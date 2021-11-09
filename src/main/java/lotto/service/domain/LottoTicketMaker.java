@@ -1,5 +1,5 @@
 package lotto.service.domain;
 
-public interface LottoTicketGenerator {
+public interface LottoTicketMaker {
     LottoTicket makeLottoTicket();
 }

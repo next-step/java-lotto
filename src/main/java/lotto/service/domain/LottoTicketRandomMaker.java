@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoTicketRandomGenerator implements LottoTicketGenerator {
+public class LottoTicketRandomMaker implements LottoTicketMaker {
     private static final Integer START_NUMBER = 1;
     private static final Integer END_NUMBER = 45;
     private static final Integer LOTTO_NUMBER_COUNT = 6;

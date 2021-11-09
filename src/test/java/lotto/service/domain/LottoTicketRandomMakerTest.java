@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoTicketRandomGeneratorTest {
-    private final LottoTicketGenerator lottoTicketGenerator = new LottoTicketRandomGenerator();
+class LottoTicketRandomMakerTest {
+    private final LottoTicketMaker lottoTicketMaker = new LottoTicketRandomMaker();
 
     @Test
     @DisplayName("LottoTicket 정상 생성여부 검증")
     void makeLottoTicket() {
-        LottoTicket lottoTicket = lottoTicketGenerator.makeLottoTicket();
+        LottoTicket lottoTicket = lottoTicketMaker.makeLottoTicket();
         assertThat(lottoTicket).isNotNull();
     }
 

@@ -10,10 +10,12 @@ public class InputUtils {
     }
 
     public static Integer inputInt(String message) {
+        System.out.println(message);
         return Integer.parseInt(SCANNER.nextLine());
     }
 
     public static String inputString(String message) {
+        System.out.println(message);
         return SCANNER.nextLine();
     }
 }

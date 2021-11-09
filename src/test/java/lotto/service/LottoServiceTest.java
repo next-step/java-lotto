@@ -1,14 +1,18 @@
 package lotto.service;
 
-import lotto.service.domain.LottoTicketRandomGenerator;
-import lotto.service.dto.LottoPurchaseDTO;
 import lotto.service.domain.LottoTicket;
+import lotto.service.domain.LottoTicketRandomMaker;
+import lotto.service.dto.LottoPurchaseDTO;
+import lotto.service.dto.LottoResultCreateDTO;
+import lotto.service.model.LottoResult;
 import lotto.service.model.LottoTickets;
+import lotto.service.value.LottoNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
@@ -18,7 +22,7 @@ class LottoServiceTest {
 
     @BeforeEach
     void setup() {
-        lottoService = new LottoService(new LottoTicketRandomGenerator());
+        lottoService = new LottoService(new LottoTicketRandomMaker());
     }
 
     @Test
@@ -32,7 +36,7 @@ class LottoServiceTest {
     }
 
     @Test
-    @DisplayName("purchaseLottoTickets의 파라미터 값이 없는 경우 예외 발생 검증")
+    @DisplayName("파라미터 값이 없는 경우 예외 발생 검증")
     void purchaseLottoTickets_exception() {
         assertThatNullPointerException().isThrownBy(() -> lottoService.purchaseLottoTickets(null));
     }
@@ -45,8 +49,28 @@ class LottoServiceTest {
     }
 
     @Test
-    @DisplayName("getWinningLottoTicket의 파라미터 값이 없는 경우 예외 발생 검증")
+    @DisplayName("파라미터 값이 없는 경우 예외 발생 검증")
     void getWinningLottoTicket_exception() {
         assertThatNullPointerException().isThrownBy(() -> lottoService.getWinningLottoTicket(null));
+    }
+
+    @Test
+    @DisplayName("lottoResult 정상 생성여부 검증")
+    void checkLottoResult() {
+        LottoResult lottoResult = lottoService.checkLottoResult(getTestLottoCreateResultDTO());
+        assertThat(lottoResult).isNotNull();
+    }
+
+    @Test
+    @DisplayName("파라미터 값이 없는 경우 예외 발생 검증")
+    void checkLottoResult_exception() {
+        assertThatNullPointerException().isThrownBy(() -> lottoService.checkLottoResult(null));
+    }
+
+    private LottoResultCreateDTO getTestLottoCreateResultDTO() {
+        LottoNumber lottoNumber = LottoNumber.from(45);
+        LottoTicket lottoTicket = LottoTicket.from(Collections.singletonList(lottoNumber));
+        LottoTickets lottoTickets = LottoTickets.from(Collections.singletonList(lottoTicket));
+        return LottoResultCreateDTO.of(lottoTickets, lottoTicket);
     }
 }

@@ -2,32 +2,37 @@ package lotto.controller;
 
 import lotto.controller.dto.LottoPurchaseRequest;
 import lotto.service.LottoService;
-import lotto.service.domain.LottoTicketRandomGenerator;
+import lotto.service.domain.LottoTicket;
+import lotto.service.domain.LottoTicketRandomMaker;
 import lotto.service.dto.LottoPurchaseDTO;
-import lotto.service.model.LottoTicket;
+import lotto.service.dto.LottoResultCreateDTO;
+import lotto.service.model.LottoResult;
 import lotto.service.model.LottoTickets;
+import lotto.service.value.LottoPrice;
 
 import java.util.List;
 
 public class LottoController {
-    private static final Integer MINIMUM_PRICE = 1_000;
-
     private final LottoService lottoService;
 
     public LottoController() {
-        this.lottoService = new LottoService(new LottoTicketRandomGenerator());
+        this.lottoService = new LottoService(new LottoTicketRandomMaker());
     }
 
     public LottoTickets purchaseLottoTickets(LottoPurchaseRequest request) {
-        Integer purchaseQuantity = getPurchaseQuantity(request.getPurchasePrice());
-        return lottoService.purchaseLottoTickets(LottoPurchaseDTO.from(purchaseQuantity));
+        Integer quantity = getPurchaseQuantity(request.getPurchasePrice());
+        return lottoService.purchaseLottoTickets(LottoPurchaseDTO.from(quantity));
     }
 
     public LottoTicket getWinningLottoTicket(List<Integer> winningNumbers) {
         return lottoService.getWinningLottoTicket(winningNumbers);
     }
 
-    private Integer getPurchaseQuantity(Integer purchasePrice) {
-        return purchasePrice / MINIMUM_PRICE;
+    public LottoResult checkLottoResult(LottoTickets purchaseLottoTickets, LottoTicket winningLottoTicket) {
+        return lottoService.checkLottoResult(LottoResultCreateDTO.of(purchaseLottoTickets, winningLottoTicket));
+    }
+
+    private Integer getPurchaseQuantity(LottoPrice purchasePrice) {
+        return purchasePrice.getQuantity();
     }
 }

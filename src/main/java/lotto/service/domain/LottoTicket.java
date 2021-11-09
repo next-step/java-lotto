@@ -4,6 +4,7 @@ import lotto.service.value.LottoNumber;
 import lotto.utils.Preconditions;
 
 import java.util.List;
+import java.util.Objects;
 
 public class LottoTicket {
     private static final Integer MINIMUM_SIZE = 1;
@@ -23,6 +24,25 @@ public class LottoTicket {
 
     public static LottoTicket from(List<LottoNumber> numbers) {
         return new LottoTicket(numbers);
+    }
+
+    public Integer getCountOfMatch(LottoTicket winningLottoTicket) {
+        return (int) numbers.stream()
+                .filter(winningLottoTicket.numbers::contains)
+                .count();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(numbers, that.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 
     @Override

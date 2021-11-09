@@ -1,5 +1,6 @@
 package lotto.ui;
 
+import lotto.service.value.LottoPrice;
 import lotto.utils.InputUtils;
 import lotto.validator.LottoValidator;
 
@@ -10,10 +11,10 @@ import java.util.stream.Collectors;
 public class InputView {
     private static final String DELIMITER = ", ";
 
-    public Integer inputPurchasePrice() {
+    public LottoPrice inputPurchasePrice() {
         Integer purchasePrice = InputUtils.inputInt("구입금액을 입력해 주세요.");
         LottoValidator.checkMinimumPurchasePrice(purchasePrice);
-        return purchasePrice;
+        return LottoPrice.from(purchasePrice);
     }
 
     public List<Integer> inputLastWeeksWinningNumber() {

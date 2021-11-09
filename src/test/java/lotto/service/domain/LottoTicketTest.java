@@ -1,6 +1,5 @@
 package lotto.service.domain;
 
-import lotto.service.domain.LottoTicket;
 import lotto.service.value.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,10 +12,21 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.assertj.core.api.Assertions.assertThatNullPointerException;
+import static org.assertj.core.api.Assertions.*;
 
 class LottoTicketTest {
+
+    @ParameterizedTest
+    @MethodSource
+    @DisplayName("동일한 LottoNumber 갯수 체크 검증")
+    void getCountOfMatch(LottoTicket myLottoTicket, LottoTicket winnerLottoTicket, Integer expected) {
+        // when
+        Integer countOfMatche = myLottoTicket.getCountOfMatch(winnerLottoTicket);
+
+        // then
+        assertThat(countOfMatche).isEqualTo(expected);
+    }
+
     @Test
     @DisplayName("Lotto의 번호가 없는 경우 예외 발생")
     void exception() {
@@ -28,6 +38,56 @@ class LottoTicketTest {
     @DisplayName("LottoNumber 갯수가 1보다 작거나 6보다 큰 경우 예외 발생 검증")
     void exception2(List<LottoNumber> numbers) {
         assertThatIllegalArgumentException().isThrownBy(() -> LottoTicket.from(numbers));
+    }
+
+    private static Stream<Arguments> getCountOfMatch() {
+        // given
+        return Stream.of(
+                Arguments.of(
+                        LottoTicket.from(Arrays.asList(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
+                                                       LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6))),
+                        LottoTicket.from(Arrays.asList(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
+                                                       LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6))),
+                        6),
+                Arguments.of(
+                        LottoTicket.from(Arrays.asList(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
+                                                       LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6))),
+                        LottoTicket.from(Arrays.asList(LottoNumber.from(11), LottoNumber.from(2), LottoNumber.from(3),
+                                                       LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6))),
+                        5),
+                Arguments.of(
+                        LottoTicket.from(Arrays.asList(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
+                                                       LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6))),
+                        LottoTicket.from(Arrays.asList(LottoNumber.from(11), LottoNumber.from(12), LottoNumber.from(3),
+                                                       LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6))),
+                        4),
+                Arguments.of(
+                        LottoTicket.from(Arrays.asList(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
+                                                       LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6))),
+                        LottoTicket.from(Arrays.asList(LottoNumber.from(11), LottoNumber.from(12), LottoNumber.from(13),
+                                                       LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6))),
+                        3),
+                Arguments.of(
+                        LottoTicket.from(Arrays.asList(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
+                                                       LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6))),
+                        LottoTicket.from(Arrays.asList(LottoNumber.from(11), LottoNumber.from(12), LottoNumber.from(13),
+                                                       LottoNumber.from(14), LottoNumber.from(5), LottoNumber.from(6))),
+                        2),
+                Arguments.of(
+                        LottoTicket.from(Arrays.asList(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
+                                                       LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6))),
+                        LottoTicket.from(Arrays.asList(LottoNumber.from(11), LottoNumber.from(12), LottoNumber.from(13),
+                                                       LottoNumber.from(14), LottoNumber.from(15),
+                                                       LottoNumber.from(6))),
+                        1),
+                Arguments.of(
+                        LottoTicket.from(Arrays.asList(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
+                                                       LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6))),
+                        LottoTicket.from(Arrays.asList(LottoNumber.from(11), LottoNumber.from(12), LottoNumber.from(13),
+                                                       LottoNumber.from(14), LottoNumber.from(15),
+                                                       LottoNumber.from(16))),
+                        0)
+        );
     }
 
     private static Stream<Arguments> exception2() {

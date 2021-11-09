@@ -6,6 +6,7 @@ import lotto.utils.Preconditions;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
@@ -18,6 +19,12 @@ public class LottoTickets {
 
     public static LottoTickets from(List<LottoTicket> numbers) {
         return new LottoTickets(numbers);
+    }
+
+    public List<Integer> getCountOfMatches(LottoTicket winningLottoTicket) {
+        return lottoTickets.stream()
+                .map(winningLottoTicket::getCountOfMatch)
+                .collect(Collectors.toList());
     }
 
     public Integer getLottoTicketsCount() {

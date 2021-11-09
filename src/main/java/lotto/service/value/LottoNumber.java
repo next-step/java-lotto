@@ -12,8 +12,8 @@ public class LottoNumber {
 
     private LottoNumber(Integer number) {
         Preconditions.checkNotNull(number, "number는 필수값 입니다.");
-        Preconditions.checkMinimumNumber(number, MINIMUM_NUMBER, String.format("%s 값 이상이어야 합니다.", MINIMUM_NUMBER));
-        Preconditions.checkMaximumNumber(number, MAXIMUM_NUMBER, String.format("%s 값 이하이어야 합니다.", MAXIMUM_NUMBER));
+        Preconditions.checkMinimumNumber(number, MINIMUM_NUMBER, String.format("%s 값 이상 이어야 합니다.", MINIMUM_NUMBER));
+        Preconditions.checkMaximumNumber(number, MAXIMUM_NUMBER, String.format("%s 값 이하 이어야 합니다.", MAXIMUM_NUMBER));
 
         this.number = number;
     }
