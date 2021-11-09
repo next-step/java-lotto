@@ -21,9 +21,9 @@ public class LottoTickets {
         return new LottoTickets(numbers);
     }
 
-    public List<Integer> getCountOfMatches(LottoTicket winningLottoTicket) {
+    public List<Integer> getMatchingCountOfAllLottoTicket(LottoTicket winningLottoTicket) {
         return lottoTickets.stream()
-                .map(winningLottoTicket::getCountOfMatch)
+                .map(winningLottoTicket::getMatchingCount)
                 .collect(Collectors.toList());
     }
 

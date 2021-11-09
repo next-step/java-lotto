@@ -18,13 +18,13 @@ class LottoTicketTest {
 
     @ParameterizedTest
     @MethodSource
-    @DisplayName("동일한 LottoNumber 갯수 체크 검증")
-    void getCountOfMatch(LottoTicket myLottoTicket, LottoTicket winnerLottoTicket, Integer expected) {
+    @DisplayName("당첨 번호에 포함된 LottoNumber 갯수 체크 검증")
+    void getWinningCount(LottoTicket myLottoTicket, LottoTicket winnerLottoTicket, Integer expected) {
         // when
-        Integer countOfMatche = myLottoTicket.getCountOfMatch(winnerLottoTicket);
+        Integer matchingCount = myLottoTicket.getMatchingCount(winnerLottoTicket);
 
         // then
-        assertThat(countOfMatche).isEqualTo(expected);
+        assertThat(matchingCount).isEqualTo(expected);
     }
 
     @Test
@@ -40,7 +40,7 @@ class LottoTicketTest {
         assertThatIllegalArgumentException().isThrownBy(() -> LottoTicket.from(numbers));
     }
 
-    private static Stream<Arguments> getCountOfMatch() {
+    private static Stream<Arguments> getWinningCount() {
         // given
         return Stream.of(
                 Arguments.of(

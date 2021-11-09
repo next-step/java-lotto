@@ -37,9 +37,9 @@ class LottoResultTest {
             "  MISS|     5"
     }, delimiter = '|')
     @DisplayName("로또 등수에 따른 당첨 횟수 검증")
-    void getCountOfMatch(Rank rank, Integer expected) {
+    void getCountOfWinning(Rank rank, Integer expected) {
         LottoResult result = LottoResult.from(lottoResult);
-        assertThat(result.getCountOfMatch(rank)).isEqualTo(expected);
+        assertThat(result.getCountOfWinning(rank)).isEqualTo(expected);
     }
 
     @ParameterizedTest

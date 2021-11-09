@@ -25,7 +25,7 @@ public class LottoResult {
         return new LottoResult(lottoResult);
     }
 
-    public Integer getCountOfMatch(Rank rank) {
+    public Integer getCountOfWinning(Rank rank) {
         return lottoResult.getOrDefault(rank, DEFAULT_VALUE);
     }
 
@@ -43,7 +43,7 @@ public class LottoResult {
                                           .sum());
     }
 
-    private int getWinningMoney(Map.Entry<Rank, Integer> entry) {
+    private Integer getWinningMoney(Map.Entry<Rank, Integer> entry) {
         return entry.getKey().getWinningMoney() * entry.getValue();
     }
 }

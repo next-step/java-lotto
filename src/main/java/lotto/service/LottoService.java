@@ -52,12 +52,11 @@ public class LottoService {
     }
 
     private LottoResult checkLottoResult(LottoTickets purchaseLottoTickets, LottoTicket winningLottoTicket) {
-        List<Integer> countOfMatches = purchaseLottoTickets.getCountOfMatches(winningLottoTicket);
+        List<Integer> matchingCountList = purchaseLottoTickets.getMatchingCountOfAllLottoTicket(winningLottoTicket);
 
-        Map<Rank, Integer> countOfMatchesMap = countOfMatches.stream()
+        Map<Rank, Integer> countOfWinningByRank = matchingCountList.stream()
                 .map(Rank::valueOf)
                 .collect(Collectors.toMap(Function.identity(), value -> 1, Integer::sum));
-
-        return LottoResult.from(countOfMatchesMap);
+        return LottoResult.from(countOfWinningByRank);
     }
 }

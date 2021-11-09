@@ -28,7 +28,8 @@ public class LottoApplication {
 
     private static LottoTickets purchaseLottoTickets() {
         LottoPrice purchasePrice = inputView.inputPurchasePrice();
-        LottoTickets purchaseLottoTickets = lottoController.purchaseLottoTickets(LottoPurchaseRequest.from(purchasePrice));
+        LottoTickets purchaseLottoTickets = lottoController.purchaseLottoTickets(
+                LottoPurchaseRequest.from(purchasePrice));
 
         resultView.printPurchaseLottoTickets(purchaseLottoTickets);
         return purchaseLottoTickets;
@@ -45,7 +46,7 @@ public class LottoApplication {
         resultView.printLottoResult(lottoResult, getPurchasePrice(purchaseLottoTickets.getCountOfLottoTickets()));
     }
 
-    private static LottoPrice getPurchasePrice(Integer ticketCount) {
-        return LottoPrice.from(ticketCount * MINIMUM_PRICE);
+    private static LottoPrice getPurchasePrice(Integer countOfLottoTickets) {
+        return LottoPrice.from(countOfLottoTickets * MINIMUM_PRICE);
     }
 }
