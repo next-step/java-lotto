@@ -9,8 +9,8 @@ class LottoTicketRandomMakerTest {
     private final LottoTicketMaker lottoTicketMaker = new LottoTicketRandomMaker();
 
     @Test
-    @DisplayName("LottoTicket 정상 생성여부 검증")
-    void makeLottoTicket() {
+    @DisplayName("로또복권들 정상 생성여부 검증")
+    void createLottoTicket() {
         LottoTicket lottoTicket = lottoTicketMaker.createLottoTicket();
         assertThat(lottoTicket).isNotNull();
     }

@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
 class LottoTicketsTest {
     @Test
-    @DisplayName("로또 티켓 갯수 검증")
+    @DisplayName("로또복권들 갯수 검증")
     void getLottoTicketsCount() {
         List<LottoTicket> result = getTestLottoTicket();
         LottoTickets lottoTickets = LottoTickets.from(getTestLottoTicket());
@@ -29,7 +29,7 @@ class LottoTicketsTest {
     }
 
     @Test
-    @DisplayName("로또 티켓이 없는 경우 예외 발생")
+    @DisplayName("로또복권 정보가 없는 경우 예외 발생")
     void exception() {
         assertThatNullPointerException().isThrownBy(() -> LottoTickets.from(null));
     }

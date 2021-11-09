@@ -26,7 +26,7 @@ class LottoServiceTest {
     }
 
     @Test
-    @DisplayName("복권들 정상 구입 검증")
+    @DisplayName("로또복권들 정상 구입 검증")
     void purchaseLottoTickets() {
         Integer purchaseQuantity = 5;
         LottoPurchaseDTO lottoPurchaseDTO = LottoPurchaseDTO.from(purchaseQuantity);
@@ -42,7 +42,7 @@ class LottoServiceTest {
     }
 
     @Test
-    @DisplayName("당첨복권 정상 생성여부 검증")
+    @DisplayName("당첨복권 정보 정상적으로 가지고오는지 검증")
     void getWiningLottoTicket() {
         LottoTicket lottoTicket = lottoService.getWinningLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(lottoTicket).isNotNull();
@@ -55,7 +55,7 @@ class LottoServiceTest {
     }
 
     @Test
-    @DisplayName("lottoResult 정상 생성여부 검증")
+    @DisplayName("로또 당첨 결과 정상 생성여부 검증")
     void checkLottoResult() {
         LottoResult lottoResult = lottoService.checkLottoResult(getTestLottoCreateResultDTO());
         assertThat(lottoResult).isNotNull();

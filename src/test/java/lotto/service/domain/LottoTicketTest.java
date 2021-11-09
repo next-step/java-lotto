@@ -18,8 +18,8 @@ class LottoTicketTest {
 
     @ParameterizedTest
     @MethodSource
-    @DisplayName("당첨 번호에 포함된 LottoNumber 갯수 체크 검증")
-    void getWinningCount(LottoTicket myLottoTicket, LottoTicket winnerLottoTicket, Integer expected) {
+    @DisplayName("당첨번호에 포함된 로또번호 갯수 체크 검증")
+    void getMatchingCount(LottoTicket myLottoTicket, LottoTicket winnerLottoTicket, Integer expected) {
         // when
         Integer matchingCount = myLottoTicket.getMatchingCount(winnerLottoTicket);
 
@@ -28,19 +28,19 @@ class LottoTicketTest {
     }
 
     @Test
-    @DisplayName("Lotto의 번호가 없는 경우 예외 발생")
+    @DisplayName("로또번호가 없는 경우 예외 발생")
     void exception() {
         assertThatNullPointerException().isThrownBy(() -> LottoTicket.from(null));
     }
 
     @ParameterizedTest
     @MethodSource
-    @DisplayName("LottoNumber 갯수가 1보다 작거나 6보다 큰 경우 예외 발생 검증")
+    @DisplayName("로또번호 갯수가 1보다 작거나 6보다 큰 경우 예외 발생 검증")
     void exception2(List<LottoNumber> numbers) {
         assertThatIllegalArgumentException().isThrownBy(() -> LottoTicket.from(numbers));
     }
 
-    private static Stream<Arguments> getWinningCount() {
+    private static Stream<Arguments> getMatchingCount() {
         // given
         return Stream.of(
                 Arguments.of(

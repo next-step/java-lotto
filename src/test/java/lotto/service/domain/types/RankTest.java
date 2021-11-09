@@ -10,7 +10,7 @@ class RankTest {
 
     @ParameterizedTest
     @ValueSource(ints = {3, 4, 5, 6})
-    @DisplayName("Rank 정상 생성여부")
+    @DisplayName("배당표 정상 생성여부")
     void valueOf(int countOfMatch) {
         Rank rank = Rank.valueOf(countOfMatch);
         assertThat(rank).isNotNull();

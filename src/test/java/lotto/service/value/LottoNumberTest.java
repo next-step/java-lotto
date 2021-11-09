@@ -20,14 +20,14 @@ class LottoNumberTest {
     }
 
     @Test
-    @DisplayName("number가 null인 경우 예외 발생 검증")
+    @DisplayName("번호가 null인 경우 예외 발생 검증")
     void exception() {
         assertThatNullPointerException().isThrownBy(() -> LottoNumber.from(null));
     }
 
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 46, 47})
-    @DisplayName("numer가 1보다 작거나 45보다 큰 경우 예외 발생 검증")
+    @DisplayName("번호가 1보다 작거나 45보다 큰 경우 예외 발생 검증")
     void exception2(Integer number) {
         assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.from(number));
     }
