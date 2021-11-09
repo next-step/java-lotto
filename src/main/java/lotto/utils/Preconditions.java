@@ -11,6 +11,12 @@ public final class Preconditions {
         }
     }
 
+    public static void checkSize(int number, int size, Object errorMessage) {
+        if (number != size) {
+            throw new IllegalArgumentException(String.valueOf(errorMessage));
+        }
+    }
+
     public static void checkMinimumNumber(int number, int minimumNumber, Object errorMessage) {
         if (number < minimumNumber) {
             throw new IllegalArgumentException(String.valueOf(errorMessage));

@@ -7,17 +7,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoTicket {
-    private static final Integer MINIMUM_SIZE = 1;
-    private static final Integer MAXIMUM_SIZE = 6;
+    private static final Integer LOTTO_NUMBERS_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
     private LottoTicket(List<LottoNumber> lottoNumbers) {
         Preconditions.checkNotNull(lottoNumbers, "lottoNumbers는 필수값 입니다.");
-        Preconditions.checkMinimumNumber(lottoNumbers.size(), MINIMUM_SIZE,
-                                         String.format("LottoNumber 갯수는 %s 이상이어야 합니다.", MINIMUM_SIZE));
-        Preconditions.checkMaximumNumber(lottoNumbers.size(), MAXIMUM_SIZE,
-                                         String.format("LottoNumber 갯수는 %s 이하이어야 합니다.", MAXIMUM_SIZE));
+        Preconditions.checkSize(lottoNumbers.size(), LOTTO_NUMBERS_SIZE,
+                                String.format("LottoNumber 갯수는 %s 이어야 합니다.", LOTTO_NUMBER_SIZE));
 
         this.lottoNumbers = lottoNumbers;
     }

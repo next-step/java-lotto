@@ -68,8 +68,9 @@ class LottoServiceTest {
     }
 
     private LottoResultCreateDTO getTestLottoCreateResultDTO() {
-        LottoNumber lottoNumber = LottoNumber.from(45);
-        LottoTicket lottoTicket = LottoTicket.from(Collections.singletonList(lottoNumber));
+        LottoTicket lottoTicket = LottoTicket.from(
+                Arrays.asList(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
+                              LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)));
         LottoTickets lottoTickets = LottoTickets.from(Collections.singletonList(lottoTicket));
         return LottoResultCreateDTO.of(lottoTickets, lottoTicket);
     }
