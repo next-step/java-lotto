@@ -5,7 +5,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class RankTest {
 
@@ -19,8 +18,8 @@ class RankTest {
 
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 7, 8, 9})
-    @DisplayName("잘못된 숫자 입력 시, 예외발생")
+    @DisplayName("잘못된 숫자 입력 시, MISS 반환")
     void valueOf_exception(int countOfMatch) {
-        assertThatIllegalArgumentException().isThrownBy(() -> Rank.valueOf(countOfMatch));
+        assertThat(Rank.valueOf(countOfMatch)).isEqualTo(Rank.MISS);
     }
 }

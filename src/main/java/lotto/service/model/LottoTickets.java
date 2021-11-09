@@ -31,6 +31,7 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
+    // only view
     public List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(new ArrayList<>(lottoTickets));
     }

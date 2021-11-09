@@ -31,7 +31,7 @@ class LottoPriceTest {
             "14000|       0|       0",
             "14000|   28000|       2"
     }, delimiter = '|')
-    @DisplayName("수량 검증")
+    @DisplayName("수익률 검증")
     void getYield(Integer purchasePrice, BigDecimal winningMoney, BigDecimal yield) {
         LottoPrice lottoPrice = LottoPrice.from(purchasePrice);
         assertThat(lottoPrice.getYield(winningMoney)).isEqualByComparingTo(yield);
