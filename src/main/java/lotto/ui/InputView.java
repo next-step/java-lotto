@@ -14,6 +14,7 @@ public class InputView {
     public LottoPrice inputPurchasePrice() {
         Integer purchasePrice = InputUtils.inputInt("구입금액을 입력해 주세요.");
         LottoValidator.checkMinimumPurchasePrice(purchasePrice);
+        LottoValidator.checkMaximumPurchasePrice(purchasePrice);
         return LottoPrice.from(purchasePrice);
     }
 
@@ -25,7 +26,7 @@ public class InputView {
 
         return Arrays.stream(winningNumbers)
                 .map(Integer::valueOf)
-                .filter(LottoValidator::checkWinningNumber)
+                .filter(LottoValidator::checkManualNumber)
                 .collect(Collectors.toList());
     }
 }
