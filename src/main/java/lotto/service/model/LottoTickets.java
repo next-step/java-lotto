@@ -31,7 +31,10 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    // only view
+
+    /**
+     * only view 에서만 사용
+     */
     public List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(new ArrayList<>(lottoTickets));
     }
