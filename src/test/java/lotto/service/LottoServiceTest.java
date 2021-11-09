@@ -2,7 +2,7 @@ package lotto.service;
 
 import lotto.service.domain.LottoTicketRandomGenerator;
 import lotto.service.dto.LottoPurchaseDTO;
-import lotto.service.model.LottoTicket;
+import lotto.service.domain.LottoTicket;
 import lotto.service.model.LottoTickets;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

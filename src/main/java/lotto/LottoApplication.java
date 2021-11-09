@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.controller.LottoController;
 import lotto.controller.dto.LottoPurchaseRequest;
-import lotto.service.model.LottoTicket;
+import lotto.service.domain.LottoTicket;
 import lotto.service.model.LottoTickets;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
@@ -17,7 +17,8 @@ public class LottoApplication {
     public static void main(String[] args) {
         // 로또 구입
         Integer purchasePrice = inputView.inputPurchasePrice();
-        LottoTickets lottoTickets = lottoController.purchaseLottoTickets(LottoPurchaseRequest.from(purchasePrice));
+        LottoTickets lottoTickets = lottoController.purchaseLottoTickets(
+                LottoPurchaseRequest.from(purchasePrice));
         resultView.printLottoTickets(lottoTickets);
 
         // 당첨 번호 입력

@@ -1,6 +1,5 @@
 package lotto.service.domain;
 
-import lotto.service.model.LottoTicket;
 import lotto.service.value.LottoNumber;
 
 import java.util.Collections;

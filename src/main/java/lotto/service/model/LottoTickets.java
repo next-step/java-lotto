@@ -1,5 +1,6 @@
 package lotto.service.model;
 
+import lotto.service.domain.LottoTicket;
 import lotto.utils.Preconditions;
 
 import java.util.ArrayList;

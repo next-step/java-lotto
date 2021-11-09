@@ -1,4 +1,4 @@
-package lotto.service.model;
+package lotto.service.domain;
 
 import lotto.service.value.LottoNumber;
 import lotto.utils.Preconditions;
