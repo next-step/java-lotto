@@ -11,9 +11,9 @@ import lotto.ui.ResultView;
 
 import java.util.List;
 
-public class LottoApplication {
-    private static final Integer MINIMUM_PRICE = 1_000;
+import static lotto.rule.LottoRule.MINIMUM_PRICE;
 
+public class LottoApplication {
     private static InputView inputView = new InputView();
     private static LottoController lottoController = new LottoController();
     private static ResultView resultView = new ResultView();
@@ -28,21 +28,21 @@ public class LottoApplication {
 
     private static LottoTickets purchaseLottoTickets() {
         LottoPrice purchasePrice = inputView.inputPurchasePrice();
-        LottoTickets lottoTickets = lottoController.purchaseLottoTickets(LottoPurchaseRequest.from(purchasePrice));
+        LottoTickets purchaseLottoTickets = lottoController.purchaseLottoTickets(LottoPurchaseRequest.from(purchasePrice));
 
-        resultView.printLottoTickets(lottoTickets);
-        return lottoTickets;
+        resultView.printPurchaseLottoTickets(purchaseLottoTickets);
+        return purchaseLottoTickets;
     }
 
     private static LottoTicket getWinningLottoTicket() {
-        List<Integer> winningNumbers = inputView.inputLastWeeksWinningNumber();
+        List<Integer> winningLottoNumbers = inputView.inputWinningLottoNumberOfLastWeeks();
 
-        return lottoController.getWinningLottoTicket(winningNumbers);
+        return lottoController.getWinningLottoTicket(winningLottoNumbers);
     }
 
     private static void checkLottoResult(LottoTickets purchaseLottoTickets, LottoTicket winningLottoTicket) {
         LottoResult lottoResult = lottoController.checkLottoResult(purchaseLottoTickets, winningLottoTicket);
-        resultView.printLottoResult(lottoResult, getPurchasePrice(purchaseLottoTickets.getLottoTicketsCount()));
+        resultView.printLottoResult(lottoResult, getPurchasePrice(purchaseLottoTickets.getCountOfLottoTickets()));
     }
 
     private static LottoPrice getPurchasePrice(Integer ticketCount) {

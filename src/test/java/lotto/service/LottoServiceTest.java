@@ -26,13 +26,13 @@ class LottoServiceTest {
     }
 
     @Test
-    @DisplayName("lottoTickets 정상 생성여부 검증")
+    @DisplayName("복권들 정상 구입 검증")
     void purchaseLottoTickets() {
         Integer purchaseQuantity = 5;
         LottoPurchaseDTO lottoPurchaseDTO = LottoPurchaseDTO.from(purchaseQuantity);
         LottoTickets lottoTickets = lottoService.purchaseLottoTickets(lottoPurchaseDTO);
         assertThat(lottoTickets).isNotNull();
-        assertThat(lottoTickets.getLottoTicketsCount()).isEqualTo(purchaseQuantity);
+        assertThat(lottoTickets.getCountOfLottoTickets()).isEqualTo(purchaseQuantity);
     }
 
     @Test
@@ -42,7 +42,7 @@ class LottoServiceTest {
     }
 
     @Test
-    @DisplayName("lottoTicket 정상 생성여부 검증")
+    @DisplayName("당첨복권 정상 생성여부 검증")
     void getWiningLottoTicket() {
         LottoTicket lottoTicket = lottoService.getWinningLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(lottoTicket).isNotNull();

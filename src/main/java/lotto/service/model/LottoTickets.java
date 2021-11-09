@@ -27,7 +27,7 @@ public class LottoTickets {
                 .collect(Collectors.toList());
     }
 
-    public Integer getLottoTicketsCount() {
+    public Integer getCountOfLottoTickets() {
         return lottoTickets.size();
     }
 

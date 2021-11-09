@@ -18,7 +18,7 @@ class LottoTicketsTest {
     void getLottoTicketsCount() {
         List<LottoTicket> result = getTestLottoTicket();
         LottoTickets lottoTickets = LottoTickets.from(getTestLottoTicket());
-        assertThat(lottoTickets.getLottoTicketsCount()).isEqualTo(result.size());
+        assertThat(lottoTickets.getCountOfLottoTickets()).isEqualTo(result.size());
     }
 
     private List<LottoTicket> getTestLottoTicket() {

@@ -10,16 +10,16 @@ public class LottoTicket {
     private static final Integer MINIMUM_SIZE = 1;
     private static final Integer MAXIMUM_SIZE = 6;
 
-    private final List<LottoNumber> numbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    private LottoTicket(List<LottoNumber> numbers) {
-        Preconditions.checkNotNull(numbers, "numbers는 필수값 입니다.");
-        Preconditions.checkMinimumNumber(numbers.size(), MINIMUM_SIZE,
+    private LottoTicket(List<LottoNumber> lottoNumbers) {
+        Preconditions.checkNotNull(lottoNumbers, "lottoNumbers는 필수값 입니다.");
+        Preconditions.checkMinimumNumber(lottoNumbers.size(), MINIMUM_SIZE,
                                          String.format("LottoNumber 갯수는 %s 이상이어야 합니다.", MINIMUM_SIZE));
-        Preconditions.checkMaximumNumber(numbers.size(), MAXIMUM_SIZE,
+        Preconditions.checkMaximumNumber(lottoNumbers.size(), MAXIMUM_SIZE,
                                          String.format("LottoNumber 갯수는 %s 이하이어야 합니다.", MAXIMUM_SIZE));
 
-        this.numbers = numbers;
+        this.lottoNumbers = lottoNumbers;
     }
 
     public static LottoTicket from(List<LottoNumber> numbers) {
@@ -27,8 +27,8 @@ public class LottoTicket {
     }
 
     public Integer getCountOfMatch(LottoTicket winningLottoTicket) {
-        return (int) numbers.stream()
-                .filter(winningLottoTicket.numbers::contains)
+        return (int) lottoNumbers.stream()
+                .filter(winningLottoTicket.lottoNumbers::contains)
                 .count();
     }
 
@@ -37,16 +37,16 @@ public class LottoTicket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoTicket that = (LottoTicket) o;
-        return Objects.equals(numbers, that.numbers);
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers);
+        return Objects.hash(lottoNumbers);
     }
 
     @Override
     public String toString() {
-        return String.join(", ", numbers.toString());
+        return String.join(", ", lottoNumbers.toString());
     }
 }

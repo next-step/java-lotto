@@ -20,19 +20,19 @@ public class LottoController {
     }
 
     public LottoTickets purchaseLottoTickets(LottoPurchaseRequest request) {
-        Integer quantity = getPurchaseQuantity(request.getPurchasePrice());
-        return lottoService.purchaseLottoTickets(LottoPurchaseDTO.from(quantity));
+        Integer lottoQuantity = getLottoQuantity(request.getPurchasePrice());
+        return lottoService.purchaseLottoTickets(LottoPurchaseDTO.from(lottoQuantity));
     }
 
-    public LottoTicket getWinningLottoTicket(List<Integer> winningNumbers) {
-        return lottoService.getWinningLottoTicket(winningNumbers);
+    public LottoTicket getWinningLottoTicket(List<Integer> winningLottoNumbers) {
+        return lottoService.getWinningLottoTicket(winningLottoNumbers);
     }
 
     public LottoResult checkLottoResult(LottoTickets purchaseLottoTickets, LottoTicket winningLottoTicket) {
         return lottoService.checkLottoResult(LottoResultCreateDTO.of(purchaseLottoTickets, winningLottoTicket));
     }
 
-    private Integer getPurchaseQuantity(LottoPrice purchasePrice) {
-        return purchasePrice.getQuantity();
+    private Integer getLottoQuantity(LottoPrice purchasePrice) {
+        return purchasePrice.getLottoQuantity();
     }
 }

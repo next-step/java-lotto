@@ -21,7 +21,7 @@ class LottoPriceTest {
     @DisplayName("수량 검증")
     void getQuantity(Integer purchasePrice, Integer quantity) {
         LottoPrice lottoPrice = LottoPrice.from(purchasePrice);
-        assertThat(lottoPrice.getQuantity()).isEqualTo(quantity);
+        assertThat(lottoPrice.getLottoQuantity()).isEqualTo(quantity);
     }
 
     @ParameterizedTest

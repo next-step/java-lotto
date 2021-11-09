@@ -2,13 +2,10 @@ package lotto.validator;
 
 import java.util.Objects;
 
-public class LottoValidator {
-    private static final Integer MINIMUM_PRICE = 1_000;
-    private static final Integer MAXIMUM_PRICE = 100_000;
-    private static final Integer MINIMUM_NUMBER = 1;
-    private static final Integer MAXIMUM_NUMBER = 45;
-    private static final Integer LOTTO_NUMBER_COUNT = 6;
+import static lotto.rule.LottoRule.*;
 
+
+public class LottoValidator {
     private LottoValidator() {
         throw new IllegalStateException("LottoValidator 직접 생성 금지");
     }

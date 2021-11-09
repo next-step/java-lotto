@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class InputView {
-    private static final String DELIMITER = ", ";
+    private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
     public LottoPrice inputPurchasePrice() {
         Integer purchasePrice = InputUtils.inputInt("구입금액을 입력해 주세요.");
@@ -18,9 +18,9 @@ public class InputView {
         return LottoPrice.from(purchasePrice);
     }
 
-    public List<Integer> inputLastWeeksWinningNumber() {
+    public List<Integer> inputWinningLottoNumberOfLastWeeks() {
         String winningNumber = InputUtils.inputString("지난 주 당첨 번호를 입력해 주세요.");
-        String[] winningNumbers = winningNumber.split(DELIMITER);
+        String[] winningNumbers = winningNumber.split(LOTTO_NUMBER_DELIMITER);
 
         LottoValidator.checkLottoNumberCount(winningNumbers.length);
 

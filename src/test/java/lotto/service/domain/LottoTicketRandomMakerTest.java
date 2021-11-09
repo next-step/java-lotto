@@ -11,7 +11,7 @@ class LottoTicketRandomMakerTest {
     @Test
     @DisplayName("LottoTicket 정상 생성여부 검증")
     void makeLottoTicket() {
-        LottoTicket lottoTicket = lottoTicketMaker.makeLottoTicket();
+        LottoTicket lottoTicket = lottoTicketMaker.createLottoTicket();
         assertThat(lottoTicket).isNotNull();
     }
 

@@ -4,10 +4,10 @@ import lotto.utils.Preconditions;
 
 import java.util.Objects;
 
-public class LottoNumber {
-    private static final Integer MINIMUM_NUMBER = 1;
-    private static final Integer MAXIMUM_NUMBER = 45;
+import static lotto.rule.LottoRule.MAXIMUM_NUMBER;
+import static lotto.rule.LottoRule.MINIMUM_NUMBER;
 
+public class LottoNumber {
     private final Integer number;
 
     private LottoNumber(Integer number) {

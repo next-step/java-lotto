@@ -6,8 +6,9 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
 
+import static lotto.rule.LottoRule.MINIMUM_PRICE;
+
 public class LottoPrice {
-    private static final Integer MINIMUM_PRICE = 1_000;
     private static final Integer YIELD_SCALE = 2;
     private final BigDecimal purchasePrice;
 
@@ -21,7 +22,7 @@ public class LottoPrice {
         return new LottoPrice(purchasePrice);
     }
 
-    public Integer getQuantity() {
+    public Integer getLottoQuantity() {
         return purchasePrice.intValue() / MINIMUM_PRICE;
     }
 
