@@ -45,7 +45,6 @@
     - 수익률 구하기
 - Money
   - 생성 시 숫자가 아닌 값이 오면  Runtime Exception
-  - 금액이 1000원 보다 작을 때 Runtime Exception
   - 로또 살 수 있는 개수 반환
 - LottoCreator
   - 생성 시 금액을 기준으로 살 수 있는 로또 갯수를 구함

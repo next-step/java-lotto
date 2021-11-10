@@ -17,7 +17,7 @@ public class LottoNumber {
             throw new IllegalArgumentException(EMPTY_EXCEPTION_MESSAGE);
         }
 
-        if(input.chars().allMatch(Character::isDigit)) {
+        if(!input.chars().allMatch(Character::isDigit)) {
             throw new IllegalArgumentException(NOT_NUMBER_EXCEPTION_MESSAGE);
         }
 

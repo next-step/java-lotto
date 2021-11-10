@@ -2,11 +2,12 @@ package lotto.vo;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.junit.jupiter.api.Assertions.*;
 
 class MoneyTest {
 
@@ -24,10 +25,14 @@ class MoneyTest {
         assertThatIllegalArgumentException().isThrownBy(() -> Money.create(input));
     }
 
-    @DisplayName("1000원 보다 적으면 IllegalArgumentException")
+    @DisplayName("로또를 살 수 있는 개수를 반환한다.")
     @ParameterizedTest
-    @ValueSource(strings = {"999"})
-    void NumberRangeTest(String input) {
-        assertThatIllegalArgumentException().isThrownBy(() -> Money.create(input));
+    @CsvSource(value = {"5000:1000:5", "10000:1000:10"}, delimiter = ':')
+    void NumberToBuyTest(String input, int priceMoney, int expect) {
+        System.out.println("priceMoney = " + priceMoney);
+        Money myMoney = Money.create(input);
+        Money price = Money.create(priceMoney);
+
+        assertThat(myMoney.getNumberToBuy(price)).isEqualTo(expect);
     }
 }

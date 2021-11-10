@@ -3,7 +3,7 @@ package lotto.vo;
 public class Money {
 
     private static final String NOT_NUMBER_EXCEPTION_MESSAGE = "입력 값이 숫자가 아닙니다.";
-    private static final String NUMBER_RANGE_EXCEPTION_MESSAGE = "입력 값은 1000원 보다 적을 수 없습니다.";
+    private static final String ZERO_EXCEPTION_MESSAGE = "입력 값은 영보다 작을 수 없습니다.";
     private static final String EMPTY_EXCEPTION_MESSAGE = "입력 값은 빈 값 일 수 없습니다.";
 
     private final int value;
@@ -17,15 +17,23 @@ public class Money {
             throw new IllegalArgumentException(EMPTY_EXCEPTION_MESSAGE);
         }
 
-        if(input.chars().allMatch(Character::isDigit)) {
+        if(!input.chars().allMatch(Character::isDigit)) {
             throw new IllegalArgumentException(NOT_NUMBER_EXCEPTION_MESSAGE);
         }
 
         int value = Integer.parseInt(input);
-        if(value < 1000) {
-            throw new IllegalArgumentException(NUMBER_RANGE_EXCEPTION_MESSAGE);
-        }
 
+        if(value < 0) {
+            throw new IllegalArgumentException(ZERO_EXCEPTION_MESSAGE);
+        }
         return new Money(value);
+    }
+
+    public static Money create(int value) {
+        return new Money(value);
+    }
+
+    public int getNumberToBuy(Money price) {
+        return this.value / price.value;
     }
 }
