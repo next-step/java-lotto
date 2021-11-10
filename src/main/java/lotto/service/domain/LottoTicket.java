@@ -5,8 +5,10 @@ import lotto.utils.Preconditions;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
+    private static final String LOTTO_NUMBERS_DELIMITER = ", ";
     private static final Integer LOTTO_NUMBERS_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
@@ -42,8 +44,10 @@ public class LottoTicket {
         return Objects.hash(lottoNumbers);
     }
 
-    @Override
-    public String toString() {
-        return String.join(", ", lottoNumbers.toString());
+    public String getLottoNumbersToString() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
+                .map(String::valueOf)
+                .collect(Collectors.joining(LOTTO_NUMBERS_DELIMITER));
     }
 }

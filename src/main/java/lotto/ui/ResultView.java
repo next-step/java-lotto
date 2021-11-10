@@ -22,7 +22,8 @@ public class ResultView {
     private String toString(LottoTickets lottoTickets) {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%s개를 구매했습니다.", lottoTickets.getCountOfLottoTickets())).append(ENTER);
-        lottoTickets.getLottoTickets().forEach(lottoTicket -> sb.append(lottoTicket).append(ENTER));
+        lottoTickets.getLottoTickets().forEach(
+                lottoTicket -> sb.append("[").append(lottoTicket.getLottoNumbersToString()).append("]").append(ENTER));
         return sb.toString();
     }
 
