@@ -1,14 +1,16 @@
 package lotto.domain;
 
+import lotto.vo.Money;
+
 import java.util.Arrays;
 
 public enum WinningRank {
 
-    FIRST_RANK(1,2000000000,6),
-    SECOND_RANK(2,1500000,5),
-    THIRD_RANK(3,50000,4),
-    FOURTH_RANK(4,5000,3),
-    NO_RANK(-1,0,-1);
+    FIRST_RANK(1, 2000000000, 6),
+    SECOND_RANK(2, 1500000, 5),
+    THIRD_RANK(3, 50000, 4),
+    FOURTH_RANK(4, 5000, 3),
+    NO_RANK(-1, 0, -1);
 
     private final int rank;
     private final Money reward;

@@ -47,10 +47,14 @@
     - 등수 / 일치 개수 / 상금 을 밸류로 가짐
 - LottoWallet
     - 수익률 구하기
-    - 금액을 기준으로 살 수 있는 로또 갯수를 구함
 - Money
   - 생성 시 숫자가 아닌 값이 오면  Runtime Exception
-  - 로또 살 수 있는 개수 반환
+  - 금액을 기준으로 살 수 있는 로또 갯수를 구함
+  - 금액 비교 lessThan 생성
+- LottoSeller
+  - buyLotto(Money) 살 수 있는 만큼의 Lotto를 생성해서 반환
+  - money 가 price 보다 작을 경우 Runtime Exception
+  - money 가 null 일 경우 Runtime Exception
 - LottoGenerator
   - 로또 갯수 만큼 생성
 - LottoGeneratorStrategy

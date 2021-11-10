@@ -18,7 +18,7 @@ public class Lotto {
 
     public static Lotto create(List<LottoNumber> lottoNumberList) {
 
-        if(lottoNumberList == null || lottoNumberList.size() != LottoRule.LOTTO_COUNT.getValue()) {
+        if (lottoNumberList == null || lottoNumberList.size() != LottoRule.LOTTO_COUNT.getValue()) {
             throw new IllegalArgumentException(RANGE_EXCEPTION_MESSAGE);
         }
 

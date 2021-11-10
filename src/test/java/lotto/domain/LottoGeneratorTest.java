@@ -14,13 +14,13 @@ class LottoGeneratorTest {
     private LottoGenerator lottoGenerator;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         lottoGenerator = LottoGenerator.create(new RandomLottoNumberGenerateStrategy());
     }
 
     @DisplayName("generateLotto(int count) count 만큼 로또를 생성해서 반환한다.")
     @ParameterizedTest
-    @ValueSource(ints = {1,2,3,4,5,6})
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     void generateTest(int count) {
         Lottos lottos = lottoGenerator.generateLotto(count);
 

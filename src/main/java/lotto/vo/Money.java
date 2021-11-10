@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.vo;
 
 import java.util.Objects;
 
@@ -15,17 +15,17 @@ public class Money {
     }
 
     public static Money create(String input) {
-        if(input == null || input.isEmpty()) {
+        if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException(EMPTY_EXCEPTION_MESSAGE);
         }
 
-        if(!input.chars().allMatch(Character::isDigit)) {
+        if (!input.chars().allMatch(Character::isDigit)) {
             throw new IllegalArgumentException(NOT_NUMBER_EXCEPTION_MESSAGE);
         }
 
         int value = Integer.parseInt(input);
 
-        if(value < 0) {
+        if (value < 0) {
             throw new IllegalArgumentException(ZERO_EXCEPTION_MESSAGE);
         }
         return new Money(value);
@@ -54,5 +54,9 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    public boolean lessThan(Money o) {
+        return this.value < o.value;
     }
 }

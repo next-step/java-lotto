@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.service.NumberGenerateStrategy;
 import lotto.vo.Lottos;
 
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 

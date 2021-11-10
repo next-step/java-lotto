@@ -15,11 +15,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber create(String input) {
-        if(input == null || input.isEmpty()) {
+        if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException(EMPTY_EXCEPTION_MESSAGE);
         }
 
-        if(!input.chars().allMatch(Character::isDigit)) {
+        if (!input.chars().allMatch(Character::isDigit)) {
             throw new IllegalArgumentException(NOT_NUMBER_EXCEPTION_MESSAGE);
         }
 
@@ -29,7 +29,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber create(int value) {
-        if(value < LottoRule.START_NUMBER.getValue() || value > LottoRule.END_NUMBER.getValue()) {
+        if (value < LottoRule.START_NUMBER.getValue() || value > LottoRule.END_NUMBER.getValue()) {
             throw new IllegalArgumentException(NUMBER_RANGE_EXCEPTION_MESSAGE);
         }
 

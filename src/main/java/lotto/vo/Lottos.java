@@ -1,6 +1,7 @@
 package lotto.vo;
 
 import lotto.domain.Lotto;
+
 import java.util.List;
 
 public class Lottos {
