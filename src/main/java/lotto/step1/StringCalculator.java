@@ -1,24 +1,30 @@
 package lotto.step1;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class StringCalculator {
 
-    private String value;
+    private List<String> values;
 
     public StringCalculator(String input) {
-        this.value = input;
+        String[] array = splitDelimiter(input);
+        this.values = Arrays.asList(array);
     }
 
-    public String[] splitDelimiter() {
-        return value.split(",|:");
+    public List<String> getValues() {
+        return values;
     }
 
-    public int add(String[] array) {
-        return Arrays.stream(array)
-                .mapToInt(s -> Integer.valueOf(s))
+    public int add() {
+        return values.stream()
+                .mapToInt(Integer::valueOf)
                 .sum();
+    }
+
+    private String[] splitDelimiter(String input) {
+        return input.split("[,:]");
     }
 
     @Override
@@ -26,12 +32,12 @@ public class StringCalculator {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StringCalculator that = (StringCalculator) o;
-        return Objects.equals(value, that.value);
+        return Objects.equals(values, that.values);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return Objects.hash(values);
     }
 
 }
