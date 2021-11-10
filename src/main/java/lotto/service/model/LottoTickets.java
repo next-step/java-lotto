@@ -32,11 +32,6 @@ public class LottoTickets {
                 .collect(Collectors.toMap(Function.identity(), value -> 1, Integer::sum));
     }
 
-    boolean isBonusNumberMatch(WinningLottoTicket winningLottoTicket) {
-        return lottoTickets.stream()
-                .anyMatch(winningLottoTicket::isBonusNumberMatch);
-    }
-
     public Integer getCountOfLottoTickets() {
         return lottoTickets.size();
     }

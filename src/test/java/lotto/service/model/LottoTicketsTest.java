@@ -26,25 +26,6 @@ class LottoTicketsTest {
         assertThat(lottoTickets.getCountOfLottoTickets()).isEqualTo(result.size());
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {
-            "1      |true",
-            "2      |true",
-            "3      |true",
-            "4      |true",
-            "5      |true",
-            "6      |true",
-            "7      |false",
-            "8      |false",
-            "9      |false",
-    }, delimiter = '|')
-    @DisplayName("보너스볼 포함 여부")
-    void isBonusNumberMatch(Integer bonusNumber, boolean expected) {
-        LottoTickets lottoTickets = LottoTickets.from(getTestLottoTicket());
-        boolean isMatch = lottoTickets.isBonusNumberMatch(getTestWinningLottoTicket(bonusNumber));
-        assertThat(isMatch).isEqualTo(expected);
-    }
-
     @ParameterizedTest(name = "[{index}] 당첨번호는 {0}, {1}, {2}, {3}, {4}, {5} 이고, 보너스번호는 {6} 일때 등수는 {7} 이다.")
     @CsvSource(value = {
             "1      |2      |3      |4      |5      |6      |7      |FIRST ",
