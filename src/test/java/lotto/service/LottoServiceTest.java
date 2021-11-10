@@ -47,15 +47,23 @@ class LottoServiceTest {
     @Test
     @DisplayName("당첨복권 정보 정상적으로 가지고오는지 검증")
     void getWiningLottoTicket() {
-        WinningLottoNumber winningLottoNumber = lottoService.getWinningLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningLottoNumber winningLottoNumber = lottoService.getWinningLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
         assertThat(winningLottoNumber).isNotNull();
     }
 
     @Test
     @DisplayName("파라미터 값이 없는 경우 예외 발생 검증")
     void getWinningLottoNumber_exception() {
-        assertThatNullPointerException().isThrownBy(() -> lottoService.getWinningLottoNumber(null));
+        assertThatNullPointerException().isThrownBy(() -> lottoService.getWinningLottoNumber(null, 7));
     }
+
+    @Test
+    @DisplayName("파라미터 값이 없는 경우 예외 발생 검증")
+    void getWinningLottoNumber_exception2() {
+        assertThatNullPointerException().isThrownBy(
+                () -> lottoService.getWinningLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6), null));
+    }
+
 
     @Test
     @DisplayName("로또 당첨 결과 정상 생성여부 검증")
@@ -71,7 +79,7 @@ class LottoServiceTest {
     }
 
     private LottoResultCreateDTO getTestLottoCreateResultDTO() {
-        WinningLottoNumber winningLottoNumber = WinningLottoNumber.of(getTestLottoNumber(), LottoNumber.from(-1));
+        WinningLottoNumber winningLottoNumber = WinningLottoNumber.of(getTestLottoNumber(), LottoNumber.from(7));
         LottoTicket lottoTicket = LottoTicket.from(getTestLottoNumber());
 
         LottoTickets lottoTickets = LottoTickets.from(Collections.singletonList(lottoTicket));

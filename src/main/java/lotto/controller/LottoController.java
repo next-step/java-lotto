@@ -22,7 +22,7 @@ public class LottoController {
     }
 
     public WinningLottoNumber getWinningLottoNumber(List<Integer> winningLottoNumbers) {
-        return lottoService.getWinningLottoNumber(winningLottoNumbers);
+        return lottoService.getWinningLottoNumber(winningLottoNumbers, -1);
     }
 
     public LottoResult checkLottoResult(LottoTickets purchaseLottoTickets, WinningLottoNumber winningLottoNumber) {

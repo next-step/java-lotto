@@ -35,14 +35,15 @@ public class LottoService {
         return LottoTickets.from(lottoTickets);
     }
 
-    public WinningLottoNumber getWinningLottoNumber(List<Integer> winningLottoNumbers) {
+    public WinningLottoNumber getWinningLottoNumber(List<Integer> winningLottoNumbers, Integer bonusNumber) {
         Preconditions.checkNotNull(winningLottoNumbers, "winningLottoNumbers의 값이 없습니다.");
+        Preconditions.checkNotNull(winningLottoNumbers, "bonusNumber의 값이 없습니다.");
 
         List<LottoNumber> numbers = winningLottoNumbers.stream()
                 .sorted()
                 .map(LottoNumber::from)
                 .collect(Collectors.toList());
-        return WinningLottoNumber.of(numbers, LottoNumber.from(-1));
+        return WinningLottoNumber.of(numbers, LottoNumber.from(bonusNumber));
     }
 
     public LottoResult checkLottoResult(LottoResultCreateDTO lottoResultCreateDTO) {
