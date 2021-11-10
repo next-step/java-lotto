@@ -19,7 +19,7 @@ class LottoTest {
     /**
      *     - Lotto
      *     - 생성 시 LottoNumber의 배열이 6자리가 아니면 runtime exception
-     *     - compare() 비교 후 일치하는 숫자의 갯수를 반환
+     *     - getCountOfMatch() 비교 후 일치하는 숫자의 갯수를 반환
      *     - LottoNumber 배열 sort()
      */
 

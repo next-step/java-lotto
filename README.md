@@ -35,7 +35,7 @@
     - 숫자의 범위가 1-45가 아니면  Runtime Exception
 - Lotto
     - 생성 시 LottoNumber의 배열이 6자리가 아니면 runtime exception
-    - compare() 비교 후 일치하는 숫자의 갯수를 반환
+    - getCountOfMatch() 비교 후 일치하는 숫자의 갯수를 반환
     - LottoNumber 배열 sort()
 - Lottos
     - Lotto list를 래핑하는 1급객체
