@@ -89,7 +89,7 @@ class StringAddCalculatorTest {
 		);
 	}
 
-	@DisplayName("음수를 입력할 경우 RuntimeException 발생 검증")
+	@DisplayName("음수를 입력할 경우 예외를 던진다")
 	@Test
 	public void splitAndSumNegative() {
 		assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))

@@ -5,11 +5,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import calcualtor.domain.Positive;
+import calcualtor.exception.UtilCreationException;
 
-public class StringAddCalculator {
-	private static final Pattern COMMA_PATTERN = Pattern.compile("^-?\\d+[,]-?\\d+$");
-	private static final Pattern COMMA_OR_COLON_PATTERN = Pattern.compile("^(-?\\d+[,:])+-?\\d+$");
-	private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+public final class StringAddCalculator {
+	private static final String ZERO = "0";
+
+	private static final String COMMA_OR_COLON_DELIMITER = ",|:";
+
+	private static final Pattern COMMA_OR_COLON_REGEX = Pattern.compile("^(-?\\d+[,:])+-?\\d+$");
+	private static final Pattern CUSTOM_DELIMITER_REGEX = Pattern.compile("//(.)\n(.*)");
+
+	private StringAddCalculator() {
+		throw new UtilCreationException();
+	}
 
 	public static int splitAndSum(String input) {
 		if (isEmpty(input)) {
@@ -20,24 +28,7 @@ public class StringAddCalculator {
 			return Integer.parseInt(input);
 		}
 
-		if (COMMA_PATTERN.matcher(input).matches()) {
-			String[] tokens = input.split(",");
-			return sum(toPositives(removeZero(tokens)));
-		}
-
-		if (COMMA_OR_COLON_PATTERN.matcher(input).matches()) {
-			String[] tokens = input.split(",|:");
-			return sum(toPositives(removeZero(tokens)));
-		}
-
-		Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
-		if (matcher.find()) {
-			String customDelimiter = matcher.group(1);
-			String[] tokens = matcher.group(2).split(customDelimiter);
-			return sum(toPositives(removeZero(tokens)));
-		}
-
-		throw new IllegalArgumentException("input cannot be processed");
+		return calculate(input);
 	}
 
 	private static boolean isEmpty(String input) {
@@ -48,9 +39,28 @@ public class StringAddCalculator {
 		return input.length() == 1;
 	}
 
+	private static int calculate(String input) {
+		if (COMMA_OR_COLON_REGEX.matcher(input).matches()) {
+			return sum(toPositives(removeZero(input.split(COMMA_OR_COLON_DELIMITER))));
+		}
+
+		Matcher matcher = CUSTOM_DELIMITER_REGEX.matcher(input);
+		if (matcher.find()) {
+			return calculateCustomDelimiter(matcher);
+		}
+
+		throw new IllegalArgumentException("input cannot be processed");
+	}
+
+	private static int calculateCustomDelimiter(Matcher matcher) {
+		String customDelimiter = matcher.group(1);
+		String[] tokens = matcher.group(2).split(customDelimiter);
+		return sum(toPositives(removeZero(tokens)));
+	}
+
 	private static String[] removeZero(String[] tokens) {
 		return Arrays.stream(tokens)
-			.filter(token -> !"0".equals(token))
+			.filter(token -> !ZERO.equals(token))
 			.toArray(String[]::new);
 	}
 
