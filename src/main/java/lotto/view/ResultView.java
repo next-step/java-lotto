@@ -9,39 +9,51 @@ import lotto.domain.Ticket;
 import lotto.exception.UtilCreationException;
 
 public final class ResultView {
+	private static final String WINNING_STATISTICS = "\n당첨 통계";
+	private static final String DIVIDING_LINE = "---------";
+	private static final String WINNING_NUMBER_RESULT = "%d개 일치 (%d원)- %d개\n";
+	private static final String PROFIT_RESULT = "총 수익률은 %.2f 입니다. (기준이 1이기 때문에 결과적으로 '%s'(이)라는 의미임)\n";
+	private static final String PROFIT = "이익";
+	private static final String LOSS = "손해";
+	private static final String SAME = "동일";
+
 	private ResultView() {
 		throw new UtilCreationException();
 	}
 
 	public static void printTickets(List<Ticket> tickets) {
-		tickets.forEach(System.out::println);
+		StringBuilder builder = new StringBuilder();
+		for (Ticket ticket : tickets) {
+			builder.append(ticket);
+			builder.append(System.lineSeparator());
+		}
+		System.out.println(builder);
 	}
 
 	public static void printStatistics(Statistics statistics) {
-		System.out.println("\n당첨 통계");
-		System.out.println("---------");
+		System.out.println(WINNING_STATISTICS);
+		System.out.println(DIVIDING_LINE);
 
 		Rank[] ranksWithoutMiss = Arrays.stream(Rank.values())
 			.filter(rank -> rank != Rank.MISS)
 			.toArray(Rank[]::new);
 
 		for (Rank rank : ranksWithoutMiss) {
-			System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getCountOfMatch(), rank.getWinningMoney(),
+			System.out.printf(WINNING_NUMBER_RESULT, rank.getCountOfMatch(), rank.getWinningMoney(),
 				statistics.getRankMatchedCount(rank));
 		}
 
 		double profitRatio = statistics.calculateProfitRatio();
-		System.out.printf("총 수익률은 %.2f 입니다.", profitRatio);
-		System.out.printf(" (기준이 1이기 때문에 결과적으로 '%s'(이)라는 의미임)\n", getProfitResult(profitRatio));
+		System.out.printf(PROFIT_RESULT, profitRatio, getProfitResult(profitRatio));
 	}
 
 	private static String getProfitResult(double profitRatio) {
 		if (profitRatio > 1) {
-			return "이익";
+			return PROFIT;
 		}
 		if (profitRatio < 1) {
-			return "손해";
+			return LOSS;
 		}
-		return "동일";
+		return SAME;
 	}
 }
