@@ -21,12 +21,12 @@ public class Lotto {
         if (lottoNumberList == null || lottoNumberList.size() != LottoRule.LOTTO_COUNT.getValue()) {
             throw new IllegalArgumentException(RANGE_EXCEPTION_MESSAGE);
         }
-
+        Collections.sort(lottoNumberList);
         return new Lotto(lottoNumberList);
     }
 
-    public void sort() {
-        Collections.sort(this.lottoNumbers);
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
     public WinningRank checkWinning(Lotto winningLotto) {

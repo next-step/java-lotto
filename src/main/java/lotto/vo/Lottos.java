@@ -27,4 +27,8 @@ public class Lottos {
                 .map(lotto -> lotto.checkWinning(winningLotto))
                 .collect(Collectors.toList());
     }
+
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
 }

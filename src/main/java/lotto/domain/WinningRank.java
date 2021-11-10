@@ -3,6 +3,9 @@ package lotto.domain;
 import lotto.vo.Money;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum WinningRank {
 
@@ -29,11 +32,22 @@ public enum WinningRank {
                 .orElse(NO_RANK);
     }
 
+    public static List<WinningRank> getReverseRankListWithoutNoRank() {
+        return Arrays.stream(values())
+                .filter(rank -> !rank.equals(WinningRank.NO_RANK))
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
+    }
+
     public int getRank() {
         return rank;
     }
 
     public Money getReward() {
         return reward;
+    }
+
+    public long getMatchCount() {
+        return matchCount;
     }
 }

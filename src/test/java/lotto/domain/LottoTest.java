@@ -30,16 +30,13 @@ class LottoTest {
         assertThatIllegalArgumentException().isThrownBy(() -> Lotto.create(lottoNumberList));
     }
 
-    @DisplayName("sort() 시 오름차순으로 정렬된다.")
+    @DisplayName("생성 시 오름차순으로 정렬된다.")
     @ParameterizedTest
     @CsvSource(value = {"6,5,4,3,2,1:1,2,3,4,5,6", "10,5,34,42,35,45:5,10,34,35,42,45"}, delimiter = ':')
     void sortTest(String input, String expectStr) {
         Lotto actual = Lotto.create(createLottoNumberList(input));
         Lotto expect = Lotto.create(createLottoNumberList(expectStr));
 
-        assertThat(actual).isNotEqualTo(expect);
-
-        actual.sort();
 
         assertThat(actual).isNotEqualTo(expect);
     }

@@ -39,6 +39,18 @@ public class Money {
         return this.value / price.value;
     }
 
+    public double divide(Money o) {
+        if (o.value < 1) {
+            throw new IllegalArgumentException(ZERO_EXCEPTION_MESSAGE);
+        }
+
+        return this.value / Double.valueOf(o.value);
+    }
+
+    public long getValue() {
+        return value;
+    }
+
     public Money add(Money o) {
         return new Money(this.value + o.value);
     }

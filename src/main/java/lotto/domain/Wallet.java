@@ -11,36 +11,24 @@ import static java.util.stream.Collectors.groupingBy;
 public class Wallet {
 
     private final Lottos lottos;
-    private final Money myMoney;
-    private Money winningMoney;
-    private WinningHistory winningHistory;
+    private final Money originMoney;
 
-    private Wallet(Lottos lottos, Money myMoney) {
+    private Wallet(Lottos lottos, Money originMoney) {
         this.lottos = lottos;
-        this.myMoney = myMoney;
+        this.originMoney = originMoney;
     }
 
     public static Wallet create(Lottos lottos, Money money) {
         return new Wallet(lottos, money);
     }
 
-    public void checkWinning(Lotto winningLotto) {
+    public WinningHistory checkWinning(Lotto winningLotto) {
         List<WinningRank> winningRanks = lottos.checkWinning(winningLotto);
-        winningMoney = winningRanks.stream()
+        Money winningMoney = winningRanks.stream()
                 .map(winningRank -> winningRank.getReward())
                 .reduce((left, right) -> left.add(right))
                 .orElseGet(() -> Money.create(0));
-        winningHistory = WinningHistory.create(winningRanks);
+        return WinningHistory.create(originMoney, winningRanks, winningMoney);
     }
 
-    public boolean isEqualWinningMoney(Money expect) {
-        return this.winningMoney.equals(expect);
-    }
-
-    //    public Map<WinningRank, Long> getWinningHistory(Lotto winningLotto) {
-//        List<WinningRank> winningRanks = lottos.checkWinning(winningLotto);
-//        return winningRanks.stream()
-//                .filter(winningRank -> !winningRank.equals(WinningRank.NO_RANK))
-//                .collect(groupingBy(winningRank -> winningRank, () -> new EnumMap<WinningRank, Long>(WinningRank.class), counting()));
-//    }
 }

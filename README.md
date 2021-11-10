@@ -64,4 +64,10 @@
   - RandomLottoGeneratorStrategy 랜덤으로 발생
 - WinningHistory
    - 로또 당첨 내역 VO
+   - 가지고 있던 money
+   - 당첨 Money
+- InputView 구현
+   - 유저 입력
+- OutputView 구현
+   - WinningHistory 를 통해 당첨내역 출력
   

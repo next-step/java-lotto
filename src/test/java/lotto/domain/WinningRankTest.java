@@ -2,9 +2,13 @@ package lotto.domain;
 
 import lotto.vo.Money;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,6 +31,15 @@ class WinningRankTest {
         WinningRank winningRank = WinningRank.getWinningRankWithMatchCount(matchCount);
 
         assertThat(winningRank).isEqualTo(WinningRank.NO_RANK);
+    }
+
+    @DisplayName("No rank 를 포함한 랭크를 fourth, third, second, first 순으로 반환한다.")
+    @Test
+    void getWinningListTest() {
+        List<WinningRank> winningRankListWithoutNoRank = WinningRank.getReverseRankListWithoutNoRank();
+
+        List<WinningRank> expect = Arrays.asList(WinningRank.FOURTH_RANK, WinningRank.THIRD_RANK, WinningRank.SECOND_RANK, WinningRank.FIRST_RANK);
+        assertThat(winningRankListWithoutNoRank).isEqualTo(expect);
     }
 
 
