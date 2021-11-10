@@ -41,11 +41,11 @@ public class LottoService {
         Preconditions.checkNotNull(bonusNumber, "bonusNumber의 값이 없습니다.");
         LottoValidator.checkBonusNumber(winningLottoNumbers, bonusNumber);
 
-        List<LottoNumber> numbers = winningLottoNumbers.stream()
+        List<LottoNumber> winningNumbers = winningLottoNumbers.stream()
                 .sorted()
                 .map(LottoNumber::from)
                 .collect(Collectors.toList());
-        return WinningLottoTicket.of(numbers, bonusNumber);
+        return WinningLottoTicket.of(winningNumbers, bonusNumber);
     }
 
     public LottoResult checkLottoResult(LottoResultCreateDTO lottoResultCreateDTO) {
