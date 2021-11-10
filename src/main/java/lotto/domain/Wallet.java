@@ -6,8 +6,6 @@ import lotto.vo.WinningHistory;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.groupingBy;
-
 public class Wallet {
 
     private final Lottos lottos;

@@ -4,7 +4,6 @@ import lotto.service.NumberGenerateStrategy;
 import lotto.vo.Lottos;
 
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
 public class LottoGenerator {

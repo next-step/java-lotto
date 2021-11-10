@@ -17,7 +17,7 @@ public class WinningHistory {
     }
 
     public static WinningHistory create(Money originMoney, List<WinningRank> history, Money winningMoney) {
-        return new WinningHistory(history,originMoney,winningMoney);
+        return new WinningHistory(history, originMoney, winningMoney);
     }
 
     public List<WinningRank> getHistory() {

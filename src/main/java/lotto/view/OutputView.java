@@ -49,7 +49,7 @@ public class OutputView {
         Money winningMoney = winningHistory.getWinningMoney();
 
         double yield = winningMoney.divide(originMoney);
-        if(yield < 1) {
+        if (yield < 1) {
             return String.format(YIELD_LESS_ONE_PRINT_FORMAT, yield);
         }
         return String.format(YIELD_MORE_ONE_PRINT_FORMAT, yield);

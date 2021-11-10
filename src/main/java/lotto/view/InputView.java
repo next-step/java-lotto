@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class InputView {
 
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     public Money inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
