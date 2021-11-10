@@ -21,8 +21,8 @@ public class LottoController {
         return lottoService.purchaseLottoTickets(LottoPurchaseDTO.from(purchasePrice.getLottoQuantity()));
     }
 
-    public WinningLottoNumber getWinningLottoNumber(List<Integer> winningLottoNumbers) {
-        return lottoService.getWinningLottoNumber(winningLottoNumbers, -1);
+    public WinningLottoNumber getWinningLottoNumber(List<Integer> winningLottoNumbers, Integer bonusNumber) {
+        return lottoService.getWinningLottoNumber(winningLottoNumbers, bonusNumber);
     }
 
     public LottoResult checkLottoResult(LottoTickets purchaseLottoTickets, WinningLottoNumber winningLottoNumber) {

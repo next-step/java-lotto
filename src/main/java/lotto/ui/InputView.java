@@ -29,4 +29,12 @@ public class InputView {
                 .filter(LottoValidator::checkManualNumber)
                 .collect(Collectors.toList());
     }
+
+    public Integer inputBonusNumber() {
+        String bonusNumberString = InputUtils.inputString("보너스 볼을 입력해 주세요.");
+        Integer bonusNumber = Integer.parseInt(bonusNumberString);
+
+        LottoValidator.checkManualNumber(bonusNumber);
+        return bonusNumber;
+    }
 }

@@ -25,7 +25,8 @@ public class LottoApplication {
         resultView.printPurchaseLottoTickets(purchaseLottoTickets);
 
         List<Integer> winningLottoNumbers = inputView.inputWinningLottoNumberOfLastWeeks();
-        WinningLottoNumber winningLottoNumber = lottoController.getWinningLottoNumber(winningLottoNumbers);
+        Integer bonusNumber = inputView.inputBonusNumber();
+        WinningLottoNumber winningLottoNumber = lottoController.getWinningLottoNumber(winningLottoNumbers, bonusNumber);
 
         LottoResult lottoResult = lottoController.checkLottoResult(purchaseLottoTickets, winningLottoNumber);
         resultView.printLottoResult(lottoResult, purchasePrice);
