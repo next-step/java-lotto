@@ -30,6 +30,9 @@
 
 # 로또 step 2 - 자동
 ## 기능목록
+- LottoRule
+  - 로또의 범위를 가진 룰을 생성한다
+  - 1-45의 6개의 숫자
 - LottoNumber
     - 생성 시 숫자가 아닌 값이 오면  Runtime Exception
     - 숫자의 범위가 1-45가 아니면  Runtime Exception
