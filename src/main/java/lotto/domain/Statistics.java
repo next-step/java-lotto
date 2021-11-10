@@ -1,35 +1,48 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Statistics {
 	private final Tickets tickets;
 	private final Ticket winningNumberTicket;
+	private final Map<Rank, Integer> matchedResult;
+	private final double profitRatio;
 
 	Statistics(Tickets tickets, Ticket winningNumberTicket) {
 		this.tickets = tickets;
 		this.winningNumberTicket = winningNumberTicket;
+		this.matchedResult = calculateMatchedResult();
+		this.profitRatio = calculateProfitRatio();
+	}
+
+	private Map<Rank, Integer> calculateMatchedResult() {
+		return Arrays.stream(Rank.values())
+			.collect(Collectors.toMap(Function.identity(), this::getRankMatchedCount));
+	}
+
+	private int getRankMatchedCount(Rank rank) {
+		return tickets.getRankMatchedCount(rank, winningNumberTicket);
+	}
+
+	private double calculateProfitRatio() {
+		return tickets.calculateProfitRatio(winningNumberTicket);
 	}
 
 	public static Statistics create(Tickets tickets, Ticket winningNumberTicket) {
 		return new Statistics(tickets, winningNumberTicket);
 	}
 
-	public int getRankMatchedCount(Rank rank) {
-		return (int)tickets.getValues().stream()
-			.map(ticket -> ticket.getMatchedCount(winningNumberTicket))
-			.filter(matchedCount -> matchedCount == rank.getCountOfMatch())
-			.count();
+	public Map<Rank, Integer> getMatchedResult() {
+		return Collections.unmodifiableMap(matchedResult);
 	}
 
-	public double calculateProfitRatio() {
-		double winningAmount = tickets.getValues().stream()
-			.map(ticket -> Rank.from(ticket.getMatchedCount(winningNumberTicket)))
-			.mapToDouble(Rank::getWinningMoney)
-			.sum();
-
-		int purchasePrice = tickets.getValues().size() * Ticket.PRICE;
-		return winningAmount / purchasePrice;
+	public double getProfitRatio() {
+		return profitRatio;
 	}
 
 	@Override

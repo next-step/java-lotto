@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.*;
 
 import java.util.Arrays;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
@@ -31,31 +32,31 @@ class StatisticsTest {
 		assertThat(statistics).isNotNull();
 	}
 
-	@DisplayName("Rank 를 전달 할 경우 해당순위에 맞는 현재 당첨 티켓수를 반환한다.")
+	@DisplayName("Rank 에 맞는 당첨 티켓수를 미리 계산하여 Rank 전달시에 현재 당첨 티켓수를 반환한다.")
 	@ParameterizedTest(name = "{index}. winningNumberTicket : {0}, rank : {1}")
 	@MethodSource("provideWinningNumberTicketWithRank")
-	void getRankMatchedCount(Ticket winningNumberTicket, Rank rank) {
+	void getMatchedResult(Ticket winningNumberTicket, Rank rank) {
 		// given
 		Tickets tickets = Tickets.create(new FixedGenerator(), FIXED_NUMBER_OF_PURCHASES);
 		Statistics statistics = Statistics.create(tickets, winningNumberTicket);
 
 		// when
-		int result = statistics.getRankMatchedCount(rank);
+		Map<Rank, Integer> matchedResult = statistics.getMatchedResult();
 
 		// then
-		assertThat(result).isEqualTo(FIXED_NUMBER_OF_PURCHASES);
+		assertThat(matchedResult.get(rank)).isEqualTo(FIXED_NUMBER_OF_PURCHASES);
 	}
 
 	@DisplayName("구매한 로또 금액 대비 당첨 금액 수익률을 반환한다.")
 	@ParameterizedTest(name = "{index}. winningNumberTicket : {0}, profitRatio : {1}")
 	@MethodSource("provideWinningNumberTicketAndProfitRatio")
-	void calculateProfitRatio(Ticket winningNumberTicket, double profitRatio) {
+	void getProfitRatio(Ticket winningNumberTicket, double profitRatio) {
 		// given
 		Tickets tickets = Tickets.create(new FixedGenerator(), FIXED_NUMBER_OF_PURCHASES);
 		Statistics statistics = Statistics.create(tickets, winningNumberTicket);
 
 		// when
-		double result = statistics.calculateProfitRatio();
+		double result = statistics.getProfitRatio();
 
 		// then
 		assertThat(result).isEqualTo(profitRatio);
