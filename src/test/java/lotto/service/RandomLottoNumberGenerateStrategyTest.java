@@ -1,5 +1,6 @@
-package lotto.util;
+package lotto.service;
 
+import lotto.vo.LottoNumber;
 import lotto.vo.LottoRule;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ class RandomLottoNumberGenerateStrategyTest {
 
         numberGenerateStrategy = new RandomLottoNumberGenerateStrategy();
 
-        List<Integer> generate = numberGenerateStrategy.generate();
+        List<LottoNumber> generate = numberGenerateStrategy.generate();
 
         assertThat(generate.size()).isEqualTo(LottoRule.LOTTO_COUNT.getValue());
         System.out.println("generate = " + generate);

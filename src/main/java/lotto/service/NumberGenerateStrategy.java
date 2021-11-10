@@ -1,9 +1,11 @@
 package lotto.service;
 
+import lotto.vo.LottoNumber;
+
 import java.util.List;
 
 @FunctionalInterface
-public interface NumberGenerateStrategy<T> {
+public interface NumberGenerateStrategy {
 
-    List<T> generate();
+    List<LottoNumber> generate();
 }
