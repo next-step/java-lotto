@@ -30,10 +30,7 @@ public enum Rank {
 
 	public static Rank from(int countOfMatch) {
 		validate(countOfMatch);
-		if (!CACHED_RANK.containsKey(countOfMatch)) {
-			return MISS;
-		}
-		return CACHED_RANK.get(countOfMatch);
+		return CACHED_RANK.getOrDefault(countOfMatch, MISS);
 	}
 
 	private static void validate(int countOfMatch) {
