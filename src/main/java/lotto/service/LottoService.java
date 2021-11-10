@@ -42,7 +42,7 @@ public class LottoService {
                 .sorted()
                 .map(LottoNumber::from)
                 .collect(Collectors.toList());
-        return WinningLottoNumber.from(numbers);
+        return WinningLottoNumber.of(numbers, LottoNumber.from(-1));
     }
 
     public LottoResult checkLottoResult(LottoResultCreateDTO lottoResultCreateDTO) {

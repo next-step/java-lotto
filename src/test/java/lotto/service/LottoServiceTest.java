@@ -71,7 +71,7 @@ class LottoServiceTest {
     }
 
     private LottoResultCreateDTO getTestLottoCreateResultDTO() {
-        WinningLottoNumber winningLottoNumber = WinningLottoNumber.from(getTestLottoNumber());
+        WinningLottoNumber winningLottoNumber = WinningLottoNumber.of(getTestLottoNumber(), LottoNumber.from(-1));
         LottoTicket lottoTicket = LottoTicket.from(getTestLottoNumber());
 
         LottoTickets lottoTickets = LottoTickets.from(Collections.singletonList(lottoTicket));
