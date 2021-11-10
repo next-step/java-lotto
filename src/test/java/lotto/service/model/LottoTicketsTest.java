@@ -1,7 +1,7 @@
 package lotto.service.model;
 
 import lotto.service.domain.LottoTicket;
-import lotto.service.domain.WinningLottoNumber;
+import lotto.service.domain.WinningLottoTicket;
 import lotto.service.domain.types.Rank;
 import lotto.service.value.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
@@ -41,7 +41,7 @@ class LottoTicketsTest {
     @DisplayName("보너스볼 포함 여부")
     void isBonusNumberMatch(Integer bonusNumber, boolean expected) {
         LottoTickets lottoTickets = LottoTickets.from(getTestLottoTicket());
-        boolean isMatch = lottoTickets.isBonusNumberMatch(getTestWinningLottoNumber(bonusNumber));
+        boolean isMatch = lottoTickets.isBonusNumberMatch(getTestWinningLottoTicket(bonusNumber));
         assertThat(isMatch).isEqualTo(expected);
     }
 
@@ -62,10 +62,10 @@ class LottoTicketsTest {
                               Integer bonusNumber,
                               Rank rank) {
         LottoTickets lottoTickets = LottoTickets.from(getTestLottoTicket());
-        WinningLottoNumber winningLottoNumber = getTestWinningLottoNumber(number1, number2, number3, number4, number5,
+        WinningLottoTicket winningLottoTicket = getTestWinningLottoTicket(number1, number2, number3, number4, number5,
                                                                           number6, bonusNumber);
 
-        Map<Rank, Integer> countOfWinningByRank = lottoTickets.countOfWinningByRank(winningLottoNumber);
+        Map<Rank, Integer> countOfWinningByRank = lottoTickets.countOfWinningByRank(winningLottoTicket);
 
         assertThat(countOfWinningByRank.get(rank)).isNotNull().isEqualTo(1);
     }
@@ -83,19 +83,19 @@ class LottoTicketsTest {
         return Collections.singletonList(LottoTicket.from(numbers));
     }
 
-    private static WinningLottoNumber getTestWinningLottoNumber(Integer bonusNumber) {
-        return WinningLottoNumber.of(
+    private static WinningLottoTicket getTestWinningLottoTicket(Integer bonusNumber) {
+        return WinningLottoTicket.of(
                 Arrays.asList(LottoNumber.from(11), LottoNumber.from(12), LottoNumber.from(13),
                               LottoNumber.from(14), LottoNumber.from(15), LottoNumber.from(16)),
-                LottoNumber.from(bonusNumber));
+                bonusNumber);
     }
 
-    private static WinningLottoNumber getTestWinningLottoNumber(
+    private static WinningLottoTicket getTestWinningLottoTicket(
             Integer number1, Integer number2, Integer number3, Integer number4, Integer number5, Integer number6,
             Integer bonusNumber) {
-        return WinningLottoNumber.of(
+        return WinningLottoTicket.of(
                 Arrays.asList(LottoNumber.from(number1), LottoNumber.from(number2), LottoNumber.from(number3),
                               LottoNumber.from(number4), LottoNumber.from(number5), LottoNumber.from(number6)),
-                LottoNumber.from(bonusNumber));
+                bonusNumber);
     }
 }

@@ -38,7 +38,7 @@ public class LottoValidator {
 
     public static void checkBonusNumber(List<Integer> winningLottoNumbers, Integer bonusNumber) {
         if (winningLottoNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("보너스볼 숫자가 잘못되었습니다.");
+            throw new IllegalArgumentException("보너스볼 숫자가 당첨번호와 중복입니다.");
         }
     }
 }

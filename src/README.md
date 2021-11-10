@@ -47,7 +47,7 @@
         - LottoTicketRandomMaker는 로또 번호 난수 생성
         - LottoTicket는 번호 6개로 이루어진 로또 한게임
         - LottoResultMaker는 로또당첨 통계성 데이터 생성
-        - WinningLottoNumber는 당첨번호
+        - WinningLottoTicket은 당첨번호
     - model
         - LottoTickets은 LottoTicket의 일급컬렉션
         - LottoResult는 내가 구매한 복권과 당첨번호 확인 결과

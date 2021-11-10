@@ -1,7 +1,7 @@
 package lotto.service.model;
 
 import lotto.service.domain.LottoTicket;
-import lotto.service.domain.WinningLottoNumber;
+import lotto.service.domain.WinningLottoTicket;
 import lotto.service.domain.types.Rank;
 import lotto.utils.Preconditions;
 
@@ -25,16 +25,16 @@ public class LottoTickets {
         return new LottoTickets(numbers);
     }
 
-    public Map<Rank, Integer> countOfWinningByRank(WinningLottoNumber winningLottoNumber) {
+    public Map<Rank, Integer> countOfWinningByRank(WinningLottoTicket winningLottoTicket) {
         return lottoTickets.stream()
-                .map(ticket -> Rank.convertRankByCountOfMatch(winningLottoNumber.getCountOfMatch(ticket),
-                                                              winningLottoNumber.isBonusNumberMatch(ticket)))
+                .map(ticket -> Rank.convertRankByCountOfMatch(winningLottoTicket.getCountOfMatch(ticket),
+                                                              winningLottoTicket.isBonusNumberMatch(ticket)))
                 .collect(Collectors.toMap(Function.identity(), value -> 1, Integer::sum));
     }
 
-    boolean isBonusNumberMatch(WinningLottoNumber winningLottoNumber) {
+    boolean isBonusNumberMatch(WinningLottoTicket winningLottoTicket) {
         return lottoTickets.stream()
-                .anyMatch(winningLottoNumber::isBonusNumberMatch);
+                .anyMatch(winningLottoTicket::isBonusNumberMatch);
     }
 
     public Integer getCountOfLottoTickets() {

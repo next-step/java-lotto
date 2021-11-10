@@ -5,20 +5,20 @@ import lotto.utils.Preconditions;
 
 import java.util.List;
 
-public class WinningLottoNumber {
+public class WinningLottoTicket {
     private final LottoTicket winningLottoTicket;
     private final LottoNumber bonusNumber;
 
-    private WinningLottoNumber(List<LottoNumber> winningLottoNumbers, LottoNumber bonusNumber) {
+    private WinningLottoTicket(List<LottoNumber> winningLottoNumbers, Integer bonusNumber) {
         Preconditions.checkNotNull(winningLottoNumbers, "winningLottoNumbers는 필수값 입니다.");
         Preconditions.checkNotNull(bonusNumber, "bonusNumber 필수값 입니다.");
 
         this.winningLottoTicket = LottoTicket.from(winningLottoNumbers);
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = LottoNumber.from(bonusNumber);
     }
 
-    public static WinningLottoNumber of(List<LottoNumber> numbers, LottoNumber bonusNumber) {
-        return new WinningLottoNumber(numbers, bonusNumber);
+    public static WinningLottoTicket of(List<LottoNumber> winningLottoNumbers, Integer bonusNumber) {
+        return new WinningLottoTicket(winningLottoNumbers, bonusNumber);
     }
 
     public Integer getCountOfMatch(LottoTicket lottoTicket) {
