@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.vo.LottoNumber;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -27,5 +28,11 @@ public class Lotto {
 
     public void sort() {
         Collections.sort(this.lottoNumbers);
+    }
+
+    public long getCountOfMatch(Lotto winningLotto) {
+        return lottoNumbers.stream()
+                .filter(winningLotto.lottoNumbers::contains)
+                .count();
     }
 }
