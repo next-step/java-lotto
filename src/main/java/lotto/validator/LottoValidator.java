@@ -1,5 +1,6 @@
 package lotto.validator;
 
+import java.util.List;
 import java.util.Objects;
 
 import static lotto.rule.LottoRule.*;
@@ -33,5 +34,11 @@ public class LottoValidator {
             throw new IllegalArgumentException("1-45 사이의 숫자를 입력해 주세요.");
         }
         return true;
+    }
+
+    public static void checkBonusNumber(List<Integer> winningLottoNumbers, Integer bonusNumber) {
+        if (winningLottoNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스볼 숫자가 잘못되었습니다.");
+        }
     }
 }
