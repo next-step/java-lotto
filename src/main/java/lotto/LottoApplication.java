@@ -1,8 +1,10 @@
 package lotto;
 
 import lotto.controller.LottoController;
-import lotto.controller.dto.LottoPurchaseRequest;
+import lotto.service.LottoService;
+import lotto.service.domain.LottoResultMaker;
 import lotto.service.domain.LottoTicket;
+import lotto.service.domain.LottoTicketRandomMaker;
 import lotto.service.model.LottoResult;
 import lotto.service.model.LottoTickets;
 import lotto.service.value.LottoPrice;
@@ -15,7 +17,8 @@ import static lotto.rule.LottoRule.MINIMUM_PRICE;
 
 public class LottoApplication {
     private static InputView inputView = new InputView();
-    private static LottoController lottoController = new LottoController();
+    private static LottoService lottoService = new LottoService(new LottoTicketRandomMaker(), new LottoResultMaker());
+    private static LottoController lottoController = new LottoController(lottoService);
     private static ResultView resultView = new ResultView();
 
     public static void main(String[] args) {
@@ -28,8 +31,7 @@ public class LottoApplication {
 
     private static LottoTickets purchaseLottoTickets() {
         LottoPrice purchasePrice = inputView.inputPurchasePrice();
-        LottoTickets purchaseLottoTickets = lottoController.purchaseLottoTickets(
-                LottoPurchaseRequest.from(purchasePrice));
+        LottoTickets purchaseLottoTickets = lottoController.purchaseLottoTickets(purchasePrice);
 
         resultView.printPurchaseLottoTickets(purchaseLottoTickets);
         return purchaseLottoTickets;

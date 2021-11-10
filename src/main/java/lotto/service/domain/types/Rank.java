@@ -25,7 +25,7 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static Rank valueOf(int countOfMatch) {
+    public static Rank convertRankByCountOfMatch(int countOfMatch) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.countOfMatch == countOfMatch)
                 .findAny()
