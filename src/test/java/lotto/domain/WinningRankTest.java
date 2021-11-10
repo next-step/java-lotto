@@ -14,7 +14,7 @@ class WinningRankTest {
     @ParameterizedTest
     @CsvSource(value = {"6:1:2000000000", "5:2:1500000", "4:3:50000", "3:4:5000"}, delimiter = ':')
     void getWinningRankTest(long matchCount, int rank, int reward) {
-        WinningRank winningRank = WinningRank.getWinningRank(matchCount);
+        WinningRank winningRank = WinningRank.getWinningRankWithMatchCount(matchCount);
 
         assertThat(winningRank.getRank()).isEqualTo(rank);
         assertThat(winningRank.getReward()).isEqualTo(Money.create(reward));
@@ -24,7 +24,7 @@ class WinningRankTest {
     @ParameterizedTest
     @ValueSource(longs = {2l, 1l, 0l})
     void getNoRankTest(long matchCount) {
-        WinningRank winningRank = WinningRank.getWinningRank(matchCount);
+        WinningRank winningRank = WinningRank.getWinningRankWithMatchCount(matchCount);
 
         assertThat(winningRank).isEqualTo(WinningRank.NO_RANK);
     }

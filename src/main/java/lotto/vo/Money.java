@@ -8,9 +8,9 @@ public class Money {
     private static final String ZERO_EXCEPTION_MESSAGE = "입력 값은 영보다 작을 수 없습니다.";
     private static final String EMPTY_EXCEPTION_MESSAGE = "입력 값은 빈 값 일 수 없습니다.";
 
-    private final int value;
+    private final long value;
 
-    private Money(int value) {
+    private Money(long value) {
         this.value = value;
     }
 
@@ -31,12 +31,16 @@ public class Money {
         return new Money(value);
     }
 
-    public static Money create(int value) {
+    public static Money create(long value) {
         return new Money(value);
     }
 
-    public int getNumberToBuy(Money price) {
+    public long getNumberToBuy(Money price) {
         return this.value / price.value;
+    }
+
+    public Money add(Money o) {
+        return new Money(this.value + o.value);
     }
 
     @Override
@@ -58,5 +62,12 @@ public class Money {
 
     public boolean lessThan(Money o) {
         return this.value < o.value;
+    }
+
+    @Override
+    public String toString() {
+        return "Money{" +
+                "value=" + value +
+                '}';
     }
 }

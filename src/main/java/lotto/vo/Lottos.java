@@ -1,8 +1,10 @@
 package lotto.vo;
 
 import lotto.domain.Lotto;
+import lotto.domain.WinningRank;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -18,5 +20,11 @@ public class Lottos {
 
     public int count() {
         return lottos.size();
+    }
+
+    public List<WinningRank> checkWinning(Lotto winningLotto) {
+        return lottos.stream()
+                .map(lotto -> lotto.checkWinning(winningLotto))
+                .collect(Collectors.toList());
     }
 }

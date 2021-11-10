@@ -22,7 +22,7 @@ public enum WinningRank {
         this.matchCount = matchCount;
     }
 
-    public static WinningRank getWinningRank(long matchCount) {
+    public static WinningRank getWinningRankWithMatchCount(long matchCount) {
         return Arrays.stream(values())
                 .filter(item -> item.matchCount == matchCount)
                 .findFirst()

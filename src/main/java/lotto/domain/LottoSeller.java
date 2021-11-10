@@ -24,7 +24,7 @@ public class LottoSeller {
     public Lottos buyLotto(Money money) {
         validate(money);
 
-        int numberToBuy = money.getNumberToBuy(lottoPrice);
+        long numberToBuy = money.getNumberToBuy(lottoPrice);
         return lottoGenerator.generateLotto(numberToBuy);
     }
 

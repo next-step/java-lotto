@@ -5,6 +5,7 @@ import lotto.vo.Lottos;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 public class LottoGenerator {
 
@@ -18,8 +19,8 @@ public class LottoGenerator {
         return new LottoGenerator(numberGenerateStrategy);
     }
 
-    public Lottos generateLotto(int count) {
-        return Lottos.create(IntStream.range(0, count)
+    public Lottos generateLotto(long count) {
+        return Lottos.create(LongStream.range(0, count)
                 .mapToObj(i -> numberGenerateStrategy.generate())
                 .map(Lotto::create)
                 .collect(Collectors.toList()));
