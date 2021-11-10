@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import static java.util.stream.Collectors.*;
+
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
@@ -61,6 +64,14 @@ public class Ticket {
 
 	public static Ticket create(List<Integer> values) {
 		return new Ticket(new LinkedHashSet<>(values));
+	}
+
+	public static Ticket createWinningNumberTicket(String[] numbers) {
+		List<Integer> values = Arrays.stream(numbers)
+			.map(Integer::parseInt)
+			.sorted()
+			.collect(toList());
+		return create(values);
 	}
 
 	public int getMatchedCount(Ticket winningNumberTicket) {
