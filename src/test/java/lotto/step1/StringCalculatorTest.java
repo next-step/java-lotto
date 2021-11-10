@@ -30,4 +30,12 @@ public class StringCalculatorTest {
         assertThat(result).isEqualTo(12);
     }
 
+    @Test
+    @DisplayName("커스텀 구분자 도입")
+    void customDelimiter() {
+        StringCalculator calculator = new StringCalculator("//;\n3;4;5");
+        int result = calculator.add();
+        assertThat(result).isEqualTo(12);
+    }
+
 }

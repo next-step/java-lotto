@@ -24,6 +24,10 @@ public class StringCalculator {
     }
 
     private String[] splitDelimiter(String input) {
+        if (input.startsWith("//") && input.charAt(3) == '\n') {
+            String customDelimiter = input.substring(2, 3);
+            return input.substring(4).split(customDelimiter);
+        }
         return input.split("[,:]");
     }
 
