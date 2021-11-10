@@ -62,4 +62,6 @@
   - functional interface로 구현 -> 이후 테스트 시에 특정 값을 쉽게 입력할 수 있게
   - generate() 
   - RandomLottoGeneratorStrategy 랜덤으로 발생
+- WinningHistory
+   - 로또 당첨 내역 VO
   

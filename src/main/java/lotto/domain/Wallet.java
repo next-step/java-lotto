@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.vo.Lottos;
 import lotto.vo.Money;
+import lotto.vo.WinningHistory;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class Wallet {
     private final Lottos lottos;
     private final Money myMoney;
     private Money winningMoney;
+    private WinningHistory winningHistory;
 
     private Wallet(Lottos lottos, Money myMoney) {
         this.lottos = lottos;
@@ -28,7 +30,7 @@ public class Wallet {
                 .map(winningRank -> winningRank.getReward())
                 .reduce((left, right) -> left.add(right))
                 .orElseGet(() -> Money.create(0));
-        System.out.println("winningMoney = " + winningMoney);
+        winningHistory = WinningHistory.create(winningRanks);
     }
 
     public boolean isEqualWinningMoney(Money expect) {

@@ -67,11 +67,5 @@ class WalletTest {
         wallet.checkWinning(winningLotto);
 
         assertThat(wallet.isEqualWinningMoney(Money.create(winningMoney))).isTrue();
-
-//        assertThat(history.getOrDefault(WinningRank.FIRST_RANK,0L)).isEqualTo(first);
-//        assertThat(history.getOrDefault(WinningRank.SECOND_RANK,0L)).isEqualTo(second);
-//        assertThat(history.getOrDefault(WinningRank.THIRD_RANK,0L)).isEqualTo(third);
-//        assertThat(history.getOrDefault(WinningRank.FOURTH_RANK,0L)).isEqualTo(fourth);
-//        System.out.println("history = " + history);
     }
 }
