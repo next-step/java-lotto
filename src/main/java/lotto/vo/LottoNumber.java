@@ -3,6 +3,7 @@ package lotto.vo;
 public class LottoNumber {
 
     private static final String NOT_NUMBER_EXCEPTION_MESSAGE = "입력 값이 숫자가 아닙니다.";
+    private static final String NUMBER_RANGE_EXCEPTION_MESSAGE = "입력 값의 범위가 1-45가 아닙니다.";
     private static final String EMPTY_EXCEPTION_MESSAGE = "입력 값은 빈 값 일 수 없습니다.";
 
     private final int value;
@@ -20,6 +21,11 @@ public class LottoNumber {
             throw new IllegalArgumentException(NOT_NUMBER_EXCEPTION_MESSAGE);
         }
 
-        return new LottoNumber(Integer.parseInt(input));
+        int value = Integer.parseInt(input);
+        if(value < 1 || value > 45) {
+            throw new IllegalArgumentException(NUMBER_RANGE_EXCEPTION_MESSAGE);
+        }
+
+        return new LottoNumber(value);
     }
 }

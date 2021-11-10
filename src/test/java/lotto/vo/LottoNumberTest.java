@@ -25,4 +25,11 @@ class LottoNumberTest {
         assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.create(input));
     }
 
+    @DisplayName("숫자의 범위는 1-45가 아니면 IllegalArgumentException")
+    @ParameterizedTest
+    @ValueSource(strings = {"0", "46", "-1"})
+    void NumberRangeTest(String input) {
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.create(input));
+    }
+
 }
