@@ -35,6 +35,7 @@
     - InputView
         - 로또 구입금액 입력
         - 지난 주 당첨 번호를 입력
+        - 보너스볼 입력
     - ResultView
         - 구매한 로또 번호 출력
         - 당첨 통계 출력
@@ -56,7 +57,7 @@
         - LottoPrice는 로또 구매 가격 정보를 담은 VO
     - LottoService는 실제 로또 관련 비즈니스 로직 수행
 - utils
-    - Preconditions는 객체를 생성 전, 필수값 체크 유틸
+    - Preconditions는 필수값 체크 유틸
 - rule
     - 로또에서 사용되는 공통 상수 정의
 - validator
