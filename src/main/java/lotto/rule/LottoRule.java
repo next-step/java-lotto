@@ -8,6 +8,5 @@ public final class LottoRule {
     public static final Integer LOTTO_NUMBER_COUNT = 6;
 
     private LottoRule() {
-        throw new IllegalStateException("LottoRule 직접 생성 금지");
     }
 }

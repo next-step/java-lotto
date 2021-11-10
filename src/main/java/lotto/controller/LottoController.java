@@ -1,9 +1,7 @@
 package lotto.controller;
 
-import lotto.controller.dto.LottoPurchaseRequest;
 import lotto.service.LottoService;
 import lotto.service.domain.LottoTicket;
-import lotto.service.domain.LottoTicketRandomMaker;
 import lotto.service.dto.LottoPurchaseDTO;
 import lotto.service.dto.LottoResultCreateDTO;
 import lotto.service.model.LottoResult;
@@ -15,13 +13,12 @@ import java.util.List;
 public class LottoController {
     private final LottoService lottoService;
 
-    public LottoController() {
-        this.lottoService = new LottoService(new LottoTicketRandomMaker());
+    public LottoController(LottoService lottoService) {
+        this.lottoService = lottoService;
     }
 
-    public LottoTickets purchaseLottoTickets(LottoPurchaseRequest request) {
-        Integer lottoQuantity = getLottoQuantity(request.getPurchasePrice());
-        return lottoService.purchaseLottoTickets(LottoPurchaseDTO.from(lottoQuantity));
+    public LottoTickets purchaseLottoTickets(LottoPrice purchasePrice) {
+        return lottoService.purchaseLottoTickets(LottoPurchaseDTO.from(purchasePrice.getLottoQuantity()));
     }
 
     public LottoTicket getWinningLottoTicket(List<Integer> winningLottoNumbers) {
@@ -30,9 +27,5 @@ public class LottoController {
 
     public LottoResult checkLottoResult(LottoTickets purchaseLottoTickets, LottoTicket winningLottoTicket) {
         return lottoService.checkLottoResult(LottoResultCreateDTO.of(purchaseLottoTickets, winningLottoTicket));
-    }
-
-    private Integer getLottoQuantity(LottoPrice purchasePrice) {
-        return purchasePrice.getLottoQuantity();
     }
 }
