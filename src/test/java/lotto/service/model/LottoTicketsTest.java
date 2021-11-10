@@ -70,7 +70,6 @@ class LottoTicketsTest {
         assertThat(countOfWinningByRank.get(rank)).isNotNull().isEqualTo(1);
     }
 
-
     @Test
     @DisplayName("로또복권 정보가 없는 경우 예외 발생")
     void exception() {
