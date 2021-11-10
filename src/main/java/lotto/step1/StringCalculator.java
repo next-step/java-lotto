@@ -3,8 +3,13 @@ package lotto.step1;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringCalculator {
+
+    private static final String BASIC_DELIMITER_PATTERN = "[,:]";
+    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
 
     private List<String> values;
 
@@ -24,11 +29,12 @@ public class StringCalculator {
     }
 
     private String[] splitDelimiter(String input) {
-        if (input.startsWith("//") && input.charAt(3) == '\n') {
-            String customDelimiter = input.substring(2, 3);
-            return input.substring(4).split(customDelimiter);
+        Matcher m = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(input);
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            return m.group(2).split(customDelimiter);
         }
-        return input.split("[,:]");
+        return input.split(BASIC_DELIMITER_PATTERN);
     }
 
     @Override
