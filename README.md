@@ -39,7 +39,7 @@
     - 숫자의 범위가 1-45가 아니면  Runtime Exception
 - Lotto
     - 생성 시 LottoNumber의 배열이 6자리가 아니면 runtime exception
-    - getCountOfMatch() 비교 후 일치하는 숫자의 갯수를 반환
+    - checkWinning() 비교 후 일치하는 숫자의 WinningRank를 반환
     - LottoNumber 배열 sort()
 - Lottos
     - Lotto list를 래핑하는 1급객체
@@ -47,6 +47,7 @@
     - 등수 / 일치 개수 / 상금 을 밸류로 가짐
 - LottoWallet
     - 수익률 구하기
+    - 로또 당첨 확인
 - Money
   - 생성 시 숫자가 아닌 값이 오면  Runtime Exception
   - 금액을 기준으로 살 수 있는 로또 갯수를 구함

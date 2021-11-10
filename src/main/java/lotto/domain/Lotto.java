@@ -29,7 +29,11 @@ public class Lotto {
         Collections.sort(this.lottoNumbers);
     }
 
-    public long getCountOfMatch(Lotto winningLotto) {
+    public WinningRank checkWinning(Lotto winningLotto) {
+        return WinningRank.getWinningRankWithMatchCount(getCountOfMatch(winningLotto));
+    }
+
+    private long getCountOfMatch(Lotto winningLotto) {
         return lottoNumbers.stream()
                 .filter(winningLotto.lottoNumbers::contains)
                 .count();
