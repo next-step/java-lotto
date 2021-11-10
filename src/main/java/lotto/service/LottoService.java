@@ -37,7 +37,7 @@ public class LottoService {
 
     public WinningLottoNumber getWinningLottoNumber(List<Integer> winningLottoNumbers, Integer bonusNumber) {
         Preconditions.checkNotNull(winningLottoNumbers, "winningLottoNumbers의 값이 없습니다.");
-        Preconditions.checkNotNull(winningLottoNumbers, "bonusNumber의 값이 없습니다.");
+        Preconditions.checkNotNull(bonusNumber, "bonusNumber의 값이 없습니다.");
 
         List<LottoNumber> numbers = winningLottoNumbers.stream()
                 .sorted()
