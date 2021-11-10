@@ -11,10 +11,10 @@ import java.util.stream.Collectors;
 
 public class LottoResultMaker {
     public LottoResult checkLottoResult(LottoTickets purchaseLottoTickets, WinningLottoNumber winningLottoNumber) {
-        List<Integer> matchingCountList = purchaseLottoTickets.getMatchingCountOfAllLottoTicket(winningLottoNumber);
+        List<Integer> countOfMatchList = purchaseLottoTickets.getMatchingCountOfAllLottoTicket(winningLottoNumber);
 
-        Map<Rank, Integer> countOfWinningByRank = matchingCountList.stream()
-                .map(Rank::convertRankByCountOfMatch)
+        Map<Rank, Integer> countOfWinningByRank = countOfMatchList.stream()
+                .map(countOfMatch -> Rank.convertRankByCountOfMatch(countOfMatch, false))
                 .collect(Collectors.toMap(Function.identity(), value -> 1, Integer::sum));
         return LottoResult.from(countOfWinningByRank);
     }

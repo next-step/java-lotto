@@ -2,6 +2,8 @@ package lotto.service.domain.types;
 
 import java.util.Arrays;
 
+import static lotto.rule.LottoRule.LOTTO_SECOND_MATCH_COUNT;
+
 public enum Rank {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
@@ -18,19 +20,27 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
+    public static Rank convertRankByCountOfMatch(int countOfMatch, boolean matchBonus) {
+        if (isSecond(countOfMatch, matchBonus)) {
+            return Rank.SECOND;
+        }
+
+        return Arrays.stream(Rank.values())
+                .filter(rank -> Rank.SECOND != rank)
+                .filter(rank -> rank.countOfMatch == countOfMatch)
+                .findAny()
+                .orElse(MISS);
+    }
+
+    private static boolean isSecond(int countOfMatch, boolean matchBonus) {
+        return LOTTO_SECOND_MATCH_COUNT == countOfMatch && matchBonus;
+    }
+
     public int getCountOfMatch() {
         return countOfMatch;
     }
 
     public int getWinningMoney() {
         return winningMoney;
-    }
-
-    public static Rank convertRankByCountOfMatch(int countOfMatch) { //, boolean matchBonus
-        // TODO 일치하는 수를 로또 등수로 변경한다. enum 값 목록은 "Rank[] ranks = values();"와 같이 가져올 수 있다.
-        return Arrays.stream(Rank.values())
-                .filter(rank -> rank.countOfMatch == countOfMatch)
-                .findAny()
-                .orElse(MISS);
     }
 }
