@@ -15,4 +15,13 @@ public class StringCalculatorTest {
         assertThat(calculator).isEqualTo(new StringCalculator(input));
     }
 
+    @Test
+    @DisplayName("구분자(,:)를 기준으로 분리")
+    void splitDelimiter() {
+        String input = "3,4,5";
+        StringCalculator calculator = new StringCalculator(input);
+        String[] array =  calculator.splitDelimiter();
+        assertThat(array).containsExactly("3", "4", "5");
+    }
+
 }

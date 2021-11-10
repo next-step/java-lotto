@@ -10,6 +10,10 @@ public class StringCalculator {
         this.value = input;
     }
 
+    public String[] splitDelimiter() {
+        return value.split(",|:");
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
