@@ -1,8 +1,8 @@
 package lotto.service;
 
+import lotto.service.domain.LottoResultMaker;
 import lotto.service.domain.LottoTicket;
 import lotto.service.domain.LottoTicketMaker;
-import lotto.service.domain.types.Rank;
 import lotto.service.dto.LottoPurchaseDTO;
 import lotto.service.dto.LottoResultCreateDTO;
 import lotto.service.model.LottoResult;
@@ -11,17 +11,17 @@ import lotto.service.value.LottoNumber;
 import lotto.utils.Preconditions;
 
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoService {
     private static final Integer START_LOTTO_QUANTITY = 1;
     private final LottoTicketMaker lottoTicketMaker;
+    private final LottoResultMaker lottoResultMaker;
 
-    public LottoService(LottoTicketMaker lottoTicketMaker) {
+    public LottoService(LottoTicketMaker lottoTicketMaker, LottoResultMaker lottoResultMaker) {
         this.lottoTicketMaker = lottoTicketMaker;
+        this.lottoResultMaker = lottoResultMaker;
     }
 
     public LottoTickets purchaseLottoTickets(LottoPurchaseDTO lottoPurchaseDTO) {
@@ -47,16 +47,7 @@ public class LottoService {
     public LottoResult checkLottoResult(LottoResultCreateDTO lottoResultCreateDTO) {
         Preconditions.checkNotNull(lottoResultCreateDTO, "lottoResultCreateDTO의 값이 없습니다.");
 
-        return checkLottoResult(lottoResultCreateDTO.getPurchaseLottoTickets(),
-                                lottoResultCreateDTO.getWinningLottoTicket());
-    }
-
-    private LottoResult checkLottoResult(LottoTickets purchaseLottoTickets, LottoTicket winningLottoTicket) {
-        List<Integer> matchingCountList = purchaseLottoTickets.getMatchingCountOfAllLottoTicket(winningLottoTicket);
-
-        Map<Rank, Integer> countOfWinningByRank = matchingCountList.stream()
-                .map(Rank::valueOf)
-                .collect(Collectors.toMap(Function.identity(), value -> 1, Integer::sum));
-        return LottoResult.from(countOfWinningByRank);
+        return lottoResultMaker.checkLottoResult(lottoResultCreateDTO.getPurchaseLottoTickets(),
+                                                 lottoResultCreateDTO.getWinningLottoTicket());
     }
 }

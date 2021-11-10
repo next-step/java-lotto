@@ -1,5 +1,6 @@
 package lotto.service;
 
+import lotto.service.domain.LottoResultMaker;
 import lotto.service.domain.LottoTicket;
 import lotto.service.domain.LottoTicketRandomMaker;
 import lotto.service.dto.LottoPurchaseDTO;
@@ -22,7 +23,7 @@ class LottoServiceTest {
 
     @BeforeEach
     void setup() {
-        lottoService = new LottoService(new LottoTicketRandomMaker());
+        lottoService = new LottoService(new LottoTicketRandomMaker(), new LottoResultMaker());
     }
 
     @Test
