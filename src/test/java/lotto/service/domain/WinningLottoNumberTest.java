@@ -16,9 +16,9 @@ class WinningLottoNumberTest {
     @ParameterizedTest
     @MethodSource
     @DisplayName("당첨번호에 포함된 로또번호 갯수 체크 검증")
-    void getMatchingCount(WinningLottoNumber winningLottoNumber, LottoTicket myLottoTicket, Integer expected) {
+    void getCountOfMatch(WinningLottoNumber winningLottoNumber, LottoTicket myLottoTicket, Integer expected) {
         // when
-        Integer matchingCount = winningLottoNumber.getMatchingCount(myLottoTicket);
+        Integer matchingCount = winningLottoNumber.getCountOfMatch(myLottoTicket);
 
         // then
         assertThat(matchingCount).isEqualTo(expected);
@@ -35,7 +35,7 @@ class WinningLottoNumberTest {
         assertThat(bonusNumberMatch).isEqualTo(expected);
     }
 
-    private static Stream<Arguments> getMatchingCount() {
+    private static Stream<Arguments> getCountOfMatch() {
         // given
         return Stream.of(
                 Arguments.of(getTestWinningLottoNumber(), getTestLottoTicket(1, 2, 3, 4, 5, 6), 6),

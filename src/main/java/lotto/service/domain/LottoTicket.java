@@ -29,6 +29,12 @@ public class LottoTicket {
         return lottoNumbers.contains(lottoNumber);
     }
 
+    public Integer getCountOfMatch(LottoTicket lottoTicket) {
+        return (int) lottoNumbers.stream()
+                .filter(lottoTicket::isContains)
+                .count();
+    }
+
     public String getLottoNumbersToString() {
         return lottoNumbers.stream()
                 .map(LottoNumber::getNumber)

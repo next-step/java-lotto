@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -25,6 +26,31 @@ class LottoTicketTest {
                               LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)));
 
         assertThat(lottoTicket.isContains(LottoNumber.from(number))).isTrue();
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "1      |2      |3      |4      |5      |6      |6",
+            "11     |2      |3      |4      |5      |6      |5",
+            "11     |12     |3      |4      |5      |6      |4",
+            "11     |12     |13     |4      |5      |6      |3",
+            "11     |12     |13     |14     |5      |6      |2",
+            "11     |12     |13     |14     |15     |6      |1",
+            "11     |12     |13     |14     |15     |16      |0"
+    }, delimiter = '|')
+    @DisplayName("해당 번호가 로또복권에 포함되어 있는지 확인")
+    void getCountOfMatch(Integer number1, Integer number2, Integer number3,
+                         Integer number4, Integer number5, Integer number6,
+                         Integer countOfMatch) {
+        LottoTicket winningLottoTicket = LottoTicket.from(
+                Arrays.asList(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
+                              LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)));
+
+        LottoTicket purchaseLottoTicket = LottoTicket.from(
+                Arrays.asList(LottoNumber.from(number1), LottoNumber.from(number2), LottoNumber.from(number3),
+                              LottoNumber.from(number4), LottoNumber.from(number5), LottoNumber.from(number6)));
+
+        assertThat(winningLottoTicket.getCountOfMatch(purchaseLottoTicket)).isEqualTo(countOfMatch);
     }
 
     @Test
