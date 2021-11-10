@@ -8,7 +8,6 @@
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
-
 # 문자열 덧셈 계산기
 ## 기능 목록
 - StringAddCalculator
@@ -28,3 +27,31 @@
 - Item
     - 음수 값 / 문자열이 있을 경우 Runtime Exception을 발생시킨다.
     - add() 인자로 들어온 값과 지금의 값을 합쳐서 합계를 반환한다.
+
+# 로또 step 2 - 자동
+## 기능목록
+- LottoNumber
+    - 생성 시 숫자가 아닌 값이 오면  Runtime Exception
+    - 숫자의 범위가 1-45가 아니면  Runtime Exception
+- Lotto
+    - 생성 시 LottoNumber의 배열이 6자리가 아니면 runtime exception
+    - compare() 비교 후 일치하는 숫자의 갯수를 반환
+    - LottoNumber 배열 sort()
+- Lottos
+    - Lotto list를 래핑하는 1급객체
+- 당첨 enum
+    - 등수 / 일치 개수 / 상금 을 밸류로 가짐
+- LottoWallet
+    - 수익률 구하기
+- Money
+  - 생성 시 숫자가 아닌 값이 오면  Runtime Exception
+  - 금액이 1000원 보다 작을 때 Runtime Exception
+  - 로또 살 수 있는 개수 반환
+- LottoCreator
+  - 생성 시 금액을 기준으로 살 수 있는 로또 갯수를 구함
+  - 로또 생성
+- LottoGeneratorStrategy
+  - functional interface로 구현 -> 이후 테스트 시에 특정 값을 쉽게 입력할 수 있게
+  - generate() 
+  - RandomLottoGeneratorStrategy 랜덤으로 발생
+  
