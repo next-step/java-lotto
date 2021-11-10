@@ -1,15 +1,21 @@
 package lotto.vo;
 
 import lotto.domain.Lotto;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
 
-    private final List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos;
 
-    public void addLotto(Lotto lotto) {
-        lottos.add(lotto);
+    private Lottos(List<Lotto> lottoList) {
+        this.lottos = lottoList;
+    }
+
+    public static Lottos create(List<Lotto> lottoList) {
+        return new Lottos(lottoList);
+    }
+
+    public int count() {
+        return lottos.size();
     }
 }
