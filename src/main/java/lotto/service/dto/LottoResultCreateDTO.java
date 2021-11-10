@@ -1,30 +1,30 @@
 package lotto.service.dto;
 
-import lotto.service.domain.LottoTicket;
+import lotto.service.domain.WinningLottoNumber;
 import lotto.service.model.LottoTickets;
 import lotto.utils.Preconditions;
 
 public class LottoResultCreateDTO {
     private final LottoTickets purchaseLottoTickets;
-    private final LottoTicket winningLottoTicket;
+    private final WinningLottoNumber winningLottoNumber;
 
-    public LottoResultCreateDTO(LottoTickets purchaseLottoTickets, LottoTicket winningLottoTicket) {
+    public LottoResultCreateDTO(LottoTickets purchaseLottoTickets, WinningLottoNumber winningLottoNumber) {
         Preconditions.checkNotNull(purchaseLottoTickets, "purchaseLottoTickets는 필수값입니다.");
-        Preconditions.checkNotNull(winningLottoTicket, "winningLottoTicket는 필수값입니다.");
+        Preconditions.checkNotNull(winningLottoNumber, "winningLottoNumber는 필수값입니다.");
 
         this.purchaseLottoTickets = purchaseLottoTickets;
-        this.winningLottoTicket = winningLottoTicket;
+        this.winningLottoNumber = winningLottoNumber;
     }
 
-    public static LottoResultCreateDTO of(LottoTickets purchaseLottoTickets, LottoTicket winningLottoTicket) {
-        return new LottoResultCreateDTO(purchaseLottoTickets, winningLottoTicket);
+    public static LottoResultCreateDTO of(LottoTickets purchaseLottoTickets, WinningLottoNumber winningLottoNumber) {
+        return new LottoResultCreateDTO(purchaseLottoTickets, winningLottoNumber);
     }
 
     public LottoTickets getPurchaseLottoTickets() {
         return purchaseLottoTickets;
     }
 
-    public LottoTicket getWinningLottoTicket() {
-        return winningLottoTicket;
+    public WinningLottoNumber getWinningLottoNumber() {
+        return winningLottoNumber;
     }
 }

@@ -1,6 +1,7 @@
 package lotto.service.model;
 
 import lotto.service.domain.LottoTicket;
+import lotto.service.domain.WinningLottoNumber;
 import lotto.utils.Preconditions;
 
 import java.util.ArrayList;
@@ -21,9 +22,9 @@ public class LottoTickets {
         return new LottoTickets(numbers);
     }
 
-    public List<Integer> getMatchingCountOfAllLottoTicket(LottoTicket winningLottoTicket) {
+    public List<Integer> getMatchingCountOfAllLottoTicket(WinningLottoNumber winningLottoNumber) {
         return lottoTickets.stream()
-                .map(winningLottoTicket::getMatchingCount)
+                .map(winningLottoNumber::getMatchingCount)
                 .collect(Collectors.toList());
     }
 

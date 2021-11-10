@@ -3,6 +3,7 @@ package lotto.service;
 import lotto.service.domain.LottoResultMaker;
 import lotto.service.domain.LottoTicket;
 import lotto.service.domain.LottoTicketRandomMaker;
+import lotto.service.domain.WinningLottoNumber;
 import lotto.service.dto.LottoPurchaseDTO;
 import lotto.service.dto.LottoResultCreateDTO;
 import lotto.service.model.LottoResult;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
@@ -45,14 +47,14 @@ class LottoServiceTest {
     @Test
     @DisplayName("당첨복권 정보 정상적으로 가지고오는지 검증")
     void getWiningLottoTicket() {
-        LottoTicket lottoTicket = lottoService.getWinningLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lottoTicket).isNotNull();
+        WinningLottoNumber winningLottoNumber = lottoService.getWinningLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(winningLottoNumber).isNotNull();
     }
 
     @Test
     @DisplayName("파라미터 값이 없는 경우 예외 발생 검증")
-    void getWinningLottoTicket_exception() {
-        assertThatNullPointerException().isThrownBy(() -> lottoService.getWinningLottoTicket(null));
+    void getWinningLottoNumber_exception() {
+        assertThatNullPointerException().isThrownBy(() -> lottoService.getWinningLottoNumber(null));
     }
 
     @Test
@@ -69,10 +71,15 @@ class LottoServiceTest {
     }
 
     private LottoResultCreateDTO getTestLottoCreateResultDTO() {
-        LottoTicket lottoTicket = LottoTicket.from(
-                Arrays.asList(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
-                              LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)));
+        WinningLottoNumber winningLottoNumber = WinningLottoNumber.from(getTestLottoNumber());
+        LottoTicket lottoTicket = LottoTicket.from(getTestLottoNumber());
+
         LottoTickets lottoTickets = LottoTickets.from(Collections.singletonList(lottoTicket));
-        return LottoResultCreateDTO.of(lottoTickets, lottoTicket);
+        return LottoResultCreateDTO.of(lottoTickets, winningLottoNumber);
+    }
+
+    private List<LottoNumber> getTestLottoNumber() {
+        return Arrays.asList(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
+                             LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6));
     }
 }

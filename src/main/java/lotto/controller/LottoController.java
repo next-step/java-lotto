@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.service.LottoService;
-import lotto.service.domain.LottoTicket;
+import lotto.service.domain.WinningLottoNumber;
 import lotto.service.dto.LottoPurchaseDTO;
 import lotto.service.dto.LottoResultCreateDTO;
 import lotto.service.model.LottoResult;
@@ -21,11 +21,11 @@ public class LottoController {
         return lottoService.purchaseLottoTickets(LottoPurchaseDTO.from(purchasePrice.getLottoQuantity()));
     }
 
-    public LottoTicket getWinningLottoTicket(List<Integer> winningLottoNumbers) {
-        return lottoService.getWinningLottoTicket(winningLottoNumbers);
+    public WinningLottoNumber getWinningLottoNumber(List<Integer> winningLottoNumbers) {
+        return lottoService.getWinningLottoNumber(winningLottoNumbers);
     }
 
-    public LottoResult checkLottoResult(LottoTickets purchaseLottoTickets, LottoTicket winningLottoTicket) {
-        return lottoService.checkLottoResult(LottoResultCreateDTO.of(purchaseLottoTickets, winningLottoTicket));
+    public LottoResult checkLottoResult(LottoTickets purchaseLottoTickets, WinningLottoNumber winningLottoNumber) {
+        return lottoService.checkLottoResult(LottoResultCreateDTO.of(purchaseLottoTickets, winningLottoNumber));
     }
 }

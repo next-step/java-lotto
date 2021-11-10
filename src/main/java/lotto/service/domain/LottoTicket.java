@@ -25,10 +25,8 @@ public class LottoTicket {
         return new LottoTicket(numbers);
     }
 
-    public Integer getMatchingCount(LottoTicket winningLottoTicket) {
-        return (int) lottoNumbers.stream()
-                .filter(winningLottoTicket.lottoNumbers::contains)
-                .count();
+    public boolean isContains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     @Override

@@ -3,8 +3,8 @@ package lotto;
 import lotto.controller.LottoController;
 import lotto.service.LottoService;
 import lotto.service.domain.LottoResultMaker;
-import lotto.service.domain.LottoTicket;
 import lotto.service.domain.LottoTicketRandomMaker;
+import lotto.service.domain.WinningLottoNumber;
 import lotto.service.model.LottoResult;
 import lotto.service.model.LottoTickets;
 import lotto.service.value.LottoPrice;
@@ -24,9 +24,9 @@ public class LottoApplication {
     public static void main(String[] args) {
         LottoTickets purchaseLottoTickets = purchaseLottoTickets();
 
-        LottoTicket winningLottoTicket = getWinningLottoTicket();
+        WinningLottoNumber winningLottoNumber = getWinningLottoNumber();
 
-        checkLottoResult(purchaseLottoTickets, winningLottoTicket);
+        checkLottoResult(purchaseLottoTickets, winningLottoNumber);
     }
 
     private static LottoTickets purchaseLottoTickets() {
@@ -37,14 +37,14 @@ public class LottoApplication {
         return purchaseLottoTickets;
     }
 
-    private static LottoTicket getWinningLottoTicket() {
+    private static WinningLottoNumber getWinningLottoNumber() {
         List<Integer> winningLottoNumbers = inputView.inputWinningLottoNumberOfLastWeeks();
 
-        return lottoController.getWinningLottoTicket(winningLottoNumbers);
+        return lottoController.getWinningLottoNumber(winningLottoNumbers);
     }
 
-    private static void checkLottoResult(LottoTickets purchaseLottoTickets, LottoTicket winningLottoTicket) {
-        LottoResult lottoResult = lottoController.checkLottoResult(purchaseLottoTickets, winningLottoTicket);
+    private static void checkLottoResult(LottoTickets purchaseLottoTickets, WinningLottoNumber winningLottoNumber) {
+        LottoResult lottoResult = lottoController.checkLottoResult(purchaseLottoTickets, winningLottoNumber);
         resultView.printLottoResult(lottoResult, getPurchasePrice(purchaseLottoTickets.getCountOfLottoTickets()));
     }
 

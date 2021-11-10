@@ -3,6 +3,7 @@ package lotto.service;
 import lotto.service.domain.LottoResultMaker;
 import lotto.service.domain.LottoTicket;
 import lotto.service.domain.LottoTicketMaker;
+import lotto.service.domain.WinningLottoNumber;
 import lotto.service.dto.LottoPurchaseDTO;
 import lotto.service.dto.LottoResultCreateDTO;
 import lotto.service.model.LottoResult;
@@ -34,20 +35,20 @@ public class LottoService {
         return LottoTickets.from(lottoTickets);
     }
 
-    public LottoTicket getWinningLottoTicket(List<Integer> winningLottoNumbers) {
+    public WinningLottoNumber getWinningLottoNumber(List<Integer> winningLottoNumbers) {
         Preconditions.checkNotNull(winningLottoNumbers, "winningLottoNumbers의 값이 없습니다.");
 
         List<LottoNumber> numbers = winningLottoNumbers.stream()
                 .sorted()
                 .map(LottoNumber::from)
                 .collect(Collectors.toList());
-        return LottoTicket.from(numbers);
+        return WinningLottoNumber.from(numbers);
     }
 
     public LottoResult checkLottoResult(LottoResultCreateDTO lottoResultCreateDTO) {
         Preconditions.checkNotNull(lottoResultCreateDTO, "lottoResultCreateDTO의 값이 없습니다.");
 
         return lottoResultMaker.checkLottoResult(lottoResultCreateDTO.getPurchaseLottoTickets(),
-                                                 lottoResultCreateDTO.getWinningLottoTicket());
+                                                 lottoResultCreateDTO.getWinningLottoNumber());
     }
 }
