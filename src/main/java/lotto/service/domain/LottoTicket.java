@@ -29,6 +29,13 @@ public class LottoTicket {
         return lottoNumbers.contains(lottoNumber);
     }
 
+    public String getLottoNumbersToString() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
+                .map(String::valueOf)
+                .collect(Collectors.joining(LOTTO_NUMBERS_DELIMITER));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,12 +47,5 @@ public class LottoTicket {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
-    }
-
-    public String getLottoNumbersToString() {
-        return lottoNumbers.stream()
-                .map(LottoNumber::getNumber)
-                .map(String::valueOf)
-                .collect(Collectors.joining(LOTTO_NUMBERS_DELIMITER));
     }
 }
