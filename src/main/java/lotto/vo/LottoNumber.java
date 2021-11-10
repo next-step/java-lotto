@@ -24,6 +24,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
 
         int value = Integer.parseInt(input);
+
+        return create(value);
+    }
+
+    public static LottoNumber create(int value) {
         if(value < LottoRule.START_NUMBER.getValue() || value > LottoRule.END_NUMBER.getValue()) {
             throw new IllegalArgumentException(NUMBER_RANGE_EXCEPTION_MESSAGE);
         }
