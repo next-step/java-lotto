@@ -5,7 +5,7 @@ import java.util.Objects;
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final String NOT_NUMBER_EXCEPTION_MESSAGE = "입력 값이 숫자가 아닙니다.";
-    private static final String NUMBER_RANGE_EXCEPTION_MESSAGE = "입력 값의 범위가 1-45가 아닙니다.";
+    private static final String NUMBER_RANGE_EXCEPTION_MESSAGE = "입력 값의 범위 맞지 않습니다.";
     private static final String EMPTY_EXCEPTION_MESSAGE = "입력 값은 빈 값 일 수 없습니다.";
 
     private final int value;
@@ -24,7 +24,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
 
         int value = Integer.parseInt(input);
-        if(value < 1 || value > 45) {
+        if(value < LottoRule.START_NUMBER.getValue() || value > LottoRule.END_NUMBER.getValue()) {
             throw new IllegalArgumentException(NUMBER_RANGE_EXCEPTION_MESSAGE);
         }
 
