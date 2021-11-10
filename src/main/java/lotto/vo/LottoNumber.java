@@ -2,7 +2,7 @@ package lotto.vo;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final String NOT_NUMBER_EXCEPTION_MESSAGE = "입력 값이 숫자가 아닙니다.";
     private static final String NUMBER_RANGE_EXCEPTION_MESSAGE = "입력 값의 범위가 1-45가 아닙니다.";
@@ -46,5 +46,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return this.value - o.value;
     }
 }
