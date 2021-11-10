@@ -1,5 +1,6 @@
-package lotto.vo;
+package lotto.domain;
 
+import lotto.domain.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -29,7 +30,6 @@ class MoneyTest {
     @ParameterizedTest
     @CsvSource(value = {"5000:1000:5", "10000:1000:10"}, delimiter = ':')
     void NumberToBuyTest(String input, int priceMoney, int expect) {
-        System.out.println("priceMoney = " + priceMoney);
         Money myMoney = Money.create(input);
         Money price = Money.create(priceMoney);
 

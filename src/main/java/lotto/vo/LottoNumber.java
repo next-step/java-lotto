@@ -1,5 +1,7 @@
 package lotto.vo;
 
+import java.util.Objects;
+
 public class LottoNumber {
 
     private static final String NOT_NUMBER_EXCEPTION_MESSAGE = "입력 값이 숫자가 아닙니다.";
@@ -27,5 +29,22 @@ public class LottoNumber {
         }
 
         return new LottoNumber(value);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumber that = (LottoNumber) o;
+        return value == that.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }
