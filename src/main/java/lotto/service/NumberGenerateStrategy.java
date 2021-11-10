@@ -1,11 +1,9 @@
-package lotto.util;
-
-import lotto.domain.Lotto;
+package lotto.service;
 
 import java.util.List;
 
 @FunctionalInterface
-public interface NumberGenerateStrategy {
+public interface NumberGenerateStrategy<T> {
 
-    List<Integer> generate();
+    List<T> generate();
 }
