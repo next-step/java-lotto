@@ -3,12 +3,14 @@ package lotto.domain;
 import lotto.vo.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,6 +30,21 @@ class LottoTest {
         List<LottoNumber> lottoNumberList = createLottoNumberList(input);
         assertThatIllegalArgumentException().isThrownBy(() -> Lotto.create(lottoNumberList));
     }
+
+    @DisplayName("sort() 시 오름차순으로 정렬된다.")
+    @ParameterizedTest
+    @CsvSource(value = {"6,5,4,3,2,1:1,2,3,4,5,6","10,5,34,42,35,45:5,10,34,35,42,45"}, delimiter = ':')
+    void sortTest(String input, String expectStr) {
+        Lotto actual = Lotto.create(createLottoNumberList(input));
+        Lotto expect = Lotto.create(createLottoNumberList(expectStr));
+
+        assertThat(actual).isNotEqualTo(expect);
+
+        actual.sort();
+
+        assertThat(actual).isNotEqualTo(expect);
+    }
+    
 
     private List<LottoNumber> createLottoNumberList(String input) {
         return Arrays.stream(input.split(","))
