@@ -18,19 +18,15 @@ public class StringCalculatorTest {
     @Test
     @DisplayName("구분자(,:)를 기준으로 분리")
     void splitDelimiter() {
-        String input = "3,4,5";
-        StringCalculator calculator = new StringCalculator(input);
-        String[] array =  calculator.splitDelimiter();
-        assertThat(array).containsExactly("3", "4", "5");
+        StringCalculator calculator = new StringCalculator("3,4:5");
+        assertThat(calculator.getValues()).containsExactly("3", "4", "5");
     }
 
     @Test
     @DisplayName("분리된 숫자 합")
     void add() {
-        String input = "3,4,5";
-        StringCalculator calculator = new StringCalculator(input);
-        String[] array =  calculator.splitDelimiter();
-        int result = calculator.add(array);
+        StringCalculator calculator = new StringCalculator("3,4:5");
+        int result = calculator.add();
         assertThat(result).isEqualTo(12);
     }
 
