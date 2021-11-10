@@ -8,6 +8,8 @@ import java.util.Objects;
 import lotto.generator.Generator;
 
 public class Tickets {
+	private static final String EMPTY_MESSAGE = "Ticket 리스트가 비어있습니다.";
+
 	private final List<Ticket> values;
 
 	Tickets(List<Ticket> values) {
@@ -17,7 +19,7 @@ public class Tickets {
 
 	private void validate(List<Ticket> values) {
 		if (isEmpty(values)) {
-			throw new IllegalArgumentException("Ticket 리스트가 비어있습니다.");
+			throw new IllegalArgumentException(EMPTY_MESSAGE);
 		}
 	}
 
