@@ -36,7 +36,7 @@ class LottoTicketTest {
             "11     |12     |13     |4      |5      |6      |3",
             "11     |12     |13     |14     |5      |6      |2",
             "11     |12     |13     |14     |15     |6      |1",
-            "11     |12     |13     |14     |15     |16      |0"
+            "11     |12     |13     |14     |15     |16     |0"
     }, delimiter = '|')
     @DisplayName("해당 번호가 로또복권에 포함되어 있는지 확인")
     void getCountOfMatch(Integer number1, Integer number2, Integer number3,
