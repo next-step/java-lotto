@@ -15,5 +15,5 @@ public enum LottoRule {
     public int getValue() {
         return value;
     }
-    
+
 }
