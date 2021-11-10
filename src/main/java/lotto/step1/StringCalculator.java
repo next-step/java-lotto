@@ -1,5 +1,6 @@
 package lotto.step1;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class StringCalculator {
@@ -12,6 +13,12 @@ public class StringCalculator {
 
     public String[] splitDelimiter() {
         return value.split(",|:");
+    }
+
+    public int add(String[] array) {
+        return Arrays.stream(array)
+                .mapToInt(s -> Integer.valueOf(s))
+                .sum();
     }
 
     @Override

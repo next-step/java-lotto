@@ -24,4 +24,14 @@ public class StringCalculatorTest {
         assertThat(array).containsExactly("3", "4", "5");
     }
 
+    @Test
+    @DisplayName("분리된 숫자 합")
+    void add() {
+        String input = "3,4,5";
+        StringCalculator calculator = new StringCalculator(input);
+        String[] array =  calculator.splitDelimiter();
+        int result = calculator.add(array);
+        assertThat(result).isEqualTo(12);
+    }
+
 }
