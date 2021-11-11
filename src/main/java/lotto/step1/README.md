@@ -26,4 +26,3 @@
     - sum : 숫자값이면 합산하여 반환
 2. StringCalculatorTest
     - 각 단계별 테스트 진행
-    - private 접근제어자 변경으로 테스트 메서드변경 및 주석처리

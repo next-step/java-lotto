@@ -17,11 +17,11 @@ public class StringCalculator {
         return checkNullOrEmpty(input) ? 0 : sum(splitValue(input));
     }
 
-    private static boolean checkNullOrEmpty(String input) {
+    static boolean checkNullOrEmpty(String input) {
         return input == null || input.isEmpty();
     }
 
-    private static String[] splitValue(String input) {
+    static String[] splitValue(String input) {
         return isCustom(input) ? splitCustomPattern(input) : splitBasicPattern(input);
     }
 
@@ -51,7 +51,7 @@ public class StringCalculator {
         }
     }
 
-    private static int sum(String[] input) {
+    static int sum(String[] input) {
         Arrays.stream(input)
                 .forEach(StringCalculator::checkMinusOrNotNumber);
         return Arrays.stream(input)
@@ -59,7 +59,7 @@ public class StringCalculator {
                 .sum();
     }
 
-    private static void checkMinusOrNotNumber(String input) {
+    static void checkMinusOrNotNumber(String input) {
         for (char c : input.toCharArray()) {
             notDigitThrowException(c);
         }
