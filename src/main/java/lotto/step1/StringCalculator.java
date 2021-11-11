@@ -9,6 +9,10 @@ public class StringCalculator {
     private static final Pattern CUSTOM = Pattern.compile("//(.)\n(.*)");
     private static final String BASIC = "[,:]";
 
+    private StringCalculator() {
+        throw new AssertionError();
+    }
+
     public static int addString(String input) {
         return checkNullOrEmpty(input) ? 0 : sum(splitValue(input));
     }
