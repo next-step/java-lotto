@@ -1,5 +1,6 @@
 package lotto.step1;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,46 +9,62 @@ public class StringCalculator {
     private static final Pattern CUSTOM = Pattern.compile("//(.)\n(.*)");
     private static final Pattern BASIC = Pattern.compile("[,:]");
 
-    public static int addString(String s) {
-        return checkNullOrEmpty(s) ? 0 : sum(splitValue(s));
+    public static int addString(String input) {
+        return checkNullOrEmpty(input) ? 0 : sum(splitValue(input));
     }
 
-    public static boolean checkNullOrEmpty(String input) {
+    private static boolean checkNullOrEmpty(String input) {
         return input == null || input.isEmpty();
     }
 
-    public static String[] splitValue(String input) {
-        return isCustom(input) ? splitCustomPattern(input) : input.split(BASIC.toString());
+    private static String[] splitValue(String input) {
+        return isCustom(input) ? splitCustomPattern(input) : splitBasicPattern(input);
     }
 
-    public static int sum(String[] input) {
-        int sum = 0;
-        for (String s : input) {
-            checkMinusOrNotNumber(s);
-            sum += Integer.valueOf(s);
-        }
-        return sum;
-    }
-
-    public static void checkMinusOrNotNumber(String s) {
-        for (int i = 0; i < s.length(); i++) {
-            if (!Character.isDigit(s.charAt(i))) {
-                throw new RuntimeException();
-            }
-        }
-    }
-
-    static boolean isCustom(String input) {
+    private static boolean isCustom(String input) {
         return CUSTOM.matcher(input).matches();
     }
 
-    public static String[] splitCustomPattern(String input) {
+    private static String[] splitCustomPattern(String input) {
         Matcher matcher = CUSTOM.matcher(input);
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
             return matcher.group(2).split(customDelimiter);
         }
         return null;
+    }
+
+    private static String[] splitBasicPattern(String input) {
+        String[] split = input.split(BASIC.toString());
+        Arrays.stream(split)
+                .forEach(StringCalculator::checkDelimiter);
+        return split;
+    }
+
+    private static void checkDelimiter(String input) {
+        if (input.length() > 1) {
+            throw new RuntimeException("구분자 잘못 입력");
+        }
+    }
+
+    private static int sum(String[] input) {
+        Arrays.stream(input)
+                .forEach(StringCalculator::checkMinusOrNotNumber);
+        return Arrays.stream(input)
+                .mapToInt(Integer::valueOf)
+                .sum();
+    }
+
+    private static void checkMinusOrNotNumber(String input) {
+        for (char c : input.toCharArray()) {
+            notDigitThrowException(c);
+        }
+    }
+
+    private static void notDigitThrowException(char c) {
+        if (!Character.isDigit(c)) {
+            throw new RuntimeException("0 이상 숫자 값을 넣어주세요");
+        }
     }
 
 }
