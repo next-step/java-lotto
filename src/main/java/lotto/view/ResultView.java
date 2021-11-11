@@ -10,44 +10,51 @@ import lotto.domain.Ticket;
 import lotto.exception.UtilCreationException;
 
 public final class ResultView {
-	private static final String WINNING_STATISTICS = "\n당첨 통계";
-	private static final String DIVIDING_LINE = "---------";
+	private static final String WINNING_STATISTICS = "당첨 통계\n";
+	private static final String DIVIDING_LINE = "---------\n";
 	private static final String WINNING_NUMBER_RESULT = "%d개 일치 (%d원)- %d개\n";
 	private static final String PROFIT_RESULT = "총 수익률은 %.2f 입니다. (기준이 1이기 때문에 결과적으로 '%s'(이)라는 의미임)\n";
 	private static final String PROFIT = "이익";
 	private static final String LOSS = "손해";
 	private static final String SAME = "동일";
 
+	private static final StringBuilder BUILDER = new StringBuilder();
+
 	private ResultView() {
 		throw new UtilCreationException();
 	}
 
 	public static void printTickets(List<Ticket> tickets) {
-		StringBuilder builder = new StringBuilder();
+		initializeBuilder();
 		for (Ticket ticket : tickets) {
-			builder.append(ticket);
-			builder.append(System.lineSeparator());
+			appendBuilder(ticket);
+			appendBuilder(System.lineSeparator());
 		}
-		System.out.println(builder);
+		printBuilder();
 	}
 
 	public static void printStatistics(Statistics statistics) {
-		System.out.println(WINNING_STATISTICS);
-		System.out.println(DIVIDING_LINE);
+		initializeBuilder();
 
-		printMatchedResult(statistics);
+		appendBuilder(WINNING_STATISTICS);
+		appendBuilder(DIVIDING_LINE);
+
+		appendMatchedResultToBuilder(statistics);
 
 		double profitRatio = statistics.getProfitRatio();
-		System.out.printf(PROFIT_RESULT, profitRatio, getProfitResult(profitRatio));
+		appendBuilder(String.format(PROFIT_RESULT, profitRatio, getProfitResult(profitRatio)));
+
+		printBuilder();
 	}
 
-	private static void printMatchedResult(Statistics statistics) {
+	private static void appendMatchedResultToBuilder(Statistics statistics) {
 		Map<Rank, Integer> matchedResult = statistics.getMatchedResult();
 
 		Arrays.stream(Rank.values())
 			.filter(rank -> rank != Rank.MISS)
-			.forEach(rank -> System.out.printf(WINNING_NUMBER_RESULT, rank.getCountOfMatch(), rank.getWinningMoney(),
-				matchedResult.get(rank)));
+			.forEach(rank -> appendBuilder(
+				String.format(WINNING_NUMBER_RESULT, rank.getCountOfMatch(), rank.getWinningMoney(),
+					matchedResult.get(rank))));
 	}
 
 	private static String getProfitResult(double profitRatio) {
@@ -58,5 +65,17 @@ public final class ResultView {
 			return LOSS;
 		}
 		return SAME;
+	}
+
+	private static void initializeBuilder() {
+		BUILDER.setLength(0);
+	}
+
+	private static void appendBuilder(Object input) {
+		BUILDER.append(input);
+	}
+
+	private static void printBuilder() {
+		System.out.println(BUILDER);
 	}
 }
