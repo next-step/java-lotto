@@ -3,13 +3,14 @@ package lotto.service;
 import lotto.service.domain.LottoResultMaker;
 import lotto.service.domain.LottoTicket;
 import lotto.service.domain.LottoTicketMaker;
-import lotto.service.domain.WinningLottoNumber;
+import lotto.service.domain.WinningLottoTicket;
 import lotto.service.dto.LottoPurchaseDTO;
 import lotto.service.dto.LottoResultCreateDTO;
 import lotto.service.model.LottoResult;
 import lotto.service.model.LottoTickets;
 import lotto.service.value.LottoNumber;
 import lotto.utils.Preconditions;
+import lotto.validator.LottoValidator;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,20 +36,22 @@ public class LottoService {
         return LottoTickets.from(lottoTickets);
     }
 
-    public WinningLottoNumber getWinningLottoNumber(List<Integer> winningLottoNumbers) {
+    public WinningLottoTicket getWinningLottoTicket(List<Integer> winningLottoNumbers, Integer bonusNumber) {
         Preconditions.checkNotNull(winningLottoNumbers, "winningLottoNumbers의 값이 없습니다.");
+        Preconditions.checkNotNull(bonusNumber, "bonusNumber의 값이 없습니다.");
+        LottoValidator.checkBonusNumber(winningLottoNumbers, bonusNumber);
 
-        List<LottoNumber> numbers = winningLottoNumbers.stream()
+        List<LottoNumber> winningNumbers = winningLottoNumbers.stream()
                 .sorted()
                 .map(LottoNumber::from)
                 .collect(Collectors.toList());
-        return WinningLottoNumber.from(numbers);
+        return WinningLottoTicket.of(winningNumbers, bonusNumber);
     }
 
     public LottoResult checkLottoResult(LottoResultCreateDTO lottoResultCreateDTO) {
         Preconditions.checkNotNull(lottoResultCreateDTO, "lottoResultCreateDTO의 값이 없습니다.");
 
         return lottoResultMaker.checkLottoResult(lottoResultCreateDTO.getPurchaseLottoTickets(),
-                                                 lottoResultCreateDTO.getWinningLottoNumber());
+                                                 lottoResultCreateDTO.getWinningLottoTicket());
     }
 }

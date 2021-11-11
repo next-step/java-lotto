@@ -4,7 +4,7 @@ import lotto.controller.LottoController;
 import lotto.service.LottoService;
 import lotto.service.domain.LottoResultMaker;
 import lotto.service.domain.LottoTicketRandomMaker;
-import lotto.service.domain.WinningLottoNumber;
+import lotto.service.domain.WinningLottoTicket;
 import lotto.service.model.LottoResult;
 import lotto.service.model.LottoTickets;
 import lotto.service.value.LottoPrice;
@@ -25,9 +25,10 @@ public class LottoApplication {
         resultView.printPurchaseLottoTickets(purchaseLottoTickets);
 
         List<Integer> winningLottoNumbers = inputView.inputWinningLottoNumberOfLastWeeks();
-        WinningLottoNumber winningLottoNumber = lottoController.getWinningLottoNumber(winningLottoNumbers);
+        Integer bonusNumber = inputView.inputBonusNumber();
+        WinningLottoTicket winningLottoTicket = lottoController.getWinningLottoTicket(winningLottoNumbers, bonusNumber);
 
-        LottoResult lottoResult = lottoController.checkLottoResult(purchaseLottoTickets, winningLottoNumber);
+        LottoResult lottoResult = lottoController.checkLottoResult(purchaseLottoTickets, winningLottoTicket);
         resultView.printLottoResult(lottoResult, purchasePrice);
     }
 }

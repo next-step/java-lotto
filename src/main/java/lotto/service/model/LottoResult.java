@@ -15,7 +15,7 @@ public class LottoResult {
 
     private final Map<Rank, Integer> lottoResult;
 
-    public LottoResult(Map<Rank, Integer> lottoResult) {
+    private LottoResult(Map<Rank, Integer> lottoResult) {
         Preconditions.checkNotNull(lottoResult, "lottoResult는 필수값입니다.");
 
         this.lottoResult = lottoResult;

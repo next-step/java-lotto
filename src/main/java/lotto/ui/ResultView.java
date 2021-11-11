@@ -34,14 +34,22 @@ public class ResultView {
 
         Arrays.stream(Rank.values())
                 .filter(rank -> Rank.MISS != rank)
-                .sorted(Comparator.comparing(Rank::getCountOfMatch))
-                .forEach(rank -> sb.append(String.format("%d개 일치 (%d원)- %d개",
-                                                         rank.getCountOfMatch(), rank.getWinningMoney(),
-                                                         lottoResult.getCountOfWinning(rank))).append(ENTER));
+                .sorted(Comparator.comparing(Rank::getSort))
+                .forEach(rank -> getWinningStatistics(sb, lottoResult, rank));
 
         sb.append(String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)",
                                 lottoResult.getLottoYield(purchasePrice), lottoResult.getProfitOrLoss(purchasePrice)))
                 .append(ENTER);
         return sb.toString();
+    }
+
+    private void getWinningStatistics(StringBuilder sb, LottoResult lottoResult, Rank rank) {
+        String bonusMessage = "";
+        if (Rank.SECOND == rank) {
+            bonusMessage = ", 보너스 볼 일치";
+        }
+        sb.append(String.format("%d개 일치%s(%d원)- %d개",
+                                rank.getCountOfMatch(), bonusMessage, rank.getWinningMoney(),
+                                lottoResult.getCountOfWinning(rank))).append(ENTER);
     }
 }

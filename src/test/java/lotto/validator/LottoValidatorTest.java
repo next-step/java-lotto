@@ -1,8 +1,13 @@
 package lotto.validator;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.RepetitionInfo;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -35,5 +40,14 @@ class LottoValidatorTest {
     @DisplayName("번호 입력 시, 제한 범위를 벗어나는 경우 예외 발생 (1-45)")
     void checkWinningNumber(Integer manualNumber) {
         assertThatIllegalArgumentException().isThrownBy(() -> LottoValidator.checkManualNumber(manualNumber));
+    }
+
+    @RepeatedTest(6)
+    @DisplayName("보너스볼 번호가 당첨번호에 포함되면 예외 발생")
+    void checkBonusNumber(RepetitionInfo repetitionInfo) {
+        Integer bonusNumber = repetitionInfo.getCurrentRepetition();
+        List<Integer> winningLottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> LottoValidator.checkBonusNumber(winningLottoNumbers, bonusNumber));
     }
 }

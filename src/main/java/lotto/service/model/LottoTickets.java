@@ -1,12 +1,15 @@
 package lotto.service.model;
 
 import lotto.service.domain.LottoTicket;
-import lotto.service.domain.WinningLottoNumber;
+import lotto.service.domain.WinningLottoTicket;
+import lotto.service.domain.types.Rank;
 import lotto.utils.Preconditions;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class LottoTickets {
@@ -22,16 +25,16 @@ public class LottoTickets {
         return new LottoTickets(numbers);
     }
 
-    public List<Integer> getMatchingCountOfAllLottoTicket(WinningLottoNumber winningLottoNumber) {
+    public Map<Rank, Integer> countOfWinningByRank(WinningLottoTicket winningLottoTicket) {
         return lottoTickets.stream()
-                .map(winningLottoNumber::getMatchingCount)
-                .collect(Collectors.toList());
+                .map(ticket -> Rank.convertRankByCountOfMatch(winningLottoTicket.getCountOfMatch(ticket),
+                                                              winningLottoTicket.isBonusNumberMatch(ticket)))
+                .collect(Collectors.toMap(Function.identity(), value -> 1, Integer::sum));
     }
 
     public Integer getCountOfLottoTickets() {
         return lottoTickets.size();
     }
-
 
     /**
      * only view 에서만 사용

@@ -22,11 +22,18 @@ public class InputView {
         String winningNumber = InputUtils.inputString("지난 주 당첨 번호를 입력해 주세요.");
         String[] winningNumbers = winningNumber.split(LOTTO_NUMBER_DELIMITER);
 
-        LottoValidator.checkLottoNumberCount(winningNumbers.length);
-
+        LottoValidator.checkLottoNumberCount((int) Arrays.stream(winningNumbers).distinct().count());
         return Arrays.stream(winningNumbers)
                 .map(Integer::valueOf)
                 .filter(LottoValidator::checkManualNumber)
                 .collect(Collectors.toList());
+    }
+
+    public Integer inputBonusNumber() {
+        String bonusNumberString = InputUtils.inputString("보너스 볼을 입력해 주세요.");
+        Integer bonusNumber = Integer.parseInt(bonusNumberString);
+
+        LottoValidator.checkManualNumber(bonusNumber);
+        return bonusNumber;
     }
 }
