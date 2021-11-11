@@ -26,7 +26,7 @@ public class OutputView {
     }
 
     private void printLottos(Lottos lottos) {
-        lottos.getLottos().stream()
+        lottos.getLottoList().stream()
                 .forEach(lotto -> printLotto(lotto));
     }
 
