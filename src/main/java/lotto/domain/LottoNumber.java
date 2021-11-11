@@ -25,6 +25,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		return value < MIN_OF_LOTTO_NUMBERS || value > MAX_OF_LOTTO_NUMBERS;
 	}
 
+	public static LottoNumber create(String value) {
+		return create(Integer.parseInt(value));
+	}
+
 	public static LottoNumber create(int value) {
 		return new LottoNumber(value);
 	}

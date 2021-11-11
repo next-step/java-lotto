@@ -1,9 +1,11 @@
 package lotto.domain;
 
+import static java.util.stream.Collectors.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -65,18 +67,24 @@ class StatisticsTest {
 	private static Stream<Arguments> provideWinningNumberTicketWithRank() {
 		return Stream.of(
 			arguments(Ticket.create(FixedGenerator.FIXED_NUMBERS), Rank.FIRST),
-			arguments(Ticket.create(Arrays.asList(1, 2, 3, 4, 5, 45)), Rank.SECOND),
-			arguments(Ticket.create(Arrays.asList(1, 2, 3, 4, 44, 45)), Rank.THIRD),
-			arguments(Ticket.create(Arrays.asList(1, 2, 3, 43, 44, 45)), Rank.FORTH)
+			arguments(Ticket.create(convertToLottoNumbers(1, 2, 3, 4, 5, 45)), Rank.SECOND),
+			arguments(Ticket.create(convertToLottoNumbers(1, 2, 3, 4, 44, 45)), Rank.THIRD),
+			arguments(Ticket.create(convertToLottoNumbers(1, 2, 3, 43, 44, 45)), Rank.FORTH)
 		);
 	}
 
 	private static Stream<Arguments> provideWinningNumberTicketAndProfitRatio() {
 		return Stream.of(
 			arguments(Ticket.create(FixedGenerator.FIXED_NUMBERS), 2000000.0),
-			arguments(Ticket.create(Arrays.asList(1, 2, 3, 4, 5, 45)), 1500.0),
-			arguments(Ticket.create(Arrays.asList(1, 2, 3, 4, 44, 45)), 50.0),
-			arguments(Ticket.create(Arrays.asList(1, 2, 3, 43, 44, 45)), 5.0)
+			arguments(Ticket.create(convertToLottoNumbers(1, 2, 3, 4, 5, 45)), 1500.0),
+			arguments(Ticket.create(convertToLottoNumbers(1, 2, 3, 4, 44, 45)), 50.0),
+			arguments(Ticket.create(convertToLottoNumbers(1, 2, 3, 43, 44, 45)), 5.0)
 		);
+	}
+
+	private static List<LottoNumber> convertToLottoNumbers(int... numbers) {
+		return Arrays.stream(numbers)
+			.mapToObj(LottoNumber::create)
+			.collect(toList());
 	}
 }

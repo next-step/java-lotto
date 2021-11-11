@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static java.util.stream.Collectors.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.*;
 
@@ -13,32 +14,19 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import lotto.exception.TicketRangeException;
 import lotto.exception.TicketSizeException;
 
 class TicketTest {
-	private static final Ticket WINNING_NUMBER_TICKET = Ticket.create(Arrays.asList(1, 2, 3, 4, 5, 6));
+	private static final Ticket WINNING_NUMBER_TICKET = Ticket.create(convertToLottoNumbers(1, 2, 3, 4, 5, 6));
 
 	@DisplayName("Ticket 생성시 " + Ticket.SIZE_OF_LOTTO_TICKET + "개가 아니면 예외를 던진다.")
 	@Test
 	void createSizeMismatch() {
 		// given
-		List<Integer> values = Arrays.asList(1, 2, 3, 4, 5);
+		List<LottoNumber> values = convertToLottoNumbers(1, 2, 3, 4, 5);
 
 		// when then
 		assertThatExceptionOfType(TicketSizeException.class)
-			.isThrownBy(() -> Ticket.create(values));
-	}
-
-	@DisplayName("Ticket 생성시 숫자는 지정된 범위 숫자가 아닐 경우 예외를 던진다.")
-	@Test
-	void createRangeMismatch() {
-		// given
-		List<Integer> values = Arrays.asList(Ticket.MIN_OF_LOTTO_NUMBERS - 1, Ticket.MAX_OF_LOTTO_NUMBERS + 1,
-			1, 2, 3, 4);
-
-		// when then
-		assertThatExceptionOfType(TicketRangeException.class)
 			.isThrownBy(() -> Ticket.create(values));
 	}
 
@@ -46,7 +34,7 @@ class TicketTest {
 	@Test
 	void createDuplicatedValue() {
 		// given
-		List<Integer> values = Arrays.asList(1, 1, 1, 1, 1, 1);
+		List<LottoNumber> values = convertToLottoNumbers(1, 1, 1, 1, 1, 1);
 
 		// when then
 		assertThatIllegalArgumentException()
@@ -66,13 +54,19 @@ class TicketTest {
 
 	private static Stream<Arguments> provideTicketWithMatchedCount() {
 		return Stream.of(
-			arguments(Ticket.create(Arrays.asList(1, 2, 3, 4, 5, 6)), 6),
-			arguments(Ticket.create(Arrays.asList(1, 2, 3, 4, 5, 45)), 5),
-			arguments(Ticket.create(Arrays.asList(1, 2, 3, 4, 44, 45)), 4),
-			arguments(Ticket.create(Arrays.asList(1, 2, 3, 43, 44, 45)), 3),
-			arguments(Ticket.create(Arrays.asList(1, 2, 42, 43, 44, 45)), 2),
-			arguments(Ticket.create(Arrays.asList(1, 41, 42, 43, 44, 45)), 1),
-			arguments(Ticket.create(Arrays.asList(40, 41, 42, 43, 44, 45)), 0)
+			arguments(Ticket.create(convertToLottoNumbers(1, 2, 3, 4, 5, 6)), 6),
+			arguments(Ticket.create(convertToLottoNumbers(1, 2, 3, 4, 5, 45)), 5),
+			arguments(Ticket.create(convertToLottoNumbers(1, 2, 3, 4, 44, 45)), 4),
+			arguments(Ticket.create(convertToLottoNumbers(1, 2, 3, 43, 44, 45)), 3),
+			arguments(Ticket.create(convertToLottoNumbers(1, 2, 42, 43, 44, 45)), 2),
+			arguments(Ticket.create(convertToLottoNumbers(1, 41, 42, 43, 44, 45)), 1),
+			arguments(Ticket.create(convertToLottoNumbers(40, 41, 42, 43, 44, 45)), 0)
 		);
+	}
+
+	private static List<LottoNumber> convertToLottoNumbers(int... numbers) {
+		return Arrays.stream(numbers)
+			.mapToObj(LottoNumber::create)
+			.collect(toList());
 	}
 }
