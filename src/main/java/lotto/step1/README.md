@@ -10,13 +10,20 @@
 **- TODO List**
 1. ~~문자열을 받아서 구분자를 기준으로 분리해보자(테스트 코드부터 작성해볼까)~~
 2. ~~분리한 숫자들을 합해보자~~
-3. 커스텀 구분자를 지정해서 계산해보자
-4. 빈 문자열 or null 이 들어올 경우 0을 반환(뒤늦게 추가)
-5. 검증로직을 구현(number < 0 or number가 아닌것)
+3. ~~커스텀 구분자를 지정해서 계산해보자~~
+4. ~~빈 문자열 or null 이 들어올 경우 0을 반환(뒤늦게 추가)~~
+5. ~~검증로직을 구현(number < 0 or number가 아닌것)~~
 
 **- 기능 목록**
 1. StringCalculator 클래스
-    - split 메서드
-    - 계산 로직
-    - 커스텀 구분자 지정 로직  
-    - 검증로직
+    - addString : 입력값 받음
+    - checkNullOrEmpty : 널이거나 0이 들어오면 0반환 아니면 로직시작
+    - splitValue, isCustom : 커스텀구분자와 기본구분자로 나뉨
+    - splitCustomPattern : 커스텀 구분자로 문자열 자름
+    - splitBasicPattern : 기본구분자로 문자열 자름
+    - checkDelimiter : 구분자 검증  
+    - checkMinusOrNotNumber : 자른 값이 숫자값인지 마이너스 값인지 검증 -> RuntimeException
+    - sum : 숫자값이면 합산하여 반환
+2. StringCalculatorTest
+    - 각 단계별 테스트 진행
+    - private 접근제어자 변경으로 테스트 메서드변경 및 주석처리

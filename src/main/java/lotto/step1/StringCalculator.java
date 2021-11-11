@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 public class StringCalculator {
 
     private static final Pattern CUSTOM = Pattern.compile("//(.)\n(.*)");
-    private static final Pattern BASIC = Pattern.compile("[,:]");
+    private static final String BASIC = "[,:]";
 
     public static int addString(String input) {
         return checkNullOrEmpty(input) ? 0 : sum(splitValue(input));
@@ -35,7 +35,7 @@ public class StringCalculator {
     }
 
     private static String[] splitBasicPattern(String input) {
-        String[] split = input.split(BASIC.toString());
+        String[] split = input.split(BASIC);
         Arrays.stream(split)
                 .forEach(StringCalculator::checkDelimiter);
         return split;
