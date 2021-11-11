@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class CalcTest {
+public class CalculatorTest {
     @ParameterizedTest
     @MethodSource("nullOrEmptyInputSource")
     @DisplayName("Null 또는 공백의 입력이 들어왔을 때 결과로 0을 리턴하는지")
