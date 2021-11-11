@@ -13,7 +13,7 @@ public class Statistics {
 	private final Map<Rank, Integer> matchedResult;
 	private final double profitRatio;
 
-	Statistics(Tickets tickets, Ticket winningNumberTicket) {
+	private Statistics(Tickets tickets, Ticket winningNumberTicket) {
 		this.tickets = tickets;
 		this.winningNumberTicket = winningNumberTicket;
 		this.matchedResult = calculateMatchedResult();

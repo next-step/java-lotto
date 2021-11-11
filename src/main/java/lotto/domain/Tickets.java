@@ -12,7 +12,7 @@ public class Tickets {
 
 	private final List<Ticket> values;
 
-	Tickets(List<Ticket> values) {
+	private Tickets(List<Ticket> values) {
 		validate(values);
 		this.values = new ArrayList<>(values);
 	}

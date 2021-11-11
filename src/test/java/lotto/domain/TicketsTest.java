@@ -58,8 +58,8 @@ class TicketsTest {
 	private Tickets createFixedTickets(int numberOfPurchases) {
 		List<Ticket> values = new ArrayList<>();
 		for (int i = 0; i < numberOfPurchases; i++) {
-			values.add(new Ticket(FixedGenerator.FIXED_NUMBERS));
+			values.add(Ticket.create(FixedGenerator.FIXED_NUMBERS));
 		}
-		return new Tickets(values);
+		return Tickets.create(values);
 	}
 }

@@ -8,11 +8,11 @@ import lotto.generator.Generator;
 public class Lotto {
 	private final Tickets tickets;
 
-	Lotto(Generator generator, int numberOfPurchases) {
+	private Lotto(Generator generator, int numberOfPurchases) {
 		this(Tickets.create(generator, numberOfPurchases));
 	}
 
-	Lotto(Tickets tickets) {
+	private Lotto(Tickets tickets) {
 		this.tickets = tickets;
 	}
 

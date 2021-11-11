@@ -19,19 +19,6 @@ import lotto.exception.TicketSizeException;
 class TicketTest {
 	private static final Ticket WINNING_NUMBER_TICKET = Ticket.create(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-	@DisplayName("Ticket 생성을 검증한다.")
-	@Test
-	void create() {
-		// given
-		List<Integer> values = Arrays.asList(1, 2, 3, 4, 5, 6);
-
-		// when
-		Ticket ticket = Ticket.create(values);
-
-		// then
-		assertThat(ticket).isEqualTo(new Ticket(values));
-	}
-
 	@DisplayName("Ticket 생성시 " + Ticket.SIZE_OF_LOTTO_TICKET + "개가 아니면 예외를 던진다.")
 	@Test
 	void createSizeMismatch() {

@@ -22,11 +22,7 @@ public class Ticket {
 
 	private final Set<Integer> values;
 
-	Ticket(List<Integer> values) {
-		this(new LinkedHashSet<>(values));
-	}
-
-	Ticket(Set<Integer> values) {
+	private Ticket(Set<Integer> values) {
 		validate(values);
 		this.values = values;
 	}
