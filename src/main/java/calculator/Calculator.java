@@ -80,7 +80,7 @@ public class Calculator implements Function<String, Integer> {
         }
 
         if (target < 0) {
-            throw new RuntimeException("숫자 이외의 값을 입력으로 사용할 수 없습니다.");
+            throw new RuntimeException("음수를 사용할 수 없습니다.");
         }
 
         return target;
