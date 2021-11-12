@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class Calculator implements Function<String, Integer> {
     private static final int NULL_OR_EMPTY_RESULT = 0;
+    private static final int ZERO = 0;
     private static final String DEFAULT_DELIMITER = "[,:]";
     private static final String CHECK_CUSTOM_DELIMITER_USED = "//";
     private static final String CUSTOM_DELIMITER_REGEX = "//(.*)\n(.*)";
@@ -27,8 +28,7 @@ public class Calculator implements Function<String, Integer> {
     }
 
     private Integer applyDefaultDelimiter(String input) {
-        final List<String> numbers = Arrays.stream(input.trim().split(DEFAULT_DELIMITER)).collect(Collectors.toList());
-        return numbers.stream()
+        return Arrays.stream(splitInputByDelimiter(input, DEFAULT_DELIMITER))
                 .mapToInt(this::convertStringToInteger)
                 .sum();
     }
@@ -40,8 +40,11 @@ public class Calculator implements Function<String, Integer> {
 
         String customDelimiter = getCustomDelimiter(matcher);
 
-        final List<String > numbers = getNumbers(matcher, customDelimiter);
-        if (numbers == null) return NULL_OR_EMPTY_RESULT;
+        final List<String> numbers = getNumbers(matcher, customDelimiter);
+
+        if (numbers == null) {
+            return NULL_OR_EMPTY_RESULT;
+        }
 
         return numbers.stream()
                 .mapToInt(this::convertStringToInteger)
@@ -63,7 +66,12 @@ public class Calculator implements Function<String, Integer> {
             return null;
         }
 
-        return Arrays.stream(matcher.group(2).trim().split(customDelimiter)).collect(Collectors.toList());
+        return Arrays.stream(splitInputByDelimiter(matcher.group(2), customDelimiter))
+                .collect(Collectors.toList());
+    }
+
+    private String[] splitInputByDelimiter(String input, String delimiter) {
+        return input.trim().split(delimiter);
     }
 
     private boolean isNullOrEmpty(String input) {
@@ -79,7 +87,7 @@ public class Calculator implements Function<String, Integer> {
             throw new RuntimeException("숫자 이외의 값을 입력으로 사용할 수 없습니다.");
         }
 
-        if (target < 0) {
+        if (target < ZERO) {
             throw new RuntimeException("음수를 사용할 수 없습니다.");
         }
 
