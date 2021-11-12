@@ -9,16 +9,17 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static lotto.rule.LottoRule.LOTTO_NUMBER_COUNT;
+
 public class LottoTicket {
     private static final String LOTTO_NUMBERS_DELIMITER = ", ";
-    private static final Integer LOTTO_NUMBERS_SIZE = 6;
 
     private final Set<LottoNumber> lottoNumbers;
 
     private LottoTicket(Set<LottoNumber> lottoNumbers) {
         Preconditions.checkNotNull(lottoNumbers, "lottoNumbers는 필수값 입니다.");
-        Preconditions.checkSize(lottoNumbers.size(), LOTTO_NUMBERS_SIZE,
-                                String.format("LottoNumber 갯수는 %s 이어야 합니다.", LOTTO_NUMBERS_SIZE));
+        Preconditions.checkSize(lottoNumbers.size(), LOTTO_NUMBER_COUNT,
+                                String.format("LottoNumber 갯수는 %s 이어야 합니다.", LOTTO_NUMBER_COUNT));
 
         this.lottoNumbers = lottoNumbers;
     }
