@@ -29,10 +29,10 @@ public class LottoTickets {
     }
 
     public static LottoTickets of(List<LottoTicket> manualNumbers, List<LottoTicket> autoNumbers) {
-        List<LottoTicket> total = new ArrayList<>();
-        total.addAll(autoNumbers);
-        total.addAll(manualNumbers);
-        return new LottoTickets(total);
+        List<LottoTicket> totalNumbers = new ArrayList<>();
+        totalNumbers.addAll(autoNumbers);
+        totalNumbers.addAll(manualNumbers);
+        return new LottoTickets(totalNumbers);
     }
 
     public Map<Rank, Integer> countOfWinningByRank(WinningLottoTicket winningLottoTicket) {
@@ -47,6 +47,10 @@ public class LottoTickets {
 
     public LottoPrice getLottoPrice() {
         return LottoPrice.from(getCountOfLottoTickets() * MINIMUM_PRICE);
+    }
+
+    public Integer getAutoLottoCount(Integer manualLottoCount) {
+        return getCountOfLottoTickets() - manualLottoCount;
     }
 
     /**

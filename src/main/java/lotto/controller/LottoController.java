@@ -33,12 +33,13 @@ public class LottoController {
         List<List<Integer>> manualNumbers = inputView.inputManualLottoNumbers(manualLottoCount);
 
         LottoTickets purchaseLottoTickets
-                = lottoService.purchaseLottoTickets(
-                LottoPurchaseDTO.from(purchasePrice.getLottoQuantity(), manualNumbers));
+                = lottoService.purchaseLottoTickets(LottoPurchaseDTO.from(purchasePrice.getLottoQuantity(),
+                                                                          manualNumbers));
 
-        resultView.printPurchaseLottoTickets(PurchaseLottoTicketsDTO.create(manualLottoCount,
-                                                                            purchaseLottoTickets.getCountOfLottoTickets() - manualLottoCount,
-                                                                            purchaseLottoTickets));
+        resultView.printPurchaseLottoTickets(
+                PurchaseLottoTicketsDTO.create(manualLottoCount,
+                                               purchaseLottoTickets.getAutoLottoCount(manualLottoCount),
+                                               purchaseLottoTickets));
         return purchaseLottoTickets;
     }
 
