@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  * 가방은 최대한 많이 로또를 구매할 수 있다. (로또 한장당 가격을 입력 받는다)
  * 가방은 로또를 살 돈이 충분하지 않으면 로또 구매가 불가능하다
  * 가방은 로또의 당첨 결과를 알 수 있다. (당첨번호를 입력 받는다)
- * 가방은 총 수익률을 계산할 수 있다. (각 등수의 금액과 당첨번호를 입력 받는다)
+ * 가방은 총 수익을 계산할 수 있다. (각 등수의 금액과 당첨번호를 입력 받는다)
  */
 public class BagTest {
     private static final int LOTTO_UNIT_PRICE = 1000;
@@ -85,7 +85,7 @@ public class BagTest {
     }
 
     @Test
-    @DisplayName("가방은 총 수익률을 계산할 수 있다. (각 등수의 금액과 당첨번호를 입력 받는다)")
+    @DisplayName("가방은 총 수익을 계산할 수 있다. (각 등수의 금액과 당첨번호를 입력 받는다)")
     void 수익률계산() {
         Bag bag = new Bag(0,
                 new Lotto(1, 2, 3, 4, 5, 6),
@@ -99,6 +99,6 @@ public class BagTest {
 
         double yield = bag.yield(PRIZE_LIST, new Lotto(1, 2, 3, 4, 5, 6));
 
-        assertThat(yield).isEqualTo(PRIZE_LIST.stream().mapToDouble(e -> e).sum() / PRIZE_LIST.size());
+        assertThat(yield).isEqualTo(PRIZE_LIST.stream().mapToDouble(e -> e).sum());
     }
 }

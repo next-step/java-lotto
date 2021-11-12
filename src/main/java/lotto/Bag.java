@@ -54,7 +54,6 @@ public class Bag {
     }
 
     public double yield(List<Double> prizeList, Lotto lotto) {
-        final int lottoCount = this.lottos.size();
         final List<Integer> result = this.lottoResult(lotto);
 
         final double totalPrize = Stream.iterate(0, i -> i + 1)
@@ -62,7 +61,7 @@ public class Bag {
                 .mapToDouble(index -> result.get(index) * prizeList.get(index))
                 .sum();
 
-        return totalPrize / lottoCount;
+        return totalPrize;
     }
 
     @Override
