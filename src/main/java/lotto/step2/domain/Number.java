@@ -8,8 +8,13 @@ public class Number {
 
     List<Integer> number = new ArrayList<>();
 
+    // 테스트 생성자
     public Number() {
         createRandomNumber();
+    }
+
+    public Number(List<Integer> list) {
+        number = list;
     }
 
     public List<Integer> getNumber() {
@@ -22,4 +27,8 @@ public class Number {
         }
     }
 
+    @Override
+    public String toString() {
+        return "" + number;
+    }
 }

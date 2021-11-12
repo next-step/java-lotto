@@ -1,7 +1,5 @@
 package lotto.step2.domain;
 
-import lotto.step2.domain.Lotto;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,12 +8,14 @@ public class LotteryStore {
     private static final int LOTTO_PRICE = 1000;
 
     private int totalCount;
-    private List<Lotto> lottos = new ArrayList<>();
+    private List<Lotto> lotteries = new ArrayList<>();
+
+    public LotteryStore() {}
 
     public LotteryStore(int orderPrice) {
         totalCount = orderPrice / 1000;
         for (int i = 0; i < totalCount; i++) {
-            lottos.add(new Lotto(LOTTO_PRICE));
+            lotteries.add(new Lotto(LOTTO_PRICE));
         }
     }
 
@@ -23,7 +23,8 @@ public class LotteryStore {
         return totalCount;
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
+    public List<Lotto> getLotteries() {
+        return lotteries;
     }
+
 }
