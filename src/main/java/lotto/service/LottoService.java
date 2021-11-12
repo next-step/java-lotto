@@ -1,9 +1,6 @@
 package lotto.service;
 
-import lotto.service.domain.LottoResultMaker;
-import lotto.service.domain.LottoTicket;
-import lotto.service.domain.LottoTicketMaker;
-import lotto.service.domain.WinningLottoTicket;
+import lotto.service.domain.*;
 import lotto.service.dto.LottoPurchaseDTO;
 import lotto.service.dto.LottoResultCreateDTO;
 import lotto.service.model.LottoResult;
@@ -18,11 +15,9 @@ import java.util.stream.IntStream;
 
 public class LottoService {
     private static final Integer START_LOTTO_QUANTITY = 1;
-    private final LottoTicketMaker lottoTicketMaker;
     private final LottoResultMaker lottoResultMaker;
 
-    public LottoService(LottoTicketMaker lottoTicketMaker, LottoResultMaker lottoResultMaker) {
-        this.lottoTicketMaker = lottoTicketMaker;
+    public LottoService(LottoResultMaker lottoResultMaker) {
         this.lottoResultMaker = lottoResultMaker;
     }
 
@@ -31,7 +26,7 @@ public class LottoService {
 
         List<LottoTicket> lottoTickets = IntStream.rangeClosed(START_LOTTO_QUANTITY,
                                                                lottoPurchaseDTO.getLottoQuantity())
-                .mapToObj(v -> lottoTicketMaker.createLottoTicket())
+                .mapToObj(v -> new LottoTicketRandomMaker().createLottoTicket())
                 .collect(Collectors.toList());
         return LottoTickets.from(lottoTickets);
     }

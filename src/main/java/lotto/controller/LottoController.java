@@ -7,25 +7,42 @@ import lotto.service.dto.LottoResultCreateDTO;
 import lotto.service.model.LottoResult;
 import lotto.service.model.LottoTickets;
 import lotto.service.value.LottoPrice;
+import lotto.ui.InputView;
+import lotto.ui.ResultView;
 
 import java.util.List;
 
 public class LottoController {
     private final LottoService lottoService;
+    private final InputView inputView;
+    private final ResultView resultView;
 
-    public LottoController(LottoService lottoService) {
+    public LottoController(LottoService lottoService, InputView inputView, ResultView resultView) {
         this.lottoService = lottoService;
+        this.inputView = inputView;
+        this.resultView = resultView;
     }
 
-    public LottoTickets purchaseLottoTickets(LottoPrice purchasePrice) {
-        return lottoService.purchaseLottoTickets(LottoPurchaseDTO.from(purchasePrice.getLottoQuantity()));
+    public LottoTickets purchaseLottoTickets() {
+        LottoPrice purchasePrice = inputView.inputPurchasePrice();
+
+        LottoTickets purchaseLottoTickets
+                = lottoService.purchaseLottoTickets(LottoPurchaseDTO.from(purchasePrice.getLottoQuantity()));
+
+        resultView.printPurchaseLottoTickets(purchaseLottoTickets);
+        return purchaseLottoTickets;
     }
 
-    public WinningLottoTicket getWinningLottoTicket(List<Integer> winningLottoNumbers, Integer bonusNumber) {
+    public WinningLottoTicket getWinningLottoTicket() {
+        List<Integer> winningLottoNumbers = inputView.inputWinningLottoNumberOfLastWeeks();
+        Integer bonusNumber = inputView.inputBonusNumber();
+
         return lottoService.getWinningLottoTicket(winningLottoNumbers, bonusNumber);
     }
 
-    public LottoResult checkLottoResult(LottoTickets purchaseLottoTickets, WinningLottoTicket winningLottoTicket) {
-        return lottoService.checkLottoResult(LottoResultCreateDTO.of(purchaseLottoTickets, winningLottoTicket));
+    public void checkLottoResult(LottoTickets purchaseLottoTickets, WinningLottoTicket winningLottoTicket) {
+        LottoResult lottoResult
+                = lottoService.checkLottoResult(LottoResultCreateDTO.of(purchaseLottoTickets, winningLottoTicket));
+        resultView.printLottoResult(lottoResult, purchaseLottoTickets.getLottoPrice());
     }
 }

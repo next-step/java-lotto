@@ -3,6 +3,7 @@ package lotto.service.model;
 import lotto.service.domain.LottoTicket;
 import lotto.service.domain.WinningLottoTicket;
 import lotto.service.domain.types.Rank;
+import lotto.service.value.LottoPrice;
 import lotto.utils.Preconditions;
 
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static lotto.rule.LottoRule.MINIMUM_PRICE;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
@@ -33,6 +36,10 @@ public class LottoTickets {
 
     public Integer getCountOfLottoTickets() {
         return lottoTickets.size();
+    }
+
+    public LottoPrice getLottoPrice() {
+        return LottoPrice.from(getCountOfLottoTickets() * MINIMUM_PRICE);
     }
 
     /**
