@@ -1,4 +1,4 @@
-package lotto.step2;
+package lotto.step2.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +20,6 @@ public class Number {
         for (int i = 0; i < 6; i++) {
             number.add(new Random().nextInt(45) + 1);
         }
-    }
-
-    @Override
-    public String toString() {
-        return "LottoNumber{" +
-                "number=" + number +
-                '}';
     }
 
 }

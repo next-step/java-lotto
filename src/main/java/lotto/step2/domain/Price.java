@@ -1,4 +1,4 @@
-package lotto.step2;
+package lotto.step2.domain;
 
 public class Price {
 

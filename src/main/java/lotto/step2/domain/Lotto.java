@@ -1,16 +1,13 @@
-package lotto.step2;
+package lotto.step2.domain;
 
 public class Lotto {
 
     private Price price;
     private Number number;
 
-    public Lotto() {
-        this.number = new Number();
-    }
-
     public Lotto(int price) {
         this.price = new Price(price);
+        this.number = new Number();
     }
 
     public Number getLottoNumber() {
@@ -20,4 +17,5 @@ public class Lotto {
     public Price getLottoPrice() {
         return price;
     }
+
 }
