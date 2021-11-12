@@ -8,6 +8,8 @@ public class StringCalculator {
 
     private static final Pattern CUSTOM = Pattern.compile("//(.)\n(.*)");
     private static final String BASIC = "[,:]";
+    public static final int MATCHER_FIRST_INDEX = 1;
+    public static final int MATCHER_SECOND_INDEX = 2;
 
     private StringCalculator() {
         throw new AssertionError();
@@ -17,11 +19,11 @@ public class StringCalculator {
         return checkNullOrEmpty(input) ? 0 : sum(splitValue(input));
     }
 
-    static boolean checkNullOrEmpty(String input) {
+    private static boolean checkNullOrEmpty(String input) {
         return input == null || input.isEmpty();
     }
 
-    static String[] splitValue(String input) {
+    private static String[] splitValue(String input) {
         return isCustom(input) ? splitCustomPattern(input) : splitBasicPattern(input);
     }
 
@@ -32,10 +34,10 @@ public class StringCalculator {
     private static String[] splitCustomPattern(String input) {
         Matcher matcher = CUSTOM.matcher(input);
         if (matcher.find()) {
-            String customDelimiter = matcher.group(1);
-            return matcher.group(2).split(customDelimiter);
+            String customDelimiter = matcher.group(MATCHER_FIRST_INDEX);
+            return matcher.group(MATCHER_SECOND_INDEX).split(customDelimiter);
         }
-        return null;
+        return new String[0];
     }
 
     private static String[] splitBasicPattern(String input) {
@@ -51,7 +53,7 @@ public class StringCalculator {
         }
     }
 
-    static int sum(String[] input) {
+    private static int sum(String[] input) {
         Arrays.stream(input)
                 .forEach(StringCalculator::checkMinusOrNotNumber);
         return Arrays.stream(input)
@@ -59,7 +61,7 @@ public class StringCalculator {
                 .sum();
     }
 
-    static void checkMinusOrNotNumber(String input) {
+    private static void checkMinusOrNotNumber(String input) {
         for (char c : input.toCharArray()) {
             notDigitThrowException(c);
         }
