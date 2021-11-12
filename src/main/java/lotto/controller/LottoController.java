@@ -28,8 +28,6 @@ public class LottoController {
     public LottoTickets purchaseLottoTickets() {
         LottoPrice purchasePrice = inputView.inputPurchasePrice();
         Integer manualLottoCount = inputView.inputManualCount();
-        LottoValidator.checkManualLottoCount(purchasePrice.getLottoQuantity(), manualLottoCount);
-
         List<List<Integer>> manualNumbers = inputView.inputManualLottoNumbers(manualLottoCount);
 
         LottoTickets purchaseLottoTickets

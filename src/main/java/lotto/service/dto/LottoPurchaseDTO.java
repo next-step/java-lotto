@@ -1,6 +1,7 @@
 package lotto.service.dto;
 
 import lotto.utils.Preconditions;
+import lotto.validator.LottoValidator;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ public class LottoPurchaseDTO {
     private LottoPurchaseDTO(Integer lottoQuantity, List<List<Integer>> manualNumbers) {
         Preconditions.checkNotNull(lottoQuantity, "lottoQuantity는 필수값입니다.");
         Preconditions.checkNotNull(manualNumbers, "manualNumbers는 필수값입니다.");
+        LottoValidator.checkManualLottoCount(lottoQuantity, manualNumbers.size());
 
         this.autoLottoQuantity = lottoQuantity - manualNumbers.size();
         this.manualNumbers = manualNumbers;

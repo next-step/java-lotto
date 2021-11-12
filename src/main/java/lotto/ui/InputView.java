@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.rule.LottoRule.MINIMUM_NUMBER;
+
 public class InputView {
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
@@ -30,7 +32,7 @@ public class InputView {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
         List<List<Integer>> manualLottoNumbers = new ArrayList<>();
-        IntStream.rangeClosed(1, manualLottoCount)
+        IntStream.rangeClosed(MINIMUM_NUMBER, manualLottoCount)
                 .forEach(v -> manualLottoNumbers.add(inputLottoNumber(InputUtils.input())));
         return manualLottoNumbers;
     }
