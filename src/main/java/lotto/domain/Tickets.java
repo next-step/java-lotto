@@ -43,21 +43,25 @@ public class Tickets {
 		return Collections.unmodifiableList(values);
 	}
 
-	public int getRankMatchedCount(Rank rank, Ticket winningNumberTicket) {
+	public int getRankMatchedCount(Rank rank, WinningTicket winningTicket) {
 		return (int)values.stream()
-			.map(ticket -> ticket.getMatchedCount(winningNumberTicket))
-			.filter(matchedCount -> matchedCount == rank.getCountOfMatch())
+			.map(ticket -> convertToRank(winningTicket, ticket))
+			.filter(winningRank -> winningRank == rank)
 			.count();
 	}
 
-	public double calculateProfitRatio(Ticket winningNumberTicket) {
+	public double calculateProfitRatio(WinningTicket winningTicket) {
 		double winningAmount = values.stream()
-			.map(ticket -> Rank.from(ticket.getMatchedCount(winningNumberTicket)))
+			.map(ticket -> convertToRank(winningTicket, ticket))
 			.mapToDouble(Rank::getWinningMoney)
 			.sum();
 
 		int purchasePrice = values.size() * Ticket.PRICE;
 		return winningAmount / purchasePrice;
+	}
+
+	private Rank convertToRank(WinningTicket winningTicket, Ticket ticket) {
+		return Rank.from(winningTicket.getMatchedCount(ticket), winningTicket.isBonusMatched(ticket));
 	}
 
 	@Override

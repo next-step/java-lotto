@@ -18,15 +18,18 @@ class LottoTest {
 		Generator generator = new FixedGenerator();
 		int numberOfPurchases = 10;
 
+		String[] winningNumber = {"12", "17", "26", "36", "38", "40"};
+		int bonus = 5;
+
 		Lotto lotto = Lotto.create(generator, numberOfPurchases);
-		Ticket winningNumberTicket = Ticket.create(FixedGenerator.FIXED_NUMBERS);
+		WinningTicket winningTicket = WinningTicket.create(winningNumber, bonus);
 
 		// when
-		Statistics statistics = lotto.createStatistics(winningNumberTicket);
+		Statistics statistics = lotto.createStatistics(winningTicket);
 
 		// then
 		assertThat(statistics).isEqualTo(
-			Statistics.create(Tickets.create(generator, numberOfPurchases), winningNumberTicket));
+			Statistics.create(Tickets.create(generator, numberOfPurchases), winningTicket));
 	}
 
 	@DisplayName("Lotto getTickets() 호출후 컬렉션 수정시 예외를 던진다.")

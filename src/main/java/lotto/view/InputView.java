@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import lotto.domain.Ticket;
+import lotto.domain.WinningTicket;
 import lotto.exception.UtilCreationException;
 
 public final class InputView {
@@ -18,7 +19,8 @@ public final class InputView {
 
 	private static final String PURCHASE_MESSAGE = "구입금액을 입력해 주세요.";
 	private static final String PURCHASE_COMPLETE_MESSAGE = "%d개를 구매했습니다.\n";
-	private static final String WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.\n";
+	private static final String WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+	private static final String BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
 
 	private InputView() {
 		throw new UtilCreationException();
@@ -50,22 +52,25 @@ public final class InputView {
 		SCANNER.nextLine();
 	}
 
-	public static Ticket getWinningNumberTicket() {
+	public static WinningTicket getWinningTicket() {
 		try {
-			return innerWinningNumberTicket();
+			return innerWinningTicket();
 		} catch (IllegalArgumentException e) {
 			System.err.println(WINNING_NUMBER_PATTERN_MISMATCH_MESSAGE);
-			return getWinningNumberTicket();
+			return getWinningTicket();
 		}
 	}
 
-	private static Ticket innerWinningNumberTicket() {
+	private static WinningTicket innerWinningTicket() {
 		System.out.println(WINNING_NUMBER_MESSAGE);
 		String winningNumber = SCANNER.nextLine();
 
 		validate(winningNumber);
 
-		return Ticket.createWinningNumberTicket(winningNumber.split(WINNING_NUMBER_DELIMITER));
+		System.out.println(BONUS_BALL_MESSAGE);
+		int bonus = SCANNER.nextInt();
+
+		return WinningTicket.create(winningNumber.split(WINNING_NUMBER_DELIMITER), bonus);
 	}
 
 	private static void validate(String winningNumber) {

@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import static java.util.stream.Collectors.*;
-
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -44,14 +41,6 @@ public class Ticket {
 		return new Ticket(values);
 	}
 
-	public static Ticket createWinningNumberTicket(String[] numbers) {
-		List<LottoNumber> values = Arrays.stream(numbers)
-			.map(LottoNumber::create)
-			.sorted()
-			.collect(toList());
-		return create(values);
-	}
-
 	public int getMatchedCount(Ticket winningNumberTicket) {
 		return (int)values.stream()
 			.filter(winningNumberTicket::contains)
@@ -60,6 +49,10 @@ public class Ticket {
 
 	private boolean contains(LottoNumber number) {
 		return values.contains(number);
+	}
+
+	public boolean isBonusMatched(LottoNumber bonus) {
+		return contains(bonus);
 	}
 
 	@Override

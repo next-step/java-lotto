@@ -10,7 +10,7 @@ import lotto.domain.Ticket;
 import lotto.exception.UtilCreationException;
 
 public final class ResultView {
-	private static final String WINNING_STATISTICS = "당첨 통계\n";
+	private static final String WINNING_STATISTICS = "\n당첨 통계\n";
 	private static final String DIVIDING_LINE = "---------\n";
 	private static final String WINNING_NUMBER_RESULT = "%d개 일치 (%d원)- %d개\n";
 	private static final String PROFIT_RESULT = "총 수익률은 %.2f 입니다. (기준이 1이기 때문에 결과적으로 '%s'(이)라는 의미임)\n";

@@ -24,8 +24,8 @@ public class Lotto {
 		return tickets.getValues();
 	}
 
-	public Statistics createStatistics(Ticket winningNumberTicket) {
-		return Statistics.create(tickets, winningNumberTicket);
+	public Statistics createStatistics(WinningTicket winningTicket) {
+		return Statistics.create(tickets, winningTicket);
 	}
 
 	@Override
