@@ -3,10 +3,8 @@ package lotto.service.domain;
 import lotto.service.value.LottoNumber;
 import lotto.utils.Preconditions;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static lotto.rule.LottoRule.LOTTO_NUMBER_COUNT;
@@ -14,9 +12,9 @@ import static lotto.rule.LottoRule.LOTTO_NUMBER_COUNT;
 public class LottoTicket {
     private static final String LOTTO_NUMBERS_DELIMITER = ", ";
 
-    private final Set<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    private LottoTicket(Set<LottoNumber> lottoNumbers) {
+    private LottoTicket(List<LottoNumber> lottoNumbers) {
         Preconditions.checkNotNull(lottoNumbers, "lottoNumbers는 필수값 입니다.");
         Preconditions.checkSize(lottoNumbers.size(), LOTTO_NUMBER_COUNT,
                                 String.format("LottoNumber 갯수는 %s 이어야 합니다.", LOTTO_NUMBER_COUNT));
@@ -25,7 +23,7 @@ public class LottoTicket {
     }
 
     public static LottoTicket from(List<LottoNumber> numbers) {
-        return new LottoTicket(new HashSet<>(numbers));
+        return new LottoTicket(numbers);
     }
 
     public boolean isContains(LottoNumber lottoNumber) {

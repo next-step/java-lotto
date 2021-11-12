@@ -29,6 +29,12 @@ public class LottoValidator {
         }
     }
 
+    public static void checkMinimumCount(Integer manualCount) {
+        if (manualCount < MINIMUM_MANUAL_COUNT) {
+            throw new IllegalArgumentException("최소 0이상 입력해 주세요.");
+        }
+    }
+
     public static boolean checkManualNumber(Integer manualNumber) {
         if (manualNumber < MINIMUM_NUMBER || manualNumber > MAXIMUM_NUMBER) {
             throw new IllegalArgumentException("1-45 사이의 숫자를 입력해 주세요.");

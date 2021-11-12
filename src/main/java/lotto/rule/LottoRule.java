@@ -7,6 +7,7 @@ public final class LottoRule {
     public static final Integer MAXIMUM_NUMBER = 45;
     public static final Integer LOTTO_NUMBER_COUNT = 6;
     public static final Integer LOTTO_SECOND_MATCH_COUNT = 5;
+    public static final Integer MINIMUM_MANUAL_COUNT = 0;
 
     private LottoRule() {
     }

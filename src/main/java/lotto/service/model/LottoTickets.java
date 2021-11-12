@@ -28,6 +28,13 @@ public class LottoTickets {
         return new LottoTickets(numbers);
     }
 
+    public static LottoTickets of(List<LottoTicket> manualNumbers, List<LottoTicket> autoNumbers) {
+        List<LottoTicket> total = new ArrayList<>();
+        total.addAll(autoNumbers);
+        total.addAll(manualNumbers);
+        return new LottoTickets(total);
+    }
+
     public Map<Rank, Integer> countOfWinningByRank(WinningLottoTicket winningLottoTicket) {
         return lottoTickets.stream()
                 .map(winningLottoTicket::matchRank)

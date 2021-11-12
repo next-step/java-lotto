@@ -1,6 +1,9 @@
 package lotto.service;
 
-import lotto.service.domain.*;
+import lotto.service.domain.LottoResultMaker;
+import lotto.service.domain.LottoTicket;
+import lotto.service.domain.WinningLottoTicket;
+import lotto.service.domain.factory.LottoTicketFactory;
 import lotto.service.dto.LottoPurchaseDTO;
 import lotto.service.dto.LottoResultCreateDTO;
 import lotto.service.model.LottoResult;
@@ -16,19 +19,19 @@ import java.util.stream.IntStream;
 public class LottoService {
     private static final Integer START_LOTTO_QUANTITY = 1;
     private final LottoResultMaker lottoResultMaker;
+    private final LottoTicketFactory lottoTicketFactory;
 
-    public LottoService(LottoResultMaker lottoResultMaker) {
+    public LottoService(LottoResultMaker lottoResultMaker, LottoTicketFactory lottoTicketFactory) {
         this.lottoResultMaker = lottoResultMaker;
+        this.lottoTicketFactory = lottoTicketFactory;
     }
 
     public LottoTickets purchaseLottoTickets(LottoPurchaseDTO lottoPurchaseDTO) {
         Preconditions.checkNotNull(lottoPurchaseDTO, "lottoPurchaseDTO의 값이 없습니다.");
 
-        List<LottoTicket> lottoTickets = IntStream.rangeClosed(START_LOTTO_QUANTITY,
-                                                               lottoPurchaseDTO.getLottoQuantity())
-                .mapToObj(v -> new LottoTicketRandomMaker().createLottoTicket())
-                .collect(Collectors.toList());
-        return LottoTickets.from(lottoTickets);
+        List<LottoTicket> manualLottoTickets = createManualLottoTickets(lottoPurchaseDTO);
+        List<LottoTicket> lottoTickets = createAutoLottoTickets(lottoPurchaseDTO);
+        return LottoTickets.of(lottoTickets, manualLottoTickets);
     }
 
     public WinningLottoTicket getWinningLottoTicket(List<Integer> winningLottoNumbers, Integer bonusNumber) {
@@ -48,5 +51,17 @@ public class LottoService {
 
         return lottoResultMaker.checkLottoResult(lottoResultCreateDTO.getPurchaseLottoTickets(),
                                                  lottoResultCreateDTO.getWinningLottoTicket());
+    }
+
+    private List<LottoTicket> createManualLottoTickets(LottoPurchaseDTO lottoPurchaseDTO) {
+        return lottoPurchaseDTO.getManualNumbers().stream()
+                .map(lottoTicketFactory::createLottoTicketByManual)
+                .collect(Collectors.toList());
+    }
+
+    private List<LottoTicket> createAutoLottoTickets(LottoPurchaseDTO lottoPurchaseDTO) {
+        return IntStream.rangeClosed(START_LOTTO_QUANTITY, lottoPurchaseDTO.getAutoLottoQuantity())
+                .mapToObj(v -> lottoTicketFactory.createLottoTicketByAuto())
+                .collect(Collectors.toList());
     }
 }

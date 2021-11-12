@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.controller.dto.PurchaseLottoTicketsDTO;
 import lotto.service.LottoService;
 import lotto.service.domain.WinningLottoTicket;
 import lotto.service.dto.LottoPurchaseDTO;
@@ -25,11 +26,16 @@ public class LottoController {
 
     public LottoTickets purchaseLottoTickets() {
         LottoPrice purchasePrice = inputView.inputPurchasePrice();
+        Integer manualLottoCount = inputView.inputManualCount();
+        List<List<Integer>> manualNumbers = inputView.inputManualLottoNumbers(manualLottoCount);
 
         LottoTickets purchaseLottoTickets
-                = lottoService.purchaseLottoTickets(LottoPurchaseDTO.from(purchasePrice.getLottoQuantity()));
+                = lottoService.purchaseLottoTickets(
+                LottoPurchaseDTO.from(purchasePrice.getLottoQuantity(), manualNumbers));
 
-        resultView.printPurchaseLottoTickets(purchaseLottoTickets);
+        resultView.printPurchaseLottoTickets(PurchaseLottoTicketsDTO.create(manualLottoCount,
+                                                                            purchaseLottoTickets.getCountOfLottoTickets() - manualLottoCount,
+                                                                            purchaseLottoTickets));
         return purchaseLottoTickets;
     }
 

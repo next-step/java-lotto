@@ -9,13 +9,17 @@ public class InputUtils {
         throw new IllegalStateException("InputUtils 직접 생성 금지");
     }
 
-    public static Integer inputInt(String message) {
-        System.out.println(message);
-        return Integer.parseInt(SCANNER.nextLine());
+    public static String input() {
+        return SCANNER.nextLine();
     }
 
-    public static String inputString(String message) {
+    public static String input(String message) {
         System.out.println(message);
         return SCANNER.nextLine();
+    }
+
+    public static Integer inputToInteger(String message) {
+        System.out.println(message);
+        return Integer.parseInt(SCANNER.nextLine());
     }
 }

@@ -1,8 +1,8 @@
 package lotto.ui;
 
+import lotto.controller.dto.PurchaseLottoTicketsDTO;
 import lotto.service.domain.types.Rank;
 import lotto.service.model.LottoResult;
-import lotto.service.model.LottoTickets;
 import lotto.service.value.LottoPrice;
 
 import java.util.Arrays;
@@ -11,18 +11,19 @@ import java.util.Comparator;
 public class ResultView {
     private static final String ENTER = "\r\n";
 
-    public void printPurchaseLottoTickets(LottoTickets lottoTickets) {
-        System.out.println(toString(lottoTickets));
+    public void printPurchaseLottoTickets(PurchaseLottoTicketsDTO dto) {
+        System.out.println(toString(dto));
     }
 
     public void printLottoResult(LottoResult lottoResult, LottoPrice purchasePrice) {
         System.out.println(toString(lottoResult, purchasePrice));
     }
 
-    private String toString(LottoTickets lottoTickets) {
+    private String toString(PurchaseLottoTicketsDTO dto) {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%s개를 구매했습니다.", lottoTickets.getCountOfLottoTickets())).append(ENTER);
-        lottoTickets.getLottoTickets().forEach(
+        sb.append(String.format("수동으로 %s장, 자동으로 %s개를 구매했습니다.",
+                                dto.getManualLottoCount(), dto.getAutoLottoCount())).append(ENTER);
+        dto.getLottoTicketList().forEach(
                 lottoTicket -> sb.append("[").append(lottoTicket.getLottoNumbersToString()).append("]").append(ENTER));
         return sb.toString();
     }

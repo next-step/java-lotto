@@ -1,5 +1,6 @@
-package lotto.service.domain;
+package lotto.service.domain.factory;
 
+import lotto.service.domain.LottoTicket;
 import lotto.service.value.LottoNumber;
 
 import java.util.Collections;
@@ -9,12 +10,15 @@ import java.util.stream.IntStream;
 
 import static lotto.rule.LottoRule.*;
 
-public class LottoTicketRandomMaker implements LottoTicketMaker {
-    @Override
-    public LottoTicket createLottoTicket() {
-        List<Integer> lottoNumbers = getLottoNumbers();
+public class LottoTicketFactory {
+    public LottoTicket createLottoTicketByManual(List<Integer> lottoNumbers) {
+        return LottoTicket.from(choiceNumbers(lottoNumbers));
+    }
 
-        return LottoTicket.from(choiceRandomNumbers(lottoNumbers));
+    public LottoTicket createLottoTicketByAuto() {
+        List<Integer> lottoNumbers = getLottoNumbers();
+        Collections.shuffle(lottoNumbers);
+        return LottoTicket.from(choiceNumbers(lottoNumbers));
     }
 
     private List<Integer> getLottoNumbers() {
@@ -23,9 +27,7 @@ public class LottoTicketRandomMaker implements LottoTicketMaker {
                 .collect(Collectors.toList());
     }
 
-    private List<LottoNumber> choiceRandomNumbers(List<Integer> lottoNumbers) {
-        Collections.shuffle(lottoNumbers);
-
+    private List<LottoNumber> choiceNumbers(List<Integer> lottoNumbers) {
         return lottoNumbers.stream()
                 .limit(LOTTO_NUMBER_COUNT)
                 .sorted()
