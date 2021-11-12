@@ -27,8 +27,7 @@ public class LottoTickets {
 
     public Map<Rank, Integer> countOfWinningByRank(WinningLottoTicket winningLottoTicket) {
         return lottoTickets.stream()
-                .map(ticket -> Rank.convertRankByCountOfMatch(winningLottoTicket.getCountOfMatch(ticket),
-                                                              winningLottoTicket.isBonusNumberMatch(ticket)))
+                .map(winningLottoTicket::matchRank)
                 .collect(Collectors.toMap(Function.identity(), value -> 1, Integer::sum));
     }
 
