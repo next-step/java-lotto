@@ -10,11 +10,22 @@
 7. 총 수익률 계산
 
 **- TODO List**
-1. 도메인 설계를 해보자
-   LottoStore, Lotto, Price, Number
-   InputView, ResultView
-2. 도메인 객체 생성(Lotto, Price, Number)
-   
+1. ~~도메인 설계를 해보자~~
+2. ~~도메인 객체 생성(Lotto, Price, Number)~~ 
+   - ~~랜덤으로 6개 숫자 반환(1~46)~~
+3. ~~출력~~ 
+   - ~~가격 입력받고 주문개수 출력~~ 
+   - ~~로또번호 출력~~
 
 **- 기능 목록**
+1. domain
+   - LotteryStore : 로토판매점
+   - Lotto : 로또
+   - Number : 로또 넘버
+   - Price : 로또 가격
+2. controller
+   - LottoController : 컨트롤러
+3. view
+   - InputView : 클라이언트 입력 뷰
+   - ResultView : 출력 뷰
 
