@@ -18,7 +18,7 @@ public class LottoPurchaseDTO {
         this.manualNumbers = manualNumbers;
     }
 
-    public static LottoPurchaseDTO from(Integer lottoQuantity, List<List<Integer>> manualNumbers) {
+    public static LottoPurchaseDTO of(Integer lottoQuantity, List<List<Integer>> manualNumbers) {
         return new LottoPurchaseDTO(lottoQuantity, manualNumbers);
     }
 

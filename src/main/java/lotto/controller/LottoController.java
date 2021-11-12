@@ -8,7 +8,6 @@ import lotto.service.dto.LottoResultCreateDTO;
 import lotto.service.model.LottoResult;
 import lotto.service.model.LottoTickets;
 import lotto.service.value.LottoPrice;
-import lotto.ui.InputView;
 import lotto.ui.ResultView;
 import lotto.validator.LottoValidator;
 
@@ -16,35 +15,29 @@ import java.util.List;
 
 public class LottoController {
     private final LottoService lottoService;
-    private final InputView inputView;
     private final ResultView resultView;
 
-    public LottoController(LottoService lottoService, InputView inputView, ResultView resultView) {
+    public LottoController(LottoService lottoService, ResultView resultView) {
         this.lottoService = lottoService;
-        this.inputView = inputView;
         this.resultView = resultView;
     }
 
-    public LottoTickets purchaseLottoTickets() {
-        LottoPrice purchasePrice = inputView.inputPurchasePrice();
-        Integer manualLottoCount = inputView.inputManualCount();
-        List<List<Integer>> manualNumbers = inputView.inputManualLottoNumbers(manualLottoCount);
+    public LottoTickets purchaseLottoTickets(LottoPrice purchasePrice, List<List<Integer>> manualNumbers) {
+        Integer manualLottoCount = manualNumbers.size();
 
         LottoTickets purchaseLottoTickets
-                = lottoService.purchaseLottoTickets(LottoPurchaseDTO.from(purchasePrice.getLottoQuantity(),
-                                                                          manualNumbers));
+                = lottoService.purchaseLottoTickets(LottoPurchaseDTO.of(purchasePrice.getLottoQuantity(),
+                                                                        manualNumbers));
 
         resultView.printPurchaseLottoTickets(
-                PurchaseLottoTicketsDTO.create(manualLottoCount,
-                                               purchaseLottoTickets.getAutoLottoCount(manualLottoCount),
-                                               purchaseLottoTickets));
+                PurchaseLottoTicketsDTO.of(manualLottoCount,
+                                           purchaseLottoTickets.getAutoLottoCount(manualLottoCount),
+                                           purchaseLottoTickets));
         return purchaseLottoTickets;
     }
 
-    public WinningLottoTicket getWinningLottoTicket() {
-        List<Integer> winningLottoNumbers = inputView.inputWinningLottoNumberOfLastWeeks();
-        Integer bonusNumber = inputView.inputBonusNumber();
-
+    public WinningLottoTicket getWinningLottoTicket(List<Integer> winningLottoNumbers, Integer bonusNumber) {
+        LottoValidator.checkBonusNumber(winningLottoNumbers, bonusNumber);
         return lottoService.getWinningLottoTicket(winningLottoNumbers, bonusNumber);
     }
 

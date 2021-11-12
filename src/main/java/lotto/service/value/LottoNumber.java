@@ -11,8 +11,8 @@ import static lotto.rule.LottoRule.MAXIMUM_NUMBER;
 import static lotto.rule.LottoRule.MINIMUM_NUMBER;
 
 public class LottoNumber {
-    private final Integer number;
     private static final Map<Integer, LottoNumber> LOTTO_NUMBER_CACHE = new HashMap<>();
+    private final Integer number;
 
     static {
         IntStream.rangeClosed(MINIMUM_NUMBER, MAXIMUM_NUMBER)

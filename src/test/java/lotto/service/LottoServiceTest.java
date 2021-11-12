@@ -35,7 +35,7 @@ class LottoServiceTest {
         List<List<Integer>> manualLottoNumbers = Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6),
                                                                Arrays.asList(11, 12, 13, 14, 15, 16));
 
-        LottoPurchaseDTO lottoPurchaseDTO = LottoPurchaseDTO.from(purchaseQuantity, manualLottoNumbers);
+        LottoPurchaseDTO lottoPurchaseDTO = LottoPurchaseDTO.of(purchaseQuantity, manualLottoNumbers);
         LottoTickets lottoTickets = lottoService.purchaseLottoTickets(lottoPurchaseDTO);
         assertThat(lottoTickets).isNotNull();
         assertThat(lottoTickets.getCountOfLottoTickets()).isEqualTo(purchaseQuantity);

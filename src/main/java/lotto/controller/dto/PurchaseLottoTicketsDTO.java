@@ -16,8 +16,8 @@ public class PurchaseLottoTicketsDTO {
         this.lottoTickets = lottoTickets;
     }
 
-    public static PurchaseLottoTicketsDTO create(Integer manualLottoCount, Integer autoLottoCount,
-                                                 LottoTickets lottoTickets) {
+    public static PurchaseLottoTicketsDTO of(Integer manualLottoCount, Integer autoLottoCount,
+                                             LottoTickets lottoTickets) {
         return new PurchaseLottoTicketsDTO(manualLottoCount, autoLottoCount, lottoTickets);
     }
 
