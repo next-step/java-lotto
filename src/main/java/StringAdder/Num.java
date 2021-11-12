@@ -3,15 +3,39 @@ package StringAdder;
 import java.util.Objects;
 
 public class Num {
+    private final int MINIMUM_VALUE = 0;
 
-    int value;
+    private int value;
 
-    public Num(int i) {
-        this.value = i;
+    public Num(int value) {
+        checkNumberIsAboveZero(value);
+
+        this.value = value;
+    }
+
+    public Num(String rawValue) {
+        int value = extractNumberFromRawValue(rawValue);
+        checkNumberIsAboveZero(value);
+
+        this.value = value;
     }
 
     public Num add(Num other) {
         return new Num(this.value + other.value);
+    }
+
+    private int extractNumberFromRawValue(String rawValue) {
+        try {
+            return Integer.parseInt(rawValue);
+        } catch (Exception e) {
+            throw new RuntimeException("Input is not number.");
+        }
+    }
+
+    private void checkNumberIsAboveZero(int value) {
+        if (value < MINIMUM_VALUE) {
+            throw new RuntimeException("Input is below zero.");
+        }
     }
 
     @Override
