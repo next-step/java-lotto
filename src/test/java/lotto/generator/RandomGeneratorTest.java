@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.Ticket;
 
 class RandomGeneratorTest {
@@ -17,7 +18,7 @@ class RandomGeneratorTest {
 		Generator generator = new RandomGenerator();
 
 		// when
-		List<Integer> values = generator.generate();
+		List<LottoNumber> values = generator.generate();
 
 		// then
 		assertThat(values).hasSize(Ticket.SIZE_OF_LOTTO_TICKET);

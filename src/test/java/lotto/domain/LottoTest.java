@@ -11,20 +11,6 @@ import lotto.generator.FixedGenerator;
 import lotto.generator.Generator;
 
 class LottoTest {
-	@DisplayName("Lotto 생성을 검증한다.")
-	@Test
-	void create() {
-		// given
-		Generator generator = new FixedGenerator();
-		int numberOfPurchases = 10;
-
-		// when
-		Lotto lotto = Lotto.create(generator, numberOfPurchases);
-
-		// then
-		assertThat(lotto).isEqualTo(new Lotto(Tickets.create(generator, numberOfPurchases)));
-	}
-
 	@DisplayName("생성된 Lotto 로 부터 Statistics 생성을 검증한다.")
 	@Test
 	void createStatistics() {
@@ -32,15 +18,18 @@ class LottoTest {
 		Generator generator = new FixedGenerator();
 		int numberOfPurchases = 10;
 
+		String[] winningNumber = {"12", "17", "26", "36", "38", "40"};
+		int bonus = 5;
+
 		Lotto lotto = Lotto.create(generator, numberOfPurchases);
-		Ticket winningNumberTicket = Ticket.create(FixedGenerator.FIXED_NUMBERS);
+		WinningTicket winningTicket = WinningTicket.create(winningNumber, bonus);
 
 		// when
-		Statistics statistics = lotto.createStatistics(winningNumberTicket);
+		Statistics statistics = lotto.createStatistics(winningTicket);
 
 		// then
 		assertThat(statistics).isEqualTo(
-			new Statistics(Tickets.create(generator, numberOfPurchases), winningNumberTicket));
+			Statistics.create(Tickets.create(generator, numberOfPurchases), winningTicket));
 	}
 
 	@DisplayName("Lotto getTickets() 호출후 컬렉션 수정시 예외를 던진다.")

@@ -9,13 +9,13 @@ import java.util.stream.Collectors;
 
 public class Statistics {
 	private final Tickets tickets;
-	private final Ticket winningNumberTicket;
+	private final WinningTicket winningTicket;
 	private final Map<Rank, Integer> matchedResult;
 	private final double profitRatio;
 
-	Statistics(Tickets tickets, Ticket winningNumberTicket) {
+	private Statistics(Tickets tickets, WinningTicket winningTicket) {
 		this.tickets = tickets;
-		this.winningNumberTicket = winningNumberTicket;
+		this.winningTicket = winningTicket;
 		this.matchedResult = calculateMatchedResult();
 		this.profitRatio = calculateProfitRatio();
 	}
@@ -26,15 +26,15 @@ public class Statistics {
 	}
 
 	private int getRankMatchedCount(Rank rank) {
-		return tickets.getRankMatchedCount(rank, winningNumberTicket);
+		return tickets.getRankMatchedCount(rank, winningTicket);
 	}
 
 	private double calculateProfitRatio() {
-		return tickets.calculateProfitRatio(winningNumberTicket);
+		return tickets.calculateProfitRatio(winningTicket);
 	}
 
-	public static Statistics create(Tickets tickets, Ticket winningNumberTicket) {
-		return new Statistics(tickets, winningNumberTicket);
+	public static Statistics create(Tickets tickets, WinningTicket winningTicket) {
+		return new Statistics(tickets, winningTicket);
 	}
 
 	public Map<Rank, Integer> getMatchedResult() {
@@ -59,13 +59,13 @@ public class Statistics {
 		if (!Objects.equals(tickets, that.tickets)) {
 			return false;
 		}
-		return Objects.equals(winningNumberTicket, that.winningNumberTicket);
+		return Objects.equals(winningTicket, that.winningTicket);
 	}
 
 	@Override
 	public int hashCode() {
 		int result = tickets != null ? tickets.hashCode() : 0;
-		result = 31 * result + (winningNumberTicket != null ? winningNumberTicket.hashCode() : 0);
+		result = 31 * result + (winningTicket != null ? winningTicket.hashCode() : 0);
 		return result;
 	}
 }

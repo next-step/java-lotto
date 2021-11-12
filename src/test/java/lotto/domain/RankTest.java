@@ -17,9 +17,9 @@ class RankTest {
 	@DisplayName("from() 메서드를 통한 Rank 생성을 검증한다.")
 	@ParameterizedTest(name = "{index}. countOfMatch : {0}, expectedRank : {1}")
 	@MethodSource("provideCountOfMatchWithRank")
-	void from(int countOfMatch, Rank expectedRank) {
+	void from(int countOfMatch, boolean matchBonus, Rank expectedRank) {
 		// when
-		Rank rank = Rank.from(countOfMatch);
+		Rank rank = Rank.from(countOfMatch, matchBonus);
 
 		// then
 		assertThat(rank).isEqualTo(expectedRank);
@@ -29,20 +29,24 @@ class RankTest {
 	@ParameterizedTest(name = "{index}. countOfMatch : {0}")
 	@ValueSource(ints = {Rank.MIN_OF_MATCH - 1, Rank.MAX_OF_MATCH + 1})
 	void fromException(int countOfMatch) {
+		// given
+		boolean matchBonus = false;
+
 		// when then
 		assertThatExceptionOfType(RankMatchCountSizeException.class)
-			.isThrownBy(() -> Rank.from(countOfMatch));
+			.isThrownBy(() -> Rank.from(countOfMatch, matchBonus));
 	}
 
 	private static Stream<Arguments> provideCountOfMatchWithRank() {
 		return Stream.of(
-			arguments(0, Rank.MISS),
-			arguments(1, Rank.MISS),
-			arguments(2, Rank.MISS),
-			arguments(3, Rank.FORTH),
-			arguments(4, Rank.THIRD),
-			arguments(5, Rank.SECOND),
-			arguments(6, Rank.FIRST)
+			arguments(0, false, Rank.MISS),
+			arguments(1, false, Rank.MISS),
+			arguments(2, false, Rank.MISS),
+			arguments(3, false, Rank.FIFTH),
+			arguments(4, false, Rank.FOURTH),
+			arguments(5, false, Rank.THIRD),
+			arguments(5, true, Rank.SECOND),
+			arguments(6, false, Rank.FIRST)
 		);
 	}
 }

@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.Lotto;
 import lotto.domain.Statistics;
 import lotto.domain.Ticket;
+import lotto.domain.WinningTicket;
 import lotto.generator.Generator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -20,8 +21,8 @@ public class LottoController {
 
 		ResultView.printTickets(lotto.getTickets());
 
-		Ticket winningNumberTicket = InputView.getWinningNumberTicket();
-		Statistics statistics = lotto.createStatistics(winningNumberTicket);
+		WinningTicket winningTicket = InputView.getWinningTicket();
+		Statistics statistics = lotto.createStatistics(winningTicket);
 
 		ResultView.printStatistics(statistics);
 	}

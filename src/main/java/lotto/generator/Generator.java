@@ -2,7 +2,9 @@ package lotto.generator;
 
 import java.util.List;
 
+import lotto.domain.LottoNumber;
+
 @FunctionalInterface
 public interface Generator {
-	List<Integer> generate();
+	List<LottoNumber> generate();
 }

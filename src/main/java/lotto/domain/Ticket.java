@@ -1,77 +1,44 @@
 package lotto.domain;
 
-import static java.util.stream.Collectors.*;
-
-import java.util.Arrays;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
-import lotto.exception.TicketRangeException;
 import lotto.exception.TicketSizeException;
 
 public class Ticket {
 	public static final int SIZE_OF_LOTTO_TICKET = 6;
-	public static final int MIN_OF_LOTTO_NUMBERS = 1;
-	public static final int MAX_OF_LOTTO_NUMBERS = 45;
 
 	public static final int PRICE = 1000;
 
 	private static final String DUPLICATE_MESSAGE = "티켓 번호는 중복될 수 없습니다.";
 
-	private final Set<Integer> values;
+	private final List<LottoNumber> values;
 
-	Ticket(List<Integer> values) {
-		this(new LinkedHashSet<>(values));
-	}
-
-	Ticket(Set<Integer> values) {
+	private Ticket(List<LottoNumber> values) {
 		validate(values);
 		this.values = values;
 	}
 
-	private void validate(Set<Integer> values) {
+	private void validate(List<LottoNumber> values) {
 		validateSize(values);
-		validateRange(values);
 		validateDuplicate(values);
 	}
 
-	private void validateSize(Set<Integer> values) {
+	private void validateSize(List<LottoNumber> values) {
 		if (values.size() != SIZE_OF_LOTTO_TICKET) {
 			throw new TicketSizeException();
 		}
 	}
 
-	private void validateRange(Set<Integer> values) {
-		long count = values.stream()
-			.filter(this::isPossibleRange)
-			.count();
-		if (count != SIZE_OF_LOTTO_TICKET) {
-			throw new TicketRangeException();
-		}
-	}
-
-	private boolean isPossibleRange(Integer value) {
-		return value >= MIN_OF_LOTTO_NUMBERS && value <= MAX_OF_LOTTO_NUMBERS;
-	}
-
-	private void validateDuplicate(Set<Integer> values) {
-		if (values.size() != SIZE_OF_LOTTO_TICKET) {
+	private void validateDuplicate(List<LottoNumber> values) {
+		if (new HashSet<>(values).size() != SIZE_OF_LOTTO_TICKET) {
 			throw new IllegalArgumentException(DUPLICATE_MESSAGE);
 		}
 	}
 
-	public static Ticket create(List<Integer> values) {
-		return new Ticket(new LinkedHashSet<>(values));
-	}
-
-	public static Ticket createWinningNumberTicket(String[] numbers) {
-		List<Integer> values = Arrays.stream(numbers)
-			.map(Integer::parseInt)
-			.sorted()
-			.collect(toList());
-		return create(values);
+	public static Ticket create(List<LottoNumber> values) {
+		return new Ticket(values);
 	}
 
 	public int getMatchedCount(Ticket winningNumberTicket) {
@@ -80,8 +47,12 @@ public class Ticket {
 			.count();
 	}
 
-	private boolean contains(Integer number) {
+	private boolean contains(LottoNumber number) {
 		return values.contains(number);
+	}
+
+	public boolean isBonusMatched(LottoNumber bonus) {
+		return contains(bonus);
 	}
 
 	@Override

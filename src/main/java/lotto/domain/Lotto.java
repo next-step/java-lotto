@@ -8,11 +8,11 @@ import lotto.generator.Generator;
 public class Lotto {
 	private final Tickets tickets;
 
-	Lotto(Generator generator, int numberOfPurchases) {
+	private Lotto(Generator generator, int numberOfPurchases) {
 		this(Tickets.create(generator, numberOfPurchases));
 	}
 
-	Lotto(Tickets tickets) {
+	private Lotto(Tickets tickets) {
 		this.tickets = tickets;
 	}
 
@@ -24,8 +24,8 @@ public class Lotto {
 		return tickets.getValues();
 	}
 
-	public Statistics createStatistics(Ticket winningNumberTicket) {
-		return Statistics.create(tickets, winningNumberTicket);
+	public Statistics createStatistics(WinningTicket winningTicket) {
+		return Statistics.create(tickets, winningTicket);
 	}
 
 	@Override
