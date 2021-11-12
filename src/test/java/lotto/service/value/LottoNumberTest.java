@@ -16,7 +16,7 @@ class LottoNumberTest {
         Integer number = repetitionInfo.getCurrentRepetition();
         LottoNumber result = LottoNumber.from(number);
 
-        assertThat(result).isEqualTo(LottoNumber.from(number));
+        assertThat(result).isEqualTo(LottoNumber.from(number)).isSameAs(LottoNumber.from(number));
     }
 
     @Test
