@@ -13,7 +13,7 @@ public class Number {
 
     private static void checkNegativeNumber(int[] numbers) {
         long count = Arrays.stream(numbers)
-                .filter(i -> i < 0)
+                .filter(number -> number < 0)
                 .count();
 
         if (count > 0) {
