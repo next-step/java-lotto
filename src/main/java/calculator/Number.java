@@ -39,7 +39,7 @@ public class Number {
 
     private void checkNotNull(Number other) {
         if (other == null) {
-            throw new IllegalArgumentException("필수값이 없습니다.");
+            throw new IllegalArgumentException("필수 값이 없습니다.");
         }
     }
 

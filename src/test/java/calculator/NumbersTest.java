@@ -21,7 +21,7 @@ class NumbersTest {
         String expression = "1,2:3";
 
         //when
-        Numbers numbers = Numbers.from(expression, DELIMITER_PATTERN);
+        Numbers numbers = Numbers.from(expression, Calculator.DEFAULT_DELIMITER_PATTERN);
 
         //then
         Numbers expected = new Numbers(asList(new Number(1), new Number(2), new Number(3)));
