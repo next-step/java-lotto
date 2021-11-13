@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +22,7 @@ class LottoTest {
 		String[] winningNumber = {"12", "17", "26", "36", "38", "40"};
 		int bonus = 5;
 
-		Lotto lotto = Lotto.create(generator, numberOfPurchases);
+		Lotto lotto = Lotto.create(generator, numberOfPurchases, Collections.emptyList());
 		WinningTicket winningTicket = WinningTicket.create(winningNumber, bonus);
 
 		// when
@@ -29,7 +30,7 @@ class LottoTest {
 
 		// then
 		assertThat(statistics).isEqualTo(
-			Statistics.create(Tickets.create(generator, numberOfPurchases), winningTicket));
+			Statistics.create(Tickets.create(generator, numberOfPurchases, Collections.emptyList()), winningTicket));
 	}
 
 	@DisplayName("Lotto getTickets() 호출후 컬렉션 수정시 예외를 던진다.")
@@ -39,7 +40,7 @@ class LottoTest {
 		Generator generator = new FixedGenerator();
 		int numberOfPurchases = 10;
 
-		Lotto lotto = Lotto.create(generator, numberOfPurchases);
+		Lotto lotto = Lotto.create(generator, numberOfPurchases, Collections.emptyList());
 
 		// when
 		List<Ticket> values = lotto.getTickets();

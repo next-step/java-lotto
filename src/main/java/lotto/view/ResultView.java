@@ -10,6 +10,7 @@ import lotto.domain.Ticket;
 import lotto.exception.UtilCreationException;
 
 public final class ResultView {
+	private static final String PURCHASE_COMPLETE_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 	private static final String WINNING_STATISTICS = "\n당첨 통계\n";
 	private static final String DIVIDING_LINE = "---------\n";
 	private static final String WINNING_NUMBER_RESULT = "%d개 일치 (%d원)- %d개\n";
@@ -65,6 +66,12 @@ public final class ResultView {
 			return LOSS;
 		}
 		return SAME;
+	}
+
+	public static void printPurchasesInfo(int sizeOfManualTickets, int numberOfPurchases) {
+		initializeBuilder();
+		appendBuilder(String.format(PURCHASE_COMPLETE_MESSAGE, sizeOfManualTickets, numberOfPurchases));
+		printBuilder();
 	}
 
 	private static void initializeBuilder() {

@@ -22,7 +22,7 @@ class TicketsTest {
 		int numberOfPurchases = 10;
 
 		// when
-		Tickets tickets = Tickets.create(generator, numberOfPurchases);
+		Tickets tickets = Tickets.create(generator, numberOfPurchases, Collections.emptyList());
 
 		// then
 		assertThat(tickets).isEqualTo(createFixedTickets(numberOfPurchases));
@@ -45,7 +45,7 @@ class TicketsTest {
 	@Test
 	void getValues() {
 		// given
-		Tickets tickets = Tickets.create(new FixedGenerator(), 10);
+		Tickets tickets = Tickets.create(new FixedGenerator(), 10, Collections.emptyList());
 
 		// when
 		List<Ticket> values = tickets.getValues();
