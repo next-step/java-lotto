@@ -7,6 +7,7 @@ import lotto.service.dto.LottoPurchaseDTO;
 import lotto.service.dto.LottoResultCreateDTO;
 import lotto.service.model.LottoResult;
 import lotto.service.model.LottoTickets;
+import lotto.service.model.LottoNumbers;
 import lotto.service.value.LottoPrice;
 import lotto.ui.ResultView;
 import lotto.validator.LottoValidator;
@@ -22,11 +23,11 @@ public class LottoController {
         this.resultView = resultView;
     }
 
-    public LottoTickets purchaseLottoTickets(LottoPrice purchasePrice, List<List<Integer>> manualNumbers) {
-        Integer manualLottoCount = manualNumbers.size();
+    public LottoTickets purchaseLottoTickets(LottoPrice purchasePrice, List<LottoNumbers> lottoNumbers) {
+        Integer manualLottoCount = lottoNumbers.size();
 
         LottoTickets purchaseLottoTickets
-                = lottoService.purchaseLottoTickets(LottoPurchaseDTO.of(purchasePrice, manualNumbers));
+                = lottoService.purchaseLottoTickets(LottoPurchaseDTO.of(purchasePrice, lottoNumbers));
 
         resultView.printPurchaseLottoTickets(
                 PurchaseLottoTicketsDTO.of(manualLottoCount,

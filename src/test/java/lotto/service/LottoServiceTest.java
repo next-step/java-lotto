@@ -4,6 +4,7 @@ import lotto.service.domain.LottoResultMaker;
 import lotto.service.domain.LottoTicket;
 import lotto.service.domain.WinningLottoTicket;
 import lotto.service.domain.factory.LottoTicketFactory;
+import lotto.service.model.LottoNumbers;
 import lotto.service.dto.LottoPurchaseDTO;
 import lotto.service.dto.LottoResultCreateDTO;
 import lotto.service.model.LottoResult;
@@ -33,10 +34,11 @@ class LottoServiceTest {
     @DisplayName("로또복권들 정상 구입 검증")
     void purchaseLottoTickets() {
         LottoPrice lottoPrice = LottoPrice.from(5000);
-        List<List<Integer>> manualLottoNumbers = Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6),
-                                                               Arrays.asList(11, 12, 13, 14, 15, 16));
+        List<LottoNumbers> lottoNumbers
+                = Arrays.asList(LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                                LottoNumbers.from(Arrays.asList(11, 12, 13, 14, 15, 16)));
 
-        LottoPurchaseDTO lottoPurchaseDTO = LottoPurchaseDTO.of(lottoPrice, manualLottoNumbers);
+        LottoPurchaseDTO lottoPurchaseDTO = LottoPurchaseDTO.of(lottoPrice, lottoNumbers);
         LottoTickets lottoTickets = lottoService.purchaseLottoTickets(lottoPurchaseDTO);
         assertThat(lottoTickets).isNotNull();
         assertThat(lottoTickets.getCountOfLottoTickets()).isEqualTo(lottoPrice.getLottoQuantity());

@@ -8,6 +8,7 @@ import lotto.service.dto.LottoPurchaseDTO;
 import lotto.service.dto.LottoResultCreateDTO;
 import lotto.service.model.LottoResult;
 import lotto.service.model.LottoTickets;
+import lotto.service.model.LottoNumbers;
 import lotto.service.value.LottoNumber;
 import lotto.utils.Preconditions;
 
@@ -52,7 +53,8 @@ public class LottoService {
     }
 
     private List<LottoTicket> createManualLottoTickets(LottoPurchaseDTO lottoPurchaseDTO) {
-        return lottoPurchaseDTO.getManualNumbers().stream()
+        return lottoPurchaseDTO.getLottoNumbersList().stream()
+                .map(LottoNumbers::getLottoNumbers)
                 .map(lottoTicketFactory::createLottoTicketByManual)
                 .collect(Collectors.toList());
     }

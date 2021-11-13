@@ -6,6 +6,7 @@ import lotto.service.domain.LottoResultMaker;
 import lotto.service.domain.WinningLottoTicket;
 import lotto.service.domain.factory.LottoTicketFactory;
 import lotto.service.model.LottoTickets;
+import lotto.service.model.LottoNumbers;
 import lotto.service.value.LottoPrice;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
@@ -33,9 +34,9 @@ public class LottoApplication {
     private LottoTickets purchaseLottoTickets(LottoController lottoController, InputView inputView) {
         LottoPrice purchasePrice = inputView.inputPurchasePrice();
         Integer manualLottoCount = inputView.inputManualCount();
-        List<List<Integer>> manualNumbers = inputView.inputManualLottoNumbers(manualLottoCount);
+        List<LottoNumbers> lottoNumbers = inputView.inputManualLottoNumbers(manualLottoCount);
 
-        return lottoController.purchaseLottoTickets(purchasePrice, manualNumbers);
+        return lottoController.purchaseLottoTickets(purchasePrice, lottoNumbers);
     }
 
     private WinningLottoTicket getWinningLottoTicket(LottoController lottoController, InputView inputView) {

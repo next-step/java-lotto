@@ -1,5 +1,6 @@
 package lotto.ui;
 
+import lotto.service.model.LottoNumbers;
 import lotto.service.value.LottoPrice;
 import lotto.utils.InputUtils;
 import lotto.validator.LottoValidator;
@@ -28,13 +29,16 @@ public class InputView {
         return manualCount;
     }
 
-    public List<List<Integer>> inputManualLottoNumbers(Integer manualLottoCount) {
+    public List<LottoNumbers> inputManualLottoNumbers(Integer manualLottoCount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
-        List<List<Integer>> manualLottoNumbers = new ArrayList<>();
+        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
         IntStream.rangeClosed(MINIMUM_NUMBER, manualLottoCount)
-                .forEach(v -> manualLottoNumbers.add(inputLottoNumber(InputUtils.input())));
-        return manualLottoNumbers;
+                .forEach(v -> {
+                    LottoNumbers lottoNumbers = LottoNumbers.from(inputLottoNumber(InputUtils.input()));
+                    lottoNumbersList.add(lottoNumbers);
+                });
+        return lottoNumbersList;
     }
 
     public List<Integer> inputWinningLottoNumberOfLastWeeks() {
