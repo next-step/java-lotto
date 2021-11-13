@@ -18,12 +18,13 @@ public final class InputView {
 
 	private static final String INTEGER_INPUT_MISMATCH_MESSAGE = "숫자만 입력 가능합니다.";
 	private static final String WINNING_NUMBER_PATTERN_MISMATCH_MESSAGE = "당첨 번호 입력 형식이 올바르지 않습니다.";
+	private static final String MANUAL_SIZE_EXCEED_MESSAGE = "구매 가능한 최대 크기는 %d 입니다.";
 
 	private static final String PURCHASE_MESSAGE = "구입금액을 입력해 주세요.";
+	private static final String SIZE_OF_MANUAL_TICKET_MESSAGE = "\n수동으로 구매할 로또 수를 입력해 주세요.";
+	private static final String NUMBER_OF_MANUAL_TICKET_MESSAGE = "\n수동으로 구매할 번호를 입력해 주세요.";
 	private static final String WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
 	private static final String BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
-	private static final String SIZE_OF_MANUAL_TICKET_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
-	private static final String NUMBER_OF_MANUAL_TICKET_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 
 	private InputView() {
 		throw new UtilCreationException();
@@ -81,19 +82,28 @@ public final class InputView {
 		}
 	}
 
-	public static List<Ticket> getManualTickets() {
+	public static List<Ticket> getManualTickets(int availableTicketSize) {
 		try {
-			return innerManualTickets();
+			return innerManualTickets(availableTicketSize);
+		} catch (InputMismatchException e) {
+			System.err.println(INTEGER_INPUT_MISMATCH_MESSAGE);
+			clearScannerBuffer();
+			return getManualTickets(availableTicketSize);
 		} catch (IllegalArgumentException e) {
-			return getManualTickets();
+			System.err.println(e.getMessage());
+			return getManualTickets(availableTicketSize);
 		}
 	}
 
-	private static List<Ticket> innerManualTickets() {
+	private static List<Ticket> innerManualTickets(int availableTicketSize) {
 		System.out.println(SIZE_OF_MANUAL_TICKET_MESSAGE);
 		int manualCount = SCANNER.nextInt();
 
 		clearScannerBuffer();
+
+		if (manualCount > availableTicketSize) {
+			throw new IllegalArgumentException(String.format(MANUAL_SIZE_EXCEED_MESSAGE, availableTicketSize));
+		}
 
 		System.out.println(NUMBER_OF_MANUAL_TICKET_MESSAGE);
 		List<Ticket> manualTicket = new ArrayList<>(manualCount);

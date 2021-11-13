@@ -19,7 +19,7 @@ public class LottoController {
 
 	public void draw() {
 		int availableTicketSize = InputView.geAvailableTicketSize();
-		List<Ticket> manualTickets = InputView.getManualTickets();
+		List<Ticket> manualTickets = InputView.getManualTickets(availableTicketSize);
 		int sizeOfAutoTickets = availableTicketSize - manualTickets.size();
 
 		Lotto lotto = Lotto.create(generator, sizeOfAutoTickets, manualTickets);
