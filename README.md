@@ -17,8 +17,6 @@
   - RandomGenerator
     - 1 ~ 45, 6자리 로또 티켓 숫자를 랜덤으로 생성한다.
 - Domain
-  - Lotto
-    - 로또 추첨을 관리한다.
   - LottoNumber
     - 1 ~ 45 로또 범위 숫자.
   - Ticket
