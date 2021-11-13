@@ -14,18 +14,21 @@ import lotto.generator.FixedGenerator;
 import lotto.generator.Generator;
 
 class TicketsTest {
+	private static final int SIZE_OF_MANUAL_TICKETS = 10;
+
 	@DisplayName("Tickets 생성을 검증한다.")
 	@Test
 	void create() {
 		// given
 		Generator generator = new FixedGenerator();
 		int sizeOfAutoTickets = 10;
+		List<Ticket> manualTickets = createManualTickets();
 
 		// when
-		Tickets tickets = Tickets.create(generator, sizeOfAutoTickets, Collections.emptyList());
+		Tickets tickets = Tickets.create(generator, sizeOfAutoTickets, manualTickets);
 
 		// then
-		assertThat(tickets).isEqualTo(createFixedTickets(sizeOfAutoTickets));
+		assertThat(tickets).isEqualTo(createFixedTickets(sizeOfAutoTickets, manualTickets));
 	}
 
 	@DisplayName("Tickets 생성시 null 이거나 size 가 0 일 경우 예외를 던진다.")
@@ -55,11 +58,19 @@ class TicketsTest {
 			.isThrownBy(() -> values.remove(0));
 	}
 
-	private Tickets createFixedTickets(int sizeOfAutoTickets) {
-		List<Ticket> values = new ArrayList<>();
+	private Tickets createFixedTickets(int sizeOfAutoTickets, List<Ticket> manualTickets) {
+		List<Ticket> values = new ArrayList<>(manualTickets);
 		for (int i = 0; i < sizeOfAutoTickets; i++) {
 			values.add(Ticket.create(FixedGenerator.FIXED_NUMBERS));
 		}
 		return Tickets.create(values);
+	}
+
+	private List<Ticket> createManualTickets() {
+		List<Ticket> manualTicket = new ArrayList<>(TicketsTest.SIZE_OF_MANUAL_TICKETS);
+		for (int i = 0; i < TicketsTest.SIZE_OF_MANUAL_TICKETS; i++) {
+			manualTicket.add(Ticket.create(FixedGenerator.FIXED_NUMBERS));
+		}
+		return manualTicket;
 	}
 }
