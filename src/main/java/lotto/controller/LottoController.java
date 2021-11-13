@@ -2,9 +2,9 @@ package lotto.controller;
 
 import java.util.List;
 
-import lotto.domain.Lotto;
 import lotto.domain.Statistics;
 import lotto.domain.Ticket;
+import lotto.domain.Tickets;
 import lotto.domain.WinningTicket;
 import lotto.generator.Generator;
 import lotto.view.InputView;
@@ -22,13 +22,13 @@ public class LottoController {
 		List<Ticket> manualTickets = InputView.getManualTickets(availableTicketSize);
 		int sizeOfAutoTickets = availableTicketSize - manualTickets.size();
 
-		Lotto lotto = Lotto.create(generator, sizeOfAutoTickets, manualTickets);
+		Tickets tickets = Tickets.create(generator, sizeOfAutoTickets, manualTickets);
 
 		ResultView.printPurchasesInfo(manualTickets.size(), sizeOfAutoTickets);
-		ResultView.printTickets(lotto.getTickets());
+		ResultView.printTickets(tickets.getValues());
 
 		WinningTicket winningTicket = InputView.getWinningTicket();
-		Statistics statistics = lotto.createStatistics(winningTicket);
+		Statistics statistics = Statistics.create(tickets, winningTicket);
 
 		ResultView.printStatistics(statistics);
 	}
