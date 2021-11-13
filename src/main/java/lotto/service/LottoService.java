@@ -9,6 +9,7 @@ import lotto.service.model.LottoResult;
 import lotto.service.model.LottoTickets;
 import lotto.service.value.LottoNumber;
 import lotto.utils.Preconditions;
+import lotto.validator.LottoValidator;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,6 +37,7 @@ public class LottoService {
     public WinningLottoTicket getWinningLottoTicket(List<Integer> winningLottoNumbers, Integer bonusNumber) {
         Preconditions.checkNotNull(winningLottoNumbers, "winningLottoNumbers의 값이 없습니다.");
         Preconditions.checkNotNull(bonusNumber, "bonusNumber의 값이 없습니다.");
+        LottoValidator.checkBonusNumber(winningLottoNumbers, bonusNumber);
 
         List<LottoNumber> winningNumbers = winningLottoNumbers.stream()
                 .sorted()

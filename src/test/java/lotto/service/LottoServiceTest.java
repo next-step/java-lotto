@@ -19,8 +19,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatNullPointerException;
+import static org.assertj.core.api.Assertions.*;
 
 class LottoServiceTest {
     private LottoService lottoService;
@@ -69,6 +68,13 @@ class LottoServiceTest {
     void getWinningLottoTicket_exception2() {
         assertThatNullPointerException().isThrownBy(
                 () -> lottoService.getWinningLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6), null));
+    }
+
+    @Test
+    @DisplayName("당첨번호와 보너스번호 같은 경우 예외 발생 검증")
+    void getWinningLottoTicket_exception3() {
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> lottoService.getWinningLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 6));
     }
 
     @Test

@@ -9,7 +9,6 @@ import lotto.service.domain.WinningLottoTicket;
 import lotto.service.model.LottoResult;
 import lotto.service.model.LottoTickets;
 import lotto.ui.ResultView;
-import lotto.validator.LottoValidator;
 
 public class LottoController {
     private final LottoService lottoService;
@@ -34,9 +33,6 @@ public class LottoController {
     }
 
     public WinningLottoTicket getWinningLottoTicket(WinningLottoTicketParam winningLottoTicketParam) {
-        LottoValidator.checkBonusNumber(winningLottoTicketParam.getWinningLottoNumbers(),
-                                        winningLottoTicketParam.getBonusNumber());
-
         return lottoService.getWinningLottoTicket(winningLottoTicketParam.getWinningLottoNumbers(),
                                                   winningLottoTicketParam.getBonusNumber());
     }
