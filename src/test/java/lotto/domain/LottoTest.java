@@ -17,12 +17,12 @@ class LottoTest {
 	void createStatistics() {
 		// given
 		Generator generator = new FixedGenerator();
-		int numberOfPurchases = 10;
+		int sizeOfAutoTickets = 10;
 
 		String[] winningNumber = {"12", "17", "26", "36", "38", "40"};
 		int bonus = 5;
 
-		Lotto lotto = Lotto.create(generator, numberOfPurchases, Collections.emptyList());
+		Lotto lotto = Lotto.create(generator, sizeOfAutoTickets, Collections.emptyList());
 		WinningTicket winningTicket = WinningTicket.create(winningNumber, bonus);
 
 		// when
@@ -30,7 +30,7 @@ class LottoTest {
 
 		// then
 		assertThat(statistics).isEqualTo(
-			Statistics.create(Tickets.create(generator, numberOfPurchases, Collections.emptyList()), winningTicket));
+			Statistics.create(Tickets.create(generator, sizeOfAutoTickets, Collections.emptyList()), winningTicket));
 	}
 
 	@DisplayName("Lotto getTickets() 호출후 컬렉션 수정시 예외를 던진다.")
@@ -38,9 +38,9 @@ class LottoTest {
 	void getValues() {
 		// given
 		Generator generator = new FixedGenerator();
-		int numberOfPurchases = 10;
+		int sizeOfAutoTickets = 10;
 
-		Lotto lotto = Lotto.create(generator, numberOfPurchases, Collections.emptyList());
+		Lotto lotto = Lotto.create(generator, sizeOfAutoTickets, Collections.emptyList());
 
 		// when
 		List<Ticket> values = lotto.getTickets();

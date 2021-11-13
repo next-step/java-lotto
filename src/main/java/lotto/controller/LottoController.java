@@ -18,12 +18,13 @@ public class LottoController {
 	}
 
 	public void draw() {
-		int numberOfPurchases = InputView.getNumberOfPurchases();
+		int availableTicketSize = InputView.geAvailableTicketSize();
 		List<Ticket> manualTickets = InputView.getManualTickets();
+		int sizeOfAutoTickets = availableTicketSize - manualTickets.size();
 
-		Lotto lotto = Lotto.create(generator, numberOfPurchases, manualTickets);
+		Lotto lotto = Lotto.create(generator, sizeOfAutoTickets, manualTickets);
 
-		ResultView.printPurchasesInfo(manualTickets.size(), numberOfPurchases);
+		ResultView.printPurchasesInfo(manualTickets.size(), sizeOfAutoTickets);
 		ResultView.printTickets(lotto.getTickets());
 
 		WinningTicket winningTicket = InputView.getWinningTicket();

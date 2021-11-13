@@ -29,17 +29,17 @@ public final class InputView {
 		throw new UtilCreationException();
 	}
 
-	public static int getNumberOfPurchases() {
+	public static int geAvailableTicketSize() {
 		try {
-			return innerNumberOfPurchases();
+			return innerAvailableTicketSize();
 		} catch (InputMismatchException e) {
 			System.err.println(INTEGER_INPUT_MISMATCH_MESSAGE + "\n");
 			clearScannerBuffer();
-			return getNumberOfPurchases();
+			return geAvailableTicketSize();
 		}
 	}
 
-	private static int innerNumberOfPurchases() {
+	private static int innerAvailableTicketSize() {
 		System.out.println(PURCHASE_MESSAGE);
 		int purchasePrice = SCANNER.nextInt();
 

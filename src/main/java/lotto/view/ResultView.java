@@ -68,9 +68,9 @@ public final class ResultView {
 		return SAME;
 	}
 
-	public static void printPurchasesInfo(int sizeOfManualTickets, int numberOfPurchases) {
+	public static void printPurchasesInfo(int sizeOfManualTickets, int sizeOfAutoTickets) {
 		initializeBuilder();
-		appendBuilder(String.format(PURCHASE_COMPLETE_MESSAGE, sizeOfManualTickets, numberOfPurchases));
+		appendBuilder(String.format(PURCHASE_COMPLETE_MESSAGE, sizeOfManualTickets, sizeOfAutoTickets));
 		printBuilder();
 	}
 

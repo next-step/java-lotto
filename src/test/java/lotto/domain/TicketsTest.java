@@ -19,13 +19,13 @@ class TicketsTest {
 	void create() {
 		// given
 		Generator generator = new FixedGenerator();
-		int numberOfPurchases = 10;
+		int sizeOfAutoTickets = 10;
 
 		// when
-		Tickets tickets = Tickets.create(generator, numberOfPurchases, Collections.emptyList());
+		Tickets tickets = Tickets.create(generator, sizeOfAutoTickets, Collections.emptyList());
 
 		// then
-		assertThat(tickets).isEqualTo(createFixedTickets(numberOfPurchases));
+		assertThat(tickets).isEqualTo(createFixedTickets(sizeOfAutoTickets));
 	}
 
 	@DisplayName("Tickets 생성시 null 이거나 size 가 0 일 경우 예외를 던진다.")
@@ -55,9 +55,9 @@ class TicketsTest {
 			.isThrownBy(() -> values.remove(0));
 	}
 
-	private Tickets createFixedTickets(int numberOfPurchases) {
+	private Tickets createFixedTickets(int sizeOfAutoTickets) {
 		List<Ticket> values = new ArrayList<>();
-		for (int i = 0; i < numberOfPurchases; i++) {
+		for (int i = 0; i < sizeOfAutoTickets; i++) {
 			values.add(Ticket.create(FixedGenerator.FIXED_NUMBERS));
 		}
 		return Tickets.create(values);
