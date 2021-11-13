@@ -23,7 +23,7 @@ class NumberTest {
     @ValueSource(strings = {"a", "-1", "!", "12ad", "!a"})
     void create_illegalFormat(String illegalFormatNumber) {
         assertThatThrownBy(() -> Number.from(illegalFormatNumber))
-                .isInstanceOf(RuntimeException.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(Number.NOT_NUMBER_ERROR_MESSAGE);
     }
 

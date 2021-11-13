@@ -9,6 +9,7 @@ import static java.util.Arrays.stream;
 
 public class Numbers {
 
+    private static final int MIN_NUMBERS_SIZE = 1;
     private final List<Number> numbers;
 
     public static Numbers from(String expression, Pattern delimiterPattern) {
@@ -24,7 +25,7 @@ public class Numbers {
     }
 
     public Numbers(List<Number> numbers) {
-        checkNotNull(numbers);
+        checkNotEmpty(numbers);
         this.numbers = numbers;
     }
 
@@ -37,6 +38,13 @@ public class Numbers {
     private static void checkNotNull(Object object) {
         if (object == null) {
             throw new IllegalArgumentException("필수 값이 없습니다.");
+        }
+    }
+
+    private static void checkNotEmpty(List<Number> numbers) {
+        checkNotNull(numbers);
+        if (numbers.size() < MIN_NUMBERS_SIZE) {
+            throw new IllegalArgumentException("하나 이상의 Number가 필요합니다.");
         }
     }
 

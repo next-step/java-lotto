@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class NumbersTest {
 
@@ -22,6 +23,15 @@ class NumbersTest {
         //then
         Numbers expected = new Numbers(asList(new Number(1), new Number(2), new Number(3)));
         assertThat(numbers).isEqualTo(expected);
+    }
+
+    @Test
+    void from_illegalExpression_thrownException() {
+        //given
+        String invalidExpression = ":";
+        assertThatThrownBy(() -> Numbers.from(invalidExpression, Calculator.DEFAULT_DELIMITER_PATTERN))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("하나 이상의 Number가 필요합니다.");
     }
 
 

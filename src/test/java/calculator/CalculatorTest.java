@@ -62,7 +62,7 @@ class CalculatorTest {
     void calculate_invalidExpression(String expression) {
         //when
         assertThatThrownBy(() -> Calculator.calculate(expression))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     private static Stream<Arguments> invalidExpression() {

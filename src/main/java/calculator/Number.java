@@ -17,7 +17,7 @@ public class Number {
         try {
             return Integer.parseInt(stringNumber);
         } catch (NumberFormatException e) {
-            throw new RuntimeException(NOT_NUMBER_ERROR_MESSAGE);
+            throw new IllegalArgumentException(NOT_NUMBER_ERROR_MESSAGE);
         }
     }
 
@@ -28,7 +28,7 @@ public class Number {
 
     private void checkPositive(int number) {
         if (number < MIN_NUMBER) {
-            throw new RuntimeException(NOT_NUMBER_ERROR_MESSAGE);
+            throw new IllegalArgumentException(NOT_NUMBER_ERROR_MESSAGE);
         }
     }
 
