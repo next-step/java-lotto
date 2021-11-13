@@ -7,12 +7,21 @@ import java.util.List;
 import java.util.Objects;
 
 public class WinningTicket {
+	private static final String INCLUDED_MESSAGE = "당첨번호는 보너스 번호를 포함할수 없습니다.";
+
 	private final Ticket ticket;
 	private final LottoNumber bonus;
 
 	private WinningTicket(Ticket ticket, LottoNumber bonus) {
+		validate(ticket, bonus);
 		this.ticket = ticket;
 		this.bonus = bonus;
+	}
+
+	private void validate(Ticket ticket, LottoNumber bonus) {
+		if (ticket.isBonusMatched(bonus)) {
+			throw new IllegalArgumentException(INCLUDED_MESSAGE);
+		}
 	}
 
 	public static WinningTicket create(String[] numbers, int bonus) {
