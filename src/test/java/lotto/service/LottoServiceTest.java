@@ -9,6 +9,7 @@ import lotto.service.dto.LottoResultCreateDTO;
 import lotto.service.model.LottoResult;
 import lotto.service.model.LottoTickets;
 import lotto.service.value.LottoNumber;
+import lotto.service.value.LottoPrice;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,14 +32,14 @@ class LottoServiceTest {
     @Test
     @DisplayName("로또복권들 정상 구입 검증")
     void purchaseLottoTickets() {
-        Integer purchaseQuantity = 5;
+        LottoPrice lottoPrice = LottoPrice.from(5000);
         List<List<Integer>> manualLottoNumbers = Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6),
                                                                Arrays.asList(11, 12, 13, 14, 15, 16));
 
-        LottoPurchaseDTO lottoPurchaseDTO = LottoPurchaseDTO.of(purchaseQuantity, manualLottoNumbers);
+        LottoPurchaseDTO lottoPurchaseDTO = LottoPurchaseDTO.of(lottoPrice, manualLottoNumbers);
         LottoTickets lottoTickets = lottoService.purchaseLottoTickets(lottoPurchaseDTO);
         assertThat(lottoTickets).isNotNull();
-        assertThat(lottoTickets.getCountOfLottoTickets()).isEqualTo(purchaseQuantity);
+        assertThat(lottoTickets.getCountOfLottoTickets()).isEqualTo(lottoPrice.getLottoQuantity());
     }
 
     @Test

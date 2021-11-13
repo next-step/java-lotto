@@ -1,5 +1,6 @@
 package lotto.service.dto;
 
+import lotto.service.value.LottoPrice;
 import lotto.utils.Preconditions;
 import lotto.validator.LottoValidator;
 
@@ -18,8 +19,8 @@ public class LottoPurchaseDTO {
         this.manualNumbers = manualNumbers;
     }
 
-    public static LottoPurchaseDTO of(Integer lottoQuantity, List<List<Integer>> manualNumbers) {
-        return new LottoPurchaseDTO(lottoQuantity, manualNumbers);
+    public static LottoPurchaseDTO of(LottoPrice purchasePrice, List<List<Integer>> manualNumbers) {
+        return new LottoPurchaseDTO(purchasePrice.getLottoQuantity(), manualNumbers);
     }
 
     public Integer getAutoLottoQuantity() {

@@ -26,8 +26,7 @@ public class LottoController {
         Integer manualLottoCount = manualNumbers.size();
 
         LottoTickets purchaseLottoTickets
-                = lottoService.purchaseLottoTickets(LottoPurchaseDTO.of(purchasePrice.getLottoQuantity(),
-                                                                        manualNumbers));
+                = lottoService.purchaseLottoTickets(LottoPurchaseDTO.of(purchasePrice, manualNumbers));
 
         resultView.printPurchaseLottoTickets(
                 PurchaseLottoTicketsDTO.of(manualLottoCount,
