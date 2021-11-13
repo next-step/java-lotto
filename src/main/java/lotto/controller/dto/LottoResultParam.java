@@ -1,14 +1,15 @@
-package lotto.service.dto;
+package lotto.controller.dto;
 
 import lotto.service.domain.WinningLottoTicket;
 import lotto.service.model.LottoTickets;
+import lotto.service.value.LottoPrice;
 import lotto.utils.Preconditions;
 
-public class LottoResultCreateDTO {
+public class LottoResultParam {
     private final LottoTickets purchaseLottoTickets;
     private final WinningLottoTicket winningLottoTicket;
 
-    public LottoResultCreateDTO(LottoTickets purchaseLottoTickets, WinningLottoTicket winningLottoTicket) {
+    public LottoResultParam(LottoTickets purchaseLottoTickets, WinningLottoTicket winningLottoTicket) {
         Preconditions.checkNotNull(purchaseLottoTickets, "purchaseLottoTickets는 필수값입니다.");
         Preconditions.checkNotNull(winningLottoTicket, "winningLottoTicket는 필수값입니다.");
 
@@ -16,8 +17,8 @@ public class LottoResultCreateDTO {
         this.winningLottoTicket = winningLottoTicket;
     }
 
-    public static LottoResultCreateDTO of(LottoTickets purchaseLottoTickets, WinningLottoTicket winningLottoTicket) {
-        return new LottoResultCreateDTO(purchaseLottoTickets, winningLottoTicket);
+    public static LottoResultParam of(LottoTickets purchaseLottoTickets, WinningLottoTicket winningLottoTicket) {
+        return new LottoResultParam(purchaseLottoTickets, winningLottoTicket);
     }
 
     public LottoTickets getPurchaseLottoTickets() {
@@ -26,5 +27,9 @@ public class LottoResultCreateDTO {
 
     public WinningLottoTicket getWinningLottoTicket() {
         return winningLottoTicket;
+    }
+
+    public LottoPrice getLottoPrice() {
+        return purchaseLottoTickets.getLottoPrice();
     }
 }

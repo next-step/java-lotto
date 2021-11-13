@@ -1,12 +1,12 @@
 package lotto.service;
 
+import lotto.controller.dto.LottoPurchaseParam;
+import lotto.controller.dto.LottoResultParam;
 import lotto.service.domain.LottoResultMaker;
 import lotto.service.domain.LottoTicket;
 import lotto.service.domain.WinningLottoTicket;
 import lotto.service.domain.factory.LottoTicketFactory;
 import lotto.service.model.LottoNumbers;
-import lotto.service.dto.LottoPurchaseDTO;
-import lotto.service.dto.LottoResultCreateDTO;
 import lotto.service.model.LottoResult;
 import lotto.service.model.LottoTickets;
 import lotto.service.value.LottoNumber;
@@ -38,8 +38,9 @@ class LottoServiceTest {
                 = Arrays.asList(LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6)),
                                 LottoNumbers.from(Arrays.asList(11, 12, 13, 14, 15, 16)));
 
-        LottoPurchaseDTO lottoPurchaseDTO = LottoPurchaseDTO.of(lottoPrice, lottoNumbers);
-        LottoTickets lottoTickets = lottoService.purchaseLottoTickets(lottoPurchaseDTO);
+        LottoPurchaseParam lottoPurchaseParam = LottoPurchaseParam.of(lottoPrice, lottoNumbers);
+        LottoTickets lottoTickets = lottoService.purchaseLottoTickets(lottoPurchaseParam.getAutoLottoQuantity(),
+                                                                      lottoPurchaseParam.getLottoNumbersList());
         assertThat(lottoTickets).isNotNull();
         assertThat(lottoTickets.getCountOfLottoTickets()).isEqualTo(lottoPrice.getLottoQuantity());
     }
@@ -47,7 +48,7 @@ class LottoServiceTest {
     @Test
     @DisplayName("파라미터 값이 없는 경우 예외 발생 검증")
     void purchaseLottoTickets_exception() {
-        assertThatNullPointerException().isThrownBy(() -> lottoService.purchaseLottoTickets(null));
+        assertThatNullPointerException().isThrownBy(() -> lottoService.purchaseLottoTickets(null, null));
     }
 
     @Test
@@ -73,22 +74,23 @@ class LottoServiceTest {
     @Test
     @DisplayName("로또당첨 결과 정상 생성여부 검증")
     void checkLottoResult() {
-        LottoResult lottoResult = lottoService.checkLottoResult(getTestLottoCreateResultDTO());
+        LottoResult lottoResult = lottoService.checkLottoResult(getTestLottoCreateResultDTO().getPurchaseLottoTickets(),
+                                                                getTestLottoCreateResultDTO().getWinningLottoTicket());
         assertThat(lottoResult).isNotNull();
     }
 
     @Test
     @DisplayName("파라미터 값이 없는 경우 예외 발생 검증")
     void checkLottoResult_exception() {
-        assertThatNullPointerException().isThrownBy(() -> lottoService.checkLottoResult(null));
+        assertThatNullPointerException().isThrownBy(() -> lottoService.checkLottoResult(null, null));
     }
 
-    private LottoResultCreateDTO getTestLottoCreateResultDTO() {
+    private LottoResultParam getTestLottoCreateResultDTO() {
         WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(getTestLottoNumber(), 7);
         LottoTicket lottoTicket = LottoTicket.from(getTestLottoNumber());
 
         LottoTickets lottoTickets = LottoTickets.from(Collections.singletonList(lottoTicket));
-        return LottoResultCreateDTO.of(lottoTickets, winningLottoTicket);
+        return LottoResultParam.of(lottoTickets, winningLottoTicket);
     }
 
     private List<LottoNumber> getTestLottoNumber() {

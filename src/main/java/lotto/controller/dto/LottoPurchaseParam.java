@@ -1,4 +1,4 @@
-package lotto.service.dto;
+package lotto.controller.dto;
 
 import lotto.service.model.LottoNumbers;
 import lotto.service.value.LottoPrice;
@@ -7,12 +7,11 @@ import lotto.validator.LottoValidator;
 
 import java.util.List;
 
-public class LottoPurchaseDTO {
+public class LottoPurchaseParam {
     private final Integer autoLottoQuantity;
-
     private final List<LottoNumbers> lottoNumbersList;
 
-    private LottoPurchaseDTO(Integer lottoQuantity, List<LottoNumbers> lottoNumbersList) {
+    private LottoPurchaseParam(Integer lottoQuantity, List<LottoNumbers> lottoNumbersList) {
         Preconditions.checkNotNull(lottoQuantity, "lottoQuantity는 필수값입니다.");
         Preconditions.checkNotNull(lottoNumbersList, "lottoNumbersList는 필수값입니다.");
         LottoValidator.checkManualLottoCount(lottoQuantity, lottoNumbersList.size());
@@ -21,8 +20,8 @@ public class LottoPurchaseDTO {
         this.lottoNumbersList = lottoNumbersList;
     }
 
-    public static LottoPurchaseDTO of(LottoPrice purchasePrice, List<LottoNumbers> lottoNumbers) {
-        return new LottoPurchaseDTO(purchasePrice.getLottoQuantity(), lottoNumbers);
+    public static LottoPurchaseParam of(LottoPrice purchasePrice, List<LottoNumbers> lottoNumbers) {
+        return new LottoPurchaseParam(purchasePrice.getLottoQuantity(), lottoNumbers);
     }
 
     public Integer getAutoLottoQuantity() {
@@ -31,5 +30,9 @@ public class LottoPurchaseDTO {
 
     public List<LottoNumbers> getLottoNumbersList() {
         return lottoNumbersList;
+    }
+
+    public Integer getManualLottoCount() {
+        return lottoNumbersList.size();
     }
 }
