@@ -14,7 +14,8 @@ public class Calculator {
         if (isEmpty(expression)) {
             return DEFAULT_RESULT;
         }
-        return Integer.parseInt(expression);
+        Positive positive = Positive.from(expression);
+        return positive.getNumber();
     }
 
     private static boolean isEmpty(String inputNum) {
