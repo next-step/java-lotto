@@ -17,7 +17,7 @@ class CalculatorTest {
     @DisplayName("입력값이 null이나 비어있다면 0을 반환한다.")
     @ParameterizedTest(name = "[{index}] {0} = 0")
     @NullAndEmptySource
-    void calculate_emptyInput(String expression) {
+    void calculate_emptyExpression(String expression) {
         int resultNum = Calculator.calculate(expression);
 
         assertThat(resultNum).isEqualTo(Calculator.DEFAULT_RESULT);
@@ -39,8 +39,8 @@ class CalculatorTest {
 
     @DisplayName("커스텀 구분자를 사용할 때 계산")
     @ParameterizedTest(name = "[{index}] {0} = {1}")
-    @MethodSource("getCustomExpression")
-    void calculateNumbers_withCustomDelimiter(String expression, int expected) {
+    @MethodSource("customExpression")
+    void calculate_customExpression(String expression, int expected) {
         //when
         int result = Calculator.calculate(expression);
 
@@ -48,7 +48,7 @@ class CalculatorTest {
         assertThat(result).isEqualTo(expected);
     }
 
-    private static Stream<Arguments> getCustomExpression() {
+    private static Stream<Arguments> customExpression() {
         return Stream.of(
                 Arguments.of("//*\n0:2,3*3", 8),
                 Arguments.of("//!\n1!2!100", 103),
