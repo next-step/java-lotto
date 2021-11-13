@@ -11,7 +11,7 @@ public class Number {
         this.number = findTheValidValue(numbers);
     }
 
-    private static void checkNegativeNumber(int[] numbers) {
+    private void checkNegativeNumber(int[] numbers) {
         long count = Arrays.stream(numbers)
                 .filter(number -> number < 0)
                 .count();
@@ -21,7 +21,7 @@ public class Number {
         }
     }
 
-    private static int findTheValidValue(int[] numbers) {
+    private int findTheValidValue(int[] numbers) {
         if (numbers.length == 1) {
             return numbers[0];
         }
@@ -29,7 +29,7 @@ public class Number {
         return calculate(numbers);
     }
 
-    private static int calculate(int[] numbers) {
+    private int calculate(int[] numbers) {
         int loopNumber = numbers.length - 1;
         int result = numbers[0];
         for (int i = 0; i < loopNumber; i++) {
