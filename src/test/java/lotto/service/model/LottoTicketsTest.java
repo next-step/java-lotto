@@ -4,6 +4,7 @@ import lotto.service.domain.LottoTicket;
 import lotto.service.domain.WinningLottoTicket;
 import lotto.service.domain.types.Rank;
 import lotto.service.value.LottoNumber;
+import lotto.service.value.LottoPrice;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import static lotto.rule.LottoRule.MINIMUM_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
@@ -24,6 +26,14 @@ class LottoTicketsTest {
         List<LottoTicket> result = getTestLottoTicket();
         LottoTickets lottoTickets = LottoTickets.from(getTestLottoTicket());
         assertThat(lottoTickets.getCountOfLottoTickets()).isEqualTo(result.size());
+    }
+
+    @Test
+    @DisplayName("로또복권 구입금액 검증")
+    void getLottoPrice() {
+        List<LottoTicket> result = getTestLottoTicket();
+        LottoTickets lottoTickets = LottoTickets.from(getTestLottoTicket());
+        assertThat(lottoTickets.getLottoPrice()).isEqualTo(LottoPrice.from(result.size() * MINIMUM_PRICE));
     }
 
     @ParameterizedTest(name = "[{index}] 당첨번호는 {0}, {1}, {2}, {3}, {4}, {5} 이고, 보너스번호는 {6} 일때 등수는 {7} 이다.")

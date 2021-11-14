@@ -1,5 +1,6 @@
 package lotto.service.domain;
 
+import lotto.service.domain.types.Rank;
 import lotto.service.value.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,47 +17,24 @@ class WinningLottoTicketTest {
     @ParameterizedTest
     @MethodSource
     @DisplayName("당첨번호에 포함된 로또번호 갯수 체크 검증")
-    void getCountOfMatch(WinningLottoTicket winningLottoTicket, LottoTicket myLottoTicket, Integer expected) {
-        // when
-        Integer matchingCount = winningLottoTicket.getCountOfMatch(myLottoTicket);
-
-        // then
-        assertThat(matchingCount).isEqualTo(expected);
+    void matchRank(WinningLottoTicket winningLottoTicket, LottoTicket myLottoTicket, Rank expected) {
+        Rank rank = winningLottoTicket.matchRank(myLottoTicket);
+        assertThat(rank).isEqualTo(expected);
     }
 
-    @ParameterizedTest
-    @MethodSource
-    @DisplayName("보너스번호 포함 여부 체크 검증")
-    void isBonusNumberMatch(WinningLottoTicket winningLottoTicket, LottoTicket myLottoTicket, boolean expected) {
-        // when
-        boolean bonusNumberMatch = winningLottoTicket.isBonusNumberMatch(myLottoTicket);
-
-        // then
-        assertThat(bonusNumberMatch).isEqualTo(expected);
-    }
-
-    private static Stream<Arguments> getCountOfMatch() {
+    private static Stream<Arguments> matchRank() {
         // given
         return Stream.of(
-                Arguments.of(getTestWinningLottoTicket(), getTestLottoTicket(1, 2, 3, 4, 5, 6), 6),
-                Arguments.of(getTestWinningLottoTicket(), getTestLottoTicket(11, 2, 3, 4, 5, 6), 5),
-                Arguments.of(getTestWinningLottoTicket(), getTestLottoTicket(11, 12, 3, 4, 5, 6), 4),
-                Arguments.of(getTestWinningLottoTicket(), getTestLottoTicket(11, 12, 13, 4, 5, 6), 3),
-                Arguments.of(getTestWinningLottoTicket(), getTestLottoTicket(11, 12, 13, 14, 5, 6), 2),
-                Arguments.of(getTestWinningLottoTicket(), getTestLottoTicket(11, 12, 13, 14, 15, 6), 1),
-                Arguments.of(getTestWinningLottoTicket(), getTestLottoTicket(11, 12, 13, 14, 15, 16), 0)
-        );
-    }
-
-    private static Stream<Arguments> isBonusNumberMatch() {
-        // given
-        return Stream.of(
-                Arguments.of(getTestWinningLottoTicket(), getTestLottoTicket(1, 2, 3, 4, 5, 7), true),
-                Arguments.of(getTestWinningLottoTicket(), getTestLottoTicket(11, 2, 3, 4, 5, 7), true),
-                Arguments.of(getTestWinningLottoTicket(), getTestLottoTicket(11, 12, 3, 4, 5, 7), true),
-                Arguments.of(getTestWinningLottoTicket(), getTestLottoTicket(11, 12, 13, 4, 5, 6), false),
-                Arguments.of(getTestWinningLottoTicket(), getTestLottoTicket(11, 12, 13, 14, 5, 6), false),
-                Arguments.of(getTestWinningLottoTicket(), getTestLottoTicket(11, 12, 13, 14, 15, 6), false)
+                Arguments.of(getTestWinningLottoTicket(), getTestLottoTicket(1, 2, 3, 4, 5, 6), Rank.FIRST),
+                Arguments.of(getTestWinningLottoTicket(), getTestLottoTicket(1, 2, 3, 4, 5, 7), Rank.SECOND),
+                Arguments.of(getTestWinningLottoTicket(), getTestLottoTicket(1, 2, 3, 4, 5, 8), Rank.THIRD),
+                Arguments.of(getTestWinningLottoTicket(), getTestLottoTicket(1, 2, 3, 4, 15, 16), Rank.FOURTH),
+                Arguments.of(getTestWinningLottoTicket(), getTestLottoTicket(1, 2, 3, 4, 15, 7), Rank.FOURTH),
+                Arguments.of(getTestWinningLottoTicket(), getTestLottoTicket(1, 2, 3, 14, 15, 17), Rank.FIFTH),
+                Arguments.of(getTestWinningLottoTicket(), getTestLottoTicket(1, 2, 3, 14, 15, 7), Rank.FIFTH),
+                Arguments.of(getTestWinningLottoTicket(), getTestLottoTicket(1, 2, 13, 14, 15, 7), Rank.MISS),
+                Arguments.of(getTestWinningLottoTicket(), getTestLottoTicket(1, 12, 13, 14, 15, 7), Rank.MISS),
+                Arguments.of(getTestWinningLottoTicket(), getTestLottoTicket(11, 12, 13, 14, 15, 7), Rank.MISS)
         );
     }
 

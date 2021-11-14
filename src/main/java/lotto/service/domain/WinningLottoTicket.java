@@ -1,11 +1,12 @@
 package lotto.service.domain;
 
+import lotto.service.domain.types.Rank;
 import lotto.service.value.LottoNumber;
 import lotto.utils.Preconditions;
 
 import java.util.List;
 
-public class WinningLottoTicket {
+public class WinningLottoTicket implements RankMatchable {
     private final LottoTicket lottoTicket;
     private final LottoNumber bonusNumber;
 
@@ -21,11 +22,17 @@ public class WinningLottoTicket {
         return new WinningLottoTicket(winningNumbers, bonusNumber);
     }
 
-    public Integer getCountOfMatch(LottoTicket purchaseLottoTicket) {
+    @Override
+    public Rank matchRank(LottoTicket purchaseLottoTicket) {
+        return Rank.convertRankByCountOfMatch(getCountOfMatch(purchaseLottoTicket),
+                                              isBonusNumberMatch(purchaseLottoTicket));
+    }
+
+    private Integer getCountOfMatch(LottoTicket purchaseLottoTicket) {
         return lottoTicket.getCountOfMatch(purchaseLottoTicket);
     }
 
-    public boolean isBonusNumberMatch(LottoTicket purchaseLottoTicket) {
+    private boolean isBonusNumberMatch(LottoTicket purchaseLottoTicket) {
         return purchaseLottoTicket.isContains(bonusNumber);
     }
 }

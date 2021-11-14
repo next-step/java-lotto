@@ -1,31 +1,45 @@
 package lotto.controller;
 
+import lotto.controller.dto.LottoPurchaseParam;
+import lotto.controller.dto.LottoResultParam;
+import lotto.controller.dto.PurchaseLottoTicketsDTO;
+import lotto.controller.dto.WinningLottoTicketParam;
 import lotto.service.LottoService;
 import lotto.service.domain.WinningLottoTicket;
-import lotto.service.dto.LottoPurchaseDTO;
-import lotto.service.dto.LottoResultCreateDTO;
 import lotto.service.model.LottoResult;
 import lotto.service.model.LottoTickets;
-import lotto.service.value.LottoPrice;
-
-import java.util.List;
+import lotto.ui.ResultView;
 
 public class LottoController {
     private final LottoService lottoService;
+    private final ResultView resultView;
 
-    public LottoController(LottoService lottoService) {
+    public LottoController(LottoService lottoService, ResultView resultView) {
         this.lottoService = lottoService;
+        this.resultView = resultView;
     }
 
-    public LottoTickets purchaseLottoTickets(LottoPrice purchasePrice) {
-        return lottoService.purchaseLottoTickets(LottoPurchaseDTO.from(purchasePrice.getLottoQuantity()));
+    public LottoTickets purchaseLottoTickets(LottoPurchaseParam lottoPurchaseParam) {
+        Integer manualLottoCount = lottoPurchaseParam.getManualLottoCount();
+
+        LottoTickets purchaseLottoTickets = lottoService.purchaseLottoTickets(lottoPurchaseParam.getAutoLottoQuantity(),
+                                                                              lottoPurchaseParam.getLottoNumbersList());
+
+        resultView.printPurchaseLottoTickets(
+                PurchaseLottoTicketsDTO.of(manualLottoCount,
+                                           purchaseLottoTickets.getAutoLottoCount(manualLottoCount),
+                                           purchaseLottoTickets));
+        return purchaseLottoTickets;
     }
 
-    public WinningLottoTicket getWinningLottoTicket(List<Integer> winningLottoNumbers, Integer bonusNumber) {
-        return lottoService.getWinningLottoTicket(winningLottoNumbers, bonusNumber);
+    public WinningLottoTicket getWinningLottoTicket(WinningLottoTicketParam winningLottoTicketParam) {
+        return lottoService.getWinningLottoTicket(winningLottoTicketParam.getWinningLottoNumbers(),
+                                                  winningLottoTicketParam.getBonusNumber());
     }
 
-    public LottoResult checkLottoResult(LottoTickets purchaseLottoTickets, WinningLottoTicket winningLottoTicket) {
-        return lottoService.checkLottoResult(LottoResultCreateDTO.of(purchaseLottoTickets, winningLottoTicket));
+    public void checkLottoResult(LottoResultParam lottoResultParam) {
+        LottoResult lottoResult = lottoService.checkLottoResult(lottoResultParam.getPurchaseLottoTickets(),
+                                                                lottoResultParam.getWinningLottoTicket());
+        resultView.printLottoResult(lottoResult, lottoResultParam.getLottoPrice());
     }
 }

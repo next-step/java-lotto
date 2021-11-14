@@ -2,10 +2,9 @@ package lotto.service;
 
 import lotto.service.domain.LottoResultMaker;
 import lotto.service.domain.LottoTicket;
-import lotto.service.domain.LottoTicketMaker;
 import lotto.service.domain.WinningLottoTicket;
-import lotto.service.dto.LottoPurchaseDTO;
-import lotto.service.dto.LottoResultCreateDTO;
+import lotto.service.domain.factory.LottoTicketFactory;
+import lotto.service.model.LottoNumbers;
 import lotto.service.model.LottoResult;
 import lotto.service.model.LottoTickets;
 import lotto.service.value.LottoNumber;
@@ -18,22 +17,21 @@ import java.util.stream.IntStream;
 
 public class LottoService {
     private static final Integer START_LOTTO_QUANTITY = 1;
-    private final LottoTicketMaker lottoTicketMaker;
     private final LottoResultMaker lottoResultMaker;
+    private final LottoTicketFactory lottoTicketFactory;
 
-    public LottoService(LottoTicketMaker lottoTicketMaker, LottoResultMaker lottoResultMaker) {
-        this.lottoTicketMaker = lottoTicketMaker;
+    public LottoService(LottoResultMaker lottoResultMaker, LottoTicketFactory lottoTicketFactory) {
         this.lottoResultMaker = lottoResultMaker;
+        this.lottoTicketFactory = lottoTicketFactory;
     }
 
-    public LottoTickets purchaseLottoTickets(LottoPurchaseDTO lottoPurchaseDTO) {
-        Preconditions.checkNotNull(lottoPurchaseDTO, "lottoPurchaseDTO의 값이 없습니다.");
+    public LottoTickets purchaseLottoTickets(Integer autoLottoQuantity, List<LottoNumbers> lottoNumbersList) {
+        Preconditions.checkNotNull(autoLottoQuantity, "autoLottoQuantity의 값이 없습니다.");
+        Preconditions.checkNotNull(lottoNumbersList, "lottoNumbersList의 값이 없습니다.");
 
-        List<LottoTicket> lottoTickets = IntStream.rangeClosed(START_LOTTO_QUANTITY,
-                                                               lottoPurchaseDTO.getLottoQuantity())
-                .mapToObj(v -> lottoTicketMaker.createLottoTicket())
-                .collect(Collectors.toList());
-        return LottoTickets.from(lottoTickets);
+        List<LottoTicket> manualLottoTickets = createManualLottoTickets(lottoNumbersList);
+        List<LottoTicket> lottoTickets = createAutoLottoTickets(autoLottoQuantity);
+        return LottoTickets.of(lottoTickets, manualLottoTickets);
     }
 
     public WinningLottoTicket getWinningLottoTicket(List<Integer> winningLottoNumbers, Integer bonusNumber) {
@@ -48,10 +46,23 @@ public class LottoService {
         return WinningLottoTicket.of(winningNumbers, bonusNumber);
     }
 
-    public LottoResult checkLottoResult(LottoResultCreateDTO lottoResultCreateDTO) {
-        Preconditions.checkNotNull(lottoResultCreateDTO, "lottoResultCreateDTO의 값이 없습니다.");
+    public LottoResult checkLottoResult(LottoTickets purchaseLottoTickets, WinningLottoTicket winningLottoTicket) {
+        Preconditions.checkNotNull(purchaseLottoTickets, "purchaseLottoTickets의 값이 없습니다.");
+        Preconditions.checkNotNull(winningLottoTicket, "winningLottoTicket의 값이 없습니다.");
 
-        return lottoResultMaker.checkLottoResult(lottoResultCreateDTO.getPurchaseLottoTickets(),
-                                                 lottoResultCreateDTO.getWinningLottoTicket());
+        return lottoResultMaker.checkLottoResult(purchaseLottoTickets, winningLottoTicket);
+    }
+
+    private List<LottoTicket> createManualLottoTickets(List<LottoNumbers> lottoNumbersList) {
+        return lottoNumbersList.stream()
+                .map(LottoNumbers::getLottoNumbers)
+                .map(lottoTicketFactory::createLottoTicketByManual)
+                .collect(Collectors.toList());
+    }
+
+    private List<LottoTicket> createAutoLottoTickets(Integer autoLottoQuantity) {
+        return IntStream.rangeClosed(START_LOTTO_QUANTITY, autoLottoQuantity)
+                .mapToObj(v -> lottoTicketFactory.createLottoTicketByAuto())
+                .collect(Collectors.toList());
     }
 }
