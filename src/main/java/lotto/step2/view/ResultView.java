@@ -27,13 +27,13 @@ public final class ResultView {
         System.out.println("----------");
         for (int i = 3; i <= 6; i++) {
             System.out.println(i + "개 일치("
-                    + prizeMoney.get(i) + "원) - "
+                    + company.getPrizeMoney().get(i) + "원) - "
                     + company.getTotalCountOfMatch(i));
         }
     }
 
     public static void printRateOfReturn(LotteryCompany company, int orderPrice) {
-        System.out.println("총 수익률은 " + company.getRateOfReturn(14000) + "입니다.");
+        System.out.println("총 수익률은 " + company.getRateOfReturn(orderPrice) + "입니다.");
     }
 
 }

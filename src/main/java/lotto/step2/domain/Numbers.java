@@ -8,7 +8,6 @@ public class Numbers {
     private static final int LOTTO_SIZE = 6;
     private List<Integer> numbers = new ArrayList<>();
 
-    // 테스트 생성자
     public Numbers() {
         createRandomNumber();
     }
@@ -42,11 +41,6 @@ public class Numbers {
             numbers.add(array[ranIndex]);
         }
         Collections.shuffle(numbers);
-    }
-
-    @Override
-    public String toString() {
-        return "" + numbers;
     }
 
 }

@@ -22,8 +22,4 @@ public class Lotto {
         return numbers.getCountOfMatch(winningNumbers) == expected;
     }
 
-    @Override
-    public String toString() {
-        return "" + numbers;
-    }
 }

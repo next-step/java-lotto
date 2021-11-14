@@ -6,21 +6,24 @@ import java.util.*;
 
 public class LotteryCompany {
 
-    public static final Map<Integer, Integer> prizeMoney = createMap();
     private static final String COMMA = ",";
     private static final String RATE_PATTERN = "0.##";
+    private final Map<Integer, Integer> prizeMoney = new HashMap<>();
+    private final List<Integer> winningNumbers = new ArrayList<>();
     private Lotteries lotteries;
-    private List<Integer> winningNumbers = new ArrayList<>();
 
-    public LotteryCompany() {}
+    public LotteryCompany(String winningNumbers) {
+        setPrizeMoney();
+        setWinningNumbers(winningNumbers);
+    }
 
     public LotteryCompany(String winningNumbers, Lotteries lotteries) {
-        setWinningNumbers(winningNumbers);
+        this(winningNumbers);
         this.lotteries = lotteries;
     }
-    //테스트 편의 생성자
-    public LotteryCompany(String winningNumbers) {
-        setWinningNumbers(winningNumbers);
+
+    public Map<Integer, Integer> getPrizeMoney() {
+        return prizeMoney;
     }
 
     public List<Integer> getWinningNumbers() {
@@ -39,13 +42,11 @@ public class LotteryCompany {
         return Double.parseDouble(decimalFormat.format(calculateRateOfReturn() / orderPrice));
     }
 
-    private static Map<Integer, Integer> createMap() {
-        Map<Integer, Integer> prizeMoney = new HashMap<>();
+    private void setPrizeMoney() {
         prizeMoney.put(3, 5000);
         prizeMoney.put(4, 50000);
         prizeMoney.put(5, 15000000);
         prizeMoney.put(6, 2000000000);
-        return prizeMoney;
     }
 
     private void setWinningNumbers(String input) {
