@@ -12,12 +12,14 @@ public final class InputView {
 
     public static int printInputOrderPrice() {
         System.out.println("구매 금액을 입력해주세요");
-        return sc.nextInt();
+        return Integer.parseInt(sc.nextLine());
     }
 
     public static String printWinningNumber() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요");
-        return sc.next();
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        String input = sc.nextLine();
+        System.out.println();
+        return input;
     }
 
 }

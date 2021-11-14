@@ -1,29 +1,23 @@
 package lotto.step2.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LotteryStore {
 
     private static final int LOTTO_PRICE = 1000;
-
-    private int totalCount;
-    private List<Lotto> lotteries = new ArrayList<>();
+    private Lotteries lotteries;
+    private int orderCount;
 
     public LotteryStore() {}
 
     public LotteryStore(int orderPrice) {
-        totalCount = orderPrice / 1000;
-        for (int i = 0; i < totalCount; i++) {
-            lotteries.add(new Lotto(LOTTO_PRICE));
-        }
+        orderCount = orderPrice / LOTTO_PRICE;
+        lotteries = new Lotteries(orderCount);
     }
 
-    public int getTotalCount() {
-        return totalCount;
+    public int getOrderCount() {
+        return orderCount;
     }
 
-    public List<Lotto> getLotteries() {
+    public Lotteries getLotteries() {
         return lotteries;
     }
 

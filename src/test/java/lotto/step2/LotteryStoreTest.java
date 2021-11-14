@@ -10,9 +10,9 @@ class LotteryStoreTest {
 
     @Test
     @DisplayName("주문 가격을 입력하면 몇개의 복권을 주는가?")
-    void getTotalCount() {
+    void getOrderCount() {
         LotteryStore store = new LotteryStore(14000);
-        assertThat(store.getTotalCount()).isEqualTo(14);
+        assertThat(store.getOrderCount()).isEqualTo(14);
     }
 
 }

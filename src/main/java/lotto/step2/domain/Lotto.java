@@ -4,41 +4,26 @@ import java.util.List;
 
 public class Lotto {
 
-    private Price price;
-    private Number number;
+    private Numbers numbers;
 
-    // 테스트 생성자
-    public Lotto(Number number) {
-        this.number = number;
+    public Lotto() {
+        this.numbers = new Numbers();
+    }
+    // 테스트 편의 생성자
+    public Lotto(Numbers numbers) {
+        this.numbers = numbers;
     }
 
-    public Lotto(int price) {
-        this.price = new Price(price);
-        this.number = new Number();
+    public Numbers getNumbers() {
+        return numbers;
     }
 
-    public Number getLottoNumber() {
-        return number;
-    }
-
-    public Price getLottoPrice() {
-        return price;
-    }
-
-    public int getMatch(List<Integer> winningNumber) {
-        int count = 0;
-        List<Integer> number = this.number.getNumber();
-        for (int w : winningNumber) {
-            if (number.contains(w)) {
-                count++;
-            }
-        }
-        return count;
-
+    public boolean isMatchExpected(List<Integer> winningNumbers, int expected) {
+        return numbers.getCountOfMatch(winningNumbers) == expected;
     }
 
     @Override
     public String toString() {
-        return "" + number;
+        return "" + numbers;
     }
 }
