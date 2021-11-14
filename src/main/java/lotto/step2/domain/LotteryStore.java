@@ -21,4 +21,5 @@ public class LotteryStore {
         return lotteries;
     }
 
+
 }

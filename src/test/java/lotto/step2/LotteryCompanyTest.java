@@ -7,6 +7,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -47,5 +49,33 @@ class LotteryCompanyTest {
                 Arguments.of("1, 2, 3, 4, 11, 12", 6, 1)
         );
     }
+
+    @ParameterizedTest
+    @MethodSource("provideWinnerNumber2")
+    @DisplayName("총 수익률")
+    void rate(String provided, double rate) {
+        List<Integer> lottoNumbers1 = Arrays.asList(1, 2, 3, 4, 11, 12);
+        List<Integer> lottoNumbers2 = Arrays.asList(1, 2, 3, 4, 14, 15);
+        List<Integer> lottoNumbers3 = Arrays.asList(1, 2, 3, 4, 14, 17);
+        Lotto lotto1 = new Lotto(new Numbers(lottoNumbers1));
+        Lotto lotto2 = new Lotto(new Numbers(lottoNumbers2));
+        Lotto lotto3 = new Lotto(new Numbers(lottoNumbers3));
+        Lotteries lotteries = new Lotteries(lotto1, lotto2, lotto3);
+
+        LotteryCompany company = new LotteryCompany(provided, lotteries);
+        double value = company.getRateOfReturn(14000);
+        assertThat(value).isEqualTo(rate);
+    }
+
+    private static Stream<Arguments> provideWinnerNumber2() {
+        return Stream.of(
+                Arguments.of("1, 44, 45, 46, 11, 12", 0.35),
+                Arguments.of("1, 2, 3, 39, 37, 26", 1.07),
+                Arguments.of("1, 2, 3, 4, 37, 26", 10.71),
+                Arguments.of("1, 2, 3, 4, 11, 26", 1071.42),
+                Arguments.of("1, 2, 3, 4, 11, 12", 142857.14)
+        );
+    }
+
 
 }

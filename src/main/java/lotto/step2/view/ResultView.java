@@ -32,4 +32,8 @@ public final class ResultView {
         }
     }
 
+    public static void printRateOfReturn(LotteryCompany company, int orderPrice) {
+        System.out.println("총 수익률은 " + company.getRateOfReturn(14000) + "입니다.");
+    }
+
 }

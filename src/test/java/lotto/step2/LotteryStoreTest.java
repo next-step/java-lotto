@@ -15,4 +15,5 @@ class LotteryStoreTest {
         assertThat(store.getOrderCount()).isEqualTo(14);
     }
 
+
 }

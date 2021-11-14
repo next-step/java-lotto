@@ -26,9 +26,12 @@ public class LottoController {
         // 복권회사에 당첨번호 입력
         LotteryCompany company = new LotteryCompany(InputView.printWinningNumber(), lotteries);
 
-        // 통계출력
+        // 당첨 통계 출력
         printWinnerStatics(company);
 
+        // 총 수익률 출력
+        printRateOfReturn(company, orderPrice);
     }
+
 
 }
