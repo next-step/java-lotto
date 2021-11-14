@@ -1,4 +1,4 @@
-- [ ] LottoNumber 구현
+- [x] LottoNumber 구현
   - 1 ~ 45 까지의 값만 가질 수 있다.
   - 정렬될 수 있다. (Comparable 구현)
 - [ ] LottoNumbers (일급컬렉션) 구현 
