@@ -5,7 +5,7 @@ import java.util.*;
 public class Numbers {
 
     private static final int LOTTO_NUMBER = 46;
-    private static final int LOTTO_INDEX = 6;
+    private static final int LOTTO_SIZE = 6;
     private List<Integer> numbers = new ArrayList<>();
 
     // 테스트 생성자
@@ -34,8 +34,12 @@ public class Numbers {
         for (int i = 0; i < LOTTO_NUMBER; i++) {
             array[i] = i + 1;
         }
-        for (int i = 0; i < LOTTO_INDEX; i++) {
-            numbers.add(array[new Random().nextInt(LOTTO_NUMBER - 1) + 1]);
+        while (numbers.size() != LOTTO_SIZE) {
+            int ranIndex = new Random().nextInt(LOTTO_NUMBER - 1) + 1;
+            if (numbers.contains(array[ranIndex])) {
+                continue;
+            }
+            numbers.add(array[ranIndex]);
         }
         Collections.shuffle(numbers);
     }
