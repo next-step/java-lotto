@@ -19,4 +19,16 @@ class WinningTicketTest {
 		// then
 		assertThat(winningTicket).isNotNull();
 	}
+
+	@DisplayName("당첨번호에 보너스 번호를 포함할 경우 예외가 발생한다.")
+	@Test
+	void createBonusInclude() {
+		// given
+		String[] winningNumber = {"12", "17", "26", "36", "38", "40"};
+		int bonus = 12;
+
+		// when then
+		assertThatIllegalArgumentException()
+			.isThrownBy(() -> WinningTicket.create(winningNumber, bonus));
+	}
 }

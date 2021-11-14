@@ -31,9 +31,9 @@ public class Tickets {
 		return new Tickets(values);
 	}
 
-	public static Tickets create(Generator generator, int numberOfPurchases) {
-		List<Ticket> values = new ArrayList<>();
-		for (int i = 0; i < numberOfPurchases; i++) {
+	public static Tickets create(Generator generator, int sizeOfAutoTickets, List<Ticket> manualTickets) {
+		List<Ticket> values = new ArrayList<>(manualTickets);
+		for (int i = 0; i < sizeOfAutoTickets; i++) {
 			values.add(Ticket.create(generator.generate()));
 		}
 		return create(values);

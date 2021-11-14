@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.*;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -26,7 +27,7 @@ class StatisticsTest {
 	@Test
 	void create() {
 		// given
-		Tickets tickets = Tickets.create(new FixedGenerator(), FIXED_NUMBER_OF_PURCHASES);
+		Tickets tickets = Tickets.create(new FixedGenerator(), FIXED_NUMBER_OF_PURCHASES, Collections.emptyList());
 		WinningTicket winningTicket = WinningTicket.create(FIXED_WINNING_NUMBERS, FIXED_BONUS);
 
 		// when
@@ -41,7 +42,7 @@ class StatisticsTest {
 	@MethodSource("provideWinningTicketWithRank")
 	void getMatchedResult(WinningTicket winningTicket, Rank rank) {
 		// given
-		Tickets tickets = Tickets.create(new FixedGenerator(), FIXED_NUMBER_OF_PURCHASES);
+		Tickets tickets = Tickets.create(new FixedGenerator(), FIXED_NUMBER_OF_PURCHASES, Collections.emptyList());
 		Statistics statistics = Statistics.create(tickets, winningTicket);
 
 		// when
@@ -56,7 +57,7 @@ class StatisticsTest {
 	@MethodSource("provideWinningTicketAndProfitRatio")
 	void getProfitRatio(WinningTicket winningTicket, double profitRatio) {
 		// given
-		Tickets tickets = Tickets.create(new FixedGenerator(), FIXED_NUMBER_OF_PURCHASES);
+		Tickets tickets = Tickets.create(new FixedGenerator(), FIXED_NUMBER_OF_PURCHASES, Collections.emptyList());
 		Statistics statistics = Statistics.create(tickets, winningTicket);
 
 		// when
