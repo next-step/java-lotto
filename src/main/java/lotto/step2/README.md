@@ -1,4 +1,4 @@
-**step1. 문자열 덧셈 계산기**
+**step2. 로또 당첨(자동)**
 -
 **- 요구사항**
 1. 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급
@@ -16,13 +16,17 @@
 3. ~~출력~~ 
    - ~~가격 입력받고 주문개수 출력~~ 
    - ~~로또번호 출력~~
+   - ~~당첨번호 입력~~
+4. ~~출력 통계~~
+5. 총 수익률
 
 **- 기능 목록**
 1. domain
-   - LotteryStore : 로토판매점
+   - LotteryStore : 로또판매점, 로또 생성
+   - LotteryCompany : 로또회사, 로또통계 계산
+   - Lotteries : 로또 컬렉션
    - Lotto : 로또
-   - Number : 로또 넘버
-   - Price : 로또 가격
+   - Numbers : 랜덤 로또 넘버 컬렉션
 2. controller
    - LottoController : 컨트롤러
 3. view
