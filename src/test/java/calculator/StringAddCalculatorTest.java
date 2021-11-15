@@ -52,6 +52,10 @@ class StringAddCalculatorTest {
         assertThat(result1).isEqualTo(6);
         int result2 = StringAddCalculator.splitAndSum("//;\n1;3;6");
         assertThat(result2).isEqualTo(10);
+        int result3 = StringAddCalculator.splitAndSum("//;\n1;2:3");
+        assertThat(result3).isEqualTo(6);
+        int result4 = StringAddCalculator.splitAndSum("//;\n1,3;6");
+        assertThat(result4).isEqualTo(10);
     }
 
     @ParameterizedTest
