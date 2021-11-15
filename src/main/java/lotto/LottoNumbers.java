@@ -1,8 +1,8 @@
 package lotto;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+
+import static java.lang.String.format;
 
 public class LottoNumbers {
 
@@ -15,9 +15,28 @@ public class LottoNumbers {
         return new LottoNumbers(lottoNumbers);
     }
 
+    // TODO: [2021/11/15 양동혁] 중복 테스트
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
-        checkNotNull(lottoNumbers);
+        checkLottoNumbersSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+        Collections.sort(lottoNumbers);
+    }
+
+    private static void checkLottoNumbersSize(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers == null || lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
+            throw new IllegalArgumentException(format("로또번호는 %s 개 여야합니다.", LOTTO_NUMBERS_SIZE));
+        }
+    }
+
+    public List<LottoNumber> lottoNumbers() {
+        Collections.sort(lottoNumbers);
+        return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public Grade rank(LottoNumbers lastWinningNumbers) {
+        checkNotNull(lastWinningNumbers);
+        Set<LottoNumber> allNumbers = mergeWithLottoNumbers(lastWinningNumbers.lottoNumbers);
+        return Grade.from(LOTTO_NUMBERS_SIZE * 2 - allNumbers.size());
     }
 
     private static void checkNotNull(Object object) {
@@ -26,10 +45,13 @@ public class LottoNumbers {
         }
     }
 
-    public List<LottoNumber> lottoNumbers() {
-        Collections.sort(lottoNumbers);
-        return Collections.unmodifiableList(lottoNumbers);
+    private Set<LottoNumber> mergeWithLottoNumbers(List<LottoNumber> winningNumbers) {
+        Set<LottoNumber> allNumbers = new HashSet<>();
+        allNumbers.addAll(lottoNumbers);
+        allNumbers.addAll(winningNumbers);
+        return allNumbers;
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -42,5 +64,12 @@ public class LottoNumbers {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoNumbers{" +
+                "lottoNumbers=" + lottoNumbers +
+                '}';
     }
 }
