@@ -17,6 +17,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MAX_NUMBER = 45;
     public static final String INVALID_RANGE_ERROR_MESSAGE = format("%s ~ %s 의 값만 사용가능합니다.", MIN_NUMBER, MAX_NUMBER);
     private static final Map<Integer, LottoNumber> CACHED_LOTTO_NUMBERS = initCachedLottoNumbers();
+    private static final int MIN_LIST_OF_SIZE = 1;
 
     private static  Map<Integer, LottoNumber> initCachedLottoNumbers() {
         return IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
@@ -49,9 +50,20 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static List<LottoNumber> listOf(int size, ShuffleStrategy shuffleStrategy) {
+        checkListOfArguments(size, shuffleStrategy);
         List<LottoNumber> lottoNumbers = new ArrayList<>(CACHED_LOTTO_NUMBERS.values());
         shuffleStrategy.shuffle(lottoNumbers);
         return limitFromStart(lottoNumbers, size);
+    }
+
+    private static void checkListOfArguments(int size, ShuffleStrategy shuffleStrategy) {
+        if (size < MIN_LIST_OF_SIZE) {
+            throw new IllegalArgumentException(format("size는 %s 이상이어야합니다.", MIN_LIST_OF_SIZE));
+        }
+        
+        if (shuffleStrategy == null) {
+            throw new IllegalArgumentException("필수 값이 없습니다.");
+        }
     }
 
     private static List<LottoNumber> limitFromStart(List<LottoNumber> lottoNumbers, int closedEndIndex) {

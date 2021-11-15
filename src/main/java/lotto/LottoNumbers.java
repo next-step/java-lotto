@@ -11,7 +11,6 @@ public class LottoNumbers {
     private final List<LottoNumber> lottoNumbers;
 
     public static LottoNumbers publish(ShuffleStrategy shuffleStrategy) {
-        checkNotNull(shuffleStrategy);
         List<LottoNumber> lottoNumbers = LottoNumber.listOf(LOTTO_NUMBERS_SIZE, shuffleStrategy);
         return new LottoNumbers(lottoNumbers);
     }
