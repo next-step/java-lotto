@@ -30,7 +30,7 @@ public class LottoController {
         printWinnerStatics(company);
 
         // 총 수익률 출력
-        printRateOfReturn(company, Integer.parseInt(orderPrice));
+        printRateOfReturn(company, store.getOrderPrice());
     }
 
 }

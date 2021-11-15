@@ -12,6 +12,7 @@ class LotteryStoreTest {
     @DisplayName("주문 가격을 입력하면 가격을 계산하고 로또 컬랙션 생성")
     void getOrderCount() {
         LotteryStore store = new LotteryStore("14000");
+        assertThat(store.getOrderPrice()).isEqualTo(14000);
         assertThat(store.getOrderCount()).isEqualTo(14);
         assertThat(store.getLotteries().getLotteries()).size().isEqualTo(14);
     }
@@ -27,7 +28,6 @@ class LotteryStoreTest {
                 .isInstanceOf(IllegalArgumentException.class);
         assertThatCode(() -> new LotteryStore("1000"))
                 .doesNotThrowAnyException();
-        assertThat(new LotteryStore("14000").getOrderPrice()).isEqualTo(14000);
     }
 
 }
