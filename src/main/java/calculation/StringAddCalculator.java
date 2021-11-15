@@ -1,6 +1,5 @@
 package calculation;
 
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,9 +17,7 @@ public class StringAddCalculator {
             return NULL_AND_EMPTY_ZERO;
         }
 
-        int[] numbers = changeToIntegerArrayType(patternMatch(text));
-
-        return calculate(numbers);
+        return calculate(patternMatch(text));
     }
 
     private static String[] patternMatch(String text) {
@@ -34,20 +31,8 @@ public class StringAddCalculator {
         return text.split(SPLIT_CONDITION);
     }
 
-    private static int[] changeToIntegerArrayType(String[] numbers) {
-        return Arrays.stream(numbers)
-                .mapToInt(Integer::parseInt)
-                .toArray();
-    }
-
-    private static int calculate(int[] numbers) {
-        Number number = new Number(numbers);
-        int loopNumber = numbers.length - 1;
-        for (int i = 0; i < loopNumber; i++) {
-            number.plus(numbers[i + 1]);
-        }
-
-        return number.getNumber();
+    private static int calculate(String[] numbers) {
+        return new Numbers(numbers).sum();
     }
 
 }
