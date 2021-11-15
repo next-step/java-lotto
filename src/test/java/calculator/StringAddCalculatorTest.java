@@ -39,8 +39,17 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     @CsvSource(value = { "1,2:3;6", "1:3,6;10"}, delimiter = ';')
     @DisplayName("구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있다.")
-    void otherCharSeparatedAddNumbers(String input, int expected){
+    void colonSeparatedAddNumbers(String input, int expected){
         int result = StringAddCalculator.splitAndSum(input);
         assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("//”와 “\n” 문자 사이에 커스텀 구분자를 지정할 수 있다.")
+    void customCharSeparatedAddNumbers(){
+        int result1 = StringAddCalculator.splitAndSum("//;\n1;2;3");
+        assertThat(result1).isEqualTo(6);
+        int result2 = StringAddCalculator.splitAndSum("//;\n1;3;6");
+        assertThat(result2).isEqualTo(10);
     }
 }
