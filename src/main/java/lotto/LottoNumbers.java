@@ -6,16 +6,22 @@ import java.util.Objects;
 
 public class LottoNumbers {
 
-    private static final int LOTTO_NUMBERS_SIZE = 6;
+    public static final int LOTTO_NUMBERS_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
+
+    public static LottoNumbers publish(ShuffleStrategy shuffleStrategy) {
+        checkNotNull(shuffleStrategy);
+        List<LottoNumber> lottoNumbers = LottoNumber.listOf(LOTTO_NUMBERS_SIZE, shuffleStrategy);
+        return new LottoNumbers(lottoNumbers);
+    }
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         checkNotNull(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void checkNotNull(Object object) {
+    private static void checkNotNull(Object object) {
         if (object == null) {
             throw new IllegalArgumentException("필수 값이 없습니다.");
         }
