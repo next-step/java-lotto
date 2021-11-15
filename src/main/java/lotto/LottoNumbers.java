@@ -7,6 +7,8 @@ import static java.lang.String.format;
 public class LottoNumbers {
 
     public static final int LOTTO_NUMBERS_SIZE = 6;
+    private static final int TWICE_LOTTO_NUMBERS_SIZE = LOTTO_NUMBERS_SIZE * 2;
+    public static final String DUPLICATION_ERROR_MESSAGE = "번호의 중복을 허용하지 않습니다.";
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -15,16 +17,27 @@ public class LottoNumbers {
         return new LottoNumbers(lottoNumbers);
     }
 
-    // TODO: [2021/11/15 양동혁] 중복 테스트
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
-        checkLottoNumbersSize(lottoNumbers);
+        checkLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
         Collections.sort(lottoNumbers);
     }
 
-    private static void checkLottoNumbersSize(List<LottoNumber> lottoNumbers) {
+    private static void checkLottoNumbers(List<LottoNumber> lottoNumbers) {
+        checkSize(lottoNumbers);
+        checkDuplication(lottoNumbers);
+    }
+
+    private static void checkSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers == null || lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(format("로또번호는 %s 개 여야합니다.", LOTTO_NUMBERS_SIZE));
+        }
+    }
+
+    private static void checkDuplication(List<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> notDuplicatedNumbers = new HashSet<>(lottoNumbers);
+        if (notDuplicatedNumbers.size() != LOTTO_NUMBERS_SIZE) {
+            throw new IllegalArgumentException(DUPLICATION_ERROR_MESSAGE);
         }
     }
 
@@ -36,7 +49,7 @@ public class LottoNumbers {
     public Grade rank(LottoNumbers lastWinningNumbers) {
         checkNotNull(lastWinningNumbers);
         Set<LottoNumber> allNumbers = mergeWithLottoNumbers(lastWinningNumbers.lottoNumbers);
-        return Grade.from(LOTTO_NUMBERS_SIZE * 2 - allNumbers.size());
+        return Grade.from(TWICE_LOTTO_NUMBERS_SIZE - allNumbers.size());
     }
 
     private static void checkNotNull(Object object) {
@@ -51,7 +64,6 @@ public class LottoNumbers {
         allNumbers.addAll(winningNumbers);
         return allNumbers;
     }
-
 
     @Override
     public boolean equals(Object o) {

@@ -15,9 +15,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
+    private static final int MIN_LIST_OF_SIZE = 1;
     public static final String INVALID_RANGE_ERROR_MESSAGE = format("%s ~ %s 의 값만 사용가능합니다.", MIN_NUMBER, MAX_NUMBER);
     private static final Map<Integer, LottoNumber> CACHED_LOTTO_NUMBERS = initCachedLottoNumbers();
-    private static final int MIN_LIST_OF_SIZE = 1;
 
     private static  Map<Integer, LottoNumber> initCachedLottoNumbers() {
         return IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)

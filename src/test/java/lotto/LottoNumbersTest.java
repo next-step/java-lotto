@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class LottoNumbersTest {
 
@@ -46,5 +47,13 @@ class LottoNumbersTest {
 
     private static LottoNumber num(int num) {
         return new LottoNumber(num);
+    }
+
+    @DisplayName("중복된 로또번호를 입력할 경우 예외를 던진다.")
+    @Test
+    void create_duplicatedLottoNumbers() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new LottoNumbers(asList(NUM_3, NUM_3, NUM_2, NUM_10, NUM_20, NUM_15)))
+                .withMessage(LottoNumbers.DUPLICATION_ERROR_MESSAGE);
     }
 }
