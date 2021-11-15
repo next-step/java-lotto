@@ -25,15 +25,15 @@ class LottoTest {
     }
 
     @ParameterizedTest
-    @MethodSource("provideLottoNumbers")
-    @DisplayName("로또번호를 당첨번호와 매칭했을 떄, 예상된 값이랑 맞는지 확인")
+    @MethodSource("provideWiningNumbers")
+    @DisplayName("당첨번호와 비교했을 때, 예상된 값이랑 맞는지 확인")
     void isMatchExpected(List<Integer> provided, int expected) {
-        List<Integer> winnerNumbers = Arrays.asList(1, 2, 3, 4, 11, 12);
-        Lotto lotto = new Lotto(new Numbers(provided));
-        assertThat(lotto.isMatchExpected(winnerNumbers, expected)).isTrue();
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 11, 12);
+        Lotto lotto = new Lotto(new Numbers(lottoNumbers));
+        assertThat(lotto.isMatchExpected(provided, expected)).isTrue();
     }
 
-    private static Stream<Arguments> provideLottoNumbers() {
+    private static Stream<Arguments> provideWiningNumbers() {
         return Stream.of(
                 Arguments.of(Arrays.asList(1, 2, 3, 35, 37, 26), 3),
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 37, 26), 4),

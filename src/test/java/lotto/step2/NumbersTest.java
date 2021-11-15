@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class NumbersTest {
@@ -22,11 +23,12 @@ class NumbersTest {
         assertThat(numbers).size().isEqualTo(6);
         assertThat(numbers).doesNotContain(47);
         assertThat(numbers).doesNotContain(0);
+        assertThat(numbers.stream().distinct().collect(toList())).size().isEqualTo(6);
     }
 
     @ParameterizedTest
     @MethodSource("provideWiningNumbers")
-    @DisplayName("로또번호 == 당첨번호 => 몇개 번호가 당첨되었나?")
+    @DisplayName("당첨번호(provided)와 비교했을 때, 일치한 번호 개수(expected)")
     void getCountOfMatch(List<Integer> provided, int expected) {
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         Numbers numbers = new Numbers(lottoNumbers);

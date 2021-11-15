@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Lotto {
 
-    private Numbers numbers;
+    private final Numbers numbers;
 
     public Lotto() {
         this.numbers = new Numbers();

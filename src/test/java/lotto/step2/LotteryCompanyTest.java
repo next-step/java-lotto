@@ -58,8 +58,8 @@ class LotteryCompanyTest {
 
     @ParameterizedTest
     @MethodSource("provideWinnerNumberRate")
-    @DisplayName("당첨번호와 비교 했을때, 주어진 금액에 대한 총 수익률 계산")
-    void rate(String provided, double rate) {
+    @DisplayName("당첨번호와 비교 했을때, 로또구매 금액과 당첨수에 따른 총 수익률 계산")
+    void getRateOfReturn(String provided, double rate) {
         LotteryCompany company = new LotteryCompany(provided, lotteries);
         assertThat(company.getRateOfReturn(14000)).isEqualTo(rate);
     }
