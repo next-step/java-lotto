@@ -7,6 +7,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -29,7 +31,7 @@ class MoneyTest {
     @DisplayName("로또를 살 수 있는 개수를 반환한다.")
     @ParameterizedTest
     @CsvSource(value = {"5000:1000:5", "10000:1000:10"}, delimiter = ':')
-    void NumberToBuyTest(String input, int priceMoney, int expect) {
+    void NumberToBuyTest(String input, BigDecimal priceMoney, int expect) {
         Money myMoney = Money.create(input);
         Money price = Money.create(priceMoney);
 

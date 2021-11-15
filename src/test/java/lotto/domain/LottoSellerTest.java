@@ -8,6 +8,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -25,7 +27,7 @@ class LottoSellerTest {
     @DisplayName("Money / price 에 맞게 로또를 반환한다.")
     @ParameterizedTest
     @CsvSource(value = {"5000:1000:5", "4500:500:9", "10000:900:11"}, delimiter = ':')
-    void buyLottoTest(int money, int price, int expect) {
+    void buyLottoTest(BigDecimal money, BigDecimal price, int expect) {
         lottoSeller = LottoSeller.create(Money.create(price), lottoGenerator);
 
         Lottos lottos = lottoSeller.buyLotto(Money.create(money));
@@ -36,7 +38,7 @@ class LottoSellerTest {
     @DisplayName("Money 가 price 보다 작으면 illegal argument exception")
     @ParameterizedTest
     @CsvSource(value = {"900:1000", "499:500", "899:900"}, delimiter = ':')
-    void buyLottoLessMoneyTest(int money, int price) {
+    void buyLottoLessMoneyTest(BigDecimal money, BigDecimal price) {
         lottoSeller = LottoSeller.create(Money.create(price), lottoGenerator);
 
         assertThatIllegalArgumentException().isThrownBy(() -> lottoSeller.buyLotto(Money.create(money)));

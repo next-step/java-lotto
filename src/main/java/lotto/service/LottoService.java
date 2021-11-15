@@ -6,6 +6,7 @@ import lotto.domain.LottoSeller;
 import lotto.domain.Wallet;
 import lotto.vo.*;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -18,7 +19,8 @@ public class LottoService {
 
     public LottoService() {
         NumberGenerateStrategy strategy = new RandomLottoNumberGenerateStrategy();
-        this.lottoPrice = Money.create(LottoRule.LOTTO_PRICE.getValue());
+        int price = LottoRule.LOTTO_PRICE.getValue();
+        this.lottoPrice = Money.create(BigDecimal.valueOf(price));
         this.lottoGenerator = LottoGenerator.create(strategy);
         this.lottoSeller = LottoSeller.create(lottoPrice, lottoGenerator);
     }
@@ -37,7 +39,8 @@ public class LottoService {
 
     private Lotto createWinningLottoWithString(String winningLottoString) {
         return Lotto.create(Arrays.stream(winningLottoString.split(","))
-                .map(LottoNumber::create)
+                .map(Integer::parseInt)
+                .map(LottoNumber::getCachedLottoNumber)
                 .collect(Collectors.toList()));
     }
 }

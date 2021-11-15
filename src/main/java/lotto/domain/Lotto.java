@@ -6,6 +6,7 @@ import lotto.vo.LottoRule;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -27,14 +28,12 @@ public class Lotto {
     }
 
     public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+        return lottoNumbers.stream()
+                .map(lottoNumber -> LottoNumber.getCachedLottoNumber(lottoNumber.getValue()))
+                .collect(Collectors.toList());
     }
 
-    public WinningRank checkWinning(Lotto winningLotto) {
-        return WinningRank.getWinningRankWithMatchCount(getCountOfMatch(winningLotto));
-    }
-
-    private long getCountOfMatch(Lotto winningLotto) {
+    public long getCountOfMatch(Lotto winningLotto) {
         return lottoNumbers.stream()
                 .filter(winningLotto.lottoNumbers::contains)
                 .count();
@@ -42,8 +41,12 @@ public class Lotto {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Lotto lotto = (Lotto) o;
         return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
@@ -51,5 +54,12 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "lottoNumbers=" + lottoNumbers +
+                '}';
     }
 }

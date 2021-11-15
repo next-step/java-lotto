@@ -1,5 +1,7 @@
 package lotto.vo;
 
+import java.math.BigDecimal;
+
 public enum LottoRule {
 
     START_NUMBER(1),

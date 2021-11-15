@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -53,14 +54,14 @@ class WalletTest {
                         LottoNumber.create(8)
                 ))
         ));
-        Money money = Money.create(3000);
+        Money money = Money.create(BigDecimal.valueOf(3000));
         wallet = Wallet.create(lottos, money);
     }
 
     @DisplayName("로또 당첨을 확인한 뒤 WinningHistory를 반환한다.")
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,6:4001550000:2:1:1:0", "2,3,4,5,6,7:2004500000:1:3:0:0"}, delimiter = ':')
-    void buyLottoTest(String winningLottoStr, long winningMoney,
+    void buyLottoTest(String winningLottoStr, BigDecimal winningMoney,
                       int firstCount, int secondCount, int thirdCount, int fourthCount) {
         Lotto winningLotto = Lotto.create(Arrays.stream(winningLottoStr.split(","))
                 .map(LottoNumber::create)

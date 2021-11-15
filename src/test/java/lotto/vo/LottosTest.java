@@ -39,7 +39,7 @@ class LottosTest {
                 LottoNumber.create(4),
                 LottoNumber.create(5),
                 LottoNumber.create(6))));
-        
+
         assertThat(actual.size()).isNotEqualTo(lottoList.size());
     }
 

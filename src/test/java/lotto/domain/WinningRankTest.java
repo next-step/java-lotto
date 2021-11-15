@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,7 +18,7 @@ class WinningRankTest {
     @DisplayName("match count 에 맞는 enum을 반환한다.")
     @ParameterizedTest
     @CsvSource(value = {"6:1:2000000000", "5:2:1500000", "4:3:50000", "3:4:5000"}, delimiter = ':')
-    void getWinningRankTest(long matchCount, int rank, int reward) {
+    void getWinningRankTest(long matchCount, int rank, BigDecimal reward) {
         WinningRank winningRank = WinningRank.getWinningRankWithMatchCount(matchCount);
 
         assertThat(winningRank.getRank()).isEqualTo(rank);

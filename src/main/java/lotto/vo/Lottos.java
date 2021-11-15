@@ -23,12 +23,6 @@ public class Lottos {
         return lottos.size();
     }
 
-    public List<WinningRank> checkWinning(Lotto winningLotto) {
-        return lottos.stream()
-                .map(lotto -> lotto.checkWinning(winningLotto))
-                .collect(Collectors.toList());
-    }
-
     public List<Lotto> getLottoList() {
         return lottos.stream()
                 .map(lotto -> Lotto.create(lotto.getLottoNumbers()))

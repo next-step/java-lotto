@@ -4,6 +4,7 @@ import lotto.vo.Lottos;
 import lotto.vo.Money;
 import lotto.vo.WinningHistory;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Wallet {
@@ -21,11 +22,11 @@ public class Wallet {
     }
 
     public WinningHistory checkWinning(Lotto winningLotto) {
-        List<WinningRank> winningRanks = lottos.checkWinning(winningLotto);
+        List<WinningRank> winningRanks = WinningRank.checkWinning(lottos, winningLotto);
         Money winningMoney = winningRanks.stream()
                 .map(winningRank -> winningRank.getReward())
                 .reduce((left, right) -> left.add(right))
-                .orElseGet(() -> Money.create(0));
+                .orElseGet(() -> Money.create(BigDecimal.ZERO));
         return WinningHistory.create(originMoney, winningRanks, winningMoney);
     }
 

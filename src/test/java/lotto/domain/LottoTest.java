@@ -37,18 +37,17 @@ class LottoTest {
         Lotto actual = Lotto.create(createLottoNumberList(input));
         Lotto expect = Lotto.create(createLottoNumberList(expectStr));
 
-
-        assertThat(actual).isNotEqualTo(expect);
+        assertThat(actual).isEqualTo(expect);
     }
 
-    @DisplayName("checkWinning() 일치하는 WinningRank를 반환한다.")
+    @DisplayName("getCountOfMatch() 일치하는 갯수를 반환한다.")
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,6:1,2,3,7,8,9:3", "1,2,3,4,5,6:7,8,9,10,11,12:0", "10,5,34,42,35,45:5,11,12,13,14,15:1", "1,2,3,4,5,6:1,2,3,4,5,6:6"}, delimiter = ':')
     void sortTest(String input, String compareStr, long expect) {
         Lotto myLotto = Lotto.create(createLottoNumberList(input));
         Lotto winningLotto = Lotto.create(createLottoNumberList(compareStr));
 
-        assertThat(myLotto.checkWinning(winningLotto)).isEqualTo(WinningRank.getWinningRankWithMatchCount(expect));
+        assertThat(myLotto.getCountOfMatch(winningLotto)).isEqualTo(expect);
     }
 
     private List<LottoNumber> createLottoNumberList(String input) {
