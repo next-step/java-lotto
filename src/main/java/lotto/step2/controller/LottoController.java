@@ -13,7 +13,7 @@ public class LottoController {
     public static void main(String[] args) {
 
         // 복권가게에 로또 주문
-        int orderPrice = printInputOrderPrice();
+        String orderPrice = printInputOrderPrice();
         LotteryStore store = new LotteryStore(orderPrice);
 
         // 로또 주문 개수 출력
@@ -30,7 +30,7 @@ public class LottoController {
         printWinnerStatics(company);
 
         // 총 수익률 출력
-        printRateOfReturn(company, orderPrice);
+        printRateOfReturn(company, Integer.parseInt(orderPrice));
     }
 
 }

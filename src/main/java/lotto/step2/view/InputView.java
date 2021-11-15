@@ -10,9 +10,9 @@ public final class InputView {
         throw new AssertionError();
     }
 
-    public static int printInputOrderPrice() {
+    public static String printInputOrderPrice() {
         System.out.println("구매 금액을 입력해주세요");
-        return Integer.parseInt(sc.nextLine());
+        return sc.nextLine();
     }
 
     public static String printWinningNumber() {
