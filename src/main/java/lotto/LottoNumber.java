@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
@@ -7,15 +9,16 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static java.lang.String.format;
+import static java.util.stream.Collectors.toList;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    public static final int MIN_NUMBER = 1;
-    public static final int MAX_NUMBER = 45;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
     public static final String INVALID_RANGE_ERROR_MESSAGE = format("%s ~ %s 의 값만 사용가능합니다.", MIN_NUMBER, MAX_NUMBER);
     private static final Map<Integer, LottoNumber> CACHED_LOTTO_NUMBERS = initCachedLottoNumbers();
 
-    private static Map<Integer, LottoNumber> initCachedLottoNumbers() {
+    private static  Map<Integer, LottoNumber> initCachedLottoNumbers() {
         return IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
                 .boxed()
                 .collect(Collectors.toMap(Function.identity(), LottoNumber::new));
@@ -43,6 +46,18 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (!CACHED_LOTTO_NUMBERS.containsKey(number)) {
             throw new IllegalArgumentException(INVALID_RANGE_ERROR_MESSAGE);
         }
+    }
+
+    public static List<LottoNumber> listOf(int size, ShuffleStrategy shuffleStrategy) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>(CACHED_LOTTO_NUMBERS.values());
+        shuffleStrategy.shuffle(lottoNumbers);
+        return limitFromStart(lottoNumbers, size);
+    }
+
+    private static List<LottoNumber> limitFromStart(List<LottoNumber> lottoNumbers, int closedEndIndex) {
+        return lottoNumbers.stream()
+                .limit(closedEndIndex)
+                .collect(toList());
     }
 
     @Override

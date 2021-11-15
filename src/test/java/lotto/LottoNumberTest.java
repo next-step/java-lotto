@@ -7,6 +7,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -60,6 +62,27 @@ class LottoNumberTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> LottoNumber.from(invalidRangeNumber))
                 .withMessage(LottoNumber.INVALID_RANGE_ERROR_MESSAGE);
+    }
+
+
+    @Test
+    void listOf() {
+        //given
+        int size = 5;
+
+        //when
+        List<LottoNumber> lottoNumbers = LottoNumber.listOf(size, noShuffleStrategy());
+
+        //then
+        List<LottoNumber> expectedLottoNumbers = IntStream.rangeClosed(1, size)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
+        assertThat(lottoNumbers).isEqualTo(expectedLottoNumbers);
+    }
+
+    private ShuffleStrategy noShuffleStrategy() {
+        return (lottoNumbers11) -> {
+        };
     }
 
 }
