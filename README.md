@@ -5,7 +5,7 @@
   - 특정개수의 셔플된 LottoNumber 를 반환할 수 있다.
   - 전략패턴으로 셔플하는로직을 테스트할 수 있게한다.
   
-- [ ] LottoNumbers (일급컬렉션) 구현 
+- [x] LottoNumbers (일급컬렉션) 구현 
   - LottoNumber를 정렬된 상태로 반환한다.
   
 - [ ] LottoTicket 구현
