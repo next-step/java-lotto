@@ -46,4 +46,20 @@ class LottoNumberTest {
         assertThat(lottoNumbers).isEqualTo(asList(smallLottoNumber, bigLottoNumber));
     }
 
+    @DisplayName("캐시 잘 되는지")
+    @ParameterizedTest(name = "[{index}] number: {0}")
+    @ValueSource(ints = {1, 45})
+    void cache(int number) {
+        assertThat(LottoNumber.from(number) == LottoNumber.from(number)).isTrue();
+    }
+
+    @DisplayName("범위 밖의 숫자로 캐시된 데이터를 가져오면 예외를 던진다.")
+    @ParameterizedTest(name = "[{index}] number: {0}")
+    @ValueSource(ints = {0, 46})
+    void create_InvalidRangeNumberInCachedNumbers(int invalidRangeNumber) {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> LottoNumber.from(invalidRangeNumber))
+                .withMessage(LottoNumber.INVALID_RANGE_ERROR_MESSAGE);
+    }
+
 }
