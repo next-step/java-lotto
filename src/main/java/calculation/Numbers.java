@@ -5,15 +5,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Number {
+public class Numbers {
     private static final String NEGATIVE_NUMBER_ERROR_MESSAGE = "error : 음수는 사용할수 없습니다.";
+    private static final int NEGATIVE_NUMBER_ZERO = 0;
     private final List<Integer> number;
 
-    public Number(String[] numbers) {
+    public Numbers(String[] numbers) {
         this(changeToIntegerArrayType(numbers));
     }
 
-    public Number(List<Integer> numbers) {
+    public Numbers(List<Integer> numbers) {
         checkNegativeNumber(numbers);
         this.number = Collections.unmodifiableList(numbers);
     }
@@ -27,10 +28,10 @@ public class Number {
 
     private void checkNegativeNumber(List<Integer> numbers) {
         long count = numbers.stream()
-                .filter(number -> number < 0)
+                .filter(number -> number < NEGATIVE_NUMBER_ZERO)
                 .count();
 
-        if (count > 0) {
+        if (count > NEGATIVE_NUMBER_ZERO) {
             throw new IllegalArgumentException(NEGATIVE_NUMBER_ERROR_MESSAGE);
         }
     }
