@@ -7,7 +7,6 @@ public class DelimiterRegex {
 
     private static final String REGEX_CUSTOM_DELIMITER = "^\\/\\/(.+)\\\\n";
     private static final String REGEX_INPUT = "\\\\n(.+)";
-
     private static final Pattern PATTERN_CUSTOM_DELIMITER = Pattern.compile(REGEX_CUSTOM_DELIMITER);
     private static final Pattern PATTERN_INPUT = Pattern.compile(REGEX_INPUT);
     private static final Integer DELIMITER_GROUP = 1;
