@@ -1,9 +1,11 @@
 package lotto.step2.view;
 
 import lotto.step2.domain.Lotteries;
-import lotto.step2.domain.LotteryCompany;
+import lotto.step2.domain.Statics;
+import lotto.step2.domain.Lotto;
+import lotto.step2.domain.Rank;
 
-import static lotto.step2.domain.LotteryCompany.*;
+import java.util.Collections;
 
 public final class ResultView {
 
@@ -16,24 +18,37 @@ public final class ResultView {
     }
 
     public static void printOrderLottoNumber(Lotteries lotteries) {
-        lotteries.getLotteries().stream()
-                .map(lotto -> lotto.getNumbers().getNumbers())
-                .forEach(System.out::println);
+        lotteries.getLotteries()
+                .stream()
+                .map(Lotto::getNumbers)
+                .forEach(s -> {
+                    Collections.sort(s);
+                    System.out.println(s);
+                });
         System.out.println();
     }
 
-    public static void printWinnerStatics(LotteryCompany company) {
-        System.out.println("당첨 통계");
-        System.out.println("----------");
-        for (int i = 3; i <= 6; i++) {
-            System.out.println(i + "개 일치("
-                    + company.getPrizeMoney().get(i) + "원) - "
-                    + company.getTotalCountOfMatch(i));
+    public static void printWinningStatics(Statics statics) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("당첨 통계");
+        builder.append("\n");
+        builder.append("----------");
+        builder.append("\n");
+        for (int count = 3; count <= 6; count++) {
+            Rank rank = Rank.valueOf(count);
+            builder.append(rank.getCountOfMatch());
+            builder.append("개 일치(");
+            builder.append(rank.getPrizeMoney());
+            builder.append("원) - ");
+            builder.append(statics.totalCountOfMatch(count));
+            builder.append("개");
+            builder.append("\n");
         }
+        System.out.print(builder);
     }
 
-    public static void printRateOfReturn(LotteryCompany company, int orderPrice) {
-        System.out.println("총 수익률은 " + company.getRateOfReturn(orderPrice) + "입니다.");
+    public static void printRateOfReturn(double profit) {
+        System.out.println("총 수익률은 " + profit + "입니다.");
     }
 
 }

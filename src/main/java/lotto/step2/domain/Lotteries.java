@@ -1,7 +1,6 @@
 package lotto.step2.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Lotteries {
@@ -11,13 +10,19 @@ public class Lotteries {
     public Lotteries(int orderCount) {
         createLotteries(orderCount);
     }
-    // 테스트 편의 생성자
-    public Lotteries(Lotto ... lotto) {
-        this.lotteries = Arrays.asList(lotto);
+
+    public Lotteries(List<Lotto> lotteries) {
+        this.lotteries = lotteries;
     }
 
     public List<Lotto> getLotteries() {
         return lotteries;
+    }
+
+    public int totalCountOfMatch(Lotto winningNumbers, int count) {
+        return (int) lotteries.stream()
+                .filter(lotto -> lotto.isCountOfMatch(winningNumbers, count))
+                .count();
     }
 
     private void createLotteries(int orderCount) {

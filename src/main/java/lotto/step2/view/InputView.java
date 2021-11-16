@@ -15,11 +15,11 @@ public final class InputView {
         return sc.nextLine();
     }
 
-    public static String printWinningNumber() {
+    public static String printInputWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String input = sc.nextLine();
+        String winningNumber = sc.nextLine();
         System.out.println();
-        return input;
+        return winningNumber;
     }
 
 }

@@ -1,34 +1,33 @@
 package lotto.step2.domain;
 
-public class LotteryStore {
+public class Store {
 
     private static final int LOTTO_PRICE = 1000;
-    private Lotteries lotteries;
-    private int orderCount;
-    private int orderPrice;
 
-    private LotteryStore() {}
+    private final int orderPrice;
+    private final int orderCount;
+    private final Lotteries lotteries;
 
-    public LotteryStore(String orderPrice) {
+    public Store(String orderPrice) {
         checkOrderPrice(orderPrice);
         this.orderPrice = Integer.parseInt(orderPrice);
         this.orderCount = this.orderPrice / LOTTO_PRICE;
         lotteries = new Lotteries(orderCount);
     }
 
-    public int getOrderCount() {
-        return orderCount;
-    }
-
     public int getOrderPrice() {
         return orderPrice;
+    }
+
+    public int getOrderCount() {
+        return orderCount;
     }
 
     public Lotteries getLotteries() {
         return lotteries;
     }
 
-    private void checkOrderPrice(String orderPrice) {
+    private static void checkOrderPrice(String orderPrice) {
         for (char c : orderPrice.toCharArray()) {
             if (!Character.isDigit(c)) {
                 throw new IllegalArgumentException("숫자를 입력해주세요");
