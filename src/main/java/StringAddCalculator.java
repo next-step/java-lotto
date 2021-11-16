@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,11 +23,10 @@ public class StringAddCalculator {
     }
 
     private static int sum(String[] numbers) {
-        int result = 0;
-        for (String n : numbers) {
-            result += parseInt(n);
-        }
-        return result;
+        return Arrays
+            .stream(numbers)
+            .mapToInt(StringAddCalculator::parseInt)
+            .sum();
     }
 
     private static String[] split(String input) {
@@ -39,7 +39,7 @@ public class StringAddCalculator {
         return input.split(",|:");
     }
 
-    public static int parseInt(String input) {
+    private static int parseInt(String input) {
         int number = Integer.parseInt(input);
         if (number < 0) {
             throw new RuntimeException();
