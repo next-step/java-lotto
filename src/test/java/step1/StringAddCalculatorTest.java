@@ -12,51 +12,51 @@ public class StringAddCalculatorTest {
 
     @Test
     void stringAddCalculator() {
-        int ans = StringAddCalculator.calculate("1,2:3");
+        int ans = StringAddCalculator.calculate(new Expression("1,2:3"));
         assertEquals(6, ans);
     }
 
     @ParameterizedTest
     @NullSource
     void expressionIsNull(String expression) {
-        int ans = StringAddCalculator.calculate(expression);
+        int ans = StringAddCalculator.calculate(new Expression(expression));
         assertEquals(0, ans);
     }
 
     @ParameterizedTest
     @EmptySource
     void expressionIsEmpty(String expression) {
-        int ans = StringAddCalculator.calculate(expression);
+        int ans = StringAddCalculator.calculate(new Expression(expression));
         assertEquals(0, ans);
     }
 
     @Test
     void calculate() {
-        int ans = StringAddCalculator.calculate("1,2:3,4");
+        int ans = StringAddCalculator.calculate(new Expression("1,2:3,4"));
         assertEquals(10, ans);
     }
 
     @Test
     void expressionIsOneNumber() {
-        int ans = StringAddCalculator.calculate("1");
+        int ans = StringAddCalculator.calculate(new Expression("1"));
         assertEquals(1, ans);
     }
 
     @Test
     void runtimeExceptionBecauseInputNumberLessThan0() {
-        assertThatThrownBy(() -> StringAddCalculator.calculate("-1,1"))
+        assertThatThrownBy(() -> StringAddCalculator.calculate(new Expression("-1,1")))
             .isInstanceOf(RuntimeException.class);
     }
 
     @Test
     void runtimeExceptionBecauseInputIsNotNumber() {
-        assertThatThrownBy(() -> StringAddCalculator.calculate("1,a"))
+        assertThatThrownBy(() -> StringAddCalculator.calculate(new Expression("1,a")))
             .isInstanceOf(RuntimeException.class);
     }
 
     @Test
     void calculateCustomDelimiter() {
-        int ans = StringAddCalculator.calculate("//;\n1;2;3");
+        int ans = StringAddCalculator.calculate(new Expression("//;\n1;2;3"));
         assertEquals(6, ans);
     }
 }
