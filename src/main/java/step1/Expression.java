@@ -1,7 +1,5 @@
 package step1;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,13 +11,13 @@ public class Expression {
     private static final int CUSTOM_DELIM_INDEX = 1;
     private static final int CUSTOM_EXPRESSION_INDEX = 2;
 
-    private final List<Number> numbers;
+    private Numbers numbers;
 
     public Expression(final String input) {
-        numbers = new LinkedList<>();
+        numbers = new Numbers();
         if (isValid(input)) {
             String[] stringNums = generateStringNums(input);
-            initNumbers(stringNums);
+            numbers = new Numbers(stringNums);
         }
     }
 
@@ -40,17 +38,11 @@ public class Expression {
         return stringNums;
     }
 
-    private void initNumbers(String[] stringNums) {
-        for (String num : stringNums) {
-            numbers.add(new Number(num));
-        }
-    }
-
     public boolean hasNextNumber() {
         return !numbers.isEmpty();
     }
 
     public Number nextNumber() {
-        return numbers.remove(0);
+        return numbers.nextNumber();
     }
 }
