@@ -10,8 +10,8 @@ public class Expression {
     private static final String STANDARD_REGEX = ",|:";
     private static final String CUSTOM_CHECK_REGEX = "//(.)\n(.*)";
     private static final String CUSTOM_REGEX = ",|:|\\%s";
-    private static final int CUSTOM_DELIM = 1;
-    private static final int CUSTOM_EXPRESSION = 2;
+    private static final int CUSTOM_DELIM_INDEX = 1;
+    private static final int CUSTOM_EXPRESSION_INDEX = 2;
 
     private final List<Number> numbers;
 
@@ -32,9 +32,9 @@ public class Expression {
 
         Matcher matcher = Pattern.compile(CUSTOM_CHECK_REGEX).matcher(input);
         if (matcher.find()) {
-            String customDelim = matcher.group(CUSTOM_DELIM);
+            String customDelim = matcher.group(CUSTOM_DELIM_INDEX);
             String regex = String.format(CUSTOM_REGEX, customDelim);
-            stringNums = matcher.group(CUSTOM_EXPRESSION).split(regex);
+            stringNums = matcher.group(CUSTOM_EXPRESSION_INDEX).split(regex);
         }
 
         return stringNums;
