@@ -15,8 +15,9 @@ public class ExpressionParser {
     public static List<String> parse(String calculationInput) {
         Matcher matcher = regexPattern.matcher(calculationInput);
         ParserResult result = findPattern(matcher);
-        if (result != null)
+        if (result != null){
             return new CustomSplitter(result.delimiter).split(result.input);
+        }
         return defaultSplitter.split(calculationInput);
     }
 
