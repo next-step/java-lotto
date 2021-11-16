@@ -18,6 +18,14 @@ class LottoTicketTest {
     }
 
     @Test
+    @DisplayName("숫자 6개로 로또 티켓 한장은 정렬되어 발급된다.")
+    void ofSorted() {
+        LottoTicket lottoTicket = LottoTicket.of(Arrays.asList(3, 4, 6, 5, 1, 2));
+        assertThat(lottoTicket.getLottoNumbers()).containsExactly(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
+    }
+
+    @Test
     @DisplayName("티켓 한장을 발급할 때 숫자가 6개가 아니면 에러")
     void ofFail() {
         assertThatIllegalArgumentException()
@@ -30,4 +38,5 @@ class LottoTicketTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 5)));
     }
+
 }

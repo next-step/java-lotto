@@ -1,5 +1,6 @@
 package com.kakao.lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,10 +14,15 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public List<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
+    }
+
     public static LottoTicket of(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = numbers.stream()
                 .map(LottoNumber::of)
                 .distinct()
+                .sorted()
                 .collect(Collectors.toList());
         return new LottoTicket(lottoNumbers);
     }
