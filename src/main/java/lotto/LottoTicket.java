@@ -2,7 +2,9 @@ package lotto;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -27,6 +29,15 @@ public class LottoTicket {
         if (Objects.isNull(object)) {
             throw new IllegalArgumentException("필수 값이 없습니다.");
         }
+    }
+
+    public Statistics rank(LottoNumbers lastWinningNumbers) {
+        Map<Grade, Long> grades = lottoLines.stream()
+                .map(lottoLine -> lottoLine.rank(lastWinningNumbers))
+                .filter(rank -> rank != Grade.BANG)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        Dollars dollars = new Dollars(lottoLines.size() * Dollars.DOLLAR_UNIT);
+        return new Statistics(grades, dollars);
     }
 
     public List<LottoNumbers> getLottoLines() {
