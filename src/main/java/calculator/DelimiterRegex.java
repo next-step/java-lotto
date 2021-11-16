@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.exception.CustomFormaterException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,6 +32,6 @@ public class DelimiterRegex {
             return matcher.group(DELIMITER_GROUP);
         }
 
-        throw new IllegalArgumentException("커스텀 계산 식이 아닙니다.");
+        throw new CustomFormaterException();
     }
 }
