@@ -11,4 +11,11 @@ public class NumberTest {
         Number number2 = new Number(1);
         assertThat(number1).isEqualTo(number2);
     }
+
+    @Test
+    void checkBiggerThanZeroCheck() {
+        assertThatThrownBy(() -> {
+            Number number = new Number(-10);
+        }).isInstanceOf(RuntimeException.class).hasMessageContaining("0보다 작은 값이 존재합니다.");
+    }
 }

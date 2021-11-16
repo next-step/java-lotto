@@ -1,5 +1,9 @@
 package step1.util;
 
+import step1.domain.Number;
+import step1.domain.Numbers;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -11,24 +15,24 @@ public class InputUtil {
     private InputUtil() {
     }
 
-    public static List<Integer> paresNumberList(String input) {
+    public static Numbers getNumbers(String input) {
+        if (nullCheck(input)) {
+            List<Integer> numberList = new ArrayList<>();
+            numberList.add(0);
+            Numbers numbers = new Numbers(numberList);
+            return numbers;
+        }
+
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
         if (m.find()) {
             List<String> numberList = Arrays.asList(m.group(2).split(m.group(1)));
             checkNumeric(numberList);
-            checkBiggerThanZero(numberList);
-            return mapStringToInt(numberList);
+            return new Numbers(mapStringToInt(numberList));
         }
-        List<String> numberList = Arrays.asList(input.split(";|,"));
-        checkNumeric(numberList);
-        checkBiggerThanZero(numberList);
-        return mapStringToInt(numberList);
-    }
 
-    public static void checkBiggerThanZero(List<String> input) {
-        if (input.stream().anyMatch(i -> Integer.parseInt(i) > 5)) {
-            throw new RuntimeException("0보다 작은 값이 존재합니다.");
-        }
+        List<String> numberList = Arrays.asList(input.split(":|,"));
+        checkNumeric(numberList);
+        return new Numbers(mapStringToInt(numberList));
     }
 
     public static void checkNumeric(List<String> input) {
@@ -43,4 +47,10 @@ public class InputUtil {
         return input.stream().map(i -> Integer.parseInt(i)).collect(Collectors.toList());
     }
 
+    private static boolean nullCheck(String input) {
+        if (input == null || input.equals("") ) {
+            return true;
+        }
+        return false;
+    }
 }

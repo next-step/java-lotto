@@ -6,6 +6,10 @@ import java.util.List;
 public class Numbers {
     private List<Number> numbers;
 
+    public List<Number> getNumbers() {
+        return numbers;
+    }
+
     public Numbers(List<Integer> numberList) {
         List<Number> numbers = new ArrayList<Number>();
         for (Integer number : numberList) {
