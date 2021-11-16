@@ -7,8 +7,8 @@ public class InputView {
 
     private final InputStream inputStream;
 
-    private InputView(InputStream inputStream1) {
-        this.inputStream = inputStream1;
+    public InputView(InputStream inputStream) {
+        this.inputStream = inputStream;
     }
 
     public int inputLottoPerchase() {
