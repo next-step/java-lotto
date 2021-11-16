@@ -1,6 +1,5 @@
 package step1.util;
 
-import step1.domain.Number;
 import step1.domain.Numbers;
 
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ public class InputUtil {
     }
 
     public static Numbers getNumbers(String input) {
-        if (nullCheck(input)) {
+        if (checkNull(input)) {
             List<Integer> numberList = new ArrayList<>();
             numberList.add(0);
             Numbers numbers = new Numbers(numberList);
@@ -47,7 +46,7 @@ public class InputUtil {
         return input.stream().map(i -> Integer.parseInt(i)).collect(Collectors.toList());
     }
 
-    private static boolean nullCheck(String input) {
+    private static boolean checkNull(String input) {
         if (input == null || input.equals("") ) {
             return true;
         }
