@@ -3,6 +3,7 @@ package lotto.model;
 public class PurchaseInfo {
 
     private final int amount;
+    private final int LOTTO_PRICE = 1000;
 
     public PurchaseInfo(int amount){
         checkValidation(amount);
@@ -13,4 +14,7 @@ public class PurchaseInfo {
         if(amount < 0) throw new IllegalArgumentException("구매액은 음수일 수 없습니다.");
     }
 
+    public int getLottoCount() {
+        return this.amount / LOTTO_PRICE;
+    }
 }
