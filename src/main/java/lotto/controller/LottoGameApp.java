@@ -1,11 +1,12 @@
 package lotto.controller;
 
 import lotto.model.LotteryTicket;
-import lotto.model.LotteryTicketGenerator;
 import lotto.model.LotteryTickets;
 import lotto.model.PurchaseInfo;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.*;
 
 public class LottoGameApp {
 
@@ -14,13 +15,12 @@ public class LottoGameApp {
             int amount = InputView.getIntValue("구입금액을 입력해 주세요.");
             PurchaseInfo purchaseInfo = new PurchaseInfo(amount);
             ResultView.purchaseCount(purchaseInfo.getLottoCount());
-            LotteryTickets tickets = new LotteryTickets(purchaseInfo.getLottoCount());
-            for(LotteryTicket ticket : tickets.getTickets()){
-                System.out.println(ticket.getNumbers());
-            }
+            ResultView.printTickets(new LotteryTickets(purchaseInfo.getLottoCount()));
+            List<Integer> winning = InputView.getCommaSplitIntList("지난 주 당첨 번호를 입력해 주세요.");
+            LotteryTicket winningTicket = new LotteryTicket(winning);
+
         } catch (Exception ex) {
             System.out.println(ex.getMessage() + " 게임을 종료합니다.");
         }
     }
-
 }

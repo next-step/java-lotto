@@ -6,10 +6,10 @@ import java.util.stream.IntStream;
 
 public class LotteryTicketGenerator {
 
-    private final static int NUMBER_START = 1;
-    private final static int NUMBER_END = 25;
-    private final static int CHOOSE_COUNT = 6;
-    private final static List<Integer> numbers = IntStream.rangeClosed(NUMBER_START,NUMBER_END)
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
+    private static final int CHOOSE_COUNT = 6;
+    private static final List<Integer> numbers = IntStream.rangeClosed(MIN_NUMBER,MAX_NUMBER)
                                                         .boxed()
                                                         .collect(Collectors.toList());
 
