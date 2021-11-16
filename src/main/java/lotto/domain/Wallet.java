@@ -9,16 +9,15 @@ import java.util.List;
 
 public class Wallet {
 
-    private final Lottos lottos;
-    private final Money originMoney;
+    private Lottos lottos;
+    private Money myMoney;
 
-    private Wallet(Lottos lottos, Money originMoney) {
-        this.lottos = lottos;
-        this.originMoney = originMoney;
+    private Wallet(Money myMoney) {
+        this.myMoney = myMoney;
     }
 
-    public static Wallet create(Lottos lottos, Money money) {
-        return new Wallet(lottos, money);
+    public static Wallet create(Money money) {
+        return new Wallet(money);
     }
 
     public WinningHistory checkWinning(Lotto winningLotto) {
@@ -27,7 +26,16 @@ public class Wallet {
                 .map(winningRank -> winningRank.getReward())
                 .reduce((left, right) -> left.add(right))
                 .orElseGet(() -> Money.create(BigDecimal.ZERO));
-        return WinningHistory.create(originMoney, winningRanks, winningMoney);
+        return WinningHistory.create(myMoney, winningRanks, winningMoney);
     }
 
+    public Money getMoneyToBuy() {
+        Money havingMoney = Money.create(myMoney.getValue());
+        myMoney = Money.create(BigDecimal.ZERO);
+        return havingMoney;
+    }
+
+    public void saveLottos(Lottos lottos) {
+        this.lottos = lottos;
+    }
 }

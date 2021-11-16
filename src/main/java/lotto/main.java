@@ -16,9 +16,9 @@ public class main {
         OutputView outputView = new OutputView();
         Money money = inputView.inputMoney();
 
-        LottoService lottoService = new LottoService();
+        LottoService lottoService = new LottoService(money);
 
-        Lottos lottos = lottoService.buyLotto(money);
+        Lottos lottos = lottoService.buyLotto();
 
         outputView.renderWithLottos(lottos);
 

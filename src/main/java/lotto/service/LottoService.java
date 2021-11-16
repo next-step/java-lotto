@@ -17,18 +17,20 @@ public class LottoService {
     private final LottoGenerator lottoGenerator;
     private Wallet wallet;
 
-    public LottoService() {
+    public LottoService(Money money) {
         NumberGenerateStrategy strategy = new RandomLottoNumberGenerateStrategy();
         int price = LottoRule.LOTTO_PRICE.getValue();
         this.lottoPrice = Money.create(BigDecimal.valueOf(price));
         this.lottoGenerator = LottoGenerator.create(strategy);
         this.lottoSeller = LottoSeller.create(lottoPrice, lottoGenerator);
+        this.wallet = Wallet.create(money);
     }
 
 
-    public Lottos buyLotto(Money money) {
+    public Lottos buyLotto() {
+        Money money = wallet.getMoneyToBuy();
         Lottos lottos = lottoSeller.buyLotto(money);
-        wallet = Wallet.create(lottos, money);
+        wallet.saveLottos(lottos);
         return lottos;
     }
 
