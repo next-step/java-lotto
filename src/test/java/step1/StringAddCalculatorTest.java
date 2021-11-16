@@ -11,5 +11,10 @@ public class StringAddCalculatorTest {
         int ans = StringAddCalculator.calculate("1,2:3");
         assertEquals(6, ans);
     }
-    
+
+    @Test
+    void calculateComma() {
+        int ans = StringAddCalculator.calculate("1,2,3,4");
+        assertEquals(10, ans);
+    }
 }
