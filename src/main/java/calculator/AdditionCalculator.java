@@ -1,8 +1,11 @@
 package calculator;
 
+import calculator.exception.AdditionIllegalArgumentException;
+import calculator.exception.AdditionNumberFormatException;
 import calculator.strategy.CustomSplitStrategy;
 import calculator.strategy.DefaultSplitStrategy;
 import calculator.strategy.SplitStrategy;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,22 +15,54 @@ public class AdditionCalculator {
     private static final List<String> DEFAULT_DELIMITERS = Arrays.asList(",", ":");
     private static final String JOIN_DELIMITER = "|";
     private static final String DEFAULT_DELIMITER = String.join(JOIN_DELIMITER, DEFAULT_DELIMITERS);
+    private static final int DEFAULT_VALUE = 0;
 
     private final String input;
 
-    private AdditionCalculator(String s) {
-        this.input = s;
+    private AdditionCalculator(String input) {
+        this.input = input;
     }
 
-    public static AdditionCalculator from(String s) {
-        return new AdditionCalculator(s);
+    public static AdditionCalculator from(String input) {
+        return new AdditionCalculator(input);
     }
 
     public int result() {
-        String[] splitInput = getSplitInput();
+        if (inputNullOrEmpty()) {
+            return DEFAULT_VALUE;
+        }
+
+        try {
+            return sumSplitInput(getSplitInput());
+        } catch (NumberFormatException e) {
+            throw new AdditionNumberFormatException();
+        }
+    }
+
+    private boolean inputNullOrEmpty() {
+        if (input == null || input.trim().isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    private int sumSplitInput(String[] splitInput) {
+        validNegative(splitInput);
+
         return Arrays.stream(splitInput)
             .mapToInt(Integer::parseInt)
             .sum();
+    }
+
+    private void validNegative(String[] splitInput) {
+        long count = Arrays.stream(splitInput)
+            .mapToInt(Integer::parseInt)
+            .filter(num -> num < DEFAULT_VALUE)
+            .count();
+
+        if (count > DEFAULT_VALUE) {
+            throw new AdditionIllegalArgumentException();
+        }
     }
 
     private String[] getSplitInput() {
@@ -41,8 +76,5 @@ public class AdditionCalculator {
     private String[] getSplitInput(SplitStrategy splitStrategy, String delimiter) {
         return splitStrategy.getSplitInput(input, delimiter);
     }
-
-    public static void main(String[] args) {
-        Arrays.stream("1+2+3+4+6".split("\\+")).forEach(num -> System.out.println(num));
-    }
+    
 }

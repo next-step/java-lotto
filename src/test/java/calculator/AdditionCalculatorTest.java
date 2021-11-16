@@ -3,6 +3,8 @@ package calculator;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
+import calculator.exception.AdditionIllegalArgumentException;
+import calculator.exception.AdditionNumberFormatException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -39,7 +41,7 @@ public class AdditionCalculatorTest {
 
     @ParameterizedTest
     @DisplayName("음수가 있을 시 예외처리")
-    @ValueSource(strings = {"1;-1", "-2,3", "3:2,-1"})
+    @ValueSource(strings = {"1:-1", "-2,3", "3:2,-1"})
     void 음수있을시_예외처리(String input) {
         AdditionCalculator calculator = AdditionCalculator.from(input);
         assertThatExceptionOfType(AdditionIllegalArgumentException.class)
