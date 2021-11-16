@@ -5,6 +5,7 @@ import calculator.strategy.DefaultSplitStrategy;
 import calculator.strategy.SplitStrategy;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AdditionCalculator {
 
@@ -39,5 +40,9 @@ public class AdditionCalculator {
 
     private String[] getSplitInput(SplitStrategy splitStrategy, String delimiter) {
         return splitStrategy.getSplitInput(input, delimiter);
+    }
+
+    public static void main(String[] args) {
+        Arrays.stream("1+2+3+4+6".split("\\+")).forEach(num -> System.out.println(num));
     }
 }
