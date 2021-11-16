@@ -1,5 +1,6 @@
 package com.kakao.lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -20,6 +21,13 @@ public class LottoNumber {
         return baseLotto.get(lottoNumber - 1);
     }
 
+    private static List<LottoNumber> createBaseLottoNumber() {
+        return IntStream.range(LOTTO_MIN, LOTTO_MAX + 1)
+                .boxed()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
+
     private static void validate(int input) {
         if (input < LOTTO_MIN || input > LOTTO_MAX) {
             throw new IllegalArgumentException(input + "은 로또 번호에 포함되지 않습니다.");
@@ -30,10 +38,7 @@ public class LottoNumber {
         return value;
     }
 
-    private static List<LottoNumber> createBaseLottoNumber() {
-        return IntStream.range(LOTTO_MIN, LOTTO_MAX + 1)
-                .boxed()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+    public static List<LottoNumber> getBaseLotto() {
+        return Collections.unmodifiableList(baseLotto);
     }
 }
