@@ -14,8 +14,7 @@ public class StringAddCalculator {
             return 0;
         }
 
-        String[] numbers = split(input);
-        return sum(numbers);
+        return sum(split(input));
     }
 
     private static boolean nullOrEmpty(String input) {
@@ -44,6 +43,7 @@ public class StringAddCalculator {
         if (number < 0) {
             throw new RuntimeException();
         }
+
         return number;
     }
 }
