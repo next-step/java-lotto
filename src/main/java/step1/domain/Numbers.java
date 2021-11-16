@@ -1,24 +1,25 @@
 package step1.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Numbers {
-    private List<Number> numbers;
+    private final List<Number> numbers;
 
-    public List<Number> getNumbers() {
-        return numbers;
-    }
-
-    public Numbers(List<Integer> numberList) {
-        List<Number> numbers = new ArrayList<Number>();
-        for (Integer number : numberList) {
+    public Numbers(List<String> numberList) {
+        List<Number> numbers = new ArrayList<>();
+        for (String number : numberList) {
             numbers.add(new Number(number));
         }
         this.numbers = numbers;
     }
 
-    public Number add() {
+    public List<Number> getNumbers() {
+        return Collections.unmodifiableList(numbers);
+    }
+
+    public Number sum() {
         return numbers.stream().reduce((x, y) -> x.add(y)).get();
     }
 }
