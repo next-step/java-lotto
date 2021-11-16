@@ -4,6 +4,9 @@ public class StringAddCalculator {
 
     public static int calculate(String expression) {
         int ans = 0;
+        if (expression == null || expression.isEmpty()) {
+            return ans;
+        }
         String[] numbers = expression.split(":|,");
         for (String number : numbers) {
             int cur = Integer.parseInt(number);
