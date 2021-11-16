@@ -6,7 +6,7 @@ import calculator.strategy.SplitStrategy;
 import java.util.Arrays;
 import java.util.List;
 
-public class Calculator {
+public class AdditionCalculator {
 
     private static final List<String> DEFAULT_DELIMITERS = Arrays.asList(",", ":");
     private static final String JOIN_DELIMITER = "|";
@@ -14,12 +14,12 @@ public class Calculator {
 
     private final String input;
 
-    private Calculator(String s) {
+    private AdditionCalculator(String s) {
         this.input = s;
     }
 
-    public static Calculator from(String s) {
-        return new Calculator(s);
+    public static AdditionCalculator from(String s) {
+        return new AdditionCalculator(s);
     }
 
     public int result() {

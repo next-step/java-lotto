@@ -2,22 +2,17 @@ package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.MethodSource;
 
-public class CalculatorTest {
+public class AdditionCalculatorTest {
 
     @ParameterizedTest
     @DisplayName("디폴트구분자로 덧셈계산하기")
     @CsvSource(value = {"1:2:3=6", "1,2,3=6", "1,2:3=6"}, delimiter = '=')
     void 디폴트구분자로_덧셈계산하기(String s, Integer result) {
-        Calculator calculator = Calculator.from(s);
+        AdditionCalculator calculator = AdditionCalculator.from(s);
         assertThat(calculator.result()).isEqualTo(result);
     }
 
