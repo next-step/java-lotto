@@ -1,6 +1,8 @@
 package addcalculator;
 
-import java.util.Arrays;
+import addcalculator.domain.Numbers;
+import addcalculator.exception.NotInstanceException;
+
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,6 +12,10 @@ public class StringPlusCalculator {
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final int CUSTOM_DELIMITER = 1;
     private static final int MAIN_TEXT = 2;
+
+    public StringPlusCalculator() {
+        throw new NotInstanceException();
+    }
 
     public static int execute(String text) {
         if (isNullAndEmpty(text)) {
@@ -28,10 +34,8 @@ public class StringPlusCalculator {
         return Objects.isNull(input) || input.isEmpty();
     }
 
-    private static int plusNumbers(String[] stringNumbers) {
-        return Arrays.stream(stringNumbers)
-                .mapToInt(Integer::parseInt)
-                .sum();
+    private static int plusNumbers(Numbers numbers) {
+        return numbers.sum();
     }
 
     private static int plusNumbers(Matcher matcher) {
