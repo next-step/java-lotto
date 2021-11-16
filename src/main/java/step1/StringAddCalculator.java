@@ -1,5 +1,8 @@
 package step1;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringAddCalculator {
 
     public static int calculate(String expression) {
@@ -7,7 +10,14 @@ public class StringAddCalculator {
         if (expression == null || expression.isEmpty()) {
             return ans;
         }
-        String[] numbers = expression.split(":|,");
+        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(expression);
+        String[] numbers = expression.split(",|:");
+        if (matcher.find()) {
+            String customDelim = matcher.group(1);
+            String exp = matcher.group(2);
+            String regex = String.format(",|:|\\%s", customDelim);
+            numbers = exp.split(regex);
+        }
         for (String number : numbers) {
             int cur = Integer.parseInt(number);
             if (cur < 0) {

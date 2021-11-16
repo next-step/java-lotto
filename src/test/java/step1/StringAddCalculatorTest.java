@@ -31,8 +31,8 @@ public class StringAddCalculatorTest {
     }
 
     @Test
-    void calculateComma() {
-        int ans = StringAddCalculator.calculate("1,2,3,4");
+    void calculate() {
+        int ans = StringAddCalculator.calculate("1,2:3,4");
         assertEquals(10, ans);
     }
 
@@ -52,5 +52,11 @@ public class StringAddCalculatorTest {
     void runtimeExceptionBecauseInputIsNotNumber() {
         assertThatThrownBy(() -> StringAddCalculator.calculate("1,a"))
             .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    void calculateCustomDelimiter() {
+        int ans = StringAddCalculator.calculate("//;\n1;2;3");
+        assertEquals(6, ans);
     }
 }
