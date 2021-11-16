@@ -23,7 +23,8 @@ public class ConsoleInputView implements InputView {
     @Override
     public int extractPurchaseAmount() {
         try {
-            return scanner.nextInt();
+            String rawInput = scanner.nextLine();
+            return Integer.parseInt(rawInput);
         } catch (Exception e) {
             throw new IllegalArgumentException("Purchase amount must be integer");
         }
