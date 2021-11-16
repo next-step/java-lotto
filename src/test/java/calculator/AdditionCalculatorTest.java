@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class AdditionCalculatorTest {
 
@@ -24,11 +26,31 @@ public class AdditionCalculatorTest {
         assertThat(calculator.result()).isEqualTo(result);
     }
 
-    void 구분자_숫자_외_값있을시_예외처리() {
+    @ParameterizedTest
+    @DisplayName("구분자, 숫자 외 값이 있을 시 예외처리")
+    @ValueSource(strings = {"1a2a3", "1:2,a", "1,3b4"})
+    void 구분자_숫자_외_값이_있을_시_예외처리(String input) {
 
     }
 
-    void 음수있을시_예외처리() {
+    @ParameterizedTest
+    @DisplayName("음수가 있을 시 예외처리")
+    @ValueSource(strings = {"1;-1", "-2,3", "3:2,-1"})
+    void 음수있을시_예외처리(String input) {
+
+    }
+
+    @ParameterizedTest
+    @DisplayName("null 혹은 빈 값일 경우 0 리턴")
+    @NullAndEmptySource
+    void null_혹은_빈_값일_경우_0_리턴(String input) {
+
+    }
+
+    @ParameterizedTest
+    @DisplayName("숫자가 하나일 경우 해당 숫자 리턴")
+    @CsvSource(value = {"1=1", "2=2", "10=10"}, delimiter = '=')
+    void 숫자가_하나일_경우_해당_숫자_리턴(String input, int result) {
 
     }
 
