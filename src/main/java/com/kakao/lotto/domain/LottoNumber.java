@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private final int value;
     private static final List<LottoNumber> baseLotto = createBaseLottoNumber();
 
@@ -40,5 +40,10 @@ public class LottoNumber {
 
     public static List<LottoNumber> getBaseLotto() {
         return Collections.unmodifiableList(baseLotto);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return Integer.compare(value, o.value);
     }
 }

@@ -5,26 +5,28 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
-    private final List<LottoNumber> lottoNumbers;
+    protected final List<LottoNumber> lottoNumbers;
 
     public static final int LOTTO_SIZE = 6;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
+    public LottoTicket(List<LottoNumber> inputNumbers) {
+        List<LottoNumber> lottoNumbers = inputNumbers.stream()
+                .distinct()
+                .sorted()
+                .collect(Collectors.toList());
         validSizeNumber(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
-    }
-
-    public List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
     }
 
     public static LottoTicket of(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = numbers.stream()
                 .map(LottoNumber::of)
-                .distinct()
-                .sorted()
                 .collect(Collectors.toList());
         return new LottoTicket(lottoNumbers);
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     private void validSizeNumber(List<LottoNumber> lottoNumbers){
