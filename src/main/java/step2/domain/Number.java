@@ -16,4 +16,8 @@ public class Number {
     public int getNumber() {
         return number;
     }
+
+    public String getStringNumber() {
+        return String.valueOf(number);
+    }
 }
