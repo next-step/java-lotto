@@ -8,7 +8,7 @@ public class StringAddCalculator {
             return 0;
         }
 
-        String[] numbers = input.split(",");
+        String[] numbers = split(input);
         return sum(numbers);
     }
 
@@ -22,5 +22,9 @@ public class StringAddCalculator {
             result += Integer.parseInt(n);
         }
         return result;
+    }
+
+    private static String[] split(String input) {
+        return input.split(",|:");
     }
 }
