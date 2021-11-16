@@ -26,8 +26,8 @@ public class Dollars {
         return count;
     }
 
-    public int won() {
-        return count * DOLLAR_UNIT;
+    public long won() {
+        return (long) count * DOLLAR_UNIT;
     }
 
     @Override

@@ -12,9 +12,9 @@ public enum Grade {
     private static final Grade[] CACHED_GRADES = Grade.values();
 
     private final int matchCount;
-    private final int reward;
+    private final long reward;
 
-    Grade(int matchCount, int reward) {
+    Grade(int matchCount, long reward) {
         this.matchCount = matchCount;
         this.reward = reward;
     }
@@ -24,5 +24,9 @@ public enum Grade {
                 .filter(grade -> grade.matchCount == matchCount)
                 .findAny()
                 .orElse(BANG);
+    }
+
+    public long getReward() {
+        return reward;
     }
 }

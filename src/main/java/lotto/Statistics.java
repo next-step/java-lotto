@@ -7,6 +7,8 @@ import java.util.Objects;
 public class Statistics {
 
     private static final int MIN_COUNT = 0;
+    private static final long DEFAULT_REWARD = 0L;
+    
     private final Map<Grade, Long> grades;
     private final Dollars dollars;
 
@@ -38,6 +40,21 @@ public class Statistics {
         if (count < MIN_COUNT) {
             throw new IllegalArgumentException("개수가 음수일 수 없습니다.");
         }
+    }
+
+    public double yield() {
+        return (double) sumReward() / dollars.won();
+    }
+
+    private long sumReward() {
+        return grades.keySet().stream()
+                .map(this::sumGradeReward)
+                .reduce(Long::sum)
+                .orElse(DEFAULT_REWARD);
+    }
+
+    private long sumGradeReward(Grade grade) {
+        return grade.getReward() * grades.get(grade);
     }
 
     @Override
