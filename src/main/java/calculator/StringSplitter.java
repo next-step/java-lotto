@@ -24,7 +24,7 @@ public class StringSplitter {
     }
 
     private static boolean containNegativeInt(String[] splitInput) {
-        return Arrays.stream(splitInput).anyMatch(number -> NumberUtils.isNegativeInt(number));
+        return Arrays.stream(splitInput).anyMatch(NumberUtils::isNegativeInt);
     }
 
     private static String[] split(String input) {

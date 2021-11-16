@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,8 +13,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class StringAddCalculatorTest {
 
     @ParameterizedTest
-    @NullSource
-    @ValueSource(strings = { "", " "})
+    @NullAndEmptySource
     @DisplayName("빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.")
     void emptyOrNullValueReturn0Test(String input){
         int result = StringAddCalculator.splitAndSum(input);
