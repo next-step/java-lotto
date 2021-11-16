@@ -24,7 +24,7 @@ public class StringAddCalculator {
     private static int sum(String[] numbers) {
         int result = 0;
         for (String n : numbers) {
-            result += Integer.parseInt(n);
+            result += parseInt(n);
         }
         return result;
     }
@@ -37,5 +37,13 @@ public class StringAddCalculator {
         }
 
         return input.split(",|:");
+    }
+
+    public static int parseInt(String input) {
+        int number = Integer.parseInt(input);
+        if (number < 0) {
+            throw new RuntimeException();
+        }
+        return number;
     }
 }
