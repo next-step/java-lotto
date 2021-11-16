@@ -7,6 +7,6 @@ public class StringAddCalculator {
         if (input == null || input.isEmpty()) {
             return 0;
         }
-        return 0;
+        return Integer.parseInt(input);
     }
 }
