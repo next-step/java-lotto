@@ -30,12 +30,12 @@ public class Number {
         }
     }
 
-    public Integer getNum() {
+    public Integer getNumber() {
         return number;
     }
 
     public Number add(Number num2) {
-        return new Number(number + num2.getNum());
+        return new Number(number + num2.getNumber());
     }
 
     @Override

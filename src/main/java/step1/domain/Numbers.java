@@ -19,7 +19,7 @@ public class Numbers {
         return Collections.unmodifiableList(numbers);
     }
 
-    public Number sum() {
-        return numbers.stream().reduce((x, y) -> x.add(y)).get();
+    public Integer sum() {
+        return numbers.stream().mapToInt(Number::getNumber).sum();
     }
 }
