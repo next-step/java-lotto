@@ -6,7 +6,11 @@ public class StringAddCalculator {
         int ans = 0;
         String[] numbers = expression.split(":|,");
         for (String number : numbers) {
-            ans += Integer.parseInt(number);
+            int cur = Integer.parseInt(number);
+            if (cur < 0) {
+                throw new RuntimeException("입력 숫자는 0보다 작을 수 없습니다.");
+            }
+            ans += cur;
         }
         return ans;
     }
