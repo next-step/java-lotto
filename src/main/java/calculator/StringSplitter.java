@@ -1,6 +1,6 @@
 package calculator;
 
-import calculator.util.NumberUtils;
+import util.NumberUtils;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
