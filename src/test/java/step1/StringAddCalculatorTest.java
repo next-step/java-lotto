@@ -37,6 +37,12 @@ public class StringAddCalculatorTest {
     }
 
     @Test
+    void expressionIsOneNumber() {
+        int ans = StringAddCalculator.calculate("1");
+        assertEquals(1, ans);
+    }
+
+    @Test
     void runtimeExceptionBecauseInputNumberLessThan0() {
         assertThatThrownBy(() -> StringAddCalculator.calculate("-1,1"))
             .isInstanceOf(RuntimeException.class);
