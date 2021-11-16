@@ -24,4 +24,10 @@ public class StringAddCalculatorTest {
         assertThatThrownBy(() -> StringAddCalculator.calculate("-1,1"))
             .isInstanceOf(RuntimeException.class);
     }
+
+    @Test
+    void illegalArgumentExceptionBecauseInputIsNotNumber() {
+        assertThatThrownBy(() -> StringAddCalculator.calculate("1,a"))
+            .isInstanceOf(RuntimeException.class);
+    }
 }
