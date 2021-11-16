@@ -2,11 +2,11 @@ package step1;
 
 public class StringAddCalculator {
 
-    public static int calculate(Expression expression) {
-        int ans = 0;
+    public static Number calculate(Expression expression) {
+        Number ans = new Number(0);
 
         while (expression.hasNextNumber()) {
-            ans += expression.nextNumber();
+            ans = ans.add(expression.nextNumber());
         }
 
         return ans;

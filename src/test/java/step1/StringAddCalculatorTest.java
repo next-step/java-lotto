@@ -12,34 +12,34 @@ public class StringAddCalculatorTest {
 
     @Test
     void stringAddCalculator() {
-        int ans = StringAddCalculator.calculate(new Expression("1,2:3"));
-        assertEquals(6, ans);
+        Number ans = StringAddCalculator.calculate(new Expression("1,2:3"));
+        assertEquals(new Number(6), ans);
     }
 
     @ParameterizedTest
     @NullSource
     void expressionIsNull(String expression) {
-        int ans = StringAddCalculator.calculate(new Expression(expression));
-        assertEquals(0, ans);
+        Number ans = StringAddCalculator.calculate(new Expression(expression));
+        assertEquals(new Number(0), ans);
     }
 
     @ParameterizedTest
     @EmptySource
     void expressionIsEmpty(String expression) {
-        int ans = StringAddCalculator.calculate(new Expression(expression));
-        assertEquals(0, ans);
+        Number ans = StringAddCalculator.calculate(new Expression(expression));
+        assertEquals(new Number(0), ans);
     }
 
     @Test
     void calculate() {
-        int ans = StringAddCalculator.calculate(new Expression("1,2:3,4"));
-        assertEquals(10, ans);
+        Number ans = StringAddCalculator.calculate(new Expression("1,2:3,4"));
+        assertEquals(new Number(10), ans);
     }
 
     @Test
     void expressionIsOneNumber() {
-        int ans = StringAddCalculator.calculate(new Expression("1"));
-        assertEquals(1, ans);
+        Number ans = StringAddCalculator.calculate(new Expression("1"));
+        assertEquals(new Number(1), ans);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class StringAddCalculatorTest {
 
     @Test
     void calculateCustomDelimiter() {
-        int ans = StringAddCalculator.calculate(new Expression("//;\n1;2;3"));
-        assertEquals(6, ans);
+        Number ans = StringAddCalculator.calculate(new Expression("//;\n1;2;3"));
+        assertEquals(new Number(6), ans);
     }
 }

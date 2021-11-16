@@ -25,8 +25,8 @@ public class ExpressionTest {
     @Test
     void nextNumber() {
         Expression expression = new Expression("1,2:3");
-        assertEquals(1, expression.nextNumber());
-        assertEquals(2, expression.nextNumber());
-        assertEquals(3, expression.nextNumber());
+        assertEquals(new Number(1), expression.nextNumber());
+        assertEquals(new Number(2), expression.nextNumber());
+        assertEquals(new Number(3), expression.nextNumber());
     }
 }

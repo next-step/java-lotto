@@ -13,7 +13,7 @@ public class Expression {
     private static final int CUSTOM_DELIM = 1;
     private static final int CUSTOM_EXPRESSION = 2;
 
-    private final List<Integer> numbers;
+    private final List<Number> numbers;
 
     public Expression(final String input) {
         numbers = new LinkedList<>();
@@ -42,7 +42,7 @@ public class Expression {
 
     private void initNumbers(String[] stringNums) {
         for (String num : stringNums) {
-            numbers.add(Integer.parseInt(num));
+            numbers.add(new Number(num));
         }
     }
 
@@ -50,7 +50,7 @@ public class Expression {
         return !numbers.isEmpty();
     }
 
-    public int nextNumber() {
+    public Number nextNumber() {
         return numbers.remove(0);
     }
 }
