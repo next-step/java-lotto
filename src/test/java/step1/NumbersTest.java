@@ -17,6 +17,6 @@ public class NumbersTest {
         numberList.add("100");
         numberList.add("17");
         Numbers numbers = new Numbers(numberList);
-        assertThat(numbers.sum().getNum()).isEqualTo(117);
+        assertThat(numbers.sum()).isEqualTo(117);
     }
 }

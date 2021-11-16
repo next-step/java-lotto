@@ -20,8 +20,8 @@ public class InputUtilTest {
         List<Integer> testList = Arrays.asList(input.split(",")).stream().map(i->Integer.parseInt(i)).collect(Collectors.toList());
         Numbers numbers = InputUtil.getNumbers(input);
         for (int i =0 ; i < 4; i++) {
-            System.out.println(InputUtil.getNumbers(input).getNumbers().get(i).getNum());
-            assertThat(numbers.getNumbers().get(i).getNum()).isEqualTo(testList.get(i));
+            System.out.println(InputUtil.getNumbers(input).getNumbers().get(i).getNumber());
+            assertThat(numbers.getNumbers().get(i).getNumber()).isEqualTo(testList.get(i));
         }
     }
 
@@ -30,10 +30,10 @@ public class InputUtilTest {
     void checkNull() {
         List<Integer> testList = Arrays.asList(0);
         Numbers numbers = InputUtil.getNumbers("");
-        assertThat(numbers.getNumbers().get(0).getNum()).isEqualTo(testList.get(0));
+        assertThat(numbers.getNumbers().get(0).getNumber()).isEqualTo(testList.get(0));
 
         List<Integer> testList1 = Arrays.asList(0);
         Numbers numbers1 = InputUtil.getNumbers(null);
-        assertThat(numbers1.getNumbers().get(0).getNum()).isEqualTo(testList1.get(0));
+        assertThat(numbers1.getNumbers().get(0).getNumber()).isEqualTo(testList1.get(0));
     }
 }
