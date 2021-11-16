@@ -5,10 +5,8 @@ import calculator.exception.AdditionNumberFormatException;
 import calculator.strategy.CustomSplitStrategy;
 import calculator.strategy.DefaultSplitStrategy;
 import calculator.strategy.SplitStrategy;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class AdditionCalculator {
 
@@ -76,5 +74,5 @@ public class AdditionCalculator {
     private String[] getSplitInput(SplitStrategy splitStrategy, String delimiter) {
         return splitStrategy.getSplitInput(input, delimiter);
     }
-    
+
 }
