@@ -1,7 +1,6 @@
 package com.kakao.lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -9,7 +8,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoRankTest {
 
@@ -17,7 +15,7 @@ class LottoRankTest {
     @DisplayName("맞춘 개수를 넣으면 로또 결과를 반환한다.")
     @MethodSource("lottoRanks")
     void findByCorrectRank(int correctNumber, LottoRank lottoRank) {
-        assertThat(LottoRank.findByCorrectRank(correctNumber)).isEqualTo(lottoRank);
+        assertThat(LottoRank.findByMatchRank(correctNumber)).isEqualTo(lottoRank);
     }
 
     private static Stream<Arguments> lottoRanks() {

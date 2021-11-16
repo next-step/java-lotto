@@ -17,7 +17,7 @@ public enum LottoRank {
         this.price = price;
     }
 
-    public static LottoRank findByCorrectRank(int correctAmount) {
+    public static LottoRank findByMatchRank(int correctAmount) {
         return Arrays.stream(LottoRank.values())
                 .filter(rank -> rank.correctRank == correctAmount)
                 .findAny()
@@ -26,5 +26,9 @@ public enum LottoRank {
 
     public int getPrice() {
         return price;
+    }
+
+    public int getCorrectRank() {
+        return correctRank;
     }
 }
