@@ -1,5 +1,6 @@
 package step1;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,8 +10,11 @@ public class NumberTest {
 
     @Test
     void number() {
-        Number number = new Number("1");
-        Number intNumber = new Number(1);
+        Number stringInput = new Number("1");
+        Number integerInput = new Number(1);
+
+        assertThat(stringInput).isEqualTo(integerInput);
+        assertEquals(stringInput.hashCode(), integerInput.hashCode());
     }
 
     @Test
