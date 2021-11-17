@@ -12,7 +12,7 @@ public class StringAddCalculator {
 
     public static int splitAndSum(String input) {
         if (nullOrEmpty(input)) {
-            return NumberConstant.ZERO;
+            return NumberConstant.DEFAULT_SUM;
         }
 
         return sum(split(input));
