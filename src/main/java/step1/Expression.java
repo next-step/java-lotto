@@ -15,13 +15,13 @@ public class Expression {
 
     public Expression(final String input) {
         numbers = new Numbers();
-        if (isValid(input)) {
+        if (isNotEmpty(input)) {
             String[] stringNums = generateStringNums(input);
             numbers = new Numbers(stringNums);
         }
     }
 
-    private boolean isValid(String input) {
+    private boolean isNotEmpty(String input) {
         return (input != null) && (!input.isEmpty());
     }
 
