@@ -16,7 +16,12 @@ public class Calculator {
         if (isEmpty(input))
             return 0;
 
-        int number = Integer.parseInt(input);
+        int number;
+        try{
+            number = Integer.parseInt(input);
+        }catch (NumberFormatException e){
+            throw new RuntimeException("구분자 외 숫자 이외의 값은 전달할 수 없습니다.");
+        }
 
         if (number < 0) {
             throw new RuntimeException("입력값으로 음수는 전달할 수 없습니다.");

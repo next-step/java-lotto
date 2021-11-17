@@ -37,7 +37,7 @@ class CalculatorTest {
     @DisplayName("숫자와 문자가 포함된 문자열을 숫자로 변환했을 때 예외 발생")
     void parseNumber() {
         assertThatThrownBy(() -> Calculator.parse("abc123"))
-                .isInstanceOf(NumberFormatException.class);
+                .isInstanceOf(RuntimeException.class);
     }
 
     @Test
