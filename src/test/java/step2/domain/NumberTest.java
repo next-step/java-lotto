@@ -1,6 +1,5 @@
 package step2.domain;
 
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -9,12 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class NumberTest {
 
-    @RepeatedTest(10)
-    void 범위_1_이상_45_이하의_랜덤한_숫자를_생성한다() {
+    @Test
+    void 숫자를_생성한다() {
         //given
-        Number number = Number.create();
+        Number number = Number.create(2);
         //when & then
-        assertThat(number.getNumber()).isGreaterThanOrEqualTo(1).isLessThanOrEqualTo(45);
+        assertThat(number.getNumber()).isEqualTo(2);
     }
 
     @Test
@@ -28,6 +27,6 @@ public class NumberTest {
         //given
         //when
         //then
-        assertEquals(Number.of("1"), Number.of("2"));
+        assertEquals(Number.of("1"), Number.of("1"));
     }
 }

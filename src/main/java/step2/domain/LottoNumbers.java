@@ -1,5 +1,7 @@
 package step2.domain;
 
+import step2.utils.RandomUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,13 +13,20 @@ public class LottoNumbers {
 
     private LottoNumbers() {
         while (numbers.size() < LOTTO_NUMBERS_SIZE) {
-            numbers.add(Number.create());
+            add();
         }
     }
 
     private LottoNumbers(String[] splitNumbers) {
         for (String number : splitNumbers) {
             numbers.add(Number.of(number));
+        }
+    }
+
+    private void add() {
+        Number number = Number.create(RandomUtils.nextInt());
+        if (!numbers.contains(number)) {
+            numbers.add(number);
         }
     }
 

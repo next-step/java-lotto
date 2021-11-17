@@ -10,8 +10,8 @@ public class Number {
 
     private int number;
 
-    private Number() {
-        this.number = RandomUtils.nextInt();
+    private Number(int number) {
+        this.number = number;
     }
 
     private Number(String number) {
@@ -20,8 +20,8 @@ public class Number {
         this.number = value;
     }
 
-    public static Number create() {
-        return new Number();
+    public static Number create(int number) {
+        return new Number(number);
     }
 
     public static Number of(String number) {
