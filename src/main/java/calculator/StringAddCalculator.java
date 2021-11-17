@@ -1,24 +1,23 @@
 package calculator;
 
-import constant.NumberConstant;
-import helper.StringHelper;
-
 import java.util.Arrays;
-import java.util.regex.Pattern;
+
+import static constant.CalculatorConstant.CUSTOM_DELIMITER_PATTERN;
+import static constant.CalculatorConstant.DEFAULT_SUM;
+import static helper.StringHelper.nullOrEmpty;
+import static helper.StringHelper.splitByPattern;
 
 /**
  * @author han
  */
 public class StringAddCalculator {
 
-    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
-
     public static int splitAndSum(String input) {
-        if (StringHelper.nullOrEmpty(input)) {
-            return NumberConstant.DEFAULT_SUM;
+        if (nullOrEmpty(input)) {
+            return DEFAULT_SUM;
         }
 
-        return sum(StringHelper.splitByPattern(CUSTOM_DELIMITER_PATTERN, input));
+        return sum(splitByPattern(CUSTOM_DELIMITER_PATTERN, input));
     }
 
     private static int sum(String[] numbers) {
