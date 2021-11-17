@@ -1,5 +1,7 @@
 package step2.domain;
 
+import step2.domain.starategy.GetLottoNumberStrategy;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,11 +14,11 @@ public class LottoList {
         return Collections.unmodifiableList(lottoList);
     }
 
-    public LottoList(Integer purchaseAmount) {
+    public LottoList(Integer purchaseAmount, GetLottoNumberStrategy getLottoNumberStrategy) {
         int purchaseCount = purchaseAmount/1000;
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < purchaseCount; i++) {
-            Lotto lotto = new Lotto();
+            Lotto lotto = new Lotto(getLottoNumberStrategy);
             lottoList.add(lotto);
         }
         this.lottoList = lottoList;

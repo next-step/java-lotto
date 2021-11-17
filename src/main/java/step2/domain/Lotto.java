@@ -1,5 +1,7 @@
 package step2.domain;
 
+import step2.domain.starategy.GetLottoNumberStrategy;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,7 +12,7 @@ public class Lotto {
 
     public static final int SIZE = 6;
 
-    private static List<Integer> NumberList = IntStream.range(1, 46).boxed().collect(Collectors.toList());
+    public static List<Integer> NumberList = IntStream.range(1, 46).boxed().collect(Collectors.toList());
 
     private final List<Integer> lottoNumbers;
 
@@ -18,9 +20,9 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public Lotto() {
-        Collections.shuffle(NumberList);
-        this.lottoNumbers = new ArrayList<>(NumberList.subList(0, SIZE));
+    public Lotto(GetLottoNumberStrategy getLottoNumberStrategy) {
+        this.lottoNumbers = getLottoNumberStrategy.getLotto();
+
     }
 
     public Integer checkMatching(List<Integer> winningNumbers) {
