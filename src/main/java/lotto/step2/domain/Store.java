@@ -8,11 +8,11 @@ public class Store {
     private final int orderCount;
     private final Lotteries lotteries;
 
-    public Store(String orderPrice) {
+    public Store(int orderPrice) {
         checkOrderPrice(orderPrice);
-        this.orderPrice = Integer.parseInt(orderPrice);
+        this.orderPrice = orderPrice;
         this.orderCount = this.orderPrice / LOTTO_PRICE;
-        lotteries = new Lotteries(orderCount);
+        this.lotteries = new Lotteries(orderCount);
     }
 
     public int getOrderPrice() {
@@ -27,13 +27,8 @@ public class Store {
         return lotteries;
     }
 
-    private static void checkOrderPrice(String orderPrice) {
-        for (char c : orderPrice.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                throw new IllegalArgumentException("숫자를 입력해주세요");
-            }
-        }
-        if (Integer.parseInt(orderPrice) < LOTTO_PRICE) {
+    private static void checkOrderPrice(int orderPrice) {
+        if (orderPrice < LOTTO_PRICE) {
             throw new IllegalArgumentException("1장 이상 가격 입력해주세요");
         }
     }
