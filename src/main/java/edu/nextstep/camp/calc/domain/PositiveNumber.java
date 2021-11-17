@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 public class PositiveNumber {
     private final static Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+");
     private final static String TO_STRING_FORMAT = "Number(%d)";
-    private static final int POSITIVE_THRESHOLD = 0;
-    private static final PositiveNumber ZERO = new PositiveNumber(0);
+    private static final int ZERO_VALUE = 0;
+    private static final PositiveNumber ZERO = new PositiveNumber(ZERO_VALUE);
 
     private final int number;
 
@@ -18,8 +18,12 @@ public class PositiveNumber {
     }
 
     public static PositiveNumber of(int number) {
-        if (number < POSITIVE_THRESHOLD) {
+        if (number < ZERO_VALUE) {
             throw new IllegalArgumentException("invalid input: the number must not be negative: " + number);
+        }
+
+        if (number == ZERO_VALUE) {
+            return ZERO;
         }
 
         return new PositiveNumber(number);
