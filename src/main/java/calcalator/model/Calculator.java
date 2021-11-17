@@ -6,8 +6,6 @@ import java.util.regex.Pattern;
 
 public class Calculator {
 
-    private static final String DEFAULT_DELIMITER = ",";
-
     public static boolean isEmpty(String input) {
         return input == null || "".equals(input);
     }
