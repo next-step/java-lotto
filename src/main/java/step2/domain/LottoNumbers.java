@@ -14,8 +14,18 @@ public class LottoNumbers {
         }
     }
 
+    private LottoNumbers(String[] splitNumbers) {
+        for (String number : splitNumbers) {
+            numbers.add(Number.of(number));
+        }
+    }
+
     public static LottoNumbers create() {
         return new LottoNumbers();
+    }
+
+    public static LottoNumbers of(String[] splitNumbers) {
+        return new LottoNumbers(splitNumbers);
     }
 
     public List<Number> getNumbers() {

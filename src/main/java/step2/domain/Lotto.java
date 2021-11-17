@@ -9,8 +9,16 @@ public class Lotto {
         lottoNumbers = LottoNumbers.create();
     }
 
+    private Lotto(String[] splitNumbers) {
+        lottoNumbers = LottoNumbers.of(splitNumbers);
+    }
+
     public static Lotto generate() {
         return new Lotto();
+    }
+
+    public static Lotto of(String[] splitNumbers) {
+        return new Lotto(splitNumbers);
     }
 
     public List<Number> getLottoNumbers() {
