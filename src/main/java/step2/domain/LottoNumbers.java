@@ -2,9 +2,8 @@ package step2.domain;
 
 import step2.utils.RandomUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private static final int LOTTO_NUMBERS_SIZE = 6;
@@ -45,7 +44,9 @@ public class LottoNumbers {
     }
 
     public List<Number> getNumbers() {
-        return numbers;
+        return numbers.stream()
+                .sorted(Comparator.comparing(Number::getNumber))
+                .collect(Collectors.toList());
     }
 
     @Override
