@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.vo.LottoNumber;
 import lotto.vo.LottoRule;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -27,9 +28,16 @@ public class Lotto {
         return new Lotto(lottoNumberList);
     }
 
+    public static Lotto createWithString(String lottoInput) {
+        return Arrays.stream(lottoInput.split(","))
+                .map(Integer::parseInt)
+                .map(LottoNumber::create)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
+    }
+
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers.stream()
-                .map(lottoNumber -> LottoNumber.getCachedLottoNumber(lottoNumber.getValue()))
+                .map(lottoNumber -> LottoNumber.create(lottoNumber.getValue()))
                 .collect(Collectors.toList());
     }
 
@@ -61,5 +69,9 @@ public class Lotto {
         return "Lotto{" +
                 "lottoNumbers=" + lottoNumbers +
                 '}';
+    }
+
+    public boolean containLottoNumber(LottoNumber bonus) {
+        return lottoNumbers.contains(bonus);
     }
 }

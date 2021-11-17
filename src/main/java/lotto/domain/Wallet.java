@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.vo.LottoNumber;
 import lotto.vo.Lottos;
 import lotto.vo.Money;
 import lotto.vo.WinningHistory;
@@ -20,19 +21,12 @@ public class Wallet {
         return new Wallet(money);
     }
 
-    public WinningHistory checkWinning(Lotto winningLotto) {
-        List<WinningRank> winningRanks = WinningRank.checkWinning(lottos, winningLotto);
-        Money winningMoney = winningRanks.stream()
-                .map(winningRank -> winningRank.getReward())
-                .reduce((left, right) -> left.add(right))
-                .orElseGet(() -> Money.create(BigDecimal.ZERO));
-        return WinningHistory.create(myMoney, winningRanks, winningMoney);
+    public Money getMoneyToBuy() {
+        return myMoney;
     }
 
-    public Money getMoneyToBuy() {
-        Money havingMoney = Money.create(myMoney.getValue());
-        myMoney = Money.create(BigDecimal.ZERO);
-        return havingMoney;
+    public Lottos getLottos() {
+        return lottos;
     }
 
     public void saveLottos(Lottos lottos) {

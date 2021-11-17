@@ -47,7 +47,7 @@ class LottoNumberTest {
             ,41,42,43,44,45
     })
     void NumberCachedTest(int input) {
-        assertThat(LottoNumber.getCachedLottoNumber(input)).isEqualTo(LottoNumber.create(input));
+        assertThat(LottoNumber.create(input)).isEqualTo(LottoNumber.create(input));
     }
 
 }

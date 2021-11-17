@@ -1,9 +1,13 @@
 package lotto;
 
+import lotto.domain.Lotto;
 import lotto.domain.WinningRank;
 import lotto.service.LottoService;
+import lotto.service.NumberGenerateStrategy;
+import lotto.service.RandomLottoNumberGenerateStrategy;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+import lotto.vo.LottoNumber;
 import lotto.vo.Lottos;
 import lotto.vo.Money;
 import lotto.vo.WinningHistory;
@@ -16,7 +20,8 @@ public class main {
         OutputView outputView = new OutputView();
         Money money = inputView.inputMoney();
 
-        LottoService lottoService = new LottoService(money);
+        NumberGenerateStrategy strategy = new RandomLottoNumberGenerateStrategy();
+        LottoService lottoService = new LottoService(money, strategy);
 
         Lottos lottos = lottoService.buyLotto();
 
@@ -24,7 +29,15 @@ public class main {
 
         String winningLottoString = inputView.inputWinningLotto();
 
-        WinningHistory winningHistory = lottoService.getWinningHistory(winningLottoString);
+        Lotto winningLotto = Lotto.createWithString(winningLottoString);
+
+        String bonusBallString = inputView.inputBonus();
+
+        LottoNumber lottoNumber = LottoNumber.create(bonusBallString);
+
+        lottoService.validBonus(winningLotto, lottoNumber);
+
+        WinningHistory winningHistory = lottoService.getWinningHistory(winningLotto, lottoNumber);
 
         outputView.renderWithWinningHistory(winningHistory, WinningRank.getReverseRankListWithoutNoRank());
 

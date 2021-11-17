@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.vo.LottoNumber;
 import lotto.vo.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,10 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinningRankTest {
@@ -19,7 +23,7 @@ class WinningRankTest {
     @ParameterizedTest
     @CsvSource(value = {"6:1:2000000000", "5:2:1500000", "4:3:50000", "3:4:5000"}, delimiter = ':')
     void getWinningRankTest(long matchCount, int rank, BigDecimal reward) {
-        WinningRank winningRank = WinningRank.getWinningRankWithMatchCount(matchCount);
+        WinningRank winningRank = WinningRank.valueOf(matchCount);
 
         assertThat(winningRank.getRank()).isEqualTo(rank);
         assertThat(winningRank.getReward()).isEqualTo(Money.create(reward));
@@ -29,7 +33,7 @@ class WinningRankTest {
     @ParameterizedTest
     @ValueSource(longs = {2l, 1l, 0l})
     void getNoRankTest(long matchCount) {
-        WinningRank winningRank = WinningRank.getWinningRankWithMatchCount(matchCount);
+        WinningRank winningRank = WinningRank.valueOf(matchCount);
 
         assertThat(winningRank).isEqualTo(WinningRank.NO_RANK);
     }
@@ -43,5 +47,24 @@ class WinningRankTest {
         assertThat(winningRankListWithoutNoRank).isEqualTo(expect);
     }
 
+    @DisplayName("맞는 값이 5개인 경우 보너스볼을 기준으로 2등 3등이 나뉜다")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,4,5,6:1,2,3,4,5,7:6:SECOND_RANK", "1,2,3,4,5,6:1,2,3,4,5,8:7:THIRD_RANK"}, delimiter = ':')
+    void getWinningRankWithLottoTest(String lottoStr, String winningLottoStr, int bonusBallValue, String rank) {
+        Lotto lotto = createLottoWithString(lottoStr);
+        Lotto winningLotto = createLottoWithString(winningLottoStr);
+        LottoNumber bonus = LottoNumber.create(bonusBallValue);
+
+        WinningRank actual = WinningRank.getWinningRankWithLotto(lotto, winningLotto, bonus);
+        WinningRank expect = WinningRank.valueOf(rank);
+
+        assertThat(actual).isEqualTo(expect);
+    }
+
+    private Lotto createLottoWithString(String input) {
+        return Arrays.stream(input.split(","))
+                .map(LottoNumber::create)
+                .collect(collectingAndThen(toList(), Lotto::create));
+    }
 
 }
