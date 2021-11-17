@@ -19,7 +19,7 @@ public class LottoTest {
     @Test
     @DisplayName("로또는 랜덤번호로 자신을 생성할 수 있다.")
     void 로또생성_랜덤번호() {
-        Lotto lotto = new Lotto();
+        new Lotto();
     }
 
     @Test
@@ -45,14 +45,14 @@ public class LottoTest {
         Lotto fourthPlace = new Lotto(4, 5, 6, 7, 8, 9);
         Lotto fifthPlace = new Lotto(5, 6, 7, 8, 9, 10);
         Lotto sixthplace = new Lotto(6, 7, 8, 9, 10, 11);
-        Lotto fail = new Lotto(7, 8, 9, 10, 11, 12);
+        Lotto lose = new Lotto(7, 8, 9, 10, 11, 12);
 
-        assertThat(firstPlace.hitCount(target)).isEqualTo(6);
-        assertThat(secondPlace.hitCount(target)).isEqualTo(5);
-        assertThat(thirdPlace.hitCount(target)).isEqualTo(4);
-        assertThat(fourthPlace.hitCount(target)).isEqualTo(3);
-        assertThat(fifthPlace.hitCount(target)).isEqualTo(2);
-        assertThat(sixthplace.hitCount(target)).isEqualTo(1);
-        assertThat(fail.hitCount(target)).isEqualTo(0);
+        assertThat(firstPlace.result(target)).isEqualTo(Prize.FIRST);
+        assertThat(secondPlace.result(target)).isEqualTo(Prize.SECOND);
+        assertThat(thirdPlace.result(target)).isEqualTo(Prize.THIRD);
+        assertThat(fourthPlace.result(target)).isEqualTo(Prize.FOURTH);
+        assertThat(fifthPlace.result(target)).isEqualTo(Prize.FIFTH);
+        assertThat(sixthplace.result(target)).isEqualTo(Prize.SIXTH);
+        assertThat(lose.result(target)).isEqualTo(Prize.LOSE);
     }
 }

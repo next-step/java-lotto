@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -22,15 +23,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  */
 public class BagTest {
     private static final int LOTTO_UNIT_PRICE = 1000;
-    private static final List<Double> PRIZE_LIST = Arrays.asList(
-            0D,
-            0D,
-            0D,
-            5000D,
-            5_0000D,
-            150_0000D,
-            20_0000_0000D
-    );
 
     @ParameterizedTest
     @ValueSource(ints = {10000, 15000, 18000})
@@ -79,9 +71,12 @@ public class BagTest {
                 new Lotto(7, 8, 9, 10, 11, 12)
                 );
 
-        List<Integer> result = bag.lottoResult(new Lotto(1, 2, 3, 4, 5, 6));
+        Map<Prize, Integer> result = bag.lottoResult(new Lotto(1, 2, 3, 4, 5, 6));
 
-        assertThat(result).isEqualTo(Arrays.asList(1, 1, 1, 1, 1, 1, 1));
+        for (Map.Entry<Prize, Integer> each : result.entrySet()) {
+            assertThat(each.getValue()).isEqualTo(1);
+        }
+
     }
 
     @Test
@@ -97,8 +92,8 @@ public class BagTest {
                 new Lotto(7, 8, 9, 10, 11, 12)
         );
 
-        double yield = bag.yield(PRIZE_LIST, new Lotto(1, 2, 3, 4, 5, 6));
+        double yield = bag.yield(new Lotto(1, 2, 3, 4, 5, 6));
 
-        assertThat(yield).isEqualTo(PRIZE_LIST.stream().mapToDouble(e -> e).sum());
+        assertThat(yield).isEqualTo(Arrays.stream(Prize.values()).mapToDouble(p -> p.money()).sum());
     }
 }
