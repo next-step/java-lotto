@@ -4,7 +4,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 /**
  * @author han
@@ -49,14 +49,14 @@ class StringAddCalculatorTest {
     @Test
     @DisplayName(value = "음수")
     public void splitAndSum_negative() {
-        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-            .isInstanceOf(RuntimeException.class);
+        assertThatExceptionOfType(RuntimeException.class)
+            .isThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"));
     }
 
     @Test
     @DisplayName(value = "숫자 이외의 값")
     public void splitAndSum_숫자_이외의_값() {
-        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("a,2,3"))
-            .isInstanceOf(RuntimeException.class);
+        assertThatExceptionOfType(RuntimeException.class)
+            .isThrownBy(() -> StringAddCalculator.splitAndSum("a,2,3"));
     }
 }
