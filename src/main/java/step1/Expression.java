@@ -26,16 +26,17 @@ public class Expression {
     }
 
     private String[] generateStringNumbers(String input) {
-        String[] stringNums = input.split(STANDARD_REGEX);
+        String[] stringNumbers = input.split(STANDARD_REGEX);
 
         Matcher matcher = Pattern.compile(CUSTOM_CHECK_REGEX).matcher(input);
+
         if (matcher.find()) {
             String customDelim = matcher.group(CUSTOM_DELIMITER_INDEX);
             String regex = String.format(CUSTOM_REGEX, customDelim);
-            stringNums = matcher.group(CUSTOM_EXPRESSION_INDEX).split(regex);
+            stringNumbers = matcher.group(CUSTOM_EXPRESSION_INDEX).split(regex);
         }
 
-        return stringNums;
+        return stringNumbers;
     }
 
     public boolean hasNextNumber() {
