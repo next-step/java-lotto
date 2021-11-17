@@ -31,4 +31,22 @@ public class Calculator {
         return input.split(delimiter);
     }
 
+    public static int plus(String input, String delimiter) {
+
+        String[] inputSplit = split(input, delimiter);
+        int[] numbers = Arrays.stream(inputSplit)
+                .mapToInt(Calculator::parse)
+                .toArray();
+
+        int result = 0;
+        for (int number : numbers) {
+            result += number;
+        }
+
+        return result;
+    }
+
+    public static int plus(String input) {
+        return plus(input, DEFAULT_DELIMITER);
+    }
 }

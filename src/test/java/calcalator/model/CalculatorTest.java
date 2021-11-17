@@ -59,4 +59,18 @@ class CalculatorTest {
         assertThat(Calculator.split("//;\n1;2;3")).contains("1", "2", "3");
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"2,4:6", "10,12:22", "30,2:32", "101,123:224"}, delimiter = ':')
+    @DisplayName("숫자 두개를 컴마(,)로 구분자로 입력헀을 경우 두 숫자의 합을 반환")
+    void plusNumbers(String input, int output) {
+        assertThat(Calculator.plus(input, ",")).isEqualTo(output);
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자를 입력헀을 경우 두 숫자의 합을 반환")
+    void plusNumbers() {
+        assertThat(Calculator.plus("//;\n1;2;3")).isEqualTo(6);
+    }
+
+
 }
