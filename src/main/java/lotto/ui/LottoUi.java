@@ -1,7 +1,10 @@
-package lotto;
+package lotto.ui;
 
-import lotto.view.InputView;
-import lotto.view.OutputView;
+import lotto.controller.LottoMachine;
+import lotto.domain.LottoTicket;
+import lotto.domain.Statistics;
+import lotto.ui.view.InputView;
+import lotto.ui.view.OutputView;
 
 public class LottoUi {
 

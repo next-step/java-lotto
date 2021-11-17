@@ -1,6 +1,6 @@
-package lotto.view;
+package lotto.ui.view;
 
-import lotto.*;
+import lotto.domain.*;
 
 import java.util.List;
 

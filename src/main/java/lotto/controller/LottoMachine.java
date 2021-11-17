@@ -1,5 +1,9 @@
-package lotto;
+package lotto.controller;
 
+import lotto.domain.Dollars;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoTicket;
+import lotto.domain.Statistics;
 import lotto.utils.IntegerParser;
 
 import java.util.Collections;

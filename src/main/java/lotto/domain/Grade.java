@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import static java.util.Arrays.stream;
 

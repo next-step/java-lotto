@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.ui.view;
 
 import java.util.Scanner;
 
