@@ -1,6 +1,7 @@
 package calculator;
 
 import helper.CollectionHelper;
+import helper.StringHelper;
 
 import java.util.List;
 
@@ -33,16 +34,7 @@ public class StringAddCalculator {
     private int sum(List<String> numbers) {
         return numbers
             .stream()
-            .mapToInt(this::parseInt)
+            .mapToInt(StringHelper::stringToInt)
             .sum();
-    }
-
-    private int parseInt(String input) {
-        int number = Integer.parseInt(input);
-        if (number < 0) {
-            throw new RuntimeException();
-        }
-
-        return number;
     }
 }

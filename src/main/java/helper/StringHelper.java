@@ -1,5 +1,7 @@
 package helper;
 
+import constant.CalculatorConstant;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -28,6 +30,14 @@ public class StringHelper {
 
     public static List<String> splitByCommaOrColon(String input) {
         return Arrays.asList(input.split(",|:"));
+    }
+
+    public static int stringToInt(String input) {
+        int number = Integer.parseInt(input);
+        if (number < 0) {
+            throw new RuntimeException();
+        }
+        return number;
     }
 
     private StringHelper() {

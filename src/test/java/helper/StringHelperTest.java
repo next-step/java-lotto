@@ -1,6 +1,8 @@
 package helper;
 
 import constant.CalculatorConstant;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -9,6 +11,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 /**
  * @author han
@@ -32,6 +35,13 @@ class StringHelperTest {
     @MethodSource(value = "stringCommaOrColonProvider")
     void splitByCommaOrColon(String input, String[] expected) {
         assertThat(StringHelper.splitByCommaOrColon(input)).containsExactly(expected);
+    }
+
+    @Test
+    @DisplayName(value = "음수 변환 시, 에러를 던진다.")
+    void stringToInt() {
+        assertThatExceptionOfType(RuntimeException.class)
+            .isThrownBy(() -> StringHelper.stringToInt("-1"));
     }
 
     static Stream<Arguments> stringPatternProvider() {
