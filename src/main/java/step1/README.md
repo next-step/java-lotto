@@ -22,4 +22,7 @@
     5. equals 재정의 할거면 hashcode도 재정의
     6. 계산 책임을 numbers에게 맡기는 것은 어떤지
     7. 인스턴스 생성 테스트여도 적절한 검증 필요
-    
+
+## 질문
+
+    Expression의 Regex Matcher에서 한줄에 한점찍기를 어떻게 구상해야할지 어렵다.
