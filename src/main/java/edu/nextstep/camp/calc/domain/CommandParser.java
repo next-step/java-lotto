@@ -1,4 +1,4 @@
-package edu.nextstep.camp.calc;
+package edu.nextstep.camp.calc.domain;
 
 import java.util.Arrays;
 import java.util.Collection;
