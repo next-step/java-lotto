@@ -10,8 +10,7 @@ public class Lotto {
         lottoNumbers = new LottoNumbers();
     }
 
-    //랜덤값 테스트를 위한 protected 생성자
-    protected Lotto(List<Integer> lottoNumbers) {
+    public Lotto(List<Integer> lottoNumbers) {
         this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }
 
