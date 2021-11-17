@@ -17,9 +17,9 @@ public class Calculator {
             return 0;
 
         int number;
-        try{
+        try {
             number = Integer.parseInt(input);
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new RuntimeException("구분자 외 숫자 이외의 값은 전달할 수 없습니다.");
         }
 
@@ -29,17 +29,17 @@ public class Calculator {
         return number;
     }
 
-    public static String[] split(String input) {
-        return split(input, DEFAULT_DELIMITER);
+    public static String[] split(String input, String delimiter) {
+        return input.split(delimiter);
     }
 
-    public static String[] split(String input, String delimiter) {
+    public static String[] split(String input) {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
         if (m.find()) {
             String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);
         }
-        return input.split(delimiter);
+        return input.split("");
     }
 
     public static int plus(String input, String delimiter) {
@@ -58,6 +58,16 @@ public class Calculator {
     }
 
     public static int plus(String input) {
-        return plus(input, DEFAULT_DELIMITER);
+        String[] inputSplit = split(input);
+        int[] numbers = Arrays.stream(inputSplit)
+                .mapToInt(Calculator::parse)
+                .toArray();
+
+        int result = 0;
+        for (int number : numbers) {
+            result += number;
+        }
+
+        return result;
     }
 }
