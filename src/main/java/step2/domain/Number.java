@@ -1,7 +1,5 @@
 package step2.domain;
 
-import step2.utils.RandomUtils;
-
 import java.util.Objects;
 
 public class Number {
