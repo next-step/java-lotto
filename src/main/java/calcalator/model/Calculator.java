@@ -15,7 +15,13 @@ public class Calculator {
     public static int parse(String input) throws NumberFormatException {
         if (isEmpty(input))
             return 0;
-        return Integer.parseInt(input);
+
+        int number = Integer.parseInt(input);
+
+        if (number < 0) {
+            throw new RuntimeException("입력값으로 음수는 전달할 수 없습니다.");
+        }
+        return number;
     }
 
     public static String[] split(String input) {
