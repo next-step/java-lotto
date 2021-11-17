@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Money implements Comparable<Money> {
     private final int value;
+    private static final int ZERO = 0;
 
     public Money(int value) {
         this.value = value;
@@ -26,7 +27,7 @@ public class Money implements Comparable<Money> {
     }
 
     public int quotient(Money unitPrice) {
-        if (unitPrice.value == 0) {
+        if (unitPrice.value == ZERO) {
             throw new IllegalArgumentException("로또의 가격은 0이 될 수 없습니다.");
         }
 

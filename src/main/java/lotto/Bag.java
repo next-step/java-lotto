@@ -2,11 +2,14 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Stream;
 
 public class Bag {
+    private static final int ZERO = 0;
+
     private Money money;
     private final List<Lotto> lottos;
 
@@ -29,7 +32,7 @@ public class Bag {
 
     public void buyLotto(Money unitPrice) {
         if (money.lessThan(unitPrice)) {
-            throw new IllegalArgumentException("Not enough to buy lotto...");
+            throw new IllegalArgumentException("로또를 살 돈이 없습니다.");
         }
 
         int lottoCount = money.quotient(unitPrice);
@@ -40,25 +43,31 @@ public class Bag {
         }
     }
 
-    public List<Integer> lottoResult(Lotto target) {
-        Integer[] result = new Integer[7];
-        for (int i = 0; i < 7; i++) {
-            result[i] = 0;
-        }
+    public Map<Prize, Integer> lottoResult(Lotto target) {
+        Map<Prize, Integer> result = new HashMap<>();
 
         for (Lotto lotto : this.lottos) {
-            result[lotto.hitCount(target)]++;
+            Prize prize = lotto.result(target);
+            emptyCheckAndSetDefault(result, prize);
+
+            result.put(prize, result.get(prize) + 1);
         }
 
-        return Arrays.asList(result);
+        return result;
     }
 
-    public double yield(List<Double> prizeList, Lotto lotto) {
-        final List<Integer> result = this.lottoResult(lotto);
+    private void emptyCheckAndSetDefault(Map<Prize, Integer> result, Prize prize) {
+        if (!result.containsKey(prize)) {
+            result.put(prize, ZERO);
+        }
+    }
 
-        final double totalPrize = Stream.iterate(0, i -> i + 1)
-                .limit(7)
-                .mapToDouble(index -> result.get(index) * prizeList.get(index))
+    public double yield(Lotto lotto) {
+        final Map<Prize, Integer> result = this.lottoResult(lotto);
+
+        final double totalPrize = Arrays.stream(Prize.values())
+                .filter(prize -> result.containsKey(prize))
+                .mapToDouble(prize -> (double) result.get(prize) * prize.money())
                 .sum();
 
         return totalPrize;

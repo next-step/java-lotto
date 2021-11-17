@@ -8,32 +8,48 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Lotto {
-    private static final List<Integer> LOTTO_NUMBERS = Stream.iterate(1, i -> i + 1).limit(45).collect(Collectors.toList());
+    private static final int TOTAL_LOTTO_NUMBER_COUNT = 45;
     private static final int DEFAULT_SELECT_COUNT = 6;
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
     // 자동 로또
     public Lotto() {
-        Collections.shuffle(LOTTO_NUMBERS);
-        this.numbers = LOTTO_NUMBERS.stream().limit(6).collect(Collectors.toList());
+        this.numbers = getNumbers();
+    }
+
+    private List<LottoNumber> getNumbers() {
+        final List<LottoNumber> allLottoNumbers = Stream.iterate(1, i -> i + 1)
+                .limit(TOTAL_LOTTO_NUMBER_COUNT)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        Collections.shuffle(allLottoNumbers);
+
+        return allLottoNumbers.stream()
+                .limit(DEFAULT_SELECT_COUNT)
+                .collect(Collectors.toList());
     }
 
     // 수동 로또
     public Lotto(Integer... numbers) {
-        this(Arrays.asList(numbers));
+        this(Arrays.asList(numbers).stream().collect(Collectors.toList()));
     }
 
     public Lotto(List<Integer> numbers) {
         if (numbers.size() != DEFAULT_SELECT_COUNT) {
             throw new IllegalArgumentException("로또는 6개의 번호를 입력해야 합니다.");
         }
-        this.numbers = numbers;
+        this.numbers = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
-    public int hitCount(Lotto target) {
-        return (int) this.numbers.stream()
-                .filter(target.numbers::contains)
-                .count();
+    public Prize result(Lotto target) {
+        return Prize.of(
+                (int) this.numbers.stream()
+                        .filter(target.numbers::contains)
+                        .count()
+        );
     }
 
     @Override

@@ -2,22 +2,16 @@ package lotto.view;
 
 import lotto.Bag;
 import lotto.Lotto;
+import lotto.Prize;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResultView {
     private final int money;
     private final Lotto winLotto;
-    private static final List<Double> PRIZE_LIST = Arrays.asList(
-            0D,
-            0D,
-            0D,
-            5000D,
-            5_0000D,
-            150_0000D,
-            20_0000_0000D
-    );
 
     public ResultView(int money, Lotto winLotto) {
         this.money = money;
@@ -25,15 +19,15 @@ public class ResultView {
     }
 
     public void showStatistics(Bag bag) {
-        final List<Integer> result = bag.lottoResult(winLotto);
+        final Map<Prize, Integer> result = bag.lottoResult(winLotto);
 
-        for (int i = 3; i < result.size(); i++) {
-            System.out.println(i + "개 일치" + "(" + PRIZE_LIST.get(i) + "원) - " + result.get(i) + "개");
+        for (Prize prize : result.keySet().stream().sorted().collect(Collectors.toList())) {
+            System.out.println(prize.hitCount() + "개 일치" + "(" + prize.money() + "원) - " + result.get(prize) + "개");
         }
     }
 
     public void showYield(Bag bag) {
-        final double yield = bag.yield(PRIZE_LIST, winLotto);
+        final double yield = bag.yield(winLotto);
         System.out.println("총 수익률은 " + (yield / money) + "입니다.");
     }
 }
