@@ -30,7 +30,8 @@ public class NumberTest {
     void plus() {
         Number number = new Number("1");
         Number other = new Number("3");
-        assertThat(number.plus(other).equals(new Number(4))).isTrue();
+        number.plus(other);
+        assertThat(number.equals(new Number(4))).isTrue();
     }
 
     @ParameterizedTest

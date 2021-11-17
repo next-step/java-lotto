@@ -6,8 +6,12 @@ import static calcalator.application.Constant.EXCEPTION_NUMBER_FORMAT_MESSAGE;
 import static calcalator.application.Constant.EXCEPTION_NUMBER_NEGATIVE_MESSAGE;
 
 public class Number {
-    private final int number;
+    private int number;
 
+
+    public Number() {
+        this.number = 0;
+    }
 
     public Number(String input) {
         this.number = parse(input);
@@ -17,8 +21,8 @@ public class Number {
         this.number = number;
     }
 
-    public Number plus(Number other) {
-        return new Number(this.number + other.number);
+    public void plus(Number other) {
+        this.number += other.number;
     }
 
     public int parse(String input) {
