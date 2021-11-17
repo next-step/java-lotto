@@ -12,9 +12,10 @@ public class LottoList {
         return Collections.unmodifiableList(lottoList);
     }
 
-    public LottoList(Integer size) {
+    public LottoList(Integer purchaseAmount) {
+        int purchaseCount = purchaseAmount/1000;
         List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < purchaseCount; i++) {
             Lotto lotto = new Lotto();
             lottoList.add(lotto);
         }
