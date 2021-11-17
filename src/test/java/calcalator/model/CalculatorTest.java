@@ -40,4 +40,23 @@ class CalculatorTest {
                 .isInstanceOf(NumberFormatException.class);
     }
 
+    @Test
+    @DisplayName("숫자 두개를 컴마(,)로 구분")
+    void split() {
+        assertThat(Calculator.split("1,2,3")).contains("1", "2", "3");
+    }
+
+    @Test
+    @DisplayName("입력값을 여러 구분자로 구분")
+    void multiSplit() {
+        String regex = "[,:]";
+        assertThat("1,2:3".split(regex)).contains("1", "2", "3");
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자 테스트")
+    void customDelimiter() {
+        assertThat(Calculator.customDelimiter("//;\n1;2;3")).isEqualTo(";");
+    }
+
 }
