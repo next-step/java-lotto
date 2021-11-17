@@ -17,20 +17,34 @@ class StringHelperTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    public void null_or_empty(String input) {
+    void nullOrEmpty(String input) {
         assertThat(StringHelper.nullOrEmpty(input)).isEqualTo(true);
     }
 
     @ParameterizedTest(name = "패턴을 포함한 split")
-    @MethodSource(value = "stringProvider")
-    public void split_by_pattern(String input, String[] expected) {
+    @MethodSource(value = "stringPatternProvider")
+    void splitByPattern(String input, String[] expected) {
         assertThat(StringHelper.splitByPattern(CalculatorConstant.CUSTOM_DELIMITER_PATTERN, input)).containsExactly(expected);
     }
 
-    static Stream<Arguments> stringProvider() {
+
+    @ParameterizedTest(name = "콤마 혹은 콜론을 포함한 split")
+    @MethodSource(value = "stringCommaOrColonProvider")
+    void splitByCommaOrColon(String input, String[] expected) {
+        assertThat(StringHelper.splitByCommaOrColon(input)).containsExactly(expected);
+    }
+
+    static Stream<Arguments> stringPatternProvider() {
         return Stream.of(
             Arguments.arguments("//;\n1;2;3", new String[]{"1", "2", "3"}),
             Arguments.arguments("//;\n-1;1912;3333", new String[]{"-1", "1912", "3333"})
+        );
+    }
+
+    static Stream<Arguments> stringCommaOrColonProvider() {
+        return Stream.of(
+            Arguments.arguments("1,2:3", new String[]{"1", "2", "3"}),
+            Arguments.arguments("0:1:0,4,6", new String[]{"0", "1", "0", "4", "6"})
         );
     }
 }

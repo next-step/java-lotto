@@ -1,28 +1,36 @@
 package calculator;
 
-import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 import static constant.CalculatorConstant.CUSTOM_DELIMITER_PATTERN;
 import static constant.CalculatorConstant.DEFAULT_SUM;
-import static helper.StringHelper.nullOrEmpty;
-import static helper.StringHelper.splitByPattern;
+import static helper.StringHelper.*;
 
 /**
  * @author han
  */
 public class StringAddCalculator {
 
+    private static List<String> strings;
+
     public static int splitAndSum(String input) {
         if (nullOrEmpty(input)) {
             return DEFAULT_SUM;
         }
 
-        return sum(splitByPattern(CUSTOM_DELIMITER_PATTERN, input));
+        strings = splitByPattern(CUSTOM_DELIMITER_PATTERN, input);
+
+        if (Objects.isNull(strings) || strings.isEmpty()) {
+            strings = splitByCommaOrColon(input);
+        }
+
+        return sum(strings);
     }
 
-    private static int sum(String[] numbers) {
-        return Arrays
-            .stream(numbers)
+    private static int sum(List<String> numbers) {
+        return numbers
+            .stream()
             .mapToInt(StringAddCalculator::parseInt)
             .sum();
     }
