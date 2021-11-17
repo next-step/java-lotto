@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.lang.String.format;
 
@@ -14,6 +15,14 @@ public class LottoNumbers {
 
     public static LottoNumbers publish(ShuffleStrategy shuffleStrategy) {
         List<LottoNumber> lottoNumbers = LottoNumber.listOf(LOTTO_NUMBERS_SIZE, shuffleStrategy);
+        return new LottoNumbers(lottoNumbers);
+    }
+
+    public static LottoNumbers of(List<Integer> numbers) {
+        checkNotNull(numbers);
+        List<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::from)
+                .collect(Collectors.toList());
         return new LottoNumbers(lottoNumbers);
     }
 

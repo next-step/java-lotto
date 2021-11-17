@@ -26,6 +26,10 @@ public enum Grade {
                 .orElse(BANG);
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
     public long getReward() {
         return reward;
     }

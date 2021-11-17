@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 
@@ -55,6 +56,10 @@ public class Statistics {
 
     private long sumGradeReward(Grade grade) {
         return grade.getReward() * grades.get(grade);
+    }
+
+    public Map<Grade, Long> getGrades() {
+        return Collections.unmodifiableMap(grades);
     }
 
     @Override
