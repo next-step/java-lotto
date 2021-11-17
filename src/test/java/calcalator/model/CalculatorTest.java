@@ -82,7 +82,7 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("입력값이 음수일 때 pluse시 RuntimeException 발생")
+    @DisplayName("입력값이 음수일 때 plus시 RuntimeException 발생")
     void plusWithNegative() {
         assertThatThrownBy(() -> Calculator.plus("-1,-2,1"))
                 .isInstanceOf(RuntimeException.class);
