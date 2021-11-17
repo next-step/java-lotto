@@ -10,16 +10,17 @@ public class NumbersTest {
     void numbers() {
         Numbers numbers = new Numbers(new String[]{"1", "2"});
         Numbers empty = new Numbers();
+
+        assertEquals(new Number(3), numbers.sum());
+        assertEquals(new Number(0), empty.sum());
     }
 
     @Test
     void sum() {
         Numbers sumIs6 = new Numbers(new String[]{"1", "2", "3"});
-        Number ans6 = sumIs6.sum();
-        assertEquals(new Number(6), ans6);
+        assertEquals(new Number(6), sumIs6.sum());
 
         Numbers sumIs10 = new Numbers(new String[]{"1", "2", "3", "4"});
-        Number ans10 = sumIs10.sum();
-        assertEquals(new Number(10), ans10);
+        assertEquals(new Number(10), sumIs10.sum());
     }
 }
