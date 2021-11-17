@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -18,36 +19,42 @@ class StringAddCalculatorTest {
     }
 
     @Test
+    @DisplayName(value = "하나의 숫자")
     public void splitAndSum_숫자하나() {
         int result = StringAddCalculator.splitAndSum("1");
         assertThat(result).isEqualTo(1);
     }
 
     @Test
+    @DisplayName(value = "쉼표를 포함한 숫자")
     public void splitAndSum_쉼표구분자() {
         int result = StringAddCalculator.splitAndSum("1,2");
         assertThat(result).isEqualTo(3);
     }
 
     @Test
+    @DisplayName(value = "쉼표와 콜론을 포함한 숫자")
     public void splitAndSum_쉼표_또는_콜론_구분자() {
         int result = StringAddCalculator.splitAndSum("1,2:3");
         assertThat(result).isEqualTo(6);
     }
 
     @Test
+    @DisplayName(value = "커스텀 구분자를 포함한 숫자")
     public void splitAndSum_custom_구분자() {
         int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
     }
 
     @Test
+    @DisplayName(value = "음수")
     public void splitAndSum_negative() {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
             .isInstanceOf(RuntimeException.class);
     }
 
     @Test
+    @DisplayName(value = "숫자 이외의 값")
     public void splitAndSum_숫자_이외의_값() {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("a,2,3"))
             .isInstanceOf(RuntimeException.class);
