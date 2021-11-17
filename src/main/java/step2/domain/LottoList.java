@@ -10,10 +10,6 @@ import java.util.List;
 public class LottoList {
     private final List<Lotto> lottoList;
 
-    public List<Lotto> getLottoList() {
-        return Collections.unmodifiableList(lottoList);
-    }
-
     public LottoList(Integer purchaseAmount, GetLottoNumberStrategy getLottoNumberStrategy) {
         int purchaseCount = purchaseAmount/1000;
         List<Lotto> lottoList = new ArrayList<>();
@@ -24,17 +20,20 @@ public class LottoList {
         this.lottoList = lottoList;
     }
 
-    public List<Integer> checkMatching(List<Integer> winningNumbers) {
-        List<Integer> matchingList = new ArrayList<>();
-        lottoList.stream().forEach(i -> matchingList.add(i.checkMatching(winningNumbers)));
-        return matchingList;
+    public List<Lotto> getLottoList() {
+        return Collections.unmodifiableList(lottoList);
     }
 
-    public List<Integer> getCountList(List<Integer> matchingList) {
-        List<Integer> countList = new ArrayList<>();
-        for (int i = 0; i < Lotto.SIZE+1;i++) {
-            countList.add(Collections.frequency(matchingList,i));
+    /***
+     *  matchingList 는
+     *  [ 0개 맞춘 로또 수, 1개 맞춘 로또 수, ... ] 을 의미한다.
+     */
+    public List<Integer> checkMatching(List<Integer> winningNumbers) {
+        List<Integer> matchingList = new ArrayList<>();
+        for (int i = 0; i < Lotto.SIZE+1; i++) {
+            matchingList.add(0);
         }
-        return countList;
+        lottoList.stream().forEach(i -> matchingList.set(i.checkMatching(winningNumbers),matchingList.get(i.checkMatching(winningNumbers))+1));
+        return matchingList;
     }
 }
