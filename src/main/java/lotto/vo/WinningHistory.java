@@ -7,41 +7,40 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-import static java.util.stream.Collectors.counting;
-import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.*;
 
 public class WinningHistory {
 
     private final List<WinningRank> history;
-    private final Money originMoney;
-    private final Money winningMoney;
+    private final Double yield;
+    private final WinningStatistics stat;
 
-    private WinningHistory(List<WinningRank> history, Money originMoney, Money winningMoney) {
+    public WinningHistory(List<WinningRank> history, Double yield, WinningStatistics stat) {
         this.history = history;
-        this.originMoney = originMoney;
-        this.winningMoney = winningMoney;
+        this.yield = yield;
+        this.stat = stat;
     }
 
     public static WinningHistory create(Money originMoney, List<WinningRank> history, Money winningMoney) {
-        return new WinningHistory(history, originMoney, winningMoney);
+        BigDecimal yieldOfDecimal = winningMoney.divide(originMoney);
+        WinningStatistics stat = history.stream()
+                .filter(winningRank -> !winningRank.equals(WinningRank.NO_RANK))
+                .collect(collectingAndThen(
+                        groupingBy(winningRank -> winningRank, () -> new EnumMap<WinningRank, Long>(WinningRank.class), counting()),
+                        WinningStatistics::new));
+        return new WinningHistory(history, yieldOfDecimal.doubleValue(), stat);
     }
 
     public List<WinningRank> getHistory() {
         return history;
     }
 
-    public Money getWinningMoney() {
-        return winningMoney;
-    }
-
-    public Map<WinningRank, Long> getWinningMap() {
-        return history.stream()
-                .filter(winningRank -> !winningRank.equals(WinningRank.NO_RANK))
-                .collect(groupingBy(winningRank -> winningRank, () -> new EnumMap<WinningRank, Long>(WinningRank.class), counting()));
+    public WinningStatistics getStat() {
+        return stat;
 
     }
 
-    public BigDecimal getYield() {
-        return winningMoney.divide(originMoney);
+    public Double getYield() {
+        return yield;
     }
 }
