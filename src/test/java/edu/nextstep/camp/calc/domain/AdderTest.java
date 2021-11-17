@@ -15,23 +15,23 @@ import static org.assertj.core.api.Assertions.*;
 public class AdderTest {
     static Stream<Arguments> addAndExpectedArguments() {
         return Stream.of(
-                Arguments.of(List.of(1), 1),
-                Arguments.of(List.of(1, 2), 3),
-                Arguments.of(List.of(1, 2, 3), 6),
-                Arguments.of(Collections.emptyList(), 0)
+                Arguments.of(List.of(PositiveNumber.of(1)), PositiveNumber.of(1)),
+                Arguments.of(List.of(PositiveNumber.of(1), PositiveNumber.of(2)), PositiveNumber.of(3)),
+                Arguments.of(List.of(PositiveNumber.of(1), PositiveNumber.of(2), PositiveNumber.of(3)), PositiveNumber.of(6)),
+                Arguments.of(Collections.emptyList(), PositiveNumber.ofZero())
         );
     }
 
     @ParameterizedTest(name = "add: sum of {0} = {1}")
     @MethodSource("addAndExpectedArguments")
-    public void add(Collection<Integer> numbers, int expected) {
+    public void add(Collection<PositiveNumber> numbers, PositiveNumber expected) {
         assertThat(Adder.add(numbers)).isEqualTo(expected);
     }
 
 
     @ParameterizedTest(name = "add but failed")
     @NullSource
-    public void addFailed(List<Integer> numbers) {
+    public void addFailed(List<PositiveNumber> numbers) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> Adder.add(numbers))
                 .withMessageContaining("invalid input");

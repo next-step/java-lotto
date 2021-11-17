@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 public class CommandParser {
     private final static Pattern PATTERN = Pattern.compile("//(.)\n(.*)");
-    private final static Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+");
     private final static String DELIMITER = ",:";
     private final static String REGEX_OR_FORMATTER = "[%s]";
     private final static String DELIMITERS = String.format(REGEX_OR_FORMATTER, DELIMITER);
@@ -17,14 +16,14 @@ public class CommandParser {
     private final static int COMMAND_GROUP = 2;
 
 
-    public static Collection<Integer> parse(String command) {
+    public static Collection<PositiveNumber> parse(String command) {
         if (command == null || command.isEmpty()) {
-            return List.of(0);
+            return List.of(PositiveNumber.ofZero());
         }
 
         return Arrays.stream(split(command))
                 .map(String::trim)
-                .map(CommandParser::parseToInt)
+                .map(PositiveNumber::of)
                 .collect(Collectors.toList());
     }
 
@@ -38,22 +37,5 @@ public class CommandParser {
         final String delimiters = String.format(REGEX_OR_FORMATTER, DELIMITER + customDelimiter);
         return matcher.group(COMMAND_GROUP)
                 .split(delimiters);
-    }
-
-    private static int parseToInt(String numberCandidate) {
-        if (numberCandidate == null || numberCandidate.isEmpty()) {
-            return 0;
-        }
-
-        if (!NUMBER_PATTERN.matcher(numberCandidate).matches()) {
-            throw new IllegalArgumentException("invalid input(given value is not a number):" + numberCandidate);
-        }
-
-        final int number = Integer.parseInt(numberCandidate);
-        if (number < 0) {
-            throw new IllegalArgumentException("invalid input(the number must be positive): " + numberCandidate);
-        }
-
-        return number;
     }
 }
