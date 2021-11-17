@@ -16,8 +16,8 @@ public class Expression {
     public Expression(final String input) {
         numbers = new Numbers();
         if (isNotEmpty(input)) {
-            String[] stringNums = generateStringNums(input);
-            numbers = new Numbers(stringNums);
+            String[] stringNumbers = generateStringNumbers(input);
+            numbers = new Numbers(stringNumbers);
         }
     }
 
@@ -25,7 +25,7 @@ public class Expression {
         return (input != null) && (!input.isEmpty());
     }
 
-    private String[] generateStringNums(String input) {
+    private String[] generateStringNumbers(String input) {
         String[] stringNums = input.split(STANDARD_REGEX);
 
         Matcher matcher = Pattern.compile(CUSTOM_CHECK_REGEX).matcher(input);
