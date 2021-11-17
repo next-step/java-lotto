@@ -1,5 +1,8 @@
 package lotto.step2.domain;
 
+import java.util.Arrays;
+import java.util.function.Predicate;
+
 public enum Rank {
 
     FIRST(6, 2_000_000_000),
@@ -25,11 +28,14 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch) {
-        if (FIFTH.countOfMatch == countOfMatch) return FIFTH;
-        if (FOURTH.countOfMatch == countOfMatch) return FOURTH;
-        if (THIRD.countOfMatch == countOfMatch) return THIRD;
-        if (FIRST.countOfMatch == countOfMatch) return FIRST;
-        return MISS;
+        return Arrays.stream(values())
+                .filter(isSameCountOfMatch(countOfMatch))
+                .findFirst()
+                .orElse(MISS);
+    }
+
+    private static Predicate<Rank> isSameCountOfMatch(int countOfMatch) {
+        return rank -> rank.getCountOfMatch() == countOfMatch;
     }
 
 }
