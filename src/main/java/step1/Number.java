@@ -12,10 +12,10 @@ public class Number {
 
     public Number(int number) {
         this.number = number;
-        validate();
+        validateNonNegative();
     }
 
-    private void validate() {
+    private void validateNonNegative() {
         if (this.number < 0) {
             throw new RuntimeException("입력 숫자는 0보다 작을 수 없습니다");
         }
