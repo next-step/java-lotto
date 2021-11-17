@@ -22,6 +22,13 @@ class NumberTest {
     }
 
     @Test
+    @DisplayName("valueOf 메소드는 null이나 빈 값 문자열이 들어오면 0을 반환")
+    void 테스트_valueOf_문자열_null_빈문자열_처리() {
+        assertThat(Number.valueOf("")).isEqualTo(new Number(0));
+        assertThat(Number.valueOf(null)).isEqualTo(new Number(0));
+    }
+
+    @Test
     @DisplayName("valueOf 메소드는 음수의 문자열 값이 들어오면 예외 발생")
     void 테스트_valueOf_음수_문자열_예외_발생() {
         assertThrows(InvalidNumberValueException.class, () -> Number.valueOf("-1"));
@@ -30,7 +37,7 @@ class NumberTest {
     @Test
     @DisplayName("valueOf 메소드는 숫자가 아닌 문자열 값이 들어오면 예외 발생")
     void 테스트_valueOf_숫자가_아닌_문자열_예외_발생() {
-        assertThrows(NumberFormatException.class, () -> Number.valueOf(""));
+        assertThrows(NumberFormatException.class, () -> Number.valueOf("A"));
     }
 
 }

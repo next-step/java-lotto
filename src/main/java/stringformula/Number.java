@@ -20,6 +20,9 @@ public class Number {
     }
 
     public static Number valueOf(String value) {
+        if (value == null || value.isEmpty()) {
+            return new Number(0);
+        }
         return new Number(Integer.parseInt(value));
     }
 
@@ -32,7 +35,7 @@ public class Number {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        
+
         Number number = (Number) o;
         return value == number.value;
     }
