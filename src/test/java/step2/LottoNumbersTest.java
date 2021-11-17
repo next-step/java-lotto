@@ -18,16 +18,16 @@ public class LottoNumbersTest {
 
     @Test
     void getMatchCount() {
-        LottoNumbers firstRank = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumbers secondRank = new LottoNumbers(Arrays.asList(2, 3, 4, 5, 6, 7));
-        LottoNumbers thirdRank = new LottoNumbers(Arrays.asList(3, 4, 5, 6, 7, 8));
-        LottoNumbers fourthRank = new LottoNumbers(Arrays.asList(4, 5, 6, 7, 8, 9));
+        LottoNumbers matchSix = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers matchFive = new LottoNumbers(Arrays.asList(2, 3, 4, 5, 6, 7));
+        LottoNumbers matchFour = new LottoNumbers(Arrays.asList(3, 4, 5, 6, 7, 8));
+        LottoNumbers matchThree = new LottoNumbers(Arrays.asList(4, 5, 6, 7, 8, 9));
 
         assertAll(
-            () -> assertEquals(6, lottoNumbers.getMatchCount(firstRank)),
-            () -> assertEquals(5, lottoNumbers.getMatchCount(secondRank)),
-            () -> assertEquals(4, lottoNumbers.getMatchCount(thirdRank)),
-            () -> assertEquals(3, lottoNumbers.getMatchCount(fourthRank))
+            () -> assertEquals(6, lottoNumbers.getMatchCount(matchSix)),
+            () -> assertEquals(5, lottoNumbers.getMatchCount(matchFive)),
+            () -> assertEquals(4, lottoNumbers.getMatchCount(matchFour)),
+            () -> assertEquals(3, lottoNumbers.getMatchCount(matchThree))
         );
     }
 
