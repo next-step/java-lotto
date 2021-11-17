@@ -1,5 +1,7 @@
 package step1;
 
+import java.util.Objects;
+
 public class Number {
 
     private final int number;
@@ -30,5 +32,10 @@ public class Number {
         }
         Number other = (Number) o;
         return this.number == other.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }
