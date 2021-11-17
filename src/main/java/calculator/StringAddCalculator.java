@@ -9,6 +9,8 @@ public class StringAddCalculator {
             return NUMBER_ZERO;
         }
 
+
+
         return NUMBER_ZERO;
     }
 

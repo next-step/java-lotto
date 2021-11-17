@@ -16,10 +16,17 @@ public class StringAddCalculatorTest {
         assertThat(new StringAddCalculator().splitAndSum(inputValue)).isEqualTo(0);
     }
 
-//    @Test
+    @Test
+    @DisplayName("문자가 들어있는지 체크한다.")
+    public void isNumber() {
+        assertThatThrownBy(() -> {
+            new StringAddCalculator().splitAndSum("a");
+        }).isInstanceOf(RuntimeException.class);
+    }
+
+    //    @Test
 //    public void splitAndSum_숫자하나() throws Exception {
-//        int result = StringAddCalculator.splitAndSum("1");
-//        assertThat(result).isEqualTo(1);
+//        assertThat(new StringAddCalculator().splitAndSum("1")).isEqualTo(1);
 //    }
 
 //    @Test
