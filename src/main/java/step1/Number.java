@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class Number {
 
+    private static final int MINIMUM_NUMBER = 0;
+
     private final int number;
 
     public Number(final String number) {
@@ -16,8 +18,8 @@ public class Number {
     }
 
     private void validateNonNegative() {
-        if (this.number < 0) {
-            throw new RuntimeException("입력 숫자는 0보다 작을 수 없습니다");
+        if (this.number < MINIMUM_NUMBER) {
+            throw new RuntimeException("입력 숫자는" + MINIMUM_NUMBER + "보다 작을 수 없습니다");
         }
     }
 
