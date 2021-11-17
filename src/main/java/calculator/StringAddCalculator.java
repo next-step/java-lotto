@@ -13,7 +13,10 @@ import static helper.StringHelper.*;
  */
 public class StringAddCalculator {
 
-    public static int splitAndSum(String input) {
+    public StringAddCalculator() {
+    }
+
+    public int splitAndSum(String input) {
         if (nullOrEmpty(input)) {
             return DEFAULT_SUM;
         }
@@ -27,14 +30,14 @@ public class StringAddCalculator {
         return sum(strings);
     }
 
-    private static int sum(List<String> numbers) {
+    private int sum(List<String> numbers) {
         return numbers
             .stream()
-            .mapToInt(StringAddCalculator::parseInt)
+            .mapToInt(this::parseInt)
             .sum();
     }
 
-    private static int parseInt(String input) {
+    private int parseInt(String input) {
         int number = Integer.parseInt(input);
         if (number < 0) {
             throw new RuntimeException();
