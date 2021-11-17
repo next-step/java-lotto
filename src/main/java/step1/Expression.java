@@ -39,11 +39,7 @@ public class Expression {
         return stringNumbers;
     }
 
-    public boolean hasNextNumber() {
-        return !numbers.isEmpty();
-    }
-
-    public Number nextNumber() {
-        return numbers.nextNumber();
+    public Number sum() {
+        return numbers.sum();
     }
 }
