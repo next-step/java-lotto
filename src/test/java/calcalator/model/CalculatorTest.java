@@ -56,7 +56,7 @@ class CalculatorTest {
     @Test
     @DisplayName("커스텀 구분자 테스트")
     void customDelimiter() {
-        assertThat(Calculator.customDelimiter("//;\n1;2;3")).isEqualTo(";");
+        assertThat(Calculator.split("//;\n1;2;3")).contains("1", "2", "3");
     }
 
 }
