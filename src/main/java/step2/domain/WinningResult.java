@@ -26,4 +26,12 @@ public class WinningResult {
     public Map<WinningType, Integer> getWinningResult() {
         return winningResult;
     }
+
+    public int totalWinnings() {
+        int totalWinnings = 0;
+        for (WinningType type : winningResult.keySet()) {
+            totalWinnings += (type.getWinnings() * winningResult.get(type));
+        }
+        return totalWinnings;
+    }
 }

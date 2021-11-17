@@ -3,10 +3,11 @@ package step2.domain;
 import java.util.Arrays;
 
 public enum WinningType {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
+    NONE(0, 0),
+    FOURTH(3, 5_000),
     THIRD(4, 50_000),
-    FOURTH(3, 5_000);
+    SECOND(5, 1_500_000),
+    FIRST(6, 2_000_000_000);
 
     private int matchCount;
     private int winnings;
@@ -20,7 +21,11 @@ public enum WinningType {
         return Arrays.stream(values())
                 .filter(type -> type.eq(matchCount))
                 .findAny()
-                .orElseThrow(IllegalArgumentException::new);
+                .orElse(WinningType.NONE);
+    }
+
+    public int getMatchCount() {
+        return matchCount;
     }
 
     public int getWinnings() {

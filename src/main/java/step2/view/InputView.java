@@ -15,6 +15,7 @@ public class InputView {
 
     public static String inputLastWeekLottoNumber() {
         System.out.println(INPUT_LAST_WEEK_LOTTO_NUMBER_MESSAGE);
-        return scanner.next();
+        scanner.nextLine();//버퍼 비우기
+        return scanner.nextLine();
     }
 }

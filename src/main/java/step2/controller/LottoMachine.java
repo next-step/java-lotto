@@ -1,26 +1,26 @@
 package step2.controller;
 
 import step2.domain.Lottos;
-import step2.view.InputView;
-import step2.view.ResultView;
+import step2.domain.WinningResult;
+import step2.service.LottoService;
 
 public class LottoMachine {
 
-    public static void main(String[] args) {
-        start();
+    private LottoService lottoService;
+
+    private LottoMachine() {
+        this.lottoService = new LottoService();
     }
 
-    public static void start() {
-        int price = InputView.inputCash();
-        Lottos lottos = Lottos.purchase(price);
+    public static LottoMachine create() {
+        return new LottoMachine();
+    }
 
-        ResultView.showLottoGenerateCount(lottos);
-        ResultView.showAllLottoNumbers(lottos);
-        System.out.println();
+    public Lottos purchase(int price) {
+        return lottoService.purchase(price);
+    }
 
-        String numbers = InputView.inputLastWeekLottoNumber();
-        System.out.println();
-
-        ResultView.showWinningStatistics();
+    public WinningResult winningResult(Lottos purchasedLottos, String winningNumbers) {
+        return lottoService.winningResult(purchasedLottos, winningNumbers);
     }
 }

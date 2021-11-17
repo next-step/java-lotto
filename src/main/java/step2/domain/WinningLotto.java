@@ -15,6 +15,10 @@ public class WinningLotto {
         return new WinningLotto(splitNumbers(numbers));
     }
 
+    public Lotto getLotto() {
+        return lotto;
+    }
+
     public List<Number> getLottoNumbers() {
         return lotto.getLottoNumbers();
     }
