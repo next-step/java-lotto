@@ -2,12 +2,41 @@ package calcalator.model;
 
 import java.util.Objects;
 
+import static calcalator.application.Constant.EXCEPTION_NUMBER_FORMAT_MESSAGE;
+import static calcalator.application.Constant.EXCEPTION_NUMBER_NEGATIVE_MESSAGE;
+
 public class Number {
-    private int number;
+    private final int number;
 
 
-    public Number(String number) {
-        this.number = Integer.parseInt(number);
+    public Number(String input) {
+        this.number = parse(input);
+    }
+
+    public Number(int number) {
+        this.number = number;
+    }
+
+    public Number plus(Number other) {
+        return new Number(this.number + other.number);
+    }
+
+    public int parse(String input) {
+        if (input == null || "".equals(input))
+            return 0;
+
+        int number;
+        try {
+            number = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException(EXCEPTION_NUMBER_FORMAT_MESSAGE);
+        }
+
+        if (number < 0) {
+            throw new RuntimeException(EXCEPTION_NUMBER_NEGATIVE_MESSAGE);
+        }
+
+        return number;
     }
 
     @Override
