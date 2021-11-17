@@ -12,10 +12,10 @@ public class Output {
         lottoList.getLottoList().stream().map(randomNumbers -> randomNumbers.getLottoNumbers()).forEach(System.out::println);
     }
 
-    public static void viewResult(List<Integer> countList,Integer purchaseAmount) {
-        for (int i = 3; i < countList.size(); i++) {
-            System.out.println(i + "개 일치 ("+ Prize.prizeList.get(i)+")-"+countList.get(i)+"개");
+    public static void viewResult(List<Integer> matchingList,Integer purchaseAmount) {
+        for (int i = 3; i < matchingList.size(); i++) {
+            System.out.println(i + "개 일치 ("+ Prize.prizeList.get(i)+")-"+matchingList.get(i)+"개");
         }
-        System.out.println("총 수익률은 "+Prize.calculatorYield(countList,purchaseAmount)+"입니다.");
+        System.out.println("총 수익률은 "+Prize.calculatorYield(matchingList,purchaseAmount)+"입니다.");
     }
 }

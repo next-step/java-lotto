@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Input {
+
     private static Scanner scanner = new Scanner(System.in);
 
     private static Integer purchaseAmount;
@@ -19,8 +20,6 @@ public class Input {
         Integer purchaseAmount = scanner.nextInt();
         this.purchaseAmount = purchaseAmount;
         System.out.println(purchaseAmount / 1000 + "개를 구매했습니다.");
-
-
     }
 
     public List<Integer> inputWinningNumbers() {
