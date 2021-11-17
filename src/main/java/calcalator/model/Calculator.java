@@ -5,4 +5,9 @@ public class Calculator {
         return input == null || "".equals(input);
     }
 
+    public static int parse(String input) throws NumberFormatException {
+        if (isEmpty(input))
+            return 0;
+        return Integer.parseInt(input);
+    }
 }
