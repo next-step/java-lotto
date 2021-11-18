@@ -47,7 +47,7 @@ public class Bag {
         Map<Prize, Integer> result = new HashMap<>();
 
         for (Lotto lotto : this.lottos) {
-            Prize prize = lotto.result(target);
+            Prize prize = Prize.of(lotto.result(target));
             emptyCheckAndSetDefault(result, prize);
 
             result.put(prize, result.get(prize) + 1);

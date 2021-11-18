@@ -2,9 +2,14 @@ package lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,25 +39,24 @@ public class LottoTest {
         assertThat(lotto).isEqualTo(new Lotto(new ArrayList<>(Arrays.asList(6,5,4,3,2,1))));
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("resultMethodSource")
     @DisplayName("당첨로또와 비교하여 몇개 맞추었는지 계산할 수 있다.")
-    void 로또비교() {
+    void resultMethod(List<Integer> input, int result) {
         Lotto target = new Lotto(1, 2, 3, 4, 5, 6);
 
-        Lotto firstPlace = new Lotto(1, 2, 3, 4, 5, 6);
-        Lotto secondPlace = new Lotto(2, 3, 4, 5, 6, 7);
-        Lotto thirdPlace = new Lotto(3, 4, 5, 6, 7, 8);
-        Lotto fourthPlace = new Lotto(4, 5, 6, 7, 8, 9);
-        Lotto fifthPlace = new Lotto(5, 6, 7, 8, 9, 10);
-        Lotto sixthplace = new Lotto(6, 7, 8, 9, 10, 11);
-        Lotto lose = new Lotto(7, 8, 9, 10, 11, 12);
+        assertThat(new Lotto(input).result(target)).isEqualTo(result);
+    }
 
-        assertThat(firstPlace.result(target)).isEqualTo(Prize.FIRST);
-        assertThat(secondPlace.result(target)).isEqualTo(Prize.SECOND);
-        assertThat(thirdPlace.result(target)).isEqualTo(Prize.THIRD);
-        assertThat(fourthPlace.result(target)).isEqualTo(Prize.FOURTH);
-        assertThat(fifthPlace.result(target)).isEqualTo(Prize.FIFTH);
-        assertThat(sixthplace.result(target)).isEqualTo(Prize.SIXTH);
-        assertThat(lose.result(target)).isEqualTo(Prize.LOSE);
+    static Stream<Arguments> resultMethodSource() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 6),
+                Arguments.of(Arrays.asList(2, 3, 4, 5, 6, 7), 5),
+                Arguments.of(Arrays.asList(3, 4, 5, 6, 7, 8), 4),
+                Arguments.of(Arrays.asList(4, 5, 6, 7, 8, 9), 3),
+                Arguments.of(Arrays.asList(5, 6, 7, 8, 9, 10), 2),
+                Arguments.of(Arrays.asList(6, 7, 8, 9, 10, 11), 1),
+                Arguments.of(Arrays.asList(7, 8, 9, 10, 11, 12), 0)
+        );
     }
 }

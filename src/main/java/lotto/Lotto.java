@@ -44,12 +44,10 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public Prize result(Lotto target) {
-        return Prize.of(
-                (int) this.numbers.stream()
-                        .filter(target.numbers::contains)
-                        .count()
-        );
+    public int result(Lotto target) {
+        return (int) this.numbers.stream()
+                .filter(target.numbers::contains)
+                .count();
     }
 
     @Override
