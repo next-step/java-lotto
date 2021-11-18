@@ -1,14 +1,11 @@
 package lotto;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Lotto {
-    private static final int TOTAL_LOTTO_NUMBER_COUNT = 45;
     private static final int DEFAULT_SELECT_COUNT = 6;
     private final List<LottoNumber> numbers;
 

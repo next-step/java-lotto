@@ -6,7 +6,6 @@ import lotto.LottoResult;
 import lotto.Prize;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ResultView {
     private final int money;
