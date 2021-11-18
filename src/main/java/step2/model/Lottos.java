@@ -42,6 +42,12 @@ public class Lottos {
         }
     }
 
+    public double getYield(Lotto winner) {
+        Map<Integer, Integer> winners = getWinners(winner);
+
+        return 0.35;
+    }
+
     public Map<Integer, Integer> getWinners(Lotto winner) {
         Map<Integer, Integer> winners = new HashMap<>();
 

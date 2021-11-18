@@ -46,4 +46,13 @@ public class LottosTest {
         assertEquals(0, noneWinner.get(4));
         assertEquals(0, noneWinner.get(3));
     }
+
+    @Test
+    void getYield() {
+        Lotto threeMatch = new Lotto(Arrays.asList(1, 2, 3, 30, 31, 32));
+
+        double yield = lottos.getYield(threeMatch);
+        double ans = Math.round(yield * 100) / 100.0;
+        assertEquals(0.35, ans);
+    }
 }
