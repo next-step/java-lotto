@@ -1,4 +1,4 @@
-package calcalator.view;
+package common.view;
 
 import calcalator.model.Number;
 
