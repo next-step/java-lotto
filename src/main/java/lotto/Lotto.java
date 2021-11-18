@@ -32,7 +32,7 @@ public class Lotto {
 
     // 수동 로또
     public Lotto(Integer... numbers) {
-        this(Arrays.asList(numbers).stream().collect(Collectors.toList()));
+        this(Arrays.asList(numbers));
     }
 
     public Lotto(List<Integer> numbers) {
