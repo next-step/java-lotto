@@ -9,12 +9,10 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Input input = new Input();
-        input.inputPurchaseAmount();
-
-        LottoList lottoList = new LottoList(input.getPurchaseAmount(), new RandomGetLottoImpl());
+        Integer purchaseAmount = Input.inputPurchaseAmount();
+        LottoList lottoList = new LottoList(purchaseAmount, new RandomGetLottoImpl());
         Output.viewPurchasedLotto(lottoList);
-        List<Integer> matchingList = lottoList.checkMatching(input.inputWinningNumbers());
-        Output.viewResult(matchingList,input.getPurchaseAmount());
+        List<Integer> matchingList = lottoList.checkMatching(Input.inputWinningNumbers());
+        Output.viewResult(matchingList,purchaseAmount);
     }
 }

@@ -31,7 +31,7 @@ public class InputUtil {
     }
 
     private static boolean checkNull(String input) {
-        if (input == null || input.equals("") ) {
+        if (input == null || input.equals("")) {
             return true;
         }
         return false;

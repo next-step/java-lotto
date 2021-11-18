@@ -8,6 +8,9 @@ import java.util.List;
 
 public class Output {
 
+    private Output() {
+    }
+
     public static void viewPurchasedLotto(LottoList lottoList) {
         lottoList.getLottoList().stream().map(randomNumbers -> randomNumbers.getLottoNumbers()).forEach(System.out::println);
     }
