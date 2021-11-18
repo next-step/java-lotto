@@ -1,5 +1,6 @@
 package calcalator.model;
 
+import calcalator.strategy.CustomDelimiter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class NumbersTest {
+
+class StringAddCalculatorTest {
+
 
     private Numbers numbers;
 
@@ -24,17 +27,10 @@ public class NumbersTest {
     }
 
     @Test
-    @DisplayName("합계")
-    void sumTest() {
-        Number sum = this.numbers.sum();
-        assertThat(sum.equals(new Number(10))).isTrue();
-    }
-
-    @Test
-    @DisplayName("String[] 생성자 테스트")
-    void name() {
-        String[] input = new String[]{"1", "2", "3", "4" };
-        Numbers numbers = new Numbers(input);
-        assertThat(numbers).isEqualTo(this.numbers);
+    @DisplayName("결과")
+    void result() {
+        StringAddCalculator calculator = new StringAddCalculator("//;\n1;2;3", new CustomDelimiter());
+        Number result = calculator.result();
+        assertThat(result).isEqualTo(new Number(6));
     }
 }
