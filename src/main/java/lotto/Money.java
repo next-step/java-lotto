@@ -26,8 +26,8 @@ public class Money implements Comparable<Money> {
         return new Money(this.value - other.value);
     }
 
-    public boolean lessThan(Money unitPrice) {
-        return this.compareTo(unitPrice) < 0;
+    public boolean lessThan(Money other) {
+        return this.compareTo(other) < 0;
     }
 
     public int quotient(Money unitPrice) {

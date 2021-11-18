@@ -2,7 +2,19 @@ package lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.stream.Stream;
+
+import static lotto.Prize.FIFTH;
+import static lotto.Prize.FIRST;
+import static lotto.Prize.FOURTH;
+import static lotto.Prize.LOSE;
+import static lotto.Prize.SECOND;
+import static lotto.Prize.SIXTH;
+import static lotto.Prize.THIRD;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -39,5 +51,20 @@ public class MoneyTest {
         Money money = new Money(30000);
         money = money.minus(10, new Money(1000));
         assertThat(money).isEqualTo(new Money(20000));
+    }
+
+    @ParameterizedTest
+    @MethodSource("lessThanMethodSource")
+    @DisplayName("다른 돈과 비교하여 자신이 작다면 True, 같거나 큰 경우 False 를 반환한다.")
+    void lessThanMethod(Money self, Money other, boolean result) {
+        assertThat(self.lessThan(other)).isEqualTo(result);
+    }
+
+    static Stream<Arguments> lessThanMethodSource() {
+        return Stream.of(
+                Arguments.of(new Money(10_000), new Money(20_000), true),
+                Arguments.of(new Money(20_000), new Money(10_000), false),
+                Arguments.of(new Money(20_000), new Money(20_000), false)
+        );
     }
 }
