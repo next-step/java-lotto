@@ -44,8 +44,8 @@ class LottoTest {
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,6:1,2,3,7,8,9:3", "1,2,3,4,5,6:7,8,9,10,11,12:0", "10,5,34,42,35,45:5,11,12,13,14,15:1", "1,2,3,4,5,6:1,2,3,4,5,6:6"}, delimiter = ':')
     void sortTest(String input, String compareStr, long expect) {
-        Lotto myLotto = Lotto.create(createLottoNumberList(input));
-        Lotto winningLotto = Lotto.create(createLottoNumberList(compareStr));
+        Lotto myLotto = Lotto.create(input);
+        Lotto winningLotto = Lotto.create(compareStr);
 
         assertThat(myLotto.getCountOfMatch(winningLotto)).isEqualTo(expect);
     }

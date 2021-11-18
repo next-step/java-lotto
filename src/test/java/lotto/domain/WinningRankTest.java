@@ -21,12 +21,11 @@ class WinningRankTest {
 
     @DisplayName("match count 에 맞는 enum을 반환한다.")
     @ParameterizedTest
-    @CsvSource(value = {"6:1:2000000000", "5:2:1500000", "4:3:50000", "3:4:5000"}, delimiter = ':')
+    @CsvSource(value = {"6:1:2000000000", "5:2:1500000", "4:4:50000", "3:5:5000"}, delimiter = ':')
     void getWinningRankTest(long matchCount, int rank, BigDecimal reward) {
         WinningRank winningRank = WinningRank.valueOf(matchCount);
 
         assertThat(winningRank.getRank()).isEqualTo(rank);
-        assertThat(winningRank.getReward()).isEqualTo(Money.create(reward));
     }
 
     @DisplayName("match count 가 3보다 작으면 NO_RANK를 반환한다.")
@@ -38,12 +37,12 @@ class WinningRankTest {
         assertThat(winningRank).isEqualTo(WinningRank.NO_RANK);
     }
 
-    @DisplayName("No rank 를 포함한 랭크를 fourth, third, second, first 순으로 반환한다.")
+    @DisplayName("No rank 를 포함한 랭크를 fifth, fourth, third, second, first 순으로 반환한다.")
     @Test
     void getWinningListTest() {
         List<WinningRank> winningRankListWithoutNoRank = WinningRank.getReverseRankListWithoutNoRank();
 
-        List<WinningRank> expect = Arrays.asList(WinningRank.FOURTH_RANK, WinningRank.THIRD_RANK, WinningRank.SECOND_RANK, WinningRank.FIRST_RANK);
+        List<WinningRank> expect = Arrays.asList(WinningRank.FIFTH_RANK, WinningRank.FOURTH_RANK, WinningRank.THIRD_RANK, WinningRank.SECOND_RANK, WinningRank.FIRST_RANK);
         assertThat(winningRankListWithoutNoRank).isEqualTo(expect);
     }
 

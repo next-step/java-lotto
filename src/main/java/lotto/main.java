@@ -29,7 +29,7 @@ public class main {
 
         String winningLottoString = inputView.inputWinningLotto();
 
-        Lotto winningLotto = Lotto.createWithString(winningLottoString);
+        Lotto winningLotto = Lotto.create(winningLottoString);
 
         String bonusBallString = inputView.inputBonus();
 

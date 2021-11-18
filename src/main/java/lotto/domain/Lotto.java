@@ -28,11 +28,14 @@ public class Lotto {
         return new Lotto(lottoNumberList);
     }
 
-    public static Lotto createWithString(String lottoInput) {
-        return Arrays.stream(lottoInput.split(","))
-                .map(Integer::parseInt)
-                .map(LottoNumber::create)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
+
+    public static Lotto create(String lottoInput) {
+        return create(
+                Arrays.stream(lottoInput.split(","))
+                        .map(Integer::parseInt)
+                        .map(LottoNumber::create)
+                        .collect(Collectors.toList())
+        );
     }
 
     public List<LottoNumber> getLottoNumbers() {
