@@ -1,7 +1,6 @@
 package lotto;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,10 +12,6 @@ public class Bag {
 
     public Bag(int money) {
         this(new Money(money), new ArrayList<>());
-    }
-
-    public Bag(int money, Lotto... lottos) {
-        this(new Money(money), Arrays.asList(lottos));
     }
 
     public Bag(int money, List<Lotto> lottos) {
