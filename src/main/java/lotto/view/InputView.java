@@ -9,6 +9,8 @@ public class InputView {
     private int money;
     private List<Integer> winNumbers;
 
+    private static final String DELIMITER = ", ";
+
     public int getMoney() {
         return money;
     }
@@ -24,6 +26,12 @@ public class InputView {
 
     public void setWinNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        this.winNumbers = Arrays.stream(new Scanner(System.in).nextLine().trim().split(", ")).map(Integer::parseInt).collect(Collectors.toList());
+        this.winNumbers = Arrays.stream(getNumbersAndSplit())
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+    }
+
+    private String[] getNumbersAndSplit() {
+        return new Scanner(System.in).nextLine().trim().split(DELIMITER);
     }
 }
