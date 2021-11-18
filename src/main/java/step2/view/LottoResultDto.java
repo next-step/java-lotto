@@ -22,7 +22,7 @@ public class LottoResultDto {
         fourMatchCount = winners.get(4);
         fiveMatchCount = winners.get(5);
         sixMatchCount = winners.get(6);
-        yield = lottos.getYield(winner);
+        yield = Math.round(lottos.getYield(winner)) / 100.0;
     }
 
     private List<LottoDTO> getLottoDtoList(Lottos lottos) {
@@ -30,5 +30,29 @@ public class LottoResultDto {
             .stream()
             .map(LottoDTO::new)
             .collect(Collectors.toList());
+    }
+
+    public List<LottoDTO> getLottoDTOs() {
+        return lottoDTOs;
+    }
+
+    public int getThreeMatchCount() {
+        return threeMatchCount;
+    }
+
+    public int getFourMatchCount() {
+        return fourMatchCount;
+    }
+
+    public int getFiveMatchCount() {
+        return fiveMatchCount;
+    }
+
+    public int getSixMatchCount() {
+        return sixMatchCount;
+    }
+
+    public double getYield() {
+        return yield;
     }
 }

@@ -16,6 +16,10 @@ public enum LottoWinnings {
         this.winnings = winnings;
     }
 
+    public int getWinnings() {
+        return winnings;
+    }
+
     public static int getYield(Map<Integer, Integer> winners) {
         int yield = 0;
         for (Integer matchCount : winners.keySet()) {
