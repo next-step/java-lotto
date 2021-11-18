@@ -34,11 +34,15 @@ public class StringAddCalculator {
         return sum(strings);
     }
 
-    private int sum(List<String> numbers) {
-        return numbers
+    private List<PositiveNumber> createPositiveNumbersBy(List<String> strings) {
+        return strings
             .stream()
             .map(PositiveNumber::of)
-            .collect(Collectors.toList())
+            .collect(Collectors.toList());
+    }
+
+    private int sum(List<String> strings) {
+        return createPositiveNumbersBy(strings)
             .stream()
             .mapToInt(PositiveNumber::getNumber)
             .sum();
