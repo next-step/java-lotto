@@ -50,4 +50,15 @@ public class InputValueTest {
         assertThat(new InputValue("12").isMoreThanTwoNumber()).isTrue();
     }
 
+    @Test
+    @DisplayName("컴마(,) 또는 콜론(:) 구분자 인지 테스트")
+    public void isCommaOrColonSeparator() {
+        assertThat(new InputValue("1,2:3").isCommaOrColonSeparator()).isTrue();
+    }
+
+    @Test
+    @DisplayName("컴마(,) 또는 콜론(:)로 입력값을 분리한다.")
+    public void getSeparatedValuesByCommaOrColon() {
+        assertThat(new InputValue("1,2:3").getSeparatedValuesByCommaOrColon()).contains("1", "2", "3");
+    }
 }

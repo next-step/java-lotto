@@ -23,6 +23,10 @@ public class StringAddCalculator {
             separatedValues = inputValue.getSeparatedValuesByComma();
         }
 
+        if (inputValue.isCommaOrColonSeparator()) {
+            separatedValues = inputValue.getSeparatedValuesByCommaOrColon();
+        }
+
         return separatedValues.stream()
                 .mapToInt(value -> Integer.parseInt(value)).sum();
 

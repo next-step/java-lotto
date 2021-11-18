@@ -10,6 +10,7 @@ public class InputValue {
     private static final String STRING_BLANK = "";
     private static final String REGULAR_EXPRESSION_ONLY_NUMBER = "^[0-9]*$";
     private static final String REGULAR_EXPRESSION_COMMA = ",";
+    private static final String REGULAR_EXPRESSION_COMMA_OR_COLON = ",|:";
 
     private String inputStringValue;
     private Matcher matcher;
@@ -39,8 +40,7 @@ public class InputValue {
     }
 
     public boolean isCommaSeparator() {
-        matcher = Pattern.compile(REGULAR_EXPRESSION_COMMA).matcher(inputStringValue);
-        return matcher.find();
+        return isEffectiveSeparator(REGULAR_EXPRESSION_COMMA);
     }
 
     public boolean isMoreThanTwoNumber() {
@@ -59,6 +59,19 @@ public class InputValue {
         return Arrays.asList(inputStringValue.split(regex));
     }
 
+    public boolean isCommaOrColonSeparator() {
+        return isEffectiveSeparator(REGULAR_EXPRESSION_COMMA_OR_COLON);
+    }
+
+    private boolean isEffectiveSeparator(String regex) {
+        matcher = Pattern.compile(regex).matcher(inputStringValue);
+        return matcher.find();
+    }
+
+    public List<String> getSeparatedValuesByCommaOrColon() {
+        return getSeparatedValues(REGULAR_EXPRESSION_COMMA_OR_COLON);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,6 +84,4 @@ public class InputValue {
     public int hashCode() {
         return Objects.hash(inputStringValue);
     }
-
-
 }
