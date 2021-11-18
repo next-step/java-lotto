@@ -8,13 +8,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static lotto.Prize.FIFTH;
-import static lotto.Prize.FIRST;
-import static lotto.Prize.FOURTH;
-import static lotto.Prize.LOSE;
-import static lotto.Prize.SECOND;
-import static lotto.Prize.SIXTH;
-import static lotto.Prize.THIRD;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -71,5 +64,17 @@ public class MoneyTest {
                 Arguments.of(new Money(20_000), new Money(10_000), false),
                 Arguments.of(new Money(20_000), new Money(20_000), false)
         );
+    }
+
+    @Test
+    @DisplayName("다른 돈으로 나눈 몫을 반환할 수 있다.")
+    void quotientMethod() {
+        Money self = new Money(10_000);
+        Money other = new Money(1_000);
+        assertThat(self.quotient(other)).isEqualTo(10);
+
+        assertThatThrownBy(() -> {
+            self.quotient(new Money(0));
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }

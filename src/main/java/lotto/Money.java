@@ -30,12 +30,12 @@ public class Money implements Comparable<Money> {
         return this.compareTo(other) < 0;
     }
 
-    public int quotient(Money unitPrice) {
-        if (unitPrice.value == ZERO) {
+    public int quotient(Money other) {
+        if (other.value == ZERO) {
             throw new IllegalArgumentException("로또의 가격은 0이 될 수 없습니다.");
         }
 
-        return this.value / unitPrice.value;
+        return this.value / other.value;
     }
 
     @Override
