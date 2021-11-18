@@ -27,6 +27,7 @@ public class Lotto {
 
         return allLottoNumbers.stream()
                 .limit(DEFAULT_SELECT_COUNT)
+                .sorted()
                 .collect(Collectors.toList());
     }
 

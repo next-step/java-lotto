@@ -15,6 +15,7 @@ public class Client {
         bag.buyLotto(new Money(1000));
 
         ResultView resultView = new ResultView(inputView.getMoney(), new Lotto(inputView.getWinNumbers()));
+        resultView.showLottos(bag); // 로또 출력
         resultView.showStatistics(bag); // 로또 결과를 알려준다.
         resultView.showYield(bag); // 수익률을 알려준다.
     }

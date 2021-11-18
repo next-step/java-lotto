@@ -2,11 +2,10 @@ package lotto.view;
 
 import lotto.Bag;
 import lotto.Lotto;
+import lotto.LottoResult;
 import lotto.Prize;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -18,16 +17,34 @@ public class ResultView {
         this.winLotto = winLotto;
     }
 
-    public void showStatistics(Bag bag) {
-        final Map<Prize, Integer> result = bag.lottoResult(winLotto);
+    public void showLottos(Bag bag) {
+        final List<Lotto> lottos = bag.lottos();
 
-        for (Prize prize : result.keySet().stream().sorted().collect(Collectors.toList())) {
-            System.out.println(prize.hitCount() + "개 일치" + "(" + prize.money() + "원) - " + result.get(prize) + "개");
+        for (Lotto lotto : lottos) {
+            System.out.println(lotto);
+        }
+    }
+
+    public void showStatistics(Bag bag) {
+        System.out.println("당첨 통계\n---------");
+        final LottoResult lottoResult = bag.lottoResult(winLotto);
+
+        for (Prize prize : Prize.values()) {
+            System.out.println(prize.hitCount() + "개 일치" + "(" + prize.money() + "원) - " + lottoResult.result(prize) + "개");
         }
     }
 
     public void showYield(Bag bag) {
-        final double yield = bag.yield(winLotto);
-        System.out.println("총 수익률은 " + (yield / money) + "입니다.");
+        final LottoResult lottoResult = bag.lottoResult(winLotto);
+        final double totalPrize = lottoResult.totalPrize();
+        final double yield = totalPrize / money;
+
+        StringBuilder stringBuilder = new StringBuilder()
+                .append("총 수익률은 ")
+                .append(yield)
+                .append("입니다.")
+                .append(totalPrize > money ? "(이득)" : "(손해)");
+
+        System.out.println(stringBuilder);
     }
 }

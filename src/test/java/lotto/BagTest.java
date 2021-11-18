@@ -1,14 +1,11 @@
 package lotto;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -50,50 +47,11 @@ public class BagTest {
 
     @ParameterizedTest
     @ValueSource(ints = {0, 500, 900})
-    @DisplayName("가방은 로또의 당첨 결과를 알 수 있다. (당첨번호를 입력 받는다)")
+    @DisplayName("가방은 로또를 살 돈이 충분하지 않으면 로또 구매가 불가능하다")
     void 로또구매_실패(int input) {
         assertThatThrownBy(() -> {
             Bag bag = new Bag(input);
             bag.buyLotto(new Money(LOTTO_UNIT_PRICE));
         }).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    @DisplayName("가방은 로또의 당첨 결과를 알 수 있다.")
-    void 결과확인() {
-        Bag bag = new Bag(0,
-                new Lotto(1, 2, 3, 4, 5, 6),
-                new Lotto(2, 3, 4, 5, 6, 7),
-                new Lotto(3, 4, 5, 6, 7, 8),
-                new Lotto(4, 5, 6, 7, 8, 9),
-                new Lotto(5, 6, 7, 8, 9, 10),
-                new Lotto(6, 7, 8, 9, 10, 11),
-                new Lotto(7, 8, 9, 10, 11, 12)
-                );
-
-        Map<Prize, Integer> result = bag.lottoResult(new Lotto(1, 2, 3, 4, 5, 6));
-
-        for (Map.Entry<Prize, Integer> each : result.entrySet()) {
-            assertThat(each.getValue()).isEqualTo(1);
-        }
-
-    }
-
-    @Test
-    @DisplayName("가방은 총 수익을 계산할 수 있다. (각 등수의 금액과 당첨번호를 입력 받는다)")
-    void 수익률계산() {
-        Bag bag = new Bag(0,
-                new Lotto(1, 2, 3, 4, 5, 6),
-                new Lotto(2, 3, 4, 5, 6, 7),
-                new Lotto(3, 4, 5, 6, 7, 8),
-                new Lotto(4, 5, 6, 7, 8, 9),
-                new Lotto(5, 6, 7, 8, 9, 10),
-                new Lotto(6, 7, 8, 9, 10, 11),
-                new Lotto(7, 8, 9, 10, 11, 12)
-        );
-
-        double yield = bag.yield(new Lotto(1, 2, 3, 4, 5, 6));
-
-        assertThat(yield).isEqualTo(Arrays.stream(Prize.values()).mapToDouble(p -> p.money()).sum());
     }
 }

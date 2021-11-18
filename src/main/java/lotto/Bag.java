@@ -38,39 +38,17 @@ public class Bag {
         int lottoCount = money.quotient(unitPrice);
         money = money.minus(lottoCount, unitPrice);
 
-        while (lottoCount-- > 0) {
+        while (lottoCount-- > ZERO) {
             this.lottos.add(new Lotto());
         }
     }
 
-    public Map<Prize, Integer> lottoResult(Lotto target) {
-        Map<Prize, Integer> result = new HashMap<>();
-
-        for (Lotto lotto : this.lottos) {
-            Prize prize = Prize.of(lotto.result(target));
-            emptyCheckAndSetDefault(result, prize);
-
-            result.put(prize, result.get(prize) + 1);
-        }
-
-        return result;
+    public List<Lotto> lottos() {
+        return lottos;
     }
 
-    private void emptyCheckAndSetDefault(Map<Prize, Integer> result, Prize prize) {
-        if (!result.containsKey(prize)) {
-            result.put(prize, ZERO);
-        }
-    }
-
-    public double yield(Lotto lotto) {
-        final Map<Prize, Integer> result = this.lottoResult(lotto);
-
-        final double totalPrize = Arrays.stream(Prize.values())
-                .filter(prize -> result.containsKey(prize))
-                .mapToDouble(prize -> (double) result.get(prize) * prize.money())
-                .sum();
-
-        return totalPrize;
+    public LottoResult lottoResult(Lotto target) {
+        return new LottoResult(this.lottos, target);
     }
 
     @Override
