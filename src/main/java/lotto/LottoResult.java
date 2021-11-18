@@ -28,9 +28,11 @@ public class LottoResult {
     }
 
     private int incrementValue(Map<Prize, Integer> result, Prize prize) {
-        return result.containsKey(prize)
-                ? result.get(prize) + DEFAULT_INCREMENT
-                : DEFAULT_INCREMENT;
+        if (result.containsKey(prize)){
+            return result.get(prize) + DEFAULT_INCREMENT;
+        }
+
+        return DEFAULT_INCREMENT;
     }
 
     public int result(Prize prize) {
