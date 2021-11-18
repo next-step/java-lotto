@@ -9,8 +9,10 @@ public class Lotto {
 
     private static final int LOTTO_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
+    public static final int FIVE_MATCH = 5;
 
     private static final List<Integer> indices = createIndices();
+
 
     private List<Integer> numbers = new ArrayList<>();
 
@@ -33,13 +35,15 @@ public class Lotto {
                 .count() == count;
     }
 
-    private void createRandomNumber() {
-        while (numbers.size() != LOTTO_SIZE) {
-            int randomIndex = new Random().nextInt(LOTTO_NUMBER - 1) + 1;
-            addNotDuplicateNumbers(numbers, indices, randomIndex);
-        }
-        checkNumbers(numbers);
-        Collections.shuffle(numbers);
+    public boolean isSecondPrizeWinner(Lotto winningNumbers, int bonusBall) {
+        return isFiveMatch(winningNumbers) && hasBonusBall(bonusBall);
+    }
+
+    public int calculatePrizeMoney(Lotto winningNumbers, int bonusBall) {
+        int count = (int) numbers.stream()
+                .filter(number -> winningNumbers.numbers.contains(number))
+                .count();
+        return Rank.valueOf(count, isSecondPrizeWinner(winningNumbers,bonusBall)).getPrizeMoney();
     }
 
     private static List<Integer> createIndices() {
@@ -50,10 +54,29 @@ public class Lotto {
         return indices;
     }
 
+    private void createRandomNumber() {
+        while (numbers.size() != LOTTO_SIZE) {
+            int randomIndex = new Random().nextInt(LOTTO_NUMBER - 1) + 1;
+            addNotDuplicateNumbers(numbers, indices, randomIndex);
+        }
+        checkNumbers(numbers);
+        Collections.shuffle(numbers);
+    }
+
     private void addNotDuplicateNumbers(List<Integer> numbers, List<Integer> indices, int randomIndex) {
         if (!numbers.contains(indices.get(randomIndex))) {
             numbers.add(indices.get(randomIndex));
         }
+    }
+
+    private boolean isFiveMatch(Lotto winningNumbers) {
+        return numbers.stream()
+                .filter(number -> winningNumbers.numbers.contains(number))
+                .count() == FIVE_MATCH;
+    }
+
+    private boolean hasBonusBall(int bonusBall) {
+        return numbers.contains(bonusBall);
     }
 
     private void checkNumbers(List<Integer> numbers) {

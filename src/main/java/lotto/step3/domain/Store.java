@@ -6,13 +6,15 @@ public class Store {
 
     private final int orderPrice;
     private final int orderCount;
-    private final Lotteries lotteries;
 
     public Store(int orderPrice) {
         checkOrderPrice(orderPrice);
         this.orderPrice = orderPrice;
         this.orderCount = this.orderPrice / LOTTO_PRICE;
-        this.lotteries = new Lotteries(orderCount);
+    }
+
+    public Lotteries sellLotteries() {
+        return new Lotteries(orderCount);
     }
 
     public int getOrderPrice() {
@@ -21,10 +23,6 @@ public class Store {
 
     public int getOrderCount() {
         return orderCount;
-    }
-
-    public Lotteries getLotteries() {
-        return lotteries;
     }
 
     private static void checkOrderPrice(int orderPrice) {
