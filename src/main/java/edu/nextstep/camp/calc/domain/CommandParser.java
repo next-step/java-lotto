@@ -15,6 +15,7 @@ public class CommandParser {
     private final static int CUSTOM_DELIMITER_GROUP = 1;
     private final static int COMMAND_GROUP = 2;
 
+    private CommandParser() {}
 
     public static Collection<PositiveNumber> parse(String command) {
         if (command == null || command.isEmpty()) {

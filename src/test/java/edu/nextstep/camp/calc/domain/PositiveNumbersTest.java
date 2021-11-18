@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -12,7 +13,21 @@ import org.junit.jupiter.params.provider.NullSource;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class AdderTest {
+public class PositiveNumbersTest {
+    @Test
+    public void create() {
+        Collection<PositiveNumber> numbers = List.of(PositiveNumber.of(1), PositiveNumber.of(2));
+        assertThat(PositiveNumbers.of(numbers)).containsExactly(PositiveNumber.of(1), PositiveNumber.of(2));
+    }
+
+    @ParameterizedTest
+    @NullSource
+    public void createFailed(Collection<PositiveNumber> input) {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> PositiveNumbers.of(input))
+                .withMessageContaining("invalid input");
+    }
+
     static Stream<Arguments> addAndExpectedArguments() {
         return Stream.of(
                 Arguments.of(List.of(PositiveNumber.of(1)), PositiveNumber.of(1)),
@@ -24,16 +39,7 @@ public class AdderTest {
 
     @ParameterizedTest(name = "add: sum of {0} = {1}")
     @MethodSource("addAndExpectedArguments")
-    public void add(Collection<PositiveNumber> numbers, PositiveNumber expected) {
-        assertThat(Adder.add(numbers)).isEqualTo(expected);
-    }
-
-
-    @ParameterizedTest(name = "add but failed")
-    @NullSource
-    public void addFailed(List<PositiveNumber> numbers) {
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> Adder.add(numbers))
-                .withMessageContaining("invalid input");
+    public void sum(Collection<PositiveNumber> numbers, PositiveNumber expected) {
+        assertThat(PositiveNumbers.of(numbers).sum()).isEqualTo(expected);
     }
 }
