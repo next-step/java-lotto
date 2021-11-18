@@ -14,21 +14,7 @@ public class Lotto {
 
     // 자동 로또
     public Lotto() {
-        this.numbers = getNumbers();
-    }
-
-    private List<LottoNumber> getNumbers() {
-        final List<LottoNumber> allLottoNumbers = Stream.iterate(1, i -> i + 1)
-                .limit(TOTAL_LOTTO_NUMBER_COUNT)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-
-        Collections.shuffle(allLottoNumbers);
-
-        return allLottoNumbers.stream()
-                .limit(DEFAULT_SELECT_COUNT)
-                .sorted()
-                .collect(Collectors.toList());
+        this.numbers = LottoGenerator.autoMode();
     }
 
     // 수동 로또
