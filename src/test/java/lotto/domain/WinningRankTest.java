@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.vo.LottoNumber;
+import lotto.vo.Lottos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -52,10 +53,10 @@ class WinningRankTest {
         Lotto winningLotto = createLottoWithString(winningLottoStr);
         LottoNumber bonus = LottoNumber.create(bonusBallValue);
 
-        WinningRank actual = WinningRank.getWinningRankWithLotto(lotto, winningLotto, bonus);
+        List<WinningRank> winningRanks = WinningRank.findWinningRanks(Lottos.create(Arrays.asList(lotto)), winningLotto, bonus);
         WinningRank expect = WinningRank.valueOf(rank);
 
-        assertThat(actual).isEqualTo(expect);
+        assertThat(winningRanks).containsOnly(expect);
     }
 
     private Lotto createLottoWithString(String input) {

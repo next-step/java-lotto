@@ -39,7 +39,7 @@ public class LottoService {
     }
 
     private List<WinningRank> checkWinning(Lottos lottos, Lotto winningLotto, LottoNumber bonus) {
-        return WinningRank.checkWinning(lottos, winningLotto, bonus);
+        return WinningRank.findWinningRanks(lottos, winningLotto, bonus);
     }
 
     private Money getWinningMoney(List<WinningRank> winningRanks) {

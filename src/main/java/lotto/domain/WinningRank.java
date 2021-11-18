@@ -19,6 +19,7 @@ public enum WinningRank {
     FIFTH_RANK(5, 5_000, 3),
     NO_RANK(-1, 0, -1);
 
+    private static final int CHECK_SECOND_OR_THIRD_COUNT = 5;
     private final int rank;
     private final Money reward;
     private final long matchCount;
@@ -36,10 +37,10 @@ public enum WinningRank {
                 .orElse(NO_RANK);
     }
 
-    public static WinningRank getWinningRankWithLotto(Lotto lotto, Lotto winningLotto, LottoNumber bonus) {
+    private static WinningRank getWinningRankWithLotto(Lotto lotto, Lotto winningLotto, LottoNumber bonus) {
         long countOfMatch = lotto.getCountOfMatch(winningLotto);
         WinningRank winningRank = valueOf(countOfMatch);
-        if (countOfMatch == 5) {
+        if (countOfMatch == CHECK_SECOND_OR_THIRD_COUNT) {
             return getSecondOrThird(lotto, bonus);
         }
 
@@ -61,7 +62,7 @@ public enum WinningRank {
                 .collect(Collectors.toList());
     }
 
-    public static List<WinningRank> checkWinning(Lottos lottos, Lotto winningLotto, LottoNumber bonus) {
+    public static List<WinningRank> findWinningRanks(Lottos lottos, Lotto winningLotto, LottoNumber bonus) {
         return lottos.getLottoList().stream()
                 .map(lotto -> getWinningRankWithLotto(lotto, winningLotto, bonus))
                 .collect(Collectors.toList());
