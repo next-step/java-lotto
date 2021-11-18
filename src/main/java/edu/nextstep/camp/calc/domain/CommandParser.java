@@ -19,7 +19,7 @@ public class CommandParser {
 
     public static Collection<PositiveNumber> parse(String command) {
         if (command == null || command.isEmpty()) {
-            return List.of(PositiveNumber.ofZero());
+            return List.of(PositiveNumber.ZERO);
         }
 
         return Arrays.stream(split(command))

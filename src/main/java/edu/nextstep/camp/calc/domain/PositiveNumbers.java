@@ -2,10 +2,9 @@ package edu.nextstep.camp.calc.domain;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 
-public class PositiveNumbers implements Iterable<PositiveNumber> {
-    private static final PositiveNumber SUM_OF_EMPTY = PositiveNumber.ofZero();
+public class PositiveNumbers {
+    private static final PositiveNumber SUM_OF_EMPTY = PositiveNumber.ZERO;
 
     private final Collection<PositiveNumber> numbers;
 
@@ -21,14 +20,14 @@ public class PositiveNumbers implements Iterable<PositiveNumber> {
         return new PositiveNumbers(positiveNumbers);
     }
 
-    @Override
-    public Iterator<PositiveNumber> iterator() {
-        return numbers.iterator();
+
+    public Collection<PositiveNumber> collect() {
+        return numbers;
     }
 
     public PositiveNumber sum() {
         return numbers.stream()
-                .reduce(PositiveNumber::sum)
-                .orElse(SUM_OF_EMPTY); // if empty
+                .reduce(PositiveNumber::add)
+                .orElse(SUM_OF_EMPTY);
     }
 }

@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 public class PositiveNumber {
     private final static Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+");
     private final static String TO_STRING_FORMAT = "Number(%d)";
-    private static final int ZERO_VALUE = 0;
-    private static final PositiveNumber ZERO = new PositiveNumber(ZERO_VALUE);
+
+    public static final PositiveNumber ZERO = new PositiveNumber(0);
 
     private final int number;
 
@@ -18,11 +18,11 @@ public class PositiveNumber {
     }
 
     public static PositiveNumber of(int number) {
-        if (number < ZERO_VALUE) {
+        if (number < ZERO.number) {
             throw new IllegalArgumentException("invalid input: the number must not be negative: " + number);
         }
 
-        if (number == ZERO_VALUE) {
+        if (number == ZERO.number) {
             return ZERO;
         }
 
@@ -31,7 +31,7 @@ public class PositiveNumber {
 
     public static PositiveNumber of(String numberString) {
         if (numberString == null || numberString.isEmpty()) {
-            return PositiveNumber.ofZero();
+            return PositiveNumber.ZERO;
         }
 
         if (!NUMBER_PATTERN.matcher(numberString).matches()) {
@@ -41,12 +41,8 @@ public class PositiveNumber {
         return PositiveNumber.of(Integer.parseInt(numberString));
     }
 
-    public static PositiveNumber ofZero() {
-        return ZERO;
-    }
-
-    public static PositiveNumber sum(PositiveNumber left, PositiveNumber right) {
-        return PositiveNumber.of(left.number + right.number);
+    public PositiveNumber add(PositiveNumber that) {
+        return PositiveNumber.of(number + that.number);
     }
 
     @Override
