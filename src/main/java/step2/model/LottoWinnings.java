@@ -2,15 +2,42 @@ package step2.model;
 
 import java.util.Map;
 
-public class LottoWinnings {
+public enum LottoWinnings {
+    THREE(3, 5000),
+    FOUR(4, 50000),
+    FIVE(5, 1500000),
+    SIX(6, 2000000000);
 
-    private static final int THREE_MATCH_WINNINGS = 5000;
-    private static final int FOUR_MATCH_WINNINGS = 50000;
-    private static final int FIVE_MATCH_WINNINGS = 1500000;
-    private static final int SIX_MATCH_WINNINGS = 2000000000;
+    private final int matchCount;
+    private final int winnings;
+
+    LottoWinnings(int matchCount, int winnings) {
+        this.matchCount = matchCount;
+        this.winnings = winnings;
+    }
 
     public static int getYield(Map<Integer, Integer> winners) {
-        return 5000;
+        int yield = 0;
+        for (Integer matchCount : winners.keySet()) {
+            Integer winnerCount = winners.get(matchCount);
+            yield += getWinning(matchCount) * winnerCount;
+        }
+        return yield;
     }
-    
+
+    private static int getWinning(int matchCount) {
+        if (matchCount == THREE.matchCount) {
+            return THREE.winnings;
+        }
+        if (matchCount == FOUR.matchCount) {
+            return FOUR.winnings;
+        }
+        if (matchCount == FIVE.matchCount) {
+            return FIVE.winnings;
+        }
+        if (matchCount == SIX.matchCount) {
+            return SIX.winnings;
+        }
+        throw new IllegalArgumentException("당첨 개수가 아닙니다");
+    }
 }

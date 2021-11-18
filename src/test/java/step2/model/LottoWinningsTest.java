@@ -1,5 +1,6 @@
 package step2.model;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashMap;
@@ -17,6 +18,22 @@ public class LottoWinningsTest {
         winners.put(6, 0);
         int winnings = LottoWinnings.getYield(winners);
         assertEquals(5000, winnings);
+    }
+
+    @Test
+    void illegalArgumentException_matchCountIsLessThan3() {
+        Map<Integer, Integer> lowMatchCount = new HashMap<>();
+        lowMatchCount.put(2, 1);
+        assertThatThrownBy(() -> LottoWinnings.getYield(lowMatchCount))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void illegalArgumentException_matchCountIsBiggerThan6() {
+        Map<Integer, Integer> lowMatchCount = new HashMap<>();
+        lowMatchCount.put(7, 1);
+        assertThatThrownBy(() -> LottoWinnings.getYield(lowMatchCount))
+            .isInstanceOf(IllegalArgumentException.class);
     }
 
 }
