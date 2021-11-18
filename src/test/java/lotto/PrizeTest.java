@@ -21,25 +21,32 @@ public class PrizeTest {
         assertThat(FOURTH).isEqualTo(FOURTH);
     }
 
-    @Test
-    @DisplayName("각 등수는 순서를 갖는다.")
-    void 상금순위() {
-        assertThat(FIRST).isGreaterThan(SECOND);
-        assertThat(SECOND).isGreaterThan(THIRD);
-        assertThat(THIRD).isGreaterThan(FOURTH);
-        assertThat(FOURTH).isGreaterThan(FIFTH);
-        assertThat(FIFTH).isGreaterThan(SIXTH);
-        assertThat(SIXTH).isGreaterThan(LOSE);
+    @ParameterizedTest
+    @MethodSource("compareToMethodSource")
+    @DisplayName("각 등수는 순서를 갖는다. FIRST 가 가장 크고 LOSE 가 가장 작다.")
+    void compareToMethod(Prize self, Prize other) {
+        assertThat(self).isGreaterThan(other);
+    }
+
+    static Stream<Arguments> compareToMethodSource() {
+        return Stream.of(
+                Arguments.of(FIRST, SECOND),
+                Arguments.of(SECOND, THIRD),
+                Arguments.of(THIRD, FOURTH),
+                Arguments.of(FOURTH, FIFTH),
+                Arguments.of(FIFTH, SIXTH),
+                Arguments.of(SIXTH, LOSE)
+        );
     }
 
     @ParameterizedTest
-    @MethodSource("ofSource")
+    @MethodSource("ofMethodSource")
     @DisplayName("맞은 번호에 따라 상금을 리턴할 수 있는지")
-    void of(int hitCount, Prize result) {
+    void ofMethod(int hitCount, Prize result) {
         assertThat(Prize.of(hitCount)).isEqualTo(result);
     }
 
-    static Stream<Arguments> ofSource() {
+    static Stream<Arguments> ofMethodSource() {
         return Stream.of(
                 Arguments.of(6, FIRST),
                 Arguments.of(5, SECOND),
