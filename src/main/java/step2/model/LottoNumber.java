@@ -20,6 +20,10 @@ public class LottoNumber {
         }
     }
 
+    public int getLottoNumber() {
+        return lottoNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || !o.getClass().equals(LottoNumber.class)) {

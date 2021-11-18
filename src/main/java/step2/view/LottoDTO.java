@@ -8,6 +8,6 @@ public class LottoDTO {
     private List<Integer> lottoNumbers;
 
     public LottoDTO(Lotto lotto) {
-
+        
     }
 }

@@ -35,6 +35,10 @@ public class LottoNumbers {
         }
     }
 
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     public int getMatchCount(LottoNumbers winnerNumbers) {
         int matchCount = INITIAL_MATCH_COUNT;
 
