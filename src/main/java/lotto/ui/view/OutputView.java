@@ -8,6 +8,9 @@ public class OutputView {
 
     private static final StringBuilder stringBuilder = new StringBuilder();
 
+    private OutputView() {
+    }
+
     public static void showTicket(LottoTicket lottoTicket) {
         List<LottoNumbers> lottoLines = lottoTicket.getLottoLines();
         for (LottoNumbers lottoLine : lottoLines) {

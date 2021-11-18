@@ -1,14 +1,17 @@
 package lotto.utils;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static java.util.Arrays.stream;
+import static lotto.utils.Validator.checkNotNull;
 
 public class IntegerParser {
 
     private static final String DELIMITER = ",";
+
+    private IntegerParser() {
+    }
 
     public static List<Integer> listOf(String string) {
         checkNotNull(string);
@@ -23,12 +26,6 @@ public class IntegerParser {
             return Integer.parseInt(stringNum.trim());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자만 가능합니다.");
-        }
-    }
-
-    private static void checkNotNull(String string) {
-        if (Objects.isNull(string)) {
-            throw new IllegalArgumentException("필수 값이 없습니다.");
         }
     }
 }

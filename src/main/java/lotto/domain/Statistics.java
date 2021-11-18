@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 
+import static lotto.utils.Validator.checkNotNull;
+
 public class Statistics {
 
     private static final int MIN_COUNT = 0;
@@ -20,15 +22,8 @@ public class Statistics {
     }
 
     private void checkArguments(Map<Grade, Long> results, Dollars dollars) {
-        checkNotNull(dollars);
-        checkNotNull(results);
+        checkNotNull(results, dollars);
         checkNonNegativeKey(results);
-    }
-
-    private void checkNotNull(Object object) {
-        if (Objects.isNull(object)) {
-            throw new IllegalArgumentException("필수 값이 없습니다.");
-        }
     }
 
     private void checkNonNegativeKey(Map<Grade, Long> results) {

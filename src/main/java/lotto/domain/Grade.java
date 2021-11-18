@@ -26,6 +26,10 @@ public enum Grade {
                 .orElse(BANG);
     }
 
+    public boolean isWin() {
+        return this != BANG;
+    }
+
     public int getMatchCount() {
         return matchCount;
     }

@@ -10,6 +10,7 @@ import java.util.stream.IntStream;
 
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
+import static lotto.utils.Validator.checkNotNull;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
@@ -39,14 +40,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber from(int number) {
-        checkExists(number);
-        return CACHED_LOTTO_NUMBERS.get(number);
-    }
-
-    private static void checkExists(int number) {
         if (!CACHED_LOTTO_NUMBERS.containsKey(number)) {
             throw new IllegalArgumentException(INVALID_RANGE_ERROR_MESSAGE);
         }
+        return CACHED_LOTTO_NUMBERS.get(number);
     }
 
     public static List<LottoNumber> listOf(int size, ShuffleStrategy shuffleStrategy) {
@@ -60,10 +57,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (size < MIN_LIST_OF_SIZE) {
             throw new IllegalArgumentException(format("size는 %s 이상이어야합니다.", MIN_LIST_OF_SIZE));
         }
-        
-        if (shuffleStrategy == null) {
-            throw new IllegalArgumentException("필수 값이 없습니다.");
-        }
+        checkNotNull(shuffleStrategy);
     }
 
     private static List<LottoNumber> limitFromStart(List<LottoNumber> lottoNumbers, int closedEndIndex) {

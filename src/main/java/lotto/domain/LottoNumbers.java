@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.lang.String.format;
+import static lotto.utils.Validator.checkNotNull;
 
 public class LottoNumbers {
 
@@ -59,12 +60,6 @@ public class LottoNumbers {
         checkNotNull(lastWinningNumbers);
         Set<LottoNumber> allNumbers = mergeWithLottoNumbers(lastWinningNumbers.lottoNumbers);
         return Grade.from(TWICE_LOTTO_NUMBERS_SIZE - allNumbers.size());
-    }
-
-    private static void checkNotNull(Object object) {
-        if (object == null) {
-            throw new IllegalArgumentException("필수 값이 없습니다.");
-        }
     }
 
     private Set<LottoNumber> mergeWithLottoNumbers(List<LottoNumber> winningNumbers) {

@@ -8,6 +8,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.groupingBy;
+
 public class LottoTicket {
 
     private final List<LottoNumbers> lottoLines;
@@ -34,8 +36,9 @@ public class LottoTicket {
     public Statistics rank(LottoNumbers lastWinningNumbers) {
         Map<Grade, Long> grades = lottoLines.stream()
                 .map(lottoLine -> lottoLine.rank(lastWinningNumbers))
-                .filter(rank -> rank != Grade.BANG)
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+                .filter(Grade::isWin)
+                .collect(groupingBy(Function.identity(), Collectors.counting()));
+
         Dollars dollars = new Dollars(lottoLines.size() * Dollars.DOLLAR_UNIT);
         return new Statistics(grades, dollars);
     }
