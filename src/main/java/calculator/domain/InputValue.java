@@ -1,12 +1,62 @@
 package calculator.domain;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class InputValue {
+    private static final String STRING_BLANK = "";
+    private static final String REGULAR_EXPRESSION_ONLY_NUMBER = "^[0-9]*$";
+    private static final String REGULAR_EXPRESSION_COMMA = ",";
+
     private String inputStringValue;
+    private Matcher matcher;
 
     public InputValue(String inputStringValue) {
         this.inputStringValue = inputStringValue;
+    }
+
+    public String getInputStringValue() {
+        return inputStringValue;
+    }
+
+    public boolean isNullOrBlank() {
+        return inputStringValue == null || inputStringValue == STRING_BLANK;
+    }
+
+    public boolean isOneLengthOnlyNumber() {
+        return isOnlyNumber() && isOneLength();
+    }
+
+    private boolean isOnlyNumber() {
+        return inputStringValue.matches(REGULAR_EXPRESSION_ONLY_NUMBER);
+    }
+
+    private boolean isOneLength() {
+        return inputStringValue.length() == 1;
+    }
+
+    public boolean isCommaSeparator() {
+        matcher = Pattern.compile(REGULAR_EXPRESSION_COMMA).matcher(inputStringValue);
+        return matcher.find();
+    }
+
+    public boolean isMoreThanTwoNumber() {
+        return isOnlyNumber() && isMoreThanTwoLength();
+    }
+
+    private boolean isMoreThanTwoLength() {
+        return inputStringValue.length() > 1;
+    }
+
+    public List<String> getSeparatedValuesByComma() {
+        return getSeparatedValues(REGULAR_EXPRESSION_COMMA);
+    }
+
+    private List<String> getSeparatedValues(String regex) {
+        return Arrays.asList(inputStringValue.split(regex));
     }
 
     @Override
@@ -21,4 +71,6 @@ public class InputValue {
     public int hashCode() {
         return Objects.hash(inputStringValue);
     }
+
+
 }

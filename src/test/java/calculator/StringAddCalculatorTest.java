@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.domain.InputValue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -10,30 +11,23 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
     @ParameterizedTest
-    @DisplayName("입력값은 null 또는 빈문자일 수 없다.")
+    @DisplayName("입력값은 null 또는 빈문자일 경우 0을 출력한다.")
     @NullAndEmptySource
-    public void splitAndSum_null_또는_빈문자(String inputValue) {
-        assertThat(new StringAddCalculator().splitAndSum(inputValue)).isEqualTo(0);
+    public void splitAndSum_null_또는_빈문자(String inputStringValue) {
+        assertThat(new StringAddCalculator().splitAndSum(new InputValue(inputStringValue))).isEqualTo(0);
     }
 
     @Test
-    @DisplayName("문자가 들어있는지 체크한다.")
-    public void isNumber() {
-        assertThatThrownBy(() -> {
-            new StringAddCalculator().splitAndSum("a");
-        }).isInstanceOf(RuntimeException.class);
+    @DisplayName("숫자가 하나인 경우 숫자를 그대로 출력한다.")
+    public void splitAndSum_숫자하나() throws Exception {
+        assertThat(new StringAddCalculator().splitAndSum(new InputValue("1"))).isEqualTo(1);
     }
 
-    //    @Test
-//    public void splitAndSum_숫자하나() throws Exception {
-//        assertThat(new StringAddCalculator().splitAndSum("1")).isEqualTo(1);
-//    }
-
-//    @Test
-//    public void splitAndSum_쉼표구분자() throws Exception {
-//        int result = StringAddCalculator.splitAndSum("1,2");
-//        assertThat(result).isEqualTo(3);
-//    }
+    @Test
+    @DisplayName("컴마(,) 구분자 덧셈")
+    public void splitAndSum_쉼표구분자() throws Exception {
+        assertThat(new StringAddCalculator().splitAndSum(new InputValue("1,2"))).isEqualTo(3);
+    }
 
 //    @Test
 //    public void splitAndSum_쉼표_또는_콜론_구분자() throws Exception {

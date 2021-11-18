@@ -2,13 +2,52 @@ package calculator.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class InputValueTest {
+    private static final String REGULAR_EXPRESSION_ONLY_NUMBER = "^[0-9]*$";
+    private static final String REGULAR_EXPRESSION_COMMA = ",";
     @Test
     @DisplayName("InputValue 생성자 테스트")
     public void create() {
         assertThat(new InputValue("1")).isEqualTo(new InputValue("1"));
     }
+
+    @ParameterizedTest
+    @DisplayName("입력값은 null 또는 빈문자일 수 없다.")
+    @NullAndEmptySource
+    public void splitAndSum_null_또는_빈문자(String inputStringValue) {
+        assertThat(new InputValue(inputStringValue).isNullOrBlank()).isTrue();
+    }
+
+    @Test
+    @DisplayName("숫자가 하나로 되어있는지 테스트")
+    public void isOneOnlyNumber() {
+        assertThat(new InputValue("1").isOneLengthOnlyNumber()).isTrue();
+        assertThat(new InputValue("12").isOneLengthOnlyNumber()).isFalse();
+    }
+
+    @Test
+    @DisplayName("컴마(,) 구분자 인지 테스트")
+    public void isCommaSeparator() {
+        assertThat(new InputValue("1,2,3,3").isCommaSeparator()).isTrue();
+        assertThat(new InputValue("12").isCommaSeparator()).isFalse();
+    }
+
+    @Test
+    @DisplayName("컴마(,)로 입력값을 분리한다.")
+    public void getSeparatedValuesByComma() {
+        assertThat(new InputValue("1,2").getSeparatedValuesByComma()).contains("1", "2");
+    }
+
+    @Test
+    @DisplayName("두개 이상의 숫자로만 되어있는지 테스트")
+    public void isMoreThanTwoNumber() {
+        assertThat(new InputValue("1,2,3,3").isMoreThanTwoNumber()).isFalse();
+        assertThat(new InputValue("12").isMoreThanTwoNumber()).isTrue();
+    }
+
 }
