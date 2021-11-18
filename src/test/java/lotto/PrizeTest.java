@@ -12,13 +12,24 @@ import static lotto.Prize.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PrizeTest {
-    @Test
+    @ParameterizedTest
+    @MethodSource("constructorMethodSource")
     @DisplayName("각 등수에 대한 정보를 static 하게 사용할 수 있다.")
-    void 상금생성() {
-        assertThat(FIRST).isEqualTo(FIRST);
-        assertThat(SECOND).isEqualTo(SECOND);
-        assertThat(THIRD).isEqualTo(THIRD);
-        assertThat(FOURTH).isEqualTo(FOURTH);
+    void constructorMethod(Prize self, int hitCount, int money) {
+        assertThat(self.hitCount()).isEqualTo(hitCount);
+        assertThat(self.money()).isEqualTo(money);
+    }
+
+    static Stream<Arguments> constructorMethodSource() {
+        return Stream.of(
+                Arguments.of(FIRST, 6, 20_0000_0000),
+                Arguments.of(SECOND, 5, 150_0000),
+                Arguments.of(THIRD, 4, 5_0000),
+                Arguments.of(FOURTH, 3, 5000),
+                Arguments.of(FIFTH, 2, 0),
+                Arguments.of(SIXTH, 1, 0),
+                Arguments.of(LOSE, 0, 0)
+        );
     }
 
     @ParameterizedTest
