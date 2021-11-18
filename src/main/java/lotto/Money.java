@@ -3,8 +3,9 @@ package lotto;
 import java.util.Objects;
 
 public class Money implements Comparable<Money> {
-    private final int value;
     private static final int ZERO = 0;
+
+    private final int value;
 
     public Money(int value) {
         if (value < ZERO) {
