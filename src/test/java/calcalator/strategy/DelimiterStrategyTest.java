@@ -23,4 +23,11 @@ class DelimiterStrategyTest {
         assertThat(token).contains("1", "2", "3");
     }
 
+    @Test
+    @DisplayName("입력값에 구분자기 없을 경우 테스트")
+    void notFoundDelimiter() {
+        DelimiterStrategy delimiterStrategy = (input) -> input.split(",");
+        String[] token = delimiterStrategy.getToken("123");
+        assertThat(token).contains("123");
+    }
 }
