@@ -36,21 +36,26 @@ public class MoneyTest {
 
     @Test
     @DisplayName("다른 돈에서 자신의 돈을 뺄 수 있다.")
-    void 돈_차감() {
+    void minusMethod() {
         Money money = new Money(10000);
+
         assertThat(money.minus(new Money(4000))).isEqualTo(new Money(6000));
-        assertThat(money.minus(5, new Money(1000))).isEqualTo(new Money(5000));
+
         assertThatThrownBy(() -> {
             money.minus(new Money(20000));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    @DisplayName("가중치와 다른 돈의 곱의 값에서 자신의 돈을 뺄 수 있다.")
-    void 돈_차감_곱하기_가중치() {
+    @DisplayName("다른 돈에서 자신의 돈을 뺄 수 있다. (가중치 포함)")
+    void minusWithWeightMethod() {
         Money money = new Money(30000);
-        money = money.minus(10, new Money(1000));
-        assertThat(money).isEqualTo(new Money(20000));
+
+        assertThat(money.minus(5, new Money(5000))).isEqualTo(new Money(5000));
+
+        assertThatThrownBy(() -> {
+            money.minus(10, new Money(10000));
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
