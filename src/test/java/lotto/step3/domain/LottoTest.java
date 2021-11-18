@@ -33,15 +33,9 @@ class LottoTest {
     void checkNumbers() {
         assertThatThrownBy(() -> new Lotto(Arrays.asList(1,2,3,4,5,6,7)))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new Lotto(Arrays.asList(1)))
-                .hasMessage("6자리 입력 해주세요!!");
-        assertThatThrownBy(() -> new Lotto(Arrays.asList(0,1,2,3,4,5)))
+        assertThatThrownBy(() -> new Lotto(Arrays.asList(1,2,3,4,5)))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new Lotto(Arrays.asList(1,2,3,4,5,46)))
-                .hasMessage("1~45 숫자를 입력해주세요!!");
         //정상입력
-        assertThatCode(Lotto::new)
-                .doesNotThrowAnyException();
         assertThatCode(() -> new Lotto(Arrays.asList(1,2,3,4,5,6)))
                 .doesNotThrowAnyException();
     }

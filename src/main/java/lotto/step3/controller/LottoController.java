@@ -26,15 +26,16 @@ public class LottoController {
         printOrderLottoCount(lotteries);
         printOrderLottoNumber(lotteries);
 
-        Lotto winningNumbers = service.createWinningNumbers(printInputWinningNumbers());
+        List<Integer> numbers = printInputWinningNumbers();
+        Lotto winningNumbers = service.createWinningNumbers(numbers);
 
         int bonusBall = PrintInputBonusBall();
+        service.validation(winningNumbers,bonusBall);
 
         Map<Integer, Integer> totalCountOfMatch =  service.totalCountOfMatch(lotteries, winningNumbers);
         boolean isSecondPrizeWinners = service.isSecondPrizeWinners(lotteries, winningNumbers, bonusBall);
         int totalSecondPrizeWinner = service.totalSecondPrizeWinners(lotteries, winningNumbers, bonusBall);
 
-        // 몇등에 몇명? / 2등이냐? / 2등 몇명이냐?
         printWinningStatics(totalCountOfMatch, isSecondPrizeWinners, totalSecondPrizeWinner);
 
         double rateOfReturn = service.calculateRateOfProfit(lotteries, winningNumbers, bonusBall, orderPrice);

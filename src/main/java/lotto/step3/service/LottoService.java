@@ -49,4 +49,12 @@ public class LottoService {
         return Double.parseDouble(format.format(totalPrizeMoney / orderPrice));
     }
 
+    public void validation(Lotto lotteries, int bonusBall) {
+        boolean isSame = lotteries.getNumbers().stream()
+                .anyMatch(number -> number == bonusBall);
+        if (!isSame) {
+            throw new IllegalArgumentException();
+        }
+    }
+
 }

@@ -5,12 +5,13 @@ import lotto.step3.domain.Lotto;
 import lotto.step3.domain.Rank;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 public final class ResultView {
 
-    public static final int LOTTO_BONUS_COUNT = 5;
+    public static final int LOTTO_BONUS_COUNT = Rank.THIRD.getCountOfMatch();
+    public static final int LOTTO_START_COUNT = Rank.FIFTH.getCountOfMatch();
+    public static final int LOTTO_END_COUNT = Rank.FIRST.getCountOfMatch();
 
     private ResultView() {
         throw new AssertionError();
@@ -37,14 +38,14 @@ public final class ResultView {
         builder.append("\n");
         builder.append("----------");
         builder.append("\n");
-        for (int count = 3; count <= 6; count++) {
-            boolean bonus = isBonus(count, isMatchBonusBall);
-            Rank rank = Rank.valueOf(count, bonus);
+        for (int count = LOTTO_START_COUNT; count <= LOTTO_END_COUNT; count++) {
+            boolean isSecond = isSecondPrizeWinner(count, isMatchBonusBall);
+            Rank rank = Rank.valueOf(count, isSecond);
             builder.append(count);
             builder.append("개 일치(");
             builder.append(rank.getPrizeMoney());
             builder.append("원) - ");
-            int value = bonus ? 0 : countOfMatch.get(count);
+            int value = isSecond ? Rank.MISS.getCountOfMatch() : countOfMatch.get(count);
             builder.append(value);
             builder.append("개");
             builder.append("\n");
@@ -53,24 +54,28 @@ public final class ResultView {
         System.out.print(builder);
     }
 
-    private static void printBonusBallStatics(StringBuilder builder, int totalSecond, int count) {
-        if (count == LOTTO_BONUS_COUNT) {
+    public static void printRateOfReturn(double profit) {
+        System.out.println("총 수익률은 " + profit + "입니다.");
+    }
+
+    private static void printBonusBallStatics(StringBuilder builder, int totalSecondPrizeWinners, int count) {
+        if (isBonusCount(count)) {
             builder.append(count);
             builder.append("개 일치, 보너스볼 일치 (");
             builder.append(Rank.SECOND.getPrizeMoney());
             builder.append("원) - ");
-            builder.append(totalSecond);
+            builder.append(totalSecondPrizeWinners);
             builder.append("개");
             builder.append("\n");
         }
     }
 
-    private static boolean isBonus(int count, boolean isMatchBonusBall) {
-        return count == LOTTO_BONUS_COUNT && isMatchBonusBall;
+    private static boolean isSecondPrizeWinner(int count, boolean isMatchBonusBall) {
+        return isBonusCount(count) && isMatchBonusBall;
     }
 
-    public static void printRateOfReturn(double profit) {
-        System.out.println("총 수익률은 " + profit + "입니다.");
+    private static boolean isBonusCount(int count) {
+        return count == LOTTO_BONUS_COUNT;
     }
 
 }
