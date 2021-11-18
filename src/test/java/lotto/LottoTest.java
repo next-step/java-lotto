@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -23,20 +22,20 @@ public class LottoTest {
 
     @Test
     @DisplayName("로또는 랜덤번호로 자신을 생성할 수 있다.")
-    void 로또생성_랜덤번호() {
+    void constructorMethodAutoNumber() {
         new Lotto();
     }
 
     @Test
     @DisplayName("로또는 수동번호로 자신을 생성할 수 있다.")
-    void 로또생성_수동번호() {
+    void constructorMethodManualNumber() {
         Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
         assertThat(lotto).isEqualTo(new Lotto(1, 2, 3, 4, 5, 6));
         assertThat(lotto).isEqualTo(new Lotto(6, 5, 4, 3, 2, 1));
 
-        lotto = new Lotto(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)));
-        assertThat(lotto).isEqualTo(new Lotto(new ArrayList<>(Arrays.asList(1,2,3,4,5,6))));
-        assertThat(lotto).isEqualTo(new Lotto(new ArrayList<>(Arrays.asList(6,5,4,3,2,1))));
+        lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lotto).isEqualTo(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        assertThat(lotto).isEqualTo(new Lotto(Arrays.asList(6, 5, 4, 3, 2, 1)));
     }
 
     @ParameterizedTest
