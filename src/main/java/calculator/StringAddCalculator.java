@@ -4,9 +4,8 @@ import helper.CollectionHelper;
 import helper.StringHelper;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
-import static constant.CalculatorConstant.CUSTOM_DELIMITER_PATTERN;
-import static constant.CalculatorConstant.DEFAULT_SUM;
 import static helper.StringHelper.*;
 
 /**
@@ -14,8 +13,12 @@ import static helper.StringHelper.*;
  */
 public class StringAddCalculator {
 
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final int DEFAULT_SUM = 0;
+
     public StringAddCalculator() {
     }
+
 
     public int splitAndSum(String input) {
         if (nullOrEmpty(input)) {

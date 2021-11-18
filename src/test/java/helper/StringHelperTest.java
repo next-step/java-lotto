@@ -1,6 +1,5 @@
 package helper;
 
-import constant.CalculatorConstant;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -8,6 +7,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,7 +27,7 @@ class StringHelperTest {
     @ParameterizedTest(name = "패턴을 포함한 split")
     @MethodSource(value = "stringPatternProvider")
     void splitByPattern(String input, String[] expected) {
-        assertThat(StringHelper.splitByPattern(CalculatorConstant.CUSTOM_DELIMITER_PATTERN, input)).containsExactly(expected);
+        assertThat(StringHelper.splitByPattern(Pattern.compile("//(.)\n(.*)"), input)).containsExactly(expected);
     }
 
 
