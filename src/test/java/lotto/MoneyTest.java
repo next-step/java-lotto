@@ -26,8 +26,11 @@ public class MoneyTest {
     @DisplayName("다른 돈에서 자신의 돈을 뺄 수 있다.")
     void 돈_차감() {
         Money money = new Money(10000);
-        money = money.minus(4000);
-        assertThat(money).isEqualTo(new Money(6000));
+        assertThat(money.minus(new Money(4000))).isEqualTo(new Money(6000));
+        assertThat(money.minus(5, new Money(1000))).isEqualTo(new Money(5000));
+        assertThatThrownBy(() -> {
+            money.minus(new Money(20000));
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

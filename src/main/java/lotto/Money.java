@@ -14,16 +14,16 @@ public class Money implements Comparable<Money> {
         this.value = value;
     }
 
-    public Money minus(int value) {
-        if (value > this.value) {
+    public Money minus(int weight, Money other) {
+        return this.minus(new Money(weight * other.value));
+    }
+
+    public Money minus(Money other) {
+        if (other.value > this.value) {
             throw new IllegalArgumentException("현재 가지고 있는 돈이 부족합니다.");
         }
 
-        return new Money(this.value - value);
-    }
-
-    public Money minus(int weight, Money money) {
-        return this.minus(weight * money.value);
+        return new Money(this.value - other.value);
     }
 
     public boolean lessThan(Money unitPrice) {
