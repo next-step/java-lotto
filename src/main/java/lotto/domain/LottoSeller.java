@@ -3,8 +3,6 @@ package lotto.domain;
 import lotto.vo.Lottos;
 import lotto.vo.Money;
 
-import java.math.BigDecimal;
-
 public class LottoSeller {
 
     private static final String NULL_MONEY_EXCEPTION_MESSAGE = "Money 는 null 값 일 수 없습니다.";

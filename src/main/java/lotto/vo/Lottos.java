@@ -1,7 +1,6 @@
 package lotto.vo;
 
 import lotto.domain.Lotto;
-import lotto.domain.WinningRank;
 
 import java.util.List;
 import java.util.Objects;

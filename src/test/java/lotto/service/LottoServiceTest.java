@@ -3,7 +3,6 @@ package lotto.service;
 import lotto.domain.Lotto;
 import lotto.domain.WinningRank;
 import lotto.vo.LottoNumber;
-import lotto.vo.Lottos;
 import lotto.vo.Money;
 import lotto.vo.WinningHistory;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +15,6 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoServiceTest {
 
@@ -36,7 +34,7 @@ class LottoServiceTest {
                         LottoNumber.create(4),
                         LottoNumber.create(5),
                         LottoNumber.create(7)
-                        )
+                )
         );
 
         lottoService.buyLotto();

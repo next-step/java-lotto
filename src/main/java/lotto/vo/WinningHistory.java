@@ -5,7 +5,6 @@ import lotto.domain.WinningRank;
 import java.math.BigDecimal;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 
 import static java.util.stream.Collectors.*;
 

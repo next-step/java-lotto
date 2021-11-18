@@ -5,7 +5,6 @@ import lotto.vo.Lottos;
 import lotto.vo.Money;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -40,7 +39,7 @@ public enum WinningRank {
     public static WinningRank getWinningRankWithLotto(Lotto lotto, Lotto winningLotto, LottoNumber bonus) {
         long countOfMatch = lotto.getCountOfMatch(winningLotto);
         WinningRank winningRank = valueOf(countOfMatch);
-        if(countOfMatch == 5) {
+        if (countOfMatch == 5) {
             return getSecondOrThird(lotto, bonus);
         }
 
@@ -48,7 +47,7 @@ public enum WinningRank {
     }
 
     private static WinningRank getSecondOrThird(Lotto lotto, LottoNumber bonus) {
-        if(lotto.containLottoNumber(bonus)) {
+        if (lotto.containLottoNumber(bonus)) {
             return WinningRank.SECOND_RANK;
         }
 

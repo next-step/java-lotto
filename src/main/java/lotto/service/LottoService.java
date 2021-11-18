@@ -4,9 +4,7 @@ import lotto.domain.*;
 import lotto.vo.*;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoService {
 
@@ -15,7 +13,7 @@ public class LottoService {
     private final Money lottoPrice;
     private final LottoSeller lottoSeller;
     private final LottoGenerator lottoGenerator;
-    private Wallet wallet;
+    private final Wallet wallet;
 
     public LottoService(Money money, NumberGenerateStrategy strategy) {
         int price = LottoRule.LOTTO_PRICE.getValue();
@@ -54,7 +52,7 @@ public class LottoService {
     }
 
     public void validBonus(Lotto winningLotto, LottoNumber bonus) {
-        if(winningLotto.containLottoNumber(bonus)) {
+        if (winningLotto.containLottoNumber(bonus)) {
             throw new IllegalArgumentException(BONUS_BALL_NOT_CONTAINS_LOTTO);
         }
     }

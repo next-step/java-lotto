@@ -1,17 +1,12 @@
 package lotto.domain;
 
-import lotto.vo.LottoNumber;
 import lotto.vo.Lottos;
 import lotto.vo.Money;
-import lotto.vo.WinningHistory;
-
-import java.math.BigDecimal;
-import java.util.List;
 
 public class Wallet {
 
     private Lottos lottos;
-    private Money myMoney;
+    private final Money myMoney;
 
     private Wallet(Money myMoney) {
         this.myMoney = myMoney;
