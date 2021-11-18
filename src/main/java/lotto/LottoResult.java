@@ -41,12 +41,10 @@ public class LottoResult {
         return ZERO;
     }
 
-    public double yield() {
-        final double totalPrize = this.result.keySet().stream()
+    public double totalPrize() {
+        return this.result.keySet().stream()
                 .mapToDouble(prize -> prize.money() * this.result.get(prize))
                 .sum();
-
-        return totalPrize / this.result.values().stream().mapToInt(i -> i).sum();
     }
 
     @Override

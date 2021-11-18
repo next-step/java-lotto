@@ -83,6 +83,6 @@ public class LottoResultTest {
                 .mapToDouble(prize -> prize.money())
                 .sum();
 
-        assertThat(lottoResult.yield()).isEqualTo(result / Prize.values().length);
+        assertThat(lottoResult.totalPrize()).isEqualTo(result);
     }
 }
