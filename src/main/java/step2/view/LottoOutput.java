@@ -5,7 +5,7 @@ import step2.model.Lottos;
 public class LottoOutput {
 
     public void printLottos(Lottos lottos) {
-        LottosDTO lottosDTO = new LottosDTO(lottos);
+        LottoResultDto lottoResultDto = new LottoResultDto(lottos);
 
     }
 }
