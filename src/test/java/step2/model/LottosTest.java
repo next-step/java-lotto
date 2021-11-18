@@ -1,9 +1,10 @@
-package step2;
+package step2.model;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,12 +32,18 @@ public class LottosTest {
     @Test
     void getWinnerCount() {
         Lotto sixMatch = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto threeMatch = new Lotto(Arrays.asList(6, 7, 8, 44, 45));
         Lotto noneMatch = new Lotto(Arrays.asList(40, 41, 42, 43, 44, 45));
 
-        assertEquals(1, lottos.getWinnerCount(6, sixMatch));
-        assertEquals(0, lottos.getWinnerCount(5, sixMatch));
-        assertEquals(2, lottos.getWinnerCount(3, threeMatch));
-        assertEquals(0, lottos.getWinnerCount(6, noneMatch));
+        Map<Integer, Integer> sixWinner = lottos.getWinners(sixMatch);
+        assertEquals(1, sixWinner.get(6));
+        assertEquals(0, sixWinner.get(5));
+        assertEquals(0, sixWinner.get(4));
+        assertEquals(0, sixWinner.get(3));
+
+        Map<Integer, Integer> noneWinner = lottos.getWinners(noneMatch);
+        assertEquals(0, noneWinner.get(6));
+        assertEquals(0, noneWinner.get(5));
+        assertEquals(0, noneWinner.get(4));
+        assertEquals(0, noneWinner.get(3));
     }
 }
