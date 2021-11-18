@@ -21,7 +21,7 @@ public enum Prize {
 
     public static Prize of(int hitCount) {
         return Arrays.stream(values())
-                .filter(p -> p.hitCount == hitCount)
+                .filter(prize -> prize.hitCount == hitCount)
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
     }
