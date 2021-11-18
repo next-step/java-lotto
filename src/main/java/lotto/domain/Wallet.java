@@ -23,8 +23,10 @@ public class Wallet {
     public Lottos getLottos() {
         return lottos;
     }
-
-    public void saveLottos(Lottos lottos) {
+    
+    public Lottos buyLotto(LottoSeller lottoSeller) {
+        Lottos lottos = lottoSeller.buyLotto(myMoney);
         this.lottos = lottos;
+        return this.lottos;
     }
 }

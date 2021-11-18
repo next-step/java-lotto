@@ -9,6 +9,7 @@ import java.util.List;
 public class LottoService {
 
     private static final String BONUS_BALL_NOT_CONTAINS_LOTTO = "보너스 볼은 당첨 번호안에 포함되면 안됩니다.";
+    private static final String WALLET_NOT_HAVE_LOTTO_MESSAGE = "보너스 볼은 당첨 번호안에 포함되면 안됩니다.";
 
     private final Money lottoPrice;
     private final LottoSeller lottoSeller;
@@ -25,10 +26,7 @@ public class LottoService {
 
 
     public Lottos buyLotto() {
-        Money money = wallet.getMoneyToBuy();
-        Lottos lottos = lottoSeller.buyLotto(money);
-        wallet.saveLottos(lottos);
-        return lottos;
+        return wallet.buyLotto(lottoSeller);
     }
 
     public WinningHistory getWinningHistory(Lotto winningLotto, LottoNumber bonus) {
