@@ -1,6 +1,8 @@
 package step2.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoNumbers {
@@ -22,6 +24,7 @@ public class LottoNumbers {
 
     public LottoNumbers() {
         lottoNumbers = new ArrayList<>();
+        Collections.shuffle(defaultLottoNumbers);
         for (int i = 0; i < LOTTO_NUMBERS_SIZE; i++) {
             lottoNumbers.add(defaultLottoNumbers.get(i));
         }
@@ -50,5 +53,10 @@ public class LottoNumbers {
 
     private boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.toString(lottoNumbers.toArray());
     }
 }

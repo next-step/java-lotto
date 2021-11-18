@@ -8,7 +8,6 @@ import java.util.Map;
 public class Lottos {
 
     private static final int INITIAL_WINNER_COUNT = 0;
-    private static final int MONEY_MIN = 0;
     private static final int LOTTO_PRICE = 1000;
     private static final int WINNER_MATCH_COUNT_MIN = 3;
     private static final int WINNER_MATCH_COUNT_MAX = 6;
@@ -16,15 +15,8 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(int money) {
-        validatePositive(money);
         lottos = new ArrayList<>();
         purchaseLottos(money);
-    }
-
-    private void validatePositive(int money) {
-        if (money < MONEY_MIN) {
-            throw new IllegalArgumentException("돈이 음수일 수 없습니다");
-        }
     }
 
     private void purchaseLottos(int money) {
@@ -48,7 +40,7 @@ public class Lottos {
 
     public double getYield(Lotto winner) {
         Map<Integer, Integer> winners = getWinners(winner);
-        return LottoWinnings.getYield(winners);
+        return (double) LottoWinnings.getYield(winners) / (LOTTO_PRICE * lottos.size());
     }
 
     public Map<Integer, Integer> getWinners(Lotto winner) {
