@@ -7,6 +7,10 @@ public class Money implements Comparable<Money> {
     private static final int ZERO = 0;
 
     public Money(int value) {
+        if (value < ZERO) {
+            throw new IllegalArgumentException("돈은 0 미만의 값을 가질 수 없습니다.");
+        }
+
         this.value = value;
     }
 
@@ -33,7 +37,6 @@ public class Money implements Comparable<Money> {
 
         return this.value / unitPrice.value;
     }
-
 
     @Override
     public boolean equals(Object o) {

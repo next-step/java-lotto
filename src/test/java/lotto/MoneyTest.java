@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * 돈은 자신을 생성할 수 있다.
@@ -13,9 +14,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MoneyTest {
     @Test
     @DisplayName("돈을 생성할 수 있다.")
-    void 돈_생성() {
-        Money money = new Money(10000);
-        assertThat(money).isEqualTo(new Money(10000));
+    void constructorMethod() {
+        assertThat(new Money(10000)).isEqualTo(new Money(10000));
+
+        assertThatThrownBy(() -> {
+            new Money(-10000);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
