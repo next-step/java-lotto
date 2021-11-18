@@ -3,10 +3,7 @@ package lotto.domain;
 import lotto.vo.LottoNumber;
 import lotto.vo.LottoRule;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -24,8 +21,11 @@ public class Lotto {
         if (lottoNumberList == null || lottoNumberList.size() != LottoRule.LOTTO_COUNT.getValue()) {
             throw new IllegalArgumentException(RANGE_EXCEPTION_MESSAGE);
         }
-        Collections.sort(lottoNumberList);
-        return new Lotto(lottoNumberList);
+
+        List<LottoNumber> copy = new ArrayList<>(lottoNumberList);
+
+        Collections.sort(copy);
+        return new Lotto(copy);
     }
 
 
@@ -62,6 +62,10 @@ public class Lotto {
         return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
 
+    public boolean containLottoNumber(LottoNumber bonus) {
+        return lottoNumbers.contains(bonus);
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
@@ -72,9 +76,5 @@ public class Lotto {
         return "Lotto{" +
                 "lottoNumbers=" + lottoNumbers +
                 '}';
-    }
-
-    public boolean containLottoNumber(LottoNumber bonus) {
-        return lottoNumbers.contains(bonus);
     }
 }

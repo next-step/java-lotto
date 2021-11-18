@@ -5,8 +5,8 @@ import lotto.vo.Money;
 
 public class Wallet {
 
-    private Lottos lottos;
     private final Money myMoney;
+    private Lottos lottos;
 
     private Wallet(Money myMoney) {
         this.myMoney = myMoney;

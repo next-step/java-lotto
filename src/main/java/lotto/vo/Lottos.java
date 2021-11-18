@@ -2,9 +2,10 @@ package lotto.vo;
 
 import lotto.domain.Lotto;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -15,7 +16,7 @@ public class Lottos {
     }
 
     public static Lottos create(List<Lotto> lottoList) {
-        return new Lottos(lottoList);
+        return new Lottos(new ArrayList<>(lottoList));
     }
 
     public int count() {
@@ -23,9 +24,7 @@ public class Lottos {
     }
 
     public List<Lotto> getLottoList() {
-        return lottos.stream()
-                .map(lotto -> Lotto.create(lotto.getLottoNumbers()))
-                .collect(Collectors.toList());
+        return Collections.unmodifiableList(lottos);
     }
 
     @Override

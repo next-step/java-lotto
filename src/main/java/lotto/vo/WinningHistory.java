@@ -3,6 +3,8 @@ package lotto.vo;
 import lotto.domain.WinningRank;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 
@@ -14,7 +16,7 @@ public class WinningHistory {
     private final Double yield;
     private final WinningStatistics stat;
 
-    public WinningHistory(List<WinningRank> history, Double yield, WinningStatistics stat) {
+    private WinningHistory(List<WinningRank> history, Double yield, WinningStatistics stat) {
         this.history = history;
         this.yield = yield;
         this.stat = stat;
@@ -27,11 +29,11 @@ public class WinningHistory {
                 .collect(collectingAndThen(
                         groupingBy(winningRank -> winningRank, () -> new EnumMap<WinningRank, Long>(WinningRank.class), counting()),
                         WinningStatistics::new));
-        return new WinningHistory(history, yieldOfDecimal.doubleValue(), stat);
+        return new WinningHistory(new ArrayList<>(history), yieldOfDecimal.doubleValue(), stat);
     }
 
     public List<WinningRank> getHistory() {
-        return history;
+        return Collections.unmodifiableList(history);
     }
 
     public WinningStatistics getStat() {
