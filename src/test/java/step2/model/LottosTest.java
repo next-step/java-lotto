@@ -1,6 +1,5 @@
 package step2.model;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
@@ -20,13 +19,6 @@ public class LottosTest {
             Arrays.asList(6, 7, 8, 12, 13, 14),
             Arrays.asList(16, 17, 18, 19, 20, 21)
         );
-    }
-
-    @Test
-    void illegalArgumentException_moneyIsLessThan0() {
-        Lottos lottos = new Lottos(1000);
-        assertThatThrownBy(() -> new Lottos(-1))
-            .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

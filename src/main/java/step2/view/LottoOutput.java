@@ -1,9 +1,7 @@
 package step2.view;
 
-import java.util.Collections;
 import java.util.List;
 import step2.model.Lotto;
-import step2.model.LottoNumber;
 import step2.model.LottoNumbers;
 import step2.model.LottoWinnings;
 import step2.model.Lottos;
