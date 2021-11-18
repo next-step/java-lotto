@@ -32,6 +32,8 @@ public class InputView {
     }
 
     private String[] getNumbersAndSplit() {
-        return new Scanner(System.in).nextLine().trim().split(DELIMITER);
+        return new Scanner(System.in).nextLine()
+                .trim()
+                .split(DELIMITER);
     }
 }
