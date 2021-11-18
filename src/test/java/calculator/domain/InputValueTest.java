@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class InputValueTest {
@@ -31,7 +34,7 @@ public class InputValueTest {
     }
 
     @Test
-    @DisplayName("컴마(,) 구분자 인지 테스트")
+    @DisplayName("컴마(,) 구분자인지 테스트")
     public void isCommaSeparator() {
         assertThat(new InputValue("1,2,3,3").isCommaSeparator()).isTrue();
         assertThat(new InputValue("12").isCommaSeparator()).isFalse();
@@ -51,7 +54,7 @@ public class InputValueTest {
     }
 
     @Test
-    @DisplayName("컴마(,) 또는 콜론(:) 구분자 인지 테스트")
+    @DisplayName("컴마(,) 또는 콜론(:) 구분자인지 테스트")
     public void isCommaOrColonSeparator() {
         assertThat(new InputValue("1,2:3").isCommaOrColonSeparator()).isTrue();
     }
@@ -60,5 +63,17 @@ public class InputValueTest {
     @DisplayName("컴마(,) 또는 콜론(:)로 입력값을 분리한다.")
     public void getSeparatedValuesByCommaOrColon() {
         assertThat(new InputValue("1,2:3").getSeparatedValuesByCommaOrColon()).contains("1", "2", "3");
+    }
+
+    @Test
+    @DisplayName("“//”와 “\\n” 문자 사이에 커스텀 구분자인지 테스트")
+    public void isCustomSeparator() {
+        assertThat(new InputValue("//;\n1;2;3").isCustomSeparator()).isTrue();
+    }
+
+    @Test
+    @DisplayName("“//”와 “\\n”로 입력값을 분리한다.")
+    public void getSeparatedValuesByCustom() {
+        assertThat(new InputValue("//;\n1;2;3").getSeparatedValuesByCustom()).contains("1", "2", "3");
     }
 }

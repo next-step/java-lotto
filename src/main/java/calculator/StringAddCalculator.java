@@ -27,6 +27,10 @@ public class StringAddCalculator {
             separatedValues = inputValue.getSeparatedValuesByCommaOrColon();
         }
 
+        if (inputValue.isCustomSeparator()) {
+            separatedValues = inputValue.getSeparatedValuesByCustom();
+        }
+
         return separatedValues.stream()
                 .mapToInt(value -> Integer.parseInt(value)).sum();
 

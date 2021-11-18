@@ -11,6 +11,7 @@ public class InputValue {
     private static final String REGULAR_EXPRESSION_ONLY_NUMBER = "^[0-9]*$";
     private static final String REGULAR_EXPRESSION_COMMA = ",";
     private static final String REGULAR_EXPRESSION_COMMA_OR_COLON = ",|:";
+    private static final String REGULAR_EXPRESSION_CUSTOM = "//(.)\n(.*)";
 
     private String inputStringValue;
     private Matcher matcher;
@@ -70,6 +71,27 @@ public class InputValue {
 
     public List<String> getSeparatedValuesByCommaOrColon() {
         return getSeparatedValues(REGULAR_EXPRESSION_COMMA_OR_COLON);
+    }
+
+    public boolean isCustomSeparator() {
+        Matcher matcher = getRegularExpressionCustomMatcher();
+        return matcher.find();
+    }
+
+    public List<String> getSeparatedValuesByCustom() {
+        String[] tokens = null;
+        Matcher matcher = getRegularExpressionCustomMatcher();
+        if (matcher.find()) {
+            String customDelimiter = matcher.group(1);
+            tokens = matcher.group(2).split(customDelimiter);
+
+        }
+
+        return Arrays.asList(tokens);
+    }
+
+    private Matcher getRegularExpressionCustomMatcher() {
+        return Pattern.compile(REGULAR_EXPRESSION_CUSTOM).matcher(inputStringValue);
     }
 
     @Override
