@@ -1,12 +1,19 @@
 package lotto.model;
 
+import lotto.generator.NumberGenerator;
+
 import java.util.Objects;
 
 public class LottoNumber {
 
     private static final int MIN_RANGE = 1;
     private static final int MAX_RANGE = 45;
-    private int number;
+
+    private final int number;
+
+    public LottoNumber(NumberGenerator generator) {
+        this.number = generator.generate();
+    }
 
     public LottoNumber(int input) {
         this.number = invalid(input);
@@ -42,5 +49,9 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    public int getNumber() {
+        return number;
     }
 }

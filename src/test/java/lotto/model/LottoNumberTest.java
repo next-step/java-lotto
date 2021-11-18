@@ -1,6 +1,8 @@
 package lotto.model;
 
+import lotto.generator.LottoNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -33,4 +35,12 @@ class LottoNumberTest {
                 .isThrownBy(() -> new LottoNumber(input));
     }
 
+    @RepeatedTest(100)
+    @DisplayName("랜덤 숫자가 1~45 사이의 값인지 테스트")
+    void randomNumber() {
+        LottoNumber lottoNumber = new LottoNumber(new LottoNumberGenerator());
+        assertThat(lottoNumber.getNumber())
+                .isGreaterThanOrEqualTo(1)
+                .isLessThanOrEqualTo(45);
+    }
 }
