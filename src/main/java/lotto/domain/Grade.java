@@ -17,7 +17,7 @@ public enum Grade {
     FOURTH(3, 5_000),
     BANG(0, 0);
 
-    private static final Grade[] GRADES_EXCLUDED_BONUS = Grade.values();
+    private static final Grade[] CACHED_GRADES = Grade.values();
     private static final long DEFAULT_COUNT = 0L;
     private static final int INCREASE_COUNT_UNIT = 1;
     private static final int BONUS_WIN_MATCH_COUNT = 5;
@@ -42,7 +42,7 @@ public enum Grade {
     }
 
     private static Grade from(int matchCount) {
-        return stream(GRADES_EXCLUDED_BONUS)
+        return stream(CACHED_GRADES)
                 .filter(matchesExcludedBonus(matchCount))
                 .findFirst()
                 .orElse(BANG);
@@ -70,7 +70,7 @@ public enum Grade {
     }
 
     private static Map<Grade, Long> initMap() {
-        return stream(GRADES_EXCLUDED_BONUS)
+        return stream(CACHED_GRADES)
                 .filter(Grade::isWin)
                 .collect(Collectors.toMap(grade -> grade, grade -> DEFAULT_COUNT));
     }

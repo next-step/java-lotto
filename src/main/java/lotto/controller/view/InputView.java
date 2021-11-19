@@ -1,4 +1,4 @@
-package lotto.ui.view;
+package lotto.controller.view;
 
 import java.util.Scanner;
 
