@@ -25,7 +25,7 @@ public class LottoWinningsTest {
         Map<Integer, Integer> lowMatchCount = new HashMap<>();
         lowMatchCount.put(2, 1);
         assertThatThrownBy(() -> LottoWinnings.getYield(lowMatchCount))
-            .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(InvalidLottoMatchCountException.class);
     }
 
     @Test
@@ -33,7 +33,7 @@ public class LottoWinningsTest {
         Map<Integer, Integer> lowMatchCount = new HashMap<>();
         lowMatchCount.put(7, 1);
         assertThatThrownBy(() -> LottoWinnings.getYield(lowMatchCount))
-            .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(InvalidLottoMatchCountException.class);
     }
 
 }

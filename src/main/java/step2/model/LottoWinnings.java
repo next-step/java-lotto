@@ -42,6 +42,6 @@ public enum LottoWinnings {
         if (matchCount == SIX.matchCount) {
             return SIX.winnings;
         }
-        throw new IllegalArgumentException("당첨 개수가 아닙니다");
+        throw new InvalidLottoMatchCountException();
     }
 }
