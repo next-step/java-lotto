@@ -1,6 +1,7 @@
 package lotto;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -29,6 +30,24 @@ public class LottoNumberTest {
                 Arguments.of(-1, 1),
                 Arguments.of(0, 15),
                 Arguments.of(46, 45)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("constructorMethodForSpecialSource")
+    @DisplayName("로또번호는 1이상 45이하의 범위를 가지며 보너스 볼일 수 있다.")
+    void constructorMethodForSpecial(int number, boolean special) {
+        LottoNumber lottoNumber = new LottoNumber(number, special);
+
+        assertThat(lottoNumber).isEqualTo(new LottoNumber(number, special));
+        assertThat(lottoNumber).isNotEqualTo(new LottoNumber(number, !special));
+    }
+
+    static Stream<Arguments> constructorMethodForSpecialSource() {
+        return Stream.of(
+                Arguments.of(1, false),
+                Arguments.of(15, true),
+                Arguments.of(45, false)
         );
     }
 }
