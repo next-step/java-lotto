@@ -8,6 +8,7 @@ import java.util.List;
 public class LottoNumbers {
 
     private static final int INITIAL_MATCH_COUNT = 0;
+    private static final int SUBLIST_START_INDEX = 0;
     private static final int LOTTO_NUMBERS_SIZE = 6;
     private static final int LOTTO_NUMBER_MIN = 1;
     private static final int LOTTO_NUMBER_MAX = 45;
@@ -23,11 +24,8 @@ public class LottoNumbers {
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers() {
-        lottoNumbers = new ArrayList<>();
         Collections.shuffle(defaultLottoNumbers);
-        for (int i = 0; i < LOTTO_NUMBERS_SIZE; i++) {
-            lottoNumbers.add(defaultLottoNumbers.get(i));
-        }
+        lottoNumbers = defaultLottoNumbers.subList(SUBLIST_START_INDEX, LOTTO_NUMBERS_SIZE);
     }
 
     //랜덤값 테스트의 편의성을 위한 protected 생성자
