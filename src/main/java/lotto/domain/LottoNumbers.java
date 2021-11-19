@@ -70,13 +70,6 @@ public class LottoNumbers {
         }
     }
 
-    // TODO: [2021/11/19 양동혁] 이거 삭제하자
-    public Grade rank(LottoNumbers lastWinningNumbers) {
-        checkNotNull(lastWinningNumbers);
-        Set<LottoNumber> allNumbers = mergeWithLottoNumbers(lastWinningNumbers.lottoNumbers);
-        return Grade.from(TWICE_LOTTO_NUMBERS_SIZE - allNumbers.size());
-    }
-
     private Set<LottoNumber> mergeWithLottoNumbers(List<LottoNumber> winningNumbers) {
         Set<LottoNumber> allNumbers = new HashSet<>();
         allNumbers.addAll(lottoNumbers);

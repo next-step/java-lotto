@@ -32,14 +32,6 @@ public class LottoTicket {
         return new Statistics(Grade.mapOf(grades), lineSizeToDollars());
     }
 
-    public Statistics rank(LottoNumbers lastWinningNumbers) {
-        checkNotNull(lastWinningNumbers);
-        List<Grade> grades = lottoLines.stream()
-                .map(lottoLine -> lottoLine.rank(lastWinningNumbers))
-                .collect(Collectors.toList());
-        return new Statistics(Grade.mapOf(grades), lineSizeToDollars());
-    }
-
     private Dollars lineSizeToDollars() {
         return new Dollars(lottoLines.size() * Dollars.DOLLAR_UNIT);
     }

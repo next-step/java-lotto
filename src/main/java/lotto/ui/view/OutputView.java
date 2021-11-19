@@ -36,7 +36,7 @@ public class OutputView {
     }
 
     public static void showStatistics(Statistics statistics) {
-        System.out.println("당첨통계");
+        System.out.println("\n당첨통계");
         System.out.println("--------");
 
         Map<Grade, Long> grades = getReverseOrderedGrades(statistics);

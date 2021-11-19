@@ -16,17 +16,18 @@ class GradeTest {
     @DisplayName("일치하는 개수에 맞게 등급을 반환한다.")
     @ParameterizedTest(name = "[{index}] matchCount: {0}, expected: {1}")
     @CsvSource(value = {
-            "1000, BANG",
-            "6, FIRST",
-            "5, SECOND",
-            "4, THIRD",
-            "3, FOURTH",
-            "2, BANG",
-            "0, BANG",
-            "-1, BANG"
+            "1000, true, BANG",
+            "6, false, FIRST",
+            "5, true, BONUS",
+            "5, false, SECOND",
+            "4, false, THIRD",
+            "3, true, FOURTH",
+            "2, false, BANG",
+            "0, true, BANG",
+            "-1, true, BANG"
     })
-    void from(int matchCount, Grade expectedGrade) {
-        assertThat(Grade.from(matchCount)).isEqualTo(expectedGrade);
+    void from(int matchCount, boolean matchBonus, Grade expectedGrade) {
+        assertThat(Grade.from(matchCount, matchBonus)).isEqualTo(expectedGrade);
     }
 
     @DisplayName("보너스 등급을 잘 반환하는지")

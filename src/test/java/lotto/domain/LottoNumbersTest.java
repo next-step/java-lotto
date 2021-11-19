@@ -28,17 +28,18 @@ class LottoNumbersTest {
     @DisplayName("당첨번호개수에 맞게 등급을 잘 반환하는지")
     @ParameterizedTest(name = "[{index}] lottos: {0}, winnings: {1}, grade: {2}")
     @MethodSource("matchArguments")
-    void match(LottoNumbers lottoNumbers, LottoNumbers winningNumbers, Grade expectedGrade) {
-        Grade grade = lottoNumbers.rank(winningNumbers);
+    void match(LottoNumbers lottoNumbers, LottoNumbers winningNumbers, LottoNumber bonusNumber, Grade expectedGrade) {
+        Grade grade = lottoNumbers.rank(winningNumbers, bonusNumber);
         assertThat(grade).isEqualTo(expectedGrade);
     }
 
     static Stream<Arguments> matchArguments() {
         LottoNumbers lottoNumbers = LottoNumbers.of(asList(3, 1, 2, 10, 15, 20));
         return Stream.of(
-                Arguments.of(lottoNumbers, LottoNumbers.of(asList(3, 1, 2, 10, 15, 20)), Grade.FIRST),
-                Arguments.of(lottoNumbers, LottoNumbers.of(asList(3, 1, 2, 43, 44, 45)), Grade.FOURTH),
-                Arguments.of(lottoNumbers, LottoNumbers.of(asList(40, 41, 42, 43, 44, 45)), Grade.BANG)
+                Arguments.of(lottoNumbers, LottoNumbers.of(asList(3, 1, 2, 10, 15, 20)), LottoNumber.from(40), Grade.FIRST),
+                Arguments.of(lottoNumbers, LottoNumbers.of(asList(3, 1, 2, 10, 15, 30)), LottoNumber.from(20), Grade.BONUS),
+                Arguments.of(lottoNumbers, LottoNumbers.of(asList(3, 1, 2, 43, 44, 45)), LottoNumber.from(20), Grade.FOURTH),
+                Arguments.of(lottoNumbers, LottoNumbers.of(asList(40, 41, 42, 43, 44, 45)), LottoNumber.from(20), Grade.BANG)
                 );
     }
 
