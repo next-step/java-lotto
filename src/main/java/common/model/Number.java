@@ -21,6 +21,10 @@ public class Number {
         this.number = number;
     }
 
+    public void plus() {
+        this.number++;
+    }
+
     public void plus(Number other) {
         this.number += other.number;
     }
