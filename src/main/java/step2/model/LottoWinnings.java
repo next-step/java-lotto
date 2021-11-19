@@ -1,5 +1,6 @@
 package step2.model;
 
+import java.util.Arrays;
 import java.util.Map;
 
 public enum LottoWinnings {
@@ -30,18 +31,11 @@ public enum LottoWinnings {
     }
 
     private static int getWinning(int matchCount) {
-        if (matchCount == THREE.matchCount) {
-            return THREE.winnings;
-        }
-        if (matchCount == FOUR.matchCount) {
-            return FOUR.winnings;
-        }
-        if (matchCount == FIVE.matchCount) {
-            return FIVE.winnings;
-        }
-        if (matchCount == SIX.matchCount) {
-            return SIX.winnings;
-        }
-        throw new InvalidLottoMatchCountException();
+        LottoWinnings matchWinning = Arrays.stream(LottoWinnings.values())
+            .filter(lottoWinnings -> lottoWinnings.winnings == matchCount)
+            .findFirst()
+            .orElseThrow(InvalidLottoMatchCountException::new);
+
+        return matchWinning.getWinnings();
     }
 }
