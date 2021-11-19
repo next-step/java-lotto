@@ -2,6 +2,6 @@ package lotto.domain.starategy;
 
 import java.util.List;
 
-public interface GetLottoNumberStrategy {
+public interface GetLottoNumbersStrategy {
     List<Integer> getLotto();
 }

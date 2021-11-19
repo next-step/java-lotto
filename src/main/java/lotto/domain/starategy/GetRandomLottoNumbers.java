@@ -7,8 +7,7 @@ import java.util.List;
 import static lotto.domain.Lotto.BOUND_NUMBERS;
 import static lotto.domain.Lotto.SIZE;
 
-public class RandomGetLottoImpl implements GetLottoNumberStrategy{
-
+public class GetRandomLottoNumbers implements GetLottoNumbersStrategy {
     @Override
     public List<Integer> getLotto() {
         Collections.shuffle(BOUND_NUMBERS);

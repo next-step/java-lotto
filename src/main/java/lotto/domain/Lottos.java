@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.starategy.GetLottoNumberStrategy;
+import lotto.domain.starategy.GetLottoNumbersStrategy;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,11 +9,11 @@ import java.util.List;
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(Integer purchaseAmount, GetLottoNumberStrategy getLottoNumberStrategy) {
+    public Lottos(Integer purchaseAmount, GetLottoNumbersStrategy getLottoNumbersStrategy) {
         int purchaseCount = purchaseAmount/1000;
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < purchaseCount; i++) {
-            Lotto lotto = new Lotto(getLottoNumberStrategy);
+            Lotto lotto = new Lotto(getLottoNumbersStrategy);
             lottos.add(lotto);
         }
         this.lottos = lottos;

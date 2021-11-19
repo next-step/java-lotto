@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.starategy.GetLottoNumberStrategy;
+import lotto.domain.starategy.GetLottoNumbersStrategy;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,8 +19,8 @@ public class Lotto {
 
     private final List<Integer> lottoNumbers;
 
-    public Lotto(GetLottoNumberStrategy getLottoNumberStrategy) {
-        List<Integer> lottoNumbers = getLottoNumberStrategy.getLotto();
+    public Lotto(GetLottoNumbersStrategy getLottoNumbersStrategy) {
+        List<Integer> lottoNumbers = getLottoNumbersStrategy.getLotto();
         checkSize(lottoNumbers);
         checkDistinct(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
