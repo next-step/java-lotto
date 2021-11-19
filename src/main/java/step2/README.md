@@ -22,12 +22,12 @@
 
 ## 피드백 명세
 
-    1. 생성자는 생성자들끼리
-    2. 사용자 정의 예외
+    1. 생성자는 생성자들끼리 ㅇ
+    2. 사용자 정의 예외 ㅇ
     3. LottoNumbers가 Lotto가 되어도 될 것 같다
-    4. 로또번호 만들기 sublist
+    4. 로또번호 만들기 sublist ㅇ
     5. 로또 상금 enum 꽝도 추가해보기
-    6. enum에서 stream 활용하여 winnings 처리하기
+    6. enum에서 stream 활용하여 winnings 처리하기 ㅇ
     7. Lottos에서 Map을 불변 객체로 바꿔보기
     8. 삼항 연산자 없애보기
     9. static class들의 인스턴스화 막기

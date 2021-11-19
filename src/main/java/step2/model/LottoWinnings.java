@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Map;
 
 public enum LottoWinnings {
+    ONE(1, 0),
+    TWO(2, 0),
     THREE(3, 5000),
     FOUR(4, 50000),
     FIVE(5, 1500000),
