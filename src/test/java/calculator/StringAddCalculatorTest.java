@@ -30,16 +30,19 @@ public class StringAddCalculatorTest {
     }
 
     @Test
+    @DisplayName("컴마(,) 또는 콜론(:) 구분자 덧셈")
     public void splitAndSum_쉼표_또는_콜론_구분자() throws Exception {
         assertThat(new StringAddCalculator().splitAndSum(new InputValue("1,2:3"))).isEqualTo(6);
     }
 
     @Test
+    @DisplayName("“//”와 “\\n” 커스텀 구분자 덧셈")
     public void splitAndSum_custom_구분자() throws Exception {
         assertThat(new StringAddCalculator().splitAndSum(new InputValue("//;\n1;2;3"))).isEqualTo(6);
     }
 
     @Test
+    @DisplayName("음수를 전달할 경우 RuntimeException 예외가 발생")
     public void splitAndSum_negative() throws Exception {
         assertThatThrownBy(() ->
                 new StringAddCalculator().splitAndSum(new InputValue("-1,2,3"))

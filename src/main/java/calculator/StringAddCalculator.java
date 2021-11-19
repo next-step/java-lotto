@@ -1,13 +1,12 @@
 package calculator;
 
 import calculator.domain.InputValue;
-
-import java.util.List;
+import calculator.domain.SeparatedValues;
 
 public class StringAddCalculator {
     private static final int NUMBER_ZERO = 0;
 
-    private List<Integer> separatedValues;
+    private SeparatedValues separatedValues;
 
     public int splitAndSum(InputValue inputValue) {
         if (inputValue.isNullOrBlank()) {
@@ -19,20 +18,15 @@ public class StringAddCalculator {
         }
 
         if (inputValue.isCommaOrColonSeparator()) {
-            separatedValues = inputValue.getSeparatedValuesByCommaOrColon();
+            separatedValues = new SeparatedValues(inputValue.getSeparatedValuesByCommaOrColon());
         }
 
         if (inputValue.isCustomSeparator()) {
-            separatedValues = inputValue.getSeparatedValuesByCustom();
+            separatedValues = new SeparatedValues(inputValue.getSeparatedValuesByCustom());
         }
 
-        separatedValues.forEach(separatedValue -> {
-            if (separatedValue < 0) {
-                throw new RuntimeException("입력값으로 음수는 전달할 수 없습니다.");
-            }
-        });
+        separatedValues.checkMinusValues();
 
-        return separatedValues.stream()
-                .mapToInt(value -> value).sum();
+        return separatedValues.calculateSum();
     }
 }
