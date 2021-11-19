@@ -20,6 +20,7 @@ public class OutputView {
     private static String lottoTicketPrintFormat(LottoTicket lottoTicket) {
         return lottoTicket.getLottoNumbers().stream()
                 .map(LottoNumber::getValue)
+                .sorted()
                 .map(Object::toString)
                 .collect(Collectors.joining(",", "[", "]"));
     }
