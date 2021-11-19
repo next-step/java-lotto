@@ -13,9 +13,7 @@ public class Lotto {
     private Lotto() {}
 
     public Lotto(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException();
-        }
+        checkNumbers(numbers);
         this.numbers = numbers;
     }
 
@@ -52,6 +50,19 @@ public class Lotto {
 
     private boolean hasBonusBall(int bonusBall) {
         return numbers.contains(bonusBall);
+    }
+
+    private void checkNumbers(List<Integer> numbers) {
+        if (numbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("6자리 입력해주세요");
+        }
+        long count = numbers.stream()
+                .mapToInt(n -> n)
+                .distinct()
+                .count();
+        if (count != LOTTO_SIZE) {
+            throw new IllegalArgumentException("중복 번호는 안됩니다");
+        }
     }
 
 }

@@ -2,6 +2,7 @@ package lotto.step3.domain;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.IntStream;
 
@@ -23,9 +24,8 @@ public class LottoStatistics {
         this.bonusBall = new BonusBall(bonusBall, winningNumbers);
     }
 
-    public Map<Integer, Integer> totalCountOfMatch() {
-        return IntStream
-                .rangeClosed(LOTTO_MATCH_COUNT_START, LOTTO_MATCH_COUNT_END)
+    public Map<Integer, Integer> createRepository() {
+        return IntStream.rangeClosed(LOTTO_MATCH_COUNT_START, LOTTO_MATCH_COUNT_END)
                 .boxed()
                 .collect(toMap(count -> count, count -> lotteries.totalCountOfMatch(winningNumbers, count), (a, b) -> b));
     }

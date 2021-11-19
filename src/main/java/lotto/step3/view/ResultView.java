@@ -10,7 +10,7 @@ import java.util.Map;
 public final class ResultView {
 
     public static final int LOTTO_BONUS_COUNT = 5;
-    public static final int LOTTO_START_COUNT = 1;
+    public static final int LOTTO_START_COUNT = 3;
     public static final int LOTTO_END_COUNT = 6;
 
     private ResultView() {
@@ -20,10 +20,7 @@ public final class ResultView {
     public static void printOrderLottoNumber(Lotteries lotteries) {
         lotteries.getLotteries().stream()
                 .map(Lotto::getNumbers)
-                .forEach(s -> {
-                    Collections.sort(s);
-                    System.out.println(s);
-                });
+                .forEach(System.out::println);
         System.out.println();
     }
 

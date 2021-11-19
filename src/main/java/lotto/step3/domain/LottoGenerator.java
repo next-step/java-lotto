@@ -16,8 +16,9 @@ public final class LottoGenerator {
         Collections.shuffle(allLottoNumbers);
         List<Integer> randomLottoNumbers = allLottoNumbers.stream()
                 .limit(LOTTO_SIZE)
+                .sorted()
                 .collect(Collectors.toList());
-        return new Lotto(randomLottoNumbers);
+        return new Lotto(Collections.unmodifiableList(randomLottoNumbers));
     }
 
     private static List<Integer> createAllNumbers() {

@@ -26,11 +26,11 @@ public class LottoController {
 
         LottoStatistics lottoStatistics = service.createLottoStatistics(lotteries, winningNumbers, PrintInputBonusBall());
 
-        Map<Integer, Integer> totalCountOfMatch = service.totalCountOfMatch(lottoStatistics);
+        Map<Integer, Integer> repository = service.createRepository(lottoStatistics);
         boolean isSecondPrizeWinners = service.isSecondPrizeWinners(lottoStatistics);
         int totalSecondPrizeWinner = service.totalSecondPrizeWinners(lottoStatistics);
 
-        printWinningStatics(totalCountOfMatch, isSecondPrizeWinners, totalSecondPrizeWinner);
+        printWinningStatics(repository, isSecondPrizeWinners, totalSecondPrizeWinner);
 
         printRateOfReturn(service.calculateRateOfProfit(lottoStatistics, orderPrice));
 

@@ -23,8 +23,8 @@ public class LottoService {
         return new LottoStatistics(lotteries, winningNumbers, bonusBall);
     }
 
-    public Map<Integer, Integer> totalCountOfMatch(LottoStatistics lottoStatistics) {
-        return lottoStatistics.totalCountOfMatch();
+    public Map<Integer, Integer> createRepository(LottoStatistics lottoStatistics) {
+        return lottoStatistics.createRepository();
     }
 
     public boolean isSecondPrizeWinners(LottoStatistics lottoStatistics) {
@@ -37,14 +37,6 @@ public class LottoService {
 
     public double calculateRateOfProfit(LottoStatistics lottoStatistics, int orderPrice) {
         return lottoStatistics.calculateRateOfProfit(orderPrice);
-    }
-
-    public void validation(Lotto lotteries, int bonusBall) {
-        boolean isSame = lotteries.getNumbers().stream()
-                .anyMatch(number -> number == bonusBall);
-        if (!isSame) {
-            throw new IllegalArgumentException();
-        }
     }
 
 }

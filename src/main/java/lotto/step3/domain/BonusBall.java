@@ -23,7 +23,7 @@ public class BonusBall {
         boolean isAllNoneMatch = winningNumbers.getNumbers().stream()
                 .noneMatch(number -> number == bonusBall);
         if (isAllNoneMatch) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("당첨번호 내에서 보너스볼을 입력해주세요");
         }
     }
 
