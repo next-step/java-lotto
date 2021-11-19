@@ -22,18 +22,27 @@
 4. ~~출력 통계~~
 5. ~~총 수익률~~
 6. ~~검증~~
-7. 보너스볼 입력 해보자 
-8. 보너스볼 일치 로직 작성 해보자
-9. 보너스볼 출력 해보자
+7. ~~보너스볼 입력 해보자~~ 
+8. ~~보너스볼 일치 로직 작성 해보자~~
+9. ~~보너스볼 출력 해보자~~
+10. ~~원시값 클래스로 감싸자~~
+11. ~~각 값에대한 검증값~~
 
 **- 기능 목록**
 1. domain
    - Lotto : 로또
-   - Lotteries : 로또 컬렉션, 당첨번호와 일치수 계산
-   - Store : 로또판매점, 로또 생성
-   - Profit : 총 수익률 계산
+   - Lotteries : 로또 컬렉션
+   - LottoStore : 로또판매점, 로또 생성
+      - OrderPrice : 로또 주문 가격
+      - OrderCount : 로또 주문 수
+   - LottoGenerator : 자동로또번호 생성기
+   - LottoStatistics : 총 수익률 계산
+      - BonusBall : 보너스 볼
+   - Rank : 로또 당첨 순위
 2. controller
    - LottoController : 컨트롤러
+3. service
+   - LottoService : 서비스
 3. view
    - InputView : 클라이언트 입력 뷰
    - ResultView : 출력 뷰
