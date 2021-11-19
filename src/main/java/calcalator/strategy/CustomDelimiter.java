@@ -9,7 +9,9 @@ public class CustomDelimiter implements DelimiterStrategy {
 
     @Override
     public String[] getToken(String input) {
-
+        if (input == null) {
+            return new String[]{"0"};
+        }
         Matcher m = PATTERN.matcher(input);
         if (m.find()) {
             String customDelimiter = m.group(1);
