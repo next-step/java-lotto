@@ -53,11 +53,8 @@ public class Lottos {
     }
 
     private int getWinnerCount(int matchCount, Lotto winner) {
-        int winnerCount = INITIAL_WINNER_COUNT;
-
-        for (Lotto lotto : lottos) {
-            winnerCount = (matchCount == lotto.getMatchCount(winner)) ? winnerCount + 1 : winnerCount;
-        }
-        return winnerCount;
+        return (int) lottos.stream()
+            .filter(lotto -> lotto.getMatchCount(winner) == matchCount)
+            .count();
     }
 }

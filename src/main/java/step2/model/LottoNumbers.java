@@ -41,6 +41,9 @@ public class LottoNumbers {
     }
 
     public int getMatchCount(LottoNumbers winnerNumbers) {
+//        return (int) lottoNumbers.stream()
+//            .filter(winnerNumbers::contains)
+//            .count();
         int matchCount = INITIAL_MATCH_COUNT;
 
         for (LottoNumber lottoNumber : lottoNumbers) {
