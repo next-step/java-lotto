@@ -16,10 +16,14 @@ class BonusBallTest {
     }
 
     @Test
-    @DisplayName("보너스볼은 당첨번호에 포함 x -> IllegalArgumentException")
+    @DisplayName("보너스볼은 당첨번호에 포함 x, 1~45 x -> IllegalArgumentException")
     void validation() {
         Lotto winningNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThatThrownBy(() -> new BonusBall(7, winningNumbers))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new BonusBall(0, winningNumbers))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new BonusBall(46, winningNumbers))
                 .isInstanceOf(IllegalArgumentException.class);
         //정상
         assertThatCode(() -> new BonusBall(1, winningNumbers))

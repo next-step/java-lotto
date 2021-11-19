@@ -16,24 +16,13 @@ import static org.assertj.core.api.Assertions.*;
 class LottoTest {
 
     @Test
-    @DisplayName("랜덤 로또번호 생성 - 6자리, 1~45, 중복값 x")
-    void createLottoNumber() {
-        for (int i = 0; i < 1000; i++) {
-            Lotto lotto = LottoGenerator.createLotto();
-            List<Integer> numbers =  lotto.getNumbers();
-            assertThat(numbers).size().isEqualTo(6);
-            assertThat(numbers).doesNotContain(46);
-            assertThat(numbers).doesNotContain(0);
-            assertThat(numbers.stream().distinct().collect(toList())).size().isEqualTo(6);
-        }
-    }
-
-    @Test
-    @DisplayName("입력된 당첨번호 6자리, 1~45 만족 못하면 -> IllegalArgumentException")
+    @DisplayName("입력된 당첨번호 6자리, 1~45, 중복값 x,  만족 못하면 -> IllegalArgumentException")
     void checkNumbers() {
         assertThatThrownBy(() -> new Lotto(Arrays.asList(1,2,3,4,5,6,7)))
                 .isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> new Lotto(Arrays.asList(1,2,3,4,5)))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lotto(Arrays.asList(1,2,3,5,5,5)))
                 .isInstanceOf(IllegalArgumentException.class);
         //정상입력
         assertThatCode(() -> new Lotto(Arrays.asList(1,2,3,4,5,6)))
