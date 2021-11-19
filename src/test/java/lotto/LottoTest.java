@@ -3,39 +3,36 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import lotto.domain.Lotto;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import static org.assertj.core.api.Assertions.*;
 import static lotto.domain.Lotto.SIZE;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class LottoTest {
-    @Test
-    @DisplayName("print 로 랜덤 값이 들어간 배열이 잘 생성되는지 확인")
-    void checkMatchingTest() {
-        List<Integer> testList = Arrays.asList(1, 2, 3, 4, 5, 6);
-
+    private static Stream<Arguments> generateArgumentsStream() {
+        List<Arguments> listOfArguments = new LinkedList<>();
+        listOfArguments.add(Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 6));
+        listOfArguments.add(Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 7), 5));
+        listOfArguments.add(Arguments.of(Arrays.asList(1, 2, 3, 4, 7, 8), 4));
+        listOfArguments.add(Arguments.of(Arrays.asList(1, 2, 3, 9, 7, 8), 3));
+        listOfArguments.add(Arguments.of(Arrays.asList(20, 2, 3, 11, 13, 16), 2));
+        listOfArguments.add(Arguments.of(Arrays.asList(24, 22, 31, 42, 17, 3), 1));
+        listOfArguments.add(Arguments.of(Arrays.asList(31, 42, 43, 34, 27, 18), 0));
+        return listOfArguments.stream();
+    }
+    @ParameterizedTest
+    @MethodSource("generateArgumentsStream")
+    @DisplayName("lotto 번호 matching 테스트")
+    void checkMatchingTest(List<Integer> list, int expect) {
         Lotto lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.checkMatching(testList)).isEqualTo(6);
-
-        Lotto lotto2 = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 7));
-        assertThat(lotto2.checkMatching(testList)).isEqualTo(5);
-
-        Lotto lotto3 = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 8, 9));
-        assertThat(lotto3.checkMatching(testList)).isEqualTo(4);
-
-        Lotto lotto4 = new Lotto(() -> Arrays.asList(7, 8, 9, 4, 5, 6));
-        assertThat(lotto4.checkMatching(testList)).isEqualTo(3);
-
-        Lotto lotto5 = new Lotto(() -> Arrays.asList(1, 8, 9, 7, 11, 6));
-        assertThat(lotto5.checkMatching(testList)).isEqualTo(2);
-
-        Lotto lotto6 = new Lotto(() -> Arrays.asList(20, 21, 4, 7, 11, 15));
-        assertThat(lotto6.checkMatching(testList)).isEqualTo(1);
-
-        Lotto lotto7 = new Lotto(() -> Arrays.asList(20, 21, 43, 7, 11, 15));
-        assertThat(lotto7.checkMatching(testList)).isEqualTo(0);
+        assertThat(lotto.checkMatching(list)).isEqualTo(expect);
     }
 
     @Test
