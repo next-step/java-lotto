@@ -10,12 +10,12 @@ public class Lotto {
         lottoNumbers = new LottoNumbers();
     }
 
-    public LottoNumbers getLottoNumbers() {
-        return lottoNumbers;
-    }
-
     public Lotto(List<Integer> lottoNumbers) {
         this.lottoNumbers = new LottoNumbers(lottoNumbers);
+    }
+
+    public LottoNumbers getLottoNumbers() {
+        return lottoNumbers;
     }
 
     public int getMatchCount(Lotto winner) {
