@@ -16,9 +16,9 @@ public class LottoNumberTest {
 
     @Test
     void illegalArgumentException_InputNumberIsLessThan1_or_BiggerThan45() {
-        assertThatThrownBy(() -> new LottoNumber(-1))
-            .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new LottoNumber(0))
+            .isInstanceOf(InvalidLottoNumberException.class);
         assertThatThrownBy(() -> new LottoNumber(46))
-            .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(InvalidLottoNumberException.class);
     }
 }
