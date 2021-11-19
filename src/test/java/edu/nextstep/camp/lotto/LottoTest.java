@@ -22,12 +22,8 @@ public class LottoTest {
 
     static Stream<Arguments> parseLottoInvalid() {
         return Stream.of(
-            Arguments.of(
-                List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5))
-            ),
-            Arguments.of(
-                List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6), LottoNumber.of(7))
-            )
+            Arguments.of(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5))),
+            Arguments.of(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6), LottoNumber.of(7)))
         );
     }
 
@@ -35,18 +31,9 @@ public class LottoTest {
     @MethodSource("parseLotto1To6AsList")
     public void createFromList(List<LottoNumber> numbers) {
         assertThat(Lotto.of(numbers))
-                .isEqualTo(Lotto.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
+                .isEqualTo(Lotto.of(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))));
         assertThat(Lotto.of(numbers).collect()).hasSize(6);
         assertThat(Lotto.of(numbers).collect())
-                .containsExactly(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
-    }
-
-    @Test
-    public void createFromList() {
-        assertThat(Lotto.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)))
-                .isEqualTo(Lotto.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
-        assertThat(Lotto.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)).collect()).hasSize(6);
-        assertThat(Lotto.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)).collect())
                 .containsExactly(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
     }
 
@@ -56,25 +43,14 @@ public class LottoTest {
     public void createFailedFromList(List<LottoNumber> numbers) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> Lotto.of(numbers))
-                .withMessageContaining("invalid input");
-    }
-
-    @ParameterizedTest(name = "create failed from objects: {arguments}")
-    @NullAndEmptySource
-    public void createFailedFromObjects(LottoNumber[] numbers) {
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> Lotto.of(numbers))
-                .withMessageContaining("invalid input");
+                .withMessageContaining("size of numbers must be");
     }
 
     @Test
-    @DisplayName("create failed from objects: {arguments}")
-    public void createFailedFromObjects() {
+    @DisplayName("create failed cause by duplicated numbers: {arguments}")
+    public void createFailedByDuplicatedNumber() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> Lotto.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5)))
-                .withMessageContaining("invalid input");
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> Lotto.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6), LottoNumber.of(7)))
-                .withMessageContaining("invalid input");
+                .isThrownBy(() -> Lotto.of(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(1))))
+                .withMessageContaining("duplicated numbers");
     }
 }

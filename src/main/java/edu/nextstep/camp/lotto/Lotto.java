@@ -1,12 +1,11 @@
 package edu.nextstep.camp.lotto;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Lotto {
+    private static final String FORMATTER = "Lotto{numbers=%s)";
     private static final int SIZE_OF_NUMBERS = 6;
 
     private final Collection<LottoNumber> numbers;
@@ -15,20 +14,13 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static Lotto of(LottoNumber... numbers) {
-        if (numbers == null || numbers.length != SIZE_OF_NUMBERS) {
-            throw new IllegalArgumentException("invalid input: size of numbers must be " + SIZE_OF_NUMBERS);
-        }
-
-        return Lotto.of(
-                Arrays.stream(numbers)
-                .collect(Collectors.toUnmodifiableList())
-        );
-    }
-
     public static Lotto of(Collection<LottoNumber> numbers) {
         if (numbers == null || numbers.size() != SIZE_OF_NUMBERS) {
             throw new IllegalArgumentException("invalid input: size of numbers must be " + SIZE_OF_NUMBERS);
+        }
+
+        if (numbers.stream().distinct().count() != numbers.size()) {
+            throw new IllegalArgumentException("invalid input: duplicated numbers are found: " + numbers);
         }
 
         return new Lotto(Collections.unmodifiableCollection(numbers));
@@ -53,6 +45,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return String.format("Lotto{numbers=%s)", numbers.toString());
+        return String.format(FORMATTER, numbers.toString());
     }
 }

@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class LottosTest {
     @Test
     public void create() {
-        final Lotto testLotto = Lotto.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
+        final Lotto testLotto = Lotto.of(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
         assertThat(Lottos.of(List.of(testLotto))).isEqualTo(Lottos.of(List.of(testLotto)));
     }
 
