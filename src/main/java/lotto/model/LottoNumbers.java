@@ -11,16 +11,16 @@ import java.util.Set;
 public class LottoNumbers {
 
     private final List<LottoNumber> lottoNumbers;
-    private final Number matchCount;
+    private LottoRank lottoRank;
 
     public LottoNumbers(NumberGenerator generator) {
         this.lottoNumbers = autoCreate(generator);
-        this.matchCount = new Number();
+        this.lottoRank = LottoRank.MISS;
     }
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
-        this.matchCount = new Number();
+        this.lottoRank = LottoRank.MISS;
     }
 
     private List<LottoNumber> autoCreate(NumberGenerator generator) {
@@ -31,27 +31,15 @@ public class LottoNumbers {
         return new ArrayList<>(lottoNumbers);
     }
 
-    public void match(LottoNumbers matchNumbers) {
-        for (LottoNumber lottoNumber : this.lottoNumbers) {
-            matchNumbers.match(lottoNumber);
-        }
-    }
-
-    public void match(LottoNumber matchNumber) {
-        if (contains(matchNumber)) {
-            this.matchCount.plus();
-        }
-    }
-
-    public boolean contains(LottoNumber lottoNumber) {
-        return this.lottoNumbers.contains(lottoNumber);
+    public void matchRank(Number matchCount) {
+        this.lottoRank = LottoRank.valueOf(matchCount.getNumber());
     }
 
     public List<LottoNumber> getLottoNumbers() {
         return this.lottoNumbers;
     }
 
-    public Number getMatchCount() {
-        return matchCount;
+    public LottoRank getLottoRank() {
+        return lottoRank;
     }
 }
