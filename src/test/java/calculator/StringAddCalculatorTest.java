@@ -39,9 +39,10 @@ public class StringAddCalculatorTest {
         assertThat(new StringAddCalculator().splitAndSum(new InputValue("//;\n1;2;3"))).isEqualTo(6);
     }
 
-//    @Test
-//    public void splitAndSum_negative() throws Exception {
-//        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
-//                .isInstanceOf(RuntimeException.class);
-//    }
+    @Test
+    public void splitAndSum_negative() throws Exception {
+        assertThatThrownBy(() ->
+                new StringAddCalculator().splitAndSum(new InputValue("-1,2,3"))
+        ).isInstanceOf(RuntimeException.class);
+    }
 }

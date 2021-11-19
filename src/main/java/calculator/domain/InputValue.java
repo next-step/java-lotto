@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class InputValue {
     private static final String STRING_BLANK = "";
@@ -40,10 +41,6 @@ public class InputValue {
         return inputStringValue.length() == 1;
     }
 
-    public boolean isCommaSeparator() {
-        return isEffectiveSeparator(REGULAR_EXPRESSION_COMMA);
-    }
-
     public boolean isMoreThanTwoNumber() {
         return isOnlyNumber() && isMoreThanTwoLength();
     }
@@ -52,12 +49,14 @@ public class InputValue {
         return inputStringValue.length() > 1;
     }
 
-    public List<String> getSeparatedValuesByComma() {
-        return getSeparatedValues(REGULAR_EXPRESSION_COMMA);
+    public List<Integer> getSeparatedValuesByComma() {
+        return getSeparatedValues(inputStringValue.split(REGULAR_EXPRESSION_COMMA));
     }
 
-    private List<String> getSeparatedValues(String regex) {
-        return Arrays.asList(inputStringValue.split(regex));
+    private List<Integer> getSeparatedValues(String[] inputStringArray) {
+        return Arrays.asList(inputStringArray).stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     public boolean isCommaOrColonSeparator() {
@@ -69,8 +68,8 @@ public class InputValue {
         return matcher.find();
     }
 
-    public List<String> getSeparatedValuesByCommaOrColon() {
-        return getSeparatedValues(REGULAR_EXPRESSION_COMMA_OR_COLON);
+    public List<Integer> getSeparatedValuesByCommaOrColon() {
+        return getSeparatedValues(inputStringValue.split(REGULAR_EXPRESSION_COMMA_OR_COLON));
     }
 
     public boolean isCustomSeparator() {
@@ -78,7 +77,7 @@ public class InputValue {
         return matcher.find();
     }
 
-    public List<String> getSeparatedValuesByCustom() {
+    public List<Integer> getSeparatedValuesByCustom() {
         String[] tokens = null;
         Matcher matcher = getRegularExpressionCustomMatcher();
         if (matcher.find()) {
@@ -87,7 +86,7 @@ public class InputValue {
 
         }
 
-        return Arrays.asList(tokens);
+        return getSeparatedValues(tokens);
     }
 
     private Matcher getRegularExpressionCustomMatcher() {

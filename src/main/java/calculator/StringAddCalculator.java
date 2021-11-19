@@ -7,8 +7,7 @@ import java.util.List;
 public class StringAddCalculator {
     private static final int NUMBER_ZERO = 0;
 
-    private int resultValue;
-    private List<String> separatedValues;
+    private List<Integer> separatedValues;
 
     public int splitAndSum(InputValue inputValue) {
         if (inputValue.isNullOrBlank()) {
@@ -19,10 +18,6 @@ public class StringAddCalculator {
             return Integer.parseInt(inputValue.getInputStringValue());
         }
 
-        if (inputValue.isCommaSeparator()) {
-            separatedValues = inputValue.getSeparatedValuesByComma();
-        }
-
         if (inputValue.isCommaOrColonSeparator()) {
             separatedValues = inputValue.getSeparatedValuesByCommaOrColon();
         }
@@ -31,8 +26,13 @@ public class StringAddCalculator {
             separatedValues = inputValue.getSeparatedValuesByCustom();
         }
 
-        return separatedValues.stream()
-                .mapToInt(value -> Integer.parseInt(value)).sum();
+        separatedValues.forEach(separatedValue -> {
+            if (separatedValue < 0) {
+                throw new RuntimeException("입력값으로 음수는 전달할 수 없습니다.");
+            }
+        });
 
+        return separatedValues.stream()
+                .mapToInt(value -> value).sum();
     }
 }
