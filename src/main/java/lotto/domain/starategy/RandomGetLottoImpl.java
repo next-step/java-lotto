@@ -1,11 +1,11 @@
-package step2.domain.starategy;
+package lotto.domain.starategy;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static step2.domain.Lotto.BOUND_NUMBER;
-import static step2.domain.Lotto.SIZE;
+import static lotto.domain.Lotto.BOUND_NUMBER;
+import static lotto.domain.Lotto.SIZE;
 
 public class RandomGetLottoImpl implements GetLottoNumberStrategy{
 

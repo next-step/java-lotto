@@ -1,11 +1,11 @@
-package step2;
+package lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.domain.Lotto;
+import lotto.domain.Lotto;
 
 import static org.assertj.core.api.Assertions.*;
-import static step2.domain.Lotto.SIZE;
+import static lotto.domain.Lotto.SIZE;
 
 import java.util.Arrays;
 import java.util.List;

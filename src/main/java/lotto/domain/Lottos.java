@@ -1,6 +1,6 @@
-package step2.domain;
+package lotto.domain;
 
-import step2.domain.starategy.GetLottoNumberStrategy;
+import lotto.domain.starategy.GetLottoNumberStrategy;
 
 import java.util.ArrayList;
 import java.util.Collections;

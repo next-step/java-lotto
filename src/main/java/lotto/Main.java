@@ -1,10 +1,11 @@
-package step2;
+package lotto;
 
-import step2.domain.Lottos;
+import lotto.domain.Lottos;
 
-import step2.domain.starategy.RandomGetLottoImpl;
-import step2.view.Input;
-import step2.view.Output;
+import lotto.domain.starategy.RandomGetLottoImpl;
+import lotto.view.Input;
+import lotto.view.Output;
+
 import java.util.List;
 
 public class Main {
@@ -13,6 +14,6 @@ public class Main {
         Lottos lottos = new Lottos(purchaseAmount, new RandomGetLottoImpl());
         Output.viewPurchasedLotto(lottos);
         List<Integer> matchingList = lottos.checkMatching(Input.inputWinningNumbers());
-        Output.viewResult(matchingList,purchaseAmount);
+        Output.viewResult(matchingList, purchaseAmount);
     }
 }
