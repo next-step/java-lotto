@@ -2,6 +2,11 @@ package stringformula;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import stringformula.exception.InvalidNumberValueException;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -21,11 +26,12 @@ class NumberTest {
         assertThat(Number.valueOf("1")).isEqualTo(new Number(1));
     }
 
-    @Test
+    @ParameterizedTest
+    @NullSource
+    @EmptySource
     @DisplayName("valueOf 메소드는 null이나 빈 값 문자열이 들어오면 0을 반환")
-    void 테스트_valueOf_문자열_null_빈문자열_처리() {
-        assertThat(Number.valueOf("")).isEqualTo(new Number(0));
-        assertThat(Number.valueOf(null)).isEqualTo(new Number(0));
+    void 테스트_valueOf_문자열_null_빈문자열_처리(String value) {
+        assertThat(Number.valueOf(value)).isEqualTo(new Number(0));
     }
 
     @Test

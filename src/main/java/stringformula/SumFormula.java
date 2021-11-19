@@ -4,8 +4,9 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class SumFormula {
-    private final String CUSTOM_DELIMITER_PREFIX = "\\";
-    private final String DEFAULT_DELIMITERS = ":|,";
+    private final static String CUSTOM_DELIMITER_PREFIX = "\\";
+    private final static String DEFAULT_DELIMITERS = ":|,";
+
     private final String stringFormula;
 
     private SumFormula(String stringFormula) {
