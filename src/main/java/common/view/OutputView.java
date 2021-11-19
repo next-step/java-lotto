@@ -1,7 +1,9 @@
 package common.view;
 
 import common.model.Number;
+import lotto.model.Lotto;
 import lotto.model.LottoNumber;
+import lotto.model.LottoNumbers;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,5 +46,11 @@ public class OutputView {
 
         print("[", String.join(", ", lottoNumbersString), "]");
 
+    }
+
+    public static void print(Lotto lotto) {
+        for (LottoNumbers lottoNumbers : lotto.getLotto()) {
+            print(lottoNumbers.getLottoNumbers());
+        }
     }
 }
