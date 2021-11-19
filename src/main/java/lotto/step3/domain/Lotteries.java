@@ -2,13 +2,16 @@ package lotto.step3.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class Lotteries {
 
     private List<Lotto> lotteries = new ArrayList<>();
 
     public Lotteries(int orderCount) {
-        createLotteries(orderCount);
+        IntStream.range(0, orderCount)
+                .forEach(i -> lotteries.add(LottoGenerator.createLotto()));
     }
 
     public Lotteries(List<Lotto> lotteries) {
@@ -40,12 +43,6 @@ public class Lotteries {
         return lotteries.stream()
                 .mapToInt(lotto -> lotto.calculatePrizeMoney(winningNumbers, bonusBall))
                 .sum();
-    }
-
-    private void createLotteries(int orderCount) {
-        for (int i = 0; i < orderCount; i++) {
-            lotteries.add(new Lotto());
-        }
     }
 
 }

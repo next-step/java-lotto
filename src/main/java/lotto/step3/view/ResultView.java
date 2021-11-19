@@ -9,27 +9,26 @@ import java.util.Map;
 
 public final class ResultView {
 
-    public static final int LOTTO_BONUS_COUNT = Rank.THIRD.getCountOfMatch();
-    public static final int LOTTO_START_COUNT = Rank.FIFTH.getCountOfMatch();
-    public static final int LOTTO_END_COUNT = Rank.FIRST.getCountOfMatch();
+    public static final int LOTTO_BONUS_COUNT = 5;
+    public static final int LOTTO_START_COUNT = 1;
+    public static final int LOTTO_END_COUNT = 6;
 
     private ResultView() {
         throw new AssertionError();
     }
 
-    public static void printOrderLottoCount(Lotteries lotteries) {
-        System.out.println(lotteries.getLotteries().size() + "개를 구매했습니다.");
-    }
-
     public static void printOrderLottoNumber(Lotteries lotteries) {
-        lotteries.getLotteries()
-                .stream()
+        lotteries.getLotteries().stream()
                 .map(Lotto::getNumbers)
                 .forEach(s -> {
                     Collections.sort(s);
                     System.out.println(s);
                 });
         System.out.println();
+    }
+
+    public static void printOrderLottoCount(Lotteries lotteries) {
+        System.out.println(lotteries.getLotteries().size() + "개를 구매했습니다.");
     }
 
     public static void printWinningStatics(Map<Integer, Integer> countOfMatch, boolean isMatchBonusBall, int totalSecond) {

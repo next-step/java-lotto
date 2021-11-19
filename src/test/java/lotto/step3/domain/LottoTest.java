@@ -19,7 +19,7 @@ class LottoTest {
     @DisplayName("랜덤 로또번호 생성 - 6자리, 1~45, 중복값 x")
     void createLottoNumber() {
         for (int i = 0; i < 1000; i++) {
-            Lotto lotto = new Lotto();
+            Lotto lotto = LottoGenerator.createLotto();
             List<Integer> numbers =  lotto.getNumbers();
             assertThat(numbers).size().isEqualTo(6);
             assertThat(numbers).doesNotContain(46);

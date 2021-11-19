@@ -2,17 +2,13 @@ package lotto.step3.controller;
 
 import lotto.step3.domain.Lotteries;
 import lotto.step3.domain.Lotto;
-import lotto.step3.domain.Profit;
-import lotto.step3.domain.Store;
+import lotto.step3.domain.LottoStatistics;
 import lotto.step3.service.LottoService;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import static lotto.step3.view.InputView.*;
 import static lotto.step3.view.ResultView.*;
-import static lotto.step3.view.ResultView.printWinningStatics;
 
 public class LottoController {
 
@@ -26,20 +22,17 @@ public class LottoController {
         printOrderLottoCount(lotteries);
         printOrderLottoNumber(lotteries);
 
-        List<Integer> numbers = printInputWinningNumbers();
-        Lotto winningNumbers = service.createWinningNumbers(numbers);
+        Lotto winningNumbers = service.createWinningNumbers(printInputWinningNumbers());
 
-        int bonusBall = PrintInputBonusBall();
-        service.validation(winningNumbers,bonusBall);
+        LottoStatistics lottoStatistics = service.createLottoStatistics(lotteries, winningNumbers, PrintInputBonusBall());
 
-        Map<Integer, Integer> totalCountOfMatch =  service.totalCountOfMatch(lotteries, winningNumbers);
-        boolean isSecondPrizeWinners = service.isSecondPrizeWinners(lotteries, winningNumbers, bonusBall);
-        int totalSecondPrizeWinner = service.totalSecondPrizeWinners(lotteries, winningNumbers, bonusBall);
+        Map<Integer, Integer> totalCountOfMatch = service.totalCountOfMatch(lottoStatistics);
+        boolean isSecondPrizeWinners = service.isSecondPrizeWinners(lottoStatistics);
+        int totalSecondPrizeWinner = service.totalSecondPrizeWinners(lottoStatistics);
 
         printWinningStatics(totalCountOfMatch, isSecondPrizeWinners, totalSecondPrizeWinner);
 
-        double rateOfReturn = service.calculateRateOfProfit(lotteries, winningNumbers, bonusBall, orderPrice);
-        printRateOfReturn(rateOfReturn);
+        printRateOfReturn(service.calculateRateOfProfit(lottoStatistics, orderPrice));
 
     }
 

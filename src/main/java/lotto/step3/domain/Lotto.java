@@ -1,17 +1,16 @@
 package lotto.step3.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
 
-    public static final int LOTTO_BONUS_COUNT = Rank.SECOND.getCountOfMatch();
-    private static final int LOTTO_SIZE = Rank.FIRST.getCountOfMatch();
+    public static final int LOTTO_BONUS_COUNT = 5;
+    private static final int LOTTO_SIZE = 6;
 
-    private final List<Integer> numbers;
+    private List<Integer> numbers = new ArrayList<>();
 
-    public Lotto() {
-       this.numbers = RandomNumbers.createRandomNumber();
-    }
+    private Lotto() {}
 
     public Lotto(List<Integer> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
@@ -25,9 +24,7 @@ public class Lotto {
     }
 
     public boolean isCountOfMatch(Lotto winningNumbers, int count) {
-        return numbers.stream()
-                .filter(winningNumbers.getNumbers()::contains)
-                .count() == count;
+        return countOfMatch(winningNumbers) == count;
     }
 
     public boolean isSecondPrizeWinner(Lotto winningNumbers, int bonusBall) {
@@ -39,6 +36,12 @@ public class Lotto {
                 .filter(number -> winningNumbers.getNumbers().contains(number))
                 .count();
         return Rank.valueOf(count, isSecondPrizeWinner(winningNumbers,bonusBall)).getPrizeMoney();
+    }
+
+    private long countOfMatch(Lotto winningNumbers) {
+        return numbers.stream()
+                .filter(winningNumbers.getNumbers()::contains)
+                .count();
     }
 
     private boolean isLottoBonusCount(Lotto winningNumbers) {

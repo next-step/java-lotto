@@ -17,4 +17,5 @@ class RankTest {
         assertThat(Rank.valueOf(5, true)).isEqualTo(Rank.SECOND);
         assertThat(Rank.valueOf(6, false)).isEqualTo(Rank.FIRST);
     }
+
 }
