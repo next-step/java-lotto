@@ -26,8 +26,9 @@ public class Number {
     }
 
     public int parse(String input) {
-        if (input == null || "".equals(input))
+        if (input == null || "".equals(input)) {
             return 0;
+        }
 
         int number;
         try {
