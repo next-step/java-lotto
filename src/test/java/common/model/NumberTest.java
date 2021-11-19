@@ -1,5 +1,6 @@
-package calcalator.model;
+package common.model;
 
+import common.model.Number;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

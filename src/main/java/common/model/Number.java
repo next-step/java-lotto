@@ -1,4 +1,4 @@
-package calcalator.model;
+package common.model;
 
 import java.util.Objects;
 

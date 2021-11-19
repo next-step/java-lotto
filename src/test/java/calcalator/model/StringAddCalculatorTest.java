@@ -1,6 +1,7 @@
 package calcalator.model;
 
 import calcalator.strategy.CustomDelimiter;
+import common.model.Number;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

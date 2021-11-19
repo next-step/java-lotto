@@ -1,6 +1,6 @@
 package common.view;
 
-import calcalator.model.Number;
+import common.model.Number;
 import lotto.model.LottoNumbers;
 
 import java.util.List;

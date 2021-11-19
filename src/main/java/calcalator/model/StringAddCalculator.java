@@ -1,6 +1,7 @@
 package calcalator.model;
 
 import calcalator.strategy.DelimiterStrategy;
+import common.model.Number;
 
 public class StringAddCalculator {
 
