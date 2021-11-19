@@ -1,18 +1,19 @@
 package com.kakao.lotto.domain;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinLottoTicket extends LottoTicket {
 
-    private WinLottoTicket(List<LottoNumber> lottoNumbers) {
+    private WinLottoTicket(Set<LottoNumber> lottoNumbers) {
         super(lottoNumbers);
     }
 
     public static WinLottoTicket of(List<Integer> winLottoNumbers) {
-        List<LottoNumber> correctLottoNumbers = winLottoNumbers.stream()
+        Set<LottoNumber> correctLottoNumbers = winLottoNumbers.stream()
                 .map(LottoNumber::of)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         return new WinLottoTicket(correctLottoNumbers);
     }
 

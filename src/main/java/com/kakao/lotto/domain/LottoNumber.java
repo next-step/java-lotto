@@ -6,11 +6,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private final int value;
-    private static final List<LottoNumber> baseLotto = createBaseLottoNumber();
 
+    private static final List<LottoNumber> baseLotto = createBaseLottoNumber();
     private static final int LOTTO_MAX = 45;
     private static final int LOTTO_MIN = 1;
+
+    private final int value;
 
     private LottoNumber(int value) {
         this.value = value;
@@ -22,7 +23,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private static List<LottoNumber> createBaseLottoNumber() {
-        return IntStream.range(LOTTO_MIN, LOTTO_MAX + 1)
+        return IntStream.rangeClosed(LOTTO_MIN, LOTTO_MAX)
                 .boxed()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());

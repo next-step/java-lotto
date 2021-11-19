@@ -1,35 +1,33 @@
 package com.kakao.lotto.domain;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
-    protected final List<LottoNumber> lottoNumbers;
+    protected final Set<LottoNumber> lottoNumbers;
 
     public static final int LOTTO_SIZE = 6;
 
-    public LottoTicket(List<LottoNumber> inputNumbers) {
-        List<LottoNumber> lottoNumbers = inputNumbers.stream()
-                .distinct()
-                .sorted()
-                .collect(Collectors.toList());
+    public LottoTicket(Set<LottoNumber> lottoNumbers) {
         validSizeNumber(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
     public static LottoTicket of(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = numbers.stream()
+        Set<LottoNumber> lottoNumbers = numbers.stream()
                 .map(LottoNumber::of)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         return new LottoTicket(lottoNumbers);
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
+    public Set<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 
-    private void validSizeNumber(List<LottoNumber> lottoNumbers){
+    private void validSizeNumber(Set<LottoNumber> lottoNumbers){
         if (lottoNumbers.size() != LOTTO_SIZE){
             throw new IllegalArgumentException("입력된 로또 숫자 개수가 올바르지 않습니다");
         }

@@ -5,6 +5,7 @@ import com.kakao.lotto.supportInfo.PurchaseInfo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -22,9 +23,9 @@ public class LottoMachine {
     }
 
     private LottoTicket makeRandomLottoTicket() {
-        List<LottoNumber> pickedNumber = shuffledLottoNumber().stream()
+        Set<LottoNumber> pickedNumber = shuffledLottoNumber().stream()
                 .limit(LottoTicket.LOTTO_SIZE)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         return new LottoTicket(pickedNumber);
     }
 

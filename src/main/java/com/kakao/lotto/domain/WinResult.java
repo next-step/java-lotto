@@ -1,18 +1,16 @@
 package com.kakao.lotto.domain;
 
 import com.kakao.lotto.supportInfo.PurchaseInfo;
-import com.kakao.lotto.supportInfo.WinLottoInfo;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class WinResult {
     private final List<LottoTicket> userLottoTicket;
     private final WinLottoTicket winLottoTicket;
 
-    public WinResult(List<LottoTicket> userLottoTicket, WinLottoInfo winLottoInfo) {
+    public WinResult(List<LottoTicket> userLottoTicket, WinLottoTicket winLottoTicket) {
         this.userLottoTicket = userLottoTicket;
-        this.winLottoTicket = WinLottoTicket.of(winLottoInfo.getWinLottoNumbers());
+        this.winLottoTicket = winLottoTicket;
     }
 
     public double calculateProfitRate(PurchaseInfo purchaseInfo) {
@@ -29,6 +27,7 @@ public class WinResult {
     }
 
     public int getLottoRankCount(LottoRank lottoRank) {
+
         return (int) userLottoTicket.stream()
                 .map(winLottoTicket::matchWinNumber)
                 .map(LottoRank::findByMatchRank)
