@@ -1,6 +1,6 @@
 package step2;
 
-import step2.domain.LottoList;
+import step2.domain.Lottos;
 
 import step2.domain.starategy.RandomGetLottoImpl;
 import step2.view.Input;
@@ -10,9 +10,9 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         Integer purchaseAmount = Input.inputPurchaseAmount();
-        LottoList lottoList = new LottoList(purchaseAmount, new RandomGetLottoImpl());
-        Output.viewPurchasedLotto(lottoList);
-        List<Integer> matchingList = lottoList.checkMatching(Input.inputWinningNumbers());
+        Lottos lottos = new Lottos(purchaseAmount, new RandomGetLottoImpl());
+        Output.viewPurchasedLotto(lottos);
+        List<Integer> matchingList = lottos.checkMatching(Input.inputWinningNumbers());
         Output.viewResult(matchingList,purchaseAmount);
     }
 }

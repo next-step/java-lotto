@@ -36,7 +36,11 @@ public class Lotto {
     }
 
     public void checkDistinct(List<Integer> lottoNumbers) {
-        if (lottoNumbers.stream().distinct().collect(Collectors.toList()).size() != lottoNumbers.size()) {
+        Integer compareSize = lottoNumbers.stream()
+                .distinct()
+                .collect(Collectors.toList())
+                .size();
+        if ( compareSize != lottoNumbers.size()) {
             throw new IllegalArgumentException("로또에 중복된 숫자가 존재합니다.");
         }
     }

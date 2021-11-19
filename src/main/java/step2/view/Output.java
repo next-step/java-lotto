@@ -1,9 +1,8 @@
 package step2.view;
 
-import step2.domain.LottoList;
+import step2.domain.Lottos;
 import step2.domain.Prize;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class Output {
@@ -11,8 +10,8 @@ public class Output {
     private Output() {
     }
 
-    public static void viewPurchasedLotto(LottoList lottoList) {
-        lottoList.getLottoList().stream().map(randomNumbers -> randomNumbers.getLottoNumbers()).forEach(System.out::println);
+    public static void viewPurchasedLotto(Lottos lottos) {
+        lottos.getLottos().stream().map(randomNumbers -> randomNumbers.getLottoNumbers()).forEach(System.out::println);
     }
 
     public static void viewResult(List<Integer> matchingList,Integer purchaseAmount) {
