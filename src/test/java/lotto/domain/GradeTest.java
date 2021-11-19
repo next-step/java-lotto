@@ -29,7 +29,6 @@ class GradeTest {
         assertThat(Grade.from(matchCount)).isEqualTo(expectedGrade);
     }
     
-    
     @DisplayName("List를 Map으로 잘 변환하는지")
     @Test
     void mapOf() {

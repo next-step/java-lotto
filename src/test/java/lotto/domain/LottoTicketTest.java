@@ -34,13 +34,13 @@ class LottoTicketTest {
     @Test
     void rank() {
         //given
-        LottoNumbers winningNumbers = new LottoNumbers(asList(num(1), num(2), num(3), num(4), num(5), num(6)));
+        LottoNumbers winningNumbers = LottoNumbers.of(asList(1, 2, 3, 4, 5, 6));
 
-        LottoNumbers sixMatched = new LottoNumbers(asList(num(1), num(2), num(3), num(4), num(5), num(6)));
-        LottoNumbers fiveMatched = new LottoNumbers(asList(num(1), num(2), num(3), num(4), num(5), num(7)));
-        LottoNumbers fiveMatched2 = new LottoNumbers(asList(num(1), num(2), num(3), num(4), num(5), num(10)));
-        LottoNumbers threeMatched = new LottoNumbers(asList(num(1), num(2), num(3), num(9), num(8), num(7)));
-        LottoNumbers twoMatched = new LottoNumbers(asList(num(1), num(2), num(10), num(9), num(8), num(7)));
+        LottoNumbers sixMatched = LottoNumbers.of(asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers fiveMatched = LottoNumbers.of(asList(1, 2, 3, 4, 5, 7));
+        LottoNumbers fiveMatched2 = LottoNumbers.of(asList(1, 2, 3, 4, 5, 10));
+        LottoNumbers threeMatched = LottoNumbers.of(asList(1, 2, 3, 9, 8, 7));
+        LottoNumbers twoMatched = LottoNumbers.of(asList(1, 2, 10, 9, 8, 7));
 
         LottoTicket lottoTicket = new LottoTicket(asList(sixMatched, fiveMatched, fiveMatched2, threeMatched, twoMatched));
 
@@ -55,10 +55,6 @@ class LottoTicketTest {
         expectedGrades.put(Grade.FOURTH, 1L);
 
         assertThat(statistics).isEqualTo(new Statistics(expectedGrades, new Dollars(5000)));
-    }
-
-    private static LottoNumber num(int num) {
-        return LottoNumber.from(num);
     }
 
 }

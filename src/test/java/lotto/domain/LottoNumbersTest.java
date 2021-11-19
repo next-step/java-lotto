@@ -17,7 +17,7 @@ class LottoNumbersTest {
     @DisplayName("LottoNumber를 정렬된 상태로 가지고 있는지")
     @Test
     void lottoNumbers() {
-        LottoNumbers lottoNumbers = new LottoNumbers(asList(num(3), num(1), num(2), num(10), num(15), num(20)));
+        LottoNumbers lottoNumbers = LottoNumbers.of(asList(3, 1, 2, 10, 15, 20));
         assertThat(lottoNumbers.lottoNumbers()).isEqualTo(asList(num(1), num(2), num(3), num(10), num(15), num(20)));
     }
 
@@ -30,11 +30,11 @@ class LottoNumbersTest {
     }
 
     static Stream<Arguments> matchArguments() {
-        LottoNumbers lottoNumbers = new LottoNumbers(asList(num(3), num(1), num(2), num(10), num(15), num(20)));
+        LottoNumbers lottoNumbers = LottoNumbers.of(asList(3, 1, 2, 10, 15, 20));
         return Stream.of(
-                Arguments.of(lottoNumbers, new LottoNumbers(asList(num(3), num(1), num(2), num(10), num(20), num(15))), Grade.FIRST),
-                Arguments.of(lottoNumbers, new LottoNumbers(asList(num(3), num(1), num(2), num(43), num(44), num(45))), Grade.FOURTH),
-                Arguments.of(lottoNumbers, new LottoNumbers(asList(num(40), num(41), num(42), num(43), num(44), num(45))), Grade.BANG)
+                Arguments.of(lottoNumbers, LottoNumbers.of(asList(3, 1, 2, 10, 15, 20)), Grade.FIRST),
+                Arguments.of(lottoNumbers, LottoNumbers.of(asList(3, 1, 2, 43, 44, 45)), Grade.FOURTH),
+                Arguments.of(lottoNumbers, LottoNumbers.of(asList(40, 41, 42, 43, 44, 45)), Grade.BANG)
                 );
     }
 
@@ -42,7 +42,7 @@ class LottoNumbersTest {
     @Test
     void create_duplicatedLottoNumbers() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoNumbers(asList(num(3), num(3), num(2), num(10), num(20), num(15))))
+                .isThrownBy(() -> LottoNumbers.of(asList(3, 3, 2, 10, 15, 20)))
                 .withMessage(LottoNumbers.DUPLICATION_ERROR_MESSAGE);
     }
 

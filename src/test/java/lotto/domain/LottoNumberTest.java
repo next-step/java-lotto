@@ -64,7 +64,6 @@ class LottoNumberTest {
                 .withMessage(LottoNumber.INVALID_RANGE_ERROR_MESSAGE);
     }
 
-
     @Test
     void listOf() {
         //given
