@@ -13,6 +13,9 @@ import static lotto.utils.Validator.checkNotNull;
 
 public class LottoMachine {
 
+    private LottoMachine() {
+    }
+
     public static LottoTicket publish(int won) {
         return LottoTicket.publish(new Dollars(won), Collections::shuffle);
     }
