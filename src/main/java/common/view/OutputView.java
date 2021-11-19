@@ -1,7 +1,7 @@
 package common.view;
 
 import common.model.Number;
-import lotto.model.LottoNumbers;
+import lotto.model.LottoNumber;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,9 +35,9 @@ public class OutputView {
         print(number.getNumber());
     }
 
-    public static void print(LottoNumbers lottoNumbers) {
+    public static void print(List<LottoNumber> lottoNumbers) {
 
-        List<String> lottoNumbersString = lottoNumbers.getLottoNumbers()
+        List<String> lottoNumbersString = lottoNumbers
                 .stream()
                 .map(String::valueOf)
                 .collect(Collectors.toList());
