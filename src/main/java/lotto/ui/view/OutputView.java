@@ -57,6 +57,10 @@ public class OutputView {
     }
 
     private static void showGrade(Grade grade, Long count) {
+        if (grade == Grade.BONUS) {
+            System.out.printf("%s개 일치, 보너스볼 일치(%s원)- %s개\n", grade.getMatchCount(), grade.getReward(), count);
+            return;
+        }
         System.out.printf("%s개 일치 (%s원)- %s개\n", grade.getMatchCount(), grade.getReward(), count);
     }
 }

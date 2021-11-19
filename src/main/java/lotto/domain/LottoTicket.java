@@ -24,6 +24,14 @@ public class LottoTicket {
         this.lottoLines = lottoLines;
     }
 
+    public Statistics rank(LottoNumbers lastWinningNumbers, LottoNumber bonusNumber) {
+        checkNotNull(lastWinningNumbers);
+        List<Grade> grades = lottoLines.stream()
+                .map(lottoLine -> lottoLine.rank(lastWinningNumbers, bonusNumber))
+                .collect(Collectors.toList());
+        return new Statistics(Grade.mapOf(grades), lineSizeToDollars());
+    }
+
     public Statistics rank(LottoNumbers lastWinningNumbers) {
         checkNotNull(lastWinningNumbers);
         List<Grade> grades = lottoLines.stream()
