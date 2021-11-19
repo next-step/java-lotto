@@ -1,10 +1,15 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Map;
+
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
 class GradeTest {
 
@@ -22,6 +27,19 @@ class GradeTest {
     })
     void from(int matchCount, Grade expectedGrade) {
         assertThat(Grade.from(matchCount)).isEqualTo(expectedGrade);
+    }
+    
+    
+    @DisplayName("List를 Map으로 잘 변환하는지")
+    @Test
+    void mapOf() {
+        Map<Grade, Long> grades = Grade.mapOf(asList(Grade.BANG, Grade.FIRST, Grade.THIRD, Grade.THIRD, Grade.FIRST));
+        assertThat(grades).containsOnly(
+                entry(Grade.FIRST, 2L),
+                entry(Grade.SECOND, 0L),
+                entry(Grade.THIRD, 2L),
+                entry(Grade.FOURTH, 0L)
+        );
     }
 
 }

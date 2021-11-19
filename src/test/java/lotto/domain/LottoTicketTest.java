@@ -51,6 +51,7 @@ class LottoTicketTest {
         Map<Grade, Long> expectedGrades = new HashMap<>();
         expectedGrades.put(Grade.FIRST, 1L);
         expectedGrades.put(Grade.SECOND, 2L);
+        expectedGrades.put(Grade.THIRD, 0L);
         expectedGrades.put(Grade.FOURTH, 1L);
 
         assertThat(statistics).isEqualTo(new Statistics(expectedGrades, new Dollars(5000)));
