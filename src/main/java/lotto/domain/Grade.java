@@ -11,6 +11,7 @@ import static lotto.utils.Validator.checkNotNull;
 public enum Grade {
     FIRST(6, 2_000_000_000),
     SECOND(5, 1_500_000),
+    BONUS(5, 30_000_000),
     THIRD(4, 50_000),
     FOURTH(3, 5_000),
     BANG(0, 0);
@@ -18,6 +19,7 @@ public enum Grade {
     private static final Grade[] CACHED_GRADES = Grade.values();
     private static final long DEFAULT_COUNT = 0L;
     private static final int INCREASE_COUNT_UNIT = 1;
+    private static final int BONUS_WIN_MATCH_COUNT = 5;
 
     private final int matchCount;
     private final long reward;
@@ -27,10 +29,21 @@ public enum Grade {
         this.reward = reward;
     }
 
+    public static Grade from(int matchCount, boolean matchBonus) {
+        if (isBonusWin(matchCount, matchBonus)) {
+            return BONUS;
+        }
+        return from(matchCount);
+    }
+
+    private static boolean isBonusWin(int matchCount, boolean matchBonus) {
+        return matchCount == BONUS_WIN_MATCH_COUNT && matchBonus;
+    }
+
     public static Grade from(int matchCount) {
         return stream(CACHED_GRADES)
                 .filter(grade -> grade.matchCount == matchCount)
-                .findAny()
+                .findFirst()
                 .orElse(BANG);
     }
 

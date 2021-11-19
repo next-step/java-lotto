@@ -21,6 +21,10 @@ class LottoNumbersTest {
         assertThat(lottoNumbers.lottoNumbers()).isEqualTo(asList(num(1), num(2), num(3), num(10), num(15), num(20)));
     }
 
+    private static LottoNumber num(int num) {
+        return LottoNumber.from(num);
+    }
+
     @DisplayName("당첨번호개수에 맞게 등급을 잘 반환하는지")
     @ParameterizedTest(name = "[{index}] lottos: {0}, winnings: {1}, grade: {2}")
     @MethodSource("matchArguments")
@@ -46,7 +50,31 @@ class LottoNumbersTest {
                 .withMessage(LottoNumbers.DUPLICATION_ERROR_MESSAGE);
     }
 
-    private static LottoNumber num(int num) {
-        return LottoNumber.from(num);
+    @DisplayName("당첨번호와 보너스번호가 중복이 있다면 예외를 던진다.")
+    @Test
+    void rank_duplicatedBonusNumber() {
+        int duplicatedNumber = 1;
+        LottoNumbers winningNumbers = LottoNumbers.of(asList(duplicatedNumber, 2, 3, 4, 5, 6));
+        LottoNumber bonusNumber = LottoNumber.from(duplicatedNumber);
+
+        LottoNumbers lottoNumbers = LottoNumbers.of(asList(1, 2, 3, 4, 5, 6));
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lottoNumbers.rank(winningNumbers, bonusNumber))
+                .withMessage(LottoNumbers.DUPLICATION_ERROR_MESSAGE);
+    }
+
+    @DisplayName("보너스 당첨일 때 등급을 잘 반환하는지")
+    @Test
+    void rank_bonusWin() {
+        //given
+        LottoNumbers lottoNumbers = LottoNumbers.of(asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers winningNumbers = LottoNumbers.of(asList(1, 2, 3, 4, 5, 40));
+        LottoNumber bonusNumber = LottoNumber.from(6);
+
+        //when
+        Grade grade = lottoNumbers.rank(winningNumbers, bonusNumber);
+
+        //then
+        assertThat(grade).isEqualTo(Grade.BONUS);
     }
 }

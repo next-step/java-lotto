@@ -51,6 +51,8 @@ class LottoTicketTest {
         Map<Grade, Long> expectedGrades = new HashMap<>();
         expectedGrades.put(Grade.FIRST, 1L);
         expectedGrades.put(Grade.SECOND, 2L);
+        // TODO: [2021/11/19 양동혁] 보너스 추가 
+        expectedGrades.put(Grade.BONUS, 0L);
         expectedGrades.put(Grade.THIRD, 0L);
         expectedGrades.put(Grade.FOURTH, 1L);
 

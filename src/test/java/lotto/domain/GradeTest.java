@@ -28,6 +28,12 @@ class GradeTest {
     void from(int matchCount, Grade expectedGrade) {
         assertThat(Grade.from(matchCount)).isEqualTo(expectedGrade);
     }
+
+    @DisplayName("보너스 등급을 잘 반환하는지")
+    @Test
+    void from_bonus() {
+        assertThat(Grade.from(5, true)).isEqualTo(Grade.BONUS);
+    }
     
     @DisplayName("List를 Map으로 잘 변환하는지")
     @Test
@@ -36,6 +42,7 @@ class GradeTest {
         assertThat(grades).containsOnly(
                 entry(Grade.FIRST, 2L),
                 entry(Grade.SECOND, 0L),
+                entry(Grade.BONUS, 0L),
                 entry(Grade.THIRD, 2L),
                 entry(Grade.FOURTH, 0L)
         );
