@@ -1,9 +1,5 @@
 package step1.view;
 
-import step1.domain.Numbers;
-import step1.util.InputUtil;
-
-import java.util.List;
 import java.util.Scanner;
 
 
