@@ -8,7 +8,7 @@ public class Number {
 
     private final int value;
 
-    public Number(int value) {
+    private Number(int value) {
         this.value = value;
     }
 
@@ -25,7 +25,7 @@ public class Number {
         }
     }
 
-    public int value() {
+    public int getValue() {
         return value;
     }
 

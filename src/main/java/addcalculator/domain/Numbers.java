@@ -17,7 +17,7 @@ public class Numbers {
 
     public int sum() {
         return numbers.stream()
-                .mapToInt(Number::value)
+                .mapToInt(Number::getValue)
                 .sum();
     }
 }
