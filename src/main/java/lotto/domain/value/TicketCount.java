@@ -14,7 +14,7 @@ public class TicketCount {
         int lottoPrice = Integer.parseInt(price);
         validateUnit(lottoPrice);
 
-        this.count = lottoPrice % BASIC_UNIT;
+        this.count = lottoPrice / BASIC_UNIT;
     }
 
     public static TicketCount of(String price) {
@@ -25,6 +25,10 @@ public class TicketCount {
         if (!isCorrectUnit(price)) {
             throw new InvalidUnitException();
         }
+    }
+
+    public int size() {
+        return count;
     }
 
     private static boolean isCorrectUnit(int input) {
