@@ -6,19 +6,20 @@ import java.util.stream.IntStream;
 
 public class LotteryTicketGenerator {
 
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
-    private static final int CHOOSE_COUNT = 6;
-    private static final List<Integer> numbers = IntStream.rangeClosed(MIN_NUMBER,MAX_NUMBER)
-                                                        .boxed()
-                                                        .collect(Collectors.toList());
+    private static final List<Lotto> numbers = IntStream.rangeClosed(LottoNumber.MIN_NUMBER,LottoNumber.MAX_NUMBER)
+                                                        .boxed().map(Lotto::new).collect(Collectors.toList());
 
     public static LotteryTicket generate() {
+        List<Lotto> chosenNumbers = chooseNumber();
+        return new LotteryTicket(chosenNumbers);
+    }
+
+    private static List<Lotto> chooseNumber() {
         Collections.shuffle(numbers);
-        List<Integer> chosenNumbers = numbers.stream()
-                                            .limit(CHOOSE_COUNT)
+        List<Lotto> chosenNumbers = numbers.stream()
+                                            .limit(LottoNumber.CHOOSE_COUNT)
                                             .collect(Collectors.toList());
         Collections.sort(chosenNumbers);
-        return new LotteryTicket(chosenNumbers);
+        return chosenNumbers;
     }
 }

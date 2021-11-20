@@ -1,9 +1,15 @@
 package lotto.model;
 
+import java.util.Collections;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -33,5 +39,21 @@ class LottoTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Lotto(number))
                 .withMessage("로또 숫자 범위에 속하지 않습니다.");
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"2,4,6,5:2,4,5,6", "1,5,7,6:1,5,6,7"}, delimiter = ':')
+    @DisplayName("로또 정상 범위에 속하지 않을 때 예외 발생")
+    void sortTest(String input, String expected){
+        List<Lotto> list = toLottoList(input);
+        Collections.sort(list);
+        List<Lotto> sortedList = toLottoList(expected);
+        assertThat(list).isEqualTo(sortedList);
+    }
+
+    private List<Lotto> toLottoList(String input) {
+        return Arrays.stream(input.split(","))
+                .map((value) -> new Lotto(Integer.parseInt(value)))
+                .collect(Collectors.toList());
     }
 }
