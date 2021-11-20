@@ -1,42 +1,40 @@
 package lotto.model;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LotteryTicket {
 
-    private static final int NUMBERS_COUNT = 6;
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
-    private final List<Integer> numbers;
+    private final List<Lotto> numbers;
 
-    public LotteryTicket(List<Integer> numbers) {
-        checkNumbersSize(numbers);
-        checkNumber(numbers);
-        checkDuplicate(numbers);
-        this.numbers = numbers;
+    public LotteryTicket(List<Lotto> chosenNumbers) {
+        checkDuplicate(chosenNumbers);
+        checkNumbersSize(chosenNumbers);
+        this.numbers = chosenNumbers;
     }
 
-    private void checkDuplicate(List<Integer> numbers) {
+    private void checkDuplicate(List<Lotto> numbers) {
         if(numbers.size() != numbers.stream().distinct().count()) {
             throw new IllegalArgumentException("중복된 번호가 있습니다.");
         }
     }
 
-    private void checkNumber(List<Integer> numbers) {
-        boolean rangeInvalid = numbers.stream()
-                                    .anyMatch((number) -> number > MAX_NUMBER || number < MIN_NUMBER);
-        if(rangeInvalid) {
-            throw new IllegalArgumentException("번호는 1 ~ 45 사이의 숫자여야 합니다.");
-        }
-    }
-
-    private void checkNumbersSize(List<Integer> numbers) {
-        if(numbers.size() != NUMBERS_COUNT) {
+    private void checkNumbersSize(List<Lotto> numbers) {
+        if(numbers.size() != LottoNumber.CHOOSE_COUNT) {
             throw new IllegalArgumentException("6개 번호가 선택되어야 합니다.");
         }
     }
 
-    public List<Integer> getNumbers() {
+    public List<Lotto> getNumbers() {
         return numbers;
+    }
+
+    public String print() {
+        List<String> list = numbers.stream().map(Lotto::print).collect(Collectors.toList());
+        return "[" + String.join(", ", list) + "]";
+    }
+
+    public boolean match(Lotto number) {
+        return this.numbers.contains(number);
     }
 }
