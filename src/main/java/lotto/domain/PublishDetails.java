@@ -10,9 +10,14 @@ public class PublishDetails {
     private final List<LottoNumbers> manualLottoLines;
 
     public PublishDetails(Dollars dollars, List<LottoNumbers> manualLottoLines) {
-        checkNotNull(dollars, manualLottoLines);
+        checkArguments(dollars, manualLottoLines);
         this.dollars = dollars;
         this.manualLottoLines = manualLottoLines;
+    }
+
+    private void checkArguments(Dollars dollars, List<LottoNumbers> manualLottoLines) {
+        checkNotNull(dollars, manualLottoLines);
+        dollars.checkEnoughMoney(manualLottoLines);
     }
 
     public int autoLottoLineCount() {

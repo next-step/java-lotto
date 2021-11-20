@@ -20,7 +20,7 @@ class PublishDetailsTest {
     @DisplayName("입력값이 하나라도 null이면 예외를 던진다")
     @ParameterizedTest(name = "[{index}] dollars: {0}, manualLottoLines: {1}")
     @MethodSource("nullInputArguments")
-    void create_nullInput(Dollars dollars, List<LottoNumbers> manualLottoLines) {
+    void create_nullInput_thrownException(Dollars dollars, List<LottoNumbers> manualLottoLines) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new PublishDetails(dollars, manualLottoLines))
                 .withMessage(Validator.REQUIRED_ERROR_MESSAGE);
