@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +15,7 @@ public class LottoTickets {
 
     public LottoTickets autoLottoTicket(Integer ticketCount) {
         while (tickets.size() != ticketCount) {
-            tickets.add(LottoTicket.of(new HashSet<>(AutoTicket.ticket())));
+            tickets.add(LottoTicket.of(new ArrayList<>(AutoTicket.ticket())));
         }
         return this;
     }

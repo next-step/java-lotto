@@ -1,6 +1,9 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import lotto.exception.ArgumentCountException;
@@ -19,9 +22,10 @@ public class LottoTicket {
         this.ticket = ticket;
     }
 
-    public static LottoTicket of(Set<Integer> args) {
-        valid(args);
-        return new LottoTicket(args);
+    public static LottoTicket of(List<Integer> args) {
+        Set<Integer> ticket = new HashSet<>(args);
+        valid(ticket);
+        return new LottoTicket(ticket);
     }
 
     private static void valid(Set<Integer> args) {
@@ -49,8 +53,10 @@ public class LottoTicket {
         return TICKET_MINIMUM_NUMBER > number || number > TICKET_MAXIMUM_NUMBER;
     }
 
-    public Set<Integer> getTicket() {
-        return Collections.unmodifiableSet(ticket);
+    public List<Integer> getTicket() {
+        List<Integer> ticket = new ArrayList<>(this.ticket);
+        Collections.sort(ticket);
+        return ticket;
     }
 
     @Override
