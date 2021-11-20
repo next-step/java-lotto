@@ -4,21 +4,21 @@ import lotto.exception.InvalidUnitException;
 
 import java.util.Objects;
 
-public class LottoCount {
+public class TicketCount {
     private static final int BASIC_UNIT = 1000;
     private static final int CORRECT_UNIT = 0;
 
     private final int count;
 
-    private LottoCount(String price) {
+    private TicketCount(String price) {
         int lottoPrice = Integer.parseInt(price);
         validateUnit(lottoPrice);
 
         this.count = lottoPrice % BASIC_UNIT;
     }
 
-    public static LottoCount of(String price) {
-        return new LottoCount(price);
+    public static TicketCount of(String price) {
+        return new TicketCount(price);
     }
 
     private static void validateUnit(int price) {
@@ -39,7 +39,7 @@ public class LottoCount {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoCount that = (LottoCount) o;
+        TicketCount that = (TicketCount) o;
         return count == that.count;
     }
 

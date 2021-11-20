@@ -1,6 +1,6 @@
 package lotto.utils;
 
-import lotto.domain.value.LottoCount;
+import lotto.domain.value.TicketCount;
 import lotto.exception.EmptySourceException;
 import lotto.exception.InvalidValueException;
 import org.junit.jupiter.api.DisplayName;
@@ -35,9 +35,9 @@ public class InputUtilsTest {
             "14000", "23000", "42000"
     })
     void createLottoCount(String input) {
-        LottoCount lottoCount = InputUtils.createLottoCount(input);
+        TicketCount ticketCount = InputUtils.createLottoCount(input);
 
-        assertThat(lottoCount).isEqualTo(LottoCount.of(input));
+        assertThat(ticketCount).isEqualTo(TicketCount.of(input));
     }
 
 }

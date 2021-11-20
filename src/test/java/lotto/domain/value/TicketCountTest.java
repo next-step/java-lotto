@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoCountTest {
+class TicketCountTest {
 
     @DisplayName("100원 단위 입력시 예외가 발생한다.")
     @ParameterizedTest
@@ -15,7 +15,7 @@ class LottoCountTest {
             "14100", "14300", "23100"
     })
     void validateMoneyUnit(String input) {
-        assertThatThrownBy(() -> LottoCount.of(input)).isInstanceOf(InvalidUnitException.class);
+        assertThatThrownBy(() -> TicketCount.of(input)).isInstanceOf(InvalidUnitException.class);
     }
 
 }

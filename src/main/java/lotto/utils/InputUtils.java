@@ -1,7 +1,7 @@
 package lotto.utils;
 
 import addcalculator.exception.NotInstanceException;
-import lotto.domain.value.LottoCount;
+import lotto.domain.value.TicketCount;
 import lotto.exception.EmptySourceException;
 import lotto.exception.InvalidValueException;
 
@@ -13,9 +13,9 @@ public class InputUtils {
         throw new NotInstanceException();
     }
 
-    public static LottoCount createLottoCount(String input) {
+    public static TicketCount createLottoCount(String input) {
         validate(input);
-        return LottoCount.of(input);
+        return TicketCount.of(input);
     }
 
     private static void validate(String input) {
