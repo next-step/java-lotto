@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 import lotto.exception.ArgumentCountException;
@@ -46,6 +47,10 @@ public class LottoTicket {
 
     private static boolean isNumberSize(Integer number) {
         return TICKET_MINIMUM_NUMBER > number || number > TICKET_MAXIMUM_NUMBER;
+    }
+
+    public Set<Integer> getTicket() {
+        return Collections.unmodifiableSet(ticket);
     }
 
     @Override
