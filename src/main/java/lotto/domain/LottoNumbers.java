@@ -56,10 +56,18 @@ public class LottoNumbers {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    public Grade rank(LottoNumbers lastWinningNumbers) {
-        checkNotNull(lastWinningNumbers);
+    public Grade rank(LottoNumbers lastWinningNumbers, LottoNumber bonusNumber) {
+        checkWinningNumbers(lastWinningNumbers, bonusNumber);
         Set<LottoNumber> allNumbers = mergeWithLottoNumbers(lastWinningNumbers.lottoNumbers);
-        return Grade.from(TWICE_LOTTO_NUMBERS_SIZE - allNumbers.size());
+        return Grade.from(TWICE_LOTTO_NUMBERS_SIZE - allNumbers.size(), allNumbers.contains(bonusNumber));
+    }
+
+    private void checkWinningNumbers(LottoNumbers lastWinningNumbers, LottoNumber bonusNumber) {
+        checkNotNull(lastWinningNumbers, bonusNumber);
+        List<LottoNumber> lottoNumbers = lastWinningNumbers.lottoNumbers;
+        if (lottoNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException(DUPLICATION_ERROR_MESSAGE);
+        }
     }
 
     private Set<LottoNumber> mergeWithLottoNumbers(List<LottoNumber> winningNumbers) {

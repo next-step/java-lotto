@@ -2,13 +2,10 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.groupingBy;
+import static lotto.utils.Validator.checkNotNull;
 
 public class LottoTicket {
 
@@ -27,20 +24,16 @@ public class LottoTicket {
         this.lottoLines = lottoLines;
     }
 
-    private static void checkNotNull(Object object) {
-        if (Objects.isNull(object)) {
-            throw new IllegalArgumentException("필수 값이 없습니다.");
-        }
+    public Statistics rank(LottoNumbers lastWinningNumbers, LottoNumber bonusNumber) {
+        checkNotNull(lastWinningNumbers);
+        List<Grade> grades = lottoLines.stream()
+                .map(lottoLine -> lottoLine.rank(lastWinningNumbers, bonusNumber))
+                .collect(Collectors.toList());
+        return new Statistics(Grade.mapOf(grades), lineSizeToDollars());
     }
 
-    public Statistics rank(LottoNumbers lastWinningNumbers) {
-        Map<Grade, Long> grades = lottoLines.stream()
-                .map(lottoLine -> lottoLine.rank(lastWinningNumbers))
-                .filter(Grade::isWin)
-                .collect(groupingBy(Function.identity(), Collectors.counting()));
-
-        Dollars dollars = new Dollars(lottoLines.size() * Dollars.DOLLAR_UNIT);
-        return new Statistics(grades, dollars);
+    private Dollars lineSizeToDollars() {
+        return new Dollars(lottoLines.size() * Dollars.DOLLAR_UNIT);
     }
 
     public List<LottoNumbers> getLottoLines() {

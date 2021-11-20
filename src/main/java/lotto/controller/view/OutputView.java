@@ -1,8 +1,11 @@
-package lotto.ui.view;
+package lotto.controller.view;
 
 import lotto.domain.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class OutputView {
 
@@ -33,14 +36,31 @@ public class OutputView {
     }
 
     public static void showStatistics(Statistics statistics) {
-        System.out.println("당첨통계");
+        System.out.println("\n당첨통계");
         System.out.println("--------");
-        statistics.getGrades()
-                .forEach(OutputView::showGrade);
-        System.out.printf("총 수익률은 %.2f입니다.\n", statistics.yield());
+
+        Map<Grade, Long> grades = getReverseOrderedGrades(statistics);
+        grades.forEach(OutputView::showGrade);
+
+        double yield = statistics.yield();
+        System.out.printf("총 수익률은 %.2f입니다.", yield);
+        if (yield < 1) {
+            System.out.print("기준이 1이기 때문에 결과적으로 손해라는 의미임.");
+        }
+        System.out.println();
+    }
+
+    private static Map<Grade, Long> getReverseOrderedGrades(Statistics statistics) {
+        Map<Grade, Long> grades = new TreeMap<>(Collections.reverseOrder());
+        grades.putAll(statistics.getGrades());
+        return grades;
     }
 
     private static void showGrade(Grade grade, Long count) {
+        if (grade == Grade.BONUS) {
+            System.out.printf("%s개 일치, 보너스볼 일치(%s원)- %s개\n", grade.getMatchCount(), grade.getReward(), count);
+            return;
+        }
         System.out.printf("%s개 일치 (%s원)- %s개\n", grade.getMatchCount(), grade.getReward(), count);
     }
 }

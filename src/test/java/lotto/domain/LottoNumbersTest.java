@@ -17,24 +17,29 @@ class LottoNumbersTest {
     @DisplayName("LottoNumber를 정렬된 상태로 가지고 있는지")
     @Test
     void lottoNumbers() {
-        LottoNumbers lottoNumbers = new LottoNumbers(asList(num(3), num(1), num(2), num(10), num(15), num(20)));
+        LottoNumbers lottoNumbers = LottoNumbers.of(asList(3, 1, 2, 10, 15, 20));
         assertThat(lottoNumbers.lottoNumbers()).isEqualTo(asList(num(1), num(2), num(3), num(10), num(15), num(20)));
+    }
+
+    private static LottoNumber num(int num) {
+        return LottoNumber.from(num);
     }
 
     @DisplayName("당첨번호개수에 맞게 등급을 잘 반환하는지")
     @ParameterizedTest(name = "[{index}] lottos: {0}, winnings: {1}, grade: {2}")
     @MethodSource("matchArguments")
-    void match(LottoNumbers lottoNumbers, LottoNumbers winningNumbers, Grade expectedGrade) {
-        Grade grade = lottoNumbers.rank(winningNumbers);
+    void match(LottoNumbers lottoNumbers, LottoNumbers winningNumbers, LottoNumber bonusNumber, Grade expectedGrade) {
+        Grade grade = lottoNumbers.rank(winningNumbers, bonusNumber);
         assertThat(grade).isEqualTo(expectedGrade);
     }
 
     static Stream<Arguments> matchArguments() {
-        LottoNumbers lottoNumbers = new LottoNumbers(asList(num(3), num(1), num(2), num(10), num(15), num(20)));
+        LottoNumbers lottoNumbers = LottoNumbers.of(asList(3, 1, 2, 10, 15, 20));
         return Stream.of(
-                Arguments.of(lottoNumbers, new LottoNumbers(asList(num(3), num(1), num(2), num(10), num(20), num(15))), Grade.FIRST),
-                Arguments.of(lottoNumbers, new LottoNumbers(asList(num(3), num(1), num(2), num(43), num(44), num(45))), Grade.FOURTH),
-                Arguments.of(lottoNumbers, new LottoNumbers(asList(num(40), num(41), num(42), num(43), num(44), num(45))), Grade.BANG)
+                Arguments.of(lottoNumbers, LottoNumbers.of(asList(3, 1, 2, 10, 15, 20)), LottoNumber.from(40), Grade.FIRST),
+                Arguments.of(lottoNumbers, LottoNumbers.of(asList(3, 1, 2, 10, 15, 30)), LottoNumber.from(20), Grade.BONUS),
+                Arguments.of(lottoNumbers, LottoNumbers.of(asList(3, 1, 2, 43, 44, 45)), LottoNumber.from(20), Grade.FOURTH),
+                Arguments.of(lottoNumbers, LottoNumbers.of(asList(40, 41, 42, 43, 44, 45)), LottoNumber.from(20), Grade.BANG)
                 );
     }
 
@@ -42,11 +47,35 @@ class LottoNumbersTest {
     @Test
     void create_duplicatedLottoNumbers() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoNumbers(asList(num(3), num(3), num(2), num(10), num(20), num(15))))
+                .isThrownBy(() -> LottoNumbers.of(asList(3, 3, 2, 10, 15, 20)))
                 .withMessage(LottoNumbers.DUPLICATION_ERROR_MESSAGE);
     }
 
-    private static LottoNumber num(int num) {
-        return LottoNumber.from(num);
+    @DisplayName("당첨번호와 보너스번호가 중복이 있다면 예외를 던진다.")
+    @Test
+    void rank_duplicatedBonusNumber() {
+        int duplicatedNumber = 1;
+        LottoNumbers winningNumbers = LottoNumbers.of(asList(duplicatedNumber, 2, 3, 4, 5, 6));
+        LottoNumber bonusNumber = LottoNumber.from(duplicatedNumber);
+
+        LottoNumbers lottoNumbers = LottoNumbers.of(asList(1, 2, 3, 4, 5, 6));
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lottoNumbers.rank(winningNumbers, bonusNumber))
+                .withMessage(LottoNumbers.DUPLICATION_ERROR_MESSAGE);
+    }
+
+    @DisplayName("보너스 당첨일 때 등급을 잘 반환하는지")
+    @Test
+    void rank_bonusWin() {
+        //given
+        LottoNumbers lottoNumbers = LottoNumbers.of(asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers winningNumbers = LottoNumbers.of(asList(1, 2, 3, 4, 5, 40));
+        LottoNumber bonusNumber = LottoNumber.from(6);
+
+        //when
+        Grade grade = lottoNumbers.rank(winningNumbers, bonusNumber);
+
+        //then
+        assertThat(grade).isEqualTo(Grade.BONUS);
     }
 }
