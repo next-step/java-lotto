@@ -28,7 +28,7 @@ public class InputNumber {
         String[] splitNums = input.split("[,:]");
 
         List<Integer> numbers = Arrays.stream(splitNums)
-            .map(Integer::parseInt)
+            .map(StringUtils::parsePositiveNumber)
             .collect(Collectors.toList());
 
         return new InputNumber(numbers);

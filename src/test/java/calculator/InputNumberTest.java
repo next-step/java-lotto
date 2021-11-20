@@ -1,10 +1,9 @@
 package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.in;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.Arrays;
-import java.util.Collections;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -26,7 +25,6 @@ public class InputNumberTest {
     void spiltEmptyTest(String input) {
         InputNumber inputNumber = InputNumber.create(input);
         assertThat(inputNumber).isEqualTo(new InputNumber());
-
     }
 
     @Test
@@ -37,6 +35,12 @@ public class InputNumberTest {
         InputNumber inputNumber = InputNumber.create(input);
 
         assertThat(inputNumber).isEqualTo(new InputNumber(Arrays.asList(1)));
+    }
+
+    @ParameterizedTest(name = "[{argumentsWithNames}] 음수 또는 잘못된 값이 들어간 경우, IllegalArgumentException이 반환된다.")
+    @ValueSource(strings = {"1,2:-3", "=,1,2:3", "-1:-5/3"})
+    void invalidExceptionByInputNumberTest(String input) {
+        assertThatIllegalArgumentException().isThrownBy(() -> InputNumber.create(input));
     }
 
 }
