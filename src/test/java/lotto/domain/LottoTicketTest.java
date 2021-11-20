@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTicketTest {
@@ -28,8 +29,8 @@ class LottoTicketTest {
         //then
         assertThat(lottoLines.size()).isEqualTo(lineCount);
     }
-    
-    
+
+
     @DisplayName("통계가 잘구해지는지")
     @Test
     void rank() {
@@ -57,6 +58,27 @@ class LottoTicketTest {
         expectedGrades.put(Grade.FOURTH, 1L);
 
         assertThat(statistics).isEqualTo(new Statistics(expectedGrades, new Dollars(6000)));
+    }
+
+    @DisplayName("수동 로또 줄")
+    @Test
+    void manual() {
+        //given
+        Dollars dollars = new Dollars(2000);
+        List<LottoNumbers> manualLottoLines = singletonList(LottoNumbers.of(asList(1, 2, 3, 4, 5, 6)));
+
+        LottoTicket lottoTicket = LottoTicket.publish(new PublishDetails(dollars, manualLottoLines), noShuffleStrategy());
+
+        //when
+        List<LottoNumbers> autoLines = singletonList(LottoNumbers.of(asList(1, 2, 3, 4, 5, 6)));
+        LottoTicket expectedLottoTicket = new LottoTicket(autoLines, manualLottoLines);
+
+        //then
+        assertThat(lottoTicket).isEqualTo(expectedLottoTicket);
+    }
+
+    private ShuffleStrategy noShuffleStrategy() {
+        return lottoNumbers -> {};
     }
 
 }

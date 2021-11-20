@@ -18,4 +18,8 @@ public class PublishDetails {
     public int autoLottoLineCount() {
         return dollars.getCount() - manualLottoLines.size();
     }
+
+    public List<LottoNumbers> getManualLottoLines() {
+        return manualLottoLines;
+    }
 }
