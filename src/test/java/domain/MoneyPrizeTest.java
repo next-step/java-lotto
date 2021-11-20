@@ -4,9 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,7 +20,7 @@ class MoneyPrizeTest {
 
         LotteryTicket lotteryTicket = new LotteryTicket(numbers);
         List<LotteryTicket> lotteryTickets = Arrays.asList(lotteryTicket);
-        LastWeekLotteryNumber lastWeekLottery = new LastWeekLotteryNumber("1,2,3,4,8,9");
+        LastWeekLotteryNumber lastWeekLottery = new LastWeekLotteryNumber(new HashSet<>(Arrays.asList(1,2,3,4,7,8)));
         moneyPrize = new MoneyPrize(new RankGroup(new LotteryTickets(lotteryTickets), lastWeekLottery));
     }
 
