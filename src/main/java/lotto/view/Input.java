@@ -26,4 +26,10 @@ public class Input {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
+
+    public static Integer inputBonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        SCANNER.nextLine();
+        return SCANNER.nextInt();
+    }
 }
