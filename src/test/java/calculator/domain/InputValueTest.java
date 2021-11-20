@@ -8,8 +8,6 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class InputValueTest {
-    private static final String REGULAR_EXPRESSION_ONLY_NUMBER = "^[0-9]*$";
-    private static final String REGULAR_EXPRESSION_COMMA = ",";
     @Test
     @DisplayName("InputValue 생성자 테스트")
     public void create() {

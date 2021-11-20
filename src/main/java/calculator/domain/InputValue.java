@@ -13,9 +13,14 @@ public class InputValue {
     private static final String REGULAR_EXPRESSION_COMMA = ",";
     private static final String REGULAR_EXPRESSION_COMMA_OR_COLON = ",|:";
     private static final String REGULAR_EXPRESSION_CUSTOM = "//(.)\n(.*)";
+    private static final int NUMBER_ONE = 1;
+    private static final int NUMBER_TWO = 2;
+    private static final Pattern commaOrColonPattern = Pattern.compile(REGULAR_EXPRESSION_COMMA_OR_COLON);
+    private static final Pattern customPattern = Pattern.compile(REGULAR_EXPRESSION_CUSTOM);
 
-    private String inputStringValue;
+    private final String inputStringValue;
     private Matcher matcher;
+
 
     public InputValue(String inputStringValue) {
         this.inputStringValue = inputStringValue;
@@ -26,7 +31,7 @@ public class InputValue {
     }
 
     public boolean isNullOrBlank() {
-        return inputStringValue == null || inputStringValue == STRING_BLANK;
+        return inputStringValue == null || STRING_BLANK.equals(inputStringValue);
     }
 
     public boolean isOneLengthOnlyNumber() {
@@ -38,7 +43,7 @@ public class InputValue {
     }
 
     private boolean isOneLength() {
-        return inputStringValue.length() == 1;
+        return inputStringValue.length() == NUMBER_ONE;
     }
 
     public boolean isMoreThanTwoNumber() {
@@ -46,7 +51,7 @@ public class InputValue {
     }
 
     private boolean isMoreThanTwoLength() {
-        return inputStringValue.length() > 1;
+        return inputStringValue.length() > NUMBER_ONE;
     }
 
     public List<Integer> getSeparatedValuesByComma() {
@@ -54,17 +59,17 @@ public class InputValue {
     }
 
     private List<Integer> getSeparatedValues(String[] inputStringArray) {
-        return Arrays.asList(inputStringArray).stream()
+        return Arrays.stream(inputStringArray)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
     public boolean isCommaOrColonSeparator() {
-        return isEffectiveSeparator(REGULAR_EXPRESSION_COMMA_OR_COLON);
+        return isEffectiveSeparator();
     }
 
-    private boolean isEffectiveSeparator(String regex) {
-        matcher = Pattern.compile(regex).matcher(inputStringValue);
+    private boolean isEffectiveSeparator() {
+        matcher = commaOrColonPattern.matcher(inputStringValue);
         return matcher.find();
     }
 
@@ -81,8 +86,8 @@ public class InputValue {
         String[] tokens = null;
         Matcher matcher = getRegularExpressionCustomMatcher();
         if (matcher.find()) {
-            String customDelimiter = matcher.group(1);
-            tokens = matcher.group(2).split(customDelimiter);
+            String customDelimiter = matcher.group(NUMBER_ONE);
+            tokens = matcher.group(NUMBER_TWO).split(customDelimiter);
 
         }
 
@@ -90,7 +95,7 @@ public class InputValue {
     }
 
     private Matcher getRegularExpressionCustomMatcher() {
-        return Pattern.compile(REGULAR_EXPRESSION_CUSTOM).matcher(inputStringValue);
+        return customPattern.matcher(inputStringValue);
     }
 
     @Override
