@@ -7,27 +7,21 @@ import java.util.List;
 public class LotteryTickets {
     private final List<LotteryTicket> lotteryTickets;
 
-    public LotteryTickets(Store store) {
-        this(IssueLotteryTicket(store));
+    public LotteryTickets(int lotteryCount) {
+        this(IssueLotteryTicket(lotteryCount));
     }
 
     public LotteryTickets(List<LotteryTicket> lotteryTicket) {
         this.lotteryTickets = Collections.unmodifiableList(lotteryTicket);
     }
 
-    public static List<LotteryTicket> IssueLotteryTicket(Store store) {
-        int lotteryCount = store.lotteryCount();
-
+    private static List<LotteryTicket> IssueLotteryTicket(int lotteryCount) {
         List<LotteryTicket> lotteryTicket = new ArrayList<>();
         for (int i = 0; i < lotteryCount; i++) {
             lotteryTicket.add(new LotteryTicket(RandomNumber.sixRandomNumber()));
         }
 
         return lotteryTicket;
-    }
-
-    public String lotteryTicketNumber(int index) {
-        return lotteryTickets.get(index).lotteryNumber();
     }
 
     public LotteryTicket lotteryTicket(int index) {
