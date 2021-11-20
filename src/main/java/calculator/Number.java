@@ -14,6 +14,10 @@ public class Number {
         this.number = Integer.parseInt(number);
     }
 
+    public Number sum(Number numberObject) {
+        return new Number(this.number + numberObject.number);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
