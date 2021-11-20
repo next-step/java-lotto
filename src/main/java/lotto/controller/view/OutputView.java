@@ -8,6 +8,7 @@ import java.util.Map;
 public class OutputView {
 
     private static final StringBuilder stringBuilder = new StringBuilder();
+    private static final int BREAK_EVEN_RATIO = 1;
 
     private OutputView() {
     }
@@ -42,7 +43,7 @@ public class OutputView {
 
         double yield = statistics.yield();
         System.out.printf("총 수익률은 %.2f입니다.", yield);
-        if (yield < 1) {
+        if (yield < BREAK_EVEN_RATIO) {
             System.out.print("기준이 1이기 때문에 결과적으로 손해라는 의미임.");
         }
         System.out.println();
