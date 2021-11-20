@@ -20,7 +20,7 @@ public class InputNumberTest {
         assertThat(inputNumber).isEqualTo(new InputNumber(Arrays.asList(1, 2, 3)));
     }
 
-    @ParameterizedTest(name = "[arguments] 값이 오면, 빈 List 를 반환한다.")
+    @ParameterizedTest(name = "[{argumentsWithNames}] 값이 오면, 빈 List 를 반환한다.")
     @NullAndEmptySource
     void spiltEmptyTest(String input) {
         InputNumber inputNumber = InputNumber.create(input);
