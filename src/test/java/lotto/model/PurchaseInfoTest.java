@@ -1,6 +1,5 @@
 package lotto.model;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -15,7 +14,7 @@ class PurchaseInfoTest {
 
     @ParameterizedTest
     @ValueSource(ints = { -1, -2, -3})
-    @DisplayName("파라미터가 음수면 예외 발생")
+    @DisplayName("amount 가 음수면 예외 발생")
     void amountUnderZeroThrowException(int amount){
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> purchaseInfo = new PurchaseInfo(amount))
@@ -24,9 +23,9 @@ class PurchaseInfoTest {
 
     @ParameterizedTest
     @CsvSource(value = { "14000,14", "200,0", "2000,2", "2600,2" })
-    @DisplayName("파라미터가 음수면 예외 발생")
-    void getLottoCountTest(int amount, int expected){
+    @DisplayName("amount로 구매한 로또 개수 확인하기")
+    void getLotteryCountTest(int amount, int expected){
         purchaseInfo = new PurchaseInfo(amount);
-        assertThat(purchaseInfo.getLottoCount()).isEqualTo(expected);
+        assertThat(purchaseInfo.getLotteryCount()).isEqualTo(expected);
     }
 }
