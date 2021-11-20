@@ -1,8 +1,12 @@
 package com.kakao.lotto.domain;
 
 import com.kakao.lotto.supportInfo.PurchaseInfo;
+import com.kakao.lotto.supportInfo.RankStatistic;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class WinResult {
     private final List<LottoTicket> userLottoTicket;
@@ -13,21 +17,13 @@ public class WinResult {
         this.winLottoTicket = winLottoTicket;
     }
 
-    public double calculateProfitRate(PurchaseInfo purchaseInfo) {
-        Integer profit = userLottoTicket.stream()
-                .map(winLottoTicket::matchWinNumber)
-                .map(LottoRank::findByMatchRank)
-                .map(LottoRank::getPrice)
-                .reduce(0, Integer::sum);
-        return profitFormula(purchaseInfo.getMoney(), profit);
+    public RankStatistic createRankStatistic() {
+        final Map<LottoRank, Integer> usersRankCount = Arrays.stream(LottoRank.values())
+                .collect(Collectors.toMap(x -> x, this::getLottoRankCount));
+        return new RankStatistic(usersRankCount);
     }
 
-    private double profitFormula(int beforeMoney, int nowMoney) {
-        return (double) nowMoney / beforeMoney;
-    }
-
-    public int getLottoRankCount(LottoRank lottoRank) {
-
+    private int getLottoRankCount(LottoRank lottoRank) {
         return (int) userLottoTicket.stream()
                 .map(winLottoTicket::matchWinNumber)
                 .map(LottoRank::findByMatchRank)

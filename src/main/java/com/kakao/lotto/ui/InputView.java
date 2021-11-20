@@ -27,6 +27,11 @@ public class InputView {
         return makeIntegerList(winLotto);
     }
 
+    public int inputLottoBonus() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return new Scanner(inputStream).nextInt();
+    }
+
     private List<Integer> makeIntegerList(String line){
         return Arrays.stream(line.split(DELIMITER))
                 .map(String::trim)
