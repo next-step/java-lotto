@@ -1,32 +1,30 @@
 package domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LotteryTicket {
-    private static final String COMMA_AND_SPACING = ", ";
-    private final List<Number> lotteryTicket;
+    private final List<LotteryNumber> lotteryTicket;
 
     public LotteryTicket(List<Integer> lotteryTicket) {
-        this.lotteryTicket = changeToLotteryNumber(lotteryTicket);
+        this.lotteryTicket = Collections.unmodifiableList(changeToLotteryNumber(lotteryTicket));
     }
 
-    public static List<Number> changeToLotteryNumber(List<Integer> lotteryTicket) {
+    public static List<LotteryNumber> changeToLotteryNumber(List<Integer> lotteryTicket) {
         return lotteryTicket.stream()
-                .map(Number::new)
+                .map(LotteryNumber::new)
                 .collect(Collectors.toList());
     }
 
-    public String lotteryNumber() {
-        return lotteryTicket.stream()
-                .map(number -> Integer.toString(number.value()))
-                .collect(Collectors.joining(COMMA_AND_SPACING));
+    public int getLotteryNumber(int index){
+        return lotteryTicket.get(index).value();
     }
 
     public int matchCount(LastWeekLotteryNumber lastWeekLottery) {
         int count = 0;
-        for (Number number : lotteryTicket) {
-            count += lastWeekLottery.lotteryMatch(number.value());
+        for (LotteryNumber number : lotteryTicket) {
+            count += lastWeekLottery.matchNumber(number.value());
         }
 
         return count;
