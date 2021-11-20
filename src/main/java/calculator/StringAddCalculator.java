@@ -3,20 +3,15 @@ package calculator;
 import java.util.Arrays;
 
 public class StringAddCalculator {
+
+    private final Splitter splitter = new Splitter();
+
     public int calculate(String text) {
         if (text == null || text.isEmpty()) {
             return 0;
         }
 
-        String regex = ",|:";
-        if (text.contains("//") && text.contains("\n")) {
-            int startIdx = text.indexOf("//") + 2;
-            int endIdx = text.indexOf("\n");
-            regex = regex + "|" + text.substring(startIdx, endIdx);
-            text = text.substring(endIdx + 1);
-        }
-
-        String[] split = text.split(regex);
+        String[] split = splitter.split(text);
 
         if (Arrays.stream(split)
                 .mapToInt(Integer::parseInt)
