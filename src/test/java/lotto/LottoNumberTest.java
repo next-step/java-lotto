@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoNumber;
+import lotto.exception.LottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -21,6 +22,6 @@ class LottoNumberTest {
     @DisplayName("LottoNumber는 1 ~ 45 사의의 숫자가 아닌경우 exception.")
     @ValueSource(ints = {-1, 0, 46})
     void createLottoNumberExceptionTest(int number) {
-        assertThatThrownBy(() -> LottoNumber.from(number)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> LottoNumber.from(number)).isInstanceOf(LottoNumberException.class);
     }
 }
