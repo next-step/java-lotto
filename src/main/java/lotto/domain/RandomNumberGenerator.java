@@ -1,11 +1,11 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.LottoNumbers.LOTTO_NUMBERS;
+import static lotto.domain.LottoNumbers.LOTTO_NUMBERS;
 
 public class RandomNumberGenerator implements NumberGenerator {
 
