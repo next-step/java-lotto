@@ -19,4 +19,9 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
+    public static float nextFloat(String message) {
+        OutputView.print(message);
+        return SCANNER.nextFloat();
+    }
+
 }
