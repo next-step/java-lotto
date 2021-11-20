@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

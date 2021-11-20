@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.domain;
 
 public class PurchaseInfo {
 

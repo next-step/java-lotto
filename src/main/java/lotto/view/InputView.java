@@ -1,5 +1,8 @@
 package lotto.view;
 
+import lotto.model.ticket.LotteryTicket;
+import lotto.model.domain.Lotto;
+import lotto.model.domain.PurchaseInfo;
 import util.NumberUtils;
 
 import java.util.*;
@@ -12,7 +15,17 @@ public class InputView {
 
     private InputView() {}
 
-    public static int getIntValue(String message){
+    public static PurchaseInfo getPurchaseInfo() {
+        int amount = getIntValue("구입금액을 입력해 주세요.");
+        return new PurchaseInfo(amount);
+    }
+
+    public static LotteryTicket getWinningTicket() {
+        List<Integer> winningNumbers = InputView.getCommaSplitIntList("지난 주 당첨 번호를 입력해 주세요.");
+        return new LotteryTicket(winningNumbers.stream().map(Lotto::new).collect(Collectors.toList()));
+    }
+
+    private static int getIntValue(String message){
         String input = getInput(message);
         if(!NumberUtils.isIntValue(input)) {
             throw new IllegalArgumentException("입력 값이 숫자가 아닙니다.");
@@ -25,7 +38,7 @@ public class InputView {
         return scanner.next();
     }
 
-    public static List<Integer> getCommaSplitIntList(String message){
+    private static List<Integer> getCommaSplitIntList(String message){
         String[] list = getInput(message).split(",");
         checkAllInt(list);
         return Arrays.stream(list)

@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.game;
 
 public class LottoNumber {
 
