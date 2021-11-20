@@ -1,10 +1,13 @@
 package calculator;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class Splitter {
 
     private final static String DELIMITERS = ",|:";
 
-    public String[] split(String text) {
+    public Operands split(String text) {
         validate(text);
 
         String addDelimiter = "";
@@ -15,7 +18,9 @@ public class Splitter {
             text = text.substring(endIdx + 1);
         }
 
-        return text.split(DELIMITERS + addDelimiter);
+        return new Operands(Arrays.stream(text.split(DELIMITERS + addDelimiter))
+                .map(Operand::new)
+                .collect(Collectors.toList()));
     }
 
     private void validate(String text) {

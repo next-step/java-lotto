@@ -1,7 +1,5 @@
 package calculator;
 
-import java.util.Arrays;
-
 public class StringAddCalculator {
 
     private final Splitter splitter = new Splitter();
@@ -11,16 +9,9 @@ public class StringAddCalculator {
             return 0;
         }
 
-        String[] split = splitter.split(text);
+        Operands operands = splitter.split(text);
 
-        if (Arrays.stream(split)
-                .mapToInt(Integer::parseInt)
-                .filter(num -> num < 0)
-                .findAny()
-                .isPresent()) {
-            throw new RuntimeException();
-        };
-
-        return Arrays.stream(split).mapToInt(Integer::parseInt).sum();
+        return operands.sumAll();
     }
+
 }
