@@ -1,15 +1,19 @@
 package lotto.domain;
 
-import java.util.Set;
+import java.util.List;
 
 public class Lotto {
-    private final Set<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    private Lotto(Set<LottoNumber> lottoNumbers) {
+    private Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
     public static Lotto from(NumberGenerator generator) {
         return new Lotto(generator.generate());
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return lottoNumbers;
     }
 }

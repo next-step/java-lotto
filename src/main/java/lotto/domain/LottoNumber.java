@@ -1,8 +1,9 @@
 package lotto.domain;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
+
     private final int number;
 
     private LottoNumber(int number) {
@@ -18,5 +19,14 @@ public class LottoNumber {
 
     public static LottoNumber from(int number) {
         return new LottoNumber(number);
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return this.number - o.number;
     }
 }
