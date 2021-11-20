@@ -21,7 +21,7 @@ public class StringCalculatorTest {
     @Test
     @DisplayName("숫자의 합, 3개")
     void sum3() {
-        String data = "1,2,3";
+        String data = "0,3,3";
 
         Number result = StringCalculator.sum(data);
 

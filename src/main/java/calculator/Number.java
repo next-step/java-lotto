@@ -7,11 +7,18 @@ public class Number {
     private final int number;
 
     public Number(int number) {
+        if (number < 0) {
+            throw new RuntimeException("음수는 생성하실 수 없습니다");
+        }
         this.number = number;
     }
 
     public Number(String number) {
-        this.number = Integer.parseInt(number);
+        try {
+            this.number = Integer.parseUnsignedInt(number);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("잘못된 타입입니다", e);
+        }
     }
 
     public Number sum(Number numberObject) {
