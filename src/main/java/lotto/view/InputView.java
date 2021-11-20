@@ -12,8 +12,8 @@ public class InputView {
         throw new NotInstanceException();
     }
 
-    public static int getPurchaseAmount() {
+    public static String getPurchaseAmount() {
         System.out.println(PURCHASE_AMOUNT_INPUT_MESSAGE);
-        return SCANNER.nextInt();
+        return SCANNER.nextLine();
     }
 }
