@@ -1,14 +1,24 @@
 package calculator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class NumberSplitter {
 
-    private final List<String> separators = Arrays.asList(",", ":");
+    private static final List<String> DEFAULT_SEPARATORS = Arrays.asList(",", ":");
+
+    private final List<String> separators;
+
+    public NumberSplitter(String separator) {
+        this();
+        if (!Objects.isNull(separator) && !separator.isEmpty()) {
+            this.separators.add(separator);
+        }
+    }
+
+    public NumberSplitter() {
+        this.separators = new ArrayList<>(DEFAULT_SEPARATORS);
+    }
 
     public List<Number> split(String target) {
         List<String> numbers = Collections.singletonList(target);

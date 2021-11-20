@@ -39,4 +39,15 @@ public class StringCalculatorTest {
         assertThat(result)
                 .isEqualTo(new Number(6));
     }
+
+    @Test
+    @DisplayName("커스텀 구분자 지정")
+    void sumAnotherSeparator() {
+        String data = "//;\n1;2;3";
+
+        Number result = StringCalculator.sum(data);
+
+        assertThat(result)
+                .isEqualTo(new Number(6));
+    }
 }

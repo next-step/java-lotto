@@ -44,4 +44,32 @@ class NumberSplitterTest {
         assertThat(numbers)
                 .containsExactly(new Number(1), new Number(2), new Number(3));
     }
+
+    @Test
+    @DisplayName("커스텀 구분자 추가")
+    void splitAnotherSeparator() {
+        String data = "1/2,3";
+        NumberSplitter numberSplitter = new NumberSplitter("/");
+
+        List<Number> numbers = numberSplitter.split(data);
+
+        assertThat(numbers)
+                .containsExactly(new Number(1), new Number(2), new Number(3));
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자 null, empty 제외")
+    void ignoreNullEmptySeparator() {
+        String data = "1,2,3";
+
+        NumberSplitter numberSplitter = new NumberSplitter(null);
+        List<Number> numbers = numberSplitter.split(data);
+        assertThat(numbers)
+                .containsExactly(new Number(1), new Number(2), new Number(3));
+
+        NumberSplitter numberSplitter2 = new NumberSplitter("");
+        List<Number> numbers2 = numberSplitter.split(data);
+        assertThat(numbers2)
+                .containsExactly(new Number(1), new Number(2), new Number(3));
+    }
 }
