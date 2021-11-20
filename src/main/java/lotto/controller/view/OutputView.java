@@ -2,10 +2,8 @@ package lotto.controller.view;
 
 import lotto.domain.*;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class OutputView {
 
@@ -39,7 +37,7 @@ public class OutputView {
         System.out.println("\n당첨통계");
         System.out.println("--------");
 
-        Map<Grade, Long> grades = getReverseOrderedGrades(statistics);
+        Map<Grade, Long> grades = statistics.getReverseOrderedGrades();
         grades.forEach(OutputView::showGrade);
 
         double yield = statistics.yield();
@@ -48,12 +46,6 @@ public class OutputView {
             System.out.print("기준이 1이기 때문에 결과적으로 손해라는 의미임.");
         }
         System.out.println();
-    }
-
-    private static Map<Grade, Long> getReverseOrderedGrades(Statistics statistics) {
-        Map<Grade, Long> grades = new TreeMap<>(Collections.reverseOrder());
-        grades.putAll(statistics.getGrades());
-        return grades;
     }
 
     private static void showGrade(Grade grade, Long count) {

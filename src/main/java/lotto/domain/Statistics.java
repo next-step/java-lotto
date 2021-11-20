@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 import static lotto.utils.Validator.checkNotNull;
 
@@ -53,8 +50,10 @@ public class Statistics {
         return grade.getReward() * grades.get(grade);
     }
 
-    public Map<Grade, Long> getGrades() {
-        return Collections.unmodifiableMap(grades);
+    public Map<Grade, Long> getReverseOrderedGrades() {
+        Map<Grade, Long> reverseOrderedGrades = new TreeMap<>(Collections.reverseOrder());
+        reverseOrderedGrades.putAll(grades);
+        return Collections.unmodifiableMap(reverseOrderedGrades);
     }
 
     @Override
