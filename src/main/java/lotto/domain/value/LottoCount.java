@@ -10,15 +10,15 @@ public class LottoCount {
 
     private final int count;
 
-    private LottoCount(String count) {
-        int lottoPrice = Integer.parseInt(count);
+    private LottoCount(String price) {
+        int lottoPrice = Integer.parseInt(price);
         validateUnit(lottoPrice);
 
         this.count = lottoPrice % BASIC_UNIT;
     }
 
-    public static LottoCount of(String count) {
-        return new LottoCount(count);
+    public static LottoCount of(String price) {
+        return new LottoCount(price);
     }
 
     private static void validateUnit(int price) {
