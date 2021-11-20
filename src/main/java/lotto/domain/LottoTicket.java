@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -11,29 +10,20 @@ import static lotto.utils.Validator.checkNotNull;
 
 public class LottoTicket {
 
-    // TODO: [2021/11/21 양동혁] final 추가
-    private List<LottoNumbers> manualLottoLines = new ArrayList<>();
+    private final List<LottoNumbers> manualLottoLines;
+    // TODO: [2021/11/21 양동혁] autoLottoLines으로 변경
     private final List<LottoNumbers> lottoLines;
-
-    public static LottoTicket publish(Dollars dollars, ShuffleStrategy shuffleStrategy) {
-        checkNotNull(dollars);
-        List<LottoNumbers> lottoLines = Stream.generate(() -> LottoNumbers.publish(shuffleStrategy))
-                .limit(dollars.getCount())
-                .collect(Collectors.toList());
-        return new LottoTicket(lottoLines);
-    }
 
     public static LottoTicket publish(PublishDetails publishDetails, ShuffleStrategy shuffleStrategy) {
         checkNotNull(publishDetails);
-        List<LottoNumbers> lottoLines = Stream.generate(() -> LottoNumbers.publish(shuffleStrategy))
-                .limit(publishDetails.autoLottoLineCount())
-                .collect(Collectors.toList());
-        return new LottoTicket(lottoLines, publishDetails.getManualLottoLines());
+        List<LottoNumbers> autoLottoLines = createLottoLines(publishDetails.autoLottoLineCount(), shuffleStrategy);
+        return new LottoTicket(autoLottoLines, publishDetails.manualLottoLines());
     }
 
-    public LottoTicket(List<LottoNumbers> lottoLines) {
-        checkNotNull(lottoLines);
-        this.lottoLines = lottoLines;
+    private static List<LottoNumbers> createLottoLines(int lineCount, ShuffleStrategy shuffleStrategy) {
+        return Stream.generate(() -> LottoNumbers.publish(shuffleStrategy))
+                .limit(lineCount)
+                .collect(Collectors.toList());
     }
 
     public LottoTicket(List<LottoNumbers> lottoLines, List<LottoNumbers> manualLottoLines) {

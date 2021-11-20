@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 
+import static java.util.Collections.unmodifiableList;
 import static lotto.utils.Validator.checkNotNull;
 
 public class PublishDetails {
@@ -24,7 +25,15 @@ public class PublishDetails {
         return dollars.getCount() - manualLottoLines.size();
     }
 
-    public List<LottoNumbers> getManualLottoLines() {
-        return manualLottoLines;
+    public List<LottoNumbers> manualLottoLines() {
+        return unmodifiableList(manualLottoLines);
+    }
+
+    @Override
+    public String toString() {
+        return "PublishDetails{" +
+                "dollars=" + dollars +
+                ", manualLottoLines=" + manualLottoLines +
+                '}';
     }
 }

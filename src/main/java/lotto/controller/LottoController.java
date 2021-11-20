@@ -22,7 +22,9 @@ public class LottoController {
 
     private static LottoTicket publishLottoTicket() {
         int won = InputView.getWon();
-        return LottoTicket.publish(new Dollars(won), Collections::shuffle);
+        // TODO: [2021/11/21 양동혁] 변경
+        Dollars dollars = new Dollars(won);
+        return LottoTicket.publish(new PublishDetails(dollars, Collections.emptyList()), Collections::shuffle);
     }
 
     private static Statistics rank(LottoTicket lottoTicket) {

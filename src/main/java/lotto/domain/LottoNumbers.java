@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.lang.String.format;
+import static java.util.stream.Collectors.joining;
 import static lotto.utils.Validator.checkNotNull;
 
 public class LottoNumbers {
@@ -92,8 +93,11 @@ public class LottoNumbers {
 
     @Override
     public String toString() {
-        return "LottoNumbers{" +
-                "lottoNumbers=" + lottoNumbers +
-                '}';
+        String lottoNumbers = this.lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
+                .map(String::valueOf)
+                .collect(joining(","));
+        return "LottoNumbers{" + lottoNumbers + '}';
     }
+
 }
