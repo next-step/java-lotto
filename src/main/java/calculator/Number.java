@@ -25,6 +25,10 @@ public class Number {
         return new Number(this.number + numberObject.number);
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

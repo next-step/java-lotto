@@ -12,10 +12,8 @@ public class StringCalculatorTest {
     void sum2() {
         String data = "1,2";
 
-        Number result = StringCalculator.sum(data);
-
-        assertThat(result)
-                .isEqualTo(new Number(3));
+        assertThat(StringCalculator.sum(data))
+                .isEqualTo(3);
     }
 
     @Test
@@ -23,10 +21,8 @@ public class StringCalculatorTest {
     void sum3() {
         String data = "0,3,3";
 
-        Number result = StringCalculator.sum(data);
-
-        assertThat(result)
-                .isEqualTo(new Number(6));
+        assertThat(StringCalculator.sum(data))
+                .isEqualTo(6);
     }
 
     @Test
@@ -34,10 +30,8 @@ public class StringCalculatorTest {
     void sum3Mix() {
         String data = "1,2:3";
 
-        Number result = StringCalculator.sum(data);
-
-        assertThat(result)
-                .isEqualTo(new Number(6));
+        assertThat(StringCalculator.sum(data))
+                .isEqualTo(6);
     }
 
     @Test
@@ -45,9 +39,16 @@ public class StringCalculatorTest {
     void sumAnotherSeparator() {
         String data = "//;\n1;2;3";
 
-        Number result = StringCalculator.sum(data);
+        assertThat(StringCalculator.sum(data))
+                .isEqualTo(6);
+    }
 
-        assertThat(result)
-                .isEqualTo(new Number(6));
+    @Test
+    @DisplayName("null 또는 빈 문자 시 0 리턴")
+    void sumWhenInputNullOrEmpty() {
+        assertThat(StringCalculator.sum(null))
+                .isEqualTo(0);
+        assertThat(StringCalculator.sum(""))
+                .isEqualTo(0);
     }
 }

@@ -2,6 +2,7 @@ package calculator;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class StringCalculator {
 
@@ -10,15 +11,18 @@ public class StringCalculator {
 
     private StringCalculator() {}
 
-    public static Number sum(String data) {
-        String separator = extractSeparator(data);
-        String numberData = extractNumberData(data);
-        NumberSplitter numberSplitter = new NumberSplitter(separator);
+    public static int sum(String data) {
+        if (Objects.isNull(data) || data.isEmpty()) {
+            return 0;
+        }
 
-        List<Number> numbers = numberSplitter.split(numberData);
+        NumberSplitter numberSplitter = new NumberSplitter(extractSeparator(data));
+        List<Number> numbers = numberSplitter.split(extractNumberData(data));
+
         return numbers.stream()
                 .reduce(Number::sum)
-                .orElseThrow(() -> new ArithmeticException("계산 중 잘못되어 null 이 반환되었습니다"));
+                .orElseThrow(() -> new ArithmeticException("계산 중 잘못되어 null 이 반환되었습니다"))
+                .getNumber();
     }
 
     private static String extractSeparator(String data) {
