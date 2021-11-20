@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class Validator {
 
+    public static final String REQUIRED_ERROR_MESSAGE = "필수 값이 없습니다.";
+
     private Validator() {
     }
 
@@ -15,7 +17,7 @@ public class Validator {
 
     public static void checkNotNull(Object object) {
         if (Objects.isNull(object)) {
-            throw new IllegalArgumentException("필수 값이 없습니다.");
+            throw new IllegalArgumentException(REQUIRED_ERROR_MESSAGE);
         }
     }
 }

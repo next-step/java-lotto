@@ -42,4 +42,11 @@ public class Dollars {
     public int hashCode() {
         return Objects.hash(count);
     }
+
+    @Override
+    public String toString() {
+        return "Dollars{" +
+                "count=" + count +
+                '}';
+    }
 }
