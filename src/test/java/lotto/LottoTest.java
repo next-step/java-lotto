@@ -1,0 +1,5 @@
+package lotto;
+
+class LottoTest {
+
+}
