@@ -6,16 +6,16 @@ public class LottoService {
 
     private static final int TICKET_PRICE = 1000;
 
-    static LottoService lottoService;
+    private static LottoService LOTTO_SERVICE;
 
     private LottoService() {
     }
 
     public static LottoService getInstance() {
-        if (lottoService == null) {
-            lottoService = new LottoService();
+        if (LOTTO_SERVICE == null) {
+            LOTTO_SERVICE = new LottoService();
         }
-        return lottoService;
+        return LOTTO_SERVICE;
     }
 
     public LottoTickets buyLottoTickets(Integer money) {
