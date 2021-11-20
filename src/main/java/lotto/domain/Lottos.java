@@ -10,7 +10,7 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(Integer purchaseAmount, GetLottoNumbersStrategy getLottoNumbersStrategy) {
-        int purchaseCount = purchaseAmount/1000;
+        int purchaseCount = purchaseAmount / 1000;
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < purchaseCount; i++) {
             Lotto lotto = new Lotto(getLottoNumbersStrategy);
@@ -23,13 +23,28 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public List<Integer> checkMatching(List<Integer> winningNumbers) {
-        List<Integer> matchingList = new ArrayList<>();
-        for (int i = 0; i < Lotto.SIZE+1; i++) {
-            matchingList.add(0);
+    public Integer getPrize(List<Number> winningNumbers, Integer bonus) {
+        return lottos.stream()
+                .mapToInt(lotto -> Prize.findPrize(lotto, winningNumbers, bonus).getPrize())
+                .sum();
+    }
+
+    public Integer getCount(Prize prize, List<Number> winningNumbers, Integer bonus) {
+        if (prize == Prize.BONUS_SECOND) {
+            Long count = lottos.stream()
+                    .filter(lotto -> lotto.checkMatching(winningNumbers) == prize.getMatching() && lotto.getLottoNumbers().contains(new Number(bonus)))
+                    .count();
+            return count.intValue();
         }
-        lottos.stream()
-                .forEach(i -> matchingList.set(i.checkMatching(winningNumbers),matchingList.get(i.checkMatching(winningNumbers))+1));
-        return matchingList;
+        if (prize == Prize.SECOND) {
+            Long count = lottos.stream()
+                    .filter(lotto -> lotto.checkMatching(winningNumbers) == prize.getMatching() && !lotto.getLottoNumbers().contains(new Number(bonus)))
+                    .count();
+            return count.intValue();
+        }
+        Long count = lottos.stream()
+                .filter(lotto -> lotto.checkMatching(winningNumbers) == prize.getMatching())
+                .count();
+        return count.intValue();
     }
 }

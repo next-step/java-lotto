@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.Number;
+
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
@@ -18,12 +20,13 @@ public class Input {
         return purchaseAmount;
     }
 
-    public static List<Integer> inputWinningNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요");
+    public static List<Number> inputWinningNumbers() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         SCANNER.nextLine();
         return Arrays.asList(SCANNER.nextLine().split(","))
                 .stream()
                 .map(Integer::parseInt)
+                .map(integer -> new Number(integer))
                 .collect(Collectors.toList());
     }
 

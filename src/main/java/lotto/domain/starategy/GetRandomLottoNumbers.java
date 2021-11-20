@@ -1,5 +1,7 @@
 package lotto.domain.starategy;
 
+import lotto.domain.Number;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,9 +11,9 @@ import static lotto.domain.Lotto.SIZE;
 
 public class GetRandomLottoNumbers implements GetLottoNumbersStrategy {
     @Override
-    public List<Integer> getLotto() {
+    public List<Number> getLotto() {
         Collections.shuffle(BOUND_NUMBERS);
-        List<Integer> lottoNumbers = new ArrayList<>(BOUND_NUMBERS.subList(0, SIZE));
+        List<Number> lottoNumbers = new ArrayList<Number>(BOUND_NUMBERS.subList(0, SIZE));
         return lottoNumbers;
     }
 }

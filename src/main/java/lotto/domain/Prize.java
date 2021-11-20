@@ -3,18 +3,47 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.List;
 
-public class Prize {
+public enum Prize {
+    SEVENTH(0, 0),
+    SIXTH(1, 0),
+    FIFTH(2, 0),
+    FOURTH(3, 5_000),
+    THIRD(4, 50_000),
+    SECOND(5, 1_500_000),
+    BONUS_SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000);
 
-    private Prize() {
+
+    private final int matching;
+    private final int prize;
+
+    Prize(Integer matching, Integer prize) {
+        this.matching = matching;
+        this.prize = prize;
     }
 
-    public static List<Integer> prizeList = Arrays.asList(0, 0, 0, 5_000, 50_000, 1_500_000, 2_000_000_000);
+    public int getPrize() {
+        return prize;
+    }
 
-    public static double calculatorYield(List<Integer> matchingList, Integer purchaseAmount) {
-        double resultPrize = 0L;
-        for (int i = 0; i < matchingList.size(); i++) {
-            resultPrize += matchingList.get(i) * prizeList.get(i);
+    public int getMatching() {
+        return matching;
+    }
+
+    public static Prize findPrize(Lotto lotto, List<Number> winningNumbers, Integer bonus) {
+        Prize prize = Arrays.asList(values()).stream()
+                .filter(prizeEnum -> prizeEnum.matching == lotto.checkMatching(winningNumbers))
+                .findAny().get();
+        if (prize.matching == 5 && checkBonus(lotto.getLottoNumbers(), bonus)) {
+            return Prize.BONUS_SECOND;
         }
-        return (resultPrize / new Double(purchaseAmount));
+        if (prize.matching == 5 && !checkBonus(lotto.getLottoNumbers(), bonus)) {
+            return Prize.SECOND;
+        }
+        return prize;
+    }
+
+    public static Boolean checkBonus(List<Number> lottoNumbers, Integer bonus) {
+        return lottoNumbers.contains(bonus);
     }
 }
