@@ -3,9 +3,7 @@ package lotto.domain;
 import lotto.vo.LottoNumber;
 import lotto.vo.LottoRule;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -23,13 +21,26 @@ public class Lotto {
         if (lottoNumberList == null || lottoNumberList.size() != LottoRule.LOTTO_COUNT.getValue()) {
             throw new IllegalArgumentException(RANGE_EXCEPTION_MESSAGE);
         }
-        Collections.sort(lottoNumberList);
-        return new Lotto(lottoNumberList);
+
+        List<LottoNumber> copy = new ArrayList<>(lottoNumberList);
+
+        Collections.sort(copy);
+        return new Lotto(copy);
+    }
+
+
+    public static Lotto create(String lottoInput) {
+        return create(
+                Arrays.stream(lottoInput.split(","))
+                        .map(Integer::parseInt)
+                        .map(LottoNumber::create)
+                        .collect(Collectors.toList())
+        );
     }
 
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers.stream()
-                .map(lottoNumber -> LottoNumber.getCachedLottoNumber(lottoNumber.getValue()))
+                .map(lottoNumber -> LottoNumber.create(lottoNumber.getValue()))
                 .collect(Collectors.toList());
     }
 
@@ -49,6 +60,10 @@ public class Lotto {
         }
         Lotto lotto = (Lotto) o;
         return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    public boolean containLottoNumber(LottoNumber bonus) {
+        return lottoNumbers.contains(bonus);
     }
 
     @Override

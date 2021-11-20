@@ -16,7 +16,7 @@ public class RandomLottoNumberGenerateStrategy implements NumberGenerateStrategy
                 .collect(Collectors.toList());
         Collections.shuffle(numberList);
         return numberList.stream()
-                .map(LottoNumber::getCachedLottoNumber)
+                .map(LottoNumber::create)
                 .limit(LottoRule.LOTTO_COUNT.getValue())
                 .collect(Collectors.toList());
     }
