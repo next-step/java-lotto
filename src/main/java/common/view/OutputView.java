@@ -1,11 +1,10 @@
 package common.view;
 
 import common.model.Number;
-import lotto.model.Lotto;
-import lotto.model.LottoNumber;
-import lotto.model.LottoNumbers;
+import lotto.model.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -52,5 +51,25 @@ public class OutputView {
         for (LottoNumbers lottoNumbers : lotto.getLotto()) {
             print(lottoNumbers.getLottoNumbers());
         }
+    }
+
+    public static void print(LottoStats lottoStats) {
+        print("당첨 통계");
+        print("-------------");
+        Map<LottoRank, Number> lottoRankNumberMap = lottoStats.getLottoRankNumberMap();
+        float revenue = 0;
+
+        //일치여부 확인
+        for (LottoRank rank : LottoRank.valuesWithoutMiss()) {
+            Number count = lottoRankNumberMap.getOrDefault(rank, new Number());
+            revenue += rank.getAmount() * count.getNumber();
+            print(String.valueOf(rank.getMatchCount()), "개 일치 (", String.valueOf(rank.getAmount()), "원)- ",
+                    count.toString(), "개");
+        }
+
+        //총 수익률
+        float rateOfRevenue = lottoStats.calculateRateOfRevenue(revenue);
+        print("총 수익률은 ", String.valueOf(rateOfRevenue), "입니다.");
+
     }
 }

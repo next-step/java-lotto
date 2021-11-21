@@ -64,4 +64,9 @@ public class Number {
     public int getNumber() {
         return number;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
 }
