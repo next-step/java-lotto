@@ -9,4 +9,10 @@ public class Lotto {
     public Lotto(List<Number> pickedNumbers) {
         this.pickedNumbers = pickedNumbers;
     }
+
+    public long match(List<Number> winningNumber) {
+        return winningNumber.stream()
+                            .filter(pickedNumbers::contains)
+                            .count();
+    }
 }
