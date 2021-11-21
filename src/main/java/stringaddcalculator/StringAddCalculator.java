@@ -24,11 +24,22 @@ public final class StringAddCalculator {
         if (m.find()) {
             String customDelimiter = m.group(1);
             String[] numbers = m.group(2).split(customDelimiter);
+            validatePositiveOrThrow(numbers);
             return new Number(sum(numbers));
         }
 
         String[] numbers = COMPILE.split(expression);
+        validatePositiveOrThrow(numbers);
         return new Number(sum(numbers));
+    }
+
+    private static void validatePositiveOrThrow(String[] numbers) {
+        boolean isExistNegative = Arrays.stream(numbers)
+                                        .map(Integer::parseInt)
+                                        .anyMatch(number -> number < 0);
+        if (isExistNegative) {
+            throw new RuntimeException("expression's values must be positive");
+        }
     }
 
     private static int sum(String[] numbers) {
