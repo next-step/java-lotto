@@ -40,12 +40,14 @@ public class InputNumberTest {
     @ParameterizedTest(name = "[{argumentsWithNames}] 음수 또는 잘못된 값이 들어간 경우, IllegalArgumentException이 반환된다.")
     @ValueSource(strings = {"1,2:-3", "=,1,2:3", "-1:-5/3"})
     void invalidExceptionByInputNumberTest(String input) {
-        assertThatIllegalArgumentException().isThrownBy(() -> InputNumber.create(input, new StringSplitter()));
+        assertThatIllegalArgumentException().isThrownBy(
+            () -> InputNumber.create(input, new StringSplitter()));
     }
 
-    @ParameterizedTest(name = "[{argumentsWithNames}] ")
+    @ParameterizedTest(name = "[{argumentsWithNames}] //(.)\\n 형태를 가진 (.) 구분자에 포함되며, 더해지는지 확인한다.")
     @ValueSource(strings = "//;\n1;2;3")
     void customRegexTest(String input) {
-        assertThat(InputNumber.create(input, new StringSplitter())).isEqualTo(new InputNumber(Arrays.asList(1, 2, 3)));
+        assertThat(InputNumber.create(input, new StringSplitter())).isEqualTo(
+            new InputNumber(Arrays.asList(1, 2, 3)));
     }
 }
