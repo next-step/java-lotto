@@ -9,13 +9,12 @@ import java.util.stream.IntStream;
 
 import static lotto.domain.LottoNumbers.LOTTO_NUMBERS;
 
-public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
+public class RandomLottoNumbersGenerator extends AbstractNumberGenerator {
 
-    @Override
     public List<LottoNumber> generate() {
         Collections.shuffle(LOTTO_NUMBERS);
 
-        return IntStream.range(0, 6)
+        return IntStream.range(0, LOTTO_NUMBERS_COUNT)
                 .mapToObj(LOTTO_NUMBERS::get)
                 .sorted()
                 .collect(Collectors.toList());

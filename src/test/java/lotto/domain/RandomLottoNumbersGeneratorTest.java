@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.numbergenerator.LottoNumbersGenerator;
+import lotto.domain.numbergenerator.AbstractNumberGenerator;
 import lotto.domain.numbergenerator.RandomLottoNumbersGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class RandomLottoNumbersGeneratorTest {
 
-    private LottoNumbersGenerator generator;
+    private AbstractNumberGenerator generator;
 
     @BeforeEach
     void setUp() {

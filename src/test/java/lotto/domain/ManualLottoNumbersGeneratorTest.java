@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.numbergenerator.LottoNumbersGenerator;
+import lotto.domain.numbergenerator.AbstractNumberGenerator;
 import lotto.domain.numbergenerator.ManualLottoNumbersGenerator;
 import lotto.exception.LottoNumberException;
 import lotto.exception.LottoNumbersCountException;
@@ -21,7 +21,7 @@ class ManualLottoNumbersGeneratorTest {
     @Test
     @DisplayName("입력한 문자열에 해당하는 로또번호가 생성 된다.")
     void manualLottoGenerateTest() {
-        LottoNumbersGenerator manualLottoNumbersGenerator = ManualLottoNumbersGenerator.from(new String[] {"1", "2", "3", "4", "5", "6"});
+        AbstractNumberGenerator manualLottoNumbersGenerator = ManualLottoNumbersGenerator.from(new String[] {"1", "2", "3", "4", "5", "6"});
         List<LottoNumber> generate = manualLottoNumbersGenerator.generate();
 
         assertThat(generate.size()).isEqualTo(6);
