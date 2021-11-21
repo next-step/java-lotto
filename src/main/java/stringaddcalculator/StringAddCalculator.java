@@ -1,7 +1,5 @@
 package stringaddcalculator;
 
-import java.util.List;
-
 public final class StringAddCalculator {
 
     private static final Number ZERO = Number.init();
@@ -15,13 +13,7 @@ public final class StringAddCalculator {
             return ZERO;
         }
 
-        List<Number> numbers = expression.numbers();
-        return new Number(sum(numbers));
-    }
-
-    private static int sum(List<Number> numbers) {
-        return numbers.stream()
-                      .mapToInt(Number::getValue)
-                      .sum();
+        Numbers numbers = expression.numbers();
+        return new Number(numbers.sum());
     }
 }

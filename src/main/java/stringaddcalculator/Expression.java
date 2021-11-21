@@ -1,7 +1,6 @@
 package stringaddcalculator;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -21,7 +20,7 @@ public class Expression {
         return expresion == null || expresion.isEmpty();
     }
 
-    public List<Number> numbers() {
+    public Numbers numbers() {
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(expresion);
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
@@ -31,9 +30,9 @@ public class Expression {
         return makeNumbers(DEFUALT_DELIMITER.split(expresion));
     }
 
-    private List<Number> makeNumbers(String[] stringNumbers) {
-        return Arrays.stream(stringNumbers)
-                     .map(Number::new)
-                     .collect(Collectors.toList());
+    private Numbers makeNumbers(String[] stringNumbers) {
+        return new Numbers(Arrays.stream(stringNumbers)
+                                 .map(Number::new)
+                                 .collect(Collectors.toList()));
     }
 }

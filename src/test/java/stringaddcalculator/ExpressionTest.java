@@ -3,7 +3,6 @@ package stringaddcalculator;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
@@ -25,13 +24,13 @@ public class ExpressionTest {
     @DisplayName("expression가 주어졌을 때 정수 list만 뽑아내는 지 검증")
     @ParameterizedTest
     @MethodSource("numbersParameter")
-    void numbersTest(String input, List<Number> numbers) {
+    void numbersTest(String input, Numbers numbers) {
         Expression expression = new Expression(input);
         assertThat(expression.numbers()).isEqualTo(numbers);
     }
 
     private static Stream<Arguments> numbersParameter() {
-        List<Number> numbers = Arrays.asList(new Number(1), new Number(2), new Number(3));
+        Numbers numbers = new Numbers(Arrays.asList(new Number(1), new Number(2), new Number(3)));
         return Stream.of(Arguments.of("//'\n1'2'3", numbers),
                          Arguments.of("//;\n1;2;3", numbers),
                          Arguments.of("1:2:3", numbers),
