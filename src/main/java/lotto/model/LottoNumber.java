@@ -31,7 +31,11 @@ public class LottoNumber {
     }
 
     private int invalid(String input) throws IllegalArgumentException {
-        return invalid(Integer.parseInt(input));
+        try {
+            return invalid(Integer.parseInt(input));
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("로또 번호에는 1~45 사이의 숫자만 가능합니다.");
+        }
     }
 
     private boolean rangeCheck(int number) {

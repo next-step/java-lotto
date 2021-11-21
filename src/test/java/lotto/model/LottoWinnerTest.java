@@ -5,11 +5,14 @@ import common.view.OutputView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class LottoWinnerTest {
     LottoNumbers lottoNumbers;
@@ -22,11 +25,7 @@ class LottoWinnerTest {
             temps.add(new LottoNumber(7 * i + 3));
         }
         lottoNumbers = new LottoNumbers(temps);
-
         winnerNumbers = new LottoWinner("3, 10, 17, 24, 31, 45");
-
-        OutputView.print(lottoNumbers.getLottoNumbers());
-        OutputView.print(winnerNumbers.getWinnerNumbers());
     }
 
     @Test
@@ -53,8 +52,21 @@ class LottoWinnerTest {
     @Test
     @DisplayName("문자열 변환 테스트")
     void convert() {
-        LottoWinner winner = new LottoWinner("1, 2, 3, 4, 5");
+        LottoWinner winner = new LottoWinner("1, 2, 3, 4, 5, 6");
         assertThat(winner.getWinnerNumbers())
                 .contains(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1, 2, 3, 4, 5", "1, 2, 3, 4, 5, 6, 7"})
+    @DisplayName("6개 외의 숫자를 입력시 IllegalArgumentException 발생")
+    void splitValidation(String input) {
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoWinner(input));
+    }
+
+    @Test
+    @DisplayName("숫자가 아닌 문자를 입력시 IllegalArgumentException 발생")
+    void convertValidation() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoWinner("q, w, e, r, t, y"));
     }
 }

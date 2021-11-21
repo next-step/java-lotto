@@ -15,10 +15,17 @@ public class LottoWinner {
     }
 
     private List<LottoNumber> convert(String numbers) {
-        return Arrays.stream(numbers.split(", "))
+        String[] splitNumbers = numbers.split(", ");
+
+        if(splitNumbers.length != 6){
+            throw new IllegalArgumentException("당첨 번호가 6개가 아닙니다.");
+        }
+
+        return Arrays.stream(splitNumbers)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
+
 
     public void match(LottoNumbers lottoNumbers) {
         Number matchCount = new Number();
