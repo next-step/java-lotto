@@ -9,8 +9,18 @@ public class LottoTickets {
 
     private final List<LottoTicket> lottoTickets;
 
+    public LottoTickets() {
+        this.lottoTickets = new ArrayList<>();
+    }
+
     private LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
+    }
+
+    public LottoTickets add(List<Integer> numbers) {
+        List<LottoTicket> tickets = new ArrayList<>(lottoTickets);
+        tickets.add(LottoTicket.from(numbers));
+        return new LottoTickets(tickets);
     }
 
     public static LottoTickets from(Integer size) {
