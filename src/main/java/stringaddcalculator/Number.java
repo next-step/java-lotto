@@ -10,6 +10,10 @@ public class Number {
         value = input;
     }
 
+    public static Number init() {
+        return new Number(0);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

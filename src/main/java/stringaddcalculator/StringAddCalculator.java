@@ -6,18 +6,15 @@ import java.util.regex.Pattern;
 
 public final class StringAddCalculator {
 
+    private static final Number ZERO = Number.init();
     private static final Pattern COMPILE = Pattern.compile(",|:");
 
     private StringAddCalculator() {
     }
 
     public static Number splitAndSum(String expression) {
-        if (expression == null) {
-            return new Number(0);
-        }
-
-        if (expression.isEmpty()) {
-            return new Number(0);
+        if (expression == null || expression.isEmpty()) {
+            return ZERO;
         }
 
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(expression);
