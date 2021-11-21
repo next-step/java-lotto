@@ -15,6 +15,9 @@ public class Output {
     private static final String DELIMITER = ", ";
     private static final String PREFIX = "[";
     private static final String SUFFIX = "]";
+    private static final String WINNINGSTATISTICS = "\n당첨 통계";
+    private static final String LINE = "---------";
+    private static final String RESULT_INFO = "\"%s개 일치 (%s원)- %s개\\n\"";
 
 
     public static void printLottosCount(Lottos lottos) {
@@ -45,12 +48,12 @@ public class Output {
     }
 
     public static void printWinningStatistics(WinningStatistics statistics) {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+        System.out.println(WINNINGSTATISTICS);
+        System.out.println(LINE);
         for (Rank rank : Rank.values()) {
             int count = statistics.rankCount(rank);
             if (rank.matchCount() > 2) {
-                System.out.printf("%s개 일치 (%s원)- %s개\n", rank.matchCount(), rank.price(), count);
+                System.out.printf(RESULT_INFO, rank.matchCount(), rank.price(), count);
             }
         }
     }
