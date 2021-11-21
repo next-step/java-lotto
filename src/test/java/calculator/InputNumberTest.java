@@ -16,14 +16,14 @@ public class InputNumberTest {
     @ValueSource(strings = "1,2:3")
     @ParameterizedTest(name = "{argumentsWithNames}, :를 기준으로 문자열이 잘 구분되는지 확인한다.")
     void splitTest(String input) {
-        InputNumber inputNumber = InputNumber.create(input);
+        InputNumber inputNumber = InputNumber.create(input, new StringSplitter());
         assertThat(inputNumber).isEqualTo(new InputNumber(Arrays.asList(1, 2, 3)));
     }
 
     @ParameterizedTest(name = "[{argumentsWithNames}] 값이 오면, 빈 List 를 반환한다.")
     @NullAndEmptySource
     void spiltEmptyTest(String input) {
-        InputNumber inputNumber = InputNumber.create(input);
+        InputNumber inputNumber = InputNumber.create(input, new StringSplitter());
         assertThat(inputNumber).isEqualTo(new InputNumber());
     }
 
@@ -32,7 +32,7 @@ public class InputNumberTest {
     @SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
     void splitOneStringTest() {
         String input = "1";
-        InputNumber inputNumber = InputNumber.create(input);
+        InputNumber inputNumber = InputNumber.create(input, new StringSplitter());
 
         assertThat(inputNumber).isEqualTo(new InputNumber(Arrays.asList(1)));
     }
@@ -40,7 +40,12 @@ public class InputNumberTest {
     @ParameterizedTest(name = "[{argumentsWithNames}] 음수 또는 잘못된 값이 들어간 경우, IllegalArgumentException이 반환된다.")
     @ValueSource(strings = {"1,2:-3", "=,1,2:3", "-1:-5/3"})
     void invalidExceptionByInputNumberTest(String input) {
-        assertThatIllegalArgumentException().isThrownBy(() -> InputNumber.create(input));
+        assertThatIllegalArgumentException().isThrownBy(() -> InputNumber.create(input, new StringSplitter()));
     }
 
+    @ParameterizedTest(name = "[{argumentsWithNames}] ")
+    @ValueSource(strings = "//;\n1;2;3")
+    void customRegexTest(String input) {
+        assertThat(InputNumber.create(input, new StringSplitter())).isEqualTo(new InputNumber(Arrays.asList(1, 2, 3)));
+    }
 }

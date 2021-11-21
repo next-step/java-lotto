@@ -19,20 +19,17 @@ public class InputNumber {
         this.numbers = numbers;
     }
 
-    public static InputNumber create(String input) {
-
+    public static InputNumber create(String input, Splitter splitter) {
         if (StringUtils.isNullOrEmpty(input)) {
             return new InputNumber();
         }
 
-        String[] splitNums = input.split("[,:]");
-
-        List<Integer> numbers = Arrays.stream(splitNums)
-            .map(StringUtils::parsePositiveNumber)
-            .collect(Collectors.toList());
-
-        return new InputNumber(numbers);
+        return new InputNumber(
+            Arrays.stream(splitter.split(input))
+                .map(StringUtils::parsePositiveNumber)
+                .collect(Collectors.toList()));
     }
+
 
     @Override
     public boolean equals(Object o) {
