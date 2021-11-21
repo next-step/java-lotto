@@ -3,11 +3,17 @@ package lotto.model;
 import lotto.generator.LottoNumberGenerator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
 
     private final List<LottoNumbers> lotto;
+
+    //TEST
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.lotto = Collections.singletonList(lottoNumbers);
+    }
 
     public Lotto(int count) {
         this.lotto = ticket(count);

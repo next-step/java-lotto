@@ -21,4 +21,10 @@ public class LottoStore {
         return lotto;
     }
 
+    public static void match(Lotto lotto, LottoWinner winner){
+        for (LottoNumbers lottoNumbers : lotto.getLotto()) {
+            winner.match(lottoNumbers);
+        }
+    }
+
 }
