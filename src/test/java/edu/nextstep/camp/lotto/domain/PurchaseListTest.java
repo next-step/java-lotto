@@ -12,7 +12,7 @@ public class PurchaseListTest {
     @ParameterizedTest(name = "create: {arguments}")
     @CsvSource(value = {"1000,1", "2000,2"}, delimiter = ',')
     public void create(int budget, int expected) {
-        assertThat(PurchaseList.purchase(budget).amount())
+        assertThat(PurchaseList.purchase(budget, AutoLottoGenerator.getInstance()).amount())
                 .isEqualTo(expected);
     }
 
@@ -20,7 +20,7 @@ public class PurchaseListTest {
     @ValueSource(ints = {-1000, 0, 999})
     public void createFailedByNotEnoughMoney(int budget) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> PurchaseList.purchase(budget))
+                .isThrownBy(() -> PurchaseList.purchase(budget, AutoLottoGenerator.getInstance()))
                 .withMessageContaining("budget must be at least 1000");
     }
 
@@ -29,7 +29,7 @@ public class PurchaseListTest {
     @ValueSource(ints = {1999, 1001})
     public void createFailedByChaneExist(int budget) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> PurchaseList.purchase(budget))
+                .isThrownBy(() -> PurchaseList.purchase(budget, AutoLottoGenerator.getInstance()))
                 .withMessageContaining("budget must be multiple of 1000");
     }
 }
