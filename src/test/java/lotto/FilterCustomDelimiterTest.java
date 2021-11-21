@@ -11,15 +11,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class FilterCustomDelimiterTest {
     private final FilterCustomDelimiter dut = new FilterCustomDelimiter();
     @ParameterizedTest
-    @MethodSource("RawStringToDelimiter")
+    @MethodSource("rawFormulaToDelimiter")
     void filter(String rawFormula, String expectedDelimeter) {
         assertThat(dut.filter(rawFormula)).isEqualTo(expectedDelimeter);
     }
 
-    static Stream<Arguments> RawStringToDelimiter() {
+    static Stream<Arguments> rawFormulaToDelimiter() {
         return Stream.of(
                 Arguments.of("//;\n1;2;3", ";"),
-                Arguments.of("1;2;3", null)
+                Arguments.of("1,2,3", null)
         );
     }
 }
