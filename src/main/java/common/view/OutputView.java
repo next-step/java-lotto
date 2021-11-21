@@ -56,20 +56,17 @@ public class OutputView {
     public static void print(LottoStats lottoStats) {
         print("당첨 통계");
         print("-------------");
-        Map<LottoRank, Number> lottoRankNumberMap = lottoStats.getLottoRankNumberMap();
-        float revenue = 0;
 
         //일치여부 확인
+        Map<LottoRank, Number> lottoRankNumberMap = lottoStats.getLottoRankNumberMap();
         for (LottoRank rank : LottoRank.valuesWithoutMiss()) {
             Number count = lottoRankNumberMap.getOrDefault(rank, new Number());
-            revenue += rank.getAmount() * count.getNumber();
             print(String.valueOf(rank.getMatchCount()), "개 일치 (", String.valueOf(rank.getAmount()), "원)- ",
                     count.toString(), "개");
         }
 
         //총 수익률
-        float rateOfRevenue = lottoStats.calculateRateOfRevenue(revenue);
-        print("총 수익률은 ", String.valueOf(rateOfRevenue), "입니다.");
+        print("총 수익률은 ", String.valueOf(lottoStats.getRateOfRevenue()), "입니다.");
 
     }
 }
