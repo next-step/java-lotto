@@ -3,10 +3,7 @@ package lotto.model;
 import common.model.Number;
 import lotto.generator.NumberGenerator;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class LottoNumbers {
 
@@ -16,11 +13,13 @@ public class LottoNumbers {
     public LottoNumbers(NumberGenerator generator) {
         this.lottoNumbers = autoCreate(generator);
         this.lottoRank = LottoRank.MISS;
+        sort();
     }
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
         this.lottoRank = LottoRank.MISS;
+        sort();
     }
 
     private List<LottoNumber> autoCreate(NumberGenerator generator) {
@@ -29,6 +28,10 @@ public class LottoNumbers {
             lottoNumbers.add(new LottoNumber(generator));
         }
         return new ArrayList<>(lottoNumbers);
+    }
+
+    private void sort() {
+        lottoNumbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
     }
 
     public void matchRank(Number matchCount) {
