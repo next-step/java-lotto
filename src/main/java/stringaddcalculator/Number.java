@@ -7,11 +7,26 @@ public class Number {
     private final int value;
 
     public Number(int input) {
+        validateInputOrThrow(input);
         value = input;
+    }
+
+    private void validateInputOrThrow(int input) {
+        if (input < 0) {
+            throw new RuntimeException("input number must be positive");
+        }
+    }
+
+    public Number(String input) {
+        this(Integer.parseInt(input));
     }
 
     public static Number init() {
         return new Number(0);
+    }
+
+    public int getValue() {
+        return value;
     }
 
     @Override

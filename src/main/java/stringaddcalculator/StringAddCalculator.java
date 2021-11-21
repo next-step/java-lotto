@@ -1,13 +1,10 @@
 package stringaddcalculator;
 
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.List;
 
 public final class StringAddCalculator {
 
     private static final Number ZERO = Number.init();
-    private static final Pattern COMPILE = Pattern.compile(",|:");
 
     private StringAddCalculator() {
     }
@@ -18,32 +15,13 @@ public final class StringAddCalculator {
             return ZERO;
         }
 
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
-        if (m.find()) {
-            String customDelimiter = m.group(1);
-            String[] numbers = m.group(2).split(customDelimiter);
-            validatePositiveOrThrow(numbers);
-            return new Number(sum(numbers));
-        }
-
-        String[] numbers = COMPILE.split(input);
-        validatePositiveOrThrow(numbers);
+        List<Number> numbers = expression.numbers();
         return new Number(sum(numbers));
     }
 
-    private static void validatePositiveOrThrow(String[] numbers) {
-        boolean isExistNegative = Arrays.stream(numbers)
-                                        .map(Integer::parseInt)
-                                        .anyMatch(number -> number < 0);
-        if (isExistNegative) {
-            throw new RuntimeException("expression's values must be positive");
-        }
-    }
-
-    private static int sum(String[] numbers) {
-        return Arrays.stream(numbers)
-                     .map(Integer::parseInt)
-                     .mapToInt(Integer::intValue)
-                     .sum();
+    private static int sum(List<Number> numbers) {
+        return numbers.stream()
+                      .mapToInt(Number::getValue)
+                      .sum();
     }
 }
