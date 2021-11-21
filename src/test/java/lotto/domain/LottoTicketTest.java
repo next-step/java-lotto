@@ -12,8 +12,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
-import static java.util.Collections.nCopies;
+import static java.util.Collections.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTicketTest {
@@ -42,19 +41,21 @@ class LottoTicketTest {
     @Test
     void rank() {
         //given
-        LottoNumbers winningNumbers = LottoNumbers.of(asList(1, 2, 3, 4, 5, 6));
-
         int bonusNumber = 40;
         LottoNumbers fiveMatchedAndBonus = LottoNumbers.of(asList(1, 2, 3, 4, 5, bonusNumber));
         LottoNumbers sixMatched = LottoNumbers.of(asList(1, 2, 3, 4, 5, 6));
         LottoNumbers fiveMatched = LottoNumbers.of(asList(1, 2, 3, 4, 5, 7));
         LottoNumbers fiveMatched2 = LottoNumbers.of(asList(1, 2, 3, 4, 5, 10));
         LottoNumbers threeMatched = LottoNumbers.of(asList(1, 2, 3, 9, 8, 7));
+        List<LottoNumbers> autoLottoLines = asList(sixMatched, fiveMatched, fiveMatched2, threeMatched, fiveMatchedAndBonus);
+
         LottoNumbers twoMatched = LottoNumbers.of(asList(1, 2, 10, 9, 8, 7));
+        List<LottoNumbers> manualLottoLines = singletonList(twoMatched);
+
+        LottoTicket lottoTicket = new LottoTicket(autoLottoLines, manualLottoLines);
 
         //when
-        // TODO: [2021/11/21 양동혁] 수동의 통계도 잘구하도록 리팩토링
-        LottoTicket lottoTicket = new LottoTicket(asList(sixMatched, fiveMatched, fiveMatched2, threeMatched, fiveMatchedAndBonus, twoMatched), emptyList());
+        LottoNumbers winningNumbers = LottoNumbers.of(asList(1, 2, 3, 4, 5, 6));
         Statistics statistics = lottoTicket.rank(winningNumbers, new LottoNumber(bonusNumber));
 
         //then
@@ -65,7 +66,8 @@ class LottoTicketTest {
         expectedGrades.put(Grade.THIRD, 0L);
         expectedGrades.put(Grade.FOURTH, 1L);
 
-        assertThat(statistics).isEqualTo(new Statistics(expectedGrades, new Dollars(6000)));
+        Statistics expected = new Statistics(expectedGrades, new Dollars(6000));
+        assertThat(statistics).isEqualTo(expected);
     }
 
     private ShuffleStrategy noShuffleStrategy() {

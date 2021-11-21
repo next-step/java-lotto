@@ -1,11 +1,12 @@
 package lotto.domain;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.Collections.unmodifiableList;
 import static lotto.utils.Validator.checkNotNull;
 
 public class LottoTicket {
@@ -34,18 +35,21 @@ public class LottoTicket {
 
     public Statistics rank(LottoNumbers lastWinningNumbers, LottoNumber bonusNumber) {
         checkNotNull(lastWinningNumbers);
-        List<Grade> grades = lottoLines.stream()
+        List<Grade> grades = allLottoLines().stream()
                 .map(lottoLine -> lottoLine.rank(lastWinningNumbers, bonusNumber))
                 .collect(Collectors.toList());
-        return new Statistics(Grade.mapOf(grades), lineSizeToDollars());
+        return new Statistics(Grade.mapOf(grades), allLineSizeToDollars());
     }
 
-    private Dollars lineSizeToDollars() {
-        return new Dollars(lottoLines.size() * Dollars.DOLLAR_UNIT);
+    public List<LottoNumbers> allLottoLines() {
+        List<LottoNumbers> allLottoLines = new ArrayList<>();
+        allLottoLines.addAll(manualLottoLines);
+        allLottoLines.addAll(lottoLines);
+        return unmodifiableList(allLottoLines);
     }
 
-    public List<LottoNumbers> getLottoLines() {
-        return Collections.unmodifiableList(lottoLines);
+    private Dollars allLineSizeToDollars() {
+        return new Dollars(allLottoLines().size() * Dollars.DOLLAR_UNIT);
     }
 
     @Override

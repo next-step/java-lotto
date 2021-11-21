@@ -14,7 +14,7 @@ public class OutputView {
     }
 
     public static void showTicket(LottoTicket lottoTicket) {
-        List<LottoNumbers> lottoLines = lottoTicket.getLottoLines();
+        List<LottoNumbers> lottoLines = lottoTicket.allLottoLines();
         for (LottoNumbers lottoLine : lottoLines) {
             showLine(lottoLine);
         }

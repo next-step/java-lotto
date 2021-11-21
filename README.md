@@ -4,7 +4,7 @@
 - [x] LottoTicket
   - [x] publish메소드 파라미터 Dollars대신 PublishDetails 받도록 변경
   - [x] 수동번호, 자동번호 필드 분리
-  - [ ] rank 메소드 수동번호도 반영하도록 변경
+  - [x] rank 메소드 수동번호도 반영하도록 변경
 
 - [ ] OutputView 구현
   - 수동, 자동번호 개수 출력 
