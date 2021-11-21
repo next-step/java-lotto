@@ -12,12 +12,13 @@ public class Output {
     private static final String PURCHASE_MESSAGE = "%s 개를 구매했습니다.\n";
     private static final String LOTTO_NUMBER_ERROR_MESSAGE = "로또 번호를 잘못 입력 했습니다.";
     private static final String WINNING_COUNT_ERROR_MESSAGE = "당첨 번호 개수를 잘못 입력 했습니다.";
+    private static final String MONEY_MINUNUM_ERROR_MESSAGE = "최소 1000원 이상 입력하세요.";
     private static final String DELIMITER = ", ";
     private static final String PREFIX = "[";
     private static final String SUFFIX = "]";
     private static final String WINNINGSTATISTICS = "\n당첨 통계";
     private static final String LINE = "---------";
-    private static final String RESULT_INFO = "\"%s개 일치 (%s원)- %s개\\n\"";
+    private static final String RESULT_INFO = "%s개 일치 (%s원)- %s개 \n";
 
 
     public static void printLottosCount(Lottos lottos) {
@@ -56,5 +57,9 @@ public class Output {
                 System.out.printf(RESULT_INFO, rank.matchCount(), rank.price(), count);
             }
         }
+    }
+
+    public static void printMoneyError() {
+        System.out.println(MONEY_MINUNUM_ERROR_MESSAGE);
     }
 }
