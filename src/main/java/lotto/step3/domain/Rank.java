@@ -19,14 +19,6 @@ public enum Rank {
         this.prizeMoney = prizeMoney;
     }
 
-    public int getCountOfMatch() {
-        return countOfMatch;
-    }
-
-    public int getPrizeMoney() {
-        return prizeMoney;
-    }
-
     public static Rank valueOf(int countOfMatch, boolean matchBonusBall) {
         if (matchBonusBall && isFiveCountOfMatch(countOfMatch)) {
             return SECOND;
@@ -38,6 +30,14 @@ public enum Rank {
                 .filter(rank -> rank.getCountOfMatch() == countOfMatch)
                 .findFirst()
                 .orElse(MISS);
+    }
+
+    public int getCountOfMatch() {
+        return countOfMatch;
+    }
+
+    public int getPrizeMoney() {
+        return prizeMoney;
     }
 
     private static boolean isFiveCountOfMatch(int countOfMatch) {

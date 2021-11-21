@@ -1,9 +1,6 @@
 package lotto.step3.controller;
 
-import lotto.step3.domain.Lotteries;
-import lotto.step3.domain.Lotto;
-import lotto.step3.domain.LottoStatistics;
-import lotto.step3.service.LottoService;
+import lotto.step3.domain.*;
 
 import java.util.Map;
 
@@ -14,25 +11,20 @@ public class LottoController {
 
     public static void main(String[] args) {
 
-        LottoService service = new LottoService();
-
         int orderPrice = printInputOrderPrice();
-        Lotteries lotteries = service.buyLotteries(orderPrice);
+        LottoStore store = new LottoStore(orderPrice);
+        Lotteries lotteries = store.sellLotteries();
 
         printOrderLottoCount(lotteries);
         printOrderLottoNumber(lotteries);
 
-        Lotto winningNumbers = service.createWinningNumbers(printInputWinningNumbers());
+        WinningLotto winningLotto = new WinningLotto(printInputWinningNumbers(), PrintInputBonusBall());
 
-        LottoStatistics lottoStatistics = service.createLottoStatistics(lotteries, winningNumbers, PrintInputBonusBall());
+        Map<Integer, Integer> prizeWinnersRepository = winningLotto.createRepository(lotteries);
+        int totalSecondPrizeWinner = winningLotto.totalSecondPrizeWinners(lotteries);
 
-        Map<Integer, Integer> repository = service.createRepository(lottoStatistics);
-        boolean isSecondPrizeWinners = service.isSecondPrizeWinners(lottoStatistics);
-        int totalSecondPrizeWinner = service.totalSecondPrizeWinners(lottoStatistics);
-
-        printWinningStatics(repository, isSecondPrizeWinners, totalSecondPrizeWinner);
-
-        printRateOfReturn(service.calculateRateOfProfit(lottoStatistics, orderPrice));
+        printWinningStatics(prizeWinnersRepository, totalSecondPrizeWinner);
+        printRateOfReturn(winningLotto.calculateRateOfProfit(lotteries, orderPrice));
 
     }
 

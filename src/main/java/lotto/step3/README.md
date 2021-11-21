@@ -30,19 +30,38 @@
 
 **- 기능 목록**
 1. domain
-   - Lotto : 로또
-   - Lotteries : 로또 컬렉션
+   - LottoNumber : 로또 넘버 1개
+   - Lotto : 로또 넘버 6개
+   - Lotteries : 로또 여러개 
    - LottoStore : 로또판매점, 로또 생성
       - OrderPrice : 로또 주문 가격
       - OrderCount : 로또 주문 수
    - LottoGenerator : 자동로또번호 생성기
-   - LottoStatistics : 총 수익률 계산
-      - BonusBall : 보너스 볼
+   - WinningLotto : 당첨번호, 보너스볼 1개
    - Rank : 로또 당첨 순위
 2. controller
    - LottoController : 컨트롤러
-3. service
-   - LottoService : 서비스
 3. view
    - InputView : 클라이언트 입력 뷰
    - ResultView : 출력 뷰
+
+**- 피드백 반영**
+1. toString을 비롯해 hashCode, equals 를 재정의해주는건 어떨까요~?
+   - 도메인 클래스 hashCode, equals, toString 재정의
+2. 요 친구도 final로 해주는건 어떨까요~?
+   - final 로 변경
+3. 매개변수로 받은 numbers가 변경되면 의도치않은 버그가 발생할 수도 있을 것 같습니다!
+   - 인스턴스 변수 final 로 변경하여 numbers 가 초기화되고 변경되지 않도록 함
+4. Getter, setter 와 같은 중요도가 낮은 메서드는 하단부에 위치시켜주면 더 읽기 좋을거같습니다.
+   - 하단부에 위치
+5. 반복되는 코드들이 많이 보이는데 줄일 수 있을까요
+   - 중복 코드 제거
+6. 잠깐 사용하는 변수도 의미있게 명명 부탁드립니다
+   - 의미있는 변수명을 사용하자!!
+7. 서비스 레이어를 만든 이유가 있으실까요~?
+   - MVC 서비스 계층을 따라할려고 만들어 보았는데 전부다 위임만 하는 메서드라 서비스 계층 삭제하였습니다.
+8. Rank에 해당하는 개수정도만 가지고 있는건 어떨까요?
+   - LottoStatistics 클래스가 좀 애매한거같아서 삭제하였습니다.   
+9. 요 부분과 winningLotto를 잘 녹여보시면 좋을거같아요!
+   - WinningLotto 클래스에서 당첨번호와 보너스볼을 관리
+   - WinningLotto -> Lotteries 로 메서드 흐름으로 변경

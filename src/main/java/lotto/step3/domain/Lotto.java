@@ -1,68 +1,67 @@
 package lotto.step3.domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Lotto {
 
     public static final int LOTTO_BONUS_COUNT = 5;
-    private static final int LOTTO_SIZE = 6;
 
-    private List<Integer> numbers = new ArrayList<>();
+    private final List<LottoNumber> numbers;
 
-    private Lotto() {}
-
-    public Lotto(List<Integer> numbers) {
-        checkNumbers(numbers);
-        this.numbers = numbers;
+    public Lotto() {
+        this.numbers = LottoGenerator.createLotto();
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public Lotto(List<Integer> numbers) {
+        this.numbers = LottoGenerator.createWinningNumbers(numbers);
     }
 
     public boolean isCountOfMatch(Lotto winningNumbers, int count) {
         return countOfMatch(winningNumbers) == count;
     }
 
-    public boolean isSecondPrizeWinner(Lotto winningNumbers, int bonusBall) {
-        return isLottoBonusCount(winningNumbers) && hasBonusBall(bonusBall);
+    public boolean isSecondPrizeWinner(Lotto winningNumbers, LottoNumber bonusBall) {
+        return countOfMatch(winningNumbers) == LOTTO_BONUS_COUNT && hasBonusBall(bonusBall);
     }
 
-    public int calculatePrizeMoney(Lotto winningNumbers, int bonusBall) {
-        int count = (int) numbers.stream()
-                .filter(number -> winningNumbers.getNumbers().contains(number))
-                .count();
-        return Rank.valueOf(count, isSecondPrizeWinner(winningNumbers,bonusBall)).getPrizeMoney();
+    public int calculatePrizeMoney(Lotto winningNumbers, LottoNumber bonusBall) {
+        return Rank.valueOf(countOfMatch(winningNumbers),
+                isSecondPrizeWinner(winningNumbers, bonusBall)).getPrizeMoney();
     }
 
-    private long countOfMatch(Lotto winningNumbers) {
-        return numbers.stream()
+    public List<LottoNumber> getNumbers() {
+        return numbers;
+    }
+
+    private int countOfMatch(Lotto winningNumbers) {
+        return (int) numbers.stream()
                 .filter(winningNumbers.getNumbers()::contains)
                 .count();
     }
 
-    private boolean isLottoBonusCount(Lotto winningNumbers) {
-        return numbers.stream()
-                .filter(number -> winningNumbers.getNumbers().contains(number))
-                .count() == LOTTO_BONUS_COUNT;
-    }
-
-    private boolean hasBonusBall(int bonusBall) {
+    private boolean hasBonusBall(LottoNumber bonusBall) {
         return numbers.contains(bonusBall);
     }
 
-    private void checkNumbers(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("6자리 입력해주세요");
-        }
-        long count = numbers.stream()
-                .mapToInt(n -> n)
-                .distinct()
-                .count();
-        if (count != LOTTO_SIZE) {
-            throw new IllegalArgumentException("중복 번호는 안됩니다");
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(numbers, lotto.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "numbers=" + numbers +
+                '}';
     }
 
 }

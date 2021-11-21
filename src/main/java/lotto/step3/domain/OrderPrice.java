@@ -15,12 +15,12 @@ public class OrderPrice {
         this.orderPrice = orderPrice;
     }
 
-    public int getOrderPrice() {
-        return orderPrice;
-    }
-
     public OrderCount createOrderCount() {
         return new OrderCount(orderPrice / LOTTO_PRICE);
+    }
+
+    public int getOrderPrice() {
+        return orderPrice;
     }
 
     @Override
@@ -35,4 +35,12 @@ public class OrderPrice {
     public int hashCode() {
         return Objects.hash(orderPrice);
     }
+
+    @Override
+    public String toString() {
+        return "OrderPrice{" +
+                "orderPrice=" + orderPrice +
+                '}';
+    }
+
 }

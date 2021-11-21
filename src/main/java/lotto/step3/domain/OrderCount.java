@@ -30,4 +30,12 @@ public class OrderCount {
     public int hashCode() {
         return Objects.hash(orderCount);
     }
+
+    @Override
+    public String toString() {
+        return "OrderCount{" +
+                "orderCount=" + orderCount +
+                '}';
+    }
+
 }

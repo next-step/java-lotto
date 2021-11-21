@@ -28,14 +28,14 @@ public final class ResultView {
         System.out.println(lotteries.getLotteries().size() + "개를 구매했습니다.");
     }
 
-    public static void printWinningStatics(Map<Integer, Integer> countOfMatch, boolean isMatchBonusBall, int totalSecond) {
+    public static void printWinningStatics(Map<Integer, Integer> countOfMatch, int totalSecond) {
         StringBuilder builder = new StringBuilder();
         builder.append("당첨 통계");
         builder.append("\n");
         builder.append("----------");
         builder.append("\n");
         for (int count = LOTTO_START_COUNT; count <= LOTTO_END_COUNT; count++) {
-            boolean isSecond = isSecondPrizeWinner(count, isMatchBonusBall);
+            boolean isSecond = isSecondPrizeWinner(count, totalSecond);
             Rank rank = Rank.valueOf(count, isSecond);
             builder.append(count);
             builder.append("개 일치(");
@@ -66,8 +66,8 @@ public final class ResultView {
         }
     }
 
-    private static boolean isSecondPrizeWinner(int count, boolean isMatchBonusBall) {
-        return isBonusCount(count) && isMatchBonusBall;
+    private static boolean isSecondPrizeWinner(int count, int totalSecond) {
+        return isBonusCount(count) && totalSecond > 0;
     }
 
     private static boolean isBonusCount(int count) {

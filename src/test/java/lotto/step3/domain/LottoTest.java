@@ -1,7 +1,6 @@
 package lotto.step3.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -10,32 +9,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.toList;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTest {
-
-    @Test
-    @DisplayName("입력된 당첨번호 6자리, 1~45, 중복값 x,  만족 못하면 -> IllegalArgumentException")
-    void checkNumbers() {
-        assertThatThrownBy(() -> new Lotto(Arrays.asList(1,2,3,4,5,6,7)))
-                .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new Lotto(Arrays.asList(1,2,3,4,5)))
-                .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new Lotto(Arrays.asList(1,2,3,5,5,5)))
-                .isInstanceOf(IllegalArgumentException.class);
-        //정상입력
-        assertThatCode(() -> new Lotto(Arrays.asList(1,2,3,4,5,6)))
-                .doesNotThrowAnyException();
-    }
 
     @ParameterizedTest
     @MethodSource("provideWiningNumbers")
     @DisplayName("당첨번호와 비교했을 때, 예상된 매칭수랑 맞는지 확인")
-    void isMatchExpected(Lotto provided, int expected) {
+    void isMatchExpected(Lotto winningNumbers, int expected) {
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 11, 12);
         Lotto lotto = new Lotto(lottoNumbers);
-        assertThat(lotto.isCountOfMatch(provided, expected)).isTrue();
+        assertThat(lotto.isCountOfMatch(winningNumbers, expected)).isTrue();
     }
 
     private static Stream<Arguments> provideWiningNumbers() {
@@ -50,10 +34,10 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("provideWiningNumbers1")
     @DisplayName("당첨번호와 비교했을 때, 5개 매칭 그리고 보너스 볼과 맞는지 확인(2등이냐?)")
-    void isSecondPrizeWinner(Lotto provided, int bonusBall, boolean expected) {
+    void isSecondPrizeWinner(Lotto winningNumbers, int bonusBall, boolean expected) {
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 11, 12);
         Lotto lotto = new Lotto(lottoNumbers);
-        assertThat(lotto.isSecondPrizeWinner(provided, bonusBall)).isEqualTo(expected);
+        assertThat(lotto.isSecondPrizeWinner(winningNumbers, new LottoNumber(bonusBall))).isEqualTo(expected);
     }
 
     private static Stream<Arguments> provideWiningNumbers1() {
@@ -68,10 +52,10 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("provideWiningNumbers2")
     @DisplayName("당첨번호와 비교했을 때, 매칭된 우승상금이랑 맞는가?")
-    void prizeMoney(Lotto provided, int bonusBall, int money) {
+    void prizeMoney(Lotto winningNumbers, int bonusBall, int money) {
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 11, 12);
         Lotto lotto = new Lotto(lottoNumbers);
-        assertThat(lotto.calculatePrizeMoney(provided, bonusBall)).isEqualTo(money);
+        assertThat(lotto.calculatePrizeMoney(winningNumbers, new LottoNumber(bonusBall))).isEqualTo(money);
     }
 
     private static Stream<Arguments> provideWiningNumbers2() {
