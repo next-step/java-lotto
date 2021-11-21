@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Numbers {
 
-  private List<Number> numberList;
+  private final List<Number> numberList;
 
   public Numbers(List<Number> numberList) {
     this.numberList = numberList;

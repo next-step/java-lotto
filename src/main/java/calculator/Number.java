@@ -6,7 +6,7 @@ public class Number {
   private static final int ZERO = 0;
   private static final String NOT_VALID_NUMBER = "유효한 숫자가 아닙니다.";
 
-  private int value;
+  private final int value;
 
   public Number(int value) {
     validNaturalNumber(value);
