@@ -13,8 +13,8 @@ public enum Rank {
     SIXTH(1, 0),
     NOTHING(0, 0);
 
-    int matchCount;
-    int money;
+    private int matchCount;
+    private int money;
 
     Rank(int matchCount, int money) {
         this.matchCount = matchCount;
