@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.List;
 
 public class Lotto extends AbstractLotto {
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    private Lotto(List<LottoNumber> lottoNumbers) {
         super(lottoNumbers);
     }
 
