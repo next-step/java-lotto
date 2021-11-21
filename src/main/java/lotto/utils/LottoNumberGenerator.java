@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import lotto.model.Number;
+
 public final class LottoNumberGenerator {
 
     private static final int FIRST_LOTTO_NUMBER = 1;
@@ -29,6 +31,7 @@ public final class LottoNumberGenerator {
         return allNumbers.stream()
                          .limit(COUNT_TO_PICK)
                          .sorted()
+                         .map(Number::new)
                          .collect(Collectors.toList());
     }
 }
