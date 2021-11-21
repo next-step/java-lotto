@@ -13,21 +13,13 @@ public enum Prize {
     BONUS_SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
-
     private final int matching;
+
     private final int prize;
 
     Prize(Integer matching, Integer prize) {
         this.matching = matching;
         this.prize = prize;
-    }
-
-    public int getPrize() {
-        return prize;
-    }
-
-    public int getMatching() {
-        return matching;
     }
 
     public static Prize findPrize(Lotto lotto, List<Number> winningNumbers, Integer bonus) {
@@ -45,5 +37,13 @@ public enum Prize {
 
     public static Boolean checkBonus(List<Number> lottoNumbers, Integer bonus) {
         return lottoNumbers.contains(bonus);
+    }
+
+    public int getPrize() {
+        return prize;
+    }
+
+    public int getMatching() {
+        return matching;
     }
 }

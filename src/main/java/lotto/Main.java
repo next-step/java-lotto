@@ -12,6 +12,6 @@ public class Main {
         Lottos lottos = new Lottos(purchaseAmount, new GetRandomLottoNumbers());
         Output.viewPurchasedLotto(lottos);
         Integer bonus = Input.inputBonusBall();
-        Output.viewResult(lottos, purchaseAmount,Input.inputWinningNumbers(),bonus);
+        Output.viewResult(lottos, purchaseAmount, Input.inputWinningNumbers(), bonus);
     }
 }

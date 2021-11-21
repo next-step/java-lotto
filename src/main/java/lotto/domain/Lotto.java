@@ -26,10 +26,6 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<Number> getLottoNumbers() {
-        return lottoNumbers;
-    }
-
     private void checkSize(List<Number> lottoNumbers) {
         if (lottoNumbers.size() != SIZE) {
             throw new IllegalArgumentException(SIZE + " 와 길이가 다른 Lotto 는 입력될 수 없습니다.");
@@ -51,5 +47,9 @@ public class Lotto {
                 .filter(number -> winningNumbers.contains(number))
                 .count();
         return count.intValue();
+    }
+
+    public List<Number> getLottoNumbers() {
+        return lottoNumbers;
     }
 }
