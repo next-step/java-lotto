@@ -1,9 +1,7 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.domain.Number;
-import lotto.domain.Prize;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +21,7 @@ public class Output {
         }
     }
 
-    public static void viewResult(Lottos lottos, Integer purchaseAmount, List<Number> winningNumbers, Integer bonus) {
+    public static void viewResult(Lottos lottos, Integer purchaseAmount, WinningNumbers winningNumbers, Number bonus) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         Integer startIndex = 3;

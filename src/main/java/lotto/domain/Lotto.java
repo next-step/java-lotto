@@ -42,11 +42,15 @@ public class Lotto {
         }
     }
 
-    public Integer checkMatching(List<Number> winningNumbers) {
+    public Integer checkMatching(WinningNumbers winningNumbers) {
         Long count = lottoNumbers.stream()
-                .filter(number -> winningNumbers.contains(number))
+                .filter(number -> winningNumbers.checkContainNumber(number))
                 .count();
         return count.intValue();
+    }
+
+    public boolean checkContainNumber(Number number) {
+        return lottoNumbers.contains(number);
     }
 
     public List<Number> getLottoNumbers() {

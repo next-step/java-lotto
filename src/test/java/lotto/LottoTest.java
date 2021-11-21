@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Number;
+import lotto.domain.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import lotto.domain.Lotto;
@@ -19,22 +20,22 @@ import java.util.stream.Stream;
 public class LottoTest {
     private static Stream<Arguments> generateArgumentsStream() {
         List<Arguments> listOfArguments = new LinkedList<>();
-        listOfArguments.add(Arguments.of(Arrays.asList(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6)), 6));
-        listOfArguments.add(Arguments.of(Arrays.asList(new Number(1), new Number(2), new Number(3), new Number(7), new Number(8), new Number(9)), 3));
-        listOfArguments.add(Arguments.of(Arrays.asList(new Number(11), new Number(12), new Number(13), new Number(14), new Number(5), new Number(6)), 2));
-        listOfArguments.add(Arguments.of(Arrays.asList(new Number(21), new Number(2), new Number(33), new Number(4), new Number(5), new Number(6)), 4));
-        listOfArguments.add(Arguments.of(Arrays.asList(new Number(1), new Number(2), new Number(3), new Number(6), new Number(5), new Number(16)), 5));
-        listOfArguments.add(Arguments.of(Arrays.asList(new Number(16), new Number(25), new Number(43), new Number(24), new Number(15), new Number(6)), 1));
-        listOfArguments.add(Arguments.of(Arrays.asList(new Number(41), new Number(42), new Number(23), new Number(34), new Number(35), new Number(36)), 0));
+        listOfArguments.add(Arguments.of(new WinningNumbers("1,2,3,4,5,6"), 6));
+        listOfArguments.add(Arguments.of(new WinningNumbers("1,2,13,14,15,6"), 3));
+        listOfArguments.add(Arguments.of(new WinningNumbers("12,13,14,5,6,7"), 2));
+        listOfArguments.add(Arguments.of(new WinningNumbers("1,2,3,4,8,9") , 4));
+        listOfArguments.add(Arguments.of(new WinningNumbers("1,2,4,7,6,3"), 5));
+        listOfArguments.add(Arguments.of(new WinningNumbers("11,12,13,14,15,6"), 1));
+        listOfArguments.add(Arguments.of(new WinningNumbers("14,15,25,35,45,33"), 0));
         return listOfArguments.stream();
     }
 
     @ParameterizedTest
     @MethodSource("generateArgumentsStream")
     @DisplayName("lotto 번호 matching 테스트")
-    void checkMatchingTest(List<Number> list, int expect) {
+    void checkMatchingTest(WinningNumbers winningNumbers, int expect) {
         Lotto lotto = new Lotto(() -> Arrays.asList(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6)));
-        assertThat(lotto.checkMatching(list)).isEqualTo(expect);
+        assertThat(lotto.checkMatching(winningNumbers)).isEqualTo(expect);
     }
 
     @Test

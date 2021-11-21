@@ -1,11 +1,8 @@
 package lotto.view;
 
 import lotto.domain.Number;
-
-import java.util.Arrays;
+import lotto.domain.WinningNumbers;
 import java.util.Scanner;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class Input {
 
@@ -20,19 +17,13 @@ public class Input {
         return purchaseAmount;
     }
 
-    public static List<Number> inputWinningNumbers() {
+    public static WinningNumbers inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        SCANNER.nextLine();
-        return Arrays.asList(SCANNER.nextLine().split(","))
-                .stream()
-                .map(Integer::parseInt)
-                .map(integer -> new Number(integer))
-                .collect(Collectors.toList());
+        return new WinningNumbers(SCANNER.nextLine());
     }
 
-    public static Integer inputBonusBall() {
+    public static Number inputBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        SCANNER.nextLine();
-        return SCANNER.nextInt();
+        return new Number(SCANNER.nextInt());
     }
 }

@@ -23,22 +23,22 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public Integer getPrize(List<Number> winningNumbers, Integer bonus) {
+    public Integer getPrize(WinningNumbers winningNumbers, Number bonus) {
         return lottos.stream()
                 .mapToInt(lotto -> Prize.findPrize(lotto, winningNumbers, bonus).getPrize())
                 .sum();
     }
 
-    public Integer getCount(Prize prize, List<Number> winningNumbers, Integer bonus) {
+    public Integer getCount(Prize prize, WinningNumbers winningNumbers, Number bonus) {
         if (prize == Prize.BONUS_SECOND) {
             Long count = lottos.stream()
-                    .filter(lotto -> lotto.checkMatching(winningNumbers) == prize.getMatching() && lotto.getLottoNumbers().contains(new Number(bonus)))
+                    .filter(lotto -> lotto.checkMatching(winningNumbers) == prize.getMatching() && lotto.checkContainNumber(bonus))
                     .count();
             return count.intValue();
         }
         if (prize == Prize.SECOND) {
             Long count = lottos.stream()
-                    .filter(lotto -> lotto.checkMatching(winningNumbers) == prize.getMatching() && !lotto.getLottoNumbers().contains(new Number(bonus)))
+                    .filter(lotto -> lotto.checkMatching(winningNumbers) == prize.getMatching() && !lotto.checkContainNumber(bonus))
                     .count();
             return count.intValue();
         }

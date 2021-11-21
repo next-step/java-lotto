@@ -22,21 +22,21 @@ public enum Prize {
         this.prize = prize;
     }
 
-    public static Prize findPrize(Lotto lotto, List<Number> winningNumbers, Integer bonus) {
+    public static Prize findPrize(Lotto lotto, WinningNumbers winningNumbers, Number bonus) {
         Prize prize = Arrays.asList(values()).stream()
                 .filter(prizeEnum -> prizeEnum.matching == lotto.checkMatching(winningNumbers))
                 .findAny().get();
-        if (prize.matching == 5 && checkBonus(lotto.getLottoNumbers(), bonus)) {
+        if (prize.matching == 5 && checkBonus(lotto, bonus)) {
             return Prize.BONUS_SECOND;
         }
-        if (prize.matching == 5 && !checkBonus(lotto.getLottoNumbers(), bonus)) {
+        if (prize.matching == 5 && !checkBonus(lotto, bonus)) {
             return Prize.SECOND;
         }
         return prize;
     }
 
-    public static Boolean checkBonus(List<Number> lottoNumbers, Integer bonus) {
-        return lottoNumbers.contains(bonus);
+    public static Boolean checkBonus(Lotto lotto, Number bonus) {
+        return lotto.checkContainNumber(bonus);
     }
 
     public int getPrize() {
