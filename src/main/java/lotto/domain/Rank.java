@@ -27,4 +27,12 @@ public enum Rank {
                 .findFirst()
                 .orElseThrow(() -> new NotFoundRankException(matchCount));
     }
+
+    public int matchCount() {
+        return this.matchCount;
+    }
+
+    public int price() {
+        return this.money;
+    }
 }

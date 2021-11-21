@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.Rank;
 import lotto.domain.WinningStatistics;
 
 import java.util.List;
@@ -44,6 +45,13 @@ public class Output {
     }
 
     public static void printWinningStatistics(WinningStatistics statistics) {
-
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        for (Rank rank : Rank.values()) {
+            int count = statistics.rankCount(rank);
+            if (rank.matchCount() > 2) {
+                System.out.printf("%s개 일치 (%s원)- %s개\n", rank.matchCount(), rank.price(), count);
+            }
+        }
     }
 }
