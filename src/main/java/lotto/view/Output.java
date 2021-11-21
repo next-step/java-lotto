@@ -24,9 +24,7 @@ public class Output {
     public static void printLottos(Lottos lottos) {
         List<Lotto> lottoList = lottos.getLottos();
 
-        for (Lotto lotto : lottoList) {
-            printLotto(lotto);
-        }
+        lottoList.forEach(Output::printLotto);
     }
 
     private static void printLotto(Lotto lotto) {
