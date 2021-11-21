@@ -3,43 +3,23 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class WinnerLottoTicketTest {
 
-    static Stream<Arguments> generateTicketSuccess() {
-        return Stream.of(
-            Arguments.of(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
-            Arguments.of(new ArrayList<>(Arrays.asList(4, 10, 20, 30, 44, 45)))
-        );
-    }
-
-    static Stream<Arguments> generateTicketException() {
-        return Stream.of(
-            Arguments.of(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 1))),
-            Arguments.of(new ArrayList<>(Arrays.asList(1, 2, 3, 44, 44, 40)))
-        );
-    }
-
-
     @ParameterizedTest
     @DisplayName("성공생성")
-    @MethodSource("generateTicketSuccess")
-    void createSuccess(List<Integer> args) {
+    @ValueSource(strings = {"1, 2, 3, 4, 5, 6"})
+    void createSuccess(String args) {
         assertThat(WinnerLottoTicket.from(args)).isInstanceOf(WinnerLottoTicket.class);
     }
 
     @ParameterizedTest
-    @DisplayName("중복 제거로 인한 예외처리")
-    @MethodSource("generateTicketException")
-    void lottoTicketSizeException(List<Integer> args) {
+    @DisplayName("숫자 외의 다른 값 예외처리")
+    @ValueSource(strings = {"1, 2, 3, 4, 5, a", "`, 2, 3, 5, -"})
+    void lottoTicketSizeException(String args) {
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> WinnerLottoTicket.from(args));
     }
