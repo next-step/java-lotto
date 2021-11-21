@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.Lottos;
-import lotto.domain.LottosFactory;
-import lotto.domain.RandomLottoNumbersGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -24,13 +21,13 @@ class LottosTest {
     static Stream<Arguments> lottosCountTest() {
         return Stream.of(
                 Arguments.of(
-                        LottosFactory.from(1000, new RandomLottoNumbersGenerator()), 1
+                        LottosFactory.from(Money.from(1000), new RandomLottoNumbersGenerator()), 1
                 ),
                 Arguments.of(
-                        LottosFactory.from(2000, new RandomLottoNumbersGenerator()), 2
+                        LottosFactory.from(Money.from(2000), new RandomLottoNumbersGenerator()), 2
                 ),
                 Arguments.of(
-                        LottosFactory.from(10000, new RandomLottoNumbersGenerator()), 10
+                        LottosFactory.from(Money.from(10000), new RandomLottoNumbersGenerator()), 10
                 )
         );
     }
