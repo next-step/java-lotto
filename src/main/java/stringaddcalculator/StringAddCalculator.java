@@ -1,11 +1,15 @@
 package stringaddcalculator;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringAddCalculator {
+public final class StringAddCalculator {
 
     private static final Pattern COMPILE = Pattern.compile(",|:");
+
+    private StringAddCalculator() {
+    }
 
     public static Number splitAndSum(String expression) {
         if (expression == null) {
@@ -16,12 +20,21 @@ public class StringAddCalculator {
             return new Number(0);
         }
 
-        String[] numbers = COMPILE.split(expression);
-        int result = Arrays.stream(numbers)
-                           .map(Integer::parseInt)
-                           .mapToInt(Integer::intValue)
-                           .sum();
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(expression);
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            String[] numbers = m.group(2).split(customDelimiter);
+            return new Number(sum(numbers));
+        }
 
-        return new Number(result);
+        String[] numbers = COMPILE.split(expression);
+        return new Number(sum(numbers));
+    }
+
+    private static int sum(String[] numbers) {
+        return Arrays.stream(numbers)
+                     .map(Integer::parseInt)
+                     .mapToInt(Integer::intValue)
+                     .sum();
     }
 }
