@@ -24,7 +24,16 @@ public class LottoNumberTest {
                 .withMessageContaining("invalid input");
     }
 
-    @Test void toInt() {
+    @Test
+    public void toInt() {
         assertThat(LottoNumber.of(1).toInt()).isEqualTo(1);
+    }
+
+    @Test
+    public void totalNumbers() {
+        assertThat(LottoNumber.totalNumbers()).hasSize(45);
+        assertThat(LottoNumber.totalNumbers()).hasOnlyElementsOfType(LottoNumber.class);
+        assertThat(LottoNumber.totalNumbers()).contains(LottoNumber.of(1));
+        assertThat(LottoNumber.totalNumbers()).contains(LottoNumber.of(45));
     }
 }
