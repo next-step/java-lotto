@@ -15,6 +15,10 @@ public class StringAddCalculator {
   private static final String CUSTOM_REGEX = "//(.)\n(.*)";
   private static final String DEFAULT_REGEX = ",|:";
 
+  private static final Pattern customPattern = Pattern.compile(CUSTOM_REGEX);
+
+  private StringAddCalculator() {}
+
   public static int splitAndSum(String text) {
     if (text == null || text.isEmpty()) {
       return ZERO;
@@ -30,7 +34,7 @@ public class StringAddCalculator {
   }
 
   private static Numbers convertToNumbers(String text) {
-    Matcher m = Pattern.compile(CUSTOM_REGEX).matcher(text);
+    Matcher m = customPattern.matcher(text);
 
     if (m.find()) {
       String customDelimiter = m.group(ONE);
