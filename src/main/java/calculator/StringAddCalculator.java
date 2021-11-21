@@ -2,6 +2,7 @@ package calculator;
 
 public class StringAddCalculator {
 
+    private final Parser parser = new Parser();
     private final Splitter splitter = new Splitter();
 
     public int calculate(String text) {
@@ -9,9 +10,10 @@ public class StringAddCalculator {
             return 0;
         }
 
-        Operands operands = splitter.split(text);
+        String delimiter = parser.getDelimiterFrom(text);
+        String parsedText = parser.getTextFrom(text);
 
-        return operands.sumAll();
+        return splitter.split(parsedText, delimiter).sumAll();
     }
 
 }

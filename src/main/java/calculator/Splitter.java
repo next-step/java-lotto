@@ -1,32 +1,25 @@
 package calculator;
 
+import calculator.util.Assert;
+
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class Splitter {
 
-    private final static String DELIMITERS = ",|:";
+    private static final String DEFAULT_DELIMITER = ",|:";
 
     public Operands split(String text) {
-        validate(text);
-
-        String addDelimiter = "";
-        if (text.contains("//") && text.contains("\n")) {
-            int startIdx = text.indexOf("//") + 2;
-            int endIdx = text.indexOf("\n");
-            addDelimiter = "|" + text.substring(startIdx, endIdx);
-            text = text.substring(endIdx + 1);
-        }
-
-        return new Operands(Arrays.stream(text.split(DELIMITERS + addDelimiter))
-                .map(Operand::new)
-                .collect(Collectors.toList()));
+        return split(text, DEFAULT_DELIMITER);
     }
 
-    private void validate(String text) {
-        if (text == null) {
-            throw new IllegalArgumentException("text는 null일 수 없습니다.");
-        }
+    public Operands split(String text, String delimiter) {
+        Assert.notNull(text, "text는 null일 수 없습니다.");
+        Assert.notNull(delimiter, "delimiter는 null일 수 없습니다.");
+
+        return new Operands(Arrays.stream(text.split(delimiter))
+                .map(Operand::new)
+                .collect(Collectors.toList()));
     }
 
 }

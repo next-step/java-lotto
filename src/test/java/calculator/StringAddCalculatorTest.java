@@ -1,6 +1,8 @@
 package calculator;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -9,31 +11,29 @@ public class StringAddCalculatorTest {
 
     private final StringAddCalculator calculator = new StringAddCalculator();
 
-    @Test
-    void calculate() {
-        assertThat(calculator.calculate("")).isEqualTo(0);
-        assertThat(calculator.calculate(null)).isEqualTo(0);
-        assertThat(calculator.calculate("1,2")).isEqualTo(3);
-        assertThat(calculator.calculate("1,2,3")).isEqualTo(6);
-        assertThat(calculator.calculate("1,2:3")).isEqualTo(6);
-        assertThat(calculator.calculate("//;\n1;2;3")).isEqualTo(6);
-        assertThat(calculator.calculate("//;\n1,2:3;4")).isEqualTo(10);
-        assertThat(calculator.calculate("//-\n1-2")).isEqualTo(3);
+    @ParameterizedTest
+    @NullAndEmptySource
+    void calculate_nullAndEmpty(String text) {
+        assertThat(calculator.calculate(text)).isEqualTo(0);
     }
 
-    @Test
-    void calculateFail() {
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3", "1,2:3"})
+    void calculate(String text) {
+        assertThat(calculator.calculate(text)).isEqualTo(6);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;2;3;4", "//;\n1,2:3;4", "//-\n1-2-3-4"})
+    void calculate_custom(String text) {
+        assertThat(calculator.calculate(text)).isEqualTo(10);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"-1", "-1,2", "a", "//-\n1--2"})
+    void calculateFail(String text) {
         assertThatThrownBy(() -> {
-            calculator.calculate("-1");
-        }).isInstanceOf(RuntimeException.class);
-        assertThatThrownBy(() -> {
-            calculator.calculate("-1,2");
-        }).isInstanceOf(RuntimeException.class);
-        assertThatThrownBy(() -> {
-            calculator.calculate("a");
-        }).isInstanceOf(RuntimeException.class);
-        assertThatThrownBy(() -> {
-            calculator.calculate("//-\n1--2");
+            calculator.calculate(text);
         }).isInstanceOf(RuntimeException.class);
     }
     

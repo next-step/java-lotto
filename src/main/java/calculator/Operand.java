@@ -3,7 +3,7 @@ package calculator;
 public class Operand {
 
     public static final Operand ZERO = new Operand("0");
-    
+
     private static final String VALID_REGEX = "[0-9]+";
 
     private final int value;
