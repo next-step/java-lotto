@@ -41,6 +41,10 @@ public class LottoTicket {
         return new Statistics(Grade.mapOf(grades), allLineSizeToDollars());
     }
 
+    private Dollars allLineSizeToDollars() {
+        return new Dollars(allLottoLines().size() * Dollars.DOLLAR_UNIT);
+    }
+
     public List<LottoNumbers> allLottoLines() {
         List<LottoNumbers> allLottoLines = new ArrayList<>();
         allLottoLines.addAll(manualLottoLines);
@@ -48,8 +52,12 @@ public class LottoTicket {
         return unmodifiableList(allLottoLines);
     }
 
-    private Dollars allLineSizeToDollars() {
-        return new Dollars(allLottoLines().size() * Dollars.DOLLAR_UNIT);
+    public int manualLottoLinesCount() {
+        return manualLottoLines.size();
+    }
+
+    public int autoLottoLinesCount() {
+        return lottoLines.size();
     }
 
     @Override
