@@ -30,6 +30,12 @@ public class CalNumbers {
                 .collect(Collectors.toList()));
     }
 
+    public int sum() {
+        return numbers.stream()
+            .mapToInt(Integer::intValue)
+            .sum();
+    }
+
 
     @Override
     public boolean equals(Object o) {
