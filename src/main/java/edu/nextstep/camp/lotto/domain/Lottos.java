@@ -1,4 +1,4 @@
-package edu.nextstep.camp.lotto;
+package edu.nextstep.camp.lotto.domain;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -30,5 +30,9 @@ public class Lottos {
     @Override
     public int hashCode() {
         return Objects.hash(lottos);
+    }
+
+    public int amount() {
+        return lottos.size();
     }
 }

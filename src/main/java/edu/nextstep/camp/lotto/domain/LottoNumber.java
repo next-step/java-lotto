@@ -1,4 +1,4 @@
-package edu.nextstep.camp.lotto;
+package edu.nextstep.camp.lotto.domain;
 
 import java.util.Objects;
 
