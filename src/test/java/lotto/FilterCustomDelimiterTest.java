@@ -10,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class FilterCustomDelimiterTest {
     private final FilterCustomDelimiter dut = new FilterCustomDelimiter();
+
     @ParameterizedTest
     @MethodSource("rawFormulaToDelimiter")
     void filter(String rawFormula, String expectedDelimeter) {
