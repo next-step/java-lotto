@@ -7,24 +7,24 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import utils.StringUtils;
 
-public class InputNumber {
+public class CalNumbers {
 
     private final List<Integer> numbers;
 
-    public InputNumber() {
+    public CalNumbers() {
         this(Collections.emptyList());
     }
 
-    public InputNumber(List<Integer> numbers) {
+    public CalNumbers(List<Integer> numbers) {
         this.numbers = numbers;
     }
 
-    public static InputNumber create(String input, Splitter splitter) {
+    public static CalNumbers create(String input, Splitter splitter) {
         if (StringUtils.isNullOrEmpty(input)) {
-            return new InputNumber();
+            return new CalNumbers();
         }
 
-        return new InputNumber(
+        return new CalNumbers(
             Arrays.stream(splitter.split(input))
                 .map(StringUtils::parsePositiveNumber)
                 .collect(Collectors.toList()));
@@ -39,7 +39,7 @@ public class InputNumber {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        InputNumber that = (InputNumber) o;
+        CalNumbers that = (CalNumbers) o;
         return Objects.equals(numbers, that.numbers);
     }
 
