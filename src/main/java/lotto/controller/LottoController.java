@@ -15,6 +15,16 @@ public class LottoController {
     }
 
     public static void main(String[] args) {
+        try {
+            lottoStart();
+        } catch (IllegalArgumentException e) {
+            System.out.println("\n잘못된 입력입니다: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("\n잠시 후 이용해주세요.");
+        }
+    }
+
+    private static void lottoStart() {
         LottoTicket lottoTicket = publishLottoTicket();
         OutputView.showTicket(lottoTicket);
 
@@ -23,13 +33,9 @@ public class LottoController {
     }
 
     private static LottoTicket publishLottoTicket() {
-        int won = InputView.getWon();
-        List<String> manualLottoLines = InputView.getManualLottoLines();
-        return LottoTicket.publish(toPublishDetails(won, manualLottoLines), Collections::shuffle);
-    }
-
-    private static PublishDetails toPublishDetails(int won, List<String> lottoLines) {
-        return new PublishDetails(new Dollars(won), toLottoLines(lottoLines));
+        Dollars dollars = new Dollars(InputView.getWon());
+        List<LottoNumbers> manualLottoLines = toLottoLines(InputView.getManualLottoLines());
+        return LottoTicket.publish(new PublishDetails(dollars, manualLottoLines), Collections::shuffle);
     }
 
     private static List<LottoNumbers> toLottoLines(List<String> stringLottoLines) {
