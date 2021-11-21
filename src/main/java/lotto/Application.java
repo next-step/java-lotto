@@ -40,7 +40,7 @@ public class Application {
             String winningNumber = Input.askWinningNumber();
             String[] split = split(winningNumber);
             return WinningLotto.from(split);
-        }catch (LottoNumberException e) {
+        } catch (LottoNumberException e) {
             Output.LottoNumberError();
             return getWinningNumber();
         } catch (LottoNumbersCountException e) {
