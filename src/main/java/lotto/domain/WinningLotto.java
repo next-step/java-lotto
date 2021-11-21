@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.numbergenerator.ManualLottoNumbersGenerator;
+
 import java.util.List;
 
 public class WinningLotto extends AbstractLotto {

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.numbergenerator.LottoNumbersGenerator;
+import lotto.domain.numbergenerator.ManualLottoNumbersGenerator;
 import lotto.exception.LottoNumberException;
 import lotto.exception.LottoNumbersCountException;
 import org.junit.jupiter.api.DisplayName;

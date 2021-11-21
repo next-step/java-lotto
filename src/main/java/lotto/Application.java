@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.domain.numbergenerator.RandomLottoNumbersGenerator;
 import lotto.exception.LottoNumberException;
 import lotto.exception.LottoNumbersCountException;
 import lotto.exception.MinimumAmountException;

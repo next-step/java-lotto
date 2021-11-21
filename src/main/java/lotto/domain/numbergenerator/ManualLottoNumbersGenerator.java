@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.numbergenerator;
 
+import lotto.domain.LottoNumber;
 import lotto.exception.LottoNumbersCountException;
 
 import java.util.Arrays;
