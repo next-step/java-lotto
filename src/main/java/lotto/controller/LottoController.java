@@ -6,6 +6,8 @@ import lotto.domain.*;
 import lotto.utils.IntegerParser;
 
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoController {
 
@@ -22,9 +24,19 @@ public class LottoController {
 
     private static LottoTicket publishLottoTicket() {
         int won = InputView.getWon();
-        // TODO: [2021/11/21 양동혁] 변경
-        Dollars dollars = new Dollars(won);
-        return LottoTicket.publish(new PublishDetails(dollars, Collections.emptyList()), Collections::shuffle);
+        List<String> manualLottoLines = InputView.getManualLottoLines();
+        return LottoTicket.publish(toPublishDetails(won, manualLottoLines), Collections::shuffle);
+    }
+
+    private static PublishDetails toPublishDetails(int won, List<String> lottoLines) {
+        return new PublishDetails(new Dollars(won), toLottoLines(lottoLines));
+    }
+
+    private static List<LottoNumbers> toLottoLines(List<String> stringLottoLines) {
+        return stringLottoLines.stream()
+                .map(IntegerParser::listOf)
+                .map(LottoNumbers::of)
+                .collect(Collectors.toList());
     }
 
     private static Statistics rank(LottoTicket lottoTicket) {
