@@ -35,4 +35,8 @@ public enum Rank {
     public int price() {
         return this.money;
     }
+
+    public long calcTotalPrice(int count) {
+        return Long.valueOf(this.money) * count;
+    }
 }

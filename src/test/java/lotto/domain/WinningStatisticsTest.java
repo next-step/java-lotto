@@ -171,4 +171,146 @@ class WinningStatisticsTest {
                 )
         );
     }
+
+    @ParameterizedTest
+    @DisplayName("수익률을 계산 한다")
+    @MethodSource
+    void calcYeild(WinningStatistics statistics, double expected) {
+        double yeild = statistics.calcYeiild();
+
+        assertThat(yeild).isEqualTo(expected);
+    }
+
+    static Stream<Arguments> calcYeild() {
+        List<Lotto> lottoList = Arrays.asList(
+                Lotto.from(
+                    Arrays.asList(
+                        LottoNumber.from(1),
+                        LottoNumber.from(2),
+                        LottoNumber.from(3),
+                        LottoNumber.from(4),
+                        LottoNumber.from(5),
+                        LottoNumber.from(6)
+                    )
+                ),
+                Lotto.from(
+                        Arrays.asList(
+                                LottoNumber.from(10),
+                                LottoNumber.from(11),
+                                LottoNumber.from(12),
+                                LottoNumber.from(13),
+                                LottoNumber.from(14),
+                                LottoNumber.from(15)
+                        )
+                ),
+                Lotto.from(
+                        Arrays.asList(
+                                LottoNumber.from(20),
+                                LottoNumber.from(21),
+                                LottoNumber.from(22),
+                                LottoNumber.from(23),
+                                LottoNumber.from(24),
+                                LottoNumber.from(25)
+                        )
+                )
+                ,
+                Lotto.from(
+                        Arrays.asList(
+                                LottoNumber.from(20),
+                                LottoNumber.from(21),
+                                LottoNumber.from(22),
+                                LottoNumber.from(23),
+                                LottoNumber.from(24),
+                                LottoNumber.from(25)
+                        )
+                )
+                ,
+                Lotto.from(
+                        Arrays.asList(
+                                LottoNumber.from(20),
+                                LottoNumber.from(21),
+                                LottoNumber.from(22),
+                                LottoNumber.from(23),
+                                LottoNumber.from(24),
+                                LottoNumber.from(25)
+                        )
+                )
+                ,
+                Lotto.from(
+                        Arrays.asList(
+                                LottoNumber.from(20),
+                                LottoNumber.from(21),
+                                LottoNumber.from(22),
+                                LottoNumber.from(23),
+                                LottoNumber.from(24),
+                                LottoNumber.from(25)
+                        )
+                )
+                ,
+                Lotto.from(
+                        Arrays.asList(
+                                LottoNumber.from(20),
+                                LottoNumber.from(21),
+                                LottoNumber.from(22),
+                                LottoNumber.from(23),
+                                LottoNumber.from(24),
+                                LottoNumber.from(25)
+                        )
+                )
+                ,
+                Lotto.from(
+                        Arrays.asList(
+                                LottoNumber.from(20),
+                                LottoNumber.from(21),
+                                LottoNumber.from(22),
+                                LottoNumber.from(23),
+                                LottoNumber.from(24),
+                                LottoNumber.from(25)
+                        )
+                )
+                ,
+                Lotto.from(
+                        Arrays.asList(
+                                LottoNumber.from(20),
+                                LottoNumber.from(21),
+                                LottoNumber.from(22),
+                                LottoNumber.from(23),
+                                LottoNumber.from(24),
+                                LottoNumber.from(25)
+                        )
+                )
+                ,
+                Lotto.from(
+                        Arrays.asList(
+                                LottoNumber.from(20),
+                                LottoNumber.from(21),
+                                LottoNumber.from(22),
+                                LottoNumber.from(23),
+                                LottoNumber.from(24),
+                                LottoNumber.from(25)
+                        )
+                )
+                ,
+                Lotto.from(
+                        Arrays.asList(
+                                LottoNumber.from(20),
+                                LottoNumber.from(21),
+                                LottoNumber.from(22),
+                                LottoNumber.from(23),
+                                LottoNumber.from(24),
+                                LottoNumber.from(25)
+                        )
+                )
+        );
+
+        Lottos lottos = Lottos.from(lottoList);
+
+        return Stream.of(
+                Arguments.of(
+                    WinningStatistics.from(lottos, WinningLotto.from(new String[] {"1", "2", "3", "14", "15", "16"})),
+                        0.
+                )
+        );
+    }
+
 }

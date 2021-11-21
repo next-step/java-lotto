@@ -33,4 +33,26 @@ public class WinningStatistics {
     public int rankCount(Rank rank) {
         return winningStatistics.getOrDefault(rank, DEFALUT_RANK_COUNT);
     }
+
+    public double calcYeiild() {
+        long yeild = 0;
+
+        for (Rank key : winningStatistics.keySet()) {
+            int count = winningStatistics.get(key);
+            yeild += key.calcTotalPrice(count);
+        }
+
+
+        return Math.round(yeild / (double)getTotalPurchaseCount());
+    }
+
+    private int getTotalPurchaseCount() {
+        int totalpurchaseCount = 0;
+
+        for (Rank key : winningStatistics.keySet()) {
+            totalpurchaseCount += winningStatistics.get(key);
+        }
+
+        return totalpurchaseCount * 1000;
+    }
 }
