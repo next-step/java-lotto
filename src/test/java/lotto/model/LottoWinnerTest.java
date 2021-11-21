@@ -22,11 +22,8 @@ class LottoWinnerTest {
             temps.add(new LottoNumber(7 * i + 3));
         }
         lottoNumbers = new LottoNumbers(temps);
-        temps = new ArrayList<>();
-        for (int i = 1; i <= 6; i++) {
-            temps.add(new LottoNumber(7 * i + 3));
-        }
-        winnerNumbers = new LottoWinner(temps);
+
+        winnerNumbers = new LottoWinner("3, 10, 17, 24, 31, 45");
 
         OutputView.print(lottoNumbers.getLottoNumbers());
         OutputView.print(winnerNumbers.getWinnerNumbers());
@@ -51,5 +48,13 @@ class LottoWinnerTest {
     void matchAmount() {
         winnerNumbers.match(lottoNumbers);
         assertThat(lottoNumbers.getLottoRank()).isEqualTo(LottoRank.SECOND);
+    }
+
+    @Test
+    @DisplayName("문자열 변환 테스트")
+    void convert() {
+        LottoWinner winner = new LottoWinner("1, 2, 3, 4, 5");
+        assertThat(winner.getWinnerNumbers())
+                .contains(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5));
     }
 }

@@ -2,13 +2,22 @@ package lotto.model;
 
 import common.model.Number;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoWinner {
+
     private final List<LottoNumber> winnerNumbers;
 
-    public LottoWinner(List<LottoNumber> winnerNumbers) {
-        this.winnerNumbers = winnerNumbers;
+    public LottoWinner(String winnerNumbers) {
+        this.winnerNumbers = convert(winnerNumbers);
+    }
+
+    private List<LottoNumber> convert(String numbers) {
+        return Arrays.stream(numbers.split(", "))
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     public void match(LottoNumbers lottoNumbers) {
