@@ -1,9 +1,11 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Number;
 import lotto.domain.Prize;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,7 +16,11 @@ public class Output {
     }
 
     public static void viewPurchasedLotto(Lottos lottos) {
-        lottos.getLottos().stream().map(randomNumbers -> randomNumbers.getLottoNumbers()).forEach(System.out::println);
+        for (Lotto lotto : lottos.getLottos()) {
+            List<Integer> view = new ArrayList<>();
+            lotto.getLottoNumbers().stream().map(number -> number.getNumber()).forEach(i -> view.add(i));
+            System.out.println(view);
+        }
     }
 
     public static void viewResult(Lottos lottos, Integer purchaseAmount, List<Number> winningNumbers, Integer bonus) {
