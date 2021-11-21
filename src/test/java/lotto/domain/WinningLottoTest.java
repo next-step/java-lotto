@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.exception.LottoNumberException;
-import lotto.exception.WinningLottoCountException;
+import lotto.exception.LottoNumbersCountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -35,7 +35,7 @@ class WinningLottoTest {
     @DisplayName("배열의 길이가 6이 아닌경우 WinningLottoCountException")
     @MethodSource
     void createWinningLottoCountException(String[] winningNums) {
-        assertThatThrownBy(() -> WinningLotto.from(winningNums)).isInstanceOf(WinningLottoCountException.class);
+        assertThatThrownBy(() -> WinningLotto.from(winningNums)).isInstanceOf(LottoNumbersCountException.class);
     }
 
     static Stream<Arguments> createWinningLottoCountException() {

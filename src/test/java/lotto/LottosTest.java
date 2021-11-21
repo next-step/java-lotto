@@ -1,7 +1,8 @@
 package lotto;
 
 import lotto.domain.Lottos;
-import lotto.domain.RandomNumberGenerator;
+import lotto.domain.LottosFactory;
+import lotto.domain.RandomLottoNumbersGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -14,24 +15,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottosTest {
 
     @ParameterizedTest
-    @DisplayName("입력한 금액 만큼 Lotto를 생성 한다.")
+    @DisplayName("Lotto의 개수를 리턴한다.")
     @MethodSource
-    void createLottos(int money, int expected) {
-        Lottos lottos = Lottos.from(money, new RandomNumberGenerator());
-
-        assertThat(lottos.lottoCount()).isEqualTo(expected);
+    void lottosCountTest(Lottos lottos, int count) {
+        assertThat(lottos.lottoCount()).isEqualTo(count);
     }
 
-    static Stream<Arguments> createLottos() {
+    static Stream<Arguments> lottosCountTest() {
         return Stream.of(
                 Arguments.of(
-                        1000, 1
+                        LottosFactory.from(1000, new RandomLottoNumbersGenerator()), 1
                 ),
                 Arguments.of(
-                        2000, 2
+                        LottosFactory.from(2000, new RandomLottoNumbersGenerator()), 2
                 ),
                 Arguments.of(
-                        3200, 3
+                        LottosFactory.from(10000, new RandomLottoNumbersGenerator()), 10
                 )
         );
     }

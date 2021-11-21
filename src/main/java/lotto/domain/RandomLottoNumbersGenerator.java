@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 import static lotto.domain.LottoNumbers.LOTTO_NUMBERS;
 
-public class RandomNumberGenerator implements NumberGenerator {
+public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
 
     @Override
     public List<LottoNumber> generate() {

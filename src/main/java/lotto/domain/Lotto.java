@@ -2,15 +2,13 @@ package lotto.domain;
 
 import java.util.List;
 
-public class Lotto {
-    private final List<LottoNumber> lottoNumbers;
-
-    private Lotto(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+public class Lotto extends AbstractLotto {
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        super(lottoNumbers);
     }
 
-    public static Lotto from(NumberGenerator generator) {
-        return new Lotto(generator.generate());
+    public static Lotto from(List<LottoNumber> lottoNumbers) {
+        return new Lotto(lottoNumbers);
     }
 
     public List<LottoNumber> getNumbers() {

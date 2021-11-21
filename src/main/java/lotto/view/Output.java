@@ -8,6 +8,10 @@ import java.util.stream.Collectors;
 
 public class Output {
     private static final String PURCHASE_MESSAGE = "%s 개를 구매했습니다.\n";
+    private static final String LOTTO_NUMBER_ERROR_MESSAGE = "로또 번호를 잘못 입력 했습니다.";
+    private static final String WINNING_COUNT_ERROR_MESSAGE = "당첨 번호 개수를 잘못 입력 했습니다.";
+
+
     public static void printLottosCount(Lottos lottos) {
         int lottoCount = lottos.lottoCount();
         System.out.printf(PURCHASE_MESSAGE, lottoCount);
@@ -29,4 +33,15 @@ public class Output {
         System.out.println(collect);
     }
 
+    public static void LottoNumberError() {
+        System.out.println(LOTTO_NUMBER_ERROR_MESSAGE);
+    }
+
+    public static void WinningNumberCountError() {
+        System.out.println(WINNING_COUNT_ERROR_MESSAGE);
+    }
+
+    public static void printWinningStatistics() {
+
+    }
 }
