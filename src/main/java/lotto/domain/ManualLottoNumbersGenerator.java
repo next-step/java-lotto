@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.LottoNumbersCountException;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,20 +10,30 @@ public class ManualLottoNumbersGenerator implements LottoNumbersGenerator {
 
     private final List<LottoNumber> lottoNumbers;
 
-    private ManualLottoNumbersGenerator(String[] numbers) {
-        this.lottoNumbers = Arrays.stream(numbers)
+    private ManualLottoNumbersGenerator(List<LottoNumber> lottoNumbers) {
+        validateLottoNumbersCount(lottoNumbers.size());
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    public void validateLottoNumbersCount(int count) {
+        if (count != 6) {
+            throw new LottoNumbersCountException(count);
+        }
+    }
+
+    public static ManualLottoNumbersGenerator from(String[] numbers) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
                 .mapToInt(Integer::valueOf)
                 .mapToObj(LottoNumber::from)
                 .sorted()
                 .collect(Collectors.toList());
-    }
 
-    public static ManualLottoNumbersGenerator from(String[] numbers) {
-        return new ManualLottoNumbersGenerator(numbers);
+        return new ManualLottoNumbersGenerator(lottoNumbers);
     }
 
     @Override
     public List<LottoNumber> generate() {
         return lottoNumbers;
     }
+
 }
