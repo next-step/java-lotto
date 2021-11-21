@@ -69,4 +69,10 @@ class LottoWinnerTest {
     void convertValidation() {
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoWinner("q, w, e, r, t, y"));
     }
+
+    @Test
+    @DisplayName("당첨 번호가 중복될 경우")
+    void duplicateValidation() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoWinner("1, 2, 3, 4, 5, 1"));
+    }
 }
