@@ -1,6 +1,7 @@
 package common.view;
 
 import common.model.Number;
+import lotto.application.Constant;
 import lotto.model.*;
 
 import java.util.List;
@@ -48,6 +49,7 @@ public class OutputView {
     }
 
     public static void print(Lotto lotto) {
+        OutputView.print(String.valueOf(lotto.getLotto().size()), Constant.OUTPUT_MESSAGE_PURCHASE_LOTTO);
         for (LottoNumbers lottoNumbers : lotto.getLotto()) {
             print(lottoNumbers.getLottoNumbers());
         }
