@@ -19,6 +19,7 @@ public class Output {
     private static final String WINNINGSTATISTICS = "\n당첨 통계";
     private static final String LINE = "---------";
     private static final String RESULT_INFO = "%s개 일치 (%s원)- %s개 \n";
+    private static final String YEILD_MESSAGE = "총 수익률은 %f입니다.";
 
 
     public static void printLottosCount(Lottos lottos) {
@@ -53,10 +54,21 @@ public class Output {
         System.out.println(LINE);
         for (Rank rank : Rank.values()) {
             int count = statistics.rankCount(rank);
-            if (rank.matchCount() > 2) {
-                System.out.printf(RESULT_INFO, rank.matchCount(), rank.price(), count);
-            }
+            printResult(rank, count);
         }
+
+        printYeild(statistics);
+    }
+
+    private static void printResult(Rank rank, int count) {
+        if (rank.matchCount() > 2) {
+            System.out.printf(RESULT_INFO, rank.matchCount(), rank.price(), count);
+        }
+    }
+
+
+    private static void printYeild(WinningStatistics statistics) {
+        System.out.printf(YEILD_MESSAGE, statistics.calcYeiild());
     }
 
     public static void printMoneyError() {
