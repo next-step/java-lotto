@@ -5,7 +5,7 @@ import lotto.domain.numbergenerator.ManualLottoNumbersGenerator;
 import java.util.List;
 
 public class WinningLotto extends AbstractLotto {
-    public WinningLotto(List<LottoNumber> lottoNumbers) {
+    private WinningLotto(List<LottoNumber> lottoNumbers) {
         super(lottoNumbers);
     }
 
@@ -16,16 +16,10 @@ public class WinningLotto extends AbstractLotto {
     }
 
     public int matchCount(Lotto other) {
-        int matchCount = 0;
-
-        for (LottoNumber number : other.lottoNumbers) {
-            for (LottoNumber winningLottoNumber : this.lottoNumbers) {
-                if (number.compareTo(winningLottoNumber) == 0) {
-                    matchCount ++;
-                }
-            }
-        }
-
-        return matchCount;
+        return other.lottoNumbers.stream()
+                .mapToInt(number -> (int) this.lottoNumbers.stream()
+                .filter(number::equals)
+                .count())
+                .sum();
     }
 }
