@@ -1,9 +1,10 @@
 package step2.view;
 
+import step2.domain.Lotto;
 import step2.domain.Number;
-import step2.domain.*;
+import step2.domain.Price;
 
-import java.util.Map;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -16,35 +17,32 @@ public class ResultView {
     private static final String SHOW_WINNING_RESULT_MESSAGE = "%d개 일치 (%d원)- %d개\n";
     private static final String WINNING_RESULT_REVENUE_MESSAGE = "총 수익률은 %.2f 입니다.\n";
 
-    public static void showLottoGenerateCount(Lottos lottos) {
-        System.out.println(lottos.getLottos().size() + PURCHASE_LOTTO_RESULT_MESSAGE);
+    public static void showLottoGenerateCount(int lottosSize) {
+        System.out.println(lottosSize + PURCHASE_LOTTO_RESULT_MESSAGE);
     }
 
-    public static void showAllLottoNumbers(Lottos lottos) {
-        for (Lotto lotto : lottos.getLottos()) {
-            String numbers = lotto.getLottoNumbers().stream()
-                    .map(Number::getStringNumber)
-                    .collect(Collectors.joining(COMMA));
-            System.out.println(LEFT_SQUARE_BRACKET + numbers + RIGHT_SQUARE_BRACKET);
+    public static void showAllLottoNumbers(List<Lotto> lottos) {
+        for (Lotto lotto : lottos) {
+            System.out.println(LEFT_SQUARE_BRACKET + toJoiningLottoNumbers(lotto) + RIGHT_SQUARE_BRACKET);
         }
     }
 
-    public static void showWinningStatistics(int price, WinningResult winningResult) {
+    private static String toJoiningLottoNumbers(Lotto lotto) {
+        return lotto.getLottoNumbers().stream()
+                .map(Number::getStringNumber)
+                .collect(Collectors.joining(COMMA));
+    }
+
+    public static void showWinningStatistics() {
         System.out.println(WINNING_STATISTICS_MESSAGE);
         System.out.println(DASH_LINE);
-        showWinningResult(winningResult);
-        showWinningResultRevenue(price, winningResult);
     }
 
-    private static void showWinningResult(WinningResult winningResult) {
-        Map<WinningType, Integer> winningResultMap = winningResult.getWinningResult();
-        for (WinningType type : winningResultMap.keySet()) {
-            System.out.printf(SHOW_WINNING_RESULT_MESSAGE,
-                    type.getMatchCount(), type.getWinnings(), winningResultMap.get(type));
-        }
+    public static void showWinningResultOfWinningType(int matchCount, int winnings, int matchResult) {
+        System.out.printf(SHOW_WINNING_RESULT_MESSAGE, matchCount, winnings, matchResult);
     }
 
-    private static void showWinningResultRevenue(int price, WinningResult winningResult) {
-        System.out.printf(WINNING_RESULT_REVENUE_MESSAGE, (float) winningResult.totalWinnings() / price);
+    public static void showWinningResultOfRevenue(Price price, int totalWinnings) {
+        System.out.printf(WINNING_RESULT_REVENUE_MESSAGE, price.revenueOf(totalWinnings));
     }
 }

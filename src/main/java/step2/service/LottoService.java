@@ -1,11 +1,22 @@
 package step2.service;
 
 import step2.domain.*;
+import step2.strategy.IntNumberGeneratorStrategy;
 
 public class LottoService {
+    private static final int MIN_MATCH_COUNT = 3;
+
+    private IntNumberGeneratorStrategy generatorStrategy;
+
+    private LottoService() {
+    }
+
+    public LottoService(IntNumberGeneratorStrategy generatorStrategy) {
+        this.generatorStrategy = generatorStrategy;
+    }
 
     public Lottos purchase(int price) {
-        return Lottos.purchase(price);
+        return Lottos.purchase(price, generatorStrategy);
     }
 
     public WinningResult winningResult(Lottos purchasedLottos, String winningNumbers) {
@@ -17,9 +28,14 @@ public class LottoService {
         WinningResult winningResult = WinningResult.create();
         for (Lotto lotto : purchasedLottos.getLottos()) {
             int matchCount = lotto.match(winningLotto.getLotto());
-            WinningType type = WinningType.findBy(matchCount);
-            winningResult.addCount(type);
+            addWinningTypeCount(matchCount, winningResult);
         }
         return winningResult;
+    }
+
+    private void addWinningTypeCount(int matchCount, WinningResult winningResult) {
+        if (matchCount < MIN_MATCH_COUNT) return;
+        WinningType type = WinningType.findBy(matchCount);
+        winningResult.addCount(type);
     }
 }

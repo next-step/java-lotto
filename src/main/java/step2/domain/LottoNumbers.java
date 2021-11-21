@@ -1,6 +1,6 @@
 package step2.domain;
 
-import step2.utils.RandomUtils;
+import step2.strategy.IntNumberGeneratorStrategy;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -10,9 +10,9 @@ public class LottoNumbers {
 
     private final List<Number> numbers = new ArrayList<>();
 
-    private LottoNumbers() {
+    private LottoNumbers(IntNumberGeneratorStrategy generatorStrategy) {
         while (numbers.size() < LOTTO_NUMBERS_SIZE) {
-            add();
+            add(generatorStrategy);
         }
     }
 
@@ -22,15 +22,15 @@ public class LottoNumbers {
         }
     }
 
-    private void add() {
-        Number number = Number.create(RandomUtils.nextInt());
+    private void add(IntNumberGeneratorStrategy generatorStrategy) {
+        Number number = Number.create(generatorStrategy.generate());
         if (!numbers.contains(number)) {
             numbers.add(number);
         }
     }
 
-    public static LottoNumbers create() {
-        return new LottoNumbers();
+    public static LottoNumbers create(IntNumberGeneratorStrategy generatorStrategy) {
+        return new LottoNumbers(generatorStrategy);
     }
 
     public static LottoNumbers of(String[] splitNumbers) {

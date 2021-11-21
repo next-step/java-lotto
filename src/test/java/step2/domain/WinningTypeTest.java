@@ -1,7 +1,11 @@
 package step2.domain;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -23,5 +27,15 @@ public class WinningTypeTest {
         WinningType winningType = WinningType.findBy(matchCount);
         //then
         assertEquals(winningType.getWinnings(), 5000);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 0, 1, 2})
+    void 지정된_당첨_개수가_존재하지_않으면_IllegalArgumentException_이_발생한다(int matchCount) {
+        //given
+        //when
+        //then
+        assertThatThrownBy(() -> WinningType.findBy(matchCount))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

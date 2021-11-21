@@ -1,21 +1,23 @@
 package step2.domain;
 
+import step2.strategy.IntNumberGeneratorStrategy;
+
 import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
     private LottoNumbers lottoNumbers;
 
-    private Lotto() {
-        lottoNumbers = LottoNumbers.create();
+    private Lotto(IntNumberGeneratorStrategy generatorStrategy) {
+        lottoNumbers = LottoNumbers.create(generatorStrategy);
     }
 
     private Lotto(String[] splitNumbers) {
         lottoNumbers = LottoNumbers.of(splitNumbers);
     }
 
-    public static Lotto generate() {
-        return new Lotto();
+    public static Lotto generate(IntNumberGeneratorStrategy generatorStrategy) {
+        return new Lotto(generatorStrategy);
     }
 
     public static Lotto of(String[] splitNumbers) {
