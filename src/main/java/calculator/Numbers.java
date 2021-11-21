@@ -13,7 +13,8 @@ public class Numbers {
   public int continuousSum() {
     return this.numberList.stream()
                .reduce((number, number2) -> number.sum(number2))
-               .get().getValue();
+               .orElseThrow(IllegalArgumentException::new)
+               .getValue();
   }
 
   public boolean isSizeEquals(int size) {
