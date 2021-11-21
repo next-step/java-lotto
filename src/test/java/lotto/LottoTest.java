@@ -1,5 +1,0 @@
-package lotto;
-
-class LottoTest {
-
-}
