@@ -12,12 +12,13 @@ public final class StringAddCalculator {
     private StringAddCalculator() {
     }
 
-    public static Number splitAndSum(String expression) {
-        if (expression == null || expression.isEmpty()) {
+    public static Number splitAndSum(String input) {
+        Expression expression = new Expression(input);
+        if (expression.isNullOrEmpty()) {
             return ZERO;
         }
 
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(expression);
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
         if (m.find()) {
             String customDelimiter = m.group(1);
             String[] numbers = m.group(2).split(customDelimiter);
@@ -25,7 +26,7 @@ public final class StringAddCalculator {
             return new Number(sum(numbers));
         }
 
-        String[] numbers = COMPILE.split(expression);
+        String[] numbers = COMPILE.split(input);
         validatePositiveOrThrow(numbers);
         return new Number(sum(numbers));
     }
