@@ -40,10 +40,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber from(int number) {
-        if (!CACHED_LOTTO_NUMBERS.containsKey(number)) {
-            throw new IllegalArgumentException(INVALID_RANGE_ERROR_MESSAGE);
+        if (CACHED_LOTTO_NUMBERS.containsKey(number)) {
+            return CACHED_LOTTO_NUMBERS.get(number);
         }
-        return CACHED_LOTTO_NUMBERS.get(number);
+        throw new IllegalArgumentException(INVALID_RANGE_ERROR_MESSAGE);
     }
 
     public static List<LottoNumber> listOf(int size, ShuffleStrategy shuffleStrategy) {

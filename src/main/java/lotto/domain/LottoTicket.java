@@ -12,8 +12,7 @@ import static lotto.utils.Validator.checkNotNull;
 public class LottoTicket {
 
     private final List<LottoNumbers> manualLottoLines;
-    // TODO: [2021/11/21 양동혁] autoLottoLines으로 변경
-    private final List<LottoNumbers> lottoLines;
+    private final List<LottoNumbers> autoLottoLines;
 
     public static LottoTicket publish(PublishDetails publishDetails, ShuffleStrategy shuffleStrategy) {
         checkNotNull(publishDetails);
@@ -27,9 +26,9 @@ public class LottoTicket {
                 .collect(Collectors.toList());
     }
 
-    public LottoTicket(List<LottoNumbers> lottoLines, List<LottoNumbers> manualLottoLines) {
-        checkNotNull(lottoLines, manualLottoLines);
-        this.lottoLines = lottoLines;
+    public LottoTicket(List<LottoNumbers> autoLottoLines, List<LottoNumbers> manualLottoLines) {
+        checkNotNull(autoLottoLines, manualLottoLines);
+        this.autoLottoLines = autoLottoLines;
         this.manualLottoLines = manualLottoLines;
     }
 
@@ -48,7 +47,7 @@ public class LottoTicket {
     public List<LottoNumbers> allLottoLines() {
         List<LottoNumbers> allLottoLines = new ArrayList<>();
         allLottoLines.addAll(manualLottoLines);
-        allLottoLines.addAll(lottoLines);
+        allLottoLines.addAll(autoLottoLines);
         return unmodifiableList(allLottoLines);
     }
 
@@ -57,7 +56,7 @@ public class LottoTicket {
     }
 
     public int autoLottoLinesCount() {
-        return lottoLines.size();
+        return autoLottoLines.size();
     }
 
     @Override
@@ -65,11 +64,11 @@ public class LottoTicket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoTicket that = (LottoTicket) o;
-        return Objects.equals(manualLottoLines, that.manualLottoLines) && Objects.equals(lottoLines, that.lottoLines);
+        return Objects.equals(manualLottoLines, that.manualLottoLines) && Objects.equals(autoLottoLines, that.autoLottoLines);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(manualLottoLines, lottoLines);
+        return Objects.hash(manualLottoLines, autoLottoLines);
     }
 }
