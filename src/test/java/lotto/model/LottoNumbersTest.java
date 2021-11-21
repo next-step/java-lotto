@@ -16,7 +16,6 @@ class LottoNumbersTest {
     void autoCreate() {
         LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumberGenerator());
         assertThat(lottoNumbers.getLottoNumbers()).hasSize(6);
-        OutputView.print(lottoNumbers.getLottoNumbers());
     }
 
     @Test

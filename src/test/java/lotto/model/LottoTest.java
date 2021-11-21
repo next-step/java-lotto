@@ -18,7 +18,6 @@ class LottoTest {
     void ticket() {
         Lotto lotto = new Lotto(10);
         assertThat(lotto.getLotto()).hasSize(10);
-        OutputView.print(lotto);
     }
 
     @Test
