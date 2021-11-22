@@ -48,8 +48,13 @@ Prize
 
 Wallet
 
+* Wallet 은 돈을 입력 받아 자신을 생성할 수 있다.
 * Wallet 은 Lotto 를 여러장 구매할 수 있다.
 * Wallet 은 LottoResult 를 파라미터로 받아 자신의 Lotto 를 Prize 로 반환할 수 있다.
+
+
+
+
 
 ## 2단계 로또
 
