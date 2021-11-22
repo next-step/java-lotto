@@ -1,12 +1,19 @@
 package lotto.service;
 
+import java.util.List;
 import lotto.domain.LottoTickets;
+import lotto.domain.WinningResult;
+import lotto.domain.WinnerLottoTicket;
+import lotto.domain.dto.ResultDto;
+import lotto.domain.dto.WinningLottoTicketDto;
 import lotto.util.AutoLottoNumberUtils;
 
 public class LottoService {
 
-    private static final int TICKET_PRICE = 1000;
+    private static final Double DEFAULT_PRIZE_MONEY = 0d;
+    private static final long TICKET_PRICE = 1000l;
     private static final int MINIMUM_COUNT = 1;
+
     private static LottoService lottoService;
 
     private LottoService() {
@@ -28,12 +35,27 @@ public class LottoService {
         return lottoTickets;
     }
 
+    public ResultDto winningResult(WinningLottoTicketDto dto) {
+        WinnerLottoTicket winnerLottoTicket = WinnerLottoTicket.from(dto.getWinnerLottoTicket());
+        List<Long> winningResult = winnerLottoTicket.winnerCount(dto.getLottoTickets());
+        WinningResult resultRank = new WinningResult();
+        resultRank.updateRank(winningResult);
+        return ResultDto.of(resultRank, mathYield(resultRank.getMoney(), resultRank.getPrizeMoney()));
+    }
+
     private int getCount(int money) {
         int count = (int) Math.floor(money / TICKET_PRICE);
-        if(count < MINIMUM_COUNT) {
+        if (count < MINIMUM_COUNT) {
             throw new IllegalArgumentException(String.format("금액은 %d원 이상이어야 합니다.", TICKET_PRICE));
         }
         return count;
+    }
+
+    private Double mathYield(Double money, Double prizeMoney) {
+        if (prizeMoney == DEFAULT_PRIZE_MONEY) {
+            return DEFAULT_PRIZE_MONEY;
+        }
+        return Math.floor((prizeMoney / money) * 100l) / 100.0;
     }
 
 }

@@ -17,17 +17,6 @@ public class WinnerLottoTicket extends AbstractLottoTicket {
         return new WinnerLottoTicket(MapToInt(input.split(DELIMITER)));
     }
 
-    private static List<Integer> MapToInt(String[] input) {
-        try {
-            return Arrays.stream(input)
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .collect(Collectors.toCollection(ArrayList::new));
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("숫자만 입력할 수 있습니다.");
-        }
-    }
-
     public List<Long> winnerCount(LottoTickets lottoTickets) {
         return lottoTickets.getLottoTickets().stream()
             .mapToLong(this::winnerCount)
@@ -40,6 +29,17 @@ public class WinnerLottoTicket extends AbstractLottoTicket {
             .stream()
             .filter(number -> this.lottoTicket.contains(number))
             .count();
+    }
+
+    private static List<Integer> MapToInt(String[] input) {
+        try {
+            return Arrays.stream(input)
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(Collectors.toCollection(ArrayList::new));
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("숫자만 입력할 수 있습니다.");
+        }
     }
 
 }
