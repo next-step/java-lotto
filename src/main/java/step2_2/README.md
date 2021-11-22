@@ -45,3 +45,7 @@
     [출력]
     - OutputView (static)
         - LottoResult를 입력받아서 출력 (toString?)
+
+## 질문사항
+
+    1. 설계방식
