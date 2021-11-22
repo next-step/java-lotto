@@ -28,4 +28,8 @@ public enum LottoReward {
     public int getReward() {
         return reward;
     }
+
+    public long getMatchCount() {
+        return matchCount;
+    }
 }
