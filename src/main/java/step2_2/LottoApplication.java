@@ -12,6 +12,5 @@ public class LottoApplication {
         printLottoBundle(lottoBundle);
 
         Lotto winner = readLotto();
-        LottoResult lottoResult = lottoBundle.getLottoResult(winner);
     }
 }

@@ -18,7 +18,7 @@ public class LottoBundle {
         }
     }
 
-    public int lottoCount() {
+    public int getLottoCount() {
         return lottos.size();
     }
 

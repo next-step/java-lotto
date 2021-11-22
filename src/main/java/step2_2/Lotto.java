@@ -11,20 +11,20 @@ import java.util.stream.IntStream;
 
 public class Lotto {
 
-    private static final List<LottoNumber> RANDOM_LOTTO_NUMBERS;
+    private static final List<LottoNumber> RANDOM_LOTTO_NUMBERS = initDefaultLottoNumbers();
     private static final int LOTTO_NUMBER_SIZE = 6;
     private static final int ZERO = 0;
-
-    static {
-        RANDOM_LOTTO_NUMBERS = IntStream.range(1, 46)
-            .mapToObj(LottoNumber::new)
-            .collect(toList());
-    }
 
     public static Lotto publish() {
         Collections.shuffle(RANDOM_LOTTO_NUMBERS);
         List<LottoNumber> randomNumbers = RANDOM_LOTTO_NUMBERS.subList(ZERO, LOTTO_NUMBER_SIZE);
         return new Lotto(new ArrayList<>(randomNumbers));
+    }
+
+    private static List<LottoNumber> initDefaultLottoNumbers() {
+        return IntStream.range(1, 46)
+            .mapToObj(LottoNumber::new)
+            .collect(toList());
     }
 
     private List<LottoNumber> lottoNumbers;
@@ -42,13 +42,13 @@ public class Lotto {
 
     public LottoReward getReward(Lotto winner) {
         long matchCount = lottoNumbers.stream()
-            .filter(winner::containsNumber)
+            .filter(winner::containsLottoNumber)
             .count();
 
-        return LottoReward.getReward(matchCount);
+        return LottoReward.fromMatchCount(matchCount);
     }
 
-    private boolean containsNumber(LottoNumber lottoNumber) {
+    private boolean containsLottoNumber(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 

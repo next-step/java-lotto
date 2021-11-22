@@ -6,8 +6,8 @@ public class Money {
 
     private int money;
 
-    public static Money fromLottoCount(int count) {
-        return new Money(count * LOTTO_PRICE);
+    public static Money fromLottoCount(int lottoCount) {
+        return new Money(lottoCount * LOTTO_PRICE);
     }
 
     public Money(int money) {
@@ -19,10 +19,6 @@ public class Money {
         if (money < 0) {
             throw new InvalidMoneyInputException();
         }
-    }
-
-    public int won() {
-        return money;
     }
 
     public boolean canPurchase() {

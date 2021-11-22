@@ -11,25 +11,17 @@ public enum LottoReward {
     BANG(0, 0);
 
     private final long matchCount;
-    private final int reward;
+    private final Money reward;
 
-    LottoReward(long matchCount, int reward) {
+    LottoReward(int matchCount, int reward) {
         this.matchCount = matchCount;
-        this.reward = reward;
+        this.reward = new Money(reward);
     }
 
-    public static LottoReward getReward(long matchCount) {
-        return Arrays.stream(values())
+    public static LottoReward fromMatchCount(long matchCount) {
+        return Arrays.stream(LottoReward.values())
             .filter(lottoReward -> lottoReward.matchCount == matchCount)
             .findAny()
             .orElse(BANG);
-    }
-
-    public int getReward() {
-        return reward;
-    }
-
-    public long getMatchCount() {
-        return matchCount;
     }
 }
