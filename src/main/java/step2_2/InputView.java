@@ -1,5 +1,6 @@
 package step2_2;
 
+import static java.util.stream.Collectors.toList;
 import static step2_2.InputUtil.readInt;
 import static step2_2.InputUtil.readNumbers;
 
@@ -23,8 +24,19 @@ public class InputView {
         }
     }
 
-    public static List<Integer> readLottoNumbers() {
+    public static List<LottoNumber> readLottoNumbers() {
         System.out.println(LOTTO_NUMBER_INPUT_MESSAGE);
-        return readNumbers();
+        try {
+            return readLottoNumbersFromNumber();
+        } catch (InvalidLottoNumberException e) {
+            System.out.println(e.getMessage());
+            return readLottoNumbers();
+        }
+    }
+
+    private static List<LottoNumber> readLottoNumbersFromNumber() {
+        return readNumbers().stream()
+            .map(LottoNumber::new)
+            .collect(toList());
     }
 }
