@@ -3,32 +3,24 @@ package lotto.domain;
 import lotto.vo.Lottos;
 import lotto.vo.Money;
 
-import java.util.Optional;
-
 public class Wallet {
 
     private final Money myMoney;
-    private Lottos lottos;
+    private final Lottos lottos;
 
-    private Wallet(Money myMoney) {
+    private Wallet(Money myMoney, Lottos lottos) {
         this.myMoney = myMoney;
-    }
-
-    public static Wallet create(Money money) {
-        return new Wallet(money);
-    }
-
-    public Money getMoneyToBuy() {
-        return myMoney;
-    }
-
-    public Optional<Lottos> getLottos() {
-        return Optional.ofNullable(lottos);
-    }
-
-    public Lottos buyLotto(LottoSeller lottoSeller) {
-        Lottos lottos = lottoSeller.buyLotto(myMoney);
         this.lottos = lottos;
-        return this.lottos;
+    }
+
+    public static Wallet create(Money money, Lottos lottos) {
+        return new Wallet(money, lottos);
+    }
+    public Lottos getLottos() {
+        return lottos;
+    }
+
+    public Money getMyMoney() {
+        return myMoney;
     }
 }

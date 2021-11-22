@@ -1,41 +1,40 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.WinningRank;
+import lotto.domain.*;
 import lotto.service.LottoService;
 import lotto.service.NumberGenerateStrategy;
 import lotto.service.RandomLottoNumberGenerateStrategy;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-import lotto.vo.LottoNumber;
-import lotto.vo.Lottos;
-import lotto.vo.Money;
-import lotto.vo.WinningHistory;
+import lotto.vo.*;
 
 public class main {
 
     public static void main(String[] args) {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
+        LottoService lottoService = getLottoService();
 
-        LottoService lottoService = getLottoService(inputView);
+        Money money = inputView.inputMoney();
 
-        buyLotto(outputView, lottoService);
+        Wallet wallet = buyLotto(money, lottoService);
 
-        WinningHistory winningHistory = startLottoService(inputView, lottoService);
+        outputView.renderWithLottos(wallet.getLottos());
+
+        WinningHistory winningHistory = startLottoService(inputView, lottoService, wallet);
 
         outputView.renderWithWinningHistory(winningHistory, WinningRank.getReverseRankListWithoutNoRank());
 
     }
 
-    private static WinningHistory startLottoService(InputView inputView, LottoService lottoService) {
+    private static WinningHistory startLottoService(InputView inputView, LottoService lottoService, Wallet wallet) {
         Lotto winningLotto = getWinningLotto(inputView);
 
         LottoNumber lottoNumber = getBonusBall(inputView);
 
         lottoService.validBonus(winningLotto, lottoNumber);
 
-        WinningHistory winningHistory = lottoService.getWinningHistory(winningLotto, lottoNumber);
+        WinningHistory winningHistory = lottoService.getWinningHistory(winningLotto, lottoNumber, wallet);
         return winningHistory;
     }
 
@@ -53,17 +52,15 @@ public class main {
         return winningLotto;
     }
 
-    private static void buyLotto(OutputView outputView, LottoService lottoService) {
-        Lottos lottos = lottoService.buyLotto();
-
-        outputView.renderWithLottos(lottos);
+    private static Wallet buyLotto(Money money, LottoService lottoService) {
+        return Wallet.create(money,lottoService.buyLotto(money));
     }
 
-    private static LottoService getLottoService(InputView inputView) {
-        Money money = inputView.inputMoney();
-
+    private static LottoService getLottoService() {
         NumberGenerateStrategy strategy = new RandomLottoNumberGenerateStrategy();
-        LottoService lottoService = new LottoService(money, strategy);
+        LottoGenerator lottoGenerator = LottoGenerator.create(strategy);
+        LottoSeller lottoSeller = LottoSeller.create(Money.create(LottoRule.LOTTO_PRICE.getValue()), lottoGenerator);
+        LottoService lottoService = new LottoService(lottoSeller);
         return lottoService;
     }
 }

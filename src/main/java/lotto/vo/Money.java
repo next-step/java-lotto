@@ -1,6 +1,7 @@
 package lotto.vo;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Objects;
 
 public class Money {
@@ -26,26 +27,24 @@ public class Money {
 
         BigDecimal value = new BigDecimal(input);
 
+        return new Money(value);
+    }
+
+    public static Money create(int value) {
+        return create(BigDecimal.valueOf(value));
+    }
+    public static Money create(BigDecimal value) {
         if (value.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException(ZERO_EXCEPTION_MESSAGE);
         }
         return new Money(value);
     }
 
-    public static Money create(BigDecimal value) {
-        return new Money(value);
-    }
-
-    public long getNumberToBuy(Money price) {
-        return this.value.divideToIntegralValue(price.value).longValue();
-    }
-
     public BigDecimal divide(Money o) {
         if (o.value.compareTo(BigDecimal.ONE) < 0) {
             throw new IllegalArgumentException(ZERO_EXCEPTION_MESSAGE);
         }
-
-        return this.value.divide(o.value);
+        return this.value.divide(o.value, MathContext.DECIMAL32);
     }
 
     public BigDecimal getValue() {

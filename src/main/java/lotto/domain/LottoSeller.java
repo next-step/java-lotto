@@ -20,14 +20,6 @@ public class LottoSeller {
         return new LottoSeller(lottoPrice, lottoGenerator);
     }
 
-
-    public Lottos buyLotto(Money money) {
-        validate(money);
-
-        long numberToBuy = money.getNumberToBuy(lottoPrice);
-        return lottoGenerator.generateLotto(numberToBuy);
-    }
-
     private void validate(Money money) {
         if (money == null) {
             throw new IllegalArgumentException(NULL_MONEY_EXCEPTION_MESSAGE);
@@ -36,5 +28,14 @@ public class LottoSeller {
         if (money.lessThan(lottoPrice)) {
             throw new IllegalArgumentException(LESS_MONEY_EXCEPTION_MESSAGE);
         }
+    }
+
+    public Lottos sellLotto(Money money) {
+        validate(money);
+        return lottoGenerator.generateLotto(getNumberToBuy(money));
+    }
+
+    private long getNumberToBuy(Money money) {
+        return money.divide(lottoPrice).longValue();
     }
 }

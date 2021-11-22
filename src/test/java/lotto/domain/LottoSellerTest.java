@@ -30,7 +30,7 @@ class LottoSellerTest {
     void buyLottoTest(BigDecimal money, BigDecimal price, int expect) {
         lottoSeller = LottoSeller.create(Money.create(price), lottoGenerator);
 
-        Lottos lottos = lottoSeller.buyLotto(Money.create(money));
+        Lottos lottos = lottoSeller.sellLotto(Money.create(money));
 
         assertThat(lottos.count()).isEqualTo(expect);
     }
@@ -41,8 +41,7 @@ class LottoSellerTest {
     void buyLottoLessMoneyTest(BigDecimal money, BigDecimal price) {
         lottoSeller = LottoSeller.create(Money.create(price), lottoGenerator);
 
-        assertThatIllegalArgumentException().isThrownBy(() -> lottoSeller.buyLotto(Money.create(money)));
+        assertThatIllegalArgumentException().isThrownBy(() -> lottoSeller.sellLotto(Money.create(money)));
 
     }
-
 }
