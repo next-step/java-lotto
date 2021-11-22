@@ -2,9 +2,7 @@ package lotto.domain;
 
 import calculator.PositiveNumber;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * @author han
@@ -25,6 +23,8 @@ public class Lotto {
         for (int i = 0; i < size; i++) {
             numbers.add(new PositiveNumber(r.nextInt(seed)));
         }
+
+        Collections.sort(numbers, Comparator.comparing(PositiveNumber::getNumber));
         return new Lotto(numbers);
     }
 
