@@ -10,6 +10,7 @@ public class StringAddCalculator {
     private static final String DEFAULT_SEPARATOR = ",|:";
     private static final String MSG_OR = "|";
     private static final String CUTTING_MSG = "\n";
+
     private static final int FIRST_MATCHED = 1;
     private static final int ZERO = 0;
 
