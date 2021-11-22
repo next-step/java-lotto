@@ -1,31 +1,26 @@
 package lotto.model;
 
-public enum WinningPrice {
-    NOTWIN(0),
-    FORTH(5000),
-    THIRD(50000),
-    SECOND(1500000),
-    FIRST(2000000000);
+import java.util.Arrays;
 
+public enum WinningPrice {
+    NOTWIN(2, 0),
+    FORTH(3, 5_000),
+    THIRD(4, 50_000),
+    SECOND(5, 1_500_000),
+    FIRST(6, 2_000_000_000);
+
+    private final int winningCount;
     private final int price;
 
-    WinningPrice(int price) {
+    WinningPrice(int winningCount, int price) {
+        this.winningCount = winningCount;
         this.price = price;
     }
 
     public static WinningPrice of(int winningCount) {
-        switch (winningCount) {
-            case 3:
-                return FORTH;
-            case 4:
-                return THIRD;
-            case 5:
-                return SECOND;
-            case 6:
-                return FIRST;
-            default:
-                return NOTWIN;
-        }
+        return Arrays.stream(values()).filter(it -> it.winningCount == winningCount)
+                .findFirst()
+                .orElse(NOTWIN);
     }
 
     public int getPrice() {

@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 import static lotto.LottoPaper.LOTTO_PRICE;
 
 public class InputView {
-    private final static String INPUT_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";
-    private final static String PURCHASE_RESULT_MESSAGE = "개를 구매했습니다.";
-    private final static String INPUT_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String INPUT_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";
+    private static final String PURCHASE_RESULT_MESSAGE = "개를 구매했습니다.";
+    private static final String INPUT_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
 
     private static final String WINNING_NUMBERS_DELIMITER = ",";
 

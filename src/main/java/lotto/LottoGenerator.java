@@ -9,24 +9,24 @@ public class LottoGenerator {
 
     private static final int LOTTERY_NUMBER_COUNT = 45;
 
-    private LottoNumbers lottoNumbers;
+    private final LottoNumbers lottoNumbers;
     private final LotteryStrategy lotteryStrategy;
 
     public LottoGenerator(LotteryStrategy lotteryStrategy) {
         this.lotteryStrategy = lotteryStrategy;
-        initLottoNumbers();
+        this.lottoNumbers = getLottoNumbers();
     }
 
     public LottoNumbers generateLottoNumber() {
         return this.lotteryStrategy.draw(this.lottoNumbers);
     }
 
-    private void initLottoNumbers() {
+    private LottoNumbers getLottoNumbers() {
         List<LottoNumber> numbers = new ArrayList<>();
         for (int i = 1; i <= LOTTERY_NUMBER_COUNT; i++) {
             numbers.add(new LottoNumber(i));
         }
 
-        this.lottoNumbers = new LottoNumbers(numbers);
+        return new LottoNumbers(numbers);
     }
 }

@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
@@ -23,14 +24,10 @@ public class LottoNumbers {
     }
 
     public int winningCount(LottoNumbers winningNumbers) {
-        int count = 0;
-
-        for (LottoNumber lottoNumber: winningNumbers.numbers) {
-            if (this.numbers.contains(lottoNumber)) {
-                count++;
-            }
-        }
-        return count;
+        return (int) winningNumbers.numbers
+                .stream()
+                .filter(this.numbers::contains)
+                .count();
     }
 
     @Override
@@ -52,5 +49,10 @@ public class LottoNumbers {
 
         LottoNumbers that = (LottoNumbers) o;
         return this.numbers.containsAll(that.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }
