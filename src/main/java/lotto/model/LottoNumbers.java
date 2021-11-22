@@ -5,6 +5,8 @@ import lotto.generator.NumberGenerator;
 
 import java.util.*;
 
+import static lotto.application.Constant.LOTTO_NUMBERS_SIZE;
+
 public class LottoNumbers {
 
     private final List<LottoNumber> lottoNumbers;
@@ -24,7 +26,7 @@ public class LottoNumbers {
 
     private List<LottoNumber> autoCreate(NumberGenerator generator) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
-        while (lottoNumbers.size() < 6) {
+        while (lottoNumbers.size() < LOTTO_NUMBERS_SIZE) {
             lottoNumbers.add(new LottoNumber(generator));
         }
         return new ArrayList<>(lottoNumbers);

@@ -12,7 +12,7 @@ public class Constant {
     public static final String EXCEPTION_MESSAGE_RANGE_VALIDATION = "로또 번호는 1~45 사이의 숫자입니다.";
     public static final String EXCEPTION_MESSAGE_PARSE_VALIDATION = "숫자가 아닌 문자가 입력되었습니다.";
 
-
+    public static final int LOTTO_NUMBERS_SIZE = 6;
 
     private Constant() {
     }
