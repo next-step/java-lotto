@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.LottoNumber;
 import lotto.exception.LottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class LottoNumberTest {
 
     @ParameterizedTest
-    @DisplayName("LottoNumber는 1 ~ 45 사의의 숫자가 아닌경우 exception.")
+    @DisplayName("LottoNumber 생성 test")
     @ValueSource(ints = {1, 2, 45})
     void createLottoNumberTest(int number) {
         assertThat(LottoNumber.from(number)).isInstanceOf(LottoNumber.class);
