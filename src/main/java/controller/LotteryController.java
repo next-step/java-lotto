@@ -9,15 +9,15 @@ public class LotteryController {
         Store store = new Store(InputView.inputPrice());
         OutputView.purchaseLottery(store);
 
-        LotteryTickets lotteryTickets = store.lotteryNumbersAutomatically();
+        LotteryTickets lotteryTickets = store.createLotteryNumber();
         OutputView.printLotteryNumber(lotteryTickets);
 
-        LastWeekLotteryNumber lastWeekLottery = new LastWeekLotteryNumber(InputView.inputLastWeekNumber());
-        RankGroup rankGroup = new RankGroup(lotteryTickets, lastWeekLottery);
+        LastWeekLottery lastWeekLottery = new LastWeekLottery(InputView.inputLastWeekNumber());
+
+        RankGroup rankGroup = new RankGroup(lotteryTickets, lastWeekLottery, InputView.inputBonusBall());
         MoneyPrize moneyPrize = new MoneyPrize(rankGroup);
         OutputView.resultWinningMessage();
         OutputView.printWinningPrize(rankGroup);
         OutputView.resultLotteryProfit(moneyPrize, store);
-
     }
 }
