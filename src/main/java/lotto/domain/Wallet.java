@@ -4,7 +4,6 @@ import lotto.dto.LottoInput;
 import lotto.vo.LottoNumber;
 import lotto.vo.Lottos;
 import lotto.vo.Money;
-import lotto.vo.WinningHistory;
 
 import java.math.BigDecimal;
 import java.util.Collections;
