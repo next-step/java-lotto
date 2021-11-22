@@ -32,7 +32,7 @@ public class Lotto {
         List<PositiveNumber> numbers = r.ints(1, seed)
             .distinct()
             .limit(size)
-            .mapToObj(i -> new PositiveNumber(i)).collect(Collectors.toList());
+            .mapToObj(PositiveNumber::new).collect(Collectors.toList());
 
         Collections.sort(numbers, Comparator.comparing(PositiveNumber::getNumber));
         return new Lotto(numbers);
