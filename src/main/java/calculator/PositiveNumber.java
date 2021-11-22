@@ -7,16 +7,20 @@ public class PositiveNumber {
 
     private final int number;
 
-    private PositiveNumber(String input) {
-        this.number = stringToInt(input);
+    public PositiveNumber(int number) {
+        this.number = number;
     }
 
-    public static PositiveNumber of(String input) {
-        return new PositiveNumber(input);
+    public PositiveNumber(String input) {
+        this.number = stringToInt(input);
     }
 
     public int getNumber() {
         return number;
+    }
+
+    public PositiveNumber add(PositiveNumber number) {
+        return new PositiveNumber(this.number + number.getNumber());
     }
 
     private int stringToInt(String input) {
