@@ -32,7 +32,12 @@ public class StringAddCalculator {
                 .boxed()
                 .collect(Collectors.toList());
 
-        return numbers.stream().reduce(0 ,Integer::sum);
+        return numbers.stream().reduce(0 ,(a, b) -> {
+            if (b < 0) {
+                throw new RuntimeException("음수는 입력할 수 없습니다.");
+            }
+            return a + b;
+        });
     }
 }
 
