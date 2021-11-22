@@ -23,6 +23,10 @@ public class WinningLotto {
         return lotteries.totalSecondPrizeWinners(winningNumbers, bonusBall);
     }
 
+    public double calculateRateOfProfit(Lotteries lotteries, int orderPrice) {
+        return lotteries.calculateRateOfProfit(winningNumbers, bonusBall, orderPrice);
+    }
+
     private void checkBonusBall(List<Integer> winningNumbers, int bonusBall) {
         boolean isAllNoneMatch = winningNumbers.stream()
                 .noneMatch(number -> number == bonusBall);
@@ -52,7 +56,4 @@ public class WinningLotto {
                 '}';
     }
 
-    public double calculateRateOfProfit(Lotteries lotteries, int orderPrice) {
-        return lotteries.calculateRateOfProfit(winningNumbers, bonusBall, orderPrice);
-    }
 }

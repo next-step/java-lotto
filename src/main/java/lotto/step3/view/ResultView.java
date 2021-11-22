@@ -4,7 +4,6 @@ import lotto.step3.domain.Lotteries;
 import lotto.step3.domain.Lotto;
 import lotto.step3.domain.Rank;
 
-import java.util.Collections;
 import java.util.Map;
 
 public final class ResultView {

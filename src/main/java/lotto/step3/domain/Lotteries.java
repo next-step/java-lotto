@@ -2,20 +2,24 @@ package lotto.step3.domain;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.*;
-import java.util.stream.IntStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.IntStream.range;
 
 public class Lotteries {
 
-    private static final int LOTTO_MATCH_COUNT_START = 3;
-    private static final int LOTTO_MATCH_COUNT_END = 6;
     private static final String RATE_PATTERN = "0.##";
 
-    private List<Lotto> lotteries = new ArrayList<>();
+    private final List<Lotto> lotteries;
 
     public Lotteries(int orderCount) {
-        IntStream.range(0, orderCount)
-                .forEach(i -> lotteries.add(new Lotto()));
+        this(range(0, orderCount)
+                .mapToObj(i -> new Lotto())
+                .collect(toList()));
     }
 
     public Lotteries(List<Lotto> lotteries) {
@@ -24,8 +28,8 @@ public class Lotteries {
 
     public Map<Integer, Integer> createRepository(Lotto winningNumbers) {
         Map<Integer, Integer> repository = new HashMap<>();
-        for (int count = LOTTO_MATCH_COUNT_START; count <= LOTTO_MATCH_COUNT_END; count++) {
-            repository.put(count, totalCountOfMatch(winningNumbers, count));
+        for (Rank rank : Rank.values()) {
+            repository.put(rank.getCountOfMatch(), totalCountOfMatch(winningNumbers, rank.getCountOfMatch()));
         }
         return repository;
     }
