@@ -17,10 +17,9 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOf
 public class LottoTest {
 
     @Test
-    @DisplayName("로또 생성")
+    @DisplayName("로또 자동 생성")
     void create() {
-        List<PositiveNumber> numbers = Arrays.asList(new PositiveNumber("8"), new PositiveNumber("23"), new PositiveNumber("41"), new PositiveNumber("42"), new PositiveNumber("43"));
-        Lotto l = new Lotto(numbers);
-        assertThat(l.getNumbers().size()).isEqualTo(5);
+        Lotto byAuto = Lotto.createByAuto();
+        assertThat(byAuto.getNumbers().size()).isEqualTo(5);
     }
 }
