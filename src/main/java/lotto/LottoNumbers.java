@@ -30,6 +30,12 @@ public class LottoNumbers {
                 .count();
     }
 
+    public List<Integer> getNumberValues() {
+        return this.numbers.stream()
+                .map(LottoNumber::getValue)
+                .collect(Collectors.toList());
+    }
+
     @Override
     public String toString() {
         return "[ " + this.numbers.stream()

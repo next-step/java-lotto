@@ -2,6 +2,8 @@ package lotto;
 
 import lotto.model.WinningPrice;
 
+import java.util.List;
+
 public class LottoPaper {
     public static final Integer LOTTO_PRICE = 1000;
 
@@ -16,8 +18,7 @@ public class LottoPaper {
         return WinningPrice.of(winningCount);
     }
 
-    @Override
-    public String toString() {
-        return this.numbers.toString();
+    public List<Integer> getNumberValues() {
+        return this.numbers.getNumberValues();
     }
 }

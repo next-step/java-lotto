@@ -16,14 +16,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.value = value;
     }
 
-    @Override
-    public int compareTo(LottoNumber other) {
-        return Integer.compare(this.value, other.value);
+    public int getValue() {
+        return value;
     }
 
     @Override
-    public String toString() {
-        return String.valueOf(this.value);
+    public int compareTo(LottoNumber other) {
+        return Integer.compare(this.value, other.value);
     }
 
     @Override

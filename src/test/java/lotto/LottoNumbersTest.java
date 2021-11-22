@@ -56,17 +56,4 @@ class LottoNumbersTest {
         // then
         assertThat(lottoNumbers.winningCount(winningNumbers)).isEqualTo(6);
     }
-
-    @Test
-    @DisplayName("toString 메소드는 로또 번호를 문자열로 반환한다")
-    void 테스트_toString_로또_번호_문자열_반환() {
-        // given
-        LottoNumbers testNumbers = testLottoNumbers();
-
-        // when
-        String result = testNumbers.toString();
-
-        // then
-        assertThat(result).isEqualTo("[ 1, 2, 3, 4, 5, 6 ]");
-    }
 }

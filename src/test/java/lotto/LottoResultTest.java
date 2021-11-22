@@ -35,7 +35,7 @@ class LottoResultTest {
         LottoResult result = getTestLottoResult();
 
         // then
-        assertThat(result.getYield()).isEqualTo(400311.0);
+        assertThat(result.getYield()).isEqualTo(400311.0f);
     }
 
     private LottoResult getTestLottoResult() {
