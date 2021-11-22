@@ -308,7 +308,15 @@ class WinningStatisticsTest {
         return Stream.of(
                 Arguments.of(
                     WinningStatistics.from(lottos, WinningLotto.from(new String[] {"1", "2", "3", "14", "15", "16"})),
-                        0.
+                        0.0
+                ),
+                Arguments.of(
+                    WinningStatistics.from(lottos, WinningLotto.from(new String[] {"10", "11", "12", "14", "15", "16"})),
+                        136.0
+                ),
+                Arguments.of(
+                    WinningStatistics.from(lottos, WinningLotto.from(new String[] {"10", "11", "12", "20", "22", "23"})),
+                        5.0
                 )
         );
     }
