@@ -132,7 +132,7 @@ class WinningStatisticsTest {
         );
 
         this.lottos = Lottos.from(lottoList);
-        this.winningLotto = WinningLotto.from(new String[] {"1", "2", "3", "4", "5", "6"});
+        this.winningLotto = WinningLotto.from(new String[] {"1", "2", "3", "4", "5", "6"}, LottoNumber.from(7));
     }
 
     @ParameterizedTest
@@ -162,9 +162,6 @@ class WinningStatisticsTest {
                 ),
                 Arguments.of(
                         Rank.FIFTH, 1
-                ),
-                Arguments.of(
-                        Rank.SIXTH, 1
                 ),
                 Arguments.of(
                         Rank.NOTHING, 1
@@ -307,15 +304,15 @@ class WinningStatisticsTest {
 
         return Stream.of(
                 Arguments.of(
-                    WinningStatistics.from(lottos, WinningLotto.from(new String[] {"1", "2", "3", "14", "15", "16"})),
+                    WinningStatistics.from(lottos, WinningLotto.from(new String[] {"1", "2", "3", "14", "15", "16"}, LottoNumber.from(17))),
                         0.0
                 ),
                 Arguments.of(
-                    WinningStatistics.from(lottos, WinningLotto.from(new String[] {"10", "11", "12", "14", "15", "16"})),
+                    WinningStatistics.from(lottos, WinningLotto.from(new String[] {"10", "11", "12", "14", "15", "16"}, LottoNumber.from(17))),
                         136.0
                 ),
                 Arguments.of(
-                    WinningStatistics.from(lottos, WinningLotto.from(new String[] {"10", "11", "12", "20", "22", "23"})),
+                    WinningStatistics.from(lottos, WinningLotto.from(new String[] {"10", "11", "12", "20", "22", "23"}, LottoNumber.from(17))),
                         5.0
                 )
         );
