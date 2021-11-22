@@ -3,8 +3,8 @@ package lotto.domain;
 import calculator.PositiveNumber;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * @author han
@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 public class Lotto {
     private static final int seed = 46;
     private static final int size = 6;
-    private static final Random r = new Random();
+    private static final Random r = ThreadLocalRandom.current();
 
     private final List<PositiveNumber> numbers;
 
@@ -29,10 +29,10 @@ public class Lotto {
     }
 
     public static Lotto createByAuto() {
-        List<PositiveNumber> numbers = IntStream
-            .range(0, size)
-            .mapToObj(o -> new PositiveNumber(r.nextInt(seed)))
-            .collect(Collectors.toList());
+        List<PositiveNumber> numbers = r.ints(1, seed)
+            .distinct()
+            .limit(size)
+            .mapToObj(i -> new PositiveNumber(i)).collect(Collectors.toList());
 
         Collections.sort(numbers, Comparator.comparing(PositiveNumber::getNumber));
         return new Lotto(numbers);
