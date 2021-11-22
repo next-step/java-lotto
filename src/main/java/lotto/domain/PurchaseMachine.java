@@ -3,6 +3,7 @@ package lotto.domain;
 import calculator.PositiveNumber;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -23,6 +24,12 @@ public class PurchaseMachine {
     public PurchaseMachine(PositiveNumber credit, List<Lotto> lottoList) {
         this.credit = credit;
         this.lottoList = lottoList;
+        this.won = Lotto.createByAuto();
+    }
+
+    public PurchaseMachine(PositiveNumber credit) {
+        this.credit = credit;
+        this.lottoList = Collections.emptyList();
         this.won = Lotto.createByAuto();
     }
 
