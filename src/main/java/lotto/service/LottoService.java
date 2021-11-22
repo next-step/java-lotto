@@ -30,15 +30,16 @@ public class LottoService {
     }
 
     public WinningHistory getWinningHistory(Lotto winningLotto, LottoNumber bonus) {
-        Lottos lottos = wallet.getLottos();
-        List<WinningRank> winningRanks = checkWinning(lottos, winningLotto, bonus);
+        Lottos lottos = wallet.getLottos()
+                .orElseThrow(RuntimeException::new);
+        List<WinningRank> winningRanks = findWinningRanks(lottos, winningLotto, bonus);
         Money winningMoney = getWinningMoney(winningRanks);
         Money originMoney = wallet.getMoneyToBuy();
 
         return WinningHistory.create(originMoney, winningRanks, winningMoney);
     }
 
-    private List<WinningRank> checkWinning(Lottos lottos, Lotto winningLotto, LottoNumber bonus) {
+    private List<WinningRank> findWinningRanks(Lottos lottos, Lotto winningLotto, LottoNumber bonus) {
         return WinningRank.findWinningRanks(lottos, winningLotto, bonus);
     }
 

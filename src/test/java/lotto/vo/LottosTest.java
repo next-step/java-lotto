@@ -30,16 +30,6 @@ class LottosTest {
 
         assertThat(actual).isNotSameAs(lottoList);
         assertThat(actual).isEqualTo(lottoList);
-
-        actual.add(Lotto.create(Arrays.asList(
-                LottoNumber.create(1),
-                LottoNumber.create(2),
-                LottoNumber.create(3),
-                LottoNumber.create(4),
-                LottoNumber.create(5),
-                LottoNumber.create(6))));
-
-        assertThat(actual.size()).isNotEqualTo(lottoList.size());
     }
 
 }
