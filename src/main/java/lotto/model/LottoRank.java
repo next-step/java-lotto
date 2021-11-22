@@ -27,7 +27,7 @@ public enum LottoRank {
                 .orElse(MISS);
     }
 
-    public static List<LottoRank> valuesWithoutMiss(){
+    public static List<LottoRank> valuesWithoutMiss() {
         List<LottoRank> ranksWithoutMiss = Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> lottoRank != LottoRank.MISS)
                 .collect(Collectors.toList());

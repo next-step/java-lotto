@@ -60,15 +60,23 @@ public class OutputView {
         print("-------------");
 
         //일치여부 확인
-        Map<LottoRank, Number> lottoRankNumberMap = lottoStats.getLottoRankNumberMap();
-        for (LottoRank rank : LottoRank.valuesWithoutMiss()) {
-            Number count = lottoRankNumberMap.getOrDefault(rank, new Number());
-            print(String.valueOf(rank.getMatchCount()), "개 일치 (", String.valueOf(rank.getAmount()), "원)- ",
-                    count.toString(), "개");
-        }
+        print(lottoStats.getLottoRankNumberMap());
 
         //총 수익률
         print("총 수익률은 ", String.valueOf(lottoStats.getRateOfRevenue()), "입니다.");
 
     }
+
+    public static void print(Map<LottoRank, Number> lottoRankNumberMap) {
+        for (LottoRank rank : LottoRank.valuesWithoutMiss()) {
+            Number count = lottoRankNumberMap.getOrDefault(rank, new Number());
+            print(rank, count);
+        }
+    }
+
+    public static void print(LottoRank rank, Number count) {
+        print(String.format("%d개 일치 (%d원)- %d개", rank.getMatchCount(), rank.getAmount(), count.getNumber()));
+    }
+
+
 }
