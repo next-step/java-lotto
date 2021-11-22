@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.domain.starategy.GetLottoNumbersStrategy;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -9,13 +10,8 @@ import java.util.stream.IntStream;
 public class Lotto {
     public static final int SIZE = 6;
 
-    private static Integer BOUND_START = 1;
 
-    private static Integer BOUND_END = 45;
 
-    public static final List<Number> BOUND_NUMBERS = IntStream.rangeClosed(BOUND_START, BOUND_END)
-            .mapToObj(i -> new Number(i))
-            .collect(Collectors.toList());
 
     private final List<Number> lottoNumbers;
 
@@ -44,7 +40,7 @@ public class Lotto {
 
     public Integer checkMatching(WinningNumbers winningNumbers) {
         Long count = lottoNumbers.stream()
-                .filter(number -> winningNumbers.checkContainNumber(number))
+                .filter(winningNumbers::checkContainNumber)
                 .count();
         return count.intValue();
     }
@@ -54,6 +50,6 @@ public class Lotto {
     }
 
     public List<Number> getLottoNumbers() {
-        return lottoNumbers;
+        return Collections.unmodifiableList(lottoNumbers);
     }
 }

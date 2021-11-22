@@ -27,7 +27,6 @@ public class Output {
         Integer startIndex = 3;
         for (int index = startIndex; index < Prize.values().length; index++) {
             stringBuilder.setLength(0);
-            stringBuilder.append("");
             Prize prize = Arrays.asList(Prize.values()).get(index);
             if (prize == Prize.BONUS_SECOND) {
                 stringBuilder = stringBuilder.append(", 보너스 볼 일치");

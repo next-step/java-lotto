@@ -24,8 +24,8 @@ public class WinningNumbers {
         this.winningNumbers = winningNumbers;
     }
 
-    public void checkSize(List<Number> winningNumbers) {
-        if (winningNumbers.size() > SIZE) {
+    private void checkSize(List<Number> winningNumbers) {
+        if (winningNumbers.size() != SIZE) {
             throw new IllegalArgumentException(SIZE + " 와 길이가 다른 winningNumbers 는 입력될 수 없습니다.");
         }
     }

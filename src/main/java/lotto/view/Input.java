@@ -19,6 +19,7 @@ public class Input {
 
     public static WinningNumbers inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        SCANNER.nextLine();
         return new WinningNumbers(SCANNER.nextLine());
     }
 
