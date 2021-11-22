@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class CalculatorTest {
 
     @Test
-    void shouldSplit() {
+    void shouldSplitByComma() {
         String input = "1,2,3";
         Calculator calculator = new Calculator();
         calculator.split(input);
@@ -15,4 +15,12 @@ class CalculatorTest {
         assertThat(calculator.size()).isEqualTo(3);
     }
 
+    @Test
+    void shouldSplitByColon() {
+        String input = "4:5:6";
+        Calculator calculator = new Calculator();
+        calculator.split(input);
+
+        assertThat(calculator.size()).isEqualTo(3);
+    }
 }
