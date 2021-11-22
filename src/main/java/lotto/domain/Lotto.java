@@ -15,4 +15,8 @@ public class Lotto extends AbstractLotto {
     public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
+
+    public boolean contain(LottoNumber number) {
+        return lottoNumbers.contains(number);
+    }
 }
