@@ -3,6 +3,8 @@ package lotto.domain;
 import calculator.PositiveNumber;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * @author han
@@ -19,10 +21,10 @@ public class Lotto {
     }
 
     public static Lotto createByAuto() {
-        List<PositiveNumber> numbers = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            numbers.add(new PositiveNumber(r.nextInt(seed)));
-        }
+        List<PositiveNumber> numbers = IntStream
+            .range(0, size)
+            .mapToObj(o -> new PositiveNumber(r.nextInt(seed)))
+            .collect(Collectors.toList());
 
         Collections.sort(numbers, Comparator.comparing(PositiveNumber::getNumber));
         return new Lotto(numbers);
