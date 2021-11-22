@@ -1,34 +1,30 @@
 package domain;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class MoneyPrize {
-    private final Map<Integer, Integer> moneyPrize;
-
-    private static final int MATCH_NUMBER_MAX = 6;
-    private static final int MATCH_NUMBER_MIN = 3;
     private static final double LOTTERY_PRICE = 1000;
 
+    private final List<Integer> moneyPrize;
+
     public MoneyPrize(RankGroup rankGroup) {
-        this.moneyPrize = Collections.unmodifiableMap(moneyPrizeByLotteryRank(rankGroup));
+        this.moneyPrize = Collections.unmodifiableList(moneyPrizeByLotteryRank(rankGroup));
     }
 
-    private Map<Integer, Integer> moneyPrizeByLotteryRank(RankGroup rankGroup) {
-        Map<Integer, Integer> moneyPrize = new HashMap<>();
-        for (int i = MATCH_NUMBER_MIN; i <= MATCH_NUMBER_MAX; i++) {
-            moneyPrize.put(i, LotteryPrizeCalculation.winningAmount(i, rankGroup.count(i)));
+    private List<Integer> moneyPrizeByLotteryRank(RankGroup rankGroup) {
+        List<Integer> moneyPrize = new ArrayList<>();
+        int loopNumber = rankGroup.size();
+        for (int i = 0; i < loopNumber; i++) {
+            moneyPrize.add(LotteryPrizeCalculation.winningAmount(rankGroup.rank(i), rankGroup.bonusBoll(i)));
         }
 
         return moneyPrize;
     }
 
     public double lotteryProfit(int lotteryCount) {
-        int money = 0;
-        for (int rank : moneyPrize.keySet()) {
-            money += moneyPrize.get(rank);
-        }
+        int money = moneyPrize.stream()
+                .mapToInt(winnerPrize -> winnerPrize)
+                .sum();
 
         return calculateDivide(money, lotteryCount);
     }
@@ -37,7 +33,7 @@ public class MoneyPrize {
         return money / (count * LOTTERY_PRICE);
     }
 
-    public int value(int key) {
-        return moneyPrize.get(key);
+    public int value(int index) {
+        return moneyPrize.get(index);
     }
 }
