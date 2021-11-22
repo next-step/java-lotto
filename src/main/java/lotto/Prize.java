@@ -22,6 +22,14 @@ public enum Prize {
         this.prize = prize;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public int getPrize() {
+        return prize;
+    }
+
     /**
      * Prize 는 맞춘개수와 보너스 여부를 판단하여 알맞은 상금을 반환할 수 있다.
      * @param matchCount
