@@ -40,6 +40,18 @@ public class Lotto {
         }
     }
 
+    public LottoReward getReward(Lotto winner) {
+        long matchCount = lottoNumbers.stream()
+            .filter(winner::containsNumber)
+            .count();
+
+        return LottoReward.getReward(matchCount);
+    }
+
+    private boolean containsNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     @Override
     public String toString() {
         return Arrays.toString(lottoNumbers.toArray());

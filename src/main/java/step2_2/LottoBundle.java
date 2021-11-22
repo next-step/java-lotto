@@ -1,6 +1,9 @@
 package step2_2;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class LottoBundle {
@@ -20,7 +23,11 @@ public class LottoBundle {
     }
 
     public LottoResult getLottoResult(Lotto winner) {
-        return null;
+        List<LottoReward> rewards = lottos.stream()
+            .map(lotto -> lotto.getReward(winner))
+            .collect(toList());
+
+        return new LottoResult(rewards);
     }
 
     @Override
