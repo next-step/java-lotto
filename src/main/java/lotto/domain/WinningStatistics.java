@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static lotto.domain.Money.LOTTO_PRICE;
+
 public class WinningStatistics {
     private static final int DEFALUT_RANK_COUNT = 0;
     private static final int COUNT_ADD_VALUE = 1;
@@ -53,6 +55,6 @@ public class WinningStatistics {
             totalpurchaseCount += winningStatistics.get(key);
         }
 
-        return totalpurchaseCount * 1000;
+        return totalpurchaseCount * LOTTO_PRICE;
     }
 }

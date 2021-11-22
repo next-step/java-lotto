@@ -3,7 +3,7 @@ package lotto.domain;
 import lotto.exception.MinimumAmountException;
 
 public class Money {
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
 
     private final int money;
 
