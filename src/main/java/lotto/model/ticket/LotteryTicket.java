@@ -4,7 +4,6 @@ import lotto.model.domain.Lotto;
 import lotto.model.game.LottoNumber;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LotteryTicket {
 
@@ -18,11 +17,6 @@ public class LotteryTicket {
 
     public List<Lotto> getNumbers() {
         return numbers;
-    }
-
-    public String print() {
-        List<String> list = numbers.stream().map(Lotto::print).collect(Collectors.toList());
-        return "[" + String.join(", ", list) + "]";
     }
 
     public boolean match(Lotto number) {

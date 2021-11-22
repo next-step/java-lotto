@@ -13,8 +13,8 @@ public class Lotto implements Comparable<Lotto> {
         this.number = number;
     }
 
-    public String print() {
-        return String.valueOf(this.number);
+    public int getNumber() {
+        return number;
     }
 
     private void checkValidation(int number) {
@@ -40,4 +40,5 @@ public class Lotto implements Comparable<Lotto> {
     public int hashCode() {
         return Objects.hash(number);
     }
+
 }

@@ -1,7 +1,5 @@
 package lotto.model.game;
 
-import java.util.List;
-
 import lotto.model.domain.PurchaseInfo;
 import lotto.model.domain.Winning;
 import lotto.model.ticket.LotteryTicket;
@@ -12,25 +10,22 @@ public class LotteryGame {
 
     private final static int MIN_PURCHASE_COUNT = 1;
     private final LotteryTickets tickets;
-    private final LotteryGameResult result;
 
     public LotteryGame(PurchaseInfo purchaseInfo) {
         checkValidation(purchaseInfo.getLotteryCount());
         this.tickets = new LotteryTickets(purchaseInfo.getLotteryCount());
-        this.result = new LotteryGameResult(purchaseInfo.getAmount());
     }
 
     public LotteryTickets getLotteryTickets() {
         return this.tickets;
     }
 
-    public List<String> play() {
+    public void play() {
         LotteryTicket winningTicket = InputView.getWinningTicket();
         for(LotteryTicket ticket : tickets.getTickets()) {
             int match = compareTicket(winningTicket, ticket);
             Winning.win(match);
         }
-        return result.get();
     }
 
     private void checkValidation(int lotteryCount) {

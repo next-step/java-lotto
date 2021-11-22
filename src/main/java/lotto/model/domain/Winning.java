@@ -16,6 +16,8 @@ public enum Winning {
     private static final Map<Integer,String> MAP = Collections.unmodifiableMap(
             Stream.of(values()).collect(Collectors.toMap(Winning::getMatch, Winning::name))
     );
+
+    private static final int LOSS_STANDARD = 1;
     private final int match;
     private final int price;
     private int count;
@@ -30,18 +32,26 @@ public enum Winning {
         return totalWinningPrice / (double)amount;
     }
 
+    public static boolean isLoss(double profit) {
+        return profit < LOSS_STANDARD;
+    }
+
     public static void win(int match) {
         if(MAP.containsKey(match)) {
             Winning.valueOf(MAP.get(match)).plusCount();
         }
     }
 
-    public String print() {
-        return match + "개 일치 (" + price +" 원)- " + count +"개";
+    public int getMatch(){
+        return match;
     }
 
-    private int getMatch(){
-        return match;
+    public int getPrice() {
+        return this.price;
+    }
+
+    public int getCount() {
+        return this.count;
     }
 
     private int getWinningPrice(){
@@ -51,4 +61,5 @@ public enum Winning {
     private void plusCount() {
         this.count++;
     }
+
 }

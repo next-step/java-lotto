@@ -1,6 +1,7 @@
 package lotto.model.game;
 
 import lotto.model.domain.Winning;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -14,8 +15,7 @@ class WinningTest {
     @DisplayName("당첨되는 항목 개수 플러스 되는 것 테스트")
     void winningPlusTest(int match, int result){
         Winning.win(match);
-        String print =  "3개 일치 (5000 원)- " + result + "개";
-        assertThat(Winning.THREE_MATCH.print()).isEqualTo(print);
+        assertThat(Winning.THREE_MATCH.getCount()).isEqualTo(result);
     }
 
     @ParameterizedTest
