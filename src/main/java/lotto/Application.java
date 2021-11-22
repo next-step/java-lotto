@@ -9,6 +9,7 @@ import lotto.view.Input;
 import lotto.view.Output;
 
 import static lotto.utils.StringUtil.split;
+import static lotto.view.Input.askBonusBall;
 
 public class Application {
     public static void main(String[] args) {
@@ -20,9 +21,20 @@ public class Application {
         Output.printLottos(lottos);
 
         WinningLotto winningLotto = getWinningNumber();
+        LottoNumber bonusBall = getBonusBall();
 
         WinningStatistics statistics = WinningStatistics.from(lottos, winningLotto);
         Output.printWinningStatistics(statistics);
+    }
+
+    private static LottoNumber getBonusBall() {
+        int bonusBall = askBonusBall();
+        try {
+            return LottoNumber.from(bonusBall);
+        } catch (LottoNumberException e) {
+            Output.LottoNumberError();
+            return getBonusBall();
+        }
     }
 
     private static Money getPurchaseAount() {
