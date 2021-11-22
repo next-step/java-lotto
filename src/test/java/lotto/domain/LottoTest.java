@@ -15,6 +15,6 @@ public class LottoTest {
     @DisplayName("로또 자동 생성")
     void create() {
         Lotto byAuto = Lotto.createByAuto();
-        assertThat(byAuto.getNumbers().size()).isEqualTo(5);
+        assertThat(byAuto.getNumbers().size()).isEqualTo(6);
     }
 }

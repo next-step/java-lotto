@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
  */
 public class Lotto {
     private static final int seed = 46;
-    private static final int size = 5;
+    private static final int size = 6;
     private static final Random r = new Random();
 
     private final List<PositiveNumber> numbers;

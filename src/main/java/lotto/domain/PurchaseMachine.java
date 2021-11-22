@@ -12,10 +12,18 @@ public class PurchaseMachine {
     private final static int price = 1000;
     private final PositiveNumber credit;
     private final List<Lotto> lottoList;
+    private final Lotto won;
+
+    private PurchaseMachine(PositiveNumber credit, List<Lotto> lottoList, Lotto won) {
+        this.credit = credit;
+        this.lottoList = lottoList;
+        this.won = won;
+    }
 
     public PurchaseMachine(PositiveNumber credit, List<Lotto> lottoList) {
         this.credit = credit;
         this.lottoList = lottoList;
+        this.won = Lotto.createByAuto();
     }
 
     public PositiveNumber getCredit() {
@@ -26,13 +34,21 @@ public class PurchaseMachine {
         return lottoList;
     }
 
+    public Lotto getWon() {
+        return won;
+    }
+
     public PurchaseMachine purchase() {
         int count = credit.getNumber() / price;
         List<Lotto> lottos = new ArrayList<>();
 
-        for (int i = 0; i < count; i ++) {
+        for (int i = 0; i < count; i++) {
             lottos.add(Lotto.createByAuto());
         }
         return new PurchaseMachine(credit, lottos);
+    }
+
+    public PurchaseMachine insertWonLotto(Lotto won) {
+        return new PurchaseMachine(this.credit, this.lottoList, won);
     }
 }
