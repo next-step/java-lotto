@@ -24,17 +24,17 @@ public class InputView {
         }
     }
 
-    public static List<LottoNumber> readLottoNumbers() {
+    public static Lotto readLotto() {
         System.out.println(LOTTO_NUMBER_INPUT_MESSAGE);
         try {
-            return readLottoNumbersFromNumber();
-        } catch (InvalidLottoNumberException e) {
+            return new Lotto(readLottoNumbers());
+        } catch (InvalidLottoNumberException | LottoNumberCountMisMatchException e) {
             System.out.println(e.getMessage());
-            return readLottoNumbers();
+            return readLotto();
         }
     }
 
-    private static List<LottoNumber> readLottoNumbersFromNumber() {
+    private static List<LottoNumber> readLottoNumbers() {
         return readNumbers().stream()
             .map(LottoNumber::new)
             .collect(toList());

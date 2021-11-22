@@ -1,13 +1,11 @@
 package step2_2;
 
-import static step2_2.InputView.readLottoNumbers;
-
-import java.util.List;
+import static step2_2.InputView.readLotto;
 
 public class LottoApplication {
 
     public static void main(String[] args) {
-        List<LottoNumber> list = readLottoNumbers();
-        System.out.println(new Lotto(list));
+        Lotto lotto = readLotto();
+        System.out.println(lotto);
     }
 }

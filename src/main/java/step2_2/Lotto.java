@@ -5,10 +5,19 @@ import java.util.List;
 
 public class Lotto {
 
+    private static final int LOTTO_NUMBER_SIZE = 6;
+
     private List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
+        checkSize6(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    private void checkSize6(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
+            throw new LottoNumberCountMisMatchException();
+        }
     }
 
     @Override
