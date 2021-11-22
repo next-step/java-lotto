@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
+    private static final int BASE_RATE = 1;
+
     public void showStatus(int money, Wallet wallet, LottoResult lottoResult) {
         System.out.println("당첨 통계\n---------\n");
 
@@ -30,7 +32,7 @@ public class ResultView {
 
         double rate = totalPrize / money;
 
-        if (rate >= 1) {
+        if (rate >= BASE_RATE) {
             System.out.println("총 수익률은 " + rate +"입니다. (이익)");
             return;
         }
@@ -43,9 +45,7 @@ public class ResultView {
         for (Prize status : targetStatus) {
             stringBuilder.append(status.getMatchCount());
             stringBuilder.append("개 일치");
-            if (status == SECOND) {
-                stringBuilder.append(", 보너스 볼 일치");
-            }
+            hasBonus(stringBuilder, status);
             stringBuilder.append("(");
             stringBuilder.append(status.getPrize());
             stringBuilder.append(") - ");
@@ -55,5 +55,11 @@ public class ResultView {
 
         }
         System.out.println(stringBuilder);
+    }
+
+    private void hasBonus(StringBuilder stringBuilder, Prize status) {
+        if (status == SECOND) {
+            stringBuilder.append(", 보너스 볼 일치");
+        }
     }
 }
