@@ -20,8 +20,8 @@ public class Application {
         Output.printLottosCount(lottos);
         Output.printLottos(lottos);
 
-        WinningLotto winningLotto = getWinningNumber();
         LottoNumber bonusBall = getBonusBall();
+        WinningLotto winningLotto = getWinningNumber(bonusBall);
 
         WinningStatistics statistics = WinningStatistics.from(lottos, winningLotto);
         Output.printWinningStatistics(statistics);
@@ -47,17 +47,17 @@ public class Application {
         }
     }
 
-    private static WinningLotto getWinningNumber() {
+    private static WinningLotto getWinningNumber(LottoNumber bonusBall) {
         try {
             String winningNumber = Input.askWinningNumber();
             String[] split = split(winningNumber);
-            return WinningLotto.from(split);
+            return WinningLotto.from(split, bonusBall);
         } catch (LottoNumberException e) {
             Output.LottoNumberError();
-            return getWinningNumber();
+            return getWinningNumber(bonusBall);
         } catch (LottoNumbersCountException e) {
             Output.WinningNumberCountError();
-            return getWinningNumber();
+            return getWinningNumber(bonusBall);
         }
     }
 }

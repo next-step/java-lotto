@@ -23,7 +23,9 @@ public class WinningStatistics {
 
         for (Lotto lotto : lottoList) {
             int matchCount = winningLotto.matchCount(lotto);
-            Rank rank = Rank.from(matchCount);
+            boolean matchBonus = winningLotto.matchBonus(lotto);
+
+            Rank rank = Rank.from(matchCount, matchBonus);
 
             int count = winningStatistics.getOrDefault(rank, DEFALUT_RANK_COUNT);
             winningStatistics.put(rank, count + COUNT_ADD_VALUE);
@@ -37,19 +39,18 @@ public class WinningStatistics {
     }
 
     public double calcYeiild() {
-        long yeild = 0;
+        long yeild = Money.ZERO;
 
         for (Rank key : winningStatistics.keySet()) {
             int count = winningStatistics.get(key);
             yeild += key.calcTotalPrice(count);
         }
 
-
         return Math.round(yeild / (double)getTotalPurchaseCount());
     }
 
     private int getTotalPurchaseCount() {
-        int totalpurchaseCount = 0;
+        int totalpurchaseCount = Money.ZERO;
 
         for (Rank key : winningStatistics.keySet()) {
             totalpurchaseCount += winningStatistics.get(key);

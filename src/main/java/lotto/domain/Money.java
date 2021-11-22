@@ -4,6 +4,7 @@ import lotto.exception.MinimumAmountException;
 
 public class Money {
     public static final int LOTTO_PRICE = 1000;
+    public static final int ZERO = 0;
 
     private final int money;
 

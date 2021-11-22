@@ -1,16 +1,13 @@
 package lotto.domain;
 
-import lotto.exception.NotFoundRankException;
-
 import java.util.Arrays;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
     SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOURTH(3, 5_000),
-    FIFTH(2, 0),
-    SIXTH(1, 0),
+    THIRD(5, 50_000),
+    FOURTH(4, 5_000),
+    FIFTH(3, 0),
     NOTHING(0, 0);
 
     private int matchCount;
@@ -21,11 +18,14 @@ public enum Rank {
         this.money = money;
     }
 
-    public static Rank from(int matchCount) {
+    public static Rank from(int matchCount, boolean matchBonus) {
+        if (matchCount == THIRD.matchCount && !matchBonus) {
+            return THIRD;
+        }
         return Arrays.stream(values())
                 .filter(rank -> rank.matchCount == matchCount)
                 .findFirst()
-                .orElseThrow(() -> new NotFoundRankException(matchCount));
+                .orElse(NOTHING);
     }
 
     public int matchCount() {
@@ -37,6 +37,6 @@ public enum Rank {
     }
 
     public long calcTotalPrice(int count) {
-        return Long.valueOf(this.money) * count;
+        return (long) this.money * count;
     }
 }
