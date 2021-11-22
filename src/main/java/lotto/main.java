@@ -1,22 +1,27 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.Lotto;
+import lotto.domain.LottoSeller;
+import lotto.domain.Wallet;
+import lotto.domain.WinningRank;
+import lotto.dto.LottoInput;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-import lotto.vo.*;
+import lotto.vo.LottoNumber;
+import lotto.vo.LottoRule;
+import lotto.vo.Money;
+import lotto.vo.WinningHistory;
 
 public class main {
 
     public static void main(String[] args) {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
-        LottoSeller lottoSeller = LottoSeller.create(Money.create(LottoRule.LOTTO_PRICE.getValue()));
-        Money originMoney = inputView.inputMoney();
-        Wallet wallet = Wallet.create(originMoney);
+        LottoInput lottoInput = inputView.getLottoInput();
 
-        wallet = buyLotto(wallet, lottoSeller);
+        Wallet wallet = buyLottos(lottoInput);
 
-        outputView.renderWithLottos(wallet.getLottos());
+        outputView.renderWithLottos(wallet.getLottos(), lottoInput);
 
         WinningHistory winningHistory = startLottoService(inputView, wallet);
 
@@ -48,9 +53,11 @@ public class main {
         return winningLotto;
     }
 
-    private static Wallet buyLotto(Wallet wallet, LottoSeller lottoSeller) {
-        Lottos lottos = lottoSeller.buyLottos(wallet.getAllMoney(), new RandomLottoGenerator());
-        return wallet.saveLottos(lottos);
+    private static Wallet buyLottos(LottoInput lottoInput) {
+        Wallet wallet = Wallet.create(lottoInput.getMoney());
+        LottoSeller lottoSeller = LottoSeller.create(Money.create(LottoRule.LOTTO_PRICE.getValue()));
+
+        return wallet.buyLottos(lottoSeller, lottoInput);
     }
 
 }

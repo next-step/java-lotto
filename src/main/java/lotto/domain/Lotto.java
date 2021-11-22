@@ -32,7 +32,6 @@ public class Lotto {
     public static Lotto create(String lottoInput) {
         return create(
                 Arrays.stream(lottoInput.split(","))
-                        .map(Integer::parseInt)
                         .map(LottoNumber::create)
                         .collect(Collectors.toList())
         );

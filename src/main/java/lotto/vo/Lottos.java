@@ -9,10 +9,10 @@ import java.util.Objects;
 
 public class Lottos {
 
-    private final List<Lotto> lottos;
+    private final List<Lotto> lottoList;
 
     private Lottos(List<Lotto> lottoList) {
-        this.lottos = lottoList;
+        this.lottoList = lottoList;
     }
 
     public static Lottos create(List<Lotto> lottoList) {
@@ -20,11 +20,16 @@ public class Lottos {
     }
 
     public int count() {
-        return lottos.size();
+        return lottoList.size();
     }
 
     public List<Lotto> getLottoList() {
-        return Collections.unmodifiableList(lottos);
+        return Collections.unmodifiableList(lottoList);
+    }
+
+    public Lottos addLottos(Lottos lottos) {
+        this.lottoList.addAll(lottos.lottoList);
+        return create(this.lottoList);
     }
 
     @Override
@@ -36,11 +41,11 @@ public class Lottos {
             return false;
         }
         Lottos lottos1 = (Lottos) o;
-        return Objects.equals(lottos, lottos1.lottos);
+        return Objects.equals(lottoList, lottos1.lottoList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottos);
+        return Objects.hash(lottoList);
     }
 }

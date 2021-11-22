@@ -2,9 +2,8 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.WinningRank;
-import lotto.vo.Lottos;
-import lotto.vo.WinningHistory;
-import lotto.vo.WinningStatistics;
+import lotto.dto.LottoInput;
+import lotto.vo.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -13,11 +12,12 @@ import java.util.stream.Collectors;
 public class OutputView {
 
     private static final String WINNING_HISTORY_PRINT_FORMAT = "%d개 일치 (%.0f원)- %d개";
+    private static final String BUY_LOTTO_PRINT_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매헀습니다.";
     private static final String YIELD_MORE_ONE_PRINT_FORMAT = "총 수익률은 %.2f입니다.";
     private static final String YIELD_LESS_ONE_PRINT_FORMAT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    public void renderWithLottos(Lottos lottos) {
-        System.out.println(lottos.count() + "개를 구매했습니다.");
+    public void renderWithLottos(Lottos lottos, LottoInput lottoInput) {
+        System.out.println(String.format(BUY_LOTTO_PRINT_FORMAT, lottoInput.getManualCount(), lottoInput.getAutoCount(Money.create(LottoRule.LOTTO_PRICE.getValue()))));
         printLottos(lottos);
     }
 

@@ -38,11 +38,16 @@ public class LottoSeller {
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::create));
     }
 
-    public Lotto buyLotto(LottoGenerator lottoGenerator) {
+    public Lotto buyLotto(Money money, LottoGenerator lottoGenerator) {
+        validate(money);
         return lottoGenerator.generate();
     }
 
     private long getNumberToBuy(Money money) {
         return money.divide(lottoPrice).longValue();
+    }
+
+    public Money getPrice() {
+        return lottoPrice;
     }
 }

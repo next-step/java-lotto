@@ -19,9 +19,11 @@ class LottoSellerTest {
 
     private LottoSeller lottoSeller;
     private LottoGenerator lottoGenerator;
+    private Money money;
 
     @BeforeEach
     void setUp() {
+        money = Money.create(1000);
         lottoGenerator = () -> Lotto.create(Arrays.asList(
                 LottoNumber.create(1),
                 LottoNumber.create(2),
@@ -30,7 +32,7 @@ class LottoSellerTest {
                 LottoNumber.create(5),
                 LottoNumber.create(6)
         ));
-        lottoSeller = LottoSeller.create(Money.create(1000));
+        lottoSeller = LottoSeller.create(money);
     }
 
 
@@ -49,13 +51,21 @@ class LottoSellerTest {
     void sellLottosLessMoneyTest(BigDecimal money) {
 
         assertThatIllegalArgumentException().isThrownBy(() -> lottoSeller.buyLottos(Money.create(money), lottoGenerator));
+        assertThatIllegalArgumentException().isThrownBy(() -> lottoSeller.buyLotto(Money.create(money), lottoGenerator));
 
     }
 
     @DisplayName("1장의 로또를 반환한다.")
     @Test
     void sellLottoTest() {
-        Lotto lotto = lottoSeller.buyLotto(lottoGenerator);
-        assertThat(lotto).isNotNull();
+        Lotto lotto = lottoSeller.buyLotto(money, lottoGenerator);
+        assertThat(lotto).isEqualTo(Lotto.create(Arrays.asList(
+                LottoNumber.create(1),
+                LottoNumber.create(2),
+                LottoNumber.create(3),
+                LottoNumber.create(4),
+                LottoNumber.create(5),
+                LottoNumber.create(6)
+        )));
     }
 }

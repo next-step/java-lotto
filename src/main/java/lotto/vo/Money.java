@@ -48,12 +48,20 @@ public class Money {
         return this.value.divide(o.value, MathContext.DECIMAL32);
     }
 
-    public BigDecimal getValue() {
-        return value;
+    public Money multiply(Money o) {
+        return new Money(this.value.multiply(o.value));
     }
 
     public Money add(Money o) {
         return new Money(this.value.add(o.value));
+    }
+
+    public BigDecimal getValue() {
+        return value;
+    }
+
+    public Money subtract(Money o) {
+        return new Money(this.value.subtract(o.value));
     }
 
     @Override
