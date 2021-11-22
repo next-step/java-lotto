@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 import lotto.domain.LottoTickets;
 import lotto.domain.dto.WinningLottoTicketDto;
+import lotto.exception.MinimumAmountException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,15 +28,15 @@ public class LottoServiceTest {
     @ParameterizedTest
     @DisplayName("로또자동생성성공")
     @CsvSource(value = {"14000:14", "10000:10", "1000:1"}, delimiter = ':')
-    void 자동성생성공(int money, int size) {
+    void autoCreate(int money, int size) {
         assertThat(lottoService.autoTickets(money).size()).isEqualTo(size);
     }
 
     @ParameterizedTest
     @DisplayName("로또 금액 부족 예외처리")
     @ValueSource(ints = {900, 100, 0})
-    void 금액부족예외처리(Integer money) {
-        assertThatExceptionOfType(IllegalArgumentException.class)
+    void LackOfMoneyException(Integer money) {
+        assertThatExceptionOfType(MinimumAmountException.class)
             .isThrownBy(() -> lottoService.autoTickets(money));
 
     }
@@ -65,7 +66,7 @@ public class LottoServiceTest {
 
     @ParameterizedTest
     @MethodSource("generateWinningLottoTicket")
-    void winningResult테스트(WinningLottoTicketDto dto, Double yield) {
+    void winningResult(WinningLottoTicketDto dto, Double yield) {
         assertThat(lottoService.winningResult(dto).getYield()).isEqualTo(yield);
     }
 

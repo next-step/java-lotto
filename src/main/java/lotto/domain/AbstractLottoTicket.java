@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import lotto.exception.TicketSizeOutBoundException;
 
 public abstract class AbstractLottoTicket {
 
@@ -19,7 +20,7 @@ public abstract class AbstractLottoTicket {
 
     private void valid(Set<LottoNumber> lottoTicket) {
         if (lottoTicket.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(String.format("로또 티켓은 %d개 여야 합니다.", LOTTO_SIZE));
+            throw new TicketSizeOutBoundException(LOTTO_SIZE);
         }
     }
 

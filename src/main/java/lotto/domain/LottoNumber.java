@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.util.Objects;
+import lotto.exception.NumberNullPointerException;
+import lotto.exception.TicketNumberOutBoundException;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
@@ -20,14 +22,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static void validNumber(Integer number) {
         if (number == null) {
-            throw new NullPointerException("숫자는 빈 값일 수 없습니다.");
+            throw new NumberNullPointerException();
         }
         if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
-            throw new IllegalArgumentException(String.format("%d ~ %d 값만 입력할 수 있습니다.", MINIMUM_NUMBER, MAXIMUM_NUMBER));
+            throw new TicketNumberOutBoundException(MINIMUM_NUMBER, MAXIMUM_NUMBER);
         }
     }
-
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) {

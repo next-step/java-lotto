@@ -34,7 +34,7 @@ public class WinningResult {
     public Double getPrizeMoney() {
         return (double) result.keySet()
             .stream()
-            .mapToLong(key -> key.getMoney() * result.get(key))
+            .mapToLong(key -> key.getPrizeMoney() * result.get(key))
             .sum();
     }
 

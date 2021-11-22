@@ -1,6 +1,7 @@
 package lotto.util;
 
 import java.util.Scanner;
+import lotto.exception.NotNumberException;
 
 public class ScannerUtils {
 
@@ -10,7 +11,7 @@ public class ScannerUtils {
         try {
             return Integer.parseInt(SCANNER.nextLine());
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("숫자만 입력할 수 있습니다.");
+            throw new NotNumberException();
         }
     }
 

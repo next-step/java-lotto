@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
+import lotto.exception.TicketSizeOutBoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -40,7 +41,7 @@ public class LottoTicketTest {
     @DisplayName("중복 제거로 인한 예외처리")
     @MethodSource("generateTicketException")
     void lottoTicketSizeException(List<Integer> args) {
-        assertThatExceptionOfType(IllegalArgumentException.class)
+        assertThatExceptionOfType(TicketSizeOutBoundException.class)
             .isThrownBy(() -> LottoTicket.from(args));
     }
 

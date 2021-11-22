@@ -11,19 +11,23 @@ public enum Rank implements Supplier<Rank> {
     , NONE(0, 0);
 
     private long count;
-    private long money;
+    private long prizeMoney;
 
-    Rank(long count, long money) {
+    Rank(long count, long prizeMoney) {
         this.count = count;
-        this.money = money;
+        this.prizeMoney = prizeMoney;
     }
 
     public long getCount() {
         return count;
     }
 
-    public long getMoney() {
-        return money;
+    public long getPrizeMoney() {
+        return prizeMoney;
+    }
+
+    public boolean isPrizeMoney() {
+        return this.getPrizeMoney() > 0;
     }
 
     public static Rank equalToCount(Long count) {

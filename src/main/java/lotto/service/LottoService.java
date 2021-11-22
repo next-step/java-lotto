@@ -6,11 +6,13 @@ import lotto.domain.WinningResult;
 import lotto.domain.WinnerLottoTicket;
 import lotto.domain.dto.ResultDto;
 import lotto.domain.dto.WinningLottoTicketDto;
+import lotto.exception.MinimumAmountException;
 import lotto.util.AutoLottoNumberUtils;
 
 public class LottoService {
 
-    private static final Double DEFAULT_PRIZE_MONEY = 0d;
+    private static final double DEFAULT_PRIZE_MONEY = 0d;
+    private static final double DECIMAL_POINT = 100d;
     private static final long TICKET_PRICE = 1000l;
     private static final int MINIMUM_COUNT = 1;
 
@@ -46,7 +48,7 @@ public class LottoService {
     private int getCount(int money) {
         int count = (int) Math.floor(money / TICKET_PRICE);
         if (count < MINIMUM_COUNT) {
-            throw new IllegalArgumentException(String.format("금액은 %d원 이상이어야 합니다.", TICKET_PRICE));
+            throw new MinimumAmountException(TICKET_PRICE);
         }
         return count;
     }
@@ -55,7 +57,7 @@ public class LottoService {
         if (prizeMoney == DEFAULT_PRIZE_MONEY) {
             return DEFAULT_PRIZE_MONEY;
         }
-        return Math.floor((prizeMoney / money) * 100l) / 100.0;
+        return Math.floor((prizeMoney / money) * DECIMAL_POINT) / DECIMAL_POINT;
     }
 
 }

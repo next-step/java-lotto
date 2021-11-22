@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.exception.NotNumberException;
 
 public class WinnerLottoTicket extends AbstractLottoTicket {
 
@@ -38,7 +39,7 @@ public class WinnerLottoTicket extends AbstractLottoTicket {
                 .boxed()
                 .collect(Collectors.toCollection(ArrayList::new));
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("숫자만 입력할 수 있습니다.");
+            throw new NotNumberException();
         }
     }
 
