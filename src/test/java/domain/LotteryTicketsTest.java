@@ -11,8 +11,7 @@ class LotteryTicketsTest {
 
     @BeforeEach
     public void setup() {
-        Store store = new Store(3000);
-        lotteryTickets = new LotteryTickets(store.lotteryCount());
+        lotteryTickets = new LotteryTickets(new Store(3000).lotteryCount());
     }
 
     @Test
