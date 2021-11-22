@@ -4,6 +4,9 @@ import lotto.generator.NumberGenerator;
 
 import java.util.Objects;
 
+import static lotto.application.Constant.EXCEPTION_MESSAGE_PARSE_VALIDATION;
+import static lotto.application.Constant.EXCEPTION_MESSAGE_RANGE_VALIDATION;
+
 public class LottoNumber {
 
     private static final int MIN_RANGE = 1;
@@ -27,14 +30,14 @@ public class LottoNumber {
         if (rangeCheck(number)) {
             return number;
         }
-        throw new IllegalArgumentException("로또 번호는 1~45 사이의 숫자입니다.");
+        throw new IllegalArgumentException(EXCEPTION_MESSAGE_RANGE_VALIDATION);
     }
 
     private int invalid(String input) throws IllegalArgumentException {
         try {
             return invalid(Integer.parseInt(input));
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("로또 번호에는 1~45 사이의 숫자만 가능합니다.");
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE_PARSE_VALIDATION);
         }
     }
 

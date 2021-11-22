@@ -1,8 +1,10 @@
 package lotto.model;
 
 import common.model.Number;
+import lotto.application.Constant;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoWinner {
@@ -26,13 +28,13 @@ public class LottoWinner {
 
     private void lengthValidation(String[] numbers) {
         if (numbers.length != 6) {
-            throw new IllegalArgumentException("당첨 번호가 6개가 아닙니다.");
+            throw new IllegalArgumentException(Constant.EXCEPTION_MESSAGE_LENGTH_VALIDATION);
         }
     }
 
     private void duplicateValidation(String[] numbers) {
         if (Arrays.stream(numbers).collect(Collectors.toSet()).size() != 6) {
-            throw new IllegalArgumentException("중복되는 당첨 번호가 있습니다.");
+            throw new IllegalArgumentException(Constant.EXCEPTION_MESSAGE_DUPLICATE_VALIDATION);
         }
     }
 
