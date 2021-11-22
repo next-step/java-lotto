@@ -26,7 +26,7 @@ public class LottoResult {
                 getWinningPrice(WinningPrice.SECOND) +
                 getWinningPrice(WinningPrice.THIRD) +
                 getWinningPrice(WinningPrice.FORTH);
-        return (float) totalWinningCount / LottoPaper.LOTTO_PRICE;
+        return (float) totalWinningCount / (purchasedLottos.size() * LottoPaper.LOTTO_PRICE);
     }
 
     private Integer getWinningPrice(WinningPrice winningPrice) {
