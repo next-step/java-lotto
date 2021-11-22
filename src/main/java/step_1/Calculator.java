@@ -8,24 +8,28 @@ public class Calculator {
     private final List<Number> numbers = new ArrayList<>();
     private int sum;
 
-    public void split(String input) {
+    public int calculate(String input) {
         if (input == null || input.isEmpty()) {
-            numbers.add(new Number(0));
-        } else {
-            String[] splitInputs = input.split(DELIMITER);
-            for (String splitInput : splitInputs) {
-                numbers.add(new Number(splitInput));
-            }
+            return 0;
+        }
+
+        split(input);
+        return sum();
+    }
+
+    private void split(String input) {
+        String[] splitInputs = input.split(DELIMITER);
+
+        for (String splitInput : splitInputs) {
+            numbers.add(new Number(splitInput));
         }
     }
 
-    public void sum() {
+    public int sum() {
         for (Number number : numbers) {
             this.sum += number.getValue();
         }
-    }
 
-    public int count() {
         return this.sum;
     }
 

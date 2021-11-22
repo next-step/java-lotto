@@ -10,7 +10,7 @@ class CalculatorTest {
     void shouldSplitByComma() {
         String input = "1,2,3";
         Calculator calculator = new Calculator();
-        calculator.split(input);
+        calculator.calculate(input);
 
         assertThat(calculator.size()).isEqualTo(3);
     }
@@ -19,26 +19,25 @@ class CalculatorTest {
     void shouldSplitByColon() {
         String input = "4:5:6";
         Calculator calculator = new Calculator();
-        calculator.split(input);
+        calculator.calculate(input);
 
         assertThat(calculator.size()).isEqualTo(3);
     }
 
     @Test
-    void shouldNotSplitBlankString() {
+    void shouldReturnZeroWhenInputIsBlank() {
         String input = "";
         Calculator calculator = new Calculator();
-        calculator.split(input);
-        calculator.sum();
+        int sum = calculator.calculate(input);
 
-        assertThat(calculator.count()).isEqualTo(0);
+        assertThat(sum).isEqualTo(0);
     }
 
     @Test
-    void shouldNotSplitNull() {
+    void shouldReturnZeroWhenInputIsNull() {
         Calculator calculator = new Calculator();
-        calculator.split(null);
+        int sum = calculator.calculate(null);
 
-        assertThat(calculator.count()).isEqualTo(0);
+        assertThat(sum).isEqualTo(0);
     }
 }
