@@ -2,7 +2,10 @@ package step2.domain;
 
 import step2.strategy.NumberGeneratorStrategy;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
@@ -38,7 +41,7 @@ public class LottoNumbers {
     }
 
     public int match(List<Number> targetNumbers) {
-        List<Number> tempNumbers = numbers;
+        List<Number> tempNumbers = new ArrayList<>(numbers);
         tempNumbers.retainAll(targetNumbers);
         return tempNumbers.size();
     }

@@ -41,4 +41,18 @@ public class LottoTest {
         //then
         assertThat(matchCount).isEqualTo(4);
     }
+
+    @Test
+    void 보너스_번호를_비교_한다() {
+        //given
+        Lotto lotto = Lotto.of(new String[]{"1", "2", "3", "4", "5", "6"});
+        Lotto targetLotto = Lotto.of(new String[]{"1", "2", "3", "24", "5", "26"});
+        Number bonusNumber = Number.create(6);
+        //when
+        int matchCount = lotto.match(targetLotto);
+        boolean matchBonus = lotto.matchBonus(bonusNumber);
+        //then
+        assertThat(matchCount).isEqualTo(4);
+        assertThat(matchBonus).isTrue();
+    }
 }

@@ -2,10 +2,13 @@ package step2.domain;
 
 import step2.strategy.NumberGeneratorStrategy;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
+    private static final int NONE_MATCH_COUNT = 0;
+
     private LottoNumbers lottoNumbers;
 
     private Lotto(NumberGeneratorStrategy generatorStrategy) {
@@ -26,6 +29,10 @@ public class Lotto {
 
     public int match(Lotto lotto) {
         return lottoNumbers.match(lotto.getLottoNumbers());
+    }
+
+    public boolean matchBonus(Number bonusNumber) {
+        return lottoNumbers.match(Collections.singletonList(bonusNumber)) > NONE_MATCH_COUNT;
     }
 
     public List<Number> getLottoNumbers() {
