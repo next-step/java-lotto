@@ -9,11 +9,10 @@ import java.util.List;
 
 public class LottoTicketGenerator {
 
-    private LottoTicketGenerator() {
-        throw new NotInstanceException();
+    public LottoTicketGenerator() {
     }
 
-    public static LottoTickets generateTickets(TicketCount ticketCount, GenerateLottoTicketStrategy lottoTicketStrategy) {
+    public LottoTickets generateTickets(TicketCount ticketCount, GenerateLottoTicketStrategy lottoTicketStrategy) {
         List<LottoTicket> lottoTickets = lottoTicketStrategy.publishTickets(ticketCount);
 
         return LottoTickets.of(lottoTickets);
