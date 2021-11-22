@@ -5,7 +5,7 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printLotto(Lotto lotto) {
-        System.out.println(lotto);
+    public static void printLottoBundle(LottoBundle lottoBundle) {
+        System.out.println(lottoBundle);
     }
 }

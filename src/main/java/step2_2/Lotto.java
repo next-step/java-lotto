@@ -2,6 +2,7 @@ package step2_2;
 
 import static java.util.stream.Collectors.toList;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +23,8 @@ public class Lotto {
 
     public static Lotto publish() {
         Collections.shuffle(RANDOM_LOTTO_NUMBERS);
-        return new Lotto(RANDOM_LOTTO_NUMBERS.subList(ZERO, LOTTO_NUMBER_SIZE));
+        List<LottoNumber> randomNumbers = RANDOM_LOTTO_NUMBERS.subList(ZERO, LOTTO_NUMBER_SIZE);
+        return new Lotto(new ArrayList<>(randomNumbers));
     }
 
     private List<LottoNumber> lottoNumbers;
@@ -45,11 +47,11 @@ public class Lotto {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) {
+        if (o == null || !o.getClass().equals(Lotto.class)) {
             return false;
         }
         Lotto other = (Lotto) o;
-        return this.lottoNumbers.containsAll(other.lottoNumbers);
+        return lottoNumbers.containsAll(other.lottoNumbers);
     }
 
     @Override
