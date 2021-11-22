@@ -1,7 +1,7 @@
 package step2.domain;
 
 import org.junit.jupiter.api.Test;
-import step2.strategy.RandomIntNumberGenerator;
+import step2.strategy.RandomNumberGenerator;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class LottoTest {
     @Test
     void 랜덤한_숫자_6자리로_구성된_로또를_생성한다() {
         //given
-        Lotto lotto = Lotto.generate(new RandomIntNumberGenerator());
+        Lotto lotto = Lotto.generate(new RandomNumberGenerator());
         //when
         List<Number> lottoNumbers = lotto.getLottoNumbers();
         //then

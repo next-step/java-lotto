@@ -1,17 +1,17 @@
 package step2.service;
 
 import step2.domain.*;
-import step2.strategy.IntNumberGeneratorStrategy;
+import step2.strategy.NumberGeneratorStrategy;
 
 public class LottoService {
     private static final int MIN_MATCH_COUNT = 3;
 
-    private IntNumberGeneratorStrategy generatorStrategy;
+    private NumberGeneratorStrategy generatorStrategy;
 
     private LottoService() {
     }
 
-    public LottoService(IntNumberGeneratorStrategy generatorStrategy) {
+    public LottoService(NumberGeneratorStrategy generatorStrategy) {
         this.generatorStrategy = generatorStrategy;
     }
 
@@ -34,7 +34,9 @@ public class LottoService {
     }
 
     private void addWinningTypeCount(int matchCount, WinningResult winningResult) {
-        if (matchCount < MIN_MATCH_COUNT) return;
+        if (matchCount < MIN_MATCH_COUNT) {
+            return;
+        }
         WinningType type = WinningType.findBy(matchCount);
         winningResult.addCount(type);
     }

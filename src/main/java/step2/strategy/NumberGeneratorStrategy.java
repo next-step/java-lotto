@@ -1,5 +1,5 @@
 package step2.strategy;
 
-public interface IntNumberGeneratorStrategy {
+public interface NumberGeneratorStrategy {
     int generate();
 }

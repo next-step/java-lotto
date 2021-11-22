@@ -5,7 +5,7 @@ import step2.domain.Price;
 import step2.domain.WinningResult;
 import step2.domain.WinningType;
 import step2.service.LottoService;
-import step2.strategy.RandomIntNumberGenerator;
+import step2.strategy.RandomNumberGenerator;
 import step2.view.ResultView;
 
 import java.util.Map;
@@ -16,7 +16,7 @@ public class LottoMachine {
 
     private LottoMachine(int price) {
         this.price = Price.of(price);
-        this.lottoService = new LottoService(new RandomIntNumberGenerator());
+        this.lottoService = new LottoService(new RandomNumberGenerator());
     }
 
     public static LottoMachine create(int price) {
