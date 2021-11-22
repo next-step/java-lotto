@@ -28,6 +28,12 @@ public class InputView {
         return removeOverlap(scanner.nextLine());
     }
 
+    public static int inputBonusBall() {
+        System.out.println("보너스볼 을 입력해 주세요.");
+
+        return validNumber();
+    }
+
     private static int validNumber() {
         if (!scanner.hasNextInt()) {
             throw new IllegalArgumentException(NUMBER_TYPE_ERROR_MESSAGE);
