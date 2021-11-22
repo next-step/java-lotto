@@ -39,7 +39,9 @@ public class Lotto {
     }
 
     public List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
+        return lottoNumbers.stream()
+                .map(lottoNumber -> LottoNumber.create(lottoNumber.getValue()))
+                .collect(Collectors.toList());
     }
 
     public long getCountOfMatch(Lotto winningLotto) {
