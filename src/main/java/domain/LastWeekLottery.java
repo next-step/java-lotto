@@ -4,13 +4,13 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LastWeekLotteryNumber {
+public class LastWeekLottery {
     private static final String LOTTERY_NUMBER_LACK_ERROR_MESSAGE = "error : 로또 번호는 중복되지 않는 번호 6개 입니다.";
     private static final int LOTTERY_NUMBER_SIX = 6;
 
     private final Set<LotteryNumber> lastWeekLotteryNumber;
 
-    public LastWeekLotteryNumber(Set<Integer> numbers) {
+    public LastWeekLottery(Set<Integer> numbers) {
         this.lastWeekLotteryNumber = Collections.unmodifiableSet(lastWeekLottery(numbers));
     }
 
