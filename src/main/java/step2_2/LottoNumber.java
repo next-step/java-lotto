@@ -17,4 +17,9 @@ public class LottoNumber {
             throw new InvalidLottoNumberException();
         }
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
 }

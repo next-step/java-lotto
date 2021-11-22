@@ -1,5 +1,6 @@
 package step2_2;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Lotto {
@@ -10,5 +11,9 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
+    @Override
+    public String toString() {
+        return Arrays.toString(lottoNumbers.toArray());
+    }
 
 }

@@ -8,6 +8,6 @@ public class LottoApplication {
 
     public static void main(String[] args) {
         List<LottoNumber> list = readLottoNumbers();
-        list.forEach(System.out::println);
+        System.out.println(new Lotto(list));
     }
 }
