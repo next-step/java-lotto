@@ -21,6 +21,10 @@ public class Money {
         }
     }
 
+    public int won() {
+        return money;
+    }
+
     public boolean canPurchase() {
         return money >= LOTTO_PRICE;
     }
@@ -29,4 +33,8 @@ public class Money {
         money -= LOTTO_PRICE;
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(money);
+    }
 }

@@ -24,4 +24,16 @@ public enum LottoReward {
             .findAny()
             .orElse(BANG);
     }
+
+    public Money getReward() {
+        return reward;
+    }
+
+    public long getMatchCount() {
+        return matchCount;
+    }
+
+    public boolean isWin() {
+        return this != BANG;
+    }
 }
