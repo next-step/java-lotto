@@ -29,13 +29,9 @@ public class LottoService {
         return wallet.buyLotto(lottoSeller);
     }
 
-    public WinningHistory getWinningHistory(Lotto winningLotto, LottoNumber bonus) {
-        Lottos lottos = wallet.getLottos();
-        List<WinningRank> winningRanks = checkWinning(lottos, winningLotto, bonus);
-        Money winningMoney = getWinningMoney(winningRanks);
-        Money originMoney = wallet.getMoneyToBuy();
-
-        return WinningHistory.create(originMoney, winningRanks, winningMoney);
+    public WinningHistory getWinningHistory(String winningLottoString) {
+        Lotto winningLotto = createWinningLottoWithString(winningLottoString);
+        return wallet.getWinningRanks(winningLotto);
     }
 
     private List<WinningRank> checkWinning(Lottos lottos, Lotto winningLotto, LottoNumber bonus) {
