@@ -9,7 +9,7 @@ public class Calculator {
     private int sum;
 
     public void split(String input) {
-        if (input.isEmpty()) {
+        if (input == null || input.isEmpty()) {
             numbers.add(new Number(0));
         } else {
             String[] splitInputs = input.split(DELIMITER);

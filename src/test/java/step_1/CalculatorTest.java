@@ -31,7 +31,14 @@ class CalculatorTest {
         calculator.split(input);
         calculator.sum();
 
-        assertThat(calculator.size()).isEqualTo(1);
+        assertThat(calculator.count()).isEqualTo(0);
+    }
+
+    @Test
+    void shouldNotSplitNull() {
+        Calculator calculator = new Calculator();
+        calculator.split(null);
+
         assertThat(calculator.count()).isEqualTo(0);
     }
 }
