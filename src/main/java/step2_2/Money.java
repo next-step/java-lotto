@@ -6,6 +6,10 @@ public class Money {
 
     private int money;
 
+    public static Money fromLottoCount(int count) {
+        return new Money(count * LOTTO_PRICE);
+    }
+
     public Money(int money) {
         checkPositive(money);
         this.money = money;
@@ -17,6 +21,10 @@ public class Money {
         }
     }
 
+    public int won() {
+        return money;
+    }
+
     public boolean canPurchase() {
         return money >= LOTTO_PRICE;
     }
@@ -24,4 +32,5 @@ public class Money {
     public void purchaseLotto() {
         money -= LOTTO_PRICE;
     }
+
 }

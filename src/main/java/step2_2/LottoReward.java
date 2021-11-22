@@ -24,4 +24,8 @@ public enum LottoReward {
             .findAny()
             .orElse(BANG);
     }
+
+    public int getReward() {
+        return reward;
+    }
 }

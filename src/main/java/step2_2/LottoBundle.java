@@ -23,11 +23,16 @@ public class LottoBundle {
     }
 
     public LottoResult getLottoResult(Lotto winner) {
-        List<LottoReward> rewards = lottos.stream()
+        List<LottoReward> rewards = getRewards(winner);
+        Money money = Money.fromLottoCount(lottos.size());
+
+        return new LottoResult(rewards, money);
+    }
+
+    private List<LottoReward> getRewards(Lotto winner) {
+        return lottos.stream()
             .map(lotto -> lotto.getReward(winner))
             .collect(toList());
-
-        return new LottoResult(rewards);
     }
 
     @Override
