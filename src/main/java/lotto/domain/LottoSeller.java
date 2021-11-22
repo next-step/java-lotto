@@ -3,21 +3,22 @@ package lotto.domain;
 import lotto.vo.Lottos;
 import lotto.vo.Money;
 
+import java.util.stream.Collectors;
+import java.util.stream.LongStream;
+
 public class LottoSeller {
 
     private static final String NULL_MONEY_EXCEPTION_MESSAGE = "Money 는 null 값 일 수 없습니다.";
     private static final String LESS_MONEY_EXCEPTION_MESSAGE = "가격보다 Money가 적습니다.";
 
     private final Money lottoPrice;
-    private final LottoGenerator lottoGenerator;
 
-    private LottoSeller(Money lottoPrice, LottoGenerator lottoGenerator) {
+    private LottoSeller(Money lottoPrice) {
         this.lottoPrice = lottoPrice;
-        this.lottoGenerator = lottoGenerator;
     }
 
-    public static LottoSeller create(Money lottoPrice, LottoGenerator lottoGenerator) {
-        return new LottoSeller(lottoPrice, lottoGenerator);
+    public static LottoSeller create(Money lottoPrice) {
+        return new LottoSeller(lottoPrice);
     }
 
     private void validate(Money money) {
@@ -30,9 +31,15 @@ public class LottoSeller {
         }
     }
 
-    public Lottos sellLotto(Money money) {
+    public Lottos buyLottos(Money money, LottoGenerator lottoGenerator) {
         validate(money);
-        return lottoGenerator.generateLotto(getNumberToBuy(money));
+        return LongStream.range(0, getNumberToBuy(money))
+                .mapToObj(i -> lottoGenerator.generate())
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::create));
+    }
+
+    public Lotto buyLotto(LottoGenerator lottoGenerator) {
+        return lottoGenerator.generate();
     }
 
     private long getNumberToBuy(Money money) {

@@ -50,6 +50,20 @@ class LottoTest {
         assertThat(myLotto.getCountOfMatch(winningLotto)).isEqualTo(expect);
     }
 
+    @DisplayName("Winning Lotto 안에 bonus가 있으면 illegal exception")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,4,5,6:1", "1,2,3,4,5,6:2", "1,2,3,4,5,6:3", "1,2,3,4,5,6:4", "1,2,3,4,5,6:5", "1,2,3,4,5,6:6"}, delimiter = ':')
+    void validBonus(String winningLottoStr, String bonusStr) {
+        LottoNumber bonus = LottoNumber.create(bonusStr);
+
+        Lotto winningLotto = Lotto.create(Arrays.stream(winningLottoStr.split(","))
+                .map(LottoNumber::create)
+                .collect(Collectors.toList()));
+
+        assertThatIllegalArgumentException().isThrownBy(() -> winningLotto.validBonus(bonus));
+
+    }
+
     private List<LottoNumber> createLottoNumberList(String input) {
         return Arrays.stream(input.split(","))
                 .map(LottoNumber::create)

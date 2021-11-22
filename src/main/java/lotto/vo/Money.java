@@ -6,10 +6,10 @@ import java.util.Objects;
 
 public class Money {
 
+    public static final Money ZERO = new Money(BigDecimal.ZERO);
     private static final String NOT_NUMBER_EXCEPTION_MESSAGE = "입력 값이 숫자가 아닙니다.";
     private static final String ZERO_EXCEPTION_MESSAGE = "입력 값은 영보다 작을 수 없습니다.";
     private static final String EMPTY_EXCEPTION_MESSAGE = "입력 값은 빈 값 일 수 없습니다.";
-
     private final BigDecimal value;
 
     private Money(BigDecimal value) {
@@ -33,6 +33,7 @@ public class Money {
     public static Money create(int value) {
         return create(BigDecimal.valueOf(value));
     }
+
     public static Money create(BigDecimal value) {
         if (value.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException(ZERO_EXCEPTION_MESSAGE);

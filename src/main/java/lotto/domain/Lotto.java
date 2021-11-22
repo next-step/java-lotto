@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     private static final String RANGE_EXCEPTION_MESSAGE = "로또의 숫자 개수가 맞지 않습니다.";
+    private static final String BONUS_BALL_NOT_CONTAINS_LOTTO = "보너스 볼은 당첨 번호안에 포함되면 안됩니다.";
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -57,6 +58,12 @@ public class Lotto {
         }
         Lotto lotto = (Lotto) o;
         return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    public void validBonus(LottoNumber bonus) {
+        if (containLottoNumber(bonus)) {
+            throw new IllegalArgumentException(BONUS_BALL_NOT_CONTAINS_LOTTO);
+        }
     }
 
     public boolean containLottoNumber(LottoNumber bonus) {
