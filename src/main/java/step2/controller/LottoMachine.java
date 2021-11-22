@@ -35,8 +35,8 @@ public class LottoMachine {
         System.out.println();
     }
 
-    public void winningResult(Lottos purchasedLottos, String winningNumbers) {
-        WinningResult winningResult = lottoService.winningResult(purchasedLottos, winningNumbers);
+    public void winningResult(Lottos purchasedLottos, String winningNumbers, int bonusNumber) {
+        WinningResult winningResult = lottoService.winningResult(purchasedLottos, winningNumbers, bonusNumber);
         showWinningStatistics(winningResult);
     }
 
