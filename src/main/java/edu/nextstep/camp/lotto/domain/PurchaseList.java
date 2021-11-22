@@ -24,4 +24,9 @@ public class PurchaseList {
     public int amount() {
         return lottos.amount();
     }
+
+
+    public GameResult winningResult(Lotto winningNumber) {
+        return lottos.winningResult(winningNumber);
+    }
 }

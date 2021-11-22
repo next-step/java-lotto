@@ -2,6 +2,8 @@ package edu.nextstep.camp.lotto.domain;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Lottos {
@@ -34,5 +36,14 @@ public class Lottos {
 
     public int amount() {
         return lottos.size();
+    }
+
+    public GameResult winningResult(Lotto winningNumber) {
+        Map<Integer, Integer> rankMap = new HashMap<>();
+        for (Lotto lotto: lottos) {
+            rankMap.compute(lotto.matchedCount(winningNumber), (k, v) -> v == null ? 1 : v++);
+        }
+        return GameResult.of(rankMap.getOrDefault(6, 0), rankMap.getOrDefault(5, 0),
+                rankMap.getOrDefault(4, 0), rankMap.getOrDefault(3, 0));
     }
 }

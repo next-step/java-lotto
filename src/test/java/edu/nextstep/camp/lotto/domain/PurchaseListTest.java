@@ -1,8 +1,13 @@
 package edu.nextstep.camp.lotto.domain;
 
 
+import java.util.List;
+import java.util.stream.Stream;
+
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,5 +36,42 @@ public class PurchaseListTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> PurchaseList.purchase(budget, AutoLottoGenerator.getInstance()))
                 .withMessageContaining("budget must be multiple of 1000");
+    }
+
+    static Stream<Arguments> parseWinningResult() {
+        return Stream.of(
+                // 0 matched
+                Arguments.of(
+                        Lotto.of(List.of(LottoNumber.of(10), LottoNumber.of(11), LottoNumber.of(12),
+                                LottoNumber.of(13), LottoNumber.of(14), LottoNumber.of(15))),
+                        GameResult.of(0, 0, 0, 0)
+                ),
+                // 1 matched
+                Arguments.of(
+                        Lotto.of(List.of(LottoNumber.of(1), LottoNumber.of(11), LottoNumber.of(12),
+                                LottoNumber.of(13), LottoNumber.of(14), LottoNumber.of(15))),
+                        GameResult.of(0, 0, 0, 0)
+                ),
+                // 2 matched
+                Arguments.of(
+                        Lotto.of(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(12),
+                                LottoNumber.of(13), LottoNumber.of(14), LottoNumber.of(15))),
+                        GameResult.of(0, 0, 0, 0)
+                ),
+                // 3 matched
+                Arguments.of(
+                        Lotto.of(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                                LottoNumber.of(13), LottoNumber.of(14), LottoNumber.of(15))),
+                        GameResult.of(0, 0, 0, 1)
+                )
+        );
+    }
+
+    @ParameterizedTest(name = "check winning with FixedLotto: {0} -> {1}")
+    @MethodSource("parseWinningResult")
+    public void winningResult(Lotto winningNumber, GameResult expected) {
+        assertThat(PurchaseList.purchase(1000, FixedLottoGenerator.getInstance()).winningResult(winningNumber))
+                .isEqualTo(expected);
+
     }
 }

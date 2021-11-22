@@ -13,7 +13,7 @@ public class LottoGeneratorTest {
     public void generate() {
         final List<LottoNumber> lottoNumberList = List.of(LottoNumber.of(1),LottoNumber.of(2),LottoNumber.of(3),
                 LottoNumber.of(4),LottoNumber.of(5),LottoNumber.of(6));
-        assertThat(new FixedLottoGenerator().generate().collect()).hasSameElementsAs(lottoNumberList);
+        assertThat(FixedLottoGenerator.getInstance().generate().collect()).hasSameElementsAs(lottoNumberList);
     }
 
     @Test

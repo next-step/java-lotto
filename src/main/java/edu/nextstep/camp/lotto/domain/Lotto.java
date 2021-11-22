@@ -47,4 +47,10 @@ public class Lotto {
     public String toString() {
         return String.format(FORMATTER, numbers.toString());
     }
+
+    public int matchedCount(Lotto winningNumber) {
+        return (int) numbers.stream()
+                .filter(winningNumber.numbers::contains)
+                .count();
+    }
 }

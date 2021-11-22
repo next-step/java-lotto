@@ -61,4 +61,32 @@ public class LottoTest {
                         LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(1))))
                 .withMessageContaining("duplicated numbers");
     }
+
+    static Stream<Arguments> parseMatched() {
+        return Stream.of(
+                Arguments.of(
+                        Lotto.of(
+                                List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))),
+                        6),
+                Arguments.of(
+                        Lotto.of(
+                                List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                                        LottoNumber.of(43), LottoNumber.of(44), LottoNumber.of(45))),
+                        3),
+                Arguments.of(
+                        Lotto.of(
+                                List.of(LottoNumber.of(40), LottoNumber.of(41), LottoNumber.of(42),
+                                        LottoNumber.of(43), LottoNumber.of(44), LottoNumber.of(45))),
+                        0)
+        );
+    }
+
+    @ParameterizedTest(name = "check matched count with FixedLotto(1,2,3,4,5,6): {arguments}")
+    @MethodSource("parseMatched")
+    public void matchedCount() {
+        final Lotto testLotto = Lotto.of(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
+        assertThat(testLotto.matchedCount(testLotto)).isEqualTo(6);
+    }
 }
