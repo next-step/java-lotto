@@ -2,6 +2,8 @@ package lotto;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -12,7 +14,7 @@ public class LottoGenerator {
     private static final List<LottoNumber> LOTTO_NUMBERS;
 
     private static final int SEED = 1;
-    private static final int INCREMENT = 1;
+    private static final UnaryOperator<Integer> INCREMENT_FUNC = i -> i + 1;
     private static final int TOTAL_LOTTO_NUMBER_COUNT = 45;
     private static final int DEFAULT_CHOICE_COUNT = 6;
 
@@ -20,7 +22,7 @@ public class LottoGenerator {
      * 1부터 45까지 모든 LottoNumber 를 생성한다.
      */
     static {
-        LOTTO_NUMBERS = Stream.iterate(SEED, i -> i + INCREMENT)
+        LOTTO_NUMBERS = Stream.iterate(SEED, INCREMENT_FUNC)
                 .limit(TOTAL_LOTTO_NUMBER_COUNT)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
