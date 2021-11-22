@@ -30,4 +30,11 @@ public class PositiveNumber {
         }
         return number;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append(number);
+        return sb.toString();
+    }
 }

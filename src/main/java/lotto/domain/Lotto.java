@@ -20,6 +20,14 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public Lotto(String numbers) {
+        this.numbers = createByStrings(numbers);
+    }
+
+    public List<PositiveNumber> getNumbers() {
+        return numbers;
+    }
+
     public static Lotto createByAuto() {
         List<PositiveNumber> numbers = IntStream
             .range(0, size)
@@ -30,7 +38,11 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
-    public List<PositiveNumber> getNumbers() {
-        return numbers;
+    private List<PositiveNumber> createByStrings(String numbers) {
+        return Arrays.asList(numbers.split(","))
+            .stream()
+            .map(String::trim)
+            .map(PositiveNumber::new)
+            .collect(Collectors.toList());
     }
 }
