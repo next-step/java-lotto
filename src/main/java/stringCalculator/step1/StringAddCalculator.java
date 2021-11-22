@@ -1,4 +1,4 @@
-package lotto.step1;
+package stringCalculator.step1;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
