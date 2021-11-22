@@ -16,18 +16,6 @@ public class LotteryTicket {
         this.numbers = chosenNumbers;
     }
 
-    private void checkDuplicate(List<Lotto> numbers) {
-        if(numbers.size() != numbers.stream().distinct().count()) {
-            throw new IllegalArgumentException("중복된 번호가 있습니다.");
-        }
-    }
-
-    private void checkNumbersSize(List<Lotto> numbers) {
-        if(numbers.size() != LottoNumber.CHOOSE_COUNT) {
-            throw new IllegalArgumentException("6개 번호가 선택되어야 합니다.");
-        }
-    }
-
     public List<Lotto> getNumbers() {
         return numbers;
     }
@@ -39,5 +27,17 @@ public class LotteryTicket {
 
     public boolean match(Lotto number) {
         return this.numbers.contains(number);
+    }
+
+    private void checkDuplicate(List<Lotto> numbers) {
+        if(numbers.size() != numbers.stream().distinct().count()) {
+            throw new IllegalArgumentException("중복된 번호가 있습니다.");
+        }
+    }
+
+    private void checkNumbersSize(List<Lotto> numbers) {
+        if(numbers.size() != LottoNumber.CHOOSE_COUNT) {
+            throw new IllegalArgumentException("6개 번호가 선택되어야 합니다.");
+        }
     }
 }

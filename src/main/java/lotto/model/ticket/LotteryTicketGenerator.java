@@ -10,7 +10,8 @@ import java.util.stream.IntStream;
 public class LotteryTicketGenerator {
 
     private static final List<Lotto> numbers = IntStream.rangeClosed(LottoNumber.MIN_NUMBER,LottoNumber.MAX_NUMBER)
-                                                        .boxed().map(Lotto::new).collect(Collectors.toList());
+                                                        .boxed().map(Lotto::new)
+                                                        .collect(Collectors.toList());
 
     public static LotteryTicket generate() {
         List<Lotto> chosenNumbers = chooseNumber();
@@ -19,10 +20,9 @@ public class LotteryTicketGenerator {
 
     private static List<Lotto> chooseNumber() {
         Collections.shuffle(numbers);
-        List<Lotto> chosenNumbers = numbers.stream()
-                                            .limit(LottoNumber.CHOOSE_COUNT)
-                                            .collect(Collectors.toList());
-        Collections.sort(chosenNumbers);
-        return chosenNumbers;
+        return numbers.stream()
+                .limit(LottoNumber.CHOOSE_COUNT)
+                .sorted()
+                .collect(Collectors.toList());
     }
 }

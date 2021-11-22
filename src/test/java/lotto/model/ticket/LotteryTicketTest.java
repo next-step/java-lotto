@@ -25,7 +25,7 @@ class LotteryTicketTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"1,2,2,3,4,5","1,2,3,4,5,5"})
-    @DisplayName("로또 번호에 중복이 있으면 에외발생")
+    @DisplayName("로또 번호에 chooseNumber중복이 있으면 에외발생")
     void duplicateNumberExistExceptionTest(String input){
         List<Lotto> list = splitToLottoList(input);
         throwExceptionCheck(list, "중복된 번호가 있습니다.");

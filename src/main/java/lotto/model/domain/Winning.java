@@ -13,13 +13,12 @@ public enum Winning {
     FIVE_MATCH(5,1500000),
     SIX_MATCH(6,2000000000);
 
-    private final int match;
-    private final int price;
-    private int count;
-
     private static final Map<Integer,String> MAP = Collections.unmodifiableMap(
             Stream.of(values()).collect(Collectors.toMap(Winning::getMatch, Winning::name))
     );
+    private final int match;
+    private final int price;
+    private int count;
 
     Winning(int match, int price) {
         this.match = match;
@@ -29,6 +28,16 @@ public enum Winning {
     public static double getProfit(int amount) {
         int totalWinningPrice = Arrays.stream(Winning.values()).mapToInt(Winning::getWinningPrice).sum();
         return totalWinningPrice / (double)amount;
+    }
+
+    public static void win(int match) {
+        if(MAP.containsKey(match)) {
+            Winning.valueOf(MAP.get(match)).plusCount();
+        }
+    }
+
+    public String print() {
+        return match + "개 일치 (" + price +" 원)- " + count +"개";
     }
 
     private int getMatch(){
@@ -41,15 +50,5 @@ public enum Winning {
 
     private void plusCount() {
         this.count++;
-    }
-
-    public static void win(int match) {
-        if(MAP.containsKey(match)) {
-            Winning.valueOf(MAP.get(match)).plusCount();
-        }
-    }
-
-    public String print() {
-        return match + "개 일치 (" + price +" 원)- " + count +"개";
     }
 }

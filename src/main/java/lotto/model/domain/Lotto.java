@@ -13,14 +13,14 @@ public class Lotto implements Comparable<Lotto> {
         this.number = number;
     }
 
+    public String print() {
+        return String.valueOf(this.number);
+    }
+
     private void checkValidation(int number) {
         if (number < LottoNumber.MIN_NUMBER || number > LottoNumber.MAX_NUMBER) {
             throw new IllegalArgumentException("로또 숫자 범위에 속하지 않습니다.");
         }
-    }
-
-    public String print() {
-        return String.valueOf(this.number);
     }
 
     @Override

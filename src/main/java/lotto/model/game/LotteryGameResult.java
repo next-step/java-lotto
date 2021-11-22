@@ -7,8 +7,8 @@ import java.util.List;
 
 public class LotteryGameResult {
 
+    private static final int LOSS_STANDARD = 1;
     private final int amount;
-    private static final double LOSS_STANDARD = 1;
 
     public LotteryGameResult(int amount) {
         this.amount = amount;
