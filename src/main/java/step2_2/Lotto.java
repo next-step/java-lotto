@@ -5,6 +5,7 @@ import static java.util.stream.Collectors.toList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class Lotto {
@@ -42,4 +43,17 @@ public class Lotto {
         return Arrays.toString(lottoNumbers.toArray());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lotto other = (Lotto) o;
+        return this.lottoNumbers.containsAll(other.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
+    }
 }
