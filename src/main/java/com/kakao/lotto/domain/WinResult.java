@@ -1,6 +1,5 @@
 package com.kakao.lotto.domain;
 
-import com.kakao.lotto.supportInfo.PurchaseInfo;
 import com.kakao.lotto.supportInfo.RankStatistic;
 
 import java.util.Arrays;
@@ -25,11 +24,9 @@ public class WinResult {
 
     private int getLottoRankCount(LottoRank lottoRank) {
         return (int) userLottoTicket.stream()
-                .map(winLottoTicket::matchWinNumber)
-                .map(LottoRank::findByMatchRank)
+                .map(winLottoTicket::matchLottoRank)
                 .filter(rank -> lottoRank == rank)
                 .count();
     }
-
 
 }
