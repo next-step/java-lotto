@@ -15,10 +15,17 @@ public class LottoBundle {
         }
     }
 
+    public int lottoCount() {
+        return lottos.size();
+    }
+
+    public LottoResult getLottoResult(Lotto winner) {
+        return null;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(lottos.size() + "개를 구매했습니다\n");
         lottos.forEach(lotto -> sb.append(lotto + "\n"));
         return sb.toString();
     }
