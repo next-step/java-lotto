@@ -50,7 +50,15 @@ public class LottoMachine {
     private void showWinningResultOfWinningType(WinningResult winningResult) {
         Map<WinningType, Integer> winningResultMap = winningResult.getWinningResult();
         for (WinningType type : winningResultMap.keySet()) {
-            ResultView.showWinningResultOfWinningType(type.getMatchCount(), type.getWinnings(), winningResultMap.get(type));
+            checkBonusType(type, winningResultMap);
         }
+    }
+
+    private void checkBonusType(WinningType type, Map<WinningType, Integer> winningResultMap) {
+        if (WinningType.SECOND_BONUS.equals(type)) {
+            ResultView.showBonusWinningResultOfWinningType(type.getMatchCount(), type.getWinnings(), winningResultMap.get(type));
+            return;
+        }
+        ResultView.showWinningResultOfWinningType(type.getMatchCount(), type.getWinnings(), winningResultMap.get(type));
     }
 }
