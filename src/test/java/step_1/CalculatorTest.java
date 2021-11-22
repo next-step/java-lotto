@@ -23,4 +23,15 @@ class CalculatorTest {
 
         assertThat(calculator.size()).isEqualTo(3);
     }
+
+    @Test
+    void shouldNotSplitBlankString() {
+        String input = "";
+        Calculator calculator = new Calculator();
+        calculator.split(input);
+        calculator.sum();
+
+        assertThat(calculator.size()).isEqualTo(1);
+        assertThat(calculator.count()).isEqualTo(0);
+    }
 }
