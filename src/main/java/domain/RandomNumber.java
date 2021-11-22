@@ -2,31 +2,40 @@ package domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-public class RandomNumber {
-    private static final Random random = new Random();
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
-    private static final int LOTTERY_NUMBER_SIX = 6;
+public class Number {
+    private static final int LOTTERY_START_SIZE = 0;
+    private static final int LOTTERY_END_SIZE = 6;
+    private static final int LOTTERY_START_NUMBER = 1;
+    private static final int LOTTERY_END_NUMBER = 46;
+    private static final String NUMBER_ERROR_MESSAGE = "error : 유효하지 않는 번호 입니다.";
+    private static final List<Integer> lotteryBalls = IntStream.range(LOTTERY_START_NUMBER, LOTTERY_END_NUMBER)
+            .boxed()
+            .collect(Collectors.toList());
 
-    private RandomNumber() {
+    private Number() {
     }
 
-    public static List<Integer> sixRandomNumber() {
-        return removeOverlap().stream()
+    public static List<Integer> bringNumber() {
+        Collections.shuffle(lotteryBalls);
+        return lotteryBalls.subList(LOTTERY_START_SIZE, LOTTERY_END_SIZE)
+                .stream()
                 .sorted()
                 .collect(Collectors.toList());
     }
 
-    private static Set<Integer> removeOverlap() {
-        Set<Integer> numbers = new HashSet<>();
-        while (numbers.size() != LOTTERY_NUMBER_SIX) {
-            numbers.add(random());
+    private static boolean checkNumberList(int number) {
+        if (number < LOTTERY_START_NUMBER || number >= LOTTERY_END_NUMBER) {
+            return true;
         }
-        return numbers;
+        return false;
     }
 
-    public static int random() {
-        return random.nextInt(MAX_NUMBER) + MIN_NUMBER;
+    private static void errorNumber(int count) {
+        if (count > 0) {
+            throw new IllegalArgumentException(NUMBER_ERROR_MESSAGE);
+        }
     }
+
 }

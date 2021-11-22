@@ -11,11 +11,11 @@ import java.util.HashSet;
 import static org.assertj.core.api.Assertions.*;
 
 class LastWeekLotteryNumberTest {
-    LastWeekLotteryNumber lastWeekLottery;
+    LastWeekLottery lastWeekLottery;
 
     @BeforeEach
     public void setup() {
-        lastWeekLottery = new LastWeekLotteryNumber(new HashSet<>(Arrays.asList(1,2,3,4,5,6)));
+        lastWeekLottery = new LastWeekLottery(new HashSet<>(Arrays.asList(1,2,3,4,5,6)));
     }
 
     @Test
@@ -28,7 +28,7 @@ class LastWeekLotteryNumberTest {
     @DisplayName("로또 당첨번호 중복확인")
     public void checkLotteryNumberOverlap() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new LastWeekLotteryNumber(new HashSet<>(Arrays.asList(1,2,3,4,5,5)));
+            new LastWeekLottery(new HashSet<>(Arrays.asList(1,2,3,4,5,5)));
 
             fail("로또번호 에러가 발생해야 한다.");
         });
