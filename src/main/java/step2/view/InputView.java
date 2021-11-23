@@ -1,5 +1,7 @@
 package step2.view;
 
+import step2.validator.NumberValidator;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -13,7 +15,9 @@ public class InputView {
 
     public static int inputCash() {
         System.out.println(INPUT_CASH_MESSAGE);
-        return Integer.parseInt(scanner.nextLine());
+        String input = scanner.nextLine();
+        NumberValidator.isDigit(input);
+        return Integer.parseInt(input);
     }
 
     public static String inputLastWeekLottoNumber() {
@@ -23,12 +27,16 @@ public class InputView {
 
     public static int inputBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
-        return Integer.parseInt(scanner.nextLine());
+        String input = scanner.nextLine();
+        NumberValidator.isDigit(input);
+        return Integer.parseInt(input);
     }
 
     public static int inputManualLottoCount() {
         System.out.println(INPUT_MANUAL_LOTTO_COUNT_MESSAGE);
-        return Integer.parseInt(scanner.nextLine());
+        String input = scanner.nextLine();
+        NumberValidator.isDigit(input);
+        return Integer.parseInt(input);
     }
 
     public static void inputManualLottoNumberMessage() {

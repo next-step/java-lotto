@@ -1,6 +1,8 @@
 package step2.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -28,5 +30,14 @@ public class NumberTest {
         //when
         //then
         assertEquals(Number.of("1"), Number.of("1"));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1a", "w"})
+    void 숫자가_아닌_문자가_포함되면_IllegalArgumentException_이_발생한다(String input) {
+        //given
+        //when
+        //then
+        assertThatThrownBy(() -> Number.of(input)).isInstanceOf(IllegalArgumentException.class);
     }
 }
