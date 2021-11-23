@@ -41,7 +41,7 @@ public class LottoReport {
             Number count = lottoRankNumberMap.get(rank);
             revenue += rank.getAmount() * count.getNumber();
         }
-        
+
         return Math.round(revenue / purchaseAmount * 100) / 100.F;
     }
 

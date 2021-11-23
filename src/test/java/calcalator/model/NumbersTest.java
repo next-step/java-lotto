@@ -34,7 +34,7 @@ public class NumbersTest {
     @Test
     @DisplayName("String[] 생성자 테스트")
     void name() {
-        String[] input = new String[]{"1", "2", "3", "4" };
+        String[] input = new String[]{"1", "2", "3", "4"};
         Numbers numbers = new Numbers(input);
         assertThat(numbers).isEqualTo(this.numbers);
     }
