@@ -2,16 +2,21 @@ package lotto.service;
 
 import lotto.domain.LottoGameCount;
 import lotto.view.InputView;
+import lotto.view.OutputView;
 
 import java.util.Objects;
 
 public class LottoGameService {
     private LottoGameCount lottoGameCount;
+    private InputView inputView;
+    private OutputView outputView;
 
     public void startLottoGame() {
-        InputView inputView = new InputView();
+        inputView = new InputView();
+        outputView = new OutputView();
         inputView.inputPrice();
         lottoGameCount = inputView.getLottoGameCount();
+        outputView.drawLottoGameCount(lottoGameCount);
     }
 
     @Override

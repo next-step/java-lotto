@@ -9,6 +9,10 @@ public class LottoGameCount {
         this.lottoGameCount = lottoGameCount;
     }
 
+    public Integer getLottoGameCount() {
+        return lottoGameCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -21,4 +25,5 @@ public class LottoGameCount {
     public int hashCode() {
         return Objects.hash(lottoGameCount);
     }
+
 }

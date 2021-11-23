@@ -1,9 +1,11 @@
 package lotto.view;
 
-public class OutputView {
-    private static final String LOTTO_COUNT_MSG = "개를 구매했습니다.";
+import lotto.domain.LottoGameCount;
 
-    public void drawLottoGameCount(Integer lottoCount) {
-        System.out.println(lottoCount + LOTTO_COUNT_MSG);
+import static lotto.utils.Constants.MSG_LOTTO_COUNT;
+
+public class OutputView {
+    public void drawLottoGameCount(LottoGameCount lottoGameCount) {
+        System.out.println(lottoGameCount.getLottoGameCount() + MSG_LOTTO_COUNT);
     }
 }

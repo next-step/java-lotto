@@ -29,7 +29,6 @@ public class InputView {
         }
     }
 
-
     public LottoGameCount getLottoGameCount() {
         return new LottoGameCount(inputPrice.divideByThousands());
     }

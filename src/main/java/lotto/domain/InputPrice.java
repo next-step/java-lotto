@@ -13,7 +13,14 @@ public class InputPrice {
     }
 
     public boolean validateSmallestUnit() {
-        return inputPrice < NUMBER_THOUSAND || Math.floorDiv(inputPrice, NUMBER_THOUSAND) != NUMBER_ZERO;
+        if (inputPrice < NUMBER_THOUSAND) {
+            System.out.println();
+        }
+
+        if (Math.floorDiv(inputPrice, NUMBER_THOUSAND) != NUMBER_ZERO) {
+            System.out.println();
+        }
+        return inputPrice < NUMBER_THOUSAND || Math.floorMod(inputPrice, NUMBER_THOUSAND) != NUMBER_ZERO;
     }
 
     public Integer divideByThousands() {
