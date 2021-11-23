@@ -1,5 +1,7 @@
 package edu.nextstep.camp.lotto.domain;
 
+import java.util.Collection;
+
 public class PurchaseList {
     private static final int GAME_PRICE = 1000;
 
@@ -25,6 +27,9 @@ public class PurchaseList {
         return lottos.amount();
     }
 
+    public Collection<Lotto> collect() {
+        return lottos.collect();
+    }
 
     public GameResult winningResult(Lotto winningNumber) {
         return lottos.winningResult(winningNumber);

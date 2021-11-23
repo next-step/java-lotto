@@ -4,6 +4,7 @@ package edu.nextstep.camp.lotto.domain;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -36,6 +37,16 @@ public class PurchaseListTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> PurchaseList.purchase(budget, AutoLottoGenerator.getInstance()))
                 .withMessageContaining("budget must be multiple of 1000");
+    }
+
+    @Test
+    public void collect() {
+        final List<Lotto> lottoList = List.of(Lotto.of(
+                List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))
+        ));
+        final PurchaseList testlist = PurchaseList.purchase(1000, FixedLottoGenerator.getInstance());
+        assertThat(testlist.collect()).hasSameElementsAs(lottoList);
     }
 
     static Stream<Arguments> parseWinningResult() {

@@ -3,10 +3,10 @@ package edu.nextstep.camp.lotto.domain;
 import java.util.Objects;
 
 public class GameResult {
-    private static final int FIRST_PRIZE = 2000000000;
-    private static final int SECOND_PRIZE = 1500000;
-    private static final int THIRD_PRIZE = 50000;
-    private static final int FOURTH_PRIZE = 5000;
+    public static final int FIRST_PRIZE = 2000000000;
+    public static final int SECOND_PRIZE = 1500000;
+    public static final int THIRD_PRIZE = 50000;
+    public static final int FOURTH_PRIZE = 5000;
 
     private final int amountOfFirst;
     private final int amountOfSecond;
@@ -60,5 +60,20 @@ public class GameResult {
                 ", third=" + amountOfThird +
                 ", fourth=" + amountOfFourth +
                 '}';
+    }
+
+    public int firstPlace() {
+        return amountOfFirst;
+    }
+
+    public int secondPlace() {
+        return amountOfSecond;
+    }
+
+    public int thirdPlace() {
+        return amountOfThird;
+    }
+    public int fourthPlace() {
+        return amountOfFourth;
     }
 }

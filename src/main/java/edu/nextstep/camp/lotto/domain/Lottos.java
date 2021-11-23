@@ -38,6 +38,10 @@ public class Lottos {
         return lottos.size();
     }
 
+    public Collection<Lotto> collect() {
+        return lottos;
+    }
+
     public GameResult winningResult(Lotto winningNumber) {
         Map<Integer, Integer> rankMap = new HashMap<>();
         for (Lotto lotto: lottos) {

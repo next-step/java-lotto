@@ -53,6 +53,6 @@ public class LottoNumber {
     }
 
     public String toString() {
-        return String.format("LottoNumber(%d)", number);
+        return Integer.toString(number);
     }
 }

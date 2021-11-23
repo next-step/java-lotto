@@ -15,16 +15,13 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class LottosTest {
     @Test
     public void create() {
-        final Lotto testLotto = Lotto.of(
-                List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))
-        );
+        final Lotto testLotto = Lotto.of(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
+
         assertThat(Lottos.of(List.of(testLotto)))
                 .isEqualTo(Lottos.of(List.of(
-                        Lotto.of(
-                                List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))
-                        )
+                        Lotto.of(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)))
                 )));
     }
 
@@ -39,13 +36,20 @@ public class LottosTest {
     @Test
     public void amount() {
         final Lottos testLottos = Lottos.of(List.of(
-                        Lotto.of(
-                                List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))
-                        )
-                ));
+                Lotto.of(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)))
+        ));
         assertThat(testLottos.amount()).isEqualTo(1);
+    }
 
+    @Test
+    public void collect() {
+        final List<Lotto> lottoList = List.of(Lotto.of(
+                List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))
+        ));
+        final Lottos testLottos = Lottos.of(lottoList);
+        assertThat(testLottos.collect()).hasSameElementsAs(lottoList);
     }
 
     static Stream<Arguments> parseWinningResult() {

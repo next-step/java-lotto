@@ -1,6 +1,5 @@
 package edu.nextstep.camp.lotto.domain;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -8,10 +7,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class GameResultTest {
-    @Test
-    public void create() {
-        assertThat(GameResult.of(0, 0, 0, 0))
-                .isEqualTo(GameResult.of(0, 0, 0, 0));
+    @ParameterizedTest(name = "total prize: {arguments}")
+    @CsvSource(value = {"0,0,0,0", "1,0,0,0", "0,1,0,0", "0,0,1,0", "0,0,0,1"}, delimiter = ',')
+    public void create(int first, int second, int third, int fourth) {
+        assertThat(GameResult.of(first, second, third, fourth))
+                .isEqualTo(GameResult.of(first, second, third, fourth));
+        assertThat(GameResult.of(first, second, third, fourth).firstPlace()).isEqualTo(first);
+        assertThat(GameResult.of(first, second, third, fourth).secondPlace()).isEqualTo(second);
+        assertThat(GameResult.of(first, second, third, fourth).thirdPlace()).isEqualTo(third);
+        assertThat(GameResult.of(first, second, third, fourth).fourthPlace()).isEqualTo(fourth);
     }
 
     @ParameterizedTest(name = "create failed: {arguments}")
