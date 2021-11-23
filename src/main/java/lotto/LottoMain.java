@@ -1,11 +1,11 @@
 package lotto;
 
-import lotto.view.InputView;
+import lotto.service.LottoGameService;
 
 public class LottoMain {
     public static void main(String[] args)  {
-        InputView inputView = new InputView();
-//        Integer lottoGameCount
+        LottoGameService lottoGameService = new LottoGameService();
+        lottoGameService.startLottoGame();
 
     }
 
