@@ -18,8 +18,14 @@ class WinLottoTicketTest {
     @DisplayName("숫자 6개와 보너스 번호 하나로 정답 로또 티켓을 발급할 수 있다.")
     void createWinLottoTicket() {
         WinLottoTicket winLottoTicket = WinLottoTicket.of(Arrays.asList(3, 4, 6, 5, 1, 2), 7);
-        assertThat(winLottoTicket.getLottoNumbers()).contains(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
+        assertThat(winLottoTicket).isNotNull();
+    }
+
+    @Test
+    @DisplayName("로또 번호와 보너스 번호는 같을 수 없다.")
+    void lottoBonusFail() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> WinLottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6), 6));
     }
 
     @Test
@@ -47,10 +53,10 @@ class WinLottoTicketTest {
     private static Stream<Arguments> lottoMatchWinNumber() {
         return Stream.of(
                 Arguments.arguments(LottoRank.FIRST, LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6))),
-                Arguments.arguments(LottoRank.BONUS, LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 7))),
-                Arguments.arguments(LottoRank.SECOND, LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 45))),
-                Arguments.arguments(LottoRank.THIRD, LottoTicket.of(Arrays.asList(1, 2, 3, 4, 44, 45))),
-                Arguments.arguments(LottoRank.FOURTH, LottoTicket.of(Arrays.asList(1, 2, 3, 43, 44, 45))),
+                Arguments.arguments(LottoRank.SECOND, LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 7))),
+                Arguments.arguments(LottoRank.THIRD, LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 45))),
+                Arguments.arguments(LottoRank.FOURTH, LottoTicket.of(Arrays.asList(1, 2, 3, 4, 44, 45))),
+                Arguments.arguments(LottoRank.FIFTH, LottoTicket.of(Arrays.asList(1, 2, 3, 43, 44, 45))),
                 Arguments.arguments(LottoRank.OUT, LottoTicket.of(Arrays.asList(1, 2, 42, 43, 44, 45))),
                 Arguments.arguments(LottoRank.OUT, LottoTicket.of(Arrays.asList(1, 41, 42, 43, 44, 45))),
                 Arguments.arguments(LottoRank.OUT, LottoTicket.of(Arrays.asList(40, 41, 42, 43, 44, 45)))

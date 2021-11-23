@@ -39,7 +39,7 @@ public class OutputView {
     }
 
     private static String lottoRankToString(LottoRank lottoRank) {
-        String formatString = lottoRank == LottoRank.BONUS ? "%d개 일치, 보너스 볼 일치 (%d원)" : "%d개 일치 (%d원)";
+        String formatString = lottoRank == LottoRank.SECOND ? "%d개 일치, 보너스 볼 일치 (%d원)" : "%d개 일치 (%d원)";
         return String.format(formatString, lottoRank.getCorrectRank(), lottoRank.getPrice());
     }
 
