@@ -3,6 +3,7 @@ package lotto.model;
 import lotto.application.Constant;
 import lotto.factory.LottoFactory;
 import lotto.factory.LottoNumberFactory;
+import lotto.factory.LottoNumbersFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,8 +25,8 @@ class LottoStoreTest {
             numbers.add(LottoNumberFactory.manualCreateNumber(7 * i + 3));
         }
 
-        lotto = LottoFactory.manualCreateSingleLotto(LottoNumberFactory.manualCreateNumbers(numbers));
-        winner = new LottoWinner("3, 10, 17, 24, 31, 45");
+        lotto = LottoFactory.manualCreateSingleLotto(LottoNumbersFactory.manualCreateNumbers(numbers));
+        winner = new LottoWinner(LottoNumbersFactory.manualCreateNumberList("3, 10, 17, 24, 31, 45"));
     }
 
     @Test
@@ -39,7 +40,5 @@ class LottoStoreTest {
     @DisplayName("로또 번호 당첨 확인")
     void match() {
         LottoStore.match(lotto, winner); //[3, 10, 17, 24, 31, 38]
-        LottoNumbers lottoNumbers = lotto.getLotto().get(0);
-        assertThat(lottoNumbers.getLottoRank()).isEqualTo(LottoRank.SECOND);
     }
 }

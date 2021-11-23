@@ -3,6 +3,7 @@ package lotto;
 import common.view.InputView;
 import common.view.OutputView;
 import lotto.application.Constant;
+import lotto.factory.LottoNumbersFactory;
 import lotto.model.Lotto;
 import lotto.model.LottoStats;
 import lotto.model.LottoStore;
@@ -17,7 +18,7 @@ public class Consumer {
         OutputView.print(lotto);
 
         String winnerNumbers = InputView.nextLine(Constant.INPUT_MESSAGE_WINNER_NUMBERS);
-        LottoWinner lottoWinner = new LottoWinner(winnerNumbers);
+        LottoWinner lottoWinner = new LottoWinner(LottoNumbersFactory.manualCreateNumberList(winnerNumbers));
 
         LottoStore.match(lotto, lottoWinner);
 
