@@ -19,23 +19,23 @@ public class LottoNumber {
     }
 
     public LottoNumber(int input) {
-        this.number = invalid(input);
+        this.number = validate(input);
     }
 
     public LottoNumber(String input) {
-        this.number = invalid(input);
+        this.number = validate(input);
     }
 
-    private int invalid(int number) {
+    private int validate(int number) {
         if (rangeCheck(number)) {
             return number;
         }
         throw new IllegalArgumentException(EXCEPTION_MESSAGE_RANGE_VALIDATION);
     }
 
-    private int invalid(String input) throws IllegalArgumentException {
+    private int validate(String input) throws IllegalArgumentException {
         try {
-            return invalid(Integer.parseInt(input));
+            return validate(Integer.parseInt(input));
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(EXCEPTION_MESSAGE_PARSE_VALIDATION);
         }
