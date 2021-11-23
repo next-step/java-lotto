@@ -32,10 +32,9 @@ class ConsumerTest {
 
         LottoWinner lottoWinner = new LottoWinner(LottoNumbersFactory.manualCreateNumberList("10, 20, 30, 40, 5, 15"));
 
-        LottoStore.match(lotto, lottoWinner);
+        LottoReport report = LottoStore.report(lotto, lottoWinner);
 
-        LottoStats lottoStats = new LottoStats(lotto, purchaseAmount);
-
-        assertThat(lottoStats.getRateOfRevenue()).isEqualTo(2000000.0f);
+        float rateOfRevenue = report.calculateRateOfRevenue(purchaseAmount);
+        assertThat(rateOfRevenue).isEqualTo(2000000.0f);
     }
 }

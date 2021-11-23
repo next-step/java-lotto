@@ -4,10 +4,7 @@ import common.view.InputView;
 import common.view.OutputView;
 import lotto.application.Constant;
 import lotto.factory.LottoNumbersFactory;
-import lotto.model.Lotto;
-import lotto.model.LottoStats;
-import lotto.model.LottoStore;
-import lotto.model.LottoWinner;
+import lotto.model.*;
 
 public class Consumer {
 
@@ -20,11 +17,8 @@ public class Consumer {
         String winnerNumbers = InputView.nextLine(Constant.INPUT_MESSAGE_WINNER_NUMBERS);
         LottoWinner lottoWinner = new LottoWinner(LottoNumbersFactory.manualCreateNumberList(winnerNumbers));
 
-        LottoStore.match(lotto, lottoWinner);
-
-        LottoStats lottoStats = new LottoStats(lotto, purchaseAmount);
-
-        OutputView.print(lottoStats);
+        LottoReport report = new LottoReport(lotto, lottoWinner);
+        OutputView.print(report, purchaseAmount);
     }
 
 }

@@ -5,7 +5,6 @@ import lotto.application.Constant;
 import lotto.model.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -55,23 +54,17 @@ public class OutputView {
         }
     }
 
-    public static void print(LottoStats lottoStats) {
+    public static void print(LottoReport report, int purchaseAmount) {
         print("당첨 통계");
         print("-------------");
-
-        //일치여부 확인
-        print(lottoStats.getLottoRankNumberMap());
-
-        //총 수익률
-        print("총 수익률은 ", String.valueOf(lottoStats.getRateOfRevenue()), "입니다.");
-
-    }
-
-    public static void print(Map<LottoRank, Number> lottoRankNumberMap) {
         for (LottoRank rank : LottoRank.valuesWithoutMiss()) {
-            Number count = lottoRankNumberMap.getOrDefault(rank, new Number());
+            Number count = report.getLottoRankNumberMap().getOrDefault(rank, new Number());
             print(rank, count);
         }
+
+        float rateOfRevenue = report.calculateRateOfRevenue(purchaseAmount);
+        print("총 수익률은 ", String.valueOf(rateOfRevenue), "입니다.");
+
     }
 
     public static void print(LottoRank rank, Number count) {
