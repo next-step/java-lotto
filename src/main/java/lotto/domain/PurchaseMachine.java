@@ -38,10 +38,6 @@ public class PurchaseMachine {
         return statistics;
     }
 
-    public Credit getCredit() {
-        return credit;
-    }
-
     public PurchaseMachine purchase() {
         int count = this.credit.getLottoCount();
         List<Lotto> lottos = new ArrayList<>();
@@ -53,7 +49,7 @@ public class PurchaseMachine {
     }
 
     public PurchaseMachine insertWonLotto(Lotto won) {
-        Statistics statistics = new Statistics(won, this.lottoList);
+        Statistics statistics = new Statistics(this.credit, won, this.lottoList);
         return new PurchaseMachine(this.credit, this.lottoList, statistics);
     }
 }

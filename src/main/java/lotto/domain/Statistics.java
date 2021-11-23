@@ -1,6 +1,8 @@
 package lotto.domain;
 
-import java.util.List;
+import lotto.dto.StatisticsResult;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -8,11 +10,11 @@ import java.util.stream.Collectors;
  */
 public class Statistics {
 
-    private final Lotto won;
+    private final Credit credit;
     private final List<Lotto> lottos;
 
-    public Statistics(Lotto won, List<Lotto> lottos) {
-        this.won = won;
+    public Statistics(Credit credit, Lotto won, List<Lotto> lottos) {
+        this.credit = credit;
         this.lottos = createResult(won, lottos);
     }
 
@@ -22,11 +24,16 @@ public class Statistics {
             .collect(Collectors.toList());
     }
 
-    public Lotto getWon() {
-        return won;
-    }
+    public StatisticsResult getMatchResult() {
+        List<Rank> ranks = Arrays.asList(Rank.FORTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
+        Map<Rank, Integer> map = new TreeMap<>(Comparator.comparing(Rank::getMatch));
+        ranks.forEach(rank -> map.put(rank, 0));
 
-    public List<Lotto> getLottos() {
-        return lottos;
+        lottos.forEach(l -> map.computeIfPresent(l.getRank(), (k, v) -> v + 1));
+
+        int profit = map.keySet().stream().filter(r -> map.get(r) != 0).mapToInt(Rank::getMoney).sum();
+
+        int purchaseAmount = this.credit.getPurchaseAmount();
+        return new StatisticsResult(map, String.valueOf(profit != 0 ? (double) profit / purchaseAmount : 0));
     }
 }
