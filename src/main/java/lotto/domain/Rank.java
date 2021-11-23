@@ -30,7 +30,7 @@ public enum Rank implements Supplier<Rank> {
         return this.getPrizeMoney() > 0;
     }
 
-    public static Rank equalToCount(Long count) {
+    public static Rank equalToCount(long count) {
         return Arrays.stream(values())
             .filter(rank -> rank.count == count)
             .findFirst()

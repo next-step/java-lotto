@@ -9,10 +9,10 @@ import java.util.stream.IntStream;
 
 public class AutoLottoNumberUtils {
 
-    private static final Integer MINIMUM_NUMBER = 1;
-    private static final Integer MAXIMUM_NUMBER = 45;
-    private static final Integer FROM_INDEX = 0;
-    private static final Integer TO_INDEX = 6;
+    private static final int MINIMUM_NUMBER = 1;
+    private static final int MAXIMUM_NUMBER = 45;
+    private static final int FROM_INDEX = 0;
+    private static final int TO_INDEX = 6;
     private static final List<Integer> NUMBER;
 
     static {

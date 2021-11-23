@@ -53,7 +53,7 @@ public class LottoService {
         return count;
     }
 
-    private Double mathYield(Double money, Double prizeMoney) {
+    private double mathYield(double money, double prizeMoney) {
         if (prizeMoney == DEFAULT_PRIZE_MONEY) {
             return DEFAULT_PRIZE_MONEY;
         }

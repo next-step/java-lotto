@@ -27,11 +27,11 @@ public class WinningResult {
         return this;
     }
 
-    public Double getMoney() {
+    public double getMoney() {
         return count * TICKET_PRICE;
     }
 
-    public Double getPrizeMoney() {
+    public double getPrizeMoney() {
         return (double) result.keySet()
             .stream()
             .mapToLong(key -> key.getPrizeMoney() * result.get(key))

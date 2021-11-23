@@ -8,7 +8,7 @@ import lotto.exception.TicketSizeOutBoundException;
 
 public abstract class AbstractLottoTicket {
 
-    private static final Integer LOTTO_SIZE = 6;
+    private static final int LOTTO_SIZE = 6;
 
     protected final Set<LottoNumber> lottoTicket;
 
