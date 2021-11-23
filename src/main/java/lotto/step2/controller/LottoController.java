@@ -1,12 +1,12 @@
 package lotto.step2.controller;
 
 import lotto.step2.domain.Lotteries;
+import lotto.step2.domain.Lotto;
 import lotto.step2.domain.Profit;
-import lotto.step2.domain.Statics;
 import lotto.step2.domain.Store;
 
 import static lotto.step2.view.InputView.printInputOrderPrice;
-import static lotto.step2.view.InputView.printInputWinningNumber;
+import static lotto.step2.view.InputView.printInputWinningNumbers;
 import static lotto.step2.view.ResultView.*;
 
 public class LottoController {
@@ -19,11 +19,12 @@ public class LottoController {
         Lotteries lotteries = store.getLotteries();
         printOrderLottoNumber(lotteries);
 
-        Statics statics = new Statics(printInputWinningNumber(), lotteries);
-        printWinningStatics(statics);
+        Lotto winningNumbers = new Lotto(printInputWinningNumbers());
 
-        Profit profit = new Profit(statics, store.getOrderPrice());
-        printRateOfReturn(profit.getRateOfProfit());
+        printWinningStatics(lotteries, winningNumbers);
+
+        Profit profit = new Profit(lotteries, winningNumbers, store.getOrderPrice());
+        printRateOfReturn(profit.calculateRateOfProfit());
     }
 
 }

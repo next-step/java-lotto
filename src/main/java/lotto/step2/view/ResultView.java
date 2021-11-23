@@ -1,7 +1,6 @@
 package lotto.step2.view;
 
 import lotto.step2.domain.Lotteries;
-import lotto.step2.domain.Statics;
 import lotto.step2.domain.Lotto;
 import lotto.step2.domain.Rank;
 
@@ -28,7 +27,7 @@ public final class ResultView {
         System.out.println();
     }
 
-    public static void printWinningStatics(Statics statics) {
+    public static void printWinningStatics(Lotteries lotteries, Lotto winningNumbers) {
         StringBuilder builder = new StringBuilder();
         builder.append("당첨 통계");
         builder.append("\n");
@@ -40,12 +39,13 @@ public final class ResultView {
             builder.append("개 일치(");
             builder.append(rank.getPrizeMoney());
             builder.append("원) - ");
-            builder.append(statics.totalCountOfMatch(count));
+            builder.append(lotteries.totalCountOfMatch(winningNumbers, count));
             builder.append("개");
             builder.append("\n");
         }
         System.out.print(builder);
     }
+
 
     public static void printRateOfReturn(double profit) {
         System.out.println("총 수익률은 " + profit + "입니다.");
