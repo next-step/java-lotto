@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private static final int LOTTO_NUMBERS_SIZE = 6;
+    public static final int LOTTO_NUMBER_LENGTH = 6;
 
     private final List<Number> numbers = new ArrayList<>();
 
@@ -20,6 +21,7 @@ public class LottoNumbers {
     }
 
     private LottoNumbers(String[] splitNumbers) {
+        validateNumbersLength(splitNumbers);
         for (String number : splitNumbers) {
             numbers.add(Number.of(number));
         }
@@ -50,6 +52,12 @@ public class LottoNumbers {
         return numbers.stream()
                 .sorted(Comparator.comparing(Number::getNumber))
                 .collect(Collectors.toList());
+    }
+
+    private void validateNumbersLength(String[] splitNumbers) {
+        if (splitNumbers.length != LOTTO_NUMBER_LENGTH) {
+            throw new IllegalArgumentException("로또는 6개의 숫자로 구성되어야 합니다.");
+        }
     }
 
     @Override

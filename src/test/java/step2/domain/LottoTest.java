@@ -6,6 +6,7 @@ import step2.strategy.RandomNumberGenerator;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -65,5 +66,14 @@ public class LottoTest {
         Lotto lotto = Lotto.of(splitLottoNumbers);
         //then
         assertThat(lotto).isEqualTo(Lotto.of(new String[]{"1", "2", "3", "4", "5", "6"}));
+    }
+
+    @Test
+    void 로또_길이가_6이_아니면_IllegalArgumentException_이_발생한다() {
+        //given
+        //when
+        //then
+        assertThatThrownBy(() -> Lotto.of(new String[]{"1", "2", "3", "4", "5"}))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

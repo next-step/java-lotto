@@ -21,7 +21,7 @@ public class Lottos {
         return new Lottos();
     }
 
-    public static Lottos purchase(int generateCount, NumberGeneratorStrategy generatorStrategy ) {
+    public static Lottos purchase(int generateCount, NumberGeneratorStrategy generatorStrategy) {
         return new Lottos(generateCount, generatorStrategy);
     }
 
@@ -31,9 +31,5 @@ public class Lottos {
 
     public List<Lotto> getLottos() {
         return lottos;
-    }
-
-    public int getLottosSize() {
-        return lottos.size();
     }
 }

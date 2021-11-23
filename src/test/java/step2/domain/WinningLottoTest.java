@@ -14,7 +14,7 @@ public class WinningLottoTest {
         //given
         String numbers = "1, 2, 3, 4, 5, 6";
         //when
-        WinningLotto winningLotto = WinningLotto.create(numbers);
+        WinningLotto winningLotto = WinningLotto.create(numbers.split(", "));
         //then
         assertNotNull(winningLotto);
         assertThat(winningLotto.getLottoNumbers().stream()
