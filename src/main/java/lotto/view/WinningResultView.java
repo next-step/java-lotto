@@ -18,7 +18,7 @@ public class WinningResultView {
                 System.out.println(String.format("%d개 일치 (%d원) - %d개", key.getCount(), key.getPrizeMoney(), dto.getResultRank().getOrDefault(key, DEFAULT_VALUE)));
             }
         }
-        System.out.println(String.format("총 수익률은 %.2f 입니다.", dto.getYield()));
+        System.out.println(String.format("총 수익률은 %.2f 입니다.", dto.getRate()));
     }
 
 }

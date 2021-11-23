@@ -3,18 +3,22 @@ package lotto.controller;
 import lotto.domain.LottoTickets;
 import lotto.domain.dto.ResultDto;
 import lotto.domain.dto.WinningLottoTicketDto;
-import lotto.service.LottoService;
+import lotto.service.LottoTicketBooth;
+import lotto.service.WinningResult;
 
 public class LottoController {
 
     private static class LottoControllerHolder {
+
         private static final LottoController LOTTO_CONTROLLER = new LottoController();
     }
 
-    private final LottoService lottoService;
+    private final WinningResult winningResult;
+    private final LottoTicketBooth lottoTicketBooth;
 
     private LottoController() {
-        lottoService = LottoService.getInstance();
+        winningResult = WinningResult.getInstance();
+        lottoTicketBooth = LottoTicketBooth.getInstance();
     }
 
     public static LottoController getInstance() {
@@ -22,11 +26,11 @@ public class LottoController {
     }
 
     public LottoTickets autoBuyLottoTickets(int money) {
-        return lottoService.autoTickets(money);
+        return lottoTicketBooth.autoTickets(money);
     }
 
     public ResultDto lottoResult(WinningLottoTicketDto winningLottoTicketDto) {
-        return lottoService.winningResult(winningLottoTicketDto);
+        return winningResult.winningResult(winningLottoTicketDto);
     }
 
 }

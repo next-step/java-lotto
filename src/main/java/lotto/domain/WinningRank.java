@@ -5,23 +5,23 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-public class WinningResult {
+public class WinningRank {
 
     private static final int DEFAULT_VALUE = 0;
     private static final int UPDATE_VALUE = 1;
     private static final double TICKET_PRICE = 1000l;
 
-    private Map<Rank, Integer> result;
+    private Map<Rank, Integer> winningRank;
     private double count = 0d;
 
-    public WinningResult() {
-        this.result = new EnumMap<>(Rank.class);
+    public WinningRank() {
+        this.winningRank = new EnumMap<>(Rank.class);
     }
 
-    public WinningResult updateRank(List<Long> winnerCount) {
+    public WinningRank updateRank(List<Long> winnerCount) {
         for (Long count : winnerCount) {
             Rank rank = Rank.equalToCount(count);
-            result.put(rank, result.getOrDefault(rank, DEFAULT_VALUE) + UPDATE_VALUE);
+            winningRank.put(rank, winningRank.getOrDefault(rank, DEFAULT_VALUE) + UPDATE_VALUE);
             this.count = this.count + UPDATE_VALUE;
         }
         return this;
@@ -32,13 +32,13 @@ public class WinningResult {
     }
 
     public double getPrizeMoney() {
-        return (double) result.keySet()
+        return (double) winningRank.keySet()
             .stream()
-            .mapToLong(key -> key.getPrizeMoney() * result.get(key))
+            .mapToLong(key -> key.getPrizeMoney() * winningRank.get(key))
             .sum();
     }
 
-    public Map<Rank, Integer> getResult() {
-        return Collections.unmodifiableMap(result);
+    public Map<Rank, Integer> getWinningRank() {
+        return Collections.unmodifiableMap(winningRank);
     }
 }

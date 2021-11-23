@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class LottoTicket extends AbstractLottoTicket {
 
-    public LottoTicket(List<Integer> lottoNumber) {
+    private LottoTicket(List<Integer> lottoNumber) {
         super(lottoNumber);
     }
 
