@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.*;
 import lotto.domain.numbergenerator.RandomLottoNumbersGenerator;
+import lotto.exception.BonusNumberException;
 import lotto.exception.LottoNumberException;
 import lotto.exception.LottoNumbersCountException;
 import lotto.exception.MinimumAmountException;
@@ -9,6 +10,7 @@ import lotto.view.Input;
 import lotto.view.Output;
 
 import static lotto.utils.StringUtil.split;
+import static lotto.view.Input.askBonusBall;
 
 public class Application {
     public static void main(String[] args) {
@@ -19,10 +21,25 @@ public class Application {
         Output.printLottosCount(lottos);
         Output.printLottos(lottos);
 
-        WinningLotto winningLotto = getWinningNumber();
+        String askWinningNumbers = Input.askWinningNumber();
+        String[] winningNumbers = split(askWinningNumbers);
+
+        LottoNumber bonusBall = getBonusBall();
+
+        WinningLotto winningLotto = getWinningNumber(winningNumbers, bonusBall);
 
         WinningStatistics statistics = WinningStatistics.from(lottos, winningLotto);
         Output.printWinningStatistics(statistics);
+    }
+
+    private static LottoNumber getBonusBall() {
+        int bonusBall = askBonusBall();
+        try {
+            return LottoNumber.from(bonusBall);
+        } catch (LottoNumberException e) {
+            Output.lottoNumberError();
+            return getBonusBall();
+        }
     }
 
     private static Money getPurchaseAount() {
@@ -35,17 +52,18 @@ public class Application {
         }
     }
 
-    private static WinningLotto getWinningNumber() {
+    private static WinningLotto getWinningNumber(String[] winningNumber, LottoNumber bonusBall) {
         try {
-            String winningNumber = Input.askWinningNumber();
-            String[] split = split(winningNumber);
-            return WinningLotto.from(split);
+            return WinningLotto.from(winningNumber, bonusBall);
         } catch (LottoNumberException e) {
-            Output.LottoNumberError();
-            return getWinningNumber();
+            Output.lottoNumberError();
+            return getWinningNumber(winningNumber, bonusBall);
         } catch (LottoNumbersCountException e) {
-            Output.WinningNumberCountError();
-            return getWinningNumber();
+            Output.winningNumberCountError();
+            return getWinningNumber(winningNumber, bonusBall);
+        } catch (BonusNumberException e) {
+            Output.bonusNumberError();
+            return getWinningNumber(winningNumber, getBonusBall());
         }
     }
 }
