@@ -8,9 +8,20 @@ public class Operand {
 
     private final int value;
 
+    public Operand(int value) {
+        validate(value);
+        this.value = value;
+    }
+
     public Operand(String stringNumber) {
         validate(stringNumber);
         this.value = Integer.parseInt(stringNumber);
+    }
+
+    private void validate(int value) {
+        if (value < 0) {
+            throw new IllegalArgumentException("피연산자는 0 이상의 양수여야합니다.");
+        }
     }
 
     private void validate(String stringNumber) {
@@ -20,7 +31,7 @@ public class Operand {
     }
 
     public Operand add(final Operand other) {
-        return new Operand("" + (value + other.value));
+        return new Operand(value + other.value);
     }
 
     public int value() {

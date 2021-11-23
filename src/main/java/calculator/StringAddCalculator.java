@@ -10,8 +10,8 @@ public class StringAddCalculator {
             return 0;
         }
 
-        String delimiter = parser.getDelimiterFrom(text);
-        String parsedText = parser.getTextFrom(text);
+        String delimiter = parser.extractDelimiterFrom(text);
+        String parsedText = parser.extractTextFrom(text);
 
         return splitter.split(parsedText, delimiter).sumAll();
     }
