@@ -3,8 +3,6 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
-
 import static lotto.utils.Constants.NUMBER_THOUSAND;
 import static lotto.utils.Constants.NUMBER_ZERO;
 import static org.assertj.core.api.Assertions.assertThat;
