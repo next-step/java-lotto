@@ -5,10 +5,11 @@ import stringformula.exception.InvalidNumberValueException;
 import java.util.Objects;
 
 public class Number {
+    private static final int MINIMUM = 0;
     private final int value;
 
     public Number(int value) {
-        if (value < 0) {
+        if (value < MINIMUM) {
             throw new InvalidNumberValueException();
         }
 
