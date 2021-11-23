@@ -17,7 +17,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int value;
 
     public LottoNumber(int value) {
+        validate(value);
         this.value = value;
+    }
+
+    private void validate(int value) {
+        if (value < MIN_LOTTO_NUMBER || value > MAX_LOTTO_NUMBER) {
+            throw new IllegalArgumentException("해당 번호의 로또번호는 없습니다.");
+        }
     }
 
     public static List<LottoNumber> getRandomNumber(int count) {
@@ -32,6 +39,21 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int compareTo(LottoNumber o) {
         return Integer.compare(value, o.value);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LottoNumber that = (LottoNumber) o;
+
+        return value == that.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return value;
     }
 
 }

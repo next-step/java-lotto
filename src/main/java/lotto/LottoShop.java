@@ -12,4 +12,12 @@ public class LottoShop {
         return lottoCashier.pay(moneyString);
     }
 
+    public LottoResult match(List<Lotto> lottos, Lotto winLotto) {
+        LottoCounter lottoCounter = new LottoCounter();
+        for (Lotto lotto : lottos) {
+            lottoCounter.countResult(lotto.countMatch(winLotto));
+        }
+        return lottoCounter.makeResult();
+    }
+
 }
