@@ -4,8 +4,8 @@ public class StringCalculator {
     public static int splitAndSum(String text) {
         String[] tokens = text.split(",|:");
         int result = 0;
-        for (int i = 0; i < tokens.length; i++) {
-            result += Integer.parseInt(tokens[i]);
+        for (String token : tokens) {
+            result += Integer.parseInt(token);
         }
         return result;
     }

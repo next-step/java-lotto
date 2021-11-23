@@ -25,4 +25,11 @@ public class CalculatorTest {
         int result = StringCalculator.splitAndSum("1:2");
         assertThat(result).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("쉼표와 콜론을 함께 사용한 문자열 테스트")
+    void testCalculator_쉼표콜론구분자() {
+        int result = StringCalculator.splitAndSum("1,2:3");
+        assertThat(result).isEqualTo(6);
+    }
 }
