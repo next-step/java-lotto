@@ -1,5 +1,7 @@
 package lotto.model;
 
+import common.model.Number;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -20,9 +22,9 @@ public enum LottoRank {
         this.amount = amount;
     }
 
-    public static LottoRank valueOf(int matchCount) {
+    public static LottoRank valueOf(Number matchCount) {
         return Arrays.stream(values())
-                .filter(r -> matchCount == r.matchCount)
+                .filter(r -> matchCount.equals(new Number(r.matchCount)))
                 .findFirst()
                 .orElse(MISS);
     }

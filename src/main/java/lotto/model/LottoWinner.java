@@ -5,13 +5,22 @@ import common.model.Number;
 import java.util.List;
 
 public class LottoWinner extends LottoNumbers {
+
     public LottoWinner(List<LottoNumber> lottoNumbers) {
         super(lottoNumbers);
     }
 
-    public void match(LottoNumber lottoNumber, Number matchCount) {
+    public LottoRank match(LottoNumbers lottoNumbers) {
+        Number count = new Number();
+        for (LottoNumber lottoNumber : lottoNumbers.getLottoNumbers()) {
+            match(lottoNumber, count);
+        }
+        return LottoRank.valueOf(count);
+    }
+
+    public void match(LottoNumber lottoNumber, Number count) {
         if (contains(lottoNumber)) {
-            matchCount.plus();
+            count.plus();
         }
     }
 
