@@ -1,6 +1,6 @@
 package calculator;
 
-import calculator.util.NumberUtils;
+import util.NumberUtils;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -24,7 +24,7 @@ public class StringSplitter {
     }
 
     private static boolean containNegativeInt(String[] splitInput) {
-        return Arrays.stream(splitInput).anyMatch(number -> NumberUtils.isNegativeInt(number));
+        return Arrays.stream(splitInput).anyMatch(NumberUtils::isNegativeInt);
     }
 
     private static String[] split(String input) {
