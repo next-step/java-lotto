@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
-    private static final int LOTTO_PRICE = 1000;
-
     private List<Lotto> lottos = new ArrayList<>();
+
+    private Lottos() {
+    }
 
     private Lottos(int generateCount, NumberGeneratorStrategy generatorStrategy) {
         while (lottos.size() < generateCount) {
@@ -16,8 +17,16 @@ public class Lottos {
         }
     }
 
-    public static Lottos purchase(int price, NumberGeneratorStrategy generatorStrategy ) {
-        return new Lottos(price / LOTTO_PRICE, generatorStrategy);
+    public static Lottos create() {
+        return new Lottos();
+    }
+
+    public static Lottos purchase(int generateCount, NumberGeneratorStrategy generatorStrategy ) {
+        return new Lottos(generateCount, generatorStrategy);
+    }
+
+    public void addAll(List<Lotto> lottos) {
+        this.lottos.addAll(lottos);
     }
 
     public List<Lotto> getLottos() {

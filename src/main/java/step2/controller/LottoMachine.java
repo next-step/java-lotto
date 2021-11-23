@@ -1,16 +1,18 @@
 package step2.controller;
 
-import step2.domain.Lottos;
-import step2.domain.Price;
-import step2.domain.WinningResult;
-import step2.domain.WinningType;
+import step2.domain.*;
 import step2.service.LottoService;
 import step2.strategy.RandomNumberGenerator;
+import step2.view.InputView;
 import step2.view.ResultView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class LottoMachine {
+    public static final int LOTTO_PRICE = 1000;
+
     private Price price;
     private LottoService lottoService;
 
@@ -23,14 +25,38 @@ public class LottoMachine {
         return new LottoMachine(price);
     }
 
-    public Lottos purchase() {
-        Lottos lottos = lottoService.purchase(price.getPrice());
+    public Lottos purchase(int manualLottoCount) {
+        int lottoCount = price.getPrice() / LOTTO_PRICE;
+        int autoLottoCount = lottoCount - manualLottoCount;
+        Lottos lottos = Lottos.create();
+        lottos.addAll(purchaseManualLotto(manualLottoCount));
+        lottos.addAll(purchaseAutoLotto(autoLottoCount));
+        showPurchaseCountResult(manualLottoCount, autoLottoCount);
         showPurchaseResult(lottos);
         return lottos;
     }
 
+    private List<Lotto> purchaseManualLotto(int manualLottoCount) {
+        InputView.inputManualLottoNumberMessage();
+        List<Lotto> lottos = new ArrayList<>();
+        for (int purchaseCount = 0; purchaseCount < manualLottoCount; purchaseCount++) {
+            String manualLottoNumber = InputView.inputManualLottoNumber();
+            lottos.add(lottoService.purchaseManualLotto(manualLottoNumber));
+        }
+        System.out.println();
+        return lottos;
+    }
+
+    private List<Lotto> purchaseAutoLotto(int autoLottoCount) {
+        Lottos lottos = lottoService.purchase(autoLottoCount);
+        return lottos.getLottos();
+    }
+
+    private void showPurchaseCountResult(int manualLottoCount, int autoLottoCount) {
+        ResultView.showLottoGenerateCount(manualLottoCount, autoLottoCount);
+    }
+
     private void showPurchaseResult(Lottos lottos) {
-        ResultView.showLottoGenerateCount(lottos.getLottosSize());
         ResultView.showAllLottoNumbers(lottos.getLottos());
         System.out.println();
     }
