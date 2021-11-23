@@ -15,6 +15,7 @@ public class ResultView {
     private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계";
     private static final String DASH_LINE = "---------";
     private static final String SHOW_WINNING_RESULT_MESSAGE = "%d개 일치 (%d원)- %d개\n";
+    private static final String SHOW_BONUS_WINNING_RESULT_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원)- %d개\n";
     private static final String WINNING_RESULT_REVENUE_MESSAGE = "총 수익률은 %.2f 입니다.\n";
 
     public static void showLottoGenerateCount(int lottosSize) {
@@ -40,6 +41,10 @@ public class ResultView {
 
     public static void showWinningResultOfWinningType(int matchCount, int winnings, int matchResult) {
         System.out.printf(SHOW_WINNING_RESULT_MESSAGE, matchCount, winnings, matchResult);
+    }
+
+    public static void showBonusWinningResultOfWinningType(int matchCount, int winnings, int matchResult) {
+        System.out.printf(SHOW_BONUS_WINNING_RESULT_MESSAGE, matchCount, winnings, matchResult);
     }
 
     public static void showWinningResultOfRevenue(Price price, int totalWinnings) {

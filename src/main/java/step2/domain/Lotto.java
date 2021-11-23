@@ -1,14 +1,17 @@
 package step2.domain;
 
-import step2.strategy.IntNumberGeneratorStrategy;
+import step2.strategy.NumberGeneratorStrategy;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
+    private static final int NONE_MATCH_COUNT = 0;
+
     private LottoNumbers lottoNumbers;
 
-    private Lotto(IntNumberGeneratorStrategy generatorStrategy) {
+    private Lotto(NumberGeneratorStrategy generatorStrategy) {
         lottoNumbers = LottoNumbers.create(generatorStrategy);
     }
 
@@ -16,7 +19,7 @@ public class Lotto {
         lottoNumbers = LottoNumbers.of(splitNumbers);
     }
 
-    public static Lotto generate(IntNumberGeneratorStrategy generatorStrategy) {
+    public static Lotto generate(NumberGeneratorStrategy generatorStrategy) {
         return new Lotto(generatorStrategy);
     }
 
@@ -26,6 +29,10 @@ public class Lotto {
 
     public int match(Lotto lotto) {
         return lottoNumbers.match(lotto.getLottoNumbers());
+    }
+
+    public boolean matchBonus(Number bonusNumber) {
+        return lottoNumbers.match(Collections.singletonList(bonusNumber)) > NONE_MATCH_COUNT;
     }
 
     public List<Number> getLottoNumbers() {

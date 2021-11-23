@@ -24,7 +24,7 @@ public class WinningTypeTest {
         //given
         int matchCount = 3;
         //when
-        WinningType winningType = WinningType.findBy(matchCount);
+        WinningType winningType = WinningType.findBy(matchCount, false);
         //then
         assertEquals(winningType.getWinnings(), 5000);
     }
@@ -35,7 +35,7 @@ public class WinningTypeTest {
         //given
         //when
         //then
-        assertThatThrownBy(() -> WinningType.findBy(matchCount))
+        assertThatThrownBy(() -> WinningType.findBy(matchCount, false))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

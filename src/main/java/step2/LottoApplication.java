@@ -16,6 +16,7 @@ public class LottoApplication {
 
         //input last week lotto number
         String winningNumbers = InputView.inputLastWeekLottoNumber();
-        lottoMachine.winningResult(purchasedLottos, winningNumbers);
+        int bonusNumber = InputView.inputBonusNumber();
+        lottoMachine.winningResult(purchasedLottos, winningNumbers, bonusNumber);
     }
 }
