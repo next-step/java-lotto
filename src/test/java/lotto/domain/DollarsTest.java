@@ -1,10 +1,15 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.List;
+
+import static java.util.Arrays.asList;
+import static java.util.Collections.nCopies;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -28,6 +33,17 @@ class DollarsTest {
     void create(int won, int expectedCount) {
         Dollars dollars = new Dollars(won);
         assertThat(dollars.getCount()).isEqualTo(expectedCount);
+    }
+
+    @DisplayName("구입금액보다 로또개수가 많다면 예외를 던진다")
+    @Test
+    void checkEnoughMoney_notEnoughMoney_thrownException() {
+        Dollars dollars = new Dollars(1000);
+        List<LottoNumbers> lottoLines = nCopies(2, LottoNumbers.of(asList(1, 2, 3, 4, 5, 6)));
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> dollars.checkEnoughMoney(lottoLines))
+                .withMessage(Dollars.NOT_ENOUGH_MONEY_EXCEPTION);
     }
 
 }

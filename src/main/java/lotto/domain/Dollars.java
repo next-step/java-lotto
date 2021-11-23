@@ -1,11 +1,13 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Dollars {
 
-    public static final int DOLLAR_UNIT = 1000;
     public static final String ILLEGAL_RANGE_ERROR_MESSAGE = "1000이상의 값이 필요합니다.";
+    public static final String NOT_ENOUGH_MONEY_EXCEPTION = "금액이 부족합니다.";
+    public static final int DOLLAR_UNIT = 1000;
     private static final int MIN_COUNT = 1;
 
     private final int count;
@@ -30,6 +32,12 @@ public class Dollars {
         return (long) count * DOLLAR_UNIT;
     }
 
+    public void checkEnoughMoney(List<LottoNumbers> lottoLines) {
+        if (count < lottoLines.size()) {
+            throw new IllegalArgumentException(NOT_ENOUGH_MONEY_EXCEPTION);
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -41,5 +49,12 @@ public class Dollars {
     @Override
     public int hashCode() {
         return Objects.hash(count);
+    }
+
+    @Override
+    public String toString() {
+        return "Dollars{" +
+                "count=" + count +
+                '}';
     }
 }

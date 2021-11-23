@@ -52,14 +52,6 @@ public enum Grade {
         return grade -> (grade != BONUS) && (grade.matchCount == matchCount);
     }
 
-    public int getMatchCount() {
-        return matchCount;
-    }
-
-    public long getReward() {
-        return reward;
-    }
-
     public static Map<Grade, Long> mapOf(List<Grade> grades) {
         checkNotNull(grades);
         Map<Grade, Long> resultGrades = initMap();
@@ -81,5 +73,13 @@ public enum Grade {
 
     private static BiFunction<Grade, Long, Long> increaseCount() {
         return (grade, count) -> count + INCREASE_COUNT_UNIT;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public long getReward() {
+        return reward;
     }
 }

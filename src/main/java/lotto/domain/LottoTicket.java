@@ -1,42 +1,74 @@
 package lotto.domain;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.Collections.unmodifiableList;
 import static lotto.utils.Validator.checkNotNull;
 
 public class LottoTicket {
 
-    private final List<LottoNumbers> lottoLines;
+    private final List<LottoNumbers> manualLottoLines;
+    private final List<LottoNumbers> autoLottoLines;
 
-    public static LottoTicket publish(Dollars dollars, ShuffleStrategy shuffleStrategy) {
-        checkNotNull(dollars);
-        List<LottoNumbers> lottoLines = Stream.generate(() -> LottoNumbers.publish(shuffleStrategy))
-                .limit(dollars.getCount())
-                .collect(Collectors.toList());
-        return new LottoTicket(lottoLines);
+    public static LottoTicket publish(PublishDetails publishDetails, ShuffleStrategy shuffleStrategy) {
+        checkNotNull(publishDetails);
+        List<LottoNumbers> autoLottoLines = createLottoLines(publishDetails.autoLottoLineCount(), shuffleStrategy);
+        return new LottoTicket(autoLottoLines, publishDetails.manualLottoLines());
     }
 
-    public LottoTicket(List<LottoNumbers> lottoLines) {
-        checkNotNull(lottoLines);
-        this.lottoLines = lottoLines;
+    private static List<LottoNumbers> createLottoLines(int lineCount, ShuffleStrategy shuffleStrategy) {
+        return Stream.generate(() -> LottoNumbers.publish(shuffleStrategy))
+                .limit(lineCount)
+                .collect(Collectors.toList());
+    }
+
+    public LottoTicket(List<LottoNumbers> autoLottoLines, List<LottoNumbers> manualLottoLines) {
+        checkNotNull(autoLottoLines, manualLottoLines);
+        this.autoLottoLines = autoLottoLines;
+        this.manualLottoLines = manualLottoLines;
     }
 
     public Statistics rank(LottoNumbers lastWinningNumbers, LottoNumber bonusNumber) {
         checkNotNull(lastWinningNumbers);
-        List<Grade> grades = lottoLines.stream()
+        List<Grade> grades = allLottoLines().stream()
                 .map(lottoLine -> lottoLine.rank(lastWinningNumbers, bonusNumber))
                 .collect(Collectors.toList());
-        return new Statistics(Grade.mapOf(grades), lineSizeToDollars());
+        return new Statistics(Grade.mapOf(grades), allLineSizeToDollars());
     }
 
-    private Dollars lineSizeToDollars() {
-        return new Dollars(lottoLines.size() * Dollars.DOLLAR_UNIT);
+    private Dollars allLineSizeToDollars() {
+        return new Dollars(allLottoLines().size() * Dollars.DOLLAR_UNIT);
     }
 
-    public List<LottoNumbers> getLottoLines() {
-        return Collections.unmodifiableList(lottoLines);
+    public List<LottoNumbers> allLottoLines() {
+        List<LottoNumbers> allLottoLines = new ArrayList<>();
+        allLottoLines.addAll(manualLottoLines);
+        allLottoLines.addAll(autoLottoLines);
+        return unmodifiableList(allLottoLines);
+    }
+
+    public int manualLottoLinesCount() {
+        return manualLottoLines.size();
+    }
+
+    public int autoLottoLinesCount() {
+        return autoLottoLines.size();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(manualLottoLines, that.manualLottoLines) && Objects.equals(autoLottoLines, that.autoLottoLines);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(manualLottoLines, autoLottoLines);
     }
 }

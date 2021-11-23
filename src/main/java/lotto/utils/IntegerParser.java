@@ -21,7 +21,7 @@ public class IntegerParser {
                 .collect(Collectors.toList());
     }
 
-    private static int parseInt(String stringNum) {
+    public static int parseInt(String stringNum) {
         try {
             return Integer.parseInt(stringNum.trim());
         } catch (NumberFormatException e) {
