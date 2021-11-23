@@ -85,4 +85,42 @@ public class PurchaseListTest {
                 .isEqualTo(expected);
 
     }
+
+    static Stream<Arguments> parseWPriceEarningRate() {
+        return Stream.of(
+                // first place
+                Arguments.of(
+                        GameResult.of(1, 0, 0, 0),
+                        2000000
+                ),
+                // second place
+                Arguments.of(
+                        GameResult.of(0, 1, 0, 0),
+                        1500
+                ),
+                // third place
+                Arguments.of(
+                        GameResult.of(0, 0, 1, 0),
+                        50
+                ),
+                // fource place
+                Arguments.of(
+                        GameResult.of(0, 0, 0, 1),
+                        5
+                ),
+                // no winning
+                Arguments.of(
+                        GameResult.of(0, 0, 0, 0),
+                        0
+                )
+        );
+    }
+
+    @ParameterizedTest(name = "price-earning rate: {0} -> {1}")
+    @MethodSource("parseWPriceEarningRate")
+    public void priceEarningRate(GameResult gameResult, float expected) {
+        final PurchaseList purchaseList = PurchaseList.purchase(1000, FixedLottoGenerator.getInstance());
+//        final GameResult gameResult = purchaseList.winningResult(winningNumber);
+        assertThat(purchaseList.priceEarningRate(gameResult)).isEqualTo(expected);
+    }
 }

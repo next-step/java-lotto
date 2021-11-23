@@ -6,9 +6,11 @@ public class PurchaseList {
     private static final int GAME_PRICE = 1000;
 
     private final Lottos lottos;
+    private final int budget;
 
-    private PurchaseList(Lottos lottos) {
+    private PurchaseList(Lottos lottos, int budget) {
         this.lottos = lottos;
+        this.budget = budget;
     }
 
     public static PurchaseList purchase(int budget, LottoGenerator generator) {
@@ -20,7 +22,7 @@ public class PurchaseList {
             throw new IllegalArgumentException("invalid input: budget must be multiple of 1000, but " + budget);
         }
 
-        return new PurchaseList(generator.generate(budget / GAME_PRICE));
+        return new PurchaseList(generator.generate(budget / GAME_PRICE), budget);
     }
 
     public int amount() {
@@ -33,5 +35,9 @@ public class PurchaseList {
 
     public GameResult winningResult(Lotto winningNumber) {
         return lottos.winningResult(winningNumber);
+    }
+
+    public float priceEarningRate(GameResult gameResult) {
+        return gameResult.totalPrize() / (budget * 1.0f);
     }
 }
