@@ -1,4 +1,4 @@
-package calcalator.model;
+package common.model;
 
 import java.util.Objects;
 
@@ -21,13 +21,18 @@ public class Number {
         this.number = number;
     }
 
+    public void plus() {
+        this.number++;
+    }
+
     public void plus(Number other) {
         this.number += other.number;
     }
 
     public int parse(String input) {
-        if (input == null || "".equals(input))
+        if (input == null || "".equals(input)) {
             return 0;
+        }
 
         int number;
         try {
@@ -58,5 +63,10 @@ public class Number {
 
     public int getNumber() {
         return number;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 }
