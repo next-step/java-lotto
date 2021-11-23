@@ -13,7 +13,11 @@ public class StringCalculator {
         }
         int result = 0;
         for (String token : tokens) {
-            result += Integer.parseInt(token);
+            int number = Integer.parseInt(token);
+            if (number < 0) {
+                throw new RuntimeException();
+            }
+            result += number;
         }
         return result;
     }

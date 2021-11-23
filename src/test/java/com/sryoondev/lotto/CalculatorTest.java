@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CalculatorTest {
     @Test
@@ -38,5 +39,12 @@ public class CalculatorTest {
     void testCalculator_커스텀구분자() {
         int result = StringCalculator.splitAndSum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("음수를 전달할 경우 예외처리")
+    void testCalculator_음수전달() {
+        assertThatThrownBy(() -> StringCalculator.splitAndSum("-1,2,3"))
+                .isInstanceOf(RuntimeException.class);
     }
 }
