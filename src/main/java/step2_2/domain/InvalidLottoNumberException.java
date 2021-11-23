@@ -1,4 +1,4 @@
-package step2_2;
+package step2_2.domain;
 
 public class InvalidLottoNumberException extends RuntimeException{
 

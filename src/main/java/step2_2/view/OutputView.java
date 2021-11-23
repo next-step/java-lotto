@@ -1,8 +1,11 @@
-package step2_2;
+package step2_2.view;
 
 import static java.lang.String.format;
 
 import java.util.Map;
+import step2_2.domain.LottoBundle;
+import step2_2.domain.LottoResult;
+import step2_2.domain.LottoReward;
 
 public class OutputView {
 

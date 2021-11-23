@@ -1,10 +1,13 @@
-package step2_2;
+package step2_2.view;
 
 import static java.util.stream.Collectors.toList;
-import static step2_2.InputUtil.readInt;
-import static step2_2.InputUtil.readNumbers;
+import static step2_2.view.InputUtil.readInt;
+import static step2_2.view.InputUtil.readNumbers;
 
 import java.util.List;
+import step2_2.domain.Lotto;
+import step2_2.domain.LottoNumber;
+import step2_2.domain.Money;
 
 public class InputView {
 

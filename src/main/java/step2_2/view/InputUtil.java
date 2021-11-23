@@ -1,4 +1,4 @@
-package step2_2;
+package step2_2.view;
 
 import static java.util.stream.Collectors.toList;
 
