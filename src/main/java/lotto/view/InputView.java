@@ -24,7 +24,7 @@ public class InputView {
         System.out.println(INSERT_PURCHASE_PRICE);
         String line = scanner.nextLine();
         Credit credit = new Credit(line);
-        System.out.println(String.format(PRINT_CREDIT_COUNT, credit.getNumber()));
+        System.out.println(String.format(PRINT_CREDIT_COUNT, credit.getLottoCount()));
         return credit;
     }
 

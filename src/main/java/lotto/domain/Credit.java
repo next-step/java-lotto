@@ -13,7 +13,11 @@ public class Credit {
         this.number = new PositiveNumber(Integer.parseInt(input) / price);
     }
 
-    public int getNumber() {
+    public int getLottoCount() {
         return number.getNumber();
+    }
+
+    public int getPurchaseAmount() {
+        return number.getNumber() * price;
     }
 }
