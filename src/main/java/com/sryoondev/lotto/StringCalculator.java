@@ -5,6 +5,10 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
     public static int splitAndSum(String text) {
+        if (text == null || text.isEmpty()) {
+            return 0;
+        }
+
         String[] tokens = text.split(",|:");
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
         if (m.find()) {
