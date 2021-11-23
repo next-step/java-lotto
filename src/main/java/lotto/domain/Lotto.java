@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
  * @author han
  */
 public class Lotto {
-    private static final int seed = 46;
+    private static final int bound = 46;
     private static final int size = 6;
     private static final Random r = ThreadLocalRandom.current();
 
@@ -29,7 +29,7 @@ public class Lotto {
     }
 
     public static Lotto createByAuto() {
-        List<PositiveNumber> numbers = r.ints(1, seed)
+        List<PositiveNumber> numbers = r.ints(1, bound)
             .distinct()
             .limit(size)
             .mapToObj(PositiveNumber::new)
