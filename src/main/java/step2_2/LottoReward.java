@@ -11,11 +11,11 @@ public enum LottoReward {
     BANG(0, 0);
 
     private final long matchCount;
-    private final Money reward;
+    private final int reward;
 
     LottoReward(int matchCount, int reward) {
         this.matchCount = matchCount;
-        this.reward = new Money(reward);
+        this.reward = reward;
     }
 
     public static LottoReward fromMatchCount(long matchCount) {
@@ -25,7 +25,7 @@ public enum LottoReward {
             .orElse(BANG);
     }
 
-    public Money getReward() {
+    public int getReward() {
         return reward;
     }
 

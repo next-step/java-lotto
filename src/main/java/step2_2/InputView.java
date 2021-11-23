@@ -18,7 +18,7 @@ public class InputView {
         System.out.println(MONEY_INPUT_MESSAGE);
         try {
             return new Money(readInt());
-        } catch (InvalidMoneyInputException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return readMoney();
         }
@@ -28,7 +28,7 @@ public class InputView {
         System.out.println(LOTTO_NUMBER_INPUT_MESSAGE);
         try {
             return new Lotto(readLottoNumbers());
-        } catch (InvalidLottoNumberException | LottoNumberCountMisMatchException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return readLotto();
         }

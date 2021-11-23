@@ -3,11 +3,14 @@ package step2_2;
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.counting;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoResult {
+
+    private static final int DEFAULT_REWARD = 0;
 
     private List<LottoReward> rewards;
     private Money money;
@@ -18,20 +21,22 @@ public class LottoResult {
     }
 
     public double getYield() {
-        int moneySum = getMoneySum();
+        int moneySum = getReward();
         return (double) moneySum / money.won();
     }
 
-    private int getMoneySum() {
+    private int getReward() {
         return rewards.stream()
             .map(LottoReward::getReward)
-            .mapToInt(Money::won)
-            .sum();
+            .reduce(Integer::sum)
+            .orElse(DEFAULT_REWARD);
     }
 
     public Map<LottoReward, Long> getRewardMap() {
-        return rewards.stream()
+        Map<LottoReward, Long> rewardMap = rewards.stream()
             .filter(LottoReward::isWin)
             .collect(Collectors.groupingBy(identity(), counting()));
+
+        return Collections.unmodifiableMap(rewardMap);
     }
 }

@@ -3,6 +3,7 @@ package step2_2;
 public class Money {
 
     private static final int LOTTO_PRICE = 1000;
+    private static final int MIN = 1;
 
     private int money;
 
@@ -16,7 +17,7 @@ public class Money {
     }
 
     private void checkPositive(int money) {
-        if (money < 0) {
+        if (money < MIN) {
             throw new InvalidMoneyInputException();
         }
     }

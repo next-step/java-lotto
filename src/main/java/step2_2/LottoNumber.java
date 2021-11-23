@@ -1,5 +1,7 @@
 package step2_2;
 
+import java.util.Objects;
+
 public class LottoNumber {
 
     private static final int LOTTO_MIN = 1;
@@ -21,5 +23,19 @@ public class LottoNumber {
     @Override
     public String toString() {
         return String.valueOf(number);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || !o.getClass().equals(LottoNumber.class)) {
+            return false;
+        }
+        LottoNumber other = (LottoNumber) o;
+        return this.number == other.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }
