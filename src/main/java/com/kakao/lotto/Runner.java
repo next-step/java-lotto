@@ -1,10 +1,9 @@
 package com.kakao.lotto;
 
-import com.kakao.lotto.domain.LottoMachine;
-import com.kakao.lotto.domain.LottoTicket;
-import com.kakao.lotto.domain.WinResult;
+import com.kakao.lotto.domain.*;
 import com.kakao.lotto.supportInfo.PurchaseInfo;
-import com.kakao.lotto.supportInfo.WinLottoInfo;
+import com.kakao.lotto.domain.RankStatistic;
+import com.kakao.lotto.supportInfo.WinResult;
 import com.kakao.lotto.ui.InputView;
 import com.kakao.lotto.ui.OutputView;
 
@@ -14,14 +13,18 @@ public class Runner {
     public static void main(String[] args) {
         InputView inputView = new InputView(System.in);
 
-        PurchaseInfo purchaseInfo = new PurchaseInfo(inputView.inputLottoPerchase());
+        PurchaseInfo purchaseInfo = new PurchaseInfo(inputView.inputLottoPurchase());
         LottoMachine lottoMachine = new LottoMachine(purchaseInfo);
-        List<LottoTicket> userLottoTickets = lottoMachine.makeLottoTickets();
-        OutputView.printLottoTicket(userLottoTickets);
+        LottoTicketCollection lottoTickets = lottoMachine.makeLottoTickets();
+        OutputView.printLottoTicket(lottoTickets);
 
-        WinLottoInfo winLottoInfo = new WinLottoInfo(inputView.inputWinLotto());
-        WinResult winResult = new WinResult(userLottoTickets, winLottoInfo);
-        OutputView.printLottoWinStatistic(winResult, purchaseInfo);
+        List<Integer> winLotto = inputView.inputWinLotto();
+        int bonus = inputView.inputLottoBonus();
+        WinLottoTicket winLottoTicket = WinLottoTicket.of(winLotto, bonus);
+
+        RankStatistic rankStatistic = lottoTickets.createRankStatistic(winLottoTicket);
+        WinResult winResult = rankStatistic.createWinResult(purchaseInfo);
+        OutputView.printLottoWinStatistic(winResult);
 
     }
 }
