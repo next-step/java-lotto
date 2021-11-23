@@ -8,7 +8,7 @@ public class Price {
     private Price() {
     }
 
-    public Price(int price) {
+    private Price(int price) {
         validatePurchasePrice(price);
         this.price = price;
     }

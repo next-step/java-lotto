@@ -25,19 +25,19 @@ public class LottoNumbers {
         }
     }
 
-    private void add(NumberGeneratorStrategy generatorStrategy) {
-        Number number = Number.create(generatorStrategy.generate());
-        if (!numbers.contains(number)) {
-            numbers.add(number);
-        }
-    }
-
     public static LottoNumbers create(NumberGeneratorStrategy generatorStrategy) {
         return new LottoNumbers(generatorStrategy);
     }
 
     public static LottoNumbers of(String[] splitNumbers) {
         return new LottoNumbers(splitNumbers);
+    }
+
+    private void add(NumberGeneratorStrategy generatorStrategy) {
+        Number number = Number.create(generatorStrategy.generate());
+        if (!numbers.contains(number)) {
+            numbers.add(number);
+        }
     }
 
     public int match(List<Number> targetNumbers) {

@@ -23,12 +23,7 @@ public enum WinningType {
         return Arrays.stream(values())
                 .filter(type -> type.matchCountEquals(matchCount))
                 .findAny()
-                .map(type -> {
-                    if (type.isSecondMatchCount()) {
-                        return type.isBonusType(matchBonus);
-                    }
-                    return type;
-                })
+                .map(type -> type.checkBonusType(matchBonus))
                 .orElseThrow(IllegalArgumentException::new);
     }
 
@@ -50,5 +45,12 @@ public enum WinningType {
 
     private WinningType isBonusType(boolean matchBonus) {
         return matchBonus ? SECOND_BONUS : SECOND;
+    }
+
+    private WinningType checkBonusType(boolean matchBonus) {
+        if (isSecondMatchCount()) {
+            return isBonusType(matchBonus);
+        }
+        return this;
     }
 }

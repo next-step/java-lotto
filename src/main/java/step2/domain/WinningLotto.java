@@ -7,7 +7,10 @@ public class WinningLotto {
 
     private Lotto lotto;
 
-    public WinningLotto(String[] splitNumbers) {
+    private WinningLotto() {
+    }
+
+    private WinningLotto(String[] splitNumbers) {
         this.lotto = Lotto.of(splitNumbers);
     }
 
