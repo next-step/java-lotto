@@ -21,5 +21,6 @@ public class Main {
         PurchaseMachine purchase = pm.purchase();
         resultView.printPurchaseLottos(purchase);
         PurchaseMachine purchaseMachineWithWonLotto = inputView.insertLastLotto(purchase);
+        resultView.printResultStatics(purchaseMachineWithWonLotto);
     }
 }
