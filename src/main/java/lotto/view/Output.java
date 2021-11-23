@@ -5,6 +5,7 @@ import lotto.domain.Lottos;
 import lotto.domain.Rank;
 import lotto.domain.WinningStatistics;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +20,9 @@ public class Output {
     private static final String WINNINGSTATISTICS = "\n당첨 통계";
     private static final String LINE = "---------";
     private static final String RESULT_INFO = "%s개 일치 (%s원)- %s개 \n";
+    private static final String RESULT_SECOND_INFO = "%s개 일치, 보너스 볼 일치 (%s원)- %s개 \n";
     private static final String YEILD_MESSAGE = "총 수익률은 %f입니다.";
+    private static final String BONUS_NUMBER_ERROR_MESSAGE = "보너스 번호가 중복 됩니다.";
 
 
     public static void printLottosCount(Lottos lottos) {
@@ -41,29 +44,35 @@ public class Output {
         System.out.println(collect);
     }
 
-    public static void LottoNumberError() {
+    public static void lottoNumberError() {
         System.out.println(LOTTO_NUMBER_ERROR_MESSAGE);
     }
 
-    public static void WinningNumberCountError() {
+    public static void winningNumberCountError() {
         System.out.println(WINNING_COUNT_ERROR_MESSAGE);
     }
 
     public static void printWinningStatistics(WinningStatistics statistics) {
         System.out.println(WINNINGSTATISTICS);
         System.out.println(LINE);
-        for (Rank rank : Rank.values()) {
+
+        List<Rank> sortRanks = Arrays.stream(Rank.values()).sorted().collect(Collectors.toList());
+
+        for (Rank rank : sortRanks) {
             int count = statistics.rankCount(rank);
             printResult(rank, count);
         }
+
 
         printYeild(statistics);
     }
 
     private static void printResult(Rank rank, int count) {
-        if (rank.matchCount() > 2) {
-            System.out.printf(RESULT_INFO, rank.matchCount(), rank.price(), count);
+        if (rank == Rank.SECOND) {
+            System.out.printf(RESULT_SECOND_INFO, rank.matchCount(), rank.price(), count);
+            return;
         }
+        System.out.printf(RESULT_INFO, rank.matchCount(), rank.price(), count);
     }
 
 
@@ -73,5 +82,9 @@ public class Output {
 
     public static void printMoneyError() {
         System.out.println(MONEY_MINUNUM_ERROR_MESSAGE);
+    }
+
+    public static void bonusNumberError() {
+        System.out.println(BONUS_NUMBER_ERROR_MESSAGE);
     }
 }
