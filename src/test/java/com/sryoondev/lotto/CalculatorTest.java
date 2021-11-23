@@ -2,11 +2,20 @@ package com.sryoondev.lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CalculatorTest {
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("입력값이 빈 경우 0 리턴")
+    void testCalculator_빈문자열(String text) {
+        assertThat(StringCalculator.splitAndSum(text)).isEqualTo(0);
+    }
+
     @Test
     void testCalculator_숫자하나() {
         int result = StringCalculator.splitAndSum("1");
