@@ -1,8 +1,8 @@
-package com.kakao.lotto.supportInfo;
+package com.kakao.lotto.domain;
 
-import com.kakao.lotto.domain.LottoRank;
+import com.kakao.lotto.supportInfo.PurchaseInfo;
+import com.kakao.lotto.supportInfo.WinResult;
 
-import java.util.Collections;
 import java.util.Map;
 
 public class RankStatistic {
@@ -12,8 +12,8 @@ public class RankStatistic {
         this.rankCount = usersRankCount;
     }
 
-    public Map<LottoRank, Integer> getRankCount(){
-        return Collections.unmodifiableMap(rankCount);
+    public WinResult createWinResult(PurchaseInfo purchaseInfo){
+        return new WinResult(rankCount, calculateProfitRate(purchaseInfo));
     }
 
     public double calculateProfitRate(PurchaseInfo purchaseInfo) {

@@ -3,16 +3,15 @@ package com.kakao.lotto.ui;
 import com.kakao.lotto.domain.LottoNumber;
 import com.kakao.lotto.domain.LottoRank;
 import com.kakao.lotto.domain.LottoTicket;
-import com.kakao.lotto.supportInfo.PurchaseInfo;
-import com.kakao.lotto.supportInfo.RankStatistic;
+import com.kakao.lotto.domain.LottoTicketCollection;
+import com.kakao.lotto.supportInfo.WinResult;
 
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    public static void printLottoTicket(List<LottoTicket> lottoTickets) {
-        lottoTickets.stream()
+    public static void printLottoTicket(LottoTicketCollection lottoTickets) {
+        lottoTickets.getLottoTickets().stream()
                 .map(OutputView::lottoTicketPrintFormat)
                 .forEach(System.out::println);
     }
@@ -25,9 +24,9 @@ public class OutputView {
                 .collect(Collectors.joining(",", "[", "]"));
     }
 
-    public static void printLottoWinStatistic(RankStatistic rankStatistic, PurchaseInfo purchaseInfo) {
-        System.out.printf("총 수익률은 %.1f 입니다. %n", rankStatistic.calculateProfitRate(purchaseInfo));
-        rankStatistic.getRankCount().entrySet()
+    public static void printLottoWinStatistic(WinResult winResult) {
+        System.out.printf("총 수익률은 %.1f 입니다. %n", winResult.getProfit());
+        winResult.getRankCount().entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByKey())
                 .forEach(OutputView::printLottoRankCount);
