@@ -1,16 +1,14 @@
 package step2_2;
 
-import static java.util.function.Function.identity;
-import static java.util.stream.Collectors.counting;
-
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class LottoResult {
 
     private static final int DEFAULT_REWARD = 0;
+    private static final long DEFAULT_WINNER = 0;
 
     private List<LottoReward> rewards;
     private Money money;
@@ -26,17 +24,27 @@ public class LottoResult {
     }
 
     private int getReward() {
-        return rewards.stream()
-            .map(LottoReward::getReward)
-            .reduce(Integer::sum)
-            .orElse(DEFAULT_REWARD);
+        int rewardSum = DEFAULT_REWARD;
+        for (LottoReward reward : rewards) {
+            rewardSum += reward.getReward();
+        }
+        return rewardSum;
     }
 
     public Map<LottoReward, Long> getRewardMap() {
-        Map<LottoReward, Long> rewardMap = rewards.stream()
-            .filter(LottoReward::isWin)
-            .collect(Collectors.groupingBy(identity(), counting()));
-
+        Map<LottoReward, Long> rewardMap = initRewardMap();
+        for (LottoReward reward : rewards) {
+            long winners = rewardMap.get(reward);
+            rewardMap.put(reward, winners + 1);
+        }
         return Collections.unmodifiableMap(rewardMap);
+    }
+
+    private Map<LottoReward, Long> initRewardMap() {
+        Map<LottoReward, Long> rewardMap = new HashMap<>();
+        for (LottoReward lottoReward : LottoReward.values()) {
+            rewardMap.put(lottoReward, DEFAULT_WINNER);
+        }
+        return rewardMap;
     }
 }
