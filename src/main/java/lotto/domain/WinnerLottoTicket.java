@@ -15,7 +15,7 @@ public class WinnerLottoTicket extends AbstractLottoTicket {
     }
 
     public static WinnerLottoTicket from(String input) {
-        return new WinnerLottoTicket(MapToInt(input.split(DELIMITER)));
+        return new WinnerLottoTicket(mapToInt(input.split(DELIMITER)));
     }
 
     public List<Long> winnerCount(LottoTickets lottoTickets) {
@@ -32,7 +32,7 @@ public class WinnerLottoTicket extends AbstractLottoTicket {
             .count();
     }
 
-    private static List<Integer> MapToInt(String[] input) {
+    private static List<Integer> mapToInt(String[] input) {
         try {
             return Arrays.stream(input)
                 .mapToInt(Integer::parseInt)
