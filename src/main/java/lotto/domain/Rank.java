@@ -3,15 +3,15 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(5, 50_000),
-    FOURTH(4, 5_000),
-    FIFTH(3, 0),
-    NOTHING(0, 0);
+    NOTHING(0, 0),
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000);
 
-    private int matchCount;
-    private int money;
+    private final int matchCount;
+    private final int money;
 
     Rank(int matchCount, int money) {
         this.matchCount = matchCount;
@@ -39,4 +39,5 @@ public enum Rank {
     public long calcTotalPrice(int count) {
         return (long) this.money * count;
     }
+
 }
