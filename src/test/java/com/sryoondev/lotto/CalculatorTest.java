@@ -32,4 +32,11 @@ public class CalculatorTest {
         int result = StringCalculator.splitAndSum("1,2:3");
         assertThat(result).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("커스텀 구분자 테스트")
+    void testCalculator_커스텀구분자() {
+        int result = StringCalculator.splitAndSum("//;\n1;2;3");
+        assertThat(result).isEqualTo(6);
+    }
 }
