@@ -8,11 +8,9 @@ import lotto.view.InputView;
 
 public class LotteryGame {
 
-    private final static int MIN_PURCHASE_COUNT = 1;
     private final LotteryTickets tickets;
 
     public LotteryGame(PurchaseInfo purchaseInfo) {
-        checkValidation(purchaseInfo.getLotteryCount());
         this.tickets = new LotteryTickets(purchaseInfo.getLotteryCount());
     }
 
@@ -28,16 +26,10 @@ public class LotteryGame {
         }
     }
 
-    private void checkValidation(int lotteryCount) {
-        if(lotteryCount < MIN_PURCHASE_COUNT) {
-            throw new IllegalArgumentException("로또를 구매하지 않았습니다.");
-        }
-    }
-
     private int compareTicket(LotteryTicket winningTicket, LotteryTicket ticket) {
         return (int) ticket.getNumbers()
                         .stream()
-                        .filter(number -> winningTicket.match(number))
+                        .filter(winningTicket::match)
                         .count();
     }
 }
