@@ -11,21 +11,20 @@ import lotto.util.AutoLottoNumberUtils;
 
 public class LottoService {
 
+    private static class LottoServiceHolder {
+        private static final LottoService LOTTO_SERVICE = new LottoService();
+    }
+
     private static final double DEFAULT_PRIZE_MONEY = 0d;
     private static final double DECIMAL_POINT = 100d;
     private static final long TICKET_PRICE = 1000l;
     private static final int MINIMUM_COUNT = 1;
 
-    private static LottoService lottoService;
-
     private LottoService() {
     }
 
     public static LottoService getInstance() {
-        if (lottoService == null) {
-            lottoService = new LottoService();
-        }
-        return lottoService;
+        return LottoServiceHolder.LOTTO_SERVICE;
     }
 
     public LottoTickets autoTickets(int money) {

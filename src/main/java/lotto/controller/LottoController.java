@@ -7,7 +7,10 @@ import lotto.service.LottoService;
 
 public class LottoController {
 
-    private static LottoController lottoController;
+    private static class LottoControllerHolder {
+        private static final LottoController LOTTO_CONTROLLER = new LottoController();
+    }
+
     private final LottoService lottoService;
 
     private LottoController() {
@@ -15,10 +18,7 @@ public class LottoController {
     }
 
     public static LottoController getInstance() {
-        if (lottoController == null) {
-            lottoController = new LottoController();
-        }
-        return lottoController;
+        return LottoControllerHolder.LOTTO_CONTROLLER;
     }
 
     public LottoTickets autoBuyLottoTickets(int money) {
