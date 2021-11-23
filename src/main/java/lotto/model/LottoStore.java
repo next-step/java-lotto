@@ -14,10 +14,7 @@ public class LottoStore {
         return LottoFactory.autoCreateLotto(count);
     }
 
-    public static void match(Lotto lotto, LottoWinner winner) {
-        for (LottoNumbers lottoNumbers : lotto.getLotto()) {
-            winner.match(lottoNumbers);
-        }
+    public static LottoReport report(Lotto lotto, LottoWinner winner) {
+        return new LottoReport(lotto, winner);
     }
-
 }

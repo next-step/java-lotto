@@ -1,5 +1,6 @@
 package lotto.model;
 
+import common.model.Number;
 import lotto.application.Constant;
 import lotto.factory.LottoFactory;
 import lotto.factory.LottoNumberFactory;
@@ -26,7 +27,7 @@ class LottoStoreTest {
         }
 
         lotto = LottoFactory.manualCreateSingleLotto(LottoNumbersFactory.manualCreateNumbers(numbers));
-        winner = new LottoWinner(LottoNumbersFactory.manualCreateNumberList("3, 10, 17, 24, 31, 45"));
+        winner = new LottoWinner(LottoNumbersFactory.manualCreateNumberList("3, 10, 17, 43, 44, 45"));
     }
 
     @Test
@@ -39,6 +40,7 @@ class LottoStoreTest {
     @Test
     @DisplayName("로또 번호 당첨 확인")
     void match() {
-        LottoStore.match(lotto, winner); //[3, 10, 17, 24, 31, 38]
+        LottoReport report = LottoStore.report(lotto, winner);//[3, 10, 17, 24, 31, 38] 4등
+        assertThat(report.getLottoRankNumberMap().get(LottoRank.FOURTH)).isEqualTo(new Number(1));
     }
 }
