@@ -25,12 +25,4 @@ public class PurchaseMachineTest {
         PurchaseMachine purchase = machine.purchase();
         assertThat(purchase.getLottoList().size()).isEqualTo(14);
     }
-
-    @Test
-    @DisplayName("당첨 번호 입력")
-    void won() {
-        PurchaseMachine machine = new PurchaseMachine(new Credit("14000"));
-        PurchaseMachine hasWonLottoMachine = machine.insertWonLotto(Lotto.createByAuto());
-        assertThat(hasWonLottoMachine.getWon().getNumbers().size()).isEqualTo(6);
-    }
 }
