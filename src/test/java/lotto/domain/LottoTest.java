@@ -16,4 +16,14 @@ public class LottoTest {
         Lotto byAuto = Lotto.createByAuto();
         assertThat(byAuto.getNumbers().size()).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("당첨 로또 생성")
+    void createWithWon() {
+        Lotto test = Lotto.createByAuto();
+        assertThat(test.getRank()).isEqualTo(Rank.NONE);
+
+        Lotto withWon = test.createWithWon(test);
+        assertThat(withWon.getRank()).isEqualTo(Rank.FIRST);
+    }
 }
