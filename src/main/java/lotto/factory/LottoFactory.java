@@ -21,7 +21,7 @@ public class LottoFactory {
         List<LottoNumbers> lotto = new ArrayList<>();
         LottoNumberGenerator generator = new LottoNumberGenerator();
         for (int i = 0; i < count; i++) {
-            lotto.add(LottoNumberFactory.autoCreateNumbers(generator));
+            lotto.add(LottoNumbersFactory.autoCreateNumbers(generator));
         }
         return new Lotto(lotto);
     }
