@@ -55,4 +55,15 @@ public class LottoTest {
         assertThat(matchCount).isEqualTo(4);
         assertThat(matchBonus).isTrue();
     }
+
+    @Test
+    void 수동_로또를_생성한다() {
+        //given
+        String lottoNumbers = "1, 2, 3, 4, 5, 6";
+        //when
+        String[] splitLottoNumbers = lottoNumbers.split(", ");
+        Lotto lotto = Lotto.of(splitLottoNumbers);
+        //then
+        assertThat(lotto).isEqualTo(Lotto.of(new String[]{"1", "2", "3", "4", "5", "6"}));
+    }
 }
