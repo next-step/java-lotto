@@ -15,11 +15,7 @@ public class StringCalculator {
         String[] tokens = split(text);
         int result = 0;
         for (String token : tokens) {
-            int number = Integer.parseInt(token);
-            if (number < 0) {
-                throw new RuntimeException();
-            }
-            result += number;
+            result += validate(token);
         }
         return result;
     }
@@ -47,5 +43,13 @@ public class StringCalculator {
             return m.group(2).split(customDelimiter);
         }
         throw new RuntimeException("커스텀 구분자가 입력되지 않았습니다.");
+    }
+
+    public static int validate(String token) {
+        int number = Integer.parseInt(token);
+        if (number < 0) {
+            throw new RuntimeException();
+        }
+        return number;
     }
 }
