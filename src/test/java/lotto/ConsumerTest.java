@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.factory.LottoFactory;
 import lotto.factory.LottoNumberFactory;
 import lotto.model.*;
 import org.junit.jupiter.api.DisplayName;
@@ -26,7 +27,7 @@ class ConsumerTest {
         numbers.add(LottoNumberFactory.manualCreateNumber(40));
 
         LottoNumbers lottoNumbers = LottoNumberFactory.manualCreateNumbers(numbers);
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = LottoFactory.manualCreateSingleLotto(lottoNumbers);
         LottoWinner lottoWinner = new LottoWinner("10, 20, 30, 40, 5, 15");
 
         LottoStore.match(lotto, lottoWinner);

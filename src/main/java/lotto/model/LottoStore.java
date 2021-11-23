@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.factory.LottoFactory;
+
 public class LottoStore {
 
     private static final int LOTTO_PRICE = 1000;
@@ -8,7 +10,8 @@ public class LottoStore {
     }
 
     public static Lotto ticket(int purchaseAmount) {
-        return new Lotto(purchaseAmount / LOTTO_PRICE);
+        int count = purchaseAmount / LOTTO_PRICE;
+        return LottoFactory.autoCreateLotto(count);
     }
 
     public static void match(Lotto lotto, LottoWinner winner) {
