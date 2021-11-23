@@ -1,6 +1,7 @@
 package lotto.model;
 
 import lotto.application.Constant;
+import lotto.factory.LottoNumberFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,10 +20,10 @@ class LottoStoreTest {
     void setUp() {
         List<LottoNumber> numbers = new ArrayList<>();
         for (int i = 0; i < Constant.LOTTO_NUMBERS_SIZE; i++) {
-            numbers.add(new LottoNumber(7 * i + 3));
+            numbers.add(LottoNumberFactory.manualCreateNumber(7 * i + 3));
         }
 
-        lotto = new Lotto(new LottoNumbers(numbers));
+        lotto = new Lotto(LottoNumberFactory.manualCreateNumbers(numbers));
         winner = new LottoWinner("3, 10, 17, 24, 31, 45");
     }
 

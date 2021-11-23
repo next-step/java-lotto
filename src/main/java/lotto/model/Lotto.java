@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.factory.LottoNumberFactory;
 import lotto.generator.LottoNumberGenerator;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class Lotto {
         List<LottoNumbers> lotto = new ArrayList<>();
         LottoNumberGenerator generator = new LottoNumberGenerator();
         for (int i = 0; i < count; i++) {
-            lotto.add(new LottoNumbers(generator));
+            lotto.add(LottoNumberFactory.autoCreateNumbers(generator));
         }
         return lotto;
     }

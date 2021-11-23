@@ -4,7 +4,6 @@ import lotto.generator.NumberGenerator;
 
 import java.util.Objects;
 
-import static lotto.application.Constant.EXCEPTION_MESSAGE_PARSE_VALIDATION;
 import static lotto.application.Constant.EXCEPTION_MESSAGE_RANGE_VALIDATION;
 
 public class LottoNumber {
@@ -22,23 +21,11 @@ public class LottoNumber {
         this.number = validate(input);
     }
 
-    public LottoNumber(String input) {
-        this.number = validate(input);
-    }
-
     private int validate(int number) {
         if (rangeCheck(number)) {
             return number;
         }
         throw new IllegalArgumentException(EXCEPTION_MESSAGE_RANGE_VALIDATION);
-    }
-
-    private int validate(String input) throws IllegalArgumentException {
-        try {
-            return validate(Integer.parseInt(input));
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(EXCEPTION_MESSAGE_PARSE_VALIDATION);
-        }
     }
 
     private boolean rangeCheck(int number) {

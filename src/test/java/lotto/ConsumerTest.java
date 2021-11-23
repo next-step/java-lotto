@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.factory.LottoNumberFactory;
 import lotto.model.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,14 +18,14 @@ class ConsumerTest {
         int purchaseAmount = 1000;
 
         List<LottoNumber> numbers = new ArrayList<>();
-        numbers.add(new LottoNumber(5));
-        numbers.add(new LottoNumber(10));
-        numbers.add(new LottoNumber(15));
-        numbers.add(new LottoNumber(20));
-        numbers.add(new LottoNumber(30));
-        numbers.add(new LottoNumber(40));
+        numbers.add(LottoNumberFactory.manualCreateNumber(5));
+        numbers.add(LottoNumberFactory.manualCreateNumber(10));
+        numbers.add(LottoNumberFactory.manualCreateNumber(15));
+        numbers.add(LottoNumberFactory.manualCreateNumber(20));
+        numbers.add(LottoNumberFactory.manualCreateNumber(30));
+        numbers.add(LottoNumberFactory.manualCreateNumber(40));
 
-        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
+        LottoNumbers lottoNumbers = LottoNumberFactory.manualCreateNumbers(numbers);
         Lotto lotto = new Lotto(lottoNumbers);
         LottoWinner lottoWinner = new LottoWinner("10, 20, 30, 40, 5, 15");
 

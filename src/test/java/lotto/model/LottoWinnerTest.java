@@ -1,7 +1,8 @@
 package lotto.model;
 
 import common.model.Number;
-import common.view.OutputView;
+import lotto.application.Constant;
+import lotto.factory.LottoNumberFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,23 +23,23 @@ class LottoWinnerTest {
     void setUp() {
         List<LottoNumber> temps = new ArrayList<>();
         for (int i = 0; i < Constant.LOTTO_NUMBERS_SIZE; i++) {
-            temps.add(new LottoNumber(7 * i + 3));
+            temps.add(LottoNumberFactory.manualCreateNumber(7 * i + 3));
         }
-        lottoNumbers = new LottoNumbers(temps);
+        lottoNumbers = LottoNumberFactory.manualCreateNumbers(temps);
         winnerNumbers = new LottoWinner("3, 10, 17, 24, 31, 45");
     }
 
     @Test
     @DisplayName("당첨번호 여부 확인 테스트")
     void contains() {
-        assertThat(winnerNumbers.contains(new LottoNumber(10))).isTrue();
+        assertThat(winnerNumbers.contains(LottoNumberFactory.manualCreateNumber(10))).isTrue();
     }
 
     @Test
     @DisplayName("당첨시 matchCount 증가 테스트")
     void matchCount() {
         Number matchCount = new Number();
-        winnerNumbers.match(new LottoNumber(10), matchCount);
+        winnerNumbers.match(LottoNumberFactory.manualCreateNumber(10), matchCount);
         assertThat(matchCount).isEqualTo(new Number(1));
     }
 
@@ -54,7 +55,11 @@ class LottoWinnerTest {
     void convert() {
         LottoWinner winner = new LottoWinner("1, 2, 3, 4, 5, 6");
         assertThat(winner.getWinnerNumbers())
-                .contains(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5));
+                .contains(LottoNumberFactory.manualCreateNumber(1),
+                        LottoNumberFactory.manualCreateNumber(2),
+                        LottoNumberFactory.manualCreateNumber(3),
+                        LottoNumberFactory.manualCreateNumber(4),
+                        LottoNumberFactory.manualCreateNumber(5));
     }
 
     @ParameterizedTest

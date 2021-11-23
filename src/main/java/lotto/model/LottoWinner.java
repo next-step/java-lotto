@@ -22,7 +22,7 @@ public class LottoWinner {
         lengthValidation(splitNumbers);
 
         return Arrays.stream(splitNumbers)
-                .map(LottoNumber::new)
+                .map(LottoNumberFactory::manualCreateNumber)
                 .collect(Collectors.toList());
     }
 
