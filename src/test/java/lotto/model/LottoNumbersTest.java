@@ -1,7 +1,7 @@
 package lotto.model;
 
 import common.model.Number;
-import common.view.OutputView;
+import lotto.application.Constant;
 import lotto.generator.LottoNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
@@ -15,7 +15,7 @@ class LottoNumbersTest {
     @DisplayName("로또 번호 자동생성")
     void autoCreate() {
         LottoNumbers lottoNumbers = new LottoNumbers(new LottoNumberGenerator());
-        assertThat(lottoNumbers.getLottoNumbers()).hasSize(6);
+        assertThat(lottoNumbers.getLottoNumbers()).hasSize(Constant.LOTTO_NUMBERS_SIZE);
     }
 
     @Test

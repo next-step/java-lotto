@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.application.Constant;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,7 @@ class LottoStoreTest {
     @BeforeEach
     void setUp() {
         List<LottoNumber> numbers = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < Constant.LOTTO_NUMBERS_SIZE; i++) {
             numbers.add(new LottoNumber(7 * i + 3));
         }
 

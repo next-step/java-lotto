@@ -21,7 +21,7 @@ class LottoWinnerTest {
     @BeforeEach
     void setUp() {
         List<LottoNumber> temps = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < Constant.LOTTO_NUMBERS_SIZE; i++) {
             temps.add(new LottoNumber(7 * i + 3));
         }
         lottoNumbers = new LottoNumbers(temps);

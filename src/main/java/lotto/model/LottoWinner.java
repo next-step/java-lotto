@@ -27,13 +27,13 @@ public class LottoWinner {
     }
 
     private void lengthValidation(String[] numbers) {
-        if (numbers.length != 6) {
+        if (numbers.length != Constant.LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(Constant.EXCEPTION_MESSAGE_LENGTH_VALIDATION);
         }
     }
 
     private void duplicateValidation(String[] numbers) {
-        if (Arrays.stream(numbers).collect(Collectors.toSet()).size() != 6) {
+        if (Arrays.stream(numbers).collect(Collectors.toSet()).size() != Constant.LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(Constant.EXCEPTION_MESSAGE_DUPLICATE_VALIDATION);
         }
     }
