@@ -2,8 +2,13 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.stream.Stream;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -11,10 +16,19 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class RankTest {
 
-    @Test
-    @DisplayName("일치하는 갯수의 랭크를 반환")
-    void create() {
-        Rank forth = Rank.of(3);
-        assertThat(forth).isEqualTo(Rank.FORTH);
+    @ParameterizedTest(name = "일치하는 갯수의 랭크를 반환")
+    @MethodSource("providedRanks")
+    void create(int count, Rank rank) {
+        assertThat(Rank.of(count)).isEqualTo(rank);
+    }
+
+    static Stream<Arguments> providedRanks() {
+        return Stream.of(
+            Arguments.of(0, Rank.NONE),
+            Arguments.of(3, Rank.FORTH),
+            Arguments.of(4, Rank.THIRD),
+            Arguments.of(5, Rank.SECOND),
+            Arguments.of(6, Rank.FIRST)
+        );
     }
 }
