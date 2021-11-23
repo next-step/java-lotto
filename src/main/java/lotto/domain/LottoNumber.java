@@ -1,6 +1,8 @@
-package lotto;
+package lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
@@ -34,6 +36,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         List<LottoNumber> lottos = tmpLottoNumbers.subList(0, count);
         Collections.sort(lottos);
         return lottos;
+    }
+
+    public int value() {
+        return value;
     }
 
     @Override

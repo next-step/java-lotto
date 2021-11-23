@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ public class LottoShop {
 
     private final LottoCashier lottoCashier = new LottoCashier();
 
-    public List<Lotto> buy(String moneyString) {
-        return lottoCashier.pay(moneyString);
+    public List<Lotto> buyLottos(int money) {
+        return lottoCashier.pay(money);
     }
 
     public LottoResult match(List<Lotto> lottos, Lotto winLotto) {
