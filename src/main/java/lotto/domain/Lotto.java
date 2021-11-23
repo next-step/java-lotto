@@ -15,17 +15,24 @@ public class Lotto {
     private static final Random r = ThreadLocalRandom.current();
 
     private final List<PositiveNumber> numbers;
+    private final Rank rank;
 
-    public Lotto(List<PositiveNumber> numbers) {
+    public Lotto(List<PositiveNumber> numbers, Rank rank) {
         this.numbers = numbers;
+        this.rank = rank;
     }
 
     public Lotto(String numbers) {
         this.numbers = createByStrings(numbers);
+        this.rank = Rank.NONE;
     }
 
     public List<PositiveNumber> getNumbers() {
         return numbers;
+    }
+
+    public Rank getRank() {
+        return rank;
     }
 
     public static Lotto createByAuto() {
@@ -36,7 +43,21 @@ public class Lotto {
             .collect(Collectors.toList());
 
         Collections.sort(numbers, Comparator.comparing(PositiveNumber::getNumber));
-        return new Lotto(numbers);
+        return new Lotto(numbers, Rank.NONE);
+    }
+
+    public Lotto createWithWon(Lotto won) {
+        Map<Integer, PositiveNumber> collect = won.getNumbers()
+            .stream()
+            .collect(Collectors.toMap(PositiveNumber::getNumber, p -> p));
+        int match = getMatchPointsBy(collect);
+        return new Lotto(this.numbers, Rank.of(match));
+    }
+
+    private int getMatchPointsBy(Map<Integer, PositiveNumber> map) {
+        return (int) numbers.stream()
+            .mapToInt(PositiveNumber::getNumber)
+            .filter(map::containsKey).count();
     }
 
     private List<PositiveNumber> createByStrings(String numbers) {
