@@ -3,6 +3,7 @@ package lotto.model.ticket;
 import lotto.model.domain.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.*;
@@ -50,5 +51,22 @@ class LotteryTicketTest {
         return Arrays.stream(input.split(","))
                 .map((value) -> new Lotto(Integer.parseInt(value)))
                 .collect(Collectors.toList());
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,4,5,6|2,5,6,7,8,9|3","1,2,3,4,5,6|3,4,5,6,7,8|4", "1,2,3,4,5,6|7,8,9,10,11,12|0"}, delimiter = '|')
+    @DisplayName("두 복권 겹치는 숫자 개수 구하는 것 테스트")
+    void getMatchCountTest(String input1, String input2, int matchCount){
+        LotteryTicket ticket1 = new LotteryTicket(splitToLottoList(input1));
+        LotteryTicket ticket2 = new LotteryTicket(splitToLottoList(input2));
+        assertThat(ticket1.getMatchCount(ticket2)).isEqualTo(matchCount);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,4,5,6|3|true","1,2,3,4,5,6|3|true","1,2,3,4,5,6|7|false","1,2,3,4,5,6|10|false"}, delimiter = '|')
+    @DisplayName("해당 번호가 복권에 있는지 확인하는 로직 테스트")
+    void matchTest(String input, int number, boolean match){
+        lotteryTicket = new LotteryTicket(splitToLottoList(input));
+        assertThat(lotteryTicket.match(new Lotto(number))).isEqualTo(match);
     }
 }
