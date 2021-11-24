@@ -18,6 +18,11 @@ public class Lotto {
         this.lotto = autoCreateLotto(count);
     }
 
+    public Lotto(List<LottoNumbers> manualLottoNumbers, int count) {
+        this.lotto = manualLottoNumbers;
+        merge(autoCreateLotto(count - manualLottoNumbers.size()));
+    }
+
     private List<LottoNumbers> autoCreateLotto(int count) {
         List<LottoNumbers> lotto = new ArrayList<>();
         LottoNumberGenerator generator = new LottoNumberGenerator();
@@ -25,6 +30,10 @@ public class Lotto {
             lotto.add(LottoNumbersFactory.autoCreateNumbers(generator));
         }
         return lotto;
+    }
+
+    private void merge(List<LottoNumbers> lottoNumbers) {
+        this.lotto.addAll(lottoNumbers);
     }
 
     public List<LottoNumbers> getLotto() {
