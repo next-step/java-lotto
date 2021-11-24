@@ -1,9 +1,12 @@
 package step3.view;
 
+import static java.util.stream.Collectors.toList;
 import static step3.view.InputUtil.readInt;
 import static step3.view.InputUtil.readNumbers;
 
+import java.util.List;
 import step3.model.Lotto;
+import step3.model.LottoNumber;
 import step3.model.Money;
 
 public class InputView {
@@ -24,11 +27,17 @@ public class InputView {
     public static Lotto readLotto() {
         System.out.println(LOTTO_INPUT_MESSAGE);
         try {
-            return new Lotto(readNumbers());
+            return new Lotto(readLottoNumbers());
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return readLotto();
         }
+    }
+
+    private static List<LottoNumber> readLottoNumbers() {
+        return readNumbers().stream()
+            .map(LottoNumber::new)
+            .collect(toList());
     }
 
     private InputView() {
