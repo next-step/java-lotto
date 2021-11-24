@@ -27,14 +27,6 @@ public class Lotto {
         this.rank = Rank.NONE;
     }
 
-    public List<PositiveNumber> getNumbers() {
-        return numbers;
-    }
-
-    public Rank getRank() {
-        return rank;
-    }
-
     public static Lotto createByAuto() {
         List<PositiveNumber> numbers = r.ints(1, bound)
             .distinct()
@@ -44,6 +36,14 @@ public class Lotto {
 
         Collections.sort(numbers, Comparator.comparing(PositiveNumber::getNumber));
         return new Lotto(numbers, Rank.NONE);
+    }
+
+    public List<PositiveNumber> getNumbers() {
+        return numbers;
+    }
+
+    public Rank getRank() {
+        return rank;
     }
 
     public Lotto createWithWon(Lotto won) {
