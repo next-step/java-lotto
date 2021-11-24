@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.value.LottoNumber;
+
 import java.util.*;
 
 public class Lotto {
@@ -7,52 +9,50 @@ public class Lotto {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
 
-    private static List<Integer> numbers = new ArrayList<>();
+    private List<LottoNumber> numbers;
 
     public Lotto() {
-        createRandomNumbers();
+
+        this.numbers = createRandomNumbers();
     }
 
-    private Lotto(List<Integer> number) {
+    private Lotto(List<LottoNumber> numbers) {
 
-        checkNumber(number);
-
-        this.numbers = number;
-    }
-
-    public static Lotto from(List<Integer> number) {
-        return new Lotto(number);
-    }
-
-    public List<Integer> getNumbers() {
-        return numbers;
-    }
-
-    private void createRandomNumbers() {
-
-        while (numbers.size() != LOTTO_SIZE) {
-            Integer randomNumber = (new Random().nextInt(LOTTO_MAX_NUMBER -1) + 1);
-            checkDuplicationNumber(numbers, randomNumber);
-        }
-
-    }
-
-    private void checkDuplicationNumber(List<Integer> number, Integer randomNumber) {
-        if(!number.contains(randomNumber)) {
-            number.add(randomNumber);
-        }
-    }
-
-    private void checkNumber(List<Integer> numbers) {
         if(numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또는 6자리 형식입니다.!!!");
         }
 
-        numbers.forEach(number -> {
-            if(number < 1 || number > 45) {
-                throw new IllegalArgumentException("로또 숫자는 1~45의 숫자만 입력 가능합니다!!!!");
-            }
-        });
+        this.numbers = numbers;
+    }
+
+    public static Lotto from(List<LottoNumber> number) {
+        return new Lotto(number);
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return numbers;
+    }
+
+    private List<LottoNumber> createRandomNumbers() {
+
+        List<LottoNumber> autoNumbers = new ArrayList<>();
+
+        while (autoNumbers.size() != LOTTO_SIZE) {
+            int raffleNumber = new Random().nextInt(LOTTO_MAX_NUMBER -1) + 1;
+            LottoNumber randomNumber = LottoNumber.from(raffleNumber);
+            checkDuplicationNumber(autoNumbers, randomNumber);
+
+        }
+
+        Collections.sort(autoNumbers);
+
+        return autoNumbers;
+    }
+
+    private void checkDuplicationNumber(List<LottoNumber> autoNumbers, LottoNumber randomNumber) {
+        if(!autoNumbers.contains(randomNumber)) {
+            autoNumbers.add(randomNumber);
+        }
     }
 
     @Override

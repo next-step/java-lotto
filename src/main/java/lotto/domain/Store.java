@@ -1,20 +1,21 @@
 package lotto.domain;
 
+import lotto.domain.value.OrderCount;
+import lotto.domain.value.OrderPrice;
+
 public class Store {
 
     private static final int LOTTO_PRICE = 1000;
 
-    private static int orderPrice;
-    private static int orderCount;
-    private static LottoTicket lottoTicket;
+    private final OrderPrice orderPrice;
+    private final OrderCount orderCount;
 
     private Store(String orderPrice) {
 
         checkOrderPrice(orderPrice);
 
-        this.orderPrice = Integer.parseInt(orderPrice);
-        this.orderCount = this.orderPrice / LOTTO_PRICE;
-        lottoTicket = new LottoTicket(orderCount);
+        this.orderPrice = OrderPrice.from(Integer.parseInt(orderPrice));
+        this.orderCount = OrderCount.from(this.orderPrice.getOrderPrice() / LOTTO_PRICE);
     }
 
 
@@ -22,8 +23,13 @@ public class Store {
         return new Store(orderPrice);
     }
 
-    public static LottoTicket getLottoTicket() {
-        return lottoTicket;
+    public int getOrderCount() {
+        return orderCount.getOrderCount();
+    }
+
+    public LottoTicket purchaseTicket() {
+
+        return new LottoTicket(orderCount.getOrderCount());
     }
 
     private void checkOrderPrice(String orderPrice) {
@@ -39,7 +45,4 @@ public class Store {
         }
     }
 
-    public static int getOrderCount() {
-        return orderCount;
-    }
 }
