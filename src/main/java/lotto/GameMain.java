@@ -1,5 +1,10 @@
 package lotto;
 
+import lotto.domain.GameResult;
+import lotto.domain.LottoRandomMachine;
+import lotto.domain.LottoTickets;
+import lotto.domain.ResultLotto;
+import lotto.domain.Shop;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

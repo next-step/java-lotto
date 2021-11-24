@@ -1,10 +1,10 @@
 package lotto.view;
 
 import java.text.MessageFormat;
-import lotto.Award;
-import lotto.GameResult;
-import lotto.LottoTicket;
-import lotto.LottoTickets;
+import lotto.domain.Award;
+import lotto.domain.GameResult;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 
 public class OutputView {
 
