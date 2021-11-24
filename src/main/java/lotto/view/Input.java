@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.domain.BonusBall;
-import lotto.domain.Number;
-import lotto.domain.WinningNumbers;
+import lotto.domain.LottoNumber;
+import lotto.domain.WinningLotto;
+
 import java.util.Scanner;
 
 public class Input {
@@ -18,14 +18,15 @@ public class Input {
         return purchaseAmount;
     }
 
-    public static WinningNumbers inputWinningNumbers() {
+    public static String inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         SCANNER.nextLine();
-        return new WinningNumbers(SCANNER.nextLine());
+        return SCANNER.nextLine();
     }
 
-    public static BonusBall inputBonusBall(WinningNumbers winningNumbers) {
+    public static LottoNumber inputBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return new BonusBall(winningNumbers,new Number(SCANNER.nextInt()));
+        LottoNumber bonusBall = new LottoNumber(SCANNER.nextInt());
+        return bonusBall;
     }
 }
