@@ -4,6 +4,9 @@ import java.util.Objects;
 
 public class Number {
 
+    private static final int VALID_MIN_NUMBER = 0;
+    private static final int INIT_NUMBER = 0;
+
     private final int value;
 
     public Number(int input) {
@@ -12,7 +15,7 @@ public class Number {
     }
 
     private void validateInputOrThrow(int input) {
-        if (input < 0) {
+        if (input < VALID_MIN_NUMBER) {
             throw new RuntimeException("input number must be positive");
         }
     }
@@ -22,7 +25,7 @@ public class Number {
     }
 
     public static Number init() {
-        return new Number(0);
+        return new Number(INIT_NUMBER);
     }
 
     public int getValue() {

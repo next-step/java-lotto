@@ -7,13 +7,13 @@ public final class StringAddCalculator {
     private StringAddCalculator() {
     }
 
-    public static Number splitAndSum(String input) {
+    public static int splitAndSum(String input) {
         Expression expression = new Expression(input);
         if (expression.isNullOrEmpty()) {
-            return ZERO;
+            return 0;
         }
 
         Numbers numbers = expression.numbers();
-        return new Number(numbers.sum());
+        return numbers.sum();
     }
 }
