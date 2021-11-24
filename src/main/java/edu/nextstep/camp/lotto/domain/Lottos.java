@@ -7,6 +7,13 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Lottos {
+    private static final int MATCHED_COUNT_1ST = 6;
+    private static final int MATCHED_COUNT_2ND = 5;
+    private static final int MATCHED_COUNT_3RD = 4;
+    private static final int MATCHED_COUNT_4TH = 3;
+    private static final int INITIAL_COUNT = 0;
+    private static final int INCREASE_COUNT = 1;
+
     private final Collection<Lotto> lottos;
 
     private Lottos(Collection<Lotto> lottos) {
@@ -45,9 +52,14 @@ public class Lottos {
     public GameResult winningResult(Lotto winningNumber) {
         Map<Integer, Integer> rankMap = new HashMap<>();
         for (Lotto lotto : lottos) {
-            rankMap.compute(lotto.matchedCount(winningNumber), (k, v) -> v == null ? 1 : v + 1);
+            rankMap.compute(
+                    lotto.matchedCount(winningNumber), (k, v) -> v == null ? INCREASE_COUNT : v + INCREASE_COUNT
+            );
         }
-        return GameResult.of(rankMap.getOrDefault(6, 0), rankMap.getOrDefault(5, 0),
-                rankMap.getOrDefault(4, 0), rankMap.getOrDefault(3, 0));
+        return GameResult.of(
+                rankMap.getOrDefault(MATCHED_COUNT_1ST, INITIAL_COUNT),
+                rankMap.getOrDefault(MATCHED_COUNT_2ND, INITIAL_COUNT),
+                rankMap.getOrDefault(MATCHED_COUNT_3RD, INITIAL_COUNT),
+                rankMap.getOrDefault(MATCHED_COUNT_4TH, INITIAL_COUNT));
     }
 }

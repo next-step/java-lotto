@@ -6,8 +6,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
+    public static final int SIZE_OF_NUMBERS = 6;
     private static final String FORMATTER = "Lotto{numbers=%s)";
-    private static final int SIZE_OF_NUMBERS = 6;
 
     private final Collection<LottoNumber> numbers;
 
