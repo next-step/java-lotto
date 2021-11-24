@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import edu.nextstep.camp.lotto.domain.GameResult;
 import edu.nextstep.camp.lotto.domain.Lotto;
 import edu.nextstep.camp.lotto.domain.LottoNumber;
+import edu.nextstep.camp.lotto.domain.Prize;
 import edu.nextstep.camp.lotto.domain.PurchaseList;
 
 public class OutputView {
@@ -27,9 +28,9 @@ public class OutputView {
     public static void printGameResult(GameResult gameResult) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (" + GameResult.FOURTH_PRIZE + "원)-" + gameResult.fourthPlace());
-        System.out.println("4개 일치 (" + GameResult.THIRD_PRIZE + "원)-" + gameResult.thirdPlace());
-        System.out.println("5개 일치 (" + GameResult.SECOND_PRIZE + "원)-" + gameResult.secondPlace());
-        System.out.println("6개 일치 (" + GameResult.FIRST_PRIZE + "원)-" + gameResult.firstPlace());
+        System.out.println("3개 일치 (" + Prize.FOURTH_PRIZE + "원)-" + gameResult.fourthPlace());
+        System.out.println("4개 일치 (" + Prize.THIRD_PRIZE + "원)-" + gameResult.thirdPlace());
+        System.out.println("5개 일치 (" + Prize.SECOND_PRIZE + "원)-" + gameResult.secondPlace());
+        System.out.println("6개 일치 (" + Prize.FIRST_PRIZE + "원)-" + gameResult.firstPlace());
     }
 }

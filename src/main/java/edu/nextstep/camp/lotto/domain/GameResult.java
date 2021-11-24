@@ -3,11 +3,6 @@ package edu.nextstep.camp.lotto.domain;
 import java.util.Objects;
 
 public class GameResult {
-    public static final int FIRST_PRIZE = 2000000000;
-    public static final int SECOND_PRIZE = 1500000;
-    public static final int THIRD_PRIZE = 50000;
-    public static final int FOURTH_PRIZE = 5000;
-
     private final int amountOfFirst;
     private final int amountOfSecond;
     private final int amountOfThird;
@@ -19,7 +14,6 @@ public class GameResult {
         this.amountOfThird = amountOfThird;
         this.amountOfFourth = amountOfFourth;
     }
-
 
     public static GameResult of(int firstPlace, int secondPlace, int thirdPlace, int fourthPlace) {
         if (firstPlace < 0 || secondPlace < 0 || thirdPlace < 0 || fourthPlace < 0) {
@@ -45,11 +39,11 @@ public class GameResult {
         return Objects.hash(amountOfFirst, amountOfSecond, amountOfThird, amountOfFourth);
     }
 
-    public int totalPrize() {
-        return amountOfFirst * FIRST_PRIZE
-                + amountOfSecond * SECOND_PRIZE
-                + amountOfThird * THIRD_PRIZE
-                + amountOfFourth * FOURTH_PRIZE;
+    public Prize totalPrize() {
+        return Prize.ofFirstPlace(amountOfFirst)
+                .add(Prize.ofSecondPlace(amountOfSecond))
+                .add(Prize.ofThirdPlace(amountOfThird))
+                .add(Prize.ofFourthPlace(amountOfFourth));
     }
 
     @Override
@@ -73,6 +67,7 @@ public class GameResult {
     public int thirdPlace() {
         return amountOfThird;
     }
+
     public int fourthPlace() {
         return amountOfFourth;
     }

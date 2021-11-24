@@ -27,8 +27,13 @@ public class GameResultTest {
     }
 
     @ParameterizedTest(name = "total prize: {arguments}")
-    @CsvSource(value = {"0,0,0,0,0", "1,0,0,0,2000000000", "0,1,0,0,1500000", "0,0,1,0,50000", "0,0,0,1,5000"}, delimiter = ',')
-    public void totalPrize(int first, int second, int third, int fourth, int expected) {
-        assertThat(GameResult.of(first, second, third, fourth).totalPrize()).isEqualTo(expected);
+    @CsvSource(value = {"0,0,0,0,0",
+            "1,0,0,0,2000000000",
+            "0,1,0,0,1500000",
+            "0,0,1,0,50000",
+            "0,0,0,1,5000",
+            "2,0,0,0,4000000000"}, delimiter = ',')
+    public void totalPrize(int first, int second, int third, int fourth, long expected) {
+        assertThat(GameResult.of(first, second, third, fourth).totalPrize()).isEqualTo(Prize.of(expected));
     }
 }

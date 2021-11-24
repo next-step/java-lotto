@@ -38,6 +38,6 @@ public class PurchaseList {
     }
 
     public float priceEarningRate(GameResult gameResult) {
-        return gameResult.totalPrize() / (budget * 1.0f);
+        return gameResult.totalPrize().toLong() / (budget * 1.0f);
     }
 }
