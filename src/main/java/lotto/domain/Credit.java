@@ -6,7 +6,7 @@ import calculator.PositiveNumber;
  * @author han
  */
 public class Credit {
-    private final int price = 1_000;
+    private static final int price = 1_000;
     private final PositiveNumber number;
 
     public Credit(String input) {
