@@ -8,11 +8,12 @@ public class PositiveNumber {
     private final int number;
 
     public PositiveNumber(int number) {
+        validateNumber(number);
         this.number = number;
     }
 
     public PositiveNumber(String input) {
-        this.number = stringToInt(input);
+        this(stringToInt(input));
     }
 
     public int getNumber() {
@@ -23,12 +24,16 @@ public class PositiveNumber {
         return new PositiveNumber(this.number + number.getNumber());
     }
 
-    private int stringToInt(String input) {
+    private static int stringToInt(String input) {
         int number = Integer.parseInt(input);
+        validateNumber(number);
+        return number;
+    }
+
+    private static void validateNumber(int number) {
         if (number < 0) {
             throw new RuntimeException();
         }
-        return number;
     }
 
     @Override
