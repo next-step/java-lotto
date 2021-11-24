@@ -1,13 +1,16 @@
 package lotto.domain;
 
+import lotto.view.InputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumbersTest {
     @Test
@@ -26,15 +29,23 @@ public class LottoNumbersTest {
     }
 
     @Test
-@DisplayName("생성된 로또번호가 1~45 사이인지 테스트한다.")
-    public void validateLottoNumbers() {
-        List<Integer> defaultNumbers = IntStream.rangeClosed(1, 45)
-                .boxed().collect(Collectors.toList());
-
-        LottoNumbers lottoNumbers = new LottoNumbers();
-        lottoNumbers.createAutoLottoNumbers();
-
-        assertThat(defaultNumbers).containsAll(lottoNumbers.getLottoNumbers());
+    @DisplayName("지난 주 당첨 번호는 6개만 입력 받는다.")
+    public void validateLottoNumbersLength() {
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
+        assertThatThrownBy(() -> {
+            lottoNumbers.validateLottoNumbersLength();
+        }).isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessageContaining("지난 주 당첨 번호는 6개만 입력할 수 있습니다.");
     }
 
+    @Test
+    @DisplayName("지난 주 당첨 번호는 1~45의 값을 가진다.")
+    public void validateLottoNumbersOneToFortyfive() {
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 46));
+
+        assertThatThrownBy(() -> {
+            lottoNumbers.validateLottoNumbersOneToFortyfive();
+        }).isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessageContaining("지난 주 당첨 번호는 1~45만 입력할 수 있습니다.");
+    }
 }

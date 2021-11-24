@@ -33,6 +33,20 @@ public class LottoNumbers {
         return new LottoNumbers(lottoNumbers);
     }
 
+    public void validateLottoNumbersLength() {
+        if (lottoNumbers.size() > NUMBER_SIX) {
+            throw new IndexOutOfBoundsException(MSG_LOTTO_NUMBERS_LENGTH_ONLY_SIX);
+        }
+    }
+
+    public void validateLottoNumbersOneToFortyfive() {
+        lottoNumbers.forEach(lottoNumber -> {
+            if (lottoNumber < NUMBER_ONE || lottoNumber > NUMBER_FORTY_FIVE) {
+                throw new IndexOutOfBoundsException(MSG_LOTTO_NUMBER_ONE_TO_FORTY_FIVE);
+            }
+        });
+    }
+
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
@@ -49,4 +63,6 @@ public class LottoNumbers {
     public int hashCode() {
         return Objects.hash(lottoNumbers);
     }
+
+
 }

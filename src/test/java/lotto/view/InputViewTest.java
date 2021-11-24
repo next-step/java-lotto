@@ -18,12 +18,12 @@ public class InputViewTest {
     }
 
     @Test
-    @DisplayName("지난 주 당첨 번호는 6개만 입력 받는다.")
-    public void validLottoNumberLength() {
-        String[] lottoMumber = "1,2,3,4,5,6,7".split(",");
+    @DisplayName("지난 주 당첨 번호는 1~45의 값을 가진다.")
+    public void validateLottoNumberOneToFortyfive() {
+        String[] lottoNumber = "1,2,3,4,5,46".split(",");
         assertThatThrownBy(() -> {
-            new InputView().validLottoNumberLength(lottoMumber);
+            new InputView().validateLottoNumberOneToFortyfive(lottoNumber);
         }).isInstanceOf(IndexOutOfBoundsException.class)
-                .hasMessageContaining("지난 주 당첨 번호는 6개만 입력할 수 있습니다.");
+                .hasMessageContaining("지난 주 당첨 번호는 1~45의 값만 입력할 수 있습니다.");
     }
 }

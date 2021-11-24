@@ -35,16 +35,16 @@ public class InputView {
     public LottoNumbers inputLastWeekWinningNumbers() {
         System.out.println(MSG_INPUT_WINNING_NUMBER);
         String[] lastWeekWinningNumbers = scanner.next().split(COMMA);
-        validLottoNumberLength(lastWeekWinningNumbers);
-        return new LottoNumbers(Arrays.stream(lastWeekWinningNumbers)
+        LottoNumbers lastWeekWinnigNumbers = new LottoNumbers(Arrays.stream(lastWeekWinningNumbers)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList()));
+        lastWeekWinnigNumbers.validateLottoNumbersLength();
+
+        return lastWeekWinnigNumbers;
     }
 
-    public void validLottoNumberLength(String[] lottoNumber) {
-        if (lottoNumber.length > NUMBER_SIX) {
-            throw new IndexOutOfBoundsException("지난 주 당첨 번호는 6개만 입력할 수 있습니다.");
-        }
+    public void validateLottoNumberOneToFortyfive(String[] lottoNumber) {
+
     }
 
     public LottoGameCount getLottoGameCount() {
@@ -63,6 +63,7 @@ public class InputView {
     public int hashCode() {
         return Objects.hash(inputPrice);
     }
+
 
 
 }
