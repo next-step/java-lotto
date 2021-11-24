@@ -1,6 +1,7 @@
 package lotto.Controller;
 
 import lotto.LottoResult;
+import lotto.Money;
 import lotto.Wallet;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -12,7 +13,7 @@ public class Client {
 
         inputView.getMoney();
         Wallet wallet = new Wallet(inputView.money());
-        wallet.buyLotto(1000);
+        wallet.buyLotto(new Money(1000));
         inputView.showLottos(wallet.getLottos());
 
         inputView.getWinNumbers();

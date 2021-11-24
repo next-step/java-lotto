@@ -44,14 +44,14 @@ public class WalletTest {
     @DisplayName("Wallet 은 Lotto 를 여러장 구매할 수 있다.")
     void buyLottoMethod(int money) {
         // given
-        final int unitPrice = 1000;
+        final Money unitPrice = new Money(1000);
         Wallet wallet = new Wallet(money);
 
         // when
         wallet.buyLotto(unitPrice);
 
         // then
-        assertThat(wallet).isEqualTo(new Wallet(money, money / unitPrice));
+        assertThat(wallet).isEqualTo(new Wallet(money, new Money(money).quotient(unitPrice)));
     }
 
     static Stream<Arguments> buyLottoMethodSource() {
@@ -66,7 +66,7 @@ public class WalletTest {
     @DisplayName("Wallet 은 LottoResult 를 파라미터로 받아 자신의 Lotto 를 Prize 로 반환할 수 있다.")
     void lottoResultByPrize(String winNumber, String bonusNumber, Prize targetPrize) {
         // given
-        Wallet wallet = new Wallet(10000, Arrays.asList(new Lotto("1, 2, 3, 4, 5, 6")));
+        Wallet wallet = new Wallet(new Money(10000), Arrays.asList(new Lotto("1, 2, 3, 4, 5, 6")));
         LottoResult lottoResult = new LottoResult(winNumber, bonusNumber);
 
         // when
