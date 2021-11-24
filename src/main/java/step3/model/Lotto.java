@@ -13,7 +13,7 @@ public class Lotto {
     private static final String SIZE_ERROR_MESSAGE = format("로또 번호의 개수는 반드시 %d개 여야 합니다.", LOTTO_NUMBER_SIZE);
     private static final String DUPLICATE_ERROR_MESSAGE = "로또 번호는 중복될 수 없습니다.";
 
-    public static Lotto fromRandom() {
+    public static Lotto publishRandom() {
         return new Lotto(LottoNumber.generateRandomNumbers(LOTTO_NUMBER_SIZE));
     }
 

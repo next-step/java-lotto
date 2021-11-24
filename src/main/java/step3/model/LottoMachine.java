@@ -9,7 +9,7 @@ public class LottoMachine {
     public static LottoBundle purchaseLotto(Money money) {
         List<Lotto> lottoList = new ArrayList<>();
         while (money.canPurchase()) {
-            lottoList.add(Lotto.fromRandom());
+            lottoList.add(Lotto.publishRandom());
             money.purchase();
         }
         return new LottoBundle(lottoList);
