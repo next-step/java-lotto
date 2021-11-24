@@ -52,6 +52,11 @@ Wallet
 * Wallet 은 Lotto 를 여러장 구매할 수 있다.
 * Wallet 은 LottoResult 와 Prize 파라미터로 받아 Prize 에 해당하는 결과의 수를 반환할 수 있다.
 
+Money
+
+* Money 는 0원을 기본으로 자신을 생성할 수 있다.
+* Money 는 다른 Money 로 나는 몫을 반환할 수 있다.
+
 
 
 
