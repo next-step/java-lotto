@@ -9,16 +9,16 @@ import java.util.Objects;
 public class Lottos {
     private final Collection<Lotto> lottos;
 
+    private Lottos(Collection<Lotto> lottos) {
+        this.lottos = Collections.unmodifiableCollection(lottos);
+    }
+
     public static Lottos of(Collection<Lotto> lottos) {
         if (lottos == null || lottos.isEmpty()) {
             throw new IllegalArgumentException("invalid input: lottos must not be null or empty");
         }
 
         return new Lottos(lottos);
-    }
-
-    private Lottos(Collection<Lotto> lottos) {
-        this.lottos = Collections.unmodifiableCollection(lottos);
     }
 
     @Override
@@ -44,8 +44,8 @@ public class Lottos {
 
     public GameResult winningResult(Lotto winningNumber) {
         Map<Integer, Integer> rankMap = new HashMap<>();
-        for (Lotto lotto: lottos) {
-            rankMap.compute(lotto.matchedCount(winningNumber), (k, v) -> v == null ? 1 : v++);
+        for (Lotto lotto : lottos) {
+            rankMap.compute(lotto.matchedCount(winningNumber), (k, v) -> v == null ? 1 : v + 1);
         }
         return GameResult.of(rankMap.getOrDefault(6, 0), rankMap.getOrDefault(5, 0),
                 rankMap.getOrDefault(4, 0), rankMap.getOrDefault(3, 0));

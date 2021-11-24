@@ -12,7 +12,7 @@ public class OutputView {
     public static void printPurchasedLotto(PurchaseList purchaseList) {
         System.out.printf("%d장을 구입했습니다.\n", purchaseList.amount());
 
-        for(Lotto lotto: purchaseList.collect()) {
+        for(Lotto lotto : purchaseList.collect()) {
             printLotto(lotto);
         }
     }
@@ -32,5 +32,6 @@ public class OutputView {
         System.out.println("4개 일치 (" + Prize.THIRD_PRIZE + "원)-" + gameResult.thirdPlace());
         System.out.println("5개 일치 (" + Prize.SECOND_PRIZE + "원)-" + gameResult.secondPlace());
         System.out.println("6개 일치 (" + Prize.FIRST_PRIZE + "원)-" + gameResult.firstPlace());
+        System.out.println("총 상금: " + gameResult.totalPrize());
     }
 }
