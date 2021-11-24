@@ -14,4 +14,12 @@ public class Lottos {
     public List<Lotto> getPurchasedLottos() {
         return Collections.unmodifiableList(purchasedLottos);
     }
+
+    public Result match(List<Number> winningNumber) {
+        Result result = new Result();
+        purchasedLottos.stream()
+                       .map(lotto -> lotto.match(winningNumber))
+                       .forEach(matchedCount -> result.add(matchedCount));
+        return result;
+    }
 }

@@ -1,29 +1,53 @@
 package lotto.model;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class Result {
+
+    private static final int MIN_WINNING_COUNT = 3;
+    private static final int INIT_COUNT = 0;
+    private static final int PLUS_COUNT = 1;
+    private static final int DECIMAL_DENOMINATOR = 100;
+    private static final double DECIMAL_NUMERATOR = 100.0;
 
     private final Map<Match, Integer> matchedCounts;
 
     public Result() {
-        matchedCounts = new HashMap<>();
-        matchedCounts.put(Match.THREE, 0);
-        matchedCounts.put(Match.FOUR, 0);
-        matchedCounts.put(Match.FIVE, 0);
-        matchedCounts.put(Match.SIX, 0);
+        matchedCounts = initMatchedCounts();
+    }
+
+    private Map<Match, Integer> initMatchedCounts() {
+        final Map<Match, Integer> matchedCounts;
+        matchedCounts = new TreeMap<>();
+        matchedCounts.put(Match.THREE, INIT_COUNT);
+        matchedCounts.put(Match.FOUR, INIT_COUNT);
+        matchedCounts.put(Match.FIVE, INIT_COUNT);
+        matchedCounts.put(Match.SIX, INIT_COUNT);
+        return matchedCounts;
     }
 
     public Result add(int matchCount) {
-        matchedCounts.merge(Match.from(matchCount), 1, (first, second) -> first + second);
+        if (matchCount < MIN_WINNING_COUNT) {
+            return this;
+        }
+        matchedCounts.merge(Match.from(matchCount), PLUS_COUNT, (first, second) -> first + second);
         return this;
     }
 
-    public int winningAmount() {
+    public int calculateWinningAmount() {
         return matchedCounts.entrySet()
                             .stream()
                             .mapToInt(entry -> entry.getKey().winningAmount(entry.getValue()))
                             .sum();
+    }
+
+    public Double calculateRatio(int purchasedAmount) {
+        return Math.floor(calculateWinningAmount() / (double) purchasedAmount * DECIMAL_DENOMINATOR) / DECIMAL_NUMERATOR;
+    }
+
+    public Map<Match, Integer> matchResult() {
+        return Collections.unmodifiableMap(matchedCounts);
     }
 }

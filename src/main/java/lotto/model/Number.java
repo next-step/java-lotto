@@ -18,11 +18,7 @@ public class Number {
     }
 
     public Number(String input) {
-        this(Integer.parseInt(input));
-    }
-
-    public static Number init() {
-        return new Number(0);
+        this(Integer.parseInt(input.trim()));
     }
 
     @Override
@@ -40,5 +36,10 @@ public class Number {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 }
