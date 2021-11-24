@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 /**
  * @author han
@@ -12,9 +11,16 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOf
 class PositiveNumberTest {
 
     @Test
-    @DisplayName("덧셈 테스트")
-    void add() {
+    @DisplayName("문자를 통한 생성")
+    void create() {
         PositiveNumber p = new PositiveNumber("0");
-        assertThat(p.add(new PositiveNumber("1")).getNumber()).isEqualTo(1);
+        assertThat(p.getNumber()).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("덧셈")
+    void add() {
+        PositiveNumber p = new PositiveNumber(0);
+        assertThat(p.add(new PositiveNumber(1)).getNumber()).isEqualTo(1);
     }
 }
