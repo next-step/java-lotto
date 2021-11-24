@@ -1,6 +1,7 @@
 package step3.controller;
 
 import static step3.view.InputView.readMoney;
+import static step3.view.OutputView.print;
 
 import step3.model.LottoBundle;
 import step3.model.LottoMachine;
@@ -11,5 +12,6 @@ public class LottoApplication {
     public static void main(String[] args) {
         Money money = readMoney();
         LottoBundle lottoBundle = LottoMachine.purchaseLotto(money);
+        print(lottoBundle);
     }
 }

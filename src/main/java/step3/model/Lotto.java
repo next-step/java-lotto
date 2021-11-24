@@ -2,6 +2,7 @@ package step3.model;
 
 import static java.lang.String.format;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,5 +36,9 @@ public class Lotto {
         if (set.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
         }
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
     }
 }
