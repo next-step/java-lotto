@@ -1,9 +1,9 @@
 package lotto.domain.starategy;
 
-import lotto.domain.Number;
+import lotto.domain.LottoNumber;
 
 import java.util.List;
 
 public interface GetLottoNumbersStrategy {
-    List<Number> getLotto();
+    List<LottoNumber> getLotto();
 }
