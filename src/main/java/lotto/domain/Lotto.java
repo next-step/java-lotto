@@ -1,8 +1,11 @@
 package lotto.domain;
 
-import calculator.PositiveNumber;
-
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
@@ -14,10 +17,10 @@ public class Lotto {
     private static final int size = 6;
     private static final Random r = ThreadLocalRandom.current();
 
-    private final List<PositiveNumber> numbers;
+    private final List<LottoNumber> numbers;
     private final Rank rank;
 
-    public Lotto(List<PositiveNumber> numbers, Rank rank) {
+    public Lotto(List<LottoNumber> numbers, Rank rank) {
         this.numbers = numbers;
         this.rank = rank;
     }
@@ -28,17 +31,17 @@ public class Lotto {
     }
 
     public static Lotto createByAuto() {
-        List<PositiveNumber> numbers = r.ints(1, bound)
+        List<LottoNumber> numbers = r.ints(1, bound)
             .distinct()
             .limit(size)
-            .mapToObj(PositiveNumber::new)
+            .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
 
-        Collections.sort(numbers, Comparator.comparing(PositiveNumber::getNumber));
+        Collections.sort(numbers, Comparator.comparing(LottoNumber::getNumber));
         return new Lotto(numbers, Rank.NONE);
     }
 
-    public List<PositiveNumber> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return numbers;
     }
 
@@ -47,24 +50,25 @@ public class Lotto {
     }
 
     public Lotto createWithWon(Lotto won) {
-        Map<Integer, PositiveNumber> collect = won.getNumbers()
+        Map<Integer, LottoNumber> collect = won.getNumbers()
             .stream()
-            .collect(Collectors.toMap(PositiveNumber::getNumber, p -> p));
+            .collect(Collectors.toMap(LottoNumber::getNumber, p -> p));
         int match = getMatchPointsBy(collect);
         return new Lotto(this.numbers, Rank.of(match));
     }
 
-    private int getMatchPointsBy(Map<Integer, PositiveNumber> map) {
+    private int getMatchPointsBy(Map<Integer, LottoNumber> map) {
         return (int) numbers.stream()
-            .mapToInt(PositiveNumber::getNumber)
-            .filter(map::containsKey).count();
+            .mapToInt(LottoNumber::getNumber)
+            .filter(map::containsKey)
+            .count();
     }
 
-    private List<PositiveNumber> createByStrings(String numbers) {
+    private List<LottoNumber> createByStrings(String numbers) {
         return Arrays.asList(numbers.split(","))
             .stream()
             .map(String::trim)
-            .map(PositiveNumber::new)
+            .map(LottoNumber::new)
             .collect(Collectors.toList());
     }
 }
