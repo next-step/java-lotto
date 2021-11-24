@@ -6,7 +6,7 @@ public class LottoMain {
     public static void main(String[] args)  {
         LottoGameService lottoGameService = new LottoGameService();
         lottoGameService.buyLotto();
-//        lottoGameService.playLottoGame();
+        lottoGameService.getLastWeekWinningNumbers();
     }
 
 }

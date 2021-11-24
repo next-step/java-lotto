@@ -14,8 +14,8 @@ public class LottoNumbers {
 
     }
 
-    public LottoNumbers(List<Integer> defaultLottoNumbers) {
-        this.lottoNumbers = defaultLottoNumbers;
+    public LottoNumbers(List<Integer> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     public LottoNumbers createAutoLottoNumbers() {

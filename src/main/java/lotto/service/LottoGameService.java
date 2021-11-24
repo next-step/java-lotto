@@ -6,7 +6,6 @@ import lotto.domain.Lottoes;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.List;
 import java.util.Objects;
 
 public class LottoGameService {
@@ -14,6 +13,7 @@ public class LottoGameService {
     private InputView inputView;
     private OutputView outputView;
     private Lottoes lottoes;
+    private LottoNumbers lastWeekWinningNumbers;
 
     public void buyLotto() {
         inputView = new InputView();
@@ -25,6 +25,11 @@ public class LottoGameService {
         lottoes = new Lottoes();
         lottoes.makeLottoes(lottoGameCount);
         outputView.drawPurchasedLottoes(lottoes);
+    }
+
+    public void getLastWeekWinningNumbers() {
+        lastWeekWinningNumbers = inputView.inputLastWeekWinningNumbers();
+        System.out.println(lastWeekWinningNumbers);
     }
 
     @Override
