@@ -6,7 +6,7 @@ import step1.domain.Number;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class NumberTest {
+public class LottoNumberTest {
     @Test
     void numberTest() {
         Number number1 = new Number(1);
