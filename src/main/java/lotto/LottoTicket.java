@@ -10,4 +10,9 @@ public class LottoTicket {
     public LottoTicket(List<Integer> numbers) {
         this.numbers = Collections.unmodifiableList(numbers);
     }
+
+    public int matchOfNumberCount(LottoTicket lottoTicket) {
+        return (int) numbers.stream()
+            .filter(lottoTicket.numbers::contains).count();
+    }
 }
