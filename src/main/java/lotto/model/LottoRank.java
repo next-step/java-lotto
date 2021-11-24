@@ -40,10 +40,7 @@ public enum LottoRank {
     }
 
     private static LottoRank secondOrThird(boolean isBonus) {
-        if (isBonus) {
-            return SECOND;
-        }
-        return THIRD;
+        return isBonus ? SECOND : THIRD;
     }
 
     public static List<LottoRank> valuesWithoutMiss() {
