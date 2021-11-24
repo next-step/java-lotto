@@ -15,14 +15,10 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class LottosTest {
     @Test
     public void create() {
-        final Lotto testLotto = Lotto.of(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
+        final Lotto testLotto = Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6));
 
         assertThat(Lottos.of(List.of(testLotto)))
-                .isEqualTo(Lottos.of(List.of(
-                        Lotto.of(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)))
-                )));
+                .isEqualTo(Lottos.of(List.of(Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6)))));
     }
 
     @ParameterizedTest(name = "create failed: {arguments}")
@@ -35,19 +31,13 @@ public class LottosTest {
 
     @Test
     public void amount() {
-        final Lottos testLottos = Lottos.of(List.of(
-                Lotto.of(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)))
-        ));
+        final Lottos testLottos = Lottos.of(List.of(Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6))));
         assertThat(testLottos.amount()).isEqualTo(1);
     }
 
     @Test
     public void collect() {
-        final List<Lotto> lottoList = List.of(Lotto.of(
-                List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))
-        ));
+        final List<Lotto> lottoList = List.of(Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6)));
         final Lottos testLottos = Lottos.of(lottoList);
         assertThat(testLottos.collect()).hasSameElementsAs(lottoList);
     }
@@ -56,39 +46,32 @@ public class LottosTest {
         return Stream.of(
                 // 0 matched
                 Arguments.of(
-                        Lottos.of(List.of(Lotto.of(List.of(LottoNumber.of(10), LottoNumber.of(11), LottoNumber.of(12),
-                                LottoNumber.of(13), LottoNumber.of(14), LottoNumber.of(15))))),
+                        Lottos.of(List.of(Lotto.fromIntegers(List.of(10, 11, 12, 13, 14, 15)))),
                         GameResult.of(0, 0, 0, 0)
                 ),
                 // 3 matched
                 Arguments.of(
-                        Lottos.of(List.of(Lotto.of(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                                LottoNumber.of(13), LottoNumber.of(14), LottoNumber.of(15))))),
+                        Lottos.of(List.of(Lotto.fromIntegers(List.of(1, 2, 3, 13, 14, 15)))),
                         GameResult.of(0, 0, 0, 1)
                 ),
                 // 6 matched
                 Arguments.of(
-                        Lottos.of(List.of(Lotto.of(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))))),
+                        Lottos.of(List.of(Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6)))),
                         GameResult.of(1, 0, 0, 0)
                 ),
                 // 3 matched with 2 lottos
                 Arguments.of(
                         Lottos.of(List.of(
-                                Lotto.of(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                                        LottoNumber.of(13), LottoNumber.of(14), LottoNumber.of(15))),
-                                Lotto.of(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                                        LottoNumber.of(13), LottoNumber.of(14), LottoNumber.of(15)))
+                                Lotto.fromIntegers(List.of(1, 2, 3, 13, 14, 15)),
+                                Lotto.fromIntegers(List.of(1, 2, 3, 13, 14, 15))
                         )),
                         GameResult.of(0, 0, 0, 2)
                 ),
                 // 6 matched with 2 lottos
                 Arguments.of(
                         Lottos.of(List.of(
-                                Lotto.of(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))),
-                                Lotto.of(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)))
+                                Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6)),
+                                Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6))
                         )),
                         GameResult.of(2, 0, 0, 0)
                 )
@@ -98,8 +81,7 @@ public class LottosTest {
     @ParameterizedTest(name = "check winning: {0} -> {1}")
     @MethodSource("parseWinningResult")
     public void winningResult(Lottos lottos, GameResult expected) {
-        final Lotto winningNumber = Lotto.of(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
+        final Lotto winningNumber = Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6));
         assertThat(lottos.winningResult(winningNumber))
                 .isEqualTo(expected);
 

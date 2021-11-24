@@ -1,8 +1,9 @@
 package edu.nextstep.camp.lotto.domain;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private static final String FORMATTER = "Lotto{numbers=%s)";
@@ -11,10 +12,12 @@ public class Lotto {
     private final Collection<LottoNumber> numbers;
 
     private Lotto(Collection<LottoNumber> numbers) {
-        this.numbers = numbers;
+        this.numbers = numbers.stream()
+                .sorted(Comparator.comparingInt(LottoNumber::toInt))
+                .collect(Collectors.toUnmodifiableList());
     }
 
-    public static Lotto of(Collection<LottoNumber> numbers) {
+    public static Lotto fromLottoNumbers(Collection<LottoNumber> numbers) {
         if (numbers == null || numbers.size() != SIZE_OF_NUMBERS) {
             throw new IllegalArgumentException("invalid input: size of numbers must be " + SIZE_OF_NUMBERS);
         }
@@ -23,7 +26,17 @@ public class Lotto {
             throw new IllegalArgumentException("invalid input: duplicated numbers are found: " + numbers);
         }
 
-        return new Lotto(Collections.unmodifiableCollection(numbers));
+        return new Lotto(numbers);
+    }
+
+    public static Lotto fromIntegers(Collection<Integer> numbers) {
+        if (numbers == null) {
+            throw new IllegalArgumentException("invalid input: size of numbers must be " + SIZE_OF_NUMBERS);
+        }
+
+        return Lotto.fromLottoNumbers(numbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toList()));
     }
 
     @Override

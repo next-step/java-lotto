@@ -17,6 +17,6 @@ public class AutoLottoGenerator implements LottoGenerator {
     public Lotto generate() {
         List<LottoNumber> deck = new ArrayList<>(LottoNumber.totalNumbers());
         Collections.shuffle(deck);
-        return Lotto.of(deck.subList(0, 6));
+        return Lotto.fromLottoNumbers(deck.subList(0, 6));
     }
 }

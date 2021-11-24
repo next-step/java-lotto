@@ -41,10 +41,7 @@ public class PurchaseListTest {
 
     @Test
     public void collect() {
-        final List<Lotto> lottoList = List.of(Lotto.of(
-                List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))
-        ));
+        final List<Lotto> lottoList = List.of(Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6)));
         final PurchaseList testlist = PurchaseList.purchase(1000, FixedLottoGenerator.getInstance());
         assertThat(testlist.collect()).hasSameElementsAs(lottoList);
     }
@@ -53,26 +50,22 @@ public class PurchaseListTest {
         return Stream.of(
                 // 0 matched
                 Arguments.of(
-                        Lotto.of(List.of(LottoNumber.of(10), LottoNumber.of(11), LottoNumber.of(12),
-                                LottoNumber.of(13), LottoNumber.of(14), LottoNumber.of(15))),
+                        Lotto.fromIntegers(List.of(10, 11, 12, 13, 14, 15)),
                         GameResult.of(0, 0, 0, 0)
                 ),
                 // 1 matched
                 Arguments.of(
-                        Lotto.of(List.of(LottoNumber.of(1), LottoNumber.of(11), LottoNumber.of(12),
-                                LottoNumber.of(13), LottoNumber.of(14), LottoNumber.of(15))),
+                        Lotto.fromIntegers(List.of(1, 11, 12, 13, 14, 15)),
                         GameResult.of(0, 0, 0, 0)
                 ),
                 // 2 matched
                 Arguments.of(
-                        Lotto.of(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(12),
-                                LottoNumber.of(13), LottoNumber.of(14), LottoNumber.of(15))),
+                        Lotto.fromIntegers(List.of(1, 2, 12, 13, 14, 15)),
                         GameResult.of(0, 0, 0, 0)
                 ),
                 // 3 matched
                 Arguments.of(
-                        Lotto.of(List.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                                LottoNumber.of(13), LottoNumber.of(14), LottoNumber.of(15))),
+                        Lotto.fromIntegers(List.of(1, 2, 3, 13, 14, 15)),
                         GameResult.of(0, 0, 0, 1)
                 )
         );
@@ -89,30 +82,15 @@ public class PurchaseListTest {
     static Stream<Arguments> parseWPriceEarningRate() {
         return Stream.of(
                 // first place
-                Arguments.of(
-                        GameResult.of(1, 0, 0, 0),
-                        2000000
-                ),
+                Arguments.of(GameResult.of(1, 0, 0, 0), 2000000),
                 // second place
-                Arguments.of(
-                        GameResult.of(0, 1, 0, 0),
-                        1500
-                ),
+                Arguments.of(GameResult.of(0, 1, 0, 0), 1500),
                 // third place
-                Arguments.of(
-                        GameResult.of(0, 0, 1, 0),
-                        50
-                ),
+                Arguments.of(GameResult.of(0, 0, 1, 0), 50),
                 // fource place
-                Arguments.of(
-                        GameResult.of(0, 0, 0, 1),
-                        5
-                ),
+                Arguments.of(GameResult.of(0, 0, 0, 1), 5),
                 // no winning
-                Arguments.of(
-                        GameResult.of(0, 0, 0, 0),
-                        0
-                )
+                Arguments.of(GameResult.of(0, 0, 0, 0), 0)
         );
     }
 
@@ -120,7 +98,6 @@ public class PurchaseListTest {
     @MethodSource("parseWPriceEarningRate")
     public void priceEarningRate(GameResult gameResult, float expected) {
         final PurchaseList purchaseList = PurchaseList.purchase(1000, FixedLottoGenerator.getInstance());
-//        final GameResult gameResult = purchaseList.winningResult(winningNumber);
         assertThat(purchaseList.priceEarningRate(gameResult)).isEqualTo(expected);
     }
 }
