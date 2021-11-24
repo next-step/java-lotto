@@ -9,13 +9,13 @@ public class LottoApplication {
     public static void main(String[] args) {
         //input cash
         int price = InputView.inputCash();
+        LottoMachine lottoMachine = LottoMachine.create(price);
         System.out.println();
 
         int manualLottoCount = InputView.inputManualLottoCount();
         System.out.println();
 
         //purchase lotto
-        LottoMachine lottoMachine = LottoMachine.create(price);
         Lottos purchasedLottos = lottoMachine.purchase(manualLottoCount);
 
         //input last week lotto number

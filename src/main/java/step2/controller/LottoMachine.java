@@ -28,11 +28,16 @@ public class LottoMachine {
     public Lottos purchase(int manualLottoCount) {
         int lottoCount = price.getPrice() / LOTTO_PRICE;
         int autoLottoCount = lottoCount - manualLottoCount;
+        Lottos lottos = purchaseLotto(manualLottoCount, autoLottoCount);
+        showPurchaseCountResult(manualLottoCount, autoLottoCount);
+        showPurchaseResult(lottos);
+        return lottos;
+    }
+
+    private Lottos purchaseLotto(int manualLottoCount, int autoLottoCount) {
         Lottos lottos = Lottos.create();
         lottos.addAll(purchaseManualLotto(manualLottoCount));
         lottos.addAll(purchaseAutoLotto(autoLottoCount));
-        showPurchaseCountResult(manualLottoCount, autoLottoCount);
-        showPurchaseResult(lottos);
         return lottos;
     }
 
