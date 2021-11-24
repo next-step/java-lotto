@@ -21,7 +21,6 @@ public class LottoTest {
     @DisplayName("당첨 로또 생성")
     void createWithWon() {
         Lotto test = Lotto.createByAuto();
-        assertThat(test.getRank()).isEqualTo(Rank.NONE);
 
         WonLotto wonLotto = WonLotto.of(test);
         assertThat(wonLotto.getLottoRankBy(test)).isEqualTo(Rank.FIRST);

@@ -30,7 +30,7 @@ public class Statistics {
         Map<Rank, Integer> map = new TreeMap<>(Comparator.comparing(Rank::getMatch));
         ranks.forEach(rank -> map.put(rank, 0));
 
-        lottos.forEach(l -> map.computeIfPresent(l.getRank(), (k, v) -> v + 1));
+//        lottos.forEach(l -> map.computeIfPresent(l.getRank(), (k, v) -> v + 1));
 
         int profit = map.keySet().stream().filter(r -> map.get(r) != 0).mapToInt(Rank::getMoney).sum();
 
