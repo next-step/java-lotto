@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.model.domain.LotteryGameResultDto;
+import lotto.model.result.LotteryGameResultDto;
 import lotto.model.domain.Rank;
 import lotto.model.ticket.LotteryTicket;
 import lotto.model.ticket.LotteryTickets;

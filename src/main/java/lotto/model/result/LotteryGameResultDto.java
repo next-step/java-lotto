@@ -1,4 +1,6 @@
-package lotto.model.domain;
+package lotto.model.result;
+
+import lotto.model.domain.Rank;
 
 import java.util.Map;
 

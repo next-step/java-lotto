@@ -1,6 +1,7 @@
 package lotto.model.game;
 
 import lotto.model.domain.*;
+import lotto.model.result.LotteryGameResultDto;
 import lotto.model.ticket.LotteryTicket;
 import lotto.model.ticket.LotteryTickets;
 import lotto.view.InputView;
@@ -24,7 +25,7 @@ public class LotteryGame {
         Lotto bonus = InputView.getBonusLotto();
         checkBonusDuplicate(winningTicket, bonus);
         for(LotteryTicket ticket : tickets.getTickets()) {
-            Rank rank = getRank(winningTicket, bonus, ticket);
+            Rank rank = getRank(winningTicket, ticket, bonus);
             result.plusResultCount(rank);
         }
         return result;
@@ -36,11 +37,8 @@ public class LotteryGame {
         }
     }
 
-    private Rank getRank(LotteryTicket winningTicket, Lotto bonus, LotteryTicket ticket) {
-        int matchCount = (int) ticket.getNumbers()
-                        .stream()
-                        .filter(winningTicket::match)
-                        .count();
-        return Rank.valueOf(matchCount, ticket.getNumbers().contains(bonus));
+    private Rank getRank(LotteryTicket winningTicket, LotteryTicket ticket, Lotto bonus) {
+        int matchCount = winningTicket.getMatchCount(ticket);
+        return Rank.valueOf(matchCount, ticket.match(bonus));
     }
 }
