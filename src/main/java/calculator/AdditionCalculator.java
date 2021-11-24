@@ -6,14 +6,13 @@ import calculator.strategy.CustomSplitStrategy;
 import calculator.strategy.DefaultSplitStrategy;
 import calculator.strategy.SplitStrategy;
 import java.util.Arrays;
-import java.util.List;
+import java.util.stream.IntStream;
 
 public class AdditionCalculator {
 
-    private static final List<String> DEFAULT_DELIMITERS = Arrays.asList(",", ":");
-    private static final String JOIN_DELIMITER = "|";
-    private static final String DEFAULT_DELIMITER = String.join(JOIN_DELIMITER, DEFAULT_DELIMITERS);
-    private static final int DEFAULT_VALUE = 0;
+    private static final String DEFAULT_DELIMITER = ",|:";
+    private static final int COMPARISON_VALUE = 0;
+    private static final int DEFAULT_RETURN_VALUE = 0;
 
     private final String input;
 
@@ -27,14 +26,9 @@ public class AdditionCalculator {
 
     public int result() {
         if (inputNullOrEmpty()) {
-            return DEFAULT_VALUE;
+            return DEFAULT_RETURN_VALUE;
         }
-
-        try {
-            return sumSplitInput(getSplitInput());
-        } catch (NumberFormatException e) {
-            throw new AdditionNumberFormatException();
-        }
+        return sumSplitInput(getSplitInput());
     }
 
     private boolean inputNullOrEmpty() {
@@ -45,21 +39,27 @@ public class AdditionCalculator {
     }
 
     private int sumSplitInput(String[] splitInput) {
-        validNegative(splitInput);
+        IntStream intStream = this.mapToInt(splitInput);
+        validNegativeValue(intStream);
 
-        return Arrays.stream(splitInput)
-            .mapToInt(Integer::parseInt)
-            .sum();
+        return intStream.sum();
     }
 
-    private void validNegative(String[] splitInput) {
-        long count = Arrays.stream(splitInput)
-            .mapToInt(Integer::parseInt)
-            .filter(num -> num < DEFAULT_VALUE)
+    private void validNegativeValue(IntStream intStream) {
+        long count = intStream.filter(num -> num < COMPARISON_VALUE)
             .count();
 
-        if (count > DEFAULT_VALUE) {
+        if (count > COMPARISON_VALUE) {
             throw new AdditionIllegalArgumentException();
+        }
+    }
+
+    private IntStream mapToInt(String[] splitInput) {
+        try {
+            return Arrays.stream(splitInput)
+                .mapToInt(Integer::parseInt);
+        } catch (NumberFormatException e) {
+            throw new AdditionNumberFormatException();
         }
     }
 
