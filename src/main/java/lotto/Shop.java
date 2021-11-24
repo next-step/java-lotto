@@ -7,7 +7,6 @@ public class Shop {
 
     private static final int PRICE = 1000;
 
-
     public LottoTickets buy(int money, LottoMachine lottoMachine) {
         int count = money / PRICE;
 

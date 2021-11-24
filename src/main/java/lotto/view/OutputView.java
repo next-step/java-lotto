@@ -1,12 +1,14 @@
 package lotto.view;
 
 import java.text.MessageFormat;
+import lotto.Award;
+import lotto.GameResult;
 import lotto.LottoTicket;
 import lotto.LottoTickets;
 
 public class OutputView {
 
-    public static void printBuyCountMessage(LottoTickets lottoTickets) {
+    public void printBuyCountMessage(LottoTickets lottoTickets) {
         System.out.println(MessageFormat.format("{0}개를 구매했습니다.", lottoTickets.getTicketSize()));
 
         lottoTickets.getTickets().stream()
@@ -14,6 +16,28 @@ public class OutputView {
             .forEach(System.out::println);
 
         System.out.println();
+    }
+
+    public void printByResult(GameResult gameResult) {
+        System.out.println();
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+
+        printAwardCase(Award.MATCH_OF_THREE, gameResult);
+        printAwardCase(Award.MATCH_OF_FOUR, gameResult);
+        printAwardCase(Award.MATCH_OF_FIVE, gameResult);
+        printAwardCase(Award.MATCH_OF_SIX, gameResult);
+
+        System.out.println(
+            MessageFormat.format("총 수익률은 {0}입니다.", String.format("%.2f", gameResult.getYield())));
+    }
+
+    private void printAwardCase(Award award, GameResult gameResult) {
+        System.out.println(
+            MessageFormat.format("{0}개 일치 ({1}원)-{2}개",
+                award.getTopMatchCount(),
+                award.getReward(),
+                gameResult.getResultByCount(award)));
     }
 
 }
