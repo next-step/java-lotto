@@ -16,11 +16,11 @@ public class LottoMachine {
         this.purchaseInfo = purchaseInfo;
     }
 
-    public LottoTicketCollection makeLottoTickets() {
+    public LottoTickets makeLottoTickets() {
         List<LottoTicket> lottoTickets = IntStream.range(0, purchaseInfo.getTicketNumber()).boxed()
                 .map(i -> makeRandomLottoTicket())
                 .collect(Collectors.toList());
-        return new LottoTicketCollection(lottoTickets);
+        return new LottoTickets(lottoTickets);
     }
 
     private LottoTicket makeRandomLottoTicket() {
