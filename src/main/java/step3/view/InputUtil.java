@@ -25,23 +25,23 @@ public class InputUtil {
         return SCANNER.nextLine();
     }
 
-    public static List<Integer> readIntList() {
+    public static List<Integer> readNumbers() {
         try {
-            return getIntList();
+            return readIntegers();
         } catch (NumberFormatException e) {
             System.out.println(NOT_NUMBER_ERROR_MESSAGE);
-            return readIntList();
+            return readNumbers();
         }
     }
 
-    private static List<Integer> getIntList() {
-        return Arrays.stream(getStringNumbers())
+    private static List<Integer> readIntegers() {
+        return Arrays.stream(readStringNumbers())
             .map(String::trim)
             .map(Integer::valueOf)
             .collect(toList());
     }
 
-    private static String[] getStringNumbers() {
+    private static String[] readStringNumbers() {
         return readLine().split(NUMBER_SPLIT_REGEX);
     }
 

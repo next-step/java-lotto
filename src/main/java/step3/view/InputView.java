@@ -1,6 +1,7 @@
 package step3.view;
 
 import static step3.view.InputUtil.readInt;
+import static step3.view.InputUtil.readNumbers;
 
 import step3.model.Lotto;
 import step3.model.Money;
@@ -23,7 +24,7 @@ public class InputView {
     public static Lotto readLotto() {
         System.out.println(LOTTO_INPUT_MESSAGE);
         try {
-            return new Lotto(InputUtil.readIntList());
+            return new Lotto(readNumbers());
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return readLotto();
