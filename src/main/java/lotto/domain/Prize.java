@@ -3,13 +3,11 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Prize {
-    SEVENTH(0, 0),
-    SIXTH(1, 0),
-    FIFTH(2, 0),
-    FOURTH(3, 5_000),
-    THIRD(4, 50_000),
-    SECOND(5, 1_500_000),
-    BONUS_SECOND(5, 30_000_000),
+    ELSE(0, 0),
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
     private final int matching;
@@ -21,21 +19,17 @@ public enum Prize {
         this.prize = prize;
     }
 
-    public static Prize findPrize(Lotto lotto, WinningNumbers winningNumbers, BonusBall bonus) {
+    public static Prize findPrize(Integer matchingCount, WinningLotto winningLotto, boolean containBonus) {
         Prize prize = Arrays.asList(values()).stream()
-                .filter(prizeEnum -> prizeEnum.matching == lotto.checkMatching(winningNumbers))
-                .findAny().get();
-        if (prize.matching == 5 && checkBonus(lotto, bonus)) {
-            return Prize.BONUS_SECOND;
-        }
-        if (prize.matching == 5 && !checkBonus(lotto, bonus)) {
+                .filter(prizeEnum -> prizeEnum.matching == matchingCount)
+                .findAny().orElse(Prize.ELSE);
+        if (prize.matching == 5 && containBonus) {
             return Prize.SECOND;
         }
+        if (prize.matching == 5 && !containBonus) {
+            return Prize.THIRD;
+        }
         return prize;
-    }
-
-    public static Boolean checkBonus(Lotto lotto, BonusBall bonus) {
-        return lotto.checkContainNumber(bonus);
     }
 
     public int getPrize() {
