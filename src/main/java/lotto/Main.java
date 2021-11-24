@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.BonusBall;
 import lotto.domain.Lottos;
 
 import lotto.domain.Number;
@@ -14,7 +15,7 @@ public class Main {
         Lottos lottos = new Lottos(purchaseAmount, new GetRandomLottoNumbers());
         Output.viewPurchasedLotto(lottos);
         WinningNumbers winningNumbers = Input.inputWinningNumbers();
-        Number bonus = Input.inputBonusBall();
+        BonusBall bonus = Input.inputBonusBall(winningNumbers);
         Output.viewResult(lottos, purchaseAmount,winningNumbers , bonus);
     }
 }

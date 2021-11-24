@@ -33,5 +33,4 @@ public class WinningNumbers {
     public boolean checkContainNumber(Number number) {
         return winningNumbers.contains(number);
     }
-
 }

@@ -10,9 +10,6 @@ import java.util.stream.IntStream;
 public class Lotto {
     public static final int SIZE = 6;
 
-
-
-
     private final List<Number> lottoNumbers;
 
     public Lotto(GetLottoNumbersStrategy getLottoNumbersStrategy) {
@@ -45,8 +42,8 @@ public class Lotto {
         return count.intValue();
     }
 
-    public boolean checkContainNumber(Number number) {
-        return lottoNumbers.contains(number);
+    public boolean checkContainNumber(BonusBall bonusBall) {
+        return lottoNumbers.contains(bonusBall.getBonusBall());
     }
 
     public List<Number> getLottoNumbers() {

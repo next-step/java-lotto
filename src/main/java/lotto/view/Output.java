@@ -21,7 +21,7 @@ public class Output {
         }
     }
 
-    public static void viewResult(Lottos lottos, Integer purchaseAmount, WinningNumbers winningNumbers, Number bonus) {
+    public static void viewResult(Lottos lottos, Integer purchaseAmount, WinningNumbers winningNumbers, BonusBall bonus) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         Integer startIndex = 3;

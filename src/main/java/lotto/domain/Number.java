@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.Parser;
-
 import java.util.Objects;
 
 public class Number {

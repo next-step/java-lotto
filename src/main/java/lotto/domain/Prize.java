@@ -22,7 +22,7 @@ public enum Prize {
         this.prize = prize;
     }
 
-    public static Prize findPrize(Lotto lotto, WinningNumbers winningNumbers, Number bonus) {
+    public static Prize findPrize(Lotto lotto, WinningNumbers winningNumbers, BonusBall bonus) {
         Prize prize = Arrays.asList(values()).stream()
                 .filter(prizeEnum -> prizeEnum.matching == lotto.checkMatching(winningNumbers))
                 .findAny().get();
@@ -35,7 +35,7 @@ public enum Prize {
         return prize;
     }
 
-    public static Boolean checkBonus(Lotto lotto, Number bonus) {
+    public static Boolean checkBonus(Lotto lotto, BonusBall bonus) {
         return lotto.checkContainNumber(bonus);
     }
 
