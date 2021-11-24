@@ -27,7 +27,7 @@ public class LottosTest {
         lottoList.add(new Lotto("1,12,13,44,45,36"));
         Lottos lottos = new Lottos(lottoList);
         LottoNumber bonus = new LottoNumber(10);
-        listOfArguments.add(Arguments.of(lottos,bonus, 2_000_000_000+5_000));
+        listOfArguments.add(Arguments.of(lottos, bonus, 2_000_000_000 + 5_000));
 
         List<Lotto> lottoList1 = new ArrayList<>();
         lottoList1.add(new Lotto("1,2,3,4,5,6"));
@@ -35,7 +35,7 @@ public class LottosTest {
         lottoList1.add(new Lotto("1,2,3,4,5,7"));
         Lottos lottos1 = new Lottos(lottoList1);
         LottoNumber bonus1 = new LottoNumber(7);
-        listOfArguments.add(Arguments.of(lottos1,bonus1, 2000000000 * 2+30000000));
+        listOfArguments.add(Arguments.of(lottos1, bonus1, 2000000000 * 2 + 30000000));
 
         List<Lotto> lottoList2 = new ArrayList<>();
         lottoList2.add(new Lotto("1,2,3,14,15,16"));
@@ -43,7 +43,7 @@ public class LottosTest {
         lottoList2.add(new Lotto("1,2,3,14,5,7"));
         Lottos lottos2 = new Lottos(lottoList2);
         LottoNumber bonus2 = new LottoNumber(7);
-        listOfArguments.add(Arguments.of(lottos2,bonus2,  5_000* 2+50_000));
+        listOfArguments.add(Arguments.of(lottos2, bonus2, 5_000 * 2 + 50_000));
 
         return listOfArguments.stream();
     }
@@ -51,7 +51,7 @@ public class LottosTest {
     @ParameterizedTest
     @MethodSource("generateArgumentsStream")
     @DisplayName("lottos 의 getPrize 테스트")
-    void getPrizeTest(Lottos lottos, LottoNumber bonus,Integer expect) {
+    void getPrizeTest(Lottos lottos, LottoNumber bonus, Integer expect) {
         WinningLotto winningNumber = new WinningLotto("1,2,3,4,5,6", bonus);
         assertThat(lottos.getPrize(winningNumber, bonus)).isEqualTo(expect);
     }
