@@ -2,6 +2,9 @@ package lotto.utils;
 
 public class Constants {
     public static final Integer NUMBER_ZERO = 0;
+    public static final Integer NUMBER_ONE = 1;
+    public static final Integer NUMBER_SIX = 6;
+    public static final Integer NUMBER_FORTY_FIVE = 45;
     public static final Integer NUMBER_THOUSAND = 1000;
 
     public static final String MSG_INPUT_PRICE = "구입금액을 입력해 주세요.";

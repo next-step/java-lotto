@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static lotto.utils.Constants.NUMBER_ZERO;
+
 public class Lottoes {
     private List<LottoNumbers> lottoNumbers;
 
@@ -16,7 +18,7 @@ public class Lottoes {
     }
 
     public void makeLottoes(LottoGameCount lottoGameCount) {
-        for (int i = 0; i < lottoGameCount.getLottoGameCount(); i++) {
+        for (int i = NUMBER_ZERO; i < lottoGameCount.getLottoGameCount(); i++) {
             lottoNumbers.add(new LottoNumbers().createAutoLottoNumbers());
         }
     }

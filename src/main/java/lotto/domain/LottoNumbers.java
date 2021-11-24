@@ -7,6 +7,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.utils.Constants.*;
+
 public class LottoNumbers {
     private List<Integer> lottoNumbers;
 
@@ -19,11 +21,11 @@ public class LottoNumbers {
     }
 
     public LottoNumbers createAutoLottoNumbers() {
-        List<Integer> defaultNumbers = IntStream.rangeClosed(1, 45)
+        List<Integer> defaultNumbers = IntStream.rangeClosed(NUMBER_ONE, NUMBER_FORTY_FIVE)
                 .boxed().collect(Collectors.toList());
         Collections.shuffle(defaultNumbers);
         List<Integer> randomNumbers = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = NUMBER_ZERO; i < NUMBER_SIX; i++) {
             randomNumbers.add(defaultNumbers.get(i));
         }
         lottoNumbers = randomNumbers.stream()
