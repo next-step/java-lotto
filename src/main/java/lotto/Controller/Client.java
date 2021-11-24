@@ -1,7 +1,9 @@
-package lotto.view;
+package lotto.Controller;
 
 import lotto.LottoResult;
 import lotto.Wallet;
+import lotto.view.InputView;
+import lotto.view.ResultView;
 
 public class Client {
     public static void main(String[] args) {
