@@ -28,9 +28,9 @@ public class ShopTest {
     @SuppressWarnings("unchecked")
     private List<LottoTicket> getTicketsByReflection(LottoTickets lottoTickets)
         throws NoSuchFieldException, IllegalAccessException {
-        Field lotteryField = LottoTickets.class.getDeclaredField("tickets");
-        lotteryField.setAccessible(true);
-        return (List<LottoTicket>) lotteryField.get(lottoTickets);
+        Field ticketsField = LottoTickets.class.getDeclaredField("tickets");
+        ticketsField.setAccessible(true);
+        return (List<LottoTicket>) ticketsField.get(lottoTickets);
     }
 
 }
