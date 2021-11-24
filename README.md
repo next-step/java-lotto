@@ -6,5 +6,16 @@
 
 ## 설계 내용
 1. domain
+    * Lotto : 로또 번호 6자리를 담고있는 클래스
+    * LottoTicket : 로또 일급 컬랙션
+    * Store : 상점에서 입력한 값을 들고 있는 클래스
+   
+    ### 추가할 클래스
+   * 당첨 번호를 들고 있을 클래스
+   * 결과 통계 해주는 클래스
+   * 룰에 대한 정보를 담고 있는 enum 클래스
 2. view
+   * InsertView : 입력
+   * ResertView : 출력
 3. controller
+   * LottoGame : 컨트롤러
