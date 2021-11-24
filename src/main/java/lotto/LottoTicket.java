@@ -1,7 +1,9 @@
 package lotto;
 
+import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
@@ -14,5 +16,12 @@ public class LottoTicket {
     public int matchOfNumberCount(LottoTicket lottoTicket) {
         return (int) numbers.stream()
             .filter(lottoTicket.numbers::contains).count();
+    }
+
+    public String getNumbersToString() {
+        return MessageFormat.format("[{0}]",
+            this.numbers.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(", ")));
     }
 }

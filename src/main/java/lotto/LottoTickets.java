@@ -10,4 +10,11 @@ public class LottoTickets {
         this.tickets = tickets;
     }
 
+    public int getTicketSize() {
+        return tickets.size();
+    }
+
+    public List<LottoTicket> getTickets() {
+        return tickets;
+    }
 }
