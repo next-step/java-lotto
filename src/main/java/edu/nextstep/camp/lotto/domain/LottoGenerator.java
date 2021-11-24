@@ -1,11 +1,17 @@
 package edu.nextstep.camp.lotto.domain;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 
 @FunctionalInterface
 public interface LottoGenerator {
     default Lottos generate(int amount) {
-        return Lottos.of(Collections.nCopies(amount, generate()));
+        List<Lotto> lottoList = new ArrayList<>(amount);
+        while (lottoList.size() < amount) {
+            lottoList.add(generate());
+        }
+
+        return Lottos.of(lottoList);
     }
 
     Lotto generate();
