@@ -5,17 +5,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
-import static lotto.Prize.FIFTH;
-import static lotto.Prize.FIRST;
-import static lotto.Prize.FOURTH;
-import static lotto.Prize.LOSE;
-import static lotto.Prize.SECOND;
-import static lotto.Prize.SEVENTH;
-import static lotto.Prize.SIXTH;
-import static lotto.Prize.THIRD;
+import static lotto.Prize.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WalletTest {
@@ -86,6 +81,33 @@ public class WalletTest {
                 Arguments.of("1, 2, 8, 9, 10, 11", "7", SIXTH),
                 Arguments.of("1, 8, 9, 10, 11, 12", "7", SEVENTH),
                 Arguments.of("8, 9, 10, 11, 12, 13", "7", LOSE)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("rateSource")
+    @DisplayName("Wallet 이 가지고 있는 lottos 의 수익률을 계산할 수 있다.")
+    void rate(List<Lotto> lottos, double result) {
+        // given
+        int totalMoney = 1000 * lottos.size();
+        LottoResult lottoResult = new LottoResult(new Lotto("1, 2, 3, 4, 5, 6"), new LottoNumber(7));
+
+        // when
+        Wallet wallet = new Wallet(new Money(), lottos);
+
+        // then
+        double totalPrize = 0;
+        for (Prize prize : Prize.values()) {
+            totalPrize += wallet.lottoResultByPrize(lottoResult, prize) * prize.getPrize();
+        }
+
+        assertThat(totalPrize / totalMoney).isEqualTo(result);
+    }
+
+    static Stream<Arguments> rateSource() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(new Lotto("1, 2, 3, 4, 5, 6"), new Lotto("7, 8, 9, 10, 11, 12")), 1000000),
+                Arguments.of(Arrays.asList(new Lotto("13, 14, 15, 16, 17, 18"), new Lotto("7, 8, 9, 10, 11, 12")), 0)
         );
     }
 }
