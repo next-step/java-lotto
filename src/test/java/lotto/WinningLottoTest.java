@@ -9,16 +9,16 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoResultTest {
+public class WinningLottoTest {
     @ParameterizedTest
     @MethodSource("constructorMethodSource")
     @DisplayName("LottoResult 는 6개의 일반 번호와 1개의 보너스 번호로 자신을 생성할 수 있다.")
     void constructorMethod(String numbers, String bonusNumber) {
         // given
-        LottoResult self = new LottoResult(numbers, bonusNumber);
+        WinningLotto self = new WinningLotto(numbers, bonusNumber);
 
         // when
-        LottoResult other = new LottoResult(numbers, bonusNumber);
+        WinningLotto other = new WinningLotto(numbers, bonusNumber);
 
         // then
         assertThat(self).isEqualTo(other);
@@ -36,7 +36,7 @@ public class LottoResultTest {
     @DisplayName("Lotto 는 LottoResult 와 비교하여 일반번호 중 몇개가 일치하는지 반환할 수 있다.")
     void matchCountMethod(String input, String win, String bonus, int result) {
         // given
-        LottoResult self = new LottoResult(win, bonus);
+        WinningLotto self = new WinningLotto(win, bonus);
         Lotto lotto = new Lotto(input);
 
         // when
@@ -63,7 +63,7 @@ public class LottoResultTest {
     @DisplayName("LottoResult 는 Lotto 와 비교하여 보너스 번호를 가지고 있는지 반환할 수 있다.")
     void hasBonusMethod(String input, String win, String bonus, boolean result) {
         // given
-        LottoResult self = new LottoResult(win, bonus);
+        WinningLotto self = new WinningLotto(win, bonus);
         Lotto lotto = new Lotto(input);
 
         // when

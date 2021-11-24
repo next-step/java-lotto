@@ -47,9 +47,9 @@ public class Wallet {
         return Objects.hash(money, lottos);
     }
 
-    public int lottoResultByPrize(LottoResult lottoResult, Prize targetPrize) {
+    public int lottoResultByPrize(WinningLotto winningLotto, Prize targetPrize) {
         return (int) lottos.stream()
-                .map(lotto -> Prize.of(lottoResult.matchCount(lotto), lottoResult.hasBonus(lotto)))
+                .map(lotto -> Prize.of(winningLotto.matchCount(lotto), winningLotto.hasBonus(lotto)))
                 .filter(prize -> prize.equals(targetPrize))
                 .count();
     }

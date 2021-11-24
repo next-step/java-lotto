@@ -1,6 +1,6 @@
 package lotto.Controller;
 
-import lotto.LottoResult;
+import lotto.WinningLotto;
 import lotto.Money;
 import lotto.Wallet;
 import lotto.view.InputView;
@@ -18,8 +18,8 @@ public class Client {
 
         inputView.getWinNumbers();
         inputView.getBonusNumber();
-        LottoResult lottoResult = new LottoResult(inputView.winNumbers(), inputView.bonusNumber());
+        WinningLotto winningLotto = new WinningLotto(inputView.winNumbers(), inputView.bonusNumber());
 
-        resultView.showStatus(inputView.money(), wallet, lottoResult);
+        resultView.showStatus(inputView.money(), wallet, winningLotto);
     }
 }

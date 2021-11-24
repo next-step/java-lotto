@@ -5,7 +5,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -62,10 +61,10 @@ public class WalletTest {
     void lottoResultByPrize(String winNumber, String bonusNumber, Prize targetPrize) {
         // given
         Wallet wallet = new Wallet(new Money(10000), Arrays.asList(new Lotto("1, 2, 3, 4, 5, 6")));
-        LottoResult lottoResult = new LottoResult(winNumber, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(winNumber, bonusNumber);
 
         // when
-        final int ea = wallet.lottoResultByPrize(lottoResult, targetPrize);
+        final int ea = wallet.lottoResultByPrize(winningLotto, targetPrize);
 
         // then
         assertThat(ea).isEqualTo(1);
@@ -90,7 +89,7 @@ public class WalletTest {
     void rate(List<Lotto> lottos, double result) {
         // given
         int totalMoney = 1000 * lottos.size();
-        LottoResult lottoResult = new LottoResult(new Lotto("1, 2, 3, 4, 5, 6"), new LottoNumber(7));
+        WinningLotto winningLotto = new WinningLotto(new Lotto("1, 2, 3, 4, 5, 6"), new LottoNumber(7));
 
         // when
         Wallet wallet = new Wallet(new Money(), lottos);
@@ -98,7 +97,7 @@ public class WalletTest {
         // then
         double totalPrize = 0;
         for (Prize prize : Prize.values()) {
-            totalPrize += wallet.lottoResultByPrize(lottoResult, prize) * prize.getPrize();
+            totalPrize += wallet.lottoResultByPrize(winningLotto, prize) * prize.getPrize();
         }
 
         assertThat(totalPrize / totalMoney).isEqualTo(result);

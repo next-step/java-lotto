@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * LottoResult 는 각각의 Lotto 에 대한 결과를 반환할 수 있다.
  */
-public class LottoResult {
+public class WinningLotto {
     private final Lotto lotto;
     private final LottoNumber bonusNumber;
 
@@ -14,7 +14,7 @@ public class LottoResult {
      * @param numbers
      * @param bonusNumber
      */
-    public LottoResult(String numbers, String bonusNumber) {
+    public WinningLotto(String numbers, String bonusNumber) {
         this(new Lotto(numbers), new LottoNumber(bonusNumber));
     }
 
@@ -24,7 +24,7 @@ public class LottoResult {
      * @param lotto
      * @param bonusNumber
      */
-    public LottoResult(Lotto lotto, LottoNumber bonusNumber) {
+    public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
         this.lotto = lotto;
         this.bonusNumber = bonusNumber;
     }
@@ -41,7 +41,7 @@ public class LottoResult {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoResult that = (LottoResult) o;
+        WinningLotto that = (WinningLotto) o;
         return Objects.equals(lotto, that.lotto) && Objects.equals(bonusNumber, that.bonusNumber);
     }
 
