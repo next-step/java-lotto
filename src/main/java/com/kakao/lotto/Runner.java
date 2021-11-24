@@ -12,10 +12,13 @@ public class Runner {
     public static void main(String[] args) {
         InputView inputView = new InputView(System.in);
 
-        PurchaseInfo purchaseInfo = new PurchaseInfo(inputView.inputLottoPurchase());
+        int lottoPrice = inputView.inputLottoPrice();
+        List<List<Integer>> pickedLotteries = inputView.inputPickedLotteries();
+        PurchaseInfo purchaseInfo = new PurchaseInfo(lottoPrice, pickedLotteries);
+
         LottoMachine lottoMachine = new LottoMachine(purchaseInfo);
         LottoTickets lottoTickets = lottoMachine.makeLottoTickets();
-        OutputView.printLottoTicket(lottoTickets);
+        OutputView.printLottoTicket(lottoTickets, purchaseInfo);
 
         List<Integer> winLotto = inputView.inputWinLotto();
         int bonus = inputView.inputLottoBonus();

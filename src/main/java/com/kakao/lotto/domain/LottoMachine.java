@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoMachine {
     private final PurchaseInfo purchaseInfo;
@@ -17,10 +18,23 @@ public class LottoMachine {
     }
 
     public LottoTickets makeLottoTickets() {
-        List<LottoTicket> lottoTickets = IntStream.range(0, purchaseInfo.getTicketNumber()).boxed()
+        List<LottoTicket> pickedLottoTickets = makePickedLottoTickets();
+        List<LottoTicket> randomLottoTickets = makeRandomLottoTickets();
+        List<LottoTicket> userLottoTickets = Stream.concat(pickedLottoTickets.stream(), randomLottoTickets.stream())
+                .collect(Collectors.toList());
+        return new LottoTickets(userLottoTickets);
+    }
+
+    private List<LottoTicket> makePickedLottoTickets() {
+        return purchaseInfo.getPickedLotteries().stream()
+                .map(LottoTicket::of)
+                .collect(Collectors.toList());
+    }
+
+    private List<LottoTicket> makeRandomLottoTickets() {
+        return IntStream.range(0, purchaseInfo.getRandomTicketCount()).boxed()
                 .map(i -> makeRandomLottoTicket())
                 .collect(Collectors.toList());
-        return new LottoTickets(lottoTickets);
     }
 
     private LottoTicket makeRandomLottoTicket() {
