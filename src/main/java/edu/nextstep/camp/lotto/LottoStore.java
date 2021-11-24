@@ -23,5 +23,6 @@ public class LottoStore {
                 .collect(Collectors.toList());
         final GameResult gameResult = purchaseList.winningResult(Lotto.of(winningNumbers));
         OutputView.printGameResult(gameResult);
+        OutputView.printPriceEarningRate(purchaseList.priceEarningRate(gameResult));
     }
 }
