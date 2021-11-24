@@ -1,6 +1,7 @@
 package lotto.model;
 
 import common.model.Number;
+import lotto.application.Constant;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -32,7 +33,7 @@ public enum LottoRank {
     }
 
     public static LottoRank valueOf(Number matchCount, boolean isBonus) {
-        if (matchCount.equals(new Number(5))) {
+        if (matchCount.equals(Constant.LOTTO_SECOND_AND_THIRD_MATCH_COUNT)) {
             return secondOrThird(isBonus);
         }
         return valueOf(matchCount);
