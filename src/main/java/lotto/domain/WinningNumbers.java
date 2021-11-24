@@ -18,7 +18,7 @@ public class WinningNumbers {
     public WinningNumbers(String winningNumbersString) {
         List<Number> winningNumbers = Arrays.asList(winningNumbersString.split(",")).stream()
                 .map(Integer::parseInt)
-                .map(integer -> new Number(integer))
+                .map(Number::new)
                 .collect(Collectors.toList());
         checkSize(winningNumbers);
         this.winningNumbers = winningNumbers;
