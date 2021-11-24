@@ -6,6 +6,13 @@ import java.util.List;
 
 public class LottoWinner extends LottoNumbers {
 
+    private LottoNumber bonusNumber;
+
+    public LottoWinner(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
+        super(lottoNumbers);
+        this.bonusNumber = bonusNumber;
+    }
+
     public LottoWinner(List<LottoNumber> lottoNumbers) {
         super(lottoNumbers);
     }
@@ -22,6 +29,10 @@ public class LottoWinner extends LottoNumbers {
         if (contains(lottoNumber)) {
             count.plus();
         }
+    }
+
+    public boolean bonusMatch(LottoNumbers lottoNumbers){
+        return lottoNumbers.getLottoNumbers().contains(bonusNumber);
     }
 
     public boolean contains(LottoNumber lottoNumber) {
