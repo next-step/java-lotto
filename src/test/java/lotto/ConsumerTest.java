@@ -19,22 +19,18 @@ class ConsumerTest {
     void integrationTest() {
         int purchaseAmount = 1000;
 
-        List<LottoNumber> numbers = new ArrayList<>();
-        numbers.add(LottoNumberFactory.manualCreateNumber(5));
-        numbers.add(LottoNumberFactory.manualCreateNumber(10));
-        numbers.add(LottoNumberFactory.manualCreateNumber(15));
-        numbers.add(LottoNumberFactory.manualCreateNumber(20));
-        numbers.add(LottoNumberFactory.manualCreateNumber(30));
-        numbers.add(LottoNumberFactory.manualCreateNumber(40));
 
-        LottoNumbers lottoNumbers = LottoNumbersFactory.manualCreateNumbers(numbers);
+        LottoNumbers lottoNumbers = LottoNumbersFactory.manualCreateNumbers("1, 2, 3, 4, 5, 6");
         Lotto lotto = LottoFactory.manualCreateSingleLotto(lottoNumbers);
 
-        LottoWinner lottoWinner = new LottoWinner(LottoNumbersFactory.manualCreateNumberList("10, 20, 30, 40, 5, 15"));
+        LottoWinner lottoWinner = new LottoWinner(
+                LottoNumbersFactory.manualCreateNumberList("1, 2, 3, 4, 5, 10"),
+                LottoNumberFactory.manualCreateNumber(6)
+        );
 
         LottoReport report = LottoStore.report(lotto, lottoWinner);
 
         float rateOfRevenue = report.calculateRateOfRevenue(purchaseAmount);
-        assertThat(rateOfRevenue).isEqualTo(2000000.0f);
+        assertThat(rateOfRevenue).isEqualTo(30000.0f);
     }
 }

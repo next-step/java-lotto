@@ -41,6 +41,6 @@ class LottoStoreTest {
     @DisplayName("로또 번호 당첨 확인")
     void match() {
         LottoReport report = LottoStore.report(lotto, winner);//[3, 10, 17, 24, 31, 38] 4등
-        assertThat(report.getLottoRankNumberMap().get(LottoRank.FOURTH)).isEqualTo(new Number(1));
+        assertThat(report.getLottoRankNumbers().get(LottoRank.FIFTH)).isEqualTo(new Number(1));
     }
 }

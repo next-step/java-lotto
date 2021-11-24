@@ -74,4 +74,27 @@ class LottoWinnerTest {
     void duplicateValidation() {
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoWinner(LottoNumbersFactory.manualCreateNumberList("1, 2, 3, 4, 5, 1")));
     }
+
+
+    @Test
+    @DisplayName("보너스 번호 매칭 테스트")
+    void bonusMatch() {
+        LottoWinner winnerNumbers = new LottoWinner(
+                LottoNumbersFactory.manualCreateNumberList("3, 10, 17, 24, 31, 45"),
+                LottoNumberFactory.manualCreateNumber(7));
+        LottoNumbers lottoNumbers = LottoNumbersFactory.manualCreateNumbers("3, 7, 10, 17, 24, 31");
+        assertThat(winnerNumbers.bonusMatch(lottoNumbers)).isTrue();
+    }
+
+    @Test
+    @DisplayName("2등 당첨 테스트")
+    void secondMatch() {
+        LottoNumbers lottoNumbers = LottoNumbersFactory.manualCreateNumbers("1, 2, 3, 4, 5, 6");
+        LottoWinner winnerNumbers = new LottoWinner(
+                LottoNumbersFactory.manualCreateNumberList("1, 2, 3, 4, 5, 10"),
+                LottoNumberFactory.manualCreateNumber(6)
+        );
+
+        assertThat(winnerNumbers.match(lottoNumbers)).isEqualTo(LottoRank.SECOND);
+    }
 }

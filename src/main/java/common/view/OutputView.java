@@ -58,7 +58,7 @@ public class OutputView {
         print("당첨 통계");
         print("-------------");
         for (LottoRank rank : LottoRank.valuesWithoutMiss()) {
-            Number count = report.getLottoRankNumberMap().getOrDefault(rank, new Number());
+            Number count = report.getLottoRankNumbers().getOrDefault(rank, new Number());
             print(rank, count);
         }
 
@@ -68,7 +68,15 @@ public class OutputView {
     }
 
     public static void print(LottoRank rank, Number count) {
-        print(String.format("%d개 일치 (%d원)- %d개", rank.getMatchCount(), rank.getAmount(), count.getNumber()));
+        StringBuilder output = new StringBuilder();
+        output.append(rank.getMatchCount()).append("개 일치");
+        if (LottoRank.SECOND.equals(rank)) {
+            output.append(", 보너스 볼 일치");
+        }
+        output.append("(").append(rank.getAmount()).append("원) - ")
+                .append(count.getNumber()).append("개");
+
+        print(output.toString());
     }
 
 
