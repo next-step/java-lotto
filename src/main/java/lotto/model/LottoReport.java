@@ -7,10 +7,10 @@ import java.util.Map;
 
 public class LottoReport {
 
-    private final Map<LottoRank, Number> lottoRankNumberMap;
+    private final Map<LottoRank, Number> lottoRankNumbers;
 
     public LottoReport(Lotto lotto, LottoWinner winner) {
-        this.lottoRankNumberMap = initialize();
+        this.lottoRankNumbers = initialize();
         match(lotto, winner);
     }
 
@@ -29,23 +29,23 @@ public class LottoReport {
     }
 
     private void countPlus(LottoRank rank) {
-        Number count = lottoRankNumberMap.get(rank);
+        Number count = lottoRankNumbers.get(rank);
         count.plus();
-        lottoRankNumberMap.put(rank, count);
+        lottoRankNumbers.put(rank, count);
     }
 
     public float calculateRateOfRevenue(int purchaseAmount) {
         float revenue = 0;
 
         for (LottoRank rank : LottoRank.valuesWithoutMiss()) {
-            Number count = lottoRankNumberMap.get(rank);
+            Number count = lottoRankNumbers.get(rank);
             revenue += rank.getAmount() * count.getNumber();
         }
 
         return Math.round(revenue / purchaseAmount * 100) / 100.F;
     }
 
-    public Map<LottoRank, Number> getLottoRankNumberMap() {
-        return lottoRankNumberMap;
+    public Map<LottoRank, Number> getLottoRankNumbers() {
+        return lottoRankNumbers;
     }
 }

@@ -58,7 +58,7 @@ public class OutputView {
         print("당첨 통계");
         print("-------------");
         for (LottoRank rank : LottoRank.valuesWithoutMiss()) {
-            Number count = report.getLottoRankNumberMap().getOrDefault(rank, new Number());
+            Number count = report.getLottoRankNumbers().getOrDefault(rank, new Number());
             print(rank, count);
         }
 
