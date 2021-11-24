@@ -23,7 +23,7 @@ public class LottoTest {
         Lotto test = Lotto.createByAuto();
         assertThat(test.getRank()).isEqualTo(Rank.NONE);
 
-        Lotto withWon = test.createWithWon(test);
-        assertThat(withWon.getRank()).isEqualTo(Rank.FIRST);
+        WonLotto wonLotto = WonLotto.of(test);
+        assertThat(wonLotto.getLottoRankBy(test)).isEqualTo(Rank.FIRST);
     }
 }

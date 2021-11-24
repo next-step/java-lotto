@@ -49,21 +49,6 @@ public class Lotto {
         return rank;
     }
 
-    public Lotto createWithWon(Lotto won) {
-        Map<Integer, LottoNumber> collect = won.getNumbers()
-            .stream()
-            .collect(Collectors.toMap(LottoNumber::getNumber, p -> p));
-        int match = getMatchPointsBy(collect);
-        return new Lotto(this.numbers, Rank.of(match));
-    }
-
-    private int getMatchPointsBy(Map<Integer, LottoNumber> map) {
-        return (int) numbers.stream()
-            .mapToInt(LottoNumber::getNumber)
-            .filter(map::containsKey)
-            .count();
-    }
-
     private List<LottoNumber> createByStrings(String numbers) {
         return Arrays.asList(numbers.split(","))
             .stream()

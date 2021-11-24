@@ -19,9 +19,10 @@ public class Statistics {
     }
 
     public List<Lotto> createResult(Lotto won, List<Lotto> lottos) {
-        return lottos.stream()
-            .map(l -> l.createWithWon(won))
-            .collect(Collectors.toList());
+//        return lottos.stream()
+//            .map(l -> l.createWithWon(won))
+//            .collect(Collectors.toList());
+        return null;
     }
 
     public StatisticsResult getMatchResult() {
