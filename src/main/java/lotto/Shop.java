@@ -15,4 +15,8 @@ public class Shop {
                 .map(n -> lottoMachine.publish())
                 .collect(Collectors.toList()));
     }
+
+    public GameResult result(LottoTickets lottoTickets, ResultLotto resultLotto) {
+        return new GameResult(lottoTickets, resultLotto, lottoTickets.getTotalPrice(PRICE));
+    }
 }

@@ -17,4 +17,8 @@ public class LottoTickets {
     public List<LottoTicket> getTickets() {
         return tickets;
     }
+
+    public int getTotalPrice(int price) {
+        return tickets.size() * price;
+    }
 }
