@@ -9,6 +9,10 @@ import java.util.List;
 public class Lottos {
     private final List<Lotto> lottos;
 
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
     public Lottos(Integer purchaseAmount, GetLottoNumbersStrategy getLottoNumbersStrategy) {
         int purchaseCount = purchaseAmount / 1000;
         List<Lotto> lottos = new ArrayList<>();
@@ -23,15 +27,15 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public Integer getPrize(WinningNumbers winningNumbers, BonusBall bonus) {
+    public Integer getPrize(WinningLotto winningLotto, LottoNumber bonus) {
         return lottos.stream()
-                .mapToInt(lotto -> Prize.findPrize(lotto, winningNumbers, bonus).getPrize())
+                .mapToInt(lotto -> Prize.findPrize(lotto.checkMatching(winningLotto), winningLotto, lotto.checkContainNumber(bonus)).getPrize())
                 .sum();
     }
 
-    public Integer getCount(Prize prize, WinningNumbers winningNumbers, BonusBall bonus) {
+    public Integer getCount(Prize prize, WinningLotto winningLotto, LottoNumber bonus) {
         Long count = lottos.stream()
-                .filter(lotto -> Prize.findPrize(lotto,winningNumbers,bonus) == prize)
+                .filter(lotto -> Prize.findPrize(lotto.checkMatching(winningLotto), winningLotto, lotto.checkContainNumber(bonus)) == prize)
                 .count();
         return count.intValue();
     }

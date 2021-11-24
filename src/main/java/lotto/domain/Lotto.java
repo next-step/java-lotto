@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.domain.starategy.GetLottoNumbersStrategy;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,43 +10,52 @@ import java.util.stream.Collectors;
 public class Lotto {
     public static final int SIZE = 6;
 
-    private final List<Number> lottoNumbers;
+    private final List<LottoNumber> lotto;
 
-    public Lotto(GetLottoNumbersStrategy getLottoNumbersStrategy) {
-        List<Number> lottoNumbers = getLottoNumbersStrategy.getLotto();
-        checkSize(lottoNumbers);
-        checkDistinct(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+    public Lotto(String lottoString) {
+        List<LottoNumber> lotto = Arrays.stream(lottoString.split(","))
+                .map(lottoNumberString -> new LottoNumber(lottoNumberString))
+                .collect(Collectors.toList());
+        checkSize(lotto);
+        checkDistinct(lotto);
+        this.lotto = lotto;
     }
 
-    private void checkSize(List<Number> lottoNumbers) {
-        if (lottoNumbers.size() != SIZE) {
+    public Lotto(GetLottoNumbersStrategy getLottoNumbersStrategy) {
+        List<LottoNumber> lotto = getLottoNumbersStrategy.getLotto();
+        checkSize(lotto);
+        checkDistinct(lotto);
+        this.lotto = lotto;
+    }
+
+    private void checkSize(List<LottoNumber> lottoLottoNumbers) {
+        if (lottoLottoNumbers.size() != SIZE) {
             throw new IllegalArgumentException(SIZE + " 와 길이가 다른 Lotto 는 입력될 수 없습니다.");
         }
     }
 
-    private void checkDistinct(List<Number> lottoNumbers) {
-        Integer compareSize = lottoNumbers.stream()
+    private void checkDistinct(List<LottoNumber> lotto) {
+        Integer compareSize = lotto.stream()
                 .distinct()
                 .collect(Collectors.toList())
                 .size();
-        if (compareSize != lottoNumbers.size()) {
+        if (compareSize != lotto.size()) {
             throw new IllegalArgumentException("로또에 중복된 숫자가 존재합니다.");
         }
     }
 
-    public Integer checkMatching(WinningNumbers winningNumbers) {
-        Long count = lottoNumbers.stream()
-                .filter(winningNumbers::checkContainNumber)
+    public Integer checkMatching(WinningLotto winningLotto) {
+        Long count = lotto.stream()
+                .filter(winningLotto::checkContainNumber)
                 .count();
         return count.intValue();
     }
 
-    public boolean checkContainNumber(BonusBall bonusBall) {
-        return lottoNumbers.contains(bonusBall.getBonusBall());
+    public boolean checkContainNumber(LottoNumber bonusBall) {
+        return lotto.contains(bonusBall);
     }
 
-    public List<Number> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
+    public List<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableList(lotto);
     }
 }
