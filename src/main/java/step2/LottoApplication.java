@@ -2,6 +2,8 @@ package step2;
 
 import step2.controller.LottoMachine;
 import step2.domain.Lottos;
+import step2.domain.Number;
+import step2.domain.WinningLotto;
 import step2.view.InputView;
 
 public class LottoApplication {
@@ -19,8 +21,8 @@ public class LottoApplication {
         Lottos purchasedLottos = lottoMachine.purchase(manualLottoCount);
 
         //input last week lotto number
-        String winningNumbers = InputView.inputLastWeekLottoNumber();
-        int bonusNumber = InputView.inputBonusNumber();
-        lottoMachine.winningResult(purchasedLottos, winningNumbers, bonusNumber);
+        lottoMachine.winningResult(purchasedLottos,
+                WinningLotto.create(InputView.inputLastWeekLottoNumber()),
+                Number.create(InputView.inputBonusNumber()));
     }
 }

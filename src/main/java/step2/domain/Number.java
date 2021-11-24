@@ -11,6 +11,7 @@ public class Number {
     private int number;
 
     private Number(int number) {
+        validateNumberBound(number);
         this.number = number;
     }
 

@@ -1,6 +1,7 @@
 package step2.controller;
 
 import step2.domain.*;
+import step2.domain.Number;
 import step2.service.LottoService;
 import step2.strategy.RandomNumberGenerator;
 import step2.view.InputView;
@@ -66,8 +67,8 @@ public class LottoMachine {
         System.out.println();
     }
 
-    public void winningResult(Lottos purchasedLottos, String winningNumbers, int bonusNumber) {
-        WinningResult winningResult = lottoService.winningResult(purchasedLottos, winningNumbers, bonusNumber);
+    public void winningResult(Lottos purchasedLottos, WinningLotto winningLotto, Number bonusNumber) {
+        WinningResult winningResult = lottoService.winningResult(purchasedLottos, winningLotto, bonusNumber);
         showWinningStatistics(winningResult);
     }
 
