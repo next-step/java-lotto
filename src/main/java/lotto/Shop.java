@@ -5,7 +5,7 @@ import java.util.stream.IntStream;
 
 public class Shop {
 
-    public static final int PRICE = 1000;
+    private static final int PRICE = 1000;
 
 
     public LottoTickets buy(int money, LottoMachine lottoMachine) {
