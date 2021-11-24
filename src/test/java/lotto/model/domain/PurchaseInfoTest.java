@@ -13,17 +13,17 @@ class PurchaseInfoTest {
     PurchaseInfo purchaseInfo;
 
     @ParameterizedTest
-    @ValueSource(ints = { -1, -2, -3})
-    @DisplayName("amount 가 음수면 예외 발생")
+    @ValueSource(ints = { -1, -2, -3, 100, 900})
+    @DisplayName("amount 가 1000보다 작으면 예외 발생")
     void amountUnderZeroThrowException(int amount){
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> purchaseInfo = new PurchaseInfo(amount))
-                .withMessage("구매액은 음수일 수 없습니다.");
+                .withMessage("로또를 구매하지 않았습니다.");
     }
 
     @ParameterizedTest
-    @CsvSource(value = { "14000,14", "200,0", "2000,2", "2600,2" })
-    @DisplayName("amount로 구매한 로또 개수 확인하기")
+    @CsvSource(value = { "14000,14", "2000,2", "2600,2" })
+    @DisplayName("amount 로 구매한 로또 개수 확인하기")
     void getLotteryCountTest(int amount, int expected){
         purchaseInfo = new PurchaseInfo(amount);
         assertThat(purchaseInfo.getLotteryCount()).isEqualTo(expected);
