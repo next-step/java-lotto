@@ -1,49 +1,65 @@
 package lotto.view;
 
-import lotto.Bag;
-import lotto.Lotto;
-import lotto.LottoResult;
+import lotto.WinningLotto;
 import lotto.Prize;
+import lotto.Wallet;
 
+import static lotto.Prize.*;
+
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
-    private final int money;
-    private final Lotto winLotto;
+    private static final int BASE_RATE = 1;
 
-    public ResultView(int money, Lotto winLotto) {
-        this.money = money;
-        this.winLotto = winLotto;
+    public void showStatus(int money, Wallet wallet, WinningLotto winningLotto) {
+        System.out.println("당첨 통계\n---------\n");
+
+        final List<Prize> targetStatus = Arrays.stream(values())
+                .filter(prize -> prize.compareTo(SIXTH) > 0)
+                .collect(Collectors.toList());
+
+        showStatistics(wallet, winningLotto, targetStatus);
+        showRate(money, wallet, winningLotto, targetStatus);
     }
 
-    public void showLottos(Bag bag) {
-        final List<Lotto> lottos = bag.lottos();
-
-        for (Lotto lotto : lottos) {
-            System.out.println(lotto);
+    private void showRate(int money, Wallet wallet, WinningLotto winningLotto, List<Prize> targetStatus) {
+        double totalPrize = 0;
+        for (Prize status : targetStatus) {
+            totalPrize += wallet.lottoResultByPrize(winningLotto, status) * status.getPrize();
         }
-    }
 
-    public void showStatistics(Bag bag) {
-        System.out.println("당첨 통계\n---------");
-        final LottoResult lottoResult = bag.lottoResult(winLotto);
+        double rate = totalPrize / money;
 
-        for (Prize prize : Prize.values()) {
-            System.out.println(prize.hitCount() + "개 일치" + "(" + prize.money() + "원) - " + lottoResult.result(prize) + "개");
+        if (rate >= BASE_RATE) {
+            System.out.println("총 수익률은 " + rate +"입니다. (이익)");
+            return;
         }
+
+        System.out.println("총 수익률은 " + rate +"입니다. (손해)");
     }
 
-    public void showYield(Bag bag) {
-        final LottoResult lottoResult = bag.lottoResult(winLotto);
-        final double totalPrize = lottoResult.totalPrize();
-        final double yield = totalPrize / money;
+    private void showStatistics(Wallet wallet, WinningLotto winningLotto, List<Prize> targetStatus) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Prize status : targetStatus) {
+            stringBuilder.append(status.getMatchCount());
+            stringBuilder.append("개 일치");
+            hasBonus(stringBuilder, status);
+            stringBuilder.append("(");
+            stringBuilder.append(status.getPrize());
+            stringBuilder.append(") - ");
+            stringBuilder.append(wallet.lottoResultByPrize(winningLotto, status));
+            stringBuilder.append("개");
+            stringBuilder.append("\n");
 
-        StringBuilder stringBuilder = new StringBuilder()
-                .append("총 수익률은 ")
-                .append(yield)
-                .append("입니다.")
-                .append(totalPrize > money ? "(이득)" : "(손해)");
-
+        }
         System.out.println(stringBuilder);
+    }
+
+    private void hasBonus(StringBuilder stringBuilder, Prize status) {
+        if (status == SECOND) {
+            stringBuilder.append(", 보너스 볼 일치");
+        }
     }
 }

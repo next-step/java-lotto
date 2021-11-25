@@ -5,33 +5,56 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Lotto 는 6개의 LottoNumber List 형태로 가지고 있다.
+ * Lotto 는 LottoResult 와 협력하여 몇개 맞추었는지 알 수 있다.
+ * Lotto 는 LottoResult 와 협력하여 보너스 볼을 맞추었는지 알 수 있다.
+ */
 public class Lotto {
-    private static final int DEFAULT_SELECT_COUNT = 6;
+    private static final String DELIMITER = ", ";
+    private static final int DEFAULT_CHOICE_COUNT = 6;
+
     private final List<LottoNumber> numbers;
 
-    // 자동 로또
+    /**
+     * 인자를 받지 않은 경우
+     * LottoGenerator.auto() 를 통해 번호를 가져와 default 생성자에 위임한다.
+     */
     public Lotto() {
-        this.numbers = LottoGenerator.autoMode();
+        this(LottoGenerator.auto());
     }
 
-    // 수동 로또
-    public Lotto(Integer... numbers) {
-        this(Arrays.asList(numbers));
-    }
-
-    public Lotto(List<Integer> numbers) {
-        if (numbers.size() != DEFAULT_SELECT_COUNT) {
-            throw new IllegalArgumentException("로또는 6개의 번호를 입력해야 합니다.");
-        }
-        this.numbers = numbers.stream()
+    /**
+     * String 을 인자로 받은 경우
+     * List<LottoNumber>로 변환하여 default 생성자에 위임한다.
+     * @param numbers
+     */
+    public Lotto(String numbers) {
+        this(Arrays.stream(numbers.split(DELIMITER))
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList())
+        );
     }
 
-    public int result(Lotto target) {
-        return (int) this.numbers.stream()
-                .filter(target.numbers::contains)
-                .count();
+    /**
+     * @DEFAULT_CONSTRUCTOR
+     * numbers 를 갖는 Lotto 객체를 생성한다.
+     * @param numbers
+     */
+    public Lotto(List<LottoNumber> numbers) {
+        validateNumbersCount(numbers);
+
+        this.numbers = numbers;
+    }
+
+    /**
+     * numbers 의 size 가 DEFAULT_CHOICE_COUNT 와 일치하지 않다면 예외를 던진다.
+     * @param numbers
+     */
+    private void validateNumbersCount(List<LottoNumber> numbers) {
+        if (numbers.size() != DEFAULT_CHOICE_COUNT) {
+            throw new IllegalArgumentException("로또는 6개의 번호를 선택해야 합니다.");
+        }
     }
 
     @Override
@@ -39,7 +62,7 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return numbers.containsAll(lotto.numbers);
+        return Objects.equals(numbers, lotto.numbers);
     }
 
     @Override
@@ -50,5 +73,15 @@ public class Lotto {
     @Override
     public String toString() {
         return numbers.toString();
+    }
+
+    public int compare(Lotto target) {
+        return (int) target.numbers.stream()
+                .filter(this.numbers::contains)
+                .count();
+    }
+
+    public boolean hasBonus(LottoNumber bonusNumber) {
+        return this.numbers.contains(bonusNumber);
     }
 }

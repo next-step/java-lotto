@@ -7,55 +7,42 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.in;
 
-/**
- * [기능분석]
- * 로또는 랜덤번호로 로또를 생성할 수 있다.
- * 로또는 수동번호로 로또를 생성할 수 있다.
- * 로또는 당첨로또와 비교하여 몇개 맞추었는지 계산할 수 있다.
- */
 public class LottoTest {
-
     @Test
-    @DisplayName("로또는 랜덤번호로 자신을 생성할 수 있다.")
-    void constructorMethodAutoNumber() {
-        new Lotto();
-    }
+    @DisplayName("Lotto 는 자동번호로 자신을 생성할 수 있다.")
+    void constructorMethodAuto() {
+        // given
+        Lotto lotto = new Lotto();
 
-    @Test
-    @DisplayName("로또는 수동번호로 자신을 생성할 수 있다.")
-    void constructorMethodManualNumber() {
-        Lotto lotto = new Lotto(1, 2, 3, 4, 5, 6);
-        assertThat(lotto).isEqualTo(new Lotto(1, 2, 3, 4, 5, 6));
-        assertThat(lotto).isEqualTo(new Lotto(6, 5, 4, 3, 2, 1));
+        // when
 
-        lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto).isEqualTo(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        assertThat(lotto).isEqualTo(new Lotto(Arrays.asList(6, 5, 4, 3, 2, 1)));
+        // then
     }
 
     @ParameterizedTest
-    @MethodSource("resultMethodSource")
-    @DisplayName("당첨로또와 비교하여 몇개 맞추었는지 계산할 수 있다.")
-    void resultMethod(List<Integer> input, int result) {
-        Lotto target = new Lotto(1, 2, 3, 4, 5, 6);
+    @MethodSource("constructorMethodManualSource")
+    @DisplayName("Lotto 는 6개의 번호를 받아 자신을 생성할 수 있다.")
+    void constructorMethodManual(String numbers) {
+        // given
+        Lotto self = new Lotto(numbers);
 
-        assertThat(new Lotto(input).result(target)).isEqualTo(result);
+        // when
+        Lotto other = new Lotto(numbers);
+
+        // then
+        assertThat(self).isEqualTo(other);
     }
 
-    static Stream<Arguments> resultMethodSource() {
+    static Stream<Arguments> constructorMethodManualSource() {
         return Stream.of(
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 6),
-                Arguments.of(Arrays.asList(2, 3, 4, 5, 6, 7), 5),
-                Arguments.of(Arrays.asList(3, 4, 5, 6, 7, 8), 4),
-                Arguments.of(Arrays.asList(4, 5, 6, 7, 8, 9), 3),
-                Arguments.of(Arrays.asList(5, 6, 7, 8, 9, 10), 2),
-                Arguments.of(Arrays.asList(6, 7, 8, 9, 10, 11), 1),
-                Arguments.of(Arrays.asList(7, 8, 9, 10, 11, 12), 0)
+                Arguments.of("1, 2, 3, 4, 5, 6"),
+                Arguments.of("40, 41, 42, 43, 44, 45")
         );
     }
 }

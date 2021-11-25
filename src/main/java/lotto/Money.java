@@ -2,57 +2,46 @@ package lotto;
 
 import java.util.Objects;
 
-public class Money implements Comparable<Money> {
-    private final int value;
-    private static final int ZERO = 0;
+public class Money {
+    public static final int ZERO = 0;
+    private final int money;
 
-    public Money(int value) {
-        if (value < ZERO) {
-            throw new IllegalArgumentException("돈은 0 미만의 값을 가질 수 없습니다.");
+    public Money() {
+        this(ZERO);
+    }
+
+    public Money(int money) {
+        isGreaterThanEqualToZero(money);
+
+        this.money = money;
+    }
+
+    private void isGreaterThanEqualToZero(int money) {
+        if (money >= ZERO) {
+            return;
         }
 
-        this.value = value;
+        throw new IllegalArgumentException("돈은 음수일 수 없습니다.");
     }
 
-    public Money minus(int weight, Money other) {
-        return this.minus(new Money(weight * other.value));
-    }
-
-    public Money minus(Money other) {
-        if (other.value > this.value) {
-            throw new IllegalArgumentException("현재 가지고 있는 돈이 부족합니다.");
+    public int quotient(Money unitPrice) {
+        if (unitPrice.money == ZERO) {
+            throw new IllegalArgumentException("로또 가격은 0이 될 수 없습니다.");
         }
 
-        return new Money(this.value - other.value);
-    }
-
-    public boolean lessThan(Money other) {
-        return this.compareTo(other) < 0;
-    }
-
-    public int quotient(Money other) {
-        if (other.value == ZERO) {
-            throw new IllegalArgumentException("로또의 가격은 0이 될 수 없습니다.");
-        }
-
-        return this.value / other.value;
+        return this.money / unitPrice.money;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Money money = (Money) o;
-        return value == money.value;
+        Money other = (Money) o;
+        return money == other.money;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
-    }
-
-    @Override
-    public int compareTo(Money other) {
-        return this.value - other.value;
+        return Objects.hash(money);
     }
 }

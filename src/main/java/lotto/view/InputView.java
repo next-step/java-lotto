@@ -1,37 +1,44 @@
 package lotto.view;
 
-import java.util.Arrays;
+import lotto.Lotto;
+
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class InputView {
     private int money;
-    private List<Integer> winNumbers;
+    private String winNumbers;
+    private String bonusNumber;
 
-    private static final String DELIMITER = ", ";
-
-    public int getMoney() {
-        return money;
-    }
-
-    public void setMoney() {
+    public void getMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        this.money = new Scanner(System.in).nextInt();
+        this.money = Integer.parseInt(new Scanner(System.in).nextLine());
     }
-
-    public List<Integer> getWinNumbers() {
-        return winNumbers;
-    }
-
-    public void setWinNumbers() {
+    public void getWinNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        this.winNumbers = Arrays.stream(getNumbersAndSplit())
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        this.winNumbers = new Scanner(System.in).nextLine();
     }
 
-    private String[] getNumbersAndSplit() {
-        return new Scanner(System.in).nextLine().trim().split(DELIMITER);
+    public void getBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        this.bonusNumber = new Scanner(System.in).nextLine();
+    }
+
+    public int money() {
+        return this.money;
+    }
+
+    public String winNumbers() {
+        return this.winNumbers;
+    }
+
+    public String bonusNumber() {
+        return this.bonusNumber;
+    }
+
+    public void showLottos(List<Lotto> lottos) {
+        for (Lotto lotto : lottos) {
+            System.out.println(lotto);
+        }
     }
 }

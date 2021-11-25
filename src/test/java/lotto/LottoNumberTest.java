@@ -12,23 +12,46 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumberTest {
     @ParameterizedTest
-    @MethodSource("constructorMethodSource")
-    @DisplayName("로또번호는 1이상 45이하의 범위를 갖는다.")
-    void constructorMethod(int fail, int success) {
-        LottoNumber lottoNumber = new LottoNumber(success);
+    @MethodSource("constructorMethodSuccessSource")
+    @DisplayName("LottoNumber 는 유효한 번호를 인자로 전달받아 생성할 수 있다.")
+    void constructorMethodSuccess(int number) {
+        // given
+        LottoNumber me = new LottoNumber(number);
 
-        assertThat(lottoNumber).isEqualTo(new LottoNumber(success));
+        // when
+        LottoNumber other = new LottoNumber(number);
 
-        assertThatThrownBy(() -> {
-            new LottoNumber(fail);
-        }).isInstanceOf(IllegalArgumentException.class);
+        // then
+        assertThat(me).isEqualTo(other);
     }
 
-    static Stream<Arguments> constructorMethodSource() {
+    static Stream<Arguments> constructorMethodSuccessSource() {
         return Stream.of(
-                Arguments.of(-1, 1),
-                Arguments.of(0, 15),
-                Arguments.of(46, 45)
+                Arguments.of(1),
+                Arguments.of(20),
+                Arguments.of(45)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("constructorMethodFailSource")
+    @DisplayName("LottoNumber 는 유효한 번호를 전달 받지 못한 경우 생성할 수 없다.")
+    void constructorMethodFail(int number) {
+        // given
+        assertThatThrownBy(() -> {
+            new LottoNumber(number);
+        }).isInstanceOf(IllegalArgumentException.class);
+
+        // when
+
+        // then
+    }
+
+    static Stream<Arguments> constructorMethodFailSource() {
+        return Stream.of(
+                Arguments.of(-1),
+                Arguments.of(0),
+                Arguments.of(46)
         );
     }
 }
