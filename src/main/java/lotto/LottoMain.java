@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoShop;
 import lotto.domain.Lottos;
 import lotto.domain.Ranks;
+import lotto.domain.dto.RanksDto;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -19,7 +20,7 @@ public class LottoMain {
         String winningNumber = InputView.readWinningNumber();
 
         Ranks ranks = lottos.checkWinning(new Lotto(winningNumber));
-        ResultView.printResult(ranks);
+        ResultView.printResult(new RanksDto(ranks));
     }
 
 }

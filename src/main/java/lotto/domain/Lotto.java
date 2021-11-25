@@ -7,18 +7,19 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    public static final int NUMBER_COUNT = 6;
+    public static final String STRING_NUMBERS_DELIMITER = ",";
+
+    private static final int NUMBER_COUNT = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto() {
-        this(pickRandomNumber(NUMBER_COUNT));
+        this(pickRandomNumber());
     }
 
-    private static List<LottoNumber> pickRandomNumber(int numberCount) {
-        // 중복제거하여 랜덤으로 뽑는 방법을 이렇게 작성했다면 10점 만점에 몇 점 정도일까? 6점정도?
+    private static List<LottoNumber> pickRandomNumber() {
         Set<LottoNumber> tmpLottoNumbers = new HashSet<>();
-        while (tmpLottoNumbers.size() < numberCount) {
+        while (tmpLottoNumbers.size() < NUMBER_COUNT) {
             tmpLottoNumbers.add(LottoNumber.valueOf(RandomUtil.randomInt(LottoNumber.MAX_VALUE)));
         }
 
@@ -28,11 +29,11 @@ public class Lotto {
     }
 
     public Lotto(final String numbers) {
-        this(Arrays.stream(numbers.split(","))// 뭔가 길지 않나... 이 방향이 맞는지 의심.
+        this(Arrays.stream(numbers.split(STRING_NUMBERS_DELIMITER))
                 .map(String::trim)
                 .mapToInt(Integer::parseInt)
                 .sorted()
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList()));
     }
 

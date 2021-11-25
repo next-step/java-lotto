@@ -11,8 +11,8 @@ public enum Rank {
 
     private static final int MIN_MATCH_COUNT = 0;
 
-    private int matchCount;
-    private int prize;
+    private final int matchCount;
+    private final int prize;
 
     Rank(int matchCount, int prize) {
         this.matchCount = matchCount;

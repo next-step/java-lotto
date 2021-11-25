@@ -9,14 +9,15 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class CashierTest {
-    private final Cashier cashier = new Cashier();
+public class LottoShopTest {
+
+    private final LottoShop shop = new LottoShop();
 
     @DisplayName("구매 가능한 로또 개수 계산하기")
     @ParameterizedTest
     @CsvSource(value = {"1000,1", "1500,1"})
     void calculateCountAvailable(int money, int availableLottoCount) {
-        assertThat(cashier.calculateCountAvailable(money))
+        assertThat(shop.calculateCountAvailable(money))
                 .isEqualTo(availableLottoCount);
     }
 
@@ -24,7 +25,7 @@ public class CashierTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 500})
     void calculateCountAvailable_zero_count_fail(int money) {
-        assertThatThrownBy(() -> cashier.calculateCountAvailable(money))
+        assertThatThrownBy(() -> shop.calculateCountAvailable(money))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("해당 금액으로는 로또를 사실 수 없습니다.");
     }
@@ -32,7 +33,7 @@ public class CashierTest {
     @DisplayName("구매 가능한 로또 개수 계산하기(돈이 음수_실패)")
     @Test
     void calculateCountAvailable_fail() {
-        assertThatThrownBy(() -> cashier.calculateCountAvailable(-1000))
+        assertThatThrownBy(() -> shop.calculateCountAvailable(-1000))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("해당 금액으로는 로또를 사실 수 없습니다.");
     }
