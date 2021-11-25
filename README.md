@@ -41,6 +41,11 @@ LottoNumber
 Lotto
 
 * `Set<LottoNumber>` field 를 하나 가지며 크기는 6이어야 한다.
+* Lotto 는 LottoNumber 와 협력하여 LottoNumber 가 Lotto 에 있는지 확인할 수 있다.
+
+WinLotto
+
+* `Lotto` field 와 `LottoNumber` field 총 두개를 가지며 `LottoNumber` 는 `Lotto` 에 없는 것이어야 한다.
 
 
 
