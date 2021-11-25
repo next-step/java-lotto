@@ -43,3 +43,15 @@ null이 포함되지 않고 값이 무조건 있거나, 사용하는 곳에서 �
 그렇다면 서비스의 역할은?
 : 각각의 객체에 있는 로직을 합쳐서 원하는 최종 결과를 만들기?
 ```
+
+## 피드백 2차
+- AbstractLottoTicket : 메서드 이름에 특정 자료구조 넣지 않기
+```
+generateHashSetLottoNumber -> generateLottoNumber
+메소드 네이밍에 대해서 조금 더 알아볼 필요가 있을 것 같다.
+```
+
+- 로또 생성 방식을 유연하게 변경해보자.
+- WinningRank 클래스 테스트 클래스 생성하기
+- WinningResultTest : 등수에 따라 몇 개인지에 대한 테스트 케이스 추가
+- WinnerLottoTicket : winnerCount 메소드명은 동사가 앞에 와야한다.
