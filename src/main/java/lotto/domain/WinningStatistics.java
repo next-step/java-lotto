@@ -25,7 +25,7 @@ public class WinningStatistics {
             int matchCount = winningLotto.matchCount(lotto);
             boolean matchBonus = winningLotto.matchBonus(lotto);
 
-            Rank rank = Rank.from(matchCount, matchBonus);
+            Rank rank = Rank.from(LottoMatch.of(matchCount, matchBonus));
 
             int count = winningStatistics.getOrDefault(rank, DEFALUT_RANK_COUNT);
             winningStatistics.put(rank, count + COUNT_ADD_VALUE);
