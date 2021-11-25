@@ -45,4 +45,20 @@ public class LottoTest {
 
     }
 
+    @Test
+    @DisplayName("맞은 개수 카운트 검증")
+    void checkCount() {
+        List<Integer> winningNumber = Arrays.asList(1,2,3,4,5,6);
+
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+                LottoNumber.from(1),LottoNumber.from(2),LottoNumber.from(3),
+                LottoNumber.from(4),LottoNumber.from(5),LottoNumber.from(10)
+        );
+
+        Lotto winning = Lotto.winningFrom(winningNumber);
+        Lotto auto = Lotto.from(lottoNumbers);
+
+        assertThat(auto.countOfMatch(winning, 5)).isTrue();
+    }
+
 }

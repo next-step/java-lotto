@@ -29,6 +29,16 @@ public class Lotto {
         return new Lotto(number);
     }
 
+    public static Lotto winningFrom(List<Integer> number) {
+
+        List<LottoNumber> numbers = new ArrayList<>();
+        for(int i = 0; i < number.size(); i++) {
+            numbers.add(LottoNumber.from(number.get(i)));
+        }
+
+        return new Lotto(numbers);
+    }
+
     public List<LottoNumber> getNumbers() {
         return numbers;
     }
@@ -53,6 +63,22 @@ public class Lotto {
         if(!autoNumbers.contains(randomNumber)) {
             autoNumbers.add(randomNumber);
         }
+    }
+
+    public int calculatePrizeMoney(Lotto winningNumbers) {
+        return Rank.valueOf(countOfMatch(winningNumbers)).getPrizeMoney();
+    }
+
+    private int countOfMatch(Lotto winningNumbers) {
+        return (int) numbers.stream()
+                .filter(winningNumbers.getNumbers()::contains)
+                .count();
+    }
+
+    public boolean countOfMatch(Lotto winningNumbers, int count) {
+        return (int) numbers.stream()
+                .filter(winningNumbers.getNumbers()::contains)
+                .count() == count;
     }
 
     @Override

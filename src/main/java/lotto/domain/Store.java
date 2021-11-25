@@ -39,10 +39,9 @@ public class Store {
                 throw new IllegalArgumentException("숫자만 입력 가능합니다!!!!");
             }
         }
-
-        if (Integer.parseInt(orderPrice) < LOTTO_PRICE) {
-            throw new IllegalArgumentException("로또 살수 있는 최소 금액은 1000원 입니다!!");
-        }
     }
 
+    public OrderPrice getOrderPrice() {
+        return orderPrice;
+    }
 }
