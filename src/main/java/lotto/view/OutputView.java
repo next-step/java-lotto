@@ -18,8 +18,8 @@ public class OutputView {
     }
 
     public void drawResultWinLotto(Lottoes lottoes) {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+        System.out.println(MSG_WINNING_STATISTICS);
+        System.out.println(MSG_DASH_TEN);
 
         System.out.println(getRankMsg(NUMBER_THREE.longValue(), lottoes));
         System.out.println(getRankMsg(NUMBER_FOUR.longValue(), lottoes));
@@ -27,12 +27,20 @@ public class OutputView {
         System.out.println(getRankMsg(NUMBER_SIX.longValue(), lottoes));
     }
 
-    public String getRankMsg(Long rank, Lottoes lottoes) {
+    public StringBuilder getRankMsg(Long rank, Lottoes lottoes) {
         RankEnum rankEnum = RankEnum.findBy(rank);
         StringBuilder sb = new StringBuilder();
         sb.append(rankEnum.getMsg());
         sb.append(lottoes.winRankLottoCount(rank));
         sb.append(MSG_NUMBER);
-        return sb.toString();
+        return sb;
+    }
+
+    public void drawTotalReward(Double yield) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(MSG_TOTAL_YIELD);
+        sb.append(yield);
+        sb.append(MSG_IS);
+        System.out.println(sb);
     }
 }

@@ -1,7 +1,5 @@
 package lotto.utils;
 
-import org.omg.CORBA.UNKNOWN;
-
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
@@ -44,5 +42,4 @@ public enum RankEnum {
     public static RankEnum findBy(Long rank) {
         return Optional.ofNullable(rankEnums.get(rank)).orElse(null);
     }
-
 }

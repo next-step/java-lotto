@@ -20,6 +20,10 @@ public class Lottoes {
         this.lottoGames = lottoGames;
     }
 
+    public Lottoes(Long totalReward) {
+        this.totalReward = totalReward;
+    }
+
     public void makeLottoes(LottoGameCount lottoGameCount) {
         for (int i = NUMBER_ZERO; i < lottoGameCount.getLottoGameCount(); i++) {
             lottoGames.add(new LottoGame(new LottoNumbers().createAutoLottoNumbers()));

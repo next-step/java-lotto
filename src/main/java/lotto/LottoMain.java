@@ -11,5 +11,4 @@ public class LottoMain {
         lottoGameService.resultWinLotto();
         lottoGameService.resultTotalReward();
     }
-
 }

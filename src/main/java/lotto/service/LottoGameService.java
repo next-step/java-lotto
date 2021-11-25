@@ -8,12 +8,23 @@ import lotto.view.OutputView;
 
 import java.util.Objects;
 
+import static lotto.utils.Constants.NUMBER_THOUSAND;
+
 public class LottoGameService {
     private LottoGameCount lottoGameCount;
     private InputView inputView;
     private OutputView outputView;
     private Lottoes lottoes;
     private LottoNumbers lastWeekWinningNumbers;
+
+    public LottoGameService() {
+
+    }
+
+    public LottoGameService(LottoGameCount lottoGameCount, Lottoes lottoes) {
+        this.lottoGameCount = lottoGameCount;
+        this.lottoes = lottoes;
+    }
 
     public void buyLotto() {
         inputView = new InputView();
@@ -41,7 +52,13 @@ public class LottoGameService {
     }
 
     public void resultTotalReward() {
-//        lottoes
+        lottoes.calculateTotalReward();
+        outputView.drawTotalReward(calculateYield());
+    }
+
+    public Double calculateYield() {
+        return (lottoes.getTotalReward().doubleValue() /
+                (lottoGameCount.getLottoGameCount().doubleValue() * NUMBER_THOUSAND));
     }
 
     @Override

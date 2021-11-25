@@ -25,5 +25,4 @@ public class LottoGameCount {
     public int hashCode() {
         return Objects.hash(lottoGameCount);
     }
-
 }

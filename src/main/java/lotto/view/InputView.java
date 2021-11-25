@@ -44,10 +44,6 @@ public class InputView {
         return lastWeekWinnigNumbers;
     }
 
-    public void validateLottoNumberOneToFortyfive(String[] lottoNumber) {
-
-    }
-
     public LottoGameCount getLottoGameCount() {
         return new LottoGameCount(inputPrice.divideByThousands());
     }
@@ -64,7 +60,4 @@ public class InputView {
     public int hashCode() {
         return Objects.hash(inputPrice);
     }
-
-
-
 }
