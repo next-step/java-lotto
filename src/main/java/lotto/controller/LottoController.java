@@ -40,9 +40,9 @@ public class LottoController {
         return lottos;
     }
 
-    private List<Number> makeWinningNumber(String[] array) {
-        return Arrays.stream(array)
-                     .map(Number::new)
-                     .collect(Collectors.toList());
+    private Lotto makeWinningNumber(String[] array) {
+        return new Lotto(Arrays.stream(array)
+                               .map(Number::new)
+                               .collect(Collectors.toList()));
     }
 }

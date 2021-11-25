@@ -15,7 +15,7 @@ public class Lottos {
         return Collections.unmodifiableList(purchasedLottos);
     }
 
-    public Result match(List<Number> winningNumber) {
+    public Result match(Lotto winningNumber) {
         Result result = new Result();
         purchasedLottos.stream()
                        .map(lotto -> lotto.match(winningNumber))

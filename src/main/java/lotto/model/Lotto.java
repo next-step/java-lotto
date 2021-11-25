@@ -12,10 +12,10 @@ public class Lotto {
         this.pickedNumbers = pickedNumbers;
     }
 
-    public int match(List<Number> winningNumber) {
-        return (int) winningNumber.stream()
-                                  .filter(pickedNumbers::contains)
-                                  .count();
+    public int match(Lotto winningNumber) {
+        return (int) winningNumber.pickedNumbers.stream()
+                                                .filter(pickedNumbers::contains)
+                                                .count();
     }
 
     @Override
