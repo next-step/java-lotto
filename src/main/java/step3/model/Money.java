@@ -32,7 +32,7 @@ public class Money {
     }
 
     public boolean isUnableToYield() {
-        return money == 0;
+        return money == MIN;
     }
 
     public long won() {

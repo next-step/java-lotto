@@ -27,5 +27,5 @@
 
 ### 질문
 
-    1. LottoMachine의 purchase 메서드에서 로또 리스트 생성의 책임이 LottoBundle에게 가는 것이 더 
-    객체지향적인 설계인지
+    1. Lotto에서 checkDuplicate 메서드를 생성자에서 재활용하고 싶은데, 할당먼저 하고 체크 하는게 괜찮은지
+    2. Enum에 comparable을 적용하면 자동으로 선언순서가 적용된다는 것을 알게되었습니다.
