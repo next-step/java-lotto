@@ -7,7 +7,7 @@ public class Money {
     public static final int LOTTO_PRICE = 1000;
     public static final int ZERO = 0;
 
-    private final int money;
+    private int money;
 
     private Money(int money) {
         validateMinuminMoney(money);
@@ -36,10 +36,19 @@ public class Money {
     }
 
     public Money manualLottoMoney(int manualLottoCount) {
+        validateManualLottoCount(manualLottoCount);
         return new Money(manualLottoCount * LOTTO_PRICE);
     }
 
     public Money autoLottoMoney(int manualLottoCount) {
         return new Money(money - (manualLottoCount * LOTTO_PRICE));
+    }
+
+    public boolean canBuy() {
+        return money >= LOTTO_PRICE;
+    }
+
+    public void buy() {
+        this.money -= LOTTO_PRICE;
     }
 }

@@ -18,16 +18,16 @@ public class Application {
     public static void main(String[] args) {
         Money money = getPurchaseAount();
 
-        int manualLottoCount = getManualLottoCount(money);
+        Money manualLottoMoney = money.manualLottoMoney(getManualLottoCount(money));
+        int manualLottoCount = manualLottoMoney.lottoCount();
 
-        Money manualLottoMoney = money.manualLottoMoney(manualLottoCount);
         Money autoLottoMoney = money.autoLottoMoney(manualLottoCount);
 
         List<Lotto> lottos = new ArrayList<>();
 
-        while (manualLottoCount > 0) {
+        while (manualLottoMoney.canBuy()) {
+            manualLottoMoney.buy();
             Output.askManualLottosNumber();
-            manualLottoCount --;
             String manualLottosNumber = Input.askManualLottosNumber();
             String[] manualLottosNumbers = split(manualLottosNumber);
             List<LottoNumber> lottoNumbers = ManualLottoNumbersGenerator.from(manualLottosNumbers).generate();
@@ -39,7 +39,7 @@ public class Application {
 
         manualLottos.merge(autoLottos);
 
-        Output.printLottosCount(manualLottoMoney.lottoCount(), autoLottoMoney.lottoCount());
+        Output.printLottosCount(manualLottoCount, autoLottoMoney.lottoCount());
         Output.printLottos(manualLottos);
 
         String askWinningNumbers = Input.askWinningNumber();
