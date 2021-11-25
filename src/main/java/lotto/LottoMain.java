@@ -9,6 +9,7 @@ public class LottoMain {
         lottoGameService.getLastWeekWinningNumbers();
         lottoGameService.matchLottoNumbers();
         lottoGameService.resultWinLotto();
+        lottoGameService.resultTotalReward();
     }
 
 }
