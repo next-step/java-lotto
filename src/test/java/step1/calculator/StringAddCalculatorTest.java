@@ -1,4 +1,4 @@
-package step1;
+package step1.calculator;
 
 import org.junit.jupiter.api.Test;
 
