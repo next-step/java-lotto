@@ -39,13 +39,15 @@ public class InputView {
             .collect(toList());
     }
 
-    public static LottoNumber readBonusNumber() {
+    public static LottoNumber readBonusNumberNotContains(Lotto winner) {
         System.out.println(BONUS_INPUT_MESSAGE);
         try {
-            return new LottoNumber(InputUtil.readInt());
+            LottoNumber bonusNumber = new LottoNumber(InputUtil.readInt());
+            winner.checkDuplicate(bonusNumber);
+            return bonusNumber;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return readBonusNumber();
+            return readBonusNumberNotContains(winner);
         }
     }
 

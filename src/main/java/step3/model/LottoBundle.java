@@ -14,4 +14,11 @@ public class LottoBundle {
     public List<Lotto> getLottoList() {
         return Collections.unmodifiableList(lottoList);
     }
+
+    public LottoPrize totalReward(Lotto winner, LottoNumber bonusNumber) {
+        for (Lotto lotto : lottoList) {
+            LottoReward lottoReward = lotto.getReward(winner, bonusNumber);
+        }
+        return null;
+    }
 }

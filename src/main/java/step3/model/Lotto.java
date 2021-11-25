@@ -41,4 +41,14 @@ public class Lotto {
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
+
+    public LottoReward getReward(Lotto winner, LottoNumber bonusNumber) {
+        return null;
+    }
+
+    public void checkDuplicate(LottoNumber lottoNumber) {
+        if (lottoNumbers.contains(lottoNumber)) {
+            throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
+        }
+    }
 }
