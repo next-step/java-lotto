@@ -7,16 +7,16 @@ import java.util.Map;
 /**
  * @author han
  */
-public class StatisticsResult {
-    private final Map<Rank, Integer> rankIntegerMap;
+public class StatisticResult {
+    private final Map<Rank, Long> rankIntegerMap;
     private final String profit;
 
-    public StatisticsResult(Map<Rank, Integer> result, String profit) {
+    public StatisticResult(Map<Rank, Long> result, String profit) {
         this.rankIntegerMap = result;
         this.profit = profit;
     }
 
-    public Map<Rank, Integer> getRankIntegerMap() {
+    public Map<Rank, Long> getRankIntegerMap() {
         return rankIntegerMap;
     }
 
