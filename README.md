@@ -38,7 +38,9 @@ LottoNumber
 
 * `int` field 를 하나 가지며 그 값은 1이상 45이하이다.
 
+Lotto
 
+* `Set<LottoNumber>` field 를 하나 가지며 크기는 6이어야 한다.
 
 
 
