@@ -14,7 +14,9 @@ public final class ScannerUtils {
     public static int nextInt() {
         validateNextIntOrThrow();
         int input = scanner.nextInt();
-        scanner.nextLine();
+        if (scanner.hasNextLine()) {
+            scanner.nextLine();
+        }
         return input;
     }
 
