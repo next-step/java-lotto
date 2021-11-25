@@ -21,4 +21,8 @@ public class Lottos {
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
+
+    public void merge(Lottos other) {
+        this.lottos.addAll(other.lottos);
+    }
 }

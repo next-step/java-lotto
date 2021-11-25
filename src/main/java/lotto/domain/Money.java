@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.ManualLottoCountException;
 import lotto.exception.MinimumAmountException;
 
 public class Money {
@@ -25,5 +26,20 @@ public class Money {
 
     public int lottoCount() {
         return money / LOTTO_PRICE;
+    }
+
+    public int validateManualLottoCount(int manualLottoCount) {
+        if (manualLottoCount * LOTTO_PRICE > money) {
+            throw new ManualLottoCountException(manualLottoCount);
+        }
+        return manualLottoCount;
+    }
+
+    public Money manualLottoMoney(int manualLottoCount) {
+        return new Money(manualLottoCount * LOTTO_PRICE);
+    }
+
+    public Money autoLottoMoney(int manualLottoCount) {
+        return new Money(money - (manualLottoCount * LOTTO_PRICE));
     }
 }
