@@ -1,7 +1,5 @@
 package lotto;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -13,13 +11,14 @@ public class LottoNumberTest {
     @ValueSource(ints = {1, 20, 45})
     void create(int number) {
         // given
-        LottoNumber self = new LottoNumber(number);
+        LottoNumber self = LottoNumber.of(number);
 
         // when
-        LottoNumber other = new LottoNumber(number);
+        LottoNumber other = LottoNumber.of(number);
 
         // then
         assertThat(self).isEqualTo(other);
+        assertThat(self == other).isTrue();
     }
 
     @ParameterizedTest
@@ -27,7 +26,7 @@ public class LottoNumberTest {
     void invalid_create(int number) {
         // given
         assertThatThrownBy(() -> {
-            new LottoNumber(number);
+            LottoNumber.of(number);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
