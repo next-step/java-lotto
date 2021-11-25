@@ -2,7 +2,9 @@ package lotto.model;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
+import java.util.function.ToIntFunction;
 
 public class Result {
 
@@ -39,8 +41,16 @@ public class Result {
     public int calculateWinningAmount() {
         return matchedCounts.entrySet()
                             .stream()
-                            .mapToInt(entry -> entry.getKey().winningAmount(entry.getValue()))
+                            .mapToInt(calculateEachWinningAmount())
                             .sum();
+    }
+
+    private ToIntFunction<Entry<Match, Integer>> calculateEachWinningAmount() {
+        return entry -> {
+            Match match = entry.getKey();
+            Integer matchedCount = entry.getValue();
+            return match.getPrice() * matchedCount;
+        };
     }
 
     public Double calculateRatio(int purchasedAmount) {

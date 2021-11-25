@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class Number {
 
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
     private final int value;
 
     public Number(int input) {
@@ -12,7 +14,7 @@ public class Number {
     }
 
     private void validateInputOrThrow(int input) {
-        if (input < 0) {
+        if (input < MIN_LOTTO_NUMBER || input > MAX_LOTTO_NUMBER) {
             throw new RuntimeException("input number must be positive");
         }
     }

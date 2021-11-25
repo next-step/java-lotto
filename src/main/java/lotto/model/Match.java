@@ -23,10 +23,6 @@ public enum Match {
                      .orElseThrow(() -> new IllegalArgumentException("not matched count."));
     }
 
-    public int winningAmount(int matchedCount) {
-        return this.price * matchedCount;
-    }
-
     public int getMatchedCount() {
         return matchedCount;
     }
