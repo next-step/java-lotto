@@ -38,17 +38,27 @@ public class Lotto {
         }
     }
 
+    public void checkDuplicate(LottoNumber lottoNumber) {
+        if (contains(lottoNumber)) {
+            throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
+        }
+    }
+
+    private boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
     public LottoReward getReward(Lotto winner, LottoNumber bonusNumber) {
-        return null;
+        return LottoReward.of(countMatch(winner), contains(bonusNumber));
     }
 
-    public void checkDuplicate(LottoNumber lottoNumber) {
-        if (lottoNumbers.contains(lottoNumber)) {
-            throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
-        }
+    private long countMatch(Lotto other) {
+        return lottoNumbers.stream()
+            .filter(other::contains)
+            .count();
     }
 }

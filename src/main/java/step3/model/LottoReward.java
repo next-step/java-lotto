@@ -1,6 +1,8 @@
 package step3.model;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public enum LottoReward {
     FIRST(6, 2_000_000_000),
@@ -10,15 +12,17 @@ public enum LottoReward {
     FIFTH(3, 5_000),
     BANG(0, 0);
 
-    private final int matchCount;
+    private static final long DEFAULT_WINNER_COUNT = 0L;
+
+    private final long matchCount;
     private final Money reward;
 
-    LottoReward(int matchCount, int reward) {
+    LottoReward(long matchCount, int reward) {
         this.matchCount = matchCount;
         this.reward = new Money(reward);
     }
 
-    public int getMatchCount() {
+    public long getMatchCount() {
         return matchCount;
     }
 
@@ -26,7 +30,7 @@ public enum LottoReward {
         return reward;
     }
 
-    public static LottoReward of(int matchCount, boolean isBonusMatch) {
+    public static LottoReward of(long matchCount, boolean isBonusMatch) {
         LottoReward lottoReward = fromMatchCount(matchCount);
         if (lottoReward.equals(THIRD) && isBonusMatch) {
             return SECOND;
@@ -34,10 +38,17 @@ public enum LottoReward {
         return lottoReward;
     }
 
-    private static LottoReward fromMatchCount(int matchCount) {
+    private static LottoReward fromMatchCount(long matchCount) {
         return Arrays.stream(values())
             .filter(lottoReward -> lottoReward.getMatchCount() == matchCount)
             .findAny()
             .orElse(BANG);
+    }
+
+    public static Map<LottoReward, Long> getDefaultRewardMap() {
+        Map<LottoReward, Long> defaultRewardMap = new HashMap<>();
+        Arrays.stream(values())
+            .forEach(lottoReward -> defaultRewardMap.put(lottoReward, DEFAULT_WINNER_COUNT));
+        return defaultRewardMap;
     }
 }
