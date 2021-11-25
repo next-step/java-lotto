@@ -37,6 +37,10 @@ public class LottoGameService {
         });
     }
 
+    public void resultWinLotto() {
+        outputView.drawResultWinLotto(lottoes);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

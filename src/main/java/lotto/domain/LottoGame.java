@@ -10,6 +10,10 @@ public class LottoGame {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public LottoGame(Long matchedCount) {
+        this.matchedCount = matchedCount;
+    }
+
     public void matchLottoNumbers(LottoNumbers lastWeekWinningNumbers) {
         matchedCount = lottoNumbers.getLottoNumbers().stream()
                 .filter(lottoNumber -> lastWeekWinningNumbers.getLottoNumbers().contains(lottoNumber))
@@ -18,6 +22,10 @@ public class LottoGame {
 
     public LottoNumbers getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public Long getMatchedCount() {
+        return matchedCount;
     }
 
     @Override

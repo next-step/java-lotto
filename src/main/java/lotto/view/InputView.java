@@ -39,6 +39,7 @@ public class InputView {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList()));
         lastWeekWinnigNumbers.validateLottoNumbersLength();
+        System.out.println();
 
         return lastWeekWinnigNumbers;
     }

@@ -23,6 +23,12 @@ public class Lottoes {
         }
     }
 
+    public Long winRankLottoCount(Long rankCount) {
+        return lottoGames.stream()
+                .filter(lottoGame -> lottoGame.getMatchedCount() == rankCount)
+                .count();
+    }
+
     public List<LottoGame> getLottoGames() {
         return lottoGames;
     }
