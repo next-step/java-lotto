@@ -5,9 +5,9 @@ import lotto.model.domain.Rank;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class ResultMapManager {
+public class ResultMapGenerator {
 
-    private ResultMapManager() {}
+    private ResultMapGenerator() {}
 
     public static Map<Rank, Integer> init() {
         Map<Rank, Integer> map = new LinkedHashMap<Rank, Integer>();

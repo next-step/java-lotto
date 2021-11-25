@@ -1,5 +1,7 @@
 package lotto.model.domain;
 
+import java.util.Arrays;
+
 public enum Rank {
 
     FIRST(6, 2_000_000_000),
@@ -30,14 +32,12 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        for(Rank rank : values()) {
-            if(countOfMatch == SECOND.countOfMatch) {
-                return matchBonus ? SECOND : THIRD;
-            }
-            if (rank.countOfMatch == countOfMatch) {
-                return rank;
-            }
+        if(countOfMatch == SECOND.countOfMatch) {
+            return matchBonus ? SECOND : THIRD;
         }
-        return MISS;
+        return Arrays.stream(values())
+                    .filter(rank -> rank.countOfMatch == countOfMatch)
+                    .findFirst()
+                    .orElse(MISS);
     }
 }

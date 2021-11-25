@@ -7,7 +7,7 @@ import java.util.Map;
 public class LotteryGameResultDto {
 
     private static final int LOSS_STANDARD = 1;
-    private final Map<Rank, Integer> result = ResultMapManager.init();
+    private final Map<Rank, Integer> result = ResultMapGenerator.init();
     private final int amount;
 
     public LotteryGameResultDto(int amount) {
