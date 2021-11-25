@@ -29,7 +29,12 @@ public class LottoGameService {
 
     public void getLastWeekWinningNumbers() {
         lastWeekWinningNumbers = inputView.inputLastWeekWinningNumbers();
-        System.out.println(lastWeekWinningNumbers);
+    }
+
+    public void matchLottoNumbers() {
+        lottoes.getLottoGames().forEach(lottoGame -> {
+            lottoGame.matchLottoNumbers(lastWeekWinningNumbers);
+        });
     }
 
     @Override

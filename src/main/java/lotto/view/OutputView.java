@@ -11,8 +11,9 @@ public class OutputView {
     }
 
     public void drawPurchasedLottoes(Lottoes lottoes) {
-        lottoes.getLottoNumbers().forEach(lotto ->
-                System.out.println(lotto.getLottoNumbers()));
+        lottoes.getLottoGames().forEach(lottoGame ->
+                System.out.println(lottoGame.getLottoNumbers().getLottoNumbers()));
         System.out.println();
     }
+
 }

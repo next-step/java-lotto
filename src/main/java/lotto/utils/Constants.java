@@ -15,4 +15,5 @@ public class Constants {
     public static final String MSG_LOTTO_NUMBER_ONE_TO_FORTY_FIVE ="지난 주 당첨 번호는 1~45만 입력할 수 있습니다.";
 
     public static final String COMMA = ",";
+    public static final String COMMA_BLANK = ", ";
 }

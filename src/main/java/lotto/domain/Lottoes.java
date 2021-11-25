@@ -7,38 +7,36 @@ import java.util.Objects;
 import static lotto.utils.Constants.NUMBER_ZERO;
 
 public class Lottoes {
-    private List<LottoNumbers> lottoNumbers;
+    private List<LottoGame> lottoGames;
 
     public Lottoes() {
-        this.lottoNumbers = new ArrayList<>();
+        this.lottoGames = new ArrayList<>();
     }
 
-    public Lottoes(List<LottoNumbers> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public Lottoes(List<LottoGame> lottoGames) {
+        this.lottoGames = lottoGames;
     }
 
     public void makeLottoes(LottoGameCount lottoGameCount) {
         for (int i = NUMBER_ZERO; i < lottoGameCount.getLottoGameCount(); i++) {
-            lottoNumbers.add(new LottoNumbers().createAutoLottoNumbers());
+            lottoGames.add(new LottoGame(new LottoNumbers().createAutoLottoNumbers()));
         }
     }
 
-    public List<LottoNumbers> getLottoNumbers() {
-        return lottoNumbers;
+    public List<LottoGame> getLottoGames() {
+        return lottoGames;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Lottoes lottos = (Lottoes) o;
-        return Objects.equals(lottoNumbers, lottos.lottoNumbers);
+        Lottoes lottoes = (Lottoes) o;
+        return Objects.equals(lottoGames, lottoes.lottoGames);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumbers);
+        return Objects.hash(lottoGames);
     }
-
-
 }

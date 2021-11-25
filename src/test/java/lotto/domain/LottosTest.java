@@ -11,9 +11,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
     @Test
-    @DisplayName("Lottos 생성자 테스트")
+    @DisplayName("Lottoes 생성자 테스트")
     public void constructor() {
-        assertThat(new Lottoes(Arrays.asList(new LottoNumbers(IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList())))))
-                .isEqualTo(new Lottoes(Arrays.asList(new LottoNumbers(IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList())))));
+        assertThat(new Lottoes(Arrays.asList(new LottoGame(new LottoNumbers(IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList()))))))
+                .isEqualTo(new Lottoes(Arrays.asList(new LottoGame(new LottoNumbers(IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList()))))));
     }
 }

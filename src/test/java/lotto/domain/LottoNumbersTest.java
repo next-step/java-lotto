@@ -1,11 +1,9 @@
 package lotto.domain;
 
-import lotto.view.InputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -47,5 +45,15 @@ public class LottoNumbersTest {
             lottoNumbers.validateLottoNumbersOneToFortyfive();
         }).isInstanceOf(IndexOutOfBoundsException.class)
                 .hasMessageContaining("지난 주 당첨 번호는 1~45만 입력할 수 있습니다.");
+    }
+
+    @Test
+    @DisplayName("지난 주 당첨 번호를 콤마로 이어준다.")
+    public void getLottoNumbersJoinComma() {
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 45));
+        assertThat(lottoNumbers.getLottoNumbers().stream()
+                .map(number -> number.toString())
+                .collect(Collectors.joining(", ")))
+                .isEqualTo("1, 2, 3, 4, 5, 45");
     }
 }
