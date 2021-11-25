@@ -31,7 +31,12 @@
 
  Money
 
+* `int` field 를 하나 가지며 그 값은 0 이상이다.
 * Money 는 다른 Money 와 협력하여 몫을 구할 수 있다.
+
+LottoNumber
+
+* `int` field 를 하나 가지며 그 값은 1이상 45이하이다.
 
 
 
