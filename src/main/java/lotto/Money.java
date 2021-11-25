@@ -7,15 +7,36 @@ public class Money {
 
     private final int value;
 
+    /*
+        CONSTRUCTOR
+     */
     public Money(int value) {
         validateGreaterThanEqualToZero(value);
 
         this.value = value;
     }
 
+    /*
+        INTERFACE
+     */
+    public int quotient(Money other) {
+        validateNotEqualToZero(other);
+
+        return this.value / other.value;
+    }
+
+    /*
+        FUNCTION
+     */
     private void validateGreaterThanEqualToZero(int value) {
         if (value < ZERO) {
             throw new IllegalArgumentException("돈은 음수의 상태를 가질 수 없습니다.");
+        }
+    }
+
+    private void validateNotEqualToZero(Money money) {
+        if (money.value == ZERO) {
+            throw new IllegalArgumentException("나누는 값은 0이 될 수 없습니다.");
         }
     }
 
