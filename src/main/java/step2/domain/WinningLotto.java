@@ -1,18 +1,21 @@
 package step2.domain;
 
+import step2.validator.StringNumberValidator;
+
 import java.util.List;
 
 public class WinningLotto {
-    private static final String REGEX = ", ";
-
     private Lotto lotto;
 
-    public WinningLotto(String[] splitNumbers) {
-        this.lotto = Lotto.of(splitNumbers);
+    private WinningLotto() {
+    }
+
+    private WinningLotto(String[] numbers) {
+        this.lotto = Lotto.of(numbers);
     }
 
     public static WinningLotto create(String numbers) {
-        return new WinningLotto(splitNumbers(numbers));
+        return new WinningLotto(StringNumberValidator.splitNumbers(numbers));
     }
 
     public Lotto getLotto() {
@@ -21,9 +24,5 @@ public class WinningLotto {
 
     public List<Number> getLottoNumbers() {
         return lotto.getLottoNumbers();
-    }
-
-    private static String[] splitNumbers(String numbers) {
-        return numbers.split(REGEX);
     }
 }

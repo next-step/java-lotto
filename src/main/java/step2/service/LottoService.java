@@ -3,6 +3,7 @@ package step2.service;
 import step2.domain.Number;
 import step2.domain.*;
 import step2.strategy.NumberGeneratorStrategy;
+import step2.validator.StringNumberValidator;
 
 public class LottoService {
     private static final int MIN_MATCH_COUNT = 3;
@@ -16,13 +17,16 @@ public class LottoService {
         this.generatorStrategy = generatorStrategy;
     }
 
-    public Lottos purchase(int price) {
-        return Lottos.purchase(price, generatorStrategy);
+    public Lottos purchase(int generateCount) {
+        return Lottos.purchase(generateCount, generatorStrategy);
     }
 
-    public WinningResult winningResult(Lottos purchasedLottos, String winningNumbers, int bonusNumber) {
-        WinningLotto winningLotto = WinningLotto.create(winningNumbers);
-        return calculate(purchasedLottos, winningLotto, Number.create(bonusNumber));
+    public Lotto purchaseManualLotto(String lottoNumber) {
+        return Lotto.of(StringNumberValidator.splitNumbers(lottoNumber));
+    }
+
+    public WinningResult winningResult(Lottos purchasedLottos, WinningLotto winningLotto, Number bonusNumber) {
+        return calculate(purchasedLottos, winningLotto, bonusNumber);
     }
 
     private WinningResult calculate(Lottos purchasedLottos, WinningLotto winningLotto, Number bonusNumber) {

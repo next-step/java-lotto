@@ -1,5 +1,7 @@
 package step2.domain;
 
+import step2.validator.NumberValidator;
+
 import java.util.Objects;
 
 public class Number {
@@ -9,6 +11,7 @@ public class Number {
     private int number;
 
     private Number(int number) {
+        validateNumberBound(number);
         this.number = number;
     }
 
@@ -23,6 +26,7 @@ public class Number {
     }
 
     public static Number of(String number) {
+        NumberValidator.isDigit(number);
         return new Number(number);
     }
 
