@@ -15,10 +15,10 @@ public class Lottos {
         return Collections.unmodifiableList(purchasedLottos);
     }
 
-    public Result match(Lotto winningNumber) {
+    public Result makeResult(Lotto target) {
         Result result = new Result();
         purchasedLottos.stream()
-                       .map(lotto -> lotto.match(winningNumber))
+                       .map(lotto -> lotto.match(target))
                        .forEach(matchedCount -> result.add(matchedCount));
         return result;
     }

@@ -27,7 +27,7 @@ public class LottoController {
         ResultView.printLottos(lottos);
         String[] array = InputView.acceptWinningNumber();
 
-        Result result = lottoService.checkLotto(lottos, makeWinningNumber(array));
+        Result result = lottoService.matchLotto(lottos, makeWinningNumber(array));
 
         ResultView.printResult(purchasedCount * Lotto.eachAmount, result);
     }

@@ -22,7 +22,7 @@ public final class ResultView {
     public static void printResult(int purchasedAmount, Result result) {
         stringBuilder.setLength(0);
         stringBuilder.append("당첨 통계\n---------\n");
-        result.matchResult()
+        result.getMatchedCounts()
               .entrySet()
               .forEach(entry -> printEachMatch(entry));
 

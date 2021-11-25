@@ -8,8 +8,8 @@ import lotto.model.Result;
 
 public class LottoService {
 
-    public Result checkLotto(List<Lotto> lottos, Lotto winningNumber) {
+    public Result matchLotto(List<Lotto> lottos, Lotto winningNumber) {
         Lottos purchasedLottos = new Lottos(lottos);
-        return purchasedLottos.match(winningNumber);
+        return purchasedLottos.makeResult(winningNumber);
     }
 }

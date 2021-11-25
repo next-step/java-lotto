@@ -57,7 +57,7 @@ public class Result {
         return Math.floor(calculateWinningAmount() / (double) purchasedAmount * DECIMAL_DENOMINATOR) / DECIMAL_NUMERATOR;
     }
 
-    public Map<Match, Integer> matchResult() {
+    public Map<Match, Integer> getMatchedCounts() {
         return Collections.unmodifiableMap(matchedCounts);
     }
 }
