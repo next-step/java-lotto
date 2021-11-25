@@ -4,11 +4,11 @@ import lotto.domain.Lotto;
 import lotto.domain.PurchaseMachine;
 import lotto.domain.Rank;
 import lotto.domain.Statistics;
-import lotto.dto.StatisticsResult;
+import lotto.dto.StatisticResult;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -31,11 +31,10 @@ public class ResultView {
         }
     }
 
-    public void printResultStatics(PurchaseMachine purchaseMachine) {
-        Statistics statistics = purchaseMachine.getStatistics();
+    public void printResultStatics(Statistics statistics) {
         System.out.println(WON_STATISTICS);
         System.out.println(LINE);
-        System.out.println(statisticResult(statistics.getMatchResult()));
+        System.out.println(statisticResult(statistics.getStatisticResult()));
     }
 
     private String lottoNumberWithJoinedByComma(Lotto lotto) {
@@ -45,10 +44,10 @@ public class ResultView {
             .collect(Collectors.joining(","));
     }
 
-    private String statisticResult(StatisticsResult result) {
-        Map<Rank, Integer> map = result.getRankIntegerMap();
+    private String statisticResult(StatisticResult result) {
+        Map<Rank, Long> map = result.getRankIntegerMap();
 
-        Set<Rank> ranks = map.keySet();
+        List<Rank> ranks = Arrays.asList(Rank.FORTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
 
         StringBuilder sb = new StringBuilder();
         for (Rank r : ranks) {

@@ -2,6 +2,8 @@ package lotto;
 
 import lotto.domain.Credit;
 import lotto.domain.PurchaseMachine;
+import lotto.domain.Statistics;
+import lotto.domain.WonLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -17,10 +19,14 @@ public class Main {
         ResultView resultView = new ResultView();
 
         Credit credit = inputView.start();
-        PurchaseMachine pm = new PurchaseMachine(credit);
-        PurchaseMachine purchase = pm.purchase();
+        PurchaseMachine purchaseByCredit = new PurchaseMachine(credit);
+        PurchaseMachine purchase = purchaseByCredit.purchase();
+
         resultView.printPurchaseLottos(purchase);
-        PurchaseMachine purchaseMachineWithWonLotto = inputView.insertLastLotto(purchase);
-        resultView.printResultStatics(purchaseMachineWithWonLotto);
+
+        WonLotto wonLotto = inputView.insertWonLotto();
+        Statistics statistics = new Statistics(credit, purchase.getLottoList(), wonLotto);
+
+        resultView.printResultStatics(statistics);
     }
 }

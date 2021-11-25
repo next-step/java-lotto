@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.Credit;
 import lotto.domain.Lotto;
-import lotto.domain.PurchaseMachine;
+import lotto.domain.WonLotto;
 
 import java.util.Scanner;
 
@@ -28,10 +28,9 @@ public class InputView {
         return credit;
     }
 
-    public PurchaseMachine insertLastLotto(PurchaseMachine purchaseMachine) {
+    public WonLotto insertWonLotto() {
         System.out.println(INSERT_LAST_WON_LOTTO);
         String line = scanner.nextLine();
-        Lotto lotto = new Lotto(line);
-        return purchaseMachine.insertWonLotto(lotto);
+        return WonLotto.of(new Lotto(line));
     }
 }

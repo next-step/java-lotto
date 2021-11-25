@@ -1,8 +1,12 @@
 package lotto.domain;
 
-import lotto.dto.StatisticsResult;
+import lotto.dto.StatisticResult;
 
-import java.util.*;
+import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -11,30 +15,57 @@ import java.util.stream.Collectors;
 public class Statistics {
 
     private final Credit credit;
-    private final List<Lotto> lottos;
+    private final List<Rank> ranks;
 
-    public Statistics(Credit credit, Lotto won, List<Lotto> lottos) {
+    public Statistics(Credit credit, List<Lotto> lottoList, WonLotto wonLotto) {
         this.credit = credit;
-        this.lottos = createResult(won, lottos);
+        this.ranks = createRanksBy(lottoList, wonLotto);
     }
 
-    public List<Lotto> createResult(Lotto won, List<Lotto> lottos) {
-//        return lottos.stream()
-//            .map(l -> l.createWithWon(won))
-//            .collect(Collectors.toList());
-        return null;
+    public StatisticResult getStatisticResult() {
+        List<Rank> ranks = Rank.wonRanks;
+
+        Map<Rank, Long> map = ranks.stream()
+            .collect(Collectors.toMap(r -> r, r -> Long.valueOf(0), (a, b) -> b));
+
+        Map<Rank, Long> rankAndCount = getRankAndCountMap(this.ranks);
+        map.putAll(rankAndCount);
+
+        return new StatisticResult(map, getProfit(rankAndCount));
     }
 
-    public StatisticsResult getMatchResult() {
-        List<Rank> ranks = Arrays.asList(Rank.FORTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
-        Map<Rank, Integer> map = new TreeMap<>(Comparator.comparing(Rank::getMatch));
-        ranks.forEach(rank -> map.put(rank, 0));
+    private List<Rank> createRanksBy(List<Lotto> lottoList, WonLotto wonLotto) {
+        return lottoList.stream()
+            .map(lotto -> wonLotto.getLottoRankBy(lotto))
+            .sorted(Comparator.comparing(Rank::getMatch)
+                .reversed())
+            .collect(Collectors.toList());
+    }
 
-//        lottos.forEach(l -> map.computeIfPresent(l.getRank(), (k, v) -> v + 1));
+    private String getProfit(Map<Rank, Long> map) {
+        long profit = map.keySet()
+            .stream()
+            .mapToLong(rank -> map.get(rank) * rank.getMoney())
+            .sum();
 
-        int profit = map.keySet().stream().filter(r -> map.get(r) != 0).mapToInt(Rank::getMoney).sum();
+        if (profit == 0) {
+            return "0";
+        }
 
-        int purchaseAmount = this.credit.getPurchaseAmount();
-        return new StatisticsResult(map, String.valueOf(profit != 0 ? (double) profit / purchaseAmount : 0));
+        BigDecimal bProfit = BigDecimal.valueOf(profit);
+        BigDecimal bPurchaseAmount = BigDecimal.valueOf(this.credit.getPurchaseAmount());
+
+        return bProfit.divide(bPurchaseAmount, 2, BigDecimal.ROUND_DOWN)
+            .toString();
+    }
+
+    private Map<Rank, Long> getRankAndCountMap(List<Rank> ranks) {
+        if (ranks == null || ranks.isEmpty()) {
+            return Collections.EMPTY_MAP;
+        }
+
+        return ranks.stream()
+            .filter(rank -> rank != Rank.NONE)
+            .collect(Collectors.groupingBy(rank -> rank, Collectors.counting()));
     }
 }
