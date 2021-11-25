@@ -1,18 +1,14 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
+    public static final int MIN_VALUE = 1; //MAX_VALUE는 RandomUtil.randomInt(LottoNumber.MAX_VALUE)와 같이 사용해서 public인데,
+    public static final int MAX_VALUE = 45; // 첫번째 위와 같이 사용해도 되는가?(사용하게 될 때 자꾸 의존성을 의식하게 됨. 독립적으로 짜야하는것 아닌가?) 두번째, MIN_VALUE는 사용안하는데 private으로 둬야하는가?
 
-    private static final List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private static final LottoNumber[] lottoNumbers = new LottoNumber[MIN_VALUE + MAX_VALUE];
     static {
-        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+        for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
+            lottoNumbers[i] = new LottoNumber(i);
         }
     }
 
@@ -23,22 +19,18 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.value = value;
     }
 
-    private void validate(int value) {
-        if (value < MIN_LOTTO_NUMBER || value > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException("해당 번호의 로또번호는 없습니다.");
+    private static void validate(int value) { // static valueOf를 만들었더니 validate가 static이 되버렸다..!
+        if (value < MIN_VALUE || value > MAX_VALUE) {
+            throw new IllegalArgumentException("해당 로또번호는 없습니다.");
         }
     }
 
-    public static List<LottoNumber> getRandomNumber(int count) {
-        List<LottoNumber> tmpLottoNumbers = new ArrayList<>(LottoNumber.lottoNumbers);
-        Collections.shuffle(tmpLottoNumbers);
-
-        List<LottoNumber> lottos = tmpLottoNumbers.subList(0, count);
-        Collections.sort(lottos);
-        return lottos;
+    public static LottoNumber valueOf(int value) {
+        validate(value);
+        return lottoNumbers[value];
     }
 
-    public int value() {
+    public int getValue() {
         return value;
     }
 
