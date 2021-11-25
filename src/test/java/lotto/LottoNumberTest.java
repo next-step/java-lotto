@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.*;
 public class LottoNumberTest {
 
     @Test
-    @DisplayName("45")
+    @DisplayName("bound 보다 큰 숫자 exception test")
     void checkBoundTest() {
         int boundNumber = 46;
         assertThatThrownBy(() -> {

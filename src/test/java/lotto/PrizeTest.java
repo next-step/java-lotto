@@ -28,7 +28,6 @@ public class PrizeTest {
         LottoNumber bonus2 = new LottoNumber(6);
         Lotto lotto2 = new Lotto(() -> Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
         assertThat(Prize.findPrize(lotto2.checkMatching(winningNumber2), winningNumber2, lotto2.checkContainNumber(bonus2))).isEqualTo(Prize.ELSE);
-
     }
 }
 
