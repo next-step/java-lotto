@@ -17,7 +17,7 @@ public enum Reward implements Comparable<Reward>{
     private final long matchCount;
     private final Money rewardMoney;
 
-    Reward(long matchCount, int rewardMoney) {
+    Reward(long matchCount, long rewardMoney) {
         this.matchCount = matchCount;
         this.rewardMoney = new Money(rewardMoney);
     }

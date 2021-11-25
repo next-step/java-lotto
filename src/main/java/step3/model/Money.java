@@ -2,22 +2,22 @@ package step3.model;
 
 public class Money {
 
-    private static final int LOTTO_PRICE = 1000;
+    private static final long LOTTO_PRICE = 1000L;
     private static final String RANGE_VIOLATION_ERROR_MESSAGE = "돈은 양수여야 합니다";
-    private static final int MIN = 0;
+    private static final long MIN = 0L;
 
     public static Money fromLottoBundleSize(int bundleSize) {
         return new Money(LOTTO_PRICE * bundleSize);
     }
 
-    private int money;
+    private long money;
 
-    public Money(int money) {
+    public Money(long money) {
         checkPositive(money);
         this.money = money;
     }
 
-    private void checkPositive(int money) {
+    private void checkPositive(long money) {
         if (money < MIN) {
             throw new IllegalArgumentException(RANGE_VIOLATION_ERROR_MESSAGE);
         }
@@ -35,7 +35,7 @@ public class Money {
         return money == 0;
     }
 
-    public int won() {
+    public long won() {
         return money;
     }
 
