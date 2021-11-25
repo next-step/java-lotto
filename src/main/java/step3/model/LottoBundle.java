@@ -17,11 +17,16 @@ public class LottoBundle {
     }
 
     public LottoPrize totalReward(Lotto winner, LottoNumber bonusNumber) {
-        Map<LottoReward, Long> rewardCountMap = LottoReward.getDefaultRewardMap();
+        Map<Reward, Long> rewardMap = getRewardMap(winner, bonusNumber);
+        return new LottoPrize(new LottoWin(rewardMap), Money.fromLottoBundleSize(lottoList.size()));
+    }
+
+    private Map<Reward, Long> getRewardMap(Lotto winner, LottoNumber bonusNumber) {
+        Map<Reward, Long> rewardMap = Reward.getDefaultRewardMap();
         for (Lotto lotto : lottoList) {
-            LottoReward lottoReward = lotto.getReward(winner, bonusNumber);
-            rewardCountMap.put(lottoReward, rewardCountMap.get(lottoReward) + 1);
+            Reward reward = lotto.getReward(winner, bonusNumber);
+            rewardMap.put(reward, rewardMap.get(reward) + 1);
         }
-        return new LottoPrize(rewardCountMap, Money.fromLottoBundleSize(lottoList.size()));
+        return rewardMap;
     }
 }

@@ -52,8 +52,8 @@ public class Lotto {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    public LottoReward getReward(Lotto winner, LottoNumber bonusNumber) {
-        return LottoReward.of(countMatch(winner), contains(bonusNumber));
+    public Reward getReward(Lotto winner, LottoNumber bonusNumber) {
+        return Reward.of(countMatch(winner), contains(bonusNumber));
     }
 
     private long countMatch(Lotto other) {

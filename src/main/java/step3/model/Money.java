@@ -30,4 +30,16 @@ public class Money {
     public void purchase() {
         money -= LOTTO_PRICE;
     }
+
+    public boolean isUnableToYield() {
+        return money == 0;
+    }
+
+    public int won() {
+        return money;
+    }
+
+    public void add(long money) {
+        this.money += money;
+    }
 }
