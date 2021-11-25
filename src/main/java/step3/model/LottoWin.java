@@ -1,5 +1,6 @@
 package step3.model;
 
+import java.util.Collections;
 import java.util.Map;
 
 public class LottoWin {
@@ -10,6 +11,10 @@ public class LottoWin {
 
     public LottoWin(Map<Reward, Long> rewardMap) {
         this.rewardMap = rewardMap;
+    }
+
+    public Map<Reward, Long> getRewardMap() {
+        return Collections.unmodifiableMap(rewardMap);
     }
 
     public Money totalReward() {

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum Reward {
+public enum Reward implements Comparable<Reward>{
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
@@ -50,5 +50,9 @@ public enum Reward {
         Arrays.stream(values())
             .forEach(reward -> defaultRewardMap.put(reward, DEFAULT_WINNER_COUNT));
         return defaultRewardMap;
+    }
+
+    public boolean isWin() {
+        return this != BANG;
     }
 }
