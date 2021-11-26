@@ -1,5 +1,6 @@
 package step3.model;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -19,7 +20,7 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         checkSize(lottoNumbers);
-        checkNotDuplicate(lottoNumbers);
+        checkDuplicate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -29,7 +30,7 @@ public class Lotto {
         }
     }
 
-    private void checkNotDuplicate(List<LottoNumber> lottoNumbers) {
+    private void checkDuplicate(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> set = new HashSet<>(lottoNumbers);
         if (set.size() != LOTTO_NUMBER_SIZE) {
             throw new LottoNumberDuplicateException(lottoNumbers);
@@ -58,5 +59,10 @@ public class Lotto {
         return lottoNumbers.stream()
             .filter(other::contains)
             .count();
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.toString(lottoNumbers.toArray());
     }
 }
