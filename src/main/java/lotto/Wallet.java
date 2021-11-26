@@ -50,7 +50,7 @@ public class Wallet {
         for (Lotto lotto : this.lottos) {
             final Prize prize = Prize.of(lotto.matchCount(winLotto), lotto.bonusContained(winLotto));
             result.putIfAbsent(prize, 0);
-            result.put(prize, result.get(prize));
+            result.put(prize, result.get(prize) + 1);
         }
 
         return new LottoResult(result);
