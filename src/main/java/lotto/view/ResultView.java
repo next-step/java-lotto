@@ -11,7 +11,9 @@ public class ResultView {
     public static final int LOTTO_START_COUNT = 3;
     public static final int LOTTO_END_COUNT = 6;
 
-    private ResultView() {}
+    private ResultView() {
+        throw new AssertionError();
+    }
 
     public static void printOrderCount(int orderCount) {
         System.out.println(orderCount + "개를 구매했습니다");
