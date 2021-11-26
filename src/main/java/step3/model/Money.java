@@ -1,5 +1,6 @@
 package step3.model;
 
+import java.util.Objects;
 import step3.exception.MoneyRangeNegativeException;
 
 public class Money {
@@ -32,8 +33,8 @@ public class Money {
         money -= LOTTO_PRICE;
     }
 
-    public boolean isUnableToYield() {
-        return money == MIN;
+    public boolean ableToYield() {
+        return money != MIN;
     }
 
     public long won() {
@@ -42,5 +43,24 @@ public class Money {
 
     public void add(long money) {
         this.money += money;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(money);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || !o.getClass().equals(Money.class)) {
+            return false;
+        }
+        Money other = (Money) o;
+        return money == other.money;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(money);
     }
 }

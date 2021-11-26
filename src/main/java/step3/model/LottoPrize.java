@@ -17,7 +17,7 @@ public class LottoPrize {
     }
 
     public double totalYield() {
-        if (insertedMoney.isUnableToYield()) {
+        if (!insertedMoney.ableToYield()) {
             return DEFAULT_YIELD;
         }
         return (double) totalReward().won() / insertedMoney.won();
