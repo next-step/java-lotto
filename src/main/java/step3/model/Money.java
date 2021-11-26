@@ -1,9 +1,10 @@
 package step3.model;
 
+import step3.exception.MoneyRangeNegativeException;
+
 public class Money {
 
     private static final long LOTTO_PRICE = 1000L;
-    private static final String RANGE_VIOLATION_ERROR_MESSAGE = "돈은 양수여야 합니다";
     private static final long MIN = 0L;
 
     public static Money fromLottoBundleSize(int bundleSize) {
@@ -19,7 +20,7 @@ public class Money {
 
     private void checkPositive(long money) {
         if (money < MIN) {
-            throw new IllegalArgumentException(RANGE_VIOLATION_ERROR_MESSAGE);
+            throw new MoneyRangeNegativeException(money);
         }
     }
 
