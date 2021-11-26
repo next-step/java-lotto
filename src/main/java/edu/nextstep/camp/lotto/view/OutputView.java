@@ -10,6 +10,8 @@ import edu.nextstep.camp.lotto.domain.PurchaseList;
 import edu.nextstep.camp.lotto.domain.Rank;
 
 public class OutputView {
+    private OutputView() {}
+
     public static void printPurchasedLotto(PurchaseList purchaseList) {
         System.out.printf("%d장을 구입했습니다.\n", purchaseList.amount());
 
