@@ -10,18 +10,18 @@ import java.util.HashSet;
 
 import static org.assertj.core.api.Assertions.*;
 
-class LastWeekLotteryTest {
-    WinningLottery lastWeekLottery;
+class WinningLotteryTest {
+    WinningLottery winningLottery;
 
     @BeforeEach
     public void setup() {
-        lastWeekLottery = new WinningLottery(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 0);
+        winningLottery = new WinningLottery(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 0);
     }
 
     @Test
     @DisplayName("전 주 로또 당첨번호 생성")
     public void createLastWeekLotteryNumber() {
-        assertThat(lastWeekLottery.size()).isEqualTo(6);
+        assertThat(winningLottery.size()).isEqualTo(6);
     }
 
     @Test
@@ -39,7 +39,9 @@ class LastWeekLotteryTest {
     public void checkWinningNumber() {
         int count = 0;
         for (int i = 5; i <= 9; i++) {
-            count += lastWeekLottery.matchNumber(i);
+            if (winningLottery.matchLottery(i)) {
+                count++;
+            }
         }
         assertThat(count).isEqualTo(2);
     }
