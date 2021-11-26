@@ -14,8 +14,13 @@ class RankGroupTest {
 
     @BeforeEach
     public void setup() {
-        LastWeekLottery lastWeekLottery = new LastWeekLottery(new HashSet<>(Arrays.asList(1, 2, 3, 4, 7, 8)));
-        rankGroup = new RankGroup(new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 6)), lastWeekLottery, 0);
+        List<LotteryNumber> lotteryNumber = new ArrayList<>();
+        for(int i=1; i<=6; i++){
+            lotteryNumber.add(new LotteryNumber(i));
+        }
+
+        WinningLottery winningLottery = new WinningLottery(new HashSet<>(Arrays.asList(1, 2, 3, 4, 7, 8)), 0);
+        rankGroup = new RankGroup(new LotteryTicket(lotteryNumber), winningLottery);
     }
 
     @Test

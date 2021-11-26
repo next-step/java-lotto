@@ -13,9 +13,14 @@ class MoneyPrizeTest {
 
     @BeforeEach
     public void setup() {
-        LotteryTicket lotteryTicket = new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LastWeekLottery lastWeekLottery = new LastWeekLottery(new HashSet<>(Arrays.asList(1, 2, 3, 4, 7, 8)));
-        moneyPrize = new MoneyPrize(new RankGroup(lotteryTicket, lastWeekLottery, 0));
+        List<LotteryNumber> lotteryNumber = new ArrayList<>();
+        for(int i=1; i<=6; i++){
+            lotteryNumber.add(new LotteryNumber(i));
+        }
+
+        LotteryTicket lotteryTicket = new LotteryTicket(lotteryNumber);
+        WinningLottery lastWeekLottery = new WinningLottery(new HashSet<>(Arrays.asList(1, 2, 3, 4, 7, 8)), 0);
+        moneyPrize = new MoneyPrize(new RankGroup(lotteryTicket, lastWeekLottery));
     }
 
     @Test
