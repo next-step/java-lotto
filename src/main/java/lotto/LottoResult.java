@@ -2,12 +2,23 @@ package lotto;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class LottoResult {
     private final Map<Prize, Integer> value;
 
+    /*
+        CONSTRUCTOR
+     */
     public LottoResult(Map<Prize, Integer> value) {
         this.value = value;
+    }
+
+    /*
+        INTERFACE
+     */
+    public int countByPrize(Prize prize) {
+        return this.value.getOrDefault(prize, 0);
     }
 
     @Override
@@ -21,5 +32,19 @@ public class LottoResult {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    public double rate(Money unitPrice) {
+        long lottoCount = value.values()
+                .stream()
+                .mapToInt(count -> count)
+                .sum();
+
+        final double totalPrize = value.keySet()
+                .stream()
+                .mapToDouble(prize -> prize.getPrize() * this.value.get(prize))
+                .sum();
+
+        return totalPrize / (lottoCount * unitPrice.getValue());
     }
 }
