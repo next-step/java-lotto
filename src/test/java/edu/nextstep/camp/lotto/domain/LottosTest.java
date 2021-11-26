@@ -47,7 +47,7 @@ public class LottosTest {
                 // 0 matched
                 Arguments.of(
                         Lottos.of(List.of(Lotto.fromIntegers(List.of(10, 11, 12, 13, 14, 15)))),
-                        GameResult.of(Ranks.of(List.of()))
+                        GameResult.of(Ranks.of(List.of(Rank.NO_RANK)))
                 ),
                 // 3 matched
                 Arguments.of(
@@ -82,8 +82,7 @@ public class LottosTest {
     @MethodSource("parseWinningResult")
     public void winningResult(Lottos lottos, GameResult expected) {
         final Lotto winningNumber = Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6));
-        assertThat(lottos.winningResult(winningNumber))
-                .isEqualTo(expected);
-
+        assertThat(lottos.winningResult(winningNumber)).isEqualTo(expected);
+        assertThat(lottos.winningResult(winningNumber).collect()).hasSameSizeAs(lottos.collect());
     }
 }

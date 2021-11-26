@@ -51,17 +51,17 @@ public class PurchaseListTest {
                 // 0 matched
                 Arguments.of(
                         Lotto.fromIntegers(List.of(10, 11, 12, 13, 14, 15)),
-                        GameResult.of(Ranks.of(List.of()))
+                        GameResult.of(Ranks.of(List.of(Rank.NO_RANK)))
                 ),
                 // 1 matched
                 Arguments.of(
                         Lotto.fromIntegers(List.of(1, 11, 12, 13, 14, 15)),
-                        GameResult.of(Ranks.of(List.of()))
+                        GameResult.of(Ranks.of(List.of(Rank.NO_RANK)))
                 ),
                 // 2 matched
                 Arguments.of(
                         Lotto.fromIntegers(List.of(1, 2, 12, 13, 14, 15)),
-                        GameResult.of(Ranks.of(List.of()))
+                        GameResult.of(Ranks.of(List.of(Rank.NO_RANK)))
                 ),
                 // 3 matched
                 Arguments.of(
@@ -76,23 +76,5 @@ public class PurchaseListTest {
     public void winningResult(Lotto winningNumber, GameResult expected) {
         assertThat(PurchaseList.purchase(1000, FixedLottoGenerator.getInstance()).winningResult(winningNumber))
                 .isEqualTo(expected);
-
-    }
-
-    static Stream<Arguments> parseWPriceEarningRate() {
-        return Stream.of(
-                Arguments.of(GameResult.of(Ranks.of(List.of(Rank.FIRST))), 2000000),
-                Arguments.of(GameResult.of(Ranks.of(List.of(Rank.SECOND))), 1500),
-                Arguments.of(GameResult.of(Ranks.of(List.of(Rank.THIRD))), 50),
-                Arguments.of(GameResult.of(Ranks.of(List.of(Rank.FOURTH))), 5),
-                Arguments.of(GameResult.of(Ranks.of(List.of(Rank.NO_RANK))), 0)
-        );
-    }
-
-    @ParameterizedTest(name = "price-earning rate: {0} -> {1}")
-    @MethodSource("parseWPriceEarningRate")
-    public void priceEarningRate(GameResult gameResult, float expected) {
-        final PurchaseList purchaseList = PurchaseList.purchase(1000, FixedLottoGenerator.getInstance());
-        assertThat(purchaseList.priceEarningRate(gameResult)).isEqualTo(expected);
     }
 }

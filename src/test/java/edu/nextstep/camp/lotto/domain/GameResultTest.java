@@ -57,4 +57,22 @@ public class GameResultTest {
     public void totalPrize(Ranks ranks, long expected) {
         assertThat(GameResult.of(ranks).totalPrize()).isEqualTo(Prize.of(expected));
     }
+
+    static Stream<Arguments> parsePriceEarningRate() {
+        return Stream.of(
+                Arguments.of(List.of(Rank.FIRST, Rank.FIRST), 2000000),
+                Arguments.of(List.of(Rank.FIRST), 2000000),
+                Arguments.of(List.of(Rank.SECOND), 1500),
+                Arguments.of(List.of(Rank.THIRD), 50),
+                Arguments.of(List.of(Rank.FOURTH), 5),
+                Arguments.of(List.of(Rank.NO_RANK), 0)
+        );
+    }
+
+    @ParameterizedTest(name = "price-earning rate: {0} -> {1}")
+    @MethodSource("parsePriceEarningRate")
+    public void priceEarningRate(List<Rank> ranks, float expected) {
+        final GameResult gameResult = GameResult.of(Ranks.of(ranks));
+        assertThat(gameResult.priceEarningRate()).isEqualTo(expected);
+    }
 }

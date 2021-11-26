@@ -26,7 +26,7 @@ public class Lottos {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lottos others = (Lottos) o;
-        return lottos.containsAll(others.lottos);
+        return lottos.containsAll(others.lottos) && others.lottos.containsAll(lottos);
     }
 
     @Override

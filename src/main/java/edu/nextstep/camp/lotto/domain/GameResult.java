@@ -1,5 +1,6 @@
 package edu.nextstep.camp.lotto.domain;
 
+import java.util.Collection;
 import java.util.Objects;
 
 public class GameResult {
@@ -17,12 +18,20 @@ public class GameResult {
         return new GameResult(ranks);
     }
 
+    public Collection<Rank> collect() {
+        return ranks.collect();
+    }
+
     public Prize totalPrize() {
         return ranks.totalPrize();
     }
 
     public long amountOfPlace(Rank rank) {
         return ranks.amountOfPlace(rank);
+    }
+
+    public float priceEarningRate() {
+        return (float)ranks.totalPrize().toLong() / (ranks.collect().size() * PurchaseList.GAME_PRICE);
     }
 
     @Override

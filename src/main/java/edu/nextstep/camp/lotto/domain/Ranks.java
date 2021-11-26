@@ -41,7 +41,7 @@ public class Ranks {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ranks other = (Ranks) o;
-        return ranks.containsAll(other.ranks);
+        return ranks.containsAll(other.ranks) && other.ranks.containsAll(ranks);
     }
 
     @Override

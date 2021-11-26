@@ -36,9 +36,6 @@ public class OutputView {
         System.out.println("5개 일치 (" + Prize.SECOND_PRIZE + "원)-" + gameResult.amountOfPlace(Rank.SECOND));
         System.out.println("6개 일치 (" + Prize.FIRST_PRIZE + "원)-" + gameResult.amountOfPlace(Rank.FIRST));
         System.out.println("총 상금: " + gameResult.totalPrize());
-    }
-
-    public static void printPriceEarningRate(float rate) {
-        System.out.println("총 수익률은 " + rate + "입니다.");
+        System.out.println("총 수익률은 " + gameResult.priceEarningRate() + "입니다.");
     }
 }
