@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Wallet {
-    private final Money money;
+    private Money money;
     private final List<Lotto> lottos;
 
     /*
@@ -24,6 +24,25 @@ public class Wallet {
         this.lottos = lottos;
     }
 
+    /*
+        INTERFACE
+     */
+    public void buyLotto(Money unitPrice) {
+        final int quotient = this.money.quotient(unitPrice);
+
+        for (int i = 0; i < quotient; i++) {
+            this.lottos.add(new Lotto());
+            this.money = this.money.subtract(unitPrice);
+        }
+    }
+
+    public List<Lotto> getLottos() {
+        return this.lottos;
+    }
+
+    /*
+            FUNCTION
+         */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
