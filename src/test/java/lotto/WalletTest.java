@@ -34,7 +34,7 @@ public class WalletTest {
 
     @ParameterizedTest
     @MethodSource("buyLottoSource")
-    @DisplayName("")
+    @DisplayName("Wallet 은 Money 와 협력하여 자신의 Money 를 사용하여 Lotto 를 구매할 수 있다.")
     void buyLotto(int unitPriceValue, int walletMoney, int result) {
         // given
         Money unitPrice = new Money(unitPriceValue);
