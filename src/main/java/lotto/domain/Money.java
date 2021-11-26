@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.exception.ManualLottoCountException;
-import lotto.exception.MinimumAmountException;
 
 public class Money {
     public static final int LOTTO_PRICE = 1000;
@@ -10,14 +9,7 @@ public class Money {
     private int money;
 
     private Money(int money) {
-        validateMinuminMoney(money);
         this.money = money;
-    }
-
-    private void validateMinuminMoney(int money) {
-        if (money < LOTTO_PRICE) {
-            throw new MinimumAmountException(money);
-        }
     }
 
     public static Money from(int money) {
