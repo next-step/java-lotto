@@ -22,6 +22,13 @@ public class WinLotto {
     }
 
     /*
+        INTERFACE
+     */
+    public boolean checkBonus(LottoNumber lottoNumber) {
+        return this.bonus == lottoNumber;
+    }
+
+    /*
         FUNCTION
      */
     private void validateDuplicate(Lotto lotto, LottoNumber bonus) {

@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -13,6 +14,12 @@ public class Lotto {
     /*
         CONSTRUCTOR
      */
+    public Lotto(Integer... lottoNumberList) {
+        this(Arrays.stream(lottoNumberList)
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet()));
+    }
+
     public Lotto(List<Integer> lottoNumberList) {
         this(lottoNumberList.stream()
                 .map(LottoNumber::of)
@@ -30,6 +37,14 @@ public class Lotto {
      */
     public boolean contains(LottoNumber number) {
         return this.value.contains(number);
+    }
+
+    public int matchCount(Lotto other) {
+        return (int) this.value.stream().filter(other.value::contains).count();
+    }
+
+    public boolean bonusContained(WinLotto winLotto) {
+        return this.value.stream().filter(winLotto::checkBonus).count() > 0;
     }
 
     /*
