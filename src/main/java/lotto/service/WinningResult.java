@@ -1,11 +1,12 @@
 package lotto.service;
 
-import java.util.List;
 import lotto.domain.Rate;
 import lotto.domain.WinnerLottoTicket;
 import lotto.domain.WinningRank;
 import lotto.domain.dto.ResultDto;
 import lotto.domain.dto.WinningLottoTicketDto;
+
+import java.util.List;
 
 public class WinningResult {
 
@@ -21,10 +22,12 @@ public class WinningResult {
     }
 
     public ResultDto winningResult(WinningLottoTicketDto dto) {
-        WinnerLottoTicket winnerLottoTicket = WinnerLottoTicket.from(dto.getWinnerLottoTicket());
-        List<Long> winningResult = winnerLottoTicket.findWinningCount(dto.getLottoTickets());
+        WinnerLottoTicket winnerLottoTicket = WinnerLottoTicket.of(dto.getWinnerNumber(), dto.getBonusNumber());
+        List<Long> winningResult = winnerLottoTicket.findLottoMatchCount(dto.getLottoTickets());
+
         WinningRank resultRank = new WinningRank();
         resultRank = resultRank.updateRank(winningResult);
+
         return ResultDto.of(resultRank, Rate.of(resultRank.getMoney(), resultRank.getPrizeMoney()));
     }
 

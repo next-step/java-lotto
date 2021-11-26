@@ -15,7 +15,7 @@ public class WinningRankTest {
 
     static Stream<Arguments> generateWinnerCountAndMoney() {
         return Stream.of(
-            Arguments.of(new ArrayList<>(Arrays.asList(1l, 2l, 3l, 3l, 4l)), 5000),
+            Arguments.of(WinnerLottoTicket.of("1, 2, 3, 4, 5, 6", 7), 5000),
             Arguments.of(new ArrayList<>(Arrays.asList(0l, 0l, 3l, 5l)), 4000)
         );
     }

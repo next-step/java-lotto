@@ -1,6 +1,5 @@
 package lotto.util;
 
-import com.sun.org.apache.bcel.internal.generic.RETURN;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

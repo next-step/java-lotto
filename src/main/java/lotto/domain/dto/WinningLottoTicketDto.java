@@ -5,19 +5,23 @@ import lotto.domain.LottoTickets;
 public class WinningLottoTicketDto {
 
     private final LottoTickets lottoTickets;
-    private final String winnerLottoTicket;
+    private final WinnerNumberDto winnerNumberDto;
 
-    public WinningLottoTicketDto(LottoTickets lottoTickets, String winnerLottoTicket) {
+    public WinningLottoTicketDto(LottoTickets lottoTickets, WinnerNumberDto winnerNumberDto) {
         this.lottoTickets = lottoTickets;
-        this.winnerLottoTicket = winnerLottoTicket;
+        this.winnerNumberDto = winnerNumberDto;
     }
 
     public LottoTickets getLottoTickets() {
         return lottoTickets;
     }
 
-    public String getWinnerLottoTicket() {
-        return winnerLottoTicket;
+    public String getWinnerNumber() {
+        return winnerNumberDto.getWinnerNumbers();
+    }
+
+    public int getBonusNumber() {
+        return winnerNumberDto.getBonusNumber();
     }
 
 }

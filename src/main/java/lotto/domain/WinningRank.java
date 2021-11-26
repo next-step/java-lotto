@@ -20,7 +20,7 @@ public class WinningRank {
 
     public WinningRank updateRank(List<Long> winnerCount) {
         for (Long count : winnerCount) {
-            Rank rank = Rank.equalToCount(count);
+            Rank rank = Rank.valueOf(count, true);
             winningRank.put(rank, winningRank.getOrDefault(rank, DEFAULT_VALUE) + UPDATE_VALUE);
             this.count = this.count + UPDATE_VALUE;
         }
