@@ -10,6 +10,8 @@ public class InsertView {
 
     private static final String COMMA = ",";
 
+    private InsertView() {}
+
     public static String printInputIntro() {
         System.out.println("구매금액을 입력해 주세요");
 
