@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.entity;
 
 import java.util.List;
 
@@ -14,6 +14,16 @@ public class LottoTicket {
       throw new IllegalArgumentException(INVALID_SIZE_OF_NUMBER);
     }
     this.numbers = numbers;
+  }
+
+  private boolean contains(int number) {
+    return numbers.contains(new LottoNumber(number));
+  }
+
+  public int getMatchedCount(LottoTicket lotto) {
+    return (int) this.numbers.stream()
+            .filter(number -> lotto.contains(number.getNumber()))
+            .count();
   }
 
   public int size() {

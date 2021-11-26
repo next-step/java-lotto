@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.entity;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -14,6 +15,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoTicketTest {
+
+  @BeforeEach
+  void setup() {
+
+  }
 
   @ParameterizedTest
   @MethodSource("makeLottoNumberList")
@@ -46,5 +52,25 @@ class LottoTicketTest {
             Arguments.of(Arrays.asList(new LottoNumber(4), new LottoNumber(10), new LottoNumber(26),
                     new LottoNumber(35), new LottoNumber(45), new LottoNumber(12), new LottoNumber(1),
                     new LottoNumber(7), new LottoNumber(19))));
+  }
+
+  @ParameterizedTest
+  @MethodSource("makeLottoNumbers")
+  @DisplayName("로또 티켓이 당첨 번호를 몇개 가지고 있는지 반환한다.")
+  void getContainsNumberTest(LottoTicket lottoTicket, LottoTicket winning, int count) {
+    assertEquals(lottoTicket.getMatchedCount(winning), count);
+  }
+
+
+  private static Stream<Arguments> makeLottoNumbers() {
+    return Stream.of(
+            Arguments.of(new LottoTicket(Arrays.asList(new LottoNumber(1), new LottoNumber(15), new LottoNumber(40),
+                            new LottoNumber(25), new LottoNumber(30), new LottoNumber(4))),
+                    new LottoTicket(Arrays.asList(new LottoNumber(15), new LottoNumber(40), new LottoNumber(30),
+                            new LottoNumber(5), new LottoNumber(10))), 3),
+            Arguments.of(new LottoTicket(Arrays.asList(new LottoNumber(4), new LottoNumber(10), new LottoNumber(26),
+                    new LottoNumber(35), new LottoNumber(17), new LottoNumber(12))),
+                    new LottoTicket(Arrays.asList(new LottoNumber(15), new LottoNumber(40), new LottoNumber(30),
+                            new LottoNumber(5), new LottoNumber(10))), 1));
   }
 }
