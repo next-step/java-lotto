@@ -65,7 +65,7 @@ LottoResult
 
 * `Map<Prize, Integer>` field 를 가진다.
 * LottoResult 는 임의의 Prize 에 협력하여 matchCount 를 반환할 수 있다.
-* LottoResult 는 UnitPrice 와 협력하여 수익률을 구할 수 있다.
+* LottoResult 는 Money(unitPrice) 와 협력하여 수익률을 구할 수 있다.
 
 
 
