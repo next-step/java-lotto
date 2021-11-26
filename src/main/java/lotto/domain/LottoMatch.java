@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoMatch {
+    private static final int SECOND_COUNT = 5;
+
     private final int matchCount;
     private final boolean matchBonus;
 
@@ -25,7 +27,7 @@ public class LottoMatch {
         if (o == null || getClass() != o.getClass()) return false;
         LottoMatch other = (LottoMatch) o;
 
-        if (this.matchCount == 5 && other.matchCount == 5) {
+        if (this.matchCount == SECOND_COUNT && other.matchCount == SECOND_COUNT) {
             return matchBonus == other.matchBonus;
         }
 
