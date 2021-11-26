@@ -37,9 +37,13 @@ public enum Prize {
                 .orElse(NONE);
     }
 
+    public double getPrize() {
+        return prize;
+    }
+
     /*
-        FUNCTION
-     */
+            FUNCTION
+         */
     private static Prize secondOrThirdPrize(boolean bonusContained) {
         if (bonusContained) {
             return SECOND;
