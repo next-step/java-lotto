@@ -47,8 +47,18 @@ Lotto
 
 WinLotto
 
-* `Lotto` field 와 `LottoNumber` field 총 두개를 가지며 `LottoNumber` 는 `Lotto` 에 없는 것이어야 한다.
+* `Lotto` 와 `LottoNumber` 총 두개의 field 를 가지며 `LottoNumber` 는 `Lotto` 에 없는 것이어야 한다.
 * WinLotto 는 LottoNumber 와 협력하여 LottoNumber 가 보너스 번호인지 확인할 수 있다.
+
+Wallet
+
+* `Money` 와 `List<Lotto>` 총 두개의 field 를 가진다.
+* Wallet 은 Money 와 협력하여 자신의 Money 를 사용하여 Lotto 를 구매할 수 있다.
+* Wallet 은 WinLotto 와 협력하여 LottoResult 를 반환할 수 있다.
+
+Prize
+
+* Prize 는 matchCount 와 bonus 여부를 확인하여 알맞은 등수를 반환할 수 있다.
 
 
 
