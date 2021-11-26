@@ -4,6 +4,8 @@ import domain.*;
 import view.InputView;
 import view.OutputView;
 
+import java.util.Set;
+
 public class LotteryController {
     public static void main(String[] args) {
         Store store = new Store(InputView.inputPrice());
@@ -12,12 +14,15 @@ public class LotteryController {
         LotteryTickets lotteryTickets = store.createLotteryNumber();
         OutputView.printLotteryNumber(lotteryTickets);
 
-        LastWeekLottery lastWeekLottery = new LastWeekLottery(InputView.inputLastWeekNumber());
-
-        RankGroup rankGroup = new RankGroup(lotteryTickets, lastWeekLottery, InputView.inputBonusBall());
+        Set<Integer> winningNumber = InputView.inputWinningNumber();
+        WinningLottery winningLottery = new WinningLottery(winningNumber, InputView.inputBonusBall());
+        RankGroup rankGroup = new RankGroup(lotteryTickets, winningLottery);
         MoneyPrize moneyPrize = new MoneyPrize(rankGroup);
         OutputView.resultWinningMessage();
         OutputView.printWinningPrize(rankGroup);
         OutputView.resultLotteryProfit(moneyPrize, store);
     }
 }
+
+
+
