@@ -41,9 +41,13 @@ public enum Prize {
         return prize;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
     /*
-            FUNCTION
-         */
+                FUNCTION
+             */
     private static Prize secondOrThirdPrize(boolean bonusContained) {
         if (bonusContained) {
             return SECOND;
