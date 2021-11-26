@@ -3,6 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
@@ -22,7 +24,7 @@ public class PurchaseMachineTest {
     @DisplayName("로또 구입")
     void purchase() {
         PurchaseMachine machine = new PurchaseMachine(new Credit("14000"));
-        PurchaseMachine purchase = machine.purchase();
-        assertThat(purchase.getLotto().size()).isEqualTo(14);
+        List<Lotto> lotto = machine.purchase();
+        assertThat(lotto.size()).isEqualTo(14);
     }
 }

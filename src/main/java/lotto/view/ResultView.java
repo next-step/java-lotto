@@ -19,10 +19,12 @@ public class ResultView {
     private static final String WON_STATISTICS = "당첨 통계";
     private static final String LINE = "--------";
 
-    public void printPurchaseLottos(PurchaseMachine purchaseMachine) {
-        List<Lotto> lottoList = purchaseMachine.getLotto();
+    public void printPurchaseLottos(List<Lotto> lotto) {
+        if (lotto == null || lotto.isEmpty()) {
+            return;
+        }
 
-        for (Lotto l : lottoList) {
+        for (Lotto l : lotto) {
             StringBuilder sb = new StringBuilder();
             sb.append("[");
             sb.append(lottoNumberWithJoinedByComma(l));
