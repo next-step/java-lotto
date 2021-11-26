@@ -51,22 +51,22 @@ public class PurchaseListTest {
                 // 0 matched
                 Arguments.of(
                         Lotto.fromIntegers(List.of(10, 11, 12, 13, 14, 15)),
-                        GameResult.of(0, 0, 0, 0)
+                        GameResult.of(Ranks.of(List.of()))
                 ),
                 // 1 matched
                 Arguments.of(
                         Lotto.fromIntegers(List.of(1, 11, 12, 13, 14, 15)),
-                        GameResult.of(0, 0, 0, 0)
+                        GameResult.of(Ranks.of(List.of()))
                 ),
                 // 2 matched
                 Arguments.of(
                         Lotto.fromIntegers(List.of(1, 2, 12, 13, 14, 15)),
-                        GameResult.of(0, 0, 0, 0)
+                        GameResult.of(Ranks.of(List.of()))
                 ),
                 // 3 matched
                 Arguments.of(
                         Lotto.fromIntegers(List.of(1, 2, 3, 13, 14, 15)),
-                        GameResult.of(0, 0, 0, 1)
+                        GameResult.of(Ranks.of(List.of(Rank.FOURTH)))
                 )
         );
     }
@@ -81,16 +81,11 @@ public class PurchaseListTest {
 
     static Stream<Arguments> parseWPriceEarningRate() {
         return Stream.of(
-                // first place
-                Arguments.of(GameResult.of(1, 0, 0, 0), 2000000),
-                // second place
-                Arguments.of(GameResult.of(0, 1, 0, 0), 1500),
-                // third place
-                Arguments.of(GameResult.of(0, 0, 1, 0), 50),
-                // fource place
-                Arguments.of(GameResult.of(0, 0, 0, 1), 5),
-                // no winning
-                Arguments.of(GameResult.of(0, 0, 0, 0), 0)
+                Arguments.of(GameResult.of(Ranks.of(List.of(Rank.FIRST))), 2000000),
+                Arguments.of(GameResult.of(Ranks.of(List.of(Rank.SECOND))), 1500),
+                Arguments.of(GameResult.of(Ranks.of(List.of(Rank.THIRD))), 50),
+                Arguments.of(GameResult.of(Ranks.of(List.of(Rank.FOURTH))), 5),
+                Arguments.of(GameResult.of(Ranks.of(List.of(Rank.NO_RANK))), 0)
         );
     }
 

@@ -47,17 +47,17 @@ public class LottosTest {
                 // 0 matched
                 Arguments.of(
                         Lottos.of(List.of(Lotto.fromIntegers(List.of(10, 11, 12, 13, 14, 15)))),
-                        GameResult.of(0, 0, 0, 0)
+                        GameResult.of(Ranks.of(List.of()))
                 ),
                 // 3 matched
                 Arguments.of(
                         Lottos.of(List.of(Lotto.fromIntegers(List.of(1, 2, 3, 13, 14, 15)))),
-                        GameResult.of(0, 0, 0, 1)
+                        GameResult.of(Ranks.of(List.of(Rank.FOURTH)))
                 ),
                 // 6 matched
                 Arguments.of(
                         Lottos.of(List.of(Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6)))),
-                        GameResult.of(1, 0, 0, 0)
+                        GameResult.of(Ranks.of(List.of(Rank.FIRST)))
                 ),
                 // 3 matched with 2 lottos
                 Arguments.of(
@@ -65,7 +65,7 @@ public class LottosTest {
                                 Lotto.fromIntegers(List.of(1, 2, 3, 13, 14, 15)),
                                 Lotto.fromIntegers(List.of(1, 2, 3, 13, 14, 15))
                         )),
-                        GameResult.of(0, 0, 0, 2)
+                        GameResult.of(Ranks.of(List.of(Rank.FOURTH, Rank.FOURTH)))
                 ),
                 // 6 matched with 2 lottos
                 Arguments.of(
@@ -73,7 +73,7 @@ public class LottosTest {
                                 Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6)),
                                 Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6))
                         )),
-                        GameResult.of(2, 0, 0, 0)
+                        GameResult.of(Ranks.of(List.of(Rank.FIRST, Rank.FIRST)))
                 )
         );
     }

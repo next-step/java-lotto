@@ -7,6 +7,7 @@ public class Prize {
     public static final Prize SECOND_PRIZE = Prize.of(1500000);
     public static final Prize THIRD_PRIZE = Prize.of(50000);
     public static final Prize FOURTH_PRIZE = Prize.of(5000);
+    public static final Prize NO_PRIZE = Prize.of(0);
 
     private final long prize;
 

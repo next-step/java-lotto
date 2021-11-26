@@ -1,19 +1,12 @@
 package edu.nextstep.camp.lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.Objects;
 
 public class Lottos {
-    private static final int MATCHED_COUNT_1ST = 6;
-    private static final int MATCHED_COUNT_2ND = 5;
-    private static final int MATCHED_COUNT_3RD = 4;
-    private static final int MATCHED_COUNT_4TH = 3;
-    private static final int INITIAL_COUNT = 0;
-    private static final int INCREASE_COUNT = 1;
-
     private final Collection<Lotto> lottos;
 
     private Lottos(Collection<Lotto> lottos) {
@@ -50,16 +43,11 @@ public class Lottos {
     }
 
     public GameResult winningResult(Lotto winningNumber) {
-        Map<Integer, Integer> rankMap = new HashMap<>();
+        List<Rank> ranks = new ArrayList<>(lottos.size());
         for (Lotto lotto : lottos) {
-            rankMap.compute(
-                    lotto.matchedCount(winningNumber), (k, v) -> v == null ? INCREASE_COUNT : v + INCREASE_COUNT
-            );
+            int matchedCount = lotto.matchedCount(winningNumber);
+            ranks.add(Rank.valueOf(matchedCount));
         }
-        return GameResult.of(
-                rankMap.getOrDefault(MATCHED_COUNT_1ST, INITIAL_COUNT),
-                rankMap.getOrDefault(MATCHED_COUNT_2ND, INITIAL_COUNT),
-                rankMap.getOrDefault(MATCHED_COUNT_3RD, INITIAL_COUNT),
-                rankMap.getOrDefault(MATCHED_COUNT_4TH, INITIAL_COUNT));
+        return GameResult.of(Ranks.of(ranks));
     }
 }
