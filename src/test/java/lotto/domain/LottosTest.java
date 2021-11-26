@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.utils.RankEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

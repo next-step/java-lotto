@@ -32,17 +32,17 @@ public class Lottoes {
         }
     }
 
-    public Long winRankLottoCount(Long rankCount) {
-        return lottoGames.stream()
-                .filter(lottoGame -> lottoGame.getMatchedCount().equals(rankCount))
-                .count();
-    }
-
     public void calculateTotalReward() {
         totalReward = RankEnum.RANK_THREE.getReward() * winRankLottoCount(RankEnum.RANK_THREE.getRank());
         totalReward = totalReward + RankEnum.RANK_FOUR.getReward() * winRankLottoCount(RankEnum.RANK_FOUR.getRank());
         totalReward = totalReward + RankEnum.RANK_FIVE.getReward() * winRankLottoCount(RankEnum.RANK_FIVE.getRank());
         totalReward = totalReward + RankEnum.RANK_SIX.getReward() * winRankLottoCount(RankEnum.RANK_SIX.getRank());
+    }
+
+    public Long winRankLottoCount(Long rankCount) {
+        return lottoGames.stream()
+                .filter(lottoGame -> lottoGame.getMatchedCount().equals(rankCount))
+                .count();
     }
 
     public List<LottoGame> getLottoGames() {
