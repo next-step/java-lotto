@@ -15,9 +15,16 @@ class OrderCountTest {
     }
 
     @Test
+    @DisplayName("자동로또 개수 = 전체로또 - 수동구매")
+    void calculateAutoCount() {
+        OrderCount manualCount = new OrderCount(3);
+        assertThat(manualCount.calculateAutoCount(new OrderCount(5))).isEqualTo(2);
+    }
+
+    @Test
     @DisplayName("1개 미만 -> IllegalArgumentException")
     void validation() {
-        assertThatThrownBy(() -> new OrderCount(0))
+        assertThatThrownBy(() -> new OrderCount(-1))
                 .isInstanceOf(IllegalArgumentException.class);
         //정상
         assertThatCode(() -> new OrderCount(1))

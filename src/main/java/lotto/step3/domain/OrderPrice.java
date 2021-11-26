@@ -10,13 +10,9 @@ public class OrderPrice {
 
     public OrderPrice(int orderPrice) {
         if (orderPrice < LOTTO_PRICE) {
-            throw new IllegalArgumentException("1000원 이상 입력해주세요");
+            throw new IllegalArgumentException("최소 주문 금액은 1000원 입니다.");
         }
         this.orderPrice = orderPrice;
-    }
-
-    public OrderCount createOrderCount() {
-        return new OrderCount(orderPrice / LOTTO_PRICE);
     }
 
     public int getOrderPrice() {

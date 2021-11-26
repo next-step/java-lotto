@@ -13,7 +13,7 @@ class LottoGeneratorTest {
     @Test
     @DisplayName("랜덤 로또번호 생성 - 6자리, 중복값 x")
     void createLottoNumber() {
-        List<LottoNumber> numbers = LottoGenerator.createLotto();
+        List<LottoNumber> numbers = LottoGenerator.createAutoLotto();
         assertThat(numbers).size().isEqualTo(6);
         assertThat(numbers.stream().distinct().count()).isEqualTo(6);
     }
@@ -21,14 +21,16 @@ class LottoGeneratorTest {
     @Test
     @DisplayName("입력된 당첨번호 6자리, 1~45, 중복값 x,  만족 못하면 -> IllegalArgumentException")
     void CreateWinningNumbers() {
-        assertThatThrownBy(() -> LottoGenerator.createWinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 46)))
+        assertThatThrownBy(() -> LottoGenerator.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 46)))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> LottoGenerator.createWinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 0)))
+        assertThatThrownBy(() -> LottoGenerator.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 0)))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> LottoGenerator.createWinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
+        assertThatThrownBy(() -> LottoGenerator.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> LottoGenerator.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 5)))
                 .isInstanceOf(IllegalArgumentException.class);
         //정상입력
-        assertThatCode(() -> LottoGenerator.createWinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)))
+        assertThatCode(() -> LottoGenerator.createManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6)))
                 .doesNotThrowAnyException();
     }
 

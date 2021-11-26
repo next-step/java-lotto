@@ -19,17 +19,17 @@ public enum Rank {
         this.prizeMoney = prizeMoney;
     }
 
-    public static Rank valueOf(int countOfMatch, boolean matchBonusBall) {
-        if (matchBonusBall && isFiveCountOfMatch(countOfMatch)) {
-            return SECOND;
+    public static Rank rank(int count, boolean matchBonusBall) {
+        if (count < Rank.FIFTH.countOfMatch) {
+            return Rank.MISS;
         }
-        if (isFiveCountOfMatch(countOfMatch)) {
-            return THIRD;
+        if (SECOND.isCountOfMatch(count)) {
+            return rankSecondAndThird(matchBonusBall);
         }
         return Arrays.stream(values())
-                .filter(rank -> rank.getCountOfMatch() == countOfMatch)
+                .filter(rank -> rank.isCountOfMatch(count))
                 .findFirst()
-                .orElse(MISS);
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public int getCountOfMatch() {
@@ -40,8 +40,23 @@ public enum Rank {
         return prizeMoney;
     }
 
-    private static boolean isFiveCountOfMatch(int countOfMatch) {
-        return countOfMatch == THIRD.countOfMatch;
+    private static Rank rankSecondAndThird(boolean matchBonusBall) {
+        if (matchBonusBall) {
+            return SECOND;
+        }
+        return THIRD;
+    }
+
+    private boolean isCountOfMatch(int count) {
+        return this.countOfMatch == count;
+    }
+
+    @Override
+    public String toString() {
+        return "Rank{" +
+                "countOfMatch=" + countOfMatch +
+                ", prizeMoney=" + prizeMoney +
+                '}';
     }
 
 }

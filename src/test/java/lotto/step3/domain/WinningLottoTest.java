@@ -12,18 +12,18 @@ class WinningLottoTest {
 
     @Test
     void create() {
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 1);
-        assertThat(winningLotto).isEqualTo(new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 1));
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        assertThat(winningLotto).isEqualTo(new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7));
     }
 
     @Test
-    @DisplayName("보너스볼은 당첨번호에 포함 x -> IllegalArgumentException")
+    @DisplayName("보너스볼이 당첨번호에 포함 될 수 없음 -> IllegalArgumentException")
     void validation() {
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        assertThatThrownBy(() -> new WinningLotto(winningNumbers, 7))
+        assertThatThrownBy(() -> new WinningLotto(winningNumbers, 1))
                 .isInstanceOf(IllegalArgumentException.class);
         // 정상
-        assertThatCode(() -> new WinningLotto(winningNumbers, 1))
+        assertThatCode(() -> new WinningLotto(winningNumbers, 7))
                 .doesNotThrowAnyException();
     }
 
