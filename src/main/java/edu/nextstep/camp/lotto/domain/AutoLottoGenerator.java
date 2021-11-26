@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class AutoLottoGenerator implements LottoGenerator {
+    private static final List<LottoNumber> DECK = new ArrayList<>(LottoNumber.totalNumbers());
     private static final int HEAD = 0;
 
     private static final AutoLottoGenerator instance = new AutoLottoGenerator();
@@ -17,8 +18,7 @@ public class AutoLottoGenerator implements LottoGenerator {
 
     @Override
     public Lotto generate() {
-        List<LottoNumber> deck = new ArrayList<>(LottoNumber.totalNumbers());
-        Collections.shuffle(deck);
-        return Lotto.fromLottoNumbers(deck.subList(HEAD, Lotto.SIZE_OF_NUMBERS));
+        Collections.shuffle(DECK);
+        return Lotto.fromLottoNumbers(DECK.subList(HEAD, Lotto.SIZE_OF_NUMBERS));
     }
 }
