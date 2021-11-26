@@ -1,16 +1,16 @@
-package lotto.step3.controller;
+package lotto.step3_4.controller;
 
-import lotto.step3.domain.Lotteries;
-import lotto.step3.domain.LottoStore;
-import lotto.step3.domain.Rank;
-import lotto.step3.domain.WinningLotto;
+import lotto.step3_4.domain.Lotteries;
+import lotto.step3_4.domain.LottoStore;
+import lotto.step3_4.domain.Rank;
+import lotto.step3_4.domain.WinningLotto;
 
 import java.util.Map;
 
-import static lotto.step3.domain.LottoStatistics.calculateRateOfProfit;
-import static lotto.step3.domain.LottoStatistics.createLottoStatistics;
-import static lotto.step3.view.InputView.*;
-import static lotto.step3.view.ResultView.*;
+import static lotto.step3_4.domain.LottoStatistics.calculateRateOfProfit;
+import static lotto.step3_4.domain.LottoStatistics.createLottoStatistics;
+import static lotto.step3_4.view.InputView.*;
+import static lotto.step3_4.view.ResultView.*;
 
 public class LottoController {
 

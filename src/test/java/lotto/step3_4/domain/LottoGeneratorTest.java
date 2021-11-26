@@ -1,4 +1,4 @@
-package lotto.step3.domain;
+package lotto.step3_4.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

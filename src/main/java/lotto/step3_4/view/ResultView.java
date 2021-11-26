@@ -1,9 +1,9 @@
-package lotto.step3.view;
+package lotto.step3_4.view;
 
-import lotto.step3.domain.Lotteries;
-import lotto.step3.domain.Lotto;
-import lotto.step3.domain.LottoStore;
-import lotto.step3.domain.Rank;
+import lotto.step3_4.domain.Lotteries;
+import lotto.step3_4.domain.Lotto;
+import lotto.step3_4.domain.LottoStore;
+import lotto.step3_4.domain.Rank;
 
 import java.util.Arrays;
 import java.util.Collections;

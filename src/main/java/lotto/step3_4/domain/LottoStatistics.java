@@ -1,4 +1,4 @@
-package lotto.step3.domain;
+package lotto.step3_4.domain;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;

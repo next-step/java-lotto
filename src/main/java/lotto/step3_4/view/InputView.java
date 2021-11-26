@@ -1,4 +1,4 @@
-package lotto.step3.view;
+package lotto.step3_4.view;
 
 import java.util.ArrayList;
 import java.util.Arrays;
