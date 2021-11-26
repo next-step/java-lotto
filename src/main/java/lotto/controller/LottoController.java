@@ -6,20 +6,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.model.Lotto;
+import lotto.model.Lottos;
 import lotto.model.Number;
 import lotto.model.Result;
-import lotto.service.LottoService;
 import lotto.utils.LottoNumberGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoController {
-
-    private final LottoService lottoService;
-
-    public LottoController(LottoService lottoService) {
-        this.lottoService = lottoService;
-    }
 
     public void start() {
         int purchasedCount = InputView.acceptPuchaseAmount();
@@ -27,7 +21,8 @@ public class LottoController {
         ResultView.printLottos(lottos);
         String[] array = InputView.acceptWinningNumber();
 
-        Result result = lottoService.matchLotto(lottos, makeWinningNumber(array));
+        Lottos purchasedLottos = new Lottos(lottos);
+        Result result = purchasedLottos.makeResult(makeWinningNumber(array));
 
         ResultView.printResult(purchasedCount * Lotto.eachAmount, result);
     }
