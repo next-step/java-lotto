@@ -9,6 +9,8 @@ public class Lotto {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
 
+    private static Random random = new Random();
+
     private static final String FORM_ERROR_MSG = "로또는 6자리 형식입니다.!!!";
 
     private List<LottoNumber> numbers;
@@ -50,7 +52,7 @@ public class Lotto {
         List<LottoNumber> autoNumbers = new ArrayList<>();
 
         while (autoNumbers.size() != LOTTO_SIZE) {
-            int raffleNumber = new Random().nextInt(LOTTO_MAX_NUMBER -1) + 1;
+            int raffleNumber = random.nextInt(LOTTO_MAX_NUMBER -1) + 1;
             LottoNumber randomNumber = LottoNumber.from(raffleNumber);
             checkDuplicationNumber(autoNumbers, randomNumber);
 
