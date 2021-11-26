@@ -6,40 +6,37 @@ public class LottoNumber {
     private final Integer lottoNumber;
 
     public static final int BOUND_START = 1;
-
     public static final int BOUND_END = 45;
 
     public LottoNumber(int lottoNumber) {
-        checkBound(lottoNumber);
-        this.lottoNumber = lottoNumber;
+        this.lottoNumber = checkBound(lottoNumber);
+
     }
 
     public LottoNumber(String numberString) {
-        checkNumeric(numberString);
-        Integer number = Integer.parseInt(numberString);
-        checkBound(number);
-        this.lottoNumber = number;
+        this(checkNumeric(numberString));
     }
 
     public Integer getLottoNumber() {
         return lottoNumber;
     }
 
-    public void checkNumeric(String numberString) {
+    public static int checkNumeric(String numberString) {
         try {
-            Integer.parseInt(numberString);
+            return Integer.parseInt(numberString);
         } catch (Exception e) {
             throw new IllegalArgumentException("숫자가 아닙니다");
         }
     }
 
-    private void checkBound(Integer number) {
+    private static int checkBound(Integer number) {
         if (number > BOUND_END) {
             throw new IllegalArgumentException(BOUND_END + "보다 큰 숫자가 입력될 수 없습니다.");
         }
         if (number < BOUND_START) {
             throw new IllegalArgumentException(BOUND_START + "보다 작은 숫자가 입력될 수 없습니다.");
         }
+        return number;
     }
 
     @Override
