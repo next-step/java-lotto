@@ -43,7 +43,7 @@ public class Lotto {
         }
     }
 
-    public Integer checkMatching(WinningLotto winningLotto) {
+    public int checkMatching(WinningLotto winningLotto) {
         Long count = lotto.stream()
                 .filter(winningLotto::checkContainNumber)
                 .count();
