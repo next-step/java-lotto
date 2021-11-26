@@ -1,6 +1,5 @@
 package lotto.domain.entity;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -15,11 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoTicketTest {
-
-  @BeforeEach
-  void setup() {
-
-  }
 
   @ParameterizedTest
   @MethodSource("makeLottoNumberList")
@@ -60,7 +54,6 @@ class LottoTicketTest {
   void getContainsNumberTest(LottoTicket lottoTicket, LottoTicket winning, int count) {
     assertEquals(lottoTicket.getMatchedCount(winning), count);
   }
-
 
   private static Stream<Arguments> makeLottoNumbers() {
     return Stream.of(

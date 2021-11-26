@@ -3,6 +3,7 @@ package lotto.domain.entity;
 public class Budget {
 
   private static final String INVALID_BUDGET = "구매할 수 없는 금액입니다.";
+  private static final int ZERO = 0;
 
   private int cost;
 
@@ -20,9 +21,6 @@ public class Budget {
   }
 
   public boolean isEmpty() {
-    if (this.cost != 0) {
-      return true;
-    }
-    return false;
+    return this.cost <= ZERO;
   }
 }
