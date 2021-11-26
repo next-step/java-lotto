@@ -1,13 +1,10 @@
 package com.kakao.lotto.domain;
 
-import com.kakao.lotto.supportInfo.RankStatistic;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.provider.Arguments;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -33,4 +30,17 @@ class LottoTicketsTest {
                 () -> lottoTickets.getLottoTickets().add(LottoTicket.of(Arrays.asList(1, 3, 7, 8, 9, 10))));
     }
 
+    @Test
+    @DisplayName("로또 티켓 그룹끼리 병합이 가능하다.")
+    void concat() {
+        LottoTicket lottoTicket1 = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket lottoTicket2 = LottoTicket.of(Arrays.asList(1, 3, 7, 8, 9, 10));
+
+        LottoTickets lottoTicketGroup = new LottoTickets(Collections.singletonList(lottoTicket1));
+        LottoTickets addingLottoTicketGroup = new LottoTickets(Collections.singletonList(lottoTicket2));
+
+        LottoTickets mergedTicket = lottoTicketGroup.createMergedTicket(addingLottoTicketGroup);
+
+        assertThat(mergedTicket.getLottoTickets()).containsExactly(lottoTicket1, lottoTicket2);
+    }
 }

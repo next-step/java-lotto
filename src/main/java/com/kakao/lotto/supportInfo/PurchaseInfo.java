@@ -15,15 +15,8 @@ public class PurchaseInfo {
     }
 
     public PurchaseInfo(int money, List<List<Integer>> pickedLotteries) {
-        validate(money, pickedLotteries);
         this.money = money;
         this.pickedLotteries = pickedLotteries;
-    }
-
-    private void validate(int money, List<List<Integer>> pickedLotteries) {
-        if (money / BASE_MONEY < pickedLotteries.size()) {
-            throw new IllegalArgumentException("구입금액보다 큰 수동로또 숫자 입력은 불가능합니다.");
-        }
     }
 
     public int getTotalTicketCount() {

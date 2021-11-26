@@ -4,6 +4,7 @@ import com.kakao.lotto.supportInfo.RankStatistic;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
@@ -27,5 +28,11 @@ public class LottoTickets {
                 .map(winLottoTicket::matchLottoRank)
                 .filter(rank -> lottoRank == rank)
                 .count();
+    }
+
+    public LottoTickets createMergedTicket(LottoTickets addLottoTickets){
+        List<LottoTicket> mergedTicket = Stream.concat(lottoTickets.stream(), addLottoTickets.lottoTickets.stream())
+                .collect(Collectors.toList());
+        return new LottoTickets(mergedTicket);
     }
 }

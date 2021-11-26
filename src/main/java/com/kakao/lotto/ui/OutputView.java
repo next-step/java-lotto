@@ -31,7 +31,7 @@ public class OutputView {
 
     public static void printLottoWinStatistic(RankStatistic rankStatistic) {
         System.out.println("\n\n당첨통계");
-        System.out.println("\n=========");
+        System.out.println("=========");
         rankStatistic.getRankCount().entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByKey())
