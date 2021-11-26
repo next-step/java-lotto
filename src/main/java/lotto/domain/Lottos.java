@@ -1,11 +1,8 @@
 package lotto.domain;
 
-import lotto.domain.enums.Rank;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -37,7 +34,7 @@ public class Lottos {
     }
 
     public int size() {
-        return this.lottos.size();
+        return lottos.size();
     }
 
 }

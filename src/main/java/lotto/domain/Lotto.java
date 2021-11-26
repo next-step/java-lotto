@@ -12,17 +12,6 @@ public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public static Lotto pickRandomNumber() {
-        Set<LottoNumber> tmpLottoNumbers = new HashSet<>();
-        while (tmpLottoNumbers.size() < NUMBER_COUNT) {
-            tmpLottoNumbers.add(LottoNumber.valueOf(RandomUtil.randomInt(LottoNumber.MAX_VALUE)));
-        }
-
-        List<LottoNumber> lottoNumbers = new ArrayList<>(tmpLottoNumbers);
-        Collections.sort(lottoNumbers);
-        return new Lotto(lottoNumbers);
-    }
-
     public Lotto(final String numbers) {
         this(Arrays.stream(numbers.split(STRING_NUMBERS_DELIMITER))
                 .map(String::trim)
@@ -37,6 +26,17 @@ public class Lotto {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public static Lotto pickRandomNumber() {
+        Set<LottoNumber> tmpLottoNumbers = new HashSet<>();
+        while (tmpLottoNumbers.size() < NUMBER_COUNT) {
+            tmpLottoNumbers.add(LottoNumber.valueOf(RandomUtil.randomInt(LottoNumber.MAX_VALUE)));
+        }
+
+        List<LottoNumber> lottoNumbers = new ArrayList<>(tmpLottoNumbers);
+        Collections.sort(lottoNumbers);
+        return new Lotto(lottoNumbers);
     }
 
     public int countMatch(Lotto other) {
