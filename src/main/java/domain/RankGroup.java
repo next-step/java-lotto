@@ -15,34 +15,34 @@ public class RankGroup {
 
     private final List<Rank> rankGroup;
 
-    public RankGroup(LotteryTicket lottery, LastWeekLottery lastWeekLottery, int bonusBall) {
-        this(winningNumberList(lottery, lastWeekLottery, bonusBall));
+    public RankGroup(LotteryTicket lottery, WinningLottery lastWeekLottery) {
+        this(winningNumberList(lottery, lastWeekLottery));
     }
 
-    public RankGroup(LotteryTickets lottery, LastWeekLottery lastWeekLottery, int bonusBall) {
-        this(winningNumberList(lottery, lastWeekLottery, bonusBall));
+    public RankGroup(LotteryTickets lottery, WinningLottery lastWeekLottery) {
+        this(winningNumberList(lottery, lastWeekLottery));
     }
 
     private RankGroup(List<Rank> rankGroup) {
         this.rankGroup = Collections.unmodifiableList(rankGroup);
     }
 
-    private static List<Rank> winningNumberList(LotteryTickets lotteryTickets, LastWeekLottery lastWeekLottery, int bonusBall) {
+    private static List<Rank> winningNumberList(LotteryTickets lotteryTickets, WinningLottery lastWeekLottery) {
         List<Rank> numbers = new ArrayList<>();
         int loopNumber = lotteryTickets.size();
         int rank;
         int bonus;
         for (int i = 0; i < loopNumber; i++) {
             rank = lotteryTickets.matchLottery(i, lastWeekLottery);
-            bonus = lotteryTickets.matchBonusBoll(i, rank, bonusBall);
+            bonus = lotteryTickets.matchBonusBoll(i, rank, lastWeekLottery);
             numbers.add(new Rank(rank, bonus));
         }
         return numbers;
     }
 
-    private static List<Rank> winningNumberList(LotteryTicket lotteryTicket, LastWeekLottery lastWeekLottery, int bonusBall) {
-        int rank = lotteryTicket.matchCount(lastWeekLottery);
-        int bonus = lotteryTicket.matchBonusBall(rank, bonusBall);
+    private static List<Rank> winningNumberList(LotteryTicket lotteryTicket, WinningLottery winningLottery) {
+        int rank = lotteryTicket.matchCount(winningLottery);
+        int bonus = lotteryTicket.matchBonusBall(rank, winningLottery);
 
         return Arrays.asList(new Rank(rank, bonus));
     }
