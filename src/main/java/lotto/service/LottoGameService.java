@@ -18,7 +18,9 @@ public class LottoGameService {
     private LottoNumbers lastWeekWinningNumbers;
 
     public LottoGameService() {
-
+        inputView = new InputView();
+        outputView = new OutputView();
+        lottoes = new Lottoes();
     }
 
     public LottoGameService(LottoGameCount lottoGameCount, Lottoes lottoes) {
@@ -27,12 +29,9 @@ public class LottoGameService {
     }
 
     public void buyLotto() {
-        inputView = new InputView();
-        outputView = new OutputView();
         inputView.inputPrice();
         lottoGameCount = inputView.getLottoGameCount();
         outputView.drawLottoGameCount(lottoGameCount);
-        lottoes = new Lottoes();
         lottoes.makeLottoes(lottoGameCount);
         outputView.drawPurchasedLottoes(lottoes);
     }
