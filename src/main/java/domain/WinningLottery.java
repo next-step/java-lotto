@@ -1,44 +1,60 @@
 package domain;
 
-import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LastWeekLottery {
+public class WinningLottery {
     private static final String LOTTERY_NUMBER_LACK_ERROR_MESSAGE = "error : 로또 번호는 중복되지 않는 번호 6개 입니다.";
-    private static final int LOTTERY_NUMBER_SIX = 6;
+    private static final int LOTTERY_SIZE_MAX = 6;
+    private static final boolean MATCH_NUMBER_TRUE = true;
+    private static final boolean MATCH_NUMBER_FALSE = false;
 
-    private final Set<LotteryNumber> lastWeekLotteryNumber;
+    private final Set<LotteryNumber> winningLottery;
+    private final int bonusBall;
 
-    public LastWeekLottery(Set<Integer> numbers) {
-        this.lastWeekLotteryNumber = Collections.unmodifiableSet(lastWeekLottery(numbers));
+    public WinningLottery(Set<Integer> numbers, int bonusBall) {
+        this.winningLottery = changeToLotteryNumber(numbers);
+        this.bonusBall = bonusBall;
     }
 
-    public Set<LotteryNumber> lastWeekLottery(Set<Integer> numbers) {
-        validLastWeekLotteryNumber(numbers.size());
+    public Set<LotteryNumber> changeToLotteryNumber(Set<Integer> numbers) {
+        validWinningLottery(numbers.size());
 
         return of(numbers);
     }
 
-    private void validLastWeekLotteryNumber(int count) {
-        if (count < LOTTERY_NUMBER_SIX) {
+    private void validWinningLottery(int count) {
+        if (count < LOTTERY_SIZE_MAX) {
             throw new IllegalArgumentException(LOTTERY_NUMBER_LACK_ERROR_MESSAGE);
         }
     }
 
-    public Set<LotteryNumber> of(Set<Integer> numbers) {
+    private Set<LotteryNumber> of(Set<Integer> numbers) {
         return numbers.stream()
                 .map(LotteryNumber::new)
                 .collect(Collectors.toSet());
     }
 
-    public int matchNumber(int number) {
-        return (int) lastWeekLotteryNumber.stream()
-                .filter(i -> i.value() == number)
-                .count();
+    public boolean matchLottery(int lotteryNumber) {
+        return winningLottery.stream()
+                .anyMatch(number -> validLotteryNumber(number.value(), lotteryNumber));
+    }
+
+    private boolean validLotteryNumber(int winningNumber, int lotteryNumber) {
+        if (winningNumber == lotteryNumber) {
+            return MATCH_NUMBER_TRUE;
+        }
+        return MATCH_NUMBER_FALSE;
+    }
+
+    public boolean matchBonusBall(int lotteryNumber) {
+        if (lotteryNumber == bonusBall) {
+            return MATCH_NUMBER_TRUE;
+        }
+        return MATCH_NUMBER_FALSE;
     }
 
     public int size() {
-        return lastWeekLotteryNumber.size();
+        return winningLottery.size();
     }
 }
