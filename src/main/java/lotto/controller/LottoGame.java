@@ -17,13 +17,13 @@ public class LottoGame {
         Store store = Store.of(printInputIntro());
         LottoTicket lottoTicket = store.purchaseTicket();
 
-        printOrderCount(store.getOrderCount());
+        printOrderCount(store.getLottoCount());
         printOrderLottoNumber(lottoTicket);
 
         LottoWinning lottoWinning = LottoWinning.from(printInputWinningNumbers());
         Map<Integer, Integer> prizeWinnersRepository = lottoWinning.createRepository(lottoTicket);
 
         printWinningStatics(prizeWinnersRepository);
-        printRateOfReturn(lottoWinning.calculateRateOfProfit(lottoTicket, store.getOrderPrice().getOrderPrice()));
+        printRateOfReturn(lottoWinning.calculateRateOfProfit(lottoTicket, store.getLottoPrice().getLottoPrice()));
     }
 }

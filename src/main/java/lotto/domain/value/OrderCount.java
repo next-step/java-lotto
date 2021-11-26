@@ -6,10 +6,10 @@ public class OrderCount {
 
     private static final int MIN_ORDER_COUNT = 1;
 
-    private final int orderCount;
+    private final int lottoCount;
 
     public OrderCount(int orderCount) {
-        this.orderCount = orderCount;
+        this.lottoCount = orderCount;
     }
 
     public static OrderCount from(int orderCount) {
@@ -21,8 +21,8 @@ public class OrderCount {
         return new OrderCount(orderCount);
     }
 
-    public int getOrderCount() {
-        return orderCount;
+    public int getLottoCount() {
+        return lottoCount;
     }
 
     @Override
@@ -30,11 +30,11 @@ public class OrderCount {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderCount that = (OrderCount) o;
-        return orderCount == that.orderCount;
+        return lottoCount == that.lottoCount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderCount);
+        return Objects.hash(lottoCount);
     }
 }

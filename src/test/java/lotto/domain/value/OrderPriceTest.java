@@ -1,6 +1,5 @@
 package lotto.domain.value;
 
-import lotto.domain.value.OrderPrice;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +13,7 @@ public class OrderPriceTest {
     void createTest() {
         OrderPrice orderPrice = OrderPrice.from(3000);
 
-        assertThat(orderPrice.getOrderPrice()).isEqualTo(3000);
+        assertThat(orderPrice.getLottoPrice()).isEqualTo(3000);
     }
 
     @Test

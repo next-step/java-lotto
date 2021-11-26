@@ -6,10 +6,10 @@ public class OrderPrice {
 
     private static final int LOTTO_PRICE = 1000;
 
-    private final int orderPrice;
+    private final int lottoPrice;
 
     private OrderPrice(int orderPrice) {
-        this.orderPrice = orderPrice;
+        this.lottoPrice = orderPrice;
     }
 
     public static OrderPrice from(int orderPrice) {
@@ -21,8 +21,8 @@ public class OrderPrice {
         return new OrderPrice(orderPrice);
     }
 
-    public int getOrderPrice() {
-        return orderPrice;
+    public int getLottoPrice() {
+        return lottoPrice;
     }
 
     @Override
@@ -30,11 +30,11 @@ public class OrderPrice {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderPrice that = (OrderPrice) o;
-        return orderPrice == that.orderPrice;
+        return lottoPrice == that.lottoPrice;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderPrice);
+        return Objects.hash(lottoPrice);
     }
 }

@@ -1,6 +1,5 @@
 package lotto.domain.value;
 
-import lotto.domain.value.OrderCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +13,7 @@ public class OrderCountTest {
     void createTest() {
         OrderCount orderCount = OrderCount.from(3);
 
-        assertThat(orderCount.getOrderCount()).isEqualTo(3);
+        assertThat(orderCount.getLottoCount()).isEqualTo(3);
     }
 
     @Test

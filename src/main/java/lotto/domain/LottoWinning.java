@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class LottoWinning {
 
-    private final static int LOTTO_SIZE = 6;
+    private static final int LOTTO_SIZE = 6;
 
     private final Lotto winningNumbers;
 
