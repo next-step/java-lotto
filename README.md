@@ -60,6 +60,10 @@ Prize
 
 * Prize 는 matchCount 와 bonus 여부를 확인하여 알맞은 등수를 반환할 수 있다.
 
+LottoResult
+
+* `Map<Prize, Integer>` field 를 가진다.
+
 
 
 ## 3단계 로또(2등)
