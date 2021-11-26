@@ -16,6 +16,7 @@ public class OutputView {
     private static final String COMMA_AND_SPACING = ", ";
     private static final String NEXT_LINE = "\n";
     private static final String HYPHEN_LINE = "----------";
+    private static final String EMPTY = "";
     private static final int LAST_COMMA_LENGTH = 2;
     private static final int LOTTERY_START_NUMBER = 3;
     private static final int LOTTERY_END_NUMBER = 7;
@@ -33,7 +34,7 @@ public class OutputView {
         IntStream.range(0, loopNumber)
                 .forEach(index -> {
                     int size = lotteryTickets.lotteryTicket(index).size();
-                    String lotteryNumber = "";
+                    String lotteryNumber = EMPTY;
                     for (int i = 0; i < size; i++) {
                         lotteryNumber += lotteryTickets.lotteryTicket(index).value(i) + COMMA_AND_SPACING;
                     }
