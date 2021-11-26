@@ -50,6 +50,10 @@ public class Lotto {
                 .anyMatch(bonus::equals);
     }
 
+    public boolean contains(LottoNumber number) {
+        return lottoNumbers.contains(number);
+    }
+
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
