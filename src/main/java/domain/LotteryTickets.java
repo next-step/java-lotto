@@ -16,9 +16,11 @@ public class LotteryTickets {
     }
 
     private static List<LotteryTicket> IssueLotteryTicket(int lotteryCount) {
+        LotteryNumbers lotteryNumbers = new LotteryNumbers();
+
         List<LotteryTicket> lotteryTicket = new ArrayList<>();
         for (int i = 0; i < lotteryCount; i++) {
-            lotteryTicket.add(new LotteryTicket(RandomNumber.bringNumber()));
+            lotteryTicket.add(new LotteryTicket(lotteryNumbers.bringNumber()));
         }
 
         return lotteryTicket;
@@ -28,12 +30,12 @@ public class LotteryTickets {
         return lotteryTickets.get(index);
     }
 
-    public int matchLottery(int index, LastWeekLottery lastWeekLottery) {
+    public int matchLottery(int index, WinningLottery lastWeekLottery) {
         return lotteryTickets.get(index).matchCount(lastWeekLottery);
     }
 
-    public int matchBonusBoll(int index, int rank, int bonusBall) {
-        return lotteryTickets.get(index).matchBonusBall(rank, bonusBall);
+    public int matchBonusBoll(int index, int rank, WinningLottery winningLottery) {
+        return lotteryTickets.get(index).matchBonusBall(rank, winningLottery);
     }
 
     public int size() {
