@@ -13,7 +13,6 @@ public class InputPrice {
 
     public void validateSmallestUnit() {
         if (inputPrice < NUMBER_THOUSAND || Math.floorMod(inputPrice, NUMBER_THOUSAND) != NUMBER_ZERO) {
-            System.exit(NUMBER_ZERO);
             throw new IndexOutOfBoundsException(MSG_MINIMUM_PURCHASE_PRICE);
         }
     }

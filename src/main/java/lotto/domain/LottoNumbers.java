@@ -18,6 +18,8 @@ public class LottoNumbers {
 
     public LottoNumbers(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+        validateLottoNumbersLength();
+        validateLottoNumbersOneToFortyfive();
     }
 
     public LottoNumbers createAutoLottoNumbers() {
@@ -33,13 +35,13 @@ public class LottoNumbers {
         return new LottoNumbers(lottoNumbers);
     }
 
-    public void validateLottoNumbersLength() {
+    private void validateLottoNumbersLength() {
         if (lottoNumbers.size() > NUMBER_SIX) {
             throw new IndexOutOfBoundsException(MSG_LOTTO_NUMBERS_LENGTH_ONLY_SIX);
         }
     }
 
-    public void validateLottoNumbersOneToFortyfive() {
+    private void validateLottoNumbersOneToFortyfive() {
         lottoNumbers.forEach(lottoNumber -> {
             if (lottoNumber < NUMBER_ONE || lottoNumber > NUMBER_FORTY_FIVE) {
                 throw new IndexOutOfBoundsException(MSG_LOTTO_NUMBER_ONE_TO_FORTY_FIVE);

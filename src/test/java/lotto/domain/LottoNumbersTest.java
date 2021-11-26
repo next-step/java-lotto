@@ -29,9 +29,8 @@ public class LottoNumbersTest {
     @Test
     @DisplayName("지난 주 당첨 번호는 6개만 입력 받는다.")
     public void validateLottoNumbersLength() {
-        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
         assertThatThrownBy(() -> {
-            lottoNumbers.validateLottoNumbersLength();
+            LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
         }).isInstanceOf(IndexOutOfBoundsException.class)
                 .hasMessageContaining("지난 주 당첨 번호는 6개만 입력할 수 있습니다.");
     }
@@ -39,10 +38,8 @@ public class LottoNumbersTest {
     @Test
     @DisplayName("지난 주 당첨 번호는 1~45의 값을 가진다.")
     public void validateLottoNumbersOneToFortyfive() {
-        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 46));
-
         assertThatThrownBy(() -> {
-            lottoNumbers.validateLottoNumbersOneToFortyfive();
+            LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 46));
         }).isInstanceOf(IndexOutOfBoundsException.class)
                 .hasMessageContaining("지난 주 당첨 번호는 1~45만 입력할 수 있습니다.");
     }
