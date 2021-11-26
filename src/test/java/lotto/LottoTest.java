@@ -39,7 +39,7 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("입력된 lotto 길이가 SIZE 보다 클 때 exception 테스트")
+    @DisplayName("입력된 lotto 길이가 SIZE 와 다를 때 exception 테스트")
     void sizeCheckTest() {
         assertThatThrownBy(() -> {
             Lotto lotto = new Lotto(() -> Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6), new LottoNumber(7)));

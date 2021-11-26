@@ -35,7 +35,7 @@ public class LottosTest {
         lottoList1.add(new Lotto("1,2,3,4,5,7"));
         Lottos lottos1 = new Lottos(lottoList1);
         LottoNumber bonus1 = new LottoNumber(7);
-        listOfArguments.add(Arguments.of(lottos1, bonus1, 2000000000 * 2 + 30000000));
+        listOfArguments.add(Arguments.of(lottos1, bonus1, 2_000_000_000 * 2 + 30000000));
 
         List<Lotto> lottoList2 = new ArrayList<>();
         lottoList2.add(new Lotto("1,2,3,14,15,16"));
