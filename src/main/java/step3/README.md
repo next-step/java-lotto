@@ -25,6 +25,11 @@
 
 ---
 
+### 리팩토링 명세
+
+    1. custom exception 관리
+
+
 ### 질문
 
     1. Lotto에서 checkDuplicate 메서드를 생성자에서 재활용하고 싶은데, 할당먼저 하고 체크 하는게 괜찮은지
