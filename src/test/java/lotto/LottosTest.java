@@ -25,7 +25,7 @@ public class LottosTest {
         lottoList.add(new Lotto("1,2,13,44,45,36"));
         lottoList.add(new Lotto("21,12,33,1,2,3"));
         lottoList.add(new Lotto("1,12,13,44,45,36"));
-        Lottos lottos = new Lottos(lottoList);
+        Lottos lottos = Lottos.createManualLottos(lottoList);
         LottoNumber bonus = new LottoNumber(10);
         listOfArguments.add(Arguments.of(lottos, bonus, 2_000_000_000 + 5_000));
 
@@ -33,7 +33,7 @@ public class LottosTest {
         lottoList1.add(new Lotto("1,2,3,4,5,6"));
         lottoList1.add(new Lotto("1,2,3,4,5,6"));
         lottoList1.add(new Lotto("1,2,3,4,5,7"));
-        Lottos lottos1 = new Lottos(lottoList1);
+        Lottos lottos1 = Lottos.createManualLottos(lottoList1);
         LottoNumber bonus1 = new LottoNumber(7);
         listOfArguments.add(Arguments.of(lottos1, bonus1, 2_000_000_000 * 2 + 30000000));
 
@@ -41,7 +41,7 @@ public class LottosTest {
         lottoList2.add(new Lotto("1,2,3,14,15,16"));
         lottoList2.add(new Lotto("11,12,13,4,5,6"));
         lottoList2.add(new Lotto("1,2,3,14,5,7"));
-        Lottos lottos2 = new Lottos(lottoList2);
+        Lottos lottos2 = Lottos.createManualLottos(lottoList2);
         LottoNumber bonus2 = new LottoNumber(7);
         listOfArguments.add(Arguments.of(lottos2, bonus2, 5_000 * 2 + 50_000));
 
@@ -61,7 +61,7 @@ public class LottosTest {
     void getCountTest() {
         WinningLotto winningNumber = new WinningLotto("1,2,3,4,5,6", new LottoNumber(13));
         LottoNumber bonus = new LottoNumber(10);
-        Lottos lottos = new Lottos(7000,
+        Lottos lottos = Lottos.createRandomLottos(7000,
                 () -> Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(7), new LottoNumber(8), new LottoNumber(9)));
         assertThat(lottos.getCount(Prize.FIFTH, winningNumber, bonus)).isEqualTo(7);
     }

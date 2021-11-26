@@ -26,11 +26,11 @@ public class WinningLottoTest {
         assertThatThrownBy(() ->
         {
             WinningLotto winningLotto = new WinningLotto("1,2,3,4,5$6", new LottoNumber(6));
-        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("당첨 번호가 정수로 변환 불가능 합니다.");
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("당첨 번호가 NUMBER로 변환 불가능 합니다.");
     }
 
     @Test
-    @DisplayName("당첨 번호의 size 테스트")
+    @DisplayName("입력된 당첨번호의 길이가 SIZE 와 다를 때 exception 테스트")
     void checkSizeTest() {
         assertThatThrownBy(() ->
         {

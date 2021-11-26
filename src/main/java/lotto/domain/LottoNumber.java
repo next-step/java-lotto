@@ -13,17 +13,19 @@ public class LottoNumber {
 
     }
 
-    public LottoNumber(String numberString) {
-        this(checkNumeric(numberString));
+    public static LottoNumber of(String lottoNumber) {
+        checkNumeric(lottoNumber);
+        return new LottoNumber(Integer.parseInt(lottoNumber));
+
     }
 
     public Integer getLottoNumber() {
         return lottoNumber;
     }
 
-    public static int checkNumeric(String numberString) {
+    public static void checkNumeric(String numberString) {
         try {
-            return Integer.parseInt(numberString);
+            Integer.parseInt(numberString);
         } catch (Exception e) {
             throw new IllegalArgumentException("숫자가 아닙니다");
         }

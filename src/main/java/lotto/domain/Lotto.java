@@ -20,12 +20,20 @@ public class Lotto {
 
     public Lotto(String lottoString) {
         this(Arrays.stream(lottoString.split(","))
-                .map(lottoNumberString -> new LottoNumber(lottoNumberString))
+                .map(lottoNumberString -> LottoNumber.of(lottoNumberString))
                 .collect(Collectors.toList()));
     }
 
-    public Lotto(GetLottoNumbersStrategy getLottoNumbersStrategy) {
-        this(getLottoNumbersStrategy.getLotto());
+    public static Lotto createRandomLotto(GetLottoNumbersStrategy getLottoNumbersStrategy) {
+        return new Lotto(getLottoNumbersStrategy.getLotto());
+    }
+
+    public static Lotto createManualLotto(String lottoString) {
+        return new Lotto(lottoString);
+    }
+
+    public static Lotto createManualLotto(List<LottoNumber> lotto) {
+        return new Lotto(lotto);
     }
 
     private void checkSize(List<LottoNumber> lottoLottoNumbers) {

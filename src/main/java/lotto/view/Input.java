@@ -1,8 +1,10 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.domain.WinningLotto;
-
+import lotto.domain.Lottos;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Input {
@@ -28,5 +30,16 @@ public class Input {
         System.out.println("보너스 볼을 입력해 주세요.");
         LottoNumber bonusBall = new LottoNumber(SCANNER.nextInt());
         return bonusBall;
+    }
+
+    public static int inputManualLottoCount() {
+        return SCANNER.nextInt();
+    }
+
+    public static Lottos inputManualLottos() {
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.add(Lotto.createManualLotto(SCANNER.nextLine()));
+
+        return SCANNER.nextInt();
     }
 }

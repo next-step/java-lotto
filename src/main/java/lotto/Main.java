@@ -11,7 +11,7 @@ import lotto.view.Output;
 public class Main {
     public static void main(String[] args) {
         Integer purchaseAmount = Input.inputPurchaseAmount();
-        Lottos lottos = new Lottos(purchaseAmount, new GetRandomLottoNumbers());
+        Lottos lottos = Lottos.createRandomLottos(purchaseAmount, new GetRandomLottoNumbers());
         Output.viewPurchasedLotto(lottos);
         String winningLottoString = Input.inputWinningNumbers();
         LottoNumber bonus = Input.inputBonusBall();

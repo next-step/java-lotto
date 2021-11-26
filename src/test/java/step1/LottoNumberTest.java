@@ -1,5 +1,6 @@
 package step1;
 
+import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step1.domain.Number;
@@ -28,5 +29,11 @@ public class LottoNumberTest {
             Number number = new Number("1*");
         }).isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("숫자로 바뀔 수 없습니다.");
+    }
+
+    @Test
+    @DisplayName("String 타입의 lottoNumber가 int 로 잘 바뀌는지 테스트")
+    void of() {
+        assertThat(LottoNumber.of("10")).isEqualTo(new LottoNumber(10));
     }
 }
