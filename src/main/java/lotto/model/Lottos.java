@@ -5,21 +5,21 @@ import java.util.List;
 
 public class Lottos {
 
-    private final List<Lotto> purchasedLottos;
+    private final List<Lotto> lottos;
 
-    public Lottos(List<Lotto> purchasedLottos) {
-        this.purchasedLottos = purchasedLottos;
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    public List<Lotto> getPurchasedLottos() {
-        return Collections.unmodifiableList(purchasedLottos);
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 
     public Result makeResult(Lotto target) {
         Result result = new Result();
-        purchasedLottos.stream()
-                       .map(lotto -> lotto.match(target))
-                       .forEach(matchedCount -> result.add(matchedCount));
+        lottos.stream()
+              .map(lotto -> lotto.match(target))
+              .forEach(matchedCount -> result.add(matchedCount));
         return result;
     }
 }

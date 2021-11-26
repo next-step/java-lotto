@@ -15,7 +15,7 @@ class LottosTest {
     @Test
     void unmodifiableTest() {
         Lottos lottos = new Lottos(Arrays.asList(new Lotto(LottoNumberGenerator.generate())));
-        assertThatThrownBy(() -> lottos.getPurchasedLottos().add(new Lotto(LottoNumberGenerator.generate())))
+        assertThatThrownBy(() -> lottos.getLottos().add(new Lotto(LottoNumberGenerator.generate())))
                 .isInstanceOf(UnsupportedOperationException.class);
     }
 }

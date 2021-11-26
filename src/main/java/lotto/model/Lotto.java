@@ -6,20 +6,20 @@ public class Lotto {
 
     public static final int eachAmount = 1_000;
 
-    private final List<Number> pickedNumbers;
+    private final List<Number> values;
 
-    public Lotto(List<Number> pickedNumbers) {
-        this.pickedNumbers = pickedNumbers;
+    public Lotto(List<Number> values) {
+        this.values = values;
     }
 
-    public int match(Lotto winningNumber) {
-        return (int) winningNumber.pickedNumbers.stream()
-                                                .filter(pickedNumbers::contains)
-                                                .count();
+    public int match(Lotto lotto) {
+        return (int) lotto.values.stream()
+                                 .filter(values::contains)
+                                 .count();
     }
 
     @Override
     public String toString() {
-        return String.valueOf(pickedNumbers);
+        return String.valueOf(values);
     }
 }
