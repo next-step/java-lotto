@@ -74,4 +74,11 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(value);
     }
+
+    @Override
+    public String toString() {
+        return value.stream().sorted()
+                .collect(Collectors.toList())
+                .toString();
+    }
 }

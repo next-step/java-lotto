@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber>{
     private static final int LOWER_BOUND = 1;
     private static final int UPPER_BOUND = 45;
     private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
@@ -53,5 +53,15 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
+    }
+
+    @Override
+    public int compareTo(LottoNumber other) {
+        return this.value - other.value;
     }
 }
