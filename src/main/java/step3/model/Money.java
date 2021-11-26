@@ -4,8 +4,8 @@ import step3.exception.MoneyRangeNegativeException;
 
 public class Money {
 
+    public static final long MIN = 0L;
     private static final long LOTTO_PRICE = 1000L;
-    private static final long MIN = 0L;
 
     public static Money fromLottoBundleSize(int bundleSize) {
         return new Money(LOTTO_PRICE * bundleSize);

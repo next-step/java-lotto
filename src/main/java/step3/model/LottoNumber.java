@@ -1,6 +1,5 @@
 package step3.model;
 
-import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 
 import java.util.ArrayList;
@@ -12,9 +11,9 @@ import step3.exception.InvalidLottoNumberRangeException;
 
 public class LottoNumber {
 
+    public static final int MIN = 1;
+    public static final int MAX = 45;
     private static final int ZERO_INDEX = 0;
-    private static final int MIN = 1;
-    private static final int MAX = 45;
     private static final List<LottoNumber> DEFAULT_LOTTO_NUMBERS = initDefaultLottoNumbers();
 
     public static List<LottoNumber> generateRandomNumbers(int listSize) {

@@ -34,3 +34,5 @@
 
     1. Lotto에서 checkDuplicate 메서드를 생성자에서 재활용하고 싶은데, 할당먼저 하고 체크 하는게 괜찮은지
     2. Enum에 comparable을 적용하면 자동으로 선언순서가 적용된다는 것을 알게되었습니다.
+    3. 원래 클래스에서 public static private static static 함수 public변수 private 변수 생성자 public함수 private함수
+    인것으로 알고있는데 ENUM은 어떻게 위치시키는 것이 좋은지?

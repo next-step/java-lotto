@@ -10,7 +10,7 @@ public class InputUtil {
 
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String NOT_NUMBER_ERROR_MESSAGE = "숫자가 아닙니다. 다시 입력해주세요";
-    private static final String NUMBER_SPLIT_REGEX = ",";
+    private static final String NUMBER_SPLIT_DELIMITER = ",";
 
     public static int readInt() {
         try {
@@ -42,7 +42,7 @@ public class InputUtil {
     }
 
     private static String[] readStringNumbers() {
-        return readLine().split(NUMBER_SPLIT_REGEX);
+        return readLine().split(NUMBER_SPLIT_DELIMITER);
     }
 
     private InputUtil() {
