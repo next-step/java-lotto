@@ -13,7 +13,7 @@ public class LottoTest {
     @Test
     @DisplayName("로또 자동 생성")
     void create() {
-        Lotto byAuto = Lotto.createByAuto();
+        Lotto byAuto = new Lotto(LottoNumber.createNonDuplicated());
         assertThat(byAuto.getNumbers().size()).isEqualTo(6);
     }
 }

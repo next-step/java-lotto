@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Credit;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.WonLotto;
 
 import java.util.Scanner;
@@ -31,6 +32,6 @@ public class InputView {
     public WonLotto insertWonLotto() {
         System.out.println(INSERT_LAST_WON_LOTTO);
         String line = scanner.nextLine();
-        return WonLotto.of(new Lotto(line));
+        return WonLotto.of(new Lotto(LottoNumber.createNonDuplicated(line)));
     }
 }
