@@ -6,7 +6,7 @@ import static lotto.utils.Constants.NUMBER_THOUSAND;
 import static lotto.utils.Constants.NUMBER_ZERO;
 
 public class InputPrice {
-    private Integer inputPrice;
+    private final int inputPrice;
 
     public InputPrice(Integer inputPrice) {
         this.inputPrice = inputPrice;
