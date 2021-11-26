@@ -2,6 +2,8 @@ package view;
 
 import domain.*;
 
+import java.util.stream.IntStream;
+
 public class OutputView {
     private static final String PURCHASE_MESSAGE = "%d개를 구매했습니다.\n";
     private static final String LOTTERY_NUMBER_MESSAGE = "[%s]\n";
@@ -16,10 +18,11 @@ public class OutputView {
     private static final String HYPHEN_LINE = "----------";
     private static final int LAST_COMMA_LENGTH = 2;
     private static final int LOTTERY_START_NUMBER = 3;
-    private static final int LOTTERY_END_NUMBER = 6;
+    private static final int LOTTERY_END_NUMBER = 7;
     private static final int WINNING_FIVE = 5;
     private static final int BONUS_NONE = 0;
     private static final int BONUS = 1;
+    private static final int PROFIT_STANDARD = 1;
 
     public static void purchaseLottery(Store store) {
         System.out.printf(PURCHASE_MESSAGE, store.lotteryCount());
@@ -27,21 +30,18 @@ public class OutputView {
 
     public static void printLotteryNumber(LotteryTickets lotteryTickets) {
         int loopNumber = lotteryTickets.size();
-        for (int i = 0; i < loopNumber; i++) {
-            System.out.printf(LOTTERY_NUMBER_MESSAGE, lotteryNumber(lotteryTickets.lotteryTicket(i)));
-        }
+        IntStream.range(0, loopNumber)
+                .forEach(index -> {
+                    int size = lotteryTickets.lotteryTicket(index).size();
+                    String lotteryNumber = "";
+                    for (int i = 0; i < size; i++) {
+                        lotteryNumber += lotteryTickets.lotteryTicket(index).value(i) + COMMA_AND_SPACING;
+                    }
+                    lotteryNumber = lotteryNumber.substring(0, lotteryNumber.length() - LAST_COMMA_LENGTH);
 
+                    System.out.printf(LOTTERY_NUMBER_MESSAGE, lotteryNumber);
+                });
         System.out.print(NEXT_LINE);
-    }
-
-    private static String lotteryNumber(LotteryTicket lotteryTicket) {
-        StringBuilder numbers = new StringBuilder();
-        int loopNumber = lotteryTicket.size();
-        for (int i = 0; i < loopNumber; i++) {
-            numbers.append(lotteryTicket.getLotteryNumber(i)).append(COMMA_AND_SPACING);
-        }
-
-        return numbers.substring(0, numbers.length() - LAST_COMMA_LENGTH);
     }
 
     public static void resultWinningMessage() {
@@ -51,18 +51,15 @@ public class OutputView {
     }
 
     public static void printWinningPrize(RankGroup rankGroup) {
-        for (int i = LOTTERY_START_NUMBER; i <= LOTTERY_END_NUMBER; i++) {
-            System.out.printf(WINNING_PRIZE_MESSAGE, i, rankGroup.moneyPrizeRank(i, BONUS_NONE), rankGroup.count(i, BONUS_NONE));
-            printBonusBall(i, rankGroup);
-            System.out.print(NEXT_LINE);
-        }
-    }
-
-    private static void printBonusBall(int rank, RankGroup rankGroup) {
-        if (rank == WINNING_FIVE) {
-            System.out.print(NEXT_LINE);
-            System.out.printf(BONUS_BALL_MESSAGE, rank, rankGroup.moneyPrizeRank(rank, BONUS), rankGroup.count(rank, BONUS));
-        }
+        IntStream.range(LOTTERY_START_NUMBER, LOTTERY_END_NUMBER)
+                .forEach(rank -> {
+                    System.out.printf(WINNING_PRIZE_MESSAGE, rank, rankGroup.moneyPrizeRank(rank, BONUS_NONE), rankGroup.count(rank, BONUS_NONE));
+                    System.out.print(NEXT_LINE);
+                    if (rank == WINNING_FIVE) {
+                        System.out.printf(BONUS_BALL_MESSAGE, rank, rankGroup.moneyPrizeRank(rank, BONUS), rankGroup.count(rank, BONUS));
+                        System.out.print(NEXT_LINE);
+                    }
+                });
     }
 
     public static void resultLotteryProfit(MoneyPrize moneyPrize, Store store) {
@@ -72,7 +69,7 @@ public class OutputView {
     }
 
     private static String profitAndLossMessage(double profit) {
-        if (profit < 1) {
+        if (profit < PROFIT_STANDARD) {
             return LOSS_MESSAGE;
         }
         return PROFIT_MESSAGE;
