@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,9 +34,14 @@ public class Wallet {
         final int quotient = this.money.quotient(unitPrice);
 
         for (int i = 0; i < quotient; i++) {
-            this.lottos.add(new Lotto());
             this.money = this.money.subtract(unitPrice);
+            this.lottos.add(new Lotto());
         }
+    }
+
+    public void buyLotto(Money unitPrice, List<Integer> manualNumber) {
+        this.money = this.money.subtract(unitPrice);
+        this.lottos.add(new Lotto(manualNumber));
     }
 
     public LottoResult lottoResult(WinLotto winLotto) {

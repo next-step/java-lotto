@@ -55,6 +55,30 @@ public class WalletTest {
     }
 
     @ParameterizedTest
+    @MethodSource("buyLottoManualSource")
+    @DisplayName("Wallet 은 Money 와 협력하여 자신의 Money 를 사용하여 Lotto 를 구매할 수 있다.")
+    void buyLottoManual(int unitPriceValue, int walletMoney, List<Integer> manualNumber, int result) {
+        // given
+        Money unitPrice = new Money(unitPriceValue);
+        Wallet self = new Wallet(walletMoney);
+
+        // when
+        self.buyLotto(unitPrice, manualNumber);
+
+        // then
+        assertThat(self.getLottos().size()).isEqualTo(result);
+    }
+
+    static Stream<Arguments> buyLottoManualSource() {
+        return Stream.of(
+                Arguments.of(1000, 10000, Arrays.asList(1,2,3,4,5,6), 1),
+                Arguments.of(1000, 10500, Arrays.asList(1,2,3,4,5,6), 1),
+                Arguments.of(1000, 11000, Arrays.asList(1,2,3,4,5,6), 1)
+        );
+    }
+
+
+    @ParameterizedTest
     @MethodSource("lottoResultSource")
     @DisplayName("Wallet 은 WinLotto 와 협력하여 LottoResult 를 반환할 수 있다.")
     void lottoResult(List<Lotto> lottos) {
