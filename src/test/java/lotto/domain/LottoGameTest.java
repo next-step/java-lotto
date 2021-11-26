@@ -19,10 +19,8 @@ public class LottoGameTest {
     public void winLottoNumber() {
         LottoGame lottoGame = new LottoGame(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 16)));
         LottoNumbers lastWeekWinningNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-
-        assertThat(lottoGame.getLottoNumbers().getLottoNumbers().stream()
-                .filter(lottoNumber -> lastWeekWinningNumbers.getLottoNumbers().contains(lottoNumber))
-                .count())
+        lottoGame.matchLottoNumbers(lastWeekWinningNumbers);
+        assertThat(lottoGame.getMatchedCount())
                 .isEqualTo(5);
     }
 }

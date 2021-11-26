@@ -35,32 +35,20 @@ public class LottosTest {
     @Test
     @DisplayName("몇등에 당첨 됐는지 확인한다.")
     public void winRankLotto() {
-        assertThat(lottoes.getLottoGames().stream()
-                .filter(lottoGame -> lottoGame.getMatchedCount() == 3)
-                .count())
+        assertThat(lottoes.winRankLottoCount(3L))
                 .isEqualTo(1);
-        assertThat(lottoes.getLottoGames().stream()
-                .filter(lottoGame -> lottoGame.getMatchedCount() == 4)
-                .count())
+        assertThat(lottoes.winRankLottoCount(4L))
                 .isEqualTo(1);
-        assertThat(lottoes.getLottoGames().stream()
-                .filter(lottoGame -> lottoGame.getMatchedCount() == 5)
-                .count())
+        assertThat(lottoes.winRankLottoCount(5L))
                 .isEqualTo(1);
-        assertThat(lottoes.getLottoGames().stream()
-                .filter(lottoGame -> lottoGame.getMatchedCount() == 6)
-                .count())
+        assertThat(lottoes.winRankLottoCount(6L))
                 .isEqualTo(1);
     }
 
     @Test
     @DisplayName("총상금을 계산한다.")
     public void calculateTotalReward() {
-        Long totalReward;
-        totalReward = RankEnum.RANK_THREE.getReward() * lottoes.winRankLottoCount(RankEnum.RANK_THREE.getRank());
-        totalReward = totalReward + RankEnum.RANK_FOUR.getReward() * lottoes.winRankLottoCount(RankEnum.RANK_FOUR.getRank());
-        totalReward = totalReward + RankEnum.RANK_FIVE.getReward() * lottoes.winRankLottoCount(RankEnum.RANK_FIVE.getRank());
-        totalReward = totalReward + RankEnum.RANK_SIX.getReward() * lottoes.winRankLottoCount(RankEnum.RANK_SIX.getRank());
-        assertThat(totalReward).isEqualTo(2001555000L);
+        lottoes.calculateTotalReward();
+        assertThat(lottoes.getTotalReward()).isEqualTo(2001555000L);
     }
 }
