@@ -32,7 +32,7 @@ public class Lottoes {
 
     public Long winRankLottoCount(Long rankCount) {
         return lottoGames.stream()
-                .filter(lottoGame -> lottoGame.getMatchedCount() == rankCount)
+                .filter(lottoGame -> lottoGame.getMatchedCount().equals(rankCount))
                 .count();
     }
 
