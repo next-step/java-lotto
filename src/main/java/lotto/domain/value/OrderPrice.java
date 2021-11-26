@@ -28,8 +28,12 @@ public class OrderPrice {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         OrderPrice that = (OrderPrice) o;
         return lottoPrice == that.lottoPrice;
     }
