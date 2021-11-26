@@ -12,11 +12,7 @@ public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto() {
-        this(pickRandomNumber());
-    }
-
-    private static List<LottoNumber> pickRandomNumber() {
+    public static Lotto pickRandomNumber() {
         Set<LottoNumber> tmpLottoNumbers = new HashSet<>();
         while (tmpLottoNumbers.size() < NUMBER_COUNT) {
             tmpLottoNumbers.add(LottoNumber.valueOf(RandomUtil.randomInt(LottoNumber.MAX_VALUE)));
@@ -24,7 +20,7 @@ public class Lotto {
 
         List<LottoNumber> lottoNumbers = new ArrayList<>(tmpLottoNumbers);
         Collections.sort(lottoNumbers);
-        return lottoNumbers;
+        return new Lotto(lottoNumbers);
     }
 
     public Lotto(final String numbers) {

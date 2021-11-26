@@ -20,7 +20,7 @@ public class Lottos {
         }
 
         for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto());
+            lottos.add(Lotto.pickRandomNumber());
         }
     }
 
