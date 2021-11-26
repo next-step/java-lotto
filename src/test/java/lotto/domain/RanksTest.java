@@ -27,7 +27,7 @@ public class RanksTest {
         assertThat(ranks.countRankOf(rank)).isEqualTo(count);
     }
 
-    private static Stream<Arguments> provideRank() { // 해당 메소드는 맨 밑으로 내려주는게 가독성이 좋을까? 테스트 수가 적던 많던 연관된 테스트 옆에 있는게 좋을 것 같다는 생각.
+    private static Stream<Arguments> provideRank() {
         return Stream.of(
                 Arguments.of(Rank.FIRST, 2),
                 Arguments.of(Rank.SECOND, 1),

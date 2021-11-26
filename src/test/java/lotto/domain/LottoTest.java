@@ -32,7 +32,7 @@ class LottoTest {
     @ValueSource(strings = {"a, 1, 2, 3, 4, 5"})
     void create_string_non_number_fail(String lottoNumbers) {
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
-                .isInstanceOf(NumberFormatException.class); // 문자열을 숫자로 바꾸는데 NumberFormatExeception같은 경우. 따로 체크를 해줘야하는지?
+                .isInstanceOf(NumberFormatException.class);
     }
 
     @DisplayName("당첨 번호와 비교해 일치하는 개수")
