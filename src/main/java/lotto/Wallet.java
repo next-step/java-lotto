@@ -1,7 +1,9 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class Wallet {
@@ -36,13 +38,25 @@ public class Wallet {
         }
     }
 
+    public LottoResult lottoResult(WinLotto winLotto) {
+        final Map<Prize, Integer> result = new HashMap<>();
+
+        for (Lotto lotto : this.lottos) {
+            final Prize prize = Prize.of(lotto.matchCount(winLotto), lotto.bonusContained(winLotto));
+            result.putIfAbsent(prize, 0);
+            result.put(prize, result.get(prize));
+        }
+
+        return new LottoResult(result);
+    }
+
     public List<Lotto> getLottos() {
         return this.lottos;
     }
 
     /*
-            FUNCTION
-         */
+        FUNCTION
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

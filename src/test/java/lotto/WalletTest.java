@@ -1,6 +1,7 @@
 package lotto;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -51,6 +52,27 @@ public class WalletTest {
                 Arguments.of(1000, 10000, 10),
                 Arguments.of(1000, 10500, 10),
                 Arguments.of(1000, 11000, 11)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("lottoResultSource")
+    @DisplayName("Wallet 은 WinLotto 와 협력하여 LottoResult 를 반환할 수 있다.")
+    void lottoResult(List<Lotto> lottos) {
+        // given
+        Wallet self = new Wallet(0, lottos);
+        WinLotto winLotto = new WinLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+
+        // when
+        final LottoResult lottoResult = self.lottoResult(winLotto);
+
+        // then
+        assertThat(lottoResult).isEqualTo(self.lottoResult(winLotto));
+    }
+
+    static Stream<Arguments> lottoResultSource() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(new Lotto(1, 2, 3, 4, 5, 6), new Lotto(4, 5, 6, 7, 8, 9)))
         );
     }
 }
