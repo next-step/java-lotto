@@ -10,20 +10,20 @@ import java.util.stream.IntStream;
  */
 public class PurchaseMachine {
     private final Credit credit;
-    private final List<Lotto> lottoList;
+    private final List<Lotto> lotto;
 
     private PurchaseMachine(Credit credit, List<Lotto> lottoList) {
         this.credit = credit;
-        this.lottoList = lottoList;
+        this.lotto = lottoList;
     }
 
     public PurchaseMachine(Credit credit) {
         this.credit = credit;
-        this.lottoList = Collections.emptyList();
+        this.lotto = Collections.emptyList();
     }
 
-    public List<Lotto> getLottoList() {
-        return lottoList;
+    public List<Lotto> getLotto() {
+        return lotto;
     }
 
     public PurchaseMachine purchase() {

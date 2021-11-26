@@ -23,6 +23,6 @@ public class PurchaseMachineTest {
     void purchase() {
         PurchaseMachine machine = new PurchaseMachine(new Credit("14000"));
         PurchaseMachine purchase = machine.purchase();
-        assertThat(purchase.getLottoList().size()).isEqualTo(14);
+        assertThat(purchase.getLotto().size()).isEqualTo(14);
     }
 }

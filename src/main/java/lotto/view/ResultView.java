@@ -20,7 +20,7 @@ public class ResultView {
     private static final String LINE = "--------";
 
     public void printPurchaseLottos(PurchaseMachine purchaseMachine) {
-        List<Lotto> lottoList = purchaseMachine.getLottoList();
+        List<Lotto> lottoList = purchaseMachine.getLotto();
 
         for (Lotto l : lottoList) {
             StringBuilder sb = new StringBuilder();

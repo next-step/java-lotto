@@ -25,7 +25,7 @@ public class Main {
         resultView.printPurchaseLottos(purchase);
 
         WonLotto wonLotto = inputView.insertWonLotto();
-        Statistics statistics = new Statistics(credit, purchase.getLottoList(), wonLotto);
+        Statistics statistics = new Statistics(credit, purchase.getLotto(), wonLotto);
 
         resultView.printResultStatics(statistics);
     }
