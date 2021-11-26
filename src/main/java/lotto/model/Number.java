@@ -1,12 +1,11 @@
-package stringaddcalculator;
+package lotto.model;
 
 import java.util.Objects;
 
 public class Number {
 
-    private static final int VALID_MIN_NUMBER = 0;
-    private static final int INIT_NUMBER = 0;
-
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
     private final int value;
 
     public Number(int input) {
@@ -15,21 +14,13 @@ public class Number {
     }
 
     private void validateInputOrThrow(int input) {
-        if (input < VALID_MIN_NUMBER) {
+        if (input < MIN_LOTTO_NUMBER || input > MAX_LOTTO_NUMBER) {
             throw new RuntimeException("input number must be positive");
         }
     }
 
     public Number(String input) {
-        this(Integer.parseInt(input));
-    }
-
-    public static Number init() {
-        return new Number(INIT_NUMBER);
-    }
-
-    public int getValue() {
-        return value;
+        this(Integer.parseInt(input.trim()));
     }
 
     @Override
@@ -47,5 +38,10 @@ public class Number {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 }

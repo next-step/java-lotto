@@ -9,6 +9,8 @@ public class Expression {
 
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final Pattern DEFUALT_DELIMITER = Pattern.compile(",|:");
+    private static final int CUSTOM_DELIMITER_INDEX = 1;
+    private static final int ONLY_EXPRESSION_INDEX = 2;
 
     private final String expresion;
 
@@ -23,8 +25,8 @@ public class Expression {
     public Numbers numbers() {
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(expresion);
         if (matcher.find()) {
-            String customDelimiter = matcher.group(1);
-            String[] split = matcher.group(2).split(customDelimiter);
+            String customDelimiter = matcher.group(CUSTOM_DELIMITER_INDEX);
+            String[] split = matcher.group(ONLY_EXPRESSION_INDEX).split(customDelimiter);
             return makeNumbers(split);
         }
         return makeNumbers(DEFUALT_DELIMITER.split(expresion));

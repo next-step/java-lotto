@@ -8,35 +8,35 @@ public class StringAddCalculatorTest {
 
     @Test
     public void splitAndSum_null_또는_빈문자() {
-        Number result = StringAddCalculator.splitAndSum(null);
-        assertThat(result).isEqualTo(new Number(0));
+        int result = StringAddCalculator.splitAndSum(null);
+        assertThat(result).isEqualTo(0);
 
         result = StringAddCalculator.splitAndSum("");
-        assertThat(result).isEqualTo(new Number(0));
+        assertThat(result).isEqualTo(0);
     }
 
     @Test
     public void splitAndSum_숫자하나() throws Exception {
-        Number result = StringAddCalculator.splitAndSum("1");
-        assertThat(result).isEqualTo(new Number(1));
+        int result = StringAddCalculator.splitAndSum("1");
+        assertThat(result).isEqualTo(1);
     }
 
     @Test
     public void splitAndSum_쉼표구분자() throws Exception {
-        Number result = StringAddCalculator.splitAndSum("1,2");
-        assertThat(result).isEqualTo(new Number(3));
+        int result = StringAddCalculator.splitAndSum("1,2");
+        assertThat(result).isEqualTo(3);
     }
 
     @Test
     public void splitAndSum_쉼표_또는_콜론_구분자() throws Exception {
-        Number result = StringAddCalculator.splitAndSum("1,2:3");
-        assertThat(result).isEqualTo(new Number(6));
+        int result = StringAddCalculator.splitAndSum("1,2:3");
+        assertThat(result).isEqualTo(6);
     }
 
     @Test
     public void splitAndSum_custom_구분자() throws Exception {
-        Number result = StringAddCalculator.splitAndSum("//;\n1;2;3");
-        assertThat(result).isEqualTo(new Number(6));
+        int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
+        assertThat(result).isEqualTo(6);
     }
 
     @Test
