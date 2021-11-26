@@ -22,7 +22,13 @@ public class InputView {
 
     public static LotteryTicket getWinningTicket() {
         List<Integer> winningNumbers = InputView.getCommaSplitIntList("지난 주 당첨 번호를 입력해 주세요.");
-        return new LotteryTicket(winningNumbers.stream().map(Lotto::new).collect(Collectors.toList()));
+        return new LotteryTicket(winningNumbers.stream()
+                .map(Lotto::new)
+                .collect(Collectors.toList()));
+    }
+
+    public static Lotto getBonusLotto() {
+        return new Lotto(InputView.getIntValue("보너스 볼을 입력해 주세요."));
     }
 
     private static int getIntValue(String message){

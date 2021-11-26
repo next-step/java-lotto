@@ -23,6 +23,12 @@ public class LotteryTicket {
         return this.numbers.contains(number);
     }
 
+    public int getMatchCount(LotteryTicket ticket) {
+        return (int) this.numbers.stream()
+                        .filter(ticket::match)
+                        .count();
+    }
+
     private void checkDuplicate(List<Lotto> numbers) {
         if(numbers.size() != numbers.stream().distinct().count()) {
             throw new IllegalArgumentException("중복된 번호가 있습니다.");
