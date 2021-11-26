@@ -9,11 +9,13 @@ import java.util.Objects;
 import static lotto.utils.Constants.NUMBER_ZERO;
 
 public class Lottoes {
-    private List<LottoGame> lottoGames;
     private Long totalReward;
+    private DefaultLottoNumbers defaultLottoNumbers;
+    private List<LottoGame> lottoGames;
 
     public Lottoes() {
         this.lottoGames = new ArrayList<>();
+        this.defaultLottoNumbers = new DefaultLottoNumbers();
     }
 
     public Lottoes(List<LottoGame> lottoGames) {
@@ -26,7 +28,7 @@ public class Lottoes {
 
     public void makeLottoes(LottoGameCount lottoGameCount) {
         for (int i = NUMBER_ZERO; i < lottoGameCount.getLottoGameCount(); i++) {
-            lottoGames.add(new LottoGame(new LottoNumbers().createAutoLottoNumbers()));
+            lottoGames.add(new LottoGame(new LottoNumbers().createAutoLottoNumbers(defaultLottoNumbers)));
         }
     }
 

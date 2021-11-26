@@ -19,18 +19,11 @@ public class LottoNumbersTest {
     }
 
     @Test
-    @DisplayName("자동으로 로또번호를 생성한다.")
-    public void createAutoLottoNumbers() {
-        LottoNumbers lottoNumbers = new LottoNumbers();
-        lottoNumbers.createAutoLottoNumbers();
-        assertThat(lottoNumbers.getLottoNumbers().size()).isEqualTo(6);
-    }
-
-    @Test
     @DisplayName("지난 주 당첨 번호는 6개만 입력 받는다.")
     public void validateLottoNumbersLength() {
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
         assertThatThrownBy(() -> {
-            LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
+            lottoNumbers.validateLottoNumbersLength();
         }).isInstanceOf(IndexOutOfBoundsException.class)
                 .hasMessageContaining("지난 주 당첨 번호는 6개만 입력할 수 있습니다.");
     }

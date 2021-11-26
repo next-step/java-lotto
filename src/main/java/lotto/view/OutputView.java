@@ -27,18 +27,19 @@ public class OutputView {
         System.out.println(MSG_WINNING_STATISTICS);
         System.out.println(MSG_DASH_TEN);
 
-        System.out.println(getRankMsg((long) NUMBER_THREE, lottoes));
-        System.out.println(getRankMsg((long) NUMBER_FOUR, lottoes));
-        System.out.println(getRankMsg((long) NUMBER_FIVE, lottoes));
-        System.out.println(getRankMsg((long) NUMBER_SIX, lottoes));
+        getRankMsg((long) NUMBER_THREE, lottoes);
+        getRankMsg((long) NUMBER_FOUR, lottoes);
+        getRankMsg((long) NUMBER_FIVE, lottoes);
+        getRankMsg((long) NUMBER_SIX, lottoes);
     }
 
-    public StringBuilder getRankMsg(Long rank, Lottoes lottoes) {
+    public void getRankMsg(Long rank, Lottoes lottoes) {
         RankEnum rankEnum = RankEnum.findBy(rank);
         sb.append(rankEnum.getMsg());
         sb.append(lottoes.winRankLottoCount(rank));
         sb.append(MSG_NUMBER);
-        return sb;
+        System.out.println(sb);
+        sb.setLength(NUMBER_ZERO);
     }
 
     public void drawTotalReward(Double yield) {

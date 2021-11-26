@@ -18,24 +18,21 @@ public class LottoNumbers {
 
     public LottoNumbers(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
-        validateLottoNumbersLength();
         validateLottoNumbersOneToFortyfive();
     }
 
-    public LottoNumbers createAutoLottoNumbers() {
-        List<Integer> defaultNumbers = IntStream.rangeClosed(NUMBER_ONE, NUMBER_FORTY_FIVE)
-                .boxed().collect(Collectors.toList());
-        Collections.shuffle(defaultNumbers);
+    public LottoNumbers createAutoLottoNumbers(DefaultLottoNumbers defaultLottoNumbers) {
+        defaultLottoNumbers.shuffleNumbers();
         List<Integer> randomNumbers = new ArrayList<>();
         for (int i = NUMBER_ZERO; i < NUMBER_SIX; i++) {
-            randomNumbers.add(defaultNumbers.get(i));
+            randomNumbers.add(defaultLottoNumbers.getDefaultLottoNumberByIndex(i));
         }
         lottoNumbers = randomNumbers.stream()
                 .sorted().collect(Collectors.toList());
         return new LottoNumbers(lottoNumbers);
     }
 
-    private void validateLottoNumbersLength() {
+    public void validateLottoNumbersLength() {
         if (lottoNumbers.size() > NUMBER_SIX) {
             throw new IndexOutOfBoundsException(MSG_LOTTO_NUMBERS_LENGTH_ONLY_SIX);
         }

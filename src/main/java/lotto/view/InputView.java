@@ -35,6 +35,7 @@ public class InputView {
         LottoNumbers lastWeekWinnigNumbers = new LottoNumbers(Arrays.stream(lastWeekWinningNumbers)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList()));
+        lastWeekWinnigNumbers.validateLottoNumbersLength();
         System.out.println();
 
         return lastWeekWinnigNumbers;
