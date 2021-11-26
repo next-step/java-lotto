@@ -11,17 +11,12 @@ public class Store {
     private final OrderPrice lottoPrice;
     private final OrderCount lottoCount;
 
-    private Store(String orderPrice) {
+    public Store(String orderPrice) {
 
         checkOrderPrice(orderPrice);
 
-        this.lottoPrice = OrderPrice.from(Integer.parseInt(orderPrice));
-        this.lottoCount = OrderCount.from(this.lottoPrice.getLottoPrice() / LOTTO_PRICE);
-    }
-
-
-    public static Store of(String orderPrice) {
-        return new Store(orderPrice);
+        this.lottoPrice = new OrderPrice(Integer.parseInt(orderPrice));
+        this.lottoCount = new OrderCount(this.lottoPrice.getLottoPrice() / LOTTO_PRICE);
     }
 
     public int getLottoCount() {

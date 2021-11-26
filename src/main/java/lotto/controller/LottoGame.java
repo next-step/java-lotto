@@ -14,7 +14,7 @@ public class LottoGame {
 
     public void start() {
 
-        Store store = Store.of(printInputIntro());
+        Store store = new Store(printInputIntro());
         LottoTicket lottoTicket = store.purchaseTicket();
 
         printOrderCount(store.getLottoCount());

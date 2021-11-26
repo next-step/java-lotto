@@ -9,17 +9,13 @@ public class OrderPrice {
 
     private final int lottoPrice;
 
-    private OrderPrice(int orderPrice) {
-        this.lottoPrice = orderPrice;
-    }
-
-    public static OrderPrice from(int orderPrice) {
+    public OrderPrice(int orderPrice) {
 
         if (orderPrice < LOTTO_PRICE) {
             throw new IllegalArgumentException(MIN_MONEY_ERROR_MSG);
         }
 
-        return new OrderPrice(orderPrice);
+        this.lottoPrice = orderPrice;
     }
 
     public int getLottoPrice() {

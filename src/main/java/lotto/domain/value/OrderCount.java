@@ -10,16 +10,12 @@ public class OrderCount {
     private final int lottoCount;
 
     public OrderCount(int orderCount) {
-        this.lottoCount = orderCount;
-    }
-
-    public static OrderCount from(int orderCount) {
 
         if (orderCount < MIN_ORDER_COUNT) {
             throw new IllegalArgumentException(MIN_MONEY_ERROR_MSG);
         }
 
-        return new OrderCount(orderCount);
+        this.lottoCount = orderCount;
     }
 
     public int getLottoCount() {

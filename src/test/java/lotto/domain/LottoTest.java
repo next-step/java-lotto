@@ -15,8 +15,8 @@ public class LottoTest {
     @Test
     @DisplayName("로또 생성 테스트")
     void createTest() {
-        List<LottoNumber> test = Arrays.asList(LottoNumber.from(1),LottoNumber.from(2),LottoNumber.from(3)
-                ,LottoNumber.from(4),LottoNumber.from(5),LottoNumber.from(6));
+        List<LottoNumber> test = Arrays.asList(new LottoNumber(1),new LottoNumber(2),new LottoNumber(3)
+                ,new LottoNumber(4),new LottoNumber(5),new LottoNumber(6));
         Lotto lotto = Lotto.from(test);
 
         assertThat(lotto).isEqualTo(Lotto.from(test));
@@ -34,13 +34,13 @@ public class LottoTest {
     @Test
     @DisplayName("예외 검증")
     void exceptionTest() {
-        assertThatThrownBy(() -> Lotto.from(Arrays.asList(LottoNumber.from(1),LottoNumber.from(2),
-                LottoNumber.from(3),LottoNumber.from(4),LottoNumber.from(5)
-                ,LottoNumber.from(6),LottoNumber.from(7))))
+        assertThatThrownBy(() -> Lotto.from(Arrays.asList(new LottoNumber(1),new LottoNumber(2),
+                new LottoNumber(3),new LottoNumber(4),new LottoNumber(5)
+                ,new LottoNumber(6),new LottoNumber(7))))
                 .isInstanceOf(IllegalArgumentException.class);
 
-        assertThatThrownBy(() -> Lotto.from(Arrays.asList(LottoNumber.from(1),
-                LottoNumber.from(2),LottoNumber.from(3))))
+        assertThatThrownBy(() -> Lotto.from(Arrays.asList(new LottoNumber(1),
+                new LottoNumber(2),new LottoNumber(3))))
                 .isInstanceOf(IllegalArgumentException.class);
 
     }
@@ -51,8 +51,8 @@ public class LottoTest {
         List<Integer> winningNumber = Arrays.asList(1,2,3,4,5,6);
 
         List<LottoNumber> lottoNumbers = Arrays.asList(
-                LottoNumber.from(1),LottoNumber.from(2),LottoNumber.from(3),
-                LottoNumber.from(4),LottoNumber.from(5),LottoNumber.from(10)
+                new LottoNumber(1),new LottoNumber(2),new LottoNumber(3),
+                new LottoNumber(4),new LottoNumber(5),new LottoNumber(10)
         );
 
         Lotto winning = Lotto.winningFrom(winningNumber);

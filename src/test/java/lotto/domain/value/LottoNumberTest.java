@@ -14,7 +14,7 @@ public class LottoNumberTest {
     @Test
     @DisplayName("생성 테스트")
     void createTest() {
-        LottoNumber lottoNumber = LottoNumber.from(3);
+        LottoNumber lottoNumber = new LottoNumber(3);
 
         assertThat(lottoNumber.getNumber()).isEqualTo(3);
 
@@ -26,6 +26,6 @@ public class LottoNumberTest {
     void exceptionTest(int number) {
 
         assertThatThrownBy(() ->
-                LottoNumber.from(number)).isInstanceOf(IllegalArgumentException.class);
+                new LottoNumber(number)).isInstanceOf(IllegalArgumentException.class);
     }
 }

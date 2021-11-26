@@ -11,7 +11,7 @@ public class OrderCountTest {
     @Test
     @DisplayName("생성 테스트")
     void createTest() {
-        OrderCount orderCount = OrderCount.from(3);
+        OrderCount orderCount = new OrderCount(3);
 
         assertThat(orderCount.getLottoCount()).isEqualTo(3);
     }
@@ -21,6 +21,6 @@ public class OrderCountTest {
     void exceptionTest() {
 
         assertThatThrownBy(() ->
-                OrderCount.from(0)).isInstanceOf(IllegalArgumentException.class);
+                new OrderCount(0)).isInstanceOf(IllegalArgumentException.class);
     }
 }

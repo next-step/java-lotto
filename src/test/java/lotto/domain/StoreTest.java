@@ -11,7 +11,7 @@ public class StoreTest {
     @Test
     @DisplayName("상점에서 돈 입력했을 경우 로또티켓 생성 테스트")
     void lottoCreateTest() {
-        Store store = Store.of("3000");
+        Store store = new Store("3000");
         LottoTicket lottoTicket = store.purchaseTicket();
 
         assertThat(lottoTicket.getLotto().size()).isEqualTo(3);
@@ -22,6 +22,6 @@ public class StoreTest {
     void exceptionTest() {
 
         assertThatThrownBy(() ->
-                Store.of("String Input")).isInstanceOf(IllegalArgumentException.class);
+                new Store("String Input")).isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -37,7 +37,7 @@ public class Lotto {
 
         List<LottoNumber> numbers = new ArrayList<>();
         for(int i = 0; i < number.size(); i++) {
-            numbers.add(LottoNumber.from(number.get(i)));
+            numbers.add(new LottoNumber(number.get(i)));
         }
 
         return new Lotto(numbers);
@@ -53,7 +53,7 @@ public class Lotto {
 
         while (autoNumbers.size() != LOTTO_SIZE) {
             int raffleNumber = random.nextInt(LOTTO_MAX_NUMBER -1) + 1;
-            LottoNumber randomNumber = LottoNumber.from(raffleNumber);
+            LottoNumber randomNumber = new LottoNumber(raffleNumber);
             checkDuplicationNumber(autoNumbers, randomNumber);
 
         }
