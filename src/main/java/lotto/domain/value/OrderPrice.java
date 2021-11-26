@@ -5,7 +5,7 @@ import java.util.Objects;
 public class OrderPrice {
 
     private static final int LOTTO_PRICE = 1000;
-    private static final String MIN_MONEY_ERROR_MSG = "1000원 이상 입력해주세요";
+    private static final String MIN_MONEY_ERROR_MSG = "원 이상 입력해주세요";
     private static final String NUMBER_CHECK_ERROR_MSG = "숫자만 입력 가능합니다!!!!";
 
     private final int lottoPrice;
@@ -29,7 +29,7 @@ public class OrderPrice {
 
     private void moneySizeCheck(String inputMoney) {
         if (Integer.parseInt(inputMoney) < LOTTO_PRICE) {
-            throw new IllegalArgumentException(MIN_MONEY_ERROR_MSG);
+            throw new IllegalArgumentException(LOTTO_PRICE + MIN_MONEY_ERROR_MSG);
         }
     }
 

@@ -28,20 +28,19 @@ public class ResultView {
 
     public static void printWinningStatics(Map<Integer, Integer> countOfMatch) {
         StringBuilder builder = new StringBuilder();
-        builder.append("당첨 통계");
-        builder.append("\n");
-        builder.append("---------");
-        builder.append("\n");
+        builder.append("당첨 통계")
+        .append("\n")
+        .append("---------")
+        .append("\n");
         for (int count = LOTTO_START_COUNT; count <= LOTTO_END_COUNT; count++) {
             Rank rank = Rank.valueOf(count);
-            builder.append(count);
-            builder.append("개 일치(");
-            builder.append(rank.getPrizeMoney());
-            builder.append("원) - ");
-            int value = countOfMatch.get(count);
-            builder.append(value);
-            builder.append("개");
-            builder.append("\n");
+            builder.append(count)
+            .append("개 일치(")
+            .append(rank.getPrizeMoney())
+            .append("원) - ")
+            .append(countOfMatch.get(count))
+            .append("개")
+            .append("\n");
         }
         System.out.print(builder);
     }
