@@ -45,6 +45,11 @@ public class Lotto {
                 .count();
     }
 
+    public boolean matchBonus(LottoNumber bonus) {
+        return lottoNumbers.stream()
+                .anyMatch(bonus::equals);
+    }
+
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
