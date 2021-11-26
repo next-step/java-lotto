@@ -21,10 +21,10 @@ public class OutputView {
         System.out.println(MSG_WINNING_STATISTICS);
         System.out.println(MSG_DASH_TEN);
 
-        System.out.println(getRankMsg(NUMBER_THREE.longValue(), lottoes));
-        System.out.println(getRankMsg(NUMBER_FOUR.longValue(), lottoes));
-        System.out.println(getRankMsg(NUMBER_FIVE.longValue(), lottoes));
-        System.out.println(getRankMsg(NUMBER_SIX.longValue(), lottoes));
+        System.out.println(getRankMsg((long) NUMBER_THREE, lottoes));
+        System.out.println(getRankMsg((long) NUMBER_FOUR, lottoes));
+        System.out.println(getRankMsg((long) NUMBER_FIVE, lottoes));
+        System.out.println(getRankMsg((long) NUMBER_SIX, lottoes));
     }
 
     public StringBuilder getRankMsg(Long rank, Lottoes lottoes) {
