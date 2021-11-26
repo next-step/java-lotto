@@ -21,18 +21,21 @@ public class Application {
         Money manualLottoMoney = money.manualLottoMoney(getManualLottoCount(money));
         int manualLottoCount = manualLottoMoney.lottoCount();
 
-        Money autoLottoMoney = money.autoLottoMoney(manualLottoCount);
-
         List<Lotto> lottos = new ArrayList<>();
 
         while (manualLottoMoney.canBuy()) {
             manualLottoMoney.buy();
+
             Output.askManualLottosNumber();
+
             String manualLottosNumber = Input.askManualLottosNumber();
             String[] manualLottosNumbers = split(manualLottosNumber);
+
             List<LottoNumber> lottoNumbers = ManualLottoNumbersGenerator.from(manualLottosNumbers).generate();
             lottos.add(Lotto.from(lottoNumbers));
         }
+
+        Money autoLottoMoney = money.autoLottoMoney(manualLottoCount);
 
         Lottos manualLottos = Lottos.from(lottos);
         Lottos autoLottos = LottosFactory.from(autoLottoMoney, new RandomLottoNumbersGenerator());
@@ -55,11 +58,8 @@ public class Application {
 
     private static int getManualLottoCount(Money purchaseAmount) {
         int manualLottoCount = askManualLottoCount();
-        try {
-            return purchaseAmount.validateManualLottoCount(manualLottoCount);
-        } catch (ManualLottoCountException e) {
-            return getManualLottoCount(purchaseAmount);
-        }
+
+        return purchaseAmount.validateManualLottoCount(manualLottoCount);
     }
 
     private static LottoNumber getBonusBall() {
