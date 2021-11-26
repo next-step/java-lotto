@@ -2,7 +2,6 @@ package lotto;
 
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.IntStream;
 
 public class LottoResult {
     private final Map<Prize, Integer> value;
