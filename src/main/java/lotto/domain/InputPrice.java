@@ -2,8 +2,7 @@ package lotto.domain;
 
 import java.util.Objects;
 
-import static lotto.utils.Constants.NUMBER_THOUSAND;
-import static lotto.utils.Constants.NUMBER_ZERO;
+import static lotto.utils.Constants.*;
 
 public class InputPrice {
     private final int inputPrice;
@@ -12,8 +11,11 @@ public class InputPrice {
         this.inputPrice = inputPrice;
     }
 
-    public boolean validateSmallestUnit() {
-        return inputPrice < NUMBER_THOUSAND || Math.floorMod(inputPrice, NUMBER_THOUSAND) != NUMBER_ZERO;
+    public void validateSmallestUnit() {
+        if (inputPrice < NUMBER_THOUSAND || Math.floorMod(inputPrice, NUMBER_THOUSAND) != NUMBER_ZERO) {
+            System.exit(NUMBER_ZERO);
+            throw new IndexOutOfBoundsException(MSG_MINIMUM_PURCHASE_PRICE);
+        }
     }
 
     public Integer divideByThousands() {

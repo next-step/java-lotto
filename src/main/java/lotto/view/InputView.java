@@ -13,7 +13,7 @@ import static lotto.utils.Constants.*;
 
 public class InputView {
     private InputPrice inputPrice;
-    private Scanner scanner;
+    private static Scanner scanner;
 
     public InputView() {
         scanner = new Scanner(System.in);
@@ -26,10 +26,7 @@ public class InputView {
     public void inputPrice() {
         System.out.println(MSG_INPUT_PRICE);
         inputPrice = new InputPrice(Integer.valueOf(scanner.next()));
-        if (inputPrice.validateSmallestUnit()) {
-            System.exit(NUMBER_ZERO);
-            throw new IndexOutOfBoundsException(MSG_MINIMUM_PURCHASE_PRICE);
-        }
+        inputPrice.validateSmallestUnit();
     }
 
     public LottoNumbers inputLastWeekWinningNumbers() {
