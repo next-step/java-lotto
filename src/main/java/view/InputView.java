@@ -22,7 +22,7 @@ public class InputView {
         return validNumber();
     }
 
-    public static Set<Integer> inputLastWeekNumber() {
+    public static Set<Integer> inputWinningNumber() {
         System.out.println(LAST_WEEK_LOTTERY_NUMBER_MESSAGE);
 
         return removeOverlap(scanner.nextLine());
