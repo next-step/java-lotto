@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -52,5 +53,13 @@ public class LottoTest {
                                                               new Number(26),
                                                               new Number(1))),
                                       3));
+    }
+
+    @DisplayName("로또 구매 가격이 주어졌을 때 몇 개의 로또를 구매했는지 반환하는 로직 검증")
+    @Test
+    void lottoCountByAmountTest() {
+        int amount = 14_000;
+        int expectedCount = 14;
+        assertThat(Lotto.getLottoCount(amount)).isEqualTo(expectedCount);
     }
 }

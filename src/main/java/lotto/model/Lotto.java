@@ -12,6 +12,10 @@ public class Lotto {
         this.values = values;
     }
 
+    public static int getLottoCount(int amount) {
+        return amount / eachAmount;
+    }
+
     public int match(Lotto lotto) {
         return (int) lotto.values.stream()
                                  .filter(values::contains)

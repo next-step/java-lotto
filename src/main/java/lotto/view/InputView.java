@@ -13,7 +13,7 @@ public final class InputView {
     public static int acceptPuchaseAmount() {
         System.out.println("구입 금액을 입력해주세요.");
         int purchasedAmount = ScannerUtils.nextInt();
-        int purchasedCount = purchasedAmount / Lotto.eachAmount;
+        int purchasedCount = Lotto.getLottoCount(purchasedAmount);
         System.out.println(purchasedCount + "개를 구매했습니다.");
         return purchasedCount;
     }
