@@ -43,7 +43,7 @@ Lotto
 
 * `Set<LottoNumber>` field 를 하나 가지며 크기는 6이어야 한다.
 * Lotto 는 LottoNumber 와 협력하여 LottoNumber 가 Lotto 에 있는지 확인할 수 있다.
-* Lotto 는 Lotto 와 협력하여 일반 번호 중 몇개가 match 되는지 구할 수 있다.
+* Lotto 는 WinLotto 와 협력하여 일반 번호 중 몇개가 match 되는지 구할 수 있다.
 * Lotto 는 WinLotto 와 협력하여 보너스 번호가 match 되는지 확인 할 수 있다.
 
 WinLotto
@@ -64,6 +64,8 @@ Prize
 LottoResult
 
 * `Map<Prize, Integer>` field 를 가진다.
+* LottoResult 는 임의의 Prize 에 협력하여 matchCount 를 반환할 수 있다.
+* LottoResult 는 UnitPrice 와 협력하여 수익률을 구할 수 있다.
 
 
 

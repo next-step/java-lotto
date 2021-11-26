@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class WinLotto {
     private final Lotto lotto;
@@ -26,6 +27,10 @@ public class WinLotto {
      */
     public boolean checkBonus(LottoNumber lottoNumber) {
         return this.bonus == lottoNumber;
+    }
+
+    public int matchCount(Set<LottoNumber> walletLotto) {
+        return (int) walletLotto.stream().filter(this.lotto::contains).count();
     }
 
     /*

@@ -45,8 +45,8 @@ public class Lotto {
         return this.value.contains(number);
     }
 
-    public int matchCount(Lotto other) {
-        return (int) this.value.stream().filter(other.value::contains).count();
+    public int matchCount(WinLotto winLotto) {
+        return winLotto.matchCount(this.value);
     }
 
     public boolean bonusContained(WinLotto winLotto) {

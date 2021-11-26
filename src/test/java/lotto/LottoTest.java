@@ -60,10 +60,10 @@ public class LottoTest {
         Lotto self = new Lotto(1, 2, 3, 4, 5, 6);
 
         // when
-        Lotto other = new Lotto(winNumbers);
+        WinLotto winLotto = new WinLotto(winNumbers, 13);
 
         // then
-        assertThat(self.matchCount(other)).isEqualTo(result);
+        assertThat(self.matchCount(winLotto)).isEqualTo(result);
     }
 
     static Stream<Arguments> matchCountSource() {
