@@ -22,7 +22,8 @@ public class RanksTest {
                 Rank.FIRST, Rank.FIRST,
                 Rank.SECOND,
                 Rank.THIRD,
-                Rank.FOURTH, Rank.FOURTH));
+                Rank.FOURTH, Rank.FOURTH,
+                Rank.FIFTH, Rank.FIFTH));
 
         assertThat(ranks.countRankOf(rank)).isEqualTo(count);
     }
@@ -32,7 +33,8 @@ public class RanksTest {
                 Arguments.of(Rank.FIRST, 2),
                 Arguments.of(Rank.SECOND, 1),
                 Arguments.of(Rank.THIRD, 1),
-                Arguments.of(Rank.FOURTH, 2)
+                Arguments.of(Rank.FOURTH, 2),
+                Arguments.of(Rank.FIFTH, 2)
         );
     }
 
@@ -40,7 +42,7 @@ public class RanksTest {
     @Test
     void calculateRateOfProfit() {
         Ranks ranks = new Ranks(Arrays.asList(
-                Rank.FOURTH,
+                Rank.FIFTH,
                 Rank.ETC, Rank.ETC));
 
         assertThat(ranks.calculateRateOfProfit()).isEqualTo(1.66);

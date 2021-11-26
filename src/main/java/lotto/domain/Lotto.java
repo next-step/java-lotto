@@ -39,15 +39,14 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int countMatch(Lotto winLotto) {
+    public int countMatch(Lotto other) {
         return (int) lottoNumbers.stream()
-                .filter(winLotto.lottoNumbers::contains)
+                .filter(other.lottoNumbers::contains)
                 .count();
     }
 
     public boolean matchBonus(LottoNumber bonus) {
-        return lottoNumbers.stream()
-                .anyMatch(bonus::equals);
+        return contains(bonus);
     }
 
     public boolean contains(LottoNumber number) {

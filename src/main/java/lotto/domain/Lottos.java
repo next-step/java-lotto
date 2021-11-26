@@ -28,12 +28,8 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Ranks checkWinning(Lotto winLotto) {
-        return new Ranks(lottos.stream()
-                .mapToInt(winLotto::countMatch)
-                .mapToObj(Rank::valueOf)
-                .collect(Collectors.toList())
-        );
+    public Ranks checkWinning(WinLotto winLotto) {
+        return winLotto.checkWinning(lottos);
     }
 
     public List<Lotto> getLottos() {
