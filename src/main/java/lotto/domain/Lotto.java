@@ -12,20 +12,20 @@ public class Lotto {
 
     private final List<LottoNumber> lotto;
 
-    public Lotto(String lottoString) {
-        List<LottoNumber> lotto = Arrays.stream(lottoString.split(","))
-                .map(lottoNumberString -> new LottoNumber(lottoNumberString))
-                .collect(Collectors.toList());
+    public Lotto(List<LottoNumber> lotto ) {
         checkSize(lotto);
         checkDistinct(lotto);
         this.lotto = lotto;
     }
 
+    public Lotto(String lottoString) {
+        this(Arrays.stream(lottoString.split(","))
+                .map(lottoNumberString -> new LottoNumber(lottoNumberString))
+                .collect(Collectors.toList()));
+    }
+
     public Lotto(GetLottoNumbersStrategy getLottoNumbersStrategy) {
-        List<LottoNumber> lotto = getLottoNumbersStrategy.getLotto();
-        checkSize(lotto);
-        checkDistinct(lotto);
-        this.lotto = lotto;
+        this(getLottoNumbersStrategy.getLotto());
     }
 
     private void checkSize(List<LottoNumber> lottoLottoNumbers) {
