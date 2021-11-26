@@ -8,13 +8,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
+import step3.exception.InvalidLottoNumberRangeException;
 
 public class LottoNumber {
 
     private static final int ZERO_INDEX = 0;
     private static final int MIN = 1;
     private static final int MAX = 45;
-    private static final String RANGE_ERROR_MESSAGE = format("로또 번호는 %d부터 %d 사이여야 합니다.", MIN, MAX);
     private static final List<LottoNumber> DEFAULT_LOTTO_NUMBERS = initDefaultLottoNumbers();
 
     public static List<LottoNumber> generateRandomNumbers(int listSize) {
@@ -37,7 +37,7 @@ public class LottoNumber {
 
     private void checkRange(int number) {
         if (number < MIN || number > MAX) {
-            throw new IllegalArgumentException(RANGE_ERROR_MESSAGE);
+            throw new InvalidLottoNumberRangeException(number);
         }
     }
 
