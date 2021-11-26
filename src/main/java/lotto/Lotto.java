@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.util.LottoGenerator;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -14,6 +16,10 @@ public class Lotto {
     /*
         CONSTRUCTOR
      */
+    public Lotto() {
+        this(LottoGenerator.auto());
+    }
+
     public Lotto(Integer... lottoNumberList) {
         this(Arrays.stream(lottoNumberList)
                 .map(LottoNumber::of)
