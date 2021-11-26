@@ -33,6 +33,7 @@
 
 * `int` field 를 하나 가지며 그 값은 0 이상이다.
 * Money 는 다른 Money 와 협력하여 몫을 구할 수 있다.
+* Money 는 다른 Money 와 협력하여 차감연산이 가능하다.
 
 LottoNumber
 

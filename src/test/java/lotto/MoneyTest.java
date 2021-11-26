@@ -1,6 +1,7 @@
 package lotto;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -75,6 +76,50 @@ public class MoneyTest {
     static Stream<Arguments> invalid_quotientSource() {
         return Stream.of(
                 Arguments.of(10000, 0)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("subtractSource")
+    @DisplayName("Money 는 다른 Money 와 협력하여 차감연산이 가능하다.")
+    void subtract(int myMoney, int otherMoney) {
+        // given
+        Money self = new Money(myMoney);
+
+        // when
+        Money other = new Money(otherMoney);
+
+        // then
+        assertThat(self.subtract(other)).isEqualTo(new Money(myMoney - otherMoney));
+    }
+
+    static Stream<Arguments> subtractSource() {
+        return Stream.of(
+                Arguments.of(10000, 2000),
+                Arguments.of(10000, 5000),
+                Arguments.of(10000, 10000)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("invalid_subtractSource")
+    @DisplayName("Money 는 다른 Money 와 협력하여 차감연산이 가능하다. 단, 돈이 음수가 되는 경우는 불가능하다.")
+    void invalid_subtract(int myMoney, int otherMoney) {
+        // given
+        Money self = new Money(myMoney);
+
+        // when
+        Money other = new Money(otherMoney);
+
+        // then
+        assertThatThrownBy(() -> {
+            self.subtract(other);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    static Stream<Arguments> invalid_subtractSource() {
+        return Stream.of(
+                Arguments.of(10000, 11000)
         );
     }
 }

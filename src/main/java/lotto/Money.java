@@ -25,6 +25,10 @@ public class Money {
         return this.value / other.value;
     }
 
+    public Money subtract(Money other) {
+        return new Money(this.value - other.value);
+    }
+
     /*
         FUNCTION
      */
