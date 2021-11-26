@@ -22,7 +22,7 @@ public class WinningResult {
 
     public ResultDto winningResult(WinningLottoTicketDto dto) {
         WinnerLottoTicket winnerLottoTicket = WinnerLottoTicket.from(dto.getWinnerLottoTicket());
-        List<Long> winningResult = winnerLottoTicket.winnerCount(dto.getLottoTickets());
+        List<Long> winningResult = winnerLottoTicket.findWinningCount(dto.getLottoTickets());
         WinningRank resultRank = new WinningRank();
         resultRank = resultRank.updateRank(winningResult);
         return ResultDto.of(resultRank, Rate.of(resultRank.getMoney(), resultRank.getPrizeMoney()));

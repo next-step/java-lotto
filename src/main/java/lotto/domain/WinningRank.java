@@ -34,11 +34,12 @@ public class WinningRank {
     public double getPrizeMoney() {
         return (double) winningRank.keySet()
             .stream()
-            .mapToLong(key -> key.getPrizeMoney() * winningRank.get(key))
+            .mapToLong(rank -> rank.calculatePrizeMoney(winningRank.get(rank)))
             .sum();
     }
 
     public Map<Rank, Integer> getWinningRank() {
         return Collections.unmodifiableMap(winningRank);
     }
+
 }

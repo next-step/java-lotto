@@ -13,7 +13,7 @@ public abstract class AbstractLottoTicket {
     protected final Set<LottoNumber> lottoTicket;
 
     protected AbstractLottoTicket(List<Integer> lottoNumber) {
-        Set<LottoNumber> lottoTicket = generateHashSetLottoNumber(lottoNumber);
+        Set<LottoNumber> lottoTicket = generateLottoNumber(lottoNumber);
         valid(lottoTicket);
         this.lottoTicket = lottoTicket;
     }
@@ -24,7 +24,7 @@ public abstract class AbstractLottoTicket {
         }
     }
 
-    private Set<LottoNumber> generateHashSetLottoNumber(List<Integer> lottoTicket) {
+    private Set<LottoNumber> generateLottoNumber(List<Integer> lottoTicket) {
         return lottoTicket.stream()
             .map(LottoNumber::from)
             .collect(Collectors.toCollection(HashSet::new));

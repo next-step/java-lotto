@@ -18,14 +18,14 @@ public class WinnerLottoTicket extends AbstractLottoTicket {
         return new WinnerLottoTicket(mapToInt(input.split(DELIMITER)));
     }
 
-    public List<Long> winnerCount(LottoTickets lottoTickets) {
+    public List<Long> findWinningCount(LottoTickets lottoTickets) {
         return lottoTickets.getLottoTickets().stream()
-            .mapToLong(this::winnerCount)
+            .mapToLong(this::findWinningCount)
             .boxed()
             .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    private long winnerCount(LottoTicket lottoTicket) {
+    private long findWinningCount(LottoTicket lottoTicket) {
         return lottoTicket.getLottoTicket()
             .stream()
             .filter(number -> this.lottoTicket.contains(number))
