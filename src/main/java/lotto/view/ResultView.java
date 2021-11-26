@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import lotto.model.Lotto;
-import lotto.model.Match;
+import lotto.model.Rank;
 import lotto.model.Result;
 
 public final class ResultView {
@@ -22,7 +22,7 @@ public final class ResultView {
     public static void printResult(int purchasedAmount, Result result) {
         stringBuilder.setLength(0);
         stringBuilder.append("당첨 통계\n---------\n");
-        result.getMatchedCounts()
+        result.getRanks()
               .entrySet()
               .forEach(entry -> printEachMatch(entry));
 
@@ -30,8 +30,8 @@ public final class ResultView {
         System.out.println(stringBuilder);
     }
 
-    private static void printEachMatch(Entry<Match, Integer> entry) {
-        Match match = entry.getKey();
-        stringBuilder.append(match.getMatchedCount() + "개 일치 (" + match.getPrice() + "원) - " + entry.getValue() + "개\n");
+    private static void printEachMatch(Entry<Rank, Integer> entry) {
+        Rank rank = entry.getKey();
+        stringBuilder.append(rank.getMatchedCount() + "개 일치 (" + rank.getPrice() + "원) - " + entry.getValue() + "개\n");
     }
 }
