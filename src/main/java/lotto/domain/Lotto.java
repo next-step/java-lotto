@@ -7,8 +7,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    public static final String STRING_NUMBERS_DELIMITER = ",";
-
+    private static final String STRING_NUMBERS_DELIMITER = ",";
     private static final int NUMBER_COUNT = 6;
 
     private final List<LottoNumber> lottoNumbers;
