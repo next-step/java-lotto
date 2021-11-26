@@ -6,6 +6,7 @@ import lotto.domain.value.OrderPrice;
 public class Store {
 
     private static final int LOTTO_PRICE = 1000;
+    private static final String NUMBER_CHECK_ERROR_MSG = "숫자만 입력 가능합니다!!!!";
 
     private final OrderPrice lottoPrice;
     private final OrderCount lottoCount;
@@ -36,7 +37,7 @@ public class Store {
 
         for (char c : orderPrice.toCharArray()) {
             if (!Character.isDigit(c)) {
-                throw new IllegalArgumentException("숫자만 입력 가능합니다!!!!");
+                throw new IllegalArgumentException(NUMBER_CHECK_ERROR_MSG);
             }
         }
     }

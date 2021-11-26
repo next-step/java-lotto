@@ -7,6 +7,7 @@ import java.util.Objects;
 public class LottoWinning {
 
     private static final int LOTTO_SIZE = 6;
+    private static final String FORM_ERROR_MSG = "당첨번호는 6자리 입니다!!!!";
 
     private final Lotto winningNumbers;
 
@@ -19,7 +20,7 @@ public class LottoWinning {
     public static LottoWinning from(List<Integer> winningNumbers) {
 
         if(winningNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("당첨번호는 6자리 입니다!!!!");
+            throw new IllegalArgumentException(FORM_ERROR_MSG);
         }
 
         return new LottoWinning(winningNumbers);

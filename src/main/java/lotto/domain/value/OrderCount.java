@@ -5,6 +5,7 @@ import java.util.Objects;
 public class OrderCount {
 
     private static final int MIN_ORDER_COUNT = 1;
+    private static final String MIN_MONEY_ERROR_MSG = "로또 살수 있는 최소 금액은 1000원 입니다!!";
 
     private final int lottoCount;
 
@@ -15,7 +16,7 @@ public class OrderCount {
     public static OrderCount from(int orderCount) {
 
         if (orderCount < MIN_ORDER_COUNT) {
-            throw new IllegalArgumentException("로또 살수 있는 최소 금액은 1000원 입니다!!");
+            throw new IllegalArgumentException(MIN_MONEY_ERROR_MSG);
         }
 
         return new OrderCount(orderCount);

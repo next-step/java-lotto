@@ -9,6 +9,8 @@ public class Lotto {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
 
+    private static final String FORM_ERROR_MSG = "로또는 6자리 형식입니다.!!!";
+
     private List<LottoNumber> numbers;
 
     public Lotto() {
@@ -19,7 +21,7 @@ public class Lotto {
     private Lotto(List<LottoNumber> numbers) {
 
         if(numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또는 6자리 형식입니다.!!!");
+            throw new IllegalArgumentException(FORM_ERROR_MSG);
         }
 
         this.numbers = numbers;

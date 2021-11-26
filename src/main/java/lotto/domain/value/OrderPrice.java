@@ -5,6 +5,7 @@ import java.util.Objects;
 public class OrderPrice {
 
     private static final int LOTTO_PRICE = 1000;
+    private static final String MIN_MONEY_ERROR_MSG = "1000원 이상 입력해주세요";
 
     private final int lottoPrice;
 
@@ -15,7 +16,7 @@ public class OrderPrice {
     public static OrderPrice from(int orderPrice) {
 
         if (orderPrice < LOTTO_PRICE) {
-            throw new IllegalArgumentException("1000원 이상 입력해주세요");
+            throw new IllegalArgumentException(MIN_MONEY_ERROR_MSG);
         }
 
         return new OrderPrice(orderPrice);
