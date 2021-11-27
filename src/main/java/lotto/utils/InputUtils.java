@@ -1,8 +1,8 @@
 package lotto.utils;
 
 import addcalculator.exception.NotInstanceException;
-import lotto.domain.value.Price;
-import lotto.domain.value.WinningNumbers;
+import lotto.domain.Price;
+import lotto.domain.WinningNumbers;
 import lotto.exception.EmptySourceException;
 import lotto.exception.InvalidValueException;
 

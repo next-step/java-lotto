@@ -1,8 +1,8 @@
 package lotto.controller;
 
-import lotto.domain.LottoTicketGenerator;
-import lotto.domain.value.LottoResult;
-import lotto.domain.value.LottoTickets;
+import lotto.application.LottoTicketGenerator;
+import lotto.domain.LottoResult;
+import lotto.domain.LottoTickets;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

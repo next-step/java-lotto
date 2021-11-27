@@ -1,8 +1,8 @@
-package lotto.domain;
+package lotto.application;
 
-import lotto.domain.value.LottoTicket;
-import lotto.domain.value.LottoTickets;
-import lotto.domain.value.Price;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
+import lotto.domain.Price;
 
 import java.util.List;
 

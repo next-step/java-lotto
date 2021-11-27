@@ -1,6 +1,6 @@
 package lotto.utils;
 
-import lotto.domain.value.Price;
+import lotto.domain.Price;
 import lotto.exception.EmptySourceException;
 import lotto.exception.InvalidValueException;
 import org.junit.jupiter.api.DisplayName;

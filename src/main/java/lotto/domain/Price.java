@@ -1,4 +1,4 @@
-package lotto.domain.value;
+package lotto.domain;
 
 import lotto.exception.InvalidUnitException;
 

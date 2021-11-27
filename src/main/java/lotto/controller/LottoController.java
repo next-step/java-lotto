@@ -1,8 +1,8 @@
 package lotto.controller;
 
-import lotto.domain.AllAutomaticLottoTicketStrategy;
-import lotto.domain.LottoTicketGenerator;
-import lotto.domain.value.*;
+import lotto.application.AllAutomaticLottoTicketStrategy;
+import lotto.application.LottoTicketGenerator;
+import lotto.domain.*;
 import lotto.utils.InputUtils;
 
 import java.util.Map;

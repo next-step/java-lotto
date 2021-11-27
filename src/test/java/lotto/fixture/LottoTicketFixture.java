@@ -1,7 +1,7 @@
 package lotto.fixture;
 
-import lotto.domain.value.LottoTicket;
-import lotto.domain.value.LottoTickets;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 
 import java.util.Arrays;
 
