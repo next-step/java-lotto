@@ -14,7 +14,7 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(NumberGenerator generator) {
-        this.number = generator.generate();
+        this.number = validate(generator.generate());
     }
 
     public LottoNumber(int input) {
