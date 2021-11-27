@@ -14,30 +14,45 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class InputUtilsTest {
 
-    @DisplayName("공백이 입력될 시 예외가 발생한다.")
+    @DisplayName("금액 생성에 공백이 입력될 시 예외가 발생한다.")
     @ParameterizedTest
     @NullAndEmptySource
-    void validateNullAndEmptySource(String input) {
+    void validateNullAndEmptySourceOnCreatePrice(String input) {
         assertThatThrownBy(() -> InputUtils.createPrice(input)).isInstanceOf(EmptySourceException.class);
     }
 
-    @DisplayName("금액이아닌 문자열을 입력했을 경우 예외가 발생한다.")
+    @DisplayName("금액 생성에 금액이아닌 문자열을 입력했을 경우 예외가 발생한다.")
     @Test
-    void validateString() {
+    void validateStringOnCreatePrice() {
         String input = "문자열 입력";
 
         assertThatThrownBy(() -> InputUtils.createPrice(input)).isInstanceOf(InvalidValueException.class);
     }
 
-    @DisplayName("금액을 입력할 경우 LottoCount를 생성한다.")
+    @DisplayName("금액을 입력할 경우 Price를 생성한다.")
     @ParameterizedTest
     @ValueSource(strings = {
             "14000", "23000", "42000"
     })
     void createLottoCount(String input) {
-        Price ticketCount = InputUtils.createPrice(input);
+        Price price = InputUtils.createPrice(input);
 
-        assertThat(ticketCount).isEqualTo(Price.of(input));
+        assertThat(price).isEqualTo(Price.of(input));
+    }
+
+    @DisplayName("당첨번호 생성에 공백이 입력될 시 예외가 발생한다.")
+    @ParameterizedTest
+    @NullAndEmptySource
+    void validateNullAndEmptySourceOnCreateWinningFrom(String input) {
+        assertThatThrownBy(() -> InputUtils.createWinningNumbers(input)).isInstanceOf(EmptySourceException.class);
+    }
+
+    @DisplayName("당첨번호 생성에 문자가 입력될 시 예외가 발생한다.")
+    @Test
+    void validateNullAndEmptySourceOnCreateWinningFrom() {
+        String input = "1, 문자, 3, 4, 5, 6";
+
+        assertThatThrownBy(() -> InputUtils.createWinningNumbers(input)).isInstanceOf(InvalidValueException.class);
     }
 
 }

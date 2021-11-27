@@ -2,23 +2,43 @@ package lotto.utils;
 
 import addcalculator.exception.NotInstanceException;
 import lotto.domain.value.Price;
+import lotto.domain.value.WinningNumbers;
 import lotto.exception.EmptySourceException;
 import lotto.exception.InvalidValueException;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class InputUtils {
+    private static final String SEPARATOR = ", ";
 
     private InputUtils() {
         throw new NotInstanceException();
     }
 
     public static Price createPrice(String input) {
-        validate(input);
+        validatePrice(input);
         return Price.of(input);
     }
 
-    private static void validate(String input) {
+    public static WinningNumbers createWinningNumbers(String input) {
+        validateEmpty(input);
+
+        List<String> stringNumbers = Arrays.asList(input.split(SEPARATOR));
+        System.out.println(stringNumbers);
+
+        validateNumber(stringNumbers);
+
+        List<Integer> numbers = stringNumbers.stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+        return WinningNumbers.of(numbers);
+    }
+
+    private static void validatePrice(String input) {
         validateEmpty(input);
         validateIsDigit(input);
     }
@@ -36,5 +56,9 @@ public class InputUtils {
         if (!isDigit) {
             throw new InvalidValueException();
         }
+    }
+
+    private static void validateNumber(List<String> winningNumbers) {
+        winningNumbers.forEach(InputUtils::validateIsDigit);
     }
 }

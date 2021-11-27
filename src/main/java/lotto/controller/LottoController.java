@@ -19,4 +19,6 @@ public class LottoController {
 
         return ticketGenerator.generateTickets(price, new AllAutomaticLottoTicketStrategy());
     }
+
+
 }
