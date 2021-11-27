@@ -14,33 +14,21 @@ public class Inputs {
     }
 
     public static Inputs createWithDelimiter(String s) {
-        List<Delimiter> delimiters = new ArrayList<>();
         List<InputNumber> inputNumbers = new ArrayList<>();
 
-        String delimiter = s.substring("//".length(), s.indexOf("\\n"));
-        delimiters.add(new Delimiter(delimiter));
-
-        s = s.substring(s.indexOf("\\n") + "\\n".length());
+        String delimiter = s.substring(Delimiter.START_DELIMITER.length(), s.indexOf(Delimiter.END_DELIMITER));
+        s = s.substring(s.indexOf(Delimiter.END_DELIMITER) + Delimiter.END_DELIMITER.length());
 
         for (String number : s.split(delimiter)) {
             inputNumbers.add(new InputNumber(Integer.parseInt(number)));
         }
 
-        return new Inputs(new Delimiters(delimiters), new InputNumbers(inputNumbers));
+        return new Inputs(Delimiters.createWithDelimiter(new Delimiter(delimiter)), new InputNumbers(inputNumbers));
     }
 
     public static Inputs createWithoutDelimiter(String s) {
-        List<Delimiter> delimiters = new ArrayList() {{
-            add(",");
-            add(":");
-        }};
-
-        List<InputNumber> inputNumbers = new ArrayList<>();
-        for (String number : s.split(",|:")) {
-            inputNumbers.add(new InputNumber(Integer.parseInt(number)));
-        }
-
-        return new Inputs(new Delimiters(delimiters), new InputNumbers(inputNumbers));
+        Delimiters delimiters = Delimiters.createWithoutDelimiter();
+        return new Inputs(Delimiters.createWithoutDelimiter(), delimiters.split(s));
     }
 
     public InputNumber sum() {
