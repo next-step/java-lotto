@@ -22,6 +22,10 @@ public class PurchaseInfo {
         return getLotteryCount() - manualCount;
     }
 
+    public boolean haveManualLottery() {
+        return this.manualCount > MIN_COUNT;
+    }
+
     public int getLotteryCount() {
         return this.amount / LOTTO_PRICE;
     }

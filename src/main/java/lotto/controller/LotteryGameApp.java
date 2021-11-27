@@ -14,6 +14,7 @@ public class LotteryGameApp {
     public static void main(String[] args) {
         try {
             PurchaseInfo purchaseInfo = InputView.getPurchaseInfo();
+            if(purchaseInfo.haveManualLottery()) InputView.inputManualLottery();
             LotteryTickets lotteryTickets = new LotteryTickets(purchaseInfo, new AutoTicketGenerator(), new ManualTicketGenerator());
             LotteryGameResultDto resultDto = new LotteryGameResultDto(purchaseInfo.getAmount());
             ResultView.printTickets(purchaseInfo, lotteryTickets.getTickets());

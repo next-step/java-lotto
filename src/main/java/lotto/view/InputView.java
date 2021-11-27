@@ -12,13 +12,16 @@ import java.util.stream.Collectors;
 public class InputView {
 
     private final static Scanner scanner = new Scanner(System.in);
-
     private InputView() {}
 
     public static PurchaseInfo getPurchaseInfo() {
         int amount = getIntValue("구입금액을 입력해 주세요.");
         int manualCount = getIntValue("수동으로 구매할 로또 수를 입력해 주세요.");
         return new PurchaseInfo(amount, manualCount);
+    }
+
+    private static void printInputManualLottery() {
+        System.out.println();
     }
 
     public static LotteryTicket getTicket(String message) {
@@ -42,7 +45,7 @@ public class InputView {
     }
 
     private static String getInput(String message) {
-        System.out.println(message);
+        if(!message.isEmpty()) System.out.println(message);
         return scanner.next();
     }
 
@@ -59,5 +62,9 @@ public class InputView {
         if(!allInt) {
             throw new IllegalArgumentException("입력 값이 숫자가 아닙니다.");
         }
+    }
+
+    public static void inputManualLottery() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 }
