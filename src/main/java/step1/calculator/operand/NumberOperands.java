@@ -38,14 +38,14 @@ public class NumberOperands {
         return numberOperands;
     }
 
-    private static String[] splitToArr(String inputStr) {
-        Matcher m = CUSTOM_DELIMITER_PATTERN.matcher(inputStr);
+    private static String[] splitToArr(String inputString) {
+        Matcher m = CUSTOM_DELIMITER_PATTERN.matcher(inputString);
         if (m.find()) {
             String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);
         }
 
-        return inputStr.split(DEFAULT_DELIMITER_REGEX);
+        return inputString.split(DEFAULT_DELIMITER_REGEX);
     }
 
     public List<NumberOperand> getOperands() {
