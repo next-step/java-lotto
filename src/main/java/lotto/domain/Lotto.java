@@ -16,6 +16,7 @@ public class Lotto {
                                             .collect(Collectors.toList());
         return new Lotto(numbers);
     }
+
     public Lotto(final List<LottoNumber> numbers) {
         Collections.sort(numbers);
         this.numbers = Collections.unmodifiableList(numbers);
@@ -33,4 +34,7 @@ public class Lotto {
                         .collect(Collectors.joining(", "));
     }
 
+    public Rank getRank(Lotto lotto) {
+        return Rank.matchNumber(this.sameLottoNumberCount(lotto));
+    }
 }
