@@ -15,7 +15,7 @@ public class MoneyPrize {
         List<Integer> moneyPrize = new ArrayList<>();
         int loopNumber = rankGroup.size();
         for (int i = 0; i < loopNumber; i++) {
-            moneyPrize.add(LotteryPrizeCalculation.winningAmount(rankGroup.rank(i), rankGroup.bonusBoll(i)));
+            moneyPrize.add(LotteryPrizeCalculation.winningAmount(rankGroup.rank(i), rankGroup.bonusBall(i)));
         }
 
         return moneyPrize;
