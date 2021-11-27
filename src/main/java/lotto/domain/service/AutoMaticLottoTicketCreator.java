@@ -3,6 +3,7 @@ package lotto.domain.service;
 import lotto.domain.entity.LottoNumber;
 import lotto.domain.entity.LottoTicket;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -29,6 +30,6 @@ public class AutoMaticLottoTicketCreator implements LottoTicketCreator {
   @Override
   public LottoTicket pickLottoTicket() {
     Collections.shuffle(lottoNumbers);
-    return new LottoTicket(lottoNumbers.subList(FIRST_INDEX, LAST_INDEX));
+    return new LottoTicket(new ArrayList<>(lottoNumbers.subList(FIRST_INDEX, LAST_INDEX)));
   }
 }
