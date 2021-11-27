@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,11 +32,17 @@ class LottoStoreTest {
         winner = new LottoWinner(LottoNumbersFactory.manualCreateNumberList("3, 10, 17, 42, 43, 44"), bonus);
     }
 
-
     @Test
-    @DisplayName("로또 번호 당첨 확인")
-    void match() {
-        LottoReport report = LottoStore.report(lotto, winner);//[3, 10, 17, 24, 31, 38] 4등
-        assertThat(report.getLottoRankNumbers().get(LottoRank.FIFTH)).isEqualTo(new Number(1));
+    @DisplayName("수익률 계산")
+    void calculateRateOfRevenue() {
+        LottoNumbers lottoNumbers = LottoNumbersFactory.manualCreateNumbers("1, 2, 3, 4, 5, 6");
+        Lotto lotto = LottoFactory.manualCreateSingleLotto(lottoNumbers);
+        LottoNumber bonus = LottoNumberFactory.manualCreateNumber(7);
+        LottoWinner winner = new LottoWinner(LottoNumbersFactory.manualCreateNumberList("1, 2, 3, 11, 12, 13"), bonus);
+
+        Map<LottoRank, Number> result = lotto.matchAll(winner);
+        float rateOfRevenue = LottoStore.calculateRateOfRevenue(result, 1000);
+        assertThat(rateOfRevenue).isEqualTo(5);
+
     }
 }
