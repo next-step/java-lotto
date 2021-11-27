@@ -16,8 +16,8 @@ import static org.assertj.core.api.Assertions.*;
 public class CommandParserTest {
     static Stream<Arguments> validArguments() {
         return Stream.of(
-                Arguments.of(null, List.of(PositiveNumber.ofZero())),
-                Arguments.of("", List.of(PositiveNumber.ofZero())),
+                Arguments.of(null, List.of(PositiveNumber.ZERO)),
+                Arguments.of("", List.of(PositiveNumber.ZERO)),
                 Arguments.of("1", List.of(PositiveNumber.of(1))),
                 Arguments.of("1,2", List.of(PositiveNumber.of(1), PositiveNumber.of(2))),
                 Arguments.of("1,2:3", List.of(PositiveNumber.of(1), PositiveNumber.of(2), PositiveNumber.of(3))),

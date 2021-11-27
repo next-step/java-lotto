@@ -9,8 +9,8 @@ public class PositiveNumberTest {
     @Test
     public void create() {
         assertThat(PositiveNumber.of(0).toInt()).isEqualTo(0);
-        assertThat(PositiveNumber.of(0)).isEqualTo(PositiveNumber.ofZero());
-        assertThat(PositiveNumber.of("0")).isEqualTo(PositiveNumber.ofZero());
+        assertThat(PositiveNumber.of(0)).isEqualTo(PositiveNumber.ZERO);
+        assertThat(PositiveNumber.of("0")).isEqualTo(PositiveNumber.ZERO);
     }
 
     @Test
@@ -22,7 +22,7 @@ public class PositiveNumberTest {
 
     @Test
     public void sum() {
-        assertThat(PositiveNumber.sum(PositiveNumber.of(0), PositiveNumber.of(0))).isEqualTo(PositiveNumber.ofZero());
-        assertThat(PositiveNumber.sum(PositiveNumber.of(1), PositiveNumber.of(2))).isEqualTo(PositiveNumber.of(3));
+        assertThat(PositiveNumber.of(0).add(PositiveNumber.of(0))).isEqualTo(PositiveNumber.ZERO);
+        assertThat(PositiveNumber.of(1).add(PositiveNumber.of(2))).isEqualTo(PositiveNumber.of(3));
     }
 }

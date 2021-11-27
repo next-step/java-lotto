@@ -17,7 +17,7 @@ public class PositiveNumbersTest {
     @Test
     public void create() {
         Collection<PositiveNumber> numbers = List.of(PositiveNumber.of(1), PositiveNumber.of(2));
-        assertThat(PositiveNumbers.of(numbers)).containsExactly(PositiveNumber.of(1), PositiveNumber.of(2));
+        assertThat(PositiveNumbers.of(numbers).collect()).containsExactly(PositiveNumber.of(1), PositiveNumber.of(2));
     }
 
     @ParameterizedTest
@@ -33,7 +33,7 @@ public class PositiveNumbersTest {
                 Arguments.of(List.of(PositiveNumber.of(1)), PositiveNumber.of(1)),
                 Arguments.of(List.of(PositiveNumber.of(1), PositiveNumber.of(2)), PositiveNumber.of(3)),
                 Arguments.of(List.of(PositiveNumber.of(1), PositiveNumber.of(2), PositiveNumber.of(3)), PositiveNumber.of(6)),
-                Arguments.of(Collections.emptyList(), PositiveNumber.ofZero())
+                Arguments.of(Collections.emptyList(), PositiveNumber.ZERO)
         );
     }
 
