@@ -8,14 +8,20 @@ import lotto.domain.starategy.GetRandomLottoNumbers;
 import lotto.view.Input;
 import lotto.view.Output;
 
+import static lotto.domain.Lotto.PRICE;
+
 public class Main {
     public static void main(String[] args) {
         Integer purchaseAmount = Input.inputPurchaseAmount();
-        Lottos lottos = Lottos.createRandomLottos(purchaseAmount, new GetRandomLottoNumbers());
-        Output.viewPurchasedLotto(lottos);
+        int manualLottoCount = Input.inputManualLottoCount();
+        Lottos manualLottos = Input.inputManualLottos(manualLottoCount);
+        int randomLottoCount = purchaseAmount / PRICE - manualLottoCount;
+        Lottos randomLottos = Lottos.ofStrategy(randomLottoCount, new GetRandomLottoNumbers());
+        Output.viewPurchasedLotto(randomLottos);
         String winningLottoString = Input.inputWinningNumbers();
         LottoNumber bonus = Input.inputBonusBall();
-        WinningLotto winningLotto = new WinningLotto(winningLottoString, bonus);
-        Output.viewResult(lottos, purchaseAmount, winningLotto, bonus);
+        WinningLotto winningLotto = WinningLotto.ofStringAndBonusBall(winningLottoString, bonus);
+        manualLottos.mergeLottos(randomLottos);
+        Output.viewResult(manualLottos, purchaseAmount, winningLotto, bonus);
     }
 }

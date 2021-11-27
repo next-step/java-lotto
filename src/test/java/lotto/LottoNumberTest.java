@@ -15,13 +15,13 @@ public class LottoNumberTest {
     void checkBoundTest() {
         int boundNumber = 46;
         assertThatThrownBy(() -> {
-            new LottoNumber(boundNumber);
+            LottoNumber.ofInt(boundNumber);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(BOUND_END + "보다 큰 숫자가 입력될 수 없습니다.");
 
         int boundNumber1 = 0;
         assertThatThrownBy(() -> {
-            new LottoNumber(boundNumber1);
+             LottoNumber.ofInt(boundNumber1);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(BOUND_START + "보다 작은 숫자가 입력될 수 없습니다.");
     }
@@ -29,6 +29,6 @@ public class LottoNumberTest {
     @Test
     @DisplayName("LottoNumber 클래스 equal 테스트")
     void numberTest() {
-        assertThat(new LottoNumber(10)).isEqualTo(new LottoNumber(10));
+        assertThat( LottoNumber.ofInt(10)).isEqualTo(LottoNumber.ofInt(10));
     }
 }

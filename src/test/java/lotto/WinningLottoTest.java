@@ -16,7 +16,7 @@ public class WinningLottoTest {
     void bonusBallDuplicateCheckTest() {
         assertThatThrownBy(() ->
         {
-            WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6", new LottoNumber(6));
+            WinningLotto winningLotto = WinningLotto.ofStringAndBonusBall("1,2,3,4,5,6", LottoNumber.ofInt(6));
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("당첨 번호와 보너스볼이 겹칩니다.");
     }
 
@@ -25,7 +25,7 @@ public class WinningLottoTest {
     void parseIntWinningLottoTest() {
         assertThatThrownBy(() ->
         {
-            WinningLotto winningLotto = new WinningLotto("1,2,3,4,5$6", new LottoNumber(6));
+            WinningLotto winningLotto = WinningLotto.ofStringAndBonusBall("1,2,3,4,5$6", LottoNumber.ofInt(6));
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("당첨 번호가 NUMBER로 변환 불가능 합니다.");
     }
 
@@ -34,19 +34,19 @@ public class WinningLottoTest {
     void checkSizeTest() {
         assertThatThrownBy(() ->
         {
-            WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6,7", new LottoNumber(6));
+            WinningLotto winningLotto = WinningLotto.ofStringAndBonusBall("1,2,3,4,5,6,7", LottoNumber.ofInt(12));
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining(SIZE + " 와 길이가 다른 winningLotto 는 입력될 수 없습니다.");
         assertThatThrownBy(() ->
         {
-            WinningLotto winningLotto = new WinningLotto("1,2,3,4,5", new LottoNumber(6));
+            WinningLotto winningLotto = WinningLotto.ofStringAndBonusBall("1,2,3,4,5",  LottoNumber.ofInt(6));
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining(SIZE + " 와 길이가 다른 winningLotto 는 입력될 수 없습니다.");
     }
 
     @Test
     @DisplayName("당첨 번호의 size 테스트")
     void checkContainNumberTest() {
-        WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6");
-        assertTrue(winningLotto.checkContainNumber(new LottoNumber(5)));
-        assertFalse(winningLotto.checkContainNumber(new LottoNumber(12)));
+        WinningLotto winningLotto = WinningLotto.ofString("1,2,3,4,5,6");
+        assertTrue(winningLotto.checkContainNumber( LottoNumber.ofInt(5)));
+        assertFalse(winningLotto.checkContainNumber( LottoNumber.ofInt(12)));
     }
 }

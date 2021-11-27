@@ -8,15 +8,16 @@ public class LottoNumber {
     public static final int BOUND_START = 1;
     public static final int BOUND_END = 45;
 
-    public LottoNumber(int lottoNumber) {
+    private LottoNumber(int lottoNumber) {
         this.lottoNumber = checkBound(lottoNumber);
 
     }
-
-    public static LottoNumber of(String lottoNumber) {
+    public static LottoNumber ofInt(int lottoNumber) {
+        return new LottoNumber(lottoNumber);
+    }
+    public static LottoNumber ofString(String lottoNumber) {
         checkNumeric(lottoNumber);
         return new LottoNumber(Integer.parseInt(lottoNumber));
-
     }
 
     public Integer getLottoNumber() {

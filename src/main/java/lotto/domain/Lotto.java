@@ -5,34 +5,37 @@ import lotto.domain.starategy.GetLottoNumbersStrategy;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
+
+    public static final int PRICE = 1000;
     public static final int SIZE = 6;
 
     private final List<LottoNumber> lotto;
 
-    public Lotto(List<LottoNumber> lotto ) {
+    private Lotto(List<LottoNumber> lotto) {
         checkSize(lotto);
         checkDistinct(lotto);
         this.lotto = lotto;
     }
 
-    public Lotto(String lottoString) {
+    private Lotto(String lottoString) {
         this(Arrays.stream(lottoString.split(","))
-                .map(lottoNumberString -> LottoNumber.of(lottoNumberString))
+                .map(lottoNumberString -> LottoNumber.ofString(lottoNumberString))
                 .collect(Collectors.toList()));
     }
 
-    public static Lotto createRandomLotto(GetLottoNumbersStrategy getLottoNumbersStrategy) {
+    public static Lotto ofStrategy(GetLottoNumbersStrategy getLottoNumbersStrategy) {
         return new Lotto(getLottoNumbersStrategy.getLotto());
     }
 
-    public static Lotto createManualLotto(String lottoString) {
+    public static Lotto ofString(String lottoString) {
         return new Lotto(lottoString);
     }
 
-    public static Lotto createManualLotto(List<LottoNumber> lotto) {
+    public static Lotto ofLottoNumberList(List<LottoNumber> lotto) {
         return new Lotto(lotto);
     }
 
@@ -64,5 +67,18 @@ public class Lotto {
 
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(lotto);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto1 = (Lotto) o;
+        return Objects.equals(lotto, lotto1.lotto);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lotto);
     }
 }

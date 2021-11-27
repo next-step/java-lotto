@@ -34,6 +34,6 @@ public class LottoNumberTest {
     @Test
     @DisplayName("String 타입의 lottoNumber가 int 로 잘 바뀌는지 테스트")
     void of() {
-        assertThat(LottoNumber.of("10")).isEqualTo(new LottoNumber(10));
+        assertThat(LottoNumber.ofString("10")).isEqualTo(LottoNumber.ofInt(10));
     }
 }

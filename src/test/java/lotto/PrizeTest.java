@@ -19,21 +19,21 @@ import java.util.stream.Stream;
 public class PrizeTest {
     private static Stream<Arguments> generateArgumentsStream() {
         List<Arguments> listOfArguments = new LinkedList<>();
-        Lotto lotto = new Lotto("1,2,3,7,8,9");
-        WinningLotto winningNumber = new WinningLotto("1,2,3,4,5,6");
-        LottoNumber bonus = new LottoNumber(10);
+        Lotto lotto = Lotto.ofString("1,2,3,7,8,9");
+        WinningLotto winningNumber = WinningLotto.ofString("1,2,3,4,5,6");
+        LottoNumber bonus = LottoNumber.ofInt(10);
         Prize prize = Prize.FIFTH;
         listOfArguments.add(Arguments.of(lotto, winningNumber, bonus,prize));
 
-        Lotto lotto_1 = new Lotto("1,2,3,4,5,6");
-        WinningLotto winningNumber_1 = new WinningLotto("1,2,3,4,5,9");
-        LottoNumber bonus_1 = new LottoNumber(6);
+        Lotto lotto_1 = Lotto.ofString("1,2,3,4,5,6");
+        WinningLotto winningNumber_1 = WinningLotto.ofString("1,2,3,4,5,9");
+        LottoNumber bonus_1 = LottoNumber.ofInt(6);
         Prize prize_1 = Prize.SECOND;
         listOfArguments.add(Arguments.of(lotto_1, winningNumber_1, bonus_1,prize_1));
 
-        Lotto lotto_2 = new Lotto("1,2,3,4,5,6");
-        WinningLotto winningNumber_2 = new WinningLotto("11,12,13,14,15,19");
-        LottoNumber bonus_2 = new LottoNumber(6);
+        Lotto lotto_2 = Lotto.ofString("1,2,3,4,5,6");
+        WinningLotto winningNumber_2 = WinningLotto.ofString("11,12,13,14,15,19");
+        LottoNumber bonus_2 = LottoNumber.ofInt(6);
         Prize prize_2 = Prize.ELSE;
         listOfArguments.add(Arguments.of(lotto_2, winningNumber_2, bonus_2,prize_2));
         return listOfArguments.stream();

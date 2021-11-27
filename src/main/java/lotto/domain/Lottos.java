@@ -14,23 +14,18 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos createRandomLottos(Integer purchaseAmount, GetLottoNumbersStrategy getLottoNumbersStrategy) {
-        int purchaseCount = purchaseAmount / 1000;
+    public static Lottos ofStrategy(Integer purchaseCount, GetLottoNumbersStrategy getLottoNumbersStrategy) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < purchaseCount; i++) {
-            Lotto lotto = Lotto.createRandomLotto(getLottoNumbersStrategy);
+            Lotto lotto = Lotto.ofStrategy(getLottoNumbersStrategy);
             lottos.add(lotto);
         }
         return new Lottos(lottos);
     }
 
-    public static Lottos createManualLottos(List<Lotto> lottos) {
+    public static Lottos ofLottoList(List<Lotto> lottos) {
         return new Lottos(lottos);
     }
-
-//    public static Lottos createManualLottos(List<String> lottos) {
-//        return new Lottos(lottos.stream().map(lottoString -> Lotto.createManualLotto(lottoString)).collect(Collectors.toList()));
-//    }
 
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
@@ -48,4 +43,11 @@ public class Lottos {
                 .count();
         return count.intValue();
     }
+
+    public void mergeLottos(Lottos lottos) {
+        this.lottos.addAll(lottos.getLottos());
+    }
+
+
+
 }

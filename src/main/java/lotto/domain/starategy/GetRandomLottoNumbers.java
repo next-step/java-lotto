@@ -14,7 +14,7 @@ import static lotto.domain.LottoNumber.BOUND_START;
 
 public class GetRandomLottoNumbers implements GetLottoNumbersStrategy {
     public static final List<LottoNumber> BOUND_LOTTO_NUMBERS = IntStream.rangeClosed(BOUND_START, BOUND_END)
-            .mapToObj(i -> new LottoNumber(i))
+            .mapToObj(i -> LottoNumber.ofInt(i))
             .collect(Collectors.toList());
 
     @Override

@@ -20,29 +20,29 @@ public class LottosTest {
     private static Stream<Arguments> generateArgumentsStream() {
         List<Arguments> listOfArguments = new LinkedList<>();
         List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add(new Lotto("1,2,3,4,5,6"));
-        lottoList.add(new Lotto("11,12,13,14,15,16"));
-        lottoList.add(new Lotto("1,2,13,44,45,36"));
-        lottoList.add(new Lotto("21,12,33,1,2,3"));
-        lottoList.add(new Lotto("1,12,13,44,45,36"));
-        Lottos lottos = Lottos.createManualLottos(lottoList);
-        LottoNumber bonus = new LottoNumber(10);
+        lottoList.add(Lotto.ofString("1,2,3,4,5,6"));
+        lottoList.add(Lotto.ofString("11,12,13,14,15,16"));
+        lottoList.add(Lotto.ofString("1,2,13,44,45,36"));
+        lottoList.add(Lotto.ofString("21,12,33,1,2,3"));
+        lottoList.add(Lotto.ofString("1,12,13,44,45,36"));
+        Lottos lottos = Lottos.ofLottoList(lottoList);
+        LottoNumber bonus = LottoNumber.ofInt(10);
         listOfArguments.add(Arguments.of(lottos, bonus, 2_000_000_000 + 5_000));
 
         List<Lotto> lottoList1 = new ArrayList<>();
-        lottoList1.add(new Lotto("1,2,3,4,5,6"));
-        lottoList1.add(new Lotto("1,2,3,4,5,6"));
-        lottoList1.add(new Lotto("1,2,3,4,5,7"));
-        Lottos lottos1 = Lottos.createManualLottos(lottoList1);
-        LottoNumber bonus1 = new LottoNumber(7);
+        lottoList1.add(Lotto.ofString("1,2,3,4,5,6"));
+        lottoList1.add(Lotto.ofString("1,2,3,4,5,6"));
+        lottoList1.add(Lotto.ofString("1,2,3,4,5,7"));
+        Lottos lottos1 = Lottos.ofLottoList(lottoList1);
+        LottoNumber bonus1 = LottoNumber.ofInt(7);
         listOfArguments.add(Arguments.of(lottos1, bonus1, 2_000_000_000 * 2 + 30000000));
 
         List<Lotto> lottoList2 = new ArrayList<>();
-        lottoList2.add(new Lotto("1,2,3,14,15,16"));
-        lottoList2.add(new Lotto("11,12,13,4,5,6"));
-        lottoList2.add(new Lotto("1,2,3,14,5,7"));
-        Lottos lottos2 = Lottos.createManualLottos(lottoList2);
-        LottoNumber bonus2 = new LottoNumber(7);
+        lottoList2.add(Lotto.ofString("1,2,3,14,15,16"));
+        lottoList2.add(Lotto.ofString("11,12,13,4,5,6"));
+        lottoList2.add(Lotto.ofString("1,2,3,14,5,7"));
+        Lottos lottos2 = Lottos.ofLottoList(lottoList2);
+        LottoNumber bonus2 =  LottoNumber.ofInt(7);
         listOfArguments.add(Arguments.of(lottos2, bonus2, 5_000 * 2 + 50_000));
 
         return listOfArguments.stream();
@@ -52,18 +52,38 @@ public class LottosTest {
     @MethodSource("generateArgumentsStream")
     @DisplayName("lottos 의 getPrize 테스트")
     void getPrizeTest(Lottos lottos, LottoNumber bonus, Integer expect) {
-        WinningLotto winningNumber = new WinningLotto("1,2,3,4,5,6", bonus);
+        WinningLotto winningNumber = WinningLotto.ofStringAndBonusBall("1,2,3,4,5,6", bonus);
         assertThat(lottos.getPrize(winningNumber, bonus)).isEqualTo(expect);
     }
 
     @Test
-    @DisplayName("당첨 번호를 얼마나 맞췄는지 getCountTest")
+    @DisplayName("특정 상금을 몇번 받았는지 getCountTest")
     void getCountTest() {
-        WinningLotto winningNumber = new WinningLotto("1,2,3,4,5,6", new LottoNumber(13));
-        LottoNumber bonus = new LottoNumber(10);
-        Lottos lottos = Lottos.createRandomLottos(7000,
-                () -> Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(7), new LottoNumber(8), new LottoNumber(9)));
+        LottoNumber bonus = LottoNumber.ofInt(10);
+        WinningLotto winningNumber = WinningLotto.ofString("1,2,3,4,5,6");
+        Lottos lottos = Lottos.ofStrategy(7,
+                () -> Arrays.asList(LottoNumber.ofInt(1), LottoNumber.ofInt(2), LottoNumber.ofInt(3), LottoNumber.ofInt(7), LottoNumber.ofInt(8), LottoNumber.ofInt(9)));
         assertThat(lottos.getCount(Prize.FIFTH, winningNumber, bonus)).isEqualTo(7);
     }
 
+    @Test
+    @DisplayName("Lottos merge test")
+    void mergeLottosTest() {
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.add(Lotto.ofString("1,2,3,4,5,6"));
+        Lottos lottos_1 = Lottos.ofLottoList(lottoList);
+
+        List<Lotto> lottoList_2 = new ArrayList<>();
+        lottoList_2.add(Lotto.ofString("11,12,13,14,15,16"));
+        Lottos lottos_2 = Lottos.ofLottoList(lottoList_2);
+
+        lottos_1.mergeLottos(lottos_2);
+
+        List<Lotto> expectList = new ArrayList<>();
+        expectList.add(Lotto.ofString("1,2,3,4,5,6"));
+        expectList.add(Lotto.ofString("11,12,13,14,15,16"));
+
+        Lottos lottos = Lottos.ofLottoList(expectList);
+        assertThat(lottos_1.getLottos()).isEqualTo(lottos.getLottos());
+    }
 }

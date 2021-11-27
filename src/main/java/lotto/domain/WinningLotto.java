@@ -11,24 +11,27 @@ public class WinningLotto {
 
     private List<LottoNumber> winningLotto;
 
-    public WinningLotto(String winningLottoString) {
+    private WinningLotto(String winningLottoString) {
         List<LottoNumber> winningLotto = parseIntWinningLotto(winningLottoString);
         checkSize(winningLotto);
         this.winningLotto = winningLotto;
     }
 
-    public WinningLotto(String winningLottoString, LottoNumber bonusBall) {
-        List<LottoNumber> winningLotto = parseIntWinningLotto(winningLottoString);
-        checkSize(winningLotto);
-        bonusBallDuplicateCheck(bonusBall, winningLotto);
-        this.winningLotto = winningLotto;
+    public static WinningLotto ofString(String winningLottoString) {
+        return new WinningLotto(winningLottoString);
     }
 
-    private List<LottoNumber> parseIntWinningLotto(String winningLottoString) {
+    public static WinningLotto ofStringAndBonusBall(String winningLottoString, LottoNumber bonusBall) {
+        bonusBallDuplicateCheck(bonusBall, parseIntWinningLotto(winningLottoString));
+        return new WinningLotto(winningLottoString);
+    }
+
+
+    private static List<LottoNumber> parseIntWinningLotto(String winningLottoString) {
         try {
             List<LottoNumber> winningLotto = Arrays.asList(winningLottoString.split(",")).stream()
                     .map(Integer::parseInt)
-                    .map(LottoNumber::new)
+                    .map(LottoNumber::ofInt)
                     .collect(Collectors.toList());
             return winningLotto;
         } catch (Exception e) {
@@ -36,13 +39,13 @@ public class WinningLotto {
         }
     }
 
-    private void checkSize(List<LottoNumber> winningLotto) {
+    private static void checkSize(List<LottoNumber> winningLotto) {
         if (winningLotto.size() != SIZE) {
             throw new IllegalArgumentException(SIZE + " 와 길이가 다른 winningLotto 는 입력될 수 없습니다.");
         }
     }
 
-    public void bonusBallDuplicateCheck(LottoNumber bonusBall, List<LottoNumber> winningLotto) {
+    public static void bonusBallDuplicateCheck(LottoNumber bonusBall, List<LottoNumber> winningLotto) {
         if (winningLotto.contains(bonusBall)) {
             throw new IllegalArgumentException("당첨 번호와 보너스볼이 겹칩니다.");
         }
