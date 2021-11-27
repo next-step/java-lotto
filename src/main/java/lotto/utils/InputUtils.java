@@ -27,7 +27,6 @@ public class InputUtils {
         validateEmpty(input);
 
         List<String> stringNumbers = Arrays.asList(input.split(SEPARATOR));
-        System.out.println(stringNumbers);
 
         validateNumber(stringNumbers);
 
