@@ -7,23 +7,23 @@ import lotto.utils.RankEnum;
 import static lotto.utils.Constants.*;
 
 public class OutputView {
-    private StringBuilder sb;
+    private static final StringBuilder sb = new StringBuilder();
 
-    public OutputView() {
-        sb = new StringBuilder();
+    private OutputView() {
+
     }
 
-    public void drawLottoGameCount(LottoGameCount lottoGameCount) {
+    public static void drawLottoGameCount(LottoGameCount lottoGameCount) {
         System.out.println(lottoGameCount.getLottoGameCount() + MSG_LOTTO_COUNT);
     }
 
-    public void drawPurchasedLottoes(Lottoes lottoes) {
+    public static void drawPurchasedLottoes(Lottoes lottoes) {
         lottoes.getLottoGames().forEach(lottoGame ->
                 System.out.println(lottoGame.getLottoNumbers().getLottoNumbers()));
         System.out.println();
     }
 
-    public void drawResultWinLotto(Lottoes lottoes) {
+    public static void drawResultWinLotto(Lottoes lottoes) {
         System.out.println(MSG_WINNING_STATISTICS);
         System.out.println(MSG_DASH_TEN);
 
@@ -33,7 +33,7 @@ public class OutputView {
         getRankMsg((long) NUMBER_SIX, lottoes);
     }
 
-    public void getRankMsg(Long rank, Lottoes lottoes) {
+    public static void getRankMsg(Long rank, Lottoes lottoes) {
         RankEnum rankEnum = RankEnum.findBy(rank);
         sb.append(rankEnum.getMsg());
         sb.append(lottoes.winRankLottoCount(rank));
@@ -42,7 +42,7 @@ public class OutputView {
         sb.setLength(NUMBER_ZERO);
     }
 
-    public void drawTotalReward(Double yield) {
+    public static void drawTotalReward(Double yield) {
         sb.append(MSG_TOTAL_YIELD);
         sb.append(yield);
         sb.append(MSG_IS);

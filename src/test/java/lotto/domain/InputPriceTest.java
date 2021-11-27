@@ -17,9 +17,8 @@ public class InputPriceTest {
     @Test
     @DisplayName("입력받은 금액이 1000원 단위인지 체크한다.")
     public void validateSmallestUnit() {
-        InputPrice inputPrice = new InputPrice(999);
         assertThatThrownBy(() -> {
-            inputPrice.validateSmallestUnit();
+            new InputPrice(999);
         }).isInstanceOf(IndexOutOfBoundsException.class)
                 .hasMessageContaining("로또는 1000원 단위로 구매할 수 있습니다.");
     }

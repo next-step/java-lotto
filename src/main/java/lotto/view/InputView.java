@@ -12,24 +12,23 @@ import java.util.stream.Collectors;
 import static lotto.utils.Constants.*;
 
 public class InputView {
-    private InputPrice inputPrice;
-    private static Scanner scanner;
+    private static InputPrice inputPrice;
+    private static final Scanner scanner = new Scanner(System.in);
 
-    public InputView() {
-        scanner = new Scanner(System.in);
+    private InputView() {
+
     }
 
     public InputView(InputPrice inputPrice) {
         this.inputPrice = inputPrice;
     }
 
-    public void inputPrice() {
+    public static void inputPrice() {
         System.out.println(MSG_INPUT_PRICE);
         inputPrice = new InputPrice(Integer.valueOf(scanner.next()));
-        inputPrice.validateSmallestUnit();
     }
 
-    public LottoNumbers inputLastWeekWinningNumbers() {
+    public static LottoNumbers inputLastWeekWinningNumbers() {
         System.out.println(MSG_INPUT_WINNING_NUMBER);
         String[] lastWeekWinningNumbers = scanner.next().split(COMMA);
         LottoNumbers lastWeekWinnigNumbers = new LottoNumbers(Arrays.stream(lastWeekWinningNumbers)
@@ -41,7 +40,7 @@ public class InputView {
         return lastWeekWinnigNumbers;
     }
 
-    public LottoGameCount getLottoGameCount() {
+    public static LottoGameCount getLottoGameCount() {
         return new LottoGameCount(inputPrice.divideByThousands());
     }
 

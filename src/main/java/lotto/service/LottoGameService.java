@@ -12,14 +12,10 @@ import static lotto.utils.Constants.NUMBER_THOUSAND;
 
 public class LottoGameService {
     private LottoGameCount lottoGameCount;
-    private InputView inputView;
-    private OutputView outputView;
     private Lottoes lottoes;
     private LottoNumbers lastWeekWinningNumbers;
 
     public LottoGameService() {
-        inputView = new InputView();
-        outputView = new OutputView();
         lottoes = new Lottoes();
     }
 
@@ -29,15 +25,15 @@ public class LottoGameService {
     }
 
     public void buyLotto() {
-        inputView.inputPrice();
-        lottoGameCount = inputView.getLottoGameCount();
-        outputView.drawLottoGameCount(lottoGameCount);
+        InputView.inputPrice();
+        lottoGameCount = InputView.getLottoGameCount();
+        OutputView.drawLottoGameCount(lottoGameCount);
         lottoes.makeLottoes(lottoGameCount);
-        outputView.drawPurchasedLottoes(lottoes);
+        OutputView.drawPurchasedLottoes(lottoes);
     }
 
     public void getLastWeekWinningNumbers() {
-        lastWeekWinningNumbers = inputView.inputLastWeekWinningNumbers();
+        lastWeekWinningNumbers = InputView.inputLastWeekWinningNumbers();
     }
 
     public void matchLottoNumbers() {
@@ -47,12 +43,12 @@ public class LottoGameService {
     }
 
     public void resultWinLotto() {
-        outputView.drawResultWinLotto(lottoes);
+        OutputView.drawResultWinLotto(lottoes);
     }
 
     public void resultTotalReward() {
         lottoes.calculateTotalReward();
-        outputView.drawTotalReward(calculateYield());
+        OutputView.drawTotalReward(calculateYield());
     }
 
     public Double calculateYield() {
@@ -66,14 +62,12 @@ public class LottoGameService {
         if (o == null || getClass() != o.getClass()) return false;
         LottoGameService that = (LottoGameService) o;
         return Objects.equals(lottoGameCount, that.lottoGameCount) &&
-                Objects.equals(inputView, that.inputView) &&
-                Objects.equals(outputView, that.outputView) &&
                 Objects.equals(lottoes, that.lottoes) &&
                 Objects.equals(lastWeekWinningNumbers, that.lastWeekWinningNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoGameCount, inputView, outputView, lottoes, lastWeekWinningNumbers);
+        return Objects.hash(lottoGameCount, lottoes, lastWeekWinningNumbers);
     }
 }

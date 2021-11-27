@@ -9,9 +9,10 @@ public class InputPrice {
 
     public InputPrice(Integer inputPrice) {
         this.inputPrice = inputPrice;
+        validateSmallestUnit();
     }
 
-    public void validateSmallestUnit() {
+    private void validateSmallestUnit() {
         if (inputPrice < NUMBER_THOUSAND || Math.floorMod(inputPrice, NUMBER_THOUSAND) != NUMBER_ZERO) {
             throw new IndexOutOfBoundsException(MSG_MINIMUM_PURCHASE_PRICE);
         }
