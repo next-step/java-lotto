@@ -7,10 +7,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Delimiters {
-    private static final List<Delimiter> BASE_DELIMITERS = new ArrayList(){{
-        new Delimiter(",");
-        new Delimiter(":");
-    }};
+    private static final String[] BASE_DELIMITERS = {",", ":"};
 
     private final List<Delimiter> delimiters;
 
@@ -19,11 +16,13 @@ public class Delimiters {
     }
 
     public static Delimiters createWithoutDelimiter() {
-        return new Delimiters(BASE_DELIMITERS);
+        return new Delimiters(Arrays.stream(BASE_DELIMITERS)
+                .map(d -> new Delimiter(d))
+                .collect(Collectors.toList()));
     }
 
     public static Delimiters createWithDelimiter(Delimiter delimiter) {
-        return new Delimiters(new ArrayList(){{
+        return new Delimiters(new ArrayList() {{
             add(delimiter);
         }});
     }

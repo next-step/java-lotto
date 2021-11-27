@@ -8,11 +8,11 @@ import static org.assertj.core.api.Assertions.*;
 public class InputsTest {
     @Test
     void createWithDelimiter() {
-        assertThat(Inputs.createWithDelimiter("//;\\n1;2;3")).isEqualTo(Inputs.createWithDelimiter("//;\\n1;2;3"));
+        assertThat(Inputs.createWithDelimiters("//;\\n1;2;3")).isEqualTo(Inputs.createWithDelimiters("//;\\n1;2;3"));
     }
 
     @Test
     void createWithoutDelimiter() {
-        assertThat(Inputs.createWithoutDelimiter("1:2:3")).isEqualTo(Inputs.createWithoutDelimiter("1:2,3"));
+        assertThat(Inputs.createWithoutDelimiters("1:2:3")).isEqualTo(Inputs.createWithoutDelimiters("1:2,3"));
     }
 }

@@ -13,10 +13,10 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
-        if (input.startsWith("//")) {
-            return Inputs.createWithDelimiter(input);
+        if (Inputs.isHaveDelimiters(input)) {
+            return Inputs.createWithDelimiters(input);
         }
 
-        return Inputs.createWithoutDelimiter(input);
+        return Inputs.createWithoutDelimiters(input);
     }
 }
