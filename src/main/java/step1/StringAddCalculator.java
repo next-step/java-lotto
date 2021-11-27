@@ -11,41 +11,43 @@ public class StringAddCalculator {
             return 0;
         }
 
-        String[] splits = inputData.split(",|:");
-        List<Integer> numbers = new ArrayList<>();
-        int result = 0;
+        List<Integer> numbers = convertIntegers(inputData.split(",|:"));
 
-        convertIntegers(splits, numbers);
-
-        if (isSizeOne(numbers)) {
+        if (isNumberOfOne(numbers)) {
             return numbers.get(0);
         }
 
+        return sum(numbers);
+    }
+
+    private static int sum(List<Integer> numbers) {
+        int result = 0;
         for (Integer number : numbers) {
             result += number;
         }
-
         return result;
     }
 
-    private static boolean isSizeOne(List<Integer> numbers) {
+    private static boolean isNumberOfOne(List<Integer> numbers) {
         return numbers.size() == 1;
     }
 
-    private static void convertIntegers(String[] splits, List<Integer> numbers) {
+    private static List<Integer> convertIntegers(String[] splits) {
+        List<Integer> numbers = new ArrayList<>();
         for (String split : splits) {
-            int number = getPositive(split);
+            int number = convertPositive(split);
             numbers.add(number);
         }
+        return numbers;
     }
 
-    private static int getPositive(String split) {
+    private static int convertPositive(String split) {
         int number = Integer.parseInt(split);
         if (number < 0) throw new RuntimeException();
         return number;
     }
 
     private static boolean isEmpty(String inputData) {
-        return "".equals(inputData) || inputData == null;
+        return inputData == null || inputData.trim().isEmpty();
     }
 }
