@@ -1,5 +1,6 @@
 package lotto;
 
+import common.model.Number;
 import lotto.factory.LottoFactory;
 import lotto.factory.LottoNumberFactory;
 import lotto.factory.LottoNumbersFactory;
@@ -7,8 +8,7 @@ import lotto.model.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,9 +28,9 @@ class ConsumerTest {
                 LottoNumberFactory.manualCreateNumber(6)
         );
 
-        LottoReport report = LottoStore.report(lotto, lottoWinner);
+        Map<LottoRank, Number> result = lotto.matchAll(lottoWinner);
 
-        float rateOfRevenue = report.calculateRateOfRevenue(purchaseAmount);
+        float rateOfRevenue = LottoStore.calculateRateOfRevenue(result, purchaseAmount);
         assertThat(rateOfRevenue).isEqualTo(30000.0f);
     }
 }
