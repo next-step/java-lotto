@@ -19,7 +19,7 @@ public class WinnerNumberView {
         System.out.println(MESSAGE_WINNER_NUMBERS);
         return ScannerUtils.nextLine();
     }
-    
+
     private static int getBonusNumber() {
         System.out.println(MESSAGE_BONUS_NUMBER);
         return ScannerUtils.nextInt();

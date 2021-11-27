@@ -9,6 +9,7 @@ import lotto.service.WinningResult;
 public class LottoController {
 
     private static class LottoControllerHolder {
+
         private static final LottoController LOTTO_CONTROLLER = new LottoController();
     }
 

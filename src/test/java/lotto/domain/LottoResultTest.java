@@ -1,14 +1,13 @@
 package lotto.domain;
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottoResultTest {
 
@@ -20,9 +19,9 @@ public class LottoResultTest {
         LottoTicket lottoTicket3 = LottoTicket.from(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 8)));
 
         return Stream.of(
-                Arguments.of(winnerLottoTicket, lottoTicket1, 6),
-                Arguments.of(winnerLottoTicket, lottoTicket2, 5),
-                Arguments.of(winnerLottoTicket, lottoTicket3, 5)
+            Arguments.of(winnerLottoTicket, lottoTicket1, 6),
+            Arguments.of(winnerLottoTicket, lottoTicket2, 5),
+            Arguments.of(winnerLottoTicket, lottoTicket3, 5)
         );
     }
 
@@ -34,9 +33,9 @@ public class LottoResultTest {
         LottoTicket lottoTicket3 = LottoTicket.from(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 8)));
 
         return Stream.of(
-                Arguments.of(winnerLottoTicket, lottoTicket1, false),
-                Arguments.of(winnerLottoTicket, lottoTicket2, true),
-                Arguments.of(winnerLottoTicket, lottoTicket3, false)
+            Arguments.of(winnerLottoTicket, lottoTicket1, false),
+            Arguments.of(winnerLottoTicket, lottoTicket2, true),
+            Arguments.of(winnerLottoTicket, lottoTicket3, false)
         );
     }
 

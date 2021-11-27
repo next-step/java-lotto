@@ -1,11 +1,10 @@
 package lotto.domain;
 
-import lotto.exception.NotNumberException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.exception.NotNumberException;
 
 public class WinnerLottoTicket extends AbstractLottoTicket {
 
@@ -27,16 +26,16 @@ public class WinnerLottoTicket extends AbstractLottoTicket {
 
     public List<Long> findLottoMatchCount(LottoTickets lottoTickets) {
         return lottoTickets.getLottoTickets().stream()
-                .mapToLong(this::findLottoMatchCount)
-                .boxed()
-                .collect(Collectors.toCollection(ArrayList::new));
+            .mapToLong(this::findLottoMatchCount)
+            .boxed()
+            .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public long findLottoMatchCount(LottoTicket lottoTicket) {
         return lottoTicket.getLottoTicket()
-                .stream()
-                .filter(number -> this.lottoTicket.contains(number))
-                .count();
+            .stream()
+            .filter(number -> this.lottoTicket.contains(number))
+            .count();
     }
 
     public LottoNumber getBonusNumber() {
@@ -46,9 +45,9 @@ public class WinnerLottoTicket extends AbstractLottoTicket {
     private static List<Integer> mapToInt(String[] input) {
         try {
             return Arrays.stream(input)
-                    .mapToInt(Integer::parseInt)
-                    .boxed()
-                    .collect(Collectors.toCollection(ArrayList::new));
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(Collectors.toCollection(ArrayList::new));
         } catch (NumberFormatException e) {
             throw new NotNumberException();
         }

@@ -25,11 +25,13 @@ public class WinningResultView {
         }
 
         if (key == Rank.SECOND) {
-            System.out.println(String.format("%d개 일치, 보너스 볼 일치 (%d원) - %d개", key.getCount(), key.getPrizeMoney(), dto.getResultRank().getOrDefault(key, DEFAULT_VALUE)));
+            System.out.println(String.format("%d개 일치, 보너스 볼 일치 (%d원) - %d개"
+                , key.getCount(), key.getPrizeMoney(), dto.getResultRank().getOrDefault(key, DEFAULT_VALUE)));
             return;
         }
 
-        System.out.println(String.format("%d개 일치 (%d원) - %d개", key.getCount(), key.getPrizeMoney(), dto.getResultRank().getOrDefault(key, DEFAULT_VALUE)));
+        System.out.println(String.format("%d개 일치 (%d원) - %d개"
+            , key.getCount(), key.getPrizeMoney(), dto.getResultRank().getOrDefault(key, DEFAULT_VALUE)));
     }
 
 }

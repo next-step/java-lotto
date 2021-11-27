@@ -28,7 +28,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
             throw new TicketNumberOutBoundException(MINIMUM_NUMBER, MAXIMUM_NUMBER);
         }
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

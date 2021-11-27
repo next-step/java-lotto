@@ -1,15 +1,19 @@
 package lotto.service;
 
-import lotto.domain.*;
-import lotto.domain.dto.ResultDto;
-import lotto.domain.dto.WinningLottoTicketDto;
-
 import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.LottoResult;
+import lotto.domain.LottoTicket;
+import lotto.domain.Rate;
+import lotto.domain.WinnerLottoTicket;
+import lotto.domain.WinningRank;
+import lotto.domain.dto.ResultDto;
+import lotto.domain.dto.WinningLottoTicketDto;
 
 public class WinningResult {
 
     private static class WinningResultHolder {
+
         private static final WinningResult WINNING_RESULT = new WinningResult();
     }
 

@@ -1,18 +1,13 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 public class WinningRankTest {
 
@@ -22,16 +17,12 @@ public class WinningRankTest {
     void setUp() {
         WinnerLottoTicket winnerLottoTicket = WinnerLottoTicket.of("1, 2, 3, 4, 5, 6", 7);
 
-        results.add(LottoResult.of(winnerLottoTicket, LottoTicket.from(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)))));
-        results.add(LottoResult.of(winnerLottoTicket, LottoTicket.from(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 7)))));
-        results.add(LottoResult.of(winnerLottoTicket, LottoTicket.from(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 8)))));
-    }
-
-    static Stream<Arguments> generateWinnerCountAndPrizeMoney() {
-        return Stream.of(
-                Arguments.of(new ArrayList<>(Arrays.asList(1l, 2l, 3l, 3l, 4l)), 60_000),
-                Arguments.of(new ArrayList<>(Arrays.asList(0l, 0l, 3l, 5l)), 1_505_000)
-        );
+        results.add(
+            LottoResult.of(winnerLottoTicket, LottoTicket.from(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)))));
+        results.add(
+            LottoResult.of(winnerLottoTicket, LottoTicket.from(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 7)))));
+        results.add(
+            LottoResult.of(winnerLottoTicket, LottoTicket.from(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 8)))));
     }
 
     @Test

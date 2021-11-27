@@ -1,14 +1,14 @@
 package lotto.service;
 
+import java.util.List;
 import lotto.domain.LottoTickets;
 import lotto.exception.MinimumAmountException;
 import lotto.util.AutoLottoNumberUtils;
 
-import java.util.List;
-
 public class LottoTicketBooth {
 
     private static class LottoTicketBoothHolder {
+
         private static final LottoTicketBooth LOTTO_TICKET_BOOTH = new LottoTicketBooth();
     }
 

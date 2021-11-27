@@ -1,12 +1,12 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import lotto.exception.NotNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class WinnerLottoTicketTest {
 
@@ -22,7 +22,7 @@ public class WinnerLottoTicketTest {
     @CsvSource(value = {"1, 2, 3, 4, 5, a : 7"}, delimiter = ':')
     void notNumberException(String winnerNumber, int bonusNumber) {
         assertThatExceptionOfType(NotNumberException.class)
-                .isThrownBy(() -> WinnerLottoTicket.of(winnerNumber, bonusNumber));
+            .isThrownBy(() -> WinnerLottoTicket.of(winnerNumber, bonusNumber));
     }
 
     @ParameterizedTest
@@ -30,7 +30,7 @@ public class WinnerLottoTicketTest {
     @CsvSource(value = {"1, 2, 3, 4, 5, 7 : 7"}, delimiter = ':')
     void lottoTicketSizeException(String winnerNumber, int bonusNumber) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> WinnerLottoTicket.of(winnerNumber, bonusNumber));
+            .isThrownBy(() -> WinnerLottoTicket.of(winnerNumber, bonusNumber));
     }
 
 }
