@@ -3,23 +3,19 @@ package lotto.domain.value;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoTicket {
-    private final List<LottoNumber> lottoNumbers;
+    private final List<Integer> lottoNumbers;
 
-    private LottoTicket(List<LottoNumber> lottoNumbers) {
+    private LottoTicket(List<Integer> lottoNumbers) {
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
-    public static LottoTicket createTicket(List<LottoNumber> numbers) {
+    public static LottoTicket createTicket(List<Integer> numbers) {
         return new LottoTicket(numbers);
     }
 
     public List<Integer> getNumbers() {
-        return Collections.unmodifiableList(
-                lottoNumbers.stream()
-                .map(LottoNumber::getValue)
-                .collect(Collectors.toList()));
+        return Collections.unmodifiableList(lottoNumbers);
     }
 }

@@ -1,8 +1,8 @@
 package lotto.utils;
 
 import addcalculator.exception.NotInstanceException;
-import lotto.domain.value.LottoNumber;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,18 +18,15 @@ public class LottoNumberGenerator {
         throw new NotInstanceException();
     }
 
-    public static List<LottoNumber> generateLottoNumbers() {
+    public static List<Integer> generateLottoNumbers() {
         return createLottoNumbers();
     }
 
-    private static List<LottoNumber> createLottoNumbers() {
+    private static List<Integer> createLottoNumbers() {
         List<Integer> numbers = getLottoRangeNumbers();
         Collections.shuffle(numbers);
 
-        return numbers.subList(FROM_INDEX, TO_INDEX)
-                .stream()
-                .map(LottoNumber::of)
-                .collect(Collectors.toList());
+        return new ArrayList<>(numbers.subList(FROM_INDEX, TO_INDEX));
     }
 
     private static List<Integer> getLottoRangeNumbers() {
