@@ -4,21 +4,25 @@ import lotto.exception.InvalidUnitException;
 
 import java.util.Objects;
 
-public class TicketCount {
+public class Price {
     private static final int BASIC_UNIT = 1000;
     private static final int CORRECT_UNIT = 0;
 
-    private final int count;
+    private final int price;
 
-    private TicketCount(String price) {
+    private Price(String price) {
         int lottoPrice = Integer.parseInt(price);
         validateUnit(lottoPrice);
 
-        this.count = lottoPrice / BASIC_UNIT;
+        this.price = lottoPrice;
     }
 
-    public static TicketCount of(String price) {
-        return new TicketCount(price);
+    public static Price of(String price) {
+        return new Price(price);
+    }
+
+    public int getNumberOfTickets() {
+        return price / BASIC_UNIT;
     }
 
     private static void validateUnit(int price) {
@@ -27,28 +31,24 @@ public class TicketCount {
         }
     }
 
-    public int size() {
-        return count;
+    private static boolean isCorrectUnit(int price) {
+        return divideBasicUnit(price) == CORRECT_UNIT;
     }
 
-    private static boolean isCorrectUnit(int input) {
-        return divideBasicUnit(input) == CORRECT_UNIT;
-    }
-
-    private static int divideBasicUnit(int input) {
-        return input % BASIC_UNIT;
+    private static int divideBasicUnit(int price) {
+        return price % BASIC_UNIT;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TicketCount that = (TicketCount) o;
-        return count == that.count;
+        Price price1 = (Price) o;
+        return price == price1.price;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(count);
+        return Objects.hash(price);
     }
 }

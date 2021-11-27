@@ -22,12 +22,6 @@ public class LottoNumberGenerator {
         return createLottoNumbers();
     }
 
-    private static List<Integer> getLottoRangeNumbers() {
-        return IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
-                .boxed()
-                .collect(Collectors.toList());
-    }
-
     private static List<LottoNumber> createLottoNumbers() {
         List<Integer> numbers = getLottoRangeNumbers();
         Collections.shuffle(numbers);
@@ -35,6 +29,12 @@ public class LottoNumberGenerator {
         return numbers.subList(FROM_INDEX, TO_INDEX)
                 .stream()
                 .map(LottoNumber::of)
+                .collect(Collectors.toList());
+    }
+
+    private static List<Integer> getLottoRangeNumbers() {
+        return IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
+                .boxed()
                 .collect(Collectors.toList());
     }
 

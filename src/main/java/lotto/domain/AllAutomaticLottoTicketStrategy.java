@@ -1,10 +1,11 @@
 package lotto.domain;
 
 import lotto.domain.value.LottoTicket;
-import lotto.domain.value.TicketCount;
+import lotto.domain.value.Price;
 import lotto.utils.LottoNumberGenerator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AllAutomaticLottoTicketStrategy implements GenerateLottoTicketStrategy {
@@ -13,15 +14,15 @@ public class AllAutomaticLottoTicketStrategy implements GenerateLottoTicketStrat
     }
 
     @Override
-    public List<LottoTicket> publishTickets(TicketCount ticketCount) {
-        int ticketSize = ticketCount.size();
-        List<LottoTicket> lottoTickets = new ArrayList<>(ticketSize);
+    public List<LottoTicket> publishTickets(Price price) {
+        int numberOfTickets = price.getNumberOfTickets();
+        List<LottoTicket> lottoTickets = new ArrayList<>(numberOfTickets);
 
-        for (int i = 0; i < ticketSize; i++) {
+        for (int i = 0; i < numberOfTickets; i++) {
             lottoTickets.add(createTicket());
         }
 
-        return lottoTickets;
+        return Collections.unmodifiableList(lottoTickets);
     }
 
     private LottoTicket createTicket() {
