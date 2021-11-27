@@ -34,7 +34,7 @@ class LottoTicketTest {
   private static Stream<Arguments> makeLottoNumberList() {
     return Stream.of(
             Arguments.of(Arrays.asList(new LottoNumber(1), new LottoNumber(15), new LottoNumber(40),
-            new LottoNumber(25), new LottoNumber(15), new LottoNumber(4)), 6),
+            new LottoNumber(25), new LottoNumber(30), new LottoNumber(4)), 6),
             Arguments.of(Arrays.asList(new LottoNumber(4), new LottoNumber(10), new LottoNumber(26),
             new LottoNumber(35), new LottoNumber(45), new LottoNumber(12)), 6));
   }
@@ -60,10 +60,10 @@ class LottoTicketTest {
             Arguments.of(new LottoTicket(Arrays.asList(new LottoNumber(1), new LottoNumber(15), new LottoNumber(40),
                             new LottoNumber(25), new LottoNumber(30), new LottoNumber(4))),
                     new LottoTicket(Arrays.asList(new LottoNumber(15), new LottoNumber(40), new LottoNumber(30),
-                            new LottoNumber(5), new LottoNumber(10))), 3),
+                            new LottoNumber(5), new LottoNumber(10), new LottoNumber(38))), 3),
             Arguments.of(new LottoTicket(Arrays.asList(new LottoNumber(4), new LottoNumber(10), new LottoNumber(26),
                     new LottoNumber(35), new LottoNumber(17), new LottoNumber(12))),
                     new LottoTicket(Arrays.asList(new LottoNumber(15), new LottoNumber(40), new LottoNumber(30),
-                            new LottoNumber(5), new LottoNumber(10))), 1));
+                            new LottoNumber(5), new LottoNumber(10), new LottoNumber(29))), 1));
   }
 }

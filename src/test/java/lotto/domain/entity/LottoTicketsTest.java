@@ -21,7 +21,7 @@ class LottoTicketsTest {
             new LottoNumber(25), new LottoNumber(22), new LottoNumber(4)));
 
     LottoTicket ticket2 = new LottoTicket(Arrays.asList(new LottoNumber(15), new LottoNumber(40), new LottoNumber(26),
-            new LottoNumber(5), new LottoNumber(10)));
+            new LottoNumber(5), new LottoNumber(10),  new LottoNumber(32)));
 
     lottoTickets = new LottoTickets(Arrays.asList(ticket1, ticket2));
   }
@@ -38,7 +38,7 @@ class LottoTicketsTest {
             Arguments.of(new LottoTicket(Arrays.asList(new LottoNumber(3), new LottoNumber(20), new LottoNumber(40),
                     new LottoNumber(28), new LottoNumber(15), new LottoNumber(9))), 2, 2),
             Arguments.of(new LottoTicket(Arrays.asList(new LottoNumber(5), new LottoNumber(9), new LottoNumber(15),
-                    new LottoNumber(40), new LottoNumber(27))),3, 1));
+                    new LottoNumber(40), new LottoNumber(27), new LottoNumber(12))),3, 1));
 
   }
 
