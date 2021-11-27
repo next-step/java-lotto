@@ -22,10 +22,16 @@ public class InputView {
         return validNumber();
     }
 
-    public static Set<Integer> inputLastWeekNumber() {
+    public static Set<Integer> inputWinningNumber() {
         System.out.println(LAST_WEEK_LOTTERY_NUMBER_MESSAGE);
 
         return removeOverlap(scanner.nextLine());
+    }
+
+    public static int inputBonusBall() {
+        System.out.println("보너스볼 을 입력해 주세요.");
+
+        return validNumber();
     }
 
     private static int validNumber() {
