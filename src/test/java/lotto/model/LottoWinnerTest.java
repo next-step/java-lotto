@@ -27,7 +27,8 @@ class LottoWinnerTest {
             temps.add(LottoNumberFactory.manualCreateNumber(7 * i + 3));
         }
         lottoNumbers = LottoNumbersFactory.manualCreateNumbers(temps);
-        winnerNumbers = new LottoWinner(LottoNumbersFactory.manualCreateNumberList("3, 10, 17, 24, 31, 45"));
+        LottoNumber bonus = LottoNumberFactory.manualCreateNumber("45");
+        winnerNumbers = new LottoWinner(LottoNumbersFactory.manualCreateNumberList("3, 10, 17, 24, 31, 44"), bonus);
     }
 
     @Test
@@ -47,43 +48,27 @@ class LottoWinnerTest {
     @Test
     @DisplayName("문자열 변환 테스트")
     void convert() {
-        LottoWinner winner = new LottoWinner(LottoNumbersFactory.manualCreateNumberList("1, 2, 3, 4, 5, 6"));
-        assertThat(winner.getLottoNumbers())
-                .contains(LottoNumberFactory.manualCreateNumber(1),
-                        LottoNumberFactory.manualCreateNumber(2),
-                        LottoNumberFactory.manualCreateNumber(3),
-                        LottoNumberFactory.manualCreateNumber(4),
-                        LottoNumberFactory.manualCreateNumber(5));
+        LottoWinner winner = new LottoWinner(LottoNumbersFactory.manualCreateNumberList("1, 2, 3, 4, 5, 6"), LottoNumberFactory.manualCreateNumber("7"));
+        assertThat(winner.contains(LottoNumberFactory.manualCreateNumber(1))).isTrue();
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1, 2, 3, 4, 5", "1, 2, 3, 4, 5, 6, 7"})
     @DisplayName("6개 외의 숫자를 입력시 IllegalArgumentException 발생")
     void splitValidation(String input) {
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoWinner(LottoNumbersFactory.manualCreateNumberList(input)));
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoWinner(LottoNumbersFactory.manualCreateNumberList(input), LottoNumberFactory.manualCreateNumber("45")));
     }
 
     @Test
     @DisplayName("숫자가 아닌 문자를 입력시 IllegalArgumentException 발생")
     void convertValidation() {
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoWinner(LottoNumbersFactory.manualCreateNumberList("q, w, e, r, t, y")));
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoWinner(LottoNumbersFactory.manualCreateNumberList("q, w, e, r, t, y"), LottoNumberFactory.manualCreateNumber("45")));
     }
 
     @Test
     @DisplayName("당첨 번호가 중복될 경우")
     void duplicateValidation() {
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoWinner(LottoNumbersFactory.manualCreateNumberList("1, 2, 3, 4, 5, 1")));
-    }
-
-
-    @Test
-    @DisplayName("보너스 번호 매칭 테스트")
-    void bonusMatch() {
-        LottoWinner winnerNumbers = new LottoWinner(
-                LottoNumbersFactory.manualCreateNumberList("3, 10, 17, 24, 31, 45"),
-                LottoNumberFactory.manualCreateNumber(7));
-        LottoNumbers lottoNumbers = LottoNumbersFactory.manualCreateNumbers("3, 7, 10, 17, 24, 31");
-        assertThat(winnerNumbers.bonusMatch(lottoNumbers)).isTrue();
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoWinner(LottoNumbersFactory.manualCreateNumberList("1, 2, 3, 4, 5, 1"), LottoNumberFactory.manualCreateNumber("45")));
     }
 
     @Test
