@@ -49,7 +49,8 @@ class NumberSplitterTest {
     @DisplayName("커스텀 구분자 추가")
     void splitAnotherSeparator() {
         String data = "1/2,3";
-        NumberSplitter numberSplitter = new NumberSplitter("/");
+        NumberSplitter numberSplitter = new NumberSplitter();
+        numberSplitter.addSeparator("/");
 
         List<Number> numbers = numberSplitter.split(data);
 
@@ -62,12 +63,14 @@ class NumberSplitterTest {
     void ignoreNullEmptySeparator() {
         String data = "1,2,3";
 
-        NumberSplitter numberSplitter = new NumberSplitter(null);
+        NumberSplitter numberSplitter = new NumberSplitter();
+        numberSplitter.addSeparator(null);
         List<Number> numbers = numberSplitter.split(data);
         assertThat(numbers)
                 .containsExactly(new Number(1), new Number(2), new Number(3));
 
-        NumberSplitter numberSplitter2 = new NumberSplitter("");
+        NumberSplitter numberSplitter2 = new NumberSplitter();
+        numberSplitter2.addSeparator("");
         List<Number> numbers2 = numberSplitter.split(data);
         assertThat(numbers2)
                 .containsExactly(new Number(1), new Number(2), new Number(3));

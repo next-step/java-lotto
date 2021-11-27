@@ -16,7 +16,8 @@ public class StringCalculator {
             return 0;
         }
 
-        NumberSplitter numberSplitter = new NumberSplitter(extractSeparator(data));
+        NumberSplitter numberSplitter = new NumberSplitter();
+        numberSplitter.addSeparator(extractSeparator(data));
         List<Number> numbers = numberSplitter.split(extractNumberData(data));
 
         return numbers.stream()

@@ -7,17 +7,12 @@ public class NumberSplitter {
 
     private static final List<String> DEFAULT_SEPARATORS = Arrays.asList(",", ":");
 
-    private final List<String> separators;
+    private final List<String> separators = new ArrayList<>(DEFAULT_SEPARATORS);
 
-    public NumberSplitter(String separator) {
-        this();
+    public void addSeparator(String separator) {
         if (!Objects.isNull(separator) && !separator.isEmpty()) {
             this.separators.add(separator);
         }
-    }
-
-    public NumberSplitter() {
-        this.separators = new ArrayList<>(DEFAULT_SEPARATORS);
     }
 
     public List<Number> split(String target) {
