@@ -18,7 +18,7 @@ public class InputUtilsTest {
     @ParameterizedTest
     @NullAndEmptySource
     void validateNullAndEmptySource(String input) {
-        assertThatThrownBy(() -> InputUtils.createLottoCount(input)).isInstanceOf(EmptySourceException.class);
+        assertThatThrownBy(() -> InputUtils.createPrice(input)).isInstanceOf(EmptySourceException.class);
     }
 
     @DisplayName("금액이아닌 문자열을 입력했을 경우 예외가 발생한다.")
@@ -26,7 +26,7 @@ public class InputUtilsTest {
     void validateString() {
         String input = "문자열 입력";
 
-        assertThatThrownBy(() -> InputUtils.createLottoCount(input)).isInstanceOf(InvalidValueException.class);
+        assertThatThrownBy(() -> InputUtils.createPrice(input)).isInstanceOf(InvalidValueException.class);
     }
 
     @DisplayName("금액을 입력할 경우 LottoCount를 생성한다.")
@@ -35,7 +35,7 @@ public class InputUtilsTest {
             "14000", "23000", "42000"
     })
     void createLottoCount(String input) {
-        Price ticketCount = InputUtils.createLottoCount(input);
+        Price ticketCount = InputUtils.createPrice(input);
 
         assertThat(ticketCount).isEqualTo(Price.of(input));
     }

@@ -13,7 +13,7 @@ public class InputUtils {
         throw new NotInstanceException();
     }
 
-    public static Price createLottoCount(String input) {
+    public static Price createPrice(String input) {
         validate(input);
         return Price.of(input);
     }
