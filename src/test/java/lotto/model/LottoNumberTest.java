@@ -37,9 +37,7 @@ class LottoNumberTest {
     @Test
     @DisplayName("랜덤 숫자가 1~45 사이의 값인지 테스트")
     void randomNumber() {
-        LottoNumber lottoNumber = LottoNumberFactory.autoCreateNumber(() -> 45);
-        assertThat(lottoNumber.getNumber())
-                .isGreaterThanOrEqualTo(1)
-                .isLessThanOrEqualTo(45);
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> LottoNumberFactory.autoCreateNumber(() -> 46));
     }
 }

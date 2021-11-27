@@ -27,15 +27,10 @@ class LottoStoreTest {
         }
 
         lotto = LottoFactory.manualCreateSingleLotto(LottoNumbersFactory.manualCreateNumbers(numbers));
-        winner = new LottoWinner(LottoNumbersFactory.manualCreateNumberList("3, 10, 17, 43, 44, 45"));
+        LottoNumber bonus = LottoNumberFactory.manualCreateNumber("45");
+        winner = new LottoWinner(LottoNumbersFactory.manualCreateNumberList("3, 10, 17, 42, 43, 44"), bonus);
     }
 
-    @Test
-    @DisplayName("로또 생성")
-    void ticket() {
-        Lotto lotto = LottoStore.ticket(14000);
-        assertThat(lotto.getLotto()).hasSize(14);
-    }
 
     @Test
     @DisplayName("로또 번호 당첨 확인")

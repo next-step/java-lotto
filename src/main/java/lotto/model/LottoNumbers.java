@@ -1,11 +1,13 @@
 package lotto.model;
 
+import common.model.Number;
 import lotto.application.Constant;
 
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
@@ -35,7 +37,19 @@ public class LottoNumbers {
         lottoNumbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return this.lottoNumbers;
+    public void match(LottoNumber lottoNumber, Number count) {
+        if (contains(lottoNumber)) {
+            count.plus();
+        }
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    @Override
+    public String toString() {
+        return "[" + this.lottoNumbers.stream().map(LottoNumber::toString).collect(Collectors.joining(", ")) + "]";
+
     }
 }
