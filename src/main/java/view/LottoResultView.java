@@ -30,17 +30,9 @@ public class LottoResultView {
   private static void showEachPrizeResult(LottoResult lottoResult) {
     Arrays.stream(LottoPrize.values()).forEach(lottoPrize -> {
       int matchTotal = lottoResult.result(lottoPrize);
-      String resultForEachPrize = String.format(PRIZE_SHOW_FORMAT, lottoPrize.getMatchCount(), lottoPrize.getPrize(), matchTotal);
+      String resultForEachPrize = String.format(PRIZE_SHOW_FORMAT, lottoPrize.matchCount, lottoPrize.prize, matchTotal);
       System.out.println(resultForEachPrize);
     });
-  }
-
-  private static int calculateMatchedCount(int winningPrize, LottoPrize lottoPrize) {
-    int prize = lottoPrize.getPrize();
-    if (winningPrize <= 0 || prize <= 0) {
-      return 0;
-    }
-    return prize / lottoPrize.getPrize();
   }
 
   public static void showLottoProfit(int lottoAmount, double totalLottoPrize) {

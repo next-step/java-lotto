@@ -21,7 +21,7 @@ public class WalletTest {
     wallet.buyLottos();
 
     // then
-    assertThat(wallet.getLottos().getLottoAmount()).isEqualTo(availableLottoCount);
+    assertThat(wallet.getLottos().getLottoCountAmount()).isEqualTo(availableLottoCount);
   }
 
   @ParameterizedTest

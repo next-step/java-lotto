@@ -46,7 +46,7 @@ public class LottoResult {
 
   public double totalLottoPrize() {
     return this.result.keySet().stream()
-            .mapToDouble(LottoPrize -> LottoPrize.getPrize() * this.result.get(LottoPrize))
+            .mapToDouble(LottoPrize -> LottoPrize.prize * this.result.get(LottoPrize))
             .sum();
   }
 

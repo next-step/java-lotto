@@ -17,7 +17,7 @@ public class main {
     wallet.buyLottos();
 
     Lottos boughtLottos = wallet.getLottos();
-    int boughtLottosAmount = boughtLottos.getLottoAmount();
+    int boughtLottosAmount = boughtLottos.getLottoCountAmount();
     LottoResultView.showBoughtLottoAmount(boughtLottosAmount);
     LottoResultView.showLottos(boughtLottos);
 

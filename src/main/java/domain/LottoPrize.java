@@ -9,8 +9,8 @@ public enum LottoPrize {
   FOURTH(3, 5_000),
   NONE(0, 0);
 
-  private final int matchCount;
-  private final int prize;
+  public final int matchCount;
+  public final int prize;
 
   LottoPrize(int matchCount, int prize) {
     this.matchCount = matchCount;
@@ -18,19 +18,10 @@ public enum LottoPrize {
   }
 
   public static LottoPrize find(long matchCount) {
-    LottoPrize lottoNumber = Arrays.stream(LottoPrize.values())
+    return Arrays.stream(values())
             .filter(lottoResult -> lottoResult.matchCount == matchCount)
             .findAny()
-            .orElse(LottoPrize.NONE);
-    return lottoNumber;
-  }
-
-  public int getPrize() {
-    return prize;
-  }
-
-  public int getMatchCount() {
-    return matchCount;
+            .orElse(NONE);
   }
 
 }

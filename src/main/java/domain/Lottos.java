@@ -19,7 +19,7 @@ public class Lottos {
     return new ArrayList(lottos);
   }
 
-  public int getLottoAmount() {
+  public int getLottoCountAmount() {
     return this.lottos.size();
   }
 
