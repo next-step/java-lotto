@@ -4,6 +4,8 @@ import lotto.domain.LottoTickets;
 import lotto.exception.MinimumAmountException;
 import lotto.util.AutoLottoNumberUtils;
 
+import java.util.List;
+
 public class LottoTicketBooth {
 
     private static class LottoTicketBoothHolder {
@@ -24,7 +26,7 @@ public class LottoTicketBooth {
         int count = getCount(money);
         LottoTickets lottoTickets = new LottoTickets();
         for (int i = 0; i < count; i++) {
-            lottoTickets = lottoTickets.add(AutoLottoNumberUtils.getAutoLottoNumber());
+            lottoTickets = this.addLottoTicket(lottoTickets, AutoLottoNumberUtils.getAutoLottoNumber());
         }
         return lottoTickets;
     }
@@ -36,4 +38,9 @@ public class LottoTicketBooth {
         }
         return count;
     }
+
+    private LottoTickets addLottoTicket(LottoTickets lottoTickets, List<Integer> lottoTicket) {
+        return lottoTickets.add(lottoTicket);
+    }
+
 }

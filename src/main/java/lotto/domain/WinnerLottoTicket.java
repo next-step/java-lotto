@@ -11,9 +11,9 @@ public class WinnerLottoTicket extends AbstractLottoTicket {
 
     private static final String DELIMITER = ", ";
 
-    private final int bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    private WinnerLottoTicket(List<Integer> lottoNumber, int bonusNumber) {
+    private WinnerLottoTicket(List<Integer> lottoNumber, LottoNumber bonusNumber) {
         super(lottoNumber);
         this.bonusNumber = bonusNumber;
     }
@@ -22,7 +22,7 @@ public class WinnerLottoTicket extends AbstractLottoTicket {
         List<Integer> winnerNumbers = mapToInt(winnerNumber.split(DELIMITER));
 
         validBonusNumber(winnerNumbers, bonusNumber);
-        return new WinnerLottoTicket(winnerNumbers, bonusNumber);
+        return new WinnerLottoTicket(winnerNumbers, LottoNumber.from(bonusNumber));
     }
 
     public List<Long> findLottoMatchCount(LottoTickets lottoTickets) {
@@ -39,7 +39,7 @@ public class WinnerLottoTicket extends AbstractLottoTicket {
                 .count();
     }
 
-    public int getBonusNumber() {
+    public LottoNumber getBonusNumber() {
         return bonusNumber;
     }
 
