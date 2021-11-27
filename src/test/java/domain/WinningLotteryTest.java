@@ -39,7 +39,7 @@ class WinningLotteryTest {
     public void checkWinningNumber() {
         int count = 0;
         for (int i = 5; i <= 9; i++) {
-            if (winningLottery.matchLottery(i)) {
+            if (winningLottery.matchLottery(new LotteryNumber(i))) {
                 count++;
             }
         }
