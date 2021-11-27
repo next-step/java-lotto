@@ -30,12 +30,9 @@ public class RankGroup {
     private static List<Rank> winningNumberList(LotteryTickets lotteryTickets, WinningLottery lastWeekLottery) {
         List<Rank> numbers = new ArrayList<>();
         int loopNumber = lotteryTickets.size();
-        int rank;
-        int bonus;
         for (int i = 0; i < loopNumber; i++) {
-            rank = lotteryTickets.matchLottery(i, lastWeekLottery);
-            bonus = lotteryTickets.matchBonusBoll(i, rank, lastWeekLottery);
-            numbers.add(new Rank(rank, bonus));
+            int rank = lotteryTickets.matchLottery(i, lastWeekLottery);
+            numbers.add(new Rank(rank, lotteryTickets.matchBonusBoll(i, rank, lastWeekLottery)));
         }
         return numbers;
     }
@@ -47,11 +44,11 @@ public class RankGroup {
         return Arrays.asList(new Rank(rank, bonus));
     }
 
-    public int rank(int index) {
+    public int rank(int index){
         return rankGroup.get(index).rank();
     }
 
-    public int bonusBoll(int index) {
+    public int bonusBall(int index){
         return rankGroup.get(index).bonusBall();
     }
 
