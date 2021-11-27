@@ -17,11 +17,17 @@ public class AutoMaticLottoTicketCreator implements LottoTicketCreator {
   private static final int FIRST_INDEX = 0;
   private static final int LAST_INDEX = 6;
 
+  private List<LottoNumber> lottoNumbers;
+
+  public AutoMaticLottoTicketCreator() {
+    this.lottoNumbers = IntStream.range(MIN_LOTTO_NUMBERS, MAX_LOTTO_NUMBERS + ONE)
+                                 .mapToObj(LottoNumber::new)
+                                 .collect(toList());
+    Collections.sort(lottoNumbers);
+  }
+
   @Override
   public LottoTicket pickLottoTicket() {
-    List<LottoNumber> lottoNumbers = IntStream.range(MIN_LOTTO_NUMBERS, MAX_LOTTO_NUMBERS + ONE)
-                                              .mapToObj(LottoNumber::new)
-                                              .collect(toList());
     Collections.shuffle(lottoNumbers);
     return new LottoTicket(lottoNumbers.subList(FIRST_INDEX, LAST_INDEX));
   }
