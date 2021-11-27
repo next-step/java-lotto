@@ -8,6 +8,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int number;
 
+    public LottoNumber(final String text) {
+        this(Integer.parseInt(text));
+    }
+
     public LottoNumber(final int number) {
         validateLottoNumber(number);
         this.number = number;
