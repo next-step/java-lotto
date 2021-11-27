@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import java.util.stream.Stream;
 import lotto.domain.LottoTickets;
-import lotto.domain.dto.WinningLottoTicketDto;
 import lotto.domain.dto.WinningNumberDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -40,14 +39,14 @@ public class WinningResultTest {
         lottoTickets = lottoTickets.add(Arrays.asList(7, 11, 30, 40, 42, 43));
 
         return Stream.of(
-            Arguments.of(new WinningLottoTicketDto(lottoTickets, winnerNumberDto), 0.35d)
+            Arguments.of(lottoTickets, winnerNumberDto, 0.35d)
         );
     }
 
     @ParameterizedTest
     @MethodSource("generateWinningLottoTicket")
-    void winningResult(WinningLottoTicketDto dto, Double yield) {
-        assertThat(winningResult.winningResult(dto).getRate()).isEqualTo(yield);
+    void winningResult(LottoTickets lottoTickets, WinningNumberDto winnerNumberDto, Double yield) {
+        assertThat(winningResult.winningResult(lottoTickets, winnerNumberDto).getRate()).isEqualTo(yield);
     }
 
 }

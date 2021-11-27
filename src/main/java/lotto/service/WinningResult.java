@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import lotto.domain.Rate;
 import lotto.domain.WinnerLottoTicket;
 import lotto.domain.WinningRank;
 import lotto.domain.dto.LottoResultDto;
-import lotto.domain.dto.WinningLottoTicketDto;
+import lotto.domain.dto.WinningNumberDto;
 
 public class WinningResult {
 
@@ -24,11 +25,12 @@ public class WinningResult {
         return WinningResultHolder.WINNING_RESULT;
     }
 
-    public LottoResultDto winningResult(WinningLottoTicketDto dto) {
-        WinnerLottoTicket winnerLottoTicket = WinnerLottoTicket.of(dto.getWinningNumbers(), dto.getBonusNumber());
+    public LottoResultDto winningResult(LottoTickets lottoTickets, WinningNumberDto winningNumberDto) {
+        WinnerLottoTicket winnerLottoTicket = WinnerLottoTicket.of(winningNumberDto.getWinnerNumbers(),
+            winningNumberDto.getBonusNumber());
 
         List<LottoResult> results = new ArrayList<>();
-        for (LottoTicket ticket : dto.getLottoTickets().getLottoTickets()) {
+        for (LottoTicket ticket : lottoTickets.getLottoTickets()) {
             results.add(LottoResult.of(winnerLottoTicket, ticket));
         }
 
