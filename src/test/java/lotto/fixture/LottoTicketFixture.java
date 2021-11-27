@@ -13,4 +13,6 @@ public class LottoTicketFixture {
 
     public static final LottoTickets LOTTO_TICKETS = LottoTickets.of(
             Arrays.asList(LOTTO_TICKET1, LOTTO_TICKET2, LOTTO_TICKET3));
+
+    public static final double PROFIT_RATE = 666668.3333333334;
 }
