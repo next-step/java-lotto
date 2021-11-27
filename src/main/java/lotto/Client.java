@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.controller.LottoController;
 import lotto.domain.LottoTicketGenerator;
+import lotto.domain.value.LottoResult;
 import lotto.domain.value.LottoTickets;
 import lotto.view.InputView;
 import lotto.view.OutView;
@@ -14,7 +15,12 @@ public class Client {
         LottoController lottoController = new LottoController(new LottoTicketGenerator());
 
         LottoTickets lottoTickets = lottoController.createLottoTickets(purchaseAmount);
-
         OutView.showLottoTickets(lottoTickets);
+
+        String winningNumbers = InputView.getWinningNumbers();
+
+        LottoResult lottoResult = lottoController.createLottoResult(winningNumbers, lottoTickets);
+
+        OutView.showLottoResult(lottoResult);
     }
 }
