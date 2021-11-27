@@ -1,9 +1,13 @@
 package lotto.domain;
 
-import lotto.exception.MinimumAmountException;
+import lotto.exception.ManualLottoCountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -20,11 +24,17 @@ class MoneyTest {
     }
 
     @ParameterizedTest
-    @DisplayName("Money 생성 예외 테스트 1000원 이하 금액은 예외")
-    @ValueSource(ints = {-1, 0, 999})
-    void minumumAmountException(int purchaseAmount) {
-
-        assertThatThrownBy(() -> Money.from(purchaseAmount)).isInstanceOf(MinimumAmountException.class);
+    @DisplayName("수동 로또 구입 개수가 구입 금액보다 클 경우 예외")
+    @MethodSource
+    void manualLottoCountException(Money money, int manualCount) {
+        assertThatThrownBy(() -> money.validateManualLottoCount(manualCount)).isInstanceOf(ManualLottoCountException.class);
     }
 
+    static Stream<Arguments> manualLottoCountException() {
+        return Stream.of(
+                Arguments.of(
+                        Money.from(1000), 2
+                )
+        );
+    }
 }

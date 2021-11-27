@@ -1,25 +1,49 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.domain.numbergenerator.ManualLottoNumbersGenerator;
 import lotto.domain.numbergenerator.RandomLottoNumbersGenerator;
-import lotto.exception.BonusNumberException;
-import lotto.exception.LottoNumberException;
-import lotto.exception.LottoNumbersCountException;
-import lotto.exception.MinimumAmountException;
+import lotto.exception.*;
 import lotto.view.Input;
 import lotto.view.Output;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static lotto.utils.StringUtil.split;
 import static lotto.view.Input.askBonusBall;
+import static lotto.view.Input.askManualLottoCount;
 
 public class Application {
     public static void main(String[] args) {
-        Money purchaseAmount = getPurchaseAount();
+        Money money = getPurchaseAount();
 
-        Lottos lottos = LottosFactory.from(purchaseAmount, new RandomLottoNumbersGenerator());
+        Money manualLottoMoney = money.manualLottoMoney(getManualLottoCount(money));
+        int manualLottoCount = manualLottoMoney.lottoCount();
 
-        Output.printLottosCount(lottos);
-        Output.printLottos(lottos);
+        List<Lotto> lottos = new ArrayList<>();
+
+        while (manualLottoMoney.canBuy()) {
+            manualLottoMoney.buy();
+
+            Output.askManualLottosNumber();
+
+            String manualLottosNumber = Input.askManualLottosNumber();
+            String[] manualLottosNumbers = split(manualLottosNumber);
+
+            List<LottoNumber> lottoNumbers = ManualLottoNumbersGenerator.from(manualLottosNumbers).generate();
+            lottos.add(Lotto.from(lottoNumbers));
+        }
+
+        Money autoLottoMoney = money.autoLottoMoney(manualLottoCount);
+
+        Lottos manualLottos = Lottos.from(lottos);
+        Lottos autoLottos = LottosFactory.from(autoLottoMoney, new RandomLottoNumbersGenerator());
+
+        manualLottos.merge(autoLottos);
+
+        Output.printLottosCount(manualLottoCount, autoLottoMoney.lottoCount());
+        Output.printLottos(manualLottos);
 
         String askWinningNumbers = Input.askWinningNumber();
         String[] winningNumbers = split(askWinningNumbers);
@@ -28,8 +52,14 @@ public class Application {
 
         WinningLotto winningLotto = getWinningNumber(winningNumbers, bonusBall);
 
-        WinningStatistics statistics = WinningStatistics.from(lottos, winningLotto);
+        WinningStatistics statistics = WinningStatistics.from(manualLottos, winningLotto);
         Output.printWinningStatistics(statistics);
+    }
+
+    private static int getManualLottoCount(Money purchaseAmount) {
+        int manualLottoCount = askManualLottoCount();
+
+        return purchaseAmount.validateManualLottoCount(manualLottoCount);
     }
 
     private static LottoNumber getBonusBall() {
@@ -57,12 +87,18 @@ public class Application {
             return WinningLotto.from(winningNumber, bonusBall);
         } catch (LottoNumberException e) {
             Output.lottoNumberError();
+
             return getWinningNumber(winningNumber, bonusBall);
         } catch (LottoNumbersCountException e) {
+            String winningNumberInput = Input.askWinningNumber();
+            String[] split = split(winningNumberInput);
+
             Output.winningNumberCountError();
-            return getWinningNumber(winningNumber, bonusBall);
+
+            return getWinningNumber(split, bonusBall);
         } catch (BonusNumberException e) {
             Output.bonusNumberError();
+
             return getWinningNumber(winningNumber, getBonusBall());
         }
     }

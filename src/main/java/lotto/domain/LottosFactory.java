@@ -14,4 +14,5 @@ public class LottosFactory {
 
         return Lottos.from(lottos);
     }
+
 }
