@@ -2,7 +2,6 @@ package lotto.model.ticket;
 
 import lotto.model.domain.PurchaseInfo;
 import lotto.model.ticket.generator.AutoTicketGenerator;
-import lotto.model.ticket.generator.LotteryTicketGenerator;
 import lotto.model.ticket.generator.ManualTicketGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,7 +1,6 @@
 package lotto.model.result;
 
 import lotto.model.domain.Rank;
-import lotto.model.result.LotteryGameResultDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
