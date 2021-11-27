@@ -15,7 +15,7 @@ public class LotteryTicket {
 
     public int matchCount(WinningLottery winningLottery) {
         return (int) lotteryTicket.stream()
-                .filter(number -> winningLottery.matchLottery(number.value()))
+                .filter(number -> winningLottery.matchLottery(number))
                 .count();
     }
 
@@ -29,7 +29,7 @@ public class LotteryTicket {
                 .count();
     }
 
-    public int value(int index){
+    public int value(int index) {
         return lotteryTicket.get(index).value();
     }
 
