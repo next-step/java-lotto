@@ -5,7 +5,7 @@ import java.util.stream.IntStream;
 
 public class Store {
     private static int FIRST_GAME = 0;
-    private static int LOTTO_ONE_GAME_PRICE = 1000;
+    public static int LOTTO_ONE_GAME_PRICE = 1000;
 
     public Lotties purchaseLottiesByMoney(Money money, NumberGenerator numberGenerator) {
         int gameCount = money.getValue() / LOTTO_ONE_GAME_PRICE;
