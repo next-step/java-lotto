@@ -2,17 +2,13 @@ package lotto.view;
 
 public class ResultView {
 
-  private static ResultView instance;
+  private static ResultView instance = new ResultView();
 
   private ResultView() {
   }
 
   public static ResultView getInstance() {
-    if (instance == null) {
-      instance = new ResultView();
-      return instance;
-    }
-    return instance;
+    return ResultView.instance;
   }
 
   public void printResult(String message) {

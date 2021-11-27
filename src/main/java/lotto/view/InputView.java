@@ -17,35 +17,24 @@ public class InputView {
 
   private static final String COMMA =",";
 
-  private static InputView instance;
-  private Scanner scanner;
+  private static final InputView instance = new InputView();
+  private static final Scanner scanner = new Scanner(System.in);
 
   private InputView() {
   }
 
   public static InputView getInstance() {
-    if (instance == null) {
-      instance = new InputView();
-      return instance;
-    }
-    return instance;
+    return InputView.instance;
   }
 
   public Budget inputBudget() {
     System.out.println(BUDGET_INPUT_MESSAGE);
-    scanner = new Scanner(System.in);
-
-    int cost = scanner.nextInt();
-
-    return new Budget(cost);
+    return new Budget(Integer.parseInt(scanner.next()));
   }
 
   public LottoTicket inputWinning() {
-    scanner = new Scanner(System.in);
     System.out.println(WINNING_INPUT_MESSAGE);
-
-    String numberList = scanner.nextLine();
-    List<LottoNumber> splitNumbersByDelimiter = getSplitNumbersByDelimiter(numberList);
+    List<LottoNumber> splitNumbersByDelimiter = getSplitNumbersByDelimiter(scanner.next());
 
     return new LottoTicket(splitNumbersByDelimiter);
   }
