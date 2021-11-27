@@ -7,7 +7,7 @@ import lotto.domain.LottoTicket;
 import lotto.domain.Rate;
 import lotto.domain.WinnerLottoTicket;
 import lotto.domain.WinningRank;
-import lotto.domain.dto.ResultDto;
+import lotto.domain.dto.LottoResultDto;
 import lotto.domain.dto.WinningLottoTicketDto;
 
 public class WinningResult {
@@ -24,7 +24,7 @@ public class WinningResult {
         return WinningResultHolder.WINNING_RESULT;
     }
 
-    public ResultDto winningResult(WinningLottoTicketDto dto) {
+    public LottoResultDto winningResult(WinningLottoTicketDto dto) {
         WinnerLottoTicket winnerLottoTicket = WinnerLottoTicket.of(dto.getWinningNumbers(), dto.getBonusNumber());
 
         List<LottoResult> results = new ArrayList<>();
@@ -35,7 +35,7 @@ public class WinningResult {
         WinningRank resultRank = new WinningRank();
         resultRank = resultRank.updateRank(results);
 
-        return ResultDto.of(resultRank, Rate.of(resultRank.getMoney(), resultRank.getPrizeMoney()));
+        return LottoResultDto.of(resultRank, Rate.of(resultRank.getMoney(), resultRank.getPrizeMoney()));
     }
 
 }

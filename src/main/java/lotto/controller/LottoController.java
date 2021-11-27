@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.LottoTickets;
-import lotto.domain.dto.ResultDto;
+import lotto.domain.dto.LottoResultDto;
 import lotto.domain.dto.WinningLottoTicketDto;
 import lotto.service.LottoTicketBooth;
 import lotto.service.WinningResult;
@@ -29,7 +29,7 @@ public class LottoController {
         return lottoTicketBooth.autoTickets(money);
     }
 
-    public ResultDto lottoResult(WinningLottoTicketDto winningLottoTicketDto) {
+    public LottoResultDto lottoResult(WinningLottoTicketDto winningLottoTicketDto) {
         return winningResult.winningResult(winningLottoTicketDto);
     }
 
