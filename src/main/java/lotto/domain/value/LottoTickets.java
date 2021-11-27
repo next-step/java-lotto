@@ -1,11 +1,9 @@
 package lotto.domain.value;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoTickets {
-    private List<LottoTicket> lottoTickets;
+    private final List<LottoTicket> lottoTickets;
 
     private LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = new ArrayList<>(lottoTickets);
@@ -21,5 +19,17 @@ public class LottoTickets {
 
     public List<LottoTicket> getDetailTickets() {
         return Collections.unmodifiableList(lottoTickets);
+    }
+
+    public Map<Rank, Integer> creatWinningRank(WinningNumbers winningNumbers) {
+        Map<Rank, Integer> result = new EnumMap<>(Rank.class);
+
+        lottoTickets.forEach(
+                lottoTicket -> {
+                    int matchCount = lottoTicket.countMatchWinningNumber(winningNumbers.getNumbers());
+                    result.put(Rank.matchRankOf(matchCount), matchCount);
+                });
+
+        return result;
     }
 }
