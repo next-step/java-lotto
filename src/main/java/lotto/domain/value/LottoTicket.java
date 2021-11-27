@@ -18,4 +18,10 @@ public class LottoTicket {
     public List<Integer> getNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
+
+    public int countMatchWinningNumber(List<Integer> winningNumbers) {
+        return (int) winningNumbers.stream()
+                .filter(lottoNumbers::contains)
+                .count();
+    }
 }
