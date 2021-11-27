@@ -3,6 +3,9 @@ package lotto.domain.value;
 import java.util.*;
 
 public class LottoTickets {
+    private static final int INIT_COUNT = 0;
+    private static final int INCREASE_NUMBER = 1;
+
     private final List<LottoTicket> lottoTickets;
 
     private LottoTickets(List<LottoTicket> lottoTickets) {
@@ -27,7 +30,9 @@ public class LottoTickets {
         lottoTickets.forEach(
                 lottoTicket -> {
                     int matchCount = lottoTicket.countMatchWinningNumber(winningNumbers.getNumbers());
-                    result.put(Rank.matchRankOf(matchCount), matchCount);
+                    result.put(
+                            Rank.matchRankOf(matchCount),
+                            result.getOrDefault(Rank.matchRankOf(matchCount), INIT_COUNT) + INCREASE_NUMBER);
                 });
 
         return result;
