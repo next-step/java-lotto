@@ -2,22 +2,32 @@ package step1;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringAddCalculator {
-
 
     public static int splitAndSum(String inputData) {
         if (isEmpty(inputData)) {
             return 0;
         }
 
-        List<Integer> numbers = convertIntegers(inputData.split(",|:"));
+        List<Integer> numbers = convertIntegers(split(inputData));
 
         if (isNumberOfOne(numbers)) {
             return numbers.get(0);
         }
-
         return sum(numbers);
+    }
+
+    private static String[] split(String inputData) {
+        String[] tokens = inputData.split(",|:");
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(inputData);
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            tokens= m.group(2).split(customDelimiter);
+        }
+        return tokens;
     }
 
     private static int sum(List<Integer> numbers) {
