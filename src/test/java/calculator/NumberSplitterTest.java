@@ -2,6 +2,8 @@ package calculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
 
@@ -58,21 +60,18 @@ class NumberSplitterTest {
                 .containsExactly(new Number(1), new Number(2), new Number(3));
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {"null", "''"},
+            nullValues = {"null"})
     @DisplayName("커스텀 구분자 null, empty 제외")
-    void ignoreNullEmptySeparator() {
+    void ignoreNullEmptySeparator(String separator) {
         String data = "1,2,3";
-
         NumberSplitter numberSplitter = new NumberSplitter();
-        numberSplitter.addSeparator(null);
-        List<Number> numbers = numberSplitter.split(data);
-        assertThat(numbers)
-                .containsExactly(new Number(1), new Number(2), new Number(3));
+        numberSplitter.addSeparator(separator);
 
-        NumberSplitter numberSplitter2 = new NumberSplitter();
-        numberSplitter2.addSeparator("");
-        List<Number> numbers2 = numberSplitter.split(data);
-        assertThat(numbers2)
+        List<Number> numbers = numberSplitter.split(data);
+
+        assertThat(numbers)
                 .containsExactly(new Number(1), new Number(2), new Number(3));
     }
 }
