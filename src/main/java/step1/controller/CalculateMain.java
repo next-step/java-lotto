@@ -1,6 +1,6 @@
 package step1.controller;
 
-import step1.Inputs;
+import step1.domain.Inputs;
 import step1.view.InputView;
 import step1.view.ResultView;
 

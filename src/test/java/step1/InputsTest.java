@@ -1,6 +1,7 @@
 package step1;
 
 import org.junit.jupiter.api.Test;
+import step1.domain.Inputs;
 
 import static org.assertj.core.api.Assertions.*;
 

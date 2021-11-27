@@ -1,10 +1,10 @@
 package step1.controller;
 
-import step1.InputNumber;
-import step1.Inputs;
+import step1.domain.Number;
+import step1.domain.Inputs;
 
 public class CalculateProcessor {
-    public InputNumber calculate(Inputs inputs) {
+    public Number calculate(Inputs inputs) {
         return inputs.sum();
     }
 }

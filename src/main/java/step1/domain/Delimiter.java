@@ -1,12 +1,19 @@
-package step1;
+package step1.domain;
 
 import java.util.Objects;
 
 public class Delimiter {
+    public static final String START_DELIMITER = "//";
+    public static final String END_DELIMITER = "\\n";
+
     private final String delimiter;
 
-    public Delimiter(String s) {
-        this.delimiter = s;
+    public Delimiter(String delimiter) {
+        this.delimiter = delimiter;
+    }
+
+    public String getDelimiter() {
+        return delimiter;
     }
 
     private void validateDelimiter(String s) {

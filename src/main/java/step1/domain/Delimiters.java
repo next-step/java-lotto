@@ -1,4 +1,4 @@
-package step1;
+package step1.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,13 +28,13 @@ public class Delimiters {
         }});
     }
 
-    public InputNumbers split(String s) {
+    public Numbers split(String s) {
         String joining = delimiters.stream()
                 .map(d -> d.getDelimiter())
                 .collect(Collectors.joining("|"));
 
-        return new InputNumbers(Arrays.stream(s.split(joining))
-                .map(i -> new InputNumber(Integer.parseInt(i)))
+        return new Numbers(Arrays.stream(s.split(joining))
+                .map(i -> new Number(Integer.parseInt(i)))
                 .collect(Collectors.toList()));
     }
 

@@ -1,6 +1,6 @@
 package step1.view;
 
-import step1.Inputs;
+import step1.domain.Inputs;
 
 import java.util.Scanner;
 

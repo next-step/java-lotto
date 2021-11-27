@@ -1,6 +1,7 @@
 package step1;
 
 import org.junit.jupiter.api.Test;
+import step1.domain.Delimiter;
 
 import static org.assertj.core.api.Assertions.*;
 
