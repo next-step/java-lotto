@@ -24,13 +24,6 @@ public class WinnerLottoTicket extends AbstractLottoTicket {
         return new WinnerLottoTicket(winnerNumbers, LottoNumber.from(bonusNumber));
     }
 
-    public List<Long> findLottoMatchCount(LottoTickets lottoTickets) {
-        return lottoTickets.getLottoTickets().stream()
-            .mapToLong(this::findLottoMatchCount)
-            .boxed()
-            .collect(Collectors.toCollection(ArrayList::new));
-    }
-
     public long findLottoMatchCount(LottoTicket lottoTicket) {
         return lottoTicket.getLottoTicket()
             .stream()

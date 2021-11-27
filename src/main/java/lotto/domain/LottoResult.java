@@ -2,8 +2,6 @@ package lotto.domain;
 
 public class LottoResult {
 
-    // TODO : 당첨번호와 구매번호를 비교하는 로직을 어디에 두어야 할까.
-
     private final long matchCount;
     private final boolean matchBonus;
 
