@@ -7,23 +7,39 @@ public class PositiveNumber {
 
     private final int number;
 
-    private PositiveNumber(String input) {
-        this.number = stringToInt(input);
+    public PositiveNumber(int number) {
+        validateNumber(number);
+        this.number = number;
     }
 
-    public static PositiveNumber of(String input) {
-        return new PositiveNumber(input);
+    public PositiveNumber(String input) {
+        this(stringToInt(input));
     }
 
     public int getNumber() {
         return number;
     }
 
-    private int stringToInt(String input) {
+    public PositiveNumber add(PositiveNumber number) {
+        return new PositiveNumber(this.number + number.getNumber());
+    }
+
+    private static int stringToInt(String input) {
         int number = Integer.parseInt(input);
+        validateNumber(number);
+        return number;
+    }
+
+    private static void validateNumber(int number) {
         if (number < 0) {
             throw new RuntimeException();
         }
-        return number;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append(number);
+        return sb.toString();
     }
 }
