@@ -13,10 +13,10 @@ public class LottoStore {
     public static void main(String[] args) {
         final int budget = InputView.inputBudget();
         final PurchaseList purchaseList = PurchaseList.purchase(budget, AutoLottoGenerator.getInstance());
-        OutputView.printPurchasedLotto(purchaseList);
+        OutputView.printPurchasedLotto(purchaseList.collect());
 
         final Collection<Integer> winningNumbers = InputView.inputWinningNumber();
         final GameResult gameResult = purchaseList.winningResult(Lotto.fromIntegers(winningNumbers));
-        OutputView.printGameResult(gameResult);
+        OutputView.printGameResult(gameResult.collect(), gameResult.totalPrize().toLong(), gameResult.priceEarningRate());
     }
 }

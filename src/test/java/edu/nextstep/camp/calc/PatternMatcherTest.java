@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PatternMatcherTest {
     static final Pattern pattern = Pattern.compile("//(.)\n(.*)");
-    final static Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+");
+    static final Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+");
 
     @ParameterizedTest(name ="not matched patterns: {arguments}")
     @ValueSource(strings = {"1,2", "//%/n1,2", "//\n1,2"})

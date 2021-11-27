@@ -6,8 +6,8 @@ import java.util.regex.Pattern;
 // Note: 엄밀히 따지면 0을 포함하므로 NonNegativeNumber가 맞지만, 이름이 너무 길고 부정적이라 이렇게 함
 // Note: 대안으로는 UnsignedNumber나 AbsoluteNumber도 가능은 하지만, 용도와 맞지 않는다고 판단.
 public class PositiveNumber {
-    private final static Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+");
-    private final static String TO_STRING_FORMAT = "Number(%d)";
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+");
+    private static final String TO_STRING_FORMAT = "Number(%d)";
 
     public static final PositiveNumber ZERO = new PositiveNumber(0);
 

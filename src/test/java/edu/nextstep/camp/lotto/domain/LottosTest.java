@@ -83,6 +83,5 @@ public class LottosTest {
     public void winningResult(Lottos lottos, GameResult expected) {
         final Lotto winningNumber = Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6));
         assertThat(lottos.winningResult(winningNumber)).isEqualTo(expected);
-        assertThat(lottos.winningResult(winningNumber).collect()).hasSameSizeAs(lottos.collect());
     }
 }

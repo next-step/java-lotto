@@ -1,6 +1,7 @@
 package edu.nextstep.camp.lotto.domain;
 
-import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PurchaseList {
     public static final int GAME_PRICE = 1000;
@@ -27,8 +28,14 @@ public class PurchaseList {
         return lottos.amount();
     }
 
-    public Collection<Lotto> collect() {
-        return lottos.collect();
+    public List<List<String>> collect() {
+        return lottos.collect()
+                .stream()
+                .map(lotto -> lotto.collect()
+                        .stream()
+                        .map(LottoNumber::toString)
+                        .collect(Collectors.toList()))
+                .collect(Collectors.toList());
     }
 
     public GameResult winningResult(Lotto winningNumber) {

@@ -1,6 +1,7 @@
 package edu.nextstep.camp.lotto.domain;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,23 +15,20 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class GameResultTest {
     static Stream<Arguments> parseCreateByRanks() {
         return Stream.of(
-                Arguments.of(Ranks.of(List.of(Rank.FIRST)), 1, 0, 0, 0),
-                Arguments.of(Ranks.of(List.of(Rank.SECOND)), 0, 1, 0, 0),
-                Arguments.of(Ranks.of(List.of(Rank.THIRD)), 0, 0, 1, 0),
-                Arguments.of(Ranks.of(List.of(Rank.FOURTH)), 0, 0, 0, 1),
-                Arguments.of(Ranks.of(List.of(Rank.NO_RANK)), 0, 0, 0, 0)
+                Arguments.of(Ranks.of(List.of(Rank.FIRST, Rank.FIRST)), Map.of(Rank.FIRST, 2)),
+                Arguments.of(Ranks.of(List.of(Rank.FIRST)), Map.of(Rank.FIRST, 1)),
+                Arguments.of(Ranks.of(List.of(Rank.SECOND)), Map.of(Rank.SECOND, 1)),
+                Arguments.of(Ranks.of(List.of(Rank.THIRD)), Map.of(Rank.THIRD, 1)),
+                Arguments.of(Ranks.of(List.of(Rank.FOURTH)), Map.of(Rank.FOURTH, 1)),
+                Arguments.of(Ranks.of(List.of(Rank.NO_RANK)), Map.of(Rank.NO_RANK, 1))
         );
     }
 
     @ParameterizedTest(name = "create: {arguments}")
     @MethodSource("parseCreateByRanks")
-    public void create(Ranks ranks, int first, int second, int third, int fourth) {
-        assertThat(GameResult.of(ranks))
-                .isEqualTo(GameResult.of(ranks));
-        assertThat(GameResult.of(ranks).amountOfPlace(Rank.FIRST)).isEqualTo(first);
-        assertThat(GameResult.of(ranks).amountOfPlace(Rank.SECOND)).isEqualTo(second);
-        assertThat(GameResult.of(ranks).amountOfPlace(Rank.THIRD)).isEqualTo(third);
-        assertThat(GameResult.of(ranks).amountOfPlace(Rank.FOURTH)).isEqualTo(fourth);
+    public void create(Ranks ranks, Map<Rank, Integer> expectedRankMap) {
+        assertThat(GameResult.of(ranks)).isEqualTo(GameResult.of(ranks));
+        assertThat(GameResult.of(ranks).collect()).containsExactlyEntriesOf(expectedRankMap);
     }
 
     @ParameterizedTest

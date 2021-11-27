@@ -2,13 +2,16 @@ package edu.nextstep.camp.lotto.domain;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Objects;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class Ranks {
-    private final Collection<Rank> ranks;
+    private final SortedMap<Rank, Integer> ranks;
 
-    private Ranks(Collection<Rank> ranks) {
-        this.ranks = Collections.unmodifiableCollection(ranks);
+    private Ranks(Map<Rank, Integer> ranks) {
+        this.ranks = Collections.unmodifiableSortedMap(new TreeMap<>(ranks));
     }
 
     public static Ranks of(final Collection<Rank> ranks) {
@@ -16,24 +19,36 @@ public class Ranks {
             throw new IllegalArgumentException("invalid input: ranks cannot be null");
         }
 
-        return new Ranks(ranks);
+        final Map<Rank, Integer> rankMap = new TreeMap<>();
+        for (Rank rank : ranks) {
+            rankMap.compute(rank, (r, count) -> count == null ? 1 : count + 1);
+        }
+
+        return new Ranks(rankMap);
     }
 
-    public Collection<Rank> collect() {
+    public Map<Rank, Integer> collect() {
         return ranks;
     }
 
     public int amountOfPlace(final Rank rank) {
-        return (int) ranks.stream()
-                .filter(r -> r.equals(rank))
-                .count();
+        return ranks.getOrDefault(rank, 0);
     }
 
     public Prize totalPrize() {
-        return ranks.stream()
-                .map(Rank::prize)
+        return ranks.entrySet().stream()
+                .map(entry -> entry.getKey()
+                        .prize()
+                        .multiply(entry.getValue()))
                 .reduce(Prize::add)
                 .orElse(Prize.NO_PRIZE);
+    }
+
+    public int size() {
+        return ranks.values()
+                .stream()
+                .reduce(Integer::sum)
+                .orElse(0);
     }
 
     @Override
@@ -41,7 +56,8 @@ public class Ranks {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ranks other = (Ranks) o;
-        return ranks.containsAll(other.ranks) && other.ranks.containsAll(ranks);
+        return ranks.entrySet().containsAll(other.ranks.entrySet())
+                && other.ranks.entrySet().containsAll(ranks.entrySet());
     }
 
     @Override

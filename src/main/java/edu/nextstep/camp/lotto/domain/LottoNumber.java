@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MINIMUM = 1;
     private static final int MAXIMUM = 45;
 
@@ -54,5 +54,10 @@ public class LottoNumber {
 
     public String toString() {
         return Integer.toString(number);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return number - o.number;
     }
 }

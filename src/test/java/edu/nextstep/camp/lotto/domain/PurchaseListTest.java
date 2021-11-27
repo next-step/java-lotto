@@ -2,6 +2,7 @@ package edu.nextstep.camp.lotto.domain;
 
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
@@ -41,7 +42,12 @@ public class PurchaseListTest {
 
     @Test
     public void collect() {
-        final List<Lotto> lottoList = List.of(Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6)));
+        final List<List<String>> lottoList = List.of(FixedLottoGenerator.getInstance()
+                .generate()
+                .collect()
+                .stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.toList()));
         final PurchaseList testlist = PurchaseList.purchase(1000, FixedLottoGenerator.getInstance());
         assertThat(testlist.collect()).hasSameElementsAs(lottoList);
     }
