@@ -25,7 +25,7 @@ public class LottoTickets {
     }
 
     public Map<Rank, Integer> creatWinningRank(WinningNumbers winningNumbers) {
-        Map<Rank, Integer> result = new EnumMap<>(Rank.class);
+        Map<Rank, Integer> result = createInitialMap();
 
         lottoTickets.forEach(
                 lottoTicket -> {
@@ -36,5 +36,14 @@ public class LottoTickets {
                 });
 
         return result;
+    }
+
+    private Map<Rank, Integer> createInitialMap() {
+        Map<Rank, Integer> rankMap = new EnumMap<>(Rank.class);
+
+        Arrays.stream(Rank.values())
+                .forEach(rank -> rankMap.put(rank, INIT_COUNT));
+
+        return rankMap;
     }
 }
