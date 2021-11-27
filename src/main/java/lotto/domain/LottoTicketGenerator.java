@@ -11,8 +11,8 @@ public class LottoTicketGenerator {
     public LottoTicketGenerator() {
     }
 
-    public LottoTickets generateTickets(Price ticketCount, GenerateLottoTicketStrategy lottoTicketStrategy) {
-        List<LottoTicket> lottoTickets = lottoTicketStrategy.publishTickets(ticketCount);
+    public LottoTickets generateTickets(Price price, GenerateLottoTicketStrategy lottoTicketStrategy) {
+        List<LottoTicket> lottoTickets = lottoTicketStrategy.publishTickets(price);
 
         return LottoTickets.of(lottoTickets);
     }
