@@ -22,10 +22,12 @@ class AllAutomaticLottoTicketStrategyTest {
     @DisplayName("로또 티켓의 숫자개수만큼 티켓을 발행한다.")
     @Test
     void generateLottoTicketsFromTicketCount() {
-        Price ticketCount = Price.of("22000");
+        Price price = Price.of("22000");
 
-        List<LottoTicket> lottoTickets = strategy.publishTickets(ticketCount);
+        List<LottoTicket> lottoTickets = strategy.publishTickets(price);
 
-        assertThat(lottoTickets.size()).isEqualTo(ticketCount.getNumberOfTickets());
+        assertThat(lottoTickets.size()).isEqualTo(price.getNumberOfTickets());
     }
+
+
 }
