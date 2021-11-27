@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Objects;
 
 public class Inputs {
-    private final List<Delimiter> delimiters;
-    private final List<InputNumber> numbers;
+    private final Delimiters delimiters;
+    private final InputNumbers numbers;
 
-    private Inputs(List<Delimiter> delimiters, List<InputNumber> numbers) {
+    private Inputs(Delimiters delimiters, InputNumbers numbers) {
         this.delimiters = delimiters;
         this.numbers = numbers;
     }
@@ -26,7 +26,7 @@ public class Inputs {
             inputNumbers.add(new InputNumber(Integer.parseInt(number)));
         }
 
-        return new Inputs(delimiters, inputNumbers);
+        return new Inputs(new Delimiters(delimiters), new InputNumbers(inputNumbers));
     }
 
     public static Inputs createWithoutDelimiter(String s) {
@@ -40,7 +40,11 @@ public class Inputs {
             inputNumbers.add(new InputNumber(Integer.parseInt(number)));
         }
 
-        return new Inputs(delimiters, inputNumbers);
+        return new Inputs(new Delimiters(delimiters), new InputNumbers(inputNumbers));
+    }
+
+    public InputNumber sum() {
+        return numbers.sum();
     }
 
     @Override
