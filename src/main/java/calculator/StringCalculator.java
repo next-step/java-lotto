@@ -8,6 +8,7 @@ public class StringCalculator {
 
     private static final String SEPARATOR_PREFIX = "//";
     private static final String SEPARATOR_POSTFIX = "\n";
+    private static final int FIRST_INDEX = 0;
 
     private StringCalculator() {}
 
@@ -32,7 +33,7 @@ public class StringCalculator {
         if (strings.size() <= 1) {
             return "";
         }
-        return strings.get(0)
+        return strings.get(FIRST_INDEX)
                 .split(SEPARATOR_PREFIX)[1];
     }
 
@@ -42,7 +43,8 @@ public class StringCalculator {
         if (strings.size() <= 1) {
             return data;
         }
-        return strings.get(
-                strings.size() - 1);
+
+        final int lastIndex = strings.size() - 1;
+        return strings.get(lastIndex);
     }
 }
