@@ -17,12 +17,14 @@ public class InputView {
 
     public static PurchaseInfo getPurchaseInfo() {
         int amount = getIntValue("구입금액을 입력해 주세요.");
-        return new PurchaseInfo(amount);
+        int manualCount = getIntValue("수동으로 구매할 로또 수를 입력해 주세요.");
+        return new PurchaseInfo(amount, manualCount);
     }
 
-    public static LotteryTicket getWinningTicket() {
-        List<Integer> winningNumbers = InputView.getCommaSplitIntList("지난 주 당첨 번호를 입력해 주세요.");
-        return new LotteryTicket(winningNumbers.stream()
+    public static LotteryTicket getTicket(String message) {
+        List<Integer> numbers = InputView.getCommaSplitIntList(message);
+        Collections.sort(numbers);
+        return new LotteryTicket(numbers.stream()
                 .map(Lotto::new)
                 .collect(Collectors.toList()));
     }
