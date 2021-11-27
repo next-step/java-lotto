@@ -37,4 +37,17 @@ class LottoTest {
 
         assertThat(buyLotto.sameLottoNumberCount(winLotto)).isEqualTo(matchCount);
     }
+
+    @DisplayName("로또의 당첨 등수 체크 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"2, 9, 13, 33 ,39, 45:34, 40, 13, 2 ,9, 44:3"}, delimiter = ':')
+    void lottoRankCheck(String buyLottoString, String winLottoString, int matchCount) {
+        Lotto buyLotto = Lotto.from(buyLottoString);
+        Lotto winLotto = Lotto.from(winLottoString);
+
+        Rank rank = buyLotto.getRank(winLotto);
+
+        assertThat(rank.getMatchCount()).isEqualTo(3);
+        assertThat(rank.getPrizeMoney()).isEqualTo(5000);
+    }
 }
