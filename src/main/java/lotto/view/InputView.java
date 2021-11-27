@@ -20,6 +20,7 @@ public class InputView {
     }
 
     public Lotto inputLastWeekWinLotto() {
+        System.out.println(LAST_WEEK_WIN_LOTTO_MESSAGE);
         return Lotto.from(this.scanner.nextLine());
     }
 }
