@@ -1,28 +1,30 @@
-package lotto.model.ticket;
+package lotto.model.ticket.generator;
 
 import lotto.model.domain.Lotto;
 import lotto.model.game.LottoNumber;
+import lotto.model.ticket.LotteryTicket;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LotteryTicketGenerator {
+public class AutoTicketGenerator implements LotteryTicketGenerator {
 
     private static final List<Lotto> numbers = IntStream.rangeClosed(LottoNumber.MIN_NUMBER,LottoNumber.MAX_NUMBER)
-                                                        .boxed().map(Lotto::new)
-                                                        .collect(Collectors.toList());
+            .boxed().map(Lotto::new)
+            .collect(Collectors.toList());
 
-    public static LotteryTicket generate() {
-        List<Lotto> chosenNumbers = chooseNumber();
-        return new LotteryTicket(chosenNumbers);
-    }
-
-    private static List<Lotto> chooseNumber() {
+    private List<Lotto> chooseNumber() {
         Collections.shuffle(numbers);
         return numbers.stream()
                 .limit(LottoNumber.CHOOSE_COUNT)
                 .sorted()
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public LotteryTicket generate() {
+        return new LotteryTicket(chooseNumber());
     }
 }
