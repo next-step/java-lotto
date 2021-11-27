@@ -3,24 +3,28 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public class LotteryTickets {
     private final List<LotteryTicket> lotteryTickets;
 
-    public LotteryTickets(int lotteryCount) {
-        this(IssueLotteryTicket(lotteryCount));
+    public LotteryTickets(int lotteryCount, List<Set<Integer>> manualNumber) {
+        this(IssueLotteryTicket(lotteryCount, manualNumber));
     }
 
     private LotteryTickets(List<LotteryTicket> lotteryTicket) {
         this.lotteryTickets = Collections.unmodifiableList(lotteryTicket);
     }
 
-    private static List<LotteryTicket> IssueLotteryTicket(int lotteryCount) {
-        LotteryNumbers lotteryNumbers = new LotteryNumbers();
-
+    private static List<LotteryTicket> IssueLotteryTicket(int lotteryCount, List<Set<Integer>> manualNumber) {
         List<LotteryTicket> lotteryTicket = new ArrayList<>();
-        for (int i = 0; i < lotteryCount; i++) {
-            lotteryTicket.add(new LotteryTicket(lotteryNumbers.bringNumber()));
+        int manualNumberSize = manualNumber.size();
+        for (int i = 0; i < manualNumberSize; i++) {
+            lotteryTicket.add(new LotteryTicket(LotteryNumbers.validManualNumber(manualNumber.get(i))));
+        }
+        int automaticCount = lotteryCount - manualNumberSize;
+        for (int i = 0; i < automaticCount; i++) {
+            lotteryTicket.add(new LotteryTicket(LotteryNumbers.bringNumber()));
         }
 
         return lotteryTicket;
