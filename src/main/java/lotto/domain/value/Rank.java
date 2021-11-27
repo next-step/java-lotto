@@ -3,11 +3,11 @@ package lotto.domain.value;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(6, 2000000000),
-    SECOND(5, 1500000),
-    THIRD(4, 50000),
+    OUT(0, 0),
     FOURTH(3, 5000),
-    OUT(0, 0);
+    THIRD(4, 50000),
+    SECOND(5, 1500000),
+    FIRST(6, 2000000000);
 
     private final int matchCount;
     private final int prizeMoney;
