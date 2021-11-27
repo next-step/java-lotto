@@ -11,17 +11,13 @@ public class LotteryGame {
     private final LotteryTickets tickets;
     private final LotteryGameResultDto result;
 
-    public LotteryGame(PurchaseInfo purchaseInfo) {
-        this.tickets = new LotteryTickets(purchaseInfo.getLotteryCount());
-        this.result = new LotteryGameResultDto(purchaseInfo.getAmount());
-    }
-
-    public LotteryTickets getLotteryTickets() {
-        return this.tickets;
+    public LotteryGame(LotteryTickets lotteryTickets, LotteryGameResultDto result) {
+        this.tickets = lotteryTickets;
+        this.result = result;
     }
 
     public LotteryGameResultDto play() {
-        LotteryTicket winningTicket = InputView.getWinningTicket();
+        LotteryTicket winningTicket = InputView.getTicket("지난 주 당첨 번호를 입력해 주세요.");
         Lotto bonus = InputView.getBonusLotto();
         checkBonusDuplicate(winningTicket, bonus);
         for(LotteryTicket ticket : tickets.getTickets()) {
