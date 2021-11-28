@@ -77,9 +77,8 @@ class LottoTicketTest {
   private static Stream<Arguments> makeDuplicatedLottoNumberList() {
     return Stream.of(
             Arguments.of(Arrays.asList(new LottoNumber(1), new LottoNumber(15), new LottoNumber(40),
-                    new LottoNumber(25), new LottoNumber(15), new LottoNumber(4), new LottoNumber(20))),
+                    new LottoNumber(25), new LottoNumber(15), new LottoNumber(4))),
             Arguments.of(Arrays.asList(new LottoNumber(4), new LottoNumber(10), new LottoNumber(26),
-                    new LottoNumber(35), new LottoNumber(45), new LottoNumber(12), new LottoNumber(1),
-                    new LottoNumber(7), new LottoNumber(19))));
+                    new LottoNumber(35), new LottoNumber(45))));
   }
 }
