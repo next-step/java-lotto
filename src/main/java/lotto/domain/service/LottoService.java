@@ -6,10 +6,10 @@ import lotto.domain.entity.LottoTicket;
 import lotto.domain.entity.LottoTickets;
 import lotto.domain.entity.Prize;
 import lotto.domain.entity.PrizeEntry;
+import lotto.domain.entity.WinningTicket;
 import lotto.domain.entity.YieldRate;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +17,7 @@ import java.util.Map;
 public class LottoService {
 
   private static final int LOTTO_FEE = 1000;
+  private static final int ONE = 1;
   private static final String CAN_NOT_PURCHASED = "로또를 구매할 수 없습니다.";
 
   private final LottoTicketCreator creator;
@@ -43,23 +44,31 @@ public class LottoService {
     }
   }
 
-  public LottoResult getLottoResult(LottoTicket winningTicket, LottoTickets lottoTickets) {
-    PrizeEntry prizeEntry = new PrizeEntry(getPrizeResult(winningTicket, lottoTickets));
+  public LottoResult getLottoResult(WinningTicket winningTicket, LottoTickets lottoTickets) {
+    PrizeEntry prizeEntry = new PrizeEntry(calculatePrize(winningTicket, lottoTickets));
     YieldRate yieldRate = new YieldRate(calculateYieldRate(lottoTickets, prizeEntry));
 
     return new LottoResult(prizeEntry, yieldRate);
   }
 
-  private Map<Prize, Integer> getPrizeResult(LottoTicket winningTicket, LottoTickets lottoTickets) {
+  private Map<Prize, Integer> calculatePrize(WinningTicket winningTicket, LottoTickets lottoTickets) {
     Map<Prize, Integer> prizeMap = new EnumMap<>(Prize.class);
+    Prize.inputValuesToMap(prizeMap);
 
-    Arrays.stream(Prize.values())
-          .forEach(prize -> {
-            int numberOfMatched = lottoTickets.getCountOfMatch(winningTicket, prize.getMatchedCount());
-            prizeMap.put(prize, numberOfMatched);
-          });
-
+    lottoTickets.getLottoList()
+                .forEach(lottoTicket -> {
+                  Prize prize = getPrize(winningTicket, lottoTicket);
+                  if (prizeMap.containsKey(prize)) {
+                    prizeMap.computeIfPresent(prize, (key, value) -> value + ONE);
+                  }
+                });
     return prizeMap;
+  }
+
+  private Prize getPrize(WinningTicket winningTicket, LottoTicket lottoTicket) {
+    int matchedCount = lottoTicket.getMatchedCount(winningTicket);
+    boolean matchedBonus = lottoTicket.isMatchedBonus(winningTicket.getBonusNumber());
+    return Prize.valueOf(matchedCount, matchedBonus);
   }
 
   private double calculateYieldRate(LottoTickets lottoTickets, PrizeEntry prizeEntry) {
