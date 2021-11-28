@@ -35,10 +35,6 @@ public class Lotto {
         return new Lotto(lottoString);
     }
 
-    public static Lotto ofLottoNumberList(List<LottoNumber> lotto) {
-        return new Lotto(lotto);
-    }
-
     private void checkSize(List<LottoNumber> lottoLottoNumbers) {
         if (lottoLottoNumbers.size() != SIZE) {
             throw new IllegalArgumentException(SIZE + " 와 길이가 다른 Lotto 는 입력될 수 없습니다.");

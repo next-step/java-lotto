@@ -3,25 +3,21 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber {
-    private final Integer lottoNumber;
-
     public static final int BOUND_START = 1;
     public static final int BOUND_END = 45;
+    private final Integer lottoNumber;
 
     private LottoNumber(int lottoNumber) {
         this.lottoNumber = checkBound(lottoNumber);
-
     }
+
     public static LottoNumber ofInt(int lottoNumber) {
         return new LottoNumber(lottoNumber);
     }
+
     public static LottoNumber ofString(String lottoNumber) {
         checkNumeric(lottoNumber);
         return new LottoNumber(Integer.parseInt(lottoNumber));
-    }
-
-    public Integer getLottoNumber() {
-        return lottoNumber;
     }
 
     public static void checkNumeric(String numberString) {
@@ -40,6 +36,10 @@ public class LottoNumber {
             throw new IllegalArgumentException(BOUND_START + "보다 작은 숫자가 입력될 수 없습니다.");
         }
         return number;
+    }
+
+    public Integer getLottoNumber() {
+        return lottoNumber;
     }
 
     @Override
