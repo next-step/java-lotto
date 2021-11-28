@@ -5,8 +5,6 @@ import step1.domain.Inputs;
 import java.util.Scanner;
 
 public class InputView {
-
-
     public static Inputs start() {
         System.out.println("입력하세요");
 
