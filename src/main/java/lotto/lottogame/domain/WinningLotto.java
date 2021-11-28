@@ -11,7 +11,7 @@ public class WinningLotto {
     private final LottoNumber bonusBall;
 
     public WinningLotto(List<Integer> winningNumbers, int bonusBall) {
-        this.winningNumbers = new Lotto(winningNumbers);
+        this.winningNumbers = LottoGenerator.createManualLotto(winningNumbers);
         this.bonusBall = LottoNumber.of(bonusBall);
         if (winningNumbers.contains(bonusBall)) {
             throw new IllegalArgumentException("당첨번호 외에 보너스볼을 입력해주세요");

@@ -13,9 +13,9 @@ class LottoGeneratorTest {
     @Test
     @DisplayName("랜덤 로또번호 생성 - 6자리, 중복값 x")
     void createLottoNumber() {
-        List<LottoNumber> numbers = LottoGenerator.createAutoLotto();
-        assertThat(numbers).size().isEqualTo(6);
-        assertThat(numbers.stream().distinct().count()).isEqualTo(6);
+        Lotto numbers = LottoGenerator.createAutoLotto();
+        assertThat(numbers.getNumbers()).size().isEqualTo(6);
+        assertThat(numbers.getNumbers().stream().distinct().count()).isEqualTo(6);
     }
 
     @Test

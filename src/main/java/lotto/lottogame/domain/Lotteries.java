@@ -21,10 +21,10 @@ public class Lotteries {
 
     public Lotteries(List<List<Integer>> autoLotteries, int orderCount) {
         for (List<Integer> numbers : autoLotteries) {
-            lotteries.add(new Lotto(numbers));
+            lotteries.add(LottoGenerator.createManualLotto(numbers));
         }
         this.lotteries.addAll(range(0, orderCount)
-                .mapToObj(i -> new Lotto())
+                .mapToObj(i -> LottoGenerator.createAutoLotto())
                 .collect(toList()));
     }
 

@@ -20,21 +20,21 @@ public final class LottoGenerator {
         }
     }
 
-    public static List<LottoNumber> createAutoLotto() {
+    public static Lotto createAutoLotto() {
         Collections.shuffle(allLottoNumbers);
         List<LottoNumber> randomLottoNumbers = allLottoNumbers.stream()
                 .limit(LOTTO_SIZE)
                 .sorted()
                 .collect(toList());
-        return Collections.unmodifiableList(randomLottoNumbers);
+        return new Lotto(Collections.unmodifiableList(randomLottoNumbers));
     }
 
-    public static List<LottoNumber> createManualLotto(List<Integer> numbers) {
+    public static Lotto createManualLotto(List<Integer> numbers) {
         checkNumbers(numbers);
         List<LottoNumber> lottoNumbers = numbers.stream()
                 .map(LottoNumber::of)
                 .collect(toList());
-        return Collections.unmodifiableList(lottoNumbers);
+        return new Lotto(Collections.unmodifiableList(lottoNumbers));
     }
 
     private static void checkNumbers(List<Integer> numbers) {

@@ -7,12 +7,11 @@ public class Lotto {
 
     private final List<LottoNumber> numbers;
 
-    public Lotto() {
-        this.numbers = LottoGenerator.createAutoLotto();
-    }
-
-    public Lotto(List<Integer> numbers) {
-        this.numbers = LottoGenerator.createManualLotto(numbers);
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != 6) {
+            throw new IllegalArgumentException("6자리 입력해주세요");
+        }
+        this.numbers = lottoNumbers;
     }
 
     public int countOfMatch(Lotto winningNumbers) {
