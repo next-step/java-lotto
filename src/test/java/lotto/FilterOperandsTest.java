@@ -17,13 +17,13 @@ public class FilterOperandsTest {
 
     @ParameterizedTest(name = "{displayName} - {arguments}")
     @MethodSource("rawFormulaToOperands")
-    void filterWithoutCustomDelimiter(String rawFormula, Collection<Integer> operands) {
+    void filterWithoutCustomDelimiter(String rawFormula, Collection<Operand> operands) {
         assertThat(dut.filter(rawFormula)).containsExactlyElementsOf(operands);
     }
 
     @ParameterizedTest(name = "{displayName} - {arguments}")
     @MethodSource("rawFormulaAndDelimiterToOperands")
-    void filterWithCustomDelimiter(String rawFormula, String delimiter, Collection<Integer> operands) {
+    void filterWithCustomDelimiter(String rawFormula, String delimiter, Collection<Operand> operands) {
         assertThat(dut.filter(rawFormula, delimiter)).containsExactlyElementsOf(operands);
     }
 
@@ -35,16 +35,31 @@ public class FilterOperandsTest {
 
     static Stream<Arguments> rawFormulaToOperands() {
         return Stream.of(
-                Arguments.of("//;\n1,2:3", Arrays.asList(1, 2, 3)),
-                Arguments.of("1,2:3", Arrays.asList(1, 2, 3))
+                Arguments.of(
+                        "//;\n1,2:3",
+                        Arrays.asList(new Operand(1), new Operand(2), new Operand(3))
+                ),
+                Arguments.of(
+                        "1,2:3",
+                        Arrays.asList(new Operand(1), new Operand(2), new Operand(3))
+                )
         );
     }
 
     static Stream<Arguments> rawFormulaAndDelimiterToOperands() {
         return Stream.of(
-                Arguments.of("//;\n1,2;3", ";", Arrays.asList(1, 2, 3)),
-                Arguments.of("//?\n1?2,3", "?", Arrays.asList(1, 2, 3)),
-                Arguments.of("//_\n1,2:3,4_1", "_", Arrays.asList(1, 2, 3, 4, 1))
+                Arguments.of(
+                        "//;\n1,2;3", ";",
+                        Arrays.asList(new Operand(1), new Operand(2), new Operand(3))
+                ),
+                Arguments.of(
+                        "//?\n1?2,3", "?",
+                        Arrays.asList(new Operand(1), new Operand(2), new Operand(3))
+                ),
+                Arguments.of(
+                        "//_\n1,2:3,4_1", "_",
+                        Arrays.asList(new Operand(1), new Operand(2), new Operand(3), new Operand(4), new Operand(1))
+                )
         );
     }
 }

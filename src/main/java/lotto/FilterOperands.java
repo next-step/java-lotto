@@ -4,23 +4,23 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class FilterOperands {
-    private final Set<String> basicDelimiters = Collections.unmodifiableSet(new HashSet(Arrays.asList(",", ":")));
+    private final Set<String> basicDelimiters = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(",", ":")));
     private final Set<String> regexDanglingMetaCharacters = new HashSet<>(Arrays.asList("*", ".", "?", "+"));
 
-    public Collection<Integer> filter(String rawFormula) {
+    public Collection<Operand> filter(String rawFormula) {
         return filter(rawFormula, (String) null);
     }
 
-    public Collection<Integer> filter(String rawFormula, String delimiter) {
-        final Set<String> delimiters = new HashSet(basicDelimiters);
+    public Collection<Operand> filter(String rawFormula, String delimiter) {
+        final Set<String> delimiters = new HashSet<>(basicDelimiters);
         if (delimiter != null) {
             delimiters.add(escapeDanglingMetaCharacter(delimiter));
         }
-        String[] splitedByNewLine = rawFormula.split("\n");
-        return filter(splitedByNewLine[splitedByNewLine.length - 1], delimiters);
+        String[] splitByNewLine = rawFormula.split("\n");
+        return filter(splitByNewLine[splitByNewLine.length - 1], delimiters);
     }
 
-    private Collection<Integer> filter(String operandsWithDelimiters, Set<String> delimiters) {
+    private Collection<Operand> filter(String operandsWithDelimiters, Set<String> delimiters) {
         String delimiterRegexp = String.join("|", delimiters);
         return Collections.unmodifiableCollection(
                 Arrays.stream(operandsWithDelimiters.split(delimiterRegexp))
@@ -29,14 +29,12 @@ public class FilterOperands {
         );
     }
 
-    private Integer castRawOperand(String rawOperand) {
+    private Operand castRawOperand(String rawOperand) {
         if (!isNumeric(rawOperand)) {
             throw new IllegalArgumentException("operand is not numeric. operand:" + rawOperand);
         }
-        if (Integer.parseInt(rawOperand) < 0) {
-            throw new IllegalArgumentException(("negative numeric is not allowed. operand:" + rawOperand));
-        }
-        return Integer.parseInt(rawOperand);
+
+        return new Operand(Integer.parseInt(rawOperand));
     }
 
     private String escapeDanglingMetaCharacter(String delimiter) {

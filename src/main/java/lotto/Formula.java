@@ -16,7 +16,7 @@ public class Formula {
 
         return filterOperands.filter(rawFormula, filterCustomDelimiter.filter(rawFormula))
                 .stream()
-                .mapToInt(Integer::intValue)
-                .sum();
+                .reduce(new Operand(0), Operand::add)
+                .getValue();
     }
 }
