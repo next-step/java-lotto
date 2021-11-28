@@ -16,7 +16,7 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(List<Integer> lottoNumbers) {
-        validateLottoNumbersOneToFortyfive();
+        validateLottoNumbersOneToFortyfive(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -37,7 +37,7 @@ public class LottoNumbers {
         }
     }
 
-    private void validateLottoNumbersOneToFortyfive() {
+    private void validateLottoNumbersOneToFortyfive(List<Integer> lottoNumbers) {
         lottoNumbers.forEach(lottoNumber -> {
             if (lottoNumber < NUMBER_ONE || lottoNumber > NUMBER_FORTY_FIVE) {
                 throw new IndexOutOfBoundsException(MSG_LOTTO_NUMBER_ONE_TO_FORTY_FIVE);

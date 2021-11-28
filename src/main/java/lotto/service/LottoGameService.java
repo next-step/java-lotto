@@ -1,5 +1,6 @@
 package lotto.service;
 
+import lotto.domain.BonusLottoNumber;
 import lotto.domain.LottoGameCount;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Lottoes;
@@ -14,6 +15,7 @@ public class LottoGameService {
     private LottoGameCount lottoGameCount;
     private Lottoes lottoes;
     private LottoNumbers lastWeekWinningNumbers;
+    private BonusLottoNumber bonusLottoNumber;
 
     public LottoGameService() {
         lottoes = new Lottoes();
@@ -34,6 +36,10 @@ public class LottoGameService {
 
     public void getLastWeekWinningNumbers() {
         lastWeekWinningNumbers = InputView.inputLastWeekWinningNumbers();
+    }
+
+    public void getBonusLottonumber() {
+        bonusLottoNumber = InputView.inputBonusLottonumber(lastWeekWinningNumbers);
     }
 
     public void matchLottoNumbers() {

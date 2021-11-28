@@ -8,11 +8,11 @@ public class InputPrice {
     private final int inputPrice;
 
     public InputPrice(Integer inputPrice) {
-        validateSmallestUnit();
+        validateSmallestUnit(inputPrice);
         this.inputPrice = inputPrice;
     }
 
-    private void validateSmallestUnit() {
+    private void validateSmallestUnit(Integer inputPrice) {
         if (inputPrice < NUMBER_THOUSAND || Math.floorMod(inputPrice, NUMBER_THOUSAND) != NUMBER_ZERO) {
             throw new IndexOutOfBoundsException(MSG_MINIMUM_PURCHASE_PRICE);
         }
