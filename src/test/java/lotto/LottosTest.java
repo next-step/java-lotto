@@ -42,7 +42,7 @@ public class LottosTest {
         lottoList2.add(Lotto.ofString("11,12,13,4,5,6"));
         lottoList2.add(Lotto.ofString("1,2,3,14,5,7"));
         Lottos lottos2 = Lottos.ofLottoList(lottoList2);
-        LottoNumber bonus2 =  LottoNumber.ofInt(7);
+        LottoNumber bonus2 = LottoNumber.ofInt(7);
         listOfArguments.add(Arguments.of(lottos2, bonus2, 5_000 * 2 + 50_000));
 
         return listOfArguments.stream();

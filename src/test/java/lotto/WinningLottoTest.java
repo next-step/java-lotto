@@ -38,7 +38,7 @@ public class WinningLottoTest {
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining(SIZE + " 와 길이가 다른 winningLotto 는 입력될 수 없습니다.");
         assertThatThrownBy(() ->
         {
-            WinningLotto winningLotto = WinningLotto.ofStringAndBonusBall("1,2,3,4,5",  LottoNumber.ofInt(6));
+            WinningLotto winningLotto = WinningLotto.ofStringAndBonusBall("1,2,3,4,5", LottoNumber.ofInt(6));
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining(SIZE + " 와 길이가 다른 winningLotto 는 입력될 수 없습니다.");
     }
 
@@ -46,7 +46,7 @@ public class WinningLottoTest {
     @DisplayName("당첨 번호의 size 테스트")
     void checkContainNumberTest() {
         WinningLotto winningLotto = WinningLotto.ofString("1,2,3,4,5,6");
-        assertTrue(winningLotto.checkContainNumber( LottoNumber.ofInt(5)));
-        assertFalse(winningLotto.checkContainNumber( LottoNumber.ofInt(12)));
+        assertTrue(winningLotto.checkContainNumber(LottoNumber.ofInt(5)));
+        assertFalse(winningLotto.checkContainNumber(LottoNumber.ofInt(12)));
     }
 }

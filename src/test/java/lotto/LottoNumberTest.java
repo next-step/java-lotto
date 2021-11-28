@@ -21,14 +21,21 @@ public class LottoNumberTest {
 
         int boundNumber1 = 0;
         assertThatThrownBy(() -> {
-             LottoNumber.ofInt(boundNumber1);
+            LottoNumber.ofInt(boundNumber1);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(BOUND_START + "보다 작은 숫자가 입력될 수 없습니다.");
     }
 
     @Test
-    @DisplayName("LottoNumber 클래스 equal 테스트")
+    @DisplayName("LottoNumber of Int Test")
     void numberTest() {
-        assertThat( LottoNumber.ofInt(10)).isEqualTo(LottoNumber.ofInt(10));
+        assertThat(LottoNumber.ofInt(10)).isEqualTo(LottoNumber.ofInt(10));
     }
+
+    @Test
+    @DisplayName("LottoNumber ofString Test")
+    void ofStringTest() {
+        assertThat(LottoNumber.ofString("10")).isEqualTo(LottoNumber.ofInt(10));
+    }
+
 }
