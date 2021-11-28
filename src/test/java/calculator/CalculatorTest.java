@@ -1,5 +1,6 @@
 package calculator;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -7,37 +8,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 class CalculatorTest {
 
     @Test
+    @DisplayName("숫자 하나만 문자열로 입력할 경우 해당 숫자를 반환한다")
+    void shouldReturnIfSingleInput() {
+        Calculator calculator = new Calculator("1");
+        assertThat(calculator.sum()).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("숫자 여러 개를 입력할 경우 쉼표를 구분자로 분리한다")
     void shouldSplitByComma() {
-        String input = "1,2,3";
-        Calculator calculator = new Calculator();
-        calculator.calculate(input);
-
-        assertThat(calculator.size()).isEqualTo(3);
-    }
-
-    @Test
-    void shouldSplitByColon() {
-        String input = "4:5:6";
-        Calculator calculator = new Calculator();
-        calculator.calculate(input);
-
-        assertThat(calculator.size()).isEqualTo(3);
-    }
-
-    @Test
-    void shouldReturnZeroWhenInputIsBlank() {
-        String input = "";
-        Calculator calculator = new Calculator();
-        int sum = calculator.calculate(input);
-
-        assertThat(sum).isEqualTo(0);
-    }
-
-    @Test
-    void shouldReturnZeroWhenInputIsNull() {
-        Calculator calculator = new Calculator();
-        int sum = calculator.calculate(null);
-
-        assertThat(sum).isEqualTo(0);
+        Calculator calculator = new Calculator("1,2:3");
+        assertThat(calculator.sum()).isEqualTo(6);
     }
 }
