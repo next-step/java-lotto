@@ -1,6 +1,8 @@
-package lotto.step3_4.domain;
+package lotto.lottogame.domain;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class WinningLotto {
@@ -16,12 +18,17 @@ public class WinningLotto {
         }
     }
 
-    public Lotto getWinningNumbers() {
-        return winningNumbers;
+    public LottoStatistics createLottoStatistics(Lotteries lotteries, OrderPrice orderPrice) {
+        Map<Rank, Integer> lottoStatistics = new HashMap<>();
+        for (Lotto lotto : lotteries.getLotteries()) {
+            Rank rank = Rank.rank(lotto.countOfMatch(winningNumbers), lotto.contains(bonusBall));
+            lottoStatistics.put(rank, lottoStatistics.getOrDefault(rank, 0) + 1);
+        }
+        return new LottoStatistics(lottoStatistics, orderPrice);
     }
 
-    public LottoNumber getBonusBall() {
-        return bonusBall;
+    public Lotto getWinningNumbers() {
+        return winningNumbers;
     }
 
     @Override

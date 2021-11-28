@@ -1,9 +1,6 @@
-package lotto.step3_4.view;
+package lotto.lottogame.view;
 
-import lotto.step3_4.domain.Lotteries;
-import lotto.step3_4.domain.Lotto;
-import lotto.step3_4.domain.LottoStore;
-import lotto.step3_4.domain.Rank;
+import lotto.lottogame.domain.*;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -28,7 +25,7 @@ public final class ResultView {
         System.out.println("수동으로 " + manualCount + "장, 자동으로 " + autoCount + "개를 구매했습니다.");
     }
 
-    public static void printLottoStatics(Map<Rank, Integer> lottoStatistics, double profit) {
+    public static void printLottoStatics(LottoStatistics statistics) {
         StringBuilder builder = new StringBuilder();
         builder.append("당첨 통계");
         builder.append("\n");
@@ -43,12 +40,12 @@ public final class ResultView {
             builder.append("(");
             builder.append(ranks.get(i).getPrizeMoney());
             builder.append("원) - ");
-            isRanker(builder, lottoStatistics, ranks.get(i));
+            isRanker(builder, statistics.getLottoStatistics(), ranks.get(i));
             builder.append("개");
             builder.append("\n");
         }
         System.out.print(builder);
-        System.out.println("총 수익률은 " + profit + "입니다.");
+        System.out.println("총 수익률은 " + statistics.calculateRateOfProfit() + "입니다.");
     }
 
     private static void isSecondPrize(StringBuilder builder, Rank rank) {

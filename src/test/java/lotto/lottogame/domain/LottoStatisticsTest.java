@@ -1,4 +1,4 @@
-package lotto.step3_4.domain;
+package lotto.lottogame.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -36,8 +35,8 @@ class LottoStatisticsTest {
     @DisplayName("당첨 통계 - Rank 별 당첨 개수 Map 저장")
     void createLottoStatistics(List<Integer> winningNumbers, Rank rank, int value) {
         WinningLotto winningLotto = new WinningLotto(winningNumbers, 12);
-        Map<Rank, Integer> lottoStatistics = LottoStatistics.createLottoStatistics(winningLotto, lotteries);
-        assertThat(lottoStatistics.get(rank)).isEqualTo(value);
+        LottoStatistics lottoStatistics = winningLotto.createLottoStatistics(lotteries, new OrderPrice(14000));
+        assertThat(lottoStatistics.getLottoStatistics().get(rank)).isEqualTo(value);
     }
 
     private static Stream<Arguments> provideWinnerNumberCount() {
@@ -55,8 +54,8 @@ class LottoStatisticsTest {
     @DisplayName("통계 Map 을 이용한 총 수익률 계산")
     void getRateOfReturn(List<Integer> winningNumbers, int bonusBall, double rate) {
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusBall);
-        Map<Rank, Integer> lottoStatistics = LottoStatistics.createLottoStatistics(winningLotto, lotteries);
-        assertThat(LottoStatistics.calculateRateOfProfit(lottoStatistics, new OrderPrice(14000))).isEqualTo(rate);
+        LottoStatistics lottoStatistics = winningLotto.createLottoStatistics(lotteries, new OrderPrice(14000));
+        assertThat(lottoStatistics.calculateRateOfProfit()).isEqualTo(rate);
     }
 
     private static Stream<Arguments> provideWinnerNumberRate() {
