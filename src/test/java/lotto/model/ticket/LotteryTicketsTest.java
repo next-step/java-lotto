@@ -1,8 +1,6 @@
 package lotto.model.ticket;
 
-import lotto.model.domain.PurchaseInfo;
-import lotto.model.ticket.generator.AutoTicketGenerator;
-import lotto.model.ticket.generator.ManualTicketGenerator;
+import lotto.model.domain.CountInfo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,16 +16,16 @@ class LotteryTicketsTest {
     @ValueSource(ints = {1, 2, 3, 4})
     @DisplayName("파라미터로 받은 count 와 생성된 복권 티켓 수가 일치하는지 테스트")
     void createdLotteryTicketSizeCheckTest(int count){
-        PurchaseInfo purchaseInfo = new PurchaseInfo(count * 1000,0);
-        lotteryTickets = new LotteryTickets(purchaseInfo,new AutoTicketGenerator(), new ManualTicketGenerator());
+        CountInfo countInfo = new CountInfo(0, count);
+        lotteryTickets = new LotteryTickets(countInfo);
         assertThat(lotteryTickets.getTickets().size()).isEqualTo(count);
     }
 
     @Test
     @DisplayName("자동생성으로 생성된 로또 숫자가 6개인지 체크")
     void selectNumberSizeTest(){
-        PurchaseInfo purchaseInfo = new PurchaseInfo(1000,0);
-        lotteryTickets = new LotteryTickets(purchaseInfo, new AutoTicketGenerator(), new ManualTicketGenerator());
+        CountInfo countInfo = new CountInfo(0,10);
+        lotteryTickets = new LotteryTickets(countInfo);
         assertThat(lotteryTickets.getTickets().get(0).getNumbers().size()).isEqualTo(6);
     }
 }
