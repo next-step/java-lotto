@@ -11,15 +11,12 @@ public class LottoTickets {
     this.lottoList = lottoTicketList;
   }
 
-  public int getCountOfMatch(LottoTicket standard, int count) {
-    return (int) lottoList.stream()
-                          .map(ticket -> ticket.getMatchedCount(standard))
-                          .filter(number -> number == count)
-                          .count();
-  }
-
   public int size() {
     return lottoList.size();
+  }
+
+  public List<LottoTicket> getLottoList() {
+    return lottoList;
   }
 
   @Override
