@@ -28,4 +28,9 @@ public class LottoTickets {
     public List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(lottoTickets);
     }
+
+    public LottoTickets sum(LottoTickets lottoTickets) {
+        this.lottoTickets.addAll(lottoTickets.getLottoTickets());
+        return new LottoTickets(this.lottoTickets);
+    }
 }

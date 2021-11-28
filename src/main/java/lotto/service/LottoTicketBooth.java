@@ -11,9 +11,24 @@ import lotto.util.AutoLottoNumberUtils;
 
 public class LottoTicketBooth implements LottoTicketsGenerator {
 
+    private static class LottoTicketBoothHolder {
+
+        private static final LottoTicketBooth LOTTO_TICKET_BOOTH = new LottoTicketBooth();
+    }
+
+    private static final long TICKET_PRICE = 1000l;
+    private static final int MINIMUM_COUNT = 1;
+
+    private LottoTicketBooth() {
+    }
+
+    public static LottoTicketBooth getInstance() {
+        return LottoTicketBoothHolder.LOTTO_TICKET_BOOTH;
+    }
+
     public LottoTickets generate(Money money) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < money.autoCount(); i++) {
+        for (int i = 0; i < money.getAutoCount(); i++) {
             lottoTickets.add(LottoTicket.from(LottoTicketFactory
                 .LottoTicketFactory()
                 .createLottoNumber()));
@@ -29,21 +44,6 @@ public class LottoTicketBooth implements LottoTicketsGenerator {
                 .createLottoNumber()));
         }
         return new LottoTickets(lottoTickets);
-    }
-
-    private static class LottoTicketBoothHolder {
-
-        private static final LottoTicketBooth LOTTO_TICKET_BOOTH = new LottoTicketBooth();
-    }
-
-    private static final long TICKET_PRICE = 1000l;
-    private static final int MINIMUM_COUNT = 1;
-
-    private LottoTicketBooth() {
-    }
-
-    public static LottoTicketBooth getInstance() {
-        return LottoTicketBoothHolder.LOTTO_TICKET_BOOTH;
     }
 
     public LottoTickets autoTickets(int money) {
