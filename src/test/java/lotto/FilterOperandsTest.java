@@ -23,7 +23,7 @@ public class FilterOperandsTest {
 
     @ParameterizedTest(name = "{displayName} - {arguments}")
     @MethodSource("rawFormulaAndDelimiterToOperands")
-    void filterWithCustomDelimiter(String rawFormula, String delimiter, Collection<Operand> operands) {
+    void filterWithCustomDelimiter(String rawFormula, Delimiter delimiter, Collection<Operand> operands) {
         assertThat(dut.filter(rawFormula, delimiter)).containsExactlyElementsOf(operands);
     }
 
@@ -49,15 +49,18 @@ public class FilterOperandsTest {
     static Stream<Arguments> rawFormulaAndDelimiterToOperands() {
         return Stream.of(
                 Arguments.of(
-                        "//;\n1,2;3", ";",
+                        "//;\n1,2;3",
+                        new Delimiter(";"),
                         Arrays.asList(new Operand(1), new Operand(2), new Operand(3))
                 ),
                 Arguments.of(
-                        "//?\n1?2,3", "?",
+                        "//?\n1?2,3",
+                        new Delimiter("?"),
                         Arrays.asList(new Operand(1), new Operand(2), new Operand(3))
                 ),
                 Arguments.of(
-                        "//_\n1,2:3,4_1", "_",
+                        "//_\n1,2:3,4_1",
+                        new Delimiter("_"),
                         Arrays.asList(new Operand(1), new Operand(2), new Operand(3), new Operand(4), new Operand(1))
                 )
         );
