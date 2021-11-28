@@ -20,4 +20,11 @@ class CalculatorTest {
         Calculator calculator = new Calculator("1,2:3");
         assertThat(calculator.sum()).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("커스텀 구분자를 입력할 경우 이를 기준으로 숫자를 분리한다")
+    void shouldSplitByCustomDelimiter() {
+        Calculator calculator = new Calculator("//;\n1;2;3");
+        assertThat(calculator.sum()).isEqualTo(6);
+    }
 }
