@@ -1,6 +1,9 @@
 package lotto.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTicketFactory;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.exception.MinimumAmountException;
@@ -9,12 +12,23 @@ import lotto.util.AutoLottoNumberUtils;
 public class LottoTicketBooth implements LottoTicketsGenerator {
 
     public LottoTickets generate(Money money) {
-        money.autoCount();
-        return null;
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (int i = 0; i < money.autoCount(); i++) {
+            lottoTickets.add(LottoTicket.from(LottoTicketFactory
+                .LottoTicketFactory()
+                .createLottoNumber()));
+        }
+        return new LottoTickets(lottoTickets);
     }
 
     public LottoTickets generate(List<String> manualLottoNumbers) {
-        return null;
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (String manualLottoNumber : manualLottoNumbers) {
+            lottoTickets.add(LottoTicket.from(LottoTicketFactory
+                .LottoTicketFactory(manualLottoNumber)
+                .createLottoNumber()));
+        }
+        return new LottoTickets(lottoTickets);
     }
 
     private static class LottoTicketBoothHolder {

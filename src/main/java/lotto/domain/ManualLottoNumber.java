@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.exception.NotNumberException;
 
-public class ManualLottoNumber {
+public class ManualLottoNumber implements CreatableLottoNumber {
 
     private static final String DELIMITER = ", ";
 
@@ -16,6 +16,7 @@ public class ManualLottoNumber {
         this.manualLottoNumber = manualLottoNumber;
     }
 
+    @Override
     public List<Integer> createLottoNumber() {
         try {
             return Arrays.stream(manualLottoNumber.split(DELIMITER))

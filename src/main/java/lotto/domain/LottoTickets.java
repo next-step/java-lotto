@@ -12,7 +12,7 @@ public class LottoTickets {
         this.lottoTickets = new ArrayList<>();
     }
 
-    private LottoTickets(List<LottoTicket> lottoTickets) {
+    public LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
     }
 
