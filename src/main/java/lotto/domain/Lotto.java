@@ -11,7 +11,7 @@ public class Lotto {
 
     public static Lotto from(final String lottoString) {
         List<LottoNumber> numbers = Arrays.stream(lottoString.split(","))
-                .map(s -> s.trim())
+                .map(String::trim)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
         return new Lotto(numbers);
@@ -30,7 +30,7 @@ public class Lotto {
 
     public String getNumbers() {
         return this.numbers.stream()
-                .map(LottoNumber::getNumberString)
+                .map(LottoNumber::getNumber)
                 .collect(Collectors.joining(", "));
     }
 
