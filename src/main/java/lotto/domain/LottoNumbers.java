@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -15,8 +16,8 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(List<Integer> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
         validateLottoNumbersOneToFortyfive();
+        this.lottoNumbers = lottoNumbers;
     }
 
     public LottoNumbers createAutoLottoNumbers(DefaultLottoNumbers defaultLottoNumbers) {
@@ -45,7 +46,7 @@ public class LottoNumbers {
     }
 
     public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     @Override

@@ -8,8 +8,8 @@ public class InputPrice {
     private final int inputPrice;
 
     public InputPrice(Integer inputPrice) {
-        this.inputPrice = inputPrice;
         validateSmallestUnit();
+        this.inputPrice = inputPrice;
     }
 
     private void validateSmallestUnit() {
