@@ -18,11 +18,10 @@ public class Application {
 
         int purchaseAmount = PaymentView.inputPurchaseAmount();
         int manualCount = PaymentView.inputManualCount();
+        Money money = Money.of(purchaseAmount, manualCount);
         List<String> manualLottoNumbers = PaymentView.inputManualLottoNumbers(manualCount);
 
-        Money money = Money.of(purchaseAmount, manualCount);
         LottoTickets lottoTickets = lottoController.buyLottoTickets(money, manualLottoNumbers);
-
         LottoTicketPrintView.printLottoTickets(lottoTickets, money);
         WinningNumberDto winnerNumber = WinnerNumberView.getWinningNumberDto();
 

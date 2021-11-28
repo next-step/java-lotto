@@ -6,12 +6,11 @@ import lotto.exception.MinimumAmountException;
 public class Money {
 
     private static final long LOTTO_PRICE = 1000l;
-    private final int purchaseAmount;
+    
     private final int manualCount;
     private final long autoCount;
 
-    private Money(int purchaseAmount, int manualCount, long autoCount) {
-        this.purchaseAmount = purchaseAmount;
+    private Money(int manualCount, long autoCount) {
         this.manualCount = manualCount;
         this.autoCount = autoCount;
     }
@@ -20,7 +19,7 @@ public class Money {
         valid(purchaseAmount, manualCount);
         long autoCount = purchaseAmount / LOTTO_PRICE - manualCount;
 
-        return new Money(purchaseAmount, manualCount, autoCount);
+        return new Money(manualCount, autoCount);
     }
 
     public long getAutoCount() {

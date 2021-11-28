@@ -27,7 +27,7 @@ public class WinnerLottoTicket extends AbstractLottoTicket {
     public long findLottoMatchCount(LottoTicket lottoTicket) {
         return lottoTicket.getLottoTicket()
             .stream()
-            .filter(number -> this.lottoTicket.contains(number))
+            .filter(this.lottoTicket::contains)
             .count();
     }
 

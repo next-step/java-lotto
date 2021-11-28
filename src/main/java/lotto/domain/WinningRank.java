@@ -11,7 +11,7 @@ public class WinningRank {
     private static final int UPDATE_VALUE = 1;
     private static final double TICKET_PRICE = 1000l;
 
-    private Map<Rank, Integer> winningRank;
+    private final Map<Rank, Integer> winningRank;
     private double count = 0d;
 
     public WinningRank() {

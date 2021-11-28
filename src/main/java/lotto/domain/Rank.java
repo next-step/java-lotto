@@ -42,10 +42,7 @@ public enum Rank implements Supplier<Rank> {
     }
 
     private static boolean isSecond(boolean matchBonus, Rank result) {
-        if (result.equals(Rank.THIRD) && matchBonus) {
-            return true;
-        }
-        return false;
+        return result.equals(Rank.THIRD) && matchBonus;
     }
 
     public long calculatePrizeMoney(Integer count) {

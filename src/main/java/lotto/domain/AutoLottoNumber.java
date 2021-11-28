@@ -12,6 +12,7 @@ public class AutoLottoNumber implements CreatableLottoNumber {
     private static final int MAXIMUM_NUMBER = 45;
     private static final int FROM_INDEX = 0;
     private static final int TO_INDEX = 6;
+
     private static final List<Integer> NUMBER;
 
     static {
