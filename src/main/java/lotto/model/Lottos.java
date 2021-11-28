@@ -18,8 +18,12 @@ public class Lottos {
     public Result makeResult(Lotto target, Number bonusNumber) {
         Result result = new Result();
         lottos.stream()
-              .map(lotto -> lotto.match(target, bonusNumber))
+              .map(lotto -> makeRank(lotto, target, bonusNumber))
               .forEach(matchedCount -> result.add(matchedCount));
         return result;
+    }
+
+    private Rank makeRank(Lotto lotto, Lotto target, Number bonusNumber) {
+        return Rank.from(lotto.getMachedCount(target), lotto.contains(bonusNumber));
     }
 }
