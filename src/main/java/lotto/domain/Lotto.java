@@ -40,7 +40,7 @@ public class Lotto {
     }
 
     private void validateLotto(final int count) {
-        if (count == LOTTO_NUMBER_SIZE) {
+        if (count != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException();
         }
     }
