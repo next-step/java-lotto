@@ -1,18 +1,27 @@
 package calculator;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.Arrays.stream;
+import static java.util.Collections.singletonList;
 
 public class Numbers {
-    private final List<Number> numbers = new ArrayList<>();
+    private final List<Number> numbers;
+
+    public Numbers(List<Number> numbers) {
+        this.numbers = numbers;
+    }
 
     public Numbers(String input) {
-        String[] splitNumbers = input.split(",");
+        this(singletonList(new Number(input)));
+    }
 
-        for (String splitNumber : splitNumbers) {
-            numbers.add(new Number(splitNumber));
-        }
+    public Numbers(String input, String delimiter) {
+        this(stream(input.split(delimiter))
+                .map(Number::new)
+                .collect(Collectors.toList()));
     }
 
     public List<Number> getNumbers() {
