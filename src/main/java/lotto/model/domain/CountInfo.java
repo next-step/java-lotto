@@ -7,8 +7,8 @@ public class CountInfo {
     private final int autoCount;
 
     public CountInfo(int manualCount, int lotteryCount) {
-        this.manualCount = manualCount;
         checkValidation(manualCount, lotteryCount);
+        this.manualCount = manualCount;
         this.autoCount = lotteryCount - manualCount;
     }
 
