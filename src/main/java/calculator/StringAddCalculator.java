@@ -3,12 +3,14 @@ package calculator;
 public class StringAddCalculator {
 
     public static int splitAndSum(String text) {
-        if (text == null || text.trim().length() == 0) {
-            return 0;
-        }
+        if (isEmpty(text)) return 0;
 
         String[] nums = text.split(",|:");
         return sum(nums);
+    }
+
+    private static boolean isEmpty(String text) {
+        return text == null || text.trim().length() == 0;
     }
 
     private static int sum(String[] nums) {
