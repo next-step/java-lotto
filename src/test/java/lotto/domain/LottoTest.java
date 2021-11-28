@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
 
@@ -15,6 +16,13 @@ class LottoTest {
         Lotto actual = Lotto.from("2, 9, 13, 33 ,39, 45");
 
         assertThat(actual).isNotNull();
+    }
+
+    @DisplayName("로또 생성 테스트 - 로또는 6자리의 숫자만 가능하다")
+    @Test
+    void createLottoDuplicate() {
+        assertThatThrownBy(() -> Lotto.from("2, 2, 13, 33 ,39, 45"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("로또번호 출력 테스트")
@@ -27,26 +35,16 @@ class LottoTest {
         assertThat(buyLotto.getNumbers()).isEqualTo(winLotto.getNumbers());
     }
 
-    @DisplayName("로또번호 번호 체크 테스트")
-    @ParameterizedTest
-    @CsvSource(value = {"2, 9, 13, 33 ,39, 45:34, 40, 13, 2 ,9, 44:3"}, delimiter = ':')
-    void lottoNumberCheck(String buyLottoString, String winLottoString, int matchCount) {
-        Lotto buyLotto = Lotto.from(buyLottoString);
-        Lotto winLotto = Lotto.from(winLottoString);
-
-        assertThat(buyLotto.sameLottoNumberCount(winLotto)).isEqualTo(matchCount);
-    }
-
     @DisplayName("로또의 당첨 등수 체크 테스트")
     @ParameterizedTest
-    @CsvSource(value = {"2, 9, 13, 33 ,39, 45:34, 40, 13, 2 ,9, 44:3"}, delimiter = ':')
-    void lottoRankCheck(String buyLottoString, String winLottoString, int matchCount) {
+    @CsvSource(value = {"2, 9, 13, 33 ,39, 45:34, 40, 13, 2 ,9, 44"}, delimiter = ':')
+    void lottoRankCheck(String buyLottoString, String winLottoString) {
         Lotto buyLotto = Lotto.from(buyLottoString);
         Lotto winLotto = Lotto.from(winLottoString);
 
         Rank rank = buyLotto.getRank(winLotto);
 
-        assertThat(rank.getMatchCount()).isEqualTo(3);
-        assertThat(rank.getPrizeMoney()).isEqualTo(5000);
+        assertThat(rank.getMatchCount()).isEqualTo(Rank.FIFTH.getMatchCount());
+        assertThat(rank.getPrizeMoney()).isEqualTo(Rank.FIFTH.getPrizeMoney());
     }
 }
