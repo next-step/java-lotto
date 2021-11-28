@@ -10,11 +10,12 @@ public enum Rank {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
-    public static final int SECOND_OR_THIRD_COUNT = 5;
+    private static final int SECOND_OR_THIRD_COUNT = 5;
+
     private final int matchedCount;
     private final int price;
 
-    Rank(int matchedCount, int price) {
+    private Rank(int matchedCount, int price) {
         this.matchedCount = matchedCount;
         this.price = price;
     }
