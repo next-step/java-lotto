@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.dto.LottoResult;
 import lotto.domain.entity.Budget;
+import lotto.domain.entity.LottoNumber;
 import lotto.domain.entity.LottoTicket;
 import lotto.domain.entity.LottoTickets;
 
@@ -23,6 +24,11 @@ public class ViewImpl implements View{
   @Override
   public LottoTicket getWinning() {
     return inputView.inputWinning();
+  }
+
+  @Override
+  public LottoNumber getBonus() {
+    return inputView.inputBonus();
   }
 
   @Override

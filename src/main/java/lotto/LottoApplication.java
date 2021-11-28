@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.dto.LottoResult;
 import lotto.domain.entity.Budget;
 import lotto.domain.entity.LottoTickets;
+import lotto.domain.entity.WinningTicket;
 import lotto.domain.service.AutoMaticLottoTicketCreator;
 import lotto.domain.service.LottoService;
 import lotto.view.InputView;
@@ -21,7 +22,9 @@ public class LottoApplication {
     LottoTickets lottoTickets = lottoService.buyTheLottoTickets(budget);
     view.setBuyResult(lottoTickets);
 
-    LottoResult lottoResult = lottoService.getLottoResult(view.getWinning(), lottoTickets);
+    WinningTicket winningTicket = new WinningTicket(view.getWinning(), view.getBonus());
+    LottoResult lottoResult = lottoService.getLottoResult(winningTicket, lottoTickets);
+
     view.setLottoResult(lottoResult);
   }
 
