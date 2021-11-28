@@ -1,7 +1,10 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public enum Rank implements Supplier<Rank> {
     NONE(0, 0),
@@ -19,8 +22,10 @@ public enum Rank implements Supplier<Rank> {
         this.prizeMoney = prizeMoney;
     }
 
-    public boolean isPrizeMoney() {
-        return this.getPrizeMoney() > 0;
+    public static List<Rank> valuesFilterNoPrizeMoney() {
+        return Arrays.stream(Rank.values())
+            .filter(rank -> rank.prizeMoney > 0)
+            .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public static Rank valueOf(long countOfMatch, boolean matchBonus) {

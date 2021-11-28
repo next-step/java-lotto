@@ -6,12 +6,8 @@ import lotto.domain.Money;
 
 public interface LottoTicketsGenerator {
 
-    default LottoTickets generate(Money money) {
-        return null;
-    }
+    LottoTickets generate(Money money);
 
-    default LottoTickets generate(List<String> manualLottoNumbers) {
-        return null;
-    }
+    LottoTickets generate(List<String> manualLottoNumbers);
 
 }

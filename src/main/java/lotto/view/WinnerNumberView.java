@@ -5,9 +5,6 @@ import lotto.util.ScannerUtils;
 
 public class WinnerNumberView {
 
-    private static final String MESSAGE_WINNER_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
-    private static final String MESSAGE_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
-
     private WinnerNumberView() {
     }
 
@@ -16,12 +13,12 @@ public class WinnerNumberView {
     }
 
     private static String getWinningNumbers() {
-        System.out.println(MESSAGE_WINNER_NUMBERS);
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return ScannerUtils.nextLine();
     }
 
     private static int getBonusNumber() {
-        System.out.println(MESSAGE_BONUS_NUMBER);
+        System.out.println("보너스 볼을 입력해 주세요.");
         return ScannerUtils.nextInt();
     }
 

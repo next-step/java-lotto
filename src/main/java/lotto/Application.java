@@ -16,9 +16,9 @@ public class Application {
     public static void main(String[] args) {
         LottoController lottoController = LottoController.getInstance();
 
-        int purchaseAmount = PaymentView.purchaseAmount();
-        int manualCount = PaymentView.manualCount();
-        List<String> manualLottoNumbers = PaymentView.manualLottoNumbers(manualCount);
+        int purchaseAmount = PaymentView.inputPurchaseAmount();
+        int manualCount = PaymentView.inputManualCount();
+        List<String> manualLottoNumbers = PaymentView.inputManualLottoNumbers(manualCount);
 
         Money money = Money.of(purchaseAmount, manualCount);
         LottoTickets lottoTickets = lottoController.buyLottoTickets(money, manualLottoNumbers);
