@@ -10,13 +10,9 @@ public class Numbers {
     List<Number> numbers;
 
     public Numbers(String[] numbers) {
-        try {
-            this.numbers = Arrays.stream(numbers)
-                    .map(n -> new Number(Integer.parseInt(n)))
-                    .collect(Collectors.toList());
-        } catch (Exception e) {
-            throw new RuntimeException("입력 숫자 오류");
-        }
+        this.numbers = Arrays.stream(numbers)
+                .map(n -> Number.createFromString(n))
+                .collect(Collectors.toList());
     }
 
     public List<Number> getList() {
@@ -24,7 +20,7 @@ public class Numbers {
     }
 
     public Number sum() {
-        return new Number(numbers.stream()
+        return Number.createFromInt(numbers.stream()
                 .mapToInt(Number::getNumber)
                 .sum()
         );

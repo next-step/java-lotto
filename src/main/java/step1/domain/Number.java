@@ -5,12 +5,33 @@ import java.util.Objects;
 public class Number {
     private final int number;
 
-    public Number(int number) {
+    private Number(int number) {
+        validateNumbers(number);
         this.number = number;
+    }
+
+    public static Number createFromInt(int number) {
+        return new Number(number);
+    }
+
+    public static Number createFromString(String number) {
+        try {
+            return new Number(Integer.parseInt(number));
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("입력 구분자 오류");
+        }
     }
 
     public int getNumber() {
         return number;
+    }
+
+    private void validateNumbers(int number) {
+        if (number > 0) {
+            return;
+        }
+
+        throw new RuntimeException("입력 숫자 오류");
     }
 
     @Override
