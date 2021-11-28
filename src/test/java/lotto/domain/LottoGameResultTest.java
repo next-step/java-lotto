@@ -5,10 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoGameResultTest {
 
@@ -39,8 +37,6 @@ class LottoGameResultTest {
     void lottoGameRankCheck() {
         LottoGameResult lottoGameResult = new LottoGameResult(lotties, winLotto);
 
-        Map<Rank, Long> rank = lottoGameResult.getLottiesRank();
-
-        assertThat(rank.get(Rank.FIFTH)).isEqualTo(1);
+        assertThat(lottoGameResult.getRankCount(Rank.FIFTH)).isEqualTo(1);
     }
 }
