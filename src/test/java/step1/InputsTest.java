@@ -17,14 +17,14 @@ public class InputsTest {
     @Test
     @DisplayName("구분자가 포함된 문자열을 사용하여 Inputs 객체 생성")
     void createWithDelimiter() {
-        assertThat(Inputs.createWithDelimiters("//;\n1;2;3")).isEqualTo(Inputs.createWithDelimiters("//;\n1;2;3"));
-        assertThat(Inputs.createWithDelimiters("//;\n1;2;3")).isNotEqualTo(Inputs.createWithDelimiters("//:\n1:2:3"));
+        assertThat(Inputs.create("//;\n1;2;3")).isEqualTo(Inputs.create("//;\n1;2;3"));
+        assertThat(Inputs.create("//;\n1;2;3")).isNotEqualTo(Inputs.create("//:\n1:2:3"));
     }
 
     @Test
     @DisplayName("구분자가 포함되지 않은 문자열을 사용하여 Inputs 객체 생성")
     void createWithoutDelimiter() {
-        assertThat(Inputs.createWithoutDelimiters("1:2:3")).isEqualTo(Inputs.createWithoutDelimiters("1:2,3"));
-        assertThat(Inputs.createWithoutDelimiters("1:2:3")).isNotEqualTo(Inputs.createWithoutDelimiters("1:2,4"));
+        assertThat(Inputs.create("1:2:3")).isEqualTo(Inputs.create("1:2,3"));
+        assertThat(Inputs.create("1:2:3")).isNotEqualTo(Inputs.create("1:2,4"));
     }
 }

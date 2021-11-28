@@ -16,14 +16,22 @@ public class Inputs {
         this.numbers = numbers;
     }
 
-    public static Inputs createWithDelimiters(String input) {
+    public static Inputs create(String input) {
+        if (isHaveDelimiters(input)) {
+            return createWithDelimiters(input);
+        }
+
+        return createWithoutDelimiters(input);
+    }
+
+    private static Inputs createWithDelimiters(String input) {
         Delimiters delimiters = extractDelimiters(input);
         Numbers numbers = extractNumbers(input, delimiters);
 
         return new Inputs(delimiters, numbers);
     }
 
-    public static Inputs createWithoutDelimiters(String input) {
+    private static Inputs createWithoutDelimiters(String input) {
         Delimiters delimiters = Delimiters.createWithoutInput();
         Numbers numbers = extractNumbers(input, delimiters);
 
@@ -42,17 +50,14 @@ public class Inputs {
 
     private static Numbers extractNumbers(String input, Delimiters delimiters) {
         Matcher matcher = EXTRACT_NUMBERS_PATTERN.matcher(input);
+        String extract = matcher.find() ? matcher.group(0) : input;
 
-        if (matcher.find()) {
-            String numbers = matcher.group(0);
-            return new Numbers(numbers.split(delimiters.joining()));
-        }
-
-        return new Numbers(input.split(delimiters.joining()));
+        return new Numbers(extract.split(delimiters.joining()));
     }
 
     public static boolean isHaveDelimiters(String input) {
         Matcher matcher = EXTRACT_DELIMITERS_PATTERN.matcher(input);
+
         return matcher.find();
     }
 

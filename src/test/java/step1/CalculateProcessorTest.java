@@ -13,7 +13,7 @@ public class CalculateProcessorTest {
     @DisplayName("input String을 사용하여 연산 후 결과 test")
     void calculate() {
         CalculateProcessor calculator = new CalculateProcessor();
-        assertThat(calculator.calculate(Inputs.createWithoutDelimiters("1,2:3"))).isEqualTo(new Number(6));
-        assertThat(calculator.calculate(Inputs.createWithDelimiters("//;\n1;2;3"))).isEqualTo(new Number(6));
+        assertThat(calculator.calculate(Inputs.create("1,2:3"))).isEqualTo(Number.createFromInt(6));
+        assertThat(calculator.calculate(Inputs.create("//;\n1;2;3"))).isEqualTo(Number.createFromInt(6));
     }
 }

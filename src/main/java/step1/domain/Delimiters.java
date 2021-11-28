@@ -11,10 +11,6 @@ public class Delimiters {
 
     private final List<Delimiter> delimiters;
 
-    private Delimiters(List<Delimiter> delimiters) {
-        this.delimiters = delimiters;
-    }
-
     public static Delimiters createWithoutInput() {
         return new Delimiters(Arrays.stream(BASE_DELIMITERS)
                 .map(d -> new Delimiter(d))
@@ -25,6 +21,10 @@ public class Delimiters {
         return new Delimiters(new ArrayList() {{
             add(delimiter);
         }});
+    }
+
+    private Delimiters(List<Delimiter> delimiters) {
+        this.delimiters = delimiters;
     }
 
     public String joining() {

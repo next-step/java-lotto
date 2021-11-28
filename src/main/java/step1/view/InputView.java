@@ -13,10 +13,6 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
-        if (Inputs.isHaveDelimiters(input)) {
-            return Inputs.createWithDelimiters(input);
-        }
-
-        return Inputs.createWithoutDelimiters(input);
+        return Inputs.create(input);
     }
 }
