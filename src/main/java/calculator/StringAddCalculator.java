@@ -8,12 +8,14 @@ public class StringAddCalculator {
         }
 
         String[] nums = text.split(",|:");
+        return sum(nums);
+    }
 
+    private static int sum(String[] nums) {
         int sum = 0;
         for (String num : nums) {
             sum += Integer.parseInt(num);
         }
-
         return sum;
     }
 }
