@@ -45,10 +45,6 @@ public class Lotto {
                 .count();
     }
 
-    public boolean matchBonus(LottoNumber bonus) {
-        return contains(bonus);
-    }
-
     public boolean contains(LottoNumber number) {
         return lottoNumbers.contains(number);
     }

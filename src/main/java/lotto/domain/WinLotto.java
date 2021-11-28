@@ -25,7 +25,7 @@ public class WinLotto {
     public Ranks checkWinning(List<Lotto> lottos) {
         return new Ranks(lottos.stream()
                 .map(lotto -> Rank.valueOf(
-                        lotto.countMatch(winLotto), lotto.matchBonus(bonus)))
+                        lotto.countMatch(winLotto), lotto.contains(bonus)))
                 .collect(Collectors.toList())
         );
     }
