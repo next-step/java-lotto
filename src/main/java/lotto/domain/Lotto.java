@@ -1,13 +1,17 @@
 package lotto.domain;
 
 public class Lotto {
-    private Numbers numbers;
+    private final Numbers numbers;
 
-    public Lotto() {
-        this.numbers = new Numbers();
+    public Lotto(Numbers numbers) {
+        this.numbers = numbers;
     }
 
     public Numbers getNumbers() {
         return this.numbers;
+    }
+
+    public int countMatch(Numbers prizeNumbers) {
+        return this.numbers.match(prizeNumbers);
     }
 }
