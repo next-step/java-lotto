@@ -18,9 +18,9 @@ public class WinningRank {
         this.winningRank = new EnumMap<>(Rank.class);
     }
 
-    public WinningRank updateRank(List<Long> winnerCount) {
-        for (Long count : winnerCount) {
-            Rank rank = Rank.equalToCount(count);
+    public WinningRank updateRank(List<LottoResult> lottoResults) {
+        for (LottoResult lottoResult : lottoResults) {
+            Rank rank = Rank.valueOf(lottoResult.getMatchCount(), lottoResult.isMatchBonus());
             winningRank.put(rank, winningRank.getOrDefault(rank, DEFAULT_VALUE) + UPDATE_VALUE);
             this.count = this.count + UPDATE_VALUE;
         }
@@ -34,11 +34,12 @@ public class WinningRank {
     public double getPrizeMoney() {
         return (double) winningRank.keySet()
             .stream()
-            .mapToLong(key -> key.getPrizeMoney() * winningRank.get(key))
+            .mapToLong(rank -> rank.calculatePrizeMoney(winningRank.get(rank)))
             .sum();
     }
 
     public Map<Rank, Integer> getWinningRank() {
         return Collections.unmodifiableMap(winningRank);
     }
+
 }

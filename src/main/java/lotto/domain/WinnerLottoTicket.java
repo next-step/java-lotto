@@ -10,26 +10,29 @@ public class WinnerLottoTicket extends AbstractLottoTicket {
 
     private static final String DELIMITER = ", ";
 
-    private WinnerLottoTicket(List<Integer> lottoNumber) {
+    private final LottoNumber bonusNumber;
+
+    private WinnerLottoTicket(List<Integer> lottoNumber, LottoNumber bonusNumber) {
         super(lottoNumber);
+        this.bonusNumber = bonusNumber;
     }
 
-    public static WinnerLottoTicket from(String input) {
-        return new WinnerLottoTicket(mapToInt(input.split(DELIMITER)));
+    public static WinnerLottoTicket of(String winnerNumber, int bonusNumber) {
+        List<Integer> winnerNumbers = mapToInt(winnerNumber.split(DELIMITER));
+
+        validBonusNumber(winnerNumbers, bonusNumber);
+        return new WinnerLottoTicket(winnerNumbers, LottoNumber.from(bonusNumber));
     }
 
-    public List<Long> winnerCount(LottoTickets lottoTickets) {
-        return lottoTickets.getLottoTickets().stream()
-            .mapToLong(this::winnerCount)
-            .boxed()
-            .collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    private long winnerCount(LottoTicket lottoTicket) {
+    public long findLottoMatchCount(LottoTicket lottoTicket) {
         return lottoTicket.getLottoTicket()
             .stream()
             .filter(number -> this.lottoTicket.contains(number))
             .count();
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
     }
 
     private static List<Integer> mapToInt(String[] input) {
@@ -40,6 +43,12 @@ public class WinnerLottoTicket extends AbstractLottoTicket {
                 .collect(Collectors.toCollection(ArrayList::new));
         } catch (NumberFormatException e) {
             throw new NotNumberException();
+        }
+    }
+
+    private static void validBonusNumber(List<Integer> winnerNumbers, int bonusNumber) {
+        if (winnerNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호는 당첨 번호와 달라야 합니다.");
         }
     }
 

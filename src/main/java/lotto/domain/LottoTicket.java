@@ -15,6 +15,10 @@ public class LottoTicket extends AbstractLottoTicket {
         return new LottoTicket(args);
     }
 
+    public boolean contains(LottoNumber number) {
+        return this.lottoTicket.contains(number);
+    }
+
     public Set<LottoNumber> getLottoTicket() {
         return Collections.unmodifiableSet(this.lottoTicket);
     }

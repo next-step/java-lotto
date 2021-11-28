@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import java.util.stream.Stream;
 import lotto.domain.LottoTickets;
-import lotto.domain.dto.WinningLottoTicketDto;
+import lotto.domain.dto.WinningNumberDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -21,7 +21,7 @@ public class WinningResultTest {
     }
 
     static Stream<Arguments> generateWinningLottoTicket() {
-        String winnerLottoTicket = "1, 2, 3, 4, 5, 6";
+        WinningNumberDto winnerNumberDto = WinningNumberDto.from("1, 2, 3, 4, 5, 6", 7);
         LottoTickets lottoTickets = new LottoTickets();
         lottoTickets = lottoTickets.add(Arrays.asList(8, 21, 23, 41, 42, 43));
         lottoTickets = lottoTickets.add(Arrays.asList(3, 5, 11, 16, 32, 38));
@@ -39,14 +39,14 @@ public class WinningResultTest {
         lottoTickets = lottoTickets.add(Arrays.asList(7, 11, 30, 40, 42, 43));
 
         return Stream.of(
-            Arguments.of(new WinningLottoTicketDto(lottoTickets, winnerLottoTicket), 0.35d)
+            Arguments.of(lottoTickets, winnerNumberDto, 0.35d)
         );
     }
 
     @ParameterizedTest
     @MethodSource("generateWinningLottoTicket")
-    void winningResult(WinningLottoTicketDto dto, Double yield) {
-        assertThat(winningResult.winningResult(dto).getRate()).isEqualTo(yield);
+    void winningResult(LottoTickets lottoTickets, WinningNumberDto winnerNumberDto, Double yield) {
+        assertThat(winningResult.winningResult(lottoTickets, winnerNumberDto).getRate()).isEqualTo(yield);
     }
 
 }

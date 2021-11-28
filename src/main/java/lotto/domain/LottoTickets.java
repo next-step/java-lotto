@@ -17,9 +17,8 @@ public class LottoTickets {
     }
 
     public LottoTickets add(List<Integer> numbers) {
-        List<LottoTicket> tickets = new ArrayList<>(lottoTickets);
-        tickets.add(LottoTicket.from(numbers));
-        return new LottoTickets(tickets);
+        lottoTickets.add(LottoTicket.from(numbers));
+        return this;
     }
 
     public int size() {

@@ -1,15 +1,20 @@
 package lotto.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.LottoResult;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import lotto.domain.Rate;
 import lotto.domain.WinnerLottoTicket;
 import lotto.domain.WinningRank;
-import lotto.domain.dto.ResultDto;
-import lotto.domain.dto.WinningLottoTicketDto;
+import lotto.domain.dto.LottoResultDto;
+import lotto.domain.dto.WinningNumberDto;
 
 public class WinningResult {
 
     private static class WinningResultHolder {
+
         private static final WinningResult WINNING_RESULT = new WinningResult();
     }
 
@@ -20,12 +25,19 @@ public class WinningResult {
         return WinningResultHolder.WINNING_RESULT;
     }
 
-    public ResultDto winningResult(WinningLottoTicketDto dto) {
-        WinnerLottoTicket winnerLottoTicket = WinnerLottoTicket.from(dto.getWinnerLottoTicket());
-        List<Long> winningResult = winnerLottoTicket.winnerCount(dto.getLottoTickets());
+    public LottoResultDto winningResult(LottoTickets lottoTickets, WinningNumberDto winningNumberDto) {
+        WinnerLottoTicket winnerLottoTicket = WinnerLottoTicket.of(winningNumberDto.getWinnerNumbers(),
+            winningNumberDto.getBonusNumber());
+
+        List<LottoResult> results = new ArrayList<>();
+        for (LottoTicket ticket : lottoTickets.getLottoTickets()) {
+            results.add(LottoResult.of(winnerLottoTicket, ticket));
+        }
+
         WinningRank resultRank = new WinningRank();
-        resultRank = resultRank.updateRank(winningResult);
-        return ResultDto.of(resultRank, Rate.of(resultRank.getMoney(), resultRank.getPrizeMoney()));
+        resultRank = resultRank.updateRank(results);
+
+        return LottoResultDto.of(resultRank, Rate.of(resultRank.getMoney(), resultRank.getPrizeMoney()));
     }
 
 }

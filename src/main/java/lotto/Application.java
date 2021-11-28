@@ -2,8 +2,8 @@ package lotto;
 
 import lotto.controller.LottoController;
 import lotto.domain.LottoTickets;
-import lotto.domain.dto.ResultDto;
-import lotto.domain.dto.WinningLottoTicketDto;
+import lotto.domain.dto.LottoResultDto;
+import lotto.domain.dto.WinningNumberDto;
 import lotto.view.LottoTicketCountView;
 import lotto.view.LottoTicketPrintView;
 import lotto.view.WinnerNumberView;
@@ -18,9 +18,9 @@ public class Application {
         LottoTickets lottoTickets = lottoController.autoBuyLottoTickets(money);
 
         LottoTicketPrintView.printLottoTickets(lottoTickets);
-        String winnerNumber = WinnerNumberView.getWinnerNumber();
+        WinningNumberDto winnerNumber = WinnerNumberView.getWinningNumberDto();
 
-        ResultDto dto = lottoController.lottoResult(new WinningLottoTicketDto(lottoTickets, winnerNumber));
+        LottoResultDto dto = lottoController.lottoResult(lottoTickets, winnerNumber);
         WinningResultView.resultView(dto);
     }
 
