@@ -3,7 +3,7 @@ package calculator;
 import java.util.Objects;
 
 public class Number {
-    private int value;
+    private final int value;
 
     public Number(String input) {
         this(Integer.parseInt(input));
