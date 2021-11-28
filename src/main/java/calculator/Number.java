@@ -4,8 +4,12 @@ public class Number {
     private final int value;
 
     public Number(String text) {
-        this.value = Integer.parseInt(text);
-        this.validatePositiveNumber(this.value);
+        this(Integer.parseInt(text));
+    }
+
+    public Number(int value) {
+        this.validatePositiveNumber(value);
+        this.value = value;
     }
 
     public int getValue() {
