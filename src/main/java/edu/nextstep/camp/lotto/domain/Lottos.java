@@ -42,11 +42,16 @@ public class Lottos {
         return lottos;
     }
 
-    public GameResult winningResult(Lotto winningNumber) {
+    public GameResult winningResult(Lotto winningNumber, LottoNumber bonus) {
+        // todo add Lotto#contains
+        if (winningNumber.collect().contains(bonus)) {
+            throw new IllegalArgumentException("invalid input: winning number and bonus number must be exclusive");
+        }
+
         List<Rank> ranks = new ArrayList<>(lottos.size());
         for (Lotto lotto : lottos) {
             int matchedCount = lotto.matchedCount(winningNumber);
-            ranks.add(Rank.valueOf(matchedCount));
+            ranks.add(Rank.valueOf(matchedCount, lotto.collect().contains(bonus)));
         }
         return GameResult.of(Ranks.of(ranks));
     }

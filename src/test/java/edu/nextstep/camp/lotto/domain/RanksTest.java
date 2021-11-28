@@ -19,9 +19,9 @@ public class RanksTest {
     static Stream<Arguments> parseRanksArguments() {
         return Stream.of(
                 Arguments.of(List.of(), Collections.emptyMap()),
-                Arguments.of(List.of(Rank.valueOf(6)), Map.of(Rank.FIRST, 1)),
-                Arguments.of(List.of(Rank.valueOf(3)), Map.of(Rank.FOURTH, 1)),
-                Arguments.of(List.of(Rank.valueOf(3), Rank.valueOf(3)), Map.of(Rank.FOURTH, 2))
+                Arguments.of(List.of(Rank.valueOf(6, false)), Map.of(Rank.FIRST, 1)),
+                Arguments.of(List.of(Rank.valueOf(3, false)), Map.of(Rank.FIFTH, 1)),
+                Arguments.of(List.of(Rank.valueOf(3, false), Rank.valueOf(3, false)), Map.of(Rank.FIFTH, 2))
         );
     }
 
@@ -29,7 +29,6 @@ public class RanksTest {
     @MethodSource("parseRanksArguments")
     public void create(List<Rank> input, Map<Rank, Integer> expected) {
         assertThat(Ranks.of(input)).isEqualTo(Ranks.of(input));
-        assertThat(Ranks.of(input).collect()).containsAllEntriesOf(expected);
         assertThat(Ranks.of(input).collect()).containsAllEntriesOf(expected);
     }
 
@@ -85,9 +84,10 @@ public class RanksTest {
         return Stream.of(
                 Arguments.of(List.of(Rank.FIRST, Rank.FIRST), 4000000000L),
                 Arguments.of(List.of(Rank.FIRST), 2000000000L),
-                Arguments.of(List.of(Rank.SECOND), 1500000L),
-                Arguments.of(List.of(Rank.THIRD), 50000L),
-                Arguments.of(List.of(Rank.FOURTH), 5000L),
+                Arguments.of(List.of(Rank.SECOND), 3000000L),
+                Arguments.of(List.of(Rank.THIRD), 1500000L),
+                Arguments.of(List.of(Rank.FOURTH), 50000L),
+                Arguments.of(List.of(Rank.FIFTH), 5000L),
                 Arguments.of(List.of(Rank.NO_RANK), 0L)
         );
     }

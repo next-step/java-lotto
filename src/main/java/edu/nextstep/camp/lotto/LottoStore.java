@@ -5,6 +5,7 @@ import java.util.Collection;
 import edu.nextstep.camp.lotto.domain.AutoLottoGenerator;
 import edu.nextstep.camp.lotto.domain.GameResult;
 import edu.nextstep.camp.lotto.domain.Lotto;
+import edu.nextstep.camp.lotto.domain.LottoNumber;
 import edu.nextstep.camp.lotto.domain.PurchaseList;
 import edu.nextstep.camp.lotto.view.InputView;
 import edu.nextstep.camp.lotto.view.OutputView;
@@ -16,7 +17,8 @@ public class LottoStore {
         OutputView.printPurchasedLotto(purchaseList.collect());
 
         final Collection<Integer> winningNumbers = InputView.inputWinningNumber();
-        final GameResult gameResult = purchaseList.winningResult(Lotto.fromIntegers(winningNumbers));
+        final int bonusNumber = InputView.inputBonusNumber();
+        final GameResult gameResult = purchaseList.winningResult(Lotto.fromIntegers(winningNumbers), LottoNumber.of(bonusNumber));
         OutputView.printGameResult(gameResult.collect(), gameResult.totalPrize().toLong(), gameResult.priceEarningRate());
     }
 }

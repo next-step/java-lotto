@@ -43,9 +43,10 @@ public class GameResultTest {
         return Stream.of(
                 Arguments.of(Ranks.of(List.of(Rank.FIRST, Rank.FIRST)), 4000000000L),
                 Arguments.of(Ranks.of(List.of(Rank.FIRST)), 2000000000L),
-                Arguments.of(Ranks.of(List.of(Rank.SECOND)), 1500000L),
-                Arguments.of(Ranks.of(List.of(Rank.THIRD)), 50000L),
-                Arguments.of(Ranks.of(List.of(Rank.FOURTH)), 5000L),
+                Arguments.of(Ranks.of(List.of(Rank.SECOND)), 3000000L),
+                Arguments.of(Ranks.of(List.of(Rank.THIRD)), 1500000L),
+                Arguments.of(Ranks.of(List.of(Rank.FOURTH)), 50000L),
+                Arguments.of(Ranks.of(List.of(Rank.FIFTH)), 5000L),
                 Arguments.of(Ranks.of(List.of(Rank.NO_RANK)), 0L)
         );
     }
@@ -60,9 +61,10 @@ public class GameResultTest {
         return Stream.of(
                 Arguments.of(List.of(Rank.FIRST, Rank.FIRST), 2000000),
                 Arguments.of(List.of(Rank.FIRST), 2000000),
-                Arguments.of(List.of(Rank.SECOND), 1500),
-                Arguments.of(List.of(Rank.THIRD), 50),
-                Arguments.of(List.of(Rank.FOURTH), 5),
+                Arguments.of(List.of(Rank.SECOND), 3000),
+                Arguments.of(List.of(Rank.THIRD), 1500),
+                Arguments.of(List.of(Rank.FOURTH), 50),
+                Arguments.of(List.of(Rank.FIFTH), 5),
                 Arguments.of(List.of(Rank.NO_RANK), 0)
         );
     }

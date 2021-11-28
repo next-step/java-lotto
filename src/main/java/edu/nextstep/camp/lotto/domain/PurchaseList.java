@@ -38,7 +38,7 @@ public class PurchaseList {
                 .collect(Collectors.toList());
     }
 
-    public GameResult winningResult(Lotto winningNumber) {
-        return lottos.winningResult(winningNumber);
+    public GameResult winningResult(Lotto winningNumber, LottoNumber bonus) {
+        return lottos.winningResult(winningNumber, bonus);
     }
 }

@@ -3,6 +3,7 @@ package edu.nextstep.camp.lotto.domain;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -52,7 +53,7 @@ public class LottosTest {
                 // 3 matched
                 Arguments.of(
                         Lottos.of(List.of(Lotto.fromIntegers(List.of(1, 2, 3, 13, 14, 15)))),
-                        GameResult.of(Ranks.of(List.of(Rank.FOURTH)))
+                        GameResult.of(Ranks.of(List.of(Rank.FIFTH)))
                 ),
                 // 6 matched
                 Arguments.of(
@@ -65,7 +66,7 @@ public class LottosTest {
                                 Lotto.fromIntegers(List.of(1, 2, 3, 13, 14, 15)),
                                 Lotto.fromIntegers(List.of(1, 2, 3, 13, 14, 15))
                         )),
-                        GameResult.of(Ranks.of(List.of(Rank.FOURTH, Rank.FOURTH)))
+                        GameResult.of(Ranks.of(List.of(Rank.FIFTH, Rank.FIFTH)))
                 ),
                 // 6 matched with 2 lottos
                 Arguments.of(
@@ -74,6 +75,13 @@ public class LottosTest {
                                 Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6))
                         )),
                         GameResult.of(Ranks.of(List.of(Rank.FIRST, Rank.FIRST)))
+                ),
+                // 5 matched with bonus matched
+                Arguments.of(
+                        Lottos.of(List.of(
+                                Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 7))
+                        )),
+                        GameResult.of(Ranks.of(List.of(Rank.SECOND)))
                 )
         );
     }
@@ -82,6 +90,16 @@ public class LottosTest {
     @MethodSource("parseWinningResult")
     public void winningResult(Lottos lottos, GameResult expected) {
         final Lotto winningNumber = Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6));
-        assertThat(lottos.winningResult(winningNumber)).isEqualTo(expected);
+        final LottoNumber bonus = LottoNumber.of(7);
+        assertThat(lottos.winningResult(winningNumber, bonus)).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("check winning result failed due to bonus is in winning number")
+    public void winningResultFailed() {
+        final Lottos lottos = Lottos.of(List.of(Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6))));
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lottos.winningResult(Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6)), LottoNumber.of(1)))
+                .withMessageContaining("winning number and bonus number must be exclusive");
     }
 }
