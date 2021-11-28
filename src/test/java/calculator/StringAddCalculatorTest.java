@@ -2,17 +2,26 @@ package calculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringAddCalculatorTest {
 
-    @Test
-    void splitAndSum_빈문자열_널_0반환() {
-
+    @ParameterizedTest
+    @NullAndEmptySource
+    void splitAndSum_빈문자열_널_0반환(String input) {
+        int result = StringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(0);
     }
 
-    @Test
-    void splitAndSum_숫자하나() {
-
+    @ParameterizedTest
+    @CsvSource(value = {"1:1", "3:3", "5:5"}, delimiter = ':')
+    void splitAndSum_숫자하나(String input, int expected) {
+        int result = StringAddCalculator.splitAndSum(input);
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
