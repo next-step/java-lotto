@@ -53,8 +53,8 @@ public class LottoTicket {
     return numbers.size();
   }
 
-  public List<LottoNumber> getNumbers() {
-    return numbers;
+  protected List<LottoNumber> getNumbers() {
+    return Collections.unmodifiableList(numbers);
   }
 
   @Override
