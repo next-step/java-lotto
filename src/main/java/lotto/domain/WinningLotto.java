@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,7 +8,7 @@ import static lotto.domain.Lotto.SIZE;
 
 public class WinningLotto {
 
-    private List<LottoNumber> winningLotto;
+    private final List<LottoNumber> winningLotto;
 
     private WinningLotto(String winningLottoString) {
         List<LottoNumber> winningLotto = parseIntWinningLotto(winningLottoString);
