@@ -25,8 +25,15 @@ public class StringAddCalculatorTest {
     }
 
     @Test
-    void splitAndSum_구분자_컴마또는콜론() {
+    void splitAndSum_구분자_컴마() {
+        int result = StringAddCalculator.splitAndSum("1,2,5");
+        assertThat(result).isEqualTo(8);
+    }
 
+    @Test
+    void splitAndSum_구분자_컴마또는콜론() {
+        int result = StringAddCalculator.splitAndSum("1,2:3");
+        assertThat(result).isEqualTo(6);
     }
 
     @DisplayName("//와 \n문자 사이로 커스텀 구분자를 지정 가능")
