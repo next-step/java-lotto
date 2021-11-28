@@ -1,10 +1,7 @@
 package lotto.model;
 
 import common.model.Number;
-import lotto.factory.LottoNumbersFactory;
-import lotto.generator.LottoNumberGenerator;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,28 +12,6 @@ public class Lotto {
 
     public Lotto(List<LottoNumbers> lottoNumbers) {
         this.lotto = lottoNumbers;
-    }
-
-    public Lotto(int count) {
-        this.lotto = autoCreateLotto(count);
-    }
-
-    public Lotto(List<LottoNumbers> manualLottoNumbers, int count) {
-        this.lotto = manualLottoNumbers;
-        merge(autoCreateLotto(count - manualLottoNumbers.size()));
-    }
-
-    private List<LottoNumbers> autoCreateLotto(int count) {
-        List<LottoNumbers> lotto = new ArrayList<>();
-        LottoNumberGenerator generator = new LottoNumberGenerator();
-        for (int i = 0; i < count; i++) {
-            lotto.add(LottoNumbersFactory.autoCreateNumbers(generator));
-        }
-        return lotto;
-    }
-
-    private void merge(List<LottoNumbers> lottoNumbers) {
-        this.lotto.addAll(lottoNumbers);
     }
 
     public Map<LottoRank, Number> matchAll(LottoWinner winner) {
@@ -51,7 +26,6 @@ public class Lotto {
 
         return lottoRankNumbers;
     }
-
 
     public int getLottoSize() {
         return lotto.size();

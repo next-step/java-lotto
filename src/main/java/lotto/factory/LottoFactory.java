@@ -1,8 +1,10 @@
 package lotto.factory;
 
+import lotto.generator.LottoNumberGenerator;
 import lotto.model.Lotto;
 import lotto.model.LottoNumbers;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -17,5 +19,24 @@ public class LottoFactory {
 
     public static Lotto manualCreateSingleLotto(LottoNumbers lottoNumbers) {
         return new Lotto(Collections.singletonList(lottoNumbers));
+    }
+
+    public static Lotto autoCreateLotto(int count) {
+        List<LottoNumbers> lotto = new ArrayList<>();
+
+        for (int i = 0; i < count; i++) {
+            lotto.add(LottoNumbersFactory.autoCreateSingleNumbers(new LottoNumberGenerator()));
+        }
+
+        return new Lotto(lotto);
+    }
+
+    public static Lotto mixCreateLotto(List<LottoNumbers> manualLottoNumbers, int count) {
+        List<LottoNumbers> autoLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            autoLottoNumbers.add(LottoNumbersFactory.autoCreateSingleNumbers(new LottoNumberGenerator()));
+        }
+        manualLottoNumbers.addAll(autoLottoNumbers);
+        return new Lotto(manualLottoNumbers);
     }
 }

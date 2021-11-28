@@ -1,6 +1,7 @@
 package lotto.model;
 
 import common.model.Number;
+import lotto.factory.LottoFactory;
 
 import java.util.Map;
 
@@ -12,8 +13,7 @@ public class LottoStore {
     }
 
     public static Lotto ticket(int purchaseAmount) {
-        int count = purchaseAmount / LOTTO_PRICE;
-        return new Lotto(count);
+        return LottoFactory.autoCreateLotto(purchaseAmount / LOTTO_PRICE);
     }
 
     public static float calculateRateOfRevenue(Map<LottoRank, Number> lottoRankNumbers, int purchaseAmount) {
