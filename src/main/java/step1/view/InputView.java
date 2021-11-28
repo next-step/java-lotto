@@ -13,6 +13,6 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
-        return Inputs.create(input);
+        return new Inputs(input);
     }
 }

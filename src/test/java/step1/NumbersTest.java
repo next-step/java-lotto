@@ -34,11 +34,11 @@ public class NumbersTest {
     @Test
     @DisplayName("input String의 숫자 사이 구분자 유효성 체크")
     void validate() {
-        assertThatThrownBy(() -> Inputs.create("1;2,4"))
+        assertThatThrownBy(() -> new Inputs("1;2,4"))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("입력 구분자 오류");
 
-        assertThatThrownBy(() -> Inputs.create("//$\n1,2,4"))
+        assertThatThrownBy(() -> new Inputs("//$\n1,2,4"))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("입력 구분자 오류");
 

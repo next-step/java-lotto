@@ -11,34 +11,12 @@ public class Inputs {
     private final Delimiters delimiters;
     private final Numbers numbers;
 
-    private Inputs(Delimiters delimiters, Numbers numbers) {
-        this.delimiters = delimiters;
-        this.numbers = numbers;
+    public Inputs(String input) {
+        this.delimiters = isHaveDelimiters(input) ? extractDelimiters(input) : Delimiters.createWithoutInput();
+        this.numbers = extractNumbers(input, delimiters);
     }
 
-    public static Inputs create(String input) {
-        if (isHaveDelimiters(input)) {
-            return createWithDelimiters(input);
-        }
-
-        return createWithoutDelimiters(input);
-    }
-
-    private static Inputs createWithDelimiters(String input) {
-        Delimiters delimiters = extractDelimiters(input);
-        Numbers numbers = extractNumbers(input, delimiters);
-
-        return new Inputs(delimiters, numbers);
-    }
-
-    private static Inputs createWithoutDelimiters(String input) {
-        Delimiters delimiters = Delimiters.createWithoutInput();
-        Numbers numbers = extractNumbers(input, delimiters);
-
-        return new Inputs(delimiters, numbers);
-    }
-
-    private static Delimiters extractDelimiters(String input) {
+    private Delimiters extractDelimiters(String input) {
         Matcher matcher = EXTRACT_DELIMITERS_PATTERN.matcher(input);
 
         if (matcher.find()) {
@@ -48,14 +26,14 @@ public class Inputs {
         return null;
     }
 
-    private static Numbers extractNumbers(String input, Delimiters delimiters) {
+    private Numbers extractNumbers(String input, Delimiters delimiters) {
         Matcher matcher = EXTRACT_NUMBERS_PATTERN.matcher(input);
         String extract = matcher.find() ? matcher.group(0) : input;
 
         return new Numbers(extract.split(delimiters.joining()));
     }
 
-    public static boolean isHaveDelimiters(String input) {
+    private boolean isHaveDelimiters(String input) {
         Matcher matcher = EXTRACT_DELIMITERS_PATTERN.matcher(input);
 
         return matcher.find();
