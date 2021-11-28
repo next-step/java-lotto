@@ -1,4 +1,4 @@
-package lotto.step3.domain;
+package lotto.lottogame.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,13 +12,6 @@ public class OrderPriceTest {
     void create() {
         OrderPrice orderPrice = new OrderPrice(14000);
         assertThat(orderPrice).isEqualTo(new OrderPrice(14000));
-    }
-
-    @Test
-    @DisplayName("가격을 받아서 OrderCount 객체 생성")
-    void calculateOrderCount() {
-        OrderPrice orderPrice = new OrderPrice(14000);
-        assertThat(orderPrice.createOrderCount()).isEqualTo(new OrderCount(14));
     }
 
     @Test

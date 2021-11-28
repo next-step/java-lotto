@@ -1,17 +1,22 @@
-package lotto.step3.domain;
+package lotto.lottogame.domain;
 
 import java.util.Objects;
 
 public class OrderCount {
 
-    private static final int MIN_ORDER_COUNT = 1;
+    private static final int MIN_ORDER_COUNT = 0;
+
     private final int orderCount;
 
     public OrderCount(int orderCount) {
         if (orderCount < MIN_ORDER_COUNT) {
-            throw new IllegalArgumentException("최소 주문은 1장 이상입니다.");
+            throw new IllegalArgumentException("주문 수량은 금액과 맞지 않습니다.");
         }
         this.orderCount = orderCount;
+    }
+
+    public int calculateAutoCount(OrderCount calculateAllCount) {
+        return calculateAllCount.getOrderCount() - this.orderCount;
     }
 
     public int getOrderCount() {
