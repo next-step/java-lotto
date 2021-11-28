@@ -16,8 +16,8 @@ public class ResultView {
     public void purchaseLottiesInformation(Lotties lotties) {
         System.out.printf((PURCHASE_LOTTO_COUNT_MESSAGE) + "%n", lotties.purchaseLottiesCount());
         lotties.getLotties().stream()
-                .map(Lotto::showLottoNumber)
-                .forEach(n -> System.out.printf((LOTTO_NUMBER_TEXT_MESSAGE) + "%n",n));
+                .map(Lotto::getNumbers)
+                .forEach(n -> System.out.printf((LOTTO_NUMBER_TEXT_MESSAGE) + "%n", n));
         System.out.println();
     }
 
