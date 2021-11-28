@@ -1,32 +1,31 @@
 package lotto;
 
-import lotto.domain.LottoNumber;
+import lotto.domain.Lotto;
 import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import lotto.domain.Lotto;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import static org.assertj.core.api.Assertions.*;
-import static lotto.domain.Lotto.SIZE;
-
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static lotto.domain.Lotto.SIZE;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 public class LottoTest {
     private static Stream<Arguments> generateArgumentsStream() {
         List<Arguments> listOfArguments = new LinkedList<>();
-        listOfArguments.add(Arguments.of(WinningLotto.ofStringAndBonusBall("1,2,3,4,5,6", LottoNumber.ofInt(6))));
-        listOfArguments.add(Arguments.of(WinningLotto.ofStringAndBonusBall("1,2,13,14,15,6", LottoNumber.ofInt(3))));
-        listOfArguments.add(Arguments.of(WinningLotto.ofStringAndBonusBall("12,13,14,5,6,7", LottoNumber.ofInt(2))));
-        listOfArguments.add(Arguments.of(WinningLotto.ofStringAndBonusBall("1,2,3,4,8,9", LottoNumber.ofInt(3))));
-        listOfArguments.add(Arguments.of(WinningLotto.ofStringAndBonusBall("1,2,4,7,6,3", LottoNumber.ofInt(5))));
-        listOfArguments.add(Arguments.of(WinningLotto.ofStringAndBonusBall("11,12,13,14,15,6", LottoNumber.ofInt(1))));
-        listOfArguments.add(Arguments.of(WinningLotto.ofStringAndBonusBall("14,15,25,35,45,33", LottoNumber.ofInt(10))));
+        listOfArguments.add(Arguments.of(WinningLotto.ofString("1,2,3,4,5,6"), 6));
+        listOfArguments.add(Arguments.of(WinningLotto.ofString("1,2,13,14,15,6"), 3));
+        listOfArguments.add(Arguments.of(WinningLotto.ofString("12,13,14,5,6,7"), 2));
+        listOfArguments.add(Arguments.of(WinningLotto.ofString("1,2,3,4,8,9"), 4));
+        listOfArguments.add(Arguments.of(WinningLotto.ofString("1,2,4,7,6,3"), 5));
+        listOfArguments.add(Arguments.of(WinningLotto.ofString("11,12,13,14,15,6"), 1));
+        listOfArguments.add(Arguments.of(WinningLotto.ofString("14,15,25,35,45,33"), 0));
         return listOfArguments.stream();
     }
 
