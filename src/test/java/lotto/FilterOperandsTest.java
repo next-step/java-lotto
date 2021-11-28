@@ -3,14 +3,12 @@ package lotto;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class FilterOperandsTest {
     private final FilterOperands dut = new FilterOperands();
@@ -25,12 +23,6 @@ public class FilterOperandsTest {
     @MethodSource("rawFormulaAndDelimiterToOperands")
     void filterWithCustomDelimiter(String rawFormula, Delimiter delimiter, Collection<Operand> operands) {
         assertThat(dut.filter(rawFormula, delimiter)).containsExactlyElementsOf(operands);
-    }
-
-    @ParameterizedTest(name = "{displayName} - {arguments}")
-    @ValueSource(strings = {"1,2,-3", "1,2,&"})
-    void operandMustBeZeroOrPositiveNumber(String rawFormula) {
-        assertThatThrownBy(() -> dut.filter(rawFormula)).isInstanceOf(IllegalArgumentException.class);
     }
 
     static Stream<Arguments> rawFormulaToOperands() {

@@ -26,17 +26,9 @@ public class FilterOperands {
         String delimiterRegexp = delimiters.stream().map(Delimiter::getValue).collect(Collectors.joining("|"));
         return Collections.unmodifiableCollection(
                 Arrays.stream(operandsWithDelimiters.split(delimiterRegexp))
-                        .map(this::castRawOperand)
+                        .map(Operand::new)
                         .collect(Collectors.toList())
         );
-    }
-
-    private Operand castRawOperand(String rawOperand) {
-        if (!isNumeric(rawOperand)) {
-            throw new IllegalArgumentException("operand is not numeric. operand:" + rawOperand);
-        }
-
-        return new Operand(Integer.parseInt(rawOperand));
     }
 
     private Delimiter escapeDanglingMetaCharacter(Delimiter delimiter) {
@@ -44,14 +36,5 @@ public class FilterOperands {
             return new Delimiter("\\" + delimiter.getValue());
         }
         return delimiter;
-    }
-
-    private boolean isNumeric(String raw) {
-        try {
-            Integer.parseInt(raw);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
     }
 }

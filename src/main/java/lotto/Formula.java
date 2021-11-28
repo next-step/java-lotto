@@ -10,7 +10,7 @@ public class Formula {
     }
 
     public Integer calculate(String rawFormula) {
-        if(rawFormula == null || rawFormula.trim().isEmpty()) {
+        if (rawFormula == null || rawFormula.trim().isEmpty()) {
             throw new IllegalArgumentException("rawFormula is null or blank.");
         }
 

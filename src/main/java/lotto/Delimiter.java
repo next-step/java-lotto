@@ -6,6 +6,9 @@ public class Delimiter {
     private final String value;
 
     public Delimiter(String value) {
+        if (value == null || value.trim().isEmpty()) {
+            throw new IllegalArgumentException("delimiter is null or blank.");
+        }
         this.value = value;
     }
 
