@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTest {
 
@@ -25,7 +24,7 @@ class LottoTest {
         Lotto buyLotto = Lotto.from(buyLottoString);
         Lotto winLotto = Lotto.from(winLottoString);
 
-        assertThat(buyLotto.showLottoNumber()).isEqualTo(winLotto.showLottoNumber());
+        assertThat(buyLotto.getNumbers()).isEqualTo(winLotto.getNumbers());
     }
 
     @DisplayName("로또번호 번호 체크 테스트")
