@@ -2,10 +2,20 @@ package lotto.service;
 
 import java.util.List;
 import lotto.domain.LottoTickets;
+import lotto.domain.Money;
 import lotto.exception.MinimumAmountException;
 import lotto.util.AutoLottoNumberUtils;
 
-public class LottoTicketBooth {
+public class LottoTicketBooth implements LottoTicketsGenerator {
+
+    public LottoTickets generate(Money money) {
+        money.autoCount();
+        return null;
+    }
+
+    public LottoTickets generate(List<String> manualLottoNumbers) {
+        return null;
+    }
 
     private static class LottoTicketBoothHolder {
 
