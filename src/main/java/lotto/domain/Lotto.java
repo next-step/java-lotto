@@ -12,21 +12,6 @@ public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto() {
-        this(pickRandomNumber());
-    }
-
-    private static List<LottoNumber> pickRandomNumber() {
-        Set<LottoNumber> tmpLottoNumbers = new HashSet<>();
-        while (tmpLottoNumbers.size() < NUMBER_COUNT) {
-            tmpLottoNumbers.add(LottoNumber.valueOf(RandomUtil.randomInt(LottoNumber.MAX_VALUE)));
-        }
-
-        List<LottoNumber> lottoNumbers = new ArrayList<>(tmpLottoNumbers);
-        Collections.sort(lottoNumbers);
-        return lottoNumbers;
-    }
-
     public Lotto(final String numbers) {
         this(Arrays.stream(numbers.split(STRING_NUMBERS_DELIMITER))
                 .map(String::trim)
@@ -43,10 +28,25 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int countMatch(Lotto winLotto) {
+    public static Lotto pickRandomNumber() {
+        Set<LottoNumber> tmpLottoNumbers = new HashSet<>();
+        while (tmpLottoNumbers.size() < NUMBER_COUNT) {
+            tmpLottoNumbers.add(LottoNumber.valueOf(RandomUtil.randomInt(LottoNumber.MAX_VALUE)));
+        }
+
+        List<LottoNumber> lottoNumbers = new ArrayList<>(tmpLottoNumbers);
+        Collections.sort(lottoNumbers);
+        return new Lotto(lottoNumbers);
+    }
+
+    public int countMatch(Lotto other) {
         return (int) lottoNumbers.stream()
-                .filter(winLotto.lottoNumbers::contains)
+                .filter(other.lottoNumbers::contains)
                 .count();
+    }
+
+    public boolean contains(LottoNumber number) {
+        return lottoNumbers.contains(number);
     }
 
     public List<LottoNumber> getLottoNumbers() {

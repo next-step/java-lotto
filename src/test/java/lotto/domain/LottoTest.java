@@ -1,21 +1,24 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 class LottoTest {
+
+    private final Lotto baseLotto = new Lotto("1, 2, 3, 4, 5, 6");
 
     @DisplayName("문자열숫자 6개로 로또를 생성한다.")
     @ParameterizedTest
     @ValueSource(strings = {"1, 2, 3, 4, 5, 45"})
     void create_string(String lottoNumbers) {
-        Assertions.assertDoesNotThrow(() -> new Lotto(lottoNumbers));
+        assertDoesNotThrow(() -> new Lotto(lottoNumbers));
     }
 
     @DisplayName("문자열숫자 6개로 로또를 생성한다.(범위 이외의 숫자_실패)")
@@ -45,9 +48,27 @@ class LottoTest {
             delimiter = '|')
     void countMatch(String lottoNumbers, int matchCount) {
         Lotto lotto = new Lotto(lottoNumbers);
-        Lotto winLotto = new Lotto("1, 2, 3, 4, 5, 6");
+        Lotto winLotto = baseLotto;
 
         assertThat(lotto.countMatch(winLotto)).isEqualTo(matchCount);
+    }
+
+    @DisplayName("로또가 보너스 번호를 포함하고 있는지 확인")
+    @Test
+    void contains() {
+        Lotto lotto = baseLotto;
+        LottoNumber bonus = LottoNumber.valueOf(6);
+
+        assertThat(lotto.contains(bonus)).isTrue();
+    }
+
+    @DisplayName("로또가 보너스 번호를 포함하고 있는지 확인_실패")
+    @Test
+    void contains_fail() {
+        Lotto lotto = baseLotto;
+        LottoNumber bonus = LottoNumber.valueOf(7);
+
+        assertThat(lotto.contains(bonus)).isFalse();
     }
 
 }

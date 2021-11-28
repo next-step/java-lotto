@@ -1,11 +1,8 @@
 package lotto.domain;
 
-import lotto.domain.enums.Rank;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -20,7 +17,7 @@ public class Lottos {
         }
 
         for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto());
+            lottos.add(Lotto.pickRandomNumber());
         }
     }
 
@@ -28,12 +25,8 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Ranks checkWinning(Lotto winLotto) {
-        return new Ranks(lottos.stream()
-                .mapToInt(winLotto::countMatch)
-                .mapToObj(Rank::valueOf)
-                .collect(Collectors.toList())
-        );
+    public Ranks checkWinning(WinLotto winLotto) {
+        return winLotto.checkWinning(lottos);
     }
 
     public List<Lotto> getLottos() {
@@ -41,7 +34,7 @@ public class Lottos {
     }
 
     public int size() {
-        return this.lottos.size();
+        return lottos.size();
     }
 
 }
