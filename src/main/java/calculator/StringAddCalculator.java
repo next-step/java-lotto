@@ -25,18 +25,34 @@ public class StringAddCalculator {
 
     static List<Integer> split(String input) {
         return Arrays.stream(input.split(BASIC_DELIMITER))
-                .map(Integer::parseInt)
+                .map(StringAddCalculator::parseInt)
                 .collect(Collectors.toList());
     }
 
     static List<Integer> splitWithCustomDelimiter(Matcher matcher) {
         String customDelimiter = matcher.group(1);
         return Arrays.stream(matcher.group(2).split(customDelimiter))
-                .map(Integer::parseInt)
+                .map(StringAddCalculator::parseInt)
                 .collect(Collectors.toList());
     }
 
     static Matcher getCustomDelimiterMatcher(String input) {
         return CUSTOM_DELIMITER_PATTERN.matcher(input);
+    }
+
+    static Integer parseInt(String numberString) {
+        try {
+            Integer number = Integer.parseInt(numberString);
+            checkIsNegative(number);
+            return number;
+        } catch (NumberFormatException e) {
+            throw new RuntimeException();
+        }
+    }
+
+    static void checkIsNegative(Integer number) {
+        if (number < 0) {
+            throw new RuntimeException();
+        }
     }
 }
