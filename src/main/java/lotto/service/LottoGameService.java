@@ -1,29 +1,20 @@
 package lotto.service;
 
-import lotto.domain.BonusLottoNumber;
-import lotto.domain.LottoGameCount;
-import lotto.domain.LottoNumbers;
-import lotto.domain.Lottoes;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.Objects;
-
-import static lotto.utils.Constants.NUMBER_THOUSAND;
 
 public class LottoGameService {
     private LottoGameCount lottoGameCount;
     private Lottoes lottoes;
     private LottoNumbers lastWeekWinningNumbers;
     private BonusLottoNumber bonusLottoNumber;
+    private LottoResult lottoResult;
 
     public LottoGameService() {
         lottoes = new Lottoes();
-    }
-
-    public LottoGameService(LottoGameCount lottoGameCount, Lottoes lottoes) {
-        this.lottoGameCount = lottoGameCount;
-        this.lottoes = lottoes;
     }
 
     public void buyLotto() {
@@ -49,18 +40,9 @@ public class LottoGameService {
     }
 
     public void resultWinLotto() {
-
-        OutputView.drawResultWinLotto(lottoes);
-    }
-
-    public void resultTotalReward() {
-        lottoes.calculateTotalReward();
-        OutputView.drawTotalReward(calculateYield());
-    }
-
-    public Double calculateYield() {
-        return (lottoes.getTotalReward().doubleValue() /
-                (lottoGameCount.getLottoGameCount().doubleValue() * NUMBER_THOUSAND));
+        lottoResult = new LottoResult();
+        lottoResult.calculateResultWin(lottoes.getLottoGames());
+        OutputView.drawResultWinLotto(lottoGameCount, lottoResult);
     }
 
     @Override

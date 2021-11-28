@@ -33,6 +33,10 @@ public class LottoGame {
         return matchedCount;
     }
 
+    public boolean getMatchBonus() {
+        return matchBonus;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

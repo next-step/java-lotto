@@ -43,11 +43,4 @@ public class LottosTest {
         assertThat(lottoes.winRankLottoCount(6L))
                 .isEqualTo(1);
     }
-
-    @Test
-    @DisplayName("총상금을 계산한다.")
-    public void calculateTotalReward() {
-        lottoes.calculateTotalReward();
-        assertThat(lottoes.getTotalReward()).isEqualTo(2001555000L);
-    }
 }

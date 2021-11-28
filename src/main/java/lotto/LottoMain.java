@@ -10,6 +10,5 @@ public class LottoMain {
         lottoGameService.getBonusLottonumber();
         lottoGameService.matchLottoNumbers();
         lottoGameService.resultWinLotto();
-        lottoGameService.resultTotalReward();
     }
 }

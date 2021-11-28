@@ -16,10 +16,6 @@ public class InputView {
     private static InputPrice inputPrice;
     private static final Scanner scanner = new Scanner(System.in);
 
-    private InputView() {
-
-    }
-
     public InputView(InputPrice inputPrice) {
         this.inputPrice = inputPrice;
     }

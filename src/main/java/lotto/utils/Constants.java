@@ -3,9 +3,6 @@ package lotto.utils;
 public class Constants {
     public static final int NUMBER_ZERO = 0;
     public static final int NUMBER_ONE = 1;
-    public static final int NUMBER_THREE = 3;
-    public static final int NUMBER_FOUR = 4;
-    public static final int NUMBER_FIVE = 5;
     public static final int NUMBER_SIX = 6;
     public static final int NUMBER_FORTY_FIVE = 45;
     public static final int NUMBER_THOUSAND = 1000;
@@ -22,6 +19,10 @@ public class Constants {
     public static final String MSG_TOTAL_YIELD = "총 수익률은 ";
     public static final String MSG_IS = "입니다.";
     public static final String MSG_WINNING_STATISTICS = "당첨 통계";
+    public static final String MSG_NUMBER_SAME = "개 일치";
+    public static final String MSG_BONUS_SAME =  " 보너스 볼 일치";
+    public static final String MSG_BRACKET = " (";
+    public static final String MSG_WON_BRACKET = "원) - ";
     public static final String MSG_DASH_TEN = "---------";
 
     public static final String COMMA = ",";
