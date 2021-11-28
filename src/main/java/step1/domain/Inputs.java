@@ -5,7 +5,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Inputs {
-    public static final Pattern EXTRACT_DELIMITER_PATTERN = Pattern.compile("(?<=//).+(?=\n)");
+    public static final Pattern EXTRACT_DELIMITERS_PATTERN = Pattern.compile("(?<=//).+(?=\n)");
+    public static final Pattern EXTRACT_NUMBERS_PATTERN = Pattern.compile("(?<=\n).+");
 
     private final Delimiters delimiters;
     private final Numbers numbers;
@@ -16,24 +17,42 @@ public class Inputs {
     }
 
     public static Inputs createWithDelimiters(String input) {
-        Delimiter extractDelimiter = extractDelimiters(input);
-        Numbers extractNumbers = Delimiters.createWithDelimiter(extractDelimiter).split(input);
+        Delimiters delimiters = extractDelimiters(input);
+        Numbers numbers = extractNumbers(input, delimiters);
 
-        return new Inputs(Delimiters.createWithDelimiter(extractDelimiter), extractNumbers);
+        return new Inputs(delimiters, numbers);
     }
 
     public static Inputs createWithoutDelimiters(String input) {
-        Delimiters delimiters = Delimiters.createWithoutDelimiter();
-        return new Inputs(Delimiters.createWithoutDelimiter(), delimiters.split(input));
+        Delimiters delimiters = Delimiters.createWithoutInput();
+        Numbers numbers = extractNumbers(input, delimiters);
+
+        return new Inputs(delimiters, numbers);
     }
 
-    private static Delimiter extractDelimiters(String input) {
-        Matcher matcher = EXTRACT_DELIMITER_PATTERN.matcher(input);
-        return new Delimiter(matcher.group(0));
+    private static Delimiters extractDelimiters(String input) {
+        Matcher matcher = EXTRACT_DELIMITERS_PATTERN.matcher(input);
+
+        if (matcher.find()) {
+            return Delimiters.createWithInput(new Delimiter(matcher.group(0)));
+        }
+
+        return null;
+    }
+
+    private static Numbers extractNumbers(String input, Delimiters delimiters) {
+        Matcher matcher = EXTRACT_NUMBERS_PATTERN.matcher(input);
+
+        if (matcher.find()) {
+            String numbers = matcher.group(0);
+            return new Numbers(numbers.split(delimiters.joining()));
+        }
+
+        return new Numbers(input.split(delimiters.joining()));
     }
 
     public static boolean isHaveDelimiters(String input) {
-        Matcher matcher = EXTRACT_DELIMITER_PATTERN.matcher(input);
+        Matcher matcher = EXTRACT_DELIMITERS_PATTERN.matcher(input);
         return matcher.find();
     }
 

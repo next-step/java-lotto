@@ -15,29 +15,23 @@ public class Delimiters {
         this.delimiters = delimiters;
     }
 
-    public static Delimiters createWithoutDelimiter() {
+    public static Delimiters createWithoutInput() {
         return new Delimiters(Arrays.stream(BASE_DELIMITERS)
                 .map(d -> new Delimiter(d))
                 .collect(Collectors.toList()));
     }
 
-    public static Delimiters createWithDelimiter(Delimiter delimiter) {
+    public static Delimiters createWithInput(Delimiter delimiter) {
         return new Delimiters(new ArrayList() {{
             add(delimiter);
         }});
     }
 
-    public Numbers split(String s) {
-        String joining = delimiters.stream()
+    public String joining() {
+        return this.delimiters.stream()
                 .map(d -> d.getDelimiter())
                 .collect(Collectors.joining("|"));
-
-        return new Numbers(Arrays.stream(s.split(joining))
-                .map(i -> new Number(Integer.parseInt(i)))
-                .collect(Collectors.toList()));
     }
-
-    // TODO 특수문자 체크
 
     @Override
     public boolean equals(Object o) {
