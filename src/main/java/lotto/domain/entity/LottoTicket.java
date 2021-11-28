@@ -1,5 +1,6 @@
 package lotto.domain.entity;
 
+import java.util.Collections;
 import java.util.List;
 
 import static java.util.stream.Collectors.joining;
@@ -39,13 +40,13 @@ public class LottoTicket {
     }
   }
 
-  private boolean contains(int number) {
-    return numbers.contains(new LottoNumber(number));
+  protected boolean contains(LottoNumber lottoNumber) {
+    return numbers.contains(lottoNumber);
   }
 
   public int getMatchedCount(LottoTicket lotto) {
     return (int) this.numbers.stream()
-            .filter(number -> lotto.contains(number.getNumber()))
+            .filter(lotto::contains)
             .count();
   }
 
@@ -53,8 +54,12 @@ public class LottoTicket {
     return numbers.size();
   }
 
-  public List<LottoNumber> getNumbers() {
-    return numbers;
+  protected List<LottoNumber> getNumbers() {
+    return Collections.unmodifiableList(numbers);
+  }
+
+  public boolean isMatchedBonus(LottoNumber bonusNumber) {
+    return numbers.contains(bonusNumber);
   }
 
   @Override
@@ -71,4 +76,5 @@ public class LottoTicket {
                   .map(lottoNumber -> String.valueOf(lottoNumber.getNumber()))
                   .collect(joining(COMMA));
   }
+
 }
