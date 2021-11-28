@@ -8,18 +8,19 @@ import step1.domain.Delimiter;
 import step1.domain.Delimiters;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class DelimitersTest {
     @Test
     void createWithoutDelimiter() {
-        Delimiters delimiters = Delimiters.createWithoutDelimiter();
-        assertThat(delimiters).isEqualTo(Delimiters.createWithoutDelimiter());
+        Delimiters delimiters = Delimiters.createWithoutInput();
+        assertThat(delimiters).isEqualTo(Delimiters.createWithoutInput());
     }
 
     @ParameterizedTest
     @CsvSource(value = {";,true","!,false"})
     void createWithDelimiter(String delimiter, boolean expected) {
-        Delimiters delimiters = Delimiters.createWithDelimiter(new Delimiter(";"));
-        Assertions.assertEquals(delimiters.equals(Delimiters.createWithDelimiter(new Delimiter(delimiter))), expected);
+        Delimiters delimiters = Delimiters.createWithInput(new Delimiter(";"));
+        Assertions.assertEquals(delimiters.equals(Delimiters.createWithInput(new Delimiter(delimiter))), expected);
     }
 }
