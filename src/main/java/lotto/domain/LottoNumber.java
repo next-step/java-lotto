@@ -17,11 +17,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public int getNumber() {
-        return number;
-    }
-
-    public String getNumberString() {
+    public String getNumber() {
         return String.valueOf(this.number);
     }
 
@@ -33,13 +29,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int compareTo(LottoNumber o) {
-        if (this.getNumber() > o.getNumber()) {
-            return 1;
-        }
-        if (this.getNumber() == o.getNumber()) {
-            return 0;
-        }
-        return -1;
+        return Integer.compare(this.number, o.number);
     }
 
     @Override
