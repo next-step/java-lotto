@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.utils.RankEnum;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -33,10 +31,10 @@ public class Lottoes {
     }
 
     public void calculateTotalReward() {
-        totalReward = RankEnum.RANK_THREE.getReward() * winRankLottoCount(RankEnum.RANK_THREE.getRank());
-        totalReward = totalReward + RankEnum.RANK_FOUR.getReward() * winRankLottoCount(RankEnum.RANK_FOUR.getRank());
-        totalReward = totalReward + RankEnum.RANK_FIVE.getReward() * winRankLottoCount(RankEnum.RANK_FIVE.getRank());
-        totalReward = totalReward + RankEnum.RANK_SIX.getReward() * winRankLottoCount(RankEnum.RANK_SIX.getRank());
+//        totalReward = RankEnum.RANK_THREE.getReward() * winRankLottoCount(RankEnum.RANK_THREE.getRank());
+//        totalReward = totalReward + RankEnum.RANK_FOUR.getReward() * winRankLottoCount(RankEnum.RANK_FOUR.getRank());
+//        totalReward = totalReward + RankEnum.RANK_FIVE.getReward() * winRankLottoCount(RankEnum.RANK_FIVE.getRank());
+//        totalReward = totalReward + RankEnum.RANK_SIX.getReward() * winRankLottoCount(RankEnum.RANK_SIX.getRank());
     }
 
     public Long winRankLottoCount(Long rankCount) {

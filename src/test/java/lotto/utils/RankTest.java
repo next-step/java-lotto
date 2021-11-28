@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RankEnumTest {
+public class RankTest {
     @Test
     @DisplayName("rank값으로 Enum객체를 가져온다.")
-    public void findBy() {
-        assertThat(RankEnum.findBy(3L)).isEqualTo(RankEnum.RANK_THREE);
+    public void valueOf() {
+        assertThat(Rank.find(3, false)).isEqualTo(Rank.FIFTH);
     }
 }

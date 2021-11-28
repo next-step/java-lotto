@@ -44,11 +44,12 @@ public class LottoGameService {
 
     public void matchLottoNumbers() {
         lottoes.getLottoGames().forEach(lottoGame -> {
-            lottoGame.matchLottoNumbers(lastWeekWinningNumbers);
+            lottoGame.matchLottoNumbers(lastWeekWinningNumbers, bonusLottoNumber);
         });
     }
 
     public void resultWinLotto() {
+
         OutputView.drawResultWinLotto(lottoes);
     }
 

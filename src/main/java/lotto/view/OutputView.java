@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.domain.LottoGameCount;
 import lotto.domain.Lottoes;
-import lotto.utils.RankEnum;
 
 import static lotto.utils.Constants.*;
 
@@ -34,8 +33,8 @@ public class OutputView {
     }
 
     public static void getRankMsg(Long rank, Lottoes lottoes) {
-        RankEnum rankEnum = RankEnum.findBy(rank);
-        sb.append(rankEnum.getMsg());
+//        RankEnum rankEnum = RankEnum.valueOf(rank);
+//        sb.append(rankEnum.getMsg());
         sb.append(lottoes.winRankLottoCount(rank));
         sb.append(MSG_NUMBER);
         System.out.println(sb);
