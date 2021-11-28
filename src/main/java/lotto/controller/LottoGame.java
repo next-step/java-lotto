@@ -15,12 +15,12 @@ public class LottoGame {
     }
 
     public void startLottoGame() {
-        Money money = inputView.inputMoney();
-        NumberGenerator numberGenerator = new LottoNumberGenerator();
+        Money money = new Money(inputView.inputMoney());
+        LottoGenerator numberGenerator = new RandomLottoGenerator();
         Store store = new Store();
         Lotties lotties = store.purchaseLottiesByMoney(money, numberGenerator);
         resultView.purchaseLottiesInformation(lotties);
-        Lotto lastWeekWinLotto = inputView.inputLastWeekWinLotto();
+        Lotto lastWeekWinLotto = Lotto.from(inputView.inputLastWeekWinLotto());
         LottoGameResult lottoGameResult = new LottoGameResult(lotties, lastWeekWinLotto);
         resultView.printGameResult(lottoGameResult);
     }

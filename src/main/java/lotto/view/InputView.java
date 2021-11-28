@@ -1,8 +1,5 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.Money;
-
 import java.util.Scanner;
 
 public class InputView {
@@ -14,13 +11,13 @@ public class InputView {
         scanner = new Scanner(System.in);
     }
 
-    public Money inputMoney() {
+    public int inputMoney() {
         System.out.println(MESSAGE_PURCHASE_PRICE);
-        return new Money(this.scanner.nextLine());
+        return this.scanner.nextInt();
     }
 
-    public Lotto inputLastWeekWinLotto() {
+    public String inputLastWeekWinLotto() {
         System.out.println(LAST_WEEK_WIN_LOTTO_MESSAGE);
-        return Lotto.from(this.scanner.nextLine());
+        return this.scanner.nextLine();
     }
 }
