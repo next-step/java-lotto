@@ -10,6 +10,13 @@ public class Formula {
     }
 
     public Integer calculate(String rawFormula) {
-        return -1;
+        if(rawFormula == null || rawFormula.trim().isEmpty()) {
+            throw new IllegalArgumentException("rawFormula is null or blank.");
+        }
+
+        return filterOperands.filter(rawFormula, filterCustomDelimiter.filter(rawFormula))
+                .stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 }

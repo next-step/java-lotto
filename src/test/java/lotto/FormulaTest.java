@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class FormulaTest {
     private final Formula dut = new Formula(new FilterCustomDelimiter(), new FilterOperands());
