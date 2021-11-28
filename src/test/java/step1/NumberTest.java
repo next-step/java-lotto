@@ -19,11 +19,11 @@ public class NumberTest {
         assertThat(Number.createFromInt(2)).isNotEqualTo(Number.createFromInt(1));
     }
 
-        @Test
-        @DisplayName("생성자 테스트")
-        void createFromString() {
-            assertThat(Number.createFromString("1")).isEqualTo(Number.createFromInt(1));
-            assertThat(Number.createFromString("2")).isNotEqualTo(Number.createFromInt(1));
+    @Test
+    @DisplayName("생성자 테스트")
+    void createFromString() {
+        assertThat(Number.createFromString("1")).isEqualTo(Number.createFromInt(1));
+        assertThat(Number.createFromString("2")).isNotEqualTo(Number.createFromInt(1));
     }
 
     @Test
