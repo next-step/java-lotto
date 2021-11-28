@@ -8,7 +8,6 @@ import java.util.function.ToIntFunction;
 
 public class Result {
 
-    private static final int MIN_WINNING_COUNT = 3;
     private static final int INIT_COUNT = 0;
     private static final int PLUS_COUNT = 1;
     private static final int DECIMAL_DENOMINATOR = 100;
