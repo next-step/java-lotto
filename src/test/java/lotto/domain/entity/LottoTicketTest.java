@@ -66,4 +66,20 @@ class LottoTicketTest {
                     new LottoTicket(Arrays.asList(new LottoNumber(15), new LottoNumber(40), new LottoNumber(30),
                             new LottoNumber(5), new LottoNumber(10), new LottoNumber(29))), 1));
   }
+
+  @ParameterizedTest
+  @MethodSource("makeDuplicatedLottoNumberList")
+  @DisplayName("6개의 로또번호를 입력했을 때 중복된 번호가 있다면 exception을 던진다.")
+  void createDuplicatedNumbers(List<LottoNumber> lottoNumbers) {
+    assertThrows(IllegalArgumentException.class, () -> new LottoTicket(lottoNumbers));
+  }
+
+  private static Stream<Arguments> makeDuplicatedLottoNumberList() {
+    return Stream.of(
+            Arguments.of(Arrays.asList(new LottoNumber(1), new LottoNumber(15), new LottoNumber(40),
+                    new LottoNumber(25), new LottoNumber(15), new LottoNumber(4), new LottoNumber(20))),
+            Arguments.of(Arrays.asList(new LottoNumber(4), new LottoNumber(10), new LottoNumber(26),
+                    new LottoNumber(35), new LottoNumber(45), new LottoNumber(12), new LottoNumber(1),
+                    new LottoNumber(7), new LottoNumber(19))));
+  }
 }
