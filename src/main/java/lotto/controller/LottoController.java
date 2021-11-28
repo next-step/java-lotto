@@ -20,9 +20,10 @@ public class LottoController {
         List<Lotto> lottos = makeLottos(purchasedCount);
         ResultView.printLottos(lottos);
         String[] array = InputView.acceptWinningNumber();
+        Number bonusNumber = InputView.acceptBonusNumber();
 
         Lottos purchasedLottos = new Lottos(lottos);
-        Result result = purchasedLottos.makeResult(makeWinningNumber(array));
+        Result result = purchasedLottos.makeResult(makeWinningNumber(array), bonusNumber);
 
         ResultView.printResult(purchasedCount * Lotto.eachAmount, result);
     }

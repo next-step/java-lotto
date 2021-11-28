@@ -23,18 +23,16 @@ public class Result {
     private Map<Rank, Integer> initMatchedCounts() {
         final Map<Rank, Integer> matchedCounts;
         matchedCounts = new TreeMap<>();
-        matchedCounts.put(Rank.FIFTH, INIT_COUNT);
-        matchedCounts.put(Rank.FOURTH, INIT_COUNT);
-        matchedCounts.put(Rank.SECOND, INIT_COUNT);
         matchedCounts.put(Rank.FIRST, INIT_COUNT);
+        matchedCounts.put(Rank.SECOND, INIT_COUNT);
+        matchedCounts.put(Rank.THIRD, INIT_COUNT);
+        matchedCounts.put(Rank.FOURTH, INIT_COUNT);
+        matchedCounts.put(Rank.FIFTH, INIT_COUNT);
         return matchedCounts;
     }
 
-    public Result add(int matchCount) {
-        if (matchCount < MIN_WINNING_COUNT) {
-            return this;
-        }
-        ranks.merge(Rank.from(matchCount), PLUS_COUNT, (first, second) -> first + second);
+    public Result add(Rank rank) {
+        ranks.merge(rank, PLUS_COUNT, (first, second) -> first + second);
         return this;
     }
 

@@ -16,10 +16,14 @@ public class Lotto {
         return amount / eachAmount;
     }
 
-    public int match(Lotto lotto) {
-        return (int) lotto.values.stream()
-                                 .filter(values::contains)
-                                 .count();
+    public Rank match(Lotto lotto, Number bonusNumber) {
+        return Rank.from(getMachedCount(lotto), values.contains(bonusNumber));
+    }
+
+    private int getMachedCount(Lotto lotto) {
+        return (int) values.stream()
+                           .filter(lotto.values::contains)
+                           .count();
     }
 
     @Override

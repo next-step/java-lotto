@@ -15,6 +15,7 @@ public final class ResultView {
     }
 
     public static void printLottos(List<Lotto> lottos) {
+        stringBuilder.setLength(0);
         lottos.forEach(lotto -> stringBuilder.append(lotto + "\n"));
         System.out.println(stringBuilder);
     }
@@ -24,6 +25,8 @@ public final class ResultView {
         stringBuilder.append("당첨 통계\n---------\n");
         result.getRanks()
               .entrySet()
+              .stream()
+              .filter(entry -> entry.getKey() != Rank.MISS)
               .forEach(entry -> printEachMatch(entry));
 
         stringBuilder.append("총 수익률은 " + result.calculateRatio(purchasedAmount) + "입니다.");
@@ -32,6 +35,10 @@ public final class ResultView {
 
     private static void printEachMatch(Entry<Rank, Integer> entry) {
         Rank rank = entry.getKey();
-        stringBuilder.append(rank.getMatchedCount() + "개 일치 (" + rank.getPrice() + "원) - " + entry.getValue() + "개\n");
+        stringBuilder.append(rank.getMatchedCount() + "개 일치");
+        if (rank == Rank.SECOND) {
+            stringBuilder.append(", 보너스 볼 일치");
+        }
+        stringBuilder.append(" (" + rank.getPrice() + "원) - " + entry.getValue() + "개\n");
     }
 }
