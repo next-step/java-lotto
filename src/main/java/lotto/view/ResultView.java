@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import lotto.model.Lotto;
+import lotto.model.Money;
 import lotto.model.Rank;
 import lotto.model.Result;
 
@@ -14,26 +15,39 @@ public final class ResultView {
     private ResultView() {
     }
 
-    public static void printLottos(List<Lotto> lottos) {
+    public static void printInput(List<Lotto> lottos, Money purchasedAmount) {
         stringBuilder.setLength(0);
-        lottos.forEach(lotto -> stringBuilder.append(lotto + "\n"));
+        printPurchasedCount(purchasedAmount);
+        printEachLotto(lottos);
         System.out.println(stringBuilder);
     }
 
-    public static void printResult(int purchasedAmount, Result result) {
+    private static void printPurchasedCount(Money purchasedAmount) {
+        stringBuilder.append(purchasedAmount.getLottoCount())
+                     .append("개를 구매했습니다.\n");
+    }
+
+    private static void printEachLotto(List<Lotto> lottos) {
+        lottos.forEach(lotto -> stringBuilder.append(lotto + "\n"));
+    }
+
+    public static void printResult(Money purchasedAmount, Result result) {
         stringBuilder.setLength(0);
         stringBuilder.append("당첨 통계\n---------\n");
+        printRanks(result);
+        stringBuilder.append("총 수익률은 " + result.calculateRatio(purchasedAmount.getMoney()) + "입니다.");
+        System.out.println(stringBuilder);
+    }
+
+    private static void printRanks(Result result) {
         result.getRanks()
               .entrySet()
               .stream()
               .filter(entry -> entry.getKey() != Rank.MISS)
-              .forEach(entry -> printEachMatch(entry));
-
-        stringBuilder.append("총 수익률은 " + result.calculateRatio(purchasedAmount) + "입니다.");
-        System.out.println(stringBuilder);
+              .forEach(entry -> printEachRank(entry));
     }
 
-    private static void printEachMatch(Entry<Rank, Integer> entry) {
+    private static void printEachRank(Entry<Rank, Integer> entry) {
         Rank rank = entry.getKey();
         stringBuilder.append(rank.getMatchedCount() + "개 일치");
         if (rank == Rank.SECOND) {
