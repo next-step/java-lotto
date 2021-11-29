@@ -18,10 +18,7 @@ public class LottoTicket {
             .filter(lottoTicket.numbers::contains).count();
     }
 
-    public String getNumbersToString() {
-        return MessageFormat.format("[{0}]",
-            this.numbers.stream()
-                .map(Object::toString)
-                .collect(Collectors.joining(", ")));
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 }

@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.text.MessageFormat;
+import java.util.stream.Collectors;
 import lotto.domain.Award;
 import lotto.domain.GameResult;
 import lotto.domain.LottoTicket;
@@ -12,10 +13,17 @@ public class OutputView {
         System.out.println(MessageFormat.format("{0}개를 구매했습니다.", lottoTickets.getTicketSize()));
 
         lottoTickets.getTickets().stream()
-            .map(LottoTicket::getNumbersToString)
+            .map(this::getLottoNumbersString)
             .forEach(System.out::println);
 
         System.out.println();
+    }
+
+    private String getLottoNumbersString(LottoTicket tickets) {
+        return MessageFormat.format("[{0}]",
+            tickets.getNumbers().stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(", ")));
     }
 
     public void printByResult(GameResult gameResult) {
