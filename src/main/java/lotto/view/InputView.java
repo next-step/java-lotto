@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.BonusLottoNumber;
 import lotto.domain.InputPrice;
 import lotto.domain.LottoGameCount;
 import lotto.domain.LottoNumbers;
@@ -14,10 +15,6 @@ import static lotto.utils.Constants.*;
 public class InputView {
     private static InputPrice inputPrice;
     private static final Scanner scanner = new Scanner(System.in);
-
-    private InputView() {
-
-    }
 
     public InputView(InputPrice inputPrice) {
         this.inputPrice = inputPrice;
@@ -38,6 +35,11 @@ public class InputView {
         System.out.println();
 
         return lastWeekWinnigNumbers;
+    }
+
+    public static BonusLottoNumber inputBonusLottonumber(LottoNumbers lastWeekWinningNumbers) {
+        System.out.println(MSG_INPUT_BONUS_NUMBER);
+        return new BonusLottoNumber(Integer.valueOf(scanner.next()), lastWeekWinningNumbers);
     }
 
     public static LottoGameCount getLottoGameCount() {

@@ -1,8 +1,11 @@
 package lotto.view;
 
 import lotto.domain.LottoGameCount;
+import lotto.domain.LottoResult;
 import lotto.domain.Lottoes;
-import lotto.utils.RankEnum;
+import lotto.utils.Rank;
+
+import java.util.Map;
 
 import static lotto.utils.Constants.*;
 
@@ -23,28 +26,39 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void drawResultWinLotto(Lottoes lottoes) {
+    public static void drawResultWinLotto(LottoGameCount lottoGameCount, LottoResult lottoResult) {
+        System.out.println();
         System.out.println(MSG_WINNING_STATISTICS);
         System.out.println(MSG_DASH_TEN);
+        lottoResult.getRanks()
+                .entrySet()
+                .stream()
+                .filter(rank -> !rank.getKey().equals(Rank.MISS))
+                .forEach(rank -> drawLottoResult(rank));
 
-        getRankMsg((long) NUMBER_THREE, lottoes);
-        getRankMsg((long) NUMBER_FOUR, lottoes);
-        getRankMsg((long) NUMBER_FIVE, lottoes);
-        getRankMsg((long) NUMBER_SIX, lottoes);
+        drawTotalReward(lottoGameCount, lottoResult);
     }
 
-    public static void getRankMsg(Long rank, Lottoes lottoes) {
-        RankEnum rankEnum = RankEnum.findBy(rank);
-        sb.append(rankEnum.getMsg());
-        sb.append(lottoes.winRankLottoCount(rank));
+    private static void drawLottoResult(Map.Entry<Rank, Integer> entry) {
+        Rank rank = entry.getKey();
+        sb.append(rank.getCountOfMatch() + MSG_NUMBER_SAME);
+        if (rank == Rank.SECOND) {
+            sb.append(COMMA);
+            sb.append(MSG_BONUS_SAME);
+        }
+        sb.append(MSG_BRACKET);
+        sb.append(rank.getWinningMoney());
+        sb.append(MSG_WON_BRACKET);
+        sb.append(entry.getValue());
         sb.append(MSG_NUMBER);
         System.out.println(sb);
         sb.setLength(NUMBER_ZERO);
     }
 
-    public static void drawTotalReward(Double yield) {
+
+    public static void drawTotalReward(LottoGameCount lottoGameCount, LottoResult lottoResult) {
         sb.append(MSG_TOTAL_YIELD);
-        sb.append(yield);
+        sb.append(lottoResult.calculateYield(lottoGameCount));
         sb.append(MSG_IS);
         System.out.println(sb);
     }

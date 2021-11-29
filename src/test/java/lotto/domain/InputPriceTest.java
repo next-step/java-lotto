@@ -16,7 +16,7 @@ public class InputPriceTest {
 
     @Test
     @DisplayName("입력받은 금액이 1000원 단위인지 체크한다.")
-    public void validateSmallestUnit() {
+    void validateSmallestUnit() {
         assertThatThrownBy(() -> {
             new InputPrice(999);
         }).isInstanceOf(IndexOutOfBoundsException.class)
@@ -25,7 +25,7 @@ public class InputPriceTest {
 
     @Test
     @DisplayName("입력받은 금액을 1000원 단위로 나눈다")
-    public void divideByThousands() {
+    void divideByThousands() {
         assertThat(new InputPrice(10000).divideByThousands()).isEqualTo(10);
     }
 }

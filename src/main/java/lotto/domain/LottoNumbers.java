@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -15,8 +16,8 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(List<Integer> lottoNumbers) {
+        validateLottoNumbersOneToFortyfive(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
-        validateLottoNumbersOneToFortyfive();
     }
 
     public LottoNumbers createAutoLottoNumbers(DefaultLottoNumbers defaultLottoNumbers) {
@@ -36,7 +37,7 @@ public class LottoNumbers {
         }
     }
 
-    private void validateLottoNumbersOneToFortyfive() {
+    private void validateLottoNumbersOneToFortyfive(List<Integer> lottoNumbers) {
         lottoNumbers.forEach(lottoNumber -> {
             if (lottoNumber < NUMBER_ONE || lottoNumber > NUMBER_FORTY_FIVE) {
                 throw new IndexOutOfBoundsException(MSG_LOTTO_NUMBER_ONE_TO_FORTY_FIVE);
@@ -44,8 +45,12 @@ public class LottoNumbers {
         });
     }
 
+    public boolean isIncludeBonusNumber(int bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
     public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     @Override

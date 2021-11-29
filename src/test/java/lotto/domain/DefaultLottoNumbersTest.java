@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class DefaultLottoNumbersTest {
     @Test
     @DisplayName("DefaultLottoNumbers 생성자 테스트")
-    public void constructor() {
+    void constructor() {
         assertThat(new DefaultLottoNumbers()).isEqualTo(new DefaultLottoNumbers());
     }
 }

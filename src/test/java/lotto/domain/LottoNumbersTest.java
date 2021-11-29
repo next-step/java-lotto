@@ -13,14 +13,14 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoNumbersTest {
     @Test
     @DisplayName("LottoNumbers 생성자 테스트")
-    public void constructor() {
+    void constructor() {
         assertThat(new LottoNumbers(IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList())))
                 .isEqualTo(new LottoNumbers(IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList())));
     }
 
     @Test
     @DisplayName("지난 주 당첨 번호는 6개만 입력 받는다.")
-    public void validateLottoNumbersLength() {
+    void validateLottoNumbersLength() {
         LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
         assertThatThrownBy(() -> {
             lottoNumbers.validateLottoNumbersLength();
@@ -30,7 +30,7 @@ public class LottoNumbersTest {
 
     @Test
     @DisplayName("지난 주 당첨 번호는 1~45의 값을 가진다.")
-    public void validateLottoNumbersOneToFortyfive() {
+    void validateLottoNumbersOneToFortyfive() {
         assertThatThrownBy(() -> {
             new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 46));
         }).isInstanceOf(IndexOutOfBoundsException.class)

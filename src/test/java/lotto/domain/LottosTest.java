@@ -16,7 +16,7 @@ public class LottosTest {
     private List<LottoGame> lottoGames;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         lottoGames = Arrays.asList(new LottoGame(2L),
                 new LottoGame(3L), new LottoGame(4L),
                 new LottoGame(5L), new LottoGame(6L));
@@ -26,14 +26,14 @@ public class LottosTest {
 
     @Test
     @DisplayName("Lottoes 생성자 테스트")
-    public void constructor() {
+    void constructor() {
         assertThat(new Lottoes(Arrays.asList(new LottoGame(new LottoNumbers(IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList()))))))
                 .isEqualTo(new Lottoes(Arrays.asList(new LottoGame(new LottoNumbers(IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList()))))));
     }
 
     @Test
     @DisplayName("몇등에 당첨 됐는지 확인한다.")
-    public void winRankLotto() {
+    void winRankLotto() {
         assertThat(lottoes.winRankLottoCount(3L))
                 .isEqualTo(1);
         assertThat(lottoes.winRankLottoCount(4L))
@@ -42,12 +42,5 @@ public class LottosTest {
                 .isEqualTo(1);
         assertThat(lottoes.winRankLottoCount(6L))
                 .isEqualTo(1);
-    }
-
-    @Test
-    @DisplayName("총상금을 계산한다.")
-    public void calculateTotalReward() {
-        lottoes.calculateTotalReward();
-        assertThat(lottoes.getTotalReward()).isEqualTo(2001555000L);
     }
 }
