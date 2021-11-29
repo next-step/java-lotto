@@ -13,10 +13,10 @@ public class Shop {
         return new LottoTickets(
             IntStream.range(0, count).boxed()
                 .map(n -> lottoMachine.publish())
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList()), PRICE);
     }
 
     public GameResult result(LottoTickets lottoTickets, ResultLotto resultLotto) {
-        return new GameResult(lottoTickets, resultLotto, lottoTickets.getTotalPrice(PRICE));
+        return lottoTickets.result(resultLotto);
     }
 }

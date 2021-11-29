@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 class GameResultTest {
 
     GameResult gameResult;
-    int startMoney = 14000;
 
     @BeforeEach
     void init() {
@@ -25,16 +24,18 @@ class GameResultTest {
         int num4 = 41;
         int num5 = 42;
 
+        int price = 1000;
+
         LottoTickets lottoTickets = new LottoTickets(
             Arrays.asList(mockLottoTicket(num1, num2, num3, 4, 5, 6),
                 mockLottoTicket(num1, num2, num3, 4, 5, 6),
                 mockLottoTicket(num1, num2, num3, num4, num5, 6),
-                mockLottoTicket(num1, num2, num4, 4, 5, 6)));
+                mockLottoTicket(num1, num2, num4, 4, 5, 6)), price);
 
         ResultLotto resultLotto = new ResultLotto(
             mockLottoTicket(num1, num2, num3, num4, num5, 43));
 
-        gameResult = new GameResult(lottoTickets, resultLotto, startMoney);
+        gameResult = lottoTickets.result(resultLotto);
     }
 
     @Test
@@ -48,7 +49,7 @@ class GameResultTest {
     @Test
     @DisplayName(value = "수익률이 정상적으로 출력된다.")
     void getYieldTest() {
-        assertThat(gameResult.getYield()).isEqualTo(108.21428571428571);
+        assertThat(gameResult.getYield()).isEqualTo(378.75);
     }
 
     LottoTicket mockLottoTicket(int num1, int num2, int num3, int num4, int num5, int num6) {
