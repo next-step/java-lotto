@@ -38,7 +38,7 @@ public class WinningLotto {
         }
     }
 
-    private static void checkSize(List<LottoNumber> winningLotto) {
+    private void checkSize(List<LottoNumber> winningLotto) {
         if (winningLotto.size() != SIZE) {
             throw new IllegalArgumentException(SIZE + " 와 길이가 다른 winningLotto 는 입력될 수 없습니다.");
         }

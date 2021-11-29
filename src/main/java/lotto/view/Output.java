@@ -13,7 +13,6 @@ public class Output {
     }
 
     public static void viewPurchasedLotto(Lottos lottos) {
-        System.out.println("수동으로 3장, 자동으로 11개를 구매했습니다.");
         for (Lotto lotto : lottos.getLottos()) {
             List<Integer> view = new ArrayList<>();
             lotto.getLottoNumbers().stream()
