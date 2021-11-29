@@ -14,7 +14,7 @@ public class InputPrice {
 
     private void validateSmallestUnit(Integer inputPrice) {
         if (inputPrice < NUMBER_THOUSAND || Math.floorMod(inputPrice, NUMBER_THOUSAND) != NUMBER_ZERO) {
-            throw new IndexOutOfBoundsException(MSG_MINIMUM_PURCHASE_PRICE);
+            throw new IllegalArgumentException(MSG_MINIMUM_PURCHASE_PRICE);
         }
     }
 

@@ -19,7 +19,7 @@ public class InputPriceTest {
     void validateSmallestUnit() {
         assertThatThrownBy(() -> {
             new InputPrice(999);
-        }).isInstanceOf(IndexOutOfBoundsException.class)
+        }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또는 1000원 단위로 구매할 수 있습니다.");
     }
 

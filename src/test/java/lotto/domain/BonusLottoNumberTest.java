@@ -21,7 +21,7 @@ public class BonusLottoNumberTest {
         LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThatThrownBy(() -> {
             new BonusLottoNumber(1, lottoNumbers);
-        }).isInstanceOf(IndexOutOfBoundsException.class)
+        }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("보너스 번호가 지난 주 당첨중에 있습니다.");
     }
 }
