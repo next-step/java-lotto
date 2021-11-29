@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.value.LottoNumber;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -12,14 +13,14 @@ public class Lotto {
     private static final String FORM_ERROR_MSG = "로또는 6자리 형식입니다.!!!";
     private static Random random = new Random();
 
-    private List<LottoNumber> numbers;
+    private Set<LottoNumber> numbers;
 
     public Lotto() {
 
         this.numbers = createRandomNumbers();
     }
 
-    private Lotto(List<LottoNumber> numbers) {
+    private Lotto(Set<LottoNumber> numbers) {
 
         if(numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(FORM_ERROR_MSG);
@@ -29,39 +30,33 @@ public class Lotto {
     }
 
     public static Lotto from(List<LottoNumber> number) {
-        return new Lotto(number);
+        return new Lotto(number.stream()
+                .collect(Collectors.toSet()));
     }
 
     public static Lotto winningFrom(List<Integer> number) {
 
-        List<LottoNumber> numbers = new ArrayList<>();
-        for(int i = 0; i < number.size(); i++) {
-            numbers.add(new LottoNumber(number.get(i)));
+        Set<LottoNumber> numbers = new TreeSet<>();
+        Iterator<Integer> itr = number.iterator();
+        while(itr.hasNext()) {
+            numbers.add(new LottoNumber(itr.next()));
         }
 
         return new Lotto(numbers);
     }
 
-    private List<LottoNumber> createRandomNumbers() {
+    private Set<LottoNumber> createRandomNumbers() {
 
-        List<LottoNumber> autoNumbers = new ArrayList<>();
+        Set<LottoNumber> autoNumbers = new TreeSet<>();
 
         while (autoNumbers.size() != LOTTO_SIZE) {
             int raffleNumber = random.nextInt(LOTTO_MAX_NUMBER -1) + 1;
             LottoNumber randomNumber = new LottoNumber(raffleNumber);
-            checkDuplicationNumber(autoNumbers, randomNumber);
+            autoNumbers.add(randomNumber);
 
         }
-
-        Collections.sort(autoNumbers);
 
         return autoNumbers;
-    }
-
-    private void checkDuplicationNumber(List<LottoNumber> autoNumbers, LottoNumber randomNumber) {
-        if(!autoNumbers.contains(randomNumber)) {
-            autoNumbers.add(randomNumber);
-        }
     }
 
     public int calculatePrizeMoney(Lotto winningNumbers) {
@@ -83,9 +78,9 @@ public class Lotto {
 
     private boolean contains(LottoNumber lottoNumber) {
 
-        for(int i = 0; i < numbers.size(); i++) {
-
-            if(isValueEqual(numbers.get(i), lottoNumber)) {
+        Iterator<LottoNumber> itr = numbers.iterator();
+        while(itr.hasNext()) {
+            if(isValueEqual(itr.next(), lottoNumber)) {
                 return true;
             }
         }
@@ -102,7 +97,7 @@ public class Lotto {
     }
 
 
-    public List<LottoNumber> getNumbers() {
+    public Set<LottoNumber> getNumbers() {
         return numbers;
     }
 

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -26,7 +27,8 @@ public class LottoTest {
     @DisplayName("1~45 랜덤 함수 생성 기능")
     void randomCreateTest() {
         Lotto autoLotto = new Lotto();
-        List<LottoNumber> lottoRandomNumbers = autoLotto.getNumbers();
+//        List<LottoNumber> lottoRandomNumbers = autoLotto.getNumbers();
+        Set<LottoNumber> lottoRandomNumbers = autoLotto.getNumbers();
 
         assertThat(lottoRandomNumbers).size().isEqualTo(6);
     }
