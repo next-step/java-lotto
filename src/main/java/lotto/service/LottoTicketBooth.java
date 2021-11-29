@@ -26,7 +26,7 @@ public class LottoTicketBooth implements LottoTicketsGenerator {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < money.getAutoCount(); i++) {
             lottoTickets.add(LottoTicket.from(LottoTicketFactory
-                .LottoTicketFactory()
+                .autoLotto()
                 .createLottoNumber()));
         }
         return new LottoTickets(lottoTickets);
@@ -37,7 +37,7 @@ public class LottoTicketBooth implements LottoTicketsGenerator {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (String manualLottoNumber : manualLottoNumbers) {
             lottoTickets.add(LottoTicket.from(LottoTicketFactory
-                .LottoTicketFactory(manualLottoNumber)
+                .manualLotto(manualLottoNumber)
                 .createLottoNumber()));
         }
         return new LottoTickets(lottoTickets);

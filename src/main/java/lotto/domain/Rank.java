@@ -14,6 +14,8 @@ public enum Rank implements Supplier<Rank> {
     SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
+    private static final int MINIMUM_PRIZE_MONEY = 1;
+
     private long count;
     private long prizeMoney;
 
@@ -24,7 +26,7 @@ public enum Rank implements Supplier<Rank> {
 
     public static List<Rank> valuesFilterNoPrizeMoney() {
         return Arrays.stream(Rank.values())
-            .filter(rank -> rank.prizeMoney > 0)
+            .filter(rank -> rank.prizeMoney >= MINIMUM_PRIZE_MONEY)
             .collect(Collectors.toCollection(ArrayList::new));
     }
 

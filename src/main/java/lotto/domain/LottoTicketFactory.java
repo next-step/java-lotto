@@ -2,11 +2,14 @@ package lotto.domain;
 
 public class LottoTicketFactory {
 
-    public static CreatableLottoNumber LottoTicketFactory() {
+    private LottoTicketFactory() {
+    }
+
+    public static CreatableLottoNumber autoLotto() {
         return new AutoLottoNumber();
     }
 
-    public static CreatableLottoNumber LottoTicketFactory(String manualLottoNumber) {
+    public static CreatableLottoNumber manualLotto(String manualLottoNumber) {
         return new ManualLottoNumber(manualLottoNumber);
     }
 

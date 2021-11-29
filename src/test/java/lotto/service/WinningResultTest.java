@@ -46,7 +46,7 @@ public class WinningResultTest {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (String manualLottoNumber : manualLottoNumbers) {
             lottoTickets.add(LottoTicket.from(LottoTicketFactory
-                .LottoTicketFactory(manualLottoNumber)
+                .manualLotto(manualLottoNumber)
                 .createLottoNumber()));
         }
         LottoTickets argumentLottoTickets = new LottoTickets(lottoTickets);

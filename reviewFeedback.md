@@ -54,3 +54,14 @@ generateHashSetLottoNumber -> generateLottoNumber
 - 로또 생성 방식을 유연하게 변경해보자.
 - WinningResultTest : 등수에 따라 몇 개인지에 대한 테스트 케이스 추가 ✔
 - WinnerLottoTicket : winnerCount 메소드명은 동사가 앞에 와야한다. ✔
+
+# STEP 4
+## 피드백 1차
+- 메서드명 시작은 소문자
+- LottoTicketFactory 기본 생성자 private 처리
+- Rank 매직넘버 제거
+```
+소소한 것들을 최대한 실수하지 말자..!
+```
+
+- 

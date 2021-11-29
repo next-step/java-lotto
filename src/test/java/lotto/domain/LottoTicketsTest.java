@@ -12,12 +12,12 @@ public class LottoTicketsTest {
     @Test
     @DisplayName("생성성공")
     void createSuccess() {
-        List<LottoTicket> lottoTicketss = new ArrayList<>();
-        lottoTicketss.add(LottoTicket.from(LottoTicketFactory
-            .LottoTicketFactory()
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        lottoTickets.add(LottoTicket.from(LottoTicketFactory
+            .autoLotto()
             .createLottoNumber()));
 
-        assertThat(new LottoTickets(lottoTicketss)).isInstanceOf(LottoTickets.class);
+        assertThat(new LottoTickets(lottoTickets)).isInstanceOf(LottoTickets.class);
     }
 
 }
