@@ -32,4 +32,9 @@ public class LottoNumberTest {
         assertThat(LottoNumber.valueOf(1)).isEqualTo(LottoNumber.valueOf(1));
     }
 
+    @Test
+    void same() {
+        assertThat(LottoNumber.valueOf(1) == LottoNumber.valueOf(1) ).isTrue();
+    }
+
 }
