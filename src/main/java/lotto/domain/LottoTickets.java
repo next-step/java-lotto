@@ -16,7 +16,7 @@ public class LottoTickets {
     }
 
     public static LottoTickets publishTickets(Price price) {
-        return new LottoTickets(createTickets(price));
+        return publishTickets(createTickets(price));
     }
 
     public int size() {
