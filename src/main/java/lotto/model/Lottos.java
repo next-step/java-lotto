@@ -1,7 +1,10 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import lotto.utils.LottoNumberGenerator;
 
 public class Lottos {
 
@@ -9,6 +12,14 @@ public class Lottos {
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    public static Lottos create(int lottoCount) {
+        List<Lotto> lottos = new ArrayList();
+        for (int i = 0; i < lottoCount; i++) {
+            lottos.add(new Lotto(LottoNumberGenerator.generate()));
+        }
+        return new Lottos(lottos);
     }
 
     public List<Lotto> getLottos() {

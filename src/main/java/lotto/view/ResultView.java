@@ -1,9 +1,8 @@
 package lotto.view;
 
-import java.util.List;
 import java.util.Map.Entry;
 
-import lotto.model.Lotto;
+import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.Rank;
 import lotto.model.Result;
@@ -16,7 +15,7 @@ public final class ResultView {
     private ResultView() {
     }
 
-    public static void printInput(List<Lotto> lottos, Money purchasedAmount) {
+    public static void printInput(Lottos lottos, Money purchasedAmount) {
         stringBuilder.setLength(0);
         printPurchasedCount(purchasedAmount);
         printEachLotto(lottos);
@@ -28,8 +27,9 @@ public final class ResultView {
                      .append("개를 구매했습니다.\n");
     }
 
-    private static void printEachLotto(List<Lotto> lottos) {
-        lottos.forEach(lotto -> stringBuilder.append(lotto + "\n"));
+    private static void printEachLotto(Lottos lottos) {
+        lottos.getLottos()
+              .forEach(lotto -> stringBuilder.append(lotto + "\n"));
     }
 
     public static void printResult(Money purchasedAmount, Result result) {
