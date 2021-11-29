@@ -30,5 +30,4 @@ public abstract class AbstractLottoTicket {
             .collect(Collectors.toCollection(HashSet::new));
     }
 
-
 }

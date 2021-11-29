@@ -1,6 +1,8 @@
 package lotto.controller;
 
+import java.util.List;
 import lotto.domain.LottoTickets;
+import lotto.domain.Money;
 import lotto.domain.dto.LottoResultDto;
 import lotto.domain.dto.WinningNumberDto;
 import lotto.service.LottoTicketBooth;
@@ -25,8 +27,9 @@ public class LottoController {
         return LottoControllerHolder.LOTTO_CONTROLLER;
     }
 
-    public LottoTickets autoBuyLottoTickets(int money) {
-        return lottoTicketBooth.autoTickets(money);
+    public LottoTickets buyLottoTickets(Money money, List<String> manualLottoNumbers) {
+        LottoTickets lottoTickets = lottoTicketBooth.generate(money);
+        return lottoTickets.sum(lottoTicketBooth.generate(manualLottoNumbers));
     }
 
     public LottoResultDto lottoResult(LottoTickets lottoTickets, WinningNumberDto winningNumberDto) {

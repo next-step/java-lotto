@@ -1,12 +1,8 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import lotto.exception.NumberNullPointerException;
 import lotto.exception.TicketNumberOutBoundException;
 
@@ -20,8 +16,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     static {
         LOTTO_NUMBERS = new HashMap<>();
-        for (int i = MINIMUM_NUMBER; i <= MAXIMUM_NUMBER; i++) {
-            LOTTO_NUMBERS.put(i, new LottoNumber(i));
+        for (int number = MINIMUM_NUMBER; number <= MAXIMUM_NUMBER; number++) {
+            LOTTO_NUMBERS.put(number, new LottoNumber(number));
         }
     }
 
