@@ -54,13 +54,13 @@ public class LottoTest {
 
         List<LottoNumber> lottoNumbers = Arrays.asList(
                 new LottoNumber(1),new LottoNumber(2),new LottoNumber(3),
-                new LottoNumber(4),new LottoNumber(5),new LottoNumber(10)
+                new LottoNumber(4),new LottoNumber(11),new LottoNumber(10)
         );
 
         Lotto winning = Lotto.winningFrom(winningNumber);
         Lotto auto = Lotto.from(lottoNumbers);
 
-        assertThat(auto.isCountOfMatch(winning, 5)).isTrue();
+        assertThat(auto.isCountOfMatch(winning, 4)).isTrue();
     }
 
 }

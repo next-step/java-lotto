@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoWinning;
+import lotto.domain.Rank;
 import lotto.domain.Store;
 import lotto.domain.value.OrderPrice;
 
@@ -26,7 +27,7 @@ public class LottoGame {
         printOrderLottoNumber(lottoTicket);
 
         LottoWinning lottoWinning = LottoWinning.from(printInputWinningNumbers());
-        Map<Integer, Integer> prizeWinnersRepository = lottoWinning.createRepository(lottoTicket);
+        Map<Rank, Integer> prizeWinnersRepository = lottoWinning.createRepository(lottoTicket);
 
         printWinningStatics(prizeWinnersRepository);
         printRateOfReturn(lottoWinning.calculateRateOfProfit(lottoTicket, lottoPrice.getLottoPrice()));

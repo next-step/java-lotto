@@ -26,7 +26,7 @@ public class LottoWinning {
         return new LottoWinning(winningNumbers);
     }
 
-    public Map<Integer, Integer> createRepository(LottoTicket lottoTicket) {
+    public Map<Rank, Integer> createRepository(LottoTicket lottoTicket) {
         return lottoTicket.createRepository(winningNumbers);
     }
 

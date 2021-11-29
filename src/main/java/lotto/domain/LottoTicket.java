@@ -31,11 +31,12 @@ public class LottoTicket {
         }
     }
 
-    public Map<Integer, Integer> createRepository(Lotto winningNumbers) {
-        Map<Integer, Integer> repository = new HashMap<>();
+    public Map<Rank, Integer> createRepository(Lotto winningNumbers) {
+        Map<Rank, Integer> repository = new HashMap<>();
         for (Rank rank : Rank.values()) {
-            repository.put(rank.getCountOfMatch(), totalCountOfMatch(winningNumbers, rank.getCountOfMatch()));
+            repository.put(rank, totalCountOfMatch(winningNumbers, rank.getCountOfMatch()));
         }
+
         return repository;
     }
 

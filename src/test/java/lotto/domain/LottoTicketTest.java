@@ -40,16 +40,16 @@ public class LottoTicketTest {
     @ParameterizedTest
     @MethodSource("provideWinnerNumberCount")
     @DisplayName("당첨번호를 입력했을 때 맞는 갯수 카운트 검증")
-    void createRepository(Lotto winningNumbers, int key, int value) {
-        Map<Integer, Integer> repository = initTicket.createRepository(winningNumbers);
+    void createRepository(Lotto winningNumbers, Rank key, int value) {
+        Map<Rank, Integer> repository = initTicket.createRepository(winningNumbers);
         assertThat(repository.get(key)).isEqualTo(value);
     }
 
     private static Stream<Arguments> provideWinnerNumberCount() {
         return Stream.of(
-                Arguments.of(Lotto.winningFrom(Arrays.asList(1, 2, 3, 4, 5, 6)), 6, 1),
-                Arguments.of(Lotto.winningFrom(Arrays.asList(1, 2, 3, 4, 44, 45)), 4, 2),
-                Arguments.of(Lotto.winningFrom(Arrays.asList(7, 8, 9, 10, 20, 40)), 3, 1)
+                Arguments.of(Lotto.winningFrom(Arrays.asList(1, 2, 3, 4, 5, 6)), Rank.FIRST, 1),
+                Arguments.of(Lotto.winningFrom(Arrays.asList(1, 2, 3, 4, 44, 45)), Rank.FOURTH, 2),
+                Arguments.of(Lotto.winningFrom(Arrays.asList(7, 8, 9, 10, 20, 40)), Rank.FIFTH, 1)
         );
     }
 }

@@ -8,9 +8,6 @@ import java.util.Map;
 
 public class ResultView {
 
-    public static final int LOTTO_START_COUNT = 3;
-    public static final int LOTTO_END_COUNT = 6;
-
     private ResultView() {
         throw new AssertionError();
     }
@@ -26,23 +23,34 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void printWinningStatics(Map<Integer, Integer> countOfMatch) {
+    public static void printWinningStatics(Map<Rank, Integer> resultData) {
         StringBuilder builder = new StringBuilder();
         builder.append("당첨 통계")
         .append("\n")
         .append("---------")
         .append("\n");
-        for (int count = LOTTO_START_COUNT; count <= LOTTO_END_COUNT; count++) {
-            Rank rank = Rank.valueOf(count);
-            builder.append(count)
-            .append("개 일치(")
-            .append(rank.getPrizeMoney())
-            .append("원) - ")
-            .append(countOfMatch.get(count))
-            .append("개")
-            .append("\n");
+
+        Rank[] ranks = Rank.values();
+        for(int i = 1; i < ranks.length; i++) {
+            Integer matchCount = getMatchCount(resultData.get(ranks[i]));
+            builder.append(ranks[i].getCountOfMatch())
+                    .append("개 일치 (")
+                    .append(ranks[i].getPrizeMoney())
+                    .append("원)- ")
+                    .append(matchCount)
+                    .append("개")
+                    .append("\n");
         }
+
         System.out.print(builder);
+    }
+
+    private static Integer getMatchCount(Integer count) {
+        if (count == null) {
+            return 0;
+        }
+
+        return count;
     }
 
     public static void printRateOfReturn(double profit) {

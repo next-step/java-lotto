@@ -13,7 +13,6 @@ public class RankTest {
         assertThat(Rank.valueOf(0)).isEqualTo(Rank.MISS);
         assertThat(Rank.valueOf(3)).isEqualTo(Rank.FIFTH);
         assertThat(Rank.valueOf(4)).isEqualTo(Rank.FOURTH);
-        assertThat(Rank.valueOf(5)).isEqualTo(Rank.SECOND);
         assertThat(Rank.valueOf(6)).isEqualTo(Rank.FIRST);
     }
 }
