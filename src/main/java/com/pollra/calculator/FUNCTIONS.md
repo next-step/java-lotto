@@ -13,25 +13,25 @@
 
 ### Number
 * ```java
-  Number plus(Number number)
+  public Number plus(Number number)
   ```
 
 ### Separator
 * ```java
-  Separator decompose(String text)
+  public Separator decompose(String text)
   ```
 
 ### Calculator
 * ```java
-  void decompose(String formula, Separator)
+  private void decompose(String formula, Separator)
   ```
   
 * ```java
-  Number calculate()
+  public Number calculate(String text)
   ```
   
 ### StringCalculateApplication
 
 * ```java
-  void start(String text)
+  public void start(String text)
   ```
