@@ -15,15 +15,15 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public Result makeResult(Lotto target, Number bonusNumber) {
+    public Result makeResult(WinningNumber winningNumber) {
         Result result = new Result();
         lottos.stream()
-              .map(lotto -> makeRank(lotto, target, bonusNumber))
+              .map(lotto -> makeRank(lotto, winningNumber))
               .forEach(matchedCount -> result.add(matchedCount));
         return result;
     }
 
-    private Rank makeRank(Lotto lotto, Lotto target, Number bonusNumber) {
-        return Rank.from(lotto.matchCount(target), lotto.contains(bonusNumber));
+    private Rank makeRank(Lotto lotto, WinningNumber winningNumber) {
+        return Rank.from(winningNumber.matchCount(lotto), winningNumber.hasBonusNumber(lotto));
     }
 }
