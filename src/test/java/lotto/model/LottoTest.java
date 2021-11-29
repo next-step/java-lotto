@@ -2,8 +2,13 @@ package lotto.model;
 
 import lotto.factory.LottoFactory;
 import lotto.factory.LottoNumbersFactory;
+import lotto.generator.LottoNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,5 +29,24 @@ class LottoTest {
         assertThat(lotto).isInstanceOf(Lotto.class);
     }
 
+    @Test
+    @DisplayName("수동, 자동 한장씩 발행")
+    void mixCreateTicket() {
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        lottoNumbers.add(LottoNumbersFactory.manualCreateSingleNumbers("3, 10, 17, 42, 43, 44"));
+        lottoNumbers.add(LottoNumbersFactory.autoCreateSingleNumbers(new LottoNumberGenerator()));
+
+        Lotto lotto = LottoFactory.manualCreateLotto(lottoNumbers);
+        assertThat(lotto.getLottoSize()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("수동, 자동 한장씩 발행. count로 줬을 때")
+    void mixCreateTicketWithCount() {
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        lottoNumbers.add(LottoNumbersFactory.autoCreateSingleNumbers(new LottoNumberGenerator()));
+
+        Lotto lotto = LottoFactory.mixCreateLotto(lottoNumbers, 1);
+        assertThat(lotto.getLottoSize()).isEqualTo(2);
     }
 }
