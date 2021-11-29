@@ -17,6 +17,7 @@ public class LottoPaper {
         int winningCount = winningNumbers.winningCount(numbers);
         boolean isBonusMatch = winningNumbers.isBonusMatch(numbers);
         return WinningPrice.of(winningCount, isBonusMatch);
+
     }
 
     public List<Integer> getNumberValues() {

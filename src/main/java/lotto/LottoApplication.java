@@ -15,6 +15,7 @@ public class LottoApplication {
         List<LottoPaper> lottoPapers = controller.purchaseLotto(lottoCount);
         lottoPapers.forEach(outputView::printLottoPaper);
 
+
         WinningNumbers winningNumbers = inputView.inputWinningNumbers();
 
         LottoResult result = new LottoResult(lottoPapers, winningNumbers);
