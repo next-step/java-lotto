@@ -45,15 +45,7 @@ public class Wallet {
     }
 
     public LottoResult lottoResult(WinLotto winLotto) {
-        final Map<Prize, Integer> result = new HashMap<>();
-
-        for (Lotto lotto : this.lottos) {
-            final Prize prize = Prize.of(lotto.matchCount(winLotto), lotto.bonusContained(winLotto));
-            result.putIfAbsent(prize, 0);
-            result.put(prize, result.get(prize) + 1);
-        }
-
-        return new LottoResult(result);
+        return new LottoResult(this.lottos, winLotto);
     }
 
     public List<Lotto> getLottos() {

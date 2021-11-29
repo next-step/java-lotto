@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -13,24 +15,23 @@ public class LottoResult {
         this.value = value;
     }
 
+    public LottoResult(List<Lotto> lottos, WinLotto winLotto) {
+        final Map<Prize, Integer> result = new HashMap<>();
+
+        for (Lotto lotto : lottos) {
+            final Prize prize = Prize.of(lotto.matchCount(winLotto), lotto.bonusContained(winLotto));
+            result.putIfAbsent(prize, 0);
+            result.put(prize, result.get(prize) + 1);
+        }
+
+        this.value = result;
+    }
+
     /*
         INTERFACE
      */
     public int countByPrize(Prize prize) {
         return this.value.getOrDefault(prize, 0);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoResult that = (LottoResult) o;
-        return Objects.equals(value, that.value);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
     }
 
     public double rate(Money unitPrice) {
@@ -45,5 +46,21 @@ public class LottoResult {
                 .sum();
 
         return totalPrize / (lottoCount * unitPrice.getValue());
+    }
+
+    /*
+        FUNCTION
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoResult that = (LottoResult) o;
+        return Objects.equals(value, that.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }
