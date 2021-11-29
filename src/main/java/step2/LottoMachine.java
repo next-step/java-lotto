@@ -1,13 +1,12 @@
 package step2;
 
-import javax.xml.transform.Result;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class LottoMachine {
 
     private List<Lotto> lottos;
+    private LottoPrice lottoPrice;
 
     public LottoMachine() {
         try (Scanner scanner = new Scanner(System.in)) {
@@ -15,11 +14,13 @@ public class LottoMachine {
             makeLotto(inputView.askPurchaseAmount());
             ResultView.showLottoUnitCount(lottos.size());
             ResultView.showLottoUnitDetail(lottos);
+            Lotto lastWeekWinningLotto = new Lotto(inputView.askLastWeekWinningNumber());
+            ResultView.showWinningStats(lottos, lastWeekWinningLotto, lottoPrice);
         }
     }
 
     private void makeLotto(String askPurchaseAmount) {
-        LottoPrice lottoPrice = new LottoPrice(askPurchaseAmount);
+        this.lottoPrice = new LottoPrice(askPurchaseAmount);
         this.lottos = LottoGenerator.publish(lottoPrice.getAvailableForPurchaseCount());
     }
 

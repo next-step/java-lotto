@@ -6,6 +6,10 @@ public class LottoGenerator {
 
     private static final List<Ball> DEFAULT_LOTTO_NUMBERS = new ArrayList<>();
 
+    private LottoGenerator() {
+        throw new AssertionError();
+    }
+
     static {
         for (int i = 1; i < 46; i++) {
             DEFAULT_LOTTO_NUMBERS.add(new Ball(i));
