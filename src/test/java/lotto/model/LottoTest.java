@@ -18,7 +18,7 @@ public class LottoTest {
     @ParameterizedTest
     @MethodSource("matchParameter")
     void matchTest(Lotto lotto, Lotto winningNnumber, int expected) {
-        assertThat(lotto.getMachedCount(winningNnumber)).isEqualTo(expected);
+        assertThat(lotto.matchCount(winningNnumber)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> matchParameter() {

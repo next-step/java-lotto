@@ -10,7 +10,7 @@ public class Lotto {
         this.values = values;
     }
 
-    public int getMachedCount(Lotto lotto) {
+    public int matchCount(Lotto lotto) {
         return (int) values.stream()
                            .filter(lotto.values::contains)
                            .count();

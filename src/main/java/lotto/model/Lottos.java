@@ -24,6 +24,6 @@ public class Lottos {
     }
 
     private Rank makeRank(Lotto lotto, Lotto target, Number bonusNumber) {
-        return Rank.from(lotto.getMachedCount(target), lotto.contains(bonusNumber));
+        return Rank.from(lotto.matchCount(target), lotto.contains(bonusNumber));
     }
 }
