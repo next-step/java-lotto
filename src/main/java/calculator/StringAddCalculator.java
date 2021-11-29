@@ -46,13 +46,13 @@ public class StringAddCalculator {
             checkIsNegative(number);
             return number;
         } catch (NumberFormatException e) {
-            throw new RuntimeException();
+            throw new CustomNumberFormatException();
         }
     }
 
     static void checkIsNegative(Integer number) {
         if (number < 0) {
-            throw new RuntimeException();
+            throw new CustomNumberFormatException();
         }
     }
 }
