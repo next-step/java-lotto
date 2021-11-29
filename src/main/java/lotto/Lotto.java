@@ -45,16 +45,10 @@ public class Lotto {
         return this.value.contains(number);
     }
 
-    public int matchCount(WinLotto winLotto) {
-        return (int) this.value.stream()
-                .filter(winLotto::checkGeneralNumber)
+    public int matchCount(Lotto targetLotto) {
+        return (int) targetLotto.value.stream()
+                .filter(this.value::contains)
                 .count();
-    }
-
-    public boolean bonusContained(WinLotto winLotto) {
-        return this.value.stream()
-                .filter(winLotto::checkBonus)
-                .count() > 0;
     }
 
     /*

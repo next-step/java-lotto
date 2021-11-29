@@ -7,6 +7,7 @@ import static lotto.Prize.*;
 import lotto.Money;
 import lotto.Prize;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -30,7 +31,7 @@ public class ResultView {
             forSecond(prize, stringBuilder);
 
             stringBuilder.append("(")
-                    .append(prize.getPrize())
+                    .append(new BigDecimal(prize.getPrize()))
                     .append("원)- ")
                     .append(lottoResult.countByPrize(prize))
                     .append("개");
@@ -38,7 +39,7 @@ public class ResultView {
             System.out.println(stringBuilder);
         }
 
-        System.out.println("총 수익률은 " + this.lottoResult.rate(new Money(UNIT_PRICE)) + "입니다.");
+        System.out.println("총 수익률은 " + String.format("%.2f", this.lottoResult.rate(new Money(UNIT_PRICE))) + "입니다.");
     }
 
     private void forSecond(Prize prize, StringBuilder stringBuilder) {

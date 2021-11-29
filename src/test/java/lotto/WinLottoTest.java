@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static lotto.Prize.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -50,23 +51,29 @@ public class WinLottoTest {
     }
 
     @ParameterizedTest
-    @MethodSource("checkBonusSource")
-    @DisplayName("WinLotto 는 LottoNumber 와 협력하여 LottoNumber 가 보너스 번호인지 확인할 수 있다.")
-    void checkBonus(int number, boolean result) {
+    @MethodSource("matchSource")
+    @DisplayName("WinLotto 는 Lotto 와 협력하여 Prize 를 확인할 수 있다.")
+    void match(List<Integer> targetNumbers, Prize result) {
         // given
         WinLotto self = new WinLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
         // when
-        LottoNumber lottoNumber = LottoNumber.of(number);
+        Lotto lotto = new Lotto(targetNumbers);
 
         // then
-        assertThat(self.checkBonus(lottoNumber)).isEqualTo(result);
+        assertThat(self.match(lotto)).isEqualTo(result);
     }
 
-    static Stream<Arguments> checkBonusSource() {
+    static Stream<Arguments> matchSource() {
         return Stream.of(
-                Arguments.of(6, false),
-                Arguments.of(7, true)
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), FIRST),
+                Arguments.of(Arrays.asList(2, 3, 4, 5, 6, 7), SECOND),
+                Arguments.of(Arrays.asList(2, 3, 4, 5, 6, 8), THIRD),
+                Arguments.of(Arrays.asList(3, 4, 5, 6, 7, 8), FOURTH),
+                Arguments.of(Arrays.asList(4, 5, 6, 7, 8, 9), FIFTH),
+                Arguments.of(Arrays.asList(5, 6, 7, 8, 9, 10), NONE),
+                Arguments.of(Arrays.asList(6, 7, 8, 9, 10, 11), NONE),
+                Arguments.of(Arrays.asList(7, 8, 9, 10, 11, 12), NONE)
         );
     }
 }

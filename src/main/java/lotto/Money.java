@@ -29,8 +29,8 @@ public class Money {
         return new Money(this.value - other.value);
     }
 
-    public int getValue() {
-        return value;
+    public long multiply(long weight) {
+        return weight * this.value;
     }
 
     /*

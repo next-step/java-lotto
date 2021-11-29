@@ -19,7 +19,7 @@ public class LottoResult {
         final Map<Prize, Integer> result = new HashMap<>();
 
         for (Lotto lotto : lottos) {
-            final Prize prize = Prize.of(lotto.matchCount(winLotto), lotto.bonusContained(winLotto));
+            final Prize prize = winLotto.match(lotto);
             result.putIfAbsent(prize, 0);
             result.put(prize, result.get(prize) + 1);
         }
@@ -45,7 +45,7 @@ public class LottoResult {
                 .mapToDouble(prize -> prize.getPrize() * this.value.get(prize))
                 .sum();
 
-        return totalPrize / (lottoCount * unitPrice.getValue());
+        return totalPrize / unitPrice.multiply(lottoCount);
     }
 
     /*

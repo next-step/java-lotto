@@ -25,12 +25,10 @@ public class WinLotto {
     /*
         INTERFACE
      */
-    public boolean checkGeneralNumber(LottoNumber number) {
-        return this.lotto.contains(number);
-    }
-
-    public boolean checkBonus(LottoNumber lottoNumber) {
-        return this.bonus == lottoNumber;
+    public Prize match(Lotto target) {
+        int matchCount = lotto.matchCount(target);
+        boolean matchBonus = target.contains(bonus);
+        return Prize.of(matchCount, matchBonus);
     }
 
     /*

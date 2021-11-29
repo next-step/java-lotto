@@ -59,10 +59,10 @@ public class LottoTest {
         Lotto self = new Lotto(1, 2, 3, 4, 5, 6);
 
         // when
-        WinLotto winLotto = new WinLotto(winNumbers, 13);
+        Lotto other = new Lotto(winNumbers);
 
         // then
-        assertThat(self.matchCount(winLotto)).isEqualTo(result);
+        assertThat(self.matchCount(other)).isEqualTo(result);
     }
 
     static Stream<Arguments> matchCountSource() {
@@ -80,21 +80,21 @@ public class LottoTest {
     @ParameterizedTest
     @MethodSource("bonusContainedSource")
     @DisplayName("Lotto 는 WinLotto 와 협력하여 보너스 번호가 match 되는지 확인 할 수 있다.")
-    void bonusContained(List<Integer> myNumber, boolean result) {
+    void bonusContained(List<Integer> myNumber, int bonusNumber, boolean result) {
         // given
-        WinLotto winLotto = new WinLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
-
-        // when
         Lotto self = new Lotto(myNumber);
 
+        // when
+        LottoNumber lottoNumber = LottoNumber.of(bonusNumber);
+
         // then
-        assertThat(self.bonusContained(winLotto)).isEqualTo(result);
+        assertThat(self.contains(lottoNumber)).isEqualTo(result);
     }
 
     static Stream<Arguments> bonusContainedSource() {
         return Stream.of(
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), false),
-                Arguments.of(Arrays.asList(2, 3, 4, 5, 6, 7), true)
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7, false),
+                Arguments.of(Arrays.asList(2, 3, 4, 5, 6, 7), 7, true)
         );
     }
 }
