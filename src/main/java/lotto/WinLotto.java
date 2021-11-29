@@ -25,12 +25,12 @@ public class WinLotto {
     /*
         INTERFACE
      */
-    public boolean checkBonus(LottoNumber lottoNumber) {
-        return this.bonus == lottoNumber;
+    public boolean checkGeneralNumber(LottoNumber number) {
+        return this.lotto.contains(number);
     }
 
-    public int matchCount(Set<LottoNumber> walletLotto) {
-        return (int) walletLotto.stream().filter(this.lotto::contains).count();
+    public boolean checkBonus(LottoNumber lottoNumber) {
+        return this.bonus == lottoNumber;
     }
 
     /*
