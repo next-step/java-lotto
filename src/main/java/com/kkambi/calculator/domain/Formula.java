@@ -17,13 +17,13 @@ public class Formula {
         this.formula = formula;
     }
 
-    public Numbers convertToNumbers(Pattern groupPattern, String basicDelimiter) {
+    public Elements split(Pattern groupPattern, String basicDelimiter) {
         Matcher matcher = groupPattern.matcher(formula);
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
-            return new Numbers(matcher.group(2).split(customDelimiter));
+            return new Elements(matcher.group(2).split(customDelimiter));
         }
-        return new Numbers(formula.split(basicDelimiter));
+        return new Elements(formula.split(basicDelimiter));
     }
 
     private boolean isEmpty(String formula) {
@@ -33,5 +33,4 @@ public class Formula {
 
         return formula.isEmpty();
     }
-
 }
