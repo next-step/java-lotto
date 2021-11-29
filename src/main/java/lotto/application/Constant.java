@@ -7,8 +7,11 @@ public class Constant {
     public static final String INPUT_MESSAGE_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
     public static final String INPUT_MESSAGE_WINNER_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String INPUT_MESSAGE_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+    public static final String INPUT_MESSAGE_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    public static final String INPUT_MESSAGE_MANUAL_LOTTO_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
 
     public static final String OUTPUT_MESSAGE_PURCHASE_LOTTO = "개를 구매했습니다.";
+    public static final String OUTPUT_MESSAGE_PURCHASE_MIX_LOTTO_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 
     public static final String EXCEPTION_MESSAGE_LENGTH_VALIDATION = "당첨 번호가 6개가 아닙니다.";
     public static final String EXCEPTION_MESSAGE_DUPLICATE_VALIDATION = "중복되는 당첨 번호가 있습니다.";

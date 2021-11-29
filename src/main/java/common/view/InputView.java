@@ -9,6 +9,10 @@ public class InputView {
     private InputView() {
     }
 
+    public static String nextLine() {
+        return SCANNER.nextLine();
+    }
+
     public static String nextLine(String message) {
         OutputView.print(message);
         return SCANNER.nextLine();

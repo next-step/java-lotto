@@ -2,7 +2,10 @@ package common.view;
 
 import common.model.Number;
 import lotto.application.Constant;
-import lotto.model.*;
+import lotto.model.Lotto;
+import lotto.model.LottoNumber;
+import lotto.model.LottoRank;
+import lotto.model.LottoStore;
 
 import java.util.List;
 import java.util.Map;
@@ -50,6 +53,12 @@ public class OutputView {
 
     public static void print(Lotto lotto) {
         OutputView.print(String.valueOf(lotto.getLottoSize()), Constant.OUTPUT_MESSAGE_PURCHASE_LOTTO);
+        print(lotto.toString());
+    }
+
+    public static void print(Lotto lotto, int manualLottoCount) {
+        int autoLottoCount = lotto.getLottoSize() - manualLottoCount;
+        OutputView.print(String.format(Constant.OUTPUT_MESSAGE_PURCHASE_MIX_LOTTO_FORMAT, manualLottoCount, autoLottoCount));
         print(lotto.toString());
     }
 
