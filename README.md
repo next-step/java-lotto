@@ -30,38 +30,29 @@
 
 # 로또 step 2 - 자동
 ## 기능목록
-- LottoRule
-  - 로또의 범위를 가진 룰을 생성한다
-  - 1-45의 6개의 숫자
-  - 로또 한장의 금액
 - LottoNumber
     - 생성 시 숫자가 아닌 값이 오면  Runtime Exception
     - 숫자의 범위가 1-45가 아니면  Runtime Exception
 - Lotto
     - 생성 시 LottoNumber의 배열이 6자리가 아니면 runtime exception
-    - checkWinning() 비교 후 일치하는 숫자의 WinningRank를 반환
     - LottoNumber 배열 sort()
 - Lottos
     - Lotto list를 래핑하는 1급객체
 - 당첨 enum
     - 등수 / 일치 개수 / 상금 을 밸류로 가짐
-- LottoWallet
-    - 수익률 구하기
-    - 로또 당첨 확인
 - Money
   - 생성 시 숫자가 아닌 값이 오면  Runtime Exception
   - 금액을 기준으로 살 수 있는 로또 갯수를 구함
   - 금액 비교 lessThan 생성
+- LottoPaper
+  - 자동 구매 갯수
+  - 수동 구매 내역
 - LottoSeller
-  - buyLotto(Money) 살 수 있는 만큼의 Lotto를 생성해서 반환
-  - money 가 price 보다 작을 경우 Runtime Exception
-  - money 가 null 일 경우 Runtime Exception
+  - buyLotto(LottoPaper) 구매내역에 맞게 lottos 를 반환한다.
 - LottoGenerator
-  - 로또 갯수 만큼 생성
-- LottoGeneratorStrategy
-  - functional interface로 구현 -> 이후 테스트 시에 특정 값을 쉽게 입력할 수 있게
-  - generate() 
-  - RandomLottoGeneratorStrategy 랜덤으로 발생
+  - 로또 생성
+  - string을 받아서 로또 생성
+  - 랜덤 로또 생성
 - WinningHistory
    - 로또 당첨 내역 VO
    - 가지고 있던 money
