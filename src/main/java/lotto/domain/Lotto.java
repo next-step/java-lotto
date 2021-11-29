@@ -18,25 +18,33 @@ public class Lotto {
                 .mapToInt(Integer::parseInt)
                 .sorted()
                 .mapToObj(LottoNumber::valueOf)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
     }
 
-    public Lotto(final List<LottoNumber> lottoNumbers) {
+    public Lotto(final Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
-        this.lottoNumbers = lottoNumbers;
+
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+        Collections.sort(this.lottoNumbers);
     }
 
-    public static Lotto pickRandomNumber() {
+    public static Lotto pickManualNumber(String numbers) {
+        return new Lotto(Arrays.stream(numbers.split(STRING_NUMBERS_DELIMITER))
+                .map(String::trim)
+                .mapToInt(Integer::parseInt)
+                .sorted()
+                .mapToObj(LottoNumber::valueOf)
+                .collect(Collectors.toSet()));
+    }
+
+    public static Lotto pickAutoNumber() {
         Set<LottoNumber> tmpLottoNumbers = new HashSet<>();
         while (tmpLottoNumbers.size() < NUMBER_COUNT) {
             tmpLottoNumbers.add(LottoNumber.valueOf(RandomUtil.randomInt(LottoNumber.MAX_VALUE)));
         }
-
-        List<LottoNumber> lottoNumbers = new ArrayList<>(tmpLottoNumbers);
-        Collections.sort(lottoNumbers);
-        return new Lotto(lottoNumbers);
+        return new Lotto(tmpLottoNumbers);
     }
 
     public int countMatch(Lotto other) {
@@ -51,6 +59,21 @@ public class Lotto {
 
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Lotto lotto = (Lotto) o;
+
+        return lottoNumbers != null ? lottoNumbers.equals(lotto.lottoNumbers) : lotto.lottoNumbers == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return lottoNumbers != null ? lottoNumbers.hashCode() : 0;
     }
 
 }

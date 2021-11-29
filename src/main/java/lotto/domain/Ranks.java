@@ -12,14 +12,14 @@ public class Ranks {
         this.rank = rank;
     }
 
-    public int countRankOf(Rank first) {
-        return (int) rank.stream()
-                .filter(first::equals)
+    public int countRankOf(Rank rank) {
+        return (int) this.rank.stream()
+                .filter(rank::equals)
                 .count();
     }
 
     public double calculateRateOfProfit() {
-        return ((int)(rank.stream()
+        return ((int) (rank.stream()
                 .mapToInt(Rank::getPrize)
                 .sum() / (rank.size() * 1000d) * 100)) / 100d;
     }
