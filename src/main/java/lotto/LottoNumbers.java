@@ -23,7 +23,7 @@ public class LottoNumbers {
                 .collect(Collectors.toList()));
     }
 
-    public int winningCount(LottoNumbers winningNumbers) {
+    public int matchCount(LottoNumbers winningNumbers) {
         return (int) winningNumbers.numbers
                 .stream()
                 .filter(this.numbers::contains)
@@ -34,6 +34,10 @@ public class LottoNumbers {
         return this.numbers.stream()
                 .map(LottoNumber::getValue)
                 .collect(Collectors.toList());
+    }
+
+    public boolean contains(LottoNumber number) {
+        return this.numbers.contains(number);
     }
 
     @Override

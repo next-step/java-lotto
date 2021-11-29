@@ -6,16 +6,16 @@ import java.util.List;
 
 public class LottoResult {
     private List<LottoPaper> purchasedLottos;
-    private LottoNumbers lottoNumbers;
+    private WinningNumbers winningNumbers;
 
-    public LottoResult(List<LottoPaper> purchasedLottos, LottoNumbers lottoNumbers) {
+    public LottoResult(List<LottoPaper> purchasedLottos, WinningNumbers winningNumbers) {
         this.purchasedLottos = purchasedLottos;
-        this.lottoNumbers = lottoNumbers;
+        this.winningNumbers = winningNumbers;
     }
 
     public Integer getWinningCount(WinningPrice winningPrice) {
         return Long.valueOf(this.purchasedLottos.stream().filter(lottoPaper ->
-                lottoPaper.getWinningPrice(lottoNumbers)
+                lottoPaper.getWinningPrice(winningNumbers)
                         .equals(winningPrice))
                 .count())
                 .intValue();
@@ -31,7 +31,7 @@ public class LottoResult {
 
     private Integer getWinningPrice(WinningPrice winningPrice) {
         return Long.valueOf(this.purchasedLottos.stream().filter(lottoPaper ->
-                lottoPaper.getWinningPrice(lottoNumbers)
+                lottoPaper.getWinningPrice(winningNumbers)
                         .equals(winningPrice))
                 .count())
                 .intValue() * winningPrice.getPrice();

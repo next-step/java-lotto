@@ -10,6 +10,8 @@ import java.util.List;
 
 import static lotto.utils.TestUtils.testLottoNumbers;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LottoNumbersTest {
 
@@ -54,6 +56,19 @@ class LottoNumbersTest {
         LottoNumbers lottoNumbers = this.testLottoNumbers.selectNumbers(count);
 
         // then
-        assertThat(lottoNumbers.winningCount(winningNumbers)).isEqualTo(6);
+        assertThat(lottoNumbers.matchCount(winningNumbers)).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("contains 메소드는 특정 로또 번호가 로또 번호 목록에 포함되어 있는지 여부를 반환한다")
+    void 테스트_contains_포함_여부_반환한다() {
+        // given
+        LottoNumbers winningNumbers = testLottoNumbers();
+
+        // when
+
+        // then
+        assertTrue(winningNumbers.contains(new LottoNumber(1)));
+        assertFalse(winningNumbers.contains(new LottoNumber(7)));
     }
 }

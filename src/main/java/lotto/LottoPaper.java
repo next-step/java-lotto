@@ -13,9 +13,10 @@ public class LottoPaper {
         this.numbers = numbers;
     }
 
-    public WinningPrice getWinningPrice(LottoNumbers winningNumbers) {
-        int winningCount = numbers.winningCount(winningNumbers);
-        return WinningPrice.of(winningCount);
+    public WinningPrice getWinningPrice(WinningNumbers winningNumbers) {
+        int winningCount = winningNumbers.winningCount(numbers);
+        boolean isBonusMatch = winningNumbers.isBonusMatch(numbers);
+        return WinningPrice.of(winningCount, isBonusMatch);
     }
 
     public List<Integer> getNumberValues() {
