@@ -24,6 +24,8 @@ class GameResultTest {
         int num4 = 41;
         int num5 = 42;
 
+        int bonusNumber = 40;
+
         int price = 1000;
 
         LottoTickets lottoTickets = new LottoTickets(
@@ -33,7 +35,7 @@ class GameResultTest {
                 mockLottoTicket(num1, num2, num4, 4, 5, 6)), price);
 
         ResultLotto resultLotto = new ResultLotto(
-            mockLottoTicket(num1, num2, num3, num4, num5, 43));
+            mockLottoTicket(num1, num2, num3, num4, num5, 43), bonusNumber);
 
         gameResult = lottoTickets.result(resultLotto);
     }
