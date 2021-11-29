@@ -31,9 +31,9 @@ public class LottoFactory {
         return new Lotto(lotto);
     }
 
-    public static Lotto mixCreateLotto(List<LottoNumbers> manualLottoNumbers, int count) {
+    public static Lotto mixCreateLotto(List<LottoNumbers> manualLottoNumbers, int autoLottoCount) {
         List<LottoNumbers> autoLottoNumbers = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < autoLottoCount; i++) {
             autoLottoNumbers.add(LottoNumbersFactory.autoCreateSingleNumbers(new LottoNumberGenerator()));
         }
         manualLottoNumbers.addAll(autoLottoNumbers);

@@ -3,6 +3,7 @@ package lotto.model;
 import common.model.Number;
 import lotto.factory.LottoFactory;
 
+import java.util.List;
 import java.util.Map;
 
 public class LottoStore {
@@ -14,6 +15,11 @@ public class LottoStore {
 
     public static Lotto ticket(int purchaseAmount) {
         return LottoFactory.autoCreateLotto(purchaseAmount / LOTTO_PRICE);
+    }
+
+    public static Lotto mixTicket(int purchaseAmount, List<LottoNumbers> manualLottoNumbers) {
+        int autoLottoCount = purchaseAmount / LOTTO_PRICE - manualLottoNumbers.size();
+        return LottoFactory.mixCreateLotto(manualLottoNumbers, autoLottoCount);
     }
 
     public static float calculateRateOfRevenue(Map<LottoRank, Number> lottoRankNumbers, int purchaseAmount) {
