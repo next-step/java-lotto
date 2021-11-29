@@ -12,7 +12,7 @@ public class LottoWinner extends LottoNumbers {
         super(lottoNumbers);
         this.bonusNumber = bonusNumber;
     }
-    
+
     public LottoRank match(LottoNumbers matchNumbers) {
         Number count = new Number();
 
