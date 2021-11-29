@@ -18,14 +18,16 @@ public class Lotto {
                 .mapToInt(Integer::parseInt)
                 .sorted()
                 .mapToObj(LottoNumber::valueOf)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
     }
 
-    public Lotto(final List<LottoNumber> lottoNumbers) {
+    public Lotto(final Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
-        this.lottoNumbers = lottoNumbers;
+
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+        Collections.sort(this.lottoNumbers);
     }
 
     public static Lotto pickManualNumber(String numbers) {
@@ -34,7 +36,7 @@ public class Lotto {
                 .mapToInt(Integer::parseInt)
                 .sorted()
                 .mapToObj(LottoNumber::valueOf)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
     }
 
     public static Lotto pickAutoNumber() {
@@ -42,10 +44,7 @@ public class Lotto {
         while (tmpLottoNumbers.size() < NUMBER_COUNT) {
             tmpLottoNumbers.add(LottoNumber.valueOf(RandomUtil.randomInt(LottoNumber.MAX_VALUE)));
         }
-
-        List<LottoNumber> lottoNumbers = new ArrayList<>(tmpLottoNumbers);
-        Collections.sort(lottoNumbers);
-        return new Lotto(lottoNumbers);
+        return new Lotto(tmpLottoNumbers);
     }
 
     public int countMatch(Lotto other) {

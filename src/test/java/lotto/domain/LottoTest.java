@@ -27,6 +27,14 @@ class LottoTest {
         assertDoesNotThrow(() -> Lotto.pickAutoNumber());
     }
 
+    @DisplayName("수동 중복 번호 불가")
+    @Test
+    void create_string_duplicate() {
+        assertThatThrownBy(() -> Lotto.pickManualNumber("1, 1, 1, 1, 1, 1"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 번호는 6개여야 합니다.");
+    }
+
     @DisplayName("문자열숫자 6개로 로또를 생성한다.(범위 이외의 숫자_실패)")
     @ParameterizedTest
     @ValueSource(strings = {"0, 1, 2, 3, 4, 5", "46, 1, 2, 3, 4, 5"})
