@@ -1,9 +1,5 @@
 package lotto.view;
 
-import lotto.Lotto;
-import lotto.Money;
-import lotto.Wallet;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
