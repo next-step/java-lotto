@@ -11,6 +11,7 @@ import lotto.model.Result;
 public final class ResultView {
 
     private static final StringBuilder stringBuilder = new StringBuilder();
+    private static final int BREAK_EVEN_POINT = 1;
 
     private ResultView() {
     }
@@ -35,7 +36,9 @@ public final class ResultView {
         stringBuilder.setLength(0);
         stringBuilder.append("당첨 통계\n---------\n");
         printRanks(result);
-        stringBuilder.append("총 수익률은 " + purchasedAmount.calculateRatio(result.calculateWinningAmount()) + "입니다.");
+        Double ratio = purchasedAmount.calculateRatio(result.calculateWinningAmount());
+        stringBuilder.append("총 수익률은 " + ratio + "입니다.");
+        stringBuilder.append(printProfitableOrNot(ratio));
         System.out.println(stringBuilder);
     }
 
@@ -54,5 +57,12 @@ public final class ResultView {
             stringBuilder.append(", 보너스 볼 일치");
         }
         stringBuilder.append(" (" + rank.getPrice() + "원) - " + entry.getValue() + "개\n");
+    }
+
+    private static String printProfitableOrNot(Double ratio) {
+        if (ratio < BREAK_EVEN_POINT) {
+            return "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+        }
+        return "(기준이 1이기 때문에 이득이라는 의미)";
     }
 }
