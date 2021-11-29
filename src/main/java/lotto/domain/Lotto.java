@@ -28,7 +28,16 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto pickRandomNumber() {
+    public static Lotto pickManualNumber(String numbers) {
+        return new Lotto(Arrays.stream(numbers.split(STRING_NUMBERS_DELIMITER))
+                .map(String::trim)
+                .mapToInt(Integer::parseInt)
+                .sorted()
+                .mapToObj(LottoNumber::valueOf)
+                .collect(Collectors.toList()));
+    }
+
+    public static Lotto pickAutoNumber() {
         Set<LottoNumber> tmpLottoNumbers = new HashSet<>();
         while (tmpLottoNumbers.size() < NUMBER_COUNT) {
             tmpLottoNumbers.add(LottoNumber.valueOf(RandomUtil.randomInt(LottoNumber.MAX_VALUE)));

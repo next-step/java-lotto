@@ -18,7 +18,7 @@ class LottoTest {
     @ParameterizedTest
     @ValueSource(strings = {"1, 2, 3, 4, 5, 45"})
     void create_string(String lottoNumbers) {
-        assertDoesNotThrow(() -> new Lotto(lottoNumbers));
+        assertDoesNotThrow(() -> Lotto.pickManualNumber(lottoNumbers));
     }
 
     @DisplayName("문자열숫자 6개로 로또를 생성한다.(범위 이외의 숫자_실패)")

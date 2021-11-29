@@ -25,7 +25,7 @@ public class Lottos {
 
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottos.add(Lotto.pickRandomNumber());
+            lottos.add(Lotto.pickAutoNumber());
         }
         return lottos;
     }
@@ -37,7 +37,7 @@ public class Lottos {
 
         List<Lotto> lottos = new ArrayList<>();
         for (String lottoNumber : lottoNumbers) {
-            lottos.add(new Lotto(lottoNumber));
+            lottos.add(Lotto.pickManualNumber(lottoNumber));
         }
         return lottos;
     }
