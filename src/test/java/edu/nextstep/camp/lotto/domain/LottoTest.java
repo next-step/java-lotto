@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -70,5 +72,13 @@ public class LottoTest {
     public void matchedCount() {
         final Lotto testLotto = Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6));
         assertThat(testLotto.matchedCount(testLotto)).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("check given number is in lotto numbers")
+    public void contains() {
+        Lotto lotto = Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6));
+        assertThat(lotto.contains(LottoNumber.of(6))).isTrue();
+        assertThat(lotto.contains(LottoNumber.of(7))).isFalse();
     }
 }
