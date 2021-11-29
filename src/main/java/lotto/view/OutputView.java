@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.text.MessageFormat;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 import lotto.domain.Award;
 import lotto.domain.GameResult;
@@ -31,10 +32,9 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        printAwardCase(Award.MATCH_OF_THREE, gameResult);
-        printAwardCase(Award.MATCH_OF_FOUR, gameResult);
-        printAwardCase(Award.MATCH_OF_FIVE, gameResult);
-        printAwardCase(Award.MATCH_OF_SIX, gameResult);
+        Arrays.stream(Award.values())
+            .filter(award -> award != Award.NON_MATCH)
+            .forEach(award -> printAwardCase(award, gameResult));
 
         System.out.println(
             MessageFormat.format("총 수익률은 {0}입니다.", String.format("%.2f", gameResult.getYield())));
