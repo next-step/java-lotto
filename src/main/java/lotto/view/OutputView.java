@@ -42,10 +42,22 @@ public class OutputView {
 
     private void printAwardCase(Award award, GameResult gameResult) {
         System.out.println(
-            MessageFormat.format("{0}개 일치 ({1}원)-{2}개",
-                award.getTopMatchCount(),
+            MessageFormat.format(getMessagePattern(award),
+                award.getMatchCount(),
                 award.getReward(),
                 gameResult.getResultByCount(award)));
+    }
+
+    private String getMessagePattern(Award award) {
+        StringBuilder messagePatternBuilder = new StringBuilder("{0}개 일치");
+
+        if (award == Award.MATCH_OF_FIVE_WITH_BONUS) {
+            messagePatternBuilder.append(", 보너스 볼 일치");
+        }
+
+        messagePatternBuilder.append("({1}원)-{2}개");
+
+        return messagePatternBuilder.toString();
     }
 
 }

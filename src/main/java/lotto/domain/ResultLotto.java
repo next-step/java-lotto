@@ -11,7 +11,8 @@ public class ResultLotto {
     }
 
     public Award award(LottoTicket lottoTicket) {
-        return Award.of(this.winningTicket.matchOfNumberCount(lottoTicket));
+        return Award.of(winningTicket.matchOfNumberCount(lottoTicket),
+            lottoTicket.matchOfNumber(bonusNumber));
     }
 
 }

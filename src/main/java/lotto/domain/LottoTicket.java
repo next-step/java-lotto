@@ -33,6 +33,10 @@ public class LottoTicket {
             .filter(lottoTicket.numbers::contains).count();
     }
 
+    public boolean matchOfNumber(int number) {
+        return numbers.contains(number);
+    }
+
     public List<Integer> getNumbers() {
         return numbers;
     }
