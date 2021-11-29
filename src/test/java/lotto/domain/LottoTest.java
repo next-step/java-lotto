@@ -21,6 +21,12 @@ class LottoTest {
         assertDoesNotThrow(() -> Lotto.pickManualNumber(lottoNumbers));
     }
 
+    @DisplayName("자동으로 로또 생성가능한지 확인")
+    @Test
+    void create_auto() {
+        assertDoesNotThrow(() -> Lotto.pickAutoNumber());
+    }
+
     @DisplayName("문자열숫자 6개로 로또를 생성한다.(범위 이외의 숫자_실패)")
     @ParameterizedTest
     @ValueSource(strings = {"0, 1, 2, 3, 4, 5", "46, 1, 2, 3, 4, 5"})
