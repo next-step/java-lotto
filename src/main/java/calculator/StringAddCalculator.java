@@ -42,7 +42,7 @@ public class StringAddCalculator {
 
     static Integer parseInt(String numberString) {
         try {
-            Integer number = Integer.parseInt(numberString);
+            Integer number = Integer.valueOf(numberString);
             checkIsNegative(number);
             return number;
         } catch (NumberFormatException e) {
