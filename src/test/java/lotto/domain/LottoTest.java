@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoTest {
 
     @Test
-    @DisplayName("로또 생성 테스트")
+    @DisplayName("로또 인위적으로 생성 테스트")
     void createTest() {
         List<LottoNumber> test = Arrays.asList(new LottoNumber(1),new LottoNumber(2),new LottoNumber(3)
                 ,new LottoNumber(4),new LottoNumber(5),new LottoNumber(6));
@@ -24,17 +24,16 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("1~45 랜덤 함수 생성 기능")
+    @DisplayName("로또객체 자동으로 생성 되는지 테스트")
     void randomCreateTest() {
         Lotto autoLotto = new Lotto();
-//        List<LottoNumber> lottoRandomNumbers = autoLotto.getNumbers();
         Set<LottoNumber> lottoRandomNumbers = autoLotto.getNumbers();
 
         assertThat(lottoRandomNumbers).size().isEqualTo(6);
     }
 
     @Test
-    @DisplayName("예외 검증")
+    @DisplayName("객체 생성 시 사이즈가 6넘어가는지 예외 검증")
     void exceptionTest() {
         assertThatThrownBy(() -> Lotto.from(Arrays.asList(new LottoNumber(1),new LottoNumber(2),
                 new LottoNumber(3),new LottoNumber(4),new LottoNumber(5)
@@ -48,7 +47,7 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("맞은 개수 카운트 검증")
+    @DisplayName("몇 개의 번호가 맞는지 개수 카운트 검증")
     void checkCount() {
         List<Integer> winningNumber = Arrays.asList(1,2,3,4,5,6);
 

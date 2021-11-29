@@ -26,7 +26,7 @@ public class LottoWinningTest {
     }
 
     @Test
-    @DisplayName("생성 테스트")
+    @DisplayName("당첨 번호 입력시 생성 테스트")
     void createTest() {
         List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
         LottoWinning lottoWinning = LottoWinning.from(winningNumbers);
@@ -35,7 +35,7 @@ public class LottoWinningTest {
     }
 
     @Test
-    @DisplayName("예외 검증")
+    @DisplayName("당첨 번호 입력 시 사이즈 확인 예외 검증")
     void exceptionTest() {
         List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6,7);
         assertThatThrownBy(() ->
@@ -43,7 +43,7 @@ public class LottoWinningTest {
     }
 
     @Test
-    @DisplayName("수익률 계산 검증")
+    @DisplayName("당첨번호와 로또티켓을 비교하여 수익률 계산 검증 테스트")
     void profitTest() {
         LottoWinning lottoWinning = LottoWinning.from(Arrays.asList(1,2,3,4,5,6));
 
