@@ -20,6 +20,7 @@ public class LottoResultTest {
   void setUp() {
     Lottos lottos = new Lottos();
     lottos.addLotto(new Lotto(makeLottoNumbers("1,2,3,4,5,6")));
+    lottos.addLotto(new Lotto(makeLottoNumbers("2,3,4,5,6,7")));
     lottos.addLotto(new Lotto(makeLottoNumbers("2,3,4,5,6,45")));
     lottos.addLotto(new Lotto(makeLottoNumbers("3,4,5,6,44,45")));
     lottos.addLotto(new Lotto(makeLottoNumbers("4,5,6,43,44,45")));
@@ -27,7 +28,7 @@ public class LottoResultTest {
     lottos.addLotto(new Lotto(makeLottoNumbers("6,41,42,43,44,45")));
     lottos.addLotto(new Lotto(makeLottoNumbers("40,41,42,43,44,45")));
 
-    Lotto winningLotto = new Lotto(makeLottoNumbers("1,2,3,4,5,6"));
+    WinningLotto winningLotto = new WinningLotto(makeLottoNumbers("1,2,3,4,5,6"), new LottoNumber(7));
 
     lottoResult = new LottoResult(lottos, winningLotto);
   }
@@ -45,7 +46,7 @@ public class LottoResultTest {
   void lottoResultCanReturnEachLottoPrizeMatchCount (LottoPrize inputPrize, int expected) {
     // when
     int matchCount = lottoResult.result(inputPrize);
-
+    System.out.println(String.format("input prize : %d, matchCount : %d, expected  : %d", inputPrize.prize, matchCount, expected));
     // then
     assertThat(matchCount).isEqualTo(expected);
   }
@@ -56,6 +57,7 @@ public class LottoResultTest {
             Arguments.of(LottoPrize.SECOND, 1),
             Arguments.of(LottoPrize.THIRD, 1),
             Arguments.of(LottoPrize.FOURTH, 1),
+            Arguments.of(LottoPrize.FIFTH, 1),
             Arguments.of(LottoPrize.NONE, 3)
     );
   }
