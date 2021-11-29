@@ -61,7 +61,7 @@ public class LottoTicket {
     }
 
     public List<Lotto> getLotto() {
-        return lottoNumbers;
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     @Override
