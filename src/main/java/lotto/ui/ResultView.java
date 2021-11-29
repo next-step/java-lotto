@@ -1,6 +1,7 @@
 package lotto.ui;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoBuyMethod;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.dto.RanksDto;
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    private static final String BUY_LOTTO_MESSAGE = "%d개를 구매했습니다.\n";
+    private static final String BUY_LOTTO_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String RESULT_MESSAGE = "당첨 통계\n---------";
     private static final String RESULT_WINNING_MESSAGE =
             "%d개 일치 (%d원)- %d개\n" +
@@ -20,8 +21,8 @@ public class ResultView {
                     "%d개 일치 (%d원)- %d개\n" +
                     "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    public static void printLottos(Lottos lottos) {
-        System.out.printf(BUY_LOTTO_MESSAGE, lottos.size());
+    public static void printBuyHistory(LottoBuyMethod buyMethod, Lottos lottos) {
+        System.out.printf(BUY_LOTTO_MESSAGE, buyMethod.getManualCount(), buyMethod.getAutoCount());
         for (Lotto lotto : lottos.getLottos()) {
             printLotto(lotto.getLottoNumbers());
         }
@@ -49,5 +50,4 @@ public class ResultView {
                 result.getMatchCountOfFirst(), result.getPrizeOfFirst(), result.getCountOfFirst(),
                 result.getRateOfProfit());
     }
-
 }
