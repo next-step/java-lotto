@@ -8,13 +8,11 @@ public class LottoBuyMethod {
 
     private final int buyCountTotal;
     private final List<String> manualNumbers;
-    private final int autoCount;
 
     public LottoBuyMethod(int money, List<String> manualNumbers) {
         validate(money, manualNumbers);
         this.buyCountTotal = calculateCountAvailable(money);
         this.manualNumbers = manualNumbers;
-        this.autoCount = this.buyCountTotal - this.manualNumbers.size();
     }
 
     private void validate(int money, List<String> manualNumbers) {
@@ -31,7 +29,7 @@ public class LottoBuyMethod {
     }
 
     public Lottos buy() {
-        return new Lottos(autoCount, manualNumbers);
+        return new Lottos(buyCountTotal - manualNumbers.size(), manualNumbers);
     }
 
     public int getBuyCountTotal() {
@@ -43,7 +41,7 @@ public class LottoBuyMethod {
     }
 
     public int getAutoCount() {
-        return autoCount;
+        return buyCountTotal - manualNumbers.size();
     }
 
     @Override
@@ -51,18 +49,16 @@ public class LottoBuyMethod {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        LottoBuyMethod buyMethod = (LottoBuyMethod) o;
+        LottoBuyMethod that = (LottoBuyMethod) o;
 
-        if (buyCountTotal != buyMethod.buyCountTotal) return false;
-        if (autoCount != buyMethod.autoCount) return false;
-        return manualNumbers != null ? manualNumbers.equals(buyMethod.manualNumbers) : buyMethod.manualNumbers == null;
+        if (buyCountTotal != that.buyCountTotal) return false;
+        return manualNumbers != null ? manualNumbers.equals(that.manualNumbers) : that.manualNumbers == null;
     }
 
     @Override
     public int hashCode() {
         int result = buyCountTotal;
         result = 31 * result + (manualNumbers != null ? manualNumbers.hashCode() : 0);
-        result = 31 * result + autoCount;
         return result;
     }
 
