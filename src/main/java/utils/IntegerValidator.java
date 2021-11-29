@@ -1,16 +1,8 @@
 package utils;
 
 import java.text.MessageFormat;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public interface IntegerValidator {
-
-    static List<Integer> getNumbersIfRange(List<Integer> numbers, int min, int max) {
-        return numbers.stream()
-            .map(number -> getNumberIfRange(number, min, max))
-            .collect(Collectors.toList());
-    }
 
     static int getNumberIfRange(int number, int min, int max) {
         if (number < min) {
