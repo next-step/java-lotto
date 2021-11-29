@@ -5,7 +5,8 @@ import java.util.Objects;
 public class LottoNumber {
     public static final int BOUND_START = 1;
     public static final int BOUND_END = 45;
-    private final Integer lottoNumber;
+
+    private final int lottoNumber;
 
     private LottoNumber(int lottoNumber) {
         this.lottoNumber = checkBound(lottoNumber);
@@ -28,7 +29,7 @@ public class LottoNumber {
         }
     }
 
-    private static int checkBound(Integer number) {
+    private int checkBound(Integer number) {
         if (number > BOUND_END) {
             throw new IllegalArgumentException(BOUND_END + "보다 큰 숫자가 입력될 수 없습니다.");
         }
