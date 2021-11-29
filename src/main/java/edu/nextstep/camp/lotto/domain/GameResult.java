@@ -27,7 +27,7 @@ public class GameResult {
     }
 
     public float priceEarningRate() {
-        return (float)ranks.totalPrize().toLong() / (ranks.size() * Store.GAME_PRICE);
+        return (float) ranks.totalPrize().toLong() / (ranks.size() * Store.GAME_PRICE);
     }
 
     @Override

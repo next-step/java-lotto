@@ -12,7 +12,7 @@ public class OutputView {
     public static void printPurchasedLotto(List<List<String>> purchaseList) {
         System.out.printf("%d장을 구입했습니다.\n", purchaseList.size());
 
-        for(List<String> lotto : purchaseList) {
+        for (List<String> lotto : purchaseList) {
             System.out.println("[" + String.join(",", lotto) + "]");
         }
     }
