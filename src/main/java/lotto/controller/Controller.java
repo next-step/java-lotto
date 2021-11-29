@@ -2,25 +2,30 @@ package lotto.controller;
 
 import lotto.Wallet;
 import lotto.WinLotto;
-import lotto.view.InputView;
+import lotto.view.LottoResultInputView;
+import lotto.view.ManualCountInputView;
+import lotto.view.MoneyInputView;
 import lotto.view.ResultView;
 
 public class Controller {
     public static void run() {
-        InputView inputView = new InputView();
+        MoneyInputView moneyInputView = new MoneyInputView();
 
-        inputView.setMoney();
-        Wallet wallet = new Wallet(inputView.getMoney());
+        moneyInputView.setMoney();
+        Wallet wallet = new Wallet(moneyInputView.getMoney());
 
-        inputView.setManualLottoCount();
-        inputView.buyLotto(wallet);
 
-        inputView.showLottos(wallet.getLottos());
+        ManualCountInputView manualCountInputView = new ManualCountInputView();
+        manualCountInputView.setManualLottoCount();
+        manualCountInputView.buyLotto(wallet);
 
-        inputView.setWinNumbers();
-        inputView.setBonusNumber();
+        manualCountInputView.showLottos(wallet.getLottos());
 
-        WinLotto winLotto = new WinLotto(inputView.getWinNumbers(), inputView.getBonusNumber());
+        LottoResultInputView lottoResultInputView = new LottoResultInputView();
+        lottoResultInputView.setWinNumbers();
+        lottoResultInputView.setBonusNumber();
+
+        WinLotto winLotto = new WinLotto(lottoResultInputView.getWinNumbers(), lottoResultInputView.getBonusNumber());
 
         ResultView resultView = new ResultView(wallet.lottoResult(winLotto));
         resultView.showResult();
