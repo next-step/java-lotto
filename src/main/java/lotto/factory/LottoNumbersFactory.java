@@ -14,6 +14,9 @@ import static lotto.application.Constant.LOTTO_NUMBERS_SIZE;
 
 public class LottoNumbersFactory {
 
+    private LottoNumbersFactory() {
+    }
+
     public static LottoNumbers autoCreateSingleNumbers(NumberGenerator generator) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         while (lottoNumbers.size() < LOTTO_NUMBERS_SIZE) {
