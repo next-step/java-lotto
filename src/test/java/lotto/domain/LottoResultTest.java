@@ -1,31 +1,43 @@
 package lotto.domain;
 
-import lotto.domain.LottoResult;
-import lotto.domain.Rank;
-import lotto.domain.WinningNumbers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import static lotto.fixture.LottoTicketFixture.LOTTO_TICKETS;
 import static lotto.fixture.LottoTicketFixture.PROFIT_RATE;
+import static lotto.fixture.WinningNumbersFixture.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
+
+    @DisplayName("로또당첨결과를 반환한다.")
+    @Test
+    void createResult() {
+        // given
+        WinningNumbers winningNumbers = WINNING_NUMBERS;
+
+        // when
+        LottoResult lottoResult = LottoResult.createResult(LOTTO_TICKETS, winningNumbers);
+        Map<Rank, Integer> result = lottoResult.getResult();
+
+        // then
+        Assertions.assertAll(
+                () -> assertThat(result.get(Rank.FIRST)).isEqualTo(1),
+                () -> assertThat(result.get(Rank.FOURTH)).isEqualTo(1)
+        );
+    }
 
     @DisplayName("로또 수익률을 계산한다.")
     @Test
     void calculateProfitRate() {
         // given
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        WinningNumbers winningNumbers = WinningNumbers.of(numbers);
+        WinningNumbers winningNumbers = WINNING_NUMBERS;
 
         // when
-        Map<Rank, Integer> rankIntegerMap = LOTTO_TICKETS.creatWinningRank(winningNumbers);
-        LottoResult lottoResult = LottoResult.of(rankIntegerMap, LOTTO_TICKETS.size());
+        LottoResult lottoResult = LottoResult.createResult(LOTTO_TICKETS, winningNumbers);
 
         // then
         assertThat(lottoResult.getProfitRate()).isEqualTo(PROFIT_RATE);

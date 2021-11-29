@@ -8,8 +8,8 @@ import java.util.Map;
 
 public class OutView {
     private static final String PURCHASE_COUNT_MESSAGE = "%s개를 구매했습니다.\n";
-    private static final String WINNING_STATISTICS = "당첨통계\n";
-    private static final String HORIZON = "---------\n";
+    private static final String WINNING_STATISTICS = "당첨통계";
+    private static final String HORIZON = "---------";
     private static final String STATISTICS_MESSAGE = "%d개 일치 (%d)- %d개\n";
     private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %f입니다.";
 

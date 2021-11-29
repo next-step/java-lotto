@@ -1,12 +1,10 @@
 package lotto.application;
 
-import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import lotto.domain.Price;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,7 +22,7 @@ class AllAutomaticLottoTicketStrategyTest {
     void generateLottoTicketsFromTicketCount() {
         Price price = Price.of("22000");
 
-        List<LottoTicket> lottoTickets = strategy.publishTickets(price);
+        LottoTickets lottoTickets = strategy.publishTickets(price);
 
         assertThat(lottoTickets.size()).isEqualTo(price.getNumberOfTickets());
     }

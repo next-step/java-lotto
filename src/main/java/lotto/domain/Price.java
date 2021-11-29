@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.EmptySourceException;
 import lotto.exception.InvalidUnitException;
 
 import java.util.Objects;
@@ -10,19 +11,26 @@ public class Price {
 
     private final int price;
 
-    private Price(String price) {
-        int lottoPrice = Integer.parseInt(price);
-        validateUnit(lottoPrice);
+    private Price(int price) {
+        validateUnit(price);
 
-        this.price = lottoPrice;
+        this.price = price;
     }
 
     public static Price of(String price) {
-        return new Price(price);
+        validateEmpty(price);
+
+        return new Price(Integer.parseInt(price));
     }
 
     public int getNumberOfTickets() {
         return price / BASIC_UNIT;
+    }
+
+    private static void validateEmpty(String price) {
+        if (Objects.isNull(price) || price.isEmpty()) {
+            throw new EmptySourceException();
+        }
     }
 
     private static void validateUnit(int price) {

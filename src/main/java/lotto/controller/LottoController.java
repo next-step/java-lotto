@@ -2,10 +2,10 @@ package lotto.controller;
 
 import lotto.application.AllAutomaticLottoTicketStrategy;
 import lotto.application.LottoTicketGenerator;
-import lotto.domain.*;
-import lotto.utils.InputUtils;
-
-import java.util.Map;
+import lotto.domain.LottoResult;
+import lotto.domain.LottoTickets;
+import lotto.domain.Price;
+import lotto.domain.WinningNumbers;
 
 public class LottoController {
 
@@ -16,16 +16,14 @@ public class LottoController {
     }
 
     public LottoTickets createLottoTickets(String purchaseAmount) {
-        Price price = InputUtils.createPrice(purchaseAmount);
+        Price price = Price.of(purchaseAmount);
 
         return ticketGenerator.generateTickets(price, new AllAutomaticLottoTicketStrategy());
     }
 
     public LottoResult createLottoResult(String inputWinningNumbers, LottoTickets lottoTickets) {
-        WinningNumbers winningNumbers = InputUtils.createWinningNumbers(inputWinningNumbers);
+        WinningNumbers winningNumbers = WinningNumbers.of(inputWinningNumbers);
 
-        Map<Rank, Integer> winningRank = lottoTickets.creatWinningRank(winningNumbers);
-
-        return LottoResult.of(winningRank, lottoTickets.size());
+        return LottoResult.createResult(lottoTickets, winningNumbers);
     }
 }

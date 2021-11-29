@@ -2,7 +2,6 @@ package lotto.utils;
 
 import addcalculator.exception.NotInstanceException;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,6 +12,11 @@ public class LottoNumberGenerator {
     private static final int LOTTO_MAX_NUMBER = 46;
     private static final int FROM_INDEX = 0;
     private static final int TO_INDEX = 6;
+    private static final List<Integer> LOTTO_NUMBERS;
+
+    static {
+        LOTTO_NUMBERS = cachingLottoNumbers();
+    }
 
     private LottoNumberGenerator() {
         throw new NotInstanceException();
@@ -23,17 +27,16 @@ public class LottoNumberGenerator {
     }
 
     private static List<Integer> createLottoNumbers() {
-        List<Integer> numbers = getLottoRangeNumbers();
-        Collections.shuffle(numbers);
+        Collections.shuffle(LOTTO_NUMBERS);
+        List<Integer> lottoNumbers = LOTTO_NUMBERS.subList(FROM_INDEX, TO_INDEX);
+        Collections.sort(lottoNumbers);
 
-        return new ArrayList<>(numbers.subList(FROM_INDEX, TO_INDEX));
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
-    private static List<Integer> getLottoRangeNumbers() {
+    private static List<Integer> cachingLottoNumbers() {
         return IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
     }
-
-
 }

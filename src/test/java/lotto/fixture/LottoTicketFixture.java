@@ -11,8 +11,9 @@ public class LottoTicketFixture {
     public static final LottoTicket LOTTO_TICKET2 = LottoTicket.createTicket(Arrays.asList(4, 7, 10, 32, 22, 42));
     public static final LottoTicket LOTTO_TICKET3 = LottoTicket.createTicket(Arrays.asList(1, 2, 3, 16, 24, 23));
 
-    public static final LottoTickets LOTTO_TICKETS = LottoTickets.of(
+    public static final LottoTickets LOTTO_TICKETS = LottoTickets.publishTickets(
             Arrays.asList(LOTTO_TICKET1, LOTTO_TICKET2, LOTTO_TICKET3));
 
-    public static final double PROFIT_RATE = 666668.3333333334;
+
+    public static final double PROFIT_RATE = 667185.0;
 }
