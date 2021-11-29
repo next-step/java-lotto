@@ -16,6 +16,10 @@ public class CountInfo {
         return this.manualCount;
     }
 
+    public int getTotalCount() {
+        return this.manualCount + this.autoCount;
+    }
+
     public int getAutoCount() {
         return this.autoCount;
     }
@@ -31,5 +35,9 @@ public class CountInfo {
         if(lotteryCount < manualCount) {
             throw new IllegalArgumentException("수동으로 구매할 수 있는 로또 수를 넘었습니다.");
         }
+    }
+
+    public boolean isManualIdx(int idx) {
+        return idx < manualCount;
     }
 }

@@ -14,8 +14,7 @@ public class LotteryTickets {
         if(countInfo.haveManualLottery()) {
             InputView.inputManualLottery();
         }
-        tickets.addAll(LotteryTicketGenerator.generateManualLotteryTicket(countInfo.getManualCount()));
-        tickets.addAll(LotteryTicketGenerator.generateAutoLotteryTicket(countInfo.getAutoCount()));
+        tickets.addAll(LotteryTicketGenerator.generate(countInfo));
     }
 
     public List<LotteryTicket> getTickets(){

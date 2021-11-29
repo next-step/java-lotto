@@ -1,5 +1,6 @@
 package lotto.model.ticket.generator;
 
+import lotto.model.domain.CountInfo;
 import lotto.model.domain.Lotto;
 import lotto.model.game.LottoNumber;
 import lotto.model.ticket.LotteryTicket;
@@ -17,20 +18,19 @@ public class LotteryTicketGenerator {
             .boxed().map(Lotto::new)
             .collect(Collectors.toList());
 
-    public static List<LotteryTicket> generateAutoLotteryTicket(int count) {
+    public static List<LotteryTicket> generate(CountInfo countInfo) {
         List<LotteryTicket> list = new ArrayList<LotteryTicket>();
-        for(int cnt = 0 ; cnt < count ; cnt++) {
-            list.add(new LotteryTicket(chooseNumber()));
+        for(int idx = 0 ; idx < countInfo.getTotalCount() ; idx++) {
+            list.add(newLotteryTicket(countInfo.isManualIdx(idx)));
         }
         return list ;
     }
 
-    public static List<LotteryTicket> generateManualLotteryTicket(int count) {
-        List<LotteryTicket> list = new ArrayList<LotteryTicket>();
-        for(int cnt = 0 ; cnt < count ; cnt++) {
-            list.add(InputView.getTicket(""));
+    private static LotteryTicket newLotteryTicket(boolean isManualIndex) {
+        if (isManualIndex) {
+            return InputView.getTicket("");
         }
-        return list;
+        return new LotteryTicket(chooseNumber());
     }
 
     private static List<Lotto> chooseNumber() {
