@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StoreTest {
 
@@ -18,11 +17,4 @@ public class StoreTest {
         assertThat(lottoTicket.getLotto().size()).isEqualTo(3);
     }
 
-//    @Test
-//    @DisplayName("예외 검증(숫자가 아닌 문자를 입력 했을 경우)")
-//    void exceptionTest() {
-//
-//        assertThatThrownBy(() ->
-//                new Store("String Input")).isInstanceOf(IllegalArgumentException.class);
-//    }
 }

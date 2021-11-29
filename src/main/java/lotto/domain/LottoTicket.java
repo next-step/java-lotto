@@ -31,18 +31,18 @@ public class LottoTicket {
         }
     }
 
-    public int totalCountOfMatch(Lotto winningNumbers, int count) {
-        return (int) lottoNumbers.stream()
-                .filter(lotto -> lotto.countOfMatch(winningNumbers, count))
-                .count();
-    }
-
     public Map<Integer, Integer> createRepository(Lotto winningNumbers) {
         Map<Integer, Integer> repository = new HashMap<>();
         for (Rank rank : Rank.values()) {
             repository.put(rank.getCountOfMatch(), totalCountOfMatch(winningNumbers, rank.getCountOfMatch()));
         }
         return repository;
+    }
+
+    public int totalCountOfMatch(Lotto winningNumbers, int count) {
+        return (int) lottoNumbers.stream()
+                .filter(lotto -> lotto.isCountOfMatch(winningNumbers, count))
+                .count();
     }
 
     public double calculateRateOfProfit(Lotto winningNumbers, int orderPrice) {

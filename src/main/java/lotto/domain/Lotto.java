@@ -9,9 +9,8 @@ public class Lotto {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
 
-    private static Random random = new Random();
-
     private static final String FORM_ERROR_MSG = "로또는 6자리 형식입니다.!!!";
+    private static Random random = new Random();
 
     private List<LottoNumber> numbers;
 
@@ -43,10 +42,6 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
-    public List<LottoNumber> getNumbers() {
-        return numbers;
-    }
-
     private List<LottoNumber> createRandomNumbers() {
 
         List<LottoNumber> autoNumbers = new ArrayList<>();
@@ -74,15 +69,41 @@ public class Lotto {
     }
 
     private int countOfMatch(Lotto winningNumbers) {
+
         return (int) numbers.stream()
-                .filter(winningNumbers.getNumbers()::contains)
+                .filter(winningNumbers::contains)
                 .count();
     }
 
-    public boolean countOfMatch(Lotto winningNumbers, int count) {
+    public boolean isCountOfMatch(Lotto winningNumbers, int count) {
         return (int) numbers.stream()
-                .filter(winningNumbers.getNumbers()::contains)
+                .filter(winningNumbers::contains)
                 .count() == count;
+    }
+
+    private boolean contains(LottoNumber lottoNumber) {
+
+        for(int i = 0; i < numbers.size(); i++) {
+
+            if(isValueEqual(numbers.get(i), lottoNumber)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean isValueEqual(LottoNumber winningNumber, LottoNumber lottoNumber) {
+        if(lottoNumber.equals(winningNumber)) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    public List<LottoNumber> getNumbers() {
+        return numbers;
     }
 
     @Override

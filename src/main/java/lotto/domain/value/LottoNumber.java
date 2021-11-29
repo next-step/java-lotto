@@ -50,4 +50,5 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public int compareTo(LottoNumber lottoNumber) {
         return this.number - lottoNumber.getNumber();
     }
+
 }
