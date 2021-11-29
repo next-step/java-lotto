@@ -27,18 +27,18 @@ class LottoStoreTest {
             numbers.add(LottoNumberFactory.manualCreateNumber(7 * i + 3));
         }
 
-        lotto = LottoFactory.manualCreateSingleLotto(LottoNumbersFactory.manualCreateNumbers(numbers));
+        lotto = LottoFactory.manualCreateSingleLotto(LottoNumbersFactory.manualCreateSingleNumbers(numbers));
         LottoNumber bonus = LottoNumberFactory.manualCreateNumber("45");
-        winner = new LottoWinner(LottoNumbersFactory.manualCreateNumberList("3, 10, 17, 42, 43, 44"), bonus);
+        winner = LottoNumbersFactory.manualCreateWinner("3, 10, 17, 42, 43, 44", bonus);
     }
 
     @Test
     @DisplayName("수익률 계산")
     void calculateRateOfRevenue() {
-        LottoNumbers lottoNumbers = LottoNumbersFactory.manualCreateNumbers("1, 2, 3, 4, 5, 6");
+        LottoNumbers lottoNumbers = LottoNumbersFactory.manualCreateSingleNumbers("1, 2, 3, 4, 5, 6");
         Lotto lotto = LottoFactory.manualCreateSingleLotto(lottoNumbers);
         LottoNumber bonus = LottoNumberFactory.manualCreateNumber(7);
-        LottoWinner winner = new LottoWinner(LottoNumbersFactory.manualCreateNumberList("1, 2, 3, 11, 12, 13"), bonus);
+        LottoWinner winner = LottoNumbersFactory.manualCreateWinner("1, 2, 3, 11, 12, 13", bonus);
 
         Map<LottoRank, Number> result = lotto.matchAll(winner);
         float rateOfRevenue = LottoStore.calculateRateOfRevenue(result, 1000);

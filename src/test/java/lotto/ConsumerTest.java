@@ -20,13 +20,10 @@ class ConsumerTest {
         int purchaseAmount = 1000;
 
 
-        LottoNumbers lottoNumbers = LottoNumbersFactory.manualCreateNumbers("1, 2, 3, 4, 5, 6");
+        LottoNumbers lottoNumbers = LottoNumbersFactory.manualCreateSingleNumbers("1, 2, 3, 4, 5, 6");
         Lotto lotto = LottoFactory.manualCreateSingleLotto(lottoNumbers);
 
-        LottoWinner lottoWinner = new LottoWinner(
-                LottoNumbersFactory.manualCreateNumberList("1, 2, 3, 4, 5, 10"),
-                LottoNumberFactory.manualCreateNumber(6)
-        );
+        LottoWinner lottoWinner = LottoNumbersFactory.manualCreateWinner("1, 2, 3, 4, 5, 10", LottoNumberFactory.manualCreateNumber(6));
 
         Map<LottoRank, Number> result = lotto.matchAll(lottoWinner);
 

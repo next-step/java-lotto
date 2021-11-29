@@ -24,7 +24,7 @@ public class Consumer {
         String winnerNumbers = InputView.nextLine(Constant.INPUT_MESSAGE_WINNER_NUMBERS);
         int bonusNumber = InputView.nextInt(Constant.INPUT_MESSAGE_BONUS_NUMBER);
 
-        LottoWinner lottoWinner = new LottoWinner(LottoNumbersFactory.manualCreateNumberList(winnerNumbers), LottoNumberFactory.manualCreateNumber(bonusNumber));
+        LottoWinner lottoWinner = LottoNumbersFactory.manualCreateWinner(winnerNumbers, LottoNumberFactory.manualCreateNumber(bonusNumber));
 
         Map<LottoRank, Number> result = lotto.matchAll(lottoWinner);
 
