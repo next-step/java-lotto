@@ -23,6 +23,7 @@ public class OutputView {
     private String getLottoNumbersString(LottoTicket tickets) {
         return MessageFormat.format("[{0}]",
             tickets.getNumbers().stream()
+                .sorted()
                 .map(Object::toString)
                 .collect(Collectors.joining(", ")));
     }
