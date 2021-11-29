@@ -3,7 +3,7 @@ package step2;
 import java.util.Objects;
 
 public class Ball implements Comparable<Ball>{
-    private static final String VALID_BALL_NUMBER_MSG = "로또공의 숫자는 1부터 45사이여야 합니다.";
+    public static final String VALID_BALL_NUMBER_MSG = "로또공의 숫자는 1부터 45사이여야 합니다.";
     private final int number;
 
     public Ball(int number) {

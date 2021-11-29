@@ -3,10 +3,11 @@ package step2;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class Lotto {
 
-    private static final String VALID_LOTTO_COUNT_MSG = "당첨 번호 6개를 입력해주세요.";
+    public static final String VALID_LOTTO_COUNT_MSG = "번호 6개를 입력해주세요.";
     private static final String COMMA = ",";
     private static final int LOTTO_COUNT = 6;
     private List<Ball> balls = new ArrayList<>();
@@ -46,5 +47,20 @@ public class Lotto {
     public String toString() {
         Collections.sort(balls);
         return balls.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Lotto)) return false;
+        Lotto lotto = (Lotto) o;
+        Collections.sort(balls);
+        Collections.sort(lotto.balls);
+        return balls.equals(lotto.balls);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(balls);
     }
 }
