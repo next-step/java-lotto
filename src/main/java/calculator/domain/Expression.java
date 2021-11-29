@@ -8,16 +8,9 @@ public class Expression {
 
     public static final Pattern EXPRESSION_PATTERN = Pattern.compile("//(.)\n(.*)");
 
-    private final Delimiter delimiter;
-
     private final Operands operands;
 
     private Expression(Operands operands) {
-        this(Delimiter.DEFAULT_DELIMITER, operands);
-    }
-
-    private Expression(Delimiter delimiter, Operands operands) {
-        this.delimiter = delimiter;
         this.operands = operands;
     }
 
@@ -26,7 +19,7 @@ public class Expression {
         if (matcher.find()) {
             Delimiter delimiter = Delimiter.from(matcher.group(1));
             Operands operands = Operands.from(Arrays.asList(delimiter.split(matcher.group(2))));
-            return new Expression(delimiter, operands);
+            return new Expression(operands);
         }
 
         return new Expression(Operands.from(Arrays.asList(Delimiter.DEFAULT_DELIMITER.split(expression))));
