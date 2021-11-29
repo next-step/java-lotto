@@ -22,4 +22,8 @@ public class ResultView {
     public static void responseWinningStatistics() {
 
     }
+
+    public static void responseWinningRate() {
+
+    }
 }
