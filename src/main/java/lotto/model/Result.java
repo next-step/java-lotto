@@ -10,8 +10,6 @@ public class Result {
 
     private static final int INIT_COUNT = 0;
     private static final int PLUS_COUNT = 1;
-    private static final int DECIMAL_DENOMINATOR = 100;
-    private static final double DECIMAL_NUMERATOR = 100.0;
 
     private final Map<Rank, Integer> ranks;
 
@@ -35,11 +33,11 @@ public class Result {
         return this;
     }
 
-    public int calculateWinningAmount() {
-        return ranks.entrySet()
-                    .stream()
-                    .mapToInt(calculateEachWinningAmount())
-                    .sum();
+    public Money calculateWinningAmount() {
+        return new Money(ranks.entrySet()
+                              .stream()
+                              .mapToInt(calculateEachWinningAmount())
+                              .sum());
     }
 
     private ToIntFunction<Entry<Rank, Integer>> calculateEachWinningAmount() {
@@ -48,10 +46,6 @@ public class Result {
             Integer matchedCount = entry.getValue();
             return rank.getPrice() * matchedCount;
         };
-    }
-
-    public Double calculateRatio(int purchasedAmount) {
-        return Math.floor(calculateWinningAmount() / (double) purchasedAmount * DECIMAL_DENOMINATOR) / DECIMAL_NUMERATOR;
     }
 
     public Map<Rank, Integer> getRanks() {

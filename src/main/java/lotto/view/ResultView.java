@@ -35,7 +35,7 @@ public final class ResultView {
         stringBuilder.setLength(0);
         stringBuilder.append("당첨 통계\n---------\n");
         printRanks(result);
-        stringBuilder.append("총 수익률은 " + result.calculateRatio(purchasedAmount.getMoney()) + "입니다.");
+        stringBuilder.append("총 수익률은 " + purchasedAmount.calculateRatio(result.calculateWinningAmount()) + "입니다.");
         System.out.println(stringBuilder);
     }
 

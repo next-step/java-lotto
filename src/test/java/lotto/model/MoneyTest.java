@@ -14,4 +14,15 @@ class MoneyTest {
         int expectedCount = 14;
         assertThat(new Money(amount).getLottoCount()).isEqualTo(expectedCount);
     }
+
+    @DisplayName("Money와 Result가 주어졌을 때 해당 결과에 맞는 수익률이 반환되는지 검증")
+    @Test
+    void ratioTest() {
+        Result result = new Result();
+        result.add(Rank.FIFTH);
+
+        Money purchasedAmount = new Money(14000);
+
+        assertThat(purchasedAmount.calculateRatio(result.calculateWinningAmount())).isEqualTo(0.35);
+    }
 }
