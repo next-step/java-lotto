@@ -1,16 +1,19 @@
 package lotto.domain;
 
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class GameResult {
 
     private final Map<Award, Long> results;
     private final double yield;
 
-    public GameResult(LottoTickets lottoTickets, ResultLotto resultLotto, int startMoney) {
-        results = createResultsToMap(lottoTickets, resultLotto);
+    private GameResult(Map<Award, Long> results, int startMoney) {
+        this.results = results;
         this.yield = calculateYield(sumOfAward(), startMoney);
+    }
+
+    public static GameResult create(Map<Award, Long> results, int startMoney) {
+        return new GameResult(results, startMoney);
     }
 
 
@@ -39,12 +42,4 @@ public class GameResult {
 
         return sum / (double) startMoney;
     }
-
-    private Map<Award, Long> createResultsToMap(LottoTickets lottoTickets,
-        ResultLotto resultLotto) {
-        return lottoTickets.getTickets().stream()
-            .map(resultLotto::award)
-            .collect(Collectors.groupingBy(award -> award, Collectors.counting()));
-    }
-
 }

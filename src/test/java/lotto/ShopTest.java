@@ -8,6 +8,7 @@ import lotto.domain.LottoRandomMachine;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Shop;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -27,6 +28,16 @@ public class ShopTest {
 
         assertThat(tickets.size()).isEqualTo(input / PRICE);
     }
+
+    @ValueSource(ints = {-1000})
+    @ParameterizedTest(name = "[{argumentsWithNames}] 로또가격은 음수가 올수 없다.")
+    void buyNegativeNumberTest(int input) {
+        Shop shop = new Shop();
+        Assertions.assertThatIllegalArgumentException()
+            .isThrownBy(() -> shop.buy(input, new LottoRandomMachine()));
+    }
+
+
 
 
     @SuppressWarnings("unchecked")
