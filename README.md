@@ -27,14 +27,10 @@
   * 생성된 Lotto Instance를 list로 저장한다.
 * Lotto class를 만든다.
   * 여섯 개의 번호를 list로 가진다.
-* LottoComparator class를 만든다.
   * 로또 번호화 당첨 번호를 비교해 LottoResult를 받는다.
 * LottoResult class를 만든다.
   * 3개 일치~6개 일치까지의 개수를 member 변수로 저장한다.
-* StatisticGenerator class를 만든다.
-  * LottoResult class로 수익률을 계산하여 반환한다,
-* ProfitRateCalculator class를 만든다.
-  * LottoResult를 받아 수익률을 반환하는 함수를 만든다.
+  * 수익률을 계산하여 반환하는 함수를 만든다.
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)

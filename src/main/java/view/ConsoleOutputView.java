@@ -1,6 +1,5 @@
 package view;
 
-import domain.LottoResult;
 import domain.Lottos;
 
 public class ConsoleOutputView implements OutputView
@@ -12,12 +11,12 @@ public class ConsoleOutputView implements OutputView
 
     @Override
     public void showRandomGeneratedLottos(Lottos lottos) {
-
+        System.out.println(lottos.lottosAsString());
     }
 
     @Override
-    public void showLottoResult(LottoResult lottoResult) {
-
+    public void showLottoResult(int matchingNumber, int reward, int count) {
+        System.out.printf("%d matched (￦%d) - %d\n", matchingNumber, reward, count);
     }
 
     @Override
