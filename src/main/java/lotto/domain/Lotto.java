@@ -98,7 +98,7 @@ public class Lotto {
 
 
     public Set<LottoNumber> getNumbers() {
-        return numbers;
+        return Collections.unmodifiableSet(numbers);
     }
 
     @Override
