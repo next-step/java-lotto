@@ -14,7 +14,7 @@ public class LottoNumbers {
 
     public LottoNumbers(List<Integer> lottoNumbers) {
         lottoNumbers.forEach( lottoNumber -> {
-            this.lottoNumbers.add(new LottoNumber(lottoNumber));
+            this.lottoNumbers.add(LottoNumber.of(lottoNumber));
         });
     }
 
@@ -36,7 +36,7 @@ public class LottoNumbers {
     }
 
     public boolean isIncludeBonusNumber(int bonusNumber) {
-        return lottoNumbers.contains(new LottoNumber(bonusNumber));
+        return lottoNumbers.contains(LottoNumber.of(bonusNumber));
     }
 
     public List<LottoNumber> getLottoNumbers() {

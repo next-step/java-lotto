@@ -1,21 +1,35 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import static lotto.utils.Constants.*;
 
 public class LottoNumber {
     private final int lottoNumber;
+    private static Map<Integer, LottoNumber> lottoNumberMap = new HashMap<>();
 
-    public LottoNumber(String lottoNumber) {
-        this(Integer.parseInt(lottoNumber));
+    static {
+        for (int i = NUMBER_ZERO; i <= NUMBER_FORTY_FIVE; i++) {
+            lottoNumberMap.put(i, new LottoNumber(i));
+        }
     }
 
-    public LottoNumber(int lottoNumber) {
-        if (lottoNumber < NUMBER_ZERO || lottoNumber > NUMBER_FORTY_FIVE) {
+    private LottoNumber(int lottoNumber) {
+        this.lottoNumber = lottoNumber;
+    }
+
+    public static LottoNumber of(int number) {
+        LottoNumber lottoNumber = lottoNumberMap.get(number);
+        if (lottoNumber == null) {
             throw new IllegalArgumentException(MSG_LOTTO_NUMBER_ONE_TO_FORTY_FIVE);
         }
-        this.lottoNumber = lottoNumber;
+        return lottoNumber;
+    }
+
+    public static LottoNumber of(String lottoNumber) {
+        return of(Integer.parseInt(lottoNumber));
     }
 
     @Override
