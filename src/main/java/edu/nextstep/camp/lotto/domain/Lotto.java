@@ -2,6 +2,7 @@ package edu.nextstep.camp.lotto.domain;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
@@ -49,8 +50,10 @@ public class Lotto {
         return Objects.hash(numbers);
     }
 
-    public Collection<LottoNumber> collect() {
-        return numbers;
+    public List<String> collect() {
+        return numbers.stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.toUnmodifiableList());
     }
 
     @Override

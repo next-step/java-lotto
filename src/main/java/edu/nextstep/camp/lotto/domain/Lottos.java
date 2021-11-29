@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lottos {
     private final Collection<Lotto> lottos;
@@ -38,8 +39,10 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Collection<Lotto> collect() {
-        return lottos;
+    public List<List<String>> collect() {
+        return lottos.stream()
+                .map(Lotto::collect)
+                .collect(Collectors.toUnmodifiableList());
     }
 
     public GameResult winningResult(Lotto winningNumber, LottoNumber bonus) {

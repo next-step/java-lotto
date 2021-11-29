@@ -55,8 +55,7 @@ public class LottoTest {
     @MethodSource("parseLotto1To6AsList")
     public void collect(List<Integer> numbers) {
         assertThat(Lotto.fromIntegers(numbers).collect())
-                .containsExactly(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
+                .containsExactly("1", "2", "3", "4", "5", "6");
     }
 
     static Stream<Arguments> parseMatched() {

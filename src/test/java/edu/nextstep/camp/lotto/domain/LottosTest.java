@@ -40,7 +40,7 @@ public class LottosTest {
     public void collect() {
         final List<Lotto> lottoList = List.of(Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6)));
         final Lottos testLottos = Lottos.of(lottoList);
-        assertThat(testLottos.collect()).hasSameElementsAs(lottoList);
+        assertThat(testLottos.collect()).hasSameElementsAs(List.of(List.of("1", "2", "3", "4", "5", "6")));
     }
 
     static Stream<Arguments> parseWinningResult() {
@@ -82,6 +82,20 @@ public class LottosTest {
                                 Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 7))
                         )),
                         GameResult.of(Ranks.of(List.of(Rank.SECOND)))
+                ),
+                // 5 matched
+                Arguments.of(
+                        Lottos.of(List.of(
+                                Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 15))
+                        )),
+                        GameResult.of(Ranks.of(List.of(Rank.THIRD)))
+                ),
+                // 4 matched
+                Arguments.of(
+                        Lottos.of(List.of(
+                                Lotto.fromIntegers(List.of(1, 2, 3, 4, 14, 15))
+                        )),
+                        GameResult.of(Ranks.of(List.of(Rank.FOURTH)))
                 )
         );
     }
