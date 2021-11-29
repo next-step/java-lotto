@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RankTest {
     @Test
     @DisplayName("rank값으로 Enum객체를 가져온다.")
-    public void valueOf() {
+    void valueOf() {
         assertThat(Rank.find(3, false)).isEqualTo(Rank.FIFTH);
     }
 }

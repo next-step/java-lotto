@@ -11,7 +11,7 @@ public class InputViewTest {
 
     @Test
     @DisplayName("입력받은 금액으로 로또 게임수를 계산한다.")
-    public void getLottoGameCount() {
+    void getLottoGameCount() {
         InputView inputView = new InputView(new InputPrice(10000));
         assertThat(inputView.getLottoGameCount()).isEqualTo(new LottoGameCount(10));
     }

@@ -35,7 +35,8 @@ public class LottoGameService {
 
     public void matchLottoNumbers() {
         lottoes.getLottoGames().forEach(lottoGame -> {
-            lottoGame.matchLottoNumbers(lastWeekWinningNumbers, bonusLottoNumber);
+            lottoGame.matchingCount(lastWeekWinningNumbers);
+            lottoGame.matchingBonus(bonusLottoNumber);
         });
     }
 

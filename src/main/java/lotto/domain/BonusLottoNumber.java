@@ -18,9 +18,13 @@ public class BonusLottoNumber {
 
     private void validateDifferentNumberFromWinningNumbers(int bonusNumber,
             LottoNumbers lastWeekWinningNumbers) {
-        if (lastWeekWinningNumbers.getLottoNumbers().contains(bonusNumber)) {
+        if (lastWeekWinningNumbers.isIncludeBonusNumber(bonusNumber)) {
             throw new IndexOutOfBoundsException(MSG_BONUS_NUMBER_SAME_WINNING_NUMBERS);
         }
+    }
+
+    public int getBonusNumber() {
+        return bonusNumber;
     }
 
     @Override

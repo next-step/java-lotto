@@ -45,6 +45,10 @@ public class LottoNumbers {
         });
     }
 
+    public boolean isIncludeBonusNumber(int bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
     public List<Integer> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }

@@ -1,13 +1,13 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 import static lotto.utils.Constants.NUMBER_ZERO;
 
 public class Lottoes {
-    private Long totalReward;
     private DefaultLottoNumbers defaultLottoNumbers;
     private List<LottoGame> lottoGames;
 
@@ -18,10 +18,6 @@ public class Lottoes {
 
     public Lottoes(List<LottoGame> lottoGames) {
         this.lottoGames = lottoGames;
-    }
-
-    public Lottoes(Long totalReward) {
-        this.totalReward = totalReward;
     }
 
     public void makeLottoes(LottoGameCount lottoGameCount) {
@@ -37,7 +33,7 @@ public class Lottoes {
     }
 
     public List<LottoGame> getLottoGames() {
-        return lottoGames;
+        return Collections.unmodifiableList(lottoGames);
     }
 
     @Override
@@ -45,12 +41,12 @@ public class Lottoes {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lottoes lottoes = (Lottoes) o;
-        return Objects.equals(lottoGames, lottoes.lottoGames) &&
-                Objects.equals(totalReward, lottoes.totalReward);
+        return Objects.equals(defaultLottoNumbers, lottoes.defaultLottoNumbers) &&
+                Objects.equals(lottoGames, lottoes.lottoGames);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoGames, totalReward);
+        return Objects.hash(defaultLottoNumbers, lottoGames);
     }
 }

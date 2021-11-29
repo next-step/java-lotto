@@ -2,30 +2,20 @@ package lotto.domain;
 
 import lotto.utils.Rank;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Objects;
-import java.util.TreeMap;
 import java.util.function.ToIntFunction;
 
 import static lotto.utils.Constants.*;
 
 public class LottoResult {
-    private final Map<Rank, Integer> ranks;
+    private final Map<Rank, Integer> ranks = new EnumMap<>(Rank.class);
 
     public LottoResult() {
-        ranks = new TreeMap<>();
-        ranks.put(Rank.FIRST, NUMBER_ZERO);
-        ranks.put(Rank.SECOND, NUMBER_ZERO);
-        ranks.put(Rank.THIRD, NUMBER_ZERO);
-        ranks.put(Rank.FOURTH, NUMBER_ZERO);
-        ranks.put(Rank.FIFTH, NUMBER_ZERO);
-    }
-
-    private LottoResult add(Rank rank) {
-        ranks.merge(rank, NUMBER_ONE, (first, second) -> first + second);
-        return this;
+        Arrays.stream(Rank.values())
+                .forEach(rank -> {
+                    ranks.put(rank, NUMBER_ZERO);
+                });
     }
 
     public void calculateResultWin(List<LottoGame> lottoGames) {
@@ -33,6 +23,11 @@ public class LottoResult {
             Rank rank = Rank.find(lottoGame.getMatchedCount().intValue(), lottoGame.getMatchBonus());
             add(rank);
         });
+    }
+
+    private LottoResult add(Rank rank) {
+        ranks.merge(rank, NUMBER_ONE, (first, second) -> first + second);
+        return this;
     }
 
     public Double calculateYield(LottoGameCount lottoGameCount) {

@@ -16,13 +16,16 @@ public class LottoGame {
         this.matchedCount = matchedCount;
     }
 
-    public void matchLottoNumbers(LottoNumbers lastWeekWinningNumbers, BonusLottoNumber bonusLottoNumber) {
+    public void matchingBonus(BonusLottoNumber bonusLottoNumber) {
+        if (lottoNumbers.isIncludeBonusNumber(bonusLottoNumber.getBonusNumber())) {
+            matchBonus = true;
+        }
+    }
+
+    public void matchingCount(LottoNumbers lastWeekWinningNumbers) {
         matchedCount = lottoNumbers.getLottoNumbers().stream()
                 .filter(lottoNumber -> lastWeekWinningNumbers.getLottoNumbers().contains(lottoNumber))
                 .count();
-        if (lottoNumbers.getLottoNumbers().contains(bonusLottoNumber)) {
-            matchBonus = true;
-        }
     }
 
     public LottoNumbers getLottoNumbers() {
