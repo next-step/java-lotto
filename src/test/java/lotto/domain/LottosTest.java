@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
-    private Lottoes lottoes;
+    private Lottos lottos;
     private List<LottoGame> lottoGames;
 
     @BeforeEach
@@ -20,27 +20,27 @@ public class LottosTest {
         lottoGames = Arrays.asList(new LottoGame(2L),
                 new LottoGame(3L), new LottoGame(4L),
                 new LottoGame(5L), new LottoGame(6L));
-        lottoes = new Lottoes(lottoGames);
+        lottos = new Lottos(lottoGames);
     }
 
 
     @Test
-    @DisplayName("Lottoes 생성자 테스트")
+    @DisplayName("Lottos 생성자 테스트")
     void constructor() {
-        assertThat(new Lottoes(Arrays.asList(new LottoGame(new LottoNumbers(IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList()))))))
-                .isEqualTo(new Lottoes(Arrays.asList(new LottoGame(new LottoNumbers(IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList()))))));
+        assertThat(new Lottos(Arrays.asList(new LottoGame(new LottoNumbers(IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList()))))))
+                .isEqualTo(new Lottos(Arrays.asList(new LottoGame(new LottoNumbers(IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList()))))));
     }
 
     @Test
     @DisplayName("몇등에 당첨 됐는지 확인한다.")
     void winRankLotto() {
-        assertThat(lottoes.winRankLottoCount(3L))
+        assertThat(lottos.winRankLottoCount(3L))
                 .isEqualTo(1);
-        assertThat(lottoes.winRankLottoCount(4L))
+        assertThat(lottos.winRankLottoCount(4L))
                 .isEqualTo(1);
-        assertThat(lottoes.winRankLottoCount(5L))
+        assertThat(lottos.winRankLottoCount(5L))
                 .isEqualTo(1);
-        assertThat(lottoes.winRankLottoCount(6L))
+        assertThat(lottos.winRankLottoCount(6L))
                 .isEqualTo(1);
     }
 }

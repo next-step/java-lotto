@@ -8,21 +8,21 @@ import java.util.Objects;
 
 public class LottoGameService {
     private LottoGameCount lottoGameCount;
-    private Lottoes lottoes;
+    private Lottos lottos;
     private LottoNumbers lastWeekWinningNumbers;
     private BonusLottoNumber bonusLottoNumber;
     private LottoResult lottoResult;
 
     public LottoGameService() {
-        lottoes = new Lottoes();
+        lottos = new Lottos();
     }
 
     public void buyLotto() {
         InputView.inputPrice();
         lottoGameCount = InputView.getLottoGameCount();
         OutputView.drawLottoGameCount(lottoGameCount);
-        lottoes.makeLottoes(lottoGameCount);
-        OutputView.drawPurchasedLottoes(lottoes);
+        lottos.makeLottos(lottoGameCount);
+        OutputView.drawPurchasedLottos(lottos);
     }
 
     public void getLastWeekWinningNumbers() {
@@ -34,7 +34,7 @@ public class LottoGameService {
     }
 
     public void matchLottoNumbers() {
-        lottoes.getLottoGames().forEach(lottoGame -> {
+        lottos.getLottoGames().forEach(lottoGame -> {
             lottoGame.matchingCount(lastWeekWinningNumbers);
             lottoGame.matchingBonus(bonusLottoNumber);
         });
@@ -42,7 +42,7 @@ public class LottoGameService {
 
     public void resultWinLotto() {
         lottoResult = new LottoResult();
-        lottoResult.calculateResultWin(lottoes.getLottoGames());
+        lottoResult.calculateResultWin(lottos.getLottoGames());
         OutputView.drawResultWinLotto(lottoGameCount, lottoResult);
     }
 
@@ -52,12 +52,12 @@ public class LottoGameService {
         if (o == null || getClass() != o.getClass()) return false;
         LottoGameService that = (LottoGameService) o;
         return Objects.equals(lottoGameCount, that.lottoGameCount) &&
-                Objects.equals(lottoes, that.lottoes) &&
+                Objects.equals(lottos, that.lottos) &&
                 Objects.equals(lastWeekWinningNumbers, that.lastWeekWinningNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoGameCount, lottoes, lastWeekWinningNumbers);
+        return Objects.hash(lottoGameCount, lottos, lastWeekWinningNumbers);
     }
 }
