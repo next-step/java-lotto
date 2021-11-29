@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static utils.IntegerValidator.*;
+
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -8,7 +10,7 @@ public class Shop {
     private static final int PRICE = 1000;
 
     public LottoTickets buy(int money, LottoMachine lottoMachine) {
-        int count = money / PRICE;
+        int count = getNumberIfPositive(money) / PRICE;
 
         return new LottoTickets(
             IntStream.range(0, count).boxed()
