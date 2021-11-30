@@ -30,16 +30,15 @@ public class Lotto {
     }
 
     public static Lotto from(List<LottoNumber> number) {
-        return new Lotto(number.stream()
-                .collect(Collectors.toSet()));
+        return new Lotto(new TreeSet<>(number));
     }
 
     public static Lotto winningFrom(List<Integer> number) {
 
         Set<LottoNumber> numbers = new TreeSet<>();
-        Iterator<Integer> itr = number.iterator();
-        while(itr.hasNext()) {
-            numbers.add(new LottoNumber(itr.next()));
+
+        for (Integer integer : number) {
+            numbers.add(new LottoNumber(integer));
         }
 
         return new Lotto(numbers);
@@ -89,13 +88,8 @@ public class Lotto {
     }
 
     private boolean isValueEqual(LottoNumber winningNumber, LottoNumber lottoNumber) {
-        if(lottoNumber.equals(winningNumber)) {
-            return true;
-        }
-
-        return false;
+        return lottoNumber.equals(winningNumber);
     }
-
 
     public Set<LottoNumber> getNumbers() {
         return Collections.unmodifiableSet(numbers);
