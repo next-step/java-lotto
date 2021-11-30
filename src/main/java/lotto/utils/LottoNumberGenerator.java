@@ -6,36 +6,36 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import lotto.model.Number;
+import lotto.model.LottoNumber;
 
 public final class LottoNumberGenerator {
 
     private static final int FIRST_LOTTO_NUMBER = 1;
     private static final int LAST_LOTTO_NUMBER_BOUND = 46;
     private static final int COUNT_TO_PICK = 6;
-    private static List<Number> initNumbers;
+    private static List<LottoNumber> initLottoNumbers;
 
     static {
-        initNumbers = IntStream.range(FIRST_LOTTO_NUMBER, LAST_LOTTO_NUMBER_BOUND)
-                               .mapToObj(Number::new)
-                               .collect(Collectors.toList());
+        initLottoNumbers = IntStream.range(FIRST_LOTTO_NUMBER, LAST_LOTTO_NUMBER_BOUND)
+                                    .mapToObj(LottoNumber::new)
+                                    .collect(Collectors.toList());
     }
 
     private LottoNumberGenerator() {
     }
 
-    public static List<Number> generate() {
-        List<Number> sortedInitNumbers = initNumbers.stream()
-                                                    .sorted(Comparator.comparing(Number::getValue))
-                                                    .collect(Collectors.toList());
-        return pickNumbers(sortedInitNumbers);
+    public static List<LottoNumber> generate() {
+        List<LottoNumber> sortedInitLottoNumbers = initLottoNumbers.stream()
+                                                                   .sorted(Comparator.comparing(LottoNumber::getValue))
+                                                                   .collect(Collectors.toList());
+        return pickNumbers(sortedInitLottoNumbers);
     }
 
-    private static List<Number> pickNumbers(List<Number> allNumbers) {
-        Collections.shuffle(allNumbers);
-        return allNumbers.stream()
-                         .limit(COUNT_TO_PICK)
-                         .sorted(Comparator.comparing(Number::getValue))
-                         .collect(Collectors.toList());
+    private static List<LottoNumber> pickNumbers(List<LottoNumber> allLottoNumbers) {
+        Collections.shuffle(allLottoNumbers);
+        return allLottoNumbers.stream()
+                              .limit(COUNT_TO_PICK)
+                              .sorted(Comparator.comparing(LottoNumber::getValue))
+                              .collect(Collectors.toList());
     }
 }

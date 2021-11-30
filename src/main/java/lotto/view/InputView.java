@@ -2,8 +2,8 @@ package lotto.view;
 
 import java.util.Arrays;
 
+import lotto.model.LottoNumber;
 import lotto.model.Money;
-import lotto.model.Number;
 import lotto.model.WinningLotto;
 import lotto.utils.ScannerUtils;
 
@@ -24,6 +24,6 @@ public final class InputView {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
         String[] winningNumbers = ScannerUtils.nextLine().split(DELIMITER);
         System.out.println("보너스 볼을 입력해주세요.");
-        return WinningLotto.from(Arrays.asList(winningNumbers), new Number(ScannerUtils.nextInt()));
+        return WinningLotto.from(Arrays.asList(winningNumbers), new LottoNumber(ScannerUtils.nextInt()));
     }
 }

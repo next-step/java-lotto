@@ -2,25 +2,25 @@ package lotto.model;
 
 import java.util.Objects;
 
-public class Number {
+public class LottoNumber {
 
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private final int value;
 
-    public Number(int input) {
-        validateInputOrThrow(input);
-        value = input;
+    public LottoNumber(int number) {
+        validateInputOrThrow(number);
+        value = number;
     }
 
-    private void validateInputOrThrow(int input) {
-        if (input < MIN_LOTTO_NUMBER || input > MAX_LOTTO_NUMBER) {
-            throw new RuntimeException("input number must be positive");
+    private void validateInputOrThrow(int number) {
+        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
+            throw new RuntimeException("number must be positive");
         }
     }
 
-    public Number(String input) {
-        this(Integer.parseInt(input.trim()));
+    public LottoNumber(String number) {
+        this(Integer.parseInt(number.trim()));
     }
 
     public int getValue() {
@@ -35,8 +35,8 @@ public class Number {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Number number = (Number) o;
-        return value == number.value;
+        LottoNumber lottoNumber = (LottoNumber) o;
+        return value == lottoNumber.value;
     }
 
     @Override

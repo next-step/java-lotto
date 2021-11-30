@@ -6,20 +6,20 @@ import java.util.stream.Collectors;
 public class WinningLotto {
 
     private final Lotto lotto;
-    private final Number bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    public WinningLotto(Lotto lotto, Number bonusNumber) {
+    public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
         this.lotto = lotto;
         this.bonusNumber = bonusNumber;
     }
 
-    public static WinningLotto from(List<String> winningNumbers, Number bonusNumber) {
+    public static WinningLotto from(List<String> winningNumbers, LottoNumber bonusNumber) {
         return new WinningLotto(makeLotto(winningNumbers), bonusNumber);
     }
 
     private static Lotto makeLotto(List<String> winningNumbers) {
         return new Lotto(winningNumbers.stream()
-                                       .map(Number::new)
+                                       .map(LottoNumber::new)
                                        .collect(Collectors.toList()));
     }
 
@@ -27,7 +27,7 @@ public class WinningLotto {
         Result result = new Result();
         lottos.getLottos()
               .stream()
-              .map(lotto -> makeRank(lotto))
+              .map(this::makeRank)
               .forEach(matchedCount -> result.add(matchedCount));
         return result;
     }
