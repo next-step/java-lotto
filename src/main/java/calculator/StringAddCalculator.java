@@ -23,10 +23,23 @@ public class StringAddCalculator {
         return text.split(delimiter);
     }
 
+    private static int toInt(String stringNumber) {
+        for (char c : stringNumber.toCharArray()) {
+            validateDigit(c);
+        }
+        return Integer.parseInt(stringNumber);
+    }
+
+    public static void validateDigit(char num) {
+        if (!Character.isDigit(num)) {
+            throw new RuntimeException("숫자가 아닙니다.");
+        }
+    }
+
     private static int sum(String[] nums) {
         int sum = 0;
         for (String num : nums) {
-            sum += Integer.parseInt(num);
+            sum += toInt(num);
         }
         return sum;
     }

@@ -5,8 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
 
@@ -44,9 +46,12 @@ public class StringAddCalculatorTest {
     }
 
     @DisplayName("숫자 이외의 값이나 음수가 오는 경우 RuntimeException")
-    @Test
-    void splitAndSum_숫자이외의값_음수_예외() {
-
+    @ParameterizedTest
+    @ValueSource(strings = {"6,5,-3", "a,3,4", "3,*,8"})
+    void splitAndSum_숫자이외의값_음수_예외(String input) {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum(input))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("숫자가 아닙니다.");
     }
 
 }
