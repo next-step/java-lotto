@@ -2,6 +2,7 @@ package com.kkambi.calculator;
 
 import com.kkambi.calculator.domain.Formula;
 import com.kkambi.calculator.domain.Numbers;
+import com.kkambi.calculator.domain.Operator;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -19,8 +20,6 @@ public class StringAddCalculator {
 
     public static int sum(List<String> elements) {
         Numbers numbers = new Numbers(elements);
-        return numbers.getNumbers()
-                .stream()
-                .reduce(0, (sumResult, number) -> sumResult + number.getNumber(), Integer::sum);
+        return Operator.SUM.calculate(numbers);
     }
 }
