@@ -24,7 +24,7 @@ public class InputView {
     }
 
     public static List<Integer> getNumberListFromString(String str) {
-        String[] numberArr = str.trim().split(SPLIT_SYMBOL);
+        String[] numberArr = str.replaceAll(" ", "").split(SPLIT_SYMBOL);
 
         return Arrays.stream(numberArr).map(InputView::validateIntegerInput).collect(Collectors.toList());
     }

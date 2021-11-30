@@ -15,12 +15,9 @@ public class LottosTest {
 
     @Test
     void lotto_금액_exception_test() {
-
         assertThatThrownBy(() -> Lottos.getLottoCount(2200)).isInstanceOf(IllegalArgumentException.class);
         assertThat(Lottos.getLottoCount(2000)).isEqualTo(2);
-
     }
-
 
     @Test
     @DisplayName("lottos create 결과 체크")

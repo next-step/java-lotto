@@ -7,7 +7,7 @@ import java.util.List;
 public class RandomLottoNumberStrategy implements LottoNumberStrategy {
 
     private static final int LOTTO_NUMBER_SELECT_COUNT = 6;
-    private static List<Integer> LOTTO_NUMBER_LIST;
+    private List<Integer> LOTTO_NUMBER_LIST;
     private static final int LOTTO_TOTAL_COUNT = 45;
 
     public RandomLottoNumberStrategy() {
@@ -20,6 +20,6 @@ public class RandomLottoNumberStrategy implements LottoNumberStrategy {
     @Override
     public List<Integer> createNumber() {
         Collections.shuffle(LOTTO_NUMBER_LIST);
-        return LOTTO_NUMBER_LIST.subList(0, LOTTO_NUMBER_SELECT_COUNT);
+        return new ArrayList<>(LOTTO_NUMBER_LIST.subList(0, LOTTO_NUMBER_SELECT_COUNT));
     }
 }
