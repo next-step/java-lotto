@@ -1,5 +1,6 @@
 package com.pollra.calculator;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -14,6 +15,10 @@ public class Separator {
         this.value = text;
     }
 
+    public List<String> splitOf(String requestText) {
+        return null;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -25,5 +30,12 @@ public class Separator {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return "Separator{" +
+                "value='" + value + '\'' +
+                '}';
     }
 }
