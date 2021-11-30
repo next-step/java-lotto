@@ -29,6 +29,10 @@ public enum WinningPrice {
                 .orElse(NOTWIN);
     }
 
+    public int getWinningCount() {
+        return winningCount;
+    }
+
     public int getPrice() {
         return price;
     }
