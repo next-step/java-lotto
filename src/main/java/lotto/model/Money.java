@@ -9,6 +9,7 @@ public class Money {
     private static final int LOTTO_AMOUNT = 1_000;
     private static final int DECIMAL_DENOMINATOR = 100;
     private static final double DECIMAL_NUMERATOR = 100.0;
+    private static final int MIN_MONEY_VALUE = 0;
 
     private final int value;
 
@@ -18,7 +19,7 @@ public class Money {
     }
 
     private void validateMoneyOrThrow(int money) {
-        if (money < 0) {
+        if (money < MIN_MONEY_VALUE) {
             throw new InvalidMoneyException("money must be zero or positive");
         }
     }
