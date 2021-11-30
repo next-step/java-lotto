@@ -36,4 +36,10 @@ public class CalculatorTest {
         int result = Calculator.compute("1,2:3");
         assertThat(result).isEqualTo(6);
     }
+
+    @Test
+    void customDelimiter() {
+        int result = Calculator.compute("//;\\n1;2;3");
+        assertThat(result).isEqualTo(6);
+    }
 }
