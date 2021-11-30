@@ -9,20 +9,17 @@ public class Number {
     private final int value;
 
     public Number(String input) {
-        validate(input);
         this.value = parse(input);
     }
 
-    private void validate(String input) {
+    private int parse(String input) {
         if (!input.matches(REGEX)) {
             throw new RuntimeException("숫자가 아닌 값은 입력할 수 없습니다.");
         }
-    }
 
-    private int parse(String input) {
         int parsedInput = parseInt(input);
 
-        if (parseInt(input) < 0) {
+        if (parsedInput < 0) {
             throw new RuntimeException("음수는 입력할 수 없습니다.");
         }
 
