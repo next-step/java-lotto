@@ -32,7 +32,7 @@ public class LottoTicket {
     }
 
     public Map<Rank, Integer> createRepository(Lotto winningNumbers) {
-        Map<Rank, Integer> repository = new HashMap<>();
+        Map<Rank, Integer> repository = new EnumMap(Rank.class);
         for (Rank rank : Rank.values()) {
             repository.put(rank, totalCountOfMatch(winningNumbers, rank.getCountOfMatch()));
         }
