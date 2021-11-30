@@ -1,6 +1,8 @@
 package lotto.view;
 
-import lotto.model.Lotto;
+import lotto.model.Money;
+import lotto.model.Number;
+import lotto.model.WinningNumber;
 import lotto.utils.ScannerUtils;
 
 public final class InputView {
@@ -10,16 +12,16 @@ public final class InputView {
     private InputView() {
     }
 
-    public static int acceptPuchaseAmount() {
+    public static Money acceptPuchaseAmount() {
         System.out.println("구입 금액을 입력해주세요.");
-        int purchasedAmount = ScannerUtils.nextInt();
-        int purchasedCount = purchasedAmount / Lotto.eachAmount;
-        System.out.println(purchasedCount + "개를 구매했습니다.");
-        return purchasedCount;
+        Money purchasedAmount = new Money(ScannerUtils.nextInt());
+        return purchasedAmount;
     }
 
-    public static String[] acceptWinningNumber() {
+    public static WinningNumber acceptWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
-        return ScannerUtils.nextLine().split(DELIMITER);
+        String[] winningNumber = ScannerUtils.nextLine().split(DELIMITER);
+        System.out.println("보너스 볼을 입력해주세요.");
+        return WinningNumber.from(winningNumber, new Number(ScannerUtils.nextInt()));
     }
 }

@@ -1,25 +1,40 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import lotto.utils.LottoNumberGenerator;
+
 public class Lottos {
 
-    private final List<Lotto> purchasedLottos;
+    private final List<Lotto> lottos;
 
-    public Lottos(List<Lotto> purchasedLottos) {
-        this.purchasedLottos = purchasedLottos;
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    public List<Lotto> getPurchasedLottos() {
-        return Collections.unmodifiableList(purchasedLottos);
+    public static Lottos create(int lottoCount) {
+        List<Lotto> lottos = new ArrayList();
+        for (int i = 0; i < lottoCount; i++) {
+            lottos.add(new Lotto(LottoNumberGenerator.generate()));
+        }
+        return new Lottos(lottos);
     }
 
-    public Result makeResult(Lotto target) {
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
+    }
+
+    public Result makeResult(WinningNumber winningNumber) {
         Result result = new Result();
-        purchasedLottos.stream()
-                       .map(lotto -> lotto.match(target))
-                       .forEach(matchedCount -> result.add(matchedCount));
+        lottos.stream()
+              .map(lotto -> makeRank(lotto, winningNumber))
+              .forEach(matchedCount -> result.add(matchedCount));
         return result;
+    }
+
+    private Rank makeRank(Lotto lotto, WinningNumber winningNumber) {
+        return Rank.from(winningNumber.matchCount(lotto), winningNumber.hasBonusNumber(lotto));
     }
 }

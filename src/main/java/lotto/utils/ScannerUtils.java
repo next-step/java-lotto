@@ -6,13 +6,12 @@ import lotto.exception.InvalidScannerInputException;
 
 public final class ScannerUtils {
 
-    private static final Scanner scanner = new Scanner(System.in);
-
     private ScannerUtils() {
     }
 
     public static int nextInt() {
-        validateNextIntOrThrow();
+        Scanner scanner = new Scanner(System.in);
+        validateNextIntOrThrow(scanner);
         int input = scanner.nextInt();
         if (scanner.hasNextLine()) {
             scanner.nextLine();
@@ -20,13 +19,14 @@ public final class ScannerUtils {
         return input;
     }
 
-    private static void validateNextIntOrThrow() {
+    private static void validateNextIntOrThrow(Scanner scanner) {
         if (!scanner.hasNextInt()) {
             throw new InvalidScannerInputException("input is not a numeric string.");
         }
     }
 
     public static String nextLine() {
+        Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
 }

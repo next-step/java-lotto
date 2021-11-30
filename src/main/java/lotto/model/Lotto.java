@@ -4,22 +4,24 @@ import java.util.List;
 
 public class Lotto {
 
-    public static final int eachAmount = 1_000;
+    private final List<Number> values;
 
-    private final List<Number> pickedNumbers;
-
-    public Lotto(List<Number> pickedNumbers) {
-        this.pickedNumbers = pickedNumbers;
+    public Lotto(List<Number> values) {
+        this.values = values;
     }
 
-    public int match(Lotto winningNumber) {
-        return (int) winningNumber.pickedNumbers.stream()
-                                                .filter(pickedNumbers::contains)
-                                                .count();
+    public int matchCount(Lotto lotto) {
+        return (int) values.stream()
+                           .filter(lotto.values::contains)
+                           .count();
+    }
+
+    public boolean contains(Number number) {
+        return values.contains(number);
     }
 
     @Override
     public String toString() {
-        return String.valueOf(pickedNumbers);
+        return String.valueOf(values);
     }
 }

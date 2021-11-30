@@ -23,6 +23,10 @@ public class Number {
         this(Integer.parseInt(input.trim()));
     }
 
+    public int getValue() {
+        return value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

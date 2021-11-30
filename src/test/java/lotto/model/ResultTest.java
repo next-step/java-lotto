@@ -11,20 +11,12 @@ class ResultTest {
     @Test
     void winningAmountTest() {
         Result result = new Result();
-        result.add(3);
-        result.add(4);
-        result.add(5);
-        result.add(6);
+        result.add(Rank.FIFTH);
+        result.add(Rank.FOURTH);
+        result.add(Rank.THIRD);
+        result.add(Rank.SECOND);
+        result.add(Rank.FIRST);
 
-        assertThat(result.calculateWinningAmount()).isEqualTo(2_001_555_000);
-    }
-
-    @DisplayName("result가 주어졌을 때 해당 결과에 맞는 수익률이 반환되는지 검증")
-    @Test
-    void ratioTest() {
-        Result result = new Result();
-        result.add(3);
-
-        assertThat(result.calculateRatio(14000)).isEqualTo(0.35);
+        assertThat(result.calculateWinningAmount()).isEqualTo(2_004_555_000);
     }
 }
