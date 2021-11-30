@@ -13,7 +13,8 @@ class WonLottoTest {
     @Test
     @DisplayName("1등 당첨을 테스트 한다")
     void createWithWon() {
-        Lotto test = new Lotto(LottoNumber.createNonDuplicated());
+        LottoNumberFactory factory = LottoNumberFactory.getInstance();
+        Lotto test = new Lotto(factory.getNonDuplicated());
 
         WonLotto wonLotto = WonLotto.of(test);
         assertThat(wonLotto.getLottoRankBy(test)).isEqualTo(Rank.FIRST);
