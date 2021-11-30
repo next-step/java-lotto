@@ -31,6 +31,10 @@ public class Money {
         return Math.floor(money.value / (double) value * DECIMAL_DENOMINATOR) / DECIMAL_NUMERATOR;
     }
 
+    public Money buyManual(int count) {
+        return new Money(value - count * LOTTO_AMOUNT);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

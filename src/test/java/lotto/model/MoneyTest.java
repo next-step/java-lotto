@@ -36,4 +36,10 @@ class MoneyTest {
 
         assertThat(purchasedAmount.calculateRatio(result.calculateWinningAmount())).isEqualTo(0.35);
     }
+
+    @DisplayName("Money와 수동으로 구매한 로또 개수가 주어졌을 때 거스름돈을 반환하는지 검증")
+    @Test
+    void buyManualTest() {
+        assertThat(new Money(14_000).buyManual(3)).isEqualTo(new Money(11_000));
+    }
 }

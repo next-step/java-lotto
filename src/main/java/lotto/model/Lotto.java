@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -8,6 +9,12 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public static Lotto from(List<String> lottoNumbers) {
+        return new Lotto(lottoNumbers.stream()
+                                     .map(LottoNumber::new)
+                                     .collect(Collectors.toList()));
     }
 
     public int matchCount(Lotto lotto) {

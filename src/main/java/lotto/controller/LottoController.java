@@ -16,16 +16,19 @@ public class LottoController {
 
     public void start() {
         Money purchasedAmount = InputView.acceptPuchaseAmount();
-        Lottos purchasedLottos = createLottos(purchasedAmount.getLottoCount());
-        ResultView.printInput(purchasedLottos, purchasedAmount);
-        WinningLotto winningLotto = InputView.acceptWinningLotto();
+        Lottos manualLottos = InputView.acceptManualLottos();
 
-        Result result = winningLotto.makeResult(purchasedLottos);
+        Money autoPurchasedAmount = purchasedAmount.buyManual(manualLottos.count());
+        Lottos autoLottos = createAutoLottos(autoPurchasedAmount.getLottoCount());
+        ResultView.printInput(manualLottos, autoLottos);
+
+        WinningLotto winningLotto = InputView.acceptWinningLotto();
+        Result result = winningLotto.makeResult(manualLottos.join(autoLottos));
 
         ResultView.printResult(purchasedAmount, result);
     }
 
-    private Lottos createLottos(int lottoCount) {
+    private Lottos createAutoLottos(int lottoCount) {
         List<Lotto> lottos = new ArrayList();
         for (int i = 0; i < lottoCount; i++) {
             lottos.add(new Lotto(LottoNumberGenerator.generate()));
