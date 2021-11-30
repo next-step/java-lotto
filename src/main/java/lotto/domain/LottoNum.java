@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 public class LottoNum {
 
@@ -14,6 +14,7 @@ public class LottoNum {
             throw new IllegalArgumentException("Number should be in 1 to 45");
         }
     }
+
 
 
 }

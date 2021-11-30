@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.numberstrategy.RandomLottoNumberStrategy;
+import lotto.domain.RandomLottoNumberStrategy;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
