@@ -1,5 +1,6 @@
 package com.pollra.calculator;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,7 +17,8 @@ public class Separator {
     }
 
     public List<String> splitOf(String requestText) {
-        return null;
+        String[] splitResult = requestText.split(value);
+        return Arrays.asList(splitResult);
     }
 
     @Override
