@@ -2,6 +2,7 @@ package view;
 
 import domain.*;
 
+import java.util.Comparator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -33,11 +34,12 @@ public class OutputView {
         int loopNumber = lotteryTickets.size();
         IntStream.range(0, loopNumber)
                 .forEach(index -> {
-                    int size = lotteryTickets.lotteryTicket(index).size();
-                    String lotteryNumber = IntStream.range(0, size)
-                            .mapToObj(i -> String.valueOf(lotteryTickets.lotteryTicket(index).value(i)))
+                    String lotteryNumber = lotteryTickets.findLotteryTicket(index)
+                            .bringLottery()
+                            .stream()
+                            .map(lottery -> String.valueOf(lottery.value()))
+                            .sorted(Comparator.comparing(Integer::new))
                             .collect(Collectors.joining(COMMA_AND_SPACING));
-
                     System.out.printf(LOTTERY_NUMBER_MESSAGE, lotteryNumber);
                     System.out.print(NEXT_LINE);
                 });
