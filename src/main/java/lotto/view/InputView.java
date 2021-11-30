@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import lotto.model.Lotto;
 import lotto.model.LottoNumber;
-import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.WinningLotto;
 import lotto.utils.ScannerUtils;
@@ -32,20 +30,19 @@ public final class InputView {
         return WinningLotto.from(Arrays.asList(winningNumbers), new LottoNumber(ScannerUtils.nextInt()));
     }
 
-    public static Lottos acceptManualLottos() {
+    public static List<List<String>> acceptManualLottos() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         int manualCount = ScannerUtils.nextInt();
 
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<Lotto> manualLottos = makeLottos(manualCount);
-        return new Lottos(manualLottos);
+        return acceptEachManualLotto(manualCount);
     }
 
-    private static List<Lotto> makeLottos(int manualCount) {
-        List<Lotto> manualLottos = new ArrayList();
+    private static List<List<String>> acceptEachManualLotto(int manualCount) {
+        List<List<String>> manualLottos = new ArrayList();
         for (int i = 0; i < manualCount; i++) {
             String[] lotto = ScannerUtils.nextLine().split(DELIMITER);
-            manualLottos.add(Lotto.from(Arrays.asList(lotto)));
+            manualLottos.add(Arrays.asList(lotto));
         }
         return manualLottos;
     }
