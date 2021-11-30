@@ -1,16 +1,18 @@
 package step1.domain;
 
+import step1.exception.DelimiterFormatException;
+
 import java.util.Objects;
 
 public class Number {
     private final int number;
 
     private Number(int number) {
-        validateNumbers(number);
         this.number = number;
     }
 
     public static Number createFromInt(int number) {
+        validateNumbers(number);
         return new Number(number);
     }
 
@@ -18,7 +20,7 @@ public class Number {
         try {
             return new Number(Integer.parseInt(number));
         } catch (NumberFormatException e) {
-            throw new RuntimeException("입력 구분자 오류");
+            throw new DelimiterFormatException("숫자 사이의 구분자 오류");
         }
     }
 
@@ -26,7 +28,7 @@ public class Number {
         return number;
     }
 
-    private void validateNumbers(int number) {
+    private static void validateNumbers(int number) {
         if (number > 0) {
             return;
         }

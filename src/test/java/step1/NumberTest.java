@@ -2,6 +2,7 @@ package step1;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step1.exception.DelimiterFormatException;
 import step1.domain.Number;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,7 +35,7 @@ public class NumberTest {
     @DisplayName("숫자 사이의 구분자가 유효하지 않을 경우 유효성 체크")
     void validateNumberFromString() {
         assertThatThrownBy(() -> Number.createFromString("1$1"))
-                .isInstanceOf(RuntimeException.class)
-                .hasMessage("입력 구분자 오류");
+                .isInstanceOf(DelimiterFormatException.class)
+                .hasMessage("숫자 사이의 구분자 오류");
     }
 }
