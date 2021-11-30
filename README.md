@@ -7,3 +7,13 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 2단계 로또(자동) 구현 기능 목록
+
+- [ ] LotteryNumber 테스트, 클래스 구현
+- [ ] PurchasePrice 테스트, 클래스 구현
+- [ ] LotteryTicketGenerator 인터페이스와 AutoLotteryTicketGenerator 클래스 구현
+- [ ] ManualLotteryTicketGenerator 테스트, 클래스 구현
+- [ ] LotteryMachine 테스트, 클래스 구현
+- [ ] InputView 구현
+- [ ] ResultView 구현
