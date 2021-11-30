@@ -1,16 +1,40 @@
 package step2.domain;
 
+import step2.domain.dto.LottoWinningResult;
+
 import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
-    private List<Integer> lottoNumbers;
+    private final LottoWinningRules lottoWinningRules;
+    private final List<Integer> lottoNumbers;
 
-    Lotto(List<Integer> lottoNumbers) {
+    Lotto(LottoWinningRules lottoWinningRules, List<Integer> lottoNumbers) {
+        this.lottoWinningRules = lottoWinningRules;
         this.lottoNumbers = lottoNumbers;
     }
 
     public List<Integer> getLottoNumbers(){
         return Collections.unmodifiableList(lottoNumbers);
     }
+
+    private int numberOfMatches(LottoWinningNumbers lottoWinningNumbers) {
+        int numberOfMatching = 0;
+        for (int lottoNumber : lottoNumbers) {
+            if (lottoWinningNumbers.contain(lottoNumber)) {
+                numberOfMatching += 1;
+            }
+        }
+        return numberOfMatching;
+
+    }
+
+    public LottoWinningResult getWinningResult(LottoWinningNumbers lottoWinningNumbers){
+        int numberOfMatches = numberOfMatches(lottoWinningNumbers);
+        boolean winLotto = lottoWinningRules.winLotto(numberOfMatches);
+        int prize = lottoWinningRules.getPrizeOf(numberOfMatches);
+        return new LottoWinningResult(winLotto, numberOfMatches, prize);
+
+    }
+
 }

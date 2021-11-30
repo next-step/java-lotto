@@ -24,7 +24,7 @@ public class LottoFactory {
     public static Lotto create() {
         List<Integer> lottoNumbers = generateLottoNumbers();
         List<Integer> unmodifiableLottoNumbers = Collections.unmodifiableList(lottoNumbers);
-        return new Lotto(unmodifiableLottoNumbers);
+        return new Lotto(new LottoWinningRules(), unmodifiableLottoNumbers);
     }
 
     private static List<Integer> generateLottoNumbers() {
