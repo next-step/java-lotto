@@ -14,7 +14,7 @@ class RankGroupTest {
 
     @BeforeEach
     public void setup() {
-        List<LotteryNumber> lotteryNumber = new ArrayList<>();
+        Set<LotteryNumber> lotteryNumber = new HashSet<>();
         for(int i=1; i<=6; i++){
             lotteryNumber.add(new LotteryNumber(i));
         }
