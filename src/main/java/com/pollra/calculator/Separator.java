@@ -1,8 +1,6 @@
 package com.pollra.calculator;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * @since       2021.11.29
@@ -10,14 +8,10 @@ import java.util.Set;
  **********************************************************************************************************************/
 public class Separator {
 
-    private String value;
+    private final String value;
 
     public Separator(String text) {
         this.value = text;
-    }
-
-    public Separator decompose(String text) {
-        return null;
     }
 
     @Override
