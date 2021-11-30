@@ -1,6 +1,9 @@
 package lotto.view;
 
 
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+
 public class ResultView {
 
     private ResultView() {
@@ -10,8 +13,12 @@ public class ResultView {
         System.out.println(str);
     }
 
-    public static void printLottoNumberView(int lottoCount) {
-        System.out.println(lottoCount + "개를 구매했습니다.");
+    public static void printLottoNumberView(Lottos lottos) {
+        lottos.getLottos().forEach(ResultView::printLotto);
+    }
+
+    private static void printLotto(Lotto lotto) {
+        System.out.println(lotto.toString());
     }
 
 

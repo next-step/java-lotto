@@ -11,4 +11,11 @@ public class Lotto {
         this.lottoNumList = numList.stream().map(LottoNum::new).collect(Collectors.toList());
     }
 
+    @Override
+    public String toString() {
+
+        return "[" + lottoNumList.stream()
+                .map(LottoNum::toString)
+                .collect(Collectors.joining(", ")) + "]";
+    }
 }

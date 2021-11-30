@@ -2,6 +2,11 @@ package lotto.domain;
 
 public class LottoNum {
 
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
+
     private int number;
 
     public LottoNum(int number) {
@@ -14,7 +19,5 @@ public class LottoNum {
             throw new IllegalArgumentException("Number should be in 1 to 45");
         }
     }
-
-
 
 }
