@@ -26,15 +26,15 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public Result makeResult(WinningNumber winningNumber) {
+    public Result makeResult(WinningLotto winningLotto) {
         Result result = new Result();
         lottos.stream()
-              .map(lotto -> makeRank(lotto, winningNumber))
+              .map(lotto -> makeRank(lotto, winningLotto))
               .forEach(matchedCount -> result.add(matchedCount));
         return result;
     }
 
-    private Rank makeRank(Lotto lotto, WinningNumber winningNumber) {
-        return Rank.from(winningNumber.matchCount(lotto), winningNumber.hasBonusNumber(lotto));
+    private Rank makeRank(Lotto lotto, WinningLotto winningLotto) {
+        return Rank.from(winningLotto.matchCount(lotto), winningLotto.hasBonusNumber(lotto));
     }
 }
