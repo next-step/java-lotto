@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.RandomLottoNumberStrategy;
+import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -16,5 +17,6 @@ public class RandomNumberStrategyTest {
         List<Integer> list = randomNumberStrategy.createNumber();
 
         assertThat(list.size()).isEqualTo(6);
+        assertThat(list.size()).isEqualTo(Sets.newHashSet(list).size());
     }
 }

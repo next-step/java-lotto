@@ -5,7 +5,7 @@ import java.util.List;
 
 public class RandomLottoNumberStrategy implements LottoNumberStrategy {
 
-    int LOTTO_NUMBER_SELECT_COUNT = 0;
+    private static final int LOTTO_NUMBER_SELECT_COUNT = 6;
 
     @Override
     public List<Integer> createNumber() {
