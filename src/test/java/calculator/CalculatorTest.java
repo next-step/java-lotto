@@ -7,6 +7,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CalculatorTest {
     @Test
+    void nullInput() {
+        int result = Calculator.compute(null);
+        assertThat(result).isEqualTo(0);
+    }
+
+    @Test
     @DisplayName("input으로 공백문자열이 들어오는 경우 0이 반환된다.")
     void emptyInput() {
         int result = Calculator.compute("");
