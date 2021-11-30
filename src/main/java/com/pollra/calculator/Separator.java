@@ -12,6 +12,10 @@ public class Separator {
 
     private Set<String> separators = new HashSet<>();
 
+    public Separator(String text) {
+
+    }
+
     public Separator decompose(String text) {
         return null;
     }
