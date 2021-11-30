@@ -21,4 +21,16 @@ class DecomposerTest {
         ));
         assertEquals(expectedNumbers, resultNumbers);
     }
+
+    @Test
+    @DisplayName("\"1;2;3\" 입력 시 Numbers 로 변환")
+    public void notDecompose() {
+        Decomposer decomposer = new Decomposer();
+        Numbers resultNumbers = decomposer.decompose("1;2;3");
+
+        Numbers expectedNumbers = new Numbers(Numbers.toInstance(
+                Arrays.asList(1, 2, 3)
+        ));
+        assertEquals(expectedNumbers, resultNumbers);
+    }
 }
