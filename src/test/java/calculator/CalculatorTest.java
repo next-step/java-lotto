@@ -1,6 +1,6 @@
-package StringCalculator;
+package calculator;
 
-import StringCalculator.Domain.StringCalculator;
+import calculator.domain.StringCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
