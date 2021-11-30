@@ -18,8 +18,7 @@ public class LottoGameService {
     }
 
     public void buyLotto() {
-        InputView.inputPrice();
-        lottoGameCount = InputView.getLottoGameCount();
+        lottoGameCount = InputView.inputPrice();
         OutputView.drawLottoGameCount(lottoGameCount);
         lottos.makeLottos(lottoGameCount);
         OutputView.drawPurchasedLottos(lottos);

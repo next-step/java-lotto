@@ -20,9 +20,11 @@ public class InputView {
         this.inputPrice = inputPrice;
     }
 
-    public static void inputPrice() {
+    public static LottoGameCount inputPrice() {
         System.out.println(MSG_INPUT_PRICE);
         inputPrice = new InputPrice(Integer.valueOf(scanner.next()));
+        System.out.println(MSG_INPUT_MANUAL_COUNT);
+        return new LottoGameCount(getLottoGameCount(), Integer.valueOf(scanner.next()));
     }
 
     public static LottoNumbers inputLastWeekWinningNumbers() {
@@ -42,8 +44,8 @@ public class InputView {
         return new BonusLottoNumber(Integer.valueOf(scanner.next()), lastWeekWinningNumbers);
     }
 
-    public static LottoGameCount getLottoGameCount() {
-        return new LottoGameCount(inputPrice.divideByThousands());
+    private static int getLottoGameCount() {
+        return inputPrice.divideByThousands();
     }
 
     @Override
