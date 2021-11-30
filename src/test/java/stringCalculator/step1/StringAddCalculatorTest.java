@@ -1,10 +1,12 @@
-package lotto.step1;
+package stringCalculator.step1;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class StringAddCalculatorTest {
 
@@ -40,16 +42,34 @@ public class StringAddCalculatorTest {
     }
 
     @Test
-    @DisplayName("“//”와 “\\n” 문자 사이에 커스텀 구분자를 지정할 수 있다..")
-    public void splitAndSum_custom_구분자() throws Exception {
-        int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
-        assertThat(result).isEqualTo(6);
-    }
-
-    @Test
     @DisplayName("음수를 전달할 경우 RuntimeException 예외가 발생해야 한다. ")
     public void splitAndSum_negative()  {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
                 .isInstanceOf(RuntimeException.class);
+    }
+
+    @DisplayName("숫자 이외의 값이 전달 될 경우 에러 발생")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,adf,2", "adb,1"})
+    void calculateFailByInvalidString(String expression) {
+        assertThatIllegalArgumentException().isThrownBy(() -> StringAddCalculator.splitAndSum(expression));
+    }
+
+    @DisplayName(" “//”와 “\\n” 문자 사이에 커스텀 구분자를 지정할 수 있다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;2;3", "//a\n1a2a3", "//-\n1-2-3"})
+    void customDelimiterCalculate(String expression) {
+        int actual = StringAddCalculator.splitAndSum(expression);
+
+        assertThat(actual).isEqualTo(6);
+    }
+
+    @DisplayName("문자열 계산기 정상 작동")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3=6", "1,2:3=6"}, delimiter = '=')
+    void calculate(String expression, int expected) {
+
+        int actual = StringAddCalculator.splitAndSum(expression);
+        assertThat(actual).isEqualTo(expected);
     }
 }
