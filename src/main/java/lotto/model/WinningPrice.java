@@ -19,7 +19,7 @@ public enum WinningPrice {
     }
 
     public static WinningPrice of(int winningCount, boolean isBonusMatch) {
-        if (winningCount == 5 && isBonusMatch) {
+        if (winningCount == SECOND.winningCount && isBonusMatch) {
             return SECOND;
         }
 
