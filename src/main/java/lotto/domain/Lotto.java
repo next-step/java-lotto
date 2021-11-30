@@ -11,9 +11,9 @@ public class Lotto {
     private static final int LOTTO_SIZE = 6;
 
     private static final String FORM_ERROR_MSG = "로또는 6자리 형식입니다.!!!";
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
-    private Set<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
     public Lotto() {
 
