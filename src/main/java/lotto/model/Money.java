@@ -2,6 +2,8 @@ package lotto.model;
 
 import java.util.Objects;
 
+import lotto.exception.InvalidMoneyException;
+
 public class Money {
 
     private static final int LOTTO_AMOUNT = 1_000;
@@ -11,7 +13,14 @@ public class Money {
     private final int value;
 
     public Money(int money) {
+        validateMoneyOrThrow(money);
         value = money;
+    }
+
+    private void validateMoneyOrThrow(int money) {
+        if (money < 0) {
+            throw new InvalidMoneyException("money must be zero or positive");
+        }
     }
 
     public int getLottoCount() {
