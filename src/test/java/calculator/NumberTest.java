@@ -8,7 +8,7 @@ class NumberTest {
 
     @Test
     void shouldBeEqualTo() {
-        Number number = new Number(1);
-        assertThat(number).isEqualTo(new Number(1));
+        Number number = new Number("1");
+        assertThat(number).isEqualTo(new Number("1"));
     }
 }

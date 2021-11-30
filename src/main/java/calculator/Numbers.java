@@ -1,3 +1,4 @@
+/*
 package calculator;
 
 import java.util.List;
@@ -48,3 +49,4 @@ public class Numbers {
         return Objects.hash(numbers);
     }
 }
+*/

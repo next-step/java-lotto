@@ -7,28 +7,19 @@ public class Number {
     private final int value;
 
     public Number(String input) {
-        Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
-        boolean matches = pattern.matcher(input).matches();
+        boolean matches = input.matches("[+-]?\\d*(\\.\\d+)?");
 
         if(!matches) {
             throw new RuntimeException("숫자가 아닌 값은 입력할 수 없습니다.");
         }
 
-        int parsedInput = Integer.parseInt(input);
+        int parsedInt = Integer.parseInt(input);
 
-        if (parsedInput < 0) {
+        if(parsedInt < 0) {
             throw new RuntimeException("음수는 입력할 수 없습니다.");
         }
 
-        this.value = parsedInput;
-    }
-
-    public Number(int input) {
-        if (input < 0) {
-            throw new RuntimeException("음수는 입력할 수 없습니다.");
-        }
-
-        this.value = input;
+        this.value = parsedInt;
     }
 
     public int getValue() {

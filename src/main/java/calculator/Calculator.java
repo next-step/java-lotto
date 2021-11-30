@@ -21,20 +21,8 @@ public class Calculator {
         int sum = 0;
 
         for (String s : splitInput) {
-
-            boolean matches = s.matches("[+-]?\\d*(\\.\\d+)?");
-
-            if(!matches) {
-                 throw new RuntimeException("숫자가 아닌 값은 입력할 수 없습니다.");
-            }
-
-            int parsedInt = Integer.parseInt(s);
-
-            if(parsedInt < 0) {
-                throw new RuntimeException("음수는 입력할 수 없습니다.");
-            }
-
-            sum += parsedInt;
+            Number number = new Number(s);
+            sum += number.getValue();
         }
 
         return sum;
