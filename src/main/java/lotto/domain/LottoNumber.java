@@ -25,7 +25,7 @@ public class LottoNumber {
     }
 
     public LottoNumber(String input) {
-        this(stringToInt(input));
+        this(Integer.parseInt(input));
     }
 
     public int getNumber() {
@@ -50,10 +50,6 @@ public class LottoNumber {
             .map(LottoNumber::new)
             .collect(Collectors.toList());
         return byStrings;
-    }
-
-    private static int stringToInt(String input) {
-        return Integer.parseInt(input);
     }
 
     private void validateNumber(int number) {
