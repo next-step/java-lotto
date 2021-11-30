@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CalculatorTest {
     @Test
@@ -41,5 +42,19 @@ public class CalculatorTest {
     void customDelimiter() {
         int result = Calculator.compute("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    void negativeNumberInput() {
+        assertThatThrownBy(() -> {
+            Calculator.compute("-1,1");
+        }).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    void notNumberInput() {
+        assertThatThrownBy(() -> {
+            Calculator.compute("a,1");
+        }).isInstanceOf(RuntimeException.class);
     }
 }
