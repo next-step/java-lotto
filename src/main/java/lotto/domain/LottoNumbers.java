@@ -16,6 +16,10 @@ public class LottoNumbers {
         lottoNumbers.forEach( lottoNumber -> {
             this.lottoNumbers.add(LottoNumber.of(lottoNumber));
         });
+
+        if (this.lottoNumbers.size() < 6) {
+            throw new IllegalArgumentException(MSG_SAME_LOTTO_NUMBERS);
+        }
     }
 
     public LottoNumbers createAutoLottoNumbers(DefaultLottoNumbers defaultLottoNumbers) {

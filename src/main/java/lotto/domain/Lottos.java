@@ -18,7 +18,7 @@ public class Lottos {
     }
 
     public void makeLottos(LottoGameCount lottoGameCount) {
-        for (int i = NUMBER_ZERO; i < lottoGameCount.getLottoGameCount(); i++) {
+        for (int i = NUMBER_ZERO; i < lottoGameCount.getLottoAutoCount(); i++) {
             lottoGames.add(new LottoGame(new LottoNumbers().createAutoLottoNumbers(defaultLottoNumbers)));
         }
     }

@@ -35,4 +35,12 @@ public class LottoNumbersTest {
             new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 46));
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("동일한 번호를 입력할 수 없다.")
+    void validateSameLottoNumbers() {
+        assertThatThrownBy(() -> {
+            new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 5));
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 }

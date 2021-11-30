@@ -24,6 +24,7 @@ public class OutputView {
         sb.append(lottoGameCount.getLottoAutoCount());
         sb.append(MSG_LOTTO_COUNT);
         System.out.println(sb);
+        sb.setLength(NUMBER_ZERO);
     }
 
     public static void drawPurchasedLottos(Lottos lottos) {
