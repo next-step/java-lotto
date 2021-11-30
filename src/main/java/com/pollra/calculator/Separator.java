@@ -10,10 +10,10 @@ import java.util.Set;
  **********************************************************************************************************************/
 public class Separator {
 
-    private Set<String> separators = new HashSet<>();
+    private String value;
 
     public Separator(String text) {
-
+        this.value = text;
     }
 
     public Separator decompose(String text) {
@@ -25,11 +25,11 @@ public class Separator {
         if (this == o) return true;
         if (! (o instanceof Separator)) return false;
         Separator separator=(Separator) o;
-        return Objects.equals(separators, separator.separators);
+        return Objects.equals(value, separator.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(separators);
+        return Objects.hash(value);
     }
 }
