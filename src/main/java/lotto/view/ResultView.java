@@ -1,12 +1,10 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.PurchaseMachine;
 import lotto.domain.Rank;
 import lotto.domain.Statistics;
 import lotto.dto.StatisticResult;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -49,12 +47,13 @@ public class ResultView {
     private String statisticResult(StatisticResult result) {
         Map<Rank, Long> map = result.getRankIntegerMap();
 
-        List<Rank> ranks = Arrays.asList(Rank.FORTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
+        List<Rank> ranks = Rank.wonRanks;
 
         StringBuilder sb = new StringBuilder();
         for (Rank r : ranks) {
             sb.append(r.getMatch());
             sb.append("개 일치 ");
+            appendIfSecond(r, sb);
             sb.append("(");
             sb.append(r.getMoney());
             sb.append(")- ");
@@ -67,5 +66,12 @@ public class ResultView {
         sb.append(result.getProfit());
         sb.append("입니다");
         return sb.toString();
+    }
+
+    private void appendIfSecond(Rank rank, StringBuilder sb) {
+        if (rank.equals(Rank.SECOND)) {
+            sb.append(",");
+            sb.append(" 보너스 볼 일치");
+        }
     }
 }
