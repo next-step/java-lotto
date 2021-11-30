@@ -10,6 +10,7 @@ import java.util.Arrays;
 public class LottoResultView {
 
   private static final String PRIZE_SHOW_FORMAT = "%d개 일치 (%d원)- %d개";
+  private static final String BONUS_PRIZE_SHOW_FORMAT = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
 
   private LottoResultView() { }
 
@@ -28,11 +29,20 @@ public class LottoResultView {
   }
 
   private static void showEachPrizeResult(LottoResult lottoResult) {
-    Arrays.stream(LottoPrize.values()).forEach(lottoPrize -> {
-      int matchTotal = lottoResult.result(lottoPrize);
-      String resultForEachPrize = String.format(PRIZE_SHOW_FORMAT, lottoPrize.matchCount, lottoPrize.prize, matchTotal);
-      System.out.println(resultForEachPrize);
+    Arrays.stream(LottoPrize.values())
+      .filter(lottoprize -> lottoprize != LottoPrize.NONE)
+      .forEach(lottoPrize -> {
+        int matchTotal = lottoResult.result(lottoPrize);
+        String resultForEachPrize = makePrizeResultNotice(lottoPrize, matchTotal);
+        System.out.println(resultForEachPrize);
     });
+  }
+
+  private static String makePrizeResultNotice(LottoPrize lottoPrize, int matchTotal) {
+    if (lottoPrize == LottoPrize.SECOND) {
+      return String.format(BONUS_PRIZE_SHOW_FORMAT, lottoPrize.matchCount, lottoPrize.prize, matchTotal);
+    }
+    return String.format(PRIZE_SHOW_FORMAT, lottoPrize.matchCount, lottoPrize.prize, matchTotal);
   }
 
   public static void showLottoProfit(int lottoAmount, double totalLottoPrize) {

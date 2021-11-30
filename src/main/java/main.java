@@ -1,8 +1,8 @@
-import domain.Lotto;
 import domain.LottoNumber;
 import domain.LottoResult;
 import domain.Lottos;
 import domain.Wallet;
+import domain.WinningLotto;
 import view.LottoInputView;
 import view.LottoResultView;
 
@@ -23,7 +23,8 @@ public class main {
 
 
     List<LottoNumber> lastWeekWinningNumbers = LottoInputView.inputLastWeekWinningNumbers();
-    Lotto lastWeekWinningLotto = new Lotto(lastWeekWinningNumbers);
+    int lastWeekBonusNumber = LottoInputView.inputLastWeekBonusNumber();
+    WinningLotto lastWeekWinningLotto = new WinningLotto(lastWeekWinningNumbers, new LottoNumber(lastWeekBonusNumber));
 
     LottoResult lottoResult = new LottoResult(boughtLottos, lastWeekWinningLotto);
     LottoResultView.showLottoStatistics(lottoResult);

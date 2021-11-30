@@ -10,22 +10,23 @@ public class LottoResult {
 
   private final Map<LottoPrize, Integer> result;
 
-  public LottoResult(Lottos lottos, Lotto target) {
-    this.result = makeResult(lottos.getLottos(), target);
+  public LottoResult(Lottos lottos, WinningLotto winningLotto) {
+    this.result = makeResult(lottos.getLottos(), winningLotto);
   }
 
-  private Map<LottoPrize, Integer> makeResult(List<Lotto> lottos, Lotto winningLotto) {
+  private Map<LottoPrize, Integer> makeResult(List<Lotto> lottos, WinningLotto winningLotto) {
     Map<LottoPrize, Integer> result = new HashMap<>();
     for (Lotto lotto : lottos) {
-      LottoPrize lottoPrize = LottoPrize.find(matchedNumberCount(lotto, winningLotto));
+      LottoPrize lottoPrize =
+              LottoPrize.find(matchedNumberCount(lotto, winningLotto), winningLotto.isContainsBonusNumber(lotto));
       result.put(lottoPrize, increasePrizeCount(result, lottoPrize));
     }
 
     return result;
   }
 
-  private long matchedNumberCount(Lotto lotto, Lotto winningLotto) {
-    return lotto.getLottoNumbers().stream()
+  private int matchedNumberCount(Lotto lotto, WinningLotto winningLotto) {
+    return (int) lotto.getLottoNumbers().stream()
             .filter(winningLotto.getLottoNumbers()::contains)
             .count();
   }
