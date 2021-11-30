@@ -17,6 +17,6 @@ class ResultTest {
         result.add(Rank.SECOND);
         result.add(Rank.FIRST);
 
-        assertThat(result.calculateWinningAmount()).isEqualTo(2_004_555_000);
+        assertThat(result.calculateWinningAmount()).isEqualTo(new Money(2_004_555_000));
     }
 }
