@@ -49,6 +49,6 @@ public class Result {
     }
 
     public Map<Rank, Integer> getRanks() {
-        return Collections.unmodifiableMap(ranks);
+        return Collections.unmodifiableMap(((TreeMap) ranks).descendingMap());
     }
 }
