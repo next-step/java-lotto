@@ -28,7 +28,7 @@ class NumberTest {
     }
 
     @Test
-    @DisplayName("음수 입력 시 RuntimeException")
+    @DisplayName("문자 입력 시 RuntimeException")
     public void validCharacter() {
         assertThrows(RuntimeException.class
                 ,() -> new Number("뷁")
