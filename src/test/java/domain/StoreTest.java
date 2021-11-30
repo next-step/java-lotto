@@ -46,7 +46,7 @@ class StoreTest {
     @DisplayName("로또 구매후 번호 자동생성")
     public void lotteryNumbersAutomatically() {
         LotteryTickets lottery = new LotteryTickets(new Store(1000).lotteryCount(), new ArrayList<>());
-        assertThat(lottery.lotteryTicket(0).size()).isEqualTo(6);
+        assertThat(lottery.findLotteryTicket(0).size()).isEqualTo(6);
     }
 
 }
