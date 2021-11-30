@@ -12,17 +12,17 @@ public class OutputView {
     private static final String WINNING_STATICS_FORMAT ="%d개 일치 (%d원)- %d개";
     private static final String EARNING_RATE_FORMAT ="총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    public void printNumberOfPurchase(int number) {
+    public static void printNumberOfPurchase(int number) {
         System.out.println(number + NUMBER_OF_PURCHASE);
     }
 
-    public void printLottoNumbers(List<Integer> numbers) {
+    public static void printLottoNumbers(List<Integer> numbers) {
         String format = String.format(LOTTO_NUMBERS_FORMAT, numbers.get(0), numbers.get(1), numbers.get(2), numbers.get(3), numbers.get(4), numbers.get(5));
         System.out.println(format);
 
     }
 
-    public void printWinningStatics(List<WinningInformation> informationList ) {
+    public static void printWinningStatics(List<WinningInformation> informationList ) {
         System.out.println(WINNING_STATICS);
         System.out.println(DIVIDING_LINE);
         for (WinningInformation information : informationList) {
@@ -33,7 +33,7 @@ public class OutputView {
 
     }
 
-    public void earningsRate(double rate){
+    public static void earningsRate(double rate){
         String format = String.format(EARNING_RATE_FORMAT, rate);
         System.out.println(format);
     }
