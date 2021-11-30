@@ -1,7 +1,7 @@
 package calculator;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Numbers {
 
@@ -12,18 +12,14 @@ public class Numbers {
     }
 
     private List<Number> rapping(List<String> stringNumbers) {
-        List<Number> numbers = new ArrayList<>();
-        for (String textNumber : stringNumbers) {
-            numbers.add(new Number(textNumber));
-        }
-        return numbers;
+        return stringNumbers.stream()
+                .map(Number::new)
+                .collect(Collectors.toList());
     }
 
     public int getResult() {
-        int result = 0;
-        for (Number number : this.numbers) {
-            result += number.getNumber();
-        }
-        return result;
+        return this.numbers.stream()
+                .mapToInt(Number::getNumber)
+                .sum();
     }
 }
