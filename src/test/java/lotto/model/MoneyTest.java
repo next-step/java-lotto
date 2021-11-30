@@ -18,14 +18,6 @@ class MoneyTest {
         assertThatThrownBy(() -> new Money(input)).isInstanceOf(InvalidMoneyException.class);
     }
 
-    @DisplayName("로또 구매 가격이 주어졌을 때 몇 개의 로또를 구매했는지 반환하는 로직 검증")
-    @Test
-    void lottoCountByAmountTest() {
-        int amount = 14_000;
-        int expectedCount = 14;
-        assertThat(new Money(amount).getLottoCount()).isEqualTo(expectedCount);
-    }
-
     @DisplayName("Money와 Result가 주어졌을 때 해당 결과에 맞는 수익률이 반환되는지 검증")
     @Test
     void ratioTest() {
@@ -39,7 +31,14 @@ class MoneyTest {
 
     @DisplayName("Money와 수동으로 구매한 로또 개수가 주어졌을 때 거스름돈을 반환하는지 검증")
     @Test
-    void buyManualTest() {
-        assertThat(new Money(14_000).buyManual(3)).isEqualTo(new Money(11_000));
+    void changesByBuyManualTest() {
+        assertThat(new Money(14_000).changesAfterBuyManual(3)).isEqualTo(new Money(11_000));
+    }
+
+    @DisplayName("Money가 주어졌을 때 해당 금액만큼의 자동 추첨 로또를 사는지 검증")
+    @Test
+    void buyAutoLottosAllTest() {
+        Money money = new Money(14_000);
+        assertThat(money.buyAutoLottosAll().count()).isEqualTo(14);
     }
 }

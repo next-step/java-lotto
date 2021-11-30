@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,7 +8,6 @@ import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.Result;
 import lotto.model.WinningLotto;
-import lotto.utils.LottoNumberGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -19,8 +17,8 @@ public class LottoController {
         Money purchasedAmount = InputView.acceptPuchaseAmount();
         Lottos manualLottos = createManualLottos(InputView.acceptManualLottos());
 
-        Money autoPurchasedAmount = purchasedAmount.buyManual(manualLottos.count());
-        Lottos autoLottos = createAutoLottos(autoPurchasedAmount.getLottoCount());
+        Money changes = purchasedAmount.changesAfterBuyManual(manualLottos.count());
+        Lottos autoLottos = changes.buyAutoLottosAll();
         ResultView.printInput(manualLottos, autoLottos);
 
         WinningLotto winningLotto = InputView.acceptWinningLotto();
@@ -33,13 +31,5 @@ public class LottoController {
         return new Lottos(manualLottos.stream()
                                       .map(lottoNumbers -> Lotto.from(lottoNumbers))
                                       .collect(Collectors.toList()));
-    }
-
-    private Lottos createAutoLottos(int lottoCount) {
-        List<Lotto> lottos = new ArrayList();
-        for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto(LottoNumberGenerator.generate()));
-        }
-        return new Lottos(lottos);
     }
 }
