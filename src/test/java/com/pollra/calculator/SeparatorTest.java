@@ -3,6 +3,9 @@ package com.pollra.calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("분리 기호 테스트")
@@ -24,5 +27,16 @@ class SeparatorTest {
         Separator dot = new Separator(".");
 
         assertNotEquals(comma, dot);
+    }
+
+    @Test
+    @DisplayName("Separator 가 \":\" 일 때 \"10:2;11\" 입력 시 \"{\"10\", \"2;10\"}\" 리턴")
+    public void splitOf() {
+        String requestText = "10:2;11";
+        Separator colon = new Separator(":");
+        List<String> splitResult = colon.splitOf(requestText);
+        List<String> expectedSplitResult = Arrays.asList("10", "2;10");
+
+        assertEquals(expectedSplitResult, splitResult);
     }
 }
