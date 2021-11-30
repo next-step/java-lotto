@@ -10,6 +10,6 @@ class LotteryNumbersTest {
     @Test
     @DisplayName("랜덤번호 6개 생성")
     public void sixRandomNumber() {
-        assertThat(LotteryNumbers.bringNumber().size()).isEqualTo(6);
+        assertThat(LotteryNumbers.auto().size()).isEqualTo(6);
     }
 }
