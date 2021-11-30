@@ -14,7 +14,7 @@ public class StringPlusCalculator {
     private static final int MAIN_TEXT = 2;
     private static final int BASIC_RESULT_VALUE = 0;
 
-    public StringPlusCalculator() {
+    private StringPlusCalculator() {
         throw new NotInstanceException();
     }
 
