@@ -10,7 +10,7 @@
 
 ## 2단계 로또(자동) 구현 기능 목록
 
-- [ ] LotteryNumber 테스트, 클래스 구현
+- [X] LotteryNumber 테스트, 클래스 구현
 - [ ] PurchasePrice 테스트, 클래스 구현
 - [ ] LotteryTicketGenerator 인터페이스와 AutoLotteryTicketGenerator 클래스 구현
 - [ ] ManualLotteryTicketGenerator 테스트, 클래스 구현
