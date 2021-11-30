@@ -39,7 +39,7 @@ public class CalculatorTest {
 
     @Test
     void customDelimiter() {
-        int result = Calculator.compute("//;\\n1;2;3");
+        int result = Calculator.compute("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
     }
 }
