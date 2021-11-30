@@ -22,7 +22,7 @@ public class Calculator {
 
         String[] numbers = splitInput(input);
         return Arrays.stream(numbers)
-                .mapToInt(Integer::parseInt)
+                .mapToInt(Calculator::parseInt)
                 .sum();
     }
 
@@ -35,5 +35,16 @@ public class Calculator {
         return input.split(DELIMITERS_REGEX);
     }
 
-
+    private static int parseInt(String input) {
+        int number;
+        try {
+            number = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("숫자 타입만 입력 가능합니다.");
+        }
+        if (number < 0) {
+            throw new RuntimeException("양수만 입력 가능합니다.");
+        }
+        return number;
+    }
 }
