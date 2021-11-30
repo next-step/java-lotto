@@ -24,11 +24,11 @@ class FormulaTest {
     void createNumbersWithNumberList(String formulaString) {
         // when
         Formula formula = new Formula(formulaString);
-        List<Element> elements = formula.split(GROUP_PATTERN, BASIC_DELIMITER)
-                .getElements();
+        formula.split(GROUP_PATTERN, BASIC_DELIMITER);
+        List<String> elements = formula.getElements();
 
         // then
-        assertThat(elements).containsExactly(new Element("0"));
+        assertThat(elements).containsExactly("0");
     }
 
     static Stream<Arguments> getInvalidFormula() {
@@ -41,11 +41,11 @@ class FormulaTest {
     @DisplayName("그룹 패턴과 기본 구분자에 맞게 계산식을 숫자로 변환한다")
     @MethodSource("getFormula")
     @ParameterizedTest
-    void createNumbersWithNumberList(String formulaString, List<Element> expected) {
+    void createNumbersWithNumberList(String formulaString, List<String> expected) {
         // when
         Formula formula = new Formula(formulaString);
-        List<Element> elements = formula.split(GROUP_PATTERN, BASIC_DELIMITER)
-                .getElements();
+        formula.split(GROUP_PATTERN, BASIC_DELIMITER);
+        List<String> elements = formula.getElements();
 
         // then
         assertThat(elements).containsExactlyElementsOf(expected);
@@ -53,15 +53,9 @@ class FormulaTest {
 
     static Stream<Arguments> getFormula() {
         return Stream.of(
-                Arguments.of(
-                        "//!\n1!2!3",
-                        Arrays.asList(new Element("1"), new Element("2"), new Element("3"))
-                ),
-                Arguments.of(
-                        "1,2:3",
-                        Arrays.asList(new Element("1"), new Element("2"), new Element("3"))
-                ),
-                Arguments.of("1", Collections.singletonList(new Element("1")))
+                Arguments.of("//!\n1!2!3", Arrays.asList(("1"), ("2"), ("3"))),
+                Arguments.of("1,2:3", Arrays.asList(("1"), ("2"), ("3"))),
+                Arguments.of("1", Collections.singletonList("1"))
         );
     }
 }

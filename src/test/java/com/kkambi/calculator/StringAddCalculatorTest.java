@@ -1,7 +1,5 @@
 package com.kkambi.calculator;
 
-import com.kkambi.calculator.domain.Element;
-import com.kkambi.calculator.domain.Elements;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -21,21 +19,21 @@ class StringAddCalculatorTest {
     @DisplayName("문자열로 된 계산식을 원소들로 나눈다")
     @MethodSource("getFormulaString")
     @ParameterizedTest
-    void split(String formulaString, List<Element> expected) {
+    void split(String formulaString, List<String> expected) {
         // when
         // then
-        Elements elements = StringAddCalculator.split(formulaString);
-        assertThat(elements.getElements()).containsExactlyElementsOf(expected);
+        List<String> elements = StringAddCalculator.split(formulaString);
+        assertThat(elements).containsExactlyElementsOf(expected);
     }
 
     static Stream<Arguments> getFormulaString() {
         return Stream.of(
-                Arguments.of(null, Collections.singletonList(new Element("0"))),
-                Arguments.of("", Collections.singletonList(new Element("0"))),
-                Arguments.of("10", Collections.singletonList(new Element("10"))),
-                Arguments.of("1,2", Arrays.asList(new Element("1"), new Element("2"))),
-                Arguments.of("1,2:3", Arrays.asList(new Element("1"), new Element("2"), new Element("3"))),
-                Arguments.of("//;\n1;2;3", Arrays.asList(new Element("1"), new Element("2"), new Element("3")))
+                Arguments.of(null, Collections.singletonList("0")),
+                Arguments.of("", Collections.singletonList("0")),
+                Arguments.of("10", Collections.singletonList("10")),
+                Arguments.of("1,2", Arrays.asList("1", "2")),
+                Arguments.of("1,2:3", Arrays.asList("1", "2", "3")),
+                Arguments.of("//;\n1;2;3", Arrays.asList("1", "2", "3"))
         );
     }
 
@@ -44,7 +42,7 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     void sum(String formulaString) {
         // given
-        Elements elements = StringAddCalculator.split(formulaString);
+        List<String> elements = StringAddCalculator.split(formulaString);
 
         // when
         // then
@@ -57,7 +55,7 @@ class StringAddCalculatorTest {
     @ParameterizedTest
     void sumThrowingException(String formulaString) {
         // given
-        Elements elements = StringAddCalculator.split(formulaString);
+        List<String> elements = StringAddCalculator.split(formulaString);
 
         // when
         // then

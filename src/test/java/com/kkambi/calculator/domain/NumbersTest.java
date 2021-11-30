@@ -15,8 +15,7 @@ class NumbersTest {
     @Test
     void createNumbersWithNumberList() {
         // given
-        String[] tokens = {"1", "2", "3"};
-        Elements elements = new Elements(tokens);
+        List<String> elements = Arrays.asList("1", "2", "3");
 
         // when
         List<Number> numbers = new Numbers(elements).getNumbers();

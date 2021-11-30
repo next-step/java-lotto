@@ -8,10 +8,9 @@ public class Numbers {
 
     private final List<Number> numbers;
 
-    public Numbers(Elements elements) {
-        this.numbers = elements.getElements()
-                .stream()
-                .map(element -> new Number(element.getElement()))
+    public Numbers(List<String> elements) {
+        this.numbers = elements.stream()
+                .map(Number::new)
                 .collect(Collectors.toList());
     }
 
