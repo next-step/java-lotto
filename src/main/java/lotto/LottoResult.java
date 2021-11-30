@@ -5,8 +5,8 @@ import lotto.model.WinningPrice;
 import java.util.List;
 
 public class LottoResult {
-    private List<LottoPaper> purchasedLottos;
-    private WinningNumbers winningNumbers;
+    private final List<LottoPaper> purchasedLottos;
+    private final WinningNumbers winningNumbers;
 
     public LottoResult(List<LottoPaper> purchasedLottos, WinningNumbers winningNumbers) {
         this.purchasedLottos = purchasedLottos;
