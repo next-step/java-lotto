@@ -11,27 +11,47 @@
 
 클래스별로 나누어 기능을 구현한다
 
-### Number
-* ```java
-  public Number plus(Number number)
-  ```
+![String Calculator Flow](2_1_String_Calculator_Flow.png)
 
-### Separator
-* ```java
-  public Separator decompose(String text)
-  ```
-
-### Calculator
-* ```java
-  private void decompose(String formula, Separator)
-  ```
-  
-* ```java
-  public Number calculate(String text)
-  ```
-  
 ### StringCalculateApplication
 
 * ```java
   public void start(String text)
+  ```
+
+### Calculator
+* ```java
+  public Number calculate(String text)
+  ```
+
+### Decomposer
+* ```java
+  public Numbers decompose(String text);
+  ```
+* ```java
+  private void decomposeSeparators(String text)
+  ```
+* ```java
+  private void decomposeNumbers(String text);
+  ```
+
+### Separator
+* ```java
+  public Separator(String text)
+  ```
+* ```java
+  public boolean equals(Separator separator)
+  ```
+
+### Numbers
+* ```java
+  public Number sum()
+  ```
+
+### Number
+* ```java
+  public Number(int value)
+  ```
+* ```java
+  public Number plus(Number number)
   ```
