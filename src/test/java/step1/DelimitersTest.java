@@ -9,7 +9,6 @@ import step1.domain.Delimiter;
 import step1.domain.Delimiters;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class DelimitersTest {
     @Test
@@ -30,7 +29,7 @@ public class DelimitersTest {
     @Test
     @DisplayName("String split를 위한 구분자들 합치기")
     void joining() {
-        assertThat(Delimiters.createWithoutInput().joining()).isEqualTo(",|:");
-        assertThat(Delimiters.createWithInput(new Delimiter("$")).joining()).isEqualTo("$");
+        assertThat(Delimiters.createWithoutInput().joining()).isEqualTo(new Delimiter(",|:"));
+        assertThat(Delimiters.createWithInput(new Delimiter("$")).joining()).isEqualTo(new Delimiter("$"));
     }
 }

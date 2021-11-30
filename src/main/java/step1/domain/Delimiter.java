@@ -13,6 +13,10 @@ public class Delimiter {
         return delimiter;
     }
 
+    public Delimiter joining(Delimiter delimiter) {
+        return new Delimiter(String.format("%s|%s", this.delimiter, delimiter.getDelimiter()));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

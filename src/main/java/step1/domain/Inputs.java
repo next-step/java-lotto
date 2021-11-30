@@ -30,7 +30,7 @@ public class Inputs {
         Matcher matcher = EXTRACT_NUMBERS_PATTERN.matcher(input);
         String extract = matcher.find() ? matcher.group(0) : input;
 
-        return new Numbers(extract.split(delimiters.joining()));
+        return new Numbers(extract.split(delimiters.joining().getDelimiter()));
     }
 
     private boolean isHaveDelimiters(String input) {

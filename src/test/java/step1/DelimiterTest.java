@@ -21,4 +21,11 @@ public class DelimiterTest {
         assertThat(delimiter.getDelimiter()).isEqualTo(";");
         assertThat(delimiter.getDelimiter()).isNotEqualTo(":");
     }
+
+    @Test
+    @DisplayName("get method test")
+    void joining() {
+        assertThat(new Delimiter(";").joining(new Delimiter(","))).isEqualTo(new Delimiter(";|,"));
+        assertThat(new Delimiter(",").joining(new Delimiter(";"))).isEqualTo(new Delimiter(",|;"));
+    }
 }

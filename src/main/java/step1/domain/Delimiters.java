@@ -27,10 +27,10 @@ public class Delimiters {
         this.delimiters = delimiters;
     }
 
-    public String joining() {
+    public Delimiter joining() {
         return this.delimiters.stream()
-                .map(d -> d.getDelimiter())
-                .collect(Collectors.joining("|"));
+                .reduce((d1, d2) -> d1.joining(d2))
+                .get();
     }
 
     @Override
