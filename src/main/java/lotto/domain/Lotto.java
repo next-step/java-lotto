@@ -75,20 +75,8 @@ public class Lotto {
                 .count() == count;
     }
 
-    private boolean contains(LottoNumber lottoNumber) {
-
-        Iterator<LottoNumber> itr = numbers.iterator();
-        while(itr.hasNext()) {
-            if(isValueEqual(itr.next(), lottoNumber)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private boolean isValueEqual(LottoNumber winningNumber, LottoNumber lottoNumber) {
-        return lottoNumber.equals(winningNumber);
+    public boolean contains(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
     }
 
     public Set<LottoNumber> getNumbers() {
