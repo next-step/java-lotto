@@ -20,5 +20,11 @@ public class LottoGameCountTest {
             new LottoGameCount(1, 2);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("수동으로 구매한 로또가 있는지 테스트")
+    void isPurchasedManual() {
+        assertThat(new LottoGameCount(10, 3).isPurchasedManual()).isTrue();
+    }
 }
 

@@ -17,7 +17,13 @@ public class OutputView {
     }
 
     public static void drawLottoGameCount(LottoGameCount lottoGameCount) {
-        System.out.println(lottoGameCount.getLottoGameCount() + MSG_LOTTO_COUNT);
+        System.out.println();
+        sb.append(MSG_MANUAL_COUNT);
+        sb.append(lottoGameCount.getLottoManualCount());
+        sb.append(MSG_AUTO_COUNT);
+        sb.append(lottoGameCount.getLottoAutoCount());
+        sb.append(MSG_LOTTO_COUNT);
+        System.out.println(sb);
     }
 
     public static void drawPurchasedLottos(Lottos lottos) {

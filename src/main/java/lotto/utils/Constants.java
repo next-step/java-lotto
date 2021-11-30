@@ -9,7 +9,10 @@ public class Constants {
 
     public static final String MSG_INPUT_PRICE = "구입금액을 입력해 주세요.";
     public static final String MSG_INPUT_MANUAL_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    public static final String MSG_INPUT_MANUAL_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
     public static final String MSG_MINIMUM_PURCHASE_PRICE = "로또는 1000원 단위로 구매할 수 있습니다.";
+    public static final String MSG_MANUAL_COUNT = "수동으로 ";
+    public static final String MSG_AUTO_COUNT = "장, 자동으로 ";
     public static final String MSG_LOTTO_COUNT = "개를 구매했습니다.";
     public static final String MSG_INPUT_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String MSG_INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";

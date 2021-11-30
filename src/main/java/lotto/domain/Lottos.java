@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static lotto.utils.Constants.NUMBER_ZERO;
 
@@ -24,6 +21,12 @@ public class Lottos {
         for (int i = NUMBER_ZERO; i < lottoGameCount.getLottoGameCount(); i++) {
             lottoGames.add(new LottoGame(new LottoNumbers().createAutoLottoNumbers(defaultLottoNumbers)));
         }
+    }
+
+    public void makeManualLottos(List<String[]> inputLottos) {
+        inputLottos.forEach(inputLotto -> {
+            lottoGames.add(new LottoGame(new LottoNumbers().createManualLottoNumbers(Arrays.asList(inputLotto))));
+        });
     }
 
     public Long winRankLottoCount(Long rankCount) {

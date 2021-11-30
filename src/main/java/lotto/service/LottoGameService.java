@@ -4,6 +4,7 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
 import java.util.Objects;
 
 public class LottoGameService {
@@ -19,6 +20,10 @@ public class LottoGameService {
 
     public void buyLotto() {
         lottoGameCount = InputView.inputPrice();
+        if (lottoGameCount.isPurchasedManual()) {
+            List<String[]> inputLottos = InputView.inputManualLottoNumbers(lottoGameCount.getLottoManualCount());
+            lottos.makeManualLottos(inputLottos);
+        }
         OutputView.drawLottoGameCount(lottoGameCount);
         lottos.makeLottos(lottoGameCount);
         OutputView.drawPurchasedLottos(lottos);

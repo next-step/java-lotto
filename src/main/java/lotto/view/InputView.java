@@ -5,9 +5,7 @@ import lotto.domain.InputPrice;
 import lotto.domain.LottoGameCount;
 import lotto.domain.LottoNumbers;
 
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static lotto.utils.Constants.*;
@@ -42,6 +40,16 @@ public class InputView {
     public static BonusLottoNumber inputBonusLottonumber(LottoNumbers lastWeekWinningNumbers) {
         System.out.println(MSG_INPUT_BONUS_NUMBER);
         return new BonusLottoNumber(Integer.valueOf(scanner.next()), lastWeekWinningNumbers);
+    }
+
+    public static List<String[]> inputManualLottoNumbers(Integer lottoManualCount) {
+        System.out.println(MSG_INPUT_MANUAL_NUMBER);
+        List<String[]> inputLottos = new ArrayList<>();
+        for (int i = 0; i < lottoManualCount; i++) {
+            String[] inputLottoNumbers = scanner.next().split(COMMA);
+            inputLottos.add(inputLottoNumbers);
+        }
+        return inputLottos;
     }
 
     private static int getLottoGameCount() {

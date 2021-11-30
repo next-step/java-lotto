@@ -24,9 +24,22 @@ public class LottoNumbers {
         for (int i = NUMBER_ZERO; i < NUMBER_SIX; i++) {
             randomNumbers.add(defaultLottoNumbers.getDefaultLottoNumberByIndex(i));
         }
-        List<Integer> lottoNumbers = randomNumbers.stream()
+        return new LottoNumbers(sortNumbers(randomNumbers));
+    }
+
+    public LottoNumbers createManualLottoNumbers(List<String> inputNumbers) {
+        List<Integer> lottoNumbers = new ArrayList<>();
+        inputNumbers.forEach(inputNumber -> {
+            lottoNumbers.add(Integer.parseInt(inputNumber));
+        });
+
+        return new LottoNumbers(sortNumbers(lottoNumbers));
+    }
+
+    private List<Integer> sortNumbers(List<Integer> numbers) {
+        List<Integer> lottoNumbers = numbers.stream()
                 .sorted().collect(Collectors.toList());
-        return new LottoNumbers(lottoNumbers);
+        return lottoNumbers;
     }
 
     public void validateLottoNumbersLength() {
@@ -55,4 +68,6 @@ public class LottoNumbers {
     public int hashCode() {
         return Objects.hash(lottoNumbers);
     }
+
+
 }

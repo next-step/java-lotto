@@ -14,8 +14,20 @@ public class LottoGameCount {
         this.lottoManualCount = lottoManualCount;
     }
 
+    public boolean isPurchasedManual() {
+        return lottoManualCount > 0;
+    }
+
     public Integer getLottoGameCount() {
         return lottoGameCount;
+    }
+
+    public Integer getLottoAutoCount() {
+        return lottoGameCount - lottoManualCount;
+    }
+
+    public Integer getLottoManualCount() {
+        return lottoManualCount;
     }
 
     @Override
