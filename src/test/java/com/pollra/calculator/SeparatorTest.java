@@ -30,23 +30,23 @@ class SeparatorTest {
     }
 
     @Test
-    @DisplayName("Separator 가 \":\" 일 때 \"10:2;11\" 입력 시 \"{\"10\", \"2;10\"}\" 리턴")
+    @DisplayName("Separator 가 \":\" 일 때 \"10:2;11\" 입력 시 \"{\"10\", \"2;11\"}\" 리턴")
     public void splitOf() {
         String requestText = "10:2;11";
         Separator colon = new Separator(":");
         List<String> splitResult = colon.splitOf(requestText);
-        List<String> expectedSplitResult = Arrays.asList("10", "2;10");
+        List<String> expectedSplitResult = Arrays.asList("10", "2;11");
 
         assertEquals(expectedSplitResult, splitResult);
     }
 
     @Test
-    @DisplayName("Separator 가 \":\" 일 때 \"10:2;11:5\" 입력 시 \"{\"10\", \"2;10\", \"5\"}\" 리턴")
+    @DisplayName("Separator 가 \":\" 일 때 \"10:2;11:5\" 입력 시 \"{\"10\", \"2;11\", \"5\"}\" 리턴")
     public void splitOf2() {
         String requestText = "10:2;11:5";
         Separator colon = new Separator(":");
         List<String> splitResult = colon.splitOf(requestText);
-        List<String> expectedSplitResult = Arrays.asList("10", "2;10", "5");
+        List<String> expectedSplitResult = Arrays.asList("10", "2;11", "5");
 
         assertEquals(expectedSplitResult, splitResult);
     }
