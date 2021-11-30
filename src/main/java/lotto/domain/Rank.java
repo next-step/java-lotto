@@ -9,12 +9,13 @@ import java.util.List;
 public enum Rank {
 
     FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FORTH(3, 5_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FORTH(4, 50_000),
+    FIFTH(3, 5_000),
     NONE(0, 0);
 
-    public static List<Rank> wonRanks = Arrays.asList(FORTH, THIRD, SECOND, FIRST);
+    public static List<Rank> wonRanks = Arrays.asList(FIFTH, FORTH, THIRD, SECOND, FIRST);
 
     private int match;
     private int money;
@@ -24,9 +25,14 @@ public enum Rank {
         this.money = money;
     }
 
-    public static Rank of (int count) {
+    public static Rank of(int count, boolean bonus) {
+        if (count == Rank.SECOND.match && bonus) {
+            return Rank.SECOND;
+        }
+
         return Arrays.stream(Rank.values())
-            .filter(r -> r.match == count)
+            .filter(rank -> rank != Rank.SECOND)
+            .filter(rank -> rank.match == count)
             .findFirst()
             .orElse(Rank.NONE);
     }
