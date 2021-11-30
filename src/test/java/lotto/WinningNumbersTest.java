@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import stringformula.exception.DuplicateBonusNumberException;
 
 import static lotto.utils.TestUtils.testLottoNumbers;
+import static lotto.utils.TestUtils.testWinningNumbers;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,7 +28,7 @@ class WinningNumbersTest {
     @DisplayName("winningCount 메소드는 당첨된 로또 번호 개수를 반환한다")
     void 테스트_winningCount_당첨된_로또_개수_반환한다() {
         // given
-        WinningNumbers winningNumbers = new WinningNumbers(testLottoNumbers(), new LottoNumber(7));
+        WinningNumbers winningNumbers = testWinningNumbers();
 
         // when
         int result = winningNumbers.winningCount(testLottoNumbers(1,2,3,4,5,6));
@@ -40,7 +41,7 @@ class WinningNumbersTest {
     @DisplayName("isBonusMatch 보너스 번호의 당첨 여부를 반환한다 ")
     void 테스트_isBonusMatch_보너스_번호의_매치_여부를_반환() {
         // given
-        WinningNumbers winningNumbers = new WinningNumbers(testLottoNumbers(), new LottoNumber(7));
+        WinningNumbers winningNumbers = testWinningNumbers();
 
         // when
 

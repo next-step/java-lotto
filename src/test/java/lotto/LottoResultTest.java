@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static lotto.utils.TestUtils.testLottoNumbers;
+import static lotto.utils.TestUtils.testWinningNumbers;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoResultTest {
@@ -40,7 +41,7 @@ class LottoResultTest {
     }
 
     private LottoResult getTestLottoResult() {
-        WinningNumbers winningNumbers = new WinningNumbers(testLottoNumbers(), new LottoNumber(7));
+        WinningNumbers winningNumbers = testWinningNumbers();
         LottoPaper firstPaper = new LottoPaper(testLottoNumbers(1,2,3,4,5,6));
         LottoPaper secondPaper = new LottoPaper(testLottoNumbers(1,2,3,4,5,7));
         LottoPaper thirdPaper = new LottoPaper(testLottoNumbers(1,2,3,4,5,8));

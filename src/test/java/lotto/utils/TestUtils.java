@@ -2,6 +2,7 @@ package lotto.utils;
 
 import lotto.LottoNumber;
 import lotto.LottoNumbers;
+import lotto.WinningNumbers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,5 +26,9 @@ public class TestUtils {
             lottoNumbers.add(new LottoNumber(number));
         }
         return new LottoNumbers(lottoNumbers);
+    }
+
+    public static WinningNumbers testWinningNumbers() {
+        return new WinningNumbers(testLottoNumbers(), new LottoNumber(7));
     }
 }
