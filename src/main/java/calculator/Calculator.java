@@ -4,27 +4,27 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
-    public static final String DELIMITER = ",|:";
+    public static final String DEFAULT_DELIMITER = ",|:";
+    private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
 
     public static int calculate(String input) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER).matcher(input);
+        String[] splitInput = split(matcher, input);
 
-        String[] splitInput;
+        return sum(splitInput);
+    }
 
-        if(m.find()) {
-            String customDelimiter = m.group(1);
-            splitInput = m.group(2).split(customDelimiter);
-        } else {
-            splitInput = input.split(DELIMITER);
+    private static String[] split(Matcher matcher, String input) {
+        if (matcher.find()) {
+            String customDelimiter = matcher.group(1);
+            return matcher.group(2).split(customDelimiter);
         }
 
-        int sum = 0;
+        return input.split(DEFAULT_DELIMITER);
+    }
 
-        for (String s : splitInput) {
-            Number number = new Number(s);
-            sum += number.getValue();
-        }
-
-        return sum;
+    private static int sum(String[] splitInput) {
+        Numbers numbers = new Numbers(splitInput);
+        return numbers.sum();
     }
 }
