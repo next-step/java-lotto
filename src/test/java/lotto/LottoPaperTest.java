@@ -24,7 +24,7 @@ class LottoPaperTest {
         // when
 
         // then
-        assertThat(expected).isEqualTo(input.getWinningPrice(winningNumbers));
+        assertThat(input.getWinningPrice(winningNumbers)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> provideTestArguments() { // argument source method
