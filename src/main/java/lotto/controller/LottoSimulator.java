@@ -7,7 +7,7 @@ import lotto.view.ManualCountInputView;
 import lotto.view.MoneyInputView;
 import lotto.view.ResultView;
 
-public class Controller {
+public class LottoSimulator {
     public static void run() {
         MoneyInputView moneyInputView = new MoneyInputView();
 

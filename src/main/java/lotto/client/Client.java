@@ -1,10 +1,10 @@
 package lotto.client;
 
-import lotto.controller.Controller;
+import lotto.controller.LottoSimulator;
 
 public class Client {
 
     public static void main(String[] args) {
-        Controller.run();
+        LottoSimulator.run();
     }
 }
