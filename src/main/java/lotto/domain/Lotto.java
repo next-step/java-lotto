@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.domain.value.LottoNumber;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -58,11 +57,7 @@ public class Lotto {
         return autoNumbers;
     }
 
-    public int calculatePrizeMoney(Lotto winningNumbers) {
-        return Rank.valueOf(countOfMatch(winningNumbers)).getPrizeMoney();
-    }
-
-    private int countOfMatch(Lotto winningNumbers) {
+    public int countOfMatch(Lotto winningNumbers) {
 
         return (int) numbers.stream()
                 .filter(winningNumbers::contains)

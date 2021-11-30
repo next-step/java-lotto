@@ -20,6 +20,13 @@ public class InsertView {
         return scanner.nextLine();
     }
 
+    public static String printInputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String bonusBall = scanner.nextLine();
+
+        return bonusBall;
+    }
+
     public static List<Integer> printInputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String input = scanner.nextLine();

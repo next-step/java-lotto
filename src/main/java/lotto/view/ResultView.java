@@ -33,13 +33,8 @@ public class ResultView {
         Rank[] ranks = Rank.values();
         for(int i = 1; i < ranks.length; i++) {
             Integer matchCount = getMatchCount(resultData.get(ranks[i]));
-            builder.append(ranks[i].getCountOfMatch())
-                    .append("개 일치 (")
-                    .append(ranks[i].getPrizeMoney())
-                    .append("원)- ")
-                    .append(matchCount)
-                    .append("개")
-                    .append("\n");
+
+            builder.append(printRank(ranks[i], matchCount));
         }
 
         System.out.print(builder);
@@ -51,6 +46,11 @@ public class ResultView {
         }
 
         return count;
+    }
+
+    private static String printRank(Rank rank, int matchCount) {
+        if(rank == Rank.SECOND) return String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개\n", rank.getCountOfMatch(), rank.getPrizeMoney(), matchCount);
+        return String.format("%d개 일치 (%d원)- %d개\n", rank.getCountOfMatch(), rank.getPrizeMoney(), matchCount);
     }
 
     public static void printRateOfReturn(double profit) {

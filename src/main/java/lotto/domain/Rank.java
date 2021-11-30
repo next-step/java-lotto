@@ -18,12 +18,20 @@ public enum Rank {
         this.prizeMoney = prizeMoney;
     }
 
-    public static Rank valueOf(int countOfMatch) {
+    public static Rank valueOf(int countOfMatch, boolean matchBonusBall) {
+
+        if (countOfMatch < Rank.FIFTH.countOfMatch) {
+            return Rank.MISS;
+        }
+
+        if(matchBonusBall && SECOND.getCountOfMatch() == countOfMatch) {
+            return SECOND;
+        }
 
         return Arrays.stream(values())
                 .filter(rank -> rank.getCountOfMatch() == countOfMatch)
                 .findFirst()
-                .orElse(MISS);
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public int getCountOfMatch() {

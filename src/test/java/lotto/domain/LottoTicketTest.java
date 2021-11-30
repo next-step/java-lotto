@@ -3,14 +3,9 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -37,19 +32,4 @@ public class LottoTicketTest {
         assertThat(lottoTicket.getLotto().size()).isEqualTo(3);
     }
 
-    @ParameterizedTest
-    @MethodSource("provideWinnerNumberCount")
-    @DisplayName("당첨번호를 입력했을 때 맞는 갯수 카운트 검증")
-    void createRepository(Lotto winningNumbers, Rank key, int value) {
-        Map<Rank, Integer> repository = initTicket.createRepository(winningNumbers);
-        assertThat(repository.get(key)).isEqualTo(value);
-    }
-
-    private static Stream<Arguments> provideWinnerNumberCount() {
-        return Stream.of(
-                Arguments.of(Lotto.winningFrom(Arrays.asList(1, 2, 3, 4, 5, 6)), Rank.FIRST, 1),
-                Arguments.of(Lotto.winningFrom(Arrays.asList(1, 2, 3, 4, 44, 45)), Rank.FOURTH, 2),
-                Arguments.of(Lotto.winningFrom(Arrays.asList(7, 8, 9, 10, 20, 40)), Rank.FIFTH, 1)
-        );
-    }
 }
