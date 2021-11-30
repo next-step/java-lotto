@@ -1,14 +1,15 @@
 package lotto;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import stringformula.exception.DuplicateLottoNumbersException;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private final List<LottoNumber> numbers;
 
     public LottoNumbers(List<LottoNumber> numbers) {
+        checkLottoNumbersDuplication(numbers);
         this.numbers = numbers;
     }
 
@@ -34,6 +35,13 @@ public class LottoNumbers {
         return this.numbers.stream()
                 .map(LottoNumber::getValue)
                 .collect(Collectors.toList());
+    }
+
+    private void checkLottoNumbersDuplication(List<LottoNumber> numbers) {
+        Set<LottoNumber> numberSet = new HashSet<>(numbers);
+        if (numbers.size() != numberSet.size()) {
+            throw new DuplicateLottoNumbersException();
+        }
     }
 
     public boolean contains(LottoNumber number) {
