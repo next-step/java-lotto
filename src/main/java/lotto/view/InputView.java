@@ -1,37 +1,35 @@
 package lotto.view;
 
+import lotto.domain.Lottos;
 import lotto.domain.Numbers;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class InputView {
-    public static final int PRICE_PER_LOTTO = 1000;
     private static final int NUMBERS_SIZE = 6;
     private static final int LAST_NUMBER_INDEX = 5;
     private final Scanner scanner;
-    private final List<Numbers> numbers;
+    private final Lottos lottos;
 
     public InputView() {
         scanner = new Scanner(System.in);
         System.out.println("구입 금액을 입력해 주세요.");
         int money = scanner.nextInt();
-        int count = money / PRICE_PER_LOTTO;
-        numbers = IntStream.range(0, count).mapToObj(i -> new Numbers()).collect(Collectors.toList());
-        System.out.println(count + "개를 구매했습니다.");
+        lottos = new Lottos(money);
+        System.out.println(lottos.getSize() + "개를 구매했습니다.");
         printNumbers();
         System.out.println();
     }
 
     private void printNumbers() {
-        this.numbers.forEach(lotto -> System.out.println(lotto.getNumbers()));
+        this.lottos.getLottos().forEach(lotto -> System.out.println(lotto.getNumbers().getNumbers()));
     }
 
-    public List<Numbers> getNumbers() {
-        return numbers;
+    public Lottos getLottos() {
+        return lottos;
     }
 
     public Numbers getPrizeNumbers() {

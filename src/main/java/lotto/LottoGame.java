@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Numbers;
 import lotto.domain.PrizeType;
@@ -9,25 +8,21 @@ import lotto.view.ResultView;
 
 import java.math.BigDecimal;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-public enum LottoGame {
-    INSTANCE;
-
-    private static BigDecimal investment;
+public class LottoGame {
+    private LottoGame() {
+        throw new AssertionError();
+    }
 
     static void playLotto() {
         InputView inputView = new InputView();
-        Lottos lottos = new Lottos(inputView.getNumbers().stream()
-                .map(Lotto::new)
-                .collect(Collectors.toList()));
-        investment = new BigDecimal(lottos.getSize() * InputView.PRICE_PER_LOTTO);
+        Lottos lottos = inputView.getLottos();
         Numbers prizeNumbers = inputView.getPrizeNumbers();
         Map<PrizeType, Integer> prizeStat = lottos.countMatch(prizeNumbers);
-        printResult(prizeStat);
+        printResult(prizeStat, lottos.getInvestment());
     }
 
-    private static void printResult(Map<PrizeType, Integer> prizeStat) {
+    private static void printResult(Map<PrizeType, Integer> prizeStat, BigDecimal investment) {
         ResultView resultView = new ResultView();
         resultView.printPrize(PrizeType.FOURTH.getCountOfMatch(),
                 PrizeType.FOURTH.getPrizeMoney(),

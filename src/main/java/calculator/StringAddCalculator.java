@@ -5,8 +5,10 @@ import calculator.domain.TextSplitter;
 
 import java.util.Objects;
 
-public enum StringAddCalculator {
-    INSTANCE;
+public class StringAddCalculator {
+    private StringAddCalculator() {
+        throw new AssertionError();
+    }
 
     public static int splitAndSum(String text) {
         if (Objects.isNull(text) || text.isEmpty()) {
