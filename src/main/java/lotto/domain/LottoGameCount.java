@@ -2,13 +2,15 @@ package lotto.domain;
 
 import java.util.Objects;
 
+import static lotto.utils.Constants.MSG_MANUAL_NUMBER_GREATER_THAN_TOTAL_NUMBER;
+
 public class LottoGameCount {
     private Integer lottoGameCount;
     private Integer lottoManualCount;
 
     public LottoGameCount(Integer lottoGameCount, Integer lottoManualCount) {
         if (lottoGameCount < lottoManualCount) {
-            throw  new IllegalArgumentException("수동 구매수가 전체 구매수 보다 클수 없습니다.");
+            throw  new IllegalArgumentException(MSG_MANUAL_NUMBER_GREATER_THAN_TOTAL_NUMBER);
         }
         this.lottoGameCount = lottoGameCount;
         this.lottoManualCount = lottoManualCount;
