@@ -1,22 +1,17 @@
 package lotto.view;
 
+import lotto.model.domain.CountInfo;
 import lotto.model.result.LotteryGameResultDto;
 import lotto.model.domain.Rank;
 import lotto.model.ticket.LotteryTicket;
-import lotto.model.ticket.LotteryTickets;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public static void printLotteryCount(int lottoCount) {
-        System.out.println(lottoCount + "개를 구매했습니다.");
-    }
-
-    public static void printTickets(LotteryTickets lotteryTickets) {
-        lotteryTickets.getTickets()
-                .forEach((ticket) -> System.out.println(printTicket(ticket)));
+    public static void printTickets(CountInfo countInfo, List<LotteryTicket> lotteryTickets) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", countInfo.getManualCount(), countInfo.getAutoCount());
+        lotteryTickets.forEach(ticket -> System.out.println(printTicket(ticket)));
     }
 
     public static void printStatistics(LotteryGameResultDto result) {

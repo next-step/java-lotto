@@ -15,7 +15,7 @@ class PurchaseInfoTest {
     @ParameterizedTest
     @ValueSource(ints = { -1, -2, -3, 100, 900})
     @DisplayName("amount 가 1000보다 작으면 예외 발생")
-    void amountUnderZeroThrowException(int amount){
+    void amountUnderZeroThrowException(int amount) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> purchaseInfo = new PurchaseInfo(amount))
                 .withMessage("로또를 구매하지 않았습니다.");

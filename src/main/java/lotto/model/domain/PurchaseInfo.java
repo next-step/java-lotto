@@ -5,8 +5,8 @@ public class PurchaseInfo {
     private final static int LOTTO_PRICE = 1000;
     private final int amount;
 
-    public PurchaseInfo(int amount){
-        checkValidation(amount);
+    public PurchaseInfo(int amount) {
+        checkAmountValidation(amount);
         this.amount = amount;
     }
 
@@ -18,7 +18,7 @@ public class PurchaseInfo {
         return this.amount;
     }
 
-    private void checkValidation(int amount) {
+    private void checkAmountValidation(int amount) {
         if(amount < LOTTO_PRICE) {
             throw new IllegalArgumentException("로또를 구매하지 않았습니다.");
         }
