@@ -37,7 +37,7 @@ public class WinningLottoTest {
     void profitPercentTest() {
 
         WinningLottoStats winningLottoStats = new WinningLottoStats(new Lottos(lottoList), winning);
-        assertThat(winningLottoStats.getProfitPercent(4000)).isEqualTo("500388.00");
+        assertThat(winningLottoStats.getProfitPercent(4000)).isEqualTo("500388.75");
 
     }
 }

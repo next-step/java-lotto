@@ -33,7 +33,7 @@ public class WinningLottoStats {
 
     public String getProfitPercent(int totalPurchaseAmount) {
         int winningAmount = getTotalWinningAmount();
-        double ratio = winningAmount / totalPurchaseAmount;
+        double ratio = (double) winningAmount / totalPurchaseAmount;
         return String.format("%.2f", ratio);
     }
 
