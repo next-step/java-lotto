@@ -1,7 +1,9 @@
 package lotto.util;
 
+import lotto.Lotto;
 import lotto.LottoNumber;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -27,6 +29,18 @@ public class LottoGenerator {
 
         return LOTTO_NUMBERS.stream()
                 .limit(DEFAULT_SIZE)
+                .collect(Collectors.toSet());
+    }
+
+    public static Set<LottoNumber> manual(Integer... lottoNumberList) {
+        return Arrays.stream(lottoNumberList)
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet());
+    }
+
+    public static Set<LottoNumber> manual(List<Integer> lottoNumberList) {
+        return lottoNumberList.stream()
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet());
     }
 }

@@ -21,15 +21,11 @@ public class Lotto {
     }
 
     public Lotto(Integer... lottoNumberList) {
-        this(Arrays.stream(lottoNumberList)
-                .map(LottoNumber::of)
-                .collect(Collectors.toSet()));
+        this(LottoGenerator.manual(lottoNumberList));
     }
 
     public Lotto(List<Integer> lottoNumberList) {
-        this(lottoNumberList.stream()
-                .map(LottoNumber::of)
-                .collect(Collectors.toSet()));
+        this(LottoGenerator.manual(lottoNumberList));
     }
 
     public Lotto(Set<LottoNumber> value) {
