@@ -1,42 +1,44 @@
 package lotto;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
-/**
- * LottoNumber 는 일반 번호 하나와 자신이 보너스 번호인지 구분할 상태를 가지고 있다.
- */
-public class LottoNumber implements Comparable<LottoNumber> {
+public class LottoNumber implements Comparable<LottoNumber>{
     private static final int LOWER_BOUND = 1;
     private static final int UPPER_BOUND = 45;
+    private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
 
-    private final int number;
+    private final int value;
 
-    /**
-     * String 값을 Integer 로 파싱하여 default 생성자로 위임한다.
-     * @param number
+    /*
+        CONSTRUCTOR
      */
-    public LottoNumber(String number) {
-        this(Integer.parseInt(number));
+    static {
+        for (int i = LOWER_BOUND; i <= UPPER_BOUND; i++) {
+            CACHE.put(i, new LottoNumber(i));
+        }
     }
 
-    /**
-     * @DEFAULT_CONSTRUCTOR
-     * 해당 integer 값을 번호로하고 해당 boolean 값을 보너스 상태로 하는 객체를 생성한다.
-     * @param number
-     */
-    public LottoNumber(int number) {
-        validateNumberRange(number);
-
-        this.number = number;
+    private LottoNumber(int value) {
+        this.value = value;
     }
 
-    /**
-     * int 값이 LOWER_BOUND 에서 UPPER_BOUND 사이의 값이 아니면 예외를 던진다.
-     * @param number
+    /*
+        INTERFACE
      */
-    private void validateNumberRange(int number) {
-        if (number < LOWER_BOUND || number > UPPER_BOUND) {
-            throw new IllegalArgumentException("로또 번호는 1에서 45사이의 값이어야 합니다.");
+    public static LottoNumber of(int value) {
+        validateRange(value);
+
+        return CACHE.get(value);
+    }
+
+    /*
+        FUNCTION
+     */
+    private static void validateRange(int value) {
+        if (value < LOWER_BOUND || value > UPPER_BOUND) {
+            throw new IllegalArgumentException("로또번호는 1이상 45이하입니다.");
         }
     }
 
@@ -45,21 +47,21 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return number == that.number;
+        return value == that.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number);
-    }
-
-    @Override
-    public int compareTo(LottoNumber other) {
-        return this.number - other.number;
+        return Objects.hash(value);
     }
 
     @Override
     public String toString() {
-        return String.valueOf(number);
+        return String.valueOf(value);
+    }
+
+    @Override
+    public int compareTo(LottoNumber other) {
+        return this.value - other.value;
     }
 }

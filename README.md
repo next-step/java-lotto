@@ -2,8 +2,68 @@
 
 * [x] 1단계: 문자열 덧셈 계산기
 * [x] 2단계: 로또(자동)
-* [ ] 3단계: 로또(2등)
-* [ ] 4단계: 로또(수동)
+* [x] 3단계: 로또(2등)
+* [x] 4단계: 로또(수동)
+
+
+
+## 4단계 로또(수동)
+
+### 기능 요구사항
+
+- 현재 로또 생성기는 자동 생성 기능만 제공한다. 사용자가 수동으로 추첨 번호를 입력할 수 있도록 해야 한다.
+- 입력한 금액, 자동 생성 숫자, 수동 생성 번호를 입력하도록 해야 한다.
+
+### 프로그래밍 요구사항
+
+- **규칙 3: 모든 원시값과 문자열을 포장한다.**
+- **규칙 5: 줄여쓰지 않는다(축약 금지).**
+- **예외 처리를 통해 에러가 발생하지 않도록 한다.**
+- 모든 기능을 TDD로 구현해 단위 테스트가 존재해야 한다. 단, UI(System.out, System.in) 로직은 제외
+- java enum을 적용해 프로그래밍을 구현한다.
+- 규칙 8: 일급 콜렉션을 쓴다.
+- indent(인덴트, 들여쓰기) depth를 2를 넘지 않도록 구현한다. 1까지만 허용한다.
+- 함수(또는 메소드)의 길이가 15라인을 넘어가지 않도록 구현한다.
+- 자바 코드 컨벤션을 지키면서 프로그래밍한다.
+- else 예약어를 쓰지 않는다.
+
+### 기능분석
+
+ Money
+
+* `int` field 를 하나 가지며 그 값은 0 이상이다.
+* Money 는 다른 Money 와 협력하여 몫을 구할 수 있다.
+* Money 는 다른 Money 와 협력하여 차감연산이 가능하다.
+
+LottoNumber
+
+* `int` field 를 하나 가지며 그 값은 1이상 45이하이다.
+
+Lotto
+
+* `Set<LottoNumber>` field 를 하나 가지며 크기는 6이어야 한다.
+* Lotto 는 LottoNumber 와 협력하여 LottoNumber 가 Lotto 에 있는지 확인할 수 있다.
+* Lotto 는 Lotto 와 협력하여 일반 번호 중 몇개가 match 되는지 구할 수 있다.
+
+WinLotto
+
+* `Lotto` 와 `LottoNumber` 총 두개의 field 를 가지며 `LottoNumber` 는 `Lotto` 에 없는 것이어야 한다.
+* WinLotto 는 Lotto 와 협력하여 Prize 를 확인할 수 있다.
+
+Wallet
+
+* `Money` 와 `List<Lotto>` 총 두개의 field 를 가진다.
+* Wallet 은 Money 와 협력하여 자신의 Money 를 사용하여 Lotto 를 구매할 수 있다.
+
+Prize
+
+* Prize 는 matchCount 와 bonus 여부를 확인하여 알맞은 등수를 반환할 수 있다.
+
+LottoResult
+
+* `Map<Prize, Integer>` field 를 가진다.
+* LottoResult 는 임의의 Prize 에 협력하여 matchCount 를 반환할 수 있다.
+* LottoResult 는 Money(unitPrice) 와 협력하여 수익률을 구할 수 있다.
 
 
 

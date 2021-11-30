@@ -9,104 +9,71 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static lotto.Prize.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WalletTest {
     @ParameterizedTest
-    @MethodSource("constructorMethodSource")
-    @DisplayName("Wallet 은 돈을 입력 받아 자신을 생성할 수 있다.")
-    void constructorMethod(int money) {
+    @MethodSource("createSource")
+    void create(int money, List<Lotto> lottos) {
         // given
-        Wallet wallet = new Wallet(money);
+        Wallet self = new Wallet(10000, Arrays.asList(new Lotto(4, 5, 6, 7, 8, 9), new Lotto(1, 2, 3, 4, 5, 6)));
 
         // when
+        Wallet other = new Wallet(money, lottos);
 
         // then
-        assertThat(wallet).isEqualTo(new Wallet(money));
+        assertThat(self).isEqualTo(other);
     }
 
-    static Stream<Arguments> constructorMethodSource() {
+    static Stream<Arguments> createSource() {
         return Stream.of(
-                Arguments.of(10000),
-                Arguments.of(20000)
+                Arguments.of(10000, Arrays.asList(new Lotto(1, 2, 3, 4, 5, 6), new Lotto(4, 5, 6, 7, 8, 9)))
         );
     }
 
     @ParameterizedTest
-    @MethodSource("buyLottoMethodSource")
-    @DisplayName("Wallet 은 Lotto 를 여러장 구매할 수 있다.")
-    void buyLottoMethod(int money) {
+    @MethodSource("buyLottoSource")
+    @DisplayName("Wallet 은 Money 와 협력하여 자신의 Money 를 사용하여 Lotto 를 구매할 수 있다.")
+    void buyLotto(int unitPriceValue, int walletMoney, int result) {
         // given
-        final Money unitPrice = new Money(1000);
-        Wallet wallet = new Wallet(money);
+        Money unitPrice = new Money(unitPriceValue);
+        Wallet self = new Wallet(walletMoney);
 
         // when
-        wallet.buyLotto(unitPrice);
+        self.buyLotto(unitPrice);
 
         // then
-        assertThat(wallet).isEqualTo(new Wallet(money, new Money(money).quotient(unitPrice)));
+        assertThat(self.getLottos().size()).isEqualTo(result);
     }
 
-    static Stream<Arguments> buyLottoMethodSource() {
+    static Stream<Arguments> buyLottoSource() {
         return Stream.of(
-                Arguments.of(10000),
-                Arguments.of(20000)
+                Arguments.of(1000, 10000, 10),
+                Arguments.of(1000, 10500, 10),
+                Arguments.of(1000, 11000, 11)
         );
     }
 
     @ParameterizedTest
-    @MethodSource("lottoResultByPrizeSource")
-    @DisplayName("Wallet 은 LottoResult 를 파라미터로 받아 자신의 Lotto 를 Prize 로 반환할 수 있다.")
-    void lottoResultByPrize(String winNumber, String bonusNumber, Prize targetPrize) {
+    @MethodSource("buyLottoManualSource")
+    @DisplayName("Wallet 은 Money 와 협력하여 자신의 Money 를 사용하여 Lotto 를 구매할 수 있다.")
+    void buyLottoManual(int unitPriceValue, int walletMoney, List<Integer> manualNumber, int result) {
         // given
-        Wallet wallet = new Wallet(new Money(10000), Arrays.asList(new Lotto("1, 2, 3, 4, 5, 6")));
-        WinningLotto winningLotto = new WinningLotto(winNumber, bonusNumber);
+        Money unitPrice = new Money(unitPriceValue);
+        Wallet self = new Wallet(walletMoney);
 
         // when
-        final int ea = wallet.lottoResultByPrize(winningLotto, targetPrize);
+        self.buyLotto(unitPrice, manualNumber);
 
         // then
-        assertThat(ea).isEqualTo(1);
+        assertThat(self.getLottos().size()).isEqualTo(result);
     }
 
-    static Stream<Arguments> lottoResultByPrizeSource() {
+    static Stream<Arguments> buyLottoManualSource() {
         return Stream.of(
-                Arguments.of("1, 2, 3, 4, 5, 6", "7", FIRST),
-                Arguments.of("1, 2, 3, 4, 5, 7", "6", SECOND),
-                Arguments.of("1, 2, 3, 4, 5, 8", "7", THIRD),
-                Arguments.of("1, 2, 3, 4, 8, 9", "7", FOURTH),
-                Arguments.of("1, 2, 3, 8, 9, 10", "7", FIFTH),
-                Arguments.of("1, 2, 8, 9, 10, 11", "7", SIXTH),
-                Arguments.of("1, 8, 9, 10, 11, 12", "7", SEVENTH),
-                Arguments.of("8, 9, 10, 11, 12, 13", "7", LOSE)
-        );
-    }
-
-    @ParameterizedTest
-    @MethodSource("rateSource")
-    @DisplayName("Wallet 이 가지고 있는 lottos 의 수익률을 계산할 수 있다.")
-    void rate(List<Lotto> lottos, double result) {
-        // given
-        int totalMoney = 1000 * lottos.size();
-        WinningLotto winningLotto = new WinningLotto(new Lotto("1, 2, 3, 4, 5, 6"), new LottoNumber(7));
-
-        // when
-        Wallet wallet = new Wallet(new Money(), lottos);
-
-        // then
-        double totalPrize = 0;
-        for (Prize prize : Prize.values()) {
-            totalPrize += wallet.lottoResultByPrize(winningLotto, prize) * prize.getPrize();
-        }
-
-        assertThat(totalPrize / totalMoney).isEqualTo(result);
-    }
-
-    static Stream<Arguments> rateSource() {
-        return Stream.of(
-                Arguments.of(Arrays.asList(new Lotto("1, 2, 3, 4, 5, 6"), new Lotto("7, 8, 9, 10, 11, 12")), 1000000),
-                Arguments.of(Arrays.asList(new Lotto("13, 14, 15, 16, 17, 18"), new Lotto("7, 8, 9, 10, 11, 12")), 0)
+                Arguments.of(1000, 10000, Arrays.asList(1,2,3,4,5,6), 1),
+                Arguments.of(1000, 10500, Arrays.asList(1,2,3,4,5,6), 1),
+                Arguments.of(1000, 11000, Arrays.asList(1,2,3,4,5,6), 1)
         );
     }
 }

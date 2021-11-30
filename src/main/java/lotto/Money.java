@@ -4,44 +4,60 @@ import java.util.Objects;
 
 public class Money {
     public static final int ZERO = 0;
-    private final int money;
 
-    public Money() {
-        this(ZERO);
+    private final int value;
+
+    /*
+        CONSTRUCTOR
+     */
+    public Money(int value) {
+        validateGreaterThanEqualToZero(value);
+
+        this.value = value;
     }
 
-    public Money(int money) {
-        isGreaterThanEqualToZero(money);
+    /*
+        INTERFACE
+     */
+    public int quotient(Money other) {
+        validateNotEqualToZero(other);
 
-        this.money = money;
+        return this.value / other.value;
     }
 
-    private void isGreaterThanEqualToZero(int money) {
-        if (money >= ZERO) {
-            return;
+    public Money subtract(Money other) {
+        return new Money(this.value - other.value);
+    }
+
+    public long multiply(long weight) {
+        return weight * this.value;
+    }
+
+    /*
+        FUNCTION
+     */
+    private void validateGreaterThanEqualToZero(int value) {
+        if (value < ZERO) {
+            throw new IllegalArgumentException("돈은 음수의 상태를 가질 수 없습니다.");
         }
-
-        throw new IllegalArgumentException("돈은 음수일 수 없습니다.");
     }
 
-    public int quotient(Money unitPrice) {
-        if (unitPrice.money == ZERO) {
-            throw new IllegalArgumentException("로또 가격은 0이 될 수 없습니다.");
+    private void validateNotEqualToZero(Money money) {
+        if (money.value == ZERO) {
+            throw new IllegalArgumentException("나누는 값은 0이 될 수 없습니다.");
         }
-
-        return this.money / unitPrice.money;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Money other = (Money) o;
-        return money == other.money;
+        Money money = (Money) o;
+        return value == money.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(money);
+        return Objects.hash(value);
     }
 }

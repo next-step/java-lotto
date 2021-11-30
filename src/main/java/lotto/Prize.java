@@ -3,61 +3,56 @@ package lotto;
 import java.util.Arrays;
 
 public enum Prize {
-    LOSE(0, 0),
-    SEVENTH(1, 0),
-    SIXTH(2, 0),
-    FIFTH(3, 5000),
-    FOURTH(4, 5_0000),
-    THIRD(5, 150_0000),
-    SECOND(5, 3000_0000),
-    FIRST(6, 20_0000_0000);
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    NONE(0, 0);
 
-    private static int CONDITION_REQUIRED_MATCH_COUNT = 5;
+    private static final int DETERMINE_REQUIRED_MATCH_COUNT = 5;
 
     private final int matchCount;
-    private final int prize;
+    private final double prize;
 
-    Prize(int matchCount, int prize) {
+    /*
+        CONSTRUCTOR
+     */
+    Prize(int matchCount, double prize) {
         this.matchCount = matchCount;
         this.prize = prize;
+    }
+
+    /*
+        INTERFACE
+     */
+    public static Prize of(int matchCount, boolean bonusContained) {
+        if (matchCount == DETERMINE_REQUIRED_MATCH_COUNT) {
+            return secondOrThirdPrize(bonusContained);
+        }
+
+        return Arrays.stream(values())
+                .filter(prize -> prize.matchCount == matchCount)
+                .findFirst()
+                .orElse(NONE);
+    }
+
+    public double getPrize() {
+        return prize;
     }
 
     public int getMatchCount() {
         return matchCount;
     }
 
-    public int getPrize() {
-        return prize;
-    }
-
-    /**
-     * Prize 는 맞춘개수와 보너스 여부를 판단하여 알맞은 상금을 반환할 수 있다.
-     * @param matchCount
-     * @param hasBonus
-     * @return
-     */
-    public static Prize of(int matchCount, boolean hasBonus) {
-        if (matchCount == CONDITION_REQUIRED_MATCH_COUNT) {
-            return secondOrThirdPrize(hasBonus);
-        }
-
-        return Arrays.stream(values())
-                .filter(prize -> prize.matchCount == matchCount)
-                .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
-    }
-
-    /**
-     * matchCount 가 5인 경우 2등과 3등을 구분하기 위한 method
-     * @param hasBonus
-     * @return
-     */
-    private static Prize secondOrThirdPrize(boolean hasBonus) {
-        if (hasBonus) {
+    /*
+                FUNCTION
+             */
+    private static Prize secondOrThirdPrize(boolean bonusContained) {
+        if (bonusContained) {
             return SECOND;
         }
-
         return THIRD;
     }
-}
 
+}
