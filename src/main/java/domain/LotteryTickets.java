@@ -1,9 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class LotteryTickets {
     private final List<LotteryTicket> lotteryTickets;
@@ -18,19 +15,24 @@ public class LotteryTickets {
 
     private static List<LotteryTicket> IssueLotteryTicket(int lotteryCount, List<Set<Integer>> manualNumber) {
         List<LotteryTicket> lotteryTicket = new ArrayList<>();
-        int manualNumberSize = manualNumber.size();
-        for (int i = 0; i < manualNumberSize; i++) {
-            lotteryTicket.add(new LotteryTicket(LotteryNumbers.validManualNumber(manualNumber.get(i))));
+        for (int i = 0; i < lotteryCount; i++) {
+            lotteryTicket.add(lottery(i, manualNumber));
         }
-        int automaticCount = lotteryCount - manualNumberSize;
-        for (int i = 0; i < automaticCount; i++) {
-            lotteryTicket.add(new LotteryTicket(LotteryNumbers.bringNumber()));
-        }
-
         return lotteryTicket;
     }
 
-    public LotteryTicket lotteryTicket(int index) {
+    private static LotteryTicket lottery(int index, List<Set<Integer>> manual) {
+        if (index < manual.size()) {
+            return LotteryTicket.from(numbers(manual.get(index)));
+        }
+        return LotteryTicket.from(numbers(LotteryNumbers.auto()));
+    }
+
+    private static Set<LotteryNumber> numbers(Set<Integer> numbers) {
+        return LotteryTicket.validLotteryNumber(numbers);
+    }
+
+    public LotteryTicket findLotteryTicket(int index) {
         return lotteryTickets.get(index);
     }
 
@@ -45,4 +47,5 @@ public class LotteryTickets {
     public int size() {
         return lotteryTickets.size();
     }
+
 }
