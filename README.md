@@ -54,7 +54,6 @@ Wallet
 
 * `Money` 와 `List<Lotto>` 총 두개의 field 를 가진다.
 * Wallet 은 Money 와 협력하여 자신의 Money 를 사용하여 Lotto 를 구매할 수 있다.
-* Wallet 은 WinLotto 와 협력하여 LottoResult 를 반환할 수 있다.
 
 Prize
 

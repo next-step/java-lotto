@@ -44,10 +44,6 @@ public class Wallet {
         this.lottos.add(new Lotto(manualNumber));
     }
 
-    public LottoResult lottoResult(WinLotto winLotto) {
-        return new LottoResult(this.lottos, winLotto);
-    }
-
     public List<Lotto> getLottos() {
         return this.lottos;
     }

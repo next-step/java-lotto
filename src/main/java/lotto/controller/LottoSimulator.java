@@ -1,11 +1,15 @@
 package lotto.controller;
 
+import lotto.Lotto;
+import lotto.LottoResult;
 import lotto.Wallet;
 import lotto.WinLotto;
 import lotto.view.LottoResultInputView;
 import lotto.view.ManualCountInputView;
 import lotto.view.MoneyInputView;
 import lotto.view.ResultView;
+
+import java.util.List;
 
 public class LottoSimulator {
     public static void run() {
@@ -27,7 +31,11 @@ public class LottoSimulator {
 
         WinLotto winLotto = new WinLotto(lottoResultInputView.getWinNumbers(), lottoResultInputView.getBonusNumber());
 
-        ResultView resultView = new ResultView(wallet.lottoResult(winLotto));
+        ResultView resultView = new ResultView(lottoResult(wallet.getLottos(), winLotto));
         resultView.showResult();
+    }
+
+    public static LottoResult lottoResult(List<Lotto> lottos, WinLotto winLotto) {
+        return new LottoResult(lottos, winLotto);
     }
 }
