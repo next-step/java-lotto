@@ -24,11 +24,7 @@ public class Delimiter {
         return Arrays.asList(text.split(delimiter));
     }
 
-    public boolean isSplit(String text) {
-        if (text == null) {
-            return false;
-        }
-
-        return !text.isEmpty();
+    public boolean isEmpty(String text) {
+        return text != null && !text.isEmpty();
     }
 }

@@ -30,14 +30,7 @@ public class Number {
 
 
     public boolean isEmpty(String text) {
-        if (text == null) {
-            return true;
-        }
-
-        if (text.isEmpty()) {
-            return true;
-        }
-        return false;
+        return text == null || text.isEmpty();
     }
 
     public int getNumber() {
