@@ -9,13 +9,15 @@ import java.util.stream.Collectors;
  */
 public class WonLotto {
     private final Map<Integer, LottoNumber> map;
+    private final LottoNumber bonus;
 
-    public WonLotto(Lotto lotto) {
+    public WonLotto(Lotto lotto, LottoNumber bonus) {
         this.map = createMapBy(lotto);
+        this.bonus = bonus;
     }
 
-    public static WonLotto of(Lotto lotto) {
-        return new WonLotto(lotto);
+    public static WonLotto of(Lotto lotto, LottoNumber bonus) {
+        return new WonLotto(lotto, bonus);
     }
 
     public Rank getLottoRankBy(Lotto lotto) {
@@ -24,7 +26,7 @@ public class WonLotto {
             .mapToInt(LottoNumber::getNumber)
             .filter(map::containsKey)
             .count();
-        return Rank.of(match);
+        return Rank.of(match, numbers.contains(bonus));
     }
 
     private Map<Integer, LottoNumber> createMapBy(Lotto lotto) {
