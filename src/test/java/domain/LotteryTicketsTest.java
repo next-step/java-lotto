@@ -18,12 +18,10 @@ class LotteryTicketsTest {
     @Test
     @DisplayName("수동로또 생성")
     public void manualLottery() {
-        List<Set<Integer>> manualNumber = Arrays.asList(new HashSet<>(Arrays.asList(11, 12, 13, 14, 15, 16)));
+        Set<LotteryNumber> numbers = LotteryTicket.validLotteryNumber(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        LotteryTicket lotteryTicket = new LotteryTicket(numbers);
 
-        LotteryTickets lotteryTickets = new LotteryTickets(new Store(1000).lotteryCount(), manualNumber);
-        for(int i=0; i<lotteryTickets.size(); i++){
-            assertThat(lotteryTickets.lotteryTicket(0).value(i)).isEqualTo(i+11);
-        }
+        assertThat(lotteryTicket).isEqualTo(new LotteryTicket(numbers));
     }
 
 }
