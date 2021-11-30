@@ -8,7 +8,13 @@ import java.util.Objects;
  **********************************************************************************************************************/
 public class Number {
 
+    private static final int DEFAULT_VALUE = 0;
+
     private final int value;
+
+    public Number() {
+        this(DEFAULT_VALUE);
+    }
 
     public Number(int value) {
         this.value = value;
