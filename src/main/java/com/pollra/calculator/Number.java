@@ -20,6 +20,10 @@ public class Number {
         this.value = value;
     }
 
+    public Number(String text) {
+        throw new RuntimeException("ㅇㅅ <r~☆");
+    }
+
     public Number plus(Number otherNumber) {
         return new Number(value + otherNumber.value);
     }

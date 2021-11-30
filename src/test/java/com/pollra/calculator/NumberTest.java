@@ -18,4 +18,20 @@ class NumberTest {
 
         assertEquals(expectedNumber, number.plus(otherNumber));
     }
+
+    @Test
+    @DisplayName("음수 입력 시 RuntimeException")
+    public void validNegative() {
+        assertThrows(RuntimeException.class
+                ,() -> new Number("-1")
+        );
+    }
+
+    @Test
+    @DisplayName("음수 입력 시 RuntimeException")
+    public void validCharacter() {
+        assertThrows(RuntimeException.class
+                ,() -> new Number("뷁")
+        );
+    }
 }
