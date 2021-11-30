@@ -1,25 +1,32 @@
 package calculator;
 
 import java.util.Objects;
-import java.util.regex.Pattern;
+
+import static java.lang.Integer.parseInt;
 
 public class Number {
+    private static final String REGEX = "[+-]?\\d*(\\.\\d+)?";
     private final int value;
 
     public Number(String input) {
-        boolean matches = input.matches("[+-]?\\d*(\\.\\d+)?");
+        validate(input);
+        this.value = parse(input);
+    }
 
-        if(!matches) {
+    private void validate(String input) {
+        if (!input.matches(REGEX)) {
             throw new RuntimeException("숫자가 아닌 값은 입력할 수 없습니다.");
         }
+    }
 
-        int parsedInt = Integer.parseInt(input);
+    private int parse(String input) {
+        int parsedInput = parseInt(input);
 
-        if(parsedInt < 0) {
+        if (parseInt(input) < 0) {
             throw new RuntimeException("음수는 입력할 수 없습니다.");
         }
 
-        this.value = parsedInt;
+        return parsedInput;
     }
 
     public int getValue() {
