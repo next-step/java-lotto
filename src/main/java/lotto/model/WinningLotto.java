@@ -23,11 +23,16 @@ public class WinningLotto {
                                        .collect(Collectors.toList()));
     }
 
-    public int matchCount(Lotto target) {
-        return lotto.matchCount(target);
+    public Result makeResult(Lottos lottos) {
+        Result result = new Result();
+        lottos.getLottos()
+              .stream()
+              .map(lotto -> makeRank(lotto))
+              .forEach(matchedCount -> result.add(matchedCount));
+        return result;
     }
 
-    public boolean hasBonusNumber(Lotto lotto) {
-        return lotto.contains(bonusNumber);
+    private Rank makeRank(Lotto target) {
+        return Rank.from(target.matchCount(lotto), target.contains(bonusNumber));
     }
 }
