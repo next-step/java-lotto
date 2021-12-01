@@ -2,7 +2,12 @@ package lotto.domain;
 
 import lotto.domain.value.LottoNumber;
 
-import java.util.*;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.Collections;
+import java.util.Objects;
 
 public class Lotto {
 
@@ -28,16 +33,16 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static Lotto from(List<LottoNumber> number) {
-        return new Lotto(new TreeSet<>(number));
+    public static Lotto from(List<LottoNumber> numbers) {
+        return new Lotto(new TreeSet<>(numbers));
     }
 
-    public static Lotto winningFrom(List<Integer> number) {
+    public static Lotto winningFrom(List<Integer> winningNumber) {
 
         Set<LottoNumber> numbers = new TreeSet<>();
 
-        for (Integer integer : number) {
-            numbers.add(new LottoNumber(integer));
+        for (Integer lottoNumber : winningNumber) {
+            numbers.add(new LottoNumber(lottoNumber));
         }
 
         return new Lotto(numbers);
