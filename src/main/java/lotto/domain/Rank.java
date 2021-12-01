@@ -7,6 +7,7 @@ public enum Rank {
     FIFTH(3, 5000),
     FOURTH(4, 50000),
     THIRD(5, 1500000),
+    SECOND(5, 30000000),
     FIRST(6, 2000000000);
 
     private final int matchCount;
@@ -17,10 +18,13 @@ public enum Rank {
         this.prizeMoney = prizeMoney;
     }
 
-    public static Rank matchNumber(long matchCount) {
+    public static Rank matchNumber(long matchCount, boolean matchBonus) {
+        if (Rank.SECOND.matchCount == matchCount && matchBonus) {
+            return Rank.SECOND;
+        }
         return Arrays.stream(values())
-                    .filter(rank -> rank.matchCount == matchCount)
-                    .findAny()
+                .filter(rank -> rank.matchCount == matchCount && rank != Rank.SECOND)
+                .findAny()
                 .orElse(OUT);
     }
 
