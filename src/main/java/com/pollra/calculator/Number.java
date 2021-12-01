@@ -8,6 +8,7 @@ import java.util.Objects;
  **********************************************************************************************************************/
 public class Number {
 
+    private static final String INTEGER_MATCHES_EXPRESSION = "-?\\d+";
     private static final int DEFAULT_VALUE = 0;
 
     private final int value;
@@ -21,9 +22,12 @@ public class Number {
     }
 
     public Number(String text) {
-        boolean isDigit = text.chars().allMatch(Character::isDigit);
-        if( ! isDigit) {
-            throw new RuntimeException("음수 및 문자열은 계산할 수 없습니다.");
+        if( ! text.matches(INTEGER_MATCHES_EXPRESSION)) {
+            throw new RuntimeException("문자열은 숫자로 치환할 수 없습니다.");
+        }
+        if( ! text.chars()
+                .allMatch(Character::isDigit)) {
+            throw new RuntimeException("음수는 계산 대상이 아닙니다.");
         }
         value = Integer.parseInt(text);
     }
@@ -43,5 +47,12 @@ public class Number {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return "Number{" +
+                "value=" + value +
+                '}';
     }
 }
