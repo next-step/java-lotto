@@ -5,17 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MINIMUM = 1;
     private static final int MAXIMUM = 45;
 
     private static final Map<Integer, LottoNumber> lottoNumberMap = new HashMap<>();
-
-    private final int number;
-
-    private LottoNumber(int number) {
-        this.number = number;
-    }
 
     static {
         for (int i = MINIMUM; i <= MAXIMUM; i++) {
@@ -23,11 +17,17 @@ public class LottoNumber {
         }
     }
 
+    private final int number;
+
+    private LottoNumber(int number) {
+        this.number = number;
+    }
+
     public static Collection<LottoNumber> totalNumbers() {
         return lottoNumberMap.values();
     }
 
-    public static  LottoNumber of (int number) {
+    public static LottoNumber of(int number) {
         if (!lottoNumberMap.containsKey(number)) {
             throw new IllegalArgumentException("invalid input: the number must be between 1 and 45. number: " + number);
         }
@@ -48,11 +48,12 @@ public class LottoNumber {
         return Objects.hash(number);
     }
 
-    public int toInt() {
-        return number;
-    }
-
     public String toString() {
         return Integer.toString(number);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return Integer.compare(number, o.number);
     }
 }

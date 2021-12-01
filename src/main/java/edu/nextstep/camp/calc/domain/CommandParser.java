@@ -8,12 +8,12 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CommandParser {
-    private final static Pattern PATTERN = Pattern.compile("//(.)\n(.*)");
-    private final static String DELIMITER = ",:";
-    private final static String REGEX_OR_FORMATTER = "[%s]";
-    private final static String DELIMITERS = String.format(REGEX_OR_FORMATTER, DELIMITER);
-    private final static int CUSTOM_DELIMITER_GROUP = 1;
-    private final static int COMMAND_GROUP = 2;
+    private static final Pattern PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final String DELIMITER = ",:";
+    private static final String REGEX_OR_FORMATTER = "[%s]";
+    private static final String DELIMITERS = String.format(REGEX_OR_FORMATTER, DELIMITER);
+    private static final int CUSTOM_DELIMITER_GROUP = 1;
+    private static final int COMMAND_GROUP = 2;
 
     private CommandParser() {}
 

@@ -11,15 +11,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoGeneratorTest {
     @Test
     public void generate() {
-        final List<LottoNumber> lottoNumberList = List.of(LottoNumber.of(1),LottoNumber.of(2),LottoNumber.of(3),
-                LottoNumber.of(4),LottoNumber.of(5),LottoNumber.of(6));
-        assertThat(FixedLottoGenerator.getInstance().generate().collect()).hasSameElementsAs(lottoNumberList);
+        assertThat(FixedLottoGenerator.getInstance().generate().collect()).hasSameElementsAs(Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6)).collect());
     }
 
     @Test
     public void autoGenerate() {
         assertThat(AutoLottoGenerator.getInstance().generate().collect()).hasSize(6);
-        assertThat(AutoLottoGenerator.getInstance().generate().collect()).hasOnlyElementsOfType(LottoNumber.class);
     }
 
     @ParameterizedTest(name = "check generated amount: {arguments}")

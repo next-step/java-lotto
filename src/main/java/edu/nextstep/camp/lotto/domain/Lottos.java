@@ -1,10 +1,10 @@
 package edu.nextstep.camp.lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lottos {
     private final Collection<Lotto> lottos;
@@ -42,12 +42,10 @@ public class Lottos {
         return lottos;
     }
 
-    public GameResult winningResult(Lotto winningNumber) {
-        List<Rank> ranks = new ArrayList<>(lottos.size());
-        for (Lotto lotto : lottos) {
-            int matchedCount = lotto.matchedCount(winningNumber);
-            ranks.add(Rank.valueOf(matchedCount));
-        }
-        return GameResult.of(Ranks.of(ranks));
+    public GameResult winningResult(WinningNumber winningNumber) {
+        final List<Rank> ranks = lottos.stream()
+                .map(lotto -> lotto.rank(winningNumber))
+                .collect(Collectors.toUnmodifiableList());
+        return GameResult.of(ranks);
     }
 }

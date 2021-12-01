@@ -1,29 +1,25 @@
 package edu.nextstep.camp.lotto.domain;
 
 import java.util.Collection;
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int SIZE_OF_NUMBERS = 6;
     private static final String FORMATTER = "Lotto{numbers=%s)";
 
-    private final Collection<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
-    private Lotto(Collection<LottoNumber> numbers) {
-        this.numbers = numbers.stream()
-                .sorted(Comparator.comparingInt(LottoNumber::toInt))
-                .collect(Collectors.toUnmodifiableList());
+    private Lotto(Set<LottoNumber> numbers) {
+        this.numbers = Collections.unmodifiableSortedSet(new TreeSet<>(numbers));
     }
 
-    public static Lotto fromLottoNumbers(Collection<LottoNumber> numbers) {
+    public static Lotto fromLottoNumbers(Set<LottoNumber> numbers) {
         if (numbers == null || numbers.size() != SIZE_OF_NUMBERS) {
             throw new IllegalArgumentException("invalid input: size of numbers must be " + SIZE_OF_NUMBERS);
-        }
-
-        if (numbers.stream().distinct().count() != numbers.size()) {
-            throw new IllegalArgumentException("invalid input: duplicated numbers are found: " + numbers);
         }
 
         return new Lotto(numbers);
@@ -36,7 +32,7 @@ public class Lotto {
 
         return Lotto.fromLottoNumbers(numbers.stream()
                 .map(LottoNumber::of)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
     }
 
     @Override
@@ -52,18 +48,26 @@ public class Lotto {
         return Objects.hash(numbers);
     }
 
-    public Collection<LottoNumber> collect() {
+    public Set<LottoNumber> collect() {
         return numbers;
     }
 
     @Override
     public String toString() {
-        return String.format(FORMATTER, numbers.toString());
+        return String.format(FORMATTER, numbers);
     }
 
     public int matchedCount(Lotto winningNumber) {
         return (int) numbers.stream()
                 .filter(winningNumber.numbers::contains)
                 .count();
+    }
+
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
+    }
+
+    public Rank rank(WinningNumber winningNumber) {
+        return Rank.valueOf(matchedCount(winningNumber.numbers()), contains(winningNumber.bonus()));
     }
 }

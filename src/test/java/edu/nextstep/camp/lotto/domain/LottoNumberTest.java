@@ -1,6 +1,8 @@
 package edu.nextstep.camp.lotto.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -14,20 +16,14 @@ public class LottoNumberTest {
     }
 
 
-    @Test
-    public void createFailed() {
+    @ParameterizedTest(name = "create failed: {arguments}")
+    @ValueSource(ints = {0, 46})
+    public void createFailed(int number) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoNumber.of(0))
-                .withMessageContaining("invalid input");
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoNumber.of(46))
+                .isThrownBy(() -> LottoNumber.of(number))
                 .withMessageContaining("invalid input");
     }
 
-    @Test
-    public void toInt() {
-        assertThat(LottoNumber.of(1).toInt()).isEqualTo(1);
-    }
 
     @Test
     public void totalNumbers() {
