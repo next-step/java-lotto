@@ -33,7 +33,7 @@ public class LottoTest {
     @MethodSource("generateArgumentsStream")
     @DisplayName("lotto 번호 matching 테스트")
     void checkMatchingTest(WinningLotto winningLotto, int expect) {
-        Lotto lotto = Lotto.ofString("1,2,3,4,5,6");
+        Lotto lotto = Lotto.ofManualStringLottoNumbers("1,2,3,4,5,6");
         assertThat(lotto.checkMatching(winningLotto)).isEqualTo(expect);
     }
 
@@ -41,11 +41,11 @@ public class LottoTest {
     @DisplayName("입력된 lotto 길이가 SIZE 와 다를 때 exception 테스트")
     void sizeCheckTest() {
         assertThatThrownBy(() -> {
-            Lotto lotto = Lotto.ofString("1,2,3,4,5,6,7");
+            Lotto lotto = Lotto.ofManualStringLottoNumbers("1,2,3,4,5,6,7");
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining(SIZE + " 와 길이가 다른 Lotto 는 입력될 수 없습니다.");
 
         assertThatThrownBy(() -> {
-            Lotto lotto = Lotto.ofString("1,2,3,5");
+            Lotto lotto = Lotto.ofManualStringLottoNumbers("1,2,3,5");
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining(SIZE + " 와 길이가 다른 Lotto 는 입력될 수 없습니다.");
     }
 
@@ -53,7 +53,7 @@ public class LottoTest {
     @DisplayName("입력된 lotto 에 중복된 숫자가 있을 때 exception 테스트")
     void distinctCheckTest() {
         assertThatThrownBy(() -> {
-            Lotto lotto = Lotto.ofString("1,1,1,1,1,1");
+            Lotto lotto = Lotto.ofManualStringLottoNumbers("1,1,1,1,1,1");
         }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("로또에 중복된 숫자가 존재합니다.");
     }
 }

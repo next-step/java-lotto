@@ -38,15 +38,15 @@ public class WinningLotto {
         }
     }
 
-    private void checkSize(List<LottoNumber> winningLotto) {
-        if (winningLotto.size() != SIZE) {
-            throw new IllegalArgumentException(SIZE + " 와 길이가 다른 winningLotto 는 입력될 수 없습니다.");
-        }
-    }
-
     public static void bonusBallDuplicateCheck(LottoNumber bonusBall, List<LottoNumber> winningLotto) {
         if (winningLotto.contains(bonusBall)) {
             throw new IllegalArgumentException("당첨 번호와 보너스볼이 겹칩니다.");
+        }
+    }
+
+    private void checkSize(List<LottoNumber> winningLotto) {
+        if (winningLotto.size() != SIZE) {
+            throw new IllegalArgumentException(SIZE + " 와 길이가 다른 winningLotto 는 입력될 수 없습니다.");
         }
     }
 

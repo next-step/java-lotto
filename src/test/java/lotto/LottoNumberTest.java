@@ -27,13 +27,13 @@ public class LottoNumberTest {
     }
 
     @Test
-    @DisplayName("LottoNumber of Int Test")
+    @DisplayName("LottoNumber ofInt 로 인스턴스가 잘 만들어졌는지 Test")
     void numberTest() {
         assertThat(LottoNumber.ofInt(10)).isEqualTo(LottoNumber.ofInt(10));
     }
 
     @Test
-    @DisplayName("LottoNumber ofString Test")
+    @DisplayName("LottoNumber ofString 로 인스턴스가 잘 만들어졌는지 Test")
     void ofStringTest() {
         assertThat(LottoNumber.ofString("10")).isEqualTo(LottoNumber.ofInt(10));
     }

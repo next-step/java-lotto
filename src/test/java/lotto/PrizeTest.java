@@ -3,15 +3,12 @@ package lotto;
 import lotto.domain.*;
 import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -19,19 +16,19 @@ import java.util.stream.Stream;
 public class PrizeTest {
     private static Stream<Arguments> generateArgumentsStream() {
         List<Arguments> listOfArguments = new LinkedList<>();
-        Lotto lotto = Lotto.ofString("1,2,3,7,8,9");
+        Lotto lotto = Lotto.ofManualStringLottoNumbers("1,2,3,7,8,9");
         WinningLotto winningNumber = WinningLotto.ofString("1,2,3,4,5,6");
         LottoNumber bonus = LottoNumber.ofInt(10);
         Prize prize = Prize.FIFTH;
         listOfArguments.add(Arguments.of(lotto, winningNumber, bonus, prize));
 
-        Lotto lotto_1 = Lotto.ofString("1,2,3,4,5,6");
+        Lotto lotto_1 = Lotto.ofManualStringLottoNumbers("1,2,3,4,5,6");
         WinningLotto winningNumber_1 = WinningLotto.ofString("1,2,3,4,5,9");
         LottoNumber bonus_1 = LottoNumber.ofInt(6);
         Prize prize_1 = Prize.SECOND;
         listOfArguments.add(Arguments.of(lotto_1, winningNumber_1, bonus_1, prize_1));
 
-        Lotto lotto_2 = Lotto.ofString("1,2,3,4,5,6");
+        Lotto lotto_2 = Lotto.ofManualStringLottoNumbers("1,2,3,4,5,6");
         WinningLotto winningNumber_2 = WinningLotto.ofString("11,12,13,14,15,19");
         LottoNumber bonus_2 = LottoNumber.ofInt(6);
         Prize prize_2 = Prize.ELSE;

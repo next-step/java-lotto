@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.starategy.GetLottoNumbersStrategy;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,16 +12,16 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos ofStrategy(Integer purchaseCount, GetLottoNumbersStrategy getLottoNumbersStrategy) {
+    public static Lottos ofRandomLottos(Integer purchaseCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < purchaseCount; i++) {
-            Lotto lotto = Lotto.ofStrategy(getLottoNumbersStrategy);
+            Lotto lotto = Lotto.ofRandomLottoNumbers();
             lottos.add(lotto);
         }
         return new Lottos(lottos);
     }
 
-    public static Lottos ofLottoList(List<Lotto> lottos) {
+    public static Lottos ofLottos(List<Lotto> lottos) {
         return new Lottos(lottos);
     }
 
@@ -30,13 +29,13 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public Integer getPrize(WinningLotto winningLotto, LottoNumber bonus) {
+    public int getPrize(WinningLotto winningLotto, LottoNumber bonus) {
         return lottos.stream()
                 .mapToInt(lotto -> Prize.findPrize(lotto.checkMatching(winningLotto), winningLotto, lotto.checkContainNumber(bonus)).getPrize())
                 .sum();
     }
 
-    public Integer getCount(Prize prize, WinningLotto winningLotto, LottoNumber bonus) {
+    public int getCount(Prize prize, WinningLotto winningLotto, LottoNumber bonus) {
         Long count = lottos.stream()
                 .filter(lotto -> Prize.findPrize(lotto.checkMatching(winningLotto), winningLotto, lotto.checkContainNumber(bonus)) == prize)
                 .count();

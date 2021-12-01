@@ -1,14 +1,17 @@
 package lotto.domain;
 
-import lotto.domain.starategy.GetLottoNumbersStrategy;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static lotto.domain.LottoNumber.BOUND_END;
+import static lotto.domain.LottoNumber.BOUND_START;
 
 public class Lotto {
+
+    public static final List<LottoNumber> BOUND_LOTTO_NUMBERS = IntStream.rangeClosed(BOUND_START, BOUND_END)
+            .mapToObj(i -> LottoNumber.ofInt(i))
+            .collect(Collectors.toList());
 
     public static final int PRICE = 1000;
     public static final int SIZE = 6;
@@ -27,11 +30,12 @@ public class Lotto {
                 .collect(Collectors.toList()));
     }
 
-    public static Lotto ofStrategy(GetLottoNumbersStrategy getLottoNumbersStrategy) {
-        return new Lotto(getLottoNumbersStrategy.getLotto());
+    public static Lotto ofRandomLottoNumbers() {
+        Collections.shuffle(BOUND_LOTTO_NUMBERS);
+        return new Lotto(new ArrayList<LottoNumber>(BOUND_LOTTO_NUMBERS.subList(0, SIZE)));
     }
 
-    public static Lotto ofString(String lottoString) {
+    public static Lotto ofManualStringLottoNumbers(String lottoString) {
         return new Lotto(lottoString);
     }
 
