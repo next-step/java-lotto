@@ -14,11 +14,11 @@ public class WalletTest {
   @DisplayName("지갑은 로또를 구매할 때 가진 돈 범위 내에서 가능한 많은 로또를 구매함을 검증하는 테스트")
   void walletWillBuyLottosAsManyAsPossible(int input) {
     // given
-    int availableLottoCount = input / Lotto.PRICE_PER_LOTTO;
+    int availableLottoCount = input / Lotto.PRICE_PER_LOTTO.getValue();
     Wallet wallet = new Wallet(input);
 
     // when
-    wallet.buyLottos();
+    wallet.buyAutoLottos();
 
     // then
     assertThat(wallet.getLottos().getLottoCountAmount()).isEqualTo(availableLottoCount);
@@ -33,7 +33,7 @@ public class WalletTest {
       // given
       Wallet wallet = new Wallet(input);
       // when
-      wallet.buyLottos();
+      wallet.buyAutoLottos();
     }).isInstanceOf(IllegalArgumentException.class);
   }
 

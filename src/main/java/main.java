@@ -14,7 +14,11 @@ public class main {
     int moneyAmount = LottoInputView.inputMoney();
 
     Wallet wallet = new Wallet(moneyAmount);
-    wallet.buyLottos();
+
+    int customLottoCount = LottoInputView.inputCustomLottoCount();
+    LottoInputView.inputCustomLottoNumbers(customLottoCount, wallet);
+
+    wallet.buyAutoLottos();
 
     Lottos boughtLottos = wallet.getLottos();
     int boughtLottosAmount = boughtLottos.getLottoCountAmount();

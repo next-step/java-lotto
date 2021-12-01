@@ -19,7 +19,7 @@ public enum LottoPrize {
   }
 
   public static LottoPrize find(int matchCount, boolean containsBonus) {
-    if (isSecond(matchCount, containsBonus)) {
+    if (isBonusMatched(matchCount, containsBonus)) {
       return SECOND;
     }
     return Arrays.stream(values())
@@ -28,7 +28,7 @@ public enum LottoPrize {
             .orElse(NONE);
   }
 
-  private static boolean isSecond(int matchCount, boolean containsBonus) {
+  private static boolean isBonusMatched(int matchCount, boolean containsBonus) {
     return matchCount == SECOND.matchCount && containsBonus;
   }
 

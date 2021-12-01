@@ -4,6 +4,7 @@ import domain.Lotto;
 import domain.LottoPrize;
 import domain.LottoResult;
 import domain.Lottos;
+import domain.Money;
 
 import java.util.Arrays;
 
@@ -46,8 +47,8 @@ public class LottoResultView {
   }
 
   public static void showLottoProfit(int lottoAmount, double totalLottoPrize) {
-    int boughtLottoAmountPrice = lottoAmount * Lotto.PRICE_PER_LOTTO;
-    double profit = totalLottoPrize / boughtLottoAmountPrice;
+    Money boughtLottoAmountPrice = Lotto.PRICE_PER_LOTTO.multiply(lottoAmount);
+    double profit = totalLottoPrize / boughtLottoAmountPrice.getValue();
     double profitPercent = Math.round(profit * 10000) / 100;
     System.out.println("총 수익률은 " + profitPercent + "% 입니다.");
   }

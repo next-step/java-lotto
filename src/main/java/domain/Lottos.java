@@ -15,6 +15,10 @@ public class Lottos {
     this.lottos.add(lotto);
   }
 
+  public void addLottos(Lottos anotherLottos) {
+    this.lottos.addAll(anotherLottos.getLottos());
+  }
+
   public List<Lotto> getLottos() {
     return new ArrayList(lottos);
   }
