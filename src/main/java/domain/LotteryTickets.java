@@ -1,6 +1,8 @@
 package domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LotteryTickets {
     private final List<LotteryTicket> lotteryTickets;
@@ -14,22 +16,26 @@ public class LotteryTickets {
     }
 
     private static List<LotteryTicket> IssueLotteryTicket(int lotteryCount, List<Set<Integer>> manualNumber) {
-        List<LotteryTicket> lotteryTicket = new ArrayList<>();
-        for (int i = 0; i < lotteryCount; i++) {
-            lotteryTicket.add(lottery(i, manualNumber));
-        }
-        return lotteryTicket;
+        List<LotteryTicket> lotteryTickets = new ArrayList<>();
+        lotteryTickets.addAll(manual(manualNumber));
+        lotteryTickets.addAll(auto(lotteryCount - manualNumber.size()));
+        return lotteryTickets;
     }
 
-    private static LotteryTicket lottery(int index, List<Set<Integer>> manual) {
-        if (index < manual.size()) {
-            return LotteryTicket.from(numbers(manual.get(index)));
-        }
-        return LotteryTicket.from(numbers(LotteryNumbers.auto()));
+    private static List<LotteryTicket> manual(List<Set<Integer>> manualNumber) {
+        return IntStream.range(0, manualNumber.size())
+                .mapToObj(i -> new LotteryTicket(numbers(manualNumber.get(i))))
+                .collect(Collectors.toList());
+    }
+
+    private static List<LotteryTicket> auto(int loopNumber) {
+        return IntStream.range(0, loopNumber)
+                .mapToObj(i -> new LotteryTicket(numbers(LotteryNumbers.auto())))
+                .collect(Collectors.toList());
     }
 
     private static Set<LotteryNumber> numbers(Set<Integer> numbers) {
-        return LotteryTicket.validLotteryNumber(numbers);
+        return LotteryTicket.lotteryTicket(numbers);
     }
 
     public LotteryTicket findLotteryTicket(int index) {
