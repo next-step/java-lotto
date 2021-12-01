@@ -32,6 +32,10 @@ public class Number {
         value = Integer.parseInt(text);
     }
 
+    public static boolean isNumber(String text) {
+        return true;
+    }
+
     public Number plus(Number otherNumber) {
         return new Number(value + otherNumber.value);
     }

@@ -34,4 +34,12 @@ class NumberTest {
                 ,() -> new Number("뷁")
         );
     }
+
+    @Test
+    @DisplayName("숫자일 경우 true")
+    public void isNumber() {
+        assertFalse(Number.isNumber("A"));
+        assertTrue(Number.isNumber("-1"));
+        assertTrue(Number.isNumber("1"));
+    }
 }
