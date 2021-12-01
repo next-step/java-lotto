@@ -2,24 +2,28 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static controller.LottoGame.*;
 
 public class Lottos {
-    private final String SEPARATOR_OF_LOTTO = "\n";
 
     private final List<Lotto> lottos;
 
-    public Lottos() {
+    public Lottos(int totalNumberOfLottos) {
         this.lottos = new ArrayList<>();
+
+        IntStream.range(STARTING_INDEX_LOTTOS, totalNumberOfLottos)
+                .forEach(i -> lottos.add(generateLotto()));
     }
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
-    public void add(Lotto lotto) {
-        lottos.add(lotto);
+    public Stream<Lotto> stream() {
+        return lottos.stream();
     }
 
     public int fifthPrize(Lotto winningNumber) {
@@ -54,11 +58,5 @@ public class Lottos {
                 firstPrize(winningNumber) * FIRST_PRIZE_REWARD;
 
         return (double) profit / investment;
-    }
-
-    public String lottosAsString() {
-        return lottos.stream()
-                .map(Lotto::provideNumbers)
-                .reduce("", (acc, lotto) -> acc + SEPARATOR_OF_LOTTO + lotto);
     }
 }

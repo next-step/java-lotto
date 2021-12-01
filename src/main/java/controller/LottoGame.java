@@ -27,13 +27,14 @@ public class LottoGame {
     public static final int FOURTH_PRIZE_REWARD = 50_000;
     public static final int THIRD_PRIZE_REWARD = 1_500_000;
     public static final int FIRST_PRIZE_REWARD = 2_000_000_000;
+    public static final int STARTING_INDEX_LOTTO = 0;
+    public static final int LAST_INDEX_LOTTO = 6;
+    public static final int STARTING_INDEX_LOTTOS = 0;
 
     private static final List<Integer> LOTTO_NUMBERS =
             IntStream.rangeClosed(LOTTO_STARTING_NUMBER, LOTTO_LAST_NUMBER)
                     .boxed()
                     .collect(Collectors.toList());
-    private static final int STARTING_INDEX = 0;
-    private static final int LAST_INDEX = 6;
 
     private LottoGame() {
 
@@ -46,9 +47,7 @@ public class LottoGame {
 
         OutputView outputView = new ConsoleOutputView();
         int totalNumberOfLottos = purchaseAmount / PRICE_OF_LOTTO;
-        Lottos lottos = new Lottos();
-        IntStream.range(STARTING_INDEX, totalNumberOfLottos)
-                .forEach(i -> lottos.add(generateLotto()));
+        Lottos lottos = new Lottos(totalNumberOfLottos);
 
         outputView.showTotalNumberOfLottos(totalNumberOfLottos);
         outputView.showRandomGeneratedLottos(lottos);
@@ -65,9 +64,9 @@ public class LottoGame {
         outputView.showProfitRate(lottos.profitRate(winningLotto));
     }
 
-    private static Lotto generateLotto() {
+    public static Lotto generateLotto() {
         Collections.shuffle(LOTTO_NUMBERS);
 
-        return new Lotto(LOTTO_NUMBERS.subList(STARTING_INDEX, LAST_INDEX));
+        return new Lotto(LOTTO_NUMBERS.subList(STARTING_INDEX_LOTTO, LAST_INDEX_LOTTO));
     }
 }

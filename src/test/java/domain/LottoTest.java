@@ -7,9 +7,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static util.StringUtils.parseNumbers;
 
 public class LottoTest {
@@ -32,5 +32,13 @@ public class LottoTest {
         Lotto winningLotto = new Lotto(winningNumbers);
         int res = lotto.compareWithWinningNumber(winningLotto);
         assertThat(res).isEqualTo(expected);
+    }
+
+    @DisplayName("Test when the number of lotto numbers is not 6")
+    @Test
+    void testWhenTheNumberOfLottoNumbersIsNotSix() {
+        List<Integer> lottoNumbers = Arrays.asList(1,2,3,4,5);
+
+        assertThatThrownBy(() -> new Lotto(lottoNumbers)).isInstanceOf(IllegalArgumentException.class);
     }
 }
