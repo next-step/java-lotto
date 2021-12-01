@@ -17,15 +17,16 @@ public class LottoApplication {
     View view = new ViewImpl(InputView.getInstance(), ResultView.getInstance());
 
     Budget budget = view.getBudget();
+    LottoTickets manualTickets = view.getManualTickets();
 
     LottoService lottoService = new LottoService(new AutoMaticLottoTicketCreator());
-    LottoTickets lottoTickets = lottoService.buyTheLottoTickets(budget);
-    view.setBuyResult(lottoTickets);
+    LottoTickets lottoTickets = lottoService.buyTheLottoTickets(budget, manualTickets);
+    view.printBuyResult(manualTickets, lottoTickets);
 
     WinningTicket winningTicket = new WinningTicket(view.getWinning(), view.getBonus());
     LottoResult lottoResult = lottoService.getLottoResult(winningTicket, lottoTickets);
 
-    view.setLottoResult(lottoResult);
+    view.printLottoResult(lottoResult);
   }
 
 }
