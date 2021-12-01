@@ -1,13 +1,10 @@
 package lotto.model;
 
-import common.model.Number;
 import lotto.factory.LottoNumbersFactory;
 import lotto.generator.LottoNumberGenerator;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Lotto {
 
@@ -29,7 +26,7 @@ public class Lotto {
     private List<LottoNumbers> createAutoLottoNumbers(int count) {
         List<LottoNumbers> autoLotto = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            autoLotto.add(LottoNumbersFactory.createByGenerator(new LottoNumberGenerator()));
+            autoLotto.add(LottoNumbersFactory.from(new LottoNumberGenerator()));
         }
         return autoLotto;
     }

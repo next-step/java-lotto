@@ -17,30 +17,30 @@ public class LottoNumbersFactory {
     private LottoNumbersFactory() {
     }
 
-    public static LottoNumbers create(List<LottoNumber> lottoNumbers){
+    public static LottoNumbers from(List<LottoNumber> lottoNumbers){
         return new LottoNumbers(lottoNumbers);
     }
 
-    public static LottoNumbers createByGenerator(NumberGenerator generator) {
+    public static LottoNumbers from(NumberGenerator generator) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         while (lottoNumbers.size() < LOTTO_NUMBERS_SIZE) {
-            lottoNumbers.add(LottoNumberFactory.createByGenerator(generator));
+            lottoNumbers.add(LottoNumberFactory.from(generator));
         }
         return new LottoNumbers(new ArrayList<>(lottoNumbers));
     }
 
-    public static LottoNumbers createByInput(String input) {
+    public static LottoNumbers from(String input) {
         return new LottoNumbers(convertTo(input));
     }
 
-    public static LottoWinner createWinner(String input, LottoNumber bonusNumber) {
+    public static LottoWinner of(String input, LottoNumber bonusNumber) {
         return new LottoWinner(convertTo(input), bonusNumber);
     }
 
     private static List<LottoNumber> convertTo(String input) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (String lottoNumber : input.split(", ")) {
-            lottoNumbers.add(LottoNumberFactory.createByString(lottoNumber));
+            lottoNumbers.add(LottoNumberFactory.from(lottoNumber));
         }
         return lottoNumbers;
     }

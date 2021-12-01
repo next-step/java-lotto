@@ -12,7 +12,7 @@ class LottoNumbersTest {
     @Test
     @DisplayName("로또 번호 자동생성")
     void autoCreate() {
-        LottoNumbers lottoNumbers = LottoNumbersFactory.createByGenerator(new LottoNumberGenerator());
+        LottoNumbers lottoNumbers = LottoNumbersFactory.from(new LottoNumberGenerator());
         assertThat(lottoNumbers).isInstanceOf(LottoNumbers.class);
     }
 

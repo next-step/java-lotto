@@ -20,7 +20,7 @@ public class Consumer {
         List<LottoNumbers> manualLottoNumbers = new ArrayList<>();
         for (int i = 0; i < manualLottoCount; i++) {
             String manualLottoNumbersInput = InputView.nextLine();
-            manualLottoNumbers.add(LottoNumbersFactory.createByInput(manualLottoNumbersInput));
+            manualLottoNumbers.add(LottoNumbersFactory.from(manualLottoNumbersInput));
         }
         Lotto lotto = LottoStore.ticket(purchaseAmount, manualLottoNumbers);
         OutputView.print(lotto, manualLottoCount);
@@ -28,7 +28,7 @@ public class Consumer {
         String winnerNumbers = InputView.nextLine(Constant.INPUT_MESSAGE_WINNER_NUMBERS);
         int bonusNumber = InputView.nextInt(Constant.INPUT_MESSAGE_BONUS_NUMBER);
 
-        LottoWinner lottoWinner = LottoNumbersFactory.createWinner(winnerNumbers, LottoNumberFactory.createByNumber(bonusNumber));
+        LottoWinner lottoWinner = LottoNumbersFactory.of(winnerNumbers, LottoNumberFactory.from(bonusNumber));
 
         LottoReport report = lotto.matchAll(lottoWinner);
         OutputView.print(report, purchaseAmount);
