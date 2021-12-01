@@ -11,6 +11,7 @@ public class LottoApplication {
         int purchaseAmount= InputView.requestPurchaseAmount();
         LottoGame lottoGame = new LottoGame(purchaseAmount);
         ResultView.responseLottoCount(lottoGame.getBuyRound());
+
 //        Lottos lottos = lotto.start();
 //        ResultView.responseLottoNumbers(lottos.getLottos());
 
