@@ -33,7 +33,7 @@ public class Number {
     }
 
     public static boolean isNumber(String text) {
-        return true;
+        return text.matches(INTEGER_MATCHES_EXPRESSION);
     }
 
     public Number plus(Number otherNumber) {
