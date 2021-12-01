@@ -1,6 +1,7 @@
 package com.pollra.calculator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class Decomposer {
 
     private List<Number> decomposeNumber(String text, int index) {
         if(index >= separators.size()) {
-            return Collections.emptyList();
+            return Collections.singletonList(new Number(text));
         }
         Separator separator = separators.get(index);
         List<String> splitTexts = separator.splitOf(text);
