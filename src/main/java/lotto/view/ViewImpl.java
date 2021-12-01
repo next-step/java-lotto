@@ -8,6 +8,8 @@ import lotto.domain.entity.LottoTickets;
 
 public class ViewImpl implements View{
 
+  private static final String BUY_TICKET_RESULT_MESSAGE = "수동으로 %d장, 자동으로 %d장을 구매했습니다.";
+
   private final InputView inputView;
   private final ResultView resultView;
 
@@ -32,13 +34,18 @@ public class ViewImpl implements View{
   }
 
   @Override
-  public void setBuyResult(LottoTickets lottoTickets) {
-    resultView.printResult(String.valueOf(lottoTickets.size()));
+  public LottoTickets getManualTickets() {
+    return inputView.inputManualTickets();
+  }
+
+  @Override
+  public void printBuyResult(LottoTickets manualTickets, LottoTickets lottoTickets) {
+    resultView.printResult(String.format(BUY_TICKET_RESULT_MESSAGE, manualTickets.size(), lottoTickets.size() - manualTickets.size()));
     resultView.printResult(lottoTickets.toString());
   }
 
   @Override
-  public void setLottoResult(LottoResult result) {
+  public void printLottoResult(LottoResult result) {
     resultView.printResult(result.toString());
   }
 

@@ -14,8 +14,10 @@ public interface View {
 
   LottoNumber getBonus();
 
-  void setBuyResult(LottoTickets lottoTickets);
+  LottoTickets getManualTickets();
 
-  void setLottoResult(LottoResult result);
+  void printBuyResult(LottoTickets manualTickets, LottoTickets lottoTickets);
+
+  void printLottoResult(LottoResult result);
 
 }
