@@ -7,7 +7,7 @@
 
 ### 기능 목록
 * LottoApplication: 로또 프로그램 실행
-* LottoController: 입/출력 및 서비스 로직 호출 
+* LottoController: 입/출력 및 자동 / 수동 서비스 로직 호출
 * LottoGenerator: 로또 구입 및 서비스 로직 담당 
 * LottoResult: 전체 구입된 로또의 통계정보 반환
 * LottoPaper: 로또 용지, 당첨 금액 반환 책임
