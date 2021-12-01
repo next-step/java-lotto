@@ -49,8 +49,13 @@ public class ResultView {
     }
 
     private static String printRank(Rank rank, int matchCount) {
-        if(rank == Rank.SECOND) return String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개\n", rank.getCountOfMatch(), rank.getPrizeMoney(), matchCount);
-        return String.format("%d개 일치 (%d원)- %d개\n", rank.getCountOfMatch(), rank.getPrizeMoney(), matchCount);
+        if(rank == Rank.SECOND) {
+            return String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개\n",
+                    rank.getCountOfMatch(), rank.getPrizeMoney(), matchCount);
+        }
+
+        return String.format("%d개 일치 (%d원)- %d개\n",
+                rank.getCountOfMatch(), rank.getPrizeMoney(), matchCount);
     }
 
     public static void printRateOfReturn(double profit) {
