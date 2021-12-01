@@ -12,7 +12,14 @@ public class LotteryTicket {
     private final Set<LotteryNumber> lotteryTicket;
 
     public LotteryTicket(Set<LotteryNumber> lotteryTicket) {
+        validLotterySize(lotteryTicket.size());
         this.lotteryTicket = Collections.unmodifiableSet(lotteryTicket);
+    }
+
+    private static void validLotterySize(int size) {
+        if (size != LOTTERY_END_SIZE) {
+            throw new IllegalArgumentException(LOTTERY_SIZE_ERROR_MESSAGE);
+        }
     }
 
     public int matchCount(WinningLottery winningLottery) {
@@ -31,22 +38,10 @@ public class LotteryTicket {
                 .count();
     }
 
-    public static LotteryTicket from(Set<LotteryNumber> lottery) {
-        return new LotteryTicket(lottery);
-    }
-
-    public static Set<LotteryNumber> validLotteryNumber(Set<Integer> manualNumber) {
-        validLotterySize(manualNumber.size());
-
+    public static Set<LotteryNumber> lotteryTicket(Set<Integer> manualNumber) {
         return Collections.unmodifiableSet(manualNumber.stream()
                 .map(LotteryNumber::new)
                 .collect(Collectors.toSet()));
-    }
-
-    private static void validLotterySize(int size) {
-        if (size != LOTTERY_END_SIZE) {
-            throw new IllegalArgumentException(LOTTERY_SIZE_ERROR_MESSAGE);
-        }
     }
 
     public Set<LotteryNumber> bringLottery() {
