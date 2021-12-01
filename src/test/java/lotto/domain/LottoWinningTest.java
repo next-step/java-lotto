@@ -58,6 +58,14 @@ public class LottoWinningTest {
         assertThat(profit).isEqualTo(1.66);
     }
 
+    @Test
+    @DisplayName("보너스 번호가 당첨번호에 포함되어 있을 때 예외 검증")
+    void bonusException() {
+        assertThatThrownBy(() ->
+                LottoWinning.from(Arrays.asList(1,2,3,4,5,6), "5"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
     @ParameterizedTest
     @MethodSource("provideWinnerNumberCount")
     @DisplayName("당첨번호를 입력했을 때 맞는 갯수 카운트 검증")

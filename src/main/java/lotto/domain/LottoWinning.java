@@ -31,7 +31,7 @@ public class LottoWinning {
         Validation.lottoSizeCheck(winningNumbers.size());
         Validation.constantCheck(bonusBall);
 
-        if (winningNumbers.contains(bonusBall)) {
+        if (winningNumbers.contains(Integer.parseInt(bonusBall))) {
             throw new IllegalArgumentException("당첨번호에 있는 번호는 보너스 번호가 아닙니다!!!");
         }
 
