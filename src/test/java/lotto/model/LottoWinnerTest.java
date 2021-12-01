@@ -24,58 +24,58 @@ class LottoWinnerTest {
     void setUp() {
         List<LottoNumber> temps = new ArrayList<>();
         for (int i = 0; i < Constant.LOTTO_NUMBERS_SIZE; i++) {
-            temps.add(LottoNumberFactory.manualCreateNumber(7 * i + 3));
+            temps.add(LottoNumberFactory.createByNumber(7 * i + 3));
         }
-        lottoNumbers = LottoNumbersFactory.manualCreateSingleNumbers(temps);
-        LottoNumber bonus = LottoNumberFactory.manualCreateNumber("45");
-        winnerNumbers = LottoNumbersFactory.manualCreateWinner("3, 10, 17, 24, 31, 44", bonus);
+        lottoNumbers = LottoNumbersFactory.create(temps);
+        LottoNumber bonus = LottoNumberFactory.createByString("45");
+        winnerNumbers = LottoNumbersFactory.createWinner("3, 10, 17, 24, 31, 44", bonus);
     }
 
     @Test
     @DisplayName("당첨번호 여부 확인 테스트")
     void contains() {
-        assertThat(winnerNumbers.contains(LottoNumberFactory.manualCreateNumber(10))).isTrue();
+        assertThat(winnerNumbers.contains(LottoNumberFactory.createByNumber(10))).isTrue();
     }
 
     @Test
     @DisplayName("당첨시 matchCount 증가 테스트")
     void matchCount() {
         Number matchCount = new Number();
-        winnerNumbers.match(LottoNumberFactory.manualCreateNumber(10), matchCount);
+        winnerNumbers.match(LottoNumberFactory.createByNumber(10), matchCount);
         assertThat(matchCount).isEqualTo(new Number(1));
     }
 
     @Test
     @DisplayName("문자열 변환 테스트")
     void convert() {
-        LottoWinner winner = LottoNumbersFactory.manualCreateWinner("1, 2, 3, 4, 5, 6", LottoNumberFactory.manualCreateNumber("7"));
-        assertThat(winner.contains(LottoNumberFactory.manualCreateNumber(1))).isTrue();
+        LottoWinner winner = LottoNumbersFactory.createWinner("1, 2, 3, 4, 5, 6", LottoNumberFactory.createByString("7"));
+        assertThat(winner.contains(LottoNumberFactory.createByNumber(1))).isTrue();
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1, 2, 3, 4, 5", "1, 2, 3, 4, 5, 6, 7"})
     @DisplayName("6개 외의 숫자를 입력시 IllegalArgumentException 발생")
     void splitValidation(String input) {
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumbersFactory.manualCreateWinner(input, LottoNumberFactory.manualCreateNumber("45")));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumbersFactory.createWinner(input, LottoNumberFactory.createByString("45")));
     }
 
     @Test
     @DisplayName("숫자가 아닌 문자를 입력시 IllegalArgumentException 발생")
     void convertValidation() {
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumbersFactory.manualCreateWinner("q, w, e, r, t, y", LottoNumberFactory.manualCreateNumber("45")));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumbersFactory.createWinner("q, w, e, r, t, y", LottoNumberFactory.createByString("45")));
     }
 
     @Test
     @DisplayName("당첨 번호가 중복될 경우")
     void duplicateValidation() {
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumbersFactory.manualCreateWinner("1, 2, 3, 4, 5, 1", LottoNumberFactory.manualCreateNumber("45")));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumbersFactory.createWinner("1, 2, 3, 4, 5, 1", LottoNumberFactory.createByString("45")));
     }
 
     @Test
     @DisplayName("2등 당첨 테스트")
     void secondMatch() {
-        LottoNumbers lottoNumbers = LottoNumbersFactory.manualCreateSingleNumbers("1, 2, 3, 4, 5, 6");
-        LottoWinner winnerNumbers = LottoNumbersFactory.manualCreateWinner("1, 2, 3, 4, 5, 10", LottoNumberFactory.manualCreateNumber(6));
+        LottoNumbers lottoNumbers = LottoNumbersFactory.createByInput("1, 2, 3, 4, 5, 6");
+        LottoWinner winnerNumbers = LottoNumbersFactory.createWinner("1, 2, 3, 4, 5, 10", LottoNumberFactory.createByNumber(6));
 
         assertThat(winnerNumbers.match(lottoNumbers)).isEqualTo(LottoRank.SECOND);
     }

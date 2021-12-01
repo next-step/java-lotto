@@ -17,30 +17,30 @@ public class LottoNumbersFactory {
     private LottoNumbersFactory() {
     }
 
-    public static LottoNumbers autoCreateSingleNumbers(NumberGenerator generator) {
+    public static LottoNumbers create(List<LottoNumber> lottoNumbers){
+        return new LottoNumbers(lottoNumbers);
+    }
+
+    public static LottoNumbers createByGenerator(NumberGenerator generator) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         while (lottoNumbers.size() < LOTTO_NUMBERS_SIZE) {
-            lottoNumbers.add(LottoNumberFactory.autoCreateNumber(generator));
+            lottoNumbers.add(LottoNumberFactory.createByGenerator(generator));
         }
         return new LottoNumbers(new ArrayList<>(lottoNumbers));
     }
 
-    public static LottoNumbers manualCreateSingleNumbers(List<LottoNumber> lottoNumbers) {
-        return new LottoNumbers(lottoNumbers);
+    public static LottoNumbers createByInput(String input) {
+        return new LottoNumbers(convertTo(input));
     }
 
-    public static LottoNumbers manualCreateSingleNumbers(String input) {
-        return new LottoNumbers(createManualLottoNumbers(input));
+    public static LottoWinner createWinner(String input, LottoNumber bonusNumber) {
+        return new LottoWinner(convertTo(input), bonusNumber);
     }
 
-    public static LottoWinner manualCreateWinner(String input, LottoNumber bonusNumber) {
-        return new LottoWinner(createManualLottoNumbers(input), bonusNumber);
-    }
-
-    private static List<LottoNumber> createManualLottoNumbers(String input) {
+    private static List<LottoNumber> convertTo(String input) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (String lottoNumber : input.split(", ")) {
-            lottoNumbers.add(LottoNumberFactory.manualCreateNumber(lottoNumber));
+            lottoNumbers.add(LottoNumberFactory.createByString(lottoNumber));
         }
         return lottoNumbers;
     }

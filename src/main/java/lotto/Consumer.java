@@ -22,15 +22,15 @@ public class Consumer {
         List<LottoNumbers> manualLottoNumbers = new ArrayList<>();
         for (int i = 0; i < manualLottoCount; i++) {
             String manualLottoNumbersInput = InputView.nextLine();
-            manualLottoNumbers.add(LottoNumbersFactory.manualCreateSingleNumbers(manualLottoNumbersInput));
+            manualLottoNumbers.add(LottoNumbersFactory.createByInput(manualLottoNumbersInput));
         }
-        Lotto lotto = LottoStore.mixTicket(purchaseAmount, manualLottoNumbers);
+        Lotto lotto = LottoStore.ticket(purchaseAmount, manualLottoNumbers);
         OutputView.print(lotto, manualLottoCount);
 
         String winnerNumbers = InputView.nextLine(Constant.INPUT_MESSAGE_WINNER_NUMBERS);
         int bonusNumber = InputView.nextInt(Constant.INPUT_MESSAGE_BONUS_NUMBER);
 
-        LottoWinner lottoWinner = LottoNumbersFactory.manualCreateWinner(winnerNumbers, LottoNumberFactory.manualCreateNumber(bonusNumber));
+        LottoWinner lottoWinner = LottoNumbersFactory.createWinner(winnerNumbers, LottoNumberFactory.createByNumber(bonusNumber));
 
         Map<LottoRank, Number> result = lotto.matchAll(lottoWinner);
 
