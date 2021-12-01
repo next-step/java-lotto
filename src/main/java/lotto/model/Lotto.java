@@ -34,17 +34,14 @@ public class Lotto {
         return autoLotto;
     }
 
-    public Map<LottoRank, Number> matchAll(LottoWinner winner) {
-        Map<LottoRank, Number> lottoRankNumbers = new HashMap<>();
+    public LottoReport matchAll(LottoWinner winner) {
+        LottoReport report = new LottoReport();
 
         for (LottoNumbers lottoNumbers : this.lotto) {
-            LottoRank rank = winner.match(lottoNumbers);
-            Number count = lottoRankNumbers.getOrDefault(rank, new Number());
-            count.plus();
-            lottoRankNumbers.put(rank, count);
+            report.increaseCount(winner.match(lottoNumbers));
         }
 
-        return lottoRankNumbers;
+        return report;
     }
 
     public int getLottoSize() {

@@ -50,6 +50,13 @@ public enum LottoRank {
         return ranksWithoutMiss;
     }
 
+    public String format(Number count) {
+        if (SECOND.equals(this)) {
+            return String.format(Constant.OUTPUT_MESSAGE_REPORT_SECOND_FORMAT, count.getNumber());
+        }
+        return String.format(Constant.OUTPUT_MESSAGE_REPORT_FORMAT, this.matchCount, this.amount, count.getNumber());
+    }
+
     public int getMatchCount() {
         return matchCount;
     }

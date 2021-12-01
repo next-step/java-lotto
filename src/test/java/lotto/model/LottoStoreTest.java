@@ -1,6 +1,5 @@
 package lotto.model;
 
-import common.model.Number;
 import lotto.application.Constant;
 import lotto.factory.LottoNumberFactory;
 import lotto.factory.LottoNumbersFactory;
@@ -11,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -40,8 +38,8 @@ class LottoStoreTest {
         LottoNumber bonus = LottoNumberFactory.createByNumber(7);
         LottoWinner winner = LottoNumbersFactory.createWinner("1, 2, 3, 11, 12, 13", bonus);
 
-        Map<LottoRank, Number> result = lotto.matchAll(winner);
-        float rateOfRevenue = LottoStore.calculateRateOfRevenue(result, 1000);
+        LottoReport report = lotto.matchAll(winner);
+        float rateOfRevenue = report.calculateRateOfRevenue(1000);
         assertThat(rateOfRevenue).isEqualTo(5);
 
     }

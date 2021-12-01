@@ -5,10 +5,9 @@ import lotto.application.Constant;
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 import lotto.model.LottoRank;
-import lotto.model.LottoStore;
+import lotto.model.LottoReport;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -52,7 +51,7 @@ public class OutputView {
     }
 
     public static void print(Lotto lotto) {
-        OutputView.print(String.valueOf(lotto.getLottoSize()), Constant.OUTPUT_MESSAGE_PURCHASE_LOTTO);
+        OutputView.print(String.format(Constant.OUTPUT_MESSAGE_PURCHASE_LOTTO_FORMAT, lotto.getLottoSize()));
         print(lotto.toString());
     }
 
@@ -62,29 +61,22 @@ public class OutputView {
         print(lotto.toString());
     }
 
-    public static void print(Map<LottoRank, Number> lottoRankNumbers, int purchaseAmount) {
+    public static void print(LottoReport report, int purchaseAmount) {
         print("당첨 통계");
         print("-------------");
-        for (LottoRank rank : LottoRank.valuesWithoutMiss()) {
-            Number count = lottoRankNumbers.getOrDefault(rank, new Number());
-            print(rank, count);
-        }
-
-        float rateOfRevenue = LottoStore.calculateRateOfRevenue(lottoRankNumbers, purchaseAmount);
-        print("총 수익률은 ", String.valueOf(rateOfRevenue), "입니다.");
-
+        print(report.toString());
+        print(String.format(Constant.OUTPUT_MESSAGE_CALCULATE_RATE_OF_REVENUE_FORMAT, report.calculateRateOfRevenue(purchaseAmount)));
     }
 
     public static void print(LottoRank rank, Number count) {
-        StringBuilder output = new StringBuilder();
-        output.append(rank.getMatchCount()).append("개 일치");
-        if (LottoRank.SECOND.equals(rank)) {
-            output.append(", 보너스 볼 일치");
+        String format = Constant.OUTPUT_MESSAGE_REPORT_FORMAT;
+        if (rank.equals(LottoRank.SECOND)) {
+            rank.toString();
+            format = Constant.OUTPUT_MESSAGE_REPORT_SECOND_FORMAT;
         }
-        output.append("(").append(rank.getAmount()).append("원) - ")
-                .append(count.getNumber()).append("개");
 
-        print(output.toString());
+        print(String.format(format, rank.getMatchCount(), rank.getAmount(), count));
+
     }
 
 

@@ -1,9 +1,6 @@
 package lotto.model;
 
-import common.model.Number;
-
 import java.util.List;
-import java.util.Map;
 
 public class LottoStore {
 
@@ -15,16 +12,5 @@ public class LottoStore {
     public static Lotto ticket(int purchaseAmount, List<LottoNumbers> manualLottoNumbers) {
         int autoLottoCount = purchaseAmount / LOTTO_PRICE - manualLottoNumbers.size();
         return new Lotto(manualLottoNumbers, autoLottoCount);
-    }
-
-    public static float calculateRateOfRevenue(Map<LottoRank, Number> lottoRankNumbers, int purchaseAmount) {
-        float revenue = 0;
-
-        for (LottoRank rank : LottoRank.valuesWithoutMiss()) {
-            Number count = lottoRankNumbers.getOrDefault(rank, new Number());
-            revenue += rank.getAmount() * count.getNumber();
-        }
-
-        return Math.round(revenue / purchaseAmount * 100) / 100.F;
     }
 }

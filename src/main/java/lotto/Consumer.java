@@ -1,6 +1,5 @@
 package lotto;
 
-import common.model.Number;
 import common.view.InputView;
 import common.view.OutputView;
 import lotto.application.Constant;
@@ -10,7 +9,6 @@ import lotto.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Consumer {
 
@@ -32,9 +30,8 @@ public class Consumer {
 
         LottoWinner lottoWinner = LottoNumbersFactory.createWinner(winnerNumbers, LottoNumberFactory.createByNumber(bonusNumber));
 
-        Map<LottoRank, Number> result = lotto.matchAll(lottoWinner);
-
-        OutputView.print(result, purchaseAmount);
+        LottoReport report = lotto.matchAll(lottoWinner);
+        OutputView.print(report, purchaseAmount);
     }
 
 }
