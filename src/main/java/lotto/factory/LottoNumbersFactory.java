@@ -29,19 +29,19 @@ public class LottoNumbersFactory {
         return new LottoNumbers(lottoNumbers);
     }
 
-    public static LottoNumbers manualCreateSingleNumbers(String numbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (String number : numbers.split(", ")) {
-            lottoNumbers.add(LottoNumberFactory.manualCreateNumber(number));
-        }
-        return new LottoNumbers(lottoNumbers);
+    public static LottoNumbers manualCreateSingleNumbers(String input) {
+        return new LottoNumbers(createManualLottoNumbers(input));
     }
 
-    public static LottoWinner manualCreateWinner(String lottoNumbersInput, LottoNumber bonusNumber) {
+    public static LottoWinner manualCreateWinner(String input, LottoNumber bonusNumber) {
+        return new LottoWinner(createManualLottoNumbers(input), bonusNumber);
+    }
+
+    private static List<LottoNumber> createManualLottoNumbers(String input) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (String lottoNumber : lottoNumbersInput.split(", ")) {
+        for (String lottoNumber : input.split(", ")) {
             lottoNumbers.add(LottoNumberFactory.manualCreateNumber(lottoNumber));
         }
-        return new LottoWinner(lottoNumbers, bonusNumber);
+        return lottoNumbers;
     }
 }
