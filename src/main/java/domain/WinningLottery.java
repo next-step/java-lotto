@@ -11,36 +11,31 @@ public class WinningLottery {
     private static final String OVERLAP_ERROR_MESSAGE = "error : 당첨번호 와 보너스볼 은 중복될수 없습니다.";
 
     private final Set<LotteryNumber> winningLottery;
-    private final int bonusBall;
+    private final LotteryNumber bonusBall;
 
     public WinningLottery(Set<Integer> numbers, int bonusBall) {
+        validWinningLottery(numbers);
         this.winningLottery = changeToLotteryNumber(numbers);
         this.bonusBall = validBonusBall(bonusBall);
     }
 
     public Set<LotteryNumber> changeToLotteryNumber(Set<Integer> numbers) {
-        validWinningLottery(numbers.size());
-
-        return of(numbers);
-    }
-
-    private void validWinningLottery(int count) {
-        if (count < LOTTERY_SIZE_MAX) {
-            throw new IllegalArgumentException(LOTTERY_NUMBER_LACK_ERROR_MESSAGE);
-        }
-    }
-
-    private Set<LotteryNumber> of(Set<Integer> numbers) {
         return numbers.stream()
                 .map(LotteryNumber::new)
                 .collect(Collectors.toSet());
     }
 
-    private int validBonusBall(int bonusBall){
+    private void validWinningLottery(Set<Integer> numbers) {
+        if (numbers.size() < LOTTERY_SIZE_MAX) {
+            throw new IllegalArgumentException(LOTTERY_NUMBER_LACK_ERROR_MESSAGE);
+        }
+    }
+
+    private LotteryNumber validBonusBall(int bonusBall){
         for(LotteryNumber number : winningLottery){
             checkOverlap(number.value(), bonusBall);
         }
-        return bonusBall;
+        return new LotteryNumber(bonusBall);
     }
 
     private void checkOverlap(int lotteryNumber, int bonusBall){
@@ -54,7 +49,7 @@ public class WinningLottery {
     }
 
     public boolean matchBonusBall(int lotteryNumber) {
-        if (lotteryNumber == bonusBall) {
+        if (lotteryNumber == bonusBall.value()) {
             return MATCH_NUMBER_TRUE;
         }
         return MATCH_NUMBER_FALSE;
