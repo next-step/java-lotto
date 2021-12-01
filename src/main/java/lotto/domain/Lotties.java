@@ -23,9 +23,9 @@ public class Lotties {
         return Store.LOTTO_ONE_GAME_PRICE * this.purchaseLottiesCount();
     }
 
-    public ResultRank gameResultRank(Lotto winLotto) {
+    public ResultRank gameResultRank(Lotto winLotto, LottoNumber bonusNumber) {
         return new ResultRank(this.lotties.stream()
-                .map(winLotto::getRank)
+                .map(lotto -> winLotto.getRank(lotto, bonusNumber))
                 .collect(Collectors.groupingBy(rank -> rank, Collectors.counting())));
     }
 }

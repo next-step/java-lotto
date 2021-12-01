@@ -30,8 +30,8 @@ public class Lotto {
                 .collect(Collectors.joining(", "));
     }
 
-    public Rank getRank(Lotto lotto) {
-        return Rank.matchNumber(this.sameLottoNumberCount(lotto));
+    public Rank getRank(Lotto lotto, LottoNumber bonus) {
+        return Rank.matchNumber(this.sameLottoNumberCount(lotto), this.numbers.contains(bonus));
     }
 
     private long sameLottoNumberCount(Lotto lotto) {
