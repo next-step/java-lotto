@@ -16,7 +16,7 @@ public class LottoTickets {
   }
 
   public List<LottoTicket> getLottoList() {
-    return lottoList;
+    return Collections.unmodifiableList(lottoList);
   }
 
   @Override
