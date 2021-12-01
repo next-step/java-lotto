@@ -13,6 +13,7 @@
 * LottoPaper: 로또 용지, 당첨 금액 반환 책임
 * LottoNumbers: 로또 번호 일급 컬렉
 * LottoNumber: 로또 번호 포장 클래스
+* WinningNumbers: 로또 당첨 번호에 대한 포장 클래스, 보너스 번호 포함
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
