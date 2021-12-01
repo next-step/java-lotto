@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.number.LottoNumberStrategy;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,7 +9,7 @@ import java.util.stream.IntStream;
 
 public class Lottos {
 
-    private final List<Lotto> lottos;
+    private List<Lotto> lottos;
     private static final int LOTTO_PRICE = 1000;
 
     public Lottos(List<Lotto> lottos) {

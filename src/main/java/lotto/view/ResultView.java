@@ -3,8 +3,8 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
-import lotto.domain.winning.WinningLottoStats;
-import lotto.domain.winning.WinningPolicy;
+import lotto.domain.Rank;
+import lotto.domain.Ranks;
 
 import java.util.Map;
 
@@ -25,16 +25,24 @@ public class ResultView {
         System.out.println(lotto.toString());
     }
 
-    public static void printWinningStatsView(WinningLottoStats stats) {
-        Map<Integer, Integer> winningStatsMap = stats.getWinningStatsMap();
+    public static void printWinningStatsView(Ranks ranks) {
+        Map<Rank, Long> winningStatsMap = ranks.getRankCountMap();
 
-        for (Map.Entry<Integer, Integer> entry : winningStatsMap.entrySet()) {
-            int matchingCount = entry.getKey();
-            int winningCount = entry.getValue();
-            int winningAmount = WinningPolicy.MATCHING_WINNINGAMOUNT_MAP.get(matchingCount);
+        for (Rank rank : Rank.values()) {
+            long count = winningStatsMap.getOrDefault(rank, 0L);
+            printStats(rank, count);
+        }
+    }
 
-            String str = String.format("%d개 일치 (%d원)- %d개", matchingCount, winningAmount, winningCount);
-            System.out.println(str);
+    private static void printStats(Rank rank, long count) {
+        String st = "%d개 일치 (%d원)- %d개";
+
+        if (rank == Rank.SECOND) {
+            st = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
+        }
+
+        if (rank != Rank.MISS) {
+            System.out.printf((st) + "%n", rank.getCountOfMatch(), rank.getWinningMoney(), count);
         }
     }
 }

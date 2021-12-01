@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.RandomLottoNumberStrategy;
+import lotto.domain.number.RandomLottoNumberStrategy;
 import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.Test;
 
