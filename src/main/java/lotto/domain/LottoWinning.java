@@ -55,10 +55,10 @@ public class LottoWinning {
     public double calculateRateOfProfit(Map<Rank, Integer> prizeWinnersRepository, int orderPrice) {
         double totalPrizeMoney = totalPrizeMoney(prizeWinnersRepository);
 
-        DecimalFormat format = new DecimalFormat(RATE_PATTERN);
-        format.setRoundingMode(RoundingMode.DOWN);
+        DecimalFormat decimalFormat = new DecimalFormat(RATE_PATTERN);
+        decimalFormat.setRoundingMode(RoundingMode.DOWN);
 
-        return Double.parseDouble(format.format(totalPrizeMoney / orderPrice));
+        return Double.parseDouble(decimalFormat.format(totalPrizeMoney / orderPrice));
     }
 
     private int totalPrizeMoney(Map<Rank, Integer> prizeWinnersRepository) {
