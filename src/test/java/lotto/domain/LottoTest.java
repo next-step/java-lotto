@@ -25,14 +25,14 @@ class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("로또번호 출력 테스트")
-    @ParameterizedTest
-    @CsvSource(value = {"2, 9, 13, 33 ,39, 45:2, 9, 13, 33 ,39, 45"}, delimiter = ':')
-    void lottoNumberShow(String buyLottoString, String winLottoString) {
-        Lotto buyLotto = Lotto.from(buyLottoString);
-        Lotto winLotto = Lotto.from(winLottoString);
+    @DisplayName("로또 동등성 테스트")
+    @Test
+    void equalLotto() {
+        String lottoText = "2, 9, 13, 33 ,39, 45";
+        Lotto buyLotto = Lotto.from(lottoText);
+        Lotto winLotto = Lotto.from(lottoText);
 
-        assertThat(buyLotto.getNumbers()).isEqualTo(winLotto.getNumbers());
+        assertThat(buyLotto).isEqualTo(winLotto);
     }
 
     @DisplayName("로또의 당첨 등수 체크 테스트")
