@@ -18,7 +18,7 @@ class LotteryTicketsTest {
     @Test
     @DisplayName("수동로또 생성")
     public void manualLottery() {
-        Set<LotteryNumber> numbers = LotteryTicket.validLotteryNumber(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Set<LotteryNumber> numbers = LotteryTicket.lotteryTicket(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
         LotteryTicket lotteryTicket = new LotteryTicket(numbers);
 
         assertThat(lotteryTicket).isEqualTo(new LotteryTicket(numbers));
