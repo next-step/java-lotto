@@ -3,6 +3,7 @@ package view;
 import domain.Lotto;
 import domain.LottoNumber;
 import domain.Lottos;
+import domain.Prize;
 
 import java.util.List;
 
@@ -26,8 +27,10 @@ public class ConsoleOutputView implements OutputView
     }
 
     @Override
-    public void showLottoResult(int matchingNumber, int reward, int count) {
-        System.out.printf("%d matched (￦%d) - %d\n", matchingNumber, reward, count);
+    public void showLottoResult() {
+        for (Prize prize : Prize.values()) {
+            System.out.printf("%d matched (￦%d) - %d\n", prize.getMatchingNumber(), prize.getReward(), prize.getCount());
+        }
     }
 
     @Override
