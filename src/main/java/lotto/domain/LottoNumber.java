@@ -26,7 +26,7 @@ public class LottoNumber {
 
     private void validateNumber(int number) {
         if (number < BASE || number > BOUND) {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
     }
 
