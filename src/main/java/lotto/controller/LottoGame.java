@@ -21,7 +21,7 @@ public class LottoGame {
         Lotties lotties = store.purchaseLottiesByMoney(money, numberGenerator);
         resultView.purchaseLottiesInformation(lotties);
         Lotto lastWeekWinLotto = Lotto.from(inputView.inputLastWeekWinLotto());
-        LottoGameResult lottoGameResult = new LottoGameResult(lotties, lastWeekWinLotto);
-        resultView.printGameResult(lottoGameResult);
+        ResultRank resultRank = lotties.gameResultRank(lastWeekWinLotto);
+        resultView.printGameResult(resultRank, lotties.getLottiesPrice());
     }
 }

@@ -2,8 +2,8 @@ package lotto.view;
 
 import lotto.domain.Lotties;
 import lotto.domain.Lotto;
-import lotto.domain.LottoGameResult;
 import lotto.domain.Rank;
+import lotto.domain.ResultRank;
 
 public class ResultView {
     private static String PURCHASE_LOTTO_COUNT_MESSAGE = "%d개를 구매했습니다.";
@@ -21,17 +21,17 @@ public class ResultView {
         System.out.println();
     }
 
-    public void printGameResult(LottoGameResult result) {
+    public void printGameResult(ResultRank result, int purchaseMoney) {
         System.out.println(WIN_MESSAGE);
         System.out.println(DASH);
         printRank(Rank.FIFTH, result);
         printRank(Rank.FOURTH, result);
         printRank(Rank.THIRD, result);
         printRank(Rank.FIRST, result);
-        System.out.println(String.format(GAME_RATE_MESSAGE, result.getRate()));
+        System.out.println(String.format(GAME_RATE_MESSAGE, result.getRate(purchaseMoney)));
     }
 
-    private void printRank(Rank rank, LottoGameResult result) {
-        System.out.println(String.format(GAME_RANK_MESSAGE, rank.getMatchCount(), rank.getPrizeMoney(), result.getRankCount(rank)));
+    private void printRank(Rank rank, ResultRank result) {
+        System.out.println(String.format(GAME_RANK_MESSAGE, rank.getMatchCount(), rank.getPrizeMoney(), result.getPrizeCount(rank)));
     }
 }
