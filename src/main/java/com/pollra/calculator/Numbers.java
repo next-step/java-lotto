@@ -2,7 +2,7 @@ package com.pollra.calculator;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
@@ -35,5 +35,25 @@ public class Numbers {
         return numbers.stream()
                 .map(Number::new)
                 .collect(collectingAndThen(toList(), Collections::unmodifiableList));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (! (o instanceof Numbers)) return false;
+        Numbers numbers1=(Numbers) o;
+        return Objects.equals(numbers, numbers1.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
+    }
+
+    @Override
+    public String toString() {
+        return "Numbers{" +
+                "numbers=" + numbers +
+                '}';
     }
 }
