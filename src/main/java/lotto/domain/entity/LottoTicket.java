@@ -1,42 +1,34 @@
 package lotto.domain.entity;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static java.util.stream.Collectors.joining;
 
 public class LottoTicket {
 
   private static final String INVALID_SIZE_OF_NUMBER = "6개의 숫자 구성이 아닙니다.";
-  private static final String DUPLICATED_NUMBER = "중복된 숫자가 있습니다.";
   private static final String LEFT_SQUARE_BRACKET = "[";
   private static final String RIGHT_SQUARE_BRACKET = "]";
   private static final String COMMA = ",";
   private static final int LOTTO_SIZE = 6;
   private static final int ZERO = 0;
 
-  private final List<LottoNumber> numbers;
+  private final Set<LottoNumber> numbers;
   private final StringBuilder stringBuilder;
 
   public LottoTicket(List<LottoNumber> numbers) {
+    this.numbers = new HashSet<>(numbers);
     validSize(numbers);
-    validDuplicate(numbers);
-    this.numbers = numbers;
     this.stringBuilder = new StringBuilder();
   }
 
   private void validSize(List<LottoNumber> numbers) {
-    if (numbers.size() > LOTTO_SIZE || numbers.size() < LOTTO_SIZE) {
+    if (numbers.size() != LOTTO_SIZE) {
       throw new IllegalArgumentException(INVALID_SIZE_OF_NUMBER);
-    }
-  }
-
-  private void validDuplicate(List<LottoNumber> numbers) {
-    long size = numbers.stream()
-                       .distinct()
-                       .count();
-    if (size < LOTTO_SIZE) {
-      throw new IllegalArgumentException(DUPLICATED_NUMBER);
     }
   }
 
@@ -55,7 +47,7 @@ public class LottoTicket {
   }
 
   protected List<LottoNumber> getNumbers() {
-    return Collections.unmodifiableList(numbers);
+    return Collections.unmodifiableList(new ArrayList<>(numbers));
   }
 
   public boolean isMatchedBonus(LottoNumber bonusNumber) {
