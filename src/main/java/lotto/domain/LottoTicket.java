@@ -1,12 +1,11 @@
 package lotto.domain;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 public class LottoTicket {
-
-    private static final String RATE_PATTERN = "0.##";
 
     private List<Lotto> lottoNumbers = new ArrayList<>();
 
@@ -29,36 +28,6 @@ public class LottoTicket {
         for(int i = 0; i < orderCount; i ++) {
             lottoNumbers.add(new Lotto());
         }
-    }
-
-    public Map<Rank, Integer> createRepository(Lotto winningNumbers) {
-        Map<Rank, Integer> repository = new HashMap<>();
-        for (Rank rank : Rank.values()) {
-            repository.put(rank, totalCountOfMatch(winningNumbers, rank.getCountOfMatch()));
-        }
-
-        return repository;
-    }
-
-    public int totalCountOfMatch(Lotto winningNumbers, int count) {
-        return (int) lottoNumbers.stream()
-                .filter(lotto -> lotto.isCountOfMatch(winningNumbers, count))
-                .count();
-    }
-
-    public double calculateRateOfProfit(Lotto winningNumbers, int orderPrice) {
-        double totalPrizeMoney = totalPrizeMoney(winningNumbers);
-
-        DecimalFormat format = new DecimalFormat(RATE_PATTERN);
-        format.setRoundingMode(RoundingMode.DOWN);
-
-        return Double.parseDouble(format.format(totalPrizeMoney / orderPrice));
-    }
-
-    private int totalPrizeMoney(Lotto winningNumbers) {
-        return lottoNumbers.stream()
-                .mapToInt(lotto -> lotto.calculatePrizeMoney(winningNumbers))
-                .sum();
     }
 
     public List<Lotto> getLotto() {

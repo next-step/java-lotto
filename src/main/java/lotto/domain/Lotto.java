@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.domain.value.LottoNumber;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -11,9 +10,9 @@ public class Lotto {
     private static final int LOTTO_SIZE = 6;
 
     private static final String FORM_ERROR_MSG = "로또는 6자리 형식입니다.!!!";
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
-    private Set<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
     public Lotto() {
 
@@ -30,16 +29,15 @@ public class Lotto {
     }
 
     public static Lotto from(List<LottoNumber> number) {
-        return new Lotto(number.stream()
-                .collect(Collectors.toSet()));
+        return new Lotto(new TreeSet<>(number));
     }
 
     public static Lotto winningFrom(List<Integer> number) {
 
         Set<LottoNumber> numbers = new TreeSet<>();
-        Iterator<Integer> itr = number.iterator();
-        while(itr.hasNext()) {
-            numbers.add(new LottoNumber(itr.next()));
+
+        for (Integer integer : number) {
+            numbers.add(new LottoNumber(integer));
         }
 
         return new Lotto(numbers);
@@ -59,11 +57,7 @@ public class Lotto {
         return autoNumbers;
     }
 
-    public int calculatePrizeMoney(Lotto winningNumbers) {
-        return Rank.valueOf(countOfMatch(winningNumbers)).getPrizeMoney();
-    }
-
-    private int countOfMatch(Lotto winningNumbers) {
+    public int countOfMatch(Lotto winningNumbers) {
 
         return (int) numbers.stream()
                 .filter(winningNumbers::contains)
@@ -76,26 +70,9 @@ public class Lotto {
                 .count() == count;
     }
 
-    private boolean contains(LottoNumber lottoNumber) {
-
-        Iterator<LottoNumber> itr = numbers.iterator();
-        while(itr.hasNext()) {
-            if(isValueEqual(itr.next(), lottoNumber)) {
-                return true;
-            }
-        }
-
-        return false;
+    public boolean contains(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
     }
-
-    private boolean isValueEqual(LottoNumber winningNumber, LottoNumber lottoNumber) {
-        if(lottoNumber.equals(winningNumber)) {
-            return true;
-        }
-
-        return false;
-    }
-
 
     public Set<LottoNumber> getNumbers() {
         return Collections.unmodifiableSet(numbers);

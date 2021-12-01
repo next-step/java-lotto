@@ -8,8 +8,7 @@ import lotto.domain.value.OrderPrice;
 
 import java.util.Map;
 
-import static lotto.view.InsertView.printInputIntro;
-import static lotto.view.InsertView.printInputWinningNumbers;
+import static lotto.view.InsertView.*;
 import static lotto.view.ResultView.*;
 
 public class LottoGame {
@@ -26,10 +25,10 @@ public class LottoGame {
         printOrderCount(lottoSize);
         printOrderLottoNumber(lottoTicket);
 
-        LottoWinning lottoWinning = LottoWinning.from(printInputWinningNumbers());
+        LottoWinning lottoWinning = LottoWinning.from(printInputWinningNumbers(), printInputBonusNumber());
         Map<Rank, Integer> prizeWinnersRepository = lottoWinning.createRepository(lottoTicket);
 
         printWinningStatics(prizeWinnersRepository);
-        printRateOfReturn(lottoWinning.calculateRateOfProfit(lottoTicket, lottoPrice.getLottoPrice()));
+        printRateOfReturn(lottoWinning.calculateRateOfProfit(prizeWinnersRepository, lottoPrice.getLottoPrice()));
     }
 }
