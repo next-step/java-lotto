@@ -13,7 +13,7 @@ public class Main {
         int manualLottoCount = Input.inputManualLottoCount();
 
         LottosBuyer lottosBuyer = LottosBuyer.of(purchaseAmount, manualLottoCount);
-        Lottos manualLottos = lottosBuyer.buyManualLottos(Input.inputManualLottos(manualLottoCount));
+        lottosBuyer.buyManualLottos(Input.inputManualLottos(manualLottoCount));
         Lottos randomLottos = lottosBuyer.buyRandomLottos();
         Output.viewPurchasedLotto(randomLottos);
 
