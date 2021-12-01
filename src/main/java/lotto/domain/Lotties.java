@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Lotties {
@@ -20,9 +19,13 @@ public class Lotties {
         return this.lotties.size();
     }
 
-    public Map<Rank, Long> gameResultRank(Lotto winLotto) {
-        return this.lotties.stream()
+    public int getLottiesPrice() {
+        return Store.LOTTO_ONE_GAME_PRICE * this.purchaseLottiesCount();
+    }
+
+    public ResultRank gameResultRank(Lotto winLotto) {
+        return new ResultRank(this.lotties.stream()
                 .map(winLotto::getRank)
-                .collect(Collectors.groupingBy(rank -> rank, Collectors.counting()));
+                .collect(Collectors.groupingBy(rank -> rank, Collectors.counting())));
     }
 }
