@@ -9,13 +9,17 @@ public class ResultRank {
         this.rank = rank;
     }
 
-    public long getPrizeMoney() {
-        return rank.keySet().stream()
-                .map(Rank::getPrizeMoney)
-                .reduce(0, Integer::sum);
+    public double getRate(int purchaseLottoMoney) {
+        return (double) this.getPrizeMoney() / purchaseLottoMoney;
     }
 
     public Long getPrizeCount(Rank rank) {
         return this.rank.getOrDefault(rank, 0L);
+    }
+    
+    private long getPrizeMoney() {
+        return rank.keySet().stream()
+                .map(Rank::getPrizeMoney)
+                .reduce(0, Integer::sum);
     }
 }
