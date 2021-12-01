@@ -2,13 +2,14 @@ package lotto.domain;
 
 
 import static lotto.domain.Lotto.PRICE;
-import static lotto.domain.Lotto.SIZE;
 
 
-public class LottosBuyer {
+public class
+LottosBuyer {
 
     private final int purchaseAmount;
     private final int manualLottoCount;
+    private Lottos lottos;
 
     private LottosBuyer(int purchaseAmount, int manualLottoCount) {
         checkPurchaseValidation(purchaseAmount / PRICE, manualLottoCount);
@@ -27,7 +28,17 @@ public class LottosBuyer {
     }
 
     public Lottos buyRandomLottos() {
-        return Lottos.ofRandomLottos(this.purchaseAmount / SIZE - manualLottoCount);
+        Lottos randomLottos = Lottos.ofRandomLottos(this.purchaseAmount / PRICE - manualLottoCount);
+        this.lottos.mergeLottos(randomLottos);
+        return randomLottos;
     }
 
+    public Lottos buyManualLottos(Lottos lottos) {
+        this.lottos = lottos;
+        return lottos;
+    }
+
+    public Lottos getLottos() {
+        return lottos;
+    }
 }

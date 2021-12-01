@@ -4,15 +4,15 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Input {
 
-    private static Scanner SCANNER = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
 
-    private static Integer PRICE_PER_LOTTO = 1000;
+    private static final Integer PRICE_PER_LOTTO = 1000;
 
     public static Integer inputPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
@@ -42,11 +42,8 @@ public class Input {
 
     public static Lottos inputManualLottos(int manualLottoCount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<Lotto> lottoList = new ArrayList<>();
-        for (int index = 0; index < manualLottoCount; index++) {
-            lottoList.add(Lotto.ofString(SCANNER.nextLine()));
-        }
-        Lottos lottos = Lottos.ofLottoList(lottoList);
-        return lottos;
+        return Lottos.ofLottos(IntStream.range(0, manualLottoCount)
+                .mapToObj(i -> Lotto.ofManualStringLottoNumbers(SCANNER.nextLine()))
+                .collect(Collectors.toList()));
     }
 }
