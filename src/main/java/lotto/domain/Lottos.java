@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,7 @@ public class Lottos {
     public Lottos(int money) {
         int count = money / PRICE_PER_LOTTO;
         checkValidation(count);
-        this.lottos = IntStream.range(0, count).mapToObj(i -> new Lotto(new Numbers())).collect(Collectors.toList());
+        this.lottos = IntStream.range(0, count).mapToObj(i -> new Lotto()).collect(Collectors.toList());
     }
 
     private void checkValidation(int count) {
@@ -29,13 +30,13 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        return this.lottos;
+        return Collections.unmodifiableList(lottos);
     }
 
-    public Map<PrizeType, Integer> countMatch(Numbers prizeNumbers) {
+    public Map<PrizeType, Integer> countMatch(Lotto prizeNumbers) {
         Map<PrizeType, Integer> prizeStat = new EnumMap<>(PrizeType.class);
         this.lottos.forEach(lotto -> {
-            PrizeType prizeType = PrizeType.of(lotto.countMatch(prizeNumbers));
+            PrizeType prizeType = PrizeType.of(lotto.match(prizeNumbers));
             prizeStat.put(prizeType, prizeStat.getOrDefault(prizeType, 0) + 1);
         });
         return prizeStat;

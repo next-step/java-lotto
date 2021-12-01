@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.Lottos;
-import lotto.domain.Numbers;
+import lotto.domain.Lotto;
 import lotto.domain.PrizeType;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -17,7 +17,7 @@ public class LottoGame {
     static void playLotto() {
         InputView inputView = new InputView();
         Lottos lottos = inputView.getLottos();
-        Numbers prizeNumbers = inputView.getPrizeNumbers();
+        Lotto prizeNumbers = inputView.getPrizeNumbers();
         Map<PrizeType, Integer> prizeStat = lottos.countMatch(prizeNumbers);
         printResult(prizeStat, lottos.getInvestment());
     }

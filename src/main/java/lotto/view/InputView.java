@@ -1,7 +1,8 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
-import lotto.domain.Numbers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,18 +26,19 @@ public class InputView {
     }
 
     private void printNumbers() {
-        this.lottos.getLottos().forEach(lotto -> System.out.println(lotto.getNumbers().getNumbers()));
+        this.lottos.getLottos().forEach(lotto -> System.out.println(lotto.getNumbers()));
     }
 
     public Lottos getLottos() {
         return lottos;
     }
 
-    public Numbers getPrizeNumbers() {
+    public Lotto getPrizeNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         List<Integer> list = new ArrayList<>();
-        IntStream.range(0, NUMBERS_SIZE).forEach(i -> list.add(parseInteger(i, scanner.next())));
-        return new Numbers(list);
+        IntStream.range(0, NUMBERS_SIZE)
+                .forEach(i -> list.add(parseInteger(i, scanner.next())));
+        return new Lotto(list);
     }
 
     private Integer parseInteger(int i, String token) {

@@ -6,7 +6,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.*;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,10 +36,11 @@ public class LottosTest {
     @ValueSource(ints = {1000, 6000, 14000})
     void countMatch(int money) {
         Lottos lottos = new Lottos(money);
-        List<TreeSet> nums = lottos.getLottos().stream()
-                .map(lotto -> lotto.getNumbers().getNumbers())
+        List<Integer> nums = lottos.getLottos().get(0)
+                .getNumbers().stream()
+                .map(LottoNumber::number)
                 .collect(Collectors.toList());
-        Map<PrizeType, Integer> prizeStat = lottos.countMatch(new Numbers(new ArrayList<Integer>(nums.get(0))));
+        Map<PrizeType, Integer> prizeStat = lottos.countMatch(new Lotto(nums));
         assertThat(prizeStat).isInstanceOf(EnumMap.class);
         assertThat(prizeStat.get(PrizeType.FIRST)).isEqualTo(1);
     }
