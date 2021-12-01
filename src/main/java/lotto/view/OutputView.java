@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoGameCount;
 import lotto.domain.LottoResult;
-import lotto.domain.Lottoes;
+import lotto.domain.Lottos;
 import lotto.utils.Rank;
 
 import java.util.Map;
@@ -17,11 +17,18 @@ public class OutputView {
     }
 
     public static void drawLottoGameCount(LottoGameCount lottoGameCount) {
-        System.out.println(lottoGameCount.getLottoGameCount() + MSG_LOTTO_COUNT);
+        System.out.println();
+        sb.append(MSG_MANUAL_COUNT);
+        sb.append(lottoGameCount.getLottoManualCount());
+        sb.append(MSG_AUTO_COUNT);
+        sb.append(lottoGameCount.getLottoAutoCount());
+        sb.append(MSG_LOTTO_COUNT);
+        System.out.println(sb);
+        sb.setLength(NUMBER_ZERO);
     }
 
-    public static void drawPurchasedLottoes(Lottoes lottoes) {
-        lottoes.getLottoGames().forEach(lottoGame ->
+    public static void drawPurchasedLottos(Lottos lottos) {
+        lottos.getLottoGames().forEach(lottoGame ->
                 System.out.println(lottoGame.getLottoNumbers().getLottoNumbers()));
         System.out.println();
     }

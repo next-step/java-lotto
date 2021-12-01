@@ -1,23 +1,25 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static lotto.utils.Constants.*;
 
 public class LottoNumbers {
-    private List<Integer> lottoNumbers;
+    private Set<LottoNumber> lottoNumbers = new HashSet<>();
 
     public LottoNumbers() {
 
     }
 
     public LottoNumbers(List<Integer> lottoNumbers) {
-        validateLottoNumbersOneToFortyfive(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        lottoNumbers.forEach( lottoNumber -> {
+            this.lottoNumbers.add(LottoNumber.of(lottoNumber));
+        });
+
+        if (this.lottoNumbers.size() < 6) {
+            throw new IllegalArgumentException(MSG_SAME_LOTTO_NUMBERS);
+        }
     }
 
     public LottoNumbers createAutoLottoNumbers(DefaultLottoNumbers defaultLottoNumbers) {
@@ -26,31 +28,36 @@ public class LottoNumbers {
         for (int i = NUMBER_ZERO; i < NUMBER_SIX; i++) {
             randomNumbers.add(defaultLottoNumbers.getDefaultLottoNumberByIndex(i));
         }
-        lottoNumbers = randomNumbers.stream()
+        return new LottoNumbers(sortNumbers(randomNumbers));
+    }
+
+    public LottoNumbers createManualLottoNumbers(List<String> inputNumbers) {
+        List<Integer> lottoNumbers = new ArrayList<>();
+        inputNumbers.forEach(inputNumber -> {
+            lottoNumbers.add(Integer.parseInt(inputNumber));
+        });
+
+        return new LottoNumbers(sortNumbers(lottoNumbers));
+    }
+
+    private List<Integer> sortNumbers(List<Integer> numbers) {
+        List<Integer> lottoNumbers = numbers.stream()
                 .sorted().collect(Collectors.toList());
-        return new LottoNumbers(lottoNumbers);
+        return lottoNumbers;
     }
 
     public void validateLottoNumbersLength() {
         if (lottoNumbers.size() > NUMBER_SIX) {
-            throw new IndexOutOfBoundsException(MSG_LOTTO_NUMBERS_LENGTH_ONLY_SIX);
+            throw new IllegalArgumentException(MSG_LOTTO_NUMBERS_LENGTH_ONLY_SIX);
         }
     }
 
-    private void validateLottoNumbersOneToFortyfive(List<Integer> lottoNumbers) {
-        lottoNumbers.forEach(lottoNumber -> {
-            if (lottoNumber < NUMBER_ONE || lottoNumber > NUMBER_FORTY_FIVE) {
-                throw new IndexOutOfBoundsException(MSG_LOTTO_NUMBER_ONE_TO_FORTY_FIVE);
-            }
-        });
-    }
-
     public boolean isIncludeBonusNumber(int bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
+        return lottoNumbers.contains(LottoNumber.of(bonusNumber));
     }
 
-    public List<Integer> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
+    public List<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableList(new ArrayList(lottoNumbers));
     }
 
     @Override
@@ -65,4 +72,6 @@ public class LottoNumbers {
     public int hashCode() {
         return Objects.hash(lottoNumbers);
     }
+
+
 }

@@ -1,29 +1,32 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static lotto.utils.Constants.NUMBER_ZERO;
 
-public class Lottoes {
+public class Lottos {
     private DefaultLottoNumbers defaultLottoNumbers;
     private List<LottoGame> lottoGames;
 
-    public Lottoes() {
+    public Lottos() {
         this.lottoGames = new ArrayList<>();
         this.defaultLottoNumbers = new DefaultLottoNumbers();
     }
 
-    public Lottoes(List<LottoGame> lottoGames) {
+    public Lottos(List<LottoGame> lottoGames) {
         this.lottoGames = lottoGames;
     }
 
-    public void makeLottoes(LottoGameCount lottoGameCount) {
-        for (int i = NUMBER_ZERO; i < lottoGameCount.getLottoGameCount(); i++) {
+    public void makeLottos(LottoGameCount lottoGameCount) {
+        for (int i = NUMBER_ZERO; i < lottoGameCount.getLottoAutoCount(); i++) {
             lottoGames.add(new LottoGame(new LottoNumbers().createAutoLottoNumbers(defaultLottoNumbers)));
         }
+    }
+
+    public void makeManualLottos(List<String[]> inputLottos) {
+        inputLottos.forEach(inputLotto -> {
+            lottoGames.add(new LottoGame(new LottoNumbers().createManualLottoNumbers(Arrays.asList(inputLotto))));
+        });
     }
 
     public Long winRankLottoCount(Long rankCount) {
@@ -40,9 +43,9 @@ public class Lottoes {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Lottoes lottoes = (Lottoes) o;
-        return Objects.equals(defaultLottoNumbers, lottoes.defaultLottoNumbers) &&
-                Objects.equals(lottoGames, lottoes.lottoGames);
+        Lottos lottos = (Lottos) o;
+        return Objects.equals(defaultLottoNumbers, lottos.defaultLottoNumbers) &&
+                Objects.equals(lottoGames, lottos.lottoGames);
     }
 
     @Override
