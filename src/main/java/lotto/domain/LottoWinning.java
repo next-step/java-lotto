@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.value.LottoNumber;
+import lotto.service.util.Validation;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -11,11 +12,8 @@ import java.util.Objects;
 
 public class LottoWinning {
 
-    private static final int LOTTO_SIZE = 6;
     private static final int PLUS_COUNT = 1;
 
-    private static final String FORM_ERROR_MSG = "당첨번호는 6자리 입니다!!!!";
-    private static final String NUMBER_CHECK_ERROR_MSG = "숫자만 입력 가능합니다!!!!";
     private static final String RATE_PATTERN = "0.##";
 
     private final Lotto winningNumbers;
@@ -30,10 +28,9 @@ public class LottoWinning {
 
     public static LottoWinning from(List<Integer> winningNumbers, String bonusBall) {
 
-        if(winningNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(FORM_ERROR_MSG);
-        }
-        constantCheck(bonusBall);
+        Validation.lottoSizeCheck(winningNumbers.size());
+        Validation.constantCheck(bonusBall);
+
         if (winningNumbers.contains(bonusBall)) {
             throw new IllegalArgumentException("당첨번호에 있는 번호는 보너스 번호가 아닙니다!!!");
         }
@@ -66,15 +63,6 @@ public class LottoWinning {
         return prizeWinnersRepository.keySet().stream()
                 .mapToInt(rank -> rank.getPrizeMoney() * prizeWinnersRepository.get(rank))
                 .sum();
-    }
-
-    private static void constantCheck(String orderPrice) {
-
-        for (char c : orderPrice.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                throw new IllegalArgumentException(NUMBER_CHECK_ERROR_MSG);
-            }
-        }
     }
 
     @Override

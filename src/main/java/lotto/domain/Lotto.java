@@ -1,20 +1,15 @@
 package lotto.domain;
 
 import lotto.domain.value.LottoNumber;
+import lotto.service.util.Validation;
 
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.Collections;
-import java.util.Objects;
+import java.util.*;
 
 public class Lotto {
 
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
 
-    private static final String FORM_ERROR_MSG = "로또는 6자리 형식입니다.!!!";
     private static final Random random = new Random();
 
     private final Set<LottoNumber> numbers;
@@ -26,9 +21,7 @@ public class Lotto {
 
     private Lotto(Set<LottoNumber> numbers) {
 
-        if(numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(FORM_ERROR_MSG);
-        }
+        Validation.lottoSizeCheck(numbers.size());
 
         this.numbers = numbers;
     }

@@ -1,30 +1,22 @@
 package lotto.domain.value;
 
+import lotto.service.util.Validation;
+
 import java.util.Objects;
 
 public class OrderPrice {
 
     private static final int LOTTO_PRICE = 1000;
     private static final String MIN_MONEY_ERROR_MSG = "원 이상 입력해주세요";
-    private static final String NUMBER_CHECK_ERROR_MSG = "숫자만 입력 가능합니다!!!!";
 
     private final int lottoPrice;
 
     public OrderPrice(String inputMoney) {
 
-        constantCheck(inputMoney);
+        Validation.constantCheck(inputMoney);
         moneySizeCheck(inputMoney);
 
         this.lottoPrice = Integer.parseInt(inputMoney);
-    }
-
-    private void constantCheck(String orderPrice) {
-
-        for (char c : orderPrice.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                throw new IllegalArgumentException(NUMBER_CHECK_ERROR_MSG);
-            }
-        }
     }
 
     private void moneySizeCheck(String inputMoney) {
