@@ -2,6 +2,7 @@ package lotto.game;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
 
 public class Round {
@@ -22,5 +23,20 @@ public class Round {
 
     public int gameCount() {
         return games.size();
+    }
+
+    public EnumMap<Rank, Integer> getResult(List<Integer> winNumbers) {
+        EnumMap<Rank, Integer> result = new EnumMap<>(Rank.class);
+        for (Game game : this.games) {
+            Rank rank = game.win(winNumbers);
+            result.merge(rank, 1, (k, v) -> result.get(rank) + 1);
+        }
+        return result;
+    }
+
+    public long totalAward(List<Integer> winNumbers) {
+        return getResult(winNumbers).entrySet().stream()
+                .mapToInt(entry -> entry.getKey().award * entry.getValue())
+                .sum();
     }
 }

@@ -16,6 +16,15 @@ class RankTest {
     }
 
     @Test
+    void rankAward() {
+        assertThat(Rank.FIRST_WIN.award).isEqualTo(2000000000);
+        assertThat(Rank.SECOND_WIN.award).isEqualTo(1500000);
+        assertThat(Rank.THIRD_WIN.award).isEqualTo(50000);
+        assertThat(Rank.FORTH_WIN.award).isEqualTo(5000);
+        assertThat(Rank.LOSE.award).isEqualTo(0);
+    }
+
+    @Test
     void of() {
         assertThat(Rank.of(6)).isEqualTo(Rank.FIRST_WIN);
         assertThat(Rank.of(5)).isEqualTo(Rank.SECOND_WIN);
