@@ -9,7 +9,7 @@ public class Numbers {
 
     private static final int LOTTO_RANGE = 45;
     private static final int START_NUMBER = 1;
-    private static final int MARKED_RANGE = 6;
+    public static final int MARKED_RANGE = 6;
 
     private List<Integer> numbers;
 
@@ -18,6 +18,11 @@ public class Numbers {
         for (int i = START_NUMBER; i <= LOTTO_RANGE; i++) {
             numbers.add(i);
         }
+    }
+
+    public Numbers(List<Integer> answer) {
+        numbers = new ArrayList<>();
+        numbers.addAll(answer);
     }
 
     public void marked() {

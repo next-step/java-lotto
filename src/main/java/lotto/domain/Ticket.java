@@ -12,6 +12,10 @@ public class Ticket {
         numbers.marked();
     }
 
+    public Ticket(List<Integer> answer) {
+        numbers = new Numbers(answer);
+    }
+
     public List<Integer> getNumbers() {
         List<Integer> numbers = this.numbers.getNumbers();
         Collections.sort(numbers);
