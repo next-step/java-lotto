@@ -3,8 +3,7 @@ package lotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import stringformula.exception.DuplicateBonusNumberException;
-import stringformula.exception.DuplicateLottoNumbersException;
+import lotto.exception.DuplicateLottoNumbersException;
 
 import java.util.ArrayList;
 import java.util.Arrays;

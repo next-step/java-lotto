@@ -1,6 +1,6 @@
 package lotto;
 
-import stringformula.exception.DuplicateBonusNumberException;
+import lotto.exception.DuplicateBonusNumberException;
 
 public class WinningNumbers {
     private final LottoNumbers winningNumbers;

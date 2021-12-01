@@ -1,9 +1,8 @@
 package lotto;
 
-import lotto.model.WinningPrice;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import stringformula.exception.DuplicateBonusNumberException;
+import lotto.exception.DuplicateBonusNumberException;
 
 import static lotto.utils.TestUtils.testLottoNumbers;
 import static lotto.utils.TestUtils.testWinningNumbers;

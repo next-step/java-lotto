@@ -1,4 +1,4 @@
-package stringformula.exception;
+package lotto.exception;
 
 public class DuplicateLottoNumbersException extends RuntimeException {
     public DuplicateLottoNumbersException() {
