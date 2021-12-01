@@ -19,7 +19,7 @@ class LottoNumberFactoryTest {
 
     @BeforeEach
     void setUp() {
-        factory = LottoNumberFactory.getInstance();
+        factory = new LottoNumberFactory();
     }
 
     @Test

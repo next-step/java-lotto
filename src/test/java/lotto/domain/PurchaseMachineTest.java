@@ -24,7 +24,7 @@ public class PurchaseMachineTest {
     @DisplayName("로또 구입")
     void purchase() {
         PurchaseMachine machine = new PurchaseMachine(new Credit("14000"));
-        List<Lotto> lotto = machine.purchase();
+        List<Lotto> lotto = machine.purchase(new LottoNumberFactory());
         assertThat(lotto.size()).isEqualTo(14);
     }
 }

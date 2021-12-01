@@ -16,16 +16,11 @@ public class LottoNumberFactory {
     private static final int BASE = 1;
     private static final int BOUND = 46;
     private static final int COUNT = 6;
-    private static LottoNumberFactory factory = new LottoNumberFactory();
 
     private final List<LottoNumber> numbers;
 
-    private LottoNumberFactory() {
+    public LottoNumberFactory() {
         this.numbers = createLottoNumbers();
-    }
-
-    public static LottoNumberFactory getInstance() {
-        return factory;
     }
 
     public List<LottoNumber> getNonDuplicated() {

@@ -31,10 +31,9 @@ public class InputView {
         return credit;
     }
 
-    public WonLotto insertWonLotto() {
+    public WonLotto insertWonLotto(LottoNumberFactory factory) {
         System.out.println(INSERT_LAST_WON_LOTTO);
         String wonNumbers = scanner.nextLine();
-        LottoNumberFactory factory = LottoNumberFactory.getInstance();
 
         System.out.println(INSERT_BONUS_NUMBER);
         String bonusNumber = scanner.nextLine();
