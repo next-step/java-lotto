@@ -1,6 +1,7 @@
 package com.pollra.calculator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ public class Decomposer {
     private static final String CUSTOM_SEPARATOR_PREFIX = "//";
     private static final String CUSTOM_SEPARATOR_SUFFIX = "\\\\n";
 
-    private List<Separator> separators;
+    private final List<Separator> separators;
 
     public Decomposer() {
         separators = new ArrayList<>();
@@ -26,7 +27,7 @@ public class Decomposer {
     public Numbers decompose(String text) {
         int customSeparatorBoundary = text.indexOf(CUSTOM_SEPARATOR_SUFFIX);
         if(0 > customSeparatorBoundary) {
-            return decomposeNumbers(text, 0);
+            return decomposeNumbers(text);
         }
         if(0 < customSeparatorBoundary) {
             int textLength = text.length();
@@ -34,7 +35,7 @@ public class Decomposer {
 
             customSeparatorBoundary += CUSTOM_SEPARATOR_SUFFIX.length();
 
-            return decomposeNumbers(text.substring(customSeparatorBoundary, textLength), 0);
+            return decomposeNumbers(text.substring(customSeparatorBoundary, textLength));
         }
         throw new RuntimeException("식이 올바르지 않습니다.");
     }
@@ -48,9 +49,26 @@ public class Decomposer {
         separators.add(new Separator(customSeparatorText));
     }
 
-    private Numbers decomposeNumbers(String text, int index) {
-        Separator separator = separators.get(index);
+    private Numbers decomposeNumbers(String text) {
+        List<Number> numbers=decomposeNumber(text, 0);
+        return new Numbers(numbers);
+    }
 
-        return null;
+    private List<Number> decomposeNumber(String text, int index) {
+        if(index >= separators.size()) {
+            return Collections.emptyList();
+        }
+        Separator separator = separators.get(index);
+        List<String> splitTexts = separator.splitOf(text);
+        List<Number> numbers = new ArrayList<>();
+        for (String splitText : splitTexts) {
+            if(Number.isNumber(splitText)) {
+                numbers.add(new Number(splitText));
+            }
+            if( ! Number.isNumber(splitText)) {
+                numbers.addAll(decomposeNumber(splitText, index + 1));
+            }
+        }
+        return numbers;
     }
 }
