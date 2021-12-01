@@ -1,8 +1,11 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author han
@@ -17,8 +20,22 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public Lotto(String numbers) {
+        this(createNonDuplicatedBy(numbers));
+    }
+
     public List<LottoNumber> getNumbers() {
         return numbers;
+    }
+
+    private static List<LottoNumber> createNonDuplicatedBy(String numbers) {
+        List<LottoNumber> byStrings = Arrays.asList(numbers.split(","))
+            .stream()
+            .map(String::trim)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+
+        return byStrings;
     }
 
     private void validateSize(List<LottoNumber> numbers) {

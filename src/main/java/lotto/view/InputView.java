@@ -37,6 +37,6 @@ public class InputView {
 
         System.out.println(INSERT_BONUS_NUMBER);
         String bonusNumber = scanner.nextLine();
-        return WonLotto.of(new Lotto(factory.getNonDuplicated(wonNumbers)), new LottoNumber(bonusNumber));
+        return WonLotto.of(new Lotto(wonNumbers), new LottoNumber(bonusNumber));
     }
 }

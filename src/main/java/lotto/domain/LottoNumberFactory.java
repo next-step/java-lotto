@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -30,17 +29,6 @@ public class LottoNumberFactory {
             .collect(Collectors.toList());
         validateDuplicate(numbers);
         return Collections.unmodifiableList(numbers);
-    }
-
-    public List<LottoNumber> getNonDuplicated(String numbers) {
-        List<LottoNumber> byStrings = Arrays.asList(numbers.split(","))
-            .stream()
-            .map(String::trim)
-            .map(LottoNumber::new)
-            .collect(Collectors.toList());
-
-        validateDuplicate(byStrings);
-        return Collections.unmodifiableList(byStrings);
     }
 
     private List<LottoNumber> createLottoNumbers() {
