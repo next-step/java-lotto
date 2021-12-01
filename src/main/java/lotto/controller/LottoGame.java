@@ -8,8 +8,14 @@ import lotto.domain.value.OrderPrice;
 
 import java.util.Map;
 
-import static lotto.view.InsertView.*;
-import static lotto.view.ResultView.*;
+import static lotto.view.InsertView.printInputIntro;
+import static lotto.view.InsertView.printInputWinningNumbers;
+import static lotto.view.InsertView.printInputBonusNumber;
+import static lotto.view.ResultView.printOrderCount;
+
+import static lotto.view.ResultView.printOrderLottoNumber;
+import static lotto.view.ResultView.printWinningStatics;
+import static lotto.view.ResultView.printRateOfReturn;
 
 public class LottoGame {
 
