@@ -1,5 +1,6 @@
 package lotto.domain.entity;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,6 +14,10 @@ public class LottoTickets {
 
   public int size() {
     return lottoList.size();
+  }
+
+  public void addAll(LottoTickets lottoTickets) {
+    lottoList.addAll(lottoTickets.getLottoList());
   }
 
   public List<LottoTicket> getLottoList() {
