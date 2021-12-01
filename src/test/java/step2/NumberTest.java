@@ -8,9 +8,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class NumberTest {
     @Test
-    @DisplayName("생성자 테스트")
-    void create() {
-        assertThat(new Number(1)).isEqualTo(new Number(1));
-        assertThat(new Number(2)).isNotEqualTo(new Number(1));
+    @DisplayName("String을 사용한 생성자 테스트")
+    void createFromString() {
+        assertThat(Number.createFromString("2")).isEqualTo(Number.createFromString("2"));
+        assertThat(Number.createFromString("2")).isEqualTo(Number.createFromInt(2));
+        assertThat(Number.createFromString("2")).isNotEqualTo(Number.createFromString("1"));
+    }
+
+    @Test
+    @DisplayName("int를 사용한 생성자 테스트")
+    void createFromInt() {
+        assertThat(Number.createFromInt(1)).isEqualTo(Number.createFromInt(1));
+        assertThat(Number.createFromInt(2)).isNotEqualTo(Number.createFromInt(1));
     }
 }
