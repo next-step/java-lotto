@@ -36,7 +36,7 @@ public class Round {
 
     public long totalAward(List<Integer> winNumbers) {
         return getResult(winNumbers).entrySet().stream()
-                .mapToInt(entry -> entry.getKey().award * entry.getValue())
+                .mapToLong(entry -> (long) entry.getKey().award * entry.getValue())
                 .sum();
     }
 }
