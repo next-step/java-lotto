@@ -24,10 +24,6 @@ public class LottoNumberTest {
                 .withMessageContaining("invalid input");
     }
 
-    @Test
-    public void toInt() {
-        assertThat(LottoNumber.of(1).toInt()).isEqualTo(1);
-    }
 
     @Test
     public void totalNumbers() {

@@ -1,8 +1,8 @@
 package edu.nextstep.camp.lotto.view;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -20,13 +20,13 @@ public class InputView {
         return budget;
     }
 
-    public static Collection<Integer> inputWinningNumber() {
+    public static Set<Integer> inputWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String numbers = scanner.nextLine();
 
         return Arrays.stream(numbers.split(","))
                 .map(Integer::parseInt)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public static int inputBonusNumber() {

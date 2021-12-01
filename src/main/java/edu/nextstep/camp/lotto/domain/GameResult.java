@@ -1,41 +1,62 @@
 package edu.nextstep.camp.lotto.domain;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
+import java.util.TreeMap;
 
 public class GameResult {
-    private final Ranks ranks;
+    private final Map<Rank, Integer> ranks;
 
-    private GameResult(Ranks ranks) {
-        this.ranks = ranks;
+    private GameResult(Map<Rank, Integer> ranks) {
+        this.ranks = Collections.unmodifiableSortedMap(new TreeMap<>(ranks));
     }
 
-    public static GameResult of(Ranks ranks) {
+    public static GameResult of(final Collection<Rank> ranks) {
         if (ranks == null) {
-            throw new IllegalArgumentException("invalid input: ranks cannot be null.");
+            throw new IllegalArgumentException("invalid input: ranks cannot be null");
         }
 
-        return new GameResult(ranks);
+        final Map<Rank, Integer> rankMap = new TreeMap<>();
+        for (Rank rank : ranks) {
+            rankMap.compute(rank, (r, count) -> count == null ? 1 : count + 1);
+        }
+
+        return new GameResult(rankMap);
     }
 
     public Map<Rank, Integer> collect() {
-        return ranks.collect();
+        return ranks;
+    }
+
+    public int amountOfPlace(final Rank rank) {
+        return ranks.getOrDefault(rank, 0);
     }
 
     public Prize totalPrize() {
-        return ranks.totalPrize();
+        return ranks.entrySet().stream()
+                .map(entry -> entry.getKey()
+                        .prize()
+                        .multiply(entry.getValue()))
+                .reduce(Prize::add)
+                .orElse(Prize.NO_PRIZE);
     }
 
-    public float priceEarningRate() {
-        return (float) ranks.totalPrize().toLong() / (ranks.size() * Store.GAME_PRICE);
+    public int size() {
+        return ranks.values()
+                .stream()
+                .reduce(Integer::sum)
+                .orElse(0);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GameResult that = (GameResult) o;
-        return Objects.equals(ranks, that.ranks);
+        GameResult other = (GameResult) o;
+        return ranks.entrySet().containsAll(other.ranks.entrySet())
+                && other.ranks.entrySet().containsAll(ranks.entrySet());
     }
 
     @Override
@@ -45,8 +66,12 @@ public class GameResult {
 
     @Override
     public String toString() {
-        return "GameResult{" +
+        return "Ranks{" +
                 "ranks=" + ranks +
                 '}';
+    }
+
+    public float priceEarningRate() {
+        return (float) totalPrize().toLong() / (size() * Store.GAME_PRICE);
     }
 }

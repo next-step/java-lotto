@@ -2,10 +2,8 @@ package edu.nextstep.camp.lotto.domain;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
@@ -13,7 +11,7 @@ public class Lotto {
     public static final int SIZE_OF_NUMBERS = 6;
     private static final String FORMATTER = "Lotto{numbers=%s)";
 
-    private final SortedSet<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
     private Lotto(Set<LottoNumber> numbers) {
         this.numbers = Collections.unmodifiableSortedSet(new TreeSet<>(numbers));
@@ -50,10 +48,8 @@ public class Lotto {
         return Objects.hash(numbers);
     }
 
-    public List<String> collect() {
-        return numbers.stream()
-                .map(LottoNumber::toString)
-                .collect(Collectors.toUnmodifiableList());
+    public Set<LottoNumber> collect() {
+        return numbers;
     }
 
     @Override
@@ -69,5 +65,9 @@ public class Lotto {
 
     public boolean contains(LottoNumber number) {
         return numbers.contains(number);
+    }
+
+    public Rank rank(WinningNumber winningNumber) {
+        return Rank.valueOf(matchedCount(winningNumber.numbers()), contains(winningNumber.bonus()));
     }
 }

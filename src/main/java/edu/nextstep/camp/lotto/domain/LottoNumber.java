@@ -48,16 +48,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return Objects.hash(number);
     }
 
-    public int toInt() {
-        return number;
-    }
-
     public String toString() {
         return Integer.toString(number);
     }
 
     @Override
     public int compareTo(LottoNumber o) {
-        return number - o.number;
+        return Integer.compare(number, o.number);
     }
 }

@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoGeneratorTest {
     @Test
     public void generate() {
-        assertThat(FixedLottoGenerator.getInstance().generate().collect()).hasSameElementsAs(List.of("1", "2", "3", "4", "5", "6"));
+        assertThat(FixedLottoGenerator.getInstance().generate().collect()).hasSameElementsAs(Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6)).collect());
     }
 
     @Test

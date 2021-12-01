@@ -1,6 +1,5 @@
 package edu.nextstep.camp.lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -39,22 +38,14 @@ public class Lottos {
         return lottos.size();
     }
 
-    public List<List<String>> collect() {
-        return lottos.stream()
-                .map(Lotto::collect)
-                .collect(Collectors.toUnmodifiableList());
+    public Collection<Lotto> collect() {
+        return lottos;
     }
 
-    public GameResult winningResult(Lotto winningNumber, LottoNumber bonus) {
-        if (winningNumber.contains(bonus)) {
-            throw new IllegalArgumentException("invalid input: winning number and bonus number must be exclusive");
-        }
-
-        List<Rank> ranks = new ArrayList<>(lottos.size());
-        for (Lotto lotto : lottos) {
-            int matchedCount = lotto.matchedCount(winningNumber);
-            ranks.add(Rank.valueOf(matchedCount, lotto.contains(bonus)));
-        }
-        return GameResult.of(Ranks.of(ranks));
+    public GameResult winningResult(WinningNumber winningNumber) {
+        final List<Rank> ranks = lottos.stream()
+                .map(lotto -> lotto.rank(winningNumber))
+                .collect(Collectors.toUnmodifiableList());
+        return GameResult.of(ranks);
     }
 }

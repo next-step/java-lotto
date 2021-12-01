@@ -1,6 +1,7 @@
 package edu.nextstep.camp.lotto.domain;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -55,7 +56,8 @@ public class LottoTest {
     @MethodSource("parseLotto1To6AsList")
     public void collect(List<Integer> numbers) {
         assertThat(Lotto.fromIntegers(numbers).collect())
-                .containsExactly("1", "2", "3", "4", "5", "6");
+                .containsExactly(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
     }
 
     static Stream<Arguments> parseMatched() {
@@ -68,9 +70,9 @@ public class LottoTest {
 
     @ParameterizedTest(name = "check matched count with FixedLotto(1,2,3,4,5,6): {arguments}")
     @MethodSource("parseMatched")
-    public void matchedCount() {
-        final Lotto testLotto = Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6));
-        assertThat(testLotto.matchedCount(testLotto)).isEqualTo(6);
+    public void matchedCount(Lotto winningNumber, int expected) {
+        final Lotto lotto = Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6));
+        assertThat(lotto.matchedCount(winningNumber)).isEqualTo(expected);
     }
 
     @Test
@@ -79,5 +81,22 @@ public class LottoTest {
         Lotto lotto = Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6));
         assertThat(lotto.contains(LottoNumber.of(6))).isTrue();
         assertThat(lotto.contains(LottoNumber.of(7))).isFalse();
+    }
+
+
+    static Stream<Arguments> parseRank() {
+        return Stream.of(
+                Arguments.of(Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6)), Rank.FIRST),
+                Arguments.of(Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 7)), Rank.SECOND),
+                Arguments.of(Lotto.fromIntegers(List.of(1, 2, 3, 43, 44, 45)), Rank.FIFTH),
+                Arguments.of(Lotto.fromIntegers(List.of(40, 41, 42, 43, 44, 45)), Rank.NO_RANK)
+        );
+    }
+
+    @ParameterizedTest(name = "rank with winning(1,2,3,4,5,6), bonus(7): {arguments}")
+    @MethodSource("parseRank")
+    public void rank(Lotto lotto, Rank expected) {
+        final WinningNumber winningNumber = WinningNumber.of(Set.of(1, 2, 3, 4, 5, 6), 7);
+        assertThat(lotto.rank(winningNumber)).isEqualTo(expected);
     }
 }
