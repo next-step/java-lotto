@@ -12,6 +12,7 @@ import java.util.Objects;
 public class LottoWinning {
 
     private static final int LOTTO_SIZE = 6;
+    private static final int PLUS_COUNT = 1;
 
     private static final String FORM_ERROR_MSG = "당첨번호는 6자리 입니다!!!!";
     private static final String NUMBER_CHECK_ERROR_MSG = "숫자만 입력 가능합니다!!!!";
@@ -46,7 +47,7 @@ public class LottoWinning {
 
         for (Lotto lotto : lottoTicket.getLotto()) {
             Rank rank = Rank.valueOf(lotto.countOfMatch(winningNumbers), lotto.contains(bonusBall));
-            repository.put(rank, repository.getOrDefault(rank, 0) + 1);
+            repository.merge(rank, PLUS_COUNT, (value1, value2) -> value1 + value2);
         }
 
         return repository;
