@@ -16,7 +16,7 @@ public class LottoMain {
         OutputView.printGameCount(round.gameCount());
         OutputView.printGames(round.getGames());
 
-        List<Integer> winNumbers = InputView.inputWinNumbers();
+        List<LottoNumber> winNumbers = InputView.inputWinNumbers();
         EnumMap<Rank, Integer> result = round.getResult(winNumbers);
         long totalAward = round.totalAward(winNumbers);
 

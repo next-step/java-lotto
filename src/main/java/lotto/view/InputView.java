@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.Amount;
+import lotto.LottoNumber;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,10 +18,10 @@ public class InputView {
         return new Amount(input);
     }
 
-    public static List<Integer> inputWinNumbers() {
+    public static List<LottoNumber> inputWinNumbers() {
         String input = stringInput("지난 주 당첨 번호를 입력해 주세요.");
         return Arrays.stream(input.split(", "))
-                .map(Integer::parseInt)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 

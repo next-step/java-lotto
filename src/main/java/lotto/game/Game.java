@@ -1,41 +1,40 @@
 package lotto.game;
 
+import lotto.LottoNumber;
+
 import java.util.HashSet;
 import java.util.List;
 
 public class Game {
-    private final List<Integer> numbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public Game(List<Integer> numbers) {
-        validateNumbers(numbers);
-        this.numbers = numbers;
+    public static Game generateGame(List<Integer> numbers) {
+        return new Game(LottoNumber.toLottoNumbers(numbers));
     }
 
-    private void validateNumbers(List<Integer> numbers) {
+    public Game(List<LottoNumber> numbers) {
+        validateNumbers(numbers);
+        this.lottoNumbers = numbers;
+    }
+
+    private void validateNumbers(List<LottoNumber> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("로또는 6자리 숫자만을 선택할 수 있습니다.");
         }
         if (new HashSet<>(numbers).size() != 6) {
             throw new IllegalArgumentException("로또는 서로다른 6자리 숫자만을 선택할 수 있습니다.");
         }
-        numbers.forEach(this::validateNumber);
     }
 
-    private void validateNumber(int number) {
-        if (number < 1 || 45 < number) {
-            throw new IllegalArgumentException("로또는 1부터 45까지의 숫자만을 선택할 수 있습니다.");
-        }
-    }
-
-    public Rank win(List<Integer> numbers) {
+    public Rank win(List<LottoNumber> numbers) {
         validateNumbers(numbers);
         int count = countMatch(numbers);
         return Rank.of(count);
     }
 
-    private int countMatch(List<Integer> numbers) {
+    private int countMatch(List<LottoNumber> numbers) {
         long count = numbers.stream()
-                .map(this.numbers::contains)
+                .map(this.lottoNumbers::contains)
                 .filter(contain -> contain)
                 .count();
         return Long.valueOf(count).intValue();
@@ -43,6 +42,6 @@ public class Game {
 
     @Override
     public String toString() {
-        return numbers.toString();
+        return lottoNumbers.toString();
     }
 }

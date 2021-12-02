@@ -43,8 +43,8 @@ public class GameTest {
     }
 
     private void winTest(List<Integer> gameNumbers, List<Integer> winNumbers, Rank result) {
-        Game game = new Game(gameNumbers);
-        Rank rank = game.win(winNumbers);
+        Game game = new Game(LottoNumber.toLottoNumbers(gameNumbers));
+        Rank rank = game.win(LottoNumber.toLottoNumbers(winNumbers));
         assertThat(rank).isEqualTo(result);
     }
 
@@ -52,40 +52,26 @@ public class GameTest {
     @DisplayName("로또는 6개의 숫자만을 선택할 수 있다.")
     void sixNumberMustProvided() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new Game(Arrays.asList(1, 2, 3, 4, 5));
+            Game.generateGame(Arrays.asList(1, 2, 3, 4, 5));
         });
 
-        new Game(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Game.generateGame(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new Game(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
-        });
-    }
-
-    @Test
-    @DisplayName("로또의 숫자 범위는 1~45 이다.")
-    void numberRange() {
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            new Game(Arrays.asList(-1, 1, 3, 4, 44, 45));
-        });
-
-        new Game(Arrays.asList(1, 2, 3, 43, 44, 45));
-
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            new Game(Arrays.asList(1, 2, 3, 4, 45, 46));
+            Game.generateGame(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
         });
     }
 
     @Test
     void toStringTest() {
-        Game game = new Game(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Game game = Game.generateGame(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(game.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 
     @Test
     void duplicateNumber() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new Game(Arrays.asList(1, 2, 3, 4, 5, 5));
+            Game.generateGame(Arrays.asList(1, 2, 3, 4, 5, 5));
         });
     }
 }
