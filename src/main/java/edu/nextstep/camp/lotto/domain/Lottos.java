@@ -44,7 +44,7 @@ public class Lottos {
 
     public GameResult winningResult(WinningNumber winningNumber) {
         final List<Rank> ranks = lottos.stream()
-                .map(lotto -> lotto.rank(winningNumber))
+                .map(winningNumber::rank)
                 .collect(Collectors.toUnmodifiableList());
         return GameResult.of(ranks);
     }

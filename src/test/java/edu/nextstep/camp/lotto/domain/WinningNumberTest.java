@@ -1,5 +1,6 @@
 package edu.nextstep.camp.lotto.domain;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -39,11 +40,19 @@ public class WinningNumberTest {
                 .withMessageContaining(expectedMessage);
     }
 
+    static Stream<Arguments> parseRank() {
+        return Stream.of(
+                Arguments.of(Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6)), Rank.FIRST),
+                Arguments.of(Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 7)), Rank.SECOND),
+                Arguments.of(Lotto.fromIntegers(List.of(1, 2, 3, 43, 44, 45)), Rank.FIFTH),
+                Arguments.of(Lotto.fromIntegers(List.of(40, 41, 42, 43, 44, 45)), Rank.NO_RANK)
+        );
+    }
 
-    @ParameterizedTest(name = "numbers and bonus: {arguments}")
-    @MethodSource("parseWinningNumber")
-    public void numbersAndBonus(Set<Integer> winningNumber, int bonusNumber) {
-        assertThat(WinningNumber.of(winningNumber, bonusNumber).numbers()).isEqualTo(Lotto.fromIntegers(winningNumber));
-        assertThat(WinningNumber.of(winningNumber, bonusNumber).bonus()).isEqualTo(LottoNumber.of(bonusNumber));
+    @ParameterizedTest(name = "rank with winning(1,2,3,4,5,6), bonus(7): {arguments}")
+    @MethodSource("parseRank")
+    public void rank(Lotto lotto, Rank expected) {
+        final WinningNumber winningNumber = WinningNumber.of(Set.of(1, 2, 3, 4, 5, 6), 7);
+        assertThat(winningNumber.rank(lotto)).isEqualTo(expected);
     }
 }

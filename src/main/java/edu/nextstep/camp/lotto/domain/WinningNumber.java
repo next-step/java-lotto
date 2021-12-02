@@ -45,11 +45,7 @@ public class WinningNumber {
                 '}';
     }
 
-    public Lotto numbers() {
-        return winningNumber;
-    }
-
-    public LottoNumber bonus() {
-        return bonusNumber;
+    public Rank rank(Lotto lotto) {
+        return Rank.valueOf(lotto.matchedCount(winningNumber), lotto.contains(bonusNumber));
     }
 }
