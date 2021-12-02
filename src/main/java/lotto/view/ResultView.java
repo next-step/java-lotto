@@ -12,8 +12,16 @@ public class ResultView {
         throw new AssertionError();
     }
 
-    public static void printOrderCount(int orderCount) {
-        System.out.println(orderCount + "개를 구매했습니다");
+    public static void printOrderCount(int manualLottoCount, int autoLottoCount) {
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("수동으로 ")
+                .append(manualLottoCount)
+                .append("장, 자동으로 ")
+                .append(autoLottoCount)
+                .append("개를 구매했습니다");
+
+        System.out.println(builder);
     }
 
     public static void printOrderLottoNumber(LottoTicket lottoTicket) {
