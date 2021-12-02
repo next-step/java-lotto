@@ -1,4 +1,4 @@
-package lotto;
+package lotto.service;
 
 import lotto.model.WinningPrice;
 
@@ -13,7 +13,7 @@ public class LottoResult {
         this.winningNumbers = winningNumbers;
     }
 
-    public Integer getWinningCount(WinningPrice winningPrice) {
+    public int getWinningCount(WinningPrice winningPrice) {
         return Long.valueOf(this.purchasedLottos.stream().filter(lottoPaper ->
                 lottoPaper.getWinningPrice(winningNumbers)
                         .equals(winningPrice))

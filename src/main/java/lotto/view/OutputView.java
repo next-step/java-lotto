@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.LottoPaper;
-import lotto.LottoResult;
+import lotto.service.LottoPaper;
+import lotto.service.LottoResult;
 import lotto.model.WinningPrice;
 
 import java.util.List;
@@ -14,7 +14,7 @@ public class OutputView {
     private final static String OUTPUT_WINNING_MESSAGE_FORMAT = "%s개 일치 (%s원) - %s개";
     private final static String OUTPUT_WINNING_MESSAGE_BONUS_MATCHED_FORMAT = "%s개 일치, 보너스 볼 일치" +
             "(%s원) - %s개";
-  
+
     private final static String OUTPUT_YIELD_MESSAGE_FORMAT = "총 수익률은 %.2f%% 입니다.";
 
     public void printLottoPaper(LottoPaper lottoPaper) {

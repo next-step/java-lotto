@@ -1,6 +1,6 @@
 package lotto.strategy;
 
-import lotto.LottoNumbers;
+import lotto.service.LottoNumbers;
 
 public class RandomDrawLottoNumberStrategy implements LotteryStrategy {
     private static final int NUMBER_COUNT = 6;

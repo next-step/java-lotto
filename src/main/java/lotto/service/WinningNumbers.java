@@ -1,6 +1,6 @@
-package lotto;
+package lotto.service;
 
-import stringformula.exception.DuplicateBonusNumberException;
+import lotto.exception.DuplicateBonusNumberException;
 
 public class WinningNumbers {
     private final LottoNumbers winningNumbers;

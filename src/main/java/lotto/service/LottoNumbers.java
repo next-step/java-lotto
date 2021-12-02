@@ -1,6 +1,6 @@
-package lotto;
+package lotto.service;
 
-import stringformula.exception.DuplicateLottoNumbersException;
+import lotto.exception.DuplicateLottoNumbersException;
 
 import java.util.*;
 import java.util.stream.Collectors;
