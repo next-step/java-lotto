@@ -17,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottosTest {
     private static Stream<Arguments> generateGetPrizeTestArgumentsStream() {
         List<Arguments> listOfArguments = new LinkedList<>();
+
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(Lotto.ofManualStringLottoNumbers("1,2,3,4,5,6"));
         lottoList.add(Lotto.ofManualStringLottoNumbers("11,12,13,14,15,16"));
@@ -47,9 +48,9 @@ public class LottosTest {
     }
 
     @ParameterizedTest
-    @MethodSource("generateArgumentsStream")
+    @MethodSource("generateGetPrizeTestArgumentsStream")
     @DisplayName("lottos 의 getPrize 테스트")
-    void getPrizeTest(Lottos lottos, LottoNumber bonus, Integer expect) {
+    void getPrizeTest(Lottos lottos, LottoNumber bonus, int expect) {
         WinningLotto winningNumber = WinningLotto.ofStringAndBonusBall("1,2,3,4,5,6", bonus);
         assertThat(lottos.getPrize(winningNumber, bonus)).isEqualTo(expect);
     }
@@ -68,7 +69,7 @@ public class LottosTest {
 
         Lottos lottos = Lottos.ofLottos(lottoList);
         LottoNumber bonus = LottoNumber.ofInt(7);
-        WinningLotto winningNumber = WinningLotto.ofStringAndBonusBall("1,2,3,4,5,6",bonus);
+        WinningLotto winningNumber = WinningLotto.ofStringAndBonusBall("1,2,3,4,5,6", bonus);
 
 
         assertThat(lottos.getCount(Prize.FIRST, winningNumber, bonus)).isEqualTo(1);
@@ -77,7 +78,6 @@ public class LottosTest {
         assertThat(lottos.getCount(Prize.FOURTH, winningNumber, bonus)).isEqualTo(1);
         assertThat(lottos.getCount(Prize.FIFTH, winningNumber, bonus)).isEqualTo(2);
         assertThat(lottos.getCount(Prize.ELSE, winningNumber, bonus)).isEqualTo(2);
-
 
 
     }

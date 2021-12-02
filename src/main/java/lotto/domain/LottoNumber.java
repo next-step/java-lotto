@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.validator.LottoNumberValidator;
+
 import java.util.Objects;
 
 public class LottoNumber {
@@ -9,7 +11,8 @@ public class LottoNumber {
     private final int lottoNumber;
 
     private LottoNumber(int lottoNumber) {
-        this.lottoNumber = checkBound(lottoNumber);
+        LottoNumberValidator.checkBound(lottoNumber);
+        this.lottoNumber = lottoNumber;
     }
 
     public static LottoNumber ofInt(int lottoNumber) {
@@ -17,26 +20,8 @@ public class LottoNumber {
     }
 
     public static LottoNumber ofString(String lottoNumber) {
-        checkNumeric(lottoNumber);
+        LottoNumberValidator.checkNumeric(lottoNumber);
         return new LottoNumber(Integer.parseInt(lottoNumber));
-    }
-
-    public static void checkNumeric(String numberString) {
-        try {
-            Integer.parseInt(numberString);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("숫자가 아닙니다");
-        }
-    }
-
-    private int checkBound(Integer number) {
-        if (number > BOUND_END) {
-            throw new IllegalArgumentException(BOUND_END + "보다 큰 숫자가 입력될 수 없습니다.");
-        }
-        if (number < BOUND_START) {
-            throw new IllegalArgumentException(BOUND_START + "보다 작은 숫자가 입력될 수 없습니다.");
-        }
-        return number;
     }
 
     public Integer getLottoNumber() {

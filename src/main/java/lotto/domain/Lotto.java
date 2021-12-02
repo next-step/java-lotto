@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.validator.LottoValidator;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -19,8 +21,8 @@ public class Lotto {
     private final List<LottoNumber> lotto;
 
     private Lotto(List<LottoNumber> lotto) {
-        checkSize(lotto);
-        checkDistinct(lotto);
+        LottoValidator.checkSize(lotto);
+        LottoValidator.checkDistinct(lotto);
         this.lotto = lotto;
     }
 
@@ -39,22 +41,8 @@ public class Lotto {
         return new Lotto(lottoString);
     }
 
-    private void checkSize(List<LottoNumber> lottoLottoNumbers) {
-        if (lottoLottoNumbers.size() != SIZE) {
-            throw new IllegalArgumentException(SIZE + " 와 길이가 다른 Lotto 는 입력될 수 없습니다.");
-        }
-    }
 
-    private void checkDistinct(List<LottoNumber> lotto) {
-        int compareSize = Long.valueOf(lotto.stream()
-                .distinct()
-                .count()).intValue();
-        if (compareSize != lotto.size()) {
-            throw new IllegalArgumentException("로또에 중복된 숫자가 존재합니다.");
-        }
-    }
-
-    public int checkMatching(WinningLotto winningLotto) {
+    public int countMatching(WinningLotto winningLotto) {
         Long count = lotto.stream()
                 .filter(winningLotto::checkContainNumber)
                 .count();

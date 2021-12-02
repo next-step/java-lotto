@@ -1,17 +1,19 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.Prize;
+import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import static org.assertj.core.api.Assertions.*;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PrizeTest {
     private static Stream<Arguments> generateArgumentsStream() {
@@ -40,7 +42,7 @@ public class PrizeTest {
     @MethodSource("generateArgumentsStream")
     @DisplayName("로또 맞춘 개수에 다른 상금 테스트")
     void prizeTest(Lotto lotto, WinningLotto winningLotto, LottoNumber bonus, Prize prize) {
-        assertThat(Prize.findPrize(lotto.checkMatching(winningLotto), winningLotto, lotto.checkContainNumber(bonus))).isEqualTo(prize);
+        assertThat(Prize.findPrize(lotto.countMatching(winningLotto), winningLotto, lotto.checkContainNumber(bonus))).isEqualTo(prize);
     }
 }
 

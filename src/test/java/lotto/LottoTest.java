@@ -34,7 +34,7 @@ public class LottoTest {
     @DisplayName("lotto 번호 matching 테스트")
     void checkMatchingTest(WinningLotto winningLotto, int expect) {
         Lotto lotto = Lotto.ofManualStringLottoNumbers("1,2,3,4,5,6");
-        assertThat(lotto.checkMatching(winningLotto)).isEqualTo(expect);
+        assertThat(lotto.countMatching(winningLotto)).isEqualTo(expect);
     }
 
     @Test

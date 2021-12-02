@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import static lotto.domain.LottoNumber.BOUND_END;
 import static lotto.domain.LottoNumber.BOUND_START;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumberTest {
 

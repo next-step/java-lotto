@@ -31,13 +31,13 @@ public class Lottos {
 
     public int getPrize(WinningLotto winningLotto, LottoNumber bonus) {
         return lottos.stream()
-                .mapToInt(lotto -> Prize.findPrize(lotto.checkMatching(winningLotto), winningLotto, lotto.checkContainNumber(bonus)).getPrize())
+                .mapToInt(lotto -> Prize.findPrize(lotto.countMatching(winningLotto), winningLotto, lotto.checkContainNumber(bonus)).getPrize())
                 .sum();
     }
 
     public int getCount(Prize prize, WinningLotto winningLotto, LottoNumber bonus) {
         Long count = lottos.stream()
-                .filter(lotto -> Prize.findPrize(lotto.checkMatching(winningLotto), winningLotto, lotto.checkContainNumber(bonus)) == prize)
+                .filter(lotto -> Prize.findPrize(lotto.countMatching(winningLotto), winningLotto, lotto.checkContainNumber(bonus)) == prize)
                 .count();
         return count.intValue();
     }
@@ -45,6 +45,4 @@ public class Lottos {
     public void mergeLottos(Lottos lottos) {
         this.lottos.addAll(lottos.getLottos());
     }
-
-
 }
