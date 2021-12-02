@@ -10,7 +10,10 @@ import java.util.stream.IntStream;
 public class LottoController {
     public static void main(String[] args) {
         InputView inputView = new InputView();
+        ResultView resultView = new ResultView();
         Money money = inputView.inputMoney();
+        List<Lotto> lottoList = buyLotto(money);
+        resultView.printBoughtResult(lottoList);
     }
 
     public static List<Lotto> buyLotto(Money money) {
