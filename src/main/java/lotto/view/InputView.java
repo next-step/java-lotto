@@ -63,7 +63,7 @@ public class InputView {
                  .collect(toList());
   }
 
-  public int inputManualTicketsCount() {
+  private int inputManualTicketsCount() {
     System.out.println(MANUAL_COUNT_INPUT_MESSAGE);
     int count = Integer.parseInt(scanner.next());
 
