@@ -1,8 +1,8 @@
 package lotto.utils;
 
-import lotto.LottoNumber;
-import lotto.LottoNumbers;
-import lotto.WinningNumbers;
+import lotto.service.LottoNumber;
+import lotto.service.LottoNumbers;
+import lotto.service.WinningNumbers;
 
 import java.util.ArrayList;
 import java.util.Arrays;

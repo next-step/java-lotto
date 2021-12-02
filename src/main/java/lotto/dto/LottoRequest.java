@@ -1,6 +1,6 @@
-package lotto.model;
+package lotto.dto;
 
-import lotto.LottoNumbers;
+import lotto.service.LottoNumbers;
 
 import java.util.Set;
 

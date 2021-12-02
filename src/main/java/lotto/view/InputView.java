@@ -1,14 +1,14 @@
 package lotto.view;
 
-import lotto.LottoNumber;
-import lotto.LottoNumbers;
-import lotto.WinningNumbers;
-import lotto.model.LottoRequest;
+import lotto.service.LottoNumber;
+import lotto.service.LottoNumbers;
+import lotto.service.WinningNumbers;
+import lotto.dto.LottoRequest;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static lotto.LottoPaper.LOTTO_PRICE;
+import static lotto.service.LottoPaper.LOTTO_PRICE;
 
 public class InputView {
     private static final String INPUT_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";

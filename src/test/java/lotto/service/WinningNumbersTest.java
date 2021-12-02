@@ -1,5 +1,7 @@
-package lotto;
+package lotto.service;
 
+import lotto.service.LottoNumber;
+import lotto.service.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import lotto.exception.DuplicateBonusNumberException;

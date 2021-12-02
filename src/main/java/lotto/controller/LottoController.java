@@ -1,5 +1,8 @@
-package lotto;
+package lotto.controller;
 
+import lotto.service.LottoGenerator;
+import lotto.service.LottoNumbers;
+import lotto.service.LottoPaper;
 import lotto.strategy.RandomDrawLottoNumberStrategy;
 
 import java.util.ArrayList;

@@ -1,6 +1,9 @@
-package lotto;
+package lotto.service;
 
 import lotto.model.WinningPrice;
+import lotto.service.LottoPaper;
+import lotto.service.LottoResult;
+import lotto.service.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
