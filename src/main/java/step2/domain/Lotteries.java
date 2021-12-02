@@ -1,33 +1,52 @@
 package step2.domain;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import step2.domain.enums.RANKING;
+import step2.domain.util.RandomUtil;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotteries {
     private final List<Lottery> lotteries;
+
+    public Lotteries(int count) {
+        List<Lottery> lotteries = new ArrayList<>();
+
+        for (int i = 0; i < count; i++) {
+            lotteries.add(new Lottery(RandomUtil.getRandomNumbers()
+                    .stream()
+                    .map(n -> Number.createFromInt(n))
+                    .collect(Collectors.toList())));
+        }
+
+        this.lotteries = lotteries;
+    }
 
     public Lotteries(List<Lottery> lotteries) {
         this.lotteries = lotteries;
     }
 
-    public List<Lottery> getLotteries() {
+    public List<Lottery> getList() {
         return lotteries;
     }
 
-    public Map<Integer, Integer> getStaticResult(Lottery winningNumbers1) {
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 1; i <= 6; i++) {
-            map.put(i, 0);
-        }
+    public Map<RANKING, Integer> getStaticResult(Lottery winningNumbers) {
+        Map<RANKING, Integer> statisticResult = new LinkedHashMap() {{
+            for (int idx = 3; idx <= 6; idx++) {
+                put(RANKING.of(idx), 0);
+            }
+        }};
 
         for (Lottery lottery : this.lotteries) {
-            int count = lottery.correctCount(winningNumbers1);
-            map.put(count, map.getOrDefault(count, 0) + 1);
+            int count = lottery.correctCount(winningNumbers);
+            RANKING key = RANKING.of(count);
+
+            if (statisticResult.containsKey(key)) {
+                statisticResult.put(key, statisticResult.get(key) + 1);
+            }
         }
 
-        return map;
+        return statisticResult;
     }
 
     @Override

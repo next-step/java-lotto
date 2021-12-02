@@ -1,4 +1,4 @@
-package step2.domain;
+package step2.domain.enums;
 
 import java.util.Map;
 import java.util.stream.Collectors;

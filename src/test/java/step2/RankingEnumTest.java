@@ -2,11 +2,11 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.domain.RANKING;
+import step2.domain.enums.RANKING;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RankingTest {
+public class RankingEnumTest {
     @Test
     @DisplayName("Lotteries 객체 생성")
     void getCorrectCount() {

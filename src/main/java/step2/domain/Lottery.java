@@ -1,25 +1,24 @@
 package step2.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class Lottery {
-    List<Number> lottery;
+    final List<Number> lottery;
 
     public Lottery(List<Number> randomNumbers) {
-        this.lottery = randomNumbers.stream()
-                .collect(Collectors.toList());
+        this.lottery = new ArrayList<>(randomNumbers);
     }
 
-    public List<Number> getLottery() {
+    public List<Number> getList() {
         return lottery;
     }
 
     public int correctCount(Lottery correctNumbers) {
         return Long.valueOf(this.lottery.stream()
-                .filter(n -> correctNumbers.getLottery().stream()
+                .filter(n -> correctNumbers.getList().stream()
                         .anyMatch(Predicate.isEqual(n)))
                 .count()).intValue();
     }
