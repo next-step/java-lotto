@@ -1,6 +1,5 @@
 package domain;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,14 +16,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
-
-//  private List<LottoNumber> customNumbers;
-
-  @BeforeEach
-  void setUp() {
-//    customNumbers = new ArrayList(6);
-//    IntStream.rangeClosed(1, 6).forEach(number -> customNumbers.add(new LottoNumber(number)));
-  }
 
   @Test
   @DisplayName("로또 기본생성자는 숫자를 6개 갖는 로또 객체를 생성함을 검증하는 테스트.")

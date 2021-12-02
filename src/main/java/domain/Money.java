@@ -2,9 +2,10 @@ package domain;
 
 import java.util.Objects;
 
+import static common.Constants.ZERO;
+
 public class Money {
 
-  public static final int ZERO = 0;
   private static final String MONEY_CANNOT_BE_NEGATIVE = "Money는 음수값을 가질 수 없습니다.";
   private static final String MONEY_CANNOT_BE_DIVIDED_BY_ZERO = "분모는 0이 될 수 없습니다.";
 
