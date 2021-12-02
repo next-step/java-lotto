@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.Amount;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -10,8 +12,9 @@ public class InputView {
 
     private InputView() {}
 
-    public static int inputAmount() {
-        return intInput("구입금액을 입력해 주세요.");
+    public static Amount inputAmount() {
+        int input = intInput("구입금액을 입력해 주세요.");
+        return new Amount(input);
     }
 
     public static List<Integer> inputWinNumbers() {

@@ -1,12 +1,11 @@
 package lotto.view;
 
+import lotto.Amount;
 import lotto.game.Game;
 import lotto.game.Rank;
-import lotto.game.Round;
 
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 
 public class OutputView {
     private static final Rank[] RANK_TO_PRINT = new Rank[]{
@@ -32,14 +31,14 @@ public class OutputView {
         });
     }
 
-    public static void printResult(int amount, long totalAward, EnumMap<Rank, Integer> result) {
+    public static void printResult(Amount amount, long totalAward, EnumMap<Rank, Integer> result) {
         print("당첨 통계");
         print("---------");
         for (Rank rank : RANK_TO_PRINT) {
             int count = result.getOrDefault(rank, 0);
             print(String.format("%d개 일치 (%d원)- %d개", rank.count, rank.award, count));
         }
-        float earnRate = (float)totalAward / amount;
+        float earnRate = amount.earnRate(totalAward);
         String profitOrDamage = earnRate > 1 ? "이득이" : "손해";
         print(String.format("총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 %s라는 의미임)", earnRate, profitOrDamage));
     }

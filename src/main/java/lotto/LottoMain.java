@@ -10,7 +10,7 @@ import java.util.List;
 
 public class LottoMain {
     public static void main(String[] args) {
-        int amount = InputView.inputAmount();
+        Amount amount = InputView.inputAmount();
         Round round = LottoStore.buy(amount);
 
         OutputView.printGameCount(round.gameCount());
