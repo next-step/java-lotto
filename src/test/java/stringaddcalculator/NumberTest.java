@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class LottoNumberTest {
+class NumberTest {
 
     @DisplayName("Number의 생성자에 인자로 전달된 값을 그대로 반환하는지 검증")
     @Test

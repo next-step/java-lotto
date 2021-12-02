@@ -1,11 +1,8 @@
 package lotto.model;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import lotto.exception.InvalidMoneyException;
-import lotto.utils.LottoNumberGenerator;
 
 public class Money {
 
@@ -31,17 +28,12 @@ public class Money {
         return Math.floor(money.value / (double) value * DECIMAL_DENOMINATOR) / DECIMAL_NUMERATOR;
     }
 
-    public Money changesAfterBuyManual(int count) {
-        return new Money(value - count * LOTTO_AMOUNT);
+    public int countToBuyLotto() {
+        return value / LOTTO_AMOUNT;
     }
 
-    public Lottos buyAutoLottosAll() {
-        int count = value / LOTTO_AMOUNT;
-        List<Lotto> lottos = new ArrayList();
-        for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto(LottoNumberGenerator.generate()));
-        }
-        return new Lottos(lottos);
+    public Money buyLotto(int count) {
+        return new Money(value - count * LOTTO_AMOUNT);
     }
 
     @Override

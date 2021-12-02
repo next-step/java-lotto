@@ -24,21 +24,20 @@ class MoneyTest {
         Result result = new Result();
         result.add(Rank.FIFTH);
 
-        Money purchasedAmount = new Money(14000);
+        Money purchasedAmount = new Money(14_000);
 
         assertThat(purchasedAmount.calculateRatio(result.calculateWinningAmount())).isEqualTo(0.35);
     }
 
-    @DisplayName("Money와 수동으로 구매한 로또 개수가 주어졌을 때 거스름돈을 반환하는지 검증")
+    @DisplayName("Money가 주어졌을 때 구매할 수 있는 로또 개수를 반환하는지 검증")
     @Test
-    void changesByBuyManualTest() {
-        assertThat(new Money(14_000).changesAfterBuyManual(3)).isEqualTo(new Money(11_000));
+    void countTest() {
+        assertThat(new Money(14_000).countToBuyLotto()).isEqualTo(14);
     }
 
-    @DisplayName("Money가 주어졌을 때 해당 금액만큼의 자동 추첨 로또를 사는지 검증")
+    @DisplayName("Money와 수동으로 구매한 로또 개수가 주어졌을 때 거스름돈을 반환하는지 검증")
     @Test
-    void buyAutoLottosAllTest() {
-        Money money = new Money(14_000);
-        assertThat(money.buyAutoLottosAll().count()).isEqualTo(14);
+    void byLottoTest() {
+        assertThat(new Money(14_000).buyLotto(3)).isEqualTo(new Money(11_000));
     }
 }

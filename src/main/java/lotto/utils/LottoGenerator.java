@@ -1,14 +1,17 @@
 package lotto.utils;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import lotto.model.Lotto;
 import lotto.model.LottoNumber;
+import lotto.model.Money;
 
-public final class LottoNumberGenerator {
+public final class LottoGenerator {
 
     private static final int FIRST_LOTTO_NUMBER = 1;
     private static final int LAST_LOTTO_NUMBER_BOUND = 46;
@@ -21,10 +24,24 @@ public final class LottoNumberGenerator {
                                     .collect(Collectors.toList());
     }
 
-    private LottoNumberGenerator() {
+    private LottoGenerator() {
     }
 
-    public static List<LottoNumber> generate() {
+    public static List<Lotto> generate(List<List<String>> manualLottos) {
+        return manualLottos.stream()
+                           .map(lottoNumbers -> Lotto.from(lottoNumbers))
+                           .collect(Collectors.toList());
+    }
+
+    public static List<Lotto> generate(Money money) {
+        List<Lotto> lottos = new ArrayList();
+        for (int i = 0; i < money.countToBuyLotto(); i++) {
+            lottos.add(new Lotto(generate()));
+        }
+        return lottos;
+    }
+
+    private static List<LottoNumber> generate() {
         List<LottoNumber> sortedInitLottoNumbers = initLottoNumbers.stream()
                                                                    .sorted(Comparator.comparing(LottoNumber::getValue))
                                                                    .collect(Collectors.toList());
