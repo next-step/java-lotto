@@ -1,5 +1,6 @@
 package lotto.game;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class Game {
@@ -13,6 +14,9 @@ public class Game {
     private void validateNumbers(List<Integer> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("로또는 6자리 숫자만을 선택할 수 있습니다.");
+        }
+        if (new HashSet<>(numbers).size() != 6) {
+            throw new IllegalArgumentException("로또는 서로다른 6자리 숫자만을 선택할 수 있습니다.");
         }
         numbers.forEach(this::validateNumber);
     }

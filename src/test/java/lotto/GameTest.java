@@ -81,4 +81,11 @@ public class GameTest {
         Game game = new Game(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(game.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
+
+    @Test
+    void duplicateNumber() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new Game(Arrays.asList(1, 2, 3, 4, 5, 5));
+        });
+    }
 }
