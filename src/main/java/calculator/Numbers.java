@@ -12,12 +12,12 @@ public class Numbers {
 
     public Numbers(List<Number> inputs) {
         this.inputs = inputs;
-        this.result = new Number();
+        this.result = new Number(0);
     }
 
     public Numbers(String inputs) {
         this.inputs = split(inputs);
-        this.result = new Number();
+        this.result = new Number(0);
     }
 
     public void sum() {

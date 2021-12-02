@@ -7,10 +7,6 @@ import static java.lang.Integer.parseInt;
 public class Number {
     private final int value;
 
-    public Number() {
-        this(0);
-    }
-
     public Number(String input) {
         this(parseInt(input));
     }
