@@ -26,6 +26,8 @@ public class Lottery {
         String answerText = InputView.questionAnswer();
         List<Integer> answerList = inputInfo.getAnswer(answerText);
         Lotto answer = new Lotto(answerList);
+        ResultView resultView = new ResultView(lottos, answer);
+        resultView.printResult();
     }
 
 }
