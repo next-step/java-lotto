@@ -27,23 +27,13 @@ public class InputView {
     private final Scanner scanner = new Scanner(System.in);
 
     public LottoRequest inputLottoRequest() {
-        System.out.println(INPUT_AMOUNT_MESSAGE);
-        int amount = Integer.parseInt(scanner.nextLine());
+        int amount = inputAmount();
 
-        System.out.println(INPUT_MANUAL_PURCHASE_LOTTO_COUNT_MESSAGE);
-        int manualCount = Integer.parseInt(scanner.nextLine());
+        int manualCount = inputManualCount();
 
-        Set<LottoNumbers> lottoNumbersSet = new HashSet<>();
-        System.out.println(INPUT_MANUAL_PURCHASE_LOTTO_NUMBERS_MESSAGE);
-        for (int i = 0; i < manualCount; i++) {
-            String input = scanner.nextLine();
-            String[] numbers = input.split(WINNING_NUMBERS_DELIMITER);
+        Set<LottoNumbers> lottoNumbersSet = inputManualLottoSet(manualCount);
 
-            lottoNumbersSet.add(convertStringToLottoNumbers(numbers));
-        }
-
-        int autoCount = (amount / LOTTO_PRICE) - manualCount;
-        System.out.println(autoCount + PURCHASE_RESULT_MESSAGE);
+        int autoCount = inputAutoCount(amount, manualCount);
 
         return new LottoRequest(autoCount, lottoNumbersSet);
     }
@@ -59,6 +49,34 @@ public class InputView {
 
         return new WinningNumbers(convertStringToLottoNumbers(numbers),
                 new LottoNumber(bonusNumber));
+    }
+
+    private int inputAmount() {
+        System.out.println(INPUT_AMOUNT_MESSAGE);
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    private int inputManualCount() {
+        System.out.println(INPUT_MANUAL_PURCHASE_LOTTO_COUNT_MESSAGE);
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    private Set<LottoNumbers> inputManualLottoSet(int manualCount) {
+        Set<LottoNumbers> lottoNumbersSet = new HashSet<>();
+        System.out.println(INPUT_MANUAL_PURCHASE_LOTTO_NUMBERS_MESSAGE);
+        for (int i = 0; i < manualCount; i++) {
+            String input = scanner.nextLine();
+            String[] numbers = input.split(WINNING_NUMBERS_DELIMITER);
+
+            lottoNumbersSet.add(convertStringToLottoNumbers(numbers));
+        }
+        return lottoNumbersSet;
+    }
+
+    private int inputAutoCount(int amount, int manualCount) {
+        int autoCount = (amount / LOTTO_PRICE) - manualCount;
+        System.out.println(autoCount + PURCHASE_RESULT_MESSAGE);
+        return autoCount;
     }
 
     private LottoNumbers convertStringToLottoNumbers(String[] numbers) {
