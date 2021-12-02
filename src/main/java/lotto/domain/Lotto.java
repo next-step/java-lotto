@@ -3,16 +3,16 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.List;
 
-public class Ticket {
+public class Lotto {
 
     private Numbers numbers;
 
-    public Ticket() {
+    public Lotto() {
         numbers = new Numbers();
         numbers.marked();
     }
 
-    public Ticket(List<Integer> answer) {
+    public Lotto(List<Integer> answer) {
         numbers = new Numbers(answer);
     }
 
@@ -22,7 +22,7 @@ public class Ticket {
         return numbers;
     }
 
-    public int matchCount(Ticket ticket) {
+    public int matchCount(Lotto ticket) {
         int count = 0;
         List<Integer> numbers = ticket.getNumbers();
         for (int number : numbers) {

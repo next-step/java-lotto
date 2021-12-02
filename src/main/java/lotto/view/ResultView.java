@@ -1,13 +1,13 @@
 package lotto.view;
 
-import lotto.domain.Ticket;
-import lotto.domain.Tickets;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 
 public class ResultView {
 
-    public void printTickets(Tickets tickets) {
-        for (Ticket ticket : tickets.getTickets()) {
-            System.out.println(ticket.getNumbers());
+    public void printLottos(Lottos lottos) {
+        for (Lotto lotto : lottos.getLottos()) {
+            System.out.println(lotto.getNumbers());
         }
     }
 
