@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 
 public class Game {
+    public static final int LOTTO_NUMBER_COUNT = 6;
+
     private final List<LottoNumber> lottoNumbers;
 
     public static Game generateGame(List<Integer> numbers) {
@@ -18,11 +20,13 @@ public class Game {
     }
 
     private void validateNumbers(List<LottoNumber> numbers) {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException("로또는 6자리 숫자만을 선택할 수 있습니다.");
+        if (numbers.size() != LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException(
+                    String.format("로또는 %d자리 숫자만을 선택할 수 있습니다.", LOTTO_NUMBER_COUNT));
         }
-        if (new HashSet<>(numbers).size() != 6) {
-            throw new IllegalArgumentException("로또는 서로다른 6자리 숫자만을 선택할 수 있습니다.");
+        if (new HashSet<>(numbers).size() != LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException(
+                    String.format("로또는 서로다른 %d자리 숫자만을 선택할 수 있습니다.", LOTTO_NUMBER_COUNT));
         }
     }
 

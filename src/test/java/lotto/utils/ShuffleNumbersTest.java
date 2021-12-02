@@ -7,13 +7,13 @@ import java.util.List;
 class ShuffleNumbersTest {
     @Test
     void generate() {
-        List<Integer> numbers = ShuffleNumbers.generateSixNumbers();
+        List<Integer> numbers = ShuffleNumbers.generateLottoNumbers();
         System.out.println(numbers);
 
-        List<Integer> numbers1 = ShuffleNumbers.generateSixNumbers();
+        List<Integer> numbers1 = ShuffleNumbers.generateLottoNumbers();
         System.out.println(numbers1);
 
-        List<Integer> numbers2 = ShuffleNumbers.generateSixNumbers();
+        List<Integer> numbers2 = ShuffleNumbers.generateLottoNumbers();
         System.out.println(numbers2);
     }
 }

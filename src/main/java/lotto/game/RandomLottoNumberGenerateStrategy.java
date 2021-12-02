@@ -8,6 +8,6 @@ import java.util.List;
 public class RandomLottoNumberGenerateStrategy implements LottoNumberGenerateStrategy {
     @Override
     public List<LottoNumber> generate() {
-        return LottoNumber.toLottoNumbers(ShuffleNumbers.generateSixNumbers());
+        return LottoNumber.toLottoNumbers(ShuffleNumbers.generateLottoNumbers());
     }
 }
