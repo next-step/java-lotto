@@ -22,6 +22,6 @@ class NumbersTest {
         Numbers numbers = new Numbers("3:5");
         numbers.sum();
 
-        assertThat(numbers.result()).isEqualTo(8);
+        assertThat(numbers.result()).isEqualTo(new Number(8));
     }
 }

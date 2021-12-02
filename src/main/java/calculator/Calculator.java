@@ -2,7 +2,7 @@ package calculator;
 
 public class Calculator {
 
-    public static int calculate(String input) {
+    public static Number calculate(String input) {
         Numbers numbers = new Numbers(input);
         numbers.sum();
 

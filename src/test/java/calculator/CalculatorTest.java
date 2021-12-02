@@ -11,22 +11,22 @@ class CalculatorTest {
     @Test
     @DisplayName("숫자 하나만 문자열로 입력할 경우 해당 숫자를 반환한다")
     void shouldReturnIfSingleInput() {
-        int result = Calculator.calculate("1");
-        assertThat(result).isEqualTo(1);
+        Number result = Calculator.calculate("1");
+        assertThat(result).isEqualTo(new Number(1));
     }
 
     @Test
     @DisplayName("숫자 여러 개를 입력할 경우 쉼표를 구분자로 분리한다")
     void shouldSplitByComma() {
-        int result = Calculator.calculate("1,2:3");
-        assertThat(result).isEqualTo(6);
+        Number result = Calculator.calculate("1,2:3");
+        assertThat(result).isEqualTo(new Number(6));
     }
 
     @Test
     @DisplayName("커스텀 구분자를 입력할 경우 이를 기준으로 숫자를 분리한다")
     void shouldSplitByCustomDelimiter() {
-        int result = Calculator.calculate("//;\n1;2;3");
-        assertThat(result).isEqualTo(6);
+        Number result = Calculator.calculate("//;\n1;2;3");
+        assertThat(result).isEqualTo(new Number(6));
     }
 
     @Test

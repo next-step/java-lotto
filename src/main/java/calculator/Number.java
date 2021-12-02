@@ -7,22 +7,20 @@ import static java.lang.Integer.parseInt;
 public class Number {
     private final int value;
 
-    public Number(String input) {
-        this.value = parse(input);
+    public Number() {
+        this(0);
     }
 
-    private int parse(String input) {
-        if (!StringUtils.isNumber(input)) {
-            throw new RuntimeException("숫자가 아닌 값은 입력할 수 없습니다.");
-        }
+    public Number(String input) {
+        this(parseInt(input));
+    }
 
-        int parsedInput = parseInt(input);
-
-        if (parsedInput < 0) {
+    public Number(int input) {
+        if (input < 0) {
             throw new RuntimeException("음수는 입력할 수 없습니다.");
         }
 
-        return parsedInput;
+        this.value = input;
     }
 
     public int getValue() {
