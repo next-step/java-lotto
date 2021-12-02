@@ -22,12 +22,12 @@ public class LottoTicket {
 
   public LottoTicket(List<LottoNumber> numbers) {
     this.numbers = new HashSet<>(numbers);
-    validSize(numbers);
+    validSize();
     this.stringBuilder = new StringBuilder();
   }
 
-  private void validSize(List<LottoNumber> numbers) {
-    if (numbers.size() != LOTTO_SIZE) {
+  private void validSize() {
+    if (this.numbers.size() != LOTTO_SIZE) {
       throw new IllegalArgumentException(INVALID_SIZE_OF_NUMBER);
     }
   }
