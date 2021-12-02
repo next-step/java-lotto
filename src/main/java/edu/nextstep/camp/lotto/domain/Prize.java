@@ -24,22 +24,6 @@ public class Prize {
         return new Prize(prize);
     }
 
-    public static Prize ofFirstPlace(int amounts) {
-        return FIRST_PRIZE.multiply(amounts);
-    }
-
-    public static Prize ofSecondPlace(int amounts) {
-        return SECOND_PRIZE.multiply(amounts);
-    }
-
-    public static Prize ofThirdPlace(int amounts) {
-        return THIRD_PRIZE.multiply(amounts);
-    }
-
-    public static Prize ofFourthPlace(int amounts) {
-        return FOURTH_PRIZE.multiply(amounts);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -31,10 +31,12 @@ public class GameResult {
     }
 
     public Prize totalPrize() {
-        return ranks.entrySet().stream()
-                .map(entry -> entry.getKey()
-                        .prize()
-                        .multiply(entry.getValue()))
+        Function<Map.Entry<Rank, Long>, Prize> rankOfPrize = (entry) -> entry.getKey()
+                .ofPrize(entry.getValue());
+
+        return ranks.entrySet()
+                .stream()
+                .map(rankOfPrize)
                 .reduce(Prize::add)
                 .orElse(Prize.NO_PRIZE);
     }

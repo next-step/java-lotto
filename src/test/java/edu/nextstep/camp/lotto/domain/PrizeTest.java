@@ -2,7 +2,6 @@ package edu.nextstep.camp.lotto.domain;
 
 import java.util.stream.Stream;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -15,16 +14,8 @@ public class PrizeTest {
     @ParameterizedTest(name = "create: {arguments}")
     @ValueSource(longs = {0, 1, Integer.MAX_VALUE, 4000000000L})
     public void create(long prize) {
-        assertThat(Prize.of(prize)).isEqualTo(Prize.of(prize));
-        assertThat(Prize.of(prize).toLong()).isEqualTo(prize);
-    }
-
-    @Test
-    public void createFixedPlace() {
-        assertThat(Prize.ofFirstPlace(1)).isEqualTo(Prize.FIRST_PRIZE);
-        assertThat(Prize.ofSecondPlace(1)).isEqualTo(Prize.SECOND_PRIZE);
-        assertThat(Prize.ofThirdPlace(1)).isEqualTo(Prize.THIRD_PRIZE);
-        assertThat(Prize.ofFourthPlace(1)).isEqualTo(Prize.FOURTH_PRIZE);
+        assertThat(prize(prize)).isEqualTo(prize(prize));
+        assertThat(prize(prize).toLong()).isEqualTo(prize);
     }
 
     @ParameterizedTest(name = "create failed: {arguments}")
@@ -47,12 +38,16 @@ public class PrizeTest {
     @ParameterizedTest(name = "add: {0} + {0} = {1}")
     @MethodSource("parseMultiplyWith2")
     public void add(long input, long expected) {
-        assertThat(Prize.of(input).add(Prize.of(input))).isEqualTo(Prize.of(expected));
+        assertThat(prize(input).add(prize(input))).isEqualTo(prize(expected));
     }
 
     @ParameterizedTest(name = "multiply: {0} * 2 = {1}")
     @MethodSource("parseMultiplyWith2")
     public void multiply(long input, long expected) {
-        assertThat(Prize.of(input).multiply(2)).isEqualTo(Prize.of(expected));
+        assertThat(prize(input).multiply(2)).isEqualTo(prize(expected));
+    }
+    
+    public static Prize prize(long prize) {
+        return Prize.of(prize);
     }
 }

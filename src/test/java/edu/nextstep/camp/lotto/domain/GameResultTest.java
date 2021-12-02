@@ -12,6 +12,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullSource;
 
+import static edu.nextstep.camp.lotto.domain.PrizeTest.prize;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -74,7 +75,7 @@ public class GameResultTest {
     @ParameterizedTest(name = "total prize: {arguments}")
     @MethodSource("parseTotalPrize")
     public void totalPrize(List<Rank> ranks, long expected) {
-        assertThat(GameResult.of(ranks).totalPrize()).isEqualTo(Prize.of(expected));
+        assertThat(GameResult.of(ranks).totalPrize()).isEqualTo(prize(expected));
     }
 
     static Stream<Arguments> parsePriceEarningRate() {
