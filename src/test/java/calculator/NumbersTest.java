@@ -10,8 +10,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class NumbersTest {
 
     @Test
-    @DisplayName("주어진 문자열을 숫자로 분리한다")
-    void shouldCreate() {
+    @DisplayName("주어진 문자열을 분리해서 숫자로 변환한다")
+    void shouldSplitAndParse() {
         Numbers numbers = new Numbers(Arrays.asList(new Number("1"), new Number("3")));
         assertThat(new Numbers("1,3")).isEqualTo(numbers);
     }
