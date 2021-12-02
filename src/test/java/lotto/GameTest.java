@@ -52,15 +52,27 @@ public class GameTest {
     @DisplayName("로또는 6개의 숫자만을 선택할 수 있다.")
     void sixNumberMustProvided() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
+            new Game(Arrays.asList(1, 2, 3, 4, 5));
+        });
+
+        new Game(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        assertThatIllegalArgumentException().isThrownBy(() -> {
             new Game(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
         });
     }
 
     @Test
-    @DisplayName("로또의 제일 큰 숫자는 45이다.")
-    void maxNumber() {
+    @DisplayName("로또의 숫자 범위는 1~45 이다.")
+    void numberRange() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new Game(Arrays.asList(1, 2, 3, 4, 5, 46));
+            new Game(Arrays.asList(-1, 1, 3, 4, 44, 45));
+        });
+
+        new Game(Arrays.asList(1, 2, 3, 43, 44, 45));
+
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new Game(Arrays.asList(1, 2, 3, 4, 45, 46));
         });
     }
 
