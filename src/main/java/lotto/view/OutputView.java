@@ -39,6 +39,8 @@ public class OutputView {
             int count = result.getOrDefault(rank, 0);
             print(String.format("%d개 일치 (%d원)- %d개", rank.count, rank.award, count));
         }
-        print(String.format("총 수익률은 %.2f입니다.", (float)totalAward / amount));
+        float earnRate = (float)totalAward / amount;
+        String profitOrDamage = earnRate > 1 ? "이득이" : "손해";
+        print(String.format("총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 %s라는 의미임)", earnRate, profitOrDamage));
     }
 }
