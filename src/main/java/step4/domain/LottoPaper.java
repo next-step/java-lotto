@@ -11,7 +11,7 @@ public class LottoPaper {
     private final long autoCount;
     private final List<String> manualList;
 
-    public LottoPaper(long autoCount, List<String> manualList) {
+    private LottoPaper(long autoCount, List<String> manualList) {
         this.autoCount = autoCount;
         this.manualList = manualList;
     }
