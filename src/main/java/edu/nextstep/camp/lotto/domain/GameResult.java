@@ -70,6 +70,6 @@ public class GameResult {
     }
 
     public float priceEarningRate() {
-        return (float) totalPrize().toLong() / (size() * Store.GAME_PRICE);
+        return (float) totalPrize().toLong() / (size() * Budget.GAME_PRICE);
     }
 }

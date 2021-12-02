@@ -1,6 +1,5 @@
 package edu.nextstep.camp.lotto.domain;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -8,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import static edu.nextstep.camp.lotto.domain.LottoTest.lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -42,10 +42,10 @@ public class WinningNumberTest {
 
     static Stream<Arguments> parseRank() {
         return Stream.of(
-                Arguments.of(Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6)), Rank.FIRST),
-                Arguments.of(Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 7)), Rank.SECOND),
-                Arguments.of(Lotto.fromIntegers(List.of(1, 2, 3, 43, 44, 45)), Rank.FIFTH),
-                Arguments.of(Lotto.fromIntegers(List.of(40, 41, 42, 43, 44, 45)), Rank.NO_RANK)
+                Arguments.of(lotto(1, 2, 3, 4, 5, 6), Rank.FIRST),
+                Arguments.of(lotto(1, 2, 3, 4, 5, 7), Rank.SECOND),
+                Arguments.of(lotto(1, 2, 3, 43, 44, 45), Rank.FIFTH),
+                Arguments.of(lotto(40, 41, 42, 43, 44, 45), Rank.NO_RANK)
         );
     }
 

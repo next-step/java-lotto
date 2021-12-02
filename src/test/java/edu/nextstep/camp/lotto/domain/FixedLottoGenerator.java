@@ -1,6 +1,6 @@
 package edu.nextstep.camp.lotto.domain;
 
-import java.util.List;
+import static edu.nextstep.camp.lotto.domain.LottoTest.lotto;
 
 public class FixedLottoGenerator implements LottoGenerator {
     private static final LottoGenerator instance = new FixedLottoGenerator();
@@ -11,6 +11,6 @@ public class FixedLottoGenerator implements LottoGenerator {
 
     @Override
     public Lotto generate() {
-        return Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6));
+        return lotto(1, 2, 3, 4, 5, 6);
     }
 }

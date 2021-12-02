@@ -1,19 +1,23 @@
 package edu.nextstep.camp.lotto.domain;
 
-public class Store {
-    public static final int GAME_PRICE = 1000;
+import java.util.Collection;
 
+public class Store {
     private Store() {}
 
     public static Lottos purchase(int budget, LottoGenerator generator) {
-        if (budget < GAME_PRICE) {
-            throw new IllegalArgumentException("invalid input: budget must be at least 1000, but " + budget);
+        return generator.generate(Budget.of(budget).availableAmount());
+    }
+
+    public static Lottos purchase(int budget, Collection<Lotto> lottos) {
+        if (lottos == null) {
+            throw new IllegalArgumentException("invalid input: purchased list cannot be null.");
         }
 
-        if (budget % GAME_PRICE != 0) {
-            throw new IllegalArgumentException("invalid input: budget must be multiple of 1000, but " + budget);
+        if (lottos.size() > Budget.of(budget).availableAmount()) {
+            throw new IllegalArgumentException("invalid input: not enough money to purchase manually.");
         }
 
-        return generator.generate(budget / GAME_PRICE);
+        return Lottos.of(lottos);
     }
 }

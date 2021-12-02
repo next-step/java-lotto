@@ -1,7 +1,6 @@
 package edu.nextstep.camp.lotto.domain;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -18,9 +17,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class LottoTest {
     static Stream<Arguments> parseLotto1To6AsList() {
         return Stream.of(
-            Arguments.of(
-                    List.of(1, 2, 3, 4, 5, 6)
-            )
+            Arguments.of(List.of(1, 2, 3, 4, 5, 6))
         );
     }
 
@@ -28,11 +25,11 @@ public class LottoTest {
     @MethodSource("parseLotto1To6AsList")
     public void createFromList(List<Integer> numbers) {
         assertThat(Lotto.fromIntegers(numbers))
-                .isEqualTo(Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6)));
+                .isEqualTo(lotto(1, 2, 3, 4, 5, 6));
         assertThat(Lotto.fromLottoNumbers(numbers.stream()
                 .map(LottoNumber::of)
                 .collect(Collectors.toSet())
-        )).isEqualTo(Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6)));
+        )).isEqualTo(lotto(1, 2, 3, 4, 5, 6));
     }
 
     static Stream<Arguments> parseLottoInvalid() {
@@ -62,24 +59,28 @@ public class LottoTest {
 
     static Stream<Arguments> parseMatched() {
         return Stream.of(
-                Arguments.of(Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6)), 6),
-                Arguments.of(Lotto.fromIntegers(List.of(1, 2, 3, 43, 44, 45)), 3),
-                Arguments.of(Lotto.fromIntegers(List.of(40, 41, 42, 43, 44, 45)),0)
+                Arguments.of(lotto(1, 2, 3, 4, 5, 6), 6),
+                Arguments.of(lotto(1, 2, 3, 43, 44, 45), 3),
+                Arguments.of(lotto(40, 41, 42, 43, 44, 45),0)
         );
     }
 
     @ParameterizedTest(name = "check matched count with FixedLotto(1,2,3,4,5,6): {arguments}")
     @MethodSource("parseMatched")
     public void matchedCount(Lotto winningNumber, int expected) {
-        final Lotto lotto = Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6));
+        final Lotto lotto = lotto(1, 2, 3, 4, 5, 6);
         assertThat(lotto.matchedCount(winningNumber)).isEqualTo(expected);
     }
 
     @Test
     @DisplayName("check given number is in lotto numbers")
     public void contains() {
-        Lotto lotto = Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto = lotto(1, 2, 3, 4, 5, 6);
         assertThat(lotto.contains(LottoNumber.of(6))).isTrue();
         assertThat(lotto.contains(LottoNumber.of(7))).isFalse();
+    }
+    
+    public static Lotto lotto(int n1, int n2, int n3, int n4, int n5, int n6) {
+        return Lotto.fromIntegers(List.of(n1, n2, n3, n4, n5, n6));
     }
 }
