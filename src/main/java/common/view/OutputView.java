@@ -2,7 +2,10 @@ package common.view;
 
 import common.model.Number;
 import lotto.application.Constant;
-import lotto.model.*;
+import lotto.model.Lotto;
+import lotto.model.LottoNumber;
+import lotto.model.LottoRank;
+import lotto.model.LottoReport;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,35 +51,32 @@ public class OutputView {
     }
 
     public static void print(Lotto lotto) {
-        OutputView.print(String.valueOf(lotto.getLotto().size()), Constant.OUTPUT_MESSAGE_PURCHASE_LOTTO);
-        for (LottoNumbers lottoNumbers : lotto.getLotto()) {
-            print(lottoNumbers.getLottoNumbers());
-        }
+        OutputView.print(String.format(Constant.OUTPUT_MESSAGE_PURCHASE_LOTTO_FORMAT, lotto.getLottoSize()));
+        print(lotto.toString());
+    }
+
+    public static void print(Lotto lotto, int manualLottoCount) {
+        int autoLottoCount = lotto.getLottoSize() - manualLottoCount;
+        OutputView.print(String.format(Constant.OUTPUT_MESSAGE_PURCHASE_MIX_LOTTO_FORMAT, manualLottoCount, autoLottoCount));
+        print(lotto.toString());
     }
 
     public static void print(LottoReport report, int purchaseAmount) {
         print("당첨 통계");
         print("-------------");
-        for (LottoRank rank : LottoRank.valuesWithoutMiss()) {
-            Number count = report.getLottoRankNumbers().getOrDefault(rank, new Number());
-            print(rank, count);
-        }
-
-        float rateOfRevenue = report.calculateRateOfRevenue(purchaseAmount);
-        print("총 수익률은 ", String.valueOf(rateOfRevenue), "입니다.");
-
+        print(report.toString());
+        print(String.format(Constant.OUTPUT_MESSAGE_CALCULATE_RATE_OF_REVENUE_FORMAT, report.calculateRateOfRevenue(purchaseAmount)));
     }
 
     public static void print(LottoRank rank, Number count) {
-        StringBuilder output = new StringBuilder();
-        output.append(rank.getMatchCount()).append("개 일치");
-        if (LottoRank.SECOND.equals(rank)) {
-            output.append(", 보너스 볼 일치");
+        String format = Constant.OUTPUT_MESSAGE_REPORT_FORMAT;
+        if (rank.equals(LottoRank.SECOND)) {
+            rank.toString();
+            format = Constant.OUTPUT_MESSAGE_REPORT_SECOND_FORMAT;
         }
-        output.append("(").append(rank.getAmount()).append("원) - ")
-                .append(count.getNumber()).append("개");
 
-        print(output.toString());
+        print(String.format(format, rank.getMatchCount(), rank.getAmount(), count));
+
     }
 
 

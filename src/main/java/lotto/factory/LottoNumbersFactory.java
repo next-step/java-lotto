@@ -3,6 +3,7 @@ package lotto.factory;
 import lotto.generator.NumberGenerator;
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
+import lotto.model.LottoWinner;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,26 +14,33 @@ import static lotto.application.Constant.LOTTO_NUMBERS_SIZE;
 
 public class LottoNumbersFactory {
 
-    public static LottoNumbers autoCreateNumbers(NumberGenerator generator) {
+    private LottoNumbersFactory() {
+    }
+
+    public static LottoNumbers from(List<LottoNumber> lottoNumbers){
+        return new LottoNumbers(lottoNumbers);
+    }
+
+    public static LottoNumbers from(NumberGenerator generator) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         while (lottoNumbers.size() < LOTTO_NUMBERS_SIZE) {
-            lottoNumbers.add(LottoNumberFactory.autoCreateNumber(generator));
+            lottoNumbers.add(LottoNumberFactory.from(generator));
         }
         return new LottoNumbers(new ArrayList<>(lottoNumbers));
     }
 
-    public static LottoNumbers manualCreateNumbers(List<LottoNumber> lottoNumbers) {
-        return new LottoNumbers(lottoNumbers);
+    public static LottoNumbers from(String input) {
+        return new LottoNumbers(convertTo(input));
     }
 
-    public static LottoNumbers manualCreateNumbers(String numbers) {
-        return new LottoNumbers(manualCreateNumberList(numbers));
+    public static LottoWinner of(String input, LottoNumber bonusNumber) {
+        return new LottoWinner(convertTo(input), bonusNumber);
     }
 
-    public static List<LottoNumber> manualCreateNumberList(String numbers) {
+    private static List<LottoNumber> convertTo(String input) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (String number : numbers.split(", ")) {
-            lottoNumbers.add(LottoNumberFactory.manualCreateNumber(number));
+        for (String lottoNumber : input.split(", ")) {
+            lottoNumbers.add(LottoNumberFactory.from(lottoNumber));
         }
         return lottoNumbers;
     }

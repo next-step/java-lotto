@@ -24,12 +24,11 @@ public enum LottoRank {
         this.amount = amount;
     }
 
-    public static LottoRank valueOf(Number matchCount) {
+    private static LottoRank valueOf(Number matchCount) {
         return Arrays.stream(values())
                 .filter(r -> matchCount.equals(new Number(r.matchCount)))
                 .findFirst()
                 .orElse(MISS);
-
     }
 
     public static LottoRank valueOf(Number matchCount, boolean isBonus) {
@@ -51,6 +50,12 @@ public enum LottoRank {
         return ranksWithoutMiss;
     }
 
+    public String format(Number count) {
+        if (SECOND.equals(this)) {
+            return String.format(Constant.OUTPUT_MESSAGE_REPORT_SECOND_FORMAT, count.getNumber());
+        }
+        return String.format(Constant.OUTPUT_MESSAGE_REPORT_FORMAT, this.matchCount, this.amount, count.getNumber());
+    }
 
     public int getMatchCount() {
         return matchCount;

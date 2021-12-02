@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.factory.LottoFactory;
 import lotto.factory.LottoNumberFactory;
 import lotto.factory.LottoNumbersFactory;
 import lotto.model.*;
@@ -8,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,22 +15,37 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ConsumerTest {
 
     @Test
-    @DisplayName("통합 테스트")
-    void integrationTest() {
+    @DisplayName("자동 로또 통합 테스트")
+    void autoLottoIntegrationTest() {
         int purchaseAmount = 1000;
 
+        LottoNumbers lottoNumbers = LottoNumbersFactory.from("1, 2, 3, 4, 5, 6");
+        Lotto lotto = new Lotto(Collections.singletonList(lottoNumbers));
 
-        LottoNumbers lottoNumbers = LottoNumbersFactory.manualCreateNumbers("1, 2, 3, 4, 5, 6");
-        Lotto lotto = LottoFactory.manualCreateSingleLotto(lottoNumbers);
+        LottoWinner lottoWinner = LottoNumbersFactory.of("1, 2, 3, 4, 5, 10", LottoNumberFactory.from(6));
 
-        LottoWinner lottoWinner = new LottoWinner(
-                LottoNumbersFactory.manualCreateNumberList("1, 2, 3, 4, 5, 10"),
-                LottoNumberFactory.manualCreateNumber(6)
-        );
-
-        LottoReport report = LottoStore.report(lotto, lottoWinner);
-
+        LottoReport report = lotto.matchAll(lottoWinner);
         float rateOfRevenue = report.calculateRateOfRevenue(purchaseAmount);
         assertThat(rateOfRevenue).isEqualTo(30000.0f);
+    }
+
+    @Test
+    @DisplayName("수동, 자동 로또 통합 테스트")
+    void mixLottoIntegrationTest() {
+        int purchaseAmount = 2000;
+        int manualLottoCount = 1;
+
+        List<LottoNumbers> manualLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            manualLottoNumbers.add(LottoNumbersFactory.from("1, 2, 3, 4, 5, 6"));
+        }
+
+        Lotto lotto = LottoStore.ticket(purchaseAmount, manualLottoNumbers);
+        LottoWinner lottoWinner = LottoNumbersFactory.of("1, 2, 3, 4, 5, 10", LottoNumberFactory.from(6));
+
+        LottoReport report = lotto.matchAll(lottoWinner);
+        float rateOfRevenue = report.calculateRateOfRevenue(purchaseAmount);
+        assertThat(rateOfRevenue).isEqualTo(15000);
+
     }
 }

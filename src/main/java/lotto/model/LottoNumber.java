@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.generator.NumberGenerator;
-
 import java.util.Objects;
 
 import static lotto.application.Constant.EXCEPTION_MESSAGE_RANGE_VALIDATION;
@@ -12,11 +10,7 @@ public class LottoNumber {
     private static final int MAX_RANGE = 45;
 
     private final int number;
-
-    public LottoNumber(NumberGenerator generator) {
-        this.number = generator.generate();
-    }
-
+    
     public LottoNumber(int input) {
         this.number = validate(input);
     }

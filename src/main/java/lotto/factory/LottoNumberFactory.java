@@ -10,17 +10,17 @@ public class LottoNumberFactory {
     private LottoNumberFactory() {
     }
 
-    public static LottoNumber autoCreateNumber(NumberGenerator generator) {
-        return new LottoNumber(generator);
-    }
-
-    public static LottoNumber manualCreateNumber(int number) {
+    public static LottoNumber from(int number) {
         return new LottoNumber(number);
     }
 
-    public static LottoNumber manualCreateNumber(String number) {
+    public static LottoNumber from(NumberGenerator generator) {
+        return from(generator.generate());
+    }
+
+    public static LottoNumber from(String number) {
         try {
-            return manualCreateNumber(Integer.parseInt(number));
+            return from(Integer.parseInt(number));
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(EXCEPTION_MESSAGE_PARSE_VALIDATION);
         }

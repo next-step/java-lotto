@@ -15,19 +15,42 @@ public class Lotto {
     }
 
     public Lotto(int count) {
-        this.lotto = autoCreateLotto(count);
+        this.lotto = createAutoLottoNumbers(count);
     }
 
-    private List<LottoNumbers> autoCreateLotto(int count) {
-        List<LottoNumbers> lotto = new ArrayList<>();
-        LottoNumberGenerator generator = new LottoNumberGenerator();
+    public Lotto(List<LottoNumbers> manualLottoNumbers, int autoLottoCount) {
+        manualLottoNumbers.addAll(createAutoLottoNumbers(autoLottoCount));
+        this.lotto = manualLottoNumbers;
+    }
+
+    private List<LottoNumbers> createAutoLottoNumbers(int count) {
+        List<LottoNumbers> autoLotto = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lotto.add(LottoNumbersFactory.autoCreateNumbers(generator));
+            autoLotto.add(LottoNumbersFactory.from(new LottoNumberGenerator()));
         }
-        return lotto;
+        return autoLotto;
     }
 
-    public List<LottoNumbers> getLotto() {
-        return lotto;
+    public LottoReport matchAll(LottoWinner winner) {
+        LottoReport report = new LottoReport();
+
+        for (LottoNumbers lottoNumbers : this.lotto) {
+            report.increaseCount(winner.match(lottoNumbers));
+        }
+
+        return report;
+    }
+
+    public int getLottoSize() {
+        return lotto.size();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for (LottoNumbers lottoNumbers : lotto) {
+            builder.append(lottoNumbers.toString()).append("\n");
+        }
+        return builder.toString();
     }
 }
