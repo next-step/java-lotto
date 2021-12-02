@@ -19,15 +19,15 @@ public class GameResultTest {
     static Stream<Arguments> parseRanksArguments() {
         return Stream.of(
                 Arguments.of(List.of(), Collections.emptyMap()),
-                Arguments.of(List.of(Rank.valueOf(6, false)), Map.of(Rank.FIRST, 1)),
-                Arguments.of(List.of(Rank.valueOf(3, false)), Map.of(Rank.FIFTH, 1)),
-                Arguments.of(List.of(Rank.valueOf(3, false), Rank.valueOf(3, false)), Map.of(Rank.FIFTH, 2))
+                Arguments.of(List.of(Rank.valueOf(6, false)), Map.of(Rank.FIRST, 1L)),
+                Arguments.of(List.of(Rank.valueOf(3, false)), Map.of(Rank.FIFTH, 1L)),
+                Arguments.of(List.of(Rank.valueOf(3, false), Rank.valueOf(3, false)), Map.of(Rank.FIFTH, 2L))
         );
     }
 
     @ParameterizedTest(name = "create: {arguments}")
     @MethodSource("parseRanksArguments")
-    public void create(List<Rank> input, Map<Rank, Integer> expected) {
+    public void create(List<Rank> input, Map<Rank, Long> expected) {
         assertThat(GameResult.of(input)).isEqualTo(GameResult.of(input));
         assertThat(GameResult.of(input).collect()).containsAllEntriesOf(expected);
     }
@@ -42,42 +42,21 @@ public class GameResultTest {
 
     @ParameterizedTest(name = "collect: {arguments}")
     @MethodSource("parseRanksArguments")
-    public void collect(List<Rank> input, Map<Rank, Integer> expected) {
+    public void collect(List<Rank> input, Map<Rank, Long> expected) {
         assertThat(GameResult.of(input).collect()).containsAllEntriesOf(expected);
     }
 
     @Test
     public void sortedCollect() {
         List<Rank> input = List.of(Rank.THIRD, Rank.FIRST, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.SECOND, Rank.THIRD);
-        List<Integer> expected = List.of(1, 2, 3, 1);
+        List<Long> expected = List.of(1L, 2L, 3L, 1L);
         assertThat(GameResult.of(input).collect().values()).containsExactlyElementsOf(expected);
     }
 
     @ParameterizedTest(name = "size: {arguments}")
     @MethodSource("parseRanksArguments")
-    public void size(List<Rank> input, Map<Rank, Integer> expected) {
-        assertThat(GameResult.of(input).size()).isEqualTo(expected.values().stream().reduce(Integer::sum).orElse(0));
-    }
-
-    static Stream<Arguments> parseEachPlaces() {
-        return Stream.of(
-                Arguments.of(List.of(Rank.FIRST), 1, 0, 0, 0),
-                Arguments.of(List.of(Rank.SECOND), 0, 1, 0, 0),
-                Arguments.of(List.of(Rank.THIRD), 0, 0, 1, 0),
-                Arguments.of(List.of(Rank.FOURTH), 0, 0, 0, 1),
-                Arguments.of(List.of(Rank.NO_RANK), 0, 0, 0, 0),
-                Arguments.of(List.of(), 0, 0, 0, 0)
-        );
-    }
-
-    @ParameterizedTest(name = "amount of each places: {arguments}")
-    @MethodSource("parseEachPlaces")
-    public void amountOfEachPlaces(List<Rank> ranks, int first, int second, int third, int fourth) {
-        assertThat(GameResult.of(ranks).amountOfPlace(Rank.FIRST)).isEqualTo(first);
-        assertThat(GameResult.of(ranks).amountOfPlace(Rank.SECOND)).isEqualTo(second);
-        assertThat(GameResult.of(ranks).amountOfPlace(Rank.THIRD)).isEqualTo(third);
-        assertThat(GameResult.of(ranks).amountOfPlace(Rank.FOURTH)).isEqualTo(fourth);
-
+    public void size(List<Rank> input, Map<Rank, Long> expected) {
+        assertThat(GameResult.of(input).size()).isEqualTo(expected.values().stream().reduce(Long::sum).orElse(0L));
     }
 
     static Stream<Arguments> parseTotalPrize() {

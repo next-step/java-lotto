@@ -17,7 +17,7 @@ public class OutputView {
         }
     }
 
-    public static void printGameResult(Map<Rank, Integer> ranks, long totalPrize, float earningRate) {
+    public static void printGameResult(Map<Rank, Long> ranks, long totalPrize, float earningRate) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         System.out.println("3개 일치 (" + Prize.FOURTH_PRIZE + "원)-" + ranks.get(Rank.FOURTH));

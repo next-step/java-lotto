@@ -5,11 +5,13 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class GameResult {
-    private final Map<Rank, Integer> ranks;
+    private final Map<Rank, Long> ranks;
 
-    private GameResult(Map<Rank, Integer> ranks) {
+    private GameResult(Map<Rank, Long> ranks) {
         this.ranks = Collections.unmodifiableSortedMap(new TreeMap<>(ranks));
     }
 
@@ -18,20 +20,14 @@ public class GameResult {
             throw new IllegalArgumentException("invalid input: ranks cannot be null");
         }
 
-        final Map<Rank, Integer> rankMap = new TreeMap<>();
-        for (Rank rank : ranks) {
-            rankMap.compute(rank, (r, count) -> count == null ? 1 : count + 1);
-        }
+        final Map<Rank, Long> rankMap = ranks.stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         return new GameResult(rankMap);
     }
 
-    public Map<Rank, Integer> collect() {
+    public Map<Rank, Long> collect() {
         return ranks;
-    }
-
-    public int amountOfPlace(final Rank rank) {
-        return ranks.getOrDefault(rank, 0);
     }
 
     public Prize totalPrize() {
@@ -43,11 +39,11 @@ public class GameResult {
                 .orElse(Prize.NO_PRIZE);
     }
 
-    public int size() {
+    public long size() {
         return ranks.values()
                 .stream()
-                .reduce(Integer::sum)
-                .orElse(0);
+                .reduce(Long::sum)
+                .orElse(0L);
     }
 
     @Override
