@@ -10,28 +10,20 @@ import java.util.List;
 
 public class Lottery {
 
-    private InputView inputView;
-    private ResultView resultView;
-
-    public Lottery() {
-        inputView = new InputView();
-        resultView = new ResultView();
-    }
-
     public void draw() {
-        String price = inputView.questionPrice();
+        String price = InputView.questionPrice();
 
         InputInfo inputInfo = new InputInfo(price);
         int ticketCount = inputInfo.getTicketCount();
         Lottos lottos = new Lottos(ticketCount);
 
-        resultView.printLottos(lottos);
+        ResultView.printLottos(lottos);
 
-        winner(inputInfo);
+        winner(inputInfo, lottos);
     }
 
-    private void winner(InputInfo inputInfo) {
-        String answerText = inputView.questionAnswer();
+    private void winner(InputInfo inputInfo, Lottos lottos) {
+        String answerText = InputView.questionAnswer();
         List<Integer> answerList = inputInfo.getAnswer(answerText);
         Lotto answer = new Lotto(answerList);
     }
