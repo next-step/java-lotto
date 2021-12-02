@@ -35,5 +35,8 @@ public class Numbers {
                 .collect(Collectors.toList());
     }
 
+    public boolean contains(int number) {
+        return this.numbers.contains(number);
+    }
 
 }
