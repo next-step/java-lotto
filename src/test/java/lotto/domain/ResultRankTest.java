@@ -8,10 +8,11 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoGameResultTest {
+class ResultRankTest {
 
     private Lotties lotties;
     private Lotto winLotto;
+    private LottoNumber bonusNumber;
 
     @BeforeEach
     void setUp() {
@@ -22,21 +23,22 @@ class LottoGameResultTest {
         Lotto lotto5 = Lotto.from("1, 2, 3, 41, 22, 40");
         this.lotties = new Lotties(Arrays.asList(lotto, lotto2, lotto3, lotto4, lotto5));
         this.winLotto = Lotto.from("4, 8, 18, 22, 34, 40");
+        this.bonusNumber = new LottoNumber("31");
     }
 
     @DisplayName("구매한 로또의 수익률 계산")
     @Test
     void lottoGameRateCheck() {
-        LottoGameResult lottoGameResult = new LottoGameResult(lotties, winLotto);
+        ResultRank resultRank = lotties.gameResultRank(winLotto, bonusNumber);
 
-        assertThat(lottoGameResult.getRate()).isEqualTo(1.0);
+        assertThat(resultRank.getRate(lotties.getLottiesPrice())).isEqualTo(1.0);
     }
 
     @DisplayName("구매한 로또의 랭크 및 당첨 갯수를 체크")
     @Test
     void lottoGameRankCheck() {
-        LottoGameResult lottoGameResult = new LottoGameResult(lotties, winLotto);
+        ResultRank resultRank = lotties.gameResultRank(winLotto, bonusNumber);
 
-        assertThat(lottoGameResult.getRankCount(Rank.FIFTH)).isEqualTo(1);
+        assertThat(resultRank.getPrizeCount(Rank.FIFTH)).isEqualTo(1);
     }
 }

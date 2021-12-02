@@ -25,26 +25,39 @@ class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("로또번호 출력 테스트")
-    @ParameterizedTest
-    @CsvSource(value = {"2, 9, 13, 33 ,39, 45:2, 9, 13, 33 ,39, 45"}, delimiter = ':')
-    void lottoNumberShow(String buyLottoString, String winLottoString) {
-        Lotto buyLotto = Lotto.from(buyLottoString);
-        Lotto winLotto = Lotto.from(winLottoString);
+    @DisplayName("로또 동등성 테스트")
+    @Test
+    void equalLotto() {
+        String lottoText = "2, 9, 13, 33 ,39, 45";
+        Lotto buyLotto = Lotto.from(lottoText);
+        Lotto winLotto = Lotto.from(lottoText);
 
-        assertThat(buyLotto.getNumbers()).isEqualTo(winLotto.getNumbers());
+        assertThat(buyLotto).isEqualTo(winLotto);
     }
 
     @DisplayName("로또의 당첨 등수 체크 테스트")
     @ParameterizedTest
-    @CsvSource(value = {"2, 9, 13, 33 ,39, 45:34, 40, 13, 2 ,9, 44"}, delimiter = ':')
-    void lottoRankCheck(String buyLottoString, String winLottoString) {
+    @CsvSource(value = {"2, 9, 13, 33 ,39, 45:34, 40, 13, 2 ,9, 44:1"}, delimiter = ':')
+    void lottoRankCheck(String buyLottoString, String winLottoString, String bonusString) {
         Lotto buyLotto = Lotto.from(buyLottoString);
         Lotto winLotto = Lotto.from(winLottoString);
+        LottoNumber lottoNumber = new LottoNumber(bonusString);
 
-        Rank rank = buyLotto.getRank(winLotto);
+        Rank rank = buyLotto.getRank(winLotto, lottoNumber);
 
         assertThat(rank.getMatchCount()).isEqualTo(Rank.FIFTH.getMatchCount());
         assertThat(rank.getPrizeMoney()).isEqualTo(Rank.FIFTH.getPrizeMoney());
+    }
+
+    @DisplayName("2등 당첨 테스트")
+    @Test
+    void secondRankLotto() {
+        Lotto buyLotto = Lotto.from("2, 9, 13, 33 ,39, 45");
+        Lotto winLotto = Lotto.from("2, 9, 13, 33 ,39, 44");
+        LottoNumber lottoNumber = new LottoNumber("45");
+
+        Rank rank = buyLotto.getRank(winLotto, lottoNumber);
+
+        assertThat(rank).isEqualTo(Rank.SECOND);
     }
 }
