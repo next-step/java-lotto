@@ -56,7 +56,7 @@ public class LottoTest {
                 new LottoNumber(4),new LottoNumber(11),new LottoNumber(10)
         );
 
-        Lotto winning = Lotto.winningFrom(winningNumber);
+        Lotto winning = Lotto.manualFrom(winningNumber);
         Lotto auto = Lotto.from(lottoNumbers);
 
         assertThat(auto.isCountOfMatch(winning, 4)).isTrue();

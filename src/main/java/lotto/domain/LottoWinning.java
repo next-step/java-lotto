@@ -21,7 +21,7 @@ public class LottoWinning {
 
     private LottoWinning(List<Integer> winningNumbers, int bonusBall) {
 
-        this.winningNumbers = Lotto.winningFrom(winningNumbers);
+        this.winningNumbers = Lotto.manualFrom(winningNumbers);
         this.bonusBall = new LottoNumber(bonusBall);
 
     }

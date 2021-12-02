@@ -30,11 +30,11 @@ public class Lotto {
         return new Lotto(new TreeSet<>(numbers));
     }
 
-    public static Lotto winningFrom(List<Integer> winningNumber) {
+    public static Lotto manualFrom(List<Integer> manualNumbers) {
 
         Set<LottoNumber> numbers = new TreeSet<>();
 
-        for (Integer lottoNumber : winningNumber) {
+        for (Integer lottoNumber : manualNumbers) {
             numbers.add(new LottoNumber(lottoNumber));
         }
 
