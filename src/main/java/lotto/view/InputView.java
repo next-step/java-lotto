@@ -61,8 +61,8 @@ public class InputView {
                 new LottoNumber(bonusNumber));
     }
 
-    private LottoNumbers convertStringToLottoNumbers(String[] str) {
-        return new LottoNumbers(Arrays.stream(str)
+    private LottoNumbers convertStringToLottoNumbers(String[] numbers) {
+        return new LottoNumbers(Arrays.stream(numbers)
                 .map(Integer::valueOf)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));
