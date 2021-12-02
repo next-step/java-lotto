@@ -7,6 +7,10 @@ public class Lottos {
 
     private List<Lotto> lottos;
 
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
     public Lottos(int ticketsCount) {
         lottos = new ArrayList<>();
         for (int i = 0; i < ticketsCount; i++) {
