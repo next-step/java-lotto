@@ -26,6 +26,16 @@ public class LottoService {
     this.creator = creator;
   }
 
+  public LottoTickets buyTheLottoTickets(Budget budget, LottoTickets ticketsByManual) {
+    for(int i = 0; i < ticketsByManual.size(); i++) {
+      budget.minusBudget(LOTTO_FEE);
+    }
+
+    LottoTickets ticketsByAuto = buyTheLottoTickets(budget);
+    ticketsByAuto.addAll(ticketsByManual);
+    return ticketsByAuto;
+  }
+
   public LottoTickets buyTheLottoTickets(Budget budget) {
     validBudget(budget);
 

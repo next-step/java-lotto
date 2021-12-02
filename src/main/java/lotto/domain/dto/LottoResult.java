@@ -4,6 +4,8 @@ import lotto.domain.entity.Prize;
 import lotto.domain.entity.PrizeEntry;
 import lotto.domain.entity.YieldRate;
 
+import java.util.Map;
+
 import static java.util.stream.Collectors.joining;
 
 public class LottoResult {
@@ -46,18 +48,19 @@ public class LottoResult {
   private String prizeToString() {
    return prizeEntry.stream()
                     .filter(entry -> entry.getKey() != Prize.MISS)
-                    .map(entry -> {
-                      String result = RESULT_MATCHED_MESSAGE;
-                      if (entry.getKey() == Prize.SECOND){
-                        result = RESULT_MATCHED_MESSAGE.concat(RESULT_BONUS_STATS_MESSAGE);
-                      }
-
-                      return String.format(result.concat(RESULT_STATS_MESSAGE),
+                    .map(entry -> String.format(setResultMessage(entry),
                                            entry.getKey().getMatchedCount(),
                                            entry.getKey().getReward(),
-                                           entry.getValue());
-                    })
+                                           entry.getValue()))
                     .collect(joining(System.lineSeparator()));
+  }
+
+  private String setResultMessage(Map.Entry<Prize, Integer> entry) {
+    String result = RESULT_MATCHED_MESSAGE;
+    if (entry.getKey() == Prize.SECOND){
+      result = RESULT_MATCHED_MESSAGE.concat(RESULT_BONUS_STATS_MESSAGE);
+    }
+    return result.concat(RESULT_STATS_MESSAGE);
   }
 
   private String getYieldResultMessage() {

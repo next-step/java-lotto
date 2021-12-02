@@ -13,7 +13,7 @@ import static java.util.stream.Collectors.toList;
 public class AutoMaticLottoTicketCreator implements LottoTicketCreator {
 
   private static final int MIN_LOTTO_NUMBERS = 1;
-  private static final int MAX_LOTTO_NUMBERS = 13;
+  private static final int MAX_LOTTO_NUMBERS = 45;
   private static final int ONE = 1;
   private static final int FIRST_INDEX = 0;
   private static final int LAST_INDEX = 6;

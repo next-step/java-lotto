@@ -34,14 +34,16 @@ public enum Prize {
     return Arrays.stream(Prize.values())
                  .filter(prize -> prize != MISS && prize != SECOND)
                  .filter(prize -> prize.getMatchedCount() == countOfMatch)
-                 .map(prize -> {
-                   if (prize == THIRD && matchBonus) {
-                     return SECOND;
-                   }
-                   return prize;
-                 })
+                 .map(prize -> bonusPrizeConverter(matchBonus, prize))
                  .findAny()
                  .orElse(MISS);
+  }
+
+  private static Prize bonusPrizeConverter(boolean matchBonus, Prize prize) {
+    if (prize == THIRD && matchBonus) {
+      return SECOND;
+    }
+    return prize;
   }
 
   public static void inputValuesToMap(Map<Prize, Integer> map) {
