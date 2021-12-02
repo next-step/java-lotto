@@ -12,12 +12,12 @@
 ## STEP4
 * [ ] 수동 번호를 입력 받는다.
 * [ ] 구입 금액에서 수동 구매 금액을 뺀 나머지 금액만 자동 구입한다.
-* [ ] 이전 단계의 피드백을 반영한다.
+* [x] 이전 단계의 피드백을 반영한다.
   * [x] WinningNumber가 Lotto를 받아 결과 확인(객체와 파라미터를 반대로)
   * [x] stream을 사용해 GameResult 취합
     * [x] counting() 결과에따라 GameResult 내부 컬렉션의 밸류 타입 변경(Integer -> Long)
     * [x] totalPrize 로직의 스트림 내부 매핑을 메소드로 분리
-  * [ ] Lottos의 출력 부분 정리
+  * [x] Lottos의 출력 부분 정리
 
 ## 기능 요구사항
 * 로또 발급
