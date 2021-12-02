@@ -8,6 +8,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoController {
+    public static void main(String[] args) {
+        InputView inputView = new InputView();
+        Money money = inputView.inputMoney();
+    }
 
     public static List<Lotto> buyLotto(Money money) {
         return IntStream.range(0, money.getBuyableLottoCount())
