@@ -5,7 +5,6 @@ import java.util.Objects;
 import static java.lang.Integer.parseInt;
 
 public class Number {
-    private static final String REGEX = "[+-]?\\d*(\\.\\d+)?";
     private final int value;
 
     public Number(String input) {
@@ -13,7 +12,7 @@ public class Number {
     }
 
     private int parse(String input) {
-        if (!input.matches(REGEX)) {
+        if (!StringUtils.isNumber(input)) {
             throw new RuntimeException("숫자가 아닌 값은 입력할 수 없습니다.");
         }
 
@@ -32,8 +31,12 @@ public class Number {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Number number = (Number) o;
         return value == number.value;
     }
@@ -41,5 +44,12 @@ public class Number {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return "Number{" +
+                "value=" + value +
+                '}';
     }
 }

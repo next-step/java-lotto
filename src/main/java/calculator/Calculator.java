@@ -1,33 +1,11 @@
 package calculator;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Calculator {
-    public static final String DEFAULT_DELIMITER = ",|:";
-    private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
-
-    private static final Pattern pattern = Pattern.compile(CUSTOM_DELIMITER);
 
     public static int calculate(String input) {
-        String[] splitInput = split(input);
+        Numbers numbers = new Numbers(input);
+        numbers.sum();
 
-        return sum(splitInput);
-    }
-
-    private static String[] split(String input) {
-        Matcher matcher = pattern.matcher(input);
-
-        if (matcher.find()) {
-            String customDelimiter = matcher.group(1);
-            return matcher.group(2).split(customDelimiter);
-        }
-
-        return input.split(DEFAULT_DELIMITER);
-    }
-
-    private static int sum(String[] splitInput) {
-        Numbers numbers = new Numbers(splitInput);
-        return numbers.sum();
+        return numbers.result();
     }
 }
