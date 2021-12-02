@@ -1,9 +1,11 @@
 package lottery.domain;
 
-public class LotteryNumber {
+import java.util.Objects;
 
-    private static final int MINIMUM_LOTTERY_NUMBER = 1;
-    private static final int MAXIMUM_LOTTERY_NUMBER = 45;
+public class LotteryNumber implements Comparable<LotteryNumber> {
+
+    public static final int MINIMUM_LOTTERY_NUMBER = 1;
+    public static final int MAXIMUM_LOTTERY_NUMBER = 45;
     private static final String EXCEPTION_MESSAGE_INVALID_NUMBER_FORMAT = "로또 번호는 %d~%d 만 허용됩니다. input: %d";
 
     final int value;
@@ -19,5 +21,28 @@ public class LotteryNumber {
         }
 
         return new LotteryNumber(input);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        LotteryNumber that = (LotteryNumber) o;
+        return value == that.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public int compareTo(LotteryNumber lotteryNumber) {
+        return this.value - lotteryNumber.value;
     }
 }
