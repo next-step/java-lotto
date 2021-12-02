@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 public class LottoController {
 
-    public List<Lotto> buyLotto(Money money) {
+    public static List<Lotto> buyLotto(Money money) {
         return IntStream.range(0, money.getBuyableLottoCount())
                 .mapToObj(i -> new Lotto())
                 .collect(Collectors.toList());

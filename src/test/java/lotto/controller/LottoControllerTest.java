@@ -15,11 +15,10 @@ public class LottoControllerTest {
     @ValueSource(ints = {13000, 13001, 13999})
     void testBuyLotto(int moneyValue) {
         // Given
-        LottoController lottoController = new LottoController();
         Money money = new Money(moneyValue);
 
         // When
-        List<Lotto> lottoList = lottoController.buyLotto(money);
+        List<Lotto> lottoList = LottoController.buyLotto(money);
 
         // Then
         assertThat(lottoList).isNotNull();
