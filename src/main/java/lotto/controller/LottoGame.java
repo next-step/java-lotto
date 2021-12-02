@@ -24,8 +24,8 @@ public class LottoGame {
         Store store = new Store();
         LottoTicket lottoTicket = store.purchaseTicket(lottoPrice, manualNumbers);
 
-        int autoLottoSize = lottoTicket.getLotto().size();
         int manualLottoSize = manualNumbers.size();
+        int autoLottoSize = lottoTicket.getLotto().size() - manualLottoSize;
         ResultView.printOrderCount(manualLottoSize, autoLottoSize);
         ResultView.printOrderLottoNumber(lottoTicket);
 
