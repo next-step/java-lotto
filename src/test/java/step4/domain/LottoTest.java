@@ -1,6 +1,7 @@
 package step4.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -42,6 +43,20 @@ class LottoTest {
         Lotto winningLotto = Lotto.of(compareStr);
 
         assertThat(myLotto.countOfMatch(winningLotto)).isEqualTo(expect);
+    }
+
+    @DisplayName("containLottoNumber는 Lotto에 LottoNumber가 포함되어 있는지 확인한다.")
+    @Test
+    void containTest() {
+        Lotto lotto = Lotto.of("1,2,3,4,5,6");
+
+        assertThat(lotto.containLottoNumber(LottoNumber.of(1))).isTrue();
+        assertThat(lotto.containLottoNumber(LottoNumber.of(2))).isTrue();
+        assertThat(lotto.containLottoNumber(LottoNumber.of(3))).isTrue();
+        assertThat(lotto.containLottoNumber(LottoNumber.of(4))).isTrue();
+        assertThat(lotto.containLottoNumber(LottoNumber.of(5))).isTrue();
+        assertThat(lotto.containLottoNumber(LottoNumber.of(6))).isTrue();
+        assertThat(lotto.containLottoNumber(LottoNumber.of(7))).isFalse();
     }
 
 }
