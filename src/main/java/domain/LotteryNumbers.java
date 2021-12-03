@@ -10,25 +10,23 @@ public class LotteryNumbers {
     private static final int LOTTERY_START_NUMBER = 1;
     private static final int LOTTERY_END_NUMBER = 46;
 
-    private final List<LotteryNumber> lotteryNumbers;
+    private static final List<LotteryNumber> lotteryNumbers = balls();
 
-    public LotteryNumbers() {
-        this.lotteryNumbers = balls();
+    private LotteryNumbers() {
     }
 
-    private List<LotteryNumber> balls() {
+    private static List<LotteryNumber> balls() {
         return IntStream.range(LOTTERY_START_NUMBER, LOTTERY_END_NUMBER)
                 .mapToObj(LotteryNumber::new)
                 .collect(Collectors.toList());
     }
 
-    public List<LotteryNumber> bringNumber() {
+    public static Set<Integer> auto() {
         Collections.shuffle(lotteryNumbers);
 
-        return Collections.unmodifiableList(lotteryNumbers.subList(LOTTERY_START_SIZE, LOTTERY_END_SIZE)
-                .stream()
-                .sorted(Comparator.comparing(LotteryNumber::value))
-                .collect(Collectors.toList()));
+        return IntStream.range(LOTTERY_START_SIZE, LOTTERY_END_SIZE)
+                .mapToObj(i -> lotteryNumbers.get(i).value())
+                .collect(Collectors.toSet());
     }
 
 }
