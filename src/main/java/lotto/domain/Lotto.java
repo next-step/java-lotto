@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -40,13 +39,13 @@ public class Lotto {
 
     private void validateSize(List<LottoNumber> numbers) {
         if (numbers == null || numbers.size() != COUNT) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("6개의 로또 숫자를 , 로 구분하여 입력해주세요");
         }
 
         Set<LottoNumber> nonDuplicatedNumber = new HashSet<>(numbers);
 
         if (nonDuplicatedNumber.size() != COUNT) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("입력한 로또 숫자에 중복된 숫자가 있습니다.");
         }
     }
 }
