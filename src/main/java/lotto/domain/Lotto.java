@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Lotto {
 
-    private Numbers numbers;
+    private final Numbers numbers;
 
     public Lotto() {
         numbers = new Numbers();
@@ -19,7 +19,7 @@ public class Lotto {
     public List<Integer> getNumbers() {
         List<Integer> numbers = this.numbers.getNumbers();
         Collections.sort(numbers);
-        return numbers;
+        return Collections.unmodifiableList(numbers);
     }
 
     public int matchCount(Lotto ticket) {
