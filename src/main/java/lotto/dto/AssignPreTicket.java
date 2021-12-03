@@ -8,12 +8,12 @@ import lotto.domain.LottoMachine;
 import lotto.domain.LottoTickets;
 import lotto.domain.Wallet;
 
-public class AssignBuyPreTicket {
+public class AssignPreTicket {
 
     private final Wallet wallet;
     private final int assignCount;
 
-    public AssignBuyPreTicket(Wallet wallet, int assignCount) {
+    public AssignPreTicket(Wallet wallet, int assignCount) {
         this.wallet = wallet;
         this.assignCount = getNumberIfPositive(assignCount);
     }

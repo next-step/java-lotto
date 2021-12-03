@@ -12,7 +12,7 @@ import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.ResultLotto;
 import lotto.domain.Wallet;
-import lotto.dto.AssignBuyPreTicket;
+import lotto.dto.AssignPreTicket;
 
 public class InputView {
 
@@ -37,18 +37,18 @@ public class InputView {
         return new Wallet(sc.nextInt());
     }
 
-    public AssignBuyPreTicket inputAssignNumberCount(Wallet wallet) {
+    public AssignPreTicket inputAssignNumberCount(Wallet wallet) {
         printSpace();
         print(INPUT_ASSIGN_NUMBER_COUNT_MESSAGE);
 
         int assignTicketCount = sc.nextInt();
         int assignLottoTicketPrice = assignTicketCount * LottoTicket.PRICE;
-        return new AssignBuyPreTicket(wallet.spend(assignLottoTicketPrice),
+        return new AssignPreTicket(wallet.spend(assignLottoTicketPrice),
             assignTicketCount);
     }
 
 
-    public LottoTickets inputAssignNumber(AssignBuyPreTicket preTicket) {
+    public LottoTickets inputAssignNumber(AssignPreTicket preTicket) {
         printSpace();
         print(INPUT_ASSIGN_NUMBERS_MESSAGE);
 
