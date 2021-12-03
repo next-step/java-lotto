@@ -51,7 +51,7 @@ public class LottoTicket {
         }
     }
 
-        private void createAutoTicket(int orderCount) {
+    private void createAutoTicket(int orderCount) {
         for(int i = 0; i < orderCount; i ++) {
             allLottoNumbers.add(new Lotto());
         }
