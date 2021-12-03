@@ -16,7 +16,6 @@ public class LottoMain {
 
         int numberOfTicket = numberOfTicket(inputView, outputView);
         Lotto lotto = lotto(numberOfTicket, outputView);
-
         LottoTicket lottoWinningTicket = lottoWinningTicket(inputView, outputView);
     }
 

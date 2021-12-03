@@ -46,6 +46,13 @@ public class LottoTicket {
         return new LottoTicket(copiedLottoNumbers);
     }
 
+    public long sameCount(LottoTicket lottoTicket) {
+        List<LottoNumber> targetLottoNumbers = lottoTicket.lottoNumbers();
+        return this.lottoNumbers.stream()
+                .filter(targetLottoNumbers::contains)
+                .count();
+    }
+
     public List<LottoNumber> lottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
