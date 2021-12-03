@@ -1,6 +1,9 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum Rank {
+    NONE(0, 0),
     TRIO(3, 5_000),
     QUARTET(4, 50_000),
     QUINTET(5, 1_500_000),
@@ -15,12 +18,10 @@ public enum Rank {
     }
 
     public static Rank getRank(int count) {
-        for (Rank rank : Rank.values()) {
-            if (rank.getCount() == count) {
-                return rank;
-            }
-        }
-        return null;
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.getCount() == count)
+                .findAny()
+                .orElse(Rank.NONE);
     }
 
     public int getCount() {

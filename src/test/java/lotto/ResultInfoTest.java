@@ -29,6 +29,7 @@ public class ResultInfoTest {
         ResultInfo resultInfo = new ResultInfo(lottos, new Lotto(inputInfo.getAnswer("1,2,3,7,8,9")));
         Map<Integer, Integer> sampleResult = new HashMap<>();
 
+        sampleResult.put(0,0);
         sampleResult.put(3,1);
         sampleResult.put(4,0);
         sampleResult.put(5,0);

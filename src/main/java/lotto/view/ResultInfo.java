@@ -35,10 +35,10 @@ public class ResultInfo {
     }
 
     private double getRevenue(double revenue, int count) {
-        if (count > 2) {
+        if (count >= Rank.TRIO.getCount()) {
             this.resultInfo.put(count, this.resultInfo.get(count) + 1);
             Rank rank = Rank.getRank(count);
-            revenue += rank != null ? rank.getAmount() : 0;
+            revenue += rank.getAmount();
             return revenue;
         }
         return revenue;
