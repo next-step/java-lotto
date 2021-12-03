@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     public static final int LOTTO_NUMBER_MIN = 1;
     public static final int LOTTO_NUMBER_MAX = 45;
@@ -28,6 +28,11 @@ public class LottoNumber {
             throw new IllegalArgumentException("생성할 수 없는 로또 번호입니다");
         }
         return CACHED_LOTTO_NUMBER.get(number);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return Integer.signum(this.number - o.number);
     }
 
     @Override

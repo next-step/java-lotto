@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoPrice;
 import lotto.view.TerminalInputView;
 
@@ -11,6 +12,7 @@ public class LottoMain {
 
         LottoPrice lottoPrice = new LottoPrice(purchaseAmount);
         int numberOfTicket = lottoPrice.numberOfTicket();
-        System.out.println(numberOfTicket);
+
+        Lotto lotto = new Lotto(numberOfTicket);
     }
 }
