@@ -21,8 +21,7 @@ public class LottoGame {
         String manualInput = InsertView.printManualInput();
         List<String> manualNumbers = InsertView.printInputLottoNumbers(Integer.parseInt(manualInput));
 
-        Store store = new Store();
-        LottoTicket lottoTicket = store.purchaseTicket(lottoPrice, manualNumbers);
+        LottoTicket lottoTicket = Store.purchaseTicket(lottoPrice, manualNumbers);
 
         int manualLottoSize = manualNumbers.size();
         int autoLottoSize = lottoTicket.getLotto().size() - manualLottoSize;
