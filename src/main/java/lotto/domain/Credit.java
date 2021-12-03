@@ -9,7 +9,7 @@ public class Credit {
     private static final int price = 1_000;
     private final PositiveNumber number;
 
-    private Credit(PositiveNumber positiveNumber) {
+    public Credit(PositiveNumber positiveNumber) {
         this.number = positiveNumber;
     }
 
@@ -23,5 +23,9 @@ public class Credit {
 
     public int getPurchaseAmount() {
         return number.getNumber() * price;
+    }
+
+    public Credit minus(Credit manualLotto) {
+        return new Credit(new PositiveNumber(getLottoCount() - manualLotto.getLottoCount()));
     }
 }
