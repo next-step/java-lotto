@@ -43,4 +43,16 @@ public class Budget {
     public int availableAmount() {
         return budget / GAME_PRICE;
     }
+
+    public Budget purchased(int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("amount cannot be negative, but " + amount);
+        }
+
+        if (budget < GAME_PRICE * amount) {
+            throw new IllegalArgumentException("not enough money for purchasing " + amount);
+        }
+
+        return new Budget(budget - amount * GAME_PRICE);
+    }
 }

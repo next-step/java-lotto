@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import static edu.nextstep.camp.lotto.domain.BudgetTest.budget;
 import static edu.nextstep.camp.lotto.domain.LottoTest.lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -19,7 +20,7 @@ public class StoreTest {
     @ParameterizedTest(name = "purchase(auto): {arguments}")
     @CsvSource(value = {"1000,1", "2000,2"}, delimiter = ',')
     public void purchaseAuto(int budget, int expected) {
-        assertThat(Store.purchase(budget, AutoLottoGenerator.getInstance()).amount())
+        assertThat(Store.purchase(budget(budget), AutoLottoGenerator.getInstance()).amount())
                 .isEqualTo(expected);
     }
 
@@ -27,8 +28,8 @@ public class StoreTest {
     public void purchaseManually() {
         List<Lotto> numbers = List.of(lotto(1, 2, 3, 4, 5, 6));
         int budget = 2000;
-        assertThat(Store.purchase(budget, numbers).amount()).isEqualTo(numbers.size());
-        assertThat(Store.purchase(budget, numbers).collect()).hasSameElementsAs(numbers);
+        assertThat(Store.purchase(budget(budget), numbers).amount()).isEqualTo(numbers.size());
+        assertThat(Store.purchase(budget(budget), numbers).collect()).hasSameElementsAs(numbers);
     }
 
     static Stream<Arguments> parsePurchaseManuallyFailed() {
@@ -42,7 +43,7 @@ public class StoreTest {
     @MethodSource("parsePurchaseManuallyFailed")
     public void purchaseManuallyFailedByNotEnoughMoney(int budget, Collection<Lotto> lottos, String expectedMessage) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> Store.purchase(budget, lottos))
+                .isThrownBy(() -> Store.purchase(budget(budget), lottos))
                 .withMessageContaining(expectedMessage);
     }
 }
