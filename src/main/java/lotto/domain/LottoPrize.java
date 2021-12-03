@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-public enum LottoRank {
+public enum LottoPrize {
     NOTHING(0, 0),
     THREE_SAME(5000, 3),
     FOUR_SAME(50000, 4),
@@ -13,15 +13,15 @@ public enum LottoRank {
     private final long prizeMoney;
     private final long sameCount;
 
-    LottoRank(int prizeMoney, int sameCount) {
+    LottoPrize(int prizeMoney, int sameCount) {
         this.prizeMoney = prizeMoney;
         this.sameCount = sameCount;
     }
 
-    public static LottoRank of(LottoTicket myTicket, LottoTicket winnerTicket) {
+    public static LottoPrize of(LottoTicket myTicket, LottoTicket winnerTicket) {
         long count = myTicket.sameCount(winnerTicket);
-        return Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> lottoRank.isSameCount(count))
+        return Arrays.stream(LottoPrize.values())
+                .filter(lottoPrize -> lottoPrize.isSameCount(count))
                 .findFirst()
                 .orElse(NOTHING);
     }

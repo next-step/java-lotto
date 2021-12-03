@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
+import lotto.domain.MyLottoTickets;
 import lotto.domain.LottoPrice;
 import lotto.domain.LottoTicket;
 import lotto.view.TerminalInputView;
@@ -14,22 +14,22 @@ public class LottoMain {
         TerminalInputView inputView = new TerminalInputView();
         TerminalOutputView outputView = new TerminalOutputView();
 
-        int numberOfTicket = numberOfTicket(inputView, outputView);
-        Lotto lotto = lotto(numberOfTicket, outputView);
+        LottoPrice lottoPrice = lottoPrice(inputView, outputView);
+        MyLottoTickets myLottoTickets = lotto(lottoPrice, outputView);
         LottoTicket lottoWinningTicket = lottoWinningTicket(inputView, outputView);
     }
 
-    private static int numberOfTicket(TerminalInputView inputView, TerminalOutputView outputView) {
+    private static LottoPrice lottoPrice(TerminalInputView inputView, TerminalOutputView outputView) {
         outputView.printPurchaseAmountGuide();
         int purchaseAmount = inputView.purchaseAmount();
-        LottoPrice lottoPrice = new LottoPrice(purchaseAmount);
-        return lottoPrice.numberOfTicket();
+        return new LottoPrice(purchaseAmount);
     }
 
-    private static Lotto lotto(int numberOfTicket, TerminalOutputView outputView) {
-        Lotto lotto = new Lotto(numberOfTicket);
-        outputView.printLottoTickets(lotto.myLottoTickets());
-        return lotto;
+    private static MyLottoTickets lotto(LottoPrice lottoPrice, TerminalOutputView outputView) {
+        MyLottoTickets myLottoTickets = new MyLottoTickets(lottoPrice);
+        myLottoTickets.buy();
+        outputView.printLottoTickets(myLottoTickets.lottoTickets());
+        return myLottoTickets;
     }
 
     private static LottoTicket lottoWinningTicket(TerminalInputView inputView, TerminalOutputView outputView) {

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.util.LottoUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -30,10 +31,7 @@ class LottoTicketTest {
     @ParameterizedTest(name = "{displayName} [{index}] {arguments}")
     @CsvSource(value = {"6,1/2/3/4/5/6", "0,7/8/9/10/11/12"})
     void sameCount(long count, String numbers) {
-        List<LottoNumber> integers = Arrays.stream(numbers.split("/"))
-                .map(Integer::parseInt)
-                .map(LottoNumber::of)
-                .collect(Collectors.toList());
+        List<LottoNumber> integers = LottoUtils.lottoNumbers(numbers);
         LottoTicket lottoTicket = LottoTicket.customLottoTicket(1, 2, 3, 4, 5, 6);
         LottoTicket targetLottoTicket = LottoTicket.customLottoTicket(integers);
 
