@@ -28,4 +28,12 @@ public interface IntegerValidator {
         return number;
     }
 
+    static boolean isNumberNegative(int number) {
+        return !isNumberPositive(number);
+    }
+
+    static boolean isNumberPositive(int number) {
+        return number >= 0;
+    }
+
 }
