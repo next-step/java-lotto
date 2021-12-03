@@ -2,6 +2,7 @@ package edu.nextstep.camp.lotto.domain;
 
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -12,14 +13,20 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class BudgetTest {
     @ParameterizedTest(name = "create: {arguments}")
-    @ValueSource(ints = {1000, 2000, 1000000})
+    @ValueSource(ints = {0, 1000, 2000, 1000000})
     public void create(int budget) {
         assertThat(Budget.of(budget)).isEqualTo(Budget.of(budget));
         assertThat(Budget.of(budget).budget()).isEqualTo(budget);
     }
 
+    @Test
+    public void noMoney() {
+        assertThat(Budget.noMoney().exhausted()).isTrue();
+        assertThat(Budget.noMoney() == Budget.of(0)).isTrue();
+    }
+
     @ParameterizedTest(name = "create failed by not enough money: {arguments}")
-    @ValueSource(ints = {-1000, 0, 999})
+    @ValueSource(ints = {-1000, -1})
     public void createFailedByNotEnoughMoney(int budget) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> Budget.of(budget))
@@ -61,6 +68,14 @@ public class BudgetTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> budget(budget).purchased(amount))
                 .withMessageContaining(expectedMessage);
+    }
+
+    @ParameterizedTest(name = "exhausted: {arguments}")
+    @ValueSource(ints = {1000, 2000, 1000000})
+    public void exhausted(int input) {
+        Budget budget = budget(input);
+        assertThat(budget.exhausted()).isFalse();
+        assertThat(budget.purchased(input / Budget.GAME_PRICE).exhausted()).isTrue();
     }
 
     public static Budget budget(int budget) {

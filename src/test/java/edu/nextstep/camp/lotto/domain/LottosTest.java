@@ -1,5 +1,6 @@
 package edu.nextstep.camp.lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -7,28 +8,41 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 
 import static edu.nextstep.camp.lotto.domain.LottoTest.lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottosTest {
-    @Test
-    public void create() {
-        final Lotto testLotto = lotto(1, 2, 3, 4, 5, 6);
-
-        assertThat(Lottos.of(List.of(testLotto)))
-                .isEqualTo(Lottos.of(List.of(lotto(1, 2, 3, 4, 5, 6))));
+    static Stream<Arguments> parseCreate() {
+        return Stream.of(
+                Arguments.of(List.of(lotto(1, 2, 3, 4, 5, 6)))
+        );
+    }
+    @ParameterizedTest(name = "create: {arguments}")
+    @EmptySource
+    @MethodSource("parseCreate")
+    public void create(List<Lotto> lottos) {
+        assertThat(Lottos.of(lottos))
+                .isEqualTo(Lottos.of(lottos));
     }
 
     @ParameterizedTest(name = "create failed: {arguments}")
-    @NullAndEmptySource
+    @NullSource
     public void createFailed(List<Lotto> lottos) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> Lottos.of(lottos))
                 .withMessageContaining("invalid input");
+    }
+
+    @Test
+    public void createEmpty() {
+        assertThat(Lottos.empty().collect()).isEmpty();
+        assertThat(Lottos.of(Collections.emptyList()).collect()).isEmpty();
+        assertThat(Lottos.empty() == Lottos.of(Collections.emptyList())).isTrue();
     }
 
     @Test

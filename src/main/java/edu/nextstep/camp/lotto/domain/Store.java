@@ -6,6 +6,10 @@ public class Store {
     private Store() {}
 
     public static Lottos purchase(Budget budget, LottoGenerator generator) {
+        if (budget.exhausted()) {
+            return Lottos.empty();
+        }
+
         return generator.generate(budget.availableAmount());
     }
 

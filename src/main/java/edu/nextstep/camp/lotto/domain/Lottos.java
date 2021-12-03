@@ -7,6 +7,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lottos {
+    private static final Lottos emptyLottos = new Lottos(Collections.emptyList());
+
     private final Collection<Lotto> lottos;
 
     private Lottos(Collection<Lotto> lottos) {
@@ -14,11 +16,19 @@ public class Lottos {
     }
 
     public static Lottos of(Collection<Lotto> lottos) {
-        if (lottos == null || lottos.isEmpty()) {
-            throw new IllegalArgumentException("invalid input: lottos must not be null or empty");
+        if (lottos == null) {
+            throw new IllegalArgumentException("invalid input: lottos must not be null");
+        }
+
+        if (lottos.isEmpty()) {
+            return emptyLottos;
         }
 
         return new Lottos(lottos);
+    }
+
+    public static Lottos empty() {
+        return emptyLottos;
     }
 
     @Override

@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class StoreTest {
     @ParameterizedTest(name = "purchase(auto): {arguments}")
-    @CsvSource(value = {"1000,1", "2000,2"}, delimiter = ',')
+    @CsvSource(value = {"1000,1", "2000,2", "0,0"}, delimiter = ',')
     public void purchaseAuto(int budget, int expected) {
         assertThat(Store.purchase(budget(budget), AutoLottoGenerator.getInstance()).amount())
                 .isEqualTo(expected);

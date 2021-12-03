@@ -5,6 +5,9 @@ import java.util.Objects;
 public class Budget {
     public static final int GAME_PRICE = 1000;
 
+    private static final int ZERO = 0;
+    private static final Budget NO_MONEY = new Budget(ZERO);
+
     private final int budget;
 
     private Budget(int budget) {
@@ -12,15 +15,23 @@ public class Budget {
     }
 
     public static Budget of(int budget) {
-        if (budget < GAME_PRICE) {
+        if (budget == ZERO) {
+            return NO_MONEY;
+        }
+
+        if (budget < ZERO) {
             throw new IllegalArgumentException("invalid input: budget must be at least 1000, but " + budget);
         }
 
-        if (budget % GAME_PRICE != 0) {
+        if (budget % GAME_PRICE != ZERO) {
             throw new IllegalArgumentException("invalid input: budget must be multiple of 1000, but " + budget);
         }
 
         return new Budget(budget);
+    }
+
+    public static Budget noMoney() {
+        return NO_MONEY;
     }
 
     public int budget() {
@@ -45,7 +56,7 @@ public class Budget {
     }
 
     public Budget purchased(int amount) {
-        if (amount < 0) {
+        if (amount < ZERO) {
             throw new IllegalArgumentException("amount cannot be negative, but " + amount);
         }
 
@@ -54,5 +65,9 @@ public class Budget {
         }
 
         return new Budget(budget - amount * GAME_PRICE);
+    }
+
+    public boolean exhausted() {
+        return budget == 0;
     }
 }
