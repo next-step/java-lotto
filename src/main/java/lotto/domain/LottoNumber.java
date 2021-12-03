@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Numbers {
+public class LottoNumber {
 
     private static final String ERR_MESSAGE_RANGE = "로또 숫자 범위를 확인해주세요 (입력범위 1 ~ 45)";
     private static final int END_NUMBER = 45;
@@ -22,7 +22,7 @@ public class Numbers {
         IntStream.range(START_NUMBER, END_NUMBER).forEach(numbers::add);
     }
 
-    public static List<Integer> getAutoNumbers() {
+    public static List<Integer> autoNumbers() {
         Collections.shuffle(numbers);
         return numbers.stream()
                 .limit(MARKED_RANGE)

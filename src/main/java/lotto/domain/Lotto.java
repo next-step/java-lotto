@@ -9,11 +9,11 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto() {
-        numbers = Numbers.getAutoNumbers();
+        numbers = LottoNumber.autoNumbers();
     }
 
     public Lotto(List<Integer> answer) {
-        Numbers.valid(answer);
+        LottoNumber.valid(answer);
         numbers = new ArrayList<>(answer);
     }
 
