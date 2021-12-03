@@ -15,15 +15,19 @@ public final class ResultView {
     private ResultView() {
     }
 
-    public static void printInput(Lottos lottos, Money purchasedAmount) {
+    public static void printInput(Lottos manualLottos, Lottos autoLottos) {
         stringBuilder.setLength(0);
-        printPurchasedCount(purchasedAmount);
-        printEachLotto(lottos);
+        printPurchasedCount(manualLottos.count(), autoLottos.count());
+        printEachLotto(manualLottos.join(autoLottos));
         System.out.println(stringBuilder);
     }
 
-    private static void printPurchasedCount(Money purchasedAmount) {
-        stringBuilder.append(purchasedAmount.getLottoCount())
+    private static void printPurchasedCount(int manualLottoCount, int autoLottoCount) {
+        stringBuilder.append("수동으로 ")
+                     .append(manualLottoCount)
+                     .append("장, ")
+                     .append("자동으로 ")
+                     .append(autoLottoCount)
                      .append("개를 구매했습니다.\n");
     }
 

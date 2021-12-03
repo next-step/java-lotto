@@ -22,61 +22,65 @@ public class LottoTest {
     }
 
     private static Stream<Arguments> matchParameter() {
-        List<Number> pickedNumbers = Arrays.asList(new Number(1),
-                                                   new Number(2),
-                                                   new Number(3),
-                                                   new Number(4),
-                                                   new Number(5),
-                                                   new Number(6));
+        List<LottoNumber> pickedLottoNumbers = Arrays.asList(new LottoNumber(1),
+                                                             new LottoNumber(2),
+                                                             new LottoNumber(3),
+                                                             new LottoNumber(4),
+                                                             new LottoNumber(5),
+                                                             new LottoNumber(6));
 
-        return Stream.of(Arguments.of(new Lotto(pickedNumbers),
-                                      new Lotto(Arrays.asList(new Number(1),
-                                                              new Number(2),
-                                                              new Number(3),
-                                                              new Number(4),
-                                                              new Number(5),
-                                                              new Number(6))),
+        return Stream.of(Arguments.of(new Lotto(pickedLottoNumbers),
+                                      new Lotto(Arrays.asList(new LottoNumber(1),
+                                                              new LottoNumber(2),
+                                                              new LottoNumber(3),
+                                                              new LottoNumber(4),
+                                                              new LottoNumber(5),
+                                                              new LottoNumber(6))),
                                       6),
-                         Arguments.of(new Lotto(pickedNumbers),
-                                      new Lotto(Arrays.asList(new Number(1),
-                                                              new Number(2),
-                                                              new Number(3),
-                                                              new Number(4),
-                                                              new Number(5),
-                                                              new Number(7))),
+                         Arguments.of(new Lotto(pickedLottoNumbers),
+                                      new Lotto(Arrays.asList(new LottoNumber(1),
+                                                              new LottoNumber(2),
+                                                              new LottoNumber(3),
+                                                              new LottoNumber(4),
+                                                              new LottoNumber(5),
+                                                              new LottoNumber(7))),
                                       5),
-                         Arguments.of(new Lotto(pickedNumbers),
-                                      new Lotto(Arrays.asList(new Number(1),
-                                                              new Number(2),
-                                                              new Number(3),
-                                                              new Number(4),
-                                                              new Number(9),
-                                                              new Number(10))),
+                         Arguments.of(new Lotto(pickedLottoNumbers),
+                                      new Lotto(Arrays.asList(new LottoNumber(1),
+                                                              new LottoNumber(2),
+                                                              new LottoNumber(3),
+                                                              new LottoNumber(4),
+                                                              new LottoNumber(9),
+                                                              new LottoNumber(10))),
                                       4),
-                         Arguments.of(new Lotto(pickedNumbers),
-                                      new Lotto(Arrays.asList(new Number(1),
-                                                              new Number(2),
-                                                              new Number(3),
-                                                              new Number(8),
-                                                              new Number(9),
-                                                              new Number(10))),
+                         Arguments.of(new Lotto(pickedLottoNumbers),
+                                      new Lotto(Arrays.asList(new LottoNumber(1),
+                                                              new LottoNumber(2),
+                                                              new LottoNumber(3),
+                                                              new LottoNumber(8),
+                                                              new LottoNumber(9),
+                                                              new LottoNumber(10))),
                                       3),
-                         Arguments.of(new Lotto(pickedNumbers),
-                                      new Lotto(Arrays.asList(new Number(36),
-                                                              new Number(22),
-                                                              new Number(15),
-                                                              new Number(17),
-                                                              new Number(26),
-                                                              new Number(44))),
+                         Arguments.of(new Lotto(pickedLottoNumbers),
+                                      new Lotto(Arrays.asList(new LottoNumber(36),
+                                                              new LottoNumber(22),
+                                                              new LottoNumber(15),
+                                                              new LottoNumber(17),
+                                                              new LottoNumber(26),
+                                                              new LottoNumber(44))),
                                       0));
     }
 
     @DisplayName("Lotto와 bonus number가 주어졌을 때 해당 number를 포함하고 있는지 반환하는지 검증")
     @ParameterizedTest
     @CsvSource({ "3, true", "7, false" })
-    void containsTest(int number, boolean expected) {
-        Lotto lotto = new Lotto(
-                Arrays.asList(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6)));
-        assertThat(lotto.contains(new Number(number))).isEqualTo(expected);
+    void containsTest(int bonusNumber, boolean expected) {
+        Lotto lotto = new Lotto(Arrays.asList(new LottoNumber(1),
+                                              new LottoNumber(2),
+                                              new LottoNumber(3),
+                                              new LottoNumber(4),
+                                              new LottoNumber(5),
+                                              new LottoNumber(6)));
+        assertThat(lotto.contains(new LottoNumber(bonusNumber))).isEqualTo(expected);
     }
 }

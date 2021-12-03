@@ -1,10 +1,9 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import lotto.utils.LottoNumberGenerator;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -14,27 +13,16 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos create(int lottoCount) {
-        List<Lotto> lottos = new ArrayList();
-        for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto(LottoNumberGenerator.generate()));
-        }
-        return new Lottos(lottos);
-    }
-
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
 
-    public Result makeResult(WinningNumber winningNumber) {
-        Result result = new Result();
-        lottos.stream()
-              .map(lotto -> makeRank(lotto, winningNumber))
-              .forEach(matchedCount -> result.add(matchedCount));
-        return result;
+    public Lottos join(Lottos lottos) {
+        return new Lottos(Stream.concat(this.lottos.stream(), lottos.getLottos().stream())
+                                .collect(Collectors.toList()));
     }
 
-    private Rank makeRank(Lotto lotto, WinningNumber winningNumber) {
-        return Rank.from(winningNumber.matchCount(lotto), winningNumber.hasBonusNumber(lotto));
+    public int count() {
+        return lottos.size();
     }
 }
