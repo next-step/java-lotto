@@ -22,11 +22,14 @@ public class ResultView {
     public void printPurchaseLottos(List<Lotto> manual, List<Lotto> auto) {
         List<Lotto> lotto = new ArrayList<>();
 
-    public void printPurchaseLottos(List<Lotto> lotto) {
+        lotto.addAll(manual);
+        lotto.addAll(auto);
+
         if (lotto == null || lotto.isEmpty()) {
             return;
         }
 
+        System.out.println(String.format(PRINT_MANUAL_AUTO_COUNT, manual.size(), auto.size()));
         for (Lotto l : lotto) {
             StringBuilder sb = new StringBuilder();
             sb.append("[");
@@ -34,6 +37,7 @@ public class ResultView {
             sb.append("]");
             System.out.println(sb);
         }
+        System.out.println();
     }
 
     public void printResultStatics(Statistics statistics) {
