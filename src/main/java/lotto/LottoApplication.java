@@ -1,22 +1,17 @@
 package lotto;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoApplication {
-
-    
     public static void main(String[] args){
-        int purchaseAmount= InputView.requestPurchaseAmount();
-        LottoGame lottoGame = new LottoGame(purchaseAmount);
+        LottoGame lottoGame = new LottoGame(InputView.requestPurchaseAmount());
         ResultView.responseLottoCount(lottoGame.getBuyRound());
 
-//        Lottos lottos = lotto.start();
-//        ResultView.responseLottoNumbers(lottos.getLottos());
+        ResultView.responseLottoNumbers(lottoGame.getLottos());
 
-//        WinningNumber winningNumber = new WinningNumber(InputView.requestLastWeekWinningNumber());
-//        ResultView.responseWinningStatistics(winningNumber);
-//        ResultView.responseWinningRate(winningNumber, purchaseAmount);
+        ResultView.responseWinningStatistics(lottoGame.getResultStatics(InputView.requestLastWeekWinningNumber()));
     }
 }

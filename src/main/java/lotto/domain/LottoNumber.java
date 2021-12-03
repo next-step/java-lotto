@@ -1,11 +1,6 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoNumber {
     private static final int MIN_LOTTO_NUMBER = 1;
@@ -18,10 +13,14 @@ public class LottoNumber {
     }
 
     public LottoNumber(int number) {
+        validateLottoNumber(number);
+        this.number = number;
+    }
+
+    private void validateLottoNumber(int number) {
         if(number > MAX_LOTTO_NUMBER || number < MIN_LOTTO_NUMBER){
             throw new IllegalArgumentException("1~45까지의 숫자가 입력되어야 합니다.");
         }
-        this.number = number;
     }
 
     public int getLottoNumber() {
@@ -43,8 +42,6 @@ public class LottoNumber {
 
     @Override
     public String toString() {
-        return "LottoNumber{" +
-                "number=" + number +
-                '}';
+        return String.valueOf(number);
     }
 }

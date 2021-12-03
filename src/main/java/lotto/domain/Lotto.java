@@ -32,7 +32,6 @@ public class Lotto {
                                                     .collect(Collectors.toList());
         Collections.shuffle(lottoNumbers);
         this.lottoNumbers = lottoNumbers.subList(START_SPLIT_NUMBERS, END_SPLIT_NUMBERS);
-        System.out.println(this.lottoNumbers);
     }
 
     public List<LottoNumber> getLottoNumbers() {
@@ -57,5 +56,17 @@ public class Lotto {
         return "Lotto{" +
                 "lottoNumbers=" + lottoNumbers +
                 '}';
+    }
+
+    public int matchCountLotto(List<LottoNumber> winLottoNumbers) {
+        // 맞춘 갯수 반환
+        Long matchCount = lottoNumbers.stream()
+                .filter(number -> comp(number, winLottoNumbers))
+                .count();
+        return Long.valueOf(matchCount).intValue();
+    }
+
+    private boolean comp(LottoNumber number, List<LottoNumber> winNumbers) {
+        return winNumbers.contains(number);
     }
 }
