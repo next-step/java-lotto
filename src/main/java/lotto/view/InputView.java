@@ -1,5 +1,8 @@
 package lotto.view;
 
+import static utils.PrintUtils.print;
+import static utils.PrintUtils.printSpace;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -29,13 +32,14 @@ public class InputView {
     }
 
     public Wallet inputMoney() {
-        System.out.println(INPUT_NUMBER_OF_BUY_PRICE_MESSAGE);
+        print(INPUT_NUMBER_OF_BUY_PRICE_MESSAGE);
 
         return new Wallet(sc.nextInt());
     }
 
     public AssignBuyPreTicket inputAssignNumberCount(Wallet wallet) {
-        System.out.println(INPUT_ASSIGN_NUMBER_COUNT_MESSAGE);
+        printSpace();
+        print(INPUT_ASSIGN_NUMBER_COUNT_MESSAGE);
 
         int assignTicketCount = sc.nextInt();
         int assignLottoTicketPrice = assignTicketCount * LottoTicket.PRICE;
@@ -45,7 +49,9 @@ public class InputView {
 
 
     public LottoTickets inputAssignNumber(AssignBuyPreTicket preTicket) {
-        System.out.println(INPUT_ASSIGN_NUMBERS_MESSAGE);
+        printSpace();
+        print(INPUT_ASSIGN_NUMBERS_MESSAGE);
+
         sc.nextLine();
 
         return new LottoTickets(IntStream.range(0, preTicket.getAssignCount())
@@ -55,7 +61,8 @@ public class InputView {
     }
 
     public ResultLotto inputLottoResultNumber() {
-        System.out.println(INPUT_LOTTO_RESULT_NUMBERS_MESSAGE);
+
+        print(INPUT_LOTTO_RESULT_NUMBERS_MESSAGE);
 
         List<Integer> resultNumbers = inputLottoNumbers();
 
@@ -85,7 +92,7 @@ public class InputView {
     }
 
     private int inputLottoBonusNumber() {
-        System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
+        print(INPUT_BONUS_NUMBER_MESSAGE);
 
         return sc.nextInt();
     }
