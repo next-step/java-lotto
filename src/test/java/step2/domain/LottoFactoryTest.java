@@ -11,24 +11,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoFactoryTest {
 
-    @DisplayName("생성된 로또 번호는 6개이다.")
+    @DisplayName("LottoNumbers 한 개는 1000원이고, 구입 금액에 따라 로또 번호들을 생성한다.")
     @Test
-    void create() {
-        Lotto lotto = LottoFactory.create();
-        int lottoNumbersSize = lotto.getLottoNumbers().size();
-        assertThat(lottoNumbersSize).isEqualTo(6);
-    }
-
-    @DisplayName("생성된 로또 번호는 1~45중 하나다.")
-    @ParameterizedTest
-    @MethodSource("generateLottoNumbers")
-    void lottoNumberRangeCheck(int lottoNumber) {
-        assertThat(lottoNumber).isGreaterThan(0);
-        assertThat(lottoNumber).isLessThan(46);
-    }
-
-    private static List<Integer> generateLottoNumbers() {
-        return LottoFactory.create().getLottoNumbers();
+    void buyWithMoney(){
+        Lotto lotto = LottoFactory.buyWithMoney(14000);
+        assertThat(lotto.numberOfLottoNumbers()).isEqualTo(14);
     }
 
 
