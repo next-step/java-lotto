@@ -20,13 +20,22 @@ public class LottoGame {
 
         String manualInput = InsertView.printManualInput();
         List<String> manualNumbers = InsertView.printInputLottoNumbers(Integer.parseInt(manualInput));
-
         LottoTicket lottoTicket = Store.purchaseTicket(lottoPrice, manualNumbers);
 
-        int manualLottoSize = manualNumbers.size();
+        printLottoTicket(manualNumbers.size(),lottoTicket);
+        printLottoGameResult(lottoTicket, lottoPrice);
+
+    }
+
+    private void printLottoTicket(int manualLottoSize, LottoTicket lottoTicket) {
+
         int autoLottoSize = lottoTicket.getLotto().size() - manualLottoSize;
+
         ResultView.printOrderCount(manualLottoSize, autoLottoSize);
         ResultView.printOrderLottoNumber(lottoTicket);
+    }
+
+    private void printLottoGameResult(LottoTicket lottoTicket, OrderPrice lottoPrice) {
 
         LottoWinning lottoWinning = LottoWinning.from(InsertView.printInputWinningNumbers(),
                 InsertView.printInputBonusNumber());
