@@ -1,23 +1,29 @@
 package lotto.view;
 
+import static utils.PrintUtils.*;
+import static utils.PrintUtils.printSpace;
+
 import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import lotto.domain.Award;
 import lotto.domain.GameResult;
 import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
+import lotto.dto.ResultLottoDTO;
 
 public class OutputView {
 
-    public void printBuyCountMessage(LottoTickets lottoTickets) {
-        System.out.println(MessageFormat.format("{0}개를 구매했습니다.", lottoTickets.getTicketSize()));
+    public void printBuyCountMessage(ResultLottoDTO resultLottoDTO) {
+        printSpace();
 
-        lottoTickets.getTickets().stream()
+        print("수동으로 {0}장, 자동으로 {1}개를 구매했습니다.",
+            resultLottoDTO.getAssignTicketSize(), resultLottoDTO.getRandomTicketSize());
+
+        resultLottoDTO.getAllTicketToList().stream()
             .map(this::getLottoNumbersString)
             .forEach(System.out::println);
 
-        System.out.println();
+        printSpace();
     }
 
     private String getLottoNumbersString(LottoTicket tickets) {
@@ -29,24 +35,22 @@ public class OutputView {
     }
 
     public void printByResult(GameResult gameResult) {
-        System.out.println();
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+        printSpace();
+        print("당첨 통계");
+        print("---------");
 
         Arrays.stream(Award.values())
             .filter(award -> award != Award.NON_MATCH)
             .forEach(award -> printAwardCase(award, gameResult));
 
-        System.out.println(
-            MessageFormat.format("총 수익률은 {0}입니다.", String.format("%.2f", gameResult.getYield())));
+        print("총 수익률은 {0}입니다.", String.format("%.2f", gameResult.getYield()));
     }
 
     private void printAwardCase(Award award, GameResult gameResult) {
-        System.out.println(
-            MessageFormat.format(getMessagePattern(award),
-                award.getMatchCount(),
-                award.getReward(),
-                gameResult.getResultByCount(award)));
+        print(getMessagePattern(award),
+            award.getMatchCount(),
+            award.getReward(),
+            gameResult.getResultByCount(award));
     }
 
     private String getMessagePattern(Award award) {
