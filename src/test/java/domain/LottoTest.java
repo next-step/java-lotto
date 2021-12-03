@@ -27,9 +27,9 @@ public class LottoTest {
     }, delimiter = ':')
     void testCompareWithWinningNumber(String input, String winning, int expected) {
         List<Integer> lottoNumbers = parseNumbers(input);
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = Lotto.of(lottoNumbers);
         List<Integer> winningNumbers = parseNumbers(winning);
-        Lotto winningLotto = new Lotto(winningNumbers);
+        Lotto winningLotto = Lotto.of(winningNumbers);
         int res = lotto.compareWithWinningNumber(winningLotto);
         assertThat(res).isEqualTo(expected);
     }
@@ -39,6 +39,6 @@ public class LottoTest {
     void testWhenTheNumberOfLottoNumbersIsNotSix() {
         List<Integer> lottoNumbers = Arrays.asList(1,2,3,4,5);
 
-        assertThatThrownBy(() -> new Lotto(lottoNumbers)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Lotto.of(lottoNumbers)).isInstanceOf(IllegalArgumentException.class);
     }
 }

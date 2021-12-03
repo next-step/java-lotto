@@ -34,11 +34,6 @@ public class LottoGame {
     public static final int LAST_INDEX_LOTTO = 6;
     public static final int STARTING_INDEX_LOTTOS = 0;
 
-    private static final List<Integer> LOTTO_NUMBERS =
-            IntStream.rangeClosed(LOTTO_STARTING_NUMBER, LOTTO_LAST_NUMBER)
-                    .boxed()
-                    .collect(Collectors.toList());
-
     private LottoGame() {
 
     }
@@ -57,16 +52,10 @@ public class LottoGame {
 
         inputView.showWinningNumberInputMessage();
         String winningNumber = inputView.extractWinningNumber();
-        Lotto winningLotto = new Lotto(parseNumbers(winningNumber));
+        Lotto winningLotto = Lotto.of(parseNumbers(winningNumber));
 
         double profitRate = lottos.profitRate(winningLotto);
         outputView.showLottoResult();
         outputView.showProfitRate(profitRate);
-    }
-
-    public static Lotto generateLotto() {
-        Collections.shuffle(LOTTO_NUMBERS);
-
-        return new Lotto(LOTTO_NUMBERS.subList(STARTING_INDEX_LOTTO, LAST_INDEX_LOTTO));
     }
 }

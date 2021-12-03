@@ -16,7 +16,7 @@ public class Lottos {
         this.lottos = new ArrayList<>();
 
         IntStream.range(STARTING_INDEX_LOTTOS, totalNumberOfLottos)
-                .forEach(i -> lottos.add(generateLotto()));
+                .forEach(i -> lottos.add(Lotto.of()));
     }
 
     public Lottos(List<Lotto> lottos) {
