@@ -23,20 +23,8 @@ public class Lotto {
     }
 
     public int matchCount(Lotto ticket) {
-        int count = 0;
-        List<Integer> numbers = ticket.getNumbers();
-        for (int number : numbers) {
-            count = getCount(count, number);
-        }
-        return count;
+        return (int) ticket.getNumbers().stream()
+                .filter(this.numbers::contains)
+                .count();
     }
-
-    private int getCount(int count, int number) {
-        if (this.numbers.contains(number)) {
-            count++;
-        }
-        return count;
-    }
-
-
 }
