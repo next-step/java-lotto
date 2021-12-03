@@ -4,10 +4,10 @@ import lotto.domain.Lotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class TicketTest {
+public class LottoTest {
 
     @Test
     void 로또_길이_검사() {
@@ -17,10 +17,7 @@ public class TicketTest {
 
     @Test
     void 로또_번호_매칭() {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = 1; i <= 6; i++) {
-            numbers.add(i);
-        }
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         Lotto ticket1 = new Lotto(numbers);
         Lotto ticket2 = new Lotto(numbers);
 

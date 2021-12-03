@@ -2,8 +2,8 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.Result;
 import lotto.view.InputInfo;
-import lotto.view.ResultInfo;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ResultInfoTest {
+public class ResultTest {
 
     @Test
     void 당첨결과_테스트() {
@@ -26,7 +26,7 @@ public class ResultInfoTest {
         sampleLottos.add(new Lotto(inputInfo.getAnswer("41,42,43,44,45,46")));
 
         Lottos lottos = new Lottos(sampleLottos);
-        ResultInfo resultInfo = new ResultInfo(lottos, new Lotto(inputInfo.getAnswer("1,2,3,7,8,9")));
+        Result result = new Result(lottos, new Lotto(inputInfo.getAnswer("1,2,3,7,8,9")));
         Map<Integer, Integer> sampleResult = new HashMap<>();
 
         sampleResult.put(0,0);
@@ -36,8 +36,8 @@ public class ResultInfoTest {
         sampleResult.put(6,0);
 
         // 결과 내용
-        Assertions.assertThat(resultInfo.getResultInfo()).isEqualTo(sampleResult);
+        Assertions.assertThat(result.getResultInfo()).isEqualTo(sampleResult);
         // 수익금
-        Assertions.assertThat(resultInfo.getRateOfReturn()).isEqualTo(1);
+        Assertions.assertThat(result.getRateOfReturn()).isEqualTo(1);
     }
 }

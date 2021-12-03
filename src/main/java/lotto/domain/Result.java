@@ -1,18 +1,16 @@
-package lotto.view;
+package lotto.domain;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
+import lotto.view.InputInfo;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class ResultInfo {
+public class Result {
 
     private Map<Integer, Integer> resultInfo;
     private double rateOfReturn;
 
-    public ResultInfo(Lottos lottos, Lotto answer) {
+    public Result(Lottos lottos, Lotto answer) {
         resultInfo = new HashMap<>();
         init();
         calculateResult(lottos, answer);
