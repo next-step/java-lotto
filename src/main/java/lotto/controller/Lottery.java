@@ -14,8 +14,8 @@ public class Lottery {
         String price = InputView.questionPrice();
 
         InputInfo inputInfo = new InputInfo(price);
-        int ticketCount = inputInfo.getTicketCount();
-        Lottos lottos = new Lottos(ticketCount);
+        int count = inputInfo.getLottoCount();
+        Lottos lottos = new Lottos(count);
 
         ResultView.printLottos(lottos);
 

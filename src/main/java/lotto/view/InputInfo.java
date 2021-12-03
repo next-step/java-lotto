@@ -10,29 +10,29 @@ import java.util.stream.Collectors;
 
 public class InputInfo {
 
-    public static final int TICKET_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
     private static final String ERR_MESSAGE_NUMBER_FORMAT = "숫자형식 입력값이 아닙니다.";
     private static final String ERR_MESSAGE_LOTTO_SIZE = "입력 숫자는 6개 입니다.";
-    private static final String MESSAGE_TICKET_COUNT = "%d개를 구입하였습니다.";
+    private static final String MESSAGE_LOTTO_COUNT = "%d개를 구입하였습니다.";
     private static final String SPLIT_REGEX = ",";
     private static final String ANSWER_BLANK = " ";
     private static final String ANSWER_EMPTY = "";
 
-    private final int ticketCount;
+    private final int lottoCount;
 
     public InputInfo(String price) {
 
         try {
-            int ticketPrice = Integer.parseInt(price);
-            this.ticketCount = ticketPrice / TICKET_PRICE;
-            System.out.println(String.format(MESSAGE_TICKET_COUNT, this.ticketCount));
+            int lottoPrice = Integer.parseInt(price);
+            this.lottoCount = lottoPrice / LOTTO_PRICE;
+            System.out.println(String.format(MESSAGE_LOTTO_COUNT, this.lottoCount));
         } catch (NumberFormatException e) {
             throw new LottoNumberException(ERR_MESSAGE_NUMBER_FORMAT);
         }
     }
 
-    public int getTicketCount() {
-        return ticketCount;
+    public int getLottoCount() {
+        return lottoCount;
     }
 
     public List<Integer> getAnswer(String answer) {

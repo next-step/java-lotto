@@ -22,8 +22,8 @@ public class Lotto {
         return Collections.unmodifiableList(numbers);
     }
 
-    public int matchCount(Lotto ticket) {
-        return (int) ticket.getNumbers().stream()
+    public int matchCount(Lotto lotto) {
+        return (int) lotto.getNumbers().stream()
                 .filter(this.numbers::contains)
                 .count();
     }

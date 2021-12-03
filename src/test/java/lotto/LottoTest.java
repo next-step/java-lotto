@@ -12,8 +12,8 @@ public class LottoTest {
 
     @Test
     void 로또_길이_검사() {
-        Lotto ticket = new Lotto();
-        Assertions.assertThat(ticket.getNumbers().size()).isEqualTo(6);
+        Lotto lotto = new Lotto();
+        Assertions.assertThat(lotto.getNumbers().size()).isEqualTo(6);
     }
 
     @Test
@@ -25,9 +25,9 @@ public class LottoTest {
     @Test
     void 로또_번호_매칭() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Lotto ticket1 = new Lotto(numbers);
-        Lotto ticket2 = new Lotto(numbers);
+        Lotto lotto1 = new Lotto(numbers);
+        Lotto lotto2 = new Lotto(numbers);
 
-        Assertions.assertThat(ticket1.matchCount(ticket2)).isEqualTo(6);
+        Assertions.assertThat(lotto1.matchCount(lotto2)).isEqualTo(6);
     }
 }

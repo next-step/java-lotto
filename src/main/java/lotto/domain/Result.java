@@ -29,7 +29,7 @@ public class Result {
             revenue = getRevenue(revenue, count);
         }
 
-        this.rateOfReturn = revenue / (lottos.getLottos().size() * InputInfo.TICKET_PRICE);
+        this.rateOfReturn = revenue / (lottos.getLottos().size() * InputInfo.LOTTO_PRICE);
     }
 
     private double getRevenue(double revenue, int count) {

@@ -11,9 +11,9 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Lottos(int ticketsCount) {
+    public Lottos(int lottosCount) {
         lottos = new ArrayList<>();
-        for (int i = 0; i < ticketsCount; i++) {
+        for (int i = 0; i < lottosCount; i++) {
             lottos.add(new Lotto());
         }
     }

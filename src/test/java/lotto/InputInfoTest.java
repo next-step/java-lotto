@@ -10,9 +10,9 @@ public class InputInfoTest {
 
     @Test
     @DisplayName("로또 구매 금액에 맞게 여러장의 로또를 구입한다.")
-    void getTicket() {
+    void getLotto() {
         InputInfo inputInfo = new InputInfo("5000");
-        Assertions.assertThat(inputInfo.getTicketCount()).isEqualTo(5);
+        Assertions.assertThat(inputInfo.getLottoCount()).isEqualTo(5);
     }
 
     @Test
