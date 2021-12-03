@@ -6,11 +6,9 @@ import java.util.stream.Collectors;
 public class LottoTickets {
 
     private final List<LottoTicket> tickets;
-    private final int price;
 
-    public LottoTickets(List<LottoTicket> tickets, int price) {
+    public LottoTickets(List<LottoTicket> tickets) {
         this.tickets = tickets;
-        this.price = price;
     }
 
     public int getTicketSize() {
@@ -22,7 +20,7 @@ public class LottoTickets {
     }
 
     public int getTotalPrice() {
-        return tickets.size() * price;
+        return tickets.size() * LottoTicket.PRICE;
     }
 
     public GameResult result(ResultLotto resultLotto) {

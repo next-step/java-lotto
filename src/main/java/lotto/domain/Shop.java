@@ -7,15 +7,13 @@ import java.util.stream.IntStream;
 
 public class Shop {
 
-    private static final int PRICE = 1000;
-
     public LottoTickets buy(int money, LottoMachine lottoMachine) {
-        int count = getNumberIfPositive(money) / PRICE;
+        int count = getNumberIfPositive(money) / LottoTicket.PRICE;
 
         return new LottoTickets(
             IntStream.range(0, count).boxed()
                 .map(n -> lottoMachine.publish())
-                .collect(Collectors.toList()), PRICE);
+                .collect(Collectors.toList()));
     }
 
     public GameResult result(LottoTickets lottoTickets, ResultLotto resultLotto) {

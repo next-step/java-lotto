@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
 
+    public static final int PRICE = 1000;
     private static final int REQUIRED_NUMBER_SIZE = 6;
     private static final String INVALID_SIZE_MESSAGE = "로또 입력 숫자는 6개여야 합니다.";
 
