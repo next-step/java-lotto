@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.Credit;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumberFactory;
 import lotto.domain.WonLotto;
 
 import java.util.Scanner;
@@ -14,6 +15,7 @@ public class InputView {
     private static final String INSERT_PURCHASE_PRICE = "구입금액을 입력해주세요";
     private static final String PRINT_CREDIT_COUNT = "%s개를 구매했습니다.";
     private static final String INSERT_LAST_WON_LOTTO = "지난 주 당첨 번호를 입력해주세요";
+    private static final String INSERT_BONUS_NUMBER = "보너스 볼을 입력해주세요";
 
     private final Scanner scanner;
 
@@ -29,9 +31,12 @@ public class InputView {
         return credit;
     }
 
-    public WonLotto insertWonLotto() {
+    public WonLotto insertWonLotto(LottoNumberFactory factory) {
         System.out.println(INSERT_LAST_WON_LOTTO);
-        String line = scanner.nextLine();
-        return WonLotto.of(new Lotto(LottoNumber.createNonDuplicated(line)));
+        String wonNumbers = scanner.nextLine();
+
+        System.out.println(INSERT_BONUS_NUMBER);
+        String bonusNumber = scanner.nextLine();
+        return WonLotto.of(new Lotto(wonNumbers), new LottoNumber(bonusNumber));
     }
 }

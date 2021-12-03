@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Credit;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumberFactory;
 import lotto.domain.PurchaseMachine;
 import lotto.domain.Statistics;
 import lotto.domain.WonLotto;
@@ -22,11 +23,12 @@ public class Main {
 
         Credit credit = inputView.start();
         PurchaseMachine purchaseByCredit = new PurchaseMachine(credit);
-        List<Lotto> lotto = purchaseByCredit.purchase();
+        LottoNumberFactory lottoNumberFactory = new LottoNumberFactory();
+        List<Lotto> lotto = purchaseByCredit.purchase(lottoNumberFactory);
 
         resultView.printPurchaseLottos(lotto);
 
-        WonLotto wonLotto = inputView.insertWonLotto();
+        WonLotto wonLotto = inputView.insertWonLotto(lottoNumberFactory);
         Statistics statistics = new Statistics(credit, lotto, wonLotto);
 
         resultView.printResultStatics(statistics);

@@ -14,11 +14,11 @@ public class PurchaseMachine {
         this.credit = credit;
     }
 
-    public List<Lotto> purchase() {
+    public List<Lotto> purchase(LottoNumberFactory lottoNumberFactory) {
         int count = this.credit.getLottoCount();
 
         List<Lotto> lottos = IntStream.range(0, count)
-            .mapToObj(i -> new Lotto(LottoNumber.createNonDuplicated()))
+            .mapToObj(i -> new Lotto(lottoNumberFactory.getNonDuplicated()))
             .collect(Collectors.toList());
 
         return lottos;
