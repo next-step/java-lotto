@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
     private static final Lottos emptyLottos = new Lottos(Collections.emptyList());
@@ -57,5 +58,11 @@ public class Lottos {
                 .map(winningNumber::rank)
                 .collect(Collectors.toUnmodifiableList());
         return GameResult.of(ranks);
+    }
+
+    public Lottos append(Lottos other) {
+        List<Lotto> appended = Stream.concat(lottos.stream(), other.lottos.stream())
+                .collect(Collectors.toList());
+        return new Lottos(appended);
     }
 }

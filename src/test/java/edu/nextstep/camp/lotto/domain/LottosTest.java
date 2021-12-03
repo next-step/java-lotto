@@ -1,5 +1,6 @@
 package edu.nextstep.camp.lotto.domain;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -47,69 +48,54 @@ public class LottosTest {
 
     @Test
     public void amount() {
-        final Lottos testLottos = Lottos.of(List.of(lotto(1, 2, 3, 4, 5, 6)));
-        assertThat(testLottos.amount()).isEqualTo(1);
+        assertThat(lottos(lotto(1, 2, 3, 4, 5, 6)).amount()).isEqualTo(1);
     }
 
     @Test
     public void collect() {
-        final List<Lotto> lottoList = List.of(lotto(1, 2, 3, 4, 5, 6));
-        final Lottos testLottos = Lottos.of(lottoList);
-        assertThat(testLottos.collect()).hasSameElementsAs(List.of(lotto(1, 2, 3, 4, 5, 6)));
+        assertThat(lottos(lotto(1, 2, 3, 4, 5, 6)).collect()).hasSameElementsAs(List.of(lotto(1, 2, 3, 4, 5, 6)));
     }
 
     static Stream<Arguments> parseWinningResult() {
         return Stream.of(
                 // 0 matched
                 Arguments.of(
-                        Lottos.of(List.of(lotto(10, 11, 12, 13, 14, 15))),
+                        lottos(lotto(10, 11, 12, 13, 14, 15)),
                         GameResult.of(List.of(Rank.NO_RANK))
                 ),
                 // 3 matched
                 Arguments.of(
-                        Lottos.of(List.of(lotto(1, 2, 3, 13, 14, 15))),
+                        lottos(lotto(1, 2, 3, 13, 14, 15)),
                         GameResult.of(List.of(Rank.FIFTH))
                 ),
                 // 6 matched
                 Arguments.of(
-                        Lottos.of(List.of(lotto(1, 2, 3, 4, 5, 6))),
+                        lottos(lotto(1, 2, 3, 4, 5, 6)),
                         GameResult.of(List.of(Rank.FIRST))
                 ),
                 // 3 matched with 2 lottos
                 Arguments.of(
-                        Lottos.of(List.of(
-                                lotto(1, 2, 3, 13, 14, 15),
-                                lotto(1, 2, 3, 13, 14, 15)
-                        )),
+                        lottos(lotto(1, 2, 3, 13, 14, 15), lotto(1, 2, 3, 13, 14, 15)),
                         GameResult.of(List.of(Rank.FIFTH, Rank.FIFTH))
                 ),
                 // 6 matched with 2 lottos
                 Arguments.of(
-                        Lottos.of(List.of(
-                                lotto(1, 2, 3, 4, 5, 6),
-                                lotto(1, 2, 3, 4, 5, 6)
-                        )),
+                        lottos(lotto(1, 2, 3, 4, 5, 6), lotto(1, 2, 3, 4, 5, 6)),
                         GameResult.of(List.of(Rank.FIRST, Rank.FIRST))
                 ),
                 // 5 matched with bonus matched
                 Arguments.of(
-                        Lottos.of(List.of(
-                                lotto(1, 2, 3, 4, 5, 7)
-                        )),
+                        lottos(lotto(1, 2, 3, 4, 5, 7)),
                         GameResult.of(List.of(Rank.SECOND))
                 ),
                 // 5 matched
                 Arguments.of(
-                        Lottos.of(List.of(
-                                lotto(1, 2, 3, 4, 5, 15)
-                        )),
+                        lottos(lotto(1, 2, 3, 4, 5, 15)),
                         GameResult.of(List.of(Rank.THIRD))
                 ),
                 // 4 matched
                 Arguments.of(
-                        Lottos.of(List.of(
-                                lotto(1, 2, 3, 4, 14, 15)
-                        )),
+                        lottos(lotto(1, 2, 3, 4, 14, 15)),
                         GameResult.of(List.of(Rank.FOURTH))
                 )
         );
@@ -120,5 +106,17 @@ public class LottosTest {
     public void winningResult(Lottos lottos, GameResult expected) {
         final WinningNumber winningNumber = WinningNumber.of(Set.of(1, 2, 3, 4, 5, 6), 7);
         assertThat(lottos.winningResult(winningNumber)).isEqualTo(expected);
+    }
+
+    @Test
+    public void append() {
+        Lotto manualLotto = lotto(1, 2, 3, 4, 5, 6);
+        Lotto autoLotto = lotto(11, 12, 13, 14, 15, 16);
+        assertThat(lottos(manualLotto).append(lottos(autoLotto)).amount()).isEqualTo(2);
+        assertThat(lottos(manualLotto).append(lottos(autoLotto)).collect()).containsExactly(manualLotto, autoLotto);
+    }
+
+    public static Lottos lottos(Lotto ... lottos) {
+        return Lottos.of(Arrays.asList(lottos));
     }
 }

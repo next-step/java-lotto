@@ -17,15 +17,23 @@ public class LottoGame {
     public static void main(String[] args) {
         Budget budget = Budget.of(InputView.inputBudget());
 
+        // todo from input view
+        final int manualCount = 1;
+        // todo from input view
         final List<Lotto> lottoList = List.of(Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6)));
-        final Lottos lottosManual = Store.purchase(budget, lottoList);
-        final Lottos lottosAuto = Store.purchase(budget.purchased(lottosManual.amount()), AutoLottoGenerator.getInstance());
-        OutputView.printPurchasedLotto(lottosAuto);
+        final Lottos manualLottos = Store.purchase(budget, lottoList);
+
+        if (manualCount != manualLottos.amount())
+            throw new IllegalArgumentException("expected amount of manual purchased is " + manualCount + ", but " + manualLottos.amount());
+
+        final Lottos autoLottos = Store.purchase(budget.purchased(manualLottos.amount()), AutoLottoGenerator.getInstance());
+        final Lottos purchased = manualLottos.append(autoLottos);
+        OutputView.printPurchasedLotto(purchased);
 
         final Set<Integer> winningNumbers = InputView.inputWinningNumber();
         final int bonusNumber = InputView.inputBonusNumber();
         final WinningNumber winningNumber = WinningNumber.of(winningNumbers, bonusNumber);
-        final GameResult gameResult = lottosAuto.winningResult(winningNumber);
+        final GameResult gameResult = purchased.winningResult(winningNumber);
         OutputView.printGameResult(gameResult.collect(), gameResult.totalPrize().toLong(), gameResult.priceEarningRate());
     }
 }
