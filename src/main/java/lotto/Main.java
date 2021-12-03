@@ -1,5 +1,6 @@
 package lotto;
 
+import calculator.PositiveNumber;
 import lotto.domain.Credit;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumberFactory;
@@ -21,14 +22,18 @@ public class Main {
         InputView inputView = new InputView(new Scanner(System.in));
         ResultView resultView = new ResultView();
 
-        Credit credit = inputView.start();
-        PurchaseMachine purchaseByCredit = new PurchaseMachine(credit);
+        Credit credit = inputView.getCredit();
+        PositiveNumber manualLottoCount = inputView.getManualLottoCount();
+        List<Lotto> lottoByString = inputView.insertManualLotto(manualLottoCount);
+
+        PurchaseMachine purchaseByCredit = new PurchaseMachine(credit.minus(new Credit(manualLottoCount)));
         LottoNumberFactory lottoNumberFactory = new LottoNumberFactory();
+
         List<Lotto> lotto = purchaseByCredit.purchase(lottoNumberFactory);
 
-        resultView.printPurchaseLottos(lotto);
+        resultView.printPurchaseLottos(lottoByString, lotto);
 
-        WonLotto wonLotto = inputView.insertWonLotto(lottoNumberFactory);
+        WonLotto wonLotto = inputView.insertWonLotto();
         Statistics statistics = new Statistics(credit, lotto, wonLotto);
 
         resultView.printResultStatics(statistics);
