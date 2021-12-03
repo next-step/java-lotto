@@ -14,14 +14,6 @@ public enum Rank {
         this.amount = amount;
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
     public static Rank getRank(int count) {
         for (Rank rank : Rank.values()) {
             if (rank.getCount() == count) {
@@ -31,5 +23,12 @@ public enum Rank {
         return null;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
 
 }
