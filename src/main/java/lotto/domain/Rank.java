@@ -1,10 +1,10 @@
 package lotto.domain;
 
 public enum Rank {
-    TRIO(3, 5000),
-    QUARTET(4, 50000),
-    QUINTET(5, 1500000),
-    SEXTET(6, 2000000000);
+    TRIO(3, 5_000),
+    QUARTET(4, 50_000),
+    QUINTET(5, 1_500_000),
+    SEXTET(6, 2_000_000_000);
 
     private final int count;
     private final int amount;
