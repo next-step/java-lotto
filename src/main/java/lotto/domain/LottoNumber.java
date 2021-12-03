@@ -30,6 +30,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return CACHED_LOTTO_NUMBER.get(number);
     }
 
+    public int number() {
+        return number;
+    }
+
     @Override
     public int compareTo(LottoNumber o) {
         return Integer.signum(this.number - o.number);

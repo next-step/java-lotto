@@ -42,4 +42,8 @@ public class LottoTicket {
         Collections.sort(copiedLottoNumbers);
         return new LottoTicket(copiedLottoNumbers);
     }
+
+    public List<LottoNumber> lottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
+    }
 }
