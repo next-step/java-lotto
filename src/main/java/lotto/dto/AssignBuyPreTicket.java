@@ -2,6 +2,10 @@ package lotto.dto;
 
 import static utils.IntegerValidator.getNumberIfPositive;
 
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import lotto.domain.LottoMachine;
+import lotto.domain.LottoTickets;
 import lotto.domain.Wallet;
 
 public class AssignBuyPreTicket {
@@ -16,5 +20,16 @@ public class AssignBuyPreTicket {
 
     public int getAssignCount() {
         return assignCount;
+    }
+
+    public ResultLottoDTO getResultDto(LottoTickets assignLottoTickets, LottoMachine lottoMachine) {
+        return new ResultLottoDTO(assignLottoTickets, buyAbleAllTickets(lottoMachine));
+    }
+
+    private LottoTickets buyAbleAllTickets(LottoMachine lottoMachine) {
+        return new LottoTickets(
+            IntStream.range(0, wallet.getNumberOfBuyAvailableLottoTicket()).boxed()
+                .map(n -> lottoMachine.publish())
+                .collect(Collectors.toList()));
     }
 }

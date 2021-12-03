@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +30,14 @@ public class LottoTickets {
                 .map(resultLotto::award)
                 .collect(Collectors.groupingBy(award -> award, Collectors.counting())),
             getTotalPrice());
+    }
+
+    public LottoTickets addAll(LottoTickets lottoTickets) {
+        List<LottoTicket> mergeLottoTickets = new ArrayList<>();
+        mergeLottoTickets.addAll(this.tickets);
+        mergeLottoTickets.addAll(lottoTickets.getTickets());
+
+        return new LottoTickets(mergeLottoTickets);
     }
 
 }
