@@ -23,7 +23,7 @@ public class ResultTest {
         sampleLottos.add(new Lotto(inputInfo.getAnswer("11,12,13,14,15,16")));
         sampleLottos.add(new Lotto(inputInfo.getAnswer("21,22,23,24,25,26")));
         sampleLottos.add(new Lotto(inputInfo.getAnswer("31,32,33,34,35,36")));
-        sampleLottos.add(new Lotto(inputInfo.getAnswer("41,42,43,44,45,46")));
+        sampleLottos.add(new Lotto(inputInfo.getAnswer("40,41,42,43,44,45")));
 
         Lottos lottos = new Lottos(sampleLottos);
         Result result = new Result(lottos, new Lotto(inputInfo.getAnswer("1,2,3,7,8,9")));
