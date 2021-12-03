@@ -1,23 +1,23 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
 
-    private final Numbers numbers;
+    private final List<Integer> numbers;
 
     public Lotto() {
-        numbers = new Numbers();
-        numbers.marked();
+        numbers = Numbers.getAutoNumbers();
     }
 
     public Lotto(List<Integer> answer) {
-        numbers = new Numbers(answer);
+        Numbers.valid(answer);
+        numbers = new ArrayList<>(answer);
     }
 
     public List<Integer> getNumbers() {
-        List<Integer> numbers = this.numbers.getNumbers();
         Collections.sort(numbers);
         return Collections.unmodifiableList(numbers);
     }
