@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static common.Constants.DELIMITER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
@@ -34,7 +35,7 @@ public class LottoResultTest {
   }
 
   private List<LottoNumber> makeLottoNumbers(String numbers) {
-    return Stream.of(numbers.split(","))
+    return Stream.of(numbers.split(DELIMITER))
             .map(Integer::parseInt)
             .map(LottoNumber::new)
             .collect(Collectors.toList());
