@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Numbers;
+import lotto.exception.LottoNumberException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +27,7 @@ public class InputInfo {
             this.ticketCount = ticketPrice / TICKET_PRICE;
             System.out.println(String.format(MESSAGE_TICKET_COUNT, this.ticketCount));
         } catch (NumberFormatException e) {
-            throw new NumberFormatException(ERR_MESSAGE_NUMBER_FORMAT);
+            throw new LottoNumberException(ERR_MESSAGE_NUMBER_FORMAT);
         }
     }
 
@@ -42,7 +43,7 @@ public class InputInfo {
             List<String> answerNumbers = Arrays.asList(answerSplit);
             answers = answerNumbers.stream().map(Integer::parseInt).collect(Collectors.toList());
         } catch (Exception e) {
-            throw new NumberFormatException(ERR_MESSAGE_NUMBER_FORMAT);
+            throw new LottoNumberException(ERR_MESSAGE_NUMBER_FORMAT);
         }
         valid(answers);
         return answers;
@@ -50,7 +51,7 @@ public class InputInfo {
 
     public void valid(List<Integer> answer) {
         if (answer.size() != Numbers.MARKED_RANGE) {
-            throw new NumberFormatException(ERR_MESSAGE_LOTTO_SIZE);
+            throw new LottoNumberException(ERR_MESSAGE_LOTTO_SIZE);
         }
     }
 }
