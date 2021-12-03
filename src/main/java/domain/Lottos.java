@@ -5,19 +5,12 @@ import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static controller.LottoGame.*;
-import static domain.Prize.*;
+import static domain.Lotto.PRICE_OF_LOTTO;
 
 public class Lottos {
+    private static final int STARTING_INDEX_LOTTOS = 0;
 
     private final List<Lotto> lottos;
-
-    public Lottos(int totalNumberOfLottos) {
-        this.lottos = new ArrayList<>();
-
-        IntStream.range(STARTING_INDEX_LOTTOS, totalNumberOfLottos)
-                .forEach(i -> lottos.add(Lotto.of()));
-    }
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
@@ -27,15 +20,24 @@ public class Lottos {
         return lottos.stream();
     }
 
-    public double profitRate(Lotto winningNumber) {
-        int investment = PRICE_OF_LOTTO * lottos.size();
-
-        return (double) totalProfit(winningNumber) / investment;
+    public int investment() {
+        return lottos.size() * PRICE_OF_LOTTO;
     }
 
-    private int totalProfit(Lotto winningNumber) {
-        lottos.forEach(it -> countPrize(it.compareWithWinningNumber(winningNumber)));
+    public List<Integer> matchedNumbers(Lotto winningLotto) {
+        List<Integer> matched = new ArrayList<>();
 
-        return sumProfit();
+        lottos.forEach(lotto -> matched.add(lotto.compareWithWinningNumber(winningLotto)));
+
+        return matched;
+    }
+
+    public static Lottos of(int totalNumberOfLottos) {
+        List<Lotto> lottos = new ArrayList<>();
+
+        IntStream.range(STARTING_INDEX_LOTTOS, totalNumberOfLottos)
+                .forEach(i -> lottos.add(Lotto.of()));
+
+        return new Lottos(lottos);
     }
 }

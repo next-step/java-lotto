@@ -1,30 +1,23 @@
 package domain;
 
-import static controller.LottoGame.*;
+import java.util.Objects;
 
-public enum Prize {
+public class Prize {
+    public static final int FIFTH_PRIZE_MATCHING_NUMBER = 3;
+    public static final int FOURTH_PRIZE_MATCHING_NUMBER = 4;
+    public static final int THIRD_PRIZE_MATCHING_NUMBER = 5;
+    public static final int FIRST_PRIZE_MATCHING_NUMBER = 6;
+    public static final int FIFTH_PRIZE_REWARD = 5_000;
+    public static final int FOURTH_PRIZE_REWARD = 50_000;
+    public static final int THIRD_PRIZE_REWARD = 1_500_000;
+    public static final int FIRST_PRIZE_REWARD = 2_000_000_000;
 
-    FIRST(FIRST_PRIZE_MATCHING_NUMBER, FIRST_PRIZE_REWARD, INITIAL_PRIZE_COUNT),
-    THIRD(THIRD_PRIZE_MATCHING_NUMBER, THIRD_PRIZE_REWARD, INITIAL_PRIZE_COUNT),
-    FOURTH(FOURTH_PRIZE_MATCHING_NUMBER, FOURTH_PRIZE_REWARD, INITIAL_PRIZE_COUNT),
-    FIFTH(FIFTH_PRIZE_MATCHING_NUMBER, FIFTH_PRIZE_REWARD, INITIAL_PRIZE_COUNT);
+    private final PrizeCondition prizeCondition;
+    private final int count;
 
-    private final int matchingNumber;
-    private final int reward;
-    private int count;
-
-    Prize(int matchingNumber, int reward, int count) {
-        this.matchingNumber = matchingNumber;
-        this.reward = reward;
+    public Prize(PrizeCondition prizeCondition, int count) {
+        this.prizeCondition = prizeCondition;
         this.count = count;
-    }
-
-    public int getMatchingNumber() {
-        return matchingNumber;
-    }
-
-    public int getReward() {
-        return reward;
     }
 
     public int getCount() {
@@ -32,34 +25,28 @@ public enum Prize {
     }
 
     public int profit() {
-        return count * reward;
+        return count * prizeCondition.getReward();
     }
 
-    public static int sumProfit() {
-        int profit = 0;
-
-        for (Prize prize : values()) {
-            profit += prize.profit();
-        }
-
-        return profit;
+    public Prize incrementedPrize() {
+        return new Prize(prizeCondition, count + 1);
     }
 
-    public static void countPrize(int matchingNumber) {
-        for (Prize prize : Prize.values()) {
-            compareValueOfPrize(prize, matchingNumber);
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
         }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        Prize prize = (Prize) object;
+
+        return count == prize.count && prizeCondition == prize.prizeCondition;
     }
 
-    public static void resetPrize() {
-        for (Prize prize : Prize.values()) {
-            prize.count = INITIAL_PRIZE_COUNT;
-        }
-    }
-
-    private static void compareValueOfPrize(Prize prize, int matchingNumber) {
-        if (prize.matchingNumber == matchingNumber) {
-            prize.count++;
-        }
+    @Override
+    public int hashCode() {
+        return Objects.hash(prizeCondition, count);
     }
 }

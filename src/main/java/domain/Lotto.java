@@ -1,14 +1,16 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static controller.LottoGame.*;
+import static domain.LottoNumber.*;
 
 public class Lotto {
+    public static final int PRICE_OF_LOTTO = 1_000;
+    private static final int STARTING_INDEX_LOTTO = 0;
+    private static final int LAST_INDEX_LOTTO = 6;
 
     private static final List<Integer> LOTTO_NUMBERS =
             IntStream.rangeClosed(LOTTO_STARTING_NUMBER, LOTTO_LAST_NUMBER)
@@ -34,6 +36,10 @@ public class Lotto {
                 .stream()
                 .filter(this.lottoNumbers::contains)
                 .count();
+    }
+
+    public static int amount(int price) {
+        return price / PRICE_OF_LOTTO;
     }
 
     public static Lotto of() {

@@ -2,10 +2,9 @@ package domain;
 
 import java.util.Objects;
 
-import static controller.LottoGame.LOTTO_LAST_NUMBER;
-import static controller.LottoGame.LOTTO_STARTING_NUMBER;
-
 public class LottoNumber implements Comparable<LottoNumber> {
+    public static final int LOTTO_STARTING_NUMBER = 1;
+    public static final int LOTTO_LAST_NUMBER = 45;
 
     private final int value;
 

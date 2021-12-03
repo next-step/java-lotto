@@ -2,37 +2,15 @@ package controller;
 
 import domain.Lotto;
 import domain.Lottos;
+import domain.Prizes;
 import view.ConsoleInputView;
 import view.ConsoleOutputView;
 import view.InputView;
 import view.OutputView;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 import static util.StringUtils.parseNumbers;
 
 public class LottoGame {
-    public static final int LOTTO_STARTING_NUMBER = 1;
-    public static final int LOTTO_LAST_NUMBER = 45;
-    public static final int PRICE_OF_LOTTO = 1_000;
-
-    public static final int FIFTH_PRIZE_MATCHING_NUMBER = 3;
-    public static final int FOURTH_PRIZE_MATCHING_NUMBER = 4;
-    public static final int THIRD_PRIZE_MATCHING_NUMBER = 5;
-    public static final int FIRST_PRIZE_MATCHING_NUMBER = 6;
-    public static final int FIFTH_PRIZE_REWARD = 5_000;
-    public static final int FOURTH_PRIZE_REWARD = 50_000;
-    public static final int THIRD_PRIZE_REWARD = 1_500_000;
-    public static final int FIRST_PRIZE_REWARD = 2_000_000_000;
-    public static final int INITIAL_PRIZE_COUNT = 0;
-
-    public static final int STARTING_INDEX_LOTTO = 0;
-    public static final int LAST_INDEX_LOTTO = 6;
-    public static final int STARTING_INDEX_LOTTOS = 0;
 
     private LottoGame() {
 
@@ -44,8 +22,8 @@ public class LottoGame {
         int purchaseAmount = inputView.extractPurchaseAmount();
 
         OutputView outputView = new ConsoleOutputView();
-        int totalNumberOfLottos = purchaseAmount / PRICE_OF_LOTTO;
-        Lottos lottos = new Lottos(totalNumberOfLottos);
+        int totalNumberOfLottos = Lotto.amount(purchaseAmount);
+        Lottos lottos = Lottos.of(totalNumberOfLottos);
 
         outputView.showTotalNumberOfLottos(totalNumberOfLottos);
         outputView.showRandomGeneratedLottos(lottos);
@@ -54,8 +32,9 @@ public class LottoGame {
         String winningNumber = inputView.extractWinningNumber();
         Lotto winningLotto = Lotto.of(parseNumbers(winningNumber));
 
-        double profitRate = lottos.profitRate(winningLotto);
-        outputView.showLottoResult();
+        Prizes prizes = new Prizes(lottos);
+        double profitRate = prizes.profitRate(winningLotto);
+        outputView.showLottoResult(prizes);
         outputView.showProfitRate(profitRate);
     }
 }
