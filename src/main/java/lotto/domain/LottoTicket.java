@@ -4,6 +4,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * 역할: 로또 6자리 포장 및 생성
+ */
 public class LottoTicket {
 
     private static final int LOTTO_NUMBERS_START_INDEX = 0;
@@ -18,7 +21,7 @@ public class LottoTicket {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
+    private LottoTicket(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("lottoNumbers.size() 가 " + LOTTO_NUMBERS_SIZE + "이 아닙니다");
         }

@@ -1,5 +1,8 @@
 package lotto.domain;
 
+/**
+ * 역할: 로또 지불액을 입력받아 티켓 수 추출
+ */
 public class LottoPrice {
 
     private static final int PRICE_PER_LOTTO = 1000;

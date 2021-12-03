@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * 역할: 로또 단일 숫자 원시값 포장
+ */
 public class LottoNumber implements Comparable<LottoNumber> {
 
     public static final int LOTTO_NUMBER_MIN = 1;

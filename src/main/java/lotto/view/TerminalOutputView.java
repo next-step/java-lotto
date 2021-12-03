@@ -2,13 +2,13 @@ package lotto.view;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.util.LottoViewConstants;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class TerminalOutputView {
 
-    private static final String LOTTO_NUMBERS_DELIMITER = ", ";
     private static final String LOTTO_NUMBERS_PREFIX = "[";
     private static final String LOTTO_NUMBERS_POSTFIX = "]";
 
@@ -24,11 +24,15 @@ public class TerminalOutputView {
         System.out.println();
     }
 
-    public void printLottoNumbers(List<LottoNumber> lottoNumbers) {
+    private void printLottoNumbers(List<LottoNumber> lottoNumbers) {
         String resultNumbers = lottoNumbers.stream()
                 .map(LottoNumber::number)
                 .map(String::valueOf)
-                .collect(Collectors.joining(LOTTO_NUMBERS_DELIMITER));
+                .collect(Collectors.joining(LottoViewConstants.LOTTO_NUMBERS_DELIMITER));
         System.out.println(LOTTO_NUMBERS_PREFIX + resultNumbers + LOTTO_NUMBERS_POSTFIX);
+    }
+
+    public void printWinningNumbersGuide() {
+        System.out.println("지난 주 당첨 번호를 입력해주세요.");
     }
 }
