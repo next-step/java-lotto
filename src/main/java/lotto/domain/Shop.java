@@ -1,17 +1,15 @@
 package lotto.domain;
 
-import static utils.IntegerValidator.*;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Shop {
 
-    public LottoTickets buy(int money, LottoMachine lottoMachine) {
-        int count = getNumberIfPositive(money) / LottoTicket.PRICE;
+    public LottoTickets buy(Wallet wallet, LottoMachine lottoMachine) {
 
         return new LottoTickets(
-            IntStream.range(0, count).boxed()
+            IntStream.range(0, wallet.getNumberOfBuyAvailableLottoTicket()).boxed()
                 .map(n -> lottoMachine.publish())
                 .collect(Collectors.toList()));
     }

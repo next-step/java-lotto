@@ -8,6 +8,7 @@ import lotto.domain.LottoRandomMachine;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Shop;
+import lotto.domain.Wallet;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -20,9 +21,9 @@ public class ShopTest {
     @ParameterizedTest(name = "[{argumentsWithNames}] 로또가격은 개당 1000원으로, 금액에 맞는 갯수가 발행된다.")
     void buyTest(int input) throws NoSuchFieldException, IllegalAccessException {
         Shop shop = new Shop();
-        shop.buy(14000, new LottoRandomMachine());
+        shop.buy(new Wallet(14000), new LottoRandomMachine());
 
-        LottoTickets lotteries = shop.buy(input, new LottoRandomMachine());
+        LottoTickets lotteries = shop.buy(new Wallet(input), new LottoRandomMachine());
 
         List<LottoTicket> tickets = getTicketsByReflection(lotteries);
 
@@ -34,7 +35,7 @@ public class ShopTest {
     void buyNegativeNumberTest(int input) {
         Shop shop = new Shop();
         Assertions.assertThatIllegalArgumentException()
-            .isThrownBy(() -> shop.buy(input, new LottoRandomMachine()));
+            .isThrownBy(() -> shop.buy(new Wallet(input), new LottoRandomMachine()));
     }
 
 

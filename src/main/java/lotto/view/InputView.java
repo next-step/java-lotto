@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto.domain.LottoTicket;
 import lotto.domain.ResultLotto;
+import lotto.domain.Wallet;
 
 public class InputView {
 
@@ -22,10 +23,10 @@ public class InputView {
         return new InputView();
     }
 
-    public int inputMoney() {
+    public Wallet inputMoney() {
         System.out.println(INPUT_NUMBER_OF_BUY_PRICE_MESSAGE);
 
-        return sc.nextInt();
+        return new Wallet(sc.nextInt());
     }
 
     public ResultLotto inputLottoResultNumber() {
