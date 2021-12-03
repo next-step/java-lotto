@@ -41,6 +41,7 @@ public class LottoTicket {
 
             String[] input = lottoNumber.split(STRING_NUMBERS_DELIMITER);
             Arrays.stream(input)
+                    .map(s -> s.trim())
                     .forEach(Validation::constantCheck);
 
             List<Integer> manualNumbers = Arrays.stream(input)
