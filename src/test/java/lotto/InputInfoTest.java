@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class InputInfoTest {
 
     @Test
-    @DisplayName("로또 구매 금액에 맞추어 로또 ")
+    @DisplayName("로또 구매 금액에 맞게 여러장의 로또를 구입한다.")
     void getTicket() {
         InputInfo inputInfo = new InputInfo("5000");
         Assertions.assertThat(inputInfo.getTicketCount()).isEqualTo(5);
