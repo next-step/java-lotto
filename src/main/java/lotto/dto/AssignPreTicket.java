@@ -22,7 +22,7 @@ public class AssignPreTicket {
         return assignCount;
     }
 
-    public BuyTickets getResultDto(LottoTickets assignLottoTickets, LottoMachine lottoMachine) {
+    public BuyTickets getAllBuyTickets(LottoTickets assignLottoTickets, LottoMachine lottoMachine) {
         return new BuyTickets(assignLottoTickets, buyAbleAllTickets(lottoMachine));
     }
 

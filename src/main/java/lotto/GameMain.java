@@ -17,18 +17,16 @@ public class GameMain {
         InputView inputView = InputView.create();
         Wallet wallet = inputView.inputMoney();
 
-        AssignPreTicket assignPreTicket = inputView.inputAssignNumberCount(
-            wallet);// 갯수는도 저장해야 하는데?
-        LottoTickets lottoTickets1 = inputView.inputAssignNumber(assignPreTicket);
+        AssignPreTicket assignPreTicket = inputView.inputAssignNumberCount(wallet);
+        LottoTickets assignTickets = inputView.inputAssignNumber(assignPreTicket);
 
-        BuyTickets resultDto = assignPreTicket.getResultDto(lottoTickets1,
-            new LottoRandomMachine());
+        BuyTickets buyTickets = assignPreTicket.getAllBuyTickets(assignTickets, new LottoRandomMachine());
 
         OutputView outputView = new OutputView();
-        outputView.printBuyCountMessage(resultDto);
+        outputView.printBuyCountMessage(buyTickets);
         ResultLotto resultLotto = inputView.inputLottoResultNumber();
 
-        GameResult result = resultDto.result(resultLotto);
+        GameResult result = buyTickets.result(resultLotto);
         outputView.printByResult(result);
 
     }
