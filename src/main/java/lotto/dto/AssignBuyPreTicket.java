@@ -22,8 +22,8 @@ public class AssignBuyPreTicket {
         return assignCount;
     }
 
-    public ResultLottoDTO getResultDto(LottoTickets assignLottoTickets, LottoMachine lottoMachine) {
-        return new ResultLottoDTO(assignLottoTickets, buyAbleAllTickets(lottoMachine));
+    public BuyTickets getResultDto(LottoTickets assignLottoTickets, LottoMachine lottoMachine) {
+        return new BuyTickets(assignLottoTickets, buyAbleAllTickets(lottoMachine));
     }
 
     private LottoTickets buyAbleAllTickets(LottoMachine lottoMachine) {

@@ -9,17 +9,17 @@ import java.util.stream.Collectors;
 import lotto.domain.Award;
 import lotto.domain.GameResult;
 import lotto.domain.LottoTicket;
-import lotto.dto.ResultLottoDTO;
+import lotto.dto.BuyTickets;
 
 public class OutputView {
 
-    public void printBuyCountMessage(ResultLottoDTO resultLottoDTO) {
+    public void printBuyCountMessage(BuyTickets buyTickets) {
         printSpace();
 
         print("수동으로 {0}장, 자동으로 {1}개를 구매했습니다.",
-            resultLottoDTO.getAssignTicketSize(), resultLottoDTO.getRandomTicketSize());
+            buyTickets.getAssignTicketSize(), buyTickets.getRandomTicketSize());
 
-        resultLottoDTO.getAllTicketToList().stream()
+        buyTickets.getAllTicketToList().stream()
             .map(this::getLottoNumbersString)
             .forEach(System.out::println);
 

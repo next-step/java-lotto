@@ -6,12 +6,12 @@ import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.ResultLotto;
 
-public class ResultLottoDTO {
+public class BuyTickets {
 
     private final LottoTickets assignLottoTickets;
     private final LottoTickets randomLottoTickets;
 
-    public ResultLottoDTO(LottoTickets assignLottoTickets,
+    public BuyTickets(LottoTickets assignLottoTickets,
         LottoTickets randomLottoTickets) {
         this.assignLottoTickets = assignLottoTickets;
         this.randomLottoTickets = randomLottoTickets;
