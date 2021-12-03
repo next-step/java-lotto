@@ -37,7 +37,7 @@ public class LottoFactory {
             lottoNumbersList.add(lottoNumbers);
 
         }
-        return new Lotto(new LottoWinningRules(), lottoNumbersList);
+        return new Lotto(new LottoWinningRules(), lottoNumbersList, numberOfLottoNumbers * LOTTO_PRICE);
     }
 
     public static int getLottoPrice(){

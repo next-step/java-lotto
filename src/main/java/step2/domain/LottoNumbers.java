@@ -37,11 +37,22 @@ public class LottoNumbers {
         return new LottoNumbers(unmodifiableLottoNumbers);
     }
 
-    public int size(){
+    public int numberOfMatching(LottoWinningNumbers lottoWinningNumbers) {
+        int numberOfMatching = 0;
+        for (int lottoNumber : lottoNumbers) {
+            if (lottoWinningNumbers.contain(lottoNumber)) {
+                numberOfMatching += 1;
+            }
+        }
+        return numberOfMatching;
+
+    }
+
+    public int size() {
         return lottoNumbers.size();
     }
 
-    public  List<Integer> getLottoNumbers(){
+    public List<Integer> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 

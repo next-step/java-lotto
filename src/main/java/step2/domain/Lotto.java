@@ -3,21 +3,62 @@ package step2.domain;
 import step2.domain.dto.LottoWinningResult;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Lotto {
     private final LottoWinningRules lottoWinningRules;
     private final List<LottoNumbers> lottoNumbersList;
 //    private final List<Integer> lottoNumbers;
-    private int price;
+    private final int price;
 
-    Lotto(LottoWinningRules lottoWinningRules, List<LottoNumbers> lottoNumbersList) {
+    Lotto(LottoWinningRules lottoWinningRules, List<LottoNumbers> lottoNumbersList, int price) {
         this.lottoWinningRules = lottoWinningRules;
         this.lottoNumbersList = lottoNumbersList;
+        this.price = price;
     }
+
+
+
 
     public int numberOfLottoNumbers(){
         return lottoNumbersList.size();
+    }
+
+
+    public Map<Integer, Integer> countNumberOfMatching(LottoWinningNumbers lottoWinningNumbers){
+        Map<Integer, Integer> map = new HashMap<>();
+        for(LottoNumbers lottoNumbers : lottoNumbersList){
+            int numberOfMatching = lottoNumbers.numberOfMatching(lottoWinningNumbers);
+            if(map.containsKey(numberOfMatching)){
+                map.put(numberOfMatching, map.get(numberOfMatching) + 1);
+            }else{
+                map.put(numberOfMatching, 1);
+
+            }
+        }
+        return map;
+
+    }
+
+
+    public int prizeMoney(LottoWinningNumbers lottoWinningNumbers){
+        Map<Integer, Integer> map = countNumberOfMatching(lottoWinningNumbers);
+        return map.entrySet().stream().map((m) -> lottoWinningRules.getPrizeOf(m.getKey()) * m.getValue()).reduce(0, Integer::sum);
+    }
+    public int prizeMoney(Map<Integer, Integer> countNumberOfMatching){
+        return countNumberOfMatching.entrySet().stream().map((m) -> lottoWinningRules.getPrizeOf(m.getKey()) * m.getValue()).reduce(0, Integer::sum);
+    }
+
+    public int earningRate(LottoWinningNumbers lottoWinningNumbers){
+        int prizeMoney = prizeMoney(lottoWinningNumbers);
+        return prizeMoney / price;
+    }
+
+    public int earningRate(Map<Integer, Integer> countNumberOfMatching){
+        int prizeMoney = prizeMoney(countNumberOfMatching);
+        return prizeMoney / price;
     }
 
 //    public List<Integer> getLottoNumbers(){
