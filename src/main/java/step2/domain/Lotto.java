@@ -61,9 +61,18 @@ public class Lotto {
         return prizeMoney / price;
     }
 
-//    public List<Integer> getLottoNumbers(){
-//        return Collections.unmodifiableList(lottoNumbers);
-//    }
+    public int size(){
+        return lottoNumbersList.size();
+    }
+
+
+    public List<LottoNumbers> getLottoNumbersList(){
+        return Collections.unmodifiableList(lottoNumbersList);
+    }
+
+    public LottoWinningRules getLottoWinningRules() {
+        return lottoWinningRules;
+    }
 //
 //    private int numberOfMatches(LottoWinningNumbers lottoWinningNumbers) {
 //        int numberOfMatching = 0;

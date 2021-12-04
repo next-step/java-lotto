@@ -27,6 +27,10 @@ public class LottoFactory {
 //        List<Integer> unmodifiableLottoNumbers = Collections.unmodifiableList(lottoNumbers);
 //        return new Lotto(new LottoWinningRules(), unmodifiableLottoNumbers);
 //    }
+    public static Lotto buyWithMoney(String moneyString){
+        int money = Integer.parseInt(moneyString);
+        return buyWithMoney(money);
+    }
 
     public static Lotto buyWithMoney(int money) {
         int numberOfLottoNumbers = money / LOTTO_PRICE;

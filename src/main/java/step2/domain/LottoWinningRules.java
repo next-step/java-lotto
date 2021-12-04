@@ -2,6 +2,7 @@ package step2.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class LottoWinningRules {
     private static final int LOSE_PRIZE = 0;
@@ -23,5 +24,9 @@ public class LottoWinningRules {
             return lottoPrize.get(numberOfMatches);
         }
         return LOSE_PRIZE;
+    }
+
+    public Set<Integer> numberOfMatching(){
+        return lottoPrize.keySet();
     }
 }

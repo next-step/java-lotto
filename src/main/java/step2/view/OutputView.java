@@ -30,10 +30,11 @@ public class OutputView {
             System.out.println(format);
 
         }
+        System.out.println();
 
     }
 
-    public static void earningsRate(double rate){
+    public static void earningRate(double rate){
         String format = String.format(EARNING_RATE_FORMAT, rate);
         System.out.println(format);
     }
