@@ -1,7 +1,7 @@
 package step2.controller;
 
 import step2.domain.*;
-import step2.dto.WinningInformation;
+import step2.dto.WinningInformationDto;
 import step2.view.InputView;
 import step2.view.OutputView;
 
@@ -27,16 +27,20 @@ public class LottoController {
         LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.from(winningLotteryNumbers);
         Map<Integer, Integer> countNumberOfMatching = lotto.countNumberOfMatching(lottoWinningNumbers);
         LottoWinningRules lottoWinningRules = lotto.getLottoWinningRules();
-        Set<Integer> num = lottoWinningRules.numberOfMatching();
-        List<WinningInformation> winningInformation = new ArrayList<>();
-        for (Integer integer : num) {
-            int numberOfMatching = integer;
-            int prizeMoney = lottoWinningRules.getPrizeOf(numberOfMatching);
-            int numberOfWinning = countNumberOfMatching.getOrDefault(numberOfMatching, 0);
-            winningInformation.add(new WinningInformation(numberOfMatching, prizeMoney, numberOfWinning));
-        }
-        OutputView.printWinningStatics(winningInformation);
+        List<WinningInformationDto> winningInformationDtoList = winningInformationList(countNumberOfMatching, lottoWinningRules);
+        OutputView.printWinningStatics(winningInformationDtoList);
         int earningRate = lotto.earningRate(countNumberOfMatching);
         OutputView.earningRate(earningRate);
+    }
+
+    private List<WinningInformationDto> winningInformationList(Map<Integer, Integer> countNumberOfMatching, LottoWinningRules lottoWinningRules) {
+        Set<Integer> numberOfMatchingSet = lottoWinningRules.numberOfMatchingSet();
+        List<WinningInformationDto> winningInformationDto = new ArrayList<>();
+        for (int numberOfMatching : numberOfMatchingSet) {
+            int prizeMoney = lottoWinningRules.getPrizeOf(numberOfMatching);
+            int numberOfWinning = countNumberOfMatching.getOrDefault(numberOfMatching, 0);
+            winningInformationDto.add(new WinningInformationDto(numberOfMatching, prizeMoney, numberOfWinning));
+        }
+        return winningInformationDto;
     }
 }

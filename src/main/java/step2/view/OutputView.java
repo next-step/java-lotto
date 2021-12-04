@@ -1,6 +1,6 @@
 package step2.view;
 
-import step2.dto.WinningInformation;
+import step2.dto.WinningInformationDto;
 
 import java.util.List;
 
@@ -22,11 +22,11 @@ public class OutputView {
 
     }
 
-    public static void printWinningStatics(List<WinningInformation> informationList ) {
+    public static void printWinningStatics(List<WinningInformationDto> informationList ) {
         System.out.println(WINNING_STATICS);
         System.out.println(DIVIDING_LINE);
-        for (WinningInformation information : informationList) {
-            String format = String.format(WINNING_STATICS_FORMAT, information.numberOfMatches, information.winningPrize, information.numberOfLotto);
+        for (WinningInformationDto information : informationList) {
+            String format = String.format(WINNING_STATICS_FORMAT, information.numberOfMatching, information.prizeMoney, information.numberOfLotto);
             System.out.println(format);
 
         }
