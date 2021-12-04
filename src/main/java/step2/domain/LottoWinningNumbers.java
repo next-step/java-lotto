@@ -9,6 +9,7 @@ public class LottoWinningNumbers {
 
     private static final String SPLITTER = ", ";
     private static final int NUMBER_OF_LOTTO_WINNING_NUMBERS = 6;
+
     private final List<Integer> lottoWinningNumbers;
 
     private LottoWinningNumbers(List<Integer> lottoWinningNumbers) {

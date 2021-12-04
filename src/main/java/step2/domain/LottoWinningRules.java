@@ -6,6 +6,7 @@ import java.util.Set;
 
 public class LottoWinningRules {
     private static final int LOSE_PRIZE = 0;
+
     private final Map<Integer, Integer> lottoPrize = new HashMap<>();
 
     public LottoWinningRules() {
