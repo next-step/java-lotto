@@ -17,7 +17,7 @@ public class GameResult {
     }
 
 
-    public Long getResultByCount(Award award) {
+    public long getResultByCount(Award award) {
         return results.getOrDefault(award, 0L);
     }
 

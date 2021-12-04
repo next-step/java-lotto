@@ -18,7 +18,7 @@ public class LottoRandomMachine implements LottoMachine {
                 .collect(Collectors.toList()));
     }
 
-    private static List<Integer> shuffleNumbers() {
+    private List<Integer> shuffleNumbers() {
         List<Integer> randomNumbers = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
             .boxed()
             .collect(Collectors.toList());
