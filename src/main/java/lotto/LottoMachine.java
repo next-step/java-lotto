@@ -1,6 +1,9 @@
 package lotto;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class LottoMachine {
     private Lottos lottos;
@@ -14,6 +17,12 @@ public class LottoMachine {
 
         LottoMachine lottoMachine = new LottoMachine();
         lottoMachine.draw(quantity);
+
+        System.out.println("당첨 번호를 입력해주세요");
+        String input = scanner.next();
+        String[] split = input.split(",");
+        List<Integer> winningNumbers = Arrays.stream(split).map(Integer::parseInt).collect(Collectors.toList());
+        System.out.println("winningNumbers = " + winningNumbers);
     }
 
     private void draw(int quantity) {
