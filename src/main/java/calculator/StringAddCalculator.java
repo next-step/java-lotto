@@ -6,7 +6,7 @@ public class StringAddCalculator {
 
     public static int splitAndSum(String number) {
         Delimiter delimiter = new Delimiter();
-        if (!delimiter.isSplit(number)) {
+        if (!delimiter.isEmpty(number)) {
             return 0;
         }
         List<String> splitList = delimiter.split(number);
