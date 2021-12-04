@@ -70,4 +70,8 @@ public class Budget {
     public boolean exhausted() {
         return budget == 0;
     }
+
+    public boolean available(int amount) {
+        return availableAmount() >= amount;
+    }
 }

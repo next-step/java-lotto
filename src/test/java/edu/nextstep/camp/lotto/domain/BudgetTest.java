@@ -78,6 +78,15 @@ public class BudgetTest {
         assertThat(budget.purchased(input / Budget.GAME_PRICE).exhausted()).isTrue();
     }
 
+    @ParameterizedTest(name = "available: {arguments}")
+    @ValueSource(ints = {1000, 2000, 1000000})
+    public void available(int input) {
+        Budget budget = budget(input);
+        assertThat(budget.available(input / Budget.GAME_PRICE)).isTrue();
+        assertThat(budget.available(input / Budget.GAME_PRICE - 1)).isTrue();
+        assertThat(budget.available(input / Budget.GAME_PRICE + 1)).isFalse();
+    }
+
     public static Budget budget(int budget) {
         return Budget.of(budget);
     }

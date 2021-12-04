@@ -6,7 +6,6 @@ import java.util.Set;
 import edu.nextstep.camp.lotto.domain.AutoLottoGenerator;
 import edu.nextstep.camp.lotto.domain.Budget;
 import edu.nextstep.camp.lotto.domain.GameResult;
-import edu.nextstep.camp.lotto.domain.Lotto;
 import edu.nextstep.camp.lotto.domain.Lottos;
 import edu.nextstep.camp.lotto.domain.Store;
 import edu.nextstep.camp.lotto.domain.WinningNumber;
@@ -17,10 +16,12 @@ public class LottoGame {
     public static void main(String[] args) {
         Budget budget = Budget.of(InputView.inputBudget());
 
-        // todo from input view
-        final int manualCount = 1;
-        // todo from input view
-        final List<Lotto> lottoList = List.of(Lotto.fromIntegers(List.of(1, 2, 3, 4, 5, 6)));
+        final int manualCount = InputView.inputAmountOfManualPurchase();
+        if (!budget.available(manualCount)) {
+            throw new IllegalArgumentException("not enough money(" + budget.budget() + ") for purchase " + manualCount);
+        }
+
+        final List<Set<Integer>> lottoList = InputView.inputManualLottos(manualCount);
         final Lottos manualLottos = Store.purchase(budget, lottoList);
 
         if (manualCount != manualLottos.amount())
