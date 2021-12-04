@@ -12,7 +12,7 @@ class LottosTest {
     @DisplayName("주어진 개수만큼 로또를 생성한다")
     void shouldCreateLottos() {
         Lottos lottos = new Lottos(3);
-        assertThat(lottos.getValues().size()).isEqualTo(3);
+        assertThat(lottos.values().size()).isEqualTo(3);
     }
 
     @Test

@@ -28,7 +28,7 @@ public class Lottos {
                 .count();
     }
 
-    public List<Lotto> getValues() {
+    public List<Lotto> values() {
         return values;
     }
 
