@@ -15,14 +15,14 @@ public class LottoNumbers {
     private final List<Integer> values;
 
     public LottoNumbers() {
-        this.values = pick();
+        this.values = lottoNumbers();
     }
 
     public LottoNumbers(List<Integer> values) {
         this.values = values;
     }
 
-    private List<Integer> pick() {
+    private List<Integer> lottoNumbers() {
         Collections.shuffle(NUMBERS);
 
         return NUMBERS.stream()
