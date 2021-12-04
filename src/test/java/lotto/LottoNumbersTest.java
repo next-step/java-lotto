@@ -17,7 +17,7 @@ class LottoNumbersTest {
 
     @Test
     @DisplayName("주어진 개수만큼 당첨 번호와 일치하는지 확인한다")
-    void shouldReturnResult() {
+    void shouldCheckWinningNumbers() {
         LottoNumbers winningNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 7, 8, 9));
 

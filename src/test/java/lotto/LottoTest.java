@@ -17,4 +17,15 @@ class LottoTest {
 
         assertThat(lotto).isEqualTo(new Lotto(lottoNumbers));
     }
+
+    @Test
+    @DisplayName("주어진 개수만큼 당첨 번호와 일치하는지 확인한다")
+    void shouldCheckWinningNumbers() {
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers winningNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 7, 8, 9));
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        boolean result = lotto.result(winningNumbers, count -> count == 3);
+        assertThat(result).isTrue();
+    }
 }

@@ -7,6 +7,10 @@ import java.util.Objects;
 public class Lottos {
     private final List<Lotto> values;
 
+    public Lottos(List<Lotto> lottos) {
+        this.values = lottos;
+    }
+
     public Lottos(int quantity) {
         List<Lotto> lottos = new ArrayList<>();
 
@@ -16,6 +20,12 @@ public class Lottos {
         }
 
         this.values = lottos;
+    }
+
+    public long result(LottoNumbers winningNumbers, Condition condition) {
+        return values.stream()
+                .filter(lotto -> lotto.result(winningNumbers, condition))
+                .count();
     }
 
     public List<Lotto> getValues() {

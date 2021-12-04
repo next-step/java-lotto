@@ -17,6 +17,10 @@ public class Lotto {
         return this.lottoNumbers;
     }
 
+    public boolean result(LottoNumbers winningNumbers, Condition condition) {
+        return lottoNumbers.result(winningNumbers, condition);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
