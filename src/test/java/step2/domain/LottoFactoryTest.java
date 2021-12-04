@@ -11,7 +11,7 @@ class LottoFactoryTest {
     @Test
     void buyWithMoney(){
         Lotto lotto = LottoFactory.buyWithMoney(14000);
-        assertThat(lotto.numberOfLottoNumbers()).isEqualTo(14);
+        assertThat(lotto.size()).isEqualTo(14);
     }
 
 }

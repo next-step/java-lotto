@@ -16,10 +16,6 @@ public class Lotto {
         this.price = price;
     }
 
-    public int numberOfLottoNumbers(){
-        return lottoNumbersList.size();
-    }
-
     public Map<Integer, Integer> countNumberOfMatching(LottoWinningNumbers lottoWinningNumbers){
         Map<Integer, Integer> map = new HashMap<>();
         for(LottoNumbers lottoNumbers : lottoNumbersList){
@@ -52,7 +48,6 @@ public class Lotto {
     public int size(){
         return lottoNumbersList.size();
     }
-
 
     public List<LottoNumbers> getLottoNumbersList(){
         return Collections.unmodifiableList(lottoNumbersList);
