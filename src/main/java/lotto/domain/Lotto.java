@@ -1,11 +1,11 @@
 package lotto.domain;
 
 import lotto.domain.value.LottoNumber;
-import lotto.service.util.Validation;
+import lotto.service.util.SizeCheckStrategy;
 
 import java.util.*;
 
-public class Lotto {
+public class Lotto implements SizeCheckStrategy {
 
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
@@ -20,8 +20,10 @@ public class Lotto {
     }
 
     private Lotto(Set<LottoNumber> numbers) {
-
-        Validation.lottoSizeCheck(numbers.size());
+        
+        if(isSizeOverCheck(numbers.size())) {
+            throw new IllegalArgumentException(FORM_ERROR_MSG);
+        }
 
         this.numbers = numbers;
     }
@@ -74,6 +76,11 @@ public class Lotto {
 
     public Set<LottoNumber> getNumbers() {
         return Collections.unmodifiableSet(numbers);
+    }
+
+    @Override
+    public boolean isSizeOverCheck(int lottoSize) {
+        return lottoSize != LOTTO_SIZE;
     }
 
     @Override

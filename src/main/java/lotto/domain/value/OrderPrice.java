@@ -1,10 +1,10 @@
 package lotto.domain.value;
 
-import lotto.service.util.Validation;
+import lotto.service.util.DigitCheckStrategy;
 
 import java.util.Objects;
 
-public class OrderPrice {
+public class OrderPrice implements DigitCheckStrategy {
 
     private static final int LOTTO_PRICE = 1000;
     private static final String MIN_MONEY_ERROR_MSG = "원 이상 입력해주세요";
@@ -13,16 +13,26 @@ public class OrderPrice {
 
     public OrderPrice(String inputMoney) {
 
-        Validation.constantCheck(inputMoney);
-        moneySizeCheck(inputMoney);
+        if((Integer.parseInt(inputMoney)) < LOTTO_PRICE) {
+            throw new IllegalArgumentException(LOTTO_PRICE + MIN_MONEY_ERROR_MSG);
+        }
+
+        if(!isDigitCheck(inputMoney)) {
+            throw new IllegalArgumentException(NUMBER_CHECK_ERROR_MSG);
+        }
 
         this.lottoPrice = Integer.parseInt(inputMoney);
     }
 
-    private void moneySizeCheck(String inputMoney) {
-        if (Integer.parseInt(inputMoney) < LOTTO_PRICE) {
-            throw new IllegalArgumentException(LOTTO_PRICE + MIN_MONEY_ERROR_MSG);
+    @Override
+    public boolean isDigitCheck(String inputMoney) {
+
+        for (char c : inputMoney.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                return false;
+            }
         }
+        return true;
     }
 
     public int getLottoPrice() {
@@ -45,4 +55,5 @@ public class OrderPrice {
     public int hashCode() {
         return Objects.hash(lottoPrice);
     }
+
 }

@@ -27,9 +27,10 @@ public class LottoTicketTest {
     @Test
     @DisplayName("로또 일급 컬랜셕 생성 테스트(수동)")
     void createTest() {
-        LottoTicket lottoTicket = new LottoTicket(3,null);
 
-        assertThat(lottoTicket.getLotto().size()).isEqualTo(3);
+        LottoTicket lottoTicket = new LottoTicket(3,Arrays.asList("1,2,3,4,5,6"));
+
+        assertThat(lottoTicket.getLotto().size()).isEqualTo(4);
     }
 
 }

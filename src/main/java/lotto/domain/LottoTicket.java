@@ -1,17 +1,12 @@
 package lotto.domain;
 
-import lotto.service.util.Validation;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Collections;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
 
     private static final String STRING_NUMBERS_DELIMITER = ",";
+    private static final String NUMBER_CHECK_ERROR_MSG = "숫자만 입력 가능합니다!!!!";
 
     private List<Lotto> allLottoNumbers = new ArrayList<>();
 
@@ -42,7 +37,7 @@ public class LottoTicket {
             String[] input = lottoNumber.split(STRING_NUMBERS_DELIMITER);
             Arrays.stream(input)
                     .map(s -> s.trim())
-                    .forEach(Validation::constantCheck);
+                    .forEach(LottoTicket::constantCheck);
 
             List<Integer> manualNumbers = Arrays.stream(input)
                     .map(s -> Integer.valueOf(s.trim()))
@@ -55,6 +50,15 @@ public class LottoTicket {
     private void createAutoTicket(int orderCount) {
         for(int i = 0; i < orderCount; i ++) {
             allLottoNumbers.add(new Lotto());
+        }
+    }
+
+    public static void constantCheck(String orderPrice) {
+
+        for (char c : orderPrice.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                throw new IllegalArgumentException(NUMBER_CHECK_ERROR_MSG);
+            }
         }
     }
 
