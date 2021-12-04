@@ -17,6 +17,7 @@ public class LottoMachine {
 
         outputView.showHowManyLottosBoughtWithMoney(lottos);
 
+        String lottoWinNumbers = inputView.showMessageAndGetLastWeekLottoWinNumbers();
 
     }
 }
