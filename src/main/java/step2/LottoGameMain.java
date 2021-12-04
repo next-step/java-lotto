@@ -7,8 +7,6 @@ import step2.service.LottoGameService;
 import step2.view.InputView;
 import step2.view.ResultView;
 
-import java.util.Map;
-
 public class LottoGameMain {
     private static final InputView INPUT_VIEW = InputView.getInstance();
     private static final ResultView RESULT_VIEW = ResultView.getInstance();

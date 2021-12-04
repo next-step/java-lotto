@@ -1,15 +1,10 @@
 package step2.view;
 
 import step2.domain.LottoTicket;
-import step2.domain.LottoTickets;
 import step2.dto.Ticket;
-import step2.dto.WinningNumber;
-import step2.dto.WinningResult;
 
-import javax.xml.transform.Source;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class ResultView {
     private static final ResultView RESULT_VIEW = new ResultView();
