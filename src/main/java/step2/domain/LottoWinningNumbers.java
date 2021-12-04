@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class LottoWinningNumbers {
 
-    private static final String SPLITTER = ",";
+    private static final String SPLITTER = ", ";
     private static final int NUMBER_OF_LOTTO_WINNING_NUMBERS = 6;
     private final List<Integer> lottoWinningNumbers;
 
