@@ -13,7 +13,7 @@ public class LottoNumbers {
     private static final int LOTTO_NUMBER_TOTAL_COUNT = 6;
     private static final int LOTTO_NUMBER_MIN_INDEX = 0;
     private static final int LOTTO_NUMBER_MAX_INDEX = LOTTO_NUMBER_TOTAL_COUNT - 1;
-    private static final List<Integer> numbers = IntStream
+    private static final List<Integer> NUMBERS = IntStream
             .rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
             .boxed()
             .collect(toList());
@@ -25,7 +25,7 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers generate() {
-        List<Integer> copyOfNumbers = new ArrayList<>(numbers);
+        List<Integer> copyOfNumbers = new ArrayList<>(NUMBERS);
         Collections.shuffle(copyOfNumbers);
         List<Integer> lottoNumbers = IntStream.rangeClosed(LOTTO_NUMBER_MIN_INDEX, LOTTO_NUMBER_MAX_INDEX)
                 .mapToObj(copyOfNumbers::get)
@@ -40,7 +40,7 @@ public class LottoNumbers {
     public int numberOfMatching(LottoWinningNumbers lottoWinningNumbers) {
         int numberOfMatching = 0;
         for (int lottoNumber : lottoNumbers) {
-            numberOfMatching += lottoWinningNumbers.contain(lottoNumber) ? 1 : 0;
+            numberOfMatching += lottoWinningNumbers.numberOfMatching(lottoNumber);
         }
         return numberOfMatching;
     }

@@ -36,8 +36,15 @@ public class OutputView {
     }
 
     public static void earningRate(double rate) {
-        String format = (rate < 1) ? String.format(EARNING_RATE_LESSTHAN_1_FORMAT, rate) : String.format(EARNING_RATE_FORMAT, rate);
+        String format = String.format(gerEarningRateFormat(rate), rate);
         System.out.println(format);
+    }
+
+    private static String gerEarningRateFormat(double rate) {
+        if (rate < 1) {
+            return EARNING_RATE_LESSTHAN_1_FORMAT;
+        }
+        return EARNING_RATE_FORMAT;
     }
 
 }
