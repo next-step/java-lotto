@@ -14,6 +14,8 @@ public class StringAddCalculator {
     private static final int SECOND = 2;
     private static final String INVALID_NUMBER = "0 이상의 정수값만 입력해주세요";
 
+    private StringAddCalculator() {}
+
     public static int splitAndSum(String inputString) {
         if (isEmptyOrNullText(inputString)) {
             return ZERO;
