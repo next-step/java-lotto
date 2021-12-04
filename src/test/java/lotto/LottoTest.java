@@ -11,7 +11,7 @@ class LottoTest {
 
     @Test
     @DisplayName("숫자 6개가 담긴 Lotto 객체를 생성한다.")
-    void shouldCreate() {
+    void shouldCreateLotto() {
         LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(
                 new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
