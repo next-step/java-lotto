@@ -24,11 +24,8 @@ public class Lotto {
         Map<Integer, Integer> map = new HashMap<>();
         for(LottoNumbers lottoNumbers : lottoNumbersList){
             int numberOfMatching = lottoNumbers.numberOfMatching(lottoWinningNumbers);
-            if(map.containsKey(numberOfMatching)){
-                map.put(numberOfMatching, map.get(numberOfMatching) + 1);
-            }else{
-                map.put(numberOfMatching, 1);
-            }
+            int count = map.getOrDefault(numberOfMatching, 1);
+            map.put(numberOfMatching, count);
         }
         return map;
     }
