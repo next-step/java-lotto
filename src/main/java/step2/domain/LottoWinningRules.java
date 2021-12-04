@@ -26,7 +26,7 @@ public class LottoWinningRules {
         return LOSE_PRIZE;
     }
 
-    public Set<Integer> numberOfMatchingSet(){
+    public Set<Integer> numberOfMatchingSet() {
         return lottoPrize.keySet();
     }
 }

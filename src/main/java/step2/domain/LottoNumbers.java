@@ -20,7 +20,7 @@ public class LottoNumbers {
 
     private final List<Integer> lottoNumbers;
 
-    private LottoNumbers(List<Integer> lottoNumbers){
+    private LottoNumbers(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 

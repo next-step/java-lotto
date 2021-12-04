@@ -12,7 +12,7 @@ import java.util.Set;
 
 public class LottoController {
 
-    public Lotto buyAndPrintLotto(){
+    public Lotto buyAndPrintLotto() {
         String purchaseAmount = InputView.purchaseAmount();
         Lotto lotto = LottoFactory.buyWithMoney(purchaseAmount);
         OutputView.printNumberOfPurchase(lotto.size());
@@ -24,7 +24,7 @@ public class LottoController {
         return lotto;
     }
 
-    public void winningInformationOf(Lotto lotto){
+    public void winningInformationOf(Lotto lotto) {
         String winningLotteryNumbers = InputView.winningLotteryNumbers();
         LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.from(winningLotteryNumbers);
         Map<Integer, Integer> countNumberOfMatching = lotto.countNumberOfMatching(lottoWinningNumbers);
