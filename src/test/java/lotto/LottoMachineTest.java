@@ -9,15 +9,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoMachineTest {
     @Test
-    @DisplayName("1에서 45 사이의 로또 번호 6자리를 생성한다")
+    @DisplayName("주어진 개수만큼 로또를 발급한다")
     void shouldDrawLottoNumbers() {
-        List<LottoNumber> lottoNumbers = LottoMachine.draw();
+        LottoMachine lottoMachine = new LottoMachine(6);
 
-        assertThat(lottoNumbers.size()).isEqualTo(6);
-        assertThat(lottoNumbers).allMatch(this::inRange);
-    }
-
-    private boolean inRange(LottoNumber lottoNumber) {
-        return lottoNumber.getValue() >= 0 && lottoNumber.getValue() <= 45;
+        assertThat(lottoMachine.lottos().getValues().size()).isEqualTo(6);
     }
 }

@@ -1,13 +1,13 @@
 package lotto;
 
-import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    private final List<Integer> numbers;
 
-    public Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
+    private final LottoNumbers lottoNumbers;
+
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     @Override
@@ -15,11 +15,22 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(numbers, lotto.numbers);
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers);
+        return Objects.hash(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "lottoNumbers=" + lottoNumbers +
+                '}';
+    }
+
+    public LottoNumbers lottoNumbers() {
+        return this.lottoNumbers;
     }
 }
