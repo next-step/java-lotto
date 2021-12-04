@@ -31,7 +31,6 @@ public class OutputView {
 
         }
         System.out.println();
-
     }
 
     public static void earningRate(double rate){

@@ -2,7 +2,6 @@ package step2.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.domain.dto.LottoWinningResult;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -80,7 +79,6 @@ class LottoTest {
         //then
         assertThat(earningRate).isEqualTo(5);
     }
-
 
     private LottoNumbers createLottoNumbersFrom(Integer... numbers) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         List<Integer> numberList = Arrays.asList(numbers);

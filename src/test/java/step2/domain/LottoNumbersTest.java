@@ -11,6 +11,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoNumbersTest {
+
     @DisplayName("생성된 로또 번호는 6개이다.")
     @Test
     void generate() {

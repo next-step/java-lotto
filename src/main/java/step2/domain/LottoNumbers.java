@@ -45,7 +45,6 @@ public class LottoNumbers {
             }
         }
         return numberOfMatching;
-
     }
 
     public int size() {

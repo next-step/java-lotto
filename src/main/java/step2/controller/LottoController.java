@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class LottoController {
+
     public Lotto buyAndPrintLotto(){
         String purchaseAmount = InputView.purchaseAmount();
         Lotto lotto = LottoFactory.buyWithMoney(purchaseAmount);
@@ -22,6 +23,7 @@ public class LottoController {
         }
         return lotto;
     }
+
     public void winningInformationOf(Lotto lotto){
         String winningLotteryNumbers = InputView.winningLotteryNumbers();
         LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.from(winningLotteryNumbers);
@@ -43,4 +45,5 @@ public class LottoController {
         }
         return winningInformationDto;
     }
+
 }
