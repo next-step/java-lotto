@@ -40,9 +40,7 @@ public class LottoNumbers {
     public int numberOfMatching(LottoWinningNumbers lottoWinningNumbers) {
         int numberOfMatching = 0;
         for (int lottoNumber : lottoNumbers) {
-            if (lottoWinningNumbers.contain(lottoNumber)) {
-                numberOfMatching += 1;
-            }
+            numberOfMatching += lottoWinningNumbers.contain(lottoNumber) ? 1 : 0;
         }
         return numberOfMatching;
     }

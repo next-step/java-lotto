@@ -18,9 +18,14 @@ public class LottoWinningNumbers {
         this.lottoWinningNumbers = lottoWinningNumbers;
     }
 
+    private void validate(List<Integer> lottoWinningNumbers) {
+        if (lottoWinningNumbers.size() != NUMBER_OF_LOTTO_WINNING_NUMBERS) {
+            throw new LottoException("당첨 번호는 " + NUMBER_OF_LOTTO_WINNING_NUMBERS + "개여야 합니다.");
+        }
+    }
+
     public static LottoWinningNumbers from(List<Integer> lottoWinningNumbers) {
         return new LottoWinningNumbers(lottoWinningNumbers);
-
     }
 
     public static LottoWinningNumbers from(String lottoWinningNumbers) {
@@ -29,12 +34,6 @@ public class LottoWinningNumbers {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
         return new LottoWinningNumbers(lottoWinningNumberList);
-    }
-
-    private void validate(List<Integer> lottoWinningNumbers) {
-        if (lottoWinningNumbers.size() != NUMBER_OF_LOTTO_WINNING_NUMBERS) {
-            throw new LottoException("당첨 번호는 " + NUMBER_OF_LOTTO_WINNING_NUMBERS + "개여야 합니다.");
-        }
     }
 
     public boolean contain(int number) {

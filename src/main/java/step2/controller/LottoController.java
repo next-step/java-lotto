@@ -16,12 +16,15 @@ public class LottoController {
         String purchaseAmount = InputView.purchaseAmount();
         Lotto lotto = LottoFactory.buyWithMoney(purchaseAmount);
         OutputView.printNumberOfPurchase(lotto.size());
+        printLottoNumbersList(lotto);
+        return lotto;
+    }
+
+    private void printLottoNumbersList(Lotto lotto) {
         List<LottoNumbers> lottoNumbersList = lotto.getLottoNumbersList();
         for (LottoNumbers lottoNumbers : lottoNumbersList) {
             OutputView.printLottoNumbers(lottoNumbers.getLottoNumbers());
-
         }
-        return lotto;
     }
 
     public void winningInformationOf(Lotto lotto) {

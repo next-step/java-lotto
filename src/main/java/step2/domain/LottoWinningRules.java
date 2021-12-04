@@ -19,11 +19,8 @@ public class LottoWinningRules {
         return lottoPrize.containsKey(numberOfMatches);
     }
 
-    public int getPrizeOf(int numberOfMatches) {
-        if (winLotto(numberOfMatches)) {
-            return lottoPrize.get(numberOfMatches);
-        }
-        return LOSE_PRIZE;
+    public int getPrizeOf(int numberOfMatching) {
+        return winLotto(numberOfMatching) ? lottoPrize.get(numberOfMatching) : LOSE_PRIZE;
     }
 
     public Set<Integer> numberOfMatchingSet() {
