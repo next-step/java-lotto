@@ -1,12 +1,28 @@
 package lotto;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class Number implements Comparable<Number> {
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+");
+    private static final String NOT_VALID_NUMBER_INPUT_MESSAGE = "유효한 숫자 입력이 아닙니다.";
+
     private final int number;
+
 
     public Number(int number) {
         this.number = number;
+    }
+
+    public Number(String number) {
+        validateNumber(number);
+        this.number = Integer.parseInt(number);
+    }
+
+    private void validateNumber(String number) {
+        if (!NUMBER_PATTERN.matcher(number).matches()) {
+            throw new IllegalArgumentException(NOT_VALID_NUMBER_INPUT_MESSAGE);
+        }
     }
 
     @Override
