@@ -6,11 +6,11 @@ import java.util.List;
 public class Store {
     private static final int LOTTO_PRICE = 1000;
 
-    public static List<Lotto> buy(int price) {
-        int num = price / LOTTO_PRICE;
+    public List<Lotto> sellTo(Person person) {
         List<Lotto> lottos = new ArrayList<>();
+        int num = person.getAmount() / LOTTO_PRICE;
         for (int i = 0; i < num; i++) {
-            lottos.add(new Lotto());
+            lottos.add(person.buy());
         }
         return lottos;
     }
