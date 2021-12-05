@@ -28,4 +28,8 @@ public class Lotties {
                 .map(lotto -> lotto.getRank(winLotto))
                 .collect(Collectors.groupingBy(rank -> rank, Collectors.counting())));
     }
+
+    public void addLotties(Lotties lotties) {
+        this.lotties.addAll(lotties.getLotties());
+    }
 }
