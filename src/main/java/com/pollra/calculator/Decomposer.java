@@ -1,7 +1,6 @@
 package com.pollra.calculator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -10,6 +9,8 @@ import java.util.List;
  * @author      pollra
  **********************************************************************************************************************/
 public class Decomposer {
+
+    private static final int ZERO = 0;
 
     private static final String COLON = ":";
     private static final String COMMA = ",";
@@ -27,16 +28,17 @@ public class Decomposer {
 
     public Numbers decompose(String text) {
         int customSeparatorBoundary = text.indexOf(CUSTOM_SEPARATOR_SUFFIX);
-        if(0 > customSeparatorBoundary) {
+        if(ZERO > customSeparatorBoundary) {
             return decomposeNumbers(text);
         }
-        if(0 < customSeparatorBoundary) {
+        if(ZERO < customSeparatorBoundary) {
             int textLength = text.length();
-            decomposeSeparators(text.substring(0, customSeparatorBoundary));
-
+            String separatorText = text.substring(ZERO, customSeparatorBoundary);
             customSeparatorBoundary += CUSTOM_SEPARATOR_SUFFIX.length();
+            String numbersText = text.substring(customSeparatorBoundary, textLength);
 
-            return decomposeNumbers(text.substring(customSeparatorBoundary, textLength));
+            decomposeSeparators(separatorText);
+            return decomposeNumbers(numbersText);
         }
         throw new RuntimeException("식이 올바르지 않습니다.");
     }
@@ -51,11 +53,11 @@ public class Decomposer {
     }
 
     private Numbers decomposeNumbers(String text) {
-        List<Number> numbers=decomposeNumber(text, 0);
+        List<Number> numbers = recursiveDecomposeNumber(text, ZERO);
         return new Numbers(numbers);
     }
 
-    private List<Number> decomposeNumber(String text, int index) {
+    private List<Number> recursiveDecomposeNumber(String text, int index) {
         if(index >= separators.size()) {
             return Collections.singletonList(new Number(text));
         }
@@ -63,13 +65,17 @@ public class Decomposer {
         List<String> splitTexts = separator.splitOf(text);
         List<Number> numbers = new ArrayList<>();
         for (String splitText : splitTexts) {
-            if(Number.isNumber(splitText)) {
-                numbers.add(new Number(splitText));
-            }
-            if( ! Number.isNumber(splitText)) {
-                numbers.addAll(decomposeNumber(splitText, index + 1));
-            }
+            recursiveCondition(index, numbers, splitText);
         }
         return numbers;
+    }
+
+    private void recursiveCondition(int index, List<Number> numbers, String splitText) {
+        if(Number.isNumber(splitText)) {
+            numbers.add(new Number(splitText));
+        }
+        if(Number.notNumber(splitText)) {
+            numbers.addAll(recursiveDecomposeNumber(splitText, ++index));
+        }
     }
 }
