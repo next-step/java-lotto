@@ -38,4 +38,16 @@ public class LottoResult {
     public long lottoPrizeCount(LottoPrize lottoPrize) {
         return prizeCount.get(lottoPrize);
     }
+
+    public double earningRate() {
+        double totalPrizeAmount = prizeCount.entrySet()
+                .stream()
+                .mapToLong(this::eachPrizeAmount)
+                .sum();
+        return totalPrizeAmount / myLottoTickets.totalTicketPurchasePrice();
+    }
+
+    private long eachPrizeAmount(Map.Entry<LottoPrize, Long> lottoPrizeLongEntry) {
+        return lottoPrizeLongEntry.getKey().prizeMoney() * lottoPrizeLongEntry.getValue();
+    }
 }

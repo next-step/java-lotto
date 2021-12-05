@@ -13,6 +13,10 @@ public class LottoPrice {
         this.purchaseAmount = purchaseAmount;
     }
 
+    public int realPurchaseAmount() {
+        return numberOfTicket() * PRICE_PER_LOTTO;
+    }
+
     public int numberOfTicket() {
         return purchaseAmount / PRICE_PER_LOTTO;
     }

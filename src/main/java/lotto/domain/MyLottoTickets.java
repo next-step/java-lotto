@@ -26,6 +26,10 @@ public class MyLottoTickets {
         }
     }
 
+    public int totalTicketPurchasePrice() {
+        return lottoPrice.realPurchaseAmount();
+    }
+
     public int numberOfTicket() {
         return lottoPrice.numberOfTicket();
     }

@@ -10,7 +10,7 @@ public enum LottoPrize {
     SIX_SAME(2000000000, 6),
     ;
 
-    private final long prizeMoney;
+    private final int prizeMoney;
     private final long sameCount;
 
     LottoPrize(int prizeMoney, int sameCount) {
@@ -30,7 +30,7 @@ public enum LottoPrize {
         return this.sameCount == sameCount;
     }
 
-    public long prizeMoney() {
+    public int prizeMoney() {
         return prizeMoney;
     }
 }
