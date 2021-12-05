@@ -19,8 +19,8 @@ public class Wallet {
         return new Wallet(preSpendAmount);
     }
 
-    public int getNumberOfBuyAvailableLottoTicket() {
-        return money / LottoTicket.PRICE;
+    public int getNumberOfBuyAvailableLottoTicket(int price) {
+        return money / price;
     }
 
     private void spendValid(int spendMoney) {

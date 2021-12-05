@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.lang.reflect.Field;
-import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -59,7 +58,7 @@ class WalletTest {
     @Test
     @DisplayName("LottoTicket이 1000원 이라면, 구매가능한 Ticket이 갯수가 정상적으로 반환된다.")
     void getNumberOfBuyAvailableLottoTicketTest() {
-        assertThat(wallet.getNumberOfBuyAvailableLottoTicket()).isEqualTo(10);
+        assertThat(wallet.getNumberOfBuyAvailableLottoTicket(1000)).isEqualTo(10);
     }
 
     private int getMoneyByReflection(Wallet wallet)
