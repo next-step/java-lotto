@@ -8,6 +8,7 @@ public class LottoApplication {
     public static void main(String[] args) {
         int totalCost = InputView.totalCost();
         int quantity = totalCost / EACH_PRICE;
+
         InputView.quantity(quantity);
         LottoMachine lottoMachine = new LottoMachine(quantity);
 

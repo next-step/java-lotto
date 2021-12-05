@@ -24,6 +24,7 @@ class LottoMachineTest {
     }
 
     @Test
+    @DisplayName("로또 수익률을 구한다")
     void shouldCalculateProfit() {
         LottoNumbers winningNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoMachine lottoMachine = new LottoMachine(lottosMatchedWinningNumbers());

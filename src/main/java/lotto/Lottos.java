@@ -34,8 +34,12 @@ public class Lottos {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Lottos lottos = (Lottos) o;
         return Objects.equals(values, lottos.values);
     }

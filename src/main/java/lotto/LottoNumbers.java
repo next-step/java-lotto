@@ -32,15 +32,6 @@ public class LottoNumbers {
         this.values = values;
     }
 
-    private List<Integer> lottoNumbers() {
-        Collections.shuffle(NUMBERS);
-
-        return NUMBERS.stream()
-                .limit(6)
-                .sorted()
-                .collect(toList());
-    }
-
     public boolean result(LottoNumbers winningNumbers, Condition condition) {
         long count = values.stream()
                 .filter(value -> winningNumbers.getValues().contains(value))
@@ -52,10 +43,23 @@ public class LottoNumbers {
         return values;
     }
 
+    private List<Integer> lottoNumbers() {
+        Collections.shuffle(NUMBERS);
+
+        return NUMBERS.stream()
+                .limit(6)
+                .sorted()
+                .collect(toList());
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         LottoNumbers that = (LottoNumbers) o;
         return Objects.equals(values, that.values);
     }

@@ -21,8 +21,8 @@ class LottosTest {
         LottoNumbers winningNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lottos lottos = create();
 
-        long result = lottos.result(winningNumbers, count -> count == 3);
-        assertThat(result).isEqualTo(2);
+        long matchedThreeNumbers = lottos.result(winningNumbers, count -> count == 3);
+        assertThat(matchedThreeNumbers).isEqualTo(2);
     }
 
     private Lottos create() {

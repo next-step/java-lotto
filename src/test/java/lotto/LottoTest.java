@@ -25,7 +25,7 @@ class LottoTest {
         LottoNumbers winningNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 7, 8, 9));
         Lotto lotto = new Lotto(lottoNumbers);
 
-        boolean result = lotto.result(winningNumbers, count -> count == 3);
-        assertThat(result).isTrue();
+        boolean matchedThreeNumbers = lotto.result(winningNumbers, count -> count == 3);
+        assertThat(matchedThreeNumbers).isTrue();
     }
 }
