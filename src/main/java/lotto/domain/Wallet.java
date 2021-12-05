@@ -19,7 +19,7 @@ public class Wallet {
         return new Wallet(preSpendAmount);
     }
 
-    public int getNumberOfBuyAvailableLottoTicket(int price) {
+    public int getNumberOfBuyAvailable(int price) {
         return money / price;
     }
 

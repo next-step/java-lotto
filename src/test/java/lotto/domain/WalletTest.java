@@ -58,7 +58,7 @@ class WalletTest {
     @Test
     @DisplayName("LottoTicket이 1000원 이라면, 구매가능한 Ticket이 갯수가 정상적으로 반환된다.")
     void getNumberOfBuyAvailableLottoTicketTest() {
-        assertThat(wallet.getNumberOfBuyAvailableLottoTicket(1000)).isEqualTo(10);
+        assertThat(wallet.getNumberOfBuyAvailable(1000)).isEqualTo(10);
     }
 
     private int getMoneyByReflection(Wallet wallet)
