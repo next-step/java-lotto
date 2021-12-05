@@ -17,4 +17,8 @@ public class LottoNumbers {
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
 }
