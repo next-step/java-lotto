@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,5 +35,19 @@ class LottiesTest {
 
         assertThat(resultRank.getPrizeCount(Rank.FIFTH)).isEqualTo(1);
         assertThat(resultRank.getPrizeCount(Rank.OUT)).isEqualTo(4);
+    }
+
+    @DisplayName("로또 목록 결합 테스트")
+    @Test
+    void addLottiesTest() {
+        List<String> lottoPaperOne = Arrays.asList("2, 9, 13, 33 ,39, 45", "34, 40, 13, 2 ,9, 44");
+        List<String> lottoPaperTwo = Arrays.asList("2, 9, 13, 33, 40, 45", "9, 10, 11, 20, 22, 31");
+        Store store = new Store();
+        Lotties lottiesOne = store.purchaseManualLotto(lottoPaperOne);
+        Lotties lottiesTwo = store.purchaseManualLotto(lottoPaperOne);
+
+        lottiesOne.addLotties(lottiesTwo);
+
+        assertThat(lottiesOne.purchaseLottiesCount()).isEqualTo(4);
     }
 }
