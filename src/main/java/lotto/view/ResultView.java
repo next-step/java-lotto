@@ -1,4 +1,4 @@
-package lotto.controller;
+package lotto.view;
 
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;

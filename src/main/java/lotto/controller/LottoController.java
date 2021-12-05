@@ -2,6 +2,8 @@ package lotto.controller;
 
 import lotto.model.Lotto;
 import lotto.model.Money;
+import lotto.view.InputView;
+import lotto.view.ResultView;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,6 +16,7 @@ public class LottoController {
         Money money = inputView.inputMoney();
         List<Lotto> lottoList = buyLotto(money);
         resultView.printBoughtResult(lottoList);
+        List<Integer> winningNumbers = inputView.inputLastWeekWinningNumbers();
     }
 
     public static List<Lotto> buyLotto(Money money) {

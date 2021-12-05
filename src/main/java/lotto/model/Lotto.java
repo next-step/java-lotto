@@ -1,5 +1,8 @@
 package lotto.model;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Lotto {
     private final LottoNumbers numbers;
 
@@ -9,6 +12,13 @@ public class Lotto {
 
     public Lotto(LottoNumbers lottoNumbers) {
         this.numbers = lottoNumbers;
+    }
+
+    public Lotto(List<Integer> lottoNumbers) {
+        this(new LottoNumbers(
+                lottoNumbers.stream()
+                        .map(LottoNumber::new)
+                        .collect(Collectors.toList())));
     }
 
     public LottoNumbers getLottoNumbers() {
