@@ -1,20 +1,18 @@
 package lotto;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Scanner;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final int EACH_PRICE = 1000;
 
-    public static int quantity() {
+    public static int totalCost() {
         System.out.println("구입 금액을 입력해 주세요.");
-        int price = scanner.nextInt();
+        return scanner.nextInt();
+    }
 
-        int quantity = price / EACH_PRICE;
+    public static void quantity(int quantity) {
         System.out.println(quantity + "개를 구매했습니다.");
-
-        return quantity;
     }
 
     public static void print(Lottos lottos) {
@@ -28,9 +26,13 @@ public class InputView {
         return new LottoNumbers(scanner.next());
     }
 
-    public static void summary(HashMap<Integer, Long> result) {
-        for (Integer integer : result.keySet()) {
-            System.out.println(integer + "개 일치: " + result.get(integer));
+    public static void summary(EnumMap<MatchedNumbers, Long> result) {
+        for (MatchedNumbers matchedNumbers : result.keySet()) {
+            System.out.println(matchedNumbers.count() + "개 일치: " + result.get(matchedNumbers));
         }
+    }
+
+    public static void profit(float profit) {
+        System.out.printf("수익률: %.2f", profit);
     }
 }

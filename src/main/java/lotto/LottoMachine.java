@@ -1,12 +1,10 @@
 package lotto;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.EnumMap;
 
 public class LottoMachine {
-    private static final List<Integer> MATCHING_COUNTS = Arrays.asList(3, 4, 5, 6);
     private final Lottos lottos;
+    private EnumMap<MatchedNumbers, Long> result;
 
     public LottoMachine(int quantity) {
         this(new Lottos(quantity));
@@ -16,15 +14,26 @@ public class LottoMachine {
         this.lottos = lottos;
     }
 
-    public HashMap<Integer, Long> result(LottoNumbers winningNumbers) {
-        HashMap<Integer, Long> result = new HashMap<>();
+    public EnumMap<MatchedNumbers, Long> result(LottoNumbers winningNumbers) {
+        result = new EnumMap<>(MatchedNumbers.class);
 
-        for (Integer matchingCount : MATCHING_COUNTS) {
-            long matchedLottoNumbersCount = lottos.result(winningNumbers, count -> count == matchingCount);
-            result.put(matchingCount, matchedLottoNumbersCount);
+        for (MatchedNumbers matchedNumbers : MatchedNumbers.values()) {
+            long matchedLottoCount = lottos.result(winningNumbers, count -> count == matchedNumbers.count());
+            result.put(matchedNumbers, matchedLottoCount);
         }
 
         return result;
+    }
+
+    public float profit(int totalCost) {
+        int prize = 0;
+
+        for (MatchedNumbers matchedNumbers : result.keySet()) {
+            Long matchedLottoCount = result.get(matchedNumbers);
+            prize += matchedNumbers.prize(matchedLottoCount);
+        }
+
+        return (float) prize / totalCost;
     }
 
     public Lottos lottos() {
