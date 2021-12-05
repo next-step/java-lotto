@@ -2,17 +2,31 @@ package lotto.domain;
 
 import static utils.IntegerValidator.getNumberIfRange;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
+
+    private static final Map<Integer, LottoNumber> cache = new HashMap<>();
 
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
 
     private final int number;
 
-    public LottoNumber(int number) {
+    static {
+        IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
+            .forEach(number -> cache.put(number, new LottoNumber(number)));
+    }
+
+    private LottoNumber(int number) {
         this.number = getNumberIfRange(number, MIN_NUMBER, MAX_NUMBER);
+    }
+
+    public static LottoNumber create(int number) {
+        return cache.getOrDefault(number, new LottoNumber(number));
     }
 
     public int getNumber() {

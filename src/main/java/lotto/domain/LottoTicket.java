@@ -18,7 +18,7 @@ public class LottoTicket {
 
         this.numbers = Collections.unmodifiableList(
             numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::create)
                 .collect(Collectors.toList())
         );
     }
@@ -35,7 +35,7 @@ public class LottoTicket {
     }
 
     public boolean matchOfNumber(int number) {
-        return numbers.contains(new LottoNumber(number));
+        return numbers.contains(LottoNumber.create(number));
     }
 
     public List<Integer> getNumbers() {
