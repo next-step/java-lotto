@@ -1,4 +1,4 @@
-package utils;
+package lotto.view;
 
 import java.text.MessageFormat;
 

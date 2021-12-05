@@ -1,7 +1,7 @@
 package lotto.view;
 
-import static utils.PrintUtils.print;
-import static utils.PrintUtils.printSpace;
+import static lotto.view.PrintUtils.print;
+import static lotto.view.PrintUtils.printSpace;
 
 import java.util.Arrays;
 import java.util.List;
