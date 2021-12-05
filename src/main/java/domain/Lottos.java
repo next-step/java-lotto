@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static domain.Lotto.PRICE_OF_LOTTO;
+import static domain.Lotto.PRICE;
 
 public class Lottos {
     private static final int STARTING_INDEX_LOTTOS = 0;
@@ -21,13 +21,13 @@ public class Lottos {
     }
 
     public int investment() {
-        return lottos.size() * PRICE_OF_LOTTO;
+        return lottos.size() * PRICE;
     }
 
     public List<Integer> matchedNumbers(Lotto winningLotto) {
         List<Integer> matched = new ArrayList<>();
 
-        lottos.forEach(lotto -> matched.add(lotto.compareWithWinningNumber(winningLotto)));
+        lottos.forEach(lotto -> matched.add(lotto.matchingNumber(winningLotto)));
 
         return matched;
     }

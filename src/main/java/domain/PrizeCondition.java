@@ -3,13 +3,11 @@ package domain;
 import java.util.Arrays;
 import java.util.Optional;
 
-import static domain.Prize.*;
-
 public enum PrizeCondition {
-    FIRST(FIRST_PRIZE_MATCHING_NUMBER, FIRST_PRIZE_REWARD),
-    THIRD(THIRD_PRIZE_MATCHING_NUMBER, THIRD_PRIZE_REWARD),
-    FOURTH(FOURTH_PRIZE_MATCHING_NUMBER, FOURTH_PRIZE_REWARD),
-    FIFTH(FIFTH_PRIZE_MATCHING_NUMBER, FIFTH_PRIZE_REWARD);
+    FIRST(6, 2_000_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000);
 
     private final int matchingNumber;
     private final int reward;

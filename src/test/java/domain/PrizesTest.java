@@ -12,8 +12,8 @@ public class PrizesTest {
     @DisplayName("Test profitRate function of Prizes class")
     @Test
     void testProfitRate() {
-        Prizes prizes = new Prizes(LOTTOS);
+        Prizes prizes = new Prizes();
 
-        assertThat(prizes.profitRate(WINNING_LOTTO)).isEqualTo(200_311.5);
+        assertThat(prizes.profitRate(LOTTOS, WINNING_LOTTO)).isEqualTo(200_311.5);
     }
 }

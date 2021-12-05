@@ -14,17 +14,11 @@ public class Prizes {
         put(PrizeCondition.FIFTH, new Prize(PrizeCondition.FIFTH, INITIAL_PRIZE_COUNT));
     }};
 
-    private final Lottos lottos;
-
-    public Prizes(Lottos lottos) {
-        this.lottos = lottos;
-    }
-
     public int match(PrizeCondition prizeCondition) {
         return prizes.get(prizeCondition).getCount();
     }
 
-    public double profitRate(Lotto winningNumber) {
+    public double profitRate(Lottos lottos, Lotto winningNumber) {
         lottos.matchedNumbers(winningNumber).forEach(this::savePrize);
 
         return (double) sumProfit() / lottos.investment();

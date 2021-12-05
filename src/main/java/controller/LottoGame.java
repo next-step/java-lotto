@@ -32,8 +32,8 @@ public class LottoGame {
         String winningNumber = inputView.extractWinningNumber();
         Lotto winningLotto = Lotto.of(parseNumbers(winningNumber));
 
-        Prizes prizes = new Prizes(lottos);
-        double profitRate = prizes.profitRate(winningLotto);
+        Prizes prizes = new Prizes();
+        double profitRate = prizes.profitRate(lottos, winningLotto);
         outputView.showLottoResult(prizes);
         outputView.showProfitRate(profitRate);
     }

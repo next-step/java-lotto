@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 import static domain.LottoNumber.*;
 
 public class Lotto {
-    public static final int PRICE_OF_LOTTO = 1_000;
+    public static final int PRICE = 1_000;
     private static final int STARTING_INDEX_LOTTO = 0;
     private static final int LAST_INDEX_LOTTO = 6;
 
@@ -31,7 +31,7 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public int compareWithWinningNumber(Lotto winningNumber) {
+    public int matchingNumber(Lotto winningNumber) {
         return (int) winningNumber.lottoNumbers
                 .stream()
                 .filter(this.lottoNumbers::contains)
@@ -39,7 +39,7 @@ public class Lotto {
     }
 
     public static int amount(int price) {
-        return price / PRICE_OF_LOTTO;
+        return price / PRICE;
     }
 
     public static Lotto of() {

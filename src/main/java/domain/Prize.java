@@ -3,14 +3,6 @@ package domain;
 import java.util.Objects;
 
 public class Prize {
-    public static final int FIFTH_PRIZE_MATCHING_NUMBER = 3;
-    public static final int FOURTH_PRIZE_MATCHING_NUMBER = 4;
-    public static final int THIRD_PRIZE_MATCHING_NUMBER = 5;
-    public static final int FIRST_PRIZE_MATCHING_NUMBER = 6;
-    public static final int FIFTH_PRIZE_REWARD = 5_000;
-    public static final int FOURTH_PRIZE_REWARD = 50_000;
-    public static final int THIRD_PRIZE_REWARD = 1_500_000;
-    public static final int FIRST_PRIZE_REWARD = 2_000_000_000;
 
     private final PrizeCondition prizeCondition;
     private final int count;
