@@ -25,6 +25,12 @@ class WalletTest {
     }
 
     @Test
+    @DisplayName("Wallet 객체가 Caching이 적용되어야 한다.")
+    void walletCacheTest() {
+        assertThat(Wallet.create(1000)).isSameAs(Wallet.create(1000));
+    }
+
+    @Test
     @DisplayName("Wallet 객체 생성시, 음수가 들어가면 RuntimeException이 발생한다.")
     void walletCreateExceptionTest() {
         assertThatIllegalArgumentException()

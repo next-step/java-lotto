@@ -3,14 +3,29 @@ package lotto.domain;
 import static utils.IntegerValidator.getNumberIfPositive;
 import static utils.IntegerValidator.isNumberNegative;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class Wallet {
 
+    private static final Map<Integer, Wallet> cache = new HashMap<>();
     private final int money;
+
+    static {
+        IntStream.rangeClosed(0, 100)
+            .map(number -> number * LottoTicket.PRICE)
+            .forEach(money -> cache.put(money, new Wallet(money)));
+    }
 
     public Wallet(int money) {
         this.money = getNumberIfPositive(money);
+    }
+
+
+    public static Wallet create(int money) {
+        return cache.getOrDefault(money, new Wallet(money));
     }
 
     public Wallet spend(int spendMoney) {
