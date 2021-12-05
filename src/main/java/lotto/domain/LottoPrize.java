@@ -37,6 +37,4 @@ public enum LottoPrize {
     public long sameCount() {
         return sameCount;
     }
-
-
 }
