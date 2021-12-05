@@ -1,17 +1,17 @@
 package lotto.model;
 
+import lotto.utils.LottoNumberGenerator;
+
+import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.Set;
 
 public class LottoNumbers {
-    private static final int MAX_LENGTH_LOTTO = 6;
+    public static final int MAX_LENGTH_LOTTO = 6;
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers() {
-        this(IntStream.range(0, MAX_LENGTH_LOTTO)
-                .mapToObj((int i) -> new LottoNumber())
-                .collect(Collectors.toList()));
+        this(LottoNumberGenerator.generateLottoNumbers());
     }
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -24,10 +24,9 @@ public class LottoNumbers {
     }
 
     void checkDuplicatedNumber(final List<LottoNumber> lottoNumbers) {
-        boolean duplicated = lottoNumbers.stream()
-                .anyMatch(lottoNumbers::contains);
-        if (duplicated) {
-            throw new IllegalArgumentException("로또 숫자는 중복될 수 없습니다");
+        Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers);
+        if (lottoNumbers.size() != lottoNumberSet.size()) {
+            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
     }
 }
