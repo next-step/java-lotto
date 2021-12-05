@@ -12,7 +12,7 @@ public class LottoBuyerTest {
     void checkPurchaseValidation() {
         assertThatThrownBy(
                 () -> {
-                    LottosBuyer.of(14000, 15);
+                    new LottosBuyer(14000, 15);
                 }
         ).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("전체 로또 수 보다, 수동 로또를 많이 구매할 수 없습니다.");
     }

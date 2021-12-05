@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.validator.LottoValidator;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -15,21 +14,14 @@ public class Lotto {
             .mapToObj(i -> LottoNumber.ofInt(i))
             .collect(Collectors.toList());
 
-    public static final int PRICE = 1000;
     public static final int SIZE = 6;
 
     private final List<LottoNumber> lotto;
 
     private Lotto(List<LottoNumber> lotto) {
-        LottoValidator.checkSize(lotto);
-        LottoValidator.checkDistinct(lotto);
+        checkSize(lotto);
+        checkDistinct(lotto);
         this.lotto = lotto;
-    }
-
-    private Lotto(String lottoString) {
-        this(Arrays.stream(lottoString.split(","))
-                .map(lottoNumberString -> LottoNumber.ofString(lottoNumberString))
-                .collect(Collectors.toList()));
     }
 
     public static Lotto ofRandomLottoNumbers() {
@@ -38,9 +30,10 @@ public class Lotto {
     }
 
     public static Lotto ofManualStringLottoNumbers(String lottoString) {
-        return new Lotto(lottoString);
+        return new Lotto(Arrays.stream(lottoString.split(","))
+                .map(lottoNumberString -> LottoNumber.ofString(lottoNumberString))
+                .collect(Collectors.toList()));
     }
-
 
     public int countMatching(WinningLotto winningLotto) {
         Long count = lotto.stream()
@@ -55,6 +48,21 @@ public class Lotto {
 
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(lotto);
+    }
+
+    public void checkDistinct(List<LottoNumber> lotto) {
+        int compareSize = Long.valueOf(lotto.stream()
+                .distinct()
+                .count()).intValue();
+        if (compareSize != lotto.size()) {
+            throw new IllegalArgumentException("로또에 중복된 숫자가 존재합니다.");
+        }
+    }
+
+    public void checkSize(List<LottoNumber> lottoLottoNumbers) {
+        if (lottoLottoNumbers.size() != SIZE) {
+            throw new IllegalArgumentException(SIZE + " 와 길이가 다른 Lotto 는 입력될 수 없습니다.");
+        }
     }
 
     @Override

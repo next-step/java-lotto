@@ -44,7 +44,7 @@ public class WinningLottoTest {
     }
 
     @Test
-    @DisplayName("당첨 번호의 size 테스트")
+    @DisplayName("당첨 번호가 해당 로또넘버를 포함하는지 checkContainNumber 테스트")
     void checkContainNumberTest() {
         WinningLotto winningLotto = WinningLotto.ofString("1,2,3,4,5,6");
         assertTrue(winningLotto.checkContainNumber(LottoNumber.ofInt(5)));

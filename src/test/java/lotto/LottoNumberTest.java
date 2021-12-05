@@ -8,6 +8,7 @@ import static lotto.domain.LottoNumber.BOUND_END;
 import static lotto.domain.LottoNumber.BOUND_START;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LottoNumberTest {
 
@@ -39,4 +40,9 @@ public class LottoNumberTest {
         assertThat(LottoNumber.ofString("10")).isEqualTo(LottoNumber.ofInt(10));
     }
 
+    @Test
+    @DisplayName("1부터 45까지의 LottoNumber의 cache가 잘 만들어졌는지 test ")
+    void cacheTest() {
+        assertTrue(LottoNumber.ofInt(1)==LottoNumber.ofInt(1));
+    }
 }

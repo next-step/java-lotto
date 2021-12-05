@@ -1,6 +1,9 @@
 package lotto.view;
 
-import lotto.domain.*;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import lotto.domain.LottosRecord;
+import lotto.domain.Prize;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +25,7 @@ public class Output {
         }
     }
 
-    public static void viewResult(Lottos lottos, Integer purchaseAmount, WinningLotto winningLotto, LottoNumber bonus) {
+    public static void viewResult(LottosRecord lottosRecord) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
@@ -32,9 +35,9 @@ public class Output {
                     if (prize == Prize.SECOND) {
                         stringBuilder = stringBuilder.append(", 보너스 볼 일치");
                     }
-                    System.out.println(prize.getMatching() + "개 일치" + stringBuilder.toString() + "(" + prize.getPrize() + ") - " + lottos.getCount(prize, winningLotto, bonus) + " 개 일치");
+                    System.out.println(prize.getMatching() + "개 일치" + stringBuilder.toString() + "(" + prize.getPrize() + ") - " + lottosRecord.getRecord().get(prize) + " 개 일치");
                 });
 
-        System.out.println("총 수익률은 " + new Double(lottos.getPrize(winningLotto, bonus)) / new Double(purchaseAmount) + "입니다.");
+        System.out.println("총 수익률은 " + lottosRecord.getProfit() + "입니다.");
     }
 }

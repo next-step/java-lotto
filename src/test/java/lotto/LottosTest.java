@@ -52,7 +52,7 @@ public class LottosTest {
     @DisplayName("lottos 의 getPrize 테스트")
     void getPrizeTest(Lottos lottos, LottoNumber bonus, int expect) {
         WinningLotto winningNumber = WinningLotto.ofStringAndBonusBall("1,2,3,4,5,6", bonus);
-        assertThat(lottos.getPrize(winningNumber, bonus)).isEqualTo(expect);
+        assertThat(lottos.getTotalProfit(winningNumber, bonus)).isEqualTo(expect);
     }
 
     @Test
@@ -87,19 +87,19 @@ public class LottosTest {
     void mergeLottosTest() {
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(Lotto.ofManualStringLottoNumbers("1,2,3,4,5,6"));
-        Lottos lottos_1 = Lottos.ofLottos(lottoList);
+        Lottos lottos1 = Lottos.ofLottos(lottoList);
 
         List<Lotto> lottoList_2 = new ArrayList<>();
         lottoList_2.add(Lotto.ofManualStringLottoNumbers("11,12,13,14,15,16"));
-        Lottos lottos_2 = Lottos.ofLottos(lottoList_2);
+        Lottos lottos2 = Lottos.ofLottos(lottoList_2);
 
-        lottos_1.mergeLottos(lottos_2);
+        lottos1.mergeLottos(lottos2);
 
         List<Lotto> expectList = new ArrayList<>();
         expectList.add(Lotto.ofManualStringLottoNumbers("1,2,3,4,5,6"));
         expectList.add(Lotto.ofManualStringLottoNumbers("11,12,13,14,15,16"));
 
         Lottos lottos = Lottos.ofLottos(expectList);
-        assertThat(lottos_1.getLottos()).isEqualTo(lottos.getLottos());
+        assertThat(lottos1.getLottos()).isEqualTo(lottos.getLottos());
     }
 }

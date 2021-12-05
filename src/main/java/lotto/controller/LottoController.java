@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
-import lotto.domain.LottosBuyer;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 import lotto.view.Input;
 import lotto.view.Output;
 
@@ -12,16 +9,18 @@ public class LottoController {
         Integer purchaseAmount = Input.inputPurchaseAmount();
         int manualLottoCount = Input.inputManualLottoCount();
 
-        LottosBuyer lottosBuyer = LottosBuyer.of(purchaseAmount, manualLottoCount);
-        lottosBuyer.buyManualLottos(Input.inputManualLottos(manualLottoCount));
+        LottosBuyer lottosBuyer = new LottosBuyer(purchaseAmount, manualLottoCount);
+        Lottos manualLottos = Input.inputManualLottos(manualLottoCount);
         Lottos randomLottos = lottosBuyer.buyRandomLottos();
-        Output.viewPurchasedLotto(randomLottos);
+        Lottos totalLottos = lottosBuyer.getTotalLottos(manualLottos, randomLottos);
+        Output.viewPurchasedLotto(totalLottos);
 
         String winningLottoString = Input.inputWinningNumbers();
         LottoNumber bonus = Input.inputBonusBall();
         WinningLotto winningLotto = WinningLotto.ofStringAndBonusBall(winningLottoString, bonus);
 
-        Lottos allLottos = lottosBuyer.getLottos();
-        Output.viewResult(allLottos, purchaseAmount, winningLotto, bonus);
+        LottosRecord lottosRecord = LottosRecord.of(totalLottos, winningLotto, bonus, purchaseAmount);
+
+        Output.viewResult(lottosRecord);
     }
 }

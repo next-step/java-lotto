@@ -29,7 +29,7 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public int getPrize(WinningLotto winningLotto, LottoNumber bonus) {
+    public int getTotalProfit(WinningLotto winningLotto, LottoNumber bonus) {
         return lottos.stream()
                 .mapToInt(lotto -> Prize.findPrize(lotto.countMatching(winningLotto), winningLotto, lotto.checkContainNumber(bonus)).getPrize())
                 .sum();
