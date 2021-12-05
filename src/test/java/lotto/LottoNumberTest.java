@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class LottoNumberTest {
 
     @Test
-    @DisplayName("bound 보다 큰 숫자 exception test")
+    @DisplayName("bound 보다 크거나 작은 숫자 exception test")
     void checkBoundTest() {
         int boundNumber = 46;
         assertThatThrownBy(() -> {

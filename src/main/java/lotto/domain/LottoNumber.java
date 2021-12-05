@@ -23,6 +23,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber ofInt(int lottoNumber) {
+        checkBound(lottoNumber);
         return lottoNumbers.get(lottoNumber);
     }
 
@@ -56,7 +57,7 @@ public class LottoNumber {
         return Objects.hash(lottoNumber);
     }
 
-    private void checkBound(Integer number) {
+    private static void checkBound(Integer number) {
         if (number > BOUND_END) {
             throw new IllegalArgumentException(BOUND_END + "보다 큰 숫자가 입력될 수 없습니다.");
         }
