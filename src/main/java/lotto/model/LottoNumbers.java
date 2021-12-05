@@ -27,7 +27,7 @@ public class LottoNumbers {
         boolean duplicated = lottoNumbers.stream()
                 .anyMatch(lottoNumbers::contains);
         if (duplicated) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 숫자는 중복될 수 없습니다");
         }
     }
 }
