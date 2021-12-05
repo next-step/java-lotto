@@ -16,6 +16,6 @@ public class Person {
     }
 
     public Lotto buy() {
-        return new Lotto();
+        return new Lotto(LottoNumber.of());
     }
 }
