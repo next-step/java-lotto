@@ -24,7 +24,7 @@ public class Numbers {
 
     public Number sum() {
         Number tempNumber = numbers.get(ZERO);
-        for (int i = ONE; i < numbers.size() - ONE; i++) {
+        for (int i = ONE; i < numbers.size(); i++) {
             Number otherNumber = numbers.get(i);
             tempNumber = tempNumber.plus(otherNumber);
         }
