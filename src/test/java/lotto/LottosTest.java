@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -13,7 +14,8 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
+@Nested
+@DisplayName("Lottos 클래스는")
 public class LottosTest {
     private static Stream<Arguments> generateGetPrizeTestArgumentsStream() {
         List<Arguments> listOfArguments = new LinkedList<>();

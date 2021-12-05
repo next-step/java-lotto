@@ -5,6 +5,8 @@ import lotto.domain.LottoNumber;
 import lotto.domain.Prize;
 import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -15,6 +17,8 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Nested
+@DisplayName("Prize 클래스는")
 public class PrizeTest {
     private static Stream<Arguments> generateArgumentsStream() {
         List<Arguments> listOfArguments = new LinkedList<>();
@@ -38,11 +42,15 @@ public class PrizeTest {
         return listOfArguments.stream();
     }
 
-    @ParameterizedTest
-    @MethodSource("generateArgumentsStream")
-    @DisplayName("로또 맞춘 개수에 다른 상금 테스트")
-    void prizeTest(Lotto lotto, WinningLotto winningLotto, LottoNumber bonus, Prize prize) {
-        assertThat(Prize.findPrize(lotto.countMatching(winningLotto), winningLotto, lotto.checkContainNumber(bonus))).isEqualTo(prize);
+    @Nested
+    @DisplayName("findPrize 메소드는")
+    class FindPrizeTest {
+        @ParameterizedTest
+        @MethodSource("generateArgumentsStream")
+        @DisplayName("로또 맞춘 개수에 따른 상금을 반환")
+        void prizeTest(Lotto lotto, WinningLotto winningLotto, LottoNumber bonus, Prize prize) {
+            assertThat(Prize.findPrize(lotto.countMatching(winningLotto), winningLotto, lotto.checkContainNumber(bonus))).isEqualTo(prize);
+        }
     }
 }
 
