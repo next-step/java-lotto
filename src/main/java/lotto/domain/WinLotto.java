@@ -15,4 +15,12 @@ public class WinLotto {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호와 종복될 수 없습니다.");
         }
     }
+
+    public Lotto getLotto() {
+        return lotto;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
 }
