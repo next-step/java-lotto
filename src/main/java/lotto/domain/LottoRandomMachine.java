@@ -12,14 +12,14 @@ public class LottoRandomMachine implements LottoMachine {
         List<Integer> randomNumbers = shuffleNumbers();
 
         return new LottoTicket(
-            IntStream.range(0, DEFAULT_LOTTO_SIZE)
+            IntStream.range(0, LottoTicket.REQUIRED_NUMBER_SIZE)
                 .boxed()
                 .map(randomNumbers::get)
                 .collect(Collectors.toList()));
     }
 
     private List<Integer> shuffleNumbers() {
-        List<Integer> randomNumbers = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
+        List<Integer> randomNumbers = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
             .boxed()
             .collect(Collectors.toList());
 
