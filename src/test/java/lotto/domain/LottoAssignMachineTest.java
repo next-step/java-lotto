@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 class LottoAssignMachineTest {
 
-    LottoAssignMachine lottoAssignMachine;
+    private LottoAssignMachine lottoAssignMachine;
 
     @BeforeEach
     void init() {
