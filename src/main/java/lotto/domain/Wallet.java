@@ -3,6 +3,8 @@ package lotto.domain;
 import static utils.IntegerValidator.getNumberIfPositive;
 import static utils.IntegerValidator.isNumberNegative;
 
+import java.util.Objects;
+
 public class Wallet {
 
     private final int money;
@@ -34,4 +36,20 @@ public class Wallet {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Wallet wallet = (Wallet) o;
+        return money == wallet.money;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(money);
+    }
 }

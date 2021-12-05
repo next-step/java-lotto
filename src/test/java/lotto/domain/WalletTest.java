@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 class WalletTest {
 
-    Wallet wallet;
+    private Wallet wallet;
 
     @BeforeEach
     void init() {
@@ -61,7 +61,7 @@ class WalletTest {
         assertThat(wallet.getNumberOfBuyAvailable(1000)).isEqualTo(10);
     }
 
-    private int getMoneyByReflection(Wallet wallet)
+    private static int getMoneyByReflection(Wallet wallet)
         throws NoSuchFieldException, IllegalAccessException {
         Field walletField = Wallet.class.getDeclaredField("money");
         walletField.setAccessible(true);

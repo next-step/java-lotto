@@ -42,9 +42,7 @@ public class InputView {
         print(INPUT_ASSIGN_NUMBER_COUNT_MESSAGE);
 
         int assignTicketCount = sc.nextInt();
-        int assignLottoTicketPrice = assignTicketCount * LottoTicket.PRICE;
-        return new AssignPreTicket(wallet.spend(assignLottoTicketPrice),
-            assignTicketCount);
+        return AssignPreTicket.buy(wallet, assignTicketCount);
     }
 
 
