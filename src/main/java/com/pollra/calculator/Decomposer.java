@@ -43,7 +43,7 @@ public class Decomposer {
         throw new RuntimeException("식이 올바르지 않습니다.");
     }
 
-    private void decomposeSeparators(String text) {
+    protected void decomposeSeparators(String text) {
         int prefixEndIndex = text.indexOf(CUSTOM_SEPARATOR_PREFIX);
         prefixEndIndex += CUSTOM_SEPARATOR_PREFIX.length();
 
@@ -52,7 +52,7 @@ public class Decomposer {
         separators.add(new Separator(customSeparatorText));
     }
 
-    private Numbers decomposeNumbers(String text) {
+    protected Numbers decomposeNumbers(String text) {
         List<Number> numbers = recursiveDecomposeNumber(text, ZERO);
         return new Numbers(numbers);
     }
