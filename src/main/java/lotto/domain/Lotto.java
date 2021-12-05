@@ -34,6 +34,10 @@ public class Lotto {
         return Rank.matchNumber(this.sameLottoNumberCount(lotto), this.numbers.contains(bonus));
     }
 
+    public boolean containLottoNumber(LottoNumber lottoNumber) {
+        return this.numbers.contains(lottoNumber);
+    }
+
     private long sameLottoNumberCount(Lotto lotto) {
         return this.numbers.stream()
                 .filter(lotto.numbers::contains)
