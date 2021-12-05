@@ -45,8 +45,7 @@ class LottoTest {
 
         Rank rank = buyLotto.getRank(winLotto, lottoNumber);
 
-        assertThat(rank.getMatchCount()).isEqualTo(Rank.FIFTH.getMatchCount());
-        assertThat(rank.getPrizeMoney()).isEqualTo(Rank.FIFTH.getPrizeMoney());
+        assertThat(rank).isEqualTo(Rank.FIFTH);
     }
 
     @DisplayName("2등 당첨 테스트")
