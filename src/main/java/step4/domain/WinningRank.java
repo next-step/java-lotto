@@ -45,7 +45,7 @@ public enum WinningRank {
     }
 
     private static WinningRank getSecondOrThird(Lotto lotto, WinningLotto winningLotto) {
-        if (winningLotto.checkLottoHasBouns(lotto)) {
+        if (winningLotto.hasBonus(lotto)) {
             return WinningRank.SECOND_RANK;
         }
 
@@ -60,7 +60,7 @@ public enum WinningRank {
     }
 
     public static List<WinningRank> findWinningRanks(Lottos lottos, WinningLotto winningLotto) {
-        return lottos.getLottoList().stream()
+        return lottos.getLottos().stream()
                 .map(lotto -> rank(lotto, winningLotto))
                 .collect(Collectors.toList());
     }

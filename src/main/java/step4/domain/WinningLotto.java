@@ -20,7 +20,7 @@ public class WinningLotto {
         return new WinningLotto(Lotto.of(lottoString), LottoNumber.of(num));
     }
 
-    public boolean checkLottoHasBouns(Lotto lotto) {
+    public boolean hasBonus(Lotto lotto) {
         return lotto.containLottoNumber(bonus);
     }
 

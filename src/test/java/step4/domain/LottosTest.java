@@ -17,7 +17,7 @@ class LottosTest {
                 Lotto.of("1,2,3,4,5,6")
         );
         Lottos lottos = Lottos.of(lottoList);
-        List<Lotto> actual = lottos.getLottoList();
+        List<Lotto> actual = lottos.getLottos();
 
 
         assertThat(actual).isNotSameAs(lottoList);

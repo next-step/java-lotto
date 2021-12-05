@@ -15,8 +15,9 @@ public class LottoGameTest {
 
     @BeforeEach
     void setUp() {
-        LottoSeller lottoSeller = new LottoSeller(() -> Lotto.of("4,5,6,7,8,9"));
-        lottoGame = new LottoGame(lottoSeller);
+        LottoSeller autoLottoSeller = new AutoLottoSeller(() -> Lotto.of("4,5,6,7,8,9"));
+        LottoSeller manualLottoSeller = new ManualLottoSeller();
+        lottoGame = new LottoGame(autoLottoSeller, manualLottoSeller);
     }
 
     @DisplayName("LottoInformation으로 로또를 구매한다.")

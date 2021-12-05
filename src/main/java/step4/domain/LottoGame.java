@@ -7,20 +7,23 @@ import java.util.List;
 
 public class LottoGame {
 
-    private final LottoSeller lottoSeller;
+    private final LottoSeller autoLottoSeller;
+    private final LottoSeller manualLottoSeller;
 
-    public LottoGame(LottoSeller lottoSeller) {
-        this.lottoSeller = lottoSeller;
+    public LottoGame(LottoSeller autoLottoSeller, LottoSeller manualLottoSeller) {
+        this.autoLottoSeller = autoLottoSeller;
+        this.manualLottoSeller = manualLottoSeller;
     }
 
     public Lottos buy(LottoInformation lottoInformation) {
         LottoPaper lottoPaper = LottoPaper.of(lottoInformation);
-        return lottoSeller.buy(lottoPaper);
+        Lottos lottos = manualLottoSeller.lottos(lottoPaper);
+        return lottos.add(autoLottoSeller.lottos(lottoPaper));
     }
 
     public LottoResult result(Lottos lottos, WinningLotto winningLotto) {
         List<WinningRank> winningRanks = WinningRank.findWinningRanks(lottos, winningLotto);
-        Money origin = lottos.getFaceValue();
+        Money origin = lottos.faceValue();
         Money winning = winningRanks.stream()
                 .map(WinningRank::getReward)
                 .reduce((x, y) -> x.add(y))

@@ -24,7 +24,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.value = value;
     }
 
-    private static LottoNumber getCachedLottoNumber(int number) {
+    private static LottoNumber cachedLottoNumber(int number) {
         if (number < MIN || number > MAX) {
             throw new IllegalArgumentException(NUMBER_RANGE_EXCEPTION_MESSAGE);
         }
@@ -40,13 +40,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
             throw new IllegalArgumentException(NOT_NUMBER_EXCEPTION_MESSAGE);
         }
 
-        int value = Integer.parseInt(input);
-
-        return getCachedLottoNumber(value);
+        return of(Integer.parseInt(input));
     }
 
     public static LottoNumber of(int value) {
-        return getCachedLottoNumber(value);
+        return cachedLottoNumber(value);
     }
 
     public int getValue() {

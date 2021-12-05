@@ -16,23 +16,23 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto of(List<LottoNumber> lottoNumberList) {
-
-        if (lottoNumberList == null || lottoNumberList.size() != SIZE) {
-            throw new IllegalArgumentException(RANGE_EXCEPTION_MESSAGE);
-        }
-
-        List<LottoNumber> copy = new ArrayList<>(lottoNumberList);
-
-        Collections.sort(copy);
-        return new Lotto(copy);
-    }
-
     public static Lotto of(String lottoInput) {
         return Arrays.stream(lottoInput.split(","))
                 .map(Integer::parseInt)
                 .map(LottoNumber::of)
                 .collect(collectingAndThen(toList(), Lotto::of));
+    }
+
+    public static Lotto of(List<LottoNumber> lottoNumbers) {
+
+        if (lottoNumbers == null || lottoNumbers.size() != SIZE) {
+            throw new IllegalArgumentException(RANGE_EXCEPTION_MESSAGE);
+        }
+
+        List<LottoNumber> copy = new ArrayList<>(lottoNumbers);
+
+        Collections.sort(copy);
+        return new Lotto(copy);
     }
 
     public List<LottoNumber> getLottoNumbers() {

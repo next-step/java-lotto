@@ -9,15 +9,15 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    private Lottos(List<Lotto> lottoList) {
-        this.lottos = lottoList;
+    private Lottos(List<Lotto> lottos) {
+        this.lottos = new ArrayList<>(lottos);
     }
 
-    public static Lottos of(List<Lotto> lottoList) {
-        return new Lottos(new ArrayList<>(lottoList));
+    public static Lottos of(List<Lotto> lottos) {
+        return new Lottos(lottos);
     }
 
-    public Money getFaceValue() {
+    public Money faceValue() {
         return Lotto.PRICE.multiply(count());
     }
 
@@ -25,13 +25,13 @@ public class Lottos {
         return lottos.size();
     }
 
-    public List<Lotto> getLottoList() {
+    public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
 
-    public Lottos addLottos(Lottos other) {
+    public Lottos add(Lottos otherLottos) {
         List<Lotto> lottoList = new ArrayList<>(this.lottos);
-        lottoList.addAll(other.lottos);
+        lottoList.addAll(otherLottos.lottos);
         return of(lottoList);
     }
 
@@ -50,6 +50,13 @@ public class Lottos {
     @Override
     public int hashCode() {
         return Objects.hash(lottos);
+    }
+
+    @Override
+    public String toString() {
+        return "Lottos{" +
+                "lottos=" + lottos +
+                '}';
     }
 }
 
