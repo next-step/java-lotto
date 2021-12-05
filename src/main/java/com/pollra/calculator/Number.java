@@ -36,6 +36,10 @@ public class Number {
         return text.matches(INTEGER_MATCHES_EXPRESSION);
     }
 
+    public static boolean notNumber(String text) {
+        return ! isNumber(text);
+    }
+
     public Number plus(Number otherNumber) {
         return new Number(value + otherNumber.value);
     }

@@ -42,4 +42,12 @@ class NumberTest {
         assertTrue(Number.isNumber("-1"));
         assertTrue(Number.isNumber("1"));
     }
+
+    @Test
+    @DisplayName("숫자일 경우 false")
+    public void notNumber() {
+        assertTrue(Number.notNumber("A"));
+        assertFalse(Number.notNumber("-1"));
+        assertFalse(Number.notNumber("1"));
+    }
 }
