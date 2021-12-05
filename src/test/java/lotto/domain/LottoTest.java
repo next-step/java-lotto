@@ -41,9 +41,10 @@ class LottoTest {
     void lottoRankCheck(String buyLottoString, String winLottoString, String bonusString) {
         Lotto buyLotto = Lotto.from(buyLottoString);
         Lotto winLotto = Lotto.from(winLottoString);
-        LottoNumber lottoNumber = new LottoNumber(bonusString);
+        LottoNumber bonusLottoNumber = new LottoNumber(bonusString);
+        WinLotto lastWeekWinLotto = new WinLotto(winLotto, bonusLottoNumber);
 
-        Rank rank = buyLotto.getRank(winLotto, lottoNumber);
+        Rank rank = buyLotto.getRank(lastWeekWinLotto);
 
         assertThat(rank).isEqualTo(Rank.FIFTH);
     }
@@ -53,9 +54,10 @@ class LottoTest {
     void secondRankLotto() {
         Lotto buyLotto = Lotto.from("2, 9, 13, 33 ,39, 45");
         Lotto winLotto = Lotto.from("2, 9, 13, 33 ,39, 44");
-        LottoNumber lottoNumber = new LottoNumber("45");
+        LottoNumber bonusLottoNumber = new LottoNumber("45");
+        WinLotto lastWeekWinLotto = new WinLotto(winLotto, bonusLottoNumber);
 
-        Rank rank = buyLotto.getRank(winLotto, lottoNumber);
+        Rank rank = buyLotto.getRank(lastWeekWinLotto);
 
         assertThat(rank).isEqualTo(Rank.SECOND);
     }
