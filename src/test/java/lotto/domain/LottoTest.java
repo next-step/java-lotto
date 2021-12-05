@@ -59,4 +59,14 @@ class LottoTest {
 
         assertThat(rank).isEqualTo(Rank.SECOND);
     }
+
+    @DisplayName("번호가 포함 되어 있는지 테스트")
+    @Test
+    void containLottoNumber() {
+        Lotto lotto = Lotto.from("3, 9, 13, 33 ,39, 45");
+        LottoNumber lottoNumber = new LottoNumber(3);
+
+        assertThat(lotto.containLottoNumber(lottoNumber)).isTrue();
+    }
+
 }
