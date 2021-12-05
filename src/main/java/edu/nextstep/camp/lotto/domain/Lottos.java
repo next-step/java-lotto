@@ -5,8 +5,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
+    private static final Lottos emptyLottos = new Lottos(Collections.emptyList());
+
     private final Collection<Lotto> lottos;
 
     private Lottos(Collection<Lotto> lottos) {
@@ -14,11 +17,19 @@ public class Lottos {
     }
 
     public static Lottos of(Collection<Lotto> lottos) {
-        if (lottos == null || lottos.isEmpty()) {
-            throw new IllegalArgumentException("invalid input: lottos must not be null or empty");
+        if (lottos == null) {
+            throw new IllegalArgumentException("invalid input: lottos must not be null");
+        }
+
+        if (lottos.isEmpty()) {
+            return emptyLottos;
         }
 
         return new Lottos(lottos);
+    }
+
+    public static Lottos empty() {
+        return emptyLottos;
     }
 
     @Override
@@ -44,8 +55,14 @@ public class Lottos {
 
     public GameResult winningResult(WinningNumber winningNumber) {
         final List<Rank> ranks = lottos.stream()
-                .map(lotto -> lotto.rank(winningNumber))
+                .map(winningNumber::rank)
                 .collect(Collectors.toUnmodifiableList());
         return GameResult.of(ranks);
+    }
+
+    public Lottos append(Lottos other) {
+        List<Lotto> appended = Stream.concat(lottos.stream(), other.lottos.stream())
+                .collect(Collectors.toList());
+        return new Lottos(appended);
     }
 }

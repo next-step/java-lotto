@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import static edu.nextstep.camp.lotto.domain.LottoTest.lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -39,11 +40,19 @@ public class WinningNumberTest {
                 .withMessageContaining(expectedMessage);
     }
 
+    static Stream<Arguments> parseRank() {
+        return Stream.of(
+                Arguments.of(lotto(1, 2, 3, 4, 5, 6), Rank.FIRST),
+                Arguments.of(lotto(1, 2, 3, 4, 5, 7), Rank.SECOND),
+                Arguments.of(lotto(1, 2, 3, 43, 44, 45), Rank.FIFTH),
+                Arguments.of(lotto(40, 41, 42, 43, 44, 45), Rank.NO_RANK)
+        );
+    }
 
-    @ParameterizedTest(name = "numbers and bonus: {arguments}")
-    @MethodSource("parseWinningNumber")
-    public void numbersAndBonus(Set<Integer> winningNumber, int bonusNumber) {
-        assertThat(WinningNumber.of(winningNumber, bonusNumber).numbers()).isEqualTo(Lotto.fromIntegers(winningNumber));
-        assertThat(WinningNumber.of(winningNumber, bonusNumber).bonus()).isEqualTo(LottoNumber.of(bonusNumber));
+    @ParameterizedTest(name = "rank with winning(1,2,3,4,5,6), bonus(7): {arguments}")
+    @MethodSource("parseRank")
+    public void rank(Lotto lotto, Rank expected) {
+        final WinningNumber winningNumber = WinningNumber.of(Set.of(1, 2, 3, 4, 5, 6), 7);
+        assertThat(winningNumber.rank(lotto)).isEqualTo(expected);
     }
 }

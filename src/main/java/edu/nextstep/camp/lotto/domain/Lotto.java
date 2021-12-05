@@ -66,8 +66,4 @@ public class Lotto {
     public boolean contains(LottoNumber number) {
         return numbers.contains(number);
     }
-
-    public Rank rank(WinningNumber winningNumber) {
-        return Rank.valueOf(matchedCount(winningNumber.numbers()), contains(winningNumber.bonus()));
-    }
 }

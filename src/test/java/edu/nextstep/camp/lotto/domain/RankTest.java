@@ -8,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import static edu.nextstep.camp.lotto.domain.PrizeTest.prize;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -61,5 +62,22 @@ public class RankTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> Rank.valueOf(6, true))
                 .withMessageContaining("bonus cannot be matched with all of 6 numbers");
+    }
+
+    static Stream<Arguments> parseRankOfPrize() {
+        return Stream.of(
+                Arguments.of(Rank.FIRST, 2L, prize(2000000000L * 2)),
+                Arguments.of(Rank.FIRST, 0L, prize(0L)),
+                Arguments.of(Rank.SECOND, 0L, prize(0L)),
+                Arguments.of(Rank.THIRD, 1L, prize(1500000L)),
+                Arguments.of(Rank.FOURTH, 3L, prize(50000L * 3L)),
+                Arguments.of(Rank.NO_RANK, 1L, prize(0L))
+        );
+    }
+
+    @ParameterizedTest(name = "rank of prize: {arguments}")
+    @MethodSource("parseRankOfPrize")
+    public void rankOfPrize(Rank rank, long counts, Prize expected) {
+        assertThat(rank.ofPrize(counts)).isEqualTo(expected);
     }
 }

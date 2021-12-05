@@ -55,4 +55,8 @@ public enum Rank {
                 ", prize=" + prize +
                 '}';
     }
+
+    public Prize ofPrize(long counts) {
+        return prize.multiply(counts);
+    }
 }
