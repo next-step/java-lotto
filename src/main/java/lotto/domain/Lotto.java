@@ -13,4 +13,8 @@ public class Lotto {
         return lottoNumber.compare(winningNumbers);
     }
 
+    @Override
+    public String toString() {
+        return lottoNumber.toString();
+    }
 }

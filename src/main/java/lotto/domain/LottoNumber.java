@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,8 +15,12 @@ public class LottoNumber {
 
     public static LottoNumber of() {
         List<Integer> numbers = ShuffleNumber.shuffle(START_NUMBER, END_NUMBER);
-        Collections.sort(numbers);
-        return new LottoNumber(numbers);
+        List<Integer> lottoNumber = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            lottoNumber.add(numbers.get(i));
+        }
+        Collections.sort(lottoNumber);
+        return new LottoNumber(lottoNumber);
     }
 
     public static LottoNumber of(List<Integer> numbers) {
@@ -31,4 +36,8 @@ public class LottoNumber {
         return count;
     }
 
+    @Override
+    public String toString() {
+        return lottoNumber.toString();
+    }
 }

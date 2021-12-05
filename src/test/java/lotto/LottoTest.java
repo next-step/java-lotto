@@ -19,8 +19,8 @@ public class LottoTest {
     void 금액만큼_로또구매() {
         Store store = new Store();
         Person person = new Person(10000);
-        List<Lotto> lottos = store.sellTo(person);
-        assertThat(lottos.size()).isEqualTo(10);
+        store.sellTo(person);
+        assertThat(person.getNumberOfLotto()).isEqualTo(10);
     }
 
     @DisplayName("당첨번호와 로또번호는 몇 개 일치하는지 확인")

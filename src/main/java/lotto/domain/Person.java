@@ -15,7 +15,16 @@ public class Person {
         return amount;
     }
 
-    public Lotto buy() {
-        return new Lotto(LottoNumber.of());
+    public List<Lotto> getLottos() {
+        return lottos;
     }
+
+    public int getNumberOfLotto() {
+        return lottos.size();
+    }
+
+    public void buy() {
+        lottos.add(new Lotto(LottoNumber.of()));
+    }
+
 }
