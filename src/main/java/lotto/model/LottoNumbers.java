@@ -15,10 +15,19 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
+        checkDuplicatedNumber(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    void checkDuplicatedNumber(final List<LottoNumber> lottoNumbers) {
+        boolean duplicated = lottoNumbers.stream()
+                .anyMatch(lottoNumbers::contains);
+        if (duplicated) {
+            throw new IllegalArgumentException();
+        }
     }
 }
