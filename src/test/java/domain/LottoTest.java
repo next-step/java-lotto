@@ -30,7 +30,7 @@ public class LottoTest {
         Lotto lotto = Lotto.of(lottoNumbers);
         List<Integer> winningNumbers = parseNumbers(winning);
         Lotto winningLotto = Lotto.of(winningNumbers);
-        int res = lotto.matchingNumber(winningLotto);
+        int res = lotto.matchingNumberCount(winningLotto);
         assertThat(res).isEqualTo(expected);
     }
 

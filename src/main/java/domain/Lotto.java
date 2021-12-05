@@ -31,7 +31,7 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public int matchingNumber(Lotto winningNumber) {
+    public int matchingNumberCount(Lotto winningNumber) {
         return (int) winningNumber.lottoNumbers
                 .stream()
                 .filter(this.lottoNumbers::contains)

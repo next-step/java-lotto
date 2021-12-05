@@ -27,7 +27,7 @@ public class Lottos {
     public List<Integer> matchedNumbers(Lotto winningLotto) {
         List<Integer> matched = new ArrayList<>();
 
-        lottos.forEach(lotto -> matched.add(lotto.matchingNumber(winningLotto)));
+        lottos.forEach(lotto -> matched.add(lotto.matchingNumberCount(winningLotto)));
 
         return matched;
     }
