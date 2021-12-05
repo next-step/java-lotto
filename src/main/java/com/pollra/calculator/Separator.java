@@ -4,10 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * @since       2021.11.29
- * @author      pollra
- **********************************************************************************************************************/
 public class Separator {
 
     private final String value;

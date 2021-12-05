@@ -7,10 +7,6 @@ import java.util.Objects;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
-/**
- * @since       2021.11.30
- * @author      pollra
- **********************************************************************************************************************/
 public class Numbers {
 
     private static final int ZERO = 0;

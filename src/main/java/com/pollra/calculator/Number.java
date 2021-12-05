@@ -2,10 +2,6 @@ package com.pollra.calculator;
 
 import java.util.Objects;
 
-/**
- * @since       2021.11.29
- * @author      pollra
- **********************************************************************************************************************/
 public class Number {
 
     private static final String INTEGER_MATCHES_EXPRESSION = "-?\\d+";

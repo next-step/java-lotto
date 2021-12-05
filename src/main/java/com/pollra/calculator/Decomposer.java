@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * @since       2021.11.30
- * @author      pollra
- **********************************************************************************************************************/
 public class Decomposer {
 
     private static final int ZERO = 0;
