@@ -21,8 +21,23 @@ public class PrizeConditionTest {
             "5:true:SECOND",
             "6:false:FIRST",
     }, delimiter = ':')
-    void testPrizeCondtion(int matchingNumberCount, boolean bonusIncluded, String nameOfPrize) {
+    void testPrizeCondition(int matchingNumberCount, boolean bonusIncluded, String nameOfPrize) {
         Optional<PrizeCondition> prizeCondition = PrizeCondition.of(matchingNumberCount, bonusIncluded);
         prizeCondition.ifPresent(condition -> assertThat(condition).isEqualTo(PrizeCondition.valueOf(nameOfPrize)));
+    }
+
+    @DisplayName("Test of losing condition")
+    @ParameterizedTest
+    @CsvSource(value = {
+            "0:false",
+            "0:true",
+            "1:false",
+            "1:true",
+            "2:false",
+            "2:true"
+    }, delimiter = ':')
+    void testLosingNumber(int matchingNumberCount, boolean bonusIncluded) {
+        Optional<PrizeCondition> prizeCondition = PrizeCondition.of(matchingNumberCount, bonusIncluded);
+        assertThat(prizeCondition.isPresent()).isFalse();
     }
 }
