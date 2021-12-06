@@ -4,6 +4,8 @@ import lotto.domain.*;
 import lotto.view.Input;
 import lotto.view.Output;
 
+import java.util.HashMap;
+
 public class LottoController {
     public static void main(String[] args) {
         Integer purchaseAmount = Input.inputPurchaseAmount();
@@ -18,8 +20,10 @@ public class LottoController {
         String winningLottoString = Input.inputWinningNumbers();
         LottoNumber bonus = Input.inputBonusBall();
         WinningLotto winningLotto = WinningLotto.ofStringAndBonusBall(winningLottoString, bonus);
-
-        LottosRecord lottosRecord = LottosRecord.of(totalLottos, winningLotto, bonus, purchaseAmount);
+        HashMap<Prize, Integer> record = LottosRecord.makeRecord(totalLottos, winningLotto, bonus);
+        Double profit = new Double(totalLottos.getTotalProfit(winningLotto, bonus));
+        Double profitRate = LottosRecord.calculateProfitRate(profit, purchaseAmount);
+        LottosRecord lottosRecord = LottosRecord.of(record, profitRate);
 
         Output.viewResult(lottosRecord);
     }

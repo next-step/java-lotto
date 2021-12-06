@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 
 public class LottosRecord {
@@ -11,11 +12,11 @@ public class LottosRecord {
         this.profit = profit;
     }
 
-    public static LottosRecord of(Lottos lottos, WinningLotto winningLotto, LottoNumber bonus, int purchaseAmount) {
-        return new LottosRecord(makeRecord(lottos, winningLotto, bonus), makeProfit(lottos, winningLotto, bonus, purchaseAmount));
+    public static LottosRecord of(HashMap<Prize, Integer> record,double profit) {
+        return new LottosRecord(record, profit);
     }
 
-    private static HashMap<Prize, Integer> makeRecord(Lottos lottos, WinningLotto winningLotto, LottoNumber bonus) {
+    public static HashMap<Prize, Integer> makeRecord(Lottos lottos, WinningLotto winningLotto, LottoNumber bonus) {
         HashMap<Prize, Integer> record = new HashMap<Prize, Integer>();
         for (Prize prize : Prize.values()) {
             int count = lottos.getCount(prize, winningLotto, bonus);
@@ -24,12 +25,13 @@ public class LottosRecord {
         return record;
     }
 
-    private static Double makeProfit(Lottos lottos, WinningLotto winningLotto, LottoNumber bonus, int purchaseAmount) {
-        return new Double(lottos.getTotalProfit(winningLotto, bonus)) / new Double(purchaseAmount);
+    public static Double calculateProfitRate(Double profit, int purchaseAmount) {
+        return profit / new Double(purchaseAmount);
     }
 
-    public Double getProfit() {
-        return profit;
+    public String getProfit() {
+        DecimalFormat form = new DecimalFormat("#.##");
+        return form.format(profit);
     }
 
     public HashMap<Prize, Integer> getRecord() {
