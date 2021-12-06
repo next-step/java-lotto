@@ -5,6 +5,8 @@ import lotto.domain.Credit;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.WonLotto;
+import lotto.dto.LottoDto;
+import lotto.dto.WonLottoDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,26 +40,26 @@ public class InputView {
         return new PositiveNumber(line);
     }
 
-    public List<Lotto> insertManualLotto(PositiveNumber manualLottoCount) {
+    public List<LottoDto> insertManualLotto(PositiveNumber manualLottoCount) {
         System.out.println(INSERT_MANUAL_LOTTO_NUMBER);
         return createByString(manualLottoCount.getNumber());
     }
 
-    public WonLotto insertWonLotto() {
+    public WonLottoDto insertWonLotto() {
         System.out.println(INSERT_LAST_WON_LOTTO);
         String wonNumbers = scanner.nextLine();
 
         System.out.println(INSERT_BONUS_NUMBER);
         String bonusNumber = scanner.nextLine();
-        return WonLotto.of(new Lotto(wonNumbers), new LottoNumber(bonusNumber));
+        return new WonLottoDto(wonNumbers, bonusNumber);
     }
 
-    private List<Lotto> createByString(int number) {
-        List<Lotto> lottos = new ArrayList<>();
+    private List<LottoDto> createByString(int number) {
+        List<LottoDto> lottos = new ArrayList<>();
 
         for (int i = 0; i < number; i++) {
             String lottoString = scanner.nextLine();
-            lottos.add(new Lotto(lottoString));
+            lottos.add(new LottoDto(lottoString));
         }
 
         return lottos;
