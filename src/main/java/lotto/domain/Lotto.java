@@ -50,7 +50,7 @@ public class Lotto {
         return Collections.unmodifiableList(lotto);
     }
 
-    public void checkDistinct(List<LottoNumber> lotto) {
+    private void checkDistinct(List<LottoNumber> lotto) {
         int compareSize = Long.valueOf(lotto.stream()
                 .distinct()
                 .count()).intValue();
@@ -59,7 +59,7 @@ public class Lotto {
         }
     }
 
-    public void checkSize(List<LottoNumber> lottoLottoNumbers) {
+    private void checkSize(List<LottoNumber> lottoLottoNumbers) {
         if (lottoLottoNumbers.size() != SIZE) {
             throw new IllegalArgumentException(SIZE + " 와 길이가 다른 Lotto 는 입력될 수 없습니다.");
         }
