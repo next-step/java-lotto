@@ -20,10 +20,11 @@ public class ShuffleNumbers {
                 .collect(Collectors.toList());
     }
 
-    public static List<Integer> generateLottoNumbers() {
+    public static List<LottoNumber> generateLottoNumbers() {
         Collections.shuffle(numbers);
         return numbers.subList(0, Game.LOTTO_NUMBER_COUNT).stream()
                 .sorted()
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 }

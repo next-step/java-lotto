@@ -1,5 +1,6 @@
 package lotto.utils;
 
+import lotto.LottoNumber;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -7,13 +8,13 @@ import java.util.List;
 class ShuffleNumbersTest {
     @Test
     void generate() {
-        List<Integer> numbers = ShuffleNumbers.generateLottoNumbers();
+        List<LottoNumber> numbers = ShuffleNumbers.generateLottoNumbers();
         System.out.println(numbers);
 
-        List<Integer> numbers1 = ShuffleNumbers.generateLottoNumbers();
+        List<LottoNumber> numbers1 = ShuffleNumbers.generateLottoNumbers();
         System.out.println(numbers1);
 
-        List<Integer> numbers2 = ShuffleNumbers.generateLottoNumbers();
+        List<LottoNumber> numbers2 = ShuffleNumbers.generateLottoNumbers();
         System.out.println(numbers2);
     }
 }
