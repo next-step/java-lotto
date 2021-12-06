@@ -41,7 +41,7 @@ public class ResultView {
     }
 
     private void printRank(Map<Integer, Integer> resultMap, Rank rank) {
-        if (!rank.equals(Rank.NONE)) {
+        if (!rank.equals(Rank.MISS)) {
             System.out.println(String.format(MATCH_FORMAT, rank.getCount(), rank.getAmount(), resultMap.get(rank.getCount())));
         }
     }

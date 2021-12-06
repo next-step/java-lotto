@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Lottos {
 
-    private static final String ERR_MESSAGE_NUMBER_FORMAT = "숫자형식 입력값이 아닙니다.";
+    public static final String ERR_MESSAGE_NUMBER_FORMAT = "숫자형식 입력값이 아닙니다.";
     public static final int LOTTO_PRICE = 1000;
 
     private List<Lotto> lottos;
