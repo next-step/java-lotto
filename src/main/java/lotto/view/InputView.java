@@ -1,7 +1,8 @@
 package lotto.view;
 
 import lotto.Amount;
-import lotto.LottoNumber;
+import lotto.game.LottoNumber;
+import lotto.game.LottoNumbers;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,11 +19,12 @@ public class InputView {
         return new Amount(input);
     }
 
-    public static List<LottoNumber> inputWinNumbers() {
+    public static LottoNumbers inputWinNumbers() {
         String input = stringInput("지난 주 당첨 번호를 입력해 주세요.");
-        return Arrays.stream(input.split(", "))
+        List<LottoNumber> lottoNumbers = Arrays.stream(input.split(", "))
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
+        return new LottoNumbers(lottoNumbers);
     }
 
     private static String stringInput(String message) {

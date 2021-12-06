@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.game.Game;
+import lotto.game.LottoNumbers;
 import lotto.game.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class GameTest {
     @Test
@@ -43,35 +43,14 @@ public class GameTest {
     }
 
     private void winTest(List<Integer> gameNumbers, List<Integer> winNumbers, Rank result) {
-        Game game = new Game(LottoNumber.toLottoNumbers(gameNumbers));
-        Rank rank = game.win(LottoNumber.toLottoNumbers(winNumbers));
+        Game game = new Game(LottoNumbers.generate(gameNumbers));
+        Rank rank = game.win(LottoNumbers.generate(winNumbers));
         assertThat(rank).isEqualTo(result);
     }
 
     @Test
-    @DisplayName("로또는 6개의 숫자만을 선택할 수 있다.")
-    void sixNumberMustProvided() {
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            Game.generateGame(Arrays.asList(1, 2, 3, 4, 5));
-        });
-
-        Game.generateGame(Arrays.asList(1, 2, 3, 4, 5, 6));
-
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            Game.generateGame(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
-        });
-    }
-
-    @Test
     void toStringTest() {
-        Game game = Game.generateGame(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Game game = new Game(LottoNumbers.generate(Arrays.asList(1, 2, 3, 4, 5, 6)));
         assertThat(game.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
-    }
-
-    @Test
-    void duplicateNumber() {
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            Game.generateGame(Arrays.asList(1, 2, 3, 4, 5, 5));
-        });
     }
 }

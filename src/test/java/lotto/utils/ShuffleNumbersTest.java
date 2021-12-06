@@ -1,6 +1,6 @@
 package lotto.utils;
 
-import lotto.LottoNumber;
+import lotto.game.LottoNumber;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

@@ -1,8 +1,6 @@
-package lotto;
+package lotto.game;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class LottoNumber {
     public static final int MIN_LOTTO_NUMBER = 1;
@@ -34,12 +32,6 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
-    }
-
-    public static List<LottoNumber> toLottoNumbers(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
     }
 
     @Override

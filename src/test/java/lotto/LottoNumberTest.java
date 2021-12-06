@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.game.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

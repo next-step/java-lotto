@@ -1,17 +1,17 @@
 package lotto;
 
+import lotto.game.LottoNumbers;
 import lotto.game.Rank;
 import lotto.game.Round;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.EnumMap;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RoundTest {
-    List<LottoNumber> lottoNumbers = LottoNumber.toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+    LottoNumbers lottoNumbers = LottoNumbers.generate(Arrays.asList(1, 2, 3, 4, 5, 6));
 
     @Test
     void create() {
