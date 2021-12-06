@@ -16,11 +16,8 @@ public class WinLotto {
         }
     }
 
-    public Lotto getLotto() {
-        return lotto;
+    public Rank getRank(Lotto lotto) {
+        return Rank.matchNumber(this.lotto.sameLottoNumberCount(lotto), lotto.containLottoNumber(this.bonusNumber));
     }
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
-    }
 }
