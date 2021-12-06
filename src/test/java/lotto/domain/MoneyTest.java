@@ -19,7 +19,8 @@ class MoneyTest {
     @Test
     void payMoneyTest() {
         Money money = new Money(2000);
-        money = money.payMoney(1);
+        int purchaseLottoMoney = Store.LOTTO_ONE_GAME_PRICE;
+        money = money.minus(purchaseLottoMoney);
 
         Money expected = new Money(1000);
 
