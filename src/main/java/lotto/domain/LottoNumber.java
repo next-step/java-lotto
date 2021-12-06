@@ -1,31 +1,38 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
-    private final Integer lottoNumber;
-
     public static final int BOUND_START = 1;
-
     public static final int BOUND_END = 45;
+    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
-    public LottoNumber(int lottoNumber) {
+    static {
+        for (int i = BOUND_START; i < BOUND_END+1; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
+        }
+    }
+
+    private final int lottoNumber;
+
+    private LottoNumber(int lottoNumber) {
         checkBound(lottoNumber);
         this.lottoNumber = lottoNumber;
     }
 
-    public LottoNumber(String numberString) {
-        checkNumeric(numberString);
-        Integer number = Integer.parseInt(numberString);
-        checkBound(number);
-        this.lottoNumber = number;
+    public static LottoNumber ofInt(int lottoNumber) {
+        checkBound(lottoNumber);
+        return lottoNumbers.get(lottoNumber);
     }
 
-    public Integer getLottoNumber() {
-        return lottoNumber;
+    public static LottoNumber ofString(String lottoNumber) {
+        checkNumeric(lottoNumber);
+        return lottoNumbers.get(Integer.parseInt(lottoNumber));
     }
 
-    public void checkNumeric(String numberString) {
+    private static void checkNumeric(String numberString) {
         try {
             Integer.parseInt(numberString);
         } catch (Exception e) {
@@ -33,13 +40,17 @@ public class LottoNumber {
         }
     }
 
-    private void checkBound(Integer number) {
+    private static void checkBound(Integer number) {
         if (number > BOUND_END) {
             throw new IllegalArgumentException(BOUND_END + "보다 큰 숫자가 입력될 수 없습니다.");
         }
         if (number < BOUND_START) {
             throw new IllegalArgumentException(BOUND_START + "보다 작은 숫자가 입력될 수 없습니다.");
         }
+    }
+
+    public Integer getLottoNumber() {
+        return lottoNumber;
     }
 
     @Override

@@ -1,33 +1,50 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.Prize;
+import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import static org.assertj.core.api.Assertions.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Stream;
 
-import java.util.Arrays;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PrizeTest {
+    private static Stream<Arguments> generateArgumentsStream() {
+        List<Arguments> listOfArguments = new LinkedList<>();
+        Lotto lotto = Lotto.ofManualStringLottoNumbers("1,2,3,7,8,9");
+        WinningLotto winningNumber = WinningLotto.ofString("1,2,3,4,5,6");
+        LottoNumber bonus = LottoNumber.ofInt(10);
+        Prize prize = Prize.FIFTH;
+        listOfArguments.add(Arguments.of(lotto, winningNumber, bonus, prize));
 
-    @Test
-    @DisplayName("로또 맞춘 개수에 다른 상금 테스트")
-    void prizeTest() {
-        WinningLotto winningNumber = new WinningLotto("1,2,3,4,5,6");
-        LottoNumber bonus = new LottoNumber(10);
-        Lotto lotto = new Lotto(() -> Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(7), new LottoNumber(8), new LottoNumber(9)));
-        assertThat(Prize.findPrize(lotto.checkMatching(winningNumber), winningNumber, lotto.checkContainNumber(bonus))).isEqualTo(Prize.FIFTH);
+        Lotto lotto_1 = Lotto.ofManualStringLottoNumbers("1,2,3,4,5,6");
+        WinningLotto winningNumber_1 = WinningLotto.ofString("1,2,3,4,5,9");
+        LottoNumber bonus_1 = LottoNumber.ofInt(6);
+        Prize prize_1 = Prize.SECOND;
+        listOfArguments.add(Arguments.of(lotto_1, winningNumber_1, bonus_1, prize_1));
 
-        WinningLotto winningNumber1 = new WinningLotto("1,2,3,4,5,9");
-        LottoNumber bonus1 = new LottoNumber(6);
-        Lotto lotto1 = new Lotto(() -> Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
-        assertThat(Prize.findPrize(lotto1.checkMatching(winningNumber1), winningNumber1, lotto1.checkContainNumber(bonus1))).isEqualTo(Prize.SECOND);
+        Lotto lotto_2 = Lotto.ofManualStringLottoNumbers("1,2,3,4,5,6");
+        WinningLotto winningNumber_2 = WinningLotto.ofString("11,12,13,14,15,19");
+        LottoNumber bonus_2 = LottoNumber.ofInt(6);
+        Prize prize_2 = Prize.ELSE;
+        listOfArguments.add(Arguments.of(lotto_2, winningNumber_2, bonus_2, prize_2));
+        return listOfArguments.stream();
+    }
 
-        WinningLotto winningNumber2 = new WinningLotto("11,12,13,14,15,19");
-        LottoNumber bonus2 = new LottoNumber(6);
-        Lotto lotto2 = new Lotto(() -> Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
-        assertThat(Prize.findPrize(lotto2.checkMatching(winningNumber2), winningNumber2, lotto2.checkContainNumber(bonus2))).isEqualTo(Prize.ELSE);
+    @ParameterizedTest
+    @MethodSource("generateArgumentsStream")
+    @DisplayName("로또 맞춘 개수에 따른 상금을 반환")
+    void prizeTest(Lotto lotto, WinningLotto winningLotto, LottoNumber bonus, Prize prize) {
+        assertThat(Prize.findPrize(lotto.countMatching(winningLotto), winningLotto, lotto.checkContainNumber(bonus))).isEqualTo(prize);
     }
 }
 
