@@ -25,7 +25,7 @@ public class Lotties {
 
     public ResultRank gameResultRank(WinLotto winLotto) {
         return new ResultRank(this.lotties.stream()
-                .map(lotto -> lotto.getRank(winLotto))
+                .map(lotto -> winLotto.getRank(lotto))
                 .collect(Collectors.groupingBy(rank -> rank, Collectors.counting())));
     }
 
