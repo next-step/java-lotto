@@ -7,8 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
 public class LottosTest {
     public static final Lotto WINNING_LOTTO = generateLotto(Arrays.asList(1,2,3,4,5,6));
     public static final Lotto FIRST_LOTTO = generateLotto(Arrays.asList(1,11,12,13,14,15));
@@ -25,17 +23,7 @@ public class LottosTest {
     public static final Lottos LOTTOS = new Lottos(Arrays.asList(FIRST_LOTTO, SECOND_LOTTO, THIRD_LOTTO, FOURTH_LOTTO, FIFTH_LOTTO,
             SIXTH_LOTTO, SEVENTH_LOTTO, EIGHTH_LOTTO, NINTH_LOTTO, TENTH_LOTTO));
 
-
-    @DisplayName("Test matchedNumbers function of lottos")
-    @Test
-    void testMatchedNumbers() {
-        List<Integer> matched = LOTTOS.matchedNumbers(WINNING_LOTTO);
-        List<Integer> expected = Arrays.asList(1, 2, 3, 3, 3, 4, 4, 5, 5, 6);
-
-        for (int i=0; i < matched.size(); i++) {
-            assertThat(matched.get(i)).isEqualTo(expected.get(i));
-        }
-    }
+    public static final LottoNumber BONUS_NUMBER = new LottoNumber(13);
 
     private static Lotto generateLotto(List<Integer> numbers) {
         return new Lotto(numbers.stream()

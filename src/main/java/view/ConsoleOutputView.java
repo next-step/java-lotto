@@ -26,10 +26,19 @@ public class ConsoleOutputView implements OutputView
     @Override
     public void showLottoResult(Prizes prizes) {
         for (PrizeCondition prizeCondition : PrizeCondition.values()) {
-            System.out.printf("%d matched (￦%d) - %d\n",
-                    prizeCondition.getMatchingNumber(),
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(String.format("%d matched", prizeCondition.getMatchingNumber()));
+            appendBonusForSecondPrize(stringBuilder, prizeCondition);
+            stringBuilder.append(String.format(" (￦%d) - %d",
                     prizeCondition.getReward(),
-                    prizes.match(prizeCondition));
+                    prizes.match(prizeCondition)));
+            System.out.println(stringBuilder);
+        }
+    }
+
+    private void appendBonusForSecondPrize(StringBuilder stringBuilder, PrizeCondition prizeCondition) {
+        if (prizeCondition.equals(PrizeCondition.SECOND)) {
+            stringBuilder.append(", Bonus ball is matched.");
         }
     }
 

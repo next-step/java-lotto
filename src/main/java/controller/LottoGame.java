@@ -1,6 +1,7 @@
 package controller;
 
 import domain.Lotto;
+import domain.LottoNumber;
 import domain.Lottos;
 import domain.Prizes;
 import view.ConsoleInputView;
@@ -19,7 +20,7 @@ public class LottoGame {
     public static void run() {
         InputView inputView = new ConsoleInputView();
         inputView.showPurchaseAmountInputMessage();
-        int purchaseAmount = inputView.extractPurchaseAmount();
+        int purchaseAmount = inputView.purchaseAmount();
 
         OutputView outputView = new ConsoleOutputView();
         int totalNumberOfLottos = Lotto.amount(purchaseAmount);
@@ -29,11 +30,14 @@ public class LottoGame {
         outputView.showRandomGeneratedLottos(lottos);
 
         inputView.showWinningNumberInputMessage();
-        String winningNumber = inputView.extractWinningNumber();
+        String winningNumber = inputView.winningNumber();
         Lotto winningLotto = Lotto.of(parseNumbers(winningNumber));
 
-        Prizes prizes = new Prizes();
-        double profitRate = prizes.profitRate(lottos, winningLotto);
+        inputView.showBonusBallInputMessage();
+        int bonusNumber = inputView.bonusBall();
+
+        Prizes prizes = lottos.prizes(winningLotto, new LottoNumber(bonusNumber));
+        double profitRate = prizes.profitRate(purchaseAmount);
         outputView.showLottoResult(prizes);
         outputView.showProfitRate(profitRate);
     }
