@@ -1,38 +1,20 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Ranks {
 
-    private Map<Rank, Long> rankCountMap;
-
-    public Ranks(LottoScores lottoScores) {
-        List<LottoScore> lottoScoresList = lottoScores.getLottoScoresList();
-        this.rankCountMap = lottoScoresList.stream().collect(Collectors.groupingBy(LottoScore::getRank, Collectors.counting()
-        ));
+    public List<Rank> getRankList(Lottos lottos, WinningLotto winningLotto) {
+        return lottos.getLottos().stream().map(num -> getRank(num.lottoNumList, winningLotto))
+                .collect(Collectors.toList());
     }
 
-    public Map<Rank, Long> getRankCountMap() {
-        return Collections.unmodifiableMap(rankCountMap);
+    private Rank getRank(List<Integer> lottoNumList, WinningLotto winningLotto) {
+        int count = Math.toIntExact(lottoNumList.stream().filter(winningLotto.lottoNumList::contains).count());
+        boolean bonus = lottoNumList.contains(winningLotto.getBonusNum());
+
+        return Rank.valueOf(count, bonus);
     }
 
-    public int getTotalWinningAmount() {
-        int totalWinningAmount = 0;
-        for (Map.Entry<Rank, Long> entry : rankCountMap.entrySet()) {
-            Rank rank = entry.getKey();
-            Long count = entry.getValue();
-
-            totalWinningAmount += count * rank.getWinningMoney();
-        }
-        return totalWinningAmount;
-    }
-
-    public String getProfitPercent(int totalPurchaseAmount) {
-        int winningAmount = getTotalWinningAmount();
-        double ratio = (double) winningAmount / totalPurchaseAmount;
-        return String.format("%.2f", ratio);
-    }
 }

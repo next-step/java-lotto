@@ -22,12 +22,14 @@ public class RanksTest {
     void setWinningStatsMapTest() {
 
         Lottos lottos = new Lottos(lottoList);
-        LottoScores lottoScores = new LottoScores(lottos, new WinningLotto(winningList, 20));
-        Ranks ranks = new Ranks(lottoScores);
 
-        assertThat(ranks.getRankCountMap().get(Rank.FIRST)).isEqualTo(1);
-        assertThat(ranks.getRankCountMap().get(Rank.SECOND)).isEqualTo(1);
-        assertThat(ranks.getRankCountMap().get(Rank.THIRD)).isEqualTo(1);
+        Ranks ranks = new Ranks();
+        List<Rank> rankList = ranks.getRankList(lottos, new WinningLotto(winningList, 20));
+        RankCount rankCount = new RankCount(rankList);
+
+        assertThat(rankCount.getRankCountMap().get(Rank.FIRST)).isEqualTo(1);
+        assertThat(rankCount.getRankCountMap().get(Rank.SECOND)).isEqualTo(1);
+        assertThat(rankCount.getRankCountMap().get(Rank.THIRD)).isEqualTo(1);
 
     }
 
@@ -35,10 +37,11 @@ public class RanksTest {
     void profitPercentTest() {
 
         Lottos lottos = new Lottos(lottoList);
-        LottoScores lottoScores = new LottoScores(lottos, new WinningLotto(winningList, 7));
-        Ranks ranks = new Ranks(lottoScores);
+        Ranks ranks = new Ranks();
+        List<Rank> rankList = ranks.getRankList(lottos, new WinningLotto(winningList, 20));
+        RankCount rankCount = new RankCount(rankList);
 
-        assertThat(ranks.getProfitPercent(4000)).isEqualTo("500751.25");
+        assertThat(rankCount.getProfitPercent(4000)).isEqualTo("507875.00");
 
     }
 }

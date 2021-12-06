@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 public class Lottos {
 
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
     private static final int LOTTO_PRICE = 1000;
 
     public Lottos(List<Lotto> lottos) {

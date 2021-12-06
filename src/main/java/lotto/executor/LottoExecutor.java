@@ -1,10 +1,7 @@
 package lotto.executor;
 
-import lotto.domain.LottoScores;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.domain.number.RandomLottoNumberStrategy;
-import lotto.domain.Ranks;
-import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -31,10 +28,12 @@ public class LottoExecutor {
 
         ResultView.printView("\n" + "당첨 통계\n" + "------");
 
-        LottoScores lottoScores = new LottoScores(lottos, new WinningLotto(winningNumList, bonusBall));
-        Ranks ranks = new Ranks(lottoScores);
+        Ranks ranks = new Ranks();
+        List<Rank> rankList = ranks.getRankList(lottos, new WinningLotto(winningNumList, bonusBall));
 
-        ResultView.printWinningStatsView(ranks);
-        ResultView.printView("총 수익률은 " + ranks.getProfitPercent(totalPurchaseAmount) + "입니다.");
+        RankCount rankCount = new RankCount(rankList);
+
+        ResultView.printWinningStatsView(rankCount);
+        ResultView.printView("총 수익률은 " + rankCount.getProfitPercent(totalPurchaseAmount) + "입니다.");
     }
 }

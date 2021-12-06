@@ -3,7 +3,7 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
-import lotto.domain.Ranks;
+import lotto.domain.RankCount;
 
 import java.util.Map;
 
@@ -24,11 +24,11 @@ public class ResultView {
         System.out.println(lotto.toString());
     }
 
-    public static void printWinningStatsView(Ranks ranks) {
-        Map<Rank, Long> winningStatsMap = ranks.getRankCountMap();
+    public static void printWinningStatsView(RankCount rankCount) {
+        Map<Rank, Integer> winningStatsMap = rankCount.getRankCountMap();
 
         for (Rank rank : Rank.values()) {
-            long count = winningStatsMap.getOrDefault(rank, 0L);
+            long count = winningStatsMap.getOrDefault(rank, 0);
             printStats(rank, count);
         }
     }
