@@ -17,8 +17,6 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Nested
-@DisplayName("Prize 클래스는")
 public class PrizeTest {
     private static Stream<Arguments> generateArgumentsStream() {
         List<Arguments> listOfArguments = new LinkedList<>();
@@ -42,15 +40,11 @@ public class PrizeTest {
         return listOfArguments.stream();
     }
 
-    @Nested
-    @DisplayName("findPrize 메소드는")
-    class FindPrizeTest {
-        @ParameterizedTest
-        @MethodSource("generateArgumentsStream")
-        @DisplayName("로또 맞춘 개수에 따른 상금을 반환")
-        void prizeTest(Lotto lotto, WinningLotto winningLotto, LottoNumber bonus, Prize prize) {
-            assertThat(Prize.findPrize(lotto.countMatching(winningLotto), winningLotto, lotto.checkContainNumber(bonus))).isEqualTo(prize);
-        }
+    @ParameterizedTest
+    @MethodSource("generateArgumentsStream")
+    @DisplayName("로또 맞춘 개수에 따른 상금을 반환")
+    void prizeTest(Lotto lotto, WinningLotto winningLotto, LottoNumber bonus, Prize prize) {
+        assertThat(Prize.findPrize(lotto.countMatching(winningLotto), winningLotto, lotto.checkContainNumber(bonus))).isEqualTo(prize);
     }
 }
 
