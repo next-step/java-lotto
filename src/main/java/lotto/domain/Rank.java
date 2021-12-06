@@ -18,9 +18,13 @@ public enum Rank {
         this.amount = amount;
     }
 
-    public static Rank getRank(int count) {
+    public static Rank getRank(int count, boolean isBonus) {
+        if (isBonus) {
+            return Rank.SECOND;
+        }
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.getCount() == count)
+                .filter(rank -> Rank.SECOND != rank)
                 .findAny()
                 .orElse(Rank.MISS);
     }

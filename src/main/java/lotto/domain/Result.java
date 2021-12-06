@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Result {
 
-    private Map<Integer, Integer> resultInfo;
+    private final Map<Rank, Integer> resultInfo;
     private double rateOfReturn;
 
     public Result(Lottos lottos, Lotto answer) {
@@ -16,7 +16,7 @@ public class Result {
 
     private void init() {
         for (Rank rank : Rank.values()) {
-            resultInfo.put(rank.getCount(), 0);
+            resultInfo.put(rank, 0);
         }
     }
 
@@ -27,26 +27,20 @@ public class Result {
             boolean isBonus = lotto.getNumbers().contains(answer.getBonus());
             revenue = getRevenue(revenue, count, isBonus);
         }
-
-
         this.rateOfReturn = revenue / (lottos.getLottos().size() * Lottos.LOTTO_PRICE);
     }
 
     private double getRevenue(double revenue, int count, boolean isBonus) {
-        if (count == Rank.SECOND.getCount() && isBonus) {
-            revenue += Rank.SECOND.getAmount();
-            return revenue;
-        }
         if (count >= Rank.FIFTH.getCount()) {
-            this.resultInfo.put(count, this.resultInfo.get(count) + 1);
-            Rank rank = Rank.getRank(count);
+            Rank rank = Rank.getRank(count, isBonus);
+            this.resultInfo.put(rank, this.resultInfo.get(rank) + 1);
             revenue += rank.getAmount();
             return revenue;
         }
         return revenue;
     }
 
-    public Map<Integer, Integer> getResultInfo() {
+    public Map<Rank, Integer> getResultInfo() {
         return resultInfo;
     }
 

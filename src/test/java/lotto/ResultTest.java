@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.Rank;
 import lotto.domain.Result;
 import lotto.view.InputInfo;
 import org.assertj.core.api.Assertions;
@@ -27,13 +28,14 @@ public class ResultTest {
 
         Lottos lottos = new Lottos(sampleLottos);
         Result result = new Result(lottos, Lotto.newInstance(inputInfo.getAnswer("1,2,3,7,8,9")));
-        Map<Integer, Integer> sampleResult = new HashMap<>();
+        Map<Rank, Integer> sampleResult = new HashMap<>();
 
-        sampleResult.put(0,0);
-        sampleResult.put(3,1);
-        sampleResult.put(4,0);
-        sampleResult.put(5,0);
-        sampleResult.put(6,0);
+        sampleResult.put(Rank.MISS, 0);
+        sampleResult.put(Rank.FIFTH, 1);
+        sampleResult.put(Rank.FOURTH, 0);
+        sampleResult.put(Rank.THIRD, 0);
+        sampleResult.put(Rank.SECOND, 0);
+        sampleResult.put(Rank.FIRST, 0);
 
         // 결과 내용
         Assertions.assertThat(result.getResultInfo()).isEqualTo(sampleResult);

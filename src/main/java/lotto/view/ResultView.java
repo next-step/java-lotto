@@ -27,7 +27,7 @@ public class ResultView {
     }
 
     public void printResult() {
-        Map<Integer, Integer> resultMap = this.result.getResultInfo();
+        Map<Rank, Integer> resultMap = this.result.getResultInfo();
         System.out.println(STATISTIC);
 
         for (Rank rank : Rank.values()) {
@@ -40,9 +40,9 @@ public class ResultView {
         }
     }
 
-    private void printRank(Map<Integer, Integer> resultMap, Rank rank) {
+    private void printRank(Map<Rank, Integer> resultMap, Rank rank) {
         if (!rank.equals(Rank.MISS)) {
-            System.out.println(String.format(MATCH_FORMAT, rank.getCount(), rank.getAmount(), resultMap.get(rank.getCount())));
+            System.out.println(String.format(MATCH_FORMAT, rank.getCount(), rank.getAmount(), resultMap.get(rank)));
         }
     }
 
