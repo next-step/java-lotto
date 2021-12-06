@@ -17,8 +17,8 @@ public class Money {
         return value;
     }
 
-    public Money payMoney(int manualLottoCount) {
-        return new Money(this.value - (Store.LOTTO_ONE_GAME_PRICE * manualLottoCount));
+    public Money minus(int manualLottoPrice) {
+        return new Money(this.value - manualLottoPrice);
     }
 
     @Override
