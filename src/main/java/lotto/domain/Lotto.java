@@ -30,15 +30,11 @@ public class Lotto {
                 .collect(Collectors.joining(", "));
     }
 
-    public Rank getRank(WinLotto winLotto) {
-        return Rank.matchNumber(this.sameLottoNumberCount(winLotto.getLotto()), this.numbers.contains(winLotto.getBonusNumber()));
-    }
-
     public boolean containLottoNumber(LottoNumber lottoNumber) {
         return this.numbers.contains(lottoNumber);
     }
 
-    private long sameLottoNumberCount(Lotto lotto) {
+    public long sameLottoNumberCount(Lotto lotto) {
         return this.numbers.stream()
                 .filter(lotto.numbers::contains)
                 .count();
