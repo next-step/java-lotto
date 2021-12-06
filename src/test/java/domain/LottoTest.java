@@ -14,7 +14,7 @@ import static util.StringUtils.parseNumbers;
 
 public class LottoTest {
 
-    @DisplayName("Test comparing with winning number")
+    @DisplayName("Test matching number count with winning number")
     @ParameterizedTest
     @CsvSource(value = {
             "1,2,3,4,5,6:8,9,10,11,12,13:0",
@@ -25,7 +25,7 @@ public class LottoTest {
             "1,2,3,4,5,6:1,2,3,4,5,13:5",
             "1,2,3,4,5,6:1,2,3,4,5,6:6",
     }, delimiter = ':')
-    void testCompareWithWinningNumber(String input, String winning, int expected) {
+    void testMatchingNumberCount(String input, String winning, int expected) {
         List<Integer> lottoNumbers = parseNumbers(input);
         Lotto lotto = Lotto.of(lottoNumbers);
         List<Integer> winningNumbers = parseNumbers(winning);
