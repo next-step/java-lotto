@@ -19,7 +19,7 @@ public class LottoGame {
     public static void run() {
         InputView inputView = new ConsoleInputView();
         inputView.showPurchaseAmountInputMessage();
-        int purchaseAmount = inputView.extractPurchaseAmount();
+        int purchaseAmount = inputView.purchaseAmount();
 
         OutputView outputView = new ConsoleOutputView();
         int totalNumberOfLottos = Lotto.amount(purchaseAmount);
@@ -29,8 +29,11 @@ public class LottoGame {
         outputView.showRandomGeneratedLottos(lottos);
 
         inputView.showWinningNumberInputMessage();
-        String winningNumber = inputView.extractWinningNumber();
+        String winningNumber = inputView.winningNumber();
         Lotto winningLotto = Lotto.of(parseNumbers(winningNumber));
+
+        inputView.showBonusBallInputMessage();
+        int bonusNumber = inputView.bonusBall();
 
         Prizes prizes = new Prizes();
         double profitRate = prizes.profitRate(lottos, winningLotto);

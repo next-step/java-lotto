@@ -21,7 +21,12 @@ public class ConsoleInputView implements InputView {
     }
 
     @Override
-    public int extractPurchaseAmount() {
+    public void showBonusBallInputMessage() {
+        System.out.println("Enter Number of Bonus Ball");
+    }
+
+    @Override
+    public int purchaseAmount() {
         try {
             String rawInput = scanner.nextLine();
             return Integer.parseInt(rawInput);
@@ -31,11 +36,23 @@ public class ConsoleInputView implements InputView {
     }
 
     @Override
-    public String extractWinningNumber() {
+    public String winningNumber() {
         try {
             return scanner.nextLine();
         } catch (Exception e) {
             throw new IllegalArgumentException("Winning number must be string");
+        }
+    }
+
+    @Override
+    public int bonusBall() {
+        try {
+            int bonusBall = scanner.nextInt();
+            scanner.nextLine();
+
+            return bonusBall;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Bonus ball must be integer");
         }
     }
 }

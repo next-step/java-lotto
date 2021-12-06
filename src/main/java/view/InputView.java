@@ -3,6 +3,8 @@ package view;
 public interface InputView {
     void showPurchaseAmountInputMessage();
     void showWinningNumberInputMessage();
-    int extractPurchaseAmount();
-    String extractWinningNumber();
+    void showBonusBallInputMessage();
+    int purchaseAmount();
+    String winningNumber();
+    int bonusBall();
 }
