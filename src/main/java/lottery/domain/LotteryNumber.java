@@ -15,12 +15,19 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
     }
 
     public static LotteryNumber of(final int input) {
-        if (input > MAXIMUM_LOTTERY_NUMBER || input < MINIMUM_LOTTERY_NUMBER) {
-            throw new IllegalArgumentException(String.format(EXCEPTION_MESSAGE_INVALID_NUMBER_FORMAT, MINIMUM_LOTTERY_NUMBER,
-                MAXIMUM_LOTTERY_NUMBER, input));
+        if (isValidNumber(input)) {
+            final String exceptionMessage = String.format(EXCEPTION_MESSAGE_INVALID_NUMBER_FORMAT,
+                MINIMUM_LOTTERY_NUMBER,
+                MAXIMUM_LOTTERY_NUMBER,
+                input);
+            throw new IllegalArgumentException(exceptionMessage);
         }
 
         return new LotteryNumber(input);
+    }
+
+    private static boolean isValidNumber(int input) {
+        return input > MAXIMUM_LOTTERY_NUMBER || input < MINIMUM_LOTTERY_NUMBER;
     }
 
     @Override
@@ -44,5 +51,9 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
     @Override
     public int compareTo(LotteryNumber lotteryNumber) {
         return this.value - lotteryNumber.value;
+    }
+
+    public int value() {
+        return value;
     }
 }

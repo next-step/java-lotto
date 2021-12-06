@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
+import lottery.dto.LotteryTicketResultDto;
 
 public class LotteryTicket {
 
@@ -31,8 +31,8 @@ public class LotteryTicket {
         return new LotteryTicket(lotteryNumbers);
     }
 
-    public static LotteryTicket of(int number1, int number2, int number3, int number4, int number5, int number6) {
-        List<LotteryNumber> lotteryNumbers = Stream.of(number1, number2, number3, number4, number5, number6)
+    public static LotteryTicket of(final List<Integer> numbers) {
+        List<LotteryNumber> lotteryNumbers = numbers.stream()
             .distinct()
             .map(LotteryNumber::of)
             .sorted()
@@ -43,6 +43,19 @@ public class LotteryTicket {
         }
 
         return new LotteryTicket(lotteryNumbers);
+    }
+
+    public LotteryTicketResultDto lotteryTicketResultDto(final LotteryTicket winnerTicket) {
+        final int numberOfMatchedLotteryNumbers = (int) winnerTicket.numbers
+            .stream()
+            .filter(this.numbers::contains)
+            .count();
+
+        return LotteryTicketResultDto.of(numberOfMatchedLotteryNumbers);
+    }
+
+    public List<LotteryNumber> getNumbers() {
+        return Collections.unmodifiableList(numbers);
     }
 
     @Override
