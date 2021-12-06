@@ -1,9 +1,8 @@
-package step2.dto;
+package step2.domain;
 
 import java.util.Objects;
 
 public class Ticket {
-    private static final int BASE_PRICE = 1000;
     private static final int ZERO_COUNT = 0;
     private final int ticketCount;
 
@@ -23,7 +22,7 @@ public class Ticket {
         return this.ticketCount > ZERO_COUNT;
     }
 
-    public Ticket checkingTicket() {
+    public Ticket deductedTicket() {
         return new Ticket(this.ticketCount - 1);
     }
 

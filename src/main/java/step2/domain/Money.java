@@ -1,26 +1,35 @@
-package step2.dto;
+package step2.domain;
 
 import step2.exception.MoneyException;
+import step2.exception.NotEnoughMoney;
 
 import java.util.Objects;
 
 public class Money {
     private static final int BASE_PRICE = 1000;
     private static final int ZERO = 0;
-    private final int myMoney;
+    private final int amount;
 
     public Money(int price) {
-        validPrice(price);
+        validMoneyOrElseThrow(price);
 
-        this.myMoney = price;
+        this.amount = price;
     }
 
     public Ticket purchasedTicket() {
-        return new Ticket(this.myMoney / BASE_PRICE);
+        enoughMoneyOrElseThrow();
+
+        return new Ticket(this.amount / BASE_PRICE);
     }
 
-    private void validPrice(int price) {
-        if (ZERO >= price) {
+    private void enoughMoneyOrElseThrow() {
+        if (this.amount < BASE_PRICE) {
+            throw new NotEnoughMoney();
+        }
+    }
+
+    private void validMoneyOrElseThrow(int price) {
+        if (price <= ZERO) {
             throw new MoneyException(MoneyException.ErrorCode.MONEY_NOT_ZERO);
         }
     }
@@ -34,11 +43,11 @@ public class Money {
             return false;
         }
         Money money = (Money) o;
-        return myMoney == money.myMoney;
+        return amount == money.amount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(myMoney);
+        return Objects.hash(amount);
     }
 }

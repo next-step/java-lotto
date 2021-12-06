@@ -2,39 +2,39 @@ package step2.service;
 
 import step2.domain.LottoTicket;
 import step2.domain.LottoTickets;
-import step2.dto.Ticket;
-import step2.dto.WinningNumber;
+import step2.domain.Ticket;
+import step2.domain.WinningNumber;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class LottoGameService {
-    private static List<Integer> numbers = new ArrayList<>();
+public class LottoGame {
+    private static final List<Integer> numbers = new ArrayList<>();
     private static final int LOTTO_SIZE = 6;
     private static final int START_NUMBER = 1;
     private static final int END_NUMBER = 45;
 
     static {
-        for(int i = START_NUMBER; i < END_NUMBER ; ++i) {
+        for(int i = START_NUMBER; i <= END_NUMBER; ++i) {
             numbers.add(i);
         }
     }
 
-    public LottoTickets shuffleLotto(Ticket ticket) {
+    public LottoTickets generateLotto(Ticket ticket) {
         Ticket currentTicket = ticket;
 
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
         while(currentTicket.having()) {
-            lottoTickets.add(new LottoTicket(createLottoNumber()));
+            lottoTickets.add(new LottoTicket(shuffleNumbers()));
 
-            currentTicket = currentTicket.checkingTicket();
+            currentTicket = currentTicket.deductedTicket();
         }
 
         return new LottoTickets(lottoTickets);
     }
 
-    private Set<WinningNumber> createLottoNumber() {
+    private Set<WinningNumber> shuffleNumbers() {
         Collections.shuffle(numbers);
 
         return numbers.stream()
