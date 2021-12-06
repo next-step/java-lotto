@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.number.LottoNumberStrategy;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;

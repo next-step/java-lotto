@@ -1,9 +1,7 @@
 package lotto.executor;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.RandomLottoNumberStrategy;
-import lotto.domain.winning.WinningLottoStats;
+import lotto.domain.*;
+import lotto.domain.number.RandomLottoNumberStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -26,11 +24,16 @@ public class LottoExecutor {
         String winningString = InputView.getInput("지난 주 당첨 번호를 입력해 주세요.");
         List<Integer> winningNumList = InputView.getNumberListFromString(winningString);
 
+        int bonusBall = InputView.getNumberInput("보너스 볼을 입력해 주세요.");
+
         ResultView.printView("\n" + "당첨 통계\n" + "------");
 
-        WinningLottoStats winningLottoStats = new WinningLottoStats(lottos, new Lotto(winningNumList));
+        Ranks ranks = new Ranks();
+        List<Rank> rankList = ranks.getRankList(lottos, new WinningLotto(winningNumList, bonusBall));
 
-        ResultView.printWinningStatsView(winningLottoStats);
-        ResultView.printView("총 수익률은 " + winningLottoStats.getProfitPercent(totalPurchaseAmount) + "입니다.");
+        RankCount rankCount = new RankCount(rankList);
+
+        ResultView.printWinningStatsView(rankCount);
+        ResultView.printView("총 수익률은 " + rankCount.getProfitPercent(totalPurchaseAmount) + "입니다.");
     }
 }
