@@ -19,14 +19,14 @@ public class ResultTest {
         List<Lotto> sampleLottos = new ArrayList<>();
         InputInfo inputInfo = new InputInfo("1000");
 
-        sampleLottos.add(new Lotto(inputInfo.getAnswer("1,2,3,4,5,6")));
-        sampleLottos.add(new Lotto(inputInfo.getAnswer("11,12,13,14,15,16")));
-        sampleLottos.add(new Lotto(inputInfo.getAnswer("21,22,23,24,25,26")));
-        sampleLottos.add(new Lotto(inputInfo.getAnswer("31,32,33,34,35,36")));
-        sampleLottos.add(new Lotto(inputInfo.getAnswer("40,41,42,43,44,45")));
+        sampleLottos.add(Lotto.newInstance(inputInfo.getAnswer("1,2,3,4,5,6")));
+        sampleLottos.add(Lotto.newInstance(inputInfo.getAnswer("11,12,13,14,15,16")));
+        sampleLottos.add(Lotto.newInstance(inputInfo.getAnswer("21,22,23,24,25,26")));
+        sampleLottos.add(Lotto.newInstance(inputInfo.getAnswer("31,32,33,34,35,36")));
+        sampleLottos.add(Lotto.newInstance(inputInfo.getAnswer("40,41,42,43,44,45")));
 
         Lottos lottos = new Lottos(sampleLottos);
-        Result result = new Result(lottos, new Lotto(inputInfo.getAnswer("1,2,3,7,8,9")));
+        Result result = new Result(lottos, Lotto.newInstance(inputInfo.getAnswer("1,2,3,7,8,9")));
         Map<Integer, Integer> sampleResult = new HashMap<>();
 
         sampleResult.put(0,0);

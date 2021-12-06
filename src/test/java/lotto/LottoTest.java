@@ -12,21 +12,21 @@ public class LottoTest {
 
     @Test
     void 로또_길이_검사() {
-        Lotto lotto = new Lotto();
+        Lotto lotto = Lotto.newInstance();
         Assertions.assertThat(lotto.getNumbers().size()).isEqualTo(6);
     }
 
     @Test
     void 로또_숫자_범위_검사() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 99);
-        Assertions.assertThatThrownBy(() -> new Lotto(numbers)).isInstanceOf(LottoNumberException.class);
+        Assertions.assertThatThrownBy(() -> Lotto.newInstance(numbers)).isInstanceOf(LottoNumberException.class);
     }
 
     @Test
     void 로또_번호_매칭() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Lotto lotto1 = new Lotto(numbers);
-        Lotto lotto2 = new Lotto(numbers);
+        Lotto lotto1 = Lotto.newInstance(numbers);
+        Lotto lotto2 = Lotto.newInstance(numbers);
 
         Assertions.assertThat(lotto1.matchCount(lotto2)).isEqualTo(6);
     }

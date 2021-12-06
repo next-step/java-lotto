@@ -14,8 +14,7 @@ public class Lottery {
         String price = InputView.questionPrice();
 
         InputInfo inputInfo = new InputInfo(price);
-        int count = inputInfo.getLottoCount();
-        Lottos lottos = new Lottos(count);
+        Lottos lottos = new Lottos(price);
 
         ResultView.printLottos(lottos);
 
@@ -25,7 +24,7 @@ public class Lottery {
     private void winner(InputInfo inputInfo, Lottos lottos) {
         String answerText = InputView.questionAnswer();
         List<Integer> answerList = inputInfo.getAnswer(answerText);
-        Lotto answer = new Lotto(answerList);
+        Lotto answer = Lotto.newInstance(answerList);
         ResultView resultView = new ResultView(lottos, answer);
         resultView.printResult();
     }

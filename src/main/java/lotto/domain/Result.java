@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.view.InputInfo;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,7 +27,7 @@ public class Result {
             revenue = getRevenue(revenue, count);
         }
 
-        this.rateOfReturn = revenue / (lottos.getLottos().size() * InputInfo.LOTTO_PRICE);
+        this.rateOfReturn = revenue / (lottos.getLottos().size() * Lottos.LOTTO_PRICE);
     }
 
     private double getRevenue(double revenue, int count) {
