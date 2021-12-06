@@ -2,8 +2,6 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -35,33 +33,6 @@ class LottoTest {
         assertThat(buyLotto).isEqualTo(winLotto);
     }
 
-    @DisplayName("로또의 당첨 등수 체크 테스트")
-    @ParameterizedTest
-    @CsvSource(value = {"2, 9, 13, 33 ,39, 45:34, 40, 13, 2 ,9, 44:1"}, delimiter = ':')
-    void lottoRankCheck(String buyLottoString, String winLottoString, String bonusString) {
-        Lotto buyLotto = Lotto.from(buyLottoString);
-        Lotto winLotto = Lotto.from(winLottoString);
-        LottoNumber bonusLottoNumber = new LottoNumber(bonusString);
-        WinLotto lastWeekWinLotto = new WinLotto(winLotto, bonusLottoNumber);
-
-        Rank rank = buyLotto.getRank(lastWeekWinLotto);
-
-        assertThat(rank).isEqualTo(Rank.FIFTH);
-    }
-
-    @DisplayName("2등 당첨 테스트")
-    @Test
-    void secondRankLotto() {
-        Lotto buyLotto = Lotto.from("2, 9, 13, 33 ,39, 45");
-        Lotto winLotto = Lotto.from("2, 9, 13, 33 ,39, 44");
-        LottoNumber bonusLottoNumber = new LottoNumber("45");
-        WinLotto lastWeekWinLotto = new WinLotto(winLotto, bonusLottoNumber);
-
-        Rank rank = buyLotto.getRank(lastWeekWinLotto);
-
-        assertThat(rank).isEqualTo(Rank.SECOND);
-    }
-
     @DisplayName("번호가 포함 되어 있는지 테스트")
     @Test
     void containLottoNumber() {
@@ -69,6 +40,18 @@ class LottoTest {
         LottoNumber lottoNumber = new LottoNumber(3);
 
         assertThat(lotto.containLottoNumber(lottoNumber)).isTrue();
+    }
+
+    @DisplayName("두 개의 로또가 몇개의 번호가 맞는지 테스트")
+    @Test
+    void sameLottoNumberCountTest() {
+        Lotto buyLotto = Lotto.from("2, 9, 13, 33 ,39, 45");
+        Lotto winLotto = Lotto.from("2, 9, 14, 33 ,40, 45");
+
+        long actual = buyLotto.sameLottoNumberCount(winLotto);
+        long expected = 4;
+
+        assertThat(actual).isEqualTo(expected);
     }
 
 }
