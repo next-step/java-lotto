@@ -13,6 +13,6 @@
 - [X] LotteryNumber 테스트, 클래스 구현
 - [X] PurchasePrice 테스트, 클래스 구현
 - [X] LotteryTicket 테스트, 클래스 구현
-- [ ] LotteryMachine 테스트, 클래스 구현
-- [ ] InputView 구현
+- [X] InputView 구현
 - [ ] ResultView 구현
+- [ ] LotteryMachine 테스트, 클래스 구현
