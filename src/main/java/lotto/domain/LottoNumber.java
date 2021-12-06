@@ -10,7 +10,7 @@ public class LottoNumber {
     private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
     static {
-        for (int i = 1; i < 46; i++) {
+        for (int i = BOUND_START; i < BOUND_END+1; i++) {
             lottoNumbers.put(i, new LottoNumber(i));
         }
     }
@@ -29,7 +29,7 @@ public class LottoNumber {
 
     public static LottoNumber ofString(String lottoNumber) {
         checkNumeric(lottoNumber);
-        return new LottoNumber(Integer.parseInt(lottoNumber));
+        return lottoNumbers.get(Integer.parseInt(lottoNumber));
     }
 
     private static void checkNumeric(String numberString) {
@@ -37,6 +37,15 @@ public class LottoNumber {
             Integer.parseInt(numberString);
         } catch (Exception e) {
             throw new IllegalArgumentException("숫자가 아닙니다");
+        }
+    }
+
+    private static void checkBound(Integer number) {
+        if (number > BOUND_END) {
+            throw new IllegalArgumentException(BOUND_END + "보다 큰 숫자가 입력될 수 없습니다.");
+        }
+        if (number < BOUND_START) {
+            throw new IllegalArgumentException(BOUND_START + "보다 작은 숫자가 입력될 수 없습니다.");
         }
     }
 
@@ -55,14 +64,5 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
-    }
-
-    private static void checkBound(Integer number) {
-        if (number > BOUND_END) {
-            throw new IllegalArgumentException(BOUND_END + "보다 큰 숫자가 입력될 수 없습니다.");
-        }
-        if (number < BOUND_START) {
-            throw new IllegalArgumentException(BOUND_START + "보다 작은 숫자가 입력될 수 없습니다.");
-        }
     }
 }

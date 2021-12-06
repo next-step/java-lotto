@@ -3,7 +3,7 @@ package lotto.domain;
 
 public class LottosBuyer {
 
-    public static final int PRICE = 1000;
+    private static final int PRICE = 1000;
 
     private final int purchaseAmount;
     private final int manualLottoCount;
@@ -15,8 +15,7 @@ public class LottosBuyer {
     }
 
     public Lottos buyRandomLottos() {
-        Lottos randomLottos = Lottos.ofRandomLottos(this.purchaseAmount / PRICE - manualLottoCount);
-        return randomLottos;
+        return Lottos.ofRandomLottos(this.purchaseAmount / PRICE - manualLottoCount);
     }
 
     public Lottos getTotalLottos(Lottos randomLottos, Lottos manualLottos) {
