@@ -5,30 +5,43 @@ import lotto.domain.LottoWinning;
 import lotto.domain.Rank;
 import lotto.domain.Store;
 import lotto.domain.value.OrderPrice;
+import lotto.view.InsertView;
+import lotto.view.ResultView;
 
+import java.util.List;
 import java.util.Map;
-
-import static lotto.view.InsertView.*;
-import static lotto.view.ResultView.*;
 
 public class LottoGame {
 
     public void start() {
 
-        String inputMoney = printInputIntro();
+        String inputMoney = InsertView.printInputIntro();
         OrderPrice lottoPrice = new OrderPrice(inputMoney);
 
-        Store store = new Store();
-        LottoTicket lottoTicket = store.purchaseTicket(lottoPrice);
+        String manualInput = InsertView.printManualInput();
+        List<String> manualNumbers = InsertView.printInputLottoNumbers(Integer.parseInt(manualInput));
+        LottoTicket lottoTicket = Store.purchaseTicket(lottoPrice, manualNumbers);
 
-        int lottoSize = lottoTicket.getLotto().size();
-        printOrderCount(lottoSize);
-        printOrderLottoNumber(lottoTicket);
+        printLottoTicket(manualNumbers.size(),lottoTicket);
+        printLottoGameResult(lottoTicket, lottoPrice);
 
-        LottoWinning lottoWinning = LottoWinning.from(printInputWinningNumbers(), printInputBonusNumber());
+    }
+
+    private void printLottoTicket(int manualLottoSize, LottoTicket lottoTicket) {
+
+        int autoLottoSize = lottoTicket.getLotto().size() - manualLottoSize;
+
+        ResultView.printOrderCount(manualLottoSize, autoLottoSize);
+        ResultView.printOrderLottoNumber(lottoTicket);
+    }
+
+    private void printLottoGameResult(LottoTicket lottoTicket, OrderPrice lottoPrice) {
+
+        LottoWinning lottoWinning = LottoWinning.from(InsertView.printInputWinningNumbers(),
+                InsertView.printInputBonusNumber());
         Map<Rank, Integer> prizeWinnersRepository = lottoWinning.createRepository(lottoTicket);
 
-        printWinningStatics(prizeWinnersRepository);
-        printRateOfReturn(lottoWinning.calculateRateOfProfit(prizeWinnersRepository, lottoPrice.getLottoPrice()));
+        ResultView.printWinningStatics(prizeWinnersRepository);
+        ResultView.printRateOfReturn(lottoWinning.calculateRateOfProfit(prizeWinnersRepository, lottoPrice.getLottoPrice()));
     }
 }

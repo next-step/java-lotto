@@ -1,15 +1,15 @@
 package lotto.domain;
 
 import lotto.domain.value.LottoNumber;
+import lotto.service.util.SizeCheckStrategy;
 
 import java.util.*;
 
-public class Lotto {
+public class Lotto implements SizeCheckStrategy {
 
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
 
-    private static final String FORM_ERROR_MSG = "로또는 6자리 형식입니다.!!!";
     private static final Random random = new Random();
 
     private final Set<LottoNumber> numbers;
@@ -20,24 +20,24 @@ public class Lotto {
     }
 
     private Lotto(Set<LottoNumber> numbers) {
-
-        if(numbers.size() != LOTTO_SIZE) {
+        
+        if(isSizeOverCheck(numbers.size())) {
             throw new IllegalArgumentException(FORM_ERROR_MSG);
         }
 
         this.numbers = numbers;
     }
 
-    public static Lotto from(List<LottoNumber> number) {
-        return new Lotto(new TreeSet<>(number));
+    public static Lotto from(List<LottoNumber> numbers) {
+        return new Lotto(new TreeSet<>(numbers));
     }
 
-    public static Lotto winningFrom(List<Integer> number) {
+    public static Lotto manualFrom(List<Integer> manualNumbers) {
 
         Set<LottoNumber> numbers = new TreeSet<>();
 
-        for (Integer integer : number) {
-            numbers.add(new LottoNumber(integer));
+        for (Integer lottoNumber : manualNumbers) {
+            numbers.add(new LottoNumber(lottoNumber));
         }
 
         return new Lotto(numbers);
@@ -76,6 +76,11 @@ public class Lotto {
 
     public Set<LottoNumber> getNumbers() {
         return Collections.unmodifiableSet(numbers);
+    }
+
+    @Override
+    public boolean isSizeOverCheck(int lottoSize) {
+        return lottoSize != LOTTO_SIZE;
     }
 
     @Override

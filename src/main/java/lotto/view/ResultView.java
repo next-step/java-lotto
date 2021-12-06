@@ -12,8 +12,16 @@ public class ResultView {
         throw new AssertionError();
     }
 
-    public static void printOrderCount(int orderCount) {
-        System.out.println(orderCount + "개를 구매했습니다");
+    public static void printOrderCount(int manualLottoCount, int autoLottoCount) {
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("수동으로 ")
+                .append(manualLottoCount)
+                .append("장, 자동으로 ")
+                .append(autoLottoCount)
+                .append("개를 구매했습니다");
+
+        System.out.println(builder);
     }
 
     public static void printOrderLottoNumber(LottoTicket lottoTicket) {
@@ -49,8 +57,13 @@ public class ResultView {
     }
 
     private static String printRank(Rank rank, int matchCount) {
-        if(rank == Rank.SECOND) return String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개\n", rank.getCountOfMatch(), rank.getPrizeMoney(), matchCount);
-        return String.format("%d개 일치 (%d원)- %d개\n", rank.getCountOfMatch(), rank.getPrizeMoney(), matchCount);
+        if(rank == Rank.SECOND) {
+            return String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개\n",
+                    rank.getCountOfMatch(), rank.getPrizeMoney(), matchCount);
+        }
+
+        return String.format("%d개 일치 (%d원)- %d개\n",
+                rank.getCountOfMatch(), rank.getPrizeMoney(), matchCount);
     }
 
     public static void printRateOfReturn(double profit) {

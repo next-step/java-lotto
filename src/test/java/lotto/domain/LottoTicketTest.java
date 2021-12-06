@@ -20,16 +20,17 @@ public class LottoTicketTest {
         List<Integer> lottoNumbers2 = Arrays.asList(1, 2, 3, 4, 10, 20);
         List<Integer> lottoNumbers3 = Arrays.asList(1, 2, 3, 10, 20, 40);
 
-        initTicket = LottoTicket.from(Arrays.asList(Lotto.winningFrom(lottoNumbers1),
-                Lotto.winningFrom(lottoNumbers2), Lotto.winningFrom(lottoNumbers3)));
+        initTicket = LottoTicket.from(Arrays.asList(Lotto.manualFrom(lottoNumbers1),
+                Lotto.manualFrom(lottoNumbers2), Lotto.manualFrom(lottoNumbers3)));
     }
 
     @Test
     @DisplayName("로또 일급 컬랜셕 생성 테스트(수동)")
     void createTest() {
-        LottoTicket lottoTicket = new LottoTicket(3);
 
-        assertThat(lottoTicket.getLotto().size()).isEqualTo(3);
+        LottoTicket lottoTicket = new LottoTicket(3,Arrays.asList("1,2,3,4,5,6"));
+
+        assertThat(lottoTicket.getLotto().size()).isEqualTo(4);
     }
 
 }

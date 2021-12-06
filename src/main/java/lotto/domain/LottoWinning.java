@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import lotto.domain.value.LottoNumber;
+import lotto.service.util.DigitCheckStrategy;
+import lotto.service.util.SizeCheckStrategy;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -9,35 +11,37 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class LottoWinning {
+public class LottoWinning implements SizeCheckStrategy, DigitCheckStrategy {
 
-    private static final int LOTTO_SIZE = 6;
+    private static final int PLUS_COUNT = 1;
 
-    private static final String FORM_ERROR_MSG = "당첨번호는 6자리 입니다!!!!";
-    private static final String NUMBER_CHECK_ERROR_MSG = "숫자만 입력 가능합니다!!!!";
     private static final String RATE_PATTERN = "0.##";
+    private static final String BONUS_BALL_ERROR_MSG = "당첨번호에 있는 번호는 보너스 번호가 아닙니다!!!";
 
     private final Lotto winningNumbers;
     private final LottoNumber bonusBall;
 
-    private LottoWinning(List<Integer> winningNumbers, int bonusBall) {
+    private LottoWinning(List<Integer> winningNumbers, String bonusBall) {
 
-        this.winningNumbers = Lotto.winningFrom(winningNumbers);
-        this.bonusBall = new LottoNumber(bonusBall);
+        if(isSizeOverCheck(winningNumbers.size())) {
+            throw new IllegalArgumentException(FORM_ERROR_MSG);
+        }
+
+        if(!isDigitCheck(bonusBall)) {
+            throw new IllegalArgumentException(NUMBER_CHECK_ERROR_MSG);
+        }
+
+        if (winningNumbers.contains(Integer.parseInt(bonusBall))) {
+            throw new IllegalArgumentException(BONUS_BALL_ERROR_MSG);
+        }
+
+        this.winningNumbers = Lotto.manualFrom(winningNumbers);
+        this.bonusBall = new LottoNumber(Integer.parseInt(bonusBall));
 
     }
 
     public static LottoWinning from(List<Integer> winningNumbers, String bonusBall) {
-
-        if(winningNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(FORM_ERROR_MSG);
-        }
-        constantCheck(bonusBall);
-        if (winningNumbers.contains(bonusBall)) {
-            throw new IllegalArgumentException("당첨번호에 있는 번호는 보너스 번호가 아닙니다!!!");
-        }
-
-        return new LottoWinning(winningNumbers, Integer.parseInt(bonusBall));
+        return new LottoWinning(winningNumbers, bonusBall);
     }
 
     public Map<Rank, Integer> createRepository(LottoTicket lottoTicket) {
@@ -46,7 +50,7 @@ public class LottoWinning {
 
         for (Lotto lotto : lottoTicket.getLotto()) {
             Rank rank = Rank.valueOf(lotto.countOfMatch(winningNumbers), lotto.contains(bonusBall));
-            repository.put(rank, repository.getOrDefault(rank, 0) + 1);
+            repository.merge(rank, PLUS_COUNT, (value1, value2) -> value1 + value2);
         }
 
         return repository;
@@ -55,10 +59,10 @@ public class LottoWinning {
     public double calculateRateOfProfit(Map<Rank, Integer> prizeWinnersRepository, int orderPrice) {
         double totalPrizeMoney = totalPrizeMoney(prizeWinnersRepository);
 
-        DecimalFormat format = new DecimalFormat(RATE_PATTERN);
-        format.setRoundingMode(RoundingMode.DOWN);
+        DecimalFormat decimalFormat = new DecimalFormat(RATE_PATTERN);
+        decimalFormat.setRoundingMode(RoundingMode.DOWN);
 
-        return Double.parseDouble(format.format(totalPrizeMoney / orderPrice));
+        return Double.parseDouble(decimalFormat.format(totalPrizeMoney / orderPrice));
     }
 
     private int totalPrizeMoney(Map<Rank, Integer> prizeWinnersRepository) {
@@ -67,13 +71,20 @@ public class LottoWinning {
                 .sum();
     }
 
-    private static void constantCheck(String orderPrice) {
+    @Override
+    public boolean isSizeOverCheck(int lottoSize) {
+        return lottoSize != LOTTO_SIZE;
+    }
 
-        for (char c : orderPrice.toCharArray()) {
+    @Override
+    public boolean isDigitCheck(String bonusBall) {
+
+        for (char c : bonusBall.toCharArray()) {
             if (!Character.isDigit(c)) {
-                throw new IllegalArgumentException(NUMBER_CHECK_ERROR_MSG);
+                return false;
             }
         }
+        return true;
     }
 
     @Override
@@ -92,4 +103,5 @@ public class LottoWinning {
     public int hashCode() {
         return Objects.hash(winningNumbers);
     }
+
 }

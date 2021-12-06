@@ -26,8 +26,8 @@ public class LottoWinningTest {
         List<Integer> lottoNumbers2 = Arrays.asList(10, 21, 31, 41, 12, 23);
         List<Integer> lottoNumbers3 = Arrays.asList(12, 13, 14, 15, 17, 19);
 
-        initTicket = LottoTicket.from(Arrays.asList(Lotto.winningFrom(lottoNumbers1),
-                Lotto.winningFrom(lottoNumbers2), Lotto.winningFrom(lottoNumbers3)));
+        initTicket = LottoTicket.from(Arrays.asList(Lotto.manualFrom(lottoNumbers1),
+                Lotto.manualFrom(lottoNumbers2), Lotto.manualFrom(lottoNumbers3)));
 
     }
 
@@ -58,6 +58,14 @@ public class LottoWinningTest {
         assertThat(profit).isEqualTo(1.66);
     }
 
+    @Test
+    @DisplayName("보너스 번호가 당첨번호에 포함되어 있을 때 예외 검증")
+    void bonusException() {
+        assertThatThrownBy(() ->
+                LottoWinning.from(Arrays.asList(1,2,3,4,5,6), "5"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
     @ParameterizedTest
     @MethodSource("provideWinnerNumberCount")
     @DisplayName("당첨번호를 입력했을 때 맞는 갯수 카운트 검증")
@@ -67,8 +75,8 @@ public class LottoWinningTest {
         List<Integer> lottoNumbers2 = Arrays.asList(1, 2, 3, 4, 10, 20);
         List<Integer> lottoNumbers3 = Arrays.asList(1, 2, 3, 10, 20, 30);
 
-        initTicket = LottoTicket.from(Arrays.asList(Lotto.winningFrom(lottoNumbers1),
-                Lotto.winningFrom(lottoNumbers2), Lotto.winningFrom(lottoNumbers3)));
+        initTicket = LottoTicket.from(Arrays.asList(Lotto.manualFrom(lottoNumbers1),
+                Lotto.manualFrom(lottoNumbers2), Lotto.manualFrom(lottoNumbers3)));
 
         LottoWinning lottoWinning = LottoWinning.from(winningNumbers, "30");
         Map<Rank, Integer> repository = lottoWinning.createRepository(initTicket);
