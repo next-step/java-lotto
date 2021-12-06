@@ -2,8 +2,9 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toList;
 
 public class Store {
     private static final int FIRST_GAME = 0;
@@ -13,7 +14,7 @@ public class Store {
         int gameCount = money.getValue() / LOTTO_ONE_GAME_PRICE;
         return new Lotties(IntStream.range(FIRST_GAME, gameCount)
                 .mapToObj(n -> numberGenerator.publish())
-                .collect(Collectors.toList()));
+                .collect(toList()));
     }
 
     public Lotties purchaseManualLotto(List<String> lottoPaper) {
@@ -21,7 +22,9 @@ public class Store {
             return new Lotties(Collections.EMPTY_LIST);
         }
         return new Lotties(lottoPaper.stream()
-                .map(Lotto::from)
-                .collect(Collectors.toList()));
+                .map(ManualLottoGenerator::new)
+                .map(ManualLottoGenerator::publish)
+                .collect(toList()));
+
     }
 }
