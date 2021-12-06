@@ -1,7 +1,7 @@
 package lotto.view;
 
-import static utils.PrintUtils.print;
-import static utils.PrintUtils.printSpace;
+import static lotto.view.PrintUtils.print;
+import static lotto.view.PrintUtils.printSpace;
 
 import java.util.Arrays;
 import java.util.List;
@@ -42,9 +42,7 @@ public class InputView {
         print(INPUT_ASSIGN_NUMBER_COUNT_MESSAGE);
 
         int assignTicketCount = sc.nextInt();
-        int assignLottoTicketPrice = assignTicketCount * LottoTicket.PRICE;
-        return new AssignPreTicket(wallet.spend(assignLottoTicketPrice),
-            assignTicketCount);
+        return AssignPreTicket.buy(wallet, assignTicketCount);
     }
 
 

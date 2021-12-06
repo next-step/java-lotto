@@ -3,12 +3,29 @@ package lotto.domain;
 import static utils.IntegerValidator.getNumberIfPositive;
 import static utils.IntegerValidator.isNumberNegative;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.IntStream;
+
 public class Wallet {
 
+    private static final Map<Integer, Wallet> cache = new HashMap<>();
     private final int money;
+
+    static {
+        IntStream.rangeClosed(0, 100)
+            .map(number -> number * LottoTicket.PRICE)
+            .forEach(money -> cache.put(money, new Wallet(money)));
+    }
 
     public Wallet(int money) {
         this.money = getNumberIfPositive(money);
+    }
+
+
+    public static Wallet create(int money) {
+        return cache.getOrDefault(money, new Wallet(money));
     }
 
     public Wallet spend(int spendMoney) {
@@ -19,8 +36,8 @@ public class Wallet {
         return new Wallet(preSpendAmount);
     }
 
-    public int getNumberOfBuyAvailableLottoTicket() {
-        return money / LottoTicket.PRICE;
+    public int getNumberOfBuyAvailable(int price) {
+        return money / price;
     }
 
     private void spendValid(int spendMoney) {
@@ -34,4 +51,20 @@ public class Wallet {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Wallet wallet = (Wallet) o;
+        return money == wallet.money;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(money);
+    }
 }

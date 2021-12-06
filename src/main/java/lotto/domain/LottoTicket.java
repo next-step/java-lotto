@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class LottoTicket {
 
     public static final int PRICE = 1000;
-    private static final int REQUIRED_NUMBER_SIZE = 6;
+    public static final int REQUIRED_NUMBER_SIZE = 6;
     private static final String INVALID_SIZE_MESSAGE = "로또 입력 숫자는 6개여야 합니다.";
 
     private final List<LottoNumber> numbers;
@@ -18,15 +18,9 @@ public class LottoTicket {
 
         this.numbers = Collections.unmodifiableList(
             numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::create)
                 .collect(Collectors.toList())
         );
-    }
-
-    private void validLottoNumberSize(List<Integer> numbers) {
-        if (numbers.size() != REQUIRED_NUMBER_SIZE) {
-            throw new IllegalArgumentException(INVALID_SIZE_MESSAGE);
-        }
     }
 
     public int matchOfNumberCount(LottoTicket lottoTicket) {
@@ -35,7 +29,7 @@ public class LottoTicket {
     }
 
     public boolean matchOfNumber(int number) {
-        return numbers.contains(new LottoNumber(number));
+        return numbers.contains(LottoNumber.create(number));
     }
 
     public List<Integer> getNumbers() {
@@ -44,6 +38,11 @@ public class LottoTicket {
             .collect(Collectors.toList());
     }
 
+    private void validLottoNumberSize(List<Integer> numbers) {
+        if (numbers.size() != REQUIRED_NUMBER_SIZE) {
+            throw new IllegalArgumentException(INVALID_SIZE_MESSAGE);
+        }
+    }
 
     @Override
     public boolean equals(Object o) {

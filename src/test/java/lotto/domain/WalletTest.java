@@ -4,14 +4,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.lang.reflect.Field;
-import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class WalletTest {
 
-    Wallet wallet;
+    private Wallet wallet;
 
     @BeforeEach
     void init() {
@@ -23,6 +22,12 @@ class WalletTest {
     void createTest() throws NoSuchFieldException, IllegalAccessException {
         int moneyByReflection = getMoneyByReflection(wallet);
         assertThat(moneyByReflection).isEqualTo(10000);
+    }
+
+    @Test
+    @DisplayName("Wallet 객체가 Caching이 적용되어야 한다.")
+    void walletCacheTest() {
+        assertThat(Wallet.create(1000)).isSameAs(Wallet.create(1000));
     }
 
     @Test
@@ -59,10 +64,10 @@ class WalletTest {
     @Test
     @DisplayName("LottoTicket이 1000원 이라면, 구매가능한 Ticket이 갯수가 정상적으로 반환된다.")
     void getNumberOfBuyAvailableLottoTicketTest() {
-        assertThat(wallet.getNumberOfBuyAvailableLottoTicket()).isEqualTo(10);
+        assertThat(wallet.getNumberOfBuyAvailable(1000)).isEqualTo(10);
     }
 
-    private int getMoneyByReflection(Wallet wallet)
+    private static int getMoneyByReflection(Wallet wallet)
         throws NoSuchFieldException, IllegalAccessException {
         Field walletField = Wallet.class.getDeclaredField("money");
         walletField.setAccessible(true);
