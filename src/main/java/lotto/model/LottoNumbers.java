@@ -29,4 +29,11 @@ public class LottoNumbers {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
     }
+
+    long countSameLottoNumber(LottoNumbers lottoNumbers) {
+        List<LottoNumber> numbers = lottoNumbers.getLottoNumbers();
+        return this.lottoNumbers.stream()
+                .filter(numbers::contains)
+                .count();
+    }
 }
