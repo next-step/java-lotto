@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.exception.LottoNumberException;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,8 +17,9 @@ public class LottoNumber {
     private static final List<Integer> numbers;
 
     static {
-        numbers = new ArrayList<>();
-        IntStream.range(START_NUMBER, END_NUMBER).forEach(numbers::add);
+        numbers = IntStream.rangeClosed(START_NUMBER, END_NUMBER)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
     public static List<Integer> autoNumbers() {
