@@ -26,7 +26,7 @@ public class Main {
         PositiveNumber manualLottoCount = inputView.getManualLottoCount();
         List<Lotto> lottoByString = inputView.insertManualLotto(manualLottoCount);
 
-        PurchaseMachine purchaseByCredit = new PurchaseMachine(credit.minus(new Credit(manualLottoCount)));
+        PurchaseMachine purchaseByCredit = new PurchaseMachine(credit.substractLottocount(new Credit(manualLottoCount)));
         LottoNumberFactory lottoNumberFactory = new LottoNumberFactory();
 
         List<Lotto> lotto = purchaseByCredit.purchase(lottoNumberFactory);

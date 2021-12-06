@@ -16,7 +16,7 @@ class CreditTest {
     @DisplayName("PositiveNumber 를 이용하여 마이너스 한 Credit을 얻는다")
     void minus() {
         Credit credit = new Credit("10000");
-        Credit minus = credit.minus(new Credit(new PositiveNumber(2)));
+        Credit minus = credit.substractLottocount(new Credit(new PositiveNumber(2)));
         assertThat(minus.getPurchaseAmount()).isEqualTo(8000);
     }
 
@@ -26,7 +26,7 @@ class CreditTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> {
                 Credit credit = new Credit("10000");
-                credit.minus(new Credit(new PositiveNumber(11)));
+                credit.substractLottocount(new Credit(new PositiveNumber(11)));
             });
     }
 }

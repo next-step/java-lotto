@@ -25,7 +25,7 @@ public class Credit {
         return number.getNumber() * price;
     }
 
-    public Credit minus(Credit manualLotto) {
-        return new Credit(new PositiveNumber(getLottoCount() - manualLotto.getLottoCount()));
+    public Credit substractLottocount(Credit credit) {
+        return new Credit(new PositiveNumber(getLottoCount() - credit.getLottoCount()));
     }
 }
