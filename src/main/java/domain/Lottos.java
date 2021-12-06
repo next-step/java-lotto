@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -24,12 +25,14 @@ public class Lottos {
         return lottos.size() * PRICE;
     }
 
-    public List<Integer> matchedNumbers(Lotto winningLotto) {
-        List<Integer> matched = new ArrayList<>();
+    public Prizes prizes(Lotto winningLotto, LottoNumber lottoNumber) {
+        Prizes prizes = new Prizes();
+        lottos.forEach(lotto -> {
+            Optional<PrizeCondition> prizeCondition = lotto.prizeCondition(winningLotto, lottoNumber);
+            prizeCondition.ifPresent(prizes::savePrize);
+        });
 
-        lottos.forEach(lotto -> matched.add(lotto.matchingNumberCount(winningLotto)));
-
-        return matched;
+        return prizes;
     }
 
     public static Lottos of(int totalNumberOfLottos) {

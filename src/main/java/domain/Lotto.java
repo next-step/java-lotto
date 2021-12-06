@@ -2,6 +2,7 @@ package domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -31,11 +32,19 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public int matchingNumberCount(Lotto winningNumber) {
+    public Optional<PrizeCondition> prizeCondition(Lotto winningNumber, LottoNumber bonusNumber) {
+        return  PrizeCondition.of(matchingNumberCount(winningNumber), bonusIncluded(bonusNumber));
+    }
+
+    private int matchingNumberCount(Lotto winningNumber) {
         return (int) winningNumber.lottoNumbers
                 .stream()
                 .filter(this.lottoNumbers::contains)
                 .count();
+    }
+
+    private boolean bonusIncluded(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
     public static int amount(int price) {

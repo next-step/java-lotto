@@ -2,7 +2,6 @@ package domain;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class Prizes {
     private static final int INITIAL_PRIZE_COUNT = 0;
@@ -19,18 +18,13 @@ public class Prizes {
         return prizes.get(prizeCondition).getCount();
     }
 
-    public double profitRate(Lottos lottos, Lotto winningNumber) {
-        lottos.matchedNumbers(winningNumber).forEach(this::savePrize);
-
-        return (double) sumProfit() / lottos.investment();
+    public double profitRate(int investment) {
+        return (double) sumProfit() / investment;
     }
 
-    private void savePrize(int matchingNumber) {
-        Optional<PrizeCondition> prizeCondition = PrizeCondition.of(matchingNumber, false);
-        prizeCondition.ifPresent(condition -> {
-            Prize prize = prizes.get(condition).incrementedPrize();
-            prizes.put(condition, prize);
-        });
+    public void savePrize(PrizeCondition prizeCondition) {
+        Prize prize = prizes.get(prizeCondition).incrementedPrize();
+        prizes.put(prizeCondition, prize);
     }
 
     private int sumProfit() {
