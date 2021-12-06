@@ -31,7 +31,7 @@ public class Round {
         EnumMap<Rank, Integer> result = new EnumMap<>(Rank.class);
         for (Game game : this.games) {
             Rank rank = game.win(winNumbers);
-            result.merge(rank, 1, (k, v) -> result.get(rank) + 1);
+            result.merge(rank, 1, (existValue, initialValue) -> existValue + 1);
         }
         return result;
     }
