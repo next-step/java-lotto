@@ -44,7 +44,7 @@ class LottiesTest {
         List<String> lottoPaperTwo = Arrays.asList("2, 9, 13, 33, 40, 45", "9, 10, 11, 20, 22, 31");
         Store store = new Store();
         Lotties lottiesOne = store.purchaseManualLotto(lottoPaperOne);
-        Lotties lottiesTwo = store.purchaseManualLotto(lottoPaperOne);
+        Lotties lottiesTwo = store.purchaseManualLotto(lottoPaperTwo);
 
         lottiesOne.addLotties(lottiesTwo);
 
