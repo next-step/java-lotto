@@ -9,6 +9,7 @@ public class Prizes {
 
     private final Map<PrizeCondition, Prize> prizes = new HashMap<PrizeCondition, Prize>() {{
         put(PrizeCondition.FIRST, new Prize(PrizeCondition.FIRST, INITIAL_PRIZE_COUNT));
+        put(PrizeCondition.SECOND, new Prize(PrizeCondition.SECOND, INITIAL_PRIZE_COUNT));
         put(PrizeCondition.THIRD, new Prize(PrizeCondition.THIRD, INITIAL_PRIZE_COUNT));
         put(PrizeCondition.FOURTH, new Prize(PrizeCondition.FOURTH, INITIAL_PRIZE_COUNT));
         put(PrizeCondition.FIFTH, new Prize(PrizeCondition.FIFTH, INITIAL_PRIZE_COUNT));
