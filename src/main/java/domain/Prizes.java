@@ -26,7 +26,7 @@ public class Prizes {
     }
 
     private void savePrize(int matchingNumber) {
-        Optional<PrizeCondition> prizeCondition = PrizeCondition.of(matchingNumber);
+        Optional<PrizeCondition> prizeCondition = PrizeCondition.of(matchingNumber, false);
         prizeCondition.ifPresent(condition -> {
             Prize prize = prizes.get(condition).incrementedPrize();
             prizes.put(condition, prize);
