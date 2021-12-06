@@ -8,11 +8,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.LottoNumber.MAX_LOTTO_NUMBER;
+import static lotto.LottoNumber.MIN_LOTTO_NUMBER;
+
 public class ShuffleNumbers {
-    private static final List<Integer> numbers
-            = IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
-            .boxed()
-            .collect(Collectors.toList());
+    private static final List<Integer> numbers;
+
+    static {
+        numbers = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+                .boxed()
+                .collect(Collectors.toList());
+    }
 
     public static List<Integer> generateLottoNumbers() {
         Collections.shuffle(numbers);
