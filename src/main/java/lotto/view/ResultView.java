@@ -4,7 +4,7 @@ import lotto.Lotto;
 
 public class ResultView {
 
-    public static final String QUANTITY_RESULT_MESSAGE = "개를 구입했습니다.";
+    private static final String QUANTITY_RESULT_MESSAGE = "개를 구입했습니다.";
 
     public static void printQuantity(int quantity) {
         System.out.println(quantity + QUANTITY_RESULT_MESSAGE);
