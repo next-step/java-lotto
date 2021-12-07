@@ -25,10 +25,10 @@ public class Lottos {
         return lottos.size() * PRICE;
     }
 
-    public Prizes prizes(Lotto winningLotto, LottoNumber lottoNumber) {
+    public Prizes prizes(Lotto winningLotto, LottoNumber bonusNumber) {
         Prizes prizes = new Prizes();
         lottos.forEach(lotto -> {
-            Optional<PrizeCondition> prizeCondition = lotto.prizeCondition(winningLotto, lottoNumber);
+            Optional<PrizeCondition> prizeCondition = lotto.prizeCondition(winningLotto, bonusNumber);
             prizeCondition.ifPresent(prizes::savePrize);
         });
 

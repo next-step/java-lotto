@@ -29,15 +29,12 @@ public enum PrizeCondition {
     public static Optional<PrizeCondition> of(int matchingNumber, boolean bonusIncluded) {
         return Arrays.stream(values())
                 .filter(it -> it.matchingNumber == matchingNumber)
-                .map(it -> bonusCheck(it, matchingNumber, bonusIncluded))
+                .map(it -> {
+                    if (it.matchingNumber != SECOND.matchingNumber) {
+                        return it;
+                    }
+                    return bonusIncluded ? SECOND : THIRD;
+                })
                 .findFirst();
-    }
-
-    private static PrizeCondition bonusCheck(PrizeCondition prizeCondition, int matchingNumber, boolean bonusIncluded) {
-        if (matchingNumber != SECOND.matchingNumber) {
-            return prizeCondition;
-        }
-
-        return bonusIncluded ? SECOND : THIRD;
     }
 }
