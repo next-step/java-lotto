@@ -1,42 +1,38 @@
 package step2.domain;
 
-import step2.exception.LottoException;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 
 public class LottoFactory {
+    private static final int LOTTO_MIN_NUMBER = 1;
+    private static final int LOTTO_MAX_NUMBER = 45;
+    private static final int LOTTO_NUMBER_TOTAL_COUNT = 6;
+    private static final int LOTTO_NUMBER_MIN_INDEX = 0;
+    private static final int LOTTO_NUMBER_MAX_INDEX = LOTTO_NUMBER_TOTAL_COUNT - 1;
+    private static final List<LottoNumber> NUMBERS = IntStream
+            .rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
+            .mapToObj(LottoNumber::from)
+            .collect(toList());
     private static final int LOTTO_PRICE = 1000;
 
-    private LottoFactory() {
+    private LottoFactory(){}
+
+    public static Lotto generate() {
+        Collections.shuffle(NUMBERS);
+        List<LottoNumber> lottoNumbers = IntStream.rangeClosed(LOTTO_NUMBER_MIN_INDEX, LOTTO_NUMBER_MAX_INDEX)
+                .mapToObj(NUMBERS::get)
+                .sorted()
+                .collect(collectingAndThen(toList(), Collections::unmodifiableList));
+
+        return Lotto.from(lottoNumbers);
     }
 
-    public static Lotto buyWithMoney(String moneyString) {
-        int money = toInt(moneyString);
-        return buyWithMoney(money);
+    public static int getLottoPrice(){
+        return LOTTO_PRICE;
     }
-
-    private static int toInt(String moneyString) {
-        try{
-            return Integer.parseInt(moneyString);
-        }
-        catch(NumberFormatException e){
-            throw new LottoException("구입할 로또 가격을 숫자로 입력해야합니다.");
-        }
-
-    }
-
-
-    public static Lotto buyWithMoney(int money) {
-        int numberOfLottoNumbers = money / LOTTO_PRICE;
-
-        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-        for (int i = 0; i < numberOfLottoNumbers; i++) {
-            LottoNumbers lottoNumbers = LottoNumbers.generate();
-            lottoNumbersList.add(lottoNumbers);
-        }
-
-        return new Lotto(new LottoWinningRules(), lottoNumbersList, numberOfLottoNumbers * LOTTO_PRICE);
-    }
-
 }

@@ -11,13 +11,13 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoNumbersTest {
+public class LottosNumbersTest {
 
     @DisplayName("생성된 로또 번호는 6개이다.")
     @Test
     void generate() {
-        LottoNumbers lottoNumbers = LottoNumbers.generate();
-        int size = lottoNumbers.size();
+        Lotto lotto = LottoFactory.generate();
+        int size = lotto.size();
         assertThat(size).isEqualTo(6);
     }
 
@@ -30,7 +30,7 @@ public class LottoNumbersTest {
     }
 
     private static List<Integer> generateLottoNumbers() {
-        return LottoNumbers.generate().getLottoNumbers()
+        return LottoFactory.generate().getLottoNumbers()
                 .stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
@@ -41,8 +41,8 @@ public class LottoNumbersTest {
     void getWinningInfo() {
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.from(winningNumbers);
-        LottoNumbers lottoNumbers = LottoNumbers.generate();
-        int numberOfMatching = lottoNumbers.numberOfMatching(lottoWinningNumbers);
+        Lotto lotto = LottoFactory.generate();
+        int numberOfMatching = lotto.numberOfMatching(lottoWinningNumbers);
         assertThat(numberOfMatching).isGreaterThanOrEqualTo(0);
         assertThat(numberOfMatching).isLessThan(7);
 

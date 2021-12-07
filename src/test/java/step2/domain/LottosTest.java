@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoTest {
+class LottosTest {
 
     @DisplayName("로또 당첨 번호를 전달하면 일치하는 개수가 몇 개 있는지 알 수 있다.")
     @Test
@@ -21,15 +21,15 @@ class LottoTest {
 
         LottoWinningRules lottoWinningRules = new LottoWinningRules();
 
-        LottoNumbers lottoNumbers1 = createLottoNumbersFrom(30, 20, 25, 1, 2, 3); //3개일치
-        LottoNumbers lottoNumbers2 = createLottoNumbersFrom(30, 20, 25, 1, 2, 3); //3개일치
-        LottoNumbers lottoNumbers3 = createLottoNumbersFrom(1, 2, 3, 4, 5, 43); //5개 일치
-        List<LottoNumbers> lottoNumbersList = createLottoNumbersListFrom(lottoNumbers1, lottoNumbers2, lottoNumbers3);
+        Lotto lotto1 = createLottoFrom(30, 20, 25, 1, 2, 3); //3개일치
+        Lotto lotto2 = createLottoFrom(30, 20, 25, 1, 2, 3); //3개일치
+        Lotto lotto3 = createLottoFrom(1, 2, 3, 4, 5, 43); //5개 일치
+        List<Lotto> lottoList = createLottoListFrom(lotto1, lotto2, lotto3);
 
-        Lotto lotto = new Lotto(lottoWinningRules, lottoNumbersList, 2000);
+        Lottos lottos = new Lottos(lottoWinningRules, lottoList, 2000);
 
         //when
-        Map<Integer, Integer> countNumberOfMatching = lotto.countNumberOfMatching(lottoWinningNumbers);
+        Map<Integer, Integer> countNumberOfMatching = lottos.countNumberOfMatching(lottoWinningNumbers);
 
 
         //then
@@ -47,14 +47,14 @@ class LottoTest {
 
         LottoWinningRules lottoWinningRules = new LottoWinningRules();
 
-        LottoNumbers lottoNumbers1 = createLottoNumbersFrom(30, 20, 25, 1, 2, 3); //3개일치
-        LottoNumbers lottoNumbers2 = createLottoNumbersFrom(1, 2, 3, 4, 5, 43); //5개 일치
-        List<LottoNumbers> lottoNumbersList = createLottoNumbersListFrom(lottoNumbers1, lottoNumbers2);
+        Lotto lotto1 = createLottoFrom(30, 20, 25, 1, 2, 3); //3개일치
+        Lotto lotto2 = createLottoFrom(1, 2, 3, 4, 5, 43); //5개 일치
+        List<Lotto> lottoList = createLottoListFrom(lotto1, lotto2);
 
-        Lotto lotto = new Lotto(lottoWinningRules, lottoNumbersList, 2000);
+        Lottos lottos = new Lottos(lottoWinningRules, lottoList, 2000);
 
         //when
-        int prizeMoney = lotto.prizeMoney(lottoWinningNumbers);
+        int prizeMoney = lottos.prizeMoney(lottoWinningNumbers);
 
         //then
         assertThat(prizeMoney).isEqualTo(1505000);
@@ -69,30 +69,30 @@ class LottoTest {
 
         LottoWinningRules lottoWinningRules = new LottoWinningRules();
 
-        LottoNumbers lottoNumbers1 = createLottoNumbersFrom(30, 20, 25, 1, 2, 3); //3개일치
-        LottoNumbers lottoNumbers2 = createLottoNumbersFrom(1, 2, 3, 33, 22, 43); //3개 일치
-        List<LottoNumbers> lottoNumbersList = createLottoNumbersListFrom(lottoNumbers1, lottoNumbers2);
+        Lotto lotto1 = createLottoFrom(30, 20, 25, 1, 2, 3); //3개일치
+        Lotto lotto2 = createLottoFrom(1, 2, 3, 33, 22, 43); //3개 일치
+        List<Lotto> lottoList = createLottoListFrom(lotto1, lotto2);
 
-        Lotto lotto = new Lotto(lottoWinningRules, lottoNumbersList, 2000);
+        Lottos lottos = new Lottos(lottoWinningRules, lottoList, 2000);
 
         //when
-        int earningRate = lotto.earningRate(lottoWinningNumbers);
+        double earningRate = lottos.earningRate(lottoWinningNumbers);
 
         //then
         assertThat(earningRate).isEqualTo(5);
     }
 
-    private LottoNumbers createLottoNumbersFrom(Integer... numbers) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    private Lotto createLottoFrom(Integer... numbers) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         List<LottoNumber> numberList = Arrays.stream(numbers).map(LottoNumber::from).collect(Collectors.toList());
-        Constructor<LottoNumbers> declaredConstructor = LottoNumbers.class.getDeclaredConstructor(List.class);
+        Constructor<Lotto> declaredConstructor = Lotto.class.getDeclaredConstructor(List.class);
         declaredConstructor.setAccessible(true);
         return declaredConstructor.newInstance(numberList);
 
     }
 
-    private List<LottoNumbers> createLottoNumbersListFrom(LottoNumbers... lottoNumbers) {
-        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
-        Collections.addAll(lottoNumbersList, lottoNumbers);
-        return lottoNumbersList;
+    private List<Lotto> createLottoListFrom(Lotto... lottos) {
+        List<Lotto> lottoList = new ArrayList<>();
+        Collections.addAll(lottoList, lottos);
+        return lottoList;
     }
 }

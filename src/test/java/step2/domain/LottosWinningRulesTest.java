@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoWinningRulesTest {
+class LottosWinningRulesTest {
 
     @DisplayName("로또 당첨 숫자와 일치하는 숫자가 3개 이상이면 당첨이다.")
     @ParameterizedTest

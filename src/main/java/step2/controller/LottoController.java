@@ -9,29 +9,29 @@ import java.util.*;
 
 public class LottoController {
 
-    public Lotto buyAndPrintLotto() {
+    public Lottos buyAndPrintLotto() {
         String purchaseAmount = InputView.purchaseAmount();
-        Lotto lotto = LottoFactory.buyWithMoney(purchaseAmount);
-        OutputView.printNumberOfPurchase(lotto.size());
-        printLottoNumbersList(lotto);
-        return lotto;
+        Lottos lottos = LottosFactory.buyWithMoney(purchaseAmount);
+        OutputView.printNumberOfPurchase(lottos.size());
+        printLottoNumbersList(lottos);
+        return lottos;
     }
 
-    private void printLottoNumbersList(Lotto lotto) {
-        List<LottoNumbers> lottoNumbersList = lotto.getLottoNumbersList();
-        for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            OutputView.printLottoNumbers(lottoNumbers.getLottoNumbers());
+    private void printLottoNumbersList(Lottos lottos) {
+        List<Lotto> lottoList = lottos.getLottoNumbersList();
+        for (Lotto lotto : lottoList) {
+            OutputView.printLottoNumbers(lotto.getLottoNumbers());
         }
     }
 
-    public void winningInformationOf(Lotto lotto) {
+    public void winningInformationOf(Lottos lottos) {
         String winningLotteryNumbers = InputView.winningLotteryNumbers();
         LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.from(winningLotteryNumbers);
-        Map<Integer, Integer> countNumberOfMatching = lotto.countNumberOfMatching(lottoWinningNumbers);
-        LottoWinningRules lottoWinningRules = lotto.getLottoWinningRules();
+        Map<Integer, Integer> countNumberOfMatching = lottos.countNumberOfMatching(lottoWinningNumbers);
+        LottoWinningRules lottoWinningRules = lottos.getLottoWinningRules();
         List<WinningInformationDto> winningInformationDtoList = winningInformationList(countNumberOfMatching, lottoWinningRules);
         OutputView.printWinningStatics(winningInformationDtoList);
-        int earningRate = lotto.earningRate(countNumberOfMatching);
+        double earningRate = lottos.earningRate(countNumberOfMatching);
         OutputView.earningRate(earningRate);
     }
 

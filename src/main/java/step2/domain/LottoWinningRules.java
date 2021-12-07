@@ -16,8 +16,8 @@ public class LottoWinningRules {
         lottoPrize.put(6, 2_000_000_000);
     }
 
-    public boolean isWinLotto(int numberOfMatches) {
-        return lottoPrize.containsKey(numberOfMatches);
+    public boolean isWinLotto(int numberOfMatching) {
+        return lottoPrize.containsKey(numberOfMatching);
     }
 
     public int getPrizeOf(int numberOfMatching) {

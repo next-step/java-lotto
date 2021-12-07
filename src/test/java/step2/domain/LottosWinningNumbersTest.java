@@ -9,7 +9,7 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoWinningNumbersTest {
+class LottosWinningNumbersTest {
 
     @DisplayName("로또 당첨 번호 문자열을 입력하면 정수 리스트로 변환하여 저장한다.")
     @Test
