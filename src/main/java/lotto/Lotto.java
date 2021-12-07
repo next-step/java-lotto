@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,7 +11,7 @@ public class Lotto {
     }
 
     public static Lotto from(List<Integer> input) {
-        LottoNumbers lottoNumbers = LottoNumbers.from(new HashSet<>(input));
+        LottoNumbers lottoNumbers = LottoNumbers.from(input);
         return new Lotto(lottoNumbers);
     }
 

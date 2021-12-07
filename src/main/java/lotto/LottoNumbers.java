@@ -1,20 +1,26 @@
 package lotto;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class LottoNumbers {
-    private final Set<LottoNumber> values;
+    private final List<LottoNumber> values;
 
-    private LottoNumbers(Set<LottoNumber> input) {
+    private LottoNumbers(List<LottoNumber> input) {
         this.values = input;
     }
 
-    public static LottoNumbers from(Set<Integer> input) {
+    public static LottoNumbers from(List<Integer> input) {
         if (input == null || input.size() != 6) {
-            throw new IllegalArgumentException("로또 번호는 중복 없이 6자리여야 합니다.");
+            throw new IllegalArgumentException("로또 번호는 6자리여야 합니다.");
         }
 
-        Set<LottoNumber> newLottoNumbers = new HashSet<>();
+        if(isDuplicated(input)) {
+            throw new IllegalArgumentException("로또 번호는 중복이 없어야 합니다.");
+        }
+
+        List<LottoNumber> newLottoNumbers = new ArrayList<>();
 
         for (Integer number : input) {
             LottoNumber lottoNumber = new LottoNumber(number);
@@ -22,6 +28,13 @@ public class LottoNumbers {
         }
 
         return new LottoNumbers(newLottoNumbers);
+    }
+
+    private static boolean isDuplicated(List<Integer> input) {
+        boolean duplicated = input.stream()
+                .distinct()
+                .count() != input.size();
+        return duplicated;
     }
 
     @Override
