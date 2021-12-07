@@ -12,7 +12,7 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers from(List<Integer> input) {
-        if (input.size() < 6) {
+        if (input == null || input.size() != 6) {
             throw new IllegalArgumentException("로또 숫자는 6자리여야 합니다.");
         }
 
