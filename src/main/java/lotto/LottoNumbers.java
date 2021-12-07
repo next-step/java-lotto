@@ -1,8 +1,8 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private final List<LottoNumber> values;
@@ -12,7 +12,7 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers from(List<Integer> input) {
-        if (input == null || input.size() != 6) {
+        if (isValidDigits(input)) {
             throw new IllegalArgumentException("로또 번호는 6자리여야 합니다.");
         }
 
@@ -20,21 +20,21 @@ public class LottoNumbers {
             throw new IllegalArgumentException("로또 번호는 중복이 없어야 합니다.");
         }
 
-        List<LottoNumber> newLottoNumbers = new ArrayList<>();
+        List<LottoNumber> lottoNumbers = input.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
 
-        for (Integer number : input) {
-            LottoNumber lottoNumber = new LottoNumber(number);
-            newLottoNumbers.add(lottoNumber);
-        }
+        return new LottoNumbers(lottoNumbers);
+    }
 
-        return new LottoNumbers(newLottoNumbers);
+    private static boolean isValidDigits(List<Integer> input) {
+        return input == null || input.size() != 6;
     }
 
     private static boolean isDuplicated(List<Integer> input) {
-        boolean duplicated = input.stream()
+        return input.stream()
                 .distinct()
                 .count() != input.size();
-        return duplicated;
     }
 
     @Override

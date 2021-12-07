@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumbersTest {
 
-    private static final String LOTTO_NUMBER_FORMAT_EXCEPTION_MESSAGE = "로또 번호는 6자리여야 합니다.";
+    private static final String LOTTO_NUMBER_DIGITS_EXCEPTION_MESSAGE = "로또 번호는 6자리여야 합니다.";
     private static final String LOTTO_NUMBER_DUPLICATED_EXCEPTION_MESSAGE = "로또 번호는 중복이 없어야 합니다.";
 
     @Test
@@ -34,7 +34,7 @@ class LottoNumbersTest {
     void shouldThrowWhenInputNotSixNumbers(List<Integer> input) {
         assertThatThrownBy(() -> LottoNumbers.from(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LOTTO_NUMBER_FORMAT_EXCEPTION_MESSAGE);
+                .hasMessage(LOTTO_NUMBER_DIGITS_EXCEPTION_MESSAGE);
     }
 
     @ParameterizedTest
@@ -43,7 +43,7 @@ class LottoNumbersTest {
     void shouldThrowWhenInputIsEmpty(List<Integer> input) {
         assertThatThrownBy(() -> LottoNumbers.from(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LOTTO_NUMBER_FORMAT_EXCEPTION_MESSAGE);
+                .hasMessage(LOTTO_NUMBER_DIGITS_EXCEPTION_MESSAGE);
     }
 
     @Test
