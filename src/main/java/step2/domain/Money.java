@@ -8,12 +8,24 @@ import java.util.Objects;
 public class Money {
     private static final int BASE_PRICE = 1000;
     private static final int ZERO = 0;
-    private final int amount;
+    private final long amount;
 
-    public Money(int price) {
+    public Money(long price) {
         validMoneyOrElseThrow(price);
 
         this.amount = price;
+    }
+
+    public Money() {
+        this(ZERO);
+    }
+
+    public Money addMoney(Money otherMoney) {
+        return new Money(this.amount + otherMoney.amount);
+    }
+
+    public WinningRate calculatePercent(Money otherMoney) {
+        return new WinningRate(this.amount / (float)otherMoney.amount);
     }
 
     public Ticket purchasedTicket() {
@@ -28,8 +40,8 @@ public class Money {
         }
     }
 
-    private void validMoneyOrElseThrow(int price) {
-        if (price <= ZERO) {
+    private void validMoneyOrElseThrow(long price) {
+        if (price < ZERO) {
             throw new MoneyException(MoneyException.ErrorCode.MONEY_NOT_ZERO);
         }
     }
@@ -50,4 +62,5 @@ public class Money {
     public int hashCode() {
         return Objects.hash(amount);
     }
+
 }

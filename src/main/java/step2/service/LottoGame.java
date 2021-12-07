@@ -3,7 +3,7 @@ package step2.service;
 import step2.domain.LottoTicket;
 import step2.domain.LottoTickets;
 import step2.domain.Ticket;
-import step2.domain.WinningNumber;
+import step2.domain.LottoNumber;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -34,13 +34,13 @@ public class LottoGame {
         return new LottoTickets(lottoTickets);
     }
 
-    private Set<WinningNumber> shuffleNumbers() {
+    private Set<LottoNumber> shuffleNumbers() {
         Collections.shuffle(numbers);
 
         return numbers.stream()
                 .limit(LOTTO_SIZE)
                 .sorted(Integer::compareTo)
-                .map(number -> new WinningNumber(number))
+                .map(number -> new LottoNumber(number))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 }

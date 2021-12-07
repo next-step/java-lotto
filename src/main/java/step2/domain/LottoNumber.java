@@ -26,6 +26,10 @@ public class LottoNumber {
         }
     }
 
+    public boolean matchedWinningNumber(MatchedNumber matchedNumber) {
+        return matchedNumber.getMatchedNumbers().contains(new LottoNumber(lottoNumber));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -47,4 +51,5 @@ public class LottoNumber {
     public String toString() {
         return String.valueOf(lottoNumber);
     }
+
 }

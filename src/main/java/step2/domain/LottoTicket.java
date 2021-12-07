@@ -1,26 +1,30 @@
 package step2.domain;
 
-import step2.dto.WinningNumber;
-
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
-    private final Set<WinningNumber> lottoTicket;
+    private final Set<LottoNumber> lottoTicket;
 
-    public LottoTicket(Set<WinningNumber> lottoTicker) {
+    public LottoTicket(Set<LottoNumber> lottoTicker) {
         this.lottoTicket = lottoTicker;
     }
 
-    public long containsWinningNumber(Set<WinningNumber> winningNumbers) {
+    public long containsWinningNumber(Set<LottoNumber> winningNumbers) {
         return winningNumbers.stream()
                 .filter(number -> lottoTicket.contains(number))
                 .collect(Collectors.counting());
     }
 
-    public Set<WinningNumber> lottoTicket() {
+    public long matchedWinningNumber(MatchedNumber matchedNumber) {
+        return this.lottoTicket.stream()
+                .filter(number -> number.matchedWinningNumber(matchedNumber))
+                .count();
+    }
+
+    public Set<LottoNumber> lottoTicket() {
         return Collections.unmodifiableSet(lottoTicket);
     }
 
@@ -40,4 +44,5 @@ public class LottoTicket {
     public int hashCode() {
         return Objects.hash(lottoTicket);
     }
+
 }

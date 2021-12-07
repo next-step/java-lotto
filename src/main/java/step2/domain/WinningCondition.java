@@ -1,18 +1,18 @@
 package step2.domain;
 
-public class WinningInfo {
+public enum WinningCondition {
+    WIN_4TH(3, 5000),
+    WIN_3TH(4, 50000),
+    WIN_2TH(5, 1500000),
+    WIN_1TH(6, 2000000000),
+    ;
+
     private final long matchedCondition;
     private final long winningPrize;
-    private final long winningCount;
 
-    WinningInfo(long matchedCondition, long winningPrize, long winningCount) {
+    WinningCondition(int matchedCondition, long winningPrize) {
         this.matchedCondition = matchedCondition;
         this.winningPrize = winningPrize;
-        this.winningCount = winningCount;
-    }
-
-    public long calculatePrize() {
-        return this.winningPrize * this.winningCount;
     }
 
     public long getMatchedCondition() {
@@ -22,9 +22,4 @@ public class WinningInfo {
     public long getWinningPrize() {
         return winningPrize;
     }
-
-    public long getWinningCount() {
-        return winningCount;
-    }
-
 }

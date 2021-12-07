@@ -3,6 +3,7 @@ package step2.domain;
 import step2.exception.NotValidMatchedNumberCount;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,10 @@ public class MatchedNumber {
                 .collect(Collectors.toSet());
 
         validCountOrElseThrow();
+    }
+
+    public Set<LottoNumber> getMatchedNumbers() {
+        return Collections.unmodifiableSet(this.matchedNumber);
     }
 
     private void validCountOrElseThrow() {

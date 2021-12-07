@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class Ticket {
     private static final int ZERO_COUNT = 0;
-    private final int ticketCount;
+    private final long ticketCount;
 
-    public Ticket(int ticketCount) {
+    public Ticket(long ticketCount) {
         this.ticketCount = ticketCount;
     }
 
@@ -14,7 +14,7 @@ public class Ticket {
         this.ticketCount = ticket.ticketCount;
     }
 
-    public int ticketCount() {
+    public long ticketCount() {
         return this.ticketCount;
     }
 
