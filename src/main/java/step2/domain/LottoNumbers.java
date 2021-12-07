@@ -1,19 +1,17 @@
 package step2.domain;
 
-import step2.dto.WinningNumber;
-
 import java.util.Collections;
 import java.util.Set;
 
 public class WinningNumbers {
 
-    private final Set<WinningNumber> myWinningNumbers;
+    private final Set<LottoNumber> myWinningNumbers;
 
-    public WinningNumbers(Set<WinningNumber> winningNumbers) {
+    public WinningNumbers(Set<LottoNumber> winningNumbers) {
         this.myWinningNumbers = winningNumbers;
     }
 
-    public Set<WinningNumber> winningNumbers() {
+    public Set<LottoNumber> winningNumbers() {
         return Collections.unmodifiableSet(myWinningNumbers);
     }
 }
