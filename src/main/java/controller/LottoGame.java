@@ -9,9 +9,14 @@ import view.ConsoleOutputView;
 import view.InputView;
 import view.OutputView;
 
+import java.util.List;
+import java.util.stream.IntStream;
+
 import static util.StringUtils.parseNumbers;
 
 public class LottoGame {
+
+    private static final int START_INDEX_MANUAL_LOTTO_NUMBERS = 0;
 
     private LottoGame() {
 
@@ -23,12 +28,18 @@ public class LottoGame {
         int purchaseAmount = inputView.purchaseAmount();
 
         inputView.showManualPurchaseAmountInputMessage();
+        int manualPurchaseAmount = inputView.manualPurchaseAmount();
+        int totalNumberOfLottos = Lotto.amount(purchaseAmount);
+        Lottos lottos = Lottos.of(totalNumberOfLottos - manualPurchaseAmount);
+
         inputView.showManualLottoInputMessage();
+        IntStream.range(START_INDEX_MANUAL_LOTTO_NUMBERS, manualPurchaseAmount)
+                .forEach(i -> {
+                    List<Integer> manualLottoNumbers = inputView.manualLottoNumbers();
+                    lottos.add(manualLottoNumbers);
+                });
 
         OutputView outputView = new ConsoleOutputView();
-        int totalNumberOfLottos = Lotto.amount(purchaseAmount);
-        Lottos lottos = Lottos.of(totalNumberOfLottos);
-
         outputView.showTotalNumberOfLottos(totalNumberOfLottos);
         outputView.showRandomGeneratedLottos(lottos);
 

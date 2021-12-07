@@ -1,6 +1,9 @@
 package view;
 
+import java.util.List;
 import java.util.Scanner;
+
+import static util.StringUtils.parseNumbers;
 
 public class ConsoleInputView implements InputView {
 
@@ -21,8 +24,29 @@ public class ConsoleInputView implements InputView {
     }
 
     @Override
+    public int manualPurchaseAmount() {
+        try {
+            String rawInput = scanner.nextLine();
+            return Integer.parseInt(rawInput);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Purchase amount must be integer");
+        }
+    }
+
+    @Override
     public void showManualLottoInputMessage() {
         System.out.println("Enter Manual Lotto Numbers");
+    }
+
+    @Override
+    public List<Integer> manualLottoNumbers() {
+        try {
+            String rawInput = scanner.nextLine();
+
+            return parseNumbers(rawInput);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Purchase amount must be integer");
+        }
     }
 
     @Override

@@ -21,6 +21,10 @@ public class Lottos {
         return lottos.stream();
     }
 
+    public void add(List<Integer> lottoNumbers) {
+        lottos.add(Lotto.of(lottoNumbers));
+    }
+
     public int investment() {
         return lottos.size() * PRICE;
     }
