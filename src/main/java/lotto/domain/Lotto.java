@@ -9,8 +9,19 @@ public class Lotto {
     private final List<Integer> numbers;
     private int bonus;
 
-    public int getBonus() {
-        return bonus;
+    private Lotto() {
+        numbers = LottoNumbers.autoNumbers();
+    }
+
+    private Lotto(List<Integer> answer) {
+        LottoNumbers.valid(answer);
+        numbers = new ArrayList<>(answer);
+    }
+
+    private Lotto(List<Integer> answer, int bonus) {
+        LottoNumbers.valid(answer);
+        numbers = new ArrayList<>(answer);
+        this.bonus = bonus;
     }
 
     public static Lotto newInstance() {
@@ -27,21 +38,6 @@ public class Lotto {
         return new Lotto(new ArrayList<>(answer), bonus.getLottoNumber());
     }
 
-    public Lotto() {
-        numbers = LottoNumbers.autoNumbers();
-    }
-
-    public Lotto(List<Integer> answer) {
-        LottoNumbers.valid(answer);
-        numbers = new ArrayList<>(answer);
-    }
-
-    public Lotto(List<Integer> answer, int bonus) {
-        LottoNumbers.valid(answer);
-        numbers = new ArrayList<>(answer);
-        this.bonus = bonus;
-    }
-
     public List<Integer> getNumbers() {
         Collections.sort(numbers);
         return Collections.unmodifiableList(numbers);
@@ -51,5 +47,9 @@ public class Lotto {
         return (int) lotto.getNumbers().stream()
                 .filter(this.numbers::contains)
                 .count();
+    }
+
+    public int getBonus() {
+        return bonus;
     }
 }
