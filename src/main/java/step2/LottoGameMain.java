@@ -5,16 +5,13 @@ import step2.service.LottoGame;
 import step2.view.InputView;
 import step2.view.ResultView;
 
-import java.util.Collection;
-import java.util.EnumMap;
-import java.util.Map;
-
 public class LottoGameMain {
 
     public static void main(String[] args) {
         Money inputAmount = InputView.inputAmount();
 
         Ticket tickets = inputAmount.purchasedTicket();
+
         ResultView.renderLottoCount(tickets);
 
         LottoGame lottoGame = new LottoGame();

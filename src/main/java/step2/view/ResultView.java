@@ -1,13 +1,16 @@
 package step2.view;
 
 import step2.domain.*;
+import step2.dto.WinningCondition;
+import step2.dto.WinningInfo;
+import step2.dto.WinningRate;
 import step2.exception.SingletonConstructorException;
 
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
 public class ResultView {
+    private static final String ANS_BUY_COUNT = "%d개를 구매했습니다.\n";
     private static final String AVG_WINNING = "당첨 통계";
     private static final String DASHES = "---------";
     private static final String SAME_RESULT = "%d개 일치 (%d원)- %d개\n";
@@ -18,7 +21,7 @@ public class ResultView {
     }
 
     public static void renderLottoCount(Ticket ticket) {
-        System.out.println(ticket.ticketCount());
+        System.out.printf(ANS_BUY_COUNT, ticket.ticketCount());
     }
 
     public static void renderLottoStatus(List<LottoTicket> lottoTickets) {
