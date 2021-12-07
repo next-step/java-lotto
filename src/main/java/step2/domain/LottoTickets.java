@@ -1,5 +1,8 @@
 package step2.domain;
 
+import step2.dto.WinningCondition;
+import step2.dto.WinningInfo;
+
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;

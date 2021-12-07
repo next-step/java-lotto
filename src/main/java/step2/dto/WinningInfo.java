@@ -1,11 +1,11 @@
-package step2.domain;
+package step2.dto;
 
 public class WinningInfo {
     private final long matchedCondition;
     private final long winningPrize;
     private final long winningCount;
 
-    WinningInfo(long matchedCondition, long winningPrize, long winningCount) {
+    public WinningInfo(long matchedCondition, long winningPrize, long winningCount) {
         this.matchedCondition = matchedCondition;
         this.winningPrize = winningPrize;
         this.winningCount = winningCount;

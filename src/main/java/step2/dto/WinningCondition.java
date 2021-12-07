@@ -1,4 +1,4 @@
-package step2.domain;
+package step2.dto;
 
 public enum WinningCondition {
     WIN_4TH(3, 5000),
