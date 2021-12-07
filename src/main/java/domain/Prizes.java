@@ -18,8 +18,8 @@ public class Prizes {
         return prizes.get(prizeCondition).getCount();
     }
 
-    public double profitRate(int investment) {
-        return (double) sumProfit() / investment;
+    public double profitRate(LottoPurchaseAmount lottoPurchaseAmount) {
+        return lottoPurchaseAmount.profitRate(sumProfit());
     }
 
     public void savePrize(PrizeCondition prizeCondition) {

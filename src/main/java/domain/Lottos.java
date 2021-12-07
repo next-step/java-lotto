@@ -6,8 +6,6 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static domain.Lotto.PRICE;
-
 public class Lottos {
     private static final int STARTING_INDEX_LOTTOS = 0;
 
@@ -25,9 +23,9 @@ public class Lottos {
         lottos.add(Lotto.of(lottoNumbers));
     }
 
-    public int investment() {
-        return lottos.size() * PRICE;
-    }
+//    public int investment() {
+//        return lottos.size() * PRICE;
+//    }
 
     public Prizes prizes(Lotto winningLotto, LottoNumber bonusNumber) {
         Prizes prizes = new Prizes();

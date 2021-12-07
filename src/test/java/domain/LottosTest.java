@@ -1,14 +1,11 @@
 package domain;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottosTest {
     public static final Lotto WINNING_LOTTO = generateLotto(Arrays.asList(1,2,3,4,5,6));
@@ -23,19 +20,11 @@ public class LottosTest {
     public static final Lotto NINTH_LOTTO = generateLotto(Arrays.asList(1,2,3,13,5,6));
     public static final Lotto TENTH_LOTTO = generateLotto(Arrays.asList(1,2,3,4,5,6));
 
+    public static final LottoPurchaseAmount LOTTO_PURCHASE_AMOUNT = new LottoPurchaseAmount(10_000);
     public static final Lottos LOTTOS = new Lottos(Arrays.asList(FIRST_LOTTO, SECOND_LOTTO, THIRD_LOTTO, FOURTH_LOTTO, FIFTH_LOTTO,
             SIXTH_LOTTO, SEVENTH_LOTTO, EIGHTH_LOTTO, NINTH_LOTTO, TENTH_LOTTO));
 
     public static final LottoNumber BONUS_NUMBER = new LottoNumber(13);
-
-    @Test
-    void testInvestment() {
-        Lottos lottos = new Lottos(new ArrayList<>(Arrays.asList(FIRST_LOTTO, SECOND_LOTTO)));
-        assertThat(lottos.investment()).isEqualTo(2_000);
-
-        lottos.add(Arrays.asList(11,12,13,14,15,16));
-        assertThat(lottos.investment()).isEqualTo(3_000);
-    }
 
     private static Lotto generateLotto(List<Integer> numbers) {
         return new Lotto(numbers.stream()

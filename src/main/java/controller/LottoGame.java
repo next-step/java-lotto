@@ -1,9 +1,6 @@
 package controller;
 
-import domain.Lotto;
-import domain.LottoNumber;
-import domain.Lottos;
-import domain.Prizes;
+import domain.*;
 import view.ConsoleInputView;
 import view.ConsoleOutputView;
 import view.InputView;
@@ -25,11 +22,11 @@ public class LottoGame {
     public static void run() {
         InputView inputView = new ConsoleInputView();
         inputView.showPurchaseAmountInputMessage();
-        int purchaseAmount = inputView.purchaseAmount();
+        LottoPurchaseAmount lottoPurchaseAmount = LottoPurchaseAmount.of(inputView.purchaseAmount());
 
         inputView.showManualPurchaseAmountInputMessage();
         int manualPurchaseAmount = inputView.manualPurchaseAmount();
-        int totalNumberOfLottos = Lotto.amount(purchaseAmount);
+        int totalNumberOfLottos = lottoPurchaseAmount.amount();
         Lottos lottos = Lottos.of(totalNumberOfLottos - manualPurchaseAmount);
 
         inputView.showManualLottoInputMessage();
@@ -51,7 +48,7 @@ public class LottoGame {
         int bonusNumber = inputView.bonusBall();
 
         Prizes prizes = lottos.prizes(winningLotto, new LottoNumber(bonusNumber));
-        double profitRate = prizes.profitRate(purchaseAmount);
+        double profitRate = prizes.profitRate(lottoPurchaseAmount);
         outputView.showLottoResult(prizes);
         outputView.showProfitRate(profitRate);
     }
