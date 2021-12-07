@@ -2,7 +2,7 @@ package calculator;
 
 public class StringAddCalculator {
 
-    private static final String TOKEN_DELIMITE = ",";
+    private static final String TOKEN_DELIMITE = ",|:";
 
     public static int splitAndSum(String expression) {
         if (expression == null || expression.isEmpty()) {
