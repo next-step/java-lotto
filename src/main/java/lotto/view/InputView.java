@@ -1,20 +1,18 @@
 package lotto.view;
 
-import lotto.Lotto;
-
 public class InputView {
+
+    public static final String PURCHASE_REQUEST_MESSAGE = "구입 금액을 입력해주세요.";
+    public static final String WINNING_NUMBER_REQUEST_MESSAGE = "지난 주 당첨 번호를 입력해주세요.";
+
     private InputView() {
     }
 
     public static void printPurchaseRequest() {
-        System.out.println("구입 금액을 입력해주세요.");
+        System.out.println(PURCHASE_REQUEST_MESSAGE);
     }
 
-    public static void printQuantity(int quantity) {
-        System.out.println(quantity + "개를 구입했습니다.");
-    }
-
-    public static void printLottoNumbers(Lotto lotto) {
-        System.out.println(lotto.lottoNumbers());
+    public static void printWinningNumbersRequest() {
+        System.out.println(WINNING_NUMBER_REQUEST_MESSAGE);
     }
 }
