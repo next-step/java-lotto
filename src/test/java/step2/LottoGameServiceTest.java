@@ -9,12 +9,12 @@ import step2.service.LottoGame;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoGameServiceTest {
+class LottoGameTest {
 
     @ParameterizedTest
     @CsvSource(value = {"1,1", "2,2", "4,4", "6,6"})
     @DisplayName("티켓을 넘기면 갯수만큼 생성된 티켓 묶음이 반환된다")
-    public void shuffleLotto(int input, int expected) {
+    public void generateLotto(int input, int expected) {
         assertThat(new LottoGame().generateLotto(new Ticket(input)).lottoTicketsCount())
                 .isEqualTo(expected);
     }
