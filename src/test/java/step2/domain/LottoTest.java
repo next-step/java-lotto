@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,8 +22,9 @@ class LottoTest {
         LottoWinningRules lottoWinningRules = new LottoWinningRules();
 
         LottoNumbers lottoNumbers1 = createLottoNumbersFrom(30, 20, 25, 1, 2, 3); //3개일치
-        LottoNumbers lottoNumbers2 = createLottoNumbersFrom(1, 2, 3, 4, 5, 43); //5개 일치
-        List<LottoNumbers> lottoNumbersList = createLottoNumbersListFrom(lottoNumbers1, lottoNumbers2);
+        LottoNumbers lottoNumbers2 = createLottoNumbersFrom(30, 20, 25, 1, 2, 3); //3개일치
+        LottoNumbers lottoNumbers3 = createLottoNumbersFrom(1, 2, 3, 4, 5, 43); //5개 일치
+        List<LottoNumbers> lottoNumbersList = createLottoNumbersListFrom(lottoNumbers1, lottoNumbers2, lottoNumbers3);
 
         Lotto lotto = new Lotto(lottoWinningRules, lottoNumbersList, 2000);
 
@@ -31,7 +33,7 @@ class LottoTest {
 
 
         //then
-        assertThat(countNumberOfMatching.get(3)).isEqualTo(1);
+        assertThat(countNumberOfMatching.get(3)).isEqualTo(2);
         assertThat(countNumberOfMatching.get(5)).isEqualTo(1);
         assertThat(countNumberOfMatching.keySet().size()).isEqualTo(2);
     }
@@ -39,7 +41,7 @@ class LottoTest {
     @DisplayName("로또 당첨금을 계산한다.")
     @Test
     void getPrizeMoney() throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-       //given
+        //given
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.from(numbers);
 
@@ -81,7 +83,7 @@ class LottoTest {
     }
 
     private LottoNumbers createLottoNumbersFrom(Integer... numbers) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        List<Integer> numberList = Arrays.asList(numbers);
+        List<LottoNumber> numberList = Arrays.stream(numbers).map(LottoNumber::from).collect(Collectors.toList());
         Constructor<LottoNumbers> declaredConstructor = LottoNumbers.class.getDeclaredConstructor(List.class);
         declaredConstructor.setAccessible(true);
         return declaredConstructor.newInstance(numberList);

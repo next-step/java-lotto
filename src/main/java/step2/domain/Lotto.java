@@ -20,8 +20,8 @@ public class Lotto {
         Map<Integer, Integer> map = new HashMap<>();
         for (LottoNumbers lottoNumbers : lottoNumbersList) {
             int numberOfMatching = lottoNumbers.numberOfMatching(lottoWinningNumbers);
-            int count = map.getOrDefault(numberOfMatching, 1);
-            map.put(numberOfMatching, count);
+            int count = map.getOrDefault(numberOfMatching, 0);
+            map.put(numberOfMatching, count + 1);
         }
         return map;
     }

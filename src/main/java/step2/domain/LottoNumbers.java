@@ -18,29 +18,32 @@ public class LottoNumbers {
             .boxed()
             .collect(toList());
 
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    private LottoNumbers(List<Integer> lottoNumbers) {
+    private LottoNumbers(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
     public static LottoNumbers generate() {
         List<Integer> copyOfNumbers = new ArrayList<>(NUMBERS);
         Collections.shuffle(copyOfNumbers);
-        List<Integer> lottoNumbers = IntStream.rangeClosed(LOTTO_NUMBER_MIN_INDEX, LOTTO_NUMBER_MAX_INDEX)
-                .mapToObj(copyOfNumbers::get)
+        List<LottoNumber> lottoNumbers = IntStream.rangeClosed(LOTTO_NUMBER_MIN_INDEX, LOTTO_NUMBER_MAX_INDEX)
+//                .mapToObj(copyOfNumbers::get)
+                .mapToObj(m->LottoNumber.from(copyOfNumbers.get(m)))
                 .sorted()
                 .collect(toList());
 
-        List<Integer> unmodifiableLottoNumbers = Collections.unmodifiableList(lottoNumbers);
+        List<LottoNumber> unmodifiableLottoNumbers = Collections.unmodifiableList(lottoNumbers);
 
         return new LottoNumbers(unmodifiableLottoNumbers);
     }
 
     public int numberOfMatching(LottoWinningNumbers lottoWinningNumbers) {
         int numberOfMatching = 0;
-        for (int lottoNumber : lottoNumbers) {
+
+        for (LottoNumber lottoNumber : lottoNumbers) {
             numberOfMatching += lottoWinningNumbers.numberOfMatching(lottoNumber);
+
         }
         return numberOfMatching;
     }
@@ -49,7 +52,7 @@ public class LottoNumbers {
         return lottoNumbers.size();
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 

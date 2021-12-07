@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,7 +30,10 @@ public class LottoNumbersTest {
     }
 
     private static List<Integer> generateLottoNumbers() {
-        return LottoNumbers.generate().getLottoNumbers();
+        return LottoNumbers.generate().getLottoNumbers()
+                .stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
     }
 
     @DisplayName("LottoNumbers에 로또 당첨 번호를 전달하면 일치하는 번호의 개수를 알 수 있다.")
@@ -39,7 +43,7 @@ public class LottoNumbersTest {
         LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.from(winningNumbers);
         LottoNumbers lottoNumbers = LottoNumbers.generate();
         int numberOfMatching = lottoNumbers.numberOfMatching(lottoWinningNumbers);
-        assertThat(numberOfMatching).isGreaterThan(0);
+        assertThat(numberOfMatching).isGreaterThanOrEqualTo(0);
         assertThat(numberOfMatching).isLessThan(7);
 
     }

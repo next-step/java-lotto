@@ -1,5 +1,6 @@
 package step2.view;
 
+import step2.domain.LottoNumber;
 import step2.dto.WinningInformationDto;
 
 import java.util.Arrays;
@@ -20,7 +21,7 @@ public class OutputView {
         System.out.println(number + NUMBER_OF_PURCHASE);
     }
 
-    public static void printLottoNumbers(List<Integer> numbers) {
+    public static void printLottoNumbers(List<LottoNumber> numbers) {
         System.out.println(numbers);
     }
 
