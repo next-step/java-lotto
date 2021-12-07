@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.domain.LottoTicket;
 import step2.domain.LottoTickets;
-import step2.dto.WinningNumber;
+import step2.domain.LottoNumber;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -14,17 +14,17 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTicketsTest {
-    private Set<WinningNumber> numbers = new HashSet<>();
+    private Set<LottoNumber> numbers = new HashSet<>();
 
     @BeforeEach
     public void setNumber() {
         numbers = new HashSet<>();
-        numbers.add(new WinningNumber(1));
-        numbers.add(new WinningNumber(2));
-        numbers.add(new WinningNumber(3));
-        numbers.add(new WinningNumber(4));
-        numbers.add(new WinningNumber(5));
-        numbers.add(new WinningNumber(6));
+        numbers.add(new LottoNumber(1));
+        numbers.add(new LottoNumber(2));
+        numbers.add(new LottoNumber(3));
+        numbers.add(new LottoNumber(4));
+        numbers.add(new LottoNumber(5));
+        numbers.add(new LottoNumber(6));
     }
 
     @Test
