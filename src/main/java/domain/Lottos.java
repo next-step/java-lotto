@@ -23,10 +23,6 @@ public class Lottos {
         lottos.add(Lotto.of(lottoNumbers));
     }
 
-//    public int investment() {
-//        return lottos.size() * PRICE;
-//    }
-
     public Prizes prizes(Lotto winningLotto, LottoNumber bonusNumber) {
         Prizes prizes = new Prizes();
         lottos.forEach(lotto -> {
