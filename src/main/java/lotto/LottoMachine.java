@@ -15,14 +15,17 @@ public class LottoMachine {
     }
 
     public static LottoNumbers generateLottoNumber() {
-        List<Integer> allLottoNumbers = rangeClosed(MIN, MAX).boxed().collect(toList());
-        Collections.shuffle(allLottoNumbers);
+        List<Integer> pickedLottoNumbers = pickLottoNumbers();
+        return LottoNumbers.from(pickedLottoNumbers);
+    }
 
-        List<Integer> pickedLottoNumbers = allLottoNumbers.stream()
+    private static List<Integer> pickLottoNumbers() {
+        List<Integer> lottoNumbersRange = rangeClosed(MIN, MAX).boxed().collect(toList());
+        Collections.shuffle(lottoNumbersRange);
+
+        return lottoNumbersRange.stream()
                 .limit(6)
                 .sorted()
                 .collect(Collectors.toList());
-
-        return LottoNumbers.from(pickedLottoNumbers);
     }
 }
