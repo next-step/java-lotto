@@ -7,3 +7,16 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 요구사항
+* 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야한다.
+* 로또 한장의 가격은 1,000원이다. 
+
+
+## 기능구현
+* [ ] 로또 번호 하나에 해당하는 객체(LottoNumber) 만들기.
+  * [ ] 이 객체는 1~45 숫자 중 하나이다. 
+  * [ ] 랜덤한 값을 받아서 생성한다. 
+* [ ] LottoNumber 객체가 6개가 모이면 LottoNumbers가 된다. 
+  * [ ] LottoNumber의 size 는 6이여야 한다.
+  * [ ] LottoNumber 안에서 중복은 허용하지 않는다. 
