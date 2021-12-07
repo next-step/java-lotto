@@ -19,6 +19,10 @@ public class Lotto {
         return new Lotto(input);
     }
 
+    public List<Integer> lottoNumbers() {
+        return lottoNumbers.values();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

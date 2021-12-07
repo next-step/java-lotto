@@ -27,6 +27,12 @@ public class LottoNumbers {
         return new LottoNumbers(lottoNumbers);
     }
 
+    public List<Integer> values() {
+        return values.stream()
+                .map(LottoNumber::getValue)
+                .collect(Collectors.toList());
+    }
+
     private static boolean isValidDigits(List<Integer> input) {
         return input == null || input.size() != 6;
     }

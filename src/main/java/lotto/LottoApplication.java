@@ -2,13 +2,28 @@ package lotto;
 
 import lotto.view.InputView;
 
+import java.util.Scanner;
+
 public class LottoApplication {
+    private static final Scanner scanner = new Scanner(System.in);
+    public static final int LOTTO_PRICE = 1000;
+
     public static void main(String[] args) {
-        int purchaseAmount = InputView.purchaseAmount();
-        int quantity = InputView.quantity(purchaseAmount);
+        InputView.printPurchaseRequest();
 
+        int purchaseAmount = scanner.nextInt();
+        int quantity = quantity(purchaseAmount);
 
-        LottoNumbers lottoNumbers = LottoMachine.generateLottoNumber();
-        Lotto lotto = Lotto.from(lottoNumbers);
+        InputView.printQuantity(quantity);
+
+        for (int i = 0; i < quantity; i++) {
+            LottoNumbers lottoNumbers = LottoMachine.generateLottoNumber();
+            Lotto lotto = Lotto.from(lottoNumbers);
+            InputView.printLottoNumbers(lotto);
+        }
+    }
+
+    private static int quantity(int purchaseAmount) {
+        return purchaseAmount / LOTTO_PRICE;
     }
 }
