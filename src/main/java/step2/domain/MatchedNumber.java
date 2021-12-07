@@ -1,6 +1,6 @@
 package step2.domain;
 
-import step2.exception.NotValidMatchedNumberCount;
+import step2.exception.NotValidNumberCountException;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -27,7 +27,7 @@ public class MatchedNumber {
 
     private void validCountOrElseThrow() {
         if (matchedNumber.size() < VALID_COUNT) {
-            throw new NotValidMatchedNumberCount();
+            throw new NotValidNumberCountException();
         }
     }
 }

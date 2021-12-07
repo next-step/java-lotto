@@ -1,6 +1,6 @@
 package step2.domain;
 
-import step2.exception.NotValidLottoNumber;
+import step2.exception.NotValidLottoNumberException;
 
 import java.util.Objects;
 
@@ -22,7 +22,7 @@ public class LottoNumber {
 
     private void validNumberOrElseThrow(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
-            throw new NotValidLottoNumber();
+            throw new NotValidLottoNumberException();
         }
     }
 

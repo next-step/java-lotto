@@ -1,7 +1,9 @@
 package step2.domain;
 
-import step2.exception.MoneyException;
-import step2.exception.NotEnoughMoney;
+import org.omg.CORBA.DynAnyPackage.Invalid;
+import step2.dto.WinningRate;
+import step2.exception.InvalidMoneyException;
+import step2.exception.NotEnoughMoneyException;
 
 import java.util.Objects;
 
@@ -36,13 +38,13 @@ public class Money {
 
     private void enoughMoneyOrElseThrow() {
         if (this.amount < BASE_PRICE) {
-            throw new NotEnoughMoney();
+            throw new NotEnoughMoneyException();
         }
     }
 
     private void validMoneyOrElseThrow(long price) {
         if (price < ZERO) {
-            throw new MoneyException(MoneyException.ErrorCode.MONEY_NOT_ZERO);
+            throw new InvalidMoneyException();
         }
     }
 
