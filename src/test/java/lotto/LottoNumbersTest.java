@@ -56,6 +56,16 @@ class LottoNumbersTest {
                 .hasMessage(LOTTO_NUMBER_DUPLICATED_EXCEPTION_MESSAGE);
     }
 
+    @Test
+    @DisplayName("당첨 번호와 일치하는 로또 번호 개수를 구한다")
+    void shouldReturnCount() {
+        LottoNumbers lottoNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers winningNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 7, 8, 9));
+
+        long matchedLottoNumbersCount = lottoNumbers.match(winningNumbers);
+        assertThat(matchedLottoNumbersCount).isEqualTo(3);
+    }
+
     private static Stream<List<Integer>> createLottoNumbers() {
         return Stream.of(
                 singletonList(1),

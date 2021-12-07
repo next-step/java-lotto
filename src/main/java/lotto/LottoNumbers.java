@@ -33,6 +33,12 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
     }
 
+    public long match(LottoNumbers winningNumbers) {
+        return values.stream()
+                .filter(winningNumbers.values::contains)
+                .count();
+    }
+
     private static boolean isValidDigits(List<Integer> input) {
         return input == null || input.size() != 6;
     }
