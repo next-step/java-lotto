@@ -14,7 +14,7 @@ class LottoWinningRulesTest {
     @ValueSource(ints = {3, 4, 5, 6})
     void winLotto(int numberOfMatches) {
         LottoWinningRules lottoWInningRules = new LottoWinningRules();
-        assertThat(lottoWInningRules.winLotto(numberOfMatches)).isEqualTo(true);
+        assertThat(lottoWInningRules.isWinLotto(numberOfMatches)).isEqualTo(true);
     }
 
     @DisplayName("로또 당첨 숫자와 일치하는 숫자가 3개 미만이면 낙첨이다.")
@@ -22,7 +22,7 @@ class LottoWinningRulesTest {
     @ValueSource(ints = {0, 1, 2})
     void loseLotto(int numberOfMatches) {
         LottoWinningRules lottoWInningRules = new LottoWinningRules();
-        assertThat(lottoWInningRules.winLotto(numberOfMatches)).isEqualTo(false);
+        assertThat(lottoWInningRules.isWinLotto(numberOfMatches)).isEqualTo(false);
     }
 
     @DisplayName("일치하는 숫자 개수에 따라 당첨금액을 알려준다.")

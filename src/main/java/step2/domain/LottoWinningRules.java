@@ -16,12 +16,12 @@ public class LottoWinningRules {
         lottoPrize.put(6, 2000000000);
     }
 
-    public boolean winLotto(int numberOfMatches) {
+    public boolean isWinLotto(int numberOfMatches) {
         return lottoPrize.containsKey(numberOfMatches);
     }
 
     public int getPrizeOf(int numberOfMatching) {
-        return winLotto(numberOfMatching) ? lottoPrize.get(numberOfMatching) : LOSE_PRIZE;
+        return isWinLotto(numberOfMatching) ? lottoPrize.get(numberOfMatching) : LOSE_PRIZE;
     }
 
     public Set<Integer> numberOfMatchingSet() {
