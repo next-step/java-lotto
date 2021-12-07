@@ -14,9 +14,9 @@ public class LottoNumbers {
     private static final int LOTTO_NUMBER_TOTAL_COUNT = 6;
     private static final int LOTTO_NUMBER_MIN_INDEX = 0;
     private static final int LOTTO_NUMBER_MAX_INDEX = LOTTO_NUMBER_TOTAL_COUNT - 1;
-    private static final List<Integer> NUMBERS = IntStream
+    private static final List<LottoNumber> NUMBERS = IntStream
             .rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
-            .boxed()
+            .mapToObj(LottoNumber::from)
             .collect(toList());
 
     private final List<LottoNumber> lottoNumbers;
@@ -26,11 +26,10 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers generate() {
-        List<Integer> copyOfNumbers = new ArrayList<>(NUMBERS);
+        List<LottoNumber> copyOfNumbers = new ArrayList<>(NUMBERS);
         Collections.shuffle(copyOfNumbers);
         List<LottoNumber> lottoNumbers = IntStream.rangeClosed(LOTTO_NUMBER_MIN_INDEX, LOTTO_NUMBER_MAX_INDEX)
-//                .mapToObj(copyOfNumbers::get)
-                .mapToObj(m -> LottoNumber.from(copyOfNumbers.get(m)))
+                .mapToObj(copyOfNumbers::get)
                 .sorted()
                 .collect(collectingAndThen(toList(), Collections::unmodifiableList));
 
