@@ -9,8 +9,8 @@ public class Lotto {
         this.lottoNumber = lottoNumber;
     }
 
-    public int compare(List<Integer> winningNumbers) {
-        return lottoNumber.compare(winningNumbers);
+    public int getWinningCount(List<Integer> winningNumbers) {
+        return lottoNumber.compareTo(winningNumbers);
     }
 
     @Override

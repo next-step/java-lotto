@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Person {
     private int amount;
@@ -25,6 +27,16 @@ public class Person {
 
     public void buy() {
         lottos.add(new Lotto(LottoNumber.of()));
+    }
+
+    public Map<Integer, Integer> findWinningResult(List<Integer> winningLottoNumbers) {
+        Map<Integer, Integer> result = new HashMap<>();
+        for (Lotto lotto : lottos) {
+            int key = lotto.getWinningCount(winningLottoNumbers);
+            result.put(key, result.getOrDefault(key, 0) + 1);
+        }
+
+        return result;
     }
 
 }

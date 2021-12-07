@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class LottoNumber {
     private static final int START_NUMBER = 1;
@@ -23,17 +24,40 @@ public class LottoNumber {
         return new LottoNumber(lottoNumber);
     }
 
+    public static LottoNumber of(String numbers) {
+        List<Integer> lottoNumbers = new ArrayList<>();
+        String[] strs = numbers.replaceAll(" ", "").split(",");
+        for (String str : strs) {
+            lottoNumbers.add(Integer.parseInt(str));
+        }
+        return of(lottoNumbers);
+    }
+
     public static LottoNumber of(List<Integer> numbers) {
         return new LottoNumber(numbers);
     }
 
-    public int compare(List<Integer> winningNumbers) {
+    public int compareTo(List<Integer> winningNumbers) {
         int count = 0;
+
         for (int i = 0; i < winningNumbers.size(); i++) {
             if (lottoNumber.contains(winningNumbers.get(i)))
                 count++;
         }
         return count;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return Objects.equals(lottoNumber, that.lottoNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
     }
 
     @Override

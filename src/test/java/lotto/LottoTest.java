@@ -29,7 +29,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(LottoNumber.of(Arrays.asList(3, 4, 10, 45, 12, 11)));
         List<Integer> winningNumbers = Arrays.asList(2, 10, 42, 45, 18, 11);
 
-        assertThat(lotto.compare(winningNumbers)).isEqualTo(3);
+        assertThat(lotto.getWinningCount(winningNumbers)).isEqualTo(3);
     }
 
 }
