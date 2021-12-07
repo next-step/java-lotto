@@ -15,6 +15,10 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
+    public static Lotto from(LottoNumbers input) {
+        return new Lotto(input);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
