@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 public enum Rank {
@@ -25,7 +26,6 @@ public enum Rank {
     }
 
     public static Rank valueOf(int matchCount) {
-        // TODO 일치하는 수를 로또 등수로 변경한다. enum 값 목록은 "Rank[] ranks = values();"와 같이 가져올 수 있다.
         return Arrays.asList(values()).stream()
                 .filter(matchRank -> isEqualMatchCount(matchCount, matchRank))
                 .findFirst()

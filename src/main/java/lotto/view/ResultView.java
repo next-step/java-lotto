@@ -5,6 +5,7 @@ import lotto.domain.Rank;
 import lotto.dto.LottoDto;
 import lotto.dto.StatisticsDto;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ResultView {
@@ -25,15 +26,17 @@ public class ResultView {
         }
     }
 
-    public static void responseWinningStatistics(StatisticsDto statisticsDtoo) {
+    public static void responseWinningStatistics(StatisticsDto statisticsDto) {
         System.out.println(RESPONSE_INIT_MESSAGE);
         System.out.println(RESPONSE_INIT_LINE);
 
         for (Rank rank : Rank.values()) {
-            System.out.format(RESPONSE_MATCH_MESSAGE, rank.getMatchCount(), rank.getWinningMoney(), 0);
+            System.out.format(RESPONSE_MATCH_MESSAGE, rank.getMatchCount(), rank.getWinningMoney(), statisticsDto.countRank(rank));
         }
-        System.out.format(RESPONSE_TOTAL_EARNING_RATE_MESSAGE, 0);
+        System.out.format(RESPONSE_TOTAL_EARNING_RATE_MESSAGE, statisticsDto.earningRate());
     }
+
+
 
 }
 

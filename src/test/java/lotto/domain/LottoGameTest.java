@@ -1,19 +1,17 @@
 package lotto.domain;
 
+import lotto.strategy.MakeAutoLottoNumber;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoGameTest {
-//    @Test
-//    public void create(){
-//        LottoGame lotto = new LottoGame(3000, lottos);
-//        assertThat(lotto.getBuyRound()).isEqualTo(3);
-//    }
-//
-//    @Test
-//    public void create_amount(){
-//        LottoGame lotto = new LottoGame(3000, lottos);
-//        assertThat(lotto.getPurchaseAmount()).isEqualTo(3000);
-//    }
+    @Test
+    public void 로또개수_동일체크(){
+        LottoGame lotto = new LottoGame(3, new MakeAutoLottoNumber());
+        assertThat(lotto.getLottos().getLottos().size()).isEqualTo(3);
+    }
+
 }
