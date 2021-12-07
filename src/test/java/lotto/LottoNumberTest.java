@@ -20,6 +20,6 @@ class LottoNumberTest {
     void shouldThrowWhenInputNotInRange(int input) {
         assertThatThrownBy(() -> new LottoNumber(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 숫자는 1 이상 45 이하여야 합니다.");
+                .hasMessage("로또 번호는 1 이상 45 이하여야 합니다.");
     }
 }

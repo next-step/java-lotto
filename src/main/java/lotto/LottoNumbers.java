@@ -1,22 +1,20 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumbers {
-    private final List<LottoNumber> values;
+    private final Set<LottoNumber> values;
 
-    private LottoNumbers(List<LottoNumber> input) {
+    private LottoNumbers(Set<LottoNumber> input) {
         this.values = input;
     }
 
-    public static LottoNumbers from(List<Integer> input) {
+    public static LottoNumbers from(Set<Integer> input) {
         if (input == null || input.size() != 6) {
-            throw new IllegalArgumentException("로또 숫자는 6자리여야 합니다.");
+            throw new IllegalArgumentException("로또 번호는 중복 없이 6자리여야 합니다.");
         }
 
-        List<LottoNumber> newLottoNumbers = new ArrayList<>();
+        Set<LottoNumber> newLottoNumbers = new HashSet<>();
 
         for (Integer number : input) {
             LottoNumber lottoNumber = new LottoNumber(number);

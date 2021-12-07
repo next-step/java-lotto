@@ -7,7 +7,7 @@ public class LottoNumber {
 
     public LottoNumber(int input) {
         if (input < 1 || input > 45) {
-            throw new IllegalArgumentException("로또 숫자는 1 이상 45 이하여야 합니다.");
+            throw new IllegalArgumentException("로또 번호는 1 이상 45 이하여야 합니다.");
         }
 
         this.value = input;
