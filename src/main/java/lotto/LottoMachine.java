@@ -11,6 +11,9 @@ public class LottoMachine {
     private static final int MIN = 1;
     private static final int MAX = 45;
 
+    private LottoMachine() {
+    }
+
     public static LottoNumbers generateLottoNumber() {
         List<Integer> allLottoNumbers = rangeClosed(MIN, MAX).boxed().collect(toList());
         Collections.shuffle(allLottoNumbers);
