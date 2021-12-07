@@ -10,10 +10,10 @@ public class LottoWinningRules {
     private final Map<Integer, Integer> lottoPrize = new HashMap<>();
 
     public LottoWinningRules() {
-        lottoPrize.put(3, 5000);
-        lottoPrize.put(4, 50000);
-        lottoPrize.put(5, 1500000);
-        lottoPrize.put(6, 2000000000);
+        lottoPrize.put(3, 5_000);
+        lottoPrize.put(4, 50_000);
+        lottoPrize.put(5, 1_500_000);
+        lottoPrize.put(6, 2_000_000_000);
     }
 
     public boolean isWinLotto(int numberOfMatches) {
@@ -21,7 +21,10 @@ public class LottoWinningRules {
     }
 
     public int getPrizeOf(int numberOfMatching) {
-        return isWinLotto(numberOfMatching) ? lottoPrize.get(numberOfMatching) : LOSE_PRIZE;
+        if (isWinLotto(numberOfMatching)) {
+            return lottoPrize.get(numberOfMatching);
+        }
+        return LOSE_PRIZE;
     }
 
     public Set<Integer> numberOfMatchingSet() {
