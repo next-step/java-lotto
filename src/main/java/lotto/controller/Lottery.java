@@ -1,7 +1,7 @@
 package lotto.controller;
 
+import lotto.domain.Bonus;
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.view.InputInfo;
 import lotto.view.InputView;
@@ -25,9 +25,10 @@ public class Lottery {
     private void winner(InputInfo inputInfo, Lottos lottos) {
         String answerText = InputView.questionAnswer();
         List<Integer> answerList = inputInfo.getAnswer(answerText);
-        LottoNumber bonusBall = new LottoNumber(InputView.questionBonus());
-        Lotto answer = Lotto.newInstance(answerList, bonusBall);
-        ResultView resultView = new ResultView(lottos, answer);
+        String bonusBall = InputView.questionBonus();
+        Bonus bonus = new Bonus(bonusBall);
+        Lotto answer = Lotto.newInstance(answerList);
+        ResultView resultView = new ResultView(lottos, answer, bonus);
         resultView.printResult();
     }
 

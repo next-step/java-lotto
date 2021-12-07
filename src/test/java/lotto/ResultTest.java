@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
-import lotto.domain.Result;
+import lotto.domain.*;
 import lotto.view.InputInfo;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -27,7 +24,7 @@ public class ResultTest {
         sampleLottos.add(Lotto.newInstance(inputInfo.getAnswer("40,41,42,43,44,45")));
 
         Lottos lottos = new Lottos(sampleLottos);
-        Result result = new Result(lottos, Lotto.newInstance(inputInfo.getAnswer("1,2,3,7,8,9")));
+        Result result = new Result(lottos, Lotto.newInstance(inputInfo.getAnswer("1,2,3,7,8,9")), new Bonus(10));
         Map<Rank, Integer> sampleResult = new HashMap<>();
 
         sampleResult.put(Rank.MISS, 0);

@@ -8,10 +8,10 @@ public class Result {
     private final Map<Rank, Integer> resultInfo;
     private double rateOfReturn;
 
-    public Result(Lottos lottos, Lotto answer) {
+    public Result(Lottos lottos, Lotto answer, Bonus bonus) {
         resultInfo = new HashMap<>();
         init();
-        calculateResult(lottos, answer);
+        calculateResult(lottos, answer, bonus);
     }
 
     private void init() {
@@ -20,11 +20,11 @@ public class Result {
         }
     }
 
-    public void calculateResult(Lottos lottos, Lotto answer) {
+    public void calculateResult(Lottos lottos, Lotto answer, Bonus bonus) {
         double revenue = 0;
         for (Lotto lotto : lottos.getLottos()) {
             int count = answer.matchCount(lotto);
-            boolean isBonus = lotto.getNumbers().contains(answer.getBonus());
+            boolean isBonus = lotto.getNumbers().contains(bonus.getNumber());
             revenue = getRevenue(revenue, count, isBonus);
         }
         this.rateOfReturn = revenue / (lottos.getLottos().size() * Lottos.LOTTO_PRICE);

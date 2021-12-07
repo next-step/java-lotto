@@ -7,7 +7,6 @@ import java.util.List;
 public class Lotto {
 
     private final List<Integer> numbers;
-    private int bonus;
 
     private Lotto() {
         numbers = LottoNumbers.autoNumbers();
@@ -18,24 +17,12 @@ public class Lotto {
         numbers = new ArrayList<>(answer);
     }
 
-    private Lotto(List<Integer> answer, int bonus) {
-        LottoNumbers.valid(answer);
-        numbers = new ArrayList<>(answer);
-        this.bonus = bonus;
-    }
-
     public static Lotto newInstance() {
         return new Lotto();
     }
 
     public static Lotto newInstance(List<Integer> answer) {
-        LottoNumbers.valid(answer);
         return new Lotto(new ArrayList<>(answer));
-    }
-
-    public static Lotto newInstance(List<Integer> answer, LottoNumber bonus) {
-        LottoNumbers.valid(answer);
-        return new Lotto(new ArrayList<>(answer), bonus.getLottoNumber());
     }
 
     public List<Integer> getNumbers() {
@@ -49,7 +36,4 @@ public class Lotto {
                 .count();
     }
 
-    public int getBonus() {
-        return bonus;
-    }
 }
