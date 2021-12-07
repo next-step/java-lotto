@@ -36,4 +36,8 @@ public class LottoNumbers {
                 .filter(numbers::contains)
                 .count();
     }
+
+    public Rank getRank(LottoNumbers winningNumbers) {
+        return Rank.of(countSameLottoNumber(winningNumbers));
+    }
 }
