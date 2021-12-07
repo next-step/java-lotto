@@ -24,8 +24,7 @@ public enum Rank {
         }
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.getCount() == count)
-                .filter(rank -> Rank.SECOND != rank)
-                .findAny()
+                .findFirst()
                 .orElse(Rank.MISS);
     }
 
