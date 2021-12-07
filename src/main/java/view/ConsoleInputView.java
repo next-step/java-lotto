@@ -16,6 +16,16 @@ public class ConsoleInputView implements InputView {
     }
 
     @Override
+    public void showManualPurchaseAmountInputMessage() {
+        System.out.println("Enter The Amount of Manual Number");
+    }
+
+    @Override
+    public void showManualLottoInputMessage() {
+        System.out.println("Enter Manual Lotto Numbers");
+    }
+
+    @Override
     public void showWinningNumberInputMessage() {
         System.out.println("Enter Winning Number of Lotto");
     }

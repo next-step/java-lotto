@@ -22,6 +22,9 @@ public class LottoGame {
         inputView.showPurchaseAmountInputMessage();
         int purchaseAmount = inputView.purchaseAmount();
 
+        inputView.showManualPurchaseAmountInputMessage();
+        inputView.showManualLottoInputMessage();
+
         OutputView outputView = new ConsoleOutputView();
         int totalNumberOfLottos = Lotto.amount(purchaseAmount);
         Lottos lottos = Lottos.of(totalNumberOfLottos);
