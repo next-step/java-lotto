@@ -3,10 +3,8 @@ package step2.domain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step2.dto.WinningCondition;
 import step2.dto.WinningInfo;
 import step2.dto.WinningRate;
 

@@ -1,6 +1,5 @@
 package step2.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -11,8 +10,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class MatchedNumberTest {
 
     @ParameterizedTest
-    @ValueSource(strings = {"1, 2, 3, 4, 5, 1", "15, 14, 2, 1", "11, 12, 14, 15, 16", "40, 31, 31, 24, 1, 4"})
-    @DisplayName("중복되지 않은 6개의 숫자가 아니면 예외를 던진다")
+    @ValueSource(strings = {"1, 1, 3, 4, 5, 6, 7", "15, 14, 2, 1", "11, 12, 14, 15, 16", "40, 31, 31, 24, 1, 4"})
+    @DisplayName("지난 당첨 번호가 중복이 존재하거나 6개가 아니면 예외를 던진다")
     public void notMatchedNumberCount(String inputText) {
         assertThatThrownBy(() -> {
             new MatchedNumber(inputText);
