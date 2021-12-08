@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoAutoFactory;
 import lotto.domain.Lottos;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,8 @@ public class LottosTest {
 
     @Test
     void 로또_불변성_테스트() {
-        Lotto lotto = Lotto.newInstance();
+        LottoAutoFactory factory = new LottoAutoFactory();
+        Lotto lotto = factory.newInstance();
         List<Integer> numbers = lotto.getNumbers();
         Assertions.assertThatThrownBy(() -> numbers.add(99)).isInstanceOf(UnsupportedOperationException.class);
     }

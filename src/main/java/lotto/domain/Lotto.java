@@ -8,21 +8,13 @@ public class Lotto {
 
     private final List<Integer> numbers;
 
-    private Lotto() {
+    public Lotto() {
         numbers = LottoNumbers.autoNumbers();
     }
 
-    private Lotto(List<Integer> answer) {
+    public Lotto(List<Integer> answer) {
         LottoNumbers.valid(answer);
         numbers = new ArrayList<>(answer);
-    }
-
-    public static Lotto newInstance() {
-        return new Lotto();
-    }
-
-    public static Lotto newInstance(List<Integer> answer) {
-        return new Lotto(new ArrayList<>(answer));
     }
 
     public List<Integer> getNumbers() {

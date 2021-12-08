@@ -20,7 +20,8 @@ public class Lottos {
         int lottosCount = getCount(price);
         lottos = new ArrayList<>();
         for (int i = 0; i < lottosCount; i++) {
-            lottos.add(Lotto.newInstance());
+            LottoAutoFactory factory = new LottoAutoFactory();
+            lottos.add(factory.newInstance());
         }
     }
 

@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.Bonus;
 import lotto.domain.Lotto;
+import lotto.domain.LottoAnswerFactory;
 import lotto.domain.Lottos;
 import lotto.view.InputInfo;
 import lotto.view.InputView;
@@ -27,7 +28,8 @@ public class Lottery {
         List<Integer> answerList = inputInfo.getAnswer(answerText);
         String bonusBall = InputView.questionBonus();
         Bonus bonus = new Bonus(bonusBall);
-        Lotto answer = Lotto.newInstance(answerList);
+        LottoAnswerFactory factory = new LottoAnswerFactory();
+        Lotto answer = factory.newInstance(answerList);
         ResultView resultView = new ResultView(lottos, answer, bonus);
         resultView.printResult();
     }
