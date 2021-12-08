@@ -16,10 +16,9 @@ public class LottoNumberFactory {
     private static final int BOUND = 46;
     private static final int COUNT = 6;
 
-    private final List<LottoNumber> numbers;
+    private static final List<LottoNumber> numbers = createLottoNumbers();
 
     public LottoNumberFactory() {
-        this.numbers = createLottoNumbers();
     }
 
     public List<LottoNumber> getNonDuplicated() {
@@ -31,7 +30,7 @@ public class LottoNumberFactory {
         return Collections.unmodifiableList(numbers);
     }
 
-    private List<LottoNumber> createLottoNumbers() {
+    private static List<LottoNumber> createLottoNumbers() {
         List<LottoNumber> numbers = IntStream.range(BASE, BOUND)
             .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());

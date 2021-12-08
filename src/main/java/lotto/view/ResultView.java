@@ -5,6 +5,7 @@ import lotto.domain.Rank;
 import lotto.domain.Statistics;
 import lotto.dto.StatisticResult;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -16,12 +17,19 @@ public class ResultView {
 
     private static final String WON_STATISTICS = "당첨 통계";
     private static final String LINE = "--------";
+    private static final String PRINT_MANUAL_AUTO_COUNT = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
 
-    public void printPurchaseLottos(List<Lotto> lotto) {
+    public void printPurchaseLottos(List<Lotto> manual, List<Lotto> auto) {
+        List<Lotto> lotto = new ArrayList<>();
+
+        lotto.addAll(manual);
+        lotto.addAll(auto);
+
         if (lotto == null || lotto.isEmpty()) {
             return;
         }
 
+        System.out.println(String.format(PRINT_MANUAL_AUTO_COUNT, manual.size(), auto.size()));
         for (Lotto l : lotto) {
             StringBuilder sb = new StringBuilder();
             sb.append("[");
@@ -29,6 +37,7 @@ public class ResultView {
             sb.append("]");
             System.out.println(sb);
         }
+        System.out.println();
     }
 
     public void printResultStatics(Statistics statistics) {
