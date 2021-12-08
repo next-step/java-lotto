@@ -3,9 +3,11 @@ package lotto.controller;
 import lotto.model.Lotto;
 import lotto.model.LottoRankingBoard;
 import lotto.model.Money;
+import lotto.model.Rank;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.EnumMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -19,7 +21,8 @@ public class LottoController {
         List<Lotto> lottoList = buyLotto(money);
         resultView.printBoughtResult(lottoList);
         List<Integer> winningNumbers = inputView.inputLastWeekWinningNumbers();
-        lottoRankingBoard.getLottoRankings(lottoList, new Lotto(winningNumbers));
+        EnumMap<Rank, Integer> lottoRankings = lottoRankingBoard.getLottoRankings(lottoList, new Lotto(winningNumbers));
+        resultView.printLottoResults(lottoRankings);
     }
 
     public static List<Lotto> buyLotto(Money money) {

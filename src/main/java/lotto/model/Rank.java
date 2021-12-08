@@ -17,6 +17,10 @@ public enum Rank {
         this.reward = reward;
     }
 
+    public long getCount() {
+        return count;
+    }
+
     public long getReward() {
         return reward;
     }
