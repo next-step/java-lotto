@@ -1,8 +1,5 @@
 package domain;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +17,7 @@ public class LottosTest {
     public static final Lotto NINTH_LOTTO = generateLotto(Arrays.asList(1,2,3,13,5,6));
     public static final Lotto TENTH_LOTTO = generateLotto(Arrays.asList(1,2,3,4,5,6));
 
+    public static final LottoPurchaseAmount LOTTO_PURCHASE_AMOUNT = new LottoPurchaseAmount(10_000);
     public static final Lottos LOTTOS = new Lottos(Arrays.asList(FIRST_LOTTO, SECOND_LOTTO, THIRD_LOTTO, FOURTH_LOTTO, FIFTH_LOTTO,
             SIXTH_LOTTO, SEVENTH_LOTTO, EIGHTH_LOTTO, NINTH_LOTTO, TENTH_LOTTO));
 

@@ -6,8 +6,6 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static domain.Lotto.PRICE;
-
 public class Lottos {
     private static final int STARTING_INDEX_LOTTOS = 0;
 
@@ -21,14 +19,14 @@ public class Lottos {
         return lottos.stream();
     }
 
-    public int investment() {
-        return lottos.size() * PRICE;
+    public void add(List<Integer> lottoNumbers) {
+        lottos.add(Lotto.of(lottoNumbers));
     }
 
-    public Prizes prizes(Lotto winningLotto, LottoNumber lottoNumber) {
+    public Prizes prizes(Lotto winningLotto, LottoNumber bonusNumber) {
         Prizes prizes = new Prizes();
         lottos.forEach(lotto -> {
-            Optional<PrizeCondition> prizeCondition = lotto.prizeCondition(winningLotto, lottoNumber);
+            Optional<PrizeCondition> prizeCondition = lotto.prizeCondition(winningLotto, bonusNumber);
             prizeCondition.ifPresent(prizes::savePrize);
         });
 

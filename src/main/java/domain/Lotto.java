@@ -9,7 +9,6 @@ import java.util.stream.IntStream;
 import static domain.LottoNumber.*;
 
 public class Lotto {
-    public static final int PRICE = 1_000;
     private static final int STARTING_INDEX_LOTTO = 0;
     private static final int LAST_INDEX_LOTTO = 6;
 
@@ -45,10 +44,6 @@ public class Lotto {
 
     private boolean bonusIncluded(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
-    }
-
-    public static int amount(int price) {
-        return price / PRICE;
     }
 
     public static Lotto of() {

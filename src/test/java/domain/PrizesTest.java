@@ -13,7 +13,7 @@ public class PrizesTest {
     void testProfitRate() {
         Prizes prizes = LOTTOS.prizes(WINNING_LOTTO, BONUS_NUMBER);
 
-        assertThat(prizes.profitRate(LOTTOS.investment())).isEqualTo(203_161.5);
+        assertThat(prizes.profitRate(LOTTO_PURCHASE_AMOUNT)).isEqualTo(203_161.5);
     }
 
     @DisplayName("Test match function of prizes")

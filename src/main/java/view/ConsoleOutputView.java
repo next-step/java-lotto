@@ -27,7 +27,7 @@ public class ConsoleOutputView implements OutputView
     public void showLottoResult(Prizes prizes) {
         for (PrizeCondition prizeCondition : PrizeCondition.values()) {
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(String.format("%d matched", prizeCondition.getMatchingNumber()));
+            stringBuilder.append(String.format("%d matched", prizeCondition.getMatchCount()));
             appendBonusForSecondPrize(stringBuilder, prizeCondition);
             stringBuilder.append(String.format(" (￦%d) - %d",
                     prizeCondition.getReward(),

@@ -2,24 +2,27 @@ package domain;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.function.BiFunction;
 
 public enum PrizeCondition {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
-    FIFTH(3, 5_000);
+    FIRST(2_000_000_000, 6, (matchCount, matchBonusBall) -> matchCount == 6),
+    SECOND(30_000_000, 5, (matchCount, matchBonusBall) -> matchCount == 5 && matchBonusBall),
+    THIRD(1_500_000, 5, (matchCount, matchBonusBall) -> matchCount == 5 && !matchBonusBall),
+    FOURTH(50_000, 4, (matchCount, matchBonusBall) -> matchCount == 4),
+    FIFTH(5_000, 3, (matchCount, matchBonusBall) -> matchCount == 3);
 
-    private final int matchingNumber;
     private final int reward;
+    private final int matchCount;
+    private final BiFunction<Integer, Boolean, Boolean> condition;
 
-    PrizeCondition(int matchingNumber, int reward) {
-        this.matchingNumber = matchingNumber;
+    PrizeCondition(int reward, int matchCount, BiFunction<Integer, Boolean, Boolean> condition) {
         this.reward = reward;
+        this.matchCount = matchCount;
+        this.condition = condition;
     }
 
-    public int getMatchingNumber() {
-        return matchingNumber;
+    public int getMatchCount() {
+        return matchCount;
     }
 
     public int getReward() {
@@ -28,16 +31,7 @@ public enum PrizeCondition {
 
     public static Optional<PrizeCondition> of(int matchingNumber, boolean bonusIncluded) {
         return Arrays.stream(values())
-                .filter(it -> it.matchingNumber == matchingNumber)
-                .map(it -> bonusCheck(it, matchingNumber, bonusIncluded))
+                .filter(it -> it.condition.apply(matchingNumber, bonusIncluded))
                 .findFirst();
-    }
-
-    private static PrizeCondition bonusCheck(PrizeCondition prizeCondition, int matchingNumber, boolean bonusIncluded) {
-        if (matchingNumber != SECOND.matchingNumber) {
-            return prizeCondition;
-        }
-
-        return bonusIncluded ? SECOND : THIRD;
     }
 }
