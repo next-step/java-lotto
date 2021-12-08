@@ -22,7 +22,8 @@ public class LottoController {
         resultView.printBoughtResult(lottoList);
         List<Integer> winningNumbers = inputView.inputLastWeekWinningNumbers();
         EnumMap<Rank, Integer> lottoRankings = lottoRankingBoard.getLottoRankings(lottoList, new Lotto(winningNumbers));
-        resultView.printLottoResults(lottoRankings);
+        long totalReward = lottoRankingBoard.getTotalReward(lottoRankings);
+        resultView.printLottoResults(lottoRankings, money.getProfit(totalReward));
     }
 
     public static List<Lotto> buyLotto(Money money) {

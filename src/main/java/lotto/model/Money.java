@@ -11,4 +11,8 @@ public class Money {
     public int getBuyableLottoCount() {
         return this.money / LOTTO_PRICE;
     }
+
+    public double getProfit(long totalReward) {
+        return (double) totalReward / money;
+    }
 }

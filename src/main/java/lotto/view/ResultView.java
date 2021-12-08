@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 public class ResultView {
     private static final String LOTTO_RANK_RESULT_FORMAT = "%s개 일치 (%s원)- %s개";
+    private static final String LOTTO_PROFIT_RESULT_FORMAT = "총 수익률은 %s입니다.";
     private static final List<Rank> PRINTABLE_RANKS = Arrays.asList(
             Rank.FIRST,
             Rank.SECOND,
@@ -37,11 +38,12 @@ public class ResultView {
                 .collect(Collectors.toList());
     }
 
-    public void printLottoResults(EnumMap<Rank, Integer> lottoRankings) {
+    public void printLottoResults(EnumMap<Rank, Integer> lottoRankings, double profit) {
         System.out.println("당첨 통계\n----------");
         PRINTABLE_RANKS.forEach((Rank rank) -> {
             Integer counts = lottoRankings.getOrDefault(rank, 0);
             System.out.println(String.format(LOTTO_RANK_RESULT_FORMAT, rank.getCount(), rank.getReward(), counts));
         });
+        System.out.println(String.format(LOTTO_PROFIT_RESULT_FORMAT, profit));
     }
 }
