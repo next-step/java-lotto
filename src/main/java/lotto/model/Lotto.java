@@ -24,4 +24,8 @@ public class Lotto {
     public LottoNumbers getLottoNumbers() {
         return numbers;
     }
+
+    public Rank getLottoRank(LottoNumbers winningNumbers) {
+        return this.numbers.getRank(winningNumbers);
+    }
 }
