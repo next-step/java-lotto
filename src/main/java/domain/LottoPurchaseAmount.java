@@ -13,6 +13,10 @@ public class LottoPurchaseAmount {
         this.purchaseAmount = validatePurchaseAmount(purchaseAmount);
     }
 
+    public static LottoPurchaseAmount of(int purchaseAmount) {
+        return new LottoPurchaseAmount(purchaseAmount);
+    }
+
     private int validatePurchaseAmount(int purchaseAmount) {
         if (purchaseAmount % PRICE != ZERO_REMAINDER) {
             throw new IllegalArgumentException(String.format("Purchase amount must be multiples of %d", PRICE));
@@ -45,9 +49,5 @@ public class LottoPurchaseAmount {
     @Override
     public int hashCode() {
         return Objects.hash(purchaseAmount);
-    }
-
-    public static LottoPurchaseAmount of(int purchaseAmount) {
-        return new LottoPurchaseAmount(purchaseAmount);
     }
 }
