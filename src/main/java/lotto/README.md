@@ -19,10 +19,6 @@
   - 로또 번호 범위 검증을 수행한다.
   
 
-- LottoNumber 클래스 : 단일 로또 숫자
-  - 로또 숫자 1 ~ 45 의 범위 검증을 수행한다.
-  
-
 - Lotto 클래스 : 로또 한장에 대한 정보를 가지고 있다.
   - Numbers 클래스를 가진다.
   - 로또 번호를 정렬해서 반환한다.
@@ -42,6 +38,14 @@
   - 추첨결과와 3개, 4개, 5개, 5개(2등), 6개 매칭 개수를 반환할 수 있다.
   - 수익금을 계산한다.
 
+
+- LottoFactory interface : 객체 생성하기 위한 인터페이스
+
+
+- LottoAutoFactory : 자동 로또를 생성하는 LottoFactory 의 서브클래스
+
+
+- LottoAnswerFactory : 정답 로또를 생성하는 LottoFactory 의 서브클래스
 
 
 ### exception 패키지
