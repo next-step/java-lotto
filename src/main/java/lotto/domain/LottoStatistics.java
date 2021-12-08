@@ -30,7 +30,8 @@ public class LottoStatistics {
     }
 
     public double profitRate() {
-        return lottoResult.totalWinningAmount(winningStandard) / person.amount();
+        double result = (double) lottoResult.totalWinningAmount(winningStandard) / person.amount();
+        return Math.floor(result * 100) / 100.0;
     }
 
 }

@@ -20,11 +20,17 @@ public class LottoResult {
     public int totalWinningAmount(Map<Integer, Integer> winningStandard) {
         int sum = 0;
         for (int matchedWinningCount : lottoResult.keySet()) {
+            sum = plusWinningNumber(winningStandard, sum, matchedWinningCount);
+        }
+        return sum;
+    }
+
+    private int plusWinningNumber(Map<Integer, Integer> winningStandard, int sum, int matchedWinningCount) {
+        for (int i = 0; i < lottoResult.get(matchedWinningCount); i++) {
             int winningAmount = winningStandard.getOrDefault(matchedWinningCount, 0);
             sum += winningAmount;
         }
         return sum;
     }
-
 
 }
