@@ -8,8 +8,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
-@DisplayName("Matcher 사용 테스트")
+@DisplayName("Matcher 학습 테스트")
 class MatcherTest {
 
     private static final String TEST_REGEX = "//(.)\n(.*)";
@@ -21,9 +22,9 @@ class MatcherTest {
     void findValidRegexExpressionTest(String input) {
         // when
         Matcher matcher = TEST_REGEX_PATTERN.matcher(input);
-        boolean isFounded = matcher.find();
+        boolean isFound = matcher.find();
         // then
-        assertThat(isFounded).isTrue();
+        assertThat(isFound).isTrue();
     }
 
     @DisplayName("정규 표현식과 무효한 값의 매칭 여부 확인 테스트")
@@ -32,9 +33,9 @@ class MatcherTest {
     void findInvalidRegexExpressionTest(String input) {
         // when
         Matcher matcher = TEST_REGEX_PATTERN.matcher(input);
-        boolean isFounded = matcher.find();
+        boolean isFound = matcher.find();
         // then
-        assertThat(isFounded).isFalse();
+        assertThat(isFound).isFalse();
     }
 
     @DisplayName("Group 이 추출되는지 확인 테스트")
@@ -47,12 +48,14 @@ class MatcherTest {
         String expectedSecondGroup = expectedGroups[1];
         // when
         Matcher matcher = TEST_REGEX_PATTERN.matcher(input);
-        boolean isFounded = matcher.find();
+        boolean isFound = matcher.find();
         String actualFirstGroup = matcher.group(1);
         String actualSecondGroup = matcher.group(2);
         // then
-        assertThat(isFounded).isTrue();
-        assertThat(actualFirstGroup).isEqualTo(expectedFirstGroup);
-        assertThat(actualSecondGroup).isEqualTo(expectedSecondGroup);
+        assertAll(
+                () -> assertThat(isFound).isTrue(),
+                () -> assertThat(actualFirstGroup).isEqualTo(expectedFirstGroup),
+                () -> assertThat(actualSecondGroup).isEqualTo(expectedSecondGroup)
+        );
     }
 }
