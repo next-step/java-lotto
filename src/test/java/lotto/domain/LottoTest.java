@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 
@@ -82,6 +83,17 @@ public class LottoTest {
         LottoStatistics statistics = new LottoStatistics(person, winningNumber);
 
         assertThat(statistics.profitRate()).isEqualTo(0.35);
+    }
+
+    @DisplayName("로또가격보다 적은 구입금액 입력시 예외")
+    @Test
+    void 잔액부족() {
+        Store store = new Store();
+        Person person = new Person(500);
+
+        assertThatThrownBy(() -> store.sellTo(person))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("잔액이 부족합니다.");
     }
 
 }
