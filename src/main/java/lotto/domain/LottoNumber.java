@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.util.ShuffleNumber;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +21,7 @@ public class LottoNumber {
     public static LottoNumber of() {
         List<Integer> numbers = ShuffleNumber.shuffle(START_NUMBER, END_NUMBER);
         List<Integer> lottoNumber = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < LOTTO_NUMBER_SIZE; i++) {
             lottoNumber.add(numbers.get(i));
         }
         Collections.sort(lottoNumber);

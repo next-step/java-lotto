@@ -16,18 +16,20 @@ public class Main {
         InputView inputView = new InputView(new Scanner(System.in));
 
         Store lottoStore = new Store();
-        int amount = Integer.parseInt(inputView.nextLine("구입금액을 입력해 주세요."));
-        Person person = new Person(amount);
+        Person person = new Person(getAmount(inputView));
 
         lottoStore.sellTo(person);
         ResultView.printMyLottos(person);
 
-        List<Integer> winningNumber = getWinningNumbers(inputView);
-        LottoStatistics statistics = new LottoStatistics(person, winningNumber);
+        LottoStatistics statistics = new LottoStatistics(person, getWinningNumbers(inputView));
         ResultView.printResultStatistics(statistics);
         ResultView.printProfitRate(statistics);
 
         inputView.close();
+    }
+
+    public static int getAmount(InputView inputView) {
+        return Integer.parseInt(inputView.nextLine("구입금액을 입력해 주세요."));
     }
 
     public static List<Integer> getWinningNumbers(InputView inputView) {
