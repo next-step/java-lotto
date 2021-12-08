@@ -1,7 +1,7 @@
 package step2.view;
 
 import step2.domain.Money;
-import step2.exception.SingletonConstructorException;
+import step2.exception.NotInstanceException;
 
 import java.util.*;
 
@@ -12,7 +12,7 @@ public class InputView {
     private static final String ASK_LAST_WEEK_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
 
     private InputView() {
-        throw new SingletonConstructorException();
+        throw new NotInstanceException();
     }
 
     public static Money inputAmount() {

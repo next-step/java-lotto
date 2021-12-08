@@ -1,33 +1,30 @@
 package step2.view;
 
 import step2.domain.*;
-import step2.dto.WinningCondition;
+import step2.domain.WinningCondition;
 import step2.dto.WinningInfo;
 import step2.dto.WinningRate;
-import step2.exception.SingletonConstructorException;
+import step2.exception.NotInstanceException;
 
-import java.util.List;
 import java.util.Map;
 
 public class ResultView {
-    private static final String ANS_BUY_COUNT = "%d개를 구매했습니다.\n";
+    private static final String ANS_BUY_COUNT = "%d개를 구매했습니다.\n\n";
     private static final String AVG_WINNING = "당첨 통계";
     private static final String DASHES = "---------";
     private static final String SAME_RESULT = "%d개 일치 (%d원)- %d개\n";
     private static final String TOTAL_RATE = "총 수익률은 %.2f 입니다.\n";
 
     private ResultView() {
-        throw new SingletonConstructorException();
+        throw new NotInstanceException();
     }
 
-    public static void renderLottoCount(Ticket ticket) {
-        System.out.printf(ANS_BUY_COUNT, ticket.ticketCount());
-    }
-
-    public static void renderLottoStatus(List<LottoTicket> lottoTickets) {
-        lottoTickets.forEach(lottoTicket -> {
+    public static void renderLottoStatus(LottoTickets lottoTickets) {
+        lottoTickets.lottoTickets().forEach(lottoTicket -> {
             System.out.println(lottoTicket.lottoTicket());
         });
+
+        System.out.printf(ANS_BUY_COUNT, lottoTickets.lottoTicketsCount());
     }
 
     public static void renderWinningResult(WinningResultInfo resultInfo) {

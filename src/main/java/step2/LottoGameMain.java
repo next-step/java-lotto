@@ -10,13 +10,8 @@ public class LottoGameMain {
     public static void main(String[] args) {
         Money inputAmount = InputView.inputAmount();
 
-        Ticket tickets = inputAmount.purchasedTicket();
-
-        ResultView.renderLottoCount(tickets);
-
-        LottoGame lottoGame = new LottoGame();
-        LottoTickets lottoTickets = lottoGame.generateLotto(tickets);
-        ResultView.renderLottoStatus(lottoTickets.lottoTickets());
+        LottoTickets lottoTickets = LottoGame.generateLotto(inputAmount);
+        ResultView.renderLottoStatus(lottoTickets);
 
         WinningResultInfo resultInfo = lottoTickets.matchedWinningNumber(new MatchedNumber(InputView.pickWinningNumber()));
 

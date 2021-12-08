@@ -3,19 +3,18 @@ package step2.domain;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class LottoTicket {
     private final Set<LottoNumber> lottoTicket;
 
-    public LottoTicket(Set<LottoNumber> lottoTicker) {
-        this.lottoTicket = lottoTicker;
+    public LottoTicket(Set<LottoNumber> lottoTicket) {
+        this.lottoTicket = lottoTicket;
     }
 
     public long containsWinningNumber(Set<LottoNumber> winningNumbers) {
         return winningNumbers.stream()
-                .filter(number -> lottoTicket.contains(number))
-                .collect(Collectors.counting());
+                .filter(lottoTicket::contains)
+                .count();
     }
 
     public long matchedWinningNumber(MatchedNumber matchedNumber) {
