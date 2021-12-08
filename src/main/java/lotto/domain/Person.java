@@ -21,10 +21,10 @@ public class Person {
         lottos.add(new Lotto(LottoNumber.of()));
     }
 
-    public LottoResult lottoResult(List<Integer> winningNumber) {
+    public LottoResult lottoResult(LottoNumber winningNumber) {
         LottoResult lottoResult = new LottoResult(new HashMap<>());
         for (Lotto lotto : lottos) {
-            lottoResult.add(lotto.matchedCount(winningNumber));
+            lottoResult.add(lotto.matchedCount(winningNumber.lottoNumber()));
         }
         return lottoResult;
     }

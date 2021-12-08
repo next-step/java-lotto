@@ -96,4 +96,13 @@ public class LottoTest {
                 .hasMessage("잔액이 부족합니다.");
     }
 
+    @DisplayName("당첨 번호 입력시 로또 번호가 6개가 아니면 예외")
+    @Test
+    void 당첨번호_6개() {
+        List<Integer> winningNumber = Arrays.asList(1, 2, 3);
+        assertThatThrownBy(() -> new LottoStatistics(new Person(10000), winningNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 번호는 6개여야 합니다.");
+    }
+
 }

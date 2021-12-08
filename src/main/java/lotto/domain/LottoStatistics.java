@@ -18,7 +18,7 @@ public class LottoStatistics {
 
     public LottoStatistics(Person person, List<Integer> winningNumber) {
         this.person = person;
-        this.lottoResult = person.lottoResult(winningNumber);
+        this.lottoResult = person.lottoResult(LottoNumber.of(winningNumber));
     }
 
     public int winningAmount(int count) {
