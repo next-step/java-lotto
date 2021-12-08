@@ -16,7 +16,7 @@ public class LottoRankingBoardTest {
     void testGetLottoRankings() {
         // Given
         LottoRankingBoard lottoRankingBoard = new LottoRankingBoard();
-        LottoNumbers winningNumbers = buildLottoNumbers(1, 2, 3, 4, 5, 6);
+        Lotto winningLotto = new Lotto(buildLottoNumbers(1, 2, 3, 4, 5, 6));
         List<Lotto> lottoList = Arrays.asList(
                 new Lotto(buildLottoNumbers(1, 2, 3, 4, 5, 6)),
                 new Lotto(buildLottoNumbers(1, 2, 3, 4, 5, 36)),
@@ -26,7 +26,7 @@ public class LottoRankingBoardTest {
                 new Lotto(buildLottoNumbers(1, 2, 33, 34, 35, 36)));
 
         // When
-        EnumMap<Rank, Integer> result = lottoRankingBoard.getLottoRankings(lottoList, winningNumbers);
+        EnumMap<Rank, Integer> result = lottoRankingBoard.getLottoRankings(lottoList, winningLotto);
 
         // Then
         assertThat(result.get(Rank.FIRST)).isEqualTo(1);
