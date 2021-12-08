@@ -52,8 +52,21 @@ public class LottoNumber {
     }
 
     private void validate(List<Integer> lottoNumber) {
+        validateSize(lottoNumber);
+        for (int number : lottoNumber) {
+            validateRange(number);
+        }
+    }
+
+    private void validateSize(List<Integer> lottoNumber) {
         if (lottoNumber.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+        }
+    }
+
+    private void validateRange(int number) {
+        if (number < START_NUMBER || number > END_NUMBER) {
+            throw new IllegalArgumentException("로또 번호는 1 ~ 45의 숫자만 가능합니다.");
         }
     }
 

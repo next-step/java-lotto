@@ -105,4 +105,13 @@ public class LottoTest {
                 .hasMessage("로또 번호는 6개여야 합니다.");
     }
 
+    @DisplayName("당첨 번호 입력시 숫자가 1~45 범위를 벗어나면 예외")
+    @Test
+    void 당첨번호_1에서45범위() {
+        List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 40, 50);
+        assertThatThrownBy(() -> new LottoStatistics(new Person(10000), winningNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 번호는 1 ~ 45의 숫자만 가능합니다.");
+    }
+
 }
