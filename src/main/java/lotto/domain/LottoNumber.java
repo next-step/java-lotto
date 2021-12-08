@@ -40,8 +40,13 @@ public class LottoNumber {
     public int compareTo(List<Integer> winningNumbers) {
         int count = 0;
         for (int number : winningNumbers) {
-            if (has(number)) count++;
+            count = plusWinningCount(count, number);
         }
+        return count;
+    }
+
+    private int plusWinningCount(int count, int winningNumber) {
+        if (has(winningNumber)) count++;
         return count;
     }
 
