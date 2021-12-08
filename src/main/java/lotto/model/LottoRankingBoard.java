@@ -2,6 +2,7 @@ package lotto.model;
 
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoRankingBoard {
 
@@ -13,5 +14,11 @@ public class LottoRankingBoard {
             result.merge(lottoRank, 1, (rank, count) -> result.get(lottoRank) + 1);
         });
         return result;
+    }
+
+    public long getTotalReward(EnumMap<Rank, Integer> result) {
+        return result.entrySet().stream()
+                .mapToLong((Map.Entry<Rank, Integer> entry) -> entry.getKey().getReward() * entry.getValue())
+                .sum();
     }
 }
