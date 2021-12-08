@@ -6,8 +6,8 @@ import java.util.Map;
 
 public class LottoStatistics {
     private static final Map<Integer, Integer> winningStandard = new HashMap<>();
-    private Person person;
-    private List<Integer> winningNumber;
+    private final Person person;
+    private final LottoResult lottoResult;
 
     static {
         winningStandard.put(3, 5000);
@@ -18,16 +18,19 @@ public class LottoStatistics {
 
     public LottoStatistics(Person person, List<Integer> winningNumber) {
         this.person = person;
-        this.winningNumber = winningNumber;
+        this.lottoResult = person.lottoResult(winningNumber);
     }
 
     public int winningAmount(int count) {
         return winningStandard.getOrDefault(count, 0);
     }
 
-    public int matchedLottoNumberCount(int count) {
-        Map<Integer, Integer> result = person.findWinningResult(winningNumber);
-        return result.getOrDefault(count, 0);
+    public int numberOfWinningLotto(int matchedWinningCount) {
+        return lottoResult.numberOfLotto(matchedWinningCount);
+    }
+
+    public double profitRate() {
+        return lottoResult.totalWinningAmount(winningStandard) / person.amount();
     }
 
 }

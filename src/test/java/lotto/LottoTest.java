@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Person;
-import lotto.domain.Store;
+import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +17,7 @@ public class LottoTest {
         Store store = new Store();
         Person person = new Person(10000);
         store.sellTo(person);
-        assertThat(person.getNumberOfLotto()).isEqualTo(10);
+        assertThat(person.numberOfLotto()).isEqualTo(10);
     }
 
     @DisplayName("당첨번호와 로또번호는 몇 개 일치하는지 확인")
@@ -29,7 +26,13 @@ public class LottoTest {
         Lotto lotto = new Lotto(LottoNumber.of(Arrays.asList(3, 4, 10, 45, 12, 11)));
         List<Integer> winningNumbers = Arrays.asList(2, 10, 42, 45, 18, 11);
 
-        assertThat(lotto.getWinningCount(winningNumbers)).isEqualTo(3);
+        assertThat(lotto.matchedCount(winningNumbers)).isEqualTo(3);
+    }
+
+    @Test
+    void 수익률() {
+        Lotto lotto = new Lotto(LottoNumber.of(Arrays.asList(3, 4, 10, 45, 12, 11)));
+
     }
 
 }
