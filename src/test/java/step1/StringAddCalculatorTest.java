@@ -7,12 +7,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class TextSumCalculatorTest {
-
-    @MethodSource
-    static Stream<String> blankStrings() {
-        return Stream.of("", " ", null);
-    }
+public class StringAddCalculatorTest {
 
     @MethodSource
     static Stream<Arguments> customStrings() {
@@ -24,7 +19,7 @@ public class TextSumCalculatorTest {
     }
 
     @ParameterizedTest
-    @MethodSource(value = "blankStrings")
+    @NullAndEmptySource
     @DisplayName("null 또는 빈 문자를 인자로 받을 경우 예외를 던진다")
     public void splitAndSum_null_또는_빈문자(String input) {
         int result = StringAddCalculator.splitAndSum(input);
