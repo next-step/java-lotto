@@ -11,7 +11,7 @@ public class StringAddCalculator {
 
         Tokenization tokenization = new Tokenization(expression);
 
-        return sumNumbers(tokenization.splitExpression());
+        return sumNumbers(tokenization.splitedExpression());
     }
 
     private static int sumNumbers(String[] numbers) {

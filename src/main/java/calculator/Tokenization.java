@@ -14,7 +14,7 @@ public class Tokenization {
         this.expression = expression;
     }
 
-    public String[] splitExpression() {
+    public String[] splitedExpression() {
         Matcher matcher = Pattern.compile(REG_EXP).matcher(expression);
         String delimiter = TOKEN_DELIMITER;
 
