@@ -10,7 +10,7 @@ public class Result {
     private final Map<Rank, Integer> resultInfo;
     private double rateOfReturn;
 
-    public Result(Lottos lottos, Lotto answer, Bonus bonus) {
+    public Result(Lottos lottos, Lotto answer, Number bonus) {
         resultInfo = new HashMap<>();
         init();
         calculateResult(lottos, answer, bonus);
@@ -22,7 +22,7 @@ public class Result {
         }
     }
 
-    public void calculateResult(Lottos lottos, Lotto answer, Bonus bonus) {
+    public void calculateResult(Lottos lottos, Lotto answer, Number bonus) {
         double revenue = 0;
         for (Lotto lotto : lottos.getLottos()) {
             int count = answer.matchCount(lotto);
