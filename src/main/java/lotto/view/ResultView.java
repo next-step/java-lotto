@@ -6,8 +6,8 @@ import lotto.model.LottoNumbers;
 import lotto.model.Rank;
 
 import java.util.Arrays;
-import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -38,7 +38,7 @@ public class ResultView {
                 .collect(Collectors.toList());
     }
 
-    public void printLottoResults(EnumMap<Rank, Integer> lottoRankings, double profit) {
+    public void printLottoResults(Map<Rank, Integer> lottoRankings, double profit) {
         System.out.println("당첨 통계\n----------");
         PRINTABLE_RANKS.forEach((Rank rank) -> {
             Integer counts = lottoRankings.getOrDefault(rank, 0);

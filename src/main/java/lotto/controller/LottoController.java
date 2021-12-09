@@ -7,8 +7,8 @@ import lotto.model.Rank;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -21,7 +21,7 @@ public class LottoController {
         List<Lotto> lottoList = buyLotto(money);
         resultView.printBoughtResult(lottoList);
         List<Integer> winningNumbers = inputView.inputLastWeekWinningNumbers();
-        EnumMap<Rank, Integer> lottoRankings = lottoRankingBoard.getLottoRankings(lottoList, new Lotto(winningNumbers));
+        Map<Rank, Integer> lottoRankings = lottoRankingBoard.getLottoRankings(lottoList, new Lotto(winningNumbers));
         long totalReward = lottoRankingBoard.getTotalReward(lottoRankings);
         resultView.printLottoResults(lottoRankings, money.getProfit(totalReward));
     }

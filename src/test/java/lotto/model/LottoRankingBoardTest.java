@@ -4,8 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,7 +26,7 @@ public class LottoRankingBoardTest {
                 new Lotto(buildLottoNumbers(1, 2, 33, 34, 35, 36)));
 
         // When
-        EnumMap<Rank, Integer> result = lottoRankingBoard.getLottoRankings(lottoList, winningLotto);
+        Map<Rank, Integer> result = lottoRankingBoard.getLottoRankings(lottoList, winningLotto);
 
         // Then
         assertThat(result.get(Rank.FIRST)).isEqualTo(1);
@@ -47,7 +47,7 @@ public class LottoRankingBoardTest {
                 new Lotto(buildLottoNumbers(1, 2, 3, 4, 35, 36)),
                 new Lotto(buildLottoNumbers(1, 2, 3, 4, 35, 36)),
                 new Lotto(buildLottoNumbers(1, 2, 3, 34, 35, 36)));
-        EnumMap<Rank, Integer> result = lottoRankingBoard.getLottoRankings(lottoList, winningLotto);
+        Map<Rank, Integer> result = lottoRankingBoard.getLottoRankings(lottoList, winningLotto);
 
         // When
         long totalReward = lottoRankingBoard.getTotalReward(result);
