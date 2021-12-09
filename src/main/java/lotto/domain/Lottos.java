@@ -39,4 +39,8 @@ public class Lottos {
             throw new LottoNumberException(ERR_MESSAGE_NUMBER_FORMAT);
         }
     }
+
+    public void add(Lotto lotto) {
+        lottos.add(lotto);
+    }
 }

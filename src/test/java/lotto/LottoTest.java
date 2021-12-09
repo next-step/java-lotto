@@ -8,6 +8,8 @@ import lotto.exception.LottoNumberException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 public class LottoTest {
 
     @Test
@@ -40,5 +42,13 @@ public class LottoTest {
     @Test
     void 로또_개수_오류() {
         Assertions.assertThatThrownBy(() -> LottoAnswer.transFormNumberList("1,2")).isInstanceOf(LottoNumberException.class);
+    }
+
+    @Test
+    void 로또_불변성_테스트() {
+        LottoAnswerFactory factory = new LottoAnswerFactory();
+        Lotto lotto = factory.newInstance();
+        List<Integer> numbers = lotto.getNumbers();
+        Assertions.assertThatThrownBy(() -> numbers.add(99)).isInstanceOf(UnsupportedOperationException.class);
     }
 }
