@@ -3,11 +3,12 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
-    NONE(0, 0),
-    TRIO(3, 5_000),
-    QUARTET(4, 50_000),
-    QUINTET(5, 1_500_000),
-    SEXTET(6, 2_000_000_000);
+    MISS(0, 0),
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000);
 
     private final int count;
     private final int amount;
@@ -17,11 +18,14 @@ public enum Rank {
         this.amount = amount;
     }
 
-    public static Rank getRank(int count) {
+    public static Rank getRank(int count, boolean isBonus) {
+        if (isBonus) {
+            return Rank.SECOND;
+        }
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.getCount() == count)
-                .findAny()
-                .orElse(Rank.NONE);
+                .findFirst()
+                .orElse(Rank.MISS);
     }
 
     public int getCount() {

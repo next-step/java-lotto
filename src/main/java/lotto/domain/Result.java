@@ -1,48 +1,46 @@
 package lotto.domain;
 
-import lotto.view.InputInfo;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class Result {
 
-    private Map<Integer, Integer> resultInfo;
+    private final Map<Rank, Integer> resultInfo;
     private double rateOfReturn;
 
-    public Result(Lottos lottos, Lotto answer) {
+    public Result(Lottos lottos, Lotto answer, Bonus bonus) {
         resultInfo = new HashMap<>();
         init();
-        calculateResult(lottos, answer);
+        calculateResult(lottos, answer, bonus);
     }
 
     private void init() {
         for (Rank rank : Rank.values()) {
-            resultInfo.put(rank.getCount(), 0);
+            resultInfo.put(rank, 0);
         }
     }
 
-    public void calculateResult(Lottos lottos, Lotto answer) {
+    public void calculateResult(Lottos lottos, Lotto answer, Bonus bonus) {
         double revenue = 0;
         for (Lotto lotto : lottos.getLottos()) {
             int count = answer.matchCount(lotto);
-            revenue = getRevenue(revenue, count);
+            boolean isBonus = lotto.getNumbers().contains(bonus.getNumber());
+            revenue = getRevenue(revenue, count, isBonus);
         }
-
-        this.rateOfReturn = revenue / (lottos.getLottos().size() * InputInfo.LOTTO_PRICE);
+        this.rateOfReturn = revenue / (lottos.getLottos().size() * Lottos.LOTTO_PRICE);
     }
 
-    private double getRevenue(double revenue, int count) {
-        if (count >= Rank.TRIO.getCount()) {
-            this.resultInfo.put(count, this.resultInfo.get(count) + 1);
-            Rank rank = Rank.getRank(count);
+    private double getRevenue(double revenue, int count, boolean isBonus) {
+        if (count >= Rank.FIFTH.getCount()) {
+            Rank rank = Rank.getRank(count, isBonus);
+            this.resultInfo.put(rank, this.resultInfo.get(rank) + 1);
             revenue += rank.getAmount();
             return revenue;
         }
         return revenue;
     }
 
-    public Map<Integer, Integer> getResultInfo() {
+    public Map<Rank, Integer> getResultInfo() {
         return resultInfo;
     }
 

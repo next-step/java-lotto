@@ -9,11 +9,11 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto() {
-        numbers = LottoNumber.autoNumbers();
+        numbers = LottoNumbers.autoNumbers();
     }
 
     public Lotto(List<Integer> answer) {
-        LottoNumber.valid(answer);
+        LottoNumbers.valid(answer);
         numbers = new ArrayList<>(answer);
     }
 
@@ -27,4 +27,5 @@ public class Lotto {
                 .filter(this.numbers::contains)
                 .count();
     }
+
 }
