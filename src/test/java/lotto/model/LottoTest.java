@@ -2,8 +2,11 @@ package lotto.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,5 +31,19 @@ class LottoTest {
 
         // Then
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @ParameterizedTest(name = "로또를 한 장에 1000원에 구매할 수 있다")
+    @ValueSource(ints = {13000, 13001, 13999})
+    void testBuyLotto(int moneyValue) {
+        // Given
+        Money money = new Money(moneyValue);
+
+        // When
+        List<Lotto> lottos = Lotto.buyLotto(money);
+
+        // Then
+        assertThat(lottos).isNotNull();
+        assertThat(lottos.size()).isEqualTo(13);
     }
 }
