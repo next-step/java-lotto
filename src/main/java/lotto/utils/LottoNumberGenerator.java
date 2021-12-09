@@ -17,6 +17,10 @@ public final class LottoNumberGenerator {
                 .collect(Collectors.toList());
     }
 
+    private LottoNumberGenerator() {
+
+    }
+
     public static List<LottoNumber> generateLottoNumbers() {
         Collections.shuffle(VALID_LOTTO_NUMBERS);
         return VALID_LOTTO_NUMBERS.subList(0, LottoNumbers.MAX_LENGTH_LOTTO)
