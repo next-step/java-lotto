@@ -2,6 +2,7 @@ package lotto.model;
 
 import lotto.utils.LottoNumberGenerator;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,7 +21,7 @@ public class LottoNumbers {
     }
 
     public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     void checkDuplicatedNumber(final List<LottoNumber> lottoNumbers) {
