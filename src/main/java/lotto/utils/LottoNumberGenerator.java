@@ -22,6 +22,7 @@ public final class LottoNumberGenerator {
         return VALID_LOTTO_NUMBERS.subList(0, LottoNumbers.MAX_LENGTH_LOTTO)
                 .stream()
                 .map(LottoNumber::new)
+                .sorted()
                 .collect(Collectors.toList());
     }
 }
