@@ -3,8 +3,6 @@ package lotto.domain.factory;
 import lotto.domain.lotto.LottoAnswer;
 import lotto.domain.lotto.LottoAuto;
 
-import java.util.List;
-
 public class LottoAnswerFactory implements LottoFactory {
 
     @Override
@@ -13,7 +11,7 @@ public class LottoAnswerFactory implements LottoFactory {
     }
 
     @Override
-    public LottoAnswer newInstance(List<Integer> numbers) {
+    public LottoAnswer newInstance(String numbers) {
         return new LottoAnswer(numbers);
     }
 }

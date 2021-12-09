@@ -1,44 +1,41 @@
 package lotto.view;
 
-import lotto.domain.LottoNumbers;
-import lotto.domain.Lottos;
+import lotto.domain.Number;
 import lotto.exception.LottoNumberException;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 public class InputInfo {
 
-    private static final String ERR_MESSAGE_NUMBER_FORMAT = "로또 입력값이 아닙니다.";
-    private static final String ERR_MESSAGE_LOTTO_SIZE = "입력 숫자는 6개 입니다.";
-    private static final String MESSAGE_LOTTO_COUNT = "%d개를 구입하였습니다.";
-    private static final String SPLIT_REGEX = ",";
-    private static final String ANSWER_BLANK = " ";
-    private static final String ANSWER_EMPTY = "";
+    private static final String MESSAGE_ERR_PRICE = "구매 금액을 확인하세요.";
+    private static final String MESSAGE_LOTTO_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
+    private static final int LOTTO_PRICE = 1000;
+    private static final int ZERO_LOTTO = 0;
 
-    public InputInfo(String price) {
-        System.out.println(String.format(MESSAGE_LOTTO_COUNT, Lottos.getCount(price)));
+    private Number manualCount;
+    private Number autoCount;
+
+    public InputInfo(Number price, Number manualCount) {
+        this.autoCount = calculatorLotto(price, manualCount);
+        this.manualCount = manualCount;
     }
 
-    public List<Integer> getAnswer(String answer) {
-        List<Integer> answers;
-        try {
-            String answerLump = answer.replace(ANSWER_BLANK, ANSWER_EMPTY);
-            String[] answerSplit = answerLump.split(SPLIT_REGEX);
-            List<String> answerNumbers = Arrays.asList(answerSplit);
-            answers = answerNumbers.stream().map(Integer::parseInt).collect(Collectors.toList());
-        } catch (Exception e) {
-            throw new LottoNumberException(ERR_MESSAGE_NUMBER_FORMAT);
-        }
-        valid(answers);
-        return answers;
+    public void printInfo() {
+        System.out.println(String.format(MESSAGE_LOTTO_COUNT, manualCount.getNumber(), autoCount.getNumber()));
     }
 
-    public void valid(List<Integer> answer) {
-        if (answer.size() != LottoNumbers.MARKED_RANGE) {
-            throw new LottoNumberException(ERR_MESSAGE_LOTTO_SIZE);
+    private Number calculatorLotto(Number price, Number manualCount) {
+        int autoCount = (price.getNumber() / LOTTO_PRICE) - manualCount.getNumber();
+        if (autoCount > ZERO_LOTTO) {
+            return new Number(autoCount);
         }
+        throw new LottoNumberException(MESSAGE_ERR_PRICE);
+    }
+
+    public Number getManualCount() {
+        return manualCount;
+    }
+
+    public Number getAutoCount() {
+        return autoCount;
     }
 }

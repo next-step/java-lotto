@@ -3,12 +3,10 @@ package lotto;
 import lotto.domain.factory.LottoAnswerFactory;
 import lotto.domain.factory.LottoAutoFactory;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoAnswer;
 import lotto.exception.LottoNumberException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class LottoTest {
 
@@ -21,18 +19,26 @@ public class LottoTest {
 
     @Test
     void 로또_숫자_범위_검사() {
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 99);
         LottoAnswerFactory factory = new LottoAnswerFactory();
-        Assertions.assertThatThrownBy(() -> factory.newInstance(numbers)).isInstanceOf(LottoNumberException.class);
+        Assertions.assertThatThrownBy(() -> factory.newInstance("1, 2, 3, 4, 5, 99")).isInstanceOf(LottoNumberException.class);
     }
 
     @Test
     void 로또_번호_매칭() {
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         LottoAnswerFactory factory = new LottoAnswerFactory();
-        Lotto lotto1 = factory.newInstance(numbers);
-        Lotto lotto2 = factory.newInstance(numbers);
+        Lotto lotto1 = factory.newInstance("1, 2, 3, 4, 5, 6");
+        Lotto lotto2 = factory.newInstance("1, 2, 3, 4, 5, 6");
 
         Assertions.assertThat(lotto1.matchCount(lotto2)).isEqualTo(6);
+    }
+
+    @Test
+    void 로또_숫자변환_오류() {
+        Assertions.assertThatThrownBy(() -> LottoAnswer.transFormNumberList("숫자아닌값")).isInstanceOf(LottoNumberException.class);
+    }
+
+    @Test
+    void 로또_개수_오류() {
+        Assertions.assertThatThrownBy(() -> LottoAnswer.transFormNumberList("1,2")).isInstanceOf(LottoNumberException.class);
     }
 }
