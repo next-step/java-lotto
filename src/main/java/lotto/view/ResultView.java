@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class ResultView {
     private static final String LOTTO_RANK_RESULT_FORMAT = "%s개 일치 (%s원)- %s개";
-    private static final String LOTTO_PROFIT_RESULT_FORMAT = "총 수익률은 %s입니다.";
+    private static final String LOTTO_PROFIT_RESULT_FORMAT = "총 수익률은 %.2f입니다.";
     private static final List<Rank> PRINTABLE_RANKS = Arrays.asList(
             Rank.FIRST,
             Rank.SECOND,
