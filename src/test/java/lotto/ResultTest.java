@@ -76,4 +76,10 @@ public class ResultTest {
         Assertions.assertThat(result.getRateOfReturn()).isEqualTo(6000);
     }
 
+    @Test
+    void 보너스가_같아도_당첨개수에_맞게_Rank를_반환한다() {
+        Rank rank = Rank.getRank(4, true);
+        Assertions.assertThat(Rank.FOURTH).isEqualTo(rank);
+    }
+
 }
