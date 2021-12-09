@@ -6,10 +6,10 @@ import java.util.Map;
 
 public class LottoRankingBoard {
 
-    public Map<Rank, Integer> getLottoRankings(List<Lotto> lottoList, Lotto winningLotto) {
+    public Map<Rank, Integer> getLottoRankings(List<Lotto> lottos, Lotto winningLotto) {
         Map<Rank, Integer> result = new EnumMap<>(Rank.class);
         LottoNumbers winningNumbers = winningLotto.getLottoNumbers();
-        lottoList.forEach((Lotto lotto) -> {
+        lottos.forEach((Lotto lotto) -> {
             Rank lottoRank = lotto.getLottoRank(winningNumbers);
             result.merge(lottoRank, 1, (rank, count) -> result.get(lottoRank) + 1);
         });

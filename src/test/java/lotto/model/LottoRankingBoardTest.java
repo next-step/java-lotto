@@ -17,7 +17,7 @@ public class LottoRankingBoardTest {
         // Given
         LottoRankingBoard lottoRankingBoard = new LottoRankingBoard();
         Lotto winningLotto = new Lotto(buildLottoNumbers(1, 2, 3, 4, 5, 6));
-        List<Lotto> lottoList = Arrays.asList(
+        List<Lotto> lottos = Arrays.asList(
                 new Lotto(buildLottoNumbers(1, 2, 3, 4, 5, 6)),
                 new Lotto(buildLottoNumbers(1, 2, 3, 4, 5, 36)),
                 new Lotto(buildLottoNumbers(1, 2, 3, 4, 35, 36)),
@@ -26,7 +26,7 @@ public class LottoRankingBoardTest {
                 new Lotto(buildLottoNumbers(1, 2, 33, 34, 35, 36)));
 
         // When
-        Map<Rank, Integer> result = lottoRankingBoard.getLottoRankings(lottoList, winningLotto);
+        Map<Rank, Integer> result = lottoRankingBoard.getLottoRankings(lottos, winningLotto);
 
         // Then
         assertThat(result.get(Rank.FIRST)).isEqualTo(1);
@@ -42,12 +42,12 @@ public class LottoRankingBoardTest {
         // Given
         LottoRankingBoard lottoRankingBoard = new LottoRankingBoard();
         Lotto winningLotto = new Lotto(buildLottoNumbers(1, 2, 3, 4, 5, 6));
-        List<Lotto> lottoList = Arrays.asList(
+        List<Lotto> lottos = Arrays.asList(
                 new Lotto(buildLottoNumbers(1, 2, 3, 4, 5, 36)),
                 new Lotto(buildLottoNumbers(1, 2, 3, 4, 35, 36)),
                 new Lotto(buildLottoNumbers(1, 2, 3, 4, 35, 36)),
                 new Lotto(buildLottoNumbers(1, 2, 3, 34, 35, 36)));
-        Map<Rank, Integer> result = lottoRankingBoard.getLottoRankings(lottoList, winningLotto);
+        Map<Rank, Integer> result = lottoRankingBoard.getLottoRankings(lottos, winningLotto);
 
         // When
         long totalReward = lottoRankingBoard.getTotalReward(result);

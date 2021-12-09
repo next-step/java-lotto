@@ -20,12 +20,12 @@ public class ResultView {
             Rank.FOURTH
     );
 
-    public void printBoughtResult(List<Lotto> lottoList) {
+    public void printBoughtResult(List<Lotto> lottos) {
         StringBuilder result = new StringBuilder();
-        result.append(lottoList.size())
+        result.append(lottos.size())
                 .append("개를 구매했습니다.");
         System.out.println(result);
-        lottoList.forEach((Lotto lotto ) -> printLottoNumbers(lotto.getLottoNumbers()));
+        lottos.forEach((Lotto lotto ) -> printLottoNumbers(lotto.getLottoNumbers()));
     }
 
     public void printLottoNumbers(LottoNumbers numbers) {

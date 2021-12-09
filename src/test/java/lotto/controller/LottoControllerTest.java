@@ -18,10 +18,10 @@ public class LottoControllerTest {
         Money money = new Money(moneyValue);
 
         // When
-        List<Lotto> lottoList = LottoController.buyLotto(money);
+        List<Lotto> lottos = LottoController.buyLotto(money);
 
         // Then
-        assertThat(lottoList).isNotNull();
-        assertThat(lottoList.size()).isEqualTo(13);
+        assertThat(lottos).isNotNull();
+        assertThat(lottos.size()).isEqualTo(13);
     }
 }

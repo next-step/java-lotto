@@ -18,10 +18,10 @@ public class LottoController {
         ResultView resultView = new ResultView();
         LottoRankingBoard lottoRankingBoard = new LottoRankingBoard();
         Money money = inputView.inputMoney();
-        List<Lotto> lottoList = buyLotto(money);
-        resultView.printBoughtResult(lottoList);
+        List<Lotto> lottos = buyLotto(money);
+        resultView.printBoughtResult(lottos);
         List<Integer> winningNumbers = inputView.inputLastWeekWinningNumbers();
-        Map<Rank, Integer> lottoRankings = lottoRankingBoard.getLottoRankings(lottoList, new Lotto(winningNumbers));
+        Map<Rank, Integer> lottoRankings = lottoRankingBoard.getLottoRankings(lottos, new Lotto(winningNumbers));
         long totalReward = lottoRankingBoard.getTotalReward(lottoRankings);
         resultView.printLottoResults(lottoRankings, money.getProfit(totalReward));
     }
