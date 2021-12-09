@@ -10,9 +10,9 @@ public class InputInfoTest {
 
     @Test
     void 수동3개_자동3개() {
-        Number price = new Number("15000");
-        Number manualCount = new Number("10");
-        Number autoCount = new Number("5");
+        Number price = Number.of("15000");
+        Number manualCount = Number.of("10");
+        Number autoCount = Number.of("5");
         InputInfo inputInfo = new InputInfo(price, manualCount);
         Assertions.assertThat(inputInfo.getManualCount()).isEqualTo(manualCount);
         Assertions.assertThat(inputInfo.getAutoCount()).isEqualTo(autoCount);
@@ -20,8 +20,8 @@ public class InputInfoTest {
 
     @Test
     void 구매오류() {
-        Number price = new Number("500");
-        Number manualCount = new Number("10");
+        Number price = Number.of("500");
+        Number manualCount = Number.of("10");
         Assertions.assertThatThrownBy(() -> new InputInfo(price, manualCount)).isInstanceOf(LottoNumberException.class);
     }
 

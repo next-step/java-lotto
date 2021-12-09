@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.factory.LottoAutoFactory;
 import lotto.domain.lotto.Lotto;
 import lotto.exception.LottoNumberException;
 
@@ -14,17 +13,12 @@ public class Lottos {
 
     private List<Lotto> lottos;
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public Lottos() {
+        lottos = new ArrayList<>();
     }
 
-    public Lottos(String price) {
-        int lottosCount = getCount(price);
-        lottos = new ArrayList<>();
-        for (int i = 0; i < lottosCount; i++) {
-            LottoAutoFactory factory = new LottoAutoFactory();
-            lottos.add(factory.newInstance());
-        }
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public List<Lotto> getLottos() {

@@ -38,7 +38,7 @@ public class ResultTest {
 
     @Test
     void 당첨결과_테스트() {
-        Result result = new Result(lottos, factory.newInstance("1,2,3,7,8,9"), new Number(10));
+        Result result = new Result(lottos, factory.newInstance("1,2,3,7,8,9"), Number.of(10));
         Map<Rank, Integer> sampleResult = new HashMap<>();
 
         sampleResult.put(Rank.MISS, 0);
@@ -56,7 +56,7 @@ public class ResultTest {
 
     @Test
     void 당첨결과_2등_테스트() {
-        Result result = new Result(lottos, factory.newInstance("1,2,3,4,5,9"), new Number(6));
+        Result result = new Result(lottos, factory.newInstance("1,2,3,4,5,9"), Number.of(6));
         Map<Rank, Integer> sampleResult = new HashMap<>();
 
         sampleResult.put(Rank.MISS, 0);

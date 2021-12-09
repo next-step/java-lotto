@@ -10,16 +10,24 @@ public class Number {
 
     private int number;
 
-    public Number(int number) {
+    private Number(int number) {
         this.number = number;
     }
 
-    public Number(String number) {
+    private Number(String number) {
         try {
             this.number = Integer.parseInt(number);
         } catch (NumberFormatException e) {
             throw new LottoNumberException(ERR_NUMBER_FORMAT);
         }
+    }
+
+    public static Number of(int number) {
+        return new Number(number);
+    }
+
+    public static Number of(String number) {
+        return new Number(number);
     }
 
     public int getNumber() {

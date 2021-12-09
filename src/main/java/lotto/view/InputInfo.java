@@ -26,7 +26,7 @@ public class InputInfo {
     private Number calculatorLotto(Number price, Number manualCount) {
         int autoCount = (price.getNumber() / LOTTO_PRICE) - manualCount.getNumber();
         if (autoCount > ZERO_LOTTO) {
-            return new Number(autoCount);
+            return Number.of(autoCount);
         }
         throw new LottoNumberException(MESSAGE_ERR_PRICE);
     }

@@ -4,15 +4,19 @@ import lotto.domain.Lottos;
 import lotto.domain.Number;
 import lotto.domain.factory.LottoAnswerFactory;
 import lotto.domain.lotto.Lotto;
+import lotto.view.InputInfo;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class Lottery {
 
     public void draw() {
-        String price = InputView.questionPrice();
+        Number price = Number.of(InputView.questionPrice());
+        Number manualCount = Number.of(InputView.questionManualCount());
 
-        Lottos lottos = new Lottos(price);
+        InputInfo inputInfo = new InputInfo(price, manualCount);
+
+        Lottos lottos = new Lottos();
 
         ResultView.printLottos(lottos);
 
@@ -22,7 +26,7 @@ public class Lottery {
     private void winner(Lottos lottos) {
         String answerText = InputView.questionAnswer();
         String bonusBall = InputView.questionBonus();
-        Number bonus = new Number(bonusBall);
+        Number bonus = Number.of(bonusBall);
         LottoAnswerFactory factory = new LottoAnswerFactory();
         Lotto answer = factory.newInstance(answerText);
         ResultView resultView = new ResultView(lottos, answer, bonus);
