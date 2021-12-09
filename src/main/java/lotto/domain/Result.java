@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.lotto.Lotto;
+
 import java.util.HashMap;
 import java.util.Map;
 

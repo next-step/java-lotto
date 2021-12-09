@@ -1,8 +1,8 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoAutoFactory;
 import lotto.domain.Lottos;
+import lotto.domain.factory.LottoAutoFactory;
+import lotto.domain.lotto.Lotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 

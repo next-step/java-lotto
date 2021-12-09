@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.factory.LottoAutoFactory;
+import lotto.domain.lotto.Lotto;
 import lotto.exception.LottoNumberException;
 
 import java.util.ArrayList;

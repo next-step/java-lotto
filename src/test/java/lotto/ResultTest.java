@@ -1,6 +1,11 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.Bonus;
+import lotto.domain.Lottos;
+import lotto.domain.Rank;
+import lotto.domain.Result;
+import lotto.domain.factory.LottoAnswerFactory;
+import lotto.domain.lotto.Lotto;
 import lotto.view.InputInfo;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;

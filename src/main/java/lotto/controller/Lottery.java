@@ -1,9 +1,9 @@
 package lotto.controller;
 
 import lotto.domain.Bonus;
-import lotto.domain.Lotto;
-import lotto.domain.LottoAnswerFactory;
 import lotto.domain.Lottos;
+import lotto.domain.factory.LottoAnswerFactory;
+import lotto.domain.lotto.Lotto;
 import lotto.view.InputInfo;
 import lotto.view.InputView;
 import lotto.view.ResultView;
