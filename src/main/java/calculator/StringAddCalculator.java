@@ -10,12 +10,15 @@ public class StringAddCalculator {
         }
 
         Tokenization tokenization = new Tokenization(expression);
+        String[] numbers = tokenization.splitedExpression();
 
-        return sumNumbers(tokenization.splitedExpression());
+        Validate validate = new Validate();
+        validate.validate(numbers);
+
+        return (sum(numbers));
     }
 
-    private static int sumNumbers(String[] numbers) {
+    private static int sum(String[] numbers) {
         return Arrays.stream(numbers).mapToInt(Integer::parseInt).sum();
     }
-
 }
