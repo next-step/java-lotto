@@ -58,14 +58,14 @@ public class LottoResult {
     }
 
     private double calculateEarningsRatio(int totalEarningsAmount) {
-        return Math.floorDiv(totalEarningsAmount, getTotalPurchasedPrice());
+        return (double) totalEarningsAmount / totalPurchasedPrice();
     }
 
-    private int getTotalPurchasedPrice() {
-        return Math.multiplyExact(getTotalPurchasedSize(), Lotto.PRICE);
+    private int totalPurchasedPrice() {
+        return Math.multiplyExact(totalPurchasedSize(), Lotto.PRICE);
     }
 
-    private int getTotalPurchasedSize() {
+    private int totalPurchasedSize() {
         return results.values()
                 .stream()
                 .mapToInt(Integer::intValue)
