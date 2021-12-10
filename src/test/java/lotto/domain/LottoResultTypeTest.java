@@ -12,7 +12,7 @@ class LottoResultTypeTest {
     @Test
     void findLottoResultTypeTest() {
         // given
-        int matchedCount = LottoResultType.SIX_MATCHED.getMatchedCount();
+        int matchedCount = LottoResultType.SIX_MATCHED.matchedCount();
         // when
         LottoResultType lottoResultType = LottoResultType.findByMatchedCount(matchedCount);
         // then

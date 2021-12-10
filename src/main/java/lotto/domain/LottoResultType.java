@@ -30,11 +30,11 @@ public enum LottoResultType {
                 .orElseThrow(() -> new IllegalArgumentException(String.format("매칭된 숫자(%d)가 로또 결과의 범위를 넘었습니다.", matchedCount)));
     }
 
-    public int getMatchedCount() {
+    public int matchedCount() {
         return matchedCount;
     }
 
-    public int getReward() {
+    public int reward() {
         return reward;
     }
 }

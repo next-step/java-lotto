@@ -20,8 +20,12 @@ public class LottoResult {
         return results;
     }
 
-    public double getEarningsRatio() {
+    public double earningsRatio() {
         return calculateEarningsRatio(calculateTotalEarningsAmount());
+    }
+
+    public int countByType(LottoResultType lottoResultType) {
+        return results.get(lottoResultType);
     }
 
     private void initiate() {
@@ -52,9 +56,7 @@ public class LottoResult {
     }
 
     private double calculateEarningAmount(LottoResultType lottoResultType) {
-        int reword = lottoResultType.getReward();
-        int count = results.get(lottoResultType);
-        return Math.multiplyExact(reword, count);
+        return Math.multiplyExact(lottoResultType.reward(), countByType(lottoResultType));
     }
 
     private double calculateEarningsRatio(int totalEarningsAmount) {

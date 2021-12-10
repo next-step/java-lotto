@@ -3,6 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -29,20 +31,28 @@ class LottoResultTest {
 
     @DisplayName("`LottoResult` 수익률 반환")
     @Test
-    void getEarningsRatioTest() {
+    void earningsRatioTest() {
         // when
-        double earningsRatio = lottoResult.getEarningsRatio();
+        double earningsRatio = lottoResult.earningsRatio();
         // then
         assertThat(earningsRatio).isNotNegative();
     }
 
     @DisplayName("`LottoResult` 통계 반환")
     @Test
-    void getStatisticsTest() {
+    void statisticsTest() {
         // when
         Map<LottoResultType, Integer> earningsRatio = lottoResult.getStatistics();
         // then
         assertThat(earningsRatio.values())
                 .hasSize(LottoResultType.values().length);
+    }
+
+    @DisplayName("`LottoResult`의 통계 타입별 결과 갯수 반환")
+    @ParameterizedTest
+    @EnumSource(LottoResultType.class)
+    void countByType(LottoResultType type) {
+        // when & then
+        assertThat(lottoResult.countByType(type)).isNotNegative();
     }
 }
