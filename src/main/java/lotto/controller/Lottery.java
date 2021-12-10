@@ -8,19 +8,40 @@ import lotto.view.InputInfo;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Lottery {
 
     public void draw() {
         Number price = Number.of(InputView.questionPrice());
         Number manualCount = Number.of(InputView.questionManualCount());
 
+        // 입력 정보
         InputInfo inputInfo = new InputInfo(price, manualCount);
+        List<String> inputManualLottos = InputView.questionManualInput(inputInfo.getManualCount());
 
-        Lottos lottos = new Lottos();
+        // 수동 로또 생성
+        List<Lotto> manualLottos = getLottos(inputManualLottos);
+        Lottos lottos = new Lottos(manualLottos);
+
+        // 자동 로또 추가
+        lottos.addAutoLottos(inputInfo.getAutoCount());
+
+        // 입력 정보 받기
+        inputInfo.printInfo();
 
         ResultView.printLottos(lottos);
 
         winner(lottos);
+    }
+
+    private List<Lotto> getLottos(List<String> inputManualLottos) {
+        LottoAnswerFactory factory = new LottoAnswerFactory();
+        List<Lotto> manualLottos = inputManualLottos.stream()
+                .map(factory::newInstance)
+                .collect(Collectors.toList());
+        return manualLottos;
     }
 
     private void winner(Lottos lottos) {

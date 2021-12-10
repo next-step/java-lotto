@@ -1,8 +1,8 @@
 package lotto;
 
 import lotto.domain.Lottos;
+import lotto.domain.Number;
 import lotto.domain.factory.LottoAnswerFactory;
-import lotto.domain.factory.LottoAutoFactory;
 import lotto.domain.lotto.Lotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -35,10 +35,7 @@ public class LottosTest {
 
     @Test
     void 로또_수동_자동_합치기() {
-        LottoAutoFactory factory = new LottoAutoFactory();
-
-        lottos.add(factory.newInstance());
-        lottos.add(factory.newInstance());
+        lottos.addAutoLottos(Number.of("2"));
         Assertions.assertThat(lottos.getLottos().size()).isEqualTo(4);
     }
 }
