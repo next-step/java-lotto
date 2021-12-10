@@ -39,15 +39,11 @@ class LottosTest {
     @Test
     void retrieveStatisticsTest() {
         // given
-        Lotto winningLottoNumbers = new Lotto();
         Lottos lottos = new Lottos(LOTTOS);
+        Lotto winningLotto = new Lotto();
         // when
-        LottoResult lottoResult = lottos.retrieveStatistics(winningLottoNumbers);
+        LottoResult lottoResult = lottos.lottoResult(winningLotto);
         // then
-        assertAll(
-                () -> assertThat(lottoResult).isNotNull(),
-                () -> assertThat(lottoResult.getEarningsRatio()).isNotNegative(),
-                () -> assertThat(lottoResult.getStatistics()).isNotNull()
-        );
+        assertThat(lottoResult).isNotNull();
     }
 }

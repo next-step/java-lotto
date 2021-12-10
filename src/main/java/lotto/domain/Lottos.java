@@ -21,8 +21,8 @@ public class Lottos {
                 .collect(Collectors.toList()));
     }
 
-    public LottoResult retrieveStatistics(Lotto winningLotto) {
-        return new LottoResult(findLottoResultType(winningLotto));
+    public LottoResult lottoResult(Lotto winningLotto) {
+        return new LottoResult(this, winningLotto);
     }
 
     public List<Lotto> getLottos() {
@@ -40,11 +40,5 @@ public class Lottos {
         if (lottos.isEmpty()) {
             throw new IllegalArgumentException("lottos의 사이즈가 0입니다.");
         }
-    }
-
-    private List<LottoResultType> findLottoResultType(Lotto winningLottoNumbers) {
-        return lottos.stream()
-                .map(lotto -> lotto.findLottoResultType(winningLottoNumbers.getNumbers()))
-                .collect(Collectors.toList());
     }
 }
