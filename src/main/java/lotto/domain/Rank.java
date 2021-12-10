@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 public enum Rank {
     FOURTH(3, 5000),
@@ -17,23 +17,23 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
+    public static Rank valueOf(int matchCount) {
+        return Stream.of(values())
+                .filter(matchRank -> isEqualMatchCount(matchCount, matchRank))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException());
+    }
+
+    private static boolean isEqualMatchCount(int matchCount, Rank matchRank) {
+        return matchRank.matchCount == matchCount;
+    }
+
     public int getMatchCount() {
         return matchCount;
     }
 
     public int getWinningMoney() {
         return winningMoney;
-    }
-
-    public static Rank valueOf(int matchCount) {
-        return Arrays.asList(values()).stream()
-                .filter(matchRank -> isEqualMatchCount(matchCount, matchRank))
-                .findFirst()
-                .orElse(null);
-    }
-
-    private static boolean isEqualMatchCount(int matchCount, Rank matchRank) {
-        return matchRank.matchCount == matchCount;
     }
 
     @Override

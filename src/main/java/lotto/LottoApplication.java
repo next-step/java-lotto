@@ -1,23 +1,27 @@
 package lotto;
 
-import lotto.domain.LottoGame;
+import lotto.domain.Calculator;
+import lotto.domain.Lotto;
 import lotto.domain.LottoShop;
-import lotto.strategy.MakeAutoLottoNumber;
-import lotto.strategy.MakeLottoNumber;
+import lotto.domain.Lottos;
+import lotto.strategy.CreationAutoLottoNumber;
+import lotto.strategy.CreationLottoNumber;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoApplication {
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         LottoShop lottoShop = new LottoShop(InputView.requestPurchaseAmount());
 
         ResultView.responseLottoCount(lottoShop.getBuyRound());
 
-        MakeLottoNumber makeLottoNumber = new MakeAutoLottoNumber();
-        LottoGame lottoGame = new LottoGame(lottoShop.getBuyRound(), makeLottoNumber);
-        ResultView.responseLottoNumbers(lottoGame.getLottos());
+        CreationLottoNumber makeLottoNumber = new CreationAutoLottoNumber();
+        Lottos lottos = new Lottos(lottoShop.getBuyRound(), makeLottoNumber);
+        ResultView.responseLottoNumbers(lottos);
 
-        String winningNumber = InputView.requestLastWeekWinningNumber();
-        ResultView.responseWinningStatistics(lottoGame.getResultStatics(winningNumber, lottoShop.getBuyRound()));
+        Lotto winningLotto = new Lotto(InputView.requestLastWeekWinningNumber());
+        Calculator calculator = new Calculator(lottos.getResult(winningLotto), lottoShop.getBuyAmount());
+        ResultView.responseStatistics(calculator);
     }
 }

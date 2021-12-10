@@ -1,12 +1,9 @@
 package lotto.view;
 
+import lotto.domain.Calculator;
 import lotto.domain.Lotto;
-import lotto.domain.Rank;
-import lotto.dto.LottoDto;
-import lotto.dto.StatisticsDto;
-
-import java.math.BigDecimal;
-import java.util.List;
+import lotto.domain.LottoResult;
+import lotto.domain.Lottos;
 
 public class ResultView {
     private static final String RESPONSE_LOTTO_COUNT = "%s개를 구매했습니다.\n";
@@ -20,23 +17,20 @@ public class ResultView {
         System.out.format(RESPONSE_LOTTO_COUNT, purchaseLottoCount);
     }
 
-    public static void responseLottoNumbers(LottoDto lottoDto) {
-        for (Lotto lotto : lottoDto.getLottos()) {
+    public static void responseLottoNumbers(Lottos lottos) {
+        for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto.getLottoNumbers());
         }
     }
 
-    public static void responseWinningStatistics(StatisticsDto statisticsDto) {
+    public static void responseStatistics(Calculator calculator) {
         System.out.println(RESPONSE_INIT_MESSAGE);
         System.out.println(RESPONSE_INIT_LINE);
 
-        for (Rank rank : Rank.values()) {
-            System.out.format(RESPONSE_MATCH_MESSAGE, rank.getMatchCount(), rank.getWinningMoney(), statisticsDto.countRank(rank));
+        for (LottoResult lottoResult : calculator.getLottoResults()) {
+            System.out.format(RESPONSE_MATCH_MESSAGE, lottoResult.getRank().getMatchCount(), lottoResult.getRank().getWinningMoney(), lottoResult.getNumberOfTimes());
         }
-        System.out.format(RESPONSE_TOTAL_EARNING_RATE_MESSAGE, statisticsDto.earningRate());
+
+        System.out.format(RESPONSE_TOTAL_EARNING_RATE_MESSAGE, calculator.getEarnRate());
     }
-
-
-
 }
-
