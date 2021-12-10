@@ -1,8 +1,8 @@
 package lotto.domain;
 
 public class Number {
-    static final int MIN_NUMBER = 1;
-    static final int MAX_NUMBER = 45;
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
 
     private final int number;
 
@@ -17,11 +17,11 @@ public class Number {
         }
     }
 
-    private boolean isInvalidNumber(int number) {
-        return MIN_NUMBER > number || MAX_NUMBER < number;
-    }
-
     int getNumber() {
         return number;
+    }
+
+    private boolean isInvalidNumber(int number) {
+        return MIN_NUMBER > number || MAX_NUMBER < number;
     }
 }
