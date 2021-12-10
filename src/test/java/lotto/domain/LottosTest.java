@@ -10,7 +10,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 @DisplayName("구입한 모든 `Lotto`를 가진 `Lottos`에 대한 테스트")
 class LottosTest {
