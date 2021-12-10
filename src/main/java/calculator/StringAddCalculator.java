@@ -42,17 +42,17 @@ public class StringAddCalculator {
 
     static Integer parseInt(String numberString) {
         try {
-            Integer number = Integer.parseInt(numberString);
+            Integer number = Integer.valueOf(numberString);
             checkIsNegative(number);
             return number;
         } catch (NumberFormatException e) {
-            throw new RuntimeException();
+            throw new CustomNumberFormatException();
         }
     }
 
     static void checkIsNegative(Integer number) {
         if (number < 0) {
-            throw new RuntimeException();
+            throw new CustomNumberFormatException();
         }
     }
 }
