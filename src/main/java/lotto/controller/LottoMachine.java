@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.Lotto;
 import lotto.Lottos;
 import lotto.Money;
 import lotto.view.InputView;
@@ -16,8 +17,13 @@ public class LottoMachine {
         Lottos lottos = Lottos.buy(money);
 
         outputView.showHowManyLottosBoughtWithMoney(lottos);
+        outputView.showLottos(lottos);
 
         String lottoWinNumbers = inputView.showMessageAndGetLastWeekLottoWinNumbers();
+        Lotto winnerLotto = new Lotto(lottoWinNumbers);
+
+        lottos.updateLottoResult(winnerLotto);
+        outputView.showLottoResult(lottos.getLottoResult());
 
     }
 }

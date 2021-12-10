@@ -1,14 +1,12 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Lottos {
 
     private static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_NUMBERS_COUNT = 6;
+
     private static final List<Integer> lottoNumberSource = new ArrayList<Integer>() {{
         addAll(Arrays.asList(
                 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,
@@ -17,10 +15,12 @@ public class Lottos {
         ));
     }};
 
+    private final LottoResult lottoResult;
     private final List<Lotto> lottos;
 
     private Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
+        this.lottoResult = new LottoResult();
     }
 
     public static Lottos buy(Money money) {
@@ -33,10 +33,6 @@ public class Lottos {
         }
 
         return new Lottos(lottos);
-    }
-
-    public List<Lotto> getLottos() {
-        return lottos;
     }
 
     public int count() {
@@ -53,5 +49,29 @@ public class Lottos {
 
         Collections.sort(lottoNumbers);
         return lottoNumbers;
+    }
+
+    public void updateLottoResult(Lotto winnerLotto) {
+        for(Lotto lotto : lottos) {
+            lottoResult.update(lotto, winnerLotto);
+        }
+    }
+
+    public LottoResult getLottoResult() {
+        return lottoResult;
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
+    public String lottoToString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(Lotto lotto : lottos) {
+            stringBuilder.append(lotto.toString()).append("\n");
+        }
+
+        return stringBuilder.toString();
     }
 }

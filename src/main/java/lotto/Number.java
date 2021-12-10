@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class Number implements Comparable<Number> {
+
     private static final Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+");
     private static final String NOT_VALID_NUMBER_INPUT_MESSAGE = "유효한 숫자 입력이 아닙니다.";
 
@@ -48,5 +49,9 @@ public class Number implements Comparable<Number> {
             return 1;
         }
         return -1;
+    }
+
+    public String toString() {
+        return String.valueOf(number);
     }
 }

@@ -25,7 +25,20 @@ class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
 
         // then
-        assertThat(lotto.getLottoNumbers()).isEqualTo(lottoNumbers);
+        assertThat(lotto.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+    }
+
+    @Test
+    void count_match() {
+        // given
+        Lotto other = new Lotto("1, 2, 3, 4, 5, 6");
+        Lotto current = new Lotto("1, 2, 3, 4, 5, 7");
+
+        // when
+        int count = current.countMatch(other);
+
+        // then
+        assertThat(count).isEqualTo(5);
     }
 
 }

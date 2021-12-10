@@ -1,17 +1,24 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class Numbers {
 
     private static final String NUMBER_DELIMITER = ", ";
+    private static final int NO_MATCH_COUNT = 0;
+    private static final int YES_MATCH_COUNT = 1;
 
     private final List<Number> numbers;
 
     public Numbers(String numbersInput) {
         this.numbers = createNumbers(numbersInput);
+    }
+
+    public Numbers(List<Number> numbers) {
+        this.numbers = numbers;
     }
 
     private List<Number> createNumbers(String numbersInput) {
@@ -23,6 +30,34 @@ public class Numbers {
         }
 
         return numbers;
+    }
+
+    public List<Number> getNumbers() {
+        return numbers;
+    }
+
+    public boolean contains(Number number) {
+        return numbers.contains(number);
+    }
+
+    public int countMatch(Numbers others) {
+        if (others == null) {
+            return NO_MATCH_COUNT;
+        }
+
+        int count = 0;
+
+        for(Number number : numbers) {
+            count += countMatch(number, others);
+        }
+        return count;
+    }
+
+    public int countMatch(Number number, Numbers others) {
+        if (others.contains(number)) {
+            return YES_MATCH_COUNT;
+        }
+        return NO_MATCH_COUNT;
     }
 
     @Override
@@ -42,7 +77,8 @@ public class Numbers {
         return Objects.hash(numbers);
     }
 
-    public List<Number> getNumbers() {
-        return numbers;
+    @Override
+    public String toString() {
+        return Arrays.toString(numbers.toArray());
     }
 }
