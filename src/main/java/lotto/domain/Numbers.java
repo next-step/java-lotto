@@ -23,6 +23,13 @@ public class Numbers {
         return numbers;
     }
 
+    int matchedCount(List<Integer> matchNumbers) {
+        return (int) numbers.stream()
+                .map(Number::getNumber)
+                .filter(matchNumbers::contains)
+                .count();
+    }
+
     private List<Number> generatedRandomNumbers() {
         return generatedNumbers(LottoGenerator.generateSortedNumbers(TOTAL_SIZE_OF_NUMBERS));
     }
