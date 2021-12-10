@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Lottos {
 
-    private static final int LOTTO_PRICE = 1000;
+    private static final Money LOTTO_PRICE = new Money(1000);
     private static final int LOTTO_NUMBERS_COUNT = 6;
 
     private static final List<Integer> lottoNumberSource = new ArrayList<Integer>() {{
@@ -25,7 +25,7 @@ public class Lottos {
 
     public static Lottos buy(Money money) {
         List<Lotto> lottos = new ArrayList<>();
-        int countCanBuy = money.countCanBuy(LOTTO_PRICE);
+        long countCanBuy = money.countCanBuy(LOTTO_PRICE);
 
         for(int i = 0; i < countCanBuy; i++) {
             List<Number> numbers = createLottoNumbers();
@@ -53,8 +53,10 @@ public class Lottos {
 
     public void updateLottoResult(Lotto winnerLotto) {
         for(Lotto lotto : lottos) {
-            lottoResult.update(lotto, winnerLotto);
+            lottoResult.updateMatchCount(lotto, winnerLotto);
         }
+
+        lottoResult.updateProfit(count(), LOTTO_PRICE);
     }
 
     public LottoResult getLottoResult() {

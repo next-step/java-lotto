@@ -11,6 +11,7 @@ public class OutputView {
     private static final String OUTPUT_MESSAGE_4_NUMBERS_MATCH = "4개 일치 (50000원)- %d개\n";
     private static final String OUTPUT_MESSAGE_5_NUMBERS_MATCH = "5개 일치 (1500000원)- %d개\n";
     private static final String OUTPUT_MESSAGE_6_NUMBERS_MATCH = "6개 일치 (2000000000원)- %d개\n";
+    private static final String OUTPUT_MESSAGE_PROFIT_ANNOUNCE = "총 수익률은 %f 입니다. \n";
 
     private static final int THIRD_WIN_COUNT = 3;
     private static final int FOURTH_WIN_COUNT = 4;
@@ -25,11 +26,15 @@ public class OutputView {
         System.out.println(lottos.lottoToString());
     }
 
-    public void showLottoResult(LottoResult lottoResult) {
+    public void showLottoWinResult(LottoResult lottoResult) {
         System.out.println(OUTPUT_MESSAGE_LOTTO_RESULT_ANNOUNCE);
-        System.out.printf(OUTPUT_MESSAGE_3_NUMBERS_MATCH, lottoResult.winnerCount(THIRD_WIN_COUNT));
-        System.out.printf(OUTPUT_MESSAGE_4_NUMBERS_MATCH, lottoResult.winnerCount(FOURTH_WIN_COUNT));
-        System.out.printf(OUTPUT_MESSAGE_5_NUMBERS_MATCH, lottoResult.winnerCount(FIFTH_WIN_COUNT));
-        System.out.printf(OUTPUT_MESSAGE_6_NUMBERS_MATCH, lottoResult.winnerCount(SIXTH_WIN_COUNT));
+        System.out.printf(OUTPUT_MESSAGE_3_NUMBERS_MATCH, lottoResult.askWinnerCount(THIRD_WIN_COUNT));
+        System.out.printf(OUTPUT_MESSAGE_4_NUMBERS_MATCH, lottoResult.askWinnerCount(FOURTH_WIN_COUNT));
+        System.out.printf(OUTPUT_MESSAGE_5_NUMBERS_MATCH, lottoResult.askWinnerCount(FIFTH_WIN_COUNT));
+        System.out.printf(OUTPUT_MESSAGE_6_NUMBERS_MATCH, lottoResult.askWinnerCount(SIXTH_WIN_COUNT));
+    }
+
+    public void showLottoProfit(LottoResult lottoResult) {
+        System.out.printf(OUTPUT_MESSAGE_PROFIT_ANNOUNCE, lottoResult.getProfit());
     }
 }

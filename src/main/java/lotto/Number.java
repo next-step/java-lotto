@@ -7,6 +7,7 @@ public class Number implements Comparable<Number> {
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+");
     private static final String NOT_VALID_NUMBER_INPUT_MESSAGE = "유효한 숫자 입력이 아닙니다.";
+    private static final int ZERO = 0;
 
     private final int number;
 
@@ -24,6 +25,18 @@ public class Number implements Comparable<Number> {
         if (!NUMBER_PATTERN.matcher(number).matches()) {
             throw new IllegalArgumentException(NOT_VALID_NUMBER_INPUT_MESSAGE);
         }
+    }
+
+    public int divide(Number other) {
+        if (other.isZero()) {
+            return 0;
+        }
+
+        return number / other.number;
+    }
+
+    public boolean isZero() {
+        return number == 0;
     }
 
     @Override

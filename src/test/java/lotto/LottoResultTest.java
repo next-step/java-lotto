@@ -8,6 +8,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
+
     @Test
     void get_winnerCount() {
         // given
@@ -20,14 +21,14 @@ public class LottoResultTest {
         LottoResult lottoResult = new LottoResult(winResult);
 
         // expect
-        assertThat(lottoResult.winnerCount(1)).isEqualTo(1);
-        assertThat(lottoResult.winnerCount(2)).isEqualTo(1);
-        assertThat(lottoResult.winnerCount(3)).isEqualTo(5);
-        assertThat(lottoResult.winnerCount(4)).isEqualTo(5);
+        assertThat(lottoResult.askWinnerCount(1)).isEqualTo(1);
+        assertThat(lottoResult.askWinnerCount(2)).isEqualTo(1);
+        assertThat(lottoResult.askWinnerCount(3)).isEqualTo(5);
+        assertThat(lottoResult.askWinnerCount(4)).isEqualTo(5);
     }
 
     @Test
-    void update_lottoResult() {
+    void updateMatchCount() {
         // given
         Map<Integer, Integer> winResult = new HashMap<Integer, Integer>() {{
             put(3, 1);
@@ -38,9 +39,27 @@ public class LottoResultTest {
         LottoResult lottoResult = new LottoResult(winResult);
 
         // when
-        lottoResult.update(lotto1, lotto2);
+        lottoResult.updateMatchCount(lotto1, lotto2);
 
         // then
-        assertThat(lottoResult.winnerCount(3)).isEqualTo(2);
+        assertThat(lottoResult.askWinnerCount(3)).isEqualTo(2);
+    }
+
+    @Test
+    void calculateProfit() {
+        // given
+        int lottoSize = 1;
+        Money lottoPrice = new Money(1000);
+
+        Map<Integer, Integer> matchCount = new HashMap<Integer, Integer>() {{
+            put(3, 1);
+        }};
+        LottoResult lottoResult = new LottoResult(matchCount);
+
+        // when
+        lottoResult.updateProfit(lottoSize, lottoPrice);
+
+        // then
+        assertThat(lottoResult.getProfit()).isEqualTo(5);
     }
 }

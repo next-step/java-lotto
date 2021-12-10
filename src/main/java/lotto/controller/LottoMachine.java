@@ -23,7 +23,7 @@ public class LottoMachine {
         Lotto winnerLotto = new Lotto(lottoWinNumbers);
 
         lottos.updateLottoResult(winnerLotto);
-        outputView.showLottoResult(lottos.getLottoResult());
-
+        outputView.showLottoWinResult(lottos.getLottoResult());
+        outputView.showLottoProfit(lottos.getLottoResult());
     }
 }
