@@ -36,6 +36,6 @@ public class InputView {
     }
 
     private static int readInteger() {
-        return SCANNER.nextInt();
+        return Integer.parseInt(SCANNER.nextLine());
     }
 }
