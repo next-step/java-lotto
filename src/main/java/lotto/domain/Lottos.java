@@ -4,6 +4,7 @@ import lotto.domain.factory.LottoAutoFactory;
 import lotto.domain.lotto.Lotto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
@@ -21,7 +22,7 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        return this.lottos;
+        return Collections.unmodifiableList(this.lottos);
     }
 
     public void addAutoLottos(Number autoCount) {
