@@ -57,8 +57,14 @@ public class LottoTest {
     }
 
     @Test
-    public void 로또_맞힌횟수(){
-        Lotto winLotto = new Lotto("1,2,3,4,45,36");
-        assertThat(lotto.matchCountLottoNumbers(winLotto)).isEqualTo(4);
+    public void 로또_꽝_맞힌_횟수(){
+        PrizeLotto prizeLotto = new PrizeLotto("1,2,34,35,45,36", "7");
+        assertThat(lotto.matchCountLottoNumbers(prizeLotto)).isEqualTo(2);
+    }
+
+    @Test
+    public void 로또_상금_맞힌_횟수(){
+        PrizeLotto prizeLotto = new PrizeLotto("1,2,3,4,45,36", "7");
+        assertThat(lotto.matchCountLottoNumbers(prizeLotto)).isEqualTo(4);
     }
 }
