@@ -28,4 +28,27 @@ public class Lotto {
         return Lotto.SIZE == size;
     }
 
+    public List<LottoNumber> lottoNumbers() {
+        return lottoNumbers;
+    }
+
+    public int matchedCount(Lotto lotto) {
+        return matchedCount(lotto.lottoNumbers());
+    }
+
+    public int matchedCount(List<LottoNumber> numbers) {
+        int count = 0;
+        for (LottoNumber number : numbers) {
+            count = plusMatchedCount(count, number);
+        }
+        return count;
+    }
+
+    private int plusMatchedCount(int count, LottoNumber number) {
+        if (lottoNumbers.contains(number)) {
+            count++;
+        }
+        return count;
+    }
+
 }
