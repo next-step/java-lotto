@@ -3,7 +3,7 @@ package lotto.controller;
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
-import lotto.domain.Numbers;
+import lotto.domain.LottoNumbers;
 
 import java.util.List;
 import java.util.Objects;
@@ -17,7 +17,7 @@ public class LottoGameController {
 
     public LottoResult retrieveStatistics(Lottos lottos, List<Integer> winningLottoNumbers) {
         validateLottosAndWinningLottoNumbers(lottos, winningLottoNumbers);
-        return lottos.lottoResult(new Lotto(new Numbers(winningLottoNumbers)));
+        return lottos.lottoResult(new Lotto(new LottoNumbers(winningLottoNumbers)));
     }
 
     private void validateLottosAndWinningLottoNumbers(Lottos lottos, List<Integer> winningLottoNumbers) {

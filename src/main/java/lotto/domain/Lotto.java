@@ -6,14 +6,14 @@ import java.util.stream.Collectors;
 public class Lotto {
     public static final int PRICE = 1_000;
 
-    private final Numbers numbers;
+    private final LottoNumbers lottoNumbers;
 
     public Lotto() {
-        numbers = new Numbers();
+        lottoNumbers = new LottoNumbers();
     }
 
-    public Lotto(Numbers numbers) {
-        this.numbers = numbers;
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     LottoResultType findLottoResultType(List<Integer> winningNumbers) {
@@ -21,7 +21,7 @@ public class Lotto {
     }
 
     List<Integer> getNumbers() {
-        return this.numbers.getNumbers()
+        return this.lottoNumbers.getNumbers()
                 .stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
@@ -33,7 +33,7 @@ public class Lotto {
     }
 
     private String numbers() {
-        return numbers.getNumbers()
+        return lottoNumbers.getNumbers()
                 .stream()
                 .map(LottoNumber::getNumber)
                 .map(String::valueOf)
@@ -41,6 +41,6 @@ public class Lotto {
     }
 
     private int countMatchedNumbers(List<Integer> winningNumbers) {
-        return this.numbers.matchedCount(winningNumbers);
+        return this.lottoNumbers.matchedCount(winningNumbers);
     }
 }

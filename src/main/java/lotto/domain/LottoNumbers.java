@@ -5,16 +5,16 @@ import lotto.util.LottoGenerator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Numbers {
+public class LottoNumbers {
     static final int TOTAL_SIZE_OF_NUMBERS = 6;
 
     private final List<LottoNumber> numbers;
 
-    Numbers() {
+    LottoNumbers() {
         this.numbers = generatedRandomNumbers();
     }
 
-    public Numbers(List<Integer> numbers) {
+    public LottoNumbers(List<Integer> numbers) {
         validate(numbers);
         this.numbers = generatedNumbers(numbers);
     }
