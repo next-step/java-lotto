@@ -51,7 +51,7 @@ class LottoResultTest {
     @DisplayName("`LottoResult`의 통계 타입별 결과 갯수 반환")
     @ParameterizedTest
     @EnumSource(LottoResultType.class)
-    void countByType(LottoResultType type) {
+    void countByTypeTest(LottoResultType type) {
         // when & then
         assertThat(lottoResult.countByType(type)).isNotNegative();
     }
