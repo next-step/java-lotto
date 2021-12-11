@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.Lottos;
 import lotto.domain.Number;
+import lotto.domain.Price;
 import lotto.domain.factory.LottoFactory;
 import lotto.domain.lotto.Lotto;
 import lotto.view.InputInfo;
@@ -13,7 +14,7 @@ import java.util.List;
 public class Lottery {
 
     public void draw() {
-        Number price = Number.of(InputView.questionPrice());
+        Price price = Price.of(InputView.questionPrice());
         Number manualCount = Number.of(InputView.questionManualCount());
 
         // 입력 정보

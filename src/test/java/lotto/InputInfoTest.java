@@ -1,7 +1,8 @@
 package lotto;
 
 import lotto.domain.Number;
-import lotto.exception.LottoNumberException;
+import lotto.domain.Price;
+import lotto.exception.InputValueException;
 import lotto.view.InputInfo;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,7 @@ public class InputInfoTest {
 
     @Test
     void 수동3개_자동3개() {
-        Number price = Number.of("15000");
+        Price price = Price.of("15000");
         Number manualCount = Number.of("10");
         Number autoCount = Number.of("5");
         InputInfo inputInfo = new InputInfo(price, manualCount);
@@ -20,14 +21,14 @@ public class InputInfoTest {
 
     @Test
     void 구매오류() {
-        Number price = Number.of("500");
+        Price price = Price.of("500");
         Number manualCount = Number.of("10");
-        Assertions.assertThatThrownBy(() -> new InputInfo(price, manualCount)).isInstanceOf(LottoNumberException.class);
+        Assertions.assertThatThrownBy(() -> new InputInfo(price, manualCount)).isInstanceOf(InputValueException.class);
     }
 
     @Test
     void 수동만_구매() {
-        Number price = Number.of("2000");
+        Price price = Price.of("2000");
         Number manualCount = Number.of("2");
         InputInfo inputInfo = new InputInfo(price, manualCount);
         Assertions.assertThat(inputInfo.getManualCount().getNumber()).isEqualTo(2);
