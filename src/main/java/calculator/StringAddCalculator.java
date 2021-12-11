@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 public class StringAddCalculator {
 
+    private StringAddCalculator() {}
+
     private static final int INIT_NUMBER = 0;
     private static Tokenization tokenization = new Tokenization();
 
