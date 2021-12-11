@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumbers {
+public class AutoLottoNumbers {
 
     private static final String ERR_MESSAGE_RANGE = "로또 숫자 범위를 확인해주세요 (입력범위 1 ~ 45)";
     private static final int END_NUMBER = 45;
@@ -30,7 +30,7 @@ public class LottoNumbers {
     }
 
     public static void valid(List<Integer> defaultNumbers) {
-        defaultNumbers.forEach(LottoNumbers::valid);
+        defaultNumbers.forEach(AutoLottoNumbers::valid);
     }
 
     private static void valid(int number) {

@@ -32,12 +32,12 @@ public class LottoTest {
 
     @Test
     void 로또_숫자변환_오류() {
-        Assertions.assertThatThrownBy(() -> LottoAnswer.transFormNumberList("숫자아닌값")).isInstanceOf(LottoNumberException.class);
+        Assertions.assertThatThrownBy(() -> LottoAnswer.transformNumbers("숫자아닌값")).isInstanceOf(LottoNumberException.class);
     }
 
     @Test
     void 로또_개수_오류() {
-        Assertions.assertThatThrownBy(() -> LottoAnswer.transFormNumberList("1,2")).isInstanceOf(LottoNumberException.class);
+        Assertions.assertThatThrownBy(() -> LottoAnswer.transformNumbers("1,2")).isInstanceOf(LottoNumberException.class);
     }
 
     @Test

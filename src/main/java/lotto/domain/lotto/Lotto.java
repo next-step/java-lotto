@@ -1,6 +1,6 @@
 package lotto.domain.lotto;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.AutoLottoNumbers;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,11 +11,11 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto() {
-        numbers = LottoNumbers.autoNumbers();
+        numbers = AutoLottoNumbers.autoNumbers();
     }
 
     public Lotto(List<Integer> answer) {
-        LottoNumbers.valid(answer);
+        AutoLottoNumbers.valid(answer);
         numbers = new ArrayList<>(answer);
     }
 

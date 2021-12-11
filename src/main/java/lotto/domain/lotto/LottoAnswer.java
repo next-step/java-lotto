@@ -1,6 +1,6 @@
 package lotto.domain.lotto;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.AutoLottoNumbers;
 import lotto.exception.LottoNumberException;
 
 import java.util.Arrays;
@@ -16,7 +16,7 @@ public class LottoAnswer extends Lotto {
     private static final String ANSWER_EMPTY = "";
 
     public LottoAnswer(String answer) {
-        super(transFormNumberList(answer));
+        super(transformNumbers(answer));
     }
 
     @Override
@@ -24,7 +24,7 @@ public class LottoAnswer extends Lotto {
         return super.matchCount(lotto);
     }
 
-    public static List<Integer> transFormNumberList(String answer) {
+    public static List<Integer> transformNumbers(String answer) {
         List<Integer> answers;
         try {
             String answerLump = answer.replace(ANSWER_BLANK, ANSWER_EMPTY);
@@ -39,7 +39,7 @@ public class LottoAnswer extends Lotto {
     }
 
     private static void valid(List<Integer> answer) {
-        if (answer.size() != LottoNumbers.MARKED_RANGE) {
+        if (answer.size() != AutoLottoNumbers.MARKED_RANGE) {
             throw new LottoNumberException(ERR_MESSAGE_LOTTO_SIZE);
         }
     }
