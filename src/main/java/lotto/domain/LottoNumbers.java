@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.util.LottoGenerator;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
@@ -19,15 +20,28 @@ public class LottoNumbers {
         this.numbers = generatedNumbers(numbers);
     }
 
-    List<LottoNumber> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return numbers;
     }
 
-    int matchedCount(List<Integer> matchNumbers) {
+    public int matchedCount(List<Integer> matchNumbers) {
         return (int) numbers.stream()
                 .map(LottoNumber::getNumber)
                 .filter(matchNumbers::contains)
                 .count();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumbers that = (LottoNumbers) o;
+        return Objects.equals(numbers, that.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 
     private List<LottoNumber> generatedRandomNumbers() {
