@@ -31,17 +31,36 @@ public class LottosTest {
     }
 
     @Test
-    public void 자동로또번호(){
+    public void 상금_자동_로또번호(){
         List<Lotto> lottoGroup = new ArrayList<>();
         lottoGroup.add(new Lotto("1,2,3,4,5,6"));
         lottoGroup.add(new Lotto("1,2,3,4,5,16"));
+        lottoGroup.add(new Lotto("1,2,3,4,5,7"));
         Lottos lottos = new Lottos(lottoGroup);
         List<LottoResult> lottoResults = Arrays.asList(new LottoResult[]{
-                new LottoResult(Rank.valueOf(3), 0)
-                , new LottoResult(Rank.valueOf(4), 0)
-                , new LottoResult(Rank.valueOf(5), 1)
-                , new LottoResult(Rank.valueOf(6), 1)
+                new LottoResult(Rank.valueOf(3, false), 0)
+                , new LottoResult(Rank.valueOf(4, false), 0)
+                , new LottoResult(Rank.valueOf(5, false), 1)
+                , new LottoResult(Rank.valueOf(5, true), 1)
+                , new LottoResult(Rank.valueOf(6, false), 1)
         });
-        assertThat(lottos.getResult(new Lotto("1,2,3,4,5,6"))).isEqualTo(lottoResults);
+        assertThat(lottos.getResult(new PrizeLotto("1,2,3,4,5,6", "7"))).isEqualTo(lottoResults);
+    }
+
+    @Test
+    public void 꽝_자동_로또번호(){
+        List<Lotto> lottoGroup = new ArrayList<>();
+        lottoGroup.add(new Lotto("31,32,33,34,35,36"));
+        lottoGroup.add(new Lotto("1,32,33,34,35,36"));
+        lottoGroup.add(new Lotto("1,2,33,34,35,37"));
+        Lottos lottos = new Lottos(lottoGroup);
+        List<LottoResult> lottoResults = Arrays.asList(new LottoResult[]{
+                new LottoResult(Rank.valueOf(3, false), 0)
+                , new LottoResult(Rank.valueOf(4, false), 0)
+                , new LottoResult(Rank.valueOf(5, false), 0)
+                , new LottoResult(Rank.valueOf(5, true), 0)
+                , new LottoResult(Rank.valueOf(6, false), 0)
+        });
+        assertThat(lottos.getResult(new PrizeLotto("1,2,3,4,5,6", "7"))).isEqualTo(lottoResults);
     }
 }

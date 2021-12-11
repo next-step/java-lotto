@@ -14,10 +14,11 @@ public class CalculatorTest {
     @BeforeEach
     void setUp(){
         lottoResults = new ArrayList<>();
-        lottoResults.add(new LottoResult(Rank.valueOf(3), 1));
-        lottoResults.add(new LottoResult(Rank.valueOf(4), 0));
-        lottoResults.add(new LottoResult(Rank.valueOf(5), 0));
-        lottoResults.add(new LottoResult(Rank.valueOf(6), 0));
+        lottoResults.add(new LottoResult(Rank.valueOf(3, false), 1));
+        lottoResults.add(new LottoResult(Rank.valueOf(4, false), 0));
+        lottoResults.add(new LottoResult(Rank.valueOf(5, false), 0));
+        lottoResults.add(new LottoResult(Rank.valueOf(5, true), 0));
+        lottoResults.add(new LottoResult(Rank.valueOf(6, false), 0));
     }
 
     @Test
