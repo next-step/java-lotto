@@ -30,6 +30,14 @@ public class Lottos {
         }
     }
 
+    public LottoResult result(List<LottoNumber> winningNumbers) {
+        return result(new Lotto(winningNumbers));
+    }
+
+    public LottoResult result(Lotto winningNumbers) {
+        return new LottoResult(this, winningNumbers);
+    }
+
     public List<Lotto> lottos() {
         return lottos;
     }

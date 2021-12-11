@@ -7,6 +7,10 @@ public class LottoNumber {
     public static final int MAX = 45;
     private final int value;
 
+    public LottoNumber(String number) {
+        this(Integer.parseInt(number));
+    }
+
     public LottoNumber(int number) {
         validate(number);
         this.value = number;
