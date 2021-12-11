@@ -4,18 +4,19 @@ import java.util.Arrays;
 
 public class StringAddCalculator {
 
+    private static final int INIT_NUMBER = 0;
     private static Tokenization tokenization = new Tokenization();
 
     public static int splitAndSum(String expression) {
         if (expression == null || expression.isEmpty()) {
-            return 0;
+            return INIT_NUMBER;
         }
         String[] numbers = tokenization.splitedExpression(expression);
 
         Validate validate = new Validate();
         validate.validate(numbers);
 
-        return (sum(numbers));
+        return sum(numbers);
     }
 
     private static int sum(String[] numbers) {
