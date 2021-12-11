@@ -23,7 +23,7 @@ public class Lotto {
     List<Integer> getNumbers() {
         return this.numbers.getNumbers()
                 .stream()
-                .map(Number::getNumber)
+                .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
     }
 
@@ -35,7 +35,7 @@ public class Lotto {
     private String numbers() {
         return numbers.getNumbers()
                 .stream()
-                .map(Number::getNumber)
+                .map(LottoNumber::getNumber)
                 .map(String::valueOf)
                 .collect(Collectors.joining(", "));
     }

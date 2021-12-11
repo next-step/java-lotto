@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class Numbers {
     static final int TOTAL_SIZE_OF_NUMBERS = 6;
 
-    private final List<Number> numbers;
+    private final List<LottoNumber> numbers;
 
     Numbers() {
         this.numbers = generatedRandomNumbers();
@@ -19,24 +19,24 @@ public class Numbers {
         this.numbers = generatedNumbers(numbers);
     }
 
-    List<Number> getNumbers() {
+    List<LottoNumber> getNumbers() {
         return numbers;
     }
 
     int matchedCount(List<Integer> matchNumbers) {
         return (int) numbers.stream()
-                .map(Number::getNumber)
+                .map(LottoNumber::getNumber)
                 .filter(matchNumbers::contains)
                 .count();
     }
 
-    private List<Number> generatedRandomNumbers() {
+    private List<LottoNumber> generatedRandomNumbers() {
         return generatedNumbers(LottoGenerator.generateSortedNumbers(TOTAL_SIZE_OF_NUMBERS));
     }
 
-    private List<Number> generatedNumbers(List<Integer> numbers) {
+    private List<LottoNumber> generatedNumbers(List<Integer> numbers) {
         return numbers.stream()
-                .map(Number::new)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 

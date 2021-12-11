@@ -2,13 +2,13 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class Number {
+public class LottoNumber {
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
 
     private final int number;
 
-    Number(int number) {
+    LottoNumber(int number) {
         validate(number);
         this.number = number;
     }
@@ -21,8 +21,8 @@ public class Number {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Number number1 = (Number) o;
-        return number == number1.number;
+        LottoNumber lottoNumber1 = (LottoNumber) o;
+        return number == lottoNumber1.number;
     }
 
     @Override
