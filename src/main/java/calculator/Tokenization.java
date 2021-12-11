@@ -10,7 +10,7 @@ public class Tokenization {
     private static final int DELIMITER_GROUP_NUMBER = 1;
     private static final int EXPRESSION_GROUP_NUMBER = 2;
 
-    public String[] splitedExpression(String expression) {
+    public String[] splitExpression(String expression) {
         Matcher matcher = Pattern.compile(REG_EXP).matcher(expression);
         String delimiter = TOKEN_DELIMITER;
 

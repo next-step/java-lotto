@@ -11,7 +11,7 @@ public class StringAddCalculator {
         if (expression == null || expression.isEmpty()) {
             return INIT_NUMBER;
         }
-        String[] numbers = tokenization.splitedExpression(expression);
+        String[] numbers = tokenization.splitExpression(expression);
 
         Validate validate = new Validate();
         validate.validate(numbers);
