@@ -45,4 +45,8 @@ public class Lottos {
     public int numberOfLotto() {
         return lottos.size();
     }
+
+    public int amountOfLottos() {
+        return Lotto.PRICE * lottos.size();
+    }
 }

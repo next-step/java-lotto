@@ -25,7 +25,15 @@ public abstract class ResultView {
         System.out.println("당첨통계");
         System.out.println("---------");
         for (Rank rank : Rank.values()) {
-            System.out.printf("%d개 일치 (%d원) - %d개\n", rank.matchedCount(), rank.winningCount(), lottoResult.numberOfLotto(rank.matchedCount()));
+            System.out.printf("%d개 일치 (%d원) - %d개\n", rank.matchedCount(), rank.winningAmount(), lottoResult.numberOfLotto(rank.matchedCount()));
+        }
+    }
+
+    public static void printProfitRate(LottoResult lottoResult) {
+        double profitRate = lottoResult.profitRate();
+        System.out.printf("총 수익률은 %.2f입니다.", profitRate);
+        if (profitRate < 1) {
+            System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
     }
 

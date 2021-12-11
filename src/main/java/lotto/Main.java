@@ -19,7 +19,7 @@ public class Main {
 
         LottoResult result = lottos.result(getWinningNumbers(inputView));
         ResultView.printLottoResult(result);
-
+        ResultView.printProfitRate(result);
 
         inputView.close();
     }
