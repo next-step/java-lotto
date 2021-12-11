@@ -16,28 +16,15 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    LottoResultType findLottoResultType(List<Integer> winningNumbers) {
+    public LottoResultType findLottoResultType(List<Integer> winningNumbers) {
         return LottoResultType.findByMatchedCount(countMatchedNumbers(winningNumbers));
     }
 
-    List<Integer> getNumbers() {
+    public List<Integer> getNumbers() {
         return this.lottoNumbers.getNumbers()
                 .stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public String toString() {
-        return String.format("[%s]", numbers());
-    }
-
-    private String numbers() {
-        return lottoNumbers.getNumbers()
-                .stream()
-                .map(LottoNumber::getNumber)
-                .map(String::valueOf)
-                .collect(Collectors.joining(", "));
     }
 
     private int countMatchedNumbers(List<Integer> winningNumbers) {

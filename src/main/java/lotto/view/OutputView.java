@@ -1,8 +1,11 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoResultType;
 import lotto.domain.Lottos;
+
+import java.util.stream.Collectors;
 
 public class OutputView {
     private static final String LOTTO_SIZE_MESSAGE = "%d개를 구매했습니다.\n";
@@ -31,8 +34,15 @@ public class OutputView {
 
     private static void printNumbersForLottos(Lottos lottos) {
         lottos.getLottos()
-                .forEach(lotto -> System.out.println(lotto.toString()));
+                .forEach(lotto -> System.out.println(formattedLottoNmbers(lotto)));
         System.out.println();
+    }
+
+    private static String formattedLottoNmbers(Lotto lotto) {
+        return String.format("[%s]", lotto.getNumbers()
+                .stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(", ")));
     }
 
     private static void printStatisticsForLotto(LottoResult lottoResult) {
