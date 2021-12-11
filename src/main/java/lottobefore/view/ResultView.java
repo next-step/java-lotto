@@ -1,8 +1,8 @@
-package lotto.view;
+package lottobefore.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoStatistics;
-import lotto.domain.Person;
+import lottobefore.domain.Lotto;
+import lottobefore.domain.LottoStatistics;
+import lottobefore.domain.Person;
 
 
 public class ResultView {

@@ -1,10 +1,10 @@
-package lotto;
+package lottobefore;
 
-import lotto.domain.LottoStatistics;
-import lotto.domain.Person;
-import lotto.domain.Store;
-import lotto.view.InputView;
-import lotto.view.ResultView;
+import lottobefore.domain.LottoStatistics;
+import lottobefore.domain.Person;
+import lottobefore.domain.Store;
+import lottobefore.view.InputView;
+import lottobefore.view.ResultView;
 
 import java.util.Arrays;
 import java.util.List;
