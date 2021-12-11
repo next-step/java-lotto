@@ -5,10 +5,14 @@ public class Money {
     private static final int DEFAULT_BUY_COUNT = 0;
     private static final int DEFAULT_MONEY = 0;
 
-    private final long money;
+    private long money;
 
     public Money(long money) {
         this.money = money;
+    }
+
+    public Money() {
+        this.money = DEFAULT_MONEY;
     }
 
     public long getMoney() {
@@ -31,11 +35,19 @@ public class Money {
         return new Money(times * money);
     }
 
-    public double calculateProfit(long compareMoney) {
-        if (compareMoney == 0) {
-            return 0;
+    public void add(long otherMoney) {
+        money = money + otherMoney;
+    }
+
+    public double divide(Money base) {
+        if (base.isZero()) {
+            return DEFAULT_MONEY;
         }
 
-        return (double) compareMoney / money;
+        return (double) money / base.money;
+    }
+
+    public double calculateProfit(Money compareMoney) {
+        return divide(compareMoney);
     }
 }
