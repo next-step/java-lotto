@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.domain.Lottos;
 import lotto.domain.Number;
-import lotto.domain.factory.LottoAnswerFactory;
+import lotto.domain.factory.LottoFactory;
 import lotto.domain.lotto.Lotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,15 +15,13 @@ public class LottosTest {
 
     static List<Lotto> manualLottos;
     static Lottos lottos;
-    static LottoAnswerFactory factory;
 
     @BeforeAll
     static void 사전_로또_번호_생성() {
         manualLottos = new ArrayList<>();
-        factory = new LottoAnswerFactory();
 
-        manualLottos.add(factory.newInstance("1,2,3,4,5,6"));
-        manualLottos.add(factory.newInstance("11,12,13,14,15,16"));
+        manualLottos.add(LottoFactory.newInstance("1,2,3,4,5,6"));
+        manualLottos.add(LottoFactory.newInstance("11,12,13,14,15,16"));
 
         lottos = new Lottos(manualLottos);
     }

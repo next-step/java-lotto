@@ -2,7 +2,7 @@ package lotto.controller;
 
 import lotto.domain.Lottos;
 import lotto.domain.Number;
-import lotto.domain.factory.LottoAnswerFactory;
+import lotto.domain.factory.LottoFactory;
 import lotto.domain.lotto.Lotto;
 import lotto.view.InputInfo;
 import lotto.view.InputView;
@@ -37,9 +37,8 @@ public class Lottery {
     }
 
     private List<Lotto> getLottos(List<String> inputManualLottos) {
-        LottoAnswerFactory factory = new LottoAnswerFactory();
         List<Lotto> manualLottos = inputManualLottos.stream()
-                .map(factory::newInstance)
+                .map(LottoFactory::newInstance)
                 .collect(Collectors.toList());
         return manualLottos;
     }
@@ -48,8 +47,7 @@ public class Lottery {
         String answerText = InputView.questionAnswer();
         String bonusBall = InputView.questionBonus();
         Number bonus = Number.of(bonusBall);
-        LottoAnswerFactory factory = new LottoAnswerFactory();
-        Lotto answer = factory.newInstance(answerText);
+        Lotto answer = LottoFactory.newInstance(answerText);
         ResultView resultView = new ResultView(lottos, answer, bonus);
         resultView.printResult();
     }

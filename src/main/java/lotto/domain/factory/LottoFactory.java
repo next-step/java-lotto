@@ -3,10 +3,14 @@ package lotto.domain.factory;
 import lotto.domain.lotto.LottoAnswer;
 import lotto.domain.lotto.LottoAuto;
 
-public interface LottoFactory {
+public class LottoFactory {
 
-    LottoAuto newInstance();
+    public static LottoAuto newInstance() {
+        return new LottoAuto();
+    }
 
-    LottoAnswer newInstance(String numbers);
+    public static LottoAnswer newInstance(String numbers) {
+        return new LottoAnswer(numbers);
+    }
 
 }

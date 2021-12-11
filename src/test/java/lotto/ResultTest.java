@@ -4,7 +4,7 @@ import lotto.domain.Lottos;
 import lotto.domain.Number;
 import lotto.domain.Rank;
 import lotto.domain.Result;
-import lotto.domain.factory.LottoAnswerFactory;
+import lotto.domain.factory.LottoFactory;
 import lotto.domain.lotto.Lotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -19,18 +19,16 @@ public class ResultTest {
 
     static List<Lotto> sampleLottos;
     static Lottos lottos;
-    static LottoAnswerFactory factory;
 
     @BeforeAll
     static void 사전_로또_번호_생성() {
         sampleLottos = new ArrayList<>();
-        factory = new LottoAnswerFactory();
 
-        sampleLottos.add(factory.newInstance("1,2,3,4,5,6"));
-        sampleLottos.add(factory.newInstance("11,12,13,14,15,16"));
-        sampleLottos.add(factory.newInstance("21,22,23,24,25,26"));
-        sampleLottos.add(factory.newInstance("31,32,33,34,35,36"));
-        sampleLottos.add(factory.newInstance("40,41,42,43,44,45"));
+        sampleLottos.add(LottoFactory.newInstance("1,2,3,4,5,6"));
+        sampleLottos.add(LottoFactory.newInstance("11,12,13,14,15,16"));
+        sampleLottos.add(LottoFactory.newInstance("21,22,23,24,25,26"));
+        sampleLottos.add(LottoFactory.newInstance("31,32,33,34,35,36"));
+        sampleLottos.add(LottoFactory.newInstance("40,41,42,43,44,45"));
 
         lottos = new Lottos(sampleLottos);
     }
@@ -38,7 +36,7 @@ public class ResultTest {
 
     @Test
     void 당첨결과_테스트() {
-        Result result = new Result(lottos, factory.newInstance("1,2,3,7,8,9"), Number.of(10));
+        Result result = new Result(lottos, LottoFactory.newInstance("1,2,3,7,8,9"), Number.of(10));
         Map<Rank, Integer> sampleResult = new HashMap<>();
 
         sampleResult.put(Rank.MISS, 0);
@@ -56,7 +54,7 @@ public class ResultTest {
 
     @Test
     void 당첨결과_2등_테스트() {
-        Result result = new Result(lottos, factory.newInstance("1,2,3,4,5,9"), Number.of(6));
+        Result result = new Result(lottos, LottoFactory.newInstance("1,2,3,4,5,9"), Number.of(6));
         Map<Rank, Integer> sampleResult = new HashMap<>();
 
         sampleResult.put(Rank.MISS, 0);
