@@ -19,7 +19,8 @@ public class LottoTest {
 
     @Test
     void 로또_숫자_범위_검사() {
-        Assertions.assertThatThrownBy(() -> LottoFactory.newInstance("1, 2, 3, 4, 5, 99")).isInstanceOf(LottoNumberException.class);
+        Assertions.assertThatThrownBy(() -> LottoFactory.newInstance("0, 1, 2, 3, 4, 5")).isInstanceOf(LottoNumberException.class);
+        Assertions.assertThatThrownBy(() -> LottoFactory.newInstance("1, 2, 3, 4, 5, 46")).isInstanceOf(LottoNumberException.class);
     }
 
     @Test
@@ -44,6 +45,6 @@ public class LottoTest {
     void 로또_불변성_테스트() {
         Lotto lotto = LottoFactory.newInstance();
         List<Integer> numbers = lotto.getNumbers();
-        Assertions.assertThatThrownBy(() -> numbers.add(99)).isInstanceOf(UnsupportedOperationException.class);
+        Assertions.assertThatThrownBy(() -> numbers.add(1)).isInstanceOf(UnsupportedOperationException.class);
     }
 }
