@@ -1,19 +1,36 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
     public static final int MIN = 1;
     public static final int MAX = 45;
+    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
     private final int value;
 
-    public LottoNumber(String number) {
-        this(Integer.parseInt(number));
+    static {
+        for (int i = MIN; i <= MAX; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
+        }
     }
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         validate(number);
         this.value = number;
+    }
+
+    public static LottoNumber of(String number) {
+        return of(Integer.parseInt(number));
+    }
+
+    public static LottoNumber of(int number) {
+        if (lottoNumbers.containsKey(number)) {
+            return lottoNumbers.get(number);
+        }
+
+        return new LottoNumber(number);
     }
 
     private void validate(int number) {

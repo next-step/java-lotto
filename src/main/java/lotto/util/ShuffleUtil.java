@@ -21,7 +21,7 @@ public abstract class ShuffleUtil {
         List<Integer> numbers = sortedNumbers(shuffledNumbers(min, max), size);
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
+            lottoNumbers.add(LottoNumber.of(number));
         }
 
         return lottoNumbers;

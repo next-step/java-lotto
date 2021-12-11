@@ -31,7 +31,7 @@ public class Main {
     public static List<LottoNumber> getWinningNumbers(InputView inputView) {
         String[] numbers = inputView.nextLine("지난 주 당첨 번호를 입력해 주세요.").replace(" ", "").split(",");
         return Arrays.stream(numbers)
-                .map(s -> new LottoNumber(s))
+                .map(s -> LottoNumber.of(s))
                 .collect(Collectors.toList());
     }
 }
