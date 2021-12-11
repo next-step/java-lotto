@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -7,6 +8,7 @@ public class Tokenization {
 
     private static final String TOKEN_DELIMITER = ",|:";
     private static final String REG_EXP = "//(.)\n(.*)";
+
     private static final int DELIMITER_GROUP_NUMBER = 1;
     private static final int EXPRESSION_GROUP_NUMBER = 2;
 
@@ -21,5 +23,4 @@ public class Tokenization {
 
         return expression.split(delimiter);
     }
-
 }
