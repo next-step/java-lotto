@@ -33,7 +33,8 @@ public class LottosTest {
 
     @Test
     void 로또_수동_자동_합치기() {
-        lottos.addAutoLottos(Number.of("2"));
+        List<Lotto> autoLottos = LottoFactory.autoLottos(Number.of("2"));
+        lottos.addLottos(autoLottos);
         Assertions.assertThat(lottos.getLottos().size()).isEqualTo(4);
     }
 }

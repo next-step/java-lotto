@@ -1,9 +1,7 @@
 package lotto.domain;
 
-import lotto.domain.factory.LottoFactory;
 import lotto.domain.lotto.Lotto;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,10 +11,6 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos() {
-        lottos = new ArrayList<>();
-    }
-
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
@@ -25,9 +19,7 @@ public class Lottos {
         return Collections.unmodifiableList(this.lottos);
     }
 
-    public void addAutoLottos(Number autoCount) {
-        for (int i = 0; i < autoCount.getNumber(); i++) {
-            lottos.add(LottoFactory.newInstance());
-        }
+    public void addLottos(List<Lotto> lottos) {
+        this.lottos.addAll(lottos);
     }
 }

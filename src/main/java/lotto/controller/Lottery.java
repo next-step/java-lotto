@@ -9,7 +9,6 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lottery {
 
@@ -22,11 +21,12 @@ public class Lottery {
         List<String> inputManualLottos = InputView.questionManualInput(inputInfo.getManualCount());
 
         // 수동 로또 생성
-        List<Lotto> manualLottos = getLottos(inputManualLottos);
+        List<Lotto> manualLottos = LottoFactory.manualLottos(inputManualLottos);
         Lottos lottos = new Lottos(manualLottos);
 
         // 자동 로또 추가
-        lottos.addAutoLottos(inputInfo.getAutoCount());
+        List<Lotto> autoLottos = LottoFactory.autoLottos(inputInfo.getAutoCount());
+        lottos.addLottos(autoLottos);
 
         // 입력 정보 받기
         inputInfo.printInfo();
@@ -36,12 +36,7 @@ public class Lottery {
         winner(lottos);
     }
 
-    private List<Lotto> getLottos(List<String> inputManualLottos) {
-        List<Lotto> manualLottos = inputManualLottos.stream()
-                .map(LottoFactory::newInstance)
-                .collect(Collectors.toList());
-        return manualLottos;
-    }
+
 
     private void winner(Lottos lottos) {
         String answerText = InputView.questionAnswer();
