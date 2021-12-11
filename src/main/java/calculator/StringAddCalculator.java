@@ -4,13 +4,13 @@ import java.util.Arrays;
 
 public class StringAddCalculator {
 
+    private static Tokenization tokenization = new Tokenization();
+
     public static int splitAndSum(String expression) {
         if (expression == null || expression.isEmpty()) {
             return 0;
         }
-
-        Tokenization tokenization = new Tokenization(expression);
-        String[] numbers = tokenization.splitedExpression();
+        String[] numbers = tokenization.splitedExpression(expression);
 
         Validate validate = new Validate();
         validate.validate(numbers);
