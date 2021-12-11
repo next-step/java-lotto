@@ -1,7 +1,7 @@
 package lotto;
 
+import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
-import lotto.domain.Number;
 import lotto.domain.Rank;
 import lotto.domain.Result;
 import lotto.domain.factory.LottoFactory;
@@ -36,7 +36,7 @@ public class ResultTest {
 
     @Test
     void 당첨결과_테스트() {
-        Result result = new Result(lottos, LottoFactory.newInstance("1,2,3,7,8,9"), Number.of(10));
+        Result result = new Result(lottos, LottoFactory.newInstance("1,2,3,7,8,9"), LottoCount.of(10));
         Map<Rank, Integer> sampleResult = new HashMap<>();
 
         sampleResult.put(Rank.MISS, 0);
@@ -54,7 +54,7 @@ public class ResultTest {
 
     @Test
     void 당첨결과_2등_테스트() {
-        Result result = new Result(lottos, LottoFactory.newInstance("1,2,3,4,5,9"), Number.of(6));
+        Result result = new Result(lottos, LottoFactory.newInstance("1,2,3,4,5,9"), LottoCount.of(6));
         Map<Rank, Integer> sampleResult = new HashMap<>();
 
         sampleResult.put(Rank.MISS, 0);

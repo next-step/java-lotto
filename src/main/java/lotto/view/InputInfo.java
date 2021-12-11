@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Number;
+import lotto.domain.LottoCount;
 import lotto.domain.Price;
 
 
@@ -8,23 +8,23 @@ public class InputInfo {
 
     private static final String MESSAGE_LOTTO_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 
-    private final Number manualCount;
-    private final Number autoCount;
+    private final LottoCount manualCount;
+    private final LottoCount autoCount;
 
-    public InputInfo(Price price, Number manualCount) {
-        this.autoCount = price.calculatorLotto(manualCount);
+    public InputInfo(Price price, LottoCount manualCount) {
+        this.autoCount = price.calculatorLottoCount(manualCount);
         this.manualCount = manualCount;
     }
 
     public void printInfo() {
-        System.out.println(String.format(MESSAGE_LOTTO_COUNT, manualCount.getNumber(), autoCount.getNumber()));
+        System.out.println(String.format(MESSAGE_LOTTO_COUNT, manualCount.getCount(), autoCount.getCount()));
     }
 
-    public Number getManualCount() {
+    public LottoCount getManualCount() {
         return manualCount;
     }
 
-    public Number getAutoCount() {
+    public LottoCount getAutoCount() {
         return autoCount;
     }
 }

@@ -1,7 +1,7 @@
 package lotto.controller;
 
+import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
-import lotto.domain.Number;
 import lotto.domain.Price;
 import lotto.domain.factory.LottoFactory;
 import lotto.domain.lotto.Lotto;
@@ -15,7 +15,7 @@ public class Lottery {
 
     public void draw() {
         Price price = Price.of(InputView.questionPrice());
-        Number manualCount = Number.of(InputView.questionManualCount());
+        LottoCount manualCount = LottoCount.of(InputView.questionManualCount());
 
         // 입력 정보
         InputInfo inputInfo = new InputInfo(price, manualCount);
@@ -42,7 +42,7 @@ public class Lottery {
     private void winner(Lottos lottos) {
         String answerText = InputView.questionAnswer();
         String bonusBall = InputView.questionBonus();
-        Number bonus = Number.of(bonusBall);
+        LottoCount bonus = LottoCount.of(bonusBall);
         Lotto answer = LottoFactory.newInstance(answerText);
         ResultView resultView = new ResultView(lottos, answer, bonus);
         resultView.printResult();

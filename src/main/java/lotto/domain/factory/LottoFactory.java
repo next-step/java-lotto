@@ -1,6 +1,6 @@
 package lotto.domain.factory;
 
-import lotto.domain.Number;
+import lotto.domain.LottoCount;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoAnswer;
 import lotto.domain.lotto.LottoAuto;
@@ -19,9 +19,9 @@ public class LottoFactory {
         return new LottoAnswer(numbers);
     }
 
-    public static List<Lotto> autoLottos(Number autoCount) {
+    public static List<Lotto> autoLottos(LottoCount autoCount) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < autoCount.getNumber(); i++) {
+        for (int i = 0; i < autoCount.getCount(); i++) {
             lottos.add(newInstance());
         }
         return lottos;

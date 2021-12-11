@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Number;
+import lotto.domain.LottoCount;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +37,10 @@ public class InputView {
         return getInputValue();
     }
 
-    public static List<String> questionManualInput(Number count) {
+    public static List<String> questionManualInput(LottoCount count) {
         System.out.println(INSERT_MANUAL_INPUT);
         List<String> manualList = new ArrayList<>();
-        for (int i = 0; i < count.getNumber(); i++) {
+        for (int i = 0; i < count.getCount(); i++) {
             manualList.add(getInputValue());
         }
         return manualList;

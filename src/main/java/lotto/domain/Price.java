@@ -22,10 +22,10 @@ public class Price {
         return new Price(price);
     }
 
-    public Number calculatorLotto(Number lottoCount) {
-        int autoCount = (int) ( price / LOTTO_PRICE) - lottoCount.getNumber();
+    public LottoCount calculatorLottoCount(LottoCount lottoCount) {
+        int autoCount = (int) ( price / LOTTO_PRICE) - lottoCount.getCount();
         if (autoCount >= ZERO_LOTTO) {
-            return Number.of(autoCount);
+            return LottoCount.of(autoCount);
         }
         throw new InputValueException(MESSAGE_ERR_PRICE);
     }

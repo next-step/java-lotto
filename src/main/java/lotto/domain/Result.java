@@ -10,7 +10,7 @@ public class Result {
     private final Map<Rank, Integer> resultInfo;
     private double rateOfReturn;
 
-    public Result(Lottos lottos, Lotto answer, Number bonus) {
+    public Result(Lottos lottos, Lotto answer, LottoCount bonus) {
         resultInfo = new HashMap<>();
         init();
         calculateResult(lottos, answer, bonus);
@@ -22,11 +22,11 @@ public class Result {
         }
     }
 
-    public void calculateResult(Lottos lottos, Lotto answer, Number bonus) {
+    public void calculateResult(Lottos lottos, Lotto answer, LottoCount bonus) {
         double revenue = 0;
         for (Lotto lotto : lottos.getLottos()) {
             int count = answer.matchCount(lotto);
-            boolean isBonus = lotto.getNumbers().contains(bonus.getNumber());
+            boolean isBonus = lotto.getNumbers().contains(bonus.getCount());
             revenue = getRevenue(revenue, count, isBonus);
         }
         this.rateOfReturn = revenue / (lottos.getLottos().size() * Lottos.LOTTO_PRICE);
