@@ -40,7 +40,14 @@
   - 자동 로또를 개수에 맞게 추가한다.
   
 
-- Number 클래스 : 숫자 형식 검증 클래스
+- Price 클래스 : 숫자 형식 검증 클래스
+  - 가격내 로또 개수를 뺀 나머지 로또 개수를 반환할 수 있다.
+
+
+- LottoCount 클래스 : 로또 개수 클래스
+
+
+- BonusBall 클래스 : 보너스 숫자 클래스
 
 
 - Rank 클래스 : 당첨 순위 정보를 가지고 있다.
@@ -51,12 +58,9 @@
   - 수익금을 계산한다.
 
 
-- LottoFactory interface : 객체 생성하기 위한 인터페이스
-
-
-- LottoAutoFactory : 자동 로또를 생성하는 LottoFactory 의 서브클래스
-
-- LottoAnswerFactory : 정답 및 수동 로또를 생성하는 LottoFactory 의 서브클래스
+- LottoFactory interface : 객체 생성하기 위한 클래스
+  - 자동 로또를 생성할 수 있다.
+  - 수동 로또를 생성할 수 있다.
 
 
 ### exception 패키지
@@ -65,7 +69,11 @@
   - 숫자형태 오류시 에러 반환
   - 숫자 개수 (6개) 미일치시 에러 반환
   - 로또 숫자 범위 에러 판단
+
+
+- InputValueException 클래스 : 입력값 관련 에러 클래스
   - 구매 금액 및 구매 개수 검증
+  
 
 
 ### view 패키지
