@@ -1,14 +1,26 @@
 package step2.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Lottery {
     final List<Number> lottery;
 
-    public Lottery(List<Number> randomNumbers) {
+    public static Lottery createFromArray(String[] numbers) {
+        return new Lottery(Arrays.stream(numbers)
+                .map(n -> Number.createFromString(n))
+                .collect(Collectors.toList()));
+    }
+
+    public static Lottery createFromList(List<Number> numbers) {
+        return new Lottery(numbers);
+    }
+
+    private Lottery(List<Number> randomNumbers) {
         this.lottery = new ArrayList<>(randomNumbers);
     }
 

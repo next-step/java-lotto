@@ -1,6 +1,5 @@
 package step2.domain;
 
-import step2.domain.enums.RANKING;
 import step2.domain.util.RandomUtil;
 
 import java.util.*;
@@ -12,8 +11,8 @@ public class Lotteries {
     public Lotteries(int count) {
         List<Lottery> lotteries = new ArrayList<>();
 
-        for (int i = 0; i < count; i++) {
-            lotteries.add(new Lottery(RandomUtil.getRandomNumbers()
+        for (int idx = 0; idx < count; idx++) {
+            lotteries.add(Lottery.createFromList(RandomUtil.getRandomNumbers()
                     .stream()
                     .map(n -> Number.createFromInt(n))
                     .collect(Collectors.toList())));
@@ -28,25 +27,6 @@ public class Lotteries {
 
     public List<Lottery> getList() {
         return lotteries;
-    }
-
-    public Map<RANKING, Integer> getStaticResult(Lottery winningNumbers) {
-        Map<RANKING, Integer> statisticResult = new LinkedHashMap() {{
-            for (int idx = 3; idx <= 6; idx++) {
-                put(RANKING.of(idx), 0);
-            }
-        }};
-
-        for (Lottery lottery : this.lotteries) {
-            int count = lottery.correctCount(winningNumbers);
-            RANKING key = RANKING.of(count);
-
-            if (statisticResult.containsKey(key)) {
-                statisticResult.put(key, statisticResult.get(key) + 1);
-            }
-        }
-
-        return statisticResult;
     }
 
     @Override

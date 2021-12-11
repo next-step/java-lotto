@@ -19,7 +19,7 @@ public class InputView {
         return input;
     }
 
-    public static String inputLotteryNumbers() {
+    public static String getWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         Scanner scanner = new Scanner(System.in);

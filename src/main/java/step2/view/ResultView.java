@@ -1,34 +1,32 @@
 package step2.view;
 
 import step2.domain.Lotteries;
-import step2.domain.Lottery;
-import step2.domain.enums.RANKING;
+import step2.domain.Statistics;
 
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ResultView {
     public static void printLotteries(Lotteries lotteries) {
-        for (Lottery lottery : lotteries.getList()) {
-            String str = lottery.getList().stream()
+        lotteries.getList().forEach(l -> {
+            String lotteryNumbers = l.getList().stream()
                     .map(n -> String.valueOf(n.getNumber()))
                     .collect(Collectors.joining(", "));
 
-            System.out.println(String.format("[%s]", str));
-        }
+            System.out.println(String.format("[%s]", lotteryNumbers));
+        });
 
         System.out.println();
     }
 
-    public static void printResult(Map<RANKING, Integer> result) {
+    public static void printStatistics(Statistics statistic) {
         System.out.println("\n당첨 통계");
-        
-        for (Map.Entry<RANKING, Integer> entry : result.entrySet()) {
-            System.out.println(String.format("%s개 일치 (%d원) - %d개", entry.getKey().getCorrectCount(), entry.getKey().getPrizeMoney(), entry.getValue()));
-        }
+
+        statistic.getStatistics().forEach((ranking, count) -> {
+            System.out.println(String.format("%s개 일치 (%d원) - %d개", ranking.getCorrectCount(), ranking.getPrizeMoney(), count));
+        });
     }
 
-    public static void printStatisticRate(double profitRate) {
+    public static void printProfitRate(double profitRate) {
         System.out.println(String.format("총 수익률은 %.0f%% 입니다.", profitRate));
     }
 }

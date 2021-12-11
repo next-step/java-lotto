@@ -19,7 +19,7 @@ public class LotteriesTest {
 
     @BeforeAll
     static void before() {
-        lottery = new Lottery(new ArrayList() {{
+        lottery = Lottery.createFromList(new ArrayList() {{
             add(Number.createFromInt(1));
             add(Number.createFromInt(2));
             add(Number.createFromInt(3));
@@ -43,27 +43,7 @@ public class LotteriesTest {
                     add(lottery);
                 }}));
     }
-
-    @Test
-    @DisplayName("통계 결과 추출")
-    void getStaticResult() {
-        Lotteries lotteries = new Lotteries(new ArrayList() {{
-            add(lottery);
-            add(new Lottery(new ArrayList() {{
-                add(Number.createFromInt(1));
-                add(Number.createFromInt(2));
-                add(Number.createFromInt(3));
-                add(Number.createFromInt(5));
-            }}));
-        }});
-
-        assertThat(lotteries.getStaticResult(lottery))
-                .containsEntry(RANKING.FOURTH, 1)
-                .containsEntry(RANKING.THIRD, 1)
-                .containsEntry(RANKING.SECOND, 0)
-                .containsEntry(RANKING.FIRST, 0);
-    }
-
+    
     @Test
     @DisplayName("getList test")
     void getList() {

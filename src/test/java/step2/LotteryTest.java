@@ -32,19 +32,19 @@ public class LotteryTest {
             add(Number.createFromInt(3));
         }};
 
-        assertThat(new Lottery(numbers)).isEqualTo(new Lottery(numbers));
+        assertThat(Lottery.createFromList(numbers)).isEqualTo(Lottery.createFromList(numbers));
     }
 
     @Test
     @DisplayName("로또 당첨 번호와 사용자가 입력한 로또 번호를 비교하여 몇개가 맞는지 테스트")
     void correctCount() {
-        Lottery correctNumbers = new Lottery(new ArrayList() {{
+        Lottery correctNumbers = Lottery.createFromList(new ArrayList() {{
             add(Number.createFromInt(1));
             add(Number.createFromInt(2));
             add(Number.createFromInt(3));
         }});
 
-        assertThat(new Lottery(new ArrayList() {{
+        assertThat(Lottery.createFromList(new ArrayList() {{
             add(Number.createFromInt(1));
             add(Number.createFromInt(2));
             add(Number.createFromInt(3));
@@ -54,7 +54,7 @@ public class LotteryTest {
     @Test
     @DisplayName("getList test")
     void getList() {
-        Lottery numbers = new Lottery(new ArrayList() {{
+        Lottery numbers = Lottery.createFromList(new ArrayList() {{
             add(Number.createFromInt(1));
             add(Number.createFromInt(2));
             add(Number.createFromInt(3));

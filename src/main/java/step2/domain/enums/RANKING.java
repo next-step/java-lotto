@@ -8,8 +8,7 @@ public enum RANKING {
     FIRST(6, 2000000000),
     SECOND(5, 1500000),
     THIRD(4, 50000),
-    FOURTH(3, 5000),
-    UNKNOWN(0, 0);
+    FOURTH(3, 5000);
 
     private final static Map<Integer, String> map = Stream.of(values()).collect(Collectors.toMap(RANKING::getCorrectCount, RANKING::name));
     private final int correctCount;
@@ -32,7 +31,6 @@ public enum RANKING {
         if (map.containsKey(count)) {
             return RANKING.valueOf(map.get(count));
         }
-
-        return RANKING.UNKNOWN;
+        return null;
     }
 }
