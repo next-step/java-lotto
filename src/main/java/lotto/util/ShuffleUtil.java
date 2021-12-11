@@ -6,26 +6,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ShuffleUtil {
-
-    private ShuffleUtil() {
-    }
+public abstract class ShuffleUtil {
 
     public static List<Integer> shuffledNumbers(int min, int max) {
         List<Integer> result = new ArrayList<>();
-        for (int i = min; i < max; i++) {
+        for (int i = min; i <= max; i++) {
             result.add(i);
         }
         Collections.shuffle(result);
-        return result;
-    }
-
-    public static List<Integer> sortedNumbers(List<Integer> numbers, int size) {
-        List<Integer> result = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            result.add(numbers.get(i));
-        }
-        Collections.sort(result);
         return result;
     }
 
@@ -38,4 +26,14 @@ public class ShuffleUtil {
 
         return lottoNumbers;
     }
+
+    private static List<Integer> sortedNumbers(List<Integer> numbers, int size) {
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            result.add(numbers.get(i));
+        }
+        Collections.sort(result);
+        return result;
+    }
+
 }
