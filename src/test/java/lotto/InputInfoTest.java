@@ -25,4 +25,13 @@ public class InputInfoTest {
         Assertions.assertThatThrownBy(() -> new InputInfo(price, manualCount)).isInstanceOf(LottoNumberException.class);
     }
 
+    @Test
+    void 수동만_구매() {
+        Number price = Number.of("2000");
+        Number manualCount = Number.of("2");
+        InputInfo inputInfo = new InputInfo(price, manualCount);
+        Assertions.assertThat(inputInfo.getManualCount().getNumber()).isEqualTo(2);
+        Assertions.assertThat(inputInfo.getAutoCount().getNumber()).isEqualTo(0);
+    }
+
 }
