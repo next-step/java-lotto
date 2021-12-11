@@ -7,12 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class AutoLottoNumbers {
+import static lotto.domain.lotto.Lotto.*;
 
-    private static final String ERR_MESSAGE_RANGE = "로또 숫자 범위를 확인해주세요 (입력범위 1 ~ 45)";
-    private static final int END_NUMBER = 45;
-    private static final int START_NUMBER = 1;
-    public static final int MARKED_RANGE = 6;
+public class AutoLottoNumbers {
 
     private static final List<Integer> lottoNumbers;
 

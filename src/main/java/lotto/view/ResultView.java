@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoCount;
+import lotto.domain.BonusBall;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
 import lotto.domain.Result;
@@ -17,7 +17,7 @@ public class ResultView {
 
     private final Result result;
 
-    public ResultView(Lottos lottos, Lotto answer, LottoCount bonus) {
+    public ResultView(Lottos lottos, Lotto answer, BonusBall bonus) {
         this.result = new Result(lottos, answer, bonus);
     }
 

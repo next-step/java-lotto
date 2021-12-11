@@ -8,6 +8,11 @@ import java.util.List;
 
 public class Lotto {
 
+    public static final String ERR_MESSAGE_RANGE = "로또 숫자 범위를 확인해주세요 (입력범위 1 ~ 45)";
+    public static final int END_NUMBER = 45;
+    public static final int START_NUMBER = 1;
+    public static final int MARKED_RANGE = 6;
+
     private final List<Integer> numbers;
 
     public Lotto() {

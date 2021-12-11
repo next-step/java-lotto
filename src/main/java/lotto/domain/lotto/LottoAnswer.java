@@ -1,6 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.domain.AutoLottoNumbers;
 import lotto.exception.LottoNumberException;
 
 import java.util.Arrays;
@@ -39,7 +38,7 @@ public class LottoAnswer extends Lotto {
     }
 
     private static void valid(List<Integer> answer) {
-        if (answer.size() != AutoLottoNumbers.MARKED_RANGE) {
+        if (answer.size() != MARKED_RANGE) {
             throw new LottoNumberException(ERR_MESSAGE_LOTTO_SIZE);
         }
     }
