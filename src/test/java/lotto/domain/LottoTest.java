@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.strategy.CreationLottoNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,7 +17,7 @@ public class LottoTest {
     private Lotto lotto;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         lottoNumbers = new ArrayList<>();
         lottoNumbers.add(new LottoNumber(1));
         lottoNumbers.add(new LottoNumber(2));
@@ -28,13 +29,13 @@ public class LottoTest {
     }
 
     @Test
-    public void 문자_로또_비교(){
+    public void 문자_로또_비교() {
         assertThat(lotto).isEqualTo(new Lotto("1,2,3,4,5,6"));
     }
 
     @ParameterizedTest(name="{displayName} | 요청값: {0}")
     @ValueSource(strings = {"1,2,3", "1,2,3,4,5,6,7"})
-    public void 로또_번호_개수_체크(String param){
+    public void 로또_번호_개수_체크(String param) {
         assertThatThrownBy(() -> {
             new Lotto(param);
         }).isInstanceOf(IllegalArgumentException.class);
@@ -57,14 +58,25 @@ public class LottoTest {
     }
 
     @Test
-    public void 로또_꽝_맞힌_횟수(){
+    public void 로또_꽝_맞힌_횟수() {
         PrizeLotto prizeLotto = new PrizeLotto("1,2,34,35,45,36", "7");
         assertThat(lotto.matchCountLottoNumbers(prizeLotto)).isEqualTo(2);
     }
 
     @Test
-    public void 로또_상금_맞힌_횟수(){
+    public void 로또_상금_맞힌_횟수() {
         PrizeLotto prizeLotto = new PrizeLotto("1,2,3,4,45,36", "7");
         assertThat(lotto.matchCountLottoNumbers(prizeLotto)).isEqualTo(4);
+    }
+
+    @Test
+    public void 정적_팩토리() {
+        Lotto compareLotto = lotto.getAutoLotto(new CreationLottoNumber() {
+            @Override
+            public List<LottoNumber> automatic() {
+                return new Lotto("1,2,3,4,5,6").getLottoNumbers();
+            }
+        });
+        assertThat(compareLotto).isEqualTo(lotto);
     }
 }
