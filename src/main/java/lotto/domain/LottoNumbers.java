@@ -31,6 +31,11 @@ public class LottoNumbers {
                 .count();
     }
 
+    public boolean matchBonus(LottoNumber bonusLottoNumber) {
+        return numbers.stream()
+                .anyMatch(n -> n.equals(bonusLottoNumber));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

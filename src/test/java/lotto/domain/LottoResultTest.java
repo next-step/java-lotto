@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,9 +18,10 @@ class LottoResultTest {
 
     @BeforeEach
     void setUp() {
-        Lottos purchasedLottos = new Lottos(Arrays.asList(new Lotto(), new Lotto(), new Lotto()));
+        Lottos purchasedLottos = new Lottos(Collections.singletonList(new Lotto(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)))));
         Lotto winningLotto = new Lotto();
-        lottoResult = new LottoResult(purchasedLottos, winningLotto);
+        LottoNumber bonusLottoNumber = new LottoNumber(7);
+        lottoResult = new LottoResult(purchasedLottos, winningLotto, bonusLottoNumber);
     }
 
     @DisplayName("`LottoResult` 생성")

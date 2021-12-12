@@ -11,9 +11,9 @@ public class LottoResult {
 
     private final Map<LottoRank, Integer> results = new EnumMap<>(LottoRank.class);
 
-    public LottoResult(Lottos purchasedLottos, Lotto winningLotto) {
+    public LottoResult(Lottos purchasedLottos, Lotto winningLotto, LottoNumber bonusLottoNumber) {
         initiate();
-        processStatistics(lottoRank(purchasedLottos.getLottos(), winningLotto));
+        processStatistics(lottoRank(purchasedLottos.getLottos(), winningLotto, bonusLottoNumber));
     }
 
     public Map<LottoRank, Integer> getStatistics() {
@@ -34,9 +34,9 @@ public class LottoResult {
         }
     }
 
-    private List<LottoRank> lottoRank(List<Lotto> purchasedLottos, Lotto winningLotto) {
+    private List<LottoRank> lottoRank(List<Lotto> purchasedLottos, Lotto winningLotto, LottoNumber bonusLottoNumber) {
         return purchasedLottos.stream()
-                .map(lotto -> lotto.findLottoRank(winningLotto.getNumbers()))
+                .map(lotto -> lotto.findLottoRank(winningLotto, bonusLottoNumber))
                 .collect(Collectors.toList());
     }
 

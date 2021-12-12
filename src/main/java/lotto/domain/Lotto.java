@@ -17,8 +17,8 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoRank findLottoRank(List<Integer> winningNumbers) {
-        return LottoRank.findByMatchedCount(countMatchedNumbers(winningNumbers));
+    public LottoRank findLottoRank(Lotto winningNumbers, LottoNumber bonusLottoNumber) {
+        return LottoRank.findByMatchedCountAndBonus(countMatchedNumbers(winningNumbers), bonus(bonusLottoNumber));
     }
 
     public List<Integer> getNumbers() {
@@ -41,7 +41,11 @@ public class Lotto {
         return Objects.hash(lottoNumbers);
     }
 
-    private int countMatchedNumbers(List<Integer> winningNumbers) {
-        return this.lottoNumbers.matchedCount(winningNumbers);
+    private int countMatchedNumbers(Lotto winningLotto) {
+        return this.lottoNumbers.matchedCount(winningLotto.getNumbers());
+    }
+
+    private boolean bonus(LottoNumber bonusLottoNumber) {
+        return this.lottoNumbers.matchBonus(bonusLottoNumber);
     }
 }
