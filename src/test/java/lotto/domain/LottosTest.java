@@ -29,12 +29,23 @@ public class LottosTest {
 
     @DisplayName("당첨번호와 3개 일치하는 로또의 수는 1개이다.")
     @Test
-    void result_당첨결과() {
+    void result_당첨결과_4등() {
         Lottos lottos = new Lottos(createLottos());
-        Lotto winningNumbers = TestLottoFactory.create(new int[]{3, 6, 9, 12, 15, 2});
-        LottoResult result = lottos.result(winningNumbers);
+        Lotto winningNumbers = TestLottoFactory.create(new int[]{1, 2, 3, 39, 40, 45});
+        LottoResult result = lottos.result(winningNumbers, LottoNumber.of(44));
 
-        assertThat(result.numberOfLotto(3)).isEqualTo(1);
+        assertThat(result.numberOfLotto(Rank.FIFTH)).isEqualTo(1);
+    }
+
+    @DisplayName("당첨번호와 5개 일치하고 보너스 볼이 일치하면 2등이다")
+    @Test
+    void result_당첨결과_2등() {
+        Lottos lottos = new Lottos(createLottos());
+        Lotto winningNumbers = TestLottoFactory.create(new int[]{1, 2, 3, 4, 5, 10});
+        LottoNumber bonusNumber = LottoNumber.of(6);
+        LottoResult result = lottos.result(winningNumbers, bonusNumber);
+
+        assertThat(result.numberOfLotto(Rank.SECOND)).isEqualTo(1);
     }
 
     private static List<Lotto> createLottos() {

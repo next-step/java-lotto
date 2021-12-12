@@ -5,6 +5,8 @@ import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
+import java.util.Arrays;
+
 public abstract class ResultView {
 
     public static void println(String message) {
@@ -24,9 +26,14 @@ public abstract class ResultView {
         System.out.println();
         System.out.println("당첨통계");
         System.out.println("---------");
-        for (Rank rank : Rank.values()) {
-            System.out.printf("%d개 일치 (%d원) - %d개\n", rank.matchedCount(), rank.winningAmount(), lottoResult.numberOfLotto(rank.matchedCount()));
-        }
+        Arrays.stream(Rank.values()).filter(rank -> rank != Rank.MISS).forEach(rank -> {
+            System.out.printf("%d개 일치", rank.matchedCount());
+            if (rank == Rank.SECOND) {
+                System.out.printf(", 보너스 볼 일치(%d원) - %d개\n", rank.winningAmount(), lottoResult.numberOfLotto(rank));
+            } else {
+                System.out.printf(" (%d원)- %d개\n", rank.winningAmount(), lottoResult.numberOfLotto(rank));
+            }
+        });
     }
 
     public static void printProfitRate(LottoResult lottoResult) {

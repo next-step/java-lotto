@@ -29,5 +29,12 @@ public class LottoTest {
         assertThat(lotto.matchedCount(winningLotto)).isEqualTo(2);
     }
 
+    @Test
+    void matchedBonus_보너스번호() {
+        Lotto lotto = TestLottoFactory.create(new int[]{1, 4, 10, 15, 20, 25});
+        LottoNumber bonus = LottoNumber.of(10);
+        assertThat(lotto.matchedBonus(bonus)).isTrue();
+    }
+
 
 }

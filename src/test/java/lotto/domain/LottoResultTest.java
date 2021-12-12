@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.fixture.TestLottoFactory;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -14,7 +15,7 @@ public class LottoResultTest {
     void profitRate_수익률() {
         Lottos lottos = new Lottos(createLottos());
         Lotto winningNumbers = TestLottoFactory.create(new int[]{1, 2, 3, 4, 5, 6});
-        LottoResult result = lottos.result(winningNumbers);
+        LottoResult result = lottos.result(winningNumbers, LottoNumber.of(7));
         assertThat(result.profitRate()).isEqualTo(0.35);
 
     }

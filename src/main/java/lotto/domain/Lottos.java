@@ -32,15 +32,18 @@ public class Lottos {
         }
     }
 
-    public LottoResult result(List<LottoNumber> winningNumbers) {
-        return result(new Lotto(winningNumbers));
+
+    public LottoResult result(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+        return result(new Lotto(winningNumbers), bonusNumber);
     }
 
-    public LottoResult result(Lotto winningNumbers) {
-        Map<Integer, Integer> lottoResult = new HashMap<>();
+    public LottoResult result(Lotto winningNumbers, LottoNumber bonusNumber) {
+        Map<Rank, Integer> lottoResult = new HashMap<>();
         for (Lotto lotto : lottos) {
             int matchedCount = lotto.matchedCount(winningNumbers);
-            lottoResult.put(matchedCount, lottoResult.getOrDefault(matchedCount, 0) + 1);
+            boolean matchedBonus = lotto.matchedBonus(bonusNumber);
+            Rank rank = Rank.valueOf(matchedCount, matchedBonus);
+            lottoResult.put(rank, lottoResult.getOrDefault(rank, 0) + 1);
         }
         return new LottoResult(this, lottoResult);
     }
