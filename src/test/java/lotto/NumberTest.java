@@ -41,4 +41,5 @@ class NumberTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContainingAll("유효한 숫자 입력이 아닙니다.");
     }
+
 }

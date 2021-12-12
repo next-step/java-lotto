@@ -7,18 +7,16 @@ public class Number implements Comparable<Number> {
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+");
     private static final String NOT_VALID_NUMBER_INPUT_MESSAGE = "유효한 숫자 입력이 아닙니다.";
-    private static final int ZERO = 0;
 
     private final int number;
-
-
-    public Number(int number) {
-        this.number = number;
-    }
 
     public Number(String number) {
         validateNumber(number);
         this.number = Integer.parseInt(number);
+    }
+
+    public Number(int number) {
+        this.number = number;
     }
 
     private void validateNumber(String number) {
@@ -27,16 +25,8 @@ public class Number implements Comparable<Number> {
         }
     }
 
-    public int divide(Number other) {
-        if (other.isZero()) {
-            return 0;
-        }
-
-        return number / other.number;
-    }
-
-    public boolean isZero() {
-        return number == 0;
+    public int getNumber() {
+        return number;
     }
 
     @Override
@@ -64,7 +54,4 @@ public class Number implements Comparable<Number> {
         return -1;
     }
 
-    public String toString() {
-        return String.valueOf(number);
-    }
 }

@@ -12,7 +12,7 @@ class LottoTest {
     @Test
     void create_lotto_with_6_numbers() {
         // given
-        List<Number> lottoNumbers = new ArrayList<Number>() {{
+        List<Number> numbers = new ArrayList<Number>() {{
             add(new Number(1));
             add(new Number(2));
             add(new Number(3));
@@ -22,10 +22,10 @@ class LottoTest {
         }};
 
         // when
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = new Lotto(numbers);
 
         // then
-        assertThat(lotto.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+        assertThat(lotto.getLottoNumbers()).isEqualTo(new Numbers("1, 2, 3, 4, 5, 6"));
     }
 
     @Test

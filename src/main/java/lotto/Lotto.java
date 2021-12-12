@@ -6,8 +6,12 @@ public class Lotto {
 
     private final Numbers lottoNumbers;
 
-    public Lotto(List<Number> lottoNumbers) {
-        this.lottoNumbers = new Numbers(lottoNumbers);
+    public Lotto(List<Number> numbers) {
+        this(new Numbers(numbers));
+    }
+
+    public Lotto(Numbers numbers) {
+        this.lottoNumbers = numbers;
     }
 
     public Lotto(String lottoNumbers) {
@@ -18,8 +22,8 @@ public class Lotto {
         return lottoNumbers.countMatch(other.lottoNumbers);
     }
 
-    public String toString() {
-        return lottoNumbers.toString();
+    public Numbers getLottoNumbers() {
+        return lottoNumbers;
     }
 
 }

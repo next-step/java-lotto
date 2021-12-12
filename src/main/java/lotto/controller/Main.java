@@ -1,20 +1,22 @@
 package lotto.controller;
 
 import lotto.Lotto;
+import lotto.LottoMachine;
 import lotto.Lottos;
-import lotto.Money;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-public class LottoMachine {
+import java.math.BigDecimal;
+
+public class Main {
 
     public static void main(String[] args) {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
+        LottoMachine lottoMachine = new LottoMachine();
 
         int moneyForLotto = inputView.showMessageAndGetMoneyInput();
-        Money money = new Money(moneyForLotto);
-        Lottos lottos = Lottos.buy(money);
+        Lottos lottos = lottoMachine.buyLottos(moneyForLotto);
 
         outputView.showHowManyLottosBoughtWithMoney(lottos);
         outputView.showLottos(lottos);
@@ -22,8 +24,12 @@ public class LottoMachine {
         String lottoWinNumbers = inputView.showMessageAndGetLastWeekLottoWinNumbers();
         Lotto winnerLotto = new Lotto(lottoWinNumbers);
 
-        lottos.updateLottoResult(winnerLotto);
-        outputView.showLottoWinResult(lottos.getLottoResult());
-        outputView.showLottoProfit(lottos.getLottoResult());
+        outputView.showMatchCount(winnerLotto, lottos);
+
+        BigDecimal profit = lottos.calculateProfit(winnerLotto);
+        System.out.println(profit.toString());
+        outputView.showLottoProfit(profit);
+
     }
+
 }

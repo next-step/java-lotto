@@ -1,40 +1,71 @@
 package lotto.view;
 
-import lotto.LottoResult;
-import lotto.Lottos;
+import lotto.Number;
+import lotto.*;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OutputView {
 
     private static final String OUTPUT_MESSAGE_HOW_MANY_LOTTOS_BOUGHT = "%d개를 구매했습니다.\n";
     private static final String OUTPUT_MESSAGE_LOTTO_RESULT_ANNOUNCE = "\n당첨 통계\n" + "---------";
-    private static final String OUTPUT_MESSAGE_3_NUMBERS_MATCH = "3개 일치 (5000원)- %d개\n";
-    private static final String OUTPUT_MESSAGE_4_NUMBERS_MATCH = "4개 일치 (50000원)- %d개\n";
-    private static final String OUTPUT_MESSAGE_5_NUMBERS_MATCH = "5개 일치 (1500000원)- %d개\n";
-    private static final String OUTPUT_MESSAGE_6_NUMBERS_MATCH = "6개 일치 (2000000000원)- %d개\n";
-    private static final String OUTPUT_MESSAGE_PROFIT_ANNOUNCE = "총 수익률은 %f 입니다. \n";
-
-    private static final int THIRD_WIN_COUNT = 3;
-    private static final int FOURTH_WIN_COUNT = 4;
-    private static final int FIFTH_WIN_COUNT = 5;
-    private static final int SIXTH_WIN_COUNT = 6;
+    private static final String OUTPUT_MESSAGE_PROFIT_ANNOUNCE = "총 수익률은 %.3f 입니다. \n";
+    private static final String OUTPUT_MESSAGE_X_NUMBERS_MATCH = "%d개 일치 (%d원)- %d개\n";
+    private static final String NUMBER_CONNECTOR = ", ";
+    private static final String NUMBER_START_SIGNAL = "[";
+    private static final String NUMBER_END_SIGNAL = "]";
+    private static final String END_LINE_SIGNAL = "\n";
 
     public void showHowManyLottosBoughtWithMoney(Lottos lottos) {
-        System.out.printf((OUTPUT_MESSAGE_HOW_MANY_LOTTOS_BOUGHT), lottos.count());
+        System.out.printf(OUTPUT_MESSAGE_HOW_MANY_LOTTOS_BOUGHT, lottos.count());
     }
 
     public void showLottos(Lottos lottos) {
-        System.out.println(lottos.lottoToString());
+        StringBuilder result = new StringBuilder();
+        for(Lotto lotto: lottos.getLottos()) {
+            Numbers numbers = lotto.getLottoNumbers();
+            result.append(buildNumbers(numbers)).append(END_LINE_SIGNAL);
+        }
+
+        System.out.println(result);
     }
 
-    public void showLottoWinResult(LottoResult lottoResult) {
+    public StringBuilder buildNumbers(Numbers numbers) {
+        StringBuilder result = new StringBuilder();
+        List<Number> numberList = numbers.getNumbers();
+        List<String> stringNumbers = new ArrayList<>();
+
+        for(Number number : numberList) {
+            stringNumbers.add(String.valueOf(number.getNumber()));
+        }
+
+        String numbersToString = String.join(NUMBER_CONNECTOR, stringNumbers);
+        result.append(NUMBER_START_SIGNAL);
+        result.append(numbersToString);
+        result.append(NUMBER_END_SIGNAL);
+
+        return result;
+    }
+
+    public void showMatchCount(Lotto winnerLotto, Lottos lottos) {
+        for(LottoWin lottoWin : LottoWin.LOTTO_WINS) {
+            int winMatchCount = lottoWin.numberOfMatch();
+            int matchedCount = lottos.calculateMatchCount(winnerLotto, winMatchCount);
+
+            System.out.printf(
+                    OUTPUT_MESSAGE_X_NUMBERS_MATCH,
+                    winMatchCount,
+                    lottoWin.winPrice().getMoney().longValue(),
+                    matchedCount
+            );
+        }
+    }
+
+    public void showLottoProfit(BigDecimal profit) {
         System.out.println(OUTPUT_MESSAGE_LOTTO_RESULT_ANNOUNCE);
-        System.out.printf(OUTPUT_MESSAGE_3_NUMBERS_MATCH, lottoResult.askWinnerCount(THIRD_WIN_COUNT));
-        System.out.printf(OUTPUT_MESSAGE_4_NUMBERS_MATCH, lottoResult.askWinnerCount(FOURTH_WIN_COUNT));
-        System.out.printf(OUTPUT_MESSAGE_5_NUMBERS_MATCH, lottoResult.askWinnerCount(FIFTH_WIN_COUNT));
-        System.out.printf(OUTPUT_MESSAGE_6_NUMBERS_MATCH, lottoResult.askWinnerCount(SIXTH_WIN_COUNT));
+        System.out.printf(OUTPUT_MESSAGE_PROFIT_ANNOUNCE, profit.doubleValue());
     }
 
-    public void showLottoProfit(LottoResult lottoResult) {
-        System.out.printf(OUTPUT_MESSAGE_PROFIT_ANNOUNCE, lottoResult.getProfit());
-    }
 }

@@ -1,7 +1,6 @@
 package lotto;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,25 +20,6 @@ public class Numbers {
         this.numbers = numbers;
     }
 
-    private List<Number> createNumbers(String numbersInput) {
-        String[] strNumberArr = numbersInput.split(NUMBER_DELIMITER);
-        List<Number> numbers = new ArrayList<>();
-
-        for(String strNumber: strNumberArr) {
-            numbers.add(new Number(strNumber));
-        }
-
-        return numbers;
-    }
-
-    public List<Number> getNumbers() {
-        return numbers;
-    }
-
-    public boolean contains(Number number) {
-        return numbers.contains(number);
-    }
-
     public int countMatch(Numbers others) {
         if (others == null) {
             return NO_MATCH_COUNT;
@@ -50,14 +30,34 @@ public class Numbers {
         for(Number number : numbers) {
             count += countMatch(number, others);
         }
+
         return count;
     }
 
-    public int countMatch(Number number, Numbers others) {
+    private int countMatch(Number number, Numbers others) {
         if (others.contains(number)) {
             return YES_MATCH_COUNT;
         }
         return NO_MATCH_COUNT;
+    }
+
+    public List<Number> getNumbers() {
+        return new ArrayList<>(numbers);
+    }
+
+    private boolean contains(Number number) {
+        return numbers.contains(number);
+    }
+
+    private List<Number> createNumbers(String numbersInput) {
+        String[] strNumberArr = numbersInput.split(NUMBER_DELIMITER);
+        List<Number> numbers = new ArrayList<>();
+
+        for(String strNumber: strNumberArr) {
+            numbers.add(new Number(strNumber));
+        }
+
+        return numbers;
     }
 
     @Override
@@ -77,8 +77,4 @@ public class Numbers {
         return Objects.hash(numbers);
     }
 
-    @Override
-    public String toString() {
-        return Arrays.toString(numbers.toArray());
-    }
 }

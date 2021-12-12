@@ -2,6 +2,8 @@ package lotto;
 
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.*;
 
 class MoneyTest {
@@ -15,7 +17,7 @@ class MoneyTest {
         Money money = new Money(inputMoney);
 
         // then
-        assertThat(money.getMoney()).isEqualTo(1000);
+        assertThat(money.getMoney()).isEqualTo(new BigDecimal(1000));
     }
 
     @Test
@@ -42,6 +44,32 @@ class MoneyTest {
 
         // then
         assertThat(howMany).isEqualTo(0);
+    }
+
+    @Test
+    void calculateProfit_high() {
+        // given
+        Money originalMoney = new Money(10000);
+        Money laterMoney = new Money(30000);
+
+        // when
+        BigDecimal profit = laterMoney.calculateProfit(originalMoney);
+
+        // then
+        assertThat(profit).isEqualTo(new BigDecimal("3.000"));
+    }
+
+    @Test
+    void calculateProfit_low() {
+        // given
+        Money originalMoney = new Money(10000);
+        Money laterMoney = new Money(500);
+
+        // when
+        BigDecimal profit = laterMoney.calculateProfit(originalMoney);
+
+        // then
+        assertThat(profit).isEqualTo(new BigDecimal("0.050"));
     }
 
 }
