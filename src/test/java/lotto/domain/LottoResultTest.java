@@ -42,16 +42,16 @@ class LottoResultTest {
     @Test
     void statisticsTest() {
         // when
-        Map<LottoResultType, Integer> earningsRatio = lottoResult.getStatistics();
+        Map<LottoRank, Integer> earningsRatio = lottoResult.getStatistics();
         // then
         assertThat(earningsRatio.values())
-                .hasSize(LottoResultType.values().length);
+                .hasSize(LottoRank.values().length);
     }
 
     @DisplayName("`LottoResult`의 통계 타입별 결과 갯수 반환")
     @ParameterizedTest
-    @EnumSource(LottoResultType.class)
-    void countByTypeTest(LottoResultType type) {
+    @EnumSource(LottoRank.class)
+    void countByTypeTest(LottoRank type) {
         // when & then
         assertThat(lottoResult.countByType(type)).isNotNegative();
     }

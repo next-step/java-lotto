@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
-import lotto.domain.LottoResultType;
+import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
 
 import java.util.stream.Collectors;
@@ -46,9 +46,9 @@ public class OutputView {
     }
 
     private static void printStatisticsForLotto(LottoResult lottoResult) {
-        for (LottoResultType lottoResultType : LottoResultType.WINNING_TYPES) {
+        for (LottoRank lottoRank : LottoRank.WINNING_TYPES) {
             System.out.printf(LOTTO_STATISTICS_MESSAGE,
-                    lottoResultType.matchedCount(), lottoResultType.reward(), lottoResult.countByType(lottoResultType));
+                    lottoRank.matchedCount(), lottoRank.reward(), lottoResult.countByType(lottoRank));
         }
     }
 

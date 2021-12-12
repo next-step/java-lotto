@@ -17,8 +17,8 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoResultType findLottoResultType(List<Integer> winningNumbers) {
-        return LottoResultType.findByMatchedCount(countMatchedNumbers(winningNumbers));
+    public LottoRank findLottoRank(List<Integer> winningNumbers) {
+        return LottoRank.findByMatchedCount(countMatchedNumbers(winningNumbers));
     }
 
     public List<Integer> getNumbers() {

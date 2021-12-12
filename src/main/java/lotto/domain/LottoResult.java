@@ -9,14 +9,14 @@ public class LottoResult {
     private static final int DEFAULT_VALUE = 0;
     private static final int ADDING_COUNT_VALUE = 1;
 
-    private final Map<LottoResultType, Integer> results = new EnumMap<>(LottoResultType.class);
+    private final Map<LottoRank, Integer> results = new EnumMap<>(LottoRank.class);
 
     public LottoResult(Lottos purchasedLottos, Lotto winningLotto) {
         initiate();
-        processStatistics(lottoResultTypes(purchasedLottos.getLottos(), winningLotto));
+        processStatistics(lottoRank(purchasedLottos.getLottos(), winningLotto));
     }
 
-    public Map<LottoResultType, Integer> getStatistics() {
+    public Map<LottoRank, Integer> getStatistics() {
         return results;
     }
 
@@ -24,39 +24,39 @@ public class LottoResult {
         return calculateEarningsRatio(calculateTotalEarningsAmount());
     }
 
-    public int countByType(LottoResultType lottoResultType) {
-        return results.get(lottoResultType);
+    public int countByType(LottoRank lottoRank) {
+        return results.get(lottoRank);
     }
 
     private void initiate() {
-        for (LottoResultType lottoResultType : LottoResultType.values()) {
-            results.put(lottoResultType, DEFAULT_VALUE);
+        for (LottoRank lottoRank : LottoRank.values()) {
+            results.put(lottoRank, DEFAULT_VALUE);
         }
     }
 
-    private List<LottoResultType> lottoResultTypes(List<Lotto> purchasedLottos, Lotto winningLotto) {
+    private List<LottoRank> lottoRank(List<Lotto> purchasedLottos, Lotto winningLotto) {
         return purchasedLottos.stream()
-                .map(lotto -> lotto.findLottoResultType(winningLotto.getNumbers()))
+                .map(lotto -> lotto.findLottoRank(winningLotto.getNumbers()))
                 .collect(Collectors.toList());
     }
 
-    private void processStatistics(List<LottoResultType> lottoResultTypes) {
-        for (LottoResultType lottoResultType : lottoResultTypes) {
-            int count = results.get(lottoResultType) + ADDING_COUNT_VALUE;
-            results.put(lottoResultType, count);
+    private void processStatistics(List<LottoRank> lottoRanks) {
+        for (LottoRank lottoRank : lottoRanks) {
+            int count = results.get(lottoRank) + ADDING_COUNT_VALUE;
+            results.put(lottoRank, count);
         }
     }
 
     private int calculateTotalEarningsAmount() {
         int totalEarningsAmount = 0;
-        for (LottoResultType lottoResultType : LottoResultType.WINNING_TYPES) {
-            totalEarningsAmount += calculateEarningAmount(lottoResultType);
+        for (LottoRank lottoRank : LottoRank.WINNING_TYPES) {
+            totalEarningsAmount += calculateEarningAmount(lottoRank);
         }
         return totalEarningsAmount;
     }
 
-    private double calculateEarningAmount(LottoResultType lottoResultType) {
-        return Math.multiplyExact(lottoResultType.reward(), countByType(lottoResultType));
+    private double calculateEarningAmount(LottoRank lottoRank) {
+        return Math.multiplyExact(lottoRank.reward(), countByType(lottoRank));
     }
 
     private double calculateEarningsRatio(int totalEarningsAmount) {

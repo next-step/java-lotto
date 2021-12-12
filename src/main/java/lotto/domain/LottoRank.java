@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public enum LottoResultType {
+public enum LottoRank {
     SIX_MATCHED(6, 2_000_000_000, true),
     FIVE_MATCHED(5, 1_500_000, true),
     FOUR_MATCHED(4, 50_000, true),
@@ -15,8 +15,8 @@ public enum LottoResultType {
     ONE_MATCHED(1, 0, false),
     NONE_MATCHED(0, 0, false);
 
-    public static final List<LottoResultType> WINNING_TYPES = Collections.unmodifiableList(
-            Arrays.stream(LottoResultType.values())
+    public static final List<LottoRank> WINNING_TYPES = Collections.unmodifiableList(
+            Arrays.stream(LottoRank.values())
                     .filter(value -> value.winningType)
                     .sorted(Comparator.reverseOrder())
                     .collect(Collectors.toList()));
@@ -25,15 +25,15 @@ public enum LottoResultType {
     private final int reward;
     private final boolean winningType;
 
-    LottoResultType(int matchedCount, int reward, boolean winningType) {
+    LottoRank(int matchedCount, int reward, boolean winningType) {
         this.matchedCount = matchedCount;
         this.reward = reward;
         this.winningType = winningType;
     }
 
-    public static LottoResultType findByMatchedCount(int matchedCount) {
-        return Arrays.stream(LottoResultType.values())
-                .filter(lottoResultType -> lottoResultType.matchedCount == matchedCount)
+    public static LottoRank findByMatchedCount(int matchedCount) {
+        return Arrays.stream(LottoRank.values())
+                .filter(lottoRank -> lottoRank.matchedCount == matchedCount)
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(String.format("매칭된 숫자(%d)가 로또 결과의 범위를 넘었습니다.", matchedCount)));
     }
