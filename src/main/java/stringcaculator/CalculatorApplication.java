@@ -1,4 +1,4 @@
-package stringcaculator.application;
+package stringcaculator;
 
 import stringcaculator.domain.*;
 import stringcaculator.domain.Number;
@@ -10,9 +10,9 @@ public class CalculatorApplication {
       Scanner scanner = new Scanner(System.in);
       String input = scanner.nextLine();
 
-      Delimeter delimeter = new Delimeter(new Input(input).validValue());
+      Delimiter delimiter = new Delimiter(new Input(input).validValue());
 
-      Numbers numbers = new Numbers(delimeter.splitedInput());
+      Numbers numbers = new Numbers(delimiter.splitedInput());
 
       StringCalculator stringCalculator = new StringCalculator(numbers);
       Number result = stringCalculator.calculation();

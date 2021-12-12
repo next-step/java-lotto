@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class StringToIntegerValue implements Value{
-    private final String NUMBER_REGEX = "[0-9]+";
+    private final static String NUMBER_REGEX = "[0-9]+";
 
     private final String value;
 

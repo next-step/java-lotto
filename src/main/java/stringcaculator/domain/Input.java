@@ -10,7 +10,7 @@ public class Input {
     }
 
     public Input validValue() {
-        if(this.value == null || this.value.isEmpty()) {
+        if(this.value == null || this.value.trim().isEmpty()) {
             return new Input("0");
         }
         return this;
@@ -20,7 +20,7 @@ public class Input {
         return this.value;
     }
 
-    public String[] splitedInput(DELEMETER_REGEX regex) {
+    public String[] splitedInput(DelimiterRegex regex) {
         return this.value.split(regex.toString());
     }
 
