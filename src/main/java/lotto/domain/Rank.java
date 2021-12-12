@@ -4,10 +4,11 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 
 public enum Rank {
-    FOURTH(3, 5000),
-    THIRD(4, 50000),
-    SECOND(5, 1500000),
-    FIRST(6, 2000000000);
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000);
 
     private int matchCount;
     private int winningMoney;
@@ -17,7 +18,11 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
-    public static Rank valueOf(int matchCount) {
+    public static Rank valueOf(int matchCount, boolean matchBonus) {
+        if(isEqualMatchCount(matchCount, SECOND) && matchBonus){
+            return Rank.SECOND;
+        }
+
         return Stream.of(values())
                 .filter(matchRank -> isEqualMatchCount(matchCount, matchRank))
                 .findFirst()

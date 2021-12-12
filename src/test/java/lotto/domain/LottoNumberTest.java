@@ -11,15 +11,15 @@ public class LottoNumberTest {
 
     @Test
     public void 숫자_문자동일_확인() {
-        LottoNumber lottoNumber = new LottoNumber("1");
-        assertThat(lottoNumber).isEqualTo(new LottoNumber(1));
+        LottoNumber lottoNumber = LottoNumber.from("1");
+        assertThat(lottoNumber).isEqualTo(LottoNumber.from(1));
     }
 
     @ParameterizedTest(name="{displayName} | 요청값: {0}")
     @ValueSource(ints = {-1, 0, 46})
     public void 숫자_1이상_45이하의_입력시_IllegalArgumentException(int param) {
         assertThatThrownBy(() -> {
-            new LottoNumber(param);
+            LottoNumber.from(param);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -27,13 +27,13 @@ public class LottoNumberTest {
     @ValueSource(strings = {"ONE", "하나"})
     public void 문자_오입력시_IllegalArgumentException(String param) {
         assertThatThrownBy(() -> {
-            new LottoNumber(param);
+            LottoNumber.from(param);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     public void 로또번호_확인() {
-        LottoNumber lottoNumber = new LottoNumber("1");
+        LottoNumber lottoNumber = LottoNumber.from("1");
         assertThat(lottoNumber.getLottoNumber()).isEqualTo(1);
     }
 }

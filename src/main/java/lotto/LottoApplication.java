@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Calculator;
-import lotto.domain.Lotto;
-import lotto.domain.LottoShop;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.strategy.CreationAutoLottoNumber;
 import lotto.strategy.CreationLottoNumber;
 import lotto.view.InputView;
@@ -17,11 +14,11 @@ public class LottoApplication {
         ResultView.responseLottoCount(lottoShop.getBuyRound());
 
         CreationLottoNumber makeLottoNumber = new CreationAutoLottoNumber();
-        Lottos lottos = new Lottos(lottoShop.getBuyRound(), makeLottoNumber);
+        Lottos lottos = Lottos.of(lottoShop.getBuyRound(), makeLottoNumber);
         ResultView.responseLottoNumbers(lottos);
 
-        Lotto winningLotto = new Lotto(InputView.requestLastWeekWinningNumber());
-        Calculator calculator = new Calculator(lottos.getResult(winningLotto), lottoShop.getBuyAmount());
+        PrizeLotto prizeLotto = new PrizeLotto(InputView.requestLastWeekWinningNumber(), InputView.requestBonusNumber());
+        Calculator calculator = new Calculator(lottos.getResults(prizeLotto), lottoShop.getBuyAmount());
         ResultView.responseStatistics(calculator);
     }
 }
