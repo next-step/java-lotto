@@ -12,4 +12,11 @@ public class Lotto {
     public boolean appropriate(int count) {
         return numberGroups.size() == count;
     }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "numberGroups=" + numberGroups.toString() +
+                '}';
+    }
 }

@@ -14,22 +14,22 @@ class LottoMachineTest {
     @DisplayName("주어진 로또 장수에 따라 정상적으로 Lotto 객체를 만들어 반환합니다.")
     void lotto() {
         //given
-        int lottoNumberCount = 14;
+        int lottoPieceCount = 14;
         LottoMachine lottoMachine = new LottoMachine();
         //when
-        Lotto lotto = lottoMachine.lotto(lottoNumberCount);
+        Lotto lotto = lottoMachine.lotto(lottoPieceCount);
         //then
-        assertThat(lotto.appropriate(lottoNumberCount)).isTrue();
+        assertThat(lotto.appropriate(lottoPieceCount)).isTrue();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {-1, 0})
     @DisplayName("주어진 로또 장수에 따라 정상적으로 Lotto 객체를 만들어 반환합니다.")
-    void inappropriateLotto(int lottoNumberCount) {
+    void inappropriateLotto(int lottoPieceCount) {
         LottoMachine lottoMachine = new LottoMachine();
 
         assertThatIllegalArgumentException().isThrownBy(
-                () -> {lottoMachine.lotto(lottoNumberCount);  }
+                () -> {lottoMachine.lotto(lottoPieceCount);  }
         );
     }
 

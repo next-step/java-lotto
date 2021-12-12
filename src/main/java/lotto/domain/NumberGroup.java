@@ -26,4 +26,11 @@ public class NumberGroup {
     public int hashCode() {
         return Objects.hash(numbers);
     }
+
+    @Override
+    public String toString() {
+        return "NumberGroup{" +
+                "numbers=" + numbers.toString() +
+                '}';
+    }
 }
