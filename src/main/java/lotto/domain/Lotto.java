@@ -17,18 +17,22 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(String lottoNumber) {
-        this.lottoNumbers = Stream.of(getWinLottoNumbers(lottoNumber))
-                .map(m -> new LottoNumber((Integer.parseInt(m))))
-                .collect(Collectors.toList());
+        this.lottoNumbers = Stream.of(winLottoNumbers(lottoNumber))
+                                        .map(number -> LottoNumber.from(number))
+                                        .collect(Collectors.toList());
     }
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    private String[] getWinLottoNumbers(String winLottoNumbers) {
+    public static Lotto from(CreationLottoNumber creationLottoNumber) {
+        return new Lotto(creationLottoNumber.automatic());
+    }
+
+    private String[] winLottoNumbers(String winLottoNumbers) {
         String[] splitWinLottoNumbers = winLottoNumbers.replaceAll(DEFAULT_WHITE_SPACE_CHARACTER, DEFAULT_CHARACTER)
-                .split(DEFAULT_SPLIT_CHARACTER);
+                                                            .split(DEFAULT_SPLIT_CHARACTER);
         validationSplitLottoNumbers(splitWinLottoNumbers);
         return splitWinLottoNumbers;
     }
@@ -39,8 +43,8 @@ public class Lotto {
         }
     }
 
-    public static Lotto getAutoLotto(CreationLottoNumber creationLottoNumber) {
-        return new Lotto(creationLottoNumber.automatic());
+    public boolean contain(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
     public int matchCountLottoNumbers(PrizeLotto prizeLotto) {
@@ -50,7 +54,7 @@ public class Lotto {
     }
 
     private boolean containLottoNumber(PrizeLotto prizeLotto, LottoNumber lottoNumber) {
-        return prizeLotto.getLotto().contains(lottoNumber);
+        return prizeLotto.matchNumber(lottoNumber);
     }
 
     public List<LottoNumber> getLottoNumbers() {
@@ -70,4 +74,6 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(lottoNumbers);
     }
+
+
 }

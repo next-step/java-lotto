@@ -1,15 +1,13 @@
 package lotto.view;
 
-import lotto.domain.Calculator;
-import lotto.domain.Lotto;
-import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 
 public class ResultView {
     private static final String RESPONSE_LOTTO_COUNT = "%s개를 구매했습니다.\n";
     private static final String RESPONSE_INIT_MESSAGE = "당첨 통계";
     private static final String RESPONSE_INIT_LINE = "---------";
-    private static final String RESPONSE_MATCH_MESSAGE = "%s (%s원)- %s개\n";
+    private static final String RESPONSE_MATCH_MESSAGE = "%s개 일치 (%s원)- %s개\n";
+    private static final String RESPONSE_SECOND_MATCH_MESSAGE = "%s개 일치, 보너스 볼 일치 (%s원)- %s개\n";
     private static final String RESPONSE_TOTAL_EARNING_RATE_MESSAGE = "총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
 
@@ -29,9 +27,18 @@ public class ResultView {
         System.out.println(RESPONSE_INIT_LINE);
 
         for (LottoResult lottoResult : calculator.getLottoResults()) {
-            System.out.format(RESPONSE_MATCH_MESSAGE, lottoResult.getRank().getStatisticsMessage(), lottoResult.getRank().getWinningMoney(), lottoResult.getNumberOfTimes());
+            responseLottoResult(lottoResult);
         }
-
         System.out.format(RESPONSE_TOTAL_EARNING_RATE_MESSAGE, calculator.getEarnRate());
+    }
+
+    private static void responseLottoResult(LottoResult lottoResult) {
+        if(lottoResult.getRank() == Rank.SECOND) {
+            System.out.format(RESPONSE_SECOND_MATCH_MESSAGE, lottoResult.getRank().getMatchCount()
+                    , lottoResult.getRank().getWinningMoney(), lottoResult.getNumberOfTimes());
+            return;
+        }
+        System.out.format(RESPONSE_MATCH_MESSAGE, lottoResult.getRank().getMatchCount()
+                , lottoResult.getRank().getWinningMoney(), lottoResult.getNumberOfTimes());
     }
 }

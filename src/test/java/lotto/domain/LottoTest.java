@@ -1,31 +1,28 @@
 package lotto.domain;
 
-import lotto.strategy.CreationLottoNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoTest {
-    private List<LottoNumber> lottoNumbers;
     private Lotto lotto;
 
     @BeforeEach
     void setUp() {
-        lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(new LottoNumber(1));
-        lottoNumbers.add(new LottoNumber(2));
-        lottoNumbers.add(new LottoNumber(3));
-        lottoNumbers.add(new LottoNumber(4));
-        lottoNumbers.add(new LottoNumber(5));
-        lottoNumbers.add(new LottoNumber(6));
-        lotto = new Lotto(lottoNumbers);
+        lotto = new Lotto(Arrays.asList(
+            LottoNumber.from(1),
+            LottoNumber.from(2),
+            LottoNumber.from(3),
+            LottoNumber.from(4),
+            LottoNumber.from(5),
+            LottoNumber.from(6)
+        ));
     }
 
     @Test
@@ -71,12 +68,7 @@ public class LottoTest {
 
     @Test
     public void 정적_팩토리() {
-        Lotto compareLotto = lotto.getAutoLotto(new CreationLottoNumber() {
-            @Override
-            public List<LottoNumber> automatic() {
-                return new Lotto("1,2,3,4,5,6").getLottoNumbers();
-            }
-        });
+        Lotto compareLotto = lotto.from(() -> new Lotto("1,2,3,4,5,6").getLottoNumbers());
         assertThat(compareLotto).isEqualTo(lotto);
     }
 }

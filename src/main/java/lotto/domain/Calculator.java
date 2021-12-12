@@ -4,18 +4,15 @@ import java.util.List;
 
 public class Calculator {
     private final float earnRate;
-    private final List<LottoResult> lottoResults;
+    private final LottoResults lottoResults;
 
-    public Calculator(List<LottoResult> lottoResults, int purchaseAmount) {
-        double totalEarnMoney = lottoResults.stream()
-                                            .mapToDouble(lottoResult -> lottoResult.sumResult())
-                                            .sum();
+    public Calculator(LottoResults lottoResults, int purchaseAmount) {
         this.lottoResults = lottoResults;
-        this.earnRate = Math.round(totalEarnMoney / purchaseAmount * 100) / 100.F;
+        this.earnRate = Math.round(lottoResults.totalEarnMoney() / purchaseAmount * 100) / 100.F;
     }
 
     public List<LottoResult> getLottoResults() {
-        return lottoResults;
+        return lottoResults.getLottoResults();
     }
 
     public float getEarnRate() {

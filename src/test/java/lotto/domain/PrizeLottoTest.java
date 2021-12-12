@@ -3,7 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -14,13 +14,14 @@ class PrizeLottoTest {
 
     @BeforeEach
     void setUp(){
-        lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(new LottoNumber(1));
-        lottoNumbers.add(new LottoNumber(2));
-        lottoNumbers.add(new LottoNumber(3));
-        lottoNumbers.add(new LottoNumber(4));
-        lottoNumbers.add(new LottoNumber(5));
-        lottoNumbers.add(new LottoNumber(6));
+        lottoNumbers = Arrays.asList(
+            LottoNumber.from(1),
+            LottoNumber.from(2),
+            LottoNumber.from(3),
+            LottoNumber.from(4),
+            LottoNumber.from(5),
+            LottoNumber.from(6)
+        );
     }
 
     @Test

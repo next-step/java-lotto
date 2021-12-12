@@ -14,11 +14,11 @@ public class LottoApplication {
         ResultView.responseLottoCount(lottoShop.getBuyRound());
 
         CreationLottoNumber makeLottoNumber = new CreationAutoLottoNumber();
-        Lottos lottos = new Lottos(lottoShop.getBuyRound(), makeLottoNumber);
+        Lottos lottos = Lottos.of(lottoShop.getBuyRound(), makeLottoNumber);
         ResultView.responseLottoNumbers(lottos);
 
         PrizeLotto prizeLotto = new PrizeLotto(InputView.requestLastWeekWinningNumber(), InputView.requestBonusNumber());
-        Calculator calculator = new Calculator(lottos.getResult(prizeLotto), lottoShop.getBuyAmount());
+        Calculator calculator = new Calculator(lottos.getResults(prizeLotto), lottoShop.getBuyAmount());
         ResultView.responseStatistics(calculator);
     }
 }
