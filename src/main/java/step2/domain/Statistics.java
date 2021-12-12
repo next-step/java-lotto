@@ -25,7 +25,7 @@ public class Statistics {
     }
 
     private void setStatistics(Lottery lottery, Lottery winningNumbers) {
-        int count = lottery.correctCount(winningNumbers);
+        int count = lottery.getCorrectCount(winningNumbers);
         RANKING key = RANKING.of(count);
 
         if (statistics.containsKey(key)) {

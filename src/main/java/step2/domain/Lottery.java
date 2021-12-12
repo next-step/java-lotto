@@ -1,7 +1,8 @@
 package step2.domain;
 
+import step2.strategy.LotteryStrategy;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -10,9 +11,14 @@ import java.util.stream.Collectors;
 public class Lottery {
     final List<Number> lottery;
 
-    public static Lottery createFromArray(String[] numbers) {
-        return new Lottery(Arrays.stream(numbers)
-                .map(n -> Number.createFromString(n))
+    private Lottery(List<Number> randomNumbers) {
+        this.lottery = new ArrayList<>(randomNumbers);
+    }
+
+    public static Lottery createFromStrategy(LotteryStrategy strategy) {
+        return new Lottery(strategy.getLotteryNumbers()
+                .stream()
+                .map(n -> Number.createFromInt(n))
                 .collect(Collectors.toList()));
     }
 
@@ -20,19 +26,15 @@ public class Lottery {
         return new Lottery(numbers);
     }
 
-    private Lottery(List<Number> randomNumbers) {
-        this.lottery = new ArrayList<>(randomNumbers);
+    public int getCorrectCount(Lottery winningNumbers) {
+        return Long.valueOf(this.lottery.stream()
+                .filter(n -> winningNumbers.getList().stream()
+                        .anyMatch(Predicate.isEqual(n)))
+                .count()).intValue();
     }
 
     public List<Number> getList() {
         return lottery;
-    }
-
-    public int correctCount(Lottery correctNumbers) {
-        return Long.valueOf(this.lottery.stream()
-                .filter(n -> correctNumbers.getList().stream()
-                        .anyMatch(Predicate.isEqual(n)))
-                .count()).intValue();
     }
 
     @Override

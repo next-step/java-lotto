@@ -1,28 +1,28 @@
 package step2.domain;
 
-import step2.domain.util.RandomUtil;
+import step2.strategy.LotteryStrategy;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Lotteries {
     private final List<Lottery> lotteries;
 
-    public Lotteries(int count) {
-        List<Lottery> lotteries = new ArrayList<>();
-
-        for (int idx = 0; idx < count; idx++) {
-            lotteries.add(Lottery.createFromList(RandomUtil.getRandomNumbers()
-                    .stream()
-                    .map(n -> Number.createFromInt(n))
-                    .collect(Collectors.toList())));
-        }
-
+            private Lotteries(List<Lottery> lotteries) {
         this.lotteries = lotteries;
     }
 
-    public Lotteries(List<Lottery> lotteries) {
-        this.lotteries = lotteries;
+    public static Lotteries createFromCount(LotteryStrategy strategy, int count) {
+        List<Lottery> lotteries = new ArrayList<>();
+
+        for (int idx = 0; idx < count; idx++) {
+            lotteries.add(Lottery.createFromStrategy(strategy));
+        }
+
+        return new Lotteries(lotteries);
+    }
+
+    public static Lotteries createFromList(List<Lottery> lotteries) {
+        return new Lotteries(lotteries);
     }
 
     public List<Lottery> getList() {
