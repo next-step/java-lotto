@@ -12,6 +12,10 @@ public class Application {
         LottoGameController lottoGameController = new LottoGameController();
         Lottos lottos = lottoGameController.purchaseLottos(PurchaseLottosRequest.from(InputView.readPurchasingAmount()));
         OutputView.printPurchasedLottoInformation(lottos);
-        OutputView.printStatisticsForLottos(lottoGameController.retrieveStatistics(RetrieveStatisticsRequest.of(lottos, InputView.readWinningLottoNumbers())));
+        OutputView.printStatisticsForLottos(
+                lottoGameController.retrieveStatistics(
+                        RetrieveStatisticsRequest.of(lottos, InputView.readWinningLottoNumbers(), InputView.readBonusLottoNumber())
+                )
+        );
     }
 }
