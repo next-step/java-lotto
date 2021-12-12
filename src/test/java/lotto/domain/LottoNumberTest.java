@@ -8,6 +8,6 @@ class LottoNumberTest {
 	@Test
 	void createLottoNumber() {
 		LottoNumber number = new LottoNumber(1);
-		assertThat(number.getValue()).isBetween(1, 45);
+		assertThat(number.value()).isBetween(1, 45);
 	}
 }
