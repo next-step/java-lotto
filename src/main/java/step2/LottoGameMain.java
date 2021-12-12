@@ -1,6 +1,7 @@
 package step2;
 
 import step2.domain.*;
+import step2.dto.WinningRate;
 import step2.service.LottoGame;
 import step2.view.InputView;
 import step2.view.ResultView;
@@ -13,9 +14,15 @@ public class LottoGameMain {
         LottoTickets lottoTickets = LottoGame.generateLotto(inputAmount);
         ResultView.renderLottoStatus(lottoTickets);
 
-        WinningResultInfo resultInfo = lottoTickets.matchedWinningNumber(new MatchedNumber(InputView.pickWinningNumber()));
+        MatchedNumber matchedNumber = new MatchedNumber(InputView.pickWinningNumber());
+        BonusBallNumber bonusBallNumber = new BonusBallNumber(InputView.pickBonusBallNumber());
+        bonusBallNumber.notUniqueOrElseThrow(matchedNumber);
+
+        WinningResultInfo resultInfo = lottoTickets.matchedWinningNumber(matchedNumber, bonusBallNumber);
 
         ResultView.renderWinningResult(resultInfo);
-        ResultView.renderWinningRate(resultInfo.calculateRate(inputAmount));
+
+        WinningRate winningRate = resultInfo.calculateRate(inputAmount);
+        ResultView.renderWinningRate(winningRate, winningRate.lessThanBaseRate());
     }
 }

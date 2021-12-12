@@ -23,6 +23,10 @@ public class LottoTicket {
                 .count();
     }
 
+    public boolean matchedBonusBallNumber(BonusBallNumber bonusBallNumber) {
+        return lottoTicket.contains(bonusBallNumber.getBonusBallNumber());
+    }
+
     public Set<LottoNumber> lottoTicket() {
         return Collections.unmodifiableSet(lottoTicket);
     }

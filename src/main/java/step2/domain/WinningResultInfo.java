@@ -15,6 +15,8 @@ public class WinningResultInfo {
     }
 
     public Map<WinningCondition, WinningInfo> getWinningResultInfo() {
+        winningResultInfo.remove(WinningCondition.WIN_NONE);
+
         return Collections.synchronizedMap(new EnumMap<>(winningResultInfo));
     }
 

@@ -3,6 +3,7 @@ package step2.dto;
 import java.util.Objects;
 
 public class WinningRate {
+    private static final int BASE_ONE = 1;
     private final float winningRate;
 
     public WinningRate(float winningRate) {
@@ -11,6 +12,10 @@ public class WinningRate {
 
     public float getWinningRate() {
         return winningRate;
+    }
+
+    public boolean lessThanBaseRate() {
+        return winningRate < BASE_ONE;
     }
 
     @Override
