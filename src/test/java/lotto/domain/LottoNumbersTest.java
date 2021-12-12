@@ -49,4 +49,15 @@ class LottoNumbersTest {
                 () -> new LottoNumbers(invalidLottoNumbers)
         );
     }
+
+    @DisplayName("로또 숫자 중 일치하는 숫자 갯수 반환")
+    @Test
+    void matchedCountTest() {
+        // given
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        // when
+        int matchedCount = lottoNumbers.matchedCount(lottoNumbers);
+        // then
+        assertThat(matchedCount).isEqualTo(LottoNumbers.TOTAL_SIZE_OF_NUMBERS);
+    }
 }

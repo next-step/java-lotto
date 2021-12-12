@@ -42,7 +42,7 @@ public class Lotto {
     }
 
     private int countMatchedNumbers(Lotto winningLotto) {
-        return this.lottoNumbers.matchedCount(winningLotto.getNumbers());
+        return this.lottoNumbers.matchedCount(winningLotto.lottoNumbers);
     }
 
     private boolean bonus(LottoNumber bonusLottoNumber) {
