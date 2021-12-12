@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class NumberGroup {
+    public static final int LIMIT = 6;
     private final List<Number> numbers;
 
     public NumberGroup(List<Number> numbers) {

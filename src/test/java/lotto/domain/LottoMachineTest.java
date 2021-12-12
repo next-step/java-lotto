@@ -41,6 +41,6 @@ class LottoMachineTest {
         //when
         NumberGroup numberGroup = lottoMachine.numberGroup();
         //then
-        assertThat(numberGroup.appropriate(LottoMachine.LOTTO_NUMBER_GROUP_LIMIT)).isTrue();
+        assertThat(numberGroup.appropriate(NumberGroup.LIMIT)).isTrue();
     }
 }
