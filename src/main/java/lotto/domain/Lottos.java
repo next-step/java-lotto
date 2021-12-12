@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -35,7 +37,12 @@ public class Lottos {
     }
 
     public LottoResult result(Lotto winningNumbers) {
-        return new LottoResult(this, winningNumbers);
+        Map<Integer, Integer> lottoResult = new HashMap<>();
+        for (Lotto lotto : lottos) {
+            int matchedCount = lotto.matchedCount(winningNumbers);
+            lottoResult.put(matchedCount, lottoResult.getOrDefault(matchedCount, 0) + 1);
+        }
+        return new LottoResult(this, lottoResult);
     }
 
     public List<Lotto> lottos() {

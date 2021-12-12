@@ -7,12 +7,13 @@ import java.util.Objects;
 public class LottoNumber {
     public static final int MIN = 1;
     public static final int MAX = 45;
-    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+    private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
+
     private final int value;
 
     static {
         for (int i = MIN; i <= MAX; i++) {
-            lottoNumbers.put(i, new LottoNumber(i));
+            CACHE.put(i, new LottoNumber(i));
         }
     }
 
@@ -26,8 +27,8 @@ public class LottoNumber {
     }
 
     public static LottoNumber of(int number) {
-        if (lottoNumbers.containsKey(number)) {
-            return lottoNumbers.get(number);
+        if (CACHE.containsKey(number)) {
+            return CACHE.get(number);
         }
 
         return new LottoNumber(number);
