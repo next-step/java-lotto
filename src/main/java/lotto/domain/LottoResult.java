@@ -3,12 +3,12 @@ package lotto.domain;
 import java.util.Map;
 
 public class LottoResult {
-    private final Lottos lottos;
     private final Map<Integer, Integer> lottoResult;
+    private final double profitRate;
 
     public LottoResult(Lottos lottos, Map<Integer, Integer> lottoResult) {
-        this.lottos = lottos;
         this.lottoResult = lottoResult;
+        this.profitRate = profitRate(lottos);
     }
 
     public int numberOfLotto(int matchedWinningCount) {
@@ -16,6 +16,10 @@ public class LottoResult {
     }
 
     public double profitRate() {
+        return profitRate;
+    }
+
+    private double profitRate(Lottos lottos) {
         double result = (double) totalWinningAmount() / lottos.amountOfLottos();
         return Math.floor(result * 100) / 100.0;
     }
