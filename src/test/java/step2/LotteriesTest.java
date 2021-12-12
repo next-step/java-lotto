@@ -8,6 +8,7 @@ import step2.domain.Lottery;
 import step2.domain.Lotteries;
 import step2.domain.Number;
 import step2.domain.enums.RANKING;
+import step2.strategy.ManualLotteryStrategy;
 
 import java.util.ArrayList;
 
@@ -26,20 +27,30 @@ public class LotteriesTest {
             add(Number.createFromInt(4));
         }});
 
-        lotteries = new Lotteries(new ArrayList() {{
+        lotteries = Lotteries.createFromList(new ArrayList() {{
             add(lottery);
         }});
     }
 
     @Test
     @DisplayName("Lotteries 객체 생성")
-    void create() {
-        Lotteries lotteries = new Lotteries(new ArrayList() {{
-            add(lottery);
-        }});
+    void createFromCount() {
+        Lotteries lotteries = Lotteries.createFromCount(new ManualLotteryStrategy(), 1);
+        lotteries.getList().forEach(lottery -> {
+            lottery.getList().forEach(number -> {
+                assertThat(number.getNumber())
+                        .isGreaterThan(0)
+                        .isLessThanOrEqualTo(45);
 
+            });
+        });
+    }
+
+    @Test
+    @DisplayName("Lotteries 객체 생성")
+    void createFromList() {
         assertThat(lotteries).isEqualTo(
-                new Lotteries(new ArrayList() {{
+                Lotteries.createFromList(new ArrayList() {{
                     add(lottery);
                 }}));
     }

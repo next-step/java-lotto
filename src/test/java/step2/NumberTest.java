@@ -21,4 +21,11 @@ public class NumberTest {
         assertThat(Number.createFromInt(1)).isEqualTo(Number.createFromInt(1));
         assertThat(Number.createFromInt(2)).isNotEqualTo(Number.createFromInt(1));
     }
+
+    @Test
+    @DisplayName("get value 테스트")
+    void getNumber() {
+        assertThat(Number.createFromInt(1).getNumber()).isEqualTo(1);
+        assertThat(Number.createFromInt(1).getNumber()).isNotEqualTo(2);
+    }
 }
