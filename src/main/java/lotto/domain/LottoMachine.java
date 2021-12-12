@@ -18,6 +18,9 @@ public class LottoMachine {
     }
 
     public Lotto lotto(int count) {
+        if(count <= 0) {
+            throw new IllegalArgumentException();
+        }
         List<NumberGroup> numberGroups = new ArrayList<>();
 
         while(count-- > 0) {

@@ -2,8 +2,11 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class LottoMachineTest {
 
@@ -17,6 +20,17 @@ class LottoMachineTest {
         Lotto lotto = lottoMachine.lotto(lottoNumberCount);
         //then
         assertThat(lotto.appropriate(lottoNumberCount)).isTrue();
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 0})
+    @DisplayName("주어진 로또 장수에 따라 정상적으로 Lotto 객체를 만들어 반환합니다.")
+    void inappropriateLotto(int lottoNumberCount) {
+        LottoMachine lottoMachine = new LottoMachine();
+
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> {lottoMachine.lotto(lottoNumberCount);  }
+        );
     }
 
     @Test
