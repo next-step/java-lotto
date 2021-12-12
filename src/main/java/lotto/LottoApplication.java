@@ -23,5 +23,8 @@ public class LottoApplication {
         Lotto lotto = new LottoMachine().lotto(lottoPieceCount);
         resultView.printLotto(lotto);
 
+        inputView.askMatchingNumber();
+
+
     }
 }
