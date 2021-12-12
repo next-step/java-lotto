@@ -10,12 +10,13 @@ import static calculator.domain.DelimiterType.*;
 public class Expression {
     private static final int DELIMITER_INDEX_FOR_GROUP = 1;
     private static final int EXPRESSION_INDEX_FOR_GROUP = 2;
+    private static final Pattern DELIMITER_CUSTOM_PATTERN = Pattern.compile(CUSTOM.getRegex());
 
     private Operands operands;
 
     public Expression(String expression) {
         if (isEmpty(expression)) {
-            this.operands = new Operands(new Operand());
+            this.operands = Operands.withSingleOperand();
             return;
         }
         initiateOperands(expression);
@@ -43,7 +44,7 @@ public class Expression {
     }
 
     private void initiateCustomOperands(String expression) {
-        Matcher matcher = Pattern.compile(CUSTOM.getRegex()).matcher(expression);
+        Matcher matcher = DELIMITER_CUSTOM_PATTERN.matcher(expression);
         if (matcher.find()) {
             String delimiterGroup = matcher.group(DELIMITER_INDEX_FOR_GROUP);
             String[] expressionGroup = matcher.group(EXPRESSION_INDEX_FOR_GROUP).split(delimiterGroup);

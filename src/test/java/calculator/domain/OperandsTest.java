@@ -20,7 +20,7 @@ class OperandsTest {
     @Test
     void createOperandsWithSingleOperandTest() {
         // when & then
-        assertThat(new Operands(new Operand())).isNotNull();
+        assertThat(Operands.withSingleOperand()).isNotNull();
     }
 
     @DisplayName("다중 피연산자로 피연산자들을 초기화한다.")

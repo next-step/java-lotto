@@ -6,6 +6,8 @@ enum DelimiterType {
     CUSTOM("//(.)\n(.*)"),
     DEFAULT(",|:");
 
+    private static final Pattern DELIMITER_CUSTOM_PATTERN = Pattern.compile(CUSTOM.regex);
+
     private final String regex;
 
     DelimiterType(String regex) {
@@ -13,7 +15,7 @@ enum DelimiterType {
     }
 
     static DelimiterType findByExpression(String expression) {
-        if (Pattern.compile(CUSTOM.regex).matcher(expression).find()) {
+        if (DELIMITER_CUSTOM_PATTERN.matcher(expression).find()) {
             return CUSTOM;
         }
         return DEFAULT;

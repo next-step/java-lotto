@@ -7,8 +7,8 @@ import java.util.Objects;
 class Operands {
     private final List<Operand> operands;
 
-    Operands(Operand operand) {
-        this.operands = Collections.singletonList(operand);
+    static Operands withSingleOperand() {
+        return new Operands(Collections.singletonList(new Operand()));
     }
 
     Operands(List<Operand> operands) {
