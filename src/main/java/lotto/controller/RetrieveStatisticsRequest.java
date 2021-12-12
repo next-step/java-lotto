@@ -32,6 +32,10 @@ public class RetrieveStatisticsRequest {
         return new Lotto(new LottoNumbers(winningLottoNumbers));
     }
 
+    public LottoNumber bonusLottoNumber() {
+        return new LottoNumber(bonusLottoNumber);
+    }
+
     private void validate(Lottos lottos, List<Integer> winningLottoNumbers, int bonusLottoNumber) {
         validateLottos(lottos);
         validateWinningLottoNumbers(winningLottoNumbers);

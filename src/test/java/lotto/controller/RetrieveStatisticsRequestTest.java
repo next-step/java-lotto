@@ -33,7 +33,8 @@ class RetrieveStatisticsRequestTest {
         // then
         assertAll(
                 () -> assertThat(request).isNotNull(),
-                () -> assertThat(request.winningLotto()).isEqualTo(new Lotto(new LottoNumbers(WINNING_LOTTO_NUMBERS)))
+                () -> assertThat(request.winningLotto()).isEqualTo(new Lotto(new LottoNumbers(WINNING_LOTTO_NUMBERS))),
+                () -> assertThat(request.bonusLottoNumber()).isEqualTo(new LottoNumber(BONUS_LOTTO_NUMBER))
         );
     }
 
