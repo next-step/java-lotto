@@ -22,13 +22,7 @@ public class Lottery {
         InputInfo inputInfo = new InputInfo(price, manualCount);
         List<String> inputManualLottos = InputView.questionManualInput(inputInfo.getManualCount());
 
-        // 수동 로또 생성
-        List<Lotto> manualLottos = LottoFactory.manualLottos(inputManualLottos);
-        Lottos lottos = new Lottos(manualLottos);
-
-        // 자동 로또 추가
-        List<Lotto> autoLottos = LottoFactory.autoLottos(inputInfo.getAutoCount());
-        lottos.addLottos(autoLottos);
+        Lottos lottos = LottoFactory.lottos(price, inputManualLottos);
 
         // 입력 정보 받기
         inputInfo.printInfo();
