@@ -11,7 +11,8 @@ public class Numbers {
     }
 
     public Number sum() {
-        return numbers.stream().reduce(Number.ZERO_NUMBER, Number::add);
+        return numbers.stream()
+                .reduce(Number.ZERO_NUMBER, Number::add);
     }
 
 }
