@@ -1,4 +1,4 @@
-package lotto;
+package lotto.lotto;
 
 @FunctionalInterface
 public interface Condition {

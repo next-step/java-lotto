@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.Lotto;
-import lotto.LottoResults;
-import lotto.MatchedNumbers;
+import lotto.lotto.Lotto;
+import lotto.result.LottoResults;
+import lotto.result.MatchedNumbers;
 
 public class ResultView {
 

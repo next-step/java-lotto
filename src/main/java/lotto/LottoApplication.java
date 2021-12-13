@@ -1,5 +1,10 @@
 package lotto;
 
+import lotto.lotto.Lotto;
+import lotto.lotto.LottoNumbers;
+import lotto.lotto.Lottos;
+import lotto.result.LottoResults;
+import lotto.result.MatchedNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 

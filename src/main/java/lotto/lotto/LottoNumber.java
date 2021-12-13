@@ -1,4 +1,4 @@
-package lotto;
+package lotto.lotto;
 
 import java.util.Objects;
 

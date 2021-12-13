@@ -1,4 +1,4 @@
-package lotto;
+package lotto.result;
 
 public enum MatchedNumbers {
     THREE(3, 5_000),

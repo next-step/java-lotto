@@ -1,4 +1,6 @@
-package lotto;
+package lotto.lotto;
+
+import lotto.result.MatchedNumbers;
 
 import java.util.List;
 import java.util.Objects;
