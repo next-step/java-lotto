@@ -62,8 +62,8 @@ class LottoNumbersTest {
         LottoNumbers lottoNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumbers winningNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 7, 8, 9));
 
-        long matchedLottoNumbersCount = lottoNumbers.match(winningNumbers);
-        assertThat(matchedLottoNumbersCount).isEqualTo(3);
+        boolean result = lottoNumbers.match(winningNumbers, count -> count == 3);
+        assertThat(result).isTrue();
     }
 
     private static Stream<List<Integer>> createLottoNumbers() {

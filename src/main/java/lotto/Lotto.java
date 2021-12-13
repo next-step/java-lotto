@@ -29,9 +29,8 @@ public class Lotto {
         return lottoNumbers.values();
     }
 
-    public Lotto match(LottoNumbers winningNumbers) {
-        long newMatchedLottoNumbersCount = lottoNumbers.match(winningNumbers);
-        return new Lotto(lottoNumbers, newMatchedLottoNumbersCount);
+    public boolean match(LottoNumbers winningNumbers, Condition condition) {
+        return lottoNumbers.match(winningNumbers, condition);
     }
 
     @Override

@@ -33,10 +33,12 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
     }
 
-    public long match(LottoNumbers winningNumbers) {
-        return values.stream()
+    public boolean match(LottoNumbers winningNumbers, Condition condition) {
+        long count = values.stream()
                 .filter(winningNumbers.values::contains)
                 .count();
+
+        return condition.isEqualsTo(count);
     }
 
     private static boolean isValidDigits(List<Integer> input) {
