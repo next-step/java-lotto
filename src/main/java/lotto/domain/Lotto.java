@@ -53,10 +53,7 @@ public class Lotto {
     }
 
     public boolean matchedBonus(LottoNumber bonusNumber) {
-        if (lottoNumbers.contains(bonusNumber)) {
-            return true;
-        }
-        return false;
+        return lottoNumbers.contains(bonusNumber);
     }
 
     @Override
