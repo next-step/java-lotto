@@ -1,6 +1,6 @@
 package lotto.domain.lotto;
 
-import lotto.domain.AutoLottoNumbers;
+import lotto.exception.LottoNumberException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,13 +15,9 @@ public class Lotto {
 
     private final List<Integer> numbers;
 
-    public Lotto() {
-        numbers = AutoLottoNumbers.autoNumbers();
-    }
-
-    public Lotto(List<Integer> answer) {
-        AutoLottoNumbers.valid(answer);
-        numbers = new ArrayList<>(answer);
+    public Lotto(List<Integer> input) {
+        valid(input);
+        numbers = new ArrayList<>(input);
     }
 
     public List<Integer> getNumbers() {
@@ -33,6 +29,16 @@ public class Lotto {
         return (int) lotto.getNumbers().stream()
                 .filter(this.numbers::contains)
                 .count();
+    }
+
+    public static void valid(List<Integer> defaultNumbers) {
+        defaultNumbers.forEach(Lotto::valid);
+    }
+
+    private static void valid(int number) {
+        if (number < START_NUMBER || number > END_NUMBER) {
+            throw new LottoNumberException(ERR_MESSAGE_RANGE);
+        }
     }
 
 }

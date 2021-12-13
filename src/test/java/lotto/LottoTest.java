@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.domain.factory.LottoFactory;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoAnswer;
+import lotto.domain.lotto.LottoInput;
 import lotto.exception.LottoNumberException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -33,12 +33,12 @@ public class LottoTest {
 
     @Test
     void 로또_숫자변환_오류() {
-        Assertions.assertThatThrownBy(() -> LottoAnswer.transformNumbers("숫자아닌값")).isInstanceOf(LottoNumberException.class);
+        Assertions.assertThatThrownBy(() -> LottoInput.transformNumbers("숫자아닌값")).isInstanceOf(LottoNumberException.class);
     }
 
     @Test
     void 로또_개수_오류() {
-        Assertions.assertThatThrownBy(() -> LottoAnswer.transformNumbers("1,2")).isInstanceOf(LottoNumberException.class);
+        Assertions.assertThatThrownBy(() -> LottoInput.transformNumbers("1,2")).isInstanceOf(LottoNumberException.class);
     }
 
     @Test

@@ -32,7 +32,7 @@ public class Price {
     }
 
     private void valid() {
-        if (price < 0) {
+        if (price < LOTTO_PRICE) {
             throw new InputValueException(MESSAGE_ERR_PRICE);
         }
     }

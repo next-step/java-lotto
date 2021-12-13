@@ -4,8 +4,8 @@ import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
 import lotto.domain.Price;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoAnswer;
 import lotto.domain.lotto.LottoAuto;
+import lotto.domain.lotto.LottoInput;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +17,8 @@ public class LottoFactory {
         return new LottoAuto();
     }
 
-    public static LottoAnswer newInstance(String numbers) {
-        return new LottoAnswer(numbers);
+    public static LottoInput newInstance(String numbers) {
+        return new LottoInput(numbers);
     }
 
     public static Lottos lottos(Price price, List<String> inputManualLottos) {
@@ -44,7 +44,7 @@ public class LottoFactory {
 
     private static List<Lotto> manualLottos(List<String> inputManualLottos) {
         return inputManualLottos.stream()
-                .map(LottoFactory::newInstance)
+                .map(LottoInput::new)
                 .collect(Collectors.toList());
     }
 

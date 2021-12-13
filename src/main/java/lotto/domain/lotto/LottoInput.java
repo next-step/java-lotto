@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoAnswer extends Lotto {
+public class LottoInput extends Lotto {
 
     private static final String ERR_MESSAGE_NUMBER_FORMAT = "로또 입력값이 아닙니다.";
     private static final String ERR_MESSAGE_LOTTO_SIZE = "입력 숫자는 6개 입니다.";
@@ -14,7 +14,7 @@ public class LottoAnswer extends Lotto {
     private static final String ANSWER_BLANK = " ";
     private static final String ANSWER_EMPTY = "";
 
-    public LottoAnswer(String answer) {
+    public LottoInput(String answer) {
         super(transformNumbers(answer));
     }
 
@@ -33,11 +33,11 @@ public class LottoAnswer extends Lotto {
         } catch (Exception e) {
             throw new LottoNumberException(ERR_MESSAGE_NUMBER_FORMAT);
         }
-        valid(answers);
+        LottoInput.valid(answers);
         return answers;
     }
 
-    private static void valid(List<Integer> answer) {
+    public static void valid(List<Integer> answer) {
         if (answer.size() != MARKED_RANGE) {
             throw new LottoNumberException(ERR_MESSAGE_LOTTO_SIZE);
         }
