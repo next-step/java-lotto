@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.lotto.Lotto;
 import lotto.result.LottoResults;
-import lotto.result.MatchedNumbers;
+import lotto.result.MatchedNumbersCount;
 
 public class ResultView {
 
@@ -24,10 +24,10 @@ public class ResultView {
     public static void printResult(LottoResults lottoResults, float profit) {
         System.out.println(LOTTO_RESULT_MESSAGE);
 
-        for (MatchedNumbers matchedNumbers : lottoResults.values().keySet()) {
-            System.out.println(matchedNumbers.value() + MATCHED_NUMBERS_MESSAGE
-                    + matchedNumbers.price()  + PRICE_MESSAGE
-                    + lottoResults.values().get(matchedNumbers) + COUNT_MESSAGE);
+        for (MatchedNumbersCount matchedNumbersCount : lottoResults.values().keySet()) {
+            System.out.println(matchedNumbersCount.value() + MATCHED_NUMBERS_MESSAGE
+                    + matchedNumbersCount.price()  + PRICE_MESSAGE
+                    + lottoResults.values().get(matchedNumbersCount) + COUNT_MESSAGE);
         }
 
         System.out.printf(PROFIT_MESSAGE, profit);

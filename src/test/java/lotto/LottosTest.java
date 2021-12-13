@@ -3,7 +3,7 @@ package lotto;
 import lotto.lotto.Lotto;
 import lotto.lotto.LottoNumbers;
 import lotto.lotto.Lottos;
-import lotto.result.MatchedNumbers;
+import lotto.result.MatchedNumbersCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +26,7 @@ class LottosTest {
         Lottos lottos = lottos();
         LottoNumbers winningNumbers = winningNumbers();
 
-        long count = lottos.match(winningNumbers, MatchedNumbers.THREE);
+        long count = lottos.match(winningNumbers, MatchedNumbersCount.THREE);
         assertThat(count).isEqualTo(1L);
     }
 

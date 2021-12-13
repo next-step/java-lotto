@@ -4,7 +4,7 @@ import lotto.lotto.Lotto;
 import lotto.lotto.LottoNumbers;
 import lotto.lotto.Lottos;
 import lotto.result.LottoResults;
-import lotto.result.MatchedNumbers;
+import lotto.result.MatchedNumbersCount;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -28,11 +28,11 @@ public class LottoApplication {
     }
 
     private static LottoResults match(Lottos lottos, LottoNumbers winningNumbers) {
-        Map<MatchedNumbers, Long> lottoResults = new EnumMap<>(MatchedNumbers.class);
+        Map<MatchedNumbersCount, Long> lottoResults = new EnumMap<>(MatchedNumbersCount.class);
 
-        for (MatchedNumbers matchedNumbers : MatchedNumbers.values()) {
-            long matchedLottosCount = lottos.match(winningNumbers, matchedNumbers);
-            lottoResults.put(matchedNumbers, matchedLottosCount);
+        for (MatchedNumbersCount matchedNumbersCount : MatchedNumbersCount.values()) {
+            long matchedLottosCount = lottos.match(winningNumbers, matchedNumbersCount);
+            lottoResults.put(matchedNumbersCount, matchedLottosCount);
         }
 
         return new LottoResults(lottoResults);

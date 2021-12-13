@@ -1,6 +1,6 @@
 package lotto.lotto;
 
-import lotto.result.MatchedNumbers;
+import lotto.result.MatchedNumbersCount;
 
 import java.util.List;
 import java.util.Objects;
@@ -12,11 +12,11 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public long match(LottoNumbers winningNumbers, MatchedNumbers matchedNumbers) {
+    public long match(LottoNumbers winningNumbers, MatchedNumbersCount matchedNumbersCount) {
         return lottos.stream()
                 .filter(lotto -> lotto.match(
                         winningNumbers,
-                        count -> count == matchedNumbers.value())
+                        count -> count == matchedNumbersCount.value())
                 )
                 .count();
     }

@@ -1,21 +1,21 @@
 package lotto.result;
 
-public enum MatchedNumbers {
+public enum MatchedNumbersCount {
     THREE(3, 5_000),
     FOUR(4, 50_000),
     FIVE(5, 1_500_000),
     SIX(6, 2_000_000_000);
 
-    private final int matchedNumber;
+    private final int matchedNumbersCount;
     private final int price;
 
-    MatchedNumbers(int matchedNumber, int price) {
-        this.matchedNumber = matchedNumber;
+    MatchedNumbersCount(int matchedNumbersCount, int price) {
+        this.matchedNumbersCount = matchedNumbersCount;
         this.price = price;
     }
 
     public int value() {
-        return matchedNumber;
+        return matchedNumbersCount;
     }
 
     public int price() {
