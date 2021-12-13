@@ -4,19 +4,19 @@ import java.util.Map;
 import java.util.Objects;
 
 public class LottoResults {
-    private final Map<MatchedNumbers, Long> values;
+    private final Map<MatchedNumbersCount, Long> values;
     private final float prize;
 
-    public LottoResults(Map<MatchedNumbers, Long> lottoResults) {
+    public LottoResults(Map<MatchedNumbersCount, Long> lottoResults) {
         this.values = lottoResults;
         this.prize = totalPrize(lottoResults);
     }
 
-    public void add(MatchedNumbers matchedNumbers, long lottosCount) {
-        values.put(matchedNumbers, lottosCount);
+    public void add(MatchedNumbersCount matchedNumbersCount, long lottosCount) {
+        values.put(matchedNumbersCount, lottosCount);
     }
 
-    public Map<MatchedNumbers, Long> values() {
+    public Map<MatchedNumbersCount, Long> values() {
         return values;
     }
 
@@ -24,11 +24,11 @@ public class LottoResults {
         return prize;
     }
 
-    private float totalPrize(Map<MatchedNumbers, Long> lottoResults) {
+    private float totalPrize(Map<MatchedNumbersCount, Long> lottoResults) {
         float prize = 0f;
 
-        for (MatchedNumbers matchedNumbers : lottoResults.keySet()) {
-            prize += matchedNumbers.prize(lottoResults.get(matchedNumbers));
+        for (MatchedNumbersCount matchedNumbersCount : lottoResults.keySet()) {
+            prize += matchedNumbersCount.prize(lottoResults.get(matchedNumbersCount));
         }
 
         return prize;
