@@ -6,5 +6,5 @@ import java.util.List;
 
 @FunctionalInterface
 public interface CreationLottoNumber {
-    List<LottoNumber> automatic();
+    List<LottoNumber> lottoNumbers(String lottoNumbers);
 }

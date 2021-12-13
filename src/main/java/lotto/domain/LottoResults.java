@@ -7,8 +7,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoResults {
-    private final List<LottoResult> lottoResults;
     private static final int MIN_RANK_MATCH_COUNT = 3;
+
+    private final List<LottoResult> lottoResults;
 
     public LottoResults(List<LottoResult> lottoResults) {
         this.lottoResults = lottoResults;
@@ -26,6 +27,10 @@ public class LottoResults {
                 .filter(lotto -> lotto.matchCountLottoNumbers(prizeLotto) >= MIN_RANK_MATCH_COUNT)
                 .map(lotto -> Rank.valueOf(lotto.matchCountLottoNumbers(prizeLotto), prizeLotto.matchBonusNumber(lotto)))
                 .collect(Collectors.toList());
+    }
+
+    public float totalEarnRate(int purchaseAmount) {
+        return Math.round(totalEarnMoney() / purchaseAmount * 100) / 100.F;
     }
 
     public double totalEarnMoney() {

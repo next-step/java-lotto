@@ -12,7 +12,7 @@ public class CreationAutoLottoNumber implements CreationLottoNumber {
     private static final List<LottoNumber> DEFAULT_LOTTO_NUMBERS = LottoNumber.getDefaultLottoNumbers();
 
     @Override
-    public List<LottoNumber> automatic() {
+    public List<LottoNumber> lottoNumbers(String lottoNumbers) {
         Collections.shuffle(DEFAULT_LOTTO_NUMBERS);
         return new ArrayList<>(DEFAULT_LOTTO_NUMBERS.subList(START_SPLIT_NUMBERS, END_SPLIT_NUMBERS));
     }

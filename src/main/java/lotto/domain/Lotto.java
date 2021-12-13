@@ -20,6 +20,7 @@ public class Lotto {
         this.lottoNumbers = Stream.of(winLottoNumbers(lottoNumber))
                                         .map(number -> LottoNumber.from(number))
                                         .collect(Collectors.toList());
+        validationLottoNumbers();
     }
 
     public Lotto(List<LottoNumber> lottoNumbers) {
@@ -27,7 +28,20 @@ public class Lotto {
     }
 
     public static Lotto from(CreationLottoNumber creationLottoNumber) {
-        return new Lotto(creationLottoNumber.automatic());
+        return new Lotto(creationLottoNumber.lottoNumbers(DEFAULT_CHARACTER));
+    }
+
+    public static Lotto of(CreationLottoNumber creationLottoNumber, String manualLottoNumbers) {
+        return new Lotto(creationLottoNumber.lottoNumbers(manualLottoNumbers));
+    }
+
+    private void validationLottoNumbers() {
+        long numberFrequency = lottoNumbers.stream()
+                                                .filter(lottoNumber -> Collections.frequency(lottoNumbers, lottoNumber) > 1)
+                                                .count();
+        if (numberFrequency > 0){
+            throw new IllegalArgumentException("동일한 번호가 존재합니다.");
+        }
     }
 
     private String[] winLottoNumbers(String winLottoNumbers) {

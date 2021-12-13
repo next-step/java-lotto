@@ -3,7 +3,6 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,13 +25,13 @@ public class CalculatorTest {
     }
 
     @Test
-    public void 수익률_계산() {
+    void 수익률_계산() {
         Calculator calculator = new Calculator(lottoResults, 10000);
         assertThat(calculator.getEarnRate()).isEqualTo(0.5F);
     }
 
     @Test
-    public void 로또_결과_리스트() {
+    void 로또_결과_리스트() {
         Calculator calculator = new Calculator(lottoResults, 10000);
         assertThat(calculator.getLottoResults()).isEqualTo(lottoResultGroup);
     }

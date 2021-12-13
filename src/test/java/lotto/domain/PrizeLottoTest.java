@@ -25,13 +25,19 @@ class PrizeLottoTest {
     }
 
     @Test
-    void matchBonusNumber() {
+    void 보너스_매치_여부() {
         PrizeLotto prizeLotto = new PrizeLotto("1,2,3,4,5,6", "7");
         assertThat(prizeLotto.matchBonusNumber(new Lotto("1,2,3,4,5,7"))).isTrue();
     }
 
     @Test
-    public void 로또_비교(){
+    void 번호_매치_여부() {
+        PrizeLotto prizeLotto = new PrizeLotto("1,2,3,4,5,6", "7");
+        assertThat(prizeLotto.matchNumber(LottoNumber.from("6"))).isTrue();
+    }
+
+    @Test
+    void 로또_비교(){
         PrizeLotto prizeLotto = new PrizeLotto("1,2,3,4,5,6", "7");
         assertThat(prizeLotto.getLotto()).isEqualTo(lottoNumbers);
     }

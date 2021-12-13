@@ -22,6 +22,21 @@ public class Lottos {
         return new Lottos(lottoGroup);
     }
 
+    public static Lottos of(int gameRound, CreationLottoNumber creationLottoNumber, Lottos lottos) {
+        List<Lotto> lottoGroup = IntStream.range(START_RANGE, gameRound)
+                .mapToObj(m -> Lotto.from(creationLottoNumber))
+                .collect(Collectors.toList());
+        lottos.getLottos().addAll(lottoGroup);
+        return new Lottos(lottos.getLottos());
+    }
+
+    public static Lottos of(String[] manualLottoNumbers, CreationLottoNumber creationLottoNumber) {
+        List<Lotto> lottoGroup = Arrays.stream(manualLottoNumbers)
+                    .map(m -> Lotto.of(creationLottoNumber, m))
+                    .collect(Collectors.toList());
+        return new Lottos(lottoGroup);
+    }
+
     public LottoResults getResults(PrizeLotto prizeLotto) {
         return LottoResults.of(lottos, prizeLotto);
     }

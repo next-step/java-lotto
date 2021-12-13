@@ -8,7 +8,7 @@ public class Calculator {
 
     public Calculator(LottoResults lottoResults, int purchaseAmount) {
         this.lottoResults = lottoResults;
-        this.earnRate = Math.round(lottoResults.totalEarnMoney() / purchaseAmount * 100) / 100.F;
+        this.earnRate = lottoResults.totalEarnRate(purchaseAmount);
     }
 
     public List<LottoResult> getLottoResults() {

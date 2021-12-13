@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.strategy.CreationAutoLottoNumber;
 import lotto.strategy.CreationLottoNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,17 +14,24 @@ public class LottosTest {
 
     @BeforeEach
     void setUp(){
-        creationLottoNumber = () -> new Lotto("1,2,3,4,5,6").getLottoNumbers();
+        String defaultLottoNumbers = "1,2,3,4,5,6";
+        creationLottoNumber = (String) -> new Lotto(defaultLottoNumbers).getLottoNumbers();
     }
 
     @Test
-    public void 생성_확인(){
+    void 생성_확인(){
         Lottos lottos = Lottos.of(1, creationLottoNumber);
         assertThat(lottos.getLottos().contains(new Lotto("1,2,3,4,5,6"))).isTrue();
     }
 
     @Test
-    public void 상금_자동_로또번호(){
+    void 정적_팩토리_메서드_확인(){
+        Lottos lottos = Lottos.of(1, creationLottoNumber);
+        assertThat(lottos.getLottos().contains(new Lotto("1,2,3,4,5,6"))).isTrue();
+    }
+
+    @Test
+    void 상금_자동_로또번호(){
         List<Lotto> lottoGroup = Arrays.asList(
             new Lotto("1,2,3,4,5,6"),
             new Lotto("1,2,3,4,5,16"),
@@ -45,7 +51,7 @@ public class LottosTest {
     }
 
     @Test
-    public void 꽝_자동_로또번호(){
+    void 꽝_자동_로또번호(){
         List<Lotto> lottoGroup = Arrays.asList(
             new Lotto("31,32,33,34,35,36"),
             new Lotto("1,32,33,34,35,36"),
