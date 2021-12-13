@@ -13,6 +13,7 @@ public class Price {
     private Price(String price) {
         try {
             this.price = Long.parseLong(price);
+            valid();
         } catch (InputValueException e) {
             throw new InputValueException(MESSAGE_ERR_PRICE);
         }
@@ -28,5 +29,11 @@ public class Price {
             return LottoCount.of(autoCount);
         }
         throw new InputValueException(MESSAGE_ERR_PRICE);
+    }
+
+    private void valid() {
+        if (price < 0) {
+            throw new InputValueException(MESSAGE_ERR_PRICE);
+        }
     }
 }
