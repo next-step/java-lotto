@@ -3,58 +3,62 @@ package lotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoApplication {
-    private static final Scanner scanner = new Scanner(System.in);
-    private static final List<Lotto> lottos = new ArrayList<>();
     private static final int LOTTO_PRICE = 1000;
-    private static final String DELIMITER = ",";
 
     public static void main(String[] args) {
-        InputView.printPurchaseRequest();
-
-        int purchaseAmount = scanner.nextInt();
-        int quantity = quantity(purchaseAmount);
-
+        int purchaseAmount = InputView.getPurchaseAmount();
+        int quantity = purchaseAmount / LOTTO_PRICE;
         ResultView.printQuantity(quantity);
+
+        Lottos lottos = lottos(quantity);
+        LottoNumbers winningNumbers = draw();
+        LottoResults lottoResults = match(lottos, winningNumbers);
+
+        float profit = lottoResults.prize() / purchaseAmount;
+        ResultView.printResult(lottoResults, profit);
+    }
+
+    private static LottoResults match(Lottos lottos, LottoNumbers winningNumbers) {
+        Map<MatchedNumbers, Long> lottoResults = new EnumMap<>(MatchedNumbers.class);
+
+        for (MatchedNumbers matchedNumbers : MatchedNumbers.values()) {
+            long matchedLottosCount = lottos.match(winningNumbers, matchedNumbers);
+            lottoResults.put(matchedNumbers, matchedLottosCount);
+        }
+
+        return new LottoResults(lottoResults);
+    }
+
+    private static LottoNumbers draw() {
+        InputView.printWinningNumbersRequest();
+        return winningNumbers();
+    }
+
+    private static Lottos lottos(int quantity) {
+        List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < quantity; i++) {
             LottoNumbers lottoNumbers = LottoMachine.generateLottoNumber();
             Lotto lotto = Lotto.from(lottoNumbers);
-
             lottos.add(lotto);
+
             ResultView.printLottoNumbers(lotto);
         }
 
-        InputView.printWinningNumbersRequest();
-        LottoNumbers winningNumbers = winningNumbers();
-
-//        winningNumbers.match();
-
-//        lottos.forEach(lotto -> lotto.match(winningNumbers));
-
-        for (Lotto lotto : lottos) {
-            lotto.match(winningNumbers);
-        }
-
+        return new Lottos(lottos);
     }
 
     private static LottoNumbers winningNumbers() {
-        String[] input = scanner.next().split(DELIMITER);
+        String[] input = InputView.getWinningNumbers();
 
         List<Integer> winningNumbers = Arrays.stream(input)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
 
         return LottoNumbers.from(winningNumbers);
-    }
-
-    private static int quantity(int purchaseAmount) {
-        return purchaseAmount / LOTTO_PRICE;
     }
 }
