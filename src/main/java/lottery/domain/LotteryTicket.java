@@ -4,8 +4,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import lottery.dto.LotteryTicketResultDto;
 
 public class LotteryTicket {
 
@@ -17,18 +15,8 @@ public class LotteryTicket {
         this.numbers = numbers;
     }
 
-    public static LotteryTicket createWithRandomNumbers() {
-        final List<LotteryNumber> allNumbers = IntStream.rangeClosed(LotteryNumber.MINIMUM_LOTTERY_NUMBER, LotteryNumber.MAXIMUM_LOTTERY_NUMBER)
-            .mapToObj(LotteryNumber::of)
-            .collect(Collectors.toList());
-        Collections.shuffle(allNumbers);
-
-        final List<LotteryNumber> lotteryNumbers = allNumbers.stream()
-            .limit(VALID_COUNT_OF_NUMBERS)
-            .sorted()
-            .collect(Collectors.toList());
-
-        return new LotteryTicket(lotteryNumbers);
+    public static LotteryTicket from(final LotteryNumberGenerator lotteryNumberGenerator) {
+        return LotteryTicket.of(lotteryNumberGenerator.generate());
     }
 
     public static LotteryTicket of(final List<Integer> numbers) {
@@ -43,15 +31,6 @@ public class LotteryTicket {
         }
 
         return new LotteryTicket(lotteryNumbers);
-    }
-
-    public LotteryTicketResultDto lotteryTicketResultDto(final LotteryTicket winnerTicket) {
-        final int numberOfMatchedLotteryNumbers = (int) winnerTicket.numbers
-            .stream()
-            .filter(this.numbers::contains)
-            .count();
-
-        return LotteryTicketResultDto.of(numberOfMatchedLotteryNumbers);
     }
 
     public List<LotteryNumber> getNumbers() {
@@ -73,5 +52,12 @@ public class LotteryTicket {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
+    }
+
+    public int matchedCount(final LotteryTicket otherTicket) {
+        return (int) this.numbers
+            .stream()
+            .filter(otherTicket.numbers::contains)
+            .count();
     }
 }

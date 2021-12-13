@@ -8,14 +8,14 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
     public static final int MAXIMUM_LOTTERY_NUMBER = 45;
     private static final String EXCEPTION_MESSAGE_INVALID_NUMBER_FORMAT = "로또 번호는 %d~%d 만 허용됩니다. input: %d";
 
-    final int value;
+    private final int value;
 
     private LotteryNumber(final int value) {
         this.value = value;
     }
 
     public static LotteryNumber of(final int input) {
-        if (isValidNumber(input)) {
+        if (isInvalidNumber(input)) {
             final String exceptionMessage = String.format(EXCEPTION_MESSAGE_INVALID_NUMBER_FORMAT,
                 MINIMUM_LOTTERY_NUMBER,
                 MAXIMUM_LOTTERY_NUMBER,
@@ -26,7 +26,7 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
         return new LotteryNumber(input);
     }
 
-    private static boolean isValidNumber(int input) {
+    private static boolean isInvalidNumber(int input) {
         return input > MAXIMUM_LOTTERY_NUMBER || input < MINIMUM_LOTTERY_NUMBER;
     }
 

@@ -26,7 +26,7 @@ public class InputView {
         System.out.println(MESSAGE_LAST_WEEK_WINNING_NUMBERS);
 
         final String input = STANDARD_INPUT_SCANNER.nextLine();
-        List<Integer> lotteryNumbers = Arrays.stream(input.split(DELIMITER))
+        final List<Integer> lotteryNumbers = Arrays.stream(input.split(DELIMITER))
             .map(String::trim)
             .map(Integer::parseInt)
             .collect(Collectors.toList());
