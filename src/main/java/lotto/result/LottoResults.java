@@ -24,6 +24,10 @@ public class LottoResults {
         return prize;
     }
 
+    public float profit(int purchaseAmount) {
+        return prize / purchaseAmount;
+    }
+
     private float totalPrize(Map<MatchedNumbersCount, Long> lottoResults) {
         float prize = 0f;
 

@@ -16,31 +16,21 @@ public class LottoApplication {
 
     public static void main(String[] args) {
         int purchaseAmount = InputView.getPurchaseAmount();
-        int quantity = purchaseAmount / LOTTO_PRICE;
-        ResultView.printQuantity(quantity);
 
-        Lottos lottos = lottos(quantity);
+        Lottos lottos = purchase(purchaseAmount);
         LottoNumbers winningNumbers = draw();
         LottoResults lottoResults = match(lottos, winningNumbers);
+        float profit = lottoResults.profit(purchaseAmount);
 
-        float profit = lottoResults.prize() / purchaseAmount;
         ResultView.printResult(lottoResults, profit);
     }
 
-    private static LottoResults match(Lottos lottos, LottoNumbers winningNumbers) {
-        Map<MatchedNumbersCount, Long> lottoResults = new EnumMap<>(MatchedNumbersCount.class);
+    private static Lottos purchase(int purchaseAmount) {
+        int quantity = purchaseAmount / LOTTO_PRICE;
+        Lottos lottos = lottos(quantity);
 
-        for (MatchedNumbersCount matchedNumbersCount : MatchedNumbersCount.values()) {
-            long matchedLottosCount = lottos.match(winningNumbers, matchedNumbersCount);
-            lottoResults.put(matchedNumbersCount, matchedLottosCount);
-        }
-
-        return new LottoResults(lottoResults);
-    }
-
-    private static LottoNumbers draw() {
-        InputView.printWinningNumbersRequest();
-        return winningNumbers();
+        ResultView.printQuantity(quantity);
+        return lottos;
     }
 
     private static Lottos lottos(int quantity) {
@@ -57,6 +47,11 @@ public class LottoApplication {
         return new Lottos(lottos);
     }
 
+    private static LottoNumbers draw() {
+        InputView.printWinningNumbersRequest();
+        return winningNumbers();
+    }
+
     private static LottoNumbers winningNumbers() {
         String[] input = InputView.getWinningNumbers();
 
@@ -65,5 +60,16 @@ public class LottoApplication {
                 .collect(Collectors.toList());
 
         return LottoNumbers.from(winningNumbers);
+    }
+
+    private static LottoResults match(Lottos lottos, LottoNumbers winningNumbers) {
+        Map<MatchedNumbersCount, Long> lottoResults = new EnumMap<>(MatchedNumbersCount.class);
+
+        for (MatchedNumbersCount matchedNumbersCount : MatchedNumbersCount.values()) {
+            long matchedLottosCount = lottos.match(winningNumbers, matchedNumbersCount);
+            lottoResults.put(matchedNumbersCount, matchedLottosCount);
+        }
+
+        return new LottoResults(lottoResults);
     }
 }
