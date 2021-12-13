@@ -20,10 +20,6 @@ public class LottoResults {
         return values;
     }
 
-    public float prize() {
-        return prize;
-    }
-
     public float profit(int purchaseAmount) {
         return prize / purchaseAmount;
     }
