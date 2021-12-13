@@ -10,10 +10,9 @@ class LottoMachineTest {
     void buyLottos_with_money() {
         // given
         long inputMoney = 6000;
-        LottoMachine lottoMachine = new LottoMachine();
 
         // when
-        Lottos lottos = lottoMachine.buyLottos(inputMoney);
+        Lottos lottos = LottoMachine.buyLottos(inputMoney);
 
         // then
         assertThat(lottos.count()).isEqualTo(6);

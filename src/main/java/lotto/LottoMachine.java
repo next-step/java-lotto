@@ -20,14 +20,14 @@ public class LottoMachine {
 
     public LottoMachine() {}
 
-    public Lottos buyLottos(long inputMoney) {
+    public static Lottos buyLottos(long inputMoney) {
         Money money = new Money(inputMoney);
         int numberOfLottos = money.countCanBuy(LOTTO_PRICE);
 
         return createLottos(numberOfLottos);
     }
 
-    private Lottos createLottos(int numberOfLottos) {
+    private static Lottos createLottos(int numberOfLottos) {
         List<Lotto> lottos = new ArrayList<>();
 
         for(int i = 0; i < numberOfLottos ; i++) {
@@ -37,7 +37,7 @@ public class LottoMachine {
         return new Lottos(lottos);
     }
 
-    private Lotto createLotto() {
+    private static Lotto createLotto() {
         List<Number> numbers = new ArrayList<>();
         Collections.shuffle(lottoNumberSource);
 
