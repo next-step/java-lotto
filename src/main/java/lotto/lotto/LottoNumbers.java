@@ -5,6 +5,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
+    private static final String LOTTO_NUMBERS_DIGIT_MESSAGE = "로또 번호는 6자리여야 합니다.";
+    private static final String DUPLICATED_LOTTO_NUMBERS_MESSAGE = "로또 번호는 중복이 없어야 합니다.";
     private final List<LottoNumber> values;
 
     private LottoNumbers(List<LottoNumber> input) {
@@ -13,11 +15,11 @@ public class LottoNumbers {
 
     public static LottoNumbers from(List<Integer> input) {
         if (isValidDigits(input)) {
-            throw new IllegalArgumentException("로또 번호는 6자리여야 합니다.");
+            throw new IllegalArgumentException(LOTTO_NUMBERS_DIGIT_MESSAGE);
         }
 
         if(isDuplicated(input)) {
-            throw new IllegalArgumentException("로또 번호는 중복이 없어야 합니다.");
+            throw new IllegalArgumentException(DUPLICATED_LOTTO_NUMBERS_MESSAGE);
         }
 
         List<LottoNumber> lottoNumbers = input.stream()
@@ -53,8 +55,12 @@ public class LottoNumbers {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         LottoNumbers that = (LottoNumbers) o;
         return Objects.equals(values, that.values);
     }

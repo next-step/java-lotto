@@ -36,8 +36,12 @@ public class LottoResults {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         LottoResults that = (LottoResults) o;
         return Float.compare(that.prize, prize) == 0 && Objects.equals(values, that.values);
     }
