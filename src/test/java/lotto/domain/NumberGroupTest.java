@@ -11,22 +11,38 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class NumberGroupTest {
+    List<Number> numberList;
 
     @Test
     @DisplayName("동일한 리스트로 NumberGroup이 생성시 같은 값인지 확인합니다.")
     void equals() {
         //given
-        Integer[] numbers = {1,2,3,4,5,6};
-        List<Number> numberList = Arrays.stream(numbers)
-                .map(n -> new Number(n,new Position(n-1)))
-                .collect(Collectors.toList());
-
-        NumberGroup numberGroup = new NumberGroup(numberList);
+        NumberGroup numberGroup = mockNumberGroup();
 
         //when
         boolean result = numberGroup.equals(new NumberGroup(numberList));
 
         //then
         assertThat(result).isTrue();
+    }
+
+    @Test
+    @DisplayName("주어진 result에 일치하는 MatchCriteria의 count값이 정상적으로 증가하였는지 확인합니다.")
+    void matchMatchCriteria() {
+        //given
+        int result = 3;
+        //when
+        mockNumberGroup().matchMatchCriteria(result);
+        //then
+        assertThat(MatchCriteria.THREE.equalsCount(1)).isTrue();
+    }
+
+    NumberGroup mockNumberGroup() {
+        Integer[] numbers = {1,2,3,4,5,6};
+        numberList = Arrays.stream(numbers)
+                .map(n -> new Number(n,new Position(n-1)))
+                .collect(Collectors.toList());
+
+        return new NumberGroup(numberList);
     }
 }

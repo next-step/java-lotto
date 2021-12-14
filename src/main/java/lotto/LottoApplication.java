@@ -26,5 +26,6 @@ public class LottoApplication {
         inputView.askMatchingNumber();
 
 
+
     }
 }
