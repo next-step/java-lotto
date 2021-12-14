@@ -41,13 +41,9 @@ public class LottoNumbers {
 			.collect(Collectors.toList()));
 	}
 
-	public LottoNumbers getSortedLottoNumbers() {
-		Collections.sort(this.lottoNumbers);
-		return this;
-	}
-
 	public List<LottoNumber> lottoNumbers() {
-		return lottoNumbers;
+		Collections.sort(this.lottoNumbers);
+		return this.lottoNumbers;
 	}
 
 	@Override

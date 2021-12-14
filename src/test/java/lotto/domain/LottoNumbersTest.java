@@ -29,7 +29,6 @@ class LottoNumbersTest {
 		LottoNumbers lottoNumbers = LottoNumbers.createManualLottoNumber(Arrays.asList(3, 4, 5, 1, 10, 6));
 
 		//then
-		assertThat(lottoNumbers.getSortedLottoNumbers())
-			.isEqualTo(LottoNumbers.createManualLottoNumber(Arrays.asList(1, 3, 4, 5, 6, 10)));
+		assertThat(lottoNumbers.lottoNumbers()).isEqualTo(LottoNumbers.createManualLottoNumber(Arrays.asList(1, 3, 4, 5, 6, 10)).lottoNumbers());
 	}
 }
