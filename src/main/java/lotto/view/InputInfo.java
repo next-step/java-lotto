@@ -1,44 +1,30 @@
 package lotto.view;
 
-import lotto.domain.LottoNumbers;
-import lotto.domain.Lottos;
-import lotto.exception.LottoNumberException;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import lotto.domain.LottoCount;
+import lotto.domain.Price;
 
 
 public class InputInfo {
 
-    private static final String ERR_MESSAGE_NUMBER_FORMAT = "로또 입력값이 아닙니다.";
-    private static final String ERR_MESSAGE_LOTTO_SIZE = "입력 숫자는 6개 입니다.";
-    private static final String MESSAGE_LOTTO_COUNT = "%d개를 구입하였습니다.";
-    private static final String SPLIT_REGEX = ",";
-    private static final String ANSWER_BLANK = " ";
-    private static final String ANSWER_EMPTY = "";
+    private static final String MESSAGE_LOTTO_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 
-    public InputInfo(String price) {
-        System.out.println(String.format(MESSAGE_LOTTO_COUNT, Lottos.getCount(price)));
+    private final LottoCount manualCount;
+    private final LottoCount autoCount;
+
+    public InputInfo(Price price, LottoCount manualCount) {
+        this.autoCount = price.calculatorLottoCount(manualCount);
+        this.manualCount = manualCount;
     }
 
-    public List<Integer> getAnswer(String answer) {
-        List<Integer> answers;
-        try {
-            String answerLump = answer.replace(ANSWER_BLANK, ANSWER_EMPTY);
-            String[] answerSplit = answerLump.split(SPLIT_REGEX);
-            List<String> answerNumbers = Arrays.asList(answerSplit);
-            answers = answerNumbers.stream().map(Integer::parseInt).collect(Collectors.toList());
-        } catch (Exception e) {
-            throw new LottoNumberException(ERR_MESSAGE_NUMBER_FORMAT);
-        }
-        valid(answers);
-        return answers;
+    public void printInfo() {
+        System.out.println(String.format(MESSAGE_LOTTO_COUNT, manualCount.getCount(), autoCount.getCount()));
     }
 
-    public void valid(List<Integer> answer) {
-        if (answer.size() != LottoNumbers.MARKED_RANGE) {
-            throw new LottoNumberException(ERR_MESSAGE_LOTTO_SIZE);
-        }
+    public LottoCount getManualCount() {
+        return manualCount;
+    }
+
+    public LottoCount getAutoCount() {
+        return autoCount;
     }
 }

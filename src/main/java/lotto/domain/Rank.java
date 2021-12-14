@@ -19,7 +19,7 @@ public enum Rank {
     }
 
     public static Rank getRank(int count, boolean isBonus) {
-        if (isBonus) {
+        if (isBonus && Rank.THIRD.getCount() == count) {
             return Rank.SECOND;
         }
         return Arrays.stream(Rank.values())

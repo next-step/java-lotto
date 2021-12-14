@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.lotto.Lotto;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +10,7 @@ public class Result {
     private final Map<Rank, Integer> resultInfo;
     private double rateOfReturn;
 
-    public Result(Lottos lottos, Lotto answer, Bonus bonus) {
+    public Result(Lottos lottos, Lotto answer, BonusBall bonus) {
         resultInfo = new HashMap<>();
         init();
         calculateResult(lottos, answer, bonus);
@@ -20,11 +22,11 @@ public class Result {
         }
     }
 
-    public void calculateResult(Lottos lottos, Lotto answer, Bonus bonus) {
+    public void calculateResult(Lottos lottos, Lotto answer, BonusBall bonus) {
         double revenue = 0;
         for (Lotto lotto : lottos.getLottos()) {
             int count = answer.matchCount(lotto);
-            boolean isBonus = lotto.getNumbers().contains(bonus.getNumber());
+            boolean isBonus = lotto.getNumbers().contains(bonus.getBonus());
             revenue = getRevenue(revenue, count, isBonus);
         }
         this.rateOfReturn = revenue / (lottos.getLottos().size() * Lottos.LOTTO_PRICE);

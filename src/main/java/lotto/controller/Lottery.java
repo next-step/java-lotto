@@ -1,9 +1,11 @@
 package lotto.controller;
 
-import lotto.domain.Bonus;
-import lotto.domain.Lotto;
-import lotto.domain.LottoAnswerFactory;
+import lotto.domain.BonusBall;
+import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
+import lotto.domain.Price;
+import lotto.domain.factory.LottoFactory;
+import lotto.domain.lotto.Lotto;
 import lotto.view.InputInfo;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -13,23 +15,30 @@ import java.util.List;
 public class Lottery {
 
     public void draw() {
-        String price = InputView.questionPrice();
+        Price price = Price.of(InputView.questionPrice());
+        LottoCount manualCount = LottoCount.of(InputView.questionManualCount());
 
-        InputInfo inputInfo = new InputInfo(price);
-        Lottos lottos = new Lottos(price);
+        // 입력 정보
+        InputInfo inputInfo = new InputInfo(price, manualCount);
+        List<String> inputManualLottos = InputView.questionManualInput(inputInfo.getManualCount());
+
+        Lottos lottos = LottoFactory.lottos(price, inputManualLottos);
+
+        // 입력 정보 받기
+        inputInfo.printInfo();
 
         ResultView.printLottos(lottos);
 
-        winner(inputInfo, lottos);
+        winner(lottos);
     }
 
-    private void winner(InputInfo inputInfo, Lottos lottos) {
+
+
+    private void winner(Lottos lottos) {
         String answerText = InputView.questionAnswer();
-        List<Integer> answerList = inputInfo.getAnswer(answerText);
         String bonusBall = InputView.questionBonus();
-        Bonus bonus = new Bonus(bonusBall);
-        LottoAnswerFactory factory = new LottoAnswerFactory();
-        Lotto answer = factory.newInstance(answerList);
+        BonusBall bonus = BonusBall.of(bonusBall);
+        Lotto answer = LottoFactory.newInstance(answerText);
         ResultView resultView = new ResultView(lottos, answer, bonus);
         resultView.printResult();
     }

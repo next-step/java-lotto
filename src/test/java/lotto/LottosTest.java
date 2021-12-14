@@ -1,26 +1,47 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoAutoFactory;
 import lotto.domain.Lottos;
+import lotto.domain.Price;
+import lotto.domain.factory.LottoFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottosTest {
 
     @Test
-    void 구매_개수만큼_로또_반환() {
-        Lottos lottos = new Lottos("6000");
-        Assertions.assertThat(lottos.getLottos().size()).isEqualTo(6);
+    void 수동_2_자동_2() {
+        Price price = Price.of("4000");
+        List<String> manualList = new ArrayList<>();
+        manualList.add("1,2,3,4,5,6");
+        manualList.add("11,12,13,14,15,16");
+
+        Lottos lottos = LottoFactory.lottos(price, manualList);
+
+        Assertions.assertThat(lottos.getLottos().size()).isEqualTo(4);
     }
 
     @Test
-    void 로또_불변성_테스트() {
-        LottoAutoFactory factory = new LottoAutoFactory();
-        Lotto lotto = factory.newInstance();
-        List<Integer> numbers = lotto.getNumbers();
-        Assertions.assertThatThrownBy(() -> numbers.add(99)).isInstanceOf(UnsupportedOperationException.class);
+    void 수동_0개_자동_4개() {
+        Price price = Price.of("4000");
+        List<String> manualList = new ArrayList<>();
+
+        Lottos lottos = LottoFactory.lottos(price, manualList);
+        Assertions.assertThat(lottos.getLottos().size()).isEqualTo(4);
+    }
+
+    @Test
+    void 수동_4개_자동_0개() {
+        Price price = Price.of("4000");
+        List<String> manualList = new ArrayList<>();
+        manualList.add("1,2,3,4,5,6");
+        manualList.add("11,12,13,14,15,16");
+        manualList.add("21,22,23,24,25,26");
+        manualList.add("31,32,33,34,35,36");
+
+        Lottos lottos = LottoFactory.lottos(price, manualList);
+        Assertions.assertThat(lottos.getLottos().size()).isEqualTo(4);
     }
 }

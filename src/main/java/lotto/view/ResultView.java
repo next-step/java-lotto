@@ -1,6 +1,10 @@
 package lotto.view;
 
-import lotto.domain.*;
+import lotto.domain.BonusBall;
+import lotto.domain.Lottos;
+import lotto.domain.Rank;
+import lotto.domain.Result;
+import lotto.domain.lotto.Lotto;
 
 import java.util.Map;
 
@@ -13,7 +17,7 @@ public class ResultView {
 
     private final Result result;
 
-    public ResultView(Lottos lottos, Lotto answer, Bonus bonus) {
+    public ResultView(Lottos lottos, Lotto answer, BonusBall bonus) {
         this.result = new Result(lottos, answer, bonus);
     }
 
