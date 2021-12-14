@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottosNumbersTest {
+public class LottoTest {
 
     @DisplayName("생성된 로또 번호는 6개이다.")
     @Test
@@ -36,7 +36,7 @@ public class LottosNumbersTest {
                 .collect(Collectors.toList());
     }
 
-    @DisplayName("LottoNumbers에 로또 당첨 번호를 전달하면 일치하는 번호의 개수를 알 수 있다.")
+    @DisplayName("Lotto에 로또 당첨 번호를 전달하면 일치하는 번호의 개수를 알 수 있다.")
     @Test
     void getWinningInfo() {
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
