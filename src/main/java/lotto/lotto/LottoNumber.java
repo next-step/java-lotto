@@ -1,19 +1,16 @@
-package calculator;
+package lotto.lotto;
 
 import java.util.Objects;
 
-import static java.lang.Integer.parseInt;
-
-public class Number {
+public class LottoNumber {
+    private static final String LOTTO_NUMBER_RANGE_MESSAGE = "로또 번호는 1 이상 45 이하여야 합니다.";
+    private static final int MIN = 1;
+    private static final int MAX = 45;
     private final int value;
 
-    public Number(String input) {
-        this(parseInt(input));
-    }
-
-    public Number(int input) {
-        if (input < 0) {
-            throw new RuntimeException("음수는 입력할 수 없습니다.");
+    public LottoNumber(int input) {
+        if (input < MIN || input > MAX) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_RANGE_MESSAGE);
         }
 
         this.value = input;
@@ -31,8 +28,8 @@ public class Number {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Number number = (Number) o;
-        return value == number.value;
+        LottoNumber that = (LottoNumber) o;
+        return value == that.value;
     }
 
     @Override
@@ -42,7 +39,7 @@ public class Number {
 
     @Override
     public String toString() {
-        return "Number{" +
+        return "LottoNumber{" +
                 "value=" + value +
                 '}';
     }
