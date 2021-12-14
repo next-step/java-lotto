@@ -21,8 +21,8 @@ public class Lottos {
                 .collect(Collectors.toList()));
     }
 
-    public LottoResult lottoResult(Lotto winningLotto) {
-        return new LottoResult(this, winningLotto);
+    public LottoResult lottoResult(Lotto winningLotto, LottoNumber bonusLottoNumber) {
+        return new LottoResult(this, winningLotto, bonusLottoNumber);
     }
 
     public List<Lotto> getLottos() {

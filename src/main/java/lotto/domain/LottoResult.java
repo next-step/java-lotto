@@ -1,22 +1,20 @@
 package lotto.domain;
 
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoResult {
     private static final int DEFAULT_VALUE = 0;
     private static final int ADDING_COUNT_VALUE = 1;
 
-    private final Map<LottoResultType, Integer> results = new EnumMap<>(LottoResultType.class);
+    private final Map<LottoRank, Integer> results = new EnumMap<>(LottoRank.class);
 
-    public LottoResult(Lottos purchasedLottos, Lotto winningLotto) {
+    public LottoResult(Lottos purchasedLottos, Lotto winningLotto, LottoNumber bonusLottoNumber) {
         initiate();
-        processStatistics(lottoResultTypes(purchasedLottos.getLottos(), winningLotto));
+        processStatistics(lottoRank(purchasedLottos.getLottos(), winningLotto, bonusLottoNumber));
     }
 
-    public Map<LottoResultType, Integer> getStatistics() {
+    public Map<LottoRank, Integer> getStatistics() {
         return results;
     }
 
@@ -24,39 +22,45 @@ public class LottoResult {
         return calculateEarningsRatio(calculateTotalEarningsAmount());
     }
 
-    public int countByType(LottoResultType lottoResultType) {
-        return results.get(lottoResultType);
+    public int countByType(LottoRank lottoRank) {
+        return results.get(lottoRank);
     }
 
-    private void initiate() {
-        for (LottoResultType lottoResultType : LottoResultType.values()) {
-            results.put(lottoResultType, DEFAULT_VALUE);
-        }
-    }
-
-    private List<LottoResultType> lottoResultTypes(List<Lotto> purchasedLottos, Lotto winningLotto) {
-        return purchasedLottos.stream()
-                .map(lotto -> lotto.findLottoResultType(winningLotto.getNumbers()))
+    public List<LottoRank> ascendingWinningTypes() {
+        return Arrays.stream(LottoRank.values())
+                .filter(LottoRank::isWinningType)
+                .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
     }
 
-    private void processStatistics(List<LottoResultType> lottoResultTypes) {
-        for (LottoResultType lottoResultType : lottoResultTypes) {
-            int count = results.get(lottoResultType) + ADDING_COUNT_VALUE;
-            results.put(lottoResultType, count);
+    private void initiate() {
+        for (LottoRank lottoRank : LottoRank.values()) {
+            results.put(lottoRank, DEFAULT_VALUE);
+        }
+    }
+
+    private List<LottoRank> lottoRank(List<Lotto> purchasedLottos, Lotto winningLotto, LottoNumber bonusLottoNumber) {
+        return purchasedLottos.stream()
+                .map(lotto -> lotto.findLottoRank(winningLotto, bonusLottoNumber))
+                .collect(Collectors.toList());
+    }
+
+    private void processStatistics(List<LottoRank> lottoRanks) {
+        for (LottoRank lottoRank : lottoRanks) {
+            int count = results.get(lottoRank) + ADDING_COUNT_VALUE;
+            results.put(lottoRank, count);
         }
     }
 
     private int calculateTotalEarningsAmount() {
-        int totalEarningsAmount = 0;
-        for (LottoResultType lottoResultType : LottoResultType.WINNING_TYPES) {
-            totalEarningsAmount += calculateEarningAmount(lottoResultType);
-        }
-        return totalEarningsAmount;
+        return ascendingWinningTypes().stream()
+                .map(this::calculateEarningAmount)
+                .mapToInt(Double::intValue)
+                .sum();
     }
 
-    private double calculateEarningAmount(LottoResultType lottoResultType) {
-        return Math.multiplyExact(lottoResultType.reward(), countByType(lottoResultType));
+    private double calculateEarningAmount(LottoRank lottoRank) {
+        return Math.multiplyExact(lottoRank.reward(), countByType(lottoRank));
     }
 
     private double calculateEarningsRatio(int totalEarningsAmount) {

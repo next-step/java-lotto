@@ -7,6 +7,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,9 +19,10 @@ class LottoResultTest {
 
     @BeforeEach
     void setUp() {
-        Lottos purchasedLottos = new Lottos(Arrays.asList(new Lotto(), new Lotto(), new Lotto()));
+        Lottos purchasedLottos = new Lottos(Collections.singletonList(new Lotto(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)))));
         Lotto winningLotto = new Lotto();
-        lottoResult = new LottoResult(purchasedLottos, winningLotto);
+        LottoNumber bonusLottoNumber = new LottoNumber(7);
+        lottoResult = new LottoResult(purchasedLottos, winningLotto, bonusLottoNumber);
     }
 
     @DisplayName("`LottoResult` 생성")
@@ -42,17 +45,26 @@ class LottoResultTest {
     @Test
     void statisticsTest() {
         // when
-        Map<LottoResultType, Integer> earningsRatio = lottoResult.getStatistics();
+        Map<LottoRank, Integer> earningsRatio = lottoResult.getStatistics();
         // then
         assertThat(earningsRatio.values())
-                .hasSize(LottoResultType.values().length);
+                .hasSize(LottoRank.values().length);
     }
 
     @DisplayName("`LottoResult`의 통계 타입별 결과 갯수 반환")
     @ParameterizedTest
-    @EnumSource(LottoResultType.class)
-    void countByTypeTest(LottoResultType type) {
+    @EnumSource(LottoRank.class)
+    void countByTypeTest(LottoRank type) {
         // when & then
         assertThat(lottoResult.countByType(type)).isNotNegative();
+    }
+
+    @DisplayName("로또 결과 중에 당첨 타입들 반환")
+    @Test
+    void ascendingWinningTypesTest() {
+        // when
+        List<LottoRank> ascendingWinningTypes = lottoResult.ascendingWinningTypes();
+        // when & then
+        assertThat(ascendingWinningTypes).isNotNull();
     }
 }

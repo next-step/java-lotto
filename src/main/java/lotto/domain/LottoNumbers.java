@@ -24,11 +24,15 @@ public class LottoNumbers {
         return numbers;
     }
 
-    public int matchedCount(List<Integer> matchNumbers) {
+    public int matchedCount(LottoNumbers matchNumbers) {
         return (int) numbers.stream()
-                .map(LottoNumber::getNumber)
-                .filter(matchNumbers::contains)
+                .filter(matchNumbers.numbers::contains)
                 .count();
+    }
+
+    public boolean matchBonus(LottoNumber bonusLottoNumber) {
+        return numbers.stream()
+                .anyMatch(n -> n.equals(bonusLottoNumber));
     }
 
     @Override
