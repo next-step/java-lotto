@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
 
     private static final String DEFAULT_DELIMITER_REGEX = "[,:]";
+    private static final String INPUT_PATTERN_REGEX = "//(.)\n(.*)";
     private static final int GROUP_INDEX_DELIMITER = 1;
     private static final int GROUP_INDEX_SPLITTABLE_INPUT = 2;
 
@@ -29,17 +30,16 @@ public class StringAddCalculator {
     }
 
     private static String[] getSplitNumbers(final String input) {
-        String delimiterRegex = DEFAULT_DELIMITER_REGEX;
-        String splittableInput = input;
-
-        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+        final Matcher matcher = Pattern.compile(INPUT_PATTERN_REGEX).matcher(input);
         if (matcher.find()) {
+            final String splittableInput = matcher.group(GROUP_INDEX_SPLITTABLE_INPUT);
             final String customDelimiter = matcher.group(GROUP_INDEX_DELIMITER);
-            delimiterRegex = String.format("%s|%s", DEFAULT_DELIMITER_REGEX, customDelimiter);
-            splittableInput = matcher.group(GROUP_INDEX_SPLITTABLE_INPUT);
+            final String customDelimiterRegex = String.format("%s|%s", DEFAULT_DELIMITER_REGEX, customDelimiter);
+
+            return splittableInput.split(customDelimiterRegex);
         }
 
-        return splittableInput.split(delimiterRegex);
+        return input.split(DEFAULT_DELIMITER_REGEX);
     }
 
     private static int sum(final String[] splitNumbers) {
