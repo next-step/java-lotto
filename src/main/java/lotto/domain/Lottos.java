@@ -21,7 +21,7 @@ public class Lottos {
             return createActiveLottos(totalAmount, new ArrayList<>());
         }
         int passiveLottosAmount = passiveLottos.size() * Lotto.PRICE;
-        return createActiveLottos(totalAmount - passiveLottosAmount, passiveLottos);
+        return createActiveLottos(totalAmount - passiveLottosAmount, new ArrayList<>(passiveLottos));
     }
 
     private List<Lotto> createActiveLottos(int amount, List<Lotto> lottos) {
