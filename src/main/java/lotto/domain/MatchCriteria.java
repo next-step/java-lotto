@@ -19,7 +19,7 @@ import java.util.Arrays;
         this.count = count;
     }
 
-    public long calc() {
+    public double calc() {
         return prize * count;
     }
 
@@ -46,4 +46,12 @@ import java.util.Arrays;
     public int getCount() {
         return this.count;
     }
-}
+
+        public int getCriteria() {
+            return criteria;
+        }
+
+        public int getPrize() {
+            return prize;
+        }
+    }

@@ -25,9 +25,9 @@ class MatchCriteriaTest {
         MatchCriteria three = MatchCriteria.THREE;
         three.match();
         //when
-        Long result = three.calc();
+        double result = three.calc();
         //then
-        assertThat(result).isEqualTo(5000L);
+        assertThat(result).isEqualTo(5000);
     }
 
 }

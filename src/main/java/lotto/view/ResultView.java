@@ -1,6 +1,12 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.MatchCriteria;
+import lotto.domain.Rate;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
     public void printLottoCount(int lottoPieceCount) {
@@ -11,11 +17,16 @@ public class ResultView {
         System.out.println(lotto.toString());
     }
 
-    public void printMatchingStatistics() {
+    public void printMatchingStatistics(List<MatchCriteria> matchCriterias, Rate rate) {
         System.out.println("당첨 통계\n" +
                 "---------");
-        System.out.println("3개 일치 (5000원)- 1개");
-        System.out.println("총 수익률은 0.35입니다.");
+        for (MatchCriteria value : matchCriterias) {
+            if(value == MatchCriteria.NOTING) {
+                continue;
+            }
+            System.out.println(value.getCriteria() + "개 일치 (" + value.getPrize() + "원)- " + value.getCount() + "개");
+        }
+        System.out.println("총 수익률은 " + rate.getValue() +"입니다.");
     }
 
 }

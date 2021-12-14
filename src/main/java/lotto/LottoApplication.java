@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.Amount;
-import lotto.domain.Lotto;
-import lotto.domain.LottoMachine;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -16,7 +14,8 @@ public class LottoApplication {
         inputView.askBuyAmount();
 
         Scanner sc = new Scanner(System.in);
-        int lottoPieceCount = new Amount(sc.nextInt()).lottoPieceCount();
+        Amount lottoAmount = new Amount(sc.nextDouble());
+        int lottoPieceCount = lottoAmount.lottoPieceCount();
 
         resultView.printLottoCount(lottoPieceCount);
 
@@ -24,8 +23,11 @@ public class LottoApplication {
         resultView.printLotto(lotto);
 
         inputView.askMatchingNumber();
+        WinningNumbers winningNumbers = new WinningNumbers(sc.next());
 
+        MatchingMachine matchingMachine = new MatchingMachine(lotto, winningNumbers);
+        matchingMachine.match();
 
-
+        resultView.printMatchingStatistics(matchingMachine.matchCriterias(), matchingMachine.rate(lottoAmount));
     }
 }
