@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -56,5 +57,14 @@ class LottoResultTest {
     void countByTypeTest(LottoRank type) {
         // when & then
         assertThat(lottoResult.countByType(type)).isNotNegative();
+    }
+
+    @DisplayName("로또 결과 중에 당첨 타입들 반환")
+    @Test
+    void ascendingWinningTypesTest() {
+        // when
+        List<LottoRank> ascendingWinningTypes = lottoResult.ascendingWinningTypes();
+        // when & then
+        assertThat(ascendingWinningTypes).isNotNull();
     }
 }

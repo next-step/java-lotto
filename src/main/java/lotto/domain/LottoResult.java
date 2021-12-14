@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoResult {
@@ -28,6 +26,13 @@ public class LottoResult {
         return results.get(lottoRank);
     }
 
+    public List<LottoRank> ascendingWinningTypes() {
+        return Arrays.stream(LottoRank.values())
+                .filter(LottoRank::isWinningType)
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
+    }
+
     private void initiate() {
         for (LottoRank lottoRank : LottoRank.values()) {
             results.put(lottoRank, DEFAULT_VALUE);
@@ -48,11 +53,10 @@ public class LottoResult {
     }
 
     private int calculateTotalEarningsAmount() {
-        int totalEarningsAmount = 0;
-        for (LottoRank lottoRank : LottoRank.WINNING_TYPES) {
-            totalEarningsAmount += calculateEarningAmount(lottoRank);
-        }
-        return totalEarningsAmount;
+        return ascendingWinningTypes().stream()
+                .map(this::calculateEarningAmount)
+                .mapToInt(Double::intValue)
+                .sum();
     }
 
     private double calculateEarningAmount(LottoRank lottoRank) {

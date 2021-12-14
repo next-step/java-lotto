@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -16,12 +15,6 @@ public enum LottoRank {
     TWO_MATCHED(2, 0, false, false),
     ONE_MATCHED(1, 0, false, false),
     NONE_MATCHED(0, 0, false, false);
-
-    public static final List<LottoRank> WINNING_TYPES = Collections.unmodifiableList(
-            Arrays.stream(LottoRank.values())
-                    .filter(value -> value.winningType)
-                    .sorted(Comparator.reverseOrder())
-                    .collect(Collectors.toList()));
 
     public static final List<LottoRank> BONUS_TYPES = Collections.unmodifiableList(
             Arrays.stream(LottoRank.values())
@@ -53,6 +46,10 @@ public enum LottoRank {
 
     public int reward() {
         return reward;
+    }
+
+    public boolean isWinningType() {
+        return winningType;
     }
 
     public boolean notBonus() {

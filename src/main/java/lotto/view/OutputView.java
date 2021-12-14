@@ -49,9 +49,8 @@ public class OutputView {
     }
 
     private static void printStatisticsForLotto(LottoResult lottoResult) {
-        for (LottoRank lottoRank : LottoRank.WINNING_TYPES) {
-            System.out.print(statisticMessage(lottoResult, lottoRank));
-        }
+        lottoResult.ascendingWinningTypes()
+                .forEach(v -> System.out.print(statisticMessage(lottoResult, v)));
     }
 
     private static String statisticMessage(LottoResult lottoResult, LottoRank lottoRank) {
