@@ -1,19 +1,22 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 public enum Rank {
-    FOURTH(3, 5000),
-    THIRD(4, 50000),
-    SECOND(5, 1500000),
-    FIRST(6, 2000000000);
+    MISS(0, false, 0),
+    FIFTH(3, false, 5_000),
+    FOURTH(4, false, 50_000),
+    THIRD(5, false, 1_500_000),
+    SECOND(5, true, 1_500_000),
+    FIRST(6, false, 2_000_000_000);
 
     private final int matchedCount;
+    private final boolean matchedBonus;
     private final int winningAmount;
 
-    Rank(int matchedCount, int winningAmount) {
+    Rank(int matchedCount, boolean matchedBonus, int winningAmount) {
         this.matchedCount = matchedCount;
+        this.matchedBonus = matchedBonus;
         this.winningAmount = winningAmount;
     }
 
@@ -25,17 +28,19 @@ public enum Rank {
         return winningAmount;
     }
 
-    public static int winningAmount(int matchedCount) {
-        if (getRank(matchedCount).isPresent()) {
-            return getRank(matchedCount).get().winningAmount;
+    public static Rank valueOf(int matchedCount, boolean matchedBonus) {
+        if (isSecond(matchedCount, matchedBonus)) {
+            return Rank.SECOND;
         }
-        return 0;
+
+        return Arrays.stream(values())
+                .filter(rank -> rank != Rank.SECOND && rank.matchedCount == matchedCount)
+                .findFirst()
+                .orElseGet(() -> Rank.MISS);
     }
 
-    private static Optional<Rank> getRank(int matchedCount) {
-        return Arrays.stream(values())
-                .filter(rank -> rank.matchedCount == matchedCount)
-                .findFirst();
+    private static boolean isSecond(int matchedCount, boolean matchedBonus) {
+        return Rank.SECOND.matchedCount == matchedCount && Rank.SECOND.matchedBonus == matchedBonus;
     }
 
 }

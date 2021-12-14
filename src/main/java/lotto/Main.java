@@ -17,7 +17,7 @@ public class Main {
         Lottos lottos = new Lottos(getAmount(inputView));
         ResultView.printLottos(lottos);
 
-        LottoResult result = lottos.result(getWinningNumbers(inputView));
+        LottoResult result = lottos.result(getWinningNumbers(inputView), getBonusNumbers(inputView));
         ResultView.printLottoResult(result);
         ResultView.printProfitRate(result);
 
@@ -33,5 +33,10 @@ public class Main {
         return Arrays.stream(numbers)
                 .map(s -> LottoNumber.of(s))
                 .collect(Collectors.toList());
+    }
+
+    public static LottoNumber getBonusNumbers(InputView inputView) {
+        int bonusNumber = Integer.parseInt(inputView.nextLine("보너스 볼을 입력해 주세요."));
+        return LottoNumber.of(bonusNumber);
     }
 }

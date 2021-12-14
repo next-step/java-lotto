@@ -52,8 +52,14 @@ public class Lotto {
         return count;
     }
 
+    public boolean matchedBonus(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
     @Override
     public String toString() {
         return lottoNumbers.toString();
     }
+
+
 }
