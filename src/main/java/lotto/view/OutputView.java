@@ -54,7 +54,7 @@ public class OutputView {
     }
 
     private static String statisticMessage(LottoResult lottoResult, LottoRank lottoRank) {
-        if (lottoRank.notBonus()) {
+        if (lottoRank.hasNotBonus()) {
             return String.format(LOTTO_STATISTICS_MESSAGE, lottoRank.matchedCount(), lottoRank.reward(), lottoResult.countByType(lottoRank));
         }
         return String.format(LOTTO_BONUS_STATISTICS_MESSAGE, lottoRank.matchedCount(), lottoRank.reward(), lottoResult.countByType(lottoRank));

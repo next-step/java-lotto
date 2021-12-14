@@ -32,10 +32,10 @@ class LottoRankTest {
 
     private static Stream<LottoRank> lottoRankWithoutBonusCases() {
         return Arrays.stream(LottoRank.values())
-                .filter(LottoRank::notBonus);
+                .filter(LottoRank::hasNotBonus);
     }
 
     private static Stream<LottoRank> lottoRankWithBonusCases() {
-        return LottoRank.BONUS_TYPES.stream();
+        return Arrays.stream(LottoRank.values()).filter(LottoRank::hasBonus);
     }
 }

@@ -1,10 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public enum LottoRank {
     FIRST(6, 2_000_000_000, true, false),
@@ -15,11 +12,6 @@ public enum LottoRank {
     TWO_MATCHED(2, 0, false, false),
     ONE_MATCHED(1, 0, false, false),
     NONE_MATCHED(0, 0, false, false);
-
-    public static final List<LottoRank> BONUS_TYPES = Collections.unmodifiableList(
-            Arrays.stream(LottoRank.values())
-                    .filter(value -> value.bonus)
-                    .collect(Collectors.toList()));
 
     private final int matchedCount;
     private final int reward;
@@ -52,19 +44,24 @@ public enum LottoRank {
         return winningType;
     }
 
-    public boolean notBonus() {
-        return !bonus;
+    public boolean hasBonus() {
+        return bonus;
+    }
+
+    public boolean hasNotBonus() {
+        return !hasBonus();
     }
 
     private static Predicate<LottoRank> matchingExpression(int matchedCount, boolean bonus) {
-        if (bonus(matchedCount)) {
+        if (hasBonus(matchedCount)) {
             return lottoRank -> lottoRank.matchedCount == matchedCount && lottoRank.bonus == bonus;
         }
         return lottoRank -> lottoRank.matchedCount == matchedCount;
     }
 
-    private static boolean bonus(int matchedCount) {
-        return BONUS_TYPES.stream()
+    private static boolean hasBonus(int matchedCount) {
+        return Arrays.stream(LottoRank.values())
+                .filter(LottoRank::hasBonus)
                 .map(LottoRank::matchedCount)
                 .anyMatch(v -> v == matchedCount);
     }
