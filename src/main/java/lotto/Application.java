@@ -10,7 +10,9 @@ import lotto.view.OutputView;
 public class Application {
     public static void main(String[] args) {
         LottoGameController lottoGameController = new LottoGameController();
-        Lottos lottos = lottoGameController.purchaseLottos(PurchaseLottosRequest.from(InputView.readPurchasingAmount()));
+        Lottos lottos = lottoGameController.purchaseLottos(
+                PurchaseLottosRequest.of(InputView.readPurchasingAmount(), InputView.readManualPurchasingSize())
+        );
         OutputView.printPurchasedLottoInformation(lottos);
         OutputView.printStatisticsForLottos(
                 lottoGameController.retrieveStatistics(
