@@ -29,7 +29,7 @@ public class OutputView {
         System.out.println(WINNING_STATICS);
         System.out.println(DIVIDING_LINE);
         for (WinningInformationDto information : informationList) {
-            String format = String.format(WINNING_STATICS_FORMAT, information.numberOfMatching, information.prizeMoney, information.numberOfLotto);
+            String format = String.format(WINNING_STATICS_FORMAT, information.getNumberOfMatching(), information.getPrizeMoney(), information.getNumberOfLotto());
             System.out.println(format);
 
         }

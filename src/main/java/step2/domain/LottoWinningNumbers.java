@@ -50,7 +50,7 @@ public class LottoWinningNumbers {
         return lottoWinningNumbers.contains(lottoNumber);
     }
 
-    public int numberOfMatching(LottoNumber lottoNumber) {
+    public int numberContain(LottoNumber lottoNumber) {
         if (contain(lottoNumber)) {
             return 1;
         }
