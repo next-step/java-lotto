@@ -10,10 +10,12 @@ import lotto.view.OutputView;
 public class Application {
     public static void main(String[] args) {
         LottoGameController lottoGameController = new LottoGameController();
+        int purchasingPrice = InputView.readPurchasingAmount();
+        int manualPurchasingSize = InputView.readManualPurchasingSize();
         Lottos lottos = lottoGameController.purchaseLottos(
-                PurchaseLottosRequest.of(InputView.readPurchasingAmount(), InputView.readManualPurchasingSize())
+                PurchaseLottosRequest.of(purchasingPrice, InputView.readManualPurchasingLotto(manualPurchasingSize))
         );
-        OutputView.printPurchasedLottoInformation(lottos);
+        OutputView.printPurchasedLottoInformation(lottos, manualPurchasingSize);
         OutputView.printStatisticsForLottos(
                 lottoGameController.retrieveStatistics(
                         RetrieveStatisticsRequest.of(lottos, InputView.readWinningLottoNumbers(), InputView.readBonusLottoNumber())
