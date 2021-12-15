@@ -26,14 +26,14 @@ public class Lottos {
                 .collect(Collectors.toList()));
     }
 
-    public LottoResult lottoResult(Lotto winningLotto, LottoNumber bonusLottoNumber) {
-        return new LottoResult(this, winningLotto, bonusLottoNumber);
     private static List<Lotto> automatedLottos(int automatedSize) {
         return IntStream.range(0, automatedSize)
                 .mapToObj(v -> new Lotto())
                 .collect(Collectors.toList());
     }
 
+    public LottoResult lottoResult(WinningLotto winningLotto) {
+        return new LottoResult(this, winningLotto);
     }
 
     public List<Lotto> getLottos() {
@@ -42,6 +42,12 @@ public class Lottos {
 
     public int size() {
         return lottos.size();
+    }
+
+    public List<LottoRank> lottoRanks(WinningLotto winningLotto) {
+        return lottos.stream()
+                .map(winningLotto::match)
+                .collect(Collectors.toList());
     }
 
     private void validate(List<Lotto> lottos) {

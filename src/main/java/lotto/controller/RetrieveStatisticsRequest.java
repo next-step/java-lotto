@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -28,12 +25,8 @@ public class RetrieveStatisticsRequest {
         return lottos;
     }
 
-    public Lotto winningLotto() {
-        return new Lotto(new LottoNumbers(winningLottoNumbers));
-    }
-
-    public LottoNumber bonusLottoNumber() {
-        return new LottoNumber(bonusLottoNumber);
+    public WinningLotto winningLotto() {
+        return new WinningLotto(new Lotto(new LottoNumbers(winningLottoNumbers)), new LottoNumber(bonusLottoNumber));
     }
 
     private void validate(Lottos lottos, List<Integer> winningLottoNumbers, int bonusLottoNumber) {

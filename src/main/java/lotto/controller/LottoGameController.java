@@ -11,6 +11,6 @@ public class LottoGameController {
 
     public LottoResult retrieveStatistics(RetrieveStatisticsRequest request) {
         return request.getLottos()
-                .lottoResult(request.winningLotto(), request.bonusLottoNumber());
+                .lottoResult(request.winningLotto());
     }
 }

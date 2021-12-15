@@ -9,9 +9,9 @@ public class LottoResult {
 
     private final Map<LottoRank, Integer> results = new EnumMap<>(LottoRank.class);
 
-    public LottoResult(Lottos purchasedLottos, Lotto winningLotto, LottoNumber bonusLottoNumber) {
+    public LottoResult(Lottos purchasedLottos, WinningLotto winningLotto) {
         initiate();
-        processStatistics(lottoRank(purchasedLottos.getLottos(), winningLotto, bonusLottoNumber));
+        processStatistics(lottoRank(purchasedLottos, winningLotto));
     }
 
     public Map<LottoRank, Integer> getStatistics() {
@@ -39,10 +39,8 @@ public class LottoResult {
         }
     }
 
-    private List<LottoRank> lottoRank(List<Lotto> purchasedLottos, Lotto winningLotto, LottoNumber bonusLottoNumber) {
-        return purchasedLottos.stream()
-                .map(lotto -> lotto.findLottoRank(winningLotto, bonusLottoNumber))
-                .collect(Collectors.toList());
+    private List<LottoRank> lottoRank(Lottos purchasedLottos, WinningLotto winningLotto) {
+        return purchasedLottos.lottoRanks(winningLotto);
     }
 
     private void processStatistics(List<LottoRank> lottoRanks) {
