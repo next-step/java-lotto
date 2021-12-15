@@ -14,7 +14,9 @@ class PositionTest {
     @DisplayName("비 정상적인 값으로 Position이 생성될때 illegalArgumentException이 발생하는지 확인합니다.")
     void illegalArgument(int value) {
         assertThatIllegalArgumentException().isThrownBy(
-                () -> {new Position(value);}
+                () -> {
+                    new Position(value);
+                }
         );
     }
 

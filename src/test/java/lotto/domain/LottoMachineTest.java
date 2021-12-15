@@ -29,7 +29,9 @@ class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine();
 
         assertThatIllegalArgumentException().isThrownBy(
-                () -> {lottoMachine.lotto(lottoPieceCount);  }
+                () -> {
+                    lottoMachine.lotto(lottoPieceCount);
+                }
         );
     }
 
@@ -37,7 +39,7 @@ class LottoMachineTest {
     @DisplayName("6개의 숫자들로 이루어진 NumberGroup을 만드는지 확인합니다")
     void numberGroup() {
         //given
-        LottoMachine lottoMachine= new LottoMachine();
+        LottoMachine lottoMachine = new LottoMachine();
         //when
         NumberGroup numberGroup = lottoMachine.numberGroup();
         //then

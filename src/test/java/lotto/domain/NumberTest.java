@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 class NumberTest {
     @ParameterizedTest
-    @CsvSource({"-1,0","0,0","100,100"})
+    @CsvSource({"-1,0", "0,0", "100,100"})
     @DisplayName("비 정상적인 값으로 Number이 생성될때 illegalArgumentException이 발생하는지 확인합니다.")
     void illegalArgument(int number, int position) {
         assertThatIllegalArgumentException().isThrownBy(

@@ -15,17 +15,13 @@ public class Lotto {
     }
 
     public void match(NumberGroup winningNumbers) {
-        for (NumberGroup numberGroup:
-             numberGroups) {
+        for (NumberGroup numberGroup :
+                numberGroups) {
             numberGroup.match(winningNumbers);
         }
     }
 
-
-    @Override
-    public String toString() {
-        return "Lotto{" +
-                "numberGroups=" + numberGroups.toString() +
-                '}';
+    public List<NumberGroup> getNumberGroups() {
+        return numberGroups;
     }
 }

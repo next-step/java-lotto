@@ -37,7 +37,8 @@ class WinningNumbersTest {
         String winningNumbers = "1, 2, 3, 4, 5, 6, 7";
         //when
         assertThatIllegalArgumentException().isThrownBy(
-                () -> {new WinningNumbers(winningNumbers).numbers();}
+                () -> {
+                    new WinningNumbers(winningNumbers).numbers();}
         );
     }
 }

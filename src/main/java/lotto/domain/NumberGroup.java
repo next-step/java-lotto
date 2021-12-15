@@ -22,14 +22,14 @@ public class NumberGroup {
         Iterator<Number> winningNumberIterator = winningNumbers.numbers.iterator();
 
         int matchResult = 0;
-        while(thisNumberIterator.hasNext() && winningNumberIterator.hasNext()) {
+        while (thisNumberIterator.hasNext() && winningNumberIterator.hasNext()) {
             matchResult = matchResult(thisNumberIterator.next(), winningNumberIterator.next(), matchResult);
         }
         matchMatchCriteria(matchResult);
     }
 
     public int matchResult(Number thisNumber, Number winningNumber, int matchResult) {
-        if(thisNumber.equals(winningNumber)) {
+        if (thisNumber.equals(winningNumber)) {
             matchResult++;
         }
         return matchResult;

@@ -13,7 +13,7 @@ public class WinningNumbers {
     public String[] numbers() {
         String[] numbers = winningNumbers.split(",");
 
-        if(numbers.length != NumberGroup.LIMIT) {
+        if (numbers.length != NumberGroup.LIMIT) {
             throw new IllegalArgumentException();
         }
         return numbers;

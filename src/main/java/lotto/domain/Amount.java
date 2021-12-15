@@ -7,14 +7,14 @@ public class Amount {
     private double value;
 
     public Amount(double value) {
-        if(value < 0 || !(value % PIECE_OF_LOTTO == 0)) {
+        if (value < 0 || !(value % PIECE_OF_LOTTO == 0)) {
             throw new IllegalArgumentException();
         }
         this.value = value;
     }
 
     public int lottoPieceCount() {
-        return (int)(this.value / PIECE_OF_LOTTO);
+        return (int) (this.value / PIECE_OF_LOTTO);
     }
 
     public Rate dividedAmount(Amount divisor) {

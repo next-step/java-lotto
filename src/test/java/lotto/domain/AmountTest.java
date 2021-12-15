@@ -27,12 +27,14 @@ class AmountTest {
     @DisplayName("허용하지 않는 값으로 Amount 생성시 IllegalArgumentException이 발생하는지 확인합니다")
     void illegalArgument(int value) {
         assertThatIllegalArgumentException().isThrownBy(
-                () -> {new Amount(value);}
+                () -> {
+                    new Amount(value);
+                }
         );
     }
 
     @ParameterizedTest
-    @CsvSource({"1000,1","14000,14","123000,123"})
+    @CsvSource({"1000,1", "14000,14", "123000,123"})
     @DisplayName("주어진 금액에 따라 로또 장수가 예측한대로 반환되는지 확인한다")
     void lottoPieceCount(int value, int count) {
         //given

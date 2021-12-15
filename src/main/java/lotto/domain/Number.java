@@ -7,7 +7,7 @@ public class Number {
     private final Position position;
 
     public Number(Integer number, Position position) {
-        if(number < LottoMachine.FIRST_NUMBER || number > LottoMachine.LAST_NUMBER) {
+        if (number < LottoMachine.FIRST_NUMBER || number > LottoMachine.LAST_NUMBER) {
             throw new IllegalArgumentException();
         }
         this.number = number;

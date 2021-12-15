@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-    public enum MatchCriteria {
+public enum MatchCriteria {
     THREE(3, 5000, 0),
     FOUR(4, 50000, 0),
     FIVE(5, 1500000, 0),
@@ -47,11 +47,11 @@ import java.util.Arrays;
         return this.count;
     }
 
-        public int getCriteria() {
-            return criteria;
-        }
-
-        public int getPrize() {
-            return prize;
-        }
+    public int getCriteria() {
+        return criteria;
     }
+
+    public int getPrize() {
+        return prize;
+    }
+}

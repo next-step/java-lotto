@@ -10,7 +10,7 @@ public class Mock {
     }
 
     static Lotto lotto(NumberGroup numberGroup1, NumberGroup numberGroup2, NumberGroup numberGroup3
-            ,NumberGroup numberGroup4, NumberGroup numberGroup5, NumberGroup numberGroup6) {
+            , NumberGroup numberGroup4, NumberGroup numberGroup5, NumberGroup numberGroup6) {
         return new Lotto(Arrays.asList(numberGroup1, numberGroup2, numberGroup3, numberGroup4, numberGroup5, numberGroup6));
     }
 

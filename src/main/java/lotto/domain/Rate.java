@@ -10,7 +10,7 @@ public class Rate {
     }
 
     public Rate rate(double dividend, double divisor) {
-        if(dividend == 0) {
+        if (dividend == 0) {
             return this;
         }
         return new Rate(Math.floor((dividend / divisor) * 100) / 100.0);
