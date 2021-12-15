@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -32,15 +31,19 @@ public class LottosTest {
     }
 
     @DisplayName("countMatch 함수는 당첨 번호를 받아 전체 발급 로또에 대한 PrizeType 별 count를 통계한 Map을 반환한다.")
-    @ParameterizedTest
-    @ValueSource(ints = {1000, 6000, 14000})
-    void countMatch(int money) {
+    @Test
+    void countMatch() {
+        int money = 1000;
         Lottos lottos = new Lottos(money);
-        List<Integer> nums = lottos.getLottos().get(0)
+        // 구입한 로또로 당첨번호 생성
+        List<Integer> winningNumbers = lottos.getLottos().get(0)
                 .getNumbers().stream()
                 .map(LottoNumber::number)
                 .collect(Collectors.toList());
-        Map<PrizeType, Integer> prizeStat = lottos.countMatch(new Lotto(nums));
+        int meaninglessBonusNumber = 1;
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, meaninglessBonusNumber);
+
+        Map<PrizeType, Integer> prizeStat = lottos.countMatch(winningLotto);
         assertThat(prizeStat).isInstanceOf(EnumMap.class);
         assertThat(prizeStat.get(PrizeType.FIRST)).isEqualTo(1);
     }

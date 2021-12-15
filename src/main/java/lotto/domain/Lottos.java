@@ -33,10 +33,10 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public Map<PrizeType, Integer> countMatch(Lotto prizeNumbers) {
+    public Map<PrizeType, Integer> countMatch(WinningLotto winningLotto) {
         Map<PrizeType, Integer> prizeStat = new EnumMap<>(PrizeType.class);
         this.lottos.forEach(lotto -> {
-            PrizeType prizeType = PrizeType.of(lotto.match(prizeNumbers));
+            PrizeType prizeType = PrizeType.of(winningLotto.match(lotto), winningLotto.matchBonusNumber(lotto));
             prizeStat.put(prizeType, prizeStat.getOrDefault(prizeType, 0) + 1);
         });
         return prizeStat;

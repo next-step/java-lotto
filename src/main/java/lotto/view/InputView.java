@@ -1,8 +1,7 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
+import lotto.domain.WinningLotto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,12 +32,14 @@ public class InputView {
         return lottos;
     }
 
-    public Lotto getPrizeNumbers() {
+    public WinningLotto getWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         List<Integer> list = new ArrayList<>();
         IntStream.range(0, NUMBERS_SIZE)
                 .forEach(i -> list.add(parseInteger(i, scanner.next())));
-        return new Lotto(list);
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusNumber = scanner.nextInt();
+        return new WinningLotto(list, bonusNumber);
     }
 
     private Integer parseInteger(int i, String token) {

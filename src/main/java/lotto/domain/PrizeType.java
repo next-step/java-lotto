@@ -3,11 +3,12 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum PrizeType {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOURTH(3, 5_000),
     MISS(0, 0),
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000),
     ;
 
     private int countOfMatch;
@@ -26,7 +27,14 @@ public enum PrizeType {
         return this.prizeMoney;
     }
 
-    public static PrizeType of(int countOfMatch) {
-        return Arrays.stream(values()).filter(type -> type.countOfMatch == countOfMatch).findAny().orElse(PrizeType.MISS);
+    public static PrizeType of(long countOfMatch, boolean hasBonusNumber) {
+        return Arrays.stream(values()).filter(type -> type.countOfMatch == countOfMatch)
+                .findFirst()
+                .map(prizeType -> {
+                    if (prizeType == THIRD && hasBonusNumber) {
+                        return SECOND;
+                    }
+                    return prizeType;
+                }).orElse(PrizeType.MISS);
     }
 }
