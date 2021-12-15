@@ -7,10 +7,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 @DisplayName("로또 구입시 요청에 전달된 파라미터 객체 테스트")
 class PurchaseLottosRequestTest {
@@ -18,37 +22,55 @@ class PurchaseLottosRequestTest {
     @DisplayName("정상적인 로또 구입 요청")
     @ParameterizedTest
     @MethodSource("validRequestParameterCases")
-    void createValidCaseTest(int purchasingPrice, int manualPurchasingSize) {
+    void createValidCaseTest(int purchasingSize, List<ManualLottoRequest> manualPurchasingLottos) {
         // when & then
-        assertThat(PurchaseLottosRequest.of(purchasingPrice, manualPurchasingSize)).isNotNull();
+        assertThat(PurchaseLottosRequest.of(Lotto.PRICE * purchasingSize, manualPurchasingLottos)).isNotNull();
     }
 
     @DisplayName("비정상적인 로또 구입 요청")
     @ParameterizedTest
     @MethodSource("invalidRequestParameterCases")
-    void createInvalidCaseTest(int invalidPurchasingPrice, int invalidManualPurchasingSize) {
+    void createInvalidCaseTest(int invalidPurchasingPrice, List<ManualLottoRequest> invalidManualPurchasingLottos) {
         // when & then
         assertThatIllegalArgumentException().isThrownBy(
-                () -> PurchaseLottosRequest.of(invalidPurchasingPrice, invalidManualPurchasingSize)
+                () -> PurchaseLottosRequest.of(invalidPurchasingPrice, invalidManualPurchasingLottos)
+        );
+    }
+
+    @DisplayName("수동으로 입력된 로또 정보 반환")
+    @ParameterizedTest
+    @MethodSource("validRequestParameterCases")
+    void manualLottosTest(int purchasingSize, List<ManualLottoRequest> manualPurchasingLottos) {
+        // given
+        PurchaseLottosRequest request = PurchaseLottosRequest.of(Lotto.PRICE * purchasingSize, manualPurchasingLottos);
+        int automatedLottoSize = request.automatedLottoSize();
+        // when
+        List<Lotto> manualLottos = request.manualLottos();
+        int manualLottoSize = manualLottos.size();
+        // then
+        assertAll(
+                () -> assertThat(manualLottos).isNotNull(),
+                () -> assertThat(automatedLottoSize + manualLottoSize).isEqualTo(purchasingSize)
         );
     }
 
     @DisplayName("구입한 로또 갯수 반환")
     @ParameterizedTest
     @MethodSource("validRequestParameterCases")
-    void purchasingLottoSizeTest(int purchasingPrice, int manualPurchasingSize) {
+    void automatedLottoSizeTest(int purchasingSize, List<ManualLottoRequest> manualPurchasingLottos) {
         // when
-        PurchaseLottosRequest request = PurchaseLottosRequest.of(purchasingPrice, manualPurchasingSize);
+        PurchaseLottosRequest request = PurchaseLottosRequest.of(Lotto.PRICE * purchasingSize, manualPurchasingLottos);
         // then
-        assertThat(request.purchasingLottoSize()).isEqualTo(purchasingPrice / Lotto.PRICE);
+        assertThat(request.automatedLottoSize())
+                .isEqualTo(Lotto.PRICE * purchasingSize / Lotto.PRICE - manualPurchasingLottos.size());
     }
 
     private static Stream<Arguments> validRequestParameterCases() {
         return Stream.of(
-                Arguments.of(Lottos.MIN_LOTTO_PRICE, 1),
-                Arguments.of(Lotto.PRICE * 10, 5),
-                Arguments.of(Lotto.PRICE * 100, 50),
-                Arguments.of(Lotto.PRICE * 1000, 500)
+                Arguments.of(1, Collections.emptyList()),
+                Arguments.of(10, Collections.singletonList(ManualLottoRequest.from(Arrays.asList(1, 2, 3, 4, 5, 6)))),
+                Arguments.of(100, Arrays.asList(ManualLottoRequest.from(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                        ManualLottoRequest.from(Arrays.asList(7, 8, 9, 10, 11, 12))))
         );
     }
 
@@ -57,14 +79,14 @@ class PurchaseLottosRequestTest {
     }
 
     private static Arguments[] invalidPurchasingPriceCases() {
-        return new Arguments[]{Arguments.of(Integer.MIN_VALUE, 0),
-                Arguments.of(0, 0),
-                Arguments.of(Lottos.MIN_LOTTO_PRICE - 1, 0)};
+        return new Arguments[]{Arguments.of(Integer.MIN_VALUE, Collections.emptyList()),
+                Arguments.of(0, Collections.singletonList(ManualLottoRequest.from(Arrays.asList(1, 2, 3, 4, 5, 6)))),
+                Arguments.of(Lottos.MIN_LOTTO_PRICE - 1, Arrays.asList(ManualLottoRequest.from(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                        ManualLottoRequest.from(Arrays.asList(7, 8, 9, 10, 11, 12))))};
     }
 
     private static Arguments[] invalidManualPurchasingSizeCases() {
-        return new Arguments[]{Arguments.of(Integer.MIN_VALUE, 0),
-                Arguments.of(0, 0),
-                Arguments.of(Lottos.MIN_LOTTO_PRICE - 1, 0)};
+        return new Arguments[]{Arguments.of(Lotto.PRICE, Arrays.asList(ManualLottoRequest.from(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                ManualLottoRequest.from(Arrays.asList(7, 8, 9, 10, 11, 12))))};
     }
 }

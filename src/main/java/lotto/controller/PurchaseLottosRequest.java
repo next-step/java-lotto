@@ -3,31 +3,44 @@ package lotto.controller;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class PurchaseLottosRequest {
     private final int purchasingAmount;
-    private final int manualPurchasingSize;
+    private final List<ManualLottoRequest> manualPurchasingLottos;
 
-    private PurchaseLottosRequest(int purchasingAmount, int manualPurchasingSize) {
+    private PurchaseLottosRequest(int purchasingAmount, List<ManualLottoRequest> manualPurchasingLottos) {
         this.purchasingAmount = purchasingAmount;
-        this.manualPurchasingSize = manualPurchasingSize;
+        this.manualPurchasingLottos = manualPurchasingLottos;
     }
 
-    public static PurchaseLottosRequest of(int purchasingPrice, int manualPurchasingSize) {
-        validate(purchasingPrice, manualPurchasingSize);
-        return new PurchaseLottosRequest(purchasingPrice, manualPurchasingSize);
+    public static PurchaseLottosRequest of(int purchasingPrice, List<ManualLottoRequest> manualPurchasingLottos) {
+        validate(purchasingPrice, manualPurchasingLottos);
+        return new PurchaseLottosRequest(purchasingPrice, manualPurchasingLottos);
     }
 
-    public int purchasingLottoSize() {
+    public List<Lotto> manualLottos() {
+        return manualPurchasingLottos.stream()
+                .map(ManualLottoRequest::toLotto)
+                .collect(Collectors.toList());
+    }
+
+    public int automatedLottoSize() {
+        return purchasingLottoSize() - manualPurchasingLottoSize();
+    }
+
+    private int purchasingLottoSize() {
         return purchasingAmount / Lotto.PRICE;
     }
 
-    public int manualPurchasingSize() {
-        return manualPurchasingSize;
+    private int manualPurchasingLottoSize() {
+        return manualPurchasingLottos.size();
     }
 
-    private static void validate(int purchasingPrice, int manualPurchasingSize) {
+    private static void validate(int purchasingPrice, List<ManualLottoRequest> manualPurchasingLottos) {
         validatePurchasePrice(purchasingPrice);
-        validateManualPurchasingSize(purchasingPrice, manualPurchasingSize);
+        validateManualPurchasingLottos(purchasingPrice, manualPurchasingLottos);
     }
 
     private static void validatePurchasePrice(int purchasePrice) {
@@ -39,13 +52,11 @@ public class PurchaseLottosRequest {
         }
     }
 
-    private static void validateManualPurchasingSize(int purchasingPrice, int manualPurchasingSize) {
-        if (manualPurchasingSize < 0) {
-            throw new IllegalArgumentException(String.format("입력한 수동 로또의 갯수(%d)는 0개 이상이어야합니다.", manualPurchasingSize));
-        }
-        if (totalPurchasingSize(purchasingPrice) < manualPurchasingSize) {
+    private static void validateManualPurchasingLottos(int purchasingPrice, List<ManualLottoRequest> manualPurchasingLotto) {
+        int totalManualPurchasingLottoSize = manualPurchasingLotto.size();
+        if (totalPurchasingSize(purchasingPrice) < totalManualPurchasingLottoSize) {
             throw new IllegalArgumentException(
-                    String.format("수동 로또의 갯수(%d)는 총 구입 로또 갯수(%d)를 넘어갈 수 없습니다.", manualPurchasingSize, totalPurchasingSize(purchasingPrice))
+                    String.format("수동 로또의 갯수(%d)는 총 구입 로또 갯수(%d)를 넘어갈 수 없습니다.", totalManualPurchasingLottoSize, totalPurchasingSize(purchasingPrice))
             );
         }
     }
