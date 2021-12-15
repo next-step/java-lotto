@@ -31,8 +31,8 @@ public class NumberOperand {
         }
     }
 
-    public int plus(int ret) {
-        return operand + ret;
+    public int plus(int number) {
+        return operand + number;
     }
 
 }
