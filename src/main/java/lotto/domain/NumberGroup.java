@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class NumberGroup {
     public static final int LIMIT = 6;
@@ -43,6 +44,10 @@ public class NumberGroup {
                 .orElse(MatchCriteria.NOTING);
     }
 
+    public List<Number> getNumbers() {
+        return numbers;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -54,12 +59,5 @@ public class NumberGroup {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
-    }
-
-    @Override
-    public String toString() {
-        return "NumberGroup{" +
-                "numbers=" + numbers.toString() +
-                '}';
     }
 }

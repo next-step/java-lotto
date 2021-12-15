@@ -14,6 +14,10 @@ public class Number {
         this.position = position;
     }
 
+    public Integer getNumber() {
+        return number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -27,11 +31,4 @@ public class Number {
         return Objects.hash(number, position);
     }
 
-    @Override
-    public String toString() {
-        return "Number{" +
-                "number=" + number +
-                ", position=" + position +
-                '}';
-    }
 }
