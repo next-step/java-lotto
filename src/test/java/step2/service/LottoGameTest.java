@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class LottoGameTest {
 
     @ParameterizedTest
-    @CsvSource(value = {"1000,1", "2000,2", "4000,4", "6000,6"})
+    @CsvSource(value = {"1000,1", "2500,2", "4000,4", "6000,6", "8900, 8", "10900, 10"})
     @DisplayName("로또 기본 금액 이상을 인자로 넘기면 갯수만큼 생성된 티켓 묶음이 반환된다")
     public void generateLotto(int input, int expected) {
         assertThat(LottoGame.generateLotto(new Money(input)).lottoTicketsCount())

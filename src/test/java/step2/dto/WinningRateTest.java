@@ -14,4 +14,11 @@ class WinningRateTest {
     public void equalsTest(float input, float expected) {
         assertThat(new WinningRate(input)).isEqualTo(new WinningRate(expected));
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"2f = false", "1.1f = false", "1.0f = false", "0.9f = true", "0.1f  = true"}, delimiter = '=')
+    @DisplayName("비율이 1보다 작으면 참, 아니면 거짓을 반환한다")
+    public void lessThanBaseRate(float input, boolean expected) {
+        assertThat(new WinningRate(input).lessThanBaseRate()).isEqualTo(expected);
+    }
 }
