@@ -22,7 +22,7 @@ public enum WinningCondition {
             return WIN_1TH;
         }
 
-        if (matchedCount == WIN_2TH.matchedCondition && bonusNumber == Boolean.TRUE) {
+        if (matchedCount == WIN_2TH.matchedCondition && bonusNumber) {
             return WIN_2TH;
         }
 

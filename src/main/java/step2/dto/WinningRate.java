@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class WinningRate {
     private static final int BASE_ONE = 1;
+
     private final float winningRate;
 
     public WinningRate(float winningRate) {

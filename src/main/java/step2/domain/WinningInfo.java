@@ -1,4 +1,4 @@
-package step2.dto;
+package step2.domain;
 
 public class WinningInfo {
     private final long winningPrize;

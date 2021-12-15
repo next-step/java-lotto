@@ -1,7 +1,5 @@
 package step2.domain;
 
-import step2.dto.WinningInfo;
-
 import java.util.*;
 
 public class LottoTickets {
@@ -26,7 +24,7 @@ public class LottoTickets {
         EnumMap<WinningCondition, WinningInfo> results = new EnumMap<>(WinningCondition.class);
 
         Arrays.stream(WinningCondition.values())
-                .forEach(info -> results.put(info, new WinningInfo(info.getWinningPrize(), ZERO)));
+                .forEach(condition -> results.put(condition, new WinningInfo(condition.getWinningPrize(), ZERO)));
 
         for (LottoTicket lottoTicket : lottoTickets) {
             WinningCondition condition = WinningCondition.calculateWinningRank(lottoTicket.matchedWinningNumber(matchedNumber),

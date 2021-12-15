@@ -2,15 +2,15 @@ package step2.view;
 
 import step2.domain.*;
 import step2.domain.WinningCondition;
-import step2.dto.WinningInfo;
+import step2.domain.WinningInfo;
 import step2.dto.WinningRate;
 import step2.exception.NotInstanceException;
 
 import java.util.Map;
 
 public class ResultView {
-    private static final String ANS_BUY_COUNT = "%d개를 구매했습니다.\n\n";
-    private static final String AVG_WINNING = "당첨 통계";
+    private static final String ANSWER_BUY_COUNT = "%d개를 구매했습니다.\n\n";
+    private static final String AVERAGE_WINNING = "당첨 통계";
     private static final String DASHES = "---------";
     private static final String SAME_RESULT = "%d개 일치 (%d원)- %d개\n";
     private static final String TOTAL_RATE = "총 수익률은 %.2f 입니다. ";
@@ -25,18 +25,22 @@ public class ResultView {
             System.out.println(lottoTicket.lottoTicket());
         });
 
-        System.out.printf(ANS_BUY_COUNT, lottoTickets.lottoTicketsCount());
+        System.out.printf(ANSWER_BUY_COUNT, lottoTickets.lottoTicketsCount());
     }
 
     public static void renderWinningResult(WinningResultInfo resultInfo) {
-        System.out.println(AVG_WINNING);
+        System.out.println(AVERAGE_WINNING);
         System.out.println(DASHES);
 
         Map<WinningCondition, WinningInfo> winningResultInfo = resultInfo.getWinningResultInfo();
 
-        for (WinningCondition condition : winningResultInfo.keySet()) {
-            System.out.printf(SAME_RESULT, condition.getMatchedCondition(), condition.getWinningPrize(), resultInfo.getWinningResultInfo().get(condition).getWinningCount());
-        }
+        winningResultInfo.keySet()
+                .forEach(condition -> {
+                    if(condition != WinningCondition.WIN_NONE) {
+                        System.out.printf(SAME_RESULT, condition.getMatchedCondition(),
+                                condition.getWinningPrize(),
+                                resultInfo.getWinningResultInfo().get(condition).getWinningCount());
+        }});
     }
 
     public static void renderWinningRate(WinningRate calculateRate, boolean lessThanBase) {

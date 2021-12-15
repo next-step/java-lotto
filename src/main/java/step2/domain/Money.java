@@ -25,7 +25,15 @@ public class Money {
     }
 
     public WinningRate calculatePercent(Money otherMoney) {
+        if (otherMoney.isZero()) {
+            return new WinningRate(ZERO);
+        }
+
         return new WinningRate(this.amount / (float) otherMoney.amount);
+    }
+
+    private boolean isZero() {
+        return this.amount == ZERO;
     }
 
     public long dividedAmount(int basis) {

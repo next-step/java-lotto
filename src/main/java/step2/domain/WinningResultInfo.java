@@ -1,6 +1,5 @@
 package step2.domain;
 
-import step2.dto.WinningInfo;
 import step2.dto.WinningRate;
 
 import java.util.Collections;
@@ -15,8 +14,6 @@ public class WinningResultInfo {
     }
 
     public Map<WinningCondition, WinningInfo> getWinningResultInfo() {
-        winningResultInfo.remove(WinningCondition.WIN_NONE);
-
         return Collections.synchronizedMap(new EnumMap<>(winningResultInfo));
     }
 

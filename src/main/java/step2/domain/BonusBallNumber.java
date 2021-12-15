@@ -14,7 +14,7 @@ public class BonusBallNumber {
     }
 
     public void notUniqueOrElseThrow(MatchedNumber matchedNumber) {
-        if (matchedNumber.getMatchedNumbers().contains(bonusBallNumber)) {
+        if (matchedNumber.matchedNumber(bonusBallNumber)) {
             throw new UniqueBonusBallException();
         }
     }

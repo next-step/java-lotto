@@ -27,7 +27,7 @@ public class LottoNumber {
     }
 
     public boolean matchedWinningNumber(MatchedNumber matchedNumber) {
-        return matchedNumber.getMatchedNumbers().contains(new LottoNumber(lottoNumber));
+        return matchedNumber.matchedNumber(new LottoNumber(lottoNumber));
     }
 
     @Override

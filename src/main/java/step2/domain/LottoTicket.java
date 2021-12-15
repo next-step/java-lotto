@@ -11,12 +11,6 @@ public class LottoTicket {
         this.lottoTicket = lottoTicket;
     }
 
-    public long containsWinningNumber(Set<LottoNumber> winningNumbers) {
-        return winningNumbers.stream()
-                .filter(lottoTicket::contains)
-                .count();
-    }
-
     public long matchedWinningNumber(MatchedNumber matchedNumber) {
         return this.lottoTicket.stream()
                 .filter(number -> number.matchedWinningNumber(matchedNumber))

@@ -2,7 +2,6 @@ package step2.domain;
 
 import step2.exception.DuplicatedNumberException;
 import step2.exception.NotValidNumberCountException;
-import step2.exception.UniqueBonusBallException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -23,8 +22,12 @@ public class MatchedNumber {
         validateMatchedNumber();
     }
 
-    public List<LottoNumber> getMatchedNumbers() {
+   /* public List<LottoNumber> getMatchedNumbers() {
         return Collections.unmodifiableList(this.matchedNumber);
+    }*/
+
+    public boolean matchedNumber(LottoNumber number) {
+        return this.matchedNumber.contains(number);
     }
 
     private void validateMatchedNumber() {
