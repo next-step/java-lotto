@@ -9,7 +9,7 @@ public class StringAddCalculator {
         return addStringArray(numbers.getTokens());
     }
 
-    private static int addStringArray(String[] tokens){
+    private static int addStringArray(String[] tokens) {
         return Arrays.stream(tokens)
                         .mapToInt(number -> Integer.parseInt(number))
                         .sum();

@@ -39,7 +39,7 @@ public class Lotto {
         long numberFrequency = lottoNumbers.stream()
                                                 .filter(lottoNumber -> Collections.frequency(lottoNumbers, lottoNumber) > 1)
                                                 .count();
-        if (numberFrequency > 0){
+        if (numberFrequency > 0) {
             throw new IllegalArgumentException("동일한 번호가 존재합니다.");
         }
     }
@@ -52,7 +52,7 @@ public class Lotto {
     }
 
     private void validationSplitLottoNumbers(String[] splitWinLottoNumbers) {
-        if(splitWinLottoNumbers.length != DEFAULT_LOTTO_COUNT){
+        if (splitWinLottoNumbers.length != DEFAULT_LOTTO_COUNT) {
             throw new IllegalArgumentException("로또 번호 개수가 정확하지 않습니다.");
         }
     }

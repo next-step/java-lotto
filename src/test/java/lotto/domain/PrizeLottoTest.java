@@ -13,7 +13,7 @@ class PrizeLottoTest {
     private List<LottoNumber> lottoNumbers;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         lottoNumbers = Arrays.asList(
             LottoNumber.from(1),
             LottoNumber.from(2),
@@ -37,7 +37,7 @@ class PrizeLottoTest {
     }
 
     @Test
-    void 로또_비교(){
+    void 로또_비교() {
         PrizeLotto prizeLotto = new PrizeLotto("1,2,3,4,5,6", "7");
         assertThat(prizeLotto.getLotto()).isEqualTo(lottoNumbers);
     }

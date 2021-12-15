@@ -13,7 +13,7 @@ public class CalculatorTest {
     private List<LottoResult> lottoResultGroup;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         lottoResultGroup = Arrays.asList(
             new LottoResult(Rank.FIFTH, 1),
             new LottoResult(Rank.FOURTH, 0),

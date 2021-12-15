@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.stream.Stream;
 
 public enum Rank {
@@ -19,7 +18,7 @@ public enum Rank {
     }
 
     public static Rank valueOf(int matchCount, boolean matchBonus) {
-        if(isEqualMatchCount(matchCount, SECOND) && matchBonus){
+        if (isEqualMatchCount(matchCount, SECOND) && matchBonus) {
             return Rank.SECOND;
         }
 

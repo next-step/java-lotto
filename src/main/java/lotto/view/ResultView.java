@@ -34,7 +34,7 @@ public class ResultView {
     }
 
     private static void responseLottoResult(LottoResult lottoResult) {
-        if(lottoResult.getRank() == Rank.SECOND) {
+        if (lottoResult.getRank() == Rank.SECOND) {
             System.out.format(RESPONSE_SECOND_MATCH_MESSAGE, lottoResult.getRank().getMatchCount()
                     , lottoResult.getRank().getWinningMoney(), lottoResult.getNumberOfTimes());
             return;

@@ -11,7 +11,7 @@ public class LottoResultsTest {
     private LottoResults lottoResults;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         lottoResults = new LottoResults(Arrays.asList(
             new LottoResult(Rank.FIFTH, 1),
             new LottoResult(Rank.FOURTH, 1),

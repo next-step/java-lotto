@@ -29,7 +29,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private static void validationLottoNumber(int number) {
-        if(number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER){
+        if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException("정확하지 않은 로또 번호입니다.");
         }
     }
@@ -62,7 +62,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int compareTo(LottoNumber lottoNumber) {
-        if(this.number > lottoNumber.getLottoNumber()){
+        if (this.number > lottoNumber.getLottoNumber()) {
             return 1;
         }
         return -1;

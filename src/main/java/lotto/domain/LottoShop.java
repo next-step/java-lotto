@@ -17,7 +17,7 @@ public class LottoShop {
     }
 
     private void validationManualRound(int manualRound) {
-        if(buyRound < manualRound) {
+        if (buyRound < manualRound) {
             throw new IllegalArgumentException("구매한 게임수보다 수동 게임수가 많습니다.");
         }
     }
@@ -28,7 +28,7 @@ public class LottoShop {
     }
 
     private void validatePurchaseAmount(int purchaseAmount) {
-        if(purchaseAmount / MIN_PURCHASE_AMOUNT < MIN_BUY_ROUND){
+        if (purchaseAmount / MIN_PURCHASE_AMOUNT < MIN_BUY_ROUND) {
             throw new IllegalArgumentException("1000원 이상 입력되어야 합니다.");
         }
     }

@@ -17,7 +17,7 @@ public class NumberTokens {
             this.tokens = new String[]{DEFAULT_VALUE};
             return;
         }
-        if (isPatternDelimiter(inputString)){
+        if (isPatternDelimiter(inputString)) {
             this.tokens = splitPatternDelimiter(inputString);
             return;
         }
@@ -41,14 +41,14 @@ public class NumberTokens {
         return new String[0];
     }
 
-    private boolean isPositiveNumber(String text){
-        if(POSITIVE_NUMBER_PATTERN.matcher(text).matches()){
+    private boolean isPositiveNumber(String text) {
+        if (POSITIVE_NUMBER_PATTERN.matcher(text).matches()) {
             return true;
         }
         throw new IllegalArgumentException("입력 문자열이 정상적이지 않습니다.");
     }
 
-    public String[] getTokens(){
+    public String[] getTokens() {
         return Arrays.stream(tokens)
                 .filter(m -> isPositiveNumber(m))
                 .toArray(String[]::new);
