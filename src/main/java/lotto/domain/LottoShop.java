@@ -1,6 +1,8 @@
 package lotto.domain;
 
 public class LottoShop {
+    private static final String EXCEPTION_MESSAGE_MORE_MANUAL_GAME = "구매한 게임수보다 수동 게임수가 많습니다.";
+    private static final String EXCEPTION_MESSAGE_MIN_PURCHASE_AMOUNT = "1000원 이상 입력되어야 합니다.";
     private static final int MIN_PURCHASE_AMOUNT = 1000;
     private static final int MIN_BUY_ROUND = 1;
 
@@ -12,13 +14,12 @@ public class LottoShop {
         this.purchaseAmount = purchaseAmount;
         this.buyRound = getBuyRound();
         this.manualRound = manualRound;
-
-        validationManualRound(manualRound);
+        validateManualRound(manualRound);
     }
 
-    private void validationManualRound(int manualRound) {
+    private void validateManualRound(int manualRound) {
         if (buyRound < manualRound) {
-            throw new IllegalArgumentException("구매한 게임수보다 수동 게임수가 많습니다.");
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE_MORE_MANUAL_GAME);
         }
     }
 
@@ -29,7 +30,7 @@ public class LottoShop {
 
     private void validatePurchaseAmount(int purchaseAmount) {
         if (purchaseAmount / MIN_PURCHASE_AMOUNT < MIN_BUY_ROUND) {
-            throw new IllegalArgumentException("1000원 이상 입력되어야 합니다.");
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE_MIN_PURCHASE_AMOUNT);
         }
     }
 

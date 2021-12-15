@@ -16,14 +16,7 @@ public class LottoTest {
 
     @BeforeEach
     void setUp() {
-        lotto = new Lotto(Arrays.asList(
-            LottoNumber.from(1),
-            LottoNumber.from(2),
-            LottoNumber.from(3),
-            LottoNumber.from(4),
-            LottoNumber.from(5),
-            LottoNumber.from(6)
-        ));
+        lotto = new Lotto("1,2,3,4,5,6");
     }
 
     @Test
@@ -74,9 +67,7 @@ public class LottoTest {
 
     @Test
     void 정적_팩토리_메서드_자동_로또_생성() {
-        Lotto compareLotto = lotto.from((String) -> {
-            return new Lotto("1,2,3,4,5,6").getLottoNumbers();
-        });
+        Lotto compareLotto = lotto.from((String) -> new Lotto("1,2,3,4,5,6"));
         assertThat(compareLotto).isEqualTo(lotto);
     }
 

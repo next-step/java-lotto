@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class PrizeLottoTest {
 
@@ -40,5 +41,12 @@ class PrizeLottoTest {
     void 로또_비교() {
         PrizeLotto prizeLotto = new PrizeLotto("1,2,3,4,5,6", "7");
         assertThat(prizeLotto.getLotto()).isEqualTo(lottoNumbers);
+    }
+
+    @Test
+    void 보너스_번호와_동일한_로또_존재_IllegalArgumentException() {
+        assertThatThrownBy(() ->{
+            new PrizeLotto("1,2,3,4,5,6", "6");
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }

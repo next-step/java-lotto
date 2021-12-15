@@ -15,7 +15,7 @@ public class LottosTest {
     @BeforeEach
     void setUp() {
         String defaultLottoNumbers = "1,2,3,4,5,6";
-        creationLottoNumber = (String) -> new Lotto(defaultLottoNumbers).getLottoNumbers();
+        creationLottoNumber = (String) -> new Lotto(defaultLottoNumbers);
     }
 
     @Test
@@ -37,7 +37,7 @@ public class LottosTest {
             new Lotto("1,2,3,4,5,16"),
             new Lotto("1,2,3,4,5,7")
         );
-        Lottos lottos = new Lottos(lottoGroup);
+        Lottos lottos = Lottos.from(lottoGroup);
 
         List<LottoResult> lottoResultGroup = Arrays.asList(new LottoResult[]{
                   new LottoResult(Rank.FIFTH, 0)
@@ -57,7 +57,7 @@ public class LottosTest {
             new Lotto("1,32,33,34,35,36"),
             new Lotto("1,2,33,34,35,37")
         );
-        Lottos lottos = new Lottos(lottoGroup);
+        Lottos lottos = Lottos.from(lottoGroup);
 
         List<LottoResult> lottoResultGroup = Arrays.asList(new LottoResult[]{
                   new LottoResult(Rank.FIFTH, 0)

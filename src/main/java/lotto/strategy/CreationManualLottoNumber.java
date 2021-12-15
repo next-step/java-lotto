@@ -8,7 +8,7 @@ import java.util.List;
 public class CreationManualLottoNumber implements CreationLottoNumber {
 
     @Override
-    public List<LottoNumber> lottoNumbers(String lottoNumbers) {
-        return new Lotto(lottoNumbers).getLottoNumbers();
+    public Lotto lottoNumbers(String lottoNumbers) {
+        return new Lotto(lottoNumbers);
     }
 }

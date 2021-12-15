@@ -22,15 +22,15 @@ public class ResultView {
         }
     }
 
-    public static void responseStatistics(Calculator calculator) {
+    public static void responseStatistics(LottoResults lottoResults, int purchaseAmount) {
         System.out.println();
         System.out.println(RESPONSE_INIT_MESSAGE);
         System.out.println(RESPONSE_INIT_LINE);
 
-        for (LottoResult lottoResult : calculator.getLottoResults()) {
+        for (LottoResult lottoResult : lottoResults.getLottoResults()) {
             responseLottoResult(lottoResult);
         }
-        System.out.format(RESPONSE_TOTAL_EARNING_RATE_MESSAGE, calculator.getEarnRate());
+        System.out.format(RESPONSE_TOTAL_EARNING_RATE_MESSAGE, lottoResults.totalEarnRate(purchaseAmount));
     }
 
     private static void responseLottoResult(LottoResult lottoResult) {

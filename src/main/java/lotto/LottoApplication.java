@@ -22,7 +22,6 @@ public class LottoApplication {
         ResultView.responseLottoNumbers(lottos);
 
         PrizeLotto prizeLotto = new PrizeLotto(InputView.requestLastWeekWinningNumber(), InputView.requestBonusNumber());
-        Calculator calculator = new Calculator(lottos.getResults(prizeLotto), lottoShop.getBuyAmount());
-        ResultView.responseStatistics(calculator);
+        ResultView.responseStatistics(lottos.getResults(prizeLotto), lottoShop.getBuyAmount());
     }
 }

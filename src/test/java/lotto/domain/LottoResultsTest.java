@@ -23,7 +23,7 @@ public class LottoResultsTest {
 
     @Test
     void 로또_결과_비교() {
-        Lottos lottos = new Lottos(Arrays.asList(
+        Lottos lottos = Lottos.from(Arrays.asList(
             new Lotto("1,2,3,14,15,16"),
             new Lotto("1,2,3,4,15,16"),
             new Lotto("1,2,3,4,5,16")

@@ -24,11 +24,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber from(int number) {
-        validationLottoNumber(number);
+        validateLottoNumber(number);
         return lottoNumbers.get(number);
     }
 
-    private static void validationLottoNumber(int number) {
+    private static void validateLottoNumber(int number) {
         if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException("정확하지 않은 로또 번호입니다.");
         }
