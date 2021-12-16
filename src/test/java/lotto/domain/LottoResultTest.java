@@ -20,9 +20,8 @@ class LottoResultTest {
     @BeforeEach
     void setUp() {
         Lottos purchasedLottos = new Lottos(Collections.singletonList(new Lotto(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)))));
-        Lotto winningLotto = new Lotto();
-        LottoNumber bonusLottoNumber = new LottoNumber(7);
-        lottoResult = new LottoResult(purchasedLottos, winningLotto, bonusLottoNumber);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(), new LottoNumber(7));
+        lottoResult = new LottoResult(purchasedLottos, winningLotto);
     }
 
     @DisplayName("`LottoResult` 생성")

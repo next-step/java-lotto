@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,6 +9,7 @@ import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,7 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 @DisplayName("로또에 대한 통계 요청에 전달된 파라미터 객체 테스트")
 class RetrieveStatisticsRequestTest {
 
-    private static final Lottos PURCHASED_LOTTOS = Lottos.from(2);
+    private static final List<Lotto> MANUAL_LOTTOS = Collections.singletonList(new Lotto(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6))));
+    private static final Lottos PURCHASED_LOTTOS = Lottos.of(2, MANUAL_LOTTOS);
     private static final List<Integer> WINNING_LOTTO_NUMBERS = Arrays.asList(1, 2, 3, 4, 5, 6);
     private static final int BONUS_LOTTO_NUMBER = 7;
 
@@ -33,8 +32,12 @@ class RetrieveStatisticsRequestTest {
         // then
         assertAll(
                 () -> assertThat(request).isNotNull(),
-                () -> assertThat(request.winningLotto()).isEqualTo(new Lotto(new LottoNumbers(WINNING_LOTTO_NUMBERS))),
-                () -> assertThat(request.bonusLottoNumber()).isEqualTo(new LottoNumber(BONUS_LOTTO_NUMBER))
+                () -> assertThat(request.winningLotto()).isEqualTo(
+                        new WinningLotto(
+                                new Lotto(new LottoNumbers(WINNING_LOTTO_NUMBERS)),
+                                new LottoNumber(BONUS_LOTTO_NUMBER)
+                        )
+                )
         );
     }
 

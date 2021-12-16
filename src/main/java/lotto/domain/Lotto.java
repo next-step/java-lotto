@@ -17,15 +17,19 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoRank findLottoRank(Lotto winningNumbers, LottoNumber bonusLottoNumber) {
-        return LottoRank.findByMatchedCountAndBonus(countMatchedNumbers(winningNumbers), bonus(bonusLottoNumber));
-    }
-
     public List<Integer> getNumbers() {
         return this.lottoNumbers.getNumbers()
                 .stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
+    }
+
+    public int countMatchedNumbers(Lotto winningLotto) {
+        return this.lottoNumbers.matchedCount(winningLotto.lottoNumbers);
+    }
+
+    public boolean bonus(LottoNumber bonusLottoNumber) {
+        return this.lottoNumbers.matchBonus(bonusLottoNumber);
     }
 
     @Override
@@ -39,13 +43,5 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
-    }
-
-    private int countMatchedNumbers(Lotto winningLotto) {
-        return this.lottoNumbers.matchedCount(winningLotto.lottoNumbers);
-    }
-
-    private boolean bonus(LottoNumber bonusLottoNumber) {
-        return this.lottoNumbers.matchBonus(bonusLottoNumber);
     }
 }

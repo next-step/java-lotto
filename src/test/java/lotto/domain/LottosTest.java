@@ -39,10 +39,12 @@ class LottosTest {
     void retrieveStatisticsTest() {
         // given
         Lottos lottos = new Lottos(LOTTOS);
-        Lotto winningLotto = new Lotto(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        LottoNumber bonusLottoNumber = new LottoNumber(7);
+        WinningLotto winningLotto = new WinningLotto(
+                new Lotto(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                new LottoNumber(7)
+        );
         // when
-        LottoResult lottoResult = lottos.lottoResult(winningLotto, bonusLottoNumber);
+        LottoResult lottoResult = lottos.lottoResult(winningLotto);
         // then
         assertThat(lottoResult).isNotNull();
     }

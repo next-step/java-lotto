@@ -6,11 +6,11 @@ import lotto.domain.Lottos;
 public class LottoGameController {
 
     public Lottos purchaseLottos(PurchaseLottosRequest request) {
-        return Lottos.from(request.purchasingLottoSize());
+        return Lottos.of(request.automatedLottoSize(), request.manualLottos());
     }
 
     public LottoResult retrieveStatistics(RetrieveStatisticsRequest request) {
         return request.getLottos()
-                .lottoResult(request.winningLotto(), request.bonusLottoNumber());
+                .lottoResult(request.winningLotto());
     }
 }

@@ -8,7 +8,7 @@ import lotto.domain.Lottos;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    private static final String LOTTO_SIZE_MESSAGE = "%d개를 구매했습니다.\n";
+    private static final String LOTTO_SIZE_MESSAGE = "%n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String STATISTICS_TITLE_MESSAGE = "\n당첨 통계\n---------------------";
     private static final String LOTTO_STATISTICS_MESSAGE = "%,d개 일치 (%,d원)- %,d개%n";
     private static final String LOTTO_BONUS_STATISTICS_MESSAGE = "%,d개 일치, 보너스 볼 일치(%,d원)- %,d개%n";
@@ -20,8 +20,8 @@ public class OutputView {
         throw new AssertionError();
     }
 
-    public static void printPurchasedLottoInformation(Lottos lottos) {
-        printPurchasedLottoSize(lottos);
+    public static void printPurchasedLottoInformation(Lottos lottos, int manualPurchasingSize) {
+        printPurchasedLottoSize(automatedPurchasingSize(lottos, manualPurchasingSize), manualPurchasingSize);
         printNumbersForLottos(lottos);
     }
 
@@ -31,8 +31,12 @@ public class OutputView {
         printEarningsRatio(lottoResult.earningsRatio());
     }
 
-    private static void printPurchasedLottoSize(Lottos lottos) {
-        System.out.printf(LOTTO_SIZE_MESSAGE, lottos.size());
+    private static int automatedPurchasingSize(Lottos lottos, int manualPurchasingSize) {
+        return lottos.size() - manualPurchasingSize;
+    }
+
+    private static void printPurchasedLottoSize(int automatedPurchasingSize, int manualPurchasingSize) {
+        System.out.printf(LOTTO_SIZE_MESSAGE, manualPurchasingSize, automatedPurchasingSize);
     }
 
     private static void printNumbersForLottos(Lottos lottos) {
