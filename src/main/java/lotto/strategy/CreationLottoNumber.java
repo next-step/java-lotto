@@ -1,10 +1,8 @@
 package lotto.strategy;
 
-import lotto.domain.LottoNumber;
-
-import java.util.List;
+import lotto.domain.Lotto;
 
 @FunctionalInterface
 public interface CreationLottoNumber {
-    List<LottoNumber> automatic();
+    Lotto lottoNumbers(String lottoNumbers);
 }

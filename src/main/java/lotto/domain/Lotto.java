@@ -2,9 +2,7 @@ package lotto.domain;
 
 import lotto.strategy.CreationLottoNumber;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -17,28 +15,45 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(String lottoNumber) {
-        this.lottoNumbers = Stream.of(winLottoNumbers(lottoNumber))
-                                        .map(number -> LottoNumber.from(number))
-                                        .collect(Collectors.toList());
-    }
-
-    public Lotto(List<LottoNumber> lottoNumbers) {
+        List<LottoNumber> lottoNumbers = Stream.of(winLottoNumbers(lottoNumber))
+                                                    .map(LottoNumber::from)
+                                                    .collect(Collectors.toList());
+        validateLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
+    private Lotto(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    public static Lotto from(List<LottoNumber> lottoNumbers) {
+        return new Lotto(lottoNumbers);
+    }
+
     public static Lotto from(CreationLottoNumber creationLottoNumber) {
-        return new Lotto(creationLottoNumber.automatic());
+        return creationLottoNumber.lottoNumbers(DEFAULT_CHARACTER);
+    }
+
+    public static Lotto of(CreationLottoNumber creationLottoNumber, String manualLottoNumbers) {
+        return creationLottoNumber.lottoNumbers(manualLottoNumbers);
+    }
+
+    private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> lottoNumberGroup = new HashSet<>(lottoNumbers);
+        if (lottoNumberGroup.size() != DEFAULT_LOTTO_COUNT) {
+            throw new IllegalArgumentException("동일한 번호가 존재합니다.");
+        }
     }
 
     private String[] winLottoNumbers(String winLottoNumbers) {
         String[] splitWinLottoNumbers = winLottoNumbers.replaceAll(DEFAULT_WHITE_SPACE_CHARACTER, DEFAULT_CHARACTER)
                                                             .split(DEFAULT_SPLIT_CHARACTER);
-        validationSplitLottoNumbers(splitWinLottoNumbers);
+        validateSplitLottoNumbers(splitWinLottoNumbers);
         return splitWinLottoNumbers;
     }
 
-    private void validationSplitLottoNumbers(String[] splitWinLottoNumbers) {
-        if(splitWinLottoNumbers.length != DEFAULT_LOTTO_COUNT){
+    private void validateSplitLottoNumbers(String[] splitWinLottoNumbers) {
+        if (splitWinLottoNumbers.length != DEFAULT_LOTTO_COUNT) {
             throw new IllegalArgumentException("로또 번호 개수가 정확하지 않습니다.");
         }
     }
@@ -49,8 +64,8 @@ public class Lotto {
 
     public int matchCountLottoNumbers(PrizeLotto prizeLotto) {
         return (int) lottoNumbers.stream()
-                                .filter(lottoNumber -> containLottoNumber(prizeLotto, lottoNumber))
-                                .count();
+                                    .filter(lottoNumber -> containLottoNumber(prizeLotto, lottoNumber))
+                                    .count();
     }
 
     private boolean containLottoNumber(PrizeLotto prizeLotto, LottoNumber lottoNumber) {

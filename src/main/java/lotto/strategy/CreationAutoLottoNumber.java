@@ -1,5 +1,6 @@
 package lotto.strategy;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 
 import java.util.ArrayList;
@@ -12,8 +13,9 @@ public class CreationAutoLottoNumber implements CreationLottoNumber {
     private static final List<LottoNumber> DEFAULT_LOTTO_NUMBERS = LottoNumber.getDefaultLottoNumbers();
 
     @Override
-    public List<LottoNumber> automatic() {
+    public Lotto lottoNumbers(String lottoNumbers) {
         Collections.shuffle(DEFAULT_LOTTO_NUMBERS);
-        return new ArrayList<>(DEFAULT_LOTTO_NUMBERS.subList(START_SPLIT_NUMBERS, END_SPLIT_NUMBERS));
+        List<LottoNumber> lottoGroup = new ArrayList<>(DEFAULT_LOTTO_NUMBERS.subList(START_SPLIT_NUMBERS, END_SPLIT_NUMBERS));
+        return Lotto.from(lottoGroup);
     }
 }
