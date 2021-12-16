@@ -11,17 +11,14 @@ public abstract class ResultView {
     private static final String LOTTO_RESULT_RANK_DEFAULT = " (%d원)- %d개\n";
     private static final String LOTTO_RESULT_RANK_SECOND = ", 보너스 볼 일치(%d원) - %d개\n";
 
-    public static void println(String message) {
-        System.out.println(message);
-    }
-
-    public static void printLottos(Lottos lottos) {
+    public static void printPassiveAndActiveLottos(Lottos lottos, int passiveLottosCount) {
         int purchasedLotto = lottos.numberOfLotto();
-        System.out.printf("%d개를 구매했습니다.\n", purchasedLotto);
+        System.out.println();
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", passiveLottosCount, purchasedLotto - passiveLottosCount);
         for (Lotto lotto : lottos.lottos()) {
             System.out.println(lotto.toString());
         }
-        ResultView.println("");
+        System.out.println();
     }
 
     public static void printLottoResult(LottoResult lottoResult) {

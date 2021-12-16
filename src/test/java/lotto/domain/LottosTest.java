@@ -5,7 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -15,14 +17,22 @@ public class LottosTest {
     @DisplayName("로또가격은 1000원, 가지고 있는 금액만큼 로또를 구입한다")
     @Test
     void 금액만큼_로또구입() {
-        Lottos lottos = new Lottos(10000);
+        Lottos lottos = new Lottos(10000, Collections.emptyList());
         assertThat(lottos.numberOfLotto()).isEqualTo(10);
+    }
+
+    @DisplayName("구입금액 10000원, 4개의 수동로또를 구입")
+    @Test
+    void 수동로또구입() {
+        List<Lotto> passiveLottos = createLottos();
+        Lottos lottos = new Lottos(10000, passiveLottos);
+        assertThat(lottos.lottos().stream().limit(4).collect(Collectors.toList())).isEqualTo(passiveLottos);
     }
 
     @DisplayName("로또가격보다 적은 구입금액 입력시 예외")
     @Test
     void 잔액부족() {
-        assertThatThrownBy(() -> new Lottos(900))
+        assertThatThrownBy(() -> new Lottos(900, Collections.emptyList()))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("잔액이 부족합니다.");
     }

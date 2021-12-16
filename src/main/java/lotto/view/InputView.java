@@ -14,6 +14,10 @@ public class InputView {
         return scanner.nextLine();
     }
 
+    public String nextLine() {
+        return scanner.nextLine();
+    }
+
     public void close() {
         scanner.close();
     }

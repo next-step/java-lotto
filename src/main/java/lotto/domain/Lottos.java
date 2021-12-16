@@ -8,17 +8,24 @@ import java.util.Map;
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(int amount) {
-        this.lottos = init(amount);
+    public Lottos(int totalAmount, List<Lotto> passiveLottos) {
+        this.lottos = init(totalAmount, passiveLottos);
     }
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
-    private List<Lotto> init(int amount) {
+    private List<Lotto> init(int totalAmount, List<Lotto> passiveLottos) {
+        if (passiveLottos == null || passiveLottos.isEmpty()) {
+            return createActiveLottos(totalAmount, new ArrayList<>());
+        }
+        int passiveLottosAmount = passiveLottos.size() * Lotto.PRICE;
+        return createActiveLottos(totalAmount - passiveLottosAmount, new ArrayList<>(passiveLottos));
+    }
+
+    private List<Lotto> createActiveLottos(int amount, List<Lotto> lottos) {
         validate(amount);
-        List<Lotto> lottos = new ArrayList<>();
         int num = amount / Lotto.PRICE;
         for (int i = 0; i < num; i++) {
             lottos.add(new Lotto());
@@ -31,7 +38,6 @@ public class Lottos {
             throw new IllegalArgumentException("잔액이 부족합니다.");
         }
     }
-
 
     public LottoResult result(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         return result(new Lotto(winningNumbers), bonusNumber);
