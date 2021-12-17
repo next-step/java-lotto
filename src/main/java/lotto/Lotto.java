@@ -4,8 +4,7 @@ import java.util.List;
 
 import lotto.controller.LottoController;
 import lotto.domain.LottoNumbers;
-import lotto.domain.WinningNumbers;
-import lotto.domain.LottoCalculate;
+import lotto.dto.PrizeStack;
 import lotto.view.ResultView;
 
 public class Lotto {
@@ -13,9 +12,9 @@ public class Lotto {
 		LottoController controller = new LottoController();
 		List<LottoNumbers> lottoNumbers = controller.buyLotto();
 		ResultView.printPurchasedLotto(lottoNumbers);
-		WinningNumbers winningNumbers = controller.inputWinnings();
-		LottoCalculate result = controller.calculatedResult(winningNumbers, lottoNumbers);
-		ResultView.printLottoResult(result);
+		LottoNumbers winningNumbers = controller.inputWinnings();
+		PrizeStack prizeStack = controller.calculatedResult(winningNumbers, lottoNumbers);
+		ResultView.printLottoResult(prizeStack);
 
 	}
 }

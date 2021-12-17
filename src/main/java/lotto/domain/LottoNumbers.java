@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumbers {
-
 	private static final int MIN_LOTTO_NUMBER = 1;
 	private static final int MAX_LOTTO_NUMBER = 45;
 	private static final int LOTTO_SIZE = 6;
@@ -60,5 +59,4 @@ public class LottoNumbers {
 	public int hashCode() {
 		return Objects.hash(lottoNumbers);
 	}
-
 }

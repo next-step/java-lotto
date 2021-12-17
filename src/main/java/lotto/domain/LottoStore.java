@@ -5,38 +5,24 @@ import java.util.List;
 
 public class LottoStore {
 
-	private static final String INPUT_AMOUNT_ZERO_UP = "금액은 0원 이상 입력해주세요.";
-	private final int purchaseAmount;
-	private int numberOfPurchase;
-	private List<LottoNumbers> userPurchaseLotto;
+	private final Money money;
+	private List<LottoNumbers> userPurchaseLottoTickets;
 
-
-	public LottoStore(int purchaseAmount) {
-		if (purchaseAmount <= 0) {
-			throw new IllegalArgumentException(INPUT_AMOUNT_ZERO_UP);
-		}
-		this.purchaseAmount = purchaseAmount;
-		this.userPurchaseLotto = new ArrayList<>();
-		this.numberOfPurchase = 0;
+	public LottoStore(int money) {
+		this.money = new Money(money);
+		this.userPurchaseLottoTickets = new ArrayList<>();
 	}
 
-	public List<LottoNumbers> buyLotto() {
-		calculateNumberOfLotto();
-		issueLotto();
-		return userPurchaseLotto;
+	public List<LottoNumbers> buyingLotto() {
+		issueLotto(money.numberOfPurchase());
+		return userPurchaseLottoTickets;
 	}
 
-	private void calculateNumberOfLotto() {
-		numberOfPurchase = purchaseAmount / 1000;
-		issueLotto();
-	}
-
-	private void issueLotto() {
+	private void issueLotto(int LottoCount) {
 		List<LottoNumbers> lotto = new ArrayList<>();
-		for (int i = 0; i < numberOfPurchase; i++) {
+		for (int i = 0; i < LottoCount; i++) {
 			lotto.add(LottoNumbers.createAutoLottoNumber());
 		}
-		userPurchaseLotto = lotto;
+		userPurchaseLottoTickets = lotto;
 	}
-
 }

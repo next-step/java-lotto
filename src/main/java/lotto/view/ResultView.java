@@ -5,24 +5,19 @@ import java.util.stream.Collectors;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
-import lotto.domain.LottoCalculate;
+import lotto.dto.LottoResult;
+import lotto.dto.PrizeStack;
 
 public class ResultView {
 
 	private static final String COMMA = ",";
 
 	public static void printPurchasedLotto(List<LottoNumbers> lottoNumbers) {
-		for (LottoNumbers lottoNumber : lottoNumbers) {
-			printLotto(lottoNumber);
-		}
+		lottoNumbers.forEach(ResultView::printLotto);
 	}
 
 	private static void printLotto(LottoNumbers lottoNumber) {
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("[");
-		stringBuilder.append(separateLottoNumberAsString(lottoNumber.lottoNumbers()));
-		stringBuilder.append("]");
-
+		String stringBuilder = "[" + separateLottoNumberAsString(lottoNumber.lottoNumbers()) + "]";
 		System.out.println(stringBuilder);
 	}
 
@@ -32,13 +27,14 @@ public class ResultView {
 			.collect(Collectors.joining(COMMA));
 	}
 
-	public static void printLottoResult(LottoCalculate result) {
+	public static void printLottoResult(PrizeStack prizeStack) {
+		LottoResult result = new LottoResult(prizeStack);
 		System.out.println("당첨통계");
 		System.out.println("------");
-		System.out.printf("3개 일치 (5000원)- %d개%n", result.getFifthPlace());
-		System.out.printf("4개 일치 (50000원)- %d개%n", result.getFourthPlace());
-		System.out.printf("5개 일치 (1500000원)- %d개%n", result.getThirdPlace());
-		System.out.printf("6개 일치 (2000000000원)- %d개%n", result.getFirstPlace());
+		System.out.printf("3개 일치 (5000원)- %d개%n", result.getFifth());
+		System.out.printf("4개 일치 (50000원)- %d개%n", result.getFourth());
+		System.out.printf("5개 일치 (1500000원)- %d개%n", result.getThird());
+		System.out.printf("6개 일치 (2000000000원)- %d개%n", result.getFirst());
 		System.out.printf("총 수익률은 %.2f입니다.", result.getYield());
 	}
 

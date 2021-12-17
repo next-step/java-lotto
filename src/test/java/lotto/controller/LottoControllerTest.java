@@ -9,12 +9,5 @@ import lotto.domain.LottoStore;
 
 class LottoControllerTest {
 
-	@Test
-	@DisplayName("로또 구매 갯수 만큼 로또 생성")
-	void crateLottos(){
-		int purchaseAmount = 14000;
-		LottoStore buyingLotto = new LottoStore(purchaseAmount);
-		assertThat(buyingLotto.buyLotto().size()).isEqualTo(14);
-	}
 
 }

@@ -2,37 +2,31 @@ package lotto.controller;
 
 import java.util.List;
 
-import lotto.domain.LotteryWinnings;
+import lotto.domain.LotteryDrawing;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoStore;
-import lotto.domain.WinningNumbers;
-import lotto.domain.WinningResult;
-import lotto.domain.LottoCalculate;
+import lotto.dto.PrizeStack;
 import lotto.view.InputView;
 
 public class LottoController {
-
-	public List<LottoNumbers> buyLotto(){
+	public List<LottoNumbers> buyLotto() {
 		int purchaseAmount = InputView.inputPurchaseAmount();
 		LottoStore lottoStore = new LottoStore(purchaseAmount);
-		return lottoStore.buyLotto();
+		return lottoStore.buyingLotto();
 	}
 
-	public WinningNumbers inputWinnings(){
+	public LottoNumbers inputWinnings() {
 		List<Integer> winningsNumberLastWeek = InputView.winningsNumberLastWeek();
-		return new WinningNumbers(winningsNumberLastWeek);
+		return LottoNumbers.createManualLottoNumber(winningsNumberLastWeek);
 	}
 
-	public LottoCalculate calculatedResult(WinningNumbers winningNumbers, List<LottoNumbers> phrchasedLottos){
-		List<LotteryWinnings> lotteryWinnings = getLotteryWinnings(winningNumbers, phrchasedLottos);
-		int amount = lotteryWinnings.size() * 1000;
-		LottoCalculate lottoResult = new LottoCalculate();
-		return lottoResult.calculatedLotto(lotteryWinnings, amount);
-	}
-
-	private List<LotteryWinnings> getLotteryWinnings(WinningNumbers winningNumbers, List<LottoNumbers> phrchasedLottos) {
-		WinningResult result = new WinningResult(winningNumbers, phrchasedLottos);
-		return result.calculatedLotteryWinnings();
+	public PrizeStack calculatedResult(LottoNumbers winningNumbers, List<LottoNumbers> lottoTickets) {
+		PrizeStack prizeStack = new PrizeStack();
+		for (LottoNumbers lottoTicket : lottoTickets) {
+			LotteryDrawing draw = new LotteryDrawing(winningNumbers, lottoTicket);
+			prizeStack.add(draw.matchingPrize());
+		}
+		return prizeStack;
 	}
 
 }

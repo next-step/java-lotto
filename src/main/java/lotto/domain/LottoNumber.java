@@ -6,6 +6,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	private final int lottoNumber;
 
 	public LottoNumber(int randomNumber) {
+		if (randomNumber < 1 || randomNumber > 45) {
+			throw new IllegalArgumentException("로또 번호는 1~45 숫자까지만 존재합니다.");
+		}
 		this.lottoNumber = randomNumber;
 	}
 
