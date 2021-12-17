@@ -1,9 +1,8 @@
-package step2.view;
+package lotto.view;
 
-import step2.domain.LottoNumber;
-import step2.dto.WinningInformationDto;
+import lotto.domain.LottoNumber;
+import lotto.dto.WinningInformationDto;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class OutputView {

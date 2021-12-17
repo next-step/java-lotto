@@ -1,9 +1,9 @@
-package step2.controller;
+package lotto.controller;
 
-import step2.domain.*;
-import step2.dto.WinningInformationDto;
-import step2.view.InputView;
-import step2.view.OutputView;
+import lotto.domain.*;
+import lotto.dto.WinningInformationDto;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,29 +12,29 @@ import java.util.Set;
 
 public class LottoController {
 
-    public Lottos buyAndPrintLotto() {
+    public LottoTickets buyAndPrintLotto() {
         String purchaseAmount = InputView.purchaseAmount();
-        Lottos lottos = LottosFactory.buyWithMoney(purchaseAmount);
-        OutputView.printNumberOfPurchase(lottos.size());
-        printLottoNumbersList(lottos);
-        return lottos;
+        LottoTickets lottoTickets = LottoTicketsFactory.buyWithMoney(purchaseAmount);
+        OutputView.printNumberOfPurchase(lottoTickets.size());
+        printLottoNumbersList(lottoTickets);
+        return lottoTickets;
     }
 
-    private void printLottoNumbersList(Lottos lottos) {
-        List<Lotto> lottoList = lottos.getLottos();
-        for (Lotto lotto : lottoList) {
-            OutputView.printLottoNumbers(lotto.getLottoNumbers());
+    private void printLottoNumbersList(LottoTickets lottoTickets) {
+        List<LottoTicket> lottoTicketList = lottoTickets.getLottos();
+        for (LottoTicket lottoTicket : lottoTicketList) {
+            OutputView.printLottoNumbers(lottoTicket.getLottoNumbers());
         }
     }
 
-    public void winningInformationOf(Lottos lottos) {
+    public void winningInformationOf(LottoTickets lottoTickets) {
         String winningLotteryNumbers = InputView.winningLotteryNumbers();
         LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.from(winningLotteryNumbers);
-        Map<Integer, Integer> countNumberOfMatching = lottos.countNumberOfMatching(lottoWinningNumbers);
-        LottoWinningRules lottoWinningRules = lottos.getLottoWinningRules();
+        Map<Integer, Integer> countNumberOfMatching = lottoTickets.countNumberOfMatching(lottoWinningNumbers);
+        LottoWinningRules lottoWinningRules = lottoTickets.getLottoWinningRules();
         List<WinningInformationDto> winningInformationDtoList = winningInformationList(countNumberOfMatching, lottoWinningRules);
         OutputView.printWinningStatics(winningInformationDtoList);
-        double earningRate = lottos.earningRate(countNumberOfMatching);
+        double earningRate = lottoTickets.earningRate(countNumberOfMatching);
         OutputView.earningRate(earningRate);
     }
 

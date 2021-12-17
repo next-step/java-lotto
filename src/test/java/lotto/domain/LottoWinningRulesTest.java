@@ -1,4 +1,4 @@
-package step2.domain;
+package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottosWinningRulesTest {
+class LottoWinningRulesTest {
 
     @DisplayName("로또 당첨 숫자와 일치하는 숫자가 3개 이상이면 당첨이다.")
     @ParameterizedTest

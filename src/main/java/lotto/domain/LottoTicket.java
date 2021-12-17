@@ -1,38 +1,38 @@
-package step2.domain;
+package lotto.domain;
 
-import step2.exception.LottoException;
+import lotto.exception.LottoException;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Lotto {
+public class LottoTicket {
 
     private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
-    private Lotto(List<LottoNumber> lottoNumbers) {
+    private LottoTicket(List<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public static LottoTicket from(List<LottoNumber> lottoNumbers) {
+        return new LottoTicket(lottoNumbers);
+    }
+
+    public static LottoTicket from(Integer... numbers) {
+        List<LottoNumber> lottoNumberList = Arrays.stream(numbers)
+                .map(LottoNumber::from)
+                .collect(Collectors.toList());
+        return new LottoTicket(lottoNumberList);
     }
 
     private void validate(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != NUMBER_OF_LOTTO_NUMBERS) {
             throw new LottoException("로또 번호는 6개여야 합니다.");
         }
-    }
-
-    public static Lotto from(List<LottoNumber> lottoNumbers) {
-        return new Lotto(lottoNumbers);
-    }
-
-    public static Lotto from(Integer... numbers) {
-        List<LottoNumber> lottoNumberList = Arrays.stream(numbers)
-                .map(LottoNumber::from)
-                .collect(Collectors.toList());
-        return new Lotto(lottoNumberList);
     }
 
     public int numberOfMatching(LottoWinningNumbers lottoWinningNumbers) {

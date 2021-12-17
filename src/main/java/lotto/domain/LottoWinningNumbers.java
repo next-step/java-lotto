@@ -1,6 +1,6 @@
-package step2.domain;
+package lotto.domain;
 
-import step2.exception.LottoException;
+import lotto.exception.LottoException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -18,19 +18,6 @@ public class LottoWinningNumbers {
         this.lottoWinningNumbers = lottoWinningNumbers;
     }
 
-    private void validateNumberOf(List<LottoNumber> lottoWinningNumbers) {
-        if (lottoWinningNumbers.size() != NUMBER_OF_LOTTO_WINNING_NUMBERS) {
-            throw new LottoException("당첨 번호는 " + NUMBER_OF_LOTTO_WINNING_NUMBERS + "개여야 합니다.");
-        }
-    }
-
-    private void validateDuplicate(List<LottoNumber> lottoWinningNumbers) {
-        Set<LottoNumber> lottoWinningNumberSet = new HashSet<>(lottoWinningNumbers);
-        if (lottoWinningNumberSet.size() != NUMBER_OF_LOTTO_WINNING_NUMBERS) {
-            throw new LottoException("당첨 번호에는 중복이 있으면 안됩니다");
-        }
-    }
-
     public static LottoWinningNumbers from(List<Integer> lottoWinningNumbers) {
         List<LottoNumber> lottoWinningNumberList = lottoWinningNumbers.stream()
                 .map(LottoNumber::from)
@@ -46,6 +33,19 @@ public class LottoWinningNumbers {
         return new LottoWinningNumbers(lottoWinningNumberList);
     }
 
+    private void validateNumberOf(List<LottoNumber> lottoWinningNumbers) {
+        if (lottoWinningNumbers.size() != NUMBER_OF_LOTTO_WINNING_NUMBERS) {
+            throw new LottoException("당첨 번호는 " + NUMBER_OF_LOTTO_WINNING_NUMBERS + "개여야 합니다.");
+        }
+    }
+
+    private void validateDuplicate(List<LottoNumber> lottoWinningNumbers) {
+        Set<LottoNumber> lottoWinningNumberSet = new HashSet<>(lottoWinningNumbers);
+        if (lottoWinningNumberSet.size() != NUMBER_OF_LOTTO_WINNING_NUMBERS) {
+            throw new LottoException("당첨 번호에는 중복이 있으면 안됩니다");
+        }
+    }
+
     public boolean contain(LottoNumber lottoNumber) {
         return lottoWinningNumbers.contains(lottoNumber);
     }
@@ -59,8 +59,12 @@ public class LottoWinningNumbers {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         LottoWinningNumbers that = (LottoWinningNumbers) o;
         return Objects.equals(lottoWinningNumbers, that.lottoWinningNumbers);
     }

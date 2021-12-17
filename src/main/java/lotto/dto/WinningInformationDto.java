@@ -1,4 +1,4 @@
-package step2.dto;
+package lotto.dto;
 
 public class WinningInformationDto {
     private int numberOfMatching;

@@ -1,25 +1,25 @@
-package step2.domain;
+package lotto.domain;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Lottos {
+public class LottoTickets {
     private final LottoWinningRules lottoWinningRules;
-    private final List<Lotto> lottos;
+    private final List<LottoTicket> lottoTickets;
     private final int price;
 
-    Lottos(LottoWinningRules lottoWinningRules, List<Lotto> lottos, int price) {
+    LottoTickets(LottoWinningRules lottoWinningRules, List<LottoTicket> lottoTickets, int price) {
         this.lottoWinningRules = lottoWinningRules;
-        this.lottos = lottos;
+        this.lottoTickets = lottoTickets;
         this.price = price;
     }
 
     public Map<Integer, Integer> countNumberOfMatching(LottoWinningNumbers lottoWinningNumbers) {
         Map<Integer, Integer> map = new HashMap<>();
-        for (Lotto lotto : lottos) {
-            int numberOfMatching = lotto.numberOfMatching(lottoWinningNumbers);
+        for (LottoTicket lottoTicket : lottoTickets) {
+            int numberOfMatching = lottoTicket.numberOfMatching(lottoWinningNumbers);
             int count = map.getOrDefault(numberOfMatching, 0);
             map.put(numberOfMatching, count + 1);
         }
@@ -53,11 +53,11 @@ public class Lottos {
     }
 
     public int size() {
-        return lottos.size();
+        return lottoTickets.size();
     }
 
-    public List<Lotto> getLottos() {
-        return Collections.unmodifiableList(lottos);
+    public List<LottoTicket> getLottos() {
+        return Collections.unmodifiableList(lottoTickets);
     }
 
     public LottoWinningRules getLottoWinningRules() {
