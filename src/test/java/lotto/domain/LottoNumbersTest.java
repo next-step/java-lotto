@@ -1,34 +1,20 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
-
-import java.util.Arrays;
-
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+
 class LottoNumbersTest {
 
-	@Test
-	@DisplayName("create test.")
-	void create() {
-		//given
-
-		//when
-		LottoNumbers lottoNumbers = LottoNumbers.createAutoLottoNumber();
-
-		//then
-		assertThat(lottoNumbers.lottoNumbers().size()).isEqualTo(6);
-
-	}
-
-	@Test
-	@DisplayName("lottoNumber sort test")
-	void sortTest() {
-		//given
-		LottoNumbers lottoNumbers = LottoNumbers.createManualLottoNumber(Arrays.asList(3, 4, 5, 1, 10, 6));
-
-		//then
-		assertThat(lottoNumbers.lottoNumbers()).isEqualTo(LottoNumbers.createManualLottoNumber(Arrays.asList(1, 3, 4, 5, 6, 10)).lottoNumbers());
-	}
+    @Test
+    @DisplayName("자동으로 생성된 로또가 중복없이 6자리인지 확인")
+    void createAutoLotto() {
+        LottoNumbers lottoNumbers = LottoNumbers.createAutoLottoNumber();
+        List<LottoNumber> collect = lottoNumbers.lottoNumbers().stream().distinct().collect(Collectors.toList());
+        Assertions.assertThat(collect.size()).isEqualTo(6);
+    }
 }

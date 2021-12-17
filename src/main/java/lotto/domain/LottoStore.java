@@ -4,39 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoStore {
+    private final Money money;
+    private List<LottoNumbers> userPurchaseLottoTickets;
 
-	private static final String INPUT_AMOUNT_ZERO_UP = "금액은 0원 이상 입력해주세요.";
-	private final int purchaseAmount;
-	private int numberOfPurchase;
-	private List<LottoNumbers> userPurchaseLotto;
+    public LottoStore(int money) {
+        this.money = new Money(money);
+        this.userPurchaseLottoTickets = new ArrayList<>();
+    }
 
+    public List<LottoNumbers> buyingLotto() {
+        issueLotto(money.numberOfPurchase());
+        return userPurchaseLottoTickets;
+    }
 
-	public LottoStore(int purchaseAmount) {
-		if (purchaseAmount <= 0) {
-			throw new IllegalArgumentException(INPUT_AMOUNT_ZERO_UP);
-		}
-		this.purchaseAmount = purchaseAmount;
-		this.userPurchaseLotto = new ArrayList<>();
-		this.numberOfPurchase = 0;
-	}
-
-	public List<LottoNumbers> buyLotto() {
-		calculateNumberOfLotto();
-		issueLotto();
-		return userPurchaseLotto;
-	}
-
-	private void calculateNumberOfLotto() {
-		numberOfPurchase = purchaseAmount / 1000;
-		issueLotto();
-	}
-
-	private void issueLotto() {
-		List<LottoNumbers> lotto = new ArrayList<>();
-		for (int i = 0; i < numberOfPurchase; i++) {
-			lotto.add(LottoNumbers.createAutoLottoNumber());
-		}
-		userPurchaseLotto = lotto;
-	}
-
+    private void issueLotto(int LottoCount) {
+        List<LottoNumbers> lotto = new ArrayList<>();
+        for (int i = 0; i < LottoCount; i++) {
+            lotto.add(LottoNumbers.createAutoLottoNumber());
+        }
+        userPurchaseLottoTickets = lotto;
+    }
 }
