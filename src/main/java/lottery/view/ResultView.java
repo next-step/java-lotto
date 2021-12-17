@@ -44,6 +44,6 @@ public class ResultView {
                 System.lineSeparator());
         }
 
-        System.out.printf(MESSAGE_FORMAT_OVERALL, lotteryResult.earningRatio());
+        System.out.printf(MESSAGE_FORMAT_OVERALL, lotteryResult.getEarningRatio());
     }
 }

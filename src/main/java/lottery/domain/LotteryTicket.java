@@ -9,7 +9,7 @@ public class LotteryTicket {
 
     private static final int VALID_COUNT_OF_NUMBERS = 6;
 
-    final List<LotteryNumber> numbers;
+    private final List<LotteryNumber> numbers;
 
     private LotteryTicket(final List<LotteryNumber> numbers) {
         this.numbers = numbers;

@@ -16,12 +16,12 @@ public class LotteryApp {
         final LotteryNumberGenerator lotteryNumberGenerator = RandomLotteryNumberGenerator.create();
         final PurchasePrice purchasePrice = InputView.getPurchasePrice();
         final LotteryMachine lotteryMachine = LotteryMachine.create(purchasePrice, lotteryNumberGenerator);
-        final LotteryTickets lotteryTickets = lotteryMachine.generate();
+        final LotteryTickets lotteryTickets = lotteryMachine.createLotteryTickets();
 
         ResultView.showPurchaseInfo(lotteryTickets);
 
         final LotteryTicket winningLottery = InputView.getWinningLottery();
-        final LotteryResult lotteryResult = LotteryResult.from(purchasePrice, winningLottery, lotteryTickets);
+        final LotteryResult lotteryResult = lotteryTickets.result(winningLottery);
 
         ResultView.showResult(lotteryResult);
     }

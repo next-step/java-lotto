@@ -57,17 +57,17 @@ public class LotteryResultTest {
         }};
 
         return Stream.of(
-            Arguments.arguments(purchasePrice, winningTicket, LotteryTickets.create(Arrays.asList(oneNumberMatchedTicket)),
+            Arguments.arguments(purchasePrice, winningTicket, LotteryTickets.create(PurchasePrice.of(1000), Arrays.asList(oneNumberMatchedTicket)),
                 oneNumberMatchedResultMap, 0f),
-            Arguments.arguments(purchasePrice, winningTicket, LotteryTickets.create(Arrays.asList(twoNumbersMatchedTicket)),
+            Arguments.arguments(purchasePrice, winningTicket, LotteryTickets.create(PurchasePrice.of(1000), Arrays.asList(twoNumbersMatchedTicket)),
                 twoNumbersMatchedResultMap, 0f),
-            Arguments.arguments(purchasePrice, winningTicket, LotteryTickets.create(Arrays.asList(threeNumbersMatchedTicket)),
+            Arguments.arguments(purchasePrice, winningTicket, LotteryTickets.create(PurchasePrice.of(1000), Arrays.asList(threeNumbersMatchedTicket)),
                 threeNumbersMatchedResultMap, 0.5f),
-            Arguments.arguments(purchasePrice, winningTicket, LotteryTickets.create(Arrays.asList(fourNumbersMatchedTicket)),
+            Arguments.arguments(purchasePrice, winningTicket, LotteryTickets.create(PurchasePrice.of(1000), Arrays.asList(fourNumbersMatchedTicket)),
                 fourNumbersMatchedResultMap, 5f),
-            Arguments.arguments(purchasePrice, winningTicket, LotteryTickets.create(Arrays.asList(fiveNumbersMatchedTicket)),
+            Arguments.arguments(purchasePrice, winningTicket, LotteryTickets.create(PurchasePrice.of(1000), Arrays.asList(fiveNumbersMatchedTicket)),
                 fiveNumbersMatchedResultMap, 150f),
-            Arguments.arguments(purchasePrice, winningTicket, LotteryTickets.create(Arrays.asList(sixNumbersMatchedTicket)),
+            Arguments.arguments(purchasePrice, winningTicket, LotteryTickets.create(PurchasePrice.of(1000), Arrays.asList(sixNumbersMatchedTicket)),
                 sixNumbersMatchedResultMap, 200_000f)
         );
     }
