@@ -15,10 +15,8 @@ public class LottoGameMain {
         ResultView.renderLottoStatus(lottoTickets);
 
         MatchedNumber matchedNumber = new MatchedNumber(InputView.pickWinningNumber());
-        BonusBallNumber bonusBallNumber = new BonusBallNumber(InputView.pickBonusBallNumber());
-        bonusBallNumber.notUniqueOrElseThrow(matchedNumber);
-
-        WinningResultInfo resultInfo = lottoTickets.matchedWinningNumber(matchedNumber, bonusBallNumber);
+        int bonusBallNumber = InputView.pickBonusBallNumber();
+        WinningResultInfo resultInfo = lottoTickets.matchedWinningNumber(new WinningLotto(matchedNumber, bonusBallNumber));
 
         ResultView.renderWinningResult(resultInfo);
 

@@ -19,7 +19,24 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    public WinningResultInfo matchedWinningNumber(MatchedNumber matchedNumber, BonusBallNumber bonusBallNumber) {
+//    public WinningResultInfo matchedWinningNumber1(MatchedNumber matchedNumber, BonusBallNumber bonusBallNumber) {
+//
+//        EnumMap<WinningCondition, WinningInfo> results = new EnumMap<>(WinningCondition.class);
+//
+//        Arrays.stream(WinningCondition.values())
+//                .forEach(condition -> results.put(condition, new WinningInfo(condition.getWinningPrize(), ZERO)));
+//
+//        for (LottoTicket lottoTicket : lottoTickets) {
+//            WinningCondition condition = WinningCondition.calculateWinningRank(lottoTicket.matchedWinningNumber(matchedNumber),
+//                    lottoTicket.matchedBonusBallNumber(bonusBallNumber));
+//
+//            results.put(condition, results.get(condition).addWinningCount());
+//        }
+//
+//        return new WinningResultInfo(results);
+//    }
+
+    public WinningResultInfo matchedWinningNumber(WinningLotto winningLotto) {
 
         EnumMap<WinningCondition, WinningInfo> results = new EnumMap<>(WinningCondition.class);
 
@@ -27,8 +44,8 @@ public class LottoTickets {
                 .forEach(condition -> results.put(condition, new WinningInfo(condition.getWinningPrize(), ZERO)));
 
         for (LottoTicket lottoTicket : lottoTickets) {
-            WinningCondition condition = WinningCondition.calculateWinningRank(lottoTicket.matchedWinningNumber(matchedNumber),
-                    lottoTicket.matchedBonusBallNumber(bonusBallNumber));
+            WinningCondition condition = WinningCondition.calculateWinningRank(lottoTicket.matchedWinningNumber(winningLotto.getMatchedNumber()),
+                    lottoTicket.matchedBonusBallNumber(winningLotto.getBonusBallNumber()));
 
             results.put(condition, results.get(condition).addWinningCount());
         }

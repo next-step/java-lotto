@@ -17,8 +17,8 @@ public class LottoTicket {
                 .count();
     }
 
-    public boolean matchedBonusBallNumber(BonusBallNumber bonusBallNumber) {
-        return lottoTicket.contains(bonusBallNumber.getBonusBallNumber());
+    public boolean matchedBonusBallNumber(LottoNumber bonusBallNumber) {
+        return lottoTicket.contains(bonusBallNumber);
     }
 
     public Set<LottoNumber> lottoTicket() {

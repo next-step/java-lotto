@@ -1,5 +1,9 @@
 package step2.domain;
 
+import java.util.Arrays;
+import java.util.concurrent.locks.Condition;
+import java.util.stream.Stream;
+
 public enum WinningCondition {
     WIN_NONE(0, 0),
     WIN_5TH(3, 5_000),
@@ -18,27 +22,22 @@ public enum WinningCondition {
     }
 
     public static WinningCondition calculateWinningRank(long matchedCount, boolean bonusNumber) {
-        if (matchedCount == WIN_1TH.matchedCondition) {
-            return WIN_1TH;
-        }
 
-        if (matchedCount == WIN_2TH.matchedCondition && bonusNumber) {
+        return Arrays.stream(WinningCondition.values())
+                .filter(condition -> condition.matchedCondition == matchedCount)
+                .findFirst()
+                .map(condition -> {
+                    return gradedCondition(bonusNumber, condition);
+                })
+                .orElse(WIN_NONE);
+    }
+
+    private static WinningCondition gradedCondition(boolean bonusNumber, WinningCondition condition) {
+        if(condition.equals(WIN_3TH) && bonusNumber) {
             return WIN_2TH;
         }
 
-        if (matchedCount == WIN_3TH.matchedCondition) {
-            return WIN_3TH;
-        }
-
-        if (matchedCount == WIN_4TH.matchedCondition) {
-            return WIN_4TH;
-        }
-
-        if (matchedCount == WIN_5TH.matchedCondition) {
-            return WIN_5TH;
-        }
-
-        return WIN_NONE;
+        return condition;
     }
 
     public long getMatchedCondition() {

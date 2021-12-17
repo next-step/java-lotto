@@ -22,10 +22,6 @@ public class MatchedNumber {
         validateMatchedNumber();
     }
 
-   /* public List<LottoNumber> getMatchedNumbers() {
-        return Collections.unmodifiableList(this.matchedNumber);
-    }*/
-
     public boolean matchedNumber(LottoNumber number) {
         return this.matchedNumber.contains(number);
     }
