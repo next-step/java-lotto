@@ -49,6 +49,6 @@ class LottoTicketTest {
     public void matchedBonusBallNumber(int input, boolean expected) {
         LottoTicket lottoTicket = new LottoTicket(numbers);
 
-        assertThat(lottoTicket.matchedBonusBallNumber(new BonusBallNumber(input))).isEqualTo(expected);
+        assertThat(lottoTicket.matchedBonusBallNumber(new LottoNumber(input))).isEqualTo(expected);
     }
 }
