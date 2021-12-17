@@ -2,7 +2,6 @@ package lottery.domain;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
@@ -10,42 +9,37 @@ import java.util.stream.Collectors;
 
 public class LotteryResult {
 
-    public static final List<MatchedCountAndPrizePair> MATCHED_COUNT_AND_PRIZE_PAIRS = Arrays.asList(
-        MatchedCountAndPrizePair.of(3, 5_000L),
-        MatchedCountAndPrizePair.of(4, 50_000L),
-        MatchedCountAndPrizePair.of(5, 1500_000L),
-        MatchedCountAndPrizePair.of(6, 2_000_000_000L));
-
-    private final Map<Integer, Long> matchedNumberCountAndWinningLotteryCount;
+    private final Map<Rank, Long> rankToWinningLotteryCount;
     private final float earningRate;
 
-    private LotteryResult(Map<Integer, Long> matchedNumberCountAndWinningLotteryCount, final float earningRate) {
-        this.matchedNumberCountAndWinningLotteryCount = Collections.unmodifiableMap(matchedNumberCountAndWinningLotteryCount);
+    private LotteryResult(Map<Rank, Long> rankToWinningLotteryCount, final float earningRate) {
+        this.rankToWinningLotteryCount = Collections.unmodifiableMap(rankToWinningLotteryCount);
         this.earningRate = earningRate;
     }
 
-    public static LotteryResult from(Map<Integer, Long> matchedNumberCountAndWinningLotteryCount, final float earningRate) {
+    public static LotteryResult of(Map<Rank, Long> matchedNumberCountAndWinningLotteryCount, final float earningRate) {
         return new LotteryResult(matchedNumberCountAndWinningLotteryCount, earningRate);
     }
 
-    public static LotteryResult from(PurchasePrice purchasePrice, final LotteryTicket winningLottery, final LotteryTickets lotteryTickets) {
-        final Map<Integer, Long> matchedNumberCountToWinningLotteryCount = lotteryTickets.tickets()
+    public static LotteryResult of(final PurchasePrice purchasePrice, WinningLotteryNumbers winningLotteryNumbers,
+        final LotteryTickets lotteryTickets) {
+        final Map<Rank, Long> rankToWinningLotteryCount = lotteryTickets.tickets()
             .stream()
-            .map(winningLottery::matchedCount)
+            .map(winningLotteryNumbers::matchedRank)
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        final Long profit = MATCHED_COUNT_AND_PRIZE_PAIRS.stream()
-            .filter(pair -> matchedNumberCountToWinningLotteryCount.containsKey(pair.matchedCount()))
-            .map(pair -> pair.prize() * matchedNumberCountToWinningLotteryCount.get(pair.matchedCount()))
+        final Long profit = Arrays.stream(Rank.values())
+            .filter(rankToWinningLotteryCount::containsKey)
+            .map(rank -> rank.getWinningMoney() * rankToWinningLotteryCount.get(rank))
             .reduce(0L, Long::sum);
 
         final float earningRate = profit / (float) purchasePrice.price();
 
-        return new LotteryResult(matchedNumberCountToWinningLotteryCount, earningRate);
+        return new LotteryResult(rankToWinningLotteryCount, earningRate);
     }
 
-    public long winningLotteryCount(final int matchedCount) {
-        return matchedNumberCountAndWinningLotteryCount.getOrDefault(matchedCount, 0L);
+    public long winningLotteryCount(final Rank rank) {
+        return rankToWinningLotteryCount.getOrDefault(rank, 0L);
     }
 
     public float getEarningRatio() {
@@ -61,12 +55,12 @@ public class LotteryResult {
             return false;
         }
         LotteryResult that = (LotteryResult) o;
-        return Float.compare(that.earningRate, earningRate) == 0 && Objects.equals(matchedNumberCountAndWinningLotteryCount,
-            that.matchedNumberCountAndWinningLotteryCount);
+        return Float.compare(that.earningRate, earningRate) == 0 && Objects.equals(rankToWinningLotteryCount,
+            that.rankToWinningLotteryCount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(matchedNumberCountAndWinningLotteryCount, earningRate);
+        return Objects.hash(rankToWinningLotteryCount, earningRate);
     }
 }

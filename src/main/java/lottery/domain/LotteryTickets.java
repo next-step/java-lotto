@@ -40,8 +40,8 @@ public class LotteryTickets {
         return Collections.unmodifiableList(tickets);
     }
 
-    public LotteryResult result(final LotteryTicket winningLotteryTicket) {
-        return LotteryResult.from(purchasePrice, winningLotteryTicket, this);
+    public LotteryResult result(final WinningLotteryNumbers winningLotteryNumbers) {
+        return LotteryResult.of(purchasePrice, winningLotteryNumbers, this);
     }
 
     @Override

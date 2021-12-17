@@ -3,7 +3,8 @@ package lottery.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.EnumMap;
+import java.util.Map;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -13,62 +14,45 @@ public class LotteryResultTest {
 
     @ParameterizedTest
     @MethodSource("lotteryResultSource")
-    void conversionTest(PurchasePrice purchasePrice, LotteryTicket winningTicket, LotteryTickets lotteryTickets,
-        HashMap<Integer, Long> matchedNumbersAndCount, float earningRatio) {
-        LotteryResult lotteryResult = LotteryResult.from(purchasePrice, winningTicket, lotteryTickets);
-        LotteryResult expected = LotteryResult.from(matchedNumbersAndCount, earningRatio);
+    void conversionTest(PurchasePrice purchasePrice, WinningLotteryNumbers winningLotteryNumbers, LotteryTickets lotteryTickets,
+        Map<Rank, Long> rankToCount, float earningRatio) {
+        LotteryResult lotteryResult = LotteryResult.of(purchasePrice, winningLotteryNumbers, lotteryTickets);
+        LotteryResult expected = LotteryResult.of(rankToCount, earningRatio);
 
         assertThat(lotteryResult).isEqualTo(expected);
     }
 
     private static Stream<Arguments> lotteryResultSource() {
-        final PurchasePrice purchasePrice = PurchasePrice.of(10000);
-        final LotteryTicket winningTicket = LotteryTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final PurchasePrice purchasePrice = PurchasePrice.from(10000);
+        final LotteryTicket winningTicket = LotteryTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final WinningLotteryNumbers winningLotteryNumbers = WinningLotteryNumbers.of(winningTicket, LotteryNumber.from(45));
 
-        final LotteryTicket oneNumberMatchedTicket = LotteryTicket.of(Arrays.asList(1, 7, 8, 9, 10, 11));
-        final LotteryTicket twoNumbersMatchedTicket = LotteryTicket.of(Arrays.asList(1, 2, 8, 9, 10, 11));
-        final LotteryTicket threeNumbersMatchedTicket = LotteryTicket.of(Arrays.asList(1, 2, 3, 9, 10, 11));
-        final LotteryTicket fourNumbersMatchedTicket = LotteryTicket.of(Arrays.asList(1, 2, 3, 4, 10, 11));
-        final LotteryTicket fiveNumbersMatchedTicket = LotteryTicket.of(Arrays.asList(1, 2, 3, 4, 5, 11));
-        final LotteryTicket sixNumbersMatchedTicket = LotteryTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6));
-
-        final HashMap<Integer, Long> oneNumberMatchedResultMap = new HashMap<Integer, Long>() {{
-            put(1, 1L);
-        }};
-
-        final HashMap<Integer, Long> twoNumbersMatchedResultMap = new HashMap<Integer, Long>() {{
-            put(2, 1L);
-        }};
-
-        final HashMap<Integer, Long> threeNumbersMatchedResultMap = new HashMap<Integer, Long>() {{
-            put(3, 1L);
-        }};
-
-        final HashMap<Integer, Long> fourNumbersMatchedResultMap = new HashMap<Integer, Long>() {{
-            put(4, 1L);
-        }};
-
-        final HashMap<Integer, Long> fiveNumbersMatchedResultMap = new HashMap<Integer, Long>() {{
-            put(5, 1L);
-        }};
-
-        final HashMap<Integer, Long> sixNumbersMatchedResultMap = new HashMap<Integer, Long>() {{
-            put(6, 1L);
-        }};
+        final LotteryTicket missTicket = LotteryTicket.from(Arrays.asList(7, 8, 9, 10, 11, 12));
+        final LotteryTicket fifthTicket = LotteryTicket.from(Arrays.asList(1, 2, 3, 9, 10, 11));
+        final LotteryTicket fourthTicket = LotteryTicket.from(Arrays.asList(1, 2, 3, 4, 10, 11));
+        final LotteryTicket thirdTicket = LotteryTicket.from(Arrays.asList(1, 2, 3, 4, 5, 11));
+        final LotteryTicket secondTicket = LotteryTicket.from(Arrays.asList(1, 2, 3, 4, 5, 45));
+        final LotteryTicket firstTicket = LotteryTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         return Stream.of(
-            Arguments.arguments(purchasePrice, winningTicket, LotteryTickets.create(PurchasePrice.of(1000), Arrays.asList(oneNumberMatchedTicket)),
-                oneNumberMatchedResultMap, 0f),
-            Arguments.arguments(purchasePrice, winningTicket, LotteryTickets.create(PurchasePrice.of(1000), Arrays.asList(twoNumbersMatchedTicket)),
-                twoNumbersMatchedResultMap, 0f),
-            Arguments.arguments(purchasePrice, winningTicket, LotteryTickets.create(PurchasePrice.of(1000), Arrays.asList(threeNumbersMatchedTicket)),
-                threeNumbersMatchedResultMap, 0.5f),
-            Arguments.arguments(purchasePrice, winningTicket, LotteryTickets.create(PurchasePrice.of(1000), Arrays.asList(fourNumbersMatchedTicket)),
-                fourNumbersMatchedResultMap, 5f),
-            Arguments.arguments(purchasePrice, winningTicket, LotteryTickets.create(PurchasePrice.of(1000), Arrays.asList(fiveNumbersMatchedTicket)),
-                fiveNumbersMatchedResultMap, 150f),
-            Arguments.arguments(purchasePrice, winningTicket, LotteryTickets.create(PurchasePrice.of(1000), Arrays.asList(sixNumbersMatchedTicket)),
-                sixNumbersMatchedResultMap, 200_000f)
+            Arguments.arguments(purchasePrice, winningLotteryNumbers, LotteryTickets.create(PurchasePrice.from(1000), Arrays.asList(missTicket)),
+                getEnumMap(Rank.MISS, 1L), 0f),
+            Arguments.arguments(purchasePrice, winningLotteryNumbers, LotteryTickets.create(PurchasePrice.from(1000), Arrays.asList(fifthTicket)),
+                getEnumMap(Rank.FIFTH, 1L), 0.5f),
+            Arguments.arguments(purchasePrice, winningLotteryNumbers, LotteryTickets.create(PurchasePrice.from(1000), Arrays.asList(fourthTicket)),
+                getEnumMap(Rank.FOURTH, 1L), 5f),
+            Arguments.arguments(purchasePrice, winningLotteryNumbers, LotteryTickets.create(PurchasePrice.from(1000), Arrays.asList(thirdTicket)),
+                getEnumMap(Rank.THIRD, 1L), 150f),
+            Arguments.arguments(purchasePrice, winningLotteryNumbers, LotteryTickets.create(PurchasePrice.from(1000), Arrays.asList(secondTicket)),
+                getEnumMap(Rank.SECOND, 1L), 3000f),
+            Arguments.arguments(purchasePrice, winningLotteryNumbers, LotteryTickets.create(PurchasePrice.from(1000), Arrays.asList(firstTicket)),
+                getEnumMap(Rank.FIRST, 1L), 200_000f)
         );
+    }
+
+    private static Map<Rank, Long> getEnumMap(Rank rank, Long count) {
+        return new EnumMap<Rank, Long>(Rank.class) {{
+            put(rank, count);
+        }};
     }
 }

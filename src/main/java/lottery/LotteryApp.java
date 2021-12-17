@@ -3,10 +3,10 @@ package lottery;
 import lottery.controller.LotteryMachine;
 import lottery.domain.LotteryNumberGenerator;
 import lottery.domain.LotteryResult;
-import lottery.domain.LotteryTicket;
 import lottery.domain.LotteryTickets;
 import lottery.domain.PurchasePrice;
 import lottery.domain.RandomLotteryNumberGenerator;
+import lottery.domain.WinningLotteryNumbers;
 import lottery.view.InputView;
 import lottery.view.ResultView;
 
@@ -20,8 +20,8 @@ public class LotteryApp {
 
         ResultView.showPurchaseInfo(lotteryTickets);
 
-        final LotteryTicket winningLottery = InputView.getWinningLottery();
-        final LotteryResult lotteryResult = lotteryTickets.result(winningLottery);
+        final WinningLotteryNumbers winningLotteryNumbers = InputView.getWinningLotteryNumbers();
+        final LotteryResult lotteryResult = lotteryTickets.result(winningLotteryNumbers);
 
         ResultView.showResult(lotteryResult);
     }
