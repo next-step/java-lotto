@@ -5,7 +5,10 @@ import step2.dto.WinningInformationDto;
 import step2.view.InputView;
 import step2.view.OutputView;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class LottoController {
 
@@ -18,7 +21,7 @@ public class LottoController {
     }
 
     private void printLottoNumbersList(Lottos lottos) {
-        List<Lotto> lottoList = lottos.getLottoNumbersList();
+        List<Lotto> lottoList = lottos.getLottos();
         for (Lotto lotto : lottoList) {
             OutputView.printLottoNumbers(lotto.getLottoNumbers());
         }

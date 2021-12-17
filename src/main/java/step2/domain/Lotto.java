@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private static final int NUMBER_OF_LOTTONUMBERS = 6;
+    private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -19,7 +19,7 @@ public class Lotto {
     }
 
     private void validate(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != NUMBER_OF_LOTTONUMBERS) {
+        if (lottoNumbers.size() != NUMBER_OF_LOTTO_NUMBERS) {
             throw new LottoException("로또 번호는 6개여야 합니다.");
         }
     }
@@ -36,11 +36,10 @@ public class Lotto {
     }
 
     public int numberOfMatching(LottoWinningNumbers lottoWinningNumbers) {
-        int numberOfMatching = 0;
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            numberOfMatching += lottoWinningNumbers.numberContain(lottoNumber);
-        }
-        return numberOfMatching;
+        return lottoNumbers.stream()
+                .map(lottoWinningNumbers::numberContain)
+                .reduce(0, Integer::sum);
+
     }
 
     public int size() {

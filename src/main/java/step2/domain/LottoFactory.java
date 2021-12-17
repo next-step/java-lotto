@@ -20,7 +20,8 @@ public class LottoFactory {
             .collect(toList());
     private static final int LOTTO_PRICE = 1000;
 
-    private LottoFactory(){}
+    private LottoFactory() {
+    }
 
     public static Lotto generate() {
         Collections.shuffle(NUMBERS);
@@ -32,7 +33,7 @@ public class LottoFactory {
         return Lotto.from(lottoNumbers);
     }
 
-    public static int getLottoPrice(){
+    public static int getLottoPrice() {
         return LOTTO_PRICE;
     }
 }

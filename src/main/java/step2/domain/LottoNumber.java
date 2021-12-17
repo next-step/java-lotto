@@ -5,8 +5,9 @@ import step2.exception.LottoException;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    public static final int MIN_LOTTONUMBER = 1;
-    public static final int MAX_LOTTONUMBER = 45;
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
+
     private final int number;
 
     private LottoNumber(int number) {
@@ -33,8 +34,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validateRange(int lottoNumber) {
-        if (lottoNumber < MIN_LOTTONUMBER || lottoNumber > MAX_LOTTONUMBER) {
-            throw new LottoException("로또 번호는 " + MIN_LOTTONUMBER + "과 " + MAX_LOTTONUMBER + "번 사이여야합니다");
+        if (lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER) {
+            throw new LottoException("로또 번호는 " + MIN_LOTTO_NUMBER + "과 " + MAX_LOTTO_NUMBER + "번 사이여야합니다");
         }
     }
 

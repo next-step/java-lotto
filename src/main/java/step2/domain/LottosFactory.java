@@ -16,10 +16,9 @@ public class LottosFactory {
     }
 
     private static int toInt(String moneyString) {
-        try{
+        try {
             return Integer.parseInt(moneyString);
-        }
-        catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new LottoException("구입할 로또 가격을 숫자로 입력해야합니다.");
         }
     }

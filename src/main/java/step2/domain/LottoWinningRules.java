@@ -3,6 +3,8 @@ package step2.domain;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+/*TODO Enum으로 구현해보기*/
+
 
 public class LottoWinningRules {
     private static final int LOSE_PRIZE = 0;

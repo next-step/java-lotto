@@ -7,18 +7,18 @@ import java.util.Map;
 
 public class Lottos {
     private final LottoWinningRules lottoWinningRules;
-    private final List<Lotto> lottoList;
+    private final List<Lotto> lottos;
     private final int price;
 
-    Lottos(LottoWinningRules lottoWinningRules, List<Lotto> lottoList, int price) {
+    Lottos(LottoWinningRules lottoWinningRules, List<Lotto> lottos, int price) {
         this.lottoWinningRules = lottoWinningRules;
-        this.lottoList = lottoList;
+        this.lottos = lottos;
         this.price = price;
     }
 
     public Map<Integer, Integer> countNumberOfMatching(LottoWinningNumbers lottoWinningNumbers) {
         Map<Integer, Integer> map = new HashMap<>();
-        for (Lotto lotto : lottoList) {
+        for (Lotto lotto : lottos) {
             int numberOfMatching = lotto.numberOfMatching(lottoWinningNumbers);
             int count = map.getOrDefault(numberOfMatching, 0);
             map.put(numberOfMatching, count + 1);
@@ -49,15 +49,15 @@ public class Lottos {
 
     public double earningRate(Map<Integer, Integer> countNumberOfMatching) {
         int prizeMoney = prizeMoney(countNumberOfMatching);
-        return (double)prizeMoney / price;
+        return (double) prizeMoney / price;
     }
 
     public int size() {
-        return lottoList.size();
+        return lottos.size();
     }
 
-    public List<Lotto> getLottoNumbersList() {
-        return Collections.unmodifiableList(lottoList);
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 
     public LottoWinningRules getLottoWinningRules() {
