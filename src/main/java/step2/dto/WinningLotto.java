@@ -1,5 +1,7 @@
-package step2.domain;
+package step2.dto;
 
+import step2.domain.LottoNumber;
+import step2.domain.MatchedNumber;
 import step2.exception.UniqueBonusBallException;
 
 public class WinningLotto {

@@ -1,5 +1,7 @@
 package step2.domain;
 
+import step2.dto.WinningLotto;
+
 import java.util.*;
 
 public class LottoTickets {

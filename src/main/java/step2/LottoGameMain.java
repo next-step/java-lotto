@@ -1,6 +1,7 @@
 package step2;
 
 import step2.domain.*;
+import step2.dto.WinningLotto;
 import step2.dto.WinningRate;
 import step2.service.LottoGame;
 import step2.view.InputView;
