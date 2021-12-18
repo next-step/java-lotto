@@ -14,7 +14,7 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
         this.value = value;
     }
 
-    public static LotteryNumber of(final int input) {
+    public static LotteryNumber from(final int input) {
         if (isInvalidNumber(input)) {
             final String exceptionMessage = String.format(EXCEPTION_MESSAGE_INVALID_NUMBER_FORMAT,
                 MINIMUM_LOTTERY_NUMBER,

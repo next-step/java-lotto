@@ -9,20 +9,20 @@ public class LotteryTicket {
 
     private static final int VALID_COUNT_OF_NUMBERS = 6;
 
-    final List<LotteryNumber> numbers;
+    private final List<LotteryNumber> numbers;
 
     private LotteryTicket(final List<LotteryNumber> numbers) {
         this.numbers = numbers;
     }
 
     public static LotteryTicket from(final LotteryNumberGenerator lotteryNumberGenerator) {
-        return LotteryTicket.of(lotteryNumberGenerator.generate());
+        return LotteryTicket.from(lotteryNumberGenerator.generate());
     }
 
-    public static LotteryTicket of(final List<Integer> numbers) {
+    public static LotteryTicket from(final List<Integer> numbers) {
         List<LotteryNumber> lotteryNumbers = numbers.stream()
             .distinct()
-            .map(LotteryNumber::of)
+            .map(LotteryNumber::from)
             .sorted()
             .collect(Collectors.toList());
 
@@ -35,6 +35,17 @@ public class LotteryTicket {
 
     public List<LotteryNumber> getNumbers() {
         return Collections.unmodifiableList(numbers);
+    }
+
+    public int matchedCount(final LotteryTicket otherTicket) {
+        return (int) this.numbers
+            .stream()
+            .filter(otherTicket.numbers::contains)
+            .count();
+    }
+
+    public boolean contains(LotteryNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
 
     @Override
@@ -52,12 +63,5 @@ public class LotteryTicket {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
-    }
-
-    public int matchedCount(final LotteryTicket otherTicket) {
-        return (int) this.numbers
-            .stream()
-            .filter(otherTicket.numbers::contains)
-            .count();
     }
 }

@@ -13,7 +13,7 @@ class PurchasePriceTest {
     @DisplayName("천원 보다 작은 값 테스트")
     void lessThanMininumPriceTest(final int input) {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> PurchasePrice.of(input));
+            .isThrownBy(() -> PurchasePrice.from(input));
     }
 
     @ParameterizedTest
@@ -21,7 +21,7 @@ class PurchasePriceTest {
     @DisplayName("천원 단위 테스트")
     void priceUnitTest(final int input) {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> PurchasePrice.of(input));
+            .isThrownBy(() -> PurchasePrice.from(input));
     }
 
 }

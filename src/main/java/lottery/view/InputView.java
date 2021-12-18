@@ -4,8 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import lottery.domain.LotteryNumber;
 import lottery.domain.LotteryTicket;
 import lottery.domain.PurchasePrice;
+import lottery.domain.WinningLotteryNumbers;
 
 public class InputView {
 
@@ -13,16 +15,21 @@ public class InputView {
     private static final String MESSAGE_PURCHASE_PRICE = "구매금액을 입력해 주세요.";
     private static final String MESSAGE_LAST_WEEK_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String DELIMITER = ",";
+    private static final String MESSAGE_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 
     public static PurchasePrice getPurchasePrice() {
         System.out.println(MESSAGE_PURCHASE_PRICE);
 
         final String input = STANDARD_INPUT_SCANNER.nextLine();
         final int price = Integer.parseInt(input);
-        return PurchasePrice.of(price);
+        return PurchasePrice.from(price);
     }
 
-    public static LotteryTicket getWinningLottery() {
+    public static WinningLotteryNumbers getWinningLotteryNumbers() {
+        return WinningLotteryNumbers.of(getWinningLottery(), getBonusNumber());
+    }
+
+    private static LotteryTicket getWinningLottery() {
         System.out.println(MESSAGE_LAST_WEEK_WINNING_NUMBERS);
 
         final String input = STANDARD_INPUT_SCANNER.nextLine();
@@ -31,6 +38,14 @@ public class InputView {
             .map(Integer::parseInt)
             .collect(Collectors.toList());
 
-        return LotteryTicket.of(lotteryNumbers);
+        return LotteryTicket.from(lotteryNumbers);
+    }
+
+    private static LotteryNumber getBonusNumber() {
+        System.out.println(MESSAGE_BONUS_NUMBER);
+
+        final String input = STANDARD_INPUT_SCANNER.nextLine();
+        final int bonusNumber = Integer.parseInt(input);
+        return LotteryNumber.from(bonusNumber);
     }
 }

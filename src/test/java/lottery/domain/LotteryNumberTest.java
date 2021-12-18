@@ -14,6 +14,6 @@ class LotteryNumberTest {
     @DisplayName("정상 범위(1~45)를 벗어나는 값 테스트")
     void invalidValueTest(final int input) {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> LotteryNumber.of(input));
+            .isThrownBy(() -> LotteryNumber.from(input));
     }
 }

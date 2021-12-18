@@ -18,8 +18,7 @@ public class LotteryMachine {
         return new LotteryMachine(purchasePrice, lotteryNumberGenerator);
     }
 
-    public LotteryTickets generate() {
-        final int affordableTicketCount = purchasePrice.affordableTicketCount();
-        return LotteryTickets.create(affordableTicketCount, lotteryNumberGenerator);
+    public LotteryTickets createLotteryTickets() {
+        return LotteryTickets.create(purchasePrice, lotteryNumberGenerator);
     }
 }

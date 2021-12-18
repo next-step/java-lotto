@@ -12,7 +12,7 @@ public class PurchasePrice {
         this.price = price;
     }
 
-    public static PurchasePrice of(final int price) {
+    public static PurchasePrice from(final int price) {
         if (price < PRICE_OF_A_LOTTERY) {
             throw new IllegalArgumentException(String.format(EXCEPTION_MESSAGE_INVALID_PRICE_FORMAT, PRICE_OF_A_LOTTERY, price));
         }

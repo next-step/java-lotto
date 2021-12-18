@@ -17,3 +17,6 @@
 - [X] ResultView 구현
 - [X] LotteryTickets 구현
 - [X] LotteryMachine 테스트, 클래스 구현
+- [X] Rank 테스트, 클래스 추가
+- [X] WinningLotteryNumbers 테스트, 클래스 추가
+- [X] Rank와 WinningLotteryNumbers를 사용하도록 리팩토링
