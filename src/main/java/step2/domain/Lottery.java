@@ -3,6 +3,7 @@ package step2.domain;
 import step2.strategy.LotteryStrategy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -28,13 +29,13 @@ public class Lottery {
 
     public int getCorrectCount(Lottery winningNumbers) {
         return Long.valueOf(this.lottery.stream()
-                .filter(n -> winningNumbers.getList().stream()
+                .filter(n -> winningNumbers.getNumbers().stream()
                         .anyMatch(Predicate.isEqual(n)))
                 .count()).intValue();
     }
 
-    public List<Number> getList() {
-        return lottery;
+    public List<Number> getNumbers() {
+        return Collections.unmodifiableList(lottery);
     }
 
     @Override

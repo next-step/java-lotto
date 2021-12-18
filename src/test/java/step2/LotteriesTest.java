@@ -35,8 +35,8 @@ public class LotteriesTest {
     @DisplayName("Lotteries 객체 생성")
     void createFromCount() {
         Lotteries lotteries = Lotteries.createFromCount(new AutoLotteryStrategy(), 1);
-        lotteries.getList().forEach(lottery -> {
-            lottery.getList().forEach(number -> {
+        lotteries.getLotteries().forEach(lottery -> {
+            lottery.getNumbers().forEach(number -> {
                 assertThat(number.getNumber())
                         .isGreaterThan(0)
                         .isLessThanOrEqualTo(45);
@@ -57,7 +57,7 @@ public class LotteriesTest {
     @Test
     @DisplayName("getList test")
     void getList() {
-        assertThat(lotteries.getList())
+        assertThat(lotteries.getLotteries())
                 .contains(lottery);
     }
 }

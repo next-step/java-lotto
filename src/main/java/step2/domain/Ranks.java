@@ -12,7 +12,7 @@ public class Ranks {
     public Ranks(Lotteries lotteries, Lottery winningNumbers) {
         List<Rank> ranks = new ArrayList<>();
 
-        for (Lottery lottery : lotteries.getList()) {
+        for (Lottery lottery : lotteries.getLotteries()) {
             addRank(ranks, lottery, winningNumbers);
         }
 

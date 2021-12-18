@@ -26,7 +26,7 @@ public class Lotteries {
         return new Lotteries(lotteries);
     }
 
-    public List<Lottery> getList() {
+    public List<Lottery> getLotteries() {
         return Collections.unmodifiableList(lotteries);
     }
 

@@ -40,7 +40,7 @@ public class LotteryTest {
     @Test
     @DisplayName("getList test")
     void getList() {
-        assertThat(Lottery.createFromList(numbers).getList()).contains(
+        assertThat(Lottery.createFromList(numbers).getNumbers()).contains(
                 Number.createFromInt(1),
                 Number.createFromInt(2),
                 Number.createFromInt(3)

@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 
 public class ResultView {
     public static void printLotteries(Lotteries lotteries) {
-        lotteries.getList().forEach(l -> {
-            String lotteryNumbers = l.getList().stream()
+        lotteries.getLotteries().forEach(l -> {
+            String lotteryNumbers = l.getNumbers().stream()
                     .map(n -> String.valueOf(n.getNumber()))
                     .collect(Collectors.joining(", "));
 
