@@ -12,6 +12,7 @@ import static java.util.stream.Collectors.toList;
 import static lotto.domain.LottoInformation.*;
 
 public class LottoTicketFactory {
+    public static final int LOTTO_NUMBER_MIN_INDEX = 0;
     private static final int LOTTO_NUMBER_MAX_INDEX = NUMBER_OF_LOTTO_NUMBERS - 1;
     private static final List<LottoNumber> NUMBERS = IntStream
             .rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
@@ -21,19 +22,8 @@ public class LottoTicketFactory {
     private LottoTicketFactory() {
     }
 
-    public static LottoTickets buy(String moneyString) {
-        int money = toInt(moneyString);
-        return buy(money);
-
-    }
-
-    public static LottoTickets buy(int money) {
-        int numberOfLottoTicket = money / LOTTO_TICKET_PRICE;
-        List<LottoTicket> lottoTicketList = new ArrayList<>();
-        for (int i = 0; i < numberOfLottoTicket; i++) {
-            lottoTicketList.add(generate());
-        }
-        return new LottoTickets(new LottoWinningRules(), lottoTicketList, numberOfLottoTicket * getLottoPrice());
+    public static LottoTickets buy(String money) {
+        return buy(toInt(money));
     }
 
     private static int toInt(String moneyString) {
@@ -42,6 +32,15 @@ public class LottoTicketFactory {
         } catch (NumberFormatException e) {
             throw new LottoException("구입할 로또 가격을 숫자로 입력해야합니다.");
         }
+    }
+
+    public static LottoTickets buy(int money) {
+        int numberOfLottoTicket = money / LOTTO_TICKET_PRICE;
+        List<LottoTicket> lottoTicketList = new ArrayList<>();
+        for (int i = 0; i < numberOfLottoTicket; i++) {
+            lottoTicketList.add(generate());
+        }
+        return new LottoTickets(new LottoWinningRules(), lottoTicketList, numberOfLottoTicket * LOTTO_TICKET_PRICE);
     }
 
     public static LottoTicket generate() {
@@ -54,8 +53,4 @@ public class LottoTicketFactory {
         return LottoTicket.from(lottoNumbers);
     }
 
-
-    public static int getLottoPrice() {
-        return LOTTO_TICKET_PRICE;
-    }
 }

@@ -40,12 +40,20 @@ public class LottoTicketTest {
     @Test
     void getWinningInfo() {
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.from(winningNumbers);
+        int bonus = 45;
+        LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.from(winningNumbers, bonus);
         LottoTicket lottoTicket = LottoTicketFactory.generate();
-        int numberOfMatching = lottoTicket.numberOfMatching(lottoWinningNumbers);
-        assertThat(numberOfMatching).isGreaterThanOrEqualTo(0);
-        assertThat(numberOfMatching).isLessThan(7);
+        int numberOfMatching = lottoTicket.countOfMatch(lottoWinningNumbers);
+        assertThat(numberOfMatching).isBetween(0, 6);
 
+    }
+
+    @DisplayName("보너스 숫자와 일치하는 수를 가지고 있으면 true를 리턴한다")
+    void matchesBonus() {
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.from(winningNumbers, 45);
+        LottoTicket lottoTicket = LottoTicket.from(1, 2, 3, 4, 5, 45);
+        lottoTicket.matchesBonus(lottoWinningNumbers);
     }
 
 }

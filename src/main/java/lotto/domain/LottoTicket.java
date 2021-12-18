@@ -37,11 +37,20 @@ public class LottoTicket {
         }
     }
 
-    public int numberOfMatching(LottoWinningNumbers lottoWinningNumbers) {
+
+//    public LottoRank lottoRank(LottoWinningNumbers lottoWinningNumbers) {
+//
+//
+//    }
+
+    public int countOfMatch(LottoWinningNumbers lottoWinningNumbers) {
         return lottoNumbers.stream()
                 .map(lottoWinningNumbers::numberContain)
                 .reduce(0, Integer::sum);
+    }
 
+    public boolean matchesBonus(LottoWinningNumbers lottoWinningNumbers) {
+        return lottoNumbers.contains(lottoWinningNumbers.getBonusNumber());
     }
 
     public int size() {

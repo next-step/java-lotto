@@ -11,26 +11,31 @@ public class LottoWinningNumbers {
     private static final int NUMBER_OF_LOTTO_WINNING_NUMBERS = 6;
 
     private final List<LottoNumber> lottoWinningNumbers;
+    private final LottoNumber bonus;
 
-    private LottoWinningNumbers(List<LottoNumber> lottoWinningNumbers) {
+    private LottoWinningNumbers(List<LottoNumber> lottoWinningNumbers, LottoNumber bonus) {
         validateNumberOf(lottoWinningNumbers);
         validateDuplicate(lottoWinningNumbers);
+        this.bonus = bonus;
         this.lottoWinningNumbers = lottoWinningNumbers;
     }
 
-    public static LottoWinningNumbers from(List<Integer> lottoWinningNumbers) {
+    public static LottoWinningNumbers from(List<Integer> lottoWinningNumbers, int bonus) {
         List<LottoNumber> lottoWinningNumberList = lottoWinningNumbers.stream()
                 .map(LottoNumber::from)
                 .collect(Collectors.toList());
-        return new LottoWinningNumbers(lottoWinningNumberList);
+        LottoNumber bonusNumber = LottoNumber.from(bonus);
+
+        return new LottoWinningNumbers(lottoWinningNumberList, bonusNumber);
     }
 
-    public static LottoWinningNumbers from(String lottoWinningNumbers) {
+    public static LottoWinningNumbers from(String lottoWinningNumbers, String bonus) {
         String[] lottoWinningNumberArray = lottoWinningNumbers.split(SPLITTER);
         List<LottoNumber> lottoWinningNumberList = Arrays.stream(lottoWinningNumberArray)
                 .map(LottoNumber::from)
                 .collect(Collectors.toList());
-        return new LottoWinningNumbers(lottoWinningNumberList);
+        LottoNumber bonusNumber = LottoNumber.from(bonus);
+        return new LottoWinningNumbers(lottoWinningNumberList, bonusNumber);
     }
 
     private void validateNumberOf(List<LottoNumber> lottoWinningNumbers) {
@@ -44,6 +49,10 @@ public class LottoWinningNumbers {
         if (lottoWinningNumberSet.size() != NUMBER_OF_LOTTO_WINNING_NUMBERS) {
             throw new LottoException("당첨 번호에는 중복이 있으면 안됩니다");
         }
+    }
+
+    public LottoNumber getBonusNumber() {
+        return this.bonus;
     }
 
     public boolean contain(LottoNumber lottoNumber) {

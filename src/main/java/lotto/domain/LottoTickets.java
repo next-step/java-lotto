@@ -19,7 +19,7 @@ public class LottoTickets {
     public Map<Integer, Integer> countNumberOfMatching(LottoWinningNumbers lottoWinningNumbers) {
         Map<Integer, Integer> map = new HashMap<>();
         for (LottoTicket lottoTicket : lottoTickets) {
-            int numberOfMatching = lottoTicket.numberOfMatching(lottoWinningNumbers);
+            int numberOfMatching = lottoTicket.countOfMatch(lottoWinningNumbers);
             int count = map.getOrDefault(numberOfMatching, 0);
             map.put(numberOfMatching, count + 1);
         }

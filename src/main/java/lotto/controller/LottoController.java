@@ -29,7 +29,8 @@ public class LottoController {
 
     public void winningInformationOf(LottoTickets lottoTickets) {
         String winningLotteryNumbers = InputView.winningLotteryNumbers();
-        LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.from(winningLotteryNumbers);
+        String bonusNumber = InputView.bonusNumber();
+        LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.from(winningLotteryNumbers, bonusNumber);
         Map<Integer, Integer> countNumberOfMatching = lottoTickets.countNumberOfMatching(lottoWinningNumbers);
         LottoWinningRules lottoWinningRules = lottoTickets.getLottoWinningRules();
         List<WinningInformationDto> winningInformationDtoList = winningInformationList(countNumberOfMatching, lottoWinningRules);
