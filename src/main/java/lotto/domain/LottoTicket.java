@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.domain.LottoInformation.NUMBER_OF_LOTTO_NUMBERS;
+import static lotto.domain.LottoProperties.NUMBER_OF_LOTTO_NUMBERS;
 
 public class LottoTicket {
     
@@ -34,7 +34,6 @@ public class LottoTicket {
             throw new LottoException("로또 번호는 6개여야 합니다.");
         }
     }
-
 
     public LottoRank getLottoRank(LottoWinningNumbers lottoWinningNumbers) {
         return LottoRank.valueOf(

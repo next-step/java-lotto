@@ -29,6 +29,7 @@ class LottoTicketFactoryTest {
     }
 
     @DisplayName("1에서 45사이 숫자 6개를 랜덤으로 만들어낸다.")
+    @Test
     void generate() {
         LottoTicket lottoTicket = LottoTicketFactory.generate();
         List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();

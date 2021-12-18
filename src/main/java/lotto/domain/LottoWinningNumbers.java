@@ -5,7 +5,7 @@ import lotto.exception.LottoException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static lotto.domain.LottoInformation.NUMBER_OF_LOTTO_WINNING_NUMBERS;
+import static lotto.domain.LottoProperties.NUMBER_OF_LOTTO_WINNING_NUMBERS;
 
 public class LottoWinningNumbers {
 

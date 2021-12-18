@@ -4,7 +4,6 @@ package lotto.domain;
 import lotto.exception.LottoException;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +18,6 @@ public enum LottoRank {
     FIFTH(3, 5_000, (countOfMatch, matchesBonus) -> countOfMatch == 3),
     MISS(0, 0, (countOfMatch, matchesBonus) -> countOfMatch <= 2 && countOfMatch >= 0);
 
-    private static final List<LottoRank> lottoRanks = Arrays.asList(FIRST, SECOND, THIRD, FOURTH, FIFTH, MISS);
     private final int countOfMatch;
     private final int winningPrize;
     private final RankMatchOperation rankMatchOperation;
@@ -33,15 +31,12 @@ public enum LottoRank {
 
     public static LottoRank valueOf(int countOfMatch, boolean matchBonus) {
         validateCountOfMatch(countOfMatch);
-        return lottoRanks.stream()
+        List<LottoRank> lottoRankList = Arrays.asList(values());
+        return lottoRankList.stream()
                 .filter(r -> r.matches(countOfMatch, matchBonus))
                 .collect(collectingAndThen(
                         Collectors.toList(),
                         list -> list.get(0)));
-    }
-
-    public static List<LottoRank> lottoRanks() {
-        return Collections.unmodifiableList(lottoRanks);
     }
 
     private static void validateCountOfMatch(int countOfMatch) {
@@ -52,6 +47,10 @@ public enum LottoRank {
 
     private boolean matches(int countOfMatch, boolean matchBonus) {
         return rankMatchOperation.apply(countOfMatch, matchBonus);
+    }
+
+    public int countOfMatch() {
+        return this.countOfMatch;
     }
 
     public int winningPrize() {

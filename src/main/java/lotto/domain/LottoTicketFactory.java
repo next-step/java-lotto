@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
-import static lotto.domain.LottoInformation.*;
+import static lotto.domain.LottoProperties.*;
 
 public class LottoTicketFactory {
     public static final int LOTTO_NUMBER_MIN_INDEX = 0;

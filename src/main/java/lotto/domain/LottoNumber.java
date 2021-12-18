@@ -4,8 +4,8 @@ import lotto.exception.LottoException;
 
 import java.util.Objects;
 
-import static lotto.domain.LottoInformation.MAX_LOTTO_NUMBER;
-import static lotto.domain.LottoInformation.MIN_LOTTO_NUMBER;
+import static lotto.domain.LottoProperties.MAX_LOTTO_NUMBER;
+import static lotto.domain.LottoProperties.MIN_LOTTO_NUMBER;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
@@ -19,7 +19,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static LottoNumber from(String number) {
         int lottoNumber = toInt(number);
         return new LottoNumber(lottoNumber);
-
     }
 
     private static int toInt(String number) {

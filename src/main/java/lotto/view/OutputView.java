@@ -1,9 +1,11 @@
 package lotto.view;
 
 import lotto.domain.LottoNumber;
-import lotto.dto.WinningInformationDto;
+import lotto.domain.LottoRank;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class OutputView {
     private static final String NUMBER_OF_PURCHASE = "개를 구매했습니다.";
@@ -24,14 +26,15 @@ public class OutputView {
         System.out.println(numbers);
     }
 
-    public static void printWinningStatics(List<WinningInformationDto> informationList) {
+    public static void printWinningStatics(Map<LottoRank, Integer> map) {
         System.out.println(WINNING_STATICS);
         System.out.println(DIVIDING_LINE);
-        for (WinningInformationDto information : informationList) {
-            String format = String.format(WINNING_STATICS_FORMAT, information.getNumberOfMatching(), information.getPrizeMoney(), information.getNumberOfLotto());
-            System.out.println(format);
-
+        List<LottoRank> lottoRankList = Arrays.asList(LottoRank.FIRST, LottoRank.SECOND, LottoRank.THIRD, LottoRank.FOURTH, LottoRank.FIFTH);
+        for (LottoRank lottoRank : lottoRankList) {
+            String formattedString = String.format(WINNING_STATICS_FORMAT, lottoRank.countOfMatch(), lottoRank.winningPrize(), map.get(lottoRank));
+            System.out.println(formattedString);
         }
+
         System.out.println();
     }
 

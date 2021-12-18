@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.LottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,19 +13,44 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTicketTest {
 
-    @DisplayName("생성된 로또 번호는 6개다.")
-    @Test
-    void generate() {
-        LottoTicket lottoTicket = LottoTicketFactory.generate();
-        int size = lottoTicket.size();
-        assertThat(size).isEqualTo(6);
+    @DisplayName("LottoTicket의 LottoNumber수가 6개가 아니면 예외가 발생한다..")
+    @MethodSource("providesValueOfFrom")
+    @ParameterizedTest
+    void from(List<LottoNumber> lottoNumbers) {
+        assertThatThrownBy(() ->
+                LottoTicket.from(lottoNumbers))
+                .isInstanceOf(LottoException.class);
+    }
+
+    private static Stream<Arguments> providesValueOfFrom() {
+        return Stream.of(
+                Arguments.of(
+                        Arrays.asList(
+                                LottoNumber.from(1),
+                                LottoNumber.from(2),
+                                LottoNumber.from(3),
+                                LottoNumber.from(4),
+                                LottoNumber.from(5),
+                                LottoNumber.from(6),
+                                LottoNumber.from(7)
+                        )),
+                Arguments.of(
+                        Arrays.asList(
+                                LottoNumber.from(1),
+                                LottoNumber.from(2),
+                                LottoNumber.from(3),
+                                LottoNumber.from(4),
+                                LottoNumber.from(5)
+                        ))
+        );
     }
 
     @DisplayName("LottoTicket의 rank를 조회한다")
-    @MethodSource("provideLottoRankSource")
+    @MethodSource("provideValueOfGetLottoRank")
     @ParameterizedTest
     void getLottoRank(String winningNumbers, String bonus, LottoTicket lottoTicket, LottoRank lottoRank) {
         LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.from(winningNumbers, bonus);
@@ -34,7 +60,7 @@ public class LottoTicketTest {
     }
 
 
-    private static Stream<Arguments> provideLottoRankSource() {
+    private static Stream<Arguments> provideValueOfGetLottoRank() {
         return Stream.of(
                 Arguments.of("1, 2, 3, 4, 5, 6", "45", LottoTicket.from(1, 2, 3, 4, 5, 6), LottoRank.FIRST),
                 Arguments.of("1, 2, 3, 4, 5, 6", "45", LottoTicket.from(1, 2, 3, 4, 5, 45), LottoRank.SECOND),
