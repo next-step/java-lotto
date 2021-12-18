@@ -5,10 +5,11 @@ import lotto.exception.LottoException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static lotto.domain.LottoInformation.NUMBER_OF_LOTTO_WINNING_NUMBERS;
+
 public class LottoWinningNumbers {
 
     private static final String SPLITTER = ", ";
-    private static final int NUMBER_OF_LOTTO_WINNING_NUMBERS = 6;
 
     private final List<LottoNumber> lottoWinningNumbers;
     private final LottoNumber bonus;

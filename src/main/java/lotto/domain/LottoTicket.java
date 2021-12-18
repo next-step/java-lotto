@@ -10,9 +10,7 @@ import java.util.stream.Collectors;
 import static lotto.domain.LottoInformation.NUMBER_OF_LOTTO_NUMBERS;
 
 public class LottoTicket {
-
-//    private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
-
+    
     private final List<LottoNumber> lottoNumbers;
 
     private LottoTicket(List<LottoNumber> lottoNumbers) {
@@ -38,10 +36,12 @@ public class LottoTicket {
     }
 
 
-//    public LottoRank lottoRank(LottoWinningNumbers lottoWinningNumbers) {
-//
-//
-//    }
+    public LottoRank getLottoRank(LottoWinningNumbers lottoWinningNumbers) {
+        return LottoRank.valueOf(
+                countOfMatch(lottoWinningNumbers),
+                matchesBonus(lottoWinningNumbers)
+        );
+    }
 
     public int countOfMatch(LottoWinningNumbers lottoWinningNumbers) {
         return lottoNumbers.stream()

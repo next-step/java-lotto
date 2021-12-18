@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -25,5 +27,16 @@ class LottoTicketFactoryTest {
         assertThatThrownBy(() -> LottoTicketFactory.buy("string"))
                 .isInstanceOf(LottoException.class);
     }
+
+    @DisplayName("1에서 45사이 숫자 6개를 랜덤으로 만들어낸다.")
+    void generate() {
+        LottoTicket lottoTicket = LottoTicketFactory.generate();
+        List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
+        lottoNumbers.forEach(lottoNumber ->
+                assertThat(lottoNumber.getNumber()).isBetween(1, 45)
+        );
+        assertThat(lottoNumbers.size()).isEqualTo(6);
+    }
+
 
 }

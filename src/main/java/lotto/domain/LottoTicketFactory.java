@@ -40,7 +40,7 @@ public class LottoTicketFactory {
         for (int i = 0; i < numberOfLottoTicket; i++) {
             lottoTicketList.add(generate());
         }
-        return new LottoTickets(new LottoWinningRules(), lottoTicketList, numberOfLottoTicket * LOTTO_TICKET_PRICE);
+        return new LottoTickets(lottoTicketList, numberOfLottoTicket * LOTTO_TICKET_PRICE);
     }
 
     public static LottoTicket generate() {
