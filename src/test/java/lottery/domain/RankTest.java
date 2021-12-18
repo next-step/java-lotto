@@ -25,7 +25,7 @@ public class RankTest {
             Arguments.arguments(5, false, Rank.THIRD),
             Arguments.arguments(5, true, Rank.SECOND),
             Arguments.arguments(6, false, Rank.FIRST),
-            
+
             Arguments.arguments(0, true, Rank.MISS),
             Arguments.arguments(1, true, Rank.MISS),
             Arguments.arguments(2, true, Rank.MISS),

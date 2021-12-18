@@ -27,7 +27,12 @@ public class ResultView {
             System.lineSeparator());
 
         for (final LotteryTicket ticket : lotteryTickets.tickets()) {
-            System.out.printf(MESSAGE_FORMAT_LOTTERY_NUMBERS, ticket.getNumbers().stream().map(LotteryNumber::value).toArray());
+            String lotteryString = ticket.getNumbers()
+                .stream()
+                .map(LotteryNumber::value)
+                .map(String::valueOf)
+                .collect(Collectors.joining(", ", "[", "]"));
+            System.out.println(lotteryString);
         }
 
         System.out.println();

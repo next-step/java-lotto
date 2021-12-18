@@ -22,14 +22,6 @@ public class WinningLotteryNumbers {
         return new WinningLotteryNumbers(winningLotteryTicket, bonusNumber);
     }
 
-    public LotteryTicket getWinningLotteryTicket() {
-        return winningLotteryTicket;
-    }
-
-    public LotteryNumber getBonusNumber() {
-        return bonusNumber;
-    }
-
     public Rank matchedRank(final LotteryTicket lotteryTicket) {
         final int countOfMatch = winningLotteryTicket.matchedCount(lotteryTicket);
         final boolean matchBonus = lotteryTicket.contains(bonusNumber);
@@ -46,7 +38,8 @@ public class WinningLotteryNumbers {
             return false;
         }
         WinningLotteryNumbers that = (WinningLotteryNumbers) o;
-        return Objects.equals(winningLotteryTicket, that.winningLotteryTicket) && Objects.equals(bonusNumber, that.bonusNumber);
+        return Objects.equals(winningLotteryTicket, that.winningLotteryTicket) && Objects.equals(bonusNumber,
+            that.bonusNumber);
     }
 
     @Override

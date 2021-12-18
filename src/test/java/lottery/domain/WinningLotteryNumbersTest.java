@@ -13,6 +13,7 @@ public class WinningLotteryNumbersTest {
     void duplicatedBonusNumber(int bonusNumber) {
         LotteryTicket lotteryTicket = LotteryTicket.from(Lists.list(1, 2, 3, 4, 5, 6));
 
-        assertThatIllegalArgumentException().isThrownBy(() -> WinningLotteryNumbers.of(lotteryTicket, LotteryNumber.from(bonusNumber)));
+        assertThatIllegalArgumentException().isThrownBy(
+            () -> WinningLotteryNumbers.of(lotteryTicket, LotteryNumber.from(bonusNumber)));
     }
 }

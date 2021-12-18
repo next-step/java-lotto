@@ -18,7 +18,8 @@ public class RandomLotteryNumberGenerator implements LotteryNumberGenerator {
 
     @Override
     public List<Integer> generate() {
-        final List<Integer> allNumbers = IntStream.rangeClosed(LotteryNumber.MINIMUM_LOTTERY_NUMBER, LotteryNumber.MAXIMUM_LOTTERY_NUMBER)
+        final List<Integer> allNumbers = IntStream.rangeClosed(LotteryNumber.MINIMUM_LOTTERY_NUMBER,
+                LotteryNumber.MAXIMUM_LOTTERY_NUMBER)
             .boxed()
             .collect(Collectors.toList());
 

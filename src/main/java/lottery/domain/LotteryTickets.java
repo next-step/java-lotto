@@ -21,7 +21,8 @@ public class LotteryTickets {
         return new LotteryTickets(purchasePrice, tickets);
     }
 
-    public static LotteryTickets create(final PurchasePrice purchasePrice, final LotteryNumberGenerator lotteryNumberGenerator) {
+    public static LotteryTickets create(final PurchasePrice purchasePrice,
+        final LotteryNumberGenerator lotteryNumberGenerator) {
         final int ticketCount = purchasePrice.affordableTicketCount();
         if (Objects.isNull(lotteryNumberGenerator)) {
             throw new IllegalArgumentException(EXCEPTION_MESSAGE_GENERATOR_CAN_NOT_BE_NULL);
