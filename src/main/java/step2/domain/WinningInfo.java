@@ -1,12 +1,10 @@
-package step2.dto;
+package step2.domain;
 
 public class WinningInfo {
-    private final long matchedCondition;
     private final long winningPrize;
     private final long winningCount;
 
-    public WinningInfo(long matchedCondition, long winningPrize, long winningCount) {
-        this.matchedCondition = matchedCondition;
+    public WinningInfo(long winningPrize, long winningCount) {
         this.winningPrize = winningPrize;
         this.winningCount = winningCount;
     }
@@ -15,16 +13,12 @@ public class WinningInfo {
         return this.winningPrize * this.winningCount;
     }
 
-    public long getMatchedCondition() {
-        return matchedCondition;
-    }
-
-    public long getWinningPrize() {
-        return winningPrize;
-    }
-
     public long getWinningCount() {
         return winningCount;
+    }
+
+    public WinningInfo addWinningCount() {
+        return new WinningInfo(this.winningPrize, this.winningCount + 1);
     }
 
 }

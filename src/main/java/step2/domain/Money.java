@@ -1,15 +1,13 @@
 package step2.domain;
 
-import org.omg.CORBA.DynAnyPackage.Invalid;
 import step2.dto.WinningRate;
 import step2.exception.InvalidMoneyException;
-import step2.exception.NotEnoughMoneyException;
 
 import java.util.Objects;
 
 public class Money {
-    private static final int BASE_PRICE = 1000;
     private static final int ZERO = 0;
+
     private final long amount;
 
     public Money(long price) {
@@ -27,24 +25,32 @@ public class Money {
     }
 
     public WinningRate calculatePercent(Money otherMoney) {
-        return new WinningRate(this.amount / (float)otherMoney.amount);
-    }
-
-    public Ticket purchasedTicket() {
-        enoughMoneyOrElseThrow();
-
-        return new Ticket(this.amount / BASE_PRICE);
-    }
-
-    private void enoughMoneyOrElseThrow() {
-        if (this.amount < BASE_PRICE) {
-            throw new NotEnoughMoneyException();
+        if (otherMoney.isZero()) {
+            return new WinningRate(ZERO);
         }
+
+        return new WinningRate(this.amount / (float) otherMoney.amount);
+    }
+
+    private boolean isZero() {
+        return this.amount == ZERO;
+    }
+
+    public long dividedAmount(int basis) {
+        return this.amount / basis;
+    }
+
+    public boolean lessThanPrice(long price) {
+        return this.amount < price;
+    }
+
+    public long getAmount() {
+        return amount;
     }
 
     private void validMoneyOrElseThrow(long price) {
         if (price < ZERO) {
-            throw new InvalidMoneyException();
+            throw new InvalidMoneyException(price);
         }
     }
 
@@ -64,5 +70,4 @@ public class Money {
     public int hashCode() {
         return Objects.hash(amount);
     }
-
 }

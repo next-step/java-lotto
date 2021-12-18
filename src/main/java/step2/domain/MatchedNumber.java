@@ -1,33 +1,43 @@
 package step2.domain;
 
+import step2.exception.DuplicatedNumberException;
 import step2.exception.NotValidNumberCountException;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class MatchedNumber {
     private static final String WINNING_DELIMITER = ", ";
+    private static final int ZERO = 0;
+    private static final int ONE = 1;
     private static final int VALID_COUNT = 6;
 
-    private Set<LottoNumber> matchedNumber;
+    private List<LottoNumber> matchedNumber;
 
     public MatchedNumber(String textNumber) {
-        matchedNumber = Arrays.stream(textNumber.split(WINNING_DELIMITER))
+        this.matchedNumber = Arrays.stream(textNumber.split(WINNING_DELIMITER))
                 .map(number -> new LottoNumber(number))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
 
-        validCountOrElseThrow();
+        validateMatchedNumber();
     }
 
-    public Set<LottoNumber> getMatchedNumbers() {
-        return Collections.unmodifiableSet(this.matchedNumber);
+    public boolean matchedNumber(LottoNumber number) {
+        return this.matchedNumber.contains(number);
     }
 
-    private void validCountOrElseThrow() {
-        if (matchedNumber.size() < VALID_COUNT) {
+    private void validateMatchedNumber() {
+        long duplicatedCount = this.matchedNumber.stream()
+                .filter(number -> Collections.frequency(this.matchedNumber, number) > ONE)
+                .count();
+
+        if (duplicatedCount != ZERO) {
+            throw new DuplicatedNumberException();
+        }
+
+        if (this.matchedNumber.size() != VALID_COUNT) {
             throw new NotValidNumberCountException();
         }
     }
+
 }

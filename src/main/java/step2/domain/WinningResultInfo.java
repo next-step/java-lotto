@@ -1,7 +1,5 @@
 package step2.domain;
 
-import step2.dto.WinningCondition;
-import step2.dto.WinningInfo;
 import step2.dto.WinningRate;
 
 import java.util.Collections;

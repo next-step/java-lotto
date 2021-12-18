@@ -22,12 +22,12 @@ public class LottoNumber {
 
     private void validNumberOrElseThrow(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
-            throw new NotValidLottoNumberException();
+            throw new NotValidLottoNumberException(number);
         }
     }
 
     public boolean matchedWinningNumber(MatchedNumber matchedNumber) {
-        return matchedNumber.getMatchedNumbers().contains(new LottoNumber(lottoNumber));
+        return matchedNumber.matchedNumber(new LottoNumber(lottoNumber));
     }
 
     @Override
