@@ -2,7 +2,9 @@ package step2.view;
 
 import step2.domain.Lotteries;
 import step2.domain.Statistics;
+import step2.domain.enums.Rank;
 
+import java.util.EnumSet;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -21,8 +23,9 @@ public class ResultView {
     public static void printStatistics(Statistics statistic) {
         System.out.println("\n당첨 통계");
 
-        statistic.getStatistics().forEach((ranking, count) -> {
-            System.out.println(String.format("%s개 일치 (%d원) - %d개", ranking.getCorrectCount(), ranking.getPrizeMoney(), count));
+        EnumSet.allOf(Rank.class).forEach(rank -> {
+            long count = statistic.getRanks().getCountOfRank(rank);
+            System.out.println(String.format("%s개 일치 (%d원) - %d개", rank.getCorrectCount(), rank.getPrizeMoney(), count));
         });
     }
 

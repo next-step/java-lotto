@@ -4,7 +4,7 @@ import step2.domain.Lotteries;
 import step2.domain.Lottery;
 import step2.domain.Number;
 import step2.domain.Statistics;
-import step2.strategy.ManualLotteryStrategy;
+import step2.strategy.AutoLotteryStrategy;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -18,7 +18,7 @@ public class LotteryController {
     }
 
     public Lotteries getLotteries(int purchaseAmount) {
-        return Lotteries.createFromCount(new ManualLotteryStrategy(), purchaseAmount / LOTTERY_PURCHASE_PRICE);
+        return Lotteries.createFromCount(new AutoLotteryStrategy(), purchaseAmount / LOTTERY_PURCHASE_PRICE);
     }
 
     public double getProfitRate(Statistics statistics, int purchaseAmount) {

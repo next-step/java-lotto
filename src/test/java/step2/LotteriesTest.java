@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import step2.domain.Lottery;
 import step2.domain.Lotteries;
 import step2.domain.Number;
-import step2.strategy.ManualLotteryStrategy;
+import step2.strategy.AutoLotteryStrategy;
 
 import java.util.ArrayList;
 
@@ -34,7 +34,7 @@ public class LotteriesTest {
     @Test
     @DisplayName("Lotteries 객체 생성")
     void createFromCount() {
-        Lotteries lotteries = Lotteries.createFromCount(new ManualLotteryStrategy(), 1);
+        Lotteries lotteries = Lotteries.createFromCount(new AutoLotteryStrategy(), 1);
         lotteries.getList().forEach(lottery -> {
             lottery.getList().forEach(number -> {
                 assertThat(number.getNumber())
