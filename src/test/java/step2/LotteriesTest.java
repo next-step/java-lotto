@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import step2.domain.Lottery;
 import step2.domain.Lotteries;
 import step2.domain.Number;
-import step2.domain.enums.RANKING;
 import step2.strategy.ManualLotteryStrategy;
 
 import java.util.ArrayList;

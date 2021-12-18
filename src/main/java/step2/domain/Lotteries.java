@@ -3,20 +3,21 @@ package step2.domain;
 import step2.strategy.LotteryStrategy;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class Lotteries {
     private final List<Lottery> lotteries;
 
-            private Lotteries(List<Lottery> lotteries) {
+    private Lotteries(List<Lottery> lotteries) {
         this.lotteries = lotteries;
     }
 
     public static Lotteries createFromCount(LotteryStrategy strategy, int count) {
         List<Lottery> lotteries = new ArrayList<>();
 
-        for (int idx = 0; idx < count; idx++) {
+        IntStream.range(0, count).forEach(i -> {
             lotteries.add(Lottery.createFromStrategy(strategy));
-        }
+        });
 
         return new Lotteries(lotteries);
     }
@@ -26,7 +27,7 @@ public class Lotteries {
     }
 
     public List<Lottery> getList() {
-        return lotteries;
+        return Collections.unmodifiableList(lotteries);
     }
 
     @Override

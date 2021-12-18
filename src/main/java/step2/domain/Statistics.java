@@ -1,54 +1,22 @@
 package step2.domain;
 
-import step2.domain.enums.RANKING;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Objects;
 
 public class Statistics {
     final double profitAmount;
-    static Map<RANKING, Integer> statistics;
+    static Ranks ranks;
 
     public Statistics(Lotteries lotteries, Lottery winningNumbers) {
-        statistics = new LinkedHashMap() {{
-            for (RANKING rank : RANKING.values()) {
-                put(rank, 0);
-            }
-        }};
-
-        for (Lottery lottery : lotteries.getList()) {
-            setStatistics(lottery, winningNumbers);
-        }
-
-        this.profitAmount = calculateProfitAmount();
+        this.ranks = new Ranks(lotteries, winningNumbers);
+        this.profitAmount = ranks.calculateProfitAmount();
     }
 
-    private void setStatistics(Lottery lottery, Lottery winningNumbers) {
-        int count = lottery.getCorrectCount(winningNumbers);
-        RANKING key = RANKING.of(count);
-
-        if (statistics.containsKey(key)) {
-            statistics.put(key, statistics.get(key) + 1);
-        }
-    }
-
-    public Map<RANKING, Integer> getStatistics() {
-        return statistics;
+    public Ranks getRanks() {
+        return ranks;
     }
 
     public double calculateProfitRate(double purchaseAmount) {
         return Math.floor(this.profitAmount / purchaseAmount * 100) / 100;
-    }
-
-    private int calculateProfitAmount() {
-        int money = 0;
-
-        for (Map.Entry<RANKING, Integer> entry : this.statistics.entrySet()) {
-            money += entry.getKey().getPrizeMoney() * entry.getValue();
-        }
-
-        return money;
     }
 
     @Override
