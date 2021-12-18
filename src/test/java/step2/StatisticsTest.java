@@ -3,11 +3,8 @@ package step2;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.domain.Lotteries;
-import step2.domain.Lottery;
+import step2.domain.*;
 import step2.domain.Number;
-import step2.domain.Statistics;
-import step2.domain.enums.RANKING;
 
 import java.util.ArrayList;
 
@@ -42,9 +39,9 @@ public class StatisticsTest {
 
     @Test
     @DisplayName("Statistics 통계 계산")
-    void getStatistics() {
+    void getRanks() {
         Statistics statistics = new Statistics(lotteries, lottery);
-        assertThat(statistics.getStatistics()).containsEntry(RANKING.FIRST, 1);
+        assertThat(statistics.getRanks()).isEqualTo(new Ranks(lotteries, lottery));
     }
 
     @Test
