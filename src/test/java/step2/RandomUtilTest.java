@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RandomUtilTest {
     @Test
     void getRandomNumbers() {
-        assertThat(RandomUtil.getRandomNumbers().get(0))
+        assertThat(RandomUtil.pickNumbers().get(0))
                 .isGreaterThan(0)
                 .isLessThanOrEqualTo(45);
     }
