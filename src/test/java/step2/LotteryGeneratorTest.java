@@ -1,14 +1,14 @@
 package step2;
 
 import org.junit.jupiter.api.Test;
-import step2.domain.util.RandomUtil;
+import step2.domain.util.LotteryGenerator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RandomUtilTest {
+public class LotteryGeneratorTest {
     @Test
     void getRandomNumbers() {
-        assertThat(RandomUtil.pickNumbers().get(0))
+        assertThat(LotteryGenerator.pickNumbers().get(0))
                 .isGreaterThan(0)
                 .isLessThanOrEqualTo(45);
     }

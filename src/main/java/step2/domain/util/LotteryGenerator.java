@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class RandomUtil {
+public class LotteryGenerator {
     private final static int LOTTERY_NUMBER_COUNT = 6;
     private final static int MIN_VALUE = 1;
     private final static int MAX_VALUE = 45;
