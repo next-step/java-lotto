@@ -9,20 +9,20 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoTicketsFactoryTest {
+class LottoTicketFactoryTest {
 
-    @DisplayName("LottoNumbers 한 개는 1000원이고, 구입 금액에 따라 로또 번호들을 생성한다.")
+    @DisplayName("돈을 인자로 전달하면 LottoTickets를 살 수 있다. LottoTicket은 한 개에 1000원이다")
     @ParameterizedTest
     @CsvSource(value = {"140000:14", "14300:14", "990:0"}, delimiter = ':')
-    void buyWithMoney() {
-        LottoTickets lottoTickets = LottoTicketsFactory.buyWithMoney(14000);
+    void buy() {
+        LottoTickets lottoTickets = LottoTicketFactory.buy(14000);
         assertThat(lottoTickets.size()).isEqualTo(14);
     }
 
     @DisplayName("구입할 금액은 숫자를 입력해야한다. ")
     @Test
     void buyWithMoneyValidation() {
-        assertThatThrownBy(() -> LottoTicketsFactory.buyWithMoney("string"))
+        assertThatThrownBy(() -> LottoTicketFactory.buy("string"))
                 .isInstanceOf(LottoException.class);
     }
 

@@ -7,9 +7,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static lotto.domain.LottoInformation.NUMBER_OF_LOTTO_NUMBERS;
+
 public class LottoTicket {
 
-    private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
+//    private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
 
     private final List<LottoNumber> lottoNumbers;
 

@@ -14,7 +14,7 @@ public class LottoController {
 
     public LottoTickets buyAndPrintLotto() {
         String purchaseAmount = InputView.purchaseAmount();
-        LottoTickets lottoTickets = LottoTicketsFactory.buyWithMoney(purchaseAmount);
+        LottoTickets lottoTickets = LottoTicketFactory.buy(purchaseAmount);
         OutputView.printNumberOfPurchase(lottoTickets.size());
         printLottoNumbersList(lottoTickets);
         return lottoTickets;
