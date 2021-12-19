@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lottos {
-    private final List<Lotto> lottos;
+    private final List<Lotto> values;
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public Lottos(List<Lotto> values) {
+        this.values = values;
     }
 
     public long match(LottoNumbers winningNumbers, MatchedNumbersCount matchedNumbersCount) {
-        return lottos.stream()
+        return values.stream()
                 .filter(lotto -> lotto.match(
                         winningNumbers,
                         count -> count == matchedNumbersCount.value())
@@ -30,11 +30,11 @@ public class Lottos {
             return false;
         }
         Lottos lottos1 = (Lottos) o;
-        return Objects.equals(lottos, lottos1.lottos);
+        return Objects.equals(values, lottos1.values);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottos);
+        return Objects.hash(values);
     }
 }
