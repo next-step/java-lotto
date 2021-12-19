@@ -11,9 +11,10 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class LotteryNumberTest {
 
   @Test
-  @DisplayName("Test create lottery number.")
-  void testCreateLotteryNumber() {
+  @DisplayName("Test lottery number.")
+  void testLotteryNumber() {
     assertEquals(new LotteryNumber(1).getNumber(), 1);
+    assertEquals(new LotteryNumber(1), new LotteryNumber(1));
   }
 
   @ParameterizedTest
