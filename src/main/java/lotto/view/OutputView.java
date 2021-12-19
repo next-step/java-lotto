@@ -16,7 +16,6 @@ public class OutputView {
     private static final String OUTPUT_MESSAGE_PROFIT_ANNOUNCE = "\n총 수익률은 %.3f 입니다. \n";
     private static final String OUTPUT_MESSAGE_X_NUMBERS_MATCH = "%d개 일치 (%d원)- %d개\n";
     private static final String OUTPUT_MESSAGE_X_NUMBERS_AND_BONUS_MATCH = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
-
     private static final String NUMBER_CONNECTOR = ", ";
     private static final String NUMBER_START_SIGNAL = "[";
     private static final String NUMBER_END_SIGNAL = "]";

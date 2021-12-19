@@ -48,4 +48,5 @@ public class Main {
         BigDecimal profit = lottoMachine.calculateProfit(lottos, winnerLotto);
         outputView.showLottoProfit(profit);
     }
+
 }
