@@ -23,13 +23,19 @@ public class ResultView {
 
     public static void printResult(LottoResults lottoResults, float profit) {
         System.out.println(LOTTO_RESULT_MESSAGE);
+        StringBuilder stringBuilder = new StringBuilder();
 
         for (MatchedNumbersCount matchedNumbersCount : lottoResults.values().keySet()) {
-            System.out.println(matchedNumbersCount.value() + MATCHED_NUMBERS_MESSAGE
-                    + matchedNumbersCount.price()  + PRICE_MESSAGE
-                    + lottoResults.values().get(matchedNumbersCount) + COUNT_MESSAGE);
+            stringBuilder.append(matchedNumbersCount.value())
+                    .append(MATCHED_NUMBERS_MESSAGE)
+                    .append(matchedNumbersCount.price())
+                    .append(PRICE_MESSAGE)
+                    .append(lottoResults.values().get(matchedNumbersCount))
+                    .append(COUNT_MESSAGE)
+                    .append("\n");
         }
 
+        System.out.println(stringBuilder);
         System.out.printf(PROFIT_MESSAGE, profit);
     }
 }
