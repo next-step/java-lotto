@@ -7,27 +7,27 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoWinTest {
+class RankTest {
 
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2,})
     void getDefaultWin(int matchCount) {
         // given
         // when
-        LottoWin lottoWin = LottoWin.of(matchCount);
+        Rank rank = Rank.of(matchCount);
 
         // then
-        assertThat(lottoWin).isEqualTo(LottoWin.DEFAULT);
+        assertThat(rank).isEqualTo(Rank.MISS);
     }
 
     @Test
     void getSecondWin() {
         // given
         // when
-        LottoWin lottoWin = LottoWin.of(5);
+        Rank rank = Rank.of(5);
 
         // then
-        assertThat(lottoWin).isEqualTo(LottoWin.SECOND);
+        assertThat(rank).isEqualTo(Rank.SECOND);
     }
 
     @ParameterizedTest
@@ -43,7 +43,7 @@ class LottoWinTest {
     void winPriceOf_Default(int matchCount, int winPrice) {
         // given
         // when
-        Money money = LottoWin.winPriceOf(matchCount);
+        Money money = Rank.winPriceOf(matchCount);
 
         // then
         assertThat(money).isEqualTo(new Money(winPrice));

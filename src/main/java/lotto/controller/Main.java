@@ -1,8 +1,6 @@
 package lotto.controller;
 
-import lotto.Lotto;
-import lotto.LottoMachine;
-import lotto.Lottos;
+import lotto.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -11,9 +9,10 @@ import java.util.Map;
 
 public class Main {
 
+    static InputView inputView = new InputView();
+    static OutputView outputView = new OutputView();
+
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-        OutputView outputView = new OutputView();
         LottoMachine lottoMachine = new LottoMachine();
 
         int moneyForLotto = inputView.showMessageAndGetMoneyInput();
@@ -22,14 +21,20 @@ public class Main {
         outputView.showHowManyLottosBoughtWithMoney(lottos);
         outputView.showLottos(lottos);
 
-        String lottoWinNumbers = inputView.showMessageAndGetLastWeekLottoWinNumbers();
-        Lotto winnerLotto = new Lotto(lottoWinNumbers);
+        WinnerLotto winnerLotto = getWinnerLotto();
 
-        Map<Integer, Integer> matchCounts = lottoMachine.calculateMatchCount(lottos, winnerLotto);
+        Map<Rank, Integer> matchCounts = lottoMachine.calculateMatchCount(lottos, winnerLotto);
         outputView.showMatchCount(matchCounts);
 
         BigDecimal profit = lottoMachine.calculateProfit(lottos, winnerLotto);
         outputView.showLottoProfit(profit);
+    }
+
+    private static WinnerLotto getWinnerLotto() {
+        String lottoWinNumbers = inputView.showMessageAndGetLastWeekLottoWinNumbers();
+        int bonusNumber = inputView.showMessageAndGetBonusNumber();
+
+        return new WinnerLotto(lottoWinNumbers, bonusNumber);
     }
 
 }

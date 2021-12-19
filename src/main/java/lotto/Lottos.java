@@ -38,12 +38,24 @@ public class Lottos {
         return matchCounts;
     }
 
+    public Map<Rank, Integer> calculateMatchCount(WinnerLotto winLotto) {
+        Map<Rank, Integer> matchCounts = new HashMap<>();
+        int increment = 1;
+
+        for(Lotto lotto : lottos) {
+            Rank rank = winLotto.calculateRank(lotto);
+            matchCounts.merge(rank, increment, Integer::sum);
+        }
+
+        return matchCounts;
+    }
+
     public BigDecimal calculateProfit(Lotto winnerLotto, Money lottoPrice) {
         Money totalWinPrice = new Money();
 
         for (Lotto lotto : lottos) {
             int matchCount = lotto.countMatch(winnerLotto);
-            Money winPrice = LottoWin.winPriceOf(matchCount);
+            Money winPrice = Rank.winPriceOf(matchCount);
             totalWinPrice = totalWinPrice.add(winPrice);
         }
 

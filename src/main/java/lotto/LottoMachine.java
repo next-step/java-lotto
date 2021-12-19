@@ -34,10 +34,22 @@ public class LottoMachine {
         Map<Integer, Integer> matchCounts = lottos.calculateMatchCount(winLotto);
         Map<Integer, Integer> winnerMatchCounts = new HashMap<>();
 
-        for (LottoWin lottoWin : LottoWin.LOTTO_WINS) {
-            int expectedMatchCount = lottoWin.numberOfMatch();
+        for (Rank rank : Rank.LOTTO_WINS_NOT_BONUS) {
+            int expectedMatchCount = rank.numberOfMatch();
             int matchCount = matchCounts.getOrDefault(expectedMatchCount, DEFAULT_MATCH_COUNT);
             winnerMatchCounts.put(expectedMatchCount, matchCount);
+        }
+
+        return winnerMatchCounts;
+    }
+
+    public Map<Rank, Integer> calculateMatchCount(Lottos lottos, WinnerLotto winLotto) {
+        Map<Rank, Integer> matchCounts = lottos.calculateMatchCount(winLotto);
+        Map<Rank, Integer> winnerMatchCounts = new HashMap<>();
+
+        for(Rank rank : Rank.LOTTO_WINS) {
+            int matchCount = matchCounts.getOrDefault(rank, DEFAULT_MATCH_COUNT);
+            winnerMatchCounts.put(rank, matchCount);
         }
 
         return winnerMatchCounts;
