@@ -7,7 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class RankTest {
+class RankTest {
 
     @ParameterizedTest
     @MethodSource("testArgs")
@@ -15,7 +15,7 @@ public class RankTest {
         assertThat(Rank.valueOf(countOfMatch, bonusMatch)).isEqualTo(expectedRank);
     }
 
-    private static Stream<Arguments> testArgs() {
+    static Stream<Arguments> testArgs() {
         return Stream.of(
             Arguments.arguments(0, false, Rank.MISS),
             Arguments.arguments(1, false, Rank.MISS),

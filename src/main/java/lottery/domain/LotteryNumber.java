@@ -26,7 +26,11 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
         return new LotteryNumber(input);
     }
 
-    private static boolean isInvalidNumber(int input) {
+    public int value() {
+        return value;
+    }
+
+    private static boolean isInvalidNumber(final int input) {
         return input > MAXIMUM_LOTTERY_NUMBER || input < MINIMUM_LOTTERY_NUMBER;
     }
 
@@ -51,9 +55,5 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
     @Override
     public int compareTo(LotteryNumber lotteryNumber) {
         return this.value - lotteryNumber.value;
-    }
-
-    public int value() {
-        return value;
     }
 }
