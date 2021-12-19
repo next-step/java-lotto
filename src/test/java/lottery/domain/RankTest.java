@@ -3,6 +3,7 @@ package lottery.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.stream.Stream;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -11,6 +12,7 @@ class RankTest {
 
     @ParameterizedTest
     @MethodSource("testArgs")
+    @DisplayName("countOfMatch와 bonusMatch 값으로 Rank enum이 정상 생성 되는지 확인")
     void create(int countOfMatch, boolean bonusMatch, Rank expectedRank) {
         assertThat(Rank.valueOf(countOfMatch, bonusMatch)).isEqualTo(expectedRank);
     }

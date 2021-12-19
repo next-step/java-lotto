@@ -30,9 +30,10 @@ class LotteryTicketTest {
     }
 
     @ParameterizedTest
+    @DisplayName("티켓에 로또 번호가 포함되는지 확인")
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     void contains(int number) {
-        LotteryTicket ticket = LotteryTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(ticket.contains(LotteryNumber.from(number))).isEqualTo(true);
+        final LotteryTicket ticket = LotteryTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(ticket.contains(LotteryNumber.from(number))).isTrue();
     }
 }

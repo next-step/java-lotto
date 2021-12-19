@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -14,6 +15,7 @@ class LotteryResultTest {
 
     @ParameterizedTest
     @MethodSource("lotteryResultSource")
+    @DisplayName("LotteryTickets이 LotteryResult로 정상 변환 확인 테스트")
     void conversionTest(PurchasePrice purchasePrice, WinningLotteryNumbers winningLotteryNumbers,
         LotteryTickets lotteryTickets,
         Map<Rank, Long> rankToCount, float earningRatio) {
