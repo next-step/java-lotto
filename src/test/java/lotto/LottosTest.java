@@ -1,5 +1,6 @@
 package lotto;
 
+import org.assertj.core.api.Assertions;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 
@@ -46,29 +47,30 @@ class LottosTest {
         Lotto lotto3 = new Lotto("1, 2, 3, 10, 11, 12");
         Lotto lotto4 = new Lotto("1, 2, 3, 4, 11, 12");
         Lotto lotto5 = new Lotto("1, 2, 3, 4, 5, 12");
-        Lotto lotto6 = new Lotto("1, 2, 3, 4, 5, 6");
+        Lotto lotto6 = new Lotto("1, 2, 3, 4, 5, 7");
+        Lotto lotto7 = new Lotto("1, 2, 3, 4, 5, 6");
 
-        Lottos lottos = new Lottos(Lists.list(lotto0, lotto1, lotto2, lotto3, lotto4, lotto5, lotto6));
-        Lotto winLotto = new Lotto("1, 2, 3, 4, 5, 6");
+        Lottos lottos = new Lottos(Lists.list(lotto0, lotto1, lotto2, lotto3, lotto4, lotto5, lotto6, lotto7));
+        WinnerLotto winLotto = new WinnerLotto("1, 2, 3, 4, 5, 6", 7);
 
         // when
-        Map<Integer, Integer> matchCounts = lottos.calculateMatchCount(winLotto);
+        Map<Rank, Integer> matchCounts = lottos.calculateMatchCount(winLotto);
 
         // then
-        assertThat(matchCounts.get(0)).isEqualTo(1);
-        assertThat(matchCounts.get(1)).isEqualTo(1);
-        assertThat(matchCounts.get(2)).isEqualTo(1);
-        assertThat(matchCounts.get(3)).isEqualTo(1);
-        assertThat(matchCounts.get(4)).isEqualTo(1);
-        assertThat(matchCounts.get(5)).isEqualTo(1);
-        assertThat(matchCounts.get(6)).isEqualTo(1);
+        Assertions.assertThat(matchCounts.get(Rank.MISS)).isEqualTo(3);
+        Assertions.assertThat(matchCounts.get(Rank.FIFTH)).isEqualTo(1);
+        Assertions.assertThat(matchCounts.get(Rank.FOURTH)).isEqualTo(1);
+        Assertions.assertThat(matchCounts.get(Rank.THIRD)).isEqualTo(1);
+        Assertions.assertThat(matchCounts.get(Rank.SECOND)).isEqualTo(1);
+        Assertions.assertThat(matchCounts.get(Rank.FIRST)).isEqualTo(1);
+
     }
 
     @Test
     void calculateProfit() {
         // given
         Lottos lottos = new Lottos(lottos(3));
-        Lotto winnerLotto = new Lotto("1, 2, 3, 7, 8, 9");
+        WinnerLotto winnerLotto = new WinnerLotto("1, 2, 3, 7, 8, 9", 10);
 
         // when
         BigDecimal profit = lottos.calculateProfit(winnerLotto, new Money(1000));

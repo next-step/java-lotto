@@ -11,23 +11,25 @@ public class Main {
 
     static InputView inputView = new InputView();
     static OutputView outputView = new OutputView();
+    static LottoMachine lottoMachine = new LottoMachine();
 
     public static void main(String[] args) {
-        LottoMachine lottoMachine = new LottoMachine();
-
-        int moneyForLotto = inputView.showMessageAndGetMoneyInput();
-        Lottos lottos = lottoMachine.buyLottos(moneyForLotto);
-
-        outputView.showHowManyLottosBoughtWithMoney(lottos);
-        outputView.showLottos(lottos);
+        Lottos lottos = buyLottos();
+        showLottoInfo(lottos);
 
         WinnerLotto winnerLotto = getWinnerLotto();
+        showWinnerMatchCount(lottos, winnerLotto);
+        showLottoTotalProfit(lottos, winnerLotto);
+    }
 
-        Map<Rank, Integer> matchCounts = lottoMachine.calculateMatchCount(lottos, winnerLotto);
-        outputView.showMatchCount(matchCounts);
+    private static Lottos buyLottos() {
+        int moneyForLotto = inputView.showMessageAndGetMoneyInput();
+        return lottoMachine.buyLottos(moneyForLotto);
+    }
 
-        BigDecimal profit = lottoMachine.calculateProfit(lottos, winnerLotto);
-        outputView.showLottoProfit(profit);
+    private static void showLottoInfo(Lottos lottos) {
+        outputView.showHowManyLottosBoughtWithMoney(lottos);
+        outputView.showLottos(lottos);
     }
 
     private static WinnerLotto getWinnerLotto() {
@@ -37,4 +39,13 @@ public class Main {
         return new WinnerLotto(lottoWinNumbers, bonusNumber);
     }
 
+    private static void showWinnerMatchCount(Lottos lottos, WinnerLotto winnerLotto) {
+        Map<Rank, Integer> matchCounts = lottoMachine.calculateMatchCount(lottos, winnerLotto);
+        outputView.showMatchCount(matchCounts);
+    }
+
+    private static void showLottoTotalProfit(Lottos lottos, WinnerLotto winnerLotto) {
+        BigDecimal profit = lottoMachine.calculateProfit(lottos, winnerLotto);
+        outputView.showLottoProfit(profit);
+    }
 }

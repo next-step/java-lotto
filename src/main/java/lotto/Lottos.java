@@ -26,18 +26,6 @@ public class Lottos {
         return new ArrayList<>(lottos);
     }
 
-    public Map<Integer, Integer> calculateMatchCount(Lotto winLotto) {
-        Map<Integer, Integer> matchCounts = new HashMap<>();
-        int defaultCount = 1;
-
-        for (Lotto lotto : lottos) {
-            int matchCount = lotto.countMatch(winLotto);
-            matchCounts.merge(matchCount, defaultCount, Integer::sum);
-        }
-
-        return matchCounts;
-    }
-
     public Map<Rank, Integer> calculateMatchCount(WinnerLotto winLotto) {
         Map<Rank, Integer> matchCounts = new HashMap<>();
         int increment = 1;
@@ -50,12 +38,12 @@ public class Lottos {
         return matchCounts;
     }
 
-    public BigDecimal calculateProfit(Lotto winnerLotto, Money lottoPrice) {
+    public BigDecimal calculateProfit(WinnerLotto winnerLotto, Money lottoPrice) {
         Money totalWinPrice = new Money();
 
         for (Lotto lotto : lottos) {
-            int matchCount = lotto.countMatch(winnerLotto);
-            Money winPrice = Rank.winPriceOf(matchCount);
+            Rank rank = winnerLotto.calculateRank(lotto);
+            Money winPrice = rank.winPrice();
             totalWinPrice = totalWinPrice.add(winPrice);
         }
 

@@ -63,7 +63,6 @@ public class OutputView {
         for(Rank rank : Rank.LOTTO_WINS) {
             showMatchCount(rank, matchCounts.get(rank));
         }
-
     }
 
     private void showMatchCount(Rank rank, Integer matchCount) {
@@ -74,7 +73,6 @@ public class OutputView {
                     rank.winPrice().getMoney().longValue(),
                     matchCount
             );
-
             return;
         }
 

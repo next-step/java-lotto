@@ -14,7 +14,7 @@ class RankTest {
     void getDefaultWin(int matchCount) {
         // given
         // when
-        Rank rank = Rank.of(matchCount);
+        Rank rank = Rank.of(matchCount, false);
 
         // then
         assertThat(rank).isEqualTo(Rank.MISS);
@@ -24,26 +24,39 @@ class RankTest {
     void getSecondWin() {
         // given
         // when
-        Rank rank = Rank.of(5);
+        Rank rank = Rank.of(5, true);
 
         // then
         assertThat(rank).isEqualTo(Rank.SECOND);
     }
 
-    @ParameterizedTest
-    @CsvSource({
-            "0, 0",
-            "1, 0",
-            "2, 0",
-            "3, 5000",
-            "4, 50000",
-            "5, 1500000",
-            "6, 2000000000",
-    })
-    void winPriceOf_Default(int matchCount, int winPrice) {
+    @Test
+    void getThirdWin() {
         // given
         // when
-        Money money = Rank.winPriceOf(matchCount);
+        Rank rank = Rank.of(5, false);
+
+        // then
+        assertThat(rank).isEqualTo(Rank.THIRD);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "0, false, 0",
+            "1, false, 0",
+            "2, false, 0",
+            "3, false, 5000",
+            "4, false, 50000",
+            "5, false, 1500000",
+            "5, true, 30000000",
+            "6, false, 2000000000",
+    })
+    void winPriceOf_Default(int matchCount, boolean bonusMatch, int winPrice) {
+        // given
+        Rank rank = Rank.of(matchCount, bonusMatch);
+
+        // when
+        Money money = rank.winPrice();
 
         // then
         assertThat(money).isEqualTo(new Money(winPrice));

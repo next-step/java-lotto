@@ -24,23 +24,10 @@ public class LottoMachine {
         Lottos lottos = new Lottos();
 
         for (int i = 0; i < numberOfLottos; i++) {
-            lottos.addNewLotto(LOTTO_NUMBER_MACHINE.lottoNumbers()); // 어떻게 테스트를 할 수 있을까 ..
+            lottos.addNewLotto(LOTTO_NUMBER_MACHINE.lottoNumbers());
         }
 
         return lottos;
-    }
-
-    public Map<Integer, Integer> calculateMatchCount(Lottos lottos, Lotto winLotto) {
-        Map<Integer, Integer> matchCounts = lottos.calculateMatchCount(winLotto);
-        Map<Integer, Integer> winnerMatchCounts = new HashMap<>();
-
-        for (Rank rank : Rank.LOTTO_WINS_NOT_BONUS) {
-            int expectedMatchCount = rank.numberOfMatch();
-            int matchCount = matchCounts.getOrDefault(expectedMatchCount, DEFAULT_MATCH_COUNT);
-            winnerMatchCounts.put(expectedMatchCount, matchCount);
-        }
-
-        return winnerMatchCounts;
     }
 
     public Map<Rank, Integer> calculateMatchCount(Lottos lottos, WinnerLotto winLotto) {
@@ -55,7 +42,7 @@ public class LottoMachine {
         return winnerMatchCounts;
     }
 
-    public BigDecimal calculateProfit(Lottos lottos, Lotto winLotto) {
+    public BigDecimal calculateProfit(Lottos lottos, WinnerLotto winLotto) {
         return lottos.calculateProfit(winLotto, LOTTO_PRICE);
     }
 

@@ -28,14 +28,6 @@ public enum Rank {
     public static final List<Rank> LOTTO_WINS = Stream.of(FIFTH, FOURTH, THIRD, SECOND, FIRST)
             .collect(Collectors.toList());
 
-    public static Rank of(int matchCount) {
-        return LOTTO_WINS_NOT_BONUS.stream()
-                .filter(lottoWin -> lottoWin.numberOfMatch == matchCount)
-                .findFirst()
-                .orElse(MISS)
-                ;
-    }
-
     public static Rank of(int matchCount, boolean matchBonus) {
         if (matchCount == 5 && matchBonus) {
             return SECOND;
@@ -46,12 +38,6 @@ public enum Rank {
                 .findFirst()
                 .orElse(MISS)
                 ;
-    }
-
-    // 바꿔야 함.
-    public static Money winPriceOf(int matchCount) {
-        Rank win = of(matchCount);
-        return win.winPrice;
     }
 
     public int numberOfMatch() {
