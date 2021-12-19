@@ -20,7 +20,7 @@
 - [X] Rank 테스트, 클래스 추가
 - [X] WinningLotteryNumbers 테스트, 클래스 추가
 - [X] Rank와 WinningLotteryNumbers를 사용하도록 리팩토링
-- [ ] 원시값 포장을 위한 클래스 생성
+- [X] 원시값 포장을 위한 클래스 생성
   - ManualTicketCount 구현
   - AutoTicketCount 구현
 - [ ] ManualTicketCount와 AutoTicketCount 클래스를 사용하도록 리팩토링
