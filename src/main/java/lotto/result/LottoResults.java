@@ -5,11 +5,11 @@ import java.util.Objects;
 
 public class LottoResults {
     private final Map<MatchedNumbersCount, Long> values;
-    private final float prize;
+    private final float totalPrize;
 
     public LottoResults(Map<MatchedNumbersCount, Long> lottoResults) {
         this.values = lottoResults;
-        this.prize = totalPrize(lottoResults);
+        this.totalPrize = totalPrize(lottoResults);
     }
 
     public void add(MatchedNumbersCount matchedNumbersCount, long lottosCount) {
@@ -21,7 +21,7 @@ public class LottoResults {
     }
 
     public float profit(int purchaseAmount) {
-        return prize / purchaseAmount;
+        return totalPrize / purchaseAmount;
     }
 
     private float totalPrize(Map<MatchedNumbersCount, Long> lottoResults) {
@@ -43,11 +43,11 @@ public class LottoResults {
             return false;
         }
         LottoResults that = (LottoResults) o;
-        return Float.compare(that.prize, prize) == 0 && Objects.equals(values, that.values);
+        return Float.compare(that.totalPrize, totalPrize) == 0 && Objects.equals(values, that.values);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(values, prize);
+        return Objects.hash(values, totalPrize);
     }
 }
