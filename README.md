@@ -24,4 +24,5 @@
   - ManualTicketCount 구현
   - AutoTicketCount 구현
 - [X] ManualTicketCount와 AutoTicketCount 클래스를 사용하도록 리팩토링
+- [X] 더 이상 사용하지 않는 파일 제거
   
