@@ -1,52 +1,50 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LottoMachine {
 
+    private static final Integer DEFAULT_MATCH_COUNT = 0;
     private static final Money LOTTO_PRICE = new Money(1000);
-    private static final int LOTTO_NUMBERS_COUNT = 6;
+    private static final LottoNumberMachine LOTTO_NUMBER_MACHINE = new LottoNumberMachine();
 
-    private static final List<Integer> lottoNumberSource = new ArrayList<Integer>() {{
-        addAll(Arrays.asList(
-                1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,
-                16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,
-                31,32,33,34,35,36,37,38,39,40,41,42,43,44,45
-        ));
-    }};
+    public LottoMachine() {
+    }
 
-    public LottoMachine() {}
-
-    public static Lottos buyLottos(long inputMoney) {
+    public Lottos buyLottos(long inputMoney) {
         Money money = new Money(inputMoney);
         int numberOfLottos = money.countCanBuy(LOTTO_PRICE);
 
         return createLottos(numberOfLottos);
     }
 
-    private static Lottos createLottos(int numberOfLottos) {
-        List<Lotto> lottos = new ArrayList<>();
+    private Lottos createLottos(int numberOfLottos) {
+        Lottos lottos = new Lottos();
 
-        for(int i = 0; i < numberOfLottos ; i++) {
-            lottos.add(createLotto());
+        for (int i = 0; i < numberOfLottos; i++) {
+            lottos.addNewLotto(LOTTO_NUMBER_MACHINE.lottoNumbers()); // 어떻게 테스트를 할 수 있을까 ..
         }
 
-        return new Lottos(lottos);
+        return lottos;
     }
 
-    private static Lotto createLotto() {
-        List<Number> numbers = new ArrayList<>();
-        Collections.shuffle(lottoNumberSource);
+    public Map<Integer, Integer> calculateMatchCount(Lottos lottos, Lotto winLotto) {
+        Map<Integer, Integer> matchCounts = lottos.calculateMatchCount(winLotto);
+        Map<Integer, Integer> winnerMatchCounts = new HashMap<>();
 
-        for(int i = 0; i < LOTTO_NUMBERS_COUNT; i++) {
-            numbers.add(new Number(lottoNumberSource.get(i)));
+        for (LottoWin lottoWin : LottoWin.LOTTO_WINS) {
+            int expectedMatchCount = lottoWin.numberOfMatch();
+            int matchCount = matchCounts.getOrDefault(expectedMatchCount, DEFAULT_MATCH_COUNT);
+            winnerMatchCounts.put(expectedMatchCount, matchCount);
         }
 
-        Collections.sort(numbers);
-        return new Lotto(numbers);
+        return winnerMatchCounts;
+    }
+
+    public BigDecimal calculateProfit(Lottos lottos, Lotto winLotto) {
+        return lottos.calculateProfit(winLotto, LOTTO_PRICE);
     }
 
 }

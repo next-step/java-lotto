@@ -7,6 +7,7 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.math.BigDecimal;
+import java.util.Map;
 
 public class Main {
 
@@ -24,12 +25,11 @@ public class Main {
         String lottoWinNumbers = inputView.showMessageAndGetLastWeekLottoWinNumbers();
         Lotto winnerLotto = new Lotto(lottoWinNumbers);
 
-        outputView.showMatchCount(winnerLotto, lottos);
+        Map<Integer, Integer> matchCounts = lottoMachine.calculateMatchCount(lottos, winnerLotto);
+        outputView.showMatchCount(matchCounts);
 
-        BigDecimal profit = lottos.calculateProfit(winnerLotto);
-        System.out.println(profit.toString());
+        BigDecimal profit = lottoMachine.calculateProfit(lottos, winnerLotto);
         outputView.showLottoProfit(profit);
-
     }
 
 }

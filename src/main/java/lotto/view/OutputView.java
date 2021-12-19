@@ -6,6 +6,8 @@ import lotto.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class OutputView {
 
@@ -19,7 +21,11 @@ public class OutputView {
     private static final String END_LINE_SIGNAL = "\n";
 
     public void showHowManyLottosBoughtWithMoney(Lottos lottos) {
-        System.out.printf(OUTPUT_MESSAGE_HOW_MANY_LOTTOS_BOUGHT, lottos.count());
+        int count = 0;
+        if (Objects.nonNull(lottos)) {
+            count = lottos.count();
+        }
+        System.out.printf(OUTPUT_MESSAGE_HOW_MANY_LOTTOS_BOUGHT, count);
     }
 
     public void showLottos(Lottos lottos) {
@@ -49,16 +55,15 @@ public class OutputView {
         return result;
     }
 
-    public void showMatchCount(Lotto winnerLotto, Lottos lottos) {
-        for(LottoWin lottoWin : LottoWin.LOTTO_WINS) {
-            int winMatchCount = lottoWin.numberOfMatch();
-            int matchedCount = lottos.calculateMatchCount(winnerLotto, winMatchCount);
+    public void showMatchCount(Map<Integer, Integer> matchCounts) {
+        for(Integer matchCount : matchCounts.keySet()) {
+            LottoWin lottoWin = LottoWin.of(matchCount);
 
             System.out.printf(
                     OUTPUT_MESSAGE_X_NUMBERS_MATCH,
-                    winMatchCount,
+                    matchCount,
                     lottoWin.winPrice().getMoney().longValue(),
-                    matchedCount
+                    matchCounts.get(matchCount)
             );
         }
     }
