@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class LotteryNumberTest {
 
@@ -14,10 +16,10 @@ public class LotteryNumberTest {
     assertEquals(new LotteryNumber(1).getNumber(), 1);
   }
 
-  @Test
+  @ParameterizedTest
+  @ValueSource(ints = {-1, 0, 46, 100})
   @DisplayName("Test throw exception when create invalid lottery number.")
-  void testThrowException() {
-    assertThrows(IllegalArgumentException.class, () -> new LotteryNumber(-1));
-    assertThrows(IllegalArgumentException.class, () -> new LotteryNumber(50));
+  void testThrowException(int number) {
+    assertThrows(IllegalArgumentException.class, () -> new LotteryNumber(number));
   }
 }

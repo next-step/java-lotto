@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class LotteryNumber {
 
   private static final int MIN_NUMBER = 1;
@@ -28,5 +30,22 @@ public class LotteryNumber {
     if (number < MIN_NUMBER || number > MAX_NUMBER) {
       throw new IllegalArgumentException(String.valueOf(number));
     }
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    LotteryNumber that = (LotteryNumber) o;
+    return number == that.number;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(number);
   }
 }
