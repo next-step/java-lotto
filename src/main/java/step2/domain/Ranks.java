@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Ranks {
+    private final static int PRIZE_NUMBER_COUNT = 3;
     private final List<Rank> ranks;
 
     public Ranks(Lotteries lotteries, Lottery winningNumbers, Number bonusNumber) {
@@ -22,8 +23,8 @@ public class Ranks {
     private void addRank(List<Rank> ranks, Lottery lottery, Lottery winningNumbers, Number bonusNumber) {
         int count = lottery.getCorrectCount(winningNumbers);
 
-        if (count >= 3) {
-            ranks.add(Rank.of(count, lottery.isCorrect(bonusNumber)));
+        if (count >= PRIZE_NUMBER_COUNT) {
+            ranks.add(Rank.of(count, lottery.isCorrectBonusNumber(bonusNumber)));
         }
     }
 

@@ -1,8 +1,6 @@
 package step2.domain.enums;
 
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.EnumSet;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
@@ -11,7 +9,6 @@ public enum Rank {
     FOURTH(4, 50_000),
     FIFTH(3, 5_000);
 
-    private final static Map<String, Integer> map = Stream.of(values()).collect(Collectors.toMap(Rank::name, Rank::getCorrectCount));
     private final int correctCount;
     private final int prizeMoney;
 
@@ -28,15 +25,21 @@ public enum Rank {
         return prizeMoney;
     }
 
-    public static Rank of(int count, boolean isCorrectBonusNumber) {
-        if (count == SECOND.getCorrectCount() && isCorrectBonusNumber) {
+    public static Rank of(int correctCount, boolean isCorrectBonusNumber) {
+        if (isCorrectBonusNumber && correctCount == SECOND.getCorrectCount()) {
             return SECOND;
         }
-        if (count == FIRST.getCorrectCount())  return FIRST;
-        if (count == THIRD.getCorrectCount())  return THIRD;
-        if (count == FOURTH.getCorrectCount())  return FOURTH;
-        if (count == FIFTH.getCorrectCount())  return FIFTH;
 
-        return null;
+        return find(correctCount);
+    }
+
+    private static Rank find(int correctCount) {
+        Rank rank = null;
+
+        for (Rank r : EnumSet.allOf(Rank.class)) {
+            rank = (correctCount == r.getCorrectCount()) ? r : null;
+        }
+
+        return rank;
     }
 }
