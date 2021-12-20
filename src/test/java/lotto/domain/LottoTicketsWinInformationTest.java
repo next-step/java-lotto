@@ -7,23 +7,22 @@ import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoTicketsTest {
+class LottoTicketsWinInformationTest {
 
     @DisplayName("로또 당첨 번호를 전달하면 일치하는 개수가 몇 개 있는지 알 수 있다.")
     @Test
     void winningStatics() {
         //given
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        int bonus = 45;
         LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.from("1, 2, 3, 4, 5, 6", "45");
 
         LottoTicket lottoTicket1 = LottoTicket.from(1, 2, 3, 4, 5, 6); //1등
         LottoTicket lottoTicket2 = LottoTicket.from(1, 2, 3, 4, 5, 22); //3등
         List<LottoTicket> lottoTicketList = createLottoListFrom(lottoTicket1, lottoTicket2);
         LottoTickets lottoTickets = new LottoTickets(lottoTicketList, 2000);
+        LottoTicketsWinInformation lottoTicketsWinInformation = LottoTicketsWinInformation.from(lottoTickets);
 
         //when
-        Map<LottoRank, Integer> map = lottoTickets.winningStatics(lottoWinningNumbers);
+        Map<LottoRank, Integer> map = lottoTicketsWinInformation.winningStatics(lottoWinningNumbers);
 
         //then
         assertThat(map.get(LottoRank.FIRST)).isEqualTo(1);
@@ -53,11 +52,14 @@ class LottoTicketsTest {
         LottoTicket lottoTicket2 = LottoTicket.from(1, 2, 3, 33, 23, 22); //3등
         List<LottoTicket> lottoTicketList = createLottoListFrom(lottoTicket1, lottoTicket2);
 
-        //when
         LottoTickets lottoTickets = new LottoTickets(lottoTicketList, 2000);
+        LottoTicketsWinInformation lottoTicketsWinInformation = LottoTicketsWinInformation.from(lottoTickets);
+
+        //when
+        int winningPrize = lottoTicketsWinInformation.winningPrize(lottoWinningNumbers);
 
         //then
-        assertThat(lottoTickets.winningPrize(lottoWinningNumbers)).isEqualTo(30_005_000);
+        assertThat(winningPrize).isEqualTo(30_005_000);
 
     }
 
@@ -75,9 +77,10 @@ class LottoTicketsTest {
         List<LottoTicket> lottoTicketList = createLottoListFrom(lottoTicket1, lottoTicket2);
 
         LottoTickets lottoTickets = new LottoTickets(lottoTicketList, 2000);
+        LottoTicketsWinInformation lottoTicketsWinInformation = LottoTicketsWinInformation.from(lottoTickets);
 
         //when
-        double earningRate = lottoTickets.earningRate(lottoWinningNumbers);
+        double earningRate = lottoTicketsWinInformation.earningRate(lottoWinningNumbers);
 
         //then
         assertThat(earningRate).isEqualTo(1000750.0);

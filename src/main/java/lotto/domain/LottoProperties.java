@@ -6,7 +6,6 @@ public final class LottoProperties {
     public static final int MAX_LOTTO_NUMBER = 45;
     public static final int NUMBER_OF_LOTTO_NUMBERS = 6;
     public static final int LOTTO_TICKET_PRICE = 1000;
-    public static final int NUMBER_OF_LOTTO_WINNING_NUMBERS = 6;
 
     private LottoProperties() {
     }

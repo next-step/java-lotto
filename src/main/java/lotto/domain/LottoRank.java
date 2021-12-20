@@ -4,10 +4,6 @@ package lotto.domain;
 import lotto.exception.LottoException;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.collectingAndThen;
 
 public enum LottoRank {
 
@@ -18,6 +14,8 @@ public enum LottoRank {
     FIFTH(3, 5_000, (countOfMatch, matchesBonus) -> countOfMatch == 3),
     MISS(0, 0, (countOfMatch, matchesBonus) -> countOfMatch <= 2 && countOfMatch >= 0);
 
+    public static final int MAX_COUNT_OF_MATCH = 6;
+    public static final int MIN_COUNT_OF_MATCH = 0;
     private final int countOfMatch;
     private final int winningPrize;
     private final RankMatchOperation rankMatchOperation;
@@ -31,17 +29,16 @@ public enum LottoRank {
 
     public static LottoRank valueOf(int countOfMatch, boolean matchBonus) {
         validateCountOfMatch(countOfMatch);
-        List<LottoRank> lottoRankList = Arrays.asList(values());
-        return lottoRankList.stream()
+        return Arrays.stream(values())
                 .filter(r -> r.matches(countOfMatch, matchBonus))
-                .collect(collectingAndThen(
-                        Collectors.toList(),
-                        list -> list.get(0)));
+                .findFirst()
+                .orElseThrow(() -> new LottoException("매칭되는 Rank가 없습니다"));
+
     }
 
     private static void validateCountOfMatch(int countOfMatch) {
-        if (countOfMatch < 0 || countOfMatch > 6) {
-            throw new LottoException("일치 개수는 0개에서 6개 사이만 가능합니다.");
+        if (countOfMatch < MIN_COUNT_OF_MATCH || countOfMatch > MAX_COUNT_OF_MATCH) {
+            throw new LottoException("일치 개수는 " + MIN_COUNT_OF_MATCH + "개에서 " + MAX_COUNT_OF_MATCH + "개 사이만 가능합니다.");
         }
     }
 

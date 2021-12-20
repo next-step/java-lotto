@@ -5,18 +5,19 @@ import lotto.exception.LottoException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static lotto.domain.LottoProperties.NUMBER_OF_LOTTO_WINNING_NUMBERS;
+import static lotto.domain.LottoProperties.NUMBER_OF_LOTTO_NUMBERS;
 
 public class LottoWinningNumbers {
 
     private static final String SPLITTER = ", ";
+    private static final int NUMBER_OF_LOTTO_NUMBERS_INCLUDE_BONUS = NUMBER_OF_LOTTO_NUMBERS + 1;
 
     private final List<LottoNumber> lottoWinningNumbers;
     private final LottoNumber bonus;
 
     private LottoWinningNumbers(List<LottoNumber> lottoWinningNumbers, LottoNumber bonus) {
         validateNumberOf(lottoWinningNumbers);
-        validateDuplicate(lottoWinningNumbers);
+        validateDuplicate(lottoWinningNumbers, bonus);
         this.bonus = bonus;
         this.lottoWinningNumbers = lottoWinningNumbers;
     }
@@ -40,31 +41,21 @@ public class LottoWinningNumbers {
     }
 
     private void validateNumberOf(List<LottoNumber> lottoWinningNumbers) {
-        if (lottoWinningNumbers.size() != NUMBER_OF_LOTTO_WINNING_NUMBERS) {
-            throw new LottoException("당첨 번호는 " + NUMBER_OF_LOTTO_WINNING_NUMBERS + "개여야 합니다.");
+        if (lottoWinningNumbers.size() != NUMBER_OF_LOTTO_NUMBERS) {
+            throw new LottoException("당첨 번호는 " + NUMBER_OF_LOTTO_NUMBERS + "개여야 합니다.");
         }
     }
 
-    private void validateDuplicate(List<LottoNumber> lottoWinningNumbers) {
+    private void validateDuplicate(List<LottoNumber> lottoWinningNumbers, LottoNumber bonus) {
         Set<LottoNumber> lottoWinningNumberSet = new HashSet<>(lottoWinningNumbers);
-        if (lottoWinningNumberSet.size() != NUMBER_OF_LOTTO_WINNING_NUMBERS) {
+        lottoWinningNumberSet.add(bonus);
+        if (lottoWinningNumberSet.size() != NUMBER_OF_LOTTO_NUMBERS_INCLUDE_BONUS) {
             throw new LottoException("당첨 번호에는 중복이 있으면 안됩니다");
         }
     }
-
-    public LottoNumber getBonusNumber() {
-        return this.bonus;
-    }
-
+    
     public boolean contain(LottoNumber lottoNumber) {
         return lottoWinningNumbers.contains(lottoNumber);
-    }
-
-    public int numberContain(LottoNumber lottoNumber) {
-        if (contain(lottoNumber)) {
-            return 1;
-        }
-        return 0;
     }
 
     @Override
@@ -84,4 +75,7 @@ public class LottoWinningNumbers {
         return Objects.hash(lottoWinningNumbers);
     }
 
+    public boolean matchesBonus(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.contains(bonus);
+    }
 }

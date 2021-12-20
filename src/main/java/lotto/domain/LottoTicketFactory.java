@@ -43,7 +43,7 @@ public class LottoTicketFactory {
         return new LottoTickets(lottoTicketList, numberOfLottoTicket * LOTTO_TICKET_PRICE);
     }
 
-    public static LottoTicket generate() {
+    private static LottoTicket generate() {
         Collections.shuffle(NUMBERS);
         List<LottoNumber> lottoNumbers = IntStream.rangeClosed(LOTTO_NUMBER_MIN_INDEX, LOTTO_NUMBER_MAX_INDEX)
                 .mapToObj(NUMBERS::get)

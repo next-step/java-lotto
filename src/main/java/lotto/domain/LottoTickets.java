@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
@@ -10,38 +11,7 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
         this.price = price;
     }
-
-    public Map<LottoRank, Integer> winningStatics(LottoWinningNumbers lottoWinningNumbers) {
-        Map<LottoRank, Integer> map = createWinningStaticsMap();
-        lottoTickets.forEach(lt -> {
-            LottoRank lottoRank = lt.getLottoRank(lottoWinningNumbers);
-            int count = map.get(lottoRank) + 1;
-            map.put(lottoRank, count);
-        });
-        return map;
-    }
-
-    private Map<LottoRank, Integer> createWinningStaticsMap() {
-        Map<LottoRank, Integer> map = new HashMap<>();
-        Arrays.asList(LottoRank.values())
-                .forEach(lottoRank -> {
-                    int count = 0;
-                    map.put(lottoRank, count);
-                });
-        return map;
-    }
-
-    public int winningPrize(LottoWinningNumbers lottoWinningNumbers) {
-        return lottoTickets.stream()
-                .map(l -> l.getLottoRank(lottoWinningNumbers).winningPrize())
-                .reduce(0, Integer::sum);
-    }
-
-    public double earningRate(LottoWinningNumbers lottoWinningNumbers) {
-        int winningPrize = winningPrize(lottoWinningNumbers);
-        return (double) winningPrize / price;
-    }
-
+    
     public int size() {
         return lottoTickets.size();
     }
@@ -50,4 +20,7 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
+    public double getPrice() {
+        return this.price;
+    }
 }

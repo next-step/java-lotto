@@ -67,7 +67,9 @@ public class LottoTicketTest {
                 Arguments.of("1, 2, 3, 4, 5, 6", "45", LottoTicket.from(1, 2, 3, 4, 5, 43), LottoRank.THIRD),
                 Arguments.of("1, 2, 3, 4, 5, 6", "45", LottoTicket.from(1, 2, 3, 4, 43, 44), LottoRank.FOURTH),
                 Arguments.of("1, 2, 3, 4, 5, 6", "45", LottoTicket.from(1, 2, 3, 30, 31, 32), LottoRank.FIFTH),
-                Arguments.of("1, 2, 3, 4, 5, 6", "45", LottoTicket.from(1, 2, 33, 30, 31, 32), LottoRank.MISS)
+                Arguments.of("1, 2, 3, 4, 5, 6", "45", LottoTicket.from(1, 2, 33, 30, 31, 32), LottoRank.MISS),
+                Arguments.of("1, 2, 3, 4, 5, 6", "45", LottoTicket.from(1, 36, 33, 30, 31, 32), LottoRank.MISS),
+                Arguments.of("1, 2, 3, 4, 5, 6", "45", LottoTicket.from(45, 43, 33, 30, 31, 32), LottoRank.MISS)
 
         );
     }

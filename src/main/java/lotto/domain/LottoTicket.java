@@ -43,13 +43,13 @@ public class LottoTicket {
     }
 
     public int countOfMatch(LottoWinningNumbers lottoWinningNumbers) {
-        return lottoNumbers.stream()
-                .map(lottoWinningNumbers::numberContain)
-                .reduce(0, Integer::sum);
+        return (int) lottoNumbers.stream()
+                .filter(lottoWinningNumbers::contain)
+                .count();
     }
 
     public boolean matchesBonus(LottoWinningNumbers lottoWinningNumbers) {
-        return lottoNumbers.contains(lottoWinningNumbers.getBonusNumber());
+        return lottoWinningNumbers.matchesBonus(lottoNumbers);
     }
 
     public int size() {

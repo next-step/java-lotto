@@ -4,7 +4,6 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.List;
 import java.util.Map;
 
 public class LottoController {
@@ -15,9 +14,7 @@ public class LottoController {
         printNumberOfPurchase(lottoTickets);
         printLottoTickets(lottoTickets);
         LottoWinningNumbers lottoWinningNumbers = inputLottoWinningNumbers();
-        printLottoWinningStatics(lottoTickets, lottoWinningNumbers);
-        printEarningRate(lottoTickets, lottoWinningNumbers);
-
+        printLottoWinInformation(lottoTickets, lottoWinningNumbers);
     }
 
     private void printNumberOfPurchase(LottoTickets lottoTickets) {
@@ -26,10 +23,7 @@ public class LottoController {
     }
 
     private void printLottoTickets(LottoTickets lottoTickets) {
-        List<LottoTicket> lottoTicketList = lottoTickets.getLottoTickets();
-        for (LottoTicket lottoTicket : lottoTicketList) {
-            OutputView.printLottoNumbers(lottoTicket.getLottoNumbers());
-        }
+        OutputView.printLottoNumbers(lottoTickets);
     }
 
     private LottoWinningNumbers inputLottoWinningNumbers() {
@@ -38,14 +32,13 @@ public class LottoController {
         return LottoWinningNumbers.from(winningLottoTicketNumber, bonusNumber);
     }
 
-    private void printLottoWinningStatics(LottoTickets lottoTickets, LottoWinningNumbers lottoWinningNumbers) {
-        Map<LottoRank, Integer> map = lottoTickets.winningStatics(lottoWinningNumbers);
-        OutputView.printWinningStatics(map);
-    }
-
-    private void printEarningRate(LottoTickets lottoTickets, LottoWinningNumbers lottoWinningNumbers) {
-        double earningRate = lottoTickets.earningRate(lottoWinningNumbers);
+    private void printLottoWinInformation(LottoTickets lottoTickets, LottoWinningNumbers lottoWinningNumbers) {
+        LottoTicketsWinInformation lottoTicketsWinInformation = LottoTicketsWinInformation.from(lottoTickets);
+        Map<LottoRank, Integer> winningStaticsMap = lottoTicketsWinInformation.winningStatics(lottoWinningNumbers);
+        OutputView.printWinningStatics(winningStaticsMap);
+        double earningRate = lottoTicketsWinInformation.earningRate(lottoWinningNumbers);
         OutputView.earningRate(earningRate);
+
     }
 
 }
