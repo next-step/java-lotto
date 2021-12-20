@@ -38,7 +38,7 @@ public class Lottery {
         return Collections.unmodifiableList(lottery);
     }
 
-    public boolean isCorrect(Number bonusNumber) {
+    public boolean isCorrectBonusNumber(Number bonusNumber) {
         return lottery.contains(bonusNumber);
     }
 
