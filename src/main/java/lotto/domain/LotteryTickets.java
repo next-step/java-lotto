@@ -20,7 +20,7 @@ public class LotteryTickets {
   }
 
   private static int calculateCount(Money money) {
-    return money.getValue() / LotteryTicket.PRICE;
+    return (int) (money.getValue() / (long) LotteryTicket.PRICE);
   }
 
   private void validate(int ticketCount) {

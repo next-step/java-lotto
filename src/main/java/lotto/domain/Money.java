@@ -2,18 +2,18 @@ package lotto.domain;
 
 public class Money {
 
-  private final int value;
+  private final long value;
 
-  public Money(int value) {
+  public Money(long value) {
     validate(value);
     this.value = value;
   }
 
-  public int getValue() {
+  public long getValue() {
     return value;
   }
 
-  private void validate(int value) {
+  private void validate(long value) {
     if (value < 0) {
       throw new IllegalArgumentException("Money must be be more than 0.");
     }

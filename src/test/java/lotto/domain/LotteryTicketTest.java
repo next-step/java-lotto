@@ -9,7 +9,7 @@ public class LotteryTicketTest {
 
   @Test
   @DisplayName("Test create lottery ticket.")
-  public void testCreate() {
+  void testCreate() {
     LotteryTicket lotteryTicket = new LotteryTicket();
 
     assertEquals(LotteryNumbers.LOTTERY_NUMBERS_SIZE, lotteryTicket.getLotteryNumbers().size());
