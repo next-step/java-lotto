@@ -1,11 +1,18 @@
 package lotto.domain;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LotteryNumbersTest {
+public class  LotteryNumbersTest {
+
+  @Test
+  @DisplayName("Test create.")
+  void testCreate() {
+    assertEquals(6, new LotteryNumbers().getLotteryNumbers().size());
+  }
 
   @Test
   @DisplayName("Test throw exception when the lottery's size is not 6.")

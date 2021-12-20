@@ -13,7 +13,7 @@ public class LotteryNumberTest {
   @Test
   @DisplayName("Test lottery number.")
   void testLotteryNumber() {
-    assertEquals(new LotteryNumber(1).getNumber(), 1);
+    assertEquals(1, new LotteryNumber(1).getNumber());
     assertEquals(new LotteryNumber(1), new LotteryNumber(1));
   }
 
