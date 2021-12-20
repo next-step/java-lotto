@@ -28,7 +28,7 @@ public class LotteryNumber {
 
   private void validate(int number) {
     if (number < MIN_NUMBER || number > MAX_NUMBER) {
-      throw new IllegalArgumentException(String.valueOf(number));
+      throw new IllegalArgumentException("The lottery's number is wrong value");
     }
   }
 

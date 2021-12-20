@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.DisplayName;
@@ -12,6 +13,15 @@ public class  LotteryNumbersTest {
   @DisplayName("Test create.")
   void testCreate() {
     assertEquals(6, new LotteryNumbers().getLotteryNumbers().size());
+  }
+
+  @Test
+  @DisplayName("Test not equals even if the numbers are the same.")
+  void testNotEquals() {
+    assertNotEquals(
+        LotteryNumbers.of(new int[] {1, 2, 3, 4, 5, 6}),
+        LotteryNumbers.of(new int[] {1, 2, 3, 4, 5, 6})
+    );
   }
 
   @Test

@@ -11,7 +11,7 @@ public class LotteryTicketTest {
   @DisplayName("Test create lottery ticket.")
   public void testCreate() {
     LotteryTicket lotteryTicket = new LotteryTicket();
-    
+
     assertEquals(LotteryNumbers.LOTTERY_NUMBERS_SIZE, lotteryTicket.getLotteryNumbers().size());
     assertEquals(1000, LotteryTicket.PRICE);
   }

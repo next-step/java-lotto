@@ -15,10 +15,7 @@ public class LotteryNumbers {
   private final Set<LotteryNumber> lotteryNumbers;
 
   public LotteryNumbers() {
-    List<LotteryNumber> lotteryNumbers = LotteryNumbersGenerator.generate(LOTTERY_NUMBERS_SIZE);
-
-    validate(lotteryNumbers);
-    this.lotteryNumbers = new HashSet<>(lotteryNumbers);
+    this(LotteryNumbersGenerator.generate(LOTTERY_NUMBERS_SIZE));
   }
 
   public LotteryNumbers(List<LotteryNumber> lotteryNumbers) {
