@@ -14,11 +14,13 @@ public class PurchasePrice {
 
     public static PurchasePrice from(final int price) {
         if (price < PRICE_OF_A_LOTTERY) {
-            throw new IllegalArgumentException(String.format(EXCEPTION_MESSAGE_INVALID_PRICE_FORMAT, PRICE_OF_A_LOTTERY, price));
+            throw new IllegalArgumentException(
+                String.format(EXCEPTION_MESSAGE_INVALID_PRICE_FORMAT, PRICE_OF_A_LOTTERY, price));
         }
 
         if (price % PRICE_OF_A_LOTTERY != 0) {
-            throw new IllegalArgumentException(String.format(EXCEPTION_MESSAGE_UNIT_MATCH_FORMAT, PRICE_OF_A_LOTTERY, price));
+            throw new IllegalArgumentException(
+                String.format(EXCEPTION_MESSAGE_UNIT_MATCH_FORMAT, PRICE_OF_A_LOTTERY, price));
         }
 
         return new PurchasePrice(price);

@@ -1,9 +1,10 @@
 package lottery;
 
-import lottery.controller.LotteryMachine;
+import lottery.domain.AutoTicketCount;
 import lottery.domain.LotteryNumberGenerator;
 import lottery.domain.LotteryResult;
 import lottery.domain.LotteryTickets;
+import lottery.domain.ManualTicketCount;
 import lottery.domain.PurchasePrice;
 import lottery.domain.RandomLotteryNumberGenerator;
 import lottery.domain.WinningLotteryNumbers;
@@ -15,13 +16,17 @@ public class LotteryApp {
     public static void main(String[] args) {
         final LotteryNumberGenerator lotteryNumberGenerator = RandomLotteryNumberGenerator.create();
         final PurchasePrice purchasePrice = InputView.getPurchasePrice();
-        final LotteryMachine lotteryMachine = LotteryMachine.create(purchasePrice, lotteryNumberGenerator);
-        final LotteryTickets lotteryTickets = lotteryMachine.createLotteryTickets();
+        final ManualTicketCount manualTicketCount = InputView.getManualLotteryCount(purchasePrice);
+        final AutoTicketCount autoTicketCount = manualTicketCount.autoLotteryCount(purchasePrice);
 
-        ResultView.showPurchaseInfo(lotteryTickets);
+        final LotteryTickets manualLotteryTickets = InputView.getManualLotteryTickets(manualTicketCount);
+        final LotteryTickets autoLotteryTickets = autoTicketCount.buyTickets(lotteryNumberGenerator);
+        final LotteryTickets purchasedLotteryTickets = LotteryTickets.create(manualLotteryTickets, autoLotteryTickets);
+
+        ResultView.showPurchaseInfo(manualTicketCount, autoTicketCount, purchasedLotteryTickets);
 
         final WinningLotteryNumbers winningLotteryNumbers = InputView.getWinningLotteryNumbers();
-        final LotteryResult lotteryResult = lotteryTickets.result(winningLotteryNumbers);
+        final LotteryResult lotteryResult = purchasedLotteryTickets.result(purchasePrice, winningLotteryNumbers);
 
         ResultView.showResult(lotteryResult);
     }

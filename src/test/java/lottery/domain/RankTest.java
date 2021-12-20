@@ -3,19 +3,21 @@ package lottery.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.stream.Stream;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class RankTest {
+class RankTest {
 
     @ParameterizedTest
     @MethodSource("testArgs")
+    @DisplayName("countOfMatch와 bonusMatch 값으로 Rank enum이 정상 생성 되는지 확인")
     void create(int countOfMatch, boolean bonusMatch, Rank expectedRank) {
         assertThat(Rank.valueOf(countOfMatch, bonusMatch)).isEqualTo(expectedRank);
     }
 
-    private static Stream<Arguments> testArgs() {
+    static Stream<Arguments> testArgs() {
         return Stream.of(
             Arguments.arguments(0, false, Rank.MISS),
             Arguments.arguments(1, false, Rank.MISS),
@@ -25,7 +27,7 @@ public class RankTest {
             Arguments.arguments(5, false, Rank.THIRD),
             Arguments.arguments(5, true, Rank.SECOND),
             Arguments.arguments(6, false, Rank.FIRST),
-            
+
             Arguments.arguments(0, true, Rank.MISS),
             Arguments.arguments(1, true, Rank.MISS),
             Arguments.arguments(2, true, Rank.MISS),
