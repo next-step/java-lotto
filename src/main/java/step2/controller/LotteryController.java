@@ -13,8 +13,8 @@ public class LotteryController {
     private static final int LOTTERY_PURCHASE_PRICE = 1000;
     private static final String LOTTERY_SPLITTER = ",";
 
-    public Statistics getStatistics(Lotteries lotteries, String winningNumbers) {
-        return new Statistics(lotteries, getWinningNumbers(winningNumbers));
+    public Statistics getStatistics(Lotteries lotteries, String winningNumbers, int bonusBallNumber) {
+        return new Statistics(lotteries, getWinningNumbers(winningNumbers), Number.createFromInt(bonusBallNumber));
     }
 
     public Lotteries getLotteries(int purchaseAmount) {

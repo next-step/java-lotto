@@ -6,8 +6,8 @@ public class Statistics {
     final double profitAmount;
     static Ranks ranks;
 
-    public Statistics(Lotteries lotteries, Lottery winningNumbers) {
-        this.ranks = new Ranks(lotteries, winningNumbers);
+    public Statistics(Lotteries lotteries, Lottery winningNumbers, Number bonusNumber) {
+        this.ranks = new Ranks(lotteries, winningNumbers, bonusNumber);
         this.profitAmount = ranks.calculateProfitAmount();
     }
 
