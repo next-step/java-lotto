@@ -2,9 +2,11 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 public enum CalculatePrize {
 	FIRST(6, (number) -> 2000000000 * number),
+	SECOND(5, (number) -> 30000000 * number),
 	THIRD(5, (number) -> 1500000 * number),
 	FOURTH(4, (number) -> 500000 * number),
 	FIFTH(3, (number) -> 5000 * number),
@@ -32,4 +34,9 @@ public enum CalculatePrize {
 			.findFirst()
 			.orElseThrow(() -> new IllegalArgumentException("0~6사이의 숫자만 입력이 가능합니다."));
 	}
+
+	public static CalculatePrize ofSecondOrThird(boolean matchingBonusNumber) {
+		return matchingBonusNumber ? CalculatePrize.SECOND : CalculatePrize.THIRD;
+	}
+
 }
