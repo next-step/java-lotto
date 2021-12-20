@@ -25,6 +25,11 @@ public class ResultView {
 
         EnumSet.allOf(Rank.class).forEach(rank -> {
             long count = statistic.getRanks().getCountOfRank(rank);
+            if (rank == Rank.SECOND) {
+                System.out.println(String.format("%s개 일치, 보너스볼 일치 (%d원) - %d개", rank.getCorrectCount(), rank.getPrizeMoney(), count));
+                return;
+            }
+
             System.out.println(String.format("%s개 일치 (%d원) - %d개", rank.getCorrectCount(), rank.getPrizeMoney(), count));
         });
     }
