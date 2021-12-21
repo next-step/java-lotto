@@ -37,4 +37,8 @@ public class ResultView {
     public static void printProfitRate(double profitRate) {
         System.out.println(String.format("총 수익률은 %.0f%% 입니다.", profitRate));
     }
+
+    public static void printCount(int purchaseAmount, int manualLotteryCount) {
+        System.out.println(String.format("수동으로 %d개, 자동으로 %d개를 구매했습니다.", manualLotteryCount, purchaseAmount / 1000 - manualLotteryCount));
+    }
 }
