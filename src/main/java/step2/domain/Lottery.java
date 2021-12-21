@@ -1,5 +1,6 @@
 package step2.domain;
 
+import step2.domain.util.LotteryGenerator;
 import step2.domain.util.exception.LotteryFormatException;
 import step2.strategy.LotteryStrategy;
 
@@ -11,11 +12,10 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Lottery {
-    private final static int LOTTERY_SIZE = 6;
     private final List<Number> lottery;
 
     private Lottery(List<Number> randomNumbers) {
-        if (randomNumbers.size() != LOTTERY_SIZE) {
+        if (randomNumbers.size() != LotteryGenerator.LOTTERY_SIZE) {
             throw new LotteryFormatException("복권 번호는 6자리 필수");
         }
 
