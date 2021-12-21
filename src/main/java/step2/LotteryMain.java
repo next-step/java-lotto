@@ -11,8 +11,12 @@ public class LotteryMain {
         int purchaseAmount = InputView.getPurchaseAmount();
         LotteryController lotteryController = new LotteryController();
 
-        Lotteries lotteries = lotteryController.getLotteries(purchaseAmount);
+        int manualLotteryCount = InputView.getManualLotteryCount();
+        String[] manualLotteryNumbers = InputView.getManualLotteryNumbers(manualLotteryCount);
+
+        Lotteries lotteries = lotteryController.getLotteries(purchaseAmount, manualLotteryNumbers);
         ResultView.printLotteries(lotteries);
+        ResultView.printCount(purchaseAmount, manualLotteryCount);
 
         Statistics statisticResult = lotteryController.getStatistics(lotteries, InputView.getWinningNumbers(), InputView.getBonusBallNumber());
         ResultView.printStatistics(statisticResult);
