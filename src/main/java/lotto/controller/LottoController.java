@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.exception.LottoException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -12,24 +11,17 @@ public class LottoController {
 
     public void execute() {
         int purchaseAmount = InputView.purchaseAmount();
-        int numberOfLottoTicket = purchaseAmount / 1000;
         int numberOfManuallyPickedLottoTicket = InputView.numberOfManuallyPickedLottoTicket();
-        if (numberOfLottoTicket < numberOfManuallyPickedLottoTicket) {
-            throw new LottoException("로또 수동 입력 개수가 구입 금액을 초과했습니다");
-        }
+        LottoPurchaseInformation lottoPurchaseInformation = LottoPurchaseInformation.of(purchaseAmount, numberOfManuallyPickedLottoTicket);
         List<LottoTicket> manuallyPickedLottoTickets = InputView.manuallyPickedLottoTicket(numberOfManuallyPickedLottoTicket);
-        LottoTickets lottoTickets = LottoTicketFactory.buy(numberOfLottoTicket, numberOfManuallyPickedLottoTicket, manuallyPickedLottoTickets);
-        printNumberOfPurchase(lottoTickets, numberOfManuallyPickedLottoTicket);
+        LottoTickets lottoTickets = LottoTicketFactory.buy(lottoPurchaseInformation, manuallyPickedLottoTickets);
+        OutputView.printNumberOfPurchase(lottoPurchaseInformation);
         printLottoTickets(lottoTickets);
         LottoWinningNumbers lottoWinningNumbers = inputLottoWinningNumbers();
         printLottoWinInformation(lottoTickets, lottoWinningNumbers);
     }
 
-    private void printNumberOfPurchase(LottoTickets lottoTickets, int numberOfManuallyPickedLottoTicket) {
-        int numberOfAutomaticallyPickedLottoTicket = lottoTickets.size();
 
-        OutputView.printNumberOfPurchase(numberOfManuallyPickedLottoTicket, numberOfAutomaticallyPickedLottoTicket);
-    }
 
     private void printLottoTickets(LottoTickets lottoTickets) {
         OutputView.printLottoNumbers(lottoTickets);

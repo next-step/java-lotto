@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoRank;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
+import lotto.domain.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +18,10 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printNumberOfPurchase(int numberOfManuallyPickedLottoTicket, int numberOfAutomaticallyPickedLottoTicket) {
+    public static void printNumberOfPurchase(LottoPurchaseInformation lottoPurchaseInformation) {
+        int numberOfManuallyPickedLottoTicket = lottoPurchaseInformation.numberOfManuallyPickedLottoTicket();
+        int numberOfAutomaticallyPickedLottoTicket = lottoPurchaseInformation.numberOfAutomaticallyPickedLottoTicket();
+
         String formattedString = String.format(NUMBER_OF_PURCHASE, numberOfManuallyPickedLottoTicket, numberOfAutomaticallyPickedLottoTicket);
         System.out.println(formattedString);
     }

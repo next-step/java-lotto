@@ -32,13 +32,13 @@ public class LottoTicketFactory {
 //        }
 //    }
 
-    public static LottoTickets buy(int numberOfLottoTicket, int numberOfManuallyPickedLottoTickets, List<LottoTicket> manuallyPickedLottoTickets) {
-        int numberOfAutomaticallyPickedLottoTickets = numberOfLottoTicket - numberOfManuallyPickedLottoTickets;
+    public static LottoTickets buy(LottoPurchaseInformation lottoPurchaseInformation, List<LottoTicket> manuallyPickedLottoTickets) {
+        int numberOfAutomaticallyPickedLottoTickets = lottoPurchaseInformation.numberOfAutomaticallyPickedLottoTicket();
         List<LottoTicket> lottoTicketList = new ArrayList<>(manuallyPickedLottoTickets);
         for (int i = 0; i < numberOfAutomaticallyPickedLottoTickets; i++) {
             lottoTicketList.add(generate());
         }
-        return new LottoTickets(lottoTicketList, numberOfLottoTicket * LOTTO_TICKET_PRICE);
+        return new LottoTickets(lottoTicketList, lottoPurchaseInformation.lottoTicketsPrice());
     }
 
     private static LottoTicket generate() {
