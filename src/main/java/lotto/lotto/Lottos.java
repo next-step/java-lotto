@@ -1,6 +1,5 @@
 package lotto.lotto;
 
-import lotto.LottoMachine;
 import lotto.result.LottoResults;
 import lotto.result.MatchedNumbersCount;
 

@@ -17,7 +17,6 @@ public class LottoApplication {
         LottoNumbers winningNumbers = InputView.getWinningNumbers();
 
         LottoResults lottoResults = lottos.result(winningNumbers, purchaseAmount);
-
         ResultView.printResult(lottoResults);
     }
 
