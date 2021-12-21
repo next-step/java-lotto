@@ -4,8 +4,8 @@ import java.util.EnumSet;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
-    SECOND(5, 3_000_000),
     THIRD(5, 1_500_000),
+    SECOND(5, 3_000_000),
     FOURTH(4, 50_000),
     FIFTH(3, 5_000);
 
@@ -30,16 +30,13 @@ public enum Rank {
             return SECOND;
         }
 
-        return find(correctCount);
+        return findFromCount(correctCount);
     }
 
-    private static Rank find(int correctCount) {
-        Rank rank = null;
-
-        for (Rank r : EnumSet.allOf(Rank.class)) {
-            rank = (correctCount == r.getCorrectCount()) ? r : null;
-        }
-
-        return rank;
+    private static Rank findFromCount(int correctCount) {
+        return EnumSet.allOf(Rank.class).stream()
+                .filter(r -> r.getCorrectCount() == correctCount)
+                .findFirst()
+                .get();
     }
 }
