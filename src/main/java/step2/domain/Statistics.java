@@ -3,8 +3,8 @@ package step2.domain;
 import java.util.Objects;
 
 public class Statistics {
-    final double profitAmount;
-    static Ranks ranks;
+    private final double profitAmount;
+    private static Ranks ranks;
 
     public Statistics(Lotteries lotteries, Lottery winningNumbers, Number bonusNumber) {
         this.ranks = new Ranks(lotteries, winningNumbers, bonusNumber);
