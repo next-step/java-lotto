@@ -6,7 +6,7 @@ import java.util.Objects;
 public class LottoResults {
     private final Map<Rank, Long> values;
     private final float totalPrize;
-    private float profit;
+    private final float profit;
 
     private LottoResults(Map<Rank, Long> lottoResults, int purchaseAmount) {
         this.values = lottoResults;
@@ -16,10 +16,6 @@ public class LottoResults {
 
     public static LottoResults from(Map<Rank, Long> lottoResults, int purchaseAmount) {
         return new LottoResults(lottoResults, purchaseAmount);
-    }
-
-    public void add(Rank matchedNumbersCount, long lottosCount) {
-        values.put(matchedNumbersCount, lottosCount);
     }
 
     public Map<Rank, Long> values() {
