@@ -37,8 +37,11 @@ public class LottoResults {
     private float totalPrize(Map<MatchedNumbersCount, Long> lottoResults) {
         float prize = 0f;
 
-        for (MatchedNumbersCount matchedNumbersCount : lottoResults.keySet()) {
-            prize += matchedNumbersCount.prize(lottoResults.get(matchedNumbersCount));
+        for (Map.Entry<MatchedNumbersCount, Long> entry : lottoResults.entrySet()) {
+            MatchedNumbersCount matchedNumbersCount = entry.getKey();
+            Long quantity = entry.getValue();
+
+            prize += matchedNumbersCount.prize(quantity);
         }
 
         return prize;
