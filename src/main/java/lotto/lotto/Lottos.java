@@ -1,21 +1,59 @@
 package lotto.lotto;
 
+import lotto.LottoMachine;
+import lotto.result.LottoResults;
 import lotto.result.MatchedNumbersCount;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Lottos {
+    private static final int LOTTO_PRICE = 1000;
     private final List<Lotto> values;
 
-    public Lottos(List<Lotto> values) {
+    private Lottos(List<Lotto> values) {
         this.values = values;
     }
 
-    public long match(LottoNumbers winningNumbers, MatchedNumbersCount matchedNumbersCount) {
+    public static Lottos from(List<Lotto> values) {
+        return new Lottos(values);
+    }
+
+    public static Lottos from(int purchaseAmount) {
+        List<Lotto> lottos = new ArrayList<>();
+        int quantity = purchaseAmount / LOTTO_PRICE;
+
+        for (int i = 0; i < quantity; i++) {
+            LottoNumbers lottoNumbers = LottoMachine.generateLottoNumber();
+            Lotto lotto = Lotto.from(lottoNumbers);
+            lottos.add(lotto);
+        }
+
+        return new Lottos(lottos);
+    }
+
+    public LottoResults result(LottoNumbers winningNumbers, int purchaseAmount) {
+        Map<MatchedNumbersCount, Long> lottoResults = new EnumMap<>(MatchedNumbersCount.class);
+
+        for (MatchedNumbersCount matchedNumbersCount : MatchedNumbersCount.values()) {
+            long matchedLottosCount = match(winningNumbers, matchedNumbersCount);
+            lottoResults.put(matchedNumbersCount, matchedLottosCount);
+        }
+
+        return LottoResults.from(lottoResults, purchaseAmount);
+    }
+
+    private long match(LottoNumbers winningNumbers, MatchedNumbersCount matchedNumbersCount) {
         return values.stream()
                 .filter(lotto -> lotto.match(winningNumbers, matchedNumbersCount::isEqualsTo))
                 .count();
+    }
+
+    public List<Lotto> values() {
+        return values;
+    }
+
+    public int quantity() {
+        return values.size();
     }
 
     @Override

@@ -6,10 +6,16 @@ import java.util.Objects;
 public class LottoResults {
     private final Map<MatchedNumbersCount, Long> values;
     private final float totalPrize;
+    private float profit;
 
-    public LottoResults(Map<MatchedNumbersCount, Long> lottoResults) {
+    private LottoResults(Map<MatchedNumbersCount, Long> lottoResults, int purchaseAmount) {
         this.values = lottoResults;
         this.totalPrize = totalPrize(lottoResults);
+        this.profit = totalPrize / purchaseAmount;
+    }
+
+    public static LottoResults from(Map<MatchedNumbersCount, Long> lottoResults, int purchaseAmount) {
+        return new LottoResults(lottoResults, purchaseAmount);
     }
 
     public void add(MatchedNumbersCount matchedNumbersCount, long lottosCount) {
@@ -20,8 +26,12 @@ public class LottoResults {
         return values;
     }
 
-    public float profit(int purchaseAmount) {
-        return totalPrize / purchaseAmount;
+    public float profit() {
+        return this.profit;
+    }
+
+    public Long matchedNumbersCount(MatchedNumbersCount matchedNumbersCount) {
+        return values.get(matchedNumbersCount);
     }
 
     private float totalPrize(Map<MatchedNumbersCount, Long> lottoResults) {

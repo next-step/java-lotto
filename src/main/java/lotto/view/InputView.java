@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.lotto.LottoNumbers;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -16,8 +18,8 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static String[] getWinningNumbers() {
-        return scanner.next().split(DELIMITER);
+    public static LottoNumbers getWinningNumbers() {
+        return LottoNumbers.from(scanner.next().split(DELIMITER));
     }
 
     public static void printWinningNumbersRequest() {

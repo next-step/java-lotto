@@ -29,6 +29,15 @@ class LottoNumbersTest {
         assertThat(lottoNumbers).isEqualTo(LottoNumbers.from(input));
     }
 
+    @Test
+    @DisplayName("String 배열로 LottoNumbers 객체를 생성한다")
+    void shouldCreateWithStringArray() {
+        String[] input = {"1", "2", "3", "4", "5", "6"};
+        LottoNumbers lottoNumbers = LottoNumbers.from(input);
+
+        assertThat(lottoNumbers).isEqualTo(LottoNumbers.from(input));
+    }
+
     @ParameterizedTest
     @MethodSource("createLottoNumbers")
     @DisplayName("로또 번호가 6자리가 아니면 LottoNumbers를 생성할 수 없다")

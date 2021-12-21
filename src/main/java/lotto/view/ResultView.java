@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.lotto.Lotto;
+import lotto.lotto.Lottos;
 import lotto.result.LottoResults;
 import lotto.result.MatchedNumbersCount;
 
@@ -13,15 +13,12 @@ public class ResultView {
     private static final String COUNT_MESSAGE = "개";
     private static final String PROFIT_MESSAGE = "총 수익률은 %.2f입니다.";
 
-    public static void printQuantity(int quantity) {
-        System.out.println(quantity + QUANTITY_RESULT_MESSAGE);
+    public static void printLottoNumbers(Lottos lottos) {
+        System.out.println(lottos.quantity() + QUANTITY_RESULT_MESSAGE);
+        lottos.values().forEach(lotto -> System.out.println(lotto.lottoNumbers()));
     }
 
-    public static void printLottoNumbers(Lotto lotto) {
-        System.out.println(lotto.lottoNumbers());
-    }
-
-    public static void printResult(LottoResults lottoResults, float profit) {
+    public static void printResult(LottoResults lottoResults) {
         System.out.println(LOTTO_RESULT_MESSAGE);
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -36,6 +33,6 @@ public class ResultView {
         }
 
         System.out.println(stringBuilder);
-        System.out.printf(PROFIT_MESSAGE, profit);
+        System.out.printf(PROFIT_MESSAGE, lottoResults.profit());
     }
 }

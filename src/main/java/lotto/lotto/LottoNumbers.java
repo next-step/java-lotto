@@ -1,5 +1,6 @@
 package lotto.lotto;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -18,7 +19,7 @@ public class LottoNumbers {
             throw new IllegalArgumentException(LOTTO_NUMBERS_DIGIT_MESSAGE);
         }
 
-        if(isDuplicated(input)) {
+        if (isDuplicated(input)) {
             throw new IllegalArgumentException(DUPLICATED_LOTTO_NUMBERS_MESSAGE);
         }
 
@@ -27,6 +28,14 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
 
         return new LottoNumbers(lottoNumbers);
+    }
+
+    public static LottoNumbers from(String[] input) {
+        return LottoNumbers.from(
+                Arrays.stream(input)
+                        .map(Integer::parseInt)
+                        .collect(Collectors.toList())
+        );
     }
 
     public List<Integer> values() {
