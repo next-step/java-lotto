@@ -4,25 +4,25 @@ import java.util.Map;
 import java.util.Objects;
 
 public class LottoResults {
-    private final Map<MatchedNumbersCount, Long> values;
+    private final Map<Rank, Long> values;
     private final float totalPrize;
     private float profit;
 
-    private LottoResults(Map<MatchedNumbersCount, Long> lottoResults, int purchaseAmount) {
+    private LottoResults(Map<Rank, Long> lottoResults, int purchaseAmount) {
         this.values = lottoResults;
         this.totalPrize = totalPrize(lottoResults);
         this.profit = totalPrize / purchaseAmount;
     }
 
-    public static LottoResults from(Map<MatchedNumbersCount, Long> lottoResults, int purchaseAmount) {
+    public static LottoResults from(Map<Rank, Long> lottoResults, int purchaseAmount) {
         return new LottoResults(lottoResults, purchaseAmount);
     }
 
-    public void add(MatchedNumbersCount matchedNumbersCount, long lottosCount) {
+    public void add(Rank matchedNumbersCount, long lottosCount) {
         values.put(matchedNumbersCount, lottosCount);
     }
 
-    public Map<MatchedNumbersCount, Long> values() {
+    public Map<Rank, Long> values() {
         return values;
     }
 
@@ -30,18 +30,14 @@ public class LottoResults {
         return this.profit;
     }
 
-    public Long matchedNumbersCount(MatchedNumbersCount matchedNumbersCount) {
-        return values.get(matchedNumbersCount);
-    }
-
-    private float totalPrize(Map<MatchedNumbersCount, Long> lottoResults) {
+    private float totalPrize(Map<Rank, Long> lottoResults) {
         float prize = 0f;
 
-        for (Map.Entry<MatchedNumbersCount, Long> entry : lottoResults.entrySet()) {
-            MatchedNumbersCount matchedNumbersCount = entry.getKey();
+        for (Map.Entry<Rank, Long> entry : lottoResults.entrySet()) {
+            Rank matchedNumbersCount = entry.getKey();
             Long quantity = entry.getValue();
 
-            prize += matchedNumbersCount.prize(quantity);
+            prize += matchedNumbersCount.totalPrize(quantity);
         }
 
         return prize;

@@ -1,10 +1,14 @@
 package lotto.lotto;
 
 import lotto.lotto.lottonumber.LottoNumbers;
-import lotto.result.LottoResults;
-import lotto.result.MatchedNumbersCount;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
 
 public class Lottos {
     private static final int LOTTO_PRICE = 1000;
@@ -31,21 +35,9 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public LottoResults result(LottoNumbers winningNumbers, int purchaseAmount) {
-        Map<MatchedNumbersCount, Long> lottoResults = new EnumMap<>(MatchedNumbersCount.class);
-
-        for (MatchedNumbersCount matchedNumbersCount : MatchedNumbersCount.values()) {
-            long matchedLottosCount = match(winningNumbers, matchedNumbersCount);
-            lottoResults.put(matchedNumbersCount, matchedLottosCount);
-        }
-
-        return LottoResults.from(lottoResults, purchaseAmount);
-    }
-
-    private long match(LottoNumbers winningNumbers, MatchedNumbersCount matchedNumbersCount) {
+    public Map<Integer, Long> match(LottoNumbers winningNumbers) {
         return values.stream()
-                .filter(lotto -> lotto.match(winningNumbers, matchedNumbersCount::isEqualsTo))
-                .count();
+                .collect(groupingBy(lotto -> lotto.match(winningNumbers), counting()));
     }
 
     public List<Lotto> values() {

@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.lotto.Lottos;
 import lotto.result.LottoResults;
-import lotto.result.MatchedNumbersCount;
+import lotto.result.Rank;
 
 public class ResultView {
 
@@ -22,7 +22,7 @@ public class ResultView {
         System.out.println(LOTTO_RESULT_MESSAGE);
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (MatchedNumbersCount matchedNumbersCount : lottoResults.values().keySet()) {
+        for (Rank matchedNumbersCount : lottoResults.values().keySet()) {
             stringBuilder.append(matchedNumbersCount.value())
                     .append(MATCHED_NUMBERS_MESSAGE)
                     .append(matchedNumbersCount.price())

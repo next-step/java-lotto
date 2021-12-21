@@ -25,8 +25,8 @@ public class Lotto {
         return lottoNumbers.values();
     }
 
-    public boolean match(LottoNumbers winningNumbers, Condition condition) {
-        return lottoNumbers.match(winningNumbers, condition);
+    public int match(LottoNumbers winningNumbers) {
+        return lottoNumbers.match(winningNumbers);
     }
 
     @Override

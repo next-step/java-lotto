@@ -1,7 +1,5 @@
 package lotto.lotto.lottonumber;
 
-import lotto.lotto.Condition;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -50,16 +48,9 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
     }
 
-    public boolean match(LottoNumbers winningNumbers, Condition condition) {
-        long count = values.stream()
-                .filter(winningNumbers::contains)
-                .count();
-
-        return condition.isEqualsTo(count);
-    }
-
-    private boolean contains(LottoNumber lottoNumber) {
-        return this.values.contains(lottoNumber);
+    public int match(LottoNumbers winningNumbers) {
+        values.retainAll(winningNumbers.values);
+        return values.size();
     }
 
     private static boolean isValidDigits(List<Integer> input) {

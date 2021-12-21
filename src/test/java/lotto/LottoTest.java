@@ -19,23 +19,13 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("주어진 개수만큼 로또 번호가 일치하는지 확인한다")
+    @DisplayName("당첨 번호와 로또 번호가 일치하는 개수를 구한다")
     void shouldSetMatchedLottoNumbersCount() {
         LottoNumbers input = LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto lotto = Lotto.from(input);
         LottoNumbers winningNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 7, 8, 9));
 
-        boolean isMatchedThreeNumbers = lotto.match(winningNumbers, count -> count == 3);
-        assertThat(isMatchedThreeNumbers).isTrue();
-    }
-
-    @Test
-    void name() {
-        String input = "1, 2, 3, 4, 5, 6";
-        String input2 = "1,2,3,4,5,6";
-        String[] split = input.split(",\\s|,");
-        for (String s : split) {
-            System.out.println("s = " + s + "!");
-        }
+        int matchedLottoNumbersCount = lotto.match(winningNumbers);
+        assertThat(matchedLottoNumbersCount).isEqualTo(3);
     }
 }

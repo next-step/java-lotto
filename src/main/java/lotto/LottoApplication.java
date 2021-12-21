@@ -1,8 +1,7 @@
 package lotto;
 
-import lotto.lotto.lottonumber.LottoNumbers;
 import lotto.lotto.Lottos;
-import lotto.result.LottoResults;
+import lotto.lotto.lottonumber.LottoNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -16,9 +15,5 @@ public class LottoApplication {
         InputView.printWinningNumbersRequest();
         LottoNumbers winningNumbers = InputView.getWinningNumbers();
 
-        LottoResults lottoResults = lottos.result(winningNumbers, purchaseAmount);
-        ResultView.printResult(lottoResults);
     }
-
-
 }

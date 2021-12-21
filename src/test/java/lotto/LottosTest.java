@@ -1,15 +1,14 @@
 package lotto;
 
 import lotto.lotto.Lotto;
-import lotto.lotto.lottonumber.LottoNumbers;
 import lotto.lotto.Lottos;
-import lotto.result.LottoResults;
+import lotto.lotto.lottonumber.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Map;
+
 import static java.util.Arrays.asList;
-import static lotto.result.MatchedNumbersCount.FOUR;
-import static lotto.result.MatchedNumbersCount.THREE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosTest {
@@ -29,25 +28,25 @@ class LottosTest {
     }
 
     @Test
-    @DisplayName("로또 번호가 주어진 개수만큼 일치하는 로또의 개수를 구한다")
+    @DisplayName("당첨 번호와 로또 번호가 일치하는 개수를 구한다")
     void shouldReturnCount() {
         Lottos lottos = lottos();
-        int purchaseAmount = 2000;
         LottoNumbers winningNumbers = winningNumbers();
+        Map<Integer, Long> result = lottos.match(winningNumbers);
 
-        LottoResults lottoResults = lottos.result(winningNumbers, purchaseAmount);
-        assertThat(lottoResults.matchedNumbersCount(THREE)).isEqualTo(1L);
-        assertThat(lottoResults.matchedNumbersCount(FOUR)).isEqualTo(1L);
+        assertThat(result.get(3)).isEqualTo(1);
+        assertThat(result.get(4)).isEqualTo(2);
     }
 
     private Lottos lottos() {
         return Lottos.from(asList(
                 Lotto.from(asList(1, 2, 3, 7, 8, 9)),
+                Lotto.from(asList(1, 2, 3, 7, 8, 10)),
                 Lotto.from(asList(1, 2, 3, 4, 7, 8)))
         );
     }
 
     private LottoNumbers winningNumbers() {
-        return LottoNumbers.from(asList(1, 2, 3, 4, 5, 6));
+        return LottoNumbers.from(asList(1, 2, 3, 4, 5, 10));
     }
 }

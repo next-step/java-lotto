@@ -32,7 +32,7 @@ class LottoNumbersTest {
     @Test
     @DisplayName("String 배열로 LottoNumbers 객체를 생성한다")
     void shouldCreateWithStringArray() {
-        String[] input = {"1", "2", "3", "4", "5", "6"};
+        String input = "1,2,3,4,5,6";
         LottoNumbers lottoNumbers = LottoNumbers.from(input);
 
         assertThat(lottoNumbers).isEqualTo(LottoNumbers.from(input));
@@ -67,13 +67,13 @@ class LottoNumbersTest {
     }
 
     @Test
-    @DisplayName("당첨 번호와 일치하는 로또 번호 개수를 구한다")
+    @DisplayName("당첨 번호와 로또 번호가 일치하는 개수를 구한다")
     void shouldReturnCount() {
         LottoNumbers lottoNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumbers winningNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 7, 8, 9));
 
-        boolean result = lottoNumbers.match(winningNumbers, count -> count == 3);
-        assertThat(result).isTrue();
+        int matchedLottoNumbersCount = lottoNumbers.match(winningNumbers);
+        assertThat(matchedLottoNumbersCount).isEqualTo(3);
     }
 
     private static Stream<List<Integer>> createLottoNumbers() {
