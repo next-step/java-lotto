@@ -37,10 +37,14 @@ public class LottoNumbers {
 
     public boolean match(LottoNumbers winningNumbers, Condition condition) {
         long count = values.stream()
-                .filter(winningNumbers.values::contains)
+                .filter(winningNumbers::contains)
                 .count();
 
         return condition.isEqualsTo(count);
+    }
+
+    private boolean contains(LottoNumber lottoNumber) {
+        return this.values.contains(lottoNumber);
     }
 
     private static boolean isValidDigits(List<Integer> input) {

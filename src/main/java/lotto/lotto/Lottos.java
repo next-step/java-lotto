@@ -14,10 +14,7 @@ public class Lottos {
 
     public long match(LottoNumbers winningNumbers, MatchedNumbersCount matchedNumbersCount) {
         return values.stream()
-                .filter(lotto -> lotto.match(
-                        winningNumbers,
-                        count -> count == matchedNumbersCount.value())
-                )
+                .filter(lotto -> lotto.match(winningNumbers, matchedNumbersCount::isEqualsTo))
                 .count();
     }
 

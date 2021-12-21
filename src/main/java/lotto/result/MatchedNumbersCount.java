@@ -18,6 +18,10 @@ public enum MatchedNumbersCount {
         return matchedNumbersCount;
     }
 
+    public boolean isEqualsTo(long count) {
+        return matchedNumbersCount == count;
+    }
+
     public int price() {
         return price;
     }
