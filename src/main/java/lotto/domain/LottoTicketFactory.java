@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.exception.LottoException;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,22 +20,22 @@ public class LottoTicketFactory {
     private LottoTicketFactory() {
     }
 
-    public static LottoTickets buy(String money) {
-        return buy(toInt(money));
-    }
+//    public static LottoTickets buy(String money, int numberOfManuallyPickedLottoTickets, List<LottoTicket> manuallyPickedLottoTickets) {
+//        return buy(toInt(money), numberOfManuallyPickedLottoTickets, manuallyPickedLottoTickets);
+//    }
+//
+//    private static int toInt(String moneyString) {
+//        try {
+//            return Integer.parseInt(moneyString);
+//        } catch (NumberFormatException e) {
+//            throw new LottoException("구입할 로또 가격을 숫자로 입력해야합니다.");
+//        }
+//    }
 
-    private static int toInt(String moneyString) {
-        try {
-            return Integer.parseInt(moneyString);
-        } catch (NumberFormatException e) {
-            throw new LottoException("구입할 로또 가격을 숫자로 입력해야합니다.");
-        }
-    }
-
-    public static LottoTickets buy(int money) {
-        int numberOfLottoTicket = money / LOTTO_TICKET_PRICE;
-        List<LottoTicket> lottoTicketList = new ArrayList<>();
-        for (int i = 0; i < numberOfLottoTicket; i++) {
+    public static LottoTickets buy(int numberOfLottoTicket, int numberOfManuallyPickedLottoTickets, List<LottoTicket> manuallyPickedLottoTickets) {
+        int numberOfAutomaticallyPickedLottoTickets = numberOfLottoTicket - numberOfManuallyPickedLottoTickets;
+        List<LottoTicket> lottoTicketList = new ArrayList<>(manuallyPickedLottoTickets);
+        for (int i = 0; i < numberOfAutomaticallyPickedLottoTickets; i++) {
             lottoTicketList.add(generate());
         }
         return new LottoTickets(lottoTicketList, numberOfLottoTicket * LOTTO_TICKET_PRICE);

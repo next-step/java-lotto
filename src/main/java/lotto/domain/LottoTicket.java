@@ -10,7 +10,9 @@ import java.util.stream.Collectors;
 import static lotto.domain.LottoProperties.NUMBER_OF_LOTTO_NUMBERS;
 
 public class LottoTicket {
-    
+
+    private static final String SPLITTER = ", ";
+
     private final List<LottoNumber> lottoNumbers;
 
     private LottoTicket(List<LottoNumber> lottoNumbers) {
@@ -27,6 +29,19 @@ public class LottoTicket {
                 .map(LottoNumber::from)
                 .collect(Collectors.toList());
         return new LottoTicket(lottoNumberList);
+    }
+
+    public static LottoTicket from(String... numbers) {
+        List<LottoNumber> lottoNumberList = Arrays.stream(numbers)
+                .map(LottoNumber::from)
+                .collect(Collectors.toList());
+        return new LottoTicket(lottoNumberList);
+    }
+
+
+    public static LottoTicket from(String numbers) {
+        String[] lottoNumbers = numbers.split(SPLITTER);
+        return LottoTicket.from(lottoNumbers);
     }
 
     private void validate(List<LottoNumber> lottoNumbers) {
