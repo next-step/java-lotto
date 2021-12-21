@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.lotto.LottoNumbers;
+import lotto.lotto.lottonumber.LottoNumbers;
 import lotto.lotto.Lottos;
 import lotto.result.LottoResults;
 import lotto.view.InputView;

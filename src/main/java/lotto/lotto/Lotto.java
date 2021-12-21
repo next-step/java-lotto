@@ -1,5 +1,7 @@
 package lotto.lotto;
 
+import lotto.lotto.lottonumber.LottoNumbers;
+
 import java.util.List;
 import java.util.Objects;
 

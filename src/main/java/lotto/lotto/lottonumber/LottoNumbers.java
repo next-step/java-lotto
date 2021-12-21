@@ -1,4 +1,6 @@
-package lotto.lotto;
+package lotto.lotto.lottonumber;
+
+import lotto.lotto.Condition;
 
 import java.util.Arrays;
 import java.util.List;
