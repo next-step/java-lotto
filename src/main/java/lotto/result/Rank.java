@@ -29,7 +29,7 @@ public enum Rank {
         return matchedNumbersCount;
     }
 
-    public int price() {
+    public int prize() {
         return prize;
     }
 

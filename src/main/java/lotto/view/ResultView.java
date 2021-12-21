@@ -22,12 +22,12 @@ public class ResultView {
         System.out.println(LOTTO_RESULT_MESSAGE);
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (Rank matchedNumbersCount : lottoResults.values().keySet()) {
-            stringBuilder.append(matchedNumbersCount.value())
+        for (Rank rank : Rank.values()) {
+            stringBuilder.append(rank.value())
                     .append(MATCHED_NUMBERS_MESSAGE)
-                    .append(matchedNumbersCount.price())
+                    .append(rank.prize())
                     .append(PRICE_MESSAGE)
-                    .append(lottoResults.values().get(matchedNumbersCount))
+                    .append(lottoResults.matchedLottoNumbersCount(rank))
                     .append(COUNT_MESSAGE)
                     .append("\n");
         }

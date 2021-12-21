@@ -2,6 +2,7 @@ package lotto.result;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 public class LottoResults {
     private final Map<Rank, Long> values;
@@ -20,6 +21,10 @@ public class LottoResults {
 
     public Map<Rank, Long> values() {
         return values;
+    }
+
+    public Long matchedLottoNumbersCount(Rank rank) {
+        return Optional.ofNullable(values.get(rank)).orElse(0L);
     }
 
     public float profit() {
