@@ -24,6 +24,8 @@ public class LotteriesTest {
             add(Number.createFromInt(2));
             add(Number.createFromInt(3));
             add(Number.createFromInt(4));
+            add(Number.createFromInt(5));
+            add(Number.createFromInt(6));
         }});
 
         lotteries = Lotteries.createFromList(new ArrayList() {{
