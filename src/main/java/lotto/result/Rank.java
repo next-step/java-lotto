@@ -1,5 +1,7 @@
 package lotto.result;
 
+import java.util.Arrays;
+
 public enum Rank {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
@@ -16,12 +18,15 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public int value() {
-        return matchedNumbersCount;
+    public static Rank findBy(int count) {
+        return Arrays.stream(values())
+                .filter(value -> value.matchedNumbersCount == count)
+                .findFirst()
+                .orElse(MISS);
     }
 
-    public boolean isEqualsTo(long count) {
-        return matchedNumbersCount == count;
+    public int value() {
+        return matchedNumbersCount;
     }
 
     public int price() {

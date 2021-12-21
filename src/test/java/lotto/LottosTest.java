@@ -3,6 +3,7 @@ package lotto;
 import lotto.lotto.Lotto;
 import lotto.lotto.Lottos;
 import lotto.lotto.lottonumber.LottoNumbers;
+import lotto.result.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -32,10 +33,10 @@ class LottosTest {
     void shouldReturnCount() {
         Lottos lottos = lottos();
         LottoNumbers winningNumbers = winningNumbers();
-        Map<Integer, Long> result = lottos.match(winningNumbers);
+        Map<Rank, Long> result = lottos.match(winningNumbers);
 
-        assertThat(result.get(3)).isEqualTo(1);
-        assertThat(result.get(4)).isEqualTo(2);
+        assertThat(result.get(Rank.findBy(3))).isEqualTo(1);
+        assertThat(result.get(Rank.findBy(4))).isEqualTo(2);
     }
 
     private Lottos lottos() {
