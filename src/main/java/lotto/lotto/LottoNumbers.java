@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 public class LottoNumbers {
     private static final String LOTTO_NUMBERS_DIGIT_MESSAGE = "로또 번호는 6자리여야 합니다.";
     private static final String DUPLICATED_LOTTO_NUMBERS_MESSAGE = "로또 번호는 중복이 없어야 합니다.";
+    private static final String DELIMITER = ",\\s|,";
+
     private final List<LottoNumber> values;
 
     private LottoNumbers(List<LottoNumber> input) {
@@ -30,9 +32,11 @@ public class LottoNumbers {
         return new LottoNumbers(lottoNumbers);
     }
 
-    public static LottoNumbers from(String[] input) {
+    public static LottoNumbers from(String input) {
+        String[] splitInput = input.split(DELIMITER);
+
         return LottoNumbers.from(
-                Arrays.stream(input)
+                Arrays.stream(splitInput)
                         .map(Integer::parseInt)
                         .collect(Collectors.toList())
         );

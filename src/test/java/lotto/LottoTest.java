@@ -28,4 +28,14 @@ public class LottoTest {
         boolean isMatchedThreeNumbers = lotto.match(winningNumbers, count -> count == 3);
         assertThat(isMatchedThreeNumbers).isTrue();
     }
+
+    @Test
+    void name() {
+        String input = "1, 2, 3, 4, 5, 6";
+        String input2 = "1,2,3,4,5,6";
+        String[] split = input.split(",\\s|,");
+        for (String s : split) {
+            System.out.println("s = " + s + "!");
+        }
+    }
 }
