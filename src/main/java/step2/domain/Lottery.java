@@ -38,6 +38,10 @@ public class Lottery {
         return Collections.unmodifiableList(lottery);
     }
 
+    public boolean isCorrectBonusNumber(Number bonusNumber) {
+        return lottery.contains(bonusNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

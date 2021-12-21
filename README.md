@@ -17,7 +17,7 @@
 * <https://google.github.io/styleguide/javaguide.html> 또는 <https://myeonguni.tistory.com/1596>
 * [AngularJS Commit Message Conventions]( AngularJS Commit Message Conventions)
 ***
-## Step1. 로또(자동)
+## Step2. 로또(자동)
 #### 기능 구현 목록
 * 구입 금액 입력 받는 기능
 * 구입 금액 확인 후 14개의 로또 생성
@@ -26,4 +26,10 @@
 * 지난 주 당첨 번호 입력 받는 기능
 * 일치하는 개수에 따라 통계 추출
 * 총 수익률 계산
+
+***
+## Step3. 로또(2등)
+#### 기능 구현 목록
+* 보너스 볼 입력 받는 기능
+* 보너스볼 + 4개의 공 일치하는 enum등수 추가
 

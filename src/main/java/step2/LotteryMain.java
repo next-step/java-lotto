@@ -14,7 +14,7 @@ public class LotteryMain {
         Lotteries lotteries = lotteryController.getLotteries(purchaseAmount);
         ResultView.printLotteries(lotteries);
 
-        Statistics statisticResult = lotteryController.getStatistics(lotteries, InputView.getWinningNumbers());
+        Statistics statisticResult = lotteryController.getStatistics(lotteries, InputView.getWinningNumbers(), InputView.getBonusBallNumber());
         ResultView.printStatistics(statisticResult);
         ResultView.printProfitRate(lotteryController.getProfitRate(statisticResult, purchaseAmount));
     }

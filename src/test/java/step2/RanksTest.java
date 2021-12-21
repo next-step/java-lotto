@@ -36,14 +36,14 @@ public class RanksTest {
     @Test
     @DisplayName("Ranks list 상금 계산")
     void calculateProfitAmount() {
-        assertThat(new Ranks(lotteries, lottery).calculateProfitAmount())
+        assertThat(new Ranks(lotteries, lottery, Number.createFromInt(3)).calculateProfitAmount())
                 .isEqualTo(2_000_000_000);
     }
 
     @Test
     @DisplayName("당첨 등수에 해당되는 상금 get test")
     void getCountOfRank() {
-        assertThat(new Ranks(lotteries, lottery).getCountOfRank(Rank.FIRST))
+        assertThat(new Ranks(lotteries, lottery, Number.createFromInt(3)).getCountOfRank(Rank.FIRST))
                 .isEqualTo(1);
     }
 }

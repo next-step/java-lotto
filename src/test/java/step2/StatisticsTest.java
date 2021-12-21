@@ -33,15 +33,15 @@ public class StatisticsTest {
     @Test
     @DisplayName("Statistics 객체 생성")
     void create() {
-        Statistics statistics = new Statistics(lotteries, lottery);
-        assertThat(statistics).isEqualTo(new Statistics(lotteries, lottery));
+        Statistics statistics = new Statistics(lotteries, lottery, Number.createFromInt(3));
+        assertThat(statistics).isEqualTo(new Statistics(lotteries, lottery, Number.createFromInt(3)));
     }
 
     @Test
     @DisplayName("Statistics 통계 계산")
     void getRanks() {
-        Statistics statistics = new Statistics(lotteries, lottery);
-        assertThat(statistics.getRanks()).isEqualTo(new Ranks(lotteries, lottery));
+        Statistics statistics = new Statistics(lotteries, lottery, Number.createFromInt(3));
+        assertThat(statistics.getRanks()).isEqualTo(new Ranks(lotteries, lottery, Number.createFromInt(3)));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class StatisticsTest {
             add(Number.createFromInt(9));
         }});
 
-        Statistics statistics = new Statistics(lotteries, lottery);
+        Statistics statistics = new Statistics(lotteries, lottery, Number.createFromInt(3));
         assertThat(statistics.calculateProfitRate(5000)).isEqualTo(1);
     }
 }
