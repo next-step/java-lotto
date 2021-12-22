@@ -22,16 +22,16 @@ public class Lotto {
         return new Lotto(input);
     }
 
-    public List<Integer> lottoNumbers() {
-        return lottoNumbers.values();
-    }
-
     public long match(LottoNumbers winningNumbers) {
         return lottoNumbers.match(winningNumbers);
     }
 
     public boolean isMatchedBonusNumber(LottoNumber bonusNumber) {
         return lottoNumbers.isMatchedBonusNumber(bonusNumber);
+    }
+
+    public List<Integer> lottoNumbers() {
+        return lottoNumbers.values();
     }
 
     @Override

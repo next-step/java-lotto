@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class LottoResults {
+    public static final long NONE = 0L;
     private final Map<Rank, Long> values;
     private final float totalPrize;
     private final float profit;
@@ -19,12 +20,8 @@ public class LottoResults {
         return new LottoResults(lottoResults, purchaseAmount);
     }
 
-    public Map<Rank, Long> values() {
-        return values;
-    }
-
     public Long matchedLottoNumbersCount(Rank rank) {
-        return Optional.ofNullable(values.get(rank)).orElse(0L);
+        return Optional.ofNullable(values.get(rank)).orElse(NONE);
     }
 
     public float profit() {
@@ -42,6 +39,10 @@ public class LottoResults {
         }
 
         return prize;
+    }
+
+    public Map<Rank, Long> values() {
+        return values;
     }
 
     @Override
