@@ -19,10 +19,10 @@ class LottoTicketsWinInformationTest {
         LottoTicket lottoTicket2 = LottoTicket.from(1, 2, 3, 4, 5, 22); //3등
         List<LottoTicket> lottoTicketList = createLottoListFrom(lottoTicket1, lottoTicket2);
         LottoTickets lottoTickets = new LottoTickets(lottoTicketList, 2000);
-        LottoTicketsWinInformation lottoTicketsWinInformation = LottoTicketsWinInformation.from(lottoTickets);
+        LottoTicketsWinInformation lottoTicketsWinInformation = lottoTickets.winInformation(lottoWinningNumbers);
 
         //when
-        Map<LottoRank, Integer> map = lottoTicketsWinInformation.winningStatics(lottoWinningNumbers);
+        Map<LottoRank, Integer> map = lottoTicketsWinInformation.winningStatics();
 
         //then
         assertThat(map.get(LottoRank.FIRST)).isEqualTo(1);
@@ -53,10 +53,10 @@ class LottoTicketsWinInformationTest {
         List<LottoTicket> lottoTicketList = createLottoListFrom(lottoTicket1, lottoTicket2);
 
         LottoTickets lottoTickets = new LottoTickets(lottoTicketList, 2000);
-        LottoTicketsWinInformation lottoTicketsWinInformation = LottoTicketsWinInformation.from(lottoTickets);
+        LottoTicketsWinInformation lottoTicketsWinInformation = lottoTickets.winInformation(lottoWinningNumbers);
 
         //when
-        int winningPrize = lottoTicketsWinInformation.winningPrize(lottoWinningNumbers);
+        int winningPrize = lottoTicketsWinInformation.winningPrize();
 
         //then
         assertThat(winningPrize).isEqualTo(30_005_000);
@@ -77,10 +77,10 @@ class LottoTicketsWinInformationTest {
         List<LottoTicket> lottoTicketList = createLottoListFrom(lottoTicket1, lottoTicket2);
 
         LottoTickets lottoTickets = new LottoTickets(lottoTicketList, 2000);
-        LottoTicketsWinInformation lottoTicketsWinInformation = LottoTicketsWinInformation.from(lottoTickets);
+        LottoTicketsWinInformation lottoTicketsWinInformation = lottoTickets.winInformation(lottoWinningNumbers);
 
         //when
-        double earningRate = lottoTicketsWinInformation.earningRate(lottoWinningNumbers);
+        double earningRate = lottoTicketsWinInformation.earningRate();
 
         //then
         assertThat(earningRate).isEqualTo(1000750.0);

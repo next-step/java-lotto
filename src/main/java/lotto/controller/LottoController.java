@@ -34,10 +34,10 @@ public class LottoController {
     }
 
     private void printLottoWinInformation(LottoTickets lottoTickets, LottoWinningNumbers lottoWinningNumbers) {
-        LottoTicketsWinInformation lottoTicketsWinInformation = LottoTicketsWinInformation.from(lottoTickets);
-        Map<LottoRank, Integer> winningStaticsMap = lottoTicketsWinInformation.winningStatics(lottoWinningNumbers);
+        LottoTicketsWinInformation lottoTicketsWinInformation = lottoTickets.winInformation(lottoWinningNumbers);
+        Map<LottoRank, Integer> winningStaticsMap = lottoTicketsWinInformation.winningStatics();
         OutputView.printWinningStatics(winningStaticsMap);
-        double earningRate = lottoTicketsWinInformation.earningRate(lottoWinningNumbers);
+        double earningRate = lottoTicketsWinInformation.earningRate();
         OutputView.earningRate(earningRate);
 
     }
