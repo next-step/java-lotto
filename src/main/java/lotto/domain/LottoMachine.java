@@ -5,6 +5,9 @@ import lotto.domain.strategy.ManualLottoTicketsGenerator;
 
 public class LottoMachine {
 
+    private LottoMachine() {
+    }
+
     public static LottoTickets generateLottoTickets(LottoPurchaseInformation purchaseInfo) {
         ManualLottoTicketsGenerator manualGenerator = new ManualLottoTicketsGenerator(purchaseInfo.manuallyPickedLottoTickets(), purchaseInfo.lottoTicketPrice());
         AutomaticLottoTicketsGenerator automaticGenerator = new AutomaticLottoTicketsGenerator(purchaseInfo.numberOfAutomaticTicket(), purchaseInfo.lottoTicketPrice());
