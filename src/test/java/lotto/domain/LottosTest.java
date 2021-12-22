@@ -7,7 +7,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,11 +39,11 @@ public class LottosTest {
                 .getNumbers().stream()
                 .map(LottoNumber::number)
                 .collect(Collectors.toList());
-        int meaninglessBonusNumber = 1;
+        int meaninglessBonusNumber = 1; // 우연의 일치로 당첨 번호와 보너스 번호가 겹치면 테스트 실패 가능
         WinningLotto winningLotto = new WinningLotto(winningNumbers, meaninglessBonusNumber);
 
-        Map<PrizeType, Integer> prizeStat = lottos.countMatch(winningLotto);
-        assertThat(prizeStat).isInstanceOf(EnumMap.class);
-        assertThat(prizeStat.get(PrizeType.FIRST)).isEqualTo(1);
+        PrizeStatistic prizeStat = lottos.countMatch(winningLotto);
+        assertThat(prizeStat).isInstanceOf(PrizeStatistic.class);
+        assertThat(prizeStat.getOrDefault(PrizeType.FIRST)).isEqualTo(1);
     }
 }

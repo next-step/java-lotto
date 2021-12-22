@@ -36,10 +36,10 @@ public class Lotto {
     }
 
     public Set<LottoNumber> getNumbers() {
-        return this.numbers;
+        return Collections.unmodifiableSet(this.numbers);
     }
 
-    public boolean containBonusNumber(int bonusNumber) {
-        return numbers.contains(new LottoNumber(bonusNumber));
+    public boolean containBonusNumber(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
 }

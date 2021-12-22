@@ -30,11 +30,14 @@ public enum PrizeType {
     public static PrizeType of(long countOfMatch, boolean hasBonusNumber) {
         return Arrays.stream(values()).filter(type -> type.countOfMatch == countOfMatch)
                 .findFirst()
-                .map(prizeType -> {
-                    if (prizeType == THIRD && hasBonusNumber) {
-                        return SECOND;
-                    }
-                    return prizeType;
-                }).orElse(PrizeType.MISS);
+                .map(prizeType -> arrange(prizeType, hasBonusNumber))
+                .orElse(PrizeType.MISS);
+    }
+
+    private static PrizeType arrange(PrizeType prizeType, boolean hasBonusNumber) {
+        if (prizeType == THIRD && hasBonusNumber) {
+            return SECOND;
+        }
+        return prizeType;
     }
 }

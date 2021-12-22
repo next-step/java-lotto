@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lottos;
+import lotto.domain.PrizeStatistic;
 import lotto.domain.PrizeType;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
@@ -8,7 +9,6 @@ import lotto.view.ResultView;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.Map;
 
 public class LottoGame {
     private LottoGame() {
@@ -19,16 +19,16 @@ public class LottoGame {
         InputView inputView = new InputView();
         Lottos lottos = inputView.getLottos();
         WinningLotto winningLotto = inputView.getWinningLotto();
-        Map<PrizeType, Integer> prizeStat = lottos.countMatch(winningLotto);
+        PrizeStatistic prizeStat = lottos.countMatch(winningLotto);
         printResult(prizeStat, lottos.getInvestment());
     }
 
-    private static void printResult(Map<PrizeType, Integer> prizeStat, BigDecimal investment) {
+    private static void printResult(PrizeStatistic prizeStat, BigDecimal investment) {
         ResultView resultView = new ResultView();
         Arrays.stream(PrizeType.values())
                 .filter(prizeType -> prizeType != PrizeType.MISS)
                 .forEach(prizeType -> resultView.printPrize(prizeType,
-                        prizeStat.getOrDefault(prizeType, 0)));
+                        prizeStat.getOrDefault(prizeType)));
         resultView.printProfitMargin(investment);
     }
 }
