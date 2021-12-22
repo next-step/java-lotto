@@ -1,5 +1,6 @@
 package lotto.lotto;
 
+import lotto.lotto.lottonumber.LottoNumber;
 import lotto.lotto.lottonumber.LottoNumbers;
 import lotto.result.LottoResults;
 import lotto.result.Rank;
@@ -40,7 +41,7 @@ public class Lottos {
     public LottoResults result(LottoNumbers winningNumbers, int purchaseAmount) {
         Map<Rank, Long> result = values.stream()
                 .collect(groupingBy(
-                        lotto -> Rank.findBy(lotto.match(winningNumbers)),
+                        lotto -> Rank.valueOf(lotto.match(winningNumbers)),
                         counting())
                 );
 

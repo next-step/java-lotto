@@ -18,14 +18,14 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public static Rank findBy(int count) {
+    public static Rank valueOf(int count) {
         return Arrays.stream(values())
                 .filter(value -> value.matchedNumbersCount == count)
                 .findFirst()
                 .orElse(MISS);
     }
 
-    public int value() {
+    public int matchedNumbersCount() {
         return matchedNumbersCount;
     }
 

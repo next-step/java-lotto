@@ -23,7 +23,7 @@ public class ResultView {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (Rank rank : Rank.values()) {
-            stringBuilder.append(rank.value())
+            stringBuilder.append(rank.matchedNumbersCount())
                     .append(MATCHED_NUMBERS_MESSAGE)
                     .append(rank.prize())
                     .append(PRICE_MESSAGE)

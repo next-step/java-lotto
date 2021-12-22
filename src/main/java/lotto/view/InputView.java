@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.lotto.lottonumber.LottoNumber;
 import lotto.lotto.lottonumber.LottoNumbers;
 
 import java.util.Scanner;
@@ -19,6 +20,10 @@ public class InputView {
 
     public static LottoNumbers getWinningNumbers() {
         return LottoNumbers.from(scanner.nextLine());
+    }
+
+    public static LottoNumber getBonusBall() {
+        return new LottoNumber(Integer.parseInt(scanner.nextLine()));
     }
 
     public static void printWinningNumbersRequest() {
