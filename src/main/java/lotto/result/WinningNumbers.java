@@ -19,7 +19,7 @@ public class WinningNumbers {
 
     public Rank result(Lotto lotto) {
         long matchedLottoNumbersCount = lotto.match(winningNumbers);
-        boolean matchedBonusNumber = lotto.matchedBonusNumber(bonusNumber);
+        boolean matchedBonusNumber = lotto.isMatchedBonusNumber(bonusNumber);
 
         return Rank.valueOf(matchedLottoNumbersCount, matchedBonusNumber);
     }

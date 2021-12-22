@@ -8,12 +8,20 @@ public class LottoNumber {
     private static final int MAX = 45;
     private final int value;
 
-    public LottoNumber(int input) {
+    private LottoNumber(int input) {
         if (input < MIN || input > MAX) {
             throw new IllegalArgumentException(LOTTO_NUMBER_RANGE_MESSAGE);
         }
 
         this.value = input;
+    }
+
+    public static LottoNumber from(String input) {
+        return new LottoNumber(Integer.parseInt(input));
+    }
+
+    public static LottoNumber from(int input) {
+        return new LottoNumber(input);
     }
 
     public int getValue() {

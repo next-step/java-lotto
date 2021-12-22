@@ -1,5 +1,6 @@
 package lotto.lotto;
 
+import lotto.lotto.lottonumber.LottoNumber;
 import lotto.lotto.lottonumber.LottoNumbers;
 
 import java.util.List;
@@ -25,8 +26,12 @@ public class Lotto {
         return lottoNumbers.values();
     }
 
-    public int match(LottoNumbers winningNumbers) {
+    public long match(LottoNumbers winningNumbers) {
         return lottoNumbers.match(winningNumbers);
+    }
+
+    public boolean isMatchedBonusNumber(LottoNumber bonusNumber) {
+        return lottoNumbers.isMatchedBonusNumber(bonusNumber);
     }
 
     @Override

@@ -26,7 +26,7 @@ public class LottoNumbers {
         }
 
         List<LottoNumber> lottoNumbers = input.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(Collectors.toList());
 
         return new LottoNumbers(lottoNumbers);
@@ -48,9 +48,15 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
     }
 
-    public int match(LottoNumbers winningNumbers) {
-        values.retainAll(winningNumbers.values);
-        return values.size();
+    public long match(LottoNumbers winningNumbers) {
+        return values.stream()
+                .filter(winningNumbers.values::contains)
+                .count();
+    }
+
+    public boolean isMatchedBonusNumber(LottoNumber bonusNumber) {
+        return values.stream()
+                .anyMatch(lottoNumber -> lottoNumber.equals(bonusNumber));
     }
 
     private static boolean isValidDigits(List<Integer> input) {

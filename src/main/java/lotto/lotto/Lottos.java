@@ -1,9 +1,9 @@
 package lotto.lotto;
 
-import lotto.lotto.lottonumber.LottoNumber;
 import lotto.lotto.lottonumber.LottoNumbers;
 import lotto.result.LottoResults;
 import lotto.result.Rank;
+import lotto.result.WinningNumbers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,12 +38,9 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public LottoResults result(LottoNumbers winningNumbers, int purchaseAmount) {
+    public LottoResults result(WinningNumbers winningNumbers, int purchaseAmount) {
         Map<Rank, Long> result = values.stream()
-                .collect(groupingBy(
-                        lotto -> Rank.valueOf(lotto.match(winningNumbers)),
-                        counting())
-                );
+                .collect(groupingBy(winningNumbers::result, counting()));
 
         return LottoResults.from(result, purchaseAmount);
     }

@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.lotto.lottonumber.LottoNumber;
 import lotto.lotto.lottonumber.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -72,8 +73,17 @@ class LottoNumbersTest {
         LottoNumbers lottoNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumbers winningNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 7, 8, 9));
 
-        int matchedLottoNumbersCount = lottoNumbers.match(winningNumbers);
-        assertThat(matchedLottoNumbersCount).isEqualTo(3);
+        long matchedLottoNumbersCount = lottoNumbers.match(winningNumbers);
+        assertThat(matchedLottoNumbersCount).isEqualTo(3L);
+    }
+
+    @Test
+    @DisplayName("보너스 번호와 일치하면 true를 반환한다")
+    void shouldMatchBonusNumber() {
+        LottoNumbers lottoNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+        boolean result = lottoNumbers.isMatchedBonusNumber(LottoNumber.from("1"));
+
+        assertThat(result).isTrue();
     }
 
     private static Stream<List<Integer>> createLottoNumbers() {
