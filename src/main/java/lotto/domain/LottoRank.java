@@ -16,6 +16,7 @@ public enum LottoRank {
 
     public static final int MAX_COUNT_OF_MATCH = 6;
     public static final int MIN_COUNT_OF_MATCH = 0;
+
     private final int countOfMatch;
     private final int winningPrize;
     private final RankMatchOperation rankMatchOperation;
