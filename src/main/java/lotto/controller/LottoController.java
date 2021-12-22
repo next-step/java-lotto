@@ -11,28 +11,15 @@ public class LottoController {
 
     public void execute() {
         int purchaseAmount = InputView.purchaseAmount();
-        int numberOfManuallyPickedLottoTicket = InputView.numberOfManuallyPickedLottoTicket();
-        LottoPurchaseInformation lottoPurchaseInformation = LottoPurchaseInformation.of(purchaseAmount, numberOfManuallyPickedLottoTicket);
-        List<LottoTicket> manuallyPickedLottoTickets = InputView.manuallyPickedLottoTicket(numberOfManuallyPickedLottoTicket);
-        LottoTickets lottoTickets = LottoTicketFactory.buy(lottoPurchaseInformation, manuallyPickedLottoTickets);
-        OutputView.printNumberOfPurchase(lottoPurchaseInformation);
-        printLottoTickets(lottoTickets);
-        LottoWinningNumbers lottoWinningNumbers = inputLottoWinningNumbers();
+        List<String> manuallyPickedLottoTickets = InputView.manuallyPickedLottoTicket();
+        LottoPurchaseInformation purchaseInfo = LottoPurchaseInformation.of(purchaseAmount, manuallyPickedLottoTickets);
+        OutputView.printNumberOfPurchase(purchaseInfo);
+        LottoTickets lottoTickets = LottoMachine.generateLottoTickets(purchaseInfo);
+        OutputView.printLottoNumbers(lottoTickets);
+        LottoWinningNumbers lottoWinningNumbers = InputView.inputLottoWinningNumbers();
         printLottoWinInformation(lottoTickets, lottoWinningNumbers);
     }
-
-
-
-    private void printLottoTickets(LottoTickets lottoTickets) {
-        OutputView.printLottoNumbers(lottoTickets);
-    }
-
-    private LottoWinningNumbers inputLottoWinningNumbers() {
-        String winningLottoTicketNumber = InputView.winningLottoTicketNumber();
-        String bonusNumber = InputView.bonusNumber();
-        return LottoWinningNumbers.from(winningLottoTicketNumber, bonusNumber);
-    }
-
+    
     private void printLottoWinInformation(LottoTickets lottoTickets, LottoWinningNumbers lottoWinningNumbers) {
         LottoTicketsWinInformation lottoTicketsWinInformation = lottoTickets.winInformation(lottoWinningNumbers);
         Map<LottoRank, Integer> winningStaticsMap = lottoTicketsWinInformation.winningStatics();

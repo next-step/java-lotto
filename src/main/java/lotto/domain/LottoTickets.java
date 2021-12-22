@@ -1,13 +1,20 @@
 package lotto.domain;
 
+import lotto.domain.strategy.LottoTicketsGenerator;
+
 import java.util.*;
 
 public class LottoTickets {
-    private final List<LottoTicket> lottoTickets;
+    private final List<LottoTicket> lottoTickets = new ArrayList<>();
     private final int price;
 
-    LottoTickets(List<LottoTicket> lottoTickets, int price) {
-        this.lottoTickets = lottoTickets;
+    public LottoTickets(LottoTicketsGenerator... generators) {
+        int price = 0;
+        for (LottoTicketsGenerator generator : generators) {
+            List<LottoTicket> lottoTickets = generator.generate();
+            this.lottoTickets.addAll(lottoTickets);
+            price += generator.ticketsPrice();
+        }
         this.price = price;
     }
 
@@ -15,7 +22,7 @@ public class LottoTickets {
         return LottoTicketsWinInformation.from(winningStaticsMap(lottoWinningNumbers), price);
     }
 
-    public Map<LottoRank, Integer> winningStaticsMap(LottoWinningNumbers lottoWinningNumbers) {
+    private Map<LottoRank, Integer> winningStaticsMap(LottoWinningNumbers lottoWinningNumbers) {
         Map<LottoRank, Integer> winningStaticsMap = initiateWinningStaticsMap();
         lottoTickets.forEach(lottoTicket -> {
             LottoRank lottoRank = lottoTicket.getLottoRank(lottoWinningNumbers);
@@ -37,15 +44,8 @@ public class LottoTickets {
 
     }
 
-    public int size() {
-        return lottoTickets.size();
-    }
-
     public List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    public double getPrice() {
-        return this.price;
-    }
 }

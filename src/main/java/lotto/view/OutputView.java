@@ -18,11 +18,11 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printNumberOfPurchase(LottoPurchaseInformation lottoPurchaseInformation) {
-        int numberOfManuallyPickedLottoTicket = lottoPurchaseInformation.numberOfManuallyPickedLottoTicket();
-        int numberOfAutomaticallyPickedLottoTicket = lottoPurchaseInformation.numberOfAutomaticallyPickedLottoTicket();
+    public static void printNumberOfPurchase(LottoPurchaseInformation purchaseInfo) {
+        int numberOfManualTicket = purchaseInfo.numberOfManualTicket();
+        int numberOfAutomaticTicket = purchaseInfo.numberOfAutomaticTicket();
 
-        String formattedString = String.format(NUMBER_OF_PURCHASE, numberOfManuallyPickedLottoTicket, numberOfAutomaticallyPickedLottoTicket);
+        String formattedString = String.format(NUMBER_OF_PURCHASE, numberOfManualTicket, numberOfAutomaticTicket);
         System.out.println(formattedString);
     }
 

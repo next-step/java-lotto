@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoTicket;
+import lotto.domain.LottoWinningNumbers;
 import lotto.exception.LottoException;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class InputView {
         }
     }
 
-    public static int numberOfManuallyPickedLottoTicket() {
+    private static int numberOfManuallyPickedLottoTicket() {
         System.out.println(NUMBER_OF_MANUALLY_PICKED_LOTTOTICKET);
         String numberOfManuallyPickedLottoTicket = SCANNER.nextLine();
         try {
@@ -38,23 +38,28 @@ public class InputView {
         }
     }
 
-    public static List<LottoTicket> manuallyPickedLottoTicket(int number) {
+    public static List<String> manuallyPickedLottoTicket() {
+        int number = numberOfManuallyPickedLottoTicket();
         System.out.println(MANUALLY_PICKED_LOTTOTICKET);
-        List<LottoTicket> manuallyPickedLottoTicket = new ArrayList<>();
+        List<String> manuallyPickedLottoTicket = new ArrayList<>();
         for (int i = 0; i < number; i++) {
             String input = SCANNER.nextLine();
-            LottoTicket lottoTicket = LottoTicket.from(input);
-            manuallyPickedLottoTicket.add(lottoTicket);
+            manuallyPickedLottoTicket.add(input);
         }
         return manuallyPickedLottoTicket;
     }
 
-    public static String winningLottoTicketNumber() {
+    public static LottoWinningNumbers inputLottoWinningNumbers() {
+        return LottoWinningNumbers.from(winningLottoTicketNumber(), bonusNumber());
+
+    }
+
+    private static String winningLottoTicketNumber() {
         System.out.println(WINNING_LOTTOTICKET_NUMBERS);
         return SCANNER.nextLine();
     }
 
-    public static String bonusNumber() {
+    private static String bonusNumber() {
         System.out.println(BONUS_NUMBER);
         return SCANNER.nextLine();
     }

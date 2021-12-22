@@ -5,6 +5,7 @@ import lotto.exception.LottoException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.PatternSyntaxException;
 import java.util.stream.Collectors;
 
 import static lotto.domain.LottoProperties.NUMBER_OF_LOTTO_NUMBERS;
@@ -40,8 +41,12 @@ public class LottoTicket {
 
 
     public static LottoTicket from(String numbers) {
-        String[] lottoNumbers = numbers.split(SPLITTER);
-        return LottoTicket.from(lottoNumbers);
+        try {
+            String[] lottoNumbers = numbers.split(SPLITTER);
+            return LottoTicket.from(lottoNumbers);
+        } catch (PatternSyntaxException e) {
+            throw new LottoException("로또 번호 입력 형식이 틀렸습니다");
+        }
     }
 
     private void validate(List<LottoNumber> lottoNumbers) {
