@@ -30,7 +30,7 @@ public enum LottoRank {
     public static LottoRank valueOf(int countOfMatch, boolean matchBonus) {
         validateCountOfMatch(countOfMatch);
         return Arrays.stream(values())
-                .filter(r -> r.matches(countOfMatch, matchBonus))
+                .filter(rank -> rank.matches(countOfMatch, matchBonus))
                 .findFirst()
                 .orElseThrow(() -> new LottoException("매칭되는 Rank가 없습니다"));
 
