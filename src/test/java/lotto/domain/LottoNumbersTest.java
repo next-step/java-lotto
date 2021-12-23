@@ -31,7 +31,7 @@ public class LottoNumbersTest {
                 lottoNumber6
         );
 
-        LottoNumbers numbers = new LottoNumbers(Sets.newHashSet(lottoNumberList));
+        LottoNumbers numbers = new LottoNumbers(lottoNumberList);
 
         assertTrue(numbers.contains(lottoNumber1));
         assertTrue(numbers.contains(lottoNumber2));
