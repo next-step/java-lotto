@@ -71,11 +71,7 @@ public class LottoTicket {
     public boolean matchesBonus(LottoWinningNumbers lottoWinningNumbers) {
         return lottoWinningNumbers.matchesBonus(lottoNumbers);
     }
-
-    public int size() {
-        return lottoNumbers.size();
-    }
-
+    
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }

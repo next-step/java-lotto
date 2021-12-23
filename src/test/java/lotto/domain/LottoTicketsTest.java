@@ -36,7 +36,6 @@ class LottoTicketsTest {
         LottoTickets lottoTickets = new LottoTickets(manualLottoTicketsGenerator.generate());
         LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.from("1, 2, 3, 4, 5, 9", "6");
 
-
         //when
         WinningResult winInfo = lottoTickets.winningResult(lottoWinningNumbers, 2000);
 
