@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.stat.LottoRank;
+
 import java.util.Objects;
 
 public class Lotto {
@@ -12,6 +14,12 @@ public class Lotto {
 
     public LottoNumbers getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public LottoRank calculateRank(Lotto winningLotto) {
+        int matchedNumberCount = lottoNumbers.calculateMatchedNumberCount(winningLotto.lottoNumbers);
+
+        return LottoRank.of(matchedNumberCount);
     }
 
     @Override

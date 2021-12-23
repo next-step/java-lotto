@@ -18,8 +18,12 @@ public class Money {
         return money % number != 0;
     }
 
-    public int divideBy(int number) {
-        return money / number;
+    public double divideBy(int number) {
+        return (double) money / number;
+    }
+
+    public double divideBy(Money other) {
+        return (double) money / other.money;
     }
 
     @Override
@@ -35,4 +39,8 @@ public class Money {
         return Objects.hash(money);
     }
 
+    @Override
+    public String toString() {
+        return money+"";
+    }
 }

@@ -24,6 +24,12 @@ public class LottoNumbers {
         return numbers.contains(lottoNumber);
     }
 
+    public int calculateMatchedNumberCount(LottoNumbers other) {
+        return (int) this.numbers.stream()
+                .filter(other::contains)
+                .count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

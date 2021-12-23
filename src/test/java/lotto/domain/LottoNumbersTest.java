@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -45,6 +44,20 @@ public class LottoNumbersTest {
     }
 
     @Test
+    @DisplayName("calculateMatchedNumberCount 테스트: 일치하는 number의 개수를 리턴한다.")
+    void calculateMatchedNumberCount() {
+        List<LottoNumber> lottoNumberList = IntStream.range(1, 11)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        LottoNumbers lottoNumbers1 = new LottoNumbers(lottoNumberList.subList(0, 6));
+        LottoNumbers lottoNumbers2 = new LottoNumbers(lottoNumberList.subList(4, 10));
+
+        assertEquals(2, lottoNumbers1.calculateMatchedNumberCount(lottoNumbers2));
+        assertEquals(2, lottoNumbers2.calculateMatchedNumberCount(lottoNumbers1));
+    }
+
+    @Test
     @DisplayName("toString 테스트: 갖고있는 숫자들을 ', '로 조인하고 양쪽이 대괄호로 둘러쌓인 형태의 문자열을 리턴한다.")
     void toStringTest() {
         List<LottoNumber> lottoNumberList = IntStream.range(1, 7)
@@ -55,7 +68,7 @@ public class LottoNumbersTest {
 
         String expectedResult = "[1, 2, 3, 4, 5, 6]";
 
-        assertEquals(lottoNumbers.toString(), expectedResult);
+        assertEquals(expectedResult, lottoNumbers.toString());
     }
 
 }

@@ -26,7 +26,7 @@ public class LottoNumberTest {
 
         LottoNumber lottoNumber = new LottoNumber(number);
 
-        assertEquals(lottoNumber.toString(), number+"");
+        assertEquals(number+"", lottoNumber.toString());
     }
 
 }

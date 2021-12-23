@@ -12,7 +12,7 @@ public class LottoMachine {
 
     public Lottos buy(Money money, LottoGenerator lottoGenerator) {
         checkMoney(money);
-        int lottoCount = money.divideBy(LOTTO_PRICE);
+        int lottoCount = (int) money.divideBy(LOTTO_PRICE);
 
         List<Lotto> lottoList = IntStream.range(0, lottoCount)
                 .mapToObj((num) -> lottoGenerator.generate())

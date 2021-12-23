@@ -36,4 +36,24 @@ public class MoneyTest {
         assertEquals(2, money.divideBy(5000));
     }
 
+    @Test
+    @DisplayName("divideBy 테스트: money를 인자값으로 나눈 몫의 Money 객체을 리턴한다.")
+    void divideBy2() {
+        Money money = new Money(10000);
+
+        assertEquals(10, money.divideBy(new Money(1000)));
+        assertEquals(5, money.divideBy(new Money(2000)));
+        assertEquals(2, money.divideBy(new Money(5000)));
+    }
+
+    @Test
+    @DisplayName("toString 테스트: 갖고있는 숫자의 문자열을 리턴한다.")
+    void toStringTest() {
+        int number = 1000;
+
+        Money money = new Money(number);
+
+        assertEquals(number+"", money.toString());
+    }
+
 }
