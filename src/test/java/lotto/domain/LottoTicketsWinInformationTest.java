@@ -18,7 +18,7 @@ class LottoTicketsWinInformationTest {
         //given
         List<String> manualLottoTickets = Arrays.asList("1, 2, 3, 4, 5, 9", "1, 2, 3, 4, 5, 7");
         ManualLottoTicketsGenerator manualLottoTicketsGenerator = new ManualLottoTicketsGenerator(manualLottoTickets);
-        LottoTickets lottoTickets = new LottoTickets(manualLottoTicketsGenerator);
+        LottoTickets lottoTickets = new LottoTickets(manualLottoTicketsGenerator.generate());
         LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.from("1, 2, 3, 4, 5, 9", "6");
         LottoTicketsWinInformation winInfo = lottoTickets.winInformation(lottoWinningNumbers, 2000);
 
@@ -42,7 +42,7 @@ class LottoTicketsWinInformationTest {
         //given
         List<String> manualLottoTickets = Arrays.asList("1, 2, 3, 4, 5, 6", "1, 2, 3, 24, 25, 27");
         ManualLottoTicketsGenerator manualLottoTicketsGenerator = new ManualLottoTicketsGenerator(manualLottoTickets);
-        LottoTickets lottoTickets = new LottoTickets(manualLottoTicketsGenerator);
+        LottoTickets lottoTickets = new LottoTickets(manualLottoTicketsGenerator.generate());
         LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.from("1, 2, 3, 4, 5, 9", "6");
         LottoTicketsWinInformation winInfo = lottoTickets.winInformation(lottoWinningNumbers, 2000);
 
@@ -62,7 +62,7 @@ class LottoTicketsWinInformationTest {
         //given
         List<String> manualLottoTickets = Arrays.asList("1, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 22");
         ManualLottoTicketsGenerator manualLottoTicketsGenerator = new ManualLottoTicketsGenerator(manualLottoTickets);
-        LottoTickets lottoTickets = new LottoTickets(manualLottoTicketsGenerator);
+        LottoTickets lottoTickets = new LottoTickets(manualLottoTicketsGenerator.generate());
         LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.from("1, 2, 3, 4, 5, 6", "45");
         LottoTicketsWinInformation winInfo = lottoTickets.winInformation(lottoWinningNumbers, 2000);
 

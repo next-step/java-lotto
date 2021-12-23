@@ -1,16 +1,13 @@
 package lotto.domain;
 
-import lotto.domain.strategy.LottoTicketsGenerator;
-
 import java.util.*;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets = new ArrayList<>();
 
-    public LottoTickets(LottoTicketsGenerator... generators) {
-        for (LottoTicketsGenerator generator : generators) {
-            List<LottoTicket> lottoTickets = generator.generate();
-            this.lottoTickets.addAll(lottoTickets);
+    public LottoTickets(List<LottoTicket>... lottoTicketLists) {
+        for (List<LottoTicket> lottoTicketList : lottoTicketLists) {
+            this.lottoTickets.addAll(lottoTicketList);
         }
     }
 
