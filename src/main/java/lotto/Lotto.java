@@ -5,8 +5,7 @@ import java.util.List;
 import lotto.controller.LottoController;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
-import lotto.dto.LottoResult;
-import lotto.dto.PrizeStack;
+import lotto.domain.LottoResult;
 import lotto.view.ResultView;
 
 public class Lotto {

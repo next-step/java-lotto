@@ -1,4 +1,4 @@
-package lotto.dto;
+package lotto.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import lotto.domain.CalculatePrize;
+import lotto.dto.PrizeStack;
 
 public class LottoResult {
 

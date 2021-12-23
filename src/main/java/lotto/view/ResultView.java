@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
-import lotto.dto.LottoResult;
+import lotto.domain.LottoResult;
 
 public class ResultView {
 
