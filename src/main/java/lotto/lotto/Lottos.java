@@ -24,8 +24,22 @@ public class Lottos {
         this.values = values;
     }
 
+    public static Lottos of(int purchaseAmount, Lottos manualLottos) {
+        int autoLottosPurchaseAmount = calculateRemainingPurchaseAmount(purchaseAmount, manualLottos);
+        Lottos autoLottos = from(autoLottosPurchaseAmount);
+        return manualLottos.add(autoLottos);
+    }
+
     public static Lottos from(List<Lotto> values) {
         return new Lottos(values);
+    }
+
+    public static Lottos from(String[] inputs) {
+        List<Lotto> lottos = Arrays.stream(inputs)
+                .map(Lotto::from)
+                .collect(Collectors.toList());
+
+        return new Lottos(lottos);
     }
 
     public static Lottos from(int purchaseAmount) {
@@ -38,21 +52,6 @@ public class Lottos {
                 }).collect(Collectors.toList());
 
         return new Lottos(lottos);
-    }
-
-    public static Lottos from(String[] inputs) {
-        List<Lotto> lottos = Arrays.stream(inputs)
-                .map(Lotto::from)
-                .collect(Collectors.toList());
-
-        return new Lottos(lottos);
-    }
-
-    public static Lottos of(int purchaseAmount, Lottos manualLottos) {
-        int autoLottosPurchaseAmount = getAutoLottosPurchaseAmount(purchaseAmount, manualLottos);
-
-        Lottos autoLottos = from(autoLottosPurchaseAmount);
-        return autoLottos.add(manualLottos);
     }
 
     public LottoResults result(WinningNumbers winningNumbers, int purchaseAmount) {
@@ -70,7 +69,7 @@ public class Lottos {
         return values.size();
     }
 
-    private static int getAutoLottosPurchaseAmount(int purchaseAmount, Lottos manualLottos) {
+    private static int calculateRemainingPurchaseAmount(int purchaseAmount, Lottos manualLottos) {
         return purchaseAmount - manualLottos.values.size() * LOTTO_PRICE;
     }
 
