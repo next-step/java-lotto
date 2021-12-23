@@ -8,25 +8,20 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 import static lotto.domain.LottoProperties.*;
 
 public class AutomaticLottoTicketsGenerator implements LottoTicketsGenerator {
 
-    public static final int LOTTO_NUMBER_MIN_INDEX = 0;
-    private static final int LOTTO_NUMBER_MAX_INDEX = NUMBER_OF_LOTTO_NUMBERS - 1;
     private static final List<LottoNumber> NUMBERS = IntStream
             .rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
             .mapToObj(LottoNumber::from)
             .collect(toList());
 
     private final int numberOfTickets;
-//    private final int ticketsPrice;
 
     public AutomaticLottoTicketsGenerator(int numberOfTickets) {
         this.numberOfTickets = numberOfTickets;
-//        this.ticketsPrice = ticketPrice * numberOfTickets;
     }
 
     @Override
@@ -40,16 +35,11 @@ public class AutomaticLottoTicketsGenerator implements LottoTicketsGenerator {
 
     private static LottoTicket generateLottoTicket() {
         Collections.shuffle(NUMBERS);
-        List<LottoNumber> lottoNumbers = IntStream.rangeClosed(LOTTO_NUMBER_MIN_INDEX, LOTTO_NUMBER_MAX_INDEX)
-                .mapToObj(NUMBERS::get)
-                .sorted()
-                .collect(collectingAndThen(toList(), Collections::unmodifiableList));
+        List<LottoNumber> lottoNumbers = NUMBERS.stream()
+                .limit(NUMBER_OF_LOTTO_NUMBERS)
+                .collect(toList());
         return LottoTicket.from(lottoNumbers);
     }
-//
-//    @Override
-//    public int ticketsPrice() {
-//        return this.ticketsPrice;
-//    }
+
 
 }
