@@ -1,6 +1,9 @@
 package lotto.domain;
 
 import lotto.exception.LottoApplicationException;
+import org.assertj.core.util.Sets;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,18 +15,27 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoMachineTest {
 
-    private LottoGenerator lottoGenerator = () -> {
-        List<LottoNumber> lottoNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
-        );
+    private LottoGenerator lottoGenerator;
 
-        return new Lotto(new LottoNumbers(lottoNumbers));
-    };
+    @BeforeEach
+    void init() {
+        lottoGenerator = () -> {
+            LottoNumbers lottoNumbers = new LottoNumbers(
+                    Sets.newHashSet(
+                            Arrays.asList(
+                                    new LottoNumber(1),
+                                    new LottoNumber(2),
+                                    new LottoNumber(3),
+                                    new LottoNumber(4),
+                                    new LottoNumber(5),
+                                    new LottoNumber(6)
+                            )
+                    )
+            );
+
+            return new Lotto(lottoNumbers);
+        };
+    }
 
     @Test
     @DisplayName("buy 테스트: money가 1000으로 나누어떨어지지 않으면 LottoApplicationException 발생")

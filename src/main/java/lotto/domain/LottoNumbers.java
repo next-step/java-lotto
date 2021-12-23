@@ -1,48 +1,30 @@
 package lotto.domain;
 
+import lotto.exception.LottoApplicationException;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumbers {
 
-    private final List<LottoNumber> numbers;
+    public static final int LOTTO_NUMBERS_COUNT = 6;
 
-    public LottoNumbers(int startInclusive, int endInclusive) {
-        this(IntStream.range(startInclusive, endInclusive+1)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList()));
-    }
+    private final Set<LottoNumber> numbers;
 
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    public LottoNumbers(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBERS_COUNT) {
+            throw new LottoApplicationException("로또 숫자는 6개여야 합니다.");
+        }
+
         this.numbers = lottoNumbers;
-    }
-
-    public LottoNumbers shuffle() {
-        LottoNumbers lottoNumbers = new LottoNumbers(this.numbers);
-        Collections.shuffle(lottoNumbers.numbers);
-        return lottoNumbers;
-    }
-
-    public LottoNumbers take(int n){
-        return new LottoNumbers(this.numbers.stream()
-                .limit(n).collect(Collectors.toList()));
-    }
-
-    public LottoNumbers sort() {
-        LottoNumbers lottoNumbers = new LottoNumbers(this.numbers);
-        Collections.sort(lottoNumbers.numbers);
-        return lottoNumbers;
     }
 
     public boolean contains(LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
-    }
-
-    public int size() {
-        return numbers.size();
     }
 
     @Override
