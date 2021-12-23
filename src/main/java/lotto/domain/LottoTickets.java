@@ -41,7 +41,6 @@ public class LottoTickets {
                     winningStaticsMap.put(lottoRank, count);
                 });
         return winningStaticsMap;
-
     }
 
     public List<LottoTicket> getLottoTickets() {

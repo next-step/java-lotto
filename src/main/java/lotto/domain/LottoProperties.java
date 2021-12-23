@@ -8,7 +8,6 @@ public final class LottoProperties {
 
     private LottoProperties() {
     }
-
-
+    
 }
 

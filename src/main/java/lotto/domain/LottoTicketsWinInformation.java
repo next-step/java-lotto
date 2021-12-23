@@ -28,7 +28,6 @@ public class LottoTicketsWinInformation {
             int prize = lottoRank.winningPrize();
             return count * prize;
         }).sum();
-
     }
 
     public double earningRate() {

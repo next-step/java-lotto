@@ -44,7 +44,6 @@ public class AutomaticLottoTicketsGenerator implements LottoTicketsGenerator {
                 .mapToObj(NUMBERS::get)
                 .sorted()
                 .collect(collectingAndThen(toList(), Collections::unmodifiableList));
-
         return LottoTicket.from(lottoNumbers);
     }
 

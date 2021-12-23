@@ -27,7 +27,6 @@ public class LottoWinningNumbers {
                 .map(LottoNumber::from)
                 .collect(Collectors.toList());
         LottoNumber bonusNumber = LottoNumber.from(bonus);
-
         return new LottoWinningNumbers(lottoWinningNumberList, bonusNumber);
     }
 

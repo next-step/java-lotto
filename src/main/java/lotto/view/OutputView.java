@@ -21,7 +21,6 @@ public class OutputView {
     public static void printNumberOfPurchase(LottoPurchaseInformation purchaseInfo) {
         int numberOfManualTicket = purchaseInfo.numberOfManualTicket();
         int numberOfAutomaticTicket = purchaseInfo.numberOfAutomaticTicket();
-
         String formattedString = String.format(NUMBER_OF_PURCHASE, numberOfManualTicket, numberOfAutomaticTicket);
         System.out.println(formattedString);
     }
@@ -46,7 +45,6 @@ public class OutputView {
             String formattedString = String.format(format, lottoRank.countOfMatch(), lottoRank.winningPrize(), map.get(lottoRank));
             System.out.println(formattedString);
         }
-
         System.out.println();
     }
 

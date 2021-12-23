@@ -25,7 +25,6 @@ public enum LottoRank {
         this.countOfMatch = countOfMatch;
         this.winningPrize = winningPrize;
         this.rankMatchOperation = rankMatchOperation;
-
     }
 
     public static LottoRank valueOf(int countOfMatch, boolean matchBonus) {
@@ -34,7 +33,6 @@ public enum LottoRank {
                 .filter(rank -> rank.matches(countOfMatch, matchBonus))
                 .findFirst()
                 .orElseThrow(() -> new LottoException("매칭되는 Rank가 없습니다"));
-
     }
 
     private static void validateCountOfMatch(int countOfMatch) {

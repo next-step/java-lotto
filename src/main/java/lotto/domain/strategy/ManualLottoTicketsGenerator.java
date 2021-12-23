@@ -16,7 +16,6 @@ public class ManualLottoTicketsGenerator implements LottoTicketsGenerator {
         ticketsPrice = lottoTickets.size() * ticketPrice;
     }
 
-
     @Override
     public List<LottoTicket> generate() {
         return lottoTickets.stream()
