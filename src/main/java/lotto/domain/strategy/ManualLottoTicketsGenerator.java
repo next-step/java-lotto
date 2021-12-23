@@ -8,25 +8,17 @@ import static java.util.stream.Collectors.toList;
 
 public class ManualLottoTicketsGenerator implements LottoTicketsGenerator {
 
-    private final List<String> lottoTickets;
-//    private final int ticketsPrice;
+    private final List<String> manuallyPickedLottoTickets;
 
-    public ManualLottoTicketsGenerator(List<String> lottoTickets) {
-        this.lottoTickets = lottoTickets;
-//        ticketsPrice = lottoTickets.size() * ticketPrice;
+    public ManualLottoTicketsGenerator(List<String> manuallyPickedLottoTickets) {
+        this.manuallyPickedLottoTickets = manuallyPickedLottoTickets;
     }
 
     @Override
     public List<LottoTicket> generate() {
-        return lottoTickets.stream()
+        return manuallyPickedLottoTickets.stream()
                 .map(LottoTicket::from)
                 .collect(toList());
     }
-
-//    @Override
-//    public int ticketsPrice() {
-//        return ticketsPrice;
-//    }
-
 
 }

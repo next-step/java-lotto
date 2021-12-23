@@ -5,18 +5,18 @@ import lotto.exception.LottoException;
 import java.util.List;
 
 public class LottoPurchaseInformation {
-    private final static int LOTTO_TICKET_PRICE = 1000;
+    private static final int LOTTO_TICKET_PRICE = 1000;
 
     private final int numberOfManualTicket;
     private final int numberOfAutomaticTicket;
-    private final List<String> manuallyPickedLottoTickets;
     private final int lottoTicketsPrice;
+    private final List<String> manuallyPickedLottoTickets;
 
-    private LottoPurchaseInformation(int numberOfManualTicket, int numberOfAutomaticTicket, List<String> manuallyPickedLottoTickets, int lottoTicketsPrice) {
+    private LottoPurchaseInformation(int numberOfManualTicket, int numberOfAutomaticTicket, int lottoTicketsPrice, List<String> manuallyPickedLottoTickets) {
         this.numberOfManualTicket = numberOfManualTicket;
         this.numberOfAutomaticTicket = numberOfAutomaticTicket;
-        this.manuallyPickedLottoTickets = manuallyPickedLottoTickets;
         this.lottoTicketsPrice = lottoTicketsPrice;
+        this.manuallyPickedLottoTickets = manuallyPickedLottoTickets;
     }
 
     public static LottoPurchaseInformation of(int money, List<String> manuallyPickedLottoTickets) {
@@ -24,7 +24,11 @@ public class LottoPurchaseInformation {
         int numberOfManualTicket = manuallyPickedLottoTickets.size();
         validateNumberOfLottoTicket(numberOfLottoTicket, numberOfManualTicket);
         int numberOfAutomaticTicket = numberOfLottoTicket - numberOfManualTicket;
-        return new LottoPurchaseInformation(numberOfManualTicket, numberOfAutomaticTicket, manuallyPickedLottoTickets, numberOfLottoTicket * LOTTO_TICKET_PRICE);
+        return new LottoPurchaseInformation(
+                numberOfManualTicket,
+                numberOfAutomaticTicket,
+                numberOfLottoTicket * LOTTO_TICKET_PRICE,
+                manuallyPickedLottoTickets);
     }
 
     private static void validateNumberOfLottoTicket(int numberOfLottoTicket, int numberOfManualTicket) {
