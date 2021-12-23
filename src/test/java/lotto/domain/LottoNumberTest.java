@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottoNumberTest {
 
@@ -16,6 +17,16 @@ public class LottoNumberTest {
 
         assertThatThrownBy(() -> new LottoNumber(46))
                 .isInstanceOf(LottoApplicationException.class);
+    }
+
+    @Test
+    @DisplayName("toString 테스트: 갖고있는 숫자의 문자열을 리턴한다.")
+    void toStringTest() {
+        int number = 1;
+
+        LottoNumber lottoNumber = new LottoNumber(number);
+
+        assertEquals(lottoNumber.toString(), number+"");
     }
 
 }

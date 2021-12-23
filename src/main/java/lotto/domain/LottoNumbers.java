@@ -4,6 +4,7 @@ import lotto.exception.LottoApplicationException;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
@@ -34,6 +35,21 @@ public class LottoNumbers {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+
+        String numbersString = numbers.stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(", "));
+
+        sb.append(numbersString);
+        sb.append("]");
+
+        return sb.toString();
     }
 
 }

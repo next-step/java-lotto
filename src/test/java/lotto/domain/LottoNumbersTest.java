@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,6 +42,20 @@ public class LottoNumbersTest {
         assertTrue(numbers.contains(lottoNumber5));
         assertTrue(numbers.contains(lottoNumber6));
         assertFalse(numbers.contains(lottoNumber7));
+    }
+
+    @Test
+    @DisplayName("toString 테스트: 갖고있는 숫자들을 ', '로 조인하고 양쪽이 대괄호로 둘러쌓인 형태의 문자열을 리턴한다.")
+    void toStringTest() {
+        List<LottoNumber> lottoNumberList = IntStream.range(1, 7)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
+
+        String expectedResult = "[1, 2, 3, 4, 5, 6]";
+
+        assertEquals(lottoNumbers.toString(), expectedResult);
     }
 
 }
