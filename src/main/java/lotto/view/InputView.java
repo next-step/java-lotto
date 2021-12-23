@@ -40,6 +40,9 @@ public class InputView {
 
     public static List<String> manuallyPickedLottoTicket() {
         int number = numberOfManuallyPickedLottoTicket();
+        if (number == 0) {
+            return new ArrayList<>();
+        }
         System.out.println(MANUALLY_PICKED_LOTTOTICKET);
         List<String> manuallyPickedLottoTicket = new ArrayList<>();
         for (int i = 0; i < number; i++) {
