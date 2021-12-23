@@ -4,8 +4,11 @@ import java.util.Objects;
 
 public class LottoNumber {
     private static final String LOTTO_NUMBER_RANGE_MESSAGE = "로또 번호는 1 이상 45 이하여야 합니다.";
+    public static final String NUMERIC = "[+-]?\\d*(\\.\\d+)?";
+
     private static final int MIN = 1;
     private static final int MAX = 45;
+
     private final int value;
 
     private LottoNumber(int input) {
@@ -17,6 +20,10 @@ public class LottoNumber {
     }
 
     public static LottoNumber from(String input) {
+        if (isNullOrEmpty(input) || !isNumeric(input)) {
+            throw new IllegalArgumentException("로또 번호를 입력해주세요.");
+        }
+
         return new LottoNumber(Integer.parseInt(input));
     }
 
@@ -26,6 +33,14 @@ public class LottoNumber {
 
     public int getValue() {
         return value;
+    }
+
+    private static boolean isNullOrEmpty(String input) {
+        return input == null || input.length() == 0;
+    }
+
+    private static boolean isNumeric(String input) {
+        return input.matches(NUMERIC);
     }
 
     @Override
