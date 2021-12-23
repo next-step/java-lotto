@@ -11,8 +11,7 @@ public class LottoTicketsWinInformation {
         this.winningStaticsMap = winningStaticsMap;
         this.lottoTicketsPrice = lottoTicketsPrice;
     }
-
-
+    
     public static LottoTicketsWinInformation from(Map<LottoRank, Integer> winningStaticsMap, int price) {
         return new LottoTicketsWinInformation(winningStaticsMap, price);
     }

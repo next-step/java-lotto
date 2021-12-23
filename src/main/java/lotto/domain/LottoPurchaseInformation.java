@@ -10,13 +10,13 @@ public class LottoPurchaseInformation {
     private final int numberOfManualTicket;
     private final int numberOfAutomaticTicket;
     private final List<String> manuallyPickedLottoTickets;
-    private final int money;
+    private final int lottoTicketsPrice;
 
-    private LottoPurchaseInformation(int numberOfManualTicket, int numberOfAutomaticTicket, List<String> manuallyPickedLottoTickets, int money) {
+    private LottoPurchaseInformation(int numberOfManualTicket, int numberOfAutomaticTicket, List<String> manuallyPickedLottoTickets, int lottoTicketsPrice) {
         this.numberOfManualTicket = numberOfManualTicket;
         this.numberOfAutomaticTicket = numberOfAutomaticTicket;
         this.manuallyPickedLottoTickets = manuallyPickedLottoTickets;
-        this.money = money;
+        this.lottoTicketsPrice = lottoTicketsPrice;
     }
 
     public static LottoPurchaseInformation of(int money, List<String> manuallyPickedLottoTickets) {
@@ -34,7 +34,7 @@ public class LottoPurchaseInformation {
     }
 
     public int lottoTicketsPrice() {
-        return money;
+        return lottoTicketsPrice;
     }
 
     public int numberOfManualTicket() {
