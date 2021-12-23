@@ -7,10 +7,10 @@ import lotto.view.ConsoleOutputView;
 public class LottoApplication {
 
     public static void main(String[] args) {
-        ConsoleInputView innputView = new ConsoleInputView();
+        ConsoleInputView inputView = new ConsoleInputView();
         ConsoleOutputView outputView = new ConsoleOutputView();
 
-        Money moneyToPay = innputView.inputMoneyToPay();
+        Money moneyToPay = inputView.inputMoneyToPay();
 
         LottoGenerator lottoGenerator = new LottoAutoGenerator();
 
@@ -19,6 +19,10 @@ public class LottoApplication {
         Lottos lottos = lottoMachine.buy(moneyToPay, lottoGenerator);
 
         outputView.printLottos(lottos);
+
+        Lotto winningLotto = inputView.inputWinningLotto();
+
+
     }
 
 }

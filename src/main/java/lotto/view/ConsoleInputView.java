@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
@@ -53,17 +54,19 @@ public class ConsoleInputView implements Closeable {
         return new Money(money);
     }
 
-    public LottoNumbers inputWinningNumbers() {
+    public Lotto inputWinningLotto() {
         printWinningNumbersInputPromptMessage();
 
         String[] winningNumbersStrings = nextLine().split(WINNING_NUMBERS_INPUT_DELIMITER);
 
-        List<LottoNumber> lottoNumbers = Arrays.stream(winningNumbersStrings)
+        List<LottoNumber> lottoNumberList = Arrays.stream(winningNumbersStrings)
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
 
-        return new LottoNumbers(lottoNumbers);
+        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
+
+        return new Lotto(lottoNumbers);
     }
 
     @Override
