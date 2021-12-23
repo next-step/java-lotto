@@ -1,14 +1,14 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.view.MoneyInputView;
+import lotto.view.ConsoleInputView;
 
 public class LottoApplication {
 
     public static void main(String[] args) {
 
-        MoneyInputView moneyInputView = new MoneyInputView();
-        Money moneyToPay = moneyInputView.inputMoneyToPay();
+        ConsoleInputView consoleInputView = new ConsoleInputView();
+        Money moneyToPay = consoleInputView.inputMoneyToPay();
 
         LottoGenerator lottoGenerator = new LottoAutoGenerator();
 

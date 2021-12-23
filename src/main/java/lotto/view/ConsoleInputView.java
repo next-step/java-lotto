@@ -7,14 +7,14 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class MoneyInputView implements Closeable {
+public class ConsoleInputView implements Closeable {
 
     private static final String MONEY_INPUT_PROMPT_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String INPUT_FORMAT_EXCEPTION_MESSAGE = "구매금액은 숫자만 입력하세요.";
 
     private final Scanner scanner;
 
-    public MoneyInputView() {
+    public ConsoleInputView() {
         scanner = new Scanner(System.in);
     }
 
