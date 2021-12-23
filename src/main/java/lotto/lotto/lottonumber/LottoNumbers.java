@@ -65,9 +65,11 @@ public class LottoNumbers {
     }
 
     private static boolean isDuplicated(List<Integer> input) {
-        return input.stream()
+        long count = input.stream()
                 .distinct()
-                .count() != input.size();
+                .count();
+
+        return count != input.size();
     }
 
     @Override
