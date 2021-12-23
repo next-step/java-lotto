@@ -1,6 +1,7 @@
 package lotto;
 
-import lotto.lotto.LottoNumbers;
+import lotto.lotto.lottonumber.LottoNumber;
+import lotto.lotto.lottonumber.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,6 +25,15 @@ class LottoNumbersTest {
     @DisplayName("LottoNumbers 객체를 생성한다")
     void shouldCreateSameObject() {
         List<Integer> input = Arrays.asList(1, 2, 3, 4, 5, 6);
+        LottoNumbers lottoNumbers = LottoNumbers.from(input);
+
+        assertThat(lottoNumbers).isEqualTo(LottoNumbers.from(input));
+    }
+
+    @Test
+    @DisplayName("String 배열로 LottoNumbers 객체를 생성한다")
+    void shouldCreateWithStringArray() {
+        String input = "1,2,3,4,5,6";
         LottoNumbers lottoNumbers = LottoNumbers.from(input);
 
         assertThat(lottoNumbers).isEqualTo(LottoNumbers.from(input));
@@ -58,12 +68,21 @@ class LottoNumbersTest {
     }
 
     @Test
-    @DisplayName("당첨 번호와 일치하는 로또 번호 개수를 구한다")
+    @DisplayName("당첨 번호와 로또 번호가 일치하는 개수를 구한다")
     void shouldReturnCount() {
         LottoNumbers lottoNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumbers winningNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 7, 8, 9));
 
-        boolean result = lottoNumbers.match(winningNumbers, count -> count == 3);
+        long matchedLottoNumbersCount = lottoNumbers.match(winningNumbers);
+        assertThat(matchedLottoNumbersCount).isEqualTo(3L);
+    }
+
+    @Test
+    @DisplayName("보너스 번호와 일치하면 true를 반환한다")
+    void shouldMatchBonusNumber() {
+        LottoNumbers lottoNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+        boolean result = lottoNumbers.isMatchedBonusNumber(LottoNumber.from("1"));
+
         assertThat(result).isTrue();
     }
 

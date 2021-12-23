@@ -1,5 +1,8 @@
 package lotto.lotto;
 
+import lotto.lotto.lottonumber.LottoNumber;
+import lotto.lotto.lottonumber.LottoNumbers;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -19,12 +22,16 @@ public class Lotto {
         return new Lotto(input);
     }
 
-    public List<Integer> lottoNumbers() {
-        return lottoNumbers.values();
+    public long match(LottoNumbers winningNumbers) {
+        return lottoNumbers.match(winningNumbers);
     }
 
-    public boolean match(LottoNumbers winningNumbers, Condition condition) {
-        return lottoNumbers.match(winningNumbers, condition);
+    public boolean isMatchedBonusNumber(LottoNumber bonusNumber) {
+        return lottoNumbers.isMatchedBonusNumber(bonusNumber);
+    }
+
+    public List<Integer> lottoNumbers() {
+        return lottoNumbers.values();
     }
 
     @Override

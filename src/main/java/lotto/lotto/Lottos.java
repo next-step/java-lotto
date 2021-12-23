@@ -1,24 +1,56 @@
 package lotto.lotto;
 
-import lotto.result.MatchedNumbersCount;
+import lotto.lotto.lottonumber.LottoNumbers;
+import lotto.result.LottoResults;
+import lotto.result.Rank;
+import lotto.result.WinningNumbers;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
-public class Lottos {
-    private final List<Lotto> lottos;
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+public class Lottos {
+    private static final int LOTTO_PRICE = 1000;
+    private final List<Lotto> values;
+
+    private Lottos(List<Lotto> values) {
+        this.values = values;
     }
 
-    public long match(LottoNumbers winningNumbers, MatchedNumbersCount matchedNumbersCount) {
-        return lottos.stream()
-                .filter(lotto -> lotto.match(
-                        winningNumbers,
-                        count -> count == matchedNumbersCount.value())
-                )
-                .count();
+    public static Lottos from(List<Lotto> values) {
+        return new Lottos(values);
+    }
+
+    public static Lottos from(int purchaseAmount) {
+        List<Lotto> lottos = new ArrayList<>();
+        int quantity = purchaseAmount / LOTTO_PRICE;
+
+        for (int i = 0; i < quantity; i++) {
+            LottoNumbers lottoNumbers = LottoMachine.generateLottoNumber();
+            Lotto lotto = Lotto.from(lottoNumbers);
+            lottos.add(lotto);
+        }
+
+        return new Lottos(lottos);
+    }
+
+    public LottoResults result(WinningNumbers winningNumbers, int purchaseAmount) {
+        Map<Rank, Long> result = values.stream()
+                .collect(groupingBy(winningNumbers::result, counting()));
+
+        return LottoResults.from(result, purchaseAmount);
+    }
+
+    public List<Lotto> values() {
+        return values;
+    }
+
+    public int quantity() {
+        return values.size();
     }
 
     @Override
@@ -30,11 +62,11 @@ public class Lottos {
             return false;
         }
         Lottos lottos1 = (Lottos) o;
-        return Objects.equals(lottos, lottos1.lottos);
+        return Objects.equals(values, lottos1.values);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottos);
+        return Objects.hash(values);
     }
 }

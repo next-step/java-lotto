@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.lotto.Lotto;
+import lotto.lotto.Lottos;
 import lotto.result.LottoResults;
-import lotto.result.MatchedNumbersCount;
+import lotto.result.Rank;
 
 public class ResultView {
 
@@ -13,23 +13,26 @@ public class ResultView {
     private static final String COUNT_MESSAGE = "개";
     private static final String PROFIT_MESSAGE = "총 수익률은 %.2f입니다.";
 
-    public static void printQuantity(int quantity) {
-        System.out.println(quantity + QUANTITY_RESULT_MESSAGE);
+    public static void printLottoNumbers(Lottos lottos) {
+        System.out.println(lottos.quantity() + QUANTITY_RESULT_MESSAGE);
+        lottos.values().forEach(lotto -> System.out.println(lotto.lottoNumbers()));
     }
 
-    public static void printLottoNumbers(Lotto lotto) {
-        System.out.println(lotto.lottoNumbers());
-    }
-
-    public static void printResult(LottoResults lottoResults, float profit) {
+    public static void printResult(LottoResults lottoResults) {
         System.out.println(LOTTO_RESULT_MESSAGE);
+        StringBuilder stringBuilder = new StringBuilder();
 
-        for (MatchedNumbersCount matchedNumbersCount : lottoResults.values().keySet()) {
-            System.out.println(matchedNumbersCount.value() + MATCHED_NUMBERS_MESSAGE
-                    + matchedNumbersCount.price()  + PRICE_MESSAGE
-                    + lottoResults.values().get(matchedNumbersCount) + COUNT_MESSAGE);
+        for (Rank rank : Rank.values()) {
+            stringBuilder.append(rank.matchedNumbersCount())
+                    .append(MATCHED_NUMBERS_MESSAGE)
+                    .append(rank.prize())
+                    .append(PRICE_MESSAGE)
+                    .append(lottoResults.matchedLottoNumbersCount(rank))
+                    .append(COUNT_MESSAGE)
+                    .append("\n");
         }
 
-        System.out.printf(PROFIT_MESSAGE, profit);
+        System.out.println(stringBuilder);
+        System.out.printf(PROFIT_MESSAGE, lottoResults.profit());
     }
 }
