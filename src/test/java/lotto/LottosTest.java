@@ -10,7 +10,6 @@ import lotto.result.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosTest {
@@ -42,12 +41,27 @@ class LottosTest {
         assertThat(result.matchedLottoNumbersCount(Rank.FIFTH)).isEqualTo(1L);
     }
 
+    @Test
+    @DisplayName("수동으로 로또를 발급한다")
+    void shouldCreateIncludingManualLottos() {
+        int purchaseAmount = 3000;
+        String input1 = "8, 21, 23, 41, 42, 43";
+        String input2 = "3, 5, 11, 16, 32, 38";
+
+        Lottos manualLottos = Lottos.from(new String[]{input1, input2});
+        Lottos totalLottos = Lottos.of(purchaseAmount, manualLottos);
+
+        assertThat(totalLottos.values().size()).isEqualTo(3);
+        assertThat(totalLottos.values()).contains(Lotto.from(input1));
+        assertThat(totalLottos.values()).contains(Lotto.from(input2));
+    }
+
     private Lottos lottos() {
-        return Lottos.from(asList(
-                Lotto.from(asList(1, 2, 3, 7, 8, 9)),
-                Lotto.from(asList(1, 2, 3, 7, 8, 10)),
-                Lotto.from(asList(1, 2, 3, 4, 7, 8)))
-        );
+        return Lottos.from(new String[]{
+                "1, 2, 3, 7, 8, 9",
+                "1, 2, 3, 7, 8, 10",
+                "1, 2, 3, 4, 7, 8"
+        });
     }
 
     private WinningNumbers winningNumbers() {

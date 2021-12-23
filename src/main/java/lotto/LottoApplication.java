@@ -9,8 +9,9 @@ import lotto.view.ResultView;
 public class LottoApplication {
     public static void main(String[] args) {
         int purchaseAmount = InputView.getPurchaseAmount();
+        Lottos manualLottos = InputView.getManualLottos();
 
-        Lottos lottos = Lottos.from(purchaseAmount);
+        Lottos lottos = Lottos.of(purchaseAmount, manualLottos);
         ResultView.printLottoNumbers(lottos);
 
         WinningNumbers winningNumbers = InputView.getWinningNumbers();
