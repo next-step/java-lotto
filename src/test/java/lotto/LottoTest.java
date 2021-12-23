@@ -40,4 +40,13 @@ public class LottoTest {
         boolean result = lotto.isMatchedBonusNumber(bonusNumber);
         assertThat(result).isTrue();
     }
+
+    @Test
+    @DisplayName("수동으로 로또 번호를 입력하면 로또를 생성한다")
+    void shouldCreateManually() {
+        String input = "8, 21, 23, 41, 42, 43";
+        Lotto lotto = Lotto.from(input);
+
+        assertThat(lotto).isEqualTo(Lotto.from(LottoNumbers.from(input)));
+    }
 }
