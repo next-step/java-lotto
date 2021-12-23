@@ -5,16 +5,18 @@ import lotto.result.LottoResults;
 import lotto.result.Rank;
 import lotto.result.WinningNumbers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 
 public class Lottos {
     private static final int LOTTO_PRICE = 1000;
+    public static final int MIN = 0;
     private final List<Lotto> values;
 
     private Lottos(List<Lotto> values) {
@@ -26,14 +28,13 @@ public class Lottos {
     }
 
     public static Lottos from(int purchaseAmount) {
-        List<Lotto> lottos = new ArrayList<>();
         int quantity = purchaseAmount / LOTTO_PRICE;
 
-        for (int i = 0; i < quantity; i++) {
-            LottoNumbers lottoNumbers = LottoMachine.generateLottoNumber();
-            Lotto lotto = Lotto.from(lottoNumbers);
-            lottos.add(lotto);
-        }
+        List<Lotto> lottos = IntStream.range(MIN, quantity)
+                .mapToObj(value -> {
+                    LottoNumbers lottoNumbers = LottoMachine.generateLottoNumber();
+                    return Lotto.from(lottoNumbers);
+                }).collect(Collectors.toList());
 
         return new Lottos(lottos);
     }
