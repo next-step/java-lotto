@@ -8,6 +8,6 @@ public interface LottoTicketsGenerator {
 
     List<LottoTicket> generate();
 
-    int ticketsPrice();
+//    int ticketsPrice();
 
 }

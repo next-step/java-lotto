@@ -19,7 +19,7 @@ class ManualLottoTicketsGeneratorTest {
         List<String> lottoTicketList = new ArrayList<>();
         lottoTicketList.add("1, 2, 3, 4, 5, 6");
         lottoTicketList.add("1, 2, 3, 4, 5, 7");
-        ManualLottoTicketsGenerator manualLottoTicketsGenerator = new ManualLottoTicketsGenerator(lottoTicketList, 1000);
+        ManualLottoTicketsGenerator manualLottoTicketsGenerator = new ManualLottoTicketsGenerator(lottoTicketList);
 
         //when
         List<LottoTicket> lottoTickets = manualLottoTicketsGenerator.generate();
@@ -29,20 +29,4 @@ class ManualLottoTicketsGeneratorTest {
 
     }
 
-
-    @DisplayName("수동 입력 로또의 가격을 구할 수 있다.")
-    @Test
-    void ticketsPrice() {
-        //given
-        List<String> lottoTicketList = new ArrayList<>();
-        lottoTicketList.add("1, 2, 3, 4, 5, 6");
-        lottoTicketList.add("1, 2, 3, 4, 5, 7");
-        ManualLottoTicketsGenerator manualLottoTicketsGenerator = new ManualLottoTicketsGenerator(lottoTicketList, 1000);
-
-        //when
-        int ticketsPrice = manualLottoTicketsGenerator.ticketsPrice();
-
-        //then
-        assertThat(ticketsPrice).isEqualTo(2000);
-    }
 }

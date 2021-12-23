@@ -9,8 +9,8 @@ public class LottoMachine {
     }
 
     public static LottoTickets generateLottoTickets(LottoPurchaseInformation purchaseInfo) {
-        ManualLottoTicketsGenerator manualGenerator = new ManualLottoTicketsGenerator(purchaseInfo.manuallyPickedLottoTickets(), purchaseInfo.lottoTicketPrice());
-        AutomaticLottoTicketsGenerator automaticGenerator = new AutomaticLottoTicketsGenerator(purchaseInfo.numberOfAutomaticTicket(), purchaseInfo.lottoTicketPrice());
+        ManualLottoTicketsGenerator manualGenerator = new ManualLottoTicketsGenerator(purchaseInfo.manuallyPickedLottoTickets());
+        AutomaticLottoTicketsGenerator automaticGenerator = new AutomaticLottoTicketsGenerator(purchaseInfo.numberOfAutomaticTicket());
         return new LottoTickets(manualGenerator, automaticGenerator);
     }
 

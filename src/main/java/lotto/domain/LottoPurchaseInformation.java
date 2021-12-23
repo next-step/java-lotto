@@ -10,11 +10,13 @@ public class LottoPurchaseInformation {
     private final int numberOfManualTicket;
     private final int numberOfAutomaticTicket;
     private final List<String> manuallyPickedLottoTickets;
+    private final int money;
 
-    private LottoPurchaseInformation(int numberOfManualTicket, int numberOfAutomaticTicket, List<String> manuallyPickedLottoTickets) {
+    private LottoPurchaseInformation(int numberOfManualTicket, int numberOfAutomaticTicket, List<String> manuallyPickedLottoTickets, int money) {
         this.numberOfManualTicket = numberOfManualTicket;
         this.numberOfAutomaticTicket = numberOfAutomaticTicket;
         this.manuallyPickedLottoTickets = manuallyPickedLottoTickets;
+        this.money = money;
     }
 
     public static LottoPurchaseInformation of(int money, List<String> manuallyPickedLottoTickets) {
@@ -22,7 +24,7 @@ public class LottoPurchaseInformation {
         int numberOfManualTicket = manuallyPickedLottoTickets.size();
         validateNumberOfLottoTicket(numberOfLottoTicket, numberOfManualTicket);
         int numberOfAutomaticTicket = numberOfLottoTicket - numberOfManualTicket;
-        return new LottoPurchaseInformation(numberOfManualTicket, numberOfAutomaticTicket, manuallyPickedLottoTickets);
+        return new LottoPurchaseInformation(numberOfManualTicket, numberOfAutomaticTicket, manuallyPickedLottoTickets, numberOfLottoTicket * LOTTO_TICKET_PRICE);
     }
 
     private static void validateNumberOfLottoTicket(int numberOfLottoTicket, int numberOfManualTicket) {
@@ -31,8 +33,8 @@ public class LottoPurchaseInformation {
         }
     }
 
-    public int lottoTicketPrice() {
-        return LOTTO_TICKET_PRICE;
+    public int lottoTicketsPrice() {
+        return money;
     }
 
     public int numberOfManualTicket() {

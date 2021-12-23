@@ -22,11 +22,11 @@ public class AutomaticLottoTicketsGenerator implements LottoTicketsGenerator {
             .collect(toList());
 
     private final int numberOfTickets;
-    private final int ticketsPrice;
+//    private final int ticketsPrice;
 
-    public AutomaticLottoTicketsGenerator(int numberOfTickets, int ticketPrice) {
+    public AutomaticLottoTicketsGenerator(int numberOfTickets) {
         this.numberOfTickets = numberOfTickets;
-        this.ticketsPrice = ticketPrice * numberOfTickets;
+//        this.ticketsPrice = ticketPrice * numberOfTickets;
     }
 
     @Override
@@ -46,10 +46,10 @@ public class AutomaticLottoTicketsGenerator implements LottoTicketsGenerator {
                 .collect(collectingAndThen(toList(), Collections::unmodifiableList));
         return LottoTicket.from(lottoNumbers);
     }
-
-    @Override
-    public int ticketsPrice() {
-        return this.ticketsPrice;
-    }
+//
+//    @Override
+//    public int ticketsPrice() {
+//        return this.ticketsPrice;
+//    }
 
 }

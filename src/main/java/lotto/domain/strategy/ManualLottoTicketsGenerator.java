@@ -9,11 +9,11 @@ import static java.util.stream.Collectors.toList;
 public class ManualLottoTicketsGenerator implements LottoTicketsGenerator {
 
     private final List<String> lottoTickets;
-    private final int ticketsPrice;
+//    private final int ticketsPrice;
 
-    public ManualLottoTicketsGenerator(List<String> lottoTickets, int ticketPrice) {
+    public ManualLottoTicketsGenerator(List<String> lottoTickets) {
         this.lottoTickets = lottoTickets;
-        ticketsPrice = lottoTickets.size() * ticketPrice;
+//        ticketsPrice = lottoTickets.size() * ticketPrice;
     }
 
     @Override
@@ -23,10 +23,10 @@ public class ManualLottoTicketsGenerator implements LottoTicketsGenerator {
                 .collect(toList());
     }
 
-    @Override
-    public int ticketsPrice() {
-        return ticketsPrice;
-    }
+//    @Override
+//    public int ticketsPrice() {
+//        return ticketsPrice;
+//    }
 
 
 }

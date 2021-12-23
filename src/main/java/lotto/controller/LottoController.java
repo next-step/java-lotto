@@ -17,16 +17,12 @@ public class LottoController {
         LottoTickets lottoTickets = LottoMachine.generateLottoTickets(purchaseInfo);
         OutputView.printLottoNumbers(lottoTickets);
         LottoWinningNumbers lottoWinningNumbers = InputView.inputLottoWinningNumbers();
-        printLottoWinInformation(lottoTickets, lottoWinningNumbers);
-    }
-    
-    private void printLottoWinInformation(LottoTickets lottoTickets, LottoWinningNumbers lottoWinningNumbers) {
-        LottoTicketsWinInformation lottoTicketsWinInformation = lottoTickets.winInformation(lottoWinningNumbers);
+        LottoTicketsWinInformation lottoTicketsWinInformation = lottoTickets.winInformation(lottoWinningNumbers, purchaseInfo.lottoTicketsPrice());
         Map<LottoRank, Integer> winningStaticsMap = lottoTicketsWinInformation.winningStatics();
         OutputView.printWinningStatics(winningStaticsMap);
         double earningRate = lottoTicketsWinInformation.earningRate();
         OutputView.earningRate(earningRate);
-
     }
+
 
 }

@@ -6,20 +6,16 @@ import java.util.*;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets = new ArrayList<>();
-    private final int price;
 
     public LottoTickets(LottoTicketsGenerator... generators) {
-        int price = 0;
         for (LottoTicketsGenerator generator : generators) {
             List<LottoTicket> lottoTickets = generator.generate();
             this.lottoTickets.addAll(lottoTickets);
-            price += generator.ticketsPrice();
         }
-        this.price = price;
     }
 
-    public LottoTicketsWinInformation winInformation(LottoWinningNumbers lottoWinningNumbers) {
-        return LottoTicketsWinInformation.from(winningStaticsMap(lottoWinningNumbers), price);
+    public LottoTicketsWinInformation winInformation(LottoWinningNumbers lottoWinningNumbers, int lottoTicketsPrice) {
+        return LottoTicketsWinInformation.from(winningStaticsMap(lottoWinningNumbers), lottoTicketsPrice);
     }
 
     private Map<LottoRank, Integer> winningStaticsMap(LottoWinningNumbers lottoWinningNumbers) {
@@ -34,7 +30,6 @@ public class LottoTickets {
 
     private Map<LottoRank, Integer> initiateWinningStaticsMap() {
         Map<LottoRank, Integer> winningStaticsMap = new HashMap<>();
-
         Arrays.asList(LottoRank.values())
                 .forEach(lottoRank -> {
                     int count = 0;

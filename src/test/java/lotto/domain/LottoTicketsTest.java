@@ -17,8 +17,8 @@ class LottoTicketsTest {
     void generate() {
         //given
         List<String> manualLottoTickets = Arrays.asList("1, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 7");
-        ManualLottoTicketsGenerator manualLottoTicketsGenerator = new ManualLottoTicketsGenerator(manualLottoTickets, 1000);
-        AutomaticLottoTicketsGenerator automaticLottoTicketsGenerator = new AutomaticLottoTicketsGenerator(3, 1000);
+        ManualLottoTicketsGenerator manualLottoTicketsGenerator = new ManualLottoTicketsGenerator(manualLottoTickets);
+        AutomaticLottoTicketsGenerator automaticLottoTicketsGenerator = new AutomaticLottoTicketsGenerator(3);
 
         //when
         LottoTickets lottoTickets = new LottoTickets(manualLottoTicketsGenerator, automaticLottoTicketsGenerator);
@@ -32,13 +32,13 @@ class LottoTicketsTest {
     void winningStaticsMap() {
         //given
         List<String> manualLottoTickets = Arrays.asList("1, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 7");
-        ManualLottoTicketsGenerator manualLottoTicketsGenerator = new ManualLottoTicketsGenerator(manualLottoTickets, 1000);
+        ManualLottoTicketsGenerator manualLottoTicketsGenerator = new ManualLottoTicketsGenerator(manualLottoTickets);
         LottoTickets lottoTickets = new LottoTickets(manualLottoTicketsGenerator);
         LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.from("1, 2, 3, 4, 5, 9", "6");
 
 
         //when
-        LottoTicketsWinInformation winInfo = lottoTickets.winInformation(lottoWinningNumbers);
+        LottoTicketsWinInformation winInfo = lottoTickets.winInformation(lottoWinningNumbers, 2000);
 
         //then
         assertThat(winInfo.winningStatics()).hasEntrySatisfying(LottoRank.SECOND, value -> assertThat(value).isEqualTo(1));
