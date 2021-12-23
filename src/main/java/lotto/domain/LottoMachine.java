@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.domain.strategy.AutomaticLottoTicketsGenerator;
-import lotto.domain.strategy.ManualLottoTicketsGenerator;
+import lotto.domain.lottoGenerator.AutomaticLottoTicketsGenerator;
+import lotto.domain.lottoGenerator.ManualLottoTicketsGenerator;
 
 public class LottoMachine {
 

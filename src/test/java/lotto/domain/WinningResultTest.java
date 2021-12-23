@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.strategy.ManualLottoTicketsGenerator;
+import lotto.domain.lottoGenerator.ManualLottoTicketsGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +10,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoTicketsWinInformationTest {
+class WinningResultTest {
 
     @DisplayName("로또 당첨 번호를 전달하면 일치하는 개수가 몇 개 있는지 알 수 있다.")
     @Test
@@ -20,7 +20,7 @@ class LottoTicketsWinInformationTest {
         ManualLottoTicketsGenerator manualLottoTicketsGenerator = new ManualLottoTicketsGenerator(manualLottoTickets);
         LottoTickets lottoTickets = new LottoTickets(manualLottoTicketsGenerator.generate());
         LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.from("1, 2, 3, 4, 5, 9", "6");
-        LottoTicketsWinInformation winInfo = lottoTickets.winInformation(lottoWinningNumbers, 2000);
+        WinningResult winInfo = lottoTickets.winningResult(lottoWinningNumbers, 2000);
 
 
         //when
@@ -44,7 +44,7 @@ class LottoTicketsWinInformationTest {
         ManualLottoTicketsGenerator manualLottoTicketsGenerator = new ManualLottoTicketsGenerator(manualLottoTickets);
         LottoTickets lottoTickets = new LottoTickets(manualLottoTicketsGenerator.generate());
         LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.from("1, 2, 3, 4, 5, 9", "6");
-        LottoTicketsWinInformation winInfo = lottoTickets.winInformation(lottoWinningNumbers, 2000);
+        WinningResult winInfo = lottoTickets.winningResult(lottoWinningNumbers, 2000);
 
         //when
         int winningPrize = winInfo.winningPrize();
@@ -64,7 +64,7 @@ class LottoTicketsWinInformationTest {
         ManualLottoTicketsGenerator manualLottoTicketsGenerator = new ManualLottoTicketsGenerator(manualLottoTickets);
         LottoTickets lottoTickets = new LottoTickets(manualLottoTicketsGenerator.generate());
         LottoWinningNumbers lottoWinningNumbers = LottoWinningNumbers.from("1, 2, 3, 4, 5, 6", "45");
-        LottoTicketsWinInformation winInfo = lottoTickets.winInformation(lottoWinningNumbers, 2000);
+        WinningResult winInfo = lottoTickets.winningResult(lottoWinningNumbers, 2000);
 
         //when
         double earningRate = winInfo.earningRate();

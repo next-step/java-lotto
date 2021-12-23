@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.domain.strategy.AutomaticLottoTicketsGenerator;
-import lotto.domain.strategy.ManualLottoTicketsGenerator;
+import lotto.domain.lottoGenerator.AutomaticLottoTicketsGenerator;
+import lotto.domain.lottoGenerator.ManualLottoTicketsGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +38,7 @@ class LottoTicketsTest {
 
 
         //when
-        LottoTicketsWinInformation winInfo = lottoTickets.winInformation(lottoWinningNumbers, 2000);
+        WinningResult winInfo = lottoTickets.winningResult(lottoWinningNumbers, 2000);
 
         //then
         assertThat(winInfo.winningStatics()).hasEntrySatisfying(LottoRank.SECOND, value -> assertThat(value).isEqualTo(1));

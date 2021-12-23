@@ -17,10 +17,10 @@ public class LottoController {
         LottoTickets lottoTickets = LottoMachine.generateLottoTickets(purchaseInfo);
         OutputView.printLottoNumbers(lottoTickets);
         LottoWinningNumbers lottoWinningNumbers = InputView.inputLottoWinningNumbers();
-        LottoTicketsWinInformation lottoTicketsWinInformation = lottoTickets.winInformation(lottoWinningNumbers, purchaseInfo.lottoTicketsPrice());
-        Map<LottoRank, Integer> winningStaticsMap = lottoTicketsWinInformation.winningStatics();
+        WinningResult winningResult = lottoTickets.winningResult(lottoWinningNumbers, purchaseInfo.lottoTicketsPrice());
+        Map<LottoRank, Integer> winningStaticsMap = winningResult.winningStatics();
         OutputView.printWinningStatics(winningStaticsMap);
-        double earningRate = lottoTicketsWinInformation.earningRate();
+        double earningRate = winningResult.earningRate();
         OutputView.earningRate(earningRate);
     }
 

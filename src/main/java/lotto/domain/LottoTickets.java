@@ -11,8 +11,8 @@ public class LottoTickets {
         }
     }
 
-    public LottoTicketsWinInformation winInformation(LottoWinningNumbers lottoWinningNumbers, int lottoTicketsPrice) {
-        return LottoTicketsWinInformation.from(winningStaticsMap(lottoWinningNumbers), lottoTicketsPrice);
+    public WinningResult winningResult(LottoWinningNumbers lottoWinningNumbers, int lottoTicketsPrice) {
+        return WinningResult.from(winningStaticsMap(lottoWinningNumbers), lottoTicketsPrice);
     }
 
     private Map<LottoRank, Integer> winningStaticsMap(LottoWinningNumbers lottoWinningNumbers) {
