@@ -2,9 +2,7 @@ package lotto.domain;
 
 import java.math.BigDecimal;
 import java.util.Collections;
-import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -33,11 +31,11 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public Map<PrizeType, Integer> countMatch(Lotto prizeNumbers) {
-        Map<PrizeType, Integer> prizeStat = new EnumMap<>(PrizeType.class);
+    public PrizeStatistic countMatch(WinningLotto winningLotto) {
+        PrizeStatistic prizeStat = new PrizeStatistic();
         this.lottos.forEach(lotto -> {
-            PrizeType prizeType = PrizeType.of(lotto.match(prizeNumbers));
-            prizeStat.put(prizeType, prizeStat.getOrDefault(prizeType, 0) + 1);
+            PrizeType prizeType = PrizeType.of(winningLotto.match(lotto), winningLotto.matchBonusNumber(lotto));
+            prizeStat.put(prizeType);
         });
         return prizeStat;
     }

@@ -1,6 +1,9 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -18,22 +21,25 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
-        checkArgumentValidation(lottoNumbers);
-        this.numbers = new TreeSet<>(lottoNumbers);
+        this(numbers.stream().map(LottoNumber::new).collect(Collectors.toCollection(TreeSet::new)));
     }
 
-    private void checkArgumentValidation(List<LottoNumber> numbers) {
+    public Lotto(Set<LottoNumber> numbers) {
+        this.numbers = checkArgumentValidation(numbers);
+    }
+
+    private Set<LottoNumber> checkArgumentValidation(Set<LottoNumber> numbers) {
         if (numbers.size() != SIZE) {
             throw new IllegalArgumentException("Lotto의 List<Integer> size는 항상 6입니다.");
         }
+        return numbers;
     }
 
     public Set<LottoNumber> getNumbers() {
-        return this.numbers;
+        return Collections.unmodifiableSet(this.numbers);
     }
 
-    public int match(Lotto prizeNumbers) {
-        return (int) this.numbers.stream().filter(prizeNumbers.numbers::contains).count();
+    public boolean containBonusNumber(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
 }
