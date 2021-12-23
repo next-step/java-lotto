@@ -44,8 +44,8 @@ public class LottoTest {
     @Test
     void containBonusNumber() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.containBonusNumber(new LottoNumber(6))).isTrue();
-        assertThat(lotto.containBonusNumber(new LottoNumber(7))).isFalse();
+        assertThat(lotto.containLottoNumber(new LottoNumber(6))).isTrue();
+        assertThat(lotto.containLottoNumber(new LottoNumber(7))).isFalse();
     }
 
 }

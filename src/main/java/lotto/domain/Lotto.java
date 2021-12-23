@@ -39,7 +39,7 @@ public class Lotto {
         return Collections.unmodifiableSet(this.numbers);
     }
 
-    public boolean containBonusNumber(LottoNumber bonusNumber) {
+    public boolean containLottoNumber(LottoNumber bonusNumber) {
         return numbers.contains(bonusNumber);
     }
 }
