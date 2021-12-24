@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.domain.stat.LottoRank;
 import lotto.exception.LottoGameException;
-import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
