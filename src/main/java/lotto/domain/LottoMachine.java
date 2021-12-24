@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.LottoApplicationException;
+import lotto.exception.LottoGameException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,11 +23,11 @@ public class LottoMachine {
 
     private void checkMoney(Money money) {
         if (money.lt(LOTTO_PRICE)) {
-            throw new LottoApplicationException("최소 구매금액은 1000원 입니다.");
+            throw new LottoGameException("최소 구매금액은 1000원 입니다.");
         }
 
         if (money.isNotDivisibleBy(LOTTO_PRICE)) {
-            throw new LottoApplicationException("1000원 단위로 구매해주세요.");
+            throw new LottoGameException("1000원 단위로 구매해주세요.");
         }
     }
 

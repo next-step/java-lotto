@@ -10,6 +10,7 @@ import lotto.domain.stat.LottoResult;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ConsoleOutputView {
@@ -23,13 +24,14 @@ public class ConsoleOutputView {
     }
 
     private void printLotto(Lotto lotto) {
-        List<LottoNumber> lotttoNumbers = lotto.getLottoNumbers();
+        Set<LottoNumber> lotttoNumbers = lotto.getLottoNumbers();
 
         StringBuilder sb = new StringBuilder();
         sb.append("[");
 
         String numbersString = lotttoNumbers.stream()
                 .map(LottoNumber::getNumber)
+                .sorted()
                 .map((num) -> num+"")
                 .collect(Collectors.joining(", "));
 

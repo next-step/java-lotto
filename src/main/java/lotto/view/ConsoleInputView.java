@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.exception.LottoApplicationException;
+import lotto.exception.LottoGameException;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -44,7 +44,7 @@ public class ConsoleInputView implements Closeable {
         try {
             money = Integer.parseInt(paymentString);
         } catch (NumberFormatException e) {
-            throw new LottoApplicationException(INPUT_FORMAT_EXCEPTION_MESSAGE);
+            throw new LottoGameException(INPUT_FORMAT_EXCEPTION_MESSAGE);
         }
 
         return money;

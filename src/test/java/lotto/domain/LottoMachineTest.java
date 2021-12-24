@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.LottoApplicationException;
+import lotto.exception.LottoGameException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,23 +32,23 @@ public class LottoMachineTest {
     }
 
     @Test
-    @DisplayName("buy 테스트: money가 1000으로 나누어떨어지지 않으면 LottoApplicationException 발생")
+    @DisplayName("buy 테스트: money가 1000으로 나누어떨어지지 않으면 LottoGameException 발생")
     void buy1() {
         Money money = new Money(1500);
         LottoMachine lottoMachine = new LottoMachine();
 
         assertThatThrownBy(() -> lottoMachine.buy(money, lottoGenerator))
-                .isInstanceOf(LottoApplicationException.class);
+                .isInstanceOf(LottoGameException.class);
     }
 
     @Test
-    @DisplayName("buy 테스트: money가 1000보다 작으면 LottoApplicationException 발생")
+    @DisplayName("buy 테스트: money가 1000보다 작으면 LottoGameException 발생")
     void buy2() {
         Money money = new Money(500);
         LottoMachine lottoMachine = new LottoMachine();
 
         assertThatThrownBy(() -> lottoMachine.buy(money, lottoGenerator))
-                .isInstanceOf(LottoApplicationException.class);
+                .isInstanceOf(LottoGameException.class);
     }
 
     @Test

@@ -1,21 +1,37 @@
 package lotto.domain;
 
 import lotto.domain.stat.LottoRank;
+import lotto.exception.LottoGameException;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class Lotto {
 
+    private static final String LOTTO_NUMBERS_COUNT_EXCEPTION_MESSAGE = "로또 숫자는 6개이어야 합니다.";
+
     public static final int LOTTO_NUMBERS_COUNT = 6;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
+        this(new HashSet<>(lottoNumbers));
+    }
+
+    public Lotto(Set<LottoNumber> lottoNumbers) {
+        checkLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    private void checkLottoNumbers(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBERS_COUNT) {
+            throw new LottoGameException(LOTTO_NUMBERS_COUNT_EXCEPTION_MESSAGE);
+        }
+    }
+
+    public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 
