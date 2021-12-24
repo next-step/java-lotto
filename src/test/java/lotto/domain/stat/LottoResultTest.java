@@ -23,21 +23,12 @@ public class LottoResultTest {
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
 
-        LottoNumbers lottoNumbers1 = new LottoNumbers(lottoNumberList.subList(0, 6));
-        LottoNumbers lottoNumbers2 = new LottoNumbers(lottoNumberList.subList(1, 7));
-        LottoNumbers lottoNumbers3 = new LottoNumbers(lottoNumberList.subList(2, 8));
-        LottoNumbers lottoNumbers4 = new LottoNumbers(lottoNumberList.subList(3, 9));
-        LottoNumbers lottoNumbers5 = new LottoNumbers(lottoNumberList.subList(4, 10));
-        LottoNumbers lottoNumbers6 = new LottoNumbers(lottoNumberList.subList(5, 11));
-
-        LottoNumbers winningNumbers = new LottoNumbers(lottoNumberList.subList(2, 8));
-
-        Lotto lotto1 = new Lotto(lottoNumbers1);
-        Lotto lotto2 = new Lotto(lottoNumbers2);
-        Lotto lotto3 = new Lotto(lottoNumbers3);
-        Lotto lotto4 = new Lotto(lottoNumbers4);
-        Lotto lotto5 = new Lotto(lottoNumbers5);
-        Lotto lotto6 = new Lotto(lottoNumbers6);
+        Lotto lotto1 = new Lotto(lottoNumberList.subList(0, 6));
+        Lotto lotto2 = new Lotto(lottoNumberList.subList(1, 7));
+        Lotto lotto3 = new Lotto(lottoNumberList.subList(2, 8));
+        Lotto lotto4 = new Lotto(lottoNumberList.subList(3, 9));
+        Lotto lotto5 = new Lotto(lottoNumberList.subList(4, 10));
+        Lotto lotto6 = new Lotto(lottoNumberList.subList(5, 11));
 
         lottos = new Lottos(Arrays.asList(
                 lotto1,
@@ -48,7 +39,7 @@ public class LottoResultTest {
                 lotto6
         ));
 
-        winningLotto = new Lotto(winningNumbers);
+        winningLotto = new Lotto(lottoNumberList.subList(2, 8));
 
         money = new Money(6000);
     }

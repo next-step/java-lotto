@@ -19,13 +19,11 @@ public class LottoAutoGenerator implements LottoGenerator {
     public Lotto generate() {
         Collections.shuffle(numbersPool);
 
-        List<LottoNumber> lottoNumberList = numbersPool.stream()
-                .limit(LottoNumbers.LOTTO_NUMBERS_COUNT)
+        List<LottoNumber> lottoNumbers = numbersPool.stream()
+                .limit(Lotto.LOTTO_NUMBERS_COUNT)
                 .sorted()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
-
-        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
 
         return new Lotto(lottoNumbers);
     }

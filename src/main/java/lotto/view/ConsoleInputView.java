@@ -1,9 +1,5 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
-import lotto.domain.Money;
 import lotto.exception.LottoApplicationException;
 
 import java.io.Closeable;
@@ -39,7 +35,7 @@ public class ConsoleInputView implements Closeable {
         return scanner.nextLine();
     }
 
-    public Money inputMoneyToPay() {
+    public int inputMoneyToPay() {
         printPaymentInputPromptMessage();
 
         String paymentString = nextLine();
@@ -51,22 +47,17 @@ public class ConsoleInputView implements Closeable {
             throw new LottoApplicationException(INPUT_FORMAT_EXCEPTION_MESSAGE);
         }
 
-        return new Money(money);
+        return money;
     }
 
-    public Lotto inputWinningLotto() {
+    public List<Integer> inputWinningLottoNumbers() {
         printWinningNumbersInputPromptMessage();
 
         String[] winningNumbersStrings = nextLine().split(WINNING_NUMBERS_INPUT_DELIMITER);
 
-        List<LottoNumber> lottoNumberList = Arrays.stream(winningNumbersStrings)
+        return Arrays.stream(winningNumbersStrings)
                 .map(Integer::parseInt)
-                .map(LottoNumber::new)
                 .collect(Collectors.toList());
-
-        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
-
-        return new Lotto(lottoNumbers);
     }
 
     @Override

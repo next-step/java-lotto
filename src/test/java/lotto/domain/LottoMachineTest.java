@@ -1,8 +1,6 @@
 package lotto.domain;
 
 import lotto.exception.LottoApplicationException;
-import org.assertj.core.util.Sets;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,15 +18,13 @@ public class LottoMachineTest {
     @BeforeEach
     void init() {
         lottoGenerator = () -> {
-            LottoNumbers lottoNumbers = new LottoNumbers(
-                    Arrays.asList(
-                            new LottoNumber(1),
-                            new LottoNumber(2),
-                            new LottoNumber(3),
-                            new LottoNumber(4),
-                            new LottoNumber(5),
-                            new LottoNumber(6)
-                    )
+            List<LottoNumber> lottoNumbers = Arrays.asList(
+                    new LottoNumber(1),
+                    new LottoNumber(2),
+                    new LottoNumber(3),
+                    new LottoNumber(4),
+                    new LottoNumber(5),
+                    new LottoNumber(6)
             );
 
             return new Lotto(lottoNumbers);
