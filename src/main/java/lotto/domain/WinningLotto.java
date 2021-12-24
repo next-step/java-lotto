@@ -17,16 +17,16 @@ public class WinningLotto {
     }
 
     private void checkValidation(Lotto lotto, LottoNumber bonusNumber) {
-        if (lotto.containBonusNumber(bonusNumber)) {
+        if (lotto.containLottoNumber(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 기존 lotto 당첨 번호와 중복될 수 없습니다.");
         }
     }
 
     public long match(Lotto lotto) {
-        return this.winningLotto.getNumbers().stream().filter(lotto.getNumbers()::contains).count();
+        return this.winningLotto.getNumbers().stream().filter(lotto::containLottoNumber).count();
     }
 
     public boolean matchBonusNumber(Lotto lotto) {
-        return lotto.containBonusNumber(bonusNumber);
+        return lotto.containLottoNumber(bonusNumber);
     }
 }

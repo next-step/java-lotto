@@ -7,24 +7,40 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottos {
-    private static final int PRICE_PER_LOTTO = 1000;
+    public static final int PRICE_PER_LOTTO = 1000;
 
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
-    public Lottos(int money) {
-        int count = money / PRICE_PER_LOTTO;
-        checkValidation(count);
-        this.lottos = IntStream.range(0, count).mapToObj(i -> new Lotto()).collect(Collectors.toList());
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    private void checkValidation(int count) {
-        if (count < 1) {
+    public Lottos(int money) {
+        checkValidation(money);
+        this.lottos = autoLottos(totalCount(money));
+    }
+
+    public Lottos(int money, int manualCount) {
+        checkValidation(money);
+        this.lottos = autoLottos(totalCount(money) - manualCount);
+    }
+
+    private void checkValidation(int money) {
+        if (money < PRICE_PER_LOTTO) {
             throw new IllegalArgumentException("로또를 한 장 이상 구매하세요.");
         }
     }
 
-    public int getSize() {
-        return lottos.size();
+    private int totalCount(int money) {
+        return money / PRICE_PER_LOTTO;
+    }
+
+    private List<Lotto> autoLottos(int count) {
+        return IntStream.range(0, count).mapToObj(i -> new Lotto()).collect(Collectors.toList());
+    }
+
+    public int size() {
+        return this.lottos.size();
     }
 
     public List<Lotto> getLottos() {

@@ -5,20 +5,33 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.EnumMap;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottosTest {
 
-    @DisplayName("금액에 해당하는 수만큼 로또를 가진 일급 컬렉션 Lottos를 생성한다.")
+    @DisplayName("금액에 해당하는 수만큼 자동 로또를 생성한다.")
     @ParameterizedTest
     @CsvSource(value = {"1000, 1", "6000, 6", "14000, 14"})
-    void create(int money, int expectedCount) {
-        assertThat(new Lottos(money).getSize()).isEqualTo(expectedCount);
+    void create_only_auto(int money, int expectedCount) {
+        assertThat(new Lottos(money).size()).isEqualTo(expectedCount);
+    }
+
+    @DisplayName("금액에서 수동 로또 구매를 제외한 수만큼 자동 로또를 생성한다.")
+    @ParameterizedTest
+    @CsvSource(value = {"1000, 1, 0", "1000, 0, 1", "6000, 3, 3"})
+    void create_auto_with_manual(int money, int manualCount, int expectedCount) {
+        assertThat(new Lottos(money, manualCount).size()).isEqualTo(expectedCount);
+    }
+
+    @DisplayName("로또들 컬렉션을 입력받아 Lottos를 생성한다.(수동 로또들 또는 전체)")
+    @Test
+    void create_only_manual() {
+        assertThat(new Lottos(Collections.singletonList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)))).size()).isEqualTo(1);
     }
 
     @DisplayName("구입 금액 1000원 미만일 경우 IllegalArgumentException을 throw한다.")
@@ -32,18 +45,18 @@ public class LottosTest {
     @DisplayName("countMatch 함수는 당첨 번호를 받아 전체 발급 로또에 대한 PrizeType 별 count를 통계한 Map을 반환한다.")
     @Test
     void countMatch() {
-        int money = 1000;
-        Lottos lottos = new Lottos(money);
-        // 구입한 로또로 당첨번호 생성
-        List<Integer> winningNumbers = lottos.getLottos().get(0)
-                .getNumbers().stream()
-                .map(LottoNumber::number)
-                .collect(Collectors.toList());
-        int meaninglessBonusNumber = 1; // 우연의 일치로 당첨 번호와 보너스 번호가 겹치면 테스트 실패 가능
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, meaninglessBonusNumber);
+        // given
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto lotto1 = new Lotto(numbers);
+        Lotto lotto2 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
+        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2));
+        WinningLotto winningLotto = new WinningLotto(numbers, 7);
 
+        // when
         PrizeStatistic prizeStat = lottos.countMatch(winningLotto);
-        assertThat(prizeStat).isInstanceOf(PrizeStatistic.class);
+
+        // then
         assertThat(prizeStat.getOrDefault(PrizeType.FIRST)).isEqualTo(1);
+        assertThat(prizeStat.getOrDefault(PrizeType.SECOND)).isEqualTo(1);
     }
 }
