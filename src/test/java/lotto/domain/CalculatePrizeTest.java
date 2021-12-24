@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 class CalculatePrizeTest {
 
-    @ParameterizedTest(name = "{displayName} - [{index}] {arguments}")
+    @ParameterizedTest(name = "일치하는 번호 갯수 = {0}, 등수 = {1}")
     @MethodSource("lottoMatchingCountData")
     @DisplayName("1, 3, 4, 5, 낙첨 테스트")
     void calculatePrizeOfMatchingCount(int num, CalculatePrize expected) {
@@ -33,19 +33,21 @@ class CalculatePrizeTest {
         );
     }
 
-    @ParameterizedTest
-    @ValueSource(booleans = {true, false})
+    @ParameterizedTest(name = "보너스번호일치 ={0}, 결과 = {1}")
+    @MethodSource("bonusNumberMatchedResultData")
     @DisplayName("2, 3등 테스트")
-    void getSecondOrThirdPrize(boolean matchingBonusNumber) {
+    void getSecondOrThirdPrize(boolean matchingBonusNumber, CalculatePrize resultPrize) {
         CalculatePrize calculatePrize = CalculatePrize.ofSecondOrThird(matchingBonusNumber);
-        if(matchingBonusNumber){
-            assertThat(calculatePrize).isEqualTo(CalculatePrize.SECOND);
-        }
-
-        if (!matchingBonusNumber) {
-            assertThat(calculatePrize).isEqualTo(CalculatePrize.THIRD);
-        }
+        assertThat(calculatePrize).isEqualTo(resultPrize);
     }
+
+    static Stream<Arguments> bonusNumberMatchedResultData() {
+        return Stream.of(
+            Arguments.of(true, CalculatePrize.SECOND),
+            Arguments.of(false, CalculatePrize.THIRD)
+        );
+    }
+
 
     @Test
     @DisplayName("당청금계산")

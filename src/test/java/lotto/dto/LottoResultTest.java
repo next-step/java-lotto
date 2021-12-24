@@ -4,6 +4,8 @@ import lotto.domain.CalculatePrize;
 import lotto.domain.LottoResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

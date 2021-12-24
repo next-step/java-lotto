@@ -16,7 +16,7 @@ class LottoNumberTest {
 	}
 
 
-	@ParameterizedTest
+	@ParameterizedTest(name = "로또 입력 값 = {0}")
 	@ValueSource(ints = {0, 46})
 	@DisplayName("lotto 는 1~45까지만 가능")
 	void lottoNumberBetween1And45(int num) {
