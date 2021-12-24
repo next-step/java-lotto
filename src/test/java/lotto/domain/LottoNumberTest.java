@@ -19,14 +19,4 @@ public class LottoNumberTest {
                 .isInstanceOf(LottoApplicationException.class);
     }
 
-    @Test
-    @DisplayName("toString 테스트: 갖고있는 숫자의 문자열을 리턴한다.")
-    void toStringTest() {
-        int number = 1;
-
-        LottoNumber lottoNumber = new LottoNumber(number);
-
-        assertEquals(number+"", lottoNumber.toString());
-    }
-
 }

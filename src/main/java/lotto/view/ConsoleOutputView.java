@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.stat.LottoRank;
@@ -8,6 +9,8 @@ import lotto.domain.stat.LottoRankCountMap;
 import lotto.domain.stat.LottoResult;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ConsoleOutputView {
 
@@ -15,8 +18,25 @@ public class ConsoleOutputView {
         Collection<Lotto> lottoCollection = lottos.collect();
 
         System.out.println(lottoCollection.size() + "개를 구매했습니다.");
-        lottoCollection.forEach(lotto -> System.out.println(lotto.getLottoNumbers()));
+        lottoCollection.forEach(this::printLotto);
         System.out.println();
+    }
+
+    private void printLotto(Lotto lotto) {
+        List<LottoNumber> lotttoNumbers = lotto.getLottoNumbers();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+
+        String numbersString = lotttoNumbers.stream()
+                .map(LottoNumber::getNumber)
+                .map((num) -> num+"")
+                .collect(Collectors.joining(", "));
+
+        sb.append(numbersString);
+        sb.append("]");
+
+        System.out.println(sb.toString());
     }
 
     public void showResult(LottoResult result) {
