@@ -9,9 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -65,7 +63,7 @@ public class LottoRankCountMapTest {
     @Test
     @DisplayName("get 테스트: 갖고 있는 map에서 해당 key의 대응되는 값을 찾아 리턴한다. 없을경우 0을 리턴한다.")
     void get() {
-        LottoRankCountMap lottoRankCountMap = LottoRankCountMap.create(lottos, winningLotto);
+        LottoRankCountMap lottoRankCountMap = lottos.lottoRankCountMap(winningLotto);
 
         assertEquals(1, lottoRankCountMap.get(LottoRank.FIRST));
         assertEquals(2, lottoRankCountMap.get(LottoRank.SECOND));

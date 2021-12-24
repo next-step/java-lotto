@@ -19,7 +19,7 @@ public class LottoResult {
     }
 
     public static LottoResult generate(Lottos purchasedLottos, Lotto winningLotto, Money payedMoney) {
-        LottoRankCountMap rankCountMap = LottoRankCountMap.create(purchasedLottos, winningLotto);
+        LottoRankCountMap rankCountMap = purchasedLottos.lottoRankCountMap(winningLotto);
 
         Money totalReward = new Money(Arrays.stream(LottoRank.values())
             .map(rank -> rank.multiplyCountToReward(rankCountMap.get(rank)))
