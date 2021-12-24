@@ -1,17 +1,48 @@
 package lotto.domain;
 
 import lotto.domain.stat.LottoRank;
+import lotto.exception.LottoGameException;
+import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LottoTest {
+
+    @Test
+    @DisplayName("생성자 테스트: LottoNumber Set의 size가 6보다 작으면 LottoGameException 발생")
+    void create() {
+        Set<LottoNumber> lottoNumbers = IntStream.range(1, 5)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toSet());
+
+        assertThatThrownBy(() -> new Lotto(lottoNumbers))
+                .isInstanceOf(LottoGameException.class);
+    }
+
+    @Test
+    @DisplayName("생성자 테스트: LottoNumber List 요소들의 중복을 제거한 뒤의 size가 6보다 작으면 LottoGameException 발생")
+    void create2() {
+        List<LottoNumber> lottoNumbers = IntStream.range(1, 5)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        lottoNumbers.add(new LottoNumber(1));
+        lottoNumbers.add(new LottoNumber(2));
+        lottoNumbers.add(new LottoNumber(3));
+        lottoNumbers.add(new LottoNumber(4));
+
+        assertThatThrownBy(() -> new Lotto(lottoNumbers))
+                .isInstanceOf(LottoGameException.class);
+    }
 
     @Test
     @DisplayName("calculateRank 테스트: 일치하는 숫자 갯수에 맞는 LottoRank를 리턴한다.")
