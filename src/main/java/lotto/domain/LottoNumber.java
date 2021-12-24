@@ -23,7 +23,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static int toInt(String number) {
         try {
-            System.out.println(number);
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {
             throw new LottoException("로또 번호는 숫자만 가능합니다.");

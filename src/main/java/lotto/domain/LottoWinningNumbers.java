@@ -27,7 +27,6 @@ public class LottoWinningNumbers {
                 .map(LottoNumber::from)
                 .collect(Collectors.toList());
         LottoNumber bonusNumber = LottoNumber.from(bonus);
-
         return new LottoWinningNumbers(lottoWinningNumberList, bonusNumber);
     }
 
@@ -53,9 +52,13 @@ public class LottoWinningNumbers {
             throw new LottoException("당첨 번호에는 중복이 있으면 안됩니다");
         }
     }
-    
+
     public boolean contain(LottoNumber lottoNumber) {
         return lottoWinningNumbers.contains(lottoNumber);
+    }
+
+    public boolean matchesBonus(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.contains(bonus);
     }
 
     @Override
@@ -75,7 +78,4 @@ public class LottoWinningNumbers {
         return Objects.hash(lottoWinningNumbers);
     }
 
-    public boolean matchesBonus(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.contains(bonus);
-    }
 }

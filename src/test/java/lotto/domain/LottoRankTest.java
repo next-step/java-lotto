@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoRankTest {
 
-    @DisplayName("로또 당첨 번호와 일치하는 로또번호 개수는 개수와 보너스 당첨 여부를 인자로 전달하면 로또 당첨금을 알 수 있다.")
+    @DisplayName("일치하는 로또번호 개수와 보너스 당첨 여부를 인자로 전달하면 LottoRank를 알 수 있다.")
     @MethodSource("provideLottoValues")
     @ParameterizedTest
     void valueOf(int numberOfMatch, boolean matchesBonus, int winningPrize) {

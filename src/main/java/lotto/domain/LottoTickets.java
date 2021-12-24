@@ -1,26 +1,42 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoTickets {
-    private final List<LottoTicket> lottoTickets;
-    private final int price;
+    private final List<LottoTicket> lottoTickets = new ArrayList<>();
 
-    LottoTickets(List<LottoTicket> lottoTickets, int price) {
-        this.lottoTickets = lottoTickets;
-        this.price = price;
+    public LottoTickets(List<LottoTicket>... lottoTicketLists) {
+        for (List<LottoTicket> lottoTicketList : lottoTicketLists) {
+            this.lottoTickets.addAll(lottoTicketList);
+        }
     }
-    
-    public int size() {
-        return lottoTickets.size();
+
+    public WinningResult winningResult(LottoWinningNumbers lottoWinningNumbers, int lottoTicketsPrice) {
+        return WinningResult.from(winningStaticsMap(lottoWinningNumbers), lottoTicketsPrice);
+    }
+
+    private Map<LottoRank, Integer> winningStaticsMap(LottoWinningNumbers lottoWinningNumbers) {
+        Map<LottoRank, Integer> winningStaticsMap = initiateWinningStaticsMap();
+        lottoTickets.forEach(lottoTicket -> {
+            LottoRank lottoRank = lottoTicket.getLottoRank(lottoWinningNumbers);
+            int count = winningStaticsMap.get(lottoRank) + 1;
+            winningStaticsMap.put(lottoRank, count);
+        });
+        return winningStaticsMap;
+    }
+
+    private Map<LottoRank, Integer> initiateWinningStaticsMap() {
+        Map<LottoRank, Integer> winningStaticsMap = new HashMap<>();
+        Arrays.asList(LottoRank.values())
+                .forEach(lottoRank -> {
+                    int count = 0;
+                    winningStaticsMap.put(lottoRank, count);
+                });
+        return winningStaticsMap;
     }
 
     public List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    public double getPrice() {
-        return this.price;
-    }
 }
