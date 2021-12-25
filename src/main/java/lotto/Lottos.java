@@ -1,10 +1,7 @@
 package lotto;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Lottos {
 
@@ -60,4 +57,21 @@ public class Lottos {
         return lottoPrice.multiply(count());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lottos other = (Lottos) o;
+        return Objects.equals(lottos, other.lottos);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottos);
+    }
+    
 }

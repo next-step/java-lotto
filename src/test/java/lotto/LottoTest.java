@@ -28,17 +28,4 @@ class LottoTest {
         assertThat(lotto.getLottoNumbers()).isEqualTo(new Numbers("1, 2, 3, 4, 5, 6"));
     }
 
-    @Test
-    void count_match() {
-        // given
-        Lotto other = new Lotto("1, 2, 3, 4, 5, 6");
-        Lotto current = new Lotto("1, 2, 3, 4, 5, 7");
-
-        // when
-        int count = current.countMatch(other);
-
-        // then
-        assertThat(count).isEqualTo(5);
-    }
-
 }

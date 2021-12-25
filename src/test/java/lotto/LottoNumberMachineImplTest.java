@@ -6,14 +6,14 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoNumberMachineTest {
+class LottoNumberMachineImplTest {
 
-    LottoNumberMachine lottoNumberMachine = new LottoNumberMachine();
+    LottoNumberMachineImpl lottoNumberMachineImpl = new LottoNumberMachineImpl();
 
     @Test
     void lottoNumbers_return_numbers_size_is_6_and_sorted() {
         // when
-        List<Number> lottoNumbers = lottoNumberMachine.lottoNumbers();
+        List<Number> lottoNumbers = lottoNumberMachineImpl.lottoNumbers();
 
         // then
         assertThat(lottoNumbers.size()).isEqualTo(6);

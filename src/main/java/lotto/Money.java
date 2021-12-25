@@ -44,7 +44,6 @@ public class Money {
         return new Money(money.multiply(BigDecimal.valueOf(times)));
     }
 
-
     public Money add(Money other) {
         return new Money(money.add(other.money));
     }
