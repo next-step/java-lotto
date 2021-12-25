@@ -9,7 +9,7 @@ public class LottoNumbers {
     private static final String LOTTO_NUMBERS_DIGIT_MESSAGE = "로또 번호는 6자리여야 합니다.";
     private static final String DUPLICATED_LOTTO_NUMBERS_MESSAGE = "로또 번호는 중복이 없어야 합니다.";
     private static final String DELIMITER = ",\\s|,";
-    public static final int MAX = 6;
+    public static final int SIZE = 6;
 
     private final List<LottoNumber> values;
 
@@ -61,13 +61,15 @@ public class LottoNumbers {
     }
 
     private static boolean isValidDigits(List<Integer> input) {
-        return input == null || input.size() != MAX;
+        return input == null || input.size() != SIZE;
     }
 
     private static boolean isDuplicated(List<Integer> input) {
-        return input.stream()
+        long count = input.stream()
                 .distinct()
-                .count() != input.size();
+                .count();
+
+        return count != input.size();
     }
 
     @Override

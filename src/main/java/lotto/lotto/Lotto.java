@@ -22,6 +22,10 @@ public class Lotto {
         return new Lotto(input);
     }
 
+    public static Lotto from(String input) {
+        return new Lotto(LottoNumbers.from(input));
+    }
+
     public long match(LottoNumbers winningNumbers) {
         return lottoNumbers.match(winningNumbers);
     }
