@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoMachine {
+    public static final int LIMIT = 6;
     public static final int FIRST_NUMBER = 1;
     public static final int LAST_NUMBER = 45;
 
@@ -28,6 +29,6 @@ public class LottoMachine {
 
     public NumberGroup numberGroup() {
         return new NumberGroup(lottoDefaultNumbers.stream()
-                .limit(NumberGroup.LIMIT).map(n -> new Number(n)).collect(Collectors.toList()));
+                .limit(LIMIT).map(n -> new Number(n)).collect(Collectors.toList()));
     }
 }

@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class WinningNumbers {
+    public static final int LIMIT = 6;
+
     private final String winningNumbers;
 
     public WinningNumbers(String winningNumbers) {
@@ -13,7 +15,7 @@ public class WinningNumbers {
     public String[] numbers() {
         String[] numbers = winningNumbers.split(",");
 
-        if (numbers.length != NumberGroup.LIMIT) {
+        if (numbers.length != LIMIT) {
             throw new IllegalArgumentException();
         }
         return numbers;

@@ -29,11 +29,11 @@ class NumberGroupTest {
     @DisplayName("주어진 result에 일치하는 MatchCriteria의 count값이 정상적으로 증가하였는지 확인합니다.")
     void matchMatchCriteria() {
         //given
-        int result = 3;
+        Criteria result = new Criteria(3);
         //when
         mockNumberGroup().matchMatchCriteria(result);
         //then
-        //assertThat(MatchCriteria.THREE.equalsCount(1)).isTrue();
+        assertThat(MatchCriteria.THREE.equalsCount(new Count(1))).isTrue();
     }
 
     NumberGroup mockNumberGroup() {

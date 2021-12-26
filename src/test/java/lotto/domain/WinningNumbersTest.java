@@ -27,7 +27,7 @@ class WinningNumbersTest {
         //when
         String[] numberGroup = new WinningNumbers(winningNumbers).numbers();
         //then
-        assertThat(numberGroup.length).isEqualTo(NumberGroup.LIMIT);
+        assertThat(numberGroup.length).isEqualTo(WinningNumbers.LIMIT);
     }
 
     @Test

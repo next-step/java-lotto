@@ -1,16 +1,16 @@
 package lotto.domain;
 
 public enum MatchCriteria {
-    THREE(3, new Amount(5000), new Count(0)),
-    FOUR(4, new Amount(50_000), new Count(0)),
-    FIVE(5, new Amount(1_500_000), new Count(0)),
-    SIX(6, new Amount(2_000_000_000), new Count(0));
+    THREE(new Criteria(3), new Amount(5_000), new Count(0)),
+    FOUR(new Criteria(4), new Amount(50_000), new Count(0)),
+    FIVE(new Criteria(5), new Amount(1_500_000), new Count(0)),
+    SIX(new Criteria(6), new Amount(2_000_000_000), new Count(0));
 
-    private final int criteria;
+    private final Criteria criteria;
     private final Amount prize;
     private Count count;
 
-    MatchCriteria(int criteria, Amount prize, Count count) {
+    MatchCriteria(Criteria criteria, Amount prize, Count count) {
         this.criteria = criteria;
         this.prize = prize;
         this.count = count;
@@ -25,8 +25,8 @@ public enum MatchCriteria {
         return this;
     }
 
-    public boolean equalsCriteria(int criteria) {
-        return this.criteria == criteria;
+    public boolean equalsCriteria(Criteria criteria) {
+        return this.criteria.equals(criteria);
     }
 
     public boolean equalsCount(Count count) {
@@ -38,7 +38,7 @@ public enum MatchCriteria {
     }
 
     public int getCriteria() {
-        return criteria;
+        return this.criteria.getValue();
     }
 
     public double getPrize() {

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class NumberGroup {
-    public static final int LIMIT = 6;
     private final List<Number> numbers;
 
     public NumberGroup(List<Number> numbers) {
@@ -21,21 +20,14 @@ public class NumberGroup {
         Iterator<Number> thisNumberIterator = numbers.iterator();
         Iterator<Number> winningNumberIterator = winningNumbers.numbers.iterator();
 
-        int matchResult = 0;
+        Criteria matchedCriteria = new Criteria(0);
         while (thisNumberIterator.hasNext() && winningNumberIterator.hasNext()) {
-            matchResult = matchResult(thisNumberIterator.next(), winningNumberIterator.next(), matchResult);
+            matchedCriteria = thisNumberIterator.next().matchResult(winningNumberIterator.next(), matchedCriteria);
         }
-        matchMatchCriteria(matchResult);
+        matchMatchCriteria(matchedCriteria);
     }
 
-    public int matchResult(Number thisNumber, Number winningNumber, int matchResult) {
-        if (thisNumber.equals(winningNumber)) {
-            matchResult++;
-        }
-        return matchResult;
-    }
-
-    public void matchMatchCriteria(int result) {
+    public void matchMatchCriteria(Criteria result) {
         Arrays.stream(MatchCriteria.values())
                 .filter(m -> m.equalsCriteria(result))
                 .findFirst()
