@@ -17,14 +17,18 @@ public class LottoMachine {
         if(count <= 0) {
             throw new IllegalArgumentException();
         }
+
+        return new Lotto(numberGroups(count));
+    }
+
+    private List<NumberGroup> numberGroups(int count) {
         List<NumberGroup> numberGroups = new ArrayList<>();
 
         while(count-- > 0) {
             Collections.shuffle(lottoDefaultNumbers);
             numberGroups.add(numberGroup());
         }
-
-        return new Lotto(numberGroups);
+        return numberGroups;
     }
 
     public NumberGroup numberGroup() {

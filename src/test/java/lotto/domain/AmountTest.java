@@ -23,7 +23,7 @@ class AmountTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {-1000, 0, 1234})
+    @ValueSource(ints = {-1000,  1234})
     @DisplayName("허용하지 않는 값으로 Amount 생성시 IllegalArgumentException이 발생하는지 확인합니다")
     void illegalArgument(int value) {
         assertThatIllegalArgumentException().isThrownBy(

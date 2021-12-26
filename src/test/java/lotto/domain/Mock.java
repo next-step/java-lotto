@@ -25,6 +25,13 @@ public class Mock {
         );
     }
 
+    static void beforeEach() {
+        MatchCriteria.values();
+        for (MatchCriteria matchCriteria : MatchCriteria.values()) {
+            matchCriteria.initCount();
+        }
+    }
+
     static WinningNumbers winningNumbers() {
         String winningNumbers = "1, 2, 3, 4, 5, 6";
         return new WinningNumbers(winningNumbers);

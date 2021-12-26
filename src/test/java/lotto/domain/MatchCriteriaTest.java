@@ -1,11 +1,16 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MatchCriteriaTest {
+    @BeforeEach
+    void beforeEach() {
+        Mock.beforeEach();
+    }
 
     @Test
     @DisplayName("calc 호출시 정상적으로 count값이 증가하는지 확인합니다")
@@ -27,7 +32,7 @@ class MatchCriteriaTest {
         //when
         Amount result = three.calc();
         //then
-        assertThat(result.equals(new Amount(5000))).isTrue();
+        assertThat(result.equals(new Amount(5_000))).isTrue();
     }
 
 }

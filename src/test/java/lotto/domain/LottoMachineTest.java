@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -17,9 +19,9 @@ class LottoMachineTest {
         int lottoPieceCount = 14;
         LottoMachine lottoMachine = new LottoMachine();
         //when
-        Lotto lotto = lottoMachine.lotto(lottoPieceCount);
+        List<NumberGroup> numberGroups = lottoMachine.lotto(lottoPieceCount).getNumberGroups();
         //then
-        assertThat(lotto.appropriate(lottoPieceCount)).isTrue();
+        assertThat(numberGroups.size() == lottoPieceCount).isTrue();
     }
 
     @ParameterizedTest

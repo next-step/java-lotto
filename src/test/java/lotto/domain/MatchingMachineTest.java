@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +10,10 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MatchingMachineTest {
+    @BeforeEach
+    void beforeEach() {
+        Mock.beforeEach();
+    }
 
     @Test
     @DisplayName("일치 기준에 따른 상금의 합계를 구합니다")

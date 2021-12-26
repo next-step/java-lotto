@@ -9,14 +9,15 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 class WinningNumbersTest {
 
     @Test
-    @DisplayName("입력된 당첨 숫자들로 NumberGroup이 생성되는지 확인합니다.")
+    @DisplayName("입력된 당첨 숫자들로 NumberGroup이 생성되고 재 호출시에도 동일한 객체가 호출되는지 확인합니다.")
     void numberGroup() {
         //given
         String winningNumbers = "1, 2, 3, 4, 5, 6";
         //when
         NumberGroup numberGroup = new WinningNumbers(winningNumbers).numberGroup();
+        NumberGroup recallNumberGroup = new WinningNumbers(winningNumbers).numberGroup();
         //then
-        assertThat(numberGroup.appropriate(6)).isTrue();
+        assertThat(numberGroup.equals(recallNumberGroup)).isTrue();
     }
 
     @Test

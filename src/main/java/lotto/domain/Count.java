@@ -3,13 +3,12 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Count {
-    private static int FIRST_POSITION = 0;
-    private static int LAST_POSITION = 6;
+    private static int MIN = 0;
 
     private final int value;
 
     public Count(int value) {
-        if (value < FIRST_POSITION || value > LAST_POSITION) {
+        if (value < MIN) {
             throw new IllegalArgumentException();
         }
         this.value = value;
