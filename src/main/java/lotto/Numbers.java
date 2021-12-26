@@ -45,7 +45,7 @@ public class Numbers {
         return new ArrayList<>(numbers);
     }
 
-    private boolean contains(Number number) {
+    public boolean contains(Number number) {
         return numbers.contains(number);
     }
 

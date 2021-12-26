@@ -1,14 +1,15 @@
 package lotto;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Lottos {
 
-    private static final Money LOTTO_PRICE = new Money(1000);
-
     private final List<Lotto> lottos;
+
+    public Lottos() {
+        this(new ArrayList<>());
+    }
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
@@ -22,28 +23,55 @@ public class Lottos {
         return new ArrayList<>(lottos);
     }
 
-    public int calculateMatchCount(Lotto winnerLotto, int expectedMatchCount) {
-        return (int) lottos.stream()
-                .map(lotto -> lotto.countMatch(winnerLotto))
-                .filter(matchCount -> matchCount == expectedMatchCount)
-                .count()
-                ;
-    }
-
-    public BigDecimal calculateProfit(Lotto winnerLotto) {
-        Money totalWinPrice = new Money();
+    public Map<Rank, Integer> calculateMatchCount(WinnerLotto winLotto) {
+        Map<Rank, Integer> matchCounts = new HashMap<>();
+        int increment = 1;
 
         for(Lotto lotto : lottos) {
-            int matchCount = lotto.countMatch(winnerLotto);
-            Money winPrice = LottoWin.winPriceOf(matchCount);
+            Rank rank = winLotto.calculateRank(lotto);
+            matchCounts.merge(rank, increment, Integer::sum);
+        }
+
+        return matchCounts;
+    }
+
+    public BigDecimal calculateProfit(WinnerLotto winnerLotto, Money lottoPrice) {
+        Money totalWinPrice = new Money();
+
+        for (Lotto lotto : lottos) {
+            Rank rank = winnerLotto.calculateRank(lotto);
+            Money winPrice = rank.winPrice();
             totalWinPrice = totalWinPrice.add(winPrice);
         }
 
-        return totalWinPrice.calculateProfit(moneyForLottos());
+        return totalWinPrice.calculateProfit(moneyForLottos(lottoPrice));
     }
 
-    private Money moneyForLottos() {
-        return LOTTO_PRICE.multiply(count());
+    public void addNewLotto(List<Number> numbers) {
+        Lotto lotto = new Lotto(numbers);
+
+        lottos.add(lotto);
     }
 
+    private Money moneyForLottos(Money lottoPrice) {
+        return lottoPrice.multiply(count());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lottos other = (Lottos) o;
+        return Objects.equals(lottos, other.lottos);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottos);
+    }
+    
 }

@@ -1,35 +1,25 @@
 package lotto.controller;
 
-import lotto.Lotto;
-import lotto.LottoMachine;
+import lotto.LottoResult;
 import lotto.Lottos;
+import lotto.WinnerLotto;
 import lotto.view.InputView;
-import lotto.view.OutputView;
-
-import java.math.BigDecimal;
 
 public class Main {
 
+    static InputView inputView = new InputView();
+    static LottoController lottoController = new LottoController();
+
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-        OutputView outputView = new OutputView();
-        LottoMachine lottoMachine = new LottoMachine();
-
         int moneyForLotto = inputView.showMessageAndGetMoneyInput();
-        Lottos lottos = lottoMachine.buyLottos(moneyForLotto);
-
-        outputView.showHowManyLottosBoughtWithMoney(lottos);
-        outputView.showLottos(lottos);
+        Lottos boughtLottos = lottoController.buyLottos(moneyForLotto);
 
         String lottoWinNumbers = inputView.showMessageAndGetLastWeekLottoWinNumbers();
-        Lotto winnerLotto = new Lotto(lottoWinNumbers);
+        int bonusNumber = inputView.showMessageAndGetBonusNumber();
+        WinnerLotto winnerLotto = lottoController.getWinnerLotto(lottoWinNumbers, bonusNumber);
 
-        outputView.showMatchCount(winnerLotto, lottos);
-
-        BigDecimal profit = lottos.calculateProfit(winnerLotto);
-        System.out.println(profit.toString());
-        outputView.showLottoProfit(profit);
-
+        LottoResult lottoResult = lottoController.calculateLottoResult(boughtLottos, winnerLotto);
+        lottoController.calculateTotalProfit(lottoResult);
     }
 
 }
