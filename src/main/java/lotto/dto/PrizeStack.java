@@ -15,12 +15,8 @@ public class PrizeStack {
 		}
 	}
 
-	public void add(CalculatePrize calculatePrize) {
-		prize.put(calculatePrize, prize.get(calculatePrize) + 1);
-	}
-
-	public int countingPrize(CalculatePrize calculatePrize) {
-		return prize.get(calculatePrize);
+	public Map<CalculatePrize, Integer> getPrize() {
+		return prize;
 	}
 
 	public int size() {

@@ -2,13 +2,12 @@ package lotto.controller;
 
 import java.util.List;
 
-import lotto.domain.LotteryDrawing;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoStore;
-import lotto.dto.PrizeStack;
+import lotto.domain.*;
+import lotto.domain.LottoResult;
 import lotto.view.InputView;
 
 public class LottoController {
+
 	public List<LottoNumbers> buyLotto() {
 		int purchaseAmount = InputView.inputPurchaseAmount();
 		LottoStore lottoStore = new LottoStore(purchaseAmount);
@@ -20,13 +19,25 @@ public class LottoController {
 		return LottoNumbers.createManualLottoNumber(winningsNumberLastWeek);
 	}
 
-	public PrizeStack calculatedResult(LottoNumbers winningNumbers, List<LottoNumbers> lottoTickets) {
-		PrizeStack prizeStack = new PrizeStack();
-		for (LottoNumbers lottoTicket : lottoTickets) {
-			LotteryDrawing draw = new LotteryDrawing(winningNumbers, lottoTicket);
-			prizeStack.add(draw.matchingPrize());
-		}
-		return prizeStack;
+	public LottoNumber inputBonusNumber() {
+		int bonusNumber = InputView.inputBonusNumber();
+		return new LottoNumber(bonusNumber);
 	}
+
+	public LottoResult calculatedResult(LottoNumbers winningNumbers, LottoNumber bonusNumber, List<LottoNumbers> lottoTickets) {
+		LottoResult lottoResult = new LottoResult(lottoTickets.size());
+
+		for (LottoNumbers lottoTicket : lottoTickets) {
+			MatchedLotto draw = new MatchedLotto(winningNumbers, bonusNumber, lottoTicket);
+			lottoResult.add(draw.matchingPrize());
+		}
+		return calculatePrizeCount(lottoResult);
+	}
+
+	private LottoResult calculatePrizeCount(LottoResult lottoResult) {
+		lottoResult.calculatePrizeCount();
+		return lottoResult;
+	}
+
 
 }

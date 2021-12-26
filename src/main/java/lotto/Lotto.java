@@ -3,8 +3,9 @@ package lotto;
 import java.util.List;
 
 import lotto.controller.LottoController;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
-import lotto.dto.PrizeStack;
+import lotto.domain.LottoResult;
 import lotto.view.ResultView;
 
 public class Lotto {
@@ -13,8 +14,9 @@ public class Lotto {
 		List<LottoNumbers> lottoNumbers = controller.buyLotto();
 		ResultView.printPurchasedLotto(lottoNumbers);
 		LottoNumbers winningNumbers = controller.inputWinnings();
-		PrizeStack prizeStack = controller.calculatedResult(winningNumbers, lottoNumbers);
-		ResultView.printLottoResult(prizeStack);
+		LottoNumber bonusNumber = controller.inputBonusNumber();
+		LottoResult lottoResult = controller.calculatedResult(winningNumbers, bonusNumber, lottoNumbers);
+		ResultView.printLottoResult(lottoResult);
 
 	}
 }
