@@ -39,7 +39,8 @@ class WinningNumbersTest {
         //when
         assertThatIllegalArgumentException().isThrownBy(
                 () -> {
-                    new WinningNumbers(winningNumbers).numbers();}
+                    new WinningNumbers(winningNumbers).numbers();
+                }
         );
     }
 }

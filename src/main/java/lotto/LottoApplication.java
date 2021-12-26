@@ -14,7 +14,7 @@ public class LottoApplication {
         inputView.askBuyAmount();
 
         Scanner sc = new Scanner(System.in);
-        Amount lottoAmount = new Amount(sc.nextDouble());
+        Amount lottoAmount = new Amount(sc.nextLong());
         int lottoPieceCount = lottoAmount.lottoPieceCount();
 
         resultView.printLottoCount(lottoPieceCount);

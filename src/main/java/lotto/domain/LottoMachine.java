@@ -14,7 +14,7 @@ public class LottoMachine {
     static final List<Integer> lottoDefaultNumbers = IntStream.range(FIRST_NUMBER, LAST_NUMBER).boxed().collect(Collectors.toList());
 
     public Lotto lotto(int count) {
-        if(count <= 0) {
+        if (count <= 0) {
             throw new IllegalArgumentException();
         }
 
@@ -24,7 +24,7 @@ public class LottoMachine {
     private List<NumberGroup> numberGroups(int count) {
         List<NumberGroup> numberGroups = new ArrayList<>();
 
-        while(count-- > 0) {
+        while (count-- > 0) {
             Collections.shuffle(lottoDefaultNumbers);
             numberGroups.add(numberGroup());
         }

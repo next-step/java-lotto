@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,12 +16,12 @@ public class NumberGroup {
     }
 
     public void match(NumberGroup winningNumbers) {
-        Iterator<Number> thisNumberIterator = numbers.iterator();
-        Iterator<Number> winningNumberIterator = winningNumbers.numbers.iterator();
-
         Criteria matchedCriteria = new Criteria(0);
-        while (thisNumberIterator.hasNext() && winningNumberIterator.hasNext()) {
-            matchedCriteria = thisNumberIterator.next().matchResult(winningNumberIterator.next(), matchedCriteria);
+
+        for (Number number : numbers) {
+            for (Number winningNumber : winningNumbers.numbers) {
+                matchedCriteria = number.matchResult(winningNumber, matchedCriteria);
+            }
         }
         matchMatchCriteria(matchedCriteria);
     }

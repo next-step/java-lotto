@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class Amount {
     public static int PIECE_OF_LOTTO = 1000;
-    private double value;
+    private long value;
 
-    public Amount(double value) {
+    public Amount(long value) {
         if (value < 0 || !(value % PIECE_OF_LOTTO == 0)) {
             throw new IllegalArgumentException();
         }
@@ -29,7 +29,7 @@ public class Amount {
         return new Rate(0).rate(this.value, divisor.value);
     }
 
-    public double getValue() {
+    public long getValue() {
         return value;
     }
 

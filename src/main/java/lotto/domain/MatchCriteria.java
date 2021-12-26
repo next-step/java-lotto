@@ -46,7 +46,7 @@ public enum MatchCriteria {
         return this.criteria.getValue();
     }
 
-    public double getPrize() {
+    public long getPrize() {
         return prize.getValue();
     }
 }

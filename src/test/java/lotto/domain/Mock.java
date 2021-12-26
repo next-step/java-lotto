@@ -16,12 +16,13 @@ public class Mock {
 
     static Lotto mockLotto() {
         return lotto(
+                //3, 5, 11, 16, 32, 38
                 numberGroups(3, 5, 11, 16, 32, 38), // 6
-                numberGroups(3, 5, 11, 16, 32, 7), // 5
-                numberGroups(7, 5, 11, 16, 32, 3), // 4
-                numberGroups(7, 5, 11, 8, 32, 3), // 3
-                numberGroups(2, 5, 11, 16, 32, 38), //5
-                numberGroups(1, 2, 3, 4, 5, 6) // 0
+                numberGroups(7, 3, 5, 11, 16, 32), // 5
+                numberGroups(3, 7, 5, 11, 16, 8), // 4
+                numberGroups(7, 5, 11, 32, 8, 10), // 3
+                numberGroups(2, 38, 5, 11, 16, 32), //5
+                numberGroups(1, 2, 7, 4, 8, 6) // 0
         );
     }
 
