@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class InputView {
 
     private static final String REQUIRE_PURCHASE_AMOUNT_MSG = "구매금액을 입력해 주세요.";
-    private final String REQUIRE_LAST_WINNING_NUMBER_MSG = "지난 주 당첨 번호를 입력해 주세요.";
-    private Scanner scanner;
+    private static final String REQUIRE_LAST_WINNING_NUMBER_MSG = "지난 주 당첨 번호를 입력해 주세요.";
+    private final Scanner scanner;
 
     public InputView(Scanner scanner) {
         this.scanner = scanner;

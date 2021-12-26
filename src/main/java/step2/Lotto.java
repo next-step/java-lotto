@@ -1,30 +1,31 @@
 package step2;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lotto {
 
-    public static final String VALID_LOTTO_COUNT_MSG = "번호 6개를 입력해주세요.";
+    public static final String VALID_LOTTO_COUNT_MSG = "로또 번호는 6개여야 합니다.";
     private static final String COMMA = ",";
     private static final int LOTTO_COUNT = 6;
-    private List<Ball> balls = new ArrayList<>();
+
+    private Set<Ball> balls = new TreeSet<>();
 
     public Lotto(List<Ball> numbers) {
         for (Ball number : numbers) {
-            balls.add(new Ball(number));
+            balls.add(number);
         }
+        validLottoCount();
     }
 
     public Lotto(String numbers) {
-        String[] values = numbers.split(COMMA);
-        if (values.length != LOTTO_COUNT) {
+        this(Arrays.stream(numbers.split(COMMA)).map(ball -> new Ball(ball)).collect(Collectors.toList()));
+    }
+
+    private void validLottoCount() {
+        if (balls.size() != LOTTO_COUNT) {
             throw new IllegalArgumentException(VALID_LOTTO_COUNT_MSG);
-        }
-        for (String value : values) {
-            balls.add(new Ball(value));
         }
     }
 
@@ -45,7 +46,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        Collections.sort(balls);
         return balls.toString();
     }
 
@@ -54,8 +54,6 @@ public class Lotto {
         if (this == o) return true;
         if (!(o instanceof Lotto)) return false;
         Lotto lotto = (Lotto) o;
-        Collections.sort(balls);
-        Collections.sort(lotto.balls);
         return balls.equals(lotto.balls);
     }
 

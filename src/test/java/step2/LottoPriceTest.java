@@ -36,16 +36,10 @@ class LottoPriceTest {
     }
 
     @Test
-    void 로또_수익률_확인() {
-        HashMap<Integer, Integer> map = new HashMap<>();
-        map.put(3, 1);
-        assertThat(new LottoPrice("5000").calcYield(map)).isEqualTo(1);
+    void 로또_구매_가능개수() {
+        assertThat(new LottoPrice("3000").getAvailableForPurchaseCount()).isEqualTo(3);
+        assertThat(new LottoPrice("4500").getAvailableForPurchaseCount()).isEqualTo(4);
     }
 
-    @Test
-    void 로또_수익률_확인_10배() {
-        HashMap<Integer, Integer> map = new HashMap<>();
-        map.put(4, 1);
-        assertThat(new LottoPrice("5000").calcYield(map)).isEqualTo(10);
-    }
+
 }
