@@ -1,7 +1,10 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public enum WinningLottery {
   FIRST(6, 2000000000),
@@ -23,6 +26,13 @@ public enum WinningLottery {
         .filter(e -> Objects.equals(e.matchedCount, matchedCount))
         .findFirst()
         .orElse(NONE);
+  }
+
+  public static List<WinningLottery> getValues() {
+    return Arrays.stream(values())
+        .sorted(Comparator.comparingInt(WinningLottery::getMatchedCount))
+        .filter(e -> e != WinningLottery.NONE)
+        .collect(Collectors.toList());
   }
 
   public int getMatchedCount() {

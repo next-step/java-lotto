@@ -25,7 +25,7 @@ public class  LotteryNumbersTest {
   @Test
   @DisplayName("Test create.")
   void testCreate() {
-    assertEquals(6, new LotteryNumbers().getLotteryNumbers().size());
+    assertEquals(6, new LotteryNumbers().size());
   }
 
   @Test

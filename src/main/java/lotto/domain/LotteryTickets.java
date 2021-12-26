@@ -15,12 +15,32 @@ public class LotteryTickets {
         .collect(Collectors.toList());
   }
 
-  public static List<LotteryTicket> buy(Money money) {
-    return new LotteryTickets(calculateCount(money)).lotteryTickets;
+  public static LotteryTickets buy(Money money) {
+    return new LotteryTickets(calculateCount(money));
+  }
+
+  public long cost() {
+    return lotteryTickets.size() * LotteryTicket.PRICE;
+  }
+
+  public int size() {
+    return lotteryTickets.size();
+  }
+
+  public List<LotteryTicket> getLotteryTickets() {
+    return lotteryTickets;
+  }
+
+  public LotteryTicket getLotteryTicket(int index) {
+    if (index >= lotteryTickets.size()) {
+      throw new IllegalArgumentException("Index is over.");
+    }
+
+    return lotteryTickets.get(index);
   }
 
   private static int calculateCount(Money money) {
-    return (int) (money.getValue() / (long) LotteryTicket.PRICE);
+    return (int) (money.getValue() / LotteryTicket.PRICE);
   }
 
   private void validate(int ticketCount) {

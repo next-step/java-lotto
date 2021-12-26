@@ -11,11 +11,11 @@ public class LotteryTicketsTest {
   @Test
   @DisplayName("Test buy N tickets.")
   void testTicketCount() {
-    final int price = LotteryTicket.PRICE;
+    final long price = LotteryTicket.PRICE;
     final int count = 7;
 
-    assertEquals(count, LotteryTickets.buy(new Money(price * count)).size());
-    assertEquals(count, LotteryTickets.buy(new Money((price * count) + (price - 1))).size());
+    assertEquals(count, LotteryTickets.buy(new Money(price * count)).getLotteryTickets().size());
+    assertEquals(count, LotteryTickets.buy(new Money((price * count) + (price - 1))).getLotteryTickets().size());
   }
 
   @Test
