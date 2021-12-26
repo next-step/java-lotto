@@ -2,12 +2,11 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-class PositionTest {
+class CountTest {
 
     @ParameterizedTest
     @ValueSource(ints = {-1, 100})
@@ -15,7 +14,7 @@ class PositionTest {
     void illegalArgument(int value) {
         assertThatIllegalArgumentException().isThrownBy(
                 () -> {
-                    new Position(value);
+                    new Count(value);
                 }
         );
     }

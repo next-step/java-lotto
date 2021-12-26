@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class NumberGroup {
     public static final int LIMIT = 6;
@@ -40,8 +39,7 @@ public class NumberGroup {
         Arrays.stream(MatchCriteria.values())
                 .filter(m -> m.equalsCriteria(result))
                 .findFirst()
-                .map(MatchCriteria::match)
-                .orElse(MatchCriteria.NOTING);
+                .ifPresent(MatchCriteria::match);
     }
 
     public List<Number> getNumbers() {

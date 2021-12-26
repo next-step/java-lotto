@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 public class Mock {
     static NumberGroup numberGroups(int number1, int number2, int number3, int number4, int number5, int number6) {
-        return new NumberGroup(Arrays.asList(new Number(number1, new Position(0)),
-                new Number(number2, new Position(1)), new Number(number3, new Position(2)),
-                new Number(number4, new Position(3)), new Number(number5, new Position(4)), new Number(number6, new Position(5))));
+        return new NumberGroup(Arrays.asList(new Number(number1),
+                new Number(number2), new Number(number3),
+                new Number(number4), new Number(number5), new Number(number6)));
     }
 
     static Lotto lotto(NumberGroup numberGroup1, NumberGroup numberGroup2, NumberGroup numberGroup3

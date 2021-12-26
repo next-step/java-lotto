@@ -20,7 +20,6 @@ public class WinningNumbers {
     }
 
     public NumberGroup numberGroup() {
-        int[] index = {0};
-        return new NumberGroup(Arrays.stream(numbers()).map(n -> new Number(Integer.parseInt(n.trim()), new Position(index[0]++))).collect(Collectors.toList()));
+        return new NumberGroup(Arrays.stream(numbers()).map(n -> new Number(Integer.parseInt(n.trim()))).collect(Collectors.toList()));
     }
 }

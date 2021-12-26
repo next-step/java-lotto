@@ -1,57 +1,47 @@
 package lotto.domain;
 
-import java.util.Arrays;
-
 public enum MatchCriteria {
-    THREE(3, 5000, 0),
-    FOUR(4, 50000, 0),
-    FIVE(5, 1500000, 0),
-    SIX(6, 2000000000, 0),
-    NOTING(0, 0, 0);
+    THREE(3, new Amount(5000), new Count(0)),
+    FOUR(4, new Amount(50_000), new Count(0)),
+    FIVE(5, new Amount(1_500_000), new Count(0)),
+    SIX(6, new Amount(2_000_000_000), new Count(0));
 
-    private int criteria;
-    private int prize;
-    private int count = 0;
+    private final int criteria;
+    private final Amount prize;
+    private Count count;
 
-    MatchCriteria(int criteria, int prize, int count) {
+    MatchCriteria(int criteria, Amount prize, Count count) {
         this.criteria = criteria;
         this.prize = prize;
         this.count = count;
     }
 
-    public double calc() {
-        return prize * count;
+    public Amount calc() {
+        return prize.multiflyCountAmount(count);
     }
 
     public MatchCriteria match() {
-        count++;
+        count = count.increasedCount();
         return this;
-    }
-
-    public MatchCriteria matchCriteria(int criteria) {
-        return Arrays.stream(MatchCriteria.values())
-                .filter(m -> m.equalsCriteria(criteria))
-                .findFirst()
-                .orElse(NOTING);
     }
 
     public boolean equalsCriteria(int criteria) {
         return this.criteria == criteria;
     }
 
-    public boolean equalsCount(int count) {
-        return this.count == count;
+    public boolean equalsCount(Count count) {
+        return this.count.equals(count);
     }
 
     public int getCount() {
-        return this.count;
+        return this.count.getValue();
     }
 
     public int getCriteria() {
         return criteria;
     }
 
-    public int getPrize() {
-        return prize;
+    public double getPrize() {
+        return prize.getValue();
     }
 }

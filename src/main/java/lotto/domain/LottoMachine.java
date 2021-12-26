@@ -27,8 +27,7 @@ public class LottoMachine {
     }
 
     public NumberGroup numberGroup() {
-        int[] index = {0};
         return new NumberGroup(lottoDefaultNumbers.stream()
-                .limit(NumberGroup.LIMIT).map(n -> new Number(n, new Position(index[0]++))).collect(Collectors.toList()));
+                .limit(NumberGroup.LIMIT).map(n -> new Number(n)).collect(Collectors.toList()));
     }
 }

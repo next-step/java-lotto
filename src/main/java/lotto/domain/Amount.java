@@ -13,13 +13,24 @@ public class Amount {
         this.value = value;
     }
 
+    public Amount multiflyCountAmount(Count count) {
+        return new Amount(this.value * count.getValue());
+    }
+
+    public Amount sumedAmount(Amount amount) {
+        return new Amount(this.value + amount.value);
+    }
+
     public int lottoPieceCount() {
         return (int) (this.value / PIECE_OF_LOTTO);
     }
 
     public Rate dividedAmount(Amount divisor) {
-        //return new Rate(Math.floor((this.value / divisor.value) * 100) / 100.0);
         return new Rate(0).rate(this.value, divisor.value);
+    }
+
+    public double getValue() {
+        return value;
     }
 
     @Override

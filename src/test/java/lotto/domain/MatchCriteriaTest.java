@@ -11,7 +11,7 @@ class MatchCriteriaTest {
     @DisplayName("calc 호출시 정상적으로 count값이 증가하는지 확인합니다")
     void match() {
         //given
-        int count = 1;
+        Count count = new Count(1);
         //when
         MatchCriteria.THREE.match();
         //then
@@ -25,9 +25,9 @@ class MatchCriteriaTest {
         MatchCriteria three = MatchCriteria.THREE;
         three.match();
         //when
-        double result = three.calc();
+        Amount result = three.calc();
         //then
-        assertThat(result).isEqualTo(5000);
+        assertThat(result.equals(new Amount(5000))).isTrue();
     }
 
 }

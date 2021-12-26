@@ -4,6 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LottoTest {
 
@@ -16,10 +18,12 @@ class LottoTest {
         //when
         lotto.match(winningNumbers);
         //then
-        assertThat(MatchCriteria.THREE.equalsCount(1)).isTrue();
-        assertThat(MatchCriteria.FOUR.equalsCount(1)).isTrue();
-        assertThat(MatchCriteria.FIVE.equalsCount(2)).isTrue();
-        assertThat(MatchCriteria.SIX.equalsCount(1)).isTrue();
+        assertAll(
+                () -> assertTrue(MatchCriteria.THREE.equalsCount(new Count(1))),
+                () -> assertTrue(MatchCriteria.FOUR.equalsCount(new Count(1))),
+                () -> assertTrue(MatchCriteria.FIVE.equalsCount(new Count(2))),
+                () -> assertTrue(MatchCriteria.SIX.equalsCount(new Count(1)))
+        );
     }
 
 }

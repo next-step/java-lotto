@@ -4,14 +4,12 @@ import java.util.Objects;
 
 public class Number {
     private final Integer number;
-    private final Position position;
 
-    public Number(Integer number, Position position) {
+    public Number(Integer number) {
         if (number < LottoMachine.FIRST_NUMBER || number > LottoMachine.LAST_NUMBER) {
             throw new IllegalArgumentException();
         }
         this.number = number;
-        this.position = position;
     }
 
     public Integer getNumber() {
@@ -23,12 +21,12 @@ public class Number {
         if (this == o) return true;
         if (!(o instanceof Number)) return false;
         Number thatNumber = (Number) o;
-        return number == thatNumber.number && position.equals(thatNumber.position);
+        return number == thatNumber.number;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number, position);
+        return Objects.hash(number);
     }
 
 }

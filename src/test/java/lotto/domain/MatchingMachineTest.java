@@ -23,7 +23,7 @@ class MatchingMachineTest {
         MatchingMachine matchingMachine = new MatchingMachine(Mock.mockLotto(), Mock.winningNumbers());
 
         //then
-        assertThat(matchingMachine.matchCriteriasAmount()).isEqualTo(new Amount(2001555000));
+        assertThat(matchingMachine.matchCriteriasAmount()).isEqualTo(new Amount(2_001_555_000));
     }
 
     @Test
