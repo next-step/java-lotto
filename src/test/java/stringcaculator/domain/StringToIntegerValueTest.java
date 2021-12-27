@@ -10,22 +10,6 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 class StringToIntegerValueTest {
     @ParameterizedTest
-    @ValueSource(strings = {"-1", "19^8", "-10000"})
-    @DisplayName("숫자 이외의 값이 들어오면 illegalArgumentException을 발생시키는지 확인합니다")
-    void illegalArgument(String argument) {
-        assertThatIllegalArgumentException().isThrownBy(
-                () -> {new StringToIntegerValue(argument);}
-        );
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"1", "198", "10000"})
-    @DisplayName("정상적으로 StringToIntegerValue 객체 생성이 되는지 확인합니다")
-    void legalArgument(String argument) {
-        assertThat(new StringToIntegerValue(argument).equals(new StringToIntegerValue(argument))).isTrue();
-    }
-
-    @ParameterizedTest
     @CsvSource({"'1','2','3'","'4','5','9'"})
     @DisplayName("정상적으로 sum이 실행되는지 확인합니다")
     void sum(String thisValue, String addtionalValue, String result) {

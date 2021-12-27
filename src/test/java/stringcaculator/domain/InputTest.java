@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class InputTest {
     @ParameterizedTest
     @NullAndEmptySource
-    @DisplayName("유효한 Input 객체가 반환되는지 확인합니다")
+    @DisplayName("유효한 Input 객체로 변환되는지 확인합니다")
     void validValid(String value) {
         assertThat(new Input(value).validValue().equals(new Input("0"))).isTrue();
     }
@@ -21,7 +21,7 @@ class InputTest {
     @DisplayName("정상적으로 splitedInput가 실행되는지 확인합니다")
     void splitedInput(String value) {
         String[] result = {"1", "2", "3"};
-        assertThat(new Input(value).splitedInput(DELEMETER_REGEX.GENERAL)).isEqualTo(result);
+        assertThat(new Input(value).splitedInput(DelimiterRegex.GENERAL)).isEqualTo(result);
     }
 
 }
