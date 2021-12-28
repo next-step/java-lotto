@@ -6,27 +6,27 @@ public class Money {
 
     private final BigDecimal amount;
 
+    private Money(long amount) {
+        this(BigDecimal.valueOf(amount));
+    }
+
     private Money(BigDecimal amount) {
+        verify(amount);
         this.amount = amount;
     }
 
-    public static Money from(int value) {
-        return from(Long.valueOf(value));
-    }
-
     public static Money from(long value) {
-        verify(value);
-        return new Money(BigDecimal.valueOf(value));
+        return new Money(value);
     }
 
-    public static void verify(long value) {
-        if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(value)) > 0) {
+    public static void verify(BigDecimal amount) {
+        if (BigDecimal.ZERO.compareTo(amount) > 0) {
             throw new IllegalArgumentException("금액은 음수일 수 없습니다.");
         }
     }
 
     public int divideBy(Money value) {
-        return Integer.parseInt(amount.divide(value.amount).toString());
+        return amount.divide(value.amount).intValue();
     }
 
     public BigDecimal ratio(Money value) {

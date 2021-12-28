@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.LottoTickets;
-import lotto.domain.OrderRequest;
+import lotto.dto.OrderRequest;
 import lotto.service.LottoVendingMachine;
 
 public class LottoController {

@@ -8,12 +8,20 @@ import java.util.stream.Collectors;
 
 public class LotteryResult {
 
+    private static final int PRECISION = 2;
+
     private final Map<Rank, Long> statistics;
     private final Money reward;
 
-    public LotteryResult(Map<Rank, Long> statistics, Money reward) {
+    private LotteryResult(Map<Rank, Long> statistics, Money reward) {
         this.statistics = statistics;
         this.reward = reward;
+    }
+
+    public static LotteryResult from(Map<Rank, Long> result) {
+        Map<Rank, Long> values = Arrays.stream(Rank.values())
+                .collect(Collectors.toMap(value -> value, value -> result.getOrDefault(value, 0L), (a, b) -> b));
+        return new LotteryResult(values, calculate(values));
     }
 
     public Map<Rank, Long> getStatistics() {
@@ -22,14 +30,8 @@ public class LotteryResult {
 
     public BigDecimal ratio() {
         long total = statistics.values().stream().reduce(0L, Long::sum);
-        Money paid = LottoTicket.PRICE.multiply(total);
-        return reward.ratio(paid).setScale(2, RoundingMode.HALF_EVEN);
-    }
-
-    public static LotteryResult from(Map<Rank, Long> result) {
-        Map<Rank, Long> values = Arrays.stream(Rank.values())
-                .collect(Collectors.toMap(value -> value, value -> result.getOrDefault(value, 0L), (a, b) -> b));
-        return new LotteryResult(values, calculate(values));
+        Money paid = LottoNumbers.PRICE.multiply(total);
+        return reward.ratio(paid).setScale(PRECISION, RoundingMode.HALF_EVEN);
     }
 
     private static Money calculate(Map<Rank, Long> result) {

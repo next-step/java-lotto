@@ -1,7 +1,7 @@
 package lotto.service;
 
 import lotto.domain.LottoNumberGenerator;
-import lotto.domain.LottoTicket;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTickets;
 
 import java.util.List;
@@ -20,12 +20,12 @@ public class LottoVendingMachine {
     }
 
     public LottoTickets sell(int counts) {
-        return LottoTickets.of(generateRandomLottoTicket(counts));
+        return LottoTickets.of(generateRandomLottoNumbers(counts));
     }
 
-    private List<LottoTicket> generateRandomLottoTicket(int counts) {
+    private List<LottoNumbers> generateRandomLottoNumbers(int counts) {
         return IntStream.range(0, counts)
-                .mapToObj(i -> new LottoTicket(LottoNumberGenerator.generate()))
+                .mapToObj(i -> LottoNumberGenerator.generate())
                 .collect(Collectors.toList());
     }
 

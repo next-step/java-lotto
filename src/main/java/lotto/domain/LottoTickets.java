@@ -8,10 +8,14 @@ import java.util.stream.Collectors;
 
 public class LottoTickets {
 
-    private List<LottoTicket> values = new ArrayList<>();
+    private List<LottoNumbers> values = new ArrayList<>();
 
-    private LottoTickets(List<LottoTicket> values) {
+    private LottoTickets(List<LottoNumbers> values) {
         this.values = values;
+    }
+
+    public static LottoTickets of(List<LottoNumbers> tickets) {
+        return new LottoTickets(tickets);
     }
 
     public int count() {
@@ -20,19 +24,15 @@ public class LottoTickets {
 
     public LotteryResult calculate(WinningLottoNumbers winnings) {
         Map<Rank, Long> result = values.stream()
-                .map(ticket -> ticket.rank(winnings))
+                .map(ticket -> winnings.rank(ticket))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         return LotteryResult.from(result);
-    }
-
-    public static LottoTickets of(List<LottoTicket> tickets) {
-        return new LottoTickets(tickets);
     }
 
     @Override
     public String toString() {
         return values.stream()
-                .map(LottoTicket::toString)
+                .map(LottoNumbers::toString)
                 .collect(Collectors.joining("\n"));
     }
 }

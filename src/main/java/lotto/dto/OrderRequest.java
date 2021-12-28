@@ -1,4 +1,7 @@
-package lotto.domain;
+package lotto.dto;
+
+import lotto.domain.LottoNumbers;
+import lotto.domain.Money;
 
 public class OrderRequest {
 
@@ -13,6 +16,6 @@ public class OrderRequest {
     }
 
     public static OrderRequest from(Money money) {
-        return new OrderRequest(money.divideBy(LottoTicket.PRICE));
+        return new OrderRequest(money.divideBy(LottoNumbers.PRICE));
     }
 }

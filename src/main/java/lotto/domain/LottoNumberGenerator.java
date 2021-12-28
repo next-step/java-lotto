@@ -10,6 +10,6 @@ public class LottoNumberGenerator {
     public static LottoNumbers generate() {
         List<LottoNumber> shuffled = new ArrayList<>(LottoNumber.LOTTO_NUMBERS);
         Collections.shuffle(shuffled);
-        return LottoNumbers.from(shuffled.subList(0, LottoNumbers.LOTTO_NUMBER_COUNTS).stream().sorted().collect(Collectors.toList()));
+        return LottoNumbers.from(shuffled.subList(0, LottoNumbers.SIZE).stream().sorted().collect(Collectors.toList()));
     }
 }

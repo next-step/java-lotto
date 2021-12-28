@@ -5,6 +5,7 @@ import lotto.domain.LottoTickets;
 import lotto.domain.Rank;
 
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class LottoOutputView {
@@ -32,7 +33,9 @@ public class LottoOutputView {
     }
 
     public String printStatistics(Map<Rank, Long> statistics) {
-        return statistics.entrySet().stream()
+        return new TreeMap<>(statistics).entrySet()
+                .stream()
+                .filter(entry -> entry.getKey() != Rank.NONE)
                 .map(entry -> entry.getKey() + "- " + entry.getValue() + "개")
                 .collect(Collectors.joining("\n"));
     }

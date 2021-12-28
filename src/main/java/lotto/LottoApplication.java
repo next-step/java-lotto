@@ -2,10 +2,10 @@ package lotto;
 
 import lotto.controller.LottoController;
 import lotto.domain.LotteryResult;
-import lotto.domain.WinningLottoNumbers;
-import lotto.domain.OrderRequest;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
+import lotto.domain.WinningLottoNumbers;
+import lotto.dto.OrderRequest;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
