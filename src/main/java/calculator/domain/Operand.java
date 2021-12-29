@@ -15,6 +15,15 @@ public class Operand {
         this.value = value;
     }
 
+    public int getValue() {
+        return value;
+    }
+
+    public static Operand from(String value) {
+        verify(value);
+        return new Operand(Integer.parseInt(value));
+    }
+
     private static void verify(String value) {
         if (isNullOrEmpty(value)) {
             throw new IllegalArgumentException("null 또는 빈문자열을 피연산자로 사용할 수 없습니다.");
@@ -31,15 +40,6 @@ public class Operand {
 
     private static boolean isPositiveInteger(String value) {
         return POSITIVE_INTEGER_PATTERN.matcher(value).matches();
-    }
-
-    public static Operand from(String value) {
-        verify(value);
-        return new Operand(Integer.parseInt(value));
-    }
-
-    public int getValue() {
-        return value;
     }
 
     @Override
