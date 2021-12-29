@@ -19,4 +19,14 @@ class LottoNumbersTest {
 		List<LottoNumber> collect = lottoNumbers.lottoNumbers().stream().distinct().collect(Collectors.toList());
 		assertThat(collect.size()).isEqualTo(6);
 	}
+
+	@Test
+	@DisplayName("로또 수동 구매 테스트")
+	void manual_lotto_Test() {
+		LottoNumbers lottoNumbers = LottoNumbers.createManualLottoNumber(Arrays.asList(8, 21, 23, 41, 42, 43));
+
+		assertThat(lottoNumbers.lottoNumbers())
+			.extracting("lottoNumber", Integer.class)
+			.contains(8, 21, 23, 41, 42, 43);
+	}
 }

@@ -8,14 +8,33 @@ import lotto.view.InputView;
 
 public class LottoController {
 
-	public List<LottoNumbers> buyLotto() {
+	public LottoStore readyToBuyLotto() {
 		int purchaseAmount = InputView.inputPurchaseAmount();
-		LottoStore lottoStore = new LottoStore(purchaseAmount);
-		return lottoStore.buyingLotto();
+		int manualLottoCount = InputView.inputManualLottoCount();
+		return createdLottoStore(purchaseAmount, manualLottoCount);
+	}
+
+	public List<LottoNumbers> buyLotto(LottoStore lottoStore) {
+		return buyingLotto(lottoStore);
+	}
+
+	private List<LottoNumbers> buyingLotto(LottoStore lottoStore) {
+		if (lottoStore.containManualLotto()) {
+			List<List<Integer>> userInputs = InputView.inputManualLottoNumbers(lottoStore.getManualBuyingCount());
+			return lottoStore.buyingAutoAndManualLotto(userInputs);
+		}
+		return lottoStore.buyingAutoLotto();
+	}
+
+	private LottoStore createdLottoStore(int purchaseAmount, int manualLottoCount) {
+		if (manualLottoCount > 0) {
+			return new LottoStore(purchaseAmount, manualLottoCount);
+		}
+		return new LottoStore(purchaseAmount);
 	}
 
 	public LottoNumbers inputWinnings() {
-		List<Integer> winningsNumberLastWeek = InputView.winningsNumberLastWeek();
+		List<Integer> winningsNumberLastWeek = InputView.userInputLastWeekLottoNumbers();
 		return LottoNumbers.createManualLottoNumber(winningsNumberLastWeek);
 	}
 
@@ -24,7 +43,8 @@ public class LottoController {
 		return new LottoNumber(bonusNumber);
 	}
 
-	public LottoResult calculatedResult(LottoNumbers winningNumbers, LottoNumber bonusNumber, List<LottoNumbers> lottoTickets) {
+	public LottoResult calculatedResult(LottoNumbers winningNumbers, LottoNumber bonusNumber,
+		List<LottoNumbers> lottoTickets) {
 		LottoResult lottoResult = new LottoResult(lottoTickets.size());
 
 		for (LottoNumbers lottoTicket : lottoTickets) {
@@ -38,6 +58,5 @@ public class LottoController {
 		lottoResult.calculatePrizeCount();
 		return lottoResult;
 	}
-
 
 }
