@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
@@ -12,6 +13,8 @@ public class InputView {
 
     private static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_NUMBER_SIZE = 6;
+    private static final int LOTTO_NUMBER_MIN = 1;
+    private static final int LOTTO_NUMBER_MAX = 45;
 
     public InputView() {
     }
@@ -36,10 +39,18 @@ public class InputView {
 
     private static void checkWinningNumber(String[] numbers, Set<Integer> winningNumber) {
         if (!(numbers.length == LOTTO_NUMBER_SIZE)) {
-            throw new IllegalStateException("로또 숫자는 여섯개 입니다.");
+            throw new IllegalStateException("로또 숫자는 6개 입니다.");
         }
         if (winningNumber.size() < LOTTO_NUMBER_SIZE) {
-            throw new IllegalStateException("로또 숫자는 중복될 수 없습니다.");
+            throw new IllegalStateException("로또 숫자는 중복되지 않는 6자리 수여야 합니다.");
+        }
+        winningNumber.stream().forEach(num -> checkNumber(num));
+
+    }
+
+    private static void checkNumber(int num) {
+        if ((LOTTO_NUMBER_MAX < num) || (num < LOTTO_NUMBER_MIN)) {
+            throw new IllegalStateException("로또 숫자는 1에서 45까지 입니다.");
         }
     }
 
