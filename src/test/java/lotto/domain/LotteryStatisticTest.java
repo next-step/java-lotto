@@ -16,13 +16,13 @@ public class LotteryStatisticTest {
     LotteryStatistic statistic = new LotteryStatistic();
     statistic.produceTickets(createTickets(), winning);
 
-    double expected = (double) WinningLottery.FOURTH.getPrice() / (double) LotteryTicket.PRICE;
-    assertEquals(expected, statistic.getProfit());
+    double expected = (double) WinningLottery.FOURTH.price() / (double) LotteryTicket.PRICE;
+    assertEquals(expected, statistic.profit());
   }
 
   private LotteryTickets createTickets() {
     LotteryTickets tickets = new LotteryTickets(1);
-    tickets.getLotteryTicket(0).fixManual(new LotteryNumbers(Arrays.asList(4, 5, 6, 7, 8, 9)));
+    tickets.lotteryTicket(0).fixManual(new LotteryNumbers(Arrays.asList(4, 5, 6, 7, 8, 9)));
     return tickets;
   }
 }

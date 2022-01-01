@@ -6,29 +6,30 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
 
   private static final int MIN_NUMBER = 1;
   private static final int MAX_NUMBER = 45;
+  private static final String WRONG_VALUE_EXCEPTION = "The lottery's number is wrong value";
 
   private final int number;
 
   public LotteryNumber(int number) {
-    validate(number);
+    validateAndThrow(number);
     this.number = number;
   }
 
-  public int getNumber() {
+  public int number() {
     return number;
   }
 
-  public static int getMinNumber() {
+  public static int minNumber() {
     return MIN_NUMBER;
   }
 
-  public static int getMaxNumber() {
+  public static int maxNumber() {
     return MAX_NUMBER;
   }
 
-  private void validate(int number) {
+  private void validateAndThrow(int number) {
     if (number < MIN_NUMBER || number > MAX_NUMBER) {
-      throw new IllegalArgumentException("The lottery's number is wrong value");
+      throw new IllegalArgumentException(WRONG_VALUE_EXCEPTION);
     }
   }
 

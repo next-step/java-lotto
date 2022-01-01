@@ -9,15 +9,17 @@ public class InputView {
 
   private static final String QUESTION_BUY_AMOUNT = "구입금액을 입력해 주세요.";
   private static final String QUESTION_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+  private static final String SPLIT_STRING = ",";
+  private static final Scanner scanner = new Scanner(System.in);
 
   public long inputBuyAmount() {
     printQuestion(QUESTION_BUY_AMOUNT);
-    return new Scanner(System.in).nextLong();
+    return scanner.nextLong();
   }
 
   public List<Integer> inputWinningNumbers() {
     printQuestion(QUESTION_WINNING_NUMBERS);
-    String[] winningNumbers = new Scanner(System.in).next().split(",");
+    String[] winningNumbers = scanner.next().split(SPLIT_STRING);
     return Arrays.stream(winningNumbers).map(Integer::parseInt).collect(Collectors.toList());
   }
 

@@ -7,10 +7,10 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public enum WinningLottery {
-  FIRST(6, 2000000000),
-  SECOND(5, 1500000),
-  THIRD(4, 50000),
-  FOURTH(3, 5000),
+  FIRST(6, 2_000_000_000),
+  SECOND(5, 1_500_000),
+  THIRD(4, 50_000),
+  FOURTH(3, 5_000),
   NONE(-1, 0);
 
   private final int matchedCount;
@@ -27,19 +27,19 @@ public enum WinningLottery {
         .findFirst()
         .orElse(NONE);
   }
-
+  
   public static List<WinningLottery> getValues() {
     return Arrays.stream(values())
-        .sorted(Comparator.comparingInt(WinningLottery::getMatchedCount))
+        .sorted(Comparator.comparingInt(WinningLottery::matchedCount))
         .filter(e -> e != WinningLottery.NONE)
         .collect(Collectors.toList());
   }
 
-  public int getMatchedCount() {
+  public int matchedCount() {
     return matchedCount;
   }
 
-  public long getPrice() {
+  public long price() {
     return price;
   }
 }

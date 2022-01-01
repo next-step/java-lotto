@@ -11,7 +11,7 @@ public class MoneyTest {
   @Test
   @DisplayName("Test create.")
   void testCreate() {
-    assertEquals(1000, new Money(1000).getValue());
+    assertEquals(1000, new Money(1000).value());
   }
 
   @Test

@@ -38,8 +38,8 @@ public class  LotteryNumbersTest {
   @MethodSource(value = "generateWinningLottery")
   @DisplayName("Test win lotteries.")
   void testThirdWinner(WinningLottery winning, LotteryNumbers bought) {
-    assertEquals(winning.getMatchedCount(), bought.rank(winningNumbers).getMatchedCount());
-    assertEquals(winning.getPrice(), bought.rank(winningNumbers).getPrice());
+    assertEquals(winning.matchedCount(), bought.rank(winningNumbers).matchedCount());
+    assertEquals(winning.price(), bought.rank(winningNumbers).price());
   }
 
   @Test
