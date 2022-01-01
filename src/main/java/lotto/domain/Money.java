@@ -1,8 +1,11 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
-public class Money {
+public class Money implements Comparable<Money> {
+
+    private static final int PRECISION = 2;
 
     private final BigDecimal amount;
 
@@ -34,7 +37,7 @@ public class Money {
     }
 
     public BigDecimal ratio(Money value) {
-        return amount.divide(value.amount);
+        return amount.divide(value.amount, PRECISION, RoundingMode.HALF_EVEN);
     }
 
     public Money multiply(long value) {
@@ -43,5 +46,14 @@ public class Money {
 
     public Money add(Money value) {
         return new Money(this.amount.add(value.amount));
+    }
+
+    public Money subtract(Money value) {
+        return new Money(this.amount.subtract(value.amount));
+    }
+
+    @Override
+    public int compareTo(Money money) {
+        return this.amount.compareTo(money.amount);
     }
 }
