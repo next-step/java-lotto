@@ -7,7 +7,8 @@ public class Money {
   private final long value;
 
   public Money(long value) {
-    validateAndThrow(value);
+    validateOrThrow
+(value);
     this.value = value;
   }
 
@@ -15,7 +16,8 @@ public class Money {
     return value;
   }
 
-  private void validateAndThrow(long value) {
+  private void validateOrThrow
+(long value) {
     if (value < MIN_VALUE) {
       throw new IllegalArgumentException(WRONG_VALUE_EXCEPTION);
     }

@@ -12,7 +12,8 @@ public class LotteryTickets {
   private final List<LotteryTicket> values;
 
   public LotteryTickets(int ticketCount) {
-    validateAndThrow(ticketCount);
+    validateOrThrow
+(ticketCount);
     this.values = Stream.generate(LotteryTicket::new)
         .limit(ticketCount)
         .collect(Collectors.toList());
@@ -46,7 +47,8 @@ public class LotteryTickets {
     return values.get(index);
   }
 
-  private void validateAndThrow(int ticketCount) {
+  private void validateOrThrow
+(int ticketCount) {
     if (ticketCount < TICKET_MIN_COUNT) {
       throw new IllegalArgumentException(WRONG_COUNT_EXCEPTION);
     }
