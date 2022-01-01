@@ -9,52 +9,61 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class RankTest {
 
-    @DisplayName("6개가 모두 일치하면 FIRST라고 판단한다.")
-    @Test
-    void first() {
+    @ParameterizedTest(name = "6개 일치하고 보너스볼 일치 여부가 {0}이면 FIRST라고 판단한다.")
+    @ValueSource(booleans = {true, false})
+    void 로또_1등(boolean bonus) {
         // given
-        Rank first = Rank.calculate(6);
+        Rank first = Rank.calculate(6, bonus);
 
         // then
         assertThat(first).isEqualTo(Rank.FIRST);
     }
 
-    @DisplayName("5개가 일치하면 SECOND라고 판단한다.")
+    @DisplayName("5개와 보너스 볼이 일치하면 SECOND라고 판단한다.")
     @Test
-    void second() {
+    void 로또_2등() {
         // given
-        Rank second = Rank.calculate(5);
+        Rank second = Rank.calculate(5, true);
 
         // then
         assertThat(second).isEqualTo(Rank.SECOND);
     }
 
-    @DisplayName("4개가 일치하면 THRID라고 판단한다.")
+    @DisplayName("5개가 일치하고 보너스 볼이 일치하지 않으면 THRID라고 판단한다.")
     @Test
-    void third() {
+    void 로또_3등() {
         // given
-        Rank third = Rank.calculate(4);
+        Rank third = Rank.calculate(5, false);
 
         // then
         assertThat(third).isEqualTo(Rank.THIRD);
     }
 
-    @DisplayName("3개가 일치하면 FOURTH라고 판단한다.")
-    @Test
-    void fourth() {
+    @ParameterizedTest(name = "4개 일치하고 보너스볼 일치 여부가 {0}이면 FOURTH라고 판단한다.")
+    @ValueSource(booleans = {true, false})
+    void 로또_4등(boolean bonus) {
         // given
-        Rank fourth = Rank.calculate(3);
+        Rank fourth = Rank.calculate(4, bonus);
 
         // then
         assertThat(fourth).isEqualTo(Rank.FOURTH);
     }
 
-    @DisplayName("2개 이하로 일치하면 NONE이라고 판단한다.")
-    @ParameterizedTest
-    @ValueSource(ints = {0, 1, 2})
-    void none(int matches) {
+    @ParameterizedTest(name = "3개 일치하고 보너스볼 일치 여부가 {0}이면 FIFTH라고 판단한다.")
+    @ValueSource(booleans = {true, false})
+    void 로또_5등(boolean bonus) {
         // given
-        Rank none = Rank.calculate(matches);
+        Rank fifth = Rank.calculate(3, bonus);
+
+        // then
+        assertThat(fifth).isEqualTo(Rank.FIFTH);
+    }
+
+    @ParameterizedTest(name = "{0}개 일치하면 NONE이라고 판단한다.")
+    @ValueSource(ints = {0, 1, 2})
+    void 로또_꽝(int matches) {
+        // given
+        Rank none = Rank.calculate(matches, true);
 
         // then
         assertThat(none).isEqualTo(Rank.NONE);
