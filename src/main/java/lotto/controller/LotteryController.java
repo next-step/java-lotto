@@ -1,10 +1,12 @@
 package lotto.controller;
 
 import java.util.List;
+import lotto.domain.LotteryNumber;
 import lotto.domain.LotteryNumbers;
 import lotto.domain.LotteryStatistic;
 import lotto.domain.LotteryTickets;
 import lotto.domain.Money;
+import lotto.domain.WinningLotteryNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -27,9 +29,9 @@ public class LotteryController {
     LotteryTickets tickets = buyTickets();
     resultView.printLotteryTickets(tickets);
 
-    LotteryNumbers lotteryNumbers = inputWinningNumbers();
+    WinningLotteryNumbers winningNumbers = inputWinningNumbers();
 
-    LotteryStatistic statistic = produceStatistic(tickets, lotteryNumbers);
+    LotteryStatistic statistic = produceStatistic(tickets, winningNumbers);
     resultView.printStatistic(statistic);
   }
 
@@ -39,14 +41,16 @@ public class LotteryController {
     return LotteryTickets.buy(new Money(money));
   }
 
-  private LotteryNumbers inputWinningNumbers() {
+  private WinningLotteryNumbers inputWinningNumbers() {
     List<Integer> winningNumbers = inputView.inputWinningNumbers();
-    return new LotteryNumbers(winningNumbers);
+    int bonusNumber = inputView.inputBonusNumber();
+
+    return new WinningLotteryNumbers(winningNumbers, bonusNumber);
   }
 
-  private LotteryStatistic produceStatistic(LotteryTickets tickets, LotteryNumbers lotteryNumbers) {
+  private LotteryStatistic produceStatistic(LotteryTickets tickets, WinningLotteryNumbers winningNumbers) {
     LotteryStatistic lotteryStatistic = new LotteryStatistic();
-    lotteryStatistic.produceTickets(tickets, lotteryNumbers);
+    lotteryStatistic.produceTickets(tickets, winningNumbers);
     return lotteryStatistic;
   }
 

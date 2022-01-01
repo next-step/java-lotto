@@ -12,8 +12,7 @@ public class LotteryTickets {
   private final List<LotteryTicket> values;
 
   public LotteryTickets(int ticketCount) {
-    validateOrThrow
-(ticketCount);
+    validateOrThrow(ticketCount);
     this.values = Stream.generate(LotteryTicket::new)
         .limit(ticketCount)
         .collect(Collectors.toList());
@@ -24,7 +23,7 @@ public class LotteryTickets {
   }
 
   private static int calculateCount(Money money) {
-    return (int) (money.value() / LotteryTicket.PRICE);
+    return (int) (money.getValue() / LotteryTicket.PRICE);
   }
 
   public long cost() {
@@ -35,7 +34,7 @@ public class LotteryTickets {
     return values.size();
   }
 
-  public List<LotteryTicket> lotteryTickets() {
+  public List<LotteryTicket> getValues() {
     return values;
   }
 
@@ -47,8 +46,7 @@ public class LotteryTickets {
     return values.get(index);
   }
 
-  private void validateOrThrow
-(int ticketCount) {
+  private void validateOrThrow(int ticketCount) {
     if (ticketCount < TICKET_MIN_COUNT) {
       throw new IllegalArgumentException(WRONG_COUNT_EXCEPTION);
     }

@@ -16,7 +16,7 @@ public class LotteryNumbers {
 
   public LotteryNumbers() {
     List<LotteryNumber> generated = LotteryNumbersGenerator.generate(LOTTERY_NUMBERS_SIZE);
-    validate(generated);
+    validateOrThrow(generated);
     this.values = new ArrayList<>(generated).stream()
         .sorted()
         .collect(Collectors.toList());
@@ -27,7 +27,7 @@ public class LotteryNumbers {
         .map(LotteryNumber::new)
         .sorted()
         .collect(Collectors.toList());
-    validate(generated);
+    validateOrThrow(generated);
     this.values = generated;
   }
 
@@ -35,27 +35,19 @@ public class LotteryNumbers {
     return values;
   }
 
-  public boolean contains(LotteryNumber lotteryNumber) {
-    return values.contains(lotteryNumber);
+  public int matchCount(LotteryNumbers winning) {
+    return (int) values.stream().filter(winning::contains).count();
   }
 
-  public WinningLottery rank(LotteryNumbers winning) {
-    if (winning.size() != values.size()) {
-      return WinningLottery.of(WinningLottery.NONE.matchedCount());
-    }
-
-    int matchedCount = (int) values.stream()
-        .filter(winning::contains)
-        .count();
-
-    return WinningLottery.of(matchedCount);
+  public boolean contains(LotteryNumber lotteryNumber) {
+    return values.contains(lotteryNumber);
   }
 
   public int size() {
     return values.size();
   }
 
-  private void validate(List<LotteryNumber> lotteryNumbers) {
+  private void validateOrThrow(List<LotteryNumber> lotteryNumbers) {
     if (lotteryNumbers.size() != LOTTERY_NUMBERS_SIZE) {
       throw new IllegalArgumentException(WRONG_SIZE_EXCEPTION);
     }

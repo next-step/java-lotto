@@ -15,10 +15,6 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
     this.number = number;
   }
 
-  public int number() {
-    return number;
-  }
-
   public static int minNumber() {
     return MIN_NUMBER;
   }
@@ -27,8 +23,11 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
     return MAX_NUMBER;
   }
 
-  private void validateOrThrow
-(int number) {
+  public int getNumber() {
+    return number;
+  }
+
+  private void validateOrThrow(int number) {
     if (number < MIN_NUMBER || number > MAX_NUMBER) {
       throw new IllegalArgumentException(WRONG_VALUE_EXCEPTION);
     }

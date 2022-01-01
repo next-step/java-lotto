@@ -19,16 +19,14 @@ public class LotteryStatistic {
     this.profit = FIRST_PROFIT;
   }
 
-  public void produceTickets(LotteryTickets tickets, LotteryNumbers winningNumbers) {
+  public void produceTickets(LotteryTickets tickets, WinningLotteryNumbers winningNumbers) {
     long revenue = FIRST_REVENUE;
 
     for (int i = 0; i < tickets.size(); i++) {
-      WinningLottery winningLottery = tickets.lotteryTicket(i)
-          .lotteryNumbers()
-          .rank(winningNumbers);
-
+      LotteryNumbers bought = tickets.lotteryTicket(i).lotteryNumbers();
+      WinningLottery winningLottery = winningNumbers.rank(bought);
       putMap(winningLottery);
-      revenue += winningLottery.price();
+      revenue += winningLottery.getPrice();
     }
 
     profit = (double) revenue / (double) tickets.cost();
