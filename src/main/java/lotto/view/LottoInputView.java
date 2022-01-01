@@ -40,4 +40,9 @@ public class LottoInputView {
                 .map(LottoNumber::from)
                 .collect(Collectors.toList());
     }
+
+    public LottoNumber bonusInputPrompt() {
+        System.out.println("보너스볼 번호를 입력해 주세요.");
+        return LottoNumber.from(inputInteger());
+    }
 }
