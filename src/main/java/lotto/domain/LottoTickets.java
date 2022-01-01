@@ -18,6 +18,10 @@ public class LottoTickets {
         return new LottoTickets(tickets);
     }
 
+    public List<LottoNumbers> getValues() {
+        return values;
+    }
+
     public int count() {
         return values.size();
     }
@@ -27,12 +31,5 @@ public class LottoTickets {
                 .map(ticket -> winnings.rank(ticket))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         return LotteryResult.from(result);
-    }
-
-    @Override
-    public String toString() {
-        return values.stream()
-                .map(LottoNumbers::toString)
-                .collect(Collectors.joining("\n"));
     }
 }
