@@ -25,6 +25,10 @@ public class Money {
         }
     }
 
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
     public int divideBy(Money value) {
         return amount.divide(value.amount).intValue();
     }
@@ -39,10 +43,5 @@ public class Money {
 
     public Money add(Money value) {
         return new Money(this.amount.add(value.amount));
-    }
-
-    @Override
-    public String toString() {
-        return amount.toPlainString() + "원";
     }
 }

@@ -26,6 +26,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return LOTTO_NUMBERS.get(toIndex(value));
     }
 
+    public int getValue() {
+        return value;
+    }
+
     private static int toIndex(int value) {
         return value - 1;
     }
@@ -47,11 +51,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int hashCode() {
         return Objects.hash(value);
-    }
-
-    @Override
-    public String toString() {
-        return String.valueOf(value);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
@@ -19,11 +18,19 @@ public class LottoNumbers {
         return new LottoNumbers(values);
     }
 
+    public List<LottoNumber> getValues() {
+        return values;
+    }
+
     public int matches(LottoNumbers numbers) {
         return (int) numbers.values
                 .stream()
                 .filter(this.values::contains)
                 .count();
+    }
+
+    public boolean contains(LottoNumber number) {
+        return values.contains(number);
     }
 
     private static void verify(List<LottoNumber> values) {
@@ -38,12 +45,5 @@ public class LottoNumbers {
 
     private static boolean isDuplicated(List<LottoNumber> values) {
         return values.stream().distinct().count() != SIZE;
-    }
-
-    @Override
-    public String toString() {
-        return values.stream()
-                .map(LottoNumber::toString)
-                .collect(Collectors.joining(", ", "[", "]"));
     }
 }

@@ -22,7 +22,7 @@ public class LottoApplication {
 
         outputView.showLottoTickets(tickets);
 
-        WinningLottoNumbers winnings = WinningLottoNumbers.of(inputView.winningInputPrompt());
+        WinningLottoNumbers winnings = WinningLottoNumbers.of(inputView.winningInputPrompt(), inputView.bonusInputPrompt());
         LotteryResult result = tickets.calculate(winnings);
         outputView.showLottoResult(result);
     }
