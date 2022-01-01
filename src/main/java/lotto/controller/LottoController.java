@@ -19,6 +19,7 @@ public class LottoController {
     }
 
     public LottoTickets buy(OrderRequest request) {
-        return lottoVendingMachine.sell(request.getAmount());
+        return lottoVendingMachine.sell(request.getAmount())
+                .add(LottoTickets.of(request.getTickets()));
     }
 }

@@ -32,4 +32,9 @@ public class LottoTickets {
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         return LotteryResult.from(result);
     }
+
+    public LottoTickets add(LottoTickets tickets) {
+        this.values.addAll(tickets.values);
+        return LottoTickets.of(this.values);
+    }
 }
