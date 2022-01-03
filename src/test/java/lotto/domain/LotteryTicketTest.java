@@ -12,7 +12,7 @@ public class LotteryTicketTest {
   void testCreate() {
     LotteryTicket lotteryTicket = new LotteryTicket();
 
-    assertEquals(LotteryNumbers.LOTTERY_NUMBERS_SIZE, lotteryTicket.getLotteryNumbers().size());
+    assertEquals(LotteryNumbers.LOTTERY_NUMBERS_SIZE, lotteryTicket.lotteryNumbers().size());
     assertEquals(1000, LotteryTicket.PRICE);
   }
 }

@@ -8,13 +8,16 @@ import java.util.stream.Collectors;
 public class LotteryNumbers {
 
   public static final int LOTTERY_NUMBERS_SIZE = 6;
+  private static final String DUPLICATED_EXCEPTION = "The number of lotteries cannot be duplicated.";
+  private static final String WRONG_SIZE_EXCEPTION =
+      String.format("The size of lotteries must be %d.", LOTTERY_NUMBERS_SIZE);
 
-  private final List<LotteryNumber> lotteryNumbers;
+  private final List<LotteryNumber> values;
 
   public LotteryNumbers() {
     List<LotteryNumber> generated = LotteryNumbersGenerator.generate(LOTTERY_NUMBERS_SIZE);
-    validate(generated);
-    this.lotteryNumbers = new ArrayList<>(generated).stream()
+    validateOrThrow(generated);
+    this.values = new ArrayList<>(generated).stream()
         .sorted()
         .collect(Collectors.toList());
   }
@@ -24,39 +27,33 @@ public class LotteryNumbers {
         .map(LotteryNumber::new)
         .sorted()
         .collect(Collectors.toList());
-    validate(generated);
-    this.lotteryNumbers = generated;
+    validateOrThrow(generated);
+    this.values = generated;
   }
 
   public List<LotteryNumber> toList() {
-    return lotteryNumbers;
+    return values;
   }
 
-  public WinningLottery rank(LotteryNumbers winning) {
-    if (winning.size() != lotteryNumbers.size()) {
-      return WinningLottery.of(-1);
-    }
+  public int matchCount(LotteryNumbers winning) {
+    return (int) values.stream().filter(winning::contains).count();
+  }
 
-    int matchedCount = (int) lotteryNumbers.stream()
-        .filter(winning.lotteryNumbers::contains)
-        .count();
-
-    return WinningLottery.of(matchedCount);
+  public boolean contains(LotteryNumber lotteryNumber) {
+    return values.contains(lotteryNumber);
   }
 
   public int size() {
-    return lotteryNumbers.size();
+    return values.size();
   }
 
-  private void validate(List<LotteryNumber> lotteryNumbers) {
+  private void validateOrThrow(List<LotteryNumber> lotteryNumbers) {
     if (lotteryNumbers.size() != LOTTERY_NUMBERS_SIZE) {
-      throw new IllegalArgumentException(
-          String.format("The size of lotteries must be %d.", LOTTERY_NUMBERS_SIZE)
-      );
+      throw new IllegalArgumentException(WRONG_SIZE_EXCEPTION);
     }
 
     if (new HashSet<>(lotteryNumbers).size() != LOTTERY_NUMBERS_SIZE) {
-      throw new IllegalArgumentException("The number of lotteries cannot be duplicated.");
+      throw new IllegalArgumentException(DUPLICATED_EXCEPTION);
     }
   }
 }

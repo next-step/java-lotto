@@ -5,22 +5,26 @@ import java.util.Map;
 
 public class LotteryStatistic {
 
+  private static final int FIRST_REVENUE = 0;
+  private static final int FIRST_PROFIT = 0;
+  private static final int NONE_COUNT = 0;
+  private static final int ADD_COUNT = 1;
+  private static final int TO_INT = 100;
+  private static final double TO_DOUBLE = 100.0;
   private final Map<WinningLottery, Integer> totalLotteries;
   private double profit;
 
   public LotteryStatistic() {
     this.totalLotteries = new EnumMap<>(WinningLottery.class);
-    this.profit = 0;
+    this.profit = FIRST_PROFIT;
   }
 
-  public void produceTickets(LotteryTickets tickets, LotteryNumbers winningNumbers) {
-    long revenue = 0;
+  public void produceTickets(LotteryTickets tickets, WinningLotteryNumbers winningNumbers) {
+    long revenue = FIRST_REVENUE;
 
     for (int i = 0; i < tickets.size(); i++) {
-      WinningLottery winningLottery = tickets.getLotteryTicket(i)
-          .getLotteryNumbers()
-          .rank(winningNumbers);
-
+      LotteryNumbers bought = tickets.lotteryTicket(i).lotteryNumbers();
+      WinningLottery winningLottery = winningNumbers.rank(bought);
       putMap(winningLottery);
       revenue += winningLottery.getPrice();
     }
@@ -28,18 +32,18 @@ public class LotteryStatistic {
     profit = (double) revenue / (double) tickets.cost();
   }
 
-  public double getProfit() {
-    return Math.floor(profit * 100) / 100.0;
+  public double profit() {
+    return Math.floor(profit * TO_INT) / TO_DOUBLE;
   }
 
-  public int winCount(WinningLottery winningLottery) {
+  public int winningCount(WinningLottery winningLottery) {
     if (!totalLotteries.containsKey(winningLottery)) {
-      return 0;
+      return NONE_COUNT;
     }
     return totalLotteries.get(winningLottery);
   }
 
   private void putMap(WinningLottery winningLottery) {
-    totalLotteries.putIfAbsent(winningLottery, totalLotteries.getOrDefault(winningLottery, 0) + 1);
+    totalLotteries.merge(winningLottery, ADD_COUNT, Integer::sum);
   }
 }

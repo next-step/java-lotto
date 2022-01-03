@@ -10,7 +10,7 @@ public class LotteryTicket {
     this.lotteryNumbers = new LotteryNumbers();
   }
 
-  public LotteryNumbers getLotteryNumbers() {
+  public LotteryNumbers lotteryNumbers() {
     return lotteryNumbers;
   }
 

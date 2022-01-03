@@ -14,8 +14,8 @@ public class LotteryTicketsTest {
     final long price = LotteryTicket.PRICE;
     final int count = 7;
 
-    assertEquals(count, LotteryTickets.buy(new Money(price * count)).getLotteryTickets().size());
-    assertEquals(count, LotteryTickets.buy(new Money((price * count) + (price - 1))).getLotteryTickets().size());
+    assertEquals(count, LotteryTickets.buy(new Money(price * count)).getValues().size());
+    assertEquals(count, LotteryTickets.buy(new Money((price * count) + (price - 1))).getValues().size());
   }
 
   @Test
