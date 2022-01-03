@@ -1,14 +1,11 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LotteryResult {
-
-    private static final int PRECISION = 2;
 
     private final Map<Rank, Long> statistics;
     private final Money reward;
@@ -31,7 +28,7 @@ public class LotteryResult {
     public BigDecimal ratio() {
         long total = statistics.values().stream().reduce(0L, Long::sum);
         Money paid = LottoNumbers.PRICE.multiply(total);
-        return reward.ratio(paid).setScale(PRECISION, RoundingMode.HALF_EVEN);
+        return reward.ratio(paid);
     }
 
     private static Money calculate(Map<Rank, Long> result) {
