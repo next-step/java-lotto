@@ -1,8 +1,6 @@
 package lotto.view;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,7 +9,7 @@ public class InputView {
 
     private static final Scanner sc = new Scanner(System.in);
 
-    private static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1_000;
 
     public InputView() {
     }

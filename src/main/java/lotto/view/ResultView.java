@@ -1,8 +1,5 @@
 package lotto.view;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.Lotto;
@@ -10,8 +7,6 @@ import lotto.domain.LottoResult;
 import lotto.domain.MatchType;
 
 public class ResultView {
-
-    private static final int LOTTO_PRICE = 1000;
 
     public ResultView() {
     }
