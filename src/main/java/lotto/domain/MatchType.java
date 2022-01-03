@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum MatchType {
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 1500000),
-    SIX(6, 2000000000);
+    THREE(3, 5_000),
+    FOUR(4, 50_000),
+    FIVE(5, 1_500_000),
+    SIX(6, 2_000_000_000);
 
     private final int count;
     private final int money;
@@ -36,7 +36,7 @@ public enum MatchType {
         return MATCH_MAP.get(count);
     }
 
-    public static MatchType getMatchTypeByCount(final int count) {
+    public static MatchType of(final int count) {
         return Arrays.stream(values())
             .filter(value -> value.count == count)
             .findAny()

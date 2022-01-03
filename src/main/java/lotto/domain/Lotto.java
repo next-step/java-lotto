@@ -28,14 +28,6 @@ public class Lotto {
         return Collections.unmodifiableList(lottoNumber);
     }
 
-    public int matchCount(Set<Integer> winningNumbers) {
-        int matchNumber = 0;
-        for (int i = 0; i < this.lottoNumber.size(); i++) {
-            matchNumber += checkMatch(winningNumbers, i);
-        }
-        return matchNumber;
-    }
-
     private void checkNumbers(List<Integer> numbers) {
         if (!(numbers.size() == LOTTO_NUMBER_SIZE)) {
             throw new IllegalStateException("로또 숫자는 6개 입니다.");
@@ -51,10 +43,6 @@ public class Lotto {
         if ((LOTTO_NUMBER_MAX < num) || (num < LOTTO_NUMBER_MIN)) {
             throw new IllegalStateException("로또 숫자는 1에서 45까지 입니다.");
         }
-    }
-
-    private int checkMatch(Set<Integer> winningNumbers, int num) {
-        return winningNumbers.contains(this.lottoNumber.get(num)) ? 1 : 0;
     }
 
 

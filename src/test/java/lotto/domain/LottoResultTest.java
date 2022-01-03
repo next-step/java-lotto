@@ -16,7 +16,7 @@ class LottoResultTest {
 
     private static final List<Integer> matchCounts =
         new ArrayList<>(Arrays.asList(1, 1, 2, 4, 5, 6));
-    private static final float CONSUME_PRICE = 6000f;
+    private static final float CONSUME_PRICE = 6_000f;
 
     void setUp() {
         lottoResult = new LottoResult(matchCounts);
@@ -47,13 +47,18 @@ class LottoResultTest {
         //when
         float yield = lottoResult.getYield();
         Map<MatchType, Integer> matchResult = lottoResult.getMatchResult();
+        int total = total(matchResult);
+
+        //then
+        assertEquals(yield, total / CONSUME_PRICE);
+    }
+
+    private int total(Map<MatchType, Integer> matchResult) {
         int total = 0;
         for (Map.Entry<MatchType, Integer> entry : matchResult.entrySet()) {
             total += (entry.getKey().getMoney() * entry.getValue());
         }
-
-        //then
-        assertEquals(yield, total / CONSUME_PRICE);
+        return total;
     }
 
 

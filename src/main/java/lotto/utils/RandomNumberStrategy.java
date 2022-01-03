@@ -27,7 +27,10 @@ public class RandomNumberStrategy implements NumberStrategy {
 
     private List<Integer> getRandomNumbers() {
         Collections.shuffle(numbers);
-        return numbers.stream().limit(LOTTO_NUMBER_SIZE).sorted().collect(Collectors.toList());
+        return numbers.stream()
+            .limit(LOTTO_NUMBER_SIZE)
+            .sorted()
+            .collect(Collectors.toList());
     }
 
 }

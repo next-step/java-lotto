@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
+import lotto.utils.FixNumberStrategy;
 import lotto.utils.NumberStrategy;
 import lotto.utils.RandomNumberStrategy;
 
@@ -23,11 +23,11 @@ public class LottoGame {
     }
 
     private void setLottos(int number) {
-        List<Lotto> lottoList = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < number; i++) {
-            lottoList.add(new Lotto(numberStrategy));
+            lottos.add(new Lotto(numberStrategy));
         }
-        this.lottos = lottoList;
+        this.lottos = lottos;
     }
 
     public List<Lotto> getLottos() {
@@ -35,13 +35,9 @@ public class LottoGame {
     }
 
     public LottoResult draw(Set<Integer> winningNumber) {
-        List<Integer> matchNumbers = matchCounts(winningNumber);
-        return new LottoResult(matchNumbers);
+        NumberStrategy numberStrategy = new FixNumberStrategy(new ArrayList<>(winningNumber));
+        WinningLotto winningLotto = new WinningLotto(numberStrategy);
+        return new LottoResult(winningLotto.matchCounts(this.lottos));
     }
 
-    private List<Integer> matchCounts(Set<Integer> winningNumber) {
-        return this.lottos.stream()
-            .map(lotto -> lotto.matchCount(winningNumber))
-            .collect(Collectors.toList());
-    }
 }

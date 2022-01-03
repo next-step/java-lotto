@@ -28,7 +28,7 @@ class MatchTypeTest {
         //given
 
         //when
-        MatchType type = MatchType.getMatchTypeByCount(COUNT);
+        MatchType type = MatchType.of(COUNT);
 
         //then
         assertEquals(type, matchType);

@@ -1,25 +1,25 @@
 package lotto.domain;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Stream;
 import lotto.utils.FixNumberStrategy;
 import lotto.utils.NumberStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTest {
 
     private Lotto lotto;
     private NumberStrategy numberStrategy;
 
-    private static final Set<Integer> winningNumbers = new HashSet<>(
-        Arrays.asList(1, 2, 3, 4, 5, 6));
     private static final List<Integer> fixNumbers = new ArrayList<>(
         Arrays.asList(1, 3, 4, 5, 6, 7));
 
@@ -47,67 +47,28 @@ class LottoTest {
         assertTrue(Arrays.equals(lottoNumbers.toArray(), fixLottoNumbers.toArray()));
     }
 
-    @Test
-    @DisplayName("범위 밖의 숫자로는 로또를 생성하지 않고 예외를 발생시킨다.")
-    void out_of_range_number_is_invalid() {
-        //given
-        List<Integer> invalidFixNumbers = new ArrayList<>(Arrays.asList(-1, 0, 46, 47, 48, 49));
-        NumberStrategy numberStrategy = new FixNumberStrategy(invalidFixNumbers);
-
-        //when
-        Exception exception =
-            assertThrows(IllegalStateException.class, () -> new Lotto(numberStrategy));
-
-        //then
-        assertEquals(exception.getMessage(), OUT_OF_RANGE_EXCEPTION);
+    @ParameterizedTest
+    @MethodSource("invalidLottoNumber")
+    @DisplayName("범위 밖의 숫자, 개수가 6보다 작은 숫자, 중복된 숫자는 로또를 생성하지 않고 각각 알맞은 예외를 발생시킨다.")
+    void out_of_range_number_is_invalid(NumberStrategy invalidNumberStrategy, String exception) {
+        assertThatThrownBy(() -> new Lotto(invalidNumberStrategy))
+            .isInstanceOf(IllegalStateException.class)
+            .hasMessageContaining(exception);
     }
 
-    @Test
-    @DisplayName("숫자의 갯수가 6개가 아니면 로또를 생성하지 않고 예외를 발생시킨다.")
-    void number_size_not_six_is_invalid() {
-        //given
-        List<Integer> invalidFixNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
-        NumberStrategy numberStrategy = new FixNumberStrategy(invalidFixNumbers);
-
-        //when
-        Exception exception =
-            assertThrows(IllegalStateException.class, () -> new Lotto(numberStrategy));
-
-        //then
-        assertEquals(exception.getMessage(), INVALID_SIZE_EXCEPTION);
+    private static Stream<Arguments> invalidLottoNumber() {
+        return Stream.of(
+            Arguments
+                .of(new FixNumberStrategy(Arrays.asList(-1, 0, 46, 47, 48, 49)),
+                    OUT_OF_RANGE_EXCEPTION),
+            Arguments
+                .of(new FixNumberStrategy(Arrays.asList(1, 2, 3, 4, 5)),
+                    INVALID_SIZE_EXCEPTION),
+            Arguments
+                .of(new FixNumberStrategy(Arrays.asList(1, 1, 3, 4, 5, 6)),
+                    DUPLICATION_EXCEPTION)
+        );
     }
 
-    @Test
-    @DisplayName("중복된 숫자로는 로또를 생성하지 않고 예외를 발생시킨다.")
-    void duplicated_number_is_invalid() {
-        //given
-        List<Integer> invalidFixNumbers = new ArrayList<>(Arrays.asList(1, 1, 3, 4, 5, 6));
-        NumberStrategy numberStrategy = new FixNumberStrategy(invalidFixNumbers);
-
-        //when
-        Exception exception =
-            assertThrows(IllegalStateException.class, () -> new Lotto(numberStrategy));
-
-        //then
-        assertEquals(exception.getMessage(), DUPLICATION_EXCEPTION);
-    }
-
-
-    @Test
-    @DisplayName("당첨번호와 일치하는 로또 번호의 갯수를 올바르게 반환한다.")
-    void get_matchCount() {
-        //given
-        setUp();
-
-        //when
-        int matchCount = lotto.matchCount(winningNumbers);
-        int count = 0;
-        for (int i = 0; i < lotto.getLottoNumber().size(); i++) {
-            count += Collections.frequency(winningNumbers, lotto.getLottoNumber().get(i));
-        }
-
-        //then
-        assertEquals(matchCount, count);
-    }
 
 }
