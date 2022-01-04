@@ -7,8 +7,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
+import javafx.util.Pair;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoResultTest {
 
@@ -16,10 +21,18 @@ class LottoResultTest {
 
     private static final List<Integer> matchCounts =
         new ArrayList<>(Arrays.asList(1, 1, 2, 4, 5, 6));
-    private static final float CONSUME_PRICE = 6_000f;
+    private static final float LOTTO_PRICE = 1_000f;
 
+    @Test
     void setUp() {
-        lottoResult = new LottoResult(matchCounts);
+        List<Boolean> matchBonusBall =
+            new ArrayList<>(Arrays.asList(true, false, false, false, true, false));
+
+        List<Pair<Integer, Boolean>> matchResult = new ArrayList<>();
+        for (int i = 0; i < matchCounts.size(); i++) {
+            matchResult.add(new Pair<>(matchCounts.get(i), matchBonusBall.get(i)));
+        }
+        lottoResult = new LottoResult(matchResult);
     }
 
     @Test
@@ -34,15 +47,17 @@ class LottoResultTest {
         //then
         assertEquals(matchResult.get(MatchType.THREE), Collections.frequency(matchCounts, 3));
         assertEquals(matchResult.get(MatchType.FOUR), Collections.frequency(matchCounts, 4));
-        assertEquals(matchResult.get(MatchType.FIVE), Collections.frequency(matchCounts, 5));
+        assertEquals(matchResult.get(MatchType.FIVE), Collections.frequency(matchCounts, 5) - 1);
+        assertEquals(matchResult.get(MatchType.FIVE_AND_BONUS_BALL),
+            Collections.frequency(matchCounts, 5));
         assertEquals(matchResult.get(MatchType.SIX), Collections.frequency(matchCounts, 6));
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("lottoResults")
     @DisplayName("올바른 수익률을 반환한다.")
-    void get_yield() {
+    void get_yield(LottoResult lottoResult, int size) {
         //given
-        setUp();
 
         //when
         float yield = lottoResult.getYield();
@@ -50,7 +65,7 @@ class LottoResultTest {
         int total = total(matchResult);
 
         //then
-        assertEquals(yield, total / CONSUME_PRICE);
+        assertEquals(yield, total / (LOTTO_PRICE * size));
     }
 
     private int total(Map<MatchType, Integer> matchResult) {
@@ -59,6 +74,33 @@ class LottoResultTest {
             total += (entry.getKey().getMoney() * entry.getValue());
         }
         return total;
+    }
+
+    private static Stream<Arguments> lottoResults() {
+        return Stream.of(
+            Arguments.of(new LottoResult(new ArrayList<Pair<Integer, Boolean>>() {{
+                    add(new Pair<>(1, true));
+                    add(new Pair<>(3, false));
+                    add(new Pair<>(5, true));
+                    add(new Pair<>(6, false));
+                }})
+                , 4),
+            Arguments.of(new LottoResult(new ArrayList<Pair<Integer, Boolean>>() {{
+                    add(new Pair<>(1, true));
+                    add(new Pair<>(2, true));
+                    add(new Pair<>(4, true));
+                    add(new Pair<>(6, false));
+                }})
+                , 4),
+            Arguments.of(new LottoResult(new ArrayList<Pair<Integer, Boolean>>() {{
+                    add(new Pair<>(1, true));
+                    add(new Pair<>(3, false));
+                    add(new Pair<>(5, true));
+                    add(new Pair<>(5, false));
+                    add(new Pair<>(6, false));
+                }})
+                , 5)
+        );
     }
 
 

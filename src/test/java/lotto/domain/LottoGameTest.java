@@ -37,7 +37,7 @@ class LottoGameTest {
         //given
 
         //when
-        LottoResult lottoResult = lottoGame.draw(winningNumbers);
+        LottoResult lottoResult = lottoGame.draw(winningNumbers, 7);
 
         //then
         assertEquals(lottoResult.getMatchResult().get(MatchType.FOUR), actual);

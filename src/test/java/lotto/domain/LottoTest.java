@@ -48,25 +48,50 @@ class LottoTest {
     }
 
     @ParameterizedTest
-    @MethodSource("invalidLottoNumber")
-    @DisplayName("범위 밖의 숫자, 개수가 6보다 작은 숫자, 중복된 숫자는 로또를 생성하지 않고 각각 알맞은 예외를 발생시킨다.")
-    void out_of_range_number_is_invalid(NumberStrategy invalidNumberStrategy, String exception) {
+    @MethodSource("outOfRange")
+    @DisplayName("범위 밖의 숫자는 로또를 생성하지 않고 알맞은 예외를 발생시킨다.")
+    void out_of_range_number_is_invalid(NumberStrategy invalidNumberStrategy) {
         assertThatThrownBy(() -> new Lotto(invalidNumberStrategy))
             .isInstanceOf(IllegalStateException.class)
-            .hasMessageContaining(exception);
+            .hasMessageContaining(OUT_OF_RANGE_EXCEPTION);
     }
 
-    private static Stream<Arguments> invalidLottoNumber() {
+    @ParameterizedTest
+    @MethodSource("invalidSize")
+    @DisplayName("개수가 6보다 작은 숫자는 로또를 생성하지 않고 알맞은 예외를 발생시킨다.")
+    void number_size_less_than_six_is_invalid(NumberStrategy invalidNumberStrategy) {
+        assertThatThrownBy(() -> new Lotto(invalidNumberStrategy))
+            .isInstanceOf(IllegalStateException.class)
+            .hasMessageContaining(INVALID_SIZE_EXCEPTION);
+    }
+
+    @ParameterizedTest
+    @MethodSource("duplicatedNumber")
+    @DisplayName("중복된 숫자는 로또를 생성하지 않고 알맞은 예외를 발생시킨다.")
+    void duplicated_number_is_invalid(NumberStrategy invalidNumberStrategy) {
+        assertThatThrownBy(() -> new Lotto(invalidNumberStrategy))
+            .isInstanceOf(IllegalStateException.class)
+            .hasMessageContaining(DUPLICATION_EXCEPTION);
+    }
+
+    private static Stream<Arguments> outOfRange() {
         return Stream.of(
             Arguments
-                .of(new FixNumberStrategy(Arrays.asList(-1, 0, 46, 47, 48, 49)),
-                    OUT_OF_RANGE_EXCEPTION),
+                .of(new FixNumberStrategy(Arrays.asList(-1, 0, 46, 47, 48, 49)))
+        );
+    }
+
+    private static Stream<Arguments> invalidSize() {
+        return Stream.of(
             Arguments
-                .of(new FixNumberStrategy(Arrays.asList(1, 2, 3, 4, 5)),
-                    INVALID_SIZE_EXCEPTION),
+                .of(new FixNumberStrategy(Arrays.asList(1, 2, 3, 4, 5)))
+        );
+    }
+
+    private static Stream<Arguments> duplicatedNumber() {
+        return Stream.of(
             Arguments
-                .of(new FixNumberStrategy(Arrays.asList(1, 1, 3, 4, 5, 6)),
-                    DUPLICATION_EXCEPTION)
+                .of(new FixNumberStrategy(Arrays.asList(1, 1, 3, 4, 5, 6)))
         );
     }
 

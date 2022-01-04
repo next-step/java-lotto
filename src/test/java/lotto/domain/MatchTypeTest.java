@@ -2,36 +2,36 @@ package lotto.domain;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class MatchTypeTest {
 
-    private static final int COUNT = 5;
-    private static final MatchType matchType = MatchType.FIVE;
-
-    @Test
-    @DisplayName("매치 카운트에 알맞은 금액을 리턴한다.")
-    void find_money_with_count() {
+    @ParameterizedTest
+    @MethodSource("matchCount")
+    @DisplayName("매치 카운트에 맞는 매치타입을 리턴한다.")
+    void find_match_type_with_count(int count, boolean matchBonusBall, MatchType matchType) {
         //given
 
         //when
-        int money = MatchType.getMoneyByCount(COUNT);
+        MatchType type = MatchType.of(count, matchBonusBall);
 
         //then
-        assertEquals(money, matchType.getMoney());
+        assertEquals(matchType, type);
     }
 
-    @Test
-    @DisplayName("매치 카운트에 매치타입을 리턴한다.")
-    void find_match_type_with_count() {
-        //given
 
-        //when
-        MatchType type = MatchType.of(COUNT);
-
-        //then
-        assertEquals(type, matchType);
+    private static Stream<Arguments> matchCount() {
+        return Stream.of(
+            Arguments.of(3, false, MatchType.THREE),
+            Arguments.of(4, true, MatchType.FOUR),
+            Arguments.of(5, false, MatchType.FIVE),
+            Arguments.of(5, true, MatchType.FIVE_AND_BONUS_BALL),
+            Arguments.of(6, false, MatchType.SIX)
+        );
     }
 
 }

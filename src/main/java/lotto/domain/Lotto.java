@@ -39,7 +39,7 @@ public class Lotto {
         numbers.stream().forEach(num -> checkNumber(num));
     }
 
-    private void checkNumber(int num) {
+    protected void checkNumber(int num) {
         if ((LOTTO_NUMBER_MAX < num) || (num < LOTTO_NUMBER_MIN)) {
             throw new IllegalStateException("로또 숫자는 1에서 45까지 입니다.");
         }
