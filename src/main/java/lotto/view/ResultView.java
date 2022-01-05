@@ -18,7 +18,7 @@ public class ResultView {
 
     public static void printLottoGameResult(LottoResult lottoResult) {
         System.out.println("당첨 통계\n---------");
-        Map<MatchType, Integer> matchResult = lottoResult.getMatchResult();
+        Map<MatchType, Integer> matchResult = lottoResult.getResult();
         for (Map.Entry<MatchType, Integer> entry : matchResult.entrySet()) {
             printMatchNumber(entry);
         }

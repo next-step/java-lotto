@@ -37,7 +37,7 @@ public class LottoGame {
     public LottoResult draw(Set<Integer> winningNumber, int bonusBall) {
         NumberStrategy numberStrategy = new FixNumberStrategy(new ArrayList<>(winningNumber));
         WinningLotto winningLotto = new WinningLotto(numberStrategy, bonusBall);
-        return new LottoResult(winningLotto.matchResult(this.lottos));
+        return winningLotto.lottoResult(this.lottos);
     }
 
 }

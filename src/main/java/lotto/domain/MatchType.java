@@ -34,12 +34,11 @@ public enum MatchType {
             return FIVE_AND_BONUS_BALL;
         }
 
-        MatchType matchType = Arrays.stream(values())
+        return Arrays.stream(values())
             .filter(value -> value.getCount() == count)
             .findFirst()
             .orElseThrow(IllegalStateException::new);
 
-        return matchType;
     }
 
 

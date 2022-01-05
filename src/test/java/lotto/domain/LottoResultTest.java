@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
-import javafx.util.Pair;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,9 +27,9 @@ class LottoResultTest {
         List<Boolean> matchBonusBall =
             new ArrayList<>(Arrays.asList(true, false, false, false, true, false));
 
-        List<Pair<Integer, Boolean>> matchResult = new ArrayList<>();
+        List<MatchResult> matchResult = new ArrayList<>();
         for (int i = 0; i < matchCounts.size(); i++) {
-            matchResult.add(new Pair<>(matchCounts.get(i), matchBonusBall.get(i)));
+            matchResult.add(new MatchResult(matchCounts.get(i), matchBonusBall.get(i)));
         }
         lottoResult = new LottoResult(matchResult);
     }
@@ -42,7 +41,7 @@ class LottoResultTest {
         setUp();
 
         //when
-        Map<MatchType, Integer> matchResult = lottoResult.getMatchResult();
+        Map<MatchType, Integer> matchResult = lottoResult.getResult();
 
         //then
         assertEquals(matchResult.get(MatchType.THREE), Collections.frequency(matchCounts, 3));
@@ -61,7 +60,7 @@ class LottoResultTest {
 
         //when
         float yield = lottoResult.getYield();
-        Map<MatchType, Integer> matchResult = lottoResult.getMatchResult();
+        Map<MatchType, Integer> matchResult = lottoResult.getResult();
         int total = total(matchResult);
 
         //then
@@ -78,26 +77,26 @@ class LottoResultTest {
 
     private static Stream<Arguments> lottoResults() {
         return Stream.of(
-            Arguments.of(new LottoResult(new ArrayList<Pair<Integer, Boolean>>() {{
-                    add(new Pair<>(1, true));
-                    add(new Pair<>(3, false));
-                    add(new Pair<>(5, true));
-                    add(new Pair<>(6, false));
+            Arguments.of(new LottoResult(new ArrayList<MatchResult>() {{
+                    add(new MatchResult(1, true));
+                    add(new MatchResult(3, false));
+                    add(new MatchResult(5, true));
+                    add(new MatchResult(6, false));
                 }})
                 , 4),
-            Arguments.of(new LottoResult(new ArrayList<Pair<Integer, Boolean>>() {{
-                    add(new Pair<>(1, true));
-                    add(new Pair<>(2, true));
-                    add(new Pair<>(4, true));
-                    add(new Pair<>(6, false));
+            Arguments.of(new LottoResult(new ArrayList<MatchResult>() {{
+                    add(new MatchResult(1, true));
+                    add(new MatchResult(2, true));
+                    add(new MatchResult(4, true));
+                    add(new MatchResult(6, false));
                 }})
                 , 4),
-            Arguments.of(new LottoResult(new ArrayList<Pair<Integer, Boolean>>() {{
-                    add(new Pair<>(1, true));
-                    add(new Pair<>(3, false));
-                    add(new Pair<>(5, true));
-                    add(new Pair<>(5, false));
-                    add(new Pair<>(6, false));
+            Arguments.of(new LottoResult(new ArrayList<MatchResult>() {{
+                    add(new MatchResult(1, true));
+                    add(new MatchResult(3, false));
+                    add(new MatchResult(5, true));
+                    add(new MatchResult(5, false));
+                    add(new MatchResult(6, false));
                 }})
                 , 5)
         );

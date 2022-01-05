@@ -1,10 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import javafx.util.Pair;
 import lotto.utils.NumberStrategy;
 
 public class WinningLotto extends Lotto {
@@ -17,16 +14,14 @@ public class WinningLotto extends Lotto {
         this.bonusBall = bonusBall;
     }
 
-    public List<Pair<Integer, Boolean>> matchResult(List<Lotto> lottos) {
-        List<Pair<Integer, Boolean>> result = matchCounts(lottos);
-        Collections.sort(result, Comparator.comparing(p -> p.getKey()));
-        return result;
+    public LottoResult lottoResult(List<Lotto> lottos) {
+        return new LottoResult(matchResults(lottos));
     }
 
-    public List<Pair<Integer, Boolean>> matchCounts(List<Lotto> lottos) {
-        List<Pair<Integer, Boolean>> result = new ArrayList<>();
+    public List<MatchResult> matchResults(List<Lotto> lottos) {
+        List<MatchResult> result = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            result.add(new Pair<>(matchCount(lotto), matchBonusBall(lotto)));
+            result.add(new MatchResult(matchCount(lotto), matchBonusBall(lotto)));
         }
         return result;
     }

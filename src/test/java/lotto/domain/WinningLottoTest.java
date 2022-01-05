@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-import javafx.util.Pair;
 import lotto.utils.FixNumberStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -47,12 +46,12 @@ class WinningLottoTest {
         setUp();
 
         //when
-        List<Pair<Integer, Boolean>> matchResult = winningLotto.matchCounts(lottos);
+        List<MatchResult> matchResult = winningLotto.matchResults(lottos);
 
         //then
         for (int i = 0; i < lottos.size(); i++) {
-            assertEquals(matchResult.get(i).getKey(), match(lottos.get(i)));
-            assertEquals(matchResult.get(i).getValue(),
+            assertEquals(matchResult.get(i).getMatchCount(), match(lottos.get(i)));
+            assertEquals(matchResult.get(i).isMatchBonusBall(),
                 lottos.get(i).getLottoNumber().contains(bonusBall));
         }
     }
