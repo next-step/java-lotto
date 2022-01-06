@@ -37,11 +37,11 @@ class LottoGameTest {
         //given
 
         //when
-        LottoResult lottoResult = lottoGame.draw(winningNumbers);
+        LottoResult lottoResult = lottoGame.draw(winningNumbers, 7);
 
         //then
-        assertEquals(lottoResult.getMatchResult().get(MatchType.FOUR), actual);
-        assertEquals(lottoResult.getMatchResult().get(MatchType.FIVE), actual);
+        assertEquals(lottoResult.getResult().get(MatchType.FOUR), actual);
+        assertEquals(lottoResult.getResult().get(MatchType.FIVE), actual);
     }
 
     private static Stream<Arguments> lottoGame() {

@@ -34,10 +34,10 @@ public class LottoGame {
         return Collections.unmodifiableList(this.lottos);
     }
 
-    public LottoResult draw(Set<Integer> winningNumber) {
+    public LottoResult draw(Set<Integer> winningNumber, int bonusBall) {
         NumberStrategy numberStrategy = new FixNumberStrategy(new ArrayList<>(winningNumber));
-        WinningLotto winningLotto = new WinningLotto(numberStrategy);
-        return new LottoResult(winningLotto.matchCounts(this.lottos));
+        WinningLotto winningLotto = new WinningLotto(numberStrategy, bonusBall);
+        return winningLotto.lottoResult(this.lottos);
     }
 
 }

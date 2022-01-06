@@ -18,7 +18,7 @@ public class ResultView {
 
     public static void printLottoGameResult(LottoResult lottoResult) {
         System.out.println("당첨 통계\n---------");
-        Map<MatchType, Integer> matchResult = lottoResult.getMatchResult();
+        Map<MatchType, Integer> matchResult = lottoResult.getResult();
         for (Map.Entry<MatchType, Integer> entry : matchResult.entrySet()) {
             printMatchNumber(entry);
         }
@@ -30,8 +30,23 @@ public class ResultView {
     }
 
     private static void printMatchNumber(Map.Entry<MatchType, Integer> entry) {
+        if ((entry.getKey() == MatchType.FIVE_AND_BONUS_BALL)) {
+            printBonusMatch(entry);
+            return;
+        }
+        printMatch(entry);
+    }
+
+    private static void printMatch(Map.Entry<MatchType, Integer> entry) {
         System.out.println(
             entry.getKey().getCount() + "개 일치(" +
+                entry.getKey().getMoney() + ")-" +
+                entry.getValue() + "개");
+    }
+
+    private static void printBonusMatch(Map.Entry<MatchType, Integer> entry) {
+        System.out.println(
+            entry.getKey().getCount() + "개 일치, 보너스 볼 일치(" +
                 entry.getKey().getMoney() + ")-" +
                 entry.getValue() + "개");
     }
