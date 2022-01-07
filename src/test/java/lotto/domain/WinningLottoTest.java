@@ -46,7 +46,8 @@ class WinningLottoTest {
     @ParameterizedTest
     @MethodSource("lotto")
     @DisplayName("당첨번호와 일치하는 로또 번호의 갯수와 보너스볼과의 일치 정보를 올바르게 반환한다.")
-    void get_matchCount(List<Lotto> lottos) {
+    void get_matchCount(List<Lotto> lottos, List<Integer> matchCounts,
+        List<Boolean> matchBonusBall) {
         //given
         setUp();
 
@@ -55,27 +56,20 @@ class WinningLottoTest {
 
         //then
         for (int i = 0; i < lottos.size(); i++) {
-            assertEquals(matchResult.get(i).getMatchCount(), match(lottos.get(i)));
-            assertEquals(matchResult.get(i).isMatchBonusBall(),
-                lottos.get(i).getLottoNumber().contains(bonusBall));
+            assertEquals(matchResult.get(i).getMatchCount(), matchCounts.get(i));
+            assertEquals(matchResult.get(i).isMatchBonusBall(), matchBonusBall.get(i));
+            System.out.println(matchResult.get(i).isMatchBonusBall());
         }
     }
 
     private static Stream<Arguments> lotto() {
         return Stream.of(
             Arguments.of(new ArrayList<>(Arrays.asList(
-                new Lotto(new FixNumberStrategy(Arrays.asList(1, 3, 4, 5, 7, 9))),
-                new Lotto(new FixNumberStrategy(Arrays.asList(1, 3, 4, 5, 6, 8))))))
+                new Lotto(new FixNumberStrategy(Arrays.asList(1, 3, 4, 5, 7, 9)))
+                , new Lotto(new FixNumberStrategy(Arrays.asList(1, 3, 4, 5, 6, 8)))))
+                , new ArrayList<>(Arrays.asList(5, 5))
+                , new ArrayList<>(Arrays.asList(false, true)))
         );
-    }
-
-    private int match(Lotto lotto) {
-        int matchNumber = 0;
-        for (int i = 0; i < lotto.getLottoNumber().size(); i++) {
-            matchNumber += (winningLotto.getLottoNumber()
-                .contains(lotto.getLottoNumber().get(i)) ? 1 : 0);
-        }
-        return matchNumber;
     }
 
 }

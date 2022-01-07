@@ -20,7 +20,6 @@ class LottoResultTest {
 
     private static final List<Integer> matchCounts =
         new ArrayList<>(Arrays.asList(1, 1, 2, 4, 5, 6));
-    private static final float LOTTO_PRICE = 1_000f;
 
     @Test
     void setUp() {
@@ -55,24 +54,14 @@ class LottoResultTest {
     @ParameterizedTest
     @MethodSource("lottoResults")
     @DisplayName("올바른 수익률을 반환한다.")
-    void get_yield(LottoResult lottoResult, int size) {
+    void get_yield(LottoResult lottoResult, float expected) {
         //given
 
         //when
         float yield = lottoResult.getYield();
-        Map<MatchType, Integer> matchResult = lottoResult.getResult();
-        int total = total(matchResult);
 
         //then
-        assertEquals(yield, total / (LOTTO_PRICE * size));
-    }
-
-    private int total(Map<MatchType, Integer> matchResult) {
-        int total = 0;
-        for (Map.Entry<MatchType, Integer> entry : matchResult.entrySet()) {
-            total += (entry.getKey().getMoney() * entry.getValue());
-        }
-        return total;
+        assertEquals(expected, yield);
     }
 
     private static Stream<Arguments> lottoResults() {
@@ -83,14 +72,14 @@ class LottoResultTest {
                     add(new MatchResult(5, true));
                     add(new MatchResult(6, false));
                 }})
-                , 4),
+                , 507501.25f),
             Arguments.of(new LottoResult(new ArrayList<MatchResult>() {{
                     add(new MatchResult(1, true));
                     add(new MatchResult(2, true));
                     add(new MatchResult(4, true));
                     add(new MatchResult(6, false));
                 }})
-                , 4),
+                , 500012.5f),
             Arguments.of(new LottoResult(new ArrayList<MatchResult>() {{
                     add(new MatchResult(1, true));
                     add(new MatchResult(3, false));
@@ -98,9 +87,8 @@ class LottoResultTest {
                     add(new MatchResult(5, false));
                     add(new MatchResult(6, false));
                 }})
-                , 5)
+                , 406301.0f)
         );
     }
-
 
 }
