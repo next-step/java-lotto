@@ -10,7 +10,7 @@ public class WinningLotto extends Lotto {
 
     public WinningLotto(NumberStrategy numberStrategy, int bonusBall) {
         super(numberStrategy);
-        super.checkNumber(bonusBall);
+        checkNumber(bonusBall);
         this.bonusBall = bonusBall;
     }
 
@@ -40,6 +40,14 @@ public class WinningLotto extends Lotto {
 
     private int checkMatch(List<Integer> lottoNumber, int num) {
         return super.getLottoNumber().contains(lottoNumber.get(num)) ? 1 : 0;
+    }
+
+    @Override
+    protected void checkNumber(int bonusBall) {
+        super.checkNumber(bonusBall);
+        if (getLottoNumber().contains(bonusBall)) {
+            throw new IllegalStateException("보너스 볼은 당첨번호에 포함되지 않아야 합니다.");
+        }
     }
 
 }
