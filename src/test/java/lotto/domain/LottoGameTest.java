@@ -20,9 +20,11 @@ class LottoGameTest {
     void create_lotto_game() {
         //given
         int number = 2;
+        int manualCount = 0;
 
         //when
-        LottoGame lottoGame = new LottoGame(number);
+        LottoGame lottoGame = new LottoGame(number,manualCount);
+        lottoGame.addRandomLotto();
 
         //then
         assertEquals(lottoGame.getLottos().size(), number);

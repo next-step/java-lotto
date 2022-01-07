@@ -1,8 +1,9 @@
 package lotto.view;
 
-import java.util.List;
 import java.util.Map;
 import lotto.domain.Lotto;
+import lotto.domain.LottoCount;
+import lotto.domain.LottoGame;
 import lotto.domain.LottoResult;
 import lotto.domain.MatchType;
 
@@ -11,8 +12,9 @@ public class ResultView {
     public ResultView() {
     }
 
-    public static void printLottoNumbers(List<Lotto> lottos) {
-        lottos.forEach(lotto -> printLottoNumber(lotto));
+    public static void printLottoNumbers(LottoGame lottoGame) {
+        printLottoCount(lottoGame.getLottoCount());
+        lottoGame.getLottos().forEach(ResultView::printLottoNumber);
         System.out.println();
     }
 
@@ -27,6 +29,11 @@ public class ResultView {
 
     private static void printLottoNumber(Lotto lotto) {
         System.out.println(lotto.getLottoNumber());
+    }
+
+    private static void printLottoCount(LottoCount lottoCount) {
+        System.out.println("수동으로 " + lottoCount.getManualCount() + "장, 자동으로 "
+            + lottoCount.getAutoCount() + "장을 구매했습니다.");
     }
 
     private static void printMatchNumber(Map.Entry<MatchType, Integer> entry) {
@@ -54,5 +61,6 @@ public class ResultView {
     private static void printTotalYield(float yield) {
         System.out.println("총 수익률은 " + yield + "입니다.");
     }
+
 
 }

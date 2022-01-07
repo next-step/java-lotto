@@ -10,28 +10,37 @@ import lotto.utils.RandomNumberStrategy;
 
 public class LottoGame {
 
-    private List<Lotto> lottos;
-
     private static final NumberStrategy numberStrategy = new RandomNumberStrategy();
 
-    public LottoGame(int number) {
-        setLottos(number);
+    private List<Lotto> lottos = new ArrayList<>();
+
+    private LottoCount lottoCount;
+
+    public LottoGame(int totalCount, int manualCount) {
+        this.lottoCount = new LottoCount(totalCount, manualCount);
     }
 
     public LottoGame(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
-    private void setLottos(int number) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < number; i++) {
+    public void addManualLotto(Set<Integer> manualNumber) {
+        NumberStrategy numberStrategy = new FixNumberStrategy(new ArrayList<>(manualNumber));
+        lottos.add(new Lotto(numberStrategy));
+    }
+
+    public void addRandomLotto() {
+        for (int i = 0; i < lottoCount.getAutoCount(); i++) {
             lottos.add(new Lotto(numberStrategy));
         }
-        this.lottos = lottos;
     }
 
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(this.lottos);
+    }
+
+    public LottoCount getLottoCount() {
+        return lottoCount;
     }
 
     public LottoResult draw(Set<Integer> winningNumber, int bonusBall) {

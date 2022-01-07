@@ -18,10 +18,24 @@ public class InputView {
         System.out.println("구입 금액을 입력해 주세요.");
         int price = sc.nextInt();
         checkPrice(price);
-        int number = price / LOTTO_PRICE;
-        System.out.println(number + "개를 구매했습니다.");
+        int totalCount = price / LOTTO_PRICE;
+        System.out.println(totalCount + "개를 구매했습니다.\n");
         sc.nextLine();
-        return number;
+        return totalCount;
+    }
+
+    public static int inputManualCount() {
+        System.out.println("수동으로 구매할 로또의 수를 입력해주세요.");
+        int manualCount = sc.nextInt();
+        sc.nextLine();
+        return manualCount;
+    }
+
+    public static Set<Integer> inputManualLottoNumber() {
+        String[] numbers = sc.nextLine().split(",");
+        Set<Integer> manualNumber = Arrays
+            .stream(numbers).map(Integer::parseInt).collect(Collectors.toSet());
+        return manualNumber;
     }
 
 
