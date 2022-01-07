@@ -7,12 +7,12 @@ import java.util.Map;
 
 public class LottoResult {
 
+    private static final int LOTTO_PRICE = 1_000;
+    private static final int LOTTO_MATCH_MINIMUM_BOUND = 3;
+
     private Map<MatchType, Integer> result = defaultResult();
 
     private float yield;
-
-    private static final int LOTTO_PRICE = 1_000;
-    private static final int LOTTO_MATCH_MINIMUM_BOUND = 3;
 
     public LottoResult(final List<MatchResult> matchResult) {
         setResult(matchResult);

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.utils.FixNumberStrategy;
 import org.junit.jupiter.api.DisplayName;
@@ -32,10 +33,14 @@ class WinningLottoTest {
         setUp();
 
         //when
-        List<Integer> lottoNumbers = winningLotto.getLottoNumber();
+        List<LottoNumber> lottoNumbers = winningLotto.getLottoNumber();
 
         //then
-        assertTrue(Arrays.equals(lottoNumbers.toArray(), winningNumbers.toArray()));
+        assertTrue(Arrays.equals(lottoNumbers.toArray(),
+            winningNumbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toList())
+                .toArray()));
     }
 
     @ParameterizedTest

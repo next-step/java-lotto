@@ -40,8 +40,8 @@ class LottoTest {
         setUp();
 
         //when
-        List<Integer> lottoNumbers = lotto.getLottoNumber();
-        List<Integer> fixLottoNumbers = numberStrategy.lottoNumbers();
+        List<LottoNumber> lottoNumbers = lotto.getLottoNumber();
+        List<LottoNumber> fixLottoNumbers = numberStrategy.lottoNumbers();
 
         //then
         assertTrue(Arrays.equals(lottoNumbers.toArray(), fixLottoNumbers.toArray()));

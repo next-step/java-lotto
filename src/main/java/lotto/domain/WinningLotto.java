@@ -6,12 +6,12 @@ import lotto.utils.NumberStrategy;
 
 public class WinningLotto extends Lotto {
 
-    private final int bonusBall;
+    private final LottoNumber bonusBall;
 
     public WinningLotto(NumberStrategy numberStrategy, int bonusBall) {
         super(numberStrategy);
-        checkNumber(bonusBall);
-        this.bonusBall = bonusBall;
+        checkBonusBall(bonusBall);
+        this.bonusBall = LottoNumber.of(bonusBall);
     }
 
     public LottoResult lottoResult(List<Lotto> lottos) {
@@ -38,13 +38,11 @@ public class WinningLotto extends Lotto {
         return lotto.getLottoNumber().contains(bonusBall);
     }
 
-    private int checkMatch(List<Integer> lottoNumber, int num) {
+    private int checkMatch(List<LottoNumber> lottoNumber, int num) {
         return super.getLottoNumber().contains(lottoNumber.get(num)) ? 1 : 0;
     }
 
-    @Override
-    protected void checkNumber(int bonusBall) {
-        super.checkNumber(bonusBall);
+    private void checkBonusBall(int bonusBall) {
         if (getLottoNumber().contains(bonusBall)) {
             throw new IllegalStateException("보너스 볼은 당첨번호에 포함되지 않아야 합니다.");
         }

@@ -8,42 +8,32 @@ import lotto.utils.NumberStrategy;
 
 public class Lotto {
 
-    private List<Integer> lottoNumber;
+    private List<LottoNumber> lottoNumber;
 
     private static final int LOTTO_NUMBER_SIZE = 6;
-    private static final int LOTTO_NUMBER_MIN = 1;
-    private static final int LOTTO_NUMBER_MAX = 45;
 
     public Lotto(NumberStrategy numberStrategy) {
         setLottoNumber(numberStrategy);
     }
 
     private void setLottoNumber(NumberStrategy numberStrategy) {
-        final List<Integer> numbers = numberStrategy.lottoNumbers();
+        final List<LottoNumber> numbers = numberStrategy.lottoNumbers();
         checkNumbers(numbers);
         this.lottoNumber = numbers;
     }
 
-    public List<Integer> getLottoNumber() {
+    public List<LottoNumber> getLottoNumber() {
         return Collections.unmodifiableList(lottoNumber);
     }
 
-    private void checkNumbers(List<Integer> numbers) {
+    private void checkNumbers(List<LottoNumber> numbers) {
         if (!(numbers.size() == LOTTO_NUMBER_SIZE)) {
             throw new IllegalStateException("로또 숫자는 6개 입니다.");
         }
-        Set<Integer> set = new HashSet<>(numbers);
+        Set<LottoNumber> set = new HashSet<>(numbers);
         if (set.size() < LOTTO_NUMBER_SIZE) {
             throw new IllegalStateException("로또 숫자는 중복되지 않는 6자리 수여야 합니다.");
         }
-        numbers.stream().forEach(num -> checkNumber(num));
     }
-
-    protected void checkNumber(int num) {
-        if ((LOTTO_NUMBER_MAX < num) || (num < LOTTO_NUMBER_MIN)) {
-            throw new IllegalStateException("로또 숫자는 1에서 45까지 입니다.");
-        }
-    }
-
 
 }
