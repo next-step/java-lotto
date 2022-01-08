@@ -10,17 +10,28 @@ public class LottoMain {
     public static void main(String[] args) {
         int totalCount = InputView.inputPrice();
         int manualCount = InputView.inputManualCount();
-        LottoGame lottoGame = new LottoGame(totalCount, manualCount);
+        LottoGame lottoGame = startLottoGame(totalCount, manualCount);
+        drawLottoGame(lottoGame);
+    }
 
+    private static LottoGame startLottoGame(int totalCount, int manualCount) {
+        LottoGame lottoGame = new LottoGame(totalCount, manualCount);
+        addManualLotto(lottoGame, manualCount);
+        lottoGame.addRandomLotto();
+        ResultView.printLottoNumbers(lottoGame);
+        return lottoGame;
+    }
+
+    private static void addManualLotto(LottoGame lottoGame, int manualCount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         while (manualCount > 0) {
             Set<Integer> manualLottoNumber = InputView.inputManualLottoNumber();
             lottoGame.addManualLotto(manualLottoNumber);
             manualCount--;
         }
-        lottoGame.addRandomLotto();
-        ResultView.printLottoNumbers(lottoGame);
+    }
 
+    private static void drawLottoGame(LottoGame lottoGame) {
         Set<Integer> winningNumbers = InputView.inputWinningNumber();
         int bonusBall = InputView.inputBonusBall();
         ResultView.printLottoGameResult(lottoGame.draw(winningNumbers, bonusBall));

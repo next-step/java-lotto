@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.math.BigDecimal;
 import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
@@ -58,7 +59,7 @@ public class ResultView {
                 entry.getValue() + "개");
     }
 
-    private static void printTotalYield(float yield) {
+    private static void printTotalYield(BigDecimal yield) {
         System.out.println("총 수익률은 " + yield + "입니다.");
     }
 

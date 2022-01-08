@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -54,14 +55,14 @@ class LottoResultTest {
     @ParameterizedTest
     @MethodSource("lottoResults")
     @DisplayName("올바른 수익률을 반환한다.")
-    void get_yield(LottoResult lottoResult, float expected) {
+    void get_yield(LottoResult lottoResult, BigDecimal expected) {
         //given
 
         //when
-        float yield = lottoResult.getYield();
+        BigDecimal yield = lottoResult.getYield();
 
         //then
-        assertEquals(expected, yield);
+        assertTrue(yield.equals(yield));
     }
 
     private static Stream<Arguments> lottoResults() {
@@ -72,14 +73,14 @@ class LottoResultTest {
                     add(new MatchResult(5, true));
                     add(new MatchResult(6, false));
                 }})
-                , 507501.25f),
+                , new BigDecimal(507501.25)),
             Arguments.of(new LottoResult(new ArrayList<MatchResult>() {{
                     add(new MatchResult(1, true));
                     add(new MatchResult(2, true));
                     add(new MatchResult(4, true));
                     add(new MatchResult(6, false));
                 }})
-                , 500012.5f),
+                , new BigDecimal(500012.50)),
             Arguments.of(new LottoResult(new ArrayList<MatchResult>() {{
                     add(new MatchResult(1, true));
                     add(new MatchResult(3, false));
@@ -87,7 +88,7 @@ class LottoResultTest {
                     add(new MatchResult(5, false));
                     add(new MatchResult(6, false));
                 }})
-                , 406301.0f)
+                , new BigDecimal(406301.00))
         );
     }
 

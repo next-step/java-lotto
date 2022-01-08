@@ -18,6 +18,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoGameTest {
 
+    private static final int LOTTO_NUMBER_SIZE = 6;
+
     @ParameterizedTest
     @MethodSource("lottoCount")
     @DisplayName("주어진 매뉴얼 숫자대로 생성된 로또를 로또 목록에 추가한다.")
@@ -31,13 +33,15 @@ class LottoGameTest {
 
         //then
         assertEquals(lottoGame.getLottos().size(), manualCount);
-        for (Set<Integer> manualNumber : manualNumbers) {
-            assertThat(manualNumber.stream()
-                .map(m -> LottoNumber.of(m))
-                .collect(Collectors.toList())
-                .equals(lottoGame.getLottos()));
+        for (int i = 0; i < lottoGame.getLottos().size(); i++) {
+            List<LottoNumber> manualLotto = manualNumbers.get(i).stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
+            List<LottoNumber> createdLotto = lottoGame.getLottos().get(i).getLottoNumber();
+            compareLottNumbers(manualLotto, createdLotto);
         }
     }
+
 
     @ParameterizedTest
     @CsvSource({"1,0", "3,2", "7,2"})
@@ -89,6 +93,12 @@ class LottoGameTest {
                 , new HashSet(Arrays.asList(34, 35, 36, 37, 38, 39))
             ))
         );
+    }
+
+    private void compareLottNumbers(List<LottoNumber> expected, List<LottoNumber> created) {
+        for (int j = 0; j < LOTTO_NUMBER_SIZE; j++) {
+            assertThat(expected.get(j).equals(created.get(j))).isTrue();
+        }
     }
 
 

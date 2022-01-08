@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -12,7 +13,7 @@ public class LottoResult {
 
     private Map<MatchType, Integer> result = defaultResult();
 
-    private float yield;
+    private BigDecimal yield;
 
     public LottoResult(final List<MatchResult> matchResult) {
         setResult(matchResult);
@@ -22,7 +23,7 @@ public class LottoResult {
         return Collections.unmodifiableMap(result);
     }
 
-    public float getYield() {
+    public BigDecimal getYield() {
         return yield;
     }
 
@@ -47,8 +48,9 @@ public class LottoResult {
         }
     }
 
-    private float yield(int totalPrice, int lottoSize) {
-        return ((float) totalPrice) / (lottoSize * LOTTO_PRICE);
+    private BigDecimal yield(int totalPrice, int lottoSize) {
+        BigDecimal total = new BigDecimal(totalPrice);
+        return total.divide(new BigDecimal((lottoSize * LOTTO_PRICE)), 2, BigDecimal.ROUND_HALF_UP);
     }
 
     private int calculate() {
