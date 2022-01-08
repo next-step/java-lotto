@@ -50,7 +50,7 @@ public class LottoResult {
 
     private BigDecimal yield(int totalPrice, int lottoSize) {
         BigDecimal total = new BigDecimal(totalPrice);
-        return total.divide(new BigDecimal((lottoSize * LOTTO_PRICE)), 2, BigDecimal.ROUND_HALF_UP);
+        return total.divide(new BigDecimal(lottoSize * LOTTO_PRICE), 2, BigDecimal.ROUND_HALF_UP);
     }
 
     private int calculate() {
