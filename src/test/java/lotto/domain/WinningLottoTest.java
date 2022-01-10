@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.utils.FixNumberStrategy;
@@ -16,14 +18,14 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class WinningLottoTest {
 
-    private WinningLotto winningLotto;
-
-    private static final List<Integer> winningNumbers = new ArrayList<>(
+    private static final Set<Integer> winningNumbers = new HashSet<>(
         Arrays.asList(1, 3, 4, 5, 6, 7));
     private static final int bonusBall = 8;
 
+    private WinningLotto winningLotto;
+
     void setUp() {
-        winningLotto = new WinningLotto(new FixNumberStrategy(winningNumbers), bonusBall);
+        winningLotto = new WinningLotto(winningNumbers, bonusBall);
     }
 
     @Test

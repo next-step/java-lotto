@@ -2,14 +2,16 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.utils.NumberStrategy;
+import java.util.Set;
+import lotto.utils.FixNumberStrategy;
 
 public class WinningLotto extends Lotto {
 
     private final LottoNumber bonusBall;
 
-    public WinningLotto(NumberStrategy numberStrategy, int bonusBall) {
-        super(numberStrategy);
+    public WinningLotto(Set<Integer> winningNumber, int bonusBall) {
+        super();
+        super.setLottoNumber(new FixNumberStrategy(new ArrayList<>(winningNumber)));
         checkBonusBall(bonusBall);
         this.bonusBall = LottoNumber.of(bonusBall);
     }

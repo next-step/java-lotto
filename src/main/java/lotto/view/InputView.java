@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
+import lotto.domain.ManualLottos;
+import lotto.domain.WinningLotto;
 
 public class InputView {
 
@@ -24,30 +26,42 @@ public class InputView {
         return totalCount;
     }
 
-    public static int inputManualCount() {
+    public static ManualLottos inputManualLottos() {
+        int manualCount = inputManualCount();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        ManualLottos manualLottos = new ManualLottos();
+        while (manualCount > 0) {
+            Set<Integer> manualLottoNumber = InputView.inputManualLottoNumber();
+            manualLottos.addManualLotto(manualLottoNumber);
+            manualCount--;
+        }
+        return manualLottos;
+    }
+
+    public static WinningLotto inputWinningNumber() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        String[] numbers = sc.nextLine().split(",");
+        Set<Integer> winningNumber = Arrays
+            .stream(numbers).map(Integer::parseInt).collect(Collectors.toSet());
+        int bonusBall = inputBonusBall();
+        return new WinningLotto(winningNumber, bonusBall);
+    }
+
+
+    private static int inputManualCount() {
         System.out.println("수동으로 구매할 로또의 수를 입력해주세요.");
         int manualCount = sc.nextInt();
         sc.nextLine();
         return manualCount;
     }
 
-    public static Set<Integer> inputManualLottoNumber() {
+    private static Set<Integer> inputManualLottoNumber() {
         String[] numbers = sc.nextLine().split(",");
-        Set<Integer> manualNumber = Arrays
+        return Arrays
             .stream(numbers).map(Integer::parseInt).collect(Collectors.toSet());
-        return manualNumber;
     }
 
-
-    public static Set<Integer> inputWinningNumber() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String[] numbers = sc.nextLine().split(",");
-        Set<Integer> winningNumber = Arrays
-            .stream(numbers).map(Integer::parseInt).collect(Collectors.toSet());
-        return winningNumber;
-    }
-
-    public static int inputBonusBall() {
+    private static int inputBonusBall() {
         System.out.println("보너스 볼을 입력해주세요.");
         return sc.nextInt();
     }

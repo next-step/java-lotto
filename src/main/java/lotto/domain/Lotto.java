@@ -8,15 +8,18 @@ import lotto.utils.NumberStrategy;
 
 public class Lotto {
 
+    private static final int LOTTO_NUMBER_SIZE = 6;
+
     private List<LottoNumber> lottoNumber;
 
-    private static final int LOTTO_NUMBER_SIZE = 6;
+    public Lotto() {
+    }
 
     public Lotto(NumberStrategy numberStrategy) {
         setLottoNumber(numberStrategy);
     }
 
-    private void setLottoNumber(NumberStrategy numberStrategy) {
+    protected void setLottoNumber(NumberStrategy numberStrategy) {
         final List<LottoNumber> numbers = numberStrategy.lottoNumbers();
         checkNumbers(numbers);
         this.lottoNumber = numbers;

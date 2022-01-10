@@ -1,7 +1,8 @@
 package lotto;
 
-import java.util.Set;
 import lotto.domain.LottoGame;
+import lotto.domain.ManualLottos;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -9,31 +10,11 @@ public class LottoMain {
 
     public static void main(String[] args) {
         int totalCount = InputView.inputPrice();
-        int manualCount = InputView.inputManualCount();
-        LottoGame lottoGame = startLottoGame(totalCount, manualCount);
-        drawLottoGame(lottoGame);
-    }
-
-    private static LottoGame startLottoGame(int totalCount, int manualCount) {
-        LottoGame lottoGame = new LottoGame(totalCount, manualCount);
-        addManualLotto(lottoGame, manualCount);
-        lottoGame.addRandomLotto();
+        ManualLottos manualLottos = InputView.inputManualLottos();
+        LottoGame lottoGame = new LottoGame(totalCount, manualLottos);
         ResultView.printLottoNumbers(lottoGame);
-        return lottoGame;
-    }
 
-    private static void addManualLotto(LottoGame lottoGame, int manualCount) {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        while (manualCount > 0) {
-            Set<Integer> manualLottoNumber = InputView.inputManualLottoNumber();
-            lottoGame.addManualLotto(manualLottoNumber);
-            manualCount--;
-        }
-    }
-
-    private static void drawLottoGame(LottoGame lottoGame) {
-        Set<Integer> winningNumbers = InputView.inputWinningNumber();
-        int bonusBall = InputView.inputBonusBall();
-        ResultView.printLottoGameResult(lottoGame.draw(winningNumbers, bonusBall));
+        WinningLotto winningLotto = InputView.inputWinningNumber();
+        ResultView.printLottoGameResult(lottoGame.draw(winningLotto));
     }
 }
