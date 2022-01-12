@@ -1,0 +1,29 @@
+package view;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+public class InputView {
+    Scanner scanner = new Scanner(System.in);
+    private final static String MESSAGE_INPUT_PURCHASE_PRICE = "구입금액을 입력해 주세요.";
+    private final static String MESSAGE_INPUT_ANSWER_NUMBER = "지난 주 당첨 번호를 입력해주세요.";
+    private final static String COMMA = ",";
+
+    public int inputPurchasePrice() {
+        System.out.println(MESSAGE_INPUT_PURCHASE_PRICE);
+        return scanner.nextInt();
+    }
+
+    public List<Integer> inputAnswerNumber() {
+        System.out.println("\n" + MESSAGE_INPUT_ANSWER_NUMBER);
+        return splitAnswerNumber(scanner.next());
+    }
+
+    public List<Integer> splitAnswerNumber(String answerNumbers) {
+        return Arrays.stream(answerNumbers.split(COMMA))
+                .map(stringNumber -> Integer.parseInt(stringNumber.trim()))
+                .collect(Collectors.toList());
+    }
+}
