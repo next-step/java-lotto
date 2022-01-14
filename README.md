@@ -14,7 +14,7 @@
 
 1. 구입 금액을 입력받는다 `(input_view)`
 2. 1000원 미만의 금액을 입력한다면 종료한다 `(input_view)`
-3. 3. 로또 1장당 가격은 1000원이다. `(lottoTickets)`
+3. 로또 1장당 가격은 1000원이다. `(lottoTickets)`
 4. 구입 금액 / 로또 1장당 가격 만큼의 로또가 발급된다. `(lottoTickets)`
 5. 로또의 숫자 범위는 1~45 이다 `(lottoNumber)`
 6. 로또의 숫자 범위를 Collections.shuffle( ) 메소드를 통해 섞는다. `(lottoNumber)`
