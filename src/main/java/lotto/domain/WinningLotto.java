@@ -2,16 +2,18 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.utils.NumberStrategy;
+import java.util.Set;
+import lotto.utils.FixNumberStrategy;
 
 public class WinningLotto extends Lotto {
 
-    private final int bonusBall;
+    private final LottoNumber bonusBall;
 
-    public WinningLotto(NumberStrategy numberStrategy, int bonusBall) {
-        super(numberStrategy);
-        super.checkNumber(bonusBall);
-        this.bonusBall = bonusBall;
+    public WinningLotto(Set<Integer> winningNumber, int bonusBall) {
+        super();
+        super.setLottoNumber(new FixNumberStrategy(new ArrayList<>(winningNumber)));
+        checkBonusBall(bonusBall);
+        this.bonusBall = LottoNumber.of(bonusBall);
     }
 
     public LottoResult lottoResult(List<Lotto> lottos) {
@@ -38,8 +40,14 @@ public class WinningLotto extends Lotto {
         return lotto.getLottoNumber().contains(bonusBall);
     }
 
-    private int checkMatch(List<Integer> lottoNumber, int num) {
+    private int checkMatch(List<LottoNumber> lottoNumber, int num) {
         return super.getLottoNumber().contains(lottoNumber.get(num)) ? 1 : 0;
+    }
+
+    private void checkBonusBall(int bonusBall) {
+        if (getLottoNumber().contains(bonusBall)) {
+            throw new IllegalStateException("보너스 볼은 당첨번호에 포함되지 않아야 합니다.");
+        }
     }
 
 }

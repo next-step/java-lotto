@@ -1,19 +1,20 @@
 package lotto;
 
-import java.util.Set;
 import lotto.domain.LottoGame;
+import lotto.domain.ManualLottos;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoMain {
 
     public static void main(String[] args) {
-        int number = InputView.inputPrice();
-        LottoGame lottoGame = new LottoGame(number);
-        ResultView.printLottoNumbers(lottoGame.getLottos());
+        int totalCount = InputView.inputPrice();
+        ManualLottos manualLottos = InputView.inputManualLottos();
+        LottoGame lottoGame = new LottoGame(totalCount, manualLottos);
+        ResultView.printLottoNumbers(lottoGame);
 
-        Set<Integer> winningNumbers = InputView.inputWinningNumber();
-        int bonusBall = InputView.inputBonusBall();
-        ResultView.printLottoGameResult(lottoGame.draw(winningNumbers, bonusBall));
+        WinningLotto winningLotto = InputView.inputWinningNumber();
+        ResultView.printLottoGameResult(lottoGame.draw(winningLotto));
     }
 }
