@@ -14,16 +14,15 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    public List<Lotto> addLottoTicket(int lottoCount) {
+
+    public List<Lotto> addLottoTicket(int lottoCount, Lotto lotto) {
         for (int i = 0; i < lottoCount; i++) {
-            lottoTickets.add(new Lotto());
+            lottoTickets.add(lotto);
         }
         return lottoTickets;
-        //lottoTickets.stream().limit(lottoCount).forEach(lotto -> lottoTickets.add(new Lotto()));
     }
 
 
-    //서비스 , 출력 부분
     public Map<Integer, Integer> checkLottoAnswer(List<Integer> answerNumbers) {
         Map<Integer, Integer> lottoResult = new HashMap<>();
         for (Lotto lotto : lottoTickets) {

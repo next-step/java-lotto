@@ -15,8 +15,7 @@ class LottoTest {
     @DisplayName("로또 번호가 총 몇 개가 일치하는지 테스트")
     void checkLottoNumbers() {
         //given
-        Lotto lotto = new Lotto();
-        lotto.generateLotto(() -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Lotto lotto = new Lotto(() -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         //when
         int correctNumberCount = lotto.checkLottoNumbers(new ArrayList<>(Arrays.asList(3, 4, 5, 6, 7, 8)));
@@ -29,8 +28,7 @@ class LottoTest {
     @DisplayName("로또 번호가 하나도 일치하지 않는지 테스트")
     void checkNonLottoNumbers() {
         //given
-        Lotto lotto = new Lotto();
-        lotto.generateLotto(() -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Lotto lotto = new Lotto(() -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         //when
         int correctNumberCount = lotto.checkLottoNumbers(new ArrayList<>(Arrays.asList(7, 8, 9, 10, 11, 12)));
