@@ -1,8 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoTickets {
     private final List<Lotto> lottoTickets;
@@ -25,10 +23,13 @@ public class LottoTickets {
     }
 
 
-    public int[] checkLottoAnswer(List<Integer> answerNumbers) {
-        final int[] lottoResult = new int[7];
+    //서비스 , 출력 부분
+    public Map<Integer, Integer> checkLottoAnswer(List<Integer> answerNumbers) {
+        Map<Integer, Integer> lottoResult = new HashMap<>();
         for (Lotto lotto : lottoTickets) {
-            lottoResult[lotto.checkLottoNumbers(answerNumbers)]++;
+            int matchCount = lotto.checkLottoNumbers(answerNumbers);
+            int count = lottoResult.getOrDefault(matchCount, 0);
+            lottoResult.put(matchCount, count + 1);
         }
         return lottoResult;
     }

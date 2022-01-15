@@ -3,6 +3,7 @@ package view;
 import domain.Prize;
 
 import java.util.List;
+import java.util.Map;
 
 public class ResultView {
     private final static String MESSAGE_LOTTO_COUNT = "개를 구매했습니다";
@@ -22,12 +23,13 @@ public class ResultView {
         System.out.println(lotto);
     }
 
-    public void printResultStatistic(int[] myLottoResult) {
+    public void printResultStatistic(Map<Integer, Integer> lottoResult) {
         System.out.println("\n" + MESSAGE_STATISTIC + "\n" + MESSAGE_STATISTIC_LINE);
 
         for (int matchCount = 3; matchCount <= 6; matchCount++) {
-            System.out.println(matchCount + MESSAGE_PRIZE_IS + Prize.prizes[matchCount] + MESSAGE_PRIZE_WON
-                    + myLottoResult[matchCount] + MESSAGE_MATCH_COUNT);
+            System.out.println(matchCount + MESSAGE_PRIZE_IS
+                    + Prize.prizes[matchCount] + MESSAGE_PRIZE_WON
+                    + lottoResult.getOrDefault(matchCount, 0) + MESSAGE_MATCH_COUNT);
         }
     }
 

@@ -3,6 +3,8 @@ package domain;
 import view.InputView;
 import view.ResultView;
 
+import java.util.Map;
+
 public class LottoService {
     private LottoTickets lottoTickets;
     private final InputView inputView;
@@ -29,7 +31,7 @@ public class LottoService {
     }
 
     public void receiveAnswerNumber() {
-        int[] answerNumber = lottoTickets.checkLottoAnswer(inputView.inputAnswerNumber());
+        Map<Integer, Integer> answerNumber = lottoTickets.checkLottoAnswer(inputView.inputAnswerNumber());
         resultView.printResultStatistic(answerNumber);
     }
 
