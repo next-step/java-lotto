@@ -54,7 +54,7 @@ public class LottoTickets {
 
     public void calculateLottoTotalPrize() {
         for (Lotto lotto : lottoTickets) {
-            totalPrize += lotto.getPrizeMoney();
+            totalPrize += Prize.prizes[lotto.getMatchCount()];
         }
     }
 
