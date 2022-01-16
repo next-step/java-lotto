@@ -17,7 +17,7 @@ class LottoTicketsTest {
 
     @BeforeEach
     void setting() {
-        purchasePrice = 7000;
+        purchasePrice = 2000;
         lottoPrice = 1000;
         lottoCount = purchasePrice / lottoPrice;
     }
@@ -29,24 +29,27 @@ class LottoTicketsTest {
         LottoTickets lottoTickets = new LottoTickets();
 
         //when
-        lottoTickets.addLottoTicket(lottoCount, new Lotto());
+        lottoTickets.addLottoTicket(new Lotto(() -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        lottoTickets.addLottoTicket(new Lotto(() -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
 
         //then
-        assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(lottoCount);
+        assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(2);
     }
+
 
     @Test
     @DisplayName("로또들을 총 몇 개 맞췄는지 테스트")
     void checkLottoAnswerMatch() {
         //given
         LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.addLottoTicket(lottoCount, new Lotto(() -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        lottoTickets.addLottoTicket(new Lotto(() -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        lottoTickets.addLottoTicket(new Lotto(() -> new ArrayList<>(Arrays.asList(7, 8, 9, 10, 11, 12))));
 
         //when
-        Map<Integer, Integer> matchCount = lottoTickets.checkLottoAnswer(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 7)));
+        Map<Integer, Integer> matchCount = lottoTickets.checkLottoAnswer(new ArrayList<>(Arrays.asList(1, 2, 3, 7, 8, 9)));
 
         //then
-        assertThat(matchCount.getOrDefault(5, 0)).isEqualTo(lottoCount);
+        assertThat(matchCount.getOrDefault(3, 0)).isEqualTo(lottoCount);
     }
 
     @Test
@@ -54,13 +57,14 @@ class LottoTicketsTest {
     void checkLottoAnswerNonMatch() {
         //given
         LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.addLottoTicket(lottoCount, new Lotto(() -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        lottoTickets.addLottoTicket(new Lotto(() -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        lottoTickets.addLottoTicket(new Lotto(() -> new ArrayList<>(Arrays.asList(7, 8, 9, 10, 11, 12))));
 
         //when
-        Map<Integer, Integer> matchCount = lottoTickets.checkLottoAnswer(new ArrayList<>(Arrays.asList(7, 8, 9, 10, 11, 12)));
+        Map<Integer, Integer> matchCount = lottoTickets.checkLottoAnswer(new ArrayList<>(Arrays.asList(13, 14, 15, 16, 17, 18)));
 
         //then
-        assertThat(matchCount.getOrDefault(5, 0)).isEqualTo(0);
+        assertThat(matchCount.getOrDefault(3, 0)).isEqualTo(0);
     }
 
     @Test
@@ -68,14 +72,16 @@ class LottoTicketsTest {
     void calculateLottoRatio() {
         //given
         LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.addLottoTicket(lottoCount, new Lotto(() -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        lottoTickets.addLottoTicket(new Lotto(() -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        lottoTickets.addLottoTicket(new Lotto(() -> new ArrayList<>(Arrays.asList(7, 8, 9, 10, 11, 12))));
 
         //when
-        lottoTickets.checkLottoAnswer(new ArrayList<>(Arrays.asList(1, 2, 3, 14, 15, 16)));
+        lottoTickets.checkLottoAnswer(new ArrayList<>(Arrays.asList(1, 2, 3, 7, 8, 9)));
         lottoTickets.calculateLottoTotalPrize();
 
         //then
         assertThat(lottoTickets.calculateLottoRatio(purchasePrice))
                 .isEqualTo(String.format("%.2f", (double) Prize.THREE_NUMBERS_PRIZE * lottoCount / (double) purchasePrice));
     }
+
 }

@@ -14,14 +14,10 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-
-    public List<Lotto> addLottoTicket(int lottoCount, Lotto lotto) {
-        for (int i = 0; i < lottoCount; i++) {
-            lottoTickets.add(lotto);
-        }
-        return lottoTickets;
+    //테스트 코드에서 Lotto 들을 맘대로 넣을 수 없어서 수정
+    public void addLottoTicket(Lotto lotto) {
+        lottoTickets.add(lotto);
     }
-
 
     public Map<Integer, Integer> checkLottoAnswer(List<Integer> answerNumbers) {
         Map<Integer, Integer> lottoResult = new HashMap<>();

@@ -35,8 +35,8 @@ public class InputView {
     }
 
     public void exceedNumberRange(List<Integer> answerNumbers) {
-        if(answerNumbers.stream()
-                .anyMatch(number -> number > LottoNumber.END_LOTTO_NUMBER || number < LottoNumber.START_LOTTO_NUMBER)){
+        if (answerNumbers.stream()
+                .anyMatch(number -> number > LottoNumber.END_LOTTO_NUMBER || number < LottoNumber.START_LOTTO_NUMBER)) {
             throw new IllegalArgumentException(MESSAGE_INPUT_ANSWER_NUMBER_RANGE_OVER);
         }
     }
