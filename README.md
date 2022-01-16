@@ -7,6 +7,7 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+<<<<<<< HEAD
 
 
 --------------------------------
@@ -30,3 +31,5 @@
 16. 3~6개 일치한 로또들의 당첨 금액을 계산한다. `(lottoTickets)`
 17. 당첨 금액 / 구입 금액 으로 총 수익률을 계산한다. `(lottoTickets)`
 18. 총 수익률을 출력한다. `(print_view)`
+=======
+>>>>>>> 6bf24fbbd9d95af088361ea8e986c2c455d13b9e
