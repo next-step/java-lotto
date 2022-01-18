@@ -41,18 +41,12 @@ public class InputView {
     }
 
     public boolean checkInputNumberCountCondition(List<Integer> answerNumbers) {
-        if (answerNumbers.size() != LottoGenerator.COUNT_LOTTO_NUMBER) {
-            return false;
-        }
-        return true;
+        return answerNumbers.size() == LottoGenerator.COUNT_LOTTO_NUMBER;
     }
 
     public boolean checkNumberRangeCondition(List<Integer> answerNumbers) {
-        if (answerNumbers.stream()
-                .anyMatch(number -> number > LottoGenerator.END_LOTTO_NUMBER || number < LottoGenerator.START_LOTTO_NUMBER)) {
-            return false;
-        }
-        return true;
+        return answerNumbers.stream()
+                .noneMatch(number -> number > LottoGenerator.END_LOTTO_NUMBER || number < LottoGenerator.START_LOTTO_NUMBER);
     }
 
     public List<Integer> splitAnswerNumber(String answerNumbers) {
