@@ -1,13 +1,15 @@
 package domain;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class LottoTickets {
     private final List<Lotto> lottoTickets;
-    private int totalPrize;
+    private BigDecimal totalPrize;
 
     public LottoTickets() {
         this.lottoTickets = new ArrayList<>();
+        this.totalPrize = BigDecimal.ZERO;
     }
 
     public List<Lotto> getLottoTickets() {
@@ -32,12 +34,12 @@ public class LottoTickets {
 
     public void calculateLottoTotalPrize() {
         for (Lotto lotto : lottoTickets) {
-            totalPrize += Prize.prizes[lotto.getMatchCount()];
+            totalPrize = totalPrize.add(new BigDecimal(Prize.prizes.getOrDefault(lotto.getMatchCount(), 0)));
         }
     }
 
-    public String calculateLottoRatio(int purchasePrice) {
-        return String.format("%.2f", (double) totalPrize / (double) purchasePrice);
+    public BigDecimal calculateLottoRatio(int purchasePrice) {
+        return totalPrize.divide(new BigDecimal(purchasePrice), 2, BigDecimal.ROUND_HALF_UP);
     }
 
 }

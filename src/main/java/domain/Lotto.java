@@ -8,11 +8,11 @@ public class Lotto {
     private int matchCount = 0;
 
     public Lotto() {
-        this(new LottoNumberAuto());
+        this(new LottoAutoGenerator());
     }
 
-    public Lotto(LottoNumber lottoNumber) {
-        this.lotto = lottoNumber.generateLottoNumber();
+    public Lotto(LottoGenerator lottoGenerator) {
+        this.lotto = lottoGenerator.generateLottoNumber();
     }
 
     public List<Integer> getLotto() {

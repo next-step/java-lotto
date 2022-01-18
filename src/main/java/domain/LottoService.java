@@ -9,7 +9,7 @@ public class LottoService {
     private LottoTickets lottoTickets;
     private final InputView inputView;
     private final ResultView resultView;
-    private final static int lottoPrice = 1000;
+    private static final int lottoPrice = 1_000;
     private int purchasePrice;
 
     public LottoService() {

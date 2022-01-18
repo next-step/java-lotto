@@ -16,10 +16,10 @@
 2. 1000원 미만의 금액을 입력한다면 종료한다 `(input_view)`
 3. 로또 1장당 가격은 1000원이다. `(lottoTickets)`
 4. 구입 금액 / 로또 1장당 가격 만큼의 로또가 발급된다. `(lottoTickets)`
-5. 로또의 숫자 범위는 1~45 이다 `(lottoNumber)`
-6. 로또의 숫자 범위를 Collections.shuffle( ) 메소드를 통해 섞는다. `(lottoNumber)`
-7. 로또 1장당 총 6개의 숫자를 발급받는다. `(lottoNumber)`
-8. 로또의 숫자들은 Collection.sort( ) 메소드를 통해 정렬시킨다. `(lottoNumber)`
+5. 로또의 숫자 범위는 1~45 이다 `(lottoGenerator)`
+6. 로또의 숫자 범위를 Collections.shuffle( ) 메소드를 통해 섞는다. `(lottoGenerator)`
+7. 로또 1장당 총 6개의 숫자를 발급받는다. `(lottoGenerator)`
+8. 로또의 숫자들은 Collection.sort( ) 메소드를 통해 정렬시킨다. `(lottoGenerator)`
 9. 구매한 로또들을 보여준다 `(print_view)`
 10. 지난 주 당첨 번호 숫자를 ',' 기준으로 6개를 String으로 입력받는다 `(input_view)`
 11. 입력받은 당첨번호 String을 ','를 기준으로 split 하여 List에 담아둔다. `(input_view)`

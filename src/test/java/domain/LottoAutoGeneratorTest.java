@@ -9,11 +9,11 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.*;
 
 
-class LottoNumberAutoTest {
+class LottoAutoGeneratorTest {
 
     @Test
     @DisplayName("로또가 제대로 생성되는지 테스트")
     void generateLottoNumber() {
-        assertThat((LottoNumber) () -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))).isNotNull();
+        assertThat((LottoGenerator) () -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))).isNotNull();
     }
 }

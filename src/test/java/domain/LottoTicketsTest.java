@@ -80,8 +80,7 @@ class LottoTicketsTest {
         lottoTickets.calculateLottoTotalPrize();
 
         //then
-        assertThat(lottoTickets.calculateLottoRatio(purchasePrice))
-                .isEqualTo(String.format("%.2f", (double) Prize.THREE_NUMBERS_PRIZE * lottoCount / (double) purchasePrice));
+        assertThat(lottoTickets.calculateLottoRatio(purchasePrice)).isEqualTo("5.00");
     }
 
 }

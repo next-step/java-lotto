@@ -2,6 +2,7 @@ package view;
 
 import domain.Prize;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -28,12 +29,12 @@ public class ResultView {
 
         for (int matchCount = 3; matchCount <= 6; matchCount++) {
             System.out.println(matchCount + MESSAGE_PRIZE_IS
-                    + Prize.prizes[matchCount] + MESSAGE_PRIZE_WON
+                    + Prize.prizes.getOrDefault(matchCount, 0) + MESSAGE_PRIZE_WON
                     + lottoResult.getOrDefault(matchCount, 0) + MESSAGE_MATCH_COUNT);
         }
     }
 
-    public void printResultRatio(String prizeRatio) {
+    public void printResultRatio(BigDecimal prizeRatio) {
         System.out.println(MESSAGE_RATIO_RESULT + prizeRatio + MESSAGE_RATIO_RESULT_END);
     }
 }

@@ -1,6 +1,6 @@
 package view;
 
-import domain.LottoNumber;
+import domain.LottoGenerator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,22 +23,36 @@ public class InputView {
     public List<Integer> inputAnswerNumber() {
         System.out.println("\n" + MESSAGE_INPUT_ANSWER_NUMBER);
         List<Integer> answerNumbers = splitAnswerNumber(scanner.next());
-        overInputNumberCount(answerNumbers);
-        exceedNumberRange(answerNumbers);
+        checkInputNumberCount(answerNumbers);
+        checkNumberRange(answerNumbers);
         return answerNumbers;
     }
 
-    public void overInputNumberCount(List<Integer> answerNumbers) {
-        if (answerNumbers.size() > LottoNumber.COUNT_LOTTO_NUMBER) {
+    public void checkInputNumberCount(List<Integer> answerNumbers) {
+        if (!checkInputNumberCountCondition(answerNumbers)) {
             throw new IllegalArgumentException(MESSAGE_INPUT_ANSWER_NUMBER_COUNT_OVER);
         }
     }
 
-    public void exceedNumberRange(List<Integer> answerNumbers) {
-        if (answerNumbers.stream()
-                .anyMatch(number -> number > LottoNumber.END_LOTTO_NUMBER || number < LottoNumber.START_LOTTO_NUMBER)) {
+    public void checkNumberRange(List<Integer> answerNumbers) {
+        if (!checkNumberRangeCondition(answerNumbers)) {
             throw new IllegalArgumentException(MESSAGE_INPUT_ANSWER_NUMBER_RANGE_OVER);
         }
+    }
+
+    public boolean checkInputNumberCountCondition(List<Integer> answerNumbers) {
+        if (answerNumbers.size() != LottoGenerator.COUNT_LOTTO_NUMBER) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkNumberRangeCondition(List<Integer> answerNumbers) {
+        if (answerNumbers.stream()
+                .anyMatch(number -> number > LottoGenerator.END_LOTTO_NUMBER || number < LottoGenerator.START_LOTTO_NUMBER)) {
+            return false;
+        }
+        return true;
     }
 
     public List<Integer> splitAnswerNumber(String answerNumbers) {

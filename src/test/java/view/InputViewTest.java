@@ -15,7 +15,7 @@ class InputViewTest {
     @Test
     @DisplayName("정답 개수가 6개 초과일시 Exception 테스트")
     void overInputNumberCount() {
-        assertThatThrownBy(() -> inputView.overInputNumberCount(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7))))
+        assertThatThrownBy(() -> inputView.checkInputNumberCount(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7))))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(inputView.MESSAGE_INPUT_ANSWER_NUMBER_COUNT_OVER);
     }
@@ -23,7 +23,7 @@ class InputViewTest {
     @Test
     @DisplayName("정답 범위가 1~45 벗어나면 Exception 테스트")
     void exceedNumberRange() {
-        assertThatThrownBy(() -> inputView.exceedNumberRange(new ArrayList<>(Arrays.asList(0, 2, 3, 4, 5, 6, 99))))
+        assertThatThrownBy(() -> inputView.checkNumberRange(new ArrayList<>(Arrays.asList(0, 2, 3, 4, 5, 6, 99))))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(inputView.MESSAGE_INPUT_ANSWER_NUMBER_RANGE_OVER);
     }

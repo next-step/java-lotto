@@ -7,10 +7,10 @@ import java.util.stream.IntStream;
 
 import static java.util.Collections.shuffle;
 
-public class LottoNumberAuto implements LottoNumber {
+public class LottoAutoGenerator implements LottoGenerator {
     private List<Integer> lottoNumberPool = new ArrayList<>();
 
-    public LottoNumberAuto() {
+    public LottoAutoGenerator() {
         initLottoNumberPool();
         shuffleLottoNumberPool();
     }
