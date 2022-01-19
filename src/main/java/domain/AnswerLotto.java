@@ -1,7 +1,9 @@
 package domain;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AnswerLotto {
     private final List<Integer> answerLotto;
@@ -14,8 +16,14 @@ public class AnswerLotto {
         this.answerLotto = answerLotto;
     }
 
-    public List<Integer> getAnswerLotto() {
-        return Collections.unmodifiableList(answerLotto);
+    public Map<Integer, Integer> checkLottoAnswer(List<Lotto> lottoTickets) {
+        Map<Integer, Integer> lottoResult = new HashMap<>();
+        for (Lotto lotto : lottoTickets) {
+            int matchCount = lotto.checkLottoNumbers(answerLotto);
+            int count = lottoResult.getOrDefault(matchCount, 0);
+            lottoResult.put(matchCount, count + 1);
+        }
+        return lottoResult;
     }
 
     public void checkInputNumberCount(List<Integer> answerNumbers) {
@@ -38,6 +46,5 @@ public class AnswerLotto {
         return answerNumbers.stream()
                 .noneMatch(number -> number > LottoGenerator.END_LOTTO_NUMBER || number < LottoGenerator.START_LOTTO_NUMBER);
     }
-
 
 }

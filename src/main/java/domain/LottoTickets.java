@@ -21,17 +21,6 @@ public class LottoTickets {
         lottoTickets.add(lotto);
     }
 
-    public Map<Integer, Integer> checkLottoAnswer(List<Integer> answerLotto) {
-        Map<Integer, Integer> lottoResult = new HashMap<>();
-        for (Lotto lotto : lottoTickets) {
-            int matchCount = lotto.checkLottoNumbers(answerLotto);
-            int count = lottoResult.getOrDefault(matchCount, 0);
-            lottoResult.put(matchCount, count + 1);
-        }
-        return lottoResult;
-    }
-
-
     public void calculateLottoTotalPrize() {
         for (Lotto lotto : lottoTickets) {
             totalPrize = totalPrize.add(new BigDecimal(Prize.prizes.getOrDefault(lotto.getMatchCount(), 0)));
