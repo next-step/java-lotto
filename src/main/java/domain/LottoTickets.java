@@ -21,10 +21,10 @@ public class LottoTickets {
         lottoTickets.add(lotto);
     }
 
-    public Map<Integer, Integer> checkLottoAnswer(List<Integer> answerNumbers) {
+    public Map<Integer, Integer> checkLottoAnswer(List<Integer> answerLotto) {
         Map<Integer, Integer> lottoResult = new HashMap<>();
         for (Lotto lotto : lottoTickets) {
-            int matchCount = lotto.checkLottoNumbers(answerNumbers);
+            int matchCount = lotto.checkLottoNumbers(answerLotto);
             int count = lottoResult.getOrDefault(matchCount, 0);
             lottoResult.put(matchCount, count + 1);
         }

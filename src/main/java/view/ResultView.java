@@ -1,6 +1,7 @@
 package view;
 
 import domain.Prize;
+import domain.Prizes;
 
 import java.math.BigDecimal;
 import java.util.List;

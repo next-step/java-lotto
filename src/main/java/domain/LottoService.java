@@ -33,7 +33,8 @@ public class LottoService {
     }
 
     public void receiveAnswerNumber() {
-        Map<Integer, Integer> matchCount = lottoTickets.checkLottoAnswer(inputView.inputAnswerNumber());
+        Map<Integer, Integer> matchCount = lottoTickets.checkLottoAnswer(
+                new AnswerLotto(inputView.inputAnswerNumber()).getAnswerLotto());
         resultView.printResultStatistic(matchCount);
     }
 
