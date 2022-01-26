@@ -6,7 +6,7 @@ import java.util.List;
 public class Lotto {
     private List<Integer> lotto;
     private int matchCount = 0;
-    private boolean matchBonus;
+    private boolean matchBonus = false;
 
     public Lotto() {
         this(new LottoAutoGenerator());
