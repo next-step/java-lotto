@@ -1,29 +1,46 @@
 package domain;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class AnswerLotto {
-    private final List<Integer> answerLotto;
+    private final List<Integer> answerNumbers;
+    private final int bonusNumber;
     public static final String MESSAGE_INPUT_ANSWER_NUMBER_COUNT_OVER = "[오류] 숫자를 6개 이상 입력하셨습니다.";
     public static final String MESSAGE_INPUT_ANSWER_NUMBER_RANGE_OVER = "[오류] 숫자의 범위를 넘어갔습니다.";
 
-    public AnswerLotto(List<Integer> answerLotto) {
-        checkInputNumberCount(answerLotto);
-        checkNumberRange(answerLotto);
-        this.answerLotto = answerLotto;
+    public AnswerLotto(List<Integer> answerNumbers, int bonusNumber) {
+        checkInputNumberCount(answerNumbers);
+        checkNumberRange(answerNumbers, bonusNumber);
+        this.answerNumbers = answerNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
-    public Map<Integer, Integer> checkLottoAnswer(List<Lotto> lottoTickets) {
-        Map<Integer, Integer> lottoResult = new HashMap<>();
+
+    //3개(key)=2개다(value) -> 1등(key)=2개(value) 수정
+    public Map<Rank, Integer> checkLottoAnswer(List<Lotto> lottoTickets) {
+        Map<Rank, Integer> lottoResult = new HashMap<>();
         for (Lotto lotto : lottoTickets) {
-            int matchCount = lotto.checkLottoNumbers(answerLotto);
-            int count = lottoResult.getOrDefault(matchCount, 0);
-            lottoResult.put(matchCount, count + 1);
+            int matchNumberCount = lotto.countMatchCount(answerNumbers);
+            Rank rank = checkRank(matchNumberCount, lotto);
+            int matchLottoCount = lottoResult.getOrDefault(rank, 0);
+            lottoResult.put(rank, matchLottoCount + 1);
         }
         return lottoResult;
+    }
+
+
+    public Rank checkRank(int matchLottoCount, Lotto lotto) {
+        Rank rank = Rank.getRank(matchLottoCount);
+        if (matchLottoCount == 5 && checkBonusNumber(lotto)) {
+            rank = Rank.SECOND;
+        }
+        return rank;
+    }
+
+    public boolean checkBonusNumber(Lotto lotto) {
+        return lotto.checkBonusNumber(bonusNumber);
     }
 
     public void checkInputNumberCount(List<Integer> answerNumbers) {
@@ -32,8 +49,8 @@ public class AnswerLotto {
         }
     }
 
-    public void checkNumberRange(List<Integer> answerNumbers) {
-        if (!checkNumberRangeCondition(answerNumbers)) {
+    public void checkNumberRange(List<Integer> answerNumbers, int bonusNumber) {
+        if (!checkAnswerNumberRangeCondition(answerNumbers) || !checkBonusNumberRangeCondition(bonusNumber)) {
             throw new IllegalArgumentException(MESSAGE_INPUT_ANSWER_NUMBER_RANGE_OVER);
         }
     }
@@ -42,9 +59,14 @@ public class AnswerLotto {
         return answerNumbers.size() == LottoGenerator.COUNT_LOTTO_NUMBER;
     }
 
-    public boolean checkNumberRangeCondition(List<Integer> answerNumbers) {
+    public boolean checkAnswerNumberRangeCondition(List<Integer> answerNumbers) {
+        //noneMatch : 조건에 부합하는 객체가 없어야 true 아니면 false 리턴
         return answerNumbers.stream()
                 .noneMatch(number -> number > LottoGenerator.END_LOTTO_NUMBER || number < LottoGenerator.START_LOTTO_NUMBER);
+    }
+
+    public boolean checkBonusNumberRangeCondition(int bonusNumber) {
+        return (LottoGenerator.START_LOTTO_NUMBER <= bonusNumber && bonusNumber <= LottoGenerator.END_LOTTO_NUMBER);
     }
 
 }

@@ -16,14 +16,14 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    //테스트 코드에서 Lotto 들을 맘대로 넣을 수 없어서 수정
     public void addLottoTicket(Lotto lotto) {
         lottoTickets.add(lotto);
     }
 
     public void calculateLottoTotalPrize() {
         for (Lotto lotto : lottoTickets) {
-            totalPrize = totalPrize.add(new BigDecimal(Prize.prizes.getOrDefault(lotto.getMatchCount(), 0)));
+            int matchCount = lotto.getMatchCount();
+            totalPrize = totalPrize.add(new BigDecimal(Rank.getRank(matchCount).getPrize()));
         }
     }
 

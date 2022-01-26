@@ -3,6 +3,7 @@ package domain;
 import view.InputView;
 import view.ResultView;
 
+import java.util.List;
 import java.util.Map;
 
 public class LottoService {
@@ -33,7 +34,10 @@ public class LottoService {
     }
 
     public void receiveAnswerNumber() {
-        Map<Integer, Integer> matchCount = new AnswerLotto(inputView.inputAnswerNumber())
+        List<Integer> answerNumber = inputView.inputAnswerNumber();
+        int bonusNumber = inputView.inputBonusNumber();
+
+        Map<Rank, Integer> matchCount = new AnswerLotto(answerNumber, bonusNumber)
                 .checkLottoAnswer(lottoTickets.getLottoTickets());
         resultView.printResultStatistic(matchCount);
     }
