@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.*;
 
 class LottoTicketsTest {
 
-    /*
+
     @Test
     @DisplayName("로또 티켓을 구매금액/로또가격 개수만큼 구매했는지 테스트")
     void addLottoTicket() {
@@ -33,7 +33,7 @@ class LottoTicketsTest {
         LottoTickets lottoTickets = new LottoTickets();
         lottoTickets.addLottoTicket(new Lotto(() -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
         lottoTickets.addLottoTicket(new Lotto(() -> new ArrayList<>(Arrays.asList(7, 8, 9, 10, 11, 12))));
-        AnswerLotto answerLotto = new AnswerLotto(new ArrayList<>(Arrays.asList(1, 2, 3, 7, 8, 9)));
+        AnswerLotto answerLotto = new AnswerLotto(new ArrayList<>(Arrays.asList(1, 2, 3, 7, 8, 9)), 11);
 
         //when
         answerLotto.checkLottoAnswer(lottoTickets.getLottoTickets());
@@ -42,5 +42,4 @@ class LottoTicketsTest {
         //then
         assertThat(lottoTickets.calculateLottoRatio(2000)).isEqualTo("5.00");
     }
-     */
 }

@@ -30,9 +30,9 @@ public enum Rank {
         return this.mathCount == mathCount;
     }
 
-    public static Rank getRank(int mathCount) {
+    public static Rank getRank(int matchCount) {
         return Arrays.stream(Rank.values())
-                .filter(prize -> prize.isMatchCount(mathCount))
+                .filter(prize -> prize.isMatchCount(matchCount))
                 .findFirst()
                 .orElse(FAIL);
     }
