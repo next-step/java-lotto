@@ -10,6 +10,7 @@ import static org.assertj.core.api.Assertions.*;
 
 class LottoTicketsTest {
 
+    /*
     @Test
     @DisplayName("로또 티켓을 구매금액/로또가격 개수만큼 구매했는지 테스트")
     void addLottoTicket() {
@@ -41,4 +42,5 @@ class LottoTicketsTest {
         //then
         assertThat(lottoTickets.calculateLottoRatio(2000)).isEqualTo("5.00");
     }
+     */
 }

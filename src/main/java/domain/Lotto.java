@@ -6,6 +6,7 @@ import java.util.List;
 public class Lotto {
     private List<Integer> lotto;
     private int matchCount = 0;
+    private boolean matchBonus;
 
     public Lotto() {
         this(new LottoAutoGenerator());
@@ -23,10 +24,16 @@ public class Lotto {
         return matchCount;
     }
 
-    public int checkLottoNumbers(List<Integer> answerNumbers) {
+    public int countMatchCount(List<Integer> answerNumbers) {
         matchCount = (int) lotto.stream()
                 .filter(answerNumbers::contains)
                 .count();
         return matchCount;
+    }
+
+    public boolean checkBonusNumber(int bonusNumber) {
+        matchBonus = lotto.stream()
+                .anyMatch(number -> number == bonusNumber);
+        return matchBonus;
     }
 }
