@@ -6,15 +6,10 @@ import java.util.stream.Collectors;
 
 public class Numbers {
 
-    private static final Number ZERO = new Number(0);
     private static final String REGX_DELIMITER = ",|:";
     private static final String REGX_CUSTOM_DELIMITER = "//(.)\n(.*)";
 
     private final List<Number> numbers;
-
-    public Numbers(final List<Number> numbers) {
-        this.numbers = numbers;
-    }
 
     public Numbers(final String expression){
         this. numbers = splitFromDelimiter(expression);
@@ -38,16 +33,11 @@ public class Numbers {
             .map(Number::new).collect(Collectors.toList());
     }
 
-    public Number sum() {
-        return numbers.stream()
-            .reduce(ZERO, Number::add);
-    }
-
-    public void register(Number number) {
-        numbers.add(number);
-    }
-
     public Number get(int idx){
         return numbers.get(idx);
+    }
+
+    public List<Number> getNumbers() {
+        return numbers;
     }
 }

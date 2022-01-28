@@ -8,23 +8,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class CalculatorTest {
 
-    @Test
-    void 덧셈_연산() {
-        // given
-        Number number = new Number(1);
-        Number operand = new Number(3);
-        List<Number> list = new ArrayList<>();
-        Numbers numbers = new Numbers(list);
-        numbers.register(number);
-        numbers.register(operand);
-
-        // when
-        int result = numbers.sum().getNumber();
-
-        // then
-        assertThat(result).isEqualTo(4);
-    }
-
     @ParameterizedTest
     @ValueSource(strings = {"1,5,3", "1,5:3", "//;\n1;5;3", "//;\n1;5,3"})
     void 연산자를_구분자기준_분리(String expression) {
@@ -35,5 +18,18 @@ public class CalculatorTest {
         assertThat(numbers.get(0).getNumber()).isEqualTo(1);
         assertThat(numbers.get(1).getNumber()).isEqualTo(5);
         assertThat(numbers.get(2).getNumber()).isEqualTo(3);
+    }
+
+    @Test
+    void 계산기_동작_테스트() {
+        // given
+        Numbers numbers = new Numbers("1,5,3");
+        StringCalculator stringCalculator = StringCalculator.from(numbers);
+
+        // when
+        Number result = stringCalculator.calculate();
+
+        // then
+        assertThat(result.getNumber()).isEqualTo(9);
     }
 }
