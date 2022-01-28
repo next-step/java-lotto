@@ -9,19 +9,18 @@ public class Delimiter {
     private final String delimiter;
 
     private Delimiter(String delimiter) {
-        //TODO 구분자는 숫자가 아님.
         validateIsNumber(delimiter);
         this.delimiter = delimiter;
     }
 
-    public static List<Delimiter> of(List<String> delimiter){
+    public static List<Delimiter> of(List<String> delimiter) {
         return delimiter.stream()
             .map(Delimiter::new)
             .collect(Collectors.toList());
     }
 
     private void validateIsNumber(String delimiter) {
-        if(validateFirstIsNumber(delimiter) || validateLastIsNumber(delimiter)){
+        if (validateFirstIsNumber(delimiter) || validateLastIsNumber(delimiter)) {
             throw new IllegalArgumentException("구분자의 시작과 끝은 숫자일 수 없습니다.");
         }
     }
@@ -32,6 +31,10 @@ public class Delimiter {
 
     private boolean validateLastIsNumber(String delimiter) {
         return Character.isDigit(delimiter.charAt(delimiter.length() - 1));
+    }
+
+    public String getDelimiter() {
+        return delimiter;
     }
 
     @Override
@@ -50,6 +53,4 @@ public class Delimiter {
     public int hashCode() {
         return Objects.hash(delimiter);
     }
-
-
 }
