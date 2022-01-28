@@ -12,18 +12,23 @@ public class StringUtils {
     private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
     private static final String SLASH = "//";
 
+    private StringUtils() {
 
-    public static List<String> splitStr(final String input){
-        String[] tokens = null;
-        if(input.contains(SLASH)) {
-            tokens = split(input, tokens);
-            return Arrays.stream(tokens).collect(Collectors.toList());
-        }
-        return Arrays.stream(input.split(STANDARD_DELIMITER)).collect(Collectors.toList());
     }
 
-    private static String[] split(String input, String[] tokens) {
+    public static List<String> splitStr(final String input) {
+
+        if (input.contains(SLASH)) {
+            String[] tokens = split(input);
+            return Arrays.stream(tokens).map(String::toString).collect(Collectors.toList());
+        }
+        return Arrays.stream(input.split(STANDARD_DELIMITER)).map(String::toString)
+            .collect(Collectors.toList());
+    }
+
+    private static String[] split(String input) {
         Matcher matcher = Pattern.compile(CUSTOM_DELIMITER).matcher(input);
+        String[] tokens = null;
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
             tokens = matcher.group(2).split(customDelimiter);

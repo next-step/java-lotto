@@ -5,12 +5,20 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import stringadder.utils.StringUtils;
 
 public class AdderTest {
+
+    public static Stream<Arguments> provideArguments() {
+        return Stream.of(
+            Arguments.of(Arrays.asList("2", "3"), 5),
+            Arguments.of(Arrays.asList("3", "5"), 8)
+        );
+    }
 
     @DisplayName("쉼표_콜론_기준으로_문자열구분")
     @ParameterizedTest
@@ -24,4 +32,13 @@ public class AdderTest {
            );
     }
 
+
+    @DisplayName("더하기_테스트")
+    @ParameterizedTest
+    @MethodSource("provideArguments")
+    void sumTest(List<String> input, int expected) {
+        int result = Adder.add(input);
+        System.out.println(result);
+        assertThat(result).isEqualTo(expected);
+    }
 }
