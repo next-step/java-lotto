@@ -8,10 +8,11 @@ public class StringCalculator {
 
     private static final String DELIMITER = ",|:";
 
-    public int add(String text) {
+    public int add(String text) throws RuntimeException {
         try {
             validateText(text);
         } catch (IllegalArgumentException e) {
+            e.printStackTrace();
             return 0;
         }
         String[] numbers = splitText(text);
@@ -21,6 +22,9 @@ public class StringCalculator {
     public void validateText(String text) {
         if (Objects.isNull(text) || text.isEmpty()) {
             throw new IllegalArgumentException();
+        }
+        if (text.equals("-1")) {
+            throw new RuntimeException();
         }
     }
 
@@ -37,6 +41,9 @@ public class StringCalculator {
     public int sumNumbers(String[] numbers) {
         int result = 0;
         for (String number : numbers) {
+            if (Integer.parseInt(number) < 0) {
+                throw new RuntimeException();
+            }
             result += Integer.parseInt(number);
         }
         return result;
