@@ -3,6 +3,8 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class CalculatorTest {
 
@@ -23,11 +25,9 @@ public class CalculatorTest {
         assertThat(result).isEqualTo(4);
     }
 
-    @Test
-    void 연산자를_구분자기준_분리() {
-        // given
-        String expression = "1,5,3";
-
+    @ParameterizedTest
+    @ValueSource(strings = {"1,5,3", "1,5:3", "//;\n1;5;3", "//;\n1;5,3"})
+    void 연산자를_구분자기준_분리(String expression) {
         // when
         Numbers numbers = new Numbers(expression);
 
