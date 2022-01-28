@@ -35,7 +35,6 @@ class NumberTest {
         Number number = new Number(userInput);
         assertThat(number.split()).isEqualTo(Arrays.asList("123","456","789"));
     }
-
 //    @DisplayName("들어온 문자열이 숫자로 변환할 수 있다.")
 //    @ParameterizedTest
 //    @ValueSource()
