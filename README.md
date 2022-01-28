@@ -23,9 +23,9 @@
 
 ## 기능 구현 사항
 
-- [] 입력 받기 (InputView)
-    - [] 문자열은 쉼표(,) 또는 콜론(:)은 구분되어야 한다. (Delimiter#splitByDelimiter)
-    - [] 커스텀 구분자는 문자열 앞부분의 //와 \n 사이에 위치한다. (Delimiter#findCustomDelimiter)
-    - [] 커스텀 구분자를 추가한다.(Delimiter#addCustomDelimiter)
-    - [] 구분된 문자는 반드시 양수의 숫자여야 한다. (Validator#validatePositiveNumber)
-- [] 구분된 숫자에 대해서 덧셈을 수행한다. (StringCalculator#add)
+- [ ] 입력 받기 (InputView)
+    - [ ] 문자열은 쉼표(,) 또는 콜론(:)은 구분되어야 한다. (Delimiter#splitByDelimiter)
+    - [ ] 커스텀 구분자는 문자열 앞부분의 //와 \n 사이에 위치한다. (Delimiter#findCustomDelimiter)
+    - [ ] 커스텀 구분자를 추가한다.(Delimiter#addCustomDelimiter)
+    - [ ] 구분된 문자는 반드시 양수의 숫자여야 한다. (Validator#validatePositiveNumber)
+- [ ] 구분된 숫자에 대해서 덧셈을 수행한다. (StringCalculator#add)
