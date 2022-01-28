@@ -8,6 +8,9 @@ public class Numbers {
 
     private static final String REGX_DELIMITER = ",|:";
     private static final String REGX_CUSTOM_DELIMITER = "//(.)\n(.*)";
+    private static final Pattern PATTERN_REGX_CUSTOM = Pattern.compile(REGX_CUSTOM_DELIMITER);
+    private static final int POSITION_CUSTOM_DELIMITER = 1;
+    private static final int POSITION_OTHER_EXPRESSION = 2;
 
     private final List<Number> numbers;
 
@@ -16,10 +19,10 @@ public class Numbers {
     }
 
     private List<Number> splitFromDelimiter(String expression){
-        Matcher m = Pattern.compile(REGX_CUSTOM_DELIMITER).matcher(expression);
+        Matcher m = PATTERN_REGX_CUSTOM.matcher(expression);
         if (m.find()) {
-            String customDelimiter = m.group(1);
-            return splitDelimiter(m.group(2).split(customDelimiter));
+            String customDelimiter = m.group(POSITION_CUSTOM_DELIMITER);
+            return splitDelimiter(m.group(POSITION_OTHER_EXPRESSION).split(customDelimiter));
         }
 
         return Arrays.stream(expression.split(REGX_DELIMITER))

@@ -1,7 +1,5 @@
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -14,7 +12,7 @@ public class CalculatorTest {
         // when
         Numbers numbers = new Numbers(expression);
 
-        //then
+        // then
         assertThat(numbers.get(0).getNumber()).isEqualTo(1);
         assertThat(numbers.get(1).getNumber()).isEqualTo(5);
         assertThat(numbers.get(2).getNumber()).isEqualTo(3);
