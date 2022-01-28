@@ -1,2 +1,5 @@
-package stringcalculator.view;public class ResultView {
+package stringcalculator.view;
+
+public class ResultView {
+
 }

@@ -1,5 +1,5 @@
 package stringcalculator.view;
 
-public class ExpressionInput {
+public class InputView {
 
 }

@@ -1,5 +1,5 @@
 package stringcalculator.domain;
 
-public class Delimeter {
+public class Delimiter {
 
 }

@@ -1,2 +1,5 @@
-package stringcalculator.domain;public class Validator {
+package stringcalculator.domain;
+
+public class Validator {
+
 }
