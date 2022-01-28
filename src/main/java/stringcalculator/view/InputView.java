@@ -19,7 +19,7 @@ public class InputView {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        if(!isBlank(input)){
+        if (!isBlank(input)) {
             validatePrefix(input);
             delimiters = Arrays.asList(getRemovePrefix(input));
         }
@@ -27,15 +27,15 @@ public class InputView {
         return new Delimiters(Delimiter.of(delimiters));
     }
 
-    private static void validatePrefix(String input) {
-        if(!input.matches(PREFIX_REGEX)){
-            throw new IllegalArgumentException("올바른 입력형식이 아닙니다. ex) //${delimiter}");
-        }
-    }
-
     private static boolean isBlank(String input) {
         input = input.trim();
         return input.isEmpty() || input.equals(EMPTY_STRING);
+    }
+
+    private static void validatePrefix(String input) {
+        if (!input.matches(PREFIX_REGEX)) {
+            throw new IllegalArgumentException("올바른 입력형식이 아닙니다. ex) //${delimiter}");
+        }
     }
 
     private static String getRemovePrefix(String input) {
