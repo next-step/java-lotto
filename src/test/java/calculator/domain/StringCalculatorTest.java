@@ -42,7 +42,6 @@ class StringCalculatorTest {
     @DisplayName(value = "")
     @ParameterizedTest
     @ValueSource(strings = {"1,2:3"})
-    @Test
     void 구분자를_쉼표_이외에_콜론을_사용할_수_있다(final String text) {
         assertThat(calculator.add(text)).isSameAs(6);
     }
@@ -50,9 +49,14 @@ class StringCalculatorTest {
     @DisplayName(value = "//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다.")
     @ParameterizedTest
     @ValueSource(strings = {"//;\n1;2;3"})
-    @Test
-    void customDelimiter(final String text) {
+    void 커스텀_구분자를_지정할_수_있다(final String text) {
         assertThat(calculator.add(text)).isSameAs(6);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;2,3:4"})
+    void 구분자와_커스텀_구분자를_동시에_사용할_수_있다(final String text) {
+        assertThat(calculator.add(text)).isSameAs(10);
     }
 
     @DisplayName(value = "문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다.")
