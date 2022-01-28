@@ -1,4 +1,4 @@
-package stringadder.utils.exception;
+package stringadder.utils;
 
 import java.util.Arrays;
 import java.util.List;
