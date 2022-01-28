@@ -11,7 +11,7 @@
 ## 기능 요구 사항 
 
 - [x] 계산식을 입력받을 수 있다. - view#InputView#readFormula
-- [ ] 빈 문자열 또는 `null` 값을 입력할 경우 0을 반환해야 한다. - util#validateInput#isEmptyOrNull
+- [x] 빈 문자열 또는 `null` 값을 입력할 경우 0을 반환해야 한다. - util#validateInput#isEmptyOrNull
 - [ ] 숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다. - domain#Parser#getOneNumberToString
 - [ ] 숫자 두개를 쉼표(`,`) 구분자로 입력 받을 수 있다. - domain#Parser#splitStringToNumber
 - [ ] 구분자를 쉼표(`,`) 이외에 콜론(`:`)을 사용할 수 있다. - domain#Parser#
