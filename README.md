@@ -30,7 +30,9 @@
   - [ ] 구분자는 길이를 1로 갖는 문자 하나만 들어올 수 있다.
   - [ ] 구분자 길이가 1이 아니면 IllegalArgument Exception -> 입력 다시 받기
   - [ ] 커스텀 구분자에 양의 정수 값이 들어오면 IllegalArgument Exception -> 입력 다시 받기
+  - [ ] 커스텀 구분자가 "\n"(개행문자)인 경우 llegalArgument Exception -> 입력 다시 받기
   - [ ] 구분자를 파악한다. ("//", "\n")
+  
 
 ### Parser - 문자열 파싱
 - [ ] 구분자를 기준으로 나눈다. (숫자)
