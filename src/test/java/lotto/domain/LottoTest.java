@@ -11,6 +11,6 @@ class LottoTest {
     @Test
     void 로또_길이_확인() {
         Lotto lotto = new Lotto();
-        assertThat(lotto.getNumbers().size()).isEqualsTo(6);
+        assertThat(lotto.getNumbers().size()).isEqualTo(6);
     }
 }
