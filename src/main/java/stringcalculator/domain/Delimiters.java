@@ -2,6 +2,7 @@ package stringcalculator.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Delimiters {
 
@@ -9,6 +10,12 @@ public class Delimiters {
 
     public Delimiters(List<Delimiter> delimiters) {
         this.delimiters = delimiters;
+    }
+
+    public List<String> getDelimiters() {
+        return delimiters.stream()
+            .map(Delimiter::getDelimiter)
+            .collect(Collectors.toList());
     }
 
     @Override
