@@ -22,4 +22,18 @@ public class CalculatorTest {
         // then
         assertThat(result).isEqualTo(4);
     }
+
+    @Test
+    void 연산자를_구분자기준_분리() {
+        // given
+        String expression = "1,5,3";
+
+        // when
+        Numbers numbers = new Numbers(expression);
+
+        //then
+        assertThat(numbers.get(0).getNumber()).isEqualTo(1);
+        assertThat(numbers.get(1).getNumber()).isEqualTo(5);
+        assertThat(numbers.get(2).getNumber()).isEqualTo(3);
+    }
 }
