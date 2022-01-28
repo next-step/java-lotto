@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,29 +15,32 @@ public class Numbers {
 
     private final List<Number> numbers;
 
-    public Numbers(final String expression){
-        this. numbers = splitFromDelimiter(expression);
+    public Numbers(final String expression) {
+        if (expression == null || expression.isEmpty()) {
+            this.numbers = Collections.singletonList(new Number(0));
+            return;
+        }
+        this.numbers = splitFromDelimiter(expression);
     }
 
-    private List<Number> splitFromDelimiter(String expression){
+    private List<Number> splitFromDelimiter(String expression) {
         Matcher m = PATTERN_REGX_CUSTOM.matcher(expression);
         if (m.find()) {
             String customDelimiter = m.group(POSITION_CUSTOM_DELIMITER);
             return splitDelimiter(m.group(POSITION_OTHER_EXPRESSION).split(customDelimiter));
         }
 
-        return Arrays.stream(expression.split(REGX_DELIMITER))
-            .map(Number::new).collect(Collectors.toList());
+        return Arrays.stream(expression.split(REGX_DELIMITER)).map(Number::new)
+            .collect(Collectors.toList());
     }
 
     private List<Number> splitDelimiter(String[] expression) {
         String join = String.join(",", expression);
         String[] split = join.split(REGX_DELIMITER);
-        return Arrays.stream(split)
-            .map(Number::new).collect(Collectors.toList());
+        return Arrays.stream(split).map(Number::new).collect(Collectors.toList());
     }
 
-    public Number get(int idx){
+    public Number get(int idx) {
         return numbers.get(idx);
     }
 
