@@ -1,9 +1,13 @@
+import domain.StringCalculator;
+import util.ValidateInput;
 import view.InputView;
 
 public class Application {
     public static void main(String[] args) {
-        String unrefinedFormula = InputView.readFormula();
+        StringCalculator stringCalculator = new StringCalculator();
 
-        System.out.println(unrefinedFormula);
+        stringCalculator.add(InputView.readFormula());
+
+//        System.out.println(validateInput.getYourInput());
     }
 }
