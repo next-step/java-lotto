@@ -1,10 +1,7 @@
 package stringcalculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Arrays;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -27,20 +24,5 @@ class NumberTest {
         Number number = new Number(userInput);
         assertThat(number.getNumber()).isEqualTo(userInput);
     }
-
-    @DisplayName("사용자 입력으로 들어온 문자열에서 콤마(,),세미콜론(:)을 제거")
-    @ParameterizedTest
-    @ValueSource(strings = {"123,456:789"})
-    void 사용자_입력으로_들어온_문자열에서_콤마_세미콜론_을_기준으로_자름(final String userInput){
-        Number number = new Number(userInput);
-        assertThat(number.split()).isEqualTo(Arrays.asList("123","456","789"));
-    }
-//    @DisplayName("들어온 문자열이 숫자로 변환할 수 있다.")
-//    @ParameterizedTest
-//    @ValueSource()
-//    public void stringTransferNumber(){
-//        stringcalculator.Number number = new stringcalculator.Number();
-//        validate()
-//    }
 
 }
