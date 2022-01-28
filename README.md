@@ -12,12 +12,15 @@
 문자열 계산기에 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw 한다.
 
 ## 구현 사항
-- [ ] 사용자의 입력을 받음 - view.InputView
-    - [ ] 구분자 입력 - getDelimeter
-      - [ ] 입력 형식이 맞는지 (//*)
-      - [ ] custom 구분자가 있는지
+- [] 사용자의 입력을 받음 - view.InputView
+    - [x] 구분자 입력 - getDelimiter
+      - [X] 입력 형식이 맞는지 (//*)
+      - [X] custom 구분자가 있는지
           - 없으면 : ',' , ':'
-          - 있으면 : 숫자만 아니면 OK
+    - [X] Delimiter
+      - [X] 첫 글자와 마지막 글자가 숫자만 아니면 OK
+    - [x] Delimiters
+      - [X] 구분자들을 List<String> 으로 반환
     - [ ] 식 입력 - getExpression 
       - [ ] 입력은 공백이면 0을 반환("", " ")
 
