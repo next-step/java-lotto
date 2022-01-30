@@ -14,7 +14,7 @@ public class InputView {
     private static final String PREFIX_REGEX = "\\/\\/(.+)";
     private static final String DEFAULT_NUMBER = "0";
 
-    public static Delimiters getDelimiter() {
+    public static Delimiters getDelimiters() {
         List<String> delimiters = Arrays.asList(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON);
         String input = getInput();
 
