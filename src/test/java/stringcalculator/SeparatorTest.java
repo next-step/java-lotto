@@ -4,28 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class SeparatorTest {
-
-//    @ParameterizedTest
-//    @ValueSource(strings = {"123,456:789.10"})
-//    void 문자열에서_커스텀_구분자를_추출함(String userInput) {
-//        Separator separator = new Separator(userInput);
-////        String userInput = "//.\n1.2.3.4";
-//        assertThat(separator.extractCustomDelimiter(userInput)).isEqualTo(".");
-//    }
-
-//    @Test
-//    void 커스텀_구분자를_포함하여_문자열을_분리() {
-//        Separator separator = new Separator();
-//        String userInput = "//.\n1.2;3,4";
-//        String customDelimiter = separator.extractCustomDelimiter(userInput);
-//        Number number = new Number(userInput);
-//        assertThat(number.split()).isEqualTo(Arrays.asList("1", "2", "3", "4"));
-//    }
 
     @DisplayName("사용자 입력으로 들어온 문자열에서 콤마(,),콜론(:)을 제거")
     @ParameterizedTest

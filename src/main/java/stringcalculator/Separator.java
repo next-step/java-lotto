@@ -6,14 +6,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Separator {
+
     private final List<String> DELIMITER = Arrays.asList("\\:", "\\,");
     private final String JOIN_STR = "|";
-    private String customDelimiter="";
-    private String userNumber="";
-    private String delimiter="";
+    private String customDelimiter = "";
+    private String userNumber = "";
+    private String delimiter = "";
 
-    public Separator(String text){
-        userNumber=text;
+    public Separator(String text) {
+        userNumber = text;
         extractCustomDelimiter(text);
         delimiter = createDelimiterRegex();
     }
@@ -29,7 +30,7 @@ public class Separator {
     private String createDelimiterRegex() {
         String delimiterString = String.join(JOIN_STR, DELIMITER);
         if (!customDelimiter.equals("")) {
-            delimiterString += JOIN_STR+"\\"+ customDelimiter;
+            delimiterString += JOIN_STR + "\\" + customDelimiter;
         }
         return delimiterString;
     }
@@ -38,5 +39,4 @@ public class Separator {
         String[] numbers = userNumber.split(delimiter);
         return Arrays.asList(numbers);
     }
-
 }
