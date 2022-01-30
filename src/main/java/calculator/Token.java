@@ -10,6 +10,7 @@ public class Token {
     private List<Token> tokens;
     public Token(String parseResult) {
         this.operand = parseStringToInteger(parseResult);
+        checkNegative(operand);
     }
     public Token(String[] splitInput) {
         tokens = Arrays.stream(splitInput).map(Token::new).collect(Collectors.toList());
@@ -27,7 +28,11 @@ public class Token {
         }
 
     }
-
+    private void checkNegative(int operand){
+        if(operand<0){
+            throw new RuntimeException("음수입니다");
+        }
+    }
     public List<Token> getTokens() {
         return tokens;
     }
