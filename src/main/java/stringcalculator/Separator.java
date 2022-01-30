@@ -6,8 +6,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Separator {
-//    private final List<String> DELIMITER = Arrays.asList(";", ",");
-//    private final String JOIN_STR = "|";
+    private final List<String> DELIMITER = Arrays.asList("\\:", "\\,");
+    private final String JOIN_STR = "|";
 
     public String extractCustomDelimiter(String text) {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
@@ -19,11 +19,11 @@ public class Separator {
     }
 
     public String createDelimiterRegex(String customDelimiter) {
-        String delimiter = ":|,";
+        String createDelimiter = String.join(JOIN_STR, DELIMITER);
         if (!customDelimiter.equals("")) {
-            delimiter += "|" + customDelimiter;
+            createDelimiter += JOIN_STR + customDelimiter;
         }
-        return delimiter;
+        return createDelimiter;
     }
 
     public List<String> split(String userInput, String customDelimiter) {
