@@ -13,9 +13,9 @@ class DelimitersTest {
     @Test
     void delimiter_생성_확인() {
         List<String> actual = Arrays.asList(":", ",");
-        Delimiters delimiters = new Delimiters(Delimiter.of(actual));
+        Delimiters delimiters = new Delimiters(actual);
 
-        List<String> expected = delimiters.getDelimiters();
+        List<String> expected = delimiters.getValues();
 
         assertThat(expected).isEqualTo(actual);
     }

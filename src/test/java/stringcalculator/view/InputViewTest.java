@@ -9,7 +9,6 @@ import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import stringcalculator.domain.Delimiter;
 import stringcalculator.domain.Delimiters;
 
 public class InputViewTest {
@@ -23,7 +22,7 @@ public class InputViewTest {
         System.setIn(inputStream);
         input = input.substring(InputView.PREFIX_LENGTH);
 
-        Delimiters expected = new Delimiters(Delimiter.of(Arrays.asList(input)));
+        Delimiters expected = new Delimiters(Arrays.asList(input));
 
         // when
         Delimiters delimiters = InputView.getDelimiter();
@@ -40,9 +39,9 @@ public class InputViewTest {
         InputStream inputStream = new ByteArrayInputStream(input.getBytes());
         System.setIn(inputStream);
 
-        Delimiters expected = new Delimiters(Delimiter.of(
-            Arrays.asList(InputView.DEFAULT_DELIMITER_COMMA,
-                        InputView.DEFAULT_DELIMITER_COLON)));
+        Delimiters expected = new Delimiters(Arrays.asList(
+                InputView.DEFAULT_DELIMITER_COMMA,
+                InputView.DEFAULT_DELIMITER_COLON));
 
         // when
         Delimiters delimiters = InputView.getDelimiter();
@@ -61,6 +60,6 @@ public class InputViewTest {
 
         // then
         assertThatExceptionOfType(RuntimeException.class)
-            .isThrownBy(() -> InputView.getDelimiter());
+                .isThrownBy(() -> InputView.getDelimiter());
     }
 }
