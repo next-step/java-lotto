@@ -12,11 +12,11 @@ public class InputView {
     protected static final String DEFAULT_DELIMITER_COLON = ":";
     private static final String EMPTY_STRING = "";
     private static final String PREFIX_REGEX = "\\/\\/(.+)";
+    private static final String DEFAULT_NUMBER = "0";
 
     public static Delimiters getDelimiter() {
         List<String> delimiters = Arrays.asList(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON);
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
+        String input = getInput();
 
         if (!isBlank(input)) {
             validatePrefix(input);
@@ -24,6 +24,21 @@ public class InputView {
         }
 
         return new Delimiters(delimiters);
+    }
+
+    public static String getExpression() {
+        String input = getInput();
+
+        if (isBlank(input)) {
+            return DEFAULT_NUMBER;
+        }
+        return input;
+    }
+
+    private static String getInput() {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        return input;
     }
 
     private static boolean isBlank(String input) {
