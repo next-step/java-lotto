@@ -11,10 +11,16 @@ public class StringCalculatorApplication {
 
     public static void main(String[] args) {
         Delimiters delimiters = InputView.getDelimiters();
-        String expression = InputView.getExpression();
+        List<Integer> numbers = null;
 
-        ExpressionParser expressionParser = new ExpressionParser(delimiters);
-        List<Integer> numbers = expressionParser.parse(expression);
+        try {
+            String expression = InputView.getExpression();
+
+            ExpressionParser expressionParser = new ExpressionParser(delimiters);
+            numbers = expressionParser.parse(expression);
+        } catch (IllegalArgumentException e) {
+            InputView.printErrorMessage(e.getMessage());
+        }
 
         int result = Accumulator.calculate(numbers);
         ResultView.print(result);

@@ -3,15 +3,20 @@ package stringcalculator.domain;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import stringcalculator.view.InputView;
 
 public class Delimiters {
 
     private List<Delimiter> delimiters;
 
     public Delimiters(List<String> delimiters) {
-        this.delimiters = delimiters.stream()
-            .map(Delimiter::new)
-            .collect(Collectors.toList());
+        try {
+            this.delimiters = delimiters.stream()
+                .map(Delimiter::new)
+                .collect(Collectors.toList());
+        } catch (IllegalArgumentException e) {
+            InputView.printErrorMessage(e.getMessage());
+        }
     }
 
     public List<String> getValues() {

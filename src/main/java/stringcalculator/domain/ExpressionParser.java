@@ -20,7 +20,6 @@ public class ExpressionParser {
     public List<Integer> parse(String expression) {
         String regex = getSplitRegex();
         validateContainsCharacter(expression);
-
         String[] split = expression.split(regex);
 
         return Arrays.stream(split)
@@ -36,7 +35,7 @@ public class ExpressionParser {
         String regex = getValidateRegex();
 
         if (!expression.matches(regex)) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("구분자와 숫자만으로 이루어져야 합니다.");
         }
     }
 
