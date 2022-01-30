@@ -1,4 +1,4 @@
-package stringcalculator;
+package stringcalculator.domain;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,10 @@
 package stringcalculator;
 
 import java.util.List;
+import stringcalculator.domain.Calculator;
+import stringcalculator.domain.Number;
+import stringcalculator.domain.Separator;
+import stringcalculator.domain.UserInput;
 import stringcalculator.view.ResultView;
 
 public class StringCalculator {

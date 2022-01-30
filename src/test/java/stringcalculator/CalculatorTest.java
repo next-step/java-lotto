@@ -1,12 +1,10 @@
 package stringcalculator;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.Arrays;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
+import stringcalculator.domain.Calculator;
 
 class CalculatorTest {
 
