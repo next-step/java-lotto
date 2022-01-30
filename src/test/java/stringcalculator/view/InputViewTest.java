@@ -14,6 +14,10 @@ import stringcalculator.domain.Delimiters;
 
 public class InputViewTest {
 
+    private static final int PREFIX_LENGTH = 2;
+    private static final String DEFAULT_DELIMITER_COMMA = ",";
+    private static final String DEFAULT_DELIMITER_COLON = ":";
+
     @DisplayName("구분자를 입력받는다.")
     @ValueSource(strings = {"//s", "///", "//;", "//q"})
     @ParameterizedTest
@@ -21,7 +25,7 @@ public class InputViewTest {
         // given
         InputStream inputStream = new ByteArrayInputStream(input.getBytes());
         System.setIn(inputStream);
-        input = input.substring(InputView.PREFIX_LENGTH);
+        input = input.substring(PREFIX_LENGTH);
 
         Delimiters expected = new Delimiters(Arrays.asList(input));
 
@@ -40,9 +44,8 @@ public class InputViewTest {
         InputStream inputStream = new ByteArrayInputStream(input.getBytes());
         System.setIn(inputStream);
 
-        Delimiters expected = new Delimiters(Arrays.asList(
-            InputView.DEFAULT_DELIMITER_COMMA,
-            InputView.DEFAULT_DELIMITER_COLON));
+        Delimiters expected = new Delimiters(
+            Arrays.asList(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON));
 
         // when
         Delimiters delimiters = InputView.getDelimiters();
