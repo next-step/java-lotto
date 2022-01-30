@@ -1,5 +1,6 @@
 package stringcalculator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -19,6 +20,10 @@ public class Number {
                 throw new RuntimeException();
             }
         }
+    }
+
+    public List<String>getNumberInput(){
+        return new ArrayList<>(userInput);
     }
 }
 
