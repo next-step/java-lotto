@@ -10,14 +10,14 @@ public class Delimiters {
 
     public Delimiters(List<String> delimiters) {
         this.delimiters = delimiters.stream()
-                .map(Delimiter::new)
-                .collect(Collectors.toList());
+            .map(Delimiter::new)
+            .collect(Collectors.toList());
     }
 
     public List<String> getValues() {
         return delimiters.stream()
-                .map(Delimiter::getValue)
-                .collect(Collectors.toList());
+            .map(Delimiter::getValue)
+            .collect(Collectors.toList());
     }
 
     @Override

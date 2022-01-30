@@ -40,8 +40,9 @@ public class InputViewTest {
         InputStream inputStream = new ByteArrayInputStream(input.getBytes());
         System.setIn(inputStream);
 
-        Delimiters expected = new Delimiters(Arrays.asList(InputView.DEFAULT_DELIMITER_COMMA,
-                InputView.DEFAULT_DELIMITER_COLON));
+        Delimiters expected = new Delimiters(Arrays.asList(
+            InputView.DEFAULT_DELIMITER_COMMA,
+            InputView.DEFAULT_DELIMITER_COLON));
 
         // when
         Delimiters delimiters = InputView.getDelimiters();
@@ -60,7 +61,7 @@ public class InputViewTest {
 
         // then
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(
-                () -> InputView.getDelimiters());
+            () -> InputView.getDelimiters());
     }
 
     @DisplayName("식을 입력 받는다")

@@ -20,7 +20,7 @@ public class ExpressionParserTest {
         Delimiters delimiters = new Delimiters(Arrays.asList(",", ":"));
 
         // then
-        assertDoesNotThrow(()->new ExpressionParser(delimiters));
+        assertDoesNotThrow(() -> new ExpressionParser(delimiters));
     }
 
     @DisplayName("parse 테스트 - 커스텀 구분자")
@@ -35,7 +35,7 @@ public class ExpressionParserTest {
         List<Integer> numbers = expressionParser.parse(input);
 
         // then
-        assertThat(numbers).isEqualTo(Arrays.asList(1,2,3));
+        assertThat(numbers).isEqualTo(Arrays.asList(1, 2, 3));
     }
 
     @DisplayName("parse 테스트 - default 구분자")
@@ -50,7 +50,7 @@ public class ExpressionParserTest {
         List<Integer> numbers = expressionParser.parse(input);
 
         // then
-        assertThat(numbers).isEqualTo(Arrays.asList(1,2,3));
+        assertThat(numbers).isEqualTo(Arrays.asList(1, 2, 3));
     }
 
     @DisplayName("구분자가 아닌 문자가 들어오면 예외를 발생시킨다")
@@ -63,7 +63,7 @@ public class ExpressionParserTest {
 
         // then
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(()-> expressionParser.parse(input));
+            .isThrownBy(() -> expressionParser.parse(input));
     }
 
     @DisplayName("2개 이상의 연속된 구분자가 들어오면 예외를 발생시킨다")
@@ -76,6 +76,6 @@ public class ExpressionParserTest {
 
         // then
         assertThatExceptionOfType(NumberFormatException.class)
-                .isThrownBy(()-> expressionParser.parse(input));
+            .isThrownBy(() -> expressionParser.parse(input));
     }
 }
