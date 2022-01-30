@@ -34,7 +34,7 @@
 - [X] 계산기 - Accumulator
     - Numbers 순회하며 덧셈.
 
-- [ ] 결과 출력 view.ResultView
+- [X] 결과 출력 view.ResultView
 
 
 
