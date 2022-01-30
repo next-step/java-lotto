@@ -26,7 +26,7 @@ public class InputViewTest {
         Delimiters expected = new Delimiters(Arrays.asList(input));
 
         // when
-        Delimiters delimiters = InputView.getDelimiter();
+        Delimiters delimiters = InputView.getDelimiters();
 
         // then
         assertThat(delimiters).isEqualTo(expected);
@@ -44,7 +44,7 @@ public class InputViewTest {
                 InputView.DEFAULT_DELIMITER_COLON));
 
         // when
-        Delimiters delimiters = InputView.getDelimiter();
+        Delimiters delimiters = InputView.getDelimiters();
 
         // then
         assertThat(delimiters).isEqualTo(expected);
@@ -60,7 +60,7 @@ public class InputViewTest {
 
         // then
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(
-                () -> InputView.getDelimiter());
+                () -> InputView.getDelimiters());
     }
 
     @DisplayName("식을 입력 받는다")
