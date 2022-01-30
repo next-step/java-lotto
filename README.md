@@ -24,14 +24,14 @@
     - [X] 식 입력 - getExpression
         - [X] 입력은 공백이면 0을 반환("", " ")
 
-- [ ] 식 파싱 - ExpressionParser()
+- [X] 식 파싱 - ExpressionParser()
     - parse(expression)
     - 식을 구분자로 파싱해서 Numbers 반환. (List<Number>)
     - Number
-        - [ ] 구분자가 아닌 숫자 이외의 문자가 포함되어 있으면 안된다.
-        - [ ] 숫자는 양수.
+        - [X] 구분자가 아닌 숫자 이외의 문자가 포함되어 있으면 안된다.
+        - [X] 숫자는 양수.
 
-- [ ] 계산기 - StringAccumulator
+- [ ] 계산기 - Accumulator
     - Numbers 순회하며 덧셈.
 
 - [ ] 결과 출력 view.ResultView
