@@ -1,6 +1,7 @@
 package stringcalculator;
 
 import java.util.List;
+import stringcalculator.view.ResultView;
 
 public class StringCalculator {
 
@@ -10,5 +11,8 @@ public class StringCalculator {
 
         List<String> userNumbers = separator.split();
         Number numbers = new Number(userNumbers);
+        Calculator calculator = new Calculator();
+        ResultView resultView = new ResultView();
+        resultView.printSum(calculator.calculate(numbers.getNumberInput()));
     }
 }
