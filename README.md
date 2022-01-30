@@ -31,7 +31,7 @@
         - [X] 구분자가 아닌 숫자 이외의 문자가 포함되어 있으면 안된다.
         - [X] 숫자는 양수.
 
-- [ ] 계산기 - Accumulator
+- [X] 계산기 - Accumulator
     - Numbers 순회하며 덧셈.
 
 - [ ] 결과 출력 view.ResultView
