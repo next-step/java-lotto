@@ -23,6 +23,13 @@ public class Parser {
         }
         return ",|:";
     }
+    public List<Token> parseInput() {
+        String[] parseResult = userInput.split(delimiter);
+        Token token = new Token(parseResult);
+        List<Token> tokens = token.getTokens();
+
+        return tokens;
+    }
 
     public String getUserInput() {
         return userInput;
