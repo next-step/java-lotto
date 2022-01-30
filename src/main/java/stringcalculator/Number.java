@@ -1,28 +1,24 @@
 package stringcalculator;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class Number {
 
-    private String userInput;
+    private final List<String> userInput;
 
-
-    public Number(String userInput) {
-        if (isNullOrEmpty(userInput)) {
-            userInput = "0";
-        }
+    public Number(List<String> userInput) {
         this.userInput = userInput;
+
     }
 
-
-    public boolean isNullOrEmpty(String userInput) {
-        return Objects.isNull(userInput) || userInput.isEmpty();
+    public void checkIfPositiveNumber() {
+        Pattern m = Pattern.compile("[0-9]+");
+        for (String numStr : userInput) {
+            if (!m.matcher(numStr).find()) {
+                throw new RuntimeException();
+            }
+        }
     }
-
-    public String getNumber() {
-        return userInput;
-    }
-
 }
+
