@@ -1,6 +1,5 @@
 package calculator;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,8 +10,14 @@ public class Parser {
     private String delimiter;
 
     public Parser(String userInput) {
-        this.userInput = userInput;
+        this.userInput =checkInputNullOrZero(userInput);
         this.delimiter = findDelimiter();
+    }
+    private String checkInputNullOrZero(String userInput){
+        if (userInput==null ||userInput.equals("")){
+            return "0";
+        }
+        return userInput;
     }
 
     private String findDelimiter() {
@@ -26,9 +31,8 @@ public class Parser {
     public List<Token> parseInput() {
         String[] parseResult = userInput.split(delimiter);
         Token token = new Token(parseResult);
-        List<Token> tokens = token.getTokens();
 
-        return tokens;
+        return token.getTokens();
     }
 
     public String getUserInput() {
