@@ -7,6 +7,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import stringcalculator.domain.Delimiters;
@@ -39,8 +40,7 @@ public class InputViewTest {
         InputStream inputStream = new ByteArrayInputStream(input.getBytes());
         System.setIn(inputStream);
 
-        Delimiters expected = new Delimiters(Arrays.asList(
-                InputView.DEFAULT_DELIMITER_COMMA,
+        Delimiters expected = new Delimiters(Arrays.asList(InputView.DEFAULT_DELIMITER_COMMA,
                 InputView.DEFAULT_DELIMITER_COLON));
 
         // when
@@ -59,7 +59,35 @@ public class InputViewTest {
         System.setIn(inputStream);
 
         // then
-        assertThatExceptionOfType(RuntimeException.class)
-                .isThrownBy(() -> InputView.getDelimiter());
+        assertThatExceptionOfType(RuntimeException.class).isThrownBy(
+                () -> InputView.getDelimiter());
+    }
+
+    @DisplayName("식을 입력 받는다")
+    @Test
+    void getExpression() {
+        String expected = "1;2;3";
+        InputStream inputStream = new ByteArrayInputStream(expected.getBytes());
+        System.setIn(inputStream);
+
+        // when
+        String result = InputView.getExpression();
+
+        // then
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @DisplayName("식을 입력 - 공백 입력.")
+    @ValueSource(strings = {" ", "   ", "\t", "\n"})
+    @ParameterizedTest
+    void getExpression_공백_입력(String input) {
+        InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+        System.setIn(inputStream);
+
+        // when
+        String result = InputView.getExpression();
+
+        // then
+        assertThat(result).isEqualTo("0");
     }
 }
