@@ -1,22 +1,14 @@
 package stringcalculator.domain;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Delimiter {
 
-    private final String delimiter;
+    private final String value;
 
-    private Delimiter(String delimiter) {
-        validateIsNumber(delimiter);
-        this.delimiter = delimiter;
-    }
-
-    public static List<Delimiter> of(List<String> delimiter) {
-        return delimiter.stream()
-            .map(Delimiter::new)
-            .collect(Collectors.toList());
+    public Delimiter(String value) {
+        validateIsNumber(value);
+        this.value = value;
     }
 
     private void validateIsNumber(String delimiter) {
@@ -33,8 +25,8 @@ public class Delimiter {
         return Character.isDigit(delimiter.charAt(delimiter.length() - 1));
     }
 
-    public String getDelimiter() {
-        return delimiter;
+    public String getValue() {
+        return value;
     }
 
     @Override
@@ -46,11 +38,11 @@ public class Delimiter {
             return false;
         }
         Delimiter delimiter1 = (Delimiter) o;
-        return Objects.equals(delimiter, delimiter1.delimiter);
+        return Objects.equals(value, delimiter1.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(delimiter);
+        return Objects.hash(value);
     }
 }

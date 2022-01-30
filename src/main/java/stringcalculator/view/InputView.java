@@ -3,7 +3,6 @@ package stringcalculator.view;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import stringcalculator.domain.Delimiter;
 import stringcalculator.domain.Delimiters;
 
 public class InputView {
@@ -24,7 +23,7 @@ public class InputView {
             delimiters = Arrays.asList(getRemovePrefix(input));
         }
 
-        return new Delimiters(Delimiter.of(delimiters));
+        return new Delimiters(delimiters);
     }
 
     private static boolean isBlank(String input) {

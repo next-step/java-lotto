@@ -8,14 +8,16 @@ public class Delimiters {
 
     private List<Delimiter> delimiters;
 
-    public Delimiters(List<Delimiter> delimiters) {
-        this.delimiters = delimiters;
+    public Delimiters(List<String> delimiters) {
+        this.delimiters = delimiters.stream()
+                .map(Delimiter::new)
+                .collect(Collectors.toList());
     }
 
-    public List<String> getDelimiters() {
+    public List<String> getValues() {
         return delimiters.stream()
-            .map(Delimiter::getDelimiter)
-            .collect(Collectors.toList());
+                .map(Delimiter::getValue)
+                .collect(Collectors.toList());
     }
 
     @Override
