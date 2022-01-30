@@ -1,28 +1,21 @@
 package stringcalculator;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.ValueSource;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Test;
 
 class NumberTest {
 
-    @DisplayName("빈 문자열 또는 null 값을 입력할 경우 0을 반환")
-    @ParameterizedTest
-    @NullAndEmptySource
-    void nullOrEmptyTest(final String userInput) {
-        Number number = new Number(userInput);
-        assertThat(number.getNumber()).isEqualTo("0");
+    @Test
+    void 숫자_이외의_값_음수를_전달하면_에러_반환() {
+        List<String> numbers = Arrays.asList("1", "2", "-11as", "a");
+        final Number number = new Number(numbers);
+        assertThatThrownBy(number::checkIfPositiveNumber)
+            .isInstanceOf(RuntimeException.class);
     }
-
-    @DisplayName("빈 문자열 또는 null이 아닐경우 문자열을 반환")
-    @ParameterizedTest
-    @ValueSource(strings = {"123:456,789"})
-    void 빈_문자열_또는_null_이_아닐경우_문자열을_반환(final String userInput) {
-        Number number = new Number(userInput);
-        assertThat(number.getNumber()).isEqualTo(userInput);
-    }
-
 }
+
+
+
