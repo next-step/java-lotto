@@ -26,14 +26,14 @@ public enum Rank {
         return mathCount;
     }
 
-    private boolean isMatchCount(int mathCount) {
-        return this.mathCount == mathCount;
-    }
-
     public static Rank getRank(int matchCount) {
         return Arrays.stream(Rank.values())
                 .filter(prize -> prize.isMatchCount(matchCount))
                 .findFirst()
                 .orElse(FAIL);
+    }
+
+    private boolean isMatchCount(int mathCount) {
+        return this.mathCount == mathCount;
     }
 }

@@ -33,13 +33,16 @@ public class ResultView {
         }
     }
 
-    public void printRank(Rank rank, Map<Rank, Integer> lottoResult) {
+    public void printResultRatio(BigDecimal prizeRatio) {
+        System.out.println(MESSAGE_RATIO_RESULT + prizeRatio + MESSAGE_RATIO_RESULT_END);
+    }
+
+    private void printRank(Rank rank, Map<Rank, Integer> lottoResult) {
         if (rank == Rank.FAIL) {
             return;
-        } else if (rank == Rank.SECOND) {
-            System.out.println(rank.getMathCount() + MESSAGE_MATCH_IS + MESSAGE_BONUS_MATCH
-                    + " (" + rank.getPrize() + MESSAGE_WON + ")- "
-                    + lottoResult.getOrDefault(rank, 0) + MESSAGE_MATCH_COUNT);
+        }
+        if (rank == Rank.SECOND) {
+            printBonusRank(rank, lottoResult);
             return;
         }
         System.out.println(rank.getMathCount() + MESSAGE_MATCH_IS
@@ -47,7 +50,9 @@ public class ResultView {
                 + lottoResult.getOrDefault(rank, 0) + MESSAGE_MATCH_COUNT);
     }
 
-    public void printResultRatio(BigDecimal prizeRatio) {
-        System.out.println(MESSAGE_RATIO_RESULT + prizeRatio + MESSAGE_RATIO_RESULT_END);
+    private void printBonusRank(Rank rank, Map<Rank, Integer> lottoResult) {
+        System.out.println(rank.getMathCount() + MESSAGE_MATCH_IS + MESSAGE_BONUS_MATCH
+                + " (" + rank.getPrize() + MESSAGE_WON + ")- "
+                + lottoResult.getOrDefault(rank, 0) + MESSAGE_MATCH_COUNT);
     }
 }

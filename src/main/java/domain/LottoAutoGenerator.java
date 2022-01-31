@@ -15,16 +15,6 @@ public class LottoAutoGenerator implements LottoGenerator {
         shuffleLottoNumberPool();
     }
 
-    public void initLottoNumberPool() {
-        lottoNumberPool = IntStream.rangeClosed(START_LOTTO_NUMBER, END_LOTTO_NUMBER)
-                .boxed()
-                .collect(Collectors.toList());
-    }
-
-    public void shuffleLottoNumberPool() {
-        shuffle(lottoNumberPool);
-    }
-
     @Override
     public List<Integer> generateLottoNumber() {
         List<Integer> lotto = new ArrayList<>();
@@ -32,5 +22,15 @@ public class LottoAutoGenerator implements LottoGenerator {
             lotto.add(lottoNumberPool.get(i));
         }
         return lotto.stream().sorted().collect(Collectors.toList());
+    }
+
+    private void initLottoNumberPool() {
+        lottoNumberPool = IntStream.rangeClosed(START_LOTTO_NUMBER, END_LOTTO_NUMBER)
+                .boxed()
+                .collect(Collectors.toList());
+    }
+
+    private void shuffleLottoNumberPool() {
+        shuffle(lottoNumberPool);
     }
 }

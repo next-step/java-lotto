@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoService {
-    private LottoTickets lottoTickets;
+    private static final int lottoPrice = 1_000;
+    private final LottoTickets lottoTickets;
     private final InputView inputView;
     private final ResultView resultView;
-    private static final int lottoPrice = 1_000;
     private int purchasePrice;
 
     public LottoService() {
