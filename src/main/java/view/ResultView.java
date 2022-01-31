@@ -45,13 +45,13 @@ public class ResultView {
             printBonusRank(rank, lottoResult);
             return;
         }
-        System.out.println(rank.getMathCount() + MESSAGE_MATCH_IS
+        System.out.println(rank.getMatchCount() + MESSAGE_MATCH_IS
                 + " (" + rank.getPrize() + MESSAGE_WON + ")- "
                 + lottoResult.getOrDefault(rank, 0) + MESSAGE_MATCH_COUNT);
     }
 
     private void printBonusRank(Rank rank, Map<Rank, Integer> lottoResult) {
-        System.out.println(rank.getMathCount() + MESSAGE_MATCH_IS + MESSAGE_BONUS_MATCH
+        System.out.println(rank.getMatchCount() + MESSAGE_MATCH_IS + MESSAGE_BONUS_MATCH
                 + " (" + rank.getPrize() + MESSAGE_WON + ")- "
                 + lottoResult.getOrDefault(rank, 0) + MESSAGE_MATCH_COUNT);
     }

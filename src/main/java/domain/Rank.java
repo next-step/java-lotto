@@ -11,29 +11,39 @@ public enum Rank {
     FIRST(2_000_000_000, 6);
 
     private final int prize;
-    private final int mathCount;
+    private final int matchCount;
 
-    Rank(int prize, int mathCount) {
+    Rank(int prize, int matchCount) {
         this.prize = prize;
-        this.mathCount = mathCount;
+        this.matchCount = matchCount;
     }
 
-    public int getPrize() {
-        return prize;
-    }
-
-    public int getMathCount() {
-        return mathCount;
-    }
-
-    public static Rank getRank(int matchCount) {
+    public static Rank getRank(int matchCount, Lotto lotto, int bonusNumber) {
+        if (matchCount == 5) {
+            return checkBonusRank(lotto, bonusNumber);
+        }
         return Arrays.stream(Rank.values())
                 .filter(prize -> prize.isMatchCount(matchCount))
                 .findFirst()
                 .orElse(FAIL);
     }
 
+    private static Rank checkBonusRank(Lotto lotto, int bonusNumber) {
+        if (lotto.checkBonusNumber(bonusNumber)) {
+            return Rank.SECOND;
+        }
+        return Rank.THIRD;
+    }
+
+    public int getPrize() {
+        return prize;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
     private boolean isMatchCount(int mathCount) {
-        return this.mathCount == mathCount;
+        return this.matchCount == mathCount;
     }
 }

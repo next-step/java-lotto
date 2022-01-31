@@ -3,6 +3,7 @@ package domain;
 import view.InputView;
 import view.ResultView;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -12,11 +13,13 @@ public class LottoService {
     private final InputView inputView;
     private final ResultView resultView;
     private int purchasePrice;
+    private BigDecimal totalPrize;
 
     public LottoService() {
         this.lottoTickets = new LottoTickets();
         this.inputView = new InputView();
         this.resultView = new ResultView();
+        this.totalPrize = BigDecimal.ZERO;
     }
 
     public void purchaseLotto() {
@@ -40,10 +43,20 @@ public class LottoService {
         Map<Rank, Integer> matchCount = new AnswerLotto(answerNumber, bonusNumber)
                 .checkLottoAnswer(lottoTickets.getLottoTickets());
         resultView.printResultStatistic(matchCount);
+
+        calculateLottoTotalPrize(matchCount);
+        resultView.printResultRatio(calculateLottoRatio());
     }
 
-    public void finishLotto() {
-        lottoTickets.calculateLottoTotalPrize();
-        resultView.printResultRatio(lottoTickets.calculateLottoRatio(purchasePrice));
+    private void calculateLottoTotalPrize(Map<Rank, Integer> matchCount) {
+        for (Rank rank : Rank.values()) {
+            int prize = rank.getPrize();
+            int count = matchCount.getOrDefault(rank, 0);
+            totalPrize = totalPrize.add(new BigDecimal(prize * count));
+        }
+    }
+
+    private BigDecimal calculateLottoRatio() {
+        return totalPrize.divide(new BigDecimal(purchasePrice), 2, BigDecimal.ROUND_HALF_UP);
     }
 }

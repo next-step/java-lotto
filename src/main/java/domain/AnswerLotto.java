@@ -23,24 +23,10 @@ public class AnswerLotto {
         Map<Rank, Integer> lottoResult = new HashMap<>();
         for (Lotto lotto : lottoTickets) {
             int matchNumberCount = lotto.countMatchCount(answerNumbers);
-            Rank rank = checkRank(matchNumberCount, lotto);
-            int matchLottoCount = lottoResult.getOrDefault(rank, 0);
-            lottoResult.put(rank, matchLottoCount + 1);
+            Rank rank = Rank.getRank(matchNumberCount, lotto, bonusNumber);
+            lottoResult.put(rank, lottoResult.getOrDefault(rank, 0) + 1);
         }
         return lottoResult;
-    }
-
-
-    public Rank checkRank(int matchLottoCount, Lotto lotto) {
-        Rank rank = Rank.getRank(matchLottoCount);
-        if (matchLottoCount == 5 && checkBonusNumber(lotto)) {
-            rank = Rank.SECOND;
-        }
-        return rank;
-    }
-
-    private boolean checkBonusNumber(Lotto lotto) {
-        return lotto.checkBonusNumber(bonusNumber);
     }
 
     private void checkInputNumberCount(List<Integer> answerNumbers) {
