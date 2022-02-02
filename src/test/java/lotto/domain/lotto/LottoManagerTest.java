@@ -1,9 +1,8 @@
 package lotto.domain.lotto;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 import lotto.domain.machine.RandomLottoGenerator;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class LottoManagerTest {
@@ -15,6 +14,6 @@ class LottoManagerTest {
         //when
 
         //then
-        Assertions.assertThat(lottoManager.getLottosSize()).isEqualTo(14);
+        assertThat(lottoManager.getLottosSize()).isEqualTo(14);
     }
 }
