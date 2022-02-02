@@ -16,4 +16,8 @@ public class Lotto {
             .map(LottoNumber::new)
             .collect(Collectors.toList()));
     }
+
+    public List<LottoNumber> getNumbers() {
+        return this.numbers;
+    }
 }
