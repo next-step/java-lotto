@@ -14,6 +14,10 @@ public class LottoManager {
         }
     }
 
+    public List<Lotto> getLottos() {
+        return this.lottos;
+    }
+
     public int getLottosSize() {
         return this.lottos.size();
     }
