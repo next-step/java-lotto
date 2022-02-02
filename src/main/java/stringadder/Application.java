@@ -1,3 +1,5 @@
+package stringadder;
+
 import java.util.List;
 import stringadder.domain.Adder;
 import stringadder.utils.StringUtils;
