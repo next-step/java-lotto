@@ -1,18 +1,23 @@
 package lotto.domain.lotto;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private List<Integer> numbers;
+    private List<LottoNumber> numbers;
 
-    public Lotto() {
-        numbers = new ArrayList<>();
+    private Lotto(List<LottoNumber> numbers) {
+        this.numbers = numbers;
     }
 
-    public List<Integer> getNumbers() {
-        return Arrays.asList(1, 2, 3, 4, 5, 6);
+    public static Lotto from(List<Integer> numbers) {
+        return new Lotto(numbers.stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return this.numbers;
     }
 }
