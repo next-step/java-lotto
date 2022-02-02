@@ -19,6 +19,7 @@ public class LottoController {
             ticket.getBuyCount());
 
         OutputView.printPurchaseAmount(ticket.getBuyCount());
+        OutputView.printPurchaseTicket(lottoManager.getLottos());
 
         String[] numbers = InputView.writeWinningNumbers();
         String bonus = InputView.writeBonusBall();
