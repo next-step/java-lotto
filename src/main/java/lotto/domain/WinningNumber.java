@@ -8,12 +8,24 @@ import lotto.domain.lotto.Rank;
 
 public class WinningNumber {
 
+    private static final String DUPLICATE_BONUS_BALL = "보너스볼은 중복될 수 없습니다.";
+
     private final Lotto lotto;
     private final LottoNumber bonus;
 
     public WinningNumber(Lotto lotto, LottoNumber bonus) {
+        validateWinningNumber(lotto, bonus);
         this.lotto = lotto;
         this.bonus = bonus;
+    }
+
+    private void validateWinningNumber(Lotto lotto, LottoNumber bonus) {
+        if (lotto.getNumbers().stream()
+            .map(LottoNumber::getNumber)
+            .collect(Collectors.toList())
+            .contains(bonus.getNumber())) {
+            throw new IllegalArgumentException(DUPLICATE_BONUS_BALL);
+        }
     }
 
     public Rank compareTo(List<Integer> targetLotto) {
