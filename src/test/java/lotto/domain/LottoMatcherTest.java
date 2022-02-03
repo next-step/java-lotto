@@ -8,6 +8,8 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoMatcherTest {
 
@@ -127,5 +129,22 @@ class LottoMatcherTest {
         //then
         System.out.println(lotto);
         Assertions.assertThat(LottoMatcher.compare(numbers, integers)).isEqualTo(0);
+    }
+
+    @Test
+    void 보너스_볼_확인() {
+        // given
+        Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumber winningNumber = new WinningNumber(lotto.getNumbers(), new LottoNumber(1));
+
+        //when
+        List<LottoNumber> lottoNumbers = lotto.getNumbers();
+        List<Integer> integers = lottoNumbers.stream()
+            .map(LottoNumber::getNumber)
+            .collect(Collectors.toList());
+
+        // then
+        Assertions.assertThat(LottoMatcher.matchBonus(winningNumber, integers)).isTrue();
+
     }
 }
