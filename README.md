@@ -53,7 +53,10 @@
   - [X] 불필요한 공백 제거
   - [X] 숫자만 입력 허용
 
-- [ ] 구매한 로또 번호 발급 - Lottos.buyOnBudget
+- [X] 로또번호 - LottoBalls
+  - [X] 1 ~ 45 까지 List<Integer> 형식으로 로또 번호 관리
+
+- [ ] 구매한 로또 번호 발급 - Lottos.createAutoLottos
   - [ ] 1000원 단위로 로또 개수 발급 (ex: 14500 원 = 14장)
   - [ ] 6개의 랜덤 로또 번호를 생성한다
   - [ ] Lotto(value = lottoNumber)
