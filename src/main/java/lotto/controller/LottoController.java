@@ -18,7 +18,7 @@ public class LottoController {
     private final int countTickets;
     private final Tickets tickets;
 
-    public LottoController(int amount) {
+    public LottoController(final int amount) {
         this.amount = amount;
         this.countTickets = amount / PRICE_PER_ONE_TICKET;
         this.tickets = new Tickets();
@@ -42,7 +42,7 @@ public class LottoController {
         Answer answer = new Answer(InputView.getComparisonNumbers(), InputView.getBonus());
         Map<Rank, Integer> matchForEachTickets = answer.compare(tickets);
 
-        OutputView.printStat(matchForEachTickets);
+        OutputView.printStatistics(matchForEachTickets);
         OutputView.printResult(new PrizeRatio().calculateRatio(amount, matchForEachTickets));
     }
 

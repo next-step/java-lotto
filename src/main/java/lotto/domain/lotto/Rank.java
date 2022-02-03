@@ -15,12 +15,12 @@ public enum Rank {
     private final int prize;
     private final int matches;
 
-    Rank(int prize, int matches) {
+    Rank(final int prize, final int matches) {
         this.prize = prize;
         this.matches = matches;
     }
 
-    public static Rank getRank(int matches, boolean hasBonus) {
+    public static Rank getRank(final int matches, final boolean hasBonus) {
         if (matches == SECOND_MATCHES && hasBonus) {
             return SECOND;
         }
@@ -39,7 +39,7 @@ public enum Rank {
         return matches;
     }
 
-    private boolean isMatches(int count) {
+    private boolean isMatches(final int count) {
         return matches == count;
     }
 }

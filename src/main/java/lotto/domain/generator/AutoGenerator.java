@@ -9,7 +9,7 @@ import lotto.domain.lotto.Numbers;
 
 public class AutoGenerator implements LottoGenerator {
 
-    private List<Integer> numberPool = new ArrayList<>();
+    private List<Integer> numberPool;
 
     public AutoGenerator() {
         generate();

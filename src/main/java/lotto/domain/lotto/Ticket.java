@@ -6,7 +6,7 @@ public class Ticket {
 
     private final Numbers lotto;
 
-    public Ticket(Numbers numbers) {
+    public Ticket(final Numbers numbers) {
         this.lotto = numbers;
     }
 
@@ -14,13 +14,13 @@ public class Ticket {
         return lotto;
     }
 
-    public int matches(List<Integer> comparison) {
+    public int matches(final List<Integer> comparison) {
         return (int) lotto.get().stream()
             .filter(comparison::contains)
             .count();
     }
 
-    public boolean checkBonus(int bonus) {
+    public boolean checkBonus(final int bonus) {
         return lotto.get().stream()
             .anyMatch(number -> number == bonus);
     }
