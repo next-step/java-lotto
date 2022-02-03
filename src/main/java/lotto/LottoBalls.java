@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,8 +8,11 @@ import java.util.stream.IntStream;
 
 public class LottoBalls {
 
+    private final static int LOTTO_START_NUMBER = 1;
+    private final static int LOTTO_END_NUMBER = 45;
+
     private static final List<Integer> balls = new ArrayList<>(
-            Arrays.stream(IntStream.range(1, 45).toArray())
+            Arrays.stream(IntStream.range(LOTTO_START_NUMBER, LOTTO_END_NUMBER + 1).toArray())
                     .boxed()
                     .collect(Collectors.toList()));
 
