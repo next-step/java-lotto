@@ -5,7 +5,7 @@ import java.util.List;
 public class LottoMachine {
 
     private final List<Integer> winNumbers;
-    private final int bonusNumber;
+    private final Integer bonusNumber;
 
     public LottoMachine(List<Integer> winNumbers, int bonusNumber) {
         this.winNumbers = winNumbers;
@@ -14,6 +14,10 @@ public class LottoMachine {
 
     public boolean isContain(int number){
         return winNumbers.contains(number);
+    }
+
+    public boolean isEqualBonusNumber(final int number){
+        return bonusNumber.equals(number);
     }
 
 

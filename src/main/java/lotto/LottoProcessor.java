@@ -21,6 +21,7 @@ public class LottoProcessor {
 
         LottoMachine lottoMachine = new LottoMachine(winNumbers, bonusNumber);
         List<Integer> integers = lottoTickets.countCorrectWinNumber(lottoMachine);
+        List<Integer> bonusNumbers = lottoTickets.checkBonusNumber(lottoMachine);
 
     }
 }

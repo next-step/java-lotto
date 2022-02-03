@@ -38,6 +38,14 @@ public class LottoTickets {
         return correctNumbers;
     }
 
+    public List<Integer> checkBonusNumber(final LottoMachine lottoMachine){
+        final List<Integer>checkBonusNumber=new ArrayList<>();
+        for (Lotto lotto: lottoTickets) {
+            int i = lotto.compareLottoAndBonusNumbers(lottoMachine);
+        }
+        return checkBonusNumber;
+    }
+
 
 
 }

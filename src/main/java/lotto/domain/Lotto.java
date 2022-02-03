@@ -34,4 +34,9 @@ public class Lotto {
             .filter(lottoNumber -> lottoMachine.isContain(lottoNumber)).count()).intValue();
     }
 
+    public int compareLottoAndBonusNumbers(final LottoMachine lottoMachine){
+        return Long.valueOf(lottoNumbers.stream()
+            .filter(lottoNumber -> lottoMachine.isEqualBonusNumber(lottoNumber)).count()).intValue();
+    }
+
 }
