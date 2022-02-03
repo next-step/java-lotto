@@ -11,11 +11,11 @@ class LottoBallsTest {
     void Lotto_Ball_은_1부터_45_까지이다() {
 
         // when
-        List<Integer> balls = LottoBalls.get();
+        List<String> balls = LottoBalls.get();
 
         // then
         for (int i = 1; i <= 45; i++) {
-            assertThat(balls.get(i - 1)).isEqualTo(i);
+            assertThat(balls.get(i - 1)).isEqualTo(String.valueOf(i));
         }
     }
 }

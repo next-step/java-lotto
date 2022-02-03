@@ -31,8 +31,8 @@ public class Lottos {
         return budget.getValue() / PRICE_OF_LOTTO;
     }
 
-    private static List<Integer> createRandomNumbers() {
-        List<Integer> numbers = new ArrayList<>();
+    private static List<String> createRandomNumbers() {
+        List<String> numbers = new ArrayList<>();
 
         for (int i = 0; i < NUMBER_OF_LOTTO_BALL; i++) {
             numbers.add(LottoBalls.get().get(i));

@@ -32,7 +32,7 @@ class LottosTest {
     @Test
     void shuffle() {
         // given
-        ArrayList<Integer> before = new ArrayList<>(LottoBalls.get());
+        ArrayList<String> before = new ArrayList<>(LottoBalls.get());
 
         // when
         Lottos.createAutoLottos(new Budget("1000"));

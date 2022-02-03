@@ -13,7 +13,7 @@ class LottoTest {
     @Test
     void 생성_확인() {
         // given
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<String> numbers = Arrays.asList("1", "2", "3", "4", "5", "6");
 
         // when
         Lotto lotto = new Lotto(numbers);

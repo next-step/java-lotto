@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Lotto {
 
-    private final List<Integer> numbers;
+    private final List<String> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(List<String> numbers) {
         this.numbers = numbers;
     }
 
-    public List<Integer> get() {
+    public List<String> get() {
         return this.numbers;
     }
 }
