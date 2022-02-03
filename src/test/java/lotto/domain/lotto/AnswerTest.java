@@ -1,6 +1,6 @@
 package lotto.domain.lotto;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class AnswerTest {
+class AnswerTest {
 
     private static final List<Integer> BASE_NUMBER_LIST = Arrays.asList(8, 21, 23, 41, 42, 43);
     private static final List<Integer> TEST_NUMBER_LIST = Arrays.asList(8, 21, 25, 40, 42, 43);
@@ -28,8 +28,8 @@ public class AnswerTest {
     void testComparisonValid() {
         Answer answer = new Answer(new Numbers(BASE_NUMBER_LIST), BONUS_NUMBER);
         Map<Rank, Integer> resultMap = answer.compare(getTickets());
-        assertThat(resultMap.get(RANK))
-            .isEqualTo(MATCHES);
+
+        assertThat(resultMap).containsEntry(RANK, MATCHES);
     }
 
     Tickets getTickets() {

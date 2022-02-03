@@ -1,6 +1,6 @@
 package lotto.domain.lotto;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class PrizeRatioTest {
+class PrizeRatioTest {
 
     private static final Numbers BASE_ANSWER_NUMBERS = new Numbers(Arrays.asList(1,2,3,4,5,6));
     private static final int BASE_BONUS_NUMBER = 7;

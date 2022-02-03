@@ -1,6 +1,6 @@
 package lotto.domain.lotto;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class TicketTest {
+class TicketTest {
 
     private static final int TEST_MATCHES = 5;
     private static final int TEST_BONUS_NUMBER = 40;
