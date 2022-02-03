@@ -49,33 +49,37 @@
 
 ## 구현 사항
 - [ ] 구입할 금액 입력받기 - InputView.inputBudget
-  - [ ] 1000원 단위로 로또 개수 발급 (ex: 14500 원 = 14장)
   - [ ] 불필요한 공백 제거
   - [ ] 숫자만 입력 허용
 
-- [ ] 구매한 로또 번호 발급 - domain.createLottoNumber
+- [ ] 구매한 로또 번호 발급 - Lottos.buyOnBudget
+  - [ ] 1000원 단위로 로또 개수 발급 (ex: 14500 원 = 14장)
   - [ ] 6개의 랜덤 로또 번호를 생성한다
-  - [ ] Lottos(List<Lotto>)
   - [ ] Lotto(value = lottoNumber)
 
-- [ ] 당첨 번호 입력 - InputView.inputWinningNumber 
-  - [ ] 불필요한 공백 제거
-  - [ ] 구분자를 기준으로 숫자 분리
-  - [ ] 숫자와 구분자를 제외한 입력을 허용하지 않음
-  - [ ] 연속된 구분자의 입력을 허용하지 않음
-  - [ ] 숫자는 반드시 6개만 입력되어야 함
+- [ ] 당첨 번호 입력 - InputView.inputWinningNumbers 
+  - [ ] 불필요한 공백 제거.
+  - [ ] 구분자를 기준으로 숫자 분리.
+  - [ ] 숫자와 구분자를 제외한 입력을 허용하지 않음.
+  - [ ] 연속된 구분자의 입력을 허용하지 않음.
+  - [ ] 숫자는 반드시 6개만 입력되어야 함.
   
-- [ ] 보너스볼 입력받기
-  - [ ] 불필요한 공백 제거
-  - [ ] 숫자만 입력 가능함
-  - [ ] 숫자는 반드시 1개만 입력되어야 함
+- [ ] 보너스볼 입력받기 - InputView.inputBonusNumber
+  - [ ] 불필요한 공백 제거.
+  - [ ] 숫자만 입력 가능함.
+  - [ ] 숫자는 반드시 1개만 입력되어야 함.
+    
+- [ ] 로또 등수 구하기 - Judge
+  - [ ] 로또 번호가 몇개 맞았는지 확인 - lotto.matchNumber
+  - [ ] 맞은 개수가 몇등인지 확인 - LottoRank.getRank
+  - [ ] 만약 5개라면 보너스번호 확인해서 2등,3등 확인.
 
-- [ ] 당첨 통계 내기 - enum
-  - [ ] 로또 번호가 몇개 맞았는지 확인
-  - [ ] 맞은 개수가 몇등인지 확인
-    - [ ] 만약 5개라면 보너스번호 확인해서 2등,3등 확인
-  - [ ] 로또 결과 통계 만들기
-    - [ ] 몇등이 몇개인지 확인
-    - [ ] 총 수익률이 얼마인지 (기준 1)
+- [ ] 로또 결과 통계 만들기. - Statistics
+  - [ ] 몇등이 몇개인지 확인 Statistics.getNumberOfRank
+  - [ ] 총 수익률이 얼마인지 (기준 1) Statistics.getProfitRate
 
-
+- [ ] 출력 - PrintView
+  - [ ] 구매한 로또 수 출력. - PrintView.printNumberOfLotto
+  - [ ] 자동 생성된 로또 번호 출력 PrintView.printLottoNumber
+  - [ ] 당첨 통계 출력 - PrintView.printNumberOfRank
+  - [ ] 수익률 출력 - printView.printProfitRate
