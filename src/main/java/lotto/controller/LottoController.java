@@ -1,10 +1,8 @@
 package lotto.controller;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import lotto.domain.Ticket;
 import lotto.domain.WinningNumber;
+import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoManager;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.machine.RandomLottoGenerator;
@@ -30,29 +28,22 @@ public class LottoController {
         return new Ticket(money);
     }
 
-    public WinningNumber makeWinningNumber() {
+    private WinningNumber makeWinningNumber() {
         return new WinningNumber(makeSixNumbers(), makeBonusBall());
     }
 
-    public List<LottoNumber> makeSixNumbers() {
-        String[] numbers = InputView.writeWinningNumbers();
-
+    private Lotto makeSixNumbers() {
         try {
-            return Stream.of(numbers)
-                .map(Integer::getInteger)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+            return Lotto.from(InputView.writeWinningNumbers());
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             return makeSixNumbers();
         }
     }
 
-    public LottoNumber makeBonusBall() {
-        String bonus = InputView.writeBonusBall();
-
+    private LottoNumber makeBonusBall() {
         try {
-            return new LottoNumber(Integer.parseInt(bonus));
+            return new LottoNumber(InputView.writeBonusBall());
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             return makeBonusBall();
