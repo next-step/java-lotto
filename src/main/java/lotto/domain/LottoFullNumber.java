@@ -14,6 +14,13 @@ public class LottoFullNumber {
         this.lottoFullNumber = new ArrayList<>(lottoFullNumberLengthSix);
     }
 
+    private void validateNonDuplication(List<LottoNumber> lottoFullNumberLengthSix) {
+        Set<LottoNumber> LottoNumberSet = new HashSet<>(lottoFullNumberLengthSix);
+        if (LottoNumberSet.size() != LOTTO_NUMBER_SIZE){
+            throw new IllegalArgumentException(ERROR_MESSAGE);
+        }
+    }
+
     public List<LottoNumber> getLottoFullNumber() {
         return lottoFullNumber;
     }
