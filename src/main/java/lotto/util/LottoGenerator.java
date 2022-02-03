@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.util;
 
 public class LottoGenerator {
 
