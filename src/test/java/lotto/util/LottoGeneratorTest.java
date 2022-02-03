@@ -3,6 +3,11 @@ package lotto.util;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 import lotto.util.LottoGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -33,5 +38,14 @@ class LottoGeneratorTest {
         assertThatThrownBy(() -> lottoGenerator.getLottoQuantity(invalidPrice))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("[ERROR] 구매 금액이 1000원 이상이어야 합니다.");
+    }
+
+    @Test
+    @DisplayName("로또 번호에 중복값이 없어야 한다.")
+    void checkDuplicatedNumber() {
+        List<Integer> lottoNumbers = LottoGenerator.getLottoNumbers();
+        List<Integer> distinctNumbers = lottoNumbers.stream().distinct().collect(Collectors.toList());
+
+        assertThat(lottoNumbers.size()).isEqualTo(distinctNumbers.size());
     }
 }
