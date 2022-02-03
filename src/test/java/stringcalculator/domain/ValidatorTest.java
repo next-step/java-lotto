@@ -30,10 +30,10 @@ class ValidatorTest {
         assertDoesNotThrow(() -> Validator.validatePositiveNumber(number));
     }
 
-    @ValueSource(strings = {"1", "-2", "3"})
+    @ValueSource(strings = {"-1", "-2", "-3"})
     @ParameterizedTest
     void 구분된_문자는_반드시_양수의_숫자여야_한다_실패(String number) {
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(RuntimeException.class,
             () -> Validator.validatePositiveNumber(number));
     }
 }
