@@ -2,7 +2,7 @@
 
 ## 기능 목록
 - [X] 문자열 입력 받기 InputView#getNumbers
-- [ ] 쉼표 또는 콜론을 구분자로 문자열 분리 StringParser#splitDefaultDelimiter 
+- [X] 쉼표 또는 콜론을 구분자로 문자열 분리 StringParser#splitDefaultDelimiter 
 - [ ] 커스텀 구분자로 문자열 분리 StringParser#splitCustomDelimiter
 - [ ] 숫자 이외의 값 또한 음수일 경우 예외처리 Number#validatePositiveNumber
 - [ ] 구분된 숫자 합 반환 Calculator#calculate
