@@ -6,10 +6,6 @@ public class ValidateInput {
 
     private String yourInput;
 
-    public String getYourInput() {
-        return yourInput;
-    }
-
     public ValidateInput(String input) {
         this.yourInput = isEmptyOrNull(input);
     }
@@ -21,5 +17,7 @@ public class ValidateInput {
         return input;
     }
 
-
+    public String getYourInput() {
+        return yourInput;
+    }
 }

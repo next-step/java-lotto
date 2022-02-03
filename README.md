@@ -18,7 +18,7 @@
 - [x] 두 숫자의 합을 반환한다. - domain#StringCalculator#add
 - [x] `//`와 `\\n` 문자 사이에 커스텀 구분자를 지정할 수 있다. - domain#Parser#customSplit
   - 예를 들어 “//;\n1;2;3”과 같이 값을 입력할 경우 커스텀 구분자는 세미콜론(;)이며, 결과 값은 6이 반환되어야 한다.
-- [ ] 문자열 계산기에 음수를 전달하는 경우 `RuntimeException` 예외 처리를 한다. - util#validateCalculator
+- [x] 문자열 계산기에 음수를 전달하는 경우 `RuntimeException` 예외 처리를 한다. - util#validateCalculator
 
 ## 마감 기한
 

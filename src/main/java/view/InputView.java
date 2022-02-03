@@ -13,7 +13,7 @@ public class InputView {
         try {
             formula = Console.readLine();
         } catch (IllegalArgumentException e) {
-            System.err.println("[Error] " + e.getMessage());
+            System.err.println(OutputView.ERROR + e.getMessage());
         }
 
         return formula;
