@@ -1,22 +1,21 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMatcher {
 
-    public static int compare(String[] numbers, List<Integer> lotto) {
-        List<Integer> winningNumbers = new ArrayList<>();
-        for (String number : numbers) {
-            winningNumbers.add(Integer.parseInt(number));
-        }
-
+    public static int compare(List<Integer> numbers, List<Integer> lotto) {
         int count = 0;
+
         for (Integer number : lotto) {
-            if (winningNumbers.contains(number)) {
+            if (isContain(numbers, number)) {
                 count++;
             }
         }
         return count;
+    }
+
+    public static boolean isContain(List<Integer> numbers, int number) {
+        return numbers.contains(number);
     }
 }
