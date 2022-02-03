@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.List;
+import lotto.domain.Analyzer;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoTickets;
 import lotto.view.InputView;
@@ -22,6 +23,7 @@ public class LottoProcessor {
         LottoMachine lottoMachine = new LottoMachine(winNumbers, bonusNumber);
         List<Integer> integers = lottoTickets.countCorrectWinNumber(lottoMachine);
         List<Integer> bonusNumbers = lottoTickets.checkBonusNumber(lottoMachine);
-
+        Analyzer analyzer = new Analyzer(totalPrice);
+        analyzer.calculateWinningMoney(integers,bonusNumbers);
     }
 }
