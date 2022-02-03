@@ -29,24 +29,19 @@ public class LottoController {
     }
 
     private WinningNumber makeWinningNumber() {
-        return new WinningNumber(makeSixNumbers(), makeBonusBall());
+        try {
+            return new WinningNumber(makeSixNumbers(), makeBonusBall());
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return makeWinningNumber();
+        }
     }
 
     private Lotto makeSixNumbers() {
-        try {
-            return Lotto.from(InputView.writeWinningNumbers());
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            return makeSixNumbers();
-        }
+        return Lotto.from(InputView.writeWinningNumbers());
     }
 
     private LottoNumber makeBonusBall() {
-        try {
-            return new LottoNumber(InputView.writeBonusBall());
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            return makeBonusBall();
-        }
+        return new LottoNumber(InputView.writeBonusBall());
     }
 }
