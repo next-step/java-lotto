@@ -35,15 +35,7 @@ public class WinningNumber {
         return Rank.find(matchCount, bonusBall);
     }
 
-    public boolean isContain(List<Integer> targetLotto, int lottoNumber) {
+    private boolean isContain(List<Integer> targetLotto, int lottoNumber) {
         return targetLotto.contains(lottoNumber);
-    }
-
-    public List<LottoNumber> getLottoNumbers() {
-        return this.lottoNumbers;
-    }
-
-    public LottoNumber getBonus() {
-        return this.bonus;
     }
 }
