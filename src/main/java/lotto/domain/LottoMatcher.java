@@ -1,18 +1,33 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.Rank;
 
 public class LottoMatcher {
 
-    public static int compare(List<Integer> numbers, List<Integer> lotto) {
+    public static Rank compare(WinningNumber winningNumber, List<Integer> lotto) {
         int count = 0;
+        boolean bonusBall = false;
+
+        List<LottoNumber> winningLottoNumbers = winningNumber.getNumbers();
+        LottoNumber bonus = winningNumber.getBonus();
+
+        List<Integer> list = winningLottoNumbers.stream()
+            .map(LottoNumber::getNumber)
+            .collect(Collectors.toList());
 
         for (Integer number : lotto) {
-            if (isContain(numbers, number)) {
+            if (isContain(list, number)) {
                 count++;
             }
         }
-        return count;
+
+        if (count == 5) {
+            bonusBall = isContain(lotto, bonus.getNumber());
+        }
+        return Rank.find(count, bonusBall);
     }
 
     public static boolean isContain(List<Integer> numbers, int number) {

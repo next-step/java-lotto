@@ -11,4 +11,12 @@ public class WinningNumber {
         this.numbers = numbers;
         this.bonus = bonus;
     }
+
+    public List<LottoNumber> getNumbers() {
+        return this.numbers;
+    }
+
+    public LottoNumber getBonus() {
+        return this.bonus;
+    }
 }
