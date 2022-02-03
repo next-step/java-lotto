@@ -38,22 +38,28 @@ class DelimiterTokenizerTest {
             .isThrownBy(() -> delimiterTokenizer.getDelimiters());
     }
 
-//
-//
-//    @ValueSource(strings = {"//\n1:2,3", "//abcd\n1:2:3", "//12\n1:2:3"})
-//    @ParameterizedTest
-//    void 구분자_길이가_1이_아닌_경우(String text) {
-//        final DelimiterTokenizer delimiterTokenizer = new DelimiterTokenizer(text);
-//        assertThatExceptionOfType(IllegalArgumentException.class)
-//            .isThrownBy(() -> delimiterTokenizer.getDelimiters());
-//    }
-//
-//    @ValueSource(strings = {"0", "1","2","3","4","5","6","7","8","9"})
-//    @ParameterizedTest
-//    void 구분자가_숫자인_경우(String text) {
-//        final String str = "//" +text+"\n1:2:3";
-//        final DelimiterTokenizer delimiterTokenizer = new DelimiterTokenizer(str);
-//        assertThatExceptionOfType(IllegalArgumentException.class)
-//            .isThrownBy(() -> delimiterTokenizer.getDelimiters());
-//    }
+    @ValueSource(strings = {"//abcd\n1:2:3", "//12\n1:2:3", "//-1\n1:2:3"})
+    @ParameterizedTest
+    void 구분자_길이가_2이상인_경우(String text) {
+        final DelimiterTokenizer delimiterTokenizer = new DelimiterTokenizer(text);
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> delimiterTokenizer.getDelimiters());
+    }
+
+    @ValueSource(strings = {"//\n1:2,3"})
+    @ParameterizedTest
+    void 구분자_길이가_0인_경우(String text) {
+        final DelimiterTokenizer delimiterTokenizer = new DelimiterTokenizer(text);
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> delimiterTokenizer.getDelimiters());
+    }
+
+    @ValueSource(strings = {"0", "1","2","3","4","5","6","7","8","9"})
+    @ParameterizedTest
+    void 구분자가_숫자인_경우(String text) {
+        final String str = "//" +text+"\n1:2:3";
+        final DelimiterTokenizer delimiterTokenizer = new DelimiterTokenizer(str);
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> delimiterTokenizer.getDelimiters());
+    }
 }
