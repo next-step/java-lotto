@@ -35,6 +35,6 @@
   - [ ] 보너스볼
   - [ ] 당첨통계
   - [ ] 총수익률
-- 로또번호를 랜덤하게 생성할 수 있다. - LottoAutoGenerator
-- 당첨 통계를 계산할 수 있다. - LottoCalculator
-- 수익률을 계산할 수 있다. - LottoCalculator
+- [ ] 로또번호를 랜덤하게 생성할 수 있다. - LottoAutoGenerator
+- [ ] 당첨 통계를 계산할 수 있다. - LottoCalculator
+- [ ] 수익률을 계산할 수 있다. - LottoCalculator

@@ -7,15 +7,22 @@ import java.util.stream.IntStream;
 
 public class LottoAutoGenerator {
 
-    private LottoAutoGenerator(){}
+    private final List<Integer> LOTTO_ALL_NUM;
+    private static final LottoAutoGenerator INSTANCE = new LottoAutoGenerator();
 
-    public static List<Integer> generateLotto(){
-        List<Integer> lottoAllNum = IntStream.range(1, 45)
+    private LottoAutoGenerator(){
+        LOTTO_ALL_NUM = IntStream.range(1, 45)
             .boxed()
             .collect(Collectors.toList());
+    }
 
-        Collections.shuffle(lottoAllNum);
+    public List<Integer> generateLotto(){
+        Collections.shuffle(LOTTO_ALL_NUM);
 
-        return lottoAllNum.subList(0, 6);
+        return LOTTO_ALL_NUM.subList(0, 6);
+    }
+
+    public static LottoAutoGenerator getInstance(){
+        return INSTANCE;
     }
 }

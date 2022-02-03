@@ -11,7 +11,7 @@ class LottoAutoGeneratorTest {
 
     @Test
     void 로또번호_랜덤생성(){
-        List<Integer> lottoNum = LottoAutoGenerator.generateLotto();
+        List<Integer> lottoNum = LottoAutoGenerator.getInstance().generateLotto();
 
         assertThat(lottoNum.size()).isEqualTo(6);
         Set<Integer> duplicate = new HashSet<>(lottoNum);
