@@ -2,7 +2,6 @@ package lotto.domain.lotto;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import java.util.stream.IntStream;
 import lotto.domain.generator.AutoGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
