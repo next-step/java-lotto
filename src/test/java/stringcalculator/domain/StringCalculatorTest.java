@@ -10,8 +10,8 @@ class StringCalculatorTest {
 
     @DisplayName("연산결과 테스트")
     @Test
-    void testCalculatorOperation(){
-        int result = StringCalculator.execute(Arrays.asList(1,2,3,4));
+    void testCalculatorOperation() {
+        int result = StringCalculator.execute(Arrays.asList(1, 2, 3, 4));
         assertThat(result).isEqualTo(10);
     }
 }
