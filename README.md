@@ -7,3 +7,14 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 기능 목록
+[StringCalculator]
+[x] , 또는 : 을 구분자로 가지는 문자열을 입력 받는다.
+[x] Null이나 빈 문자열을 입력할 경우 0을 반환한다.
+[x] 숫자 하나를 입력할 경우 해당 숫자를 반환한다.
+[x] // 과 \n 를 모두 가지는 문자열이 들어오면 그 사이 문자를 구분자로 판단해서 입력 받는다.
+    [ ]// 과 \n 중 하나만 들어올 경우 Illegal Exception을 throw한다. [ERROR]  //, \n
+    [ ]// 과 \n 을 사용 시 그 사이에 커스텀 문자가 없을 경우 Illegal Exception을 throw 한다.
+    [ ]// 과 \n 을 사용하여 커스텀 구분자를 생성할 경우 \n 뒤의 문자열에 커스텀 구분자와 숫자 외의 문자열이 있으면 Illegal Exception을 throw한다.
+[x] 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw 한다.
