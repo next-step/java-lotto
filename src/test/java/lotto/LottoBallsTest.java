@@ -1,0 +1,21 @@
+package lotto;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+import org.junit.jupiter.api.Test;
+
+class LottoBallsTest {
+
+    @Test
+    void Lotto_Ball_은_1부터_45_까지이다() {
+
+        // when
+        List<Integer> balls = LottoBalls.get();
+
+        // then
+        for (int i = 1; i <= 45; i++) {
+            assertThat(balls.get(i - 1)).isEqualTo(i);
+        }
+    }
+}
