@@ -1,3 +1,5 @@
+package calculator.domain;
+
 public class Number {
 
     private final int number;

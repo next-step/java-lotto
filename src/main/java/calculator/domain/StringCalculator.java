@@ -1,3 +1,5 @@
+package calculator.domain;
+
 public class StringCalculator {
 
     private static final Number ZERO = new Number(0);

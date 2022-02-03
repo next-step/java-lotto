@@ -1,4 +1,6 @@
-import java.util.ArrayList;
+package calculator.domain;
+
+import calculator.domain.Number;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
