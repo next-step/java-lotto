@@ -17,7 +17,7 @@ public class LottoRaffle {
         this.winningLotto = winningLotto;
     }
 
-    public void compareLotto(BuyLotto buyLotto) {
+    public void compareLotto(Lotto buyLotto) {
         int count =  buyLotto.getLotto().stream().reduce(0, (cum, val) -> {
             if(winningLotto.getLotto().contains(val)) {
                 return cum+1;

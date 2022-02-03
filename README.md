@@ -88,7 +88,7 @@
 ### BuyLotto - 산 로또
 
 - [x] 번호
-- 
+
 ### WinningLotto - 당첨 로또
 
 - [x] 번호
