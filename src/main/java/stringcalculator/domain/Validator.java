@@ -1,16 +1,17 @@
 package stringcalculator.domain;
 
-import java.util.List;
 
 public class Validator {
 
-    public static void validatePositiveNumber(final List<String> tokens) {
-        tokens.forEach(token -> {
-            final int intToken = validateTypeOfToken(token);
-            if(intToken < 0) {
-                throw new IllegalArgumentException("[Error]: 양수만 연산 가능합니다.");
-            }
-        });
+    private Validator() {
+
+    }
+
+    public static void validatePositiveNumber(String token) {
+        final int intToken = validateTypeOfToken(token);
+        if (intToken < 0) {
+            throw new RuntimeException("[Error]: 양수만 연산 가능합니다.");
+        }
     }
 
     public static int validateTypeOfToken(final String token) {
