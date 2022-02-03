@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class Delimiter {
 
-    private final static String CUSTOM_DELIMITER = "//([^0-9])\\n";
+    private final static String CUSTOM_DELIMITER = "//(.)\n(.*)";
     private final static String[] DEFAULT_DELIMITER = new String[]{",", ":"};
 
     private List<String> delimiters;
@@ -24,7 +24,7 @@ public class Delimiter {
         Matcher matcher = pattern.matcher(input);
         if (matcher.find()) {
             addCustomDelimiter(matcher.group(1));
-            return input.replaceFirst(matcher.group(0), "");
+            return matcher.group(2);
         }
         return input;
     }
