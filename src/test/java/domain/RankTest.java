@@ -11,24 +11,21 @@ import static org.assertj.core.api.Assertions.*;
 class RankTest {
 
     @Test
-    @DisplayName("3개 이하 맞췄을 때")
+    @DisplayName("3개 미만 맞췄을 때")
     void getFailRank() {
-        Lotto lotto = new Lotto(() -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        assertThat(Rank.getRank(2, lotto, 4)).isEqualTo(Rank.FAIL);
+        assertThat(Rank.getRank(2, false)).isEqualTo(Rank.FAIL);
     }
 
     @Test
     @DisplayName("보너스 못맞춰서 3등일때")
     void getThirdRank() {
-        Lotto lotto = new Lotto(() -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        assertThat(Rank.getRank(5, lotto, 7)).isEqualTo(Rank.THIRD);
+        assertThat(Rank.getRank(5, false)).isEqualTo(Rank.THIRD);
     }
 
     @Test
     @DisplayName("보너스 맞춰서 2등일때")
     void getSecondRank() {
-        Lotto lotto = new Lotto(() -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        assertThat(Rank.getRank(5, lotto, 6)).isEqualTo(Rank.SECOND);
+        assertThat(Rank.getRank(5, true)).isEqualTo(Rank.SECOND);
     }
 
 }

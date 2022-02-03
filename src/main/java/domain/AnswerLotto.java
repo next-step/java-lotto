@@ -23,7 +23,7 @@ public class AnswerLotto {
         Map<Rank, Integer> lottoResult = new HashMap<>();
         for (Lotto lotto : lottoTickets) {
             int matchNumberCount = lotto.countMatchCount(answerNumbers);
-            Rank rank = Rank.getRank(matchNumberCount, lotto, bonusNumber);
+            Rank rank = Rank.getRank(matchNumberCount, lotto.checkBonusNumber(bonusNumber));
             lottoResult.put(rank, lottoResult.getOrDefault(rank, 0) + 1);
         }
         return lottoResult;

@@ -18,21 +18,14 @@ public enum Rank {
         this.matchCount = matchCount;
     }
 
-    public static Rank getRank(int matchCount, Lotto lotto, int bonusNumber) {
-        if (matchCount == 5) {
-            return checkBonusRank(lotto, bonusNumber);
+    public static Rank getRank(int matchCount, boolean matchBonus) {
+        if (matchCount == 5 && matchBonus) {
+            return SECOND;
         }
         return Arrays.stream(Rank.values())
                 .filter(prize -> prize.isMatchCount(matchCount))
                 .findFirst()
                 .orElse(FAIL);
-    }
-
-    private static Rank checkBonusRank(Lotto lotto, int bonusNumber) {
-        if (lotto.checkBonusNumber(bonusNumber)) {
-            return Rank.SECOND;
-        }
-        return Rank.THIRD;
     }
 
     public int getPrize() {
