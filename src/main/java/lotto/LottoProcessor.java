@@ -19,10 +19,8 @@ public class LottoProcessor {
         List<Integer> winNumbers = inputView.getWinNumbers();
         int bonusNumber = inputView.getBonusNumber();
 
-        System.out.println(lottoCounts);
-        System.out.println(bonusNumber);
-
         LottoMachine lottoMachine = new LottoMachine(winNumbers, bonusNumber);
+        List<Integer> integers = lottoTickets.countCorrectWinNumber(lottoMachine);
 
     }
 }

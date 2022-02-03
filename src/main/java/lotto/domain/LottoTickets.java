@@ -7,10 +7,11 @@ public class LottoTickets {
 
     private static final int LOTTO_PRICE = 1000;
     private final int lottoCounts;
+    private final List<Lotto>lottoTickets;
 
     public LottoTickets(final int price) {
         this.lottoCounts = price / LOTTO_PRICE;
-        List<Lotto> lottoTickets = makeLottoTickets(lottoCounts);
+        this.lottoTickets = makeLottoTickets(lottoCounts);
     }
 
     private List<Lotto> makeLottoTickets(final int lottoCount) {
@@ -24,4 +25,19 @@ public class LottoTickets {
     public int getLottoCounts() {
         return this.lottoCounts;
     }
+
+    public List<Lotto>getLottoTickets(){
+        return lottoTickets;
+    }
+
+    public List<Integer> countCorrectWinNumber(LottoMachine lottoMachine){
+        List<Integer>correctNumbers=new ArrayList<>();
+        for (Lotto lotto:lottoTickets) {
+            correctNumbers.add(lotto.compareLottoAndWinnerNumbers(lottoMachine));
+        }
+        return correctNumbers;
+    }
+
+
+
 }

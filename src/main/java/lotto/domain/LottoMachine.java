@@ -11,4 +11,10 @@ public class LottoMachine {
         this.winNumbers = winNumbers;
         this.bonusNumber = bonusNumber;
     }
+
+    public boolean isContain(int number){
+        return winNumbers.contains(number);
+    }
+
+
 }

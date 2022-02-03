@@ -10,11 +10,11 @@ public class Lotto {
     private static final int START_RANGE = 1;
     private static final int END_RANGE = 45;
     private static final int COUNT = 6;
-
-    List<Integer> lottoNumbers;
+    private int correctBonusNumber;
+    private final List<Integer> lottoNumbers;
 
     public Lotto() {
-        lottoNumbers = generateRandomNumbers();
+        this.lottoNumbers = generateRandomNumbers();
     }
 
     private List<Integer> generateRandomNumbers() {
@@ -28,4 +28,10 @@ public class Lotto {
 
         return newNums;
     }
+
+    public int compareLottoAndWinnerNumbers(LottoMachine lottoMachine) {
+        return Long.valueOf(lottoNumbers.stream()
+            .filter(lottoNumber -> lottoMachine.isContain(lottoNumber)).count()).intValue();
+    }
+
 }
