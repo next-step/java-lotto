@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.lotto.Lotto;
@@ -20,7 +21,7 @@ class LottoMatcherTest {
         String[] numbers = {"1", "2", "3", "4", "5", "6"};
         
         //when
-        Lotto lotto = Lotto.from(new RandomLottoGenerator().get());
+        Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
         List<LottoNumber> lottoNumbers = lotto.getNumbers();
 
         List<Integer> integers = lottoNumbers.stream()
@@ -28,6 +29,7 @@ class LottoMatcherTest {
             .collect(Collectors.toList());
 
         //then
-        Assertions.assertThat(LottoMatcher.compare(numbers, integers)).isEqaulTo(6);
+        System.out.println(lotto);
+        Assertions.assertThat(LottoMatcher.compare(numbers, integers)).isEqualTo(6);
     }
 }
