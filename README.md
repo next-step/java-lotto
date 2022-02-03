@@ -1,11 +1,11 @@
 # 문자열 덧셈 계산기
 
 ## 기능 목록
-- [ ] 문자열 입력 받기
-- [ ] 쉼표 또는 콜론을 구분자로 문자열 분리
-- [ ] 커스텀 구분자로 문자열 분리
-- [ ] 숫자 이외의 값 또한 음수일 경우 예외처리
-- [ ] 구분된 숫자 합 반환
+- [X] 문자열 입력 받기 InputView#getNumbers
+- [ ] 쉼표 또는 콜론을 구분자로 문자열 분리 StringParser#splitDefaultDelimiter 
+- [ ] 커스텀 구분자로 문자열 분리 StringParser#splitCustomDelimiter
+- [ ] 숫자 이외의 값 또한 음수일 경우 예외처리 Number#validatePositiveNumber
+- [ ] 구분된 숫자 합 반환 Calculator#calculate
 
 ## 기능 요구 사항
 * 쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열을 전달하는 경우 구분자를 기준으로 분리한 각 숫자의 합을 반환
