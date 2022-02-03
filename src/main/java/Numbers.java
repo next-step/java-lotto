@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -12,12 +13,14 @@ public class Numbers {
     private static final Pattern PATTERN_REGX_CUSTOM = Pattern.compile(REGX_CUSTOM_DELIMITER);
     private static final int POSITION_CUSTOM_DELIMITER = 1;
     private static final int POSITION_OTHER_EXPRESSION = 2;
+    private static final String COMMA = ",";
+    private static final List<Number> ZERO_NUMBERS = Collections.singletonList(new Number(0));
 
     private final List<Number> numbers;
 
     public Numbers(final String expression) {
         if (expression == null || expression.isEmpty()) {
-            this.numbers = Collections.singletonList(new Number(0));
+            this.numbers = ZERO_NUMBERS;
             return;
         }
         this.numbers = splitFromDelimiter(expression);
@@ -35,7 +38,7 @@ public class Numbers {
     }
 
     private List<Number> splitDelimiter(String[] expression) {
-        String join = String.join(",", expression);
+        String join = String.join(COMMA, expression);
         String[] split = join.split(REGX_DELIMITER);
         return Arrays.stream(split).map(Number::new).collect(Collectors.toList());
     }

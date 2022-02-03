@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class NumberTest {
+class NumberTest {
 
     @Test
     void 숫자_외_문자가_들어온경우_예외발생() {
