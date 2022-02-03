@@ -17,15 +17,16 @@ public class LottoRaffle {
     }
 
     // TODO : 다중 if 문 enum이나 map을 사용하여 처리
-    public void compareLotto(Lotto buyLotto) {
-        int count = buyLotto.getLotto().stream().reduce(0, (cum, val) -> {
+    public void compareLotto(Lotto lotto) {
+        int count = lotto.getLotto().stream().reduce(0, (cum, val) -> {
             if (winningLotto.getLotto().contains(val)) {
                 return cum + 1;
             }
             return cum;
         });
 
-        if (count == 5 && buyLotto.getLotto().contains(winningLotto.getBonusNumber())) {
+        System.out.println("개수 > " + count );
+        if (count == 5 && lotto.getLotto().contains(winningLotto.getBonusNumber())) {
             this.matchBonusNumber++;
             return;
         }
