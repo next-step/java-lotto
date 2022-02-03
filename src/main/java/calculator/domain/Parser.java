@@ -66,7 +66,7 @@ public class Parser {
 
     private String makeRegularExpression() {
         return delimiters.stream()
-            .reduce(START_REGEX, (origin, current) -> origin + current)
+            .reduce(START_REGEX, (cum, value) -> cum + value)
             + END_REGEX;
     }
 }

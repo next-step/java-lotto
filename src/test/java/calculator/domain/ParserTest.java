@@ -1,7 +1,7 @@
 package calculator.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
