@@ -1,7 +1,6 @@
 package stringcalculator.domain;
 
 import java.util.List;
-import stringcalculator.util.Delimiter;
 
 public class StringCalculator {
 
@@ -11,12 +10,12 @@ public class StringCalculator {
 
     }
 
-    public static List<Integer> preprocess(final String input) {
+    public List<Integer> preprocess(final String input) {
         String expression = Delimiter.findExpression(checkNullOrEmpty(input));
         return Delimiter.extractNumberFromExpression(expression);
     }
 
-    public static int add(final String input) {
+    public int add(final String input) {
         List<Integer> numbers = preprocess(input);
         return numbers.stream().reduce(0, Operation.PLUS::operate);
     }

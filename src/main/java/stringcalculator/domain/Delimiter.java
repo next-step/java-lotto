@@ -1,4 +1,4 @@
-package stringcalculator.util;
+package stringcalculator.domain;
 
 import static stringcalculator.domain.Validator.validatePositiveNumber;
 
@@ -13,9 +13,10 @@ public class Delimiter {
     private final static String CUSTOM_DELIMITER = "//(.)\n(.*)";
     private final static String[] DEFAULT_DELIMITER = new String[]{",", ":"};
 
-    private static final List<String> delimiters = new ArrayList<>(Arrays.asList(DEFAULT_DELIMITER));
+    private static final List<String> delimiters = new ArrayList<>(
+        Arrays.asList(DEFAULT_DELIMITER));
 
-    private Delimiter() {
+    public Delimiter() {
     }
 
     public static String findExpression(String input) {
@@ -42,9 +43,5 @@ public class Delimiter {
             token -> numbers.add(validatePositiveNumber(token))
         );
         return numbers;
-    }
-
-    public List<String> getDelimiters() {
-        return delimiters;
     }
 }
