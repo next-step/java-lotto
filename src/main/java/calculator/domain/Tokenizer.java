@@ -15,19 +15,19 @@ public class Tokenizer {
 
     public static List<Integer> tokenize(String text) {
         if (isCustomDelimiter(text)) {
+            final String CUSTOM_DELIMITER = text.substring(text.indexOf("/") + 2, text.indexOf("\n"));
+
             final String formattedText = text
-                .replaceAll("[//\\n]", "")
-                .replaceFirst(";", "")
+                .replaceAll("[//\n]", "")
+                .replaceFirst(CUSTOM_DELIMITER, "")
                 .trim();
 
-            final String CUSTOM_DELIMITER = text.substring(text.indexOf("/") + 2,
-                text.indexOf("\n"));
             return parseInt(formattedText.split(
                 STANDARD_DELIMITER_COMMA + "|" + STANDARD_DELIMITER_COLON + "|"
                     + CUSTOM_DELIMITER));
         }
 
-        return parseInt(text.replaceAll("//(.)\n", "(.)")
+        return parseInt(text
             .split(STANDARD_DELIMITER_COMMA + "|" + STANDARD_DELIMITER_COLON));
     }
 
