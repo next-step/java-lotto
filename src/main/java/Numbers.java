@@ -45,6 +45,6 @@ public class Numbers {
     }
 
     public List<Number> getNumbers() {
-        return numbers;
+        return Collections.unmodifiableList(numbers);
     }
 }
