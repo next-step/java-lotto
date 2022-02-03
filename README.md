@@ -50,16 +50,16 @@
 ## 구현 사항
 - [X] 구입할 금액 입력받기 - InputView.inputBudget
 - [X] 예산 관리 - Budget
-  - [X] 불필요한 공백 제거
-  - [X] 숫자만 입력 허용
+  - [X] 불필요한 공백 제거.
+  - [X] 숫자만 입력 허용.
 
 - [X] 로또번호 - LottoBalls
-  - [X] 1 ~ 45 까지 List<Integer> 형식으로 로또 번호 관리
+  - [X] 1 ~ 45 까지 List<Integer> 형식으로 로또 번호 관리.
 
-- [ ] 구매한 로또 번호 발급 - Lottos.createAutoLottos
-  - [ ] 1000원 단위로 로또 개수 발급 (ex: 14500 원 = 14장)
-  - [ ] 6개의 랜덤 로또 번호를 생성한다
-  - [ ] Lotto(value = lottoNumber)
+- [X] 구매한 로또 번호 발급 - Lottos.createAutoLottos
+  - [X] 1000원 단위로 로또 개수 발급. (ex: 14500 원 = 14장)
+  - [X] 6개의 랜덤 로또 번호를 생성한다.
+  - [X] Lotto(List<Integer>)
 
 - [ ] 당첨 번호 입력 - InputView.inputWinningNumbers 
   - [ ] 불필요한 공백 제거.
@@ -83,7 +83,7 @@
   - [ ] 총 수익률이 얼마인지 (기준 1) Statistics.getProfitRate
 
 - [ ] 출력 - PrintView
-  - [ ] 구매한 로또 수 출력. - PrintView.printNumberOfLotto
-  - [ ] 자동 생성된 로또 번호 출력 PrintView.printLottoNumber
+  - [X] 구매한 로또 수 출력. - PrintView.printNumberOfLotto
+  - [X] 자동 생성된 로또 번호 출력 PrintView.printLottoNumber
   - [ ] 당첨 통계 출력 - PrintView.printNumberOfRank
   - [ ] 수익률 출력 - printView.printProfitRate
