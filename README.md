@@ -8,7 +8,7 @@
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
-## 기능 요구 사항 
+## 기능 요구 사항
 
 - [x] 계산식을 입력받을 수 있다. - view#InputView#readFormula
 - [x] 빈 문자열 또는 `null` 값을 입력할 경우 0을 반환해야 한다. - util#validateInput#isEmptyOrNull
@@ -16,7 +16,7 @@
 - [x] 숫자 두개를 쉼표(`,`) 구분자로 입력 받을 수 있다. - domain#Parser#splitStringToNumber
 - [x] 구분자를 쉼표(`,`) 이외에 콜론(`:`)을 사용할 수 있다. - domain#Parser#
 - [x] 두 숫자의 합을 반환한다. - domain#StringCalculator#add
-- [ ] `//`와 `\\n` 문자 사이에 커스텀 구분자를 지정할 수 있다. - domain#Parser#customSplit
+- [x] `//`와 `\\n` 문자 사이에 커스텀 구분자를 지정할 수 있다. - domain#Parser#customSplit
   - 예를 들어 “//;\n1;2;3”과 같이 값을 입력할 경우 커스텀 구분자는 세미콜론(;)이며, 결과 값은 6이 반환되어야 한다.
 - [ ] 문자열 계산기에 음수를 전달하는 경우 `RuntimeException` 예외 처리를 한다. - util#validateCalculator
 
