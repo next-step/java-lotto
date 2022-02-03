@@ -1,6 +1,9 @@
 package lotto.view;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
 
@@ -25,7 +28,7 @@ public class InputView {
         }
     }
 
-    public static String[] writeWinningNumbers() {
+    public static List<Integer> writeWinningNumbers() {
         try {
             System.out.println(WINNING_NUMBER_MANAGER_MESSAGE);
             String input = scanner.nextLine();
@@ -33,19 +36,23 @@ public class InputView {
 
             String[] numbers = makeStringToArray(input);
             checkSixNumbers(numbers);
-            return numbers;
+
+            return Arrays.stream(numbers)
+                .map(String::trim)
+                .map(Integer::new)
+                .collect(Collectors.toList());
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             return writeWinningNumbers();
         }
     }
 
-    public static String writeBonusBall() {
+    public static int writeBonusBall() {
         try {
             System.out.println(BONUS_BALL_MANAGER_MESSAGE);
             String input = scanner.nextLine();
             checkEmptyString(input);
-            return input;
+            return Integer.parseInt(input);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             return writeBonusBall();
@@ -57,7 +64,7 @@ public class InputView {
     }
 
     private static void checkEmptyString(String input) {
-        if (input.isEmpty()) {
+        if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException(INPUT_IS_EMPTY_ERROR_LOG);
         }
     }
