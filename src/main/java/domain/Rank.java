@@ -18,8 +18,8 @@ public enum Rank {
         this.matchCount = matchCount;
     }
 
-    public static Rank getRank(int matchCount, boolean matchBonus) {
-        if (matchCount == 5 && matchBonus) {
+    public static Rank getRank(int matchCount, boolean hasBonus) {
+        if (matchCount == 5 && hasBonus) {
             return SECOND;
         }
         return Arrays.stream(Rank.values())

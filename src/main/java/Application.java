@@ -7,6 +7,6 @@ public class Application {
 
         lotto.purchaseLotto();
         lotto.showAllLottoTickets();
-        lotto.receiveAnswerNumber();
+        lotto.getRatioByAnswer();
     }
 }

@@ -3,7 +3,6 @@ package domain;
 import view.InputView;
 import view.ResultView;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -12,18 +11,16 @@ public class LottoService {
     private final LottoTickets lottoTickets;
     private final InputView inputView;
     private final ResultView resultView;
-    private int purchasePrice;
-    private BigDecimal totalPrize;
+    private final int purchasePrice;
 
     public LottoService() {
         this.lottoTickets = new LottoTickets();
         this.inputView = new InputView();
         this.resultView = new ResultView();
-        this.totalPrize = BigDecimal.ZERO;
+        this.purchasePrice = inputView.inputPurchasePrice();
     }
 
     public void purchaseLotto() {
-        purchasePrice = inputView.inputPurchasePrice();
         int lottoCount = purchasePrice / lottoPrice;
         for (int i = 0; i < lottoCount; i++) {
             lottoTickets.addLottoTicket(new Lotto());
@@ -36,27 +33,20 @@ public class LottoService {
                 .forEach(lotto -> resultView.printAllLotto(lotto.getLotto()));
     }
 
-    public void receiveAnswerNumber() {
-        List<Integer> answerNumber = inputView.inputAnswerNumber();
-        int bonusNumber = inputView.inputBonusNumber();
-
-        Map<Rank, Integer> matchCount = new AnswerLotto(answerNumber, bonusNumber)
-                .checkLottoAnswer(lottoTickets.getLottoTickets());
+    public void getRatioByAnswer() {
+        AnswerLotto answerLotto = new AnswerLotto(receiveAnswer(), receiveBonus());
+        Map<Rank, Integer> matchCount = answerLotto.checkLottoAnswer(lottoTickets.getLottoTickets());
         resultView.printResultStatistic(matchCount);
 
-        calculateLottoTotalPrize(matchCount);
-        resultView.printResultRatio(calculateLottoRatio());
+        resultView.printResultRatio(new PrizeRatio().calculateLottoRatio(purchasePrice, matchCount));
     }
 
-    private void calculateLottoTotalPrize(Map<Rank, Integer> matchCount) {
-        for (Rank rank : Rank.values()) {
-            int prize = rank.getPrize();
-            int count = matchCount.getOrDefault(rank, 0);
-            totalPrize = totalPrize.add(new BigDecimal(prize * count));
-        }
+    private List<Integer> receiveAnswer() {
+        return inputView.inputAnswerNumber();
     }
 
-    private BigDecimal calculateLottoRatio() {
-        return totalPrize.divide(new BigDecimal(purchasePrice), 2, BigDecimal.ROUND_HALF_UP);
+    private int receiveBonus() {
+        return inputView.inputBonusNumber();
     }
+
 }
