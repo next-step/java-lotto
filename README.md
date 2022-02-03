@@ -33,14 +33,14 @@
     - [x] 구분자는 길이가 1을 초과하면 IllegalArgument Exception
     - [x] 구분자는 길이가 0이면 IllegalArgument Exception
     - [x] 커스텀 구분자에 음이 아닌 정수 값이 들어오면 IllegalArgument Exception
-    - [x] 커스텀 구분자가 "\n"(개행문자)인 경우 llegalArgument Exception
+    - [x] 커스텀 구분자가 "\n"(개행문자)인 경우 IllegalArgument Exception
     - [x] 구분자를 파악한다. ("//", "\n")
 
 ### Parser - 문자열 파싱
 
-- [ ] 구분자를 기준으로 나눈다. (숫자)
-- [ ] 숫자 이외의 값()이면 RuntimeException throw (e.g. "1:a:3", "1;;3", ";1;2", "1:2;") -> 입력 다시 받기
-- [ ] 음수 값이면 RuntimeException throw -> 입력 다시 받기
+- [x] 구분자를 기준으로 나눈다. (숫자)
+- [x] 숫자 이외의 값이면 RuntimeException throw (e.g. "1:a:3", "1::3:", ":1:2", "1:2:")
+- [x] 음수 값이면 RuntimeException throw
 
 ## 온라인 코드 리뷰 과정
 
