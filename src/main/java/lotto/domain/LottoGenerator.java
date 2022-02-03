@@ -10,16 +10,17 @@ public class LottoGenerator {
     private static final int MAX_NUMBER = 45;
     private static final int MIN_NUMBER = 1;
 
-    public static List<Integer> lottoGenerator(){
+    private static final List<LottoNumber> lottoNumber;
 
-        List<Integer> lottoNumber = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
-            .mapToObj(Integer::valueOf)
+    static {
+        lottoNumber = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
+            .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
+    }
 
+    public static Lotto lottoGenerator(){
         Collections.shuffle(lottoNumber);
-        List<Integer> sortedLottoNumber = lottoNumber.subList(0,6);
-        Collections.sort(sortedLottoNumber);
-
-        return sortedLottoNumber;
+        LottoFullNumber lottoFullNumber = new LottoFullNumber(lottoNumber);
+        return new Lotto(lottoFullNumber);
     }
 }
