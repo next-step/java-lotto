@@ -41,7 +41,7 @@ public class LottoTickets {
     public List<Integer> checkBonusNumber(final LottoMachine lottoMachine){
         final List<Integer>checkBonusNumber=new ArrayList<>();
         for (Lotto lotto: lottoTickets) {
-            int i = lotto.compareLottoAndBonusNumbers(lottoMachine);
+            checkBonusNumber.add(lotto.compareLottoAndBonusNumbers(lottoMachine));
         }
         return checkBonusNumber;
     }
