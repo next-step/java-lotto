@@ -22,7 +22,7 @@ public class LottoController {
         OutputView.printPurchaseAmount(ticket.getBuyCount());
         OutputView.printPurchaseTicket(lottoManager.getLottos());
 
-        WinningNumber winningNumber = makeWinningNumber(InputView.writeWinningNumbers(), InputView.writeBonusBall());
+        WinningNumber winningNumber = makeWinningNumber();
     }
 
     public Ticket buyTicket() {
@@ -30,14 +30,32 @@ public class LottoController {
         return new Ticket(money);
     }
 
-    public WinningNumber makeWinningNumber(String[] numbers, String bonus) {
-        List<LottoNumber> lottoNumbers = Stream.of(numbers)
-            .map(Integer::getInteger)
-            .map(LottoNumber::new)
-            .collect(Collectors.toList());
+    public WinningNumber makeWinningNumber() {
+        return new WinningNumber(makeSixNumbers(), makeBonusBall());
+    }
 
-        LottoNumber bonusNumber = new LottoNumber(Integer.parseInt(bonus));
+    public List<LottoNumber> makeSixNumbers() {
+        String[] numbers = InputView.writeWinningNumbers();
 
-        return new WinningNumber(lottoNumbers, bonusNumber);
+        try {
+            return Stream.of(numbers)
+                .map(Integer::getInteger)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return makeSixNumbers();
+        }
+    }
+
+    public LottoNumber makeBonusBall() {
+        String bonus = InputView.writeBonusBall();
+
+        try {
+            return new LottoNumber(Integer.parseInt(bonus));
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return makeBonusBall();
+        }
     }
 }
