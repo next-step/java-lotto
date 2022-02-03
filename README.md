@@ -28,4 +28,4 @@
     - [x] 커스텀 구분자는 문자열 앞부분의 //와 \n 사이에 위치한다. (Delimiter#findCustomDelimiter)
     - [x] 커스텀 구분자를 추가한다.(Delimiter#addCustomDelimiter)
     - [x] 구분된 문자는 반드시 양수의 숫자여야 한다. (Validator#validatePositiveNumber)
-- [ ] 구분된 숫자에 대해서 덧셈을 수행한다. (StringCalculator#add)
+- [ ] 구분된 숫자에 대해서 덧셈을 수행한다. (StringCalculator#execute)
