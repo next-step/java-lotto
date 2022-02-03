@@ -22,4 +22,5 @@ public class Validator {
             throw new NumberFormatException("[Error]: 숫자만 연산 가능합니다.");
         }
     }
+
 }
