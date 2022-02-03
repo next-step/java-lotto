@@ -25,15 +25,6 @@ class PrizeRatioTest {
         setUpAnswer();
     }
 
-    @DisplayName("수익률 유효성 검증")
-    @Test
-    void testRateReturnsValid() {
-        int purchased = PRICE_PER_TICKET * tickets.get().size();
-        BigDecimal rate_of_return = new PrizeRatio().calculateRatio(purchased, answer.compare(tickets));
-        assertThat(rate_of_return.doubleValue())
-            .isEqualTo(RATE_RETURNS);
-    }
-
     private void setUpTickets() {
         tickets = new Tickets();
         List<List<Integer>> lottoTickets = Arrays.asList(
@@ -61,5 +52,18 @@ class PrizeRatioTest {
 
     private void setUpAnswer() {
         answer = new Answer(BASE_ANSWER_NUMBERS, BASE_BONUS_NUMBER);
+    }
+
+    private int getPurchased() {
+        return PRICE_PER_TICKET * tickets.get().size();
+    }
+
+    @DisplayName("수익률 유효성 검증")
+    @Test
+    void testRateReturnsValid() {
+        BigDecimal rateOfReturn = new PrizeRatio().calculateRatio(getPurchased(), answer.compare(tickets));
+
+        assertThat(rateOfReturn.doubleValue())
+            .isEqualTo(RATE_RETURNS);
     }
 }
