@@ -2,21 +2,22 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Rank;
 
 public class WinningNumber {
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Lotto lotto;
     private final LottoNumber bonus;
 
-    public WinningNumber(List<LottoNumber> lottoNumbers, LottoNumber bonus) {
-        this.lottoNumbers = lottoNumbers;
+    public WinningNumber(Lotto lotto, LottoNumber bonus) {
+        this.lotto = lotto;
         this.bonus = bonus;
     }
 
     public Rank compareTo(List<Integer> targetLotto) {
-        List<Integer> winningNumbers = lottoNumbers.stream()
+        List<Integer> winningNumbers = lotto.getNumbers().stream()
             .map(LottoNumber::getNumber)
             .collect(Collectors.toList());
 

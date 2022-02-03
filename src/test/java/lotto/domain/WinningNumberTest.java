@@ -15,7 +15,7 @@ class WinningNumberTest {
     public void 로또번호비교_6개_일치_1등() {
         //given
         Lotto prevLotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningNumber winningNumber = new WinningNumber(prevLotto.getNumbers(), new LottoNumber(16));
+        WinningNumber winningNumber = new WinningNumber(prevLotto, new LottoNumber(16));
 
         Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
 
@@ -33,7 +33,7 @@ class WinningNumberTest {
     public void 로또번호비교_5개_일치_보너스볼_포함_2등() {
         //given
         Lotto prevLotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningNumber winningNumber = new WinningNumber(prevLotto.getNumbers(), new LottoNumber(16));
+        WinningNumber winningNumber = new WinningNumber(prevLotto, new LottoNumber(16));
 
         Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 16));
 
@@ -51,7 +51,7 @@ class WinningNumberTest {
     public void 로또번호비교_5개_일치_보너스볼_미포함_3등() {
         //given
         Lotto prevLotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningNumber winningNumber = new WinningNumber(prevLotto.getNumbers(), new LottoNumber(26));
+        WinningNumber winningNumber = new WinningNumber(prevLotto, new LottoNumber(26));
 
         Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 16));
 
@@ -69,7 +69,7 @@ class WinningNumberTest {
     public void 로또번호비교_4개_일치_4등() {
         //given
         Lotto prevLotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningNumber winningNumber = new WinningNumber(prevLotto.getNumbers(), new LottoNumber(26));
+        WinningNumber winningNumber = new WinningNumber(prevLotto, new LottoNumber(16));
 
         Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 15, 16));
 
@@ -87,7 +87,7 @@ class WinningNumberTest {
     public void 로또번호비교_3개_일치_5등() {
         //given
         Lotto prevLotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningNumber winningNumber = new WinningNumber(prevLotto.getNumbers(), new LottoNumber(26));
+        WinningNumber winningNumber = new WinningNumber(prevLotto, new LottoNumber(16));
 
         Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 14, 15, 16));
 
@@ -105,7 +105,7 @@ class WinningNumberTest {
     public void 로또번호비교_2개_일치_5등() {
         //given
         Lotto prevLotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningNumber winningNumber = new WinningNumber(prevLotto.getNumbers(), new LottoNumber(26));
+        WinningNumber winningNumber = new WinningNumber(prevLotto, new LottoNumber(16));
 
         Lotto lotto = Lotto.from(Arrays.asList(1, 2, 13, 14, 15, 16));
 
@@ -123,7 +123,7 @@ class WinningNumberTest {
     public void 로또번호비교_1개_일치_5등() {
         //given
         Lotto prevLotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningNumber winningNumber = new WinningNumber(prevLotto.getNumbers(), new LottoNumber(26));
+        WinningNumber winningNumber = new WinningNumber(prevLotto, new LottoNumber(16));
 
         Lotto lotto = Lotto.from(Arrays.asList(1, 12, 13, 14, 15, 16));
 
@@ -141,7 +141,7 @@ class WinningNumberTest {
     public void 로또번호비교_0개_일치_5등() {
         //given
         Lotto prevLotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningNumber winningNumber = new WinningNumber(prevLotto.getNumbers(), new LottoNumber(26));
+        WinningNumber winningNumber = new WinningNumber(prevLotto, new LottoNumber(16));
 
         Lotto lotto = Lotto.from(Arrays.asList(11, 12, 13, 14, 15, 16));
 
