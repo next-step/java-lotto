@@ -21,9 +21,9 @@
 
 ### Calculator - 문자열 계산기
 
-- [ ] 빈 문자열 또는 null을 입력할 경우 0을 반환해야 한다. - Calculator#add
-- [ ] 숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다. - Calculator#add
-- [ ] 찐 계산 - Calculator#add
+- [x] 빈 문자열 또는 null을 입력할 경우 0을 반환해야 한다. - Calculator#add
+- [x] 숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다. - Calculator#add
+- [x] 찐 계산 - Calculator#add
 
 ### DelimiterTokenizer - 구분자 설정
 
