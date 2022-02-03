@@ -5,7 +5,7 @@
 - [X] 쉼표 또는 콜론을 구분자로 문자열 분리 StringParser#splitDefaultDelimiter 
 - [X] 커스텀 구분자로 문자열 분리 StringParser#splitCustomDelimiter
 - [X] 숫자 이외의 값 또한 음수일 경우 예외처리 Number#validatePositiveNumber
-- [ ] 구분된 숫자 합 반환 Calculator#calculate
+- [X] 구분된 숫자 합 반환 Calculator#calculate
 
 ## 기능 요구 사항
 * 쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열을 전달하는 경우 구분자를 기준으로 분리한 각 숫자의 합을 반환
