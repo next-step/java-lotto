@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -7,11 +8,9 @@ import java.util.stream.Collectors;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Rank;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class LottoMatcherTest {
-
+class WinningNumberTest {
     @Test
     public void 로또번호비교_6개_일치_1등() {
         //given
@@ -27,7 +26,7 @@ class LottoMatcherTest {
             .collect(Collectors.toList());
 
         //then
-        Assertions.assertThat(LottoMatcher.compare(winningNumber, integers)).isEqualTo(Rank.FIRST);
+        assertThat(winningNumber.compareTo(integers)).isEqualTo(Rank.FIRST);
     }
 
     @Test
@@ -45,7 +44,7 @@ class LottoMatcherTest {
             .collect(Collectors.toList());
 
         //then
-        Assertions.assertThat(LottoMatcher.compare(winningNumber, integers)).isEqualTo(Rank.SECOND);
+        assertThat(winningNumber.compareTo(integers)).isEqualTo(Rank.SECOND);
     }
 
     @Test
@@ -63,7 +62,7 @@ class LottoMatcherTest {
             .collect(Collectors.toList());
 
         //then
-        Assertions.assertThat(LottoMatcher.compare(winningNumber, integers)).isEqualTo(Rank.THIRD);
+        assertThat(winningNumber.compareTo(integers)).isEqualTo(Rank.THIRD);
     }
 
     @Test
@@ -81,7 +80,7 @@ class LottoMatcherTest {
             .collect(Collectors.toList());
 
         //then
-        Assertions.assertThat(LottoMatcher.compare(winningNumber, integers)).isEqualTo(Rank.FOURTH);
+        assertThat(winningNumber.compareTo(integers)).isEqualTo(Rank.FOURTH);
     }
 
     @Test
@@ -99,7 +98,7 @@ class LottoMatcherTest {
             .collect(Collectors.toList());
 
         //then
-        Assertions.assertThat(LottoMatcher.compare(winningNumber, integers)).isEqualTo(Rank.FIFTH);
+        assertThat(winningNumber.compareTo(integers)).isEqualTo(Rank.FIFTH);
     }
 
     @Test
@@ -117,7 +116,7 @@ class LottoMatcherTest {
             .collect(Collectors.toList());
 
         //then
-        Assertions.assertThat(LottoMatcher.compare(winningNumber, integers)).isEqualTo(Rank.NONE);
+        assertThat(winningNumber.compareTo(integers)).isEqualTo(Rank.NONE);
     }
 
     @Test
@@ -135,7 +134,7 @@ class LottoMatcherTest {
             .collect(Collectors.toList());
 
         //then
-        Assertions.assertThat(LottoMatcher.compare(winningNumber, integers)).isEqualTo(Rank.NONE);
+        assertThat(winningNumber.compareTo(integers)).isEqualTo(Rank.NONE);
     }
 
     @Test
@@ -153,6 +152,6 @@ class LottoMatcherTest {
             .collect(Collectors.toList());
 
         //then
-        Assertions.assertThat(LottoMatcher.compare(winningNumber, integers)).isEqualTo(Rank.NONE);
+        assertThat(winningNumber.compareTo(integers)).isEqualTo(Rank.NONE);
     }
 }
