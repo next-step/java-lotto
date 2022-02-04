@@ -6,11 +6,6 @@ import java.util.List;
 public class LottoRaffle {
 
     private final WinningLotto winningLotto;
-    private int match3Number = 0;
-    private int match4Number = 0;
-    private int match5Number = 0;
-    private int matchBonusNumber = 0;
-    private int match6Number = 0;
 
     public LottoRaffle(WinningLotto winningLotto) {
         this.winningLotto = winningLotto;
@@ -26,7 +21,7 @@ public class LottoRaffle {
         });
 
         boolean isBonusNumber = lotto.getLotto().contains(winningLotto.getBonusNumber());
-        if(count != 5) {
+        if (count != 5) {
             isBonusNumber = false;
         }
         LottoResult.upCount(count, isBonusNumber);
