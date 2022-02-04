@@ -21,11 +21,9 @@ public class UserResult {
 
     }
 
-    public static void printCountMessage(final Lottos lottos){
+    public static void printLottoBundle(final Lottos lottos){
         System.out.println(lottos.getLottosSize()+LOTTO_COUNT_MESSAGE);
-        for(Lotto lotto : lottos.lottos()){
-            System.out.println(lotto.getLottoNumber());
-        }
+        printLottoNumber(lottos);
     }
 
     public static void printRank(final RankResult rankResult){
@@ -70,5 +68,10 @@ public class UserResult {
             return true;
         }
         return false;
+    }
+
+    private static void printLottoNumber(Lottos lottos) {
+        lottos.lottos()
+            .forEach(lotto -> System.out.println(lotto.getLottoNumber()));
     }
 }

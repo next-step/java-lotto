@@ -19,7 +19,7 @@ public class Controller {
         Money money = UserConsole.inputString();
 
         Lottos lottoBundle = generateLottoBundle(money);
-        UserResult.printCountMessage(lottoBundle);
+        UserResult.printLottoBundle(lottoBundle);
 
         Lotto winningLottoNumber = winningLottoNumberInput();
         LottoNumber bonusLottoNumber = UserConsole.bonusLottoNumber();
