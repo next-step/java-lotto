@@ -2,7 +2,6 @@ package lotto.view;
 
 import java.util.Arrays;
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.LottoNumbers;
@@ -64,7 +63,7 @@ public class LottoOutput {
     }
 
     private static double countRewardRate(int winnerPriceSum, int buyPrice) {
-        return winnerPriceSum / (double) buyPrice;
+        return Math.round(winnerPriceSum / (double) buyPrice);
     }
 
     public static void printLottoNumber(List<LottoNumbers> lottoNumbers) {

@@ -8,7 +8,6 @@ import lotto.domain.Ranking;
 
 public class LottoCountCalculator {
 
-
     private static final LottoCountCalculator INSTANCE = new LottoCountCalculator();
 
     private LottoCountCalculator() {
