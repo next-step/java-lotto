@@ -19,8 +19,8 @@ public class Lotto {
 
     public int matchNumber(final List<String> winningNumbers) {
         return (int) numbers.stream()
-            .filter(n -> winningNumbers.contains(n))
-            .count();
+                .filter(n -> winningNumbers.contains(n))
+                .count();
     }
 
     public boolean containsBonusNumber(String bonusNumber) {

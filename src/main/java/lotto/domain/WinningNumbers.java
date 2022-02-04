@@ -43,7 +43,7 @@ public class WinningNumbers {
         String[] split = winningNumbers.split(DELIMITER_COMMA);
 
         return Arrays.stream(split)
-            .collect(Collectors.toList());
+                .collect(Collectors.toList());
     }
 
     private void validateWinningNumberCount(final List<String> winningNumbers) {

@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Map;
 
 public class RankCounts {
+
     private final Map<LottoRank, Integer> rankCounts;
 
     public RankCounts(final Map<LottoRank, Integer> rankCounts) {

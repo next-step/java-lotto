@@ -23,8 +23,8 @@ public class LottoApplication {
         PrintView.printLottoNumber(lottos);
 
         final CorrectNumbers correctNumbers = new CorrectNumbers(
-            new WinningNumbers(InputView.inputWinningNumbers()),
-            new BonusNumber(InputView.inputBonusNumber()));
+                new WinningNumbers(InputView.inputWinningNumbers()),
+                new BonusNumber(InputView.inputBonusNumber()));
 
         final Judge judge = new Judge(correctNumbers);
         final LottoRanks lottoRanks = judge.getRanks(lottos);

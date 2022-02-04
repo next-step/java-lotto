@@ -14,8 +14,8 @@ class JudgeTest {
         // given
         final Lottos lottos = Lottos.createAutoLottos(new Budget("14000"));
         final Judge judge = new Judge(new CorrectNumbers(
-            new WinningNumbers("1,2,3,4,5,6"),
-            new BonusNumber("7")));
+                new WinningNumbers("1,2,3,4,5,6"),
+                new BonusNumber("7")));
 
         // when
         final int size = judge.getRanks(lottos).get().size();

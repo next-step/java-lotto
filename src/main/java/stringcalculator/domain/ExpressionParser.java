@@ -23,8 +23,8 @@ public class ExpressionParser {
         String[] split = expression.split(regex);
 
         return Arrays.stream(split)
-            .map((Integer::parseInt))
-            .collect(Collectors.toList());
+                .map((Integer::parseInt))
+                .collect(Collectors.toList());
     }
 
     private String getSplitRegex() {

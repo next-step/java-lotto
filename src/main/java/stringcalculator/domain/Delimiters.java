@@ -12,8 +12,8 @@ public class Delimiters {
     public Delimiters(List<String> delimiters) {
         try {
             this.delimiters = delimiters.stream()
-                .map(Delimiter::new)
-                .collect(Collectors.toList());
+                    .map(Delimiter::new)
+                    .collect(Collectors.toList());
         } catch (IllegalArgumentException e) {
             InputView.printErrorMessage(e.getMessage());
         }
@@ -21,8 +21,8 @@ public class Delimiters {
 
     public List<String> getValues() {
         return delimiters.stream()
-            .map(Delimiter::getValue)
-            .collect(Collectors.toList());
+                .map(Delimiter::getValue)
+                .collect(Collectors.toList());
     }
 
     @Override

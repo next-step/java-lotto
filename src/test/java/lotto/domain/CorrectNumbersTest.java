@@ -32,6 +32,6 @@ class CorrectNumbersTest {
 
         // then
         assertThrows(IllegalArgumentException.class,
-            () -> new CorrectNumbers(winningNumbers, bonusNumber));
+                () -> new CorrectNumbers(winningNumbers, bonusNumber));
     }
 }
