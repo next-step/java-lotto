@@ -1,28 +1,29 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.Random;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoGenerator {
 
     private static final int LOTTO_SIZE_BOUND = 6;
+    private static final int LOTTO_MINIMUM_BOUND = 1;
     private static final int LOTTO_MAXIMUM_BOUND = 45;
-    private final Random RANDOM;
+    private static final List<Integer> LOTTO = IntStream.range(LOTTO_MINIMUM_BOUND,
+            LOTTO_MAXIMUM_BOUND + LOTTO_MINIMUM_BOUND)
+        .boxed()
+        .collect(Collectors.toList());
 
     public LottoGenerator() {
-        this.RANDOM = new Random();
     }
 
     public Set<Integer> generateLotto() {
-        Set<Integer> lotto = new HashSet<>();
-        while (lotto.size() != LOTTO_SIZE_BOUND) {
-            lotto.add(generate());
-        }
-        return lotto;
-    }
-
-    private Integer generate() {
-        return RANDOM.nextInt(LOTTO_MAXIMUM_BOUND) + 1;
+        Collections.shuffle(LOTTO);
+        List<Integer> cut = LOTTO.subList(0, LOTTO_SIZE_BOUND);
+        Collections.sort(cut);
+        return new HashSet<>(cut);
     }
 }
