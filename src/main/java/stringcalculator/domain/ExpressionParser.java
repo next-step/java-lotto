@@ -32,14 +32,12 @@ public class ExpressionParser {
     }
 
     private void validateContainsOtherCharacter(String expression) {
-        String regex = getValidateRegex();
-
-        if (!expression.matches(regex)) {
+        if (!expression.matches(getExpressionValidateRegex())) {
             throw new IllegalArgumentException("구분자와 숫자만으로 이루어져야 합니다.");
         }
     }
 
-    private String getValidateRegex() {
+    private String getExpressionValidateRegex() {
         return String.format("[0-9%s]+$", delimiters);
     }
 }
