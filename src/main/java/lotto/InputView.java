@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -35,4 +36,11 @@ public class InputView {
         }
     }
 
+    public static List<Integer> getWinningNumber() {
+        List<Integer> winningNumbers;
+        System.out.println(WINNING__NUMBER_INPUT_GUIDE_MESSAGE);
+        String numbersString = sc.next();
+        winningNumbers = Parser.parseWinningNumber(numbersString);
+        return winningNumbers;
+    }
 }
