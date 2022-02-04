@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
+
 public class OutputView {
 
     public static final String ERROR_MESSAGE = "[ERROR] ";
@@ -50,5 +52,11 @@ public class OutputView {
         }
 
         System.out.println("총 수익률은 " + earningRate + "입니다.(기준이 1이기 때문에 결과적으로 "+ profitOrLoss +"이라는 의미임)");
+    }
+
+    public static void printLottoNumber(Lotto lotto) {
+        for (int j = 0; j < lotto.getLottoList().size(); j++) {
+            System.out.print(lotto.getLottoList().get(j) + " ");
+        }
     }
 }
