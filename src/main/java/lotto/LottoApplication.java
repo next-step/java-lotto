@@ -3,8 +3,10 @@ package lotto;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoRaffle;
+import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
+import lotto.domain.YieldCalculator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -26,7 +28,8 @@ public class LottoApplication {
         for (Lotto lotto : lottos.getLottos()) {
             lottoRaffle.compareLotto(lotto);
         }
-        final List<Integer> results = lottoRaffle.getResults();
-        ResultView.printLottoResult(results, money);
+        final List<LottoResult> results = lottoRaffle.getResults();
+        double yield = YieldCalculator.calcuateYield(results, money);
+        ResultView.printLottoResults(results, yield);
     }
 }
