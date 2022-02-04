@@ -34,7 +34,6 @@ public class ResultView {
         total += 30000000 * results.get(3);
         System.out.println("6개 일치 (2000000000원)-" + results.get(4) + "개");
         total += 2000000000 * results.get(4);
-        System.out.println("수익 > " + total);
         String profit = String.format("%.2f", (double) total / (double) money);
         System.out.println("총 수익률은 " + profit + "입니다.");
     }
