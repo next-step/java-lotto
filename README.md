@@ -8,7 +8,7 @@
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
-## 기능 요구 사항
+## 문자열 계산기 기능 요구 사항
 
 - [x] 계산식을 입력받을 수 있다. - calculator.view#InputView#readFormula
 - [x] 빈 문자열 또는 `null` 값을 입력할 경우 0을 반환해야 한다. - calculator.util#validateInput#isEmptyOrNull
@@ -19,6 +19,22 @@
 - [x] `//`와 `\\n` 문자 사이에 커스텀 구분자를 지정할 수 있다. - calculator.domain#Parser#customSplit
   - 예를 들어 “//;\n1;2;3”과 같이 값을 입력할 경우 커스텀 구분자는 세미콜론(;)이며, 결과 값은 6이 반환되어야 한다.
 - [x] 문자열 계산기에 음수를 전달하는 경우 `RuntimeException` 예외 처리를 한다. - calculator.util#validateCalculator
+
+## 로또(자동) - step1 기능 요구 사항
+
+- [] 구입금액을 입력받을 수 있다. lotto.view#InputView#readPrice
+- [] 로또 한 번은 1000원이다. lotto.domain#Lotto
+- [] 로또는 한 장을 발행할 수 있다. lotto.domain#Lotto#generatorLotto
+  - 로또 자동 생성은 Collections.shuffle()를 활용한다.
+  - Collections.sort()를 활용해 정렬 가능하다.
+- [] 금액에 해당하는 로또를 발행해야 한다. lotto.domain#Lottos#generatorLottos
+- [] 지난 주 당첨 번호를 입력받을 수 있다. lotto.view#InputView#readWinningNumber
+  - 예를 들어 1, 2, 3, 4, 5, 6 쉼표를 구분자로 공백을 갖춰 입력해야 한다. 
+- [] 보너스 볼을 입력받을 수 있다. lotto.view#InputView#readBonusNumber
+- [] 로또 당첨 통계를 알 수 있다. lotto.domain#LottoStatistics
+  - ArrayList의 contains()를 활용하면 어떤 값이 존재하는지 유무를 판단할 수 있다.
+- [] 로또의 총 수익률을 알 수 있다. lotto.domain/Lottos
+- [] UI는 InputView와 OutputView, ResultView에서 작성한다. lotto.view#
 
 ## 마감 기한
 
