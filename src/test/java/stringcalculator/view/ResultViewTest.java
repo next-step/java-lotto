@@ -13,10 +13,10 @@ public class ResultViewTest {
     @Test
     void 결과_출력_테스트() {
         // given
-        int result = 20;
+        final int result = 20;
 
         // when
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
         ResultView.print(result);

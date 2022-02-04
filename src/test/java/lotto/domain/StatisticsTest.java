@@ -33,10 +33,10 @@ class StatisticsTest {
     @Test
     void getRankCount() {
         // given
-        Statistics statistics = new Statistics(lottoRanks);
+        final Statistics statistics = new Statistics(lottoRanks);
 
         // when
-        Map<LottoRank, Integer> rankCounts = statistics.getRankCounts().get();
+        final Map<LottoRank, Integer> rankCounts = statistics.getRankCounts().get();
 
         // then
         assertThat(rankCounts.get(LottoRank.FIRST)).isEqualTo(1);
@@ -50,10 +50,10 @@ class StatisticsTest {
     @Test
     void getProfitRate() {
         // given
-        Statistics statistics = new Statistics(lottoRanks);
+        final Statistics statistics = new Statistics(lottoRanks);
 
-        double rate = statistics.getProfitRate();
-        double expected = (LottoRank.FIRST.getAmount() + LottoRank.SECOND.getAmount() * 2 + LottoRank.THIRD.getAmount()) / givenRanks.size();
+        final double rate = statistics.getProfitRate();
+        final double expected = (LottoRank.FIRST.getAmount() + LottoRank.SECOND.getAmount() * 2 + LottoRank.THIRD.getAmount()) / givenRanks.size();
 
         assertThat(rate).isEqualTo(expected);
     }

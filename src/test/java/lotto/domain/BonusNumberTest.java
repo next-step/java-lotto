@@ -12,7 +12,7 @@ class BonusNumberTest {
     @Test
     void 생성자() {
         // given
-        String input = "7";
+        final String input = "7";
 
         // then
         assertDoesNotThrow(() -> new BonusNumber(input));
@@ -22,7 +22,7 @@ class BonusNumberTest {
     @Test
     void isNotANumber() {
         // given
-        String input = "aaa";
+        final String input = "aaa";
 
         // then
         assertThrows(IllegalArgumentException.class, () -> new BonusNumber(input));
@@ -32,7 +32,7 @@ class BonusNumberTest {
     @Test
     void 숫자_여러개가_들어왔을_때() {
         // given
-        String input = "1 2";
+        final String input = "1 2";
 
         // then
         assertThrows(IllegalArgumentException.class, () -> new BonusNumber(input));
@@ -42,7 +42,7 @@ class BonusNumberTest {
     @Test
     void isNumberRange1to45() {
         // given
-        String input = "46";
+        final String input = "46";
 
         // then
         assertThrows(IllegalArgumentException.class, () -> new BonusNumber(input));

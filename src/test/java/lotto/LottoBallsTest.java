@@ -11,7 +11,7 @@ class LottoBallsTest {
     void Lotto_Ball_은_1부터_45_까지이다() {
 
         // when
-        List<String> balls = LottoBalls.get();
+        final List<String> balls = LottoBalls.get();
 
         // then
         for (int i = 1; i <= 45; i++) {

@@ -17,12 +17,12 @@ class LottosTest {
     @DisplayName("금액만큼 로또가 발급된다.")
     @ValueSource(strings = {"10000", "14500"})
     @ParameterizedTest
-    void getNumberOfLottos(String budget) {
+    void getNumberOfLottos(final String budget) {
         // given
-        int numberOfLotto = Integer.parseInt(budget) / PRICE_OF_LOTTO;
+        final int numberOfLotto = Integer.parseInt(budget) / PRICE_OF_LOTTO;
 
         // when
-        Lottos autoLottos = Lottos.createAutoLottos(new Budget(budget));
+        final Lottos autoLottos = Lottos.createAutoLottos(new Budget(budget));
 
         // then
         assertThat(autoLottos.get().size()).isEqualTo(numberOfLotto);
@@ -32,7 +32,7 @@ class LottosTest {
     @Test
     void shuffle() {
         // given
-        ArrayList<String> before = new ArrayList<>(LottoBalls.get());
+        final ArrayList<String> before = new ArrayList<>(LottoBalls.get());
 
         // when
         Lottos.createAutoLottos(new Budget("1000"));
@@ -45,10 +45,10 @@ class LottosTest {
     @Test
     void createAutoLottos() {
         // given
-        int numberOfLotto = Integer.parseInt("1000") / PRICE_OF_LOTTO;
+        final int numberOfLotto = Integer.parseInt("1000") / PRICE_OF_LOTTO;
 
         // when
-        List<Lotto> lottos = Lottos.createAutoLottos(new Budget("1000")).get();
+        final List<Lotto> lottos = Lottos.createAutoLottos(new Budget("1000")).get();
 
         // then
         assertThat(lottos.get(0).get()).isEqualTo(LottoBalls.get().subList(0, 6));

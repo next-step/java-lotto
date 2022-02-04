@@ -13,7 +13,7 @@ class RankCountsTest {
     @Test
     void 생성자() {
         // given
-        Map<LottoRank, Integer> expected = new HashMap<LottoRank, Integer>() {
+        final Map<LottoRank, Integer> expected = new HashMap<LottoRank, Integer>() {
             {
                 put(LottoRank.FIRST, 0);
                 put(LottoRank.SECOND, 1);
@@ -24,7 +24,7 @@ class RankCountsTest {
         };
 
         // when
-        RankCounts rankCounts = new RankCounts(expected);
+        final RankCounts rankCounts = new RankCounts(expected);
 
         // then
         assertThat(rankCounts.get()).isEqualTo(expected);

@@ -13,11 +13,11 @@ class LottoRanksTest {
     @Test
     void 생성_확인() {
         // given
-        List<LottoRank> expected = new ArrayList<>();
+        final List<LottoRank> expected = new ArrayList<>();
         expected.add(LottoRank.FIRST);
 
         // when
-        LottoRanks lottoRanks = new LottoRanks(expected);
+        final LottoRanks lottoRanks = new LottoRanks(expected);
 
         // then
         assertThat(lottoRanks.get()).isEqualTo(expected);

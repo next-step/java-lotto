@@ -12,7 +12,7 @@ class BudgetTest {
     @Test
     void 생성_숫자만으로_이루어짐() {
         // given
-        String input = "14000";
+        final String input = "14000";
 
         // then
         Assertions.assertDoesNotThrow(() -> new Budget(input));
@@ -21,7 +21,7 @@ class BudgetTest {
     @DisplayName("문자가 들어간 경우")
     @ValueSource(strings = {"1400 0", "aaa", "12a", "12 a"})
     @ParameterizedTest
-    void 생성_숫자만으로_이루어짐(String input) {
+    void 생성_숫자만으로_이루어짐(final String input) {
         // then
         Assertions.assertThrows(IllegalArgumentException.class, () -> new Budget(input));
     }

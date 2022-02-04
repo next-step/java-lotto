@@ -23,14 +23,14 @@ public class InputViewTest {
     @ParameterizedTest
     void getDelimiter(String input) {
         // given
-        InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+        final InputStream inputStream = new ByteArrayInputStream(input.getBytes());
         System.setIn(inputStream);
         input = input.substring(PREFIX_LENGTH);
 
-        Delimiters expected = new Delimiters(Arrays.asList(input));
+        final Delimiters expected = new Delimiters(Arrays.asList(input));
 
         // when
-        Delimiters delimiters = InputView.getDelimiters();
+        final Delimiters delimiters = InputView.getDelimiters();
 
         // then
         assertThat(delimiters).isEqualTo(expected);
@@ -39,16 +39,16 @@ public class InputViewTest {
     @DisplayName("구분자 입력을 생략한다.")
     @ValueSource(strings = {" ", "   ", "\t", "\n"})
     @ParameterizedTest
-    void getDelimiter_구분자_없음(String input) {
+    void getDelimiter_구분자_없음(final String input) {
         // given
-        InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+        final InputStream inputStream = new ByteArrayInputStream(input.getBytes());
         System.setIn(inputStream);
 
-        Delimiters expected = new Delimiters(
+        final Delimiters expected = new Delimiters(
             Arrays.asList(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON));
 
         // when
-        Delimiters delimiters = InputView.getDelimiters();
+        final Delimiters delimiters = InputView.getDelimiters();
 
         // then
         assertThat(delimiters).isEqualTo(expected);
@@ -57,9 +57,9 @@ public class InputViewTest {
     @DisplayName("잘못된 Prefix ")
     @ValueSource(strings = {",", "/a", "::", "a//"})
     @ParameterizedTest
-    void getDelimiter_잘못된_Prefix(String input) {
+    void getDelimiter_잘못된_Prefix(final String input) {
         // given
-        InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+        final InputStream inputStream = new ByteArrayInputStream(input.getBytes());
         System.setIn(inputStream);
 
         // then
@@ -70,12 +70,12 @@ public class InputViewTest {
     @DisplayName("식을 입력 받는다")
     @Test
     void getExpression() {
-        String expected = "1;2;3";
-        InputStream inputStream = new ByteArrayInputStream(expected.getBytes());
+        final String expected = "1;2;3";
+        final InputStream inputStream = new ByteArrayInputStream(expected.getBytes());
         System.setIn(inputStream);
 
         // when
-        String result = InputView.getExpression();
+        final String result = InputView.getExpression();
 
         // then
         assertThat(result).isEqualTo(expected);
@@ -84,12 +84,12 @@ public class InputViewTest {
     @DisplayName("식을 입력 - 공백 입력.")
     @ValueSource(strings = {" ", "   ", "\t", "\n"})
     @ParameterizedTest
-    void getExpression_공백_입력(String input) {
-        InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+    void getExpression_공백_입력(final String input) {
+        final InputStream inputStream = new ByteArrayInputStream(input.getBytes());
         System.setIn(inputStream);
 
         // when
-        String result = InputView.getExpression();
+        final String result = InputView.getExpression();
 
         // then
         assertThat(result).isEqualTo("0");

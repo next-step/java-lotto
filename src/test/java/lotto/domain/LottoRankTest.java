@@ -13,7 +13,7 @@ class LottoRankTest {
     @Test
     void checkSecond() {
         // when
-        LottoRank lottoRank = LottoRank.getRank(5, true);
+        final LottoRank lottoRank = LottoRank.getRank(5, true);
 
         // then
         assertThat(lottoRank).isEqualTo(lottoRank.SECOND);
@@ -23,7 +23,7 @@ class LottoRankTest {
     @Test
     void checkThird() {
         // when
-        LottoRank lottoRank = LottoRank.getRank(5, false);
+        final LottoRank lottoRank = LottoRank.getRank(5, false);
 
         // then
         assertThat(lottoRank).isEqualTo(LottoRank.THIRD);
@@ -33,7 +33,7 @@ class LottoRankTest {
     @Test
     void checkFirst() {
         // when
-        LottoRank lottoRank = LottoRank.getRank(6, false);
+        final LottoRank lottoRank = LottoRank.getRank(6, false);
 
         // then
         assertThat(lottoRank).isEqualTo(lottoRank.FIRST);
@@ -42,9 +42,9 @@ class LottoRankTest {
     @DisplayName("미당첨 확인")
     @ValueSource(ints = {0, 1, 2})
     @ParameterizedTest
-    void checkFail(int matchCount) {
+    void checkFail(final int matchCount) {
         // when
-        LottoRank lottoRank = LottoRank.getRank(matchCount, false);
+        final LottoRank lottoRank = LottoRank.getRank(matchCount, false);
 
         // then
         assertThat(lottoRank).isEqualTo(lottoRank.FAIL);

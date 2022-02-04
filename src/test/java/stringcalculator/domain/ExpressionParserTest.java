@@ -17,7 +17,7 @@ public class ExpressionParserTest {
     @Test
     void ExpressionParser_객체_생성() {
         // given
-        Delimiters delimiters = new Delimiters(Arrays.asList(",", ":"));
+        final Delimiters delimiters = new Delimiters(Arrays.asList(",", ":"));
 
         // then
         assertDoesNotThrow(() -> new ExpressionParser(delimiters));
@@ -27,12 +27,12 @@ public class ExpressionParserTest {
     @Test
     void parse_테스트_커스텀_구분자() {
         // given
-        String input = "1;2;3";
-        Delimiters delimiters = new Delimiters(Arrays.asList(";"));
-        ExpressionParser expressionParser = new ExpressionParser(delimiters);
+        final String input = "1;2;3";
+        final Delimiters delimiters = new Delimiters(Arrays.asList(";"));
+        final ExpressionParser expressionParser = new ExpressionParser(delimiters);
 
         // when
-        List<Integer> numbers = expressionParser.parse(input);
+        final List<Integer> numbers = expressionParser.parse(input);
 
         // then
         assertThat(numbers).isEqualTo(Arrays.asList(1, 2, 3));
@@ -42,12 +42,12 @@ public class ExpressionParserTest {
     @Test
     void parse_테스트_기본_구분자() {
         // given
-        String input = "1,2:3";
-        Delimiters delimiters = new Delimiters(Arrays.asList(",", ":"));
-        ExpressionParser expressionParser = new ExpressionParser(delimiters);
+        final String input = "1,2:3";
+        final Delimiters delimiters = new Delimiters(Arrays.asList(",", ":"));
+        final ExpressionParser expressionParser = new ExpressionParser(delimiters);
 
         // when
-        List<Integer> numbers = expressionParser.parse(input);
+        final List<Integer> numbers = expressionParser.parse(input);
 
         // then
         assertThat(numbers).isEqualTo(Arrays.asList(1, 2, 3));
@@ -56,10 +56,10 @@ public class ExpressionParserTest {
     @DisplayName("구분자가 아닌 문자가 들어오면 예외를 발생시킨다")
     @ValueSource(strings = {"1,-2:3", "1_2:3", "1,a,3"})
     @ParameterizedTest
-    void validateContainsCharacter(String input) {
+    void validateContainsCharacter(final String input) {
         // given
-        Delimiters delimiters = new Delimiters(Arrays.asList(",", ":"));
-        ExpressionParser expressionParser = new ExpressionParser(delimiters);
+        final Delimiters delimiters = new Delimiters(Arrays.asList(",", ":"));
+        final ExpressionParser expressionParser = new ExpressionParser(delimiters);
 
         // then
         assertThatExceptionOfType(IllegalArgumentException.class)
@@ -69,10 +69,10 @@ public class ExpressionParserTest {
     @DisplayName("2개 이상의 연속된 구분자가 들어오면 예외를 발생시킨다")
     @ValueSource(strings = {"1::2:3", "1,,2,3", "1::2,3", "1,,2:3"})
     @ParameterizedTest
-    void getExpression_연속된_구분자(String input) {
+    void getExpression_연속된_구분자(final String input) {
         // given
-        Delimiters delimiters = new Delimiters(Arrays.asList(",", ":"));
-        ExpressionParser expressionParser = new ExpressionParser(delimiters);
+        final Delimiters delimiters = new Delimiters(Arrays.asList(",", ":"));
+        final ExpressionParser expressionParser = new ExpressionParser(delimiters);
 
         // then
         assertThatExceptionOfType(NumberFormatException.class)

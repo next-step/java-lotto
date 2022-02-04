@@ -12,11 +12,11 @@ class CorrectNumbersTest {
     @Test
     void 생성자() {
         // given
-        BonusNumber bonusNumber = new BonusNumber("7");
-        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
+        final BonusNumber bonusNumber = new BonusNumber("7");
+        final WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
 
         // when
-        CorrectNumbers correctNumbers = new CorrectNumbers(winningNumbers, bonusNumber);
+        final CorrectNumbers correctNumbers = new CorrectNumbers(winningNumbers, bonusNumber);
 
         // then
         assertThat(correctNumbers.getWinningNumbers()).isEqualTo(winningNumbers);
@@ -27,8 +27,8 @@ class CorrectNumbersTest {
     @Test
     void Duplicate() {
         // given
-        BonusNumber bonusNumber = new BonusNumber("6");
-        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
+        final BonusNumber bonusNumber = new BonusNumber("6");
+        final WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
 
         // then
         assertThrows(IllegalArgumentException.class,
