@@ -21,7 +21,10 @@ public class LottoFullNumber {
         }
     }
 
-    public List<LottoNumber> getLottoFullNumber() {
-        return lottoFullNumber;
+    public List<Integer> getLottoFullNumber() {
+        return lottoFullNumber
+            .stream()
+            .map(LottoNumber::getValue)
+            .collect(Collectors.toList());
     }
 }

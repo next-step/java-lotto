@@ -8,7 +8,7 @@ public class Lotto {
         this.lottoNumber = lottoNumber;
     }
 
-    public LottoFullNumber getLottoNumber() {
-        return lottoNumber;
+    public List<Integer> getLottoNumber() {
+        return lottoNumber.getLottoFullNumber();
     }
 }
