@@ -29,7 +29,4 @@ public class LottoShop {
         return lottos;
     }
 
-    public int getLottoAmount() {
-        return lottoAmount;
-    }
 }
