@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 public class LottoValidator extends Validator {
 
+    private static final int LOTTO_NUMBERS_SIZE = 6;
     private static final int MINIMUM_BALL_NUMBER = 1;
     private static final int MAXIMUM_BALL_NUMBER = 45;
 
@@ -40,8 +41,8 @@ public class LottoValidator extends Validator {
     }
 
     private static void validateSize(List<Integer> winningNumbers) {
-        if (winningNumbers.size() != 6) {
-            throw new IllegalArgumentException("[ERROR] 번호는 6개여야 합니다.");
+        if (winningNumbers.size() != LOTTO_NUMBERS_SIZE) {
+            throw new IllegalArgumentException("[ERROR] 번호는 " + LOTTO_NUMBERS_SIZE + "개여야 합니다.");
         }
     }
 
@@ -51,7 +52,8 @@ public class LottoValidator extends Validator {
 
     private static void validateRange(int number) {
         if (number < MINIMUM_BALL_NUMBER || number > MAXIMUM_BALL_NUMBER) {
-            throw new IllegalArgumentException("[ERROR] 1부터 45까지의 숫자만 입력해주세요.");
+            throw new IllegalArgumentException(
+                "[ERROR] " + MINIMUM_BALL_NUMBER + "부터 " + MAXIMUM_BALL_NUMBER + "까지의 숫자만 입력해주세요.");
         }
     }
 
