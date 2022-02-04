@@ -22,6 +22,16 @@ public class WinningLottoTest {
     }
 
     @Test
+    void 우승_로또는_중복될_수_없다() {
+        List<LottoNumber> lottoNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6, 1})
+            .boxed()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+        assertThatThrownBy(() -> new WinningLotto(lottoNumbers))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     void 우승_로또가_7개_외일_경우_예외가_발생_한다() {
         List<LottoNumber> underLottoNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6})
             .boxed()
