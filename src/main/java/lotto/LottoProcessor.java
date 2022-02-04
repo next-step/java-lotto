@@ -13,25 +13,31 @@ public class LottoProcessor {
     static ResultView resultView = new ResultView();
 
     public static void main(String[] args) {
-        int totalPrice = inputView.getTotalPrice();
-        LottoTickets lottoTickets = new LottoTickets(totalPrice);
 
-        int lottoCounts = lottoTickets.getLottoCounts();
+        try {
+            int totalPrice = inputView.getTotalPrice();
+            LottoTickets lottoTickets = new LottoTickets(totalPrice);
 
-        resultView.printNumberOfLotto(lottoCounts);
-        resultView.printLottoTickets(lottoTickets.getLottoTickets());
+            int lottoCounts = lottoTickets.getLottoCounts();
 
-        List<Integer> winNumbers = inputView.getWinNumbers();
-        int bonusNumber = inputView.getBonusNumber();
+            resultView.printNumberOfLotto(lottoCounts);
+            resultView.printLottoTickets(lottoTickets.getLottoTickets());
 
-        LottoMachine lottoMachine = new LottoMachine(winNumbers, bonusNumber);
-        List<Integer> integers = lottoTickets.countCorrectWinNumber(lottoMachine);
-        List<Integer> bonusNumbers = lottoTickets.checkBonusNumber(lottoMachine);
+            List<Integer> winNumbers = inputView.getWinNumbers();
+            int bonusNumber = inputView.getBonusNumber();
 
-        Analyzer analyzer = new Analyzer(totalPrice);
-        analyzer.calculateTotalWinningMoney(integers, bonusNumbers);
+            LottoMachine lottoMachine = new LottoMachine(winNumbers, bonusNumber);
+            List<Integer> integers = lottoTickets.countCorrectWinNumber(lottoMachine);
+            List<Integer> bonusNumbers = lottoTickets.checkBonusNumber(lottoMachine);
 
-        double profitPercent = analyzer.calculateProfitPercent();
-        resultView.printAnalyzeResults(analyzer.getWinningPrices(), profitPercent);
+            Analyzer analyzer = new Analyzer(totalPrice);
+            analyzer.calculateTotalWinningMoney(integers, bonusNumbers);
+
+            double profitPercent = analyzer.calculateProfitPercent();
+            resultView.printAnalyzeResults(analyzer.getWinningPrices(), profitPercent);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }
