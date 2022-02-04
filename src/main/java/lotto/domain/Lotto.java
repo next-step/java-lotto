@@ -2,9 +2,11 @@ package lotto.domain;
 
 import static lotto.util.Constant.*;
 
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Collections;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Lotto {
 
@@ -15,11 +17,11 @@ public class Lotto {
     }
 
     public void generateLottoTickets(int number) {
-        List<LottoNumbers> temp = new ArrayList<>();
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < number; i++) {
-            temp.add(new LottoNumbers(generateRandoms()));
+            lottoNumbers.add(new LottoNumbers(generateRandoms()));
         }
-        lottoTickets = temp;
+        lottoTickets = lottoNumbers;
     }
 
     public List<Integer> generateRandoms() {
@@ -50,5 +52,26 @@ public class Lotto {
             }
         }
         return LottoRank.valueOf(count, haveBonus);
+    }
+
+    public Map<LottoRank, Integer> getWinningResult(WinningNumbers winningNumbers) {
+        Map<LottoRank, Integer> map = new EnumMap<>(LottoRank.class);
+        this.lottoTickets.forEach(ticket -> {
+            LottoRank rank = compareWithWinning(ticket, winningNumbers);
+            if (rank != null) {
+                map.put(rank, map.getOrDefault(rank, 0) + 1);
+            }
+        });
+        return Collections.synchronizedMap(new EnumMap<>(map));
+    }
+
+    public double getProfit(int price, Map<LottoRank, Integer> map) {
+        double total = 0;
+        for (Map.Entry<LottoRank, Integer> entry : map.entrySet()) {
+            int amount = entry.getKey().getWinningAmount();
+            double profit = amount * entry.getValue();
+            total += profit;
+        }
+        return Math.floor((total / price) * 100) / 100.0;
     }
 }

@@ -30,7 +30,7 @@
 - [x] 로또 번호가 당첨되었는지 여부를 확인한다.(Lotto#compareWithWinning())
   - [x] 당첨에 대한 정보는 enum의 형태로 제공한다. (LottoRank)
 - [x] 당첨번호는 보너스볼 한 개를 포함해 7개의 숫자이어야 한다. (WinningNumbers)
-- [ ] 수익률 및 통계를 계산한다. 소수점 두자리에서 버림 처리 (Lotto)
+- [x] 수익률 및 통계를 계산한다. 소수점 두자리에서 버림 처리 (Lotto)
 - [ ] 당첨 통계를 출력한다. (ResultView)
 - [ ] 수익률을 출력한다. (ResultView)
 
