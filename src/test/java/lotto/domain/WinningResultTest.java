@@ -20,6 +20,8 @@ class WinningResultTest {
         List<Lotto> lottos = new ArrayList<>();
         Lotto lotto1 = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto lotto2 = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 7));
+        lottos.add(lotto1);
+        lottos.add(lotto2);
 
         WinningNumber winningNumber = new WinningNumber(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
 
@@ -41,7 +43,7 @@ class WinningResultTest {
         winningResult.result(ranks);
 
         //then
-        Assertions.assertThat(winningResult.getFirst()).isEqualTo(1);
-        Assertions.assertThat(winningResult.getSecond()).isEqualTo(1);
+        Assertions.assertThat(winningResult.getResult().get(Rank.FIRST)).isEqualTo(1);
+        Assertions.assertThat(winningResult.getResult().get(Rank.SECOND)).isEqualTo(1);
     }
 }
