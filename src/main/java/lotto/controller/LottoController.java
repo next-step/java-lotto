@@ -29,11 +29,11 @@ public class LottoController {
     }
 
     private void startLotto() {
-        lottoResultView.findWinner(lottoInputView.getLottos(), lottoInputView.getWinningNumbers(),
+        lottoResultView.findWinner(lottoInputView.getWinningNumbers(), lottoInputView.getLottos(),
             lottoInputView.getBonusBall());
     }
 
     private void analyzeStatistics() {
-        lottoResultView.finishGame();
+        lottoResultView.finishGame(lottoInputView.getPrice());
     }
 }
