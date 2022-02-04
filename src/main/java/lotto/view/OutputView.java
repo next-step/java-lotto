@@ -17,8 +17,10 @@ public class OutputView {
     private static final String PURCHASE_AMOUNT_MANAGER_LOG = "%d개를 구매했습니다.";
     private static final String OPEN_BRACKET = "[";
     private static final String CLOSED_BRACKET = "]";
+    private static final String WINNING_RESULT_HEAD_LOG = "당첨통계" + ENTER + "---------";
     private static final String COUNT_MATCH = "%d개 일치 (%d원)- %d개";
     private static final String BONUS_MATCH = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
+    private static final String YIELD = "총 수익률은 %.1f입니다.";
 
     public static void printMessage(String message) {
         System.out.print(message);
@@ -40,6 +42,8 @@ public class OutputView {
     }
 
     public static void printWinningResult(WinningResult winningResult) {
+        printMessage(ENTER + WINNING_RESULT_HEAD_LOG + ENTER);
+
         Map<Rank, Integer> result = winningResult.getResult();
         
         Iterator iterator = result.keySet().iterator();
@@ -53,10 +57,12 @@ public class OutputView {
             long prize = rank.getPrize(); // 얼마
 
             if (rank == Rank.SECOND) {
-                System.out.print(String.format(BONUS_MATCH, matchCount, prize, count) + ENTER);
+                printMessage(String.format(BONUS_MATCH, matchCount, prize, count) + ENTER);
                 continue;
             }
-            System.out.print(String.format(COUNT_MATCH, matchCount, prize, count) + ENTER);
+            printMessage(String.format(COUNT_MATCH, matchCount, prize, count) + ENTER);
         }
+
+        printMessage(String.format(YIELD, winningResult.getYield()) + ENTER);
     }
 }

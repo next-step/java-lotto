@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
+    private static final String ENTER = "\n";
     private static final int LOTTO_NUMBER_SIZE = 6;
     private static final String PURCHASE_TICKET_MANAGER_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String WINNING_NUMBER_MANAGER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
@@ -18,7 +19,7 @@ public class InputView {
 
     public static String writePurchaseAmount() {
         try {
-            System.out.println(PURCHASE_TICKET_MANAGER_MESSAGE);
+            OutputView.printMessage(PURCHASE_TICKET_MANAGER_MESSAGE + ENTER);
             String input = scanner.nextLine();
             checkEmptyString(input);
             return input;
@@ -30,7 +31,7 @@ public class InputView {
 
     public static List<Integer> writeWinningNumbers() {
         try {
-            System.out.println(WINNING_NUMBER_MANAGER_MESSAGE);
+            OutputView.printMessage(WINNING_NUMBER_MANAGER_MESSAGE +ENTER);
             String input = scanner.nextLine();
             checkEmptyString(input);
 
@@ -49,7 +50,7 @@ public class InputView {
 
     public static int writeBonusBall() {
         try {
-            System.out.println(BONUS_BALL_MANAGER_MESSAGE);
+            OutputView.printMessage(BONUS_BALL_MANAGER_MESSAGE + ENTER);
             String input = scanner.nextLine();
             checkEmptyString(input);
             return Integer.parseInt(input);
