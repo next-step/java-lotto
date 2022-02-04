@@ -13,6 +13,9 @@ public class GeneratorNumber {
         = IntStream.range(LIMIT_MINIMUM_NUMBER, LIMIT_MAXIMUM_NUMBER + 1)
         .boxed().collect(Collectors.toList());
 
+    private GeneratorNumber() {
+    }
+
     public static List<Integer> generateLottoNumbers() {
         Collections.shuffle(numbers);
         final List<Integer> lottoNumbers = numbers.subList(0, 6);
