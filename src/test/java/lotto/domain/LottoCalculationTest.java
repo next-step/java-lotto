@@ -13,6 +13,7 @@ public class LottoCalculationTest {
     @DisplayName("로또를_몇개_살수_있는지_계산")
     @Test
     void countLottoesTest() {
-        assertThat(LottoCalculation.lottoCalculation(price)).isEqualTo(expectedLotto);
+        LottoCalculation lottoCalculation = new LottoCalculation(price);
+        assertThat(lottoCalculation.lottoCalculation()).isEqualTo(expectedLotto);
     }
 }
