@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import lotto.LottoAutoGenerator;
@@ -12,7 +14,7 @@ public class LottoNumbers {
         validateNumbersSize(numbers);
         validateDuplicateNumber(numbers);
         validateNumberRange(numbers);
-        this.numbers = numbers;
+        this.numbers = new ArrayList<>(numbers);
     }
 
     public LottoNumbers() {
@@ -38,4 +40,7 @@ public class LottoNumbers {
             .ifPresent(num -> {throw new IllegalArgumentException("복권의 숫자 범위가 유효하지 않습니다.");});
     }
 
+    public List<Integer> getNumbers() {
+        return Collections.unmodifiableList(numbers);
+    }
 }
