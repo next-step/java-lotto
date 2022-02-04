@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.domain.Lotto;
 
 public class LottoGenerator {
 
@@ -27,12 +28,12 @@ public class LottoGenerator {
         return price < LOTTO_PRICE;
     }
 
-    public static List<List<Integer>> getTotalLottoNumbers(int quantity) {
-        List<List<Integer>> totalNumbers = new ArrayList<>();
+    public static List<Lotto> getTotalLottoNumbers(int quantity) {
+        List<Lotto> totalNumbers = new ArrayList<>();
 
         for(int i = 0; i < quantity; i++) {
-            List<Integer> lottoNumbers = getLottoNumbers();
-            totalNumbers.add(lottoNumbers);
+            Lotto lotto = new Lotto(getLottoNumbers());
+            totalNumbers.add(lotto);
         }
         return totalNumbers;
     }

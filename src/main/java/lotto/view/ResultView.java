@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.List;
+import lotto.domain.Lotto;
 import lotto.util.LottoGenerator;
 
 public class ResultView {
@@ -13,7 +14,7 @@ public class ResultView {
     }
 
     public static void printTotalLottoNumbers() {
-        List<List<Integer>> lottoNumbers = LottoGenerator.getTotalLottoNumbers(quantity);
-        lottoNumbers.forEach(System.out::println);
+        List<Lotto> lottoNumbers = LottoGenerator.getTotalLottoNumbers(quantity);
+        lottoNumbers.forEach(e -> System.out.println(e.getNumbers()));
     }
 }
