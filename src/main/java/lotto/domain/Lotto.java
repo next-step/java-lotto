@@ -10,6 +10,8 @@ import lotto.common.exception.LottoException;
 
 public class Lotto {
 
+    private static final int LOTTO_SIZE = 6;
+
     private final List<LottoNumber> lotto;
 
     public Lotto(final List<LottoNumber> lotto) {
@@ -31,7 +33,7 @@ public class Lotto {
     }
 
     private void validateNumbersSize(final List<LottoNumber> lotto) {
-        if (lotto.size() != 6) {
+        if (lotto.size() != LOTTO_SIZE) {
             throw new LottoException(LOTTO_SIZE_EXCEPTION_MESSAGE);
         }
     }

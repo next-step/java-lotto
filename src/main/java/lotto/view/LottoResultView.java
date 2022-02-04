@@ -15,10 +15,11 @@ import lotto.domain.Ranking;
 public class LottoResultView {
 
     private static final int ZERO = 0;
+    private static final int INSERT_INDEX_OF_BONUS_BALL = 5;
 
     private final StringBuilder stringBuilder = new StringBuilder();
     private final Map<Ranking, Integer> totalResult = new HashMap<>();
-    private int totalWinnerPrice = 0;
+    private int totalWinnerPrice = ZERO;
 
     public LottoResultView() {
         initializeTotalResult();
@@ -90,11 +91,11 @@ public class LottoResultView {
         totalWinnerPrice += ranking.multiplyCountAndWinnerPrice(count);
 
         if (ranking.equals(Ranking.SECOND)) {
-            stringBuilder.insert(5, ", 보너스 볼 일치");
+            stringBuilder.insert(INSERT_INDEX_OF_BONUS_BALL, ", 보너스 볼 일치");
         }
 
         System.out.println(stringBuilder);
-        stringBuilder.setLength(0);
+        stringBuilder.setLength(ZERO);
     }
 
 }
