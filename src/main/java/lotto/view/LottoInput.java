@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
@@ -14,20 +15,23 @@ public class LottoInput {
     }
 
     public static int inputPrice() {
-        return SCANNER.nextInt();
+        return Integer.parseInt(SCANNER.nextLine());
     }
 
-    public static Lotto inputWinningNumber() {
-        String input = SCANNER.next();
-        return new Lotto(Arrays.stream(input.split(","))
-            .mapToInt(Integer::new)
-            .boxed()
+    public static List<LottoNumber> inputWinningNumber() {
+        String input = SCANNER.nextLine();
+        return Arrays.stream(splitWinningNumber(input))
+            .map(Integer::parseInt)
             .map(LottoNumber::new)
-            .collect(Collectors.toList()));
+            .collect(Collectors.toList());
+    }
+
+    private static String[] splitWinningNumber(final String input) {
+        return input.replace(" ", "").split(",");
     }
 
     public static int inputBonusBall() {
-        return SCANNER.nextInt();
+        return Integer.parseInt(SCANNER.nextLine());
     }
 
 }
