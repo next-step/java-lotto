@@ -34,9 +34,7 @@ public class InputView {
 
     private static String getInput() {
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-
-        return input;
+        return sc.nextLine();
     }
 
     private static boolean isBlank(String input) {
