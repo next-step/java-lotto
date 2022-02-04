@@ -43,4 +43,9 @@ public class InputView {
         winningNumbers = Parser.parseWinningNumber(numbersString);
         return winningNumbers;
     }
+
+    public static int getBonusBall() {
+        System.out.println(BONUS_BALL_INPUT_GUIDE_MESSAGE);
+        return sc.nextInt();
+    }
 }
