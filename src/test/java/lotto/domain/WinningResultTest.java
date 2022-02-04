@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -49,11 +51,23 @@ class WinningResultTest {
         winningResult.mappingResult(ranks);
 
         //then
-        Assertions.assertThat(winningResult.getResult().get(Rank.FIRST)).isEqualTo(1);
-        Assertions.assertThat(winningResult.getResult().get(Rank.SECOND)).isEqualTo(1);
-        Assertions.assertThat(winningResult.getResult().get(Rank.THIRD)).isEqualTo(1);
-        Assertions.assertThat(winningResult.getResult().get(Rank.FOURTH)).isEqualTo(1);
-        Assertions.assertThat(winningResult.getResult().get(Rank.FIFTH)).isEqualTo(1);
-        Assertions.assertThat(winningResult.getResult().get(Rank.NONE)).isEqualTo(1);
+        assertThat(winningResult.getResult().get(Rank.FIRST)).isEqualTo(1);
+        assertThat(winningResult.getResult().get(Rank.SECOND)).isEqualTo(1);
+        assertThat(winningResult.getResult().get(Rank.THIRD)).isEqualTo(1);
+        assertThat(winningResult.getResult().get(Rank.FOURTH)).isEqualTo(1);
+        assertThat(winningResult.getResult().get(Rank.FIFTH)).isEqualTo(1);
+        assertThat(winningResult.getResult().get(Rank.NONE)).isEqualTo(1);
+    }
+
+    @Test
+    void 당첨금액_계산() {
+        List<Rank> ranks = new ArrayList<>();
+        ranks.add(Rank.FIRST);
+        ranks.add(Rank.SECOND);
+
+        WinningResult winningResult = new WinningResult();
+        winningResult.mappingResult(ranks);
+
+        assertThat(winningResult.getTotalPrize()).isEqualTo(2000000000 + 30000000);
     }
 }
