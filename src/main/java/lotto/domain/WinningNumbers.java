@@ -42,11 +42,11 @@ public class WinningNumbers {
         String[] split = winningNumbers.split(DELIMITER_COMMA);
 
         return Arrays.stream(split)
-                .collect(Collectors.toList());
+            .collect(Collectors.toList());
     }
 
     private void validateWinningNumberCount(List<String> winningNumbers) {
-        if(winningNumbers.size() != NUMBER_OF_LOTTO_BALL) {
+        if (winningNumbers.size() != NUMBER_OF_LOTTO_BALL) {
             throw new IllegalArgumentException("당첨 번호는 6개 입니다.");
         }
     }

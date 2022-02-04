@@ -10,6 +10,6 @@ public class PrintView {
 
     public static void printLottoNumber(Lottos lottos) {
         lottos.get().stream()
-                .forEach(lotto -> System.out.println(lotto.get()));
+            .forEach(lotto -> System.out.println(lotto.get()));
     }
 }

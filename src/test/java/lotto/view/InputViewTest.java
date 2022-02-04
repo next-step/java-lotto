@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 class InputViewTest {
 
     @DisplayName("구입 금액 입력을 입력받는다.")
-    @ValueSource(strings = {"1450 0", "1500", })
+    @ValueSource(strings = {"1450 0", "1500",})
     @ParameterizedTest
     void 구입_금액_입력을_입력받는다(String input) {
         // given
