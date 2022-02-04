@@ -5,17 +5,21 @@ import lotto.domain.Analyzer;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoTickets;
 import lotto.view.InputView;
+import lotto.view.ResultView;
 
 public class LottoProcessor {
 
     static InputView inputView = new InputView();
+    static ResultView resultView = new ResultView();
 
     public static void main(String[] args) {
         int totalPrice = inputView.getTotalPrice();
         LottoTickets lottoTickets = new LottoTickets(totalPrice);
 
         int lottoCounts = lottoTickets.getLottoCounts();
-        System.out.printf("%d개를 구매했습니다.%n", lottoCounts);
+
+        resultView.printNumberOfLotto(lottoCounts);
+        resultView.printLottoTickets(lottoTickets.getLottoTickets());
 
         List<Integer> winNumbers = inputView.getWinNumbers();
         int bonusNumber = inputView.getBonusNumber();
@@ -25,9 +29,9 @@ public class LottoProcessor {
         List<Integer> bonusNumbers = lottoTickets.checkBonusNumber(lottoMachine);
 
         Analyzer analyzer = new Analyzer(totalPrice);
+        analyzer.calculateTotalWinningMoney(integers, bonusNumbers);
 
-        int totalMoney = analyzer.calculateTotalWinningMoney(integers, bonusNumbers);
-        double profitPercent = analyzer.calculateProfitPercent(totalMoney);
-
+        double profitPercent = analyzer.calculateProfitPercent();
+        resultView.printAnalyzeResults(analyzer.getWinningPrices(), profitPercent);
     }
 }

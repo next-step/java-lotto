@@ -15,6 +15,7 @@ public enum WinningPrice {
     private final int winNumber;
     private int bonus = 0;
     private final int currency;
+    private int count;
 
     WinningPrice(final int winNumber, int bonus, final int currency) {
         this.winNumber = winNumber;
@@ -38,6 +39,17 @@ public enum WinningPrice {
     }
 
     public int operate(final int count) {
+        this.count = count;
         return currency * count;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("%d개 일치");
+        if (bonus == 1) {
+            sb.append(", 보너스 볼 일치");
+        }
+        sb.append("(%d원) - %d개");
+        return String.format(sb.toString(), winNumber, currency, count);
     }
 }

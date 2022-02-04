@@ -7,38 +7,42 @@ import java.util.List;
 
 public class Analyzer {
 
-    private final int price;
     private final List<Integer> WIN_KEYS = Arrays.asList(3, 4, 5, 5, 6);
     private final List<Integer> BONUS_KEYS = Arrays.asList(0, 0, 0, 1, 0);
+
+    private final List<WinningPrice> winningPrices = new ArrayList<>();
+    private int totalWinningMoney = 0;
+    private final int price;
 
     public Analyzer(final int price) {
         this.price = price;
     }
 
-    public final Double calculateProfitPercent(int winningMoney) {
-        return winningMoney / (double) this.price;
+    public Double calculateProfitPercent() {
+        return totalWinningMoney / (double) this.price;
     }
 
-    public final int calculateTotalWinningMoney(final List<Integer> correctWinNumber,
+    public void calculateTotalWinningMoney(final List<Integer> correctWinNumber,
         final List<Integer> hasBonusNumber) {
 
-        int totalMoney = 0;
         for (int i = 0; i < WIN_KEYS.size(); i++) {
             int win = WIN_KEYS.get(i);
             int bonus = BONUS_KEYS.get(i);
-            totalMoney += calculatePerStepMoney(win, bonus, correctWinNumber, hasBonusNumber);
+
+            winningPrices.add(calculatePerStepMoney(win, bonus, correctWinNumber, hasBonusNumber));
         }
-        return totalMoney;
     }
 
-    private int calculatePerStepMoney(int win, int bonus, List<Integer> winNumbers,
+    private WinningPrice calculatePerStepMoney(int win, int bonus, List<Integer> winNumbers,
         List<Integer> bonusNumbers) {
-        int occurrence = countFrequency(winNumbers, win);
+        int count = countFrequency(winNumbers, win);
         if (win == 5) {
             List<Integer> filteredBonus = filter(winNumbers, bonusNumbers, win);
-            occurrence = countFrequency(filteredBonus, bonus);
+            count = countFrequency(filteredBonus, bonus);
         }
-        return WinningPrice.of(win, bonus).operate(occurrence);
+        WinningPrice winningPrice = WinningPrice.of(win, bonus);
+        totalWinningMoney += winningPrice.operate(count);
+        return winningPrice;
     }
 
     private List<Integer> filter(List<Integer> source, List<Integer> target, int value) {
@@ -56,5 +60,13 @@ public class Analyzer {
             return Collections.frequency(data, value);
         }
         return 0;
+    }
+
+//    public List<Integer> getCorrectCounts() {
+//        return new ArrayList<>(this.correctCounts);
+//    }
+
+    public List<WinningPrice> getWinningPrices() {
+        return new ArrayList<>(winningPrices);
     }
 }
