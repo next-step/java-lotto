@@ -41,16 +41,32 @@ public class UserResult {
         if (printSecond(rankResult, rank)) {
             return;
         }
-        System.out.printf(RESULT_MESSAGE, rank.getMatchCount(), rank.getPrize().Value(), rankResult.getRankResult().get(rank));
+        System.out.printf(RESULT_MESSAGE, rankMatchCount(rank), rankPrize(rank), rankResultValue(rankResult, rank));
     }
 
     public static void printPrizeRatio(final Money totalPrize, final Money money){
-        System.out.printf(TOTAL_RATIO_MESSAGE, totalPrize.Value() / (float) money.Value());
+        System.out.printf(TOTAL_RATIO_MESSAGE, ratioValue(totalPrize, money));
+    }
+
+    private static Integer rankResultValue(RankResult rankResult, Rank rank) {
+        return rankResult.getRankResult().get(rank);
+    }
+
+    private static int rankPrize(Rank rank) {
+        return rank.getPrize().Value();
+    }
+
+    private static int rankMatchCount(Rank rank) {
+        return rank.getMatchCount();
+    }
+
+    private static float ratioValue(Money totalPrize, Money money) {
+        return totalPrize.Value() / (float) money.Value();
     }
 
     private static boolean printSecond(final RankResult rankResult, final Rank rank) {
         if(rank == rank.SECOND) {
-            System.out.printf(SECOND_RESULT_MESSAGE, rank.getMatchCount(), rank.getPrize().Value(), rankResult.getRankResult().get(rank));
+            System.out.printf(SECOND_RESULT_MESSAGE, rankMatchCount(rank), rankPrize(rank), rankResultValue(rankResult, rank));
             return true;
         }
         return false;
