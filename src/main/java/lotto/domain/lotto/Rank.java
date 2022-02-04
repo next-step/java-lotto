@@ -12,14 +12,14 @@ public enum Rank {
     NONE(0, 0);
 
     private final int matchCount;
-    private final int prize;
+    private final long prize;
 
-    Rank(int matchCount, int prize) {
+    Rank(int matchCount, long prize) {
         this.matchCount = matchCount;
         this.prize = prize;
     }
 
-    public int getPrize() {
+    public long getPrize() {
         return prize;
     }
 

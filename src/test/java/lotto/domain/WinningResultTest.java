@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Rank;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class WinningResultTest {
@@ -61,13 +60,18 @@ class WinningResultTest {
 
     @Test
     void 당첨금액_계산() {
+        //given
         List<Rank> ranks = new ArrayList<>();
         ranks.add(Rank.FIRST);
         ranks.add(Rank.SECOND);
 
+        //when
         WinningResult winningResult = new WinningResult();
         winningResult.mappingResult(ranks);
 
-        assertThat(winningResult.getTotalPrize()).isEqualTo(2000000000 + 30000000);
+        winningResult.calculateTotalPrize();
+
+        //then
+        assertThat(winningResult.getWinningCash()).isEqualTo(2000000000 + 30000000);
     }
 }

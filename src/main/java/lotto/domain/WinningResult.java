@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.lotto.Rank;
@@ -8,6 +9,7 @@ import lotto.domain.lotto.Rank;
 public class WinningResult {
 
     private final Map<Rank, Integer> result;
+    private long winningCash = 0;
 
     public WinningResult() {
         this.result = new HashMap<>();
@@ -25,5 +27,17 @@ public class WinningResult {
 
     public Map<Rank, Integer> getResult() {
         return result;
+    }
+
+    public void calculateTotalPrize() {
+        Iterator iterator = result.keySet().iterator();
+        while (iterator.hasNext()) {
+            Rank rank = (Rank) iterator.next();
+            winningCash += result.get(rank) * rank.getPrize();
+        }
+    }
+
+    public long getWinningCash() {
+        return this.winningCash;
     }
 }
