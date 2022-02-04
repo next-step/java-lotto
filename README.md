@@ -85,12 +85,12 @@
   - [x]  보너스번호 확인. - lottos.containsBonusNumber
   - [x] 맞은 개수가 몇등인지 확인. - LottoRank.getRank
 
-- [ ] 로또 결과 통계 만들기. - Statistics
-  - [ ] 몇등이 몇개인지 확인. Statistics.getNumberOfRank
-  - [ ] 총 수익률이 얼마인지. (기준 1) Statistics.getProfitRate
+- [x] 로또 결과 통계 만들기. - Statistics
+  - [x] 몇등이 몇개인지 확인. Statistics.getRankCounts
+  - [x] 총 수익률이 얼마인지. (기준 1) Statistics.getProfitRate
 
 - [ ] 출력 - PrintView
   - [X] 구매한 로또 수 출력. - PrintView.printNumberOfLotto
   - [X] 자동 생성된 로또 번호 출력. PrintView.printLottoNumber
-  - [ ] 당첨 통계 출력. - PrintView.printNumberOfRank
+  - [ ] 당첨 통계 출력. - PrintView.printRankCounts
   - [ ] 수익률 출력. - printView.printProfitRate
