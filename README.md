@@ -51,10 +51,19 @@
 ## 기능 목록
 ### InputView
 
-- [ ] 구입금액 입력
-- [ ] 당첨 번호 입력
-- [ ] 보너스볼 입력
-
+- [x] 구입금액 입력
+  - [x] 금액이 숫자가 아닐 경우, IllegalArgument Exception ("[ERROR] 숫자만 입력해주세요")
+  - [x] 금액이 1000(MINIMUM_MONEY)원보다 작을 경우, IllegalArgument Exception ("[ERROR] 1000원에 1장입니다. 1000보다 큰 값을 입력해주세요")
+- [x] 당첨 번호 입력
+  - [x] 숫자가 아닐 경우, IllegalArgument Exception ("1,2:3,4,5,6")
+  - [x] 숫자가 범위 내에 들어오지 않을경우, IllegalArgument Exception
+  - [x] 중복되는 것이 있을 경우, IllegalArgument Exception
+  - [x] 당첨 번호의 개수가 6이 아닐 경우, IllegalArgument Exception
+- [x] 보너스볼 입력
+  - [x] 숫자가 아닐 경우, IllegalArgument Exception
+  - [x] 숫자가 범위 내에 들어오지 않을경우, IllegalArgument Exception
+  - [x] 지난 당첨 번호와 중복되는 것이 있을 경우, IllegalArgument Exception
+  
 ### ResultView
 
 - [ ] 로또 개수 출력 안내
