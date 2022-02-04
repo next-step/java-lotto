@@ -13,6 +13,10 @@ public class LottoCountCalculator {
     private LottoCountCalculator() {
     }
 
+    public static LottoCountCalculator getInstance() {
+        return INSTANCE;
+    }
+
     public List<Ranking> countLotteryNumbers(List<LottoNumbers> userNumbers,
         LottoNumbers lottoNumbers, LottoNumber bonusNum) {
         List<Ranking> rankings = new ArrayList<>();
@@ -40,9 +44,5 @@ public class LottoCountCalculator {
             bonusSuccessCount++;
         }
         return bonusSuccessCount;
-    }
-
-    public static LottoCountCalculator getInstance() {
-        return INSTANCE;
     }
 }

@@ -19,20 +19,22 @@ public class Application {
 
         LottoOutput.printBuySum(buySum);
 
-        List<LottoNumbers> userLottoNumbers = LottoAutoGenerator.getInstance().generateLottos(buySum);
+        List<LottoNumbers> userLottoNumbers = LottoAutoGenerator.getInstance()
+            .generateLottos(buySum);
 
         LottoOutput.printLottoNumber(userLottoNumbers);
 
         LottoNumbers lastWeekLottoNumber = LottoInput.inputWinningNumber();
         LottoNumber bonusNumber = LottoInput.inputBonusBall();
 
-        List<Ranking> rankings = LottoCountCalculator.getInstance().countLotteryNumbers(userLottoNumbers, lastWeekLottoNumber, bonusNumber);
+        List<Ranking> rankings = LottoCountCalculator.getInstance()
+            .countLotteryNumbers(userLottoNumbers, lastWeekLottoNumber, bonusNumber);
 
         LottoOutput.printRanking(rankings);
         LottoOutput.printRewardRate(rankings, buyPrice);
     }
 
-    private static int countBuySum(int buyPrice){
+    private static int countBuySum(int buyPrice) {
         return buyPrice / LOTTO_PRICE;
     }
 }

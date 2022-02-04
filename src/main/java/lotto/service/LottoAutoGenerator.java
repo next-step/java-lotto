@@ -23,6 +23,10 @@ public class LottoAutoGenerator {
             .collect(Collectors.toList());
     }
 
+    public static LottoAutoGenerator getInstance() {
+        return INSTANCE;
+    }
+
     public List<LottoNumbers> generateLottos(int size) {
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < size; i++) {
@@ -35,9 +39,5 @@ public class LottoAutoGenerator {
         Collections.shuffle(allNum);
         List<Integer> lottoNums = allNum.subList(LOTTO_SIZE_START, LOTTO_SIZE_END);
         return new LottoNumbers(lottoNums);
-    }
-
-    public static LottoAutoGenerator getInstance() {
-        return INSTANCE;
     }
 }

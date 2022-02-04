@@ -31,7 +31,8 @@ public class Numbers {
         Matcher m = PATTERN_REGX_CUSTOM.matcher(expression);
         if (m.find()) {
             String customDelimiter = m.group(POSITION_CUSTOM_DELIMITER);
-            expression = String.join(COMMA, m.group(POSITION_OTHER_EXPRESSION).split(customDelimiter));
+            expression = String.join(COMMA,
+                m.group(POSITION_OTHER_EXPRESSION).split(customDelimiter));
         }
 
         return Arrays.stream(expression.split(REGX_DELIMITER)).map(Number::new)
