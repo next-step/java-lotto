@@ -5,12 +5,13 @@ import lotto.domain.Lotto;
 import lotto.domain.WinningPrice;
 
 public class ResultView {
+
     public void printNumberOfLotto(int lottoCounts) {
         System.out.printf("%d개를 구매했습니다.%n", lottoCounts);
     }
 
     public void printLottoTickets(List<Lotto> lottoTickets) {
-        for (Lotto lotto: lottoTickets) {
+        for (Lotto lotto : lottoTickets) {
             System.out.println(lotto);
         }
     }
@@ -23,7 +24,7 @@ public class ResultView {
     }
 
     public void printWinningMoney(List<WinningPrice> winningPrices) {
-        for (WinningPrice price: winningPrices) {
+        for (WinningPrice price : winningPrices) {
             System.out.println(price);
         }
     }

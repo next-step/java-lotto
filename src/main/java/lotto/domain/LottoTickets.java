@@ -7,15 +7,16 @@ public class LottoTickets {
 
     private static final int LOTTO_PRICE = 1000;
     private final int lottoCounts;
-    private final List<Lotto>lottoTickets;
+    private final List<Lotto> lottoTickets;
 
     public LottoTickets(final int price) {
         this.lottoCounts = price / LOTTO_PRICE;
         this.lottoTickets = makeLottoTickets(lottoCounts);
     }
-    public LottoTickets(final int price,List<Lotto>lottoTickets){
-        this.lottoCounts=price / LOTTO_PRICE;
-        this.lottoTickets=lottoTickets;
+
+    public LottoTickets(final int price, List<Lotto> lottoTickets) {
+        this.lottoCounts = price / LOTTO_PRICE;
+        this.lottoTickets = lottoTickets;
     }
 
     private List<Lotto> makeLottoTickets(final int lottoCount) {
@@ -30,26 +31,25 @@ public class LottoTickets {
         return this.lottoCounts;
     }
 
-    public List<Lotto> getLottoTickets(){
+    public List<Lotto> getLottoTickets() {
         return lottoTickets;
     }
 
-    public List<Integer> countCorrectWinNumber(LottoMachine lottoMachine){
-        List<Integer>correctNumbers=new ArrayList<>();
-        for (Lotto lotto:lottoTickets) {
+    public List<Integer> countCorrectWinNumber(LottoMachine lottoMachine) {
+        List<Integer> correctNumbers = new ArrayList<>();
+        for (Lotto lotto : lottoTickets) {
             correctNumbers.add(lotto.compareLottoAndWinnerNumbers(lottoMachine));
         }
         return correctNumbers;
     }
 
-    public List<Integer> checkBonusNumber(final LottoMachine lottoMachine){
-        final List<Integer>checkBonusNumber=new ArrayList<>();
-        for (Lotto lotto: lottoTickets) {
+    public List<Integer> checkBonusNumber(final LottoMachine lottoMachine) {
+        final List<Integer> checkBonusNumber = new ArrayList<>();
+        for (Lotto lotto : lottoTickets) {
             checkBonusNumber.add(lotto.compareLottoAndBonusNumbers(lottoMachine));
         }
         return checkBonusNumber;
     }
-
 
 
 }

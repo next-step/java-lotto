@@ -22,7 +22,7 @@ public class Number {
         }
     }
 
-    public List<String>getNumberInput(){
+    public List<String> getNumberInput() {
         return new ArrayList<>(userInput);
     }
 }

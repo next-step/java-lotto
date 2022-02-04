@@ -13,8 +13,8 @@ public enum WinningPrice {
     OTHERS(0, 0, 0);
 
     private final int winNumber;
-    private int bonus = 0;
     private final int currency;
+    private int bonus = 0;
     private int count;
 
     WinningPrice(final int winNumber, int bonus, final int currency) {

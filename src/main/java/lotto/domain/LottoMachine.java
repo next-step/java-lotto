@@ -12,11 +12,11 @@ public class LottoMachine {
         this.bonusNumber = bonusNumber;
     }
 
-    public boolean isContain(int number){
+    public boolean isContain(int number) {
         return winNumbers.contains(number);
     }
 
-    public boolean isEqualBonusNumber(final int number){
+    public boolean isEqualBonusNumber(final int number) {
         return bonusNumber.equals(number);
     }
 

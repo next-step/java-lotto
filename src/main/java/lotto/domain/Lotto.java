@@ -37,7 +37,7 @@ public class Lotto {
             .filter(lottoMachine::isContain).count()).intValue();
     }
 
-    public int compareLottoAndBonusNumbers(final LottoMachine lottoMachine){
+    public int compareLottoAndBonusNumbers(final LottoMachine lottoMachine) {
         return Long.valueOf(lottoNumbers.stream()
             .filter(lottoMachine::isEqualBonusNumber).count()).intValue();
     }
