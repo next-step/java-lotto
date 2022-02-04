@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,9 +41,9 @@ public class LottoOutput {
     }
 
     private static Map<Ranking, Integer> countRanking(List<Ranking> rankings) {
-        Map<Ranking, Integer> successSum = new HashMap<>();
+        Map<Ranking, Integer> successSum = new EnumMap<>(Ranking.class);
         for (Ranking ranking : rankings) {
-            successSum.put(ranking, successSum.getOrDefault(successSum, 0) + 1);
+            successSum.put(ranking, successSum.getOrDefault(ranking, 0) + 1);
         }
         return successSum;
     }
