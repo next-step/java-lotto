@@ -29,4 +29,11 @@ public class WinningNumbers {
         }
     }
 
+    public boolean find(int number) {
+        return winningNumbers.contains(number);
+    }
+
+    public boolean checkBonusBall(int number) {
+        return number == bonusBall;
+    }
 }

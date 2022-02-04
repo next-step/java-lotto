@@ -2,9 +2,10 @@ package lotto.domain;
 
 import static lotto.util.Constant.*;
 
+import java.util.Iterator;
 import java.util.List;
 
-public class LottoNumbers {
+public class LottoNumbers implements Iterable<Integer> {
 
     final List<Integer> lottoNumbers;
 
@@ -30,5 +31,8 @@ public class LottoNumbers {
         }
     }
 
-
+    @Override
+    public Iterator<Integer> iterator() {
+        return lottoNumbers.iterator();
+    }
 }

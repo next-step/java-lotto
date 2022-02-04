@@ -37,4 +37,18 @@ public class Lotto {
     public int getNumOfTickets() {
         return lottoTickets.size();
     }
+
+    public LottoRank compareWithWinning(LottoNumbers lottoNumbers, WinningNumbers winningNumbers) {
+        int count = 0;
+        boolean haveBonus = false;
+        for (Integer number : lottoNumbers) {
+            if (winningNumbers.find(number)) {
+                count++;
+            }
+            if (!haveBonus && winningNumbers.checkBonusBall(number)) {
+                haveBonus = true;
+            }
+        }
+        return LottoRank.valueOf(count, haveBonus);
+    }
 }

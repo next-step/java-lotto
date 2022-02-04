@@ -3,6 +3,7 @@ package lotto.domain;
 import static lotto.util.Constant.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.List;
@@ -37,5 +38,25 @@ class LottoTest {
     void 구매단위는_1000원_이다() {
         int given = lotto.buyLottoTickets(10000);
         assertThat(given).isEqualTo(10);
+    }
+
+    @Test
+    void 로또넘버중_당첨넘버와_일치하는_수에_따라_당첨결과가_나온다_1등() {
+        final LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6),
+            40);
+
+        LottoRank given = lotto.compareWithWinning(lottoNumbers, winningNumbers);
+        assertThat(given).isEqualTo(LottoRank.FIRST);
+    }
+
+    @Test
+    void 로또넘버중_당첨넘버와_일치하는_수에_따라_당첨결과가_나온다_2등() {
+        final LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 7),
+            6);
+
+        LottoRank given = lotto.compareWithWinning(lottoNumbers, winningNumbers);
+        assertThat(given).isEqualTo(LottoRank.SECOND);
     }
 }
