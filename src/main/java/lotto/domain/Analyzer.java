@@ -11,8 +11,8 @@ public class Analyzer {
     private final List<Integer> BONUS_KEYS = Arrays.asList(0, 0, 0, 1, 0);
 
     private final List<WinningPrice> winningPrices = new ArrayList<>();
-    private int totalWinningMoney = 0;
     private final int price;
+    private int totalWinningMoney = 0;
 
     public Analyzer(final int price) {
         this.price = price;
