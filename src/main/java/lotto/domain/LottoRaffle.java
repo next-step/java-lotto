@@ -25,34 +25,20 @@ public class LottoRaffle {
             return cum;
         });
 
-        if (count == 5 && lotto.getLotto().contains(winningLotto.getBonusNumber())) {
-            this.matchBonusNumber++;
-            return;
+        boolean isBonusNumber = lotto.getLotto().contains(winningLotto.getBonusNumber());
+        if(count != 5) {
+            isBonusNumber = false;
         }
-
-        if (count == 3) {
-            this.match3Number++;
-            return;
-        }
-
-        if (count == 4) {
-            this.match4Number++;
-            return;
-        }
-
-        if (count == 5) {
-            this.match5Number++;
-            return;
-        }
-
-        if (count == 6) {
-            this.match6Number++;
-            return;
-        }
+        LottoResult.upCount(count, isBonusNumber);
     }
 
     public List<Integer> getResults() {
-        return Arrays.asList(match3Number, match4Number, match5Number, matchBonusNumber,
-            match6Number);
+        return Arrays.asList(
+            LottoResult.MATCH3.getCount(),
+            LottoResult.MATCH4.getCount(),
+            LottoResult.MATCH5.getCount(),
+            LottoResult.MATCHBONUS.getCount(),
+            LottoResult.MATCH6.getCount()
+        );
     }
 }
