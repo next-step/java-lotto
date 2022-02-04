@@ -38,6 +38,10 @@ public class LottoNumbers {
         return numbers.size();
     }
 
+    public boolean contains(LottoNumber lottoNumber){
+        return numbers.contains(lottoNumber);
+    }
+
     public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(numbers);
     }

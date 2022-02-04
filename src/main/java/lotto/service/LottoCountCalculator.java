@@ -1,9 +1,10 @@
-package lotto;
+package lotto.service;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import lotto.domain.LottoCountResult;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 
 public class LottoCountCalculator {
 
@@ -12,20 +13,20 @@ public class LottoCountCalculator {
 
     private LottoCountCalculator() {}
 
-    public LottoCountResult countLotteryNumber(final List<Integer> lotteryNumbers, List<Integer> userNumbers, int bonusNum) {
+    public LottoCountResult countLotteryNumber(LottoNumbers lotteryNumbers, LottoNumbers userNumbers, LottoNumber bonusNum) {
         int normalSuccessCount = countNormalSuccessNumber(lotteryNumbers, userNumbers);
         int bonusSuccessCount = countBonusNumber(userNumbers, bonusNum);
 
         return new LottoCountResult(normalSuccessCount, bonusSuccessCount);
     }
 
-    private int countNormalSuccessNumber(final List<Integer> lotteryNumbers, List<Integer> userNumbers){
-        Set<Integer> lottoDuplicate = new HashSet<>(lotteryNumbers);
-        lottoDuplicate.addAll(userNumbers);
+    private int countNormalSuccessNumber(LottoNumbers lotteryNumbers, LottoNumbers userNumbers){
+        Set<LottoNumber> lottoDuplicate = new HashSet<>(lotteryNumbers.getNumbers());
+        lottoDuplicate.addAll(userNumbers.getNumbers());
         return STANDARD_NUMBER - lottoDuplicate.size();
     }
 
-    private int countBonusNumber(List<Integer> userNumbers, int bonusNum){
+    private int countBonusNumber(LottoNumbers userNumbers, LottoNumber bonusNum){
         int bonusSuccessCount = 0;
         if(userNumbers.contains(bonusNum)){
             bonusSuccessCount++;

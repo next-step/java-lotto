@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
+import lotto.service.LottoAutoGenerator;
 import org.junit.jupiter.api.Test;
 
 class LottoAutoGeneratorTest {
