@@ -31,5 +31,8 @@ public class LottoApplication {
 
          Statistics statistics = new Statistics(lottoRanks);
          RankCounts rankCounts = statistics.getRankCounts();
+
+         PrintView.printRankCounts(rankCounts);
+         PrintView.printProfitRate(statistics.getProfitRate());
     }
 }
