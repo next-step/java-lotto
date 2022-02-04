@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 public class RankCount {
 
+    private static final int INITIAL_VALUE = 0;
     private final Lottos lottos;
     private final Winning winning;
 
@@ -15,7 +16,7 @@ public class RankCount {
     public HashMap<Rank, Integer> rankCount(){
         HashMap<Rank, Integer> result = new HashMap<>();
         for(Rank rank : Rank.values()){
-            result.put(rank, 0);
+            result.put(rank, INITIAL_VALUE);
         }
 
         for(Lotto lotto: lottos.lottos()){

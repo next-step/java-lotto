@@ -3,10 +3,11 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private int value;
+
     private final static int MIN_RANGE_NUMBER = 1;
     private final static int MAX_RANGE_NUMBER = 45;
     private final static String ERROR_MESSAGE = "로또 숫자는 1~45 사이이어야 합니다.";
+    private int value;
 
     public LottoNumber(int value) {
         validateRange(value);

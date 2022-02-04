@@ -14,6 +14,7 @@ public class UserResult {
     private final static String DOT_LINE = "---------";
     private final static String RESULT_MESSAGE = "%s개 일치 (%d원)- %d개\n";
     private final static String SECOND_RESULT_MESSAGE = "%s개 일치, 보너스 볼 일치 (%d원)- %d개\n";
+    private final static String TOTAL_RATIO_MESSAGE = "총 수익률은 %.2f입니다.";
     private UserResult(){
 
     }
@@ -42,7 +43,7 @@ public class UserResult {
     }
 
     public static void printPrizeRatio(Money totalPrize, Money money){
-        System.out.printf("총 수익률은 %.2f입니다.", totalPrize.getValue()/(float)money.getValue());
+        System.out.printf(TOTAL_RATIO_MESSAGE, totalPrize.getValue() / (float) money.getValue());
     }
 
     private static boolean printSecond(RankResult rankResult, Rank rank) {

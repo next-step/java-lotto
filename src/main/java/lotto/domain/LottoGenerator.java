@@ -9,7 +9,6 @@ public class LottoGenerator {
 
     private static final int MAX_NUMBER = 45;
     private static final int MIN_NUMBER = 1;
-
     private static final List<LottoNumber> lottoNumber;
 
     static {

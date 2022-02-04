@@ -1,11 +1,14 @@
 package lotto.controller;
 
+
+import lotto.domain.Lotto;
 import lotto.domain.LottoBundle;
 import lotto.domain.LottoCalculation;
-import lotto.domain.LottoFullNumber;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.domain.RankCount;
+import lotto.domain.RankResult;
 import lotto.domain.Winning;
 import lotto.view.UserConsole;
 import lotto.view.UserResult;
@@ -19,12 +22,15 @@ public class Controller {
         int count = lottoCalculation.lottoCalculation();
 
         Lottos lottoBundle = LottoBundle.lottoBundle(count);
-        UserResult.countMessage(lottoBundle);
+        UserResult.printCountMessage(lottoBundle);
 
-        LottoFullNumber winningLottoNumber = UserConsole.winningLottoNumber();
+        Lotto winningLottoNumber = new Lotto(UserConsole.winningLottoNumber());
         LottoNumber bonusLottoNumber = UserConsole.bonusLottoNumber();
-        Winning winning = new Winning(winningLottoNumber, bonusLottoNumber);
 
+        RankCount rankCount = new RankCount(lottoBundle,
+            new Winning(winningLottoNumber, bonusLottoNumber));
 
+        UserResult.printRank(new RankResult(rankCount));
+        UserResult.printPrizeRatio(new RankResult(rankCount).getTotalPrize(), money);
     }
 }
