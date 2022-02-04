@@ -29,10 +29,9 @@ public class LottoController {
 
         WinningResult winningResult = new WinningResult();
         winningResult.mappingResult(getRanksFrom(lottoManager, winningNumber));
+        winningResult.calculateYield(ticket.getBuyCash());
 
         OutputView.printWinningResult(winningResult);
-
-        //수익률
     }
 
     public Ticket buyTicket() {
