@@ -32,17 +32,17 @@ public class LottoFullNumber {
     public List<Integer> getLottoFullNumber() {
         return lottoFullNumber
             .stream()
-            .map(LottoNumber::getValue)
+            .map(LottoNumber::value)
             .collect(Collectors.toList());
     }
 
     public long countMatch(LottoFullNumber lottoFullNumber){
         return this.lottoFullNumber.stream()
-            .filter(lottoFullNumber::get)
+            .filter(lottoFullNumber::contains)
             .count();
     }
 
-    public boolean get(LottoNumber lottoNumber){
+    public boolean contains(LottoNumber lottoNumber) {
         return this.lottoFullNumber.contains(lottoNumber);
     }
 

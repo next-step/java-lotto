@@ -12,18 +12,17 @@ public class Winning {
         validationWinningNumber();
     }
 
-
-    private void validationWinningNumber() {
-        if (winningLottoNumber.getLottoNumber().contains(bonusLottoNumber.getValue())) {
-            throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
-        }
-    }
-
-    public long winningLottoNumber(Lotto lotto){
+    public long winningLottoNumber(Lotto lotto) {
         return winningLottoNumber.countMatch(lotto);
     }
-    public boolean bonusLottoNumber(Lotto lotto){
+
+    public boolean bonusLottoNumber(Lotto lotto) {
         return lotto.contains(bonusLottoNumber);
     }
 
+    private void validationWinningNumber() {
+        if (winningLottoNumber.getLottoNumber().contains(bonusLottoNumber.value())) {
+            throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
+        }
+    }
 }

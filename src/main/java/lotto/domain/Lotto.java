@@ -3,7 +3,9 @@ package lotto.domain;
 import java.util.List;
 
 public class Lotto {
+
     private final LottoFullNumber lottoNumber;
+
     public Lotto(LottoFullNumber lottoNumber){
         this.lottoNumber = lottoNumber;
     }
@@ -17,6 +19,6 @@ public class Lotto {
     }
 
     public boolean contains(LottoNumber lottoNumber){
-        return this.lottoNumber.getLottoFullNumber().contains(lottoNumber.getValue());
+        return this.lottoNumber.getLottoFullNumber().contains(lottoNumber.value());
     }
 }

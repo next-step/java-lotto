@@ -23,10 +23,13 @@ public enum Rank {
     }
 
     public static Rank countMatch(Winning winning, Lotto lotto){
-        int lottoCount = (int)winning.winningLottoNumber(lotto);
+        int lottoCount = (int) winning.winningLottoNumber(lotto);
         boolean bonusBallMatch = winning.bonusLottoNumber(lotto);
-        if(THIRD.match(lottoCount) && !bonusBallMatch) return THIRD;
-        return Arrays.stream(Rank.values()).filter(rank -> rank.match(lottoCount)).findFirst().orElse(NOTHING);
+        if (THIRD.match(lottoCount) && !bonusBallMatch) {
+            return THIRD;
+        }
+        return Arrays.stream(Rank.values()).filter(rank -> rank.match(lottoCount)).findFirst()
+            .orElse(NOTHING);
     }
 
     public boolean match(int count){

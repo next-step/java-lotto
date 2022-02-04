@@ -32,10 +32,7 @@ public class UserConsole {
         System.out.println(SECOND_MESSAGE);
         String input = scanner.nextLine();
         List<LottoNumber> winningLottoNumber =
-            Arrays.stream(
-                    input
-                        .replace(SPACE_DELIMITER, BLANK_DELIMITER)
-                        .split(COMMA))
+            Arrays.stream(input.replace(SPACE_DELIMITER, BLANK_DELIMITER).split(COMMA))
                 .mapToInt(Integer::new)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());

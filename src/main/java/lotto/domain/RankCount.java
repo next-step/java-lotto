@@ -5,6 +5,7 @@ import java.util.HashMap;
 public class RankCount {
 
     private static final int INITIAL_VALUE = 0;
+    private static final int INCREMENT = 1;
     private final Lottos lottos;
     private final Winning winning;
 
@@ -21,7 +22,7 @@ public class RankCount {
 
         for(Lotto lotto: lottos.lottos()){
             Rank rank = Rank.countMatch(winning, lotto);
-            result.put(rank, result.get(rank)+1);
+            result.put(rank, result.get(rank) + INCREMENT);
         }
         return result;
     }

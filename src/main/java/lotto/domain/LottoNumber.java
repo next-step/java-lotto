@@ -14,13 +14,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.value = value;
     }
 
-    private void validateRange(int value) {
-        if (value < MIN_RANGE_NUMBER || value > MAX_RANGE_NUMBER) {
-            throw new IllegalArgumentException(ERROR_MESSAGE);
-        }
-    }
-
-    public int getValue() {
+    public int value() {
         return value;
     }
 
@@ -39,6 +33,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int compareTo(LottoNumber o) {
-        return this.value-o.value;
+        return this.value - o.value;
+    }
+
+    private void validateRange(int value) {
+        if (value < MIN_RANGE_NUMBER || value > MAX_RANGE_NUMBER) {
+            throw new IllegalArgumentException(ERROR_MESSAGE);
+        }
     }
 }
