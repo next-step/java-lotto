@@ -24,10 +24,10 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ## 기능 목록
-- [ ] 값을 사용자로부터 입력받을 수 있다. - LottoInput
-  - [ ] 구입금액
-  - [ ] 당첨번호
-  - [ ] 보너스볼
+- [x] 값을 사용자로부터 입력받을 수 있다. - LottoInput
+  - [x] 구입금액
+  - [x] 당첨번호
+  - [x] 보너스볼
 - [ ] 사용자에게 출력할 수 있다. - LottoInputView(입력 출력용), LottoResultView(결과 출력용)
   - [ ] 구입금액
   - [ ] 생성된 로또 번호
@@ -35,6 +35,6 @@
   - [ ] 보너스볼
   - [ ] 당첨통계
   - [ ] 총수익률
-- [ ] 로또번호를 랜덤하게 생성할 수 있다. - LottoAutoGenerator
-- [ ] 당첨 통계를 계산할 수 있다. - LottoCalculator
-- [ ] 수익률을 계산할 수 있다. - LottoCalculator
+- [x] 로또번호를 랜덤하게 생성할 수 있다. - LottoAutoGenerator
+- [x] 당첨 통계를 계산할 수 있다. - Ranking
+- [x] 수익률을 계산할 수 있다. - Ranking
