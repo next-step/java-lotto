@@ -2,7 +2,6 @@ package lotto.model;
 
 import java.util.Collections;
 import java.util.List;
-import lotto.controller.LottoRules;
 
 public class WinningNumberValidator {
 

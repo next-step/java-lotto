@@ -3,7 +3,6 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import lotto.controller.LottoRules;
 
 public class User {
 

@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.List;
-import lotto.controller.LottoRules;
 
 public class WinningNumber {
 
