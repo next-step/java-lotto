@@ -19,7 +19,7 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public int getMathCount() {
+    public int getMatchCount() {
         return this.matchCount;
     }
 
