@@ -7,7 +7,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 
-class PrizeRatioTest {
+class RatioCalculatorTest {
 
     @Test
     void calculateLottoRatio() {
@@ -17,6 +17,6 @@ class PrizeRatioTest {
         matchCount.put(Rank.FIFTH, 2);
 
         //when,then
-        assertThat(new PrizeRatio().calculateLottoRatio(purchasePrice, matchCount)).isEqualTo("0.10");
+        assertThat(RatioCalculator.calculateRatio(purchasePrice, matchCount)).isEqualTo("0.10");
     }
 }

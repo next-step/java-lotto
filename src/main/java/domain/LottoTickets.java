@@ -17,4 +17,10 @@ public class LottoTickets {
         lottoTickets.add(lotto);
     }
 
+    public void readyLottoTicket(int lottoCount) {
+        for (int i = 0; i < lottoCount; i++) {
+            addLottoTicket(new Lotto());
+        }
+    }
+
 }
