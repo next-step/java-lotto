@@ -24,12 +24,4 @@ class LottoNumbersTest {
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("복권에 중복된 숫자가 존재합니다.");
     }
-
-    @Test
-    void 복권의_숫자는_1부터_45사이의_숫자여야_한다() {
-        List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 47));
-        assertThatThrownBy(() -> new LottoNumbers(numbers))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("복권의 숫자 범위가 유효하지 않습니다.");
-    }
 }

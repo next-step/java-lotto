@@ -1,20 +1,22 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.LottoAutoGenerator;
 
 public class LottoNumbers {
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
     public LottoNumbers(final List<Integer> numbers){
         validateNumbersSize(numbers);
         validateDuplicateNumber(numbers);
-        validateNumberRange(numbers);
-        this.numbers = new ArrayList<>(numbers);
+
+        this.numbers = numbers.stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
     }
 
     public LottoNumbers() {
@@ -34,13 +36,7 @@ public class LottoNumbers {
         }
     }
 
-    private void validateNumberRange(final List<Integer> numbers) {
-        numbers.stream().filter(number -> number < 1 || number > 45)
-            .findAny()
-            .ifPresent(num -> {throw new IllegalArgumentException("복권의 숫자 범위가 유효하지 않습니다.");});
-    }
-
-    public List<Integer> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(numbers);
     }
 }
