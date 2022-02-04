@@ -1,22 +1,21 @@
 package lotto.domain.lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Tickets {
 
-    private final List<Ticket> ticketList;
+    private final List<Ticket> tickets;
 
-    public Tickets() {
-        ticketList = new ArrayList<>();
+    public Tickets(final List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 
     public List<Ticket> get() {
-        return ticketList;
+        return tickets;
     }
 
-    public void addTicket(final Ticket ticket) {
-        ticketList.add(ticket);
+    public int count() {
+        return tickets.size();
     }
 
 }

@@ -6,7 +6,7 @@ public enum Rank {
     NONE(0, 0),
     FIFTH(5_000, 3),
     FOURTH(50_000, 4),
-    THIRD(1_50_000, 5),
+    THIRD(150_000, 5),
     SECOND(30_000_000, 5),
     FIRST(2_000_000_000, 6);
 

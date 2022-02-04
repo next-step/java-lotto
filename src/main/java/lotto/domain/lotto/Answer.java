@@ -20,15 +20,15 @@ public class Answer {
     }
 
     public Map<Rank, Integer> compare(final Tickets tickets) {
-        Map<Rank, Integer> resultMap = new LinkedHashMap<>();
+        Map<Rank, Integer> prizeMap = new LinkedHashMap<>();
 
         for (Ticket ticket : tickets.get()) {
             int matches = ticket.matches(answerNumbers.get());
-            Rank rank = Rank.getRank(matches, ticket.checkBonus(bonus));
-            resultMap.put(rank, resultMap.getOrDefault(rank, 0) + 1);
+            Rank rank = Rank.getRank(matches, ticket.hasBonus(bonus));
+            prizeMap.put(rank, prizeMap.getOrDefault(rank, 0) + 1);
         }
 
-        return resultMap;
+        return prizeMap;
     }
 
     private void validateNumbers(final Numbers comparisonNumbers) {

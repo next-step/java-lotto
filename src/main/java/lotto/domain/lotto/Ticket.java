@@ -15,13 +15,10 @@ public class Ticket {
     }
 
     public int matches(final List<Integer> comparison) {
-        return (int) lotto.get().stream()
-            .filter(comparison::contains)
-            .count();
+        return lotto.countMatches(comparison);
     }
 
-    public boolean checkBonus(final int bonus) {
-        return lotto.get().stream()
-            .anyMatch(number -> number == bonus);
+    public boolean hasBonus(final int bonus) {
+        return lotto.hasBonus(bonus);
     }
 }

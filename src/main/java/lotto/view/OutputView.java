@@ -10,7 +10,6 @@ import lotto.domain.lotto.Rank;
 public class OutputView {
 
     private static final String SPLITTER = ", ";
-
     private static final String MESSAGE_BOUGHT_TICKET = "개를 구매했습니다.";
     private static final String MESSAGE_TICKET_START = "[";
     private static final String MESSAGE_TICKET_END = "]";
@@ -39,32 +38,32 @@ public class OutputView {
         System.out.println(MESSAGE_TICKET_END);
     }
 
-    public static void printResult(final BigDecimal calculateRatio) {
-        System.out.println(MESSAGE_RESULT_START + calculateRatio + MESSAGE_RESULT_END);
-    }
-
-    public static void printStatistics(final Map<Rank, Integer> matchForEachTickets) {
+    public static void printStatistics(final Map<Rank, Integer> prizeMap) {
         System.out.println(MESSAGE_STATISTICS_TITLE);
         System.out.println(MESSAGE_STATISTICS_DIVIDER);
 
         Arrays.stream(Rank.values())
-            .forEach(rank -> printRank(rank, matchForEachTickets));
+            .forEach(rank -> printRank(rank, prizeMap));
     }
 
-    private static void printRank(final Rank rank, final Map<Rank, Integer> matchForEachTickets) {
+    public static void printResult(final BigDecimal calculateRatio) {
+        System.out.println(MESSAGE_RESULT_START + calculateRatio + MESSAGE_RESULT_END);
+    }
+
+    private static void printRank(final Rank rank, final Map<Rank, Integer> prizeMap) {
         if (rank == Rank.NONE) {
             return;
         }
 
         if (rank == Rank.SECOND) {
-            printBonusRank(rank, matchForEachTickets);
+            printBonusRank(rank, prizeMap);
             return;
         }
 
-        System.out.println(rank.getMatches() + MESSAGE_RANK_START + rank.getPrize() + MESSAGE_RANK_MIDDLE + matchForEachTickets.getOrDefault(rank, 0) + MESSAGE_RANK_BONUS_END);
+        System.out.println(rank.getMatches() + MESSAGE_RANK_START + rank.getPrize() + MESSAGE_RANK_MIDDLE + prizeMap.getOrDefault(rank, 0) + MESSAGE_RANK_BONUS_END);
     }
 
-    private static void printBonusRank(final Rank rank, final Map<Rank, Integer> matchForEachTickets) {
-        System.out.println(rank.getMatches() + MESSAGE_RANK_BONUS_START + rank.getPrize() + MESSAGE_RANK_MIDDLE + matchForEachTickets.getOrDefault(rank, 0) + MESSAGE_RANK_BONUS_END);
+    private static void printBonusRank(final Rank rank, final Map<Rank, Integer> prizeMap) {
+        System.out.println(rank.getMatches() + MESSAGE_RANK_BONUS_START + rank.getPrize() + MESSAGE_RANK_MIDDLE + prizeMap.getOrDefault(rank, 0) + MESSAGE_RANK_BONUS_END);
     }
 }

@@ -7,21 +7,21 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.lotto.Numbers;
 
-public class AutoGenerator implements LottoGenerator {
+public class LottoAutoGenerator implements LottoGenerator {
 
-    private List<Integer> numberPool;
+    private List<Integer> numbers;
 
-    public AutoGenerator() {
+    public LottoAutoGenerator() {
         generate();
         shuffle();
     }
 
     private void shuffle() {
-        Collections.shuffle(numberPool);
+        Collections.shuffle(numbers);
     }
 
     private void generate() {
-        numberPool = IntStream.rangeClosed(START_NUMBER, END_NUMBER)
+        numbers = IntStream.rangeClosed(START_NUMBER, END_NUMBER)
             .boxed()
             .collect(Collectors.toList());
     }
@@ -30,7 +30,7 @@ public class AutoGenerator implements LottoGenerator {
     public Numbers generateNumbers() {
         List<Integer> numbers = new ArrayList<>();
         for (int i = 0; i < LOTTO_NUMBERS; i++) {
-            numbers.add(numberPool.get(i));
+            numbers.add(this.numbers.get(i));
         }
 
         return new Numbers(

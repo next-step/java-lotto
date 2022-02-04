@@ -14,15 +14,15 @@ public class PrizeRatio {
         this.totalPrize = BigDecimal.ZERO;
     }
 
-    public BigDecimal calculateRatio(final int purchased, final Map<Rank, Integer> matches) {
-        calculatePrize(matches);
+    public BigDecimal calculateRatio(final int purchased, final Map<Rank, Integer> prizeMap) {
+        calculatePrize(prizeMap);
         return totalPrize.divide(new BigDecimal(purchased), ROUND_SCALE, RoundingMode.DOWN);
     }
 
-    private void calculatePrize(final Map<Rank, Integer> matches) {
+    private void calculatePrize(final Map<Rank, Integer> prizeMap) {
         for (Rank rank: Rank.values()) {
             int prize = rank.getPrize();
-            int count = matches.getOrDefault(rank, 0);
+            int count = prizeMap.getOrDefault(rank, 0);
             totalPrize = totalPrize.add(new BigDecimal(prize * count));
         }
     }
