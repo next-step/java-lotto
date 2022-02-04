@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
+
     private static final int LOTTO_PRICE = 1000;
 
     final List<Lotto> lottoLists;
@@ -27,7 +28,7 @@ public class Lottos {
         return lottoCount;
     }
 
-    private List<Lotto> generatorLottos () {
+    private List<Lotto> generatorLottos() {
         List<Lotto> lottoLists = new ArrayList<>();
 
         for (int i = 0; i < lottoCount; i++) {
@@ -38,7 +39,7 @@ public class Lottos {
     }
 
     private void validateLottoPrice(int totalPrice) {
-        if(totalPrice % LOTTO_PRICE != 0) {
+        if (totalPrice % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(ERROR_WRONG_LOTTO_PRICE);
         }
     }

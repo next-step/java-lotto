@@ -2,19 +2,25 @@ package lotto.view;
 
 import java.util.List;
 import lotto.domain.Lotto;
-import lotto.util.Statistics;
+import lotto.domain.Statistics;
 
 public class ResultView {
+
+    private static final int LOTTO_MAX_MATCH_COUNT = 6;
+    private static final int LOTTO_MIN_MATCH_COUNT = 3;
+    private static final int LOTTO_BONUS_MATCH_COUNT = 7;
+    private static final int CASE_BONUS_BALL = 5;
 
     public static void printLottoStatistics(List<Statistics> lottoResults, String earningRate) {
         OutputView.printLottoStatisticTitle();
 
-        for (int i = 3; i <= 6; i++) {
+        for (int i = LOTTO_MIN_MATCH_COUNT; i <= LOTTO_MAX_MATCH_COUNT; i++) {
             OutputView.printLottoStatistic(i, Statistics.getRank(i).getMoney(),
                 Statistics.getCount(lottoResults, i));
-            if (i == 5) {
-                OutputView.printLottoBonusStatistic(i, Statistics.getRank(7).getMoney(),
-                    Statistics.getCount(lottoResults, 7));
+            if (i == CASE_BONUS_BALL) {
+                OutputView.printLottoBonusStatistic(i,
+                    Statistics.getRank(LOTTO_BONUS_MATCH_COUNT).getMoney(),
+                    Statistics.getCount(lottoResults, LOTTO_BONUS_MATCH_COUNT));
             }
         }
         OutputView.printTotalReturn(Double.parseDouble(earningRate));

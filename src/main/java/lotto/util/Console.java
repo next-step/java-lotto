@@ -11,11 +11,6 @@ public class Console {
     private Console() {
     }
 
-    public static String readLine() {
-        makeNewScannerIfScannerIsClosed();
-        return scanner.nextLine();
-    }
-
     public static int readLineInt() {
         makeNewScannerIfScannerIsClosed();
         return scanner.nextInt();
