@@ -22,11 +22,11 @@ public enum Ranking {
     }
 
     public static double getRewardRate(LottoResult lottoResult, int userBuyPrice) {
-        Ranking ranking = getRanking(lottoResult);
+        Ranking ranking = judgeRanking(lottoResult);
         return (double) userBuyPrice / ranking.winnerPrice;
     }
 
-    public static Ranking getRanking(LottoResult lottoResult) {
+    public static Ranking judgeRanking(LottoResult lottoResult) {
         return Arrays.stream(Ranking.values())
             .filter(rank -> rank.equals(lottoResult))
             .findFirst()

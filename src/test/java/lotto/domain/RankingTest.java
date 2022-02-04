@@ -13,10 +13,10 @@ class RankingTest {
         LottoResult lottoResult = new LottoResult(6, 0);
 
         // when
-        Ranking ranking = Ranking.getRanking(lottoResult);
+        Ranking ranking = Ranking.judgeRanking(lottoResult);
 
         // then
-        assertThat(ranking).isEqualTo(Ranking.ONE);
+        assertThat(ranking).isEqualTo(Ranking.FIRST);
     }
 
     @Test
