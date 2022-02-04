@@ -19,7 +19,7 @@ public class LottoGenerator {
 
     public static Lotto lottoGenerator(){
         Collections.shuffle(lottoNumber);
-        LottoFullNumber lottoFullNumber = new LottoFullNumber(lottoNumber);
+        LottoNumbers lottoFullNumber = new LottoNumbers(lottoNumber);
         return new Lotto(lottoFullNumber);
     }
 }

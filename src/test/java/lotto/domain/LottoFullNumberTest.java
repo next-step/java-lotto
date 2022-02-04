@@ -16,6 +16,6 @@ public class LottoFullNumberTest {
         List<Integer> number = Arrays.asList(42, 21, 23, 41, 42, 43);
         List<LottoNumber> lottoNumber = number.stream().map(LottoNumber::new).collect(Collectors.toList());
         assertThatIllegalArgumentException()
-            .isThrownBy(()->new LottoFullNumber(lottoNumber));
+            .isThrownBy(()->new LottoNumbers(lottoNumber));
     }
 }

@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import lotto.domain.LottoFullNumber;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
 
 public class UserConsole {
@@ -28,7 +28,7 @@ public class UserConsole {
         return new Money(money);
     }
 
-    public static LottoFullNumber winningLottoNumber() {
+    public static LottoNumbers winningLottoNumber() {
         System.out.println(SECOND_MESSAGE);
         String input = scanner.nextLine();
         List<LottoNumber> winningLottoNumber =
@@ -36,7 +36,7 @@ public class UserConsole {
                 .mapToInt(Integer::new)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
-        return new LottoFullNumber(winningLottoNumber);
+        return new LottoNumbers(winningLottoNumber);
     }
 
     public static LottoNumber bonusLottoNumber() {

@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Lotto {
 
-    private final LottoFullNumber lottoNumber;
+    private final LottoNumbers lottoNumber;
 
-    public Lotto(LottoFullNumber lottoNumber){
+    public Lotto(LottoNumbers lottoNumber){
         this.lottoNumber = lottoNumber;
     }
 

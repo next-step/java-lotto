@@ -16,7 +16,7 @@ public class RankCountTest {
     void lottoRankTest() {
         Lottos lottos = LottoBundle.lottoBundle(size);
 
-        LottoFullNumber lottoFullNumber = new LottoFullNumber(
+        LottoNumbers lottoFullNumber = new LottoNumbers(
             Arrays.asList(1, 2, 3, 4, 5, 6).stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));

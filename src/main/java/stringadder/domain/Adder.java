@@ -1,6 +1,5 @@
 package stringadder.domain;
 
-
 import java.util.List;
 import java.util.stream.Collectors;
 import stringadder.utils.exception.InputValidException;

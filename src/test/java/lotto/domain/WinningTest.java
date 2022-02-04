@@ -13,7 +13,7 @@ public class WinningTest {
     @DisplayName("위닝_숫자_검증")
     @Test
     void winningNumberTest() {
-        LottoFullNumber lottoFullNumber = new LottoFullNumber(
+        LottoNumbers lottoFullNumber = new LottoNumbers(
             Arrays.asList(1, 2, 3, 4, 5, 6).stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));
