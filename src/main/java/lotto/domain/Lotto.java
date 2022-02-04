@@ -10,7 +10,6 @@ public class Lotto {
     private static final int START_RANGE = 1;
     private static final int END_RANGE = 45;
     private static final int COUNT = 6;
-    private int correctBonusNumber;
     private final List<Integer> lottoNumbers;
 
     public Lotto() {
@@ -31,12 +30,16 @@ public class Lotto {
 
     public int compareLottoAndWinnerNumbers(LottoMachine lottoMachine) {
         return Long.valueOf(lottoNumbers.stream()
-            .filter(lottoNumber -> lottoMachine.isContain(lottoNumber)).count()).intValue();
+            .filter(lottoMachine::isContain).count()).intValue();
     }
 
     public int compareLottoAndBonusNumbers(final LottoMachine lottoMachine){
         return Long.valueOf(lottoNumbers.stream()
-            .filter(lottoNumber -> lottoMachine.isEqualBonusNumber(lottoNumber)).count()).intValue();
+            .filter(lottoMachine::isEqualBonusNumber).count()).intValue();
     }
 
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
 }

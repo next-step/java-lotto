@@ -26,7 +26,7 @@ public class LottoTickets {
         return this.lottoCounts;
     }
 
-    public List<Lotto>getLottoTickets(){
+    public List<Lotto> getLottoTickets(){
         return lottoTickets;
     }
 
