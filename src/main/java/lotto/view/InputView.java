@@ -1,7 +1,8 @@
-package lotto;
+package lotto.view;
 
 import java.util.List;
 import java.util.Scanner;
+import lotto.model.Parser;
 
 public class InputView {
 
