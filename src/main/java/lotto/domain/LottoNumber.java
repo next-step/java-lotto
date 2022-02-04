@@ -39,4 +39,9 @@ public class LottoNumber {
     public int hashCode() {
         return lottoNum;
     }
+
+    @Override
+    public String toString() {
+        return lottoNum + "";
+    }
 }

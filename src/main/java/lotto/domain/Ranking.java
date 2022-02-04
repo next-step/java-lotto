@@ -61,7 +61,7 @@ public enum Ranking {
         if (this.bonusSuccessNum > 0) {
             stringBuilder.append(", 보너스 볼 일치");
         }
-        stringBuilder.append("(").append(winnerPrice).append(")");
+        stringBuilder.append("(").append(winnerPrice).append("원)");
         return stringBuilder.toString();
     }
 }

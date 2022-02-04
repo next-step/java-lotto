@@ -7,6 +7,7 @@ import lotto.domain.Ranking;
 import lotto.service.LottoAutoGenerator;
 import lotto.service.LottoCountCalculator;
 import lotto.view.LottoInput;
+import lotto.view.LottoOutput;
 
 public class Application {
 
@@ -14,12 +15,24 @@ public class Application {
 
     public static void main(String[] args) {
         int buyPrice = LottoInput.inputPrice();
-        int buySum = buyPrice / LOTTO_PRICE;
+        int buySum = countBuySum(buyPrice);
+
+        LottoOutput.printBuySum(buySum);
 
         List<LottoNumbers> userLottoNumbers = LottoAutoGenerator.getInstance().generateLottos(buySum);
+
+        LottoOutput.printLottoNumber(userLottoNumbers);
+
         LottoNumbers lastWeekLottoNumber = LottoInput.inputWinningNumber();
         LottoNumber bonusNumber = LottoInput.inputBonusBall();
 
         List<Ranking> rankings = LottoCountCalculator.getInstance().countLotteryNumbers(userLottoNumbers, lastWeekLottoNumber, bonusNumber);
+
+        LottoOutput.printRanking(rankings);
+        LottoOutput.printRewardRate(rankings, buyPrice);
+    }
+
+    private static int countBuySum(int buyPrice){
+        return buyPrice / LOTTO_PRICE;
     }
 }
