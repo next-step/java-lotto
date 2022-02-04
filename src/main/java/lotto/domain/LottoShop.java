@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.common.exception.LottoException;
+
 public class LottoShop {
 
     private static final int LOTTO_PRICE = 1000;
@@ -15,10 +17,10 @@ public class LottoShop {
 
     private void validatePrice(final int price) {
         if (price < LOTTO_PRICE) {
-            throw new IllegalArgumentException("최소 1000원이어야 합니다.");
+            throw new LottoException("최소 1000원이어야 합니다.");
         }
         if (price % LOTTO_PRICE != ZERO) {
-            throw new IllegalArgumentException("투입한 금액이 1000원 단위가 아닙니다.");
+            throw new LottoException("투입한 금액이 1000원 단위가 아닙니다.");
         }
     }
 

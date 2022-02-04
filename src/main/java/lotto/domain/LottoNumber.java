@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Objects;
+import lotto.common.exception.LottoException;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
@@ -9,15 +10,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int number;
 
-    public LottoNumber(int number) {
+    public LottoNumber(final int number) {
         validateNumberRange(number);
-
         this.number = number;
     }
 
     private void validateNumberRange(final int number) {
-        if (number < LOTTO_START_NUM || LOTTO_END_NUM > 45) {
-            throw new IllegalArgumentException("복권의 숫자 범위가 유효하지 않습니다.");
+        if (number < LOTTO_START_NUM || number > LOTTO_END_NUM) {
+            throw new LottoException("복권의 숫자 범위가 유효하지 않습니다.");
         }
     }
 

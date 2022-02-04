@@ -25,7 +25,10 @@ public class LottoInputView {
         System.out.println("구입금액을 입력해 주세요.");
         userPrice = LottoInput.inputPrice();
         int lottoAmount = lottoShop.countPossibleLottoAmount(userPrice);
-        System.out.println(lottoAmount + "개를 구매했습니다.");
+
+        stringBuilder.append(lottoAmount)
+            .append("개를 구매했습니다.");
+        System.out.println(stringBuilder);
 
         lottos = lottoShop.buyLotto();
 
