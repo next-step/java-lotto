@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ public class LottoRules {
     private final int LOTTO_PRICE = 1000;
     private final List<Integer> LOTTO_NUMS;
 
-    LottoRules() {
+    public LottoRules() {
         List<Integer> lottoNums = new ArrayList<>();
         for (int i = START_NUM; i <= LAST_NUM; i++) {
             lottoNums.add(i);
