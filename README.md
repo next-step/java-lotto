@@ -22,19 +22,19 @@
 
 ## 로또(자동) - step1 기능 요구 사항
 
-- [] 구입금액을 입력받을 수 있다. lotto.view#InputView#readPrice
-- [] 로또 한 번은 1000원이다. lotto.domain#Lotto
-- [] 로또는 한 장을 발행할 수 있다. lotto.domain#Lotto#generatorLotto
+- [x] 구입금액을 입력받을 수 있다. lotto.view#InputView#readPrice
+- [x] 로또 한 번은 1000원이다. lotto.domain#Lotto
+- [x] 로또는 한 장을 발행할 수 있다. lotto.domain#Lotto#generatorLotto
   - 로또 자동 생성은 Collections.shuffle()를 활용한다.
   - Collections.sort()를 활용해 정렬 가능하다.
-- [] 금액에 해당하는 로또를 발행해야 한다. lotto.domain#Lottos#generatorLottos
-- [] 지난 주 당첨 번호를 입력받을 수 있다. lotto.view#InputView#readWinningNumber
+- [x] 금액에 해당하는 로또를 발행해야 한다. lotto.domain#Lottos#generatorLottos
+- [x] 지난 주 당첨 번호를 입력받을 수 있다. lotto.view#InputView#readWinningNumber
   - 예를 들어 1, 2, 3, 4, 5, 6 쉼표를 구분자로 공백을 갖춰 입력해야 한다. 
-- [] 보너스 볼을 입력받을 수 있다. lotto.view#InputView#readBonusNumber
-- [] 로또 당첨 통계를 알 수 있다. lotto.domain#LottoStatistics
+- [x] 보너스 볼을 입력받을 수 있다. lotto.view#InputView#readBonusNumber
+- [x] 로또 당첨 통계를 알 수 있다. lotto.domain#LottoStatistics
   - ArrayList의 contains()를 활용하면 어떤 값이 존재하는지 유무를 판단할 수 있다.
 - [] 로또의 총 수익률을 알 수 있다. lotto.domain/Lottos
-- [] UI는 InputView와 OutputView, ResultView에서 작성한다. lotto.view#
+- [x] UI는 InputView와 OutputView, ResultView에서 작성한다. lotto.view#
 
 ## 마감 기한
 
