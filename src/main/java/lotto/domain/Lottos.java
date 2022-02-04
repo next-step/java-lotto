@@ -28,7 +28,14 @@ public class Lottos {
     }
 
     private static int getNumberOfLotto(final Budget budget) {
+        validateMoreThanLottoPrice(budget);
         return budget.getValue() / PRICE_OF_LOTTO;
+    }
+
+    private static void validateMoreThanLottoPrice(Budget budget) {
+        if(budget.getValue() < PRICE_OF_LOTTO){
+            throw new IllegalArgumentException("로또 한장의 구입 가격보다 투입 금액이 적습니다.");
+        }
     }
 
     private static List<String> createRandomNumbers() {
