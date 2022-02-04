@@ -35,10 +35,6 @@ public class InputView {
         return input;
     }
 
-    public static void printErrorMessage(String message) {
-        System.out.println(message);
-    }
-
     private static String getInput() {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
