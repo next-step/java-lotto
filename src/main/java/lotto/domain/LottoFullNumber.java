@@ -2,15 +2,23 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoFullNumber {
 
     private final List<LottoNumber> lottoFullNumber;
+    private final static int NUMBER_ZERO = 0;
+    private final static int LOTTO_NUMBER_SIZE = 6;
+    private final static String ERROR_MESSAGE = "로또 숫자는 중복될 수 없습니다.";
 
     public LottoFullNumber(List<LottoNumber> lottoFullNumber) {
-        List<LottoNumber> lottoFullNumberLengthSix = lottoFullNumber.subList(0,6);
+        List<LottoNumber> lottoFullNumberLengthSix = lottoFullNumber.subList(NUMBER_ZERO,
+            LOTTO_NUMBER_SIZE);
         Collections.sort(lottoFullNumberLengthSix);
+        validateNonDuplication(lottoFullNumberLengthSix);
         this.lottoFullNumber = new ArrayList<>(lottoFullNumberLengthSix);
     }
 
