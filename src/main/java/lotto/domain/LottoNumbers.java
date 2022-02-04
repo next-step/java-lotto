@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 public class LottoNumbers {
 
     private static final int LOTTO_SIZE = 6;
+    private static final int STANDARD_NUMBER = 12;
 
     private final List<LottoNumber> numbers;
 
@@ -34,11 +35,17 @@ public class LottoNumbers {
         }
     }
 
+    public int countSameNumber(LottoNumbers otherNumbers) {
+        Set<LottoNumber> lottoDuplicate = new HashSet<>(otherNumbers.getNumbers());
+        lottoDuplicate.addAll(numbers);
+        return STANDARD_NUMBER - lottoDuplicate.size();
+    }
+
     public int size() {
         return numbers.size();
     }
 
-    public boolean contains(LottoNumber lottoNumber){
+    public boolean contains(LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
     }
 

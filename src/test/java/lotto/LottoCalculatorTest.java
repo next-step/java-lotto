@@ -21,7 +21,7 @@ class LottoCalculatorTest {
         LottoNumbers userNumbers = new LottoNumbers(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 8)));
 
         // when
-        LottoCountResult lottoResult = calculator.countLotteryNumber(lotteryNumbers, userNumbers, bounusNum);
+        LottoCountResult lottoResult = calculator.countLotteryNumber(userNumbers, lotteryNumbers, bounusNum);
 
         // then
         assertThat(lottoResult.getNormalSuccessCount()).isEqualTo(5);
