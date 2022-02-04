@@ -47,7 +47,7 @@ public enum Rank {
         return prize;
     }
     public Money getPrize(int hit){
-        return new Money(prize.getValue() * hit);
+        return new Money(prize.Value()).multiple(hit);
     }
 }
 

@@ -11,7 +11,7 @@ public class LottoCalculation {
     }
 
     public int lottoCalculation() {
-        return value.getValue() / LOTTO_PRICE;
+        return value.Value() / LOTTO_PRICE;
     }
 
 }
