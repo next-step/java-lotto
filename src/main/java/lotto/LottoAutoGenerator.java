@@ -12,18 +12,18 @@ public class LottoAutoGenerator {
     private static final int LOTTO_END_NUM = 45;
     private static final int LOTTO_SIZE = 6;
 
-    private final List<Integer> allNum;
+    private final List<Integer> allNumber;
 
     private LottoAutoGenerator() {
-        allNum = IntStream.range(LOTTO_START_NUM, LOTTO_END_NUM)
+        allNumber = IntStream.range(LOTTO_START_NUM, LOTTO_END_NUM)
             .boxed()
             .collect(Collectors.toList());
     }
 
     public List<Integer> generateLotto() {
-        Collections.shuffle(allNum);
+        Collections.shuffle(allNumber);
 
-        return allNum.stream()
+        return allNumber.stream()
             .limit(LOTTO_SIZE)
             .collect(Collectors.toList());
     }

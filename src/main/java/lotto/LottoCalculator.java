@@ -12,9 +12,9 @@ public class LottoCalculator {
 
     private LottoCalculator() {}
 
-    public LottoResult countLotteryNumber(final List<Integer> lotteryNumbers, List<Integer> userNumbers, int bonusNum) {
+    public LottoResult countLotteryNumber(final List<Integer> lotteryNumbers, List<Integer> userNumbers, int bonusNumber) {
         int normalSuccessCount = countNormalSuccessNumber(lotteryNumbers, userNumbers);
-        int bonusSuccessCount = countBonusNumber(userNumbers, bonusNum);
+        int bonusSuccessCount = countBonusNumber(userNumbers, bonusNumber);
 
         return new LottoResult(normalSuccessCount, bonusSuccessCount);
     }

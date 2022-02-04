@@ -12,7 +12,7 @@ class LottoNumberTest {
 
         LottoNumber lottoNumber = new LottoNumber(number);
 
-        assertThat(lottoNumber.getLottoNum()).isEqualTo(number);
+        assertThat(lottoNumber.getLottoNumber()).isEqualTo(number);
     }
 
     @Test
