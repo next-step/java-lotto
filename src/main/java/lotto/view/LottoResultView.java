@@ -61,6 +61,15 @@ public class LottoResultView {
 
         rankings.forEach(key ->
             process(key, totalResult.get(key)));
+
+        printYield(userPrice);
+    }
+
+    private void printYield(int userPrice) {
+        stringBuilder.append("총 수익률은 ")
+            .append(String.format("%.2f", (double) totalWinnerPrice / userPrice))
+            .append("입니다.");
+        System.out.println(stringBuilder);
     }
 
     private void process(final Ranking ranking, final Integer count) {
