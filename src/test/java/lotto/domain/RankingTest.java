@@ -20,15 +20,7 @@ class RankingTest {
     }
 
     @Test
-    void 수익률_조회(){
-        // given
-        LottoResult lottoResult = new LottoResult(3, 0);
-        int userBuyPrice = 500;
-
-        // when
-        double rewardRate = Ranking.getRewardRate(lottoResult, userBuyPrice);
-
-        // then
-        assertThat(rewardRate).isEqualTo(0.1);
+    void 등수별_상금_계산() {
+        assertThat(Ranking.FOURTH.multiplyCountAndWinnerPrice(3)).isEqualTo(150000);
     }
 }
