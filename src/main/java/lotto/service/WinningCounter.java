@@ -36,7 +36,15 @@ public class WinningCounter {
             updateWinningCountAndBonus(lotto, ball);
         }
 
-        return LottoResult.of(count, includeBonus);
+        if(hasToCheckBonus(count)) {
+            return LottoResult.of(count, includeBonus);
+        }
+
+        return LottoResult.of(count);
+    }
+
+    private boolean hasToCheckBonus(int count) {
+        return count == 5;
     }
 
     private void updateWinningCountAndBonus(Lotto lotto, WinningBall ball) {
