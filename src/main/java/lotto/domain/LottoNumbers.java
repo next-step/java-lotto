@@ -1,10 +1,11 @@
 package lotto.domain;
 
+import static lotto.util.Constant.*;
+
 import java.util.List;
 
 public class LottoNumbers {
 
-    static final int LOTTO_SIZE = 6;
     final List<Integer> lottoNumbers;
 
     public LottoNumbers(List<Integer> numbers) {
