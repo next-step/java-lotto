@@ -6,7 +6,7 @@ public class Calculator {
 
     private static final int UNAVAILABLE_THRESHOLD = 0;
     private static final int EMPTY_NUMBER = 0;
-    private static final String EXCEPTION_MESSAGE = "음수가 포함될 수 없습니다.";
+    private static final String EXCEPTION_MESSAGE_WHEN_NEGATIVE_EXISTS = "음수가 포함될 수 없습니다.";
 
     private Calculator() {}
 
@@ -21,7 +21,7 @@ public class Calculator {
         return getSum(operands);
     }
 
-    private static int getSum(String[] operands) {
+    private static int getSum(final String[] operands) {
         return Arrays.stream(operands)
             .mapToInt(Integer::parseInt)
             .sum();
@@ -29,7 +29,7 @@ public class Calculator {
 
     private static void validateExpression(final String[] operands) {
         if (negativeExists(operands)) {
-            throw new RuntimeException(EXCEPTION_MESSAGE);
+            throw new RuntimeException(EXCEPTION_MESSAGE_WHEN_NEGATIVE_EXISTS);
         }
     }
 
