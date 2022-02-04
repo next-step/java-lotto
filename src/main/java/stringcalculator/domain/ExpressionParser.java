@@ -18,16 +18,15 @@ public class ExpressionParser {
     }
 
     public List<Integer> parse(String expression) {
-        String regex = getSplitRegex();
         validateContainsOtherCharacter(expression);
-        String[] split = expression.split(regex);
+        String[] split = expression.split(getDelimiterRegex());
 
         return Arrays.stream(split)
-                .map((Integer::parseInt))
+                .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
-    private String getSplitRegex() {
+    private String getDelimiterRegex() {
         return String.format("[%s]", delimiters);
     }
 
