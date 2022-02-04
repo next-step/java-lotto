@@ -2,7 +2,6 @@ package lotto.domain;
 
 public class LottoResult {
 
-
     private final int normalSuccessCount;
     private final int bonusSuccessCount;
 

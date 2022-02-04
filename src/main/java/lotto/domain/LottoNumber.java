@@ -11,7 +11,7 @@ public class LottoNumber {
     }
 
     private void validateNumberRange(final int number) {
-        if(number < 1 || number > 45){
+        if (number < 1 || number > 45) {
             throw new IllegalArgumentException("복권의 숫자 범위가 유효하지 않습니다.");
         }
     }
