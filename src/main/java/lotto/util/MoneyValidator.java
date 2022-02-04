@@ -1,13 +1,14 @@
 package lotto.util;
 
-public class MoneyValidator extends Validator{
+public class MoneyValidator extends Validator {
+
     private static final int MINIMUM_MONEY = 1000;
 
     private MoneyValidator() {
         super();
     }
 
-    public static int validate(String input){
+    public static int validate(String input) {
         final int money = parseToInt(input);
         validateMinimumMoney(money);
         return money;

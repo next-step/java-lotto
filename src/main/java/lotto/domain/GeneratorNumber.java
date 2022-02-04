@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 
 public class GeneratorNumber {
 
+    private static final int LOTTO_NUMBERS_SIZE = 6;
     private static final int LIMIT_MINIMUM_NUMBER = 1;
     private static final int LIMIT_MAXIMUM_NUMBER = 45;
     private static final List<Integer> numbers
@@ -18,7 +19,7 @@ public class GeneratorNumber {
 
     public static List<Integer> generateLottoNumbers() {
         Collections.shuffle(numbers);
-        final List<Integer> lottoNumbers = numbers.subList(0, 6);
+        final List<Integer> lottoNumbers = numbers.subList(0, LOTTO_NUMBERS_SIZE);
         Collections.sort(lottoNumbers);
         return lottoNumbers;
     }
