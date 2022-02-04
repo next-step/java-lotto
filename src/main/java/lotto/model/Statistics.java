@@ -1,10 +1,13 @@
-package lotto;
+package lotto.model;
 
-import static lotto.Rank.getRank;
+import static lotto.model.Rank.getRank;
 
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import lotto.model.Lotto;
+import lotto.model.Rank;
+import lotto.model.WinningNumber;
 
 public class Statistics {
 

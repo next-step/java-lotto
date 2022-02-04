@@ -1,8 +1,9 @@
-package lotto;
+package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import lotto.controller.LottoRules;
 
 public class User {
 
@@ -10,7 +11,7 @@ public class User {
     private final List<Lotto> lottos;
     private Statistics statistics;
 
-    User(int count, LottoRules lottoRules) {
+    public User(int count, LottoRules lottoRules) {
         this.count = count;
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {

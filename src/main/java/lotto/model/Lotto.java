@@ -1,14 +1,15 @@
-package lotto;
+package lotto.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lotto.controller.LottoRules;
 
 public class Lotto {
 
     private final List<Integer> numbers;
 
-    Lotto(LottoRules lottoRules) {
+    public Lotto(LottoRules lottoRules) {
         List<Integer> numbers = new ArrayList<>();
         List<Integer> lottoNum = lottoRules.getLottoNums();
         Collections.shuffle(lottoNum);
