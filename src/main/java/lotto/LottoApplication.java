@@ -4,6 +4,8 @@ package lotto;
 import lotto.domain.BonusNumber;
 import lotto.domain.Budget;
 import lotto.domain.CorrectNumbers;
+import lotto.domain.Judge;
+import lotto.domain.LottoRanks;
 import lotto.domain.Lottos;
 import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
@@ -19,7 +21,16 @@ public class LottoApplication {
         PrintView.printLottoNumber(lottos);
 
         CorrectNumbers correctNumbers = new CorrectNumbers(
-                new WinningNumbers(InputView.inputWinningNumbers()),
-                new BonusNumber(InputView.inputBonusNumber()));
+            new WinningNumbers(InputView.inputWinningNumbers()),
+            new BonusNumber(InputView.inputBonusNumber()));
+
+        Judge judge = new Judge(correctNumbers);
+        LottoRanks lottoRanks = judge.getRanks(lottos);
+
+        // Statistics statistics = new Statistics(lottoRanks);
+        // NumberOfRanks numberOfRanks = staticstics.getNumberOfRank();
+
+        // printView.printNumberOfRank(numberOfRanks);
+        // printView.printProfitRate(staticstics.getProfitRate());
     }
 }
