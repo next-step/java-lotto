@@ -2,8 +2,8 @@ package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import calculator.Adder;
-import calculator.Token;
+import calculator.model.Adder;
+import calculator.model.Token;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
