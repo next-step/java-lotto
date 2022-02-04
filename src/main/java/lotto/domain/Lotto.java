@@ -14,4 +14,14 @@ public class Lotto {
     public List<String> get() {
         return this.numbers;
     }
+
+    public int matchNumber(List<String> winningNumbers) {
+        return (int) numbers.stream()
+            .filter(n -> winningNumbers.contains(n))
+            .count();
+    }
+
+    public boolean containsBonusNumber(String bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
 }
