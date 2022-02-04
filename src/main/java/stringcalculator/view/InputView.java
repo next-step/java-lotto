@@ -9,7 +9,6 @@ public class InputView {
     private static final int PREFIX_LENGTH = 2;
     private static final String DEFAULT_DELIMITER_COMMA = ",";
     private static final String DEFAULT_DELIMITER_COLON = ":";
-    private static final String EMPTY_STRING = "";
     private static final String PREFIX_REGEX = "\\/\\/(.+)";
     private static final String DEFAULT_NUMBER = "0";
 
@@ -36,12 +35,13 @@ public class InputView {
     private static String getInput() {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
+
         return input;
     }
 
     private static boolean isBlank(String input) {
         input = input.trim();
-        return input.isEmpty() || input.equals(EMPTY_STRING);
+        return input.isEmpty();
     }
 
     private static void validatePrefix(String input) {
