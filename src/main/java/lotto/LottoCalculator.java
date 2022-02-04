@@ -3,6 +3,7 @@ package lotto;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lotto.domain.LottoResult;
 
 public class LottoCalculator {
 
@@ -11,10 +12,25 @@ public class LottoCalculator {
 
     private LottoCalculator() {}
 
-    public int countLotteryNumber(final List<Integer> lotteryNumbers, List<Integer> userNumbers) {
-        Set<Integer> set = new HashSet<>(lotteryNumbers);
-        set.addAll(userNumbers);
-        return STANDARD_NUMBER - set.size();
+    public LottoResult countLotteryNumber(final List<Integer> lotteryNumbers, List<Integer> userNumbers, int bonusNum) {
+        int normalSuccessCount = countNormalSuccessNumber(lotteryNumbers, userNumbers);
+        int bonusSuccessCount = countBonusNumber(userNumbers, bonusNum);
+
+        return new LottoResult(bonusSuccessCount, normalSuccessCount);
+    }
+
+    private int countNormalSuccessNumber(final List<Integer> lotteryNumbers, List<Integer> userNumbers){
+        Set<Integer> lottoDuplicate = new HashSet<>(lotteryNumbers);
+        lottoDuplicate.addAll(userNumbers);
+        return STANDARD_NUMBER - lottoDuplicate.size();
+    }
+
+    private int countBonusNumber(List<Integer> userNumbers, int bonusNum){
+        int bonusSuccessCount = 0;
+        if(userNumbers.contains(bonusNum)){
+            bonusSuccessCount++;
+        }
+        return bonusSuccessCount;
     }
 
     public static LottoCalculator getInstance() {
