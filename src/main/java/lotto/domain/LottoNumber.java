@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class LottoNumber {
 
     private static final int LOTTO_MINIMUM_BOUND = 1;
@@ -25,5 +27,22 @@ public class LottoNumber {
 
     private boolean lottoNumberOutRange() {
         return lottoNumber < LOTTO_MINIMUM_BOUND || lottoNumber > LOTTO_MAXIMUM_BOUND;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumber lotto = (LottoNumber) o;
+        return lottoNumber == lotto.lottoNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
     }
 }
