@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.Arrays;
 import java.util.List;
+import lotto.model.LottoRules;
+import lotto.model.WinningNumber;
 import org.junit.jupiter.api.Test;
 
 class WinningNumberTest {
