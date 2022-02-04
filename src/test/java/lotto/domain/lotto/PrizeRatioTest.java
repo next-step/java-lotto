@@ -3,6 +3,7 @@ package lotto.domain.lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +27,6 @@ class PrizeRatioTest {
     }
 
     private void setUpTickets() {
-        tickets = new Tickets();
         List<List<Integer>> lottoTickets = Arrays.asList(
             Arrays.asList(8, 21, 23, 41, 42, 43),
             Arrays.asList(3, 5, 11, 16, 32, 38),
@@ -44,10 +44,13 @@ class PrizeRatioTest {
             Arrays.asList(3, 8, 27, 30, 35, 44)
         );
 
+        List<Ticket> ticketList = new ArrayList<>();
         for (List<Integer> ticketNumbers: lottoTickets) {
             Ticket ticket = new Ticket(new Numbers(ticketNumbers));
-            tickets.addTicket(ticket);
+            ticketList.add(ticket);
         }
+
+        tickets = new Tickets(ticketList);
     }
 
     private void setUpAnswer() {
@@ -55,7 +58,7 @@ class PrizeRatioTest {
     }
 
     private int getPurchased() {
-        return PRICE_PER_TICKET * tickets.get().size();
+        return PRICE_PER_TICKET * tickets.count();
     }
 
     @DisplayName("수익률 유효성 검증")

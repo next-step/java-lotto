@@ -3,6 +3,7 @@ package lotto.domain.lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -26,9 +27,9 @@ class AnswerTest {
     }
 
     Tickets getTickets() {
-        Tickets tickets = new Tickets();
-        tickets.addTicket(new Ticket(new Numbers(TEST_NUMBER_LIST)));
-        return tickets;
+        List<Ticket> tickets = new ArrayList<>();
+        tickets.add(new Ticket(new Numbers(TEST_NUMBER_LIST)));
+        return new Tickets(tickets);
     }
 
     @DisplayName("입력받은 숫자 개수가 유효한지 검증")

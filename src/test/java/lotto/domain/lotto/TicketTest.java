@@ -34,6 +34,6 @@ class TicketTest {
     @DisplayName("보너스 일치 여부 테스트")
     @Test
     void testBonusMatches() {
-        assertFalse(ticket.checkBonus(TEST_BONUS_NUMBER));
+        assertFalse(ticket.hasBonus(TEST_BONUS_NUMBER));
     }
 }

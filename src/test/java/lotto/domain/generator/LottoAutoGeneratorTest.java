@@ -9,14 +9,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class AutoGeneratorTest {
+class LottoAutoGeneratorTest {
 
     private List<Integer> numberList;
 
     @BeforeEach
     void setUp() {
-        AutoGenerator autoGenerator = new AutoGenerator();
-        Numbers numbers = autoGenerator.generateNumbers();
+        LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
+        Numbers numbers = lottoAutoGenerator.generateNumbers();
         numberList = numbers.get();
     }
 
@@ -34,7 +34,7 @@ class AutoGeneratorTest {
     @Test
     void checkValidRandomNumbersInRange() {
         boolean isInRange = numberList.stream()
-            .allMatch(AutoGeneratorTest::isInRange);
+            .allMatch(LottoAutoGeneratorTest::isInRange);
 
         assertTrue(isInRange);
     }
