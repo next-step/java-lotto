@@ -37,4 +37,8 @@ public enum LottoRank {
         }
         return LottoRank.THIRD;
     }
+
+    public int getAmount() {
+        return this.amount;
+    }
 }
