@@ -21,7 +21,8 @@ public enum Ranking {
         this.bonusSuccessNum = bonusSuccessNum;
     }
 
-    public static double getRewardRate(int normalSuccessCount, int bonusSuccessCount, int userBuyPrice) {
+    public static double getRewardRate(int normalSuccessCount, int bonusSuccessCount,
+        int userBuyPrice) {
         Ranking ranking = getRanking(normalSuccessCount, bonusSuccessCount);
         return (double) userBuyPrice / ranking.winnerPrice;
     }
@@ -48,5 +49,19 @@ public enum Ranking {
 
     public int getBonusSuccessNum() {
         return bonusSuccessNum;
+    }
+
+    @Override
+    public String toString() {
+        int matchNum = normalSuccessNum + bonusSuccessNum;
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(matchNum).append("개 일치");
+
+        if (this.bonusSuccessNum > 0) {
+            stringBuilder.append(", 보너스 볼 일치");
+        }
+        stringBuilder.append("(").append(winnerPrice).append(")");
+        return stringBuilder.toString();
     }
 }

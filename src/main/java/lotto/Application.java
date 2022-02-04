@@ -16,15 +16,10 @@ public class Application {
         int buyPrice = LottoInput.inputPrice();
         int buySum = buyPrice / LOTTO_PRICE;
 
-        LottoNumbers userLottoNumber = LottoAutoGenerator.getInstance().generateLotto();
+        List<LottoNumbers> userLottoNumbers = LottoAutoGenerator.getInstance().generateLottos(buySum);
         LottoNumbers lastWeekLottoNumber = LottoInput.inputWinningNumber();
         LottoNumber bonusNumber = LottoInput.inputBonusBall();
 
-        List<LottoNumbers> lottoNumbers = LottoAutoGenerator.getInstance().generateLottos(buySum);
-
-        Ranking ranking = LottoCountCalculator.getInstance().countLotteryNumber(userLottoNumber, lastWeekLottoNumber, bonusNumber);
-
-        System.out.println("당첨 통계");
-        System.out.println("-----------");
+        List<Ranking> rankings = LottoCountCalculator.getInstance().countLotteryNumbers(userLottoNumbers, lastWeekLottoNumber, bonusNumber);
     }
 }
