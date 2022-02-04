@@ -22,15 +22,29 @@ public enum LottoResult {
         this.description = description;
     }
 
-    public static LottoResult of(int count, boolean includeBonus) {
+    public String getDescription() {
+        return description;
+    }
+
+    public int getReward() {
+        return reward;
+    }
+
+    public static LottoResult of(int count) {
         if (count < 3) {
             return LottoResult.NO_REWARD;
         }
+        return of(count, false);
+    }
 
+    public static LottoResult of(int count, boolean includeBonus) {
         return Arrays.stream(LottoResult.values())
-            .filter(lottoResult -> count == lottoResult.count)
-            .filter(lottoResult -> includeBonus == lottoResult.includeBonus)
+            .filter(lottoResult -> isSameCountAndBonus(lottoResult, count, includeBonus))
             .findAny()
             .orElseThrow(() -> new IllegalArgumentException("[ERROR] 당첨 결과를 찾지 못했습니다."));
+    }
+
+    private static boolean isSameCountAndBonus(LottoResult lottoResult, int count, boolean includeBonus) {
+        return lottoResult.count == count && lottoResult.includeBonus == includeBonus;
     }
 }

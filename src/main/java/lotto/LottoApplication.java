@@ -21,6 +21,6 @@ public class LottoApplication {
         List<WinningBall> winningBalls = InputView.getWinningBalls();
         LottoMachine.run(lottoNumbers, winningBalls);
 
-        ResultView.printResult(LottoMachine.getResults());
+        ResultView.printResult(LottoMachine.getResults(), purchasePrice);
     }
 }
