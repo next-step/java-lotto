@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 class RankingTest {
 
-
     @Test
     void 우승순위_조회(){
         // given

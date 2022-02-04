@@ -3,6 +3,7 @@ package lotto.service;
 import lotto.domain.LottoCountResult;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
+import lotto.domain.Ranking;
 
 public class LottoCountCalculator {
 
@@ -12,12 +13,12 @@ public class LottoCountCalculator {
     private LottoCountCalculator() {
     }
 
-    public LottoCountResult countLotteryNumber(LottoNumbers userNumbers,
+    public Ranking countLotteryNumber(LottoNumbers userNumbers,
         LottoNumbers lottoNumbers, LottoNumber bonusNum) {
         int normalSuccessCount = countNormalSuccessNumber(userNumbers, lottoNumbers);
         int bonusSuccessCount = countBonusNumber(userNumbers, bonusNum);
 
-        return new LottoCountResult(normalSuccessCount, bonusSuccessCount);
+        return Ranking.getRanking(new LottoCountResult(normalSuccessCount, bonusSuccessCount));
     }
 
     private int countNormalSuccessNumber(LottoNumbers userNumbers, LottoNumbers lotteryNumbers) {

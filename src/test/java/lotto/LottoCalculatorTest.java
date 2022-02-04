@@ -4,9 +4,9 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import lotto.domain.LottoCountResult;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
+import lotto.domain.Ranking;
 import lotto.service.LottoCountCalculator;
 import org.junit.jupiter.api.Test;
 
@@ -21,10 +21,10 @@ class LottoCalculatorTest {
         LottoNumbers userNumbers = new LottoNumbers(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 8)));
 
         // when
-        LottoCountResult lottoResult = calculator.countLotteryNumber(userNumbers, lotteryNumbers, bounusNum);
+        Ranking lottoResult = calculator.countLotteryNumber(userNumbers, lotteryNumbers, bounusNum);
 
         // then
-        assertThat(lottoResult.getNormalSuccessCount()).isEqualTo(5);
-        assertThat(lottoResult.getBonusSuccessCount()).isEqualTo(0);
+        assertThat(lottoResult.getNormalSuccessNum()).isEqualTo(5);
+        assertThat(lottoResult.getBonusSuccessNum()).isEqualTo(0);
     }
 }

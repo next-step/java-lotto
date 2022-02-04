@@ -1,5 +1,6 @@
 package lotto.service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +21,14 @@ public class LottoAutoGenerator {
         allNum = IntStream.range(LOTTO_NUM_START, LOTTO_NUM_END)
             .boxed()
             .collect(Collectors.toList());
+    }
+
+    public List<LottoNumbers> generateLottos(int size) {
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            lottoNumbers.add(generateLotto());
+        }
+        return lottoNumbers;
     }
 
     public LottoNumbers generateLotto() {

@@ -37,4 +37,16 @@ public enum Ranking {
         return this.normalSuccessNum == lottoResult.getNormalSuccessCount() &&
             this.bonusSuccessNum == lottoResult.getBonusSuccessCount();
     }
+
+    public int getWinnerPrice() {
+        return winnerPrice;
+    }
+
+    public int getNormalSuccessNum() {
+        return normalSuccessNum;
+    }
+
+    public int getBonusSuccessNum() {
+        return bonusSuccessNum;
+    }
 }
