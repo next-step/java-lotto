@@ -6,15 +6,10 @@ import java.util.stream.Collectors;
 
 public class ExpressionParser {
 
-    private static final String EMPTY_STRING = "";
     private String delimiters;
 
     public ExpressionParser(Delimiters delimiters) {
-        this.delimiters = joinDelimiterWithEmptyString(delimiters.getValues());
-    }
-
-    private String joinDelimiterWithEmptyString(List<String> delimiters) {
-        return String.join(EMPTY_STRING, delimiters);
+        this.delimiters = delimiters.getValuesToString();
     }
 
     public List<Integer> parse(String expression) {
