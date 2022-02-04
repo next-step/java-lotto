@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import lotto.LottoBalls;
 import org.junit.jupiter.api.DisplayName;
@@ -51,6 +52,8 @@ class LottosTest {
         final List<Lotto> lottos = Lottos.createAutoLottos(new Budget("1000")).get();
 
         // then
-        assertThat(lottos.get(0).get()).isEqualTo(LottoBalls.get().subList(0, 6));
+        List<String> expected = LottoBalls.get().subList(0, 6);
+        expected.sort(Comparator.comparingInt(Integer::parseInt));
+        assertThat(lottos.get(0).get()).isEqualTo(expected);
     }
 }
