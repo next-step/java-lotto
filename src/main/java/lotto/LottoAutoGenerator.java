@@ -14,6 +14,10 @@ public class LottoAutoGenerator {
 
     private final List<Integer> allNumber;
 
+    public static LottoAutoGenerator getInstance() {
+        return INSTANCE;
+    }
+
     private LottoAutoGenerator() {
         allNumber = IntStream.range(LOTTO_START_NUM, LOTTO_END_NUM)
             .boxed()
@@ -26,9 +30,5 @@ public class LottoAutoGenerator {
         return allNumber.stream()
             .limit(LOTTO_SIZE)
             .collect(Collectors.toList());
-    }
-
-    public static LottoAutoGenerator getInstance() {
-        return INSTANCE;
     }
 }

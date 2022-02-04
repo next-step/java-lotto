@@ -13,6 +13,10 @@ public class LottoCalculator {
     private LottoCalculator() {
     }
 
+    public static LottoCalculator getInstance() {
+        return INSTANCE;
+    }
+
     public LottoResult countLotteryNumber(final List<Integer> lotteryNumbers,
         List<Integer> userNumbers, int bonusNumber) {
         int normalSuccessCount = countNormalSuccessNumber(lotteryNumbers, userNumbers);
@@ -34,9 +38,5 @@ public class LottoCalculator {
             bonusSuccessCount++;
         }
         return bonusSuccessCount;
-    }
-
-    public static LottoCalculator getInstance() {
-        return INSTANCE;
     }
 }
