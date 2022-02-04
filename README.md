@@ -45,37 +45,46 @@
 # 로또 (자동)
 
 ## 기능 요구사항
+
 * 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
 * 로또 1장의 가격은 1000원이다.
 
 ## 기능 목록
+
 ### InputView
 
 - [x] 구입금액 입력
-  - [x] 금액이 숫자가 아닐 경우, IllegalArgument Exception ("[ERROR] 숫자만 입력해주세요")
-  - [x] 금액이 1000(MINIMUM_MONEY)원보다 작을 경우, IllegalArgument Exception ("[ERROR] 1000원에 1장입니다. 1000보다 큰 값을 입력해주세요")
 - [x] 당첨 번호 입력
-  - [x] 숫자가 아닐 경우, IllegalArgument Exception ("1,2:3,4,5,6")
-  - [x] 숫자가 범위 내에 들어오지 않을경우, IllegalArgument Exception
-  - [x] 중복되는 것이 있을 경우, IllegalArgument Exception
-  - [x] 당첨 번호의 개수가 6이 아닐 경우, IllegalArgument Exception
 - [x] 보너스볼 입력
-  - [x] 숫자가 아닐 경우, IllegalArgument Exception
-  - [x] 숫자가 범위 내에 들어오지 않을경우, IllegalArgument Exception
-  - [x] 지난 당첨 번호와 중복되는 것이 있을 경우, IllegalArgument Exception
-  
+
 ### ResultView
 
 - [ ] 로또 개수 출력 안내
 - [ ] 로또 개수만큼 출력
 - [ ] 당첨 통계
-  - [ ] 3개 일치
-  - [ ] 4개 일치
-  - [ ] 5개 일치
-  - [ ] 5개 일치, 보너스 볼 일치
-  - [ ] 6개 일치
-  - [ ] 총 수익률
-  
+    - [ ] 3개 일치
+    - [ ] 4개 일치
+    - [ ] 5개 일치
+    - [ ] 5개 일치, 보너스 볼 일치
+    - [ ] 6개 일치
+    - [ ] 총 수익률
+
+### Validator - 입력 검증
+
+- [x] 구매 금액에 대한 최솟값 검증
+    - [x] 금액이 숫자가 아닐 경우, IllegalArgument Exception ("[ERROR] 숫자만 입력해주세요")
+    - [x] 금액이 1000(MINIMUM_MONEY)원보다 작을 경우, IllegalArgument Exception ("[ERROR] 1000원에 1장입니다. 1000보다
+      큰 값을 입력해주세요")
+- [x] 당첨 번호에 대한 검증
+    - [x] 숫자가 아닐 경우, IllegalArgument Exception ("1,2:3,4,5,6")
+    - [x] 숫자가 범위 내에 들어오지 않을경우, IllegalArgument Exception
+    - [x] 중복되는 것이 있을 경우, IllegalArgument Exception
+    - [x] 당첨 번호의 개수가 6이 아닐 경우, IllegalArgument Exception
+- [x] 보너스 번호에 대한 검증
+    - [x] 숫자가 아닐 경우, IllegalArgument Exception
+    - [x] 숫자가 범위 내에 들어오지 않을경우, IllegalArgument Exception
+    - [x] 지난 당첨 번호와 중복되는 것이 있을 경우, IllegalArgument Exception
+
 ### GeneratorNumber - 번호 생성기
 
 - [x] 랜덤 번호 생성 (1 - 45)
