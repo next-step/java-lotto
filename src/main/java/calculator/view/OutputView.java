@@ -1,4 +1,4 @@
-package calculator;
+package calculator.view;
 
 public class OutputView {
 
