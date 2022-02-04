@@ -20,6 +20,6 @@ public class WinningTest {
 
         LottoNumber bonusLottoNumber = new LottoNumber(6);
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new Winning(lottoFullNumber, bonusLottoNumber));
+            .isThrownBy(() -> new Winning(new Lotto(lottoFullNumber), bonusLottoNumber));
     }
 }
