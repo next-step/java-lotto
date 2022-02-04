@@ -12,7 +12,7 @@ public class LottoGenerator {
     private final static int LOTTO_FIRST_NUMBER = 1;
     private final static int LOTTO_LAST_NUMBER = 45;
     private final static List<Integer> numbers =
-        IntStream.range(LOTTO_FIRST_NUMBER, LOTTO_LAST_NUMBER + 1)
+        IntStream.rangeClosed(LOTTO_FIRST_NUMBER, LOTTO_LAST_NUMBER)
             .boxed()
             .collect(Collectors.toList());
 
@@ -32,7 +32,6 @@ public class LottoGenerator {
 
         for(int i = 0; i < quantity; i++) {
             List<Integer> lottoNumbers = getLottoNumbers();
-            System.out.println(lottoNumbers);
             totalNumbers.add(lottoNumbers);
         }
         return totalNumbers;
@@ -40,8 +39,9 @@ public class LottoGenerator {
 
     public static List<Integer> getLottoNumbers() {
         Collections.shuffle(numbers);
-        List<Integer> pickedNumbers = numbers.subList(0, 6);
+        List<Integer> pickedNumbers = new ArrayList<>(numbers.subList(0, 6));
         Collections.sort(pickedNumbers);
-        return new ArrayList<>(pickedNumbers);
+
+        return pickedNumbers;
     }
 }
