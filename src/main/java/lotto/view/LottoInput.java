@@ -1,10 +1,10 @@
 package lotto.view;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 public class LottoInput {
 
@@ -17,11 +17,12 @@ public class LottoInput {
         return SCANNER.nextInt();
     }
 
-    public static LottoNumbers inputWinningNumber() {
+    public static Lotto inputWinningNumber() {
         String input = SCANNER.next();
-        return new LottoNumbers(Arrays.stream(input.split(","))
+        return new Lotto(Arrays.stream(input.split(","))
             .mapToInt(Integer::new)
             .boxed()
+            .map(LottoNumber::new)
             .collect(Collectors.toList()));
     }
 

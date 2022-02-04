@@ -1,13 +1,15 @@
 package lotto.domain;
 
-public class LottoNumber {
+import java.util.Objects;
 
-    private final int lottoNumber;
+public class LottoNumber implements Comparable<LottoNumber> {
 
-    public LottoNumber(int lottoNumber) {
-        validateNumberRange(lottoNumber);
+    private final int number;
 
-        this.lottoNumber = lottoNumber;
+    public LottoNumber(int number) {
+        validateNumberRange(number);
+
+        this.number = number;
     }
 
     private void validateNumberRange(final int number) {
@@ -16,7 +18,36 @@ public class LottoNumber {
         }
     }
 
-    public int getLottoNumber() {
-        return lottoNumber;
+    public int getNumber() {
+        return number;
+    }
+
+    @Override
+    public int compareTo(LottoNumber lottoNumber) {
+        if (this.number > lottoNumber.number) {
+            return 1;
+        }
+        if (this.number == lottoNumber.number) {
+            return 0;
+        }
+
+        return -1;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }

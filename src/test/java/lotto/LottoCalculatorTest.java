@@ -15,11 +15,11 @@ class LottoCalculatorTest {
         // given
         LottoCalculator calculator = LottoCalculator.getInstance();
         List<Integer> lotteryNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        int bounusNum = 6;
+        int bonusNum = 6;
         List<Integer> userNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 8));
 
         // when
-        LottoResult lottoResult = calculator.countLotteryNumber(lotteryNumbers, userNumbers, bounusNum);
+        LottoResult lottoResult = calculator.countLotteryNumber(lotteryNumbers, userNumbers, bonusNum);
 
         // then
         assertThat(lottoResult.getNormalSuccessCount()).isEqualTo(5);
