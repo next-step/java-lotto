@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Judge {
 
-    private CorrectNumbers correctNumbers;
+    private final CorrectNumbers correctNumbers;
 
     public Judge(CorrectNumbers correctNumbers) {
         this.correctNumbers = correctNumbers;
