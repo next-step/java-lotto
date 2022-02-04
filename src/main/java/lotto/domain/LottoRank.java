@@ -12,12 +12,12 @@ public enum LottoRank {
     private final int amount;
     private final int matchCount;
 
-    LottoRank(int amount, int matchCount) {
+    LottoRank(final int amount, final int matchCount) {
         this.amount = amount;
         this.matchCount = matchCount;
     }
 
-    public static LottoRank getRank(int matchCount, boolean isBonus) {
+    public static LottoRank getRank(final int matchCount, final boolean isBonus) {
         for (LottoRank rank : LottoRank.values()) {
             if (rank.matchCount != matchCount) {
                 continue;
@@ -31,7 +31,7 @@ public enum LottoRank {
         return FAIL;
     }
 
-    private static LottoRank getSecondOrThird(boolean isBonus) {
+    private static LottoRank getSecondOrThird(final boolean isBonus) {
         if (isBonus) {
             return LottoRank.SECOND;
         }

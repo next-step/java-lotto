@@ -11,15 +11,15 @@ public class CorrectNumbers {
     private final WinningNumbers winningNumbers;
     private final BonusNumber bonusNumber;
 
-    public CorrectNumbers(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+    public CorrectNumbers(final WinningNumbers winningNumbers, final BonusNumber bonusNumber) {
         validateDuplicateNumber(winningNumbers, bonusNumber);
 
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateDuplicateNumber(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
-        Set<String> numbers = new HashSet<String>() {
+    private void validateDuplicateNumber(final WinningNumbers winningNumbers, final BonusNumber bonusNumber) {
+        final Set<String> numbers = new HashSet<String>() {
             {
                 addAll(winningNumbers.get());
                 add(bonusNumber.get());

@@ -6,7 +6,7 @@ public class Budget {
 
     private final int value;
 
-    public Budget(String budget) {
+    public Budget(final String budget) {
         try {
             this.value = Integer.parseInt(budget);
         } catch (NumberFormatException e) {

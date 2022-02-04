@@ -6,21 +6,21 @@ import lotto.domain.RankCounts;
 
 public class PrintView {
 
-    public static void printNumberOfLotto(int size) {
+    public static void printNumberOfLotto(final int size) {
         System.out.printf("%d개를 구매했습니다.\n", size);
     }
 
-    public static void printLottoNumber(Lottos lottos) {
+    public static void printLottoNumber(final Lottos lottos) {
         lottos.get().stream()
             .forEach(lotto -> System.out.println(lotto.get()));
     }
 
-    public static void printRankCounts(RankCounts rankCounts) {
+    public static void printRankCounts(final RankCounts rankCounts) {
         rankCounts.get().entrySet().stream()
             .forEach(e -> {
                 StringBuilder sentence = new StringBuilder();
 
-                LottoRank rank = e.getKey();
+                final LottoRank rank = e.getKey();
                 final int rankCount = e.getValue();
 
                 sentence.append(rank.getMatchCount())
@@ -33,7 +33,7 @@ public class PrintView {
             });
     }
 
-    public static void printProfitRate(double profitRatio) {
+    public static void printProfitRate(final double profitRatio) {
         System.out.printf("총 수익률은 %.2f 입니다. (기준:1)\n", profitRatio);
     }
 }

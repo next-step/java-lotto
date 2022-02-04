@@ -10,8 +10,8 @@ public class InputView {
     }
 
     private static String input() {
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine().trim();
+        final Scanner sc = new Scanner(System.in);
+        final String input = sc.nextLine().trim();
         validateBlank(input);
 
         return input;
@@ -27,7 +27,7 @@ public class InputView {
         return input();
     }
 
-    private static void validateBlank(String input) {
+    private static void validateBlank(final String input) {
         if (input.isEmpty()) {
             throw new IllegalArgumentException("입력은 공백일 수 없습니다.");
         }

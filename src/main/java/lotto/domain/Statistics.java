@@ -9,7 +9,7 @@ public class Statistics {
     private final LottoRanks lottoRanks;
     private final Map<LottoRank, Integer> rankCounts;
 
-    public Statistics(LottoRanks lottoRanks) {
+    public Statistics(final LottoRanks lottoRanks) {
         this.lottoRanks = lottoRanks;
         this.rankCounts = new LinkedHashMap<LottoRank, Integer>() {
             {
@@ -33,7 +33,7 @@ public class Statistics {
     }
 
     public double getProfitRate() {
-        List<LottoRank> lottoRanks = this.lottoRanks.get();
+        final List<LottoRank> lottoRanks = this.lottoRanks.get();
         return lottoRanks.stream().mapToDouble(LottoRank::getAmount).sum() / lottoRanks.size();
     }
 }

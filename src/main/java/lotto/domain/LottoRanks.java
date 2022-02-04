@@ -6,7 +6,7 @@ public class LottoRanks {
 
     private final List<LottoRank> lottoRanks;
 
-    public LottoRanks(List<LottoRank> lottoRanks) {
+    public LottoRanks(final List<LottoRank> lottoRanks) {
         this.lottoRanks = lottoRanks;
     }
 

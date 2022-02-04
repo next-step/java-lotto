@@ -17,22 +17,22 @@ public class LottoApplication {
 
     public static void main(String[] args) {
 
-        Budget budget = new Budget(InputView.inputBudget());
-        Lottos lottos = Lottos.createAutoLottos(budget);
+        final Budget budget = new Budget(InputView.inputBudget());
+        final Lottos lottos = Lottos.createAutoLottos(budget);
         PrintView.printNumberOfLotto(lottos.get().size());
         PrintView.printLottoNumber(lottos);
 
-        CorrectNumbers correctNumbers = new CorrectNumbers(
+        final CorrectNumbers correctNumbers = new CorrectNumbers(
             new WinningNumbers(InputView.inputWinningNumbers()),
             new BonusNumber(InputView.inputBonusNumber()));
 
-        Judge judge = new Judge(correctNumbers);
-        LottoRanks lottoRanks = judge.getRanks(lottos);
+        final Judge judge = new Judge(correctNumbers);
+        final LottoRanks lottoRanks = judge.getRanks(lottos);
 
-         Statistics statistics = new Statistics(lottoRanks);
-         RankCounts rankCounts = statistics.getRankCounts();
+        final Statistics statistics = new Statistics(lottoRanks);
+        final RankCounts rankCounts = statistics.getRankCounts();
 
-         PrintView.printRankCounts(rankCounts);
-         PrintView.printProfitRate(statistics.getProfitRate());
+        PrintView.printRankCounts(rankCounts);
+        PrintView.printProfitRate(statistics.getProfitRate());
     }
 }

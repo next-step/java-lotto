@@ -7,12 +7,12 @@ public class Judge {
 
     private final CorrectNumbers correctNumbers;
 
-    public Judge(CorrectNumbers correctNumbers) {
+    public Judge(final CorrectNumbers correctNumbers) {
         this.correctNumbers = correctNumbers;
     }
 
-    public LottoRanks getRanks(Lottos lottos) {
-        List<LottoRank> lottoRanks = new ArrayList<>();
+    public LottoRanks getRanks(final Lottos lottos) {
+        final List<LottoRank> lottoRanks = new ArrayList<>();
 
         lottos.get().stream()
             .forEach(lotto -> {

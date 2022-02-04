@@ -12,14 +12,14 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    Lottos(List<Lotto> lottos) {
+    Lottos(final List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
-    public static Lottos createAutoLottos(Budget budget) {
-        List<Lotto> lottos = new ArrayList<>();
+    public static Lottos createAutoLottos(final Budget budget) {
+        final List<Lotto> lottos = new ArrayList<>();
 
-        int numberOfLotto = getNumberOfLotto(budget);
+        final int numberOfLotto = getNumberOfLotto(budget);
         for (int i = 0; i < numberOfLotto; i++) {
             Collections.shuffle(LottoBalls.get());
             lottos.add(new Lotto(createRandomNumbers()));
@@ -27,12 +27,12 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    private static int getNumberOfLotto(Budget budget) {
+    private static int getNumberOfLotto(final Budget budget) {
         return budget.getValue() / PRICE_OF_LOTTO;
     }
 
     private static List<String> createRandomNumbers() {
-        List<String> numbers = new ArrayList<>();
+        final List<String> numbers = new ArrayList<>();
 
         for (int i = 0; i < NUMBER_OF_LOTTO_BALL; i++) {
             numbers.add(LottoBalls.get().get(i));

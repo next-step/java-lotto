@@ -8,7 +8,7 @@ public class Lotto {
 
     private final List<String> numbers;
 
-    public Lotto(List<String> numbers) {
+    public Lotto(final List<String> numbers) {
         numbers.sort(Comparator.comparingInt(Integer::parseInt));
         this.numbers = numbers;
     }
@@ -17,7 +17,7 @@ public class Lotto {
         return this.numbers;
     }
 
-    public int matchNumber(List<String> winningNumbers) {
+    public int matchNumber(final List<String> winningNumbers) {
         return (int) numbers.stream()
             .filter(n -> winningNumbers.contains(n))
             .count();
