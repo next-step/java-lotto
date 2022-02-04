@@ -36,4 +36,16 @@ public enum Ranking {
     public int multiplyCountAndWinnerPrice(final int count) {
         return winnerPrice * count;
     }
+
+    public boolean isFail() {
+        return this.equals(FAIL);
+    }
+
+    public int getNormalSuccessNum() {
+        return normalSuccessNum;
+    }
+
+    public int getWinnerPrice() {
+        return winnerPrice;
+    }
 }
