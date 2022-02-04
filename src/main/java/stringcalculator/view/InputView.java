@@ -17,7 +17,7 @@ public class InputView {
 
         if (!isBlank(input)) {
             validatePrefix(input);
-            return new Delimiters(Arrays.asList(getRemovePrefix(input)));
+            return new Delimiters(Arrays.asList(removePrefix(input)));
         }
 
         return new Delimiters(Arrays.asList(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON));
@@ -47,7 +47,7 @@ public class InputView {
         }
     }
 
-    private static String getRemovePrefix(String input) {
+    private static String removePrefix(String input) {
         return input.substring(PREFIX_LENGTH);
     }
 }
