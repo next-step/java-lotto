@@ -32,10 +32,7 @@ public class UserConsole {
         System.out.println(SECOND_MESSAGE);
         String input = scanner.nextLine();
         List<LottoNumber> winningLottoNumber =
-            Arrays.stream(input.replace(SPACE_DELIMITER, BLANK_DELIMITER).split(COMMA))
-                .mapToInt(Integer::new)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
+            makeWinningLottoNumber(input);
         return new LottoNumbers(winningLottoNumber);
     }
 
@@ -43,6 +40,13 @@ public class UserConsole {
         System.out.println(THIRD_MESSAGE);
         int bonusLottoNumber = Integer.valueOf(scanner.nextLine());
         return new LottoNumber(bonusLottoNumber);
+    }
+
+    private static List<LottoNumber> makeWinningLottoNumber(String input) {
+        return Arrays.stream(input.replace(SPACE_DELIMITER, BLANK_DELIMITER).split(COMMA))
+            .mapToInt(Integer::new)
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toList());
     }
 }
 

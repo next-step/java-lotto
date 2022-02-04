@@ -29,12 +29,10 @@ public class UserResult {
     public static void printRank(final RankResult rankResult){
         System.out.println(RANK_STATISTICS);
         System.out.println(DOT_LINE);
-        Arrays.stream(Rank.values())
-            .sorted(Comparator.reverseOrder())
-            .filter(Rank::get)
-            .forEach(Rank->printResult(rankResult, Rank));
+        printRankDetail(rankResult);
 
     }
+
     public static void printResult(final RankResult rankResult, final Rank rank){
         if (printSecond(rankResult, rank)) {
             return;
@@ -73,5 +71,12 @@ public class UserResult {
     private static void printLottoNumber(Lottos lottos) {
         lottos.lottos()
             .forEach(lotto -> System.out.println(lotto.getLottoNumber()));
+    }
+
+    private static void printRankDetail(RankResult rankResult) {
+        Arrays.stream(Rank.values())
+            .sorted(Comparator.reverseOrder())
+            .filter(Rank::get)
+            .forEach(Rank->printResult(rankResult, Rank));
     }
 }
