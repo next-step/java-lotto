@@ -1,0 +1,15 @@
+package lotto.domain;
+
+import java.util.Map;
+
+public class RankCounts {
+    private Map<LottoRank, Integer> rankCounts;
+
+    public RankCounts(Map<LottoRank, Integer> rankCounts) {
+        this.rankCounts = rankCounts;
+    }
+
+    public Map<LottoRank, Integer> get() {
+        return this.rankCounts;
+    }
+}
