@@ -8,6 +8,8 @@ import lotto.domain.LottoResult;
 public class LottoCalculator {
 
     private static final int STANDARD_NUMBER = 12;
+    private static final int MATCHED_BONUS_BALL = 1;
+    private static final int NOT_MATCHED_BONUS_BALL = 0;
     private static final LottoCalculator INSTANCE = new LottoCalculator();
 
     private LottoCalculator() {
@@ -19,10 +21,9 @@ public class LottoCalculator {
 
     public LottoResult countLotteryNumber(final List<Integer> lotteryNumbers,
         List<Integer> userNumbers, int bonusNumber) {
-        int normalSuccessCount = countNormalSuccessNumber(lotteryNumbers, userNumbers);
-        int bonusSuccessCount = countBonusNumber(userNumbers, bonusNumber);
 
-        return new LottoResult(normalSuccessCount, bonusSuccessCount);
+        return new LottoResult(countNormalSuccessNumber(lotteryNumbers, userNumbers),
+            countBonusNumber(userNumbers, bonusNumber));
     }
 
     private int countNormalSuccessNumber(final List<Integer> lotteryNumbers,
@@ -33,10 +34,9 @@ public class LottoCalculator {
     }
 
     private int countBonusNumber(List<Integer> userNumbers, int bonusNum) {
-        int bonusSuccessCount = 0;
         if (userNumbers.contains(bonusNum)) {
-            bonusSuccessCount++;
+            return MATCHED_BONUS_BALL;
         }
-        return bonusSuccessCount;
+        return NOT_MATCHED_BONUS_BALL;
     }
 }
