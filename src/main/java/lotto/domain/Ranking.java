@@ -21,11 +21,6 @@ public enum Ranking {
         this.bonusSuccessNum = bonusSuccessNum;
     }
 
-    public static double getRewardRate(LottoResult lottoResult, int userBuyPrice) {
-        Ranking ranking = judgeRanking(lottoResult);
-        return (double) userBuyPrice / ranking.winnerPrice;
-    }
-
     public static Ranking judgeRanking(LottoResult lottoResult) {
         return Arrays.stream(Ranking.values())
             .filter(rank -> rank.equals(lottoResult))
@@ -36,5 +31,9 @@ public enum Ranking {
     private boolean equals(LottoResult lottoResult) {
         return this.normalSuccessNum == lottoResult.getNormalSuccessCount() &&
             this.bonusSuccessNum == lottoResult.getBonusSuccessCount();
+    }
+
+    public int multiplyCountAndWinnerPrice(final int count) {
+        return winnerPrice * count;
     }
 }
