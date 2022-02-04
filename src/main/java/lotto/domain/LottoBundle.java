@@ -8,6 +8,7 @@ public class LottoBundle {
     public static Lottos lottoBundle(int count){
 
         List<Lotto> lottos = new ArrayList<>();
+
         for(int idx=0; idx<count; idx++){
             lottos.add(LottoGenerator.lottoGenerator());
         }

@@ -41,16 +41,16 @@ public class UserResult {
         if (printSecond(rankResult, rank)) {
             return;
         }
-        System.out.printf(RESULT_MESSAGE, rank.getMatchCount(), rank.getPrize().getValue(), rankResult.getRankResult().get(rank));
+        System.out.printf(RESULT_MESSAGE, rank.getMatchCount(), rank.getPrize().Value(), rankResult.getRankResult().get(rank));
     }
 
     public static void printPrizeRatio(Money totalPrize, Money money){
-        System.out.printf(TOTAL_RATIO_MESSAGE, totalPrize.getValue() / (float) money.getValue());
+        System.out.printf(TOTAL_RATIO_MESSAGE, totalPrize.Value() / (float) money.Value());
     }
 
     private static boolean printSecond(RankResult rankResult, Rank rank) {
         if(rank == rank.SECOND) {
-            System.out.printf(SECOND_RESULT_MESSAGE, rank.getMatchCount(), rank.getPrize().getValue(), rankResult.getRankResult().get(rank));
+            System.out.printf(SECOND_RESULT_MESSAGE, rank.getMatchCount(), rank.getPrize().Value(), rankResult.getRankResult().get(rank));
             return true;
         }
         return false;
