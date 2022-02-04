@@ -23,7 +23,11 @@ public class LottoProcessor {
         LottoMachine lottoMachine = new LottoMachine(winNumbers, bonusNumber);
         List<Integer> integers = lottoTickets.countCorrectWinNumber(lottoMachine);
         List<Integer> bonusNumbers = lottoTickets.checkBonusNumber(lottoMachine);
+
         Analyzer analyzer = new Analyzer(totalPrice);
-        analyzer.calculateWinningMoney(integers,bonusNumbers);
+
+        int totalMoney = analyzer.calculateTotalWinningMoney(integers, bonusNumbers);
+        double profitPercent = analyzer.calculateProfitPercent(totalMoney);
+
     }
 }
