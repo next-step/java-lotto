@@ -1,10 +1,15 @@
 package lotto.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import lotto.domain.Ticket;
 import lotto.domain.WinningNumber;
+import lotto.domain.WinningResult;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoManager;
 import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.Rank;
 import lotto.domain.machine.RandomLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -21,6 +26,9 @@ public class LottoController {
         OutputView.printPurchaseTicket(lottoManager.getLottos());
 
         WinningNumber winningNumber = makeWinningNumber();
+
+        WinningResult winningResult = new WinningResult();
+        winningResult.mappingResult(getRanksFrom(lottoManager, winningNumber));
     }
 
     public Ticket buyTicket() {
@@ -44,4 +52,18 @@ public class LottoController {
     private LottoNumber makeBonusBall() {
         return new LottoNumber(InputView.writeBonusBall());
     }
+
+    private List<Rank> getRanksFrom(LottoManager lottoManager, WinningNumber winningNumber) {
+        List<Rank> ranks = new ArrayList<>();
+
+        for (Lotto lotto : lottoManager.getLottos()) {
+            List<Integer> lottoNumbers = lotto.getNumbers().stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
+
+            ranks.add(winningNumber.compareTo(lottoNumbers));
+        }
+        return ranks;
+    }
+
 }
