@@ -80,10 +80,10 @@
   - [X] 숫자만 입력 가능하고, 반드시 1개만 입력되어야 함.
   - [X] 1 ~ 45 범위의 숫자.
     
-- [ ] 로또 등수 구하기 - Judge
-  - [ ] 로또 번호가 몇개 맞았는지 확인. - lotto.matchNumber
-  - [ ] 맞은 개수가 몇등인지 확인. - LottoRank.getRank
-  - [ ] 만약 5개라면 보너스번호 확인해서 2등,3등 확인.
+- [x] 로또 등수 구하기 - Judge
+  - [x] 로또 번호가 몇개 맞았는지 확인. - lottos.matchNumber
+  - [x]  보너스번호 확인. - lottos.containsBonusNumber
+  - [x] 맞은 개수가 몇등인지 확인. - LottoRank.getRank
 
 - [ ] 로또 결과 통계 만들기. - Statistics
   - [ ] 몇등이 몇개인지 확인. Statistics.getNumberOfRank
