@@ -1,8 +1,10 @@
 package lotto.domain;
 
+import java.util.List;
+
 public class LottoTicket {
 
-    public LottoTicket(int count) {
+    public LottoTicket(List<Lotto> lottos) {
     }
 
     public int lottoCount() {
