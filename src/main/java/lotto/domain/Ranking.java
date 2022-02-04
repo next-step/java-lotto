@@ -21,21 +21,21 @@ public enum Ranking {
         this.bonusSuccessNum = bonusSuccessNum;
     }
 
-    public static double getRewardRate(LottoCountResult lottoResult, int userBuyPrice) {
-        Ranking ranking = getRanking(lottoResult);
+    public static double getRewardRate(int normalSuccessCount, int bonusSuccessCount, int userBuyPrice) {
+        Ranking ranking = getRanking(normalSuccessCount, bonusSuccessCount);
         return (double) userBuyPrice / ranking.winnerPrice;
     }
 
-    public static Ranking getRanking(LottoCountResult lottoResult) {
+    public static Ranking getRanking(int normalSuccessCount, int bonusSuccessCount) {
         return Arrays.stream(Ranking.values())
-            .filter(rank -> rank.equalsFromResult(lottoResult))
+            .filter(rank -> rank.equalsFromResult(normalSuccessCount, bonusSuccessCount))
             .findFirst()
             .orElse(FAIL);
     }
 
-    private boolean equalsFromResult(LottoCountResult lottoResult) {
-        return this.normalSuccessNum == lottoResult.getNormalSuccessCount() &&
-            this.bonusSuccessNum == lottoResult.getBonusSuccessCount();
+    private boolean equalsFromResult(int normalSuccessCount, int bonusSuccessCount) {
+        return this.normalSuccessNum == normalSuccessCount &&
+            this.bonusSuccessNum == bonusSuccessCount;
     }
 
     public int getWinnerPrice() {

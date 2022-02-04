@@ -1,6 +1,5 @@
 package lotto.service;
 
-import lotto.domain.LottoCountResult;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Ranking;
@@ -18,7 +17,7 @@ public class LottoCountCalculator {
         int normalSuccessCount = countNormalSuccessNumber(userNumbers, lottoNumbers);
         int bonusSuccessCount = countBonusNumber(userNumbers, bonusNum);
 
-        return Ranking.getRanking(new LottoCountResult(normalSuccessCount, bonusSuccessCount));
+        return Ranking.getRanking(normalSuccessCount, bonusSuccessCount);
     }
 
     private int countNormalSuccessNumber(LottoNumbers userNumbers, LottoNumbers lotteryNumbers) {

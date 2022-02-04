@@ -8,11 +8,8 @@ class RankingTest {
 
     @Test
     void 우승순위_조회(){
-        // given
-        LottoCountResult lottoResult = new LottoCountResult(6, 0);
-
         // when
-        Ranking ranking = Ranking.getRanking(lottoResult);
+        Ranking ranking = Ranking.getRanking(6, 0);
 
         // then
         assertThat(ranking).isEqualTo(Ranking.ONE);
@@ -21,11 +18,10 @@ class RankingTest {
     @Test
     void 수익률_조회(){
         // given
-        LottoCountResult lottoResult = new LottoCountResult(3, 0);
         int userBuyPrice = 500;
 
         // when
-        double rewardRate = Ranking.getRewardRate(lottoResult, userBuyPrice);
+        double rewardRate = Ranking.getRewardRate(3,0, userBuyPrice);
 
         // then
         assertThat(rewardRate).isEqualTo(0.1);
