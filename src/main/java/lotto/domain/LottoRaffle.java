@@ -25,7 +25,6 @@ public class LottoRaffle {
             return cum;
         });
 
-        System.out.println("개수 > " + count );
         if (count == 5 && lotto.getLotto().contains(winningLotto.getBonusNumber())) {
             this.matchBonusNumber++;
             return;
