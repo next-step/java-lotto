@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.common.exception.SystemMessage.*;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -24,13 +26,13 @@ public class Lotto {
     private void validateDuplicateNumber(final List<LottoNumber> lotto) {
         Set<LottoNumber> lottoDuplicate = new HashSet<>(lotto);
         if (lotto.size() != lottoDuplicate.size()) {
-            throw new LottoException("복권에 중복된 숫자가 존재합니다.");
+            throw new LottoException(DUPLICATE_EXCEPTION_MESSAGE);
         }
     }
 
     private void validateNumbersSize(final List<LottoNumber> lotto) {
         if (lotto.size() != 6) {
-            throw new LottoException("복권의 숫자 개수가 유효하지 않습니다.");
+            throw new LottoException(LOTTO_SIZE_EXCEPTION_MESSAGE);
         }
     }
 

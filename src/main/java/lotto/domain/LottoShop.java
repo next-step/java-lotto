@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.common.exception.SystemMessage.*;
+
 import lotto.common.exception.LottoException;
 
 public class LottoShop {
@@ -17,10 +19,10 @@ public class LottoShop {
 
     private void validatePrice(final int price) {
         if (price < LOTTO_PRICE) {
-            throw new LottoException("최소 1000원이어야 합니다.");
+            throw new LottoException(MIN_PURCHASE_EXCEPTION_MESSAGE);
         }
         if (price % LOTTO_PRICE != ZERO) {
-            throw new LottoException("투입한 금액이 1000원 단위가 아닙니다.");
+            throw new LottoException(PER_THOUSAND_EXCEPTION_MESSAGE);
         }
     }
 

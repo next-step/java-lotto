@@ -1,5 +1,7 @@
 package lotto.view;
 
+import static lotto.common.exception.SystemMessage.*;
+
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
@@ -22,7 +24,7 @@ public class LottoInputView {
     private int userPrice;
 
     public void prepareLottoGame(final LottoShop lottoShop) {
-        System.out.println("구입금액을 입력해 주세요.");
+        System.out.println(INPUT_PRICE_MESSAGE);
         userPrice = LottoInput.inputPrice();
         int lottoAmount = lottoShop.countPossibleLottoAmount(userPrice);
 
@@ -36,10 +38,10 @@ public class LottoInputView {
             printLotto(lotto.getLotto());
         }
 
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        System.out.println(INPUT_LAST_WEEK_WINNING_NUMBER_MESSAGE);
         winningNumbers = LottoInput.inputWinningNumber();
 
-        System.out.println("보너스 볼을 입력해주세요.");
+        System.out.println(INPUT_BONUS_BALL_MESSAGE);
         bonusBall = new LottoNumber(LottoInput.inputBonusBall());
     }
 
