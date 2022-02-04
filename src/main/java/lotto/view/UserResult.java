@@ -55,7 +55,4 @@ public class UserResult {
         }
         return false;
     }
-
-
-
 }

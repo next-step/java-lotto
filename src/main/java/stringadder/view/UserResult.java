@@ -7,3 +7,4 @@ public class UserResult {
         System.out.println(ARROW+result);
     }
 }
+

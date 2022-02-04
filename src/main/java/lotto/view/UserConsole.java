@@ -45,3 +45,4 @@ public class UserConsole {
         return new LottoNumber(bonusLottoNumber);
     }
 }
+
