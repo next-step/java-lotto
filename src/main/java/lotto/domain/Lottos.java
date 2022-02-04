@@ -39,12 +39,7 @@ public class Lottos {
     }
 
     private static List<String> createRandomNumbers() {
-        final List<String> numbers = new ArrayList<>();
-
-        for (int i = 0; i < NUMBER_OF_LOTTO_BALL; i++) {
-            numbers.add(LottoBalls.get().get(i));
-        }
-        return numbers;
+        return new ArrayList<>(LottoBalls.get().subList(0, NUMBER_OF_LOTTO_BALL));
     }
 
     public List<Lotto> get() {
