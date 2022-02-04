@@ -3,20 +3,20 @@ package lotto;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import lotto.domain.LottoResult;
+import lotto.domain.LottoCountResult;
 
-public class LottoCalculator {
+public class LottoCountCalculator {
 
     private static final int STANDARD_NUMBER = 12;
-    private static final LottoCalculator INSTANCE = new LottoCalculator();
+    private static final LottoCountCalculator INSTANCE = new LottoCountCalculator();
 
-    private LottoCalculator() {}
+    private LottoCountCalculator() {}
 
-    public LottoResult countLotteryNumber(final List<Integer> lotteryNumbers, List<Integer> userNumbers, int bonusNum) {
+    public LottoCountResult countLotteryNumber(final List<Integer> lotteryNumbers, List<Integer> userNumbers, int bonusNum) {
         int normalSuccessCount = countNormalSuccessNumber(lotteryNumbers, userNumbers);
         int bonusSuccessCount = countBonusNumber(userNumbers, bonusNum);
 
-        return new LottoResult(normalSuccessCount, bonusSuccessCount);
+        return new LottoCountResult(normalSuccessCount, bonusSuccessCount);
     }
 
     private int countNormalSuccessNumber(final List<Integer> lotteryNumbers, List<Integer> userNumbers){
@@ -33,7 +33,7 @@ public class LottoCalculator {
         return bonusSuccessCount;
     }
 
-    public static LottoCalculator getInstance() {
+    public static LottoCountCalculator getInstance() {
         return INSTANCE;
     }
 }

@@ -10,7 +10,7 @@ class RankingTest {
     @Test
     void 우승순위_조회(){
         // given
-        LottoResult lottoResult = new LottoResult(6, 0);
+        LottoCountResult lottoResult = new LottoCountResult(6, 0);
 
         // when
         Ranking ranking = Ranking.getRanking(lottoResult);
@@ -22,7 +22,7 @@ class RankingTest {
     @Test
     void 수익률_조회(){
         // given
-        LottoResult lottoResult = new LottoResult(3, 0);
+        LottoCountResult lottoResult = new LottoCountResult(3, 0);
         int userBuyPrice = 500;
 
         // when

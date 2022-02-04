@@ -1,12 +1,11 @@
 package lotto.domain;
 
-public class LottoResult {
-
+public class LottoCountResult {
 
     private final int normalSuccessCount;
     private final int bonusSuccessCount;
 
-    public LottoResult(int normalSuccessCount, int bonusSuccessCount) {
+    public LottoCountResult(int normalSuccessCount, int bonusSuccessCount) {
         this.normalSuccessCount = normalSuccessCount;
         this.bonusSuccessCount = bonusSuccessCount;
     }
