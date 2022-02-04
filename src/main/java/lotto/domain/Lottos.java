@@ -23,6 +23,10 @@ public class Lottos {
         return Collections.unmodifiableList(lottoLists);
     }
 
+    public int getLottoCount() {
+        return lottoCount;
+    }
+
     private List<Lotto> generatorLottos () {
         List<Lotto> lottoLists = new ArrayList<>();
 

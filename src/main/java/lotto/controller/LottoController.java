@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,10 +9,9 @@ import lotto.domain.Lottos;
 import lotto.util.Statistics;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+import lotto.view.ResultView;
 
 public class LottoController {
-
-//    private void
 
     public void start() {
         OutputView.printRequestLottoPrice();
@@ -38,15 +36,9 @@ public class LottoController {
         int bonusBall = InputView.readBonusNumber();
 
         LottoStatistics lottoStatistics = new LottoStatistics(winningNumberList, bonusBall,
-            lottoLists);
-        List<Statistics> lottoResults = lottoStatistics.getResultStatistics();
+            lottoLists, lottoPrice);
 
-        for (int i = 0; i < lottoResults.size(); i++) {
-            if(lottoResults.get(i).getGrade()>=3) {
-                System.out.println(
-                    lottoResults.get(i).getGrade() + "개 일치(" + lottoResults.get(i).getMoney() + "원)");
-            }
-        }
+        ResultView.printLottoStatistics(lottoStatistics.getResultStatistics(), lottoStatistics.getLottoEarningRate());
     }
 
     private List<Integer> stringToIntegerList(String winningNumber) {
