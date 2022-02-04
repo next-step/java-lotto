@@ -15,7 +15,6 @@ class LottoNumberTest {
         assertThat(lottoNumber.getLottoNum()).isEqualTo(number);
     }
 
-
     @Test
     void 복권의_숫자는_1부터_45사이의_숫자여야_한다() {
         int number = 47;

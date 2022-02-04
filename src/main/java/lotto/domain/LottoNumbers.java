@@ -10,7 +10,7 @@ public class LottoNumbers {
 
     private final List<LottoNumber> numbers;
 
-    public LottoNumbers(final List<Integer> numbers){
+    public LottoNumbers(final List<Integer> numbers) {
         validateNumbersSize(numbers);
         validateDuplicateNumber(numbers);
 
