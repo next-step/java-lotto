@@ -23,7 +23,6 @@ public class LottoGenerator {
     public Set<Integer> generateLotto() {
         Collections.shuffle(LOTTO);
         List<Integer> cut = LOTTO.subList(0, LOTTO_SIZE_BOUND);
-        Collections.sort(cut);
         return new HashSet<>(cut);
     }
 }
