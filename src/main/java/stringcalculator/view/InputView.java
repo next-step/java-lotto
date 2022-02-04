@@ -1,7 +1,6 @@
 package stringcalculator.view;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import stringcalculator.domain.Delimiters;
 
@@ -15,15 +14,14 @@ public class InputView {
     private static final String DEFAULT_NUMBER = "0";
 
     public static Delimiters getDelimiters() {
-        List<String> delimiters = Arrays.asList(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON);
         String input = getInput();
 
         if (!isBlank(input)) {
             validatePrefix(input);
-            delimiters = Arrays.asList(getRemovePrefix(input));
+            return new Delimiters(Arrays.asList(getRemovePrefix(input)));
         }
 
-        return new Delimiters(delimiters);
+        return new Delimiters(Arrays.asList(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON));
     }
 
     public static String getExpression() {
