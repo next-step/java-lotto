@@ -33,8 +33,18 @@ public enum Rank {
         return matchCount == count;
     }
 
+    public static boolean get(Rank rank){
+        return rank!=rank.NOTHING;
+    }
     public int getMatchCount() {
         return matchCount;
+    }
+
+    public Money getPrize() {
+        return prize;
+    }
+    public Money getPrize(int hit){
+        return new Money(prize.getValue() * hit);
     }
 }
 
