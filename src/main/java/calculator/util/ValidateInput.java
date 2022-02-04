@@ -1,4 +1,4 @@
-package util;
+package calculator.util;
 
 import java.util.Objects;
 

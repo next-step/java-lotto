@@ -1,6 +1,6 @@
-package view;
+package calculator.view;
 
-import util.Console;
+import calculator.util.Console;
 
 public class InputView {
 
