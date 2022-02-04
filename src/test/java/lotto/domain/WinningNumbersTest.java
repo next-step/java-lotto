@@ -43,4 +43,13 @@ class WinningNumbersTest {
         // then
         assertThrows(IllegalArgumentException.class, () -> new WinningNumbers(input));
     }
+
+    @DisplayName("숫자 사이 공백이 있는 경우")
+    @Test
+    void NumberRange() {
+        // given
+        String input = "1, 2, 3, 4, 5, 6";
+        // then
+        assertDoesNotThrow(() -> new WinningNumbers(input));
+    }
 }
