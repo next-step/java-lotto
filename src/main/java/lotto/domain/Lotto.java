@@ -7,10 +7,17 @@ import java.util.List;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Map;
+import lotto.view.ResultView;
 
 public class Lotto {
 
     List<LottoNumbers> lottoTickets;
+
+    public Lotto(int userMoney) {
+        int ticketNumber = buyLottoTickets(userMoney);
+        generateLottoTickets(ticketNumber);
+        ResultView.printLottoTicketsInfo(lottoTickets);
+    }
 
     public int buyLottoTickets(int money) {
         return money / PRICE;

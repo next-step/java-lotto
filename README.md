@@ -20,19 +20,20 @@
 
 ## 기능 구현 사항
 
-- [ ] 구입 금액을 입력받는다. (InputView)
+- [x] 구입 금액을 입력받는다. (InputView)
 - [x] 구매 단위는 1000원 단위이다. (Lotto#buyLottoTickets()) 
 - [x] 구입 금액에 맞추어 해당하는 로또를 발급한다. (Lotto#generateLottoTickets())
 - [X] 1 ~ 45 범위의 6개의 난수 생성 (Lotto#generateRandoms()) 
 - [X] 6개의 숫자들은 중복되지 않는다. (LottoNumbers)
-- [ ] 지난 주 당첨번호를 입력 받는다. (Input)
-- [ ] 보너스 볼을 입력 받는다. 중복 X (Input)
+- [x] 지난 주 당첨번호를 입력 받는다. (InputView#)
+- [x] 보너스 볼을 입력 받는다. 중복 X (InputView#)
 - [x] 로또 번호가 당첨되었는지 여부를 확인한다.(Lotto#compareWithWinning())
   - [x] 당첨에 대한 정보는 enum의 형태로 제공한다. (LottoRank)
 - [x] 당첨번호는 보너스볼 한 개를 포함해 7개의 숫자이어야 한다. (WinningNumbers)
-- [x] 수익률 및 통계를 계산한다. 소수점 두자리에서 버림 처리 (Lotto)
-- [ ] 당첨 통계를 출력한다. (ResultView)
-- [ ] 수익률을 출력한다. (ResultView)
+- [x] 수익률 및 통계를 계산한다. 소수점 두자리에서 버림 처리 (Lotto#getProfit)
+- [x] 당첨 통계를 출력한다. (ResultView#printStatistic())
+  - [x] 로또 결과를 map 형태로 받아온다. (Lotto#getWinningResult())
+- [x] 수익률을 출력한다. (ResultView#printProfit())
 
 ---
 

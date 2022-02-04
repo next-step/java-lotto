@@ -18,7 +18,7 @@ class LottoTest {
 
     @BeforeEach
     void setUp() {
-        lotto = new Lotto();
+        lotto = new Lotto(10000);
     }
 
     @Test

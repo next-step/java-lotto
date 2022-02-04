@@ -35,4 +35,9 @@ public class LottoNumbers implements Iterable<Integer> {
     public Iterator<Integer> iterator() {
         return lottoNumbers.iterator();
     }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
 }
