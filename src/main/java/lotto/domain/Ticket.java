@@ -13,6 +13,10 @@ public class Ticket {
         this.buyCount = money / TICKET_PRICE;
     }
 
+    public int getBuyCash() {
+        return this.buyCount * TICKET_PRICE;
+    }
+
     public int getBuyCount() {
         return this.buyCount;
     }
