@@ -1,6 +1,7 @@
 package lotto.domain;
 
 
+import java.util.Comparator;
 import java.util.List;
 
 public class Lotto {
@@ -8,6 +9,7 @@ public class Lotto {
     private final List<String> numbers;
 
     public Lotto(List<String> numbers) {
+        numbers.sort(Comparator.comparingInt(Integer::parseInt));
         this.numbers = numbers;
     }
 
