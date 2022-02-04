@@ -8,7 +8,10 @@ public class Money {
         this.value = value;
     }
 
-    public int getValue() {
+    public int Value() {
         return value;
+    }
+    public Money multiple(int hit){
+        return new Money(value * hit);
     }
 }
