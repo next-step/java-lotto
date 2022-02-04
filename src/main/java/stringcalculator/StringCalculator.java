@@ -10,13 +10,13 @@ import stringcalculator.view.ResultView;
 public class StringCalculator {
 
     public static void main(String[] args) {
-        UserInput userInput = new UserInput();
-        Separator separator = new Separator(userInput.getUserInput());
+        final UserInput userInput = new UserInput();
+        final Separator separator = new Separator(userInput.getUserInput());
 
-        List<String> userNumbers = separator.split();
-        Number numbers = new Number(userNumbers);
-        Calculator calculator = new Calculator();
-        ResultView resultView = new ResultView();
+        final List<String> userNumbers = separator.split();
+        final Number numbers = new Number(userNumbers);
+        final Calculator calculator = new Calculator();
+        final ResultView resultView = new ResultView();
         resultView.printSum(calculator.calculate(numbers.getNumberInput()));
     }
 }
