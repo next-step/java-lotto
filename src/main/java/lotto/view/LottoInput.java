@@ -4,12 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 
 public class LottoInput {
 
     private static final Scanner SCANNER = new Scanner(System.in);
+    private static final String SPACE = " ";
+    private static final String EMPTY = "";
+    private static final String COMMA = ",";
 
     private LottoInput() {
     }
@@ -27,7 +29,7 @@ public class LottoInput {
     }
 
     private static String[] splitWinningNumber(final String input) {
-        return input.replace(" ", "").split(",");
+        return input.replace(SPACE, EMPTY).split(COMMA);
     }
 
     public static int inputBonusBall() {

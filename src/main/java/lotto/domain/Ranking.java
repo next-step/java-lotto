@@ -12,13 +12,13 @@ public enum Ranking {
     FAIL(0, 0, 0);
 
     private final int winnerPrice;
-    private final int normalSuccessNum;
-    private final int bonusSuccessNum;
+    private final int normalSuccessNumber;
+    private final int bonusSuccessNumber;
 
-    Ranking(int winnerPrice, int normalSuccessNum, int bonusSuccessNum) {
+    Ranking(int winnerPrice, int normalSuccessNumber, int bonusSuccessNumber) {
         this.winnerPrice = winnerPrice;
-        this.normalSuccessNum = normalSuccessNum;
-        this.bonusSuccessNum = bonusSuccessNum;
+        this.normalSuccessNumber = normalSuccessNumber;
+        this.bonusSuccessNumber = bonusSuccessNumber;
     }
 
     public static Ranking judgeRanking(LottoResult lottoResult) {
@@ -29,8 +29,8 @@ public enum Ranking {
     }
 
     private boolean equals(LottoResult lottoResult) {
-        return this.normalSuccessNum == lottoResult.getNormalSuccessCount() &&
-            this.bonusSuccessNum == lottoResult.getBonusSuccessCount();
+        return this.normalSuccessNumber == lottoResult.getNormalSuccessCount() &&
+            this.bonusSuccessNumber == lottoResult.getBonusSuccessCount();
     }
 
     public int multiplyCountAndWinnerPrice(final int count) {
@@ -41,8 +41,8 @@ public enum Ranking {
         return this.equals(FAIL);
     }
 
-    public int getNormalSuccessNum() {
-        return normalSuccessNum;
+    public int getNormalSuccessNumber() {
+        return normalSuccessNumber;
     }
 
     public int getWinnerPrice() {

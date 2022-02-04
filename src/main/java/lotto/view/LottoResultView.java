@@ -14,6 +14,8 @@ import lotto.domain.Ranking;
 
 public class LottoResultView {
 
+    private static final int ZERO = 0;
+
     private final StringBuilder stringBuilder = new StringBuilder();
     private final Map<Ranking, Integer> totalResult = new HashMap<>();
     private int totalWinnerPrice = 0;
@@ -23,11 +25,11 @@ public class LottoResultView {
     }
 
     private void initializeTotalResult() {
-        totalResult.put(Ranking.FIRST, 0);
-        totalResult.put(Ranking.SECOND, 0);
-        totalResult.put(Ranking.THIRD, 0);
-        totalResult.put(Ranking.FOURTH, 0);
-        totalResult.put(Ranking.FIFTH, 0);
+        totalResult.put(Ranking.FIRST, ZERO);
+        totalResult.put(Ranking.SECOND, ZERO);
+        totalResult.put(Ranking.THIRD, ZERO);
+        totalResult.put(Ranking.FOURTH, ZERO);
+        totalResult.put(Ranking.FIFTH, ZERO);
     }
 
     public void findWinner(final List<LottoNumber> winningNumbers, final Lottos userLottos,
@@ -77,7 +79,7 @@ public class LottoResultView {
             return;
         }
 
-        stringBuilder.append(ranking.getNormalSuccessNum())
+        stringBuilder.append(ranking.getNormalSuccessNumber())
             .append("개 일치 ")
             .append("(")
             .append(ranking.getWinnerPrice())

@@ -4,6 +4,9 @@ import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
+    private static final int LOTTO_START_NUM = 1;
+    private static final int LOTTO_END_NUM = 45;
+
     private final int number;
 
     public LottoNumber(int number) {
@@ -13,7 +16,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validateNumberRange(final int number) {
-        if (number < 1 || number > 45) {
+        if (number < LOTTO_START_NUM || LOTTO_END_NUM > 45) {
             throw new IllegalArgumentException("복권의 숫자 범위가 유효하지 않습니다.");
         }
     }

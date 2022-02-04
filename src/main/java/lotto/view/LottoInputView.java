@@ -8,6 +8,12 @@ import lotto.domain.Lottos;
 
 public class LottoInputView {
 
+    private static final String SPACE = " ";
+    private static final String COMMA = ",";
+    private static final String LEFT_SQUARE_BRACKETS = "[";
+    private static final String RIGHT_SQUARE_BRACKETS = "]";
+    private static final int ZERO = 0;
+
     private final StringBuilder stringBuilder = new StringBuilder();
 
     private List<LottoNumber> winningNumbers;
@@ -35,19 +41,20 @@ public class LottoInputView {
     }
 
     private void printLotto(final List<LottoNumber> lottoNumbers) {
-        stringBuilder.append("[");
+        stringBuilder.append(LEFT_SQUARE_BRACKETS);
 
         for (LottoNumber lottoNumber : lottoNumbers) {
             stringBuilder.append(lottoNumber.getNumber())
-                .append(", ");
+                .append(COMMA)
+                .append(SPACE);
         }
 
-        stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(" "));
-        stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(","));
-        stringBuilder.append("]");
+        stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(SPACE));
+        stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(COMMA));
+        stringBuilder.append(RIGHT_SQUARE_BRACKETS);
 
         System.out.println(stringBuilder);
-        stringBuilder.setLength(0);
+        stringBuilder.setLength(ZERO);
     }
 
     public List<LottoNumber> getWinningNumbers() {
