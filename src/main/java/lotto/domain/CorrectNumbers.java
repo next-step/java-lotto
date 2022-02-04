@@ -19,7 +19,7 @@ public class CorrectNumbers {
     }
 
     private void validateDuplicateNumber(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
-        Set numbers = new HashSet() {
+        Set<String> numbers = new HashSet<String>() {
             {
                 addAll(winningNumbers.get());
                 add(bonusNumber.get());
