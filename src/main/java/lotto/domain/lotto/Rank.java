@@ -19,8 +19,12 @@ public enum Rank {
         this.prize = prize;
     }
 
+    public int getMathCount() {
+        return this.matchCount;
+    }
+
     public long getPrize() {
-        return prize;
+        return this.prize;
     }
 
     public static Rank find(int matchCount, boolean matchBonus) {
