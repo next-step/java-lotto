@@ -9,7 +9,7 @@ public class RankCount {
     private final Lottos lottos;
     private final Winning winning;
 
-    public RankCount(Lottos lottos, Winning winning) {
+    public RankCount(final Lottos lottos, final Winning winning) {
         this.lottos = lottos;
         this.winning = winning;
     }

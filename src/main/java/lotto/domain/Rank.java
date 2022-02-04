@@ -17,12 +17,12 @@ public enum Rank {
     private final Money prize;
 
 
-    Rank(int matchCount, int prize) {
+    Rank(final int matchCount,final int prize) {
         this.matchCount = matchCount;
         this.prize = new Money(prize);
     }
 
-    public static Rank countMatch(Winning winning, Lotto lotto){
+    public static Rank countMatch(final Winning winning, final Lotto lotto){
         int lottoCount = (int) winning.winningLottoNumber(lotto);
         boolean bonusBallMatch = winning.bonusLottoNumber(lotto);
         if (THIRD.match(lottoCount) && !bonusBallMatch) {
@@ -32,7 +32,7 @@ public enum Rank {
             .orElse(NOTHING);
     }
 
-    public boolean match(int count){
+    public boolean match(final int count){
         return matchCount == count;
     }
 
@@ -46,7 +46,7 @@ public enum Rank {
     public Money getPrize() {
         return prize;
     }
-    public Money getPrize(int hit){
+    public Money getPrize(final int hit){
         return new Money(prize.Value()).multiple(hit);
     }
 }

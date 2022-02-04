@@ -9,7 +9,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final static String ERROR_MESSAGE = "로또 숫자는 1~45 사이이어야 합니다.";
     private int value;
 
-    public LottoNumber(int value) {
+    public LottoNumber(final int value) {
         validateRange(value);
         this.value = value;
     }
@@ -36,7 +36,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return this.value - o.value;
     }
 
-    private void validateRange(int value) {
+    private void validateRange(final int value) {
         if (value < MIN_RANGE_NUMBER || value > MAX_RANGE_NUMBER) {
             throw new IllegalArgumentException(ERROR_MESSAGE);
         }

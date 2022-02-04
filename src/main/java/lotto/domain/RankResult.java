@@ -7,11 +7,11 @@ public class RankResult {
 
     private final Map<Rank, Integer> rankResult;
 
-    public RankResult(Map<Rank, Integer> rankResult) {
+    public RankResult(final Map<Rank, Integer> rankResult) {
         this.rankResult = new HashMap<>(rankResult);
     }
 
-    public RankResult(RankCount rankCount) {
+    public RankResult(final RankCount rankCount) {
         Map<Rank, Integer> rankResult = new HashMap<>(rankCount.rankCount());
         this.rankResult = rankResult;
     }

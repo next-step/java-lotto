@@ -14,7 +14,7 @@ public class LottoNumbers {
     private final static String ERROR_MESSAGE = "로또 숫자는 중복될 수 없습니다.";
     private final List<LottoNumber> lottoFullNumber;
 
-    public LottoNumbers(List<LottoNumber> lottoFullNumber) {
+    public LottoNumbers(final List<LottoNumber> lottoFullNumber) {
         List<LottoNumber> lottoFullNumberLengthSix = lottoFullNumber.subList(NUMBER_ZERO,
             LOTTO_NUMBER_SIZE);
         Collections.sort(lottoFullNumberLengthSix);
@@ -22,7 +22,7 @@ public class LottoNumbers {
         this.lottoFullNumber = new ArrayList<>(lottoFullNumberLengthSix);
     }
 
-    private void validateNonDuplication(List<LottoNumber> lottoFullNumberLengthSix) {
+    private void validateNonDuplication(final List<LottoNumber> lottoFullNumberLengthSix) {
         Set<LottoNumber> LottoNumberSet = new HashSet<>(lottoFullNumberLengthSix);
         if (LottoNumberSet.size() != LOTTO_NUMBER_SIZE){
             throw new IllegalArgumentException(ERROR_MESSAGE);
@@ -36,13 +36,13 @@ public class LottoNumbers {
             .collect(Collectors.toList());
     }
 
-    public long countMatch(LottoNumbers lottoFullNumber){
+    public long countMatch(final LottoNumbers lottoFullNumber){
         return this.lottoFullNumber.stream()
             .filter(lottoFullNumber::contains)
             .count();
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
+    public boolean contains(final LottoNumber lottoNumber) {
         return this.lottoFullNumber.contains(lottoNumber);
     }
 

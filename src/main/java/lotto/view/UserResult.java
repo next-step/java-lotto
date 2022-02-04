@@ -21,14 +21,14 @@ public class UserResult {
 
     }
 
-    public static void printCountMessage(Lottos lottos){
+    public static void printCountMessage(final Lottos lottos){
         System.out.println(lottos.getLottosSize()+LOTTO_COUNT_MESSAGE);
         for(Lotto lotto : lottos.lottos()){
             System.out.println(lotto.getLottoNumber());
         }
     }
 
-    public static void printRank(RankResult rankResult){
+    public static void printRank(final RankResult rankResult){
         System.out.println(RANK_STATISTICS);
         System.out.println(DOT_LINE);
         Arrays.stream(Rank.values())
@@ -37,18 +37,18 @@ public class UserResult {
             .forEach(Rank->printResult(rankResult, Rank));
 
     }
-    public static void printResult(RankResult rankResult, Rank rank){
+    public static void printResult(final RankResult rankResult, final Rank rank){
         if (printSecond(rankResult, rank)) {
             return;
         }
         System.out.printf(RESULT_MESSAGE, rank.getMatchCount(), rank.getPrize().Value(), rankResult.getRankResult().get(rank));
     }
 
-    public static void printPrizeRatio(Money totalPrize, Money money){
+    public static void printPrizeRatio(final Money totalPrize, final Money money){
         System.out.printf(TOTAL_RATIO_MESSAGE, totalPrize.Value() / (float) money.Value());
     }
 
-    private static boolean printSecond(RankResult rankResult, Rank rank) {
+    private static boolean printSecond(final RankResult rankResult, final Rank rank) {
         if(rank == rank.SECOND) {
             System.out.printf(SECOND_RESULT_MESSAGE, rank.getMatchCount(), rank.getPrize().Value(), rankResult.getRankResult().get(rank));
             return true;

@@ -5,9 +5,9 @@ import java.util.List;
 
 public class LottoBundle {
 
-    public static Lottos lottoBundle(int count){
+    public static Lottos lottoBundle(final int count){
 
-        List<Lotto> lottos = new ArrayList<>();
+        final List<Lotto> lottos = new ArrayList<>();
 
         for(int idx=0; idx<count; idx++){
             lottos.add(LottoGenerator.lottoGenerator());

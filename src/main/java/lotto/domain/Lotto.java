@@ -6,7 +6,7 @@ public class Lotto {
 
     private final LottoNumbers lottoNumber;
 
-    public Lotto(LottoNumbers lottoNumber){
+    public Lotto(final LottoNumbers lottoNumber){
         this.lottoNumber = lottoNumber;
     }
 
@@ -14,11 +14,11 @@ public class Lotto {
         return lottoNumber.getLottoFullNumber();
     }
 
-    public long countMatch(Lotto lotto){
+    public long countMatch(final Lotto lotto){
         return lottoNumber.countMatch(lotto.lottoNumber);
     }
 
-    public boolean contains(LottoNumber lottoNumber){
+    public boolean contains(final LottoNumber lottoNumber){
         return this.lottoNumber.getLottoFullNumber().contains(lottoNumber.value());
     }
 }

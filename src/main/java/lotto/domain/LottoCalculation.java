@@ -6,7 +6,7 @@ public class LottoCalculation {
 
     private final Money value;
 
-    public LottoCalculation(Money value) {
+    public LottoCalculation(final Money value) {
         this.value = value;
     }
 
