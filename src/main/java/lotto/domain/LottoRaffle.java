@@ -11,7 +11,6 @@ public class LottoRaffle {
         this.winningLotto = winningLotto;
     }
 
-    // TODO : 다중 if 문 enum이나 map을 사용하여 처리
     public void compareLotto(Lotto lotto) {
         int count = lotto.getLotto().stream().reduce(0, (cum, val) -> {
             if (winningLotto.getLotto().contains(val)) {
@@ -24,16 +23,19 @@ public class LottoRaffle {
         if (count != 5) {
             isBonusNumber = false;
         }
-        LottoResult.upCount(count, isBonusNumber);
+
+        if(LottoResult.findLottoResult(count, isBonusNumber) != LottoResult.NOMATCH) {
+            LottoResult.increaseMatch(count, isBonusNumber);
+        }
     }
 
-    public List<Integer> getResults() {
+    public List<LottoResult> getResults() {
         return Arrays.asList(
-            LottoResult.MATCH3.getCount(),
-            LottoResult.MATCH4.getCount(),
-            LottoResult.MATCH5.getCount(),
-            LottoResult.MATCHBONUS.getCount(),
-            LottoResult.MATCH6.getCount()
+            LottoResult.MATCH3,
+            LottoResult.MATCH4,
+            LottoResult.MATCH5,
+            LottoResult.MATCHBONUS,
+            LottoResult.MATCH6
         );
     }
 }
