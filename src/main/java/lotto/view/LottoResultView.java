@@ -31,7 +31,7 @@ public class LottoResultView {
     }
 
     public void findWinner(final List<LottoNumber> winningNumbers, final Lottos userLottos,
-         final LottoNumber bonusNumber) {
+        final LottoNumber bonusNumber) {
 
         final LottoCalculator lottoCalculator = LottoCalculator.getInstance();
 

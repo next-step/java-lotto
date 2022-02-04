@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lotto.domain.LottoAutoGenerator;
 import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.Test;
 
