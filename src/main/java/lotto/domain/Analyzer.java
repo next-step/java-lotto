@@ -62,10 +62,6 @@ public class Analyzer {
         return 0;
     }
 
-//    public List<Integer> getCorrectCounts() {
-//        return new ArrayList<>(this.correctCounts);
-//    }
-
     public List<WinningPrice> getWinningPrices() {
         return new ArrayList<>(winningPrices);
     }
