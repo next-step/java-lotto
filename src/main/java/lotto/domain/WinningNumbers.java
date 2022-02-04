@@ -15,7 +15,8 @@ public class WinningNumbers {
     private final List<String> values;
 
     public WinningNumbers(String inputWinningNumbers) {
-        validateInputFormat(removeBlank(inputWinningNumbers));
+        inputWinningNumbers = removeBlank(inputWinningNumbers);
+        validateInputFormat(inputWinningNumbers);
         List<String> winningNumbers = splitNumber(inputWinningNumbers);
 
         validateWinningNumberCount(winningNumbers);
