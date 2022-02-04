@@ -4,11 +4,11 @@ import java.util.Arrays;
 
 public enum Ranking {
 
-    ONE(2000000000, 6, 0),
-    TWO(30000000, 5, 1),
-    THREE(1500000, 5, 0),
-    FOUR(50000, 4, 0),
-    FIVE(5000, 3, 0),
+    FIRST(2000000000, 6, 0),
+    SECOND(30000000, 5, 1),
+    THIRD(1500000, 5, 0),
+    FOURTH(50000, 4, 0),
+    FIFTH(5000, 3, 0),
     FAIL(0, 0, 0);
 
     private final int winnerPrice;
