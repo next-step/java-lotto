@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Tickets {
@@ -11,7 +12,7 @@ public class Tickets {
     }
 
     public List<Ticket> get() {
-        return tickets;
+        return Collections.unmodifiableList(tickets);
     }
 
     public int count() {
