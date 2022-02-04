@@ -21,8 +21,9 @@ public class LottoApplication {
         final List<Integer> winningNumbers = InputView.inputLastWinningNumbers();
         final Integer bonusNumber = InputView.inputBonusNumber(winningNumbers);
 
-        final LottoRaffle lottoRaffle = new LottoRaffle(new WinningLotto(winningNumbers, bonusNumber));
-        for(Lotto lotto: lottos.getLottos()) {
+        final LottoRaffle lottoRaffle = new LottoRaffle(
+            new WinningLotto(winningNumbers, bonusNumber));
+        for (Lotto lotto : lottos.getLottos()) {
             lottoRaffle.compareLotto(lotto);
         }
         final List<Integer> results = lottoRaffle.getResults();
