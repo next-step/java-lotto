@@ -25,11 +25,17 @@ class LottoTest {
         assertThat(given).isEqualTo(LOTTO_SIZE);
     }
 
-    @ValueSource(ints = {2,3,4})
+    @ValueSource(ints = {2, 3, 4})
     @ParameterizedTest
     void 구입금액에_맞는_로또를_발급한다(int number) {
-        lotto.buyLottoTickets(number);
+        lotto.generateLottoTickets(number);
         int given = lotto.getNumOfTickets();
         assertThat(given).isEqualTo(number);
+    }
+
+    @Test
+    void 구매단위는_1000원_이다() {
+        int given = lotto.buyLottoTickets(10000);
+        assertThat(given).isEqualTo(10);
     }
 }

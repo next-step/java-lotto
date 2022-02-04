@@ -21,8 +21,8 @@
 ## 기능 구현 사항
 
 - [ ] 구입 금액을 입력받는다. (InputView)
-- [ ] 구매 단위는 1000원 단위이다. (Lotto) 
-- [x] 구입 금액에 맞추어 해당하는 로또를 발급한다. (Lotto#buyLottoTickets())
+- [x] 구매 단위는 1000원 단위이다. (Lotto#buyLottoTickets()) 
+- [x] 구입 금액에 맞추어 해당하는 로또를 발급한다. (Lotto#generateLottoTickets())
 - [X] 1 ~ 45 범위의 6개의 난수 생성 (Lotto#generateRandoms()) 
 - [X] 6개의 숫자들은 중복되지 않는다. (LottoNumbers)
 - [ ] 지난 주 당첨번호를 입력 받는다. (Input)

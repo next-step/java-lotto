@@ -10,16 +10,16 @@ public class Lotto {
 
     List<LottoNumbers> lottoTickets;
 
-    public void buyLottoTickets(int number) {
-        List<LottoNumbers> temp = new ArrayList<>();
-        for (int i = 0; i < number; i++) {
-            temp.add(generateLotto());
-        }
-        lottoTickets = temp;
+    public int buyLottoTickets(int money) {
+        return money / PRICE;
     }
 
-    public LottoNumbers generateLotto() {
-        return new LottoNumbers(generateRandoms());
+    public void generateLottoTickets(int number) {
+        List<LottoNumbers> temp = new ArrayList<>();
+        for (int i = 0; i < number; i++) {
+            temp.add(new LottoNumbers(generateRandoms()));
+        }
+        lottoTickets = temp;
     }
 
     public List<Integer> generateRandoms() {
