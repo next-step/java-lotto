@@ -27,4 +27,16 @@ public class LottoFullNumber {
             .map(LottoNumber::getValue)
             .collect(Collectors.toList());
     }
+
+    public long countMatch(LottoFullNumber lottoFullNumber){
+        return this.lottoFullNumber.stream()
+            .filter(lottoFullNumber::get)
+            .count();
+    }
+
+    public boolean get(LottoNumber lottoNumber){
+        return this.lottoFullNumber.contains(lottoNumber);
+    }
+
+
 }
