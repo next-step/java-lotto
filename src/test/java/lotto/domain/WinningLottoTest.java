@@ -18,7 +18,7 @@ public class WinningLottoTest {
             .collect(Collectors.toList());
         WinningLotto winningLotto = new WinningLotto(lottoNumbers);
         assertThat(winningLotto.count()).isEqualTo(7);
-        assertThat(winningLotto.bonusBall()).isEqualTo(10);
+        assertThat(winningLotto.bonusBall()).isEqualTo(new LottoNumber(10));
     }
 
     @Test
