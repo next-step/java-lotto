@@ -1,5 +1,7 @@
 package lotto.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Ranking;
@@ -10,6 +12,15 @@ public class LottoCountCalculator {
     private static final LottoCountCalculator INSTANCE = new LottoCountCalculator();
 
     private LottoCountCalculator() {
+    }
+
+    public List<Ranking> countLotteryNumbers(List<LottoNumbers> userNumbers,
+        LottoNumbers lottoNumbers, LottoNumber bonusNum) {
+        List<Ranking> rankings = new ArrayList<>();
+        for (LottoNumbers userNumber : userNumbers) {
+            rankings.add(countLotteryNumber(userNumber, lottoNumbers, bonusNum));
+        }
+        return rankings;
     }
 
     public Ranking countLotteryNumber(LottoNumbers userNumbers,
