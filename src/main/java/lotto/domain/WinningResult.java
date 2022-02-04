@@ -10,6 +10,7 @@ public class WinningResult {
 
     private final Map<Rank, Integer> result;
     private long winningCash = 0;
+    private float yield = 0;
 
     public WinningResult() {
         this.result = new LinkedHashMap<>();
@@ -40,7 +41,16 @@ public class WinningResult {
         }
     }
 
+    public void calculateYield(int buyCash) {
+        calculateTotalPrize();
+        yield = (float) winningCash / buyCash;
+    }
+
     public long getWinningCash() {
         return this.winningCash;
+    }
+
+    public float getYield() {
+        return this.yield;
     }
 }
