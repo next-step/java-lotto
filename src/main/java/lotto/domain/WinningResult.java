@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.lotto.Rank;
@@ -12,7 +12,10 @@ public class WinningResult {
     private long winningCash = 0;
 
     public WinningResult() {
-        this.result = new HashMap<>();
+        this.result = new LinkedHashMap<>();
+        for (Rank rank : Rank.values()) {
+            result.put(rank, 0);
+        }
     }
 
     public void mappingResult(List<Rank> ranks) {
