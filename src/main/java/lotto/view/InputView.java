@@ -1,6 +1,7 @@
 package lotto.view;
 
 
+import java.util.Scanner;
 import lotto.util.Console;
 
 public class InputView {
@@ -20,8 +21,9 @@ public class InputView {
 
     public static String readWinningNumber() {
         String winningNumber = "";
+        Scanner sc = new Scanner(System.in);
         try {
-            winningNumber = Console.readLine();
+            winningNumber = sc.nextLine();
         } catch (IllegalArgumentException exception) {
             OutputView.printExceptionMessage(exception.getMessage());
         }
