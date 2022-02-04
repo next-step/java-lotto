@@ -38,8 +38,7 @@ public class InputView {
     }
 
     private static boolean isBlank(String input) {
-        input = input.trim();
-        return input.isEmpty();
+        return input.trim().isEmpty();
     }
 
     private static void validatePrefix(String input) {
