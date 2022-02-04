@@ -1,5 +1,10 @@
-package calculator;
+package calculator.controller;
 
+import calculator.view.InputView;
+import calculator.view.OutputView;
+import calculator.model.Parser;
+import calculator.model.Token;
+import calculator.model.Adder;
 import java.util.List;
 
 public class Calculator {
