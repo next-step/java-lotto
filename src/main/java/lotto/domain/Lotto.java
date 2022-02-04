@@ -16,6 +16,10 @@ public class Lotto {
         this.lottoNumbers = generateRandomNumbers();
     }
 
+    public Lotto(List<Integer> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
     private List<Integer> generateRandomNumbers() {
         List<Integer> nums = IntStream.rangeClosed(START_RANGE, END_RANGE)// IntStream
             .boxed() // Stream<Integer>
