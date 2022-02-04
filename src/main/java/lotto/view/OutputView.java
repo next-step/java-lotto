@@ -43,26 +43,31 @@ public class OutputView {
 
     public static void printWinningResult(WinningResult winningResult) {
         printMessage(ENTER + WINNING_RESULT_HEAD_LOG + ENTER);
+        printMatchCount(winningResult.getResult());
+        printYield(winningResult.getYield());
+    }
 
-        Map<Rank, Integer> result = winningResult.getResult();
-        
-        Iterator iterator = result.keySet().iterator();
-        while (iterator.hasNext()) {
-            Rank rank = (Rank) iterator.next();
-            int matchCount = rank.getMatchCount(); // 몇등
-            Integer count = result.get(rank); // 몇개
-            if (matchCount < 3) {
+    private static void printMatchCount(Map<Rank, Integer> result) {
+        for (Rank rank : result.keySet()) {
+            if (rank == Rank.NONE) {
                 continue;
             }
-            long prize = rank.getPrize(); // 얼마
-
-            if (rank == Rank.SECOND) {
-                printMessage(String.format(BONUS_MATCH, matchCount, prize, count) + ENTER);
-                continue;
-            }
-            printMessage(String.format(COUNT_MATCH, matchCount, prize, count) + ENTER);
+            printCountByRank(rank, result.get(rank));
         }
+    }
 
-        printMessage(String.format(YIELD, winningResult.getYield()) + ENTER);
+    private static void printCountByRank(Rank rank, int count) {
+        int matchCount = rank.getMatchCount();
+        long prize = rank.getPrize();
+
+        if (rank == Rank.SECOND) {
+            printMessage(String.format(BONUS_MATCH, matchCount, prize, count) + ENTER);
+            return;
+        }
+        printMessage(String.format(COUNT_MATCH, matchCount, prize, count) + ENTER);
+    }
+
+    private static void printYield(float yield) {
+        printMessage(String.format(YIELD, yield) + ENTER);
     }
 }
