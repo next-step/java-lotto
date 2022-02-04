@@ -2,7 +2,7 @@ package stringadder.view;
 
 public class UserResult {
 
-    private static String ARROW = "=> ";
+    private static final String ARROW = "=> ";
     public static void result(int result){
         System.out.println(ARROW+result);
     }
