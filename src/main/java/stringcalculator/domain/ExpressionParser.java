@@ -19,7 +19,7 @@ public class ExpressionParser {
 
     public List<Integer> parse(String expression) {
         String regex = getSplitRegex();
-        validateContainsCharacter(expression);
+        validateContainsOtherCharacter(expression);
         String[] split = expression.split(regex);
 
         return Arrays.stream(split)
@@ -31,7 +31,7 @@ public class ExpressionParser {
         return String.format("[%s]", delimiters);
     }
 
-    private void validateContainsCharacter(String expression) {
+    private void validateContainsOtherCharacter(String expression) {
         String regex = getValidateRegex();
 
         if (!expression.matches(regex)) {
