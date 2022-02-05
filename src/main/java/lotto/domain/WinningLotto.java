@@ -28,11 +28,13 @@ public class WinningLotto {
     }
 
     public int howMatch(Lotto lotto) {
-        return 0;
+        return (int) onlyWinnerNumbers().stream()
+            .filter(lotto::hasValue)
+            .count();
     }
 
     public boolean matchBonus(Lotto lotto) {
-        return true;
+        return lotto.hasValue(lottoNumbers.get(BONUS_IDX));
     }
 
     private void validateDuplicate(List<LottoNumber> lottoNumbers) {
@@ -46,5 +48,9 @@ public class WinningLotto {
         if (lottoNumbers.size() != WINNING_LOTTO_SIZE) {
             throw new IllegalArgumentException(WINNING_LOTTO_SIZE_EXCEPTION_MESSAGE);
         }
+    }
+
+    private List<LottoNumber> onlyWinnerNumbers() {
+        return lottoNumbers.subList(0, 6);
     }
 }
