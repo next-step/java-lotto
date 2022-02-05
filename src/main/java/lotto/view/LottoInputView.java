@@ -47,6 +47,7 @@ public class LottoInputView {
     }
 
     private void printLotto(final List<LottoNumber> lottoNumbers) {
+        stringBuilder.setLength(ZERO);
         stringBuilder.append(LEFT_SQUARE_BRACKETS);
 
         for (LottoNumber lottoNumber : lottoNumbers) {
@@ -60,7 +61,6 @@ public class LottoInputView {
         stringBuilder.append(RIGHT_SQUARE_BRACKETS);
 
         System.out.println(stringBuilder);
-        stringBuilder.setLength(ZERO);
     }
 
     public List<LottoNumber> getWinningNumbers() {
