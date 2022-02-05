@@ -30,7 +30,7 @@ public class Lotto {
     }
 
     public boolean hasValue(LottoNumber lottoNumber) {
-        return true;
+        return lotto.contains(lottoNumber);
     }
 
     private void validateDuplicates(List<LottoNumber> lotto) {
