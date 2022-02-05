@@ -1,8 +1,6 @@
 package domain;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class AnswerLotto {
     public static final String MESSAGE_INPUT_ANSWER_NUMBER_COUNT_OVER = "[오류] 숫자를 6개 이상 입력하셨습니다.";
@@ -17,14 +15,12 @@ public class AnswerLotto {
         this.bonusNumber = bonusNumber;
     }
 
-
-    //3개(key)=2개다(value) -> 1등(key)=2개(value) 수정
-    public Map<Rank, Integer> checkLottoAnswer(List<Lotto> lottoTickets) {
-        Map<Rank, Integer> lottoResult = new HashMap<>();
+    public LottoResult checkLottoAnswer(List<Lotto> lottoTickets) {
+        LottoResult lottoResult = new LottoResult();
         for (Lotto lotto : lottoTickets) {
             int matchNumberCount = lotto.countMatchCount(answerNumbers);
             Rank rank = Rank.getRank(matchNumberCount, lotto.checkBonusNumber(bonusNumber));
-            lottoResult.put(rank, lottoResult.getOrDefault(rank, 0) + 1);
+            lottoResult.addRankCount(rank);
         }
         return lottoResult;
     }

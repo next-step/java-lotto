@@ -5,7 +5,6 @@ import view.ResultView;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 public class LottoService {
     private final InputView inputView;
@@ -31,10 +30,10 @@ public class LottoService {
 
     public void getRatioByAnswer(LottoTickets lottoTickets, LottoPrice lottoPrice) {
         AnswerLotto answerLotto = new AnswerLotto(receiveAnswer(), receiveBonus());
-        Map<Rank, Integer> matchCount = answerLotto.checkLottoAnswer(lottoTickets.getLottoTickets());
-        resultView.printResultStatistic(matchCount);
+        LottoResult lottoResult = answerLotto.checkLottoAnswer(lottoTickets.getLottoTickets());
+        resultView.printResultStatistic(lottoResult);
 
-        BigDecimal prizeRatio = new RatioCalculator().calculateRatio(lottoPrice.getPurchasePrice(), matchCount);
+        BigDecimal prizeRatio = new RatioCalculator().calculateRatio(lottoPrice.getPurchasePrice(), lottoResult);
         resultView.printResultRatio(prizeRatio);
     }
 

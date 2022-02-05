@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -45,10 +44,10 @@ class AnswerLottoTest {
         AnswerLotto answerLotto = new AnswerLotto(new ArrayList<>(Arrays.asList(1, 2, 3, 7, 8, 9)), 11);
 
         //when
-        Map<Rank, Integer> matchCount = answerLotto.checkLottoAnswer(lottoTickets.getLottoTickets());
+        LottoResult lottoResult = answerLotto.checkLottoAnswer(lottoTickets.getLottoTickets());
 
         //then
-        assertThat(matchCount.getOrDefault(Rank.FIFTH, 0)).isEqualTo(2);
+        assertThat(lottoResult.getRankCount(Rank.FIFTH)).isEqualTo(2);
     }
 
     @Test
@@ -61,10 +60,10 @@ class AnswerLottoTest {
         AnswerLotto answerLotto = new AnswerLotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 9)), 6);
 
         //when
-        Map<Rank, Integer> matchCount = answerLotto.checkLottoAnswer(lottoTickets.getLottoTickets());
+        LottoResult lottoResult = answerLotto.checkLottoAnswer(lottoTickets.getLottoTickets());
 
         //then
-        assertThat(matchCount.getOrDefault(Rank.SECOND, 0)).isEqualTo(1);
+        assertThat(lottoResult.getRankCount(Rank.SECOND)).isEqualTo(1);
     }
 
 
@@ -78,9 +77,9 @@ class AnswerLottoTest {
         AnswerLotto answerLotto = new AnswerLotto(new ArrayList<>(Arrays.asList(13, 14, 15, 16, 17, 18)), 12);
 
         //when
-        Map<Rank, Integer> matchCount = answerLotto.checkLottoAnswer(lottoTickets.getLottoTickets());
+        LottoResult lottoResult = answerLotto.checkLottoAnswer(lottoTickets.getLottoTickets());
 
         //then
-        assertThat(matchCount.getOrDefault(Rank.FAIL, 0)).isEqualTo(2);
+        assertThat(lottoResult.getRankCount(Rank.FAIL)).isEqualTo(2);
     }
 }
