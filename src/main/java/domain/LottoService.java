@@ -34,7 +34,7 @@ public class LottoService {
         Map<Rank, Integer> matchCount = answerLotto.checkLottoAnswer(lottoTickets.getLottoTickets());
         resultView.printResultStatistic(matchCount);
 
-        BigDecimal prizeRatio = RatioCalculator.calculateRatio(lottoPrice.lottoCount(), matchCount);
+        BigDecimal prizeRatio = new RatioCalculator().calculateRatio(lottoPrice.getPurchasePrice(), matchCount);
         resultView.printResultRatio(prizeRatio);
     }
 

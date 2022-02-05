@@ -17,6 +17,6 @@ class RatioCalculatorTest {
         matchCount.put(Rank.FIFTH, 2);
 
         //when,then
-        assertThat(RatioCalculator.calculateRatio(purchasePrice, matchCount)).isEqualTo("0.10");
+        assertThat(new RatioCalculator().calculateRatio(purchasePrice, matchCount)).isEqualTo("0.10");
     }
 }
