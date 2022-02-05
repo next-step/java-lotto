@@ -14,18 +14,25 @@ public class Lotto {
         this.lotto = lottoGenerator.generateLottoNumber();
     }
 
+    private Lotto(List<Integer> lotto) {
+        this(() -> lotto);
+    }
+
+    public static Lotto from(List<Integer> lotto) {
+        return new Lotto(lotto);
+    }
+
     public List<Integer> getLotto() {
         return Collections.unmodifiableList(lotto);
     }
 
-    public int countMatchCount(List<Integer> answerNumbers) {
+    public int countMatch(List<Integer> answerNumbers) {
         return (int) lotto.stream()
                 .filter(answerNumbers::contains)
                 .count();
     }
 
     public boolean checkBonusNumber(int bonusNumber) {
-        return lotto.stream()
-                .anyMatch(number -> number == bonusNumber);
+        return lotto.contains(bonusNumber);
     }
 }

@@ -2,27 +2,33 @@ package domain;
 
 import java.util.List;
 
-public class AnswerLotto {
+public class LottoAnswer {
+    private final Lotto lottoAnswer;
     public static final String MESSAGE_INPUT_ANSWER_NUMBER_COUNT_OVER = "[오류] 숫자를 6개 이상 입력하셨습니다.";
     public static final String MESSAGE_INPUT_ANSWER_NUMBER_RANGE_OVER = "[오류] 숫자의 범위를 넘어갔습니다.";
-    private final List<Integer> answerNumbers;
     private final int bonusNumber;
 
-    public AnswerLotto(List<Integer> answerNumbers, int bonusNumber) {
+    public LottoAnswer(List<Integer> answerNumbers, int bonusNumber) {
         checkInputNumberCount(answerNumbers);
         checkNumberRange(answerNumbers, bonusNumber);
-        this.answerNumbers = answerNumbers;
+        this.lottoAnswer = Lotto.from(answerNumbers);
         this.bonusNumber = bonusNumber;
     }
 
     public LottoResult checkLottoAnswer(List<Lotto> lottoTickets) {
         LottoResult lottoResult = new LottoResult();
         for (Lotto lotto : lottoTickets) {
-            int matchNumberCount = lotto.countMatchCount(answerNumbers);
-            Rank rank = Rank.getRank(matchNumberCount, lotto.checkBonusNumber(bonusNumber));
+            Rank rank = checkBonus(lotto, lotto.countMatch(lottoAnswer.getLotto()));
             lottoResult.addRankCount(rank);
         }
         return lottoResult;
+    }
+
+    private Rank checkBonus(Lotto lotto, int matchCount) {
+        if (Rank.BonusCriteria(matchCount)) {
+            return Rank.getRank(matchCount, lotto.checkBonusNumber(bonusNumber));
+        }
+        return Rank.getRank(matchCount);
     }
 
     private void checkInputNumberCount(List<Integer> answerNumbers) {

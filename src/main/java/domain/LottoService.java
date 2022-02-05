@@ -29,8 +29,8 @@ public class LottoService {
     }
 
     public void getRatioByAnswer(LottoTickets lottoTickets, LottoPrice lottoPrice) {
-        AnswerLotto answerLotto = new AnswerLotto(receiveAnswer(), receiveBonus());
-        LottoResult lottoResult = answerLotto.checkLottoAnswer(lottoTickets.getLottoTickets());
+        LottoAnswer lottoAnswer = new LottoAnswer(receiveAnswer(), receiveBonus());
+        LottoResult lottoResult = lottoAnswer.checkLottoAnswer(lottoTickets.getLottoTickets());
         resultView.printResultStatistic(lottoResult);
 
         BigDecimal prizeRatio = new RatioCalculator().calculateRatio(lottoPrice.getPurchasePrice(), lottoResult);

@@ -18,14 +18,22 @@ public enum Rank {
         this.matchCount = matchCount;
     }
 
-    public static Rank getRank(int matchCount, boolean hasBonus) {
-        if (matchCount == 5 && hasBonus) {
-            return SECOND;
-        }
+    public static Rank getRank(int matchCount) {
         return Arrays.stream(Rank.values())
                 .filter(prize -> prize.isMatchCount(matchCount))
                 .findFirst()
                 .orElse(FAIL);
+    }
+
+    public static Rank getRank(int matchCount, boolean hasBonus) {
+        if (BonusCriteria(matchCount) && hasBonus) {
+            return SECOND;
+        }
+        return THIRD;
+    }
+
+    public static boolean BonusCriteria(int matchCount) {
+        return matchCount == SECOND.matchCount;
     }
 
     public int getPrize() {
