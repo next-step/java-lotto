@@ -46,4 +46,42 @@ public class WinningLottoTest {
         assertThatThrownBy(() -> new WinningLotto(overLottoNumbers))
             .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 일치하는_로또_번호의_수를_반환한다() {
+        // given
+        List<LottoNumber> lottoNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6})
+            .boxed()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+        Lotto lotto = new Lotto(lottoNumbers);
+        List<LottoNumber> winningLottoNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6, 7})
+            .boxed()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers);
+        // when
+        int expectMatchCount = winningLotto.howMatch(lotto);
+        // then
+        assertThat(expectMatchCount).isEqualTo(6);
+    }
+
+    @Test
+    void 보너스_볼의_일치_여부를_반환한다() {
+        // given
+        List<LottoNumber> lottoNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6})
+            .boxed()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+        Lotto lotto = new Lotto(lottoNumbers);
+        List<LottoNumber> winningLottoNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6, 7})
+            .boxed()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers);
+        // when
+        boolean expectMatchBonus = winningLotto.matchBonus(lotto);
+        // then
+        assertThat(expectMatchBonus).isFalse();
+    }
 }

@@ -27,6 +27,14 @@ public class WinningLotto {
         return lottoNumbers.size();
     }
 
+    public int howMatch(Lotto lotto) {
+        return 0;
+    }
+
+    public boolean matchBonus(Lotto lotto) {
+        return true;
+    }
+
     private void validateDuplicate(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> removeDuplicates = new HashSet<>(lottoNumbers);
         if (removeDuplicates.size() != lottoNumbers.size()) {
