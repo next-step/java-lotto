@@ -13,6 +13,10 @@ public class Money {
         validateMoney();
     }
 
+    public int value() {
+        return money;
+    }
+
     private void validateMoney() {
         if (notPurchasable()) {
             throw new IllegalArgumentException(NOT_PURCHASABLE_EXCEPTION_MESSAGE);
@@ -29,9 +33,5 @@ public class Money {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(NOT_NUMBER_EXCEPTION_MESSAGE);
         }
-    }
-
-    public int value() {
-        return money;
     }
 }

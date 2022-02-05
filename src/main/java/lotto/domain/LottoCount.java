@@ -11,6 +11,10 @@ public class LottoCount {
         this.lottoCount = value / LOTTO_PRICE;
     }
 
+    public int count() {
+        return lottoCount;
+    }
+
     private void validateValue(int value) {
         if (valueNotPurchasable(value)) {
             throw new IllegalArgumentException();
@@ -19,9 +23,5 @@ public class LottoCount {
 
     private boolean valueNotPurchasable(int value) {
         return value < LOTTO_PRICE || value % LOTTO_PRICE != 0;
-    }
-
-    public int count() {
-        return lottoCount;
     }
 }
