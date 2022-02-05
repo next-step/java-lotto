@@ -16,6 +16,14 @@ public class LottoNumberTest {
     }
 
     @ParameterizedTest
+    @ValueSource(strings = {"1", "45"})
+    void 문자로_로또_번호를_생성할_수_있다(String lotto) {
+        LottoNumber lottoNumber = new LottoNumber(lotto);
+        int parseLotto = Integer.parseInt(lotto);
+        assertThat(lottoNumber.value()).isEqualTo(parseLotto);
+    }
+
+    @ParameterizedTest
     @ValueSource(ints = {0, 46})
     void 로또_번호는_1_이상_45_이하이다(int lottoNumber) {
         assertThatThrownBy(() -> new LottoNumber(lottoNumber))
