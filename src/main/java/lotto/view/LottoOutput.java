@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Ranking;
+import lotto.service.RewardRateCalculator;
 
 public class LottoOutput {
 
@@ -47,7 +48,7 @@ public class LottoOutput {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("총 수익률은 ");
         int winnerPriceSum = countWinnerPriceSum(rankings);
-        double rewardRate = countRewardRate(winnerPriceSum, buyPrice);
+        double rewardRate = RewardRateCalculator.countRewardRate(winnerPriceSum, buyPrice);
         stringBuilder.append(rewardRate);
         System.out.println(stringBuilder);
     }
@@ -56,10 +57,6 @@ public class LottoOutput {
         return rankings.stream()
             .map(Ranking::getWinnerPrice)
             .reduce(0, Integer::sum);
-    }
-
-    private static double countRewardRate(int winnerPriceSum, int buyPrice) {
-        return Math.round(winnerPriceSum / (double) buyPrice);
     }
 
     public static void printLottoNumber(List<LottoNumbers> lottoNumbers) {
