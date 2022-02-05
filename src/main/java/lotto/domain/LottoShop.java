@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.common.exception.SystemMessage.*;
+import static lotto.common.SystemMessage.*;
 
 import lotto.common.exception.LottoException;
 

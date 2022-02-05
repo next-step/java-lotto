@@ -1,6 +1,6 @@
 package lotto.view;
 
-import static lotto.common.exception.SystemMessage.*;
+import static lotto.common.SystemMessage.*;
 
 import java.util.List;
 import lotto.domain.Lotto;
