@@ -28,15 +28,20 @@ public class Numbers {
     }
 
     private List<Number> splitFromDelimiter(String expression) {
+        expression = convertCustomDelimiterToComma(expression);
+
+        return Arrays.stream(expression.split(REGX_DELIMITER)).map(Number::from)
+            .collect(Collectors.toList());
+    }
+
+    private String convertCustomDelimiterToComma(String expression){
         Matcher m = PATTERN_REGX_CUSTOM.matcher(expression);
         if (m.find()) {
             String customDelimiter = m.group(POSITION_CUSTOM_DELIMITER);
             expression = String.join(COMMA,
                 m.group(POSITION_OTHER_EXPRESSION).split(customDelimiter));
         }
-
-        return Arrays.stream(expression.split(REGX_DELIMITER)).map(Number::from)
-            .collect(Collectors.toList());
+        return expression;
     }
 
     public Number get(int idx) {
