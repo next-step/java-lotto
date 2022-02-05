@@ -7,6 +7,7 @@ public class LottoNumber {
     private static final int LOTTO_MINIMUM_BOUND = 1;
     private static final int LOTTO_MAXIMUM_BOUND = 45;
     private static final String INVALID_NUMBER_RANGE_EXCEPTION_MESSAGE = "[ERROR] 로또 번호는 1 이상 45 이하입니다.";
+    private static final String INVALID_NUMBER_FORMAT_EXCEPTION_MESSAGE = "[ERROR] 로또 번호는 숫자만 가능합니다.";
 
     private int lottoNumber;
 
@@ -16,11 +17,20 @@ public class LottoNumber {
     }
 
     public LottoNumber(String lottoNumber) {
-
+        this.lottoNumber = parseLotto(lottoNumber);
+        validateLottoNumber();
     }
 
     public int value() {
         return lottoNumber;
+    }
+
+    private int parseLotto(String lottoNumber) {
+        try {
+            return Integer.parseInt(lottoNumber);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(INVALID_NUMBER_FORMAT_EXCEPTION_MESSAGE);
+        }
     }
 
     private void validateLottoNumber() {
