@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
@@ -24,17 +25,12 @@ public class LottoOutput {
         stringBuilder.append("당첨 통계 \n");
         stringBuilder.append("----------- \n");
 
+        List<Ranking> showRankings = new ArrayList<>(Arrays.asList(Ranking.FIVE, Ranking.FOUR, Ranking.FOUR, Ranking.THREE, Ranking.TWO, Ranking.ONE));
         Map<Ranking, Integer> rankingCount = countRanking(rankings);
-        stringBuilder.append(Ranking.FIVE).append(" - ")
-            .append(rankingCount.getOrDefault(Ranking.FIVE, 0)).append("개").append("\n");
-        stringBuilder.append(Ranking.FOUR).append(" - ")
-            .append(rankingCount.getOrDefault(Ranking.FOUR, 0)).append("개").append("\n");
-        stringBuilder.append(Ranking.THREE).append(" - ")
-            .append(rankingCount.getOrDefault(Ranking.THREE, 0)).append("개").append("\n");
-        stringBuilder.append(Ranking.TWO).append(" - ")
-            .append(rankingCount.getOrDefault(Ranking.TWO, 0)).append("개").append("\n");
-        stringBuilder.append(Ranking.ONE).append(" - ")
-            .append(rankingCount.getOrDefault(Ranking.ONE, 0)).append("개").append("\n");
+        for(Ranking ranking : showRankings){
+            stringBuilder.append(ranking).append(" - ")
+                .append(rankingCount.getOrDefault(ranking, 0)).append("개").append("\n");
+        }
 
         System.out.println(stringBuilder);
     }

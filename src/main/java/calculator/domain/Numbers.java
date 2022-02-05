@@ -30,7 +30,8 @@ public class Numbers {
     private List<Number> splitFromDelimiter(String expression) {
         expression = convertCustomDelimiterToComma(expression);
 
-        return Arrays.stream(expression.split(REGX_DELIMITER)).map(Number::from)
+        return Arrays.stream(expression.split(REGX_DELIMITER))
+            .map(Number::from)
             .collect(Collectors.toList());
     }
 

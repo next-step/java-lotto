@@ -28,7 +28,7 @@ class NumbersTest {
         Numbers numbers = new Numbers(expression);
 
         // then
-        assertThat(numbers.getValues().get(0).getValue()).isEqualTo(0);
+        assertThat(numbers.getValues().get(0).getValue()).isZero();
         assertThat(numbers.getValues().size()).isEqualTo(1);
     }
 
