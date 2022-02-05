@@ -2,6 +2,7 @@ package lotto.view;
 
 import static lotto.common.SystemMessage.*;
 
+import java.util.Collections;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
@@ -63,7 +64,7 @@ public class LottoInputView {
     }
 
     public List<LottoNumber> getWinningNumbers() {
-        return winningNumbers;
+        return Collections.unmodifiableList(winningNumbers);
     }
 
     public LottoNumber getBonusBall() {
