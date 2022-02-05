@@ -2,23 +2,23 @@ package calculator.domain;
 
 public class Number {
 
-    private final int number;
+    private final int value;
 
-    public Number(final String number) {
-        validateNumberFormat(number);
-        validatePositiveNum(number);
-        this.number = Integer.parseInt(number);
+    public Number(final int value) {
+        validatePositiveNum(value);
+        this.value = value;
     }
 
-    public Number(final int number) {
-        this.number = number;
+    public static Number from(final String number) {
+        validateNumberFormat(number);
+        return new Number(Integer.parseInt(number));
     }
 
     public Number add(Number operand) {
-        return new Number(number + operand.getNumber());
+        return new Number(value + operand.getValue());
     }
 
-    private void validateNumberFormat(final String number) {
+    private static void validateNumberFormat(final String number) {
         try {
             Integer.parseInt(number);
         } catch (NumberFormatException e) {
@@ -26,13 +26,13 @@ public class Number {
         }
     }
 
-    private void validatePositiveNum(final String number) {
-        if (Integer.parseInt(number) < 0) {
+    private void validatePositiveNum(final int number) {
+        if (number < 0) {
             throw new IllegalArgumentException("숫자가 음수입니다.");
         }
     }
 
-    public int getNumber() {
-        return number;
+    public int getValue() {
+        return value;
     }
 }

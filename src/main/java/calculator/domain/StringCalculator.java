@@ -15,7 +15,7 @@ public class StringCalculator {
     }
 
     public Number calculate() {
-        return numbers.getNumbers().stream()
+        return numbers.getValues().stream()
             .reduce(ZERO, Number::add);
     }
 }

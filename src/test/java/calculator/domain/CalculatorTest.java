@@ -2,7 +2,6 @@ package calculator.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import calculator.domain.Number;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -19,6 +18,6 @@ class CalculatorTest {
         Number result = stringCalculator.calculate();
 
         // then
-        assertThat(result.getNumber()).isEqualTo(9);
+        assertThat(result.getValue()).isEqualTo(9);
     }
 }

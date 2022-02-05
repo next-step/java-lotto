@@ -17,14 +17,14 @@ public class Numbers {
     private static final String COMMA = ",";
     private static final List<Number> ZERO_NUMBERS = Collections.singletonList(new Number(0));
 
-    private final List<Number> numbers;
+    private final List<Number> values;
 
     public Numbers(final String expression) {
         if (expression == null || expression.isEmpty()) {
-            this.numbers = ZERO_NUMBERS;
+            this.values = ZERO_NUMBERS;
             return;
         }
-        this.numbers = splitFromDelimiter(expression);
+        this.values = splitFromDelimiter(expression);
     }
 
     private List<Number> splitFromDelimiter(String expression) {
@@ -35,15 +35,15 @@ public class Numbers {
                 m.group(POSITION_OTHER_EXPRESSION).split(customDelimiter));
         }
 
-        return Arrays.stream(expression.split(REGX_DELIMITER)).map(Number::new)
+        return Arrays.stream(expression.split(REGX_DELIMITER)).map(Number::from)
             .collect(Collectors.toList());
     }
 
     public Number get(int idx) {
-        return numbers.get(idx);
+        return values.get(idx);
     }
 
-    public List<Number> getNumbers() {
-        return Collections.unmodifiableList(numbers);
+    public List<Number> getValues() {
+        return Collections.unmodifiableList(values);
     }
 }

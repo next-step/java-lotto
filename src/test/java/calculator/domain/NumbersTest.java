@@ -2,11 +2,9 @@ package calculator.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class NumbersTest {
@@ -18,9 +16,9 @@ class NumbersTest {
         Numbers numbers = new Numbers(expression);
 
         // then
-        assertThat(numbers.get(0).getNumber()).isEqualTo(1);
-        assertThat(numbers.get(1).getNumber()).isEqualTo(5);
-        assertThat(numbers.get(2).getNumber()).isEqualTo(3);
+        assertThat(numbers.get(0).getValue()).isEqualTo(1);
+        assertThat(numbers.get(1).getValue()).isEqualTo(5);
+        assertThat(numbers.get(2).getValue()).isEqualTo(3);
     }
 
     @ParameterizedTest
@@ -30,8 +28,8 @@ class NumbersTest {
         Numbers numbers = new Numbers(expression);
 
         // then
-        assertThat(numbers.getNumbers().get(0).getNumber()).isEqualTo(0);
-        assertThat(numbers.getNumbers().size()).isEqualTo(1);
+        assertThat(numbers.getValues().get(0).getValue()).isEqualTo(0);
+        assertThat(numbers.getValues().size()).isEqualTo(1);
     }
 
     @Test
@@ -40,7 +38,7 @@ class NumbersTest {
         Numbers numbers = new Numbers("5");
 
         // then
-        assertThat(numbers.getNumbers().get(0).getNumber()).isEqualTo(5);
-        assertThat(numbers.getNumbers().size()).isEqualTo(1);
+        assertThat(numbers.getValues().get(0).getValue()).isEqualTo(5);
+        assertThat(numbers.getValues().size()).isEqualTo(1);
     }
 }
