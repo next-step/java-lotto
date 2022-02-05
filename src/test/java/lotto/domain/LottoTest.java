@@ -45,4 +45,17 @@ public class LottoTest {
         assertThatThrownBy(() -> new Lotto(overLottoNumbers))
             .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 특정_로또_번호를_가졌는지_알_수_있다() {
+        Set<LottoNumber> lottoNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6})
+            .boxed()
+            .map(LottoNumber::new)
+            .collect(Collectors.toSet());
+        Lotto lotto = new Lotto(lottoNumbers);
+        LottoNumber havingLotto = new LottoNumber(1);
+        LottoNumber notHavingLotto = new LottoNumber(7);
+        assertThat(lotto.hasValue(havingLotto)).isTrue();
+        assertThat(lotto.hasValue(notHavingLotto)).isFalse();
+    }
 }

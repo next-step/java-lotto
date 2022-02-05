@@ -29,6 +29,10 @@ public class Lotto {
         return lotto.size();
     }
 
+    public boolean hasValue(LottoNumber lottoNumber) {
+        return true;
+    }
+
     private void validateDuplicates(List<LottoNumber> lotto) {
         Set<LottoNumber> lottoNumbers = new HashSet<>(lotto);
         if (lottoIsDuplicate(lottoNumbers, lotto)) {
