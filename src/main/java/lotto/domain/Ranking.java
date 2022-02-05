@@ -21,12 +21,6 @@ public enum Ranking {
         this.bonusSuccessNum = bonusSuccessNum;
     }
 
-    public static double getRewardRate(int normalSuccessCount, int bonusSuccessCount,
-        int userBuyPrice) {
-        Ranking ranking = getRanking(normalSuccessCount, bonusSuccessCount);
-        return (double) userBuyPrice / ranking.winnerPrice;
-    }
-
     public static Ranking getRanking(int normalSuccessCount, int bonusSuccessCount) {
         return Arrays.stream(Ranking.values())
             .filter(rank -> rank.equalsFromResult(normalSuccessCount, bonusSuccessCount))

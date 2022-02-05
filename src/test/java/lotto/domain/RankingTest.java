@@ -14,16 +14,4 @@ class RankingTest {
         // then
         assertThat(ranking).isEqualTo(Ranking.ONE);
     }
-
-    @Test
-    void 수익률_조회(){
-        // given
-        int userBuyPrice = 500;
-
-        // when
-        double rewardRate = Ranking.getRewardRate(3,0, userBuyPrice);
-
-        // then
-        assertThat(rewardRate).isEqualTo(0.1);
-    }
 }
