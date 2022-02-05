@@ -30,7 +30,7 @@ public class Application {
         List<Ranking> rankings = LottoCountCalculator.getInstance()
             .countLotteryNumbers(userLottoNumbers, lastWeekLottoNumber, bonusNumber);
 
-        LottoOutput.printRanking(rankings);
+        LottoOutput.printRankingStatus(rankings);
         LottoOutput.printRewardRate(rankings, buyPrice);
     }
 

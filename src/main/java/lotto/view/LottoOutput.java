@@ -20,7 +20,7 @@ public class LottoOutput {
         System.out.println(stringBuilder);
     }
 
-    public static void printRanking(List<Ranking> rankings) {
+    public static void printRankingStatus(List<Ranking> rankings) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("당첨 통계 \n");
         stringBuilder.append("----------- \n");
