@@ -8,6 +8,8 @@ import lotto.domain.LottoCount;
 import lotto.domain.LottoGenerator;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.domain.ResultGroup;
+import lotto.domain.WinningLotto;
 
 public class LottoMachine {
 
@@ -21,6 +23,10 @@ public class LottoMachine {
             .mapToObj((i) -> new Lotto(generateLottoNumber()))
             .collect(Collectors.toList());
         return new LottoTicket(lottos);
+    }
+
+    public static ResultGroup getResult(LottoTicket lottoTicket, WinningLotto winningLotto) {
+        return lottoTicket.getResult(winningLotto);
     }
 
     private static List<LottoNumber> generateLottoNumber() {
