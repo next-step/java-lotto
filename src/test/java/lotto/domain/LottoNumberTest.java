@@ -29,4 +29,11 @@ public class LottoNumberTest {
         assertThatThrownBy(() -> new LottoNumber(lottoNumber))
             .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"ㄱ", "1s"})
+    void 숫자가_아닌_문자는_들어올_수_없다(String lotto) {
+        assertThatThrownBy(() -> new LottoNumber(lotto))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
 }
