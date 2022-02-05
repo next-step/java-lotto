@@ -31,8 +31,8 @@ class LottoTest {
     @ValueSource(ints = {2, 3, 4})
     @ParameterizedTest
     void 구입금액에_맞는_로또를_발급한다(int number) {
-        lotto.generateLottoTickets(number);
-        int given = lotto.getNumOfTickets();
+        List<LottoNumbers> generatedTickets = lotto.generateLottoTickets(number);
+        int given = generatedTickets.size();
         assertThat(given).isEqualTo(number);
     }
 

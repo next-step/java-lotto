@@ -11,11 +11,11 @@ import lotto.view.ResultView;
 
 public class Lotto {
 
-    List<LottoNumbers> lottoTickets;
+    final List<LottoNumbers> lottoTickets;
 
     public Lotto(int userMoney) {
         int ticketNumber = buyLottoTickets(userMoney);
-        generateLottoTickets(ticketNumber);
+        this.lottoTickets = generateLottoTickets(ticketNumber);
         ResultView.printLottoTicketsInfo(lottoTickets);
     }
 
@@ -23,12 +23,12 @@ public class Lotto {
         return money / PRICE;
     }
 
-    public void generateLottoTickets(int number) {
+    public List<LottoNumbers> generateLottoTickets(int number) {
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < number; i++) {
             lottoNumbers.add(new LottoNumbers(generateRandoms()));
         }
-        lottoTickets = lottoNumbers;
+        return lottoNumbers;
     }
 
     public List<Integer> generateRandoms() {
