@@ -18,11 +18,11 @@ class LottoCalculatorTest {
         // given
         LottoCalculator calculator = LottoCalculator.getInstance();
         List<LottoNumber> lotteryNumbers = Arrays.asList(1, 2, 3, 4, 5, 6).stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList());
         int bonusNum = 6;
         List<LottoNumber> userNumbers = Arrays.asList(1, 2, 3, 4, 5, 8).stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList());
 
         // when

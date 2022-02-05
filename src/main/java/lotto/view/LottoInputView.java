@@ -43,7 +43,7 @@ public class LottoInputView {
         winningNumbers = LottoInput.inputWinningNumber();
 
         System.out.println(INPUT_BONUS_BALL_MESSAGE);
-        bonusBall = new LottoNumber(LottoInput.inputBonusBall());
+        bonusBall = LottoNumber.from(LottoInput.inputBonusBall());
     }
 
     private void printLotto(final List<LottoNumber> lottoNumbers) {

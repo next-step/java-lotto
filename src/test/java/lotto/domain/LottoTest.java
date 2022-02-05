@@ -14,7 +14,7 @@ class LottoTest {
     @Test
     void 복권의_숫자_개수는_6개여야_한다() {
         List<LottoNumber> lotto = Arrays.asList(1, 2, 3, 4, 5).stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList());
 
         assertThatThrownBy(() -> new Lotto(lotto))
@@ -25,7 +25,7 @@ class LottoTest {
     @Test
     void 복권의_숫자는_중복될_수_없다() {
         List<LottoNumber> lotto = Arrays.asList(1, 2, 3, 4, 5, 5).stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList());
 
         assertThatThrownBy(() -> new Lotto(lotto))
