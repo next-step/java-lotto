@@ -26,9 +26,11 @@ public class LottoOutput {
         stringBuilder.append("당첨 통계 \n");
         stringBuilder.append("----------- \n");
 
-        List<Ranking> showRankings = new ArrayList<>(Arrays.asList(Ranking.FIVE, Ranking.FOUR, Ranking.FOUR, Ranking.THREE, Ranking.TWO, Ranking.ONE));
+        List<Ranking> showRankings = new ArrayList<>(
+            Arrays.asList(Ranking.FIVE, Ranking.FOUR, Ranking.FOUR, Ranking.THREE, Ranking.TWO,
+                Ranking.ONE));
         Map<Ranking, Integer> rankingCount = countRanking(rankings);
-        for(Ranking ranking : showRankings){
+        for (Ranking ranking : showRankings) {
             stringBuilder.append(ranking).append(" - ")
                 .append(rankingCount.getOrDefault(ranking, 0)).append("개").append("\n");
         }

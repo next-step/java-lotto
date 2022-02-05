@@ -14,16 +14,16 @@ public class Number {
         return new Number(Integer.parseInt(number));
     }
 
-    public Number add(Number operand) {
-        return new Number(value + operand.getValue());
-    }
-
     private static void validateNumberFormat(final String number) {
         try {
             Integer.parseInt(number);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("올바른 숫자 포맷이 아닙니다.");
         }
+    }
+
+    public Number add(Number operand) {
+        return new Number(value + operand.getValue());
     }
 
     private void validatePositiveNum(final int number) {

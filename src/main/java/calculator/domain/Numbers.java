@@ -35,7 +35,7 @@ public class Numbers {
             .collect(Collectors.toList());
     }
 
-    private String convertCustomDelimiterToComma(String expression){
+    private String convertCustomDelimiterToComma(String expression) {
         Matcher m = PATTERN_REGX_CUSTOM.matcher(expression);
         if (m.find()) {
             String customDelimiter = m.group(POSITION_CUSTOM_DELIMITER);
