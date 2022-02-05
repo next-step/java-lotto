@@ -1,4 +1,4 @@
-package lotto.common.exception;
+package lotto.common;
 
 public class SystemMessage {
 
