@@ -8,16 +8,6 @@ import lotto.service.WinningStatistics;
 
 public class ResultView {
 
-    private static int quantity;
-
-    public static void printLottoQuantity(int quantity) {
-        System.out.println(quantity + "개를 구매했습니다.");
-    }
-
-    public static void printTotalLottoNumbers(List<Lotto> lottoNumbers) {
-        lottoNumbers.forEach(e -> System.out.println(e.getNumbers()));
-    }
-
     public static void printResult(List<LottoResult> results, int purchasePrice) {
         System.out.println("당첨 통계");
         System.out.println("-----------");
@@ -31,5 +21,10 @@ public class ResultView {
 
     private static boolean hasReward(LottoResult lottoResult) {
         return lottoResult != LottoResult.NO_REWARD;
+    }
+
+    public static void printLottoQuantityAndNumbers(int quantity, List<Lotto> lottoNumbers) {
+        System.out.println(quantity + "개를 구매했습니다.");
+        lottoNumbers.forEach(e -> System.out.println(e.getNumbers()));
     }
 }
