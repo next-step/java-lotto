@@ -2,9 +2,10 @@ package lotto;
 
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoResult;
 import lotto.domain.WinningBall;
 import lotto.factory.LottoFactory;
-import lotto.service.LottoResults;
+import lotto.domain.LottoResults;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -18,8 +19,9 @@ public class LottoApplication {
         ResultView.printLottoQuantityAndNumbers(quantity, lottos);
 
         List<WinningBall> winningBalls = InputView.getWinningBalls();
-        LottoResults.judge(lottos, winningBalls);
+        LottoResults lottoResults = new LottoResults(lottos, winningBalls);
+        lottoResults.judge();
 
-        ResultView.printResult(LottoResults.getResults(), purchasePrice);
+        ResultView.printResult(lottoResults.getResults(), purchasePrice);
     }
 }
