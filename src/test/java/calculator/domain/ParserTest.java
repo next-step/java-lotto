@@ -52,7 +52,7 @@ class ParserTest {
     void 숫자_이외의_값이_들어가는_경우(String text) {
         final List<String> delimiters = Arrays.asList(",",":", "a");
         final Parser parser = new Parser(text, delimiters);
-        assertThatExceptionOfType(IllegalArgumentException.class)
+        assertThatExceptionOfType(RuntimeException.class)
             .isThrownBy(() -> parser.splitNumbersByDelimiter())
             .withMessage("[ERROR] 숫자 이외의 값을 계산할 수 없습니다.");
     }
