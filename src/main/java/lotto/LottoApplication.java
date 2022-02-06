@@ -10,7 +10,7 @@ public class LottoApplication {
     public static void main(String[] args) {
         LottoController lottoController = new LottoController(new LottoInputView(),
             new LottoResultView(),
-            new LottoShop());
+            LottoShop.getInstance());
         lottoController.run();
     }
 }

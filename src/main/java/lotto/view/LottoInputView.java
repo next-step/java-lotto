@@ -34,7 +34,7 @@ public class LottoInputView {
             .append("개를 구매했습니다.");
         System.out.println(stringBuilder);
 
-        lottos = lottoShop.buyLotto();
+        lottos = lottoShop.buyLotto(lottoAmount);
 
         for (Lotto lotto : lottos.getLottos()) {
             printLotto(lotto.getLottoNumbers());

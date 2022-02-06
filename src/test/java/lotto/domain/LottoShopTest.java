@@ -8,7 +8,7 @@ class LottoShopTest {
 
     @Test
     void 로또를_사기위한_최소금액은_1000원_이상이다() {
-        LottoShop lottoShop = new LottoShop();
+        LottoShop lottoShop = LottoShop.getInstance();
 
         assertThatThrownBy(() -> lottoShop.countPossibleLottoAmount(500))
             .isInstanceOf(IllegalArgumentException.class)
@@ -17,10 +17,10 @@ class LottoShopTest {
 
     @Test
     void 투입한_금액만큼_로또를_살_수_있다() {
-        LottoShop lottoShop = new LottoShop();
+        LottoShop lottoShop = LottoShop.getInstance();
 
-        lottoShop.countPossibleLottoAmount(5000);
-        Lottos lottos = lottoShop.buyLotto();
+        int lottoAmount = lottoShop.countPossibleLottoAmount(5000);
+        Lottos lottos = lottoShop.buyLotto(lottoAmount);
 
         assertThat(lottos.getLottos().size()).isEqualTo(5);
     }

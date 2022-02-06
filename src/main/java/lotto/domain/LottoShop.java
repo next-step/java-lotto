@@ -5,13 +5,18 @@ public class LottoShop {
     private static final int LOTTO_PRICE = 1000;
     private static final int ZERO = 0;
     private static final String MIN_PURCHASE_EXCEPTION_MESSAGE = "최소 1000원이어야 합니다.";
+    private static final LottoShop INSTANCE = new LottoShop();
 
-    private int lottoAmount = ZERO;
+    private LottoShop() {
+    }
+
+    public static LottoShop getInstance() {
+        return INSTANCE;
+    }
 
     public int countPossibleLottoAmount(final int price) {
         validatePrice(price);
-        lottoAmount = price / LOTTO_PRICE;
-        return lottoAmount;
+        return price / LOTTO_PRICE;
     }
 
     private void validatePrice(final int price) {
@@ -20,7 +25,7 @@ public class LottoShop {
         }
     }
 
-    public Lottos buyLotto() {
+    public Lottos buyLotto(final int lottoAmount) {
         Lottos lottos = new Lottos();
         for (int amount = ZERO; amount < lottoAmount; amount++) {
             lottos.storeLotto(new Lotto());
