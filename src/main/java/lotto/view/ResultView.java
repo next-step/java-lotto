@@ -2,7 +2,7 @@ package lotto.view;
 
 import java.util.List;
 import lotto.domain.Lotto;
-import lotto.domain.WinningPrice;
+import lotto.domain.Ranking;
 
 public class ResultView {
 
@@ -16,16 +16,16 @@ public class ResultView {
         }
     }
 
-    public void printAnalyzeResults(List<WinningPrice> winningPrices, double profitPercent) {
+    public void printAnalyzeResults(List<Ranking> winningPrices, double profitPercent) {
         System.out.println("당첨통계");
         System.out.println("---------");
         printWinningMoney(winningPrices);
         printProfitPercent(profitPercent);
     }
 
-    public void printWinningMoney(List<WinningPrice> winningPrices) {
-        for (WinningPrice price : winningPrices) {
-            System.out.println(price);
+    public void printWinningMoney(List<Ranking> rankings) {
+        for (Ranking ranking : rankings) {
+            System.out.println(ranking);
         }
     }
 

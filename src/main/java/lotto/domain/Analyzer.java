@@ -10,39 +10,39 @@ public class Analyzer {
     private final List<Integer> WIN_KEYS = Arrays.asList(3, 4, 5, 5, 6);
     private final List<Integer> BONUS_KEYS = Arrays.asList(0, 0, 0, 1, 0);
 
-    private final List<WinningPrice> winningPrices = new ArrayList<>();
-    private final int price;
-    private int totalWinningMoney = 0;
+    private final List<Ranking> rankings = new ArrayList<>();
+    private final int payment;
+    private double prizeMoney = 0;
 
-    public Analyzer(final int price) {
-        this.price = price;
+    public Analyzer(final int payment) {
+        this.payment = payment;
     }
 
     public Double calculateProfitPercent() {
-        return totalWinningMoney / (double) this.price;
+        return prizeMoney / this.payment;
     }
 
-    public void calculateTotalWinningMoney(final List<Integer> correctWinNumber,
+    public void calculateTotalPrizeMoney(final List<Integer> correctWinNumber,
         final List<Integer> hasBonusNumber) {
 
         for (int i = 0; i < WIN_KEYS.size(); i++) {
             int win = WIN_KEYS.get(i);
             int bonus = BONUS_KEYS.get(i);
 
-            winningPrices.add(calculatePerStepMoney(win, bonus, correctWinNumber, hasBonusNumber));
+            rankings.add(calculatePerStepMoney(win, bonus, correctWinNumber, hasBonusNumber));
         }
     }
 
-    private WinningPrice calculatePerStepMoney(int win, int bonus, List<Integer> winNumbers,
+    private Ranking calculatePerStepMoney(int win, int bonus, List<Integer> winNumbers,
         List<Integer> bonusNumbers) {
         int count = countFrequency(winNumbers, win);
         if (win == 5) {
             List<Integer> filteredBonus = filter(winNumbers, bonusNumbers, win);
             count = countFrequency(filteredBonus, bonus);
         }
-        WinningPrice winningPrice = WinningPrice.of(win, bonus);
-        totalWinningMoney += winningPrice.operate(count);
-        return winningPrice;
+        Ranking ranking = Ranking.of(win, bonus);
+        prizeMoney += ranking.operate(count);
+        return ranking;
     }
 
     private List<Integer> filter(List<Integer> source, List<Integer> target, int value) {
@@ -62,7 +62,7 @@ public class Analyzer {
         return 0;
     }
 
-    public List<WinningPrice> getWinningPrices() {
-        return new ArrayList<>(winningPrices);
+    public List<Ranking> getRankings() {
+        return new ArrayList<>(rankings);
     }
 }

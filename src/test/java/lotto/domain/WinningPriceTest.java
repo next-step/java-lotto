@@ -7,20 +7,20 @@ class WinningPriceTest {
 
     @Test
     void enum_FIVE_반환_테스트() {
-        WinningPrice winningPrice = WinningPrice.of(5, 0);
-        Assertions.assertThat(winningPrice).isEqualTo(WinningPrice.Five);
+        Ranking ranking = Ranking.of(5, 0);
+        Assertions.assertThat(ranking).isEqualTo(Ranking.Five);
     }
 
     @Test
     void enum_FIVE_BONUS_반환_테스트() {
-        WinningPrice winningPrice = WinningPrice.of(5, 1);
-        Assertions.assertThat(winningPrice).isEqualTo(WinningPrice.FiveWithBonus);
+        Ranking ranking = Ranking.of(5, 1);
+        Assertions.assertThat(ranking).isEqualTo(Ranking.FiveWithBonus);
     }
 
     @Test
     void 로또_당첨_금액_테스트() {
-        WinningPrice winningPrice = WinningPrice.of(5, 0);
-        Assertions.assertThat(winningPrice.operate(1)).isEqualTo(1500000);
+        Ranking ranking = Ranking.of(5, 0);
+        Assertions.assertThat(ranking.operate(1)).isEqualTo(1500000);
     }
 
 

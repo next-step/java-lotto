@@ -31,10 +31,10 @@ public class LottoProcessor {
             List<Integer> bonusNumbers = lottoTickets.checkBonusNumber(lottoMachine);
 
             Analyzer analyzer = new Analyzer(totalPrice);
-            analyzer.calculateTotalWinningMoney(integers, bonusNumbers);
+            analyzer.calculateTotalPrizeMoney(integers, bonusNumbers);
 
             double profitPercent = analyzer.calculateProfitPercent();
-            resultView.printAnalyzeResults(analyzer.getWinningPrices(), profitPercent);
+            resultView.printAnalyzeResults(analyzer.getRankings(), profitPercent);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
