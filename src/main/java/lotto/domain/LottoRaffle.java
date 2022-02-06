@@ -34,7 +34,7 @@ public class LottoRaffle {
             LottoResult.MATCH3,
             LottoResult.MATCH4,
             LottoResult.MATCH5,
-            LottoResult.MATCHBONUS,
+            LottoResult.MATCH_BONUS,
             LottoResult.MATCH6
         );
     }

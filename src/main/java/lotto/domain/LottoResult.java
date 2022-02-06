@@ -7,13 +7,13 @@ public enum LottoResult {
     MATCH3(3, false, 0, 5000),
     MATCH4(4, false, 0, 50000),
     MATCH5(5, false, 0, 150000),
-    MATCHBONUS(5, true, 0, 30000000),
+    MATCH_BONUS(5, true, 0, 30000000),
     MATCH6(6, false, 0, 2000000000);
 
     private final int matchCount;
     private final boolean isBonusNumber;
     private int count;
-    private int winning;
+    private final int winning;
 
     LottoResult(int matchCount, boolean isBonusNumber, int count, int winning) {
         this.matchCount = matchCount;
@@ -38,9 +38,13 @@ public enum LottoResult {
         this.count++;
     }
 
-    public int getCount() {return this.count;}
+    public int getCount() {
+        return this.count;
+    }
 
-    public int getWinning() { return this.winning;}
+    public int getWinning() {
+        return this.winning;
+    }
 
     public int getMatchCount() {
         return matchCount;
