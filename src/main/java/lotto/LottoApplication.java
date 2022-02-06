@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.List;
+import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.domain.LottoRaffle;
 import lotto.domain.LottoResult;
@@ -23,12 +24,11 @@ public class LottoApplication {
         final List<Integer> winningNumbers = InputView.inputLastWinningNumbers();
         final Integer bonusNumber = InputView.inputBonusNumber(winningNumbers);
 
-        final LottoRaffle lottoRaffle = new LottoRaffle(
-            new WinningLotto(winningNumbers, bonusNumber));
+        final LottoRaffle lottoRaffle = new LottoRaffle(new WinningLotto(winningNumbers, bonusNumber));
         for (Lotto lotto : lottos.getLottos()) {
             lottoRaffle.compareLotto(lotto);
         }
-        final List<LottoResult> results = lottoRaffle.getResults();
+        final Map<LottoResult, Integer> results = lottoRaffle.getResults();
         double yield = YieldCalculator.calculateYield(results, money);
         ResultView.printLottoResults(results, yield);
     }

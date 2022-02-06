@@ -1,21 +1,33 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LottoRaffle {
 
     private final WinningLotto winningLotto;
+    private final Map<LottoResult, Integer> matchResult;
 
     public LottoRaffle(WinningLotto winningLotto) {
         this.winningLotto = winningLotto;
+        matchResult = initiateMatchMap();
+    }
+
+    private Map<LottoResult, Integer> initiateMatchMap() {
+        final Map<LottoResult, Integer> matchResult = new HashMap<>();
+        for (LottoResult lottoResult : LottoResult.values()) {
+            matchResult.put(lottoResult, 0);
+        }
+        return new HashMap<>(matchResult);
     }
 
     public void compareLotto(Lotto lotto) {
         final int matchCount = calculateMatchCount(lotto);
         boolean isBonusNumber = calculateBonusNumber(lotto, matchCount);
-        if(LottoResult.findLottoResult(matchCount, isBonusNumber) != LottoResult.NOMATCH) {
-            LottoResult.increaseMatch(matchCount, isBonusNumber);
+
+        final LottoResult lottoResult = LottoResult.findLottoResult(matchCount, isBonusNumber);
+        if (lottoResult != LottoResult.NO_MATCH) {
+            matchResult.put(lottoResult, matchResult.get(lottoResult) + 1);
         }
     }
 
@@ -35,13 +47,7 @@ public class LottoRaffle {
         });
     }
 
-    public List<LottoResult> getResults() {
-        return Arrays.asList(
-            LottoResult.MATCH3,
-            LottoResult.MATCH4,
-            LottoResult.MATCH5,
-            LottoResult.MATCH_BONUS,
-            LottoResult.MATCH6
-        );
+    public Map<LottoResult, Integer> getResults() {
+        return matchResult;
     }
 }

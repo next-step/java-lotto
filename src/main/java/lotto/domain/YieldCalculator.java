@@ -1,15 +1,16 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.Map;
 
 public class YieldCalculator {
 
-    private YieldCalculator() {}
+    private YieldCalculator() {
+    }
 
-    public static double calculateYield(List<LottoResult> lottoResults, int money) {
+    public static double calculateYield(Map<LottoResult, Integer> lottoResults, int money) {
         long profit = 0;
-        for(LottoResult lottoResult: lottoResults) {
-            profit = profit + (long) lottoResult.getCount() * lottoResult.getWinning();
+        for (LottoResult lottoResult : lottoResults.keySet()) {
+            profit = profit + (long) lottoResults.get(lottoResult) * lottoResult.getWinning();
         }
         return (double) (profit / money);
     }
