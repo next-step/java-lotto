@@ -23,10 +23,10 @@ public class LottoProcessor {
             resultView.printNumberOfLotto(lottoCounts);
             resultView.printLottoTickets(lottoTickets.getLottoTickets());
 
-            List<Integer> winNumbers = inputView.getWinNumbers();
+            List<Integer> winningNumbers = inputView.getWinningNumbers();
             int bonusNumber = inputView.getBonusNumber();
 
-            LottoMachine lottoMachine = new LottoMachine(winNumbers, bonusNumber);
+            LottoMachine lottoMachine = new LottoMachine(winningNumbers, bonusNumber);
             List<Integer> integers = lottoTickets.countCorrectWinNumber(lottoMachine);
             List<Integer> bonusNumbers = lottoTickets.checkBonusNumber(lottoMachine);
 
