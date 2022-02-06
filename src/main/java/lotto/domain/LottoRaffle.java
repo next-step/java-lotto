@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.WinningLotto;
 
 public class LottoRaffle {
 
@@ -23,7 +25,7 @@ public class LottoRaffle {
 
     public void compareLotto(Lotto lotto) {
         final int matchCount = calculateMatchCount(lotto);
-        boolean isBonusNumber = calculateBonusNumber(lotto, matchCount);
+        boolean isBonusNumber = calculateBonusNumber(lotto);
 
         final LottoResult lottoResult = LottoResult.findLottoResult(matchCount, isBonusNumber);
         if (lottoResult != LottoResult.NO_MATCH) {
@@ -31,20 +33,13 @@ public class LottoRaffle {
         }
     }
 
-    private boolean calculateBonusNumber(Lotto lotto, int matchCount) {
-        if (matchCount != 5) {
-            return false;
-        }
+    private boolean calculateBonusNumber(Lotto lotto) {
         return lotto.hasNumber(winningLotto.getBonusNumber());
     }
 
     private Integer calculateMatchCount(Lotto lotto) {
-        return lotto.getLotto().stream().reduce(0, (origin, value) -> {
-            if (winningLotto.hasNumber(value)) {
-                return origin + 1;
-            }
-            return origin;
-        });
+        return Math.toIntExact(
+            lotto.getLotto().getNumbers().stream().filter(winningLotto::hasNumber).count());
     }
 
     public Map<LottoResult, Integer> getResults() {

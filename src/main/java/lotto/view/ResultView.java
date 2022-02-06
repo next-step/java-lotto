@@ -2,9 +2,10 @@ package lotto.view;
 
 import java.util.Arrays;
 import java.util.Map;
-import lotto.domain.Lotto;
+import lotto.domain.lotto.Lotto;
 import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.number.Number;
 
 public class ResultView {
 
@@ -17,7 +18,7 @@ public class ResultView {
 
     public static void printLottos(Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
-            System.out.println(Arrays.toString(lotto.getLotto().toArray()));
+            System.out.println(Arrays.toString(lotto.getLotto().getNumbers().stream().map(Number::getValue).toArray()));
         }
         System.out.println();
     }
