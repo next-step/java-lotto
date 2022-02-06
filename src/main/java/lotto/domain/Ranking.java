@@ -10,23 +10,23 @@ public enum Ranking {
     SIX(6, 0, 2000000000),
     OTHERS(0, 0, 0);
 
-    private final int numberOfWinningNumbers;
+    private final int numberOfMatches;
     private final int currency;
     private int bonus = 0;
     private int count;
 
-    Ranking(final int numberOfWinningNumbers, int bonus, final int currency) {
-        this.numberOfWinningNumbers = numberOfWinningNumbers;
-        if (numberOfWinningNumbers == 5) {
+    Ranking(final int numberOfMatches, int bonus, final int currency) {
+        this.numberOfMatches = numberOfMatches;
+        if (numberOfMatches == 5) {
             this.bonus = bonus;
         }
         this.currency = currency;
     }
 
-    public static Ranking of(final int numberOfWinningNumbers, final int bonus) {
+    public static Ranking of(final int numberOfMatches, final int bonus) {
         return Arrays.stream(values())
             .filter(
-                Ranking -> (Ranking.numberOfWinningNumbers == numberOfWinningNumbers) &&
+                Ranking -> (Ranking.numberOfMatches == numberOfMatches) &&
                     (Ranking.bonus == bonus))
             .findAny()
             .orElse(OTHERS);
@@ -44,6 +44,6 @@ public enum Ranking {
             sb.append(", 보너스 볼 일치");
         }
         sb.append("(%d원) - %d개");
-        return String.format(sb.toString(), numberOfWinningNumbers, currency, count);
+        return String.format(sb.toString(), numberOfMatches, currency, count);
     }
 }
