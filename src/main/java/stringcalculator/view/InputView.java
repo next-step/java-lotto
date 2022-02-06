@@ -1,6 +1,7 @@
 package stringcalculator.view;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 import stringcalculator.domain.Delimiters;
 
@@ -17,7 +18,7 @@ public class InputView {
 
         if (!isBlank(input)) {
             validatePrefix(input);
-            return new Delimiters(Arrays.asList(removePrefix(input)));
+            return new Delimiters(Collections.singletonList(removePrefix(input)));
         }
 
         return new Delimiters(Arrays.asList(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON));
