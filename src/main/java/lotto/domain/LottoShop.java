@@ -4,7 +4,7 @@ public class LottoShop {
 
     private static final int LOTTO_PRICE = 1000;
     private static final int ZERO = 0;
-    public static final String MIN_PURCHASE_EXCEPTION_MESSAGE = "최소 1000원이어야 합니다.";
+    private static final String MIN_PURCHASE_EXCEPTION_MESSAGE = "최소 1000원이어야 합니다.";
 
     private int lottoAmount = ZERO;
 

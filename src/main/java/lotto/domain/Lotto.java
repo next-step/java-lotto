@@ -8,8 +8,8 @@ import java.util.Set;
 public class Lotto {
 
     private static final int LOTTO_SIZE = 6;
-    public static final String DUPLICATE_EXCEPTION_MESSAGE = "복권에 중복된 숫자가 존재합니다.";
-    public static final String LOTTO_SIZE_EXCEPTION_MESSAGE = "복권의 숫자 개수가 유효하지 않습니다.";
+    private static final String DUPLICATE_EXCEPTION_MESSAGE = "복권에 중복된 숫자가 존재합니다.";
+    private static final String LOTTO_SIZE_EXCEPTION_MESSAGE = "복권의 숫자 개수가 유효하지 않습니다.";
 
     private final List<LottoNumber> lottoNumbers;
 
