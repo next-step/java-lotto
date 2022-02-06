@@ -9,7 +9,7 @@ public class InputView {
     private static final int PREFIX_LENGTH = 2;
     private static final String DEFAULT_DELIMITER_COMMA = ",";
     private static final String DEFAULT_DELIMITER_COLON = ":";
-    private static final String PREFIX_REGEX = "\\/\\/(.+)";
+    private static final String PREFIX_REGEX = "//(.+)";
     private static final String DEFAULT_NUMBER = "0";
 
     public static Delimiters getDelimiters() {
