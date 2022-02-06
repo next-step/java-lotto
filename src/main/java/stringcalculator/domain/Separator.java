@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Separator {
 
@@ -36,7 +37,8 @@ public class Separator {
     }
 
     public List<String> split() {
-        String[] numbers = userNumber.split(delimiter);
-        return Arrays.asList(numbers);
+        return Arrays.stream(userNumber.split(delimiter))
+            .map(String::trim)
+            .collect(Collectors.toList());
     }
 }
