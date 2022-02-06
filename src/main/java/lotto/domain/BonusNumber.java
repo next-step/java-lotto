@@ -20,7 +20,7 @@ public class BonusNumber {
     }
 
     private void validateBonusNumberRange(final String value) {
-        if (!LottoBalls.get().contains(value)) {
+        if (!LottoBalls.isContains(value)) {
             throw new IllegalArgumentException("로또 번호는 1부터 45 까지 입니다.");
         }
     }

@@ -53,7 +53,7 @@ public class WinningNumbers {
     }
 
     private void validateWinningNumberRange(final List<String> winningNumbers) {
-        if (!LottoBalls.get().containsAll(winningNumbers)) {
+        if (!LottoBalls.isContains(winningNumbers)) {
             throw new IllegalArgumentException("로또 번호는 1부터 45 까지 입니다.");
         }
     }
