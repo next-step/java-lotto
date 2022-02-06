@@ -12,21 +12,27 @@ public class LottoRaffle {
     }
 
     public void compareLotto(Lotto lotto) {
-        int count = lotto.getLotto().stream().reduce(0, (origin, value) -> {
+        final int matchCount = calculateMatchCount(lotto);
+        boolean isBonusNumber = calculateBonusNumber(lotto, matchCount);
+        if(LottoResult.findLottoResult(matchCount, isBonusNumber) != LottoResult.NOMATCH) {
+            LottoResult.increaseMatch(matchCount, isBonusNumber);
+        }
+    }
+
+    private boolean calculateBonusNumber(Lotto lotto, int matchCount) {
+        if (matchCount != 5) {
+            return false;
+        }
+        return lotto.hasNumber(winningLotto.getBonusNumber());
+    }
+
+    private Integer calculateMatchCount(Lotto lotto) {
+        return lotto.getLotto().stream().reduce(0, (origin, value) -> {
             if (winningLotto.hasNumber(value)) {
                 return origin + 1;
             }
             return origin;
         });
-
-        boolean isBonusNumber = lotto.getLotto().contains(winningLotto.getBonusNumber());
-        if (count != 5) {
-            isBonusNumber = false;
-        }
-
-        if(LottoResult.findLottoResult(count, isBonusNumber) != LottoResult.NOMATCH) {
-            LottoResult.increaseMatch(count, isBonusNumber);
-        }
     }
 
     public List<LottoResult> getResults() {
