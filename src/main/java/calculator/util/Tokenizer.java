@@ -10,10 +10,13 @@ public class Tokenizer {
     private static final String STANDARD_DELIMITER_COMMA = ",";
     private static final String STANDARD_DELIMITER_COLON = ":";
 
-    private Tokenizer() {
+    private final List<Integer> tokenizedNumbers;
+
+    public Tokenizer(String text) {
+        this.tokenizedNumbers = tokenize(text);
     }
 
-    public static List<Integer> tokenize(String text) {
+    private List<Integer> tokenize(String text) {
         if (isCustomDelimiter(text)) {
             final String CUSTOM_DELIMITER = text.substring(text.indexOf("/") + 2, text.indexOf("\n"));
 
@@ -41,5 +44,9 @@ public class Tokenizer {
 
     public static boolean isCustomDelimiter(String text) {
         return Pattern.compile("//(.)\n(.*)").matcher(text).find();
+    }
+
+    public List<Integer> getTokenizedNumbers() {
+        return tokenizedNumbers;
     }
 }
