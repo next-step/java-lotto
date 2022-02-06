@@ -13,10 +13,6 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public List<String> get() {
-        return this.numbers;
-    }
-
     public int matchNumber(final List<String> winningNumbers) {
         return (int) numbers.stream()
                 .filter(n -> winningNumbers.contains(n))
@@ -25,5 +21,9 @@ public class Lotto {
 
     public boolean containsBonusNumber(String bonusNumber) {
         return numbers.contains(bonusNumber);
+    }
+
+    public List<String> get() {
+        return this.numbers;
     }
 }
