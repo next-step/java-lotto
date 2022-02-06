@@ -10,10 +10,10 @@ import stringcalculator.view.ResultView;
 public class StringCalculatorApplication {
 
     public static void main(String[] args) {
-        Delimiters delimiters = InputView.getDelimiters();
-        String expression = InputView.getExpression();
+        String delimiter = InputView.inputDelimiter();
+        String expression = InputView.inputExpression();
 
-        ExpressionParser expressionParser = new ExpressionParser(delimiters);
+        ExpressionParser expressionParser = new ExpressionParser(new Delimiters(delimiter));
         List<Integer> numbers = expressionParser.parse(expression);
 
         int result = Accumulator.calculate(numbers);

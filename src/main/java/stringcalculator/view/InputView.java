@@ -1,31 +1,29 @@
 package stringcalculator.view;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Scanner;
-import stringcalculator.domain.Delimiters;
 
 public class InputView {
 
     private static final int PREFIX_LENGTH = 2;
-    private static final String DEFAULT_DELIMITER_COMMA = ",";
-    private static final String DEFAULT_DELIMITER_COLON = ":";
+
     private static final String PREFIX_REGEX = "//(.+)";
     private static final String DEFAULT_NUMBER = "0";
 
-    public static Delimiters getDelimiters() {
-        String input = getInput();
+    public static String inputDelimiter() {
+        System.out.println("구분자를 입력해 주세요. (//${구분자}, 입력하지 않으면 기본 구분자(',' ':')가 사용됩니다.");
+        String input = input();
 
         if (!isBlank(input)) {
             validatePrefix(input);
-            return new Delimiters(Collections.singletonList(removePrefix(input)));
+            input = removePrefix(input);
         }
 
-        return new Delimiters(Arrays.asList(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON));
+        return input;
     }
 
-    public static String getExpression() {
-        String input = getInput();
+    public static String inputExpression() {
+        System.out.println("식을 입력해 주세요.");
+        String input = input();
 
         if (isBlank(input)) {
             return DEFAULT_NUMBER;
@@ -33,7 +31,7 @@ public class InputView {
         return input;
     }
 
-    private static String getInput() {
+    private static String input() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
