@@ -13,7 +13,7 @@ public class LottoApplication {
     public static void main(String[] args) {
         final int purchasePrice = InputView.getPurchasePrice();
         final int quantity = LottoGenerator.getLottoQuantity(purchasePrice);
-        final List<Lotto> lottoNumbers = LottoGenerator.getTotalLottoNumbers(quantity);
+        final List<Lotto> lottoNumbers = LottoGenerator.getLottos(quantity);
 
         ResultView.printLottoQuantityAndNumbers(quantity, lottoNumbers);
 

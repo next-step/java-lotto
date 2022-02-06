@@ -29,14 +29,14 @@ public class LottoGenerator {
         return price < LOTTO_PRICE;
     }
 
-    public static List<Lotto> getTotalLottoNumbers(int quantity) {
-        List<Lotto> totalNumbers = new ArrayList<>();
+    public static List<Lotto> getLottos(int quantity) {
+        List<Lotto> totalLotto = new ArrayList<>();
 
         for (int i = 0; i < quantity; i++) {
             Lotto lotto = new Lotto(getLottoNumbers());
-            totalNumbers.add(lotto);
+            totalLotto.add(lotto);
         }
-        return totalNumbers;
+        return totalLotto;
     }
 
     public static Numbers getLottoNumbers() {
