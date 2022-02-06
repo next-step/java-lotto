@@ -15,7 +15,7 @@ public class Lotto {
     }
 
     private void validateSize() {
-        if (numbers.getSize() == LOTTO_NUMBERS_SIZE) {
+        if (numbers.getSize() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("[ERROR] 로또 넘버는 6개여야 합니다.");
         }
     }

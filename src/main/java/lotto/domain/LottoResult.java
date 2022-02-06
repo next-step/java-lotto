@@ -11,6 +11,7 @@ public enum LottoResult {
     SIX_MATCHING(6, false, 2_000_000_000, "6개 일치 (2,000,000,000원) - ");
 
     private static final int MINIMUM_NUMBER_OF_MATCHING = 3;
+    private static final int COUNT_TO_CHECK_BONUS = 5;
 
     private final int count;
     private final boolean includeBonus;
@@ -24,14 +25,11 @@ public enum LottoResult {
         this.description = description;
     }
 
-    public static LottoResult of(int count) {
+    public static LottoResult of(int count, boolean includeBonus) {
         if (count < MINIMUM_NUMBER_OF_MATCHING) {
             return LottoResult.NO_REWARD;
         }
-        return of(count, false);
-    }
 
-    public static LottoResult of(int count, boolean includeBonus) {
         return Arrays.stream(LottoResult.values())
             .filter(lottoResult -> isSameCountAndBonus(lottoResult, count, includeBonus))
             .findAny()
@@ -40,7 +38,14 @@ public enum LottoResult {
 
     private static boolean isSameCountAndBonus(LottoResult lottoResult, int count,
         boolean includeBonus) {
+        if (notCheckBonus(count)) {
+            return lottoResult.count == count;
+        }
         return lottoResult.count == count && lottoResult.includeBonus == includeBonus;
+    }
+
+    private static boolean notCheckBonus(int count) {
+        return count != COUNT_TO_CHECK_BONUS;
     }
 
     public String getDescription() {
