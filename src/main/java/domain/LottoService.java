@@ -3,43 +3,51 @@ package domain;
 import view.InputView;
 import view.ResultView;
 
-import java.util.Map;
+import java.math.BigDecimal;
+import java.util.List;
 
 public class LottoService {
-    private LottoTickets lottoTickets;
     private final InputView inputView;
     private final ResultView resultView;
-    private static final int lottoPrice = 1_000;
-    private int purchasePrice;
 
     public LottoService() {
-        this.lottoTickets = new LottoTickets();
         this.inputView = new InputView();
         this.resultView = new ResultView();
     }
 
-    public void purchaseLotto() {
-        purchasePrice = inputView.inputPurchasePrice();
-        int lottoCount = purchasePrice / lottoPrice;
-        for (int i = 0; i < lottoCount; i++) {
-            lottoTickets.addLottoTicket(new Lotto());
-        }
-        resultView.printLottoCount(lottoCount);
+    public LottoPrice inputPrice() {
+        LottoPrice lottoPrice = new LottoPrice(inputView.inputPurchasePrice());
+        resultView.printLottoCount(lottoPrice.lottoCount());
+        return lottoPrice;
     }
 
-    public void showAllLottoTickets() {
+    public LottoTickets purchaseLotto(LottoPrice lottoPrice) {
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.readyLottoTicket(lottoPrice.lottoCount());
+        showAllLottoTickets(lottoTickets);
+        return lottoTickets;
+    }
+
+    public void getRatioByAnswer(LottoTickets lottoTickets, LottoPrice lottoPrice) {
+        LottoAnswer lottoAnswer = new LottoAnswer(receiveAnswer(), receiveBonus());
+        LottoResult lottoResult = lottoAnswer.checkLottoAnswer(lottoTickets.getLottoTickets());
+        resultView.printResultStatistic(lottoResult);
+
+        BigDecimal prizeRatio = new RatioCalculator().calculateRatio(lottoPrice.getPurchasePrice(), lottoResult);
+        resultView.printResultRatio(prizeRatio);
+    }
+
+    private void showAllLottoTickets(LottoTickets lottoTickets) {
         lottoTickets.getLottoTickets()
                 .forEach(lotto -> resultView.printAllLotto(lotto.getLotto()));
     }
 
-    public void receiveAnswerNumber() {
-        Map<Integer, Integer> matchCount = new AnswerLotto(inputView.inputAnswerNumber())
-                .checkLottoAnswer(lottoTickets.getLottoTickets());
-        resultView.printResultStatistic(matchCount);
+    private List<Integer> receiveAnswer() {
+        return inputView.inputAnswerNumber();
     }
 
-    public void finishLotto() {
-        lottoTickets.calculateLottoTotalPrize();
-        resultView.printResultRatio(lottoTickets.calculateLottoRatio(purchasePrice));
+    private int receiveBonus() {
+        return inputView.inputBonusNumber();
     }
+
 }

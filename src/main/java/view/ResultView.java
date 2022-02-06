@@ -1,21 +1,21 @@
 package view;
 
-import domain.Prize;
-import domain.Prizes;
+import domain.LottoResult;
+import domain.Rank;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 public class ResultView {
-    private final static String MESSAGE_LOTTO_COUNT = "개를 구매했습니다";
-    private final static String MESSAGE_STATISTIC = "당첨 통계";
-    private final static String MESSAGE_STATISTIC_LINE = "---------";
-    private final static String MESSAGE_PRIZE_IS = "개 일치 (";
-    private final static String MESSAGE_PRIZE_WON = "원)- ";
-    private final static String MESSAGE_MATCH_COUNT = "개";
-    private final static String MESSAGE_RATIO_RESULT = "총 수익률은 ";
-    private final static String MESSAGE_RATIO_RESULT_END = "입니다.";
+    private static final String MESSAGE_LOTTO_COUNT = "개를 구매했습니다";
+    private static final String MESSAGE_STATISTIC = "당첨 통계";
+    private static final String MESSAGE_STATISTIC_LINE = "---------";
+    private static final String MESSAGE_MATCH_IS = "개 일치";
+    private static final String MESSAGE_WON = "원";
+    private static final String MESSAGE_BONUS_MATCH = ", 보너스 볼 일치";
+    private static final String MESSAGE_MATCH_COUNT = "개";
+    private static final String MESSAGE_RATIO_RESULT = "총 수익률은 ";
+    private static final String MESSAGE_RATIO_RESULT_END = "입니다.";
 
     public void printLottoCount(int lottoCount) {
         System.out.println(lottoCount + MESSAGE_LOTTO_COUNT);
@@ -25,17 +25,35 @@ public class ResultView {
         System.out.println(lotto);
     }
 
-    public void printResultStatistic(Map<Integer, Integer> lottoResult) {
+    public void printResultStatistic(LottoResult lottoResult) {
         System.out.println("\n" + MESSAGE_STATISTIC + "\n" + MESSAGE_STATISTIC_LINE);
 
-        for (int matchCount = 3; matchCount <= 6; matchCount++) {
-            System.out.println(matchCount + MESSAGE_PRIZE_IS
-                    + Prize.prizes.getOrDefault(matchCount, 0) + MESSAGE_PRIZE_WON
-                    + lottoResult.getOrDefault(matchCount, 0) + MESSAGE_MATCH_COUNT);
+        for (Rank rank : Rank.values()) {
+            printRank(rank, lottoResult);
         }
     }
 
     public void printResultRatio(BigDecimal prizeRatio) {
         System.out.println(MESSAGE_RATIO_RESULT + prizeRatio + MESSAGE_RATIO_RESULT_END);
     }
+
+    private void printRank(Rank rank, LottoResult lottoResult) {
+        if (rank == Rank.FAIL) {
+            return;
+        }
+        if (rank == Rank.SECOND) {
+            printBonusRank(rank, lottoResult);
+            return;
+        }
+        System.out.println(rank.getMatchCount() + MESSAGE_MATCH_IS
+                + " (" + rank.getPrize() + MESSAGE_WON + ")- "
+                + lottoResult.getRankCount(rank) + MESSAGE_MATCH_COUNT);
+    }
+
+    private void printBonusRank(Rank rank, LottoResult lottoResult) {
+        System.out.println(rank.getMatchCount() + MESSAGE_MATCH_IS + MESSAGE_BONUS_MATCH
+                + " (" + rank.getPrize() + MESSAGE_WON + ")- "
+                + lottoResult.getRankCount(rank) + MESSAGE_MATCH_COUNT);
+    }
+
 }

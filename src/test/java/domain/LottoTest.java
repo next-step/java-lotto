@@ -18,7 +18,7 @@ class LottoTest {
         Lotto lotto = new Lotto(() -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         //when
-        int correctNumberCount = lotto.checkLottoNumbers(new ArrayList<>(Arrays.asList(3, 4, 5, 6, 7, 8)));
+        int correctNumberCount = lotto.countMatch(new ArrayList<>(Arrays.asList(3, 4, 5, 6, 7, 8)));
 
         //then
         assertThat(correctNumberCount).isEqualTo(4);
@@ -31,7 +31,7 @@ class LottoTest {
         Lotto lotto = new Lotto(() -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         //when
-        int correctNumberCount = lotto.checkLottoNumbers(new ArrayList<>(Arrays.asList(7, 8, 9, 10, 11, 12)));
+        int correctNumberCount = lotto.countMatch(new ArrayList<>(Arrays.asList(7, 8, 9, 10, 11, 12)));
 
         //then
         assertThat(correctNumberCount).isEqualTo(0);
