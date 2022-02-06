@@ -37,7 +37,7 @@ public class LottoInputView {
         lottos = lottoShop.buyLotto();
 
         for (Lotto lotto : lottos.getLottos()) {
-            printLotto(lotto.getLotto());
+            printLotto(lotto.getLottoNumbers());
         }
 
         System.out.println(INPUT_LAST_WEEK_WINNING_NUMBER_MESSAGE);

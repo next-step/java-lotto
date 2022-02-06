@@ -40,7 +40,7 @@ public class LottoResultView {
 
         for (Lotto lotto : userLottos.getLottos()) {
             LottoResult lottoResult = lottoCalculator.countLotteryNumber(winningNumbers,
-                lotto.getLotto(),
+                lotto.getLottoNumbers(),
                 bonusNumber.getNumber());
 
             updateResult(Ranking.judgeRanking(lottoResult));

@@ -11,12 +11,12 @@ public class Lotto {
     public static final String DUPLICATE_EXCEPTION_MESSAGE = "복권에 중복된 숫자가 존재합니다.";
     public static final String LOTTO_SIZE_EXCEPTION_MESSAGE = "복권의 숫자 개수가 유효하지 않습니다.";
 
-    private final List<LottoNumber> lotto;
+    private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(final List<LottoNumber> lotto) {
-        validateNumbersSize(lotto);
-        validateDuplicateNumber(lotto);
-        this.lotto = lotto;
+    public Lotto(final List<LottoNumber> lottoNumbers) {
+        validateNumbersSize(lottoNumbers);
+        validateDuplicateNumber(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
     public Lotto() {
@@ -36,7 +36,7 @@ public class Lotto {
         }
     }
 
-    public List<LottoNumber> getLotto() {
-        return Collections.unmodifiableList(lotto);
+    public List<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
     }
 }
