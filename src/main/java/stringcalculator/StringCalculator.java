@@ -5,12 +5,15 @@ import stringcalculator.domain.Calculator;
 import stringcalculator.domain.Number;
 import stringcalculator.domain.Separator;
 import stringcalculator.domain.UserInput;
+import stringcalculator.view.InputView;
 import stringcalculator.view.ResultView;
 
 public class StringCalculator {
 
     public static void main(String[] args) {
-        final UserInput userInput = new UserInput();
+        InputView inputView = new InputView();
+        final UserInput userInput = new UserInput( inputView.inputCalculateString());
+
         final Separator separator = new Separator(userInput.getUserInput());
 
         final List<String> userNumbers = separator.split();
