@@ -1,6 +1,14 @@
 package calculator.domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
 public class Number {
+
+    private static final String NEGATIVE_SIGN = "-";
 
     private final int number;
 
@@ -19,15 +27,18 @@ public class Number {
     }
 
     private void validateNumberFormat(final String number) {
-        try {
-            Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("올바른 숫자 포맷이 아닙니다.");
-        }
+        char[] chars = number.toCharArray();
+
+        IntStream.range(0, chars.length)
+            .mapToObj(idx -> chars[idx])
+            .filter(character -> !Character.isDigit(character))
+            .findFirst().ifPresent(character -> {
+                throw new IllegalArgumentException("올바른 숫자 포맷이 아닙니다.");
+            });
     }
 
     private void validatePositiveNum(final String number) {
-        if (Integer.parseInt(number) < 0) {
+        if (number.contains(NEGATIVE_SIGN)) {
             throw new IllegalArgumentException("숫자가 음수입니다.");
         }
     }
