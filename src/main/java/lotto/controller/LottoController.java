@@ -19,21 +19,9 @@ public class LottoController {
     }
 
     public void run() {
-        setUp();
-        startLotto();
-        analyzeStatistics();
-    }
-
-    private void setUp() {
         lottoInputView.prepareLottoGame(lottoShop);
-    }
-
-    private void startLotto() {
         lottoResultView.findWinner(lottoInputView.getWinningNumbers(), lottoInputView.getLottos(),
             lottoInputView.getBonusBall());
-    }
-
-    private void analyzeStatistics() {
         lottoResultView.finishGame(lottoInputView.getPrice());
     }
 }
