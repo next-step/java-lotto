@@ -11,26 +11,21 @@ public class PrintView {
     }
 
     public static void printLottoNumber(final Lottos lottos) {
-        lottos.get().stream()
-                .forEach(lotto -> System.out.println(lotto.get()));
+        lottos.get().forEach(lotto -> System.out.println(lotto.get()));
     }
 
     public static void printRankCounts(final RankCounts rankCounts) {
-        rankCounts.get().entrySet().stream()
-                .forEach(e -> {
-                    StringBuilder sentence = new StringBuilder();
+        rankCounts.get().forEach((rank, rankCount) -> {
+            StringBuilder sentence = new StringBuilder();
 
-                    final LottoRank rank = e.getKey();
-                    final int rankCount = e.getValue();
-
-                    sentence.append(rank.getMatchCount())
-                            .append("개 일치");
-                    if (rank == LottoRank.SECOND) {
-                        sentence.append(", 보너스 볼 일치");
-                    }
-                    sentence.append(String.format(" (%d원) - %d개", rank.getAmount(), rankCount));
-                    System.out.println(sentence);
-                });
+            sentence.append(rank.getMatchCount())
+                    .append("개 일치");
+            if (rank == LottoRank.SECOND) {
+                sentence.append(", 보너스 볼 일치");
+            }
+            sentence.append(String.format(" (%d원) - %d개", rank.getAmount(), rankCount));
+            System.out.println(sentence);
+        });
     }
 
     public static void printProfitRate(final double profitRatio) {
