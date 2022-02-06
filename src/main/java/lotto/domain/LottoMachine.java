@@ -8,8 +8,10 @@ public class LottoMachine {
     private final int bonusNumber;
     private final int LOTTO_LENGTH = 6;
 
-    public LottoMachine(List<Integer> winNumbers, int bonusNumber) {
-        this.winNumbers = winNumbers;
+    public LottoMachine(List<Integer> winningNumbers, int bonusNumber) {
+        checkLengthOfWinningNumbers(winningNumbers);
+
+        this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
 
@@ -21,7 +23,7 @@ public class LottoMachine {
 
 
     public boolean isContain(int number) {
-        return winNumbers.contains(number);
+        return winningNumbers.contains(number);
     }
 
     public boolean isEqualBonusNumber(final int number) {
