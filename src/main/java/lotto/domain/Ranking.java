@@ -38,7 +38,7 @@ public enum Ranking {
     }
 
     public boolean isFail() {
-        return this.equals(FAIL);
+        return this == (FAIL);
     }
 
     public int getNormalSuccessNumber() {
