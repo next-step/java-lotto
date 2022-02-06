@@ -16,7 +16,7 @@ public class Lotto {
         this.lottoNumbers = generateRandomNumbers();
     }
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(final List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -32,7 +32,7 @@ public class Lotto {
         return newNums;
     }
 
-    public int compareLottoAndWinnerNumbers(LottoMachine lottoMachine) {
+    public int compareLottoAndWinnerNumbers(final LottoMachine lottoMachine) {
         return Long.valueOf(lottoNumbers.stream()
             .filter(lottoMachine::isContain).count()).intValue();
     }

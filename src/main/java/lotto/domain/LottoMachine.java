@@ -7,12 +7,12 @@ public class LottoMachine {
     private final List<Integer> winNumbers;
     private final Integer bonusNumber;
 
-    public LottoMachine(List<Integer> winNumbers, int bonusNumber) {
+    public LottoMachine(final List<Integer> winNumbers, final int bonusNumber) {
         this.winNumbers = winNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    public boolean isContain(int number) {
+    public boolean isContain(final int number) {
         return winNumbers.contains(number);
     }
 

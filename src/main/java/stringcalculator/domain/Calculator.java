@@ -10,7 +10,7 @@ public class Calculator {
 
     }
 
-    public int calculate(List<String> numbers) {
+    public int calculate(final List<String> numbers) {
         int sum = numbers.stream().mapToInt(Integer::parseInt).sum();
         return sum;
     }

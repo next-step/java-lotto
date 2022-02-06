@@ -33,7 +33,8 @@ public class Analyzer {
         }
     }
 
-    private WinningPrice calculatePerStepMoney(int win, int bonus, List<Integer> winNumbers,
+    private WinningPrice calculatePerStepMoney(final int win, final int bonus,
+        final List<Integer> winNumbers,
         List<Integer> bonusNumbers) {
         int count = countFrequency(winNumbers, win);
         if (win == 5) {
@@ -45,7 +46,8 @@ public class Analyzer {
         return winningPrice;
     }
 
-    private List<Integer> filter(List<Integer> source, List<Integer> target, int value) {
+    private List<Integer> filter(final List<Integer> source, final List<Integer> target,
+        final int value) {
         List<Integer> filtered = new ArrayList<>();
         for (int i = 0; i < source.size(); i++) {
             if (source.get(i) == value) {
@@ -55,7 +57,7 @@ public class Analyzer {
         return filtered;
     }
 
-    private int countFrequency(List<Integer> data, int value) {
+    private int countFrequency(final List<Integer> data, final int value) {
         if (data.contains(value)) {
             return Collections.frequency(data, value);
         }

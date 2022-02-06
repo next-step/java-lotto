@@ -6,30 +6,31 @@ import lotto.domain.WinningPrice;
 
 public class ResultView {
 
-    public void printNumberOfLotto(int lottoCounts) {
+    public void printNumberOfLotto(final int lottoCounts) {
         System.out.printf("%d개를 구매했습니다.%n", lottoCounts);
     }
 
-    public void printLottoTickets(List<Lotto> lottoTickets) {
+    public void printLottoTickets(final List<Lotto> lottoTickets) {
         for (Lotto lotto : lottoTickets) {
             System.out.println(lotto);
         }
     }
 
-    public void printAnalyzeResults(List<WinningPrice> winningPrices, double profitPercent) {
+    public void printAnalyzeResults(final List<WinningPrice> winningPrices,
+        final double profitPercent) {
         System.out.println("당첨통계");
         System.out.println("---------");
         printWinningMoney(winningPrices);
         printProfitPercent(profitPercent);
     }
 
-    public void printWinningMoney(List<WinningPrice> winningPrices) {
+    public void printWinningMoney(final List<WinningPrice> winningPrices) {
         for (WinningPrice price : winningPrices) {
             System.out.println(price);
         }
     }
 
-    public void printProfitPercent(double profitPercent) {
+    public void printProfitPercent(final double profitPercent) {
         System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)%n", profitPercent);
     }
 }

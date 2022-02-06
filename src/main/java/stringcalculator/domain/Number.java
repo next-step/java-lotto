@@ -8,13 +8,13 @@ public class Number {
 
     private final List<String> userInput;
 
-    public Number(List<String> userInput) {
+    public Number(final List<String> userInput) {
         checkIfPositiveNumber(userInput);
         this.userInput = userInput;
 
     }
 
-    private void checkIfPositiveNumber(List<String> userInput) {
+    private void checkIfPositiveNumber(final List<String> userInput) {
         Pattern m = Pattern.compile("[0-9]+");
         for (String numStr : userInput) {
             if (!m.matcher(numStr).find()) {

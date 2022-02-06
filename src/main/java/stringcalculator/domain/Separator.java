@@ -13,13 +13,13 @@ public class Separator {
     private String userNumber = "";
     private String delimiter = "";
 
-    public Separator(String text) {
+    public Separator(final String text) {
         userNumber = text;
         extractCustomDelimiter(text);
         delimiter = createDelimiterRegex();
     }
 
-    private void extractCustomDelimiter(String text) {
+    private void extractCustomDelimiter(final String text) {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
         if (m.find()) {
             customDelimiter = m.group(1);

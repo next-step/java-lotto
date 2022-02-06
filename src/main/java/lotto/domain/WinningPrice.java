@@ -17,7 +17,7 @@ public enum WinningPrice {
     private int bonus = 0;
     private int count;
 
-    WinningPrice(final int winNumber, int bonus, final int currency) {
+    WinningPrice(final int winNumber, final int bonus, final int currency) {
         this.winNumber = winNumber;
         if (winNumber == 5) {
             this.bonus = bonus;
@@ -34,7 +34,7 @@ public enum WinningPrice {
             .orElse(OTHERS);
     }
 
-    private static boolean and(boolean equals, boolean equals1) {
+    private static boolean and(final boolean equals, final boolean equals1) {
         return equals && equals1;
     }
 
