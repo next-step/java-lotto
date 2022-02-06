@@ -12,11 +12,11 @@ public class LottoRaffle {
     }
 
     public void compareLotto(Lotto lotto) {
-        int count = lotto.getLotto().stream().reduce(0, (cum, val) -> {
-            if (winningLotto.getLotto().contains(val)) {
-                return cum + 1;
+        int count = lotto.getLotto().stream().reduce(0, (origin, value) -> {
+            if (winningLotto.hasNumber(value)) {
+                return origin + 1;
             }
-            return cum;
+            return origin;
         });
 
         boolean isBonusNumber = lotto.getLotto().contains(winningLotto.getBonusNumber());
