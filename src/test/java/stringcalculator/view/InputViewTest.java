@@ -67,20 +67,6 @@ public class InputViewTest {
             () -> InputView.getDelimiters());
     }
 
-    @DisplayName("식을 입력 받는다")
-    @Test
-    void getExpression() {
-        final String expected = "1;2;3";
-        final InputStream inputStream = new ByteArrayInputStream(expected.getBytes());
-        System.setIn(inputStream);
-
-        // when
-        final String result = InputView.getExpression();
-
-        // then
-        assertThat(result).isEqualTo(expected);
-    }
-
     @DisplayName("식을 입력 - 공백 입력.")
     @ValueSource(strings = {" ", "   ", "\t", "\n"})
     @ParameterizedTest
