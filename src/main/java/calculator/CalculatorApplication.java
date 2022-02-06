@@ -2,6 +2,7 @@ package calculator;
 
 import calculator.domain.Calculator;
 import calculator.view.InputView;
+import calculator.view.ResultView;
 
 public class CalculatorApplication {
 
@@ -9,6 +10,6 @@ public class CalculatorApplication {
         String text = InputView.inputText();
 
         Calculator calculator = new Calculator();
-        System.out.println(calculator.add(text));
+        ResultView.printResult(calculator.add(text));
     }
 }
