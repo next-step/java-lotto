@@ -20,7 +20,7 @@ class LottoCalculatorTest {
         List<LottoNumber> lotteryNumbers = Arrays.asList(1, 2, 3, 4, 5, 6).stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
-        int bonusNum = 6;
+        LottoNumber bonusNum = new LottoNumber(6);
         List<LottoNumber> userNumbers = Arrays.asList(1, 2, 3, 4, 5, 8).stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList());

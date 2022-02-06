@@ -18,21 +18,21 @@ public class LottoCalculator {
         return INSTANCE;
     }
 
-    public LottoResult countLotteryNumber(final List<LottoNumber> lotteryNumbers,
-        List<LottoNumber> userNumbers, int bonusNumber) {
+    public LottoResult countLotteryNumber(final List<LottoNumber> winningNumbers,
+        List<LottoNumber> userNumbers, LottoNumber bonusNumber) {
 
-        return new LottoResult(countNormalSuccessNumber(lotteryNumbers, userNumbers),
+        return new LottoResult(countNormalSuccessNumber(winningNumbers, userNumbers),
             countBonusNumber(userNumbers, bonusNumber));
     }
 
-    private int countNormalSuccessNumber(final List<LottoNumber> lotteryNumbers, List<LottoNumber> userNumbers) {
-        Set<LottoNumber> lottoDuplicate = new HashSet<>(lotteryNumbers);
+    private int countNormalSuccessNumber(final List<LottoNumber> winningNumbers, List<LottoNumber> userNumbers) {
+        Set<LottoNumber> lottoDuplicate = new HashSet<>(winningNumbers);
         lottoDuplicate.addAll(userNumbers);
         return STANDARD_NUMBER - lottoDuplicate.size();
     }
 
-    private int countBonusNumber(List<LottoNumber> userNumbers, int bonusNum) {
-        if (userNumbers.contains(bonusNum)) {
+    private int countBonusNumber(final List<LottoNumber> userNumbers, final LottoNumber bonusNumber) {
+        if (userNumbers.contains(bonusNumber)) {
             return MATCHED_BONUS_BALL;
         }
         return NOT_MATCHED_BONUS_BALL;
