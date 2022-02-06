@@ -24,7 +24,7 @@ public class LottoInput {
         String input = SCANNER.nextLine();
         return Arrays.stream(splitWinningNumber(input))
             .map(Integer::parseInt)
-            .map(LottoNumber::from)
+            .map(LottoNumber::new)
             .collect(Collectors.toList());
     }
 
