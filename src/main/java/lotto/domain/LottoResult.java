@@ -10,6 +10,8 @@ public enum LottoResult {
     FIVE_MATCHING_BONUS(5, true, 30_000_000, "5개 일치, 보너스 볼 일치 (30,000,000) - "),
     SIX_MATCHING(6, false, 2_000_000_000, "6개 일치 (2,000,000,000원) - ");
 
+    private static final int MINIMUM_NUMBER_OF_MATCHING = 3;
+
     private final int count;
     private final boolean includeBonus;
     private final int reward;
@@ -31,7 +33,7 @@ public enum LottoResult {
     }
 
     public static LottoResult of(int count) {
-        if (count < 3) {
+        if (count < MINIMUM_NUMBER_OF_MATCHING) {
             return LottoResult.NO_REWARD;
         }
         return of(count, false);
