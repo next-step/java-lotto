@@ -62,11 +62,8 @@ public class DelimiterTokenizer {
     }
 
     private void validateNumberValue(String customDelimiter) {
-        try {
-            Integer.parseInt(customDelimiter);
+        if(customDelimiter.matches("[0-9]*")) {
             throw new IllegalArgumentException("커스텀 구분자를 숫자를 사용할 수 없습니다.");
-        } catch (NumberFormatException e) {
-            return;
         }
     }
 
