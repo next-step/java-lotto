@@ -20,7 +20,7 @@ class MoneyValidatorTest {
     @ValueSource(ints = {1, 0, -1, 999, 100})
     void 유요하지_않은_금액을_입력했을_때(int input) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> MoneyValidator.validate(Integer.toString(input))).withMessage(
+            .isThrownBy(() -> MoneyValidator.validate(input)).withMessage(
                 "[ERROR] " + MINIMUM_MONEY + "원에 1장입니다. " + MINIMUM_MONEY + "보다 큰 값을 입력해주세요.");
     }
 
