@@ -11,24 +11,26 @@ public class LottoAutoGenerator {
     private static final int LOTTO_START_NUM = 1;
     private static final int LOTTO_END_NUM = 45;
     private static final int LOTTO_SIZE = 6;
+    private static final List<LottoNumber> ALL_LOTTO_NUMBERS;
 
-    private final List<LottoNumber> allNumber;
+    static {
+        ALL_LOTTO_NUMBERS = IntStream.range(LOTTO_START_NUM, LOTTO_END_NUM)
+            .boxed()
+            .map(LottoNumber::from)
+            .collect(Collectors.toList());
+    }
 
     public static LottoAutoGenerator getInstance() {
         return INSTANCE;
     }
 
     private LottoAutoGenerator() {
-        allNumber = IntStream.range(LOTTO_START_NUM, LOTTO_END_NUM)
-            .boxed()
-            .map(LottoNumber::from)
-            .collect(Collectors.toList());
     }
 
     public List<LottoNumber> generateLotto() {
-        Collections.shuffle(allNumber);
+        Collections.shuffle(ALL_LOTTO_NUMBERS);
 
-        return allNumber.stream()
+        return ALL_LOTTO_NUMBERS.stream()
             .limit(LOTTO_SIZE)
             .collect(Collectors.toList());
     }
