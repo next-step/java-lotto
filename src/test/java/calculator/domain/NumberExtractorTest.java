@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class ParserTest {
+class NumberExtractorTest {
 
     @ParameterizedTest
     @MethodSource
@@ -35,8 +35,7 @@ class ParserTest {
             }
         }
         final List<String> delimiters = Arrays.asList(",", ":", "-");
-        final Parser parser = new Parser(text, delimiters);
-        assertThat(parser.splitNumbersByDelimiter()).isEqualTo(numbers);
+        assertThat(NumberExtractor.splitNumbersByDelimiter(text, delimiters)).isEqualTo(numbers);
     }
 
     private static Stream<Arguments> 구분자를_기준으로_숫자를_나눈다() {
@@ -49,17 +48,15 @@ class ParserTest {
     @ValueSource(strings = {"1:3:3:", "1::3", ":1:32:2", "1ab:3", "1:2:", "1:2a3a"})
     void 숫자_이외의_값이_들어가는_경우(String text) {
         final List<String> delimiters = Arrays.asList(",", ":", "a");
-        final Parser parser = new Parser(text, delimiters);
         assertThatExceptionOfType(RuntimeException.class)
-            .isThrownBy(() -> parser.splitNumbersByDelimiter()).withMessage("[ERROR] 숫자 이외의 값을 계산할 수 없습니다.");
+            .isThrownBy(() -> NumberExtractor.splitNumbersByDelimiter(text, delimiters)).withMessage("[ERROR] 숫자 이외의 값을 계산할 수 없습니다.");
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1,3a-2", "22,-23a3123:1"})
     void 음수가_들어가는_경우(String text) {
         final List<String> delimiters = Arrays.asList(",", ":", "a");
-        final Parser parser = new Parser(text, delimiters);
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> parser.splitNumbersByDelimiter()).withMessage("[ERROR] 음수 값은 입력할 수 없습니다.");
+            .isThrownBy(() -> NumberExtractor.splitNumbersByDelimiter(text, delimiters)).withMessage("[ERROR] 음수 값은 입력할 수 없습니다.");
     }
 }

@@ -16,9 +16,8 @@ public class Calculator {
         }
 
         final DelimiterTokenizer delimiterTokenizer = new DelimiterTokenizer(text);
-        final Parser parser = new Parser(text, delimiterTokenizer.getDelimiters());
-        final List<Integer> numbers = parser.splitNumbersByDelimiter();
-        return numbers.stream().reduce(INTEGER_DEFAULT_VALUE, (cum, value) -> cum + value);
+        final List<Integer> numbers = NumberExtractor.splitNumbersByDelimiter(text, delimiterTokenizer.getDelimiters());
+        return numbers.stream().reduce(INTEGER_DEFAULT_VALUE, Integer::sum);
     }
 
     public boolean isNullAndEmptyText(String text) {
