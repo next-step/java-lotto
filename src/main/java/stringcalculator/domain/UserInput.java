@@ -5,12 +5,13 @@ import java.util.Scanner;
 
 public class UserInput {
 
-    String userInput;
+    private static final String USER_INPUT="0";
+    private String userInput;
 
     public UserInput() {
         userInput = userInputString();
         if (isNullOrEmpty(userInput)) {
-            userInput = "0";
+            userInput = USER_INPUT;
         }
     }
 
