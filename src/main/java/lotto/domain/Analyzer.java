@@ -22,14 +22,14 @@ public class Analyzer {
         return prizeMoney / this.payment;
     }
 
-    public void calculateTotalPrizeMoney(final List<Integer> correctWinNumber,
-        final List<Integer> hasBonusNumber) {
+    public void calculateTotalPrizeMoney(final List<Integer> numberOfMatches,
+        final List<Integer> bonusNumbers) {
 
         for (int i = 0; i < WIN_KEYS.size(); i++) {
             int win = WIN_KEYS.get(i);
             int bonus = BONUS_KEYS.get(i);
 
-            rankings.add(calculatePerStepMoney(win, bonus, correctWinNumber, hasBonusNumber));
+            rankings.add(calculatePerStepMoney(win, bonus, numberOfMatches, bonusNumbers));
         }
     }
 

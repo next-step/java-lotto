@@ -16,12 +16,7 @@ public class InputView {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    private String getInputValue(String message) {
-        System.out.println(message);
-        return scanner.nextLine().trim();
-    }
-
-    public final int getTotalPrice() {
+    public final int getPayment() {
         try {
             return Integer.parseInt(getInputValue(PRICE_MESSAGE));
         } catch (NumberFormatException e) {
@@ -47,5 +42,10 @@ public class InputView {
         } catch (NumberFormatException e) {
             throw new NumberFormatException(ERROR_MESSAGE);
         }
+    }
+
+    private String getInputValue(String message) {
+        System.out.println(message);
+        return scanner.nextLine().trim();
     }
 }

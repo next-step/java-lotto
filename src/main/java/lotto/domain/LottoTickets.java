@@ -6,16 +6,16 @@ import java.util.List;
 public class LottoTickets {
 
     private static final int LOTTO_PRICE = 1000;
-    private final int lottoCounts;
+    private final int ticketCounts;
     private final List<Lotto> lottoTickets;
 
-    public LottoTickets(final int price) {
-        this.lottoCounts = price / LOTTO_PRICE;
-        this.lottoTickets = makeLottoTickets(lottoCounts);
+    public LottoTickets(final int payment) {
+        this.ticketCounts = payment / LOTTO_PRICE;
+        this.lottoTickets = makeLottoTickets(ticketCounts);
     }
 
-    public LottoTickets(final int price, List<Lotto> lottoTickets) {
-        this.lottoCounts = price / LOTTO_PRICE;
+    public LottoTickets(final int payment, List<Lotto> lottoTickets) {
+        this.ticketCounts = payment / LOTTO_PRICE;
         this.lottoTickets = lottoTickets;
     }
 
@@ -27,15 +27,15 @@ public class LottoTickets {
         return lottoTickets;
     }
 
-    public int getLottoCounts() {
-        return this.lottoCounts;
+    public int getTicketCounts() {
+        return this.ticketCounts;
     }
 
     public List<Lotto> getLottoTickets() {
         return lottoTickets;
     }
 
-    public List<Integer> countCorrectWinNumber(LottoMachine lottoMachine) {
+    public List<Integer> countNumberOfMatches(LottoMachine lottoMachine) {
         List<Integer> correctNumbers = new ArrayList<>();
         for (Lotto lotto : lottoTickets) {
             correctNumbers.add(lotto.compareLottoAndWinnerNumbers(lottoMachine));
