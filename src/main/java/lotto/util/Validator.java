@@ -5,7 +5,7 @@ public class Validator {
     protected Validator() {
     }
 
-    static int parseToInt(String input) {
+    public static int parseToInt(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
