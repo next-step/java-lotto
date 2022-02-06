@@ -9,8 +9,8 @@ public class LottoMachine {
 
     private static List<LottoResult> results;
 
-    public static void run(List<Lotto> lottoNumbers, List<WinningBall> winningBalls) {
-        WinningCounter winningCounter = new WinningCounter(lottoNumbers, winningBalls);
+    public static void run(List<Lotto> lottos, List<WinningBall> winningBalls) {
+        WinningCounter winningCounter = new WinningCounter(lottos, winningBalls);
         results = winningCounter.getTotalLottoResult();
     }
 
