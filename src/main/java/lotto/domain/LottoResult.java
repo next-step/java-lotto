@@ -23,7 +23,12 @@ public enum LottoResult {
     public static LottoResult findLottoResult(int matchCount, boolean isBonusNumber) {
         return Arrays.stream(values())
             .filter(lottoResult -> lottoResult.matchCount == matchCount)
-            .filter(lottoResult -> lottoResult.isBonusNumber == isBonusNumber)
+            .filter(lottoResult -> {
+                if (lottoResult.matchCount != 5) {
+                    return true;
+                }
+                return lottoResult.isBonusNumber == isBonusNumber;
+            })
             .findAny()
             .orElse(NO_MATCH);
     }

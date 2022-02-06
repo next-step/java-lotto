@@ -9,19 +9,21 @@ import static lotto.domain.LottoResult.NO_MATCH;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.stream.Stream;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoResultTest {
 
     @ParameterizedTest
     @MethodSource
-    void enum_찾을_수_있는_경우(LottoResult lottoResult, int matchCount, boolean isBonusNumber) {
+    void enum_정확하게_찾은_경우(LottoResult lottoResult, int matchCount, boolean isBonusNumber) {
         assertThat(lottoResult).isEqualTo(LottoResult.findLottoResult(matchCount, isBonusNumber));
     }
 
-    private static Stream<Arguments> enum_찾을_수_있는_경우() {
+    private static Stream<Arguments> enum_정확하게_찾은_경우() {
         return Stream.of(
             Arguments.of(MATCH3, 3, false),
             Arguments.of(MATCH4, 4, false),
@@ -39,11 +41,15 @@ class LottoResultTest {
 
     private static Stream<Arguments> enum_찾을_수_없는_경우() {
         return Stream.of(
-            Arguments.of(3, true),
             Arguments.of(2, false),
             Arguments.of(1, false),
-            Arguments.of(6, true),
             Arguments.of(0, false)
         );
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {3,4,6})
+    void 보너스_볼과_관련_없는_당첨(int count) {
+        assertThat(LottoResult.findLottoResult(count, true)).isEqualTo(LottoResult.findLottoResult(count, false));
     }
 }
