@@ -24,14 +24,6 @@ public enum LottoResult {
         this.description = description;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public int getReward() {
-        return reward;
-    }
-
     public static LottoResult of(int count) {
         if (count < MINIMUM_NUMBER_OF_MATCHING) {
             return LottoResult.NO_REWARD;
@@ -46,7 +38,16 @@ public enum LottoResult {
             .orElseThrow(() -> new IllegalArgumentException("[ERROR] 당첨 결과를 찾지 못했습니다."));
     }
 
-    private static boolean isSameCountAndBonus(LottoResult lottoResult, int count, boolean includeBonus) {
+    private static boolean isSameCountAndBonus(LottoResult lottoResult, int count,
+        boolean includeBonus) {
         return lottoResult.count == count && lottoResult.includeBonus == includeBonus;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getReward() {
+        return reward;
     }
 }
