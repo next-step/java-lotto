@@ -1,7 +1,5 @@
 package lotto.view;
 
-import static lotto.common.SystemMessage.*;
-
 import java.util.Collections;
 import java.util.List;
 import lotto.domain.Lotto;
@@ -15,6 +13,9 @@ public class LottoInputView {
     private static final String COMMA = ",";
     private static final String LEFT_SQUARE_BRACKETS = "[";
     private static final String RIGHT_SQUARE_BRACKETS = "]";
+    public static final String INPUT_PRICE_MESSAGE = "구입금액을 입력해 주세요.";
+    public static final String INPUT_LAST_WEEK_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    public static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해주세요.";
     private static final int ZERO = 0;
 
     private final StringBuilder stringBuilder = new StringBuilder();

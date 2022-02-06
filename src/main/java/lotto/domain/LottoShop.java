@@ -1,13 +1,11 @@
 package lotto.domain;
 
-import static lotto.common.SystemMessage.*;
-
-import lotto.common.exception.LottoException;
-
 public class LottoShop {
 
     private static final int LOTTO_PRICE = 1000;
     private static final int ZERO = 0;
+    public static final String MIN_PURCHASE_EXCEPTION_MESSAGE = "최소 1000원이어야 합니다.";
+    public static final String PER_THOUSAND_EXCEPTION_MESSAGE = "투입한 금액이 1000원 단위가 아닙니다.";
 
     private int lottoAmount = ZERO;
 
@@ -19,10 +17,10 @@ public class LottoShop {
 
     private void validatePrice(final int price) {
         if (price < LOTTO_PRICE) {
-            throw new LottoException(MIN_PURCHASE_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(MIN_PURCHASE_EXCEPTION_MESSAGE);
         }
         if (price % LOTTO_PRICE != ZERO) {
-            throw new LottoException(PER_THOUSAND_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(PER_THOUSAND_EXCEPTION_MESSAGE);
         }
     }
 
