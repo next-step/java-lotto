@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 import lotto.domain.Lotto;
 import lotto.domain.Numbers;
 
-public class LottoGenerator {
+public class Lottos {
 
     private final static int LOTTO_PRICE = 1000;
     private final static int LOTTO_FIRST_NUMBER = 1;
@@ -18,7 +18,7 @@ public class LottoGenerator {
             .boxed()
             .collect(Collectors.toList());
 
-    private LottoGenerator() {
+    private Lottos() {
 
     }
 
@@ -33,7 +33,7 @@ public class LottoGenerator {
         return price < LOTTO_PRICE;
     }
 
-    public static List<Lotto> getLottos(int quantity) {
+    public static List<Lotto> from(int quantity) {
         List<Lotto> totalLotto = new ArrayList<>();
 
         for (int i = 0; i < quantity; i++) {
