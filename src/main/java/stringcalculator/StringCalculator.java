@@ -1,22 +1,22 @@
 package stringcalculator;
 
 import java.util.List;
-import stringcalculator.domain.Calculator;
-import stringcalculator.domain.Number;
+import stringcalculator.domain.Numbers;
 import stringcalculator.domain.Separator;
-import stringcalculator.domain.UserInput;
+import stringcalculator.view.UserInput;
 import stringcalculator.view.ResultView;
 
 public class StringCalculator {
 
     public static void main(String[] args) {
-        final UserInput userInput = new UserInput();
-        final Separator separator = new Separator(userInput.getUserInput());
+        String userInput = new UserInput().userInputString();
 
+        final Separator separator = new Separator(userInput);
         final List<String> userNumbers = separator.split();
-        final Number numbers = new Number(userNumbers);
-        final Calculator calculator = new Calculator();
+
+        final Numbers numbers = new Numbers(userNumbers);
+
         final ResultView resultView = new ResultView();
-        resultView.printSum(calculator.calculate(numbers.getNumberInput()));
+        resultView.printSum(numbers.sum());
     }
 }
