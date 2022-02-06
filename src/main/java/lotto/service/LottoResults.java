@@ -5,11 +5,11 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.WinningBall;
 
-public class LottoMachine {
+public class LottoResults {
 
     private static List<LottoResult> results;
 
-    public static void run(List<Lotto> lottos, List<WinningBall> winningBalls) {
+    public static void judge(List<Lotto> lottos, List<WinningBall> winningBalls) {
         WinningCounter winningCounter = new WinningCounter(lottos, winningBalls);
         results = winningCounter.getTotalLottoResult();
     }

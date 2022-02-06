@@ -4,7 +4,7 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.WinningBall;
 import lotto.factory.LottoFactory;
-import lotto.service.LottoMachine;
+import lotto.service.LottoResults;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -18,8 +18,8 @@ public class LottoApplication {
         ResultView.printLottoQuantityAndNumbers(quantity, lottos);
 
         List<WinningBall> winningBalls = InputView.getWinningBalls();
-        LottoMachine.run(lottos, winningBalls);
+        LottoResults.judge(lottos, winningBalls);
 
-        ResultView.printResult(LottoMachine.getResults(), purchasePrice);
+        ResultView.printResult(LottoResults.getResults(), purchasePrice);
     }
 }
