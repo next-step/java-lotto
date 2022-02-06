@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 
 class CorrectNumbersTest {
 
-    @DisplayName("생성 테스트")
+    @DisplayName("당첨 번호와 보너스 번호를 받아 객체를 생성한다.")
     @Test
-    void 생성자() {
+    void Given_당첨번호_보너스_번호_When_객체_생성_Then_당첨번호와_보너스_번호를_가짐() {
         // given
         final BonusNumber bonusNumber = new BonusNumber("7");
         final WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
@@ -23,9 +23,9 @@ class CorrectNumbersTest {
         assertThat(correctNumbers.getBonusNumber()).isEqualTo(bonusNumber);
     }
 
-    @DisplayName("중복 테스트")
+    @DisplayName("당첨 번호들과 보너스 번호가 중복되면 예외가 발생한다.")
     @Test
-    void Duplicate() {
+    void 당첨번호_보너스_번호_When_객체_생성_Then_예외_발생() {
         // given
         final BonusNumber bonusNumber = new BonusNumber("6");
         final WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");

@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 
 class RankCountsTest {
 
-    @DisplayName("생성 테스트")
+    @DisplayName("등수별 당첨 수를 받아 객체를 생성한다. - 정상 생성")
     @Test
-    void 생성자() {
+    void Given_등수별_당첨_수_When_객체_생성_Then_등수별_당첨_수를_잘_가지고_있음() {
         // given
         final Map<LottoRank, Integer> expected = new HashMap<LottoRank, Integer>() {
             {

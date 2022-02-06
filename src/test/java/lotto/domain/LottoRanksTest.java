@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 
 class LottoRanksTest {
 
-    @DisplayName("생성 확인")
+    @DisplayName("로또 등수 리스트를 받아 객체를 생성되고, 로또 등수 리스트를 가지고 있다.")
     @Test
-    void 생성_확인() {
+    void Given_로또_등수_리스트_When_객체_생성_Then_로또_등수_리스트를_가짐() {
         // given
         final List<LottoRank> expected = new ArrayList<>();
         expected.add(LottoRank.FIRST);

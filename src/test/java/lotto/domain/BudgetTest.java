@@ -8,9 +8,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class BudgetTest {
 
-    @DisplayName("숫자만으로 이루어짐")
+    @DisplayName("정상적인 구매 금액을 받아 객체를 생성하면 예외가 발생하지 않는다.")
     @Test
-    void 생성_숫자만으로_이루어짐() {
+    void Given_정상_매개변수_When_객체_생성_Then_예외가_발생하지_않음() {
         // given
         final String input = "14000";
 
@@ -18,10 +18,10 @@ class BudgetTest {
         Assertions.assertDoesNotThrow(() -> new Budget(input));
     }
 
-    @DisplayName("문자가 들어간 경우")
+    @DisplayName("구매 금액에 문자가 포함되어 있으면 예외가 발생한다.")
     @ValueSource(strings = {"1400 0", "aaa", "12a", "12 a"})
     @ParameterizedTest
-    void 생성_숫자만으로_이루어짐(final String input) {
+    void Given_문자가_포함된_금액_문자열_When_객체_생성_Then_예외_발생(final String input) {
         // then
         Assertions.assertThrows(IllegalArgumentException.class, () -> new Budget(input));
     }

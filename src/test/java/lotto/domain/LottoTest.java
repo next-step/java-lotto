@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 
 class LottoTest {
 
-    @DisplayName("생성 확인")
+    @DisplayName("숫자 리스트를 받아 객체를 생성, 숫자 리스트를 잘 가지고 있다.")
     @Test
-    void 생성_확인() {
+    void Given_숫자_리스트_When_객체_생성_Then_숫자_리스트를_잘_가지고_있음() {
         // given
         List<String> numbers = Arrays.asList("1", "2", "3", "4", "5", "6");
 
@@ -22,9 +22,9 @@ class LottoTest {
         assertThat(lotto.get()).isEqualTo(numbers);
     }
 
-    @DisplayName("번호 몇개 맞았는지 확인")
+    @DisplayName("정답 번호와 비교해서 맞은 수를 반환한다.")
     @Test
-    void matchWinningNumber() {
+    void Given_정답_번호_When_로또_번호와_비교_Then_맞은_수_반환() {
         // given
         Lotto lotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
         List<String> winnigNumbers = Arrays.asList("1", "2", "3", "4", "5", "7");
@@ -36,9 +36,9 @@ class LottoTest {
         assertThat(matchNumber).isEqualTo(5);
     }
 
-    @DisplayName("보너스 번호 맞았는지 확인 - ture")
+    @DisplayName("로또 번호가 보너스 번호를 포함하여 true 를 반환한다.")
     @Test
-    void containsBonusNumber_true() {
+    void Given_보너스_번호_When_포함하는지_비교_Then_true_반환() {
         // given
         Lotto lotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
 
@@ -49,9 +49,9 @@ class LottoTest {
         assertThat(isBonus).isEqualTo(true);
     }
 
-    @DisplayName("보너스 번호 맞았는지 확인 - false")
+    @DisplayName("로또 번호가 보너스 번호를 포함하지 않아 false 를 반환한다.")
     @Test
-    void containsBonusNumber_false() {
+    void Given_보너스_번호_When_포함하는지_비교_Then_false_반환() {
         // given
         Lotto lotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
 

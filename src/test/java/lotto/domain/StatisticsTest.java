@@ -22,16 +22,16 @@ class StatisticsTest {
     };
     private final LottoRanks lottoRanks = new LottoRanks(givenRanks);
 
-    @DisplayName("생성 확인.")
+    @DisplayName("정상적인 매개변수를 받아 객체를 생성할 때 예외가 발생하지 않는다.")
     @Test
-    void 생성자() {
+    void When__Then_() {
         // then
         Assertions.assertDoesNotThrow(() -> new Statistics(lottoRanks));
     }
 
-    @DisplayName("등수별 당첨 수 구하기.")
+    @DisplayName("로또 등수 리스트에서 등수별 당첨 수를 구한다.")
     @Test
-    void getRankCount() {
+    void Given_로또_등수_리스트_When_등수별_당첨수_구하기_Then_당첨수_반환() {
         // given
         final Statistics statistics = new Statistics(lottoRanks);
 
@@ -46,9 +46,9 @@ class StatisticsTest {
         assertThat(rankCounts.get(LottoRank.FIFTH)).isEqualTo(0);
     }
 
-    @DisplayName("총 수익률 구하기.")
+    @DisplayName("로또 당첨등수 리스트에서 총 수익률을 구한다.")
     @Test
-    void getProfitRate() {
+    void Given_로또_등수_리스트_When_수익률_구하기_Then_수익률_반환() {
         // given
         final Statistics statistics = new Statistics(lottoRanks);
 

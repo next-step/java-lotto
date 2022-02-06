@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 
 class BonusNumberTest {
 
-    @DisplayName("보너스 번호 정상 생성.")
+    @DisplayName("정상적인 보너스 번호 문자열을 받아 객체를 생성하면 예외가 발생하지 않는다.")
     @Test
-    void 생성자() {
+    void Given_정상_보너스_번호_When_객체_생성_Then_예외가_발생하지_않음() {
         // given
         final String input = "7";
 
@@ -18,9 +18,9 @@ class BonusNumberTest {
         assertDoesNotThrow(() -> new BonusNumber(input));
     }
 
-    @DisplayName("숫자가 아닌 값이 들어왔을 때")
+    @DisplayName("숫자가 아닌 값으로 객체를 생성하면 예외가 발생한다.")
     @Test
-    void isNotANumber() {
+    void Given_숫자가_아닌_값_When_객체_생성_Then_예외_발생() {
         // given
         final String input = "aaa";
 
@@ -28,9 +28,9 @@ class BonusNumberTest {
         assertThrows(IllegalArgumentException.class, () -> new BonusNumber(input));
     }
 
-    @DisplayName("숫자 여러개가 들어왔을 때")
+    @DisplayName("매개변수 문자열에 숫자가 여러개 포함되어 있으면 예외가 발생한다.")
     @Test
-    void 숫자_여러개가_들어왔을_때() {
+    void Given_숫자가_여러개_포함됨_When_객체_생성_Then_예외_발생() {
         // given
         final String input = "1 2";
 
@@ -38,9 +38,9 @@ class BonusNumberTest {
         assertThrows(IllegalArgumentException.class, () -> new BonusNumber(input));
     }
 
-    @DisplayName("1 ~ 45 범위의 숫자인지 확인")
+    @DisplayName("1 ~ 45 범위의 숫자가 아니면 예외가 발생한다.")
     @Test
-    void isNumberRange1to45() {
+    void Given_로또_숫자_범위를_벗어난_수_When_객체_생성_Then_예외_발생() {
         // given
         final String input = "46";
 

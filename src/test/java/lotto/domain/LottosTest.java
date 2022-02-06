@@ -15,10 +15,10 @@ class LottosTest {
 
     private static final int PRICE_OF_LOTTO = 1000;
 
-    @DisplayName("금액만큼 로또가 발급된다.")
+    @DisplayName("구매할 수 있는 개수 만큼 로또가 구매된다.")
     @ValueSource(strings = {"10000", "14500"})
     @ParameterizedTest
-    void getNumberOfLottos(final String budget) {
+    void Given_구매_금액_When_로또자동_생성_Then_구매금액에_맞게_생성(final String budget) {
         // given
         final int numberOfLotto = Integer.parseInt(budget) / PRICE_OF_LOTTO;
 
@@ -29,9 +29,9 @@ class LottosTest {
         assertThat(autoLottos.get().size()).isEqualTo(numberOfLotto);
     }
 
-    @DisplayName("로또 번호가 섞인다.")
+    @DisplayName("로또 번호 리스트가 섞인다.")
     @Test
-    void shuffle() {
+    void When_로또_번호_리스트_섞기_Then_섞기_전과_요소의_순서가_다름() {
         // given
         final ArrayList<String> before = new ArrayList<>(LottoBalls.get());
 
@@ -42,9 +42,9 @@ class LottosTest {
         assertThat(LottoBalls.get()).isNotEqualTo(before);
     }
 
-    @DisplayName("로또가 생성된다.")
+    @DisplayName("임의의 번호로 발급된 로또가 생성된다. (오름차순으로 정렬)")
     @Test
-    void createAutoLottos() {
+    void When_로또번호_생성_Then_로또볼_에서_6개를_뽑는다() {
         // given
         final int numberOfLotto = Integer.parseInt("1000") / PRICE_OF_LOTTO;
 
