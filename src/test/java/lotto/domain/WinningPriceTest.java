@@ -8,13 +8,13 @@ class WinningPriceTest {
     @Test
     void enum_FIVE_반환_테스트() {
         Ranking ranking = Ranking.of(5, 0);
-        Assertions.assertThat(ranking).isEqualTo(Ranking.Five);
+        Assertions.assertThat(ranking).isEqualTo(Ranking.FIVE);
     }
 
     @Test
     void enum_FIVE_BONUS_반환_테스트() {
         Ranking ranking = Ranking.of(5, 1);
-        Assertions.assertThat(ranking).isEqualTo(Ranking.FiveWithBonus);
+        Assertions.assertThat(ranking).isEqualTo(Ranking.FIVEWITHBONUS);
     }
 
     @Test

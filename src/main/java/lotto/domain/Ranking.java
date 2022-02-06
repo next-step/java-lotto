@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Ranking {
-    Three(3, 0, 5000),
-    Four(4, 0, 50000),
-    Five(5, 0, 1500000),
-    FiveWithBonus(5, 1, 30000000),
-    Six(6, 0, 2000000000),
+    THREE(3, 0, 5000),
+    FOUR(4, 0, 50000),
+    FIVE(5, 0, 1500000),
+    FIVEWITHBONUS(5, 1, 30000000),
+    SIX(6, 0, 2000000000),
     OTHERS(0, 0, 0);
 
     private final int numberOfWinningNumbers;
