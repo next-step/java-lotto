@@ -25,8 +25,7 @@ public class LottoCalculator {
             countBonusNumber(userNumbers, bonusNumber));
     }
 
-    private int countNormalSuccessNumber(final List<LottoNumber> lotteryNumbers,
-        List<LottoNumber> userNumbers) {
+    private int countNormalSuccessNumber(final List<LottoNumber> lotteryNumbers, List<LottoNumber> userNumbers) {
         Set<LottoNumber> lottoDuplicate = new HashSet<>(lotteryNumbers);
         lottoDuplicate.addAll(userNumbers);
         return STANDARD_NUMBER - lottoDuplicate.size();
