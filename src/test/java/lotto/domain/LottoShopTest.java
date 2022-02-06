@@ -1,10 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
-import lotto.common.exception.LottoException;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class LottoShopTest {
@@ -14,7 +11,7 @@ class LottoShopTest {
         LottoShop lottoShop = new LottoShop();
 
         assertThatThrownBy(() -> lottoShop.countPossibleLottoAmount(500))
-            .isInstanceOf(LottoException.class)
+            .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("최소 1000원이어야 합니다.");
     }
 
@@ -23,7 +20,7 @@ class LottoShopTest {
         LottoShop lottoShop = new LottoShop();
 
         assertThatThrownBy(() -> lottoShop.countPossibleLottoAmount(1230))
-            .isInstanceOf(LottoException.class)
+            .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("투입한 금액이 1000원 단위가 아닙니다.");
     }
 

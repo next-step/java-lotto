@@ -2,11 +2,9 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.common.exception.LottoException;
 import org.junit.jupiter.api.Test;
 
 class LottoTest {
@@ -18,7 +16,7 @@ class LottoTest {
             .collect(Collectors.toList());
 
         assertThatThrownBy(() -> new Lotto(lotto))
-            .isInstanceOf(LottoException.class)
+            .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("복권의 숫자 개수가 유효하지 않습니다.");
     }
 
@@ -29,7 +27,7 @@ class LottoTest {
             .collect(Collectors.toList());
 
         assertThatThrownBy(() -> new Lotto(lotto))
-            .isInstanceOf(LottoException.class)
+            .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("복권에 중복된 숫자가 존재합니다.");
     }
 }
