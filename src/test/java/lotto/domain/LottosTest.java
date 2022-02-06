@@ -2,7 +2,6 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import lotto.LottoBalls;
@@ -29,30 +28,14 @@ class LottosTest {
         assertThat(autoLottos.get().size()).isEqualTo(numberOfLotto);
     }
 
-    @DisplayName("로또 번호 리스트가 섞인다.")
+    @DisplayName("발급된 로또 번호는 오름차순으로 정렬된다.")
     @Test
-    void When_로또_번호_리스트_섞기_Then_섞기_전과_요소의_순서가_다름() {
-        // given
-        final ArrayList<String> before = new ArrayList<>(LottoBalls.get());
-
-        // when
-        Lottos.createAutoLottos(new Budget("1000"));
-
-        // then
-        assertThat(LottoBalls.get()).isNotEqualTo(before);
-    }
-
-    @DisplayName("임의의 번호로 발급된 로또가 생성된다. (오름차순으로 정렬)")
-    @Test
-    void When_로또번호_생성_Then_로또볼_에서_6개를_뽑는다() {
-        // given
-        final int numberOfLotto = Integer.parseInt("1000") / PRICE_OF_LOTTO;
-
+    void When_로또번호_생성_Then_오름차순_정렬() {
         // when
         final List<Lotto> lottos = Lottos.createAutoLottos(new Budget("1000")).get();
 
         // then
-        List<String> expected = LottoBalls.get().subList(0, 6);
+        List<String> expected = LottoBalls.createLottoNumber();
         expected.sort(Comparator.comparingInt(Integer::parseInt));
         assertThat(lottos.get(0).get()).isEqualTo(expected);
     }
