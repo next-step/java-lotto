@@ -17,7 +17,7 @@ class LottoResultTest {
 
     @ParameterizedTest
     @MethodSource
-    void enum_찾을_수_있는_경우 (LottoResult lottoResult, int matchCount, boolean isBonusNumber) {
+    void enum_찾을_수_있는_경우(LottoResult lottoResult, int matchCount, boolean isBonusNumber) {
         assertThat(lottoResult).isEqualTo(LottoResult.findLottoResult(matchCount, isBonusNumber));
     }
 
@@ -33,7 +33,7 @@ class LottoResultTest {
 
     @ParameterizedTest
     @MethodSource
-    void enum_찾을_수_없는_경우 ( int matchCount, boolean isBonusNumber) {
+    void enum_찾을_수_없는_경우(int matchCount, boolean isBonusNumber) {
         assertThat(NO_MATCH).isEqualTo(LottoResult.findLottoResult(matchCount, isBonusNumber));
     }
 

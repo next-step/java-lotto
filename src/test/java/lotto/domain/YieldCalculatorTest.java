@@ -17,7 +17,6 @@ class YieldCalculatorTest {
         lottoResults.put(LottoResult.MATCH3, 5);
         lottoResults.put(LottoResult.MATCH4, 4);
         lottoResults.put(LottoResult.MATCH5, 1);
-
     }
 
     @Test
