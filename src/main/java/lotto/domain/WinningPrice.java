@@ -27,15 +27,9 @@ public enum WinningPrice {
 
     public static WinningPrice of(final int winNumber, final int bonus) {
         return Arrays.stream(values())
-            .filter(WinningPrice -> and(
-                Objects.equals(WinningPrice.winNumber, winNumber),
-                Objects.equals(WinningPrice.bonus, bonus))
-            ).findAny()
+            .filter(WinningPrice -> (WinningPrice.winNumber == winNumber) && (WinningPrice.bonus == bonus))
+            .findAny()
             .orElse(OTHERS);
-    }
-
-    private static boolean and(boolean equals, boolean equals1) {
-        return equals && equals1;
     }
 
     public int operate(final int count) {
