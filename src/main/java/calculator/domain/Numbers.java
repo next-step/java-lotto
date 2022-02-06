@@ -34,14 +34,17 @@ public class Numbers {
             return splitDelimiter(m.group(POSITION_OTHER_EXPRESSION).split(customDelimiter));
         }
 
-        return Arrays.stream(expression.split(REGX_DELIMITER)).map(Number::new)
+        return Arrays.stream(expression.split(REGX_DELIMITER))
+            .map(Number::new)
             .collect(Collectors.toList());
     }
 
     private List<Number> splitDelimiter(String[] expression) {
         String join = String.join(COMMA, expression);
         String[] split = join.split(REGX_DELIMITER);
-        return Arrays.stream(split).map(Number::new).collect(Collectors.toList());
+        return Arrays.stream(split)
+            .map(Number::new)
+            .collect(Collectors.toList());
     }
 
     public Number get(int idx) {
