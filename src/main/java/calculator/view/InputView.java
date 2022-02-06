@@ -10,6 +10,7 @@ public class InputView {
     }
 
     public static String inputText() {
+        System.out.println("문자열 덧셈 계산기");
         return SCANNER.nextLine();
     }
 }
