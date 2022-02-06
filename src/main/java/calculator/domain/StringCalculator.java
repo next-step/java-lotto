@@ -18,10 +18,8 @@ public class StringCalculator {
 
         int result = 0;
         for(Integer number : Tokenizer.tokenize(text)) {
+            validateNegative(number);
             result += number;
-            if(number < 0 ) {
-                throw new IllegalArgumentException("[ERROR] 음수는 입력할 수 없습니다.");
-            }
         }
 
         return result;
@@ -29,6 +27,12 @@ public class StringCalculator {
 
     private boolean isEmptyOrNull(String text) {
         return Objects.isNull(text) || text.isEmpty();
+    }
+
+    private void validateNegative(Integer number) {
+        if(number < 0) {
+            throw new IllegalArgumentException("[ERROR] 음수는 입력할 수 없습니다.");
+        }
     }
 
 }
