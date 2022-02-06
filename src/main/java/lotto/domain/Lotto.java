@@ -1,29 +1,32 @@
 package lotto.domain;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class Lotto {
 
+    private static final int LOTTO_FIRST_NUMBER = 1;
+    private static final int LOTTO_LAST_NUMBER = 45;
     private static final int LOTTO_NUMBERS_SIZE = 6;
+
     private final Numbers numbers;
 
-    public Lotto(Numbers numbers) {
-        this.numbers = numbers;
+    public Lotto() {
+        numbers = new Numbers(LOTTO_FIRST_NUMBER, LOTTO_LAST_NUMBER, LOTTO_NUMBERS_SIZE);
         validateSize();
         validateDuplication();
     }
 
     private void validateSize() {
-        if (numbers.getSize() != LOTTO_NUMBERS_SIZE) {
+        if (numbers.getSize() == LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("[ERROR] 로또 넘버는 6개여야 합니다.");
         }
     }
 
     private void validateDuplication() {
-        Set<Integer> nonDuplicateNumbers = new HashSet<>(numbers.getRawValues());
-        if (nonDuplicateNumbers.size() != LOTTO_NUMBERS_SIZE) {
-            throw new IllegalArgumentException("[ERROR] 로또 넘버는 중복이 불가합니다.");
+        if (numbers.hasDuplication()) {
+            throw new IllegalArgumentException("[ERROR] 로또 넘버에 중복이 있습니다.");
         }
+    }
+
+    public Numbers getNumbers() {
+        return numbers;
     }
 }

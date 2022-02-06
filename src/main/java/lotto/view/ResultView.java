@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
+import lotto.domain.Numbers;
 import lotto.service.WinningStatistics;
 
 public class ResultView {
@@ -14,17 +15,22 @@ public class ResultView {
         HashMap<LottoResult, Integer> result = WinningStatistics.getResult(results);
         result.keySet().stream()
             .filter(ResultView::hasReward)
-            .forEach(lottoResult -> System.out.println(lottoResult.getDescription() + result.get(lottoResult) + "개"));
+            .forEach(lottoResult -> System.out.println(
+                lottoResult.getDescription() + result.get(lottoResult) + "개"));
 
-        System.out.println("총 수익률은 " + WinningStatistics.getProfitRate(result, purchasePrice) + "입니다.");
+        System.out.println(
+            "총 수익률은 " + WinningStatistics.getProfitRate(result, purchasePrice) + "입니다.");
     }
 
     private static boolean hasReward(LottoResult lottoResult) {
         return lottoResult != LottoResult.NO_REWARD;
     }
 
-    public static void printLottoQuantityAndNumbers(int quantity, List<Lotto> lottoNumbers) {
+    public static void printLottoQuantityAndNumbers(int quantity, List<Lotto> lottos) {
         System.out.println(quantity + "개를 구매했습니다.");
-        lottoNumbers.forEach(e -> System.out.println(e.getNumbers()));
+        lottos.stream() // Lotto
+            .map(Lotto::getNumbers) // Number
+            .map(Numbers::getRawNumbers) // List<Integer>
+            .forEach(System.out::println);
     }
 }
