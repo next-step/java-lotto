@@ -19,13 +19,11 @@ public class InputView {
     }
 
     public final int getTotalPrice() {
-        int totalPrice = 0;
         try {
-            totalPrice = Integer.parseInt(getInputValue(PRICE_MESSAGE));
+            return Integer.parseInt(getInputValue(PRICE_MESSAGE));
         } catch (NumberFormatException e) {
             throw new NumberFormatException("숫자를 입력해주세요");
         }
-        return totalPrice;
     }
 
     public final List<Integer> getWinNumbers() {
