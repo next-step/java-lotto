@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class Separator {
 
     private final List<String> DELIMITER = Arrays.asList("\\:", "\\,");
-    private final String JOIN_STR = "|";
+    private final static String JOIN_STR = "|";
     private String customDelimiter = "";
     private String userNumber = "";
     private String delimiter = "";
