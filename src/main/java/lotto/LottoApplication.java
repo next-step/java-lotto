@@ -29,7 +29,7 @@ public class LottoApplication {
             lottoRaffle.compareLotto(lotto);
         }
         final List<LottoResult> results = lottoRaffle.getResults();
-        double yield = YieldCalculator.calcuateYield(results, money);
+        double yield = YieldCalculator.calculateYield(results, money);
         ResultView.printLottoResults(results, yield);
     }
 }

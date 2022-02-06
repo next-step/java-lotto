@@ -28,6 +28,6 @@ class YieldCalculatorTest {
 
     @Test
     void 수익률_계산하기() {
-        assertThat(YieldCalculator.calcuateYield(lottoResults, 1000)).isEqualTo(310.00);
+        assertThat(YieldCalculator.calculateYield(lottoResults, 1000)).isEqualTo(310.00);
     }
 }

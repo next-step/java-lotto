@@ -6,11 +6,11 @@ public class YieldCalculator {
 
     private YieldCalculator() {}
 
-    public static double calcuateYield(List<LottoResult> lottoResults, int money) {
+    public static double calculateYield(List<LottoResult> lottoResults, int money) {
         long profit = 0;
         for(LottoResult lottoResult: lottoResults) {
-            profit += lottoResult.getCount() * lottoResult.getWinning();
+            profit = profit + (long) lottoResult.getCount() * lottoResult.getWinning();
         }
-        return profit / money;
+        return (double) (profit / money);
     }
 }
