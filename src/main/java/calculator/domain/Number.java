@@ -19,7 +19,7 @@ public class Number {
     }
 
     public Number add(Number operand) {
-        return new Number(number + operand.getNumber());
+        return new Number(number + operand.number);
     }
 
     private void validateNumberFormat(final String number) {
