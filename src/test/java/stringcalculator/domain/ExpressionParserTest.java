@@ -13,11 +13,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class ExpressionParserTest {
 
+    private final Delimiters delimiters = new Delimiters("");
+
     @DisplayName("ExpressionParser 객체 생성")
     @Test
     void ExpressionParser_객체_생성() {
-        // given
-        final Delimiters delimiters = new Delimiters(Arrays.asList(",", ":"));
 
         // then
         assertDoesNotThrow(() -> new ExpressionParser(delimiters));
@@ -28,7 +28,7 @@ public class ExpressionParserTest {
     void parse_테스트_커스텀_구분자() {
         // given
         final String input = "1;2;3";
-        final Delimiters delimiters = new Delimiters(Arrays.asList(";"));
+        final Delimiters delimiters = new Delimiters(";");
         final ExpressionParser expressionParser = new ExpressionParser(delimiters);
 
         // when
@@ -43,7 +43,6 @@ public class ExpressionParserTest {
     void parse_테스트_기본_구분자() {
         // given
         final String input = "1,2:3";
-        final Delimiters delimiters = new Delimiters(Arrays.asList(",", ":"));
         final ExpressionParser expressionParser = new ExpressionParser(delimiters);
 
         // when
@@ -58,7 +57,6 @@ public class ExpressionParserTest {
     @ParameterizedTest
     void validateContainsCharacter(final String input) {
         // given
-        final Delimiters delimiters = new Delimiters(Arrays.asList(",", ":"));
         final ExpressionParser expressionParser = new ExpressionParser(delimiters);
 
         // then
@@ -71,7 +69,6 @@ public class ExpressionParserTest {
     @ParameterizedTest
     void getExpression_연속된_구분자(final String input) {
         // given
-        final Delimiters delimiters = new Delimiters(Arrays.asList(",", ":"));
         final ExpressionParser expressionParser = new ExpressionParser(delimiters);
 
         // then

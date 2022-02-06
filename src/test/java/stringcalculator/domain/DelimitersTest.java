@@ -13,7 +13,7 @@ class DelimitersTest {
     @Test
     void delimiter_생성_확인() {
         final List<String> expected = Arrays.asList(":", ",");
-        final Delimiters delimiters = new Delimiters(expected);
+        final Delimiters delimiters = new Delimiters("");
 
         final String actual = delimiters.getValuesToString();
 
