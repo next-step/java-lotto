@@ -4,18 +4,18 @@ import java.util.Arrays;
 
 public enum Ranking {
 
-    FIRST(2000000000, 6, 0),
-    SECOND(30000000, 5, 1),
-    THIRD(1500000, 5, 0),
-    FOURTH(50000, 4, 0),
-    FIFTH(5000, 3, 0),
-    FAIL(0, 0, 0);
+    FIRST(2000000000, 6, false),
+    SECOND(30000000, 5, true),
+    THIRD(1500000, 5, false),
+    FOURTH(50000, 4, false),
+    FIFTH(5000, 3, false),
+    FAIL(0, 0, false);
 
     private final int winnerPrice;
     private final int normalSuccessNumber;
-    private final int bonusSuccessNumber;
+    private final boolean bonusSuccessNumber;
 
-    Ranking(int winnerPrice, int normalSuccessNumber, int bonusSuccessNumber) {
+    Ranking(final int winnerPrice, final int normalSuccessNumber, final boolean bonusSuccessNumber) {
         this.winnerPrice = winnerPrice;
         this.normalSuccessNumber = normalSuccessNumber;
         this.bonusSuccessNumber = bonusSuccessNumber;

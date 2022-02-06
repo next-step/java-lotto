@@ -7,8 +7,8 @@ import java.util.Set;
 public class LottoCalculator {
 
     private static final int STANDARD_NUMBER = 12;
-    private static final int MATCHED_BONUS_BALL = 1;
-    private static final int NOT_MATCHED_BONUS_BALL = 0;
+    private static final boolean MATCHED_BONUS_BALL = true;
+    private static final boolean NOT_MATCHED_BONUS_BALL = false;
     private static final LottoCalculator INSTANCE = new LottoCalculator();
 
     private LottoCalculator() {
@@ -31,7 +31,7 @@ public class LottoCalculator {
         return STANDARD_NUMBER - lottoDuplicate.size();
     }
 
-    private int countBonusNumber(final List<LottoNumber> userNumbers, final LottoNumber bonusNumber) {
+    private boolean countBonusNumber(final List<LottoNumber> userNumbers, final LottoNumber bonusNumber) {
         if (userNumbers.contains(bonusNumber)) {
             return MATCHED_BONUS_BALL;
         }

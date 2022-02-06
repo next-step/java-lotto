@@ -3,14 +3,14 @@ package lotto.domain;
 public class LottoResult {
 
     private final int normalSuccessCount;
-    private final int bonusSuccessCount;
+    private final boolean bonusSuccessCount;
 
-    public LottoResult(int normalSuccessCount, int bonusSuccessCount) {
+    public LottoResult(final int normalSuccessCount, final boolean bonusSuccessCount) {
         this.normalSuccessCount = normalSuccessCount;
         this.bonusSuccessCount = bonusSuccessCount;
     }
 
-    public int getBonusSuccessCount() {
+    public boolean getBonusSuccessCount() {
         return bonusSuccessCount;
     }
 

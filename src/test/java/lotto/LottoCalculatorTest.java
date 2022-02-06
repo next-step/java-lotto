@@ -30,6 +30,6 @@ class LottoCalculatorTest {
 
         // then
         assertThat(lottoResult.getNormalSuccessCount()).isEqualTo(5);
-        assertThat(lottoResult.getBonusSuccessCount()).isEqualTo(0);
+        assertThat(lottoResult.getBonusSuccessCount()).isFalse();
     }
 }
