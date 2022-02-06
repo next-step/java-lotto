@@ -4,7 +4,13 @@ import java.util.Objects;
 
 public class StringCalculator {
 
-    public int add(String text) {
+    private final String text;
+
+    public StringCalculator(String text) {
+        this.text = text;
+    }
+
+    public int add() {
         if (isEmptyOrNull(text)) {
             return 0;
         }
