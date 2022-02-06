@@ -22,15 +22,6 @@ public class WinningBall {
         this.isBonus = isBonus;
     }
 
-    public static List<WinningBall> getWinningBalls(String[] numbers, String bonusNumber) {
-        List<WinningBall> balls = Arrays.stream(numbers)
-            .map(WinningBall::new)
-            .collect(Collectors.toList());
-
-        balls.add(new WinningBall(bonusNumber, true));
-        return balls;
-    }
-
     public int getNumber() {
         return number;
     }
