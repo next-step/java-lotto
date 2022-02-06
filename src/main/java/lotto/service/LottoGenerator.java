@@ -18,6 +18,10 @@ public class LottoGenerator {
             .boxed()
             .collect(Collectors.toList());
 
+    private LottoGenerator() {
+
+    }
+
     public static int getLottoQuantity(int purchasePrice) {
         if (isLowerThanLeastPrice(purchasePrice)) {
             throw new IllegalArgumentException("[ERROR] 구매 금액이 1000원 이상이어야 합니다.");
