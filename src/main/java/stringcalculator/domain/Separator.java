@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class Separator {
 
-    private final List<String> DELIMITER = Arrays.asList("\\:", "\\,");
+    private final static List<String> DELIMITER = Arrays.asList("\\:", "\\,");
     private final static String JOIN_STR = "|";
     private String customDelimiter = "";
     private String userNumber = "";
@@ -19,7 +19,7 @@ public class Separator {
         delimiter = createDelimiterRegex();
     }
 
-    public void extractCustomDelimiter(String text) {
+    private void extractCustomDelimiter(String text) {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
         if (m.find()) {
             customDelimiter = m.group(1);
@@ -29,7 +29,7 @@ public class Separator {
 
     private String createDelimiterRegex() {
         String delimiterString = String.join(JOIN_STR, DELIMITER);
-        if (!customDelimiter.equals("")) {
+        if (!"".equals(customDelimiter)) {
             delimiterString += JOIN_STR + "\\" + customDelimiter;
         }
         return delimiterString;
