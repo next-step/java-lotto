@@ -27,7 +27,7 @@ public class LottoMachine {
     }
 
     public boolean isEqualBonusNumber(final int number) {
-        return bonusNumber.equals(number);
+        return bonusNumber == number;
     }
 
 
