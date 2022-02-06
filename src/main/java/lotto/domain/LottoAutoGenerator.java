@@ -20,11 +20,11 @@ public class LottoAutoGenerator {
             .collect(Collectors.toList());
     }
 
-    public static LottoAutoGenerator getInstance() {
-        return INSTANCE;
+    private LottoAutoGenerator() {
     }
 
-    private LottoAutoGenerator() {
+    public static LottoAutoGenerator getInstance() {
+        return INSTANCE;
     }
 
     public List<LottoNumber> generateLotto() {
