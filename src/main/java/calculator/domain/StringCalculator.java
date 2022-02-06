@@ -18,7 +18,7 @@ public class StringCalculator {
 
         Tokenizer tokenizer = new Tokenizer(text);
         int result = 0;
-        for(Integer number : tokenizer.getTokenizedNumbers()) {
+        for (Integer number : tokenizer.getTokenizedNumbers()) {
             validateNegative(number);
             result += number;
         }
@@ -31,7 +31,7 @@ public class StringCalculator {
     }
 
     private void validateNegative(Integer number) {
-        if(number < 0) {
+        if (number < 0) {
             throw new IllegalArgumentException("[ERROR] 음수는 입력할 수 없습니다.");
         }
     }

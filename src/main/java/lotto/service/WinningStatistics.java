@@ -8,7 +8,7 @@ public class WinningStatistics {
 
     public static HashMap<LottoResult, Integer> getResult(List<LottoResult> results) {
         HashMap<LottoResult, Integer> result = new HashMap<>();
-        for(LottoResult lottoResult : results) {
+        for (LottoResult lottoResult : results) {
             result.put(lottoResult, result.getOrDefault(lottoResult, 0) + 1);
         }
         return result;
@@ -17,7 +17,7 @@ public class WinningStatistics {
     public static String getProfitRate(HashMap<LottoResult, Integer> result, int purchasePrice) {
         double totalWinning = 0;
 
-        for(LottoResult lottoResult : result.keySet()) {
+        for (LottoResult lottoResult : result.keySet()) {
             final double value = result.get(lottoResult);
             totalWinning += value * lottoResult.getReward();
         }
