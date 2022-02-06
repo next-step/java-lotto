@@ -13,10 +13,6 @@ public class WinningBall {
         this(number, false);
     }
 
-    public WinningBall(int number) {
-        this(number, false);
-    }
-
     public WinningBall(String number, boolean isBonus) {
         this(Integer.parseInt(number), isBonus);
     }
