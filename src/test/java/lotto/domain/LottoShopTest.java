@@ -16,15 +16,6 @@ class LottoShopTest {
     }
 
     @Test
-    void 로또를_사기위한_금액은_1000원_단위여야_한다() {
-        LottoShop lottoShop = new LottoShop();
-
-        assertThatThrownBy(() -> lottoShop.countPossibleLottoAmount(1230))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("투입한 금액이 1000원 단위가 아닙니다.");
-    }
-
-    @Test
     void 투입한_금액만큼_로또를_살_수_있다() {
         LottoShop lottoShop = new LottoShop();
 
