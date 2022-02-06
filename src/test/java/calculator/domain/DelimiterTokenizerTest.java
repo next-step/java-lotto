@@ -14,9 +14,7 @@ class DelimiterTokenizerTest {
     void 기본_구분자_반환() {
         final String text = "1,2:3";
         final DelimiterTokenizer delimiterTokenizer = new DelimiterTokenizer(text);
-        assertThat(delimiterTokenizer.getDelimiters()).isEqualTo(
-            Arrays.asList(",",":")
-        );
+        assertThat(delimiterTokenizer.getDelimiters()).isEqualTo(Arrays.asList(",", ":"));
     }
 
     @ValueSource(strings = {"a", "/"})
@@ -24,9 +22,7 @@ class DelimiterTokenizerTest {
     void 유효한_커스텀_구분자_포함해서_반환한다(String customDelimiter) {
         final String text = "//" + customDelimiter + "\n1:2a3";
         final DelimiterTokenizer delimiterTokenizer = new DelimiterTokenizer(text);
-        assertThat(delimiterTokenizer.getDelimiters()).isEqualTo(
-            Arrays.asList(",", ":", customDelimiter)
-        );
+        assertThat(delimiterTokenizer.getDelimiters()).isEqualTo(Arrays.asList(",", ":", customDelimiter));
     }
 
     @ValueSource(strings = {"\n"})
@@ -54,10 +50,10 @@ class DelimiterTokenizerTest {
             .isThrownBy(() -> delimiterTokenizer.getDelimiters());
     }
 
-    @ValueSource(strings = {"0", "1","2","3","4","5","6","7","8","9"})
+    @ValueSource(strings = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"})
     @ParameterizedTest
     void 구분자가_숫자인_경우(String text) {
-        final String str = "//" +text+"\n1:2:3";
+        final String str = "//" + text + "\n1:2:3";
         final DelimiterTokenizer delimiterTokenizer = new DelimiterTokenizer(str);
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> delimiterTokenizer.getDelimiters());
