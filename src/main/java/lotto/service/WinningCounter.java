@@ -9,22 +9,18 @@ import lotto.domain.WinningBall;
 public class WinningCounter {
 
     private final List<WinningBall> winningBalls;
-    private final List<Lotto> lottoNumbers;
+    private final List<Lotto> lottos;
     private int count;
     private boolean includeBonus;
 
-    public WinningCounter(List<WinningBall> winningBalls) {
-        this(new ArrayList<>(), winningBalls);
-    }
-
-    public WinningCounter(List<Lotto> lottoNumbers, List<WinningBall> winningBalls) {
-        this.lottoNumbers = lottoNumbers;
+    public WinningCounter(List<Lotto> lottos, List<WinningBall> winningBalls) {
+        this.lottos = lottos;
         this.winningBalls = winningBalls;
     }
 
     public List<LottoResult> getTotalLottoResult() {
         final List<LottoResult> lottoResults = new ArrayList<>();
-        for (Lotto lotto : lottoNumbers) {
+        for (Lotto lotto : lottos) {
             initWinningCountAndBonus();
             lottoResults.add(getLottoResult(lotto));
         }
@@ -36,7 +32,7 @@ public class WinningCounter {
             updateWinningCountAndBonus(lotto, ball);
         }
 
-        if(hasToCheckBonus(count)) {
+        if (hasToCheckBonus(count)) {
             return LottoResult.of(count, includeBonus);
         }
 
@@ -48,7 +44,7 @@ public class WinningCounter {
     }
 
     private void updateWinningCountAndBonus(Lotto lotto, WinningBall ball) {
-        if (lotto.getNumbers().contains(ball.getNumber())) {
+        if (lotto.getNumbers().getRawNumbers().contains(ball.getNumber())) {
             count++;
             updateIncludeBonus(ball);
         }

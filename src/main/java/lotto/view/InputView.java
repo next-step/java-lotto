@@ -3,7 +3,7 @@ package lotto.view;
 import java.util.List;
 import java.util.Scanner;
 import lotto.domain.WinningBall;
-import lotto.service.WinningBalls;
+import lotto.factory.WinningBallFactory;
 
 public class InputView {
 
@@ -21,6 +21,6 @@ public class InputView {
         String[] numbers = input.split(", ");
 
         System.out.println("보너스 볼을 입력해 주세요.");
-        return WinningBalls.of(numbers, scanner.nextLine());
+        return WinningBallFactory.of(numbers, scanner.nextLine());
     }
 }
