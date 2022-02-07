@@ -8,7 +8,7 @@ public class UserInput {
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public String userInputString() {
-        String userInput = SCANNER.nextLine();
+        String userInput = SCANNER.nextLine().trim();
         if (isNullOrEmpty(userInput)) {
             throw new IllegalArgumentException("[ERROR] 값을 입력해주세요");
         }

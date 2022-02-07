@@ -1,5 +1,6 @@
 package stringcalculator.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -8,36 +9,34 @@ import java.util.stream.Collectors;
 
 public class Separator {
 
-    private final List<String> DELIMITER = Arrays.asList("\\:", "\\,");
-    private final String JOIN_STR = "|";
-    private String customDelimiter = "";
-    private String userNumber = "";
-    private String delimiter = "";
+    private final static List<String> DEFAULT_DELIMITERS = Arrays.asList(":", ",");
+    private final static String DELIMITER_PREFIX = "\\";
+    private final static String JOIN_STR = "|";
 
-    public Separator(String text) {
-        userNumber = text;
-        extractCustomDelimiter(text);
-        delimiter = createDelimiterRegex();
+    private final String delimiters;
+    private String numberString;
+
+    public Separator(String numberString) {
+        this.numberString = numberString;
+        this.delimiters = createDelimiters(numberString);
     }
 
-    public void extractCustomDelimiter(String text) {
+    private String createDelimiters(String text) {
+        text = text.replace("\\n", "\n");
+
+        List<String> delimiters = new ArrayList<>(DEFAULT_DELIMITERS);
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
         if (m.find()) {
-            customDelimiter = m.group(1);
-            userNumber = m.group(2);
+            delimiters.add(m.group(1));
+            numberString = m.group(2);
         }
-    }
-
-    private String createDelimiterRegex() {
-        String delimiterString = String.join(JOIN_STR, DELIMITER);
-        if (!customDelimiter.equals("")) {
-            delimiterString += JOIN_STR + "\\" + customDelimiter;
-        }
-        return delimiterString;
+        return delimiters.stream()
+            .map(delimiter -> DELIMITER_PREFIX + delimiter)
+            .collect(Collectors.joining(JOIN_STR));
     }
 
     public List<String> split() {
-        return Arrays.stream(userNumber.split(delimiter))
+        return Arrays.stream(numberString.split(delimiters))
             .map(String::trim)
             .collect(Collectors.toList());
     }
