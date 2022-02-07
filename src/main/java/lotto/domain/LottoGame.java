@@ -33,7 +33,8 @@ public class LottoGame {
         return lottoShop.buyLotto(lottoAmount);
     }
 
-    public Map<Ranking, Integer> findWinner(final List<LottoNumber> winningNumbers, final Lottos userLottos,
+    public Map<Ranking, Integer> findWinner(final List<LottoNumber> winningNumbers,
+        final Lottos userLottos,
         final LottoNumber bonusNumber) {
 
         final LottoCalculator lottoCalculator = LottoCalculator.getInstance();
@@ -45,7 +46,6 @@ public class LottoGame {
 
             updateResult(ranking);
         }
-
         return totalResult;
     }
 
