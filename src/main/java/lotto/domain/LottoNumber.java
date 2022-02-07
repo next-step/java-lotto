@@ -36,7 +36,7 @@ public class LottoNumber {
         return value < LOTTO_START_NUMBER || value > LOTTO_END_NUMBER;
     }
 
-    public int get() {
+    public int getValue() {
         return value;
     }
 
@@ -55,5 +55,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 }
