@@ -33,7 +33,8 @@ public class ResultView {
             sb.append(", 보너스 볼 일치");
         }
         sb.append("(%d원) - %d개%n");
-        System.out.printf((sb.toString()), ranking.getNumberOfMatches(), ranking.getPrizeMoney(), ranking.getCount());
+        System.out.printf((sb.toString()), ranking.getNumberOfMatches(), ranking.getPrizeMoney(),
+            ranking.getCount());
     }
 
 

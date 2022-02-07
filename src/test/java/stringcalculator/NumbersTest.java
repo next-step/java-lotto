@@ -18,7 +18,7 @@ class NumbersTest {
     }
 
     @Test
-    public void 숫자리스트_계산_테스트(){
+    public void 숫자리스트_계산_테스트() {
         Assertions.assertThat(new Numbers(Arrays.asList("1", "2", "3")).sum()).isEqualTo(6);
     }
 }

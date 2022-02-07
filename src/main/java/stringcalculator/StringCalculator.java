@@ -3,8 +3,8 @@ package stringcalculator;
 import java.util.List;
 import stringcalculator.domain.Numbers;
 import stringcalculator.domain.Separator;
-import stringcalculator.view.UserInput;
 import stringcalculator.view.ResultView;
+import stringcalculator.view.UserInput;
 
 public class StringCalculator {
 
