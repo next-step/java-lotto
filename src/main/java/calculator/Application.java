@@ -6,7 +6,7 @@ import calculator.view.InputView;
 public class Application {
 
     public static void main(String[] args) {
-        StringCalculator stringCalculator = new StringCalculator();
-        System.out.println(stringCalculator.add(InputView.readFormula()));
+        StringCalculator stringCalculator = new StringCalculator(InputView.readFormula());
+        System.out.println(stringCalculator.add());
     }
 }

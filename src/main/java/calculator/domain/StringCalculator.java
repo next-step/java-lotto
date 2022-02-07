@@ -1,7 +1,7 @@
 package calculator.domain;
 
 import java.util.List;
-import calculator.util.ValidateInput;
+import java.util.Objects;
 
 public class StringCalculator {
 
@@ -9,9 +9,13 @@ public class StringCalculator {
     private final static int CUSTOM_FORMULAR_SIZE = 2;
     private final static int DELIMITER_POSITON = 1;
     private int total;
+    private String input;
 
-    public int add(String text) {
-        String input = new ValidateInput(text).getYourInput();
+    public StringCalculator(String input) {
+        this.input = isEmptyOrNull(input);
+    }
+
+    public int add() {
         Parser parser = new Parser();
         List<String> customSymbolAndFormula = parser.splitCustom(input);
         String splitedFormular = customSymbolAndFormula.get(SPLITED_FORMULAR_POSITION);
@@ -19,12 +23,19 @@ public class StringCalculator {
         if (customSymbolAndFormula.size() == CUSTOM_FORMULAR_SIZE) {
             String delimeter = customSymbolAndFormula.get(DELIMITER_POSITON);
             total = parser.splitCustomStringToNumber(splitedFormular, delimeter + "|,|:").stream()
-                .mapToInt(Integer::intValue).sum(); // 여기를 커스텀구분자
+                .mapToInt(Integer::intValue).sum();
         } else {
             total = parser.splitCustomStringToNumber(splitedFormular, ",|:").stream()
                 .mapToInt(Integer::intValue).sum();
         }
 
         return total;
+    }
+
+    private String isEmptyOrNull(String input) {
+        if (Objects.isNull(input) || "".equals(input)) {
+            input = "0";
+        }
+        return input;
     }
 }
