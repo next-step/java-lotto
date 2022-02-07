@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 class LottoTest {
 
     Lotto lotto;
-    List<Integer> lottoList;
+    List<LottoNumber> lottoList;
 
     @BeforeEach
     void setUp() {
@@ -24,12 +24,12 @@ class LottoTest {
         assertThat(lottoList.size()).isEqualTo(6);
     }
 
-    @DisplayName(value = "로또의 범위는 1~45까지이다.")
-    @Test
-    void checkValidRange() {
-       boolean isInRange = lottoList.stream().allMatch(LottoTest::isInRange);
-       assertThat(isInRange).isTrue();
-    }
+//    @DisplayName(value = "로또의 범위는 1~45까지이다.")
+//    @Test
+//    void checkValidRange() {
+//       boolean isInRange = lottoList.stream().allMatch(LottoTest::isInRange);
+//       assertThat(isInRange).isTrue();
+//    }
 
     static boolean isInRange(final int number) {
         return (number >= 1 && number <= 45);

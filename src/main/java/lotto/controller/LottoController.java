@@ -2,6 +2,7 @@ package lotto.controller;
 
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoStatistics;
 import lotto.domain.Lottos;
 import lotto.util.Util;
@@ -12,7 +13,7 @@ import lotto.view.ResultView;
 public class LottoController {
 
     private int lottoPrice;
-    private List<Lotto> lottoLists;
+    private List<List<LottoNumber>> lottoLists;
     private Lottos lottos;
     private String winningNumber;
     private List<Integer> winningNumberList;
@@ -24,7 +25,7 @@ public class LottoController {
         lottoCountProcess();
         winningNumberProcess();
         bonusBallProcess();
-        statisticsProcess();
+//        statisticsProcess();
     }
 
     private void lottoPriceProcess() {
@@ -35,7 +36,7 @@ public class LottoController {
     private void lottoListsProcess() {
         lottos = new Lottos(lottoPrice);
         lottoLists = lottos.getLottoLists();
-        ResultView.printLottoNumbers(lottoLists);
+//        ResultView.printLottoNumbers(lottoLists);
     }
 
     private void lottoCountProcess() {
@@ -53,11 +54,11 @@ public class LottoController {
         bonusBall = InputView.readBonusNumber();
     }
 
-    private void statisticsProcess() {
-        LottoStatistics lottoStatistics = new LottoStatistics(winningNumberList, bonusBall,
-            lottoLists, lottoPrice);
-
-        ResultView.printLottoStatistics(lottoStatistics.getResultStatistics(),
-            lottoStatistics.getLottoEarningRate());
-    }
+//    private void statisticsProcess() {
+//        LottoStatistics lottoStatistics = new LottoStatistics(winningNumberList, bonusBall,
+//            lottoLists, lottoPrice);
+//
+//        ResultView.printLottoStatistics(lottoStatistics.getResultStatistics(),
+//            lottoStatistics.getLottoEarningRate());
+//    }
 }

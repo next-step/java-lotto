@@ -59,7 +59,7 @@ public class LottoStatistics {
         return count == MATCH_FOUR && lotto.getLottoList().contains(bonusNumber);
     }
 
-    private boolean isWinningNumber(final int number) {
+    private boolean isWinningNumber(final LottoNumber number) {
         return winningNumbers.contains(number);
     }
 

@@ -10,7 +10,7 @@ public class Lottos {
 
     private static final int LOTTO_PRICE = 1000;
 
-    final List<Lotto> lottoLists;
+    List<List<LottoNumber>> lottoLists;
     final int lottoCount;
 
     public Lottos(int totalPrice) {
@@ -20,19 +20,17 @@ public class Lottos {
         this.lottoLists = generatorLottos();
     }
 
-    public List<Lotto> getLottoLists() {
+    public List<List<LottoNumber>> getLottoLists() {
         return Collections.unmodifiableList(lottoLists);
     }
 
-    public int getLottoCount() {
-        return lottoCount;
-    }
-
-    private List<Lotto> generatorLottos() {
-        List<Lotto> lottoLists = new ArrayList<>();
+    private List<List<LottoNumber>> generatorLottos() {
+        List<List<LottoNumber>> lottoLists = new ArrayList<>();
 
         for (int i = 0; i < lottoCount; i++) {
-            lottoLists.add(new Lotto());
+            LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+            List<LottoNumber> lottoNumberList = lottoNumberGenerator.generate();
+            lottoLists.add(lottoNumberList);
         }
 
         return lottoLists;
@@ -43,5 +41,7 @@ public class Lottos {
             throw new IllegalArgumentException(ERROR_WRONG_LOTTO_PRICE);
         }
     }
-
+    public int getLottoCount() {
+        return lottoCount;
+    }
 }

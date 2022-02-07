@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Statistics;
 
 public class ResultView {

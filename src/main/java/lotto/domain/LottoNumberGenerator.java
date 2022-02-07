@@ -17,7 +17,7 @@ public class LottoNumberGenerator {
            .boxed().map(LottoNumber::new).collect(Collectors.toList());
     }
 
-    public List<LottoNumber> generate() {
+    public static List<LottoNumber> generate() {
         Collections.shuffle(lottoLists);
         return lottoLists.stream().limit(LOTTO_MAX_SIZE).collect(Collectors.toList());
     }
