@@ -10,13 +10,13 @@ public enum LottoResult {
     FIVE_MATCHING_BONUS(5, true, 30_000_000, "5개 일치, 보너스 볼 일치 (30,000,000) - "),
     SIX_MATCHING(6, false, 2_000_000_000, "6개 일치 (2,000,000,000원) - ");
 
-    private final int count;
+    private final int matchCount;
     private final boolean includeBonus;
     private final int reward;
     private final String description;
 
     LottoResult(int count, boolean includeBonus, int reward, String description) {
-        this.count = count;
+        this.matchCount = count;
         this.includeBonus = includeBonus;
         this.reward = reward;
         this.description = description;
@@ -45,6 +45,6 @@ public enum LottoResult {
     }
 
     private static boolean isSameCountAndBonus(LottoResult lottoResult, int count, boolean includeBonus) {
-        return lottoResult.count == count && lottoResult.includeBonus == includeBonus;
+        return lottoResult.matchCount == count && lottoResult.includeBonus == includeBonus;
     }
 }
