@@ -22,15 +22,14 @@ public class Parser {
                 Collectors.toList());
     }
 
-    public ArrayList<String> parseCustomDelimiterAndFormula(String formula) {
+    public List<String> parseCustomDelimiterAndFormula(String formula) {
         Matcher matcher = PATTERN.matcher(formula);
 
         if (matcher.find()) {
-            return new ArrayList<>(
-                Arrays.asList(matcher.group(PARSED_FORMULA), matcher.group(CUSTOM_DELIMITER)));
+            return Arrays.asList(matcher.group(PARSED_FORMULA), matcher.group(CUSTOM_DELIMITER));
         }
 
-        return new ArrayList<>(Arrays.asList(formula));
+        return Arrays.asList(formula);
     }
 
     private void validateFormular(List<String> splitedFormular) {
