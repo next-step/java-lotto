@@ -1,15 +1,18 @@
 package lotto.view;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoShop;
 import lotto.domain.Lottos;
 
 public class LottoInputView {
 
+    private static final Scanner SCANNER = new Scanner(System.in);
     private static final String SPACE = " ";
+    private static final String EMPTY = "";
     private static final String COMMA = ",";
     private static final String LEFT_SQUARE_BRACKETS = "[";
     private static final String RIGHT_SQUARE_BRACKETS = "]";
@@ -20,31 +23,42 @@ public class LottoInputView {
 
     private final StringBuilder stringBuilder = new StringBuilder();
 
-    private List<LottoNumber> winningNumbers;
-    private LottoNumber bonusBall;
-    private Lottos lottos;
-    private int userPrice;
+    public LottoInputView() {
+    }
 
-    public void prepareLottoGame(final LottoShop lottoShop) {
+    public int inputPrice() {
         System.out.println(INPUT_PRICE_MESSAGE);
-        userPrice = LottoInput.inputPrice();
-        int lottoAmount = lottoShop.countPossibleLottoAmount(userPrice);
+        return Integer.parseInt(SCANNER.nextLine());
+    }
 
+    public List<LottoNumber> inputWinningNumber() {
+        System.out.println(INPUT_LAST_WEEK_WINNING_NUMBER_MESSAGE);
+        String input = SCANNER.nextLine();
+        return Arrays.stream(splitWinningNumber(input))
+            .map(Integer::parseInt)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+    }
+
+    private String[] splitWinningNumber(final String input) {
+        return input.replace(SPACE, EMPTY).split(COMMA);
+    }
+
+    public LottoNumber inputBonusBall() {
+        System.out.println(INPUT_BONUS_BALL_MESSAGE);
+        return new LottoNumber(Integer.parseInt(SCANNER.nextLine()));
+    }
+
+    public void printAmount(final int lottoAmount) {
         stringBuilder.append(lottoAmount)
             .append("개를 구매했습니다.");
         System.out.println(stringBuilder);
+    }
 
-        lottos = lottoShop.buyLotto(lottoAmount);
-
+    public void printLottos(final Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
             printLotto(lotto.getLottoNumbers());
         }
-
-        System.out.println(INPUT_LAST_WEEK_WINNING_NUMBER_MESSAGE);
-        winningNumbers = LottoInput.inputWinningNumber();
-
-        System.out.println(INPUT_BONUS_BALL_MESSAGE);
-        bonusBall = new LottoNumber(LottoInput.inputBonusBall());
     }
 
     private void printLotto(final List<LottoNumber> lottoNumbers) {
@@ -64,19 +78,4 @@ public class LottoInputView {
         System.out.println(stringBuilder);
     }
 
-    public List<LottoNumber> getWinningNumbers() {
-        return Collections.unmodifiableList(winningNumbers);
-    }
-
-    public LottoNumber getBonusBall() {
-        return bonusBall;
-    }
-
-    public Lottos getLottos() {
-        return lottos;
-    }
-
-    public int getPrice() {
-        return this.userPrice;
-    }
 }
