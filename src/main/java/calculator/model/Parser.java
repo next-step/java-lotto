@@ -6,16 +6,20 @@ import java.util.regex.Pattern;
 
 public class Parser {
 
+    private static final String ZERO = "0";
+    private static final String DEFAULT_DELIMITER = ",|:";
+
     private String userInput;
     private String delimiter;
 
     public Parser(String userInput) {
-        this.userInput =checkInputNullOrZero(userInput);
+        this.userInput = checkInputNullOrZero(userInput);
         this.delimiter = findDelimiter();
     }
-    private String checkInputNullOrZero(String userInput){
-        if (userInput==null ||userInput.equals("")){
-            return "0";
+
+    private String checkInputNullOrZero(String userInput) {
+        if (userInput == null || userInput.equals("")) {
+            return ZERO;
         }
         return userInput;
     }
@@ -26,8 +30,9 @@ public class Parser {
             this.userInput = m.group(2);
             return m.group(1);
         }
-        return ",|:";
+        return DEFAULT_DELIMITER;
     }
+
     public List<Token> parseInput() {
         String[] parseResult = userInput.split(delimiter);
         Token token = new Token(parseResult);
