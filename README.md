@@ -40,9 +40,10 @@
 
 금요일 18시까지 1차 PR
 
-## 피드백 사항
+## 피드백 및 리펙토링 사항
 
 - [x] `"".equals(input)` 보다는 `input.isEmpty()`를 지향하자.
+- [x] Parser 메서드 이름 명사에서 동사로 리펙토링.
 - [ ] `Arrays.asList(splitedFormular.///split(delimiter)).stream()`은 `Arrays.stream(splitedFormular.split(delimiter))`으로 표현 가능하다.
 - [ ] 크기가 고정되는 Arrays의 ArrayList를 사용해보자.
 - [ ] `.stream().limit()`를 사용해보자.
