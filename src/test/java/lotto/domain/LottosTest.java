@@ -2,11 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Comparator;
-import java.util.List;
-import lotto.LottoBalls;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -26,17 +22,5 @@ class LottosTest {
 
         // then
         assertThat(autoLottos.get().size()).isEqualTo(numberOfLotto);
-    }
-
-    @DisplayName("발급된 로또 번호는 오름차순으로 정렬된다.")
-    @Test
-    void When_로또번호_생성_Then_오름차순_정렬() {
-        // when
-        final List<Lotto> lottos = Lottos.createAutoLottos(new Budget("1000")).get();
-
-        // then
-        List<LottoNumber> expected = LottoBalls.createLottoNumber();
-        expected.sort(Comparator.comparingInt(LottoNumber::get));
-        assertThat(lottos.get(0).get()).isEqualTo(expected);
     }
 }

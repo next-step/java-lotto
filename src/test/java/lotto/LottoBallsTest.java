@@ -1,9 +1,11 @@
 package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +18,7 @@ class LottoBallsTest {
     void When_로또_공_생성_Then_범위는_1부터_45() {
         // when
         final List<Integer> balls = LottoBalls.get().stream().
-                map(LottoNumber::get)
+                map(LottoNumber::getValue)
                 .collect(Collectors.toList());
 
         // then
@@ -44,9 +46,25 @@ class LottoBallsTest {
     @Test
     void When_로또번호_생성_Then_로또볼_에서_6개를_뽑는다() {
         // when
-        List<LottoNumber> lottoNumbers = LottoBalls.createLottoNumber();
+        Set<LottoNumber> lottoNumbers = LottoBalls.createLottoNumber();
 
         // then
         assertThat(lottoNumbers.size()).isEqualTo(6);
+    }
+
+    @DisplayName("생성된 로또 번호는 오름차순으로 정렬 된다.")
+    @Test
+    void When_로또번호_생성_Then_오른_차순_정렬됨() {
+        // when
+        List<Integer> lottoNumbers = LottoBalls.createLottoNumber().stream()
+                .map(LottoNumber::getValue)
+                .collect(Collectors.toList());
+
+        // then
+        int prev= 0;
+        for(int number : lottoNumbers){
+            assertTrue(number > prev);
+            prev = number;
+        }
     }
 }
