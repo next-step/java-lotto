@@ -15,7 +15,8 @@ public class ResultGroup {
     }
 
     public void updateResult(WinningResult result) {
-        resultGroup.put(result, resultGroup.get(result) + 1);
+        int currentCount = resultGroup.get(result);
+        resultGroup.put(result, currentCount + 1);
     }
 
     public int howManyHave(WinningResult result) {
