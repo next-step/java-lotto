@@ -39,6 +39,7 @@ public class StringCalculator {
         String[] numbers= splitText(text);
 
         return Arrays.stream(numbers)
+            .map(String::trim)
             .map(Integer::parseInt)
             .collect(Collectors.toList());
     }
