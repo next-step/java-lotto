@@ -42,11 +42,7 @@ public class WinningNumber {
     }
 
     private Rank getRank(List<Integer> targetLotto, int matchCount) {
-        boolean bonusBall = false;
-        if (matchCount == 5) {
-            bonusBall = isContain(targetLotto, bonus.getNumber());
-        }
-        return Rank.find(matchCount, bonusBall);
+        return Rank.of(matchCount, isContain(targetLotto, bonus.getNumber()));
     }
 
     private boolean isContain(List<Integer> targetLotto, int lottoNumber) {

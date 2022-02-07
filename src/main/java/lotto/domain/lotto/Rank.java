@@ -27,7 +27,7 @@ public enum Rank {
         return this.prize;
     }
 
-    public static Rank find(int matchCount, boolean matchBonus) {
+    public static Rank of(int matchCount, boolean matchBonus) {
         Rank rank = Arrays.stream(Rank.values())
             .filter(targetRank -> targetRank.matchCount == matchCount)
             .findFirst().orElse(NONE);
