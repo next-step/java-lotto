@@ -2,7 +2,7 @@ package lotto.domain;
 
 public class WinningBall {
 
-    private final int number;
+    private final LottoNumber number;
     private final boolean isBonus;
 
     public WinningBall(String number) {
@@ -14,11 +14,11 @@ public class WinningBall {
     }
 
     public WinningBall(int number, boolean isBonus) {
-        this.number = number;
+        this.number = new LottoNumber(number);
         this.isBonus = isBonus;
     }
 
-    public int getNumber() {
+    public LottoNumber getNumber() {
         return number;
     }
 

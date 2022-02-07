@@ -6,20 +6,16 @@ import lotto.domain.UserLotto;
 
 public class UserLottoFactory {
 
-    private final static int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
 
     private UserLottoFactory() {
     }
 
     public static int getLottoQuantity(int purchasePrice) {
-        if (isLowerThanLeastPrice(purchasePrice)) {
+        if (purchasePrice < LOTTO_PRICE) {
             throw new IllegalArgumentException("[ERROR] 구매 금액이 1000원 이상이어야 합니다.");
         }
         return purchasePrice / LOTTO_PRICE;
-    }
-
-    private static boolean isLowerThanLeastPrice(int price) {
-        return price < LOTTO_PRICE;
     }
 
     public static List<UserLotto> from(int quantity) {

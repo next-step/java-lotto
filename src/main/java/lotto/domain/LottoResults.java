@@ -44,7 +44,7 @@ public class LottoResults {
     }
 
     private boolean hasWinningNumber(UserLotto lotto, WinningBall ball) {
-        return lotto.getNumbers().getRawNumbers().contains(ball.getNumber());
+        return lotto.contains(ball.getNumber());
     }
 
     private void updateIncludeBonus(UserLotto lotto, WinningBall ball, WinningInfo info) {
