@@ -4,9 +4,7 @@ import lotto.domain.Lotto;
 
 public class OutputView {
 
-    private OutputView() {
-
-    }
+    private OutputView() {}
 
     public static final String ERROR_MESSAGE = "[ERROR] ";
     public static final String ERROR_WRONG_LOTTO_PRICE = "로또 한 장은 1000원입니다. 잘못된 금액입니다.";

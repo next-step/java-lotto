@@ -6,8 +6,7 @@ import lotto.util.Console;
 
 public class InputView {
 
-    private InputView() {
-    }
+    private InputView() {}
 
     public static int readPrice() {
         int price = 0;

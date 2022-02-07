@@ -6,8 +6,7 @@ import lotto.domain.Statistics;
 
 public class ResultView {
 
-    private ResultView() {
-    }
+    private ResultView() {}
 
     private static final int LOTTO_MAX_MATCH_COUNT = 6;
     private static final int LOTTO_MIN_MATCH_COUNT = 3;

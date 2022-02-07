@@ -14,6 +14,7 @@ public class InputView {
             formula = Console.readLine();
         } catch (IllegalArgumentException e) {
             System.err.println(OutputView.ERROR + e.getMessage());
+            System.exit(0);
         }
 
         return formula;
