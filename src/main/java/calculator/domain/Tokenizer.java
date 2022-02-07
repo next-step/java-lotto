@@ -14,23 +14,23 @@ public class Tokenizer {
     }
 
     public static List<Integer> tokenize(String text) {
+        final String STANDARD_DELIMITERS =
+            STANDARD_DELIMITER_COMMA + "|" + STANDARD_DELIMITER_COLON;
+
         if (isCustomDelimiter(text)) {
             final String CUSTOM_DELIMITER = text.substring(text.indexOf("/") + 2,
                 text.indexOf("\n"));
-            final String DELIMITERS =
-                STANDARD_DELIMITER_COMMA + "|" + STANDARD_DELIMITER_COLON + "|"
-                    + CUSTOM_DELIMITER;
+            final String CUSTOM_DELIMITERS = STANDARD_DELIMITERS + "|" + CUSTOM_DELIMITER;
 
             final String formattedText = text
                 .replaceAll("[//\n]", "")
                 .replaceFirst(CUSTOM_DELIMITER, "")
                 .trim();
 
-            return parseInt(formattedText.split(DELIMITERS));
+            return parseInt(formattedText.split(CUSTOM_DELIMITERS));
         }
 
-        return parseInt(text
-            .split(STANDARD_DELIMITER_COMMA + "|" + STANDARD_DELIMITER_COLON));
+        return parseInt(text.split(STANDARD_DELIMITERS));
     }
 
     public static List<Integer> parseInt(String[] tokens) {
