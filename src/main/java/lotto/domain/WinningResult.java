@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import lotto.domain.lotto.Rank;
+import lotto.domain.rank.Rank;
 
 public class WinningResult {
 

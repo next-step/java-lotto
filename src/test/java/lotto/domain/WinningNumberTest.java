@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.Rank;
+import lotto.domain.rank.Rank;
 import org.junit.jupiter.api.Test;
 
 class WinningNumberTest {

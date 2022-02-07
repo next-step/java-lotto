@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import lotto.domain.WinningResult;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.Rank;
+import lotto.domain.rank.Rank;
 
 public class OutputView {
 
