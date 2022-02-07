@@ -11,22 +11,22 @@ class StringParserTest {
 
     @ParameterizedTest
     @CsvSource(value = {"1:2|2", "1|1", "1,2|2", "1,2:3|3"}, delimiter = '|')
-    void 기본_구분자_테스트(String numbers, int size) {
-        String[] splitNumbers = StringParser.splitDefaultDelimiter(numbers);
-        assertThat(splitNumbers.length).isEqualTo(size);
+    void 기본_구분자_테스트(String expression, int size) {
+        String[] splitExpression = StringParser.splitDefaultDelimiter(expression);
+        assertThat(splitExpression.length).isEqualTo(size);
     }
 
     @ParameterizedTest
     @ValueSource(strings={"//;\n1;2;3", "//!\n1!2!3"})
-    void 커스텀_구분자_테스트(String numbers) {
-        String[] splitNumbers = StringParser.splitCustomDelimiter(numbers);
-        assertThat(splitNumbers.length).isEqualTo(3);
+    void 커스텀_구분자_테스트(String expression) {
+        String[] splitExpression = StringParser.splitCustomDelimiter(expression);
+        assertThat(splitExpression.length).isEqualTo(3);
     }
 
     @ParameterizedTest
     @ValueSource(strings={"//\n1;2;3", "//1!2!3"})
-    void 커스텀_구분자_예외_테스트(String numbers) {
-        assertThatThrownBy(() -> StringParser.splitCustomDelimiter(numbers))
+    void 커스텀_구분자_예외_테스트(String expression) {
+        assertThatThrownBy(() -> StringParser.splitCustomDelimiter(expression))
             .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -14,12 +14,12 @@ public class StringParser {
 
     private StringParser() {}
 
-    public static String[] splitDefaultDelimiter(String numbers) {
-        return numbers.split(DEFAULT_DELIMITER);
+    public static String[] splitDefaultDelimiter(String expression) {
+        return expression.split(DEFAULT_DELIMITER);
     }
 
-    public static String[] splitCustomDelimiter(String numbers) {
-        Matcher matcher = CUSTOM_PATTERN.matcher(numbers);
+    public static String[] splitCustomDelimiter(String expression) {
+        Matcher matcher = CUSTOM_PATTERN.matcher(expression);
         if (!matcher.find()) {
             throw new IllegalArgumentException(PATTERN_NOT_FOUND);
         }
