@@ -1,6 +1,7 @@
 package stringadder.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.Arrays;
@@ -34,6 +35,13 @@ public class AdderTest {
         );
     }
 
+    @DisplayName("커스텀_구분자가_존재하지_않는_경우")
+    @ParameterizedTest
+    @ValueSource(strings = {"//\n"})
+    void splitCustomDelimiterTest(String input) {
+        assertThatIllegalArgumentException()
+            .isThrownBy(()->StringUtils.splitInput(input));
+    }
 
     @DisplayName("더하기_테스트")
     @ParameterizedTest
