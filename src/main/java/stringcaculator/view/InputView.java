@@ -8,7 +8,7 @@ public class InputView {
 
     private InputView() {}
 
-    public static String getNumbers() {
+    public static String getExpression() {
         return SCANNER.nextLine();
     }
 }

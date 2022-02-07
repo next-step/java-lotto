@@ -7,7 +7,7 @@ import stringcaculator.view.OutputView;
 public class Application {
 
     public static void main(String[] args) {
-        String expression = InputView.getNumbers();
+        String expression = InputView.getExpression();
         Calculator calculator = new Calculator();
         int result = calculator.calculate(expression);
         OutputView.printCalculatedResult(result);
