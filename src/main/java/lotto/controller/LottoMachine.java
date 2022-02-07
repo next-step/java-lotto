@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -10,10 +11,12 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.ResultGroup;
 import lotto.domain.WinningLotto;
+import lotto.view.InputView;
 
 public class LottoMachine {
 
     private static final LottoGenerator LOTTO_GENERATOR = new LottoGenerator();
+    private static final String WINNING_LOTTO_DELIMITER = ", ";
 
     private LottoMachine() {
     }
@@ -27,6 +30,16 @@ public class LottoMachine {
 
     public static ResultGroup getResult(LottoTicket lottoTicket, WinningLotto winningLotto) {
         return lottoTicket.getResult(winningLotto);
+    }
+
+    public static WinningLotto generateWinningLotto(String winningLottoLine) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(winningLottoLine.split(WINNING_LOTTO_DELIMITER))
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+        String bonusBall = InputView.getBonusBall();
+        int parseBonus = Integer.parseInt(bonusBall);
+        lottoNumbers.add(new LottoNumber(parseBonus));
+        return new WinningLotto(lottoNumbers);
     }
 
     private static List<LottoNumber> generateLottoNumber() {
