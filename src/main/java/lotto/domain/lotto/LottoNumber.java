@@ -1,5 +1,7 @@
 package lotto.domain.lotto;
 
+import java.util.Objects;
+
 public class LottoNumber {
 
     private static final String OUT_OF_RANGE_LOTTO_NUMBER_MESSAGE = "로또 범위를 벗어난 숫자입니다.";
@@ -21,5 +23,22 @@ public class LottoNumber {
 
     public int getNumber() {
         return this.number;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }
