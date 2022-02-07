@@ -26,13 +26,15 @@ public class LottoResult {
         return this;
     }
 
-    private void countNormalSuccessNumber(final List<LottoNumber> winningNumbers, List<LottoNumber> userNumbers) {
+    private void countNormalSuccessNumber(final List<LottoNumber> winningNumbers,
+        List<LottoNumber> userNumbers) {
         Set<LottoNumber> lottoDuplicate = new HashSet<>(winningNumbers);
         lottoDuplicate.addAll(userNumbers);
         normalSuccessCount = STANDARD_NUMBER - lottoDuplicate.size();
     }
 
-    private void countBonusNumber(final List<LottoNumber> userNumbers, final LottoNumber bonusNumber) {
+    private void countBonusNumber(final List<LottoNumber> userNumbers,
+        final LottoNumber bonusNumber) {
         if (userNumbers.contains(bonusNumber)) {
             bonusSuccessCount = MATCHED_BONUS_BALL;
             return;

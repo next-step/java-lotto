@@ -15,7 +15,8 @@ public enum Ranking {
     private final int normalSuccessNumber;
     private final boolean bonusSuccessNumber;
 
-    Ranking(final int winnerPrice, final int normalSuccessNumber, final boolean bonusSuccessNumber) {
+    Ranking(final int winnerPrice, final int normalSuccessNumber,
+        final boolean bonusSuccessNumber) {
         this.winnerPrice = winnerPrice;
         this.normalSuccessNumber = normalSuccessNumber;
         this.bonusSuccessNumber = bonusSuccessNumber;

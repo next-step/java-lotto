@@ -35,7 +35,7 @@ class NumbersTest {
     }
 
     @Test
-    void 숫자_하나를_문자열로_입력할경우_해당_숫자를_반환한다(){
+    void 숫자_하나를_문자열로_입력할경우_해당_숫자를_반환한다() {
         // when
         Numbers numbers = new Numbers("5");
 

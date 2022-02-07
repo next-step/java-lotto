@@ -15,7 +15,7 @@ class NumberTest {
     }
 
     @Test
-    void 숫자가_음수면_예외발생(){
+    void 숫자가_음수면_예외발생() {
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> new Number("-1"));
     }

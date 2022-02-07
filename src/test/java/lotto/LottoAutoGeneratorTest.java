@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 class LottoAutoGeneratorTest {
 
     @Test
-    void 로또번호_랜덤생성(){
+    void 로또번호_랜덤생성() {
         List<LottoNumber> lottoNum = LottoAutoGenerator.getInstance().generateLotto();
 
         assertThat(lottoNum.size()).isEqualTo(6);
