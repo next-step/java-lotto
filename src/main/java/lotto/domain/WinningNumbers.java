@@ -10,6 +10,8 @@ public class WinningNumbers {
     private static final String EMPTY_STRING = "";
     private static final String DELIMITER_COMMA = ",";
     private static final int NUMBER_OF_LOTTO_BALL = 6;
+    private static final String INVALID_INPUT_FORMAT_EXCEPTION_MESSAGE = "구분자와 숫자만으로 이루어져야 합니다.";
+    private static final String INVALID_NUMBER_COUNT_EXCEPTION_MESSAGE = "당첨 번호는 중복되지 않은 6개의 숫자 입니다.";
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -29,7 +31,7 @@ public class WinningNumbers {
 
     private void validateInputFormat(final String numbers) {
         if (!numbers.matches(getValidateRegex())) {
-            throw new IllegalArgumentException("구분자와 숫자만으로 이루어져야 합니다.");
+            throw new IllegalArgumentException(INVALID_INPUT_FORMAT_EXCEPTION_MESSAGE);
         }
     }
 
@@ -47,7 +49,7 @@ public class WinningNumbers {
 
     private void validateWinningNumberCount(final Set<LottoNumber> winningNumbers) {
         if (winningNumbers.size() != NUMBER_OF_LOTTO_BALL) {
-            throw new IllegalArgumentException("당첨 번호는 중복되지 않은 6개의 숫자 입니다.");
+            throw new IllegalArgumentException(INVALID_NUMBER_COUNT_EXCEPTION_MESSAGE);
         }
     }
 

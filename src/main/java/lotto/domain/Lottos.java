@@ -8,6 +8,7 @@ import lotto.LottoBalls;
 public class Lottos {
 
     private static final int PRICE_OF_LOTTO = 1000;
+    private static final String LACK_OF_MONEY_EXCEPTION_MESSAGE = "로또 한장의 구입 가격보다 투입 금액이 적습니다.";
 
     private final List<Lotto> lottos;
 
@@ -33,7 +34,7 @@ public class Lottos {
 
     private static void validateMoreThanLottoPrice(Budget budget) {
         if (budget.getValue() < PRICE_OF_LOTTO) {
-            throw new IllegalArgumentException("로또 한장의 구입 가격보다 투입 금액이 적습니다.");
+            throw new IllegalArgumentException(LACK_OF_MONEY_EXCEPTION_MESSAGE);
         }
     }
 
