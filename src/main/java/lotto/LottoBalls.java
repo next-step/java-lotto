@@ -17,6 +17,7 @@ public class LottoBalls {
     private final static int LOTTO_END_NUMBER = 45;
     private static final int NUMBER_OF_LOTTO_BALL = 6;
 
+    private LottoBalls() {}
 
     private static final List<LottoNumber> balls = new ArrayList<>(
             Arrays.stream(IntStream.range(LOTTO_START_NUMBER, LOTTO_END_NUMBER + 1).toArray())
@@ -29,7 +30,8 @@ public class LottoBalls {
     }
 
     public static Set<LottoNumber> createLottoNumber() {
-        Set<LottoNumber> lottoNumbers = new TreeSet<>(Comparator.comparingInt(LottoNumber::getValue));
+        Set<LottoNumber> lottoNumbers = new TreeSet<>(
+                Comparator.comparingInt(LottoNumber::getValue));
         lottoNumbers.addAll(balls.subList(0, NUMBER_OF_LOTTO_BALL));
 
         return lottoNumbers;

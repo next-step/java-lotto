@@ -6,6 +6,8 @@ public class InputView {
 
     private static final String EMPTY_INPUT_EXCEPTION_MESSAGE = "입력은 공백일 수 없습니다.";
 
+    private InputView() {}
+
     public static String inputBudget() {
         System.out.println("구입금액을 입력해 주세요.");
         return input();

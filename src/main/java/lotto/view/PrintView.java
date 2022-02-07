@@ -6,6 +6,8 @@ import lotto.domain.RankCounts;
 
 public class PrintView {
 
+    private PrintView() {}
+
     public static void printNumberOfLotto(final int size) {
         System.out.printf("%d개를 구매했습니다.\n", size);
     }

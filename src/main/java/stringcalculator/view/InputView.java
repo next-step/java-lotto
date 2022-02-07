@@ -10,6 +10,8 @@ public class InputView {
     private static final String DEFAULT_NUMBER = "0";
     private static final String INVALID_DELIMITER_FORMAT_EXCEPTION_MESSAGE = "올바른 입력형식이 아닙니다. ex) //${delimiter}";
 
+    private InputView() {}
+
     public static String inputDelimiter() {
         System.out.println("구분자를 입력해 주세요. (//${구분자}, 입력하지 않으면 기본 구분자(',' ':')가 사용됩니다.");
         String input = input();
