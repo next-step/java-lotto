@@ -36,7 +36,7 @@
     - [x] 커스텀 구분자가 "\n"(개행문자)인 경우 IllegalArgument Exception
     - [x] 구분자를 파악한다. ("//", "\n")
 
-### Parser - 문자열 파싱
+### NumberExtractor - 구분자를 기준으로 숫자 추출
 
 - [x] 구분자를 기준으로 나눈다. (숫자)
 - [x] 숫자 이외의 값이면 RuntimeException throw (e.g. "1:a:3", "1::3:", ":1:2", "1:2:")
@@ -71,19 +71,7 @@
 
 ### Validator - 입력 검증
 
-- [x] 구매 금액에 대한 최솟값 검증
-    - [x] 금액이 숫자가 아닐 경우, IllegalArgument Exception ("[ERROR] 숫자만 입력해주세요")
-    - [x] 금액이 1000(MINIMUM_MONEY)원보다 작을 경우, IllegalArgument Exception ("[ERROR] 1000원에 1장입니다. 1000보다
-      큰 값을 입력해주세요")
-- [x] 당첨 번호에 대한 검증
-    - [x] 숫자가 아닐 경우, IllegalArgument Exception ("1,2:3,4,5,6")
-    - [x] 숫자가 범위 내에 들어오지 않을경우, IllegalArgument Exception
-    - [x] 중복되는 것이 있을 경우, IllegalArgument Exception
-    - [x] 당첨 번호의 개수가 6이 아닐 경우, IllegalArgument Exception
-- [x] 보너스 번호에 대한 검증
-    - [x] 숫자가 아닐 경우, IllegalArgument Exception
-    - [x] 숫자가 범위 내에 들어오지 않을경우, IllegalArgument Exception
-    - [x] 지난 당첨 번호와 중복되는 것이 있을 경우, IllegalArgument Exception
+- [x]  숫자가 아닐 경우, IllegalArgument Exception ("[ERROR] 숫자만 입력해주세요")
 
 ### GeneratorNumber - 번호 생성기
 
@@ -92,6 +80,10 @@
 ### LottoRaffle - 당첨 확인
 
 - [x] 로또 당첨 확인
+
+### Lottos - 여러 개의 로또
+
+- [x] 로또 생성
 
 ### Lotto - 로또
 
@@ -102,9 +94,25 @@
 - [x] 번호
 - [x] 보너스 번호
 
-### Lottos - 여러 개의 로또
+## Numbers - 로또 번호들
 
-- [x] 로또 생성
+- [x] Number의 집합
+- [x] 정해진 사이즈
+- [x] 중복 금지
+
+## Number - 로또 번호
+
+- [x] 범위
+
+## BonusNumber - 보너스 번호
+
+- [x] 당첨 번호와 겹치면 안된다.
+
+## Money - 구입 금액
+
+- [x] 1장보다 큰 금액이어야 한다
+- [x] 숫자만 입력 가능하다
+- [x] 
 
 ### YieldCalculator - 수익률 계산
 
