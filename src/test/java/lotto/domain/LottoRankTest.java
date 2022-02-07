@@ -9,6 +9,26 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoRankTest {
 
+    @DisplayName("당첨 번호 6개를 맞추고, 보너스 번호가 일치하면 1등이다.")
+    @Test
+    void When_당첨번호_6개_일치_보너스_번호_일치_Then_1등() {
+        // when
+        final LottoRank lottoRank = LottoRank.getRank(6, true);
+
+        // then
+        assertThat(lottoRank).isEqualTo(lottoRank.FIRST);
+    }
+
+    @DisplayName("당첨 번호 6개를 맞추고, 보너스 번호가 일치하지 않으면 1등 이다.")
+    @Test
+    void When_당첨번호_6개_일치_보너스_번호_미일치_Then_1등() {
+        // when
+        final LottoRank lottoRank = LottoRank.getRank(6, false);
+
+        // then
+        assertThat(lottoRank).isEqualTo(lottoRank.FIRST);
+    }
+
     @DisplayName("당첨 번호 5개를 맞추고, 보너스 번호가 있으면 2등 이다.")
     @Test
     void When_당첨번호_5개_일치_보너스_번호_일치_Then_2등() {
@@ -29,20 +49,61 @@ class LottoRankTest {
         assertThat(lottoRank).isEqualTo(LottoRank.THIRD);
     }
 
-    @DisplayName("당첨 번호 6개를 맞추면 1등 이다.")
+    @DisplayName("당첨 번호 4개를 맞추고, 보너스 번호가 있으면 4등 이다.")
     @Test
-    void When_당첨번호_6개_일치_Then_1등() {
+    void When_당첨번호_4개_일치_보너스_번호_일치_Then_4등() {
         // when
-        final LottoRank lottoRank = LottoRank.getRank(6, false);
+        final LottoRank lottoRank = LottoRank.getRank(4, true);
 
         // then
-        assertThat(lottoRank).isEqualTo(lottoRank.FIRST);
+        assertThat(lottoRank).isEqualTo(LottoRank.FOURTH);
     }
 
-    @DisplayName("당첨 번호를 2개 이하로 맞추면 미당첨 이다.")
+    @DisplayName("당첨 번호 4개를 맞추고, 보너스 번호가 없으면 4등 이다.")
+    @Test
+    void When_당첨번호_4개_일치_보너스_번호_미일치_Then_4등() {
+        // when
+        final LottoRank lottoRank = LottoRank.getRank(4, false);
+
+        // then
+        assertThat(lottoRank).isEqualTo(LottoRank.FOURTH);
+    }
+
+    @DisplayName("당첨 번호 3개를 맞추고, 보너스 번호가 있으면 5등 이다.")
+    @Test
+    void When_당첨번호_3개_일치_보너스_번호_일치_Then_5등() {
+        // when
+        final LottoRank lottoRank = LottoRank.getRank(3, true);
+
+        // then
+        assertThat(lottoRank).isEqualTo(LottoRank.FIFTH);
+    }
+
+    @DisplayName("당첨 번호 3개를 맞추고, 보너스 번호가 없으면 5등 이다.")
+    @Test
+    void When_당첨번호_3개_일치_보너스_번호_미일치_Then_5등() {
+        // when
+        final LottoRank lottoRank = LottoRank.getRank(3, false);
+
+        // then
+        assertThat(lottoRank).isEqualTo(LottoRank.FIFTH);
+    }
+
+    @DisplayName("당첨 번호를 2개 이하로 맞추고, 보너스 번호가 있으면 미당첨 이다.")
     @ValueSource(ints = {0, 1, 2})
     @ParameterizedTest
-    void When_당첨번호_2개_이하_일치_Then_미당첨(final int matchCount) {
+    void When_당첨번호_2개_이하_일치_보너스_번호_일치_Then_미당첨(final int matchCount) {
+        // when
+        final LottoRank lottoRank = LottoRank.getRank(matchCount, true);
+
+        // then
+        assertThat(lottoRank).isEqualTo(lottoRank.FAIL);
+    }
+
+    @DisplayName("당첨 번호를 2개 이하로 맞추고 보너스 번호가 없으면 미당첨 이다.")
+    @ValueSource(ints = {0, 1, 2})
+    @ParameterizedTest
+    void When_당첨번호_2개_이하_일치_보너스_번호_미일치_Then_미당첨(final int matchCount) {
         // when
         final LottoRank lottoRank = LottoRank.getRank(matchCount, false);
 
