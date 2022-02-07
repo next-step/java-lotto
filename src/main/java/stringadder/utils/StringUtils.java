@@ -1,5 +1,6 @@
 package stringadder.utils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -26,6 +27,9 @@ public class StringUtils {
     }
 
     public static List<String> splitInput(final String input) {
+        if(input == null)
+            return new ArrayList<>();
+
         if (input.contains(SLASH)) {
             String[] tokens = split(input);
             return Arrays.stream(tokens)

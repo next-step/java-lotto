@@ -6,7 +6,7 @@ public class InputValidException {
 
     public static void inputNegativeValidation(int input) {
         if (input < 0) {
-            throw new RuntimeException(NEGATIVE_INPUT_ERROR);
+            throw new IllegalArgumentException(NEGATIVE_INPUT_ERROR);
         }
     }
 }

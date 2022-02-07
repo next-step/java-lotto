@@ -9,7 +9,6 @@ public class Adder {
 
     private static final String BLANK = " ";
     private static final String EMPTY_SPACE = "";
-    private static final String NULL = null;
     private static final int VALIDATE_NUMBER_TRUE = 0;
     private static final int VALIDATE_NUMBER_FALSE = -1;
 
@@ -35,9 +34,10 @@ public class Adder {
     }
 
     private static int validateNumber(List<String> numbers) {
-        if (numbers.contains(BLANK) ||
-            numbers.contains(EMPTY_SPACE) ||
-            numbers.contains(NULL)) {
+        if (numbers.isEmpty() ||
+            numbers.contains(BLANK) ||
+            numbers.contains(EMPTY_SPACE)
+            ) {
             return VALIDATE_NUMBER_TRUE;
         }
         return VALIDATE_NUMBER_FALSE;
