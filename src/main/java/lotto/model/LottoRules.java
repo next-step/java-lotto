@@ -5,22 +5,23 @@ import java.util.List;
 
 public class LottoRules {
 
-    private final int START_NUM = 1;
-    private final int LAST_NUM = 45;
-    private final int LOTTO_COUNT = 6;
-    private final int LOTTO_PRICE = 1000;
-    private final List<Integer> LOTTO_NUMS;
+    private final static int START_NUM = 1;
+    private final static int LAST_NUM = 45;
+    private final static int LOTTO_COUNT = 6;
+    private final static int LOTTO_PRICE = 1000;
+
+    private final List<Integer> lottoNums;
 
     public LottoRules() {
         List<Integer> lottoNums = new ArrayList<>();
         for (int i = START_NUM; i <= LAST_NUM; i++) {
             lottoNums.add(i);
         }
-        this.LOTTO_NUMS = lottoNums;
+        this.lottoNums = lottoNums;
     }
 
     public List<Integer> getLottoNums() {
-        return LOTTO_NUMS;
+        return lottoNums;
     }
 
     public int getLottoPrice() {
