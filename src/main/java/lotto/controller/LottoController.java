@@ -1,7 +1,9 @@
 package lotto.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.domain.Ticket;
 import lotto.domain.WinningNumber;
@@ -28,7 +30,6 @@ public class LottoController {
         WinningNumber winningNumber = makeWinningNumber();
 
         WinningResult winningResult = new WinningResult(getRanksFrom(lottoManager, winningNumber));
-        //winningResult.mappingResult();
         winningResult.calculateYield(ticket.getBuyCash());
 
         OutputView.printWinningResult(winningResult);
@@ -66,6 +67,7 @@ public class LottoController {
 
             ranks.add(winningNumber.compareTo(lottoNumbers));
         }
+
         return ranks;
     }
 

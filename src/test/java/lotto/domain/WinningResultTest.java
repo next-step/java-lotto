@@ -53,7 +53,6 @@ class WinningResultTest {
         assertThat(winningResult.getResult().get(Rank.THIRD)).isEqualTo(1);
         assertThat(winningResult.getResult().get(Rank.FOURTH)).isEqualTo(1);
         assertThat(winningResult.getResult().get(Rank.FIFTH)).isEqualTo(1);
-        //assertThat(winningResult.getResult().get(Rank.NONE)).isEqualTo(0);
     }
 
     @Test

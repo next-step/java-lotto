@@ -1,8 +1,10 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import lotto.domain.lotto.Rank;
@@ -21,10 +23,12 @@ public class WinningResult {
     }
 
     private Map<Rank, Integer> groupByRank(List<Rank> ranks) {
-        return ranks.stream()
+        return Arrays.stream(Rank.values())
             .filter(rank -> rank != Rank.NONE)
             .collect(Collectors.toMap(Function.identity(),
-                rank -> resolveGroupByRank(ranks, rank)));
+                rank -> resolveGroupByRank(ranks, rank),
+                (p1, p2) -> p1,
+                TreeMap::new));
     }
 
     private Integer resolveGroupByRank(List<Rank> ranks, Rank rank) {
