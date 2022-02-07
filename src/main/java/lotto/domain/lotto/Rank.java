@@ -3,7 +3,6 @@ package lotto.domain.lotto;
 import java.util.Arrays;
 
 public enum Rank {
-
     NONE(0, 0),
     FIFTH(3, 5000),
     FOURTH(4, 50000),
@@ -32,7 +31,7 @@ public enum Rank {
             .filter(targetRank -> targetRank.matchCount == matchCount)
             .findFirst().orElse(NONE);
 
-        if (rank == Rank.THIRD && !matchBonus) {
+        if (rank == Rank.THIRD && matchBonus) {
             return Rank.SECOND;
         }
         return rank;
