@@ -2,7 +2,6 @@ package calculator.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import calculator.model.Parser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,7 +18,6 @@ public class ParserTest {
     @Test
     void 커스텀구분자_테스트() {
         Parser parser = new Parser("//;\n1;2;3");
-        //String customDelimiter=parser.findDelimiter();
         assertThat(parser.getDelimiter()).isEqualTo(";");
     }
 
@@ -27,14 +25,24 @@ public class ParserTest {
     @ParameterizedTest
     @NullAndEmptySource
     void emptyOrNull(final String text) {
-        Parser parser = new Parser (text);
+        Parser parser = new Parser(text);
         assertThat(parser.getUserInput()).isEqualTo("0");
     }
 
     @Test
-    void 숫자_하나(){
-        Parser parser = new Parser("1");
+    void 기본구분자로_문자열_파싱하기() {
+        Parser parser = new Parser("1,2:3");
+        Token parsedResult = parser.parseInput();
+        Token compareResult = new Token(new String[]{"1", "2", "3"});
+        assertThat(compareResult).isEqualTo(parsedResult);
+    }
 
+    @Test
+    void 커스텀구분자로_문자열_파싱하기() {
+        Parser parser = new Parser("//;\n3;4;5");
+        Token parsedResult = parser.parseInput();
+        Token compareResult = new Token(new String[]{"3", "4", "5"});
+        assertThat(compareResult).isEqualTo(parsedResult);
     }
 
 }
