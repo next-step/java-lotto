@@ -9,7 +9,6 @@ public class Adder {
 
     public static int add(List<String> numbers){
 
-
         if(numbers.contains(" ") ||
             numbers.contains("") ||
             numbers.contains(null)
