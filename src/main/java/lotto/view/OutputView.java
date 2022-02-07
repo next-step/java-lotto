@@ -33,7 +33,7 @@ public class OutputView {
         for (Lotto lotto : lottos) {
             printMessage(lotto.getNumbers().stream()
                 .sorted(Comparator.comparing(LottoNumber::getNumber))
-                .map(number -> number.getNumber())
+                .map(LottoNumber::getNumber)
                 .map(String::valueOf)
                 .collect(Collectors.joining(DELIMITER, OPEN_BRACKET, CLOSED_BRACKET)) + ENTER);
         }
