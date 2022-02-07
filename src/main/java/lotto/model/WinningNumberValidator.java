@@ -6,7 +6,7 @@ import java.util.List;
 public class WinningNumberValidator {
 
     private final LottoRules lottoRules;
-    private final String INCORRECT_INPUT = "올바른 입력이 아닙니다.";
+    private static final String INCORRECT_INPUT = "올바른 입력이 아닙니다.";
 
     WinningNumberValidator(LottoRules lottoRules) {
         this.lottoRules = lottoRules;
