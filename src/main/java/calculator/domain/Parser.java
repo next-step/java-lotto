@@ -10,21 +10,21 @@ import calculator.view.OutputView;
 
 public class Parser {
 
+    public static final String ERROR_NEGATIVE_NUMBER = "입력한 문자열에 음수가 있습니다.";
     private static final int CUSTOM_DELIMITER = 1;
     private static final int PARSED_FORMULAR = 2;
 
-    private static final Pattern PATTERN = Pattern.compile("//(.)\\n(.*)");
+    private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\\n(.*)");
 
-    public List<Integer> customSplitStringToNumber(String splitedFormular, String delimiter) {
+    public List<Integer> splitCustomStringToNumber(String splitedFormular, String delimiter) {
         validateFormular(Arrays.asList(splitedFormular.split(delimiter)));
         return Arrays.asList(splitedFormular.split(delimiter)).stream()
             .map(Integer::parseInt).collect(
                 Collectors.toList());
     }
 
-    public ArrayList<String> customSplit(String formula) {
-        Matcher matcher = PATTERN.matcher(formula);
-
+    public ArrayList<String> splitCustom(String formula) {
+        Matcher matcher = CUSTOM_PATTERN.matcher(formula);
         if (matcher.find()) {
             return new ArrayList<>(
                 Arrays.asList(matcher.group(PARSED_FORMULAR), matcher.group(CUSTOM_DELIMITER)));
@@ -36,9 +36,9 @@ public class Parser {
     private void validateFormular(List<String> splitedFormular) {
         List<Integer> integeredFormular = stringListToInteger(splitedFormular);
 
-        for(int formularNumber : integeredFormular) {
-            if(formularNumber < 0) {
-                throw new RuntimeException(OutputView.ERROR + OutputView.ERROR_NEGATIVE_NUMBER);
+        for (int formularNumber : integeredFormular) {
+            if (formularNumber < 0) {
+                throw new RuntimeException(OutputView.ERROR + ERROR_NEGATIVE_NUMBER);
             }
         }
     }

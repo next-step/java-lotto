@@ -13,15 +13,15 @@ public class StringCalculator {
     public int add(String text) {
         String input = new ValidateInput(text).getYourInput();
         Parser parser = new Parser();
-        List<String> customSymbolAndFormula = parser.customSplit(input);
+        List<String> customSymbolAndFormula = parser.splitCustom(input);
         String splitedFormular = customSymbolAndFormula.get(SPLITED_FORMULAR_POSITION);
 
         if (customSymbolAndFormula.size() == CUSTOM_FORMULAR_SIZE) {
             String delimeter = customSymbolAndFormula.get(DELIMITER_POSITON);
-            total = parser.customSplitStringToNumber(splitedFormular, delimeter + "|,|:").stream()
+            total = parser.splitCustomStringToNumber(splitedFormular, delimeter + "|,|:").stream()
                 .mapToInt(Integer::intValue).sum(); // 여기를 커스텀구분자
         } else {
-            total = parser.customSplitStringToNumber(splitedFormular, ",|:").stream()
+            total = parser.splitCustomStringToNumber(splitedFormular, ",|:").stream()
                 .mapToInt(Integer::intValue).sum();
         }
 
