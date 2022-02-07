@@ -1,15 +1,9 @@
 package lotto.view;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import lotto.domain.Lotto;
-import lotto.domain.LottoCalculator;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
 import lotto.domain.Ranking;
 
 public class LottoResultView {
@@ -18,43 +12,10 @@ public class LottoResultView {
     private static final int INSERT_INDEX_OF_BONUS_BALL = 5;
 
     private final StringBuilder stringBuilder = new StringBuilder();
-    private final Map<Ranking, Integer> totalResult = new HashMap<>();
     private int totalWinnerPrice = ZERO;
 
-    public LottoResultView() {
-        initializeTotalResult();
-    }
 
-    private void initializeTotalResult() {
-        totalResult.put(Ranking.FIRST, ZERO);
-        totalResult.put(Ranking.SECOND, ZERO);
-        totalResult.put(Ranking.THIRD, ZERO);
-        totalResult.put(Ranking.FOURTH, ZERO);
-        totalResult.put(Ranking.FIFTH, ZERO);
-    }
-
-    public void findWinner(final List<LottoNumber> winningNumbers, final Lottos userLottos,
-        final LottoNumber bonusNumber) {
-
-        final LottoCalculator lottoCalculator = LottoCalculator.getInstance();
-
-        for (Lotto lotto : userLottos.getLottos()) {
-            Ranking ranking = lottoCalculator.calculate(winningNumbers,
-                lotto.getLottoNumbers(),
-                bonusNumber);
-
-            updateResult(ranking);
-        }
-    }
-
-    private void updateResult(final Ranking ranking) {
-        if (totalResult.containsKey(ranking)) {
-            Integer currentCount = totalResult.get(ranking);
-            totalResult.put(ranking, ++currentCount);
-        }
-    }
-
-    public void finishGame(final int userPrice) {
+    public void finishGame(final Map<Ranking, Integer> totalResult, final int userPrice) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
@@ -68,7 +29,7 @@ public class LottoResultView {
         printYield(userPrice);
     }
 
-    private void printYield(int userPrice) {
+    private void printYield(final int userPrice) {
         stringBuilder.append("총 수익률은 ")
             .append(String.format("%.2f", (double) totalWinnerPrice / userPrice))
             .append("입니다.");
