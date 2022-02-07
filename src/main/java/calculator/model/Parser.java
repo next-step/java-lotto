@@ -33,11 +33,9 @@ public class Parser {
         return DEFAULT_DELIMITER;
     }
 
-    public List<Token> parseInput() {
+    public Token parseInput() {
         String[] parseResult = userInput.split(delimiter);
-        Token token = new Token(parseResult);
-
-        return token.getTokens();
+        return new Token(parseResult);
     }
 
     public String getUserInput() {
