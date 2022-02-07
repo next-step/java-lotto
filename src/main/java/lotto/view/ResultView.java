@@ -16,18 +16,26 @@ public class ResultView {
         }
     }
 
-    public void printAnalyzeResults(List<Ranking> winningPrices, double profitPercent) {
+    public void printAnalyzeResults(double profitPercent) {
         System.out.println("당첨통계");
         System.out.println("---------");
-        printWinningMoney(winningPrices);
+        printPrizeMoney(Ranking.FIRST);
+        printPrizeMoney(Ranking.SECOND);
+        printPrizeMoney(Ranking.THIRD);
+        printPrizeMoney(Ranking.FOURTH);
+        printPrizeMoney(Ranking.FIFTH);
         printProfitPercent(profitPercent);
     }
 
-    public void printWinningMoney(List<Ranking> rankings) {
-        for (Ranking ranking : rankings) {
-            System.out.println(ranking);
+    public void printPrizeMoney(Ranking ranking) {
+        StringBuilder sb = new StringBuilder("%d개 일치");
+        if (ranking.bonus == 1) {
+            sb.append(", 보너스 볼 일치");
         }
+        sb.append("(%d원) - %d개%n");
+        System.out.printf((sb.toString()), ranking.numberOfMatches, ranking.prizeMoney, ranking.count);
     }
+
 
     public void printProfitPercent(double profitPercent) {
         System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)%n", profitPercent);
