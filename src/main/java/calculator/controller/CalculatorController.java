@@ -2,6 +2,7 @@ package calculator.controller;
 
 import calculator.domain.StringCalculator;
 import calculator.view.InputView;
+import calculator.view.OutputView;
 
 public class CalculatorController {
 
@@ -17,9 +18,6 @@ public class CalculatorController {
 
     public void start() {
         resultValue = StringCalculator.calculate(userInput);
-    }
-
-    public int getResultValue() {
-        return this.resultValue;
+        OutputView.printResult(resultValue);
     }
 }
