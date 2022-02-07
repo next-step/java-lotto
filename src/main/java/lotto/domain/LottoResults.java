@@ -48,10 +48,14 @@ public class LottoResults {
     }
 
     private void updateIncludeBonus(UserLotto lotto, WinningBall ball, WinningInfo info) {
-        if (ball.isBonus()) {
+        if (hasWinningBonusNumber(lotto, ball)) {
             info.setBonus(true);
         }
         winningInfoOfLotto.put(lotto, info);
+    }
+
+    private boolean hasWinningBonusNumber(UserLotto lotto, WinningBall ball) {
+        return lotto.contains(ball.getNumber()) && ball.isBonus();
     }
 
     public List<LottoResult> getResults() {
