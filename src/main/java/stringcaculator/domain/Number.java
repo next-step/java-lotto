@@ -15,10 +15,10 @@ public class Number {
         return number;
     }
 
-    private int parse(String splitNumber) {
-        int number = parseNumber(splitNumber);
-        validatePositive(number);
-        return number;
+    private int parse(String number) {
+        int parsedNumber = parseNumber(number);
+        validatePositive(parsedNumber);
+        return parsedNumber;
     }
 
     private void validatePositive(int number) {
