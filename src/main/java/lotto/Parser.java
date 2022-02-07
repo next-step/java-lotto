@@ -10,8 +10,8 @@ public class Parser {
         String[] numberStringList = numbersString.split(",");
         int listSize = numberStringList.length;
         List<Integer> numbers = new ArrayList<>();
-        for (int i = 0; i < listSize; i++) {
-            numbers.add(Integer.parseInt(numberStringList[i]));
+        for (String s : numberStringList) {
+            numbers.add(Integer.parseInt(s));
         }
         return numbers;
     }
