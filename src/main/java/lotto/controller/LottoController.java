@@ -18,13 +18,12 @@ public class LottoController {
 
     private static LottoController lottoController = null;
 
-    private LottoController() {
+    private LottoController() {}
+
+    public static LottoController getInstance() {
         if (lottoController == null) {
             lottoController = new LottoController();
         }
-    }
-
-    public static LottoController getInstance() {
         return lottoController;
     }
 
