@@ -17,7 +17,7 @@ public class WinningResult {
 
     private final Map<Rank, Integer> result;
     private long winningCash = 0;
-    private float yield = 0;
+    private double yield = 0;
 
     public WinningResult(List<Rank> ranks) {
         this.result = groupByRank(ranks);
@@ -64,7 +64,7 @@ public class WinningResult {
         return this.winningCash;
     }
 
-    public float getYield() {
+    public double getYield() {
         return this.yield;
     }
 }

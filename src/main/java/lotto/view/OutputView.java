@@ -66,7 +66,7 @@ public class OutputView {
         printMessage(String.format(COUNT_MATCH, matchCount, prize, count) + ENTER);
     }
 
-    private void printYield(float yield) {
+    private void printYield(double yield) {
         printMessage(String.format(YIELD, yield) + ENTER);
     }
 }
