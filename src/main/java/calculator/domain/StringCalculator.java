@@ -13,7 +13,7 @@ public class StringCalculator {
     public int add(String text) {
         String input = new ValidateInput(text).getYourInput();
         Parser parser = new Parser();
-        List<String> customSymbolAndFormula = parser.customSplit(input);
+        List<String> customSymbolAndFormula = parser.parseCustomDelimiterAndFormula(input);
         String splitedFormular = customSymbolAndFormula.get(SPLITED_FORMULAR_POSITION);
 
         if (customSymbolAndFormula.size() == CUSTOM_FORMULAR_SIZE) {

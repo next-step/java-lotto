@@ -11,7 +11,7 @@ import calculator.view.OutputView;
 public class Parser {
 
     private static final int CUSTOM_DELIMITER = 1;
-    private static final int PARSED_FORMULAR = 2;
+    private static final int PARSED_FORMULA = 2;
 
     private static final Pattern PATTERN = Pattern.compile("//(.)\\n(.*)");
 
@@ -22,12 +22,12 @@ public class Parser {
                 Collectors.toList());
     }
 
-    public ArrayList<String> customSplit(String formula) {
+    public ArrayList<String> parseCustomDelimiterAndFormula(String formula) {
         Matcher matcher = PATTERN.matcher(formula);
 
         if (matcher.find()) {
             return new ArrayList<>(
-                Arrays.asList(matcher.group(PARSED_FORMULAR), matcher.group(CUSTOM_DELIMITER)));
+                Arrays.asList(matcher.group(PARSED_FORMULA), matcher.group(CUSTOM_DELIMITER)));
         }
 
         return new ArrayList<>(Arrays.asList(formula));
