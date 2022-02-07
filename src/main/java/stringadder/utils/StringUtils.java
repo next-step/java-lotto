@@ -1,5 +1,6 @@
 package stringadder.utils;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -11,6 +12,14 @@ public class StringUtils {
     private static final String STANDARD_DELIMITER = ",|:";
     private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
     private static final String SLASH = "//";
+    private static final int SELECT_DELIMITER_INDEX = 1;
+    private static final int SELECT_VALUES_INDEX = 2;
+
+    private static final Pattern pattern;
+
+    static {
+        pattern = Pattern.compile(CUSTOM_DELIMITER);
+    }
 
     private StringUtils() {
 
@@ -27,11 +36,11 @@ public class StringUtils {
     }
 
     private static String[] split(String input) {
-        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER).matcher(input);
         String[] tokens = null;
+        Matcher matcher = pattern.matcher(input);
         if (matcher.find()) {
-            String customDelimiter = matcher.group(1);
-            tokens = matcher.group(2).split(customDelimiter);
+            String customDelimiter = matcher.group(SELECT_DELIMITER_INDEX);
+            tokens = matcher.group(SELECT_VALUES_INDEX).split(customDelimiter);
         }
         return tokens;
     }
