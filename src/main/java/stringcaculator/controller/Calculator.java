@@ -27,7 +27,7 @@ public class Calculator {
     }
 
     private boolean isEmptyExpression(String expression) {
-        return expression.trim().length() == 0 || expression.isEmpty();
+        return expression == null || expression.trim().length() == 0 || expression.isEmpty();
     }
 
     private String[] splitExpression(String expression) {
