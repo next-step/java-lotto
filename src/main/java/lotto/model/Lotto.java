@@ -23,7 +23,4 @@ public class Lotto {
         return numbers;
     }
 
-    public int getCount() {
-        return numbers.size();
-    }
 }
