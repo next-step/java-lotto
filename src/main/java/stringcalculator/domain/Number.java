@@ -9,17 +9,21 @@ public class Number {
     private final List<String> userInput;
 
     public Number(final List<String> userInput) {
-        checkIfPositiveNumber(userInput);
+        checkPositiveNumbers(userInput);
         this.userInput = userInput;
 
     }
 
-    private void checkIfPositiveNumber(final List<String> userInput) {
-        Pattern m = Pattern.compile("[0-9]+");
+    private void checkPositiveNumbers(final List<String> userInput) {
+        Pattern pattern = Pattern.compile("[0-9]+");
         for (String numStr : userInput) {
-            if (!m.matcher(numStr).find()) {
-                throw new RuntimeException("양수의 값을 입력해 주세요.");
-            }
+            checkPositiveNumber(pattern, numStr);
+        }
+    }
+
+    private void checkPositiveNumber(Pattern m, String numStr) {
+        if (!m.matcher(numStr).find()) {
+            throw new RuntimeException(String.format("inputValue: %s 양수의 값을 입력해 주세요.",numStr));
         }
     }
 
