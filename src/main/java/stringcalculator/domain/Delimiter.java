@@ -10,6 +10,9 @@ import java.util.regex.Pattern;
 
 public class Delimiter {
 
+    private static final int DELIMETER_GROUP = 1;
+    private static final int EXPRESSION_GROUP = 2;
+
     private final static String CUSTOM_DELIMITER = "//(.)\n(.*)";
     private final static String[] DEFAULT_DELIMITER = new String[]{",", ":"};
 
@@ -23,8 +26,8 @@ public class Delimiter {
         Pattern pattern = Pattern.compile(CUSTOM_DELIMITER);
         Matcher matcher = pattern.matcher(input);
         if (matcher.find()) {
-            addCustomDelimiter(matcher.group(1));
-            return matcher.group(2);
+            addCustomDelimiter(matcher.group(DELIMETER_GROUP));
+            return matcher.group(EXPRESSION_GROUP);
         }
         return input;
     }
