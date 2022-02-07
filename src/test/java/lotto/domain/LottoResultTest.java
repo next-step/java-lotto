@@ -9,7 +9,6 @@ import static lotto.domain.LottoResult.NO_MATCH;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.stream.Stream;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -48,8 +47,9 @@ class LottoResultTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {3,4,6})
+    @ValueSource(ints = {3, 4, 6})
     void 보너스_볼과_관련_없는_당첨(int count) {
-        assertThat(LottoResult.findLottoResult(count, true)).isEqualTo(LottoResult.findLottoResult(count, false));
+        assertThat(LottoResult.findLottoResult(count, true)).isEqualTo(
+            LottoResult.findLottoResult(count, false));
     }
 }
