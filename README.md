@@ -33,12 +33,25 @@
 - [x] 보너스 볼을 입력받을 수 있다. lotto.view#InputView#readBonusNumber
 - [x] 로또 당첨 통계를 알 수 있다. lotto.domain#LottoStatistics
   - ArrayList의 contains()를 활용하면 어떤 값이 존재하는지 유무를 판단할 수 있다.
-- [] 로또의 총 수익률을 알 수 있다. lotto.domain/Lottos
+- [x] 로또의 총 수익률을 알 수 있다. lotto.domain/Lottos
 - [x] UI는 InputView와 OutputView, ResultView에서 작성한다. lotto.view#
 
 ## 마감 기한
 
 금요일 18시까지 1차 PR
+
+## 피드백 사항
+
+- [x] `"".equals(input)` 보다는 `input.isEmpty()`를 지향하자.
+- [ ] `Arrays.asList(splitedFormular.///split(delimiter)).stream()`은 `Arrays.stream(splitedFormular.split(delimiter))`으로 표현 가능하다.
+- [ ] 크기가 고정되는 Arrays의 ArrayList를 사용해보자.
+- [ ] `.stream().limit()`를 사용해보자.
+- [ ] 번호 생성의 책임은 다른 객체에 위임해보기.
+- [ ] 객체를 기능별로 나눠 객체의 책임과 역할을 먼저 구현을 하고, 객체들끼리 통신하게 코드를 작성하자.
+- [ ] 보너스 볼 매칭에 대한 구현이 빠져 있다.
+- [ ] 불필요한 선언이 있다. 메서드에서 로컬변수로 처리해보자.
+
+
 
 ## multiple authors
 
