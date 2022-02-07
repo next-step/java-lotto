@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.WinningLotto;
@@ -16,11 +16,11 @@ public class LottoRaffle {
     }
 
     private Map<LottoResult, Integer> initiateMatchMap() {
-        final Map<LottoResult, Integer> initiateMatchResult = new HashMap<>();
+        final Map<LottoResult, Integer> initiateMatchResult = new EnumMap<>(LottoResult.class);
         for (LottoResult lottoResult : LottoResult.values()) {
             initiateMatchResult.put(lottoResult, 0);
         }
-        return new HashMap<>(initiateMatchResult);
+        return new EnumMap<>(initiateMatchResult);
     }
 
     public void compareLotto(Lotto lotto) {

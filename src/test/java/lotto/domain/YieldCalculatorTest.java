@@ -2,7 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 import lotto.domain.money.Money;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +14,7 @@ class YieldCalculatorTest {
 
     @BeforeEach
     void setUp() {
-        lottoResults = new HashMap<>();
+        lottoResults = new EnumMap<>(LottoResult.class);
         lottoResults.put(LottoResult.MATCH3, 5);
         lottoResults.put(LottoResult.MATCH4, 4);
         lottoResults.put(LottoResult.MATCH5, 1);
