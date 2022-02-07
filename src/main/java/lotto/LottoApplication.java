@@ -1,10 +1,10 @@
 package lotto;
 
 
-import lotto.domain.BonusNumber;
 import lotto.domain.Budget;
 import lotto.domain.CorrectNumbers;
 import lotto.domain.Judge;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoRanks;
 import lotto.domain.Lottos;
 import lotto.domain.RankCounts;
@@ -24,7 +24,7 @@ public class LottoApplication {
 
         final CorrectNumbers correctNumbers = new CorrectNumbers(
                 new WinningNumbers(InputView.inputWinningNumbers()),
-                new BonusNumber(InputView.inputBonusNumber()));
+                new LottoNumber(InputView.inputBonusNumber()));
 
         final Judge judge = new Judge(correctNumbers);
         final LottoRanks lottoRanks = judge.getRanks(lottos);

@@ -12,7 +12,7 @@ class CorrectNumbersTest {
     @Test
     void Given_당첨번호_보너스_번호_When_객체_생성_Then_당첨번호와_보너스_번호를_가짐() {
         // given
-        final BonusNumber bonusNumber = new BonusNumber("7");
+        final LottoNumber bonusNumber = new LottoNumber("7");
         final WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
 
         // when
@@ -27,7 +27,7 @@ class CorrectNumbersTest {
     @Test
     void 당첨번호_보너스_번호_When_객체_생성_Then_예외_발생() {
         // given
-        final BonusNumber bonusNumber = new BonusNumber("6");
+        final LottoNumber bonusNumber = new LottoNumber("6");
         final WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
 
         // then
