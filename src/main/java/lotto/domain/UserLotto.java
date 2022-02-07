@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -50,7 +49,11 @@ public class UserLotto {
     }
 
     private void validateDuplication() {
-        if (new HashSet<>(numbers).size() != LOTTO_NUMBERS_SIZE) {
+        HashSet<Integer> set = numbers.stream()
+            .map(LottoNumber::getRaw)
+            .collect(Collectors.toCollection(HashSet::new));
+
+        if (set.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("[ERROR] 로또 넘버에 중복이 있습니다.");
         }
     }
