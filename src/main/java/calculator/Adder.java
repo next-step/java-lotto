@@ -11,13 +11,7 @@ public class Adder {
     }
 
     public int calculate() {
-        int result = tokens.get(0).getOperand();
-        int tokensSize = tokens.size();
-
-        for (int i = 1; i < tokensSize; i++) {
-            result = sum(result, tokens.get(i).getOperand());
-        }
-        return result;
+        return tokens.stream().mapToInt(Token::getOperand).sum();
     }
 
     private int sum(int a, int b) {
