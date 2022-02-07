@@ -1,41 +1,31 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class LottoRaffle {
 
     private final WinningLotto winningLotto;
+    private final LottoResult lottoResult = new LottoResult();
 
     public LottoRaffle(WinningLotto winningLotto) {
         this.winningLotto = winningLotto;
     }
 
-    public void compareLotto(Lotto lotto) {
-        int count = lotto.getLotto().stream().reduce(0, (cum, val) -> {
-            if (winningLotto.getLotto().contains(val)) {
-                return cum + 1;
-            }
-            return cum;
-        });
-
-        boolean isBonusNumber = lotto.getLotto().contains(winningLotto.getBonusNumber());
-        if (count != 5) {
-            isBonusNumber = false;
-        }
-
-        if(LottoResult.findLottoResult(count, isBonusNumber) != LottoResult.NOMATCH) {
-            LottoResult.increaseMatch(count, isBonusNumber);
+    public void raffle(Lottos lottos) {
+        for (Lotto lotto : lottos.getLottos()) {
+            compareLotto(lotto);
         }
     }
 
-    public List<LottoResult> getResults() {
-        return Arrays.asList(
-            LottoResult.MATCH3,
-            LottoResult.MATCH4,
-            LottoResult.MATCH5,
-            LottoResult.MATCHBONUS,
-            LottoResult.MATCH6
-        );
+    public LottoResult getResult() {
+        return lottoResult;
+    }
+
+    private void compareLotto(Lotto lotto) {
+        final int count = lotto.match(winningLotto);
+        boolean isBonusNumber = lotto.contains(winningLotto.getBonusNumber());
+        if (count != 5) {
+            isBonusNumber = false;
+        }
+        final String resultHash = LottoDescription.findLottoHash(count, isBonusNumber);
+        lottoResult.upCount(resultHash);
     }
 }

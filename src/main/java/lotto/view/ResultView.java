@@ -1,8 +1,8 @@
 package lotto.view;
 
 import java.util.Arrays;
-import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoDescription;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 
@@ -22,19 +22,23 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void printLottoResults(List<LottoResult> lottoResults, double yield) {
+    public static void printLottoResults(LottoResult lottoResult, double yield) {
         System.out.println("\n당첨 통계\n" + "---------");
-        for(LottoResult lottoResult : lottoResults) {
-            printLottoResult(lottoResult);
+        for (LottoDescription lottoDescription : LottoDescription.toList()) {
+            printLottoResult(lottoDescription, lottoResult.getCount(lottoDescription.getHash()));
         }
-        System.out.println("총 수익률은 " +  String.format("%.2f", yield) + "입니다.");
+        System.out.println("총 수익률은 " + String.format("%.2f", yield) + "입니다.");
     }
 
-    private static void printLottoResult(LottoResult lottoResult) {
-        if(lottoResult.isBonusNumber()) {
-            System.out.println(lottoResult.getMatchCount()+"개 일치, 보너스 볼 일치(" + lottoResult.getWinning()+")원- " + lottoResult.getCount()+"개");
+    private static void printLottoResult(LottoDescription lottoDescription, int lottoCount) {
+        if (lottoDescription.isBonusNumber()) {
+            System.out.println(
+                lottoDescription.getMatchCount() + "개 일치, 보너스 볼 일치(" + lottoDescription.getWinning()
+                    + ")원- " + lottoCount + "개");
             return;
         }
-        System.out.println(lottoResult.getMatchCount() + "개 일치 (" + lottoResult.getWinning() + ")원- " + lottoResult.getCount()+"개");
+        System.out.println(
+            lottoDescription.getMatchCount() + "개 일치 (" + lottoDescription.getWinning() + ")원- "
+                + lottoCount + "개");
     }
 }

@@ -1,52 +1,25 @@
 package lotto.domain;
 
-import java.util.Arrays;
+import java.util.HashMap;
 
-public enum LottoResult {
-    NOMATCH(0, true, 0, 0),
-    MATCH3(3, false, 0, 5000),
-    MATCH4(4, false, 0, 50000),
-    MATCH5(5, false, 0, 150000),
-    MATCHBONUS(5, true, 0, 30000000),
-    MATCH6(6, false, 0, 2000000000);
+public class LottoResult {
 
-    private final int matchCount;
-    private final boolean isBonusNumber;
-    private int count;
-    private int winning;
+    private final HashMap<String, Integer> resultMap = new HashMap<String, Integer>() {{
+        put(LottoDescription.MATCH3.getHash(), 0);
+        put(LottoDescription.MATCH4.getHash(), 0);
+        put(LottoDescription.MATCH5.getHash(), 0);
+        put(LottoDescription.MATCHBONUS.getHash(), 0);
+        put(LottoDescription.MATCH6.getHash(), 0);
+    }};
 
-    LottoResult(int matchCount, boolean isBonusNumber, int count, int winning) {
-        this.matchCount = matchCount;
-        this.isBonusNumber = isBonusNumber;
-        this.count = count;
-        this.winning = winning;
+    public int getCount(String hash) {
+        return resultMap.get(hash);
     }
 
-    public static void increaseMatch(int matchCount, boolean isBonusNumber) {
-        findLottoResult(matchCount, isBonusNumber).plusCount();
+    public void upCount(String hash) {
+        if (hash != LottoDescription.NOMATCH.getHash()) {
+            resultMap.put(hash, resultMap.get(hash) + 1);
+        }
     }
 
-    public static LottoResult findLottoResult(int matchCount, boolean isBonusNumber) {
-        return Arrays.stream(values())
-            .filter(lottoResult -> lottoResult.matchCount == matchCount)
-            .filter(lottoResult -> lottoResult.isBonusNumber == isBonusNumber)
-            .findAny()
-            .orElse(NOMATCH);
-    }
-
-    public void plusCount() {
-        this.count++;
-    }
-
-    public int getCount() {return this.count;}
-
-    public int getWinning() { return this.winning;}
-
-    public int getMatchCount() {
-        return matchCount;
-    }
-
-    public boolean isBonusNumber() {
-        return isBonusNumber;
-    }
 }

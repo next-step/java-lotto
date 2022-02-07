@@ -3,11 +3,14 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.stream.Stream;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoResultTest {
+
+    private LottoResult lottoResult;
 
     private static Stream<Arguments> enum_정상_연산_확인() {
         return Stream.of(
@@ -19,10 +22,16 @@ class LottoResultTest {
         );
     }
 
+    @BeforeEach
+    void setUp() {
+        lottoResult = new LottoResult();
+    }
+
     @ParameterizedTest
     @MethodSource
     void enum_정상_연산_확인(int matchCount, boolean isBonusNumber) {
-        LottoResult.increaseMatch(matchCount, isBonusNumber);
-        assertThat(1).isEqualTo(LottoResult.findLottoResult(matchCount, isBonusNumber).getCount());
+        final String hash = LottoDescription.findLottoHash(matchCount, isBonusNumber);
+        lottoResult.upCount(hash);
+        assertThat(1).isEqualTo(lottoResult.getCount(hash));
     }
 }

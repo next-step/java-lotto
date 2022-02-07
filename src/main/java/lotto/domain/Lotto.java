@@ -13,4 +13,12 @@ public class Lotto {
     public List<Integer> getLotto() {
         return numbers;
     }
+
+    public boolean contains(int value) {
+        return numbers.contains(value);
+    }
+
+    public int match(Lotto lotto) {
+        return (int) lotto.getLotto().stream().filter(number -> contains(number)).count();
+    }
 }

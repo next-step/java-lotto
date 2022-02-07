@@ -1,7 +1,6 @@
 package lotto;
 
 import java.util.List;
-import lotto.domain.Lotto;
 import lotto.domain.LottoRaffle;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
@@ -25,11 +24,10 @@ public class LottoApplication {
 
         final LottoRaffle lottoRaffle = new LottoRaffle(
             new WinningLotto(winningNumbers, bonusNumber));
-        for (Lotto lotto : lottos.getLottos()) {
-            lottoRaffle.compareLotto(lotto);
-        }
-        final List<LottoResult> results = lottoRaffle.getResults();
-        double yield = YieldCalculator.calcuateYield(results, money);
-        ResultView.printLottoResults(results, yield);
+        lottoRaffle.raffle(lottos);
+        final LottoResult lottoResult = lottoRaffle.getResult();
+
+        double yield = YieldCalculator.calculateYield(lottoResult, money);
+        ResultView.printLottoResults(lottoResult, yield);
     }
 }
