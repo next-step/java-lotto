@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public class Lotto {
+public class UserLotto {
 
     private static final int LOTTO_FIRST_NUMBER = 1;
     private static final int LOTTO_LAST_NUMBER = 45;
@@ -8,7 +8,7 @@ public class Lotto {
 
     private final Numbers numbers;
 
-    public Lotto() {
+    public UserLotto() {
         numbers = new Numbers(LOTTO_FIRST_NUMBER, LOTTO_LAST_NUMBER, LOTTO_NUMBERS_SIZE);
         validateSize();
         validateDuplication();

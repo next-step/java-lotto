@@ -2,7 +2,7 @@ package lotto.view;
 
 import java.util.HashMap;
 import java.util.List;
-import lotto.domain.Lotto;
+import lotto.domain.UserLotto;
 import lotto.domain.LottoResult;
 import lotto.domain.Numbers;
 import lotto.service.WinningStatistics;
@@ -26,10 +26,10 @@ public class ResultView {
         return lottoResult != LottoResult.NO_REWARD;
     }
 
-    public static void printLottoQuantityAndNumbers(int quantity, List<Lotto> lottos) {
+    public static void printLottoQuantityAndNumbers(int quantity, List<UserLotto> lottos) {
         System.out.println(quantity + "개를 구매했습니다.");
         lottos.stream() // Lotto
-            .map(Lotto::getNumbers) // Number
+            .map(UserLotto::getNumbers) // Number
             .map(Numbers::getRawNumbers) // List<Integer>
             .forEach(System.out::println);
     }

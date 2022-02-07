@@ -2,13 +2,13 @@ package lotto.factory;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.Lotto;
+import lotto.domain.UserLotto;
 
-public class LottoFactory {
+public class UserLottoFactory {
 
     private final static int LOTTO_PRICE = 1000;
 
-    private LottoFactory() {
+    private UserLottoFactory() {
     }
 
     public static int getLottoQuantity(int purchasePrice) {
@@ -22,11 +22,11 @@ public class LottoFactory {
         return price < LOTTO_PRICE;
     }
 
-    public static List<Lotto> from(int quantity) {
-        List<Lotto> lottos = new ArrayList<>();
+    public static List<UserLotto> from(int quantity) {
+        List<UserLotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < quantity; i++) {
-            lottos.add(new Lotto());
+            lottos.add(new UserLotto());
         }
         return lottos;
     }
