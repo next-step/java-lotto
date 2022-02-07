@@ -8,7 +8,7 @@ public class Application {
 
     public static void main(String[] args) {
         String expression = InputView.getExpression();
-        Calculator calculator = new Calculator();
+        Calculator calculator = Calculator.getInstance();
         int result = calculator.calculate(expression);
         OutputView.printCalculatedResult(result);
     }
