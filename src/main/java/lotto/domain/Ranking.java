@@ -3,24 +3,26 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Ranking {
-    THREE(3, 0, 5000),
-    FOUR(4, 0, 50000),
-    FIVE(5, 0, 1500000),
-    FIVEWITHBONUS(5, 1, 30000000),
-    SIX(6, 0, 2000000000),
+    FIRST(6, 0, 2000000000),
+    SECOND(5, 1, 30000000),
+    THIRD(5, 0, 1500000),
+    FOURTH(4, 0, 50000),
+    FIFTH(3, 0, 5000),
     OTHERS(0, 0, 0);
 
-    private final int numberOfMatches;
-    private final int currency;
-    private int bonus = 0;
-    private int count;
+    public final int numberOfMatches;
+    public final int prizeMoney;
+    public final int bonus;
+    public int count = 0;
 
-    Ranking(final int numberOfMatches, int bonus, final int currency) {
+    Ranking(final int numberOfMatches, int bonus, final int prizeMoney) {
         this.numberOfMatches = numberOfMatches;
         if (numberOfMatches == 5) {
             this.bonus = bonus;
+        } else {
+            this.bonus = 0;
         }
-        this.currency = currency;
+        this.prizeMoney = prizeMoney;
     }
 
     public static Ranking of(final int numberOfMatches, final int bonus) {
@@ -32,18 +34,11 @@ public enum Ranking {
             .orElse(OTHERS);
     }
 
-    public int operate(final int count) {
-        this.count = count;
-        return currency * count;
+    public void addWinningCount() {
+        count++;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder("%d개 일치");
-        if (bonus == 1) {
-            sb.append(", 보너스 볼 일치");
-        }
-        sb.append("(%d원) - %d개");
-        return String.format(sb.toString(), numberOfMatches, currency, count);
+    public int operate() {
+        return prizeMoney * count;
     }
 }
