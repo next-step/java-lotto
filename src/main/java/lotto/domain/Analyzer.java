@@ -67,4 +67,5 @@ public class Analyzer {
     public List<WinningPrice> getWinningPrices() {
         return new ArrayList<>(winningPrices);
     }
+
 }
