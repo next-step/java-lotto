@@ -4,29 +4,35 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import lotto.domain.lotto.Rank;
 
 public class WinningResult {
+
+    private static final int ZERO = 0;
+    private static final int INCREASE = 1;
 
     private final Map<Rank, Integer> result;
     private long winningCash = 0;
     private float yield = 0;
 
-    public WinningResult() {
-        this.result = new LinkedHashMap<>();
-        for (Rank rank : Rank.values()) {
-            result.put(rank, 0);
-        }
+    public WinningResult(List<Rank> ranks) {
+        this.result = groupByRank(ranks);
     }
 
-    public void mappingResult(List<Rank> ranks) {
-        for (Rank rank : ranks) {
-            if (result.containsKey(rank)) {
-                result.put(rank, result.get(rank) + 1);
-                continue;
-            }
-            result.put(rank, 1);
-        }
+    private Map<Rank, Integer> groupByRank(List<Rank> ranks) {
+        return ranks.stream()
+            .filter(rank -> rank != Rank.NONE)
+            .collect(Collectors.toMap(Function.identity(),
+                rank -> resolveGroupByRank(ranks, rank)));
+    }
+
+    private Integer resolveGroupByRank(List<Rank> ranks, Rank rank) {
+        return ranks.stream()
+            .filter(result -> result == rank)
+            .map(result -> INCREASE)
+            .reduce(ZERO, Integer::sum);
     }
 
     public Map<Rank, Integer> getResult() {

@@ -33,8 +33,6 @@ class WinningResultTest {
 
         WinningNumber winningNumber = new WinningNumber(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
 
-        WinningResult winningResult = new WinningResult();
-
         //when
         List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
@@ -47,8 +45,7 @@ class WinningResultTest {
             Rank rank = winningNumber.compareTo(collect);
             ranks.add(rank);
         }
-
-        winningResult.mappingResult(ranks);
+        WinningResult winningResult = new WinningResult(ranks);
 
         //then
         assertThat(winningResult.getResult().get(Rank.FIRST)).isEqualTo(1);
@@ -56,7 +53,7 @@ class WinningResultTest {
         assertThat(winningResult.getResult().get(Rank.THIRD)).isEqualTo(1);
         assertThat(winningResult.getResult().get(Rank.FOURTH)).isEqualTo(1);
         assertThat(winningResult.getResult().get(Rank.FIFTH)).isEqualTo(1);
-        assertThat(winningResult.getResult().get(Rank.NONE)).isEqualTo(1);
+        //assertThat(winningResult.getResult().get(Rank.NONE)).isEqualTo(0);
     }
 
     @Test
@@ -67,8 +64,7 @@ class WinningResultTest {
         ranks.add(Rank.SECOND);
 
         //when
-        WinningResult winningResult = new WinningResult();
-        winningResult.mappingResult(ranks);
+        WinningResult winningResult = new WinningResult(ranks);
 
         winningResult.calculateTotalPrize();
 

@@ -27,8 +27,8 @@ public class LottoController {
 
         WinningNumber winningNumber = makeWinningNumber();
 
-        WinningResult winningResult = new WinningResult();
-        winningResult.mappingResult(getRanksFrom(lottoManager, winningNumber));
+        WinningResult winningResult = new WinningResult(getRanksFrom(lottoManager, winningNumber));
+        //winningResult.mappingResult();
         winningResult.calculateYield(ticket.getBuyCash());
 
         OutputView.printWinningResult(winningResult);
