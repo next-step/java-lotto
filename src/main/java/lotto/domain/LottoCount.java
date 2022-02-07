@@ -6,17 +6,17 @@ public class LottoCount {
 
     private int lottoCount;
 
-    public LottoCount(int value) {
-        validateValue(value);
-        this.lottoCount = value / LOTTO_PRICE;
+    public LottoCount(int count) {
+        validateCount(count);
+        this.lottoCount = count / LOTTO_PRICE;
     }
 
     public int count() {
         return lottoCount;
     }
 
-    private void validateValue(int value) {
-        if (valueNotPurchasable(value)) {
+    private void validateCount(int count) {
+        if (valueNotPurchasable(count)) {
             throw new IllegalArgumentException();
         }
     }
