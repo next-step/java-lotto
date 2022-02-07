@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
@@ -20,7 +21,7 @@ class WinningNumberTest {
         Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         //when
-        List<LottoNumber> lottoNumbers = lotto.getNumbers();
+        Set<LottoNumber> lottoNumbers = lotto.getNumbers();
         List<Integer> integers = lottoNumbers.stream()
             .map(LottoNumber::getNumber)
             .collect(Collectors.toList());
@@ -38,7 +39,7 @@ class WinningNumberTest {
         Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 16));
 
         //when
-        List<LottoNumber> lottoNumbers = lotto.getNumbers();
+        Set<LottoNumber> lottoNumbers = lotto.getNumbers();
         List<Integer> integers = lottoNumbers.stream()
             .map(LottoNumber::getNumber)
             .collect(Collectors.toList());
@@ -56,7 +57,7 @@ class WinningNumberTest {
         Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 16));
 
         //when
-        List<LottoNumber> lottoNumbers = lotto.getNumbers();
+        Set<LottoNumber> lottoNumbers = lotto.getNumbers();
         List<Integer> integers = lottoNumbers.stream()
             .map(LottoNumber::getNumber)
             .collect(Collectors.toList());
@@ -74,7 +75,7 @@ class WinningNumberTest {
         Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 15, 16));
 
         //when
-        List<LottoNumber> lottoNumbers = lotto.getNumbers();
+        Set<LottoNumber> lottoNumbers = lotto.getNumbers();
         List<Integer> integers = lottoNumbers.stream()
             .map(LottoNumber::getNumber)
             .collect(Collectors.toList());
@@ -92,7 +93,7 @@ class WinningNumberTest {
         Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 14, 15, 16));
 
         //when
-        List<LottoNumber> lottoNumbers = lotto.getNumbers();
+        Set<LottoNumber> lottoNumbers = lotto.getNumbers();
         List<Integer> integers = lottoNumbers.stream()
             .map(LottoNumber::getNumber)
             .collect(Collectors.toList());
@@ -110,7 +111,7 @@ class WinningNumberTest {
         Lotto lotto = Lotto.from(Arrays.asList(1, 2, 13, 14, 15, 16));
 
         //when
-        List<LottoNumber> lottoNumbers = lotto.getNumbers();
+        Set<LottoNumber> lottoNumbers = lotto.getNumbers();
         List<Integer> integers = lottoNumbers.stream()
             .map(LottoNumber::getNumber)
             .collect(Collectors.toList());
@@ -128,7 +129,7 @@ class WinningNumberTest {
         Lotto lotto = Lotto.from(Arrays.asList(1, 12, 13, 14, 15, 16));
 
         //when
-        List<LottoNumber> lottoNumbers = lotto.getNumbers();
+        Set<LottoNumber> lottoNumbers = lotto.getNumbers();
         List<Integer> integers = lottoNumbers.stream()
             .map(LottoNumber::getNumber)
             .collect(Collectors.toList());
@@ -146,7 +147,7 @@ class WinningNumberTest {
         Lotto lotto = Lotto.from(Arrays.asList(11, 12, 13, 14, 15, 16));
 
         //when
-        List<LottoNumber> lottoNumbers = lotto.getNumbers();
+        Set<LottoNumber> lottoNumbers = lotto.getNumbers();
         List<Integer> integers = lottoNumbers.stream()
             .map(LottoNumber::getNumber)
             .collect(Collectors.toList());

@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
@@ -37,9 +38,9 @@ class WinningResultTest {
         //when
         List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            List<LottoNumber> numbers = lotto.getNumbers();
+            Set<LottoNumber> lottoNumbers = lotto.getNumbers();
 
-            List<Integer> collect = numbers.stream()
+            List<Integer> collect = lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
 
