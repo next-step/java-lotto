@@ -5,11 +5,11 @@ import static org.assertj.core.api.Assertions.*;
 import lotto.domain.machine.RandomLottoGenerator;
 import org.junit.jupiter.api.Test;
 
-class LottoManagerTest {
+class LottoRepositoryTest {
     @Test
     public void 입력한_티켓의개수만큼_로또가_생성된다() {
         //given
-        LottoManager lottoManager = new LottoManager(new RandomLottoGenerator(), 14);
+        LottoRepository lottoManager = new LottoRepository(new RandomLottoGenerator(), 14);
 
         //when
 

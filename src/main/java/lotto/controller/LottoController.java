@@ -1,15 +1,13 @@
 package lotto.controller;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.domain.Ticket;
 import lotto.domain.WinningNumber;
 import lotto.domain.WinningResult;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoManager;
+import lotto.domain.lotto.LottoRepository;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Rank;
 import lotto.domain.machine.RandomLottoGenerator;
@@ -21,7 +19,7 @@ public class LottoController {
     public void start() {
         Ticket ticket = buyTicket();
 
-        LottoManager lottoManager = new LottoManager(new RandomLottoGenerator(),
+        LottoRepository lottoManager = new LottoRepository(new RandomLottoGenerator(),
             ticket.getBuyCount());
 
         OutputView.printPurchaseAmount(ticket.getBuyCount());
@@ -57,7 +55,7 @@ public class LottoController {
         return new LottoNumber(InputView.writeBonusBall());
     }
 
-    private List<Rank> getRanksFrom(LottoManager lottoManager, WinningNumber winningNumber) {
+    private List<Rank> getRanksFrom(LottoRepository lottoManager, WinningNumber winningNumber) {
         List<Rank> ranks = new ArrayList<>();
 
         for (Lotto lotto : lottoManager.getLottos()) {
