@@ -8,7 +8,7 @@ import lotto.util.NumbersValidator;
 
 public class Numbers {
 
-    private final List<Number> numbers;
+    private final List<Number> numbersValue;
 
     public Numbers(final String input) {
         this(NumbersValidator.validate(input));
@@ -19,14 +19,14 @@ public class Numbers {
     }
 
     public Numbers(final Numbers newNumbers) {
-        this(newNumbers.getNumbers());
+        this(newNumbers.getNumbersValue());
     }
 
     public Numbers(final List<Number> numbers) {
-        this.numbers = new ArrayList<>(numbers);
+        this.numbersValue = new ArrayList<>(numbers);
     }
 
-    public List<Number> getNumbers() {
-        return new ArrayList<>(numbers);
+    public List<Number> getNumbersValue() {
+        return new ArrayList<>(numbersValue);
     }
 }

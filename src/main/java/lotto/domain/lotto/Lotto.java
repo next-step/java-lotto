@@ -16,6 +16,6 @@ public class Lotto {
     }
 
     public boolean hasNumber(Number number) {
-        return this.numbers.getNumbers().contains(number);
+        return this.numbers.getNumbersValue().contains(number);
     }
 }

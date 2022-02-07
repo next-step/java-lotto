@@ -16,11 +16,11 @@ public class LottoRaffle {
     }
 
     private Map<LottoResult, Integer> initiateMatchMap() {
-        final Map<LottoResult, Integer> matchResult = new HashMap<>();
+        final Map<LottoResult, Integer> initiateMatchResult = new HashMap<>();
         for (LottoResult lottoResult : LottoResult.values()) {
-            matchResult.put(lottoResult, 0);
+            initiateMatchResult.put(lottoResult, 0);
         }
-        return new HashMap<>(matchResult);
+        return new HashMap<>(initiateMatchResult);
     }
 
     public void compareLotto(Lotto lotto) {
@@ -39,7 +39,7 @@ public class LottoRaffle {
 
     private Integer calculateMatchCount(Lotto lotto) {
         return Math.toIntExact(
-            lotto.getLotto().getNumbers().stream().filter(winningLotto::hasNumber).count());
+            lotto.getLotto().getNumbersValue().stream().filter(winningLotto::hasNumber).count());
     }
 
     public Map<LottoResult, Integer> getResults() {

@@ -10,6 +10,6 @@ public class BonusNumber extends Number {
     }
 
     public BonusNumber(Integer value, Numbers numbers) {
-        super(BonusNumberValidator.validateDuplicateBonus(value, numbers.getNumbers()));
+        super(BonusNumberValidator.validateDuplicateBonus(value, numbers.getNumbersValue()));
     }
 }
