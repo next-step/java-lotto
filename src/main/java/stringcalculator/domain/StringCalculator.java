@@ -10,14 +10,14 @@ public class StringCalculator {
 
     }
 
-    public List<Integer> preprocess(final String input) {
-        String expression = Delimiter.findExpression(checkNullOrEmpty(input));
-        return Delimiter.extractNumberFromExpression(expression);
-    }
-
-    public int add(final String input) {
+    public static int add(final String input) {
         List<Integer> numbers = preprocess(input);
         return numbers.stream().reduce(0, Operation.PLUS::operate);
+    }
+
+    private static List<Integer> preprocess(final String input) {
+        String expression = Delimiter.findExpression(checkNullOrEmpty(input));
+        return Delimiter.extractNumberFromExpression(expression);
     }
 
     private static String checkNullOrEmpty(String input) {

@@ -8,8 +8,7 @@ public class StringCalculatorMain {
 
     public static void main(String[] args) {
         String input = InputView.getExpression();
-        StringCalculator calculator = new StringCalculator();
-        int result = calculator.add(input);
+        int result = StringCalculator.add(input);
         ResultView.printResult(result);
     }
 }
