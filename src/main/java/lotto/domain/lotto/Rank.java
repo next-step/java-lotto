@@ -32,7 +32,7 @@ public enum Rank {
             .filter(targetRank -> targetRank.matchCount == matchCount)
             .findFirst().orElse(NONE);
 
-        if (rank == Rank.THIRD && !matchBonus) {
+        if (rank == Rank.THIRD && matchBonus) {
             return Rank.SECOND;
         }
         return rank;
