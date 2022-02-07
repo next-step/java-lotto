@@ -33,10 +33,9 @@ public class WinningNumber {
             .map(LottoNumber::getNumber)
             .collect(Collectors.toList());
 
-        int matchCount = targetLotto.stream()
+        int matchCount = (int) targetLotto.stream()
             .filter(lottoNumber -> isContain(winningNumbers, lottoNumber))
-            .collect(Collectors.toList())
-            .size();
+            .count();
 
         return getRank(targetLotto, matchCount);
     }
