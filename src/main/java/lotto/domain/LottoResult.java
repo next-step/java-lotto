@@ -4,11 +4,11 @@ import java.util.Arrays;
 
 public enum LottoResult {
     NO_REWARD(0, false, 0, "상금이 없습니다."),
-    THREE_MATCHING(3, false, 5000, "3개 일치 (5,000원) - "),
-    FOUR_MATCHING(4, false, 50000, "4개 일치 (50,000원) - "),
-    FIVE_MATCHING(5, false, 1500000, "5개 일치 (1,500,000원) - "),
-    FIVE_MATCHING_BONUS(5, true, 30000000, "5개 일치, 보너스 볼 일치 (30,000,000) - "),
-    SIX_MATCHING(6, false, 2000000000, "6개 일치 (2,000,000,000원) - ");
+    THREE_MATCHING(3, false, 5_000, "3개 일치 (5,000원) - "),
+    FOUR_MATCHING(4, false, 50_000, "4개 일치 (50,000원) - "),
+    FIVE_MATCHING(5, false, 1_500_000, "5개 일치 (1,500,000원) - "),
+    FIVE_MATCHING_BONUS(5, true, 30_000_000, "5개 일치, 보너스 볼 일치 (30,000,000) - "),
+    SIX_MATCHING(6, false, 2_000_000_000, "6개 일치 (2,000,000,000원) - ");
 
     private final int count;
     private final boolean includeBonus;
