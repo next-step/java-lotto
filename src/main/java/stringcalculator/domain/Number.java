@@ -23,7 +23,7 @@ public class Number {
 
     private void checkPositiveNumber(Pattern m, String numStr) {
         if (!m.matcher(numStr).find()) {
-            throw new RuntimeException(String.format("inputValue: %s 양수의 값을 입력해 주세요.",numStr));
+            throw new RuntimeException(String.format("inputValue: %s 양수의 값을 입력해 주세요.", numStr));
         }
     }
 
