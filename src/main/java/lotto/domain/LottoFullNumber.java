@@ -10,8 +10,11 @@ import java.util.stream.Collectors;
 public class LottoFullNumber {
 
     private final static int NUMBER_ZERO = 0;
+
     private final static int LOTTO_NUMBER_SIZE = 6;
+
     private final static String ERROR_MESSAGE = "로또 숫자는 중복될 수 없습니다.";
+
     private final List<LottoNumber> lottoFullNumber;
 
     public LottoFullNumber(List<LottoNumber> lottoFullNumber) {
