@@ -1,9 +1,6 @@
 package lotto;
 
-import java.util.List;
-import lotto.domain.Analyzer;
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoTickets;
+import lotto.domain.LottoPlay;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -15,26 +12,14 @@ public class LottoProcessor {
     public static void main(String[] args) {
 
         try {
-            int totalPrice = inputView.getTotalPrice();
-            LottoTickets lottoTickets = new LottoTickets(totalPrice);
+            final LottoPlay lottoPlay = new LottoPlay(inputView);
+            resultView.printNumberOfLotto(lottoPlay.getLottoCounts());
+            resultView.printLottoTickets(lottoPlay.getLottoTickets());
 
-            int lottoCounts = lottoTickets.getLottoCounts();
+            lottoPlay.run();
 
-            resultView.printNumberOfLotto(lottoCounts);
-            resultView.printLottoTickets(lottoTickets.getLottoTickets());
-
-            List<Integer> winNumbers = inputView.getWinNumbers();
-            int bonusNumber = inputView.getBonusNumber();
-
-            LottoMachine lottoMachine = new LottoMachine(winNumbers, bonusNumber);
-            List<Integer> integers = lottoTickets.countCorrectWinNumber(lottoMachine);
-            List<Integer> bonusNumbers = lottoTickets.checkBonusNumber(lottoMachine);
-
-            Analyzer analyzer = new Analyzer(totalPrice);
-            analyzer.calculateTotalWinningMoney(integers, bonusNumbers);
-
-            double profitPercent = analyzer.calculateProfitPercent();
-            resultView.printAnalyzeResults(analyzer.getWinningPrices(), profitPercent);
+            resultView.printAnalyzeResults(lottoPlay.getWinningPrices(),
+                lottoPlay.calculateProfitPercent());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
