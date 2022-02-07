@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 public class WinningTest {
 
-    @DisplayName("위닝_숫자_검증")
+    @DisplayName("지난_주_당첨번호에_보너스볼이_중복으로_들어가있는지_검증")
     @Test
     void winningNumberTest() {
         LottoFullNumber lottoFullNumber = new LottoFullNumber(
