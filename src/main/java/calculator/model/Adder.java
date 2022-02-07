@@ -6,8 +6,8 @@ public class Adder {
 
     private List<Token> tokens;
 
-    public Adder(List<Token> tokens) {
-        this.tokens = tokens;
+    public Adder(Token token) {
+        this.tokens = token.getTokens();
     }
 
     public int calculate() {
