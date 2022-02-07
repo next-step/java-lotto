@@ -14,7 +14,7 @@ public class Winning {
 
 
     private void validationWinningNumber() {
-        if (winningLottoNumber.getLottoNumber().contains(bonusLottoNumber.getValue())) {
+        if (winningLottoNumber.contains(bonusLottoNumber)) {
             throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
         }
     }
