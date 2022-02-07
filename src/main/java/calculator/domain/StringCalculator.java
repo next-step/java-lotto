@@ -1,6 +1,5 @@
 package calculator.domain;
 
-import java.util.List;
 import java.util.Objects;
 
 public class StringCalculator {
@@ -11,7 +10,7 @@ public class StringCalculator {
     private String input;
 
     public StringCalculator(String input) {
-        this.input = isEmptyOrNull(input);
+        this.input = validateEmptyOrNull(input);
     }
 
     public int add() {
@@ -20,15 +19,15 @@ public class StringCalculator {
 
         if (!Objects.isNull(parser.getCustomDelimiter())) {
             String delimeter = parser.getCustomDelimiter();
-            return Parser.splitCustomStringToNumber(splitedFormular, delimeter + "|,|:").stream()
+            return Parser.makeToIntegerList(splitedFormular, delimeter + "|,|:").stream()
                 .mapToInt(Integer::intValue).sum();
         }
 
-        return Parser.splitCustomStringToNumber(input, ",|:").stream()
+        return Parser.makeToIntegerList(input, ",|:").stream()
             .mapToInt(Integer::intValue).sum();
     }
 
-    private String isEmptyOrNull(String input) {
+    private String validateEmptyOrNull(String input) {
         if (Objects.isNull(input) || "".equals(input)) {
             input = "0";
         }

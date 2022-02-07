@@ -1,6 +1,5 @@
 package calculator.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -19,18 +18,19 @@ public class Parser {
     private String customDelimiter;
 
     public Parser(String formula) {
-        splitCustom(formula);
+        splitCustomFormular(formula);
     }
 
-    public static List<Integer> splitCustomStringToNumber(String splitedFormular,
+    public static List<Integer> makeToIntegerList(String splitedFormular,
         String delimiter) {
-        validateFormular(Arrays.asList(splitedFormular.split(delimiter)));
-        return Arrays.asList(splitedFormular.split(delimiter)).stream()
+        List<String> delimiteredFormular = Arrays.asList(splitedFormular.split(delimiter));
+        validateFormular(delimiteredFormular);
+        return delimiteredFormular.stream()
             .map(Integer::parseInt).collect(
                 Collectors.toList());
     }
 
-    private void splitCustom(String formula) {
+    private void splitCustomFormular(String formula) {
         Matcher matcher = CUSTOM_PATTERN.matcher(formula);
         if (matcher.find()) {
             parsedFormular = matcher.group(PARSED_FORMULAR);
