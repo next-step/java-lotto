@@ -16,11 +16,11 @@ public class StringUtils {
 
     }
 
-    public static List<String> splitStr(final String input) {
-
+    public static List<String> splitInput(final String input) {
         if (input.contains(SLASH)) {
-            String[] tokens = split(input);
-            return Arrays.stream(tokens).map(String::toString).collect(Collectors.toList());
+            return Arrays.stream(split(input))
+                .map(String::toString)
+                .collect(Collectors.toList());
         }
         return Arrays.stream(input.split(STANDARD_DELIMITER)).map(String::toString)
             .collect(Collectors.toList());

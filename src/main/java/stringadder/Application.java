@@ -12,7 +12,7 @@ public class Application {
     public static void main(String[] args) {
         adder = new Adder();
         String userInput = UserConsole.inputString();
-        List<String> splitResult = StringUtils.splitStr(userInput);
+        List<String> splitResult = StringUtils.splitInput(userInput);
 
         UserResult.result(adder.add(splitResult));
     }

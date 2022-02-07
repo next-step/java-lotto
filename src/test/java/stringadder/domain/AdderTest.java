@@ -26,7 +26,7 @@ public class AdderTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2:3", "//;\n1;2;3", "//-\n1-2-3"})
     void stringSplitTest(String input) {
-        List<String> parsingInput = StringUtils.splitStr(input);
+        List<String> parsingInput = StringUtils.splitInput(input);
         assertAll(
             () -> assertThat(parsingInput.get(0)).isEqualTo("1"),
             () -> assertThat(parsingInput.get(1)).isEqualTo("2"),
