@@ -10,10 +10,10 @@ public enum Ranking {
     FIFTH(3, 0, 5000),
     OTHERS(0, 0, 0);
 
-    public final int numberOfMatches;
-    public final int prizeMoney;
-    public final int bonus;
-    public int count = 0;
+    private final int numberOfMatches;
+    private final int prizeMoney;
+    private final int bonus;
+    private int count = 0;
 
     Ranking(final int numberOfMatches, int bonus, final int prizeMoney) {
         this.numberOfMatches = numberOfMatches;
@@ -41,4 +41,22 @@ public enum Ranking {
     public int operate() {
         return prizeMoney * count;
     }
+
+
+    public int getNumberOfMatches() {
+        return numberOfMatches;
+    }
+
+    public int getPrizeMoney() {
+        return prizeMoney;
+    }
+
+    public int getBonus() {
+        return bonus;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
 }

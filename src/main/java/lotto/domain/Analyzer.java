@@ -18,6 +18,9 @@ public class Analyzer {
         for (int i = 0; i < numberOfMatches.size(); i++) {
             int match = numberOfMatches.get(i);
             int bonus = bonusNumbers.get(i);
+            if (match != Ranking.FIFTH.getNumberOfMatches()) {
+                bonus = 0;
+            }
             Ranking.of(match, bonus).addWinningCount();
         }
     }

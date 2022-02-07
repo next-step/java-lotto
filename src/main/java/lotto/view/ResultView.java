@@ -29,11 +29,11 @@ public class ResultView {
 
     public void printPrizeMoney(Ranking ranking) {
         StringBuilder sb = new StringBuilder("%d개 일치");
-        if (ranking.bonus == 1) {
+        if (ranking.getBonus() == 1) {
             sb.append(", 보너스 볼 일치");
         }
         sb.append("(%d원) - %d개%n");
-        System.out.printf((sb.toString()), ranking.numberOfMatches, ranking.prizeMoney, ranking.count);
+        System.out.printf((sb.toString()), ranking.getNumberOfMatches(), ranking.getPrizeMoney(), ranking.getCount());
     }
 
 
