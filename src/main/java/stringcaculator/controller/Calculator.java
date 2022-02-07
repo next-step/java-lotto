@@ -15,7 +15,7 @@ public class Calculator {
     }
 
     public int calculate(String expression) {
-        if (expressionIsEmpty(expression)) {
+        if (isEmptyExpression(expression)) {
             return 0;
         }
         String[] splitExpression = splitExpression(expression);
@@ -26,7 +26,7 @@ public class Calculator {
         return numbers.sum();
     }
 
-    private boolean expressionIsEmpty(String expression) {
+    private boolean isEmptyExpression(String expression) {
         return expression.trim().length() == 0 || expression.isEmpty();
     }
 
