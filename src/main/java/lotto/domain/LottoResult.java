@@ -30,14 +30,14 @@ public enum LottoResult {
         return reward;
     }
 
-    public static LottoResult of(int count) {
+    public static LottoResult from(int count) {
         if (count < 3) {
             return LottoResult.NO_REWARD;
         }
-        return of(count, false);
+        return from(count, false);
     }
 
-    public static LottoResult of(int count, boolean includeBonus) {
+    public static LottoResult from(int count, boolean includeBonus) {
         return Arrays.stream(LottoResult.values())
             .filter(lottoResult -> isSameCountAndBonus(lottoResult, count, includeBonus))
             .findAny()

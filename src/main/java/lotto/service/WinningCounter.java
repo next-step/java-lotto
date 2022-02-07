@@ -37,10 +37,10 @@ public class WinningCounter {
         }
 
         if(hasToCheckBonus(count)) {
-            return LottoResult.of(count, includeBonus);
+            return LottoResult.from(count, includeBonus);
         }
 
-        return LottoResult.of(count);
+        return LottoResult.from(count);
     }
 
     private boolean hasToCheckBonus(int count) {
