@@ -8,6 +8,12 @@ import calculator.model.Adder;
 import java.util.List;
 
 public class Calculator {
+    private static Calculator calculator= new Calculator();
+    private Calculator(){
+    }
+    public static Calculator getInstance(){
+        return calculator;
+    }
     public void play(){
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
