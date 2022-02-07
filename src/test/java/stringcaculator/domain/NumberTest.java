@@ -16,8 +16,15 @@ class NumberTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"문자테스트", "-1"})
-    void 숫자_예외_테스트 (String number) {
+    @ValueSource(strings = {"-2000", "-1"})
+    void 범위_값_예외_테스트 (String number) {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> new Number(number));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"12B", "a"})
+    void 문자_예외_테스트 (String number) {
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> new Number(number));
     }
