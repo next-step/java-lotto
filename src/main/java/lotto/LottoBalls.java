@@ -3,7 +3,10 @@ package lotto;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.LottoNumber;
@@ -25,8 +28,11 @@ public class LottoBalls {
         Collections.shuffle(balls);
     }
 
-    public static List<LottoNumber> createLottoNumber() {
-        return balls.subList(0, NUMBER_OF_LOTTO_BALL);
+    public static Set<LottoNumber> createLottoNumber() {
+        Set<LottoNumber> lottoNumbers = new TreeSet<>(Comparator.comparingInt(LottoNumber::getValue));
+        lottoNumbers.addAll(balls.subList(0, NUMBER_OF_LOTTO_BALL));
+
+        return lottoNumbers;
     }
 
     public static List<LottoNumber> get() {

@@ -1,19 +1,16 @@
 package lotto.domain;
 
-
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class Lotto {
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(final List<LottoNumber> lottoNumbers) {
-        lottoNumbers.sort(Comparator.comparingInt(LottoNumber::get));
+    public Lotto(final Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int matchNumber(final List<LottoNumber> winningNumbers) {
+    public int matchNumber(final Set<LottoNumber> winningNumbers) {
         return (int) lottoNumbers.stream()
                 .filter(n -> winningNumbers.contains(n))
                 .count();
@@ -23,7 +20,7 @@ public class Lotto {
         return lottoNumbers.contains(bonusNumber);
     }
 
-    public List<LottoNumber> get() {
+    public Set<LottoNumber> get() {
         return this.lottoNumbers;
     }
 }

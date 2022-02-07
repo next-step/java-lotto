@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import lotto.LottoBalls;
 
 public class Lottos {
@@ -36,8 +37,8 @@ public class Lottos {
         }
     }
 
-    private static List<LottoNumber> createRandomNumbers() {
-        return new ArrayList<>(LottoBalls.createLottoNumber());
+    private static Set<LottoNumber> createRandomNumbers() {
+        return LottoBalls.createLottoNumber();
     }
 
     public List<Lotto> get() {
