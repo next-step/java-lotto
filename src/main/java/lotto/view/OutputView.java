@@ -4,9 +4,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import lotto.domain.Ticket;
 import lotto.domain.WinningResult;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoRepository;
 import lotto.domain.rank.Rank;
 
 public class OutputView {
@@ -25,11 +27,13 @@ public class OutputView {
         System.out.print(message);
     }
 
-    public void printPurchaseAmount(int ticketCount) {
+    public void printPurchaseAmount(Ticket ticket) {
+        int ticketCount = ticket.getBuyCount();
         printMessage(String.format(PURCHASE_AMOUNT_MANAGER_LOG, ticketCount) + ENTER);
     }
 
-    public void printPurchaseTicket(List<Lotto> lottos) {
+    public void printPurchaseTicket(LottoRepository lottoRepository) {
+        List<Lotto> lottos = lottoRepository.getLottos();
         for (Lotto lotto : lottos) {
             printMessage(lotto.getNumbers().stream()
                 .sorted(Comparator.comparing(LottoNumber::getNumber))

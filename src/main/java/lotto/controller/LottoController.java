@@ -19,8 +19,8 @@ public class LottoController {
         Ticket ticket = buyTicket();
         LottoRepository lottoRepository = LottoRepository.getLottosOf(new RandomLottoGenerator(), ticket.getBuyCount());
 
-        outputView.printPurchaseAmount(ticket.getBuyCount());
-        outputView.printPurchaseTicket(lottoRepository.getLottos());
+        outputView.printPurchaseAmount(ticket);
+        outputView.printPurchaseTicket(lottoRepository);
 
         WinningNumber winningNumber = makeWinningNumber();
 
