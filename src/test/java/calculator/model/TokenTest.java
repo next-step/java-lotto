@@ -2,7 +2,6 @@ package calculator.model;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-import calculator.model.Token;
 import org.junit.jupiter.api.Test;
 
 public class TokenTest {
