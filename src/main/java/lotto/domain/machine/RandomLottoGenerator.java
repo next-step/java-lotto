@@ -3,6 +3,8 @@ package lotto.domain.machine;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class RandomLottoGenerator implements LottoGenerator {
 
@@ -13,10 +15,10 @@ public class RandomLottoGenerator implements LottoGenerator {
 
     @Override
     public List<Integer> get() {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
-            numbers.add(i);
-        }
+        List<Integer> numbers = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+            .boxed()
+            .collect(Collectors.toList());
+
         Collections.shuffle(numbers);
         return new ArrayList<>(numbers.subList(FIRST_COUNT, LOTTO_NUMBER_COUNT));
     }
