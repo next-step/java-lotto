@@ -11,7 +11,7 @@ public class ValidateInput {
     }
 
     private String isEmptyOrNull(String input) {
-        if (Objects.isNull(input) || "".equals(input)) {
+        if (Objects.isNull(input) || input.isEmpty()) {
             input = "0";
         }
         return input;
