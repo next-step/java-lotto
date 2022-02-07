@@ -20,12 +20,16 @@ public class WinningNumber {
     }
 
     private void validateWinningNumber(Lotto lotto, LottoNumber bonus) {
-        if (lotto.getNumbers().stream()
-            .map(LottoNumber::getNumber)
-            .collect(Collectors.toList())
-            .contains(bonus.getNumber())) {
+        if (isDuplicateLottoNumber(lotto, bonus)) {
             throw new IllegalArgumentException(DUPLICATE_BONUS_BALL);
         }
+    }
+
+    private boolean isDuplicateLottoNumber(Lotto lotto, LottoNumber bonus) {
+        return lotto.getNumbers().stream()
+            .map(LottoNumber::getNumber)
+            .collect(Collectors.toList())
+            .contains(bonus.getNumber());
     }
 
     public Rank compareTo(List<Integer> targetLotto) {
