@@ -20,17 +20,18 @@ public class Adder {
             return x;
         }
 
-        List<Integer> convertInt = numbers.stream()
-            .map(Integer::parseInt)
-            .collect(Collectors.toList());
-
-        convertInt.stream()
-            .peek(InputValidException::inputNegativeValidation)
-            .collect(Collectors.toList());
+        List<Integer> convertInt = ConvertInt.convertInt(numbers);
+        validateNegativeNumber(ConvertInt.convertInt(numbers));
 
         return convertInt.stream()
             .mapToInt(Integer::intValue)
             .sum();
+    }
+
+    private static void validateNegativeNumber(List<Integer> convertInt) {
+        convertInt.stream()
+            .peek(InputValidException::inputNegativeValidation)
+            .collect(Collectors.toList());
     }
 
     private static int validateNumber(List<String> numbers) {
