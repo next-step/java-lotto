@@ -15,18 +15,18 @@ public class LottoController {
 
     public void start() {
         OutputView outputView = new OutputView();
-        Ticket ticket = buyTicket();
 
-        LottoRepository lottoManager = new LottoRepository(new RandomLottoGenerator(),
-            ticket.getBuyCount());
+        Ticket ticket = buyTicket();
+        LottoRepository lottoRepository = LottoRepository.getLottosOf(new RandomLottoGenerator(), ticket.getBuyCount());
 
         outputView.printPurchaseAmount(ticket.getBuyCount());
-        outputView.printPurchaseTicket(lottoManager.getLottos());
+        outputView.printPurchaseTicket(lottoRepository.getLottos());
 
         WinningNumber winningNumber = makeWinningNumber();
 
-        RankRepository ranks = RankRepository.getRanksOf(lottoManager, winningNumber);
-        WinningResult winningResult = new WinningResult(ranks.getRanks());
+        RankRepository rankRepository = RankRepository.getRanksOf(lottoRepository, winningNumber);
+
+        WinningResult winningResult = new WinningResult(rankRepository);
         winningResult.calculateYield(ticket.getBuyCash());
 
         outputView.printWinningResult(winningResult);
