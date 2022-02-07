@@ -39,11 +39,11 @@ public class LottoResultView {
         final LottoCalculator lottoCalculator = LottoCalculator.getInstance();
 
         for (Lotto lotto : userLottos.getLottos()) {
-            LottoResult lottoResult = lottoCalculator.countLotteryNumber(winningNumbers,
+            Ranking ranking = lottoCalculator.calculate(winningNumbers,
                 lotto.getLottoNumbers(),
                 bonusNumber);
 
-            updateResult(Ranking.judgeRanking(lottoResult));
+            updateResult(ranking);
         }
     }
 

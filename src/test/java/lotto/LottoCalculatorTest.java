@@ -2,13 +2,13 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.LottoCalculator;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
+import lotto.domain.Ranking;
 import org.junit.jupiter.api.Test;
 
 class LottoCalculatorTest {
@@ -26,10 +26,10 @@ class LottoCalculatorTest {
             .collect(Collectors.toList());
 
         // when
-        LottoResult lottoResult = calculator.countLotteryNumber(lotteryNumbers, userNumbers, bonusNum);
+        Ranking calculated = calculator.calculate(lotteryNumbers, userNumbers, bonusNum);
 
         // then
-        assertThat(lottoResult.getNormalSuccessCount()).isEqualTo(5);
-        assertThat(lottoResult.getBonusSuccessCount()).isFalse();
+        assertThat(calculated.getNormalSuccessNumber()).isEqualTo(5);
+        assertThat(calculated.isBonusSuccessNumber()).isFalse();
     }
 }

@@ -8,7 +8,7 @@ class RankingTest {
 
 
     @Test
-    void 우승순위_조회(){
+    void 우승순위_조회() {
         // given
         LottoResult lottoResult = new LottoResult(6, false);
 

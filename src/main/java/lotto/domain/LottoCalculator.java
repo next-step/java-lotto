@@ -1,14 +1,9 @@
 package lotto.domain;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class LottoCalculator {
 
-    private static final int STANDARD_NUMBER = 12;
-    private static final boolean MATCHED_BONUS_BALL = true;
-    private static final boolean NOT_MATCHED_BONUS_BALL = false;
     private static final LottoCalculator INSTANCE = new LottoCalculator();
 
     private LottoCalculator() {
@@ -18,23 +13,14 @@ public class LottoCalculator {
         return INSTANCE;
     }
 
-    public LottoResult countLotteryNumber(final List<LottoNumber> winningNumbers,
+    public Ranking calculate(final List<LottoNumber> winningNumbers,
         List<LottoNumber> userNumbers, LottoNumber bonusNumber) {
 
-        return new LottoResult(countNormalSuccessNumber(winningNumbers, userNumbers),
-            countBonusNumber(userNumbers, bonusNumber));
+        LottoResult result = new LottoResult(0, false);
+        LottoResult lottoResult = result.countLotteryNumber(winningNumbers, userNumbers,
+            bonusNumber);
+
+        return Ranking.judgeRanking(lottoResult);
     }
 
-    private int countNormalSuccessNumber(final List<LottoNumber> winningNumbers, List<LottoNumber> userNumbers) {
-        Set<LottoNumber> lottoDuplicate = new HashSet<>(winningNumbers);
-        lottoDuplicate.addAll(userNumbers);
-        return STANDARD_NUMBER - lottoDuplicate.size();
-    }
-
-    private boolean countBonusNumber(final List<LottoNumber> userNumbers, final LottoNumber bonusNumber) {
-        if (userNumbers.contains(bonusNumber)) {
-            return MATCHED_BONUS_BALL;
-        }
-        return NOT_MATCHED_BONUS_BALL;
-    }
 }

@@ -48,4 +48,8 @@ public enum Ranking {
     public int getWinnerPrice() {
         return winnerPrice;
     }
+
+    public boolean isBonusSuccessNumber() {
+        return bonusSuccessNumber;
+    }
 }
