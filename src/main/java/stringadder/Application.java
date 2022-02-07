@@ -8,12 +8,11 @@ import stringadder.view.UserResult;
 
 public class Application {
 
-    private static Adder adder;
     public static void main(String[] args) {
-        adder = new Adder();
+
         String userInput = UserConsole.inputString();
         List<String> splitResult = StringUtils.splitInput(userInput);
 
-        UserResult.result(adder.add(splitResult));
+        UserResult.result(Adder.add(splitResult));
     }
 }
