@@ -17,7 +17,7 @@ public class Parser {
 
     public List<Integer> customSplitStringToNumber(String splitedFormular, String delimiter) {
         validateFormular(Arrays.asList(splitedFormular.split(delimiter)));
-        return Arrays.asList(splitedFormular.split(delimiter)).stream()
+        return Arrays.stream(splitedFormular.split(delimiter))
             .map(Integer::parseInt).collect(
                 Collectors.toList());
     }
@@ -36,8 +36,8 @@ public class Parser {
     private void validateFormular(List<String> splitedFormular) {
         List<Integer> integeredFormular = stringListToInteger(splitedFormular);
 
-        for(int formularNumber : integeredFormular) {
-            if(formularNumber < 0) {
+        for (int formularNumber : integeredFormular) {
+            if (formularNumber < 0) {
                 throw new RuntimeException(OutputView.ERROR + OutputView.ERROR_NEGATIVE_NUMBER);
             }
         }
