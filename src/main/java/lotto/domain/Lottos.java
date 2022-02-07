@@ -36,7 +36,7 @@ public class Lottos {
         }
     }
 
-    private static List<String> createRandomNumbers() {
+    private static List<LottoNumber> createRandomNumbers() {
         return new ArrayList<>(LottoBalls.createLottoNumber());
     }
 

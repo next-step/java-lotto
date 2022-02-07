@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.domain.LottoNumber;
 
 public class LottoBalls {
 
@@ -14,29 +15,21 @@ public class LottoBalls {
     private static final int NUMBER_OF_LOTTO_BALL = 6;
 
 
-    private static final List<String> balls = new ArrayList<>(
+    private static final List<LottoNumber> balls = new ArrayList<>(
             Arrays.stream(IntStream.range(LOTTO_START_NUMBER, LOTTO_END_NUMBER + 1).toArray())
-                    .boxed()
-                    .map(String::valueOf)
+                    .mapToObj(String::valueOf)
+                    .map(LottoNumber::new)
                     .collect(Collectors.toList()));
-
-    public static boolean isContains(String value) {
-        return balls.contains(value);
-    }
-
-    public static boolean isContains(List<String> numbers) {
-        return balls.containsAll(numbers);
-    }
 
     public static void shuffle() {
         Collections.shuffle(balls);
     }
 
-    public static List<String> createLottoNumber() {
+    public static List<LottoNumber> createLottoNumber() {
         return balls.subList(0, NUMBER_OF_LOTTO_BALL);
     }
 
-    public static List<String> get() {
+    public static List<LottoNumber> get() {
         return balls;
     }
 }

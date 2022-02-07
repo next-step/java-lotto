@@ -6,24 +6,24 @@ import java.util.List;
 
 public class Lotto {
 
-    private final List<String> numbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(final List<String> numbers) {
-        numbers.sort(Comparator.comparingInt(Integer::parseInt));
-        this.numbers = numbers;
+    public Lotto(final List<LottoNumber> lottoNumbers) {
+        lottoNumbers.sort(Comparator.comparingInt(LottoNumber::get));
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public int matchNumber(final List<String> winningNumbers) {
-        return (int) numbers.stream()
+    public int matchNumber(final List<LottoNumber> winningNumbers) {
+        return (int) lottoNumbers.stream()
                 .filter(n -> winningNumbers.contains(n))
                 .count();
     }
 
-    public boolean containsBonusNumber(String bonusNumber) {
-        return numbers.contains(bonusNumber);
+    public boolean containsBonusNumber(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
-    public List<String> get() {
-        return this.numbers;
+    public List<LottoNumber> get() {
+        return this.lottoNumbers;
     }
 }

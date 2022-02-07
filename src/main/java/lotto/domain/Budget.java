@@ -11,7 +11,7 @@ public class Budget {
             this.value = Integer.parseInt(budget);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(
-                NOT_A_NUMBER_EXCEPTION_MESSAGE + "(Input:" + budget + ")");
+                    NOT_A_NUMBER_EXCEPTION_MESSAGE + "(Input:" + budget + ")");
         }
     }
 

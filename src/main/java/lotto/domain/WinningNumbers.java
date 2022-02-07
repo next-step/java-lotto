@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.LottoBalls;
 
 public class WinningNumbers {
 
@@ -12,17 +11,16 @@ public class WinningNumbers {
     private static final String DELIMITER_COMMA = ",";
     private static final int NUMBER_OF_LOTTO_BALL = 6;
 
-    private final List<String> values;
+    private final List<LottoNumber> lottoNumbers;
 
     public WinningNumbers(String inputWinningNumbers) {
         inputWinningNumbers = removeBlank(inputWinningNumbers);
         validateInputFormat(inputWinningNumbers);
-        final List<String> winningNumbers = splitNumber(inputWinningNumbers);
+        final List<LottoNumber> winningNumbers = convertToLottoNumbers(inputWinningNumbers);
 
         validateWinningNumberCount(winningNumbers);
-        validateWinningNumberRange(winningNumbers);
 
-        this.values = winningNumbers;
+        this.lottoNumbers = winningNumbers;
     }
 
     private String removeBlank(final String inputNumbers) {
@@ -39,26 +37,21 @@ public class WinningNumbers {
         return String.format("[0-9%s]+$", DELIMITER_COMMA);
     }
 
-    private List<String> splitNumber(final String winningNumbers) {
+    private List<LottoNumber> convertToLottoNumbers(final String winningNumbers) {
         String[] split = winningNumbers.split(DELIMITER_COMMA);
 
         return Arrays.stream(split)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
-    private void validateWinningNumberCount(final List<String> winningNumbers) {
+    private void validateWinningNumberCount(final List<LottoNumber> winningNumbers) {
         if (winningNumbers.size() != NUMBER_OF_LOTTO_BALL) {
             throw new IllegalArgumentException("당첨 번호는 6개 입니다.");
         }
     }
 
-    private void validateWinningNumberRange(final List<String> winningNumbers) {
-        if (!LottoBalls.isContains(winningNumbers)) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45 까지 입니다.");
-        }
-    }
-
-    public List<String> get() {
-        return this.values;
+    public List<LottoNumber> get() {
+        return this.lottoNumbers;
     }
 }

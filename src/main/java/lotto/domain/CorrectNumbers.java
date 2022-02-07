@@ -18,8 +18,9 @@ public class CorrectNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateDuplicateNumber(final WinningNumbers winningNumbers, final BonusNumber bonusNumber) {
-        final Set<String> numbers = new HashSet<String>() {
+    private void validateDuplicateNumber(final WinningNumbers winningNumbers,
+            final BonusNumber bonusNumber) {
+        final Set<LottoNumber> numbers = new HashSet<LottoNumber>() {
             {
                 addAll(winningNumbers.get());
                 add(bonusNumber.get());

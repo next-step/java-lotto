@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,14 +14,15 @@ class LottoBallsTest {
     @DisplayName("로또 번호는 1부터 45까지의 범위이다.")
     @Test
     void When_로또_공_생성_Then_범위는_1부터_45() {
-
         // when
-        final List<String> balls = LottoBalls.get();
+        final List<Integer> balls = LottoBalls.get().stream().
+                map(LottoNumber::get)
+                .collect(Collectors.toList());
 
         // then
         assertThat(balls.size()).isEqualTo(45);
         for (int i = 1; i <= 45; i++) {
-            assertThat(balls).contains(String.valueOf(i));
+            assertThat(balls).contains(i);
         }
     }
 
@@ -27,7 +30,7 @@ class LottoBallsTest {
     @Test
     void When_로또_번호_리스트_섞기_Then_섞기_전과_요소의_순서가_다름() {
         // given
-        final ArrayList<String> before = new ArrayList<>(LottoBalls.get());
+        final List<LottoNumber> before = new ArrayList<>(LottoBalls.get());
 
         // when
         LottoBalls.shuffle();
@@ -41,9 +44,9 @@ class LottoBallsTest {
     @Test
     void When_로또번호_생성_Then_로또볼_에서_6개를_뽑는다() {
         // when
-        List<String> lottoNumber = LottoBalls.createLottoNumber();
+        List<LottoNumber> lottoNumbers = LottoBalls.createLottoNumber();
 
         // then
-        assertThat(lottoNumber.size()).isEqualTo(6);
+        assertThat(lottoNumbers.size()).isEqualTo(6);
     }
 }

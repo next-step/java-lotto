@@ -35,8 +35,8 @@ class LottosTest {
         final List<Lotto> lottos = Lottos.createAutoLottos(new Budget("1000")).get();
 
         // then
-        List<String> expected = LottoBalls.createLottoNumber();
-        expected.sort(Comparator.comparingInt(Integer::parseInt));
+        List<LottoNumber> expected = LottoBalls.createLottoNumber();
+        expected.sort(Comparator.comparingInt(LottoNumber::get));
         assertThat(lottos.get(0).get()).isEqualTo(expected);
     }
 }
