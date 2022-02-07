@@ -17,6 +17,7 @@ class WinningResultTest {
     public void 당첨통계_맵핑_테스트() {
         //given
         List<Lotto> lottos = new ArrayList<>();
+
         Lotto lotto1 = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto lotto2 = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 7));
         Lotto lotto3 = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 17));
@@ -45,6 +46,7 @@ class WinningResultTest {
             Rank rank = winningNumber.compareTo(collect);
             ranks.add(rank);
         }
+
         WinningResult winningResult = new WinningResult(ranks);
 
         //then

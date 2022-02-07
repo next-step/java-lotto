@@ -8,6 +8,7 @@ import java.util.TreeMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import lotto.domain.rank.Rank;
+import lotto.domain.rank.RankRepository;
 
 public class WinningResult {
 
@@ -20,6 +21,10 @@ public class WinningResult {
 
     public WinningResult(List<Rank> ranks) {
         this.result = groupByRank(ranks);
+    }
+
+    public WinningResult(RankRepository rankRepository) {
+        this.result = groupByRank(rankRepository.getRanks());
     }
 
     private Map<Rank, Integer> groupByRank(List<Rank> ranks) {
