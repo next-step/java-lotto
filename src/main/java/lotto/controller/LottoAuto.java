@@ -7,7 +7,12 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoAuto {
-
+    private static LottoAuto lottoAuto = new LottoAuto();
+    private LottoAuto(){
+    }
+    public static LottoAuto getInstance(){
+        return lottoAuto;
+    }
     public void play() {
         LottoRules lottoRules = new LottoRules();
         User user = new User(OutputView.getLottoCount(InputView.getPrice() / lottoRules.getLottoPrice()),
