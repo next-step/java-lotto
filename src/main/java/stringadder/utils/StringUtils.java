@@ -1,6 +1,5 @@
 package stringadder.utils;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -40,7 +39,9 @@ public class StringUtils {
     private static String[] split(String input) {
         Matcher matcher = pattern.matcher(input);
         String[] tokens = null;
-        if (!matcher.find()) throw new IllegalArgumentException(ERROR_MESSAGE);
+        if (!matcher.find()) {
+            throw new IllegalArgumentException(ERROR_MESSAGE);
+        }
 
         String customDelimiter = matcher.group(SELECT_DELIMITER_INDEX);
         tokens = matcher.group(SELECT_VALUES_INDEX).split(customDelimiter);

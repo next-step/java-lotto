@@ -20,9 +20,9 @@ public class RankResult {
         return rankResult;
     }
 
-    public Money getTotalPrize(){
+    public Money getTotalPrize() {
         return new Money(rankResult.entrySet().stream()
-            .mapToInt(entry->entry.getKey().getPrize(entry.getValue()).getValue())
+            .mapToInt(entry -> entry.getKey().getPrize(entry.getValue()).getValue())
             .sum());
     }
 }

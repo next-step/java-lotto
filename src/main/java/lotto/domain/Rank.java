@@ -10,7 +10,7 @@ public enum Rank {
     THIRD(5, 1500000),
     FOURTH(4, 50000),
     FIFTH(3, 5000),
-    NOTHING(0,0);
+    NOTHING(0, 0);
 
 
     private final int matchCount;
@@ -22,20 +22,24 @@ public enum Rank {
         this.prize = new Money(prize);
     }
 
-    public static Rank countMatch(Winning winning, Lotto lotto){
-        int lottoCount = (int)winning.winningLottoNumber(lotto);
+    public static Rank countMatch(Winning winning, Lotto lotto) {
+        int lottoCount = (int) winning.winningLottoNumber(lotto);
         boolean bonusBallMatch = winning.bonusLottoNumber(lotto);
-        if(THIRD.match(lottoCount) && !bonusBallMatch) return THIRD;
-        return Arrays.stream(Rank.values()).filter(rank -> rank.match(lottoCount)).findFirst().orElse(NOTHING);
+        if (THIRD.match(lottoCount) && !bonusBallMatch) {
+            return THIRD;
+        }
+        return Arrays.stream(Rank.values()).filter(rank -> rank.match(lottoCount)).findFirst()
+            .orElse(NOTHING);
     }
 
-    public boolean match(int count){
+    public static boolean get(Rank rank) {
+        return rank != rank.NOTHING;
+    }
+
+    public boolean match(int count) {
         return matchCount == count;
     }
 
-    public static boolean get(Rank rank){
-        return rank!=rank.NOTHING;
-    }
     public int getMatchCount() {
         return matchCount;
     }
@@ -43,7 +47,8 @@ public enum Rank {
     public Money getPrize() {
         return prize;
     }
-    public Money getPrize(int hit){
+
+    public Money getPrize(int hit) {
         return new Money(prize.getValue() * hit);
     }
 }

@@ -24,7 +24,7 @@ public class LottoFullNumber {
 
     private void validateNonDuplication(List<LottoNumber> lottoFullNumberLengthSix) {
         Set<LottoNumber> LottoNumberSet = new HashSet<>(lottoFullNumberLengthSix);
-        if (LottoNumberSet.size() != LOTTO_NUMBER_SIZE){
+        if (LottoNumberSet.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(ERROR_MESSAGE);
         }
     }
@@ -36,13 +36,13 @@ public class LottoFullNumber {
             .collect(Collectors.toList());
     }
 
-    public long countMatch(LottoFullNumber lottoFullNumber){
+    public long countMatch(LottoFullNumber lottoFullNumber) {
         return this.lottoFullNumber.stream()
             .filter(lottoFullNumber::get)
             .count();
     }
 
-    public boolean get(LottoNumber lottoNumber){
+    public boolean get(LottoNumber lottoNumber) {
         return this.lottoFullNumber.contains(lottoNumber);
     }
 

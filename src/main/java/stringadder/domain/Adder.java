@@ -13,7 +13,7 @@ public class Adder {
     private static final int VALIDATE_NUMBER_TRUE = 0;
     private static final int VALIDATE_NUMBER_FALSE = -1;
 
-    public static int add(List<String> numbers){
+    public static int add(List<String> numbers) {
 
         int x = validateNumber(numbers);
         if (x != VALIDATE_NUMBER_FALSE) {
@@ -35,7 +35,7 @@ public class Adder {
     }
 
     private static int validateNumber(List<String> numbers) {
-        if(numbers.contains(BLANK) ||
+        if (numbers.contains(BLANK) ||
             numbers.contains(EMPTY_SPACE) ||
             numbers.contains(NULL)) {
             return VALIDATE_NUMBER_TRUE;

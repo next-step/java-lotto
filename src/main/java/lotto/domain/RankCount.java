@@ -13,15 +13,15 @@ public class RankCount {
         this.winning = winning;
     }
 
-    public HashMap<Rank, Integer> rankCount(){
+    public HashMap<Rank, Integer> rankCount() {
         HashMap<Rank, Integer> result = new HashMap<>();
-        for(Rank rank : Rank.values()){
+        for (Rank rank : Rank.values()) {
             result.put(rank, INITIAL_VALUE);
         }
 
-        for(Lotto lotto: lottos.lottos()){
+        for (Lotto lotto : lottos.lottos()) {
             Rank rank = Rank.countMatch(winning, lotto);
-            result.put(rank, result.get(rank)+1);
+            result.put(rank, result.get(rank) + 1);
         }
         return result;
     }
