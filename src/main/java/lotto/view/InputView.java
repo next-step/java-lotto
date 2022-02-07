@@ -13,7 +13,8 @@ public class InputView {
         try {
             price = Console.readLineInt();
         } catch (IllegalArgumentException exception) {
-            OutputView.printExceptionMessage(exception.getMessage());
+            OutputView.printExceptionMessage(OutputView.ERROR_MESSAGE + exception.getMessage());
+            System.exit(0);
         }
         return price;
     }
@@ -24,7 +25,8 @@ public class InputView {
         try {
             winningNumber = sc.nextLine();
         } catch (IllegalArgumentException exception) {
-            OutputView.printExceptionMessage(exception.getMessage());
+            OutputView.printExceptionMessage(OutputView.ERROR_MESSAGE + exception.getMessage());
+            System.exit(0);
         }
         return winningNumber;
     }
@@ -34,7 +36,8 @@ public class InputView {
         try {
             bonusNumber = Console.readLineInt();
         } catch (IllegalArgumentException exception) {
-            OutputView.printExceptionMessage(exception.getMessage());
+            OutputView.printExceptionMessage(OutputView.ERROR_MESSAGE + exception.getMessage());
+            System.exit(0);
         }
         return bonusNumber;
     }
