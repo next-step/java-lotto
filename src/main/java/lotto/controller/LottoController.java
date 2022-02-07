@@ -17,20 +17,21 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public void start() {
+        OutputView outputView = new OutputView();
         Ticket ticket = buyTicket();
 
         LottoRepository lottoManager = new LottoRepository(new RandomLottoGenerator(),
             ticket.getBuyCount());
 
-        OutputView.printPurchaseAmount(ticket.getBuyCount());
-        OutputView.printPurchaseTicket(lottoManager.getLottos());
+        outputView.printPurchaseAmount(ticket.getBuyCount());
+        outputView.printPurchaseTicket(lottoManager.getLottos());
 
         WinningNumber winningNumber = makeWinningNumber();
 
         WinningResult winningResult = new WinningResult(getRanksFrom(lottoManager, winningNumber));
         winningResult.calculateYield(ticket.getBuyCash());
 
-        OutputView.printWinningResult(winningResult);
+        outputView.printWinningResult(winningResult);
     }
 
     public Ticket buyTicket() {
@@ -68,5 +69,4 @@ public class LottoController {
 
         return ranks;
     }
-
 }

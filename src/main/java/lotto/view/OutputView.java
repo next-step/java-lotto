@@ -25,11 +25,11 @@ public class OutputView {
         System.out.print(message);
     }
 
-    public static void printPurchaseAmount(int ticketCount) {
+    public void printPurchaseAmount(int ticketCount) {
         printMessage(String.format(PURCHASE_AMOUNT_MANAGER_LOG, ticketCount) + ENTER);
     }
 
-    public static void printPurchaseTicket(List<Lotto> lottos) {
+    public void printPurchaseTicket(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             printMessage(lotto.getNumbers().stream()
                 .sorted(Comparator.comparing(LottoNumber::getNumber))
@@ -40,13 +40,13 @@ public class OutputView {
         printMessage(ENTER);
     }
 
-    public static void printWinningResult(WinningResult winningResult) {
+    public void printWinningResult(WinningResult winningResult) {
         printMessage(ENTER + WINNING_RESULT_HEAD_LOG + ENTER);
         printMatchCount(winningResult.getResult());
         printYield(winningResult.getYield());
     }
 
-    private static void printMatchCount(Map<Rank, Integer> result) {
+    private void printMatchCount(Map<Rank, Integer> result) {
         for (Rank rank : result.keySet()) {
             if (rank == Rank.NONE) {
                 continue;
@@ -55,7 +55,7 @@ public class OutputView {
         }
     }
 
-    private static void printCountByRank(Rank rank, int count) {
+    private void printCountByRank(Rank rank, int count) {
         int matchCount = rank.getMatchCount();
         long prize = rank.getPrize();
 
@@ -66,7 +66,7 @@ public class OutputView {
         printMessage(String.format(COUNT_MATCH, matchCount, prize, count) + ENTER);
     }
 
-    private static void printYield(float yield) {
+    private void printYield(float yield) {
         printMessage(String.format(YIELD, yield) + ENTER);
     }
 }
