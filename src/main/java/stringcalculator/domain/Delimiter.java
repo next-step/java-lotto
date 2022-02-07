@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class Delimiter {
 
+    private final String STARTSWITH_ENDSWITH_IS_NUMBER_EXCEPTION_MESSAGE = "구분자의 시작과 끝은 숫자일 수 없습니다.";
+
     private final String value;
 
     public Delimiter(String value) {
@@ -13,7 +15,7 @@ public class Delimiter {
 
     private void validateIsNumber(String delimiter) {
         if (validateFirstIsNumber(delimiter) || validateLastIsNumber(delimiter)) {
-            throw new IllegalArgumentException("구분자의 시작과 끝은 숫자일 수 없습니다.");
+            throw new IllegalArgumentException(STARTSWITH_ENDSWITH_IS_NUMBER_EXCEPTION_MESSAGE);
         }
     }
 

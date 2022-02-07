@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 public class ExpressionParser {
 
+    private static final String INVALID_EXPRESSION_FORMAT_EXCEPTION_MESSAGE = "구분자와 숫자만으로 이루어져야 합니다.";
+
     private String delimiters;
 
     public ExpressionParser(Delimiters delimiters) {
@@ -27,7 +29,7 @@ public class ExpressionParser {
 
     private void validateContainsOtherCharacter(String expression) {
         if (!expression.matches(getExpressionValidateRegex())) {
-            throw new IllegalArgumentException("구분자와 숫자만으로 이루어져야 합니다.");
+            throw new IllegalArgumentException(INVALID_EXPRESSION_FORMAT_EXCEPTION_MESSAGE);
         }
     }
 

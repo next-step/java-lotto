@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class InputView {
 
+    private static final String EMPTY_INPUT_EXCEPTION_MESSAGE = "입력은 공백일 수 없습니다.";
+
     public static String inputBudget() {
         System.out.println("구입금액을 입력해 주세요.");
         return input();
@@ -29,7 +31,7 @@ public class InputView {
 
     private static void validateBlank(final String input) {
         if (input.isEmpty()) {
-            throw new IllegalArgumentException("입력은 공백일 수 없습니다.");
+            throw new IllegalArgumentException(EMPTY_INPUT_EXCEPTION_MESSAGE);
         }
     }
 }
