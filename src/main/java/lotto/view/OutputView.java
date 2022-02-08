@@ -1,6 +1,7 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
+import java.util.List;
+import lotto.domain.LottoNumber;
 
 public class OutputView {
 
@@ -57,9 +58,9 @@ public class OutputView {
             "총 수익률은 " + earningRate + "입니다.(기준이 1이기 때문에 결과적으로 " + profitOrLoss + "이라는 의미임)");
     }
 
-    public static void printLottoNumber(Lotto lotto) {
-        for (int j = 0; j < lotto.getLottoList().size(); j++) {
-            System.out.print(lotto.getLottoList().get(j).getLottoNumber() + " ");
+    public static void printLottoNumber(List<LottoNumber> lottoNumbers) {
+        for (int j = 0; j < lottoNumbers.size(); j++) {
+            System.out.print(lottoNumbers.get(j).getLottoNumber() + " ");
         }
     }
 }

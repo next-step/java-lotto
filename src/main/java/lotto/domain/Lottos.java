@@ -28,9 +28,7 @@ public class Lottos {
         List<List<LottoNumber>> lottoLists = new ArrayList<>();
 
         for (int i = 0; i < lottoCount; i++) {
-            LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-            List<LottoNumber> lottoNumberList = lottoNumberGenerator.generate();
-            lottoLists.add(lottoNumberList);
+            lottoLists.add(LottoNumberGenerator.generate());
         }
 
         return lottoLists;
