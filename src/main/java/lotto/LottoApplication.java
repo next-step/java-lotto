@@ -16,9 +16,9 @@ public class LottoApplication {
     public static void main(String[] args) {
         Money money = getMoneyFromUser();
         LottoCount lottoCount = initializeCount(money);
-        OutputView.printLottoCount(lottoCount.count());
+        LottoMachine.showLottoCount(lottoCount);
         LottoTicket lottoTicket = LottoMachine.purchaseLotto(lottoCount);
-        OutputView.printLotto(lottoTicket.values());
+        LottoMachine.showLottoTicket(lottoTicket);
         WinningLotto winningLotto = getWinningLotto();
         ResultGroup resultGroup = LottoMachine.getResult(lottoTicket, winningLotto);
         ResultGroupDto resultGroupDto = new ResultGroupDto(resultGroup, money);

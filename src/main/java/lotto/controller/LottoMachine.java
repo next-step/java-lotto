@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -12,6 +13,7 @@ import lotto.domain.LottoTicket;
 import lotto.domain.ResultGroup;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class LottoMachine {
 
@@ -33,13 +35,29 @@ public class LottoMachine {
     }
 
     public static WinningLotto generateWinningLotto(String winningLottoLine) {
-        List<LottoNumber> lottoNumbers = Arrays.stream(winningLottoLine.split(WINNING_LOTTO_DELIMITER))
+        List<LottoNumber> lottoNumbers = Arrays.stream(
+                winningLottoLine.split(WINNING_LOTTO_DELIMITER))
             .map(LottoNumber::new)
             .collect(Collectors.toList());
         String bonusBall = InputView.getBonusBall();
         int parseBonus = Integer.parseInt(bonusBall);
         lottoNumbers.add(new LottoNumber(parseBonus));
         return new WinningLotto(lottoNumbers);
+    }
+
+    public static void showLottoCount(LottoCount lottoCount) {
+        OutputView.printLottoCount(lottoCount.count());
+    }
+
+    public static void showLottoTicket(LottoTicket lottoTicket) {
+        lottoTicket.values()
+            .stream()
+            .map(Lotto::values)
+            .forEach(LottoMachine::showEachLottoNumber);
+    }
+
+    private static void showEachLottoNumber(List<LottoNumber> lottoNumber) {
+        OutputView.printEachLotto(lottoNumber);
     }
 
     private static List<LottoNumber> generateLottoNumber() {

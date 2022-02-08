@@ -1,10 +1,10 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -33,6 +33,10 @@ public class Lotto {
         return lotto.contains(lottoNumber);
     }
 
+    public List<LottoNumber> values() {
+        return Collections.unmodifiableList(lotto);
+    }
+
     private void validateDuplicates(List<LottoNumber> lotto) {
         Set<LottoNumber> lottoNumbers = new HashSet<>(lotto);
         if (lottoIsDuplicate(lottoNumbers, lotto)) {
@@ -52,13 +56,5 @@ public class Lotto {
 
     private boolean lottoSizeNotValid() {
         return lotto.size() != LOTTO_SIZE;
-    }
-
-    @Override
-    public String toString() {
-        return lotto.stream()
-            .map(LottoNumber::value)
-            .map(String::valueOf)
-            .collect(Collectors.joining(", "));
     }
 }
