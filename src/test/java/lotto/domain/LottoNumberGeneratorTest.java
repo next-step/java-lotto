@@ -1,17 +1,17 @@
 package lotto.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoNumberGeneratorTest {
 
+    @DisplayName(value = "로또는 한 번에 6개씩 생성된다.")
     @Test
-    void 로또생성() {
+    void generatorLotto() {
         Lotto lottoNumbers = new LottoNumberGenerator().generate();
-//        for(int i =0; i< lottoNumbers.getLottoNumber().size(); i++) {
-//            System.out.println(lottoNumbers.);
-//        }
+        assertThat(lottoNumbers.getLottoNumber().size()).isEqualTo(6);
     }
+
 }
