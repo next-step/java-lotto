@@ -1,15 +1,17 @@
 package lotto;
 
 public class LottoAuto {
-
+    
     public void play() {
         LottoRules lottoRules = new LottoRules();
+        int lottoCount = InputView.getPrice() / lottoRules.LOTTO_PRICE;
         User user = new User(
-          OutputView.getLottoCount(InputView.getPrice() / lottoRules.getLottoPrice()), lottoRules);
+          OutputView.getLottoCount(lottoCount), lottoRules);
         OutputView.printLottos(user.getLottos());
         WinningNumber winningNumber = new WinningNumber(InputView.getWinningNumber(), lottoRules);
         winningNumber.setBonusBall(InputView.getBonusBall());
         user.setRanks(winningNumber);
-        OutputView.printResult(user.getRanks(), user.getCount() * lottoRules.getLottoPrice());
+        double reward = OutputView.printResult(user.getRanks());
+        OutputView.printYield(LottoRules.calculateYield(reward, user.getCount()));
     }
 }

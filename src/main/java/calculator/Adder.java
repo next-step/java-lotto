@@ -3,17 +3,17 @@ package calculator;
 import java.util.List;
 
 public class Adder {
-
-    private List<Token> tokens;
-
-    public Adder(List<Token> tokens) {
-        this.tokens = tokens;
+    
+    private final List<Operand> operands;
+    
+    public Adder(List<Operand> tokens) {
+        this.operands = tokens;
     }
-
+    
     public int calculate() {
-        return tokens.stream().mapToInt(Token::getOperand).sum();
+        return operands.stream().mapToInt(Operand::getOperand).sum();
     }
-
+    
     private int sum(int a, int b) {
         return a + b;
     }

@@ -2,39 +2,23 @@ package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import calculator.Parser;
-import org.junit.jupiter.api.DisplayName;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 public class ParserTest {
-
+    
     @Test
     void 기본구분자_테스트() {
-        Parser parser = new Parser("1,2:3");
-        assertThat(parser.getDelimiter()).isEqualTo(",|:");
+        assertThat(Parser.parseInput("1,2,3")).isEqualTo
+          (Arrays.stream(new String[]{"1", "2", "3"}).map(Operand::new)
+            .collect(Collectors.toList()));
     }
-
+    
     @Test
     void 커스텀구분자_테스트() {
-        Parser parser = new Parser("//;\n1;2;3");
-        //String customDelimiter=parser.findDelimiter();
-        assertThat(parser.getDelimiter()).isEqualTo(";");
+        assertThat(Parser.parseInput("//;\n1;2;3")).isEqualTo
+          (Arrays.stream(new String[]{"1", "2", "3"}).map(Operand::new)
+            .collect(Collectors.toList()));
     }
-
-    @DisplayName(value = "빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.")
-    @ParameterizedTest
-    @NullAndEmptySource
-    void emptyOrNull(final String text) {
-        Parser parser = new Parser (text);
-        assertThat(parser.getUserInput()).isEqualTo("0");
-    }
-
-    @Test
-    void 숫자_하나(){
-        Parser parser = new Parser("1");
-
-    }
-
 }
