@@ -37,7 +37,9 @@ public class Delimiter {
     }
 
     public static List<Integer> extractNumberFromExpression(String input) {
-        return convertOperandType(Arrays.asList(input.split(String.join("|", delimiters))));
+        final String joinedDelimiters = String.join("|", delimiters);
+        final List<String> splitResults = Arrays.asList(input.split(joinedDelimiters));
+        return convertOperandType(splitResults);
     }
 
     private static List<Integer> convertOperandType(List<String> tokens) {
