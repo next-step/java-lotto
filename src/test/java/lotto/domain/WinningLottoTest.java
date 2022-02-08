@@ -1,4 +1,4 @@
-package lotto.util;
+package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -10,7 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class LottoValidatorTest {
+class WinningLottoTest {
 
     private static Stream<Arguments> 유효한_당첨_번호인_경우() {
         return Stream.of(
@@ -23,7 +23,7 @@ class LottoValidatorTest {
     @MethodSource
     void 유효한_당첨_번호인_경우(int number, List<Integer> numbers) {
         assertThat(number).isEqualTo(
-            LottoValidator.validateBonus(Integer.toString(number), numbers));
+            new WinningLotto(numbers, number).getBonusNumber());
     }
 
     private static Stream<Arguments> 당첨_번호와_중복되는_경우() {
@@ -37,7 +37,7 @@ class LottoValidatorTest {
     @MethodSource
     void 당첨_번호와_중복되는_경우(int number, List<Integer> numbers) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> LottoValidator.validateBonus(Integer.toString(number), numbers))
+            .isThrownBy(() -> new WinningLotto(numbers, number))
             .withMessage("[ERROR] 당첨 번호와 중복된 값입니다. 다시 입력해주세요.");
     }
 }

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,7 +16,7 @@ public class Lotto {
         validateRange(numbers);
         validateDuplicateNumber(numbers);
         validateSize(numbers);
-        this.lottoNumbers = numbers;
+        this.lottoNumbers = new ArrayList<>(numbers);
     }
 
     public List<Integer> getLotto() {
@@ -32,11 +33,11 @@ public class Lotto {
             .count();
     }
 
-    private static void validateRange(final List<Integer> numbers) {
+    public static void validateRange(final List<Integer> numbers) {
         numbers.forEach(Lotto::validateRange);
     }
 
-    private static void validateRange(final int number) {
+    public static void validateRange(final int number) {
         if (number < MINIMUM_BALL_NUMBER || number > MAXIMUM_BALL_NUMBER) {
             throw new IllegalArgumentException(
                 "[ERROR] " + MINIMUM_BALL_NUMBER + "부터 " + MAXIMUM_BALL_NUMBER + "까지의 숫자만 입력해주세요.");

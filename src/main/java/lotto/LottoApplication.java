@@ -20,7 +20,7 @@ public class LottoApplication {
         ResultView.printLottos(lottos);
 
         final List<Integer> winningNumbers = InputView.inputLastWinningNumbers();
-        final Integer bonusNumber = InputView.inputBonusNumber(winningNumbers);
+        final Integer bonusNumber = InputView.inputBonusNumber();
 
         final LottoRaffle lottoRaffle = new LottoRaffle(
             new WinningLotto(winningNumbers, bonusNumber));
