@@ -19,7 +19,7 @@ public class DelimiterTokenizer {
         this.text = text;
     }
 
-    public List<String> getDelimiters() {
+    public List<String> parseDelimiters() {
         final List<String> delimiters = new ArrayList<>(Arrays.asList(COMMA, COLON));
         if (isCustomDelimiter()) {
             String customDelimiter = this.text.substring(
@@ -29,6 +29,10 @@ public class DelimiterTokenizer {
             delimiters.add(customDelimiter);
         }
         return delimiters;
+    }
+
+    private boolean isCustomDelimiter() {
+        return this.text.startsWith(DOUBLE_SLASH);
     }
 
     private int getCustomDelimiterEndIndex() {
@@ -42,25 +46,6 @@ public class DelimiterTokenizer {
         validateNewLineValue(customDelimiter);
     }
 
-    private void validateOverLengthValue(String customDelimiter) {
-        if (customDelimiter.length() > CUSTOM_DELIMITER_LENGTH_LIMIT) {
-            throw new IllegalArgumentException("커스텀 구분자의 길이가 1을 초과할 수 없습니다.");
-        }
-    }
-
-    private void validateNullValue(String customDelimiter) {
-        if (customDelimiter.isEmpty()
-            && (getCustomDelimiterEndIndex() == this.text.lastIndexOf(NEW_LINE))) {
-            throw new IllegalArgumentException("커스텀 구분자를 빈 값으로 사용할 수 없습니다.");
-        }
-    }
-
-    private void validateNewLineValue(String customDelimiter) {
-        if (customDelimiter.isEmpty()) {
-            throw new IllegalArgumentException("'\\n'를 구분자로 사용할 수 없습니다.");
-        }
-    }
-
     private void validateNumberValue(String customDelimiter) {
         try {
             Integer.parseInt(customDelimiter);
@@ -70,8 +55,22 @@ public class DelimiterTokenizer {
         }
     }
 
-    private boolean isCustomDelimiter() {
-        return this.text.startsWith(DOUBLE_SLASH);
+    private void validateOverLengthValue(String customDelimiter) {
+        if (customDelimiter.length() > CUSTOM_DELIMITER_LENGTH_LIMIT) {
+            throw new IllegalArgumentException("커스텀 구분자의 길이가 1을 초과할 수 없습니다.");
+        }
     }
 
+    private void validateNullValue(String customDelimiter) {
+        if (customDelimiter.isEmpty() && (getCustomDelimiterEndIndex() == this.text.lastIndexOf(
+            NEW_LINE))) {
+            throw new IllegalArgumentException("커스텀 구분자를 빈 값으로 사용할 수 없습니다.");
+        }
+    }
+
+    private void validateNewLineValue(String customDelimiter) {
+        if (customDelimiter.isEmpty()) {
+            throw new IllegalArgumentException("'\\n'를 구분자로 사용할 수 없습니다.");
+        }
+    }
 }
