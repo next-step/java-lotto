@@ -19,6 +19,6 @@ public class LottoNumberGenerator {
 
     public static Lotto generate() {
         Collections.shuffle(lottoList);
-        return  new Lotto(lottoList.stream().limit(LOTTO_MAX_SIZE).collect(Collectors.toSet()));
+        return new Lotto(lottoList.stream().limit(LOTTO_MAX_SIZE).collect(Collectors.toSet()));
     }
 }

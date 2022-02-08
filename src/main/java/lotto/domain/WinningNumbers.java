@@ -10,11 +10,15 @@ public class WinningNumbers {
     private LottoNumber bonusNumber;
 
     public WinningNumbers(List<LottoNumber> winningNumber, LottoNumber bonusNumber) {
+        validate(winningNumber, bonusNumber);
+        this.winningNumber = winningNumber;
+        this.bonusNumber = bonusNumber;
+    }
+
+    private void validate(List<LottoNumber> winningNumber, LottoNumber bonusNumber) {
         if (winningNumber.contains(bonusNumber)) {
             throw new IllegalArgumentException(ERROR_DISTINCT);
         }
-        this.winningNumber = winningNumber;
-        this.bonusNumber = bonusNumber;
     }
 
     public List<LottoNumber> getWinningNumber() {

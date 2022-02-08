@@ -5,9 +5,11 @@ import static lotto.view.OutputView.ERROR_WRONG_LOTTO_PRICE;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lotto.view.OutputView;
 
 public class Lottos {
 
+    private static final int ERROR_WRONG_LOTTO_PRICE = 0;
     private static final int LOTTO_PRICE = 1000;
 
     List<Lotto> lottoLists;
@@ -35,8 +37,8 @@ public class Lottos {
     }
 
     private void validateLottoPrice(int totalPrice) {
-        if (totalPrice % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException(ERROR_WRONG_LOTTO_PRICE);
+        if (totalPrice % LOTTO_PRICE != ERROR_WRONG_LOTTO_PRICE) {
+            throw new IllegalArgumentException(OutputView.ERROR_WRONG_LOTTO_PRICE);
         }
     }
     public int getLottoCount() {

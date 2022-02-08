@@ -53,10 +53,10 @@ public class LottoController {
     }
 
     private void statisticsProcess() {
-        LottoStatistics lottoStatistics = new LottoStatistics(winningNumbers,
-            lottoLists, lottoPrice);
+        LottoStatistics lottoStatistics = new LottoStatistics(winningNumbers, lottoLists);
 
         ResultView.printLottoStatistics(lottoStatistics.getResultStatistics(),
-            LottoEarningRate.getLottoEarningRate(lottoStatistics.getResultStatistics(), lottoPrice));
+            LottoEarningRate.getLottoEarningRate(lottoStatistics.getResultStatistics(),
+                lottoPrice));
     }
 }

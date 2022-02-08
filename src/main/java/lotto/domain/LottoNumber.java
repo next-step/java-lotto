@@ -10,10 +10,14 @@ public class LottoNumber {
     private int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
+        validate(lottoNumber);
+        this.lottoNumber = lottoNumber;
+    }
+
+    private void validate(int lottoNumber) {
         if (lottoNumber < MIN_NUMBER || lottoNumber > MAX_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1부터 45까지입니다");
         }
-        this.lottoNumber = lottoNumber;
     }
 
     @Override
