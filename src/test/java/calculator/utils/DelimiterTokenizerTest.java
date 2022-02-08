@@ -1,4 +1,4 @@
-package calculator.domain;
+package calculator.utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -20,7 +20,8 @@ class DelimiterTokenizerTest {
     @ParameterizedTest
     void 유효한_커스텀_구분자_포함해서_반환한다(String customDelimiter) {
         final String text = "//" + customDelimiter + "\n1:2a3";
-        assertThat(DelimiterTokenizer.getDelimiters(text)).isEqualTo(Arrays.asList(",", ":", customDelimiter));
+        assertThat(DelimiterTokenizer.getDelimiters(text)).isEqualTo(
+            Arrays.asList(",", ":", customDelimiter));
     }
 
     @ValueSource(strings = {"\n"})
