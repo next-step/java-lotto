@@ -17,16 +17,23 @@ class StringParserTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings={"//;\n1;2;3", "//!\n1!2!3"})
+    @ValueSource(strings = {"//;\n1;2;3", "//!\n1!2!3"})
     void 커스텀_구분자_테스트(String expression) {
         String[] splitExpression = StringParser.splitCustomDelimiter(expression);
         assertThat(splitExpression.length).isEqualTo(3);
     }
 
     @ParameterizedTest
-    @ValueSource(strings={"//\n1;2;3", "//1!2!3"})
+    @ValueSource(strings = {"//\n1;2;3", "//1!2!3"})
     void 커스텀_구분자_예외_테스트(String expression) {
         assertThatThrownBy(() -> StringParser.splitCustomDelimiter(expression))
             .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;2;3", "1:2:3"})
+    void 구분자_테스트(String expression) {
+        String[] splitExpression = StringParser.splitExpression(expression);
+        assertThat(splitExpression.length).isEqualTo(3);
     }
 }

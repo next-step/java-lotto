@@ -27,4 +27,8 @@ public class StringParser {
         String refinedExpression = matcher.group(REFINE_POSITION);
         return refinedExpression.split(customDelimiter);
     }
+
+    public static String[] splitExpression(String expression) {
+        return null;
+    }
 }
