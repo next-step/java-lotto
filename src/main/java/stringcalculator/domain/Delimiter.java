@@ -1,10 +1,10 @@
 package stringcalculator.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import stringcalculator.util.Converter;
 
 public class Delimiter {
@@ -15,8 +15,9 @@ public class Delimiter {
     private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
     private static final String[] DEFAULT_DELIMITER = new String[]{",", ":"};
 
-    private static final List<String> delimiters = new ArrayList<>(
-        Arrays.asList(DEFAULT_DELIMITER));
+
+    private static final List<String> delimiters = Arrays.stream(DEFAULT_DELIMITER).collect(
+        Collectors.toList());
 
     public Delimiter() {
     }
