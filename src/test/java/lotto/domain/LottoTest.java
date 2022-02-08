@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
@@ -22,10 +23,10 @@ public class LottoTest {
 
     @Test
     void 중복된_숫자를_가질_수_없다() {
-        Set<LottoNumber> lottoNumbers = Arrays.stream(new int[]{1, 1, 2, 3, 4, 5})
+        List<LottoNumber> lottoNumbers = Arrays.stream(new int[]{1, 1, 2, 3, 4, 5})
             .boxed()
             .map(LottoNumber::new)
-            .collect(Collectors.toSet());
+            .collect(Collectors.toList());
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
             .isInstanceOf(IllegalArgumentException.class);
     }
