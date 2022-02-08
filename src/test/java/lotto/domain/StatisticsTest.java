@@ -10,30 +10,30 @@ class StatisticsTest {
     @DisplayName(value = "로또에서 3개를 맞추면 5등이다.")
     @Test
     void correctThreeFifthGrade() {
-        assertThat(Statistics.getRank(3)).isEqualTo(Statistics.FIFTH);
+        assertThat(Rank.getRank(3)).isEqualTo(Rank.FIFTH);
     }
 
     @DisplayName(value = "로또에서 4개를 맞추면 4등이다.")
     @Test
     void correctFourFourthGrade() {
-        assertThat(Statistics.getRank(4)).isEqualTo(Statistics.FOURTH);
+        assertThat(Rank.getRank(4)).isEqualTo(Rank.FOURTH);
     }
 
     @DisplayName(value = "로또에서 5개를 맞추면 3등이다.")
     @Test
     void correctFiveThird() {
-        assertThat(Statistics.getRank(5)).isEqualTo(Statistics.THIRD);
+        assertThat(Rank.getRank(5)).isEqualTo(Rank.THIRD);
     }
 
     @DisplayName(value = "로또에서 4개와 보너스를 맞추면 2등이다.")
     @Test
     void correctFourSecond() {
-        assertThat(Statistics.getRank(7)).isEqualTo(Statistics.SECOND);
+        assertThat(Rank.getRank(7)).isEqualTo(Rank.SECOND);
     }
 
     @DisplayName(value = "로또에서 6개를 맞추면 1등이다.")
     @Test
     void correctSixFirst() {
-        assertThat(Statistics.getRank(6)).isEqualTo(Statistics.FIRST);
+        assertThat(Rank.getRank(6)).isEqualTo(Rank.FIRST);
     }
 }

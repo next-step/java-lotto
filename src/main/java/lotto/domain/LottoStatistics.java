@@ -11,7 +11,7 @@ public class LottoStatistics {
     private static final int MIN_WIN_COUNT = 3;
     private final WinningNumbers winningNumbers;
     private final List<List<LottoNumber>> lottoList;
-    private final List<Statistics> resultStatistics;
+    private final List<Rank> resultStatistics;
     private final int lottoPrice;
 
     public LottoStatistics(WinningNumbers winningNumbers, List<List<LottoNumber>> lottoList, int lottoPrice) {
@@ -35,15 +35,15 @@ public class LottoStatistics {
         }
 
         if (matchBonusNumber(count, lottoNumberList)) {
-            resultStatistics.add(Statistics.SECOND);
+            resultStatistics.add(Rank.SECOND);
         } else {
-            resultStatistics.add(Statistics.getRank(count));
+            resultStatistics.add(Rank.getRank(count));
         }
     }
 
     public String getLottoEarningRate() {
         double totalPrice = 0;
-        for (Statistics statistics : resultStatistics) {
+        for (Rank statistics : resultStatistics) {
             totalPrice += statistics.getMoney();
         }
         return String.format("%.2f",totalPrice / lottoPrice);
@@ -62,7 +62,7 @@ public class LottoStatistics {
             .collect(Collectors.toList()).size();
     }
 
-    public List<Statistics> getResultStatistics() {
+    public List<Rank> getResultStatistics() {
         return Collections.unmodifiableList(resultStatistics);
     }
 }

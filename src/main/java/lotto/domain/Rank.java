@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public enum Statistics {
+public enum Rank {
     FIRST(6, 2000000000),
     SECOND(7, 30000000),
     THIRD(5, 1500000),
@@ -25,19 +25,19 @@ public enum Statistics {
     private final int grade;
     private final int money;
 
-    Statistics(int grade, int money) {
+    Rank(int grade, int money) {
         this.grade = grade;
         this.money = money;
     }
 
-    public static Statistics getRank(int numberOfMatch) {
+    public static Rank getRank(int numberOfMatch) {
         return Arrays.stream(values())
             .filter(statistic -> statistic.grade == numberOfMatch)
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException());
     }
 
-    public static int getCount(List<Statistics> statistics, int matchCount) {
+    public static int getCount(List<Rank> statistics, int matchCount) {
         return statistics.stream().filter(x -> x.grade == matchCount).collect(Collectors.toList())
             .size();
     }
