@@ -11,18 +11,16 @@ public class Calculator {
     }
 
     public int add(String text) {
-        if (isNullAndEmptyText(text)) {
+        if (Objects.isNull(text) || text.isEmpty()) {
             return INTEGER_DEFAULT_VALUE;
         }
 
         final DelimiterTokenizer delimiterTokenizer = new DelimiterTokenizer(text);
-        final Parser parser = new Parser(text, delimiterTokenizer.getDelimiters());
+        final Parser parser = new Parser(text, delimiterTokenizer.parseDelimiters());
         final List<Integer> numbers = parser.splitNumbersByDelimiter();
-        return numbers.stream().reduce(INTEGER_DEFAULT_VALUE, (cum, value) -> cum + value);
-    }
-
-    public boolean isNullAndEmptyText(String text) {
-        return Objects.isNull(text) || text.isEmpty();
+        return numbers.stream()
+            .mapToInt(Integer::valueOf)
+            .sum();
     }
 }
 
