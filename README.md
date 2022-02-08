@@ -49,13 +49,13 @@
 - [x] `.subList()`는 메모리 누수 위험이 있다. `.stream().limit()`을 사용해보자.
 - [x] IntStream.rangeClosed 사용해보자.
 - [x] 번호 생성의 책임은 다른 객체에 위임해보기.
-- [ ] 객체를 기능별로 나눠 객체의 책임과 역할을 먼저 구현을 하고, 객체들끼리 통신하게 코드를 작성하자.
+- [x] 객체를 기능별로 나눠 객체의 책임과 역할을 먼저 구현을 하고, 객체들끼리 통신하게 코드를 작성하자.
   - [x] LottoMachine 싱글턴으로 만들기
   - [x] Price (VO)
   - [x] Lottos를 LottoTicket 과 LottoTicketGenerator로 분리하기
     - [x] LottoTicketGenerator
     - [x] LottoTicket
-  - [ ] LottoMachine.calculateWinningResult 메서드 
+  - [x] LottoMachine.calculateWinningResult 메서드 
     - [x] WinningNumber (VO)
     - [x] LottoMachine에서 lottoPrice, lottoTicket 상태 유지되지 않게 구조 변경
     - [x] LottoStatistics 상태 유지되지 않게 구조 변경
