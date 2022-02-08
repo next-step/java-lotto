@@ -58,7 +58,7 @@
   - [ ] LottoMachine.calculateWinningResult 메서드 
     - [x] WinningNumber (VO)
     - [x] LottoMachine에서 lottoPrice, lottoTicket 상태 유지되지 않게 구조 변경
-    - [ ] LottoStatistics
+    - [x] LottoStatistics 상태 유지되지 않게 구조 변경
 - [ ] 보너스 볼 매칭에 대한 구현이 빠져 있다.
 - [x] `.collect(Collectors.toList()).size();` 보다는 `stream count` 지향하자.
 - [x] 불필요한 선언이 있다. 메서드에서 로컬변수로 처리해보자.
