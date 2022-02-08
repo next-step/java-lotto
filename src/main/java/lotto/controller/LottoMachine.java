@@ -29,7 +29,7 @@ public class LottoMachine {
         return lottoMachine;
     }
 
-    public void start() {
+    public void run() {
         purchaseLotto();
 
         lottoCountProcess();
