@@ -14,7 +14,7 @@ public class Calculator {
     public Calculator() {
     }
 
-    public int calculate(String expression) {
+    public static int calculate(String expression) {
         if (isEmpty(expression)) {
             return 0;
         }
@@ -26,11 +26,11 @@ public class Calculator {
         return numbers.sum();
     }
 
-    private boolean isEmpty(String expression) {
+    private static boolean isEmpty(String expression) {
         return expression.trim().length() == 0 || expression.isEmpty();
     }
 
-    private String[] splitExpression(String expression) {
+    private static String[] splitExpression(String expression) {
         if (expression.startsWith(CUSTOM_PREFIX)) {
             return StringParser.splitCustomDelimiter(expression);
         }
