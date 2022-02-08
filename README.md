@@ -50,10 +50,12 @@
 - [x] IntStream.rangeClosed 사용해보자.
 - [x] 번호 생성의 책임은 다른 객체에 위임해보기.
 - [ ] 객체를 기능별로 나눠 객체의 책임과 역할을 먼저 구현을 하고, 객체들끼리 통신하게 코드를 작성하자.
+  - [x] LottoMachine 싱글턴으로 만들기
+  - [x] VO 
+    - [x] Price
 - [ ] 보너스 볼 매칭에 대한 구현이 빠져 있다.
 - [x] `.collect(Collectors.toList()).size();` 보다는 `stream count` 지향하자.
 - [x] 불필요한 선언이 있다. 메서드에서 로컬변수로 처리해보자.
-
 
 
 ## multiple authors
