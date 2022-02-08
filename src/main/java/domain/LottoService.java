@@ -16,14 +16,27 @@ public class LottoService {
     }
 
     public LottoPrice inputPrice() {
-        LottoPrice lottoPrice = new LottoPrice(inputView.inputPurchasePrice());
-        resultView.printLottoCount(lottoPrice.lottoCount());
-        return lottoPrice;
+        return new LottoPrice(inputView.inputPurchasePrice());
     }
 
-    public LottoTickets purchaseLotto(LottoPrice lottoPrice) {
+    public void inputManualLotto(LottoPrice lottoPrice) {
+        lottoPrice.manualLottoCount(inputView.inputManualLottoCount());
+    }
+
+    public LottoTickets purchaseManualLotto(LottoPrice lottoPrice) {
+        inputManualLotto(lottoPrice);
+        inputView.inputManualLottoNumber();
         LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.readyLottoTicket(lottoPrice.lottoCount());
+        for (int i = 0; i < lottoPrice.getManualLottoCount(); i++) {
+            lottoTickets.addLottoTicket(new Lotto(inputView::inputLotto));
+        }
+        return lottoTickets;
+    }
+
+
+    public LottoTickets purchaseAutoLotto(LottoTickets lottoTickets, LottoPrice lottoPrice) {
+        lottoTickets.readyLottoTicket(lottoPrice.getAutoLottoCount());
+        resultView.printLottoCount(lottoPrice.getManualLottoCount(), lottoPrice.getAutoLottoCount());
         showAllLottoTickets(lottoTickets);
         return lottoTickets;
     }
