@@ -6,17 +6,21 @@ import java.util.List;
 
 public class Lotto {
 
+    private static final int LOTTO_NUMBER_CONDITION = 6;
+    private static final String LOTTO_NUMBER_VALIDATION_MESSAGE = "로또는 6개의 숫자입니다";
+
     private final List<Integer> numbers;
 
-    public Lotto(LottoRules lottoRules) {
-        List<Integer> numbers = new ArrayList<>();
-        List<Integer> lottoNum = lottoRules.getLottoNums();
-        Collections.shuffle(lottoNum);
-        for (int i = 0; i < lottoRules.getLottoCount(); i++) {
-            numbers.add(lottoNum.get(i));
+    public Lotto(List<Integer> lottoNumbers) {
+        validateLotto(lottoNumbers);
+        Collections.sort(lottoNumbers);
+        this.numbers = new ArrayList<>(lottoNumbers);
+    }
+
+    private void validateLotto(List<Integer> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_CONDITION) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_VALIDATION_MESSAGE);
         }
-        Collections.sort(numbers);
-        this.numbers = numbers;
     }
 
     public List<Integer> getNumbers() {
