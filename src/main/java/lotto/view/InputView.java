@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.List;
 import java.util.Scanner;
+import lotto.domain.WinningLotto;
 import lotto.util.InputValidator;
 import lotto.util.MoneyValidator;
 
@@ -32,13 +33,14 @@ public class InputView {
         }
     }
 
-    public static Integer inputBonusNumber() {
+    public static void inputBonusNumber(WinningLotto winningLotto) {
         try {
             System.out.println("보너스 볼을 입력해주세요.");
-            return InputValidator.parseToInt(SCANNER.nextLine());
+            int bonusNumber = InputValidator.parseToInt(SCANNER.nextLine());
+            winningLotto.setBonusNumber(bonusNumber);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return inputBonusNumber();
+            inputBonusNumber(winningLotto);
         }
     }
 }

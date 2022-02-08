@@ -16,15 +16,14 @@ public class LottoApplication {
         final int lottoCount = money / 1000;
         ResultView.printLottoCount(lottoCount);
 
-        final Lottoes lottos = new Lottoes(lottoCount);
-        ResultView.printLottos(lottos);
+        final Lottoes lottoes = new Lottoes(lottoCount);
+        ResultView.printLottos(lottoes);
 
-        final List<Integer> winningNumbers = InputView.inputLastWinningNumbers();
-        final Integer bonusNumber = InputView.inputBonusNumber();
+        final WinningLotto winningLotto = new WinningLotto(InputView.inputLastWinningNumbers());
+        InputView.inputBonusNumber(winningLotto);
 
-        final LottoRaffle lottoRaffle = new LottoRaffle(
-            new WinningLotto(winningNumbers, bonusNumber));
-        lottoRaffle.raffle(lottos);
+        final LottoRaffle lottoRaffle = new LottoRaffle(winningLotto);
+        lottoRaffle.raffle(lottoes);
         final LottoResult lottoResult = lottoRaffle.getResult();
 
         double yield = YieldCalculator.calculateYield(lottoResult, money);
