@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 import lotto.util.LottoValidator;
 import lotto.util.MoneyValidator;
+import lotto.util.Validator;
 
 public class InputView {
 
@@ -25,7 +26,7 @@ public class InputView {
     public static List<Integer> inputLastWinningNumbers() {
         try {
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-            return LottoValidator.validateNumbers(SCANNER.nextLine());
+            return Validator.splitInput(SCANNER.nextLine());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputLastWinningNumbers();

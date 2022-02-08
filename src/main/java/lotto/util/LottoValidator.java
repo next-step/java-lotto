@@ -1,8 +1,6 @@
 package lotto.util;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoValidator extends Validator {
 
@@ -14,40 +12,11 @@ public class LottoValidator extends Validator {
         super();
     }
 
-    public static List<Integer> validateNumbers(String input) {
-        final List<Integer> winningNumbers = Arrays.stream(input.split(","))
-            .map(number -> parseToInt(number.trim())).collect(Collectors.toList());
-
-        validateRange(winningNumbers);
-        validateDuplicateWinning(winningNumbers);
-        validateSize(winningNumbers);
-
-        return winningNumbers;
-    }
-
     public static int validateBonus(String input, List<Integer> winningNumbers) {
         final int bonusNumber = parseToInt(input);
         validateRange(bonusNumber);
         validateDuplicateBonus(bonusNumber, winningNumbers);
         return bonusNumber;
-    }
-
-    private static void validateDuplicateWinning(List<Integer> winningNumbers) {
-        final List<Integer> deleteDuplicateNumbers = winningNumbers.stream().distinct()
-            .collect(Collectors.toList());
-        if (winningNumbers.size() != deleteDuplicateNumbers.size()) {
-            throw new IllegalArgumentException("[ERROR] 중복되는 숫자가 있습니다.");
-        }
-    }
-
-    private static void validateSize(List<Integer> winningNumbers) {
-        if (winningNumbers.size() != LOTTO_NUMBERS_SIZE) {
-            throw new IllegalArgumentException("[ERROR] 번호는 " + LOTTO_NUMBERS_SIZE + "개여야 합니다.");
-        }
-    }
-
-    private static void validateRange(List<Integer> winningNumbers) {
-        winningNumbers.forEach(LottoValidator::validateRange);
     }
 
     private static void validateRange(int number) {
