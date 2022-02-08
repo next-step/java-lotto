@@ -1,9 +1,8 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
+import lotto.util.NumberGenerator;
 
 public class Lotto {
 
@@ -14,24 +13,12 @@ public class Lotto {
     private final List<Integer> lottoList;
 
     public Lotto() {
-        this.lottoList = generatorLotto();
+        this.lottoList = NumberGenerator.of(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER, LOTTO_MAX_SIZE)
+            .getNumberList();
     }
 
     public List<Integer> getLottoList() {
         return Collections.unmodifiableList(lottoList);
     }
 
-    private int generatorNumber(int min, int max) {
-        return new Random().nextInt(max + min) + max;
-    }
-
-    private List<Integer> generatorLotto() {
-        List<Integer> lottoList = new ArrayList<>();
-
-        while (lottoList.size() < LOTTO_MAX_SIZE) {
-            lottoList.add(generatorNumber(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER));
-        }
-
-        return lottoList;
-    }
 }
