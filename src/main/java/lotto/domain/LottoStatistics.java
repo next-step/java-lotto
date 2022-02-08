@@ -11,23 +11,20 @@ public class LottoStatistics {
 
     private final WinningNumbers winningNumbers;
     private final List<Lotto> lottoList;
-    private final List<Rank> resultStatistics;
-    private final int lottoPrice;
+    private List<Rank> resultStatistics = new ArrayList<>();
 
-    public LottoStatistics(WinningNumbers winningNumbers, List<Lotto> lottoList,
-        int lottoPrice) {
+    public LottoStatistics(WinningNumbers winningNumbers, List<Lotto> lottoList) {
         this.winningNumbers = winningNumbers;
         this.lottoList = lottoList;
-        this.lottoPrice = lottoPrice;
-        this.resultStatistics = new ArrayList<>();
-        compareNumber();
+        this.resultStatistics = compareNumber();
     }
 
-    private void compareNumber() {
+    private List<Rank> compareNumber() {
         for (int i = 0; i < lottoList.size(); i++) {
             int count = matchWinningNumbers(lottoList.get(i));
             resultStatistics.add(getRank(count, lottoList.get(i)));
         }
+        return resultStatistics;
     }
 
     private Rank getRank(final int count, final Lotto lottoNumberList) {
