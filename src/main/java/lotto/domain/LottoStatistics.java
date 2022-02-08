@@ -26,12 +26,21 @@ public class LottoStatistics {
         compareNumber();
     }
 
-    public static LottoStatistics of (List<Integer> winningNumbers, int bonusNumber, LottoTicket lottoTicket) {
+    public static LottoStatistics of(List<Integer> winningNumbers, int bonusNumber,
+        LottoTicket lottoTicket) {
         return new LottoStatistics(winningNumbers, bonusNumber, lottoTicket);
     }
 
     public List<Statistics> getResultStatistics() {
         return Collections.unmodifiableList(resultStatistics);
+    }
+
+    public String getLottoEarningRate() {
+        double totalPrice = 0;
+        for (Statistics statistics : resultStatistics) {
+            totalPrice += statistics.getMoney();
+        }
+        return String.format("%.2f", totalPrice / lottoPrice);
     }
 
     private void compareNumber() {
@@ -53,25 +62,17 @@ public class LottoStatistics {
         }
     }
 
-    public String getLottoEarningRate() {
-        double totalPrice = 0;
-        for (Statistics statistics : resultStatistics) {
-            totalPrice += statistics.getMoney();
-        }
-        return String.format("%.2f",totalPrice / lottoPrice);
-    }
-
-    private boolean matchBonusNumber(final int count, final Lotto lotto) {
-        return count == MATCH_FOUR && lotto.getLottoList().contains(bonusNumber);
+    private int matchWinningNumbers(final Lotto lotto) {
+        return lotto.getLottoList().stream().filter(x -> isWinningNumber(x))
+            .collect(Collectors.toList()).size();
     }
 
     private boolean isWinningNumber(final int number) {
         return winningNumbers.contains(number);
     }
 
-    private int matchWinningNumbers(final Lotto lotto) {
-        return lotto.getLottoList().stream().filter(x -> isWinningNumber(x))
-            .collect(Collectors.toList()).size();
+    private boolean matchBonusNumber(final int count, final Lotto lotto) {
+        return count == MATCH_FOUR && lotto.getLottoList().contains(bonusNumber);
     }
 
 }
