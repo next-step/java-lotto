@@ -15,10 +15,7 @@ public class LottoMachine {
 
     private static LottoMachine lottoMachine = null;
 
-    private Price lottoPrice;
-    private List<Lotto> lottoTicket;
-    private List<Integer> winningNumberList;
-    private int bonusBall;
+    private LottoStatistics lottoStatistics;
 
     private LottoMachine() {}
 
@@ -30,25 +27,27 @@ public class LottoMachine {
     }
 
     public void run() {
-        purchaseLotto();
-        calculateWinningResult();
-        printResult();
+        final LottoTicket lottoTicket = purchaseLotto(getLottoPrice());
+        calculateWinningResult(lottoTicket);
+//        printResult();
     }
 
-    public void purchaseLotto() {
-        Price lottoPrice = Price.from(getLottoPrice());
+    public LottoTicket purchaseLotto(int price) {
+        final Price lottoPrice = Price.from(price);
+        final LottoTicket lottoTicket = convertPriceToLotto(lottoPrice);
 
-        lottoTicket = convertPriceToLotto(lottoPrice);
+        ResultView.printLottoNumbers(lottoTicket.getLottoTicket());
+        OutputView.printLottoCount(lottoTicket.getLottoTicket().size());
 
-        ResultView.printLottoNumbers(lottoTicket);
-        OutputView.printLottoCount(lottoTicket.size());
+        return lottoTicket;
     }
 
-    public void calculateWinningResult() {
-        WinningNumbers winningNumbers = WinningNumbers.from(getWinningNumber());
+    public void calculateWinningResult(LottoTicket lottoTicket) {
+        final List<Integer> winningNumberList = WinningNumbers.from(getWinningNumber()).getWinningNumbers();
+        final int bonusBall = getBonusBall();
 
-        winningNumberList = winningNumbers.getWinningNumbers();
-        bonusBall = getBonusBall();
+        lottoStatistics = new LottoStatistics(winningNumberList, bonusBall,
+            lottoTicket.getLottoTicket(), lottoTicket.getLottoTicketPrice());
     }
 
     public void printResult() {
@@ -60,8 +59,8 @@ public class LottoMachine {
         return InputView.readPrice();
     }
 
-    private List<Lotto> convertPriceToLotto(Price lottoPrice) {
-        return LottoTicket.from(lottoPrice.getValue()).getLottoTicket();
+    private LottoTicket convertPriceToLotto(Price lottoPrice) {
+        return LottoTicket.from(lottoPrice.getValue());
     }
 
     private List<Integer> getWinningNumber() {
@@ -75,9 +74,6 @@ public class LottoMachine {
     }
 
     private void statisticsProcess() {
-        LottoStatistics lottoStatistics = new LottoStatistics(winningNumberList, bonusBall,
-            lottoTicket, lottoPrice.getValue());
-
         ResultView.printLottoStatistics(lottoStatistics.getResultStatistics(),
             lottoStatistics.getLottoEarningRate());
     }

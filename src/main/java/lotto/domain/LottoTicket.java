@@ -9,10 +9,12 @@ public class LottoTicket {
     private static final int LOTTO_PRICE = 1_000;
 
     final List<Lotto> lottoTicket;
+    final int price;
 
-    private LottoTicket(int totalPrice) {
-        final int lottoCount = convertPriceToCount(totalPrice);
+    private LottoTicket(int price) {
+        final int lottoCount = convertPriceToCount(price);
 
+        this.price = price;
         this.lottoTicket = LottoTicketGenerator.from(lottoCount).getLottoTicket();
     }
 
@@ -26,6 +28,10 @@ public class LottoTicket {
 
     public List<Lotto> getLottoTicket() {
         return Collections.unmodifiableList(lottoTicket);
+    }
+
+    public int getLottoTicketPrice() {
+        return price;
     }
 
 }
