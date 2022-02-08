@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoRules {
@@ -9,6 +10,8 @@ public class LottoRules {
     private final static int LAST_NUM = 45;
     private final static int LOTTO_COUNT = 6;
     private final static int LOTTO_PRICE = 1000;
+    private final static int START_INDEX = 0;
+    private final static int LAST_INDEX = 6;
 
     private final List<Integer> lottoNums;
 
@@ -20,8 +23,9 @@ public class LottoRules {
         this.lottoNums = lottoNums;
     }
 
-    public List<Integer> getLottoNums() {
-        return lottoNums;
+    public List<Integer> makeLottoNums() {
+        Collections.shuffle(lottoNums);
+        return lottoNums.subList(START_INDEX, LAST_INDEX);
     }
 
     public int getLottoPrice() {
