@@ -5,17 +5,17 @@ import static stringcalculator.domain.Calculator.calculator;
 import java.util.List;
 import stringcalculator.domain.Number;
 import stringcalculator.domain.Separator;
-import stringcalculator.domain.UserInput;
+import stringcalculator.domain.StringNumbers;
 import stringcalculator.view.InputView;
 import stringcalculator.view.ResultView;
 
 public class StringCalculator {
 
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-        final UserInput userInput = new UserInput(inputView.inputCalculateString());
+        final InputView inputView = new InputView();
+        final StringNumbers userInput = new StringNumbers(inputView.inputCalculateString());
 
-        final Separator separator = new Separator(userInput.getUserInput());
+        final Separator separator = new Separator(userInput.getStringNumber());
 
         final List<String> userNumbers = separator.split();
         final Number numbers = new Number(userNumbers);
