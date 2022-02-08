@@ -14,10 +14,10 @@ public class Lotto {
 
     private final static int LOTTO_NUMBER_SIZE = 6;
 
-    private final static String ERROR_MESSAGE = "로또 숫자는 중복될 수 없습니다.";
-    private final static String SPACE_DELIMITER = " ";
-    private final static String BLANK_DELIMITER = "";
-    private final static String COMMA = ",";
+    private static final String ERROR_MESSAGE = "로또 숫자는 중복될 수 없습니다.";
+    private static final String SPACE_DELIMITER = " ";
+    private static final String BLANK_DELIMITER = "";
+    private static final String COMMA = ",";
 
     private final List<LottoNumber> lottoNumber;
 
