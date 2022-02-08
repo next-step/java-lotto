@@ -31,7 +31,6 @@ public class LottoMachine {
     public void run() {
         purchaseLotto();
 
-        lottoCountProcess();
         winningNumberProcess();
         bonusBallProcess();
         statisticsProcess();
@@ -40,7 +39,10 @@ public class LottoMachine {
     public void purchaseLotto() {
         Price lottoPrice = Price.from(getLottoPrice());
 
-        convertPriceToLotto(lottoPrice);
+        lottoTicket = convertPriceToLotto(lottoPrice);
+
+        ResultView.printLottoNumbers(lottoTicket);
+        OutputView.printLottoCount(lottoTicket.size());
     }
 
     private int getLottoPrice() {
@@ -48,13 +50,8 @@ public class LottoMachine {
         return InputView.readPrice();
     }
 
-    private void convertPriceToLotto(Price lottoPrice) {
-        lottoTicket = LottoTicket.from(lottoPrice.getValue()).getLottoTicket();
-        ResultView.printLottoNumbers(lottoTicket);
-    }
-
-    private void lottoCountProcess() {
-        OutputView.printLottoCount(lottoTicket.size());
+    private List<Lotto> convertPriceToLotto(Price lottoPrice) {
+        return LottoTicket.from(lottoPrice.getValue()).getLottoTicket();
     }
 
     private void winningNumberProcess() {
