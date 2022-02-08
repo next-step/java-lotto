@@ -14,7 +14,6 @@ public class LottoController {
     private int lottoPrice;
     private List<Lotto> lottoLists;
     private Lottos lottos;
-    private String winningNumber;
     private List<Integer> winningNumberList;
     private int bonusBall;
 
@@ -43,6 +42,8 @@ public class LottoController {
     }
 
     private void winningNumberProcess() {
+        final String winningNumber;
+
         OutputView.printWinningNumberBefore();
         winningNumber = InputView.readWinningNumber();
         winningNumberList = Util.stringToIntegerList(winningNumber);
