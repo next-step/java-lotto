@@ -14,7 +14,7 @@ public class RankCountTest {
     @DisplayName("로또_등수가_체크되는지_확인")
     @Test
     void lottoRankTest() {
-        Lottos lottos = LottoBundle.lottoBundle(size);
+        Lottos lottos = LottoBundle.lottoBundle(size, new NonShuffleLottoNumber());
 
         Lotto lotto = new Lotto(
             Arrays.asList(1, 2, 3, 4, 5, 6).stream()

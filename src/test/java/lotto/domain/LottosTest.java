@@ -11,7 +11,7 @@ class LottosTest {
     @DisplayName("로또의_개수_사이즈_확인_테스트")
     @Test
     void countLottoCount() {
-        Lottos lottos = LottoBundle.lottoBundle(5);
+        Lottos lottos = LottoBundle.lottoBundle(5, new NonShuffleLottoNumber());
         assertThat(lottos.getLottosSize()).isEqualTo(5);
     }
 }

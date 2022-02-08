@@ -8,6 +8,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.RankResult;
+import lotto.domain.ShuffleLottoNumber;
 import lotto.domain.Winning;
 import lotto.view.UserConsole;
 import lotto.view.UserResult;
@@ -20,7 +21,7 @@ public class Controller {
         LottoCalculation lottoCalculation = new LottoCalculation(money);
         int count = lottoCalculation.lottoCalculation();
 
-        Lottos lottoBundle = LottoBundle.lottoBundle(count);
+        Lottos lottoBundle = LottoBundle.lottoBundle(count, new ShuffleLottoNumber());
         UserResult.printCountMessage(lottoBundle);
         Lotto winningLottoNumber = new Lotto(UserConsole.inputWinningLottoNumber());
         LottoNumber bonusLottoNumber = UserConsole.inputBbonusLottoNumber();

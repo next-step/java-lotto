@@ -9,11 +9,10 @@ public class LottoBundleTest {
 
     private static final int size = 14;
 
-
-    @DisplayName("구입한_금액에_맞춰_로또_개수를_생성하는지_검증")
+    @DisplayName("구입한_금액에_맞춰_로또_개수를_생성하는지_테스트")
     @Test
-    void lottosSizeTest() {
-        Lottos lottos = LottoBundle.lottoBundle(size);
+    void findlottosSizeTest() {
+        Lottos lottos = LottoBundle.lottoBundle(size, new NonShuffleLottoNumber());
         assertThat(lottos.getLottosSize()).isEqualTo(size);
     }
 }
