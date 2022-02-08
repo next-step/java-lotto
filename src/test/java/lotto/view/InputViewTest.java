@@ -1,10 +1,13 @@
 package lotto.view;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import lotto.domain.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -23,5 +26,19 @@ class InputViewTest {
 
         // then
         assertThat(expected).isEqualTo(input);
+    }
+
+    @DisplayName("숫자 사이 공백이 있는 경우 공백을 제거하고 반환한다.")
+    @Test
+    void _When_공백이_있는_입력_Then_공백을_제거하고_반환() {
+        // given
+        InputStream inputStream = new ByteArrayInputStream("1, 2, 3, 4, 5, 6".getBytes());
+        System.setIn(inputStream);
+
+        // when
+        String returnValue = InputView.inputWinningNumbers();
+
+        // then
+        assertThat(returnValue).isEqualTo("1,2,3,4,5,6");
     }
 }

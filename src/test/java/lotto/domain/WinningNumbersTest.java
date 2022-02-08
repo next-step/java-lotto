@@ -43,13 +43,4 @@ class WinningNumbersTest {
         // then
         assertThrows(IllegalArgumentException.class, () -> new WinningNumbers(input));
     }
-
-    @DisplayName("숫자 사이 공백이 있는 경우 공백을 제거하고 해석한다.")
-    @Test
-    void Given_공백이_있는_입력_When_객체_생성_Then_공백을_제거하고_해석_하여_정상_생성() {
-        // given
-        String input = "1, 2, 3, 4, 5, 6";
-        // then
-        assertDoesNotThrow(() -> new WinningNumbers(input));
-    }
 }

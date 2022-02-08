@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class InputView {
 
+    private static final String SPACES = "\\s+";
+    private static final String EMPTY_STRING = "";
     private static final String EMPTY_INPUT_EXCEPTION_MESSAGE = "입력은 공백일 수 없습니다.";
 
     private InputView() {}
@@ -23,7 +25,11 @@ public class InputView {
 
     public static String inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return input();
+        return removeBlank(input());
+    }
+
+    private static String removeBlank(final String inputNumbers) {
+        return inputNumbers.replaceAll(SPACES, EMPTY_STRING);
     }
 
     public static String inputBonusNumber() {

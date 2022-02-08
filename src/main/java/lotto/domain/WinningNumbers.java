@@ -6,8 +6,6 @@ import java.util.stream.Collectors;
 
 public class WinningNumbers {
 
-    private static final String SPACES = "\\s+";
-    private static final String EMPTY_STRING = "";
     private static final String DELIMITER_COMMA = ",";
     private static final int NUMBER_OF_LOTTO_BALL = 6;
     private static final String INVALID_INPUT_FORMAT_EXCEPTION_MESSAGE = "구분자와 숫자만으로 이루어져야 합니다.";
@@ -16,17 +14,12 @@ public class WinningNumbers {
     private final Set<LottoNumber> lottoNumbers;
 
     public WinningNumbers(String inputWinningNumbers) {
-        inputWinningNumbers = removeBlank(inputWinningNumbers);
         validateInputFormat(inputWinningNumbers);
         final Set<LottoNumber> winningNumbers = convertToLottoNumbers(inputWinningNumbers);
 
         validateWinningNumberCount(winningNumbers);
 
         this.lottoNumbers = winningNumbers;
-    }
-
-    private String removeBlank(final String inputNumbers) {
-        return inputNumbers.replaceAll(SPACES, EMPTY_STRING);
     }
 
     private void validateInputFormat(final String numbers) {
