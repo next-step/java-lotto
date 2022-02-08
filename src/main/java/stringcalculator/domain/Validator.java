@@ -7,12 +7,11 @@ public class Validator {
 
     }
 
-    public static int validatePositiveNumber(String token) {
-        final int intToken = validateTypeOfToken(token);
-        if (intToken < 0) {
+    public static int validatePositiveNumber(final int token) {
+        if (token < 0) {
             throw new RuntimeException("[Error]: 양수만 연산 가능합니다.");
         }
-        return intToken;
+        return token;
     }
 
     public static int validateTypeOfToken(final String token) {

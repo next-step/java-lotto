@@ -1,12 +1,11 @@
 package stringcalculator.domain;
 
-import static stringcalculator.domain.Validator.*;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import stringcalculator.util.Converter;
 
 public class Delimiter {
 
@@ -39,14 +38,7 @@ public class Delimiter {
     public static List<Integer> extractNumberFromExpression(String input) {
         final String joinedDelimiters = String.join("|", delimiters);
         final List<String> splitResults = Arrays.asList(input.split(joinedDelimiters));
-        return convertOperandType(splitResults);
+        return Converter.convertOperandType(splitResults);
     }
 
-    private static List<Integer> convertOperandType(List<String> tokens) {
-        List<Integer> numbers = new ArrayList<>();
-        tokens.forEach(
-            token -> numbers.add(Validator.validatePositiveNumber(token))
-        );
-        return numbers;
-    }
 }

@@ -1,6 +1,7 @@
 package stringcalculator.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,15 +23,15 @@ class ValidatorTest {
             () -> Validator.validateTypeOfToken(token));
     }
 
-    @ValueSource(strings = {"1", "2", "3"})
+    @ValueSource(ints = {1, 2, 3})
     @ParameterizedTest
-    void 구분된_문자는_반드시_양수의_숫자여야_한다_성공(String number) {
+    void 구분된_문자는_반드시_양수의_숫자여야_한다_성공(int number) {
         assertDoesNotThrow(() -> Validator.validatePositiveNumber(number));
     }
 
-    @ValueSource(strings = {"-1", "-2", "-3"})
+    @ValueSource(ints = {-1, -2, -3})
     @ParameterizedTest
-    void 구분된_문자는_반드시_양수의_숫자여야_한다_실패(String number) {
+    void 구분된_문자는_반드시_양수의_숫자여야_한다_실패(int number) {
         assertThrows(RuntimeException.class,
             () -> Validator.validatePositiveNumber(number));
     }
