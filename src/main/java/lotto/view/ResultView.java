@@ -4,7 +4,7 @@ import java.util.Arrays;
 import lotto.domain.Lotto;
 import lotto.domain.LottoDescription;
 import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
+import lotto.domain.Lottoes;
 
 public class ResultView {
 
@@ -15,7 +15,7 @@ public class ResultView {
         System.out.println(lottoCount + "개를 구매했습니다.");
     }
 
-    public static void printLottos(Lottos lottos) {
+    public static void printLottos(Lottoes lottos) {
         for (Lotto lotto : lottos.getLottos()) {
             System.out.println(Arrays.toString(lotto.getLotto().toArray()));
         }

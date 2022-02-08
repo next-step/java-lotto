@@ -9,8 +9,8 @@ public class LottoRaffle {
         this.winningLotto = winningLotto;
     }
 
-    public void raffle(Lottos lottos) {
-        for (Lotto lotto : lottos.getLottos()) {
+    public void raffle(Lottoes lottoes) {
+        for (Lotto lotto : lottoes.getLottos()) {
             compareLotto(lotto);
         }
     }

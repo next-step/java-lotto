@@ -3,7 +3,7 @@ package lotto;
 import java.util.List;
 import lotto.domain.LottoRaffle;
 import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
+import lotto.domain.Lottoes;
 import lotto.domain.WinningLotto;
 import lotto.domain.YieldCalculator;
 import lotto.view.InputView;
@@ -16,7 +16,7 @@ public class LottoApplication {
         final int lottoCount = money / 1000;
         ResultView.printLottoCount(lottoCount);
 
-        final Lottos lottos = new Lottos(lottoCount);
+        final Lottoes lottos = new Lottoes(lottoCount);
         ResultView.printLottos(lottos);
 
         final List<Integer> winningNumbers = InputView.inputLastWinningNumbers();

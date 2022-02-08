@@ -3,21 +3,21 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Lottos {
+public class Lottoes {
 
-    private final List<Lotto> lottos;
+    private final List<Lotto> lottoes;
 
-    public Lottos(int lottoCount) {
-        this.lottos = setLottos(lottoCount);
+    public Lottoes(int lottoCount) {
+        this.lottoes = setLottoes(lottoCount);
     }
 
-    private List<Lotto> setLottos(int lottoCount) {
-        final List<Lotto> lottos = new ArrayList<>();
+    private List<Lotto> setLottoes(int lottoCount) {
+        final List<Lotto> lottoes = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             Lotto lotto = setLotto();
-            lottos.add(lotto);
+            lottoes.add(lotto);
         }
-        return lottos;
+        return lottoes;
     }
 
     // TODO : 난수를 생성하는 로직과 Lotto 인스턴스를 생성하는 로직이 한 곳에 있으므로 테스트가 어려움
@@ -27,6 +27,6 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return lottoes;
     }
 }
