@@ -5,7 +5,7 @@ import static stringcalculator.domain.Calculator.calculator;
 import java.util.List;
 import stringcalculator.domain.Number;
 import stringcalculator.domain.Separator;
-import stringcalculator.domain.StringNumbers;
+import stringcalculator.domain.StringNumber;
 import stringcalculator.view.InputView;
 import stringcalculator.view.ResultView;
 
@@ -13,7 +13,7 @@ public class StringCalculator {
 
     public static void main(String[] args) {
         final InputView inputView = new InputView();
-        final StringNumbers userInput = new StringNumbers(inputView.inputCalculateString());
+        final StringNumber userInput = new StringNumber(inputView.inputCalculateString());
 
         final Separator separator = new Separator(userInput.getStringNumber());
 
