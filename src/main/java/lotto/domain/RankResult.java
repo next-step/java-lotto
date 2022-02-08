@@ -5,15 +5,16 @@ import java.util.Map;
 
 public class RankResult {
 
-    private final Map<Rank, Integer> rankResult;
+    private static final int INITIAL_VALUE = 0;
+    private Map<Rank, Integer> rankResult;
+    private final Lottos lottos;
+    private final Winning winning;
 
-    public RankResult(Map<Rank, Integer> rankResult) {
-        this.rankResult = new HashMap<>(rankResult);
-    }
 
-    public RankResult(RankCount rankCount) {
-        Map<Rank, Integer> rankResult = new HashMap<>(rankCount.rankCount());
-        this.rankResult = rankResult;
+    public RankResult(Lottos lottos, Winning winning) {
+        this.lottos = lottos;
+        this.winning = winning;
+        this.rankResult = rankCount(this.lottos,this.winning);
     }
 
     public Map<Rank, Integer> getRankResult() {
@@ -24,5 +25,18 @@ public class RankResult {
         return new Money(rankResult.entrySet().stream()
             .mapToInt(entry -> entry.getKey().getPrize(entry.getValue()).getValue())
             .sum());
+    }
+
+    public HashMap<Rank, Integer> rankCount(Lottos lottos, Winning winning) {
+        HashMap<Rank, Integer> rankResult = new HashMap<>();
+        for (Rank rank : Rank.values()) {
+            rankResult.put(rank, INITIAL_VALUE);
+        }
+
+        for (Lotto lotto : lottos.lottos()) {
+            Rank rank = Rank.countMatch(winning, lotto);
+            rankResult.put(rank, rankResult.get(rank) + 1);
+        }
+        return rankResult;
     }
 }

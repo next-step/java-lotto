@@ -7,7 +7,6 @@ import lotto.domain.LottoCalculation;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
-import lotto.domain.RankCount;
 import lotto.domain.RankResult;
 import lotto.domain.Winning;
 import lotto.view.UserConsole;
@@ -27,10 +26,8 @@ public class Controller {
         Lotto winningLottoNumber = new Lotto(UserConsole.winningLottoNumber());
         LottoNumber bonusLottoNumber = UserConsole.bonusLottoNumber();
 
-        RankCount rankCount = new RankCount(lottoBundle,
-            new Winning(winningLottoNumber, bonusLottoNumber));
-
-        UserResult.printRank(new RankResult(rankCount));
-        UserResult.printPrizeRatio(new RankResult(rankCount).getTotalPrize(), money);
+        Winning winning = new Winning(winningLottoNumber, bonusLottoNumber);
+        UserResult.printRank(new RankResult(lottoBundle, winning));
+        UserResult.printPrizeRatio(new RankResult(lottoBundle, winning).getTotalPrize(), money);
     }
 }

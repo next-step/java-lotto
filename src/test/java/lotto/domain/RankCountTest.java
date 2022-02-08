@@ -23,7 +23,7 @@ public class RankCountTest {
 
         LottoNumber bonusLottoNumber = new LottoNumber(7);
         Winning winning = new Winning(new Lotto(lottoFullNumber), bonusLottoNumber);
-        RankCount rankCount = new RankCount(lottos, winning);
-        assertThat(rankCount).isNotNull();
+        RankResult rankResult = new RankResult(lottos, winning);
+        assertThat(rankResult).isNotNull();
     }
 }
