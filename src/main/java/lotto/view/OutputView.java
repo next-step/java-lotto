@@ -1,11 +1,14 @@
 package lotto.view;
 
+import java.util.Iterator;
 import java.util.List;
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 
 public class OutputView {
 
-    private OutputView() {}
+    private OutputView() {
+    }
 
     public static final String ERROR_MESSAGE = "[ERROR] ";
     public static final String ERROR_WRONG_LOTTO_PRICE = "로또 한 장은 1000원입니다. 잘못된 금액입니다.";
@@ -58,9 +61,10 @@ public class OutputView {
             "총 수익률은 " + earningRate + "입니다.(기준이 1이기 때문에 결과적으로 " + profitOrLoss + "이라는 의미임)");
     }
 
-    public static void printLottoNumber(List<LottoNumber> lottoNumbers) {
-        for (int j = 0; j < lottoNumbers.size(); j++) {
-            System.out.print(lottoNumbers.get(j).getLottoNumber() + " ");
+    public static void printLottoNumber(Lotto lottoNumbers) {
+        Iterator<LottoNumber> iterator = lottoNumbers.getLottoNumber().iterator();
+        while (iterator.hasNext()) {
+            System.out.printf(iterator.next().getLottoNumber() + " ");
         }
     }
 }

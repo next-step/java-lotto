@@ -9,9 +9,9 @@ class LottoNumberGeneratorTest {
 
     @Test
     void 로또생성() {
-        List<LottoNumber> lottoNumbers = new LottoNumberGenerator().generate();
-        for(int i =0; i< lottoNumbers.size(); i++) {
-            System.out.println(lottoNumbers.get(i).getLottoNumber());
-        }
+        Lotto lottoNumbers = new LottoNumberGenerator().generate();
+//        for(int i =0; i< lottoNumbers.getLottoNumber().size(); i++) {
+//            System.out.println(lottoNumbers.);
+//        }
     }
 }

@@ -10,7 +10,7 @@ public class Lottos {
 
     private static final int LOTTO_PRICE = 1000;
 
-    List<List<LottoNumber>> lottoLists;
+    List<Lotto> lottoLists;
     final int lottoCount;
 
     public Lottos(int totalPrice) {
@@ -20,12 +20,12 @@ public class Lottos {
         this.lottoLists = generatorLottos();
     }
 
-    public List<List<LottoNumber>> getLottoLists() {
+    public List<Lotto> getLottoLists() {
         return Collections.unmodifiableList(lottoLists);
     }
 
-    private List<List<LottoNumber>> generatorLottos() {
-        List<List<LottoNumber>> lottoLists = new ArrayList<>();
+    private List<Lotto> generatorLottos() {
+        List<Lotto> lottoLists = new ArrayList<>();
 
         for (int i = 0; i < lottoCount; i++) {
             lottoLists.add(LottoNumberGenerator.generate());

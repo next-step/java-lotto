@@ -11,11 +11,11 @@ public class LottoStatistics {
     private static final int MIN_WIN_COUNT = 3;
 
     private final WinningNumbers winningNumbers;
-    private final List<List<LottoNumber>> lottoList;
+    private final List<Lotto> lottoList;
     private final List<Rank> resultStatistics;
     private final int lottoPrice;
 
-    public LottoStatistics(WinningNumbers winningNumbers, List<List<LottoNumber>> lottoList,
+    public LottoStatistics(WinningNumbers winningNumbers, List<Lotto> lottoList,
         int lottoPrice) {
         this.winningNumbers = winningNumbers;
         this.lottoList = lottoList;
@@ -31,7 +31,7 @@ public class LottoStatistics {
         }
     }
 
-    private void getRank(final int count, final List<LottoNumber> lottoNumberList) {
+    private void getRank(final int count, final Lotto lottoNumberList) {
         if (count < MIN_WIN_COUNT) {
             return;
         }
@@ -43,16 +43,16 @@ public class LottoStatistics {
         }
     }
 
-    private boolean matchBonusNumber(final int count, final List<LottoNumber> lottoNumberList) {
-        return count == MATCH_FIVE && lottoNumberList.contains(winningNumbers.getBonusNumber());
+    private boolean matchBonusNumber(final int count, final Lotto lottoNumberList) {
+        return count == MATCH_FIVE && lottoNumberList.getLottoNumber().contains(winningNumbers.getBonusNumber());
     }
 
     private boolean isWinningNumber(final LottoNumber lottoNumber) {
         return winningNumbers.getWinningNumber().contains(lottoNumber);
     }
 
-    private int matchWinningNumbers(final List<LottoNumber> lottoNumberList) {
-        return lottoNumberList.stream().filter(x -> isWinningNumber(x))
+    private int matchWinningNumbers(final Lotto lottoNumberList) {
+        return lottoNumberList.getLottoNumber().stream().filter(x -> isWinningNumber(x))
             .collect(Collectors.toList()).size();
     }
 

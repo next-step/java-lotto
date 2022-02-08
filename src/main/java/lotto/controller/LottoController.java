@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.List;
+import lotto.domain.Lotto;
 import lotto.domain.LottoEarningRate;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoStatistics;
@@ -14,7 +15,7 @@ import lotto.view.ResultView;
 public class LottoController {
 
     private int lottoPrice;
-    private List<List<LottoNumber>> lottoLists;
+    private List<Lotto> lottoLists;
     private Lottos lottos;
     private String winningNumber;
     private WinningNumbers winningNumbers;

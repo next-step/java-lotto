@@ -14,8 +14,8 @@ class LottoTest {
 
     @BeforeEach
     void setUp() {
-        lotto = new Lotto();
-        lottoList = lotto.getLottoList();
+//        lotto = new Lotto();
+//        lottoList = lotto.getLottoList();
     }
 
     @DisplayName(value = "로또가 생성될 때, 로또 하나에는 6개의 숫자가 들어간다.")
