@@ -12,7 +12,7 @@ class CalculatorTest {
 
     @Test
     public void 숫자리스트_계산_테스트() {
-        List<String> numbers = Arrays.asList("1", "2", "3");
+        List<Integer> numbers = Arrays.asList(1, 2, 3);
         Assertions.assertThat(calculator.calculate(numbers)).isEqualTo(6);
     }
 
