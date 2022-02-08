@@ -7,7 +7,7 @@ public class LottoTicket {
 
     private static final String NOT_VALID_SIZE_EXCEPTION_MESSAGE = "[ERROR] 로또 티켓은 최소 1개 이상의 로또가 필요합니다.";
 
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public LottoTicket(List<Lotto> lottos) {
         validateLottos(lottos);
