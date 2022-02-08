@@ -14,7 +14,8 @@ public class LottoMachine {
 
     private static LottoMachine lottoMachine = null;
 
-    private LottoMachine() {}
+    private LottoMachine() {
+    }
 
     public static LottoMachine getInstance() {
         if (lottoMachine == null) {
@@ -41,7 +42,8 @@ public class LottoMachine {
     }
 
     public LottoStatistics calculateWinningResult(LottoTicket lottoTicket) {
-        final List<Integer> winningNumberList = WinningNumbers.from(getWinningNumber()).getWinningNumbers();
+        final List<Integer> winningNumberList = WinningNumbers.from(getWinningNumber())
+            .getWinningNumbers();
         final int bonusBall = getBonusBall();
 
         return new LottoStatistics(winningNumberList, bonusBall,
@@ -49,7 +51,7 @@ public class LottoMachine {
     }
 
     public void printResult(LottoStatistics lottoStatistics) {
-        statisticsProcess(lottoStatistics);
+        ResultView.printLottoStatistics(lottoStatistics);
     }
 
     private int getLottoPrice() {
@@ -69,9 +71,5 @@ public class LottoMachine {
     private int getBonusBall() {
         OutputView.printBonusBallNumber();
         return InputView.readBonusNumber();
-    }
-
-    private void statisticsProcess(LottoStatistics lottoStatistics) {
-        ResultView.printLottoStatistics(lottoStatistics);
     }
 }
