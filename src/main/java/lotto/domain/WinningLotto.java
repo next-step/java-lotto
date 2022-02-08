@@ -11,7 +11,7 @@ public class WinningLotto {
     private static final String WINNING_LOTTO_SIZE_EXCEPTION_MESSAGE = "[ERROR] 우승 로또 숫자는 보너스 볼 포함 총 7개 입니다";
     private static final String WINNING_LOTTO_DUPLICATE_EXCEPTION_MESSAGE = "[ERROR] 우승 로또 숫자는 중복 될 수 없습니다";
 
-    private List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public WinningLotto(List<LottoNumber> lottoNumbers) {
         validateDuplicate(lottoNumbers);
