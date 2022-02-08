@@ -45,7 +45,7 @@
 - [x] `"".equals(input)` 보다는 `input.isEmpty()`를 지향하자.
 - [x] Parser 메서드 이름 명사에서 동사로 리펙토링.
 - [x] `Arrays.asList(splitedFormular.///split(delimiter)).stream()`은 `Arrays.stream(splitedFormular.split(delimiter))`으로 표현 가능하다.
-- [ ] 해당 리스트에 값을 추가하는 과정이 없으므로, 크기가 고정되는 Arrays의 ArrayList를 사용
+- [x] 해당 리스트에 값을 추가하는 과정이 없으므로, 크기가 고정되는 Arrays의 ArrayList를 사용
 - [ ] `.stream().limit()`를 사용해보자.
 - [ ] 번호 생성의 책임은 다른 객체에 위임해보기.
 - [ ] 객체를 기능별로 나눠 객체의 책임과 역할을 먼저 구현을 하고, 객체들끼리 통신하게 코드를 작성하자.
