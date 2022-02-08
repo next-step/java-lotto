@@ -31,7 +31,7 @@ public class LottoApplication {
     }
 
     private static LottoCount initializeCount(Money money) {
-        return new LottoCount(money.value());
+        return LottoCount.from(money);
     }
 
     private static Money getMoneyFromUser() {
