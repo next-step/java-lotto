@@ -1,7 +1,5 @@
 package lotto;
 
-import java.util.List;
-import lotto.domain.LottoRaffle;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottoes;
 import lotto.domain.WinningLotto;
@@ -22,9 +20,8 @@ public class LottoApplication {
         final WinningLotto winningLotto = new WinningLotto(InputView.inputLastWinningNumbers());
         InputView.inputBonusNumber(winningLotto);
 
-        final LottoRaffle lottoRaffle = new LottoRaffle(winningLotto);
-        lottoRaffle.raffle(lottoes);
-        final LottoResult lottoResult = lottoRaffle.getResult();
+        final LottoResult lottoResult = new LottoResult();
+        lottoResult.raffle(winningLotto, lottoes);
 
         double yield = YieldCalculator.calculateYield(lottoResult, money);
         ResultView.printLottoResults(lottoResult, yield);

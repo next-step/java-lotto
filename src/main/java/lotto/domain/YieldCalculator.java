@@ -6,8 +6,10 @@ public class YieldCalculator {
     }
 
     public static double calculateYield(LottoResult lottoResult, int money) {
-        long profit = 0;
+        double profit = 0;
         for (LottoDescription lottoDescription : LottoDescription.toList()) {
+            System.out.println(lottoDescription.getHash() + " " + lottoResult.getCount(
+                lottoDescription.getHash()));
             profit +=
                 lottoResult.getCount(lottoDescription.getHash()) * lottoDescription.getWinning();
         }
