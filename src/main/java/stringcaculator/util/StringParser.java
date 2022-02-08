@@ -7,6 +7,7 @@ public class StringParser {
 
     private static final String DEFAULT_DELIMITER = ",|:";
     private static final String CUSTOM_DELIMITER = "//(.)\\n(.*)";
+    private static final String CUSTOM_PREFIX = "//";
     private static final String PATTERN_NOT_FOUND = "[ERROR] 커스텀 문자열을 찾을 수 없습니다.";
     private static final Pattern CUSTOM_PATTERN = Pattern.compile(CUSTOM_DELIMITER);
     private static final int DELIMITER_POSITION = 1;
@@ -29,6 +30,9 @@ public class StringParser {
     }
 
     public static String[] splitExpression(String expression) {
-        return null;
+        if (expression.startsWith(CUSTOM_PREFIX)) {
+            return splitCustomDelimiter(expression);
+        }
+        return splitDefaultDelimiter(expression);
     }
 }
