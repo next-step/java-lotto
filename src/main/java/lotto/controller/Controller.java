@@ -22,9 +22,8 @@ public class Controller {
 
         Lottos lottoBundle = LottoBundle.lottoBundle(count);
         UserResult.printCountMessage(lottoBundle);
-
-        Lotto winningLottoNumber = new Lotto(UserConsole.winningLottoNumber());
-        LottoNumber bonusLottoNumber = UserConsole.bonusLottoNumber();
+        Lotto winningLottoNumber = new Lotto(UserConsole.inputWinningLottoNumber());
+        LottoNumber bonusLottoNumber = UserConsole.inputBbonusLottoNumber();
 
         Winning winning = new Winning(winningLottoNumber, bonusLottoNumber);
         UserResult.printRank(new RankResult(lottoBundle, winning));
