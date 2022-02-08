@@ -12,8 +12,8 @@ class LottosTest {
     @DisplayName(value = "구매금액에 알맞은 로또의 개수가 생성된다.")
     @Test
     void correctCountGenerator() {
-        Lottos lottos = new Lottos(10000);
-        List<Lotto> lottoLists = lottos.getLottoLists();
+        LottoTicket lottoTicket = new LottoTicket(10000);
+        List<Lotto> lottoLists = lottoTicket.getLottoLists();
 
         assertThat(lottoLists.size()).isEqualTo(10);
     }
@@ -21,7 +21,7 @@ class LottosTest {
     @DisplayName(value = "구매금액을 로또한개의 가격으로 나누었을때, 나머지가 발생할경우 IllegalArgumentException 발생한다.")
     @Test
     void checkValidPrice() {
-        assertThatThrownBy(() -> new Lottos(11100))
+        assertThatThrownBy(() -> new LottoTicket(11100))
         .isInstanceOf(IllegalArgumentException.class);
     }
 
