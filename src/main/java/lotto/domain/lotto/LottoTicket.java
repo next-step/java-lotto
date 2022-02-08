@@ -1,7 +1,9 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import java.util.Collections;
 import java.util.List;
+import lotto.domain.ResultGroup;
+import lotto.domain.WinningResult;
 
 public class LottoTicket {
 

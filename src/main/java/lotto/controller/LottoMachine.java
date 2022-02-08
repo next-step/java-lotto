@@ -1,18 +1,17 @@
 package lotto.controller;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.domain.Lotto;
+import lotto.domain.lotto.Lotto;
 import lotto.domain.LottoCount;
 import lotto.domain.LottoGenerator;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoTicket;
 import lotto.domain.Money;
 import lotto.domain.ResultGroup;
-import lotto.domain.WinningLotto;
+import lotto.domain.lotto.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

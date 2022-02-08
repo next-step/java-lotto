@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import lotto.controller.LottoMachine;
 import lotto.domain.LottoCount;
-import lotto.domain.LottoTicket;
+import lotto.domain.lotto.LottoTicket;
 import lotto.domain.Money;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

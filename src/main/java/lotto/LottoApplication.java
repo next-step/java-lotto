@@ -2,10 +2,10 @@ package lotto;
 
 import lotto.controller.LottoMachine;
 import lotto.domain.LottoCount;
-import lotto.domain.LottoTicket;
+import lotto.domain.lotto.LottoTicket;
 import lotto.domain.Money;
 import lotto.domain.ResultGroup;
-import lotto.domain.WinningLotto;
+import lotto.domain.lotto.WinningLotto;
 import lotto.view.InputView;
 
 public class LottoApplication {

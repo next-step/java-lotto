@@ -1,8 +1,11 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.WinningLotto;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

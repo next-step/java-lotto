@@ -3,7 +3,7 @@ package lotto.view;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.controller.ResultGroupDto;
-import lotto.domain.LottoNumber;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.WinningResult;
 
 public class OutputView {

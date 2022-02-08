@@ -1,8 +1,9 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import lotto.domain.lotto.LottoNumber;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
