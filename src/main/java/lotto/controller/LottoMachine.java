@@ -9,7 +9,7 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 import lotto.view.ResultView;
 
-public class LottoController {
+public class LottoMachine {
 
     private int lottoPrice;
     private List<Lotto> lottoLists;
