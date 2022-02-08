@@ -53,6 +53,9 @@
   - [x] LottoMachine 싱글턴으로 만들기
   - [x] VO 
     - [x] Price
+  - [ ] Lottos를 LottoTicket 과 LottoTicketGenerator로 분리하기
+    - [x] LottoTicketGenerator
+    - [ ] LottoTicket
 - [ ] 보너스 볼 매칭에 대한 구현이 빠져 있다.
 - [x] `.collect(Collectors.toList()).size();` 보다는 `stream count` 지향하자.
 - [x] 불필요한 선언이 있다. 메서드에서 로컬변수로 처리해보자.
