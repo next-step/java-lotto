@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class StatisticsTest {
+class RankTest {
 
     @DisplayName(value = "로또에서 3개를 맞추면 5등이다.")
     @Test
@@ -25,7 +25,7 @@ class StatisticsTest {
         assertThat(Rank.getRank(5)).isEqualTo(Rank.THIRD);
     }
 
-    @DisplayName(value = "로또에서 4개와 보너스를 맞추면 2등이다.")
+    @DisplayName(value = "로또에서 5개와 보너스를 맞추면 2등이다.")
     @Test
     void correctFourSecond() {
         assertThat(Rank.getRank(7)).isEqualTo(Rank.SECOND);
