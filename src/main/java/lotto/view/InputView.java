@@ -2,6 +2,7 @@ package lotto.view;
 
 
 import java.util.Scanner;
+import lotto.domain.LottoNumber;
 import lotto.util.Console;
 
 public class InputView {
@@ -31,7 +32,7 @@ public class InputView {
         return winningNumber;
     }
 
-    public static int readBonusNumber() {
+    public static LottoNumber readBonusNumber() {
         int bonusNumber = 0;
         try {
             bonusNumber = Console.readLineInt();
@@ -39,6 +40,6 @@ public class InputView {
             OutputView.printExceptionMessage(OutputView.ERROR_MESSAGE + exception.getMessage());
             System.exit(0);
         }
-        return bonusNumber;
+        return new LottoNumber(bonusNumber);
     }
 }

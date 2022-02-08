@@ -1,10 +1,10 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoStatistics;
 import lotto.domain.Lottos;
+import lotto.domain.WinningNumber;
 import lotto.util.Util;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -16,15 +16,15 @@ public class LottoController {
     private List<List<LottoNumber>> lottoLists;
     private Lottos lottos;
     private String winningNumber;
+    private WinningNumber winningNumbers;
     private List<Integer> winningNumberList;
-    private int bonusBall;
+    private LottoNumber bonusBall;
 
     public void start() {
         lottoPriceProcess();
         lottoListsProcess();
         lottoCountProcess();
         winningNumberProcess();
-        bonusBallProcess();
 //        statisticsProcess();
     }
 
@@ -46,12 +46,9 @@ public class LottoController {
     private void winningNumberProcess() {
         OutputView.printWinningNumberBefore();
         winningNumber = InputView.readWinningNumber();
-        winningNumberList = Util.stringToIntegerList(winningNumber);
-    }
-
-    private void bonusBallProcess() {
         OutputView.printBonusBallNumber();
         bonusBall = InputView.readBonusNumber();
+        winningNumbers = new WinningNumber(Util.stringToLottoNumberList(winningNumber), bonusBall);
     }
 
 //    private void statisticsProcess() {
