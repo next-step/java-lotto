@@ -14,14 +14,6 @@ public enum Rank {
     NONE1(1, 0),
     NONE(0, 0);
 
-    public int getGrade() {
-        return grade;
-    }
-
-    public int getMoney() {
-        return money;
-    }
-
     private final int grade;
     private final int money;
 
@@ -32,7 +24,7 @@ public enum Rank {
 
     public static Rank getRank(int numberOfMatch) {
         return Arrays.stream(values())
-            .filter(statistic -> statistic.grade == numberOfMatch)
+            .filter(rank -> rank.grade == numberOfMatch)
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException());
     }
@@ -40,5 +32,13 @@ public enum Rank {
     public static int getCount(List<Rank> statistics, int matchCount) {
         return statistics.stream().filter(x -> x.grade == matchCount).collect(Collectors.toList())
             .size();
+    }
+
+    public int getGrade() {
+        return grade;
+    }
+
+    public int getMoney() {
+        return money;
     }
 }

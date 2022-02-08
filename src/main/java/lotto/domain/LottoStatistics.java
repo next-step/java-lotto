@@ -9,12 +9,14 @@ public class LottoStatistics {
 
     private static final int MATCH_FIVE = 5;
     private static final int MIN_WIN_COUNT = 3;
+
     private final WinningNumbers winningNumbers;
     private final List<List<LottoNumber>> lottoList;
     private final List<Rank> resultStatistics;
     private final int lottoPrice;
 
-    public LottoStatistics(WinningNumbers winningNumbers, List<List<LottoNumber>> lottoList, int lottoPrice) {
+    public LottoStatistics(WinningNumbers winningNumbers, List<List<LottoNumber>> lottoList,
+        int lottoPrice) {
         this.winningNumbers = winningNumbers;
         this.lottoList = lottoList;
         this.lottoPrice = lottoPrice;
@@ -46,7 +48,7 @@ public class LottoStatistics {
         for (Rank statistics : resultStatistics) {
             totalPrice += statistics.getMoney();
         }
-        return String.format("%.2f",totalPrice / lottoPrice);
+        return String.format("%.2f", totalPrice / lottoPrice);
     }
 
     private boolean matchBonusNumber(final int count, final List<LottoNumber> lottoNumberList) {
