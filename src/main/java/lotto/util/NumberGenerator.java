@@ -25,7 +25,7 @@ public class NumberGenerator {
     }
 
     private int generateNumber(int min, int max) {
-        return new Random().nextInt(max + min) + max;
+        return new Random().nextInt(max) + min;
     }
 
     private HashSet<Integer> generatorLotto(int min, int max, int size) {
