@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Analyzer {
 
-    private final List<Integer> WIN_KEYS = Arrays.asList(3, 4, 5, 5, 6);
-    private final List<Integer> BONUS_KEYS = Arrays.asList(0, 0, 0, 1, 0);
+    private static final List<Integer> WIN_KEYS = Arrays.asList(3, 4, 5, 5, 6);
+    private static final List<Integer> BONUS_KEYS = Arrays.asList(0, 0, 0, 1, 0);
 
     private final List<WinningPrice> winningPrices = new ArrayList<>();
     private final int price;
@@ -33,6 +33,7 @@ public class Analyzer {
         }
     }
 
+    //TODO winNumbers, bonusNumbers 1:1
     private WinningPrice calculatePerStepMoney(final int win, final int bonus,
         final List<Integer> winNumbers,
         List<Integer> bonusNumbers) {
