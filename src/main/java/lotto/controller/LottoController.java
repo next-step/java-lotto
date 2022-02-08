@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.List;
+import lotto.domain.LottoEarningRate;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoStatistics;
 import lotto.domain.Lottos;
@@ -55,6 +56,6 @@ public class LottoController {
             lottoLists, lottoPrice);
 
         ResultView.printLottoStatistics(lottoStatistics.getResultStatistics(),
-            lottoStatistics.getLottoEarningRate());
+            LottoEarningRate.getLottoEarningRate(lottoStatistics.getResultStatistics(), lottoPrice));
     }
 }

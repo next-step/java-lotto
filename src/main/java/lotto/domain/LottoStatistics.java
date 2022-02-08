@@ -43,14 +43,6 @@ public class LottoStatistics {
         }
     }
 
-    public String getLottoEarningRate() {
-        double totalPrice = 0;
-        for (Rank statistics : resultStatistics) {
-            totalPrice += statistics.getMoney();
-        }
-        return String.format("%.2f", totalPrice / lottoPrice);
-    }
-
     private boolean matchBonusNumber(final int count, final List<LottoNumber> lottoNumberList) {
         return count == MATCH_FIVE && lottoNumberList.contains(winningNumbers.getBonusNumber());
     }

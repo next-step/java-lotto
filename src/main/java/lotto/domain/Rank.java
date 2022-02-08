@@ -34,10 +34,6 @@ public enum Rank {
             .size();
     }
 
-    public int getGrade() {
-        return grade;
-    }
-
     public int getMoney() {
         return money;
     }
