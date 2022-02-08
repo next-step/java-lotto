@@ -1,6 +1,6 @@
 package lotto.view;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import lotto.domain.Money;
 import org.junit.jupiter.api.DisplayName;
@@ -14,6 +14,6 @@ class UserConsoleTest {
     @ValueSource(strings = {"100", "-2", "abc"})
     void validateTypeLessThousandTest(String money) {
         assertThrows(IllegalArgumentException.class,
-            ()->new Money(money));
+            () -> new Money(money));
     }
 }

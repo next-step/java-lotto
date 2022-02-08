@@ -27,8 +27,9 @@ public class StringUtils {
     }
 
     public static List<String> splitInput(final String input) {
-        if(input == null)
+        if (input == null) {
             return new ArrayList<>();
+        }
 
         if (input.contains(SLASH)) {
             String[] tokens = split(input);

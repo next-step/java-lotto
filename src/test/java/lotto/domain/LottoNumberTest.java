@@ -15,6 +15,6 @@ public class LottoNumberTest {
     void LottoNumberRangeTest() {
         List<Integer> number = Arrays.asList(-2, 21, 23, 41, 42, 43);
         assertThatIllegalArgumentException()
-            .isThrownBy(()->number.stream().map(LottoNumber::new).collect(Collectors.toList()));
+            .isThrownBy(() -> number.stream().map(LottoNumber::new).collect(Collectors.toList()));
     }
 }

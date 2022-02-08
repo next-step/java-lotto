@@ -37,7 +37,7 @@ public class Adder {
         if (numbers.isEmpty() ||
             numbers.contains(BLANK) ||
             numbers.contains(EMPTY_SPACE)
-            ) {
+        ) {
             return VALIDATE_NUMBER_TRUE;
         }
         return VALIDATE_NUMBER_FALSE;

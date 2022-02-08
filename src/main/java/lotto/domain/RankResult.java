@@ -6,15 +6,15 @@ import java.util.Map;
 public class RankResult {
 
     private static final int INITIAL_VALUE = 0;
-    private Map<Rank, Integer> rankResult;
     private final Lottos lottos;
     private final Winning winning;
+    private Map<Rank, Integer> rankResult;
 
 
     public RankResult(Lottos lottos, Winning winning) {
         this.lottos = lottos;
         this.winning = winning;
-        this.rankResult = rankCount(this.lottos,this.winning);
+        this.rankResult = rankCount(this.lottos, this.winning);
     }
 
     public Map<Rank, Integer> getRankResult() {

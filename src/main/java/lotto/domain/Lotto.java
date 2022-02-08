@@ -29,7 +29,7 @@ public class Lotto {
         this.lottoNumber = new ArrayList<>(lottoFullNumberLengthSix);
     }
 
-    public Lotto(String lottoNumber){
+    public Lotto(String lottoNumber) {
         this.lottoNumber =
             Arrays.stream(
                     lottoNumber

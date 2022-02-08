@@ -12,12 +12,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import stringadder.utils.StringUtils;
-import stringadder.utils.exception.InputValidException;
 
 public class AdderTest {
 
@@ -45,7 +43,7 @@ public class AdderTest {
     @ValueSource(strings = {"//\n"})
     void splitCustomDelimiterTest(String input) {
         assertThatIllegalArgumentException()
-            .isThrownBy(()->StringUtils.splitInput(input));
+            .isThrownBy(() -> StringUtils.splitInput(input));
     }
 
     @DisplayName("빈_문자열_입력시_0을_반환_테스트")
@@ -74,10 +72,10 @@ public class AdderTest {
 
     @DisplayName("입력받은_숫자가_음수일때_예외_테스트")
     @ParameterizedTest
-    @ValueSource(strings = {"-1","-2","-3"})
+    @ValueSource(strings = {"-1", "-2", "-3"})
     void inputNegativeNumberTest(String input) {
         List<String> parsingInput = StringUtils.splitInput(input);
-        assertThrows(RuntimeException.class, ()->{
+        assertThrows(RuntimeException.class, () -> {
             Adder.add(parsingInput);
         });
     }
@@ -89,8 +87,6 @@ public class AdderTest {
         int result = Adder.add(input);
         assertThat(result).isEqualTo(expected);
     }
-
-
 
 
 }
