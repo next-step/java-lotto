@@ -18,4 +18,8 @@ public class Budget {
     public int getValue() {
         return value;
     }
+
+    public boolean canPurchase(int priceOfLotto) {
+        return this.value > priceOfLotto;
+    }
 }

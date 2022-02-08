@@ -28,12 +28,12 @@ public class Lottos {
     }
 
     private static int getNumberOfLotto(final Budget budget) {
-        validateMoreThanLottoPrice(budget);
+        validatePossibleToPurchase(budget);
         return budget.getValue() / PRICE_OF_LOTTO;
     }
 
-    private static void validateMoreThanLottoPrice(Budget budget) {
-        if (budget.getValue() < PRICE_OF_LOTTO) {
+    private static void validatePossibleToPurchase(Budget budget) {
+        if (budget.canPurchase(PRICE_OF_LOTTO)) {
             throw new IllegalArgumentException(LACK_OF_MONEY_EXCEPTION_MESSAGE);
         }
     }
