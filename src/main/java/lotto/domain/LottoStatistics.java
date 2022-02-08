@@ -9,6 +9,7 @@ public class LottoStatistics {
 
     private static final int MATCH_FOUR = 4;
     private static final int MIN_WIN_COUNT = 3;
+
     private final List<Integer> winningNumbers;
     private final int bonusNumber;
     private final List<Lotto> lottoList;
@@ -21,6 +22,7 @@ public class LottoStatistics {
         this.lottoList = lottoList;
         this.lottoPrice = lottoPrice;
         this.resultStatistics = new ArrayList<>();
+
         compareNumber();
     }
 

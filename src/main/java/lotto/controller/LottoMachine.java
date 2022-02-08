@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.domain.Lotto;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
 import lotto.domain.Price;
@@ -15,8 +14,6 @@ public class LottoMachine {
 
     private static LottoMachine lottoMachine = null;
 
-    private LottoStatistics lottoStatistics;
-
     private LottoMachine() {}
 
     public static LottoMachine getInstance() {
@@ -28,8 +25,9 @@ public class LottoMachine {
 
     public void run() {
         final LottoTicket lottoTicket = purchaseLotto(getLottoPrice());
-        calculateWinningResult(lottoTicket);
-//        printResult();
+        final LottoStatistics lottoStatistics = calculateWinningResult(lottoTicket);
+
+        printResult(lottoStatistics);
     }
 
     public LottoTicket purchaseLotto(int price) {
@@ -42,16 +40,16 @@ public class LottoMachine {
         return lottoTicket;
     }
 
-    public void calculateWinningResult(LottoTicket lottoTicket) {
+    public LottoStatistics calculateWinningResult(LottoTicket lottoTicket) {
         final List<Integer> winningNumberList = WinningNumbers.from(getWinningNumber()).getWinningNumbers();
         final int bonusBall = getBonusBall();
 
-        lottoStatistics = new LottoStatistics(winningNumberList, bonusBall,
+        return new LottoStatistics(winningNumberList, bonusBall,
             lottoTicket.getLottoTicket(), lottoTicket.getLottoTicketPrice());
     }
 
-    public void printResult() {
-        statisticsProcess();
+    public void printResult(LottoStatistics lottoStatistics) {
+        statisticsProcess(lottoStatistics);
     }
 
     private int getLottoPrice() {
@@ -73,8 +71,7 @@ public class LottoMachine {
         return InputView.readBonusNumber();
     }
 
-    private void statisticsProcess() {
-        ResultView.printLottoStatistics(lottoStatistics.getResultStatistics(),
-            lottoStatistics.getLottoEarningRate());
+    private void statisticsProcess(LottoStatistics lottoStatistics) {
+        ResultView.printLottoStatistics(lottoStatistics);
     }
 }
