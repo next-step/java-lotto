@@ -46,8 +46,7 @@ public class LottoMachine {
             .getWinningNumbers();
         final int bonusBall = getBonusBall();
 
-        return new LottoStatistics(winningNumberList, bonusBall,
-            lottoTicket.getLottoTicket(), lottoTicket.getLottoTicketPrice());
+        return LottoStatistics.of(winningNumberList, bonusBall, lottoTicket);
     }
 
     public void printResult(LottoStatistics lottoStatistics) {

@@ -16,14 +16,18 @@ public class LottoStatistics {
     private final List<Statistics> resultStatistics;
     private final int lottoPrice;
 
-    public LottoStatistics(List<Integer> winningNumbers, int bonusNumber, List<Lotto> lottoList, int lottoPrice) {
+    public LottoStatistics(List<Integer> winningNumbers, int bonusNumber, LottoTicket lottoTicket) {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
-        this.lottoList = lottoList;
-        this.lottoPrice = lottoPrice;
+        this.lottoList = lottoTicket.getLottoTicket();
+        this.lottoPrice = lottoTicket.getLottoTicketPrice();
         this.resultStatistics = new ArrayList<>();
 
         compareNumber();
+    }
+
+    public static LottoStatistics of (List<Integer> winningNumbers, int bonusNumber, LottoTicket lottoTicket) {
+        return new LottoStatistics(winningNumbers, bonusNumber, lottoTicket);
     }
 
     public List<Statistics> getResultStatistics() {
