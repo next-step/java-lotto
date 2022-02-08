@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 public class LottoStatistics {
 
     private static final int MATCH_FIVE = 5;
-    private static final int MIN_WIN_COUNT = 3;
 
     private final WinningNumbers winningNumbers;
     private final List<Lotto> lottoList;
@@ -27,33 +26,29 @@ public class LottoStatistics {
     private void compareNumber() {
         for (int i = 0; i < lottoList.size(); i++) {
             int count = matchWinningNumbers(lottoList.get(i));
-            getRank(count, lottoList.get(i));
+            resultStatistics.add(getRank(count, lottoList.get(i)));
         }
     }
 
-    private void getRank(final int count, final Lotto lottoNumberList) {
-        if (count < MIN_WIN_COUNT) {
-            return;
-        }
-
+    private Rank getRank(final int count, final Lotto lottoNumberList) {
         if (matchBonusNumber(count, lottoNumberList)) {
-            resultStatistics.add(Rank.SECOND);
-        } else {
-            resultStatistics.add(Rank.getRank(count));
+            return Rank.SECOND;
         }
-    }
-
-    private boolean matchBonusNumber(final int count, final Lotto lottoNumberList) {
-        return count == MATCH_FIVE && lottoNumberList.getLottoNumber().contains(winningNumbers.getBonusNumber());
-    }
-
-    private boolean isWinningNumber(final LottoNumber lottoNumber) {
-        return winningNumbers.getWinningNumber().contains(lottoNumber);
+        return Rank.getRank(count);
     }
 
     private int matchWinningNumbers(final Lotto lottoNumberList) {
         return lottoNumberList.getLottoNumber().stream().filter(x -> isWinningNumber(x))
             .collect(Collectors.toList()).size();
+    }
+
+    private boolean matchBonusNumber(final int count, final Lotto lottoNumberList) {
+        return count == MATCH_FIVE && lottoNumberList.getLottoNumber()
+            .contains(winningNumbers.getBonusNumber());
+    }
+
+    private boolean isWinningNumber(final LottoNumber lottoNumber) {
+        return winningNumbers.getWinningNumber().contains(lottoNumber);
     }
 
     public List<Rank> getResultStatistics() {
