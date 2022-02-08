@@ -1,6 +1,6 @@
 package stringcalculator.domain;
 
-import static stringcalculator.domain.Validator.validatePositiveNumber;
+import static stringcalculator.domain.Validator.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,11 +10,11 @@ import java.util.regex.Pattern;
 
 public class Delimiter {
 
-    private static final int DELIMETER_GROUP = 1;
+    private static final int DELIMITER_GROUP = 1;
     private static final int EXPRESSION_GROUP = 2;
 
-    private final static String CUSTOM_DELIMITER = "//(.)\n(.*)";
-    private final static String[] DEFAULT_DELIMITER = new String[]{",", ":"};
+    private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
+    private static final String[] DEFAULT_DELIMITER = new String[]{",", ":"};
 
     private static final List<String> delimiters = new ArrayList<>(
         Arrays.asList(DEFAULT_DELIMITER));
@@ -26,7 +26,7 @@ public class Delimiter {
         Pattern pattern = Pattern.compile(CUSTOM_DELIMITER);
         Matcher matcher = pattern.matcher(input);
         if (matcher.find()) {
-            addCustomDelimiter(matcher.group(DELIMETER_GROUP));
+            addCustomDelimiter(matcher.group(DELIMITER_GROUP));
             return matcher.group(EXPRESSION_GROUP);
         }
         return input;
@@ -43,7 +43,7 @@ public class Delimiter {
     private static List<Integer> convertOperandType(List<String> tokens) {
         List<Integer> numbers = new ArrayList<>();
         tokens.forEach(
-            token -> numbers.add(validatePositiveNumber(token))
+            token -> numbers.add(Validator.validatePositiveNumber(token))
         );
         return numbers;
     }
