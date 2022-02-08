@@ -18,7 +18,7 @@ public class Money {
     }
 
     public int getCount() {
-        return 0;
+        return money / LOTTO_PRICE;
     }
 
     private void validateMoney() {
