@@ -2,12 +2,15 @@ package lotto.domain;
 
 public class LottoCount {
 
-    private static final int LOTTO_PRICE = 1_000;
+    private final int lottoCount;
 
-    private int lottoCount;
+    private LottoCount(int count) {
+        this.lottoCount = count;
+    }
 
-    public LottoCount(int count) {
-        this.lottoCount = count / LOTTO_PRICE;
+    public static LottoCount from(Money money) {
+        int count = money.getCount();
+        return new LottoCount(count);
     }
 
     public int count() {
