@@ -2,13 +2,14 @@ package stringcalculator.domain;
 
 
 public class Validator {
+    private static final int BREAKPOINT = 0;
 
     private Validator() {
 
     }
 
     public static int validatePositiveNumber(final int token) {
-        if (token < 0) {
+        if (token < BREAKPOINT) {
             throw new RuntimeException("[Error]: 양수만 연산 가능합니다.");
         }
         return token;
