@@ -7,9 +7,8 @@ public class Lotto {
 
     private List<LottoNumber> lottoList;
 
-    public Lotto() {
-        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-        this.lottoList = lottoNumberGenerator.generate();
+    public Lotto(List<LottoNumber> lottoList) {
+        this.lottoList = lottoList;
     }
 
     public List<LottoNumber> getLottoList() {

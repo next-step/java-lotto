@@ -7,40 +7,34 @@ import java.util.stream.Collectors;
 
 public class LottoStatistics {
 
-    private static final int MATCH_FOUR = 4;
+    private static final int MATCH_FIVE = 5;
     private static final int MIN_WIN_COUNT = 3;
-    private final List<Integer> winningNumbers;
-    private final int bonusNumber;
-    private final List<Lotto> lottoList;
+    private final WinningNumbers winningNumbers;
+    private final List<List<LottoNumber>> lottoList;
     private final List<Statistics> resultStatistics;
     private final int lottoPrice;
 
-    public LottoStatistics(List<Integer> winningNumbers, int bonusNumber, List<Lotto> lottoList, int lottoPrice) {
+    public LottoStatistics(WinningNumbers winningNumbers, List<List<LottoNumber>> lottoList, int lottoPrice) {
         this.winningNumbers = winningNumbers;
-        this.bonusNumber = bonusNumber;
         this.lottoList = lottoList;
         this.lottoPrice = lottoPrice;
         this.resultStatistics = new ArrayList<>();
         compareNumber();
     }
 
-    public List<Statistics> getResultStatistics() {
-        return Collections.unmodifiableList(resultStatistics);
-    }
-
     private void compareNumber() {
-        for (Lotto lotto : lottoList) {
-            int count = matchWinningNumbers(lotto);
-            getRank(count, lotto);
+        for (int i = 0; i < lottoList.size(); i++) {
+            int count = matchWinningNumbers(lottoList.get(i));
+            getRank(count, lottoList.get(i));
         }
     }
 
-    private void getRank(final int count, final Lotto lotto) {
+    private void getRank(final int count, final List<LottoNumber> lottoNumberList) {
         if (count < MIN_WIN_COUNT) {
             return;
         }
 
-        if (matchBonusNumber(count, lotto)) {
+        if (matchBonusNumber(count, lottoNumberList)) {
             resultStatistics.add(Statistics.SECOND);
         } else {
             resultStatistics.add(Statistics.getRank(count));
@@ -55,17 +49,20 @@ public class LottoStatistics {
         return String.format("%.2f",totalPrice / lottoPrice);
     }
 
-    private boolean matchBonusNumber(final int count, final Lotto lotto) {
-        return count == MATCH_FOUR && lotto.getLottoList().contains(bonusNumber);
+    private boolean matchBonusNumber(final int count, final List<LottoNumber> lottoNumberList) {
+        return count == MATCH_FIVE && lottoNumberList.contains(winningNumbers.getBonusNumber());
     }
 
-    private boolean isWinningNumber(final LottoNumber number) {
-        return winningNumbers.contains(number);
+    private boolean isWinningNumber(final LottoNumber lottoNumber) {
+        return winningNumbers.getWinningNumber().contains(lottoNumber);
     }
 
-    private int matchWinningNumbers(final Lotto lotto) {
-        return lotto.getLottoList().stream().filter(x -> isWinningNumber(x))
+    private int matchWinningNumbers(final List<LottoNumber> lottoNumberList) {
+        return lottoNumberList.stream().filter(x -> isWinningNumber(x))
             .collect(Collectors.toList()).size();
     }
 
+    public List<Statistics> getResultStatistics() {
+        return Collections.unmodifiableList(resultStatistics);
+    }
 }
