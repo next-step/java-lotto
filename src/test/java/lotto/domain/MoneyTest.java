@@ -30,4 +30,12 @@ public class MoneyTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> new Money(money));
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"10000", "1000"})
+    void 금액에_따른_구매_매수를_반환할_수_있다(String money) {
+        Money createMoney = new Money(money);
+        int expectCount = Integer.parseInt(money) / 1_000;
+        assertThat(createMoney.getCount()).isEqualTo(expectCount);
+    }
 }

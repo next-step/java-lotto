@@ -17,6 +17,10 @@ public class Money {
         return money;
     }
 
+    public int getCount() {
+        return 0;
+    }
+
     private void validateMoney() {
         if (notPurchasable()) {
             throw new IllegalArgumentException(NOT_PURCHASABLE_EXCEPTION_MESSAGE);
