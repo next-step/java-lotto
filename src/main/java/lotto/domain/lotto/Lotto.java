@@ -18,4 +18,8 @@ public class Lotto {
     public boolean hasNumber(Number number) {
         return this.numbers.getNumbersValue().contains(number);
     }
+
+    public Integer getMatchCount(Lotto lotto) {
+        return Math.toIntExact(this.numbers.getNumbersValue().stream().filter(lotto::hasNumber).count());
+    }
 }

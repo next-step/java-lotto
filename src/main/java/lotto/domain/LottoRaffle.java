@@ -38,8 +38,7 @@ public class LottoRaffle {
     }
 
     private Integer calculateMatchCount(Lotto lotto) {
-        return Math.toIntExact(
-            lotto.getLotto().getNumbersValue().stream().filter(winningLotto::hasNumber).count());
+        return lotto.getMatchCount(winningLotto);
     }
 
     public Map<LottoResult, Integer> getResults() {
