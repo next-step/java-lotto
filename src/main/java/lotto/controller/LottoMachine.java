@@ -40,14 +40,19 @@ public class LottoMachine {
 
     public void purchaseLotto() {
         Price lottoPrice = Price.from(getLottoPrice());
-        lottoTicket = new LottoTicket(lottoPrice.getValue());
-        lottoLists = lottoTicket.getLottoLists();
-        ResultView.printLottoNumbers(lottoLists);
+
+        convertPriceToLotto(lottoPrice);
     }
 
     private int getLottoPrice() {
         OutputView.printRequestLottoPrice();
         return InputView.readPrice();
+    }
+
+    private void convertPriceToLotto(Price lottoPrice) {
+        lottoTicket = new LottoTicket(lottoPrice.getValue());
+        lottoLists = lottoTicket.getLottoLists();
+        ResultView.printLottoNumbers(lottoLists);
     }
 
     private void lottoCountProcess() {
