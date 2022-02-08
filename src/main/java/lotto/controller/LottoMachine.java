@@ -15,8 +15,7 @@ public class LottoMachine {
     private static LottoMachine lottoMachine = null;
 
     private Price lottoPrice;
-    private List<Lotto> lottoLists;
-    private LottoTicket lottoTicket;
+    private List<Lotto> lottoTicket;
     private List<Integer> winningNumberList;
     private int bonusBall;
 
@@ -50,13 +49,12 @@ public class LottoMachine {
     }
 
     private void convertPriceToLotto(Price lottoPrice) {
-        lottoTicket = new LottoTicket(lottoPrice.getValue());
-        lottoLists = lottoTicket.getLottoLists();
-        ResultView.printLottoNumbers(lottoLists);
+        lottoTicket = LottoTicket.from(lottoPrice.getValue()).getLottoTicket();
+        ResultView.printLottoNumbers(lottoTicket);
     }
 
     private void lottoCountProcess() {
-        OutputView.printLottoCount(lottoTicket.getLottoCount());
+        OutputView.printLottoCount(lottoTicket.size());
     }
 
     private void winningNumberProcess() {
@@ -74,7 +72,7 @@ public class LottoMachine {
 
     private void statisticsProcess() {
         LottoStatistics lottoStatistics = new LottoStatistics(winningNumberList, bonusBall,
-            lottoLists, lottoPrice.getValue());
+            lottoTicket, lottoPrice.getValue());
 
         ResultView.printLottoStatistics(lottoStatistics.getResultStatistics(),
             lottoStatistics.getLottoEarningRate());
