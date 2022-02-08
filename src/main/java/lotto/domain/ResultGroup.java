@@ -22,4 +22,12 @@ public class ResultGroup {
     public int howManyHave(WinningResult result) {
         return resultGroup.get(result);
     }
+
+    public double calculateProfits(Money money) {
+        double totalEarning = 0;
+        for (WinningResult result : WinningResult.winningResults()) {
+            totalEarning += howManyHave(result) * result.prize();
+        }
+        return totalEarning / money.value();
+    }
 }

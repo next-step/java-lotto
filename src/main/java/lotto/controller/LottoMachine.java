@@ -10,6 +10,7 @@ import lotto.domain.LottoCount;
 import lotto.domain.LottoGenerator;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.domain.Money;
 import lotto.domain.ResultGroup;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
@@ -54,6 +55,12 @@ public class LottoMachine {
             .stream()
             .map(Lotto::values)
             .forEach(LottoMachine::showEachLottoNumber);
+    }
+
+    public static void showResults(ResultGroup resultGroup, Money money) {
+        OutputView.printResult(new ResultGroupDto(resultGroup));
+        double profits = resultGroup.calculateProfits(money);
+        OutputView.printProfits(profits);
     }
 
     private static void showEachLottoNumber(List<LottoNumber> lottoNumber) {

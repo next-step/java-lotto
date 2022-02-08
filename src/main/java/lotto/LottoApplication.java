@@ -1,14 +1,12 @@
 package lotto;
 
 import lotto.controller.LottoMachine;
-import lotto.controller.ResultGroupDto;
 import lotto.domain.LottoCount;
 import lotto.domain.LottoTicket;
 import lotto.domain.Money;
 import lotto.domain.ResultGroup;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
-import lotto.view.OutputView;
 
 public class LottoApplication {
 
@@ -21,8 +19,7 @@ public class LottoApplication {
         LottoMachine.showLottoTicket(lottoTicket);
         WinningLotto winningLotto = getWinningLotto();
         ResultGroup resultGroup = LottoMachine.getResult(lottoTicket, winningLotto);
-        ResultGroupDto resultGroupDto = new ResultGroupDto(resultGroup, money);
-        OutputView.printResult(resultGroupDto);
+        LottoMachine.showResults(resultGroup, money);
     }
 
     private static WinningLotto getWinningLotto() {

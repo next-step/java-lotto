@@ -39,8 +39,11 @@ public class OutputView {
             int count = resultGroup.howManyHave(result);
             System.out.printf(STATICS_RESULT_FORMAT, result.count(), result.prize(), count);
         }
-        System.out.printf(PROFIT_RESULT_FORMAT, resultGroup.getProfits());
-        if (resultGroup.getProfits() < PROFIT_THRESHOLD) {
+    }
+
+    public static void printProfits(double profits) {
+        System.out.printf(PROFIT_RESULT_FORMAT, profits);
+        if (profits < PROFIT_THRESHOLD) {
             System.out.println(PROFIT_WARNING_MESSAGE);
         }
     }
