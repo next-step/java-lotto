@@ -8,7 +8,7 @@ public class OutputView {
     public static final String ERROR_WRONG_LOTTO_PRICE = "로또 한 장은 1000원입니다. 잘못된 금액입니다.";
     private static final String REQUEST_LOTTO_PRICE = "구입금액을 입력해 주세요.";
     private static final String SYSTEM_LOTTO_COUNT = "개를 구매했습니다.";
-    private static final String REQUEST_WINNING_NUMBER_BEFORE = "\n지난 주 당첨 번호를 입력해주세요.(ex 1, 2, 3, 4, 5)";
+    private static final String REQUEST_WINNING_NUMBER_BEFORE = "\n지난 주 당첨 번호를 입력해주세요.(ex 1, 2, 3, 4, 5, 6)";
     private static final String REQUEST_BONUS_BALL_NUMBER = "보너스 볼을 입력해주세요.";
     private static final String WINNING_STATS = "\n당첨 통계\n------------";
 

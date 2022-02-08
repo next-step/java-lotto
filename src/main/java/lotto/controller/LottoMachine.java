@@ -5,6 +5,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
 import lotto.domain.Price;
+import lotto.domain.WinningNumbers;
 import lotto.util.Util;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -30,10 +31,8 @@ public class LottoMachine {
 
     public void run() {
         purchaseLotto();
-
-        winningNumberProcess();
-        bonusBallProcess();
-        statisticsProcess();
+        calculateWinningResult();
+        printResult();
     }
 
     public void purchaseLotto() {
@@ -45,6 +44,17 @@ public class LottoMachine {
         OutputView.printLottoCount(lottoTicket.size());
     }
 
+    public void calculateWinningResult() {
+        WinningNumbers winningNumbers = WinningNumbers.from(getWinningNumber());
+
+        winningNumberList = winningNumbers.getWinningNumbers();
+        bonusBall = getBonusBall();
+    }
+
+    public void printResult() {
+        statisticsProcess();
+    }
+
     private int getLottoPrice() {
         OutputView.printRequestLottoPrice();
         return InputView.readPrice();
@@ -54,17 +64,14 @@ public class LottoMachine {
         return LottoTicket.from(lottoPrice.getValue()).getLottoTicket();
     }
 
-    private void winningNumberProcess() {
-        final String winningNumber;
-
+    private List<Integer> getWinningNumber() {
         OutputView.printWinningNumberBefore();
-        winningNumber = InputView.readWinningNumber();
-        winningNumberList = Util.stringToIntegerList(winningNumber);
+        return Util.stringToIntegerList(InputView.readWinningNumber());
     }
 
-    private void bonusBallProcess() {
+    private int getBonusBall() {
         OutputView.printBonusBallNumber();
-        bonusBall = InputView.readBonusNumber();
+        return InputView.readBonusNumber();
     }
 
     private void statisticsProcess() {
