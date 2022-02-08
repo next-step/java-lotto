@@ -21,12 +21,12 @@ public class Price {
     }
 
     private void validatePrice() {
-        if (notPurchasable()) {
+        if (!isPurchasable()) {
             throw new IllegalArgumentException(NOT_PURCHASEABLE_EXCEPTION_MESSAGE);
         }
     }
 
-    private boolean notPurchasable () {
-        return price < LOTTO_PRICE || price % LOTTO_PRICE != 0;
+    private boolean isPurchasable () {
+        return price >= LOTTO_PRICE && price % LOTTO_PRICE == 0;
     }
 }
