@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Lottos {
+public class LottoTicket {
 
     private static final int LOTTO_PRICE = 1000;
 
     final List<Lotto> lottoLists;
     final int lottoCount;
 
-    public Lottos(int totalPrice) {
+    public LottoTicket(int totalPrice) {
         validateLottoPrice(totalPrice);
 
         this.lottoCount = totalPrice / LOTTO_PRICE;

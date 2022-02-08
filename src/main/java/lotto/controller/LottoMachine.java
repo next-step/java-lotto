@@ -3,7 +3,7 @@ package lotto.controller;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoStatistics;
-import lotto.domain.Lottos;
+import lotto.domain.LottoTicket;
 import lotto.util.Util;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -11,14 +11,26 @@ import lotto.view.ResultView;
 
 public class LottoMachine {
 
+    private static LottoMachine lottoMachine = null;
+
     private int lottoPrice;
     private List<Lotto> lottoLists;
-    private Lottos lottos;
+    private LottoTicket lottoTicket;
     private List<Integer> winningNumberList;
     private int bonusBall;
 
+    private LottoMachine() {}
+
+    public static LottoMachine getInstance() {
+        if (lottoMachine == null) {
+            lottoMachine = new LottoMachine();
+        }
+        return lottoMachine;
+    }
+
     public void start() {
-        lottoPriceProcess();
+        purchaseLotto();
+
         lottoListsProcess();
         lottoCountProcess();
         winningNumberProcess();
@@ -26,19 +38,23 @@ public class LottoMachine {
         statisticsProcess();
     }
 
-    private void lottoPriceProcess() {
+    public void purchaseLotto() {
+        enterLottoPrice();
+    }
+
+    private void enterLottoPrice() {
         OutputView.printRequestLottoPrice();
         lottoPrice = InputView.readPrice();
     }
 
     private void lottoListsProcess() {
-        lottos = new Lottos(lottoPrice);
-        lottoLists = lottos.getLottoLists();
+        lottoTicket = new LottoTicket(lottoPrice);
+        lottoLists = lottoTicket.getLottoLists();
         ResultView.printLottoNumbers(lottoLists);
     }
 
     private void lottoCountProcess() {
-        OutputView.printLottoCount(lottos.getLottoCount());
+        OutputView.printLottoCount(lottoTicket.getLottoCount());
     }
 
     private void winningNumberProcess() {
