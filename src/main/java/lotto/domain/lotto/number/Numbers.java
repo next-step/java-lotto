@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.lotto.Lotto;
 import lotto.util.NumbersValidator;
 
 public class Numbers {
@@ -28,5 +29,13 @@ public class Numbers {
 
     public List<Number> getNumbersValue() {
         return new ArrayList<>(numbersValue);
+    }
+
+    public boolean has(Number number) {
+        return numbersValue.contains(number);
+    }
+
+    public Integer getMatchCount(Lotto lotto) {
+        return Math.toIntExact(this.numbersValue.stream().filter(lotto::hasNumber).count());
     }
 }

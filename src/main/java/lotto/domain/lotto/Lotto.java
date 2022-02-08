@@ -16,10 +16,10 @@ public class Lotto {
     }
 
     public boolean hasNumber(Number number) {
-        return this.numbers.getNumbersValue().contains(number);
+        return this.numbers.has(number);
     }
 
     public Integer getMatchCount(Lotto lotto) {
-        return Math.toIntExact(this.numbers.getNumbersValue().stream().filter(lotto::hasNumber).count());
+        return this.numbers.getMatchCount(lotto);
     }
 }
