@@ -9,8 +9,6 @@ import stringcaculator.util.StringParser;
 
 public class Calculator {
 
-    private static final String CUSTOM_PREFIX = "//";
-
     private static Calculator instance;
 
     private Calculator() {
@@ -40,9 +38,6 @@ public class Calculator {
     }
 
     private String[] splitExpression(String expression) {
-        if (expression.startsWith(CUSTOM_PREFIX)) {
-            return StringParser.splitCustomDelimiter(expression);
-        }
-        return StringParser.splitDefaultDelimiter(expression);
+        return StringParser.splitExpression(expression);
     }
 }
