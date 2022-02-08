@@ -3,8 +3,6 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,15 +16,15 @@ public class RankResultTest {
     void totalPrizeTest() {
 
         Lotto lotto = new Lotto(
-            new LottoFullNumber(Arrays.asList(1, 2, 3, 4, 5, 6)
+            Arrays.asList(1, 2, 3, 4, 5, 6)
             .stream().map(LottoNumber::new)
-                .collect(Collectors.toList())));
+                .collect(Collectors.toList()));
         Lottos lottos = new Lottos(Arrays.asList(lotto));
 
         Lotto winningLotto = new Lotto(
-            new LottoFullNumber(Arrays.asList(1, 2, 3, 4, 5, 6)
+            Arrays.asList(1, 2, 3, 4, 5, 6)
                 .stream().map(LottoNumber::new)
-                .collect(Collectors.toList())));
+                .collect(Collectors.toList()));
         LottoNumber bonusLottoNumber = new LottoNumber(7);
         Winning winning = new Winning(winningLotto, bonusLottoNumber);
 
