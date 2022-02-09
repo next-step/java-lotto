@@ -13,19 +13,18 @@ public class LottoRules {
     private final static int START_INDEX = 0;
     private final static int LAST_INDEX = 6;
 
-    private final List<Integer> lottoNums;
+    private final List<Integer> baseLottoNumbers;
 
     public LottoRules() {
-        List<Integer> lottoNums = new ArrayList<>();
+        baseLottoNumbers = new ArrayList<>();
         for (int i = START_NUM; i <= LAST_NUM; i++) {
-            lottoNums.add(i);
+            baseLottoNumbers.add(i);
         }
-        this.lottoNums = lottoNums;
     }
 
-    public List<Integer> makeLottoNums() {
-        Collections.shuffle(lottoNums);
-        return lottoNums.subList(START_INDEX, LAST_INDEX);
+    public List<Integer> makeLottoNumbers() {
+        Collections.shuffle(baseLottoNumbers);
+        return baseLottoNumbers.subList(START_INDEX, LAST_INDEX);
     }
 
     public int getLottoPrice() {
