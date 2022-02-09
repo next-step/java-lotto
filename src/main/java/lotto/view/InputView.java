@@ -15,14 +15,6 @@ public class InputView {
         return input();
     }
 
-    private static String input() {
-        final Scanner sc = new Scanner(System.in);
-        final String input = sc.nextLine().trim();
-        validateBlank(input);
-
-        return input;
-    }
-
     public static String inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return removeBlank(input());
@@ -41,5 +33,13 @@ public class InputView {
         if (input.isEmpty()) {
             throw new IllegalArgumentException(EMPTY_INPUT_EXCEPTION_MESSAGE);
         }
+    }
+
+    private static String input() {
+        final Scanner sc = new Scanner(System.in);
+        final String input = sc.nextLine().trim();
+        validateBlank(input);
+
+        return input;
     }
 }
