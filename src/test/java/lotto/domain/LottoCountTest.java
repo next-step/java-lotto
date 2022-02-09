@@ -39,4 +39,24 @@ public class LottoCountTest {
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("[ERROR]");
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1, 1, 0", "4, 1, 3", "1000, 500, 500"})
+    void 두_개수의_차를_구할_수_있다(String lottoCount1, String lottoCount2, int answer) {
+        LottoCount leftCount = LottoCount.from(lottoCount1);
+        LottoCount rightCount = LottoCount.from(lottoCount2);
+        LottoCount answerCount = leftCount.minus(rightCount);
+        assertThat(answerCount.count()).isEqualTo(answer);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1, 2", "500, 1000"})
+    void 더_큰_수로_뺄_수_없다(String lottoCount1, String lottoCount2) {
+        LottoCount leftCount = LottoCount.from(lottoCount1);
+        LottoCount rightCount = LottoCount.from(lottoCount2);
+        assertThatThrownBy(() -> leftCount.minus(rightCount))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("[ERROR]")
+            .hasMessageContaining("더 큰");
+    }
 }

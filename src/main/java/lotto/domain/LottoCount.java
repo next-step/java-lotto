@@ -27,6 +27,10 @@ public class LottoCount {
         return lottoCount;
     }
 
+    public LottoCount minus(LottoCount manualCount) {
+        return null;
+    }
+
     private static int parseLottoCount(String lottoCount) {
         try {
             return Integer.parseInt(lottoCount);
@@ -40,5 +44,4 @@ public class LottoCount {
             throw new IllegalArgumentException(LOTTO_COUNT_VALIDATE_MESSAGE);
         }
     }
-
 }
