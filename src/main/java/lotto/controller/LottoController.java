@@ -14,8 +14,6 @@ import lotto.view.ResultView;
 public class LottoController {
 
     private final LottoGame lottoGame = new LottoGame();
-    public LottoController() {
-    }
 
     public void start() {
         final Money money = inputMoneyValue();
