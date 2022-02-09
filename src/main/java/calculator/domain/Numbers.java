@@ -40,9 +40,8 @@ public class Numbers {
     }
 
     private List<Number> splitDelimiter(String[] expression) {
-        String join = String.join(COMMA, expression);
-        String[] split = join.split(REGX_DELIMITER);
-        return Arrays.stream(split)
+        String[] splitedNumber = String.join(COMMA, expression).split(REGX_DELIMITER);
+        return Arrays.stream(splitedNumber)
             .map(Number::new)
             .collect(Collectors.toList());
     }
