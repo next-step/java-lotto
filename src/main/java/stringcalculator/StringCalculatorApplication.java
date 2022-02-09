@@ -13,7 +13,7 @@ public class StringCalculatorApplication {
         String delimiter = InputView.inputDelimiter();
         String expression = InputView.inputExpression();
 
-        List<Integer> numbers = ExpressionParser.parse(expression, new Delimiters(delimiter).getValuesToString());
+        List<Integer> numbers = ExpressionParser.parse(expression, new Delimiters(delimiter).getValuesToRegex());
 
         int result = Accumulator.calculate(numbers);
         ResultView.print(result);

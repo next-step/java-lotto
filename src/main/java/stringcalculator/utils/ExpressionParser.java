@@ -6,21 +6,18 @@ import java.util.stream.Collectors;
 
 public class ExpressionParser {
 
-    private ExpressionParser() {}
+    private ExpressionParser() {
+    }
 
     private static final String INVALID_EXPRESSION_FORMAT_EXCEPTION_MESSAGE = "구분자와 숫자만으로 이루어져야 합니다.";
 
     public static List<Integer> parse(String expression, String delimiters) {
         validateContainsOtherCharacter(expression, delimiters);
-        String[] split = expression.split(getDelimiterRegex(delimiters));
+        String[] split = expression.split(delimiters);
 
         return Arrays.stream(split)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-    }
-
-    private static String getDelimiterRegex(String delimiters) {
-        return String.format("[%s]", delimiters);
     }
 
     private static void validateContainsOtherCharacter(String expression, String delimiters) {
