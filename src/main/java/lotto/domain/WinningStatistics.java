@@ -1,8 +1,7 @@
-package lotto.service;
+package lotto.domain;
 
 import java.util.HashMap;
 import java.util.List;
-import lotto.domain.LottoResult;
 
 public class WinningStatistics {
 
@@ -19,7 +18,7 @@ public class WinningStatistics {
 
         for(LottoResult lottoResult : result.keySet()) {
             final double value = result.get(lottoResult);
-            totalWinning += value * lottoResult.getReward();
+            totalWinning += value * lottoResult.getPrize();
         }
 
         return format(totalWinning / purchasePrice);
