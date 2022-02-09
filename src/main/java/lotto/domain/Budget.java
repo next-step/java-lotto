@@ -19,7 +19,7 @@ public class Budget {
         return value;
     }
 
-    public boolean canPurchase(int priceOfLotto) {
-        return this.value > priceOfLotto;
+    public boolean canNotPurchase(int priceOfLotto) {
+        return this.value < priceOfLotto;
     }
 }
