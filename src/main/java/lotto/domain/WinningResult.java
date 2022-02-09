@@ -10,10 +10,6 @@ public class WinningResult {
     private int matchingCount;
     private boolean hasBonus;
 
-    public WinningResult(List<WinningNumber> winningNumbers) {
-        this(new ArrayList<>(), winningNumbers);
-    }
-
     public WinningResult(List<LottoTicket> lottoTickets, List<WinningNumber> winningNumbers) {
         this.lottoTickets = lottoTickets;
         this.winningNumbers = winningNumbers;
@@ -45,15 +41,19 @@ public class WinningResult {
         return winningCount == BONUS_BALL_MATCHING;
     }
 
-    private void updateMatchingCountAndBonus(LottoTicket lotto, WinningNumber winningNumber) {
-        if (winningNumber.isBonus()) {
+    private void updateMatchingCountAndBonus(LottoTicket lottoTicket, WinningNumber winningNumber) {
+        if (winningNumber.isBonus() && hasWinningNumber(lottoTicket, winningNumber)) {
             hasBonus = true;
             return;
         }
 
-        if (lotto.getNumbers().contains(winningNumber.getNumber())) {
+        if (hasWinningNumber(lottoTicket, winningNumber)) {
             matchingCount++;
         }
+    }
+
+    private boolean hasWinningNumber(LottoTicket lottoTicket, WinningNumber winningNumber) {
+        return lottoTicket.getNumbers().contains(winningNumber.getNumber());
     }
 
     private void initMatchingCountAndBonus() {
