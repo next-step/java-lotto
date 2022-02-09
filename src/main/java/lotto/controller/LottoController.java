@@ -31,31 +31,6 @@ public class LottoController {
         LottoResult(money, rankCount);
     }
 
-    private static void LottoResult(Money money, RankCount rankCount) {
-        UserResult.printRank(rankResult(rankCount));
-        UserResult.printPrizeRatio(lottoTotalPrize(rankCount), money);
-    }
-
-    private static Money lottoTotalPrize(RankCount rankCount) {
-        return new RankResult(rankCount).getTotalPrize();
-    }
-
-    private static RankResult rankResult(RankCount rankCount) {
-        return new RankResult(rankCount);
-    }
-
-    private static RankCount lottoRankCount(Lottos lottoBundle, Lotto winningLottoNumber,
-        LottoNumber bonusLottoNumber) {
-        RankCount rankCount = new RankCount(lottoBundle,
-            new Winning(winningLottoNumber, bonusLottoNumber));
-        return rankCount;
-    }
-
-    private static Lotto winningLottoNumberInput() {
-        Lotto winningLottoNumber = new Lotto(UserConsole.winningLottoNumber());
-        return winningLottoNumber;
-    }
-
     private static Lottos generateLottoBundle(Money money) {
         Lottos lottoBundle = LottoBundle.lottoBundle(
             calculationLottoCount(makeLottoCalculation(money)));
@@ -65,6 +40,29 @@ public class LottoController {
     private static int calculationLottoCount(LottoCalculation lottoCalculation) {
         int count = lottoCalculation.lottoCalculation();
         return count;
+    }
+
+    private static Lotto winningLottoNumberInput() {
+        Lotto winningLottoNumber = new Lotto(UserConsole.winningLottoNumber());
+        return winningLottoNumber;
+    }
+
+    private static RankCount lottoRankCount(Lottos lottoBundle, Lotto winningLottoNumber,
+        LottoNumber bonusLottoNumber) {
+        return new RankCount(lottoBundle, new Winning(winningLottoNumber, bonusLottoNumber));
+    }
+
+    private static void LottoResult(Money money, RankCount rankCount) {
+        UserResult.printRank(rankResult(rankCount));
+        UserResult.printPrizeRatio(lottoTotalPrize(rankCount), money);
+    }
+
+    private static RankResult rankResult(RankCount rankCount) {
+        return new RankResult(rankCount);
+    }
+
+    private static Money lottoTotalPrize(RankCount rankCount) {
+        return new RankResult(rankCount).getTotalPrize();
     }
 
     private static LottoCalculation makeLottoCalculation(Money money) {
