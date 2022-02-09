@@ -55,7 +55,7 @@ class StatisticsTest {
 
         final double rate = statistics.getResult().getProfitRate();
         final double expected = (LottoRank.FIRST.getAmount() + LottoRank.SECOND.getAmount() * 2
-                + LottoRank.THIRD.getAmount()) / givenRanks.size();
+                + LottoRank.THIRD.getAmount()) / (givenRanks.size() * 1000);
 
         assertThat(rate).isEqualTo(expected);
     }
