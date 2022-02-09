@@ -51,12 +51,6 @@ public class WinningResult {
         }
     }
 
-    private void updateHasBonus(WinningNumber winningNumber) {
-        if (winningNumber.isBonus()) {
-            hasBonus = true;
-        }
-    }
-
     private void initMatchingCountAndBonus() {
         this.matchingCount = 0;
         this.hasBonus = false;
