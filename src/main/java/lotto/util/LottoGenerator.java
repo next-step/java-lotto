@@ -17,7 +17,7 @@ public class LottoGenerator {
             .boxed()
             .collect(Collectors.toList());
 
-    public static int getLottoQuantity(int purchasePrice) {
+    public static int getLottoTicketQuantity(int purchasePrice) {
         if (isLowerThanLeastPrice(purchasePrice)) {
             throw new IllegalArgumentException("[ERROR] 구매 금액이 1000원 이상이어야 합니다.");
         }
@@ -28,14 +28,14 @@ public class LottoGenerator {
         return price < LOTTO_PRICE;
     }
 
-    public static List<LottoTicket> getTotalLottoNumbers(int quantity) {
-        List<LottoTicket> totalNumbers = new ArrayList<>();
+    public static List<LottoTicket> getLottoTickets(int quantity) {
+        List<LottoTicket> LottoTickets = new ArrayList<>();
 
-        for(int i = 0; i < quantity; i++) {
-            LottoTicket lotto = new LottoTicket(getLottoNumbers());
-            totalNumbers.add(lotto);
+        for (int i = 0; i < quantity; i++) {
+            LottoTicket lottoTicket = new LottoTicket(getLottoNumbers());
+            LottoTickets.add(lottoTicket);
         }
-        return totalNumbers;
+        return LottoTickets;
     }
 
     public static List<Integer> getLottoNumbers() {
