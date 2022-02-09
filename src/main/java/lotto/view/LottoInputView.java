@@ -49,17 +49,19 @@ public class LottoInputView {
         return new LottoNumber(Integer.parseInt(SCANNER.nextLine()));
     }
 
-    public void printAmount(final int lottoAmount) {
-        stringBuilder.append(lottoAmount)
-            .append("개를 구매했습니다.");
-        System.out.println(stringBuilder);
-    }
-
     public void printLottos(final Lottos lottos) {
+        printAmount(lottos);
         for (Lotto lotto : lottos.getLottos()) {
             printLotto(lotto.getLottoNumbers());
         }
     }
+
+    private void printAmount(final Lottos lottos) {
+        stringBuilder.append(lottos.getLottos().size())
+            .append("개를 구매했습니다.");
+        System.out.println(stringBuilder);
+    }
+
 
     private void printLotto(final List<LottoNumber> lottoNumbers) {
         stringBuilder.setLength(ZERO);

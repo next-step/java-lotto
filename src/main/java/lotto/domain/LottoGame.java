@@ -9,7 +9,6 @@ public class LottoGame {
 
     private static final int ZERO = 0;
 
-    private final StringBuilder stringBuilder = new StringBuilder();
     private final Map<Ranking, Integer> totalResult = new HashMap<>();
 
     public LottoGame() {
@@ -23,11 +22,6 @@ public class LottoGame {
 
     public Lottos startLotto(final int price, final LottoShop lottoShop) {
         final int lottoAmount = lottoShop.countPossibleLottoAmount(price);
-
-        stringBuilder.append(lottoAmount)
-            .append("개를 구매했습니다.");
-        System.out.println(stringBuilder);
-
         return lottoShop.buyLotto(lottoAmount);
     }
 
