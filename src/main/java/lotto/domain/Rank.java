@@ -2,27 +2,24 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-
 public enum Rank {
 
-    FIRST(6, 200000000),
-    SECOND(5, 30000000),
-    THIRD(5, 1500000),
-    FOURTH(4, 50000),
-    FIFTH(3, 5000),
-    NOTHING(0,0);
-
+    FIRST(6, 200_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    NOTHING(0, 0);
 
     private final int matchCount;
     private final Money prize;
 
-
-    Rank(final int matchCount,final int prize) {
+    Rank(final int matchCount, final int prize) {
         this.matchCount = matchCount;
         this.prize = new Money(prize);
     }
 
-    public static Rank countMatch(final Winning winning, final Lotto lotto){
+    public static Rank countMatch(final Winning winning, final Lotto lotto) {
         int lottoCount = (int) winning.winningLottoNumber(lotto);
         boolean bonusBallMatch = winning.bonusLottoNumber(lotto);
         if (THIRD.match(lottoCount) && !bonusBallMatch) {
@@ -32,13 +29,14 @@ public enum Rank {
             .orElse(NOTHING);
     }
 
-    public boolean match(final int count){
+    public boolean match(final int count) {
         return matchCount == count;
     }
 
-    public static boolean get(Rank rank){
-        return rank!=rank.NOTHING;
+    public static boolean get(Rank rank) {
+        return rank != rank.NOTHING;
     }
+
     public int getMatchCount() {
         return matchCount;
     }
@@ -46,7 +44,8 @@ public enum Rank {
     public Money getPrize() {
         return prize;
     }
-    public Money getPrize(final int hit){
+
+    public Money getPrize(final int hit) {
         return new Money(prize.getValue()).multiple(hit);
     }
 }
