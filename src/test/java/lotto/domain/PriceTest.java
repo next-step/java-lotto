@@ -14,7 +14,10 @@ class PriceTest {
     @ParameterizedTest
     @ValueSource(ints = {1000, 2000, 3000})
     void GivenMoneyWithIntType_WhenPriceGetValue_ThenEqualAsMoney(final int money) {
-        assertThat(Price.from(money).getValue()).isEqualTo(money);
+        final int PriceValue = Price.from(money).getValue();
+
+        assertThat(PriceValue)
+            .isEqualTo(money);
     }
 
     @DisplayName(value = "0으로 Price 객체를 생성할때, IllegalArgumentException이 발생한다.")

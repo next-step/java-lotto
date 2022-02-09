@@ -14,6 +14,9 @@ class LottoTicketGeneratorTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2, 3, 10, 20, 30})
     void GivenLottoCountWithIntType_WhenGenerateLottoTicketGenerator_ThenLottoTicketSizeEqualsLottoCount(final int lottoCount) {
-        assertThat(LottoTicketGenerator.from(lottoCount).getLottoTicket().size()).isEqualTo(lottoCount);
+        final int lottoTicketSize = LottoTicketGenerator.from(lottoCount).getLottoTicket().size();
+
+        assertThat(lottoTicketSize)
+            .isEqualTo(lottoCount);
     }
 }
