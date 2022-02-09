@@ -10,7 +10,7 @@ public class LottoGeneratorTest {
     @DisplayName("로또를_생성하는_기능_테스트_6가지_숫자를_선택")
     @Test
     void lottoGenerateTest() {
-        Lotto lotto = LottoGenerator.lottoGenerator();
+        Lotto lotto = LottoGenerator.generateLotto();
         assertThat(lotto.getLottoNumber()).isNotNull();
     }
 

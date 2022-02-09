@@ -17,7 +17,7 @@ public class LottoGenerator {
             .collect(Collectors.toList());
     }
 
-    public static Lotto lottoGenerator(){
+    public static Lotto generateLotto(){
         Collections.shuffle(lottoNumber);
         LottoNumbers lottoFullNumber = new LottoNumbers(lottoNumber);
         return new Lotto(lottoFullNumber);

@@ -23,7 +23,7 @@ public class Lottos {
     public static Lottos lottoBundle(final int count) {
         final List<Lotto> lottos = new ArrayList<>();
         for (int idx = 0; idx < count; idx++) {
-            lottos.add(LottoGenerator.lottoGenerator());
+            lottos.add(LottoGenerator.generateLotto());
         }
         return new Lottos(lottos);
     }
