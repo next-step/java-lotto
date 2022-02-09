@@ -11,6 +11,10 @@ public class LottoNumber {
         this.number = number;
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     private void validateNumberRange(int number) {
         if (number > MAX_NUMBER | number < MIN_NUMBER) {
             throw new IllegalArgumentException("[ERROR] 1에서 45까지의 숫자만 사용가능합니다.");
