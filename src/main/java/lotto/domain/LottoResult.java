@@ -40,7 +40,6 @@ public enum LottoResult {
     }
 
     public static LottoResult from(int matchCount, boolean hasBonus) {
-        //TODO: 로직 수정
         return Arrays.stream(LottoResult.values())
             .filter(lottoResult -> isSameCountAndBonus(lottoResult, matchCount, hasBonus))
             .findAny()
