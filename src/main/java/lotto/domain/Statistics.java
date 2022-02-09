@@ -35,6 +35,6 @@ public class Statistics {
 
     public double getProfitRate() {
         final List<LottoRank> lottoRanks = this.lottoRanks.get();
-        return lottoRanks.stream().mapToDouble(LottoRank::getAmount).sum() / lottoRanks.size();
+        return lottoRanks.stream().mapToDouble(LottoRank::getAmount).sum() / (lottoRanks.size() * 1000);
     }
 }
