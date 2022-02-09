@@ -18,10 +18,6 @@ public class LottoInputView {
     private static final String INPUT_LAST_WEEK_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해주세요.";
     private static final String LOTTO_AMOUNT_MESSAGE = "개를 구매했습니다.";
-    private static final int ZERO = 0;
-
-    public LottoInputView() {
-    }
 
     public int inputPrice() {
         System.out.println(INPUT_PRICE_MESSAGE);
@@ -59,7 +55,7 @@ public class LottoInputView {
 
     private void printLotto(final List<LottoNumber> lottoNumbers) {
         final List<Integer> numbers = lottoNumbers.stream()
-            .map(lottoNumber -> lottoNumber.getNumber())
+            .map(LottoNumber::getNumber)
             .collect(Collectors.toList());
 
         System.out.println(numbers);

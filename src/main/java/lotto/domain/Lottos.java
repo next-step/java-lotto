@@ -15,7 +15,7 @@ public class Lottos {
 
     public List<Ranking> judgeAllUserLotto(final WinningLotto winningLotto) {
         return lottos.stream()
-            .map(lotto -> winningLotto.compareLotto(lotto))
+            .map(winningLotto::compareLotto)
             .collect(Collectors.toList());
     }
 
