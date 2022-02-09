@@ -2,19 +2,15 @@
 
 ## 기능구현
 
-- [x] 구입금액 입력받기 -InputView
-- [x] 당첨 번호 입력받기 -InputView
-- [x] 보너스 볼 입력받기 -InputView
-- [x] 구입금액에 따라 로또 갯수 출력하기 -OutputView
-- [x] 로또 생성 - Collections.shuffle() 사용
-- [x] 로또 번호 정렬 -Collections.sort() 사용
-- [x] 일치하는 번호 개수 구하기
-- [x] 당첨 통계 출력하기 - Outputview
-- [x] 수익률 계산하기 (당첨금액/구입금액(구매개수*1000))
-
-Lotto(로또 번호, ), User(로또 리스트, 구입금액, 구매개수 ), WinningNumber (당첨번호, 보너스볼, 일치하는 번호 개수 메소드), Statistics(일치
-개수 관리, 수익율)
-로또 번호 메소드 인자로 (Array Random.random(45))
+- [x] 구입금액 입력받기 - InputView, LottoBuy
+- [x] 당첨 번호 입력받기 - InputView, LottoBuy
+- [x] 보너스 볼 입력받기 - InputView, LottoBuy
+- [x] 구입금액에 따라 로또 갯수 출력하기 - ResultView
+- [x] 로또 생성 - Collections.shuffle(), LottoNumber, Lotto
+- [x] 로또 번호 정렬 - Collections.sort(), Lotto
+- [x] 일치하는 번호 개수 구하기 - LottoResult
+- [x] 당첨 통계 출력하기 - LottoResult, ResultView
+- [x] 수익률 계산하기 (당첨금액/구입금액(구매개수*1000)) WinningLotto
 
 ## 예외처리
 
