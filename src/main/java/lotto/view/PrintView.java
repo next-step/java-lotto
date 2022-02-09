@@ -1,11 +1,15 @@
 package lotto.view;
 
-import java.util.Map;
-import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
+import lotto.domain.RankCounts;
 import lotto.domain.dto.ResultDto;
 
 public class PrintView {
+
+    private final static String RANK_FAIL = "FAIL";
+    private final static String RANK_SECOND = "SECOND";
+    private final static String FAIL_MATCH_COUNT = "0-2개";
+    private final static String BONUS_BALL_MATCH = "보너스 볼 일치";
 
     private PrintView() {
     }
@@ -19,30 +23,31 @@ public class PrintView {
     }
 
     public static void printResult(final ResultDto resultDto) {
-        printRankCounts(resultDto.getMatchCount(), resultDto.getAmounts());
+        printRankCounts(resultDto.getNumberOfRanks());
         printProfitRate(resultDto.getProfitRate());
     }
 
-    private static void printRankCounts(final Map<String, Integer> matchCount, final Map<String, Integer> amounts) {
+    private static void printRankCounts(RankCounts rankCounts) {
         StringBuilder result = new StringBuilder();
 
-        matchCount.forEach((rank, count) -> {
-            result.append(String.format("%s 일치, ", getMatchResultString(rank, count)));
-            result.append(String.format("(%d원) - %d개%n", amounts.get(rank), count));
+        rankCounts.get().forEach((rank, count) -> {
+            result.append(String.format("%s 일치, ",
+                    getMatchResultString(rank.name(), rank.getMatchCount())));
+            result.append(String.format("(%d원) - %d개%n", rank.getAmount(), count));
         });
 
         System.out.print(result);
     }
 
     private static String getMatchResultString(final String rank, final int count) {
-        if(rank.equals(LottoRank.FAIL.name())){
-            return "0-2개";
+        if (rank.equals(RANK_FAIL)) {
+            return FAIL_MATCH_COUNT;
         }
 
         StringBuilder matchString = new StringBuilder();
         matchString.append(String.format("%d개", count));
-        if (rank.equals(LottoRank.SECOND.name())) {
-            matchString.append("보너스 볼 일치");
+        if (rank.equals(RANK_SECOND)) {
+            matchString.append(BONUS_BALL_MATCH);
         }
 
         return matchString.toString();
