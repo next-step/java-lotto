@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningNumber {
-//TODO: 로또넘버로 값을 포장해보는 것은 어떨까요? - 이게 무슨소리?
-    private final int number;
+
+    private final LottoNumber number;
     private final boolean isBonus;
 
     public WinningNumber(int number) {
