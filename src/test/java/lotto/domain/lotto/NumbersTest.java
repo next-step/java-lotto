@@ -18,13 +18,13 @@ public class NumbersTest {
 
     static Stream<Arguments> comparisonNumbers() {
         return Stream.of(
-            Arguments.of(Arrays.asList(1,2,3,4,5,6), 6),
-            Arguments.of(Arrays.asList(2,3,4,5,6,7), 5),
-            Arguments.of(Arrays.asList(3,4,5,6,7,8), 4),
-            Arguments.of(Arrays.asList(4,5,6,7,8,9), 3),
-            Arguments.of(Arrays.asList(5,6,7,8,9,10), 2),
-            Arguments.of(Arrays.asList(6,7,8,9,10,11), 1),
-            Arguments.of(Arrays.asList(7,8,9,10,11,12), 0)
+            Arguments.of(getNumberList(Arrays.asList(1,2,3,4,5,6)), 6),
+            Arguments.of(getNumberList(Arrays.asList(2,3,4,5,6,7)), 5),
+            Arguments.of(getNumberList(Arrays.asList(3,4,5,6,7,8)), 4),
+            Arguments.of(getNumberList(Arrays.asList(4,5,6,7,8,9)), 3),
+            Arguments.of(getNumberList(Arrays.asList(5,6,7,8,9,10)), 2),
+            Arguments.of(getNumberList(Arrays.asList(6,7,8,9,10,11)), 1),
+            Arguments.of(getNumberList(Arrays.asList(7,8,9,10,11,12)), 0)
         );
     }
 
@@ -37,10 +37,13 @@ public class NumbersTest {
 
     @BeforeEach
     void setUp() {
-        source = new Numbers(Stream.of(1,2,3,4,5,6)
+        source = new Numbers(getNumberList(Arrays.asList(1, 2, 3, 4, 5, 6)));
+    }
+
+    static List<Number> getNumberList(List<Integer> integerList) {
+        return integerList.stream()
             .map(Number::new)
-            .collect(Collectors.toList())
-        );
+            .collect(Collectors.toList());
     }
 
     @DisplayName("로또 넘버와 비교대상군이 주어졌을 때, 적절한 일치 숫자 개수를 반환해야한다.")

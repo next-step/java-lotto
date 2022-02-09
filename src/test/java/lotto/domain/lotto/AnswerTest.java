@@ -16,21 +16,20 @@ class AnswerTest {
 
     private static final Rank RANK = Rank.FOURTH;
     private static final int MATCHES = 1;
-    private static final int BONUS_NUMBER = 8;
+    private static final int BONUS_NUMBER = 7;
 
-    private List<Number> baseNumberList;
     private List<Number> testNumberList;
     private Numbers numbers;
 
     @BeforeEach
     void setUp() {
-        numbers = new Numbers(baseNumberList);
-        baseNumberList = Stream.of(8, 21, 23, 41, 42, 43)
+        List<Number> baseNumberList = Stream.of(8, 21, 23, 41, 42, 43)
             .map(Number::new)
             .collect(Collectors.toList());
         testNumberList = Stream.of(8, 21, 25, 40, 42, 43)
             .map(Number::new)
             .collect(Collectors.toList());
+        numbers = new Numbers(baseNumberList);
     }
 
     Tickets getTickets() {
