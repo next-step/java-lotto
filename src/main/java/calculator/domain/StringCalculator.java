@@ -10,20 +10,21 @@ import java.util.stream.Collectors;
 public class StringCalculator {
 
     private static final String DELIMITER = ",|:";
+    private static final int DEFAULT_VALUE = 0;
     private static final String NEGATIVE_EXCEPTION = "[ERROR] 음수가 포함될 수 없습니다.";
 
     private StringCalculator() {}
 
     public static int calculate(final String text) {
-        if (isEmpty(text)) {
-            return 0;
+        if (isBlank(text)) {
+            return DEFAULT_VALUE;
         }
         List<Integer> numbers = parseTextToInt(text);
         hasNegativeValue(numbers);
         return sumNumbers(numbers);
     }
 
-    private static boolean isEmpty(String text) {
+    private static boolean isBlank(String text) {
         return Objects.isNull(text) || text.isEmpty();
     }
 
