@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.lotto.Numbers;
+import lotto.domain.lotto.Number;
 
 public class LottoAutoGenerator implements LottoGenerator {
 
@@ -36,6 +37,7 @@ public class LottoAutoGenerator implements LottoGenerator {
         return new Numbers(
             numbers.stream()
             .sorted()
+            .map(Number::new)
             .collect(Collectors.toList())
         );
     }
