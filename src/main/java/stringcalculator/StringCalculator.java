@@ -3,9 +3,9 @@ package stringcalculator;
 import static stringcalculator.domain.Calculator.calculator;
 
 import java.util.List;
-import stringcalculator.domain.Number;
+import stringcalculator.domain.Line;
+import stringcalculator.domain.Numbers;
 import stringcalculator.domain.Separator;
-import stringcalculator.domain.StringNumber;
 import stringcalculator.view.InputView;
 import stringcalculator.view.ResultView;
 
@@ -13,12 +13,13 @@ public class StringCalculator {
 
     public static void main(String[] args) {
         final InputView inputView = new InputView();
-        final StringNumber userInput = new StringNumber(inputView.inputCalculateString());
+        final Line line = inputView.inputCalculateString();
 
-        final Separator separator = new Separator(userInput.getStringNumber());
+        final Separator separator = new Separator(line.getLine());
 
-        final List<String> userNumbers = separator.split();
-        final Number numbers = new Number(userNumbers);
+        //TODO numbers 네이밍... 생각해보기
+        final List<Integer> userNumbers = separator.splitAsInteger();
+        final Numbers numbers = new Numbers(userNumbers);
         final ResultView resultView = new ResultView();
         resultView.printSum(calculator.calculate(numbers.getNumberInput()));
     }
