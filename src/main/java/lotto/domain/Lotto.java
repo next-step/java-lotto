@@ -11,7 +11,7 @@ public class Lotto {
     }
 
     public List<Integer> getLottoNumber() {
-        return lottoNumbers.getLottoFullNumber();
+        return lottoNumbers.getLottoNumbers();
     }
 
     public long countMatch(final Lotto lotto){
@@ -19,6 +19,6 @@ public class Lotto {
     }
 
     public boolean contains(final LottoNumber lottoNumber){
-        return this.lottoNumbers.getLottoFullNumber().contains(lottoNumber.value());
+        return this.lottoNumbers.getLottoNumbers().contains(lottoNumber.value());
     }
 }
