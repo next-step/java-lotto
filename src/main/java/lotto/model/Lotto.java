@@ -9,12 +9,12 @@ public class Lotto {
     private static final int LOTTO_NUMBER_CONDITION = 6;
     private static final String LOTTO_NUMBER_VALIDATION_MESSAGE = "로또는 6개의 숫자입니다";
 
-    private final List<Integer> numbers;
+    private final List<Integer> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
         validateLotto(lottoNumbers);
         Collections.sort(lottoNumbers);
-        this.numbers = new ArrayList<>(lottoNumbers);
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
     private void validateLotto(List<Integer> lottoNumbers) {
@@ -24,7 +24,7 @@ public class Lotto {
     }
 
     public List<Integer> getNumbers() {
-        return numbers;
+        return lottoNumbers;
     }
 
 }
