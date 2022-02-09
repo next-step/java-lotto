@@ -22,7 +22,7 @@ class CorrectNumbersTest {
         final CorrectNumbers correctNumbers = new CorrectNumbers(winningNumbers, bonusNumber);
 
         // then
-        assertThat(correctNumbers.getWinningNumbers().get().size()).isEqualTo(6);
+        assertThat(correctNumbers.getWinningNumbers().size()).isEqualTo(6);
         assertThat(correctNumbers.getBonusNumber()).isEqualTo(bonusNumber);
     }
 

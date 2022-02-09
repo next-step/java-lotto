@@ -16,7 +16,7 @@ public class Judge {
 
         lottos.get().stream()
                 .forEach(lotto -> {
-                    int matchCount = lotto.matchNumber(correctNumbers.getWinningNumbers().get());
+                    int matchCount = lotto.matchNumber(correctNumbers.getWinningNumbers());
                     boolean isBonus = lotto.containsBonusNumber(correctNumbers.getBonusNumber());
 
                     lottoRanks.add(LottoRank.getRank(matchCount, isBonus));

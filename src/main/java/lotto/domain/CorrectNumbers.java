@@ -57,8 +57,8 @@ public class CorrectNumbers {
         }
     }
 
-    public Lotto getWinningNumbers() {
-        return winningNumbers;
+    public Set<LottoNumber> getWinningNumbers() {
+        return winningNumbers.get();
     }
 
     public LottoNumber getBonusNumber() {
