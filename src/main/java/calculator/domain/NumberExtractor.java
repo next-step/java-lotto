@@ -12,6 +12,9 @@ public class NumberExtractor {
     private static final String END_REGEX = "]";
     private static final int LIMIT_MINIMUM_NUMBER = 0;
 
+    private NumberExtractor() {
+    }
+
     private static String trimDelimiter(String text) {
         if (isCustomDelimiter(text)) {
             return text.split(NEW_LINE)[1];
