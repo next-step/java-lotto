@@ -44,8 +44,6 @@ public class LottoGame {
     }
 
     public Lottos generateTotalLottos(Lottos manualLottos, Lottos autoLottos) {
-        List<Lotto> lottos = Stream.concat(manualLottos.getLottos().stream(), autoLottos.getLottos().stream()).collect(
-            Collectors.toList());
-        return new Lottos(lottos);
+        return manualLottos.addLottos(autoLottos);
     }
 }
