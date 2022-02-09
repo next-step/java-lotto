@@ -28,7 +28,7 @@ public class LottoController {
         LottoNumber bonusLottoNumber = UserConsole.bonusLottoNumber();
 
         RankCount rankCount = lottoRankCount(lottos, winningLottoNumber, bonusLottoNumber);
-        LottoResult(money, rankCount);
+        lottoResult(money, rankCount);
     }
 
     private static Lottos generateLottoBundle(Money money) {
