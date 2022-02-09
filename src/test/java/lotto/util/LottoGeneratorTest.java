@@ -16,14 +16,14 @@ class LottoGeneratorTest {
     @ParameterizedTest
     @CsvSource(value = {"14000,14", "2000,2"})
     void getLottoQuantity(final int purchasePrice, final int expected) {
-        assertThat(LottoGenerator.getLottoQuantity(purchasePrice)).isSameAs(expected);
+        assertThat(LottoGenerator.getLottoTicketQuantity(purchasePrice)).isSameAs(expected);
     }
 
     @Test
     @DisplayName("구매금액이 1000원 미만이면 예외처리해야 한다.")
     void getLottoQuantity() {
         final int invalidPrice = 900;
-        assertThatThrownBy(() -> LottoGenerator.getLottoQuantity(invalidPrice))
+        assertThatThrownBy(() -> LottoGenerator.getLottoTicketQuantity(invalidPrice))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("[ERROR] 구매 금액이 1000원 이상이어야 합니다.");
     }
