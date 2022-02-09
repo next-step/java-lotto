@@ -2,9 +2,9 @@ package lotto.view;
 
 import java.util.HashMap;
 import java.util.List;
-import lotto.domain.Lotto;
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoResult;
-import lotto.service.WinningStatistics;
+import lotto.domain.WinningStatistics;
 
 public class ResultView {
 
@@ -14,7 +14,7 @@ public class ResultView {
         System.out.println(quantity + "개를 구매했습니다.");
     }
 
-    public static void printTotalLottoNumbers(List<Lotto> lottoNumbers) {
+    public static void printTotalLottoNumbers(List<LottoTicket> lottoNumbers) {
         lottoNumbers.forEach(e -> System.out.println(e.getNumbers()));
     }
 
@@ -30,6 +30,6 @@ public class ResultView {
     }
 
     private static boolean hasReward(LottoResult lottoResult) {
-        return lottoResult != LottoResult.NO_REWARD;
+        return lottoResult != LottoResult.NO_PRIZE;
     }
 }
