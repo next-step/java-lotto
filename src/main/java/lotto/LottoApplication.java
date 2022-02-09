@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.List;
 import lotto.controller.LottoMachine;
 import lotto.domain.LottoCount;
 import lotto.domain.lotto.LottoTicket;
@@ -13,13 +14,24 @@ public class LottoApplication {
 
     public static void main(String[] args) {
         Money money = getMoneyFromUser();
-        LottoCount lottoCount = initializeCount(money);
-        LottoMachine.showLottoCount(lottoCount);
-        LottoTicket lottoTicket = LottoMachine.purchaseLotto(lottoCount);
+        LottoCount manualCount = getManualCount();
+        LottoCount autoCount = initializeAutoCount(money, manualCount);
+        LottoMachine.showLottoCount(manualCount, autoCount);
+        LottoTicket lottoTicket = purchaseLotto(autoCount, manualCount);
         LottoMachine.showLottoTicket(lottoTicket);
         WinningLotto winningLotto = getWinningLotto();
         ResultGroup resultGroup = LottoMachine.getResult(lottoTicket, winningLotto);
         LottoMachine.showResults(resultGroup, money);
+    }
+
+    private static LottoTicket purchaseLotto(LottoCount autoCount, LottoCount manualCount) {
+        List<String> manualLottos = InputView.getManualLotto(manualCount.count());
+        return LottoMachine.purchaseLotto(autoCount, manualLottos);
+    }
+
+    private static LottoCount getManualCount() {
+        String manualCount = InputView.getManualLottoCount();
+        return LottoCount.from(manualCount);
     }
 
     private static WinningLotto getWinningLotto() {
@@ -28,8 +40,9 @@ public class LottoApplication {
         return LottoMachine.generateWinningLotto(winningLottoLine, bonusBall);
     }
 
-    private static LottoCount initializeCount(Money money) {
-        return LottoCount.from(money);
+    private static LottoCount initializeAutoCount(Money money, LottoCount manualCount) {
+        LottoCount totalCount = LottoCount.from(money);
+        return totalCount.minus(manualCount);
     }
 
     private static Money getMoneyFromUser() {

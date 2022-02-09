@@ -48,8 +48,8 @@ public class LottoMachine {
         return new WinningLotto(lottoNumbers);
     }
 
-    public static void showLottoCount(LottoCount lottoCount) {
-        OutputView.printLottoCount(lottoCount.count());
+    public static void showLottoCount(LottoCount manualCount, LottoCount autoCount) {
+        OutputView.printLottoCount(manualCount.count(), autoCount.count());
     }
 
     public static void showLottoTicket(LottoTicket lottoTicket) {

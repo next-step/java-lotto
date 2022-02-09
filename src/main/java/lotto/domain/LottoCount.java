@@ -23,7 +23,7 @@ public class LottoCount {
         validateLottoCount(parsedLottoCount);
         return new LottoCount(parsedLottoCount);
     }
-    
+
     public LottoCount minus(LottoCount otherCount) {
         if (this.lottoCount < otherCount.lottoCount) {
             throw new IllegalArgumentException(MINUS_EXCEPTION_MESSAGE);
