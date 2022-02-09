@@ -31,4 +31,21 @@ class LottoCalculatorTest {
         assertThat(calculated.getNormalNumberMatchCount()).isEqualTo(5);
         assertThat(calculated).isEqualTo(Ranking.THIRD);
     }
+
+    @Test
+    void 보너스볼을_2등_3등을_제외하고는_판단하지_않는다() {
+        LottoCalculator calculator = LottoCalculator.getInstance();
+        List<LottoNumber> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6).stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+        LottoNumber bonusNum = new LottoNumber(10);
+        List<LottoNumber> userNumbers = Arrays.asList(1, 2, 3, 4, 10, 8).stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+
+        Ranking calculated = calculator.calculate(winningNumbers, userNumbers, bonusNum);
+
+        assertThat(calculated).isEqualTo(Ranking.FOURTH);
+
+    }
 }
