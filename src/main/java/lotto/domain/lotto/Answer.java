@@ -1,59 +1,38 @@
 package lotto.domain.lotto;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 import lotto.domain.generator.LottoGenerator;
 
 public class Answer {
 
     private static final String EXCEPTION_NUMBER_RANGE = "[ERROR] 숫자의 범위가 올바르지 않습니다.";
+    private static final String EXCEPTION_BONUS_DUPLICATED = "[ERROR] 당첨 번호에 보너스가 포함될 수 없습니다.";
 
     private final Numbers answerNumbers;
     private final int bonus;
 
     public Answer(final Numbers comparisonNumbers, final int bonus) {
         validateNumbers(comparisonNumbers);
-        validateBonus(bonus);
+        validateBonus(comparisonNumbers, bonus);
 
         this.answerNumbers = comparisonNumbers;
         this.bonus = bonus;
     }
 
-    public Map<Rank, Integer> compare(final Tickets tickets) {
-        Map<Rank, Integer> prizeMap = new LinkedHashMap<>();
-
-        for (Ticket ticket : tickets.get()) {
-            int matches = ticket.matches(answerNumbers.get());
-            Rank rank = Rank.getRank(matches, ticket.hasBonus(bonus));
-            prizeMap.put(rank, prizeMap.getOrDefault(rank, 0) + 1);
-        }
-
-        return prizeMap;
+    public Map<Rank, Integer> getComparisonPrizeMap(final Tickets tickets) {
+        return tickets.getComparisonPrizeMap(answerNumbers, bonus);
     }
+
 
     private void validateNumbers(final Numbers comparisonNumbers) {
-        if (!validateEachNumberInRange(comparisonNumbers) || !validateCountOfNumbers(
-            comparisonNumbers)) {
+        if (comparisonNumbers.size() != LottoGenerator.LOTTO_NUMBERS) {
             throw new IllegalArgumentException(EXCEPTION_NUMBER_RANGE);
         }
     }
 
-    private boolean validateCountOfNumbers(final Numbers comparisonNumbers) {
-        return comparisonNumbers.get().size() == LottoGenerator.LOTTO_NUMBERS;
-    }
-
-    private boolean validateEachNumberInRange(final Numbers comparisonNumbers) {
-        return comparisonNumbers.get().stream()
-            .allMatch(this::isNumberInRange);
-    }
-
-    private void validateBonus(final int bonus) {
-        if (!isNumberInRange(bonus)) {
-            throw new IllegalArgumentException(EXCEPTION_NUMBER_RANGE);
+    private void validateBonus(Numbers comparisonNumbers, int bonus) {
+        if (comparisonNumbers.hasBonus(new Number(bonus))) {
+            throw new IllegalArgumentException(EXCEPTION_BONUS_DUPLICATED);
         }
-    }
-
-    private boolean isNumberInRange(final int number) {
-        return (LottoGenerator.START_NUMBER <= number && number <= LottoGenerator.END_NUMBER);
     }
 }
