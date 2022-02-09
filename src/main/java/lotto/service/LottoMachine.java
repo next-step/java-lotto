@@ -10,9 +10,9 @@ public class LottoMachine {
 
     private static List<LottoResult> results;
 
-    public static void run(List<LottoTicket> lottoNumbers, List<WinningNumber> winningBalls) {
-        WinningResult winningCounter = new WinningResult(lottoNumbers, winningBalls);
-        results = winningCounter.getTotalLottoResult();
+    public static void run(List<LottoTicket> lottoTickets, List<WinningNumber> winningNumbers) {
+        WinningResult winningResult = new WinningResult(lottoTickets, winningNumbers);
+        results = winningResult.getTotalLottoResult();
     }
 
     public static List<LottoResult> getResults() {
