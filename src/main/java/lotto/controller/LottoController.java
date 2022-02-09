@@ -1,10 +1,16 @@
 package lotto.controller;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lotto.LottoGame;
 import lotto.domain.LottoResult;
 import lotto.domain.YieldCalculator;
 import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.count.Count;
+import lotto.domain.lotto.count.ManualCount;
+import lotto.domain.lotto.generator.AutoGenerator;
+import lotto.domain.lotto.generator.Generator;
 import lotto.domain.lotto.number.BonusNumber;
 import lotto.domain.lotto.number.Numbers;
 import lotto.domain.money.Money;
@@ -17,23 +23,59 @@ public class LottoController {
 
     public void start() {
         final Money money = inputMoneyValue();
-        final int lottoCount = lottoGame.calculateLottoCount(money);
-        ResultView.printLottoCount(lottoCount);
+        final Count totalCount = lottoGame.calculateLottoCount(money);
 
-        final Lottos lottos = generateLottos(lottoCount);
-        ResultView.printLottos(lottos);
+        final ManualCount manualCount = inputManualCount(totalCount);
+        final Count autoCount = lottoGame.calculateAutoCount(totalCount, manualCount);
+
+        final List<Numbers> manualNumbers = inputManualNumbers(manualCount);
+        final Lottos manualLottos = generateManualLottos(manualCount, manualNumbers);
+        ResultView.printLottoCount(manualCount, autoCount);
+
+        final Lottos autoLottos = generateLottos(autoCount, new AutoGenerator());
+        ResultView.printLottos(autoLottos);
 
         final Numbers winningNumbers = inputWinningNumbers();
         final BonusNumber bonusNumber = inputBonusNumber(winningNumbers);
 
-        final Map<LottoResult, Integer> results = lottoGame.getResults(lottos, winningNumbers, bonusNumber);
+        final Lottos totalLottos = lottoGame.generateTotalLottos(manualLottos, autoLottos);
+        final Map<LottoResult, Integer> results = lottoGame.getResults(totalLottos, winningNumbers, bonusNumber);
         double yield = YieldCalculator.calculateYield(results, money);
         ResultView.printLottoResults(results, yield);
     }
 
+    private Lottos generateManualLottos(ManualCount manualCount, List<Numbers> manualNumbers) {
+        try {
+            return lottoGame.makeManualLottos(manualCount, manualNumbers);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return generateManualLottos(manualCount, manualNumbers);
+        }
+    }
+
+    private List<Numbers> inputManualNumbers(ManualCount manualCount) {
+        try {
+            return InputView.inputManualNumbers(manualCount).stream()
+                .map(Numbers::new)
+                .collect(Collectors.toList());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputManualNumbers(manualCount);
+        }
+    }
+
+    private ManualCount inputManualCount(Count count) {
+        try {
+            return new ManualCount(InputView.inputManualCount(), count);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputManualCount(count);
+        }
+    }
+
     private BonusNumber inputBonusNumber(Numbers winningNumbers) {
         try {
-            return new BonusNumber(InputView.inputBonusNumber(),winningNumbers);
+            return new BonusNumber(InputView.inputBonusNumber(), winningNumbers);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputBonusNumber(winningNumbers);
@@ -43,18 +85,18 @@ public class LottoController {
     private Numbers inputWinningNumbers() {
         try {
             return new Numbers(InputView.inputLastWinningNumbers());
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputWinningNumbers();
         }
     }
 
-    private Lottos generateLottos(int lottoCount) {
+    private Lottos generateLottos(Count lottoCount, final Generator generator) {
         try {
-            return lottoGame.generateLottos(lottoCount);
+            return lottoGame.generateLottos(lottoCount.getValue(), generator);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return generateLottos(lottoCount);
+            return generateLottos(lottoCount, generator);
         }
     }
 
