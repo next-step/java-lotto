@@ -46,9 +46,13 @@ public class WinningResult {
     }
 
     private void updateMatchingCountAndBonus(LottoTicket lotto, WinningNumber winningNumber) {
+        if (winningNumber.isBonus()) {
+            hasBonus = true;
+            return;
+        }
+
         if (lotto.getNumbers().contains(winningNumber.getNumber())) {
             matchingCount++;
-            updateHasBonus(winningNumber);
         }
     }
 
