@@ -15,8 +15,8 @@ public class LottoApplication {
         final int quantity = LottoGenerator.getLottoQuantity(purchasePrice);
         final List<LottoTicket> lottoNumbers = LottoGenerator.getTotalLottoNumbers(quantity);
 
-        ResultView.printLottoQuantity(quantity);
-        ResultView.printTotalLottoNumbers(lottoNumbers);
+        ResultView.printLottoTicketQuantity(quantity);
+        ResultView.printLottoTickets(lottoTickets);
 
         List<WinningNumber> winningNumbers = InputView.getWinningNumbers();
         LottoMachine.run(lottoNumbers, winningNumbers);

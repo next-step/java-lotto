@@ -10,11 +10,11 @@ public class ResultView {
 
     private static int quantity;
 
-    public static void printLottoQuantity(int quantity) {
+    public static void printLottoTicketQuantity(int quantity) {
         System.out.println(quantity + "개를 구매했습니다.");
     }
 
-    public static void printTotalLottoNumbers(List<LottoTicket> lottoNumbers) {
+    public static void printLottoTickets(List<LottoTicket> lottoNumbers) {
         lottoNumbers.forEach(e -> System.out.println(e.getNumbers()));
     }
 
