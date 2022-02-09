@@ -25,25 +25,21 @@ public class LottoGame {
         return lottoShop.buyLotto(lottoAmount);
     }
 
-    public Map<Ranking, Integer> findWinner(final List<LottoNumber> winningNumbers,
-        final Lottos userLottos,
-        final LottoNumber bonusNumber) {
+    public Map<Ranking, Integer> findWinner(final WinningLotto winningLotto,
+        final Lottos userLottos) {
 
-        final LottoCalculator lottoCalculator = LottoCalculator.getInstance();
+        final List<Ranking> rankings = userLottos.judgeAllUserLotto(winningLotto);
 
-        for (Lotto lotto : userLottos.getLottos()) {
-            Ranking ranking = lottoCalculator.calculate(winningNumbers,
-                lotto.getLottoNumbers(),
-                bonusNumber);
+        updateResults(rankings);
 
-            updateResult(ranking);
-        }
         return totalResult;
     }
 
-    private void updateResult(final Ranking ranking) {
-        Integer currentCount = totalResult.get(ranking);
-        totalResult.put(ranking, ++currentCount);
+    private void updateResults(final List<Ranking> rankings) {
+        rankings.forEach(ranking -> {
+            Integer currentCount = totalResult.get(ranking);
+            totalResult.put(ranking, ++currentCount);
+        });
     }
 
 }
