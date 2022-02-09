@@ -33,7 +33,7 @@ public class Lottos {
     }
 
     private static void validatePossibleToPurchase(Budget budget) {
-        if (budget.canPurchase(PRICE_OF_LOTTO)) {
+        if (budget.canNotPurchase(PRICE_OF_LOTTO)) {
             throw new IllegalArgumentException(LACK_OF_MONEY_EXCEPTION_MESSAGE);
         }
     }
