@@ -28,7 +28,7 @@ class TicketsTest {
     @DisplayName("생성한 로또 수만큼 개수 반환하는지 검증")
     @Test
     void testValidCountOfTickets() {
-        assertThat(tickets.get().size())
+        assertThat(tickets.count())
             .isEqualTo(NUM_OF_TICKETS);
     }
 }
