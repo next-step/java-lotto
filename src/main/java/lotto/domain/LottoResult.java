@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoResult {
-    NO_REWARD(0, false, 0, "상금이 없습니다."),
+    NO_PRIZE(0, false, 0, "상금이 없습니다."),
     THREE_MATCHING(3, false, 5_000, "3개 일치 (5,000원) - "),
     FOUR_MATCHING(4, false, 50_000, "4개 일치 (50,000원) - "),
     FIVE_MATCHING(5, false, 1_500_000, "5개 일치 (1,500,000원) - "),
@@ -11,14 +11,14 @@ public enum LottoResult {
     SIX_MATCHING(6, false, 2_000_000_000, "6개 일치 (2,000,000,000원) - ");
 
     private final int matchCount;
-    private final boolean includeBonus;
-    private final int reward;
+    private final boolean hasBonus;
+    private final int prize;
     private final String description;
 
-    LottoResult(int count, boolean includeBonus, int reward, String description) {
+    LottoResult(int count, boolean hasBonus, int prize, String description) {
         this.matchCount = count;
-        this.includeBonus = includeBonus;
-        this.reward = reward;
+        this.hasBonus = hasBonus;
+        this.prize = prize;
         this.description = description;
     }
 
@@ -26,13 +26,13 @@ public enum LottoResult {
         return description;
     }
 
-    public int getReward() {
-        return reward;
+    public int getPrize() {
+        return prize;
     }
 
     public static LottoResult from(int count) {
         if (count < 3) {
-            return LottoResult.NO_REWARD;
+            return LottoResult.NO_PRIZE;
         }
         return from(count, false);
     }
@@ -45,6 +45,6 @@ public enum LottoResult {
     }
 
     private static boolean isSameCountAndBonus(LottoResult lottoResult, int count, boolean includeBonus) {
-        return lottoResult.matchCount == count && lottoResult.includeBonus == includeBonus;
+        return lottoResult.matchCount == count && lottoResult.hasBonus == includeBonus;
     }
 }
