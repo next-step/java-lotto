@@ -24,9 +24,11 @@ public class ResultView {
         HashMap<LottoResult, Integer> result = WinningStatistics.getResult(results);
         result.keySet().stream()
             .filter(ResultView::hasReward)
-            .forEach(lottoResult -> System.out.println(lottoResult.getDescription() + result.get(lottoResult) + "개"));
+            .forEach(lottoResult -> System.out.println(
+                lottoResult.getDescription() + result.get(lottoResult) + "개"));
 
-        System.out.println("총 수익률은 " + WinningStatistics.getProfitRate(result, purchasePrice) + "입니다.");
+        System.out.println(
+            "총 수익률은 " + WinningStatistics.getProfitRate(result, purchasePrice) + "입니다.");
     }
 
     private static boolean hasReward(LottoResult lottoResult) {
