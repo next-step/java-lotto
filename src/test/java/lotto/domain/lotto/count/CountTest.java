@@ -1,0 +1,38 @@
+package lotto.domain.lotto.count;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+class CountTest {
+
+    @ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 77, 100})
+    @ParameterizedTest
+    void 정상적인_구매_개수_확인(int value) {
+        final Count count = new Count(value);
+        assertThat(count.getValue()).isEqualTo(value);
+    }
+
+    @ValueSource(strings = {"1","2","100000","500"})
+    @ParameterizedTest
+    void 정상적인_구매_개수_문자열일_경우_확인(String value) {
+        final Count count = new Count(value);
+        assertThat(count.getValue()).isEqualTo(Integer.parseInt(value));
+    }
+
+    @ValueSource(strings = {"1,","2개","ㅇ100000","50d0"})
+    @ParameterizedTest
+    void 정수로_변환_불가능한_입력값(String value) {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> new Count(value)).withMessage("[ERROR] 숫자만 들어올 수 있습니다.");
+    }
+
+    @ValueSource(ints = {-1, -100, -342})
+    @ParameterizedTest
+    void 구매_개수가_0보다_작을_경우(int value) {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> new Count(value)).withMessage("[ERROR] 구매 개수가 0보다 작을 수는 없습니다.");
+    }
+}
