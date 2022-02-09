@@ -11,14 +11,15 @@ public class Money {
         this.value = value;
     }
 
-    public int Value() {
+    public int getValue() {
         return value;
     }
-    public Money multiple(int hit){
+
+    public Money multiple(int hit) {
         return new Money(value * hit);
     }
 
-    private void validateMoney(final int value){
+    private void validateMoney(final int value) {
         if (value < MIN_MONEY) {
             throw new IllegalArgumentException(ERROR_MESSAGE);
         }
