@@ -2,67 +2,64 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoResult;
-import lotto.domain.WinningNumber;
 
 public class WinningResult {
 
     private final List<WinningNumber> winningNumbers;
-    private final List<LottoTicket> lottoNumbers;
-    private int count;
-    private boolean includeBonus;
+    private final List<LottoTicket> lottoTickets;
+    private int winningCount;
+    private boolean hasBonus;
 
     public WinningResult(List<WinningNumber> winningNumbers) {
         this(new ArrayList<>(), winningNumbers);
     }
 
-    public WinningResult(List<LottoTicket> lottoNumbers, List<WinningNumber> winningNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public WinningResult(List<LottoTicket> lottoTickets, List<WinningNumber> winningNumbers) {
+        this.lottoTickets = lottoTickets;
         this.winningNumbers = winningNumbers;
     }
 
     public List<LottoResult> getTotalLottoResult() {
         final List<LottoResult> lottoResults = new ArrayList<>();
-        for (LottoTicket lotto : lottoNumbers) {
+        for (LottoTicket lottoTicket : lottoTickets) {
             initWinningCountAndBonus();
-            lottoResults.add(getLottoResult(lotto));
+            lottoResults.add(getLottoResult(lottoTicket));
         }
         return lottoResults;
     }
 
-    private LottoResult getLottoResult(LottoTicket lotto) {
+    private LottoResult getLottoResult(LottoTicket lottoTicket) {
         for (WinningNumber winningNumber : winningNumbers) {
-            updateWinningCountAndBonus(lotto, winningNumber);
+            updateWinningCountAndBonus(lottoTicket, winningNumber);
         }
 
-        if(hasToCheckBonus(count)) {
-            return LottoResult.from(count, includeBonus);
+        if(hasToCheckBonus(winningCount)) {
+            return LottoResult.from(winningCount, hasBonus);
         }
 
-        return LottoResult.from(count);
+        return LottoResult.from(winningCount);
     }
 
-    private boolean hasToCheckBonus(int count) {
-        return count == 5;
+    private boolean hasToCheckBonus(int winningCount) {
+        return winningCount == 5;
     }
 
     private void updateWinningCountAndBonus(LottoTicket lotto, WinningNumber winningNumber) {
         if (lotto.getNumbers().contains(winningNumber.getNumber())) {
-            count++;
+            winningCount++;
             updateIncludeBonus(winningNumber);
         }
     }
 
     private void updateIncludeBonus(WinningNumber winningNumber) {
         if (winningNumber.isBonus()) {
-            includeBonus = true;
+            hasBonus = true;
         }
     }
 
     private void initWinningCountAndBonus() {
-        this.count = 0;
-        this.includeBonus = false;
+        this.winningCount = 0;
+        this.hasBonus = false;
     }
 }
 
