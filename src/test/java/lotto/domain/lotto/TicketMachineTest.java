@@ -2,6 +2,7 @@ package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -39,8 +40,10 @@ public class TicketMachineTest {
     void testEachTicketsValid() {
         TicketMachine machine = new TicketMachine(14000, 3);
 
-        assertThat(machine.autoTickets()).isEqualTo(11);
-        assertThat(machine.manualTickets()).isEqualTo(3);
+        assertAll(
+            () -> assertThat(machine.autoTickets()).isEqualTo(11),
+            () -> assertThat(machine.manualTickets()).isEqualTo(3)
+        );
     }
 
 }
