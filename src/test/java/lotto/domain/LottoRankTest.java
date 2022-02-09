@@ -16,7 +16,7 @@ class LottoRankTest {
         final LottoRank lottoRank = LottoRank.getRank(6, true);
 
         // then
-        assertThat(lottoRank).isEqualTo(lottoRank.FIRST);
+        assertThat(lottoRank).isEqualTo(LottoRank.FIRST);
     }
 
     @DisplayName("당첨 번호 6개를 맞추고, 보너스 번호가 일치하지 않으면 1등 이다.")
@@ -26,7 +26,7 @@ class LottoRankTest {
         final LottoRank lottoRank = LottoRank.getRank(6, false);
 
         // then
-        assertThat(lottoRank).isEqualTo(lottoRank.FIRST);
+        assertThat(lottoRank).isEqualTo(LottoRank.FIRST);
     }
 
     @DisplayName("당첨 번호 5개를 맞추고, 보너스 번호가 있으면 2등 이다.")
@@ -36,7 +36,7 @@ class LottoRankTest {
         final LottoRank lottoRank = LottoRank.getRank(5, true);
 
         // then
-        assertThat(lottoRank).isEqualTo(lottoRank.SECOND);
+        assertThat(lottoRank).isEqualTo(LottoRank.SECOND);
     }
 
     @DisplayName("당첨 번호 5개를 맞추고, 보너스 번호가 없으면 3등 이다.")
@@ -97,7 +97,7 @@ class LottoRankTest {
         final LottoRank lottoRank = LottoRank.getRank(matchCount, true);
 
         // then
-        assertThat(lottoRank).isEqualTo(lottoRank.FAIL);
+        assertThat(lottoRank).isEqualTo(LottoRank.FAIL);
     }
 
     @DisplayName("당첨 번호를 2개 이하로 맞추고 보너스 번호가 없으면 미당첨 이다.")
@@ -108,6 +108,6 @@ class LottoRankTest {
         final LottoRank lottoRank = LottoRank.getRank(matchCount, false);
 
         // then
-        assertThat(lottoRank).isEqualTo(lottoRank.FAIL);
+        assertThat(lottoRank).isEqualTo(LottoRank.FAIL);
     }
 }
