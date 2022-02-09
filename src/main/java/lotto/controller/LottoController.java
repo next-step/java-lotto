@@ -13,7 +13,7 @@ import lotto.domain.Winning;
 import lotto.view.UserConsole;
 import lotto.view.UserResult;
 
-public class Controller {
+public class LottoController {
 
     public static void run() {
         Money money = UserConsole.inputString();
