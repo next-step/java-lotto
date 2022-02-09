@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoMachine;
 import lotto.domain.LottoPlay;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -12,11 +13,11 @@ public class LottoProcessor {
     public static void main(String[] args) {
 
         try {
-            final LottoPlay lottoPlay = new LottoPlay(inputView);
+            final LottoPlay lottoPlay = new LottoPlay(inputView.getTotalPrice());
             resultView.printNumberOfLotto(lottoPlay.getLottoCounts());
             resultView.printLottoTickets(lottoPlay.getLottoTickets());
 
-            lottoPlay.run();
+            lottoPlay.run(new LottoMachine(inputView.getWinNumbers(), inputView.getBonusNumber()));
 
             resultView.printAnalyzeResults(lottoPlay.getWinningPrices(),
                 lottoPlay.calculateProfitPercent());
