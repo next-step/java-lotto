@@ -10,15 +10,23 @@ import lotto.domain.Ranking;
 public class LottoResultView {
 
     private static final int ZERO = 0;
-    private static final int INSERT_INDEX_OF_BONUS_BALL = 5;
+    private static final String LOTTO_STATISTICS_MESSAGE = "당첨 통계";
+    private static final String HYPHEN_MESSAGE = "---------";
+    private static final String TOTAL_YIELD_MESSAGE = "총 수익률은 ";
+    private static final String FINISH_MESSAGE = "입니다.";
+    private static final String OPENING_PARENTHESIS = "(";
+    private static final String MATCH_AMOUNT_MESSAGE = "개 일치";
+    private static final String BONUS_BALL_MATCH_MESSAGE = "보너스 볼 일치";
+    private static final String WON_MESSAGE = "원) - ";
+    private static final String AMOUNT_MESSAGE = "개";
+    private static final String SPACE = " ";
+    private static final String COMMA = ",";
 
-    private final StringBuilder stringBuilder = new StringBuilder();
     private int totalWinnerPrice = ZERO;
 
-
     public void finishGame(final Map<Ranking, Integer> totalResult, final Money money) {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+        System.out.println(LOTTO_STATISTICS_MESSAGE);
+        System.out.println(HYPHEN_MESSAGE);
 
         final List<Ranking> rankings = new LinkedList<>(totalResult.keySet());
         Collections.sort(rankings);
@@ -31,10 +39,10 @@ public class LottoResultView {
     }
 
     private void printYield(final Money money) {
-        stringBuilder.append("총 수익률은 ")
-            .append(String.format("%.2f", (double) totalWinnerPrice / money.getMoney()))
-            .append("입니다.");
-        System.out.println(stringBuilder);
+        System.out.printf(
+            TOTAL_YIELD_MESSAGE + String.format("%.2f",
+                (double) totalWinnerPrice / money.getMoney())
+                + FINISH_MESSAGE);
     }
 
     private void process(final Ranking ranking, final Integer count) {
@@ -42,22 +50,21 @@ public class LottoResultView {
             return;
         }
 
-        stringBuilder.append(ranking.getNormalNumberMatchCount())
-            .append("개 일치 ")
-            .append("(")
-            .append(ranking.getWinnerPrice())
-            .append("원) - ")
-            .append(count)
-            .append("개");
-
-        totalWinnerPrice += ranking.multiplyCountAndWinnerPrice(count);
-
         if (ranking.equals(Ranking.SECOND)) {
-            stringBuilder.insert(INSERT_INDEX_OF_BONUS_BALL, ", 보너스 볼 일치");
+            System.out.println(
+                ranking.getNormalNumberMatchCount() + MATCH_AMOUNT_MESSAGE + COMMA + SPACE
+                    + BONUS_BALL_MATCH_MESSAGE
+                    + OPENING_PARENTHESIS
+                    + ranking.getWinnerPrice() + WON_MESSAGE
+                    + count + AMOUNT_MESSAGE);
         }
 
-        System.out.println(stringBuilder);
-        stringBuilder.setLength(ZERO);
+        System.out.println(
+            ranking.getNormalNumberMatchCount() + MATCH_AMOUNT_MESSAGE + SPACE + OPENING_PARENTHESIS
+                + ranking.getWinnerPrice() + WON_MESSAGE
+                + count + AMOUNT_MESSAGE);
+
+        totalWinnerPrice += ranking.multiplyCountAndWinnerPrice(count);
     }
 
 }

@@ -14,14 +14,11 @@ public class LottoInputView {
     private static final String SPACE = " ";
     private static final String EMPTY = "";
     private static final String COMMA = ",";
-    private static final String LEFT_SQUARE_BRACKETS = "[";
-    private static final String RIGHT_SQUARE_BRACKETS = "]";
     private static final String INPUT_PRICE_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String INPUT_LAST_WEEK_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해주세요.";
+    private static final String LOTTO_AMOUNT_MESSAGE = "개를 구매했습니다.";
     private static final int ZERO = 0;
-
-    private final StringBuilder stringBuilder = new StringBuilder();
 
     public LottoInputView() {
     }
@@ -57,27 +54,16 @@ public class LottoInputView {
     }
 
     private void printAmount(final Lottos lottos) {
-        stringBuilder.append(lottos.getLottos().size())
-            .append("개를 구매했습니다.");
-        System.out.println(stringBuilder);
+        System.out.println(lottos.getLottos().size() + LOTTO_AMOUNT_MESSAGE);
     }
 
 
     private void printLotto(final List<LottoNumber> lottoNumbers) {
-        stringBuilder.setLength(ZERO);
-        stringBuilder.append(LEFT_SQUARE_BRACKETS);
+        final List<Integer> numbers = lottoNumbers.stream()
+            .map(lottoNumber -> lottoNumber.getNumber())
+            .collect(Collectors.toList());
 
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            stringBuilder.append(lottoNumber.getNumber())
-                .append(COMMA)
-                .append(SPACE);
-        }
-
-        stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(SPACE));
-        stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(COMMA));
-        stringBuilder.append(RIGHT_SQUARE_BRACKETS);
-
-        System.out.println(stringBuilder);
+        System.out.println(numbers);
     }
 
 }
