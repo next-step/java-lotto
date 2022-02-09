@@ -22,7 +22,7 @@ class LottoTicketsTest {
         lottoTickets.addLottoTicket(new Lotto(() -> new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
 
         //then
-        assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(2);
+        assertThat(lottoTickets.getLottos().size()).isEqualTo(2);
     }
 
 

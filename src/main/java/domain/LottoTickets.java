@@ -3,18 +3,18 @@ package domain;
 import java.util.*;
 
 public class LottoTickets {
-    private final List<Lotto> lottoTickets;
+    private final List<Lotto> lottos;
 
     public LottoTickets() {
-        this.lottoTickets = new ArrayList<>();
+        this.lottos = new ArrayList<>();
     }
 
-    public List<Lotto> getLottoTickets() {
-        return Collections.unmodifiableList(lottoTickets);
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 
     public void addLottoTicket(Lotto lotto) {
-        lottoTickets.add(lotto);
+        lottos.add(lotto);
     }
 
     public void readyLottoTicket(int lottoCount) {

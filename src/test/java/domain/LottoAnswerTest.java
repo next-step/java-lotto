@@ -44,7 +44,7 @@ class LottoAnswerTest {
         LottoAnswer lottoAnswer = new LottoAnswer(new ArrayList<>(Arrays.asList(1, 2, 3, 7, 8, 9)), 11);
 
         //when
-        LottoResult lottoResult = lottoAnswer.checkLottoAnswer(lottoTickets.getLottoTickets());
+        LottoResult lottoResult = lottoAnswer.checkLottoAnswer(lottoTickets.getLottos());
 
         //then
         assertThat(lottoResult.getRankCount(Rank.FIFTH)).isEqualTo(2);
@@ -60,7 +60,7 @@ class LottoAnswerTest {
         LottoAnswer lottoAnswer = new LottoAnswer(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 9)), 6);
 
         //when
-        LottoResult lottoResult = lottoAnswer.checkLottoAnswer(lottoTickets.getLottoTickets());
+        LottoResult lottoResult = lottoAnswer.checkLottoAnswer(lottoTickets.getLottos());
 
         //then
         assertThat(lottoResult.getRankCount(Rank.SECOND)).isEqualTo(1);
@@ -77,7 +77,7 @@ class LottoAnswerTest {
         LottoAnswer lottoAnswer = new LottoAnswer(new ArrayList<>(Arrays.asList(13, 14, 15, 16, 17, 18)), 12);
 
         //when
-        LottoResult lottoResult = lottoAnswer.checkLottoAnswer(lottoTickets.getLottoTickets());
+        LottoResult lottoResult = lottoAnswer.checkLottoAnswer(lottoTickets.getLottos());
 
         //then
         assertThat(lottoResult.getRankCount(Rank.FAIL)).isEqualTo(2);

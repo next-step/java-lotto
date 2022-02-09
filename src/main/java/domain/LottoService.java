@@ -28,7 +28,8 @@ public class LottoService {
         inputView.inputManualLottoNumber();
         LottoTickets lottoTickets = new LottoTickets();
         for (int i = 0; i < lottoPrice.getManualLottoCount(); i++) {
-            lottoTickets.addLottoTicket(new Lotto(inputView::inputLotto));
+            //lottoTickets.addLottoTicket(new Lotto(inputView::inputLotto));
+            lottoTickets.addLottoTicket(Lotto.create(inputView.inputLotto()));
         }
         return lottoTickets;
     }
@@ -42,16 +43,16 @@ public class LottoService {
     }
 
     public void getRatioByAnswer(LottoTickets lottoTickets, LottoPrice lottoPrice) {
-        LottoAnswer lottoAnswer = new LottoAnswer(receiveAnswer(), receiveBonus());
-        LottoResult lottoResult = lottoAnswer.checkLottoAnswer(lottoTickets.getLottoTickets());
-        resultView.printResultStatistic(lottoResult);
+        LottoAnswer answer = new LottoAnswer(receiveAnswer(), receiveBonus());
+        LottoResult result = answer.checkLottoAnswer(lottoTickets.getLottos());
+        resultView.printResultStatistic(result);
 
-        BigDecimal prizeRatio = new RatioCalculator().calculateRatio(lottoPrice.getPurchasePrice(), lottoResult);
+        BigDecimal prizeRatio = new RatioCalculator().calculateRatio(lottoPrice.getPurchasePrice(), result);
         resultView.printResultRatio(prizeRatio);
     }
 
     private void showAllLottoTickets(LottoTickets lottoTickets) {
-        lottoTickets.getLottoTickets()
+        lottoTickets.getLottos()
                 .forEach(lotto -> resultView.printAllLotto(lotto.getLotto()));
     }
 
