@@ -48,10 +48,8 @@ public class LottoGame {
     }
 
     private void updateResult(final Ranking ranking) {
-        if (totalResult.containsKey(ranking)) {
-            Integer currentCount = totalResult.get(ranking);
-            totalResult.put(ranking, ++currentCount);
-        }
+        Integer currentCount = totalResult.get(ranking);
+        totalResult.put(ranking, ++currentCount);
     }
 
 }
