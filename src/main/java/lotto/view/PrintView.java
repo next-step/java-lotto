@@ -23,18 +23,29 @@ public class PrintView {
         printProfitRate(resultDto.getProfitRate());
     }
 
-    private static void printRankCounts(Map<String, Integer> matchCount, Map<String, Integer> amounts) {
+    private static void printRankCounts(final Map<String, Integer> matchCount, final Map<String, Integer> amounts) {
         StringBuilder result = new StringBuilder();
 
         matchCount.forEach((rank, count) -> {
-            result.append(String.format("%d개 일치, ", count));
-            if (rank.equals(LottoRank.SECOND.name())) {
-                result.append("보너스 볼 일치");
-            }
-            result.append(String.format(" (%d원) - %d개%n", amounts.get(rank), count));
+            result.append(String.format("%s 일치, ", getMatchResultString(rank, count)));
+            result.append(String.format("(%d원) - %d개%n", amounts.get(rank), count));
         });
 
         System.out.print(result);
+    }
+
+    private static String getMatchResultString(final String rank, final int count) {
+        if(rank.equals(LottoRank.FAIL.name())){
+            return "0-2개";
+        }
+
+        StringBuilder matchString = new StringBuilder();
+        matchString.append(String.format("%d개", count));
+        if (rank.equals(LottoRank.SECOND.name())) {
+            matchString.append("보너스 볼 일치");
+        }
+
+        return matchString.toString();
     }
 
     private static void printProfitRate(final double profitRatio) {

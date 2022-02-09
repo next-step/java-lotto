@@ -14,21 +14,17 @@ public class Statistics {
         this.lottoRanks = lottoRanks;
         this.rankCounts = new LinkedHashMap<>();
 
+        initRankCount();
+    }
+
+    private void initRankCount() {
         Arrays.stream(LottoRank.values())
-                .forEach(rank -> {
-                    if (rank != LottoRank.FAIL) {
-                        rankCounts.put(rank, 0);
-                    }
-                });
+                .forEach(rank -> rankCounts.put(rank, 0));
     }
 
     public RankCounts getRankCounts() {
         lottoRanks.get()
-                .forEach(rank -> {
-                    if (rank != LottoRank.FAIL) {
-                        rankCounts.put(rank, rankCounts.get(rank) + 1);
-                    }
-                });
+                .forEach(rank -> rankCounts.put(rank, rankCounts.get(rank) + 1));
 
         return new RankCounts(rankCounts);
     }
