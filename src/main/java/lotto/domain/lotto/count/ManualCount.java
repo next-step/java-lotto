@@ -4,8 +4,8 @@ public class ManualCount {
 
     private final Count count;
 
-    public ManualCount(String count, Count maxCount) {
-        this(parseToInteger(count), maxCount);
+    public ManualCount(String count, Count totalCount) {
+        this(parseToInteger(count), totalCount);
     }
 
     private static Integer parseToInteger(String value) {
@@ -15,14 +15,14 @@ public class ManualCount {
         return Integer.parseInt(value);
     }
 
-    public ManualCount(int count, Count maxCount) {
-        validManualCount(count, maxCount);
+    public ManualCount(int count, Count totalCount) {
+        validManualCount(count, totalCount);
         this.count = new Count(count);
     }
 
-    private void validManualCount(int count, Count maxCount) {
-        if(count > maxCount.getValue()) {
-            throw new IllegalArgumentException("[ERROR] "+maxCount.getValue()+"개를 초과할 수 없습니다.");
+    private void validManualCount(int count, Count totalCount) {
+        if(count > totalCount.getValue()) {
+            throw new IllegalArgumentException("[ERROR] "+totalCount.getValue()+"개를 초과할 수 없습니다.");
         }
     }
 
