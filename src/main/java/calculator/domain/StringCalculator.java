@@ -1,7 +1,7 @@
 package calculator.domain;
 
-import java.util.List;
 import calculator.util.ValidateInput;
+import java.util.List;
 
 public class StringCalculator {
 

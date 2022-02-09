@@ -21,7 +21,8 @@ public class ResultView {
             if (i == CASE_BONUS_BALL) {
                 OutputView.printLottoBonusStatistic(i,
                     Statistics.getRank(LOTTO_BONUS_MATCH_COUNT).getMoney(),
-                    Statistics.getCount(lottoStatistics.getResultStatistics(), LOTTO_BONUS_MATCH_COUNT));
+                    Statistics.getCount(lottoStatistics.getResultStatistics(),
+                        LOTTO_BONUS_MATCH_COUNT));
             }
         }
         OutputView.printTotalReturn(Double.parseDouble(lottoStatistics.getLottoEarningRate()));

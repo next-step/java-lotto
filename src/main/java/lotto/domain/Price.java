@@ -26,7 +26,7 @@ public class Price {
         }
     }
 
-    private boolean isPurchasable () {
+    private boolean isPurchasable() {
         return price >= LOTTO_PRICE && price % LOTTO_PRICE == 0;
     }
 }

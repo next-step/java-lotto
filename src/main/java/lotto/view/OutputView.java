@@ -47,11 +47,12 @@ public class OutputView {
     public static void printTotalReturn(Double earningRate) {
         String profitOrLoss = "손해";
 
-        if(earningRate >= 1) {
+        if (earningRate >= 1) {
             profitOrLoss = "이득";
         }
 
-        System.out.println("총 수익률은 " + earningRate + "입니다.(기준이 1이기 때문에 결과적으로 "+ profitOrLoss +"이라는 의미임)");
+        System.out.println(
+            "총 수익률은 " + earningRate + "입니다.(기준이 1이기 때문에 결과적으로 " + profitOrLoss + "이라는 의미임)");
     }
 
     public static void printLottoNumber(Lotto lotto) {

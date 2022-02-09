@@ -13,7 +13,7 @@ public class Console {
 
     public static String readLine() {
         makeNewScannerIfScannerIsClosed();
-        return scanner.nextLine().replace("\\n","\n");
+        return scanner.nextLine().replace("\\n", "\n");
     }
 
     private static void makeNewScannerIfScannerIsClosed() {
