@@ -27,4 +27,11 @@ public class Lotto {
         return lottoNumbers;
     }
 
+    public boolean isContainBonusBall(WinningNumber winningNumber) {
+        return winningNumber.isContainBonusBall(lottoNumbers);
+    }
+
+    public boolean isContainBonusBall(int bonusBall) {
+        return this.lottoNumbers.contains(bonusBall);
+    }
 }

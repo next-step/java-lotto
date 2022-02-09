@@ -1,12 +1,10 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class User {
 
-    private final int count;
     private final List<Lotto> lottos;
 
     public User(List<Lotto> lottos) {
@@ -26,7 +24,7 @@ public class User {
     }
 
     public int getCount() {
-        return count;
+        return lottos.size();
     }
 
 }

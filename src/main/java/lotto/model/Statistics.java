@@ -21,8 +21,7 @@ public class Statistics {
         for (Lotto lotto : lottos) {
             int matchCount = getMatchCount(lotto.getNumbers(),
               winningNumber.getWinningNumber());
-            boolean bonusScore = getBonusScore(lotto.getNumbers(),
-              winningNumber.getBonusBall());
+            boolean bonusScore = winningNumber.isContainBonusBall(lotto);
             Rank rank = getRank(matchCount, bonusScore);
             incrementRank(rank);
         }

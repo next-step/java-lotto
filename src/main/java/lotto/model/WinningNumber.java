@@ -38,4 +38,11 @@ public class WinningNumber {
         return winningNumbers;
     }
 
+    public boolean isContainBonusBall(List<Integer> numbers) {
+        return numbers.contains(bonusBall);
+    }
+
+    public boolean isContainBonusBall(Lotto lotto) {
+        return lotto.isContainBonusBall(bonusBall);
+    }
 }
