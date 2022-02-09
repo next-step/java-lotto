@@ -4,34 +4,40 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import lotto.domain.dto.ResultDto;
 import lotto.domain.vo.RankCounts;
 
 public class Statistics {
 
-    private final LottoRanks lottoRanks;
     private final Map<LottoRank, Integer> rankCounts;
+    private final double profitRate;
 
     public Statistics(final LottoRanks lottoRanks) {
-        this.lottoRanks = lottoRanks;
-        this.rankCounts = new LinkedHashMap<>();
-
-        initRankCount();
+        this.rankCounts = rankStatistics(lottoRanks.get());
+        this.profitRate = profitStatistics(lottoRanks.get());
     }
 
-    private void initRankCount() {
-        Arrays.stream(LottoRank.values())
-                .forEach(rank -> rankCounts.put(rank, 0));
+    private Map<LottoRank, Integer> rankStatistics(final List<LottoRank> lottoRanks) {
+        Map<LottoRank, Integer> rankCounts = new LinkedHashMap<>();
+
+        Arrays.stream(LottoRank.values()).forEach(rank ->
+                rankCounts.put(rank, rankCounts.getOrDefault(rank, 0)
+                        + (int) lottoRanks.stream()
+                        .filter(resultRank -> rank == resultRank)
+                        .count())
+        );
+
+        return rankCounts;
     }
 
-    public RankCounts getRankCounts() {
-        lottoRanks.get()
-                .forEach(rank -> rankCounts.put(rank, rankCounts.get(rank) + 1));
+    private double profitStatistics(final List<LottoRank> lottoRanks) {
+        double profit = lottoRanks.stream().mapToDouble(LottoRank::getAmount).sum();
+        double budget = (lottoRanks.size() * 1000);
 
-        return new RankCounts(rankCounts);
+        return  profit / budget;
     }
 
-    public double getProfitRate() {
-        final List<LottoRank> lottoRanks = this.lottoRanks.get();
-        return lottoRanks.stream().mapToDouble(LottoRank::getAmount).sum() / (lottoRanks.size() * 1000);
+    public ResultDto getResult() {
+        return new ResultDto(new RankCounts(this.rankCounts), this.profitRate);
     }
 }

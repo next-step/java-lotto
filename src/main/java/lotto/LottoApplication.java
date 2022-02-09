@@ -8,7 +8,6 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoRanks;
 import lotto.domain.Lottos;
 import lotto.domain.Statistics;
-import lotto.domain.dto.ResultDto;
 import lotto.view.InputView;
 import lotto.view.PrintView;
 
@@ -29,8 +28,6 @@ public class LottoApplication {
         final LottoRanks lottoRanks = judge.getRanks(lottos);
 
         final Statistics statistics = new Statistics(lottoRanks);
-        final ResultDto resultDto = new ResultDto(statistics.getRankCounts(), statistics.getProfitRate());
-
-        PrintView.printResult(resultDto);
+        PrintView.printResult(statistics.getResult());
     }
 }

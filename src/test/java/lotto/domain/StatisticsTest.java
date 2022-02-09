@@ -36,7 +36,8 @@ class StatisticsTest {
         final Statistics statistics = new Statistics(lottoRanks);
 
         // when
-        final Map<LottoRank, Integer> rankCounts = statistics.getRankCounts().get();
+        final Map<LottoRank, Integer> rankCounts = statistics.getResult()
+                .getNumberOfRanks().get();
 
         // then
         assertThat(rankCounts.get(LottoRank.FIRST)).isEqualTo(1);
@@ -52,7 +53,7 @@ class StatisticsTest {
         // given
         final Statistics statistics = new Statistics(lottoRanks);
 
-        final double rate = statistics.getProfitRate();
+        final double rate = statistics.getResult().getProfitRate();
         final double expected = (LottoRank.FIRST.getAmount() + LottoRank.SECOND.getAmount() * 2
                 + LottoRank.THIRD.getAmount()) / givenRanks.size();
 
