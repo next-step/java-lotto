@@ -33,4 +33,8 @@ public class Lottos {
     public List<Lotto> get() {
         return this.lottos;
     }
+
+    public int getNumberOfPurchases() {
+        return this.lottos.size();
+    }
 }

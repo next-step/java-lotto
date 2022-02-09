@@ -17,7 +17,7 @@ public class LottoApplication {
 
         final Budget budget = new Budget(InputView.inputBudget());
         final Lottos lottos = Lottos.createAutoLottos(budget);
-        PrintView.printNumberOfLotto(lottos.get().size());
+        PrintView.printNumberOfLotto(lottos.getNumberOfPurchases());
         PrintView.printLottoNumber(lottos);
 
         final CorrectNumbers correctNumbers = new CorrectNumbers(
