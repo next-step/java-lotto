@@ -6,24 +6,25 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.LottoCount;
-import lotto.domain.LottoGenerator;
+import lotto.domain.lottogenerator.LottoGenerator;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.Money;
 import lotto.domain.ResultGroup;
 import lotto.domain.lotto.WinningLotto;
+import lotto.domain.lottogenerator.RandomLottoGenerator;
 import lotto.view.OutputView;
 
 public class LottoMachine {
 
-    private static final LottoGenerator LOTTO_GENERATOR = new LottoGenerator();
+    private static final LottoGenerator LOTTO_GENERATOR = new RandomLottoGenerator();
     private static final String WINNING_LOTTO_DELIMITER = ", ";
 
     private LottoMachine() {
     }
 
-    public static LottoTicket purchaseLotto(LottoCount lottoCount) {
-        List<Lotto> lottos = IntStream.range(0, lottoCount.count())
+    public static LottoTicket purchaseLotto(LottoCount autoCount, List<String> manualLottos) {
+        List<Lotto> lottos = IntStream.range(0, autoCount.count())
             .mapToObj((i) -> new Lotto(generateLottoNumber()))
             .collect(Collectors.toList());
         return new LottoTicket(lottos);
