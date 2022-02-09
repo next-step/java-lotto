@@ -18,8 +18,8 @@ public class LottoApplication {
         ResultView.printLottoQuantity(quantity);
         ResultView.printTotalLottoNumbers(lottoNumbers);
 
-        List<WinningNumber> winningBalls = InputView.getWinningBalls();
-        LottoMachine.run(lottoNumbers, winningBalls);
+        List<WinningNumber> winningNumbers = InputView.getWinningNumbers();
+        LottoMachine.run(lottoNumbers, winningNumbers);
 
         ResultView.printResult(LottoMachine.getResults(), purchasePrice);
     }
