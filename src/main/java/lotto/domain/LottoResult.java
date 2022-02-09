@@ -15,8 +15,8 @@ public enum LottoResult {
     private final int prize;
     private final String description;
 
-    LottoResult(int count, boolean hasBonus, int prize, String description) {
-        this.matchCount = count;
+    LottoResult(int matchCount, boolean hasBonus, int prize, String description) {
+        this.matchCount = matchCount;
         this.hasBonus = hasBonus;
         this.prize = prize;
         this.description = description;
@@ -30,21 +30,23 @@ public enum LottoResult {
         return prize;
     }
 
-    public static LottoResult from(int count) {
-        if (count < 3) {
+    public static LottoResult from(int matchingCount) {
+        if (matchingCount < MIN_PRIZE_MATCHING) {
             return LottoResult.NO_PRIZE;
         }
-        return from(count, false);
+
+        return from(matchingCount, false);
     }
 
-    public static LottoResult from(int count, boolean includeBonus) {
+    public static LottoResult from(int matchCount, boolean hasBonus) {
+        //TODO: 로직 수정
         return Arrays.stream(LottoResult.values())
-            .filter(lottoResult -> isSameCountAndBonus(lottoResult, count, includeBonus))
+            .filter(lottoResult -> isSameCountAndBonus(lottoResult, matchCount, hasBonus))
             .findAny()
             .orElseThrow(() -> new IllegalArgumentException("[ERROR] 당첨 결과를 찾지 못했습니다."));
     }
 
-    private static boolean isSameCountAndBonus(LottoResult lottoResult, int count, boolean includeBonus) {
-        return lottoResult.matchCount == count && lottoResult.hasBonus == includeBonus;
+    private static boolean isSameCountAndBonus(LottoResult lottoResult, int mathCount, boolean hasBonus) {
+        return lottoResult.matchCount == mathCount && lottoResult.hasBonus == hasBonus;
     }
 }
