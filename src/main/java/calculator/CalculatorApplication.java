@@ -10,7 +10,8 @@ public class CalculatorApplication {
         String text = InputView.getText();
 
         StringCalculator stringCalculator = new StringCalculator(text);
+        int result = stringCalculator.add();
 
-        ResultView.printResult(stringCalculator.add());
+        ResultView.printResult(result);
     }
 }
