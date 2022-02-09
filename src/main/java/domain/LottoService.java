@@ -19,27 +19,26 @@ public class LottoService {
         return new LottoPrice(inputView.inputPurchasePrice());
     }
 
-    public void inputManualLotto(LottoPrice lottoPrice) {
-        lottoPrice.manualLottoCount(inputView.inputManualLottoCount());
+    public LottoTickets purchaseLotto(LottoPrice lottoPrice) {
+        LottoTickets lottoTickets = new LottoTickets();
+        int manualCount = purchaseManualLotto(lottoTickets);
+        int autoCount = lottoPrice.lottoCount() - manualCount;
+        purchaseAutoLotto(lottoTickets, autoCount);
+        resultView.printLottoCount(manualCount, autoCount);
+        return lottoTickets;
     }
 
-    public LottoTickets purchaseManualLotto(LottoPrice lottoPrice) {
-        inputManualLotto(lottoPrice);
+    public int purchaseManualLotto(LottoTickets lottoTickets) {
+        int count = inputView.inputManualLottoCount();
         inputView.inputManualLottoNumber();
-        LottoTickets lottoTickets = new LottoTickets();
-        for (int i = 0; i < lottoPrice.getManualLottoCount(); i++) {
-            //lottoTickets.addLottoTicket(new Lotto(inputView::inputLotto));
+        for (int i = 0; i < count; i++) {
             lottoTickets.addLottoTicket(Lotto.create(inputView.inputLotto()));
         }
-        return lottoTickets;
+        return count;
     }
 
-
-    public LottoTickets purchaseAutoLotto(LottoTickets lottoTickets, LottoPrice lottoPrice) {
-        lottoTickets.readyLottoTicket(lottoPrice.getAutoLottoCount());
-        resultView.printLottoCount(lottoPrice.getManualLottoCount(), lottoPrice.getAutoLottoCount());
-        showAllLottoTickets(lottoTickets);
-        return lottoTickets;
+    public void purchaseAutoLotto(LottoTickets lottoTickets, int count) {
+        lottoTickets.readyLottoTicket(count);
     }
 
     public void getRatioByAnswer(LottoTickets lottoTickets, LottoPrice lottoPrice) {
@@ -51,7 +50,7 @@ public class LottoService {
         resultView.printResultRatio(prizeRatio);
     }
 
-    private void showAllLottoTickets(LottoTickets lottoTickets) {
+    public void showAllLottoTickets(LottoTickets lottoTickets) {
         lottoTickets.getLottos()
                 .forEach(lotto -> resultView.printAllLotto(lotto.getLotto()));
     }
