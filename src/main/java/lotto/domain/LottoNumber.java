@@ -9,7 +9,7 @@ public class LottoNumber {
     private static final String INVALID_NUMBER_RANGE_EXCEPTION_MESSAGE = "[ERROR] 로또 번호는 1 이상 45 이하입니다.";
     private static final String INVALID_NUMBER_FORMAT_EXCEPTION_MESSAGE = "[ERROR] 로또 번호는 숫자만 가능합니다.";
 
-    private int lottoNumber;
+    private final int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
         this.lottoNumber = lottoNumber;

@@ -1,8 +1,10 @@
 package lotto.view;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.controller.ResultGroupDto;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.WinningResult;
 
 public class OutputView {
@@ -22,7 +24,13 @@ public class OutputView {
 
     public static void printLotto(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            System.out.printf(LOTTO_PRINT_FORMAT, lotto);
+            System.out.printf(LOTTO_PRINT_FORMAT,
+                lotto.value()
+                    .stream()
+                    .map(LottoNumber::value)
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(", "))
+            );
         }
     }
 

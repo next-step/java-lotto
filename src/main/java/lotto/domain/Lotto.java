@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -12,7 +11,7 @@ public class Lotto {
     private static final String NOT_VALIDATE_LOTTO_MESSAGE = "[ERROR] 로또는 중복되지 않은 6개의 숫자가 필요합니다.";
     private static final String NOT_VALIDATE_SIZE_LOTTO_MESSAGE = "[ERROR] 로또는 6개의 숫자가 필요합니다.";
 
-    private List<LottoNumber> lotto;
+    private final List<LottoNumber> lotto;
 
     public Lotto(List<LottoNumber> lotto) {
         validateDuplicates(lotto);
@@ -27,6 +26,10 @@ public class Lotto {
 
     public int count() {
         return lotto.size();
+    }
+
+    public List<LottoNumber> value() {
+        return lotto;
     }
 
     public boolean hasValue(LottoNumber lottoNumber) {
@@ -52,13 +55,5 @@ public class Lotto {
 
     private boolean lottoSizeNotValid() {
         return lotto.size() != LOTTO_SIZE;
-    }
-
-    @Override
-    public String toString() {
-        return lotto.stream()
-            .map(LottoNumber::value)
-            .map(String::valueOf)
-            .collect(Collectors.joining(", "));
     }
 }
