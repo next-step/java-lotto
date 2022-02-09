@@ -1,10 +1,9 @@
 package lotto.controller;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.LottoGame;
-import lotto.domain.LottoResult;
+import lotto.domain.MatchResult;
 import lotto.domain.YieldCalculator;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.count.Count;
@@ -39,7 +38,7 @@ public class LottoController {
         final BonusNumber bonusNumber = inputBonusNumber(winningNumbers);
 
         final Lottos totalLottos = lottoGame.generateTotalLottos(manualLottos, autoLottos);
-        final Map<LottoResult, Integer> results = lottoGame.getResults(totalLottos, winningNumbers, bonusNumber);
+        final MatchResult results = lottoGame.getResults(totalLottos, winningNumbers, bonusNumber);
         double yield = YieldCalculator.calculateYield(results, money);
         ResultView.printLottoResults(results, yield);
     }

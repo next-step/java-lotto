@@ -1,9 +1,9 @@
 package lotto.view;
 
 import java.util.Arrays;
-import java.util.Map;
-import lotto.domain.lotto.Lotto;
 import lotto.domain.LottoResult;
+import lotto.domain.MatchResult;
+import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.count.Count;
 import lotto.domain.lotto.count.ManualCount;
@@ -15,7 +15,7 @@ public class ResultView {
     }
 
     public static void printLottoCount(final ManualCount manualCount, final Count autoCount) {
-        System.out.println("\n수동으로 " + manualCount.getCountValue() + "장, 자동으로 "+ autoCount.getValue() + "개를 구매했습니다.");
+        System.out.println("\n수동으로 " + manualCount.getCountValue() + "장, 자동으로 " + autoCount.getValue() + "개를 구매했습니다.");
     }
 
     public static void printLottos(Lottos lottos) {
@@ -25,19 +25,18 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void printLottoResults(Map<LottoResult, Integer> lottoResults, double yield) {
+    public static void printLottoResults(MatchResult lottoResults, double yield) {
+        lottoResults.getMatchResult().remove(LottoResult.NO_MATCH);
         System.out.println("\n당첨 통계\n" + "---------");
-        lottoResults.forEach((ResultView::printLottoResult));
+        lottoResults.getMatchResult().forEach((ResultView::printLottoResult));
         System.out.println("총 수익률은 " + String.format("%.2f", yield) + "입니다.");
     }
 
     private static void printLottoResult(LottoResult lottoResult, Integer count) {
         if (lottoResult.isBonusNumber()) {
-            System.out.println(
-                lottoResult.getMatchCount() + "개 일치, 보너스 볼 일치(" + lottoResult.getWinning() + ")원- " + count + "개");
+            System.out.println(lottoResult.getMatchCount() + "개 일치, 보너스 볼 일치(" + lottoResult.getWinning() + ")원- " + count + "개");
             return;
         }
-        System.out.println(
-            lottoResult.getMatchCount() + "개 일치 (" + lottoResult.getWinning() + ")원- " + count + "개");
+        System.out.println(lottoResult.getMatchCount() + "개 일치 (" + lottoResult.getWinning() + ")원- " + count + "개");
     }
 }
