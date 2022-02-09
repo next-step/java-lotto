@@ -4,12 +4,15 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
+import lotto.domain.lotto.Number;
 import lotto.domain.lotto.Numbers;
 import lotto.domain.lotto.Rank;
 
 public class OutputView {
 
     private static final String SPLITTER = ", ";
+    private static final String MESSAGE_BOUGHT_TICKET_START = "수동으로 ";
+    private static final String MESSAGE_BOUGHT_TICKET_MIDDLE = "장, 자동으로 ";
     private static final String MESSAGE_BOUGHT_TICKET = "개를 구매했습니다.";
     private static final String MESSAGE_TICKET_START = "[";
     private static final String MESSAGE_TICKET_END = "]";
@@ -24,14 +27,16 @@ public class OutputView {
 
     private OutputView() {}
 
-    public static void printBuyingTickets(final int amount) {
-        System.out.println(amount + MESSAGE_BOUGHT_TICKET);
+    public static void printBuyingTickets(final int manualTickets, final int autoTickets) {
+        System.out.println();
+        System.out.println(MESSAGE_BOUGHT_TICKET_START + manualTickets + MESSAGE_BOUGHT_TICKET_MIDDLE + autoTickets + MESSAGE_BOUGHT_TICKET);
     }
 
     public static void printLottoTicket(final Numbers numbers) {
         System.out.print(MESSAGE_TICKET_START);
         System.out.print(
             numbers.get().stream()
+                .map(Number::value)
                 .map(String::valueOf)
                 .collect(Collectors.joining(SPLITTER))
         );
