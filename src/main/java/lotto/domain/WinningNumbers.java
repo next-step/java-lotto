@@ -6,21 +6,21 @@ import java.util.List;
 
 public class WinningNumbers {
 
-    private final List<Integer> winningNumbers;
-    private int bonusBall;
+    private final List<Integer> ballNumbers;
+    private final int bonusBall;
 
     public WinningNumbers(List<Integer> winningNumbers, int bonusBall) {
         validateNumbers(winningNumbers);
         validateRange(bonusBall);
-        this.winningNumbers = winningNumbers;
+        this.ballNumbers = winningNumbers;
         this.bonusBall = bonusBall;
     }
 
-    private void validateNumbers(List<Integer> winningNumbers) {
-        if (winningNumbers.size() != LOTTO_SIZE) {
+    private void validateNumbers(List<Integer> ballNumbers) {
+        if (ballNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("[ERROR] 당첨번호는 6개를 입력해야 합니다.");
         }
-        winningNumbers.forEach(this::validateRange);
+        ballNumbers.forEach(this::validateRange);
     }
 
     private void validateRange(int bonusBall) {
@@ -29,11 +29,12 @@ public class WinningNumbers {
         }
     }
 
-    public boolean find(int number) {
-        return winningNumbers.contains(number);
+    public int compareLottoNumbers(LottoNumbers lottoNumbers) {
+        return lottoNumbers.getMatchCount(this.ballNumbers);
     }
 
-    public boolean checkBonusBall(int number) {
-        return number == bonusBall;
+    public boolean checkBonusBall(LottoNumbers lottoNumbers) {
+        return lottoNumbers.contains(bonusBall);
     }
+
 }

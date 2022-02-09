@@ -7,7 +7,7 @@ import java.util.List;
 
 public class LottoNumbers implements Iterable<Integer> {
 
-    final List<Integer> lottoNumbers;
+    private final List<Integer> lottoNumbers;
 
     public LottoNumbers(List<Integer> numbers) {
         lottoNumbers = getLottoNumbers(numbers);
@@ -39,5 +39,19 @@ public class LottoNumbers implements Iterable<Integer> {
     @Override
     public String toString() {
         return lottoNumbers.toString();
+    }
+
+    public int getMatchCount(List<Integer> winningNumbers) {
+        int matchCount = 0;
+        for (int lottoNumber : lottoNumbers) {
+            if (winningNumbers.contains(lottoNumber)) {
+                matchCount++;
+            }
+        }
+        return matchCount;
+    }
+
+    public boolean contains(int value) {
+        return lottoNumbers.contains(value);
     }
 }

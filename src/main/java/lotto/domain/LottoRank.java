@@ -46,4 +46,4 @@ public enum LottoRank {
         return this.rankString;
     }
 
-    }
+}

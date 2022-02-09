@@ -47,18 +47,21 @@ public class Lotto {
         return lottoTickets.size();
     }
 
-    public LottoRank compareWithWinning(LottoNumbers lottoNumbers, WinningNumbers winningNumbers) {
-        int count = 0;
-        boolean haveBonus = false;
-        for (Integer number : lottoNumbers) {
-            if (winningNumbers.find(number)) {
-                count++;
-            }
-            if (!haveBonus && winningNumbers.checkBonusBall(number)) {
-                haveBonus = true;
-            }
+
+    public double getProfit(int price, Map<LottoRank, Integer> map) {
+        double total = 0;
+        for (Map.Entry<LottoRank, Integer> entry : map.entrySet()) {
+            int amount = entry.getKey().getWinningAmount();
+            double profit = amount * entry.getValue();
+            total += profit;
         }
-        return LottoRank.valueOf(count, haveBonus);
+        return Math.floor((total / price) * 100) / 100.0;
+    }
+
+    public LottoRank compareWithWinning(LottoNumbers lottoNumbers, WinningNumbers winningNumbers) {
+        int count = winningNumbers.compareLottoNumbers(lottoNumbers);
+        boolean hasBonus = winningNumbers.checkBonusBall(lottoNumbers);
+        return LottoRank.valueOf(count, hasBonus);
     }
 
     public Map<LottoRank, Integer> getWinningResult(WinningNumbers winningNumbers) {
@@ -70,15 +73,5 @@ public class Lotto {
             }
         });
         return Collections.synchronizedMap(new EnumMap<>(map));
-    }
-
-    public double getProfit(int price, Map<LottoRank, Integer> map) {
-        double total = 0;
-        for (Map.Entry<LottoRank, Integer> entry : map.entrySet()) {
-            int amount = entry.getKey().getWinningAmount();
-            double profit = amount * entry.getValue();
-            total += profit;
-        }
-        return Math.floor((total / price) * 100) / 100.0;
     }
 }
