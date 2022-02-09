@@ -8,7 +8,7 @@ import lotto.domain.WinningResult;
 
 public class OutputView {
 
-    private static final String LOTTO_COUNT_PRINT_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
+    private static final String LOTTO_COUNT_PRINT_FORMAT = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String LOTTO_PRINT_FORMAT = "[%s]\n";
     private static final String LOTTO_DELIMITER = ", ";
     private static final String STATICS_RESULT_FORMAT = "%d개 일치 (%d원) - %d개\n";
@@ -33,7 +33,7 @@ public class OutputView {
     }
 
     public static void printResult(ResultGroupDto resultGroup) {
-        System.out.println("당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("---------");
         for (WinningResult result : WinningResult.winningResults()) {
             int count = resultGroup.howManyHave(result);
