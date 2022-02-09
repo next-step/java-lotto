@@ -4,11 +4,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Lotto {
+public class LottoTicket {
     private static final int LOTTO_NUMBERS_SIZE = 6;
     private final List<Integer> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    public LottoTicket(List<Integer> numbers) {
         validateSize(numbers);
         validateDuplication(numbers);
         this.numbers = numbers;

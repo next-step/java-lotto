@@ -1,8 +1,8 @@
 package lotto;
 
 import java.util.List;
-import lotto.domain.Lotto;
-import lotto.domain.WinningBall;
+import lotto.domain.LottoTicket;
+import lotto.domain.WinningNumber;
 import lotto.service.LottoMachine;
 import lotto.util.LottoGenerator;
 import lotto.view.InputView;
@@ -13,12 +13,12 @@ public class LottoApplication {
     public static void main(String[] args) {
         final int purchasePrice = InputView.getPurchasePrice();
         final int quantity = LottoGenerator.getLottoQuantity(purchasePrice);
-        final List<Lotto> lottoNumbers = LottoGenerator.getTotalLottoNumbers(quantity);
+        final List<LottoTicket> lottoNumbers = LottoGenerator.getTotalLottoNumbers(quantity);
 
         ResultView.printLottoQuantity(quantity);
         ResultView.printTotalLottoNumbers(lottoNumbers);
 
-        List<WinningBall> winningBalls = InputView.getWinningBalls();
+        List<WinningNumber> winningBalls = InputView.getWinningBalls();
         LottoMachine.run(lottoNumbers, winningBalls);
 
         ResultView.printResult(LottoMachine.getResults(), purchasePrice);
