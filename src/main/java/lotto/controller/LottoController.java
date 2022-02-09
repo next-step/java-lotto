@@ -18,36 +18,36 @@ public class LottoController {
     }
 
     public void start() {
-        final Money money = InputMoneyValue();
+        final Money money = inputMoneyValue();
         final int lottoCount = lottoGame.calculateLottoCount(money);
         ResultView.printLottoCount(lottoCount);
 
         final Lottos lottos = generateLottos(lottoCount);
         ResultView.printLottos(lottos);
 
-        final Numbers winningNumbers = InputWinningNumbers();
-        final BonusNumber bonusNumber = InputBonusNumber(winningNumbers);
+        final Numbers winningNumbers = inputWinningNumbers();
+        final BonusNumber bonusNumber = inputBonusNumber(winningNumbers);
 
         final Map<LottoResult, Integer> results = lottoGame.getResults(lottos, winningNumbers, bonusNumber);
         double yield = YieldCalculator.calculateYield(results, money);
         ResultView.printLottoResults(results, yield);
     }
 
-    private BonusNumber InputBonusNumber(Numbers winningNumbers) {
+    private BonusNumber inputBonusNumber(Numbers winningNumbers) {
         try {
             return new BonusNumber(InputView.inputBonusNumber(),winningNumbers);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return InputBonusNumber(winningNumbers);
+            return inputBonusNumber(winningNumbers);
         }
     }
 
-    private Numbers InputWinningNumbers() {
+    private Numbers inputWinningNumbers() {
         try {
             return new Numbers(InputView.inputLastWinningNumbers());
         } catch(IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return InputWinningNumbers();
+            return inputWinningNumbers();
         }
     }
 
@@ -60,12 +60,12 @@ public class LottoController {
         }
     }
 
-    private Money InputMoneyValue() {
+    private Money inputMoneyValue() {
         try {
             return new Money(InputView.inputMoney());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return InputMoneyValue();
+            return inputMoneyValue();
         }
     }
 }
