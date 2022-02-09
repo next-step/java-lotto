@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lottogenerator;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoGenerator {
+public class RandomLottoGenerator implements LottoGenerator {
 
     private static final int LOTTO_SIZE_BOUND = 6;
     private static final int LOTTO_MINIMUM_BOUND = 1;
@@ -17,9 +17,10 @@ public class LottoGenerator {
         .boxed()
         .collect(Collectors.toList());
 
-    public LottoGenerator() {
+    public RandomLottoGenerator() {
     }
 
+    @Override
     public Set<Integer> generateLotto() {
         Collections.shuffle(LOTTO);
         List<Integer> cut = LOTTO.subList(0, LOTTO_SIZE_BOUND);
