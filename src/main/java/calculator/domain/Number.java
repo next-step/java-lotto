@@ -32,7 +32,8 @@ public class Number {
         IntStream.range(0, chars.length)
             .mapToObj(idx -> chars[idx])
             .filter(character -> !Character.isDigit(character))
-            .findFirst().ifPresent(character -> {
+            .findFirst()
+            .ifPresent(character -> {
                 throw new IllegalArgumentException("올바른 숫자 포맷이 아닙니다.");
             });
     }
