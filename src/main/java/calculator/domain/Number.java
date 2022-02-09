@@ -9,8 +9,7 @@ public class Number {
     private final int number;
 
     public Number(final String number) {
-        validateNumberFormat(number);
-        validatePositiveNum(number);
+        validateNumber(number);
         this.number = Integer.parseInt(number);
     }
 
@@ -20,6 +19,11 @@ public class Number {
 
     public Number add(Number operand) {
         return new Number(number + operand.number);
+    }
+
+    private void validateNumber(final String number) {
+        validateNumberFormat(number);
+        validatePositiveNumber(number);
     }
 
     private void validateNumberFormat(final String number) {
@@ -33,7 +37,7 @@ public class Number {
             });
     }
 
-    private void validatePositiveNum(final String number) {
+    private void validatePositiveNumber(final String number) {
         if (number.contains(NEGATIVE_SIGN)) {
             throw new IllegalArgumentException("숫자가 음수입니다.");
         }
