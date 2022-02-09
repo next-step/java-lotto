@@ -8,16 +8,9 @@ public class User {
 
     private final int count;
     private final List<Lotto> lottos;
-    private Statistics statistics;
 
-    public User(int count, LottoRules lottoRules) {
-        this.count = count;
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto(lottoRules));
-        }
+    public User(List<Lotto> lottos) {
         this.lottos = lottos;
-        this.statistics = new Statistics();
     }
 
     public List<Lotto> getLottos() {
