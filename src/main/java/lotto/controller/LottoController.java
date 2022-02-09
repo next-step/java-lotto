@@ -66,8 +66,7 @@ public class LottoController {
     }
 
     private static LottoCalculation makeLottoCalculation(Money money) {
-        LottoCalculation lottoCalculation = new LottoCalculation(money);
-        return lottoCalculation;
+        return new LottoCalculation(money);
     }
 }
 
