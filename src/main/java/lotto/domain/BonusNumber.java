@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.LottoBalls;
-
 public class BonusNumber {
 
     private final String value;

@@ -1,6 +1,5 @@
 package lotto;
 
-
 import lotto.domain.BonusNumber;
 import lotto.domain.Budget;
 import lotto.domain.CorrectNumbers;
