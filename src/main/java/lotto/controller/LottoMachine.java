@@ -12,21 +12,25 @@ import lotto.domain.lotto.LottoTicket;
 import lotto.domain.Money;
 import lotto.domain.ResultGroup;
 import lotto.domain.lotto.WinningLotto;
+import lotto.domain.lottogenerator.ManualLottoGenerator;
 import lotto.domain.lottogenerator.RandomLottoGenerator;
 import lotto.view.OutputView;
 
 public class LottoMachine {
 
-    private static final LottoGenerator LOTTO_GENERATOR = new RandomLottoGenerator();
-    private static final String WINNING_LOTTO_DELIMITER = ", ";
+    private static final String WINNING_LOTTO_DELIMITER = ",";
 
     private LottoMachine() {
     }
 
     public static LottoTicket purchaseLotto(LottoCount autoCount, List<String> manualLottos) {
-        List<Lotto> lottos = IntStream.range(0, autoCount.count())
-            .mapToObj((i) -> new Lotto(generateLottoNumber()))
+        List<Lotto> lottos = manualLottos.stream()
+            .map(str -> generateLottoNumber(new ManualLottoGenerator(str)))
+            .map(Lotto::new)
             .collect(Collectors.toList());
+        lottos.addAll(IntStream.range(0, autoCount.count())
+            .mapToObj((i) -> new Lotto(generateLottoNumber(new RandomLottoGenerator())))
+            .collect(Collectors.toList()));
         return new LottoTicket(lottos);
     }
 
@@ -37,6 +41,7 @@ public class LottoMachine {
     public static WinningLotto generateWinningLotto(String winningLottoLine, String bonusBall) {
         List<LottoNumber> lottoNumbers = Arrays.stream(
                 winningLottoLine.split(WINNING_LOTTO_DELIMITER))
+            .map(String::trim)
             .map(LottoNumber::new)
             .collect(Collectors.toList());
         lottoNumbers.add(new LottoNumber(bonusBall));
@@ -64,8 +69,8 @@ public class LottoMachine {
         OutputView.printEachLotto(lottoNumber);
     }
 
-    private static List<LottoNumber> generateLottoNumber() {
-        return LOTTO_GENERATOR.generateLotto()
+    private static List<LottoNumber> generateLottoNumber(LottoGenerator lottoGenerator) {
+        return lottoGenerator.generateLotto()
             .stream()
             .sorted()
             .map(LottoNumber::new)
