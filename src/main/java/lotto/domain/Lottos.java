@@ -37,4 +37,9 @@ public class Lottos {
     public int getNumberOfPurchases() {
         return this.lottos.size();
     }
+
+    @Override
+    public String toString() {
+        return lottos.toString();
+    }
 }

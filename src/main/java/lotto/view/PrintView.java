@@ -11,15 +11,14 @@ public class PrintView {
     private final static String FAIL_MATCH_COUNT = "0-2개";
     private final static String BONUS_BALL_MATCH = "보너스 볼 일치";
 
-    private PrintView() {
-    }
+    private PrintView() {}
 
     public static void printNumberOfLotto(final int size) {
         System.out.printf("%d개를 구매했습니다.\n", size);
     }
 
     public static void printLottoNumber(final Lottos lottos) {
-        lottos.get().forEach(lotto -> System.out.println(lotto.get()));
+        lottos.get().forEach(System.out::println);
     }
 
     public static void printResult(final ResultDto resultDto) {

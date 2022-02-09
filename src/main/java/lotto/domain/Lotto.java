@@ -23,4 +23,9 @@ public class Lotto {
     public Set<LottoNumber> get() {
         return this.lottoNumbers;
     }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
 }
