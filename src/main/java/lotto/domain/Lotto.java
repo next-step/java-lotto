@@ -4,21 +4,21 @@ import java.util.List;
 
 public class Lotto {
 
-    private final LottoNumbers lottoNumber;
+    private final LottoNumbers lottoNumbers;
 
-    public Lotto(final LottoNumbers lottoNumber){
-        this.lottoNumber = lottoNumber;
+    public Lotto(final LottoNumbers lottoNumbers){
+        this.lottoNumbers = lottoNumbers;
     }
 
     public List<Integer> getLottoNumber() {
-        return lottoNumber.getLottoFullNumber();
+        return lottoNumbers.getLottoFullNumber();
     }
 
     public long countMatch(final Lotto lotto){
-        return lottoNumber.countMatch(lotto.lottoNumber);
+        return lottoNumbers.countMatch(lotto.lottoNumbers);
     }
 
     public boolean contains(final LottoNumber lottoNumber){
-        return this.lottoNumber.getLottoFullNumber().contains(lottoNumber.value());
+        return this.lottoNumbers.getLottoFullNumber().contains(lottoNumbers.value());
     }
 }
