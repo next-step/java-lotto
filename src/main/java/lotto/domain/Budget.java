@@ -16,7 +16,7 @@ public class Budget {
         }
     }
 
-    public int getNumberOfPurchase(int priceOfLotto) {
+    public int getNumberOfPurchase(final int priceOfLotto) {
         validatePossibleToPurchase(priceOfLotto);
         return this.value / priceOfLotto;
     }
@@ -27,7 +27,7 @@ public class Budget {
         }
     }
 
-    public boolean canNotPurchase(int priceOfLotto) {
+    public boolean canNotPurchase(final int priceOfLotto) {
         return this.value < priceOfLotto;
     }
 }
