@@ -21,6 +21,6 @@ class LottosTest {
         final Lottos autoLottos = Lottos.createAutoLottos(new Budget(budget));
 
         // then
-        assertThat(autoLottos.get().size()).isEqualTo(numberOfLotto);
+        assertThat(autoLottos.getNumberOfPurchases()).isEqualTo(numberOfLotto);
     }
 }
