@@ -1,28 +1,33 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public enum Ranking {
 
-    FIRST(2_000_000_000, 6, false),
-    SECOND(30_000_000, 5, true),
-    THIRD(1_500_000, 5, false),
-    FOURTH(50_000, 4, false),
-    FIFTH(5_000, 3, false),
-    FAIL(0, 0, false);
+    FIRST(2_000_000_000, 6),
+    SECOND(30_000_000, 5),
+    THIRD(1_500_000, 5),
+    FOURTH(50_000, 4),
+    FIFTH(5_000, 3),
+    FAIL(0, 0);
+
+    private static final int SECOND_COUNTS = 5;
 
     private final int winnerPrice;
     private final int normalNumberMatchCount;
-    private final boolean isBonusNumberMatch;
 
-    Ranking(final int winnerPrice, final int normalNumberMatchCount,
-        final boolean isBonusNumberMatch) {
+    Ranking(final int winnerPrice, final int normalNumberMatchCount) {
         this.winnerPrice = winnerPrice;
         this.normalNumberMatchCount = normalNumberMatchCount;
-        this.isBonusNumberMatch = isBonusNumberMatch;
     }
 
     public static Ranking judgeRanking(LottoResult lottoResult) {
+        if (lottoResult.getNormalNumberMatchCount() == SECOND_COUNTS && !lottoResult.getBonusNumberMatch()) {
+            return THIRD;
+        }
+
         return Arrays.stream(Ranking.values())
             .filter(rank -> rank.equals(lottoResult))
             .findFirst()
@@ -30,8 +35,7 @@ public enum Ranking {
     }
 
     private boolean equals(LottoResult lottoResult) {
-        return this.normalNumberMatchCount == lottoResult.getNormalNumberMatchCount() &&
-            this.isBonusNumberMatch == lottoResult.getBonusNumberMatch();
+        return this.normalNumberMatchCount == lottoResult.getNormalNumberMatchCount();
     }
 
     public int multiplyCountAndWinnerPrice(final int count) {
@@ -48,9 +52,5 @@ public enum Ranking {
 
     public int getWinnerPrice() {
         return winnerPrice;
-    }
-
-    public boolean isBonusNumberMatch() {
-        return isBonusNumberMatch;
     }
 }
