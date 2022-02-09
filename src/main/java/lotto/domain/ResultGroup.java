@@ -26,7 +26,7 @@ public class ResultGroup {
     public double calculateProfits(Money money) {
         double totalEarning = 0;
         for (WinningResult result : WinningResult.winningResults()) {
-            totalEarning += howManyHave(result) * result.prize();
+            totalEarning += howManyHave(result) * (double) result.prize();
         }
         return totalEarning / money.value();
     }
