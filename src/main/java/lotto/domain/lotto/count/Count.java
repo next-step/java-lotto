@@ -8,7 +8,7 @@ public class Count {
     }
 
     private static Integer parseToInteger(String value) {
-        if(!value.matches("[0-9]*")) {
+        if(!value.matches("[-]?[0-9]*")) {
             throw new IllegalArgumentException("[ERROR] 숫자만 들어올 수 있습니다.");
         }
         return Integer.parseInt(value);
