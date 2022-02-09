@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lottos;
-import lotto.domain.RankCounts;
+import lotto.domain.vo.RankCounts;
 import lotto.domain.dto.ResultDto;
 
 public class PrintView {

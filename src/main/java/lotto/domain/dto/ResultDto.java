@@ -1,6 +1,6 @@
 package lotto.domain.dto;
 
-import lotto.domain.RankCounts;
+import lotto.domain.vo.RankCounts;
 
 public class ResultDto {
 
