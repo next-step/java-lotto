@@ -12,7 +12,6 @@ import lotto.domain.lotto.LottoTicket;
 import lotto.domain.Money;
 import lotto.domain.ResultGroup;
 import lotto.domain.lotto.WinningLotto;
-import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoMachine {
@@ -34,14 +33,12 @@ public class LottoMachine {
         return lottoTicket.getResult(winningLotto);
     }
 
-    public static WinningLotto generateWinningLotto(String winningLottoLine) {
+    public static WinningLotto generateWinningLotto(String winningLottoLine, String bonusBall) {
         List<LottoNumber> lottoNumbers = Arrays.stream(
                 winningLottoLine.split(WINNING_LOTTO_DELIMITER))
             .map(LottoNumber::new)
             .collect(Collectors.toList());
-        String bonusBall = InputView.getBonusBall();
-        int parseBonus = Integer.parseInt(bonusBall);
-        lottoNumbers.add(new LottoNumber(parseBonus));
+        lottoNumbers.add(new LottoNumber(bonusBall));
         return new WinningLotto(lottoNumbers);
     }
 

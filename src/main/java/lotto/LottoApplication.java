@@ -24,7 +24,8 @@ public class LottoApplication {
 
     private static WinningLotto getWinningLotto() {
         String winningLottoLine = InputView.getWinningLotto();
-        return LottoMachine.generateWinningLotto(winningLottoLine);
+        String bonusBall = InputView.getBonusBall();
+        return LottoMachine.generateWinningLotto(winningLottoLine, bonusBall);
     }
 
     private static LottoCount initializeCount(Money money) {
