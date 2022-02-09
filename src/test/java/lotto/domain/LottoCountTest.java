@@ -9,10 +9,10 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 public class LottoCountTest {
 
     @ParameterizedTest
-    @ValueSource(ints= {1_000, 14_000, 999_000})
+    @ValueSource(ints = {1_000, 14_000, 999_000})
     void 금액에_따른_로또_개수를_출력한다(int value) {
         Money money = new Money(String.valueOf(value));
         LottoCount lottoCount = LottoCount.from(money);
-        assertThat(value / 1000).isEqualTo(lottoCount.count());
+        assertThat(lottoCount.count()).isEqualTo(value / 1000);
     }
 }
