@@ -14,9 +14,6 @@ import lotto.domain.money.Money;
 
 public class LottoGame {
 
-    public LottoGame() {
-    }
-
     public Count calculateLottoCount(Money money) {
         return new Count(money.getValue() / 1000);
     }
