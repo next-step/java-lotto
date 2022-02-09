@@ -1,10 +1,9 @@
-package lotto.domain.machine;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
-import lotto.domain.lotto.LottoNumber;
 
 public class RandomLottoGenerator implements LottoGenerator {
 
@@ -21,8 +20,9 @@ public class RandomLottoGenerator implements LottoGenerator {
     }
 
     @Override
-    public List<LottoNumber> get() {
+    public Lotto get() {
         Collections.shuffle(LOTTO_NUMBERS);
-        return new ArrayList<>(LOTTO_NUMBERS.subList(FIRST_COUNT, LOTTO_NUMBER_COUNT));
+        List<LottoNumber> lotto = new ArrayList<>(LOTTO_NUMBERS.subList(FIRST_COUNT, LOTTO_NUMBER_COUNT));
+        return Lotto.of(lotto);
     }
 }
