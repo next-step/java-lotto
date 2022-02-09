@@ -19,6 +19,6 @@ public class Lotto {
     }
 
     public boolean contains(final LottoNumber lottoNumber){
-        return this.lottoNumbers.getLottoFullNumber().contains(lottoNumbers.value());
+        return this.lottoNumbers.getLottoFullNumber().contains(lottoNumber.value());
     }
 }
