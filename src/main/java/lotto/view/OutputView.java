@@ -4,8 +4,9 @@ import lotto.domain.Lotto;
 
 public class OutputView {
 
+    private static final int LOTTO_BONUS_GRADE = 7;
+
     public static final String ERROR_MESSAGE = "[ERROR] ";
-    public static final String ERROR_WRONG_LOTTO_PRICE = "로또 한 장은 1000원입니다. 잘못된 금액입니다.";
     private static final String REQUEST_LOTTO_PRICE = "구입금액을 입력해 주세요.";
     private static final String SYSTEM_LOTTO_COUNT = "개를 구매했습니다.";
     private static final String REQUEST_WINNING_NUMBER_BEFORE = "\n지난 주 당첨 번호를 입력해주세요.(ex 1, 2, 3, 4, 5, 6)";
@@ -36,12 +37,13 @@ public class OutputView {
         System.out.println(WINNING_STATS);
     }
 
-    public static void printLottoStatistic(int grade, int money, int matchCount) {
-        System.out.println(grade + "개 일치(" + money + "원) - " + matchCount + " 개");
-    }
+    public static void printLottoStatistic(int grade, int money, int count) {
+        if (grade == LOTTO_BONUS_GRADE) {
+            System.out.println("5개 일치, 보너스 볼 일치(" + money + "원) - " + count + " 개");
 
-    public static void printLottoBonusStatistic(int grade, int money, int matchCount) {
-        System.out.println(grade + "개 일치, 보너스 볼 일치(" + money + "원) - " + matchCount + " 개");
+            return ;
+        }
+        System.out.println(grade + "개 일치(" + money + "원) - " + count + " 개");
     }
 
     public static void printTotalReturn(Double earningRate) {
