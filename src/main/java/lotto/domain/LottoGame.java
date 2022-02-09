@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,11 +17,8 @@ public class LottoGame {
     }
 
     private void initializeTotalResult() {
-        totalResult.put(Ranking.FIRST, ZERO);
-        totalResult.put(Ranking.SECOND, ZERO);
-        totalResult.put(Ranking.THIRD, ZERO);
-        totalResult.put(Ranking.FOURTH, ZERO);
-        totalResult.put(Ranking.FIFTH, ZERO);
+        Arrays.stream(Ranking.values())
+            .forEach(ranking -> totalResult.put(ranking, ZERO));
     }
 
     public Lottos startLotto(final int price, final LottoShop lottoShop) {
