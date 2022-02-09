@@ -12,7 +12,7 @@ public class Lotto {
 
     public int matchNumber(final Set<LottoNumber> winningNumbers) {
         return (int) lottoNumbers.stream()
-                .filter(n -> winningNumbers.contains(n))
+                .filter(winningNumbers::contains)
                 .count();
     }
 
