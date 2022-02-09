@@ -21,13 +21,13 @@ public class LottoController {
     public static void run() {
         Money money = UserConsole.inputString();
 
-        Lottos lottoBundle = generateLottoBundle(money);
-        UserResult.printLottoBundle(lottoBundle);
+        Lottos lottos = generateLottoBundle(money);
+        UserResult.printLottoBundle(lottos);
 
         Lotto winningLottoNumber = winningLottoNumberInput();
         LottoNumber bonusLottoNumber = UserConsole.bonusLottoNumber();
 
-        RankCount rankCount = lottoRankCount(lottoBundle, winningLottoNumber, bonusLottoNumber);
+        RankCount rankCount = lottoRankCount(lottos, winningLottoNumber, bonusLottoNumber);
         LottoResult(money, rankCount);
     }
 
