@@ -15,17 +15,14 @@ public class LottoController {
 
     private final LottoInputView lottoInputView;
     private final LottoResultView lottoResultView;
-    private final LottoShop lottoShop;
-    private final LottoGame lottoGame;
+    private final LottoShop lottoShop = LottoShop.getInstance();
+    private final LottoGame lottoGame = new LottoGame();
 
     public LottoController(final LottoInputView lottoInputView,
-        final LottoResultView lottoResultView, final LottoShop lottoShop,
-        final LottoGame lottoGame) {
+        final LottoResultView lottoResultView) {
 
         this.lottoInputView = lottoInputView;
         this.lottoResultView = lottoResultView;
-        this.lottoShop = lottoShop;
-        this.lottoGame = lottoGame;
     }
 
     public void run() {
