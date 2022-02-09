@@ -52,7 +52,7 @@ public class LottoController {
         return new RankCount(lottoBundle, new Winning(winningLottoNumber, bonusLottoNumber));
     }
 
-    private static void LottoResult(Money money, RankCount rankCount) {
+    private static void lottoResult(Money money, RankCount rankCount) {
         UserResult.printRank(rankResult(rankCount));
         UserResult.printPrizeRatio(lottoTotalPrize(rankCount), money);
     }
