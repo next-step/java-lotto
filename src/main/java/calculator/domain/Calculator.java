@@ -1,6 +1,5 @@
 package calculator.domain;
 
-import calculator.utils.DelimiterTokenizer;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,13 +7,10 @@ public class Calculator {
 
     private static final int INTEGER_DEFAULT_VALUE = 0;
 
-    public int add(String text) {
+    public int add(String text, List<Integer> numbers) {
         if (isNullAndEmptyText(text)) {
             return INTEGER_DEFAULT_VALUE;
         }
-
-        final List<String> delimiters = DelimiterTokenizer.getDelimiters(text);
-        final List<Integer> numbers = NumberExtractor.splitNumbersByDelimiter(text, delimiters);
         return numbers.stream().reduce(INTEGER_DEFAULT_VALUE, Integer::sum);
     }
 
@@ -22,4 +18,3 @@ public class Calculator {
         return Objects.isNull(text) || text.isEmpty();
     }
 }
-
