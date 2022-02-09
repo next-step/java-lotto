@@ -1,11 +1,8 @@
 package lotto;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import lotto.domain.LottoRaffle;
-import lotto.domain.LottoResult;
+import lotto.domain.MatchResult;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.WinningLotto;
@@ -27,8 +24,9 @@ public class LottoGame {
         return new Lottos(lottoCount, generator);
     }
 
-    public Map<LottoResult, Integer> getResults(Lottos lottos, Numbers winningNumbers, BonusNumber bonusNumber) {
-        final LottoRaffle lottoRaffle = new LottoRaffle(new WinningLotto(winningNumbers, bonusNumber));
+    public MatchResult getResults(Lottos lottos, Numbers winningNumbers, BonusNumber bonusNumber) {
+        final LottoRaffle lottoRaffle = new LottoRaffle(
+            new WinningLotto(winningNumbers, bonusNumber));
         for (Lotto lotto : lottos.getLottos()) {
             lottoRaffle.compareLotto(lotto);
         }
