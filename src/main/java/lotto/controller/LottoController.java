@@ -15,6 +15,9 @@ import lotto.view.UserResult;
 
 public class LottoController {
 
+    private LottoController() {
+    }
+
     public static void run() {
         Money money = UserConsole.inputString();
 
