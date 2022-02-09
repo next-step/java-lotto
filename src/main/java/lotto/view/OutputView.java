@@ -14,7 +14,7 @@ public class OutputView {
     private static final int ZERO = 0;
     private static final int HUNDRED = 100;
 
-    public static int getLottoCount(int count) {
+    public static int printLottoCount(int count) {
         System.out.println(count + "개를 구매했습니다.");
         return count;
     }
