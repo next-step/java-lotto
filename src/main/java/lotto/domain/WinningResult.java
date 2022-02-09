@@ -7,7 +7,7 @@ public class WinningResult {
 
     private final List<WinningNumber> winningNumbers;
     private final List<LottoTicket> lottoTickets;
-    private int winningCount;
+    private int matchingCount;
     private boolean hasBonus;
 
     public WinningResult(List<WinningNumber> winningNumbers) {
@@ -22,7 +22,7 @@ public class WinningResult {
     public List<LottoResult> getTotalLottoResult() {
         final List<LottoResult> lottoResults = new ArrayList<>();
         for (LottoTicket lottoTicket : lottoTickets) {
-            initWinningCountAndBonus();
+            initMatchingCountAndBonus();
             lottoResults.add(getLottoResult(lottoTicket));
         }
         return lottoResults;
@@ -30,35 +30,35 @@ public class WinningResult {
 
     private LottoResult getLottoResult(LottoTicket lottoTicket) {
         for (WinningNumber winningNumber : winningNumbers) {
-            updateWinningCountAndBonus(lottoTicket, winningNumber);
+            updateMatchingCountAndBonus(lottoTicket, winningNumber);
         }
 
-        if (hasToCheckBonus(winningCount)) {
-            return LottoResult.from(winningCount, hasBonus);
+        if (hasToCheckBonus(matchingCount)) {
+            return LottoResult.from(matchingCount, hasBonus);
         }
 
-        return LottoResult.from(winningCount);
+        return LottoResult.from(matchingCount);
     }
 
     private boolean hasToCheckBonus(int winningCount) {
         return winningCount == 5;
     }
 
-    private void updateWinningCountAndBonus(LottoTicket lotto, WinningNumber winningNumber) {
+    private void updateMatchingCountAndBonus(LottoTicket lotto, WinningNumber winningNumber) {
         if (lotto.getNumbers().contains(winningNumber.getNumber())) {
-            winningCount++;
-            updateIncludeBonus(winningNumber);
+            matchingCount++;
+            updateHasBonus(winningNumber);
         }
     }
 
-    private void updateIncludeBonus(WinningNumber winningNumber) {
+    private void updateHasBonus(WinningNumber winningNumber) {
         if (winningNumber.isBonus()) {
             hasBonus = true;
         }
     }
 
-    private void initWinningCountAndBonus() {
-        this.winningCount = 0;
+    private void initMatchingCountAndBonus() {
+        this.matchingCount = 0;
         this.hasBonus = false;
     }
 }
