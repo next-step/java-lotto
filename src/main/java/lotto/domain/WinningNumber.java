@@ -9,10 +9,6 @@ public class WinningNumber {
     private final LottoNumber number;
     private final boolean isBonus;
 
-    public WinningNumber(int number) {
-        this(number, false);
-    }
-
     public WinningNumber(String number) {
         this(Integer.parseInt(number), false);
     }
