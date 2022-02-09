@@ -1,6 +1,7 @@
 package lotto.domain.dto;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import lotto.domain.RankCounts;
 
@@ -11,7 +12,7 @@ public class ResultDto {
     private final Double prfitRate;
 
     public ResultDto(RankCounts rankCounts, double profitRate) {
-        this.matchCount = new HashMap<>();
+        this.matchCount = new LinkedHashMap<>();
         this.amount = new HashMap<>();
         this.prfitRate = profitRate;
 
