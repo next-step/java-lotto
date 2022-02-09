@@ -8,12 +8,14 @@ import lotto.domain.lotto.number.Number;
 public class NumbersValidator extends Validator {
 
     private static final int LOTTO_NUMBERS_SIZE = 6;
+    private static final String COMMA = ",";
 
     private NumbersValidator() {
     }
 
     public static List<Number> validate(String input) {
-        final List<Number> numbers = Arrays.stream(input.split(","))
+        final List<Number> numbers = Arrays.stream(input.split(COMMA))
+            .map(String::trim)
             .map(Number::new).collect(Collectors.toList());
 
         validateDuplicateNumbers(numbers);
