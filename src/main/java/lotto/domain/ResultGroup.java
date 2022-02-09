@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ResultGroup {
 
-    private Map<WinningResult, Integer> resultGroup;
+    private final Map<WinningResult, Integer> resultGroup;
 
     public ResultGroup() {
         this.resultGroup = new HashMap<>();
@@ -20,5 +20,13 @@ public class ResultGroup {
 
     public int howManyHave(WinningResult result) {
         return resultGroup.get(result);
+    }
+
+    public double getProfits(Money money) {
+        double profit = 0;
+        for (WinningResult result : WinningResult.winningResults()) {
+            profit += howManyHave(result) * result.prize();
+        }
+        return profit / money.value();
     }
 }

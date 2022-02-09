@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import lotto.controller.ResultGroupDto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.Money;
 import lotto.domain.WinningResult;
 
 public class OutputView {
@@ -38,11 +39,11 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
         for (WinningResult result : WinningResult.winningResults()) {
-            int count = resultGroup.howManyHave(result);
+            int count = resultGroup.getResultGroup().howManyHave(result);
             System.out.printf(STATICS_RESULT_FORMAT, result.count(), result.prize(), count);
         }
-        System.out.printf(PROFIT_RESULT_FORMAT, resultGroup.getProfits());
-        if (resultGroup.getProfits() < PROFIT_THRESHOLD) {
+        System.out.printf(PROFIT_RESULT_FORMAT, resultGroup.getResultGroup().getProfits(resultGroup.getMoney()));
+        if (resultGroup.getResultGroup().getProfits(resultGroup.getMoney()) < PROFIT_THRESHOLD) {
             System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
     }
