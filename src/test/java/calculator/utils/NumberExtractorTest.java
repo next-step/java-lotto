@@ -1,4 +1,4 @@
-package calculator.domain;
+package calculator.utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -49,7 +49,8 @@ class NumberExtractorTest {
     void 숫자_이외의_값이_들어가는_경우(String text) {
         final List<String> delimiters = Arrays.asList(",", ":", "a");
         assertThatExceptionOfType(RuntimeException.class)
-            .isThrownBy(() -> NumberExtractor.splitNumbersByDelimiter(text, delimiters)).withMessage("[ERROR] 숫자 이외의 값을 계산할 수 없습니다.");
+            .isThrownBy(() -> NumberExtractor.splitNumbersByDelimiter(text, delimiters))
+            .withMessage("[ERROR] 숫자 이외의 값을 계산할 수 없습니다.");
     }
 
     @ParameterizedTest
@@ -57,6 +58,7 @@ class NumberExtractorTest {
     void 음수가_들어가는_경우(String text) {
         final List<String> delimiters = Arrays.asList(",", ":", "a");
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> NumberExtractor.splitNumbersByDelimiter(text, delimiters)).withMessage("[ERROR] 음수 값은 입력할 수 없습니다.");
+            .isThrownBy(() -> NumberExtractor.splitNumbersByDelimiter(text, delimiters))
+            .withMessage("[ERROR] 음수 값은 입력할 수 없습니다.");
     }
 }
