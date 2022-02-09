@@ -19,7 +19,7 @@ public class LottoApplication {
         ResultView.printLottoTickets(lottoTickets);
 
         List<WinningNumber> winningNumbers = InputView.getWinningNumbers();
-        LottoMachine.run(lottoNumbers, winningNumbers);
+        LottoMachine.run(lottoTickets, winningNumbers);
 
         ResultView.printResult(LottoMachine.getResults(), purchasePrice);
     }
