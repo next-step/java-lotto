@@ -57,7 +57,6 @@ public class LottoInputView {
         System.out.println(lottos.getLottos().size() + LOTTO_AMOUNT_MESSAGE);
     }
 
-
     private void printLotto(final List<LottoNumber> lottoNumbers) {
         final List<Integer> numbers = lottoNumbers.stream()
             .map(lottoNumber -> lottoNumber.getNumber())
