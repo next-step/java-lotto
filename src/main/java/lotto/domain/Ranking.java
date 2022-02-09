@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public enum Ranking {
 
@@ -24,7 +22,8 @@ public enum Ranking {
     }
 
     public static Ranking judgeRanking(LottoResult lottoResult) {
-        if (lottoResult.getNormalNumberMatchCount() == SECOND_COUNTS && !lottoResult.getBonusNumberMatch()) {
+        if (lottoResult.getNormalNumberMatchCount() == SECOND_COUNTS
+            && !lottoResult.getBonusNumberMatch()) {
             return THIRD;
         }
 

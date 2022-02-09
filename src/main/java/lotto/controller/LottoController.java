@@ -1,10 +1,8 @@
 package lotto.controller;
 
 
-import java.util.List;
 import java.util.Map;
 import lotto.domain.LottoGame;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoShop;
 import lotto.domain.Lottos;
 import lotto.domain.Ranking;
