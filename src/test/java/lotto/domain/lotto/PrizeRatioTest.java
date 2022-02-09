@@ -6,13 +6,14 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class PrizeRatioTest {
 
-    private static final Numbers BASE_ANSWER_NUMBERS = new Numbers(Arrays.asList(1,2,3,4,5,6));
+    private static final List<Integer> BASE_ANSWER_NUMBERS = Arrays.asList(1, 2, 3, 4, 5, 6);
     private static final int BASE_BONUS_NUMBER = 7;
     private static final int PRICE_PER_TICKET = 1000;
     private static final double RATE_RETURNS = 0.35;
@@ -45,8 +46,11 @@ class PrizeRatioTest {
         );
 
         List<Ticket> ticketList = new ArrayList<>();
-        for (List<Integer> ticketNumbers: lottoTickets) {
-            Ticket ticket = new Ticket(new Numbers(ticketNumbers));
+        for (List<Integer> ticketNumbers : lottoTickets) {
+            Ticket ticket = new Ticket(new Numbers(ticketNumbers.
+                stream()
+                .map(Number::new)
+                .collect(Collectors.toList())));
             ticketList.add(ticket);
         }
 
@@ -54,7 +58,10 @@ class PrizeRatioTest {
     }
 
     private void setUpAnswer() {
-        answer = new Answer(BASE_ANSWER_NUMBERS, BASE_BONUS_NUMBER);
+        Numbers baseAnswerNumbers = new Numbers(BASE_ANSWER_NUMBERS.stream()
+            .map(Number::new)
+            .collect(Collectors.toList()));
+        answer = new Answer(baseAnswerNumbers, BASE_BONUS_NUMBER);
     }
 
     private int getPurchased() {
@@ -64,7 +71,8 @@ class PrizeRatioTest {
     @DisplayName("수익률 유효성 검증")
     @Test
     void testRateReturnsValid() {
-        BigDecimal rateOfReturn = new PrizeRatio().calculateRatio(getPurchased(), answer.compare(tickets));
+        BigDecimal rateOfReturn = new PrizeRatio().calculateRatio(getPurchased(),
+            answer.compare(tickets));
 
         assertThat(rateOfReturn.doubleValue())
             .isEqualTo(RATE_RETURNS);
