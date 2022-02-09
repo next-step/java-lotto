@@ -13,7 +13,7 @@ public class LottoBundleTest {
     @DisplayName("구입한_금액에_맞춰_로또_개수를_생성하는지_검증")
     @Test
     void lottosSizeTest() {
-        Lottos lottos = LottoBundle.lottoBundle(size);
+        Lottos lottos = Lottos.lottoBundle(size);
         assertThat(lottos.getLottosSize()).isEqualTo(size);
     }
 }

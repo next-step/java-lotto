@@ -2,7 +2,6 @@ package lotto.controller;
 
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoBundle;
 import lotto.domain.LottoCalculation;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
@@ -32,7 +31,7 @@ public class LottoController {
     }
 
     private static Lottos generateLottoBundle(Money money) {
-        Lottos lottoBundle = LottoBundle.lottoBundle(
+        Lottos lottoBundle = Lottos.lottoBundle(
             calculationLottoCount(makeLottoCalculation(money)));
         return lottoBundle;
     }
