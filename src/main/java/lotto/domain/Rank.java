@@ -25,7 +25,9 @@ public enum Rank {
         if (THIRD.match(lottoCount) && !bonusBallMatch) {
             return THIRD;
         }
-        return Arrays.stream(Rank.values()).filter(rank -> rank.match(lottoCount)).findFirst()
+        return Arrays.stream(Rank.values())
+            .filter(rank -> rank.match(lottoCount))
+            .findFirst()
             .orElse(NOTHING);
     }
 
