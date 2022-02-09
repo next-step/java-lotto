@@ -33,7 +33,7 @@ public class WinningResult {
             updateWinningCountAndBonus(lottoTicket, winningNumber);
         }
 
-        if(hasToCheckBonus(winningCount)) {
+        if (hasToCheckBonus(winningCount)) {
             return LottoResult.from(winningCount, hasBonus);
         }
 
