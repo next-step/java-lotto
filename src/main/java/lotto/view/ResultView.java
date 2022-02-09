@@ -5,6 +5,8 @@ import java.util.Map;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.count.Count;
+import lotto.domain.lotto.count.ManualCount;
 import lotto.domain.lotto.number.Number;
 
 public class ResultView {
@@ -12,8 +14,8 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printLottoCount(final int lottoCount) {
-        System.out.println(lottoCount + "개를 구매했습니다.");
+    public static void printLottoCount(final ManualCount manualCount, final Count autoCount) {
+        System.out.println("\n수동으로 " + manualCount.getCountValue() + "장, 자동으로 "+ autoCount.getValue() + "개를 구매했습니다.");
     }
 
     public static void printLottos(Lottos lottos) {
