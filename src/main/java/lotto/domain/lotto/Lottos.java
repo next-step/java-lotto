@@ -9,8 +9,12 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(int lottoCount) {
-        this.lottos = setLottos(lottoCount);
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = new ArrayList<>(lottos);
+    }
+
+    public Lottos(final int lottoCount, final Generator generator) {
+        this.lottos = setLottos(lottoCount, generator);
     }
 
     private List<Lotto> setLottos(int lottoCount) {
