@@ -13,6 +13,10 @@ public class LottoCount {
         return new LottoCount(count);
     }
 
+    public static LottoCount from(String lottoCount) {
+        return null;
+    }
+
     public int count() {
         return lottoCount;
     }
