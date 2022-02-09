@@ -2,8 +2,8 @@ package lotto.domain;
 
 public class Money {
 
-    private final static int MIN_MONEY = 1000;
-    private final static String ERROR_MESSAGE = "구입 금액은 1000원 이상이어야 합니다.";
+    private final static int MIN_MONEY = 0;
+    private final static String ERROR_MESSAGE = "금액은 0원 이상이어야 합니다.";
     private final int value;
 
     public Money(final int value) {

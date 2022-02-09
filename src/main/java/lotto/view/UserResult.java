@@ -49,7 +49,7 @@ public class UserResult {
     }
 
     private static int rankPrize(Rank rank) {
-        return rank.getPrize().Value();
+        return rank.getPrize().getValue();
     }
 
     private static int rankMatchCount(Rank rank) {
@@ -57,7 +57,7 @@ public class UserResult {
     }
 
     private static float ratioValue(Money totalPrize, Money money) {
-        return totalPrize.Value() / (float) money.Value();
+        return totalPrize.getValue() / (float) money.getValue();
     }
 
     private static boolean printSecond(final RankResult rankResult, final Rank rank) {

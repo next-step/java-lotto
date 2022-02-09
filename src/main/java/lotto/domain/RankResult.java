@@ -22,7 +22,7 @@ public class RankResult {
 
     public Money getTotalPrize(){
         return new Money(rankResult.entrySet().stream()
-            .mapToInt(entry->entry.getKey().getPrize(entry.getValue()).Value())
+            .mapToInt(entry->entry.getKey().getPrize(entry.getValue()).getValue())
             .sum());
     }
 }
