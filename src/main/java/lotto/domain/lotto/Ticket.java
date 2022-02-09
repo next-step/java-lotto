@@ -4,21 +4,21 @@ import java.util.List;
 
 public class Ticket {
 
-    private final Numbers lotto;
+    private final Numbers numbers;
 
     public Ticket(final Numbers numbers) {
-        this.lotto = numbers;
+        this.numbers = numbers;
     }
 
-    public Numbers getLotto() {
-        return lotto;
+    public Numbers getNumbers() {
+        return numbers;
     }
 
-    public int matches(final List<Integer> comparison) {
-        return lotto.countMatches(comparison);
+    public int matches(final List<Number> comparison) {
+        return numbers.countMatches(comparison);
     }
 
     public boolean hasBonus(final int bonus) {
-        return lotto.hasBonus(bonus);
+        return numbers.hasBonus(new Number(bonus));
     }
 }
