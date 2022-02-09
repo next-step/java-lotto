@@ -39,4 +39,12 @@ class BudgetTest {
     void Given_로또_가격보다_큰_투입_금액_When_구매가_불가능한지_판별_Then_false() {
         assertThat(new Budget("5000").canNotPurchase(1000)).isFalse();
     }
+
+    @DisplayName("로또의 가격이 주어지면 구매 가능한 로또 수를 반환한다..")
+    @Test
+    void Given_로또_가격보다_큰_투입_금액_When_구매가능_수_구하기_Then_구매_가능한_로또_수_반환() {
+        int numberOfPurchase = new Budget("5000").getNumberOfPurchase(1000);
+
+        assertThat(numberOfPurchase).isEqualTo(5);
+    }
 }
