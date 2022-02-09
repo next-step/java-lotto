@@ -5,10 +5,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.number.Number;
 import lotto.domain.lotto.number.Numbers;
 
-public class AutoGenerator implements Generator{
+public class AutoGenerator implements Generator {
 
     private static final int LOTTO_NUMBERS_SIZE = 6;
     private static final int LIMIT_MINIMUM_NUMBER = 1;
@@ -17,7 +18,15 @@ public class AutoGenerator implements Generator{
         LIMIT_MAXIMUM_NUMBER + 1).boxed().collect(Collectors.toList());
 
     @Override
-    public Numbers generateLottoNumbers() {
+    public List<Lotto> generateLottos(int count) {
+        final List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            lottos.add(new Lotto(generateLotto()));
+        }
+        return lottos;
+    }
+
+    public Numbers generateLotto() {
         Collections.shuffle(numbers);
         final List<Integer> lottoNumbers = new ArrayList<>(numbers.subList(0, LOTTO_NUMBERS_SIZE));
         Collections.sort(lottoNumbers);
