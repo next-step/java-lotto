@@ -8,9 +8,9 @@ public class YieldCalculator {
     private YieldCalculator() {
     }
 
-    public static double calculateYield(Map<LottoResult, Integer> lottoResults, Money money) {
+    public static double calculateYield(MatchResult lottoResults, Money money) {
         long profit = 0;
-        for (Map.Entry<LottoResult, Integer> resultEntry : lottoResults.entrySet()) {
+        for (Map.Entry<LottoResult, Integer> resultEntry : lottoResults.getMatchResult().entrySet()) {
             profit += (long) resultEntry.getValue() * resultEntry.getKey().getWinning();
         }
         return (double) profit / (double) money.getValue();
