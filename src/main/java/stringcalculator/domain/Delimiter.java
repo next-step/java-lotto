@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Delimiter {
 
-    private final String STARTSWITH_ENDSWITH_IS_NUMBER_EXCEPTION_MESSAGE = "구분자의 시작과 끝은 숫자일 수 없습니다.";
+    private static final String STARTSWITH_ENDSWITH_IS_NUMBER_EXCEPTION_MESSAGE = "구분자의 시작과 끝은 숫자일 수 없습니다.";
 
     private final String value;
 
