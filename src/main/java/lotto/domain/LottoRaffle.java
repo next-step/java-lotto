@@ -1,36 +1,24 @@
 package lotto.domain;
 
-import java.util.EnumMap;
-import java.util.Map;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.WinningLotto;
 
 public class LottoRaffle {
 
     private final WinningLotto winningLotto;
-    private final Map<LottoResult, Integer> matchResult;
+    private MatchResult matchResult;
 
     public LottoRaffle(WinningLotto winningLotto) {
         this.winningLotto = winningLotto;
-        matchResult = initiateMatchMap();
-    }
-
-    private Map<LottoResult, Integer> initiateMatchMap() {
-        final Map<LottoResult, Integer> initiateMatchResult = new EnumMap<>(LottoResult.class);
-        for (LottoResult lottoResult : LottoResult.values()) {
-            initiateMatchResult.put(lottoResult, 0);
-        }
-        return new EnumMap<>(initiateMatchResult);
+        matchResult = MatchResult.init();
     }
 
     public void compareLotto(Lotto lotto) {
         final int matchCount = calculateMatchCount(lotto);
-        boolean isBonusNumber = calculateBonusNumber(lotto);
+        final boolean isBonusNumber = calculateBonusNumber(lotto);
 
         final LottoResult lottoResult = LottoResult.findLottoResult(matchCount, isBonusNumber);
-        if (lottoResult != LottoResult.NO_MATCH) {
-            matchResult.put(lottoResult, matchResult.get(lottoResult) + 1);
-        }
+        matchResult = matchResult.combine(lottoResult);
     }
 
     private boolean calculateBonusNumber(Lotto lotto) {
@@ -41,7 +29,7 @@ public class LottoRaffle {
         return lotto.getMatchCount(winningLotto);
     }
 
-    public Map<LottoResult, Integer> getResults() {
+    public MatchResult getResults() {
         return matchResult;
     }
 }

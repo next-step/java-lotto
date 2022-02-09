@@ -38,11 +38,11 @@ class LottoRaffleTest {
         LottoRaffle lottoRaffle = new LottoRaffle(winningLotto);
         lottoRaffle.compareLotto(lotto);
 
-        for (LottoResult lottoResult : lottoRaffle.getResults().keySet()) {
+        for (LottoResult lottoResult : lottoRaffle.getResults().getMatchResult().keySet()) {
             if (lottoResult == LottoResult.MATCH6) {
-                assertThat(1).isEqualTo(lottoRaffle.getResults().get(lottoResult));
+                assertThat(lottoRaffle.getResults().getMatchResult().get(lottoResult)).isEqualTo(1);
             } else {
-                assertThat(0).isEqualTo(lottoRaffle.getResults().get(lottoResult));
+                assertThat(lottoRaffle.getResults().getMatchResult().get(lottoResult)).isZero();
             }
         }
     }
