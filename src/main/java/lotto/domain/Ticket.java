@@ -7,26 +7,26 @@ public class Ticket {
     private static final int TICKET_PRICE = 1000;
 
     private final int buyCount;
-    private final int money;
+    private final int cash;
 
-    public Ticket(int money) {
-        this.money = money;
+    public Ticket(int cash) {
+        this.cash = cash;
         checkMoney();
-        this.buyCount = money / TICKET_PRICE;
+        this.buyCount = cash / TICKET_PRICE;
     }
 
     public void checkMoney() {
-        if (money < TICKET_PRICE) {
+        if (cash < TICKET_PRICE) {
             throw new IllegalArgumentException(ERROR_CANNOT_BUY);
         }
 
-        if (money % TICKET_PRICE > 0) {
+        if (cash % TICKET_PRICE > 0) {
             throw new IllegalArgumentException(ERROR_WRONG_UNIT);
         }
     }
 
     public int getBuyCash() {
-        return this.buyCount * TICKET_PRICE;
+        return this.cash;
     }
 
     public int getBuyCount() {
