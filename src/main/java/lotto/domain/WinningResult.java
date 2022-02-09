@@ -41,7 +41,8 @@ public class WinningResult {
     }
 
     private boolean hasToCheckBonus(int winningCount) {
-        return winningCount == 5;
+        final int BONUS_BALL_MATCHING = 5;
+        return winningCount == BONUS_BALL_MATCHING;
     }
 
     private void updateMatchingCountAndBonus(LottoTicket lotto, WinningNumber winningNumber) {
