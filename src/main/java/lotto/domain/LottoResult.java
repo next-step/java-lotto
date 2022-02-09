@@ -10,6 +10,7 @@ public enum LottoResult {
     FIVE_MATCHING_BONUS(5, true, 30_000_000, "5개 일치, 보너스 볼 일치 (30,000,000) - "),
     SIX_MATCHING(6, false, 2_000_000_000, "6개 일치 (2,000,000,000원) - ");
 
+    private static final int MIN_PRIZE_MATCHING = 3;
     private final int matchCount;
     private final boolean hasBonus;
     private final int prize;
