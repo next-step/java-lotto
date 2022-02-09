@@ -9,12 +9,12 @@ public class WinningNumber {
     private final int number;
     private final boolean isBonus;
 
-    public WinningNumber(String number) {
+    public WinningNumber(int number) {
         this(number, false);
     }
 
-    public WinningNumber(int number) {
-        this(number, false);
+    public WinningNumber(String number) {
+        this(Integer.parseInt(number), false);
     }
 
     public WinningNumber(String number, boolean isBonus) {
@@ -22,21 +22,21 @@ public class WinningNumber {
     }
 
     public WinningNumber(int number, boolean isBonus) {
-        this.number = number;
+        this.number = new LottoNumber(number);
         this.isBonus = isBonus;
     }
 
     public static List<WinningNumber> getWinningNumbers(String[] numbers, String bonusNumber) {
-        List<WinningNumber> balls = Arrays.stream(numbers)
+        List<WinningNumber> winningNumbers = Arrays.stream(numbers)
             .map(WinningNumber::new)
             .collect(Collectors.toList());
 
-        balls.add(new WinningNumber(bonusNumber, true));
-        return balls;
+        winningNumbers.add(new WinningNumber(bonusNumber, true));
+        return winningNumbers;
     }
 
     public int getNumber() {
-        return number;
+        return number.getNumber();
     }
 
     public boolean isBonus() {
