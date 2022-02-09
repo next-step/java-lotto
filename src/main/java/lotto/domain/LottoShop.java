@@ -14,13 +14,13 @@ public class LottoShop {
         return INSTANCE;
     }
 
-    public int countPossibleLottoAmount(final int price) {
-        validatePrice(price);
-        return price / LOTTO_PRICE;
+    public int countPossibleLottoAmount(final Money money) {
+        validatePrice(money);
+        return money.divideByThousand();
     }
 
-    private void validatePrice(final int price) {
-        if (price < LOTTO_PRICE) {
+    private void validatePrice(final Money money) {
+        if (money.getMoney() < LOTTO_PRICE) {
             throw new IllegalArgumentException(MIN_PURCHASE_EXCEPTION_MESSAGE);
         }
     }

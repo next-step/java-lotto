@@ -5,6 +5,7 @@ import java.util.Map;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoShop;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
 import lotto.domain.Ranking;
 import lotto.domain.WinningLotto;
 import lotto.view.LottoInputView;
@@ -25,8 +26,8 @@ public class LottoController {
     }
 
     public void run() {
-        final int inputPrice = lottoInputView.inputPrice();
-        final Lottos lottos = lottoGame.startLotto(inputPrice, lottoShop);
+        Money money = new Money(lottoInputView.inputPrice());
+        final Lottos lottos = lottoGame.startLotto(money, lottoShop);
 
         lottoInputView.printLottos(lottos);
 
@@ -34,6 +35,6 @@ public class LottoController {
             lottoInputView.inputBonusBall());
 
         final Map<Ranking, Integer> totalResult = lottoGame.findWinner(winningLotto, lottos);
-        lottoResultView.finishGame(totalResult, inputPrice);
+        lottoResultView.finishGame(totalResult, money);
     }
 }

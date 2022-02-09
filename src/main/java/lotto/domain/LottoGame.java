@@ -20,8 +20,8 @@ public class LottoGame {
             .forEach(ranking -> totalResult.put(ranking, ZERO));
     }
 
-    public Lottos startLotto(final int price, final LottoShop lottoShop) {
-        final int lottoAmount = lottoShop.countPossibleLottoAmount(price);
+    public Lottos startLotto(final Money money, final LottoShop lottoShop) {
+        final int lottoAmount = lottoShop.countPossibleLottoAmount(money);
         return lottoShop.buyLotto(lottoAmount);
     }
 

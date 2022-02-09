@@ -40,7 +40,7 @@ class LottoGameTest {
 
     @Test
     void 투입한_금액만큼_로또를_살_수_있다() {
-        Lottos lottos = lottoGame.startLotto(2000, LottoShop.getInstance());
+        Lottos lottos = lottoGame.startLotto(new Money(2000), LottoShop.getInstance());
 
         assertThat(lottos.getLottos().size()).isEqualTo(2);
     }

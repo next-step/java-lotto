@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import lotto.domain.Money;
 import lotto.domain.Ranking;
 
 public class LottoResultView {
@@ -15,7 +16,7 @@ public class LottoResultView {
     private int totalWinnerPrice = ZERO;
 
 
-    public void finishGame(final Map<Ranking, Integer> totalResult, final int userPrice) {
+    public void finishGame(final Map<Ranking, Integer> totalResult, final Money money) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
@@ -26,12 +27,12 @@ public class LottoResultView {
         rankings.forEach(key ->
             process(key, totalResult.get(key)));
 
-        printYield(userPrice);
+        printYield(money);
     }
 
-    private void printYield(final int userPrice) {
+    private void printYield(final Money money) {
         stringBuilder.append("총 수익률은 ")
-            .append(String.format("%.2f", (double) totalWinnerPrice / userPrice))
+            .append(String.format("%.2f", (double) totalWinnerPrice / money.getMoney()))
             .append("입니다.");
         System.out.println(stringBuilder);
     }
