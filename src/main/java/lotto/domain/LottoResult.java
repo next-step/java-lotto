@@ -10,12 +10,12 @@ public class LottoResult {
     private static final boolean MATCHED_BONUS_BALL = true;
     private static final boolean NOT_MATCHED_BONUS_BALL = false;
 
-    private int normalSuccessCount;
-    private boolean bonusSuccessCount;
+    private int normalNumberMatchCount;
+    private boolean isBonusNumberMatch;
 
-    public LottoResult(final int normalSuccessCount, final boolean bonusSuccessCount) {
-        this.normalSuccessCount = normalSuccessCount;
-        this.bonusSuccessCount = bonusSuccessCount;
+    public LottoResult(final int normalNumberMatchCount, final boolean isBonusNumberMatch) {
+        this.normalNumberMatchCount = normalNumberMatchCount;
+        this.isBonusNumberMatch = isBonusNumberMatch;
     }
 
     public LottoResult countLotteryNumber(final List<LottoNumber> winningNumbers,
@@ -30,23 +30,23 @@ public class LottoResult {
         List<LottoNumber> userNumbers) {
         Set<LottoNumber> lottoDuplicate = new HashSet<>(winningNumbers);
         lottoDuplicate.addAll(userNumbers);
-        normalSuccessCount = STANDARD_NUMBER - lottoDuplicate.size();
+        normalNumberMatchCount = STANDARD_NUMBER - lottoDuplicate.size();
     }
 
     private void countBonusNumber(final List<LottoNumber> userNumbers,
         final LottoNumber bonusNumber) {
         if (userNumbers.contains(bonusNumber)) {
-            bonusSuccessCount = MATCHED_BONUS_BALL;
+            isBonusNumberMatch = MATCHED_BONUS_BALL;
             return;
         }
-        bonusSuccessCount = NOT_MATCHED_BONUS_BALL;
+        isBonusNumberMatch = NOT_MATCHED_BONUS_BALL;
     }
 
-    public boolean getBonusSuccessCount() {
-        return bonusSuccessCount;
+    public boolean getBonusNumberMatch() {
+        return isBonusNumberMatch;
     }
 
-    public int getNormalSuccessCount() {
-        return normalSuccessCount;
+    public int getNormalNumberMatchCount() {
+        return normalNumberMatchCount;
     }
 }

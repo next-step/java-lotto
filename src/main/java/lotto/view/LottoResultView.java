@@ -41,7 +41,7 @@ public class LottoResultView {
             return;
         }
 
-        stringBuilder.append(ranking.getNormalSuccessNumber())
+        stringBuilder.append(ranking.getNormalNumberMatchCount())
             .append("개 일치 ")
             .append("(")
             .append(ranking.getWinnerPrice())
