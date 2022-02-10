@@ -71,6 +71,7 @@
 - [x] lottoGenerator에서 generateStrategy 전략 패턴 적용
 - [x] Generator 테스트 케이스 작성
 - [x] LottoMachine 메서드 네이밍 변경, getLottoPrice() ->  purchaseAmount()
+- [x] 메서드 참조 방식 적용
 
 ## multiple authors
 
