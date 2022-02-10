@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.util.ArrayList;
@@ -54,5 +55,12 @@ class AnswerTest {
         Map<Rank, Integer> resultMap = answer.compare(getTickets());
 
         assertThat(resultMap).containsEntry(RANK, MATCHES);
+    }
+
+    @DisplayName("당첨번호와 보너스 번호는 중복되면 안된다.")
+    @Test
+    void testBaseNumberListHasBonusNumber() {
+        assertThatThrownBy(() -> new Answer(numbers,8))
+            .isInstanceOf(IllegalArgumentException.class);
     }
 }
