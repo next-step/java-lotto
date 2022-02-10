@@ -11,7 +11,7 @@ class LottoTest {
     @Test
     void 로또는_숫자_여섯개() {
         Lotto lotto = new Lotto(Arrays.asList(2, 4, 8, 41, 15, 20));
-        assertThat(lotto.getNumbers().size()).isEqualTo(6);
+        assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);
     }
 
     @Test
