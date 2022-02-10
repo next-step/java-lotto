@@ -19,27 +19,17 @@ public class InputView {
 
     public static String inputBudget() {
         System.out.println(INPUT_BUDGET);
-        return input();
+        return removedBlankInput();
     }
 
     public static String inputWinningNumbers() {
         System.out.println(INPUT_WINNING_NUMBERS);
-        return removeBlank(input());
-    }
-
-    private static String removeBlank(final String inputNumbers) {
-        return inputNumbers.replaceAll(SPACES, EMPTY_STRING);
+        return removedBlankInput();
     }
 
     public static String inputBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER);
-        return input();
-    }
-
-    private static void validateBlank(final String input) {
-        if (input.isEmpty()) {
-            throw new IllegalArgumentException(EMPTY_INPUT_EXCEPTION_MESSAGE);
-        }
+        return removedBlankInput();
     }
 
     public static List<String> inputManualLottoNumbers() {
@@ -48,7 +38,7 @@ public class InputView {
 
         System.out.println();
         while (lottos.size() < numberOfManualLotto) {
-            lottos.add(input());
+            lottos.add(removedBlankInput());
         }
 
         return lottos;
@@ -56,14 +46,24 @@ public class InputView {
 
     private static String inputNumberOfManualLotto() {
         System.out.println(INPUT_MANUAL_LOTTO_NUMBERS);
-        return input();
+        return removedBlankInput();
     }
 
-    private static String input() {
+    private static String removedBlankInput() {
         final Scanner sc = new Scanner(System.in);
         final String input = sc.nextLine().trim();
         validateBlank(input);
 
-        return input;
+        return removeBlank(input);
+    }
+
+    private static void validateBlank(final String input) {
+        if (input.isEmpty()) {
+            throw new IllegalArgumentException(EMPTY_INPUT_EXCEPTION_MESSAGE);
+        }
+    }
+
+    private static String removeBlank(final String inputNumbers) {
+        return inputNumbers.replaceAll(SPACES, EMPTY_STRING);
     }
 }
