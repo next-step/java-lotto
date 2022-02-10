@@ -60,13 +60,14 @@
     - [x] LottoMachine에서 lottoPrice, lottoTicket 상태 유지되지 않게 구조 변경
     - [x] LottoStatistics 상태 유지되지 않게 구조 변경
     - [x] LottoStatistics 팩토리 메서드로 변경 및 빌더 패턴 적용 
-- [ ] 보너스 볼 매칭에 대한 구현이 빠져 있다.
+- [x] 보너스 볼 매칭에 대한 구현이 빠져 있다.
 - [x] `.collect(Collectors.toList()).size();` 보다는 `stream count` 지향하자.
 - [x] 불필요한 선언이 있다. 메서드에서 로컬변수로 처리해보자.
 
 ---
 
--[x] LottoTicket -> LottoTicketGenerator 인데, LottoTicketGenerator에서 LottoTicket생성하는 것으로 변경 해보기.
+- [x] LottoTicket -> LottoTicketGenerator 인데, LottoTicketGenerator에서 LottoTicket생성하는 것으로 변경 해보기.
+- [x] Lotto -> NumberGenerator 에서 NumberGenerator -> Lotto 로 변경
 
 ## multiple authors
 
