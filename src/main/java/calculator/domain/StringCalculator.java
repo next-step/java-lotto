@@ -2,8 +2,6 @@ package calculator.domain;
 
 public class StringCalculator {
 
-    private static final Number ZERO = new Number(0);
-
     private final Numbers numbers;
 
     private StringCalculator(final Numbers numbers) {
@@ -15,7 +13,6 @@ public class StringCalculator {
     }
 
     public Number calculate() {
-        return numbers.getNumbers().stream()
-            .reduce(ZERO, Number::add);
+        return numbers.addAll();
     }
 }

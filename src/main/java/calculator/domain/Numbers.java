@@ -16,6 +16,7 @@ public class Numbers {
     private static final int POSITION_OTHER_EXPRESSION = 2;
     private static final String COMMA = ",";
     private static final List<Number> ZERO_NUMBERS = Collections.singletonList(new Number(0));
+    private static final Number ZERO = new Number(0);
 
     private final List<Number> numbers;
 
@@ -30,8 +31,12 @@ public class Numbers {
     private List<Number> splitFromDelimiter(String expression) {
         Matcher m = PATTERN_REGX_CUSTOM.matcher(expression);
         if (m.find()) {
-            String customDelimiter = m.group(POSITION_CUSTOM_DELIMITER);
-            return splitDelimiter(m.group(POSITION_OTHER_EXPRESSION).split(customDelimiter));
+            final String customDelimiter = m.group(POSITION_CUSTOM_DELIMITER);
+            final String[] numbers = m.group(POSITION_OTHER_EXPRESSION).split(customDelimiter);
+            final String[] splitedNumber = String.join(COMMA, numbers).split(REGX_DELIMITER);
+            return Arrays.stream(splitedNumber)
+                    .map(Number::new)
+                    .collect(Collectors.toList());
         }
 
         return Arrays.stream(expression.split(REGX_DELIMITER))
@@ -39,15 +44,13 @@ public class Numbers {
             .collect(Collectors.toList());
     }
 
-    private List<Number> splitDelimiter(String[] expression) {
-        String[] splitedNumber = String.join(COMMA, expression).split(REGX_DELIMITER);
-        return Arrays.stream(splitedNumber)
-            .map(Number::new)
-            .collect(Collectors.toList());
+    public Number get(int index) {
+        return numbers.get(index);
     }
 
-    public Number get(int idx) {
-        return numbers.get(idx);
+    public Number addAll() {
+        return numbers.stream()
+            .reduce(ZERO, Number::add);
     }
 
     public List<Number> getNumbers() {
