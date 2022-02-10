@@ -29,7 +29,7 @@ public class StringCalculator {
         return Objects.isNull(text) || text.isEmpty();
     }
 
-    private static void hasNegativeValue(List<Integer> numbers) {
+    private void checkNegativeValue(List<Integer> numbers) {
         for (Integer number : numbers) {
             if (number < 0) {
                 throw new RuntimeException(NEGATIVE_EXCEPTION);
