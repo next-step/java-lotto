@@ -2,76 +2,131 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.stream.Collectors;
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.Rank;
+import java.util.Map;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+
 class WinningResultTest {
-    @Test
-    public void 당첨통계_맵핑_테스트() {
-        //given
-        List<Lotto> lottos = new ArrayList<>();
-        Lotto lotto1 = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto2 = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 7));
-        Lotto lotto3 = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 17));
-        Lotto lotto4 = Lotto.from(Arrays.asList(1, 2, 3, 4, 15, 7));
-        Lotto lotto5 = Lotto.from(Arrays.asList(1, 2, 3, 14, 15, 7));
-        Lotto lotto6 = Lotto.from(Arrays.asList(1, 2, 13, 14, 15, 7));
+    private WinningResult testWinningResult;
 
-        lottos.add(lotto1);
-        lottos.add(lotto2);
-        lottos.add(lotto3);
-        lottos.add(lotto4);
-        lottos.add(lotto5);
-        lottos.add(lotto6);
-
-        WinningNumber winningNumber = new WinningNumber(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
-
-        WinningResult winningResult = new WinningResult();
-
-        //when
-        List<Rank> ranks = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            List<LottoNumber> numbers = lotto.getNumbers();
-
-            List<Integer> collect = numbers.stream()
-                .map(LottoNumber::getNumber)
-                .collect(Collectors.toList());
-
-            Rank rank = winningNumber.compareTo(collect);
-            ranks.add(rank);
-        }
-
-        winningResult.mappingResult(ranks);
-
-        //then
-        assertThat(winningResult.getResult().get(Rank.FIRST)).isEqualTo(1);
-        assertThat(winningResult.getResult().get(Rank.SECOND)).isEqualTo(1);
-        assertThat(winningResult.getResult().get(Rank.THIRD)).isEqualTo(1);
-        assertThat(winningResult.getResult().get(Rank.FOURTH)).isEqualTo(1);
-        assertThat(winningResult.getResult().get(Rank.FIFTH)).isEqualTo(1);
-        assertThat(winningResult.getResult().get(Rank.NONE)).isEqualTo(1);
+    @BeforeEach
+    void beforeEach() {
+        List<LottoNumber> testNumbers = Arrays.asList(
+            new LottoNumber(1),
+            new LottoNumber(2),
+            new LottoNumber(3),
+            new LottoNumber(4),
+            new LottoNumber(5),
+            new LottoNumber(6)
+        );
+        Lotto testLotto = Lotto.of(testNumbers);
+        LottoNumber testBonus = new LottoNumber(7);
+        WinningLotto testWinningLotto = new WinningLotto(testLotto, testBonus);
+        testWinningResult = new WinningResult(testWinningLotto);
     }
 
+    @DisplayName("각 로또의 결과를 RANK와 해당 RANK의 개수로 저장한다")
     @Test
-    void 당첨금액_계산() {
-        //given
-        List<Rank> ranks = new ArrayList<>();
-        ranks.add(Rank.FIRST);
-        ranks.add(Rank.SECOND);
+    void 결과가_1등_1개_2등_1개_3등_2개인_경우() {
+        List<LottoNumber> first = Arrays.asList(
+            new LottoNumber(1),
+            new LottoNumber(2),
+            new LottoNumber(3),
+            new LottoNumber(4),
+            new LottoNumber(5),
+            new LottoNumber(6)
+        );
 
-        //when
-        WinningResult winningResult = new WinningResult();
-        winningResult.mappingResult(ranks);
+        List<LottoNumber> second = Arrays.asList(
+            new LottoNumber(1),
+            new LottoNumber(2),
+            new LottoNumber(3),
+            new LottoNumber(4),
+            new LottoNumber(5),
+            new LottoNumber(7)
+        );
 
-        winningResult.calculateTotalPrize();
+        List<LottoNumber> third1 = Arrays.asList(
+            new LottoNumber(11),
+            new LottoNumber(2),
+            new LottoNumber(3),
+            new LottoNumber(4),
+            new LottoNumber(5),
+            new LottoNumber(6)
+        );
 
-        //then
-        assertThat(winningResult.getWinningCash()).isEqualTo(2000000000 + 30000000);
+        List<LottoNumber> third2 = Arrays.asList(
+            new LottoNumber(1),
+            new LottoNumber(2),
+            new LottoNumber(3),
+            new LottoNumber(41),
+            new LottoNumber(5),
+            new LottoNumber(6)
+        );
+
+        List<Lotto> lottos = Arrays.asList(
+            Lotto.of(first),
+            Lotto.of(second),
+            Lotto.of(third1),
+            Lotto.of(third2)
+        );
+
+        Map<Rank, Integer> actual = testWinningResult.mapResult(lottos);
+        assertThat(actual.get(Rank.FIRST)).isEqualTo(1);
+        assertThat(actual.get(Rank.SECOND)).isEqualTo(1);
+        assertThat(actual.get(Rank.THIRD)).isEqualTo(2);
+        assertThat(actual.get(Rank.FOURTH)).isEqualTo(0);
+        assertThat(actual.get(Rank.FIFTH)).isEqualTo(0);
+    }
+
+    @DisplayName("각 로또의 결과를 토대로 당첨 상금과 수익률을 계산한다")
+    @Test
+    void 로또_3개_중_4등_1개_5등_1개_꽝_1개인_경우() {
+        List<LottoNumber> fourth = Arrays.asList(
+            new LottoNumber(11),
+            new LottoNumber(21),
+            new LottoNumber(3),
+            new LottoNumber(4),
+            new LottoNumber(5),
+            new LottoNumber(6)
+        );
+
+        List<LottoNumber> fifth = Arrays.asList(
+            new LottoNumber(1),
+            new LottoNumber(2),
+            new LottoNumber(3),
+            new LottoNumber(14),
+            new LottoNumber(15),
+            new LottoNumber(16)
+        );
+
+        List<LottoNumber> none = Arrays.asList(
+            new LottoNumber(11),
+            new LottoNumber(12),
+            new LottoNumber(13),
+            new LottoNumber(14),
+            new LottoNumber(15),
+            new LottoNumber(6)
+        );
+
+        List<Lotto> lottos = Arrays.asList(
+            Lotto.of(fourth),
+            Lotto.of(fifth),
+            Lotto.of(none)
+        );
+
+        testWinningResult.mapResult(lottos);
+
+        double actualProfit = testWinningResult.calculateProfitRate(3000);
+        double expectedProfit = (double) 55000 / 3000;
+        long actualPrize = testWinningResult.calculatePrizeMoney();
+
+        assertThat(actualPrize).isEqualTo(55000);
+        assertThat(actualProfit).isEqualTo(expectedProfit);
     }
 }
