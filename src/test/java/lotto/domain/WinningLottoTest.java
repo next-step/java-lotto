@@ -26,7 +26,7 @@ class WinningLottoTest {
 
         Lotto lotto = new Lotto(lottoNumbers);
 
-        assertThat(winningLotto.compareLotto(lotto)).isEqualTo(Ranking.THIRD);
+        assertThat(winningLotto.matchLotto(lotto)).isEqualTo(Ranking.THIRD);
     }
 
 }

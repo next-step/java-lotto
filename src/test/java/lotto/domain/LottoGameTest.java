@@ -3,11 +3,11 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +19,7 @@ class LottoGameTest {
     @BeforeEach
     void setUp() {
         lottoGame = new LottoGame();
-        lottos = new Lottos();
+        lottos = new Lottos(new ArrayList<>());
 
         lottos.storeLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6).stream()
             .map(LottoNumber::new)

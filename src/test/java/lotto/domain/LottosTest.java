@@ -1,9 +1,8 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
-import org.assertj.core.api.Assertions;
+import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 class LottosTest {
@@ -11,7 +10,7 @@ class LottosTest {
     @Test
     void 로또들을_저장할_수_있다() {
         // given
-        Lottos lottos = new Lottos();
+        Lottos lottos = new Lottos(new ArrayList<>());
 
         // when
         lottos.storeLotto(new Lotto());
