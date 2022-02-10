@@ -5,32 +5,23 @@ import java.util.List;
 
 public class LottoTicket {
 
-    private static final int LOTTO_PRICE = 1_000;
-
-    final List<Lotto> lottoTicket;
+    final List<Lotto> lottoList;
     final int price;
 
-    private LottoTicket(int price) {
-        final int lottoCount = convertPriceToCount(price);
-
+    private LottoTicket(List<Lotto> lottoList, int price) {
+        this.lottoList = lottoList;
         this.price = price;
-        this.lottoTicket = LottoTicketGenerator.from(lottoCount).getLottoTicket();
     }
 
-    public static LottoTicket from(int price) {
-        return new LottoTicket(price);
+    public static LottoTicket from(List<Lotto> lottoList, int price) {
+        return new LottoTicket(lottoList, price);
     }
 
-    private int convertPriceToCount(int price) {
-        return price / LOTTO_PRICE;
+    public List<Lotto> getLottoList() {
+        return Collections.unmodifiableList(lottoList);
     }
 
-    public List<Lotto> getLottoTicket() {
-        return Collections.unmodifiableList(lottoTicket);
-    }
-
-    public int getLottoTicketPrice() {
+    public int getPrice() {
         return price;
     }
-
 }

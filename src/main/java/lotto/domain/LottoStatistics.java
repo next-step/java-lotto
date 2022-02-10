@@ -19,8 +19,8 @@ public class LottoStatistics {
     public LottoStatistics(List<Integer> winningNumbers, int bonusNumber, LottoTicket lottoTicket) {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
-        this.lottoList = lottoTicket.getLottoTicket();
-        this.lottoPrice = lottoTicket.getLottoTicketPrice();
+        this.lottoList = lottoTicket.getLottoList();
+        this.lottoPrice = lottoTicket.getPrice();
         this.resultStatistics = new ArrayList<>();
 
         compareNumber();

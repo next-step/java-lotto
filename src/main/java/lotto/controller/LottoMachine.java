@@ -3,6 +3,7 @@ package lotto.controller;
 import java.util.List;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTicketGenerator;
 import lotto.domain.Price;
 import lotto.domain.WinningNumbers;
 import lotto.util.Util;
@@ -33,10 +34,10 @@ public class LottoMachine {
 
     public LottoTicket purchaseLotto(int price) {
         final Price lottoPrice = Price.from(price);
-        final LottoTicket lottoTicket = convertPriceToLotto(lottoPrice);
+        final LottoTicket lottoTicket = LottoTicketGenerator.from(lottoPrice).getLottoTicket();
 
-        ResultView.printLottoNumbers(lottoTicket.getLottoTicket());
-        OutputView.printLottoCount(lottoTicket.getLottoTicket().size());
+        ResultView.printLottoNumbers(lottoTicket.getLottoList());
+        OutputView.printLottoCount(lottoTicket.getLottoList().size());
 
         return lottoTicket;
     }
@@ -56,10 +57,6 @@ public class LottoMachine {
     private int getLottoPrice() {
         OutputView.printRequestLottoPrice();
         return InputView.readPrice();
-    }
-
-    private LottoTicket convertPriceToLotto(Price lottoPrice) {
-        return LottoTicket.from(lottoPrice.getValue());
     }
 
     private List<Integer> getWinningNumber() {

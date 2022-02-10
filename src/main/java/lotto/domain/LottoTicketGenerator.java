@@ -1,32 +1,46 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class LottoTicketGenerator {
 
-    private final List<Lotto> lottoTicket;
+    private static final int LOTTO_PRICE = 1_000;
 
-    private LottoTicketGenerator(int count) {
-        this.lottoTicket = generateLottoTicket(count);
+    final LottoTicket lottoTicket;
+
+    private LottoTicketGenerator(LottoTicket lottoTicket) {
+        this.lottoTicket = lottoTicket;
     }
 
-    public static LottoTicketGenerator from(int count) {
-        return new LottoTicketGenerator(count);
+    public static LottoTicketGenerator from(Price price) {
+        LottoTicket lottoTicket = generateLottoTicketFromPrice(price);
+
+        return new LottoTicketGenerator(lottoTicket);
     }
 
-    public List<Lotto> getLottoTicket() {
-        return Collections.unmodifiableList(lottoTicket);
+    public LottoTicket getLottoTicket() {
+        return lottoTicket;
     }
 
-    private List<Lotto> generateLottoTicket(int count) {
-        List<Lotto> lottoTicket = new ArrayList<>();
+    private static LottoTicket generateLottoTicketFromPrice(Price price) {
+        int count = convertPriceToCount(price.getValue());
+        List<Lotto> lottoTicket = generateLottoTicket(count);
+
+        return LottoTicket.from(lottoTicket, price.getValue());
+    }
+
+    private static List<Lotto> generateLottoTicket(int count) {
+        List<Lotto> lottoList = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            lottoTicket.add(new Lotto());
+            lottoList.add(new Lotto());
         }
 
-        return lottoTicket;
+        return lottoList;
+    }
+
+    private static int convertPriceToCount(int price) {
+        return price / LOTTO_PRICE;
     }
 }
