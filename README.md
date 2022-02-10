@@ -64,6 +64,9 @@
 - [x] `.collect(Collectors.toList()).size();` 보다는 `stream count` 지향하자.
 - [x] 불필요한 선언이 있다. 메서드에서 로컬변수로 처리해보자.
 
+---
+
+-[x] LottoTicket -> LottoTicketGenerator 인데, LottoTicketGenerator에서 LottoTicket생성하는 것으로 변경 해보기.
 
 ## multiple authors
 
