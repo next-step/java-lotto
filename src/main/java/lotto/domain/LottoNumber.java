@@ -4,6 +4,7 @@ public class LottoNumber {
 
     private static final int LOTTO_VALID_NUM_START = 1;
     private static final int LOTTO_VALID_NUM_END = 45;
+    private static final String INVALID_NUMBER_RANGE = "복권의 숫자 범위가 유효하지 않습니다.";
 
     private final int lottoNum;
 
@@ -15,7 +16,7 @@ public class LottoNumber {
 
     private void validateNumberRange(final int number) {
         if (number < LOTTO_VALID_NUM_START || number > LOTTO_VALID_NUM_END) {
-            throw new IllegalArgumentException("복권의 숫자 범위가 유효하지 않습니다.");
+            throw new IllegalArgumentException(INVALID_NUMBER_RANGE);
         }
     }
 

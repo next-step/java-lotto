@@ -11,28 +11,36 @@ import lotto.service.RewardRateCalculator;
 
 public class LottoOutput {
 
+    private static final String ENTER = "\n";
+    private static final String BUYSUM_MESSAGE = "개를 구매했습니다.";
+    private static final String RANKING_STATUS_MESSAGE = "당첨 통계" + ENTER;
+    private static final String RANKING_DELIMITER = "-----------" + ENTER;
+    private static final String REWARD_RATE_MESSAGE = "총 수익률은 ";
+    private static final String DASH = " - ";
+    private static final String PIECE = "개";
+    private static final List<Ranking> ORDER_PRINT_RANKING = new ArrayList<>(
+        Arrays.asList(Ranking.FIVE, Ranking.FOUR, Ranking.FOUR, Ranking.THREE, Ranking.TWO,
+            Ranking.ONE));
+
     private LottoOutput() {
     }
 
     public static void printBuySum(int buyNum) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(buyNum)
-            .append("개를 구매했습니다.");
+            .append(BUYSUM_MESSAGE);
         System.out.println(stringBuilder);
     }
 
     public static void printRankingStatus(List<Ranking> rankings) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("당첨 통계 \n");
-        stringBuilder.append("----------- \n");
+        stringBuilder.append(RANKING_STATUS_MESSAGE);
+        stringBuilder.append(RANKING_DELIMITER);
 
-        List<Ranking> showRankings = new ArrayList<>(
-            Arrays.asList(Ranking.FIVE, Ranking.FOUR, Ranking.FOUR, Ranking.THREE, Ranking.TWO,
-                Ranking.ONE));
         Map<Ranking, Integer> rankingCount = countRanking(rankings);
-        for (Ranking ranking : showRankings) {
-            stringBuilder.append(ranking).append(" - ")
-                .append(rankingCount.getOrDefault(ranking, 0)).append("개").append("\n");
+        for (Ranking ranking : ORDER_PRINT_RANKING) {
+            stringBuilder.append(ranking).append(DASH)
+                .append(rankingCount.getOrDefault(ranking, 0)).append(PIECE).append(ENTER);
         }
 
         System.out.println(stringBuilder);
@@ -48,7 +56,7 @@ public class LottoOutput {
 
     public static void printRewardRate(List<Ranking> rankings, int buyPrice) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("총 수익률은 ");
+        stringBuilder.append(REWARD_RATE_MESSAGE);
         int winnerPriceSum = countWinnerPriceSum(rankings);
         double rewardRate = RewardRateCalculator.countRewardRate(winnerPriceSum, buyPrice);
         stringBuilder.append(rewardRate);
@@ -65,7 +73,7 @@ public class LottoOutput {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (LottoNumbers lottoNumber : lottoNumbers) {
-            stringBuilder.append(Arrays.toString(lottoNumber.getNumbers().toArray())).append("\n");
+            stringBuilder.append(Arrays.toString(lottoNumber.getNumbers().toArray())).append(ENTER);
         }
 
         System.out.println(stringBuilder);
