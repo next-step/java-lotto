@@ -13,7 +13,10 @@ public class WinningLotto {
     }
 
     public Ranking matchLotto(final Lotto lotto) {
-        final LottoCalculator calculator = LottoCalculator.getInstance();
-        return calculator.calculate(winningNumbers, lotto.getLottoNumbers(), bonusBall);
+        final LottoResult result = new LottoResult(0, false);
+        final LottoResult lottoResult = result.countLotteryNumber(winningNumbers, lotto.getLottoNumbers(),
+            bonusBall);
+
+        return Ranking.judgeRanking(lottoResult);
     }
 }
