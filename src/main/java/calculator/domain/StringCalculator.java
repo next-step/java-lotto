@@ -1,5 +1,7 @@
 package calculator.domain;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class StringCalculator {
@@ -21,16 +23,19 @@ public class StringCalculator {
 
     public int add() {
         Parser parser = new Parser(input);
-        String splitedFormular = parser.getParsedFormular();
+        List<String> refinedFormular;
 
         if (!Objects.isNull(parser.getCustomDelimiter())) {
             String delimeter = parser.getCustomDelimiter();
-            return parser.makeToIntegerList(splitedFormular, delimeter + "|,|:").stream()
+            refinedFormular = Arrays.asList(parser.getParsedFormular().split(delimeter + "|,|:"));
+            return parser.makeToIntegerList(refinedFormular).stream()
                 .mapToInt(Integer::intValue)
                 .sum();
         }
 
-        return parser.makeToIntegerList(input, ",|:").stream()
+        refinedFormular = Arrays.asList(parser.getParsedFormular().split(",|:"));
+
+        return parser.makeToIntegerList(refinedFormular).stream()
             .mapToInt(Integer::intValue)
             .sum();
     }

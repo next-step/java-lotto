@@ -18,15 +18,8 @@ public class Parser {
     private String customDelimiter;
 
     public Parser(String formula) {
+        parsedFormular = formula;
         splitCustomFormular(formula);
-    }
-
-    public static List<Integer> makeToIntegerList(String splitedFormular, String delimiter) {
-        List<String> delimiteredFormular = Arrays.asList(splitedFormular.split(delimiter));
-        validateFormular(delimiteredFormular);
-        return delimiteredFormular.stream()
-            .map(Integer::parseInt).collect(
-                Collectors.toList());
     }
 
     private void splitCustomFormular(String formula) {
@@ -37,8 +30,15 @@ public class Parser {
         }
     }
 
-    private static void validateFormular(List<String> splitedFormular) {
-        List<Integer> integeredFormular = stringListToInteger(splitedFormular);
+    public List<Integer> makeToIntegerList(List<String> refinedFormular) {
+        validateFormular(refinedFormular);
+        return refinedFormular.stream()
+            .map(Integer::parseInt).collect(
+                Collectors.toList());
+    }
+
+    private void validateFormular(List<String> refinedFormular) {
+        List<Integer> integeredFormular = stringListToInteger(refinedFormular);
         for (int formularNumber : integeredFormular) {
             if (formularNumber < 0) {
                 throw new RuntimeException(OutputView.ERROR + ERROR_NEGATIVE_NUMBER);
@@ -46,8 +46,8 @@ public class Parser {
         }
     }
 
-    private static List<Integer> stringListToInteger(List<String> splitedFormular) {
-        return splitedFormular.stream()
+    private List<Integer> stringListToInteger(List<String> refinedFormular) {
+        return refinedFormular.stream()
             .map(Integer::parseInt)
             .collect(Collectors.toList());
     }
