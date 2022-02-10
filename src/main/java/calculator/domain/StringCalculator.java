@@ -4,9 +4,6 @@ import java.util.Objects;
 
 public class StringCalculator {
 
-    private final static int SPLITED_FORMULAR_POSITION = 0;
-    private final static int CUSTOM_FORMULAR_SIZE = 2;
-    private final static int DELIMITER_POSITON = 1;
     private String input;
 
     public StringCalculator(String input) {
