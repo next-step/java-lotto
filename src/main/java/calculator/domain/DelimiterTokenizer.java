@@ -8,10 +8,10 @@ public class DelimiterTokenizer {
 
     private static final int CUSTOM_DELIMITER_LENGTH_LIMIT = 1;
     private static final int CUSTOM_DELIMITER_START_INDEX = 2;
-    private static final String COMMA = ",";
-    private static final String COLON = ":";
-    private static final String NEW_LINE = "\n";
-    private static final String DOUBLE_SLASH = "//";
+    private static final String DEFAULT_DELIMITER_COMMA = ",";
+    private static final String DEFAULT_DELIMITER_COLON = ":";
+    private static final String CUSTOM_DELIMITER_START_CHAR = "//";
+    private static final String CUSTOM_DELIMITER_END_CHAR = "\n";
 
     private final String text;
 
@@ -20,7 +20,8 @@ public class DelimiterTokenizer {
     }
 
     public List<String> parseDelimiters() {
-        final List<String> delimiters = new ArrayList<>(Arrays.asList(COMMA, COLON));
+        final List<String> delimiters = new ArrayList<>(
+            Arrays.asList(DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON));
         if (isCustomDelimiter()) {
             String customDelimiter = this.text.substring(
                 CUSTOM_DELIMITER_START_INDEX,
@@ -32,11 +33,11 @@ public class DelimiterTokenizer {
     }
 
     private boolean isCustomDelimiter() {
-        return this.text.startsWith(DOUBLE_SLASH);
+        return this.text.startsWith(CUSTOM_DELIMITER_START_CHAR);
     }
 
     private int getCustomDelimiterEndIndex() {
-        return this.text.indexOf(NEW_LINE);
+        return this.text.indexOf(CUSTOM_DELIMITER_END_CHAR);
     }
 
     private void validateCustomDelimiter(String customDelimiter) {
@@ -69,7 +70,7 @@ public class DelimiterTokenizer {
 
     private void validateNullValue(String customDelimiter) {
         if (customDelimiter.isEmpty() && (getCustomDelimiterEndIndex() == this.text.lastIndexOf(
-            NEW_LINE))) {
+            CUSTOM_DELIMITER_END_CHAR))) {
             throw new IllegalArgumentException("커스텀 구분자를 빈 값으로 사용할 수 없습니다.");
         }
     }
