@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -21,6 +22,9 @@ public class LottoNumberGenerator {
 
     public static Lotto generate() {
         Collections.shuffle(lottoList);
-        return new Lotto(lottoList.stream().limit(LOTTO_MAX_SIZE).collect(Collectors.toSet()));
+        Set<LottoNumber> lottoNumbers = lottoList.stream()
+            .limit(LOTTO_MAX_SIZE)
+            .collect(Collectors.toSet());
+        return new Lotto(lottoNumbers);
     }
 }
