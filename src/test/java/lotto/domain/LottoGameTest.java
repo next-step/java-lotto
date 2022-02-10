@@ -18,7 +18,6 @@ class LottoGameTest {
 
     @BeforeEach
     void setUp() {
-        lottoGame = new LottoGame();
         lottos = new Lottos(new ArrayList<>());
 
         lottos.storeLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6).stream()
@@ -36,13 +35,15 @@ class LottoGameTest {
         lottos.storeLotto(new Lotto(Arrays.asList(1, 2, 3, 7, 10, 9).stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList())));
+
+        lottoGame = new LottoGame(lottos);
     }
 
     @Test
-    void 투입한_금액만큼_로또를_살_수_있다() {
-        Lottos lottos = lottoGame.startLotto(new Money(2000), LottoShop.getInstance());
+    void 내부에_모든_로또를_저장할_수_있다() {
+        Lottos lottos = lottoGame.handOverLottos();
 
-        assertThat(lottos.getLottos().size()).isEqualTo(2);
+        assertThat(lottos.getLottos().size()).isEqualTo(4);
     }
 
     @Test
