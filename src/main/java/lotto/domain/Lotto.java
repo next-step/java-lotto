@@ -1,11 +1,13 @@
 package lotto.domain;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
-
-    private static final String DUPLICATE_NUMBER_MESSAGE = "중복된 번호가 있습니다";
+    private static final int LOTTO_SIZE = 6;
+    private static final String WRONG_NUMBER_EXCEPTION = "[ERROR] 로또 번호는 중복되지 않는 6자리여야 합니다.";
 
     private final List<LottoNumber> numbers;
 
@@ -19,12 +21,10 @@ public class Lotto {
     }
 
     private void validateLotto(List<LottoNumber> numbers) {
-        long excludingDuplicatedSize = numbers.stream()
-            .distinct()
-            .count();
+        Set<LottoNumber> lottoNumbers = new HashSet<>(numbers);
 
-        if (numbers.size() != excludingDuplicatedSize) {
-            throw new IllegalArgumentException(DUPLICATE_NUMBER_MESSAGE);
+        if (lottoNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(WRONG_NUMBER_EXCEPTION);
         }
     }
 
