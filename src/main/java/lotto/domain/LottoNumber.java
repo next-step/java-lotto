@@ -7,7 +7,6 @@ public class LottoNumber {
 
     private final static int LOTTO_START_NUMBER = 1;
     private final static int LOTTO_END_NUMBER = 45;
-    private static final String NOT_A_NUMBER_EXCEPTION_MESSAGE = "로또 번호의 입력은 숫자만 허용합니다.";
     private static final String OUT_OF_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE = String.format(
             "로또 번호는 %d부터 %d 까지 입니다.", LOTTO_START_NUMBER, LOTTO_END_NUMBER);
 
