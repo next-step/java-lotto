@@ -13,7 +13,7 @@ public class InputView {
         String firstLine = scanner.nextLine();
         if (firstLine.startsWith("//")) {
             String secondLine = scanner.nextLine();
-            sb.append(firstLine+ENTER).append(secondLine);
+            sb.append(firstLine).append(ENTER).append(secondLine);
             return sb.toString();
         }
 
