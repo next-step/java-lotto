@@ -15,8 +15,7 @@ public class LottoAutoGenerator {
 
     static {
         ALL_LOTTO_NUMBERS = IntStream.range(LOTTO_START_NUM, LOTTO_END_NUM)
-            .boxed()
-            .map(LottoNumber::new)
+            .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
     }
 
