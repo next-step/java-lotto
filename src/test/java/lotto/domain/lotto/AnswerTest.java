@@ -1,7 +1,7 @@
 package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,42 +14,52 @@ import org.junit.jupiter.api.Test;
 
 class AnswerTest {
 
-    private static final Rank RANK = Rank.FOURTH;
-    private static final int MATCHES = 1;
-    private static final int BONUS_NUMBER = 7;
-
-    private List<Number> testNumberList;
-    private Numbers numbers;
+    private Numbers answerNumbers;
+    private Numbers comparisonNumbers;
+    private Numbers numbersNotSizeOf6;
 
     @BeforeEach
     void setUp() {
-        List<Number> baseNumberList = Stream.of(8, 21, 23, 41, 42, 43)
-            .map(Number::new)
-            .collect(Collectors.toList());
-        testNumberList = Stream.of(8, 21, 25, 40, 42, 43)
-            .map(Number::new)
-            .collect(Collectors.toList());
-        numbers = new Numbers(baseNumberList);
+        answerNumbers = getNumberList(8, 21, 23, 41, 42, 43);
+        comparisonNumbers = getNumberList(8, 21, 25, 40, 42, 43);
+        numbersNotSizeOf6 = getNumberList(1, 2, 3, 4, 5);
     }
 
-    Tickets getTickets() {
-        List<Ticket> tickets = new ArrayList<>();
-        tickets.add(new Ticket(new Numbers(testNumberList)));
-        return new Tickets(tickets);
-    }
-
-    @DisplayName("입력받은 숫자 개수가 유효한지 검증")
+    @DisplayName("입력받은 지난 주 당첨 넘버가 주어졌을 때, 개수 부족시 예외를 발생한다.")
     @Test
-    void testValidateAnswer() {
-        assertDoesNotThrow(() -> new Answer(numbers, BONUS_NUMBER));
+    void testAnswerListSizeValid() {
+        assertThatThrownBy(() -> new Answer(numbersNotSizeOf6, 7))
+            .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("일치 여부 유효성 검증")
+    @DisplayName("입력받은 지난 주 당첨 넘버와 보너스가 주어졌을 때, 당첨 넘버와 중복되지 않아야한다.")
+    @Test
+    void testAnswerBonusNotDuplicated() {
+        assertThatThrownBy(() -> new Answer(numbersNotSizeOf6, 5))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("주어진 로또 넘버와 지난 주 당첨 넘버가 주어졌을 때, 비교 결과로 예상했던 4등을 반환하여야 한다.")
     @Test
     void testComparisonValid() {
-        Answer answer = new Answer(numbers, BONUS_NUMBER);
+        Answer answer = new Answer(answerNumbers, 7);
         Map<Rank, Integer> resultMap = answer.getComparisonPrizeMap(getTickets());
 
-        assertThat(resultMap).containsEntry(RANK, MATCHES);
+        assertThat(resultMap)
+            .containsEntry(Rank.FOURTH, 1);
+    }
+
+    private Numbers getNumberList(Integer ...values) {
+        return new Numbers(
+            Stream.of(values)
+                .map(Number::new)
+                .collect(Collectors.toList())
+        );
+    }
+
+    private Tickets getTickets() {
+        List<Ticket> tickets = new ArrayList<>();
+        tickets.add(new Ticket(comparisonNumbers));
+        return new Tickets(tickets);
     }
 }

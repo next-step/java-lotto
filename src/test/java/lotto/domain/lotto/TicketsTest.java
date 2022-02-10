@@ -11,14 +11,12 @@ import org.junit.jupiter.api.Test;
 
 class TicketsTest {
 
-    private static final int NUM_OF_TICKETS = 5;
-
     private Tickets tickets;
 
     @BeforeEach
     void setUp() {
         List<Ticket> tickets = new ArrayList<>();
-        for (int index = 0; index < NUM_OF_TICKETS; index++) {
+        for (int index = 0; index < 5; index++) {
             Ticket ticket = new Ticket(new LottoAutoGenerator().generateNumbers());
             tickets.add(ticket);
         }
@@ -29,6 +27,6 @@ class TicketsTest {
     @Test
     void testValidCountOfTickets() {
         assertThat(tickets.count())
-            .isEqualTo(NUM_OF_TICKETS);
+            .isEqualTo(5);
     }
 }

@@ -12,34 +12,33 @@ import org.junit.jupiter.api.Test;
 
 class TicketTest {
 
-    private static final int TEST_MATCHES = 5;
-    private static final int TEST_BONUS_NUMBER = 40;
-
-    private List<Number> testTicketNumbers;
-    private Ticket ticket;
+    private Ticket ticket1;
+    private List<Number> ticket2;
 
     @BeforeEach
     void setUp() {
-        List<Number> baseTicketNumbers = Stream.of(8, 21, 23, 41, 42, 43)
-            .map(Number::new)
-            .collect(Collectors.toList());
-
-        testTicketNumbers = Stream.of(8, 21, 23, 41, 42, 45)
-            .map(Number::new)
-            .collect(Collectors.toList());
-        ticket = new Ticket(new Numbers(baseTicketNumbers));
+        ticket1 = new Ticket(
+            new Numbers(getNumberList(8, 21, 23, 41, 42, 43))
+        );
+        ticket2 = getNumberList(8, 21, 23, 41, 42, 45);
     }
 
     @DisplayName("번호 6개에 대한 테스트")
     @Test
     void testMatches() {
-        assertThat(ticket.matches(testTicketNumbers))
-            .isEqualTo(TEST_MATCHES);
+        assertThat(ticket1.matches(ticket2))
+            .isEqualTo(5);
     }
 
     @DisplayName("보너스 일치 여부 테스트")
     @Test
     void testBonusMatches() {
-        assertFalse(ticket.hasBonus(TEST_BONUS_NUMBER));
+        assertFalse(ticket1.hasBonus(40));
+    }
+
+    private List<Number> getNumberList(Integer ...values) {
+        return Stream.of(values)
+            .map(Number::new)
+            .collect(Collectors.toList());
     }
 }
