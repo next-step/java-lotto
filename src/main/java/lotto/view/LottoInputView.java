@@ -1,10 +1,6 @@
 package lotto.view;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-import lotto.domain.LottoNumber;
 
 public class LottoInputView {
 
@@ -21,22 +17,19 @@ public class LottoInputView {
         return Integer.parseInt(SCANNER.nextLine());
     }
 
-    public List<LottoNumber> inputWinningNumber() {
+    public String[] inputWinningNumber() {
         System.out.println(INPUT_LAST_WEEK_WINNING_NUMBER_MESSAGE);
-        String input = SCANNER.nextLine();
-        return Arrays.stream(splitWinningNumber(input))
-            .map(Integer::parseInt)
-            .map(LottoNumber::new)
-            .collect(Collectors.toList());
+        final String input = SCANNER.nextLine();
+        return splitWinningNumber(input);
     }
 
     private String[] splitWinningNumber(final String input) {
         return input.replace(SPACE, EMPTY).split(COMMA);
     }
 
-    public LottoNumber inputBonusBall() {
+    public int inputBonusBall() {
         System.out.println(INPUT_BONUS_BALL_MESSAGE);
-        return new LottoNumber(Integer.parseInt(SCANNER.nextLine()));
+        return Integer.parseInt(SCANNER.nextLine());
     }
 
 }
