@@ -1,16 +1,12 @@
 package lotto.view;
 
+import java.util.Arrays;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoStatistics;
-import lotto.domain.Statistics;
+import lotto.domain.PrizeGrade;
 
 public class ResultView {
-
-    private static final int LOTTO_MAX_GRADE = 6;
-    private static final int LOTTO_MIN_GRADE = 3;
-    private static final int LOTTO_BONUS_GRADE = 7;
-    private static final int CASE_BONUS_BALL = 5;
 
     public static void printLottoNumbers(List<Lotto> lottoTicket) {
         lottoTicket.stream().forEach(item -> {
@@ -28,20 +24,14 @@ public class ResultView {
     }
 
     private static void printLottoStatistic(LottoStatistics lottoStatistics) {
-        for (int i = LOTTO_MIN_GRADE; i <= LOTTO_MAX_GRADE; i++) {
-            printLottoStatus(lottoStatistics, i);
+        Arrays.stream(PrizeGrade.values()).forEach(prizeGrade -> {
+            int prizeGradeCount = lottoStatistics.getResultStatistics().get(prizeGrade);
 
-            if (i == CASE_BONUS_BALL) {
-                printLottoStatus(lottoStatistics, LOTTO_BONUS_GRADE);
-            }
-        }
+            printLottoStatus(prizeGrade, prizeGradeCount);
+        });
     }
 
-    private static void printLottoStatus(LottoStatistics lottoStatistics, int lottoGrade) {
-        int grade = lottoGrade;
-        final int money = Statistics.getRank(grade).getMoney();
-        final int count = Statistics.getCount(lottoStatistics.getResultStatistics(), grade);
-
-        OutputView.printLottoStatistic(grade, money, count);
+    private static void printLottoStatus(PrizeGrade prizeGrade, int prizeGradeCount) {
+        OutputView.printLottoStatistic(prizeGrade, prizeGradeCount);
     }
 }

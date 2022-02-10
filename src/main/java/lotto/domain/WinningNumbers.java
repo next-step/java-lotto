@@ -12,20 +12,30 @@ public class WinningNumbers {
     private static final int LOTTO_SIZE = 6;
 
     private final List<Integer> winningNumbers;
+    private final int bonusNumber;
 
-    private WinningNumbers(List<Integer> winningNumbers) {
+    private WinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
         this.winningNumbers = winningNumbers;
+        this.bonusNumber = bonusNumber;
 
         validateWinningNumberRange();
         validateWinningNumbersSize();
     }
 
-    public static WinningNumbers from(List<Integer> winningNumbers) {
-        return new WinningNumbers(winningNumbers);
+    public static WinningNumbers from(List<Integer> winningNumbers, int bonusNumber) {
+        return new WinningNumbers(winningNumbers, bonusNumber);
     }
 
     public List<Integer> getWinningNumbers() {
         return Collections.unmodifiableList(winningNumbers);
+    }
+
+    public boolean isWinningNumbersContain (int number) {
+        return winningNumbers.contains(number);
+    }
+
+    public boolean isBonusNumberContain (int number) {
+        return bonusNumber == number;
     }
 
     private void validateWinningNumberRange() {

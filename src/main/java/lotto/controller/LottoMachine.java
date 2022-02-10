@@ -43,11 +43,9 @@ public class LottoMachine {
     }
 
     public LottoStatistics calculateWinningResult(LottoTicket lottoTicket) {
-        final List<Integer> winningNumberList = WinningNumbers.from(getWinningNumber())
-            .getWinningNumbers();
-        final int bonusBall = getBonusBall();
+        final WinningNumbers winningNumbers = WinningNumbers.from(getWinningNumber(), getBonusBall());
 
-        return LottoStatistics.of(winningNumberList, bonusBall, lottoTicket);
+        return LottoStatistics.of(winningNumbers, lottoTicket);
     }
 
     public void printResult(LottoStatistics lottoStatistics) {

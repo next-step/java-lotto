@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.PrizeGrade;
 
 public class OutputView {
 
@@ -37,13 +38,21 @@ public class OutputView {
         System.out.println(WINNING_STATS);
     }
 
-    public static void printLottoStatistic(int grade, int money, int count) {
-        if (grade == LOTTO_BONUS_GRADE) {
-            System.out.println("5개 일치, 보너스 볼 일치(" + money + "원) - " + count + " 개");
-
+    public static void printLottoStatistic(PrizeGrade prizeGrade, int prizeGradeCount) {
+        if (prizeGrade == PrizeGrade.NONE) {
             return ;
         }
-        System.out.println(grade + "개 일치(" + money + "원) - " + count + " 개");
+        if (prizeGrade == PrizeGrade.SECOND) {
+            System.out.println(
+                (prizeGrade.getMatchCount() + 1) + "개 일치, 보너스 볼 일치(" + prizeGrade.getPrizeMoney()
+                    + "원) - " + prizeGradeCount + " 개");
+
+            return;
+        }
+
+        System.out.println(
+            prizeGrade.getMatchCount() + "개 일치(" + prizeGrade.getPrizeMoney() + "원) - "
+                + prizeGradeCount + " 개");
     }
 
     public static void printTotalReturn(Double earningRate) {
