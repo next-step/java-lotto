@@ -2,24 +2,22 @@ package calculator.controller;
 
 import calculator.domain.StringCalculator;
 import calculator.view.InputView;
+import calculator.view.OutputView;
 
 public class CalculatorController {
 
-    private static final int DEFAULT_VALUE = 0;
-
-    private final String userInput;
-    private int resultValue;
-
-    public CalculatorController() {
-        userInput = InputView.getUserInput();
-        resultValue = DEFAULT_VALUE;
-    }
-
     public void start() {
-        resultValue = StringCalculator.calculate(userInput);
+        StringCalculator stringCalculator = getCalculator();
+        int result = stringCalculator.sumNumbers();
+        OutputView.printResult(result);
     }
 
-    public int getResultValue() {
-        return this.resultValue;
+    private StringCalculator getCalculator() {
+        try {
+            return StringCalculator.of(InputView.getUserInput());
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            return getCalculator();
+        }
     }
 }
