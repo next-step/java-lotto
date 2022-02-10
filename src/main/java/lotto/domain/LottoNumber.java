@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Objects;
+import lotto.domain.utils.Parser;
 
 public class LottoNumber {
 
@@ -13,20 +14,10 @@ public class LottoNumber {
     private final int value;
 
     public LottoNumber(String value) {
-        int number = parseInt(value);
+        int number = Parser.parseInt(value);
         validateLottoNumberRange(number);
 
         this.value = number;
-    }
-
-    private int parseInt(String value) {
-        int number;
-        try {
-            number = Integer.parseInt(value);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(NOT_A_NUMBER_EXCEPTION_MESSAGE);
-        }
-        return number;
     }
 
     private void validateLottoNumberRange(final int value) {
