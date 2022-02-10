@@ -17,11 +17,13 @@ public class StringCalculator {
         if (!Objects.isNull(parser.getCustomDelimiter())) {
             String delimeter = parser.getCustomDelimiter();
             return Parser.makeToIntegerList(splitedFormular, delimeter + "|,|:").stream()
-                .mapToInt(Integer::intValue).sum();
+                .mapToInt(Integer::intValue)
+                .sum();
         }
 
         return Parser.makeToIntegerList(input, ",|:").stream()
-            .mapToInt(Integer::intValue).sum();
+            .mapToInt(Integer::intValue)
+            .sum();
     }
 
     private String validateEmptyOrNull(String input) {
