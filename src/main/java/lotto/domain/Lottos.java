@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import lotto.LottoBalls;
 
 public class Lottos {
@@ -28,6 +29,16 @@ public class Lottos {
 
     private static Set<LottoNumber> createRandomNumbers() {
         return LottoBalls.createLottoNumber();
+    }
+
+    public static Lottos createManualLottos(List<String> inputManualLottoNumbers, Budget budget) {
+        budget.deduct(PRICE_OF_LOTTO * inputManualLottoNumbers.size());
+
+        List<Lotto> lottos = inputManualLottoNumbers.stream()
+                .map(Lotto::new)
+                .collect(Collectors.toList());
+
+        return new Lottos(lottos);
     }
 
     public List<Lotto> get() {
