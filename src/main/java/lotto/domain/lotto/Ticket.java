@@ -14,11 +14,11 @@ public class Ticket {
         return lotto;
     }
 
-    public int matches(final List<Integer> comparison) {
+    public int matches(final List<Number> comparison) {
         return lotto.countMatches(comparison);
     }
 
     public boolean hasBonus(final int bonus) {
-        return lotto.hasBonus(bonus);
+        return lotto.hasBonus(new Number(bonus));
     }
 }

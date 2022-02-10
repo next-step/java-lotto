@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
+import lotto.domain.lotto.Number;
 import lotto.domain.lotto.Numbers;
 import lotto.domain.lotto.Rank;
 
@@ -32,6 +33,7 @@ public class OutputView {
         System.out.print(MESSAGE_TICKET_START);
         System.out.print(
             numbers.get().stream()
+                .map(Number::value)
                 .map(String::valueOf)
                 .collect(Collectors.joining(SPLITTER))
         );

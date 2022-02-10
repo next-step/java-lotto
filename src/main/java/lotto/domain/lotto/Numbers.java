@@ -17,7 +17,6 @@ public class Numbers {
 
     public int countMatches(final List<Number> comparison) {
         return (int) numbers.stream()
-            .map(Number::value)
             .filter(comparison::contains)
             .count();
     }

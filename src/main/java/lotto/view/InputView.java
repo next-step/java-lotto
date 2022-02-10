@@ -3,6 +3,7 @@ package lotto.view;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import lotto.domain.lotto.Number;
 import lotto.domain.lotto.Numbers;
 
 public class InputView {
@@ -29,6 +30,7 @@ public class InputView {
             Arrays.stream(scanner.nextLine().split(COMMA))
                 .map(String::trim)
                 .map(Integer::parseInt)
+                .map(Number::new)
                 .collect(Collectors.toList())
         );
     }
