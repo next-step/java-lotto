@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -10,8 +11,9 @@ import java.util.stream.Collectors;
 public class StringCalculator {
 
     private static final String DELIMITER = ",|:";
-    private static final int DEFAULT_VALUE = 0;
+    private static final List<Integer> BLANK_LIST = new ArrayList<>();
     private static final String NEGATIVE_EXCEPTION = "[ERROR] 음수가 포함될 수 없습니다.";
+    private static final String NOT_A_NUMBER_EXCEPTION = "[ERROR] 숫자와 구분자만 입력할 수 있습니다.";
 
     private final List<Integer> userNumbers;
 
@@ -25,8 +27,8 @@ public class StringCalculator {
         return new StringCalculator(userNumbers);
     }
 
-    private static boolean isBlank(String text) {
-        return Objects.isNull(text) || text.isEmpty();
+    public int sumNumbers() {
+        return userNumbers.stream().reduce(0, Integer::sum);
     }
 
     private void checkNegativeValue(List<Integer> numbers) {
@@ -37,25 +39,37 @@ public class StringCalculator {
         }
     }
 
-    private static List<Integer> parseTextToInt(String text) {
-        String[] numbers= splitText(text);
+    private static boolean isBlank(String userInput) {
+        return Objects.isNull(userInput) || userInput.trim().isEmpty();
+    }
 
+    private static int convertNumber(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(NOT_A_NUMBER_EXCEPTION);
+        }
+    }
+
+    private static List<Integer> parseTextToInt(String userInput) {
+        if (isBlank(userInput)) {
+            return BLANK_LIST;
+        }
+
+        String[] numbers = splitText(userInput);
         return Arrays.stream(numbers)
-            .map(Integer::parseInt)
+            .map(StringCalculator::convertNumber)
             .collect(Collectors.toList());
     }
 
-    private static String[] splitText(String text) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+    private static String[] splitText(String userInput) {
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(userInput);
         if (m.find()) {
             String customDelimiter = m.group(1);
-            String[] tokens= m.group(2).split(customDelimiter + '|' + DELIMITER);
-            return tokens;
+            return m.group(2).split(customDelimiter + '|' + DELIMITER);
         }
-        return text.split(DELIMITER);
+        return userInput.split(DELIMITER);
     }
 
-    private static int sumNumbers(List<Integer> numbers) {
-        return numbers.stream().reduce(0, Integer::sum);
-    }
+
 }
