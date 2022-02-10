@@ -12,10 +12,6 @@ public class LottoGame {
     private final Map<Ranking, Integer> totalResult = new HashMap<>();
 
     public LottoGame() {
-        initializeTotalResult();
-    }
-
-    private void initializeTotalResult() {
         Arrays.stream(Ranking.values())
             .forEach(ranking -> totalResult.put(ranking, ZERO));
     }
