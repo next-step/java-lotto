@@ -6,7 +6,7 @@ import lotto.domain.LottoEarningRate;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoStatistics;
 import lotto.domain.Lottos;
-import lotto.domain.WinningNumbers;
+import lotto.domain.WinningLottery;
 import lotto.util.Util;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -19,7 +19,7 @@ public class LottoController {
     private Lottos userLottos;
     private String winningNumber;
     private LottoNumber bonusBall;
-    private WinningNumbers winningNumbers;
+    private WinningLottery winningNumbers;
 
     public void start() {
         lottoPriceProcess();
@@ -44,7 +44,7 @@ public class LottoController {
         winningNumber = InputView.readWinningNumber();
         OutputView.printBonusBallNumber();
         bonusBall = InputView.readBonusNumber();
-        winningNumbers = new WinningNumbers(Util.stringToLottoNumberList(winningNumber), bonusBall);
+        winningNumbers = new WinningLottery(Util.stringToLottoNumberList(winningNumber), bonusBall);
     }
 
     private void statisticsProcess() {
