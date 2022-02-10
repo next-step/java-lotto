@@ -4,6 +4,10 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Ranking;
 
@@ -21,8 +25,28 @@ public class LottoResultView {
     private static final String AMOUNT_MESSAGE = "개";
     private static final String SPACE = " ";
     private static final String COMMA = ",";
+    private static final String LOTTO_AMOUNT_MESSAGE = "개를 구매했습니다.";
 
     private int totalWinnerPrice = ZERO;
+
+    public void printLottos(final Lottos lottos) {
+        printAmount(lottos);
+        for (Lotto lotto : lottos.getLottos()) {
+            printLotto(lotto.getLottoNumbers());
+        }
+    }
+
+    private void printAmount(final Lottos lottos) {
+        System.out.println(lottos.getLottos().size() + LOTTO_AMOUNT_MESSAGE);
+    }
+
+    private void printLotto(final List<LottoNumber> lottoNumbers) {
+        final List<Integer> numbers = lottoNumbers.stream()
+            .map(LottoNumber::getNumber)
+            .collect(Collectors.toList());
+
+        System.out.println(numbers);
+    }
 
     public void finishGame(final Map<Ranking, Integer> totalResult, final Money money) {
         System.out.println(LOTTO_STATISTICS_MESSAGE);
