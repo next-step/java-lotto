@@ -70,6 +70,7 @@
 - [x] Lotto -> NumberGenerator 에서 lottoGenerator -> Lotto 로 변경
 - [x] lottoGenerator에서 generateStrategy 전략 패턴 적용
 - [x] Generator 테스트 케이스 작성
+- [x] LottoMachine 메서드 네이밍 변경, getLottoPrice() ->  purchaseAmount()
 
 ## multiple authors
 
