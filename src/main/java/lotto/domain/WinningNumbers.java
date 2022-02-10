@@ -37,4 +37,9 @@ public class WinningNumbers {
         return lottoNumbers.contains(bonusBall);
     }
 
+    public LottoRank getRankForLottoTicket(LottoTicket ticket) {
+        int count = compareLottoNumbers(ticket);
+        boolean hasBonus = checkBonusBall(ticket);
+        return LottoRank.valueOf(count, hasBonus);
+    }
 }

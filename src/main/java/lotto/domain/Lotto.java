@@ -47,31 +47,15 @@ public class Lotto {
         return lottoTickets.size();
     }
 
+    public LottoStatistic getWinningResult(WinningNumbers winningNumbers) {
+        Map<LottoRank, Integer> lottoRankResults = new EnumMap<>(LottoRank.class);
 
-    public double getProfit(int price, Map<LottoRank, Integer> map) {
-        double total = 0;
-        for (Map.Entry<LottoRank, Integer> entry : map.entrySet()) {
-            int amount = entry.getKey().getWinningAmount();
-            double profit = amount * entry.getValue();
-            total += profit;
-        }
-        return Math.floor((total / price) * 100) / 100.0;
-    }
-
-    public LottoRank compareWithWinning(LottoTicket lottoNumbers, WinningNumbers winningNumbers) {
-        int count = winningNumbers.compareLottoNumbers(lottoNumbers);
-        boolean hasBonus = winningNumbers.checkBonusBall(lottoNumbers);
-        return LottoRank.valueOf(count, hasBonus);
-    }
-
-    public Map<LottoRank, Integer> getWinningResult(WinningNumbers winningNumbers) {
-        Map<LottoRank, Integer> map = new EnumMap<>(LottoRank.class);
         this.lottoTickets.forEach(ticket -> {
-            LottoRank rank = compareWithWinning(ticket, winningNumbers);
+            LottoRank rank = winningNumbers.getRankForLottoTicket(ticket);
             if (rank != null) {
-                map.put(rank, map.getOrDefault(rank, 0) + 1);
+                lottoRankResults.put(rank, lottoRankResults.getOrDefault(rank, 0) + 1);
             }
         });
-        return Collections.synchronizedMap(new EnumMap<>(map));
+        return new LottoStatistic(lottoRankResults);
     }
 }
