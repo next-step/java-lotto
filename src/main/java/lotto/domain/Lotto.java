@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,6 +27,10 @@ public class Lotto {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(WRONG_NUMBER_EXCEPTION);
         }
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return this.numbers;
     }
 
     public List<Integer> getNumbers() {
