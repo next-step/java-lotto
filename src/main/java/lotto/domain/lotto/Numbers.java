@@ -5,9 +5,12 @@ import java.util.List;
 
 public class Numbers {
 
+    private static final String DUPLICATES_NOT_AVAILABLE = "중복이 존재할 수 없습니다.";
+
     private final List<Number> numbers;
 
     public Numbers(final List<Number> numbers) {
+        validateDuplicatedNumbers(numbers);
         this.numbers = numbers;
     }
 
@@ -27,6 +30,17 @@ public class Numbers {
 
     public int size() {
         return numbers.size();
+    }
+
+    private void validateDuplicatedNumbers(List<Number> numbers) {
+        int distinctSize = Math.toIntExact(numbers.stream()
+            .mapToInt(Number::value)
+            .distinct()
+            .count());
+
+        if (numbers.size() != distinctSize) {
+            throw new IllegalArgumentException(DUPLICATES_NOT_AVAILABLE);
+        }
     }
 
 }
