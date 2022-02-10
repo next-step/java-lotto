@@ -1,9 +1,7 @@
 package lotto;
 
 import java.util.List;
-import java.util.Map;
 import lotto.domain.Lotto;
-import lotto.domain.LottoRank;
 import lotto.domain.LottoStatistic;
 import lotto.domain.WinningNumbers;
 import lotto.util.InputSpliter;
