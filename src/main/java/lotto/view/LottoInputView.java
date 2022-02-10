@@ -4,9 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
 
 public class LottoInputView {
 
