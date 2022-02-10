@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Random;
+import lotto.domain.strategy.GenerateStrategy;
 
 public class LottoGenerator {
 
@@ -12,29 +12,25 @@ public class LottoGenerator {
 
     private final Lotto lotto;
 
-    public LottoGenerator() {
-        lotto = Lotto.from(new ArrayList<Integer>(generatorLotto()));
+    public LottoGenerator(GenerateStrategy strategy) {
+        lotto = Lotto.from(new ArrayList<>(generatorLotto(strategy)));
     }
 
-    public static LottoGenerator of() {
-        return new LottoGenerator();
+    public static LottoGenerator of(GenerateStrategy strategy) {
+        return new LottoGenerator(strategy);
     }
 
     public Lotto getLotto() {
         return lotto;
     }
 
-    private HashSet<Integer> generatorLotto() {
+    private HashSet<Integer> generatorLotto(GenerateStrategy strategy) {
         HashSet<Integer> lotto = new HashSet<>();
 
         while (lotto.size() < LOTTO_SIZE) {
-            lotto.add(generateNumber(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER));
+            lotto.add(strategy.generateNumber(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER));
         }
 
         return lotto;
-    }
-
-    private int generateNumber(int min, int max) {
-        return new Random().nextInt(max) + min;
     }
 }

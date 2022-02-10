@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.strategy.RandomGenerateStrategy;
 
 public class LottoTicketGenerator {
 
@@ -34,7 +35,7 @@ public class LottoTicketGenerator {
         List<Lotto> lottoList = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            lottoList.add(LottoGenerator.of().getLotto());
+            lottoList.add(LottoGenerator.of(RandomGenerateStrategy.getInstance()).getLotto());
         }
 
         return lottoList;
