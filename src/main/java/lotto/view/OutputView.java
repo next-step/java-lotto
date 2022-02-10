@@ -1,13 +1,14 @@
 package lotto.view;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.domain.WinningResult;
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.Rank;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.Rank;
 
 public class OutputView {
 
@@ -25,19 +26,21 @@ public class OutputView {
         System.out.print(message);
     }
 
-    public static void printPurchaseAmount(int ticketCount) {
-        printMessage(String.format(PURCHASE_AMOUNT_MANAGER_LOG, ticketCount) + ENTER);
+    public static void printPurchaseInfo(int ticketCount, List<Lotto> lottos) {
+        printPurchaseAmount(ticketCount);
+        printPurchaseTicket(lottos);
+    }
+    private static void printPurchaseAmount(int ticketCount) {
+        System.out.printf((PURCHASE_AMOUNT_MANAGER_LOG) + "%n", ticketCount);
     }
 
-    public static void printPurchaseTicket(List<Lotto> lottos) {
+    private static void printPurchaseTicket(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            printMessage(lotto.getNumbers().stream()
-                .sorted(Comparator.comparing(LottoNumber::getNumber))
-                .map(number -> number.getNumber())
-                .map(String::valueOf)
-                .collect(Collectors.joining(DELIMITER, OPEN_BRACKET, CLOSED_BRACKET)) + ENTER);
+            List<Integer> result = lotto.getNumbers();
+            Collections.sort(result);
+            System.out.println(result.toString());
         }
-        printMessage(ENTER);
+        System.out.println();
     }
 
     public static void printWinningResult(WinningResult winningResult) {
