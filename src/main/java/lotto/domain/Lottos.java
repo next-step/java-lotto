@@ -1,9 +1,11 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import lotto.LottoBalls;
 
 public class Lottos {
@@ -45,8 +47,11 @@ public class Lottos {
         return this.lottos.size();
     }
 
-    public void add(Lottos lottos) {
-        this.lottos.addAll(lottos.get());
+    public Lottos merge(Lottos target) {
+        List<Lotto> mergedLottos = Stream.concat(this.lottos.stream(), target.get().stream())
+                .collect(Collectors.toList());
+
+        return new Lottos(mergedLottos);
 
     }
 
