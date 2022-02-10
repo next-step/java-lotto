@@ -2,10 +2,9 @@ package lotto.domain;
 
 import static lotto.util.Constant.*;
 
-import java.util.Iterator;
 import java.util.List;
 
-public class LottoTicket implements Iterable<Integer> {
+public class LottoTicket {
 
     private final List<Integer> lottoNumbers;
 
@@ -29,11 +28,6 @@ public class LottoTicket implements Iterable<Integer> {
         if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(INVALID_SIZE);
         }
-    }
-
-    @Override
-    public Iterator<Integer> iterator() {
-        return lottoNumbers.iterator();
     }
 
     @Override
