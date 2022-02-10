@@ -26,7 +26,7 @@ public class LottoMachine {
     }
 
     public void run() {
-        final LottoTicket lottoTicket = purchaseLotto(getLottoPrice());
+        final LottoTicket lottoTicket = purchaseLotto(purchaseAmount());
         final LottoStatistics lottoStatistics = calculateWinningResult(lottoTicket);
 
         printResult(lottoStatistics);
@@ -54,7 +54,7 @@ public class LottoMachine {
         ResultView.printLottoStatistics(lottoStatistics);
     }
 
-    private int getLottoPrice() {
+    private int purchaseAmount() {
         OutputView.printRequestLottoPrice();
         return InputView.readPrice();
     }
