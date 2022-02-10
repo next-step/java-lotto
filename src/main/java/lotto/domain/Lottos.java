@@ -45,7 +45,7 @@ public class Lottos {
         return this.lottos;
     }
 
-    public int getNumberOfPurchases() {
+    public int size() {
         return this.lottos.size();
     }
 
