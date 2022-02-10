@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoNumberTest {
+class LottoNumberTest {
 
     @DisplayName("정상적인 보너스 번호 문자열을 받아 객체를 생성하면 예외가 발생하지 않는다.")
     @Test

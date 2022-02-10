@@ -6,7 +6,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class AccumulatorTest {
+class AccumulatorTest {
 
     @DisplayName("숫자 리스트를 받아 모두 더한 값을 반환한다.")
     @Test
