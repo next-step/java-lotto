@@ -67,7 +67,9 @@
 ---
 
 - [x] LottoTicket -> LottoTicketGenerator 인데, LottoTicketGenerator에서 LottoTicket생성하는 것으로 변경 해보기.
-- [x] Lotto -> NumberGenerator 에서 NumberGenerator -> Lotto 로 변경
+- [x] Lotto -> NumberGenerator 에서 lottoGenerator -> Lotto 로 변경
+- [x] lottoGenerator에서 generateStrategy 전략 패턴 적용
+- [x] Generator 테스트 케이스 작성
 
 ## multiple authors
 
