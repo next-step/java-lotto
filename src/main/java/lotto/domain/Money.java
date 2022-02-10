@@ -2,7 +2,7 @@ package lotto.domain;
 
 public class Money {
 
-    private static final int THOUSAND = 1000;
+    private static final int LOTTO_PRICE = 1000;
 
     private final int money;
 
@@ -11,7 +11,7 @@ public class Money {
     }
 
     public int divideByThousand() {
-        return money / THOUSAND;
+        return money / LOTTO_PRICE;
     }
 
     public int getMoney() {
