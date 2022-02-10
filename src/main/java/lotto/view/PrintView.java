@@ -13,8 +13,8 @@ public class PrintView {
 
     private PrintView() {}
 
-    public static void printNumberOfLotto(final int size) {
-        System.out.printf("%d개를 구매했습니다.\n", size);
+    public static void printNumberOfLotto(final int manualSize, int autoSize) {
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", manualSize, autoSize);
     }
 
     public static void printLottoNumber(final Lottos lottos) {
