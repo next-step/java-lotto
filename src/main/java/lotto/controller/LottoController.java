@@ -1,72 +1,55 @@
 package lotto.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
+import lotto.domain.Rank;
 import lotto.domain.Ticket;
-import lotto.domain.WinningNumber;
+import lotto.domain.WinningLotto;
 import lotto.domain.WinningResult;
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoManager;
-import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.Rank;
-import lotto.domain.machine.RandomLottoGenerator;
+import lotto.domain.lottogenerator.RandomLottoGenerator;
+import lotto.dto.LottosDTO;
+import lotto.utils.Converter;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
 
     public void start() {
-        Ticket ticket = buyTicket();
+        Ticket ticket = getTicket();
 
-        LottoManager lottoManager = new LottoManager(new RandomLottoGenerator(),
-            ticket.getBuyCount());
+        Lottos lottos = new Lottos(new RandomLottoGenerator(), ticket.getBuyCount());
 
-        OutputView.printPurchaseAmount(ticket.getBuyCount());
-        OutputView.printPurchaseTicket(lottoManager.getLottos());
+        LottosDTO lottosDTO = LottosDTO.from(lottos.get());
+        OutputView.printPurchaseInfo(ticket.getBuyCount(), lottosDTO.get());
 
-        WinningNumber winningNumber = makeWinningNumber();
+        WinningLotto winningLotto = getWinningLotto();
 
-        WinningResult winningResult = new WinningResult();
-        winningResult.mappingResult(getRanksFrom(lottoManager, winningNumber));
-        winningResult.calculateYield(ticket.getBuyCash());
+        WinningResult winningResult = new WinningResult(winningLotto);
+        Map<Rank, Integer> result = winningResult.mapResult(lottos.get());
+        double profitRate = winningResult.calculateProfitRate(ticket.getBuyCash());
 
-        OutputView.printWinningResult(winningResult);
+        OutputView.printWinningResult(result, profitRate);
     }
 
-    public Ticket buyTicket() {
-        int money = Integer.parseInt(InputView.writePurchaseAmount());
-        return new Ticket(money);
-    }
-
-    private WinningNumber makeWinningNumber() {
+    private Ticket getTicket() {
         try {
-            return new WinningNumber(makeSixNumbers(), makeBonusBall());
+            return new Ticket(InputView.inputBuyCash());
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
-            return makeWinningNumber();
+            return getTicket();
         }
     }
 
-    private Lotto makeSixNumbers() {
-        return Lotto.from(InputView.writeWinningNumbers());
-    }
-
-    private LottoNumber makeBonusBall() {
-        return new LottoNumber(InputView.writeBonusBall());
-    }
-
-    private List<Rank> getRanksFrom(LottoManager lottoManager, WinningNumber winningNumber) {
-        List<Rank> ranks = new ArrayList<>();
-
-        for (Lotto lotto : lottoManager.getLottos()) {
-            List<Integer> lottoNumbers = lotto.getNumbers().stream()
-                .map(LottoNumber::getNumber)
-                .collect(Collectors.toList());
-
-            ranks.add(winningNumber.compareTo(lottoNumbers));
+    private WinningLotto getWinningLotto() {
+        try {
+            Lotto winningLotto = Converter.inputToLotto(InputView.inputWinningNumbers());
+            LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
+            return new WinningLotto(winningLotto, bonusNumber);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return getWinningLotto();
         }
-        return ranks;
     }
-
 }
