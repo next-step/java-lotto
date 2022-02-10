@@ -44,4 +44,18 @@ class LottosTest {
         assertThrows(IllegalArgumentException.class, () -> Lottos.createManualLottos(
                 Arrays.asList("1,2,3,4,5,6"), new Budget("100")));
     }
+
+    @DisplayName("생성된 객체 내부의 로또 리스트를 합친다.")
+    @Test
+    void Given_두_개의_로또_리스트_When_합치기_Then_한_쪽의_리스트로_병합() {
+        // given
+        Lottos lottos = Lottos.createAutoLottos(new Budget("2000"));
+        Lottos otherLottos = Lottos.createAutoLottos(new Budget("2000"));
+
+        // when
+        lottos.add(otherLottos);
+
+        // then
+        assertThat(lottos.size()).isEqualTo(4);
+    }
 }
