@@ -6,17 +6,18 @@ import lotto.domain.vo.RankCounts;
 
 public class PrintView {
 
+    private final static String NUMBER_OF_LOTTO_FORMAT =  "수동으로 %d장, 자동으로 %d장을 구매했습니다.%n";
     private final static String RANK_SECOND = "SECOND";
-    private final static int MIN_WINNING_MATCH_COUNT = 3;
-    private final static String FAIL_MATCH_COUNT_RESULT = "0-2";
     private final static String RANK_SECOND_RESULT_FORMAT = "%s개 일치, 보너스 볼 일치(%d원) - %d개%n";
     private final static String NOT_RANK_SECOND_RESULT_FORMAT = "%s개 일치 (%d원) - %d개%n";
+    private final static int MIN_WINNING_MATCH_COUNT = 3;
+    private final static String FAIL_MATCH_COUNT_RESULT = "0-2";
+    private final static String PROFIT_RATE_FORMAT = "총 수익률은 %.2f 입니다. (기준:1)%n";
 
-    private PrintView() {
-    }
+    private PrintView() {}
 
     public static void printNumberOfLotto(final int manualSize, int autoSize) {
-        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", manualSize, autoSize);
+        System.out.printf(NUMBER_OF_LOTTO_FORMAT, manualSize, autoSize);
     }
 
     public static void printLottoNumber(final Lottos lottos) {
@@ -53,6 +54,6 @@ public class PrintView {
     }
 
     private static void printProfitRate(final double profitRatio) {
-        System.out.printf("총 수익률은 %.2f 입니다. (기준:1)\n", profitRatio);
+        System.out.printf(PROFIT_RATE_FORMAT, profitRatio);
     }
 }
