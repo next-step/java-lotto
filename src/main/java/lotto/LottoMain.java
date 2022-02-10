@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
+import lotto.domain.LottoStatistic;
 import lotto.domain.WinningNumbers;
 import lotto.util.InputSpliter;
 import lotto.view.InputView;
@@ -21,9 +22,9 @@ public class LottoMain {
         List<Integer> pickedNumbers = InputSpliter.split(winnings);
         WinningNumbers winningNumbers = new WinningNumbers(pickedNumbers, bonusBall);
 
-        Map<LottoRank, Integer> lottoResult = lotto.getWinningResult(winningNumbers);
+        LottoStatistic lottoResult = lotto.getWinningResult(winningNumbers);
         ResultView.printStatistic(lottoResult);
-        ResultView.printProfit(lotto.getProfit(userMoney,lottoResult));
+        ResultView.printProfit(lottoResult.getProfit(userMoney));
 
     }
 }
