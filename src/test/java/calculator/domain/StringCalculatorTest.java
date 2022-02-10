@@ -52,5 +52,11 @@ class StringCalculatorTest {
     void 문자열_계산기에_음수를_전달하는_경우_RuntimeException_예외처리를_한다(final String text) {
         assertThatExceptionOfType(RuntimeException.class)
             .isThrownBy(() -> StringCalculator.calculate(text));
+
+    @ParameterizedTest
+    @ValueSource(strings = {"a,b,c", "가,1,2"})
+    void 문자열_계산기에_숫자가_아닌_문자를_전달하는_경우_예외처리를_한다(final String text) {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> StringCalculator.of(text));
     }
 }
