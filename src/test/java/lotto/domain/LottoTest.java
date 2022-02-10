@@ -1,11 +1,15 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.HashSet;
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTest {
 
@@ -62,6 +66,34 @@ class LottoTest {
 
         // then
         assertThat(isBonus).isEqualTo(false);
+    }
+
+    @DisplayName("정상적인 입력을 가지고 객체를 생성할 때 예외가 발생하지 않는다.")
+    @Test
+    void Given_정상_입력_When_객체_생성_Then_예외가_발생하지_않음() {
+        // given
+        final String input = "1,2,3,4,5,6";
+
+        // then
+        assertDoesNotThrow(() -> new CorrectNumbers(input, new LottoNumber("7")));
+    }
+
+    @DisplayName("입력형식 (숫자 + 구분자) 이 아니면 예외가 발생한다.")
+    @ValueSource(strings = {"1;2;3;4;5;6", "123456", "1,2,3,4,5,a"})
+    @ParameterizedTest
+    void Given_유효하지_않은_입력형식_When_객체_생성_Then_예외_발생(final String input) {
+        // then
+        assertThrows(IllegalArgumentException.class,
+                () -> new CorrectNumbers(input, new LottoNumber("7")));
+    }
+
+    @DisplayName("숫자 개수가 6개가 아닌 경우 예외가 발생한다.")
+    @ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7"})
+    @ParameterizedTest
+    void Given_숫자가_6개가_아닌_입력_When_객체_생성_Then_예외_발생(final String input) {
+        // then
+        assertThrows(IllegalArgumentException.class,
+                () -> new CorrectNumbers(input, new LottoNumber("7")));
     }
 
     private Set<LottoNumber> createLottoNumbers(String... numbers) {
