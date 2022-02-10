@@ -21,8 +21,7 @@ public class Parser {
         splitCustomFormular(formula);
     }
 
-    public static List<Integer> makeToIntegerList(String splitedFormular,
-        String delimiter) {
+    public static List<Integer> makeToIntegerList(String splitedFormular, String delimiter) {
         List<String> delimiteredFormular = Arrays.asList(splitedFormular.split(delimiter));
         validateFormular(delimiteredFormular);
         return delimiteredFormular.stream()
