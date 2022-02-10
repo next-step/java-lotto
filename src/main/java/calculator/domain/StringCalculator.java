@@ -13,15 +13,16 @@ public class StringCalculator {
     private static final int DEFAULT_VALUE = 0;
     private static final String NEGATIVE_EXCEPTION = "[ERROR] 음수가 포함될 수 없습니다.";
 
-    private StringCalculator() {}
+    private final List<Integer> userNumbers;
 
-    public static int calculate(final String text) {
-        if (isBlank(text)) {
-            return DEFAULT_VALUE;
-        }
-        List<Integer> numbers = parseTextToInt(text);
-        hasNegativeValue(numbers);
-        return sumNumbers(numbers);
+    private StringCalculator(List<Integer> userNumbers) {
+        checkNegativeValue(userNumbers);
+        this.userNumbers = userNumbers;
+    }
+
+    public static StringCalculator of(String userInput) {
+        List<Integer> userNumbers = parseTextToInt(userInput);
+        return new StringCalculator(userNumbers);
     }
 
     private static boolean isBlank(String text) {
