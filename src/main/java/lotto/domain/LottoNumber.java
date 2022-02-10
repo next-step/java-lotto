@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 import lotto.domain.utils.Parser;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable{
 
     private final static int LOTTO_START_NUMBER = 1;
     private final static int LOTTO_END_NUMBER = 45;
@@ -53,5 +53,11 @@ public class LottoNumber {
     @Override
     public String toString() {
         return String.valueOf(value);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        LottoNumber target = (LottoNumber) o;
+        return this.value - target.value;
     }
 }

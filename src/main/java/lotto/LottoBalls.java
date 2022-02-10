@@ -30,11 +30,7 @@ public class LottoBalls {
     }
 
     public static Set<LottoNumber> createLottoNumber() {
-        Set<LottoNumber> lottoNumbers = new TreeSet<>(
-                Comparator.comparingInt(LottoNumber::getValue));
-        lottoNumbers.addAll(balls.subList(0, NUMBER_OF_LOTTO_BALL));
-
-        return lottoNumbers;
+        return new TreeSet<>(balls.subList(0, NUMBER_OF_LOTTO_BALL));
     }
 
     public static List<LottoNumber> get() {

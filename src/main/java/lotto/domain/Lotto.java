@@ -1,7 +1,10 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -41,7 +44,7 @@ public class Lotto {
 
         return Arrays.stream(split)
                 .map(LottoNumber::new)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 
     private void validateLottoNumberSize(final Set<LottoNumber> winningNumbers) {
