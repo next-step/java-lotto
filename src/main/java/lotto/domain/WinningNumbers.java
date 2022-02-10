@@ -29,17 +29,9 @@ public class WinningNumbers {
         }
     }
 
-    public int compareLottoNumbers(LottoTicket lottoNumbers) {
-        return lottoNumbers.getMatchCount(this.ballNumbers);
-    }
-
-    public boolean checkBonusBall(LottoTicket lottoNumbers) {
-        return lottoNumbers.contains(bonusBall);
-    }
-
-    public LottoRank getRankForLottoTicket(LottoTicket ticket) {
-        int count = compareLottoNumbers(ticket);
-        boolean hasBonus = checkBonusBall(ticket);
+    public LottoRank getRankForLottoTicket(LottoTicket lottoTicket) {
+        int count = lottoTicket.getMatchCount(this.ballNumbers);
+        boolean hasBonus = lottoTicket.contains(bonusBall);
         return LottoRank.valueOf(count, hasBonus);
     }
 }
