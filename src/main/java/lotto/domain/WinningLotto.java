@@ -12,7 +12,7 @@ public class WinningLotto {
         this.bonusBall = bonusBall;
     }
 
-    public Ranking compareLotto(final Lotto lotto) {
+    public Ranking matchLotto(final Lotto lotto) {
         final LottoCalculator calculator = LottoCalculator.getInstance();
         return calculator.calculate(winningNumbers, lotto.getLottoNumbers(), bonusBall);
     }
