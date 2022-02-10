@@ -10,22 +10,13 @@ class RankingTest {
 
     @Test
     void 우승순위_조회() {
-        // given
-        LottoResult sixWithFalse = new LottoResult(6, false);
-        LottoResult sixWithTrue = new LottoResult(6, true);
-        LottoResult fiveWithTrue = new LottoResult(5, true);
-        LottoResult fiveWithFalse = new LottoResult(5, false);
-        LottoResult fourWithTrue = new LottoResult(4, true);
-        LottoResult fourWithFalse = new LottoResult(4, false);
-
-        // then
         Assertions.assertAll(
-            () -> assertThat(Ranking.judgeRanking(sixWithFalse)).isEqualTo(Ranking.FIRST),
-            () -> assertThat(Ranking.judgeRanking(sixWithTrue)).isEqualTo(Ranking.FIRST),
-            () -> assertThat(Ranking.judgeRanking(fiveWithTrue)).isEqualTo(Ranking.SECOND),
-            () -> assertThat(Ranking.judgeRanking(fiveWithFalse)).isEqualTo(Ranking.THIRD),
-            () -> assertThat(Ranking.judgeRanking(fourWithTrue)).isEqualTo(Ranking.FOURTH),
-            () -> assertThat(Ranking.judgeRanking(fourWithFalse)).isEqualTo(Ranking.FOURTH)
+            () -> assertThat(Ranking.judgeRanking(6, false)).isEqualTo(Ranking.FIRST),
+            () -> assertThat(Ranking.judgeRanking(6, true)).isEqualTo(Ranking.FIRST),
+            () -> assertThat(Ranking.judgeRanking(5, true)).isEqualTo(Ranking.SECOND),
+            () -> assertThat(Ranking.judgeRanking(5, false)).isEqualTo(Ranking.THIRD),
+            () -> assertThat(Ranking.judgeRanking(4, true)).isEqualTo(Ranking.FOURTH),
+            () -> assertThat(Ranking.judgeRanking(4, false)).isEqualTo(Ranking.FOURTH)
         );
     }
 
