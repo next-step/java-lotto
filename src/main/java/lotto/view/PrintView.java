@@ -6,13 +6,13 @@ import lotto.domain.vo.RankCounts;
 
 public class PrintView {
 
-    private final static String NUMBER_OF_LOTTO_FORMAT =  "수동으로 %d장, 자동으로 %d장을 구매했습니다.%n";
-    private final static String RANK_SECOND = "SECOND";
-    private final static String RANK_SECOND_RESULT_FORMAT = "%s개 일치, 보너스 볼 일치(%d원) - %d개%n";
-    private final static String NOT_RANK_SECOND_RESULT_FORMAT = "%s개 일치 (%d원) - %d개%n";
-    private final static int MIN_WINNING_MATCH_COUNT = 3;
-    private final static String FAIL_MATCH_COUNT_RESULT = "0-2";
-    private final static String PROFIT_RATE_FORMAT = "총 수익률은 %.2f 입니다. (기준:1)%n";
+    private static final String NUMBER_OF_LOTTO_FORMAT =  "수동으로 %d장, 자동으로 %d장을 구매했습니다.%n";
+    private static final String RANK_SECOND = "SECOND";
+    private static final String RANK_SECOND_RESULT_FORMAT = "%s개 일치, 보너스 볼 일치(%d원) - %d개%n";
+    private static final String NOT_RANK_SECOND_RESULT_FORMAT = "%s개 일치 (%d원) - %d개%n";
+    private static final int MIN_WINNING_MATCH_COUNT = 3;
+    private static final String FAIL_MATCH_COUNT_RESULT = "0-2";
+    private static final String PROFIT_RATE_FORMAT = "총 수익률은 %.2f 입니다. (기준:1)%n";
 
     private PrintView() {}
 

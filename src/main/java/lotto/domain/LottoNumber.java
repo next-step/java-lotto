@@ -5,8 +5,8 @@ import lotto.domain.utils.Parser;
 
 public class LottoNumber implements Comparable{
 
-    private final static int LOTTO_START_NUMBER = 1;
-    private final static int LOTTO_END_NUMBER = 45;
+    private static final int LOTTO_START_NUMBER = 1;
+    private static final int LOTTO_END_NUMBER = 45;
     private static final String OUT_OF_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE = String.format(
             "로또 번호는 %d부터 %d 까지 입니다.", LOTTO_START_NUMBER, LOTTO_END_NUMBER);
 

@@ -2,7 +2,7 @@ package lotto.domain.utils;
 
 public class Parser {
 
-    private final static String NOT_A_NUMBER_EXCEPTION_FORMAT = "숫자만 입력 가능합니다. (Input: %s)";
+    private static final String NOT_A_NUMBER_EXCEPTION_FORMAT = "숫자만 입력 가능합니다. (Input: %s)";
 
     private Parser() {}
 

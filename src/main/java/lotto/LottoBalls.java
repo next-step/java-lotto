@@ -12,8 +12,8 @@ import lotto.domain.LottoNumber;
 
 public class LottoBalls {
 
-    private final static int LOTTO_START_NUMBER = 1;
-    private final static int LOTTO_END_NUMBER = 45;
+    private static final int LOTTO_START_NUMBER = 1;
+    private static final int LOTTO_END_NUMBER = 45;
     private static final int NUMBER_OF_LOTTO_BALL = 6;
 
     private LottoBalls() {}
