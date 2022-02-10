@@ -15,7 +15,6 @@ import lotto.view.ResultView;
 public class LottoController {
 
     private int boughtLottoPrice;
-    private List<Lotto> lottoList;
     private Lottos userLottos;
     private String winningNumber;
     private LottoNumber bonusBall;
@@ -48,7 +47,7 @@ public class LottoController {
     }
 
     private void statisticsProcess() {
-        LottoStatistics lottoStatistics = new LottoStatistics(winningNumbers, lottoList);
+        LottoStatistics lottoStatistics = new LottoStatistics(winningNumbers, userLottos.getLottoLists());
 
         ResultView.printLottoStatistics(lottoStatistics.getResultStatistics(),
             LottoEarningRate.getLottoEarningRate(lottoStatistics.getResultStatistics(),

@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +13,7 @@ class WinningNumbersTest {
     @Test
     void distinctWinningAndBonus() {
         assertThatThrownBy(() -> new WinningLottery(
-            Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)), new LottoNumber(6))).isInstanceOf(IllegalArgumentException.class);
+            new Lotto(new HashSet(Arrays.asList(1, 2, 3, 4, 5, 6))), new LottoNumber(6)))
+            .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -9,12 +9,12 @@ public class LottoStatistics {
 
     private static final int MATCH_FIVE = 5;
 
-    private final WinningLottery winningNumbers;
+    private final WinningLottery winningLottery;
     private final List<Lotto> lottoList;
     private List<Rank> resultStatistics = new ArrayList<>();
 
-    public LottoStatistics(WinningLottery winningNumbers, List<Lotto> lottoList) {
-        this.winningNumbers = winningNumbers;
+    public LottoStatistics(WinningLottery winningLottery, List<Lotto> lottoList) {
+        this.winningLottery = winningLottery;
         this.lottoList = lottoList;
         this.resultStatistics = compareNumber();
     }
@@ -36,16 +36,16 @@ public class LottoStatistics {
 
     private int matchWinningNumbers(final Lotto lottoNumberList) {
         return lottoNumberList.getLottoNumber().stream().filter(x -> isWinningNumber(x))
-            .collect(Collectors.toList()).size();
+            .collect(Collectors.toSet()).size();
     }
 
     private boolean matchBonusNumber(final int count, final Lotto lottoNumberList) {
         return count == MATCH_FIVE && lottoNumberList.getLottoNumber()
-            .contains(winningNumbers.getBonusNumber());
+            .contains(winningLottery.getBonusNumber());
     }
 
     private boolean isWinningNumber(final LottoNumber lottoNumber) {
-        return winningNumbers.getWinningNumber().contains(lottoNumber);
+        return winningLottery.getWinningNumber().getLottoNumber().contains(lottoNumber);
     }
 
     public List<Rank> getResultStatistics() {
