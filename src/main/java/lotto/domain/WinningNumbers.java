@@ -18,14 +18,14 @@ public class WinningNumbers {
 
     private void validateNumbers(List<Integer> ballNumbers) {
         if (ballNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("[ERROR] 당첨번호는 6개를 입력해야 합니다.");
+            throw new IllegalArgumentException(INVALID_SIZE);
         }
         ballNumbers.forEach(this::validateRange);
     }
 
     private void validateRange(int bonusBall) {
         if (bonusBall > MAX_NUMBER || bonusBall < MIN_NUMBER) {
-            throw new IllegalArgumentException("[ERROR] 당첨번호는 1~45 사이의 숫자여야 합니다.");
+            throw new IllegalArgumentException(INVALID_RANGE);
         }
     }
 
