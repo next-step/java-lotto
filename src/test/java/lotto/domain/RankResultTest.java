@@ -20,6 +20,6 @@ public class RankResultTest {
         hashmap.put(Rank.THIRD, 3);
 
         RankResult rankResult = new RankResult(hashmap);
-        assertThat(rankResult.getTotalPrize().Value()).isEqualTo(total);
+        assertThat(rankResult.getTotalPrize().getValue()).isEqualTo(total);
     }
 }
