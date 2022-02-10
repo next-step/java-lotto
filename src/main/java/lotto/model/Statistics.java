@@ -3,57 +3,45 @@ package lotto.model;
 import static lotto.model.Rank.getRank;
 
 import java.util.EnumMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 public class Statistics {
 
-    private static Map<Rank, Integer> ranks;
+    private static final int PRICE_OF_A_LOTTO = 1000;
 
-    public Statistics() {
+    private static Map<Rank, Integer> ranks;
+    private double totalPrice;
+    private double totalPrize;
+
+    public Statistics(int lottoAmount) {
         ranks = new EnumMap<>(Rank.class);
+        initializeRanks();
+        this.totalPrice = lottoAmount * PRICE_OF_A_LOTTO;
+        this.totalPrize = 0;
+    }
+
+    private void initializeRanks() {
         for (Rank rank : Rank.values()) {
             putRank(rank);
         }
     }
 
-    public static void setRanks(WinningNumber winningNumber, List<Lotto> lottos) {
+    public Map<Rank, Integer> updateRanks(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            int matchCount = getMatchCount(lotto.getNumbers(),
-              winningNumber.getWinningNumber());
-            boolean bonusScore = winningNumber.isContainBonusBall(lotto);
-            Rank rank = getRank(matchCount, bonusScore);
+            int matchCount = lotto.getMatchCount();
+            boolean bonusMatch = lotto.getBonusMatch();
+            Rank rank = getRank(matchCount, bonusMatch);
             incrementRank(rank);
         }
+        return ranks;
     }
 
-    private static void incrementRank(Rank rank) {
+    private void incrementRank(Rank rank) {
         if (rank != Rank.MISS) {
             ranks.put(rank, ranks.get(rank) + 1);
         }
-    }
-
-    public static boolean getBonusScore(List<Integer> numbers, int bonusBall) {
-        return numbers.contains(bonusBall);
-    }
-
-    public static int getMatchCount(List<Integer> numbers, List<Integer> winningNumber) {
-        int matchCount = 0;
-        for (Integer number : numbers) {
-            matchCount += checkContainsNumber(winningNumber, number);
-        }
-        return matchCount;
-    }
-
-    private static int checkContainsNumber(List<Integer> winningNumber, int number) {
-        if (winningNumber.contains(number)) {
-            return 1;
-        }
-        return 0;
-    }
-
-    public static Map<Rank, Integer> getRanks() {
-        return ranks;
     }
 
     private void putRank(Rank rank) {
@@ -61,4 +49,18 @@ public class Statistics {
             ranks.put(rank, 0);
         }
     }
+
+    private void calculateTotalPrize() {
+        Iterator<Rank> keys = ranks.keySet().iterator();
+        while (keys.hasNext()) {
+            Rank key = keys.next();
+            totalPrize += ranks.get(key);
+        }
+    }
+
+    public double calculateBenefits() {
+        calculateTotalPrize();
+        return Math.floor((totalPrize / totalPrice) * 100) / 100;
+    }
+
 }
