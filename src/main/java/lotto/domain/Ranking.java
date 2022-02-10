@@ -21,20 +21,20 @@ public enum Ranking {
         this.normalNumberMatchCount = normalNumberMatchCount;
     }
 
-    public static Ranking judgeRanking(LottoResult lottoResult) {
-        if (lottoResult.getNormalNumberMatchCount() == SECOND_COUNTS
-            && !lottoResult.getBonusNumberMatch()) {
+    public static Ranking judgeRanking(final int normalNumberMatchCount, final boolean isMatchedBonusNumber) {
+        if (normalNumberMatchCount == SECOND_COUNTS
+            && !isMatchedBonusNumber) {
             return THIRD;
         }
 
         return Arrays.stream(Ranking.values())
-            .filter(rank -> rank.equals(lottoResult))
+            .filter(rank -> rank.equals(normalNumberMatchCount))
             .findFirst()
             .orElse(FAIL);
     }
 
-    private boolean equals(LottoResult lottoResult) {
-        return this.normalNumberMatchCount == lottoResult.getNormalNumberMatchCount();
+    private boolean equals(final int normalNumberMatchCount) {
+        return this.normalNumberMatchCount == normalNumberMatchCount;
     }
 
     public int multiplyCountAndWinnerPrice(final int count) {
