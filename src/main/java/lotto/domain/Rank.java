@@ -1,4 +1,4 @@
-package lotto.domain.lotto;
+package lotto.domain;
 
 import java.util.Arrays;
 
@@ -11,19 +11,19 @@ public enum Rank {
     FIRST(6, 2000000000);
 
     private final int matchCount;
-    private final long prize;
+    private final long prizeMoney;
 
     Rank(int matchCount, long prize) {
         this.matchCount = matchCount;
-        this.prize = prize;
+        this.prizeMoney = prize;
     }
 
     public int getMatchCount() {
         return this.matchCount;
     }
 
-    public long getPrize() {
-        return this.prize;
+    public long getPrizeMoney() {
+        return this.prizeMoney;
     }
 
     public static Rank find(int matchCount, boolean matchBonus) {
