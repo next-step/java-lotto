@@ -36,8 +36,7 @@ public class LottoController {
 
     private void lottoListsProcess() {
         userLottos = new Lottos(boughtLottoPrice);
-        lottoList = userLottos.getLottoLists();
-        ResultView.printLottoNumbers(lottoList);
+        ResultView.printLottoNumbers(userLottos.getLottoLists());
     }
 
     private void lottoCountProcess() {
