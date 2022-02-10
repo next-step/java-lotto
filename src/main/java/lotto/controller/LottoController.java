@@ -18,8 +18,7 @@ public class LottoController {
     private final LottoShop lottoShop = LottoShop.getInstance();
     private final LottoGame lottoGame = new LottoGame();
 
-    public LottoController(final LottoInputView lottoInputView,
-        final LottoResultView lottoResultView) {
+    public LottoController(final LottoInputView lottoInputView, final LottoResultView lottoResultView) {
 
         this.lottoInputView = lottoInputView;
         this.lottoResultView = lottoResultView;
