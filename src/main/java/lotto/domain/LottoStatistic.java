@@ -38,7 +38,8 @@ public class LottoStatistic {
                         .append(rank.getWinningAmount())
                         .append(") - ")
                         .append(rankValue)
-                        .append("개");
+                        .append("개")
+                        .append("\n");
                 }
             );
         return sb.toString();
