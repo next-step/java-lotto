@@ -73,6 +73,7 @@
 - [x] LottoMachine 메서드 네이밍 변경, getLottoPrice() ->  purchaseAmount()
 - [x] 메서드 참조 방식 적용
 - [x] Price의 티켓 구매가능한 범위 검사 로직을 LottoTicketGenerate으로 이동 
+- [x] Statistics 리펙토링
 
 ## multiple authors
 
