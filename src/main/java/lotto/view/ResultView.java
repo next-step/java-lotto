@@ -1,8 +1,10 @@
 package lotto.view;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
+import lotto.domain.LottoStatistic;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoRank;
 
@@ -22,26 +24,14 @@ public class ResultView {
         });
     }
 
-    public static void printStatistic(Map<LottoRank, Integer> resultMap) {
+    public static void printStatistic(LottoStatistic lottoStatistic) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-
-        Stream.of(LottoRank.values())
-            .forEach(rank -> {
-                int rankValue = 0;
-                if (resultMap.containsKey(rank)) {
-                    rankValue = resultMap.get(rank);
-                }
-                System.out.println(
-                    rank.getRankString()
-                        + " (" + rank.getWinningAmount() + ")- "
-                        + rankValue + "개");
-
-            });
+        System.out.println(lottoStatistic);
     }
 
-    public static void printProfit(double profit) {
+    public static void printProfit(BigDecimal profit) {
         System.out.println("총 수익률은 " + profit + "입니다.");
     }
 }
