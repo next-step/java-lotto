@@ -2,9 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -47,7 +45,7 @@ class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
 
         // when
-        boolean isBonus = lotto.containsBonusNumber(new LottoNumber("5"));
+        boolean isBonus = lotto.contains(new LottoNumber("5"));
 
         // then
         assertThat(isBonus).isEqualTo(true);
@@ -60,7 +58,7 @@ class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
 
         // when
-        boolean isBonus = lotto.containsBonusNumber(new LottoNumber("7"));
+        boolean isBonus = lotto.contains(new LottoNumber("7"));
 
         // then
         assertThat(isBonus).isEqualTo(false);

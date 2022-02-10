@@ -17,7 +17,7 @@ public class CorrectNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateInputFormat(final String numbers) {
+    private void validateDuplicateNumber(final Lotto winningNumbers, final LottoNumber bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(DUPLICATE_NUMBER_EXCEPTION_MESSAGE);
         }
