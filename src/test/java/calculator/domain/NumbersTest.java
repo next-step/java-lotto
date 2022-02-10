@@ -43,4 +43,12 @@ class NumbersTest {
         assertThat(numbers.getNumbers().get(0).getNumber()).isEqualTo(5);
         assertThat(numbers.getNumbers().size()).isEqualTo(1);
     }
+
+    @Test
+    void 일급_컬렉션에_담긴_모든_숫자의_합을_구할_수_있다() {
+        Numbers numbers = new Numbers("5,1,2");
+        Number number = numbers.addAll();
+
+        assertThat(number.getNumber()).isEqualTo(8);
+    }
 }
