@@ -1,13 +1,9 @@
 package lotto.domain;
 
-import static lotto.util.Constant.*;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +13,13 @@ class WinningNumbersTest {
     @Test
     void validateWinningNumbers() {
         final int bonusBall = 12;
-        assertDoesNotThrow(() -> new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), bonusBall));
+        assertDoesNotThrow(() -> new WinningNumbers(Arrays.asList(
+            new LottoNumber(1),
+            new LottoNumber(2),
+            new LottoNumber(3),
+            new LottoNumber(4),
+            new LottoNumber(5),
+            new LottoNumber(6)), new LottoNumber(bonusBall)));
     }
 
     @DisplayName("보너스볼의 범위는 1~45까지이다.")
@@ -25,6 +27,13 @@ class WinningNumbersTest {
     void validateBonusBallRange() {
         final int bonusBall = 78;
         assertThrows(IllegalArgumentException.class,
-            () -> new WinningNumbers(Arrays.asList(1, 2, 3, 2, 5, 6), bonusBall));
+            () -> new WinningNumbers(Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(3),
+                new LottoNumber(2),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)), new LottoNumber(bonusBall)));
     }
+
 }

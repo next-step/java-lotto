@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lotto.view.ResultView;
 
 public class Lotto {
@@ -31,7 +32,7 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public List<Integer> generateRandoms() {
+    public List<LottoNumber> generateRandoms() {
         List<Integer> numberCards = new ArrayList<>();
         for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
             numberCards.add(i);
@@ -40,7 +41,7 @@ public class Lotto {
 
         List<Integer> picked = numberCards.subList(0, LOTTO_SIZE);
         Collections.sort(picked);
-        return picked;
+        return picked.stream().map(LottoNumber::new).collect(Collectors.toList());
     }
 
     public int getNumOfTickets() {

@@ -3,29 +3,27 @@ package lotto.domain;
 import static lotto.util.Constant.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WinningNumbers {
 
-    private final List<Integer> ballNumbers;
-    private final int bonusBall;
+    private final List<LottoNumber> ballNumbers;
+    private final LottoNumber bonusBall;
 
-    public WinningNumbers(List<Integer> winningNumbers, int bonusBall) {
-        validateNumbers(winningNumbers);
-        validateRange(bonusBall);
+    public WinningNumbers(final List<Integer> winningNumbers, final int bonusBall) {
+        this(winningNumbers.stream().map(LottoNumber::new).collect(Collectors.toList()),
+            new LottoNumber(bonusBall));
+    }
+
+    public WinningNumbers(final List<LottoNumber> winningNumbers, final LottoNumber bonusBall) {
+        validateDuplicate(winningNumbers);
         this.ballNumbers = winningNumbers;
         this.bonusBall = bonusBall;
     }
 
-    private void validateNumbers(List<Integer> ballNumbers) {
-        if (ballNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(INVALID_SIZE);
-        }
-        ballNumbers.forEach(this::validateRange);
-    }
-
-    private void validateRange(int bonusBall) {
-        if (bonusBall > MAX_NUMBER || bonusBall < MIN_NUMBER) {
-            throw new IllegalArgumentException(INVALID_RANGE);
+    private void validateDuplicate(List<LottoNumber> winningNumbers) {
+        if (winningNumbers.size() != winningNumbers.stream().distinct().count()) {
+            throw new IllegalArgumentException(DUPLICATE_ELEMENT);
         }
     }
 

@@ -2,29 +2,35 @@ package lotto.domain;
 
 import static lotto.util.Constant.*;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<Integer> numbers) {
+    public LottoTicket(final int... numbers) {
+        this(Arrays.stream(numbers).mapToObj(LottoNumber::new).collect(Collectors.toList()));
+    }
+
+    public LottoTicket(final List<LottoNumber> numbers) {
         lottoNumbers = getLottoNumbers(numbers);
     }
 
-    private List<Integer> getLottoNumbers(List<Integer> numbers) {
+    private List<LottoNumber> getLottoNumbers(List<LottoNumber> numbers) {
         validateDuplicate(numbers);
         validateSize(numbers);
         return numbers;
     }
 
-    private void validateDuplicate(List<Integer> picked) {
+    private void validateDuplicate(List<LottoNumber> picked) {
         if (picked.size() != picked.stream().distinct().count()) {
             throw new IllegalArgumentException(DUPLICATE_ELEMENT);
         }
     }
 
-    private void validateSize(List<Integer> numbers) {
+    private void validateSize(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(INVALID_SIZE);
         }
@@ -35,9 +41,9 @@ public class LottoTicket {
         return lottoNumbers.toString();
     }
 
-    public int getMatchCount(List<Integer> winningNumbers) {
+    public int getMatchCount(List<LottoNumber> winningNumbers) {
         int matchCount = 0;
-        for (int lottoNumber : lottoNumbers) {
+        for (LottoNumber lottoNumber : lottoNumbers) {
             if (winningNumbers.contains(lottoNumber)) {
                 matchCount++;
             }
@@ -45,7 +51,7 @@ public class LottoTicket {
         return matchCount;
     }
 
-    public boolean contains(int value) {
-        return lottoNumbers.contains(value);
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 }
