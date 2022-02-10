@@ -2,23 +2,20 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
-import lotto.util.NumberGenerator;
 
 public class Lotto {
 
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
-    private static final int LOTTO_SIZE = 6;
+    private final List<Integer> lotto;
 
-    private final List<Integer> lottoList;
-
-    public Lotto() {
-        this.lottoList = NumberGenerator.of(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER, LOTTO_SIZE)
-            .getNumberList();
+    private Lotto(List<Integer> lotto) {
+        this.lotto = lotto;
     }
 
-    public List<Integer> getLottoList() {
-        return Collections.unmodifiableList(lottoList);
+    public static Lotto from(List<Integer> lotto) {
+        return new Lotto(lotto);
     }
 
+    public List<Integer> getLotto() {
+        return Collections.unmodifiableList(lotto);
+    }
 }

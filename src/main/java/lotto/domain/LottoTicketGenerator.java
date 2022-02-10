@@ -34,7 +34,7 @@ public class LottoTicketGenerator {
         List<Lotto> lottoList = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            lottoList.add(new Lotto());
+            lottoList.add(LottoGenerator.of().getLotto());
         }
 
         return lottoList;

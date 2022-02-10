@@ -63,7 +63,7 @@ public class LottoStatistics {
     }
 
     private int matchWinningNumbers(final Lotto lotto) {
-        return lotto.getLottoList().stream().filter(x -> isWinningNumber(x))
+        return lotto.getLotto().stream().filter(x -> isWinningNumber(x))
             .collect(Collectors.toList()).size();
     }
 
@@ -72,7 +72,7 @@ public class LottoStatistics {
     }
 
     private boolean matchBonusNumber(final int count, final Lotto lotto) {
-        return count == MATCH_FOUR && lotto.getLottoList().contains(bonusNumber);
+        return count == MATCH_FOUR && lotto.getLotto().contains(bonusNumber);
     }
 
 }
