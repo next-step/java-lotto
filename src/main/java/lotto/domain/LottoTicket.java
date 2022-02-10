@@ -5,11 +5,11 @@ import static lotto.util.Constant.*;
 import java.util.Iterator;
 import java.util.List;
 
-public class LottoNumbers implements Iterable<Integer> {
+public class LottoTicket implements Iterable<Integer> {
 
     private final List<Integer> lottoNumbers;
 
-    public LottoNumbers(List<Integer> numbers) {
+    public LottoTicket(List<Integer> numbers) {
         lottoNumbers = getLottoNumbers(numbers);
     }
 

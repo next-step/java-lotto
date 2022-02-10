@@ -11,7 +11,7 @@ import lotto.view.ResultView;
 
 public class Lotto {
 
-    final List<LottoNumbers> lottoTickets;
+    private final List<LottoTicket> lottoTickets;
 
     public Lotto(int userMoney) {
         int ticketNumber = buyLottoTickets(userMoney);
@@ -19,14 +19,14 @@ public class Lotto {
         ResultView.printLottoTicketsInfo(lottoTickets);
     }
 
-    public int buyLottoTickets(int money) {
+    private int buyLottoTickets(int money) {
         return money / PRICE;
     }
 
-    public List<LottoNumbers> generateLottoTickets(int number) {
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+    public List<LottoTicket> generateLottoTickets(int number) {
+        List<LottoTicket> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < number; i++) {
-            lottoNumbers.add(new LottoNumbers(generateRandoms()));
+            lottoNumbers.add(new LottoTicket(generateRandoms()));
         }
         return lottoNumbers;
     }
@@ -58,7 +58,7 @@ public class Lotto {
         return Math.floor((total / price) * 100) / 100.0;
     }
 
-    public LottoRank compareWithWinning(LottoNumbers lottoNumbers, WinningNumbers winningNumbers) {
+    public LottoRank compareWithWinning(LottoTicket lottoNumbers, WinningNumbers winningNumbers) {
         int count = winningNumbers.compareLottoNumbers(lottoNumbers);
         boolean hasBonus = winningNumbers.checkBonusBall(lottoNumbers);
         return LottoRank.valueOf(count, hasBonus);

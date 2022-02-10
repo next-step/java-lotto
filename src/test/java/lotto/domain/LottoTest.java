@@ -31,20 +31,14 @@ class LottoTest {
     @ValueSource(ints = {2, 3, 4})
     @ParameterizedTest
     void 구입금액에_맞는_로또를_발급한다(int number) {
-        List<LottoNumbers> generatedTickets = lotto.generateLottoTickets(number);
+        List<LottoTicket> generatedTickets = lotto.generateLottoTickets(number);
         int given = generatedTickets.size();
         assertThat(given).isEqualTo(number);
     }
 
     @Test
-    void 구매단위는_1000원_이다() {
-        int given = lotto.buyLottoTickets(10000);
-        assertThat(given).isEqualTo(10);
-    }
-
-    @Test
     void 로또넘버중_당첨넘버와_일치하는_수에_따라_당첨결과가_나온다_1등() {
-        final LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final LottoTicket lottoNumbers = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
         final WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6),
             40);
 
@@ -54,7 +48,7 @@ class LottoTest {
 
     @Test
     void 로또넘버중_당첨넘버와_일치하는_수에_따라_당첨결과가_나온다_2등() {
-        final LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final LottoTicket lottoNumbers = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
         final WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 7),
             6);
 

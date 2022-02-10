@@ -3,7 +3,7 @@ package lotto.view;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
-import lotto.domain.LottoNumbers;
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoRank;
 
 public class ResultView {
@@ -16,7 +16,7 @@ public class ResultView {
         System.out.println(ticketSize + "개를 구매했습니다.");
     }
 
-    public static void printLottoTicketsInfo(List<LottoNumbers> tickets) {
+    public static void printLottoTicketsInfo(List<LottoTicket> tickets) {
         tickets.forEach(ticket -> {
             System.out.println(ticket.toString());
         });
