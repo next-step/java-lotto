@@ -15,5 +15,4 @@ public class Parser {
         }
         return number;
     }
-
 }

@@ -3,7 +3,6 @@ package lotto.view;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import lotto.domain.Lotto;
 import lotto.domain.utils.Parser;
 
 public class InputView {
@@ -44,7 +43,7 @@ public class InputView {
         int numberOfManualLotto = Parser.parseInt(inputNumberOfManualLotto());
 
         System.out.println("수동으로 구매할 번호를 입력해 주세요. (한 줄에 로또 한장을 ','로 구분하여 입력.)");
-        while(lottos.size() < numberOfManualLotto) {
+        while (lottos.size() < numberOfManualLotto) {
             lottos.add(input());
         }
 
