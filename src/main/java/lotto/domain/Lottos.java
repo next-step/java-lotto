@@ -41,12 +41,17 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public List<Lotto> get() {
-        return this.lottos;
-    }
-
     public int size() {
         return this.lottos.size();
+    }
+
+    public void add(Lottos lottos) {
+        this.lottos.addAll(lottos.get());
+
+    }
+
+    public List<Lotto> get() {
+        return this.lottos;
     }
 
     @Override
