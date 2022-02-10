@@ -15,8 +15,6 @@ public class LottoController {
 
     private final LottoInputView lottoInputView;
     private final LottoResultView lottoResultView;
-    private final LottoShop lottoShop = LottoShop.getInstance();
-    private final LottoGame lottoGame = new LottoGame();
 
     public LottoController(final LottoInputView lottoInputView, final LottoResultView lottoResultView) {
 
@@ -26,6 +24,10 @@ public class LottoController {
 
     public void run() {
         Money money = new Money(lottoInputView.inputPrice());
+
+        final LottoShop lottoShop = LottoShop.getInstance();
+        final LottoGame lottoGame = new LottoGame();
+
         final Lottos lottos = lottoGame.startLotto(money, lottoShop);
 
         lottoResultView.printLottos(lottos);
