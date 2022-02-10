@@ -33,7 +33,7 @@ public enum Statistics {
         return Arrays.stream(values())
             .filter(statistic -> statistic.grade == numberOfMatch)
             .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException());
+            .orElseThrow(IllegalArgumentException::new);
     }
 
     public static int getCount(List<Statistics> statistics, int matchCount) {
