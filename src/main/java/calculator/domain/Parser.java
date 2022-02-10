@@ -47,7 +47,9 @@ public class Parser {
     }
 
     private static List<Integer> stringListToInteger(List<String> splitedFormular) {
-        return splitedFormular.stream().map(Integer::parseInt).collect(Collectors.toList());
+        return splitedFormular.stream()
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
     }
 
     public String getParsedFormular() {
