@@ -15,7 +15,8 @@ class LottoTicketTest {
     @ValueSource(ints = {1_000, 2_000, 3_000, 10_000})
     void GivenPriceWithIntType_WhenGenerateLottoTicket_ThenLottoTicketSizeEqualsPriceDivideLottoPrice(
         final int price) {
-        final int lottoTicketSize = LottoTicket.from(price).getLottoTicket().size();
+        Price lottoPrice = Price.from(price);
+        final int lottoTicketSize = LottoTicketGenerator.from(lottoPrice).getLottoTicket().getLottoList().size();
         final int lottoCount = price / LOTTO_PRICE;
 
         assertThat(lottoTicketSize)
