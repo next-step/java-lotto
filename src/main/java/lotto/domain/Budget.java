@@ -23,7 +23,7 @@ public class Budget {
         }
     }
 
-    public boolean canNotPurchase(final int priceOfLotto) {
+    private boolean canNotPurchase(final int priceOfLotto) {
         return this.value < priceOfLotto;
     }
 }
