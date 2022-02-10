@@ -1,32 +1,18 @@
 package lotto.view;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import lotto.domain.WinningResult;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 import lotto.domain.Rank;
 
 public class OutputView {
 
-    private static final String ENTER = "\n";
-    private static final String DELIMITER = ", ";
     private static final String PURCHASE_AMOUNT_MANAGER_LOG = "%d개를 구매했습니다.";
-    private static final String OPEN_BRACKET = "[";
-    private static final String CLOSED_BRACKET = "]";
-    private static final String WINNING_RESULT_HEAD_LOG = "당첨통계" + ENTER + "---------";
-    private static final String COUNT_MATCH = "%d개 일치 (%d원)- %d개";
-    private static final String BONUS_MATCH = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
-    private static final String YIELD = "총 수익률은 %.1f입니다.";
+    private static final String WINNING_RESULT_HEAD_LOG = "\n당첨통계\n---------";
+    private static final String MATCH_COUNT_LOG = "%d개 일치 (%d원)- %d개";
+    private static final String MATCH_BONUS_LOG = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
+    private static final String PROFIT_RATE_LOG = "총 수익률은 %.1f입니다.";
 
-    public static void printMessage(String message) {
-        System.out.print(message);
-    }
-
-    public static void printPurchaseInfo(int ticketCount, List<Lotto> lottos) {
+    public static void printPurchaseInfo(int ticketCount, List<String> lottos) {
         printPurchaseAmount(ticketCount);
         printPurchaseTicket(lottos);
     }
@@ -34,42 +20,37 @@ public class OutputView {
         System.out.printf((PURCHASE_AMOUNT_MANAGER_LOG) + "%n", ticketCount);
     }
 
-    private static void printPurchaseTicket(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
-            List<Integer> result = lotto.getNumbers();
-            Collections.sort(result);
-            System.out.println(result.toString());
+    private static void printPurchaseTicket(List<String> lottos) {
+        for (String lotto : lottos) {
+            System.out.println(lotto);
         }
         System.out.println();
     }
 
-    public static void printWinningResult(WinningResult winningResult) {
-        printMessage(ENTER + WINNING_RESULT_HEAD_LOG + ENTER);
-        printMatchCount(winningResult.getResult());
-        printYield(winningResult.getYield());
+    public static void printWinningResult(Map<Rank, Integer> result, double profitRate) {
+        System.out.println(WINNING_RESULT_HEAD_LOG);
+        printMatchCount(result);
+        printProfitRate(profitRate);
     }
 
     private static void printMatchCount(Map<Rank, Integer> result) {
         for (Rank rank : result.keySet()) {
-            if (rank == Rank.NONE) {
-                continue;
-            }
             printCountByRank(rank, result.get(rank));
         }
     }
 
     private static void printCountByRank(Rank rank, int count) {
         int matchCount = rank.getMatchCount();
-        long prize = rank.getPrize();
+        long prizeMoney = rank.getPrizeMoney();
 
         if (rank == Rank.SECOND) {
-            printMessage(String.format(BONUS_MATCH, matchCount, prize, count) + ENTER);
+            System.out.printf((MATCH_BONUS_LOG) + "%n", matchCount, prizeMoney, count);
             return;
         }
-        printMessage(String.format(COUNT_MATCH, matchCount, prize, count) + ENTER);
+        System.out.printf((MATCH_COUNT_LOG) + "%n", matchCount, prizeMoney, count);
     }
 
-    private static void printYield(float yield) {
-        printMessage(String.format(YIELD, yield) + ENTER);
+    private static void printProfitRate(double profitRate) {
+        System.out.printf((PROFIT_RATE_LOG) + "%n", profitRate);
     }
 }
