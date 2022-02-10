@@ -1,56 +1,48 @@
 package lotto.domain;
 
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import lotto.domain.lotto.Rank;
 
 public class WinningResult {
 
+    private final WinningLotto winningLotto;
     private final Map<Rank, Integer> result;
-    private long winningCash = 0;
-    private float yield = 0;
 
-    public WinningResult() {
+    public WinningResult(WinningLotto winningLotto) {
+        this.winningLotto = winningLotto;
         this.result = new LinkedHashMap<>();
         for (Rank rank : Rank.values()) {
+            if (rank == Rank.NONE) continue;
             result.put(rank, 0);
         }
     }
 
-    public void mappingResult(List<Rank> ranks) {
-        for (Rank rank : ranks) {
-            if (result.containsKey(rank)) {
-                result.put(rank, result.get(rank) + 1);
-                continue;
-            }
-            result.put(rank, 1);
+    public Map<Rank, Integer> mapResult(List<Lotto> userLottos) {
+        for (Lotto lotto : userLottos) {
+            Rank rank = getRank(lotto);
+            if (rank == Rank.NONE) continue;
+            result.put(rank, result.get(rank) + 1);
         }
-    }
-
-    public Map<Rank, Integer> getResult() {
         return result;
     }
 
-    public void calculateTotalPrize() {
-        Iterator iterator = result.keySet().iterator();
-        while (iterator.hasNext()) {
-            Rank rank = (Rank) iterator.next();
-            winningCash += result.get(rank) * rank.getPrize();
+    private Rank getRank(Lotto userLotto) {
+        int matchCount = winningLotto.getMatchCount(userLotto);
+        boolean matchBonus = winningLotto.getMatchBonus(userLotto);
+        return Rank.find(matchCount, matchBonus);
+    }
+
+    public double calculateProfitRate(int buyCash) {
+        long prizeMoney = calculatePrizeMoney();
+        return (double) prizeMoney / buyCash;
+    }
+
+    public long calculatePrizeMoney() {
+        long prizeMoney = 0;
+        for (Rank rank : result.keySet()) {
+            prizeMoney += result.get(rank) * rank.getPrizeMoney();
         }
-    }
-
-    public void calculateYield(int buyCash) {
-        calculateTotalPrize();
-        yield = (float) winningCash / buyCash;
-    }
-
-    public long getWinningCash() {
-        return this.winningCash;
-    }
-
-    public float getYield() {
-        return this.yield;
+        return prizeMoney;
     }
 }
