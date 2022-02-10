@@ -47,11 +47,17 @@ public class DelimiterTokenizer {
     }
 
     private void validateNumberValue(String customDelimiter) {
-        try {
-            Integer.parseInt(customDelimiter);
+        if (isNumberString(customDelimiter)) {
             throw new IllegalArgumentException("커스텀 구분자를 숫자를 사용할 수 없습니다.");
+        }
+    }
+
+    private boolean isNumberString(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
         } catch (NumberFormatException e) {
-            return;
+            return false;
         }
     }
 
