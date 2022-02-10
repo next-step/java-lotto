@@ -7,19 +7,13 @@ public class InputView {
     private InputView() {}
 
     public static String readFormula() {
-        String formula = "";
-        OutputView.printRequestFormulaInput();
-
         try {
-            formula = Console.readLine();
+            String formula = Console.readLine();
+            return formula;
         } catch (IllegalArgumentException e) {
             System.err.println(OutputView.ERROR + e.getMessage());
             System.exit(0);
         }
-
-        return formula;
+        return readFormula();
     }
-
 }
-
-
