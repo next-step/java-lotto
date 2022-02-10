@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import lotto.domain.LottoNumber;
 
 public class InputView {
 
@@ -28,15 +29,15 @@ public class InputView {
         return totalPrice;
     }
 
-    public final List<Integer> getWinNumbers() {
-        String[] winNumbers = getInputValue(WIN_NUMBER_MESSAGE).split(",");
-        if (winNumbers.length != LOTTO_LENGTH) {
+    public final List<LottoNumber> getWinNumbers() {
+        String[] winLines = getInputValue(WIN_NUMBER_MESSAGE).split(",");
+        if (winLines.length != LOTTO_LENGTH) {
             throw new IllegalArgumentException("숫자 6개를 입력해주세요");
         }
         try {
-            return Arrays.stream(winNumbers)
+            return Arrays.stream(winLines)
                 .map(String::trim)
-                .map(Integer::parseInt)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
         } catch (NumberFormatException e) {
             throw new NumberFormatException("숫자를 입력해주세요");

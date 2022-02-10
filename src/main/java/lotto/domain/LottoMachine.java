@@ -4,21 +4,20 @@ import java.util.List;
 
 public class LottoMachine {
 
-    private final List<Integer> winNumbers;
-    private final Integer bonusNumber;
+    private final List<LottoNumber> winNumbers;
+    private final int bonusNumber;
 
-    public LottoMachine(final List<Integer> winNumbers, final int bonusNumber) {
+    public LottoMachine(final List<LottoNumber> winNumbers, final int bonusNumber) {
         this.winNumbers = winNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    public boolean isContain(final int number) {
-        return winNumbers.contains(number);
+    // TODO 리뷰어 님께 물어보기
+    public boolean isEqualBonusNumber(final LottoNumber lottoNumber) {
+        return bonusNumber == lottoNumber.getLottoNumber();
     }
 
-    public boolean isEqualBonusNumber(final int number) {
-        return bonusNumber.equals(number);
+    public boolean isContain(LottoNumber lottoNumber) {
+        return winNumbers.contains(lottoNumber.getLottoNumber());
     }
-
-
 }

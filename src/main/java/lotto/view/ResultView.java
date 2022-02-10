@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.WinningPrice;
 
 public class ResultView {
@@ -10,9 +11,13 @@ public class ResultView {
         System.out.printf("%d개를 구매했습니다.%n", lottoCounts);
     }
 
+    //TODO 인덴트 낮추기
     public void printLottoTickets(final List<Lotto> lottoTickets) {
         for (Lotto lotto : lottoTickets) {
-            System.out.println(lotto);
+            for (LottoNumber lottoNumber:lotto.getLottoNumbers()){
+                System.out.print(lottoNumber.getLottoNumber()+" ");
+            }
+            System.out.println();
         }
     }
 
