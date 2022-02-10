@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class StringCalculator {
 
+    private static final String RETURN_NUMBER_ZERO = "0";
+
     private String input;
 
     public StringCalculator(String input) {
@@ -28,7 +30,7 @@ public class StringCalculator {
 
     private String validateEmptyOrNull(String input) {
         if (Objects.isNull(input) || "".equals(input)) {
-            input = "0";
+            input = RETURN_NUMBER_ZERO;
         }
         return input;
     }
