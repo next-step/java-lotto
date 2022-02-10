@@ -17,23 +17,20 @@ public class LottoController {
     private static final int PRICE_PER_ONE_TICKET = 1000;
 
     private static LottoController lottoController = null;
+    private LottoController() {}
 
-    private LottoController() {
+    public static LottoController getInstance() {
         if (lottoController == null) {
             lottoController = new LottoController();
         }
-    }
-
-    public static LottoController getInstance() {
         return lottoController;
     }
 
     public void run() {
-        Tickets tickets;
         int amount = InputView.getAmount();
         int count = amount / PRICE_PER_ONE_TICKET;
 
-        tickets = purchase(count);
+        Tickets tickets = purchase(count);
         showTickets(tickets);
         showResult(tickets, amount);
     }
