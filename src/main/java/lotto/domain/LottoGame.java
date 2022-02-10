@@ -9,9 +9,14 @@ public class LottoGame {
 
     private static final int ZERO = 0;
 
-    public Lottos startLotto(final Money money, final LottoShop lottoShop) {
-        final int lottoAmount = lottoShop.countPossibleLottoAmount(money);
-        return lottoShop.buyLotto(lottoAmount);
+    private final Lottos lottos;
+
+    public LottoGame(final Lottos lottos) {
+        this.lottos = lottos;
+    }
+
+    public Lottos handOverLottos() {
+        return lottos;
     }
 
     public Map<Ranking, Integer> findWinner(final WinningLotto winningLotto,
