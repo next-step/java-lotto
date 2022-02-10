@@ -9,7 +9,7 @@ import calculator.view.OutputView;
 
 public class Parser {
 
-    public static final String ERROR_NEGATIVE_NUMBER = "입력한 문자열에 음수가 있습니다.";
+    private static final String ERROR_NEGATIVE_NUMBER = "입력한 문자열에 음수가 있습니다.";
     private static final int CUSTOM_DELIMITER = 1;
     private static final int PARSED_FORMULAR = 2;
     private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\\n(.*)");
