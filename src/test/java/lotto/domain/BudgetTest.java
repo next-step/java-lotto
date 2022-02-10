@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -25,26 +26,44 @@ class BudgetTest {
     @ParameterizedTest
     void Given_문자가_포함된_금액_문자열_When_객체_생성_Then_예외_발생(final String input) {
         // then
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new Budget(input));
-    }
-
-    @DisplayName("구매 금액이 로또 한장의 가격보다 적으면 true 반환")
-    @Test
-    void Given_로또_가격보다_적은_투입_금액_When_구매가_불가능한지_판별_Then_true() {
-        assertThat(new Budget("500").canNotPurchase(1000)).isTrue();
-    }
-
-    @DisplayName("구매 금액이 로또 한장의 가격보다 크면 ture 반환")
-    @Test
-    void Given_로또_가격보다_큰_투입_금액_When_구매가_불가능한지_판별_Then_false() {
-        assertThat(new Budget("5000").canNotPurchase(1000)).isFalse();
+        assertThrows(IllegalArgumentException.class, () -> new Budget(input));
     }
 
     @DisplayName("로또의 가격이 주어지면 구매 가능한 로또 수를 반환한다..")
     @Test
     void Given_로또_가격보다_큰_투입_금액_When_구매가능_수_구하기_Then_구매_가능한_로또_수_반환() {
+        // given & when
         int numberOfPurchase = new Budget("5000").getNumberOfPurchase(1000);
 
+        // then
         assertThat(numberOfPurchase).isEqualTo(5);
+    }
+
+    @DisplayName("구매 금액이 로또 한장의 가격보다도 적으면 예외가 발생한다.")
+    @Test
+    void Given_로또_가격보다_적은_투입_금액_When_구매가능_수_구하기_Then_예외_발생() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new Budget("500").getNumberOfPurchase(1000));
+
+    }
+
+    @DisplayName("예산 금액이 차감 금액보다 적으면 예외가 발생한다.")
+    @Test
+    void Given_차감_금액보다_적은_투입_금액_When_금액만큼_차감_Then_예외_발생() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new Budget("500").deduct(1000));
+    }
+
+    @DisplayName("차감 금액이 주어지면 그만큼 예산 값을 차감한다.")
+    @Test
+    void Given_차감_금액보다_큰_투입_금액_When_금액만큼_차감_Then_value값_차감() {
+        // given
+        Budget budget = new Budget("5000");
+
+        // when
+        budget.deduct(1000);
+
+        // then
+        assertThat(budget).isEqualTo(new Budget("4000"));
     }
 }
