@@ -5,10 +5,9 @@ import java.util.Scanner;
 public class InputView {
 
     private static final String ENTER = "\n";
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static String getUserInput() {
-        Scanner scanner = new Scanner(System.in);
-
         StringBuilder sb = new StringBuilder();
 
         String firstLine = scanner.nextLine();
