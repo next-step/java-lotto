@@ -22,7 +22,6 @@ public class Lottos {
 
         final int numberOfLotto = budget.getNumberOfPurchase(PRICE_OF_LOTTO);
         for (int i = 0; i < numberOfLotto; i++) {
-            LottoBalls.shuffle();
             lottos.add(new Lotto(createRandomNumbers()));
         }
         return new Lottos(lottos);

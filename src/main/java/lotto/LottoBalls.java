@@ -3,6 +3,7 @@ package lotto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -25,12 +26,15 @@ public class LottoBalls {
 
     private LottoBalls() {}
 
-    public static void shuffle() {
-        Collections.shuffle(BALLS);
+    public static Set<LottoNumber> getRandomLottoNumber() {
+        List<LottoNumber> copyNumbers = new ArrayList<>(BALLS);
+        shuffle(copyNumbers);
+
+        return new TreeSet<>(copyNumbers.subList(0, NUMBER_OF_LOTTO_BALL));
     }
 
-    public static Set<LottoNumber> getRandomLottoNumber() {
-        return new TreeSet<>(BALLS.subList(0, NUMBER_OF_LOTTO_BALL));
+    private static void shuffle(List<LottoNumber> numbers) {
+        Collections.shuffle(numbers);
     }
 
     public static Set<LottoNumber> of(final List<Integer> numbers) {
