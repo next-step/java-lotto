@@ -1,7 +1,7 @@
-package lotto.domain.vo;
+package lotto.domain.statistics.vo;
 
 import java.util.Map;
-import lotto.domain.LottoRank;
+import lotto.domain.lottorank.LottoRank;
 
 public class RankCounts {
 

@@ -1,11 +1,13 @@
-package lotto.domain;
+package lotto.domain.statistics;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import lotto.domain.dto.ResultDto;
-import lotto.domain.vo.RankCounts;
+import lotto.domain.statistics.dto.ResultDto;
+import lotto.domain.lottorank.LottoRank;
+import lotto.domain.lottorank.LottoRanks;
+import lotto.domain.statistics.vo.RankCounts;
 
 public class Statistics {
 

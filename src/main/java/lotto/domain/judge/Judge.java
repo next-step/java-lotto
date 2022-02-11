@@ -1,7 +1,11 @@
-package lotto.domain;
+package lotto.domain.judge;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.correctnumber.CorrectNumbers;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.lottorank.LottoRank;
+import lotto.domain.lottorank.LottoRanks;
 
 public class Judge {
 

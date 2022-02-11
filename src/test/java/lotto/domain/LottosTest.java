@@ -5,6 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Arrays;
 import java.util.List;
+import lotto.domain.budget.Budget;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.lottorank.LottoRank;
+import lotto.domain.lottorank.LottoRanks;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

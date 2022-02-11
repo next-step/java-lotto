@@ -1,11 +1,13 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import lotto.LottoBalls;
+import lotto.domain.lottonumber.LottoBalls;
+import lotto.domain.budget.Budget;
+import lotto.domain.lottonumber.LottoNumber;
 
 public class Lottos {
 

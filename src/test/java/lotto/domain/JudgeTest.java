@@ -2,6 +2,10 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import lotto.domain.budget.Budget;
+import lotto.domain.correctnumber.CorrectNumbers;
+import lotto.domain.judge.Judge;
+import lotto.domain.lotto.Lottos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

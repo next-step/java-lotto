@@ -1,6 +1,8 @@
-package lotto.domain;
+package lotto.domain.correctnumber;
 
 import java.util.Set;
+import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lotto.Lotto;
 import lotto.utils.Parser;
 
 public class CorrectNumbers {

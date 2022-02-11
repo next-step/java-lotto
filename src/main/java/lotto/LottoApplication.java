@@ -1,13 +1,12 @@
 package lotto;
 
 
-import lotto.domain.Budget;
-import lotto.domain.CorrectNumbers;
-import lotto.domain.Judge;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoRanks;
-import lotto.domain.Lottos;
-import lotto.domain.Statistics;
+import lotto.domain.budget.Budget;
+import lotto.domain.correctnumber.CorrectNumbers;
+import lotto.domain.judge.Judge;
+import lotto.domain.lottorank.LottoRanks;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.statistics.Statistics;
 import lotto.view.InputView;
 import lotto.view.PrintView;
 

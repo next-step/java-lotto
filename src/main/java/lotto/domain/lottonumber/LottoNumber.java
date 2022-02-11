@@ -1,7 +1,6 @@
-package lotto.domain;
+package lotto.domain.lottonumber;
 
 import java.util.Objects;
-import lotto.LottoBalls;
 
 public class LottoNumber implements Comparable {
 

@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.budget;
 
 import java.util.Objects;
 import lotto.utils.Parser;
