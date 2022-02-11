@@ -35,7 +35,8 @@ public class LottoStatistics {
     }
 
     private int matchWinningNumbers(final Lotto lottoNumberList) {
-        return lottoNumberList.getLottoNumber().stream().filter(x -> isWinningNumber(x))
+        return lottoNumberList.getLottoNumber().stream()
+            .filter(x -> isWinningNumber(x))
             .collect(Collectors.toSet()).size();
     }
 
