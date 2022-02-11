@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import java.util.Objects;
-import lotto.domain.utils.Parser;
+import lotto.utils.Parser;
 
 public class Budget {
 

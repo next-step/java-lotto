@@ -1,4 +1,4 @@
-package lotto.domain.utils;
+package lotto.utils;
 
 public class Parser {
 
