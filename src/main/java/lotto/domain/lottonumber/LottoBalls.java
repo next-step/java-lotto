@@ -44,7 +44,7 @@ public class LottoBalls {
                 .collect(Collectors.toCollection(TreeSet::new));
     }
 
-    public static LottoNumber from(final int value) {
+    static LottoNumber from(final int value) {
         validateLottoNumberRange(value);
         return BALLS.get(value - DIFFERENCE_FROM_INDEX);
     }
