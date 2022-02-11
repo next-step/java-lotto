@@ -16,19 +16,20 @@ public class LottoGame {
     }
 
 
-    public Map<Ranking, Integer> findWinner(final WinningLotto winningLotto,
-        final Lottos userLottos) {
+    public Map<Ranking, Integer> findWinner(final WinningLotto winningLotto) {
 
         final Map<Ranking, Integer> totalResult = new HashMap<>();
         initializeTotalResult(totalResult);
 
-        final List<Ranking> rankings = userLottos.judgeAllUserLotto(winningLotto);
-        rankings.forEach(ranking -> {
-            Integer currentCount = totalResult.get(ranking);
-            totalResult.put(ranking, ++currentCount);
-        });
+        final List<Ranking> rankings = lottos.judgeAllUserLotto(winningLotto);
+        rankings.forEach(ranking -> updateResults(totalResult, ranking));
 
         return totalResult;
+    }
+
+    private void updateResults(final Map<Ranking, Integer> totalResult, final Ranking ranking) {
+        Integer currentCount = totalResult.get(ranking);
+        totalResult.put(ranking, ++currentCount);
     }
 
     private void initializeTotalResult(final Map<Ranking, Integer> totalResult) {
