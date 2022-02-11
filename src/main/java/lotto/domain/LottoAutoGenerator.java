@@ -11,10 +11,10 @@ public class LottoAutoGenerator {
     private static final int LOTTO_START_NUM = 1;
     private static final int LOTTO_END_NUM = 45;
     private static final int LOTTO_SIZE = 6;
-    private static final List<LottoNumber> ALL_LOTTO_NUMBERS;
+    private static final List<LottoNumber> CACHED_ALL_LOTTO_NUMBERS;
 
     static {
-        ALL_LOTTO_NUMBERS = IntStream.range(LOTTO_START_NUM, LOTTO_END_NUM)
+        CACHED_ALL_LOTTO_NUMBERS = IntStream.range(LOTTO_START_NUM, LOTTO_END_NUM)
             .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
     }
@@ -27,9 +27,9 @@ public class LottoAutoGenerator {
     }
 
     public List<LottoNumber> generateLotto() {
-        Collections.shuffle(ALL_LOTTO_NUMBERS);
+        Collections.shuffle(CACHED_ALL_LOTTO_NUMBERS);
 
-        return ALL_LOTTO_NUMBERS.stream()
+        return CACHED_ALL_LOTTO_NUMBERS.stream()
             .limit(LOTTO_SIZE)
             .collect(Collectors.toList());
     }
