@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -57,5 +58,27 @@ class LottosTest {
 
         // then
         assertThat(merged.size()).isEqualTo(4);
+    }
+
+    @DisplayName("로또 결과 등수 리스트를 반환한다.")
+    @Test
+    void When_리스트_get_Then_결과_등수_리스트_반환() {
+        // given
+        List<LottoRank> expected = Arrays.asList(LottoRank.SECOND, LottoRank.FIFTH);
+        LottoRanks lottoRanks = new LottoRanks(expected);
+
+        // when & then
+        assertThat(lottoRanks.get()).isEqualTo(expected);
+    }
+
+    @DisplayName("로또 결과 당첨금 리스트를 반환한다.")
+    @Test
+    void When_리스트_당첨금_리스트_얻기_Then_당첨금_리스트_반환() {
+        // given
+        List<LottoRank> expected = Arrays.asList(LottoRank.SECOND, LottoRank.FIFTH);
+        LottoRanks lottoRanks = new LottoRanks(expected);
+
+        // when & then
+        assertThat(lottoRanks.getAmounts()).isEqualTo(Arrays.asList(LottoRank.SECOND.getAmount(), LottoRank.FIFTH.getAmount()));
     }
 }
