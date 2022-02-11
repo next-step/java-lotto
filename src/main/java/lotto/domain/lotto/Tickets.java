@@ -3,7 +3,6 @@ package lotto.domain.lotto;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Tickets {
 
@@ -17,13 +16,11 @@ public class Tickets {
         return tickets.size();
     }
 
-    public List<Numbers> getEachTicketNumbers() {
-        return tickets.stream()
-            .map(Ticket::getNumbers)
-            .collect(Collectors.toList());
+    public List<Ticket> getEachTicketNumbers() {
+        return tickets;
     }
 
-    public Map<Rank, Integer> getComparisonPrizeMap(Numbers answerNumbers, int bonus) {
+    public Map<Rank, Integer> getComparisonPrizeMap(final Ticket answerNumbers, final Number bonus) {
         Map<Rank, Integer> prizeMap = new LinkedHashMap<>();
         for (Ticket ticket : tickets) {
             int matches = ticket.matches(answerNumbers.get());
