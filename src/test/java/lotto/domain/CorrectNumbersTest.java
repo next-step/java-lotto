@@ -16,7 +16,7 @@ class CorrectNumbersTest {
 
         // then
         assertThat(correctNumbers.getWinningNumbers().size()).isEqualTo(6);
-        assertThat(correctNumbers.getBonusNumber()).isEqualTo(new LottoNumber(7));
+        assertThat(correctNumbers.getBonusNumber()).isEqualTo(LottoNumber.from(7));
     }
 
     @DisplayName("당첨 번호들과 보너스 번호가 중복되면 예외가 발생한다.")
