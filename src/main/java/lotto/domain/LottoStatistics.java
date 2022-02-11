@@ -60,7 +60,7 @@ public class LottoStatistics {
 
     private List<PrizeGrade> calculateLottoTicketResult() {
         return lottoTicket.getLottoList().stream()
-            .map(x -> PrizeGrade.getPrizeGrade(getMatchCount(x), isBonusMatch(x)))
+            .map(x -> PrizeGrade.of(getMatchCount(x), isBonusMatch(x)))
             .collect(Collectors.toList());
     }
 

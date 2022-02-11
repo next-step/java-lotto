@@ -1,16 +1,20 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+
+@FunctionalInterface
+interface PrizeGradeMatcher {
+
+    boolean findPrizeGrade(int matchCount, boolean matchBonus);
+}
 
 public enum PrizeGrade {
-    NONE(0, false, 0),
-    FIFTH(3, false, 5_000),
-    FOURTH(4, false, 50_000),
-    THIRD(5, false, 1_500_000),
-    SECOND(4, true, 30_000_000),
-    FIRST(6, false, 2_000_000_000);
+    NONE(0, 0, (matchCount, matchBonus) -> matchCount == 0 && matchBonus == false),
+    FIFTH(5_000, 3, (matchCount, matchBonus) -> matchCount == 3 && matchBonus == false),
+    FOURTH(50_000, 4, (matchCount, matchBonus) -> matchCount == 4 && matchBonus == false),
+    THIRD(1_500_000, 5, (matchCount, matchBonus) -> matchCount == 5 && matchBonus == false),
+    SECOND(30_000_000, 4, (matchCount, matchBonus) -> matchCount == 4 && matchBonus == true),
+    FIRST(2_000_000_000, 6, (matchCount, matchBonus) -> matchCount == 6 && matchBonus == false);
 
     public int getMatchCount() {
         return matchCount;
@@ -20,29 +24,20 @@ public enum PrizeGrade {
         return prizeMoney;
     }
 
-    private final int matchCount;
-    private final boolean isBonusMatch;
     private final int prizeMoney;
+    private final int matchCount;
+    private final PrizeGradeMatcher prizeGradeMatcher;
 
-    PrizeGrade(int matchCount, boolean isBonusMatch, int prizeMoney) {
-        this.matchCount = matchCount;
-        this.isBonusMatch = isBonusMatch;
+    PrizeGrade(int prizeMoney, int matchCount, PrizeGradeMatcher prizeGradeMatcher) {
         this.prizeMoney = prizeMoney;
+        this.matchCount = matchCount;
+        this.prizeGradeMatcher = prizeGradeMatcher;
     }
 
-    public static PrizeGrade getPrizeGrade(int matchCount, boolean isBonusMatch) {
-        if (matchCount == PrizeGrade.SECOND.getMatchCount() && isBonusMatch) {
-            return SECOND;
-        }
-
-        List<PrizeGrade> prizeGradeCandidate = Arrays.stream(values())
-            .filter(prizeGrade -> prizeGrade.matchCount == matchCount)
-            .filter(prizeGrade -> prizeGrade.isBonusMatch == false)
-            .collect(Collectors.toList());
-
-        if (prizeGradeCandidate.size() > 0) {
-            return prizeGradeCandidate.get(0);
-        }
-        return NONE;
+    public static PrizeGrade of(int matchCount, boolean isBonusMatch) {
+        return Arrays.stream(values())
+            .filter(prizeGrade -> prizeGrade.prizeGradeMatcher.findPrizeGrade(matchCount, isBonusMatch))
+            .findFirst()
+            .orElse(NONE);
     }
 }
