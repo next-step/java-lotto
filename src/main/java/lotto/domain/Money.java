@@ -10,7 +10,7 @@ public class Money {
         this.money = money;
     }
 
-    public int divideByThousand() {
+    public int divideByLottoPrice() {
         return money / LOTTO_PRICE;
     }
 

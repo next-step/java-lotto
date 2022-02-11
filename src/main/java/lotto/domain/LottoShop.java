@@ -18,7 +18,7 @@ public class LottoShop {
 
     public int countPossibleLottoAmount(final Money money) {
         validatePrice(money);
-        return money.divideByThousand();
+        return money.divideByLottoPrice();
     }
 
     private void validatePrice(final Money money) {
