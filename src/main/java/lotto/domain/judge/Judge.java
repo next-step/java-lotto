@@ -19,8 +19,8 @@ public class Judge {
         final List<LottoRank> lottoRanks = new ArrayList<>();
 
         lottos.get().forEach(lotto -> {
-            int matchCount = lotto.matchNumber(correctNumbers.getWinningNumbers());
-            boolean isBonus = lotto.contains(correctNumbers.getBonusNumber());
+            final int matchCount = lotto.matchNumber(correctNumbers.getWinningNumbers());
+            final boolean isBonus = lotto.contains(correctNumbers.getBonusNumber());
 
             lottoRanks.add(LottoRank.getRank(matchCount, isBonus));
         });

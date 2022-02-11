@@ -41,7 +41,7 @@ public class Lotto {
     }
 
     private Set<LottoNumber> convertToLottoNumbers(final String winningNumbers) {
-        List<Integer> numbers = Arrays.stream(winningNumbers.split(DELIMITER_COMMA))
+        final List<Integer> numbers = Arrays.stream(winningNumbers.split(DELIMITER_COMMA))
                 .map(Parser::parseInt
                 )
                 .collect(Collectors.toList());

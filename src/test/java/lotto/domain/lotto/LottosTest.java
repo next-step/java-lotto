@@ -35,7 +35,7 @@ class LottosTest {
     @Test
     void Given_로또_번호_리스트_AND_예산_When_수동로또_생성_Then_로또_번호의_수_만큼_생성() {
         // given & when
-        Lottos manualLottos = Lottos.createManualLottos(
+        final Lottos manualLottos = Lottos.createManualLottos(
                 Arrays.asList("1,2,3,4,5,6", "11,12,13,14,15,16"), new Budget("5000"));
 
         // then
@@ -53,11 +53,11 @@ class LottosTest {
     @Test
     void Given_두_개의_로또_리스트_When_합치기_Then_리스트_병합() {
         // given
-        Lottos lottos = Lottos.createAutoLottos(new Budget("2000"));
-        Lottos otherLottos = Lottos.createAutoLottos(new Budget("2000"));
+        final Lottos lottos = Lottos.createAutoLottos(new Budget("2000"));
+        final Lottos otherLottos = Lottos.createAutoLottos(new Budget("2000"));
 
         // when
-        Lottos merged = lottos.merge(otherLottos);
+        final Lottos merged = lottos.merge(otherLottos);
 
         // then
         assertThat(merged.size()).isEqualTo(4);
@@ -67,8 +67,8 @@ class LottosTest {
     @Test
     void When_리스트_get_Then_결과_등수_리스트_반환() {
         // given
-        List<LottoRank> expected = Arrays.asList(LottoRank.SECOND, LottoRank.FIFTH);
-        LottoRanks lottoRanks = new LottoRanks(expected);
+        final List<LottoRank> expected = Arrays.asList(LottoRank.SECOND, LottoRank.FIFTH);
+        final LottoRanks lottoRanks = new LottoRanks(expected);
 
         // when & then
         assertThat(lottoRanks.get()).isEqualTo(expected);
@@ -78,8 +78,8 @@ class LottosTest {
     @Test
     void When_리스트_당첨금_리스트_얻기_Then_당첨금_리스트_반환() {
         // given
-        List<LottoRank> expected = Arrays.asList(LottoRank.SECOND, LottoRank.FIFTH);
-        LottoRanks lottoRanks = new LottoRanks(expected);
+        final List<LottoRank> expected = Arrays.asList(LottoRank.SECOND, LottoRank.FIFTH);
+        final LottoRanks lottoRanks = new LottoRanks(expected);
 
         // when & then
         assertThat(lottoRanks.getAmounts()).isEqualTo(Arrays.asList(LottoRank.SECOND.getAmount(), LottoRank.FIFTH.getAmount()));

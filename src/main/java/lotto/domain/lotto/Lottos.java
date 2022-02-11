@@ -33,10 +33,10 @@ public class Lottos {
         return LottoBalls.getRandomLottoNumber();
     }
 
-    public static Lottos createManualLottos(List<String> inputManualLottoNumbers, Budget budget) {
+    public static Lottos createManualLottos(final List<String> inputManualLottoNumbers, final Budget budget) {
         budget.deduct(PRICE_OF_LOTTO * inputManualLottoNumbers.size());
 
-        List<Lotto> lottos = inputManualLottoNumbers.stream()
+        final List<Lotto> lottos = inputManualLottoNumbers.stream()
                 .map(Lotto::new)
                 .collect(Collectors.toList());
 
@@ -47,8 +47,8 @@ public class Lottos {
         return this.lottos.size();
     }
 
-    public Lottos merge(Lottos target) {
-        List<Lotto> mergedLottos = Stream.concat(this.lottos.stream(), target.get().stream())
+    public Lottos merge(final Lottos target) {
+        final List<Lotto> mergedLottos = Stream.concat(this.lottos.stream(), target.get().stream())
                 .collect(Collectors.toList());
 
         return new Lottos(mergedLottos);

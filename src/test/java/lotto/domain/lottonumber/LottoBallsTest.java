@@ -40,7 +40,7 @@ class LottoBallsTest {
     @Test
     void When_로또번호_생성_Then_로또볼_에서_6개를_뽑는다() {
         // when
-        Set<LottoNumber> lottoNumbers = LottoBalls.getRandomLottoNumber();
+        final Set<LottoNumber> lottoNumbers = LottoBalls.getRandomLottoNumber();
 
         // then
         assertThat(lottoNumbers.size()).isEqualTo(6);
@@ -50,7 +50,7 @@ class LottoBallsTest {
     @Test
     void When_로또번호_생성_Then_오른_차순_정렬됨() {
         // when
-        List<Integer> lottoNumbers = LottoBalls.getRandomLottoNumber().stream()
+        final List<Integer> lottoNumbers = LottoBalls.getRandomLottoNumber().stream()
                 .map(LottoNumber::getValue)
                 .collect(Collectors.toList());
 
@@ -71,7 +71,7 @@ class LottoBallsTest {
     @DisplayName("넘겨준 리스트 값에 해당하는 로또 번호 객체 리스트를 반환한다.")
     @Test
     void When_정상번호_리스트_Then_값들에_해당하는_로또_번호_객체_리스트_반환() {
-        List<Integer> returnValues = LottoBalls.of(Arrays.asList(3, 4, 5, 6, 7, 8)).stream()
+        final List<Integer> returnValues = LottoBalls.of(Arrays.asList(3, 4, 5, 6, 7, 8)).stream()
                 .map(LottoNumber::getValue)
                 .collect(Collectors.toList());
 

@@ -34,7 +34,7 @@ class BudgetTest {
     @Test
     void Given_로또_가격보다_큰_투입_금액_When_구매가능_수_구하기_Then_구매_가능한_로또_수_반환() {
         // given & when
-        int numberOfPurchase = new Budget("5000").getNumberOfPurchase(1000);
+        final int numberOfPurchase = new Budget("5000").getNumberOfPurchase(1000);
 
         // then
         assertThat(numberOfPurchase).isEqualTo(5);
@@ -59,7 +59,7 @@ class BudgetTest {
     @Test
     void Given_차감_금액보다_큰_투입_금액_When_금액만큼_차감_Then_value값_차감() {
         // given
-        Budget budget = new Budget("5000");
+        final Budget budget = new Budget("5000");
 
         // when
         budget.deduct(1000);

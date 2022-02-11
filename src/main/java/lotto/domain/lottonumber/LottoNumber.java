@@ -6,11 +6,11 @@ public class LottoNumber implements Comparable {
 
     private final int value;
 
-    LottoNumber(int value) {
+    LottoNumber(final int value) {
         this.value = value;
     }
 
-    public static LottoNumber from(int value){
+    public static LottoNumber from(final int value){
         return LottoBalls.from(value);
     }
 

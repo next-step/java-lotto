@@ -21,10 +21,10 @@ class LottoTest {
     @Test
     void Given_숫자_리스트_When_객체_생성_Then_숫자_리스트를_잘_가지고_있음() {
         // given
-        Set<LottoNumber> numbers = lottoNumbers;
+        final Set<LottoNumber> numbers = lottoNumbers;
 
         // when
-        Lotto lotto = new Lotto(numbers);
+        final Lotto lotto = new Lotto(numbers);
 
         // then
         assertThat(lotto.get()).isEqualTo(numbers);
@@ -34,11 +34,11 @@ class LottoTest {
     @Test
     void Given_정답_번호_When_로또_번호와_비교_Then_맞은_수_반환() {
         // given
-        Lotto lotto = new Lotto(lottoNumbers);
+        final Lotto lotto = new Lotto(lottoNumbers);
         Set<LottoNumber> winnigNumbers = createLottoNumbers(1,2,3,4,5,7);
 
         // when
-        int matchNumber = lotto.matchNumber(winnigNumbers);
+        final int matchNumber = lotto.matchNumber(winnigNumbers);
 
         // then
         assertThat(matchNumber).isEqualTo(5);
@@ -48,10 +48,10 @@ class LottoTest {
     @Test
     void Given_보너스_번호_When_포함하는지_비교_Then_true_반환() {
         // given
-        Lotto lotto = new Lotto(lottoNumbers);
+        final Lotto lotto = new Lotto(lottoNumbers);
 
         // when
-        boolean isBonus = lotto.contains(LottoNumber.from(5));
+        final boolean isBonus = lotto.contains(LottoNumber.from(5));
 
         // then
         assertThat(isBonus).isEqualTo(true);
@@ -61,10 +61,10 @@ class LottoTest {
     @Test
     void Given_보너스_번호_When_포함하는지_비교_Then_false_반환() {
         // given
-        Lotto lotto = new Lotto(lottoNumbers);
+        final Lotto lotto = new Lotto(lottoNumbers);
 
         // when
-        boolean isBonus = lotto.contains(LottoNumber.from(7));
+        final boolean isBonus = lotto.contains(LottoNumber.from(7));
 
         // then
         assertThat(isBonus).isEqualTo(false);
@@ -99,7 +99,7 @@ class LottoTest {
     }
 
     private Set<LottoNumber> createLottoNumbers(int... numbers) {
-        Set<LottoNumber> lottoNumbers = new HashSet<>();
+        final Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (int num : numbers) {
             lottoNumbers.add(LottoNumber.from(num));
         }

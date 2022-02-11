@@ -13,8 +13,8 @@ public class CorrectNumbers {
     private final LottoNumber bonusNumber;
 
     public CorrectNumbers(final String inputWinningNumbers, final String inputBonusNumber) {
-        Lotto lotto = new Lotto(inputWinningNumbers);
-        LottoNumber bonusNumber = LottoNumber.from(Parser.parseInt(inputBonusNumber));
+        final Lotto lotto = new Lotto(inputWinningNumbers);
+        final LottoNumber bonusNumber = LottoNumber.from(Parser.parseInt(inputBonusNumber));
         validateDuplicateNumber(lotto, bonusNumber);
 
         this.winningNumbers = lotto;

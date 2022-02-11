@@ -31,7 +31,7 @@ public class LottoBalls {
         return new TreeSet<>(copyNumbers.subList(0, NUMBER_OF_LOTTO_BALL));
     }
 
-    private static void shuffle(List<LottoNumber> numbers) {
+    private static void shuffle(final List<LottoNumber> numbers) {
         Collections.shuffle(numbers);
     }
 
