@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Set;
+import lotto.utils.Parser;
 
 public class CorrectNumbers {
 
@@ -11,7 +12,7 @@ public class CorrectNumbers {
 
     public CorrectNumbers(final String inputWinningNumbers, final String inputBonusNumber) {
         Lotto lotto = new Lotto(inputWinningNumbers);
-        LottoNumber bonusNumber = new LottoNumber(inputBonusNumber);
+        LottoNumber bonusNumber = new LottoNumber(Parser.parseInt(inputBonusNumber));
         validateDuplicateNumber(lotto, bonusNumber);
 
         this.winningNumbers = lotto;

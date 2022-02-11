@@ -17,8 +17,7 @@ public class LottoBalls {
 
     private static final List<LottoNumber> BALLS = new ArrayList<>(
             IntStream.range(LOTTO_START_NUMBER, LOTTO_END_NUMBER + 1)
-                    .mapToObj(String::valueOf)
-                    .map(LottoNumber::new)
+                    .mapToObj(LottoNumber::new)
                     .collect(Collectors.toList()));
 
     private LottoBalls() {}

@@ -12,11 +12,9 @@ public class LottoNumber implements Comparable{
 
     private final int value;
 
-    public LottoNumber(String value) {
-        int number = Parser.parseInt(value);
-        validateLottoNumberRange(number);
-
-        this.value = number;
+    public LottoNumber(int value) {
+        validateLottoNumberRange(value);
+        this.value = value;
     }
 
     private void validateLottoNumberRange(final int value) {

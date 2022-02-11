@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
+import lotto.utils.Parser;
 
 public class Lotto {
 
@@ -41,7 +42,7 @@ public class Lotto {
         String[] split = winningNumbers.split(DELIMITER_COMMA);
 
         return Arrays.stream(split)
-                .map(LottoNumber::new)
+                .map(value -> new LottoNumber(Parser.parseInt(value)))
                 .collect(Collectors.toCollection(TreeSet::new));
     }
 
