@@ -34,15 +34,15 @@ public class LottoStatistics {
         return Rank.getRank(count);
     }
 
+    private boolean matchBonusNumber(final int count, final Lotto lottoNumberList) {
+        return count == MATCH_FIVE && lottoNumberList.getLottoNumber()
+            .contains(winningLottery.getBonusNumber());
+    }
+
     private int matchWinningNumbers(final Lotto lottoNumberList) {
         return lottoNumberList.getLottoNumber().stream()
             .filter(x -> isWinningNumber(x))
             .collect(Collectors.toSet()).size();
-    }
-
-    private boolean matchBonusNumber(final int count, final Lotto lottoNumberList) {
-        return count == MATCH_FIVE && lottoNumberList.getLottoNumber()
-            .contains(winningLottery.getBonusNumber());
     }
 
     private boolean isWinningNumber(final LottoNumber lottoNumber) {
