@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
-import lotto.domain.Money;
 import lotto.domain.Ranking;
 
 public class LottoResultView {
@@ -26,8 +25,6 @@ public class LottoResultView {
     private static final String SPACE = " ";
     private static final String COMMA = ",";
     private static final String LOTTO_AMOUNT_MESSAGE = "개를 구매했습니다.";
-
-    private int totalWinnerPrice = ZERO;
 
     public void printLottos(final Lottos lottos) {
         printAmount(lottos);
@@ -48,7 +45,7 @@ public class LottoResultView {
         System.out.println(numbers);
     }
 
-    public void finishGame(final Map<Ranking, Integer> totalResult, final Money money) {
+    public void finishGame(final Map<Ranking, Integer> totalResult, final double totalWinnerPrize) {
         System.out.println(LOTTO_STATISTICS_MESSAGE);
         System.out.println(HYPHEN_MESSAGE);
 
@@ -56,39 +53,38 @@ public class LottoResultView {
         Collections.sort(rankings);
         Collections.reverse(rankings);
 
-        rankings.forEach(key ->
-            process(key, totalResult.get(key)));
-
-        printYield(money);
+        rankings.forEach(ranking -> printLottoResult(ranking, totalResult.get(ranking)));
+        printYield(totalWinnerPrize);
     }
 
-    private void printYield(final Money money) {
+    private void printYield(final double totalWinnerPrice) {
         System.out.printf(
-            TOTAL_YIELD_MESSAGE + String.format("%.2f",
-                (double) totalWinnerPrice / money.getMoney())
-                + FINISH_MESSAGE);
+            TOTAL_YIELD_MESSAGE + String.format("%.2f", totalWinnerPrice) + FINISH_MESSAGE);
     }
 
-    private void process(final Ranking ranking, final Integer count) {
+    private void printLottoResult(final Ranking ranking, final Integer count) {
+        final StringBuilder stringBuilder = new StringBuilder();
+
         if (ranking.isFail()) {
             return;
         }
 
+        stringBuilder.append(OPENING_PARENTHESIS)
+            .append(ranking.getWinnerPrice())
+            .append(WON_MESSAGE)
+            .append(count)
+            .append(AMOUNT_MESSAGE);
+
         if (ranking.equals(Ranking.SECOND)) {
-            System.out.println(
+            stringBuilder.insert(0,
                 ranking.getNormalNumberMatchCount() + MATCH_AMOUNT_MESSAGE + COMMA + SPACE
-                    + BONUS_BALL_MATCH_MESSAGE
-                    + OPENING_PARENTHESIS
-                    + ranking.getWinnerPrice() + WON_MESSAGE
-                    + count + AMOUNT_MESSAGE);
+                    + BONUS_BALL_MATCH_MESSAGE);
+            System.out.println(stringBuilder);
+            return;
         }
 
-        System.out.println(
-            ranking.getNormalNumberMatchCount() + MATCH_AMOUNT_MESSAGE + SPACE + OPENING_PARENTHESIS
-                + ranking.getWinnerPrice() + WON_MESSAGE
-                + count + AMOUNT_MESSAGE);
-
-        totalWinnerPrice += ranking.multiplyCountAndWinnerPrice(count);
+        stringBuilder.insert(0, ranking.getNormalNumberMatchCount()
+            + MATCH_AMOUNT_MESSAGE + SPACE);
+        System.out.println(stringBuilder);
     }
-
 }

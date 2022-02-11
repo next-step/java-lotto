@@ -41,7 +41,7 @@ public class LottoController {
         final WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), bonusBall);
         final LottoGame lottoGame = new LottoGame(lottos, winningLotto);
         final Map<Ranking, Integer> totalResult = lottoGame.findWinner();
-        lottoResultView.finishGame(totalResult, money);
+        lottoResultView.finishGame(totalResult, lottoGame.calculateYield(totalResult, money));
     }
 
     private List<LottoNumber> createWinningNumbers() {

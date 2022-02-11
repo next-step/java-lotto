@@ -1,7 +1,10 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +40,20 @@ public class LottoGame {
     private void updateResults(final Map<Ranking, Integer> totalResult, final Ranking ranking) {
         Integer currentCount = totalResult.get(ranking);
         totalResult.put(ranking, ++currentCount);
+    }
+
+    public double calculateYield(final Map<Ranking, Integer> totalResult, final Money money) {
+        final List<Ranking> rankings = new ArrayList<>(totalResult.keySet());
+
+        final int totalWinnerPrize = rankings.stream()
+            .mapToInt(ranking -> process(ranking, totalResult.get(ranking)))
+            .sum();
+
+        return totalWinnerPrize / money.getMoney();
+    }
+
+    private int process(Ranking ranking, Integer count) {
+        return ranking.multiplyCountAndWinnerPrice(count);
     }
 
     public Lottos getLottos() {
