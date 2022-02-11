@@ -1,7 +1,10 @@
 package calculator.util;
 
+import calculator.domain.NumberTokens;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -9,26 +12,20 @@ public class Tokenizer {
 
     private static final String STANDARD_DELIMITER_COMMA = ",";
     private static final String STANDARD_DELIMITER_COLON = ":";
+    private static final List<Integer> EMPTY = new ArrayList<>();
 
-    private final List<Integer> tokenizedNumbers;
+    private final NumberTokens numberTokens;
 
     public Tokenizer(String text) {
-        this.tokenizedNumbers = tokenize(text);
-    }
-
-    public static List<Integer> parseInt(String[] tokens) {
-        try {
-            return Arrays.stream(tokens).map(Integer::parseInt).collect(Collectors.toList());
-        } catch (NumberFormatException | NullPointerException e) {
-            throw new IllegalArgumentException("[ERROR] 지정된 구분자 외의 문자열이 있습니다.");
-        }
-    }
-
-    public static boolean isCustomDelimiter(String text) {
-        return Pattern.compile("//(.)\n(.*)").matcher(text).find();
+        this.numberTokens = new NumberTokens(tokenize(text));
+        System.out.println();
     }
 
     private List<Integer> tokenize(String text) {
+        if (isEmptyOrNull(text)) {
+            return EMPTY;
+        }
+
         if (isCustomDelimiter(text)) {
             final String CUSTOM_DELIMITER = text.substring(text.indexOf("/") + 2,
                 text.indexOf("\n"));
@@ -47,7 +44,23 @@ public class Tokenizer {
             .split(STANDARD_DELIMITER_COMMA + "|" + STANDARD_DELIMITER_COLON));
     }
 
-    public List<Integer> getTokenizedNumbers() {
-        return tokenizedNumbers;
+    private boolean isEmptyOrNull(String text) {
+        return Objects.isNull(text) || text.isEmpty();
+    }
+
+    public static List<Integer> parseInt(String[] tokens) {
+        try {
+            return Arrays.stream(tokens).map(Integer::parseInt).collect(Collectors.toList());
+        } catch (NumberFormatException | NullPointerException e) {
+            throw new IllegalArgumentException("[ERROR] 지정된 구분자 외의 문자열이 있습니다.");
+        }
+    }
+
+    public static boolean isCustomDelimiter(String text) {
+        return Pattern.compile("//(.)\n(.*)").matcher(text).find();
+    }
+
+    public NumberTokens getTokenizedNumbers() {
+        return numberTokens;
     }
 }

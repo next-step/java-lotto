@@ -1,38 +1,32 @@
 package calculator.domain;
 
-import calculator.util.Tokenizer;
-import java.util.Objects;
+import java.util.List;
 
 public class StringCalculator {
 
-    private final String text;
+    private final int result;
 
-    public StringCalculator(String text) {
-        this.text = text;
+    public StringCalculator(NumberTokens numberTokens) {
+        validateNegative(numberTokens.getNumbers());
+        this.result = createResult(numberTokens.getNumbers());
     }
 
-    public int add() {
-        if (isEmptyOrNull(text)) {
+    public int createResult(List<Integer> tokenized)  {
+        if(tokenized.isEmpty()) {
             return 0;
         }
-
-        Tokenizer tokenizer = new Tokenizer(text);
-        int result = 0;
-        for (Integer number : tokenizer.getTokenizedNumbers()) {
-            validateNegative(number);
-            result += number;
-        }
-
-        return result;
+        return tokenized.stream().mapToInt(number -> number).sum();
     }
 
-    private boolean isEmptyOrNull(String text) {
-        return Objects.isNull(text) || text.isEmpty();
-    }
-
-    private void validateNegative(Integer number) {
-        if (number < 0) {
+    private void validateNegative(List<Integer> tokenized) {
+        if(tokenized.stream().anyMatch(number -> number < 0)) {
             throw new IllegalArgumentException("[ERROR] 음수는 입력할 수 없습니다.");
         }
+        tokenized.clear();
+        System.out.println(tokenized);
+    }
+
+    public int getResult() {
+        return result;
     }
 }
