@@ -3,8 +3,6 @@ package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.IntStream;
 
 public class LottoNumber {
     private static final int MIN_LOTTO_NUMBER = 1;
