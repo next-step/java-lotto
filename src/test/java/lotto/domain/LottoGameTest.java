@@ -13,30 +13,26 @@ import org.junit.jupiter.api.Test;
 
 class LottoGameTest {
 
-    LottoGame lottoGame;
-    Lottos lottos;
+    private LottoGame lottoGame;
+    private Lottos lottos;
 
     @BeforeEach
     void setUp() {
         lottos = new Lottos(new ArrayList<>());
 
-        lottos.storeLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6).stream()
-            .map(LottoNumber::new)
-            .collect(Collectors.toList())));
-
-        lottos.storeLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 8, 6).stream()
-            .map(LottoNumber::new)
-            .collect(Collectors.toList())));
-
-        lottos.storeLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 7, 10).stream()
-            .map(LottoNumber::new)
-            .collect(Collectors.toList())));
-
-        lottos.storeLotto(new Lotto(Arrays.asList(1, 2, 3, 7, 10, 9).stream()
-            .map(LottoNumber::new)
-            .collect(Collectors.toList())));
+        lottos.storeLotto(createLotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lottos.storeLotto(createLotto(Arrays.asList(1, 2, 3, 4, 8, 6)));
+        lottos.storeLotto(createLotto(Arrays.asList(1, 2, 3, 4, 7, 10)));
+        lottos.storeLotto(createLotto(Arrays.asList(1, 2, 3, 7, 10, 9)));
 
         lottoGame = new LottoGame(lottos);
+    }
+
+    private Lotto createLotto(final List<Integer> numbers) {
+        return new Lotto(
+            numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
     }
 
     @Test
@@ -54,7 +50,7 @@ class LottoGameTest {
 
         LottoNumber bonusBall = new LottoNumber(8);
 
-        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusBall);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumber), bonusBall);
 
         Map<Ranking, Integer> totalResult = lottoGame.findWinner(winningLotto);
 
