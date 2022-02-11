@@ -58,8 +58,4 @@ public class LottoBalls {
     private static boolean isNotLottoNumberRange(final int value) {
         return value < LOTTO_START_NUMBER || value > LOTTO_END_NUMBER;
     }
-
-    public static List<LottoNumber> get() {
-        return BALLS;
-    }
 }
