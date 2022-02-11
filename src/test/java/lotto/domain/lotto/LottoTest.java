@@ -51,7 +51,7 @@ class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
 
         // when
-        boolean isBonus = lotto.contains(new LottoNumber(5));
+        boolean isBonus = lotto.contains(LottoNumber.from(5));
 
         // then
         assertThat(isBonus).isEqualTo(true);
@@ -64,7 +64,7 @@ class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
 
         // when
-        boolean isBonus = lotto.contains(new LottoNumber(7));
+        boolean isBonus = lotto.contains(LottoNumber.from(7));
 
         // then
         assertThat(isBonus).isEqualTo(false);
@@ -101,7 +101,7 @@ class LottoTest {
     private Set<LottoNumber> createLottoNumbers(int... numbers) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (int num : numbers) {
-            lottoNumbers.add(new LottoNumber(num));
+            lottoNumbers.add(LottoNumber.from(num));
         }
 
         return lottoNumbers;
