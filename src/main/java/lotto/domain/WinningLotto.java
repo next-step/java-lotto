@@ -17,17 +17,13 @@ public class WinningLotto {
 
     public Ranking matchLotto(final Lotto lotto) {
         final int normalNumberMatchCount = countNormalSuccessNumber(lotto);
-        final boolean isMatchedBonusNumber = countBonusNumber(lotto);
+        final boolean isMatchedBonusNumber = lotto.hasBonusBall(bonusBall);
         return Ranking.judgeRanking(normalNumberMatchCount, isMatchedBonusNumber);
     }
 
     private int countNormalSuccessNumber(Lotto lotto) {
-        Set<LottoNumber> lottoDuplicate = new HashSet<>(winningNumbers.getLottoNumbers());
-        lottoDuplicate.addAll(lotto.getLottoNumbers());
-        return STANDARD_NUMBER - lottoDuplicate.size();
-    }
-
-    private boolean countBonusNumber(final Lotto lotto) {
-        return lotto.getLottoNumbers().contains(bonusBall);
+        Set<LottoNumber> lottoDeduplicate = new HashSet<>(winningNumbers.getLottoNumbers());
+        lottoDeduplicate.addAll(lotto.getLottoNumbers());
+        return STANDARD_NUMBER - lottoDeduplicate.size();
     }
 }

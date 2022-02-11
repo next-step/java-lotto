@@ -40,6 +40,10 @@ public class Lotto {
         }
     }
 
+    public boolean hasBonusBall(final LottoNumber bonusBall) {
+        return lottoNumbers.contains(bonusBall);
+    }
+
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
