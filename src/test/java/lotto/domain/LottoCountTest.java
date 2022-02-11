@@ -41,12 +41,13 @@ public class LottoCountTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1, 1, 0", "4, 1, 3", "1000, 500, 500"})
-    void 두_개수의_차를_구할_수_있다(String lottoCount1, String lottoCount2, int answer) {
+    @CsvSource(value = {"4, 1, 3", "1000, 500, 500"})
+    void 두_개수의_차를_구할_수_있다(String lottoCount1, String lottoCount2, String answer) {
         LottoCount leftCount = LottoCount.from(lottoCount1);
         LottoCount rightCount = LottoCount.from(lottoCount2);
-        LottoCount answerCount = leftCount.minus(rightCount);
-        assertThat(answerCount.count()).isEqualTo(answer);
+        LottoCount actual = leftCount.minus(rightCount);
+        LottoCount expected = LottoCount.from(answer);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @ParameterizedTest
