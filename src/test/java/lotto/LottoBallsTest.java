@@ -46,7 +46,7 @@ class LottoBallsTest {
     @Test
     void When_로또번호_생성_Then_로또볼_에서_6개를_뽑는다() {
         // when
-        Set<LottoNumber> lottoNumbers = LottoBalls.createLottoNumber();
+        Set<LottoNumber> lottoNumbers = LottoBalls.getRandomLottoNumber();
 
         // then
         assertThat(lottoNumbers.size()).isEqualTo(6);
@@ -56,7 +56,7 @@ class LottoBallsTest {
     @Test
     void When_로또번호_생성_Then_오른_차순_정렬됨() {
         // when
-        List<Integer> lottoNumbers = LottoBalls.createLottoNumber().stream()
+        List<Integer> lottoNumbers = LottoBalls.getRandomLottoNumber().stream()
                 .map(LottoNumber::getValue)
                 .collect(Collectors.toList());
 

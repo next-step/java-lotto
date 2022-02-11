@@ -29,7 +29,7 @@ public class Lottos {
     }
 
     private static Set<LottoNumber> createRandomNumbers() {
-        return LottoBalls.createLottoNumber();
+        return LottoBalls.getRandomLottoNumber();
     }
 
     public static Lottos createManualLottos(List<String> inputManualLottoNumbers, Budget budget) {

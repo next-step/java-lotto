@@ -27,7 +27,7 @@ public class LottoBalls {
         Collections.shuffle(BALLS);
     }
 
-    public static Set<LottoNumber> createLottoNumber() {
+    public static Set<LottoNumber> getRandomLottoNumber() {
         return new TreeSet<>(BALLS.subList(0, NUMBER_OF_LOTTO_BALL));
     }
 
