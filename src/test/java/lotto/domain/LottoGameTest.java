@@ -41,7 +41,7 @@ class LottoGameTest {
 
     @Test
     void 내부에_모든_로또를_저장할_수_있다() {
-        Lottos lottos = lottoGame.handOverLottos();
+        Lottos lottos = lottoGame.getLottos();
 
         assertThat(lottos.getLottos().size()).isEqualTo(4);
     }

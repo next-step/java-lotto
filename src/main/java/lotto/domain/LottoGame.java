@@ -15,9 +15,6 @@ public class LottoGame {
         this.lottos = lottos;
     }
 
-    public Lottos handOverLottos() {
-        return lottos;
-    }
 
     public Map<Ranking, Integer> findWinner(final WinningLotto winningLotto,
         final Lottos userLottos) {
@@ -39,4 +36,7 @@ public class LottoGame {
             .forEach(ranking -> totalResult.put(ranking, ZERO));
     }
 
+    public Lottos getLottos() {
+        return lottos;
+    }
 }
