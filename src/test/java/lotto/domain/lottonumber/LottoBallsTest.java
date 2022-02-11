@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain.lottonumber;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -8,8 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import lotto.domain.lottonumber.LottoBalls;
-import lotto.domain.lottonumber.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -57,8 +55,8 @@ class LottoBallsTest {
                 .collect(Collectors.toList());
 
         // then
-        int prev= 0;
-        for(int number : lottoNumbers){
+        int prev = 0;
+        for (int number : lottoNumbers) {
             assertTrue(number > prev);
             prev = number;
         }
@@ -78,7 +76,7 @@ class LottoBallsTest {
                 .collect(Collectors.toList());
 
         // then
-        assertThat(returnValues).isEqualTo(Arrays.asList(3,4,5,6,7,8));
+        assertThat(returnValues).isEqualTo(Arrays.asList(3, 4, 5, 6, 7, 8));
     }
 
     @DisplayName("로또 번호 하나를 가져올 때 1 ~ 45 범위의 숫자가 아니면 예외가 발생한다.")
@@ -92,6 +90,7 @@ class LottoBallsTest {
     @Test
     void When_로또_숫자_범위를_벗어난_여러개의_수_Then_예외_발생() {
         // then
-        assertThrows(IllegalArgumentException.class, () -> LottoBalls.of(Arrays.asList(1,2,3,4,5,46)));
+        assertThrows(IllegalArgumentException.class,
+                () -> LottoBalls.of(Arrays.asList(1, 2, 3, 4, 5, 46)));
     }
 }

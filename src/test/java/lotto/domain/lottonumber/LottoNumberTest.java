@@ -1,8 +1,7 @@
-package lotto.domain;
+package lotto.domain.lottonumber;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import lotto.domain.lottonumber.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
