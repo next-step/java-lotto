@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoShop;
@@ -32,22 +33,19 @@ public class LottoController {
         final LottoShop lottoShop = LottoShop.getInstance();
         final int lottoAmount = lottoShop.countPossibleLottoAmount(money);
 
-        final LottoGame lottoGame = new LottoGame(lottoShop.buyLotto(lottoAmount));
-        final Lottos lottos = lottoGame.getLottos();
-
+        Lottos lottos = lottoShop.buyLotto(lottoAmount);
         lottoResultView.printLottos(lottos);
 
-        final List<LottoNumber> winningNumbers = collectWinningNumber(lottoInputView.inputWinningNumber());
+        final List<LottoNumber> winningNumbers = createWinningNumbers();
         final LottoNumber bonusBall = new LottoNumber(lottoInputView.inputBonusBall());
-
-        final WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusBall);
-
-        final Map<Ranking, Integer> totalResult = lottoGame.findWinner(winningLotto, lottos);
+        final WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), bonusBall);
+        final LottoGame lottoGame = new LottoGame(lottos, winningLotto);
+        final Map<Ranking, Integer> totalResult = lottoGame.findWinner();
         lottoResultView.finishGame(totalResult, money);
     }
 
-    private List<LottoNumber> collectWinningNumber(final String[] winningNumber) {
-        return Arrays.stream(winningNumber)
+    private List<LottoNumber> createWinningNumbers() {
+        return Arrays.stream(lottoInputView.inputWinningNumber())
             .map(Integer::parseInt)
             .map(LottoNumber::new)
             .collect(Collectors.toList());
