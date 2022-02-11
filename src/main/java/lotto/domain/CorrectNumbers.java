@@ -12,7 +12,7 @@ public class CorrectNumbers {
 
     public CorrectNumbers(final String inputWinningNumbers, final String inputBonusNumber) {
         Lotto lotto = new Lotto(inputWinningNumbers);
-        LottoNumber bonusNumber = new LottoNumber(Parser.parseInt(inputBonusNumber));
+        LottoNumber bonusNumber = LottoNumber.from(Parser.parseInt(inputBonusNumber));
         validateDuplicateNumber(lotto, bonusNumber);
 
         this.winningNumbers = lotto;

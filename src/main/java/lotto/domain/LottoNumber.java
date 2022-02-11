@@ -11,8 +11,8 @@ public class LottoNumber implements Comparable {
         this.value = value;
     }
 
-    private void validateLottoNumberRange(final int value) {
-        if (isNotLottoNumberRange(value)) {
+    public static LottoNumber from(int value){
+        return LottoBalls.from(value);
     }
 
     public int getValue() {

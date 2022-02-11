@@ -42,6 +42,11 @@ public class LottoBalls {
                 .collect(Collectors.toCollection(TreeSet::new));
     }
 
+    public static LottoNumber from(final int value) {
+        validateLottoNumberRange(value);
+        return BALLS.get(value - DIFFERENCE_FROM_INDEX);
+    }
+
     private static void validateLottoNumberRange(final int value) {
         if (isNotLottoNumberRange(value)) {
             throw new IllegalArgumentException(OUT_OF_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE);
