@@ -1,24 +1,25 @@
 package lotto.domain.lottogenerator;
 
 import java.util.Arrays;
-import java.util.Set;
 import java.util.stream.Collectors;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 
 public class ManualLottoGenerator implements LottoGenerator {
 
     private static final String DELIMITER = ",";
 
-    private final Set<Integer> lottoNumbers;
+    private final Lotto lotto;
 
     public ManualLottoGenerator(String manualLotto) {
-        this.lottoNumbers = Arrays.stream(manualLotto.split(DELIMITER))
+        this.lotto = Arrays.stream(manualLotto.split(DELIMITER))
             .map(String::trim)
-            .map(Integer::parseInt)
-            .collect(Collectors.toSet());
+            .map(LottoNumber::new)
+            .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
     }
 
     @Override
-    public Set<Integer> generateLotto() {
-        return lottoNumbers;
+    public Lotto generateLotto() {
+        return lotto;
     }
 }

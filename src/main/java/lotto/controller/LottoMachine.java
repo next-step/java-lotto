@@ -25,11 +25,10 @@ public class LottoMachine {
 
     public static LottoTicket purchaseLotto(LottoCount autoCount, List<String> manualLottos) {
         List<Lotto> lottos = manualLottos.stream()
-            .map(str -> generateLottoNumber(new ManualLottoGenerator(str)))
-            .map(Lotto::new)
+            .map(str -> generateLotto(new ManualLottoGenerator(str)))
             .collect(Collectors.toList());
         lottos.addAll(IntStream.range(0, autoCount.count())
-            .mapToObj((i) -> new Lotto(generateLottoNumber(new RandomLottoGenerator())))
+            .mapToObj((i) -> generateLotto(new RandomLottoGenerator()))
             .collect(Collectors.toList()));
         return new LottoTicket(lottos);
     }
@@ -69,11 +68,7 @@ public class LottoMachine {
         OutputView.printEachLotto(lottoNumber);
     }
 
-    private static List<LottoNumber> generateLottoNumber(LottoGenerator lottoGenerator) {
-        return lottoGenerator.generateLotto()
-            .stream()
-            .sorted()
-            .map(LottoNumber::new)
-            .collect(Collectors.toList());
+    private static Lotto generateLotto(LottoGenerator lottoGenerator) {
+        return lottoGenerator.generateLotto();
     }
 }

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 
 public class RandomLottoGenerator implements LottoGenerator {
 
@@ -21,9 +23,11 @@ public class RandomLottoGenerator implements LottoGenerator {
     }
 
     @Override
-    public Set<Integer> generateLotto() {
+    public Lotto generateLotto() {
         Collections.shuffle(LOTTO);
-        List<Integer> cut = LOTTO.subList(0, LOTTO_SIZE_BOUND);
-        return new HashSet<>(cut);
+        return LOTTO.subList(0, LOTTO_SIZE_BOUND)
+            .stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
     }
 }

@@ -1,9 +1,9 @@
 package lotto.domain.lottogenerator;
 
-import java.util.Set;
+import lotto.domain.lotto.Lotto;
 
 @FunctionalInterface
 public interface LottoGenerator {
 
-    Set<Integer> generateLotto();
+    Lotto generateLotto();
 }
