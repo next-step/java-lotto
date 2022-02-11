@@ -21,6 +21,13 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
+    public static Lotto from(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = numbers.stream()
+            .map(LottoNumber::from)
+            .collect(Collectors.toList());
+        return new Lotto(lottoNumbers);
+    }
+
     private void validateLotto(List<LottoNumber> numbers) {
         Set<LottoNumber> lottoNumbers = new HashSet<>(numbers);
 
