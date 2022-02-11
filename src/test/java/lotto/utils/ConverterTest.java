@@ -15,12 +15,12 @@ class ConverterTest {
 
     static {
         List<LottoNumber> testNumbers = Arrays.asList(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)
+            LottoNumber.from(1),
+            LottoNumber.from(2),
+            LottoNumber.from(3),
+            LottoNumber.from(4),
+            LottoNumber.from(5),
+            LottoNumber.from(6)
         );
         testLotto = Lotto.of(testNumbers);
     }

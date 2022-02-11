@@ -45,7 +45,7 @@ public class LottoController {
     private WinningLotto getWinningLotto() {
         try {
             Lotto winningLotto = Converter.inputToLotto(InputView.inputWinningNumbers());
-            LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
+            LottoNumber bonusNumber = LottoNumber.from(InputView.inputBonusNumber());
             return new WinningLotto(winningLotto, bonusNumber);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();

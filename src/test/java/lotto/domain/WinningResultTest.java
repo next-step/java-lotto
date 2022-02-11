@@ -17,15 +17,15 @@ class WinningResultTest {
     @BeforeEach
     void beforeEach() {
         List<LottoNumber> testNumbers = Arrays.asList(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)
+            LottoNumber.from(1),
+            LottoNumber.from(2),
+            LottoNumber.from(3),
+            LottoNumber.from(4),
+            LottoNumber.from(5),
+            LottoNumber.from(6)
         );
         Lotto testLotto = Lotto.of(testNumbers);
-        LottoNumber testBonus = new LottoNumber(7);
+        LottoNumber testBonus = LottoNumber.from(7);
         WinningLotto testWinningLotto = new WinningLotto(testLotto, testBonus);
         testWinningResult = new WinningResult(testWinningLotto);
     }
@@ -34,39 +34,39 @@ class WinningResultTest {
     @Test
     void 결과가_1등_1개_2등_1개_3등_2개인_경우() {
         List<LottoNumber> first = Arrays.asList(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)
+            LottoNumber.from(1),
+            LottoNumber.from(2),
+            LottoNumber.from(3),
+            LottoNumber.from(4),
+            LottoNumber.from(5),
+            LottoNumber.from(6)
         );
 
         List<LottoNumber> second = Arrays.asList(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(7)
+            LottoNumber.from(1),
+            LottoNumber.from(2),
+            LottoNumber.from(3),
+            LottoNumber.from(4),
+            LottoNumber.from(5),
+            LottoNumber.from(7)
         );
 
         List<LottoNumber> third1 = Arrays.asList(
-            new LottoNumber(11),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)
+            LottoNumber.from(11),
+            LottoNumber.from(2),
+            LottoNumber.from(3),
+            LottoNumber.from(4),
+            LottoNumber.from(5),
+            LottoNumber.from(6)
         );
 
         List<LottoNumber> third2 = Arrays.asList(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(41),
-            new LottoNumber(5),
-            new LottoNumber(6)
+            LottoNumber.from(1),
+            LottoNumber.from(2),
+            LottoNumber.from(3),
+            LottoNumber.from(41),
+            LottoNumber.from(5),
+            LottoNumber.from(6)
         );
 
         List<Lotto> lottos = Arrays.asList(
@@ -88,30 +88,30 @@ class WinningResultTest {
     @Test
     void 로또_3개_중_4등_1개_5등_1개_꽝_1개인_경우() {
         List<LottoNumber> fourth = Arrays.asList(
-            new LottoNumber(11),
-            new LottoNumber(21),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)
+            LottoNumber.from(11),
+            LottoNumber.from(21),
+            LottoNumber.from(3),
+            LottoNumber.from(4),
+            LottoNumber.from(5),
+            LottoNumber.from(6)
         );
 
         List<LottoNumber> fifth = Arrays.asList(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(14),
-            new LottoNumber(15),
-            new LottoNumber(16)
+            LottoNumber.from(1),
+            LottoNumber.from(2),
+            LottoNumber.from(3),
+            LottoNumber.from(14),
+            LottoNumber.from(15),
+            LottoNumber.from(16)
         );
 
         List<LottoNumber> none = Arrays.asList(
-            new LottoNumber(11),
-            new LottoNumber(12),
-            new LottoNumber(13),
-            new LottoNumber(14),
-            new LottoNumber(15),
-            new LottoNumber(6)
+            LottoNumber.from(11),
+            LottoNumber.from(12),
+            LottoNumber.from(13),
+            LottoNumber.from(14),
+            LottoNumber.from(15),
+            LottoNumber.from(6)
         );
 
         List<Lotto> lottos = Arrays.asList(

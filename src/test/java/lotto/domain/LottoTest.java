@@ -13,11 +13,11 @@ class LottoTest {
     @Test
     void 숫자_6개_보다_적은_경우() {
         List<LottoNumber> numbers = Arrays.asList(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5)
+            LottoNumber.from(1),
+            LottoNumber.from(2),
+            LottoNumber.from(3),
+            LottoNumber.from(4),
+            LottoNumber.from(5)
         );
 
         assertThatExceptionOfType(IllegalArgumentException.class)
@@ -28,13 +28,13 @@ class LottoTest {
     @Test
     void 숫자_6개_보다_많은_경우() {
         List<LottoNumber> numbers = Arrays.asList(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6),
-            new LottoNumber(7)
+            LottoNumber.from(1),
+            LottoNumber.from(2),
+            LottoNumber.from(3),
+            LottoNumber.from(4),
+            LottoNumber.from(5),
+            LottoNumber.from(6),
+            LottoNumber.from(7)
         );
 
         assertThatExceptionOfType(IllegalArgumentException.class)
@@ -45,12 +45,12 @@ class LottoTest {
     @Test
     void 중복되는_숫자가_있는_경우() {
         List<LottoNumber> numbers = Arrays.asList(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(6),
-            new LottoNumber(6)
+            LottoNumber.from(1),
+            LottoNumber.from(2),
+            LottoNumber.from(3),
+            LottoNumber.from(4),
+            LottoNumber.from(6),
+            LottoNumber.from(6)
         );
 
         assertThatExceptionOfType(IllegalArgumentException.class)
@@ -61,12 +61,12 @@ class LottoTest {
     @Test
     void 로또_번호_확인() {
         List<LottoNumber> numbers = Arrays.asList(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)
+            LottoNumber.from(1),
+            LottoNumber.from(2),
+            LottoNumber.from(3),
+            LottoNumber.from(4),
+            LottoNumber.from(5),
+            LottoNumber.from(6)
         );
 
         Lotto lotto = Lotto.of(numbers);

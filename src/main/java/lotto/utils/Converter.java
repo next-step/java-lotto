@@ -13,7 +13,7 @@ public class Converter {
         List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
             .map(String::trim)
             .map(Integer::parseInt)
-            .map(LottoNumber::new)
+            .map(LottoNumber::from)
             .collect(Collectors.toList());
         return Lotto.of(lottoNumbers);
     }

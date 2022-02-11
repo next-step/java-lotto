@@ -14,14 +14,14 @@ class LottoNumberTest {
     @ValueSource(ints = {0, -1, 46, 100})
     void 숫자_범위를_벗어난_경우(int number) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> new LottoNumber(number));
+            .isThrownBy(() -> LottoNumber.from(number));
     }
 
     @DisplayName("숫자가 같으면 같은 LottoNumber로 취급한다")
     @Test
     void 동일_숫자_동일_객체() {
-        LottoNumber test1 = new LottoNumber(7);
-        LottoNumber test2 = new LottoNumber(7);
+        LottoNumber test1 = LottoNumber.from(7);
+        LottoNumber test2 = LottoNumber.from(7);
         assertThat(test1).isEqualTo(test2);
     }
 }
