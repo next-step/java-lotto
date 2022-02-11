@@ -33,8 +33,8 @@ public class Numbers {
         if (m.find()) {
             final String customDelimiter = m.group(POSITION_CUSTOM_DELIMITER);
             final String[] numbers = m.group(POSITION_OTHER_EXPRESSION).split(customDelimiter);
-            final String[] splitedNumber = String.join(COMMA, numbers).split(REGX_DELIMITER);
-            return Arrays.stream(splitedNumber)
+            final String[] splittedNumber = String.join(COMMA, numbers).split(REGX_DELIMITER);
+            return Arrays.stream(splittedNumber)
                     .map(Number::new)
                     .collect(Collectors.toList());
         }
