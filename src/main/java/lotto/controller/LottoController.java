@@ -19,7 +19,7 @@ public class LottoController {
     public void start() {
         Ticket ticket = getTicket();
 
-        Lottos lottos = new Lottos(new RandomLottoGenerator(), ticket.getBuyCount());
+        Lottos lottos = Lottos.withLottoGenerator(new RandomLottoGenerator(), ticket.getBuyCount());
 
         LottosDTO lottosDTO = LottosDTO.from(lottos.get());
         OutputView.printPurchaseInfo(ticket.getBuyCount(), lottosDTO.get());

@@ -8,11 +8,16 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(LottoGenerator lottoGenerator, final int buyCount) {
-        lottos = new ArrayList<>();
+    private Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
+    public static Lottos withLottoGenerator(LottoGenerator lottoGenerator, int buyCount) {
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < buyCount; i++) {
             lottos.add(lottoGenerator.get());
         }
+        return new Lottos(lottos);
     }
 
     public List<Lotto> get() {
