@@ -17,15 +17,14 @@ public class LottoNumber {
     }
 
     public LottoNumber(String lottoNumber) {
-        this.lottoNumber = parseLotto(lottoNumber);
-        validateLottoNumber();
+        this(parseLotto(lottoNumber));
     }
 
     public int value() {
         return lottoNumber;
     }
 
-    private int parseLotto(String lottoNumber) {
+    private static int parseLotto(String lottoNumber) {
         try {
             return Integer.parseInt(lottoNumber);
         } catch (NumberFormatException e) {
