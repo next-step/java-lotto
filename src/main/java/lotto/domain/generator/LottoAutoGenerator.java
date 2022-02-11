@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.domain.lotto.Numbers;
 import lotto.domain.lotto.Number;
 
 public class LottoAutoGenerator implements LottoGenerator {
@@ -28,17 +27,15 @@ public class LottoAutoGenerator implements LottoGenerator {
     }
 
     @Override
-    public Numbers generateNumbers() {
+    public List<Number> generateNumbers() {
         List<Integer> numbers = new ArrayList<>();
         for (int i = 0; i < LOTTO_NUMBERS; i++) {
             numbers.add(this.numbers.get(i));
         }
 
-        return new Numbers(
-            numbers.stream()
+        return numbers.stream()
             .sorted()
             .map(Number::new)
-            .collect(Collectors.toList())
-        );
+            .collect(Collectors.toList());
     }
 }

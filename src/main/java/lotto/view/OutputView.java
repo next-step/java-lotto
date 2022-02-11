@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.domain.lotto.Number;
-import lotto.domain.lotto.Numbers;
 import lotto.domain.lotto.Rank;
+import lotto.domain.lotto.Ticket;
 
 public class OutputView {
 
@@ -32,10 +32,10 @@ public class OutputView {
         System.out.println(MESSAGE_BOUGHT_TICKET_START + manualTickets + MESSAGE_BOUGHT_TICKET_MIDDLE + autoTickets + MESSAGE_BOUGHT_TICKET);
     }
 
-    public static void printLottoTicket(final Numbers numbers) {
+    public static void printLottoTicket(final Ticket ticket) {
         System.out.print(MESSAGE_TICKET_START);
         System.out.print(
-            numbers.get().stream()
+            ticket.get().stream()
                 .map(Number::value)
                 .map(String::valueOf)
                 .collect(Collectors.joining(SPLITTER))

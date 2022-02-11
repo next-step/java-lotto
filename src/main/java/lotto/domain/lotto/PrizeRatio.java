@@ -14,9 +14,9 @@ public class PrizeRatio {
         this.totalPrize = BigDecimal.ZERO;
     }
 
-    public BigDecimal calculateRatio(final int purchased, final Map<Rank, Integer> prizeMap) {
+    public BigDecimal calculateRatio(final Amount amount, final Map<Rank, Integer> prizeMap) {
         calculatePrize(prizeMap);
-        return totalPrize.divide(new BigDecimal(purchased), ROUND_SCALE, RoundingMode.DOWN);
+        return totalPrize.divide(new BigDecimal(amount.value()), ROUND_SCALE, RoundingMode.DOWN);
     }
 
     private void calculatePrize(final Map<Rank, Integer> prizeMap) {

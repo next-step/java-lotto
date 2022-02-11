@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import lotto.domain.lotto.Number;
-import lotto.domain.lotto.Numbers;
 
 public class InputView {
 
@@ -26,18 +24,18 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<Numbers> getManualLottoNumbers(final int tickets) {
+    public static List<List<Integer>> getManualLottoNumbers(final int ticketCount) {
         scanner.nextLine();
 
         System.out.println();
         System.out.println(MESSAGE_MANUAL_NUMBERS);
 
-        List<Numbers> numbers = new ArrayList<>();
-        for (int i = 0; i < tickets; i++) {
-            numbers.add(new Numbers(convertInputNumbers()));
+        List<List<Integer>> tickets = new ArrayList<>();
+        for (int i = 0; i < ticketCount; i++) {
+            tickets.add(convertInputNumbers());
         }
 
-        return numbers;
+        return tickets;
     }
 
     public static int getAmount() {
@@ -45,11 +43,11 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static Numbers getComparisonNumbers() {
+    public static List<Integer> getComparisonNumbers() {
         System.out.println();
         System.out.println(MESSAGE_LAST_WEEK_NUMBERS);
 
-        return new Numbers(convertInputNumbers());
+        return convertInputNumbers();
     }
 
     public static int getBonus() {
@@ -57,11 +55,10 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    private static List<Number> convertInputNumbers() {
+    private static List<Integer> convertInputNumbers() {
         return Arrays.stream(scanner.nextLine().split(COMMA))
             .map(String::trim)
             .map(Integer::parseInt)
-            .map(Number::new)
             .collect(Collectors.toList());
     }
 }
