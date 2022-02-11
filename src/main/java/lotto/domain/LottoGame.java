@@ -27,14 +27,14 @@ public class LottoGame {
         return totalResult;
     }
 
-    private void updateResults(final Map<Ranking, Integer> totalResult, final Ranking ranking) {
-        Integer currentCount = totalResult.get(ranking);
-        totalResult.put(ranking, ++currentCount);
-    }
-
     private void initializeTotalResult(final Map<Ranking, Integer> totalResult) {
         Arrays.stream(Ranking.values())
             .forEach(ranking -> totalResult.put(ranking, ZERO));
+    }
+
+    private void updateResults(final Map<Ranking, Integer> totalResult, final Ranking ranking) {
+        Integer currentCount = totalResult.get(ranking);
+        totalResult.put(ranking, ++currentCount);
     }
 
     public Lottos getLottos() {
