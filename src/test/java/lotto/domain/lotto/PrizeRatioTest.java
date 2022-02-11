@@ -52,8 +52,11 @@ class PrizeRatioTest {
 
         List<Ticket> ticketList = new ArrayList<>();
         for (List<Integer> ticketNumbers: lottoTickets) {
-            Ticket ticket = new Ticket(new Numbers(ticketNumbers.stream().map(Number::new).collect(
-                Collectors.toList())));
+            Ticket ticket = new Ticket(
+                ticketNumbers.stream()
+                    .map(Number::new)
+                    .collect(Collectors.toList())
+            );
             ticketList.add(ticket);
         }
 
@@ -61,13 +64,13 @@ class PrizeRatioTest {
     }
 
     private void setUpAnswer() {
-        Numbers baseAnswerNumbers = new Numbers(Stream.of(1, 2, 3, 4, 5, 6)
+        Ticket baseAnswerNumbers = new Ticket(Stream.of(1, 2, 3, 4, 5, 6)
             .map(Number::new)
             .collect(Collectors.toList()));
-        answer = new Answer(baseAnswerNumbers, 7);
+        answer = new Answer(baseAnswerNumbers, new Number(7));
     }
 
-    private int getPurchased() {
-        return 1000 * tickets.count();
+    private Amount getPurchased() {
+        return new Amount(1000 * tickets.count());
     }
 }
