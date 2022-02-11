@@ -14,15 +14,8 @@ class WinningLottoTest {
     private static final WinningLotto testWinningLotto;
 
     static {
-        List<LottoNumber> testNumbers = Arrays.asList(
-            LottoNumber.from(1),
-            LottoNumber.from(2),
-            LottoNumber.from(3),
-            LottoNumber.from(4),
-            LottoNumber.from(5),
-            LottoNumber.from(6)
-        );
-        testLotto = Lotto.of(testNumbers);
+        List<Integer> testNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        testLotto = Lotto.from(testNumbers);
         testWinningLotto = new WinningLotto(testLotto, bonus);
     }
 
@@ -38,15 +31,8 @@ class WinningLottoTest {
     @DisplayName("주어진 로또 객체에 당첨 번호가 몇개 있는지 반환한다")
     @Test
     void 당첨_번호_반환() {
-        List<LottoNumber> userNumbers = Arrays.asList(
-            LottoNumber.from(1),
-            LottoNumber.from(8),
-            LottoNumber.from(2),
-            LottoNumber.from(3),
-            LottoNumber.from(9),
-            LottoNumber.from(10)
-        );
-        Lotto userLotto = Lotto.of(userNumbers);
+        List<Integer> userNumbers = Arrays.asList(1, 2, 3, 8, 9, 10);
+        Lotto userLotto = Lotto.from(userNumbers);
         int actual = testWinningLotto.getMatchCount(userLotto);
         assertThat(actual).isEqualTo(3);
     }
@@ -54,15 +40,8 @@ class WinningLottoTest {
     @DisplayName("보너스 번호와 일치하는 로또 숫자가 있는지 반환한다")
     @Test
     void 보너스_번호가_있는_경우() {
-        List<LottoNumber> userNumbers = Arrays.asList(
-            LottoNumber.from(1),
-            LottoNumber.from(2),
-            LottoNumber.from(3),
-            LottoNumber.from(7),
-            LottoNumber.from(9),
-            LottoNumber.from(10)
-        );
-        Lotto userLotto = Lotto.of(userNumbers);
+        List<Integer> userNumbers = Arrays.asList(1, 2, 3, 4, 5, 7);
+        Lotto userLotto = Lotto.from(userNumbers);
         boolean actual = testWinningLotto.getMatchBonus(userLotto);
         assertThat(actual).isTrue();
     }
@@ -70,15 +49,8 @@ class WinningLottoTest {
     @DisplayName("보너스 번호와 일치하는 로또 숫자가 있는지 반환한다")
     @Test
     void 보너스_번호가_없는_경우() {
-        List<LottoNumber> userNumbers = Arrays.asList(
-            LottoNumber.from(1),
-            LottoNumber.from(2),
-            LottoNumber.from(3),
-            LottoNumber.from(8),
-            LottoNumber.from(9),
-            LottoNumber.from(10)
-        );
-        Lotto userLotto = Lotto.of(userNumbers);
+        List<Integer> userNumbers = Arrays.asList(1, 2, 3, 4, 5, 8);
+        Lotto userLotto = Lotto.from(userNumbers);
         boolean actual = testWinningLotto.getMatchBonus(userLotto);
         assertThat(actual).isFalse();
     }
