@@ -8,10 +8,10 @@ public class ManualLottoGenerator implements LottoGenerator {
 
     private static final String DELIMITER = ",";
 
-    private final Set<Integer> lottoNumber;
+    private final Set<Integer> lottoNumbers;
 
     public ManualLottoGenerator(String manualLotto) {
-        this.lottoNumber = Arrays.stream(manualLotto.split(DELIMITER))
+        this.lottoNumbers = Arrays.stream(manualLotto.split(DELIMITER))
             .map(String::trim)
             .map(Integer::parseInt)
             .collect(Collectors.toSet());
@@ -19,6 +19,6 @@ public class ManualLottoGenerator implements LottoGenerator {
 
     @Override
     public Set<Integer> generateLotto() {
-        return lottoNumber;
+        return lottoNumbers;
     }
 }
