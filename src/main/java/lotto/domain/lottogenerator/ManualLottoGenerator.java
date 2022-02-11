@@ -15,7 +15,7 @@ public class ManualLottoGenerator implements LottoGenerator {
         this.lotto = Arrays.stream(manualLotto.split(DELIMITER))
             .map(String::trim)
             .map(LottoNumber::new)
-            .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
+            .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::from));
     }
 
     @Override

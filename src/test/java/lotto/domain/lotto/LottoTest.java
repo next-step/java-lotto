@@ -19,7 +19,7 @@ public class LottoTest {
             .boxed()
             .map(LottoNumber::new)
             .collect(Collectors.toSet());
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = Lotto.from(lottoNumbers);
         assertThat(lotto.count()).isEqualTo(6);
     }
 
@@ -29,7 +29,7 @@ public class LottoTest {
             .boxed()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
-        assertThatThrownBy(() -> new Lotto(lottoNumbers))
+        assertThatThrownBy(() -> Lotto.from(lottoNumbers))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -43,9 +43,9 @@ public class LottoTest {
             .boxed()
             .map(LottoNumber::new)
             .collect(Collectors.toSet());
-        assertThatThrownBy(() -> new Lotto(underLottoNumbers))
+        assertThatThrownBy(() -> Lotto.from(underLottoNumbers))
             .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new Lotto(overLottoNumbers))
+        assertThatThrownBy(() -> Lotto.from(overLottoNumbers))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -55,7 +55,7 @@ public class LottoTest {
             .boxed()
             .map(LottoNumber::new)
             .collect(Collectors.toSet());
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = Lotto.from(lottoNumbers);
         LottoNumber havingLotto = new LottoNumber(1);
         LottoNumber notHavingLotto = new LottoNumber(7);
         assertThat(lotto.hasValue(havingLotto)).isTrue();

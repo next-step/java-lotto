@@ -54,7 +54,7 @@ public class WinningLottoTest {
             .boxed()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = Lotto.from(lottoNumbers);
         List<LottoNumber> winningLottoNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6, 7})
             .boxed()
             .map(LottoNumber::new)
@@ -73,7 +73,7 @@ public class WinningLottoTest {
             .boxed()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = Lotto.from(lottoNumbers);
         List<LottoNumber> winningLottoNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6, 7})
             .boxed()
             .map(LottoNumber::new)

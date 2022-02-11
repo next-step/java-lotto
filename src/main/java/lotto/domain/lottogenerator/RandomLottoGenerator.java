@@ -26,6 +26,6 @@ public class RandomLottoGenerator implements LottoGenerator {
         return LOTTO.subList(0, LOTTO_SIZE_BOUND)
             .stream()
             .map(LottoNumber::new)
-            .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::new));
+            .collect(Collectors.collectingAndThen(Collectors.toList(), Lotto::from));
     }
 }

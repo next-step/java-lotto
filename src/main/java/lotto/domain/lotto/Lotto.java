@@ -14,15 +14,18 @@ public class Lotto {
 
     private List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
-        validateDuplicates(lottoNumbers);
+    private Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
         validateLotto();
     }
 
-    public Lotto(Set<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
-        validateLotto();
+    public static Lotto from(List<LottoNumber> lottoNumbers) {
+        validateDuplicates(lottoNumbers);
+        return new Lotto(lottoNumbers);
+    }
+
+    public static Lotto from(Set<LottoNumber> lottoNumbers) {
+        return new Lotto(new ArrayList<>(lottoNumbers));
     }
 
     public int count() {
@@ -37,14 +40,14 @@ public class Lotto {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    private void validateDuplicates(List<LottoNumber> lotto) {
+    private static void validateDuplicates(List<LottoNumber> lotto) {
         Set<LottoNumber> lottoNumbers = new HashSet<>(lotto);
         if (lottoIsDuplicate(lottoNumbers, lotto)) {
             throw new IllegalArgumentException(NOT_VALIDATE_LOTTO_MESSAGE);
         }
     }
 
-    private boolean lottoIsDuplicate(Set<LottoNumber> lottoNumbers, List<LottoNumber> lotto) {
+    private static boolean lottoIsDuplicate(Set<LottoNumber> lottoNumbers, List<LottoNumber> lotto) {
         return lottoNumbers.size() != lotto.size();
     }
 
