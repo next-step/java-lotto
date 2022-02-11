@@ -14,13 +14,12 @@ public class Judge {
     public LottoRanks getRanks(final Lottos lottos) {
         final List<LottoRank> lottoRanks = new ArrayList<>();
 
-        lottos.get().stream()
-                .forEach(lotto -> {
-                    int matchCount = lotto.matchNumber(correctNumbers.getWinningNumbers());
-                    boolean isBonus = lotto.contains(correctNumbers.getBonusNumber());
+        lottos.get().forEach(lotto -> {
+            int matchCount = lotto.matchNumber(correctNumbers.getWinningNumbers());
+            boolean isBonus = lotto.contains(correctNumbers.getBonusNumber());
 
-                    lottoRanks.add(LottoRank.getRank(matchCount, isBonus));
-                });
+            lottoRanks.add(LottoRank.getRank(matchCount, isBonus));
+        });
 
         return new LottoRanks(lottoRanks);
     }
