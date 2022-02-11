@@ -15,7 +15,7 @@ public class LottoBalls {
     private static final int LOTTO_END_NUMBER = 45;
     private static final int NUMBER_OF_LOTTO_BALL = 6;
 
-    private static final List<LottoNumber> balls = new ArrayList<>(
+    private static final List<LottoNumber> BALLS = new ArrayList<>(
             IntStream.range(LOTTO_START_NUMBER, LOTTO_END_NUMBER + 1)
                     .mapToObj(String::valueOf)
                     .map(LottoNumber::new)
@@ -24,14 +24,14 @@ public class LottoBalls {
     private LottoBalls() {}
 
     public static void shuffle() {
-        Collections.shuffle(balls);
+        Collections.shuffle(BALLS);
     }
 
     public static Set<LottoNumber> createLottoNumber() {
-        return new TreeSet<>(balls.subList(0, NUMBER_OF_LOTTO_BALL));
+        return new TreeSet<>(BALLS.subList(0, NUMBER_OF_LOTTO_BALL));
     }
 
     public static List<LottoNumber> get() {
-        return balls;
+        return BALLS;
     }
 }
