@@ -74,6 +74,7 @@
 - [x] 메서드 참조 방식 적용
 - [x] Price의 티켓 구매가능한 범위 검사 로직을 LottoTicketGenerate으로 이동 
 - [x] Statistics 리펙토링
+- [x] Enum PrizeGrade refactoring (@FunctionalInterface 사용)
 
 ## multiple authors
 
