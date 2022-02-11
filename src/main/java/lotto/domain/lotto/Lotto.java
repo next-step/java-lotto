@@ -12,29 +12,29 @@ public class Lotto {
     private static final String NOT_VALIDATE_LOTTO_MESSAGE = "[ERROR] 로또는 중복되지 않은 6개의 숫자가 필요합니다.";
     private static final String NOT_VALIDATE_SIZE_LOTTO_MESSAGE = "[ERROR] 로또는 6개의 숫자가 필요합니다.";
 
-    private List<LottoNumber> lotto;
+    private List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> lotto) {
-        validateDuplicates(lotto);
-        this.lotto = lotto;
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        validateDuplicates(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
         validateLotto();
     }
 
-    public Lotto(Set<LottoNumber> lotto) {
-        this.lotto = new ArrayList<>(lotto);
+    public Lotto(Set<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
         validateLotto();
     }
 
     public int count() {
-        return lotto.size();
+        return lottoNumbers.size();
     }
 
     public boolean hasValue(LottoNumber lottoNumber) {
-        return lotto.contains(lottoNumber);
+        return lottoNumbers.contains(lottoNumber);
     }
 
     public List<LottoNumber> values() {
-        return Collections.unmodifiableList(lotto);
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     private void validateDuplicates(List<LottoNumber> lotto) {
@@ -55,6 +55,6 @@ public class Lotto {
     }
 
     private boolean lottoSizeNotValid() {
-        return lotto.size() != LOTTO_SIZE;
+        return lottoNumbers.size() != LOTTO_SIZE;
     }
 }
