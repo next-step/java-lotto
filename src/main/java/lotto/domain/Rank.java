@@ -30,7 +30,9 @@ public enum Rank {
     }
 
     public static int getCount(List<Rank> statistics, int matchCount) {
-        return statistics.stream().filter(x -> x.grade == matchCount).collect(Collectors.toList())
+        return statistics.stream()
+            .filter(x -> x.grade == matchCount)
+            .collect(Collectors.toList())
             .size();
     }
 
