@@ -1,9 +1,10 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
+import lotto.LottoBalls;
 import lotto.utils.Parser;
 
 public class Lotto {
@@ -40,10 +41,12 @@ public class Lotto {
 
     private Set<LottoNumber> convertToLottoNumbers(final String winningNumbers) {
         String[] split = winningNumbers.split(DELIMITER_COMMA);
+        List<Integer> numbers = Arrays.stream(winningNumbers.split(DELIMITER_COMMA))
+                .map(Parser::parseInt
+                )
+                .collect(Collectors.toList());
 
-        return Arrays.stream(split)
-                .map(value -> new LottoNumber(Parser.parseInt(value)))
-                .collect(Collectors.toCollection(TreeSet::new));
+        return LottoBalls.of(numbers);
     }
 
     private void validateLottoNumberSize(final Set<LottoNumber> winningNumbers) {
