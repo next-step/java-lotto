@@ -61,8 +61,8 @@ public class Lotto {
                 .count();
     }
 
-    public boolean contains(LottoNumber bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
+    public boolean contains(LottoNumber number) {
+        return lottoNumbers.contains(number);
     }
 
     public Set<LottoNumber> get() {
