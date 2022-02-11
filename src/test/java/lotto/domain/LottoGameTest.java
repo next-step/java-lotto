@@ -61,6 +61,14 @@ class LottoGameTest {
             () -> assertThat(totalResult.get(Ranking.FOURTH)).isEqualTo(1),
             () -> assertThat(totalResult.get(Ranking.FIFTH)).isEqualTo(1)
         );
+    }
 
+    @Test
+    void 수익률을_계산할_수_있다() {
+        Map<Ranking, Integer> totalResult = lottoGame.findWinner();
+
+        double yield = lottoGame.calculateYield(totalResult, new Money(5000));
+
+        assertThat(yield).isEqualTo(406011);
     }
 }
