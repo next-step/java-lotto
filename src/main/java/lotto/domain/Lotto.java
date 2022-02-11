@@ -14,13 +14,17 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(final List<LottoNumber> lottoNumbers) {
-        validateNumbersSize(lottoNumbers);
-        validateDuplicateNumber(lottoNumbers);
+        validateNumber(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
     public Lotto() {
         this(LottoAutoGenerator.getInstance().generateLotto());
+    }
+
+    private void validateNumber(final List<LottoNumber> lotto) {
+        validateNumbersSize(lotto);
+        validateDuplicateNumber(lotto);
     }
 
     private void validateDuplicateNumber(final List<LottoNumber> lotto) {
