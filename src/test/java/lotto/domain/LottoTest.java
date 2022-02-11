@@ -13,7 +13,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTest {
 
-    private final Set<LottoNumber> lottoNumbers = createLottoNumbers("1", "2", "3", "4", "5", "6");
+    private final Set<LottoNumber> lottoNumbers = createLottoNumbers(1,2,3,4,5,6);
 
     @DisplayName("숫자 리스트를 받아 객체를 생성, 숫자 리스트를 잘 가지고 있다.")
     @Test
@@ -33,7 +33,7 @@ class LottoTest {
     void Given_정답_번호_When_로또_번호와_비교_Then_맞은_수_반환() {
         // given
         Lotto lotto = new Lotto(lottoNumbers);
-        Set<LottoNumber> winnigNumbers = createLottoNumbers("1", "2", "3", "4", "5", "7");
+        Set<LottoNumber> winnigNumbers = createLottoNumbers(1,2,3,4,5,7);
 
         // when
         int matchNumber = lotto.matchNumber(winnigNumbers);
@@ -49,7 +49,7 @@ class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
 
         // when
-        boolean isBonus = lotto.contains(new LottoNumber("5"));
+        boolean isBonus = lotto.contains(new LottoNumber(5));
 
         // then
         assertThat(isBonus).isEqualTo(true);
@@ -62,7 +62,7 @@ class LottoTest {
         Lotto lotto = new Lotto(lottoNumbers);
 
         // when
-        boolean isBonus = lotto.contains(new LottoNumber("7"));
+        boolean isBonus = lotto.contains(new LottoNumber(7));
 
         // then
         assertThat(isBonus).isEqualTo(false);
@@ -96,9 +96,9 @@ class LottoTest {
                 () -> new CorrectNumbers(input, "7"));
     }
 
-    private Set<LottoNumber> createLottoNumbers(String... numbers) {
+    private Set<LottoNumber> createLottoNumbers(int... numbers) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
-        for (String num : numbers) {
+        for (int num : numbers) {
             lottoNumbers.add(new LottoNumber(num));
         }
 
