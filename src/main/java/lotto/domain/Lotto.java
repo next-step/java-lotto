@@ -27,16 +27,16 @@ public class Lotto {
         validateDuplicateNumber(lotto);
     }
 
+    private void validateNumbersSize(final List<LottoNumber> lotto) {
+        if (lotto.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(LOTTO_SIZE_EXCEPTION_MESSAGE);
+        }
+    }
+
     private void validateDuplicateNumber(final List<LottoNumber> lotto) {
         Set<LottoNumber> deduplication = new HashSet<>(lotto);
         if (lotto.size() != deduplication.size()) {
             throw new IllegalArgumentException(DUPLICATE_EXCEPTION_MESSAGE);
-        }
-    }
-
-    private void validateNumbersSize(final List<LottoNumber> lotto) {
-        if (lotto.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(LOTTO_SIZE_EXCEPTION_MESSAGE);
         }
     }
 
