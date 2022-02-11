@@ -37,12 +37,12 @@ public class InputView {
         }
     }
 
-    public static int inputBonusNumber() {
+    public static String inputBonusNumber() {
         try {
             System.out.println(BONUS_BALL_MANAGER_LOG);
             String input = scanner.nextLine();
             checkEmpty(input);
-            return Integer.parseInt(input);
+            return input;
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             return inputBonusNumber();

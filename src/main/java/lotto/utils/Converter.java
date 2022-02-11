@@ -12,7 +12,6 @@ public class Converter {
     public static Lotto inputToLotto(String[] numbers) {
         List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
             .map(String::trim)
-            .map(Integer::parseInt)
             .map(LottoNumber::from)
             .collect(Collectors.toList());
         return Lotto.of(lottoNumbers);
