@@ -1,7 +1,5 @@
 package lotto.controller;
 
-import java.util.List;
-import lotto.domain.Lotto;
 import lotto.domain.LottoEarningRate;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoStatistics;
@@ -18,7 +16,7 @@ public class LottoController {
     private Lottos userLottos;
     private String winningNumber;
     private LottoNumber bonusBall;
-    private WinningLottery winningNumbers;
+    private WinningLottery winningLottery;
 
     public void start() {
         lottoPriceProcess();
@@ -43,11 +41,11 @@ public class LottoController {
         winningNumber = InputView.readWinningNumber();
         OutputView.printBonusBallNumber();
         bonusBall = InputView.readBonusNumber();
-        winningNumbers = new WinningLottery(Util.stringToLottoNumberList(winningNumber), bonusBall);
+        winningLottery = new WinningLottery(Util.stringToLottoNumberList(winningNumber), bonusBall);
     }
 
     private void statisticsProcess() {
-        LottoStatistics lottoStatistics = new LottoStatistics(winningNumbers, userLottos.getLottoLists());
+        LottoStatistics lottoStatistics = new LottoStatistics(winningLottery, userLottos.getLottoLists());
 
         ResultView.printLottoStatistics(lottoStatistics.getResultStatistics(),
             LottoEarningRate.getLottoEarningRate(lottoStatistics.getResultStatistics(),
