@@ -18,7 +18,7 @@ class WinningLottoTest {
 
         LottoNumber bonusBall = new LottoNumber(8);
 
-        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusBall);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumber), bonusBall);
 
         List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 7).stream()
             .map(LottoNumber::new)
