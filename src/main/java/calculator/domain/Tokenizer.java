@@ -17,19 +17,6 @@ public class Tokenizer {
 
     public Tokenizer(String text) {
         this.numberTokens = new NumberTokens(tokenize(text));
-        System.out.println();
-    }
-
-    public static List<Integer> parseInt(String[] tokens) {
-        try {
-            return Arrays.stream(tokens).map(Integer::parseInt).collect(Collectors.toList());
-        } catch (NumberFormatException | NullPointerException e) {
-            throw new IllegalArgumentException("[ERROR] 지정된 구분자 외의 문자열이 있습니다.");
-        }
-    }
-
-    public static boolean isCustomDelimiter(String text) {
-        return Pattern.compile("//(.)\n(.*)").matcher(text).find();
     }
 
     private List<Integer> tokenize(String text) {
@@ -53,6 +40,18 @@ public class Tokenizer {
 
         return parseInt(text
             .split(STANDARD_DELIMITER_COMMA + "|" + STANDARD_DELIMITER_COLON));
+    }
+
+    public static List<Integer> parseInt(String[] tokens) {
+        try {
+            return Arrays.stream(tokens).map(Integer::parseInt).collect(Collectors.toList());
+        } catch (NumberFormatException | NullPointerException e) {
+            throw new IllegalArgumentException("[ERROR] 지정된 구분자 외의 문자열이 있습니다.");
+        }
+    }
+
+    public static boolean isCustomDelimiter(String text) {
+        return Pattern.compile("//(.)\n(.*)").matcher(text).find();
     }
 
     private boolean isEmptyOrNull(String text) {
