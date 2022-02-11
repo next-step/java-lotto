@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class LottoCount {
 
     private static final int LOTTO_COUNT_MINIMUM_VALUE = 0;
@@ -47,5 +49,22 @@ public class LottoCount {
         if (lottoCount <= LOTTO_COUNT_MINIMUM_VALUE) {
             throw new IllegalArgumentException(LOTTO_COUNT_VALIDATE_MESSAGE);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoCount that = (LottoCount) o;
+        return lottoCount == that.lottoCount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoCount);
     }
 }
