@@ -1,7 +1,8 @@
-package lotto;
+package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoRules {
     
@@ -10,15 +11,10 @@ public class LottoRules {
     public static final int LOTTO_COUNT = 6;
     public static final int LOTTO_PRICE = 1000;
     private static final int HUNDRED = 100;
-    private static List<Integer> LOTTO_NUMS;
+    private static final List<Integer> LOTTO_NUMS = IntStream.rangeClosed(START_NUM, LAST_NUM)
+      .boxed().collect(
+        Collectors.toList());
     
-    LottoRules() {
-        List<Integer> lottoNums = new ArrayList<>();
-        for (int i = START_NUM; i <= LAST_NUM; i++) {
-            lottoNums.add(i);
-        }
-        this.LOTTO_NUMS = lottoNums;
-    }
     
     public static double calculateYield(double reward, int lottoCount) {
         double price = lottoCount * LOTTO_PRICE;
@@ -26,7 +22,7 @@ public class LottoRules {
         return (double) ((int) (HUNDRED * yield)) / HUNDRED;
     }
     
-    public List<Integer> getLottoNums() {
+    public static List<Integer> getLottoNums() {
         return LOTTO_NUMS;
     }
 }

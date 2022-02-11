@@ -1,8 +1,10 @@
-package lotto;
+package lotto.view;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import lotto.domain.Lotto;
+import lotto.domain.Rank;
 
 public class OutputView {
     

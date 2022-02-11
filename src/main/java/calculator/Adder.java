@@ -13,8 +13,4 @@ public class Adder {
     public int calculate() {
         return operands.stream().mapToInt(Operand::getOperand).sum();
     }
-    
-    private int sum(int a, int b) {
-        return a + b;
-    }
 }

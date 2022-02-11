@@ -8,11 +8,12 @@ import java.util.stream.Collectors;
 
 public class Parser {
     
-    private static Pattern pattern;
+    private static final String DEFAULT_DELIMITER = ",|:";
+    private static final Pattern pattern = Pattern.compile("//(.)\n(.*)");
     
     public static List<Operand> parseInput(String userInput) {
-        String delimiter = ",|:";
-        Matcher m = pattern.compile("//(.)\n(.*)").matcher(userInput);
+        String delimiter = DEFAULT_DELIMITER;
+        Matcher m = pattern.matcher(userInput);
         if (m.find()) {
             userInput = m.group(2);
             delimiter = m.group(1);

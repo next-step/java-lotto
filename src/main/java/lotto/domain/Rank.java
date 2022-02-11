@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
@@ -10,15 +10,15 @@ public enum Rank {
     SECOND(5, 30000000),
     FIRST(6, 2000000000),
     MISS(0, 0);
-
+    
     private final int matchCount;
     private final int reward;
-
+    
     Rank(int matchCount, int reward) {
         this.matchCount = matchCount;
         this.reward = reward;
     }
-
+    
     public static Rank getRank(final int matchCount, final boolean containBonusBall) {
         if (matchCount == THIRD.matchCount && containBonusBall) {
             return SECOND;
@@ -29,13 +29,13 @@ public enum Rank {
         return Arrays.stream(values()).filter(rating -> rating.matchCount == matchCount).findAny()
           .orElseThrow(NoSuchElementException::new);
     }
-
+    
     public int getMatchCount() {
         return matchCount;
     }
-
+    
     public int getReward() {
         return reward;
     }
-
+    
 }

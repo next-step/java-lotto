@@ -11,4 +11,10 @@ public class OperandTest {
         assertThatExceptionOfType(NumberFormatException.class)
           .isThrownBy(() -> new Operand("*"));
     }
+    
+    @Test
+    void 음수일_경우_예외() {
+        assertThatExceptionOfType(RuntimeException.class)
+          .isThrownBy(() -> new Operand("-3"));
+    }
 }

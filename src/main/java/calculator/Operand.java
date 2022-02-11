@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Operand {
     
-    private int operand;
+    private final int operand;
     
     public Operand(String parseResult) {
         this.operand = parseStringToInteger(parseResult);
@@ -26,7 +26,7 @@ public class Operand {
     
     private void checkNegative(int operand) {
         if (operand < 0) {
-            throw new RuntimeException("음수입니다");
+            throw new IllegalArgumentException("음수입니다");
         }
     }
     
