@@ -10,13 +10,15 @@ public class LottoGame {
     private static final int ZERO = 0;
 
     private final Lottos lottos;
+    private final WinningLotto winningLotto;
 
-    public LottoGame(final Lottos lottos) {
+    public LottoGame(final Lottos lottos, final WinningLotto winningLotto) {
         this.lottos = lottos;
+        this.winningLotto = winningLotto;
     }
 
 
-    public Map<Ranking, Integer> findWinner(final WinningLotto winningLotto) {
+    public Map<Ranking, Integer> findWinner() {
 
         final Map<Ranking, Integer> totalResult = new HashMap<>();
         initializeTotalResult(totalResult);

@@ -25,7 +25,15 @@ class LottoGameTest {
         lottos.storeLotto(createLotto(Arrays.asList(1, 2, 3, 4, 7, 10)));
         lottos.storeLotto(createLotto(Arrays.asList(1, 2, 3, 7, 10, 9)));
 
-        lottoGame = new LottoGame(lottos);
+        List<LottoNumber> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6).stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+
+        LottoNumber bonusBall = new LottoNumber(8);
+
+        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumber), bonusBall);
+
+        lottoGame = new LottoGame(lottos, winningLotto);
     }
 
     private Lotto createLotto(final List<Integer> numbers) {
@@ -44,15 +52,7 @@ class LottoGameTest {
 
     @Test
     void 발급한_모든_로또의_결과를_알_수_있다() {
-        List<LottoNumber> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6).stream()
-            .map(LottoNumber::new)
-            .collect(Collectors.toList());
-
-        LottoNumber bonusBall = new LottoNumber(8);
-
-        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumber), bonusBall);
-
-        Map<Ranking, Integer> totalResult = lottoGame.findWinner(winningLotto);
+        Map<Ranking, Integer> totalResult = lottoGame.findWinner();
 
         assertAll(
             () -> assertThat(totalResult.get(Ranking.FIRST)).isEqualTo(1),
