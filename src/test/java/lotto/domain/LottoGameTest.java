@@ -59,7 +59,7 @@ class LottoGameTest {
             () -> assertThat(totalResult.get(Ranking.SECOND)).isEqualTo(1),
             () -> assertThat(totalResult.get(Ranking.THIRD)).isEqualTo(0),
             () -> assertThat(totalResult.get(Ranking.FOURTH)).isEqualTo(1),
-            () -> assertThat(totalResult.get(Ranking.FOURTH)).isEqualTo(1)
+            () -> assertThat(totalResult.get(Ranking.FIFTH)).isEqualTo(1)
         );
 
     }
