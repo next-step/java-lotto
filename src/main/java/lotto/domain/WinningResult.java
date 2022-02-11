@@ -24,7 +24,7 @@ public class WinningResult {
             if (rank == Rank.NONE) continue;
             result.put(rank, result.get(rank) + 1);
         }
-        return result;
+        return new LinkedHashMap<>(result);
     }
 
     private Rank getRank(Lotto userLotto) {
