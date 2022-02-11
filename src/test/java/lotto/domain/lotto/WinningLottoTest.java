@@ -1,15 +1,12 @@
 package lotto.domain.lotto;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.WinningLotto;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinningLottoTest {
 
@@ -19,7 +16,7 @@ public class WinningLottoTest {
             .boxed()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
-        WinningLotto winningLotto = new WinningLotto(lottoNumbers);
+        WinningLotto winningLotto = WinningLotto.from(lottoNumbers);
         assertThat(winningLotto.count()).isEqualTo(7);
         assertThat(winningLotto.bonusBall()).isEqualTo(new LottoNumber(10));
     }
@@ -30,7 +27,7 @@ public class WinningLottoTest {
             .boxed()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
-        assertThatThrownBy(() -> new WinningLotto(lottoNumbers))
+        assertThatThrownBy(() -> WinningLotto.from(lottoNumbers))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -40,13 +37,13 @@ public class WinningLottoTest {
             .boxed()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
-        assertThatThrownBy(() -> new WinningLotto(underLottoNumbers))
+        assertThatThrownBy(() -> WinningLotto.from(underLottoNumbers))
             .isInstanceOf(IllegalArgumentException.class);
         List<LottoNumber> overLottoNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6, 7, 8})
             .boxed()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
-        assertThatThrownBy(() -> new WinningLotto(overLottoNumbers))
+        assertThatThrownBy(() -> WinningLotto.from(overLottoNumbers))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -62,7 +59,7 @@ public class WinningLottoTest {
             .boxed()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
-        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers);
+        WinningLotto winningLotto = WinningLotto.from(winningLottoNumbers);
         // when
         int expectMatchCount = winningLotto.howMatch(lotto);
         // then
@@ -81,7 +78,7 @@ public class WinningLottoTest {
             .boxed()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
-        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers);
+        WinningLotto winningLotto = WinningLotto.from(winningLottoNumbers);
         // when
         boolean expectMatchBonus = winningLotto.matchBonus(lotto);
         // then
