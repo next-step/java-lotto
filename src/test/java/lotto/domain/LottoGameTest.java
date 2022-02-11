@@ -56,7 +56,7 @@ class LottoGameTest {
 
         WinningLotto winningLotto = new WinningLotto(winningNumber, bonusBall);
 
-        Map<Ranking, Integer> totalResult = lottoGame.findWinner(winningLotto, lottos);
+        Map<Ranking, Integer> totalResult = lottoGame.findWinner(winningLotto);
 
         assertAll(
             () -> assertThat(totalResult.get(Ranking.FIRST)).isEqualTo(1),
