@@ -2,7 +2,7 @@ package calculator;
 
 import calculator.domain.NumberTokens;
 import calculator.domain.StringCalculator;
-import calculator.util.Tokenizer;
+import calculator.domain.Tokenizer;
 import calculator.view.InputView;
 import calculator.view.ResultView;
 
