@@ -9,12 +9,12 @@ interface PrizeGradeMatcher {
 }
 
 public enum PrizeGrade {
-    NONE(0, 0, (matchCount, matchBonus) -> matchCount == 0 && matchBonus == false),
-    FIFTH(5_000, 3, (matchCount, matchBonus) -> matchCount == 3 && matchBonus == false),
-    FOURTH(50_000, 4, (matchCount, matchBonus) -> matchCount == 4 && matchBonus == false),
-    THIRD(1_500_000, 5, (matchCount, matchBonus) -> matchCount == 5 && matchBonus == false),
-    SECOND(30_000_000, 4, (matchCount, matchBonus) -> matchCount == 4 && matchBonus == true),
-    FIRST(2_000_000_000, 6, (matchCount, matchBonus) -> matchCount == 6 && matchBonus == false);
+    NONE(0, 0, (matchCount, matchBonus) -> matchCount == 0),
+    FIFTH(5_000, 3, (matchCount, matchBonus) -> matchCount == 3),
+    FOURTH(50_000, 4, (matchCount, matchBonus) -> matchCount == 4),
+    THIRD(1_500_000, 5, (matchCount, matchBonus) -> matchCount == 5),
+    SECOND(30_000_000, 5, (matchCount, matchBonus) -> matchCount == 5 && matchBonus),
+    FIRST(2_000_000_000, 6, (matchCount, matchBonus) -> matchCount == 6);
 
     public int getMatchCount() {
         return matchCount;
