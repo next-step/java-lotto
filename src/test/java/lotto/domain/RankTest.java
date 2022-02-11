@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class RankTest {
 
@@ -35,5 +37,14 @@ class RankTest {
     @Test
     void correctSixFirst() {
         assertThat(Rank.getRank(6)).isEqualTo(Rank.FIRST);
+    }
+
+    @DisplayName(value = "로또에서 3개 미만을 맞추면 꽝이다.")
+    @Test
+    void correctUnderThree꽝() {
+        assertThat(Rank.getRank(0)).isEqualTo(Rank.NONE);
+        assertThat(Rank.getRank(1)).isEqualTo(Rank.NONE1);
+        assertThat(Rank.getRank(2)).isEqualTo(Rank.NONE2);
+
     }
 }
