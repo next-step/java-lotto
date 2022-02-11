@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Ranking {
-
     FIRST(2_000_000_000, 6),
     SECOND(30_000_000, 5),
     THIRD(1_500_000, 5),
