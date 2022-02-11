@@ -14,7 +14,7 @@ public class Statistics {
 
     public Statistics(final LottoRanks lottoRanks) {
         this.rankCounts = rankStatistics(lottoRanks.get());
-        this.profitRate = profitStatistics(lottoRanks.get());
+        this.profitRate = profitStatistics(lottoRanks.getAmounts());
     }
 
     private Map<LottoRank, Integer> rankStatistics(final List<LottoRank> lottoRanks) {
@@ -30,9 +30,9 @@ public class Statistics {
         return rankCounts;
     }
 
-    private double profitStatistics(final List<LottoRank> lottoRanks) {
-        double profit = lottoRanks.stream().mapToDouble(LottoRank::getAmount).sum();
-        double budget = (lottoRanks.size() * 1000);
+    private double profitStatistics(final List<Integer> amounts) {
+        double profit = amounts.stream().mapToDouble(a -> a).sum();
+        double budget = (amounts.size() * 1000);
 
         return  profit / budget;
     }
