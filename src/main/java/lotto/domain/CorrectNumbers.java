@@ -9,8 +9,9 @@ public class CorrectNumbers {
     private final Lotto winningNumbers;
     private final LottoNumber bonusNumber;
 
-    public CorrectNumbers(final String inputWinningNumbers, final LottoNumber bonusNumber) {
+    public CorrectNumbers(final String inputWinningNumbers, final String inputBonusNumber) {
         Lotto lotto = new Lotto(inputWinningNumbers);
+        LottoNumber bonusNumber = new LottoNumber(inputBonusNumber);
         validateDuplicateNumber(lotto, bonusNumber);
 
         this.winningNumbers = lotto;

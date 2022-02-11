@@ -75,7 +75,7 @@ class LottoTest {
         final String input = "1,2,3,4,5,6";
 
         // then
-        assertDoesNotThrow(() -> new CorrectNumbers(input, new LottoNumber("7")));
+        assertDoesNotThrow(() -> new CorrectNumbers(input, "7"));
     }
 
     @DisplayName("입력형식 (숫자 + 구분자) 이 아니면 예외가 발생한다.")
@@ -84,7 +84,7 @@ class LottoTest {
     void Given_유효하지_않은_입력형식_When_객체_생성_Then_예외_발생(final String input) {
         // then
         assertThrows(IllegalArgumentException.class,
-                () -> new CorrectNumbers(input, new LottoNumber("7")));
+                () -> new CorrectNumbers(input, "7"));
     }
 
     @DisplayName("숫자 개수가 6개가 아닌 경우 예외가 발생한다.")
@@ -93,7 +93,7 @@ class LottoTest {
     void Given_숫자가_6개가_아닌_입력_When_객체_생성_Then_예외_발생(final String input) {
         // then
         assertThrows(IllegalArgumentException.class,
-                () -> new CorrectNumbers(input, new LottoNumber("7")));
+                () -> new CorrectNumbers(input, "7"));
     }
 
     private Set<LottoNumber> createLottoNumbers(String... numbers) {

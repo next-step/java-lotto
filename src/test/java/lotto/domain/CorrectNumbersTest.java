@@ -12,7 +12,7 @@ class CorrectNumbersTest {
     @Test
     void Given_당첨번호_보너스_번호_When_객체_생성_Then_당첨번호와_보너스_번호를_가짐() {
         // given
-        final LottoNumber bonusNumber = new LottoNumber("7");
+        final String bonusNumber = "7";
         final String winningNumbers = "1,2,3,4,5,6";
 
         // when
@@ -20,7 +20,7 @@ class CorrectNumbersTest {
 
         // then
         assertThat(correctNumbers.getWinningNumbers().size()).isEqualTo(6);
-        assertThat(correctNumbers.getBonusNumber()).isEqualTo(bonusNumber);
+        assertThat(correctNumbers.getBonusNumber()).isEqualTo(new LottoNumber(bonusNumber));
     }
 
     @DisplayName("당첨 번호들과 보너스 번호가 중복되면 예외가 발생한다.")
@@ -28,6 +28,6 @@ class CorrectNumbersTest {
     void 당첨번호_보너스_번호_When_객체_생성_Then_예외_발생() {
         // then
         assertThrows(IllegalArgumentException.class,
-                () -> new CorrectNumbers("1,2,3,4,5,6", new LottoNumber("6")));
+                () -> new CorrectNumbers("1,2,3,4,5,6", "6"));
     }
 }

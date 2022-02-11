@@ -26,7 +26,7 @@ public class LottoApplication {
 
         final CorrectNumbers correctNumbers = new CorrectNumbers(
                 InputView.inputWinningNumbers(),
-                new LottoNumber(InputView.inputBonusNumber()));
+                InputView.inputBonusNumber());
 
         final Judge judge = new Judge(correctNumbers);
         final LottoRanks lottoRanks = judge.getRanks(allLottos);
