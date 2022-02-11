@@ -31,21 +31,25 @@ public class LottoController {
 
         final LottoShop lottoShop = LottoShop.getInstance();
         final int lottoAmount = lottoShop.countPossibleLottoAmount(money);
-        final LottoGame lottoGame = new LottoGame(lottoShop.buyLotto(lottoAmount));
 
-        final Lottos lottos = lottoGame.handOverLottos();
+        final LottoGame lottoGame = new LottoGame(lottoShop.buyLotto(lottoAmount));
+        final Lottos lottos = lottoGame.getLottos();
 
         lottoResultView.printLottos(lottos);
 
-        final List<LottoNumber> winningNumber = Arrays.stream(lottoInputView.inputWinningNumber())
-                                                .map(Integer::parseInt)
-                                                .map(LottoNumber::new)
-                                                .collect(Collectors.toList());
+        final List<LottoNumber> winningNumbers = collectWinningNumber(lottoInputView.inputWinningNumber());
         final LottoNumber bonusBall = new LottoNumber(lottoInputView.inputBonusBall());
 
-        final WinningLotto winningLotto = new WinningLotto(winningNumber, bonusBall);
+        final WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusBall);
 
         final Map<Ranking, Integer> totalResult = lottoGame.findWinner(winningLotto, lottos);
         lottoResultView.finishGame(totalResult, money);
+    }
+
+    private List<LottoNumber> collectWinningNumber(final String[] winningNumber) {
+        return Arrays.stream(winningNumber)
+            .map(Integer::parseInt)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
     }
 }
