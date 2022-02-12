@@ -80,6 +80,7 @@
 
 - [ ] 원시타입 포장하기.
 - [x] LOTTO_BONUS_GRADE 제거
+- [x] generateLottoTicket, mapToObj 활용
 
 ## multiple authors
 
