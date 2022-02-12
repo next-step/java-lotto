@@ -51,5 +51,11 @@ public enum Rank {
     public Money getPrize(int hit) {
         return new Money(prize.getValue() * hit);
     }
+
+    public boolean isSencod(Rank rank) {
+        if(rank == Rank.SECOND)
+            return true;
+        return false;
+    }
 }
 

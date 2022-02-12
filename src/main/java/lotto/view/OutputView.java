@@ -39,7 +39,9 @@ public class OutputView {
     }
 
     public static void printResult(RankResult rankResult, Rank rank) {
-        if (printSecond(rankResult, rank)) {
+        if (rank.isSencod(rank)) {
+            System.out.printf(SECOND_RESULT_MESSAGE, rank.getMatchCount(),
+                rank.getPrize().getValue(), rankResult.getRankResult().get(rank));
             return;
         }
         System.out.printf(RESULT_MESSAGE, rank.getMatchCount(), rank.getPrize().getValue(),
@@ -49,15 +51,4 @@ public class OutputView {
     public static void printPrizeRatio(Money totalPrize, Money money) {
         System.out.printf(TOTAL_RATIO_MESSAGE, totalPrize.getValue() / (float) money.getValue());
     }
-
-    private static boolean printSecond(RankResult rankResult, Rank rank) {
-        if (rank == rank.SECOND) {
-            System.out.printf(SECOND_RESULT_MESSAGE, rank.getMatchCount(),
-                rank.getPrize().getValue(), rankResult.getRankResult().get(rank));
-            return true;
-        }
-        return false;
-    }
-
-
 }
