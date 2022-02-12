@@ -1,13 +1,9 @@
 package lotto.controller;
 
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoCalculation;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.Lottos;
-import lotto.domain.Money;
-import lotto.domain.RankResult;
 import lotto.domain.Winning;
 import lotto.domain.dto.LottoCalculationDTO;
 import lotto.domain.dto.RankDTO;
@@ -23,7 +19,8 @@ public class Controller {
     }
 
     private static void purchaseLottoAutomatical(LottoCalculation lottoCalculation) {
-        Winning winning = lottoCalculation.makeWinningLottoNumber(InputView.inputWinningLottoNumber(), InputView.inputBonusLottoNumber());
+        Winning winning = lottoCalculation.makeWinningLottoNumber(
+            InputView.inputWinningLottoNumber(), InputView.inputBonusLottoNumber());
         RankDTO rankDto = lottoCalculation.getRankResult(winning);
         OutputView.printRankResult(rankDto);
     }

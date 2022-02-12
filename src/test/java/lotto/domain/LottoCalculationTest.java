@@ -20,21 +20,21 @@ public class LottoCalculationTest {
 
 
     @BeforeEach
-    void makeLottos(){
+    void makeLottos() {
         List<LottoNumber> lottoManualOne = Arrays.stream("8, 21, 23, 41, 42, 43"
-                .replace(" ","")
+                .replace(" ", "")
                 .split(","))
             .map(LottoNumber::new)
             .collect(Collectors.toList());
 
         List<LottoNumber> lottoManualTwo = Arrays.stream("3, 5, 11, 16, 32, 38"
-                .replace(" ","")
+                .replace(" ", "")
                 .split(","))
             .map(LottoNumber::new)
             .collect(Collectors.toList());
 
         List<LottoNumber> lottoManualThree = Arrays.stream("7, 11, 16, 35, 36, 44"
-                .replace(" ","")
+                .replace(" ", "")
                 .split(","))
             .map(LottoNumber::new)
             .collect(Collectors.toList());
@@ -58,8 +58,10 @@ public class LottoCalculationTest {
     void purchaseLottoTest() {
         LottoCalculation lottoCalculation = new LottoCalculation("14000");
         assertAll(
-            ()->assertThat(lottoCalculation.purchaseLottos(new Lottos(oldLottos)).getNumberOfLottoAutomatical()).isEqualTo(11),
-            ()->assertThat(lottoCalculation.purchaseLottos(new Lottos(oldLottos)).getNumberOfLottoManual()).isEqualTo(3)
+            () -> assertThat(lottoCalculation.purchaseLottos(new Lottos(oldLottos))
+                .getNumberOfLottoAutomatical()).isEqualTo(11),
+            () -> assertThat(lottoCalculation.purchaseLottos(new Lottos(oldLottos))
+                .getNumberOfLottoManual()).isEqualTo(3)
         );
     }
 
@@ -67,7 +69,8 @@ public class LottoCalculationTest {
     @Test
     void makeWinningLottoNumberTest() {
         LottoCalculation lottoCalculation = new LottoCalculation("14000");
-        Winning winning = lottoCalculation.makeWinningLottoNumber("1,2,3,4,5,6", new LottoNumber(7));
+        Winning winning = lottoCalculation.makeWinningLottoNumber("1,2,3,4,5,6",
+            new LottoNumber(7));
         assertThat(winning).isNotNull();
     }
 
@@ -76,7 +79,8 @@ public class LottoCalculationTest {
     void makeRankResultTest() {
         LottoCalculation lottoCalculation = new LottoCalculation("14000");
         lottoCalculation.purchaseLottos(new Lottos(oldLottos));
-        Winning winning = lottoCalculation.makeWinningLottoNumber("1,2,3,4,5,6", new LottoNumber(7));
+        Winning winning = lottoCalculation.makeWinningLottoNumber("1,2,3,4,5,6",
+            new LottoNumber(7));
         assertThat(lottoCalculation.getRankResult(winning)).isNotNull();
     }
 
@@ -84,8 +88,8 @@ public class LottoCalculationTest {
     @Test
     void makeLottoTicketTest() {
         assertAll(
-            () -> assertThat(new LottoTicket("3",14)),
-            () -> assertThatIllegalArgumentException().isThrownBy(()->new LottoTicket("15", 14))
+            () -> assertThat(new LottoTicket("3", 14)),
+            () -> assertThatIllegalArgumentException().isThrownBy(() -> new LottoTicket("15", 14))
         );
     }
 }

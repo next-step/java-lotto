@@ -14,7 +14,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.value = value;
     }
 
-    public LottoNumber(String value){
+    public LottoNumber(String value) {
         this(Integer.parseInt(value));
     }
 

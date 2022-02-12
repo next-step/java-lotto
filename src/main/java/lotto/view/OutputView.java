@@ -2,7 +2,6 @@ package lotto.view;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import lotto.domain.Money;
 import lotto.domain.Rank;
 import lotto.domain.RankResult;
 import lotto.domain.dto.LottoCalculationDTO;
@@ -23,7 +22,7 @@ public class OutputView {
 
     public static void printCountMessage(LottoCalculationDTO LottoCalculationDto) {
         System.out.printf(PURCHASED_LOTTO_RESULT, LottoCalculationDto.getNumberOfLottoManual(),
-        LottoCalculationDto.getNumberOfLottoAutomatical());
+            LottoCalculationDto.getNumberOfLottoAutomatical());
         LottoCalculationDto.getLottos().lottos().forEach(
             lotto -> System.out.println(lotto.getLottoNumber())
         );
@@ -37,7 +36,8 @@ public class OutputView {
             .filter(Rank::get)
             .forEach(Rank -> printResult(rankDto.getRankResult(), Rank));
 
-        System.out.printf(TOTAL_RATIO_MESSAGE, rankDto.getPurchaseAmount().getPrizeRatio(rankDto.getRankResult().getTotalPrize(), rankDto.getPurchaseAmount()));
+        System.out.printf(TOTAL_RATIO_MESSAGE, rankDto.getPurchaseAmount()
+            .getPrizeRatio(rankDto.getRankResult().getTotalPrize(), rankDto.getPurchaseAmount()));
     }
 
     public static void printResult(RankResult rankDto, Rank rank) {

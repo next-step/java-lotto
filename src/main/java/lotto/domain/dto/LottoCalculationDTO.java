@@ -8,7 +8,8 @@ public class LottoCalculationDTO {
     private final int numberOfLottoAutomatical;
     private final Lottos lottos;
 
-    public LottoCalculationDTO(int numberOfLottoManual, int numberOfLottoAutomatical, Lottos lottos) {
+    public LottoCalculationDTO(int numberOfLottoManual, int numberOfLottoAutomatical,
+        Lottos lottos) {
         this.numberOfLottoManual = numberOfLottoManual;
         this.numberOfLottoAutomatical = numberOfLottoAutomatical;
         this.lottos = lottos;

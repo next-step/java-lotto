@@ -8,7 +8,7 @@ public class LottoCalculation {
     private Lottos purchaseLottos;
     private Money purchaseMoney;
 
-    public LottoCalculation(String value){
+    public LottoCalculation(String value) {
         this(new Lottos(), new Money(value));
     }
 
@@ -17,14 +17,17 @@ public class LottoCalculation {
         purchaseLottos = lottos;
     }
 
-    public LottoCalculationDTO purchaseLottos(final Lottos lottos){
+    public LottoCalculationDTO purchaseLottos(final Lottos lottos) {
         int numberOflottoManual = lottos.lottos().size();
 
         purchaseLottos = purchaseLottos.add(lottos);
-        int numberOfLottoAutomatical = getNumberOfLottosAutomatical(purchaseMoney, numberOflottoManual);
-        purchaseLottos = purchaseLottos.add(LottoBundle.lottoBundle(numberOfLottoAutomatical, new ShuffleLottoNumber()));
+        int numberOfLottoAutomatical = getNumberOfLottosAutomatical(purchaseMoney,
+            numberOflottoManual);
+        purchaseLottos = purchaseLottos.add(
+            LottoBundle.lottoBundle(numberOfLottoAutomatical, new ShuffleLottoNumber()));
 
-        return new LottoCalculationDTO(numberOflottoManual, numberOfLottoAutomatical, purchaseLottos);
+        return new LottoCalculationDTO(numberOflottoManual, numberOfLottoAutomatical,
+            purchaseLottos);
 
     }
 
@@ -32,7 +35,8 @@ public class LottoCalculation {
         return money.lottoCalculation() - numberOflottosManual;
     }
 
-    public Winning makeWinningLottoNumber(String inputWinningLottoNumber, LottoNumber inputBonusLottoNumber) {
+    public Winning makeWinningLottoNumber(String inputWinningLottoNumber,
+        LottoNumber inputBonusLottoNumber) {
         return new Winning(new Lotto(inputWinningLottoNumber), inputBonusLottoNumber);
     }
 
