@@ -7,8 +7,10 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Lottos;
 import lotto.domain.rank.Rank;
-import lotto.domain.rank.RankRepository;
+import lotto.domain.rank.RankExtractor;
 
 public class WinningResult {
 
@@ -19,12 +21,17 @@ public class WinningResult {
     private long winningCash = 0;
     private double yield = 0;
 
-    public WinningResult(List<Rank> ranks) {
+    public WinningResult(Lottos lottoRepository, WinningNumber winningNumber) {
+        this(lottoRepository.getLottos(), winningNumber);
+    }
+
+    public WinningResult(List<Lotto> lottos, WinningNumber winningNumber) {
+        List<Rank> ranks = RankExtractor.getRanks(lottos, winningNumber);
         this.result = groupByRank(ranks);
     }
 
-    public WinningResult(RankRepository rankRepository) {
-        this.result = groupByRank(rankRepository.getRanks());
+    public WinningResult(List<Rank> ranks) {
+        this.result = groupByRank(ranks);
     }
 
     private Map<Rank, Integer> groupByRank(List<Rank> ranks) {
