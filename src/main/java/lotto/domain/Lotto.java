@@ -19,7 +19,7 @@ public class Lotto {
 
     private final List<LottoNumber> lottoNumber;
 
-    public Lotto(List<LottoNumber> lottoNumber) {
+    public Lotto(final List<LottoNumber> lottoNumber) {
         List<LottoNumber> lottoFullNumberLengthSix = lottoNumber.subList(NUMBER_ZERO,
             LOTTO_NUMBER_SIZE);
         Collections.sort(lottoFullNumberLengthSix);
@@ -27,7 +27,7 @@ public class Lotto {
         this.lottoNumber = new ArrayList<>(lottoFullNumberLengthSix);
     }
 
-    public Lotto(String lottoNumber) {
+    public Lotto(final String lottoNumber) {
         this.lottoNumber =
             Arrays.stream(
                     lottoNumber

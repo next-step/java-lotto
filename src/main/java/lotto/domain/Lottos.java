@@ -13,7 +13,7 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public Lottos(final int count, final Lotto lotto){
+    public Lottos(final Lotto lotto, final int count){
         this.lottos = IntStream.range(0, count)
             .mapToObj(idx -> lotto)
             .collect(Collectors.toList());
