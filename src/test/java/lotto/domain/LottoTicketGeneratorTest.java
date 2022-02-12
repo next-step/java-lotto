@@ -49,7 +49,7 @@ class LottoTicketGeneratorTest {
 
     @DisplayName(value = "1000으로 money가 나눠 떨어지지 않을 떄, IllegalArgumentException이 발생한다.")
     @ParameterizedTest
-    @ValueSource(ints = {500, 1200, 2500, 3300})
+    @ValueSource(ints = {500, 1_200, 2_500, 3_300})
     void GivenMoneyWithIntType_WhenNotDivisibleBy1000_ThenIllegalArgumentException(
         final int money) {
         final Price notPurchasablePrice = Price.from(money);
