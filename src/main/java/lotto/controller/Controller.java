@@ -10,24 +10,24 @@ import lotto.domain.Money;
 import lotto.domain.RankResult;
 import lotto.domain.ShuffleLottoNumber;
 import lotto.domain.Winning;
-import lotto.view.UserConsole;
-import lotto.view.UserResult;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class Controller {
 
     public static void run() {
-        Money money = UserConsole.inputPurchaseAmount();
+        Money money = InputView.inputPurchaseAmount();
 
         LottoCalculation lottoCalculation = new LottoCalculation(money);
         int count = lottoCalculation.lottoCalculation();
 
         Lottos lottoBundle = LottoBundle.lottoBundle(count, new ShuffleLottoNumber());
-        UserResult.printCountMessage(lottoBundle);
-        Lotto winningLottoNumber = new Lotto(UserConsole.inputWinningLottoNumber());
-        LottoNumber bonusLottoNumber = UserConsole.inputBbonusLottoNumber();
+        OutputView.printCountMessage(lottoBundle);
+        Lotto winningLottoNumber = new Lotto(InputView.inputWinningLottoNumber());
+        LottoNumber bonusLottoNumber = InputView.inputBbonusLottoNumber();
 
         Winning winning = new Winning(winningLottoNumber, bonusLottoNumber);
-        UserResult.printRank(new RankResult(lottoBundle, winning));
-        UserResult.printPrizeRatio(new RankResult(lottoBundle, winning).getTotalPrize(), money);
+        OutputView.printRank(new RankResult(lottoBundle, winning));
+        OutputView.printPrizeRatio(new RankResult(lottoBundle, winning).getTotalPrize(), money);
     }
 }

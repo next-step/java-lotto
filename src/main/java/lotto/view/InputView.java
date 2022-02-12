@@ -4,7 +4,7 @@ import java.util.Scanner;
 import lotto.domain.LottoNumber;
 import lotto.domain.Money;
 
-public class UserConsole {
+public class InputView {
 
     private static final String PURCHASE_AMOUNT_MESSAGE = "구입 금액을 입력해 주세요";
     private static final String WINNING_LOTTO_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
@@ -12,7 +12,7 @@ public class UserConsole {
     private static final Scanner SCANNER = new Scanner(System.in);
 
 
-    private UserConsole() {
+    private InputView() {
 
     }
 

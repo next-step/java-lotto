@@ -8,7 +8,7 @@ import lotto.domain.Money;
 import lotto.domain.Rank;
 import lotto.domain.RankResult;
 
-public class UserResult {
+public class OutputView {
 
     private final static String LOTTO_COUNT_MESSAGE = "개를 구매했습니다.";
     private final static String RANK_STATISTICS = "당첨 통계";
@@ -17,7 +17,7 @@ public class UserResult {
     private final static String SECOND_RESULT_MESSAGE = "%s개 일치, 보너스 볼 일치 (%d원)- %d개\n";
     private final static String TOTAL_RATIO_MESSAGE = "총 수익률은 %.2f입니다.";
 
-    private UserResult() {
+    private OutputView() {
 
     }
 
