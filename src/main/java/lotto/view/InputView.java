@@ -11,6 +11,7 @@ public class InputView {
     private static final String WINNING_LOTTO_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUSBALL_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String LOTTO_TICKET_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요";
+    private static final String LOTTO_NUMBER_MANUAL_MESSAGE = "수동으로 구매할 번호를 입력해주세요.";
     private static final Scanner SCANNER = new Scanner(System.in);
 
 
@@ -40,8 +41,8 @@ public class InputView {
     }
 
     public static Lottos inputPurchaseManualLotto(int count){
-        System.out.println("수동으로 구매할 번호를 입력해주세요.");
-        return new Lottos(count, inputLotto());
+        System.out.println(LOTTO_NUMBER_MANUAL_MESSAGE);
+        return new Lottos(inputLotto(), count);
     }
 
     public static Lotto inputLotto(){
