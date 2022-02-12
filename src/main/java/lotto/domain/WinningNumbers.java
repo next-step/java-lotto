@@ -26,10 +26,6 @@ public class WinningNumbers {
         return new WinningNumbers(winningNumbers, bonusNumber);
     }
 
-    public List<Integer> getWinningNumbers() {
-        return Collections.unmodifiableList(winningNumbers);
-    }
-
     public boolean isWinningNumbersContain (int number) {
         return winningNumbers.contains(number);
     }
