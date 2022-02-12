@@ -29,7 +29,7 @@ public class OutputView {
         );
     }
 
-    public static void printRankResult(Money money, RankDTO rankDto) {
+    public static void printRankResult(RankDTO rankDto) {
         System.out.println(RANK_STATISTICS);
         System.out.println(DOT_LINE);
         Arrays.stream(Rank.values())
@@ -37,7 +37,7 @@ public class OutputView {
             .filter(Rank::get)
             .forEach(Rank -> printResult(rankDto.getRankResult(), Rank));
 
-        System.out.printf(TOTAL_RATIO_MESSAGE, rankDto.getPurchaseAmount().getPrizeRatio(rankDto.getRankResult().getTotalPrize(), money));
+        System.out.printf(TOTAL_RATIO_MESSAGE, rankDto.getPurchaseAmount().getPrizeRatio(rankDto.getRankResult().getTotalPrize(), rankDto.getPurchaseAmount()));
     }
 
     public static void printResult(RankResult rankDto, Rank rank) {
