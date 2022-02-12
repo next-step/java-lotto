@@ -1,6 +1,5 @@
 package lotto.view;
 
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class InputView {
