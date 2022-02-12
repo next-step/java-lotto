@@ -5,6 +5,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoBundle;
 import lotto.domain.LottoCalculation;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.RankResult;
@@ -18,6 +19,10 @@ public class Controller {
     public static void run() {
         Money money = new Money(InputView.inputPurchaseAmount());
         int count = calculateLottoCount(money);
+
+        LottoTicket lottoTicket = new LottoTicket(InputView.inputLottoTicket(), count);
+
+
         Lottos lottoBundle = generateLottoNumber(count);
         Lotto winningLottoNumber = new Lotto(InputView.inputWinningLottoNumber());
         LottoNumber bonusLottoNumber = InputView.inputBonusLottoNumber();
