@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LottoShop {
 
@@ -28,11 +29,11 @@ public class LottoShop {
     }
 
     public Lottos buyLotto(final int lottoAmount) {
-        Lottos lottos = new Lottos(new ArrayList<>());
+        final List<Lotto> lottos = new ArrayList<>();
         for (int amount = ZERO; amount < lottoAmount; amount++) {
-            lottos.storeLotto(new Lotto());
+            lottos.add(new Lotto());
         }
-        return lottos;
+        return new Lottos(lottos);
     }
 
 }
