@@ -14,7 +14,6 @@ public class LottoCalculationTest {
     @Test
     void countLottoesTest() {
         Money money = new Money(price);
-        LottoCalculation lottoCalculation = new LottoCalculation(money);
-        assertThat(lottoCalculation.lottoCalculation()).isEqualTo(expectedLotto);
+        assertThat(money.lottoCalculation()).isEqualTo(expectedLotto);
     }
 }
