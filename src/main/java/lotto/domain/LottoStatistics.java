@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 
 public class LottoStatistics {
 
+    private static final String RATE_OF_RETURN_FORMAT = "%.2f";
+
     private final WinningNumbers winningNumbers;
     private final LottoTicket lottoTicket;
     private final List<PrizeGrade> lottoTicketResult;
@@ -38,7 +40,7 @@ public class LottoStatistics {
             .mapToInt(statistics -> statistics.getPrizeMoney())
             .sum();
 
-        return String.format("%.2f", totalPrice / lottoTicket.getPrice());
+        return String.format(RATE_OF_RETURN_FORMAT, totalPrice / lottoTicket.getPrice());
     }
 
     private void initResultStatistics () {
