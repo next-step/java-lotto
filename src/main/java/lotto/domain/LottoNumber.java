@@ -7,8 +7,8 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(int number) {
-        this.number = number;
         validateRange();
+        this.number = number;
     }
 
     private void validateRange() {
