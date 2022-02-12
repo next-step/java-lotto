@@ -6,7 +6,7 @@ import java.util.Map;
 public class RankResult {
 
     private static final int INITIAL_VALUE = 0;
-    private Map<Rank, Integer> rankResult;
+    private final Map<Rank, Integer> rankResult;
 
 
     public RankResult(final Lottos lottos, final Winning winning) {
@@ -23,7 +23,7 @@ public class RankResult {
             .sum());
     }
 
-    public HashMap<Rank, Integer> rankCount(Lottos lottos, Winning winning) {
+    public HashMap<Rank, Integer> rankCount(final Lottos lottos, final Winning winning) {
         HashMap<Rank, Integer> rankResult = new HashMap<>();
         for (Rank rank : Rank.values()) {
             rankResult.put(rank, INITIAL_VALUE);

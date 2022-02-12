@@ -24,23 +24,23 @@ public class Money {
         return value;
     }
 
-    public double getPrizeRatio(Money totalPrize, Money money) {
+    public double getPrizeRatio(final Money totalPrize, final Money money) {
         return totalPrize.getValue() / (double) money.getValue();
     }
 
-    private void validateTypeLessThousand(int value) {
+    private void validateTypeLessThousand(final int value) {
         if (value < LOTTO_PRICE) {
             throw new IllegalArgumentException(LESS_THOUSAND_ERROR_MESSAGE);
         }
     }
 
-    private void validateTypeNegativeNumber(int value) {
+    private void validateTypeNegativeNumber(final int value) {
         if (value < NUMBER_ZERO) {
             throw new IllegalArgumentException(NEGATIVE_NUMBER_ERROR_MESSAGE);
         }
     }
 
-    private int validateTypeInput(String value) {
+    private int validateTypeInput(final String value) {
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException exception) {

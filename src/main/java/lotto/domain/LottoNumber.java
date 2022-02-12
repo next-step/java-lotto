@@ -18,7 +18,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this(Integer.parseInt(value));
     }
 
-    private void validateRange(int value) {
+    private void validateRange(final int value) {
         if (value < MIN_RANGE_NUMBER || value > MAX_RANGE_NUMBER) {
             throw new IllegalArgumentException(ERROR_MESSAGE);
         }

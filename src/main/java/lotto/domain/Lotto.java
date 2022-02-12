@@ -35,7 +35,7 @@ public class Lotto {
             .map(LottoNumber::new).collect(Collectors.toList());
     }
 
-    private void validateNonDuplication(List<LottoNumber> lottoFullNumberLengthSix) {
+    private void validateNonDuplication(final List<LottoNumber> lottoFullNumberLengthSix) {
         Set<LottoNumber> LottoNumberSet = new HashSet<>(lottoFullNumberLengthSix);
         if (LottoNumberSet.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(ERROR_MESSAGE);
@@ -43,7 +43,7 @@ public class Lotto {
     }
 
 
-    public boolean get(LottoNumber lottoNumber) {
+    public boolean get(final LottoNumber lottoNumber) {
         return this.lottoNumber.contains(lottoNumber);
     }
 
@@ -54,13 +54,13 @@ public class Lotto {
             .collect(Collectors.toList());
     }
 
-    public long countMatch(Lotto lottoNumber) {
+    public long countMatch(final Lotto lottoNumber) {
         return this.lottoNumber.stream()
             .filter(lottoNumber::get)
             .count();
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
+    public boolean contains(final LottoNumber lottoNumber) {
         return this.getLottoNumber().contains(lottoNumber.getValue());
     }
 }

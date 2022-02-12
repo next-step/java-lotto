@@ -19,11 +19,11 @@ public class Winning {
         }
     }
 
-    public long winningLottoNumber(Lotto lotto) {
+    public long winningLottoNumber(final Lotto lotto) {
         return winningLottoNumber.countMatch(lotto);
     }
 
-    public boolean bonusLottoNumber(Lotto lotto) {
+    public boolean bonusLottoNumber(final Lotto lotto) {
         return lotto.contains(bonusLottoNumber);
     }
 
