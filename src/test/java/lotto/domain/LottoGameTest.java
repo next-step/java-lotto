@@ -37,10 +37,10 @@ class LottoGameTest {
     }
 
     private Lotto createLotto(final List<Integer> numbers) {
-        return new Lotto(
-            numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+        return new
+            Lotto(numbers.stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
     }
 
     @Test
