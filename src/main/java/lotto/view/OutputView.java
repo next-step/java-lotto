@@ -5,8 +5,6 @@ import lotto.domain.PrizeGrade;
 
 public class OutputView {
 
-    private static final int LOTTO_BONUS_GRADE = 7;
-
     public static final String ERROR_MESSAGE = "[ERROR] ";
     private static final String REQUEST_LOTTO_PRICE = "구입금액을 입력해 주세요.";
     private static final String SYSTEM_LOTTO_COUNT = "개를 구매했습니다.";
