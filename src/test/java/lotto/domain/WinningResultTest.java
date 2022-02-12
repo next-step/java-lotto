@@ -18,12 +18,12 @@ class WinningResultTest {
         //given
         List<Lotto> lottos = new ArrayList<>();
 
-        Lotto lotto1 = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto2 = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 7));
-        Lotto lotto3 = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 17));
-        Lotto lotto4 = Lotto.from(Arrays.asList(1, 2, 3, 4, 15, 7));
-        Lotto lotto5 = Lotto.from(Arrays.asList(1, 2, 3, 14, 15, 7));
-        Lotto lotto6 = Lotto.from(Arrays.asList(1, 2, 13, 14, 15, 7));
+        Lotto lotto1 = new Lotto(1, 2, 3, 4, 5, 6);
+        Lotto lotto2 = new Lotto(1, 2, 3, 4, 5, 7);
+        Lotto lotto3 = new Lotto(1, 2, 3, 4, 5, 17);
+        Lotto lotto4 = new Lotto(1, 2, 3, 4, 15, 7);
+        Lotto lotto5 = new Lotto(1, 2, 3, 14, 15, 7);
+        Lotto lotto6 = new Lotto(1, 2, 13, 14, 15, 7);
 
         lottos.add(lotto1);
         lottos.add(lotto2);
