@@ -36,5 +36,4 @@ class LottoRankTest {
         LottoRank given = LottoRank.valueOf(3, false);
         assertThat(given).isEqualTo(LottoRank.FIFTH);
     }
-
 }

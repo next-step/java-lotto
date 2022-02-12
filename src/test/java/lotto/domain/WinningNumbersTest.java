@@ -35,5 +35,4 @@ class WinningNumbersTest {
                 new LottoNumber(5),
                 new LottoNumber(6)), new LottoNumber(bonusBall)));
     }
-
 }
