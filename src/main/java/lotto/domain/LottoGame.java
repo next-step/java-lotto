@@ -43,14 +43,11 @@ public class LottoGame {
         final List<Ranking> rankings = new ArrayList<>(totalResult.keySet());
 
         final int totalWinnerPrize = rankings.stream()
-            .mapToInt(ranking -> process(ranking, totalResult.get(ranking)))
+            .mapToInt(ranking ->
+                ranking.multiplyCountAndWinnerPrice(totalResult.get(ranking)))
             .sum();
 
         return totalWinnerPrize / money.getMoney();
-    }
-
-    private int process(Ranking ranking, Integer count) {
-        return ranking.multiplyCountAndWinnerPrice(count);
     }
 
     public Lottos getLottos() {
