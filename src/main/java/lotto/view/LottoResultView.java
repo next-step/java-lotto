@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -46,7 +47,7 @@ public class LottoResultView {
         System.out.println(numbers);
     }
 
-    public void finishGame(final Map<Ranking, Integer> totalResult, final double totalWinnerPrize) {
+    public void finishGame(final Map<Ranking, Integer> totalResult, final BigDecimal totalWinnerPrize) {
         System.out.println(LOTTO_STATISTICS_MESSAGE);
         System.out.println(HYPHEN_MESSAGE);
 
@@ -57,7 +58,7 @@ public class LottoResultView {
         printYield(totalWinnerPrize);
     }
 
-    private void printYield(final double totalWinnerPrice) {
+    private void printYield(final BigDecimal totalWinnerPrice) {
         System.out.printf(
             TOTAL_YIELD_MESSAGE + String.format("%.2f", totalWinnerPrice) + FINISH_MESSAGE);
     }

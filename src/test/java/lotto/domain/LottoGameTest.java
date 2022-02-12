@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -67,8 +68,8 @@ class LottoGameTest {
     void 수익률을_계산할_수_있다() {
         Map<Ranking, Integer> totalResult = lottoGame.findWinner();
 
-        double yield = lottoGame.calculateYield(totalResult, new Money(5000));
+        BigDecimal yield = lottoGame.calculateYield(totalResult, new Money(5000));
 
-        assertThat(yield).isEqualTo(406011);
+        assertThat(yield).isEqualTo(BigDecimal.valueOf(406011));
     }
 }

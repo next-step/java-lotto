@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -39,15 +40,15 @@ public class LottoGame {
         totalResult.put(ranking, ++currentCount);
     }
 
-    public double calculateYield(final Map<Ranking, Integer> totalResult, final Money money) {
+    public BigDecimal calculateYield(final Map<Ranking, Integer> totalResult, final Money money) {
         final List<Ranking> rankings = new ArrayList<>(totalResult.keySet());
 
-        final int totalWinnerPrize = rankings.stream()
+        final BigDecimal totalWinnerPrize = BigDecimal.valueOf(rankings.stream()
             .mapToInt(ranking ->
                 ranking.multiplyCountAndWinnerPrice(totalResult.get(ranking)))
-            .sum();
+            .sum());
 
-        return totalWinnerPrize / money.getMoney();
+        return totalWinnerPrize.divide(BigDecimal.valueOf(money.getMoney()));
     }
 
     public Lottos getLottos() {
