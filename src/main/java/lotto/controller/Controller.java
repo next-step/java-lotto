@@ -17,30 +17,21 @@ import lotto.view.OutputView;
 public class Controller {
 
     public static void run() {
-        Money money = new Money(InputView.inputPurchaseAmount());
-
-        LottoTicket lottoTicket = new LottoTicket(InputView.inputLottoTicket(),
-            money.lottoCalculation());
-
-        Lottos lottos = InputView.inputPurchaseManualLotto(lottoTicket.getLottoTicketValue());
-
-        LottoCalculation lottoCalculation = new LottoCalculation();
-
-        LottoCalculationDTO lottoCalculationDTO = lottoCalculation.purchaseLottos(money, lottos);
-        OutputView.printCountMessage(lottoCalculationDTO);
-
-        Lotto winningLottoNumber = new Lotto(InputView.inputWinningLottoNumber());
-        LottoNumber bonusLottoNumber = InputView.inputBonusLottoNumber();
-
-        Winning winning = new Winning(winningLottoNumber, bonusLottoNumber);
-
-        RankResult rankResult = new RankResult(lottoCalculationDTO.getLottos(), winning);
-
-        RankDTO rankDTO = lottoCalculation.getCalculationLottoResult(rankResult, money);
-        showLottoResult(money, rankDTO);
+        LottoCalculation lottoCalculation = new LottoCalculation(InputView.inputPurchaseAmount());
+        purchaseLottoManual(lottoCalculation);
+        purchaseLottoAutomatical(lottoCalculation);
     }
 
-    private static void showLottoResult(Money money, RankDTO rankDto) {
-        OutputView.printRankResult(money, rankDto);
+    private static void purchaseLottoAutomatical(LottoCalculation lottoCalculation) {
+        Winning winning = lottoCalculation.makeWinningLottoNumber(InputView.inputWinningLottoNumber(), InputView.inputBonusLottoNumber());
+        RankDTO rankDto = lottoCalculation.getRankResult(winning);
+        OutputView.printRankResult(rankDto);
+    }
+
+    private static void purchaseLottoManual(LottoCalculation lottoCalculation) {
+        LottoTicket lottoTicket = lottoCalculation.makeLottoTicket(InputView.inputLottoTicket());
+        Lottos lottos = InputView.inputPurchaseManualLotto(lottoTicket.getLottoTicketValue());
+        LottoCalculationDTO lottoCalculationDTO = lottoCalculation.purchaseLottos(lottos);
+        OutputView.printCountMessage(lottoCalculationDTO);
     }
 }
