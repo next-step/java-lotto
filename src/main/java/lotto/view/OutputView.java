@@ -8,7 +8,7 @@ import lotto.domain.Ticket;
 import lotto.domain.WinningResult;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.LottoRepository;
+import lotto.domain.lotto.Lottos;
 import lotto.domain.rank.Rank;
 
 public class OutputView {
@@ -32,7 +32,7 @@ public class OutputView {
         printMessage(String.format(PURCHASE_AMOUNT_MANAGER_LOG, ticketCount) + ENTER);
     }
 
-    public void printPurchaseTicket(LottoRepository lottoRepository) {
+    public void printPurchaseTicket(Lottos lottoRepository) {
         List<Lotto> lottos = lottoRepository.getLottos();
         for (Lotto lotto : lottos) {
             printMessage(lotto.getNumbers().stream()
