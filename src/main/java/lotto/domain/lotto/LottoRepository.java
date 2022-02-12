@@ -1,9 +1,7 @@
 package lotto.domain.lotto;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import lotto.domain.machine.LottoGenerator;
 
 public class LottoRepository {
 
