@@ -4,6 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import lotto.domain.Ticket;
+import lotto.domain.WinningNumber;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 
 public class InputView {
 
@@ -17,7 +21,12 @@ public class InputView {
     private static final String INPUT_IS_EMPTY_ERROR_LOG = "공백은 들어올 수 없습니다.";
     private static final String LOTTO_NUMBER_SIZE_ERROR_LOG = "로또는 " + LOTTO_NUMBER_SIZE + "자리여야 합니다.";
 
-    public static String writePurchaseAmount() {
+    public static Ticket buyTicket() {
+        int money = Integer.parseInt(writePurchaseAmount());
+        return new Ticket(money);
+    }
+
+    private static String writePurchaseAmount() {
         try {
             OutputView.printMessage(PURCHASE_TICKET_MANAGER_MESSAGE + ENTER);
             String input = scanner.nextLine();
@@ -27,6 +36,23 @@ public class InputView {
             e.printStackTrace();
             return writePurchaseAmount();
         }
+    }
+
+    public static WinningNumber makeWinningNumber() {
+        try {
+            return new WinningNumber(makeSixNumbers(), makeBonusBall());
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return makeWinningNumber();
+        }
+    }
+
+    private static Lotto makeSixNumbers() {
+        return Lotto.from(InputView.writeWinningNumbers());
+    }
+
+    private static LottoNumber makeBonusBall() {
+        return new LottoNumber(InputView.writeBonusBall());
     }
 
     public static List<Integer> writeWinningNumbers() {

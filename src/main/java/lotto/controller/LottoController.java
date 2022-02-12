@@ -4,9 +4,7 @@ import lotto.domain.Ticket;
 import lotto.domain.TicketDealer;
 import lotto.domain.WinningNumber;
 import lotto.domain.WinningResult;
-import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoRepository;
-import lotto.domain.lotto.LottoNumber;
 import lotto.domain.machine.RandomLottoGenerator;
 import lotto.domain.rank.RankRepository;
 import lotto.view.InputView;
@@ -17,13 +15,13 @@ public class LottoController {
     public void start() {
         OutputView outputView = new OutputView();
 
-        Ticket ticket = buyTicket();
+        Ticket ticket = InputView.buyTicket();
         LottoRepository lottoRepository = TicketDealer.getLottosOf(new RandomLottoGenerator(), ticket.getBuyCount());
 
         outputView.printPurchaseAmount(ticket);
         outputView.printPurchaseTicket(lottoRepository);
 
-        WinningNumber winningNumber = makeWinningNumber();
+        WinningNumber winningNumber = InputView.makeWinningNumber();
 
         RankRepository rankRepository = RankRepository.getRanksOf(lottoRepository, winningNumber);
 
@@ -31,27 +29,5 @@ public class LottoController {
         winningResult.calculateYield(ticket.getBuyCash());
 
         outputView.printWinningResult(winningResult);
-    }
-
-    public Ticket buyTicket() {
-        int money = Integer.parseInt(InputView.writePurchaseAmount());
-        return new Ticket(money);
-    }
-
-    private WinningNumber makeWinningNumber() {
-        try {
-            return new WinningNumber(makeSixNumbers(), makeBonusBall());
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            return makeWinningNumber();
-        }
-    }
-
-    private Lotto makeSixNumbers() {
-        return Lotto.from(InputView.writeWinningNumbers());
-    }
-
-    private LottoNumber makeBonusBall() {
-        return new LottoNumber(InputView.writeBonusBall());
     }
 }
