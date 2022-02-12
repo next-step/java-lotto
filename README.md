@@ -81,6 +81,7 @@
 - [ ] 원시타입 포장하기.
 - [x] LOTTO_BONUS_GRADE 제거
 - [x] generateLottoTicket, mapToObj 활용
+- [x] RATE_OF_RETURN_FORMAT, format 상수로 표현
 
 ## multiple authors
 
