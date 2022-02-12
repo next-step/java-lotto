@@ -1,7 +1,9 @@
 package lotto.view;
 
 import java.util.Scanner;
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 
 public class InputView {
 
@@ -35,5 +37,15 @@ public class InputView {
         System.out.println(BONUSBALL_MESSAGE);
         int bonusLottoNumber = Integer.parseInt(SCANNER.nextLine());
         return new LottoNumber(bonusLottoNumber);
+    }
+
+    public static Lottos inputPurchaseManualLotto(int count){
+        System.out.println("수동으로 구매할 번호를 입력해주세요.");
+        return new Lottos(count, inputLotto());
+    }
+
+    public static Lotto inputLotto(){
+        String numberOfPurchaseManual = SCANNER.nextLine();
+        return new Lotto(numberOfPurchaseManual);
     }
 }
