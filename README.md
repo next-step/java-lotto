@@ -76,6 +76,11 @@
 - [x] Statistics 리펙토링
 - [x] Enum PrizeGrade refactoring (@FunctionalInterface 사용)
 
+---
+
+- [ ] 원시타입 포장하기.
+- [x] LOTTO_BONUS_GRADE 제거
+
 ## multiple authors
 
 ```bash
