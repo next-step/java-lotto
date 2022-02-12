@@ -3,10 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.rank.Rank;
@@ -32,22 +29,10 @@ class WinningResultTest {
         lottos.add(lotto5);
         lottos.add(lotto6);
 
-        WinningNumber winningNumber = new WinningNumber(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
+        WinningNumber winningNumber = new WinningNumber(new Lotto(1, 2, 3, 4, 5, 6), new LottoNumber(7));
 
         //when
-        List<Rank> ranks = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            Set<LottoNumber> lottoNumbers = lotto.getNumbers();
-
-            List<Integer> collect = lottoNumbers.stream()
-                .map(LottoNumber::getNumber)
-                .collect(Collectors.toList());
-
-            Rank rank = winningNumber.compareTo(collect);
-            ranks.add(rank);
-        }
-
-        WinningResult winningResult = new WinningResult(ranks);
+        WinningResult winningResult = new WinningResult(lottos, winningNumber);
 
         //then
         assertThat(winningResult.getResult().get(Rank.FIRST)).isEqualTo(1);

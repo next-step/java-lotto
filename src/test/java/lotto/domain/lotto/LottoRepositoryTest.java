@@ -1,6 +1,6 @@
 package lotto.domain.lotto;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import lotto.domain.TicketDealer;
 import lotto.domain.machine.RandomLottoGenerator;
@@ -10,7 +10,7 @@ class LottoRepositoryTest {
     @Test
     public void 입력한_티켓의개수만큼_로또가_생성된다() {
         //given
-        LottoRepository lottoManager = TicketDealer.getLottosOf(new RandomLottoGenerator(), 14);
+        Lottos lottoManager = TicketDealer.getLottosOf(new RandomLottoGenerator(), 14);
 
         //when
 
