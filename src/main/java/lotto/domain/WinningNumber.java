@@ -32,6 +32,14 @@ public class WinningNumber {
             .contains(bonus.getNumber());
     }
 
+    public Lotto getWinningLotto() {
+        return this.lotto;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return this.bonus;
+    }
+
     public Rank compareTo(List<Integer> targetLotto) {
         List<Integer> winningNumbers = lotto.getNumbers().stream()
             .map(LottoNumber::getNumber)
