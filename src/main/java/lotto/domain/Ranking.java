@@ -27,13 +27,9 @@ public enum Ranking {
         }
 
         return Arrays.stream(Ranking.values())
-            .filter(rank -> rank.equals(normalNumberMatchCount))
+            .filter(rank -> rank.normalNumberMatchCount == normalNumberMatchCount)
             .findFirst()
             .orElse(FAIL);
-    }
-
-    private boolean equals(final int normalNumberMatchCount) {
-        return this.normalNumberMatchCount == normalNumberMatchCount;
     }
 
     public int multiplyCountAndWinnerPrice(final int count) {
