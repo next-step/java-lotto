@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ShuffleLottoNumber implements Shuffle{
+public class ShuffleLottoNumber implements Shuffle {
 
     @Override
     public Lotto suffle(List<LottoNumber> lottoNumber) {

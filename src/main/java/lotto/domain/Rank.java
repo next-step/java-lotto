@@ -53,8 +53,9 @@ public enum Rank {
     }
 
     public boolean isSencod(Rank rank) {
-        if(rank == Rank.SECOND)
+        if (rank == Rank.SECOND) {
             return true;
+        }
         return false;
     }
 }

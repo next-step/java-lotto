@@ -14,7 +14,7 @@ class MoneyTest {
     @ParameterizedTest
     @ValueSource(strings = {"900", "-2", "abc"})
     void createMoneyTest(String value) {
-        assertThatIllegalArgumentException().isThrownBy(()->new Money(value));
+        assertThatIllegalArgumentException().isThrownBy(() -> new Money(value));
     }
 
     @DisplayName("로또_당첨_수익률_테스트")
@@ -22,7 +22,7 @@ class MoneyTest {
     void getLottoPrizeRatioTest() {
         Money money = new Money("14000");
         assertThat(
-            Math.floor(money.getPrizeRatio(new Money("5000"), new Money("14000"))*100.0)/100.0)
+            Math.floor(money.getPrizeRatio(new Money("5000"), new Money("14000")) * 100.0) / 100.0)
             .isEqualTo(0.35);
     }
 }
