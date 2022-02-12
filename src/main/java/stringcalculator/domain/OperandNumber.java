@@ -2,26 +2,26 @@ package stringcalculator.domain;
 
 import java.util.Objects;
 
-public class Number {
+public class OperandNumber {
 
     private final int number;
 
-    public Number(String number) {
-        this(validatePositiveNumber(number));
+    public OperandNumber(String input) {
+        this(convertNumberType(input));
     }
-    public Number(int number){
+
+    public OperandNumber(int number) {
+        checkPostitiveNumber(number);
         this.number = number;
     }
 
-    public static int validatePositiveNumber(String token) {
-        final int intToken = convertTypeOfToken(token);
-        if (intToken < 0) {
+    public static void checkPostitiveNumber(int number) {
+        if (number < 0) {
             throw new IllegalArgumentException("[Error]: 양수만 연산 가능합니다.");
         }
-        return intToken;
     }
 
-    public static int convertTypeOfToken(final String token) {
+    public static int convertNumberType(final String token) {
         try {
             return Integer.parseInt(token);
         } catch (NumberFormatException e) {
@@ -37,12 +37,16 @@ public class Number {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Number number1 = (Number) o;
+        OperandNumber number1 = (OperandNumber) o;
         return number == number1.number;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    public int getNumber() {
+        return number;
     }
 }

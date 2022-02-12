@@ -1,6 +1,7 @@
 package stringcalculator.domain;
 
-import static stringcalculator.domain.Validator.validatePositiveNumber;
+import static stringcalculator.util.Constant.CUSTOM_DELIMITER;
+import static stringcalculator.util.Constant.DEFAULT_DELIMITER;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,38 +11,37 @@ import java.util.regex.Pattern;
 
 public class Delimiter {
 
-    private final static String CUSTOM_DELIMITER = "//(.)\n(.*)";
-    private final static String[] DEFAULT_DELIMITER = new String[]{",", ":"};
-
-    private static final List<String> delimiters = new ArrayList<>(
-        Arrays.asList(DEFAULT_DELIMITER));
+    private final List<String> delimiters;
 
     public Delimiter() {
+        this.delimiters = new ArrayList<>(Arrays.asList(DEFAULT_DELIMITER));
     }
 
-    public static String findExpression(String input) {
+    public List<OperandNumber> findOperands(final String input) {
         Pattern pattern = Pattern.compile(CUSTOM_DELIMITER);
         Matcher matcher = pattern.matcher(input);
         if (matcher.find()) {
             addCustomDelimiter(matcher.group(1));
-            return matcher.group(2);
+            return extractNumberFromExpression(matcher.group(2));
         }
-        return input;
+        return extractNumberFromExpression(input);
     }
 
-    private static void addCustomDelimiter(String delimiter) {
-        delimiters.add(delimiter);
+    private void addCustomDelimiter(String delimiter) {
+        this.delimiters.add(delimiter);
     }
 
-    public static List<Integer> extractNumberFromExpression(String input) {
-        return convertOperandType(Arrays.asList(input.split(String.join("|", delimiters))));
+    public List<OperandNumber> extractNumberFromExpression(String input) {
+        return convertOperandType(
+            Arrays.asList(input.replace(" ", "").split(String.join("|", delimiters))));
     }
 
-    private static List<Integer> convertOperandType(List<String> tokens) {
-        List<Integer> numbers = new ArrayList<>();
+    private List<OperandNumber> convertOperandType(List<String> tokens) {
+        List<OperandNumber> numbers = new ArrayList<>();
         tokens.forEach(
-            token -> numbers.add(validatePositiveNumber(token))
+            token -> numbers.add(new OperandNumber(token))
         );
         return numbers;
     }
+
 }

@@ -6,21 +6,27 @@ public class StringCalculator {
 
     private static final String EMPTY_VALUE = "0";
 
-    public StringCalculator() {
+    private List<OperandNumber> operands;
+    private final Delimiter delimiter;
 
+    public StringCalculator() {
+        delimiter = new Delimiter();
     }
 
-    public List<Integer> preprocess(final String input) {
-        String expression = Delimiter.findExpression(checkNullOrEmpty(input));
-        return Delimiter.extractNumberFromExpression(expression);
+    public void preprocess(final String input) {
+        operands = delimiter.findOperands(checkNullOrEmpty(input));
     }
 
     public int add(final String input) {
-        List<Integer> numbers = preprocess(input);
-        return numbers.stream().reduce(0, Operation.PLUS::operate);
+        preprocess(input);
+        int sum = 0;
+        for (OperandNumber operand : operands) {
+            sum += operand.getNumber();
+        }
+        return sum;
     }
 
-    private static String checkNullOrEmpty(String input) {
+    private String checkNullOrEmpty(String input) {
         if (input == null || input.isEmpty()) {
             return EMPTY_VALUE;
         }
