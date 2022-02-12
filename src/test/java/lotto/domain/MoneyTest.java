@@ -13,4 +13,13 @@ class MoneyTest {
         Money money = new Money(3);
         assertThat(money.getValue()).isEqualTo(3);
     }
+
+    @DisplayName("로또_당첨_수익률_테스트")
+    @Test
+    void getLottoPrizeRatioTest() {
+        Money money = new Money("14000");
+        assertThat(
+            Math.floor(money.getPrizeRatio(new Money("5000"), new Money("14000"))*100.0)/100.0)
+            .isEqualTo(0.35);
+    }
 }

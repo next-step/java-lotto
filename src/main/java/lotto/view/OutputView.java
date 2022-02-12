@@ -48,7 +48,7 @@ public class OutputView {
             rankResult.getRankResult().get(rank));
     }
 
-    public static void printPrizeRatio(Money totalPrize, Money money) {
-        System.out.printf(TOTAL_RATIO_MESSAGE, totalPrize.getValue() / (float) money.getValue());
+    public static void printPrizeRatio(double ratio) {
+        System.out.printf(TOTAL_RATIO_MESSAGE, ratio);
     }
 }

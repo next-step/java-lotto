@@ -24,6 +24,10 @@ public class Money {
         return value;
     }
 
+    public double getPrizeRatio(Money totalPrize, Money money) {
+        return totalPrize.getValue() / (double) money.getValue();
+    }
+
     private void validateTypeLessThousand(String value) {
         System.out.println(value);
         if (Integer.parseInt(value) < NUMBER_THOUSAND) {
