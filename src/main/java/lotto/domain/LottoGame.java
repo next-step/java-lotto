@@ -6,8 +6,6 @@ import java.util.Map;
 
 public class LottoGame {
 
-    private static final int ZERO = 0;
-
     private final Lottos lottos;
     private final WinningLotto winningLotto;
 
