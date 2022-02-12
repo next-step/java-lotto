@@ -27,7 +27,9 @@ public class Controller {
         LottoNumber bonusLottoNumber = InputView.inputBonusLottoNumber();
 
         Winning winning = new Winning(winningLottoNumber, bonusLottoNumber);
-        OutputView.printRank(new RankResult(lottoBundle, winning));
-        OutputView.printPrizeRatio(money.getPrizeRatio(new RankResult(lottoBundle, winning).getTotalPrize(), money));
+        RankResult rankResult = new RankResult(lottoBundle, winning);
+        OutputView.printRank(rankResult);
+        OutputView.printPrizeRatio(money.getPrizeRatio(rankResult.getTotalPrize(), money));
+
     }
 }
