@@ -13,6 +13,6 @@ public class LottoBundleTest {
     @Test
     void findlottosSizeTest() {
         Lottos lottos = LottoBundle.lottoBundle(size, new NonShuffleLottoNumber());
-        assertThat(lottos.getLottosSize()).isEqualTo(size);
+        assertThat(lottos.lottos().size()).isEqualTo(size);
     }
 }
