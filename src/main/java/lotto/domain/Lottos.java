@@ -15,7 +15,7 @@ public class Lottos {
     }
 
     public Lottos(final List<Lotto> lottos) {
-        this.lottos = lottos;
+        this.lottos = new ArrayList<>(lottos);
     }
 
     public List<Lotto> lottos() {
