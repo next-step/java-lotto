@@ -53,7 +53,8 @@ class LottoGameTest {
 
     @Test
     void 발급한_모든_로또의_결과를_알_수_있다() {
-        Map<Ranking, Integer> totalResult = lottoGame.findWinner();
+        LottoResults lottoResults = lottoGame.findWinner();
+        Map<Ranking, Integer> totalResult = lottoResults.getTotalResult();
 
         assertAll(
             () -> assertThat(totalResult.get(Ranking.FIRST)).isEqualTo(1),
@@ -66,9 +67,9 @@ class LottoGameTest {
 
     @Test
     void 수익률을_계산할_수_있다() {
-        Map<Ranking, Integer> totalResult = lottoGame.findWinner();
+        LottoResults lottoResults = lottoGame.findWinner();
 
-        BigDecimal yield = lottoGame.calculateYield(totalResult, new Money(5000));
+        BigDecimal yield = lottoResults.calculateYield(new Money(5000));
 
         assertThat(yield).isEqualTo(BigDecimal.valueOf(406011));
     }

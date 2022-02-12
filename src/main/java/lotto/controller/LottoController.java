@@ -2,15 +2,14 @@ package lotto.controller;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoResults;
 import lotto.domain.LottoShop;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
-import lotto.domain.Ranking;
 import lotto.domain.WinningLotto;
 import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
@@ -40,8 +39,8 @@ public class LottoController {
         final LottoNumber bonusBall = new LottoNumber(lottoInputView.inputBonusBall());
         final WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), bonusBall);
         final LottoGame lottoGame = new LottoGame(lottos, winningLotto);
-        final Map<Ranking, Integer> totalResult = lottoGame.findWinner();
-        lottoResultView.finishGame(totalResult, lottoGame.calculateYield(totalResult, money));
+        final LottoResults lottoResults = lottoGame.findWinner();
+        lottoResultView.finishGame(lottoResults, lottoResults.calculateYield(money));
     }
 
     private List<LottoNumber> createWinningNumbers() {

@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoResults;
 import lotto.domain.Lottos;
 import lotto.domain.Ranking;
 
@@ -47,14 +48,14 @@ public class LottoResultView {
         System.out.println(numbers);
     }
 
-    public void finishGame(final Map<Ranking, Integer> totalResult, final BigDecimal totalWinnerPrize) {
+    public void finishGame(final LottoResults lottoResults, final BigDecimal totalWinnerPrize) {
         System.out.println(LOTTO_STATISTICS_MESSAGE);
         System.out.println(HYPHEN_MESSAGE);
 
-        final List<Ranking> rankings = new LinkedList<>(totalResult.keySet());
+        final List<Ranking> rankings = new LinkedList<>(lottoResults.getTotalResult().keySet());
         Collections.sort(rankings, Comparator.reverseOrder());
 
-        rankings.forEach(ranking -> printLottoResult(ranking, totalResult.get(ranking)));
+        rankings.forEach(ranking -> printLottoResult(ranking, lottoResults.getTotalResult().get(ranking)));
         printYield(totalWinnerPrize);
     }
 
