@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -50,8 +51,7 @@ public class LottoResultView {
         System.out.println(HYPHEN_MESSAGE);
 
         final List<Ranking> rankings = new LinkedList<>(totalResult.keySet());
-        Collections.sort(rankings);
-        Collections.reverse(rankings);
+        Collections.sort(rankings, Comparator.reverseOrder());
 
         rankings.forEach(ranking -> printLottoResult(ranking, totalResult.get(ranking)));
         printYield(totalWinnerPrize);
