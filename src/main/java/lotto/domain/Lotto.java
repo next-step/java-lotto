@@ -28,14 +28,11 @@ public class Lotto {
     }
 
     public Lotto(final String lottoNumber) {
-        this.lottoNumber =
-            Arrays.stream(
-                    lottoNumber
-                        .replace(SPACE_DELIMITER, BLANK_DELIMITER)
-                        .split(COMMA))
-                .mapToInt(Integer::new)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
+        this.lottoNumber = Arrays.stream(
+                lottoNumber
+                    .replace(SPACE_DELIMITER, BLANK_DELIMITER)
+                    .split(COMMA))
+            .map(LottoNumber::new).collect(Collectors.toList());
     }
 
     private void validateNonDuplication(List<LottoNumber> lottoFullNumberLengthSix) {
