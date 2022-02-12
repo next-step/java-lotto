@@ -16,7 +16,7 @@ import lotto.view.OutputView;
 public class Controller {
 
     public static void run() {
-        Money money = InputView.inputPurchaseAmount();
+        Money money = new Money(InputView.inputPurchaseAmount());
 
         LottoCalculation lottoCalculation = new LottoCalculation(money);
         int count = lottoCalculation.lottoCalculation();

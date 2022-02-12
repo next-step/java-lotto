@@ -17,9 +17,9 @@ public class InputView {
 
     }
 
-    public static Money inputPurchaseAmount() {
+    public static String inputPurchaseAmount() {
         System.out.println(PURCHASE_AMOUNT_MESSAGE);
-        return new Money(SCANNER.nextLine());
+        return SCANNER.nextLine();
     }
 
     public static String inputWinningLottoNumber() {
