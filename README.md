@@ -82,6 +82,7 @@
 - [x] LOTTO_BONUS_GRADE 제거
 - [x] generateLottoTicket, mapToObj 활용
 - [x] RATE_OF_RETURN_FORMAT, format 상수로 표현
+- [x] WinningNumbers, 미사용 getter 제거
 
 ## multiple authors
 
