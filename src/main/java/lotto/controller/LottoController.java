@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.Ticket;
+import lotto.domain.TicketDealer;
 import lotto.domain.WinningNumber;
 import lotto.domain.WinningResult;
 import lotto.domain.lotto.Lotto;
@@ -17,7 +18,7 @@ public class LottoController {
         OutputView outputView = new OutputView();
 
         Ticket ticket = buyTicket();
-        LottoRepository lottoRepository = LottoRepository.getLottosOf(new RandomLottoGenerator(), ticket.getBuyCount());
+        LottoRepository lottoRepository = TicketDealer.getLottosOf(new RandomLottoGenerator(), ticket.getBuyCount());
 
         outputView.printPurchaseAmount(ticket);
         outputView.printPurchaseTicket(lottoRepository);
