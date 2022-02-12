@@ -17,7 +17,7 @@ public class LottoCalculation {
         purchaseLottos = lottos;
     }
 
-    public LottoCalculationDTO purchaseLottos(final Lottos lottos) {
+    public LottoCalculationDTO purchaseLottos(Lottos lottos) {
         int numberOflottoManual = lottos.lottos().size();
 
         purchaseLottos = purchaseLottos.add(lottos);
