@@ -2,15 +2,15 @@ package lotto.controller;
 
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoBundle;
 import lotto.domain.LottoCalculation;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.RankResult;
-import lotto.domain.ShuffleLottoNumber;
 import lotto.domain.Winning;
+import lotto.domain.dto.LottoCalculationDTO;
+import lotto.domain.dto.RankDTO;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -18,33 +18,29 @@ public class Controller {
 
     public static void run() {
         Money money = new Money(InputView.inputPurchaseAmount());
-        int count = calculateLottoCount(money);
 
-        LottoTicket lottoTicket = new LottoTicket(InputView.inputLottoTicket(), count);
+        LottoTicket lottoTicket = new LottoTicket(InputView.inputLottoTicket(),
+            money.lottoCalculation());
 
+        Lottos lottos = InputView.inputPurchaseManualLotto(lottoTicket.getLottoTicketValue());
 
-        Lottos lottoBundle = generateLottoNumber(count);
+        LottoCalculation lottoCalculation = new LottoCalculation();
+
+        LottoCalculationDTO lottoCalculationDTO = lottoCalculation.purchaseLottos(money, lottos);
+        OutputView.printCountMessage(lottoCalculationDTO);
+
         Lotto winningLottoNumber = new Lotto(InputView.inputWinningLottoNumber());
         LottoNumber bonusLottoNumber = InputView.inputBonusLottoNumber();
+
         Winning winning = new Winning(winningLottoNumber, bonusLottoNumber);
-        RankResult rankResult = new RankResult(lottoBundle, winning);
-        showLottoResult(money, rankResult);
+
+        RankResult rankResult = new RankResult(lottoCalculationDTO.getLottos(), winning);
+
+        RankDTO rankDTO = lottoCalculation.getCalculationLottoResult(rankResult, money);
+        showLottoResult(money, rankDTO);
     }
 
-    private static void showLottoResult(Money money, RankResult rankResult) {
-        OutputView.printRank(rankResult);
-        OutputView.printPrizeRatio(money.getPrizeRatio(rankResult.getTotalPrize(), money));
-    }
-
-    private static Lottos generateLottoNumber(int count) {
-        Lottos lottoBundle = LottoBundle.lottoBundle(count, new ShuffleLottoNumber());
-        OutputView.printCountMessage(lottoBundle);
-        return lottoBundle;
-    }
-
-    private static int calculateLottoCount(Money money) {
-        LottoCalculation lottoCalculation = new LottoCalculation(money);
-        int count = lottoCalculation.lottoCalculation();
-        return count;
+    private static void showLottoResult(Money money, RankDTO rankDto) {
+        OutputView.printRankResult(money, rankDto);
     }
 }

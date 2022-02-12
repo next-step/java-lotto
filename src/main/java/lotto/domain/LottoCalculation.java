@@ -1,10 +1,11 @@
 package lotto.domain;
 
 import lotto.domain.dto.LottoCalculationDTO;
+import lotto.domain.dto.RankDTO;
 
 public class LottoCalculation {
 
-    private final Lottos purchaseLottos;
+    private Lottos purchaseLottos;
 
     public LottoCalculation(){
         this(new Lottos());
@@ -16,10 +17,12 @@ public class LottoCalculation {
 
     public LottoCalculationDTO purchaseLottos(final Money money, final Lottos lottos){
         int numberOflottoManual = lottos.lottos().size();
-        purchaseLottos.add(lottos);
+
+        purchaseLottos = purchaseLottos.add(lottos);
         int numberOfLottoAutomatical = getNumberOfLottosAutomatical(money, numberOflottoManual);
-        purchaseLottos.add(LottoBundle.lottoBundle(numberOfLottoAutomatical, new ShuffleLottoNumber()));
-        return new LottoCalculationDTO(numberOflottoManual, numberOfLottoAutomatical, lottos);
+        purchaseLottos = purchaseLottos.add(LottoBundle.lottoBundle(numberOfLottoAutomatical, new ShuffleLottoNumber()));
+
+        return new LottoCalculationDTO(numberOflottoManual, numberOfLottoAutomatical, purchaseLottos);
 
     }
 
@@ -27,5 +30,9 @@ public class LottoCalculation {
         return money.lottoCalculation() - numberOflottosManual;
     }
 
+
+    public RankDTO getCalculationLottoResult(RankResult rank, Money money){
+        return new RankDTO(rank, money);
+    }
 
 }
