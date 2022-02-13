@@ -3,8 +3,10 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.WinningLotto;
 import lotto.domain.lotto.number.BonusNumber;
 import lotto.domain.lotto.number.Number;
@@ -28,22 +30,18 @@ class LottoRaffleTest {
     }
 
     @Test
-    void 당첨_결과_확인() {
-        final List<Number> numbersValues = new ArrayList<>();
-        for (int i = 1; i <= 6; i++) {
-            numbersValues.add(new Number(i));
-        }
-        final Numbers numbers = new Numbers(numbersValues);
-        Lotto lotto = new Lotto(numbers);
-        LottoRaffle lottoRaffle = new LottoRaffle(winningLotto);
-        lottoRaffle.compareLotto(lotto);
+    void 일등_당첨_결과_확인() {
+        final LottoResult expectedResult = LottoResult.MATCH6;
+        final Lotto lotto = new Lotto(winningLotto.getLotto());
+        final LottoRaffle lottoRaffle = new LottoRaffle(winningLotto);
+        final MatchResult matchResult = lottoRaffle.compareLottos(new Lottos(Arrays.asList(lotto)));
 
-        for (LottoResult lottoResult : lottoRaffle.getResults().getMatchResult().keySet()) {
-            if (lottoResult == LottoResult.MATCH6) {
-                assertThat(lottoRaffle.getResults().getMatchResult().get(lottoResult)).isEqualTo(1);
-            } else {
-                assertThat(lottoRaffle.getResults().getMatchResult().get(lottoResult)).isZero();
+        for (LottoResult lottoResult : matchResult.getLottoResultSet()) {
+            if (lottoResult.equals(expectedResult)) {
+                assertThat(matchResult.getCount(lottoResult)).isEqualTo(1);
+                continue;
             }
+            assertThat(matchResult.getCount(lottoResult)).isZero();
         }
     }
 }
