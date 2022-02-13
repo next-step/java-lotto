@@ -1,12 +1,8 @@
 package lotto.view;
 
-import java.util.List;
 import java.util.Scanner;
-import lotto.domain.LottoInitInfo;
-import lotto.domain.WinningBall;
-import lotto.domain.WinningBallFactory;
-import lotto.domain.WinningBalls;
-import lotto.dto.UserLottoInfo;
+import lotto.domain.user.LottoInitInfo;
+import lotto.domain.winning.WinningBalls;
 
 public class InputView {
 
