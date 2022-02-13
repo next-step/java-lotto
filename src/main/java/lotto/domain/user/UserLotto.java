@@ -1,41 +1,21 @@
-package lotto.domain;
+package lotto.domain.user;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import lotto.domain.number.LottoNumber;
 
 public class UserLotto {
 
-    private static final int LOTTO_NUMBERS_SIZE = 6;
-    private static final List<LottoNumber> numberData =
-        IntStream.rangeClosed(LottoNumber.LOTTO_FIRST_NUMBER, LottoNumber.LOTTO_LAST_NUMBER)
-            .boxed()
-            .map(LottoNumber::new)
-            .collect(Collectors.toList());
+    public static final int LOTTO_NUMBERS_SIZE = 6;
 
     private final List<LottoNumber> numbers;
-
-    public UserLotto() {
-        this(getLottoNumbers());
-    }
-
-    public UserLotto(int... numbers) {
-        this(Arrays.stream(numbers).mapToObj(LottoNumber::new).collect(Collectors.toList()));
-    }
 
     public UserLotto(List<LottoNumber> numbers) {
         validateSize(numbers);
         validateDuplication(numbers);
         this.numbers = numbers;
-    }
-
-    private static List<LottoNumber> getLottoNumbers() {
-        Collections.shuffle(numberData);
-        return new ArrayList<>(numberData.subList(0, LOTTO_NUMBERS_SIZE));
     }
 
     private void validateSize(List<LottoNumber> numbers) {
