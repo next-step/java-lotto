@@ -1,14 +1,25 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class Analyzer {
 
-    private static final List<Integer> WIN_KEYS = Arrays.asList(3, 4, 5, 5, 6);
-    private static final List<Integer> BONUS_KEYS = Arrays.asList(0, 0, 0, 1, 0);
+    private static final Map<Integer, Integer> POSSIBLE_LOTTO_WINNING_MONEY = createPossibleLottoWinningMoneyKey();
+
+    private static Map<Integer, Integer> createPossibleLottoWinningMoneyKey() {
+
+        Map<Integer, Integer> result = new HashMap<>();
+        result.put(3, 0);
+        result.put(4, 0);
+        result.put(5, 0);
+        result.put(5, 1);
+        result.put(6, 0);
+        return result;
+    }
 
     private final List<WinningPrice> winningPrices = new ArrayList<>();
     private final int price;
@@ -22,47 +33,44 @@ public class Analyzer {
         return totalWinningMoney / (double) this.price;
     }
 
-    public void calculateTotalWinningMoney(final List<Integer> correctWinNumber,
-        final List<Integer> hasBonusNumber) {
+    public void calculateTotalWinningMoney(final List<WinningResult> winningResult) {
 
-        for (int i = 0; i < WIN_KEYS.size(); i++) {
-            int win = WIN_KEYS.get(i);
-            int bonus = BONUS_KEYS.get(i);
-
-            winningPrices.add(calculatePerStepMoney(win, bonus, correctWinNumber, hasBonusNumber));
+        for (Entry<Integer, Integer> integerBooleanEntry : POSSIBLE_LOTTO_WINNING_MONEY.entrySet()) {
+            int win = integerBooleanEntry.getKey();
+            int bonus = integerBooleanEntry.getValue();
+            winningPrices.add(calculatePerStepMoney(win, bonus, winningResult));
         }
     }
 
-    //TODO winNumbers, bonusNumbers 1:1
     private WinningPrice calculatePerStepMoney(final int win, final int bonus,
-        final List<Integer> winNumbers,
-        List<Integer> bonusNumbers) {
-        int count = countFrequency(winNumbers, win);
+        final List<WinningResult> winningResults) {
+        int count = correctCountFrequency(winningResults, win);
         if (win == 5) {
-            List<Integer> filteredBonus = filter(winNumbers, bonusNumbers, win);
-            count = countFrequency(filteredBonus, bonus);
+            count = bonusCountFrequency(winningResults, bonus);
         }
         WinningPrice winningPrice = WinningPrice.of(win, bonus);
         totalWinningMoney += winningPrice.operate(count);
         return winningPrice;
     }
 
-    private List<Integer> filter(final List<Integer> source, final List<Integer> target,
-        final int value) {
-        List<Integer> filtered = new ArrayList<>();
-        for (int i = 0; i < source.size(); i++) {
-            if (source.get(i) == value) {
-                filtered.add(target.get(i));
+    private int correctCountFrequency(final List<WinningResult> winningResults, final int value) {
+        int count = 0;
+        for (WinningResult winningResult : winningResults) {
+            if (winningResult.getMatchCount() == value) {
+                count++;
             }
         }
-        return filtered;
+        return count;
     }
 
-    private int countFrequency(final List<Integer> data, final int value) {
-        if (data.contains(value)) {
-            return Collections.frequency(data, value);
+    private int bonusCountFrequency(final List<WinningResult> winningResults, final int value) {
+        int count = 0;
+        for (WinningResult winningResult : winningResults) {
+            if (winningResult.getMatchCount() == 5 && winningResult.getHasBonus() == value) {
+                count++;
+            }
         }
-        return 0;
+        return count;
     }
 
     public List<WinningPrice> getWinningPrices() {
