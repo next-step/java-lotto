@@ -11,11 +11,12 @@ public class User {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public List<Lotto> findEachLottoMatchingNumber(WinningNumber winningNumber) {
+    public List<MatchInfo> findEachLottoMatchingNumber(WinningNumber winningNumber) {
+        List<MatchInfo> matchInfos = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            lotto.matchLottoWithWinningNumber(winningNumber);
+            matchInfos.add(lotto.matchLottoWithWinningNumber(winningNumber));
         }
-        return lottos;
+        return matchInfos;
     }
 
     public List<Lotto> getLottos() {

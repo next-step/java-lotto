@@ -29,14 +29,11 @@ class UserTest {
             new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
             new Lotto(Arrays.asList(1, 2, 3, 4, 5, 10))
         );
-
         User user = new User(lottos);
         WinningNumber winningNumber = new WinningNumber(
             Arrays.asList("1", "3", "4", "5", "6", "21"), 7);
-        user.findEachLottoMatchingNumber(winningNumber);
-        Lotto lotto1 = user.getLottos().get(0);
-        Lotto lotto2 = user.getLottos().get(1);
-        assertThat(lotto1.getMatchCount()).isEqualTo(5);
-        assertThat(lotto2.getMatchCount()).isEqualTo(4);
+        List<MatchInfo> matchInfos= user.findEachLottoMatchingNumber(winningNumber);
+        assertThat(matchInfos.get(0).getMatchCount()).isEqualTo(5);
+        assertThat(matchInfos.get(1).getMatchCount()).isEqualTo(4);
     }
 }
