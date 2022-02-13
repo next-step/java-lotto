@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class LottoShop {
 
@@ -28,12 +28,18 @@ public class LottoShop {
         }
     }
 
-    public Lottos buyLotto(final int lottoAmount) {
-        final List<Lotto> lottos = new ArrayList<>();
+    public void buyHandOperatedLotto(final Lottos lottos, final String[] lottoNumbers) {
+        lottos.storeLotto(
+            new Lotto(Arrays.stream(lottoNumbers)
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList())));
+    }
+
+    public void buyAutoLotto(final Lottos lottos, final int lottoAmount) {
         for (int amount = ZERO; amount < lottoAmount; amount++) {
-            lottos.add(new Lotto());
+            lottos.storeLotto(new Lotto());
         }
-        return new Lottos(lottos);
     }
 
 }
