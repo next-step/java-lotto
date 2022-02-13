@@ -28,9 +28,9 @@ public class UserLotto {
     }
 
     public UserLotto(List<LottoNumber> numbers) {
+        validateSize(numbers);
+        validateDuplication(numbers);
         this.numbers = numbers;
-        validateSize();
-        validateDuplication();
     }
 
     private static List<LottoNumber> getLottoNumbers() {
@@ -38,7 +38,7 @@ public class UserLotto {
         return new ArrayList<>(numberData.subList(0, LOTTO_NUMBERS_SIZE));
     }
 
-    private void validateSize() {
+    private void validateSize(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("[ERROR] 로또 넘버는 6개여야 합니다.");
         }
@@ -48,7 +48,7 @@ public class UserLotto {
         return numbers;
     }
 
-    private void validateDuplication() {
+    private void validateDuplication(List<LottoNumber> numbers) {
         HashSet<Integer> set = numbers.stream()
             .map(LottoNumber::getRaw)
             .collect(Collectors.toCollection(HashSet::new));
