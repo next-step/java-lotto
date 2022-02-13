@@ -1,19 +1,18 @@
 package lotto.view;
 
 import java.util.HashMap;
-import java.util.List;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoResult;
-import lotto.domain.UserLotto;
-import lotto.domain.WinningStatistics;
-import lotto.dto.UserLottoInfo;
+import lotto.domain.number.LottoNumber;
+import lotto.domain.result.LottoResult;
+import lotto.domain.statistics.WinningStatistics;
+import lotto.domain.user.UserLotto;
+import lotto.domain.user.UserLottos;
 
 public class ResultView {
 
-    public static void printUserLottoInfo(UserLottoInfo userLottoInfo) {
-        System.out.println(userLottoInfo.getQuantity() + "개를 구매했습니다.");
+    public static void printUserLottos(UserLottos userLottos) {
+        System.out.println(userLottos.getQuantity() + "개를 구매했습니다.");
 
-        for(UserLotto lotto : userLottoInfo.getUserLottos().getRawUserLottos()) {
+        for (UserLotto lotto : userLottos.getRawUserLottos()) {
             final StringBuilder sb = new StringBuilder("[");
             lotto.getNumbers().stream()
                 .map(LottoNumber::getRaw)
@@ -24,20 +23,24 @@ public class ResultView {
         }
     }
 
-    public static void printResult(List<LottoResult> results, int purchasePrice) {
+    public static void printResult(WinningStatistics winningStatistics) {
+        printStatistics(winningStatistics.getNumberOfResults().getRawNumberOfResults());
+        printProfitRate(winningStatistics.getProfitRate());
+    }
+
+    private static void printStatistics(HashMap<LottoResult, Integer> results) {
         System.out.println("당첨 통계");
         System.out.println("-----------");
-        HashMap<LottoResult, Integer> result = WinningStatistics.getResult(results);
-        result.keySet().stream()
-            .filter(ResultView::hasReward)
-            .forEach(lottoResult -> System.out.println(
-                lottoResult.getDescription() + result.get(lottoResult) + "개"));
 
+        results.keySet()
+            .forEach(result -> System.out.println(
+                result.getDescription() + results.get(result) + "개"));
+    }
+
+    private static void printProfitRate(String profitRate) {
         System.out.println(
-            "총 수익률은 " + WinningStatistics.getProfitRate(result, purchasePrice) + "입니다.");
+            "총 수익률은 " + profitRate + "입니다.");
     }
 
-    private static boolean hasReward(LottoResult lottoResult) {
-        return lottoResult != LottoResult.NO_REWARD;
-    }
+
 }

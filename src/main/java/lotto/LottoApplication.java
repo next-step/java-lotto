@@ -1,9 +1,10 @@
 package lotto;
 
-import java.util.List;
-import lotto.domain.LottoResults;
-import lotto.domain.WinningBall;
-import lotto.dto.UserLottoInfo;
+import lotto.domain.result.LottoResults;
+import lotto.domain.statistics.WinningStatistics;
+import lotto.domain.user.LottoInitInfo;
+import lotto.domain.user.UserLottos;
+import lotto.domain.winning.WinningBalls;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -11,12 +12,16 @@ public class LottoApplication {
 
     public static void main(String[] args) {
 
-        final UserLottoInfo userLottoInfo = InputView.getUserLottoInfo();
-        ResultView.printUserLottoInfo(userLottoInfo);
+        final LottoInitInfo lottoInitInfo = InputView.getLottoInitInfo();
+        final UserLottos userLottos = new UserLottos(lottoInitInfo.getQuantity());
+        ResultView.printUserLottos(userLottos);
 
-        List<WinningBall> winningBalls = InputView.getWinningBalls();
-        LottoResults lottoResults = new LottoResults(userLottoInfo, winningBalls);
+        final WinningBalls winningBalls = InputView.getWinningBalls();
 
-        ResultView.printResult(lottoResults.getResults(), userLottoInfo.getPurchasePrice());
+        LottoResults lottoResults = new LottoResults(userLottos, winningBalls);
+        WinningStatistics winningStatistics = new WinningStatistics(lottoResults,
+            lottoInitInfo.getPurchasePrice());
+
+        ResultView.printResult(winningStatistics);
     }
 }
