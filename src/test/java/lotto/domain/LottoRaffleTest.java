@@ -32,7 +32,7 @@ class LottoRaffleTest {
     @Test
     void 일등_당첨_결과_확인() {
         final LottoResult expectedResult = LottoResult.MATCH6;
-        final Lotto lotto = new Lotto(winningLotto.getLotto());
+        final Lotto lotto = new Lotto(winningLotto.getNumbers());
         final LottoRaffle lottoRaffle = new LottoRaffle(winningLotto);
         final MatchResult matchResult = lottoRaffle.compareLottos(new Lottos(Arrays.asList(lotto)));
 

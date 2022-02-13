@@ -27,7 +27,7 @@ public class ResultView {
     }
 
     private static String lottoFormat(Lotto lotto) {
-        return lotto.getLotto().getNumbersValue().stream()
+        return lotto.getNumbers().getNumbersValue().stream()
             .map(Number::getValue)
             .collect(Collectors.toList()).toString();
     }

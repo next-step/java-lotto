@@ -19,7 +19,7 @@ public class Lotto {
         return this.numbers.getMatchCount(lotto);
     }
 
-    public Numbers getLotto() {
+    public Numbers getNumbers() {
         return new Numbers(numbers);
     }
 
