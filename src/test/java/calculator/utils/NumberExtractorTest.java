@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -13,35 +14,19 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class NumberExtractorTest {
 
+    @DisplayName("구분자를_기준으로_숫자를_나눈다")
     @ParameterizedTest
-    @MethodSource
-    void 구분자를_기준으로_숫자를_나눈다(List<Integer> numbers) {
-        String text = "";
-        for (int i = 0; i < numbers.size(); i++) {
-            if (i == numbers.size() - 1) {
-                text += numbers.get(i);
-                continue;
-            }
-            switch (i % 3) {
-                case 0:
-                    text += numbers.get(i) + ",";
-                    break;
-                case 1:
-                    text += numbers.get(i) + ":";
-                    break;
-                case 2:
-                    text += numbers.get(i) + "-";
-                    break;
-            }
-        }
+    @MethodSource(value = "sourceOfDelimiterTest")
+    void delimiterTest(String text, List<Integer> numbers) {
         final List<String> delimiters = Arrays.asList(",", ":", "-");
         assertThat(NumberExtractor.splitNumbersByDelimiter(text, delimiters)).isEqualTo(numbers);
     }
 
-    private static Stream<Arguments> 구분자를_기준으로_숫자를_나눈다() {
-        return Stream.of(Arguments.of(Arrays.asList(1, 2, 3)),
-            Arguments.of(Arrays.asList(123, 342, 330209)),
-            Arguments.of(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)));
+    private static Stream<Arguments> sourceOfDelimiterTest() {
+        return Stream.of(
+            Arguments.of("1,2:3", Arrays.asList(1, 2, 3)),
+            Arguments.of("123-342:330209", Arrays.asList(123, 342, 330209)),
+            Arguments.of("0,1:2-3,4:5:6:7-8,9", Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)));
     }
 
     @ParameterizedTest
