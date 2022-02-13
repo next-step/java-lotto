@@ -45,7 +45,7 @@ public class UserLotto {
     }
 
     public List<LottoNumber> getNumbers() {
-        return numbers;
+        return new ArrayList<>(numbers);
     }
 
     private void validateDuplication(List<LottoNumber> numbers) {
