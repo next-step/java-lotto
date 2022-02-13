@@ -1,8 +1,9 @@
 package lotto.domain.judge;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+import java.util.stream.Collectors;
 import lotto.domain.correctnumber.CorrectNumbers;
+import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lottorank.LottoRank;
 import lotto.domain.lottorank.LottoRanks;
@@ -16,15 +17,16 @@ public class Judge {
     }
 
     public LottoRanks getRanks(final Lottos lottos) {
-        final List<LottoRank> lottoRanks = new ArrayList<>();
+        return new LottoRanks(Collections.unmodifiableList(
+                lottos.get().stream()
+                        .map(this::getRank)
+                        .collect(Collectors.toList())));
+    }
 
-        lottos.get().forEach(lotto -> {
-            final int matchCount = lotto.matchNumber(correctNumbers.getWinningNumbers());
-            final boolean isBonus = lotto.contains(correctNumbers.getBonusNumber());
+    private LottoRank getRank(final Lotto lotto) {
+        final int matchCount = lotto.matchNumber(correctNumbers.getWinningNumbers());
+        final boolean isBonus = lotto.contains(correctNumbers.getBonusNumber());
 
-            lottoRanks.add(LottoRank.getRank(matchCount, isBonus));
-        });
-
-        return new LottoRanks(lottoRanks);
+        return LottoRank.getRank(matchCount, isBonus);
     }
 }
