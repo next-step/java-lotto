@@ -14,6 +14,7 @@ public class InputView {
     private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String EMPTY_INPUT_EXCEPTION_MESSAGE = "입력은 공백일 수 없습니다.";
     private static final String INPUT_MANUAL_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요. (한 줄에 로또 한장을 ','로 구분하여 입력.)";
+    private static final String INPUT_NUMBER_OF_MANUAL_LOTTO = "수동으로 구매할 로또 수를 입력해 주세요.";
 
     private InputView() {}
 
@@ -36,7 +37,7 @@ public class InputView {
         List<String> lottos = new ArrayList<>();
         int numberOfManualLotto = Parser.parseInt(inputNumberOfManualLotto());
 
-        System.out.println();
+        System.out.println(INPUT_MANUAL_LOTTO_NUMBERS);
         while (lottos.size() < numberOfManualLotto) {
             lottos.add(removedBlankInput());
         }
@@ -45,7 +46,7 @@ public class InputView {
     }
 
     private static String inputNumberOfManualLotto() {
-        System.out.println(INPUT_MANUAL_LOTTO_NUMBERS);
+        System.out.println(INPUT_NUMBER_OF_MANUAL_LOTTO);
         return removedBlankInput();
     }
 
