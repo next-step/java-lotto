@@ -19,7 +19,7 @@ public class LottoGame {
         final LottoResults lottoResults = new LottoResults(totalResult);
 
         final List<Ranking> rankings = lottos.judgeAllUserLotto(winningLotto);
-        rankings.forEach(ranking -> lottoResults.updateResults(ranking));
+        rankings.forEach(lottoResults::updateResults);
 
         return lottoResults;
     }
