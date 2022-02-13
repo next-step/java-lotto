@@ -44,5 +44,4 @@ public class LottoInputView {
         System.out.println(INPUT_BONUS_BALL_MESSAGE);
         return Integer.parseInt(SCANNER.nextLine());
     }
-
 }
