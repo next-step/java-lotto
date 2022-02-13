@@ -57,11 +57,11 @@ class LottoGameTest {
         final Map<Ranking, Integer> totalResult = lottoResults.getTotalResult();
 
         assertAll(
-            () -> assertThat(totalResult.get(Ranking.FIRST)).isEqualTo(1),
-            () -> assertThat(totalResult.get(Ranking.SECOND)).isEqualTo(1),
-            () -> assertThat(totalResult.get(Ranking.THIRD)).isEqualTo(0),
-            () -> assertThat(totalResult.get(Ranking.FOURTH)).isEqualTo(1),
-            () -> assertThat(totalResult.get(Ranking.FIFTH)).isEqualTo(1)
+            () -> assertThat(totalResult).containsEntry(Ranking.FIRST, 1),
+            () -> assertThat(totalResult).containsEntry(Ranking.SECOND, 1),
+            () -> assertThat(totalResult).containsEntry(Ranking.THIRD, 0),
+            () -> assertThat(totalResult).containsEntry(Ranking.FIFTH, 1),
+            () -> assertThat(totalResult).containsEntry(Ranking.FIFTH, 1)
         );
     }
 

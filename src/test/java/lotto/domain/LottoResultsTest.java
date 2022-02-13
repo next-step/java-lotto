@@ -19,11 +19,11 @@ class LottoResultsTest {
         lottoResults.updateResults(Ranking.SECOND);
 
         assertAll(
-            () -> assertThat(lottoResults.getTotalResult().get(Ranking.FIRST)).isEqualTo(1),
-            () -> assertThat(lottoResults.getTotalResult().get(Ranking.SECOND)).isEqualTo(1),
-            () -> assertThat(lottoResults.getTotalResult().get(Ranking.THIRD)).isEqualTo(0),
-            () -> assertThat(lottoResults.getTotalResult().get(Ranking.FOURTH)).isEqualTo(0),
-            () -> assertThat(lottoResults.getTotalResult().get(Ranking.FIFTH)).isEqualTo(0)
+            () -> assertThat(lottoResults.getTotalResult()).containsEntry(Ranking.FIRST, 1),
+            () -> assertThat(lottoResults.getTotalResult()).containsEntry(Ranking.SECOND, 1),
+            () -> assertThat(lottoResults.getTotalResult()).containsEntry(Ranking.THIRD, 0),
+            () -> assertThat(lottoResults.getTotalResult()).containsEntry(Ranking.FOURTH, 0),
+            () -> assertThat(lottoResults.getTotalResult()).containsEntry(Ranking.FIFTH, 0)
         );
     }
 
