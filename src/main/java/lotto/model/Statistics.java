@@ -28,10 +28,10 @@ public class Statistics {
         }
     }
 
-    public Map<Rank, Integer> updateRanks(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
-            int matchCount = lotto.getMatchCount();
-            boolean bonusMatch = lotto.getBonusMatch();
+    public Map<Rank, Integer> updateRanks(List<MatchInfo> matchInfos) {
+        for (MatchInfo matchInfo: matchInfos) {
+            int matchCount = matchInfo.getMatchCount();
+            boolean bonusMatch = matchInfo.getBonusMatch();
             Rank rank = getRank(matchCount, bonusMatch);
             incrementRank(rank);
         }
