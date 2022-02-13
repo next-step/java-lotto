@@ -18,19 +18,14 @@ public class LottoController {
 
     public void start() {
         Ticket ticket = getTicket();
-
         Lottos lottos = Lottos.withLottoGenerator(new RandomLottoGenerator(), ticket.getBuyCount());
 
-        LottosDTO lottosDTO = LottosDTO.from(lottos.get());
-        OutputView.printPurchaseInfo(ticket.getBuyCount(), lottosDTO.get());
+        printTicketInfo(ticket, lottos);
 
         WinningLotto winningLotto = getWinningLotto();
+        WinningResult winningResult = new WinningResult(winningLotto.mapResult(lottos));
 
-        WinningResult winningResult = new WinningResult(winningLotto);
-        Map<Rank, Integer> result = winningResult.mapResult(lottos.get());
-        double profitRate = winningResult.calculateProfitRate(ticket.getBuyCash());
-
-        OutputView.printWinningResult(result, profitRate);
+        printResult(winningResult, ticket);
     }
 
     private Ticket getTicket() {
@@ -51,5 +46,16 @@ public class LottoController {
             e.printStackTrace();
             return getWinningLotto();
         }
+    }
+
+    private void printTicketInfo(Ticket ticket, Lottos lottos) {
+        LottosDTO lottosDTO = LottosDTO.from(lottos.get());
+        OutputView.printPurchaseInfo(ticket.getBuyCount(), lottosDTO.get());
+    }
+
+    private void printResult(WinningResult winningResult, Ticket ticket) {
+        Map<Rank, Integer> result = winningResult.getResult();
+        double profitRate = winningResult.calculateProfitRate(ticket.getBuyCash());
+        OutputView.printWinningResult(result, profitRate);
     }
 }
