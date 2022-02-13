@@ -77,7 +77,7 @@ public class Lotto {
     public int hashCode() {
         int hash = 0;
         for (LottoNumber lottoNumber : numbers) {
-            hash += lottoNumber.getLottoNum() * 31;
+            hash += lottoNumber.getValue() * 31;
         }
         return hash;
     }

@@ -8,14 +8,14 @@ import lotto.domain.Ranking;
 import lotto.domain.Rankings;
 import lotto.domain.WinningLotto;
 
-public class LottoCountCalculator {
+public class LottoRankingCalculator {
 
-    private static final LottoCountCalculator INSTANCE = new LottoCountCalculator();
+    private static final LottoRankingCalculator INSTANCE = new LottoRankingCalculator();
 
-    private LottoCountCalculator() {
+    private LottoRankingCalculator() {
     }
 
-    public static LottoCountCalculator getInstance() {
+    public static LottoRankingCalculator getInstance() {
         return INSTANCE;
     }
 
@@ -32,20 +32,16 @@ public class LottoCountCalculator {
     public Ranking countLotteryNumber(Lotto userNumbers,
         WinningLotto winningLotto) {
         int normalSuccessCount = countNormalSuccessNumber(userNumbers, winningLotto.getLottoNumbers());
-        int bonusSuccessCount = countBonusNumber(userNumbers, winningLotto.getBonusNumber());
+        boolean bonusSuccess = countBonusNumber(userNumbers, winningLotto.getBonusNumber());
 
-        return Ranking.getRanking(normalSuccessCount, bonusSuccessCount);
+        return Ranking.of(normalSuccessCount, bonusSuccess);
     }
 
     private int countNormalSuccessNumber(Lotto userNumbers, Lotto lotteryNumbers) {
         return lotteryNumbers.countSameNumber(userNumbers);
     }
 
-    private int countBonusNumber(Lotto userNumbers, LottoNumber bonusNum) {
-        int bonusSuccessCount = 0;
-        if (userNumbers.contains(bonusNum)) {
-            bonusSuccessCount++;
-        }
-        return bonusSuccessCount;
+    private boolean countBonusNumber(Lotto userNumbers, LottoNumber bonusNum) {
+        return userNumbers.contains(bonusNum);
     }
 }

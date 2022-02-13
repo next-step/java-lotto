@@ -4,33 +4,33 @@ import java.util.Arrays;
 
 public enum Ranking {
 
-    ONE(2000000000, 6, 0),
-    TWO(30000000, 5, 1),
-    THREE(1500000, 5, 0),
-    FOUR(50000, 4, 0),
-    FIVE(5000, 3, 0),
-    FAIL(0, 0, 0);
+    ONE(2000000000, 6, false),
+    TWO(30000000, 5, true),
+    THREE(1500000, 5, false),
+    FOUR(50000, 4, false),
+    FIVE(5000, 3, false),
+    FAIL(0, 0, false);
 
     private final int winnerPrice;
     private final int normalSuccessNum;
-    private final int bonusSuccessNum;
+    private final boolean bonusSuccess;
 
-    Ranking(int winnerPrice, int normalSuccessNum, int bonusSuccessNum) {
+    Ranking(int winnerPrice, int normalSuccessNum, boolean bonusSuccess) {
         this.winnerPrice = winnerPrice;
         this.normalSuccessNum = normalSuccessNum;
-        this.bonusSuccessNum = bonusSuccessNum;
+        this.bonusSuccess = bonusSuccess;
     }
 
-    public static Ranking getRanking(int normalSuccessCount, int bonusSuccessCount) {
+    public static Ranking of(int normalSuccessCount, boolean bonusSuccess) {
         return Arrays.stream(Ranking.values())
-            .filter(rank -> rank.equalsFromResult(normalSuccessCount, bonusSuccessCount))
+            .filter(rank -> rank.equalsFromResult(normalSuccessCount, bonusSuccess))
             .findFirst()
             .orElse(FAIL);
     }
 
-    private boolean equalsFromResult(int normalSuccessCount, int bonusSuccessCount) {
+    private boolean equalsFromResult(int normalSuccessCount, boolean bonusSuccess) {
         return this.normalSuccessNum == normalSuccessCount &&
-            this.bonusSuccessNum == bonusSuccessCount;
+            this.bonusSuccess == bonusSuccess;
     }
 
     public int getWinnerPrice() {
@@ -41,20 +41,24 @@ public enum Ranking {
         return normalSuccessNum;
     }
 
-    public int getBonusSuccessNum() {
-        return bonusSuccessNum;
+    public boolean getBonusSuccess() {
+        return bonusSuccess;
     }
 
     @Override
     public String toString() {
-        int matchNum = normalSuccessNum + bonusSuccessNum;
+        int matchNum = normalSuccessNum;
+        if(bonusSuccess){
+            matchNum++;
+        }
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(matchNum).append("개 일치");
 
-        if (this.bonusSuccessNum > 0) {
+        if (this.bonusSuccess) {
             stringBuilder.append(", 보너스 볼 일치");
         }
+
         stringBuilder.append("(").append(winnerPrice).append("원)");
         return stringBuilder.toString();
     }

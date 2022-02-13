@@ -9,7 +9,7 @@ class RankingTest {
     @Test
     void 우승순위_조회(){
         // when
-        Ranking ranking = Ranking.getRanking(6, 0);
+        Ranking ranking = Ranking.of(6, false);
 
         // then
         assertThat(ranking).isEqualTo(Ranking.ONE);

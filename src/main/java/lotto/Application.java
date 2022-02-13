@@ -3,11 +3,10 @@ package lotto;
 import java.util.List;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lotto;
-import lotto.domain.Ranking;
 import lotto.domain.Rankings;
 import lotto.domain.WinningLotto;
 import lotto.service.LottoAutoGenerator;
-import lotto.service.LottoCountCalculator;
+import lotto.service.LottoRankingCalculator;
 import lotto.view.LottoInput;
 import lotto.view.LottoOutput;
 
@@ -30,7 +29,7 @@ public class Application {
         LottoNumber bonusNumber = LottoInput.inputBonusBall();
         WinningLotto winningLotto = new WinningLotto(lastWeekLottoNumber, bonusNumber);
 
-        Rankings rankings = LottoCountCalculator.getInstance()
+        Rankings rankings = LottoRankingCalculator.getInstance()
             .countLotteryNumbers(userLottoNumbers, winningLotto);
 
         LottoOutput.printRankingStatus(rankings);

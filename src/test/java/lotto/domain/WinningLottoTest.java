@@ -11,7 +11,7 @@ class WinningLottoTest {
     void 당첨로또_생성() {
         // given
         Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber bonusNumber = new LottoNumber(3);
+        LottoNumber bonusNumber = LottoNumber.from(3);
 
         // when & then
         assertThatThrownBy(() -> new WinningLotto(lotto, bonusNumber))

@@ -25,8 +25,4 @@ public class Rankings {
         }
         return successSum;
     }
-
-    public List<Ranking> getRankings() {
-        return rankings;
-    }
 }

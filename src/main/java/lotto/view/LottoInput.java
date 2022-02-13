@@ -34,6 +34,6 @@ public class LottoInput {
     public static LottoNumber inputBonusBall() {
         System.out.println(INPUT_BONUSBALL_MESSAGE);
         int bonusBall = SCANNER.nextInt();
-        return new LottoNumber(bonusBall);
+        return LottoNumber.from(bonusBall);
     }
 }
