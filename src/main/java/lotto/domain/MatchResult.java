@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.Set;
 
 public class MatchResult {
 
@@ -19,13 +20,22 @@ public class MatchResult {
         return new MatchResult(initiateMatchResult);
     }
 
+    public MatchResult combine(int matchCount, boolean isBonusNumber) {
+        final LottoResult lottoResult = LottoResult.findLottoResult(matchCount, isBonusNumber);
+        return combine(lottoResult);
+    }
+
     public MatchResult combine(LottoResult lottoResult) {
         final Map<LottoResult, Integer> newMatchResult = new EnumMap<>(matchResult);
         newMatchResult.put(lottoResult, newMatchResult.getOrDefault(lottoResult, 0) + 1);
         return new MatchResult(newMatchResult);
     }
 
-    public Map<LottoResult, Integer> getMatchResult() {
-        return matchResult;
+    public Integer getCount(LottoResult lottoResult) {
+        return matchResult.get(lottoResult);
+    }
+
+    public Set<LottoResult> getLottoResultSet() {
+        return matchResult.keySet();
     }
 }
