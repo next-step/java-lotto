@@ -1,6 +1,7 @@
-package lotto.domain;
+package lotto.domain.result;
 
 import java.util.Arrays;
+import lotto.dto.WinningInfo;
 
 public enum LottoResult {
     NO_REWARD(0, false, 0, "상금이 없습니다."),
@@ -25,13 +26,14 @@ public enum LottoResult {
         this.description = description;
     }
 
-    public static LottoResult of(int count, boolean includeBonus) {
-        if (count < MINIMUM_NUMBER_OF_MATCHING) {
+    public static LottoResult of(WinningInfo info) {
+        if (info.getCount() < MINIMUM_NUMBER_OF_MATCHING) {
             return LottoResult.NO_REWARD;
         }
 
         return Arrays.stream(LottoResult.values())
-            .filter(lottoResult -> isSameCountAndBonus(lottoResult, count, includeBonus))
+            .filter(
+                lottoResult -> isSameCountAndBonus(lottoResult, info.getCount(), info.hasBonus()))
             .findAny()
             .orElseThrow(() -> new IllegalArgumentException("[ERROR] 당첨 결과를 찾지 못했습니다."));
     }
