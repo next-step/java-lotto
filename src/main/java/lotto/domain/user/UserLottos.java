@@ -1,9 +1,8 @@
-package lotto.domain;
+package lotto.domain.user;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.number.LottoNumberGenerator;
 
 public class UserLottos {
 
@@ -19,7 +18,7 @@ public class UserLottos {
         List<UserLotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < quantity; i++) {
-            lottos.add(new UserLotto());
+            lottos.add(new UserLotto(LottoNumberGenerator.getLottoNumbers()));
         }
         return lottos;
     }
