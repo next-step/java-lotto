@@ -1,15 +1,16 @@
-package lotto.domain;
+package lotto.domain.user;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class LottoInitInfo {
+
     private static final BigDecimal LOTTO_PRICE = new BigDecimal(1000);
 
     private final int purchasePrice;
     private final int quantity;
 
-    public LottoInitInfo (int purchasePrice) {
+    public LottoInitInfo(int purchasePrice) {
         this.purchasePrice = purchasePrice;
         this.quantity = calculateQuantity(purchasePrice);
     }
