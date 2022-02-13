@@ -16,10 +16,6 @@ public class LottosDTO {
         return lottos;
     }
 
-    public void set(List<String> lottos) {
-        this.lottos = lottos;
-    }
-
     public static LottosDTO from(List<Lotto> lottos) {
         List<String> result = new ArrayList<>();
         for (Lotto lotto : lottos) {
