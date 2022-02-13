@@ -7,11 +7,11 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(int number) {
-        validateRange();
+        validateRange(number);
         this.number = number;
     }
 
-    private void validateRange() {
+    private void validateRange(int number) {
         if (number < LOTTO_FIRST_NUMBER || number > LOTTO_LAST_NUMBER) {
             throw new IllegalArgumentException("[ERROR] 로또 번호는 1-45 이내의 숫자여야 합니다.");
         }
