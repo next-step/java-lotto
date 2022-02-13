@@ -30,7 +30,7 @@ class NumbersTest {
         final Numbers numbers = new Numbers(expression);
 
         // then
-        assertThat(numbers.getNumbers().get(0).getNumber()).isEqualTo(0);
+        assertThat(numbers.getNumbers().get(0).getNumber()).isZero();
         assertThat(numbers.getNumbers().size()).isEqualTo(1);
     }
 
