@@ -11,8 +11,6 @@ import lotto.domain.lottonumber.LottoNumber;
 
 public class Lottos {
 
-    private static final int PRICE_OF_LOTTO = 1000;
-
     private final List<Lotto> lottos;
 
     Lottos(final List<Lotto> lottos) {
@@ -22,7 +20,7 @@ public class Lottos {
     public static Lottos createAutoLottos(final Budget budget) {
         final List<Lotto> lottos = new ArrayList<>();
 
-        final int numberOfLotto = budget.getNumberOfPurchase(PRICE_OF_LOTTO);
+        final int numberOfLotto = budget.getNumberOfPurchase();
         for (int i = 0; i < numberOfLotto; i++) {
             lottos.add(new Lotto(createRandomNumbers()));
         }
@@ -33,9 +31,7 @@ public class Lottos {
         return LottoBalls.getRandomLottoNumber();
     }
 
-    public static Lottos createManualLottos(final List<String> inputManualLottoNumbers, final Budget budget) {
-        budget.deduct(PRICE_OF_LOTTO * inputManualLottoNumbers.size());
-
+    public static Lottos createManualLottos(final List<String> inputManualLottoNumbers) {
         final List<Lotto> lottos = inputManualLottoNumbers.stream()
                 .map(Lotto::new)
                 .collect(Collectors.toList());

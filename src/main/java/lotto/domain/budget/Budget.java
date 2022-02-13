@@ -5,22 +5,29 @@ import lotto.utils.Parser;
 
 public class Budget {
 
+    private static final int PRICE_OF_LOTTO = 1000;
     private static final String LACK_OF_MONEY_EXCEPTION_MESSAGE = "로또 구입 가격보다 예산이 적습니다.";
 
-    private int value;
+    private final int value;
 
-    public Budget(final String budget) {
-        this.value = Parser.parseInt(budget);
+    public Budget(final String value) {
+        this.value = Parser.parseInt(value);
     }
 
-    public int getNumberOfPurchase(final int priceOfLotto) {
-        validatePossibleToPurchase(priceOfLotto);
-        return this.value / priceOfLotto;
+    public Budget(final int value) {
+        this.value = value;
     }
 
-    public void deduct(final int amount) {
+    public int getNumberOfPurchase() {
+        validatePossibleToPurchase(PRICE_OF_LOTTO);
+        return this.value / PRICE_OF_LOTTO;
+    }
+
+    public Budget deductionPerLotto(final int numberOfLotto) {
+        int amount = numberOfLotto * PRICE_OF_LOTTO;
         validatePossibleToPurchase(amount);
-        this.value -= amount;
+
+        return new Budget(this.value - amount);
     }
 
     private void validatePossibleToPurchase(final int priceOfLotto) {

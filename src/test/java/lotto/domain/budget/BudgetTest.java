@@ -3,7 +3,6 @@ package lotto.domain.budget;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import lotto.domain.budget.Budget;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -34,7 +33,7 @@ class BudgetTest {
     @Test
     void Given_로또_가격보다_큰_투입_금액_When_구매가능_수_구하기_Then_구매_가능한_로또_수_반환() {
         // given & when
-        final int numberOfPurchase = new Budget("5000").getNumberOfPurchase(1000);
+        final int numberOfPurchase = new Budget("5000").getNumberOfPurchase();
 
         // then
         assertThat(numberOfPurchase).isEqualTo(5);
@@ -44,7 +43,7 @@ class BudgetTest {
     @Test
     void Given_로또_가격보다_적은_투입_금액_When_구매가능_수_구하기_Then_예외_발생() {
         assertThrows(IllegalArgumentException.class,
-                () -> new Budget("500").getNumberOfPurchase(1000));
+                () -> new Budget("500").getNumberOfPurchase());
 
     }
 
@@ -52,19 +51,19 @@ class BudgetTest {
     @Test
     void Given_차감_금액보다_적은_투입_금액_When_금액만큼_차감_Then_예외_발생() {
         assertThrows(IllegalArgumentException.class,
-                () -> new Budget("500").deduct(1000));
+                () -> new Budget("500").deductionPerLotto(1));
     }
 
-    @DisplayName("차감 금액이 주어지면 그만큼 예산 값을 차감한다.")
+    @DisplayName("차감 금액이 주어지면 차감된 예산을 가지는 객체를 새로 생성해 반환한다..")
     @Test
     void Given_차감_금액보다_큰_투입_금액_When_금액만큼_차감_Then_value값_차감() {
         // given
         final Budget budget = new Budget("5000");
 
         // when
-        budget.deduct(1000);
+        Budget result = budget.deductionPerLotto(1);
 
         // then
-        assertThat(budget).isEqualTo(new Budget("4000"));
+        assertThat(result).isEqualTo(new Budget("4000"));
     }
 }
