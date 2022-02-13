@@ -50,7 +50,7 @@ public class LottoResults {
 
     private void updateIncludeBonus(UserLotto lotto, WinningBall ball, WinningInfo info) {
         if (hasWinningBonusNumber(lotto, ball)) {
-            info.setBonus(true);
+            info.applyBonus(true);
         }
         winningInfoOfLotto.put(lotto, info);
     }

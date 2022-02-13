@@ -22,7 +22,7 @@ public class WinningInfo {
         return isBonus;
     }
 
-    public void setBonus(boolean bonus) {
+    public void applyBonus(boolean bonus) {
         isBonus = bonus;
     }
 }
