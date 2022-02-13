@@ -13,10 +13,7 @@ public class LottoPlay {
     }
 
     public void run(LottoMachine lottoMachine) {
-        analyzer.calculateTotalWinningMoney(
-            lottoTickets.countCorrectWinNumber(lottoMachine),
-            lottoTickets.checkBonusNumber(lottoMachine)
-        );
+        analyzer.calculateTotalWinningMoney(lottoTickets.calculateWinningResult(lottoMachine));
     }
 
     public List<WinningPrice> getWinningPrices() {

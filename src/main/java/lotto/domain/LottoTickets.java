@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
 
@@ -31,20 +32,12 @@ public class LottoTickets {
         return lottoTickets;
     }
 
-    public List<Integer> countCorrectWinNumber(final LottoMachine lottoMachine) {
-        List<Integer> correctNumbers = new ArrayList<>();
-        for (Lotto lotto : lottoTickets) {
-            correctNumbers.add(lotto.compareLottoAndWinnerNumbers(lottoMachine));
-        }
-        return correctNumbers;
+    public List<WinningResult> calculateWinningResult(final LottoMachine lottoMachine){
+        return lottoTickets.stream().map(winningResult -> new WinningResult(
+            winningResult.compareLottoAndWinnerNumbers(lottoMachine),
+            winningResult.compareLottoAndBonusNumbers(lottoMachine))).collect(
+            Collectors.toList());
     }
 
-    public List<Integer> checkBonusNumber(final LottoMachine lottoMachine) {
-        final List<Integer> checkBonusNumber = new ArrayList<>();
-        for (Lotto lotto : lottoTickets) {
-            checkBonusNumber.add(lotto.compareLottoAndBonusNumbers(lottoMachine));
-        }
-        return checkBonusNumber;
-    }
 
 }
