@@ -15,16 +15,12 @@ public class RandomLottoGenerator implements LottoGenerator {
         .boxed().collect(
             Collectors.toList());
 
-    /**
-     * 로또 6자리 생성 로직
-     * @return
-     */
     @Override
-    public  List<LottoNumber> generateLottoNumber() {
+    public List<LottoNumber> generateLottoNumber() {
         Collections.shuffle(lottoRange);
         List<Integer> subNumbers = lottoRange.stream().limit(COUNT).sorted()
             .collect(Collectors.toList());
-        List<LottoNumber>lottoNumbers=subNumbers.stream().map(LottoNumber::new).collect(
+        List<LottoNumber> lottoNumbers = subNumbers.stream().map(LottoNumber::new).collect(
             Collectors.toList());
         return lottoNumbers;
     }
