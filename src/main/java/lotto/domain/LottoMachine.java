@@ -12,12 +12,11 @@ public class LottoMachine {
         this.bonusNumber = bonusNumber;
     }
 
-    // TODO 리뷰어 님께 물어보기
     public boolean isEqualBonusNumber(final LottoNumber lottoNumber) {
         return bonusNumber == lottoNumber.getLottoNumber();
     }
 
     public boolean isContain(LottoNumber lottoNumber) {
-        return winNumbers.contains(lottoNumber.getLottoNumber());
+        return winNumbers.contains(lottoNumber);
     }
 }
