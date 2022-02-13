@@ -55,9 +55,7 @@ public class WinningResult {
     }
 
     public void calculateTotalPrize() {
-        Iterator iterator = result.keySet().iterator();
-        while (iterator.hasNext()) {
-            Rank rank = (Rank) iterator.next();
+        for (Rank rank : result.keySet()) {
             winningCash += result.get(rank) * rank.getPrize();
         }
     }
