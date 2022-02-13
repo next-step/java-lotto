@@ -4,13 +4,15 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.UserLotto;
 
-public class UserLottoFactory {
+public class UserLottos {
 
     private static final BigDecimal LOTTO_PRICE = new BigDecimal(1000);
 
-    private UserLottoFactory() {
+    private final List<UserLotto> userLottos;
+
+    public UserLottos(int quantity) {
+        this.userLottos = createUserLottos(quantity);
     }
 
     public static int getLottoQuantity(int purchasePrice) {
@@ -20,12 +22,16 @@ public class UserLottoFactory {
         return new BigDecimal(purchasePrice).divide(LOTTO_PRICE, RoundingMode.FLOOR).intValue();
     }
 
-    public static List<UserLotto> from(int quantity) {
+    private List<UserLotto> createUserLottos(int quantity) {
         List<UserLotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < quantity; i++) {
             lottos.add(new UserLotto());
         }
         return lottos;
+    }
+
+    public List<UserLotto> getRawUserLottos() {
+        return new ArrayList<>(userLottos);
     }
 }

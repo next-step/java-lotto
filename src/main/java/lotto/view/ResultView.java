@@ -6,8 +6,23 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.UserLotto;
 import lotto.domain.WinningStatistics;
+import lotto.dto.UserLottoInfo;
 
 public class ResultView {
+
+    public static void printUserLottoInfo(UserLottoInfo userLottoInfo) {
+        System.out.println(userLottoInfo.getQuantity() + "개를 구매했습니다.");
+
+        for(UserLotto lotto : userLottoInfo.getUserLottos().getRawUserLottos()) {
+            final StringBuilder sb = new StringBuilder("[");
+            lotto.getNumbers().stream()
+                .map(LottoNumber::getRaw)
+                .forEach(number -> sb.append(number).append(", "));
+
+            sb.append("]").deleteCharAt(sb.lastIndexOf(","));
+            System.out.println(sb.toString().trim());
+        }
+    }
 
     public static void printResult(List<LottoResult> results, int purchasePrice) {
         System.out.println("당첨 통계");
@@ -24,20 +39,5 @@ public class ResultView {
 
     private static boolean hasReward(LottoResult lottoResult) {
         return lottoResult != LottoResult.NO_REWARD;
-    }
-
-    public static void printLottoQuantityAndNumbers(int quantity, List<UserLotto> lottos) {
-        System.out.println(quantity + "개를 구매했습니다.");
-
-        for (UserLotto lotto : lottos) {
-            final StringBuilder sb = new StringBuilder("[");
-
-            lotto.getNumbers().stream()
-                .map(LottoNumber::getRaw)
-                .forEach(number -> sb.append(number).append(", "));
-
-            sb.append("]").deleteCharAt(sb.lastIndexOf(","));
-            System.out.println(sb.toString().trim());
-        }
     }
 }
