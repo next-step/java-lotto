@@ -50,8 +50,8 @@ public class LottoController {
         lottoResultView.finishGame(lottoResults, lottoResults.calculateYield(money));
     }
 
-    private void purchaseAllLottos(final int handOperatedLottoAmount, final LottoShop lottoShop, final int autoLottoAmount,
-        final Lottos allLotto) {
+    private void purchaseAllLottos(final int handOperatedLottoAmount, final LottoShop lottoShop,
+        final int autoLottoAmount, final Lottos allLotto) {
         for (int amount = 0; amount < handOperatedLottoAmount; amount++) {
             lottoShop.buyHandOperatedLotto(allLotto,
                 lottoInputView.inputHandOperatedLottoNumbers());

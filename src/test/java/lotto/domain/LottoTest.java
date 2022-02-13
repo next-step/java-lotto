@@ -11,7 +11,7 @@ class LottoTest {
 
     @Test
     void 복권의_숫자_개수는_6개여야_한다() {
-        List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5).stream()
+        final List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5).stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
 
@@ -22,7 +22,7 @@ class LottoTest {
 
     @Test
     void 복권의_숫자는_중복될_수_없다() {
-        List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 5).stream()
+        final List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 5).stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
 
@@ -33,11 +33,11 @@ class LottoTest {
 
     @Test
     void 보너스_볼을_가지고_있는지_판단할_수_있다() {
-        List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6).stream()
+        final List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6).stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
 
-        Lotto lotto = new Lotto(lottoNumbers);
+        final Lotto lotto = new Lotto(lottoNumbers);
 
         assertThat(lotto.hasBonusBall(new LottoNumber(6))).isTrue();
     }

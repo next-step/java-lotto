@@ -26,13 +26,13 @@ class LottoGameTest {
         lottos.storeLotto(createLotto(Arrays.asList(1, 2, 3, 4, 7, 10)));
         lottos.storeLotto(createLotto(Arrays.asList(1, 2, 3, 7, 10, 9)));
 
-        List<LottoNumber> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6).stream()
+        final List<LottoNumber> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6).stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
 
-        LottoNumber bonusBall = new LottoNumber(8);
+        final LottoNumber bonusBall = new LottoNumber(8);
 
-        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumber), bonusBall);
+        final WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumber), bonusBall);
 
         lottoGame = new LottoGame(lottos, winningLotto);
     }
@@ -46,15 +46,15 @@ class LottoGameTest {
 
     @Test
     void 내부에_모든_로또를_저장할_수_있다() {
-        Lottos lottos = lottoGame.getLottos();
+        final Lottos lottos = lottoGame.getLottos();
 
         assertThat(lottos.getLottos().size()).isEqualTo(4);
     }
 
     @Test
     void 발급한_모든_로또의_결과를_알_수_있다() {
-        LottoResults lottoResults = lottoGame.findWinner();
-        Map<Ranking, Integer> totalResult = lottoResults.getTotalResult();
+        final LottoResults lottoResults = lottoGame.findWinner();
+        final Map<Ranking, Integer> totalResult = lottoResults.getTotalResult();
 
         assertAll(
             () -> assertThat(totalResult.get(Ranking.FIRST)).isEqualTo(1),
@@ -67,9 +67,9 @@ class LottoGameTest {
 
     @Test
     void 수익률을_계산할_수_있다() {
-        LottoResults lottoResults = lottoGame.findWinner();
+        final LottoResults lottoResults = lottoGame.findWinner();
 
-        BigDecimal yield = lottoResults.calculateYield(new Money(5000));
+        final BigDecimal yield = lottoResults.calculateYield(new Money(5000));
 
         assertThat(yield).isEqualTo(BigDecimal.valueOf(40601100, 2));
     }

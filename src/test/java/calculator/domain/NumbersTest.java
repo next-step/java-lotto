@@ -15,7 +15,7 @@ class NumbersTest {
     @ValueSource(strings = {"1,5,3", "1,5:3", "//;\n1;5;3", "//;\n1;5,3"})
     void 연산자를_구분자기준_분리(String expression) {
         // when
-        Numbers numbers = new Numbers(expression);
+        final Numbers numbers = new Numbers(expression);
 
         // then
         assertThat(numbers.get(0).getNumber()).isEqualTo(1);
@@ -27,7 +27,7 @@ class NumbersTest {
     @NullAndEmptySource
     void 빈_문자열이나_null일_때는_0을_반환(String expression) {
         // when
-        Numbers numbers = new Numbers(expression);
+        final Numbers numbers = new Numbers(expression);
 
         // then
         assertThat(numbers.getNumbers().get(0).getNumber()).isEqualTo(0);
@@ -37,7 +37,7 @@ class NumbersTest {
     @Test
     void 숫자_하나를_문자열로_입력할경우_해당_숫자를_반환한다() {
         // when
-        Numbers numbers = new Numbers("5");
+        final Numbers numbers = new Numbers("5");
 
         // then
         assertThat(numbers.getNumbers().get(0).getNumber()).isEqualTo(5);
@@ -46,8 +46,8 @@ class NumbersTest {
 
     @Test
     void 일급_컬렉션에_담긴_모든_숫자의_합을_구할_수_있다() {
-        Numbers numbers = new Numbers("5,1,2");
-        Number number = numbers.addAll();
+        final Numbers numbers = new Numbers("5,1,2");
+        final Number number = numbers.addAll();
 
         assertThat(number.getNumber()).isEqualTo(8);
     }

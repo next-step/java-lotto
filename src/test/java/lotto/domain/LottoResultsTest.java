@@ -12,8 +12,8 @@ class LottoResultsTest {
 
     @Test
     void 결과를_업데이트_할_수_있다() {
-        Map<Ranking, Integer> totalResult = new HashMap<>();
-        LottoResults lottoResults = new LottoResults(totalResult);
+        final Map<Ranking, Integer> totalResult = new HashMap<>();
+        final LottoResults lottoResults = new LottoResults(totalResult);
 
         lottoResults.updateResults(Ranking.FIRST);
         lottoResults.updateResults(Ranking.SECOND);
@@ -29,13 +29,13 @@ class LottoResultsTest {
 
     @Test
     void 수익률을_계산할_수_있다() {
-        Map<Ranking, Integer> totalResult = new HashMap<>();
-        LottoResults lottoResults = new LottoResults(totalResult);
+        final Map<Ranking, Integer> totalResult = new HashMap<>();
+        final LottoResults lottoResults = new LottoResults(totalResult);
 
         lottoResults.updateResults(Ranking.FIRST);
         lottoResults.updateResults(Ranking.SECOND);
 
-        BigDecimal yield = lottoResults.calculateYield(new Money(10000));
+        final BigDecimal yield = lottoResults.calculateYield(new Money(10000));
 
         assertThat(yield).isEqualTo(BigDecimal.valueOf(20300000, 2));
     }

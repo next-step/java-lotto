@@ -8,9 +8,9 @@ class MoneyTest {
 
     @Test
     void 투입한_금액으로_로또를_몇_개_살_수_있는지를_알_수_있다() {
-        Money money = new Money(3000);
+        final Money money = new Money(3000);
 
-        int amount = money.divideByLottoPrice();
+        final int amount = money.divideByLottoPrice();
 
         assertThat(amount).isEqualTo(3);
     }

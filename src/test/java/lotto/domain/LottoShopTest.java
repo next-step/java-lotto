@@ -35,7 +35,7 @@ class LottoShopTest {
         final LottoShop lottoShop = LottoShop.getInstance();
         final List<Lotto> lottos = new ArrayList<>();
         final Lottos allLotto = new Lottos(lottos);
-        String[] lottoNumbers = {"1", "2", "3", "4", "5", "6"};
+        final String[] lottoNumbers = {"1", "2", "3", "4", "5", "6"};
 
         lottoShop.buyHandOperatedLotto(allLotto, lottoNumbers);
 

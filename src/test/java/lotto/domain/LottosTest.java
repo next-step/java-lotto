@@ -10,7 +10,7 @@ class LottosTest {
     @Test
     void 로또들을_저장할_수_있다() {
         // given
-        Lottos lottos = new Lottos(new ArrayList<>());
+        final Lottos lottos = new Lottos(new ArrayList<>());
 
         // when
         lottos.storeLotto(new Lotto());

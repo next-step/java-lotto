@@ -9,7 +9,7 @@ class LottoNumberTest {
 
     @Test
     void 복권의_숫자생성() {
-        LottoNumber lottoNumber = new LottoNumber(5);
+        final LottoNumber lottoNumber = new LottoNumber(5);
 
         assertThat(lottoNumber.getNumber()).isEqualTo(5);
     }
