@@ -26,7 +26,7 @@ class ManualCountTest {
     @ValueSource(strings = {"1", "2", "10", "0"})
     @ParameterizedTest
     void 정상적인_구매_개수_문자열일_경우_확인(String value) {
-        final ManualCount manualCount = new ManualCount(value, totalCount);
+        final ManualCount manualCount = new ManualCount(new Count(value), totalCount);
         assertThat(manualCount.getCountValue()).isEqualTo(Integer.parseInt(value));
     }
 
@@ -34,7 +34,7 @@ class ManualCountTest {
     @ParameterizedTest
     void 정수로_변환_불가능한_입력값(String value) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> new ManualCount(value, totalCount)).withMessage("[ERROR] 숫자만 들어올 수 있습니다.");
+            .isThrownBy(() -> new ManualCount(new Count(value), totalCount)).withMessage("[ERROR] 숫자만 들어올 수 있습니다.");
     }
 
     @ValueSource(ints = {-1, -100, -342})

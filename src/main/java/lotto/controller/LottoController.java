@@ -65,7 +65,7 @@ public class LottoController {
 
     private ManualCount inputManualCount(Count count) {
         try {
-            return new ManualCount(InputView.inputManualCount(), count);
+            return new ManualCount(new Count(InputView.inputManualCount()), count);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputManualCount(count);
