@@ -51,9 +51,7 @@ public class Statistics {
     }
 
     private void calculateTotalPrize() {
-        Iterator<Rank> keys = ranks.keySet().iterator();
-        while (keys.hasNext()) {
-            Rank key = keys.next();
+        for (Rank key : ranks.keySet()) {
             totalPrize += ranks.get(key);
         }
     }
