@@ -14,7 +14,6 @@ import lotto.domain.Ranking;
 
 public class LottoResultView {
 
-    private static final int ZERO = 0;
     private static final String LOTTO_STATISTICS_MESSAGE = "당첨 통계";
     private static final String HYPHEN_MESSAGE = "---------";
     private static final String TOTAL_YIELD_MESSAGE = "총 수익률은 ";
