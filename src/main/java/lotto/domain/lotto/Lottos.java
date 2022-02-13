@@ -1,8 +1,12 @@
 package lotto.domain.lotto;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -10,6 +14,12 @@ public class Lottos {
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    public void appendLottos(List<Lotto> target) {
+        lottos = Stream.of(lottos, target)
+            .flatMap(lotto -> lotto.stream())
+            .collect(Collectors.toList());
     }
 
     public List<Lotto> getLottos() {

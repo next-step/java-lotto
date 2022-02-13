@@ -12,14 +12,16 @@ public class TicketDealer {
 
     private static final int ONE = 1;
 
-    public static Lottos getLottosOf(LottoGenerator lottoGenerator, final int ticketCount) {
-        List<Lotto> lottos = IntStream.rangeClosed(ONE, ticketCount)
+    public static Lottos getLottosByManual(List<Lotto> lottos) {
+        return new Lottos(lottos);
+    }
+
+    public static List<Lotto> getLottosByAuto(Lottos lottos, LottoGenerator lottoGenerator, final int ticketCount) {
+        return IntStream.rangeClosed(ONE, ticketCount)
             .mapToObj(index -> lottoGenerator.get().stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()))
             .map(Lotto::new)
             .collect(Collectors.toList());
-
-        return new Lottos(lottos);
     }
 }
