@@ -10,7 +10,7 @@ import java.util.Map;
 public class Statistics {
 
     private static final int PRICE_OF_A_LOTTO = 1000;
-
+    private static final int HUNDRED = 100;
     private static Map<Rank, Integer> ranks;
     private double totalPrice;
     private double totalPrize;
@@ -60,7 +60,7 @@ public class Statistics {
 
     public double calculateBenefits() {
         calculateTotalPrize();
-        return Math.floor((totalPrize / totalPrice) * 100) / 100;
+        return Math.floor((totalPrize / totalPrice) * HUNDRED) / HUNDRED;
     }
 
 }
