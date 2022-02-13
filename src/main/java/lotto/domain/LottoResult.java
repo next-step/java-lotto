@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoResult {
-    NO_MATCH(0, true, 0),
+    NO_MATCH(0, false, 0),
     MATCH3(3, false, 5000),
     MATCH4(4, false, 5_0000),
     MATCH5(5, false, 15_0000),
@@ -22,15 +22,16 @@ public enum LottoResult {
 
     public static LottoResult findLottoResult(int matchCount, boolean isBonusNumber) {
         return Arrays.stream(values())
-            .filter(lottoResult -> lottoResult.matchCount == matchCount)
-            .filter(lottoResult -> {
-                if (lottoResult.matchCount != 5) {
-                    return true;
-                }
-                return lottoResult.isBonusNumber == isBonusNumber;
-            })
+            .filter(lottoResult -> lottoResult.isResult(matchCount, isBonusNumber))
             .findAny()
             .orElse(NO_MATCH);
+    }
+
+    private Boolean isResult(int matchCount, boolean isBonusNumber) {
+        if(matchCount == 5 && this.matchCount == 5) {
+            return this.isBonusNumber == isBonusNumber;
+        }
+        return this.matchCount == matchCount;
     }
 
     public int getWinning() {
