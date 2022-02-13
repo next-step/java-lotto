@@ -3,7 +3,6 @@ package lotto;
 import java.util.List;
 import lotto.domain.LottoRaffle;
 import lotto.domain.MatchResult;
-import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.WinningLotto;
 import lotto.domain.lotto.count.Count;
@@ -27,10 +26,7 @@ public class LottoGame {
     public MatchResult getResults(Lottos lottos, Numbers winningNumbers, BonusNumber bonusNumber) {
         final LottoRaffle lottoRaffle = new LottoRaffle(
             new WinningLotto(winningNumbers, bonusNumber));
-        for (Lotto lotto : lottos.getLottos()) {
-            lottoRaffle.compareLotto(lotto);
-        }
-        return lottoRaffle.getResults();
+        return lottoRaffle.compareLottos(lottos);
     }
 
     public Count calculateAutoCount(Count totalCount, ManualCount manualCount) {
@@ -42,6 +38,6 @@ public class LottoGame {
     }
 
     public Lottos generateTotalLottos(Lottos manualLottos, Lottos autoLottos) {
-        return manualLottos.addLottos(autoLottos);
+        return Lottos.combine(manualLottos, autoLottos);
     }
 }
