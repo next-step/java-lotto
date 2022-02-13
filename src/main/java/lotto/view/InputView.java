@@ -1,8 +1,11 @@
 package lotto.view;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import lotto.utils.Parser;
 
 public class InputView {
@@ -16,7 +19,8 @@ public class InputView {
     private static final String INPUT_MANUAL_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요. (한 줄에 로또 한장을 ','로 구분하여 입력.)";
     private static final String INPUT_NUMBER_OF_MANUAL_LOTTO = "수동으로 구매할 로또 수를 입력해 주세요.";
 
-    private InputView() {}
+    private InputView() {
+    }
 
     public static String inputBudget() {
         System.out.println(INPUT_BUDGET);
@@ -34,15 +38,17 @@ public class InputView {
     }
 
     public static List<String> inputManualLottoNumbers() {
-        List<String> lottos = new ArrayList<>();
         int numberOfManualLotto = Parser.parseInt(inputNumberOfManualLotto());
 
-        System.out.println(INPUT_MANUAL_LOTTO_NUMBERS);
-        while (lottos.size() < numberOfManualLotto) {
-            lottos.add(removedBlankInput());
+        if (numberOfManualLotto <= 0) {
+            return Collections.unmodifiableList(new ArrayList<>());
         }
 
-        return lottos;
+        System.out.println(INPUT_MANUAL_LOTTO_NUMBERS);
+        return Collections.unmodifiableList(
+                IntStream.range(0, numberOfManualLotto)
+                        .mapToObj(i -> removedBlankInput())
+                        .collect(Collectors.toList()));
     }
 
     private static String inputNumberOfManualLotto() {
