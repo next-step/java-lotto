@@ -20,7 +20,7 @@ public class LottoAutoGenerator {
 
     private LottoAutoGenerator() {
         allNum = IntStream.range(LOTTO_NUM_START, LOTTO_NUM_END)
-            .mapToObj(LottoNumber::new)
+            .mapToObj(LottoNumber::from)
             .collect(Collectors.toList());
     }
 
