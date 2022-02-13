@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -10,9 +11,10 @@ import java.util.stream.IntStream;
 public class UserLotto {
 
     private static final int LOTTO_NUMBERS_SIZE = 6;
-    private static final List<Integer> numberData =
+    private static final List<LottoNumber> numberData =
         IntStream.rangeClosed(LottoNumber.LOTTO_FIRST_NUMBER, LottoNumber.LOTTO_LAST_NUMBER)
             .boxed()
+            .map(LottoNumber::new)
             .collect(Collectors.toList());
 
     private final List<LottoNumber> numbers;
@@ -33,9 +35,7 @@ public class UserLotto {
 
     private static List<LottoNumber> getLottoNumbers() {
         Collections.shuffle(numberData);
-        return numberData.subList(0, LOTTO_NUMBERS_SIZE).stream()
-            .map(LottoNumber::new)
-            .collect(Collectors.toList());
+        return new ArrayList<>(numberData.subList(0, LOTTO_NUMBERS_SIZE));
     }
 
     private void validateSize() {
