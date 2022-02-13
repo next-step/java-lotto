@@ -4,17 +4,17 @@ import java.util.Objects;
 
 public class LottoNumber {
 
-    private int lottoNumber;
+    private final int lottoNumber;
 
-    public LottoNumber(String input) {
+    public LottoNumber(final String input) {
         this.lottoNumber = this.validatorValue(Integer.parseInt(input));
     }
 
-    public LottoNumber(int input) {
-        this.lottoNumber = this.validatorValue(input);
+    public LottoNumber(final int value) {
+        this.lottoNumber = this.validatorValue(value);
     }
 
-    public int validatorValue(int value) {
+    public int validatorValue(final int value) {
         if (value < 1 || value > 45) {
             throw new IllegalArgumentException("1 이상 45 이하의 수를 입력해주세요");
         }

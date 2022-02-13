@@ -12,7 +12,7 @@ public class LottoPlay {
         this.analyzer = new Analyzer(totalPrice);
     }
 
-    public void run(LottoMachine lottoMachine) {
+    public void run(final LottoMachine lottoMachine) {
         analyzer.calculateTotalWinningMoney(lottoTickets.calculateWinningResult(lottoMachine));
     }
 

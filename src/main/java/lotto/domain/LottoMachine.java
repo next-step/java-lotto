@@ -16,7 +16,7 @@ public class LottoMachine {
         return bonusNumber == lottoNumber.getLottoNumber();
     }
 
-    public boolean isContain(LottoNumber lottoNumber) {
+    public boolean isContain(final LottoNumber lottoNumber) {
         return winNumbers.contains(lottoNumber);
     }
 }

@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 public class LottoTickets {
 
     private static final int LOTTO_PRICE = 1000;
+
     private final int lottoCounts;
     private final List<Lotto> lottoTickets;
     private final LottoGenerator lottoGenerator;

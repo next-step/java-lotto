@@ -8,28 +8,33 @@ import lotto.domain.WinningPrice;
 
 public class ResultView {
 
+    private static final Character OPEN_CHAR = ']';
+    private static final Character CLOSED_CHAR = '[';
+    private static final String WIN_STATISTICS_MESSAGE = "당첨통계";
+    private static final String DIVISION_LINE = "---------";
+
     public void printNumberOfLotto(final int lottoCounts) {
         System.out.printf("%d개를 구매했습니다.%n", lottoCounts);
     }
 
     public void printLottoTickets(final List<Lotto> lottoTickets) {
         for (Lotto lotto : lottoTickets) {
-            System.out.print('[');
+            System.out.print(OPEN_CHAR);
 
             String lottoNumbers = String.join(", ", lotto.getLottoNumbers().stream()
                 .map(LottoNumber::getLottoNumber).map(Object::toString)
                 .collect(Collectors.toList()));
 
             System.out.print(lottoNumbers);
-            System.out.print(']');
+            System.out.print(CLOSED_CHAR);
             System.out.println();
         }
     }
 
     public void printAnalyzeResults(final List<WinningPrice> winningPrices,
         final double profitPercent) {
-        System.out.println("당첨통계");
-        System.out.println("---------");
+        System.out.println(WIN_STATISTICS_MESSAGE);
+        System.out.println(DIVISION_LINE);
         printWinningMoney(winningPrices);
         printProfitPercent(profitPercent);
     }

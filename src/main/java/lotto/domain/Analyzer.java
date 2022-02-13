@@ -9,15 +9,17 @@ import java.util.Map.Entry;
 public class Analyzer {
 
     private static final Map<Integer, Integer> POSSIBLE_LOTTO_WINNING_MONEY = createPossibleLottoWinningMoneyKey();
+
     private final List<WinningPrice> winningPrices = new ArrayList<>();
     private final int price;
+
     private int totalWinningMoney = 0;
+
     public Analyzer(final int price) {
         this.price = price;
     }
 
     private static Map<Integer, Integer> createPossibleLottoWinningMoneyKey() {
-
         Map<Integer, Integer> result = new HashMap<>();
         result.put(3, 0);
         result.put(4, 0);
@@ -32,10 +34,9 @@ public class Analyzer {
     }
 
     public void calculateTotalWinningMoney(final List<WinningResult> winningResult) {
-
         for (Entry<Integer, Integer> integerBooleanEntry : POSSIBLE_LOTTO_WINNING_MONEY.entrySet()) {
-            int win = integerBooleanEntry.getKey();
-            int bonus = integerBooleanEntry.getValue();
+            final int win = integerBooleanEntry.getKey();
+            final int bonus = integerBooleanEntry.getValue();
             winningPrices.add(calculatePerStepMoney(win, bonus, winningResult));
         }
     }
