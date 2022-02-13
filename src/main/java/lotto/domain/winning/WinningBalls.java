@@ -1,9 +1,10 @@
-package lotto.domain;
+package lotto.domain.winning;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.user.UserLotto;
+import lotto.dto.WinningInfo;
 
 public class WinningBalls {
 
@@ -23,13 +24,25 @@ public class WinningBalls {
         return balls;
     }
 
+    public WinningInfo getWinningInfoOf(UserLotto userLotto) {
+        int count = 0;
+        boolean hasBonus = false;
+
+        for (WinningBall winningBall : winningBalls) {
+            if (userLotto.contains(winningBall.getNumber())) {
+                count++;
+            }
+            if (userLotto.contains(winningBall.getNumber()) && winningBall.isBonus()) {
+                hasBonus = true;
+            }
+        }
+
+        return new WinningInfo(count, hasBonus);
+    }
+
     private void validateBonusNumberDuplication(String[] numbers, String bonusNumber) {
         if (Arrays.asList(numbers).contains(bonusNumber)) {
             throw new IllegalArgumentException("[ERROR] 보너스 번호와 당첨 번호가 같습니다.");
         }
-    }
-
-    public List<WinningBall> getWinningBalls() {
-        return new ArrayList<>(winningBalls);
     }
 }
