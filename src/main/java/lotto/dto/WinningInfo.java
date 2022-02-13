@@ -2,27 +2,19 @@ package lotto.dto;
 
 public class WinningInfo {
 
-    private int count;
-    private boolean isBonus;
+    private final int count;
+    private final boolean hasBonus;
 
-    public WinningInfo(int count, boolean isBonus) {
+    public WinningInfo(int count, boolean hasBonus) {
         this.count = count;
-        this.isBonus = isBonus;
-    }
-
-    public void countUp() {
-        count++;
+        this.hasBonus = hasBonus;
     }
 
     public int getCount() {
         return count;
     }
 
-    public boolean isBonus() {
-        return isBonus;
-    }
-
-    public void applyBonus(boolean bonus) {
-        isBonus = bonus;
+    public boolean hasBonus() {
+        return hasBonus;
     }
 }
