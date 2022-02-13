@@ -28,7 +28,8 @@ public class LottoBalls {
         List<LottoNumber> copyNumbers = new ArrayList<>(BALLS);
         shuffle(copyNumbers);
 
-        return new TreeSet<>(copyNumbers.subList(0, NUMBER_OF_LOTTO_BALL));
+        return Collections.unmodifiableSet(
+                new TreeSet<>(copyNumbers.subList(0, NUMBER_OF_LOTTO_BALL)));
     }
 
     private static void shuffle(final List<LottoNumber> numbers) {
@@ -36,12 +37,13 @@ public class LottoBalls {
     }
 
     public static Set<LottoNumber> of(final List<Integer> numbers) {
-        return numbers.stream()
-                .map(n -> {
-                    validateLottoNumberRange(n);
-                    return BALLS.get(n - DIFFERENCE_FROM_INDEX);
-                })
-                .collect(Collectors.toCollection(TreeSet::new));
+        return Collections.unmodifiableSet(
+                (Set<? extends LottoNumber>) numbers.stream()
+                        .map(n -> {
+                            validateLottoNumberRange(n);
+                            return BALLS.get(n - DIFFERENCE_FROM_INDEX);
+                        })
+                        .collect(Collectors.toCollection(TreeSet::new)));
     }
 
     static LottoNumber from(final int value) {

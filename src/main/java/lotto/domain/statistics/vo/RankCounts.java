@@ -1,5 +1,6 @@
 package lotto.domain.statistics.vo;
 
+import java.util.Collections;
 import java.util.Map;
 import lotto.domain.lottorank.LottoRank;
 
@@ -12,6 +13,6 @@ public class RankCounts {
     }
 
     public Map<LottoRank, Integer> get() {
-        return this.rankCounts;
+        return Collections.unmodifiableMap(this.rankCounts);
     }
 }

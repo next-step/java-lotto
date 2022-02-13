@@ -1,5 +1,6 @@
 package lotto.domain.lottorank;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,6 @@ public class LottoRanks {
     }
 
     public List<LottoRank> get() {
-        return this.lottoRanks;
+        return Collections.unmodifiableList(this.lottoRanks);
     }
 }

@@ -1,30 +1,30 @@
 package lotto.domain.lotto;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
-import lotto.domain.lottonumber.LottoBalls;
 import lotto.domain.budget.Budget;
+import lotto.domain.lottonumber.LottoBalls;
 import lotto.domain.lottonumber.LottoNumber;
 
 public class Lottos {
 
     private final List<Lotto> lottos;
 
-    Lottos(final List<Lotto> lottos) {
+    private Lottos(final List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
     public static Lottos createAutoLottos(final Budget budget) {
-        final List<Lotto> lottos = new ArrayList<>();
-
         final int numberOfLotto = budget.getNumberOfPurchase();
-        for (int i = 0; i < numberOfLotto; i++) {
-            lottos.add(new Lotto(createRandomNumbers()));
-        }
-        return new Lottos(lottos);
+
+        return new Lottos(Collections.unmodifiableList(
+                IntStream.range(0, numberOfLotto)
+                        .mapToObj(num -> new Lotto(createRandomNumbers()))
+                        .collect(Collectors.toList())));
     }
 
     private static Set<LottoNumber> createRandomNumbers() {
@@ -32,11 +32,10 @@ public class Lottos {
     }
 
     public static Lottos createManualLottos(final List<String> inputManualLottoNumbers) {
-        final List<Lotto> lottos = inputManualLottoNumbers.stream()
-                .map(Lotto::new)
-                .collect(Collectors.toList());
-
-        return new Lottos(lottos);
+        return new Lottos(Collections.unmodifiableList(
+                inputManualLottoNumbers.stream()
+                        .map(Lotto::new)
+                        .collect(Collectors.toList())));
     }
 
     public int size() {
@@ -44,15 +43,13 @@ public class Lottos {
     }
 
     public Lottos merge(final Lottos target) {
-        final List<Lotto> mergedLottos = Stream.concat(this.lottos.stream(), target.get().stream())
-                .collect(Collectors.toList());
-
-        return new Lottos(mergedLottos);
-
+        return new Lottos(Collections.unmodifiableList(
+                Stream.concat(this.lottos.stream(), target.get().stream())
+                        .collect(Collectors.toList())));
     }
 
     public List<Lotto> get() {
-        return this.lottos;
+        return Collections.unmodifiableList(this.lottos);
     }
 
     @Override

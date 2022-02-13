@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -66,7 +67,7 @@ public class Lotto {
     }
 
     public Set<LottoNumber> get() {
-        return this.lottoNumbers;
+        return Collections.unmodifiableSet(this.lottoNumbers);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package lotto.domain.correctnumber;
 
+import java.util.Collections;
 import java.util.Set;
 import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.lotto.Lotto;
@@ -28,7 +29,7 @@ public class CorrectNumbers {
     }
 
     public Set<LottoNumber> getWinningNumbers() {
-        return winningNumbers.get();
+        return Collections.unmodifiableSet(winningNumbers.get());
     }
 
     public LottoNumber getBonusNumber() {
