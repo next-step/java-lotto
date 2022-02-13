@@ -11,10 +11,10 @@ class StatisticsTest {
     @Test
     void 랭킹을_업데이트_한다() {
         Statistics statistics = new Statistics(2);
-        Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6), 5, true);
-        Lotto lotto2 = new Lotto(Arrays.asList(2, 4, 6, 8, 10, 12), 3, false);
+        MatchInfo matchInfo1 = new MatchInfo(5, true);
+        MatchInfo matchInfo2 = new MatchInfo(3, false);
         Map<Rank, Integer> ranks = statistics.updateRanks(
-            Arrays.asList(lotto1, lotto2)
+            Arrays.asList(matchInfo1,matchInfo2)
         );
         assertThat(ranks.get(Rank.SECOND)).isEqualTo(1);
         assertThat(ranks.get(Rank.FIFTH)).isEqualTo(1);
