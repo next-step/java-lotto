@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -53,5 +54,28 @@ class WinningLottoTest {
         Lotto userLotto = Lotto.from(userNumbers);
         boolean actual = testWinningLotto.getMatchBonus(userLotto);
         assertThat(actual).isFalse();
+    }
+
+    @DisplayName("각 로또의 결과를 RANK와 해당 RANK의 개수로 저장한다")
+    @Test
+    void 결과가_1등_1개_2등_1개_3등_2개인_경우() {
+        List<Integer> first = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> second = Arrays.asList(1, 2, 3, 4, 5, 7);
+        List<Integer> third1 = Arrays.asList(11, 2, 3, 4, 5, 6);
+        List<Integer> third2 = Arrays.asList(1, 2, 3, 41, 5, 6);
+
+        List<Lotto> lottos = Arrays.asList(
+            Lotto.from(first),
+            Lotto.from(second),
+            Lotto.from(third1),
+            Lotto.from(third2)
+        );
+
+        Map<Rank, Integer> actual = testWinningLotto.mapResult(Lottos.withListLotto(lottos));
+        assertThat(actual.get(Rank.FIRST)).isEqualTo(1);
+        assertThat(actual.get(Rank.SECOND)).isEqualTo(1);
+        assertThat(actual.get(Rank.THIRD)).isEqualTo(2);
+        assertThat(actual.get(Rank.FOURTH)).isEqualTo(0);
+        assertThat(actual.get(Rank.FIFTH)).isEqualTo(0);
     }
 }
