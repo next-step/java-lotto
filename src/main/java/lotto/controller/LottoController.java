@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,20 +28,35 @@ public class LottoController {
     }
 
     public void run() {
-        Money money = new Money(lottoInputView.inputPrice());
+        final Money money = new Money(lottoInputView.inputPrice());
+
+        final int handOperatedLottoAmount = lottoInputView.inputHandOperatedLottoAmount();
 
         final LottoShop lottoShop = LottoShop.getInstance();
-        final int lottoAmount = lottoShop.countPossibleLottoAmount(money);
+        final int autoLottoAmount = lottoShop.countPossibleLottoAmount(money) - handOperatedLottoAmount;
 
-        Lottos lottos = lottoShop.buyLotto(lottoAmount);
-        lottoResultView.printLottos(lottos);
+        final List<Lotto> lottos = new ArrayList<>();
+        final Lottos allLotto = new Lottos(lottos);
+
+        purchaseAllLottos(handOperatedLottoAmount, lottoShop, autoLottoAmount, allLotto);
+
+        lottoResultView.printLottos(allLotto, autoLottoAmount, handOperatedLottoAmount);
 
         final List<LottoNumber> winningNumbers = createWinningNumbers();
         final LottoNumber bonusBall = new LottoNumber(lottoInputView.inputBonusBall());
         final WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), bonusBall);
-        final LottoGame lottoGame = new LottoGame(lottos, winningLotto);
+        final LottoGame lottoGame = new LottoGame(allLotto, winningLotto);
         final LottoResults lottoResults = lottoGame.findWinner();
         lottoResultView.finishGame(lottoResults, lottoResults.calculateYield(money));
+    }
+
+    private void purchaseAllLottos(final int handOperatedLottoAmount, final LottoShop lottoShop, final int autoLottoAmount,
+        final Lottos allLotto) {
+        for (int amount = 0; amount < handOperatedLottoAmount; amount++) {
+            lottoShop.buyHandOperatedLotto(allLotto,
+                lottoInputView.inputHandOperatedLottoNumbers());
+        }
+        lottoShop.buyAutoLotto(allLotto, autoLottoAmount);
     }
 
     private List<LottoNumber> createWinningNumbers() {

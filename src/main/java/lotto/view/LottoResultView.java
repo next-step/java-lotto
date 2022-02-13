@@ -27,16 +27,19 @@ public class LottoResultView {
     private static final String SPACE = " ";
     private static final String COMMA = ",";
     private static final String LOTTO_AMOUNT_MESSAGE = "개를 구매했습니다.";
+    private static final String HAND_OPERATED_LOTTO_MESSAGE = "수동으로";
+    private static final String AUTO_LOTTO_MESSAGE = "자동으로";
 
-    public void printLottos(final Lottos lottos) {
-        printAmount(lottos);
+    public void printLottos(final Lottos lottos, final int autoLottoAmount,
+        final int handOperatedLottoAmount) {
+        System.out.println(HAND_OPERATED_LOTTO_MESSAGE + SPACE + handOperatedLottoAmount
+            + AMOUNT_MESSAGE + COMMA
+            + AUTO_LOTTO_MESSAGE + SPACE +
+            autoLottoAmount + LOTTO_AMOUNT_MESSAGE);
+
         for (Lotto lotto : lottos.getLottos()) {
             printLotto(lotto.getLottoNumbers());
         }
-    }
-
-    private void printAmount(final Lottos lottos) {
-        System.out.println(lottos.getLottos().size() + LOTTO_AMOUNT_MESSAGE);
     }
 
     private void printLotto(final List<LottoNumber> lottoNumbers) {
