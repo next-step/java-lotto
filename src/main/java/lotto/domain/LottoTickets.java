@@ -11,9 +11,9 @@ public class LottoTickets {
     private final List<Lotto> lottoTickets;
     private final LottoGenerator lottoGenerator;
 
-    public LottoTickets(final int price,final LottoGenerator lottoGenerator) {
+    public LottoTickets(final int price, final LottoGenerator lottoGenerator) {
         this.lottoCounts = price / LOTTO_PRICE;
-        this.lottoGenerator=lottoGenerator;
+        this.lottoGenerator = lottoGenerator;
         this.lottoTickets = makeLottoTickets(lottoCounts);
     }
 
@@ -33,7 +33,7 @@ public class LottoTickets {
         return lottoTickets;
     }
 
-    public List<WinningResult> calculateWinningResult(final LottoMachine lottoMachine){
+    public List<WinningResult> calculateWinningResult(final LottoMachine lottoMachine) {
         return lottoTickets.stream().map(winningResult -> new WinningResult(
             winningResult.compareLottoAndWinnerNumbers(lottoMachine),
             winningResult.compareLottoAndBonusNumbers(lottoMachine))).collect(

@@ -9,6 +9,12 @@ import java.util.Map.Entry;
 public class Analyzer {
 
     private static final Map<Integer, Integer> POSSIBLE_LOTTO_WINNING_MONEY = createPossibleLottoWinningMoneyKey();
+    private final List<WinningPrice> winningPrices = new ArrayList<>();
+    private final int price;
+    private int totalWinningMoney = 0;
+    public Analyzer(final int price) {
+        this.price = price;
+    }
 
     private static Map<Integer, Integer> createPossibleLottoWinningMoneyKey() {
 
@@ -19,14 +25,6 @@ public class Analyzer {
         result.put(5, 1);
         result.put(6, 0);
         return result;
-    }
-
-    private final List<WinningPrice> winningPrices = new ArrayList<>();
-    private final int price;
-    private int totalWinningMoney = 0;
-
-    public Analyzer(final int price) {
-        this.price = price;
     }
 
     public Double calculateProfitPercent() {

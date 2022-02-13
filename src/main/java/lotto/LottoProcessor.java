@@ -14,7 +14,8 @@ public class LottoProcessor {
     public static void main(String[] args) {
 
         try {
-            final LottoPlay lottoPlay = new LottoPlay(inputView.getTotalPrice(),new RandomLottoGenerator());
+            final LottoPlay lottoPlay = new LottoPlay(inputView.getTotalPrice(),
+                new RandomLottoGenerator());
             resultView.printNumberOfLotto(lottoPlay.getLottoCounts());
             resultView.printLottoTickets(lottoPlay.getLottoTickets());
 

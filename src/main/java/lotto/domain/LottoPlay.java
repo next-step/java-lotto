@@ -7,8 +7,8 @@ public class LottoPlay {
     private final LottoTickets lottoTickets;
     private final Analyzer analyzer;
 
-    public LottoPlay(final int totalPrice,final LottoGenerator lottoGenerator) {
-        this.lottoTickets = new LottoTickets(totalPrice,lottoGenerator);
+    public LottoPlay(final int totalPrice, final LottoGenerator lottoGenerator) {
+        this.lottoTickets = new LottoTickets(totalPrice, lottoGenerator);
         this.analyzer = new Analyzer(totalPrice);
     }
 
