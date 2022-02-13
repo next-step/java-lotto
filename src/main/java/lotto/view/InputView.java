@@ -17,6 +17,7 @@ public class InputView {
     private static final int LOTTO_NUMBER_SIZE = 6;
     private static final String PURCHASE_TICKET_MANAGER_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String MANUAL_TICKET_MANAGER_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUAL_TICKET_COUNT_ERROR_LOG = "수동으로 구매할 로또 수는 전체 금액을 초과할 수 없습니다.";
     private static final String MANUAL_TICKET_NUMBER_MANAGER_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String WINNING_NUMBER_MANAGER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_BALL_MANAGER_MESSAGE = "보너스 볼을 입력해 주세요.";
@@ -26,8 +27,6 @@ public class InputView {
 
     public static Ticket buyTicket() {
         int money = Integer.parseInt(writePurchaseAmount());
-
-
         return new Ticket(money);
     }
 
@@ -43,12 +42,24 @@ public class InputView {
         }
     }
 
-    public static List<Lotto> buyManualLotto() {
-        int manualTicketCount = buyManualTicket();
-        return makeManualLottos(manualTicketCount);
+    public static List<Lotto> buyManualLotto(int totalCount) {
+        try {
+            int manualTicketCount = buyManualTicket();
+            validateManualCount(manualTicketCount, totalCount);
+            return makeManualLottos(manualTicketCount);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return buyManualLotto(totalCount);
+        }
     }
 
-    public static int buyManualTicket() {
+    private static void validateManualCount(int manualCount, int totalCount) {
+        if (manualCount > totalCount) {
+            throw new IllegalArgumentException(MANUAL_TICKET_COUNT_ERROR_LOG);
+        }
+    }
+
+    private static int buyManualTicket() {
         try {
             OutputView.printMessage(ENTER + MANUAL_TICKET_MANAGER_MESSAGE + ENTER);
             String input = scanner.nextLine();
@@ -60,7 +71,7 @@ public class InputView {
         }
     }
 
-    public static List<Lotto> makeManualLottos(int manualTicketCount) {
+    private static List<Lotto> makeManualLottos(int manualTicketCount) {
         OutputView.printMessage(ENTER + MANUAL_TICKET_NUMBER_MANAGER_MESSAGE + ENTER);
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < manualTicketCount; i++) {
@@ -123,7 +134,7 @@ public class InputView {
         }
     }
 
-    public static int writeBonusBall() {
+    private static int writeBonusBall() {
         try {
             OutputView.printMessage(BONUS_BALL_MANAGER_MESSAGE + ENTER);
             String input = scanner.nextLine();

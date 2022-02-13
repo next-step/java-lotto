@@ -18,12 +18,12 @@ public class LottoController {
 
         Ticket ticket = InputView.buyTicket();
 
-        List<Lotto> manualLottos = InputView.buyManualLotto();
+        List<Lotto> manualLottos = InputView.buyManualLotto(ticket.getBuyTotalCount());
         int manualLottosSize = manualLottos.size();
         Lottos lottos = TicketDealer.getLottosByManual(manualLottos);
 
-        List<Lotto> autoLottos = TicketDealer.getLottosByAuto(lottos, new RandomLottoGenerator(), ticket.getBuyTotalCount() - manualLottos.size());
-        int autoLottosSize = autoLottos.size();
+        int autoLottosSize = ticket.getBuyTotalCount() - manualLottos.size();
+        List<Lotto> autoLottos = TicketDealer.getLottosByAuto(lottos, new RandomLottoGenerator(), autoLottosSize);
         lottos.appendLottos(autoLottos);
 
         ticket.detailCount(manualLottosSize, autoLottosSize);
@@ -32,7 +32,6 @@ public class LottoController {
         outputView.printPurchaseTicket(lottos);
 
         WinningNumber winningNumber = InputView.makeWinningNumber();
-
         WinningResult winningResult = new WinningResult(lottos, winningNumber);
         winningResult.calculateYield(ticket.getBuyCash());
 
