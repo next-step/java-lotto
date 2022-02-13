@@ -9,4 +9,12 @@ public class MatchInfo {
         this.matchCount = matchCount;
         this.bonusMatch = bonusMatch;
     }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public boolean getBonusMatch() {
+        return bonusMatch;
+    }
 }
