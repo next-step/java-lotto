@@ -5,6 +5,7 @@ import java.util.List;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lotto;
 import lotto.domain.Ranking;
+import lotto.domain.Rankings;
 import lotto.domain.WinningLotto;
 
 public class LottoCountCalculator {
@@ -19,13 +20,13 @@ public class LottoCountCalculator {
     }
 
 
-    public List<Ranking> countLotteryNumbers(List<Lotto> userNumbers,
+    public Rankings countLotteryNumbers(List<Lotto> userNumbers,
         WinningLotto winningLotto) {
         List<Ranking> rankings = new ArrayList<>();
         for (Lotto userNumber : userNumbers) {
             rankings.add(countLotteryNumber(userNumber, winningLotto));
         }
-        return rankings;
+        return new Rankings(rankings);
     }
 
     public Ranking countLotteryNumber(Lotto userNumbers,

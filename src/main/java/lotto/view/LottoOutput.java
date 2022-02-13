@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.domain.Ranking;
+import lotto.domain.Rankings;
 import lotto.service.RewardRateCalculator;
 
 public class LottoOutput {
@@ -32,12 +33,12 @@ public class LottoOutput {
         System.out.println(stringBuilder);
     }
 
-    public static void printRankingStatus(List<Ranking> rankings) {
+    public static void printRankingStatus(Rankings rankings) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(RANKING_STATUS_MESSAGE);
         stringBuilder.append(RANKING_DELIMITER);
 
-        Map<Ranking, Integer> rankingCount = countRanking(rankings);
+        Map<Ranking, Integer> rankingCount = rankings.countFrequency();
         for (Ranking ranking : ORDER_PRINT_RANKING) {
             stringBuilder.append(ranking).append(DASH)
                 .append(rankingCount.getOrDefault(ranking, 0)).append(PIECE).append(ENTER);
@@ -46,27 +47,13 @@ public class LottoOutput {
         System.out.println(stringBuilder);
     }
 
-    private static Map<Ranking, Integer> countRanking(List<Ranking> rankings) {
-        Map<Ranking, Integer> successSum = new EnumMap<>(Ranking.class);
-        for (Ranking ranking : rankings) {
-            successSum.put(ranking, successSum.getOrDefault(ranking, 0) + 1);
-        }
-        return successSum;
-    }
-
-    public static void printRewardRate(List<Ranking> rankings, int buyPrice) {
+    public static void printRewardRate(Rankings rankings, int buyPrice) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(REWARD_RATE_MESSAGE);
-        int winnerPriceSum = countWinnerPriceSum(rankings);
+        int winnerPriceSum = rankings.countWinnerPriceSum();
         double rewardRate = RewardRateCalculator.countRewardRate(winnerPriceSum, buyPrice);
         stringBuilder.append(rewardRate);
         System.out.println(stringBuilder);
-    }
-
-    private static int countWinnerPriceSum(List<Ranking> rankings) {
-        return rankings.stream()
-            .map(Ranking::getWinnerPrice)
-            .reduce(0, Integer::sum);
     }
 
     public static void printLottoNumber(List<Lotto> lottoNumbers) {
