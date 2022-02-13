@@ -20,6 +20,10 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
+    public static Lottos withListLotto(List<Lotto> lottos) {
+        return new Lottos(lottos);
+    }
+
     public List<Lotto> get() {
         return this.lottos;
     }
