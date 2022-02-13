@@ -18,7 +18,7 @@ public class LottoBalls {
     private static final int DIFFERENCE_FROM_INDEX = 1;
 
     private static final List<LottoNumber> BALLS = new ArrayList<>(
-            IntStream.range(LOTTO_START_NUMBER, LOTTO_END_NUMBER + 1)
+            IntStream.rangeClosed(LOTTO_START_NUMBER, LOTTO_END_NUMBER)
                     .mapToObj(LottoNumber::new)
                     .collect(Collectors.toList()));
 
