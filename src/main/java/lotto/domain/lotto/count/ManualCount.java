@@ -4,15 +4,8 @@ public class ManualCount {
 
     private final Count count;
 
-    public ManualCount(String count, Count totalCount) {
-        this(parseToInteger(count), totalCount);
-    }
-
-    private static Integer parseToInteger(String value) {
-        if(!value.matches("[-]?[0-9]*")) {
-            throw new IllegalArgumentException("[ERROR] 숫자만 들어올 수 있습니다.");
-        }
-        return Integer.parseInt(value);
+    public ManualCount(Count count, Count totalCount) {
+        this(count.getValue(), totalCount);
     }
 
     public ManualCount(int count, Count totalCount) {
