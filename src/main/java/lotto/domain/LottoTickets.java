@@ -9,10 +9,11 @@ public class LottoTickets {
     private static final int LOTTO_PRICE = 1000;
     private final int lottoCounts;
     private final List<Lotto> lottoTickets;
-    private final LottoGenerator lottoGenerator=new RandomLottoGenerator();
+    private final LottoGenerator lottoGenerator;
 
-    public LottoTickets(final int price) {
+    public LottoTickets(final int price,final LottoGenerator lottoGenerator) {
         this.lottoCounts = price / LOTTO_PRICE;
+        this.lottoGenerator=lottoGenerator;
         this.lottoTickets = makeLottoTickets(lottoCounts);
     }
 
