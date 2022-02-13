@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 import lotto.service.LottoAutoGenerator;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ class LottoAutoGeneratorTest {
 
     @Test
     void 로또번호_랜덤_단일_생성(){
-        LottoNumbers lottoNum = LottoAutoGenerator.getInstance().generateLotto();
+        Lotto lottoNum = LottoAutoGenerator.getInstance().generateLotto();
 
         assertThat(lottoNum.size()).isEqualTo(6);
         Set<LottoNumber> duplicate = new HashSet<>(lottoNum.getNumbers());
@@ -25,7 +25,7 @@ class LottoAutoGeneratorTest {
     void 로또번호_랜덤_다수_생성(){
         int size = 6;
 
-        List<LottoNumbers> lottoNumbers = LottoAutoGenerator.getInstance().generateLottos(size);
+        List<Lotto> lottoNumbers = LottoAutoGenerator.getInstance().generateLottos(size);
 
         assertThat(lottoNumbers.size()).isEqualTo(size);
     }

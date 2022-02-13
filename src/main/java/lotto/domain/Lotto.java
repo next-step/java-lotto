@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LottoNumbers {
+public class Lotto {
 
     private static final int LOTTO_SIZE = 6;
     private static final int STANDARD_NUMBER = 12;
@@ -15,17 +15,17 @@ public class LottoNumbers {
 
     private final List<LottoNumber> numbers;
 
-    public LottoNumbers(final List<LottoNumber> numbers){
+    public Lotto(final List<LottoNumber> numbers){
         validateNumbersSize(numbers);
         validateDuplicateNumber(numbers);
         this.numbers = numbers;
     }
 
-    public static LottoNumbers of(final List<Integer> numbers) {
+    public static Lotto of(final List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = numbers.stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
-        return new LottoNumbers(lottoNumbers);
+        return new Lotto(lottoNumbers);
     }
 
     private void validateDuplicateNumber(final List<LottoNumber> numbers) {
@@ -41,7 +41,7 @@ public class LottoNumbers {
         }
     }
 
-    public int countSameNumber(LottoNumbers otherNumbers) {
+    public int countSameNumber(Lotto otherNumbers) {
         Set<LottoNumber> lottoDuplicate = new HashSet<>(otherNumbers.getNumbers());
         lottoDuplicate.addAll(numbers);
         return STANDARD_NUMBER - lottoDuplicate.size();
@@ -64,10 +64,10 @@ public class LottoNumbers {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof LottoNumbers)) {
+        if (!(o instanceof Lotto)) {
             return false;
         }
-        List<LottoNumber> that = ((LottoNumbers) o).getNumbers();
+        List<LottoNumber> that = ((Lotto) o).getNumbers();
         Set<LottoNumber> duplicate = new HashSet<>(numbers);
         duplicate.addAll(that);
         return duplicate.size() == numbers.size();

@@ -3,7 +3,7 @@ package lotto.service;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 import lotto.domain.Ranking;
 import lotto.domain.WinningLotto;
 
@@ -19,16 +19,16 @@ public class LottoCountCalculator {
     }
 
 
-    public List<Ranking> countLotteryNumbers(List<LottoNumbers> userNumbers,
+    public List<Ranking> countLotteryNumbers(List<Lotto> userNumbers,
         WinningLotto winningLotto) {
         List<Ranking> rankings = new ArrayList<>();
-        for (LottoNumbers userNumber : userNumbers) {
+        for (Lotto userNumber : userNumbers) {
             rankings.add(countLotteryNumber(userNumber, winningLotto));
         }
         return rankings;
     }
 
-    public Ranking countLotteryNumber(LottoNumbers userNumbers,
+    public Ranking countLotteryNumber(Lotto userNumbers,
         WinningLotto winningLotto) {
         int normalSuccessCount = countNormalSuccessNumber(userNumbers, winningLotto.getLottoNumbers());
         int bonusSuccessCount = countBonusNumber(userNumbers, winningLotto.getBonusNumber());
@@ -36,11 +36,11 @@ public class LottoCountCalculator {
         return Ranking.getRanking(normalSuccessCount, bonusSuccessCount);
     }
 
-    private int countNormalSuccessNumber(LottoNumbers userNumbers, LottoNumbers lotteryNumbers) {
+    private int countNormalSuccessNumber(Lotto userNumbers, Lotto lotteryNumbers) {
         return lotteryNumbers.countSameNumber(userNumbers);
     }
 
-    private int countBonusNumber(LottoNumbers userNumbers, LottoNumber bonusNum) {
+    private int countBonusNumber(Lotto userNumbers, LottoNumber bonusNum) {
         int bonusSuccessCount = 0;
         if (userNumbers.contains(bonusNum)) {
             bonusSuccessCount++;

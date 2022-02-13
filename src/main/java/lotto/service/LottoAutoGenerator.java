@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 
 public class LottoAutoGenerator {
 
@@ -28,17 +28,17 @@ public class LottoAutoGenerator {
         return INSTANCE;
     }
 
-    public List<LottoNumbers> generateLottos(int size) {
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+    public List<Lotto> generateLottos(int size) {
+        List<Lotto> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             lottoNumbers.add(generateLotto());
         }
         return lottoNumbers;
     }
 
-    public LottoNumbers generateLotto() {
+    public Lotto generateLotto() {
         Collections.shuffle(allNum);
         List<LottoNumber> lottoNums = allNum.subList(LOTTO_SIZE_START, LOTTO_SIZE_END);
-        return new LottoNumbers(lottoNums);
+        return new Lotto(lottoNums);
     }
 }

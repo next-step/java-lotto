@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 import lotto.domain.Ranking;
 import lotto.service.RewardRateCalculator;
 
@@ -69,10 +69,10 @@ public class LottoOutput {
             .reduce(0, Integer::sum);
     }
 
-    public static void printLottoNumber(List<LottoNumbers> lottoNumbers) {
+    public static void printLottoNumber(List<Lotto> lottoNumbers) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (LottoNumbers lottoNumber : lottoNumbers) {
+        for (Lotto lottoNumber : lottoNumbers) {
             stringBuilder.append(Arrays.toString(lottoNumber.getNumbers().toArray())).append(ENTER);
         }
 

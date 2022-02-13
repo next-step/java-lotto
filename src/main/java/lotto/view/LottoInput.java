@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 
 public class LottoInput {
 
@@ -22,10 +22,10 @@ public class LottoInput {
         return SCANNER.nextInt();
     }
 
-    public static LottoNumbers inputWinningNumber() {
+    public static Lotto inputWinningNumber() {
         System.out.println(INPUT_WINNINTNUMBER_MESSAGE);
         String input = SCANNER.next();
-        return LottoNumbers.of(Arrays.stream(input.split(COMMA))
+        return Lotto.of(Arrays.stream(input.split(COMMA))
             .mapToInt(Integer::new)
             .boxed()
             .collect(Collectors.toList()));

@@ -2,7 +2,7 @@ package lotto;
 
 import java.util.List;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 import lotto.domain.Ranking;
 import lotto.domain.WinningLotto;
 import lotto.service.LottoAutoGenerator;
@@ -20,12 +20,12 @@ public class Application {
 
         LottoOutput.printBuySum(buySum);
 
-        List<LottoNumbers> userLottoNumbers = LottoAutoGenerator.getInstance()
+        List<Lotto> userLottoNumbers = LottoAutoGenerator.getInstance()
             .generateLottos(buySum);
 
         LottoOutput.printLottoNumber(userLottoNumbers);
 
-        LottoNumbers lastWeekLottoNumber = LottoInput.inputWinningNumber();
+        Lotto lastWeekLottoNumber = LottoInput.inputWinningNumber();
         LottoNumber bonusNumber = LottoInput.inputBonusBall();
         WinningLotto winningLotto = new WinningLotto(lastWeekLottoNumber, bonusNumber);
 
