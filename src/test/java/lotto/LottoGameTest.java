@@ -15,7 +15,8 @@ class LottoGameTest {
     @ValueSource(ints = {1000, 1999, 10000, 5000})
     void 구매가_가능한_경우의_금액에_따른_로또_개수(int money) {
         LottoGame lottoGame = new LottoGame();
-        assertThat(money / 1000).isEqualTo(lottoGame.calculateLottoCount(new Money(money)).getValue());
+        assertThat(money / 1000).isEqualTo(
+            lottoGame.calculateLottoCount(new Money(money)).getValue());
     }
 
     @ParameterizedTest

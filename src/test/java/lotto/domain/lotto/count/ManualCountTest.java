@@ -34,20 +34,23 @@ class ManualCountTest {
     @ParameterizedTest
     void 정수로_변환_불가능한_입력값(String value) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> new ManualCount(new Count(value), totalCount)).withMessage("[ERROR] 숫자만 들어올 수 있습니다.");
+            .isThrownBy(() -> new ManualCount(new Count(value), totalCount))
+            .withMessage("[ERROR] 숫자만 들어올 수 있습니다.");
     }
 
     @ValueSource(ints = {-1, -100, -342})
     @ParameterizedTest
     void 구매_개수가_0보다_작을_경우(int value) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() ->  new ManualCount(value, totalCount)).withMessage("[ERROR] 구매 개수가 0보다 작을 수는 없습니다.");
+            .isThrownBy(() -> new ManualCount(value, totalCount))
+            .withMessage("[ERROR] 구매 개수가 0보다 작을 수는 없습니다.");
     }
 
     @ValueSource(ints = {21, 100, 70})
     @ParameterizedTest
     void 구매_개수가_총_구매_개수보다_큰_경우(int value) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> new ManualCount(value, totalCount)).withMessage("[ERROR] "+totalCount.getValue()+"개를 초과할 수 없습니다.");
+            .isThrownBy(() -> new ManualCount(value, totalCount))
+            .withMessage("[ERROR] " + totalCount.getValue() + "개를 초과할 수 없습니다.");
     }
 }

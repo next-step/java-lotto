@@ -38,7 +38,8 @@ class BonusNumberTest {
     @DisplayName("범위 내로 유효하나 Numbers와 중복되는 String값이 들어오는 경우")
     @ValueSource(strings = {"1", "2", "3", "4", "5", "6"})
     @ParameterizedTest
-    void invalidStringTest1(String input) {assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(
+    void invalidStringTest1(String input) {
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(
                 () -> new BonusNumber(input, numbers))
             .withMessage("[ERROR] 당첨 번호와 중복된 값입니다. 다시 입력해주세요.");
     }
