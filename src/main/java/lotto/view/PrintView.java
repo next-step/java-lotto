@@ -6,7 +6,7 @@ import lotto.domain.statistics.vo.RankCounts;
 
 public class PrintView {
 
-    private static final String NUMBER_OF_LOTTO_FORMAT =  "수동으로 %d장, 자동으로 %d장을 구매했습니다.%n";
+    private static final String NUMBER_OF_LOTTO_FORMAT = "수동으로 %d장, 자동으로 %d장을 구매했습니다.%n";
     private static final String RANK_SECOND = "SECOND";
     private static final String RANK_SECOND_RESULT_FORMAT = "%s개 일치, 보너스 볼 일치(%d원) - %d개%n";
     private static final String NOT_RANK_SECOND_RESULT_FORMAT = "%s개 일치 (%d원) - %d개%n";
@@ -16,8 +16,8 @@ public class PrintView {
 
     private PrintView() {}
 
-    public static void printNumberOfLotto(final int manualSize, int autoSize) {
-        System.out.printf(NUMBER_OF_LOTTO_FORMAT, manualSize, autoSize);
+    public static void printNumberOfLotto(final int manualSize, int totalSize) {
+        System.out.printf(NUMBER_OF_LOTTO_FORMAT, manualSize, totalSize - manualSize);
     }
 
     public static void printLottoNumber(final Lottos lottos) {

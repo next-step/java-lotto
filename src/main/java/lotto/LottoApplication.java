@@ -17,21 +17,18 @@ public class LottoApplication {
 
         final Budget budget = new Budget(InputView.inputBudget());
         List<String> manualLottoNumbers = InputView.inputManualLottoNumbers();
-        final Budget autoLottoBudget = budget.deductionPerLotto(manualLottoNumbers.size());
 
-        final Lottos manualLottos = Lottos.createManualLottos(manualLottoNumbers);
-        final Lottos autoLottos = Lottos.createAutoLottos(autoLottoBudget);
-        final Lottos allLottos = manualLottos.merge(autoLottos);
+        final Lottos lottos = Lottos.createLottos(manualLottoNumbers, budget);
 
-        PrintView.printNumberOfLotto(manualLottos.size(), autoLottos.size());
-        PrintView.printLottoNumber(allLottos);
+        PrintView.printNumberOfLotto(manualLottoNumbers.size(), lottos.size());
+        PrintView.printLottoNumber(lottos);
 
         final CorrectNumbers correctNumbers = new CorrectNumbers(
                 InputView.inputWinningNumbers(),
                 InputView.inputBonusNumber());
 
         final Judge judge = new Judge(correctNumbers);
-        final LottoRanks lottoRanks = judge.getRanks(allLottos);
+        final LottoRanks lottoRanks = judge.getRanks(lottos);
 
         final Statistics statistics = new Statistics(lottoRanks);
         PrintView.printResult(statistics.getResult());

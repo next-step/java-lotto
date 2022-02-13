@@ -2,9 +2,9 @@ package lotto.domain.judge;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
 import lotto.domain.budget.Budget;
 import lotto.domain.correctnumber.CorrectNumbers;
-import lotto.domain.judge.Judge;
 import lotto.domain.lotto.Lottos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ class JudgeTest {
     void Given_정답_번호_When_등수를_판별_Then_구매한_로또_만큼_등수_리스트_반환() {
 
         // given
-        final Lottos lottos = Lottos.createAutoLottos(new Budget("14000"));
+        final Lottos lottos = Lottos.createLottos(new ArrayList<>(),new Budget("14000"));
         final Judge judge = new Judge(new CorrectNumbers(
                 "1,2,3,4,5,6", "7"));
 
