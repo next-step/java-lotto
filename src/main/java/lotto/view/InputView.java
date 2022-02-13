@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -15,6 +16,8 @@ public class InputView {
     private static final String ENTER = "\n";
     private static final int LOTTO_NUMBER_SIZE = 6;
     private static final String PURCHASE_TICKET_MANAGER_MESSAGE = "구입금액을 입력해 주세요.";
+    private static final String MANUAL_TICKET_MANAGER_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUAL_TICKET_NUMBER_MANAGER_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String WINNING_NUMBER_MANAGER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_BALL_MANAGER_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String DELIMITER = ",";
@@ -23,6 +26,8 @@ public class InputView {
 
     public static Ticket buyTicket() {
         int money = Integer.parseInt(writePurchaseAmount());
+
+
         return new Ticket(money);
     }
 
@@ -35,6 +40,50 @@ public class InputView {
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             return writePurchaseAmount();
+        }
+    }
+
+    public static List<Lotto> buyManualLotto() {
+        int manualTicketCount = buyManualTicket();
+        return makeManualLottos(manualTicketCount);
+    }
+
+    public static int buyManualTicket() {
+        try {
+            OutputView.printMessage(ENTER + MANUAL_TICKET_MANAGER_MESSAGE + ENTER);
+            String input = scanner.nextLine();
+            checkEmptyString(input);
+            return Integer.parseInt(input);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return buyManualTicket();
+        }
+    }
+
+    public static List<Lotto> makeManualLottos(int manualTicketCount) {
+        OutputView.printMessage(ENTER + MANUAL_TICKET_NUMBER_MANAGER_MESSAGE + ENTER);
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < manualTicketCount; i++) {
+            lottos.add(makeManualLotto());
+        }
+        return lottos;
+    }
+
+    private static Lotto makeManualLotto() {
+        try {
+            String input = scanner.nextLine();
+            checkEmptyString(input);
+
+            String[] numbers = makeStringToArray(input);
+            checkSixNumbers(numbers);
+
+            return Lotto.from(Arrays.stream(numbers)
+                .map(String::trim)
+                .map(Integer::new)
+                .collect(Collectors.toList()));
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return makeManualLotto();
         }
     }
 

@@ -15,7 +15,7 @@ public class OutputView {
 
     private static final String ENTER = "\n";
     private static final String DELIMITER = ", ";
-    private static final String PURCHASE_AMOUNT_MANAGER_LOG = "%d개를 구매했습니다.";
+    private static final String PURCHASE_AMOUNT_MANAGER_LOG = "수동으로 %d개, 자동으로 %d개를 구매했습니다.";
     private static final String OPEN_BRACKET = "[";
     private static final String CLOSED_BRACKET = "]";
     private static final String WINNING_RESULT_HEAD_LOG = "당첨통계" + ENTER + "---------";
@@ -28,8 +28,9 @@ public class OutputView {
     }
 
     public void printPurchaseAmount(Ticket ticket) {
-        int ticketCount = ticket.getBuyCount();
-        printMessage(String.format(PURCHASE_AMOUNT_MANAGER_LOG, ticketCount) + ENTER);
+        int buyManualCount = ticket.getBuyManualCount();
+        int buyAutoCount = ticket.getBuyAutoCount();
+        printMessage(ENTER + String.format(PURCHASE_AMOUNT_MANAGER_LOG, buyManualCount, buyAutoCount) + ENTER);
     }
 
     public void printPurchaseTicket(Lottos lottoRepository) {
