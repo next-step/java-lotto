@@ -3,6 +3,7 @@ package lotto.factory;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
+import lotto.domain.UserLottoFactory;
 import org.junit.jupiter.api.Test;
 
 class UserLottoFactoryTest {

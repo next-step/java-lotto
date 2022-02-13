@@ -3,7 +3,7 @@ package lotto.view;
 import java.util.List;
 import java.util.Scanner;
 import lotto.domain.WinningBall;
-import lotto.factory.WinningBallFactory;
+import lotto.domain.WinningBallFactory;
 
 public class InputView {
 

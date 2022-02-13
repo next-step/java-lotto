@@ -2,6 +2,7 @@ package lotto.factory;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
+import lotto.domain.WinningBallFactory;
 import org.junit.jupiter.api.Test;
 
 class WinningBallFactoryTest {

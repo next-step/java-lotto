@@ -5,7 +5,7 @@ import java.util.List;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.UserLotto;
-import lotto.service.WinningStatistics;
+import lotto.domain.WinningStatistics;
 
 public class ResultView {
 

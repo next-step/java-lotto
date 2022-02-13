@@ -1,9 +1,7 @@
-package lotto.service;
+package lotto.domain;
 
 import java.util.HashMap;
 import java.util.List;
-import lotto.domain.LottoResult;
-import lotto.factory.UserLottoFactory;
 
 public class WinningStatistics {
 

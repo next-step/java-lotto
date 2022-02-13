@@ -4,7 +4,7 @@ import java.util.List;
 import lotto.domain.LottoResults;
 import lotto.domain.UserLotto;
 import lotto.domain.WinningBall;
-import lotto.factory.UserLottoFactory;
+import lotto.domain.UserLottoFactory;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
