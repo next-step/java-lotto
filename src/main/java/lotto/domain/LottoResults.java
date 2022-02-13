@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,6 +11,7 @@ import java.util.Map;
 public class LottoResults {
 
     private static final int ZERO = 0;
+    private static final int DECIMAL_PLACE = 2;
 
     private final Map<Ranking, Integer> totalResult;
 
@@ -36,7 +38,8 @@ public class LottoResults {
                 ranking.multiplyCountAndWinnerPrice(totalResult.get(ranking)))
             .sum());
 
-        return totalWinnerPrize.divide(BigDecimal.valueOf(money.getMoney()));
+        return totalWinnerPrize.divide(BigDecimal.valueOf(money.getMoney()), DECIMAL_PLACE,
+            RoundingMode.HALF_UP);
     }
 
     public Map<Ranking, Integer> getTotalResult() {

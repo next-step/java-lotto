@@ -54,13 +54,13 @@ public class LottoResultView {
         final List<Ranking> rankings = new LinkedList<>(lottoResults.getTotalResult().keySet());
         Collections.sort(rankings, Comparator.reverseOrder());
 
-        rankings.forEach(ranking -> printLottoResult(ranking, lottoResults.getTotalResult().get(ranking)));
+        rankings.forEach(ranking ->
+            printLottoResult(ranking, lottoResults.getTotalResult().get(ranking)));
         printYield(totalWinnerPrize);
     }
 
     private void printYield(final BigDecimal totalWinnerPrice) {
-        System.out.printf(
-            TOTAL_YIELD_MESSAGE + String.format("%.2f", totalWinnerPrice) + FINISH_MESSAGE);
+        System.out.printf(TOTAL_YIELD_MESSAGE + totalWinnerPrice + FINISH_MESSAGE);
     }
 
     private void printLottoResult(final Ranking ranking, final Integer count) {

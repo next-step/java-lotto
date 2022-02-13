@@ -37,6 +37,6 @@ class LottoResultsTest {
 
         BigDecimal yield = lottoResults.calculateYield(new Money(10000));
 
-        assertThat(yield).isEqualTo(BigDecimal.valueOf(203000));
+        assertThat(yield).isEqualTo(BigDecimal.valueOf(20300000, 2));
     }
 }
