@@ -10,7 +10,7 @@ class WinningLottoTest {
     @Test
     void 당첨로또_생성() {
         // given
-        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5));
+        LottoNumbers lottoNumbers = LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(3);
 
         // when & then

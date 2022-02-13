@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 
 public class LottoAutoGenerator {
@@ -15,11 +16,11 @@ public class LottoAutoGenerator {
     private static final int LOTTO_SIZE_START = 0;
     private static final int LOTTO_SIZE_END = 6;
 
-    private final List<Integer> allNum;
+    private final List<LottoNumber> allNum;
 
     private LottoAutoGenerator() {
         allNum = IntStream.range(LOTTO_NUM_START, LOTTO_NUM_END)
-            .boxed()
+            .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
     }
 
@@ -37,7 +38,7 @@ public class LottoAutoGenerator {
 
     public LottoNumbers generateLotto() {
         Collections.shuffle(allNum);
-        List<Integer> lottoNums = allNum.subList(LOTTO_SIZE_START, LOTTO_SIZE_END);
+        List<LottoNumber> lottoNums = allNum.subList(LOTTO_SIZE_START, LOTTO_SIZE_END);
         return new LottoNumbers(lottoNums);
     }
 }

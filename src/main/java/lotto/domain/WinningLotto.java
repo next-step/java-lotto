@@ -18,4 +18,12 @@ public class WinningLotto {
             throw new IllegalArgumentException(DUPLICATE_NUM_EXIST);
         }
     }
+
+    public LottoNumbers getLottoNumbers() {
+        return lottoNumbers;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
 }

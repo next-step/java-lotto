@@ -25,7 +25,7 @@ public class LottoInput {
     public static LottoNumbers inputWinningNumber() {
         System.out.println(INPUT_WINNINTNUMBER_MESSAGE);
         String input = SCANNER.next();
-        return new LottoNumbers(Arrays.stream(input.split(COMMA))
+        return LottoNumbers.of(Arrays.stream(input.split(COMMA))
             .mapToInt(Integer::new)
             .boxed()
             .collect(Collectors.toList()));

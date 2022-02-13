@@ -4,6 +4,7 @@ import java.util.List;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Ranking;
+import lotto.domain.WinningLotto;
 import lotto.service.LottoAutoGenerator;
 import lotto.service.LottoCountCalculator;
 import lotto.view.LottoInput;
@@ -26,9 +27,10 @@ public class Application {
 
         LottoNumbers lastWeekLottoNumber = LottoInput.inputWinningNumber();
         LottoNumber bonusNumber = LottoInput.inputBonusBall();
+        WinningLotto winningLotto = new WinningLotto(lastWeekLottoNumber, bonusNumber);
 
         List<Ranking> rankings = LottoCountCalculator.getInstance()
-            .countLotteryNumbers(userLottoNumbers, lastWeekLottoNumber, bonusNumber);
+            .countLotteryNumbers(userLottoNumbers, winningLotto);
 
         LottoOutput.printRankingStatus(rankings);
         LottoOutput.printRewardRate(rankings, buyPrice);

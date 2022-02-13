@@ -15,23 +15,27 @@ public class LottoNumbers {
 
     private final List<LottoNumber> numbers;
 
-    public LottoNumbers(final List<Integer> numbers) {
+    public LottoNumbers(final List<LottoNumber> numbers){
         validateNumbersSize(numbers);
         validateDuplicateNumber(numbers);
-
-        this.numbers = numbers.stream()
-            .map(LottoNumber::new)
-            .collect(Collectors.toList());
+        this.numbers = numbers;
     }
 
-    private void validateDuplicateNumber(final List<Integer> numbers) {
-        HashSet<Integer> lottoDuplicate = new HashSet<>(numbers);
+    public static LottoNumbers of(final List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = numbers.stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+        return new LottoNumbers(lottoNumbers);
+    }
+
+    private void validateDuplicateNumber(final List<LottoNumber> numbers) {
+        HashSet<LottoNumber> lottoDuplicate = new HashSet<>(numbers);
         if (numbers.size() != lottoDuplicate.size()) {
             throw new IllegalArgumentException(DUPLICATE_NUMBER);
         }
     }
 
-    private void validateNumbersSize(final List<Integer> numbers) {
+    private void validateNumbersSize(final List<LottoNumber> numbers) {
         if (numbers == null || numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(INVALID_SIZE);
         }
