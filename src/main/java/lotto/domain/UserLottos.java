@@ -7,19 +7,12 @@ import java.util.List;
 
 public class UserLottos {
 
-    private static final BigDecimal LOTTO_PRICE = new BigDecimal(1000);
-
+    private final int quantity;
     private final List<UserLotto> userLottos;
 
     public UserLottos(int quantity) {
+        this.quantity = quantity;
         this.userLottos = createUserLottos(quantity);
-    }
-
-    public static int getLottoQuantity(int purchasePrice) {
-        if (purchasePrice < LOTTO_PRICE.intValue()) {
-            throw new IllegalArgumentException("[ERROR] 구매 금액이 1000원 이상이어야 합니다.");
-        }
-        return new BigDecimal(purchasePrice).divide(LOTTO_PRICE, RoundingMode.FLOOR).intValue();
     }
 
     private List<UserLotto> createUserLottos(int quantity) {
@@ -29,6 +22,10 @@ public class UserLottos {
             lottos.add(new UserLotto());
         }
         return lottos;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 
     public List<UserLotto> getRawUserLottos() {
