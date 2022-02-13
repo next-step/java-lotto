@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.user.UserLotto;
-import lotto.domain.user.UserLottos;
 import lotto.domain.winning.WinningBalls;
 import lotto.dto.WinningInfo;
 
@@ -12,8 +11,8 @@ public class LottoResults {
 
     private final List<LottoResult> lottoResults;
 
-    public LottoResults(UserLottos userLottos, WinningBalls winningBalls) {
-        lottoResults = judge(userLottos.getRawUserLottos(), winningBalls);
+    public LottoResults(List<UserLotto> userLottos, WinningBalls winningBalls) {
+        lottoResults = judge(userLottos, winningBalls);
     }
 
     public List<LottoResult> judge(List<UserLotto> userLottos, WinningBalls winningBalls) {

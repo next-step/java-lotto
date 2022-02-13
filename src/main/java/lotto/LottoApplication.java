@@ -18,7 +18,7 @@ public class LottoApplication {
 
         final WinningBalls winningBalls = InputView.getWinningBalls();
 
-        LottoResults lottoResults = new LottoResults(userLottos, winningBalls);
+        LottoResults lottoResults = new LottoResults(userLottos.getRawUserLottos(), winningBalls);
         WinningStatistics winningStatistics = new WinningStatistics(lottoResults,
             lottoInitInfo.getPurchasePrice());
 
