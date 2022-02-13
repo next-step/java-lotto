@@ -3,6 +3,7 @@ package lotto.domain;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +40,6 @@ public class LottoResults {
     }
 
     public Map<Ranking, Integer> getTotalResult() {
-        return totalResult;
+        return Collections.unmodifiableMap(totalResult);
     }
 }
