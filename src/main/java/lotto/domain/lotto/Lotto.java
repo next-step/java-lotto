@@ -12,7 +12,7 @@ public class Lotto {
     private static final String NOT_VALIDATE_LOTTO_MESSAGE = "[ERROR] 로또는 중복되지 않은 6개의 숫자가 필요합니다.";
     private static final String NOT_VALIDATE_SIZE_LOTTO_MESSAGE = "[ERROR] 로또는 6개의 숫자가 필요합니다.";
 
-    private List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     private Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
