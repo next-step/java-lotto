@@ -20,9 +20,8 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public Lottos add(final Lottos lottos) {
-        List<Lotto> defensiveCopyingLottos = new ArrayList<>(this.lottos);
-        defensiveCopyingLottos.addAll(lottos.lottos);
-        return new Lottos(defensiveCopyingLottos);
+    public List<Lotto> add(final Lottos lottos) {
+        this.lottos.addAll(lottos.lottos);
+        return this.lottos;
     }
 }

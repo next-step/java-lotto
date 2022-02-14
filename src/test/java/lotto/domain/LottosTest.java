@@ -12,6 +12,6 @@ class LottosTest {
     @Test
     void countLottoCount() {
         Lottos lottos = LottoBundle.lottoBundle(5, new NonShuffleLottoNumber());
-        assertThat(lottos.lottos()).isEqualTo(5);
+        assertThat(lottos.lottos().size()).isEqualTo(5);
     }
 }

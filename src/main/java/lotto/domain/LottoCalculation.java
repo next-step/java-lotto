@@ -20,10 +20,10 @@ public class LottoCalculation {
     public LottoCalculationDTO purchaseLottos(Lottos lottos) {
         int numberOflottoManual = lottos.lottos().size();
 
-        purchaseLottos = purchaseLottos.add(lottos);
+        purchaseLottos.add(lottos);
         int numberOfLottoAutomatical = getNumberOfLottosAutomatical(purchaseMoney,
             numberOflottoManual);
-        purchaseLottos = purchaseLottos.add(
+        purchaseLottos.add(
             LottoBundle.lottoBundle(numberOfLottoAutomatical, new ShuffleLottoNumber()));
 
         return new LottoCalculationDTO(numberOflottoManual, numberOfLottoAutomatical,
