@@ -16,11 +16,12 @@ public class LottoApplication {
     public static void main(String[] args) {
 
         final Budget budget = new Budget(InputView.inputBudget());
-        List<String> manualLottoNumbers = InputView.inputManualLottoNumbers();
+        final List<String> manualLottoNumbers = InputView.inputManualLottoNumbers();
 
         final Lottos lottos = Lottos.createLottos(manualLottoNumbers, budget);
 
-        PrintView.printNumberOfLotto(manualLottoNumbers.size(), lottos.size());
+        final int manualSize = manualLottoNumbers.size();
+        PrintView.printNumberOfLotto(manualSize, budget.deductionPerLotto(manualSize).getNumberOfPurchase());
         PrintView.printLottoNumber(lottos);
 
         final CorrectNumbers correctNumbers = new CorrectNumbers(

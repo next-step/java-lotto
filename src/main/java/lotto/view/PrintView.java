@@ -16,8 +16,8 @@ public class PrintView {
 
     private PrintView() {}
 
-    public static void printNumberOfLotto(final int manualSize, int totalSize) {
-        System.out.printf(NUMBER_OF_LOTTO_FORMAT, manualSize, totalSize - manualSize);
+    public static void printNumberOfLotto(final int manualSize, final int autoSize) {
+        System.out.printf(NUMBER_OF_LOTTO_FORMAT, manualSize, autoSize);
     }
 
     public static void printLottoNumber(final Lottos lottos) {
