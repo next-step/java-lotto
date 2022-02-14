@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +20,6 @@ class LottoTest {
             Arguments.of(Arrays.asList(1, 2)),
             Arguments.of(Arrays.asList(1, 2, 3)),
             Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
-            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)),
             Arguments.of(Arrays.asList(10, 20, 30, 40, 9, 45))
         );
     }
@@ -33,5 +33,21 @@ class LottoTest {
 
         assertThat(lottoSize)
             .isEqualTo(lotto.size());
+    }
+
+    static Stream<Arguments> generateOverSizeLotto() {
+        return Stream.of(
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)),
+            Arguments.of(Arrays.asList(10, 20, 30, 40, 50, 60, 70, 80, 90, 100))
+        );
+    }
+
+    @DisplayName(value = "사이즈가 6이 넘는 Lotto 인스턴스 생성시, RuntimeException이 발생한다.")
+    @ParameterizedTest
+    @MethodSource("generateOverSizeLotto")
+    void GivenListWithIntTypeOverSize6_WhenCreateInstance_ThenRuntimeException(
+        List<LottoNumber> lotto) {
+        assertThatThrownBy(()->Lotto.from(lotto))
+            .isInstanceOf(RuntimeException.class);
     }
 }
