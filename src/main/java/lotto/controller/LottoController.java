@@ -17,6 +17,15 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
+    private static final LottoController lottoController = new LottoController();
+
+    private LottoController() {
+    }
+
+    public static LottoController getInstance() {
+        return lottoController;
+    }
+
     public void start() {
         Ticket ticket = getTicket();
         Lottos lottos = Lottos.withLottoGenerator(new RandomLottoGenerator(), ticket.getBuyCount());
