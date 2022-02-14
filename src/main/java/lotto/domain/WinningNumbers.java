@@ -18,7 +18,7 @@ public class WinningNumbers {
         return number.isInLottoNumberList(winningNumbers.getLotto());
     }
 
-    public boolean isBonusNumberContain(LottoNumber number) {
-        return bonusNumber.isEqualTo(number);
+    public boolean isBonusNumberEqualTo(LottoNumber bonusNumber) {
+        return bonusNumber.isEqualTo(bonusNumber);
     }
 }

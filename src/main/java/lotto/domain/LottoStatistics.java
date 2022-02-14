@@ -75,7 +75,7 @@ public class LottoStatistics {
 
     private boolean isBonusMatch(final Lotto lotto) {
         return lotto.getLotto().stream()
-            .filter(number -> winningNumbers.isBonusNumberContain(number))
+            .filter(number -> winningNumbers.isBonusNumberEqualTo(number))
             .collect(Collectors.toList())
             .size() > 0;
     }
