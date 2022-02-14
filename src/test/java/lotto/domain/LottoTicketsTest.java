@@ -38,7 +38,7 @@ class LottoTicketsTest {
     void 로또_장당_보너스_개수_일치여부_테스트() {
         TestLottoGenerator testLottoGenerator = new TestLottoGenerator();
         LottoTickets lottoTickets = new LottoTickets(1000,testLottoGenerator);
-        testLottoGenerator.generateLottoNumber();
+        testLottoGenerator.getLottoGeneratorNumbers();
         List<WinningResult> winningResults = lottoTickets.calculateWinningResult(
             new LottoMachine(secondLottoNumbers, 6));
          Assertions.assertThat(winningResults.get(0).getHasBonus()).isEqualTo(1);

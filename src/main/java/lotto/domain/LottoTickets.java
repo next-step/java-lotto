@@ -21,7 +21,7 @@ public class LottoTickets {
     private List<Lotto> makeLottoTickets(final int lottoCount) {
         final List<Lotto> lottoTickets = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            lottoTickets.add(new Lotto(lottoGenerator.generateLottoNumber()));
+            lottoTickets.add(new Lotto(lottoGenerator.getLottoGeneratorNumbers()));
         }
         return lottoTickets;
     }
