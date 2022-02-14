@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import static lotto.view.OutputView.ERROR_WRONG_LOTTO_PRICE;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,10 +13,10 @@ public class Lottos {
     List<Lotto> lottoLists;
     final int lottoCount;
 
-    public Lottos(int totalPrice) {
-        validateLottoPrice(totalPrice);
+    public Lottos(LottoPrice lottoPrice) {
+        validateLottoPrice(lottoPrice.getPrice());
 
-        this.lottoCount = totalPrice / LOTTO_PRICE;
+        this.lottoCount = lottoPrice.getPrice() / LOTTO_PRICE;
         this.lottoLists = generatorLottos();
     }
 

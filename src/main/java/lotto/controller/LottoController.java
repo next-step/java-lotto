@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.LottoEarningRate;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoPrice;
 import lotto.domain.LottoStatistics;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
@@ -12,7 +13,7 @@ import lotto.view.ResultView;
 
 public class LottoController {
 
-    private int boughtLottoPrice;
+    private LottoPrice lottoPrice;
     private Lottos userLottos;
     private String winningNumber;
     private LottoNumber bonusBall;
@@ -28,11 +29,11 @@ public class LottoController {
 
     private void lottoPriceProcess() {
         OutputView.printRequestLottoPrice();
-        boughtLottoPrice = InputView.readPrice();
+        lottoPrice = InputView.readPrice();
     }
 
     private void lottoListsProcess() {
-        userLottos = new Lottos(boughtLottoPrice);
+        userLottos = new Lottos(lottoPrice);
         ResultView.printLottoNumbers(userLottos.getLottoLists());
     }
 
@@ -49,6 +50,6 @@ public class LottoController {
 
         ResultView.printLottoStatistics(lottoStatistics.getResultStatistics(),
             LottoEarningRate.getLottoEarningRate(lottoStatistics.getResultStatistics(),
-                boughtLottoPrice));
+                lottoPrice));
     }
 }

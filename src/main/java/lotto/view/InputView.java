@@ -4,15 +4,16 @@ package lotto.view;
 import java.util.Scanner;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoPrice;
 import lotto.util.Console;
 
 public class InputView {
 
     private InputView() {}
 
-    public static int readPrice() {
+    public static LottoPrice readPrice() {
         try {
-           int price = Console.readLineInt();
+           LottoPrice price = new LottoPrice(Console.readLineInt());
            return price;
         } catch (IllegalArgumentException exception) {
             OutputView.printExceptionMessage(OutputView.ERROR_MESSAGE + exception.getMessage());
