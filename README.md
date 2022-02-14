@@ -84,6 +84,7 @@
 - [x] RATE_OF_RETURN_FORMAT, format 상수로 표현
 - [x] WinningNumbers, 미사용 getter 제거
 - [x] Int 표기형식 통일성있게 수정
+- [x] 상수 네이밍 및 Lotto 사이즈 검증 로직 추가
 
 ## multiple authors
 
