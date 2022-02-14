@@ -24,7 +24,7 @@ public class LottoController {
         printTicketInfo(ticket, lottos);
 
         WinningLotto winningLotto = getWinningLotto();
-        WinningResult winningResult = new WinningResult(winningLotto.mapResult(lottos));
+        WinningResult winningResult = new WinningResult(lottos.mapResult(winningLotto));
 
         printResult(winningResult, ticket);
     }

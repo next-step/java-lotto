@@ -36,7 +36,9 @@ class WinningResultTest {
             Lotto.from(none)
         );
 
-        Map<Rank, Integer> rankMap = testWinningLotto.mapResult(Lottos.withListLotto(lottos));
+        Lottos testLottos = Lottos.withListLotto(lottos);
+
+        Map<Rank, Integer> rankMap = testLottos.mapResult(testWinningLotto);
         WinningResult testWinningResult = new WinningResult(rankMap);
 
         BigDecimal actualProfit = testWinningResult.calculateProfitRate(3000);

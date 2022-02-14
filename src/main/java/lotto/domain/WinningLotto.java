@@ -39,32 +39,4 @@ public class WinningLotto {
     private boolean isContain(List<LottoNumber> numbers, LottoNumber target) {
         return numbers.contains(target);
     }
-
-    public Map<Rank, Integer> mapResult(Lottos userLottos) {
-        Map<Rank, Integer> result = initResult();
-
-        for (Lotto lotto : userLottos.get()) {
-            Rank rank = getRank(lotto);
-            if (rank == Rank.NONE) continue;
-            result.put(rank, result.get(rank) + 1);
-        }
-
-        return result;
-    }
-
-    private Map<Rank, Integer> initResult() {
-        Map<Rank, Integer> result = new LinkedHashMap<>();
-        for (Rank rank : Rank.values()) {
-            if (rank == Rank.NONE) continue;
-            result.put(rank, 0);
-        }
-
-        return result;
-    }
-
-    private Rank getRank(Lotto userLotto) {
-        int matchCount = getMatchCount(userLotto);
-        boolean matchBonus = getMatchBonus(userLotto);
-        return Rank.find(matchCount, matchBonus);
-    }
 }
