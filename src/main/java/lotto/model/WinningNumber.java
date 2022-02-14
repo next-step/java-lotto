@@ -9,10 +9,10 @@ public class WinningNumber {
     private static final String WINNING_NUMBERS_ERROR_MESSAGE = "당첨 번호는 6개입니다.";
     private static final String DUPLICATE_WINNING_NUMBERS_MESSAGE = "중복된 당첨번호입니다.";
 
-    private final List<Integer> winningNumbers;
-    private final int bonusBall;
+    private final List<LottoNumber> winningNumbers;
+    private final LottoNumber bonusBall;
 
-    public WinningNumber(List<String> winningNumbersInput, int bonusBall) {
+    public WinningNumber(List<String> winningNumbersInput, LottoNumber bonusBall) {
         winningNumbers = new ArrayList<>();
         validateWinningNumbers(winningNumbersInput);
         parseStringToInt(winningNumbersInput);
@@ -26,34 +26,35 @@ public class WinningNumber {
     }
 
     private void checkDuplicateWinningNumber(int winningNumber) {
-        if (winningNumbers.contains(winningNumber)) {
+        if (winningNumbers.contains(new LottoNumber(winningNumber))) {
             throw new IllegalArgumentException(DUPLICATE_WINNING_NUMBERS_MESSAGE);
         }
     }
 
     private void parseStringToInt(List<String> winningNumbersInput) {
         for (int i = 0; i < winningNumbersInput.size(); i++) {
-            checkDuplicateWinningNumber(Integer.parseInt(winningNumbersInput.get(i)));
-            winningNumbers.add(Integer.parseInt(winningNumbersInput.get(i)));
+            int parsedWinningNumber=Integer.parseInt(winningNumbersInput.get(i));
+            checkDuplicateWinningNumber(parsedWinningNumber);
+            winningNumbers.add(new LottoNumber(parsedWinningNumber));
         }
     }
 
-    public int findMatchingCount(List<Integer> lotto) {
+    public int findMatchingCount(List<LottoNumber> lotto) {
         int matchingResult = 0;
-        for (int winningNumber: winningNumbers) {
+        for (LottoNumber winningNumber: winningNumbers) {
             matchingResult = countMatchingNumber(winningNumber, matchingResult, lotto);
         }
         return matchingResult;
     }
 
-    private int countMatchingNumber(int winningNumber, int count, List<Integer> lotto) {
+    private int countMatchingNumber(LottoNumber winningNumber, int count, List<LottoNumber> lotto) {
         if (lotto.contains(winningNumber)) {
             count++;
         }
         return count;
     }
 
-    public boolean isContainBonusBall(List<Integer> lotto) {
+    public boolean isContainBonusBall(List<LottoNumber> lotto) {
         return lotto.contains(bonusBall);
     }
 

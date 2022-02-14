@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import lotto.model.Count;
 import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 import lotto.model.LottoRules;
 import lotto.model.Price;
 import lotto.model.Rank;
