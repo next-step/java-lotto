@@ -6,6 +6,8 @@ import java.util.Map;
 
 public class Tickets {
 
+    private static final int MAP_DEFAULT = 0;
+
     private final List<Ticket> tickets;
 
     public Tickets(final List<Ticket> tickets) {
@@ -23,10 +25,10 @@ public class Tickets {
     public Map<Rank, Integer> getComparisonPrizeMap(final Ticket answerNumbers, final Number bonus) {
         Map<Rank, Integer> prizeMap = new LinkedHashMap<>();
         for (Ticket ticket : tickets) {
-            int matches = ticket.matches(answerNumbers.get());
+            int matches = ticket.matches(answerNumbers);
             Rank rank = Rank.getRank(matches, ticket.hasBonus(bonus));
 
-            prizeMap.put(rank, prizeMap.getOrDefault(rank, 0) + 1);
+            prizeMap.put(rank, prizeMap.getOrDefault(rank, MAP_DEFAULT) + 1);
         }
 
         return prizeMap;

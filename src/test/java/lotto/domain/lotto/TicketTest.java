@@ -3,7 +3,6 @@ package lotto.domain.lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import java.util.List;
 import lotto.domain.generator.LottoManualGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -24,8 +23,7 @@ class TicketTest {
     @DisplayName("번호 6개에 대한 테스트")
     @Test
     void testMatches() {
-        List<Number> ticket2 = new LottoManualGenerator(8, 21, 23, 41, 42, 45)
-            .generateNumbers();
+        Ticket ticket2 = new Ticket(new LottoManualGenerator(8, 21, 23, 41, 42, 45).generateNumbers());
 
         assertThat(ticket1.matches(ticket2))
             .isEqualTo(5);

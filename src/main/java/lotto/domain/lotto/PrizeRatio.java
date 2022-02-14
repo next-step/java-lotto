@@ -7,6 +7,7 @@ import java.util.Map;
 public class PrizeRatio {
 
     private static final int ROUND_SCALE = 2;
+    private static final int MAP_DEFAULT = 0;
 
     private BigDecimal totalPrize;
 
@@ -22,7 +23,7 @@ public class PrizeRatio {
     private void calculatePrize(final Map<Rank, Integer> prizeMap) {
         for (Rank rank: Rank.values()) {
             int prize = rank.getPrize();
-            int count = prizeMap.getOrDefault(rank, 0);
+            int count = prizeMap.getOrDefault(rank, MAP_DEFAULT);
             totalPrize = totalPrize.add(new BigDecimal(prize * count));
         }
     }

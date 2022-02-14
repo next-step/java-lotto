@@ -29,13 +29,31 @@ public class LottoController {
     }
 
     public void run() {
-        TicketMachine machine = new TicketMachine(new Amount(InputView.getAmount()), InputView.getManualLottoTickets());
+        final Amount amount = new Amount(InputView.getAmount());
+        final int manualLottoTickets = InputView.getManualLottoTickets();
+
+        TicketMachine machine = new TicketMachine(amount, manualLottoTickets);
         Tickets tickets = machine.purchase(getManualTicketNumbers(machine.manualTickets()));
 
         OutputView.printBuyingTickets(machine.manualTickets(), machine.autoTickets());
 
         showTickets(tickets);
         showResult(tickets, machine.amount());
+    }
+
+    private void showTickets(final Tickets tickets) {
+        tickets.getEachTicketNumbers().forEach(OutputView::printLottoTicket);
+    }
+
+    private void showResult(final Tickets tickets, final Amount amount) {
+        final Ticket answerTicket = getAnswerTicket();
+        final Number bonusNumber = new Number(InputView.getBonus());
+
+        Answer answer = new Answer(answerTicket, bonusNumber);
+        Map<Rank, Integer> prizeMap = answer.getComparisonPrizeMap(tickets);
+
+        OutputView.printStatistics(prizeMap);
+        OutputView.printResult(new PrizeRatio().calculateRatio(amount, prizeMap));
     }
 
     private List<Ticket> getManualTicketNumbers(final int manualTickets) {
@@ -49,21 +67,10 @@ public class LottoController {
         return ticketList;
     }
 
-    private void showTickets(final Tickets tickets) {
-        tickets.getEachTicketNumbers().forEach(OutputView::printLottoTicket);
-    }
-
-    private void showResult(final Tickets tickets, final Amount amount) {
-        Answer answer = new Answer(
-            new Ticket(InputView.getComparisonNumbers().stream()
-                .map(Number::new)
-                .collect(Collectors.toList())
-            ),
-            new Number(InputView.getBonus())
+    private Ticket getAnswerTicket() {
+        return new Ticket(InputView.getComparisonNumbers().stream()
+            .map(Number::new)
+            .collect(Collectors.toList())
         );
-        Map<Rank, Integer> prizeMap = answer.getComparisonPrizeMap(tickets);
-
-        OutputView.printStatistics(prizeMap);
-        OutputView.printResult(new PrizeRatio().calculateRatio(amount, prizeMap));
     }
 }

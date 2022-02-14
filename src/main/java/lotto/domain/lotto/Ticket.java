@@ -26,9 +26,9 @@ public class Ticket {
         return Collections.unmodifiableList(numbers);
     }
 
-    public int matches(final List<Number> comparison) {
-        return (int) numbers.stream()
-            .filter(comparison::contains)
+    public int matches(final Ticket comparison) {
+        return (int) comparison.numbers.stream()
+            .filter(numbers::contains)
             .count();
     }
 
