@@ -1,7 +1,6 @@
 package lotto.view;
 
 import java.util.Iterator;
-import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 
@@ -62,7 +61,7 @@ public class OutputView {
     }
 
     public static void printLottoNumber(Lotto lottoNumbers) {
-        Iterator<LottoNumber> iterator = lottoNumbers.getLottoNumber().iterator();
+        Iterator<LottoNumber> iterator = lottoNumbers.getLottoNumbers().iterator();
         while (iterator.hasNext()) {
             System.out.printf(iterator.next().getLottoNumber() + " ");
         }

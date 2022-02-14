@@ -14,7 +14,7 @@ public class WinningLotto {
     }
 
     private void validate(Lotto winningNumber, LottoNumber bonusNumber) {
-        if (winningNumber.getLottoNumber().contains(bonusNumber.getLottoNumber())) {
+        if (winningNumber.getLottoNumbers().contains(bonusNumber.getLottoNumber())) {
             throw new IllegalArgumentException(ERROR_DISTINCT);
         }
     }

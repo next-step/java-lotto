@@ -35,18 +35,18 @@ public class LottoStatistics {
     }
 
     private boolean matchBonusNumber(final int count, final Lotto lottoNumberList) {
-        return count == MATCH_FIVE && lottoNumberList.getLottoNumber()
+        return count == MATCH_FIVE && lottoNumberList.getLottoNumbers()
             .contains(winningLottery.getBonusNumber());
     }
 
     private int matchWinningNumbers(final Lotto lottoNumberList) {
-        return lottoNumberList.getLottoNumber().stream()
+        return lottoNumberList.getLottoNumbers().stream()
             .filter(x -> isWinningNumber(x))
             .collect(Collectors.toSet()).size();
     }
 
     private boolean isWinningNumber(final LottoNumber lottoNumber) {
-        return winningLottery.getWinningNumber().getLottoNumber().contains(lottoNumber);
+        return winningLottery.getWinningNumber().getLottoNumbers().contains(lottoNumber);
     }
 
     public List<Rank> getResultStatistics() {

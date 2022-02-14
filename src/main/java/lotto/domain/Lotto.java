@@ -7,11 +7,11 @@ public class Lotto {
 
     private static final int LOTTO_NUMBERS_SIZE = 6;
     private static final String ERROR_LOTTO_NUMBER = "로또 번호는 6개여야 합니다.";
-    private Set<LottoNumber> lottoNumber;
+    private Set<LottoNumber> lottoNumbers;
 
     public Lotto(Set<LottoNumber> lottoNumber) {
         validate(lottoNumber);
-        this.lottoNumber = lottoNumber;
+        this.lottoNumbers = lottoNumber;
     }
 
     private void validate(Set<LottoNumber> lottoNumber) {
@@ -20,8 +20,8 @@ public class Lotto {
         }
     }
 
-    public Set<LottoNumber> getLottoNumber() {
-        return Collections.unmodifiableSet(lottoNumber);
+    public Set<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 
 }
