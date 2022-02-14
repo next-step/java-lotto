@@ -7,13 +7,13 @@ public class Lottoes {
 
     private final List<Lotto> lottoes;
 
-    public Lottoes(int lottoCount) {
+    public Lottoes(LottoCount lottoCount) {
         this.lottoes = setLottoes(lottoCount);
     }
 
-    private List<Lotto> setLottoes(int lottoCount) {
+    private List<Lotto> setLottoes(LottoCount lottoCount) {
         final List<Lotto> lottoes = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
+        for (int i = 0; i < lottoCount.getCount(); i++) {
             Lotto lotto = setLotto();
             lottoes.add(lotto);
         }

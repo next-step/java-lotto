@@ -2,15 +2,13 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class YieldCalculatorTest {
 
     LottoResult lottoResult;
+    LottoCount lottoCount;
 
     @BeforeEach
     void setUp() {
@@ -21,10 +19,11 @@ class YieldCalculatorTest {
         lottoResult.upCount(LottoDescription.findLottoHash(4, false));
         lottoResult.upCount(LottoDescription.findLottoHash(4, false));
         lottoResult.upCount(LottoDescription.findLottoHash(5, false));
+        lottoCount = new LottoCount(1000);
     }
 
     @Test
     void 수익률_계산하기() {
-        assertThat(YieldCalculator.calculateYield(lottoResult, 1000)).isEqualTo(310.00);
+        assertThat(YieldCalculator.calculateYield(lottoResult, lottoCount)).isEqualTo(310.00);
     }
 }

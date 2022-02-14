@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoCount;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottoes;
 import lotto.domain.WinningLotto;
@@ -10,8 +11,7 @@ import lotto.view.ResultView;
 public class LottoApplication {
 
     public static void main(String[] args) {
-        final int money = InputView.inputMoney();
-        final int lottoCount = money / 1000;
+        LottoCount lottoCount = new LottoCount(InputView.inputMoney());
         ResultView.printLottoCount(lottoCount);
 
         final Lottoes lottoes = new Lottoes(lottoCount);
@@ -23,7 +23,7 @@ public class LottoApplication {
         final LottoResult lottoResult = new LottoResult();
         lottoResult.raffle(winningLotto, lottoes);
 
-        double yield = YieldCalculator.calculateYield(lottoResult, money);
+        double yield = YieldCalculator.calculateYield(lottoResult, lottoCount);
         ResultView.printLottoResults(lottoResult, yield);
     }
 }
