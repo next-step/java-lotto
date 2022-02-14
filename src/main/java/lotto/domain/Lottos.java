@@ -11,20 +11,18 @@ public class Lottos {
     private static final int LOTTO_PRICE = 1000;
 
     List<Lotto> lottoLists;
-    final int lottoCount;
 
     public Lottos(LottoPrice lottoPrice) {
         validateLottoPrice(lottoPrice.getPrice());
 
-        this.lottoCount = lottoPrice.getPrice() / LOTTO_PRICE;
-        this.lottoLists = generatorLottos();
+        this.lottoLists = generatorLottos(lottoPrice.getPrice() / LOTTO_PRICE);
     }
 
     public List<Lotto> getLottoLists() {
         return Collections.unmodifiableList(lottoLists);
     }
 
-    private List<Lotto> generatorLottos() {
+    private List<Lotto> generatorLottos(int lottoCount) {
         List<Lotto> lottoLists = new ArrayList<>();
 
         for (int i = 0; i < lottoCount; i++) {
@@ -39,7 +37,5 @@ public class Lottos {
             throw new IllegalArgumentException(OutputView.ERROR_WRONG_LOTTO_PRICE);
         }
     }
-    public int getLottoCount() {
-        return lottoCount;
-    }
+
 }

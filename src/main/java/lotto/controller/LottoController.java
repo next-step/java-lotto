@@ -23,7 +23,7 @@ public class LottoController {
     public void start() {
         lottoPriceProcess();
         lottoListsProcess();
-        OutputView.printLottoCount(lottos.getLottoCount());
+        OutputView.printLottoCount(lottos.getLottoLists().size());
         winningNumberProcess();
         statisticsProcess();
     }

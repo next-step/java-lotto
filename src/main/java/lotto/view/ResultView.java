@@ -2,7 +2,6 @@ package lotto.view;
 
 import java.util.List;
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 import lotto.domain.Rank;
 
 public class ResultView {
