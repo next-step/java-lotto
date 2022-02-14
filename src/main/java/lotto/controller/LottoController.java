@@ -1,24 +1,26 @@
 package lotto.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoPrice;
 import lotto.domain.LottoStatistics;
 import lotto.domain.Lottos;
+import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 import lotto.view.ResultView;
 
 public class LottoController {
-
     private LottoPrice lottoPrice;
     private Lottos lottos;
     private String winningNumber;
     private LottoNumber bonusBall;
-    private WinningLotto winningLottery;
+    private WinningLotto winningLotto;
+    private List<Rank> winningRanks;
 
     public void start() {
         lottoPriceProcess();
@@ -43,13 +45,14 @@ public class LottoController {
         winningNumber = InputView.readWinningNumber();
         OutputView.printBonusBallNumber();
         bonusBall = InputView.readBonusNumber();
-        winningLottery = new WinningLotto(refineToLottoList(winningNumber), bonusBall);
+        winningLotto = new WinningLotto(refineToLottoList(winningNumber), bonusBall, lottos);
+        winningRanks = winningLotto.matchRank();
     }
 
     private void statisticsProcess() {
-        LottoStatistics lottoStatistics = new LottoStatistics(winningLottery, lottos);
-        String lottoEaringRate = lottoStatistics.getLottoEarningRate(lottoStatistics.getResultStatistics(), lottoPrice);
-        ResultView.printLottoStatistics(lottoStatistics.getResultStatistics(), lottoEaringRate);
+        LottoStatistics lottoStatistics = new LottoStatistics();
+        String lottoEaringRate = lottoStatistics.getLottoEarningRate(winningRanks, lottoPrice);
+        ResultView.printLottoStatistics(winningRanks, lottoEaringRate);
     }
 
     public static Lotto refineToLottoList(String unrefinedNumber) {
