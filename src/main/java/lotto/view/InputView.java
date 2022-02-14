@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -36,26 +37,20 @@ public class InputView {
         return SCANNER.nextLine();
     }
 
-    public static LottoNumber inputBonusLottoNumber() {
+    public static int inputBonusLottoNumber() {
         System.out.println(BONUSBALL_MESSAGE);
-        int bonusLottoNumber = Integer.parseInt(SCANNER.nextLine());
-        return new LottoNumber(bonusLottoNumber);
+        return Integer.parseInt(SCANNER.nextLine());
     }
 
-    public static Lottos inputPurchaseManualLotto(int count) {
+    public static List<Lotto> inputPurchaseManualLotto(int count) {
         System.out.println(LOTTO_NUMBER_MANUAL_MESSAGE);
-        return new Lottos(IntStream.range(0, count)
+        return IntStream.range(0, count)
             .mapToObj(InputView::doInputLotto)
-            .collect(Collectors.toList()));
+            .map(Lotto::new)
+            .collect(Collectors.toList());
     }
 
-    private static Lotto doInputLotto(int idx) {
-        return inputLotto();
+    private static String doInputLotto(int idx) {
+        return SCANNER.nextLine();
     }
-
-    public static Lotto inputLotto() {
-        String numberOfPurchaseManual = SCANNER.nextLine();
-        return new Lotto(numberOfPurchaseManual);
-    }
-
 }
