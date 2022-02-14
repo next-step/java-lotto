@@ -18,8 +18,11 @@ public class Converter {
     }
 
     public static String LottoToString(Lotto lotto) {
-        List<Integer> lottoNumbers = lotto.getNumbers();
-        Collections.sort(lottoNumbers);
-        return lottoNumbers.toString();
+        List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
+        List<Integer> numbers = lottoNumbers.stream()
+            .map(LottoNumber::get)
+            .sorted()
+            .collect(Collectors.toList());
+        return numbers.toString();
     }
 }

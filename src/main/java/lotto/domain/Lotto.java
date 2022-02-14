@@ -40,11 +40,4 @@ public class Lotto {
     public List<LottoNumber> getLottoNumbers() {
         return new ArrayList<>(this.numbers);
     }
-
-    public List<Integer> getNumbers() {
-        return this.numbers.stream()
-            .map(LottoNumber::get)
-            .collect(Collectors.toList());
-    }
-
 }

@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -40,9 +41,12 @@ class LottoTest {
     @Test
     void 로또_번호_확인() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-
         Lotto lotto = Lotto.from(numbers);
 
-        assertThat(lotto.getNumbers()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<Integer> actual = lotto.getLottoNumbers().stream()
+                .map(LottoNumber::get)
+                .collect(Collectors.toList());
+
+        assertThat(actual).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 }
