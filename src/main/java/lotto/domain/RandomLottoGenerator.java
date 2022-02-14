@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,13 +16,18 @@ public class RandomLottoGenerator implements LottoGenerator {
         .boxed().collect(
             Collectors.toList());
 
-    @Override
-    public List<LottoNumber> generateLottoNumber() {
+    private final List<LottoNumber> lottoNumbers;
+
+    public RandomLottoGenerator(){
         Collections.shuffle(lottoRange);
         List<Integer> subNumbers = lottoRange.stream().limit(COUNT).sorted()
             .collect(Collectors.toList());
-        List<LottoNumber> lottoNumbers = subNumbers.stream().map(LottoNumber::new).collect(
+        this.lottoNumbers = subNumbers.stream().map(LottoNumber::new).collect(
             Collectors.toList());
-        return lottoNumbers;
+    }
+
+    @Override
+    public List<LottoNumber> getLottoGeneratorNumbers() {
+        return new ArrayList<>(lottoNumbers);
     }
 }
