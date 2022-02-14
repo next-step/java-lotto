@@ -15,8 +15,7 @@ public class LottoNumberGenerator {
 
     static {
        LOTTO_ONE_SHEET = IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
-           .boxed()
-           .map(LottoNumber::new)
+           .mapToObj(LottoNumber::new)
            .collect(Collectors.toList());
     }
 
