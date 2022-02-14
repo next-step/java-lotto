@@ -9,11 +9,11 @@ public class LottoStatistics {
 
     private static final int MATCH_FIVE = 5;
 
-    private final WinningLottery winningLottery;
+    private final WinningLotto winningLottery;
     private final List<Lotto> lottoList;
     private List<Rank> resultStatistics = new ArrayList<>();
 
-    public LottoStatistics(WinningLottery winningLottery, List<Lotto> lottoList) {
+    public LottoStatistics(WinningLotto winningLottery, List<Lotto> lottoList) {
         this.winningLottery = winningLottery;
         this.lottoList = lottoList;
         this.resultStatistics = compareNumber();

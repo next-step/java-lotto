@@ -1,13 +1,13 @@
 package lotto.domain;
 
-public class WinningLottery {
+public class WinningLotto {
 
     private static final String ERROR_DISTINCT = "당첨 번호와 보너스 번호는 중복될 수 없습니다.";
 
     private Lotto winningNumber;
     private LottoNumber bonusNumber;
 
-    public WinningLottery(Lotto winningNumber, LottoNumber bonusNumber) {
+    public WinningLotto(Lotto winningNumber, LottoNumber bonusNumber) {
         validate(winningNumber, bonusNumber);
         this.winningNumber = winningNumber;
         this.bonusNumber = bonusNumber;

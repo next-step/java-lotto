@@ -12,7 +12,7 @@ class WinningLotteryTest {
     @DisplayName(value = "당첨 번호와 보너스 번호는 중복될 수 없다.")
     @Test
     void distinctWinningAndBonus() {
-        assertThatThrownBy(() -> new WinningLottery(
+        assertThatThrownBy(() -> new WinningLotto(
             new Lotto(new HashSet(Arrays.asList(1, 2, 3, 4, 5, 6))), new LottoNumber(6)))
             .isInstanceOf(IllegalArgumentException.class);
     }
