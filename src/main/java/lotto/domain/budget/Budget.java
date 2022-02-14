@@ -7,7 +7,6 @@ public class Budget {
 
     private static final int PRICE_OF_LOTTO = 1000;
     private static final String LACK_OF_MONEY_EXCEPTION_MESSAGE = "로또 구입 가격보다 예산이 적습니다.";
-
     private final int value;
 
     public Budget(final String value) {
