@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class StringCalculator {
-
+    private static final String SPLITER = ",|:";
+    private static final String CUSTOM_SPLITER = "|,|:";
     private static final String RETURN_NUMBER_ZERO = "0";
 
     private String input;
@@ -23,19 +24,16 @@ public class StringCalculator {
 
     public int add() {
         Parser parser = new Parser(input);
-
-
-        if (!Objects.isNull(parser.getCustomDelimiter())) {
-            String delimeter = parser.getCustomDelimiter();
-            List<String> refinedFormular = Arrays.asList(parser.getParsedFormular().split(delimeter + "|,|:"));
-            return parser.refineToIntegerList(refinedFormular).stream()
+        if (Objects.isNull(parser.getCustomDelimiter())) {
+            List<String> numbers = Arrays.asList(parser.getParsedFormular().split(SPLITER));
+            return parser.refineToIntegerList(numbers).stream()
                 .mapToInt(Integer::intValue)
                 .sum();
         }
 
-        List<String> refinedFormular = Arrays.asList(parser.getParsedFormular().split(",|:"));
-
-        return parser.refineToIntegerList(refinedFormular).stream()
+        String delimeter = parser.getCustomDelimiter();
+        List<String> numbers = Arrays.asList(parser.getParsedFormular().split(delimeter + CUSTOM_SPLITER));
+        return parser.refineToIntegerList(numbers).stream()
             .mapToInt(Integer::intValue)
             .sum();
     }
