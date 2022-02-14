@@ -28,14 +28,14 @@ public class StringCalculator {
         if (!Objects.isNull(parser.getCustomDelimiter())) {
             String delimeter = parser.getCustomDelimiter();
             refinedFormular = Arrays.asList(parser.getParsedFormular().split(delimeter + "|,|:"));
-            return parser.makeToIntegerList(refinedFormular).stream()
+            return parser.refineToIntegerList(refinedFormular).stream()
                 .mapToInt(Integer::intValue)
                 .sum();
         }
 
         refinedFormular = Arrays.asList(parser.getParsedFormular().split(",|:"));
 
-        return parser.makeToIntegerList(refinedFormular).stream()
+        return parser.refineToIntegerList(refinedFormular).stream()
             .mapToInt(Integer::intValue)
             .sum();
     }

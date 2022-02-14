@@ -1,6 +1,5 @@
 package calculator.domain;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,15 +29,13 @@ public class Parser {
         }
     }
 
-    public List<Integer> makeToIntegerList(List<String> refinedFormular) {
+    public List<Integer> refineToIntegerList(List<String> refinedFormular) {
         validateFormular(refinedFormular);
-        return refinedFormular.stream()
-            .map(Integer::parseInt)
-            .collect(Collectors.toList());
+        return changeToIntegerList(refinedFormular);
     }
 
     private void validateFormular(List<String> refinedFormular) {
-        List<Integer> integeredFormular = stringListToInteger(refinedFormular);
+        List<Integer> integeredFormular = changeToIntegerList(refinedFormular);
         for (int formularNumber : integeredFormular) {
             if (formularNumber < DIVIDE_NEGATIVE_NUMBER) {
                 throw new RuntimeException(OutputView.ERROR + ERROR_NEGATIVE_NUMBER);
@@ -46,7 +43,7 @@ public class Parser {
         }
     }
 
-    private List<Integer> stringListToInteger(List<String> refinedFormular) {
+    private List<Integer> changeToIntegerList(List<String> refinedFormular) {
         return refinedFormular.stream()
             .map(Integer::parseInt)
             .collect(Collectors.toList());
