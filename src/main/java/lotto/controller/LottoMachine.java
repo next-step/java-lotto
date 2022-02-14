@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.List;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTicketGenerator;
@@ -43,7 +44,8 @@ public class LottoMachine {
     }
 
     public LottoStatistics calculateWinningResult(LottoTicket lottoTicket) {
-        final WinningNumbers winningNumbers = WinningNumbers.from(getWinningNumber(), getBonusBall());
+        final WinningNumbers winningNumbers = WinningNumbers.from(getWinningNumber(),
+            getBonusBall());
 
         return LottoStatistics.of(winningNumbers, lottoTicket);
     }
@@ -57,13 +59,13 @@ public class LottoMachine {
         return InputView.readPrice();
     }
 
-    private List<Integer> getWinningNumber() {
+    private List<LottoNumber> getWinningNumber() {
         OutputView.printWinningNumberBefore();
         return Util.stringToIntegerList(InputView.readWinningNumber());
     }
 
-    private int getBonusBall() {
+    private LottoNumber getBonusBall() {
         OutputView.printBonusBallNumber();
-        return InputView.readBonusNumber();
+        return LottoNumber.from(InputView.readBonusNumber());
     }
 }

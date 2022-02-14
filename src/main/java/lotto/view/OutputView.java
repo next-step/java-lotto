@@ -66,7 +66,7 @@ public class OutputView {
 
     public static void printLottoNumber(Lotto lotto) {
         for (int j = 0; j < lotto.getLotto().size(); j++) {
-            System.out.print(lotto.getLotto().get(j) + " ");
+            System.out.print(lotto.getLotto().get(j).getLottoNumber() + " ");
         }
     }
 }

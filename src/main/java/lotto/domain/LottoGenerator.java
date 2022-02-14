@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import lotto.domain.strategy.GenerateStrategy;
 
 public class LottoGenerator {
@@ -24,11 +25,18 @@ public class LottoGenerator {
         return lotto;
     }
 
-    private HashSet<Integer> generatorLotto(GenerateStrategy strategy) {
-        HashSet<Integer> lotto = new HashSet<>();
+    private List<LottoNumber> generatorLotto(GenerateStrategy strategy) {
+        List<LottoNumber> lotto = new ArrayList<>();
 
         while (lotto.size() < LOTTO_SIZE) {
-            lotto.add(strategy.generateNumber(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER));
+            LottoNumber lottoNumber = LottoNumber.from(
+                strategy.generateNumber(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
+            );
+
+            if (lottoNumber.isInLottoNumberList(lotto)) {
+                continue;
+            }
+            lotto.add(lottoNumber);
         }
 
         return lotto;
