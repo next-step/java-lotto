@@ -36,5 +36,4 @@ public class Token {
     public List<Token> getTokens() {
         return tokens;
     }
-
 }
