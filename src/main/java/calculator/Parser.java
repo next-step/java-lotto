@@ -10,6 +10,7 @@ public class Parser {
     private String userInput;
     private final String delimiter;
     private final String MATCH_STRING = "//(.)\n(.*)";
+    private final String DEFAULT_DELIMETER = ",|:";
 
     public Parser(String userInput) {
         this.userInput = checkInputNullOrZero(userInput);
@@ -31,7 +32,7 @@ public class Parser {
             return m.group(1);
         }
 
-        return ",|:";
+        return DEFAULT_DELIMETER;
     }
 
     public List<Token> parseInput() {
