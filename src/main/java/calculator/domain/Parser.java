@@ -33,8 +33,8 @@ public class Parser {
     public List<Integer> makeToIntegerList(List<String> refinedFormular) {
         validateFormular(refinedFormular);
         return refinedFormular.stream()
-            .map(Integer::parseInt).collect(
-                Collectors.toList());
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
     }
 
     private void validateFormular(List<String> refinedFormular) {
