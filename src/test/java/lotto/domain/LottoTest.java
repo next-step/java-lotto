@@ -28,7 +28,7 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("generateLotto")
     void GivenListWithIntType_WhenCreateInstance_ThenInstanceSizeIsEqualtoListWithIntType(
-        List<Integer> lotto) {
+        List<LottoNumber> lotto) {
         final int lottoSize = Lotto.from(lotto).getLotto().size();
 
         assertThat(lottoSize)

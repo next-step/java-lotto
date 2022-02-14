@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.strategy.RandomGenerateStrategy;
@@ -18,13 +19,12 @@ class LottoGeneratorTest {
     void GivenRandomGenerateStrategy_WhenCreateInstance_ThenLottoRangeBetween1And45(
     ) {
         Lotto lotto = LottoGenerator.of(RandomGenerateStrategy.getInstance()).getLotto();
+        List<Integer> lottoRange =  IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
+            .boxed()
+            .collect(Collectors.toList());
 
         boolean isAllMatch = lotto.getLotto().stream()
-            .allMatch(x -> IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
-                .boxed()
-                .collect(Collectors.toList())
-                .contains(x)
-            );
+            .allMatch(x -> x.isInList(lottoRange));
 
         assertThat(isAllMatch)
             .isEqualTo(true);
