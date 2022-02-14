@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.math.BigDecimal;
 import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
@@ -55,7 +56,7 @@ public class LottoController {
 
     private void printResult(WinningResult winningResult, Ticket ticket) {
         Map<Rank, Integer> result = winningResult.getResult();
-        double profitRate = winningResult.calculateProfitRate(ticket.getBuyCash());
+        BigDecimal profitRate = winningResult.calculateProfitRate(ticket.getBuyCash());
         OutputView.printWinningResult(result, profitRate);
     }
 }

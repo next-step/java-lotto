@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.Rank;
@@ -27,7 +28,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printWinningResult(Map<Rank, Integer> result, double profitRate) {
+    public static void printWinningResult(Map<Rank, Integer> result, BigDecimal profitRate) {
         System.out.println(WINNING_RESULT_HEAD_LOG);
         printMatchCount(result);
         printProfitRate(profitRate);
@@ -50,7 +51,7 @@ public class OutputView {
         System.out.printf((MATCH_COUNT_LOG) + "%n", matchCount, prizeMoney, count);
     }
 
-    private static void printProfitRate(double profitRate) {
+    private static void printProfitRate(BigDecimal profitRate) {
         System.out.printf((PROFIT_RATE_LOG) + "%n", profitRate);
     }
 }

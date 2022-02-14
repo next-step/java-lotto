@@ -2,6 +2,8 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -37,11 +39,11 @@ class WinningResultTest {
         Map<Rank, Integer> rankMap = testWinningLotto.mapResult(Lottos.withListLotto(lottos));
         WinningResult testWinningResult = new WinningResult(rankMap);
 
-        double actualProfit = testWinningResult.calculateProfitRate(3000);
-        double expectedProfit = (double) 55000 / 3000;
-        long actualPrize = testWinningResult.calculatePrizeMoney();
+        BigDecimal actualProfit = testWinningResult.calculateProfitRate(3000);
+        BigDecimal expectedProfit = new BigDecimal(55000).divide(new BigDecimal(3000), 2, RoundingMode.DOWN);
+        BigDecimal actualPrize = testWinningResult.calculatePrizeMoney();
 
-        assertThat(actualPrize).isEqualTo(55000);
+        assertThat(actualPrize).isEqualTo(new BigDecimal(55000));
         assertThat(actualProfit).isEqualTo(expectedProfit);
     }
 }

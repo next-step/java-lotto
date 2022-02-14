@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -11,15 +13,15 @@ public class WinningResult {
         this.result = result;
     }
 
-    public double calculateProfitRate(int buyCash) {
-        long prizeMoney = calculatePrizeMoney();
-        return (double) prizeMoney / buyCash;
+    public BigDecimal calculateProfitRate(int buyCash) {
+        BigDecimal prizeMoney = calculatePrizeMoney();
+        return prizeMoney.divide(new BigDecimal(buyCash), 2, RoundingMode.DOWN);
     }
 
-    public long calculatePrizeMoney() {
-        long prizeMoney = 0;
+    public BigDecimal calculatePrizeMoney() {
+        BigDecimal prizeMoney = BigDecimal.ZERO;
         for (Rank rank : result.keySet()) {
-            prizeMoney += result.get(rank) * rank.getPrizeMoney();
+            prizeMoney = prizeMoney.add(new BigDecimal(result.get(rank) * rank.getPrizeMoney()));
         }
         return prizeMoney;
     }
