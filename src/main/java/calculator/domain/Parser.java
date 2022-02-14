@@ -1,9 +1,7 @@
 package calculator.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Parser {
 
@@ -11,7 +9,8 @@ public class Parser {
     private static final String DOUBLE_SLASH = "//";
     private static final String START_REGEX = "[";
     private static final String END_REGEX = "]";
-    private static final int LIMIT_MINIMUM_NUMBER = 0;
+
+    private static final int DELIMITER_PART_INDEX = 1;
 
     private final String operation;
     private final List<String> delimiters;
@@ -23,7 +22,7 @@ public class Parser {
 
     private String trimDelimiter(String text) {
         if (isCustomDelimiter(text)) {
-            return text.split(NEW_LINE)[1];
+            return text.split(NEW_LINE)[DELIMITER_PART_INDEX];
         }
         return text;
     }
@@ -35,38 +34,22 @@ public class Parser {
     public List<Integer> splitNumbersByDelimiter() {
         final String regex = makeRegularExpression();
         endByDelimiter(regex);
-        final String[] numbers = operation.split(regex);
-        return castToInteger(numbers);
+        Operands operands = new Operands(operation.split(regex));
+        return operands.castToInteger();
     }
 
     private void endByDelimiter(String regex) {
-        if (operation.substring(operation.length() - 1).matches(regex)) {
+        if (endOfOperation().matches(regex)) {
             throw new RuntimeException("[ERROR] 숫자 이외의 값을 계산할 수 없습니다.");
         }
     }
 
-    private List<Integer> castToInteger(String[] numbers) {
-        try {
-            return Arrays.stream(numbers)
-                .map(value -> {
-                    final Integer number = Integer.parseInt(value);
-                    validPositiveNumber(number);
-                    return number;
-                }).collect(Collectors.toList());
-        } catch (NumberFormatException e) {
-            throw new RuntimeException("[ERROR] 숫자 이외의 값을 계산할 수 없습니다.");
-        }
-    }
-
-    private void validPositiveNumber(Integer value) {
-        if (value < LIMIT_MINIMUM_NUMBER) {
-            throw new IllegalArgumentException("[ERROR] 음수 값은 입력할 수 없습니다.");
-        }
+    private String endOfOperation() {
+        return operation.substring(operation.length() - 1);
     }
 
     private String makeRegularExpression() {
-        return delimiters.stream()
-            .reduce(START_REGEX, (cum, value) -> cum + value)
-            + END_REGEX;
+        String regex = String.join("", delimiters);
+        return START_REGEX + regex + END_REGEX;
     }
 }
