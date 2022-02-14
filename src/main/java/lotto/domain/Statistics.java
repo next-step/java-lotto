@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Statistics {
     
-    private Map<Rank, Integer> ranks;
+    private final Map<Rank, Integer> ranks;
     
     public Statistics() {
         ranks = new EnumMap<>(Rank.class);
@@ -24,14 +24,16 @@ public class Statistics {
             boolean bonusScore = getBonusScore(lotto.getNumbers(),
               winningNumber.getBonusBall());
             Rank rank = getRank(matchCount, bonusScore);
-            incrementRank(rank);
+            ranks.put(rank, incrementRank(rank));
         }
+        
     }
     
-    private void incrementRank(Rank rank) {
+    private int incrementRank(Rank rank) {
         if (rank != Rank.MISS) {
-            ranks.put(rank, ranks.get(rank) + 1);
+            return ranks.get(rank) + 1;
         }
+        return 0;
     }
     
     public boolean getBonusScore(List<Integer> numbers, int bonusBall) {
