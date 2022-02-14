@@ -5,6 +5,7 @@ import view.ResultView;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoService {
     private final InputView inputView;
@@ -52,15 +53,16 @@ public class LottoService {
 
     public void showAllLottoTickets(LottoTickets lottoTickets) {
         lottoTickets.getLottos()
-                .forEach(lotto -> resultView.printAllLotto(lotto.getLotto()));
+                .forEach(lotto -> resultView.printAllLotto(
+                        lotto.getLotto().stream().map(LottoNumber::getNumber).collect(Collectors.toList())));
     }
 
-    private List<Integer> receiveAnswer() {
+    private List<LottoNumber> receiveAnswer() {
         return inputView.inputAnswerNumber();
     }
 
-    private int receiveBonus() {
-        return inputView.inputBonusNumber();
+    private LottoNumber receiveBonus() {
+        return new LottoNumber(inputView.inputBonusNumber());
     }
 
 }

@@ -1,5 +1,6 @@
 package view;
 
+import domain.LottoNumber;
 import domain.LottoResult;
 import domain.Rank;
 

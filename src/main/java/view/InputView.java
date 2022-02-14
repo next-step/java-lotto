@@ -1,5 +1,7 @@
 package view;
 
+import domain.LottoNumber;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -28,12 +30,12 @@ public class InputView {
         System.out.println("\n" + MESSAGE_INPUT_LOTTO_NUMBER);
     }
 
-    public List<Integer> inputAnswerNumber() {
+    public List<LottoNumber> inputAnswerNumber() {
         System.out.println("\n" + MESSAGE_INPUT_ANSWER_NUMBER);
         return inputLotto();
     }
 
-    public List<Integer> inputLotto() {
+    public List<LottoNumber> inputLotto() {
         return splitAnswerNumber(scanner.next());
     }
 
@@ -44,9 +46,9 @@ public class InputView {
     }
 
 
-    public List<Integer> splitAnswerNumber(String answerNumbers) {
+    public List<LottoNumber> splitAnswerNumber(String answerNumbers) {
         return Arrays.stream(answerNumbers.split(COMMA))
-                .map(stringNumber -> Integer.parseInt(stringNumber.trim()))
+                .map(stringNumber -> new LottoNumber(Integer.parseInt(stringNumber.trim())))
                 .collect(Collectors.toList());
     }
 }
