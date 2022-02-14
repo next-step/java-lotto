@@ -3,7 +3,9 @@ package lotto.view;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 import lotto.model.Rank;
 
 public class OutputView {
@@ -17,7 +19,11 @@ public class OutputView {
     }
 
     public static void printLottos(List<Lotto> lottos) {
-        lottos.forEach(lotto -> System.out.println(lotto.getLottoNumbers()));
+        for(Lotto lotto: lottos){
+            List<Integer> list = lotto.getLottoNumbers().stream().map(LottoNumber::getNumber).collect(
+                Collectors.toList());
+            System.out.println(list);
+        }
     }
 
     public static void printStatistics(Map<Rank, Integer> ranks, double benefits) {
