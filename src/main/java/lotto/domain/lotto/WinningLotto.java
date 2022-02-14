@@ -15,13 +15,9 @@ public class WinningLotto {
     private final List<LottoNumber> lottoNumbers;
 
     private WinningLotto(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
-    }
-
-    public static WinningLotto from(List<LottoNumber> lottoNumbers) {
         validateDuplicate(lottoNumbers);
         validateWinningSize(lottoNumbers);
-        return new WinningLotto(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
     public static WinningLotto of(List<LottoNumber> winningLottoLine, LottoNumber bonusBall) {
@@ -54,8 +50,7 @@ public class WinningLotto {
         }
     }
 
-    private static void validateWinningSize(
-        List<LottoNumber> lottoNumbers) {
+    private static void validateWinningSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != WINNING_LOTTO_SIZE) {
             throw new IllegalArgumentException(WINNING_LOTTO_SIZE_EXCEPTION_MESSAGE);
         }
