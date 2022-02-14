@@ -35,7 +35,9 @@ public class LottoMachine {
     }
 
     public static WinningLotto generateWinningLotto(String winningLottoLine, String bonusBall) {
-        return WinningLotto.of(winningLottoLine, bonusBall);
+        Lotto winningLottoWithoutBonus = generateLotto(new ManualLottoGenerator(winningLottoLine));
+        LottoNumber bonusLotto = new LottoNumber(bonusBall);
+        return WinningLotto.of(winningLottoWithoutBonus.values(), bonusLotto);
     }
 
     public static void showLottoCount(LottoCount manualCount, LottoCount autoCount) {

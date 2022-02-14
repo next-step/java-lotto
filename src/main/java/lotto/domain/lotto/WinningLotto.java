@@ -1,10 +1,9 @@
 package lotto.domain.lotto;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class WinningLotto {
 
@@ -12,7 +11,6 @@ public class WinningLotto {
     private static final int WINNING_LOTTO_SIZE = 7;
     private static final String WINNING_LOTTO_SIZE_EXCEPTION_MESSAGE = "[ERROR] 우승 로또 숫자는 보너스 볼 포함 총 7개 입니다";
     private static final String WINNING_LOTTO_DUPLICATE_EXCEPTION_MESSAGE = "[ERROR] 우승 로또 숫자는 중복 될 수 없습니다";
-    private static final String WINNING_LOTTO_DELIMITER = ",";
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -26,16 +24,9 @@ public class WinningLotto {
         return new WinningLotto(lottoNumbers);
     }
 
-    public static WinningLotto of(String winningLottoLine, String bonusBall) {
-        LottoNumber bonusNumber = new LottoNumber(bonusBall);
-        return Arrays.stream(winningLottoLine.split(WINNING_LOTTO_DELIMITER))
-            .map(String::trim)
-            .map(LottoNumber::new)
-            .collect(Collectors.collectingAndThen(
-                Collectors.toList(), list -> {
-                    list.add(bonusNumber);
-                    return new WinningLotto(list);
-                }));
+    public static WinningLotto of(List<LottoNumber> winningLottoLine, LottoNumber bonusBall) {
+        winningLottoLine.add(bonusBall);
+        return new WinningLotto(new ArrayList<>(winningLottoLine));
     }
 
     public LottoNumber bonusBall() {
