@@ -22,7 +22,8 @@ public class LottoCalculation {
 
         purchaseLottos.add(lottos);
         int numberOfLottoAutomatical = getNumberOfLottosAutomatical(numberOflottoManual);
-        purchaseLottos.add(LottoBundle.lottoBundle(numberOfLottoAutomatical, new ShuffleLottoNumber()));
+        purchaseLottos.add(
+            LottoBundle.lottoBundle(numberOfLottoAutomatical, new ShuffleLottoNumber()));
 
         return new LottoCalculationDTO(numberOflottoManual, numberOfLottoAutomatical,
             purchaseLottos);
