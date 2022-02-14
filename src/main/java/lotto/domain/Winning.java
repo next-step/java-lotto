@@ -12,6 +12,11 @@ public class Winning {
         validationWinningNumber();
     }
 
+    public Winning(String inputWinningLottoNumber,
+        LottoNumber inputBonusLottoNumber){
+        this(new Lotto(inputWinningLottoNumber), inputBonusLottoNumber);
+    }
+
 
     private void validationWinningNumber() {
         if (winningLottoNumber.contains(bonusLottoNumber)) {

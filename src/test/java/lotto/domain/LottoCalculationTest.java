@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.view.InputView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -56,7 +57,7 @@ public class LottoCalculationTest {
     @DisplayName("로또_수동_자동_구매_테스트")
     @Test
     void purchaseLottoTest() {
-        LottoCalculation lottoCalculation = new LottoCalculation("14000");
+        LottoCalculation lottoCalculation = new LottoCalculation(new Money("14000"));
         assertAll(
             () -> assertThat(lottoCalculation.purchaseLottos(new Lottos(oldLottos))
                 .getNumberOfLottoAutomatical()).isEqualTo(11),
@@ -68,19 +69,17 @@ public class LottoCalculationTest {
     @DisplayName("이전_당첨_번호_확인_테스트")
     @Test
     void makeWinningLottoNumberTest() {
-        LottoCalculation lottoCalculation = new LottoCalculation("14000");
-        Winning winning = lottoCalculation.makeWinningLottoNumber("1,2,3,4,5,6",
-            new LottoNumber(7));
+        LottoCalculation lottoCalculation = new LottoCalculation(new Money("14000"));
+        Winning winning = new Winning("1,2,3,4,5,6", new LottoNumber(7));
         assertThat(winning).isNotNull();
     }
 
     @DisplayName("RankDto에_담기는_값이_랭크에_대한_결과값_테스트")
     @Test
     void makeRankResultTest() {
-        LottoCalculation lottoCalculation = new LottoCalculation("14000");
+        LottoCalculation lottoCalculation = new LottoCalculation(new Money("14000"));
         lottoCalculation.purchaseLottos(new Lottos(oldLottos));
-        Winning winning = lottoCalculation.makeWinningLottoNumber("1,2,3,4,5,6",
-            new LottoNumber(7));
+        Winning winning = new Winning("1,2,3,4,5,6", new LottoNumber(7));
         assertThat(lottoCalculation.getRankResult(winning)).isNotNull();
     }
 

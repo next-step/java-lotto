@@ -8,8 +8,8 @@ public class LottoCalculation {
     private Lottos purchaseLottos;
     private Money purchaseMoney;
 
-    public LottoCalculation(String value) {
-        this(new Lottos(), new Money(value));
+    public LottoCalculation(Money value) {
+        this(new Lottos(), value);
     }
 
     public LottoCalculation(Lottos lottos, Money money) {
@@ -33,18 +33,9 @@ public class LottoCalculation {
         return purchaseMoney.lottoCalculation() - numberOflottosManual;
     }
 
-    public Winning makeWinningLottoNumber(String inputWinningLottoNumber,
-        LottoNumber inputBonusLottoNumber) {
-        return new Winning(new Lotto(inputWinningLottoNumber), inputBonusLottoNumber);
-    }
 
     public RankDTO getRankResult(Winning winning) {
         RankResult rankResult = new RankResult(purchaseLottos, winning);
         return new RankDTO(rankResult, purchaseMoney);
-    }
-
-    public LottoTicket makeLottoTicket(String inputLottoTicket) {
-        return new LottoTicket(inputLottoTicket,
-            purchaseMoney.lottoCalculation());
     }
 }
