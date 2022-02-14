@@ -86,6 +86,8 @@
 - [x] Int 표기형식 통일성있게 수정
 - [x] 상수 네이밍 및 Lotto 사이즈 검증 로직 추가
 - [x] WinningNumbers List<LottoNumber>를 Lotto로 포장하기.
+- [ ] 테스트 케이스 추가
+  - [x] LottoNumberTest
 
 ## multiple authors
 
