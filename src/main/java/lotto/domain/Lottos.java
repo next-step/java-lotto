@@ -18,6 +18,12 @@ public class Lottos {
         this.lottoLists = generatorLottos(lottoPrice.getPrice() / LOTTO_PRICE);
     }
 
+    private void validateLottoPrice(int totalPrice) {
+        if (totalPrice % LOTTO_PRICE != ERROR_WRONG_LOTTO_PRICE) {
+            throw new IllegalArgumentException(OutputView.ERROR_WRONG_LOTTO_PRICE);
+        }
+    }
+
     public List<Lotto> getLottoLists() {
         return Collections.unmodifiableList(lottoLists);
     }
@@ -32,10 +38,5 @@ public class Lottos {
         return lottoLists;
     }
 
-    private void validateLottoPrice(int totalPrice) {
-        if (totalPrice % LOTTO_PRICE != ERROR_WRONG_LOTTO_PRICE) {
-            throw new IllegalArgumentException(OutputView.ERROR_WRONG_LOTTO_PRICE);
-        }
-    }
 
 }
