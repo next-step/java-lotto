@@ -29,8 +29,8 @@ public class ResultView {
     }
 
     public static void printLottoNumbers(List<Lotto> lottoLists) {
-        for (int i = 0; i < lottoLists.size(); i++) {
-            OutputView.printLottoNumber(lottoLists.get(i));
+        for (Lotto lotto : lottoLists) {
+            OutputView.printLottoNumber(lotto);
             System.out.println();
         }
     }
