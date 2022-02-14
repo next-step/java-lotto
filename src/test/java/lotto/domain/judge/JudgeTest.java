@@ -19,7 +19,7 @@ class JudgeTest {
         final Judge judge = new Judge(new CorrectNumbers(
                 "1,2,3,4,5,6", "7"));
 
-        final int size = judge.getRanks(lottos).get().size();
+        final int size = judge.getRanks(lottos.get()).get().size();
 
         assertThat(size).isEqualTo(14);
     }

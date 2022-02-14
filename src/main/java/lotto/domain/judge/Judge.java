@@ -1,10 +1,10 @@
 package lotto.domain.judge;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.correctnumber.CorrectNumbers;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.Lottos;
 import lotto.domain.lottorank.LottoRank;
 import lotto.domain.lottorank.LottoRanks;
 
@@ -16,9 +16,9 @@ public class Judge {
         this.correctNumbers = correctNumbers;
     }
 
-    public LottoRanks getRanks(final Lottos lottos) {
+    public LottoRanks getRanks(final List<Lotto> lottos) {
         return new LottoRanks(Collections.unmodifiableList(
-                lottos.get().stream()
+                lottos.stream()
                         .map(this::getRank)
                         .collect(Collectors.toList())));
     }

@@ -29,7 +29,7 @@ public class LottoApplication {
                 InputView.inputBonusNumber());
 
         final Judge judge = new Judge(correctNumbers);
-        final LottoRanks lottoRanks = judge.getRanks(lottos);
+        final LottoRanks lottoRanks = judge.getRanks(lottos.get());
 
         final Statistics statistics = new Statistics(lottoRanks);
         PrintView.printResult(statistics.getResult());
