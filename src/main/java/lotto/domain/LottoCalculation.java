@@ -21,18 +21,16 @@ public class LottoCalculation {
         int numberOflottoManual = lottos.lottos().size();
 
         purchaseLottos.add(lottos);
-        int numberOfLottoAutomatical = getNumberOfLottosAutomatical(purchaseMoney,
-            numberOflottoManual);
-        purchaseLottos.add(
-            LottoBundle.lottoBundle(numberOfLottoAutomatical, new ShuffleLottoNumber()));
+        int numberOfLottoAutomatical = getNumberOfLottosAutomatical(numberOflottoManual);
+        purchaseLottos.add(LottoBundle.lottoBundle(numberOfLottoAutomatical, new ShuffleLottoNumber()));
 
         return new LottoCalculationDTO(numberOflottoManual, numberOfLottoAutomatical,
             purchaseLottos);
 
     }
 
-    private int getNumberOfLottosAutomatical(Money money, int numberOflottosManual) {
-        return money.lottoCalculation() - numberOflottosManual;
+    private int getNumberOfLottosAutomatical(int numberOflottosManual) {
+        return purchaseMoney.lottoCalculation() - numberOflottosManual;
     }
 
     public Winning makeWinningLottoNumber(String inputWinningLottoNumber,
