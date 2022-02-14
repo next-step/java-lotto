@@ -1,12 +1,14 @@
 package lotto.controller;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import lotto.domain.Lotto;
 import lotto.domain.LottoEarningRate;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoPrice;
 import lotto.domain.LottoStatistics;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
-import lotto.util.Util;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 import lotto.view.ResultView;
@@ -14,7 +16,7 @@ import lotto.view.ResultView;
 public class LottoController {
 
     private LottoPrice lottoPrice;
-    private Lottos userLottos;
+    private Lottos lottos;
     private String winningNumber;
     private LottoNumber bonusBall;
     private WinningLotto winningLottery;
@@ -22,7 +24,7 @@ public class LottoController {
     public void start() {
         lottoPriceProcess();
         lottoListsProcess();
-        OutputView.printLottoCount(userLottos.getLottoCount());
+        OutputView.printLottoCount(lottos.getLottoCount());
         winningNumberProcess();
         statisticsProcess();
     }
@@ -33,8 +35,8 @@ public class LottoController {
     }
 
     private void lottoListsProcess() {
-        userLottos = new Lottos(lottoPrice);
-        ResultView.printLottoNumbers(userLottos.getLottoLists());
+        lottos = new Lottos(lottoPrice);
+        ResultView.printLottoNumbers(lottos.getLottoLists());
     }
 
     private void winningNumberProcess() {
@@ -42,14 +44,20 @@ public class LottoController {
         winningNumber = InputView.readWinningNumber();
         OutputView.printBonusBallNumber();
         bonusBall = InputView.readBonusNumber();
-        winningLottery = new WinningLotto(Util.stringToLottoNumberList(winningNumber), bonusBall);
+        winningLottery = new WinningLotto(refineToLottoList(winningNumber), bonusBall);
     }
 
     private void statisticsProcess() {
-        LottoStatistics lottoStatistics = new LottoStatistics(winningLottery, userLottos.getLottoLists());
+        LottoStatistics lottoStatistics = new LottoStatistics(winningLottery, lottos.getLottoLists());
 
         ResultView.printLottoStatistics(lottoStatistics.getResultStatistics(),
             LottoEarningRate.getLottoEarningRate(lottoStatistics.getResultStatistics(),
                 lottoPrice));
+    }
+
+    public static Lotto refineToLottoList(String unrefinedNumber) {
+        return new Lotto(Arrays.asList(unrefinedNumber.split(", ")).stream()
+            .map(n -> new LottoNumber(Integer.parseInt(n)))
+            .collect(Collectors.toSet()));
     }
 }
