@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.List;
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
@@ -44,7 +45,7 @@ public class LottoMachine {
     }
 
     public LottoStatistics calculateWinningResult(LottoTicket lottoTicket) {
-        final WinningNumbers winningNumbers = WinningNumbers.from(getWinningNumber(),
+        final WinningNumbers winningNumbers = WinningNumbers.from(Lotto.from(getWinningNumber()),
             getBonusBall());
 
         return LottoStatistics.of(winningNumbers, lottoTicket);

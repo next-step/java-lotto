@@ -6,14 +6,10 @@ import java.util.stream.IntStream;
 
 public class WinningNumbers {
 
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
-    private static final int LOTTO_SIZE = 6;
-
-    private final List<LottoNumber> winningNumbers;
+    private final Lotto winningNumbers;
     private final LottoNumber bonusNumber;
 
-    private WinningNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+    private WinningNumbers(Lotto winningNumbers, LottoNumber bonusNumber) {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
 
@@ -21,12 +17,12 @@ public class WinningNumbers {
         validateWinningNumbersSize();
     }
 
-    public static WinningNumbers from(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+    public static WinningNumbers from(Lotto winningNumbers, LottoNumber bonusNumber) {
         return new WinningNumbers(winningNumbers, bonusNumber);
     }
 
     public boolean isWinningNumbersContain (LottoNumber number) {
-        return number.isInLottoNumberList(winningNumbers);
+        return number.isInLottoNumberList(winningNumbers.getLotto());
     }
 
     public boolean isBonusNumberContain (LottoNumber number) {
@@ -40,17 +36,17 @@ public class WinningNumbers {
     }
 
     private void validateWinningNumbersSize() {
-        if (winningNumbers.size() != LOTTO_SIZE) {
+        if (winningNumbers.getLotto().size() != Lotto.LOTTO_MAX_SIZE) {
             throw new IllegalArgumentException("[ERROR] 당첨 번호 개수는 6개로 입력해주세요.");
         }
     }
 
     private boolean isWinningNumberInRange() {
-        List<Integer> validLottoNumber = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
+        List<Integer> validLottoNumber = IntStream.rangeClosed(LottoNumber.LOTTO_MIN_NUMBER, LottoNumber.LOTTO_MAX_NUMBER)
             .boxed()
             .collect(Collectors.toList());
 
-        return winningNumbers.stream()
+        return winningNumbers.getLotto().stream()
             .allMatch(winningNumber -> winningNumber.isInList(validLottoNumber));
     }
 }

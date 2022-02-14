@@ -4,8 +4,8 @@ import java.util.List;
 
 public class LottoNumber {
 
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
+    public static final int LOTTO_MIN_NUMBER = 1;
+    public static final int LOTTO_MAX_NUMBER = 45;
 
     private final int lottoNumber;
 
