@@ -32,14 +32,14 @@ class LottoGameTest {
 
         final LottoNumber bonusBall = new LottoNumber(8);
 
-        final WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumber), bonusBall);
+        final WinningLotto winningLotto = new WinningLotto(Lotto.handOperatedLotto(winningNumber), bonusBall);
 
         lottoGame = new LottoGame(lottos, winningLotto);
     }
 
     private Lotto createLotto(final List<Integer> numbers) {
-        return new
-            Lotto(numbers.stream()
+        return
+            Lotto.handOperatedLotto(numbers.stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList()));
     }

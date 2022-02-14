@@ -18,13 +18,13 @@ class WinningLottoTest {
 
         final LottoNumber bonusBall = new LottoNumber(8);
 
-        final WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumber), bonusBall);
+        final WinningLotto winningLotto = new WinningLotto(Lotto.handOperatedLotto(winningNumber), bonusBall);
 
         final List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 7).stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
 
-        final Lotto lotto = new Lotto(lottoNumbers);
+        final Lotto lotto = Lotto.handOperatedLotto(lottoNumbers);
 
         assertThat(winningLotto.matchLotto(lotto)).isEqualTo(Ranking.THIRD);
     }

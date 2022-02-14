@@ -13,9 +13,9 @@ class LottosTest {
         final Lottos lottos = new Lottos(new ArrayList<>());
 
         // when
-        lottos.storeLotto(new Lotto());
-        lottos.storeLotto(new Lotto());
-        lottos.storeLotto(new Lotto());
+        lottos.storeLotto(Lotto.autoLotto());
+        lottos.storeLotto(Lotto.autoLotto());
+        lottos.storeLotto(Lotto.autoLotto());
 
         // then
         assertThat(lottos.getLottos().size()).isEqualTo(3);
