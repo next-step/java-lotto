@@ -13,7 +13,7 @@ public class Parser {
     private static final int CUSTOM_DELIMITER = 1;
     private static final int PARSED_FORMULAR = 2;
     private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\\n(.*)");
-
+    private static final int DIVIDE_NEGATIVE_NUMBER = 0;
     private String parsedFormular;
     private String customDelimiter;
 
@@ -40,7 +40,7 @@ public class Parser {
     private void validateFormular(List<String> refinedFormular) {
         List<Integer> integeredFormular = stringListToInteger(refinedFormular);
         for (int formularNumber : integeredFormular) {
-            if (formularNumber < 0) {
+            if (formularNumber < DIVIDE_NEGATIVE_NUMBER) {
                 throw new RuntimeException(OutputView.ERROR + ERROR_NEGATIVE_NUMBER);
             }
         }
