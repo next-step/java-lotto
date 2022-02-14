@@ -10,19 +10,19 @@ public class LottoStatistics {
     private static final int MATCH_FIVE = 5;
 
     private final WinningLotto winningLottery;
-    private final List<Lotto> lottoList;
+    private final Lottos lottos;
     private List<Rank> resultStatistics = new ArrayList<>();
 
-    public LottoStatistics(WinningLotto winningLottery, List<Lotto> lottoList) {
+    public LottoStatistics(WinningLotto winningLottery, Lottos lottoList) {
         this.winningLottery = winningLottery;
-        this.lottoList = lottoList;
+        this.lottos = lottoList;
         this.resultStatistics = compareNumber();
     }
 
     private List<Rank> compareNumber() {
-        for (int i = 0; i < lottoList.size(); i++) {
-            int count = matchWinningNumbers(lottoList.get(i));
-            resultStatistics.add(getRank(count, lottoList.get(i)));
+        for (int i = 0; i < lottos.getLottoLists().size(); i++) {
+            int count = matchWinningNumbers(lottos.getLottoLists().get(i));
+            resultStatistics.add(getRank(count, lottos.getLottoLists().get(i)));
         }
         return resultStatistics;
     }

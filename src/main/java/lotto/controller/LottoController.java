@@ -48,7 +48,7 @@ public class LottoController {
     }
 
     private void statisticsProcess() {
-        LottoStatistics lottoStatistics = new LottoStatistics(winningLottery, lottos.getLottoLists());
+        LottoStatistics lottoStatistics = new LottoStatistics(winningLottery, lottos);
 
         ResultView.printLottoStatistics(lottoStatistics.getResultStatistics(),
             LottoEarningRate.getLottoEarningRate(lottoStatistics.getResultStatistics(),
