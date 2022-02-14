@@ -23,17 +23,17 @@ public class StringCalculator {
 
     public int add() {
         Parser parser = new Parser(input);
-        List<String> refinedFormular;
+
 
         if (!Objects.isNull(parser.getCustomDelimiter())) {
             String delimeter = parser.getCustomDelimiter();
-            refinedFormular = Arrays.asList(parser.getParsedFormular().split(delimeter + "|,|:"));
+            List<String> refinedFormular = Arrays.asList(parser.getParsedFormular().split(delimeter + "|,|:"));
             return parser.refineToIntegerList(refinedFormular).stream()
                 .mapToInt(Integer::intValue)
                 .sum();
         }
 
-        refinedFormular = Arrays.asList(parser.getParsedFormular().split(",|:"));
+        List<String> refinedFormular = Arrays.asList(parser.getParsedFormular().split(",|:"));
 
         return parser.refineToIntegerList(refinedFormular).stream()
             .mapToInt(Integer::intValue)
