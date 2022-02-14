@@ -16,7 +16,6 @@ class LottoBallsTest {
     @DisplayName("로또 번호는 1부터 45까지를 가진다.")
     @Test
     void When_로또_공_생성_Then_범위는_1부터_45() {
-        // then
         for (int i = 1; i <= 45; i++) {
             assertThat(LottoBalls.from(i)).isNotNull();
         }
@@ -25,7 +24,6 @@ class LottoBallsTest {
     @DisplayName("랜덤 로또 생성은 생성할 때마다 번호가 다르다")
     @Test
     void When_로또_번호_리스트_섞기_Then_섞기_전과_요소의_순서가_다름() {
-        // then
         assertThat(LottoBalls.getRandomLottoNumber()).isNotEqualTo(LottoBalls.getRandomLottoNumber());
     }
 
@@ -33,22 +31,18 @@ class LottoBallsTest {
     @DisplayName("임의의 6개의 로또번호가 생성된다.")
     @Test
     void When_로또번호_생성_Then_로또볼_에서_6개를_뽑는다() {
-        // when
         final Set<LottoNumber> lottoNumbers = LottoBalls.getRandomLottoNumber();
 
-        // then
         assertThat(lottoNumbers.size()).isEqualTo(6);
     }
 
     @DisplayName("생성된 로또 번호는 오름차순으로 정렬 된다.")
     @Test
     void When_로또번호_생성_Then_오른_차순_정렬됨() {
-        // when
         final List<Integer> lottoNumbers = LottoBalls.getRandomLottoNumber().stream()
                 .map(LottoNumber::getValue)
                 .collect(Collectors.toList());
 
-        // then
         int prev = 0;
         for (int number : lottoNumbers) {
             assertTrue(number > prev);
@@ -69,21 +63,18 @@ class LottoBallsTest {
                 .map(LottoNumber::getValue)
                 .collect(Collectors.toList());
 
-        // then
         assertThat(returnValues).isEqualTo(Arrays.asList(3, 4, 5, 6, 7, 8));
     }
 
     @DisplayName("로또 번호 하나를 가져올 때 1 ~ 45 범위의 숫자가 아니면 예외가 발생한다.")
     @Test
     void When_로또_숫자_범위를_벗어난_한_개의_수_Then_예외_발생() {
-        // then
         assertThrows(IllegalArgumentException.class, () -> LottoBalls.from(46));
     }
 
     @DisplayName("로또 번호들을 가져올 때 1 ~ 45 범위의 숫자가 아니면 예외가 발생한다.")
     @Test
     void When_로또_숫자_범위를_벗어난_여러개의_수_Then_예외_발생() {
-        // then
         assertThrows(IllegalArgumentException.class,
                 () -> LottoBalls.of(Arrays.asList(1, 2, 3, 4, 5, 46)));
     }

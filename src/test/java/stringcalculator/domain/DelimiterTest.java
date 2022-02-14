@@ -12,7 +12,6 @@ class DelimiterTest {
     @ValueSource(strings = {"3a3", "123", "22a", "aa3"})
     @ParameterizedTest
     void Given_시작이나_끝이_숫자인_구분자_When_객체_생성_Then_예외_발생(final String input) {
-
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> new Delimiter(input));
     }

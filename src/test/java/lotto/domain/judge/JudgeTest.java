@@ -15,15 +15,12 @@ class JudgeTest {
     @Test
     void Given_정답_번호_When_등수를_판별_Then_구매한_로또_만큼_등수_리스트_반환() {
 
-        // given
         final Lottos lottos = Lottos.createLottos(new ArrayList<>(),new Budget("14000"));
         final Judge judge = new Judge(new CorrectNumbers(
                 "1,2,3,4,5,6", "7"));
 
-        // when
         final int size = judge.getRanks(lottos).get().size();
 
-        // then
         assertThat(size).isEqualTo(14);
     }
 }
