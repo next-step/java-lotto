@@ -13,9 +13,8 @@ public class OutputView {
     private static final String WINNING_STATISTICS_MESSAGE = "\n당첨 통계\n---------";
     private static final int ZERO = 0;
     
-    public static int getLottoCount(int count) {
-        System.out.println(count + "개를 구매했습니다.");
-        return count;
+    public static void outputLottoCount(int count, int manualCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualCount, count - manualCount);
     }
     
     public static void printLottos(List<Lotto> lottos) {
