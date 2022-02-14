@@ -1,6 +1,8 @@
 package lotto.controller;
 
 
+import java.util.List;
+import lotto.domain.Lotto;
 import lotto.domain.LottoCalculation;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
@@ -22,14 +24,17 @@ public class Controller {
     }
 
     private static void purchaseLottoAutomatical(LottoCalculation lottoCalculation) {
-        Winning winning = new Winning(InputView.inputWinningLottoNumber(), new LottoNumber(InputView.inputBonusLottoNumber()));
+        String winningLottoNumber = InputView.inputWinningLottoNumber();
+        LottoNumber bonusLottoNumber = new LottoNumber(InputView.inputBonusLottoNumber());
+        Winning winning = new Winning(winningLottoNumber, bonusLottoNumber);
         RankDTO rankDto = lottoCalculation.getRankResult(winning);
         OutputView.printRankResult(rankDto);
     }
 
     private static void purchaseLottoManual(LottoCalculation lottoCalculation, Money money) {
         LottoTicket lottoTicket = new LottoTicket(money, InputView.inputLottoTicket());
-        Lottos lottos = new Lottos(InputView.inputPurchaseManualLotto(lottoTicket.getLottoTicketValue()));
+        List<Lotto> purchaseManualLotto = InputView.inputPurchaseManualLotto(lottoTicket.getLottoTicketValue());
+        Lottos lottos = new Lottos(purchaseManualLotto);
         LottoCalculationDTO lottoCalculationDTO = lottoCalculation.purchaseLottos(lottos);
         OutputView.printCountMessage(lottoCalculationDTO);
     }
