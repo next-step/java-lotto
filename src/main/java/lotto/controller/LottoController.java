@@ -3,7 +3,6 @@ package lotto.controller;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
-import lotto.domain.LottoEarningRate;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoPrice;
 import lotto.domain.LottoStatistics;
@@ -49,10 +48,8 @@ public class LottoController {
 
     private void statisticsProcess() {
         LottoStatistics lottoStatistics = new LottoStatistics(winningLottery, lottos);
-
-        ResultView.printLottoStatistics(lottoStatistics.getResultStatistics(),
-            LottoEarningRate.getLottoEarningRate(lottoStatistics.getResultStatistics(),
-                lottoPrice));
+        String lottoEaringRate = lottoStatistics.getLottoEarningRate(lottoStatistics.getResultStatistics(), lottoPrice);
+        ResultView.printLottoStatistics(lottoStatistics.getResultStatistics(), lottoEaringRate);
     }
 
     public static Lotto refineToLottoList(String unrefinedNumber) {

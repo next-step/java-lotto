@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,6 +48,14 @@ public class LottoStatistics {
 
     private boolean isWinningNumber(final LottoNumber lottoNumber) {
         return winningLottery.getWinningNumber().getLottoNumbers().contains(lottoNumber);
+    }
+
+    public String getLottoEarningRate(List<Rank> resultStatistics, LottoPrice lottoPrice) {
+        double totalPrice = 0;
+        for (Rank statistics : resultStatistics) {
+            totalPrice += statistics.getMoney();
+        }
+        return String.format("%.2f", totalPrice / lottoPrice.getPrice());
     }
 
     public List<Rank> getResultStatistics() {
