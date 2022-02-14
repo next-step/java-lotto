@@ -4,7 +4,7 @@ import java.util.List;
 
 public class WinningLotto extends Lotto {
 
-    private Integer bonusNumber;
+    private LottoNumber bonusNumber;
 
     public WinningLotto(List<Integer> numbers) {
         super(numbers);
@@ -15,25 +15,24 @@ public class WinningLotto extends Lotto {
         setBonusNumber(bonusNumber);
     }
 
-    public void setBonusNumber(Integer bonusNumber){
-        validateRange(bonusNumber);
-        validateDuplicateBonus(bonusNumber, this.getLotto());
-        this.bonusNumber = bonusNumber;
+    public void setBonusNumber(Integer bonusNumber) {
+        validateDuplicateBonus(bonusNumber);
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public Integer getBonusNumber() {
+    public LottoNumber getBonusNumber() {
         return bonusNumber;
     }
 
-    private static void validateDuplicateBonus(int number, List<Integer> numbers) {
-        if (numbers.contains(number)) {
+    private void validateDuplicateBonus(int number) {
+        if (this.contains(number)) {
             throw new IllegalArgumentException("[ERROR] 당첨 번호와 중복된 값입니다. 다시 입력해주세요.");
         }
     }
 
     public String compareLotto(Lotto lotto) {
         final int count = match(lotto);
-        boolean isBonusNumber = lotto.contains(bonusNumber);
+        boolean isBonusNumber = lotto.contains(bonusNumber.getNumber());
         if (count != 5) {
             isBonusNumber = false;
         }

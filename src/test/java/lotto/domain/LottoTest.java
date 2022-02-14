@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.util.InputValidator;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,8 +28,12 @@ class LottoTest {
 
     @ParameterizedTest
     @MethodSource
-    void 유효한_당첨번호_입력_시_통과(List<Integer> numbers) {
-        assertThat(new Lotto(numbers).getLotto()).isEqualTo(numbers);
+    void 유효한_당첨번호_입력_시_통과(List<Integer> inputNumbers) {
+        List<LottoNumber> lottoNumbers = new Lotto(inputNumbers).getLotto();
+        List<Integer> numbers = lottoNumbers.stream()
+            .map(LottoNumber::getNumber)
+            .collect(Collectors.toList());
+        assertThat(numbers).isEqualTo(inputNumbers);
     }
 
     @ParameterizedTest

@@ -23,7 +23,7 @@ class WinningLottoTest {
     @MethodSource
     void 유효한_당첨_번호인_경우(int number, List<Integer> numbers) {
         assertThat(number).isEqualTo(
-            new WinningLotto(numbers, number).getBonusNumber());
+            new WinningLotto(numbers, number).getBonusNumber().getNumber());
     }
 
     private static Stream<Arguments> 당첨_번호와_중복되는_경우() {

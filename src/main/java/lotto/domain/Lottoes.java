@@ -22,8 +22,7 @@ public class Lottoes {
 
     // TODO : 난수를 생성하는 로직과 Lotto 인스턴스를 생성하는 로직이 한 곳에 있으므로 테스트가 어려움
     private Lotto setLotto() {
-        final List<Integer> lottoNumbers = GeneratorNumber.generateLottoNumbers();
-        return new Lotto(new ArrayList<>(lottoNumbers));
+        return new Lotto(GeneratorNumber.generateLottoNumbers());
     }
 
     public List<Lotto> getLottos() {
