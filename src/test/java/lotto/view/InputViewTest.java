@@ -1,11 +1,14 @@
 package lotto.view;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class InputViewTest {
 
@@ -40,5 +43,15 @@ class InputViewTest {
         String returnValue = InputView.inputWinningNumbers();
 
         assertThat(returnValue).isEqualTo("1,2,3,4,5,6");
+    }
+
+    @DisplayName("입력으로 공백만 들어오면 예외를 발생시킨다.")
+    @ValueSource(strings = {" ", "  ", "\t", "\n"})
+    @ParameterizedTest
+    void When_공백_Then_예외_발생(String input) {
+        InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+        System.setIn(inputStream);
+
+        assertThrows(IllegalArgumentException.class, () -> InputView.inputBudget());
     }
 }
