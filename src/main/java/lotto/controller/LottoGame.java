@@ -20,7 +20,7 @@ public class LottoGame {
     
     private void showResult() {
         double reward = OutputView.printResult(user.getRanks());
-        OutputView.printYield(LottoRules.calculateYield(reward, user.getCount()));
+        OutputView.printYield(LottoRules.calculateYield(reward, user.getLottoCount()));
     }
     
     private void settingWinningNumber() {

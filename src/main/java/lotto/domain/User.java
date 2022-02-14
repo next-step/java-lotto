@@ -7,14 +7,16 @@ import java.util.Map;
 
 public class User {
     
-    private final int count;
+    private final int autoCount;
+    private final int manualCount;
     private final List<Lotto> lottos;
     private Statistics statistics;
     
-    public User(int count) {
-        this.count = count;
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
+    public User(int count, List<Lotto> manualLottos) {
+        this.manualCount = manualLottos.size();
+        this.autoCount = count - manualCount;
+        List<Lotto> lottos = manualLottos;
+        for (int i = 0; i < autoCount; i++) {
             lottos.add(new Lotto(makeRandomNumbers()));
         }
         this.lottos = lottos;
@@ -44,8 +46,8 @@ public class User {
         statistics.setRanks(winningNumber, lottos);
     }
     
-    public int getCount() {
-        return count;
+    public int getLottoCount() {
+        return manualCount + autoCount;
     }
     
 }
