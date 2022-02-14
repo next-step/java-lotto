@@ -19,7 +19,8 @@ public class LottoController {
 
     private static LottoController lottoController = null;
 
-    private LottoController() {}
+    private LottoController() {
+    }
 
     public static LottoController getInstance() {
         if (lottoController == null) {
@@ -58,11 +59,11 @@ public class LottoController {
 
     private List<Ticket> getManualTicketNumbers(final int manualTickets) {
         List<Ticket> ticketList = new ArrayList<>();
-        for (List<Integer> numbers: InputView.getManualLottoNumbers(manualTickets)) {
-            ticketList.add(new Ticket(numbers.stream()
-                .map(Number::new)
-                .collect(Collectors.toList())
-            ));
+        for (List<Integer> numbers : InputView.getManualLottoNumbers(manualTickets)) {
+            Ticket ticket = new Ticket(
+                numbers.stream().map(Number::new).collect(Collectors.toList())
+            );
+            ticketList.add(ticket);
         }
         return ticketList;
     }
