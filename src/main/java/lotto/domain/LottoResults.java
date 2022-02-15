@@ -11,7 +11,7 @@ import java.util.Map;
 public class LottoResults {
 
     private static final int ZERO = 0;
-    private static final int DECIMAL_PLACE = 2;
+    private static final int DECIMAL_POINT_PLACE = 2;
 
     private final Map<Ranking, Integer> totalResult;
 
@@ -38,7 +38,7 @@ public class LottoResults {
                 ranking.multiplyCountAndWinnerPrice(totalResult.get(ranking)))
             .sum());
 
-        return totalWinnerPrize.divide(BigDecimal.valueOf(money.getMoney()), DECIMAL_PLACE,
+        return totalWinnerPrize.divide(BigDecimal.valueOf(money.getMoney()), DECIMAL_POINT_PLACE,
             RoundingMode.HALF_UP);
     }
 
