@@ -64,13 +64,4 @@ class LottoGameTest {
             () -> assertThat(totalResult).containsEntry(Ranking.FIFTH, 1)
         );
     }
-
-    @Test
-    void 수익률을_계산할_수_있다() {
-        final LottoResults lottoResults = lottoGame.findWinner();
-
-        final BigDecimal yield = lottoResults.calculateYield(new Money(5000));
-
-        assertThat(yield).isEqualTo(BigDecimal.valueOf(40601100, 2));
-    }
 }
