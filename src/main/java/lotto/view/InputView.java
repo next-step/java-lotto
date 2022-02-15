@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import lotto.model.Lotto;
+import java.util.stream.Collectors;
 import lotto.model.LottoNumber;
 
 public class InputView {
@@ -21,25 +21,27 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public static int inputAmountOfManualLotto(){
+    public static int inputManualLottoCount(){
         System.out.println(THE_NUMBER_OF_MANUAL_LOTTO_INPUT_MESSAGE);
         return SCANNER.nextInt();
     }
 
-    public static List<List<String>> inputManualLottoNumber(int amountOfManualLotto){
-        List<List<String>> manualLottos = new ArrayList<>();
+    public static List<List<Integer>> inputManualLottoNumber(int amountOfManualLotto){
+        List<List<Integer>> manualLottos = new ArrayList<>();
         System.out.println(MANUAL_LOTTO_NUMBER_INPUT_MESSAGE);
         for(int i=0; i<amountOfManualLotto; i++){
-            String manualLottoNumberInput=SCANNER.nextLine();
-            String [] manualLottoNumber =manualLottoNumberInput.split(" |,");
-            manualLottos.add(Arrays.asList(manualLottoNumber));
+            String manualLottoNumberInput=SCANNER.next();
+            String [] manualLottoNumber =manualLottoNumberInput.split("[ ,]");
+            List<Integer> list= Arrays.stream(manualLottoNumber).map(Integer::parseInt).collect(
+                Collectors.toList());
+            manualLottos.add(list);
         }
         return manualLottos;
     }
     public static List<String> inputWinningNumbers() {
         System.out.println(WINNING__NUMBER_INPUT_GUIDE_MESSAGE);
-        String inputWinningNumbers = SCANNER.nextLine();
-        return Arrays.asList(inputWinningNumbers.split(" |,"));
+        String inputWinningNumbers = SCANNER.next();
+        return Arrays.asList(inputWinningNumbers.split("[ ,]"));
     }
 
     public static LottoNumber inputBonusBall() {
