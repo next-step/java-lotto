@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,10 +14,15 @@ public class WinningLotto {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public WinningLotto(List<LottoNumber> lottoNumbers) {
+    private WinningLotto(List<LottoNumber> lottoNumbers) {
         validateDuplicate(lottoNumbers);
+        validateWinningSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
-        validateWinningSize();
+    }
+
+    public static WinningLotto of(List<LottoNumber> winningLottoLine, LottoNumber bonusBall) {
+        winningLottoLine.add(bonusBall);
+        return new WinningLotto(new ArrayList<>(winningLottoLine));
     }
 
     public LottoNumber bonusBall() {
@@ -37,14 +43,14 @@ public class WinningLotto {
         return lotto.hasValue(lottoNumbers.get(BONUS_IDX));
     }
 
-    private void validateDuplicate(List<LottoNumber> lottoNumbers) {
+    private static void validateDuplicate(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> removeDuplicates = new HashSet<>(lottoNumbers);
         if (removeDuplicates.size() != lottoNumbers.size()) {
             throw new IllegalArgumentException(WINNING_LOTTO_DUPLICATE_EXCEPTION_MESSAGE);
         }
     }
 
-    private void validateWinningSize() {
+    private static void validateWinningSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != WINNING_LOTTO_SIZE) {
             throw new IllegalArgumentException(WINNING_LOTTO_SIZE_EXCEPTION_MESSAGE);
         }

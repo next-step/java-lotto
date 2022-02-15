@@ -24,7 +24,7 @@ public class LottoTicketTest {
             .boxed()
             .map(LottoNumber::new)
             .collect(Collectors.toSet());
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = Lotto.from(lottoNumbers);
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0 ; i < size; i++) {
             lottos.add(lotto);
