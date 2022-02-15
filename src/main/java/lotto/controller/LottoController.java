@@ -42,9 +42,7 @@ public class LottoController {
 
         lottoResultView.printLottos(allLotto, autoLottoAmount, handOperatedLottoAmount);
 
-        final List<LottoNumber> winningNumbers = createWinningNumbers();
-        final LottoNumber bonusBall = new LottoNumber(lottoInputView.inputBonusBall());
-        final WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), bonusBall);
+        final WinningLotto winningLotto = createWinningLotto();
         final LottoGame lottoGame = new LottoGame(allLotto, winningLotto);
         final LottoResults lottoResults = lottoGame.findWinner();
         lottoResultView.finishGame(lottoResults, lottoResults.calculateYield(money));
@@ -58,6 +56,12 @@ public class LottoController {
                 lottoInputView.inputHandOperatedLottoNumbers());
         }
         lottoShop.buyAutoLotto(allLotto, autoLottoAmount);
+    }
+
+    private WinningLotto createWinningLotto() {
+        final List<LottoNumber> winningNumbers = createWinningNumbers();
+        final LottoNumber bonusBall = new LottoNumber(lottoInputView.inputBonusBall());
+        return new WinningLotto(new Lotto(winningNumbers), bonusBall);
     }
 
     private List<LottoNumber> createWinningNumbers() {
