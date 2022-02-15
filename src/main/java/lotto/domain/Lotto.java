@@ -5,7 +5,6 @@ import static lotto.util.Constant.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
-import lotto.view.ResultView;
 
 public class Lotto {
 
