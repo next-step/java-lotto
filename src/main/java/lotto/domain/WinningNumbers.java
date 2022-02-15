@@ -1,30 +1,22 @@
 package lotto.domain;
 
-import static lotto.util.Constant.*;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningNumbers {
 
-    private final List<LottoNumber> ballNumbers;
+    private final LottoTicket ballNumbers;
     private final LottoNumber bonusBall;
 
     public WinningNumbers(final List<Integer> winningNumbers, final int bonusBall) {
-        this(winningNumbers.stream().map(LottoNumber::new).collect(Collectors.toList()),
+        this(new LottoTicket(
+                winningNumbers.stream().map(LottoNumber::from).collect(Collectors.toList())),
             new LottoNumber(bonusBall));
     }
 
-    public WinningNumbers(final List<LottoNumber> winningNumbers, final LottoNumber bonusBall) {
-        validateDuplicate(winningNumbers);
+    public WinningNumbers(final LottoTicket winningNumbers, final LottoNumber bonusBall) {
         this.ballNumbers = winningNumbers;
         this.bonusBall = bonusBall;
-    }
-
-    private void validateDuplicate(List<LottoNumber> winningNumbers) {
-        if (winningNumbers.size() != winningNumbers.stream().distinct().count()) {
-            throw new IllegalArgumentException(DUPLICATE_ELEMENT);
-        }
     }
 
     public LottoRank getRankForLottoTicket(LottoTicket lottoTicket) {

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import static lotto.util.Constant.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
@@ -19,12 +18,12 @@ class LottoTest {
         lotto = new Lotto(10000);
     }
 
-    @Test
-    void 로또숫자들은_1부터45까지의_중복되지_않은_6개의_수들이다() {
-        List<LottoNumber> lottoNumbers = lotto.generateRandoms();
-        long given = lottoNumbers.stream().distinct().count();
-        assertThat(given).isEqualTo(LOTTO_SIZE);
-    }
+//    @Test
+//    void 로또숫자들은_1부터45까지의_중복되지_않은_6개의_수들이다() {
+//        List<LottoNumber> lottoNumbers = lotto.generateRandoms();
+//        long given = lottoNumbers.stream().distinct().count();
+//        assertThat(given).isEqualTo(LOTTO_SIZE);
+//    }
 
     @ValueSource(ints = {2, 3, 4})
     @ParameterizedTest

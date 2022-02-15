@@ -14,7 +14,6 @@ public class Lotto {
     public Lotto(int userMoney) {
         int ticketNumber = buyLottoTickets(userMoney);
         this.lottoTickets = generateLottoTickets(ticketNumber);
-        ResultView.printLottoTicketsInfo(lottoTickets);
     }
 
     private int buyLottoTickets(int money) {

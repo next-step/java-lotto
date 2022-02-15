@@ -11,7 +11,7 @@ public class LottoTicket {
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(final int... numbers) {
-        this(Arrays.stream(numbers).mapToObj(LottoNumber::new).collect(Collectors.toList()));
+        this(Arrays.stream(numbers).mapToObj(LottoNumber::from).collect(Collectors.toList()));
     }
 
     public LottoTicket(final List<LottoNumber> numbers) {
@@ -41,7 +41,7 @@ public class LottoTicket {
         return lottoNumbers.toString();
     }
 
-    public int getMatchCount(List<LottoNumber> winningNumbers) {
+    public int getMatchCount(LottoTicket winningNumbers) {
         int matchCount = 0;
         for (LottoNumber lottoNumber : lottoNumbers) {
             if (winningNumbers.contains(lottoNumber)) {
