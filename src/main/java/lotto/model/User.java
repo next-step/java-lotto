@@ -20,7 +20,7 @@ public class User {
     }
 
     public List<Lotto> getLottos() {
-        return this.lottos;
+        return lottos;
     }
 
 }
