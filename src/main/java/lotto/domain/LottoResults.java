@@ -17,17 +17,6 @@ public class LottoResults {
 
     public LottoResults(final Map<Ranking, Integer> totalResult) {
         this.totalResult = totalResult;
-        initializeTotalResult(totalResult);
-    }
-
-    private void initializeTotalResult(final Map<Ranking, Integer> totalResult) {
-        Arrays.stream(Ranking.values())
-            .forEach(ranking -> totalResult.put(ranking, ZERO));
-    }
-
-    public void updateResults(final Ranking ranking) {
-        Integer currentCount = totalResult.get(ranking);
-        totalResult.put(ranking, ++currentCount);
     }
 
     public BigDecimal calculateYield(final Money money) {

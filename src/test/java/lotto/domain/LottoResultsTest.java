@@ -1,42 +1,46 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class LottoResultsTest {
 
-    @Test
-    void 결과를_업데이트_할_수_있다() {
-        final Map<Ranking, Integer> totalResult = new HashMap<>();
-        final LottoResults lottoResults = new LottoResults(totalResult);
+    private LottoGame lottoGame;
 
-        lottoResults.updateResults(Ranking.FIRST);
-        lottoResults.updateResults(Ranking.SECOND);
+    @BeforeEach
+    void setUp() {
+        List<Lotto> lottos = new ArrayList<>();
+        final List<LottoNumber> lottoNumbers1 = Arrays.asList(1, 2, 3, 4, 5, 6).stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+        final List<LottoNumber> lottoNumbers2 = Arrays.asList(1, 2, 3, 4, 5, 7).stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+        lottos.add(new Lotto(lottoNumbers1));
+        lottos.add(new Lotto(lottoNumbers2));
 
-        assertAll(
-            () -> assertThat(lottoResults.getTotalResult()).containsEntry(Ranking.FIRST, 1),
-            () -> assertThat(lottoResults.getTotalResult()).containsEntry(Ranking.SECOND, 1),
-            () -> assertThat(lottoResults.getTotalResult()).containsEntry(Ranking.THIRD, 0),
-            () -> assertThat(lottoResults.getTotalResult()).containsEntry(Ranking.FOURTH, 0),
-            () -> assertThat(lottoResults.getTotalResult()).containsEntry(Ranking.FIFTH, 0)
-        );
+        Lottos userLottos = new Lottos(lottos);
+
+        WinningLotto winningLotto = new WinningLotto(new Lotto(lottoNumbers1), new LottoNumber(8));
+
+        lottoGame = new LottoGame(userLottos, winningLotto);
     }
 
     @Test
     void 수익률을_계산할_수_있다() {
-        final Map<Ranking, Integer> totalResult = new HashMap<>();
-        final LottoResults lottoResults = new LottoResults(totalResult);
-
-        lottoResults.updateResults(Ranking.FIRST);
-        lottoResults.updateResults(Ranking.SECOND);
+        LottoResults lottoResults = lottoGame.findWinner();
 
         final BigDecimal yield = lottoResults.calculateYield(new Money(10000));
 
-        assertThat(yield).isEqualTo(BigDecimal.valueOf(20300000, 2));
+        assertThat(yield).isEqualTo(BigDecimal.valueOf(20015000, 2));
     }
 }
