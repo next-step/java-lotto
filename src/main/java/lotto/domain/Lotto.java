@@ -2,10 +2,9 @@ package lotto.domain;
 
 import static lotto.util.Constant.*;
 
-import java.util.EnumMap;
+import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
 import lotto.view.ResultView;
 
 public class Lotto {
@@ -34,15 +33,7 @@ public class Lotto {
         return lottoTickets.size();
     }
 
-    public LottoStatistic getWinningResult(WinningNumbers winningNumbers) {
-        Map<LottoRank, Integer> lottoRankResults = new EnumMap<>(LottoRank.class);
-
-        this.lottoTickets.forEach(ticket -> {
-            LottoRank rank = winningNumbers.getRankForLottoTicket(ticket);
-            if (rank != null) {
-                lottoRankResults.put(rank, lottoRankResults.getOrDefault(rank, 0) + 1);
-            }
-        });
-        return new LottoStatistic(lottoRankResults);
+    public List<LottoTicket> getLottoTickets() {
+        return Collections.unmodifiableList(lottoTickets);
     }
 }

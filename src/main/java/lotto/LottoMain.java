@@ -20,7 +20,8 @@ public class LottoMain {
         List<Integer> pickedNumbers = InputSpliter.split(winnings);
         WinningNumbers winningNumbers = new WinningNumbers(pickedNumbers, bonusBall);
 
-        LottoStatistic lottoResult = lotto.getWinningResult(winningNumbers);
+        LottoStatistic lottoResult = LottoStatistic.createWinningResult(lotto.getLottoTickets(),
+            winningNumbers);
         ResultView.printStatistic(lottoResult);
         ResultView.printProfit(lottoResult.getProfit(userMoney));
 
