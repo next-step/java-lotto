@@ -1,7 +1,7 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Lotto {
@@ -10,47 +10,40 @@ public class Lotto {
     private static final int FIVE_MATCHING = 5;
     private static final String LOTTO_NUMBER_VALIDATION_MESSAGE = "로또는 6개의 숫자입니다";
 
-    private final List<Integer> lottoNumbers;
-    private int matchCount;
-    private boolean bonusMatch;
+    private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers){
         validateLotto(lottoNumbers);
-        Collections.sort(lottoNumbers);
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+        Collections.sort(lottoNumbers, (o1, o2) -> {
+            if(o1.getNumber()>o2.getNumber()){
+                return 1;
+            }
+            return -1;
+        });
+        this.lottoNumbers= lottoNumbers;
     }
-
-    public Lotto(List<Integer> lottoNumbers, int matchCount, boolean bonusMatch) {
+    public Lotto(List<LottoNumber> lottoNumbers, int matchCount, boolean bonusMatch) {
         this(lottoNumbers);
-        this.matchCount = matchCount;
-        this.bonusMatch = bonusMatch;
     }
 
-    private void validateLotto(List<Integer> lottoNumbers) {
+    private void validateLotto(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != MAX_LOTTO_LENGTH) {
             throw new IllegalArgumentException(LOTTO_NUMBER_VALIDATION_MESSAGE);
         }
     }
 
-    public int matchLottoWithWinningNumber(WinningNumber winningNumber) {
-        matchCount = 0;
-        bonusMatch = false;
+    public MatchInfo matchLottoWithWinningNumber(WinningNumber winningNumber) {
+        int matchCount;
+        boolean bonusMatch = false;
         matchCount = winningNumber.findMatchingCount(lottoNumbers);
         if (matchCount == FIVE_MATCHING) {
             bonusMatch = winningNumber.isContainBonusBall(lottoNumbers);
         }
-        return matchCount;
+        return new MatchInfo(matchCount,bonusMatch);
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 
-    public int getMatchCount() {
-        return matchCount;
-    }
-
-    public boolean getBonusMatch() {
-        return bonusMatch;
-    }
 }
