@@ -1,25 +1,27 @@
 package lotto.view;
 
-import lotto.domain.Lottos;
-import lotto.domain.vo.RankCounts;
-import lotto.domain.dto.ResultDto;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.statistics.dto.ResultDto;
+import lotto.domain.statistics.vo.RankCounts;
 
 public class PrintView {
 
-    private final static String RANK_FAIL = "FAIL";
-    private final static String RANK_SECOND = "SECOND";
-    private final static String FAIL_MATCH_COUNT = "0-2개";
-    private final static String BONUS_BALL_MATCH = "보너스 볼 일치";
+    private static final String NUMBER_OF_LOTTO_FORMAT = "수동으로 %d장, 자동으로 %d장을 구매했습니다.%n";
+    private static final String RANK_SECOND = "SECOND";
+    private static final String RANK_SECOND_RESULT_FORMAT = "%s개 일치, 보너스 볼 일치(%d원) - %d개%n";
+    private static final String NOT_RANK_SECOND_RESULT_FORMAT = "%s개 일치 (%d원) - %d개%n";
+    private static final int MIN_WINNING_MATCH_COUNT = 3;
+    private static final String FAIL_MATCH_COUNT_RESULT = "0-2";
+    private static final String PROFIT_RATE_FORMAT = "총 수익률은 %.2f 입니다. (기준:1)%n";
 
-    private PrintView() {
-    }
+    private PrintView() {}
 
-    public static void printNumberOfLotto(final int size) {
-        System.out.printf("%d개를 구매했습니다.\n", size);
+    public static void printNumberOfLotto(final int manualSize, final int autoSize) {
+        System.out.printf(NUMBER_OF_LOTTO_FORMAT, manualSize, autoSize);
     }
 
     public static void printLottoNumber(final Lottos lottos) {
-        lottos.get().forEach(lotto -> System.out.println(lotto.get()));
+        lottos.get().forEach(System.out::println);
     }
 
     public static void printResult(final ResultDto resultDto) {
@@ -30,30 +32,28 @@ public class PrintView {
     private static void printRankCounts(RankCounts rankCounts) {
         StringBuilder result = new StringBuilder();
 
-        rankCounts.get().forEach((rank, count) -> {
-            result.append(String.format("%s 일치, ",
-                    getMatchResultString(rank.name(), rank.getMatchCount())));
-            result.append(String.format("(%d원) - %d개%n", rank.getAmount(), count));
-        });
+        rankCounts.get().forEach((rank, count) ->
+                result.append(String.format(getResultFormat(rank.name()),
+                        getMatchCount(rank.getMatchCount()), rank.getAmount(), count)));
 
         System.out.print(result);
     }
 
-    private static String getMatchResultString(final String rank, final int count) {
-        if (rank.equals(RANK_FAIL)) {
-            return FAIL_MATCH_COUNT;
-        }
-
-        StringBuilder matchString = new StringBuilder();
-        matchString.append(String.format("%d개", count));
+    private static String getResultFormat(final String rank) {
         if (rank.equals(RANK_SECOND)) {
-            matchString.append(BONUS_BALL_MATCH);
+            return RANK_SECOND_RESULT_FORMAT;
         }
+        return NOT_RANK_SECOND_RESULT_FORMAT;
+    }
 
-        return matchString.toString();
+    private static String getMatchCount(int matchCount) {
+        if (matchCount < MIN_WINNING_MATCH_COUNT) {
+            return FAIL_MATCH_COUNT_RESULT;
+        }
+        return String.valueOf(matchCount);
     }
 
     private static void printProfitRate(final double profitRatio) {
-        System.out.printf("총 수익률은 %.2f 입니다. (기준:1)\n", profitRatio);
+        System.out.printf(PROFIT_RATE_FORMAT, profitRatio);
     }
 }

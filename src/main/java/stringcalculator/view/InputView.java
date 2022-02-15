@@ -24,6 +24,16 @@ public class InputView {
         return input;
     }
 
+    private static void validatePrefix(String input) {
+        if (!input.matches(PREFIX_REGEX)) {
+            throw new IllegalArgumentException(INVALID_DELIMITER_FORMAT_EXCEPTION_MESSAGE);
+        }
+    }
+
+    private static String removePrefix(String input) {
+        return input.substring(PREFIX_LENGTH);
+    }
+
     public static String inputExpression() {
         System.out.println("식을 입력해 주세요.");
         String input = input();
@@ -34,22 +44,12 @@ public class InputView {
         return input;
     }
 
-    private static String input() {
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
-    }
-
     private static boolean isBlank(String input) {
         return input.trim().isEmpty();
     }
 
-    private static void validatePrefix(String input) {
-        if (!input.matches(PREFIX_REGEX)) {
-            throw new IllegalArgumentException(INVALID_DELIMITER_FORMAT_EXCEPTION_MESSAGE);
-        }
-    }
-
-    private static String removePrefix(String input) {
-        return input.substring(PREFIX_LENGTH);
+    private static String input() {
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
     }
 }

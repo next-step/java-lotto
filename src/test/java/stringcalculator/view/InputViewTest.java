@@ -17,14 +17,11 @@ public class InputViewTest {
     @ValueSource(strings = {"//s", "///", "//;", "//q"})
     @ParameterizedTest
     void Given_구분자_When_inputDelimiter_Then_Prefix_제거(String input) {
-        // given
         final InputStream inputStream = new ByteArrayInputStream(input.getBytes());
         System.setIn(inputStream);
 
-        // when
         final String delimiters = InputView.inputDelimiter();
 
-        // then
         assertThat(delimiters).isEqualTo(input.substring(PREFIX_LENGTH));
     }
 
@@ -32,14 +29,11 @@ public class InputViewTest {
     @ValueSource(strings = {" ", "   ", "\t"})
     @ParameterizedTest
     void Given_공백_When_구분자_입력받기_Then_그대로_반환(final String input) {
-        // given
         final InputStream inputStream = new ByteArrayInputStream(input.getBytes());
         System.setIn(inputStream);
 
-        // when
         String delimiters = InputView.inputDelimiter();
 
-        // then
         assertThat(delimiters).isEqualTo(input);
     }
 
@@ -47,11 +41,9 @@ public class InputViewTest {
     @ValueSource(strings = {",", "/a", "::", "a//"})
     @ParameterizedTest
     void Given_잘못된_prefix_When_구분자_입력받기_Then_예외발생(final String input) {
-        // given
         final InputStream inputStream = new ByteArrayInputStream(input.getBytes());
         System.setIn(inputStream);
 
-        // then
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(
                 () -> InputView.inputDelimiter());
     }
@@ -60,14 +52,11 @@ public class InputViewTest {
     @ValueSource(strings = {" ", "   ", "\t", "\n"})
     @ParameterizedTest
     void Given_공백_When_식_입력받기_Then_0을_반환(final String input) {
-        // given
         final InputStream inputStream = new ByteArrayInputStream(input.getBytes());
         System.setIn(inputStream);
 
-        // when
         final String result = InputView.inputExpression();
 
-        // then
         assertThat(result).isEqualTo("0");
     }
 }

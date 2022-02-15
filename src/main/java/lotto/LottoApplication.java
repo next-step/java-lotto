@@ -1,14 +1,13 @@
 package lotto;
 
 
-import lotto.domain.Budget;
-import lotto.domain.CorrectNumbers;
-import lotto.domain.Judge;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoRanks;
-import lotto.domain.Lottos;
-import lotto.domain.Statistics;
-import lotto.domain.dto.ResultDto;
+import java.util.List;
+import lotto.domain.budget.Budget;
+import lotto.domain.correctnumber.CorrectNumbers;
+import lotto.domain.judge.Judge;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.lottorank.LottoRanks;
+import lotto.domain.statistics.Statistics;
 import lotto.view.InputView;
 import lotto.view.PrintView;
 
@@ -17,20 +16,22 @@ public class LottoApplication {
     public static void main(String[] args) {
 
         final Budget budget = new Budget(InputView.inputBudget());
-        final Lottos lottos = Lottos.createAutoLottos(budget);
-        PrintView.printNumberOfLotto(lottos.get().size());
+        final List<String> manualLottoNumbers = InputView.inputManualLottoNumbers();
+
+        final Lottos lottos = Lottos.createLottos(manualLottoNumbers, budget);
+
+        final int manualSize = manualLottoNumbers.size();
+        PrintView.printNumberOfLotto(manualSize, budget.deductionPerLotto(manualSize).getNumberOfPurchase());
         PrintView.printLottoNumber(lottos);
 
         final CorrectNumbers correctNumbers = new CorrectNumbers(
                 InputView.inputWinningNumbers(),
-                new LottoNumber(InputView.inputBonusNumber()));
+                InputView.inputBonusNumber());
 
         final Judge judge = new Judge(correctNumbers);
-        final LottoRanks lottoRanks = judge.getRanks(lottos);
+        final LottoRanks lottoRanks = judge.getRanks(lottos.get());
 
         final Statistics statistics = new Statistics(lottoRanks);
-        final ResultDto resultDto = new ResultDto(statistics.getRankCounts(), statistics.getProfitRate());
-
-        PrintView.printResult(resultDto);
+        PrintView.printResult(statistics.getResult());
     }
 }

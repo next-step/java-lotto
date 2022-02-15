@@ -49,18 +49,23 @@
 
 ## 구현 사항
 - [X] 구입할 금액 입력받기 - InputView.inputBudget
-- [X] 예산 관리 - Budget
-  - [X] 불필요한 공백 제거.
+- [ ] 수동으로 구매할 로또 수 입력.
   - [X] 공백 입력을 허용하지 않음.
+- [X] 예산 관리 - Budget
   - [X] 숫자만 입력 허용.
-
+  - [X] 불필요한 공백 제거.
+- [ ] 수동으로 구매할 로또 번호 입력.
+  - [ ] 줄바꿈으로 로또 구분, 로또 번호는 `,` 로 구분. 
 - [X] 로또번호 - LottoBalls
-  - [X] 1 ~ 45 까지 List<Integer> 형식으로 로또 번호 관리.
+  - [x] Lotto
+    - [X] List<LottoNumber> 형식으로 로또 번호 관리.
+    - [x] LottoNumber 은 value int를 가짐.
 
-- [X] 구매한 로또 번호 발급 - Lottos.createAutoLottos
+- [X] 구매한 로또 자동 번호 발급 - Lottos.createAutoLottos
   - [X] 1000원 단위로 로또 개수 발급. (ex: 14500 원 = 14장)
   - [X] 6개의 랜덤 로또 번호를 생성한다.
   - [X] Lotto(List<Integer>)
+- [ ] 구매한 수동 로또 발급 - Lottos.createManualLotto
 
 - [X] 당첨 번호 + 보너스볼 - CorrectNumbers
   - [X] 당첨 번호와 보너스볼은 서로 중복되지 않는 값이어야 함.

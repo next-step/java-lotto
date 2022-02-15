@@ -9,6 +9,8 @@ public class Delimiters {
 
     private static final String DEFAULT_DELIMITER_COMMA = ",";
     private static final String DEFAULT_DELIMITER_COLON = ":";
+    private static final int DEFAULT_DELIMITER_SIZE = 2;
+    private static final int DELIMITER_STRING_INDEX = 0;
 
     private List<Delimiter> delimiters;
 
@@ -31,9 +33,13 @@ public class Delimiters {
         return inputDelimiters.isEmpty();
     }
 
-    public String getValuesToString() {
-        return delimiters.stream()
-                .map(Delimiter::getValue)
-                .collect(Collectors.joining(""));
+    public String getValuesToRegex() {
+        if(delimiters.size() == DEFAULT_DELIMITER_SIZE){
+            String delimiters = this.delimiters.stream()
+                    .map(Delimiter::getValue)
+                    .collect(Collectors.joining(""));
+            return String.format("[%s]", delimiters);
+        }
+        return delimiters.get(DELIMITER_STRING_INDEX).getValue();
     }
 }
