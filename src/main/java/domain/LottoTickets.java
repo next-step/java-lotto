@@ -1,6 +1,8 @@
 package domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoTickets {
     private final List<Lotto> lottos;
@@ -9,18 +11,27 @@ public class LottoTickets {
         this.lottos = new ArrayList<>();
     }
 
+    public LottoTickets(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
 
-    public void addLottoTicket(Lotto lotto) {
-        lottos.add(lotto);
+    public LottoTickets add(LottoTickets tickets) {
+        this.lottos.addAll(tickets.lottos);
+        return this;
     }
 
-    public void readyLottoTicket(int lottoCount) {
-        for (int i = 0; i < lottoCount; i++) {
-            addLottoTicket(new Lotto());
-        }
+    public static LottoTickets auto(int autoCount) {
+        return new LottoTickets(IntStream.range(0, autoCount)
+                .mapToObj(i -> new Lotto())
+                .collect(Collectors.toList()));
+    }
+
+    public static LottoTickets manual(List<Lotto> manualTickets) {
+        return new LottoTickets(manualTickets);
     }
 
 }

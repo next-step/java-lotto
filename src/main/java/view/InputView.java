@@ -1,11 +1,13 @@
 package view;
 
+import domain.Lotto;
 import domain.LottoNumber;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
     private static final String MESSAGE_INPUT_PURCHASE_PRICE = "구입금액을 입력해 주세요.";
@@ -26,8 +28,12 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public void inputManualLottoNumber() {
+    public List<Lotto> inputManualLotto(int manualCount) {
         System.out.println("\n" + MESSAGE_INPUT_LOTTO_NUMBER);
+        return IntStream.range(0, manualCount)
+                .mapToObj(i -> inputLotto())
+                .map(Lotto::new)
+                .collect(Collectors.toList());
     }
 
     public List<LottoNumber> inputAnswerNumber() {

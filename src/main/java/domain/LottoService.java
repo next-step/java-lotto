@@ -20,26 +20,20 @@ public class LottoService {
         return new LottoPrice(inputView.inputPurchasePrice());
     }
 
-    public LottoTickets purchaseLotto(LottoPrice lottoPrice) {
-        LottoTickets lottoTickets = new LottoTickets();
-        int manualCount = purchaseManualLotto(lottoTickets);
-        int autoCount = lottoPrice.lottoCount() - manualCount;
-        purchaseAutoLotto(lottoTickets, autoCount);
+
+    public LottoTickets purchase(LottoPrice lottoPrice) {
+        int manualCount = inputView.inputManualLottoCount();
+        int autoCount = lottoPrice.autoCount(manualCount);
+
+        LottoTickets manual = LottoTickets.manual(inputManual(manualCount));
+        LottoTickets auto = LottoTickets.auto(autoCount);
+
         resultView.printLottoCount(manualCount, autoCount);
-        return lottoTickets;
+        return manual.add(auto);
     }
 
-    public int purchaseManualLotto(LottoTickets lottoTickets) {
-        int count = inputView.inputManualLottoCount();
-        inputView.inputManualLottoNumber();
-        for (int i = 0; i < count; i++) {
-            lottoTickets.addLottoTicket(Lotto.create(inputView.inputLotto()));
-        }
-        return count;
-    }
-
-    public void purchaseAutoLotto(LottoTickets lottoTickets, int count) {
-        lottoTickets.readyLottoTicket(count);
+    public List<Lotto> inputManual(int manualCount) {
+        return inputView.inputManualLotto(manualCount);
     }
 
     public void getRatioByAnswer(LottoTickets lottoTickets, LottoPrice lottoPrice) {

@@ -13,7 +13,7 @@ public class Lotto {
         this(LottoGenerate.create());
     }
 
-    private Lotto(List<LottoNumber> lotto) {
+    public Lotto(List<LottoNumber> lotto) {
         verifyCount(lotto);
         verifyDuplicate(lotto);
         verifyRange(lotto);
