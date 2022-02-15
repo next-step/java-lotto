@@ -18,8 +18,8 @@ public class Price {
         }
     }
 
-    public Count calculateCount() {
-        return new Count(price / LOTTO_PRICE);
+    public Count calculateCount(int manualLottoCount) {
+        return new Count( (price - (manualLottoCount* LOTTO_PRICE))/LOTTO_PRICE, manualLottoCount);
     }
 
 }
