@@ -1,6 +1,5 @@
 package lotto.view;
 
-import java.math.BigDecimal;
 import java.util.List;
 import lotto.domain.LottoStatistic;
 import lotto.domain.LottoTicket;
@@ -16,9 +15,7 @@ public class ResultView {
     }
 
     public static void printLottoTicketsInfo(List<LottoTicket> tickets) {
-        tickets.forEach(ticket -> {
-            System.out.println(ticket.toString());
-        });
+        tickets.forEach(ticket -> System.out.println(ticket.toString()));
     }
 
     public static void printStatistic(LottoStatistic lottoStatistic) {
@@ -28,7 +25,7 @@ public class ResultView {
         System.out.println(lottoStatistic);
     }
 
-    public static void printProfit(BigDecimal profit) {
+    public static void printProfit(double profit) {
         System.out.println("총 수익률은 " + profit + "입니다.");
     }
 }
