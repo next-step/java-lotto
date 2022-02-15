@@ -37,5 +37,4 @@ public enum Rank {
     public int getReward() {
         return reward;
     }
-
 }

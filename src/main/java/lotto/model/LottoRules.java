@@ -2,7 +2,6 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class LottoRules {
@@ -13,6 +12,7 @@ public class LottoRules {
     private final static int LAST_INDEX = 6;
 
     private final List<LottoNumber> initialLottoNumbers;
+
     public LottoRules() {
         initialLottoNumbers = new ArrayList<>();
         for (int i = START_NUM; i <= LAST_NUM; i++) {

@@ -22,5 +22,4 @@ public class User {
     public List<Lotto> getLottos() {
         return lottos;
     }
-
 }

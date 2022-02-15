@@ -33,7 +33,7 @@ public class WinningNumber {
 
     private void parseStringToInt(List<String> winningNumbersInput) {
         for (int i = 0; i < winningNumbersInput.size(); i++) {
-            int parsedWinningNumber=Integer.parseInt(winningNumbersInput.get(i));
+            int parsedWinningNumber = Integer.parseInt(winningNumbersInput.get(i));
             checkDuplicateWinningNumber(parsedWinningNumber);
             winningNumbers.add(new LottoNumber(parsedWinningNumber));
         }
@@ -41,7 +41,7 @@ public class WinningNumber {
 
     public int findMatchingCount(List<LottoNumber> lotto) {
         int matchingResult = 0;
-        for (LottoNumber winningNumber: winningNumbers) {
+        for (LottoNumber winningNumber : winningNumbers) {
             matchingResult = countMatchingNumber(winningNumber, matchingResult, lotto);
         }
         return matchingResult;
@@ -57,5 +57,4 @@ public class WinningNumber {
     public boolean isContainBonusBall(List<LottoNumber> lotto) {
         return lotto.contains(bonusBall);
     }
-
 }

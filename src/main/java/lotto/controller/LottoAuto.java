@@ -31,24 +31,29 @@ public class LottoAuto {
     public void play() {
         LottoRules lottoRules = new LottoRules();
         Price price = new Price(InputView.inputPrice());
-        int manualCount =InputView.inputManualLottoCount();
+        int manualCount = InputView.inputManualLottoCount();
         Count count = price.calculateCount(manualCount);
-        User user = new User(saveAllLottos(InputView.inputManualLottoNumber(manualCount),lottoRules, count));
+        User user = new User(
+            saveAllLottos(InputView.inputManualLottoNumber(manualCount), lottoRules, count));
         OutputView.printLottoCount(count);
         OutputView.printLottos(user.getLottos());
         WinningNumber winningNumber = new WinningNumber(InputView.inputWinningNumbers(),
             InputView.inputBonusBall());
-        Ranks ranks =new Ranks();
-        Map<Rank, Integer> rankMap=ranks.updateRanks(user.findEachLottoMatchingNumber(winningNumber));
-        Statistics statistics = new Statistics(count.getCount(),ranks.calculateTotalPrize());
+        Ranks ranks = new Ranks();
+        Map<Rank, Integer> rankMap = ranks.updateRanks(
+            user.findEachLottoMatchingNumber(winningNumber));
+        Statistics statistics = new Statistics(count.getCount(), ranks.calculateTotalPrize());
         OutputView.printStatistics(rankMap, statistics.calculateBenefits());
     }
-    private List<Lotto> saveAllLottos(List<List<Integer>> manualLottoNumberInput,LottoRules lottoRules, Count count){
+
+    private List<Lotto> saveAllLottos(List<List<Integer>> manualLottoNumberInput,
+        LottoRules lottoRules, Count count) {
         List<Lotto> lottos = new ArrayList<>();
         lottos.addAll(createManualLottos(manualLottoNumberInput));
-        lottos.addAll(creatAutoLottos(lottoRules,count));
+        lottos.addAll(creatAutoLottos(lottoRules, count));
         return lottos;
     }
+
     private List<Lotto> creatAutoLottos(LottoRules lottoRules, Count count) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count.getAutoLottoCount(); i++) {
@@ -57,11 +62,11 @@ public class LottoAuto {
         return lottos;
     }
 
-    private List<Lotto> createManualLottos(List<List<Integer>> manualLottoNumberInput){
+    private List<Lotto> createManualLottos(List<List<Integer>> manualLottoNumberInput) {
         List<LottoNumber> lottoNumbers;
         List<Lotto> manualLottos = new ArrayList<>();
-        for(List<Integer> list: manualLottoNumberInput){
-            lottoNumbers=list.stream().map(LottoNumber::new).collect(
+        for (List<Integer> list : manualLottoNumberInput) {
+            lottoNumbers = list.stream().map(LottoNumber::new).collect(
                 Collectors.toList());
             manualLottos.add(new Lotto(lottoNumbers));
         }

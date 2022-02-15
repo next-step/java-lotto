@@ -7,11 +7,13 @@ import java.util.List;
 import java.util.Map;
 
 public class Ranks {
+
     private static Map<Rank, Integer> ranks;
 
-    public Ranks(){
+    public Ranks() {
         initializeRanks();
     }
+
     private void initializeRanks() {
         ranks = new EnumMap<>(Rank.class);
         for (Rank rank : Rank.values()) {
@@ -20,7 +22,7 @@ public class Ranks {
     }
 
     public Map<Rank, Integer> updateRanks(List<MatchInfo> matchInfos) {
-        for (MatchInfo matchInfo: matchInfos) {
+        for (MatchInfo matchInfo : matchInfos) {
             int matchCount = matchInfo.getMatchCount();
             boolean bonusMatch = matchInfo.getBonusMatch();
             Rank rank = getRank(matchCount, bonusMatch);
@@ -41,12 +43,11 @@ public class Ranks {
         }
     }
 
-    public int calculateTotalPrize(){
-        int totalPrize=0;
+    public int calculateTotalPrize() {
+        int totalPrize = 0;
         for (Rank key : ranks.keySet()) {
-            totalPrize += key.getReward()* ranks.get(key);
+            totalPrize += key.getReward() * ranks.get(key);
         }
         return totalPrize;
     }
-
 }

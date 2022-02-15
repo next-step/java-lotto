@@ -1,6 +1,5 @@
 package lotto.view;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -16,13 +15,16 @@ public class OutputView {
     private static final String WINNING_STATISTICS_MESSAGE = "\n당첨 통계\n---------";
 
     public static void printLottoCount(Count count) {
-        System.out.println("수동으로 "+ count.getManualLottoCount()+ "장 자동으로"+ count.getAutoLottoCount()+ "개를 구매했습니다.");
+        System.out.println(
+            "수동으로 " + count.getManualLottoCount() + "장 자동으로" + count.getAutoLottoCount()
+                + "개를 구매했습니다.");
     }
 
     public static void printLottos(List<Lotto> lottos) {
-        for(Lotto lotto: lottos){
-            List<Integer> list = lotto.getLottoNumbers().stream().map(LottoNumber::getNumber).collect(
-                Collectors.toList());
+        for (Lotto lotto : lottos) {
+            List<Integer> list = lotto.getLottoNumbers().stream().map(LottoNumber::getNumber)
+                .collect(
+                    Collectors.toList());
             System.out.println(list);
         }
         System.out.println();

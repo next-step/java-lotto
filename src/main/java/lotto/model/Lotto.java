@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class Lotto {
@@ -12,16 +11,17 @@ public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> lottoNumbers){
+    public Lotto(List<LottoNumber> lottoNumbers) {
         validateLotto(lottoNumbers);
         Collections.sort(lottoNumbers, (o1, o2) -> {
-            if(o1.getNumber()>o2.getNumber()){
+            if (o1.getNumber() > o2.getNumber()) {
                 return 1;
             }
             return -1;
         });
-        this.lottoNumbers= lottoNumbers;
+        this.lottoNumbers = lottoNumbers;
     }
+
     public Lotto(List<LottoNumber> lottoNumbers, int matchCount, boolean bonusMatch) {
         this(lottoNumbers);
     }
@@ -39,7 +39,7 @@ public class Lotto {
         if (matchCount == FIVE_MATCHING) {
             bonusMatch = winningNumber.isContainBonusBall(lottoNumbers);
         }
-        return new MatchInfo(matchCount,bonusMatch);
+        return new MatchInfo(matchCount, bonusMatch);
     }
 
     public List<LottoNumber> getLottoNumbers() {
