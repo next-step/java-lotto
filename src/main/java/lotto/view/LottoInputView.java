@@ -25,9 +25,12 @@ public class LottoInputView {
     }
 
     public String[] inputHandOperatedLottoNumbers() {
-        System.out.println(INPUT_LOTTO_NUMBER_MESSAGE);
         final String input = SCANNER.nextLine();
         return splitWinningNumber(input);
+    }
+
+    public void printMessageInputHandOperatedLottoNumbers() {
+        System.out.println(INPUT_LOTTO_NUMBER_MESSAGE);
     }
 
     public String[] inputWinningNumber() {

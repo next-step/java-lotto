@@ -52,6 +52,7 @@ public class LottoController {
 
     private void purchaseAllLottos(final int handOperatedLottoAmount, final LottoShop lottoShop,
         final int autoLottoAmount, final Lottos allLotto) {
+        lottoInputView.printMessageInputHandOperatedLottoNumbers();
         for (int amount = 0; amount < handOperatedLottoAmount; amount++) {
             lottoShop.buyHandOperatedLotto(allLotto,
                 lottoInputView.inputHandOperatedLottoNumbers());
