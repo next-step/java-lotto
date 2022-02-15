@@ -25,14 +25,14 @@ public enum Rank {
                 .orElse(FAIL);
     }
 
-    public static Rank getRank(int matchCount, boolean hasBonus) {
-        if (BonusCriteria(matchCount) && hasBonus) {
+    public static Rank getBonusRank(int matchCount, boolean hasBonus) {
+        if (isBonusCriteria(matchCount) && hasBonus) {
             return SECOND;
         }
         return THIRD;
     }
 
-    public static boolean BonusCriteria(int matchCount) {
+    public static boolean isBonusCriteria(int matchCount) {
         return matchCount == SECOND.matchCount;
     }
 

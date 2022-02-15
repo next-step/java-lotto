@@ -8,7 +8,8 @@ public class Application {
         LottoService lotto = new LottoService();
 
         LottoPrice lottoPrice = lotto.inputPrice();
-        LottoTickets lottoTickets = lotto.purchaseLotto(lottoPrice);
+        LottoTickets lottoTickets = lotto.purchase(lottoPrice);
+        lotto.showAllLottoTickets(lottoTickets);
         lotto.getRatioByAnswer(lottoTickets, lottoPrice);
     }
 }

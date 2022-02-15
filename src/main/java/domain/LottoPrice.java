@@ -14,6 +14,10 @@ public class LottoPrice {
         return purchasePrice;
     }
 
+    public int autoCount(int manualCount) {
+        return lottoCount() - manualCount;
+    }
+
     public int lottoCount() {
         return purchasePrice / LOTTO_PRICE;
     }

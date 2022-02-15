@@ -4,20 +4,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-    private final Map<Rank, Integer> lottoResult;
+    private final Map<Rank, Integer> result;
     private static final Integer ZERO = 0;
     private static final Integer ADD_COUNT = 1;
 
     public LottoResult() {
-        this.lottoResult = new HashMap<>();
+        this.result = new HashMap<>();
     }
 
     public void addRankCount(Rank rank) {
-        lottoResult.put(rank, getRankCount(rank) + ADD_COUNT);
+        result.put(rank, getRankCount(rank) + ADD_COUNT);
     }
 
     public Integer getRankCount(Rank rank) {
-        return lottoResult.getOrDefault(rank, ZERO);
+        return result.getOrDefault(rank, ZERO);
     }
 
 }

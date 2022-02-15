@@ -5,6 +5,7 @@ import view.ResultView;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoService {
     private final InputView inputView;
@@ -16,38 +17,46 @@ public class LottoService {
     }
 
     public LottoPrice inputPrice() {
-        LottoPrice lottoPrice = new LottoPrice(inputView.inputPurchasePrice());
-        resultView.printLottoCount(lottoPrice.lottoCount());
-        return lottoPrice;
+        return new LottoPrice(inputView.inputPurchasePrice());
     }
 
-    public LottoTickets purchaseLotto(LottoPrice lottoPrice) {
-        LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.readyLottoTicket(lottoPrice.lottoCount());
-        showAllLottoTickets(lottoTickets);
-        return lottoTickets;
+
+    public LottoTickets purchase(LottoPrice lottoPrice) {
+        int manualCount = inputView.inputManualLottoCount();
+        int autoCount = lottoPrice.autoCount(manualCount);
+
+        LottoTickets manual = LottoTickets.manual(inputManual(manualCount));
+        LottoTickets auto = LottoTickets.auto(autoCount);
+
+        resultView.printLottoCount(manualCount, autoCount);
+        return manual.addTickets(auto);
+    }
+
+    public List<Lotto> inputManual(int manualCount) {
+        return inputView.inputManualLotto(manualCount);
     }
 
     public void getRatioByAnswer(LottoTickets lottoTickets, LottoPrice lottoPrice) {
-        LottoAnswer lottoAnswer = new LottoAnswer(receiveAnswer(), receiveBonus());
-        LottoResult lottoResult = lottoAnswer.checkLottoAnswer(lottoTickets.getLottoTickets());
-        resultView.printResultStatistic(lottoResult);
+        LottoAnswer answer = new LottoAnswer(receiveAnswer(), receiveBonus());
+        LottoResult result = answer.checkLottoAnswer(lottoTickets.getLottos());
+        resultView.printResultStatistic(result);
 
-        BigDecimal prizeRatio = new RatioCalculator().calculateRatio(lottoPrice.getPurchasePrice(), lottoResult);
+        BigDecimal prizeRatio = new RatioCalculator().calculateRatio(lottoPrice.getPurchasePrice(), result);
         resultView.printResultRatio(prizeRatio);
     }
 
-    private void showAllLottoTickets(LottoTickets lottoTickets) {
-        lottoTickets.getLottoTickets()
-                .forEach(lotto -> resultView.printAllLotto(lotto.getLotto()));
+    public void showAllLottoTickets(LottoTickets lottoTickets) {
+        lottoTickets.getLottos()
+                .forEach(lotto -> resultView.printAllLotto(
+                        lotto.getLotto().stream().map(LottoNumber::getNumber).collect(Collectors.toList())));
     }
 
-    private List<Integer> receiveAnswer() {
+    private List<LottoNumber> receiveAnswer() {
         return inputView.inputAnswerNumber();
     }
 
-    private int receiveBonus() {
-        return inputView.inputBonusNumber();
+    private LottoNumber receiveBonus() {
+        return new LottoNumber(inputView.inputBonusNumber());
     }
 
 }
