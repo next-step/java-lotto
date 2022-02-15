@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import static lotto.util.Constant.DIVIDE_UNIT;
+
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -27,14 +27,13 @@ public class LottoStatistic {
         return new LottoStatistic(lottoRankMap);
     }
 
-    public BigDecimal getProfit(long principal) {
-        BigDecimal total = BigDecimal.ZERO;
+    public double getProfit(long principal) {
+        long total = 0;
         for (Map.Entry<LottoRank, Integer> element : lottoRankStatistic.entrySet()) {
-            total = total.add(
-                BigDecimal.valueOf(
-                    element.getKey().getWinningAmount() * (long) element.getValue()));
+            total += (long) element.getKey().getWinningAmount() * element.getValue();
         }
-        return total.divide(BigDecimal.valueOf(principal), 2, RoundingMode.DOWN);
+
+        return Math.floor(DIVIDE_UNIT * total / principal) / DIVIDE_UNIT;
     }
 
     @Override
