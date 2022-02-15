@@ -2,13 +2,21 @@ package lotto.model;
 
 public class Count {
 
-    private final int count;
+    private final int autoLottoCount;
+    private final int manualLottoCount;
+    public Count(int autoLottoCount, int manualLottoCount) {
 
-    public Count(int count) {
-        this.count = count;
+        this.autoLottoCount = autoLottoCount;
+        this.manualLottoCount =manualLottoCount;
+    }
+    public int getCount(){
+        return autoLottoCount+manualLottoCount;
+    }
+    public int getAutoLottoCount() {
+        return autoLottoCount;
     }
 
-    public int getCount() {
-        return count;
+    public int getManualLottoCount() {
+        return manualLottoCount;
     }
 }
