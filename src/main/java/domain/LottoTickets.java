@@ -19,7 +19,11 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottos);
     }
 
-    public LottoTickets add(LottoTickets tickets) {
+    public void addLotto(Lotto lotto) {
+        lottos.add(lotto);
+    }
+
+    public LottoTickets addTickets(LottoTickets tickets) {
         this.lottos.addAll(tickets.lottos);
         return this;
     }

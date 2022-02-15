@@ -29,7 +29,7 @@ public class LottoService {
         LottoTickets auto = LottoTickets.auto(autoCount);
 
         resultView.printLottoCount(manualCount, autoCount);
-        return manual.add(auto);
+        return manual.addTickets(auto);
     }
 
     public List<Lotto> inputManual(int manualCount) {

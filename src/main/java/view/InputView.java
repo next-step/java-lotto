@@ -32,7 +32,7 @@ public class InputView {
         System.out.println("\n" + MESSAGE_INPUT_LOTTO_NUMBER);
         return IntStream.range(0, manualCount)
                 .mapToObj(i -> inputLotto())
-                .map(Lotto::new)
+                .map(Lotto::create)
                 .collect(Collectors.toList());
     }
 

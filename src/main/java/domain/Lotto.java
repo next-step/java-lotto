@@ -10,10 +10,10 @@ public class Lotto {
     private static final String MESSAGE_LOTTO_NUMBER_DUPLICATED = "(ERROR) 로또 숫자는 중복되면 안됩니다.";
 
     public Lotto() {
-        this(LottoGenerate.create());
+        this(LottoGenerator.create());
     }
 
-    public Lotto(List<LottoNumber> lotto) {
+    private Lotto(List<LottoNumber> lotto) {
         verifyCount(lotto);
         verifyDuplicate(lotto);
         verifyRange(lotto);
