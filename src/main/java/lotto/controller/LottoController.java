@@ -44,7 +44,7 @@ public class LottoController {
 
         final List<LottoNumber> winningNumbers = createWinningNumbers();
         final LottoNumber bonusBall = new LottoNumber(lottoInputView.inputBonusBall());
-        final WinningLotto winningLotto = new WinningLotto(Lotto.handOperatedLotto(winningNumbers), bonusBall);
+        final WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), bonusBall);
         final LottoGame lottoGame = new LottoGame(allLotto, winningLotto);
         final LottoResults lottoResults = lottoGame.findWinner();
         lottoResultView.finishGame(lottoResults, lottoResults.calculateYield(money));
