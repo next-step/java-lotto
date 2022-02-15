@@ -4,10 +4,8 @@ import static lotto.util.Constant.*;
 
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.stream.Collectors;
 import lotto.view.ResultView;
 
 public class Lotto {
@@ -27,21 +25,9 @@ public class Lotto {
     public List<LottoTicket> generateLottoTickets(int number) {
         List<LottoTicket> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < number; i++) {
-            lottoNumbers.add(new LottoTicket(generateRandoms()));
+            lottoNumbers.add(new LottoTicket(LottoNumberGenerator.generateRandomLottoNumber()));
         }
         return lottoNumbers;
-    }
-
-    public List<LottoNumber> generateRandoms() {
-        List<Integer> numberCards = new ArrayList<>();
-        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-            numberCards.add(i);
-        }
-        Collections.shuffle(numberCards);
-
-        List<Integer> picked = numberCards.subList(0, LOTTO_SIZE);
-        Collections.sort(picked);
-        return picked.stream().map(LottoNumber::new).collect(Collectors.toList());
     }
 
     public int getNumOfTickets() {
