@@ -31,11 +31,23 @@ public class LottoTicket {
         return Collections.unmodifiableList(lottoList);
     }
 
+    public int getLottoTicketCount() {
+        return lottoList.size();
+    }
+
     public int getPrice() {
         return price;
     }
 
-    public void append(Lotto lotto) {
+    public LottoTicket append(Lotto lotto) {
         lottoList.add(lotto);
+
+        return this;
+    }
+
+    public LottoTicket concat(LottoTicket lottoTicket) {
+        lottoList.addAll(lottoTicket.getLottoList());
+
+        return this;
     }
 }

@@ -37,7 +37,8 @@ public class LottoMachine {
 
     public LottoTicket purchaseLotto(int price, LottoTicket manualLottoTicket) {
         final Price lottoPrice = Price.from(price);
-        final LottoTicket lottoTicket = LottoTicketGenerator.from(lottoPrice).getLottoTicket();
+        final LottoTicket lottoTicket = LottoTicketGenerator.of(lottoPrice, manualLottoTicket)
+            .getLottoTicket();
 
         ResultView.printLottoNumbers(lottoTicket.getLottoList());
         OutputView.printLottoCount(lottoTicket.getLottoList().size());

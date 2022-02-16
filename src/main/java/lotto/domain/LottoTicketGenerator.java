@@ -18,14 +18,31 @@ public class LottoTicketGenerator {
     }
 
     public static LottoTicketGenerator from(Price price) {
+        return LottoTicketGenerator.of(price, LottoTicket.create());
+    }
+
+    public static LottoTicketGenerator of(Price price, LottoTicket designatedLottoTicket) {
         validatePrice(price.getValue());
-        LottoTicket lottoTicket = generateLottoTicketFromPrice(price);
+
+        Price autoLottoTicketPrice = calculateAutoLottoTicketPrice(
+            price,
+            designatedLottoTicket.getLottoTicketCount()
+        );
+
+        LottoTicket lottoTicket = LottoTicket.create()
+            .concat(designatedLottoTicket)
+            .concat(generateLottoTicketFromPrice(autoLottoTicketPrice));
 
         return new LottoTicketGenerator(lottoTicket);
     }
 
     public LottoTicket getLottoTicket() {
         return lottoTicket;
+    }
+
+    private static Price calculateAutoLottoTicketPrice(Price price,
+        int designatedLottoTicketCount) {
+        return Price.from(price.getValue() - designatedLottoTicketCount * LOTTO_PRICE);
     }
 
     private static LottoTicket generateLottoTicketFromPrice(Price price) {
