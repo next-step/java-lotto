@@ -39,7 +39,7 @@ public class LottoStatistics {
         double totalPrice = lottoTicketResult.stream()
             .mapToInt(PrizeGrade::getPrizeMoney)
             .sum();
-
+        
         return String.format(RATE_OF_RETURN_FORMAT, totalPrice / lottoTicket.getPrice());
     }
 

@@ -76,7 +76,7 @@ public class LottoMachine {
         OutputView.printRequestManualLottoNumbers();
         for (int i = 0; i < manualLottoCount.getCount(); i++) {
             Lotto manualLotto = Lotto.from(Util.stringToIntegerList(InputView.readWinningNumber()));
-            lottoTicket.append(manualLotto);
+            lottoTicket.append(manualLotto, LottoTicketGenerator.LOTTO_PRICE);
         }
 
         return lottoTicket;

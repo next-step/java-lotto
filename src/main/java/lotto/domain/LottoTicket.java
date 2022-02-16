@@ -39,15 +39,15 @@ public class LottoTicket {
         return price;
     }
 
-    public LottoTicket append(Lotto lotto) {
+    public LottoTicket append(Lotto lotto, int lottoPrice) {
         lottoList.add(lotto);
 
-        return this;
+        return LottoTicket.of(lottoList, lottoPrice * lottoList.size());
     }
 
-    public LottoTicket concat(LottoTicket lottoTicket) {
+    public LottoTicket concat(LottoTicket lottoTicket, int lottoPrice) {
         lottoList.addAll(lottoTicket.getLottoList());
 
-        return this;
+        return LottoTicket.of(lottoList, lottoPrice * lottoList.size());
     }
 }

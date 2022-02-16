@@ -8,7 +8,7 @@ import lotto.domain.strategy.RandomGenerateStrategy;
 public class LottoTicketGenerator {
 
     private static final String NOT_PURCHASEABLE_EXCEPTION_MESSAGE = "[ERROR] 1000원 단위로 입력해주세요.";
-    private static final int LOTTO_PRICE = 1_000;
+    public static final int LOTTO_PRICE = 1_000;
     private static final int ZERO = 0;
 
     final LottoTicket lottoTicket;
@@ -30,8 +30,8 @@ public class LottoTicketGenerator {
         );
 
         LottoTicket lottoTicket = LottoTicket.create()
-            .concat(designatedLottoTicket)
-            .concat(generateLottoTicketFromPrice(autoLottoTicketPrice));
+            .concat(designatedLottoTicket, LOTTO_PRICE)
+            .concat(generateLottoTicketFromPrice(autoLottoTicketPrice), LOTTO_PRICE);
 
         return new LottoTicketGenerator(lottoTicket);
     }
