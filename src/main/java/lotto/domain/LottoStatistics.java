@@ -14,7 +14,7 @@ public class LottoStatistics {
     private final WinningNumbers winningNumbers;
     private final LottoTicket lottoTicket;
     private final List<PrizeGrade> lottoTicketResult;
-    private HashMap<PrizeGrade, Integer> resultStatistics;
+    private final HashMap<PrizeGrade, Integer> resultStatistics;
 
     public LottoStatistics(WinningNumbers winningNumbers, LottoTicket lottoTicket) {
         this.winningNumbers = winningNumbers;
@@ -37,13 +37,13 @@ public class LottoStatistics {
 
     public String getLottoEarningRate() {
         double totalPrice = lottoTicketResult.stream()
-            .mapToInt(statistics -> statistics.getPrizeMoney())
+            .mapToInt(PrizeGrade::getPrizeMoney)
             .sum();
 
         return String.format(RATE_OF_RETURN_FORMAT, totalPrice / lottoTicket.getPrice());
     }
 
-    private void initResultStatistics () {
+    private void initResultStatistics() {
         Arrays.stream(PrizeGrade.values())
             .forEach(prizeGrade -> resultStatistics.put(prizeGrade, 0));
     }
@@ -54,7 +54,7 @@ public class LottoStatistics {
                 int prizeGradeCount = resultStatistics.get(prizeGrade);
 
                 resultStatistics.put(prizeGrade, prizeGradeCount + 1);
-                return ;
+                return;
             }
             resultStatistics.put(prizeGrade, 1);
         });
@@ -67,16 +67,13 @@ public class LottoStatistics {
     }
 
     private int getMatchCount(final Lotto lotto) {
-        return lotto.getLotto().stream()
-            .filter(number -> winningNumbers.isWinningNumbersContain(number))
-            .collect(Collectors.toList())
-            .size();
+        return (int) lotto.getLotto().stream()
+            .filter(winningNumbers::isWinningNumbersContain)
+            .count();
     }
 
     private boolean isBonusMatch(final Lotto lotto) {
         return lotto.getLotto().stream()
-            .filter(number -> winningNumbers.isBonusNumberEqualTo(number))
-            .collect(Collectors.toList())
-            .size() > 0;
+            .anyMatch(winningNumbers::isBonusNumberEqualTo);
     }
 }
