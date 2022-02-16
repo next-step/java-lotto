@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +30,6 @@ public class Rankings {
 
     public double countRewardRate(int buyPrice) {
         int winnerPriceSum = countWinnerPriceSum();
-        return Math.round(winnerPriceSum / (double) buyPrice);
+        return BigDecimal.valueOf(winnerPriceSum).divide(BigDecimal.valueOf(buyPrice), RoundingMode.HALF_EVEN).doubleValue();
     }
 }
