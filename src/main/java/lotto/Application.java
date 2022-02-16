@@ -1,5 +1,7 @@
 package lotto;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lotto;
@@ -37,6 +39,6 @@ public class Application {
     }
 
     private static int countBuySum(int buyPrice) {
-        return buyPrice / LOTTO_PRICE;
+        return BigDecimal.valueOf(buyPrice).divide(BigDecimal.valueOf(LOTTO_PRICE), RoundingMode.DOWN).intValue();
     }
 }
