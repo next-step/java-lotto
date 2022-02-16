@@ -1,9 +1,7 @@
 package lotto.domain;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.IntStream;
 
 public class LottoNumber {
