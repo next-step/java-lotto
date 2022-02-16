@@ -3,7 +3,6 @@ package lotto.view;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.domain.Ranking;
 import lotto.domain.Rankings;
@@ -34,7 +33,9 @@ public class LottoOutput {
     public static void printLottoResult(Rankings rankings, int buyPrice) {
         StringBuilder rankingStatus = printRankingStatus(rankings);
         StringBuilder rewardRate = printRewardRate(rankings, buyPrice);
-        System.out.println(rankingStatus.append(ENTER).append(rewardRate));
+        System.out.println(rankingStatus
+            .append(ENTER)
+            .append(rewardRate));
     }
 
     private static StringBuilder printRankingStatus(Rankings rankings) {
@@ -43,8 +44,12 @@ public class LottoOutput {
         stringBuilder.append(RANKING_DELIMITER);
 
         for (Ranking ranking : ORDER_PRINT_RANKING) {
-            stringBuilder.append(ranking).append(DASH)
-                .append(rankings.countFrequency(ranking)).append(PIECE).append(ENTER);
+            stringBuilder
+                .append(ranking)
+                .append(DASH)
+                .append(rankings.countFrequency(ranking))
+                .append(PIECE)
+                .append(ENTER);
         }
 
         return stringBuilder;
