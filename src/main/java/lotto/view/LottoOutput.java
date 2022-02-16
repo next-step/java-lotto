@@ -7,7 +7,6 @@ import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.domain.Ranking;
 import lotto.domain.Rankings;
-import lotto.service.RewardRateCalculator;
 
 public class LottoOutput {
 
@@ -49,9 +48,8 @@ public class LottoOutput {
     public static void printRewardRate(Rankings rankings, int buyPrice) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(REWARD_RATE_MESSAGE);
-        int winnerPriceSum = rankings.countWinnerPriceSum();
-        double rewardRate = RewardRateCalculator.countRewardRate(winnerPriceSum, buyPrice);
-        stringBuilder.append(rewardRate);
+        double rewardCount = rankings.countRewardRate(buyPrice);
+        stringBuilder.append(rewardCount);
         System.out.println(stringBuilder);
     }
 

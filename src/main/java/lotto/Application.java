@@ -20,8 +20,8 @@ public class Application {
 
         LottoOutput.printBuySum(buySum);
 
-        List<Lotto> userLottoNumbers = LottoAutoGenerator.getInstance()
-            .generateLottos(buySum);
+        LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
+        List<Lotto> userLottoNumbers = lottoAutoGenerator.generateLottos(buySum);
 
         LottoOutput.printLottoNumber(userLottoNumbers);
 

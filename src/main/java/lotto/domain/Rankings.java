@@ -25,4 +25,9 @@ public class Rankings {
         }
         return successSum;
     }
+
+    public double countRewardRate(int buyPrice) {
+        int winnerPriceSum = countWinnerPriceSum();
+        return Math.round(winnerPriceSum / (double) buyPrice);
+    }
 }

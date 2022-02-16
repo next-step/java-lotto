@@ -10,7 +10,6 @@ import lotto.domain.Lotto;
 
 public class LottoAutoGenerator {
 
-    private static final LottoAutoGenerator INSTANCE = new LottoAutoGenerator();
     private static final int LOTTO_NUM_START = 1;
     private static final int LOTTO_NUM_END = 45;
     private static final int LOTTO_SIZE_START = 0;
@@ -18,14 +17,10 @@ public class LottoAutoGenerator {
 
     private final List<LottoNumber> allNum;
 
-    private LottoAutoGenerator() {
+    public LottoAutoGenerator() {
         allNum = IntStream.range(LOTTO_NUM_START, LOTTO_NUM_END)
             .mapToObj(LottoNumber::from)
             .collect(Collectors.toList());
-    }
-
-    public static LottoAutoGenerator getInstance() {
-        return INSTANCE;
     }
 
     public List<Lotto> generateLottos(int size) {
