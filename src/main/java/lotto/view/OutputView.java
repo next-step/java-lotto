@@ -7,8 +7,8 @@ public class OutputView {
 
     public static final String PRINT_ERROR_MESSAGE_FORMAT = "[ERROR] %s%n";
     private static final String PRINT_REQUEST_LOTTO_PRICE = "구입금액을 입력해 주세요.";
-    private static final String PRINT_REQUEST_MANUAL_LOTTO_COUNT = "%n수동으로 구매할 로또 수를 입력해 주세요.";
-    private static final String PRINT_REQUEST_MANUAL_LOTTO_NUMBERS = "%n수동으로 구매할 번호를 입력해 주세요.";
+    private static final String PRINT_REQUEST_MANUAL_LOTTO_COUNT = "\n수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String PRINT_REQUEST_MANUAL_LOTTO_NUMBERS = "\n수동으로 구매할 번호를 입력해 주세요.";
     private static final String PRINT_SYSTEM_LOTTO_COUNT_FORMAT = "%n수동으로 %d장, 자동으로 %d개를 구매했습니다.%n";
     private static final String PRINT_REQUEST_WINNING_NUMBER_BEFORE = "\n지난 주 당첨 번호를 입력해주세요.(ex 1, 2, 3, 4, 5, 6)";
     private static final String PRINT_REQUEST_BONUS_BALL_NUMBER = "보너스 볼을 입력해주세요.";
