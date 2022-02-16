@@ -16,6 +16,8 @@ public class LottoOutput {
     private static final String REWARD_RATE_MESSAGE = "총 수익률은 ";
     private static final String DASH = " - ";
     private static final String PIECE = "개";
+    private static final String LOTTO_NUM_SUM_MESSAGE = "%s개 일치%s(%s원)";
+    private static final String BONUS_MESSAGE = ",보너스 볼 일치";
     private static final List<Ranking> ORDER_PRINT_RANKING = new ArrayList<>(
         Arrays.asList(Ranking.FIVE, Ranking.FOUR, Ranking.THREE, Ranking.TWO,
             Ranking.ONE));
@@ -46,7 +48,7 @@ public class LottoOutput {
 
         for (Ranking ranking : ORDER_PRINT_RANKING) {
             stringBuilder
-                .append(ranking)
+                .append(convertRankingToStatus(ranking))
                 .append(DASH)
                 .append(rankings.countFrequency(ranking))
                 .append(PIECE)
@@ -54,6 +56,17 @@ public class LottoOutput {
         }
 
         return stringBuilder;
+    }
+
+    private static String convertRankingToStatus(Ranking ranking) {
+        int matchNum = ranking.getNormalSuccessNum();
+        String bonusMessage = "";
+        if (ranking.getBonusSuccess()) {
+            matchNum++;
+            bonusMessage = BONUS_MESSAGE;
+        }
+        return String.format(LOTTO_NUM_SUM_MESSAGE, matchNum, bonusMessage,
+            ranking.getWinnerPrice());
     }
 
     private static StringBuilder printRewardRate(Rankings rankings, int buyPrice) {

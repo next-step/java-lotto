@@ -61,22 +61,4 @@ public enum Ranking {
     public boolean getBonusSuccess() {
         return bonusSuccess;
     }
-
-    @Override
-    public String toString() {
-        int matchNum = normalSuccessNum;
-        if (bonusSuccess) {
-            matchNum++;
-        }
-
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(matchNum).append("개 일치");
-
-        if (this.bonusSuccess) {
-            stringBuilder.append(", 보너스 볼 일치");
-        }
-
-        stringBuilder.append("(").append(winnerPrice).append("원)");
-        return stringBuilder.toString();
-    }
 }
