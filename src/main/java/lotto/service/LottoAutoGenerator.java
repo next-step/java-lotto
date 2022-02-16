@@ -26,8 +26,7 @@ public class LottoAutoGenerator {
     public List<Lotto> generateLottos(int size) {
         List<Lotto> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            Lotto lotto = generateLotto();
-            lottoNumbers.add(lotto);
+            lottoNumbers.add(generateLotto());
         }
         return lottoNumbers;
     }
