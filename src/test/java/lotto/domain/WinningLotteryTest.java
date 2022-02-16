@@ -7,13 +7,13 @@ import java.util.HashSet;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class WinningLotteryTest {
+class WinningLottoTest {
 
-//    @DisplayName(value = "당첨 번호와 보너스 번호는 중복될 수 없다.")
-//    @Test
-//    void distinctWinningAndBonus() {
-//        assertThatThrownBy(() -> new WinningLotto(
-//            new Lotto(new HashSet(Arrays.asList(1, 2, 3, 4, 5, 6))), new LottoNumber(6)))
-//            .isInstanceOf(IllegalArgumentException.class);
-//    }
+    @DisplayName(value = "당첨 번호와 보너스 번호는 중복될 수 없다.")
+    @Test
+    void distinctWinningAndBonus() {
+        Lottos lottos = new Lottos(new LottoPrice(10000));
+        assertThatThrownBy(() -> new WinningLotto(new Lotto(new HashSet(Arrays.asList(1,2,3,4,5,6))), new LottoNumber(6), lottos))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
 }
