@@ -40,8 +40,11 @@ public class LottoMachine {
         final LottoTicket lottoTicket = LottoTicketGenerator.of(lottoPrice, manualLottoTicket)
             .getLottoTicket();
 
+        OutputView.printLottoCount(
+            manualLottoTicket.getLottoTicketCount(),
+            lottoTicket.getLottoTicketCount()
+        );
         ResultView.printLottoNumbers(lottoTicket.getLottoList());
-        OutputView.printLottoCount(lottoTicket.getLottoList().size());
 
         return lottoTicket;
     }
