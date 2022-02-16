@@ -49,6 +49,7 @@ public class Rankings {
     public double countRewardRate(int buyPrice) {
         int winnerPriceSum = countWinnerPriceSum();
         return BigDecimal.valueOf(winnerPriceSum)
-            .divide(BigDecimal.valueOf(buyPrice), REWARD_SCALE, RoundingMode.HALF_EVEN).doubleValue();
+            .divide(BigDecimal.valueOf(buyPrice), REWARD_SCALE, RoundingMode.HALF_EVEN)
+            .doubleValue();
     }
 }
