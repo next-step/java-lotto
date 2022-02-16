@@ -15,7 +15,7 @@ public class Numbers {
     private static final int POSITION_CUSTOM_DELIMITER = 1;
     private static final int POSITION_OTHER_EXPRESSION = 2;
     private static final String COMMA = ",";
-    private static final List<Number> ZERO_NUMBERS = Collections.singletonList(new Number(0));
+    private static final List<Number> ZERO_NUMBERS = Collections.singletonList(Number.from(0));
 
     private final List<Number> values;
 

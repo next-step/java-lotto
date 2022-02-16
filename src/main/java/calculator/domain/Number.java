@@ -4,7 +4,7 @@ public class Number {
 
     private final int value;
 
-    public Number(final int value) {
+    private Number(final int value) {
         validatePositiveNum(value);
         this.value = value;
     }
@@ -12,6 +12,10 @@ public class Number {
     public static Number from(final String number) {
         validateNumberFormat(number);
         return new Number(Integer.parseInt(number));
+    }
+
+    public static Number from(final int number) {
+        return new Number(number);
     }
 
     private static void validateNumberFormat(final String number) {

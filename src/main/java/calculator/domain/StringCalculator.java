@@ -2,7 +2,7 @@ package calculator.domain;
 
 public class StringCalculator {
 
-    private static final Number ZERO = new Number(0);
+    private static final Number ZERO = Number.from(0);
 
     private final Numbers numbers;
 
