@@ -16,13 +16,13 @@ public class Answer {
         this.bonus = bonus;
     }
 
-    public Map<Rank, Integer> getComparisonPrizeMap(final Tickets tickets) {
-        return tickets.getComparisonPrizeMap(answerNumbers, bonus);
-    }
-
     private void validateBonus(final Ticket answerNumbers, final Number bonus) {
         if (answerNumbers.hasBonus(bonus)) {
             throw new IllegalArgumentException(EXCEPTION_BONUS_DUPLICATED);
         }
+    }
+
+    public Map<Rank, Integer> getComparisonPrizeMap(final Tickets tickets) {
+        return tickets.getComparisonPrizeMap(answerNumbers, bonus);
     }
 }

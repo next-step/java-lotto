@@ -18,8 +18,16 @@ public class Ticket {
         this.numbers = numbers;
     }
 
-    public int size() {
-        return numbers.size();
+    private void validateNumbers(final List<Number> numbers) {
+        if (numbers.size() != LottoGenerator.LOTTO_NUMBERS) {
+            throw new IllegalArgumentException(NUMBERS_NOT_IN_RANGE);
+        }
+    }
+
+    private void validateDuplicatedNumbers(final List<Number> numbers) {
+        if (distinctNumbersCount(numbers) != LottoGenerator.LOTTO_NUMBERS) {
+            throw new IllegalArgumentException(DUPLICATES_NOT_AVAILABLE);
+        }
     }
 
     public List<Number> get() {
@@ -36,19 +44,7 @@ public class Ticket {
         return numbers.contains(bonus);
     }
 
-    private void validateNumbers(final List<Number> numbers) {
-        if (numbers.size() != LottoGenerator.LOTTO_NUMBERS) {
-            throw new IllegalArgumentException(NUMBERS_NOT_IN_RANGE);
-        }
-    }
-
-    private void validateDuplicatedNumbers(final List<Number> numbers) {
-        if (distinctNumbersCount(numbers) != LottoGenerator.LOTTO_NUMBERS) {
-            throw new IllegalArgumentException(DUPLICATES_NOT_AVAILABLE);
-        }
-    }
-
     private int distinctNumbersCount(final List<Number> numbers) {
-        return (int) numbers.stream().map(Number::value).distinct().count();
+        return (int) numbers.stream().distinct().count();
     }
 }

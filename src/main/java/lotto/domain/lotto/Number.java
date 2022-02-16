@@ -14,6 +14,12 @@ public class Number {
         this.number = number;
     }
 
+    private void validateRange(final int number) {
+        if (number < LottoGenerator.START_NUMBER || number > LottoGenerator.END_NUMBER) {
+            throw new IllegalArgumentException(EXCEPTION_NOT_IN_RANGE);
+        }
+    }
+
     public int value() {
         return number;
     }
@@ -33,11 +39,5 @@ public class Number {
     @Override
     public int hashCode() {
         return Objects.hash(number);
-    }
-
-    private void validateRange(final int number) {
-        if (number < LottoGenerator.START_NUMBER || number > LottoGenerator.END_NUMBER) {
-            throw new IllegalArgumentException(EXCEPTION_NOT_IN_RANGE);
-        }
     }
 }

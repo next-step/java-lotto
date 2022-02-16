@@ -13,13 +13,25 @@ public class Amount {
         this.amount = amount;
     }
 
-    public int value() {
-        return amount;
-    }
-
     private void validateAmount(final int amount) {
         if (amount < VALIDATION_BASE_UNIT || amount % PRICE_PER_ONE_TICKET > VALIDATION_BASE_UNIT) {
             throw new IllegalArgumentException(INVALID_AMOUNT);
         }
+    }
+
+    public int value() {
+        return amount;
+    }
+
+    public int getAutoTickets(int manualTicket) {
+        return totalTickets() - manualTicket;
+    }
+
+    public boolean isEnoughToBuy(int count) {
+        return count * PRICE_PER_ONE_TICKET <= amount;
+    }
+
+    private int totalTickets() {
+        return amount / PRICE_PER_ONE_TICKET;
     }
 }

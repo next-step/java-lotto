@@ -32,14 +32,15 @@ public class LottoController {
     public void run() {
         final Amount amount = new Amount(InputView.getAmount());
         final int manualLottoTickets = InputView.getManualLottoTickets();
+        final List<List<Number>> manualTicketNumbers = getManualTicketNumbers(manualLottoTickets);
 
-        TicketMachine machine = new TicketMachine(amount, manualLottoTickets);
-        Tickets tickets = machine.purchase(getManualTicketNumbers(machine.manualTickets()));
+        TicketMachine machine = new TicketMachine(amount, manualTicketNumbers);
+        Tickets tickets = machine.purchase();
 
         OutputView.printBuyingTickets(machine.manualTickets(), machine.autoTickets());
 
         showTickets(tickets);
-        showResult(tickets, machine.amount());
+        showResult(tickets, amount);
     }
 
     private void showTickets(final Tickets tickets) {
@@ -57,15 +58,14 @@ public class LottoController {
         OutputView.printResult(new PrizeRatio().calculateRatio(amount, prizeMap));
     }
 
-    private List<Ticket> getManualTicketNumbers(final int manualTickets) {
-        List<Ticket> ticketList = new ArrayList<>();
+    private List<List<Number>> getManualTicketNumbers(final int manualTickets) {
+        List<List<Number>> numbersPerOneLotto = new ArrayList<>();
         for (List<Integer> numbers : InputView.getManualLottoNumbers(manualTickets)) {
-            Ticket ticket = new Ticket(
+            numbersPerOneLotto.add(
                 numbers.stream().map(Number::new).collect(Collectors.toList())
             );
-            ticketList.add(ticket);
         }
-        return ticketList;
+        return numbersPerOneLotto;
     }
 
     private Ticket getAnswerTicket() {

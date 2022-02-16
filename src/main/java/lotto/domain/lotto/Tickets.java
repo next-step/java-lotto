@@ -14,10 +14,6 @@ public class Tickets {
         this.tickets = tickets;
     }
 
-    public int count() {
-        return tickets.size();
-    }
-
     public List<Ticket> getEachTicketNumbers() {
         return tickets;
     }

@@ -9,40 +9,42 @@ import lotto.domain.generator.LottoAutoGenerator;
 public class TicketMachine {
 
     private static final String INVALID_MANUAL_TICKETS = "수동 구매금액아 총 구매금액을 넘을 수 없습니다.";
-    private static final int PRICE_PER_ONE_TICKET = 1000;
-    private static final int VALIDATION_BASE_UNIT = 0;
 
-    private final Amount amount;
-    private final int manualTickets;
-    private final int autoTickets;
+    private final List<Ticket> manualTickets;
+    private final List<Ticket> autoTickets;
 
-    public TicketMachine(final Amount amount, final int manualTickets) {
-        validateManualTickets(amount, manualTickets);
+    public TicketMachine(final Amount amount, final List<List<Number>> manualTicketNumbers) {
+        validateManualTickets(amount, manualTicketNumbers);
 
-        this.amount = amount;
-        this.manualTickets = manualTickets;
-        this.autoTickets = countTickets() - manualTickets;
+        this.manualTickets = setManualTickets(manualTicketNumbers);
+        this.autoTickets = purchaseAutoTickets(amount.getAutoTickets(manualTicketNumbers.size()));
     }
 
-    public Amount amount() {
-        return amount;
+    private void validateManualTickets(final Amount amount, final List<List<Number>> manualTickets) {
+        if (!amount.isEnoughToBuy(manualTickets.size())) {
+            throw new IllegalArgumentException(INVALID_MANUAL_TICKETS);
+        }
     }
 
     public int manualTickets() {
-        return manualTickets;
+        return manualTickets.size();
     }
 
     public int autoTickets() {
-        return autoTickets;
+        return autoTickets.size();
     }
 
-    public Tickets purchase(final List<Ticket> manualTickets) {
-        List<Ticket> purchasedAutoTickets = purchaseAutoTickets(autoTickets);
-
+    public Tickets purchase() {
         return new Tickets(
-            Stream.concat(manualTickets.stream(), purchasedAutoTickets.stream())
+            Stream.concat(manualTickets.stream(), autoTickets.stream())
                 .collect(Collectors.toList())
         );
+    }
+
+    private List<Ticket> setManualTickets(List<List<Number>> manualTickets) {
+        return manualTickets.stream()
+            .map(Ticket::new)
+            .collect(Collectors.toList());
     }
 
     private List<Ticket> purchaseAutoTickets(final int autoTickets) {
@@ -54,15 +56,4 @@ public class TicketMachine {
 
         return tickets;
     }
-
-    private int countTickets() {
-        return amount.value() / PRICE_PER_ONE_TICKET;
-    }
-
-    private void validateManualTickets(final Amount amount, final int manualTickets) {
-        if (manualTickets < VALIDATION_BASE_UNIT || manualTickets * PRICE_PER_ONE_TICKET > amount.value()) {
-            throw new IllegalArgumentException(INVALID_MANUAL_TICKETS);
-        }
-    }
-
 }
