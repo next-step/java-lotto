@@ -15,9 +15,9 @@ public class LottoAutoGenerator {
     private static final int LOTTO_SIZE_START = 0;
     private static final int LOTTO_SIZE_END = 6;
 
-    private static final List<LottoNumber> allNum;
+    private final List<LottoNumber> allNum;
 
-    static {
+    public LottoAutoGenerator() {
         allNum = IntStream.range(LOTTO_NUM_START, LOTTO_NUM_END)
             .mapToObj(LottoNumber::from)
             .collect(Collectors.toList());

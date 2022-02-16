@@ -9,9 +9,11 @@ import java.util.Map;
 public class Rankings {
 
     private final List<Ranking> rankings;
+    private final Map<Ranking, Integer> rankingCount;
 
     public Rankings(List<Ranking> rankings) {
         this.rankings = rankings;
+        rankingCount = countRankingCount();
     }
 
     public int countWinnerPriceSum() {
@@ -21,7 +23,6 @@ public class Rankings {
     }
 
     public int countFrequency(Ranking ranking){
-        Map<Ranking, Integer> rankingCount = countRankingCount();
         return rankingCount.getOrDefault(ranking, 0);
     }
 
