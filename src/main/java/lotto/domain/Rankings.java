@@ -20,7 +20,12 @@ public class Rankings {
             .reduce(0, Integer::sum);
     }
 
-    public Map<Ranking, Integer> countFrequency() {
+    public int countFrequency(Ranking ranking){
+        Map<Ranking, Integer> rankingCount = countRankingCount();
+        return rankingCount.getOrDefault(ranking, 0);
+    }
+
+    private Map<Ranking, Integer> countRankingCount() {
         Map<Ranking, Integer> successSum = new EnumMap<>(Ranking.class);
         for (Ranking ranking : rankings) {
             successSum.put(ranking, successSum.getOrDefault(ranking, 0) + 1);

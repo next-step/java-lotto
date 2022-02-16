@@ -42,10 +42,9 @@ public class LottoOutput {
         stringBuilder.append(RANKING_STATUS_MESSAGE);
         stringBuilder.append(RANKING_DELIMITER);
 
-        Map<Ranking, Integer> rankingCount = rankings.countFrequency();
         for (Ranking ranking : ORDER_PRINT_RANKING) {
             stringBuilder.append(ranking).append(DASH)
-                .append(rankingCount.getOrDefault(ranking, 0)).append(PIECE).append(ENTER);
+                .append(rankings.countFrequency(ranking)).append(PIECE).append(ENTER);
         }
 
         return stringBuilder;
