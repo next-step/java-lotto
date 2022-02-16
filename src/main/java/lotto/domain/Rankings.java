@@ -17,6 +17,15 @@ public class Rankings {
         rankingCount = countRankingCount();
     }
 
+    public static Rankings of(List<Lotto> userNumbers,
+        WinningLotto winningLotto) {
+        List<Ranking> rankings = new ArrayList<>();
+        for (Lotto userNumber : userNumbers) {
+            rankings.add(Ranking.of(userNumber, winningLotto));
+        }
+        return new Rankings(rankings);
+    }
+
     public int countWinnerPriceSum() {
         return rankings.stream()
             .map(Ranking::getWinnerPrice)

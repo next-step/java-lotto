@@ -8,7 +8,6 @@ import lotto.domain.LottoNumber;
 import lotto.domain.Rankings;
 import lotto.domain.WinningLotto;
 import lotto.service.LottoAutoGenerator;
-import lotto.service.LottoRankingCalculator;
 import lotto.view.LottoInput;
 import lotto.view.LottoOutput;
 
@@ -17,12 +16,9 @@ public class LottoController {
     private static final int LOTTO_PRICE = 1000;
 
     private final LottoAutoGenerator lottoAutoGenerator;
-    private final LottoRankingCalculator lottoRankingCalculator;
 
-    public LottoController(LottoAutoGenerator lottoAutoGenerator,
-        LottoRankingCalculator lottoRankingCalculator) {
+    public LottoController(LottoAutoGenerator lottoAutoGenerator) {
         this.lottoAutoGenerator = lottoAutoGenerator;
-        this.lottoRankingCalculator = lottoRankingCalculator;
     }
 
     private static int countBuySum(int buyPrice) {
@@ -48,8 +44,7 @@ public class LottoController {
 
         WinningLotto winningLotto = createWinningLotto();
 
-        Rankings rankings = lottoRankingCalculator.countLotteryNumbers(userLottoNumbers,
-            winningLotto);
+        Rankings rankings = Rankings.of(userLottoNumbers, winningLotto);
 
         LottoOutput.printLottoResult(rankings, buyPrice);
     }

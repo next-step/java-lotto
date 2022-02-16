@@ -28,6 +28,23 @@ public enum Ranking {
             .orElse(FAIL);
     }
 
+    public static Ranking of(Lotto userNumbers,
+        WinningLotto winningLotto) {
+        int normalSuccessCount = countNormalSuccessNumber(userNumbers,
+            winningLotto.getLottoNumbers());
+        boolean bonusSuccess = countBonusNumber(userNumbers, winningLotto.getBonusNumber());
+
+        return Ranking.of(normalSuccessCount, bonusSuccess);
+    }
+
+    private static int countNormalSuccessNumber(Lotto userNumbers, Lotto lotteryNumbers) {
+        return lotteryNumbers.countSameNumber(userNumbers);
+    }
+
+    private static boolean countBonusNumber(Lotto userNumbers, LottoNumber bonusNum) {
+        return userNumbers.contains(bonusNum);
+    }
+
     private boolean equalsFromResult(int normalSuccessCount, boolean bonusSuccess) {
         return this.normalSuccessNum == normalSuccessCount &&
             this.bonusSuccess == bonusSuccess;
