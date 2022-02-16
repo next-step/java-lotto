@@ -97,6 +97,7 @@
 - [x] anyMatch 및 메서드 참조 활용하기
 - [x] `+` 연산자로 문자열을 구성하는 것보다는 `String.format`을 이용해보자.
 - [x] `System.out.println(String.format)`을 `System.out.printf`으로 바꿔보자.
+- [x] 네이밍을 맴버변수와 동일하게 지어서 bonusNumber가 맴버변수가아닌 매개변수로 적용되는 오류 해결
 
 ## multiple authors
 
