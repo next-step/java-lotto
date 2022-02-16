@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
-class LottoNumbersTest {
+class LottoTest {
 
     @Test
     void 복권의_숫자_개수는_6개여야_한다() {

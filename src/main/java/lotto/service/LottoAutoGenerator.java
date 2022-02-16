@@ -1,12 +1,14 @@
 package lotto.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.view.LottoOutput;
 
 public class LottoAutoGenerator {
 
@@ -26,7 +28,8 @@ public class LottoAutoGenerator {
     public List<Lotto> generateLottos(int size) {
         List<Lotto> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            lottoNumbers.add(generateLotto());
+            Lotto lotto = generateLotto();
+            lottoNumbers.add(lotto);
         }
         return lottoNumbers;
     }

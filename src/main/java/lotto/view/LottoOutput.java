@@ -25,7 +25,8 @@ public class LottoOutput {
 
     public static void printBuySum(int buyNum) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(buyNum)
+        stringBuilder
+            .append(buyNum)
             .append(BUYSUM_MESSAGE);
         System.out.println(stringBuilder);
     }
@@ -66,8 +67,10 @@ public class LottoOutput {
     public static void printLottoNumber(List<Lotto> lottoNumbers) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (Lotto lottoNumber : lottoNumbers) {
-            stringBuilder.append(Arrays.toString(lottoNumber.getNumbers().toArray())).append(ENTER);
+        for (Lotto lotto : lottoNumbers) {
+            stringBuilder
+                .append(Arrays.toString(lotto.getNumbers().toArray()))
+                .append(ENTER);
         }
 
         System.out.println(stringBuilder);
