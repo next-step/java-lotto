@@ -14,7 +14,6 @@ public class Lottos {
 
     public Lottos(LottoPrice lottoPrice) {
         validateLottoPrice(lottoPrice.getPrice());
-
         this.lottoLists = generatorLottos(lottoPrice.getPrice() / LOTTO_PRICE);
     }
 

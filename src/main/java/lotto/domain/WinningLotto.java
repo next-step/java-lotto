@@ -27,7 +27,7 @@ public class WinningLotto {
 
     public List<Rank> matchRank() {
         for (int i = 0; i < lottos.getLottoLists().size(); i++) {
-            int count = matchWinningNumbers(lottos.getLottoLists().get(i)); // 0,1,2면 무시
+            int count = matchWinningNumbers(lottos.getLottoLists().get(i));
             addWinningRanksList(count, i);
         }
         return winningRanks;
