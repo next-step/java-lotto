@@ -94,6 +94,7 @@
 ## Step2
 
 - [x] 불필요한 stream 삭제
+- [x] anyMatch 활용하기
 
 ## multiple authors
 
