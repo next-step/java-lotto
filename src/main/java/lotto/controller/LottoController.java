@@ -1,8 +1,9 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.domain.Ticket;
-import lotto.domain.TicketDealer;
+import lotto.domain.LottoGameManager;
+import lotto.domain.Money;
+import lotto.domain.PurchaseTicket;
 import lotto.domain.WinningNumber;
 import lotto.domain.WinningResult;
 import lotto.domain.lotto.Lotto;
@@ -16,17 +17,10 @@ public class LottoController {
     public void start() {
         OutputView outputView = new OutputView();
 
-        Ticket ticket = InputView.buyTicket();
+        Money money = getMoney();
+        PurchaseTicket ticket = new PurchaseTicket(money, getManualCount());
 
-        List<Lotto> manualLottos = InputView.buyManualLotto(ticket.getBuyTotalCount());
-        int manualLottosSize = manualLottos.size();
-        Lottos lottos = TicketDealer.getLottosByManual(manualLottos);
-
-        int autoLottosSize = ticket.getBuyTotalCount() - manualLottos.size();
-        List<Lotto> autoLottos = TicketDealer.getLottosByAuto(lottos, new RandomLottoGenerator(), autoLottosSize);
-        lottos.appendLottos(autoLottos);
-
-        ticket.detailCount(manualLottosSize, autoLottosSize);
+        Lottos lottos = purchase(ticket);
 
         outputView.printPurchaseAmount(ticket);
         outputView.printPurchaseTicket(lottos);
@@ -36,5 +30,30 @@ public class LottoController {
         winningResult.calculateYield(ticket.getBuyCash());
 
         outputView.printWinningResult(winningResult);
+    }
+
+    private Money getMoney() {
+        try {
+            return new Money(InputView.getMoney());
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return getMoney();
+        }
+    }
+
+    private int getManualCount() {
+        return InputView.getManualTicketCount();
+    }
+
+    private Lottos purchase(final PurchaseTicket ticket) {
+        List<List<Integer>> manualLottoNumbers = getManualLottoNumbers(ticket);
+
+        List<Lotto> lottoGames = LottoGameManager.getLottosByManual(manualLottoNumbers);
+        lottoGames.addAll(LottoGameManager.getLottosByAuto(new RandomLottoGenerator(), ticket.getBuyAutoCount()));
+        return new Lottos(lottoGames);
+    }
+
+    private List<List<Integer>> getManualLottoNumbers(final PurchaseTicket ticket) {
+        return InputView.getManualLottoNumbers(ticket.getBuyManualCount());
     }
 }
