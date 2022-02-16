@@ -16,4 +16,5 @@ class WinningLottoTest {
         assertThatThrownBy(() -> new WinningLotto(new Lotto(new HashSet(Arrays.asList(1,2,3,4,5,6))), new LottoNumber(6), lottos))
             .isInstanceOf(IllegalArgumentException.class);
     }
+
 }

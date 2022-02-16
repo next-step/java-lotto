@@ -5,7 +5,7 @@ import java.util.List;
 
 public class LottoStatistics {
 
-    public String getLottoEarningRate(List<Rank> resultStatistics, LottoPrice lottoPrice) {
+    public static String getLottoEarningRate(List<Rank> resultStatistics, LottoPrice lottoPrice) {
         int totalPrice = 0;
         for (Rank statistics : resultStatistics) {
             totalPrice += statistics.getMoney();

@@ -29,9 +29,7 @@ public class LottoController {
         WinningLotto winningLotto = new WinningLotto(refineToLottoList(winningNumber), bonusBall, lottos);
         List<Rank> winningRanks = winningLotto.matchRank();
 
-        LottoStatistics lottoStatistics = new LottoStatistics();
-        String lottoEaringRate = lottoStatistics.getLottoEarningRate(winningRanks, lottoPrice);
-
+        String lottoEaringRate = LottoStatistics.getLottoEarningRate(winningRanks, lottoPrice);
         ResultView.printLottoStatistics(winningRanks, lottoEaringRate);
     }
 

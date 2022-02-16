@@ -10,7 +10,7 @@ public class Lottos {
     private static final int ERROR_WRONG_LOTTO_PRICE = 0;
     private static final int LOTTO_PRICE = 1000;
 
-    List<Lotto> lottoLists;
+    private final List<Lotto> lottoLists;
 
     public Lottos(LottoPrice lottoPrice) {
         validateLottoPrice(lottoPrice.getPrice());
