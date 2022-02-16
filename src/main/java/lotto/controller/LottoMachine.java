@@ -39,10 +39,12 @@ public class LottoMachine {
         final Price lottoPrice = Price.from(price);
         final LottoTicket lottoTicket = LottoTicketGenerator.of(lottoPrice, manualLottoTicket)
             .getLottoTicket();
+        final int autoLottoCount =
+            lottoTicket.getLottoTicketCount() - manualLottoTicket.getLottoTicketCount();
 
         OutputView.printLottoCount(
             manualLottoTicket.getLottoTicketCount(),
-            lottoTicket.getLottoTicketCount()
+            autoLottoCount
         );
         ResultView.printLottoNumbers(lottoTicket.getLottoList());
 
@@ -71,8 +73,8 @@ public class LottoMachine {
         OutputView.printRequestManualLottoCount();
         ManualLottoCount manualLottoCount = ManualLottoCount.from(InputView.readInt());
 
+        OutputView.printRequestManualLottoNumbers();
         for (int i = 0; i < manualLottoCount.getCount(); i++) {
-            OutputView.printRequestManualLottoNumbers();
             Lotto manualLotto = Lotto.from(Util.stringToIntegerList(InputView.readWinningNumber()));
             lottoTicket.append(manualLotto);
         }
