@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,7 @@ public class Rankings {
     private final Map<Ranking, Integer> rankingCount;
 
     public Rankings(List<Ranking> rankings) {
-        this.rankings = rankings;
+        this.rankings = new ArrayList<>(rankings);
         rankingCount = countRankingCount();
     }
 
@@ -22,7 +23,7 @@ public class Rankings {
             .reduce(0, Integer::sum);
     }
 
-    public int countFrequency(Ranking ranking){
+    public int countFrequency(Ranking ranking) {
         return rankingCount.getOrDefault(ranking, 0);
     }
 

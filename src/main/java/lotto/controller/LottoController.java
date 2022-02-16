@@ -25,6 +25,16 @@ public class LottoController {
         this.lottoRankingCalculator = lottoRankingCalculator;
     }
 
+    private static int countBuySum(int buyPrice) {
+        return BigDecimal.valueOf(buyPrice)
+            .divide(BigDecimal.valueOf(LOTTO_PRICE), RoundingMode.DOWN).intValue();
+    }
+
+    private static WinningLotto createWinningLotto() {
+        Lotto lastWeekLottoNumber = LottoInput.inputWinningNumber();
+        LottoNumber bonusNumber = LottoInput.inputBonusBall();
+        return new WinningLotto(lastWeekLottoNumber, bonusNumber);
+    }
 
     public void run() {
         int buyPrice = LottoInput.inputPrice();
@@ -42,16 +52,5 @@ public class LottoController {
             winningLotto);
 
         LottoOutput.printLottoResult(rankings, buyPrice);
-    }
-
-    private static int countBuySum(int buyPrice) {
-        return BigDecimal.valueOf(buyPrice)
-            .divide(BigDecimal.valueOf(LOTTO_PRICE), RoundingMode.DOWN).intValue();
-    }
-
-    private static WinningLotto createWinningLotto() {
-        Lotto lastWeekLottoNumber = LottoInput.inputWinningNumber();
-        LottoNumber bonusNumber = LottoInput.inputBonusBall();
-        return new WinningLotto(lastWeekLottoNumber, bonusNumber);
     }
 }

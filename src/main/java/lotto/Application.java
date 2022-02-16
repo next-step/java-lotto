@@ -7,7 +7,8 @@ import lotto.service.LottoRankingCalculator;
 public class Application {
 
     public static void main(String[] args) {
-        LottoController lottoController = new LottoController(new LottoAutoGenerator(), LottoRankingCalculator.getInstance());
+        LottoController lottoController = new LottoController(new LottoAutoGenerator(),
+            LottoRankingCalculator.getInstance());
         lottoController.run();
     }
 }
