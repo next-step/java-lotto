@@ -8,7 +8,7 @@ import lotto.domain.LottoNumber;
 public class Util {
 
     public static List<LottoNumber> stringToIntegerList(String unrefinedNumber) {
-        return Arrays.asList(unrefinedNumber.split(", ")).stream()
+        return Arrays.stream(unrefinedNumber.split(", "))
             .map(Integer::parseInt)
             .map(LottoNumber::from)
             .collect(Collectors.toList());
