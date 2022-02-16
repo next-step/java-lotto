@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -19,6 +20,12 @@ public class Lotto {
         if (lottoNumber.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException(ERROR_LOTTO_NUMBER);
         }
+    }
+
+    public int matchWinningnumbers(final Lotto lottoNumberList, Lotto winningNumber) {
+        return lottoNumberList.getLottoNumbers().stream().
+            filter(lottoNumber -> lottoNumber.isWinningNumber(lottoNumber, winningNumber))
+            .collect(Collectors.toSet()).size();
     }
 
     public Set<LottoNumber> getLottoNumbers() {

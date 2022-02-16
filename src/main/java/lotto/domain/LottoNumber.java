@@ -20,6 +20,10 @@ public class LottoNumber {
         }
     }
 
+    public boolean isWinningNumber(final LottoNumber lottoNumber, final Lotto winningNumber) {
+        return winningNumber.getLottoNumbers().contains(lottoNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

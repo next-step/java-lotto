@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class WinningLotto {
     private static final String ERROR_DISTINCT = "당첨 번호와 보너스 번호는 중복될 수 없습니다.";
@@ -47,17 +46,7 @@ public class WinningLotto {
     }
 
     private int matchWinningNumbers(final Lotto lottoNumberList) {
-        return lottoNumberList.getLottoNumbers().stream()
-            .filter(lottoNumber -> isWinningNumber(lottoNumber))
-            .collect(Collectors.toSet()).size();
-    }
-
-    private boolean isWinningNumber(final LottoNumber lottoNumber) {
-        return winningNumber.getLottoNumbers().contains(lottoNumber);
-    }
-
-    public List<Rank> getWinningRanks() {
-        return winningRanks;
+       return lottoNumberList.matchWinningnumbers(lottoNumberList, winningNumber);
     }
 
 }
