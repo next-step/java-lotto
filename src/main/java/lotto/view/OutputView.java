@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import lotto.domain.PurchaseTicket;
+import lotto.domain.ticket.PurchaseTicket;
 import lotto.domain.WinningResult;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
