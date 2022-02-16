@@ -26,14 +26,6 @@ public class TicketMachine {
         }
     }
 
-    public int manualTickets() {
-        return manualTickets.size();
-    }
-
-    public int autoTickets() {
-        return autoTickets.size();
-    }
-
     public Tickets purchase() {
         return new Tickets(
             Stream.concat(manualTickets.stream(), autoTickets.stream())

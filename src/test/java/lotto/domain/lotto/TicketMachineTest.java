@@ -13,12 +13,15 @@ import org.junit.jupiter.api.Test;
 
 class TicketMachineTest {
 
+    private Amount amount;
     private TicketMachine machine;
+    private List<List<Number>> numbers;
 
     @BeforeEach
     void setUp() {
-        int amount = 14000;
-        machine = new TicketMachine(new Amount(amount), getNumbers());
+        amount = new Amount(14000);
+        numbers = getNumbers();
+        machine = new TicketMachine(amount, numbers);
     }
 
     @DisplayName("티켓 구매시 수동 티켓과 자동 티켓의 합이 총 구매장수와 일치해야 한다.")
@@ -34,8 +37,8 @@ class TicketMachineTest {
     @Test
     void testEachTicketsValid() {
         assertAll(
-            () -> assertThat(machine.autoTickets()).isEqualTo(11),
-            () -> assertThat(machine.manualTickets()).isEqualTo(3)
+            () -> assertThat(amount.getAutoTickets(numbers.size())).isEqualTo(11),
+            () -> assertThat(numbers.size()).isEqualTo(3)
         );
     }
 

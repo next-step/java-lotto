@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,12 +29,14 @@ class TicketsTest {
     @Test
     void testPrizeMapCorrectly() {
         Map<Rank, Integer> prizeMap = tickets.getComparisonPrizeMap(answerTicket, bonusNumber);
-        assertThat(prizeMap.getOrDefault(Rank.FIRST,0)).isZero();
-        assertThat(prizeMap.getOrDefault(Rank.SECOND, 0)).isEqualTo(1);
-        assertThat(prizeMap.getOrDefault(Rank.THIRD, 0)).isZero();
-        assertThat(prizeMap.getOrDefault(Rank.FOURTH, 0)).isEqualTo(1);
-        assertThat(prizeMap.getOrDefault(Rank.FIFTH, 0)).isZero();
-        assertThat(prizeMap.getOrDefault(Rank.NONE, 0)).isEqualTo(1);
+        assertAll(
+            () -> assertThat(prizeMap.getOrDefault(Rank.FIRST, 0)).isZero(),
+            () -> assertThat(prizeMap.getOrDefault(Rank.SECOND, 0)).isEqualTo(1),
+            () -> assertThat(prizeMap.getOrDefault(Rank.THIRD, 0)).isZero(),
+            () -> assertThat(prizeMap.getOrDefault(Rank.FOURTH, 0)).isEqualTo(1),
+            () -> assertThat(prizeMap.getOrDefault(Rank.FIFTH, 0)).isZero(),
+            () -> assertThat(prizeMap.getOrDefault(Rank.NONE, 0)).isEqualTo(1)
+        );
     }
 
     private Ticket setUpAnswerTicket(List<Integer> numbers) {

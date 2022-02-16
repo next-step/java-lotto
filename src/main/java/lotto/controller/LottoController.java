@@ -37,7 +37,7 @@ public class LottoController {
         TicketMachine machine = new TicketMachine(amount, manualTicketNumbers);
         Tickets tickets = machine.purchase();
 
-        OutputView.printBuyingTickets(machine.manualTickets(), machine.autoTickets());
+        OutputView.printBuyingTickets(manualTicketNumbers.size(), amount.getAutoTickets(manualTicketNumbers.size()));
 
         showTickets(tickets);
         showResult(tickets, amount);
