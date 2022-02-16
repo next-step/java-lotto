@@ -9,14 +9,14 @@ public class InputView {
     private InputView() {
     }
 
-    public static int readPrice() {
-        int price = 0;
+    public static int readInt() {
+        int number = 0;
         try {
-            price = Console.readLineInt();
+            number = Console.readLineInt();
         } catch (IllegalArgumentException exception) {
             OutputView.printExceptionMessage(exception.getMessage());
         }
-        return price;
+        return number;
     }
 
     public static String readWinningNumber() {

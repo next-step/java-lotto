@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -33,7 +32,7 @@ public class LottoTicketGenerator {
         int count = convertPriceToCount(price.getValue());
         List<Lotto> lottoTicket = generateLottoTicket(count);
 
-        return LottoTicket.from(lottoTicket, price.getValue());
+        return LottoTicket.of(lottoTicket, price.getValue());
     }
 
     private static List<Lotto> generateLottoTicket(int count) {

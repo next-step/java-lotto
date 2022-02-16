@@ -6,6 +6,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTicketGenerator;
+import lotto.domain.ManualLottoCount;
 import lotto.domain.Price;
 import lotto.domain.WinningNumbers;
 import lotto.util.Util;
@@ -28,13 +29,13 @@ public class LottoMachine {
     }
 
     public void run() {
-        final LottoTicket lottoTicket = purchaseLotto(purchaseAmount());
+        final LottoTicket lottoTicket = purchaseLotto(purchaseAmount(), purchaseManualLotto());
         final LottoStatistics lottoStatistics = calculateWinningResult(lottoTicket);
 
         printResult(lottoStatistics);
     }
 
-    public LottoTicket purchaseLotto(int price) {
+    public LottoTicket purchaseLotto(int price, LottoTicket manualLottoTicket) {
         final Price lottoPrice = Price.from(price);
         final LottoTicket lottoTicket = LottoTicketGenerator.from(lottoPrice).getLottoTicket();
 
@@ -57,7 +58,22 @@ public class LottoMachine {
 
     private int purchaseAmount() {
         OutputView.printRequestLottoPrice();
-        return InputView.readPrice();
+        return InputView.readInt();
+    }
+
+    private LottoTicket purchaseManualLotto() {
+        LottoTicket lottoTicket = LottoTicket.create();
+
+        OutputView.printRequestManualLottoCount();
+        ManualLottoCount manualLottoCount = ManualLottoCount.from(InputView.readInt());
+
+        for (int i = 0; i < manualLottoCount.getCount(); i++) {
+            OutputView.printRequestManualLottoNumbers();
+            Lotto manualLotto = Lotto.from(Util.stringToIntegerList(InputView.readWinningNumber()));
+            lottoTicket.append(manualLotto);
+        }
+
+        return lottoTicket;
     }
 
     private List<LottoNumber> getWinningNumber() {

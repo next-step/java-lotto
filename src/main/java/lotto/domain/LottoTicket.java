@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -8,12 +9,21 @@ public class LottoTicket {
     final List<Lotto> lottoList;
     final int price;
 
+    private LottoTicket() {
+        this.lottoList = new ArrayList<>();
+        this.price = 0;
+    }
+
     private LottoTicket(List<Lotto> lottoList, int price) {
         this.lottoList = lottoList;
         this.price = price;
     }
 
-    public static LottoTicket from(List<Lotto> lottoList, int price) {
+    public static LottoTicket create() {
+        return new LottoTicket();
+    }
+
+    public static LottoTicket of(List<Lotto> lottoList, int price) {
         return new LottoTicket(lottoList, price);
     }
 
@@ -23,5 +33,9 @@ public class LottoTicket {
 
     public int getPrice() {
         return price;
+    }
+
+    public void append(Lotto lotto) {
+        lottoList.add(lotto);
     }
 }
