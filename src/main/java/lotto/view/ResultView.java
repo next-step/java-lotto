@@ -9,7 +9,7 @@ import lotto.domain.PrizeGrade;
 public class ResultView {
 
     public static void printLottoNumbers(List<Lotto> lottoTicket) {
-        lottoTicket.stream().forEach(item -> {
+        lottoTicket.forEach(item -> {
             OutputView.printLottoNumber(item);
             System.out.println();
         });
