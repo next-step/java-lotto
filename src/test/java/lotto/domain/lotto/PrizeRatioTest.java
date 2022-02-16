@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 class PrizeRatioTest {
 
+    private int ticketSize;
     private Answer answer;
     private Tickets tickets;
 
@@ -26,7 +27,7 @@ class PrizeRatioTest {
     @DisplayName("수익률 유효성 검증")
     @Test
     void testRateReturnsValid() {
-        BigDecimal rateOfReturn = new PrizeRatio().calculateRatio(getPurchased(), answer.getComparisonPrizeMap(tickets));
+        BigDecimal rateOfReturn = new PrizeRatio().calculateRatio(new Amount(1000 * ticketSize), answer.getComparisonPrizeMap(tickets));
 
         assertThat(rateOfReturn.doubleValue())
             .isEqualTo(0.35);
@@ -60,6 +61,7 @@ class PrizeRatioTest {
             ticketList.add(ticket);
         }
 
+        ticketSize = ticketList.size();
         tickets = new Tickets(ticketList);
     }
 
@@ -70,7 +72,4 @@ class PrizeRatioTest {
         answer = new Answer(baseAnswerNumbers, new Number(7));
     }
 
-    private Amount getPurchased() {
-        return new Amount(1000 * tickets.count());
-    }
 }
