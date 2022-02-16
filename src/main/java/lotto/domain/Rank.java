@@ -10,9 +10,8 @@ public enum Rank {
     THIRD(5, 1500000),
     FOURTH(4, 50000),
     FIFTH(3, 5000),
-    NONE2(2, 0),
-    NONE1(1, 0),
-    NONE(0, 0);
+    NONE(0,0);
+
 
     private final int grade;
     private final int money;

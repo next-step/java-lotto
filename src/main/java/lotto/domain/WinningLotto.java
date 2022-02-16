@@ -6,7 +6,7 @@ import java.util.List;
 public class WinningLotto {
     private static final String ERROR_DISTINCT = "당첨 번호와 보너스 번호는 중복될 수 없습니다.";
     private static final int MATCH_FIVE = 5;
-
+    private static final int WINNING_LIMIT = 3;
     private final Lotto winningNumber;
     private final LottoNumber bonusNumber;
     private List<Rank> winningRanks = new ArrayList<>();
@@ -27,10 +27,16 @@ public class WinningLotto {
 
     public List<Rank> matchRank() {
         for (int i = 0; i < lottos.getLottoLists().size(); i++) {
-            int count = matchWinningNumbers(lottos.getLottoLists().get(i));
-            winningRanks.add(getRank(count, lottos.getLottoLists().get(i)));
+            int count = matchWinningNumbers(lottos.getLottoLists().get(i)); // 0,1,2면 무시
+            addWinningRanksList(count, i);
         }
         return winningRanks;
+    }
+
+    private void addWinningRanksList(int count, int i) {
+        if(count >= WINNING_LIMIT) {
+            winningRanks.add(getRank(count, lottos.getLottoLists().get(i)));
+        }
     }
 
     private Rank getRank(final int count, final Lotto lottoNumberList) {
