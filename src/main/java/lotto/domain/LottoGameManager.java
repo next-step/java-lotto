@@ -6,6 +6,7 @@ import java.util.stream.IntStream;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.machine.LottoGenerator;
+import lotto.domain.machine.LottoSupplier;
 
 public class LottoGameManager {
 
