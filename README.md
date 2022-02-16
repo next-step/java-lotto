@@ -91,6 +91,10 @@
   - [x] WinningNumbersTest
 - [x] WinningNumbers 중복 검증 로직 삭제 
 
+## Step2
+
+- [x] 불필요한 stream 삭제
+
 ## multiple authors
 
 ```bash
