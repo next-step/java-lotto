@@ -17,7 +17,7 @@ public class LottoOutput {
     private static final String DASH = " - ";
     private static final String PIECE = "개";
     private static final List<Ranking> ORDER_PRINT_RANKING = new ArrayList<>(
-        Arrays.asList(Ranking.FIVE, Ranking.FOUR, Ranking.FOUR, Ranking.THREE, Ranking.TWO,
+        Arrays.asList(Ranking.FIVE, Ranking.FOUR, Ranking.THREE, Ranking.TWO,
             Ranking.ONE));
 
     private LottoOutput() {

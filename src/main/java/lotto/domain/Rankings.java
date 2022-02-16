@@ -14,7 +14,7 @@ public class Rankings {
     private final List<Ranking> rankings;
     private final Map<Ranking, Integer> rankingCount;
 
-    public Rankings(List<Ranking> rankings) {
+    private Rankings(List<Ranking> rankings) {
         this.rankings = new ArrayList<>(rankings);
         rankingCount = countRankingCount();
     }
