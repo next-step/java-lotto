@@ -14,7 +14,7 @@ public class OutputView {
     private static final String PRINT_REQUEST_BONUS_BALL_NUMBER = "보너스 볼을 입력해주세요.";
     private static final String PRINT_WINNING_STATS = "\n당첨 통계\n------------";
     private static final String PRINT_PRIZE_GRADE_RESULT_FORMAT = "%d개 일치%s(%d원) - %d개%n";
-    private static final String PRINT_TOTAL_RETURN_FORMAT = "총 수익률은 %f입니다.(기준이 1이기 때문에 결과적으로 %s이라는 의미임)%n";
+    private static final String PRINT_TOTAL_RETURN_FORMAT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s이라는 의미임)%n";
     private static final String PRINT_LOTTO_NUMBER_FORMAT = "%d";
     private static final String BONUS_RESULT = ", 보너스 볼 일치";
 

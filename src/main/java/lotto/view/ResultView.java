@@ -20,7 +20,7 @@ public class ResultView {
 
         printLottoStatistic(lottoStatistics);
 
-        OutputView.printTotalReturn(Double.parseDouble(lottoStatistics.getLottoEarningRate()));
+        OutputView.printTotalReturn(lottoStatistics.getLottoEarningRate());
     }
 
     private static void printLottoStatistic(LottoStatistics lottoStatistics) {
