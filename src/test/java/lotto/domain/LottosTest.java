@@ -21,7 +21,7 @@ class LottosTest {
     @DisplayName(value = "구매금액을 로또한개의 가격으로 나누었을때, 나머지가 발생할경우 IllegalArgumentException 발생한다.")
     @Test
     void checkValidPrice() {
-        assertThatThrownBy(() -> new Lottos(new LottoPrice(10000)))
+        assertThatThrownBy(() -> new Lottos(new LottoPrice(10100)))
         .isInstanceOf(IllegalArgumentException.class);
     }
 
