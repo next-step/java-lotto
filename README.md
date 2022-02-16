@@ -95,6 +95,7 @@
 
 - [x] 불필요한 stream 삭제
 - [x] anyMatch 및 메서드 참조 활용하기
+- [x] `+` 연산자로 문자열을 구성하는 것보다는 `String.format`을 이용해보자.
 
 ## multiple authors
 
