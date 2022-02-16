@@ -15,7 +15,7 @@ public class Lotto {
 
     private final List<LottoNumber> numbers;
 
-    public Lotto(final List<LottoNumber> numbers){
+    public Lotto(final List<LottoNumber> numbers) {
         validateNumbersSize(numbers);
         validateDuplicateNumber(numbers);
         this.numbers = numbers;

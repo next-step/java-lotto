@@ -31,7 +31,13 @@ public class LottoOutput {
         System.out.println(stringBuilder);
     }
 
-    public static void printRankingStatus(Rankings rankings) {
+    public static void printLottoResult(Rankings rankings, int buyPrice) {
+        StringBuilder rankingStatus = printRankingStatus(rankings);
+        StringBuilder rewardRate = printRewardRate(rankings, buyPrice);
+        System.out.println(rankingStatus.append(ENTER).append(rewardRate));
+    }
+
+    private static StringBuilder printRankingStatus(Rankings rankings) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(RANKING_STATUS_MESSAGE);
         stringBuilder.append(RANKING_DELIMITER);
@@ -42,15 +48,15 @@ public class LottoOutput {
                 .append(rankingCount.getOrDefault(ranking, 0)).append(PIECE).append(ENTER);
         }
 
-        System.out.println(stringBuilder);
+        return stringBuilder;
     }
 
-    public static void printRewardRate(Rankings rankings, int buyPrice) {
+    private static StringBuilder printRewardRate(Rankings rankings, int buyPrice) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(REWARD_RATE_MESSAGE);
         double rewardCount = rankings.countRewardRate(buyPrice);
         stringBuilder.append(rewardCount);
-        System.out.println(stringBuilder);
+        return stringBuilder;
     }
 
     public static void printLottoNumber(List<Lotto> lottoNumbers) {

@@ -48,7 +48,7 @@ public enum Ranking {
     @Override
     public String toString() {
         int matchNum = normalSuccessNum;
-        if(bonusSuccess){
+        if (bonusSuccess) {
             matchNum++;
         }
 

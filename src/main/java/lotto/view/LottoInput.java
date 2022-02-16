@@ -3,8 +3,8 @@ package lotto.view;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import lotto.domain.LottoNumber;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 public class LottoInput {
 

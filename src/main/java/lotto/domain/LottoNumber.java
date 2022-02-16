@@ -12,13 +12,13 @@ public class LottoNumber {
 
     private static final Map<Integer, LottoNumber> numbers = new HashMap<>();
 
-    private final int value;
-
     static {
         IntStream.rangeClosed(LottoNumber.MINIMUM_NUMBER, LottoNumber.MAXIMUM_NUMBER)
             .mapToObj(LottoNumber::new)
             .forEach(lottoNumber -> numbers.put(lottoNumber.value, lottoNumber));
     }
+
+    private final int value;
 
     private LottoNumber(int value) {
         this.value = value;

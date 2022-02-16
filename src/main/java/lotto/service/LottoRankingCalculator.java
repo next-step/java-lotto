@@ -2,8 +2,8 @@ package lotto.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.LottoNumber;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Ranking;
 import lotto.domain.Rankings;
 import lotto.domain.WinningLotto;
@@ -31,7 +31,8 @@ public class LottoRankingCalculator {
 
     public Ranking countLotteryNumber(Lotto userNumbers,
         WinningLotto winningLotto) {
-        int normalSuccessCount = countNormalSuccessNumber(userNumbers, winningLotto.getLottoNumbers());
+        int normalSuccessCount = countNormalSuccessNumber(userNumbers,
+            winningLotto.getLottoNumbers());
         boolean bonusSuccess = countBonusNumber(userNumbers, winningLotto.getBonusNumber());
 
         return Ranking.of(normalSuccessCount, bonusSuccess);
