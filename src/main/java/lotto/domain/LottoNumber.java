@@ -29,8 +29,7 @@ public class LottoNumber {
 
     public boolean isInLottoNumberList(List<LottoNumber> list) {
         return list.stream()
-            .filter(x -> x.getLottoNumber() == lottoNumber)
-            .count() > 0;
+            .anyMatch(x -> x.getLottoNumber() == lottoNumber);
     }
 
     public boolean isEqualTo(LottoNumber number) {
