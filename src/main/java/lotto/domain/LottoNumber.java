@@ -4,9 +4,10 @@ import java.util.Objects;
 
 public class LottoNumber {
 
-    private static final int LOTTO_START_RANGE=1;
-    private static final int LOTTO_END_RANGE=45;
-    private static final String LOTTO_RANGE_ERROR="1 이상 45 이하의 수를 입력해주세요";
+    private static final int LOTTO_START_RANGE = 1;
+    private static final int LOTTO_END_RANGE = 45;
+    private static final String LOTTO_RANGE_ERROR = "1 이상 45 이하의 수를 입력해주세요";
+
     private final int lottoNumber;
 
     public LottoNumber(final String input) {

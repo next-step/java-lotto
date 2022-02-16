@@ -1,4 +1,3 @@
-
 package lotto.domain;
 
 
@@ -24,7 +23,6 @@ class LottoMachineTest {
     void isContainTest() {
         Assertions.assertThat(lottoMachine.isContain(new LottoNumber(3))).isTrue();
     }
-
 
     @Test
     void isNotContainTest() {
