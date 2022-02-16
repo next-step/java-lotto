@@ -22,11 +22,6 @@ public class LottoController {
         this.lottoAutoGenerator = lottoAutoGenerator;
     }
 
-    private static int countBuySum(int buyPrice) {
-        return BigDecimal.valueOf(buyPrice)
-            .divide(BigDecimal.valueOf(LOTTO_PRICE), RoundingMode.DOWN).intValue();
-    }
-
     public void run() {
         int buyPrice = LottoInput.inputPrice();
         int buySum = countBuySum(buyPrice);
@@ -45,5 +40,10 @@ public class LottoController {
             .countLotteryNumbers(userLottoNumbers, winningLotto);
 
         LottoOutput.printLottoResult(rankings, buyPrice);
+    }
+
+    private static int countBuySum(int buyPrice) {
+        return BigDecimal.valueOf(buyPrice)
+            .divide(BigDecimal.valueOf(LOTTO_PRICE), RoundingMode.DOWN).intValue();
     }
 }
