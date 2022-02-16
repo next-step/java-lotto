@@ -17,9 +17,8 @@ public class InputView {
            return price;
         } catch (IllegalArgumentException exception) {
             OutputView.printExceptionMessage(OutputView.ERROR_MESSAGE + exception.getMessage());
-            System.exit(0);
+            return readPrice();
         }
-        return readPrice();
     }
 
     public static String readWinningNumber() {
@@ -30,9 +29,8 @@ public class InputView {
             return winningNumber;
         } catch (IllegalArgumentException exception) {
             OutputView.printExceptionMessage(OutputView.ERROR_MESSAGE + exception.getMessage());
-            System.exit(0);
+            return readWinningNumber();
         }
-        return readWinningNumber();
     }
 
     public static LottoNumber readBonusNumber() {
@@ -42,8 +40,7 @@ public class InputView {
            return new LottoNumber(bonusNumber);
         } catch (IllegalArgumentException exception) {
             OutputView.printExceptionMessage(OutputView.ERROR_MESSAGE + exception.getMessage());
-            System.exit(0);
+            return readBonusNumber();
         }
-        return readBonusNumber();
     }
 }
