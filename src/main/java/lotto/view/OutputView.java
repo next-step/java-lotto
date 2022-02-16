@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import lotto.domain.Ticket;
+import lotto.domain.PurchaseTicket;
 import lotto.domain.WinningResult;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
@@ -27,7 +27,7 @@ public class OutputView {
         System.out.print(message);
     }
 
-    public void printPurchaseAmount(Ticket ticket) {
+    public void printPurchaseAmount(PurchaseTicket ticket) {
         int buyManualCount = ticket.getBuyManualCount();
         int buyAutoCount = ticket.getBuyAutoCount();
         printMessage(ENTER + String.format(PURCHASE_AMOUNT_MANAGER_LOG, buyManualCount, buyAutoCount) + ENTER);
