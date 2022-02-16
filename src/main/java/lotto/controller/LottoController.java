@@ -15,43 +15,23 @@ import lotto.view.OutputView;
 import lotto.view.ResultView;
 
 public class LottoController {
-    private LottoPrice lottoPrice;
-    private Lottos lottos;
-    private String winningNumber;
-    private LottoNumber bonusBall;
-    private WinningLotto winningLotto;
-    private List<Rank> winningRanks;
 
     public void start() {
-        lottoPriceProcess();
-        lottoListsProcess();
-        OutputView.printLottoCount(lottos.getLottoLists().size());
-        winningNumberProcess();
-        statisticsProcess();
-    }
+        LottoPrice lottoPrice = InputView.readPrice();
 
-    private void lottoPriceProcess() {
-        OutputView.printRequestLottoPrice();
-        lottoPrice = InputView.readPrice();
-    }
-
-    private void lottoListsProcess() {
-        lottos = new Lottos(lottoPrice);
+        Lottos lottos = new Lottos(lottoPrice);
         ResultView.printLottoNumbers(lottos.getLottoLists());
-    }
 
-    private void winningNumberProcess() {
-        OutputView.printWinningNumberBefore();
-        winningNumber = InputView.readWinningNumber();
-        OutputView.printBonusBallNumber();
-        bonusBall = InputView.readBonusNumber();
-        winningLotto = new WinningLotto(refineToLottoList(winningNumber), bonusBall, lottos);
-        winningRanks = winningLotto.matchRank();
-    }
+        OutputView.printLottoCount(lottos.getLottoLists().size());
 
-    private void statisticsProcess() {
+        String winningNumber = InputView.readWinningNumber();
+        LottoNumber bonusBall = InputView.readBonusNumber();
+        WinningLotto winningLotto = new WinningLotto(refineToLottoList(winningNumber), bonusBall, lottos);
+        List<Rank> winningRanks = winningLotto.matchRank();
+
         LottoStatistics lottoStatistics = new LottoStatistics();
         String lottoEaringRate = lottoStatistics.getLottoEarningRate(winningRanks, lottoPrice);
+
         ResultView.printLottoStatistics(winningRanks, lottoEaringRate);
     }
 
