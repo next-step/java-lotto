@@ -34,16 +34,11 @@ public class Rankings {
     }
 
     public int countFrequency(Ranking ranking) {
-        Map<Ranking, Integer> rankingCount = countRankingCount();
-        return rankingCount.getOrDefault(ranking, DEFAULT_FREQUENCY);
-    }
-
-    private Map<Ranking, Integer> countRankingCount() {
-        Map<Ranking, Integer> successSum = new EnumMap<>(Ranking.class);
-        for (Ranking ranking : rankings) {
-            successSum.put(ranking, successSum.getOrDefault(ranking, DEFAULT_FREQUENCY) + 1);
+        Map<Ranking, Integer> rankingCount = new EnumMap<>(Ranking.class);
+        for (Ranking rank : rankings) {
+            rankingCount.put(rank, rankingCount.getOrDefault(rank, DEFAULT_FREQUENCY) + 1);
         }
-        return successSum;
+        return rankingCount.getOrDefault(ranking, DEFAULT_FREQUENCY);
     }
 
     public double countRewardRate(int buyPrice) {

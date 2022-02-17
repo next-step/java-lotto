@@ -11,13 +11,13 @@ public class LottoNumber {
     private static final String INVALID_NUMBER_RANGE = "복권의 숫자 범위가 유효하지 않습니다.";
     private static final Map<Integer, LottoNumber> numbers = new HashMap<>();
 
-    private final int value;
-
     static {
         IntStream.rangeClosed(LottoNumber.MINIMUM_NUMBER, LottoNumber.MAXIMUM_NUMBER)
             .mapToObj(LottoNumber::new)
             .forEach(lottoNumber -> numbers.put(lottoNumber.value, lottoNumber));
     }
+
+    private final int value;
 
     private LottoNumber(int value) {
         this.value = value;
