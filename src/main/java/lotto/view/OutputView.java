@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.domain.lotto.Number;
@@ -32,14 +33,16 @@ public class OutputView {
         System.out.println(MESSAGE_BOUGHT_TICKET_START + manualTickets + MESSAGE_BOUGHT_TICKET_MIDDLE + autoTickets + MESSAGE_BOUGHT_TICKET);
     }
 
-    public static void printLottoTicket(final Ticket ticket) {
+    public static void printLottoTicket(final List<Ticket> tickets) {
         System.out.print(MESSAGE_TICKET_START);
-        System.out.print(
-            ticket.get().stream()
-                .map(Number::value)
-                .map(String::valueOf)
-                .collect(Collectors.joining(SPLITTER))
-        );
+        tickets.forEach(ticket -> {
+            System.out.println(
+                ticket.get().stream()
+                    .map(Number::value)
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(SPLITTER))
+            );
+        });
         System.out.println(MESSAGE_TICKET_END);
     }
 
