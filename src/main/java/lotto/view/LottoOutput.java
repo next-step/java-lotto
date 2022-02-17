@@ -7,6 +7,7 @@ import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Ranking;
 import lotto.domain.Rankings;
+import lotto.domain.Reward;
 
 public class LottoOutput {
 
@@ -36,7 +37,7 @@ public class LottoOutput {
 
     public static void printLottoResult(Rankings rankings, int buyPrice) {
         StringBuilder rankingStatus = printRankingStatus(rankings);
-        StringBuilder rewardRate = printRewardRate(rankings, buyPrice);
+        StringBuilder rewardRate = printRewardRate(new Reward(rankings, buyPrice));
         System.out.println(rankingStatus
             .append(ENTER)
             .append(rewardRate));
@@ -70,11 +71,10 @@ public class LottoOutput {
             ranking.getWinnerPrice());
     }
 
-    private static StringBuilder printRewardRate(Rankings rankings, int buyPrice) {
+    private static StringBuilder printRewardRate(Reward reward) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(REWARD_RATE_MESSAGE);
-        double rewardCount = rankings.countRewardRate(buyPrice);
-        stringBuilder.append(rewardCount);
+        stringBuilder.append(reward.getValue());
         return stringBuilder;
     }
 
