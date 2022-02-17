@@ -5,9 +5,9 @@ public class Count {
     private final int autoLottoCount;
     private final int manualLottoCount;
 
-    public Count(int autoLottoCount, int manualLottoCount) {
+    public Count(int totalLottoCount, int manualLottoCount) {
 
-        this.autoLottoCount = autoLottoCount;
+        this.autoLottoCount = totalLottoCount-manualLottoCount;
         this.manualLottoCount = manualLottoCount;
     }
 

@@ -31,10 +31,10 @@ public class LottoAuto {
     public void play() {
         LottoRules lottoRules = new LottoRules();
         Price price = new Price(InputView.inputPrice());
-        int manualCount = InputView.inputManualLottoCount();
-        Count count = price.calculateCount(manualCount);
+        Count count = new Count(price.calculateTotalCount(), InputView.inputManualLottoCount());
         User user = new User(
-            saveAllLottos(InputView.inputManualLottoNumber(manualCount), lottoRules, count));
+            saveAllLottos(InputView.inputManualLottoNumber(count.getManualLottoCount()), lottoRules,
+                count));
         OutputView.printLottos(count, user.getLottos());
         WinningNumber winningNumber = new WinningNumber(InputView.inputWinningNumbers(),
             InputView.inputBonusBall());
