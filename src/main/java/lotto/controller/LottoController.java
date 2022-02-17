@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import lotto.domain.generator.LottoManualGenerator;
 import lotto.domain.lotto.Amount;
 import lotto.domain.lotto.Answer;
 import lotto.domain.lotto.Number;
@@ -32,19 +33,19 @@ public class LottoController {
     public void run() {
         final Amount amount = new Amount(InputView.getAmount());
         final int manualLottoTickets = InputView.getManualLottoTickets();
-        final List<List<Number>> manualTicketNumbers = getManualTicketNumbers(manualLottoTickets);
+        final List<Ticket> manualTickets = getManualTickets(manualLottoTickets);
 
-        TicketMachine machine = new TicketMachine(amount, manualTicketNumbers);
+        TicketMachine machine = new TicketMachine(amount, manualTickets);
         Tickets tickets = machine.purchase();
 
-        OutputView.printBuyingTickets(manualTicketNumbers.size(), amount.getAutoTickets(manualTicketNumbers.size()));
+        OutputView.printBuyingTickets(manualTickets.size(), amount.getAutoTickets(manualTickets.size()));
 
         showTickets(tickets);
         showResult(tickets, amount);
     }
 
     private void showTickets(final Tickets tickets) {
-        tickets.getEachTicketNumbers().forEach(OutputView::printLottoTicket);
+        OutputView.printLottoTicket(tickets.getEachTicketNumbers());
     }
 
     private void showResult(final Tickets tickets, final Amount amount) {
@@ -58,12 +59,10 @@ public class LottoController {
         OutputView.printResult(new PrizeRatio().calculateRatio(amount, prizeMap));
     }
 
-    private List<List<Number>> getManualTicketNumbers(final int manualTickets) {
-        List<List<Number>> numbersPerOneLotto = new ArrayList<>();
+    private List<Ticket> getManualTickets(final int manualTickets) {
+        List<Ticket> numbersPerOneLotto = new ArrayList<>();
         for (List<Integer> numbers : InputView.getManualLottoNumbers(manualTickets)) {
-            numbersPerOneLotto.add(
-                numbers.stream().map(Number::new).collect(Collectors.toList())
-            );
+            numbersPerOneLotto.add(new Ticket(new LottoManualGenerator(numbers).generateNumbers()));
         }
         return numbersPerOneLotto;
     }
