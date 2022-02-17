@@ -13,14 +13,14 @@ public class TicketMachine {
     private final List<Ticket> manualTickets;
     private final List<Ticket> autoTickets;
 
-    public TicketMachine(final Amount amount, final List<List<Number>> manualTicketNumbers) {
-        validateManualTickets(amount, manualTicketNumbers);
+    public TicketMachine(final Amount amount, final List<Ticket> manualTickets) {
+        validateManualTickets(amount, manualTickets);
 
-        this.manualTickets = setManualTickets(manualTicketNumbers);
-        this.autoTickets = purchaseAutoTickets(amount.getAutoTickets(manualTicketNumbers.size()));
+        this.manualTickets = manualTickets;
+        this.autoTickets = purchaseAutoTickets(amount.getAutoTickets(manualTickets.size()));
     }
 
-    private void validateManualTickets(final Amount amount, final List<List<Number>> manualTickets) {
+    private void validateManualTickets(final Amount amount, final List<Ticket> manualTickets) {
         if (!amount.isEnoughToBuy(manualTickets.size())) {
             throw new IllegalArgumentException(INVALID_MANUAL_TICKETS);
         }
@@ -31,12 +31,6 @@ public class TicketMachine {
             Stream.concat(manualTickets.stream(), autoTickets.stream())
                 .collect(Collectors.toList())
         );
-    }
-
-    private List<Ticket> setManualTickets(List<List<Number>> manualTickets) {
-        return manualTickets.stream()
-            .map(Ticket::new)
-            .collect(Collectors.toList());
     }
 
     private List<Ticket> purchaseAutoTickets(final int autoTickets) {
