@@ -35,8 +35,7 @@ public class LottoAuto {
         Count count = price.calculateCount(manualCount);
         User user = new User(
             saveAllLottos(InputView.inputManualLottoNumber(manualCount), lottoRules, count));
-        OutputView.printLottoCount(count);
-        OutputView.printLottos(user.getLottos());
+        OutputView.printLottos(count, user.getLottos());
         WinningNumber winningNumber = new WinningNumber(InputView.inputWinningNumbers(),
             InputView.inputBonusBall());
         Ranks ranks = new Ranks();
