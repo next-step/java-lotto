@@ -10,8 +10,11 @@ public class LottoManualGenerator implements LottoGenerator {
     private final List<Integer> numbers;
 
     public LottoManualGenerator(final Integer ...values) {
-        this.numbers = Stream.of(values)
-            .collect(Collectors.toList());
+        this(Stream.of(values).collect(Collectors.toList()));
+    }
+
+    public LottoManualGenerator(final List<Integer> numbers) {
+        this.numbers = numbers;
     }
 
     @Override
