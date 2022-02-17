@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoAutoGenerator implements LottoGenerator{
+public class LottoAutoGenerator implements LottoGenerator {
 
     private static final int LOTTO_NUM_START = 1;
     private static final int LOTTO_NUM_END = 45;

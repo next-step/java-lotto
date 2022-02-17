@@ -2,7 +2,6 @@ package lotto.controller;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGenerator;
 import lotto.domain.LottoNumber;
