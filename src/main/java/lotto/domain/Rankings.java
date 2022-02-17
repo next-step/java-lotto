@@ -11,12 +11,11 @@ public class Rankings {
 
     private static final int REWARD_SCALE = 3;
     private static final int DEFAULT_FREQUENCY = 0;
+
     private final List<Ranking> rankings;
-    private final Map<Ranking, Integer> rankingCount;
 
     private Rankings(List<Ranking> rankings) {
         this.rankings = new ArrayList<>(rankings);
-        rankingCount = countRankingCount();
     }
 
     public static Rankings of(List<Lotto> userNumbers,
@@ -35,6 +34,7 @@ public class Rankings {
     }
 
     public int countFrequency(Ranking ranking) {
+        Map<Ranking, Integer> rankingCount = countRankingCount();
         return rankingCount.getOrDefault(ranking, DEFAULT_FREQUENCY);
     }
 
