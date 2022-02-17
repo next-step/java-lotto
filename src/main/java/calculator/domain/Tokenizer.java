@@ -9,14 +9,13 @@ public class Tokenizer {
 
     private static final String STANDARD_DELIMITER_COMMA = ",";
     private static final String STANDARD_DELIMITER_COLON = ":";
+    private static final String STANDARD_DELIMITERS =
+        STANDARD_DELIMITER_COMMA + "|" + STANDARD_DELIMITER_COLON;
 
     private Tokenizer() {
     }
 
     public static List<Integer> tokenize(String text) {
-        final String STANDARD_DELIMITERS =
-            STANDARD_DELIMITER_COMMA + "|" + STANDARD_DELIMITER_COLON;
-
         if (isCustomDelimiter(text)) {
             final String CUSTOM_DELIMITER = text.substring(text.indexOf("/") + 2,
                 text.indexOf("\n"));
