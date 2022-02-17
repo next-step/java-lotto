@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,12 +20,18 @@ class RankingsTest {
     @BeforeEach
     void setUp(){
         lotteryNumbers = Lotto.of(
-            new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+            new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6).stream()
+                .map(LottoNumber::from)
+                .collect(Collectors.toList())));
         bounusNum = LottoNumber.from(8);
         userNumbers = Lotto.of(
-            new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 8)));
+            new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 8).stream()
+                .map(LottoNumber::from)
+                .collect(Collectors.toList())));
         userNumbers2 = Lotto.of(
-            new ArrayList<>(Arrays.asList(10, 11, 12, 13, 14, 15)));
+            new ArrayList<>(Arrays.asList(10, 11, 12, 13, 14, 15).stream()
+                .map(LottoNumber::from)
+                .collect(Collectors.toList())));
         userlottos = new ArrayList<>();
         userlottos.add(userNumbers);
         userlottos.add(userNumbers2);

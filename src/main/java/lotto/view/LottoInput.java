@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
@@ -27,7 +28,7 @@ public class LottoInput {
         String input = SCANNER.next();
         return Lotto.of(Arrays.stream(input.split(COMMA))
             .mapToInt(Integer::new)
-            .boxed()
+            .mapToObj(LottoNumber::from)
             .collect(Collectors.toList()));
     }
 

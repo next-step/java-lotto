@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 class RankingTest {
@@ -21,10 +22,14 @@ class RankingTest {
     void 당첨_번호와_몇개가_일치하는지_판단할_수_있다() {
         // given
         Lotto lotteryNumbers = Lotto.of(
-            new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+            new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)).stream()
+                .map(LottoNumber::from)
+                .collect(Collectors.toList()));
         LottoNumber bounusNum = LottoNumber.from(8);
         Lotto userNumbers = Lotto.of(
-            new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 8)));
+            new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 8)).stream()
+                .map(LottoNumber::from)
+                .collect(Collectors.toList()));
 
         // when
         Ranking lottoResult = Ranking.of(userNumbers,

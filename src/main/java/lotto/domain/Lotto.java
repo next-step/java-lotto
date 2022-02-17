@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -16,17 +15,14 @@ public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(final List<LottoNumber> numbers) {
+    private Lotto(final List<LottoNumber> numbers) {
         validateNumbersSize(numbers);
         validateDuplicateNumber(numbers);
         this.lottoNumbers = new ArrayList<>(numbers);
     }
 
-    public static Lotto of(final List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = numbers.stream()
-            .map(LottoNumber::from)
-            .collect(Collectors.toList());
-        return new Lotto(lottoNumbers);
+    public static Lotto of(final List<LottoNumber> numbers) {
+        return new Lotto(numbers);
     }
 
     private void validateDuplicateNumber(final List<LottoNumber> numbers) {

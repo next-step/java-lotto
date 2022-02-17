@@ -32,6 +32,6 @@ public class LottoAutoGenerator implements LottoGenerator {
     public Lotto generateLotto() {
         Collections.shuffle(allNum);
         List<LottoNumber> lottoNums = allNum.subList(LOTTO_SIZE_START, LOTTO_SIZE_END);
-        return new Lotto(lottoNums);
+        return Lotto.of(lottoNums);
     }
 }
