@@ -15,7 +15,7 @@ class TicketMachineTest {
 
     private Amount amount;
     private TicketMachine machine;
-    private List<List<Number>> numbers;
+    private List<Ticket> numbers;
 
     @BeforeEach
     void setUp() {
@@ -42,17 +42,23 @@ class TicketMachineTest {
         );
     }
 
-    List<List<Number>> getNumbers() {
+    List<Ticket> getNumbers() {
         return Arrays.asList(
-            Stream.of(1, 2, 3, 4, 5, 6)
-                .map(Number::new)
-                .collect(Collectors.toList()),
-            Stream.of(7, 8, 9, 10, 11, 12)
-                .map(Number::new)
-                .collect(Collectors.toList()),
-            Stream.of(13, 14, 15, 16, 17, 18)
-                .map(Number::new)
-                .collect(Collectors.toList())
+            new Ticket(
+                Stream.of(1, 2, 3, 4, 5, 6)
+                    .map(Number::new)
+                    .collect(Collectors.toList())
+            ),
+            new Ticket(
+                Stream.of(7, 8, 9, 10, 11, 12)
+                    .map(Number::new)
+                    .collect(Collectors.toList())
+            ),
+            new Ticket(
+                Stream.of(13, 14, 15, 16, 17, 18)
+                    .map(Number::new)
+                    .collect(Collectors.toList())
+            )
         );
     }
 
