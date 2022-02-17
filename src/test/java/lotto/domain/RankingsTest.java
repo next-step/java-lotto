@@ -33,7 +33,7 @@ class RankingsTest {
     @Test
     void 상금총합_계산() {
         // when
-        Rankings lottoResult = Rankings.of(userlottos,
+        Rankings lottoResult = Rankings.of(new Lottos(userlottos),
             new WinningLotto(lotteryNumbers, bounusNum));
 
         // then
@@ -43,7 +43,7 @@ class RankingsTest {
     @Test
     void 특정랭킹_당첨된_횟수세기() {
         // when
-        Rankings lottoResult = Rankings.of(userlottos,
+        Rankings lottoResult = Rankings.of(new Lottos(userlottos),
             new WinningLotto(lotteryNumbers, bounusNum));
 
         // then
@@ -53,7 +53,7 @@ class RankingsTest {
     @Test
     void 특정랭킹_당첨된_횟수세기3() {
         // when
-        Rankings lottoResult = Rankings.of(userlottos,
+        Rankings lottoResult = Rankings.of(new Lottos(userlottos),
             new WinningLotto(lotteryNumbers, bounusNum));
 
         // then

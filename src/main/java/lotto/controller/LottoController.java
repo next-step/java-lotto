@@ -6,6 +6,7 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGenerator;
 import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 import lotto.domain.Rankings;
 import lotto.domain.WinningLotto;
 import lotto.view.LottoInput;
@@ -27,7 +28,7 @@ public class LottoController {
 
         LottoOutput.printBuySum(buySum);
 
-        List<Lotto> userLottoNumbers = lottoGenerator.generateLottos(buySum);
+        Lottos userLottoNumbers = lottoGenerator.generateLottos(buySum);
 
         LottoOutput.printLottoNumber(userLottoNumbers);
 

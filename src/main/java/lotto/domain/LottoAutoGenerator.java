@@ -21,12 +21,12 @@ public class LottoAutoGenerator implements LottoGenerator{
             .collect(Collectors.toList());
     }
 
-    public List<Lotto> generateLottos(int size) {
+    public Lottos generateLottos(int size) {
         List<Lotto> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             lottoNumbers.add(generateLotto());
         }
-        return lottoNumbers;
+        return new Lottos(lottoNumbers);
     }
 
     public Lotto generateLotto() {

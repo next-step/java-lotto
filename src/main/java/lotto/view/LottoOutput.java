@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.Ranking;
 import lotto.domain.Rankings;
 
@@ -77,10 +78,10 @@ public class LottoOutput {
         return stringBuilder;
     }
 
-    public static void printLottoNumber(List<Lotto> lottoNumbers) {
+    public static void printLottoNumber(Lottos lottoNumbers) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (Lotto lotto : lottoNumbers) {
+        for (Lotto lotto : lottoNumbers.getLottos()) {
             stringBuilder
                 .append(Arrays.toString(lotto.getLottoNumbers().toArray()))
                 .append(ENTER);

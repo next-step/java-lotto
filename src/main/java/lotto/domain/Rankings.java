@@ -18,10 +18,10 @@ public class Rankings {
         this.rankings = new ArrayList<>(rankings);
     }
 
-    public static Rankings of(List<Lotto> userNumbers,
+    public static Rankings of(Lottos userNumbers,
         WinningLotto winningLotto) {
         List<Ranking> rankings = new ArrayList<>();
-        for (Lotto userNumber : userNumbers) {
+        for (Lotto userNumber : userNumbers.getLottos()) {
             rankings.add(Ranking.of(userNumber, winningLotto));
         }
         return new Rankings(rankings);

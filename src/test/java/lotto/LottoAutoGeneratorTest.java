@@ -3,11 +3,11 @@ package lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lotto;
 import lotto.domain.LottoAutoGenerator;
+import lotto.domain.Lottos;
 import org.junit.jupiter.api.Test;
 
 class LottoAutoGeneratorTest {
@@ -26,7 +26,7 @@ class LottoAutoGeneratorTest {
     void 로또번호_랜덤_다수_생성(){
         int size = 6;
         LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
-        List<Lotto> lottoNumbers = lottoAutoGenerator.generateLottos(size);
+        Lottos lottoNumbers = lottoAutoGenerator.generateLottos(size);
 
         assertThat(lottoNumbers.size()).isEqualTo(size);
     }
