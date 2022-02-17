@@ -4,37 +4,37 @@ import java.util.Arrays;
 
 public enum Ranking {
 
-    ONE(2000000000, 6, false),
-    TWO(30000000, 5, true),
-    THREE(1500000, 5, false),
-    FOUR(50000, 4, false),
-    FIVE(5000, 3, false),
+    ONE(2_000_000_000, 6, false),
+    TWO(30_000_000, 5, true),
+    THREE(1_500_000, 5, false),
+    FOUR(50_000, 4, false),
+    FIVE(5_000, 3, false),
     FAIL(0, 0, false);
 
     private final int winnerPrice;
-    private final int normalSuccessNum;
-    private final boolean bonusSuccess;
+    private final int normalMatcNumber;
+    private final boolean bonusMatch;
 
-    Ranking(int winnerPrice, int normalSuccessNum, boolean bonusSuccess) {
+    Ranking(int winnerPrice, int normalMatchNumber, boolean bonusMatch) {
         this.winnerPrice = winnerPrice;
-        this.normalSuccessNum = normalSuccessNum;
-        this.bonusSuccess = bonusSuccess;
+        this.normalMatcNumber = normalMatchNumber;
+        this.bonusMatch = bonusMatch;
     }
 
-    public static Ranking of(int normalSuccessCount, boolean bonusSuccess) {
+    public static Ranking of(int normalMatchCount, boolean bonusMatch) {
         return Arrays.stream(Ranking.values())
-            .filter(rank -> rank.equalsFromResult(normalSuccessCount, bonusSuccess))
+            .filter(rank -> rank.equalsFromResult(normalMatchCount, bonusMatch))
             .findFirst()
             .orElse(FAIL);
     }
 
     public static Ranking of(Lotto userNumbers,
         WinningLotto winningLotto) {
-        int normalSuccessCount = countNormalSuccessNumber(userNumbers,
+        int normalMatchCount = countNormalSuccessNumber(userNumbers,
             winningLotto.getLottoNumbers());
-        boolean bonusSuccess = countBonusNumber(userNumbers, winningLotto.getBonusNumber());
+        boolean bonusMatch = countBonusNumber(userNumbers, winningLotto.getBonusNumber());
 
-        return Ranking.of(normalSuccessCount, bonusSuccess);
+        return Ranking.of(normalMatchCount, bonusMatch);
     }
 
     private static int countNormalSuccessNumber(Lotto userNumbers, Lotto lotteryNumbers) {
@@ -45,20 +45,20 @@ public enum Ranking {
         return userNumbers.contains(bonusNum);
     }
 
-    private boolean equalsFromResult(int normalSuccessCount, boolean bonusSuccess) {
-        return this.normalSuccessNum == normalSuccessCount &&
-            this.bonusSuccess == bonusSuccess;
+    private boolean equalsFromResult(int normalMatchNumber, boolean bonusMatch) {
+        return this.normalMatcNumber == normalMatchNumber &&
+            this.bonusMatch == bonusMatch;
     }
 
     public int getWinnerPrice() {
         return winnerPrice;
     }
 
-    public int getNormalSuccessNum() {
-        return normalSuccessNum;
+    public int getNormalMatcNumber() {
+        return normalMatcNumber;
     }
 
-    public boolean getBonusSuccess() {
-        return bonusSuccess;
+    public boolean getBonusMatch() {
+        return bonusMatch;
     }
 }

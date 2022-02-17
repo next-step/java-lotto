@@ -59,9 +59,9 @@ public class LottoOutput {
     }
 
     private static String convertRankingToStatus(Ranking ranking) {
-        int matchNum = ranking.getNormalSuccessNum();
+        int matchNum = ranking.getNormalMatcNumber();
         String bonusMessage = "";
-        if (ranking.getBonusSuccess()) {
+        if (ranking.getBonusMatch()) {
             matchNum++;
             bonusMessage = BONUS_MESSAGE;
         }
@@ -82,7 +82,7 @@ public class LottoOutput {
 
         for (Lotto lotto : lottoNumbers) {
             stringBuilder
-                .append(Arrays.toString(lotto.getNumbers().toArray()))
+                .append(Arrays.toString(lotto.getLottoNumbers().toArray()))
                 .append(ENTER);
         }
 

@@ -18,7 +18,7 @@ class LottoAutoGeneratorTest {
         Lotto lottoNum = lottoAutoGenerator.generateLotto();
 
         assertThat(lottoNum.size()).isEqualTo(6);
-        Set<LottoNumber> duplicate = new HashSet<>(lottoNum.getNumbers());
+        Set<LottoNumber> duplicate = new HashSet<>(lottoNum.getLottoNumbers());
         assertThat(lottoNum.size()).isEqualTo(duplicate.size());
     }
 

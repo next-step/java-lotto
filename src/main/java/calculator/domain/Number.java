@@ -27,7 +27,7 @@ public class Number {
     }
 
     public Number add(Number operand) {
-        return new Number(value + operand.getValue());
+        return new Number(value + operand.value);
     }
 
     private void validatePositiveNum(final int number) {
