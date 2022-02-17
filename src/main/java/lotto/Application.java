@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.controller.LottoController;
-import lotto.service.LottoAutoGenerator;
+import lotto.domain.LottoAutoGenerator;
 
 public class Application {
 

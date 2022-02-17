@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoGenerator;
 import lotto.domain.LottoNumber;
 import lotto.domain.Rankings;
 import lotto.domain.WinningLotto;
-import lotto.service.LottoAutoGenerator;
 import lotto.view.LottoInput;
 import lotto.view.LottoOutput;
 
@@ -15,10 +15,10 @@ public class LottoController {
 
     private static final int LOTTO_PRICE = 1000;
 
-    private final LottoAutoGenerator lottoAutoGenerator;
+    private final LottoGenerator lottoGenerator;
 
-    public LottoController(LottoAutoGenerator lottoAutoGenerator) {
-        this.lottoAutoGenerator = lottoAutoGenerator;
+    public LottoController(LottoGenerator lottoAutoGenerator) {
+        this.lottoGenerator = lottoAutoGenerator;
     }
 
     public void run() {
@@ -27,7 +27,7 @@ public class LottoController {
 
         LottoOutput.printBuySum(buySum);
 
-        List<Lotto> userLottoNumbers = lottoAutoGenerator.generateLottos(buySum);
+        List<Lotto> userLottoNumbers = lottoGenerator.generateLottos(buySum);
 
         LottoOutput.printLottoNumber(userLottoNumbers);
 

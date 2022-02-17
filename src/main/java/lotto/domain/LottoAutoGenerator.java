@@ -1,14 +1,12 @@
-package lotto.service;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 
-public class LottoAutoGenerator {
+public class LottoAutoGenerator implements LottoGenerator{
 
     private static final int LOTTO_NUM_START = 1;
     private static final int LOTTO_NUM_END = 45;

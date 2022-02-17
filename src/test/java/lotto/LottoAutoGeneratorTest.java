@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lotto;
-import lotto.service.LottoAutoGenerator;
+import lotto.domain.LottoAutoGenerator;
 import org.junit.jupiter.api.Test;
 
 class LottoAutoGeneratorTest {
