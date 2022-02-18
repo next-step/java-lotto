@@ -11,7 +11,7 @@ class LottoNumberGeneratorTest {
     @Test
     void generatorLotto() {
         Lotto lottoNumbers = new LottoNumberGenerator().generate();
-        assertThat(lottoNumbers.getLottoNumbers().size()).isEqualTo(6);
+        assertThat(lottoNumbers.getLotto().size()).isEqualTo(6);
     }
 
 }

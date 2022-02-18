@@ -18,7 +18,7 @@ public class WinningLotto {
     }
 
     private void validate(Lotto winningNumber, LottoNumber bonusNumber) {
-        if (winningNumber.getLottoNumbers().contains(bonusNumber.getLottoNumber())) {
+        if (winningNumber.getLotto().contains(bonusNumber.getLottoNumber())) {
             throw new IllegalArgumentException(ERROR_DISTINCT);
         }
     }
@@ -50,7 +50,7 @@ public class WinningLotto {
     }
 
     private boolean matchBonusNumber(final int matchOfNumber, final Lotto lottoNumberList) {
-        return matchOfNumber == MATCH_FIVE && lottoNumberList.getLottoNumbers()
+        return matchOfNumber == MATCH_FIVE && lottoNumberList.getLotto()
             .contains(bonusNumber);
     }
 

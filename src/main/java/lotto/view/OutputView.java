@@ -80,7 +80,7 @@ public class OutputView {
     }
 
     public static void printLottoNumber(Lotto lottoNumbers) {
-        Set<LottoNumber> lottoList = lottoNumbers.getLottoNumbers();
+        Set<LottoNumber> lottoList = lottoNumbers.getLotto();
         for (LottoNumber lottoNumber : lottoList) {
             System.out.printf(lottoNumber.getLottoNumber() + " ");
         }
