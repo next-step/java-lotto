@@ -59,9 +59,9 @@ public class LottoCalculationTest {
     void purchaseLottoTest() {
         LottoCalculation lottoCalculation = new LottoCalculation(new Money("14000"));
         assertAll(
-            () -> assertThat(lottoCalculation.purchaseLottos(new Lottos(oldLottos))
+            () -> assertThat(lottoCalculation.purchaseLottos(oldLottos)
                 .getNumberOfLottoAutomatical()).isEqualTo(11),
-            () -> assertThat(lottoCalculation.purchaseLottos(new Lottos(oldLottos))
+            () -> assertThat(lottoCalculation.purchaseLottos(oldLottos)
                 .getNumberOfLottoManual()).isEqualTo(3)
         );
     }
@@ -78,7 +78,7 @@ public class LottoCalculationTest {
     @Test
     void makeRankResultTest() {
         LottoCalculation lottoCalculation = new LottoCalculation(new Money("14000"));
-        lottoCalculation.purchaseLottos(new Lottos(oldLottos));
+        lottoCalculation.purchaseLottos(oldLottos);
         Winning winning = new Winning("1,2,3,4,5,6", new LottoNumber(7));
         RankResult rankResult = new RankResult(lottoCalculation.getPurchaseLottos(), winning);
         assertThat(rankResult.getRankResult(winning, new Money(7))).isNotNull();

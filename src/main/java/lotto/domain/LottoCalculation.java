@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.List;
 import lotto.domain.dto.LottoCalculationDTO;
 
 public class LottoCalculation {
@@ -22,10 +23,10 @@ public class LottoCalculation {
         return purchaseLottos;
     }
 
-    public LottoCalculationDTO purchaseLottos(Lottos lottos) {
-        int numberOfLottoManual = lottos.lottos().size();
+    public LottoCalculationDTO purchaseLottos(List<Lotto> lotto) {
+        int numberOfLottoManual = lotto.size();
 
-        purchaseLottos.add(lottos);
+        purchaseLottos.add(new Lottos(lotto));
         int numberOfLottoAutomatical = getNumberOfLottosAutomatical(numberOfLottoManual);
         purchaseLottos.add(
             LottoBundle.lottoBundle(numberOfLottoAutomatical, new ShuffleLottoNumber()));
