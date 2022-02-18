@@ -1,9 +1,12 @@
 package lotto.view;
 
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.Rank;
 
 public class OutputView {
 
@@ -17,6 +20,8 @@ public class OutputView {
     private static final String REQUEST_WINNING_NUMBER_BEFORE = "\n지난 주 당첨 번호를 입력해주세요.(ex 1, 2, 3, 4, 5)";
     private static final String REQUEST_BONUS_BALL_NUMBER = "보너스 볼을 입력해주세요.";
     private static final String WINNING_STATS = "\n당첨 통계\n------------";
+    private static final int LOTTO_BONUS_MATCH_COUNT = 7;
+    private static final int CASE_BONUS_BALL = 5;
 
     public static void printExceptionMessage(String exceptionMessage) {
         System.out.println(ERROR_MESSAGE + exceptionMessage);
@@ -59,6 +64,26 @@ public class OutputView {
 
         System.out.println(
             "총 수익률은 " + earningRate + "입니다.(기준이 1이기 때문에 결과적으로 " + profitOrLoss + "이라는 의미임)");
+    }
+
+    public static void printLottoStatistics(Map<Integer, Integer> rankReport) {
+        OutputView.printLottoStatisticTitle();
+        for (Integer key : rankReport.keySet()) {
+            if(key != LOTTO_BONUS_MATCH_COUNT) {
+                OutputView.printLottoStatistic(key, Rank.getRank(key).getMoney(),
+                    rankReport.get(key));
+            }
+            if(key == LOTTO_BONUS_MATCH_COUNT) {
+                OutputView.printLottoBonusStatistic(CASE_BONUS_BALL, Rank.getRank(LOTTO_BONUS_MATCH_COUNT).getMoney(), rankReport.get(key));
+            }
+        }
+    }
+
+    public static void printLottoNumbers(List<Lotto> lottoLists) {
+        for (Lotto lotto : lottoLists) {
+            OutputView.printLottoNumber(lotto);
+            System.out.println();
+        }
     }
 
     public static void printLottoNumber(Lotto lottoNumbers) {

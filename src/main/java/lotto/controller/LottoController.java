@@ -11,7 +11,6 @@ import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-import lotto.view.ResultView;
 
 public class LottoController {
 
@@ -19,14 +18,14 @@ public class LottoController {
         LottoPrice lottoPrice = InputView.readPrice();
 
         Lottos lottos = new Lottos(lottoPrice);
-        ResultView.printLottoNumbers(lottos.getLottoLists());
+        OutputView.printLottoNumbers(lottos.getLottoLists());
 
         OutputView.printLottoCount(lottos.getLottoLists().size());
 
         WinningLotto winningLotto = createWinningLotto(lottos);
         LottoStatistics lottoStatistics = new LottoStatistics(winningLotto.matchRank());
 
-        ResultView.printLottoStatistics(lottoStatistics.makeRankReport());
+        OutputView.printLottoStatistics(lottoStatistics.makeRankReport());
         OutputView.printTotalReturn(Double.parseDouble(lottoStatistics.getLottoEarningRate(lottoPrice)));
     }
 
