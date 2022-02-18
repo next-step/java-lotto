@@ -10,11 +10,11 @@ public class Lottos {
     private static final int ERROR_WRONG_LOTTO_PRICE = 0;
     private static final int LOTTO_PRICE = 1000;
 
-    private final List<Lotto> lottoLists;
+    private final List<Lotto> lottos;
 
     public Lottos(LottoPrice lottoPrice) {
         validateLottoPrice(lottoPrice.getPrice());
-        this.lottoLists = generatorLottos(lottoPrice.getPrice() / LOTTO_PRICE);
+        this.lottos = generatorLottos(lottoPrice.getPrice() / LOTTO_PRICE);
     }
 
     private void validateLottoPrice(int totalPrice) {
@@ -23,8 +23,8 @@ public class Lottos {
         }
     }
 
-    public List<Lotto> getLottoLists() {
-        return Collections.unmodifiableList(lottoLists);
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 
     private List<Lotto> generatorLottos(int lottoCount) {

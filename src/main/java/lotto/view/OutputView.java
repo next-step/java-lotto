@@ -10,9 +10,6 @@ import lotto.domain.Rank;
 
 public class OutputView {
 
-    private OutputView() {
-    }
-
     public static final String ERROR_MESSAGE = "[ERROR] ";
     public static final String ERROR_WRONG_LOTTO_PRICE = "로또 한 장은 1000원입니다. 잘못된 금액입니다.";
     private static final String REQUEST_LOTTO_PRICE = "구입금액을 입력해 주세요.";
@@ -21,6 +18,9 @@ public class OutputView {
     private static final String REQUEST_BONUS_BALL_NUMBER = "보너스 볼을 입력해주세요.";
     private static final String WINNING_STATS = "\n당첨 통계\n------------";
     private static final int CASE_BONUS_BALL_MONEY = 30000000;
+
+    private OutputView() {
+    }
 
     public static void printExceptionMessage(String exceptionMessage) {
         System.out.println(ERROR_MESSAGE + exceptionMessage);
@@ -46,12 +46,12 @@ public class OutputView {
         System.out.println(WINNING_STATS);
     }
 
-    public static void printLottoStatistic(int grade, int money, int matchCount) {
+    public static void printLottoStatistic(int grade, int money, int matchOfNumber) {
         if (money == CASE_BONUS_BALL_MONEY) {
-            System.out.println(grade + "개 일치, 보너스 볼 일치(" + money + "원) - " + matchCount + " 개");
+            System.out.println(grade + "개 일치, 보너스 볼 일치(" + money + "원) - " + matchOfNumber + " 개");
         }
         if (money != CASE_BONUS_BALL_MONEY) {
-            System.out.println(grade + "개 일치(" + money + "원) - " + matchCount + " 개");
+            System.out.println(grade + "개 일치(" + money + "원) - " + matchOfNumber + " 개");
         }
     }
 

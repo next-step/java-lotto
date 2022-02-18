@@ -13,7 +13,7 @@ class LottosTest {
     @Test
     void correctCountGenerator() {
         Lottos lottos = new Lottos(new LottoPrice(10000));
-        List<Lotto> lottoLists = lottos.getLottoLists();
+        List<Lotto> lottoLists = lottos.getLottos();
 
         assertThat(lottoLists.size()).isEqualTo(10);
     }

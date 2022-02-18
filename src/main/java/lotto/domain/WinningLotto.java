@@ -7,6 +7,7 @@ public class WinningLotto {
     private static final String ERROR_DISTINCT = "당첨 번호와 보너스 번호는 중복될 수 없습니다.";
     private static final int MATCH_FIVE = 5;
     private static final int WINNING_LIMIT = 3;
+
     private final Lotto winningNumber;
     private final LottoNumber bonusNumber;
     private List<Rank> winningRanks = new ArrayList<>();
@@ -26,33 +27,33 @@ public class WinningLotto {
     }
 
     public List<Rank> matchRank() {
-        for (int i = 0; i < lottos.getLottoLists().size(); i++) {
-            int count = matchWinningNumbers(lottos.getLottoLists().get(i));
-            addWinningRanksList(count, i);
+        for(Lotto lotto : lottos.getLottos()) {
+            int matchOfNumber = matchWinningNumbers(lotto);
+            addWinningRanksList(matchOfNumber, lotto);
         }
         return winningRanks;
     }
 
-    private void addWinningRanksList(int count, int i) {
-        if(count >= WINNING_LIMIT) {
-            winningRanks.add(getRank(count, lottos.getLottoLists().get(i)));
+    private int matchWinningNumbers(final Lotto lotto) {
+        return lotto.matchWinningnumbers(lotto, winningNumber);
+    }
+
+    private void addWinningRanksList(int matchOfNumber, Lotto lotto) {
+        if(matchOfNumber >= WINNING_LIMIT) {
+            winningRanks.add(getRank(matchOfNumber, lotto));
         }
     }
 
-    private Rank getRank(final int count, final Lotto lottoNumberList) {
-        if (matchBonusNumber(count, lottoNumberList)) {
+    private Rank getRank(final int count, final Lotto lotto) {
+        if (matchBonusNumber(count, lotto)) {
             return Rank.SECOND;
         }
         return Rank.getRank(count);
     }
 
-    private boolean matchBonusNumber(final int count, final Lotto lottoNumberList) {
-        return count == MATCH_FIVE && lottoNumberList.getLottoNumbers()
+    private boolean matchBonusNumber(final int matchOfNumber, final Lotto lottoNumberList) {
+        return matchOfNumber == MATCH_FIVE && lottoNumberList.getLottoNumbers()
             .contains(bonusNumber);
-    }
-
-    private int matchWinningNumbers(final Lotto lottoNumberList) {
-       return lottoNumberList.matchWinningnumbers(lottoNumberList, winningNumber);
     }
 
 }

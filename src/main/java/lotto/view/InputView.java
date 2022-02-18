@@ -2,7 +2,6 @@ package lotto.view;
 
 
 import java.util.Scanner;
-import lotto.domain.LottoNumber;
 import lotto.util.Console;
 
 public class InputView {

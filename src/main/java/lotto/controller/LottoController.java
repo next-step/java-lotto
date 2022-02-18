@@ -18,9 +18,9 @@ public class LottoController {
         LottoPrice lottoPrice = new LottoPrice(InputView.readPrice());
 
         Lottos lottos = new Lottos(lottoPrice);
-        OutputView.printLottoNumbers(lottos.getLottoLists());
+        OutputView.printLottoNumbers(lottos.getLottos());
 
-        OutputView.printLottoCount(lottos.getLottoLists().size());
+        OutputView.printLottoCount(lottos.getLottos().size());
 
         WinningLotto winningLotto = createWinningLotto(lottos);
         LottoStatistics lottoStatistics = new LottoStatistics(winningLotto.matchRank());
