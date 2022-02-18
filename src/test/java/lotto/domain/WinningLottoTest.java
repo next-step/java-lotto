@@ -16,7 +16,7 @@ class WinningLottoTest {
 
     static {
         List<Integer> testNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        testLotto = Lotto.from(testNumbers);
+        testLotto = Lotto.fromNumbers(testNumbers);
         testWinningLotto = new WinningLotto(testLotto, bonus);
     }
 
@@ -33,7 +33,7 @@ class WinningLottoTest {
     @Test
     void 당첨_번호_반환() {
         List<Integer> userNumbers = Arrays.asList(1, 2, 3, 8, 9, 10);
-        Lotto userLotto = Lotto.from(userNumbers);
+        Lotto userLotto = Lotto.fromNumbers(userNumbers);
         int actual = testWinningLotto.getMatchCount(userLotto);
         assertThat(actual).isEqualTo(3);
     }
@@ -42,7 +42,7 @@ class WinningLottoTest {
     @Test
     void 보너스_번호가_있는_경우() {
         List<Integer> userNumbers = Arrays.asList(1, 2, 3, 4, 5, 7);
-        Lotto userLotto = Lotto.from(userNumbers);
+        Lotto userLotto = Lotto.fromNumbers(userNumbers);
         boolean actual = testWinningLotto.getMatchBonus(userLotto);
         assertThat(actual).isTrue();
     }
@@ -51,7 +51,7 @@ class WinningLottoTest {
     @Test
     void 보너스_번호가_없는_경우() {
         List<Integer> userNumbers = Arrays.asList(1, 2, 3, 4, 5, 8);
-        Lotto userLotto = Lotto.from(userNumbers);
+        Lotto userLotto = Lotto.fromNumbers(userNumbers);
         boolean actual = testWinningLotto.getMatchBonus(userLotto);
         assertThat(actual).isFalse();
     }

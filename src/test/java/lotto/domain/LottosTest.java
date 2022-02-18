@@ -13,7 +13,7 @@ class LottosTest {
     @Test
     void 결과가_1등_1개_2등_1개_3등_2개인_경우() {
         List<Integer> testNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Lotto testLotto = Lotto.from(testNumbers);
+        Lotto testLotto = Lotto.fromNumbers(testNumbers);
         LottoNumber bonus = LottoNumber.from(7);
         WinningLotto testWinningLotto = new WinningLotto(testLotto, bonus);
 
@@ -23,10 +23,10 @@ class LottosTest {
         List<Integer> third2 = Arrays.asList(1, 2, 3, 41, 5, 6);
 
         List<Lotto> lottos = Arrays.asList(
-            Lotto.from(first),
-            Lotto.from(second),
-            Lotto.from(third1),
-            Lotto.from(third2)
+            Lotto.fromNumbers(first),
+            Lotto.fromNumbers(second),
+            Lotto.fromNumbers(third1),
+            Lotto.fromNumbers(third2)
         );
 
         Lottos testLottos = Lottos.withListLotto(lottos);

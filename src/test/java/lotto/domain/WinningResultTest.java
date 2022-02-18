@@ -18,7 +18,7 @@ class WinningResultTest {
     @BeforeEach
     void beforeEach() {
         List<Integer> testNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Lotto testLotto = Lotto.from(testNumbers);
+        Lotto testLotto = Lotto.fromNumbers(testNumbers);
         LottoNumber testBonus = LottoNumber.from(7);
         testWinningLotto = new WinningLotto(testLotto, testBonus);
     }
@@ -31,9 +31,9 @@ class WinningResultTest {
         List<Integer> none = Arrays.asList(11, 12, 13, 14, 15, 6);
 
         List<Lotto> lottos = Arrays.asList(
-            Lotto.from(fourth),
-            Lotto.from(fifth),
-            Lotto.from(none)
+            Lotto.fromNumbers(fourth),
+            Lotto.fromNumbers(fifth),
+            Lotto.fromNumbers(none)
         );
 
         Lottos testLottos = Lottos.withListLotto(lottos);
