@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lotto.utils.Converter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +17,15 @@ class LottoTest {
     void 문자열_배열을_Lotto로_변환() {
         String[] givenNumbers = {"6", "5", "4", "3", "2", "1"};
         Lotto actual = Lotto.fromInputs(givenNumbers);
+
+        assertThat(actual.getLottoNumbers()).hasSameElementsAs(testLotto.getLottoNumbers());
+    }
+
+    @DisplayName("정수 리스트를 입력 받아 Lotto 객체를 반환한다")
+    @Test
+    void 정수_리스트를_Lotto로_변환() {
+        List<Integer> givenNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto actual = Lotto.fromNumbers(givenNumbers);
 
         assertThat(actual.getLottoNumbers()).hasSameElementsAs(testLotto.getLottoNumbers());
     }
