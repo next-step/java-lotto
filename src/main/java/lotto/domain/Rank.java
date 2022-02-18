@@ -53,10 +53,7 @@ public enum Rank {
     }
 
     public boolean isSecond(final Rank rank) {
-        if (rank == Rank.SECOND) {
-            return true;
-        }
-        return false;
+        return rank == Rank.SECOND;
     }
 }
 
