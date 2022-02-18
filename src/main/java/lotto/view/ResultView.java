@@ -10,11 +10,8 @@ public class ResultView {
 
     }
 
-    public static void printNumOfLottoTickets(int ticketSize) {
-        System.out.println(ticketSize + "개를 구매했습니다.");
-    }
-
-    public static void printLottoTicketsInfo(List<LottoTicket> tickets) {
+    public static void printBuyingInformation(List<LottoTicket> tickets) {
+        System.out.println(tickets.size() + "개를 구매했습니다.");
         tickets.forEach(ticket -> System.out.println(ticket.toString()));
     }
 

@@ -13,8 +13,7 @@ public class LottoMain {
     public static void main(String[] args) {
         int userMoney = InputView.getUserMoney();
         Lotto lotto = new Lotto(userMoney);
-        ResultView.printLottoTicketsInfo(lotto.getLottoTickets());
-        ResultView.printNumOfLottoTickets(lotto.getNumOfTickets());
+        ResultView.printBuyingInformation(lotto.getLottoTickets());
 
         String winnings = InputView.getWinningNumbers();
         int bonusBall = InputView.getBonusBall();
