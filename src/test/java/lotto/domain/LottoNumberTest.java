@@ -13,8 +13,8 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {0, -1, 46, 100})
     void 숫자_범위를_벗어난_경우(int number) {
-        assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> LottoNumber.from(number));
+        assertThatThrownBy(() -> LottoNumber.from(number))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("숫자가 같으면 같은 LottoNumber로 취급한다")
