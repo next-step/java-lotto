@@ -7,18 +7,15 @@ import lotto.view.OutputView;
 
 public class Lottos {
 
-    private static final int ERROR_WRONG_LOTTO_PRICE = 0;
-    private static final int LOTTO_PRICE = 1000;
-
     private final List<Lotto> lottos;
 
     public Lottos(LottoPrice lottoPrice) {
-        validateLottoPrice(lottoPrice.getPrice());
-        this.lottos = generatorLottos(lottoPrice.getPrice() / LOTTO_PRICE);
+        validateLottoPrice(lottoPrice);
+        this.lottos = generatorLottos(lottoPrice.getLottoCount());
     }
 
-    private void validateLottoPrice(int totalPrice) {
-        if (totalPrice % LOTTO_PRICE != ERROR_WRONG_LOTTO_PRICE) {
+    private void validateLottoPrice(LottoPrice lottoPrice) {
+        if (lottoPrice.isErrorOrNot()) {
             throw new IllegalArgumentException(OutputView.ERROR_WRONG_LOTTO_PRICE);
         }
     }
