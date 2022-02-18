@@ -27,14 +27,6 @@ public enum Rank {
             .orElse(NONE);
     }
 
-    public static int getCount(LottoStatistics lottoStatistics, int matchCount) {
-        return lottoStatistics.getLottoStatistics().stream()
-            .filter(lottoStatistic -> lottoStatistic.grade == matchCount)
-            .collect(Collectors.toList())
-            .size();
-    }
-
-
     public int getGrade() {
         return grade;
     }
