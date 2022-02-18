@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -12,8 +13,8 @@ public class RankResult {
     private static int AUTO_INCREMENT = 1;
     private final Map<Rank, Integer> rankResult;
 
-    public RankResult(final Lottos lottos, final Winning winning) {
-        this.rankResult = lottos.lottos().stream().collect(
+    public RankResult(final List<Lotto> lottos, final Winning winning) {
+        this.rankResult = lottos.stream().collect(
             Collectors.groupingBy(arg -> Rank.countMatch(winning, arg),Collectors.summingInt(x -> AUTO_INCREMENT)));
     }
 

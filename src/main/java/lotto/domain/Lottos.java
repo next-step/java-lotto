@@ -34,7 +34,7 @@ public class Lottos {
         lottos.addAll(lotto);
         int numberOfLottoAutomatical = getNumberOfLottosAutomatical(numberOfLottoManual, money);
         lottos.addAll(
-            LottoBundle.lottoBundle(numberOfLottoAutomatical, new ShuffleLottoNumber()).lottos);
+            LottoBundle.lottoBundle(numberOfLottoAutomatical, new ShuffleLottoNumber()));
 
         return new LottoCalculationDTO(numberOfLottoManual, numberOfLottoAutomatical,
             new Lottos(lottos));

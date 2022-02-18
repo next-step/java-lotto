@@ -17,8 +17,8 @@ public class LottoCalculation {
         purchaseLottos = lottos;
     }
 
-    public Lottos getLottos() {
-        return purchaseLottos;
+    public List<Lotto> getLottos() {
+        return purchaseLottos.lottos();
     }
 
     public int getLottosCalculation() {
