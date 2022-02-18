@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import lotto.domain.dto.RankDTO;
 
 public class RankResult {
@@ -10,7 +12,7 @@ public class RankResult {
 
     public RankResult(final Lottos lottos, final Winning winning) {
         this.rankResult = lottos.lottos().stream().collect(
-            Collectors.groupingBy(arg -> Rank.countMatch(winning, arg),Collectors.summingInt(x -> 1)));
+            Collectors.groupingBy(arg -> Rank.countMatch(winning, arg),Collectors.summingInt(x -> 1))); //TODO: rankResult가 0으로 초기화 되지 않음.
     }
 
     public Map<Rank, Integer> getRankResult() {
