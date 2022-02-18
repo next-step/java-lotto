@@ -17,6 +17,12 @@ public class Statistics {
         }
     }
     
+    private void putRank(Rank rank) {
+        if (rank != Rank.MISS) {
+            ranks.put(rank, 0);
+        }
+    }
+    
     public void setRanks(WinningNumber winningNumber, List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             int matchCount = getMatchCount(lotto.getNumbers(),
@@ -26,17 +32,6 @@ public class Statistics {
             Rank rank = getRank(matchCount, bonusScore);
             incrementRank(rank);
         }
-    }
-    
-    private void incrementRank(Rank rank) {
-        if (rank != Rank.MISS) {
-            ranks.put(rank, ranks.get(rank) + 1);
-        }
-    }
-    
-    
-    public boolean getBonusScore(List<Integer> numbers, int bonusBall) {
-        return numbers.contains(bonusBall);
     }
     
     public int getMatchCount(List<Integer> numbers, List<Integer> winningNumber) {
@@ -54,13 +49,17 @@ public class Statistics {
         return 0;
     }
     
-    public Map<Rank, Integer> getRanks() {
-        return ranks;
+    public boolean getBonusScore(List<Integer> numbers, int bonusBall) {
+        return numbers.contains(bonusBall);
     }
     
-    private void putRank(Rank rank) {
+    private void incrementRank(Rank rank) {
         if (rank != Rank.MISS) {
-            ranks.put(rank, 0);
+            ranks.put(rank, ranks.get(rank) + 1);
         }
+    }
+    
+    public Map<Rank, Integer> getRanks() {
+        return ranks;
     }
 }

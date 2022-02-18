@@ -21,7 +21,6 @@ public class Operand {
         } catch (NumberFormatException e) {
             throw new NumberFormatException("피연산자가 숫자가 아닙니다.");
         }
-        
     }
     
     private void checkNegative(int operand) {

@@ -10,16 +10,15 @@ public class User {
     private final int autoCount;
     private final int manualCount;
     private final List<Lotto> lottos;
-    private Statistics statistics;
+    private final Statistics statistics;
     
     public User(int count, List<Lotto> manualLottos) {
         this.manualCount = manualLottos.size();
         this.autoCount = count - manualCount;
-        List<Lotto> lottos = manualLottos;
         for (int i = 0; i < autoCount; i++) {
-            lottos.add(new Lotto(makeRandomNumbers()));
+            manualLottos.add(new Lotto(makeRandomNumbers()));
         }
-        this.lottos = lottos;
+        this.lottos = manualLottos;
         this.statistics = new Statistics();
     }
     

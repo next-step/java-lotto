@@ -18,9 +18,21 @@ public class WinningNumberValidator {
         }
     }
     
+    private void validateLength(int winningNumberLength) {
+        if (winningNumberLength != LottoRules.LOTTO_COUNT) {
+            throw new RuntimeException(INCORRECT_INPUT);
+        }
+    }
+    
     private void validateNumber(Integer integer, int prev) {
         validateDuplication(integer, prev);
         validateInRange(integer);
+    }
+    
+    private void validateDuplication(Integer integer, int prev) {
+        if (prev == integer) {
+            throw new RuntimeException(INCORRECT_INPUT);
+        }
     }
     
     public void validateInRange(Integer integer) {
@@ -30,19 +42,5 @@ public class WinningNumberValidator {
         if (integer > LottoRules.LAST_NUM) {
             throw new RuntimeException(INCORRECT_INPUT);
         }
-        
     }
-    
-    private void validateLength(int winningNumberLength) {
-        if (winningNumberLength != LottoRules.LOTTO_COUNT) {
-            throw new RuntimeException(INCORRECT_INPUT);
-        }
-    }
-    
-    private void validateDuplication(Integer integer, int prev) {
-        if (prev == integer) {
-            throw new RuntimeException(INCORRECT_INPUT);
-        }
-    }
-    
 }
