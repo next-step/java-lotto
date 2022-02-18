@@ -13,6 +13,7 @@ public class Parser {
     private static final int PARSED_FORMULAR = 2;
     private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\\n(.*)");
     private static final int DIVIDE_NEGATIVE_NUMBER = 0;
+
     private String parsedFormular;
     private String customDelimiter;
 
