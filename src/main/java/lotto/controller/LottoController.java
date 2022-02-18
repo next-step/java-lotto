@@ -2,6 +2,7 @@ package lotto.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
@@ -24,18 +25,25 @@ public class LottoController {
 
         OutputView.printLottoCount(lottos.getLottoLists().size());
 
-        String winningNumber = InputView.readWinningNumber();
-        LottoNumber bonusBall = InputView.readBonusNumber();
-        WinningLotto winningLotto = new WinningLotto(refineToLottoList(winningNumber), bonusBall, lottos);
+
+        WinningLotto winningLotto = createWinningLotto(lottos);
         List<Rank> winningRanks = winningLotto.matchRank();
 
         String lottoEaringRate = LottoStatistics.getLottoEarningRate(winningRanks, lottoPrice);
         ResultView.printLottoStatistics(winningRanks, lottoEaringRate);
     }
 
-    public static Lotto refineToLottoList(String unrefinedNumber) {
-        return new Lotto(Arrays.asList(unrefinedNumber.split(", ")).stream()
-            .map(n -> new LottoNumber(Integer.parseInt(n)))
-            .collect(Collectors.toSet()));
+    private WinningLotto createWinningLotto(Lottos lottos) {
+        LottoNumber bonusBall = InputView.readBonusNumber();
+        Lotto winningLotto = createLotto();
+        return new WinningLotto(winningLotto, bonusBall, lottos);
+    }
+
+    private Lotto createLotto() {
+        String inputValue = InputView.readWinningNumber();
+        Set<LottoNumber> lottoNumbers = Arrays.asList(inputValue.split(", ")).stream()
+            .map(lottoNumber -> new LottoNumber(Integer.parseInt(lottoNumber)))
+            .collect(Collectors.toSet());
+        return new Lotto(lottoNumbers);
     }
 }
