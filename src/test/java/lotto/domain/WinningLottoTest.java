@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +18,7 @@ class WinningLottoTest {
 
     static {
         List<Integer> testNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        testLotto = Lotto.fromNumbers(testNumbers);
+        testLotto = convertToLotto(testNumbers);
         testWinningLotto = new WinningLotto(testLotto, bonus);
     }
 
@@ -33,7 +35,7 @@ class WinningLottoTest {
     @Test
     void 당첨_번호_반환() {
         List<Integer> userNumbers = Arrays.asList(1, 2, 3, 8, 9, 10);
-        Lotto userLotto = Lotto.fromNumbers(userNumbers);
+        Lotto userLotto = convertToLotto(userNumbers);
         int actual = testWinningLotto.getMatchCount(userLotto);
         assertThat(actual).isEqualTo(3);
     }
@@ -42,7 +44,7 @@ class WinningLottoTest {
     @Test
     void 보너스_번호가_있는_경우() {
         List<Integer> userNumbers = Arrays.asList(1, 2, 3, 4, 5, 7);
-        Lotto userLotto = Lotto.fromNumbers(userNumbers);
+        Lotto userLotto = convertToLotto(userNumbers);
         boolean actual = testWinningLotto.getMatchBonus(userLotto);
         assertThat(actual).isTrue();
     }
@@ -51,8 +53,16 @@ class WinningLottoTest {
     @Test
     void 보너스_번호가_없는_경우() {
         List<Integer> userNumbers = Arrays.asList(1, 2, 3, 4, 5, 8);
-        Lotto userLotto = Lotto.fromNumbers(userNumbers);
+        Lotto userLotto = convertToLotto(userNumbers);
         boolean actual = testWinningLotto.getMatchBonus(userLotto);
         assertThat(actual).isFalse();
+    }
+
+    private static Lotto convertToLotto(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::from)
+                .collect(Collectors.toList());
+
+        return Lotto.from(lottoNumbers);
     }
 }

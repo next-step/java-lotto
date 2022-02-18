@@ -14,23 +14,17 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static Lotto fromLottoNumbers(List<LottoNumber> numbers) {
+    public static Lotto from(List<LottoNumber> numbers) {
         return new Lotto(numbers);
     }
 
-    public static Lotto fromNumbers(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = numbers.stream()
-            .map(LottoNumber::from)
-            .collect(Collectors.toList());
-        return new Lotto(lottoNumbers);
-    }
 
-    public static Lotto fromInputs(String[] numbers) {
+    public static Lotto from(String[] numbers) {
         List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
                 .map(String::trim)
                 .map(LottoNumber::from)
                 .collect(Collectors.toList());
-        return Lotto.fromLottoNumbers(lottoNumbers);
+        return Lotto.from(lottoNumbers);
     }
 
     private void validateLotto(List<LottoNumber> numbers) {

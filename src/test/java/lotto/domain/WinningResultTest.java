@@ -7,6 +7,8 @@ import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +20,7 @@ class WinningResultTest {
     @BeforeEach
     void beforeEach() {
         List<Integer> testNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Lotto testLotto = Lotto.fromNumbers(testNumbers);
+        Lotto testLotto = convertToLotto(testNumbers);
         LottoNumber testBonus = LottoNumber.from(7);
         testWinningLotto = new WinningLotto(testLotto, testBonus);
     }
@@ -32,10 +34,10 @@ class WinningResultTest {
         List<Integer> third2 = Arrays.asList(1, 2, 3, 41, 5, 6);
 
         List<Lotto> lottos = Arrays.asList(
-                Lotto.fromNumbers(first),
-                Lotto.fromNumbers(second),
-                Lotto.fromNumbers(third1),
-                Lotto.fromNumbers(third2)
+                convertToLotto(first),
+                convertToLotto(second),
+                convertToLotto(third1),
+                convertToLotto(third2)
         );
 
         Lottos testLottos = Lottos.withListLotto(lottos);
@@ -57,9 +59,9 @@ class WinningResultTest {
         List<Integer> none = Arrays.asList(11, 12, 13, 14, 15, 6);
 
         List<Lotto> lottos = Arrays.asList(
-            Lotto.fromNumbers(fourth),
-            Lotto.fromNumbers(fifth),
-            Lotto.fromNumbers(none)
+                convertToLotto(fourth),
+                convertToLotto(fifth),
+                convertToLotto(none)
         );
 
         Lottos testLottos = Lottos.withListLotto(lottos);
@@ -72,5 +74,13 @@ class WinningResultTest {
 
         assertThat(actualPrize).isEqualTo(new BigDecimal(55000));
         assertThat(actualProfit).isEqualTo(expectedProfit);
+    }
+
+    private static Lotto convertToLotto(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::from)
+                .collect(Collectors.toList());
+
+        return Lotto.from(lottoNumbers);
     }
 }
