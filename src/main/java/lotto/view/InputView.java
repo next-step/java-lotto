@@ -20,30 +20,12 @@ public class InputView {
     private static final String NEED_INTEGER = "정수를 입력해주세요.";
     private static final int PRICE_OF_A_LOTTO = 1000;
     
-    public static int getPrice() {
+    public static int inputPrice() {
         System.out.println(PRICE_INPUT_GUIDE_MESSAGE);
-        String priceString = scanner.next();
+        String priceString = scanner.nextLine();
         int price = validateIsNumber(priceString);
         validatePrice(price);
         return price;
-    }
-    
-    private static void validatePrice(int price) {
-        if (price < PRICE_OF_A_LOTTO) {
-            throw new IllegalArgumentException(NEED_OVER_LOTTO_PRICE);
-        }
-    }
-    
-    public static int inputManualLottoCount(int count) {
-        System.out.println(MANUAL_LOTTO_COUNT_MESSAGE);
-        return validateManualCount(count, scanner.nextInt());
-    }
-    
-    private static int validateManualCount(int count, int manualCount) {
-        if (count > manualCount) {
-            throw new IllegalArgumentException(NEED_RIGHT_COUNT);
-        }
-        return manualCount;
     }
     
     private static int validateIsNumber(String priceString) {
@@ -54,28 +36,47 @@ public class InputView {
         }
     }
     
+    private static void validatePrice(int price) {
+        if (price < PRICE_OF_A_LOTTO) {
+            throw new IllegalArgumentException(NEED_OVER_LOTTO_PRICE);
+        }
+    }
+    
+    public static int inputManualLottoCount(int count) {
+        System.out.println(MANUAL_LOTTO_COUNT_MESSAGE);
+        return validateManualCount(count, Integer.parseInt(scanner.nextLine()));
+    }
+    
+    private static int validateManualCount(int count, int manualCount) {
+        if (count < manualCount || manualCount < 0) {
+            throw new IllegalArgumentException(NEED_RIGHT_COUNT);
+        }
+        return manualCount;
+    }
+    
+    public static List<Lotto> inputManualLottos(int manualCount) {
+        System.out.println("수동으로 구매할 번호를 입력해주세요.");
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < manualCount; i++) {
+            List<String> numbersString = Arrays.asList(scanner.nextLine().split(", "));
+            List<Integer> numbers = numbersString.stream().map(string -> Integer.parseInt(string))
+              .collect(Collectors.toList());
+            lottos.add(new Lotto(numbers));
+        }
+        System.out.println();
+        return lottos;
+    }
+    
     public static List<Integer> getWinningNumber() {
         List<Integer> winningNumbers;
         System.out.println(WINNING__NUMBER_INPUT_GUIDE_MESSAGE);
-        String numbersString = scanner.next();
+        String numbersString = scanner.nextLine();
         winningNumbers = Parser.parseWinningNumber(numbersString);
         return winningNumbers;
     }
     
     public static int getBonusBall() {
         System.out.println(BONUS_BALL_INPUT_GUIDE_MESSAGE);
-        return scanner.nextInt();
-    }
-    
-    public static List<Lotto> inputManualLottos(int manualCount) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < manualCount; i++) {
-            List<String> numbersString = Arrays.asList(scanner.nextLine().split(", "));
-            List<Integer> numbers = numbersString.stream().map(string -> Integer.parseInt(string))
-              .collect(
-                Collectors.toList());
-            lottos.add(new Lotto(numbers));
-        }
-        return lottos;
+        return Integer.parseInt(scanner.nextLine());
     }
 }

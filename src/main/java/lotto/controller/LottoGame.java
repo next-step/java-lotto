@@ -18,9 +18,13 @@ public class LottoGame {
         showResult();
     }
     
-    private void showResult() {
-        double reward = OutputView.printResult(user.getRanks());
-        OutputView.printYield(LottoRules.calculateYield(reward, user.getLottoCount()));
+    private void settingLottos() {
+        int totalLottoCount = InputView.inputPrice() / LottoRules.LOTTO_PRICE;
+        int manualCount = InputView.inputManualLottoCount(totalLottoCount);
+        List<Lotto> manualLottos = InputView.inputManualLottos(manualCount);
+        OutputView.outputLottoCount(totalLottoCount, manualCount);
+        user = new User(totalLottoCount, manualLottos);
+        OutputView.printLottos(user.getLottos());
     }
     
     private void settingWinningNumber() {
@@ -30,12 +34,8 @@ public class LottoGame {
         user.setRanks(winningNumber);
     }
     
-    private void settingLottos() {
-        int lottoCount = InputView.getPrice() / LottoRules.LOTTO_PRICE;
-        int manualCount = InputView.inputManualLottoCount(lottoCount);
-        List<Lotto> manualLottos = InputView.inputManualLottos(manualCount);
-        OutputView.outputLottoCount(lottoCount, manualCount);
-        user = new User(lottoCount, manualLottos);
-        OutputView.printLottos(user.getLottos());
+    private void showResult() {
+        double reward = OutputView.printResult(user.getRanks());
+        OutputView.printYield(LottoRules.calculateYield(reward, user.getLottoCount()));
     }
 }
