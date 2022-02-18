@@ -20,8 +20,7 @@ public class OutputView {
     private static final String REQUEST_WINNING_NUMBER_BEFORE = "\n지난 주 당첨 번호를 입력해주세요.(ex 1, 2, 3, 4, 5)";
     private static final String REQUEST_BONUS_BALL_NUMBER = "보너스 볼을 입력해주세요.";
     private static final String WINNING_STATS = "\n당첨 통계\n------------";
-    private static final int LOTTO_BONUS_MATCH_COUNT = 7;
-    private static final int CASE_BONUS_BALL = 5;
+    private static final int CASE_BONUS_BALL_MONEY = 30000000;
 
     public static void printExceptionMessage(String exceptionMessage) {
         System.out.println(ERROR_MESSAGE + exceptionMessage);
@@ -48,11 +47,12 @@ public class OutputView {
     }
 
     public static void printLottoStatistic(int grade, int money, int matchCount) {
-        System.out.println(grade + "개 일치(" + money + "원) - " + matchCount + " 개");
-    }
-
-    public static void printLottoBonusStatistic(int grade, int money, int matchCount) {
-        System.out.println(grade + "개 일치, 보너스 볼 일치(" + money + "원) - " + matchCount + " 개");
+        if (money == CASE_BONUS_BALL_MONEY) {
+            System.out.println(grade + "개 일치, 보너스 볼 일치(" + money + "원) - " + matchCount + " 개");
+        }
+        if (money != CASE_BONUS_BALL_MONEY) {
+            System.out.println(grade + "개 일치(" + money + "원) - " + matchCount + " 개");
+        }
     }
 
     public static void printTotalReturn(Double earningRate) {
@@ -66,23 +66,11 @@ public class OutputView {
             "총 수익률은 " + earningRate + "입니다.(기준이 1이기 때문에 결과적으로 " + profitOrLoss + "이라는 의미임)");
     }
 
-    public static void printLottoStatistics(Map<Integer, Integer> rankReport) {
+    public static void printLottoStatistics(Map<Rank, Integer> rankReport) {
         OutputView.printLottoStatisticTitle();
-        for (Integer key : rankReport.keySet()) {
-            printBonusBallOrNot(key, rankReport);
+        for (Rank rank : rankReport.keySet()) {
+            OutputView.printLottoStatistic(rank.getGrade(), rank.getMoney(), rankReport.get(rank));
         }
-    }
-
-    private static void printBonusBallOrNot(Integer key, Map<Integer, Integer> rankReport) {
-        if (key != LOTTO_BONUS_MATCH_COUNT) {
-            OutputView.printLottoStatistic(key, Rank.getRank(key).getMoney(),
-                rankReport.get(key));
-        }
-        if (key == LOTTO_BONUS_MATCH_COUNT) {
-            OutputView.printLottoBonusStatistic(CASE_BONUS_BALL,
-                Rank.getRank(LOTTO_BONUS_MATCH_COUNT).getMoney(), rankReport.get(key));
-        }
-
     }
 
     public static void printLottoNumbers(List<Lotto> lottoLists) {

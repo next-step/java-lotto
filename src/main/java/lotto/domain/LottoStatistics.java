@@ -23,16 +23,26 @@ public class LottoStatistics {
             BigDecimal.valueOf(lottoPrice.getPrice())));
     }
 
-    public Map<Integer, Integer> makeRankReport() {
-        Map<Integer, Integer> rankReport = new LinkedHashMap<>();
-        rankReport.put(3,0);
-        rankReport.put(4,0);
-        rankReport.put(5,0);
-        rankReport.put(7,0);
-        rankReport.put(6,0);
-        for (Rank rank : lottoStatistics) {
-            rankReport.put(rank.getGrade(), rankReport.getOrDefault(rank.getGrade(), 0) + 1);
+    public Map<Rank, Integer> makeRankReport() {
+        Map<Rank, Integer> rankReport = new LinkedHashMap<>();
+        rankReport.put(Rank.FIFTH, 0);
+        rankReport.put(Rank.FOURTH, 0);
+        rankReport.put(Rank.THIRD, 0);
+        rankReport.put(Rank.SECOND, 0);
+        rankReport.put(Rank.FIRST, 0);
+
+        for(Rank rank : lottoStatistics) {
+            rankReport.put(rank, rankReport.getOrDefault(rank,0) + 1);
         }
+//        Map<Integer, Integer> rankReport = new LinkedHashMap<>();
+//        rankReport.put(3,0);
+//        rankReport.put(4,0);
+//        rankReport.put(5,0);
+//        rankReport.put(7,0);
+//        rankReport.put(6,0);
+//        for (Rank rank : lottoStatistics) {
+//            rankReport.put(rank.getGrade(), rankReport.getOrDefault(rank.getGrade(), 0) + 1);
+//        }
         return rankReport;
     }
 
