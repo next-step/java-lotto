@@ -8,6 +8,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.domain.RankResult;
 import lotto.domain.Winning;
 import lotto.domain.dto.LottoCalculationDTO;
 import lotto.domain.dto.RankDTO;
@@ -20,14 +21,15 @@ public class Controller {
         Money money = new Money(InputView.inputPurchaseAmount());
         LottoCalculation lottoCalculation = new LottoCalculation(money);
         purchaseLottoManual(lottoCalculation, money);
-        purchaseLottoAutomatical(lottoCalculation);
+        purchaseLottoAutomatical(lottoCalculation, money);
     }
 
-    private static void purchaseLottoAutomatical(LottoCalculation lottoCalculation) {
+    private static void purchaseLottoAutomatical(LottoCalculation lottoCalculation, Money money) {
         String winningLottoNumber = InputView.inputWinningLottoNumber();
         LottoNumber bonusLottoNumber = new LottoNumber(InputView.inputBonusLottoNumber());
         Winning winning = new Winning(winningLottoNumber, bonusLottoNumber);
-        RankDTO rankDto = lottoCalculation.getRankResult(winning);
+        RankResult rankResult = new RankResult(lottoCalculation.getPurchaseLottos(), winning);
+        RankDTO rankDto = rankResult.getRankResult(winning, money);
         OutputView.printRankResult(rankDto);
     }
 

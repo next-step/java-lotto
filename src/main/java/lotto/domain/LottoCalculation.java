@@ -17,6 +17,10 @@ public class LottoCalculation {
         purchaseLottos = lottos;
     }
 
+    public Lottos getPurchaseLottos() {
+        return purchaseLottos;
+    }
+
     public LottoCalculationDTO purchaseLottos(Lottos lottos) {
         int numberOflottoManual = lottos.lottos().size();
 
@@ -32,11 +36,5 @@ public class LottoCalculation {
 
     private int getNumberOfLottosAutomatical(int numberOflottosManual) {
         return purchaseMoney.lottoCalculation() - numberOflottosManual;
-    }
-
-
-    public RankDTO getRankResult(Winning winning) {
-        RankResult rankResult = new RankResult(purchaseLottos, winning);
-        return new RankDTO(rankResult, purchaseMoney);
     }
 }

@@ -17,7 +17,6 @@ public class Winning {
         this(new Lotto(inputWinningLottoNumber), inputBonusLottoNumber);
     }
 
-
     private void validationWinningNumber() {
         if (winningLottoNumber.contains(bonusLottoNumber)) {
             throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
@@ -31,5 +30,4 @@ public class Winning {
     public boolean bonusLottoNumber(final Lotto lotto) {
         return lotto.contains(bonusLottoNumber);
     }
-
 }

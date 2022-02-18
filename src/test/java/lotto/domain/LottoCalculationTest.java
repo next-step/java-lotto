@@ -80,7 +80,8 @@ public class LottoCalculationTest {
         LottoCalculation lottoCalculation = new LottoCalculation(new Money("14000"));
         lottoCalculation.purchaseLottos(new Lottos(oldLottos));
         Winning winning = new Winning("1,2,3,4,5,6", new LottoNumber(7));
-        assertThat(lottoCalculation.getRankResult(winning)).isNotNull();
+        RankResult rankResult = new RankResult(lottoCalculation.getPurchaseLottos(), winning);
+        assertThat(rankResult.getRankResult(winning, new Money(7))).isNotNull();
     }
 
     @DisplayName("수동_로또_입력에_대한_결과값_테스트")
