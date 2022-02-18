@@ -27,11 +27,16 @@ public enum Rank {
             .orElse(NONE);
     }
 
-    public static int getCount(List<Rank> statistics, int matchCount) {
-        return statistics.stream()
-            .filter(x -> x.grade == matchCount)
+    public static int getCount(LottoStatistics lottoStatistics, int matchCount) {
+        return lottoStatistics.getLottoStatistics().stream()
+            .filter(lottoStatistic -> lottoStatistic.grade == matchCount)
             .collect(Collectors.toList())
             .size();
+    }
+
+
+    public int getGrade() {
+        return grade;
     }
 
     public int getMoney() {

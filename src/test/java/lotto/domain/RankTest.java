@@ -28,7 +28,7 @@ class RankTest {
     @DisplayName(value = "로또에서 5개와 보너스를 맞추면 2등이다.")
     @Test
     void correctFourSecond() {
-        assertThat(Rank.getRank(7)).isEqualTo(Rank.SECOND);
+        assertThat(Rank.getRank(5)).isEqualTo(Rank.SECOND);
     }
 
     @DisplayName(value = "로또에서 6개를 맞추면 1등이다.")

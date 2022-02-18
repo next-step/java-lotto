@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
@@ -9,7 +8,6 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoPrice;
 import lotto.domain.LottoStatistics;
 import lotto.domain.Lottos;
-import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -27,8 +25,9 @@ public class LottoController {
 
         WinningLotto winningLotto = createWinningLotto(lottos);
         LottoStatistics lottoStatistics = new LottoStatistics(winningLotto.matchRank());
-        String lottoEaringRate = lottoStatistics.getLottoEarningRate(lottoPrice);
-        ResultView.printLottoStatistics(lottoStatistics, lottoEaringRate);
+
+        ResultView.printLottoStatistics(lottoStatistics.makeRankReport());
+        OutputView.printTotalReturn(Double.parseDouble(lottoStatistics.getLottoEarningRate(lottoPrice)));
     }
 
     private WinningLotto createWinningLotto(Lottos lottos) {
