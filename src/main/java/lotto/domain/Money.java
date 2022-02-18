@@ -7,6 +7,7 @@ public class Money {
     private static final String NON_NUMBER_ERROR_MESSAGE = "구매 금액은 정수만 가능합니다.";
     private static final int LOTTO_PRICE = 1000;
     private static final int NUMBER_ZERO = 0;
+
     private final int value;
 
     public Money(final String value) {
