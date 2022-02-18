@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public class LottoTicket {
+public class LottoTicketManual {
 
     private static final int BASE_NUMBER = 0;
     private static final String PURCHASE_LOTTO_PRICE_ERROR_MESSAGE = "로또 수는 구입 금액 범위 안에서 입력해주세요.";
@@ -8,14 +8,14 @@ public class LottoTicket {
     private static final String NUMBER_FORMAT_ERROR_MESSAGE = "수동으로 입력할 수 있는 로또 수는 정수만 작성할 수 있습니다.";
     private final int value;
 
-    public LottoTicket(final String value, final int count) {
+    public LottoTicketManual(final String value, final int count) {
         int convertIntValue = validateTypeInput(value);
         validateNegativeNumber(convertIntValue);
         validatePurchaseLottoTicketMax(convertIntValue, count);
         this.value = convertIntValue;
     }
 
-    public LottoTicket(Money money, String inputLottoTicket) {
+    public LottoTicketManual(Money money, String inputLottoTicket) {
         this(inputLottoTicket, money.lottoCalculation());
     }
 

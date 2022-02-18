@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 import lotto.domain.Lotto;
 import lotto.domain.LottoCalculation;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
+import lotto.domain.LottoTicketManual;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.RankResult;
@@ -42,7 +42,7 @@ public class Controller {
     }
 
     private static void purchaseLottoManual(LottoCalculation lottoCalculation, Money money) {
-        LottoTicket lottoTicket = new LottoTicket(money, inputView.inputLottoTicket());
+        LottoTicketManual lottoTicket = new LottoTicketManual(money, inputView.inputLottoTicket());
         inputView.inputLottoManual();
         List<Lotto> purchaseManualLotto = IntStream.range(0, lottoTicket.getLottoTicketValue())
             .mapToObj(inputView::doInputLotto)

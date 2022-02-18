@@ -13,6 +13,6 @@ class LottoTicketTest {
     @ValueSource(strings = {"4", "-1", "abc"})
     void purchaseLottoTicketTest(String numberOfManualLottoTicket) {
         assertThatIllegalArgumentException().isThrownBy(
-            () -> new LottoTicket(numberOfManualLottoTicket, 3));
+            () -> new LottoTicketManual(numberOfManualLottoTicket, 3));
     }
 }

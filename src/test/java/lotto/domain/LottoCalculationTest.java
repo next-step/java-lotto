@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.view.InputView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -88,8 +87,8 @@ public class LottoCalculationTest {
     @Test
     void makeLottoTicketTest() {
         assertAll(
-            () -> assertThat(new LottoTicket("3", 14)),
-            () -> assertThatIllegalArgumentException().isThrownBy(() -> new LottoTicket("15", 14))
+            () -> assertThat(new LottoTicketManual("3", 14)),
+            () -> assertThatIllegalArgumentException().isThrownBy(() -> new LottoTicketManual("15", 14))
         );
     }
 }
