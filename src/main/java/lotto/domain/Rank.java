@@ -24,7 +24,7 @@ public enum Rank {
 
     public static Rank countMatch(final Winning winning, final Lotto lotto) {
         int lottoCount = (int) winning.winLottoNumber(lotto);
-        boolean bonusBallMatch = winning.getbonusLottoNumber(lotto);
+        boolean bonusBallMatch = winning.isbonusLottoNumber(lotto);
         if (THIRD.match(lottoCount) && !bonusBallMatch) {
             return THIRD;
         }
