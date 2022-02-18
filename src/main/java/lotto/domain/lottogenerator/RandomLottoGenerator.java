@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 public class RandomLottoGenerator implements LottoGenerator {
 
@@ -13,16 +14,16 @@ public class RandomLottoGenerator implements LottoGenerator {
     private static final int FIRST_COUNT = 0;
     private static final int LOTTO_SIZE = 6;
 
-    private static final List<Integer> LOTTO_NUMBERS = new ArrayList<>();
+    private static final List<LottoNumber> LOTTO_NUMBERS = new ArrayList<>();
 
     static {
         IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-            .forEach(LOTTO_NUMBERS::add);
+                .forEach(number -> LOTTO_NUMBERS.add(LottoNumber.from(number)));
     }
 
     @Override
     public Lotto get() {
         Collections.shuffle(LOTTO_NUMBERS);
-        return Lotto.fromNumbers(new ArrayList<>(LOTTO_NUMBERS.subList(FIRST_COUNT, LOTTO_SIZE)));
+        return Lotto.fromLottoNumbers(new ArrayList<>(LOTTO_NUMBERS.subList(FIRST_COUNT, LOTTO_SIZE)));
     }
 }
