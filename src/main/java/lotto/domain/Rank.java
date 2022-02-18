@@ -2,20 +2,51 @@ package lotto.domain;
 
 import java.util.Arrays;
 
+
 public enum Rank {
-    NONE(0, 0),
-    FIFTH(3, 5000),
-    FOURTH(4, 50000),
-    THIRD(5, 1500000),
-    SECOND(5, 30000000),
-    FIRST(6, 2000000000);
+    NONE(0, 0) {
+        @Override
+        boolean match(int matchCount, boolean matchBonus) {
+            return matchCount < 3;
+        }
+    },
+    FIFTH(3, 5000) {
+        @Override
+        boolean match(int matchCount, boolean matchBonus) {
+            return matchCount == getMatchCount();
+        }
+    },
+    FOURTH(4, 50000) {
+        @Override
+        boolean match(int matchCount, boolean matchBonus) {
+            return matchCount == getMatchCount();
+        }
+    },
+    THIRD(5, 1500000) {
+        @Override
+        boolean match(int matchCount, boolean matchBonus) {
+            return matchCount == getMatchCount() && !matchBonus;
+        }
+    },
+    SECOND(5, 30000000) {
+        @Override
+        boolean match(int matchCount, boolean matchBonus) {
+            return matchCount == getMatchCount() && matchBonus;
+        }
+    },
+    FIRST(6, 2000000000) {
+        @Override
+        boolean match(int matchCount, boolean matchBonus) {
+            return matchCount == getMatchCount();
+        }
+    };
 
     private final int matchCount;
     private final long prizeMoney;
 
-    Rank(int matchCount, long prize) {
+    Rank(int matchCount, long prizeMoney) {
         this.matchCount = matchCount;
-        this.prizeMoney = prize;
+        this.prizeMoney = prizeMoney;
     }
 
     public int getMatchCount() {
@@ -26,14 +57,11 @@ public enum Rank {
         return this.prizeMoney;
     }
 
-    public static Rank find(int matchCount, boolean matchBonus) {
-        Rank rank = Arrays.stream(Rank.values())
-            .filter(targetRank -> targetRank.matchCount == matchCount)
-            .findFirst().orElse(NONE);
+    abstract boolean match(int matchCount, boolean matchBonus);
 
-        if (rank == Rank.THIRD && matchBonus) {
-            return Rank.SECOND;
-        }
-        return rank;
+    public static Rank find(int matchCount, boolean matchBonus) {
+        return Arrays.stream(Rank.values())
+                .filter(targetRank -> targetRank.match(matchCount, matchBonus))
+                .findFirst().orElse(NONE);
     }
 }
