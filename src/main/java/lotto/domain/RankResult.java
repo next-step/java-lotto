@@ -15,8 +15,8 @@ public class RankResult {
             Collectors.groupingBy(arg -> Rank.countMatch(winning, arg),Collectors.summingInt(x -> 1))); //TODO: rankResult가 0으로 초기화 되지 않음.
     }
 
-    public Map<Rank, Integer> getRankResult() {
-        return rankResult;
+    public int getRankResult(Rank rank) {
+        return rankResult.get(rank);
     }
 
     public Money getTotalPrize() {
@@ -28,4 +28,5 @@ public class RankResult {
     public RankDTO getRankResult(Winning winning, Money purchaseMoney) {
         return new RankDTO(this, purchaseMoney);
     }
+
 }

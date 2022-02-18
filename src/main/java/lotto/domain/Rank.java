@@ -44,8 +44,8 @@ public enum Rank {
         return matchCount;
     }
 
-    public Money getPrize() {
-        return prize;
+    public int getPrize() {
+        return prize.getValue();
     }
 
     public Money getPrize(final int hit) {

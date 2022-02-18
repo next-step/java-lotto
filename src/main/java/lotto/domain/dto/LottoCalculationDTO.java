@@ -1,5 +1,7 @@
 package lotto.domain.dto;
 
+import java.util.List;
+import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 
 public class LottoCalculationDTO {
@@ -23,7 +25,7 @@ public class LottoCalculationDTO {
         return numberOfLottoAutomatical;
     }
 
-    public Lottos getLottos() {
-        return lottos;
+    public List<Lotto> getLottos() {
+        return lottos.lottos();
     }
 }

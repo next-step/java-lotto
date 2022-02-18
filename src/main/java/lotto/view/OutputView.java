@@ -23,7 +23,7 @@ public class OutputView {
     public static void printCountMessage(LottoCalculationDTO LottoCalculationDto) {
         System.out.printf(PURCHASED_LOTTO_RESULT, LottoCalculationDto.getNumberOfLottoManual(),
             LottoCalculationDto.getNumberOfLottoAutomatical());
-        LottoCalculationDto.getLottos().lottos().forEach(
+        LottoCalculationDto.getLottos().forEach(
             lotto -> System.out.println(lotto.getLottoNumber())
         );
     }
@@ -40,13 +40,13 @@ public class OutputView {
             .getPrizeRatio(rankDto.getRankResult().getTotalPrize(), rankDto.getPurchaseAmount()));
     }
 
-    public static void printResult(RankResult rankDto, Rank rank) {
+    public static void printResult(RankResult rankResult, Rank rank) {
         if (rank.isSencod(rank)) {
             System.out.printf(SECOND_RESULT_MESSAGE, rank.getMatchCount(),
-                rank.getPrize().getValue(), rankDto.getRankResult().get(rank));
+                rank.getPrize(), rankResult.getRankResult(rank));
             return;
         }
-        System.out.printf(RESULT_MESSAGE, rank.getMatchCount(), rank.getPrize().getValue(),
-            rankDto.getRankResult().get(rank));
+        System.out.printf(RESULT_MESSAGE, rank.getMatchCount(), rank.getPrize(),
+            rankResult.getRankResult(rank));
     }
 }
