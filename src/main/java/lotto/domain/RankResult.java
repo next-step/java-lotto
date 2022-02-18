@@ -8,14 +8,18 @@ import lotto.domain.dto.RankDTO;
 
 public class RankResult {
 
+    private static int DEFAULT_NUMBER = 0;
+    private static int AUTO_INCREMENT = 1;
     private final Map<Rank, Integer> rankResult;
 
     public RankResult(final Lottos lottos, final Winning winning) {
         this.rankResult = lottos.lottos().stream().collect(
-            Collectors.groupingBy(arg -> Rank.countMatch(winning, arg),Collectors.summingInt(x -> 1))); //TODO: rankResult가 0으로 초기화 되지 않음.
+            Collectors.groupingBy(arg -> Rank.countMatch(winning, arg),Collectors.summingInt(x -> AUTO_INCREMENT)));
     }
 
     public int getRankResult(Rank rank) {
+        if(rankResult.get(rank) == null)
+            return DEFAULT_NUMBER;
         return rankResult.get(rank);
     }
 
