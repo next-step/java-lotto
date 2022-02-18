@@ -18,39 +18,30 @@ public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
 
 
-    private InputView() {
-
+    public InputView() {
     }
 
-    public static String inputPurchaseAmount() {
+    public String inputPurchaseAmount() {
         System.out.println(PURCHASE_AMOUNT_MESSAGE);
         return SCANNER.nextLine();
     }
 
-    public static String inputLottoTicket() {
+    public String inputLottoTicket() {
         System.out.println(LOTTO_TICKET_MESSAGE);
         return SCANNER.nextLine();
     }
 
-    public static String inputWinningLottoNumber() {
+    public String inputWinningLottoNumber() {
         System.out.println(WINNING_LOTTO_NUMBER_MESSAGE);
         return SCANNER.nextLine();
     }
 
-    public static int inputBonusLottoNumber() {
+    public int inputBonusLottoNumber() {
         System.out.println(BONUSBALL_MESSAGE);
         return Integer.parseInt(SCANNER.nextLine());
     }
 
-    public static List<Lotto> inputPurchaseManualLotto(int count) {
-        System.out.println(LOTTO_NUMBER_MANUAL_MESSAGE);
-        return IntStream.range(0, count)
-            .mapToObj(InputView::doInputLotto)
-            .map(Lotto::new)
-            .collect(Collectors.toList());
-    }
-
-    private static String doInputLotto(int idx) {
+    public String doInputLotto(int idx) {
         return SCANNER.nextLine();
     }
 }
