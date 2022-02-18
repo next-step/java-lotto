@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 public class StringCalculator {
 
+    private static final int ZERO = 0;
     private static final String DELIMITER = ",|:";
     private static final List<Integer> BLANK_LIST = new ArrayList<>();
     private static final String NEGATIVE_EXCEPTION = "[ERROR] 음수가 포함될 수 없습니다.";
@@ -33,7 +34,7 @@ public class StringCalculator {
 
     private void checkNegativeValue(List<Integer> numbers) {
         for (Integer number : numbers) {
-            if (number < 0) {
+            if (number < ZERO) {
                 throw new RuntimeException(NEGATIVE_EXCEPTION);
             }
         }
