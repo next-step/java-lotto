@@ -33,7 +33,7 @@ public class WinningLotto {
     }
 
     private int matchWinningNumbers(final Lotto lotto) {
-        return lotto.matchWinningnumbers(lotto, winningNumber);
+        return lotto.matchWinningnumbers(winningNumber);
     }
 
     private void addWinningRanksList(int matchOfNumber, Lotto lotto, List<Rank> winningRanks) {
