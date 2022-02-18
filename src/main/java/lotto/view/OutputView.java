@@ -41,7 +41,7 @@ public class OutputView {
     }
 
     public static void printResult(RankResult rankResult, Rank rank) {
-        if (rank.isSencod(rank)) {
+        if (rank.isSecond(rank)) {
             System.out.printf(SECOND_RESULT_MESSAGE, rank.getMatchCount(),
                 rank.getPrize(), rankResult.getRankResult(rank));
             return;
