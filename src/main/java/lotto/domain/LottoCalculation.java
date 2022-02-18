@@ -4,6 +4,8 @@ import lotto.domain.dto.LottoCalculationDTO;
 
 public class LottoCalculation {
 
+    private static final int LOTTO_PRICE = 1000;
+
     private Lottos purchaseLottos;
     private Money purchaseMoney;
 
@@ -34,6 +36,10 @@ public class LottoCalculation {
     }
 
     private int getNumberOfLottosAutomatical(int numberOflottosManual) {
-        return purchaseMoney.calculateLotto() - numberOflottosManual;
+        return calculateLotto() - numberOflottosManual;
+    }
+
+    public int calculateLotto() {
+        return purchaseMoney.getValue() / LOTTO_PRICE;
     }
 }
