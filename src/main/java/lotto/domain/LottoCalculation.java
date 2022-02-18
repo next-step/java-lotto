@@ -5,8 +5,6 @@ import lotto.domain.dto.LottoCalculationDTO;
 
 public class LottoCalculation {
 
-    private static final int LOTTO_PRICE = 1000;
-
     private Lottos purchaseLottos;
     private Money purchaseMoney;
 
@@ -19,28 +17,16 @@ public class LottoCalculation {
         purchaseLottos = lottos;
     }
 
-    public Lottos getPurchaseLottos() {
+    public Lottos getLottos() {
         return purchaseLottos;
     }
 
-    public LottoCalculationDTO purchaseLottos(List<Lotto> lotto) {
-        int numberOfLottoManual = lotto.size();
-
-        purchaseLottos.add(new Lottos(lotto));
-        int numberOfLottoAutomatical = getNumberOfLottosAutomatical(numberOfLottoManual);
-        purchaseLottos.add(
-            LottoBundle.lottoBundle(numberOfLottoAutomatical, new ShuffleLottoNumber()));
-
-        return new LottoCalculationDTO(numberOfLottoManual, numberOfLottoAutomatical,
-            purchaseLottos);
-
+    public int getLottosCalculation() {
+        return purchaseLottos.calculateLotto(purchaseMoney);
     }
 
-    private int getNumberOfLottosAutomatical(int numberOfLottoManual) {
-        return calculateLotto() - numberOfLottoManual;
+    public LottoCalculationDTO getPurchaseLottos(List<Lotto> lotto, Money money) {
+        return purchaseLottos.purchaseLottos(lotto, money);
     }
 
-    public int calculateLotto() {
-        return purchaseMoney.getValue() / LOTTO_PRICE;
-    }
 }

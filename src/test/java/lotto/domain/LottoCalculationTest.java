@@ -51,17 +51,18 @@ public class LottoCalculationTest {
     void countLottoesTest() {
         Money money = new Money(price);
         LottoCalculation lottoCalculation = new LottoCalculation(money);
-        assertThat(lottoCalculation.calculateLotto()).isEqualTo(expectedLotto);
+        assertThat(lottoCalculation.getLottosCalculation()).isEqualTo(expectedLotto);
     }
 
     @DisplayName("로또_수동_자동_구매_테스트")
     @Test
     void purchaseLottoTest() {
+        Money money = new Money("14000");
         LottoCalculation lottoCalculation = new LottoCalculation(new Money("14000"));
         assertAll(
-            () -> assertThat(lottoCalculation.purchaseLottos(oldLottos)
+            () -> assertThat(lottoCalculation.getPurchaseLottos(oldLottos, money)
                 .getNumberOfLottoAutomatical()).isEqualTo(11),
-            () -> assertThat(lottoCalculation.purchaseLottos(oldLottos)
+            () -> assertThat(lottoCalculation.getPurchaseLottos(oldLottos, money)
                 .getNumberOfLottoManual()).isEqualTo(3)
         );
     }
@@ -77,10 +78,11 @@ public class LottoCalculationTest {
     @DisplayName("RankDto에_담기는_값이_랭크에_대한_결과값_테스트")
     @Test
     void makeRankResultTest() {
-        LottoCalculation lottoCalculation = new LottoCalculation(new Money("14000"));
-        lottoCalculation.purchaseLottos(oldLottos);
+        Money money = new Money("14000");
+        LottoCalculation lottoCalculation = new LottoCalculation(money);
+        lottoCalculation.getPurchaseLottos(oldLottos, money);
         Winning winning = new Winning("1,2,3,4,5,6", new LottoNumber(7));
-        RankResult rankResult = new RankResult(lottoCalculation.getPurchaseLottos(), winning);
+        RankResult rankResult = new RankResult(lottoCalculation.getLottos(), winning);
         assertThat(rankResult.getRankResult(winning, new Money(7))).isNotNull();
     }
 

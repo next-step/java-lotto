@@ -36,19 +36,20 @@ public class Controller {
         String winningLottoNumber = inputView.inputWinningLottoNumber();
         LottoNumber bonusLottoNumber = new LottoNumber(inputView.inputBonusLottoNumber());
         Winning winning = new Winning(winningLottoNumber, bonusLottoNumber);
-        RankResult rankResult = new RankResult(lottoCalculation.getPurchaseLottos(), winning);
+        RankResult rankResult = new RankResult(lottoCalculation.getLottos(), winning);
         RankDTO rankDto = rankResult.getRankResult(winning, money);
         OutputView.printRankResult(rankDto);
     }
 
     private static void purchaseLottoManual(LottoCalculation lottoCalculation, Money money) {
+
         LottoTicketManual lottoTicket = new LottoTicketManual(lottoCalculation, inputView.inputLottoTicket());
         inputView.inputLottoManual();
         List<Lotto> purchaseManualLotto = IntStream.range(0, lottoTicket.getLottoTicketValue())
             .mapToObj(inputView::doInputLotto)
             .map(Lotto::new)
             .collect(Collectors.toList());
-        LottoCalculationDTO lottoCalculationDTO = lottoCalculation.purchaseLottos(purchaseManualLotto);
+        LottoCalculationDTO lottoCalculationDTO = lottoCalculation.getPurchaseLottos(purchaseManualLotto,money);
         OutputView.printCountMessage(lottoCalculationDTO);
     }
 }

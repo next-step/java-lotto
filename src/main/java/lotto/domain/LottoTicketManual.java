@@ -16,7 +16,7 @@ public class LottoTicketManual {
     }
 
     public LottoTicketManual(LottoCalculation lottoCalculation, String inputLottoTicket) {
-        this(inputLottoTicket, lottoCalculation.calculateLotto());
+        this(inputLottoTicket, lottoCalculation.getLottosCalculation());
     }
 
     private void validatePurchaseLottoTicketMax(final int value, final int count) {
