@@ -22,17 +22,17 @@ public class LottoController {
 
         OutputView.printLottoCount(lottos.getLottos().size());
 
-        WinningLotto winningLotto = createWinningLotto(lottos);
-        LottoStatistics lottoStatistics = new LottoStatistics(winningLotto.matchRank());
+        WinningLotto winningLotto = createWinningLotto();
+        LottoStatistics lottoStatistics = new LottoStatistics(winningLotto.matchRank(lottos));
 
         OutputView.printLottoStatistics(lottoStatistics.makeRankReport());
         OutputView.printTotalReturn(Double.parseDouble(lottoStatistics.getLottoEarningRate(lottoPrice)));
     }
 
-    private WinningLotto createWinningLotto(Lottos lottos) {
+    private WinningLotto createWinningLotto() {
         LottoNumber bonusBall = new LottoNumber(InputView.readBonusNumber());
         Lotto winningLotto = createLotto();
-        return new WinningLotto(winningLotto, bonusBall, lottos);
+        return new WinningLotto(winningLotto, bonusBall);
     }
 
     private Lotto createLotto() {

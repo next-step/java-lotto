@@ -6,18 +6,15 @@ import java.util.List;
 public class WinningLotto {
     private static final String ERROR_DISTINCT = "당첨 번호와 보너스 번호는 중복될 수 없습니다.";
     private static final int MATCH_FIVE = 5;
-    private static final int WINNING_LIMIT = 3;
+    private static final int WINNING_LIMIT_MATCH_COUNT = 3;
 
     private final Lotto winningNumber;
     private final LottoNumber bonusNumber;
-    private List<Rank> winningRanks = new ArrayList<>();
-    private final Lottos lottos;
 
-    public WinningLotto(Lotto winningNumber, LottoNumber bonusNumber, Lottos lottos) {
+    public WinningLotto(Lotto winningNumber, LottoNumber bonusNumber) {
         validate(winningNumber, bonusNumber);
         this.winningNumber = winningNumber;
         this.bonusNumber = bonusNumber;
-        this.lottos = lottos;
     }
 
     private void validate(Lotto winningNumber, LottoNumber bonusNumber) {
@@ -26,10 +23,11 @@ public class WinningLotto {
         }
     }
 
-    public List<Rank> matchRank() {
+    public List<Rank> matchRank(Lottos lottos) {
+        List<Rank> winningRanks = new ArrayList<>();
         for(Lotto lotto : lottos.getLottos()) {
             int matchOfNumber = matchWinningNumbers(lotto);
-            addWinningRanksList(matchOfNumber, lotto);
+            addWinningRanksList(matchOfNumber, lotto, winningRanks);
         }
         return winningRanks;
     }
@@ -38,8 +36,8 @@ public class WinningLotto {
         return lotto.matchWinningnumbers(lotto, winningNumber);
     }
 
-    private void addWinningRanksList(int matchOfNumber, Lotto lotto) {
-        if(matchOfNumber >= WINNING_LIMIT) {
+    private void addWinningRanksList(int matchOfNumber, Lotto lotto, List<Rank> winningRanks) {
+        if(matchOfNumber >= WINNING_LIMIT_MATCH_COUNT) {
             winningRanks.add(getRank(matchOfNumber, lotto));
         }
     }

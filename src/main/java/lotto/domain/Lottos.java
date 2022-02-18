@@ -12,7 +12,6 @@ public class Lottos {
         this.lottos = generatorLottos(lottoPrice.getLottoCount());
     }
 
-
     private List<Lotto> generatorLottos(int lottoCount) {
         List<Lotto> lottoLists = new ArrayList<>();
 
