@@ -41,6 +41,10 @@ public class InputView {
         return Integer.parseInt(SCANNER.nextLine());
     }
 
+    public void inputLottoManual() {
+        System.out.println(LOTTO_NUMBER_MANUAL_MESSAGE);
+    }
+
     public String doInputLotto(int idx) {
         return SCANNER.nextLine();
     }

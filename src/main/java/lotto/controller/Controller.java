@@ -43,6 +43,7 @@ public class Controller {
 
     private static void purchaseLottoManual(LottoCalculation lottoCalculation, Money money) {
         LottoTicket lottoTicket = new LottoTicket(money, inputView.inputLottoTicket());
+        inputView.inputLottoManual();
         List<Lotto> purchaseManualLotto = IntStream.range(0, lottoTicket.getLottoTicketValue())
             .mapToObj(inputView::doInputLotto)
             .map(Lotto::new)
