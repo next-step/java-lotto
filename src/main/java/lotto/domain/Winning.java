@@ -23,11 +23,11 @@ public class Winning {
         }
     }
 
-    public long winningLottoNumber(final Lotto lotto) {
+    public long winLottoNumber(final Lotto lotto) {
         return winningLottoNumber.countMatch(lotto);
     }
 
-    public boolean bonusLottoNumber(final Lotto lotto) {
+    public boolean getbonusLottoNumber(final Lotto lotto) {
         return lotto.contains(bonusLottoNumber);
     }
 }
