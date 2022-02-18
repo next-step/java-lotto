@@ -6,6 +6,7 @@ public class LottoTicketManual {
     private static final String PURCHASE_LOTTO_PRICE_ERROR_MESSAGE = "로또 수는 구입 금액 범위 안에서 입력해주세요.";
     private static final String NEGATIVE_LOTTO_COUNT_ERROR_MESSAGE = "수동으로 구매할 로또 수는 음수일 수 없습니다.";
     private static final String NUMBER_FORMAT_ERROR_MESSAGE = "수동으로 입력할 수 있는 로또 수는 정수만 작성할 수 있습니다.";
+
     private final int value;
 
     public LottoTicketManual(final String value, final int count) {
