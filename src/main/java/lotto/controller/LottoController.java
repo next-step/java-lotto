@@ -10,7 +10,6 @@ import lotto.domain.Ticket;
 import lotto.domain.WinningLotto;
 import lotto.domain.WinningResult;
 import lotto.domain.lottogenerator.RandomLottoGenerator;
-import lotto.utils.Converter;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -48,7 +47,7 @@ public class LottoController {
 
     private WinningLotto getWinningLotto() {
         try {
-            Lotto winningLotto = Converter.inputToLotto(InputView.inputWinningNumbers());
+            Lotto winningLotto = Lotto.fromInputs(InputView.inputWinningNumbers());
             LottoNumber bonusNumber = LottoNumber.from(InputView.inputBonusNumber());
             return new WinningLotto(winningLotto, bonusNumber);
         } catch (IllegalArgumentException e) {
