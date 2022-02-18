@@ -41,8 +41,8 @@ class RankTest {
     @Test
     void correctUnderThree꽝() {
         assertThat(Rank.getRank(0)).isEqualTo(Rank.NONE);
-        assertThat(Rank.getRank(1)).isEqualTo(Rank.NONE1);
-        assertThat(Rank.getRank(2)).isEqualTo(Rank.NONE2);
+        assertThat(Rank.getRank(1)).isEqualTo(Rank.NONE);
+        assertThat(Rank.getRank(2)).isEqualTo(Rank.NONE);
 
     }
 }
