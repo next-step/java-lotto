@@ -31,7 +31,7 @@ public class LottoController {
         printTicketInfo(ticket, lottos);
 
         WinningLotto winningLotto = getWinningLotto();
-        WinningResult winningResult = new WinningResult(lottos.mapResult(winningLotto));
+        WinningResult winningResult = WinningResult.of(lottos, winningLotto);
 
         printResult(winningResult, ticket);
     }

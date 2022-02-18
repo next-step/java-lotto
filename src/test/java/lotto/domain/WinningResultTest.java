@@ -23,6 +23,32 @@ class WinningResultTest {
         testWinningLotto = new WinningLotto(testLotto, testBonus);
     }
 
+    @DisplayName("각 로또의 결과를 RANK와 해당 RANK의 개수로 저장한다")
+    @Test
+    void 결과가_1등_1개_2등_1개_3등_2개인_경우() {
+        List<Integer> first = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> second = Arrays.asList(1, 2, 3, 4, 5, 7);
+        List<Integer> third1 = Arrays.asList(11, 2, 3, 4, 5, 6);
+        List<Integer> third2 = Arrays.asList(1, 2, 3, 41, 5, 6);
+
+        List<Lotto> lottos = Arrays.asList(
+                Lotto.fromNumbers(first),
+                Lotto.fromNumbers(second),
+                Lotto.fromNumbers(third1),
+                Lotto.fromNumbers(third2)
+        );
+
+        Lottos testLottos = Lottos.withListLotto(lottos);
+        WinningResult winningResult = WinningResult.of(testLottos, testWinningLotto);
+
+        Map<Rank, Integer> actual = winningResult.getResult();
+        assertThat(actual.get(Rank.FIRST)).isEqualTo(1);
+        assertThat(actual.get(Rank.SECOND)).isEqualTo(1);
+        assertThat(actual.get(Rank.THIRD)).isEqualTo(2);
+        assertThat(actual.get(Rank.FOURTH)).isEqualTo(0);
+        assertThat(actual.get(Rank.FIFTH)).isEqualTo(0);
+    }
+
     @DisplayName("각 로또의 결과를 토대로 당첨 상금과 수익률을 계산한다")
     @Test
     void 로또_3개_중_4등_1개_5등_1개_꽝_1개인_경우() {
@@ -38,12 +64,11 @@ class WinningResultTest {
 
         Lottos testLottos = Lottos.withListLotto(lottos);
 
-        Map<Rank, Integer> rankMap = testLottos.mapResult(testWinningLotto);
-        WinningResult testWinningResult = new WinningResult(rankMap);
+        WinningResult winningResult = WinningResult.of(testLottos, testWinningLotto);
 
-        BigDecimal actualProfit = testWinningResult.calculateProfitRate(3000);
+        BigDecimal actualProfit = winningResult.calculateProfitRate(3000);
         BigDecimal expectedProfit = new BigDecimal(55000).divide(new BigDecimal(3000), 2, RoundingMode.DOWN);
-        BigDecimal actualPrize = testWinningResult.calculatePrizeMoney();
+        BigDecimal actualPrize = winningResult.calculatePrizeMoney();
 
         assertThat(actualPrize).isEqualTo(new BigDecimal(55000));
         assertThat(actualProfit).isEqualTo(expectedProfit);
