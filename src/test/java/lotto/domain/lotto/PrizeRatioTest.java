@@ -6,17 +6,15 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class PrizeRatioTest {
 
-    private static final Numbers BASE_ANSWER_NUMBERS = new Numbers(Arrays.asList(1,2,3,4,5,6));
-    private static final int BASE_BONUS_NUMBER = 7;
-    private static final int PRICE_PER_TICKET = 1000;
-    private static final double RATE_RETURNS = 0.35;
-
+    private int ticketSize;
     private Answer answer;
     private Tickets tickets;
 
@@ -24,6 +22,15 @@ class PrizeRatioTest {
     void setUp() {
         setUpTickets();
         setUpAnswer();
+    }
+
+    @DisplayName("수익률 유효성 검증")
+    @Test
+    void testRateReturnsValid() {
+        BigDecimal rateOfReturn = new PrizeRatio().calculateRatio(new Amount(1000 * ticketSize), answer.getComparisonPrizeMap(tickets));
+
+        assertThat(rateOfReturn.doubleValue())
+            .isEqualTo(0.35);
     }
 
     private void setUpTickets() {
@@ -46,27 +53,23 @@ class PrizeRatioTest {
 
         List<Ticket> ticketList = new ArrayList<>();
         for (List<Integer> ticketNumbers: lottoTickets) {
-            Ticket ticket = new Ticket(new Numbers(ticketNumbers));
+            Ticket ticket = new Ticket(
+                ticketNumbers.stream()
+                    .map(Number::new)
+                    .collect(Collectors.toList())
+            );
             ticketList.add(ticket);
         }
 
+        ticketSize = ticketList.size();
         tickets = new Tickets(ticketList);
     }
 
     private void setUpAnswer() {
-        answer = new Answer(BASE_ANSWER_NUMBERS, BASE_BONUS_NUMBER);
+        Ticket baseAnswerNumbers = new Ticket(Stream.of(1, 2, 3, 4, 5, 6)
+            .map(Number::new)
+            .collect(Collectors.toList()));
+        answer = new Answer(baseAnswerNumbers, new Number(7));
     }
 
-    private int getPurchased() {
-        return PRICE_PER_TICKET * tickets.count();
-    }
-
-    @DisplayName("수익률 유효성 검증")
-    @Test
-    void testRateReturnsValid() {
-        BigDecimal rateOfReturn = new PrizeRatio().calculateRatio(getPurchased(), answer.compare(tickets));
-
-        assertThat(rateOfReturn.doubleValue())
-            .isEqualTo(RATE_RETURNS);
-    }
 }

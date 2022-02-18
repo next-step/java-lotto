@@ -3,22 +3,25 @@ package lotto.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import lotto.domain.generator.LottoAutoGenerator;
+import java.util.stream.Collectors;
+import lotto.domain.generator.LottoManualGenerator;
+import lotto.domain.lotto.Amount;
 import lotto.domain.lotto.Answer;
+import lotto.domain.lotto.Number;
 import lotto.domain.lotto.PrizeRatio;
 import lotto.domain.lotto.Rank;
 import lotto.domain.lotto.Ticket;
+import lotto.domain.lotto.TicketMachine;
 import lotto.domain.lotto.Tickets;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
 
-    private static final int PRICE_PER_ONE_TICKET = 1000;
-
     private static LottoController lottoController = null;
 
-    private LottoController() {}
+    private LottoController() {
+    }
 
     public static LottoController getInstance() {
         if (lottoController == null) {
@@ -28,37 +31,46 @@ public class LottoController {
     }
 
     public void run() {
-        Tickets tickets;
-        int amount = InputView.getAmount();
-        int count = amount / PRICE_PER_ONE_TICKET;
+        final Amount amount = new Amount(InputView.getAmount());
+        final int manualLottoTickets = InputView.getManualLottoTickets();
+        final List<Ticket> manualTickets = getManualTickets(manualLottoTickets);
 
-        tickets = purchase(count);
+        TicketMachine machine = new TicketMachine(amount, manualTickets);
+        Tickets tickets = machine.purchase();
+
+        OutputView.printBuyingTickets(manualTickets.size(), amount.getAutoTickets(manualTickets.size()));
+
         showTickets(tickets);
         showResult(tickets, amount);
     }
 
-    private Tickets purchase(final int count) {
-        List<Ticket> tickets = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            Ticket ticket = new Ticket(new LottoAutoGenerator().generateNumbers());
-            tickets.add(ticket);
-        }
-        OutputView.printBuyingTickets(count);
-
-        return new Tickets(tickets);
-    }
-
     private void showTickets(final Tickets tickets) {
-        tickets.get().stream()
-            .map(Ticket::getLotto)
-            .forEach(OutputView::printLottoTicket);
+        OutputView.printLottoTicket(tickets.getEachTicketNumbers());
     }
 
-    private void showResult(final Tickets tickets, final int amount) {
-        Answer answer = new Answer(InputView.getComparisonNumbers(), InputView.getBonus());
-        Map<Rank, Integer> prizeMap = answer.compare(tickets);
+    private void showResult(final Tickets tickets, final Amount amount) {
+        final Ticket answerTicket = getAnswerTicket();
+        final Number bonusNumber = new Number(InputView.getBonus());
+
+        Answer answer = new Answer(answerTicket, bonusNumber);
+        Map<Rank, Integer> prizeMap = answer.getComparisonPrizeMap(tickets);
 
         OutputView.printStatistics(prizeMap);
         OutputView.printResult(new PrizeRatio().calculateRatio(amount, prizeMap));
+    }
+
+    private List<Ticket> getManualTickets(final int manualTickets) {
+        List<Ticket> numbersPerOneLotto = new ArrayList<>();
+        for (List<Integer> numbers : InputView.getManualLottoNumbers(manualTickets)) {
+            numbersPerOneLotto.add(new Ticket(new LottoManualGenerator(numbers).generateNumbers()));
+        }
+        return numbersPerOneLotto;
+    }
+
+    private Ticket getAnswerTicket() {
+        return new Ticket(InputView.getComparisonNumbers().stream()
+            .map(Number::new)
+            .collect(Collectors.toList())
+        );
     }
 }

@@ -25,7 +25,7 @@ public enum Rank {
             return SECOND;
         }
 
-        return Arrays.stream(Rank.values())
+        return Arrays.stream(values())
                 .filter(prize -> prize.isMatches(matches))
                 .findFirst()
                 .orElse(NONE);
