@@ -24,17 +24,16 @@ public class Statistics {
             boolean bonusScore = getBonusScore(lotto.getNumbers(),
               winningNumber.getBonusBall());
             Rank rank = getRank(matchCount, bonusScore);
-            ranks.put(rank, incrementRank(rank));
+            incrementRank(rank);
         }
-        
     }
     
-    private int incrementRank(Rank rank) {
+    private void incrementRank(Rank rank) {
         if (rank != Rank.MISS) {
-            return ranks.get(rank) + 1;
+            ranks.put(rank, ranks.get(rank) + 1);
         }
-        return 0;
     }
+    
     
     public boolean getBonusScore(List<Integer> numbers, int bonusBall) {
         return numbers.contains(bonusBall);
