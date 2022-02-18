@@ -69,14 +69,20 @@ public class OutputView {
     public static void printLottoStatistics(Map<Integer, Integer> rankReport) {
         OutputView.printLottoStatisticTitle();
         for (Integer key : rankReport.keySet()) {
-            if(key != LOTTO_BONUS_MATCH_COUNT) {
-                OutputView.printLottoStatistic(key, Rank.getRank(key).getMoney(),
-                    rankReport.get(key));
-            }
-            if(key == LOTTO_BONUS_MATCH_COUNT) {
-                OutputView.printLottoBonusStatistic(CASE_BONUS_BALL, Rank.getRank(LOTTO_BONUS_MATCH_COUNT).getMoney(), rankReport.get(key));
-            }
+            printBonusBallOrNot(key, rankReport);
         }
+    }
+
+    private static void printBonusBallOrNot(Integer key, Map<Integer, Integer> rankReport) {
+        if (key != LOTTO_BONUS_MATCH_COUNT) {
+            OutputView.printLottoStatistic(key, Rank.getRank(key).getMoney(),
+                rankReport.get(key));
+        }
+        if (key == LOTTO_BONUS_MATCH_COUNT) {
+            OutputView.printLottoBonusStatistic(CASE_BONUS_BALL,
+                Rank.getRank(LOTTO_BONUS_MATCH_COUNT).getMoney(), rankReport.get(key));
+        }
+
     }
 
     public static void printLottoNumbers(List<Lotto> lottoLists) {
