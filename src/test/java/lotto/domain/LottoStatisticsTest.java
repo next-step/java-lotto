@@ -14,7 +14,8 @@ class LottoStatisticsTest {
     @Test
     void calcLottoEarningRate() {
         List<Rank> ranks = new ArrayList<>();
+        LottoStatistics lottoStatistics = new LottoStatistics(ranks);
         ranks.add(Rank.FIRST);
-        assertThat(LottoStatistics.getLottoEarningRate(ranks, new LottoPrice(5000))).isEqualTo("400000.00");
+        assertThat(lottoStatistics.getLottoEarningRate(new LottoPrice(5000))).isEqualTo("400000.00");
     }
 }

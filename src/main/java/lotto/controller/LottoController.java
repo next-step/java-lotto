@@ -25,12 +25,10 @@ public class LottoController {
 
         OutputView.printLottoCount(lottos.getLottoLists().size());
 
-
         WinningLotto winningLotto = createWinningLotto(lottos);
-        List<Rank> winningRanks = winningLotto.matchRank();
-
-        String lottoEaringRate = LottoStatistics.getLottoEarningRate(winningRanks, lottoPrice);
-        ResultView.printLottoStatistics(winningRanks, lottoEaringRate);
+        LottoStatistics lottoStatistics = new LottoStatistics(winningLotto.matchRank());
+        String lottoEaringRate = lottoStatistics.getLottoEarningRate(lottoPrice);
+        ResultView.printLottoStatistics(lottoStatistics, lottoEaringRate);
     }
 
     private WinningLotto createWinningLotto(Lottos lottos) {

@@ -23,8 +23,8 @@ public class Lotto {
     }
 
     public int matchWinningnumbers(final Lotto lottoNumberList, Lotto winningNumber) {
-        return lottoNumberList.getLottoNumbers().stream().
-            filter(lottoNumber -> lottoNumber.isWinningNumber(lottoNumber, winningNumber))
+        return lottoNumberList.getLottoNumbers().stream()
+            .filter(lottoNumber -> lottoNumber.isWinningNumber(lottoNumber, winningNumber))
             .collect(Collectors.toSet()).size();
     }
 
