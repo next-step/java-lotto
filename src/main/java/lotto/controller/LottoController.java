@@ -10,7 +10,6 @@ import lotto.domain.Ticket;
 import lotto.domain.WinningLotto;
 import lotto.domain.WinningResult;
 import lotto.domain.lottogenerator.RandomLottoGenerator;
-import lotto.dto.LottosDTO;
 import lotto.utils.Converter;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -59,8 +58,7 @@ public class LottoController {
     }
 
     private void printTicketInfo(Ticket ticket, Lottos lottos) {
-        LottosDTO lottosDTO = LottosDTO.from(lottos.get());
-        OutputView.printPurchaseInfo(ticket.getBuyCount(), lottosDTO.get());
+        OutputView.printPurchaseInfo(ticket.getBuyCount(), lottos.getLottos());
     }
 
     private void printResult(WinningResult winningResult, Ticket ticket) {

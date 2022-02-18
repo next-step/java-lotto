@@ -39,4 +39,13 @@ public class Lotto {
     public List<LottoNumber> getLottoNumbers() {
         return new ArrayList<>(this.numbers);
     }
+
+    @Override
+    public String toString() {
+        List<Integer> result = numbers.stream()
+                .map(LottoNumber::get)
+                .sorted()
+                .collect(Collectors.toList());
+        return result.toString();
+    }
 }

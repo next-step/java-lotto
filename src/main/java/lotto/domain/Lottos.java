@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
 import lotto.domain.lottogenerator.LottoGenerator;
 
 public class Lottos {
@@ -24,6 +25,14 @@ public class Lottos {
 
     public static Lottos withListLotto(List<Lotto> lottos) {
         return new Lottos(lottos);
+    }
+
+    public List<String> getLottos() {
+        List<String> result = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            result.add(lotto.toString());
+        }
+        return result;
     }
 
     public Map<Rank, Integer> mapResult(WinningLotto winningLotto) {
