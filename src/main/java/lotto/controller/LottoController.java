@@ -30,7 +30,7 @@ public class LottoController {
     }
 
     private WinningLotto createWinningLotto(Lottos lottos) {
-        LottoNumber bonusBall = InputView.readBonusNumber();
+        LottoNumber bonusBall = new LottoNumber(InputView.readBonusNumber());
         Lotto winningLotto = createLotto();
         return new WinningLotto(winningLotto, bonusBall, lottos);
     }

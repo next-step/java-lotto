@@ -31,11 +31,10 @@ public class InputView {
         }
     }
 
-    public static LottoNumber readBonusNumber() {
+    public static int readBonusNumber() {
         OutputView.printBonusBallNumber();
         try {
-           int bonusNumber = Console.readLineInt();
-           return new LottoNumber(bonusNumber);
+           return Console.readLineInt();
         } catch (IllegalArgumentException exception) {
             OutputView.printExceptionMessage(OutputView.ERROR_MESSAGE + exception.getMessage());
             return readBonusNumber();
