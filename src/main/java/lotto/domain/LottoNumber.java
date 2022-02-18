@@ -7,9 +7,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_RANGE_NUMBER = 1;
     private static final int MAX_RANGE_NUMBER = 45;
     private static final String ERROR_MESSAGE = "로또 숫자는 1~45 사이이어야 합니다.";
-    private int value;
+    private final int value;
 
-    public LottoNumber(int value) {
+    public LottoNumber(final int value) {
         validateRange(value);
         this.value = value;
     }

@@ -50,7 +50,7 @@ public class LottoCalculationTest {
     @Test
     void countLottoesTest() {
         Money money = new Money(price);
-        assertThat(money.lottoCalculation()).isEqualTo(expectedLotto);
+        assertThat(money.calculateLotto()).isEqualTo(expectedLotto);
     }
 
     @DisplayName("로또_수동_자동_구매_테스트")

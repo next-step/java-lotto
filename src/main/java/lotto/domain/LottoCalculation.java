@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.domain.dto.LottoCalculationDTO;
-import lotto.domain.dto.RankDTO;
 
 public class LottoCalculation {
 
@@ -35,6 +34,6 @@ public class LottoCalculation {
     }
 
     private int getNumberOfLottosAutomatical(int numberOflottosManual) {
-        return purchaseMoney.lottoCalculation() - numberOflottosManual;
+        return purchaseMoney.calculateLotto() - numberOflottosManual;
     }
 }

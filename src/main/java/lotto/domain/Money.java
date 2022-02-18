@@ -49,7 +49,7 @@ public class Money {
         }
     }
 
-    public int lottoCalculation() {
+    public int calculateLotto() {
         return this.value / LOTTO_PRICE;
     }
 
