@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.assertj.core.api.Assertions;
@@ -11,6 +12,7 @@ class LottoTicketsTest {
     List<LottoNumber> firstLottoNumbers;
     List<LottoNumber> secondLottoNumbers;
     List<LottoNumber> winningLottoNumbers;
+    List<List<Integer>> lottoNumbers = new ArrayList<>();
 
     @BeforeEach
     public void init() {
@@ -23,25 +25,27 @@ class LottoTicketsTest {
         this.winningLottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2),
             new LottoNumber(3),
             new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        lottoNumbers.add(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @Test
     void 로또_장당_당첨번호_개수_일치여부_테스트() {
-        TestLottoGenerator testLottoGenerator = new TestLottoGenerator();
-        LottoTickets lottoTickets = new LottoTickets(1000,testLottoGenerator);
+        LottoTickets lottoTickets = new LottoTickets(1000, 1, lottoNumbers);
         List<WinningResult> winningResults = lottoTickets.calculateWinningResult(
             new LottoMachine(firstLottoNumbers, 8));
+        System.out.println(winningResults.size());
         Assertions.assertThat(winningResults.get(0).getMatchCount()).isEqualTo(2);
     }
 
     @Test
     void 로또_장당_보너스_개수_일치여부_테스트() {
         TestLottoGenerator testLottoGenerator = new TestLottoGenerator();
-        LottoTickets lottoTickets = new LottoTickets(1000,testLottoGenerator);
+        testLottoGenerator.getLottoGeneratorNumbers();
+        LottoTickets lottoTickets = new LottoTickets(1000, 0, lottoNumbers);
         testLottoGenerator.getLottoGeneratorNumbers();
         List<WinningResult> winningResults = lottoTickets.calculateWinningResult(
             new LottoMachine(secondLottoNumbers, 6));
-         Assertions.assertThat(winningResults.get(0).getHasBonus()).isEqualTo(1);
+        Assertions.assertThat(winningResults.get(0).getHasBonus()).isEqualTo(1);
     }
 
 }
