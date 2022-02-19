@@ -13,7 +13,7 @@ public class Winning {
     }
 
     public Winning(String inputWinningLottoNumber,
-        LottoNumber inputBonusLottoNumber){
+        LottoNumber inputBonusLottoNumber) {
         this(new Lotto(inputWinningLottoNumber), inputBonusLottoNumber);
     }
 

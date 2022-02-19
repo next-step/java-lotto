@@ -60,8 +60,9 @@ public class LottoCalculationTest {
     void purchaseLottoTest() {
         Money money = new Money("14000");
         LottoCalculation lottoCalculation = new LottoCalculation(new Money("14000"));
-        lottoCalculation.getPurchaseLottos(oldLottos,money);
-        assertThat(lottoCalculation.getLottos().calculateNumberOfLottosAutomatical(oldLottos.size(), money)).isEqualTo(11);
+        lottoCalculation.getPurchaseLottos(oldLottos, money);
+        assertThat(lottoCalculation.getLottos()
+            .calculateNumberOfLottosAutomatical(oldLottos.size(), money)).isEqualTo(11);
 
     }
 
@@ -90,7 +91,8 @@ public class LottoCalculationTest {
     void makeLottoTicketTest() {
         assertAll(
             () -> assertThat(new LottoTicketManual("3", 14)),
-            () -> assertThatIllegalArgumentException().isThrownBy(() -> new LottoTicketManual("15", 14))
+            () -> assertThatIllegalArgumentException().isThrownBy(
+                () -> new LottoTicketManual("15", 14))
         );
     }
 }

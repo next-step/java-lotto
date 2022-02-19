@@ -17,7 +17,7 @@ public enum Rank {
     private final Money prize;
 
 
-    Rank(final int matchCount,final int prize) {
+    Rank(final int matchCount, final int prize) {
         this.matchCount = matchCount;
         this.prize = new Money(prize);
     }

@@ -1,12 +1,6 @@
 package lotto.view;
 
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
 
 public class InputView {
 
