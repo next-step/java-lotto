@@ -1,6 +1,7 @@
 package lotto.domain.lotto.number;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import lotto.domain.lotto.Lotto;
 import lotto.util.NumbersValidator;
@@ -22,7 +23,7 @@ public class Numbers {
     }
 
     public List<Number> getNumbersValue() {
-        return new ArrayList<>(numbersValue);
+        return Collections.unmodifiableList(numbersValue);
     }
 
     public boolean has(Number number) {
