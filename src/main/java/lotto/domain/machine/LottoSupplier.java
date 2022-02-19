@@ -8,7 +8,7 @@ public class LottoSupplier {
 
     public static List<Lotto> makeManualLotto(List<List<Integer>> lottoNumbers) {
         final List<Lotto> manualLottos = new ArrayList<>();
-        lottoNumbers.stream()
+        lottoNumbers
             .forEach(lottoNumber -> manualLottos.add(Lotto.from(lottoNumber)));
         return manualLottos;
     }
