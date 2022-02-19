@@ -19,8 +19,7 @@ public class LottoController {
 
         Money money = getMoney();
         PurchaseTicket ticket = new PurchaseTicket(money, getManualCount());
-
-        Lottos lottos = purchase(ticket);
+        Lottos lottos = ticket.purchase(getManualLottoNumbers(ticket));
 
         outputView.printPurchaseAmount(ticket);
         outputView.printPurchaseTicket(lottos);
@@ -43,14 +42,6 @@ public class LottoController {
 
     private int getManualCount() {
         return InputView.getManualTicketCount();
-    }
-
-    private Lottos purchase(final PurchaseTicket ticket) {
-        List<List<Integer>> manualLottoNumbers = getManualLottoNumbers(ticket);
-
-        List<Lotto> lottoGames = LottoGameManager.getLottosByManual(manualLottoNumbers);
-        lottoGames.addAll(LottoGameManager.getLottosByAuto(new RandomLottoGenerator(), ticket.getBuyAutoCount()));
-        return new Lottos(lottoGames);
     }
 
     private List<List<Integer>> getManualLottoNumbers(final PurchaseTicket ticket) {
