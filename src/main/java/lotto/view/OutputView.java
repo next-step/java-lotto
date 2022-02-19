@@ -16,11 +16,10 @@ public class OutputView {
     private final static String TOTAL_RATIO_MESSAGE = "총 수익률은 %.2f입니다.";
     private final static String PURCHASED_LOTTO_RESULT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
 
-    private OutputView() {
-
+    public OutputView() {
     }
 
-    public static void printCountMessage(LottoCalculationDTO LottoCalculationDto) {
+    public void printCountMessage(LottoCalculationDTO LottoCalculationDto) {
         System.out.printf(PURCHASED_LOTTO_RESULT, LottoCalculationDto.getNumberOfLottoManual(),
             LottoCalculationDto.getNumberOfLottoAutomatical());
         LottoCalculationDto.getLottos().forEach(
@@ -28,7 +27,7 @@ public class OutputView {
         );
     }
 
-    public static void printRankResult(RankDTO rankDto) {
+    public void printRankResult(RankDTO rankDto) {
         System.out.println(RANK_STATISTICS);
         System.out.println(DOT_LINE);
         Arrays.stream(Rank.values())
@@ -40,7 +39,7 @@ public class OutputView {
             .getPrizeRatio(rankDto.getRankResult().getTotalPrize(), rankDto.getPurchaseAmount()));
     }
 
-    public static void printResult(RankResult rankResult, Rank rank) {
+    public void printResult(RankResult rankResult, Rank rank) {
         if (rank.isSecond(rank)) {
             System.out.printf(SECOND_RESULT_MESSAGE, rank.getMatchCount(),
                 rank.getPrize(), rankResult.getRankResult(rank));

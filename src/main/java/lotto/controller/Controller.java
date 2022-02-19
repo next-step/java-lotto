@@ -19,9 +19,12 @@ import lotto.view.OutputView;
 public class Controller {
 
     private static final InputView inputView;
+    private static final OutputView outputView;
+
 
     static {
         inputView = new InputView();
+        outputView = new OutputView();
     }
 
     public static void run() {
@@ -37,7 +40,7 @@ public class Controller {
         Winning winning = new Winning(winningLottoNumber, bonusLottoNumber);
         RankResult rankResult = new RankResult(lottoCalculation.getLotto(), winning);
         RankDTO rankDto = new RankDTO(rankResult, money);
-        OutputView.printRankResult(rankDto);
+        outputView.printRankResult(rankDto);
     }
 
     private static void purchaseLottoManual(LottoCalculation lottoCalculation, Money money) {
@@ -53,6 +56,6 @@ public class Controller {
             new LottoCalculationDTO(purchaseManualLotto.size(),
                 lottoCalculation.getPurchaseLottos(purchaseManualLotto, money),
                 lottoCalculation.getLottos());
-        OutputView.printCountMessage(lottoCalculationDto);
+        outputView.printCountMessage(lottoCalculationDto);
     }
 }
