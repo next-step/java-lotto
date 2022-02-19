@@ -1,14 +1,11 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.domain.LottoGameManager;
-import lotto.domain.ticket.Money;
-import lotto.domain.ticket.PurchaseTicket;
 import lotto.domain.WinningNumber;
 import lotto.domain.WinningResult;
-import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
-import lotto.domain.machine.RandomLottoGenerator;
+import lotto.domain.ticket.Money;
+import lotto.domain.ticket.PurchaseTicket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
