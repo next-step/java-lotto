@@ -3,7 +3,7 @@ package lotto.util;
 import java.util.List;
 import lotto.domain.lotto.number.Number;
 
-public class BonusNumberValidator extends NumberValidator{
+public class BonusNumberValidator extends NumberValidator {
 
     private BonusNumberValidator() {
     }

@@ -1,6 +1,7 @@
 package lotto.domain.lotto.count;
 
 public class Count {
+
     private final Integer value;
 
     public Count(String value) {
@@ -8,7 +9,7 @@ public class Count {
     }
 
     private static Integer parseToInteger(String value) {
-        if(!value.matches("[-]?[0-9]*")) {
+        if (!value.matches("[-]?[0-9]*")) {
             throw new IllegalArgumentException("[ERROR] 숫자만 들어올 수 있습니다.");
         }
         return Integer.parseInt(value);
@@ -24,7 +25,7 @@ public class Count {
     }
 
     private void validRange(Integer value) {
-        if(value < 0) {
+        if (value < 0) {
             throw new IllegalArgumentException("[ERROR] 구매 개수가 0보다 작을 수는 없습니다.");
         }
     }

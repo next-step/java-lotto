@@ -28,7 +28,7 @@ public enum LottoResult {
     }
 
     private Boolean isResult(int matchCount, boolean isBonusNumber) {
-        if(matchCount == 5 && this.matchCount == 5) {
+        if (matchCount == 5 && this.matchCount == 5) {
             return this.isBonusNumber == isBonusNumber;
         }
         return this.matchCount == matchCount;
