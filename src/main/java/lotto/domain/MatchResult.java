@@ -38,4 +38,11 @@ public class MatchResult {
     public Set<LottoResult> getLottoResultSet() {
         return matchResult.keySet();
     }
+
+    public Long getProfit() {
+        return matchResult.keySet().stream()
+            .mapToLong(
+                lottoResult -> (long) matchResult.get(lottoResult) * lottoResult.getWinning())
+            .reduce(0, Long::sum);
+    }
 }
