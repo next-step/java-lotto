@@ -8,7 +8,6 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoCalculation;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicketManual;
-import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.RankResult;
 import lotto.domain.Winning;
@@ -36,8 +35,8 @@ public class Controller {
         String winningLottoNumber = inputView.inputWinningLottoNumber();
         LottoNumber bonusLottoNumber = new LottoNumber(inputView.inputBonusLottoNumber());
         Winning winning = new Winning(winningLottoNumber, bonusLottoNumber);
-        RankResult rankResult = new RankResult(lottoCalculation.getLottos(), winning);
-        RankDTO rankDto = rankResult.getRankResult(winning, money);
+        RankResult rankResult = new RankResult(lottoCalculation.getLotto(), winning);
+        RankDTO rankDto = new RankDTO(rankResult, money);
         OutputView.printRankResult(rankDto);
     }
 
@@ -49,7 +48,8 @@ public class Controller {
             .mapToObj(inputView::doInputLotto)
             .map(Lotto::new)
             .collect(Collectors.toList());
-        LottoCalculationDTO lottoCalculationDTO = lottoCalculation.getPurchaseLottos(purchaseManualLotto,money);
+        LottoCalculationDTO lottoCalculationDTO =
+            new LottoCalculationDTO(purchaseManualLotto.size(), lottoCalculation.getPurchaseLottos(purchaseManualLotto,money), lottoCalculation.getLottos());
         OutputView.printCountMessage(lottoCalculationDTO);
     }
 }

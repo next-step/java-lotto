@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import lotto.domain.dto.LottoCalculationDTO;
 
 public class Lottos {
 
@@ -15,10 +14,6 @@ public class Lottos {
         lottos = new ArrayList<>();
     }
 
-    public Lottos(final List<Lotto> lottos) {
-        this.lottos = new ArrayList<>(lottos);
-    }
-
     public List<Lotto> lottos() {
         return Collections.unmodifiableList(lottos);
     }
@@ -28,22 +23,22 @@ public class Lottos {
         return this.lottos;
     }
 
-    public LottoCalculationDTO purchaseLottos(List<Lotto> lotto, Money money) {
+    public int purchaseLottos(List<Lotto> lotto, Money money) {
         int numberOfLottoManual = lotto.size();
 
         lottos.addAll(lotto);
-        int numberOfLottoAutomatical = getNumberOfLottosAutomatical(numberOfLottoManual, money);
+        int numberOfLottoAutomatical = calculateNumberOfLottosAutomatical(numberOfLottoManual,
+            money);
         lottos.addAll(
             LottoBundle.lottoBundle(numberOfLottoAutomatical, new ShuffleLottoNumber()));
 
-        return new LottoCalculationDTO(numberOfLottoManual, numberOfLottoAutomatical,
-            new Lottos(lottos));
-
+        return numberOfLottoAutomatical;
     }
 
-    int getNumberOfLottosAutomatical(int numberOfLottoManual, Money money) {
+    public int calculateNumberOfLottosAutomatical(int numberOfLottoManual, Money money) {
         return calculateLotto(money) - numberOfLottoManual;
     }
+
 
     public int calculateLotto(Money money) {
         return money.getValue() / LOTTO_PRICE;

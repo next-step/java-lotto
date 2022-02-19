@@ -59,12 +59,9 @@ public class LottoCalculationTest {
     void purchaseLottoTest() {
         Money money = new Money("14000");
         LottoCalculation lottoCalculation = new LottoCalculation(new Money("14000"));
-        assertAll(
-            () -> assertThat(lottoCalculation.getPurchaseLottos(oldLottos, money)
-                .getNumberOfLottoAutomatical()).isEqualTo(11),
-            () -> assertThat(lottoCalculation.getPurchaseLottos(oldLottos, money)
-                .getNumberOfLottoManual()).isEqualTo(3)
-        );
+        lottoCalculation.getPurchaseLottos(oldLottos,money);
+        assertThat(lottoCalculation.getLottos().calculateNumberOfLottosAutomatical(oldLottos.size(), money)).isEqualTo(11);
+
     }
 
     @DisplayName("이전_당첨_번호_확인_테스트")
@@ -82,7 +79,7 @@ public class LottoCalculationTest {
         LottoCalculation lottoCalculation = new LottoCalculation(money);
         lottoCalculation.getPurchaseLottos(oldLottos, money);
         Winning winning = new Winning("1,2,3,4,5,6", new LottoNumber(7));
-        RankResult rankResult = new RankResult(lottoCalculation.getLottos(), winning);
+        RankResult rankResult = new RankResult(lottoCalculation.getLotto(), winning);
         assertThat(rankResult.getRankResult(winning, new Money(7))).isNotNull();
     }
 

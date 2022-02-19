@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.List;
-import lotto.domain.dto.LottoCalculationDTO;
 
 public class LottoCalculation {
 
@@ -17,16 +16,19 @@ public class LottoCalculation {
         purchaseLottos = lottos;
     }
 
-    public List<Lotto> getLottos() {
+    public List<Lotto> getLotto() {
         return purchaseLottos.lottos();
+    }
+
+    public Lottos getLottos() {
+        return purchaseLottos;
+    }
+
+    public int getPurchaseLottos(List<Lotto> lotto, Money money) {
+        return purchaseLottos.purchaseLottos(lotto, money);
     }
 
     public int getLottosCalculation() {
         return purchaseLottos.calculateLotto(purchaseMoney);
     }
-
-    public LottoCalculationDTO getPurchaseLottos(List<Lotto> lotto, Money money) {
-        return purchaseLottos.purchaseLottos(lotto, money);
-    }
-
 }
