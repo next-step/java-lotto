@@ -41,6 +41,10 @@ public class Analyzer {
         }
     }
 
+    public List<WinningPrice> getWinningPrices() {
+        return new ArrayList<>(winningPrices);
+    }
+
     private WinningPrice calculatePerStepMoney(final int win, final int bonus,
         final List<WinningResult> winningResults) {
         int count = correctCountFrequency(winningResults, win);
@@ -71,9 +75,4 @@ public class Analyzer {
         }
         return count;
     }
-
-    public List<WinningPrice> getWinningPrices() {
-        return new ArrayList<>(winningPrices);
-    }
-
 }
