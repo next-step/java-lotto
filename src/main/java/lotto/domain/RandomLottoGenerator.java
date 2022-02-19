@@ -8,9 +8,9 @@ import java.util.stream.IntStream;
 
 public class RandomLottoGenerator implements LottoGenerator {
 
-    private static final int START_RANGE = 1;
-    private static final int END_RANGE = 45;
-    private static final int COUNT = 6;
+    public static final int START_RANGE = 1;
+    public static final int END_RANGE = 45;
+    public static final int COUNT = 6;
 
     private static final List<Integer> lottoRange = IntStream.rangeClosed(START_RANGE, END_RANGE)
         .boxed().collect(
@@ -18,7 +18,7 @@ public class RandomLottoGenerator implements LottoGenerator {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public RandomLottoGenerator(){
+    public RandomLottoGenerator() {
         Collections.shuffle(lottoRange);
         List<Integer> subNumbers = lottoRange.stream().limit(COUNT).sorted()
             .collect(Collectors.toList());
