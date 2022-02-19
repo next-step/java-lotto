@@ -48,8 +48,8 @@ public class Controller {
             .mapToObj(inputView::doInputLotto)
             .map(Lotto::new)
             .collect(Collectors.toList());
-        LottoCalculationDTO lottoCalculationDTO =
+        LottoCalculationDTO lottoCalculationDto =
             new LottoCalculationDTO(purchaseManualLotto.size(), lottoCalculation.getPurchaseLottos(purchaseManualLotto,money), lottoCalculation.getLottos());
-        OutputView.printCountMessage(lottoCalculationDTO);
+        OutputView.printCountMessage(lottoCalculationDto);
     }
 }
