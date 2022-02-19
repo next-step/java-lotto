@@ -47,7 +47,7 @@ public class InputView {
         }
     }
 
-    public static List<List<Integer>> getManualLottoNumbers(int manualCount) {
+    public static List<List<LottoNumber>> getManualLottoNumbers(int manualCount) {
         try {
             OutputView.printMessage(ENTER + MANUAL_TICKET_NUMBER_MANAGER_MESSAGE);
             return makeManualLottoNumbers(manualCount);
@@ -57,15 +57,16 @@ public class InputView {
         }
     }
 
-    private static List<List<Integer>> makeManualLottoNumbers(int manualTicketCount) {
-        List<List<Integer>> lottoNumbers = new ArrayList<>();
+    private static List<List<LottoNumber>> makeManualLottoNumbers(int manualTicketCount) {
+        List<List<LottoNumber>> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < manualTicketCount; i++) {
             lottoNumbers.add(makeManualLttoNumber());
         }
+
         return lottoNumbers;
     }
 
-    private static List<Integer> makeManualLttoNumber() {
+    private static List<LottoNumber> makeManualLttoNumber() {
         try {
             String input = scanner.nextLine();
             checkEmptyString(input);
@@ -76,6 +77,7 @@ public class InputView {
             return Arrays.stream(numbers)
                 .map(String::trim)
                 .map(Integer::new)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
         } catch (IllegalArgumentException e) {
             e.printStackTrace();

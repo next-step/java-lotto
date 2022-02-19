@@ -3,7 +3,10 @@ package lotto.controller;
 import java.util.List;
 import lotto.domain.WinningNumber;
 import lotto.domain.WinningResult;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
+import lotto.domain.machine.LottoSupplier;
 import lotto.domain.ticket.Money;
 import lotto.domain.ticket.PurchaseTicket;
 import lotto.view.InputView;
@@ -41,7 +44,10 @@ public class LottoController {
         return InputView.getManualTicketCount();
     }
 
-    private List<List<Integer>> getManualLottoNumbers(final PurchaseTicket ticket) {
-        return InputView.getManualLottoNumbers(ticket.getBuyManualCount());
+    private List<Lotto> getManualLottoNumbers(final PurchaseTicket ticket) {
+        List<List<LottoNumber>> manualLottoNumbers = InputView.getManualLottoNumbers(
+            ticket.getBuyManualCount());
+
+        return LottoSupplier.makeManualLotto(manualLottoNumbers);
     }
 }

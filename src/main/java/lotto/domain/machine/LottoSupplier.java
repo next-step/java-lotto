@@ -1,15 +1,15 @@
 package lotto.domain.machine;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 
 public class LottoSupplier {
 
-    public static List<Lotto> makeManualLotto(List<List<Integer>> lottoNumbers) {
-        final List<Lotto> manualLottos = new ArrayList<>();
-        lottoNumbers
-            .forEach(lottoNumber -> manualLottos.add(Lotto.from(lottoNumber)));
-        return manualLottos;
+    public static List<Lotto> makeManualLotto(List<List<LottoNumber>> lottos) {
+        return lottos.stream()
+            .map(Lotto::new)
+            .collect(Collectors.toList());
     }
 }

@@ -6,7 +6,6 @@ import java.util.stream.IntStream;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.machine.LottoGenerator;
-import lotto.domain.machine.LottoSupplier;
 
 public class LottoGameManager {
 
@@ -19,9 +18,5 @@ public class LottoGameManager {
                 .collect(Collectors.toList()))
             .map(Lotto::new)
             .collect(Collectors.toList());
-    }
-
-    public static List<Lotto> getLottosByManual(List<List<Integer>> lottoNumbers) {
-        return LottoSupplier.makeManualLotto(lottoNumbers);
     }
 }

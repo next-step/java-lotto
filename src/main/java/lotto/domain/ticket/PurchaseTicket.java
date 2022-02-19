@@ -34,10 +34,8 @@ public class PurchaseTicket {
         }
     }
 
-    public Lottos purchase(final List<List<Integer>> getManualLottoNumbers) {
-        List<List<Integer>> manualLottoNumbers = getManualLottoNumbers;
-
-        List<Lotto> lottoGames = LottoGameManager.getLottosByManual(manualLottoNumbers);
+    public Lottos purchase(final List<Lotto> getManualLottos) {
+        List<Lotto> lottoGames = getManualLottos;
         lottoGames.addAll(LottoGameManager.getLottosByAuto(new RandomLottoGenerator(), getBuyAutoCount()));
         return new Lottos(lottoGames);
     }
