@@ -24,13 +24,13 @@ public class OutputView {
     private static final String YIELD = "총 수익률은 %.1f입니다.";
 
     public static void printMessage(String message) {
-        System.out.print(message);
+        System.out.println(message);
     }
 
     public void printPurchaseAmount(PurchaseTicket ticket) {
         int buyManualCount = ticket.getBuyManualCount();
         int buyAutoCount = ticket.getBuyAutoCount();
-        printMessage(ENTER + String.format(PURCHASE_AMOUNT_MANAGER_LOG, buyManualCount, buyAutoCount) + ENTER);
+        printMessage(ENTER + String.format(PURCHASE_AMOUNT_MANAGER_LOG, buyManualCount, buyAutoCount));
     }
 
     public void printPurchaseTicket(Lottos lottoRepository) {
@@ -40,13 +40,12 @@ public class OutputView {
                 .sorted(Comparator.comparing(LottoNumber::getNumber))
                 .map(LottoNumber::getNumber)
                 .map(String::valueOf)
-                .collect(Collectors.joining(DELIMITER, OPEN_BRACKET, CLOSED_BRACKET)) + ENTER);
+                .collect(Collectors.joining(DELIMITER, OPEN_BRACKET, CLOSED_BRACKET)));
         }
-        printMessage(ENTER);
     }
 
     public void printWinningResult(WinningResult winningResult) {
-        printMessage(ENTER + WINNING_RESULT_HEAD_LOG + ENTER);
+        printMessage(ENTER + WINNING_RESULT_HEAD_LOG);
         printMatchCount(winningResult.getResult());
         printYield(winningResult.getYield());
     }
@@ -65,13 +64,13 @@ public class OutputView {
         long prize = rank.getPrize();
 
         if (rank == Rank.SECOND) {
-            printMessage(String.format(BONUS_MATCH, matchCount, prize, count) + ENTER);
+            printMessage(String.format(BONUS_MATCH, matchCount, prize, count));
             return;
         }
-        printMessage(String.format(COUNT_MATCH, matchCount, prize, count) + ENTER);
+        printMessage(String.format(COUNT_MATCH, matchCount, prize, count));
     }
 
     private void printYield(double yield) {
-        printMessage(String.format(YIELD, yield) + ENTER);
+        printMessage(String.format(YIELD, yield));
     }
 }

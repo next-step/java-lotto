@@ -25,7 +25,7 @@ public class InputView {
 
     public static int getMoney() {
         try {
-            OutputView.printMessage(PURCHASE_TICKET_MANAGER_MESSAGE + ENTER);
+            OutputView.printMessage(PURCHASE_TICKET_MANAGER_MESSAGE);
             String input = scanner.nextLine();
             checkEmptyString(input);
             return Integer.parseInt(input);
@@ -37,7 +37,7 @@ public class InputView {
 
     public static int getManualTicketCount() {
         try {
-            OutputView.printMessage(ENTER + MANUAL_TICKET_MANAGER_MESSAGE + ENTER);
+            OutputView.printMessage(ENTER + MANUAL_TICKET_MANAGER_MESSAGE );
             String input = scanner.nextLine();
             checkEmptyString(input);
             return Integer.parseInt(input);
@@ -49,7 +49,7 @@ public class InputView {
 
     public static List<List<Integer>> getManualLottoNumbers(int manualCount) {
         try {
-            OutputView.printMessage(ENTER + MANUAL_TICKET_NUMBER_MANAGER_MESSAGE + ENTER);
+            OutputView.printMessage(ENTER + MANUAL_TICKET_NUMBER_MANAGER_MESSAGE);
             return makeManualLottoNumbers(manualCount);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
@@ -102,7 +102,7 @@ public class InputView {
 
     public static List<Integer> writeWinningNumbers() {
         try {
-            OutputView.printMessage(WINNING_NUMBER_MANAGER_MESSAGE +ENTER);
+            OutputView.printMessage(ENTER + WINNING_NUMBER_MANAGER_MESSAGE);
             String input = scanner.nextLine();
             checkEmptyString(input);
 
@@ -121,7 +121,7 @@ public class InputView {
 
     private static int writeBonusBall() {
         try {
-            OutputView.printMessage(BONUS_BALL_MANAGER_MESSAGE + ENTER);
+            OutputView.printMessage(BONUS_BALL_MANAGER_MESSAGE);
             String input = scanner.nextLine();
             checkEmptyString(input);
             return Integer.parseInt(input);
