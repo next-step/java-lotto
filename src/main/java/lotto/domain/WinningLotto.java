@@ -26,13 +26,13 @@ public class WinningLotto {
     public List<Rank> matchRank(Lottos lottos) {
         List<Rank> winningRanks = new ArrayList<>();
         for(Lotto lotto : lottos.getLottos()) {
-            int matchOfNumber = matchWinningNumbers(lotto);
+            int matchOfNumber = countMatchNumbers(lotto);
             addWinningRanksList(matchOfNumber, lotto, winningRanks);
         }
         return winningRanks;
     }
 
-    private int matchWinningNumbers(final Lotto lotto) {
+    private int countMatchNumbers(final Lotto lotto) {
         return lotto.matchWinningnumbers(winningNumber);
     }
 

@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
