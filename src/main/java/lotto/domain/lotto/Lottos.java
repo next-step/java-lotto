@@ -21,11 +21,7 @@ public class Lottos {
     }
 
     public Lottos(final int lottoCount, final Generator generator) {
-        this.lottos = setLottos(lottoCount, generator);
-    }
-
-    private List<Lotto> setLottos(final int lottoCount, final Generator generator) {
-        return generator.generateLottos(lottoCount);
+        this.lottos = generator.generateLottos(lottoCount);
     }
 
     public List<Lotto> getLottos() {
