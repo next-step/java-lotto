@@ -14,8 +14,9 @@ public class ManualCount {
     }
 
     private void validManualCount(int count, Count totalCount) {
-        if(count > totalCount.getValue()) {
-            throw new IllegalArgumentException("[ERROR] "+totalCount.getValue()+"개를 초과할 수 없습니다.");
+        if (count > totalCount.getValue()) {
+            throw new IllegalArgumentException(
+                String.format("[ERROR] %d개를 초과할 수 없습니다.", totalCount.getValue()));
         }
     }
 
