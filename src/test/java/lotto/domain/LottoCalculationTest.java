@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.dto.RankDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -80,7 +81,8 @@ public class LottoCalculationTest {
         lottoCalculation.getPurchaseLottos(oldLottos, money);
         Winning winning = new Winning("1,2,3,4,5,6", new LottoNumber(7));
         RankResult rankResult = new RankResult(lottoCalculation.getLotto(), winning);
-        assertThat(rankResult.getRankResult(winning, new Money(7))).isNotNull();
+        RankDTO rankDto = new RankDTO(rankResult, money);
+        assertThat(rankDto).isNotNull();
     }
 
     @DisplayName("수동_로또_입력에_대한_결과값_테스트")
