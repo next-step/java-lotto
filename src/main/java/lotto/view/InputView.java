@@ -15,6 +15,7 @@ public class InputView {
     private static final String BONUS_BALL_INPUT_GUIDE_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String THE_NUMBER_OF_MANUAL_LOTTO_INPUT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String MANUAL_LOTTO_NUMBER_INPUT_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final int ZERO =0;
 
     public static int inputPrice() {
         System.out.println(PRICE_INPUT_GUIDE_MESSAGE);
@@ -29,7 +30,7 @@ public class InputView {
     public static List<List<Integer>> inputManualLottoNumber(int amountOfManualLotto) {
         List<List<Integer>> manualLottos = new ArrayList<>();
         System.out.println(MANUAL_LOTTO_NUMBER_INPUT_MESSAGE);
-        for (int i = 0; i < amountOfManualLotto; i++) {
+        for (int i = ZERO; i < amountOfManualLotto; i++) {
             String manualLottoNumberInput = SCANNER.next();
             String[] manualLottoNumber = manualLottoNumberInput.split("[ ,]");
             List<Integer> list = Arrays.stream(manualLottoNumber).map(Integer::parseInt).collect(
