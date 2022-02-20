@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoRules {
+public class AutoLottoRules {
 
     private final static int START_NUM = 1;
     private final static int LAST_NUM = 45;
@@ -13,7 +13,7 @@ public class LottoRules {
 
     private final List<LottoNumber> initialLottoNumbers;
 
-    public LottoRules() {
+    public AutoLottoRules() {
         initialLottoNumbers = new ArrayList<>();
         for (int i = START_NUM; i <= LAST_NUM; i++) {
             initialLottoNumbers.add(new LottoNumber(i));
