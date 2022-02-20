@@ -10,15 +10,15 @@ public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = makeLottoNumbers(numbers);
+    public Lotto(List<String> numberStrings) {
+        this.lottoNumbers = new ArrayList<>(makeLottoNumbers(numberStrings));
+
         validateDuplicateNumber(lottoNumbers);
         validateSize(lottoNumbers);
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
-    public static List<LottoNumber> makeLottoNumbers(List<Integer> numbers) {
-        return numbers.stream()
+    public static List<LottoNumber> makeLottoNumbers(List<String> numberStrings) {
+        return numberStrings.stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
     }

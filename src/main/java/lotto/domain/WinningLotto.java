@@ -7,26 +7,26 @@ public class WinningLotto {
     private final Lotto lotto;
     private LottoNumber bonusNumber;
 
-    public WinningLotto(List<Integer> numbers) {
-        this.lotto = new Lotto(numbers);
+    public WinningLotto(List<String> numberStrings) {
+        this.lotto = new Lotto(numberStrings);
     }
 
-    public WinningLotto(List<Integer> numbers, Integer bonusNumber) {
-        this(numbers);
-        setBonusNumber(bonusNumber);
+    public WinningLotto(List<String> numberStrings, Integer bonusNumber) {
+        this(numberStrings);
+        setBonusNumber(new LottoNumber(bonusNumber));
     }
 
-    public void setBonusNumber(Integer bonusNumber) {
+    public void setBonusNumber(LottoNumber bonusNumber) {
+        this.bonusNumber = bonusNumber;
         validateDuplicateBonus(bonusNumber);
-        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
     public LottoNumber getBonusNumber() {
         return bonusNumber;
     }
 
-    private void validateDuplicateBonus(int number) {
-        if (lotto.contains(number)) {
+    private void validateDuplicateBonus(LottoNumber bonusNumber) {
+        if (lotto.contains(bonusNumber.getNumber())) {
             throw new IllegalArgumentException("[ERROR] 당첨 번호와 중복된 값입니다. 다시 입력해주세요.");
         }
     }

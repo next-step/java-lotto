@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.util.Validator;
+
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int MINIMUM_BALL_NUMBER = 1;
@@ -10,6 +12,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public LottoNumber(int number) {
         validateRange(number);
         this.number = number;
+    }
+
+    public LottoNumber(String numberString) {
+        this(Validator.parseToInt(numberString));
     }
 
     public int getNumber() {
