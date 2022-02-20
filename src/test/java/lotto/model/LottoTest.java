@@ -32,7 +32,7 @@ class LottoTest {
             new LottoNumber(20)
         ));
         WinningNumber winningNumber = new WinningNumber(
-            Arrays.asList("2", "4", "5", "15", "20", "21"), new LottoNumber(9));
+            Arrays.asList(2,4,5,15,20,21), new LottoNumber(9));
         MatchInfo matchInfo = lotto.matchLottoWithWinningNumber(winningNumber);
         assertThat(matchInfo.getMatchCount()).isEqualTo(4);
     }
@@ -45,7 +45,7 @@ class LottoTest {
             new LottoNumber(20)
         ));
         WinningNumber winningNumber = new WinningNumber(
-            Arrays.asList("2", "4", "8", "15", "20", "21"), new LottoNumber(41));
+            Arrays.asList(2,4,8,15,20,21), new LottoNumber(41));
         MatchInfo matchInfo = lotto.matchLottoWithWinningNumber(winningNumber);
         assertThat(matchInfo.getMatchCount()).isEqualTo(5);
         assertThat(matchInfo.getBonusMatch()).isEqualTo(true);
