@@ -13,10 +13,10 @@ public class Tokenizer {
     private static final String STANDARD_DELIMITER_COLON = ":";
     private static final List<Integer> EMPTY = new ArrayList<>();
 
-    private final NumberTokens numberTokens;
+    private final List<Integer> numbers;
 
     public Tokenizer(String text) {
-        this.numberTokens = new NumberTokens(tokenize(text));
+        this.numbers = tokenize(text);
     }
 
     private List<Integer> tokenize(String text) {
@@ -56,9 +56,5 @@ public class Tokenizer {
 
     private boolean isEmptyOrNull(String text) {
         return Objects.isNull(text) || text.isEmpty();
-    }
-
-    public NumberTokens getTokenizedNumbers() {
-        return numberTokens;
     }
 }
