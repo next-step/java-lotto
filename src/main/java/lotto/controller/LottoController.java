@@ -3,14 +3,16 @@ package lotto.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.LottoGame;
+import lotto.domain.LottoRaffle;
 import lotto.domain.MatchResult;
 import lotto.domain.YieldCalculator;
 import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.WinningLotto;
 import lotto.domain.lotto.count.Count;
 import lotto.domain.lotto.count.ManualCount;
 import lotto.domain.lotto.generator.AutoGenerator;
 import lotto.domain.lotto.generator.Generator;
+import lotto.domain.lotto.generator.ManualGenerator;
 import lotto.domain.lotto.number.BonusNumber;
 import lotto.domain.lotto.number.Numbers;
 import lotto.domain.money.Money;
@@ -21,14 +23,12 @@ public class LottoController {
 
     private static final int START = 1;
 
-    private final LottoGame lottoGame = new LottoGame();
-
     public void start() {
         final Money money = inputMoneyValue();
-        final Count totalCount = lottoGame.calculateLottoCount(money);
+        final Count totalCount = Count.calculateLottoCount(money);
 
         final ManualCount manualCount = inputManualCount(totalCount);
-        final Count autoCount = lottoGame.calculateAutoCount(totalCount, manualCount);
+        final Count autoCount = Count.calculateAutoCount(totalCount, manualCount);
 
         final List<Numbers> manualNumbers = inputManualNumbers(manualCount);
         final Lottos manualLottos = generateManualLottos(manualCount, manualNumbers);
@@ -40,15 +40,18 @@ public class LottoController {
         final Numbers winningNumbers = inputWinningNumbers();
         final BonusNumber bonusNumber = inputBonusNumber(winningNumbers);
 
-        final Lottos totalLottos = lottoGame.generateTotalLottos(manualLottos, autoLottos);
-        final MatchResult results = lottoGame.getResults(totalLottos, winningNumbers, bonusNumber);
+        final Lottos totalLottos = Lottos.combine(manualLottos, autoLottos);
+
+        final LottoRaffle lottoRaffle = new LottoRaffle(
+            new WinningLotto(winningNumbers, bonusNumber));
+        final MatchResult results = lottoRaffle.compareLottos(totalLottos);
         double yield = YieldCalculator.calculateYield(results, money);
         ResultView.printLottoResults(results, yield);
     }
 
     private Lottos generateManualLottos(ManualCount manualCount, List<Numbers> manualNumbers) {
         try {
-            return lottoGame.makeManualLottos(manualCount, manualNumbers);
+            return new Lottos(manualCount.getCountValue(), new ManualGenerator(manualNumbers));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return generateManualLottos(manualCount, manualNumbers);
@@ -96,7 +99,7 @@ public class LottoController {
 
     private Lottos generateLottos(Count lottoCount, final Generator generator) {
         try {
-            return lottoGame.generateLottos(lottoCount.getValue(), generator);
+            return new Lottos(lottoCount.getValue(), generator);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return generateLottos(lottoCount, generator);
