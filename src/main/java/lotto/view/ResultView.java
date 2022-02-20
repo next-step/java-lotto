@@ -2,18 +2,18 @@ package lotto.view;
 
 import java.util.Arrays;
 import lotto.domain.Lotto;
-import lotto.domain.LottoCount;
 import lotto.domain.LottoDescription;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottoes;
+import lotto.domain.Money;
 
 public class ResultView {
 
     private ResultView() {
     }
 
-    public static void printLottoCount(final LottoCount lottoCount) {
-        System.out.println(lottoCount.getCount() + "개를 구매했습니다.");
+    public static void printMoney(final Money money) {
+        System.out.println(money.getCount() + "개를 구매했습니다.");
     }
 
     public static void printLottos(Lottoes lottos) {

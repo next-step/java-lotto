@@ -1,17 +1,24 @@
-package lotto.util;
+package lotto.domain;
 
-public class MoneyValidator extends Validator {
+import lotto.util.Validator;
+
+public class Money {
 
     private static final int MINIMUM_MONEY = 1000;
 
-    private MoneyValidator() {
-        super();
+    private final int money;
+
+    public Money(String input) {
+        this.money = Validator.parseToInt(input);
+        validateMinimumMoney(money);
     }
 
-    public static int validate(String input) {
-        final int money = parseToInt(input);
-        validateMinimumMoney(money);
+    public int getMoney() {
         return money;
+    }
+
+    public int getCount() {
+        return money / MINIMUM_MONEY;
     }
 
     private static void validateMinimumMoney(int money) {
