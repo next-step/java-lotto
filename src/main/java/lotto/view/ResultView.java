@@ -14,6 +14,10 @@ public class ResultView {
     private ResultView() {
     }
 
+    public static void printInputManualLottosInfo() {
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+    }
+
     public static void printLottoCount(ManualCount manualCount, Count autoCount) {
         final String stringFormat = "\n수동으로 %s장, 자동으로 %s개를 구매했습니다.\n";
         System.out.printf(stringFormat, manualCount.getCountValue(), autoCount.getValue());
