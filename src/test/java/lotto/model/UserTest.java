@@ -35,7 +35,7 @@ class UserTest {
         );
         User user = new User(lottos);
         WinningNumber winningNumber = new WinningNumber(
-            Arrays.asList(1,3,4,5,6,21), new LottoNumber(7));
+            Arrays.asList(1, 3, 4, 5, 6, 21), new LottoNumber(7));
         List<MatchInfo> matchInfos = user.findEachLottoMatchingNumber(winningNumber);
         assertThat(matchInfos.get(0).getMatchCount()).isEqualTo(5);
         assertThat(matchInfos.get(1).getMatchCount()).isEqualTo(4);

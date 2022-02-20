@@ -12,21 +12,21 @@ class WinningNumberTest {
     @Test
     void 중복된_숫자가_들어오면_예외를_발생하는지_확인() {
 
-        List<Integer> numbers = Arrays.asList(1,2,3,4,5,5);
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 5);
         assertThatExceptionOfType(RuntimeException.class)
             .isThrownBy(() -> new WinningNumber(numbers, new LottoNumber(9)));
     }
 
     @Test
     void 다섯개의_숫자가_들어오면_예외를_발생하는지_확인() {
-        List<Integer> numbers = Arrays.asList(1,2,3,4,5);
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
         assertThatExceptionOfType(RuntimeException.class)
             .isThrownBy(() -> new WinningNumber(numbers, new LottoNumber(9)));
     }
 
     @Test
     void 일곱개의_숫자가_들어오면_예외를_발생하는지_확인() {
-        List<Integer> numbers = Arrays.asList(1,2,3,4,5,6,7);
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
         assertThatExceptionOfType(RuntimeException.class)
             .isThrownBy(() -> new WinningNumber(numbers, new LottoNumber(9)));
     }
