@@ -44,7 +44,8 @@ class ParserTest {
         }
         final List<String> delimiters = Arrays.asList(",", ":", "-");
         final Parser parser = new Parser(text, delimiters);
-        assertThat(parser.splitNumbersByDelimiter()).isEqualTo(numbers);
+        final Operands operands = new Operands(parser.parseOperands());
+        assertThat(operands.getValues()).isEqualTo(numbers);
     }
 
     @ParameterizedTest
@@ -53,7 +54,7 @@ class ParserTest {
         final List<String> delimiters = Arrays.asList(",", ":", "a");
         final Parser parser = new Parser(text, delimiters);
         assertThatExceptionOfType(RuntimeException.class)
-            .isThrownBy(() -> parser.splitNumbersByDelimiter())
+            .isThrownBy(() -> new Operands(parser.parseOperands()))
             .withMessage("[ERROR] 숫자 이외의 값을 계산할 수 없습니다.");
     }
 
@@ -63,7 +64,7 @@ class ParserTest {
         final List<String> delimiters = Arrays.asList(",", ":", "a");
         final Parser parser = new Parser(text, delimiters);
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> parser.splitNumbersByDelimiter())
+            .isThrownBy(() -> new Operands(parser.parseOperands()))
             .withMessage("[ERROR] 음수 값은 입력할 수 없습니다.");
     }
 }

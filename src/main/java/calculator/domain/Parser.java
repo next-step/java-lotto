@@ -31,21 +31,17 @@ public class Parser {
         return text.startsWith(DOUBLE_SLASH);
     }
 
-    public List<Integer> splitNumbersByDelimiter() {
+    public String[] parseOperands() {
         final String regex = makeRegularExpression();
-        endByDelimiter(regex);
-        Operands operands = new Operands(operation.split(regex));
-        return operands.castToInteger();
+        validateEndByDelimiter(regex);
+        return operation.split(regex);
     }
 
-    private void endByDelimiter(String regex) {
-        if (endOfOperation().matches(regex)) {
+    private void validateEndByDelimiter(String regex) {
+        final String endOfOperation = operation.substring(operation.length() - 1);
+        if (endOfOperation.matches(regex)) {
             throw new RuntimeException("[ERROR] 숫자 이외의 값을 계산할 수 없습니다.");
         }
-    }
-
-    private String endOfOperation() {
-        return operation.substring(operation.length() - 1);
     }
 
     private String makeRegularExpression() {
