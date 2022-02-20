@@ -2,6 +2,7 @@ package lotto.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import lotto.LottoGame;
 import lotto.domain.MatchResult;
 import lotto.domain.YieldCalculator;
@@ -17,6 +18,8 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoController {
+
+    private static final int START = 1;
 
     private final LottoGame lottoGame = new LottoGame();
 
@@ -54,8 +57,9 @@ public class LottoController {
 
     private List<Numbers> inputManualNumbers(ManualCount manualCount) {
         try {
-            return InputView.inputManualNumbers(manualCount).stream()
-                .map(Numbers::new)
+            ResultView.printInputManualLottosInfo();
+            return IntStream.rangeClosed(START, manualCount.getCountValue())
+                .mapToObj(i -> new Numbers(InputView.inputManualNumber()))
                 .collect(Collectors.toList());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
