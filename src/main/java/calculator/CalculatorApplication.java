@@ -1,6 +1,5 @@
 package calculator;
 
-import calculator.domain.NumberTokens;
 import calculator.domain.StringCalculator;
 import calculator.domain.Tokenizer;
 import calculator.view.InputView;
@@ -12,9 +11,8 @@ public class CalculatorApplication {
         String text = InputView.getText();
 
         Tokenizer tokenizer = new Tokenizer(text);
-        NumberTokens numberTokens = tokenizer.getTokenizedNumbers();
 
-        StringCalculator stringCalculator = new StringCalculator(numberTokens);
+        StringCalculator stringCalculator = new StringCalculator(tokenizer.getNumbers());
         int result = stringCalculator.getResult();
 
         ResultView.printResult(result);

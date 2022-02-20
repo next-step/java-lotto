@@ -57,4 +57,8 @@ public class Tokenizer {
     private boolean isEmptyOrNull(String text) {
         return Objects.isNull(text) || text.isEmpty();
     }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 }

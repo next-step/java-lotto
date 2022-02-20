@@ -6,16 +6,16 @@ public class StringCalculator {
 
     private final int result;
 
-    public StringCalculator(NumberTokens numberTokens) {
-        validateNegative(numberTokens.getNumbers());
-        this.result = createResult(numberTokens.getNumbers());
+    public StringCalculator(List<Integer> numbers) {
+        validateNegative(numbers);
+        this.result = createResult(numbers);
     }
 
-    public int createResult(List<Integer> tokenized)  {
-        if(tokenized.isEmpty()) {
+    private int createResult(List<Integer> numbers)  {
+        if(numbers.isEmpty()) {
             return 0;
         }
-        return tokenized.stream().mapToInt(number -> number).sum();
+        return numbers.stream().mapToInt(number -> number).sum();
     }
 
     private void validateNegative(List<Integer> tokenized) {
