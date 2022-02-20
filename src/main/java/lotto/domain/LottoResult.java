@@ -14,7 +14,7 @@ public class LottoResult {
     }
 
     public void raffle(WinningLotto winningLotto, Lottoes lottoes) {
-        for (Lotto lotto : lottoes.getLottos()) {
+        for (Lotto lotto : lottoes.getLottoes()) {
             String resultHash = winningLotto.compareLotto(lotto);
             upCount(resultHash);
         }
@@ -25,5 +25,4 @@ public class LottoResult {
             resultMap.put(hash, resultMap.get(hash) + 1);
         }
     }
-
 }

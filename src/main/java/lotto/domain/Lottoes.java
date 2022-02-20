@@ -14,18 +14,13 @@ public class Lottoes {
     private List<Lotto> setLottoes(LottoCount lottoCount) {
         final List<Lotto> lottoes = new ArrayList<>();
         for (int i = 0; i < lottoCount.getCount(); i++) {
-            Lotto lotto = setLotto();
+            Lotto lotto = new Lotto(GeneratorNumber.generateLottoNumbers());
             lottoes.add(lotto);
         }
         return lottoes;
     }
 
-    // TODO : 난수를 생성하는 로직과 Lotto 인스턴스를 생성하는 로직이 한 곳에 있으므로 테스트가 어려움
-    private Lotto setLotto() {
-        return new Lotto(GeneratorNumber.generateLottoNumbers());
-    }
-
-    public List<Lotto> getLottos() {
+    public List<Lotto> getLottoes() {
         return lottoes;
     }
 }

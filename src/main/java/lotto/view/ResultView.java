@@ -17,7 +17,7 @@ public class ResultView {
     }
 
     public static void printLottos(Lottoes lottos) {
-        for (Lotto lotto : lottos.getLottos()) {
+        for (Lotto lotto : lottos.getLottoes()) {
             System.out.println(Arrays.toString(lotto.getLotto().toArray()));
         }
         System.out.println();
