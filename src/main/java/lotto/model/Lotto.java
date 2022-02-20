@@ -13,12 +13,7 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validateLotto(lottoNumbers);
-        Collections.sort(lottoNumbers, (o1, o2) -> {
-            if (o1.getNumber() > o2.getNumber()) {
-                return 1;
-            }
-            return -1;
-        });
+        Collections.sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
