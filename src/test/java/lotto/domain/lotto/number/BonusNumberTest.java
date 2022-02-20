@@ -32,7 +32,7 @@ class BonusNumberTest {
     @ValueSource(strings = {"7", "8", "9", "45"})
     @ParameterizedTest
     void stringTest(String input) {
-        assertThat(Integer.parseInt(input)).isEqualTo(new BonusNumber(input, numbers).getValue());
+        assertThat(Integer.parseInt(input)).isEqualTo(new BonusNumber(input, numbers).getNumber().getValue());
     }
 
     @DisplayName("범위 내로 유효하나 Numbers와 중복되는 String값이 들어오는 경우")

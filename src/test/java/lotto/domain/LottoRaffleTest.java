@@ -44,4 +44,20 @@ class LottoRaffleTest {
             assertThat(matchResult.getCount(lottoResult)).isZero();
         }
     }
+
+    @Test
+    void 이등_당첨_결과_확인() {
+        final LottoResult expectedResult = LottoResult.MATCH_BONUS;
+        final Lotto lotto = new Lotto(new Numbers("2,3,4,5,6,7"));
+        final LottoRaffle lottoRaffle = new LottoRaffle(winningLotto);
+        final MatchResult matchResult = lottoRaffle.compareLottos(new Lottos(Arrays.asList(lotto)));
+
+        for (LottoResult lottoResult : matchResult.getLottoResultSet()) {
+            if (lottoResult.equals(expectedResult)) {
+                assertThat(matchResult.getCount(lottoResult)).isEqualTo(1);
+                continue;
+            }
+            assertThat(matchResult.getCount(lottoResult)).isZero();
+        }
+    }
 }
