@@ -12,13 +12,15 @@ import java.util.stream.IntStream;
 public class LottoNumber {
 
     private static final Map<Integer, LottoNumber> cachedLottoNumber = new HashMap<>();
+
     static {
         IntStream.range(MIN_NUMBER, MAX_NUMBER)
             .forEach(value -> cachedLottoNumber.put(value, new LottoNumber(value)));
     }
+
     private final int number;
 
-    public LottoNumber(final int number) {
+    private LottoNumber(final int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException(INVALID_RANGE);
         }
@@ -26,7 +28,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber from(int value) {
-        if(cachedLottoNumber.containsKey(value)) {
+        if (cachedLottoNumber.containsKey(value)) {
             return cachedLottoNumber.get(value);
         }
         cachedLottoNumber.put(value, new LottoNumber(value));
