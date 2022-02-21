@@ -25,4 +25,12 @@ public class LottoResult {
             resultMap.put(hash, resultMap.get(hash) + 1);
         }
     }
+
+    public double calculateYield(Money money) {
+        double profit = LottoDescription.toList().stream()
+            .mapToDouble(lottoDescription -> getCount(lottoDescription.getHash())
+                * lottoDescription.getWinning())
+            .sum();
+        return profit / money.getMoney();
+    }
 }

@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -34,4 +35,19 @@ class LottoResultTest {
         lottoResult.upCount(hash);
         assertThat(1).isEqualTo(lottoResult.getCount(hash));
     }
+
+    @Test
+    void 수익률_계산하기() {
+        lottoResult = new LottoResult();
+        lottoResult.upCount(LottoDescription.findLottoHash(3, false));
+        lottoResult.upCount(LottoDescription.findLottoHash(3, false));
+        lottoResult.upCount(LottoDescription.findLottoHash(4, false));
+        lottoResult.upCount(LottoDescription.findLottoHash(4, false));
+        lottoResult.upCount(LottoDescription.findLottoHash(4, false));
+        lottoResult.upCount(LottoDescription.findLottoHash(5, false));
+        Money money = new Money("1000");
+
+        assertThat(lottoResult.calculateYield(money)).isEqualTo(310.00);
+    }
+
 }

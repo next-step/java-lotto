@@ -4,7 +4,6 @@ import lotto.domain.LottoResult;
 import lotto.domain.Lottoes;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
-import lotto.domain.YieldCalculator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -23,7 +22,7 @@ public class LottoApplication {
         final LottoResult lottoResult = new LottoResult();
         lottoResult.raffle(winningLotto, lottoes);
 
-        double yield = YieldCalculator.calculateYield(lottoResult, money);
+        double yield = lottoResult.calculateYield(money);
         ResultView.printLottoResults(lottoResult, yield);
     }
 
