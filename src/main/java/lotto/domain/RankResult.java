@@ -16,17 +16,17 @@ public class RankResult {
                 Collectors.summingInt(x -> AUTO_INCREMENT)));
     }
 
+    public int getTotalPrize() {
+        return rankResult.entrySet().stream()
+            .mapToInt(entry -> entry.getKey().getPrize(entry.getValue()).getValue())
+            .sum();
+    }
+
     public int getRankResult(Rank rank) {
         if (rankResult.get(rank) == null) {
             return DEFAULT_NUMBER;
         }
         return rankResult.get(rank);
-    }
-
-    public Money getTotalPrize() {
-        return new Money(rankResult.entrySet().stream()
-            .mapToInt(entry -> entry.getKey().getPrize(entry.getValue()).getValue())
-            .sum());
     }
 
 }

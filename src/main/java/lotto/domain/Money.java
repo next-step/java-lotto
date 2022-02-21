@@ -25,10 +25,6 @@ public class Money {
         return value;
     }
 
-    public double getPrizeRatio(final Money totalPrize, final Money money) {
-        return totalPrize.getValue() / (double) money.getValue();
-    }
-
     private void validateTypeLessThousand(final int value) {
         if (value < LOTTO_PRICE) {
             throw new IllegalArgumentException(LESS_THOUSAND_ERROR_MESSAGE);

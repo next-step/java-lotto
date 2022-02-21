@@ -9,6 +9,7 @@ import lotto.domain.LottoCalculation;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicketManual;
 import lotto.domain.Money;
+import lotto.domain.Prize;
 import lotto.domain.RankResult;
 import lotto.domain.Winning;
 import lotto.domain.dto.LottoCalculationDTO;
@@ -39,8 +40,9 @@ public class Controller {
         LottoNumber bonusLottoNumber = new LottoNumber(inputView.inputBonusLottoNumber());
         Winning winning = new Winning(winningLottoNumber, bonusLottoNumber);
         RankResult rankResult = new RankResult(lottoCalculation.getLotto(), winning);
-        RankDTO rankDto = new RankDTO(rankResult, money);
-        outputView.printRankResult(rankDto);
+        Prize prize = new Prize(money);
+        RankDTO rankDto = new RankDTO(rankResult, prize);
+        outputView.printRankResult(prize, rankDto);
     }
 
     private static void purchaseLottoManual(LottoCalculation lottoCalculation, Money money) {

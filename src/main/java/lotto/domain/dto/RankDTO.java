@@ -1,14 +1,15 @@
 package lotto.domain.dto;
 
 import lotto.domain.Money;
+import lotto.domain.Prize;
 import lotto.domain.RankResult;
 
 public class RankDTO {
 
     private final RankResult rankResult;
-    private final Money purchaseAmount;
+    private final Prize purchaseAmount;
 
-    public RankDTO(RankResult rankResult, Money purchaseAmount) {
+    public RankDTO(RankResult rankResult, Prize purchaseAmount) {
         this.rankResult = rankResult;
         this.purchaseAmount = purchaseAmount;
     }
@@ -17,7 +18,7 @@ public class RankDTO {
         return rankResult;
     }
 
-    public Money getPurchaseAmount() {
-        return purchaseAmount;
+    public Money getPrizeValue() {
+        return purchaseAmount.getValue();
     }
 }

@@ -82,7 +82,8 @@ public class LottoCalculationTest {
         lottoCalculation.getPurchaseLottos(oldLottos, money);
         Winning winning = new Winning("1,2,3,4,5,6", new LottoNumber(7));
         RankResult rankResult = new RankResult(lottoCalculation.getLotto(), winning);
-        RankDTO rankDto = new RankDTO(rankResult, money);
+        Prize prize = new Prize(money);
+        RankDTO rankDto = new RankDTO(rankResult, prize);
         assertThat(rankDto).isNotNull();
     }
 
