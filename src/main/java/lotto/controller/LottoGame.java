@@ -16,14 +16,14 @@ import lotto.model.WinningNumber;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-public class LottoAuto {
+public class LottoGame {
 
-    private static final LottoAuto lottoAuto = new LottoAuto();
+    private static final LottoGame lottoAuto = new LottoGame();
 
-    private LottoAuto() {
+    private LottoGame() {
     }
 
-    public static LottoAuto getInstance() {
+    public static LottoGame getInstance() {
         return lottoAuto;
     }
 
