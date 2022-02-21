@@ -11,7 +11,7 @@ public class WinningNumbers {
     public WinningNumbers(final List<Integer> winningNumbers, final int bonusBall) {
         this(new LottoTicket(
                 winningNumbers.stream().map(LottoNumber::from).collect(Collectors.toList())),
-            new LottoNumber(bonusBall));
+            LottoNumber.from(bonusBall));
     }
 
     public WinningNumbers(final LottoTicket winningNumbers, final LottoNumber bonusBall) {
