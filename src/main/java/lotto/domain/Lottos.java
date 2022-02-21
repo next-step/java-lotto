@@ -25,12 +25,12 @@ public class Lottos {
 
     public int purchaseLottos(List<Lotto> lotto, Money money) {
         int numberOfLottoManual = lotto.size();
-
+        LottoBundle lottoBundle = new LottoBundle(new ArrayList<>());
         lottos.addAll(lotto);
         int numberOfLottoAutomatical = calculateNumberOfLottosAutomatical(numberOfLottoManual,
             money);
         lottos.addAll(
-            LottoBundle.lottoBundle(numberOfLottoAutomatical, new ShuffleLottoNumber()));
+            lottoBundle.lottoBundle(numberOfLottoAutomatical, new ShuffleLottoNumber()));
 
         return numberOfLottoAutomatical;
     }

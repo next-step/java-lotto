@@ -50,13 +50,10 @@ public class Controller {
             inputView.inputLottoTicket());
         inputView.inputLottoManual();
 
-        List<Lotto> purchaseManualLotto = IntStream.range(0, lottoTicket.getLottoTicketValue())
-            .mapToObj(inputView::doInputLotto)
-            .map(Lotto::new)
+        List<Lotto> purchaseManualLotto = IntStream.range(0, lottoTicket.getLottoTicketValue()).mapToObj(inputView::doInputLotto).map(Lotto::new)
             .collect(Collectors.toList());
 
-        LottoCalculationDTO lottoCalculationDto =
-            new LottoCalculationDTO(purchaseManualLotto.size(),
+        LottoCalculationDTO lottoCalculationDto = new LottoCalculationDTO(purchaseManualLotto.size(),
                 lottoCalculation.getPurchaseLottos(purchaseManualLotto, money),
                 lottoCalculation.getLottos());
         outputView.printCountMessage(lottoCalculationDto);
