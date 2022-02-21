@@ -19,18 +19,12 @@ public class LottoController {
 
     public void run() {
         try {
-            final int totalPrice = inputView.getTotalPrice();
-            final int purchaseManualLottoNumber = inputView.getPurchaseManualLottoNumber();
-            final LottoPlay lottoPlay;
+            final LottoPlay lottoPlay = lottoPlayInit();
 
-            lottoPlay = getLottoPlay(totalPrice, purchaseManualLottoNumber);
-
-            resultView.printNumberOfLotto(lottoPlay.getLottoRandomMatchCount(),
+            resultView.printNumberOfLotto(lottoPlay.getLottoRandomCount(),
                 lottoPlay.getLottoManualMatchCount());
 
-            if (lottoPlay.getLottoRandomMatchCount() > IS_POSSIBLE_LOTTO_PURCHASE) {
-                resultView.printLottoTickets(lottoPlay.getLottoTickets());
-            }
+            hasPurChaseRandomLotto(lottoPlay);
 
             lottoPlay.run(new LottoMachine(inputView.getWinNumbers(), inputView.getBonusNumber()));
 
@@ -38,6 +32,19 @@ public class LottoController {
                 lottoPlay.calculateProfitPercent());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    private LottoPlay lottoPlayInit() {
+        final int totalPrice = inputView.getTotalPrice();
+        final int purchaseManualLottoNumber = inputView.getPurchaseManualLottoNumber();
+        final LottoPlay lottoPlay = getLottoPlay(totalPrice, purchaseManualLottoNumber);
+        return lottoPlay;
+    }
+
+    private void hasPurChaseRandomLotto(final LottoPlay lottoPlay) {
+        if (lottoPlay.getLottoRandomCount() > IS_POSSIBLE_LOTTO_PURCHASE) {
+            resultView.printLottoTickets(lottoPlay.getLottoTickets());
         }
     }
 
