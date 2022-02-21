@@ -22,7 +22,7 @@ public class LottoTicketGenerator {
     }
 
     public static LottoTicketGenerator of(Price price, LottoTicket designatedLottoTicket) {
-        validatePrice(price.getValue());
+        validateGeneratablePrice(price.getValue());
 
         Price autoLottoTicketPrice = calculateAutoLottoTicketPrice(
             price,
@@ -64,7 +64,7 @@ public class LottoTicketGenerator {
         return price / LOTTO_PRICE;
     }
 
-    private static void validatePrice(int price) {
+    private static void validateGeneratablePrice(int price) {
         if (!isPurchasable(price)) {
             throw new IllegalArgumentException(NOT_PURCHASEABLE_EXCEPTION_MESSAGE);
         }

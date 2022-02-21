@@ -105,6 +105,10 @@
 - [x] `System.out.println(String.format)`을 `System.out.printf`으로 바꿔보자.
 - [x] 네이밍을 맴버변수와 동일하게 지어서 bonusNumber가 맴버변수가아닌 매개변수로 적용되는 오류 해결
 
+---
+
+- [x] validatePrice 메서드 Price로 책임 위임
+
 ## multiple authors
 
 ```bash
