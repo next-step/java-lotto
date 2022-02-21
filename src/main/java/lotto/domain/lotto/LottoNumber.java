@@ -6,6 +6,10 @@ public class LottoNumber {
     public static final int LOTTO_LAST_NUMBER = 45;
     private final int number;
 
+    public LottoNumber(String number) {
+        this(Integer.parseInt(number));
+    }
+
     public LottoNumber(int number) {
         validateRange(number);
         this.number = number;
@@ -23,8 +27,12 @@ public class LottoNumber {
 
     @Override
     public boolean equals(final Object obj) {
-        if(this == obj) return true;
-        if(obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
         final LottoNumber lottoNumber = (LottoNumber) obj;
         return number == lottoNumber.number;
     }
