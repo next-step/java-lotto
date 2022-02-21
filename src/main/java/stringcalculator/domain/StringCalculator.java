@@ -5,9 +5,8 @@ import java.util.List;
 public class StringCalculator {
 
     private static final String EMPTY_VALUE = "0";
-
-    private List<OperandNumber> operands;
     private final Delimiter delimiter;
+    private List<OperandNumber> operands;
 
     public StringCalculator() {
         delimiter = new Delimiter();
