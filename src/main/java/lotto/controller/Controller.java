@@ -47,19 +47,13 @@ public class Controller {
 
     private static void purchaseLotto(Lottos lottos, Money money) {
         String purchaseManualCount = inputView.inputLottoTicket();
-        LottoTicketManual lottoTicket = new LottoTicketManual(purchaseManualCount,
-            money.calculateLotto());
-
+        LottoTicketManual lottoTicket = new LottoTicketManual(purchaseManualCount, money.calculateLotto());
         inputView.inputLottoManual();
-
         List<Lotto> purchaseManualLotto = IntStream.range(0, lottoTicket.getLottoTicketValue())
             .mapToObj(inputView::doInputLotto).map(Lotto::new)
             .collect(Collectors.toList());
-
-        LottoCalculationDTO lottoCalculationDto = new LottoCalculationDTO(
-            purchaseManualLotto.size(),
-            lottos.purchaseLottos(purchaseManualLotto, purchaseManualCount, money),
-            lottos);
+        LottoCalculationDTO lottoCalculationDto = new LottoCalculationDTO(purchaseManualLotto.size(),
+            lottos.purchaseLottos(purchaseManualLotto, purchaseManualCount, money), lottos);
         outputView.printCountMessage(lottoCalculationDto);
     }
 }
