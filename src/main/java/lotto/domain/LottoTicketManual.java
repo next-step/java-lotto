@@ -16,10 +16,6 @@ public class LottoTicketManual {
         this.value = convertIntValue;
     }
 
-    public LottoTicketManual(LottoCalculation lottoCalculation, String inputLottoTicket) {
-        this(inputLottoTicket, lottoCalculation.getLottosCalculation());
-    }
-
     private void validatePurchaseLottoTicketMax(final int value, final int count) {
         if (value > count) {
             throw new IllegalArgumentException(PURCHASE_LOTTO_PRICE_ERROR_MESSAGE);
