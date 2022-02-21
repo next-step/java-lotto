@@ -1,21 +1,21 @@
 package lotto.view;
 
 import java.util.HashMap;
-import lotto.domain.number.LottoNumber;
+import java.util.List;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.result.LottoResult;
-import lotto.domain.statistics.WinningStatistics;
-import lotto.domain.user.UserLotto;
-import lotto.domain.user.UserLottos;
+import lotto.domain.result.WinningStatistics;
 
 public class ResultView {
 
-    public static void printUserLottos(UserLottos userLottos) {
-        System.out.println(userLottos.getQuantity() + "개를 구매했습니다.");
+    public static void printUserLottos(List<Lotto> lottos) {
+        System.out.println(lottos.size() + "개를 구매했습니다.");
 
-        for (UserLotto lotto : userLottos.getRawUserLottos()) {
+        for (Lotto lotto : lottos) {
             final StringBuilder sb = new StringBuilder("[");
             lotto.getNumbers().stream()
-                .map(LottoNumber::getRaw)
+                .map(LottoNumber::getNumber)
                 .forEach(number -> sb.append(number).append(", "));
 
             sb.append("]").deleteCharAt(sb.lastIndexOf(","));

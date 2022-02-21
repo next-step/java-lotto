@@ -1,27 +1,30 @@
 package lotto;
 
-import lotto.domain.result.LottoResults;
-import lotto.domain.statistics.WinningStatistics;
-import lotto.domain.user.LottoInitInfo;
-import lotto.domain.user.UserLottos;
-import lotto.domain.winning.WinningBalls;
+import java.util.List;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoMachine;
+import lotto.domain.lotto.RandomLottoCreator;
+import lotto.domain.result.LottoJudgement;
+import lotto.domain.result.WinningStatistics;
+import lotto.domain.user.Wallet;
+import lotto.domain.winning.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoApplication {
 
     public static void main(String[] args) {
+        Wallet wallet = new Wallet(InputView.getMoney());
 
-        final LottoInitInfo lottoInitInfo = InputView.getLottoInitInfo();
-        final UserLottos userLottos = new UserLottos(lottoInitInfo.getQuantity());
-        ResultView.printUserLottos(userLottos);
+        LottoMachine lottoMachine = new LottoMachine(wallet.getMoney(), new RandomLottoCreator());
+        ;
+        List<Lotto> lottos = lottoMachine.getLottos();
+        ResultView.printUserLottos(lottos);
 
-        final WinningBalls winningBalls = InputView.getWinningBalls();
+        WinningNumbers winningNumbers = InputView.getWinningNumbers();
+        LottoJudgement judgement = new LottoJudgement(lottos, winningNumbers);
 
-        LottoResults lottoResults = new LottoResults(userLottos.getRawUserLottos(), winningBalls);
-        WinningStatistics winningStatistics = new WinningStatistics(lottoResults,
-            lottoInitInfo.getPurchasePrice());
-
+        WinningStatistics winningStatistics = new WinningStatistics(judgement.getLottoResults(), wallet.getMoney());
         ResultView.printResult(winningStatistics);
     }
 }
