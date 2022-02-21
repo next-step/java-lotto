@@ -13,18 +13,18 @@ public class Money {
         validateMinimumMoney(money);
     }
 
-    public int getMoney() {
-        return money;
-    }
-
-    public int getCount() {
-        return money / MINIMUM_MONEY;
-    }
-
     private static void validateMinimumMoney(int money) {
         if (money < MINIMUM_MONEY) {
             throw new IllegalArgumentException(
                 "[ERROR] " + MINIMUM_MONEY + "원에 1장입니다. " + MINIMUM_MONEY + "보다 큰 값을 입력해주세요.");
         }
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public int calculateCount() {
+        return money / MINIMUM_MONEY;
     }
 }
