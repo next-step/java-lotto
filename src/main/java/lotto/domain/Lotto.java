@@ -1,40 +1,32 @@
 package lotto.domain;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import lotto.util.LottoNumber;
 
 public class Lotto {
 
-    private final int LOTTO_COUNT = 6;
-    private final LottoNumber lottoNumber = new LottoNumber();
-    private List<Integer> number;
+    private final List<LottoNumber> number;
 
     public Lotto() {
-
+        number = new ArrayList<>();
     }
 
-    public Lotto(List<Integer> number) {
+    public Lotto(List<LottoNumber> number) {
         this.number = number;
     }
 
-    public Lotto getLottoTicket() {
-        List<Integer> randoms;
-
-        number = lottoNumber.getLottoNumbers();
-
-        Collections.shuffle(number);
-
-        randoms = number.stream().limit(LOTTO_COUNT)
-            .collect(Collectors.toList());
-
-        Collections.sort(randoms);
-
-        return new Lotto(randoms);
+    public List<LottoNumber> getLotto() {
+        return number;
     }
 
-    public List<Integer> getLotto() {
-        return number;
+    public int matchWinningLotto(WinningLotto winningLotto) {
+        return (int) number
+            .stream()
+            .filter(winningLotto.getWinLotto()::contains)
+            .count();
+    }
+
+    public boolean matchBonusNumber(LottoNumber bonusNumber) {
+        return number.stream().anyMatch(bonusNumber::equals);
     }
 }
