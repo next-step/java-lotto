@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class WinningLotto {
     private static final String ERROR_DISTINCT = "당첨 번호와 보너스 번호는 중복될 수 없습니다.";
@@ -18,7 +19,7 @@ public class WinningLotto {
     }
 
     private void validate(Lotto winningNumber, LottoNumber bonusNumber) {
-        if (winningNumber.getLotto().contains(bonusNumber.getLottoNumber())) {
+        if (winningNumber.getLotto().contains(bonusNumber)) {
             throw new IllegalArgumentException(ERROR_DISTINCT);
         }
     }
