@@ -43,10 +43,14 @@ public class Lotto {
     }
 
 
-    public boolean get(final LottoNumber lottoNumber) {
+    public boolean isContainsLottoNumber(final LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
+    public boolean isContainsConvertInt(final LottoNumber lottoNumber) {
+        return this.getLottoNumbers().contains(lottoNumber.getValue());
+    }
+    
     public List<Integer> getLottoNumbers() {
         return lottoNumbers
             .stream()
@@ -56,11 +60,8 @@ public class Lotto {
 
     public long countMatch(final Lotto lottoNumber) {
         return this.lottoNumbers.stream()
-            .filter(lottoNumber::get)
+            .filter(lottoNumber::isContainsLottoNumber)
             .count();
     }
 
-    public boolean contains(final LottoNumber lottoNumber) {
-        return this.getLottoNumbers().contains(lottoNumber.getValue());
-    }
 }

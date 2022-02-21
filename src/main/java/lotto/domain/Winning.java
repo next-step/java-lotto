@@ -18,7 +18,7 @@ public class Winning {
     }
 
     private void validationWinningNumber() {
-        if (winningLottoNumber.contains(bonusLottoNumber)) {
+        if (winningLottoNumber.isContainsConvertInt(bonusLottoNumber)) {
             throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
         }
     }
@@ -28,6 +28,6 @@ public class Winning {
     }
 
     public boolean isbonusLottoNumber(final Lotto lotto) {
-        return lotto.contains(bonusLottoNumber);
+        return lotto.isContainsConvertInt(bonusLottoNumber);
     }
 }

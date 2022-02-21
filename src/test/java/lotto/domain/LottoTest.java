@@ -43,6 +43,6 @@ public class LottoTest {
     @Test
     public void containsLottoNumberTest() {
         Lotto lotto = new Lotto("45, 21, 23, 41, 42, 43");
-        assertTrue(lotto.contains(new LottoNumber(45)));
+        assertTrue(lotto.isContainsConvertInt(new LottoNumber(45)));
     }
 }
