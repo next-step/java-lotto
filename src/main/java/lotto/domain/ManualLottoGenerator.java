@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 public class ManualLottoGenerator implements LottoGenerator {
 
-    private final List<LottoNumber> lottoNumbers;
     private static final int COUNT = 6;
+    private final List<LottoNumber> lottoNumbers;
 
     public ManualLottoGenerator(List<LottoNumber> line) {
         this.lottoNumbers = line.stream().limit(COUNT).collect(Collectors.toList());

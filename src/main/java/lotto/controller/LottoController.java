@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoPlay;
+import lotto.domain.ManualCount;
 import lotto.domain.Price;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -50,9 +51,9 @@ public class LottoController {
 
     private LottoPlay getLottoPlay(Price totalPrice, int purchaseManualLottoNumber) {
         if (purchaseManualLottoNumber > IS_POSSIBLE_LOTTO_PURCHASE) {
-            return new LottoPlay(totalPrice, purchaseManualLottoNumber,
+            return new LottoPlay(totalPrice, new ManualCount(purchaseManualLottoNumber),
                 inputView.getManualLottoNumbers(purchaseManualLottoNumber));
         }
-        return new LottoPlay(totalPrice, purchaseManualLottoNumber);
+        return new LottoPlay(totalPrice, new ManualCount(purchaseManualLottoNumber));
     }
 }

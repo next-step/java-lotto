@@ -68,7 +68,8 @@ public class InputView {
         for (int i = 0; i < purchaseManualLottoNumber; i++) {
             String string = scanner.nextLine();
             manualLottos.add(
-                Arrays.stream(string.split(",")).map(LottoNumber::new).collect(Collectors.toList()));
+                Arrays.stream(string.split(",")).map(LottoNumber::new)
+                    .collect(Collectors.toList()));
         }
         return manualLottos;
     }

@@ -10,8 +10,8 @@ public class Price {
         this.price = price;
     }
 
-    public int lottoCountsCalculator(){
-        return price/LOTTO_PRICE;
+    public LottoCounts lottoCountsCalculator() {
+        return new LottoCounts(price / LOTTO_PRICE);
     }
 
     public int getPrice() {

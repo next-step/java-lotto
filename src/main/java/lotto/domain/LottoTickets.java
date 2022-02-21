@@ -13,16 +13,16 @@ public class LottoTickets {
     private final int manualCount;
     private final List<Lotto> lottoTickets = new ArrayList<>();
 
-    public LottoTickets(final Price price, final int manualCount) {
-        final int lottoCounts = price.lottoCountsCalculator();
-        this.randomCounts = lottoCounts - manualCount;
-        this.manualCount = manualCount;
+    public LottoTickets(final Price price, final ManualCount manualCount) {
+        final LottoCounts lottoCounts = price.lottoCountsCalculator();
+        this.randomCounts = lottoCounts.getLottoCounts() - manualCount.getManualCount();
+        this.manualCount = manualCount.getManualCount();
         if (randomCounts > NOT_PURCHASE_RANDOM_LOTTO) {
             this.lottoTickets.addAll(makeRandomLottoTickets(randomCounts));
         }
     }
 
-    public LottoTickets(final Price price, final int manualCount,
+    public LottoTickets(final Price price, final ManualCount manualCount,
         final List<List<LottoNumber>> manualLine) {
         this(price, manualCount);
         this.lottoTickets.addAll(makeManualLottoTickets(manualLine));
