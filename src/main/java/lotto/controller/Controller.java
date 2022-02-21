@@ -48,7 +48,7 @@ public class Controller {
     private static void purchaseLotto(Lottos lottos, Money money) {
         String purchaseManualCount = inputView.inputLottoTicket();
         LottoTicketManual lottoTicket = new LottoTicketManual(purchaseManualCount,
-            lottos.calculateLotto(money));
+            money.calculateLotto());
 
         inputView.inputLottoManual();
 

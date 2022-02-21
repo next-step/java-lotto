@@ -44,5 +44,10 @@ public class Money {
             throw new IllegalArgumentException(NON_NUMBER_ERROR_MESSAGE);
         }
     }
+
+    public int calculateLotto() {
+        return value / LOTTO_PRICE;
+    }
+
 }
 

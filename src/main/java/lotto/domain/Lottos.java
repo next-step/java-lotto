@@ -37,12 +37,6 @@ public class Lottos {
     }
 
     public int calculateNumberOfLottosAutomatical(int numberOfLottoManual, Money money) {
-        return calculateLotto(money) - numberOfLottoManual;
+        return money.calculateLotto() - numberOfLottoManual;
     }
-
-
-    public int calculateLotto(Money money) {
-        return money.getValue() / LOTTO_PRICE;
-    }
-
 }
