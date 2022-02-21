@@ -10,8 +10,8 @@ public class LottoPrice {
     private final int price;
 
     public LottoPrice(int price) {
-        validateLottoPrice();
         this.price = price;
+        validateLottoPrice();
     }
 
     private void validateLottoPrice() {
