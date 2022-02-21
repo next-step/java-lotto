@@ -9,10 +9,8 @@ public class ManualLottoGenerator implements LottoGenerator {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public ManualLottoGenerator(List<Integer> line) {
-        this.lottoNumbers = line.stream().limit(COUNT).sorted()
-            .collect(Collectors.toList()).stream().map(LottoNumber::new).collect(
-                Collectors.toList());
+    public ManualLottoGenerator(List<LottoNumber> line) {
+        this.lottoNumbers = line.stream().limit(COUNT).collect(Collectors.toList());
     }
 
     @Override

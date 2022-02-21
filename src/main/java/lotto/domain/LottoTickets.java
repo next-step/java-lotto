@@ -13,7 +13,7 @@ public class LottoTickets {
     private final List<Lotto> lottoTickets = new ArrayList<>();
 
     public LottoTickets(final int price, final int manualCount,
-        final List<List<Integer>> manualLine) {
+        final List<List<LottoNumber>> manualLine) {
         final int lottoCounts = price / LOTTO_PRICE;
         this.randomCounts = lottoCounts - manualCount;
         this.manualCount = manualCount;
@@ -41,10 +41,10 @@ public class LottoTickets {
     }
 
     private List<Lotto> makeManualLottoTickets(
-        List<List<Integer>> manualLine) {
+        List<List<LottoNumber>> manualLine) {
         final List<Lotto> lottoTickets = new ArrayList<>();
 
-        for (List<Integer> line : manualLine) {
+        for (List<LottoNumber> line : manualLine) {
             lottoTickets.add(
                 new Lotto(new ManualLottoGenerator(line).getLottoGeneratorNumbers()));
         }

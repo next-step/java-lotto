@@ -20,7 +20,7 @@ class LottoTest {
             Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(8), new LottoNumber(9), new LottoNumber(10));
         this.lotto = new Lotto(lottoNumbers);
-        this.lottoMachine = new LottoMachine(winningLottoNumbers, 15);
+        this.lottoMachine = new LottoMachine(winningLottoNumbers, new LottoNumber(15));
     }
 
     @Test

@@ -8,7 +8,7 @@ public class LottoPlay {
     private final Analyzer analyzer;
 
     public LottoPlay(final int totalPrice, final int manualLottoNumber,
-        final List<List<Integer>> manualLottos) {
+        final List<List<LottoNumber>> manualLottos) {
         this.lottoTickets = new LottoTickets(totalPrice, manualLottoNumber, manualLottos);
         this.analyzer = new Analyzer(totalPrice);
     }

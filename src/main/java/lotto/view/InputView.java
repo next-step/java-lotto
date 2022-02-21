@@ -48,9 +48,9 @@ public class InputView {
         }
     }
 
-    public int getBonusNumber() {
+    public LottoNumber getBonusNumber() {
         try {
-            return Integer.parseInt(getInputValue(BONUS_NUMBER_MESSAGE));
+            return new LottoNumber(getInputValue(BONUS_NUMBER_MESSAGE));
         } catch (NumberFormatException e) {
             throw new NumberFormatException("숫자를 입력해주세요");
         }
@@ -61,14 +61,14 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public final List<List<Integer>> getManualLottoNumbers(int purchaseManualLottoNumber) {
+    public final List<List<LottoNumber>> getManualLottoNumbers(int purchaseManualLottoNumber) {
         System.out.println(MANUAL_LOTTO_NUMBERS_MESSAGE);
-        List<List<Integer>> manualLottos = new ArrayList<>();
+        List<List<LottoNumber>> manualLottos = new ArrayList<>();
         scanner.nextLine();
         for (int i = 0; i < purchaseManualLottoNumber; i++) {
             String string = scanner.nextLine();
             manualLottos.add(
-                Arrays.stream(string.split(",")).map(Integer::new).collect(Collectors.toList()));
+                Arrays.stream(string.split(",")).map(LottoNumber::new).collect(Collectors.toList()));
         }
         return manualLottos;
     }
