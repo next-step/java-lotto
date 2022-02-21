@@ -1,11 +1,5 @@
 package lotto.domain;
 
-@FunctionalInterface
-interface Prize {
-
-    boolean checkWithBonus(int matchCount, boolean bonusMatch);
-}
-
 public enum LottoRank {
     FIFTH(5_000, "3개 일치", (matchCount, bonusMatch) -> matchCount == 3),
     FOURTH(50_000, "4개 일치", (matchCount, bonusMatch) -> matchCount == 4),
@@ -41,4 +35,10 @@ public enum LottoRank {
         return this.rankState;
     }
 
+}
+
+@FunctionalInterface
+interface Prize {
+
+    boolean checkWithBonus(int matchCount, boolean bonusMatch);
 }
