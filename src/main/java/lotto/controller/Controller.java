@@ -46,7 +46,6 @@ public class Controller {
     }
 
     private static void purchaseLotto(LottoCalculation lottoCalculation, Money money) {
-
         LottoTicketManual lottoTicket = new LottoTicketManual(lottoCalculation,
             inputView.inputLottoTicket());
         inputView.inputLottoManual();
