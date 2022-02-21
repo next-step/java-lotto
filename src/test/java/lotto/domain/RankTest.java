@@ -22,7 +22,7 @@ class RankTest {
     @DisplayName(value = "로또에서 5개를 맞추면 3등이다.")
     @Test
     void correctFiveThird() {
-        assertThat(Rank.getRank(5)).isEqualTo(Rank.THIRD);
+        assertThat(Rank.THIRD.getGrade()).isEqualTo(5);
     }
 
     @DisplayName(value = "로또에서 5개와 보너스를 맞추면 2등이다.")
