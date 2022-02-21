@@ -1,4 +1,4 @@
-package lotto.domain.number;
+package lotto.domain.lotto;
 
 public class LottoNumber {
 
@@ -17,7 +17,15 @@ public class LottoNumber {
         }
     }
 
-    public int getRaw() {
+    public int getNumber() {
         return number;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if(this == obj) return true;
+        if(obj == null || getClass() != obj.getClass()) return false;
+        final LottoNumber lottoNumber = (LottoNumber) obj;
+        return number == lottoNumber.number;
     }
 }
