@@ -34,6 +34,6 @@ public class WinningLotto {
     public String compareLotto(Lotto myLotto) {
         final int count = myLotto.match(lotto);
         final boolean isBonusNumber = myLotto.matchBonusNumber(count, bonusLottoNumber);
-        return LottoDescription.findLottoHash(count, isBonusNumber);
+        return LottoGrade.findLottoHash(count, isBonusNumber);
     }
 }

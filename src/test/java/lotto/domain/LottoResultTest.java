@@ -31,7 +31,7 @@ class LottoResultTest {
     @ParameterizedTest
     @MethodSource
     void enum_정상_연산_확인(int matchCount, boolean isBonusNumber) {
-        final String hash = LottoDescription.findLottoHash(matchCount, isBonusNumber);
+        final String hash = LottoGrade.findLottoHash(matchCount, isBonusNumber);
         lottoResult.upCount(hash);
         assertThat(1).isEqualTo(lottoResult.getCount(hash));
     }
@@ -39,12 +39,12 @@ class LottoResultTest {
     @Test
     void 수익률_계산하기() {
         lottoResult = new LottoResult();
-        lottoResult.upCount(LottoDescription.findLottoHash(3, false));
-        lottoResult.upCount(LottoDescription.findLottoHash(3, false));
-        lottoResult.upCount(LottoDescription.findLottoHash(4, false));
-        lottoResult.upCount(LottoDescription.findLottoHash(4, false));
-        lottoResult.upCount(LottoDescription.findLottoHash(4, false));
-        lottoResult.upCount(LottoDescription.findLottoHash(5, false));
+        lottoResult.upCount(LottoGrade.findLottoHash(3, false));
+        lottoResult.upCount(LottoGrade.findLottoHash(3, false));
+        lottoResult.upCount(LottoGrade.findLottoHash(4, false));
+        lottoResult.upCount(LottoGrade.findLottoHash(4, false));
+        lottoResult.upCount(LottoGrade.findLottoHash(4, false));
+        lottoResult.upCount(LottoGrade.findLottoHash(5, false));
         Money money = new Money("1000");
 
         assertThat(lottoResult.calculateYield(money)).isEqualTo(310.00);
