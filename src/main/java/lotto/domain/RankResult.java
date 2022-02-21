@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 public class RankResult {
 
-    private static int DEFAULT_NUMBER = 0;
-    private static int AUTO_INCREMENT = 1;
+    private static final int DEFAULT_NUMBER = 0;
+    private static final int AUTO_INCREMENT = 1;
     private final Map<Rank, Integer> rankResult;
 
     public RankResult(final List<Lotto> lottos, final Winning winning) {
