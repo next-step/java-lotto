@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 import lotto.domain.lotto.Lotto;
@@ -54,7 +53,7 @@ public class LottoFixtures {
     );
 
     public static final WinningNumbers WINNING_NUMBERS_FOUR_MATCHING_NOT_BONUS = new WinningNumbers(
-       Arrays.asList("1", "2", "3", "4", "25", "35"),
+        Arrays.asList("1", "2", "3", "4", "25", "35"),
         "35"
     );
 

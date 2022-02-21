@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.LottoFixtures;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.winning.WinningNumbers;
 import org.junit.jupiter.api.Test;
 
 class LottoJudgementTest {
