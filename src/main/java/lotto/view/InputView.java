@@ -1,6 +1,5 @@
 package lotto.view;
 
-
 import java.util.Scanner;
 import lotto.util.Console;
 
