@@ -3,22 +3,21 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class WinningLottoTest {
 
-    Lottos lottos = new Lottos();
-    LottoResult lottoResult = new LottoResult("1, 2, 3, 4, 5, 6", "7");
-
-    @BeforeEach
-    void setUp() {
-        lottos.makeManualLottos(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        WinningLotto.getMatchWin(lottos, lottoResult);
-    }
-
     @Test
-    void 일등_우승상금_테스트() {
-        assertThat(WinningLotto.getWinProfit()).isEqualTo(2000000000);
+    void 당첨_변호_생성() {
+        WinningLotto winningLotto = WinningLotto.create(
+            Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)));
+
+        assertThat(winningLotto.getWinLotto().size()).isEqualTo(6);
     }
 }
