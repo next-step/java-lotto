@@ -28,7 +28,7 @@ public class LottoTest {
         Lotto lotto = new Lotto("45, 21, 23, 41, 42, 43");
         assertThat(
             Arrays.asList(45, 21, 23, 41, 42, 43).stream().collect(Collectors.toList())).isEqualTo(
-            lotto.getLottoNumber());
+            lotto.getLottoNumbers());
     }
 
     @DisplayName("생성된_로또_번호_개수와_당첨된_로또_번호_개수비교_테스트")

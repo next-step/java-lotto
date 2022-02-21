@@ -24,7 +24,7 @@ public class OutputView {
         System.out.printf(PURCHASED_LOTTO_RESULT, LottoCalculationDto.getNumberOfLottoManual(),
             LottoCalculationDto.getNumberOfLottoAutomatical());
         LottoCalculationDto.getLottos().forEach(
-            lotto -> System.out.println(lotto.getLottoNumber())
+            lotto -> System.out.println(lotto.getLottoNumbers())
         );
     }
 

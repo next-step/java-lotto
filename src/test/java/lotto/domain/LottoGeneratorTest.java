@@ -11,7 +11,7 @@ public class LottoGeneratorTest {
     @Test
     void lottoGenerateTest() {
         Lotto lotto = LottoGenerator.lottoGenerator(new NonShuffleLottoNumber());
-        assertThat(lotto.getLottoNumber()).isNotNull();
+        assertThat(lotto.getLottoNumbers()).isNotNull();
     }
 
 }

@@ -17,18 +17,18 @@ public class Lotto {
     private static final String BLANK_DELIMITER = "";
     private static final String COMMA = ",";
 
-    private final List<LottoNumber> lottoNumber;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(final List<LottoNumber> lottoNumber) {
         List<LottoNumber> lottoFullNumberLengthSix = lottoNumber.subList(NUMBER_ZERO,
             LOTTO_NUMBER_SIZE);
         Collections.sort(lottoFullNumberLengthSix);
         validateNonDuplication(lottoFullNumberLengthSix);
-        this.lottoNumber = new ArrayList<>(lottoFullNumberLengthSix);
+        this.lottoNumbers = new ArrayList<>(lottoFullNumberLengthSix);
     }
 
     public Lotto(final String lottoNumber) {
-        this.lottoNumber = Arrays.stream(
+        this.lottoNumbers = Arrays.stream(
                 lottoNumber
                     .replace(SPACE_DELIMITER, BLANK_DELIMITER)
                     .split(COMMA))
@@ -44,23 +44,23 @@ public class Lotto {
 
 
     public boolean get(final LottoNumber lottoNumber) {
-        return this.lottoNumber.contains(lottoNumber);
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
-    public List<Integer> getLottoNumber() {
-        return lottoNumber
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers
             .stream()
             .map(LottoNumber::getValue)
             .collect(Collectors.toList());
     }
 
     public long countMatch(final Lotto lottoNumber) {
-        return this.lottoNumber.stream()
+        return this.lottoNumbers.stream()
             .filter(lottoNumber::get)
             .count();
     }
 
     public boolean contains(final LottoNumber lottoNumber) {
-        return this.getLottoNumber().contains(lottoNumber.getValue());
+        return this.getLottoNumbers().contains(lottoNumber.getValue());
     }
 }
