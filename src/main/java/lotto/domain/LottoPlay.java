@@ -30,7 +30,7 @@ public class LottoPlay {
         return analyzer.calculateProfitPercent();
     }
 
-    public int getLottoRandomMatchCount() {
+    public int getLottoRandomCount() {
         return lottoTickets.getRandomLottoCounts();
     }
 
