@@ -19,8 +19,7 @@ public class LottoApplication {
         final WinningLotto winningLotto = readyWinningLotto();
         InputView.inputBonusNumber(winningLotto);
 
-        final LottoResult lottoResult = new LottoResult();
-        lottoResult.raffle(winningLotto, lottoes);
+        final LottoResult lottoResult = lottoes.raffle(winningLotto);
 
         double yield = lottoResult.calculateYield(money);
         ResultView.printLottoResults(lottoResult, yield);

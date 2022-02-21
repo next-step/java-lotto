@@ -13,13 +13,6 @@ public class LottoResult {
         return resultMap.get(name);
     }
 
-    public void raffle(WinningLotto winningLotto, Lottoes lottoes) {
-        for (Lotto lotto : lottoes.getLottoes()) {
-            String resultHash = winningLotto.compareLotto(lotto);
-            upCount(resultHash);
-        }
-    }
-
     public void upCount(String name) {
         if (!name.equals(LottoGrade.NOMATCH.getName())) {
             resultMap.put(name, resultMap.get(name) + 1);

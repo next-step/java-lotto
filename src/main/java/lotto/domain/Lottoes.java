@@ -11,6 +11,19 @@ public class Lottoes {
         this.lottoes = setLottoes(money);
     }
 
+    public List<Lotto> getLottoes() {
+        return lottoes;
+    }
+
+    public LottoResult raffle(final WinningLotto winningLotto) {
+        LottoResult lottoResult = new LottoResult();
+        for (Lotto lotto : lottoes) {
+            String resultHash = winningLotto.compareLotto(lotto);
+            lottoResult.upCount(resultHash);
+        }
+        return lottoResult;
+    }
+
     private List<Lotto> setLottoes(Money money) {
         final List<Lotto> lottoes = new ArrayList<>();
         for (int i = 0; i < money.calculateCount(); i++) {
@@ -20,7 +33,4 @@ public class Lottoes {
         return lottoes;
     }
 
-    public List<Lotto> getLottoes() {
-        return lottoes;
-    }
 }
