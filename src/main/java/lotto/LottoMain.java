@@ -3,6 +3,7 @@ package lotto;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoStatistic;
+import lotto.domain.RandomNumberStrategy;
 import lotto.domain.WinningNumbers;
 import lotto.util.InputSpliter;
 import lotto.view.InputView;
@@ -12,7 +13,8 @@ public class LottoMain {
 
     public static void main(String[] args) {
         int userMoney = InputView.getUserMoney();
-        Lotto lotto = new Lotto(userMoney);
+        RandomNumberStrategy randomGenerateStrategy = new RandomNumberStrategy();
+        Lotto lotto = new Lotto(userMoney, randomGenerateStrategy);
         ResultView.printBuyingInformation(lotto.getLottoTickets());
 
         String winnings = InputView.getWinningNumbers();

@@ -9,15 +9,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoNumberGenerator {
+public class RandomNumberStrategy implements NumberGenerateStrategy {
 
-    private static final List<Integer> lottoNumberBalls = makeNumbers();
+    private final List<Integer> lottoNumberBalls = makeNumbers();
 
-    private LottoNumberGenerator() {
-
-    }
-
-    private static List<Integer> makeNumbers() {
+    private List<Integer> makeNumbers() {
         final List<Integer> lottoNumbers = new ArrayList<>();
         for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
             lottoNumbers.add(i);
@@ -25,7 +21,8 @@ public class LottoNumberGenerator {
         return lottoNumbers;
     }
 
-    public static List<LottoNumber> generateRandomLottoNumber() {
+    @Override
+    public List<LottoNumber> generateLottoNumber() {
         Collections.shuffle(lottoNumberBalls);
         List<Integer> picked = lottoNumberBalls.subList(0, LOTTO_SIZE);
         Collections.sort(picked);
