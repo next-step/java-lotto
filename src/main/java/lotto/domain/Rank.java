@@ -2,19 +2,19 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-public enum Statistics {
+public enum Rank {
 
+    NOTHING(0, 0),
     FIFTH(3, 5000),
     FOURTH(4, 50000),
     THIRD(5, 1500000),
     SECOND(5, 30000000),
     FIRST(6, 2000000000);
 
-    private static final String STATISTICS_INVALID = "존재 하지 않는 등수 입니다.";
     final int match;
     final int money;
 
-    Statistics(int match, int money) {
+    Rank(int match, int money) {
         this.match = match;
         this.money = money;
     }
@@ -27,20 +27,24 @@ public enum Statistics {
         return money;
     }
 
-    public static Statistics getReward(int matchCount, boolean bonus) {
-        Statistics statistics = Arrays.stream(values())
+    public static Rank getReward(int matchCount, boolean bonus) {
+        Rank rank = Arrays.stream(values())
             .filter(match -> match.match == matchCount)
             .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException(STATISTICS_INVALID));
+            .orElse(NOTHING);
 
-        if (statistics.match == THIRD.match && bonus) {
+        if (rank.match == THIRD.match && bonus) {
             return SECOND;
         }
 
-        return statistics;
+        return rank;
     }
 
     public boolean isSecond() {
         return this.equals(SECOND);
+    }
+
+    public boolean isNothing() {
+        return this.equals(NOTHING);
     }
 }
