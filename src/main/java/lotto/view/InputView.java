@@ -18,7 +18,7 @@ public class InputView {
 
     public static List<String> inputLastWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return Arrays.stream(SCANNER.nextLine().split(","))
+        return Arrays.stream(SCANNER.nextLine().split(", "))
             .collect(Collectors.toList());
     }
 
@@ -26,7 +26,7 @@ public class InputView {
         try {
             System.out.println("보너스 볼을 입력해주세요.");
             LottoNumber bonusNumber = new LottoNumber(SCANNER.nextLine());
-            winningLotto.setBonusNumber(bonusNumber);
+            winningLotto.setBonusLottoNumber(bonusNumber);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             inputBonusNumber(winningLotto);

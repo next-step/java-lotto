@@ -33,9 +33,8 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource
     void 유효한_당첨번호_입력_시_통과(List<String> inputNumbers) {
-        List<LottoNumber> lottoNumbers = new Lotto(inputNumbers).getLotto();
+        List<Integer> lottoNumbers = new Lotto(inputNumbers).getLotto();
         List<String> numbers = lottoNumbers.stream()
-            .map(LottoNumber::getNumber)
             .map(number -> Integer.toString(number))
             .collect(Collectors.toList());
         assertThat(numbers).isEqualTo(inputNumbers);

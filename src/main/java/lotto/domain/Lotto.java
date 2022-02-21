@@ -23,20 +23,27 @@ public class Lotto {
             .collect(Collectors.toList());
     }
 
-    public List<LottoNumber> getLotto() {
-        return lottoNumbers;
+    public List<Integer> getLotto() {
+        return lottoNumbers.stream()
+            .map(LottoNumber::getNumber)
+            .collect(Collectors.toList());
+    }
+
+    public boolean matchBonusNumber(int count, LottoNumber bonusNumber) {
+        boolean isBonusNumber = contains(bonusNumber.getNumber());
+        if (count != LOTTO_NUMBERS_SIZE - 1) {
+            isBonusNumber = false;
+        }
+        return isBonusNumber;
     }
 
     public boolean contains(final int number) {
-        return lottoNumbers.stream()
-            .map(LottoNumber::getNumber)
-            .collect(Collectors.toList())
+        return getLotto()
             .contains(number);
     }
 
     public int match(final Lotto lotto) {
         return (int) lotto.getLotto().stream()
-            .map(LottoNumber::getNumber)
             .filter(this::contains)
             .count();
     }

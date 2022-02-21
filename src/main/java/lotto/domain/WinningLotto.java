@@ -5,7 +5,7 @@ import java.util.List;
 public class WinningLotto {
 
     private final Lotto lotto;
-    private LottoNumber bonusNumber;
+    private LottoNumber bonusLottoNumber;
 
     public WinningLotto(List<String> numberStrings) {
         this.lotto = new Lotto(numberStrings);
@@ -13,16 +13,16 @@ public class WinningLotto {
 
     public WinningLotto(List<String> numberStrings, Integer bonusNumber) {
         this(numberStrings);
-        setBonusNumber(new LottoNumber(bonusNumber));
+        setBonusLottoNumber(new LottoNumber(bonusNumber));
     }
 
-    public void setBonusNumber(LottoNumber bonusNumber) {
-        this.bonusNumber = bonusNumber;
-        validateDuplicateBonus(bonusNumber);
+    public void setBonusLottoNumber(LottoNumber bonusLottoNumber) {
+        this.bonusLottoNumber = bonusLottoNumber;
+        validateDuplicateBonus(bonusLottoNumber);
     }
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+    public LottoNumber getBonusLottoNumber() {
+        return bonusLottoNumber;
     }
 
     private void validateDuplicateBonus(LottoNumber bonusNumber) {
@@ -31,12 +31,9 @@ public class WinningLotto {
         }
     }
 
-    public String compareLotto(Lotto lotto) {
-        final int count = lotto.match(lotto);
-        boolean isBonusNumber = lotto.contains(bonusNumber.getNumber());
-        if (count != 5) {
-            isBonusNumber = false;
-        }
+    public String compareLotto(Lotto myLotto) {
+        final int count = myLotto.match(lotto);
+        final boolean isBonusNumber = myLotto.matchBonusNumber(count, bonusLottoNumber);
         return LottoDescription.findLottoHash(count, isBonusNumber);
     }
 }
