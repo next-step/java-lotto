@@ -8,12 +8,12 @@ public class WinningLotto {
     private static final int MATCH_FIVE = 5;
     private static final int WINNING_LIMIT_MATCH_COUNT = 3;
 
-    private final Lotto winningNumber;
+    private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
 
     public WinningLotto(Lotto winningNumber, LottoNumber bonusNumber) {
         validate(winningNumber, bonusNumber);
-        this.winningNumber = winningNumber;
+        this.winningLotto = winningNumber;
         this.bonusNumber = bonusNumber;
     }
 
@@ -33,7 +33,7 @@ public class WinningLotto {
     }
 
     private int countMatchNumbers(final Lotto lotto) {
-        return lotto.matchWinningnumbers(winningNumber);
+        return lotto.matchWinningLotto(winningLotto);
     }
 
     private void addWinningRanksList(int matchOfNumber, Lotto lotto, List<Rank> winningRanks) {
@@ -45,6 +45,9 @@ public class WinningLotto {
     private Rank getRank(final int count, final Lotto lotto) {
         if (matchBonusNumber(count, lotto)) {
             return Rank.SECOND;
+        }
+        if(Rank.getRank(count) == Rank.SECOND) {
+            return Rank.THIRD;
         }
         return Rank.getRank(count);
     }

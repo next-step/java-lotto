@@ -21,9 +21,9 @@ public class Lotto {
         }
     }
 
-    public int matchWinningnumbers(Lotto winningNumber) {
+    public int matchWinningLotto(Lotto winningLotto) {
         return (int) lotto.stream()
-            .filter(lottoNumber -> lottoNumber.isWinningNumber(lottoNumber, winningNumber))
+            .filter(lottoNumber -> lottoNumber.isWinningNumber(lottoNumber, winningLotto))
             .count();
     }
 
