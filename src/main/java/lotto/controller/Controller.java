@@ -31,11 +31,11 @@ public class Controller {
     public static void run() {
         Money money = new Money(inputView.inputPurchaseAmount());
         LottoCalculation lottoCalculation = new LottoCalculation(money);
-        purchaseLottoManual(lottoCalculation, money);
-        purchaseLottoAutomatical(lottoCalculation, money);
+        purchaseLotto(lottoCalculation, money);
+        calculateLottoRank(lottoCalculation, money);
     }
 
-    private static void purchaseLottoAutomatical(LottoCalculation lottoCalculation, Money money) {
+    private static void calculateLottoRank(LottoCalculation lottoCalculation, Money money) {
         String winningLottoNumber = inputView.inputWinningLottoNumber();
         LottoNumber bonusLottoNumber = new LottoNumber(inputView.inputBonusLottoNumber());
         Winning winning = new Winning(winningLottoNumber, bonusLottoNumber);
@@ -45,15 +45,17 @@ public class Controller {
         outputView.printRankResult(prize, rankDto);
     }
 
-    private static void purchaseLottoManual(LottoCalculation lottoCalculation, Money money) {
+    private static void purchaseLotto(LottoCalculation lottoCalculation, Money money) {
 
         LottoTicketManual lottoTicket = new LottoTicketManual(lottoCalculation,
             inputView.inputLottoTicket());
         inputView.inputLottoManual();
+
         List<Lotto> purchaseManualLotto = IntStream.range(0, lottoTicket.getLottoTicketValue())
             .mapToObj(inputView::doInputLotto)
             .map(Lotto::new)
             .collect(Collectors.toList());
+
         LottoCalculationDTO lottoCalculationDto =
             new LottoCalculationDTO(purchaseManualLotto.size(),
                 lottoCalculation.getPurchaseLottos(purchaseManualLotto, money),
