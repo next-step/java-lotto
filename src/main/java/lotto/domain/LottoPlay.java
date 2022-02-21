@@ -7,13 +7,13 @@ public class LottoPlay {
     private final LottoTickets lottoTickets;
     private final Analyzer analyzer;
 
-    public LottoPlay(final int totalPrice, final int manualLottoNumber,
+    public LottoPlay(final Price totalPrice, final int manualLottoNumber,
         final List<List<LottoNumber>> manualLottos) {
         this.lottoTickets = new LottoTickets(totalPrice, manualLottoNumber, manualLottos);
         this.analyzer = new Analyzer(totalPrice);
     }
 
-    public LottoPlay(final int totalPrice, final int manualLottoNumber) {
+    public LottoPlay(final Price totalPrice, final int manualLottoNumber) {
         this.lottoTickets = new LottoTickets(totalPrice, manualLottoNumber);
         this.analyzer = new Analyzer(totalPrice);
     }

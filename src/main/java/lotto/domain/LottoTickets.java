@@ -6,28 +6,26 @@ import java.util.stream.Collectors;
 
 public class LottoTickets {
 
-    private static final int LOTTO_PRICE = 1000;
+
+    private static final int NOT_PURCHASE_RANDOM_LOTTO = 0;
 
     private final int randomCounts;
     private final int manualCount;
     private final List<Lotto> lottoTickets = new ArrayList<>();
 
-    public LottoTickets(final int price, final int manualCount,
-        final List<List<LottoNumber>> manualLine) {
-        final int lottoCounts = price / LOTTO_PRICE;
+    public LottoTickets(final Price price, final int manualCount) {
+        final int lottoCounts = price.lottoCountsCalculator();
         this.randomCounts = lottoCounts - manualCount;
         this.manualCount = manualCount;
-        this.lottoTickets.addAll(makeManualLottoTickets(manualLine));
-        if (randomCounts > 0) {
+        if (randomCounts > NOT_PURCHASE_RANDOM_LOTTO) {
             this.lottoTickets.addAll(makeRandomLottoTickets(randomCounts));
         }
     }
 
-    public LottoTickets(final int price, final int manualCount) {
-        final int lottoCounts = price / LOTTO_PRICE;
-        this.randomCounts = lottoCounts - manualCount;
-        this.manualCount = manualCount;
-        this.lottoTickets.addAll(makeRandomLottoTickets(this.randomCounts));
+    public LottoTickets(final Price price, final int manualCount,
+        final List<List<LottoNumber>> manualLine) {
+        this(price, manualCount);
+        this.lottoTickets.addAll(makeManualLottoTickets(manualLine));
     }
 
     private List<Lotto> makeRandomLottoTickets(final int lottoCount) {

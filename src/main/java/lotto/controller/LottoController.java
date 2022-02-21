@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoPlay;
+import lotto.domain.Price;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -36,7 +37,7 @@ public class LottoController {
     }
 
     private LottoPlay lottoPlayInit() {
-        final int totalPrice = inputView.getTotalPrice();
+        final Price totalPrice = new Price(inputView.getTotalPrice());
         final int purchaseManualLottoNumber = inputView.getPurchaseManualLottoNumber();
         return getLottoPlay(totalPrice, purchaseManualLottoNumber);
     }
@@ -47,7 +48,7 @@ public class LottoController {
         }
     }
 
-    private LottoPlay getLottoPlay(int totalPrice, int purchaseManualLottoNumber) {
+    private LottoPlay getLottoPlay(Price totalPrice, int purchaseManualLottoNumber) {
         if (purchaseManualLottoNumber > IS_POSSIBLE_LOTTO_PURCHASE) {
             return new LottoPlay(totalPrice, purchaseManualLottoNumber,
                 inputView.getManualLottoNumbers(purchaseManualLottoNumber));

@@ -15,8 +15,8 @@ public class Analyzer {
 
     private int totalWinningMoney = 0;
 
-    public Analyzer(final int price) {
-        this.price = price;
+    public Analyzer(final Price price) {
+        this.price = price.getPrice();
     }
 
     private static Map<Integer, Integer> createPossibleLottoWinningMoneyKey() {
