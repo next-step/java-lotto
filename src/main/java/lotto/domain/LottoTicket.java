@@ -1,6 +1,8 @@
 package lotto.domain;
 
-import static lotto.util.Constant.*;
+import static lotto.util.Constant.DUPLICATE_ELEMENT;
+import static lotto.util.Constant.INVALID_SIZE;
+import static lotto.util.Constant.LOTTO_SIZE;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +27,7 @@ public class LottoTicket {
     }
 
     private void validateDuplicate(List<LottoNumber> picked) {
-        if (picked.size() != picked.stream().distinct().count()) {
+        if (picked.stream().distinct().count() != LOTTO_SIZE) {
             throw new IllegalArgumentException(DUPLICATE_ELEMENT);
         }
     }
