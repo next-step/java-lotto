@@ -1,8 +1,7 @@
 package calculator.domain;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,7 @@ class TokenizerTest {
     @NullAndEmptySource
     void emptyOrNull(final String text) {
         tokenizer = new Tokenizer(text);
-        assertThat(tokenizer.getTokenizedNumbers().getNumbers().size()).isZero();
+        assertThat(tokenizer.getNumbers().size()).isZero();
     }
 
     @DisplayName(value = "구분자를 쉼표(,) 이외에 콜론(:)을 사용할 수 있다.")
@@ -27,7 +26,7 @@ class TokenizerTest {
     @ValueSource(strings = {"1,2:3"})
     void colons(final String text) {
         tokenizer = new Tokenizer(text);
-        assertThat(tokenizer.getTokenizedNumbers().getNumbers().size()).isSameAs(3);
+        assertThat(tokenizer.getNumbers().size()).isSameAs(3);
     }
 
     @DisplayName(value = "//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다.")
@@ -35,7 +34,7 @@ class TokenizerTest {
     @ValueSource(strings = {"//o\n1o2o3"})
     void customDelimiter(final String text) {
         tokenizer = new Tokenizer(text);
-        assertThat(tokenizer.getTokenizedNumbers().getNumbers().size()).isSameAs(3);
+        assertThat(tokenizer.getNumbers().size()).isSameAs(3);
     }
 
     @DisplayName(value = "문자열 계산기에 지정된 구분자 외의 문자를 전달하는 경우 RuntimeException 예외 처리를 한다.")
