@@ -7,10 +7,15 @@ import static lotto.util.Constant.MIN_NUMBER;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
 
     private static final Map<Integer, LottoNumber> cachedLottoNumber = new HashMap<>();
+    static {
+        IntStream.range(MIN_NUMBER, MAX_NUMBER)
+            .forEach(value -> cachedLottoNumber.put(value, new LottoNumber(value)));
+    }
     private final int number;
 
     public LottoNumber(final int number) {
