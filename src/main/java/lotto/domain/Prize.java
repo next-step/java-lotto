@@ -4,7 +4,7 @@ public class Prize {
 
     private final Money value;
 
-    public Prize(Money value) {
+    public Prize(final Money value) {
         this.value = value;
     }
 
