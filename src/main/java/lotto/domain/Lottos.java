@@ -30,7 +30,8 @@ public class Lottos {
         int numberOfLottoAutomatical = calculateNumberOfLottosAutomatical(numberOfLottoManual,
             money);
         lottos.addAll(
-            lottoBundle.lottoBundle(numberOfLottoAutomatical, new ShuffleLottoNumber()));
+            lottoBundle.lottoBundle(numberOfLottoAutomatical, new ShuffleLottoNumber())
+        );
 
         return numberOfLottoAutomatical;
     }
