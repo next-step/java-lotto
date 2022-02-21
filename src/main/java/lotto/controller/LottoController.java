@@ -38,8 +38,7 @@ public class LottoController {
     private LottoPlay lottoPlayInit() {
         final int totalPrice = inputView.getTotalPrice();
         final int purchaseManualLottoNumber = inputView.getPurchaseManualLottoNumber();
-        final LottoPlay lottoPlay = getLottoPlay(totalPrice, purchaseManualLottoNumber);
-        return lottoPlay;
+        return getLottoPlay(totalPrice, purchaseManualLottoNumber);
     }
 
     private void hasPurChaseRandomLotto(final LottoPlay lottoPlay) {
@@ -49,13 +48,10 @@ public class LottoController {
     }
 
     private LottoPlay getLottoPlay(int totalPrice, int purchaseManualLottoNumber) {
-        final LottoPlay lottoPlay;
         if (purchaseManualLottoNumber > IS_POSSIBLE_LOTTO_PURCHASE) {
-            lottoPlay = new LottoPlay(totalPrice, purchaseManualLottoNumber,
+            return new LottoPlay(totalPrice, purchaseManualLottoNumber,
                 inputView.getManualLottoNumbers(purchaseManualLottoNumber));
-        } else {
-            lottoPlay = new LottoPlay(totalPrice, purchaseManualLottoNumber);
         }
-        return lottoPlay;
+        return new LottoPlay(totalPrice, purchaseManualLottoNumber);
     }
 }
