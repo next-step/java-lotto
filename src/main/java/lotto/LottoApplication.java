@@ -17,7 +17,7 @@ public class LottoApplication {
         Wallet wallet = new Wallet(InputView.getMoney());
 
         LottoMachine lottoMachine = new LottoMachine(wallet.getMoney(), new RandomLottoCreator());
-        ;
+
         List<Lotto> lottos = lottoMachine.getLottos();
         ResultView.printUserLottos(lottos);
 

@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import lotto.domain.winning.WinningNumbers;
 
@@ -18,6 +20,6 @@ public class InputView {
         String[] numbers = input.split(", ");
 
         System.out.println("보너스 볼을 입력해 주세요.");
-        return new WinningNumbers(numbers, scanner.nextLine());
+        return new WinningNumbers(Arrays.asList(numbers), scanner.nextLine());
     }
 }
