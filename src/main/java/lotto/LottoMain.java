@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoStatistic;
 import lotto.domain.RandomNumberStrategy;
 import lotto.domain.WinningNumbers;
@@ -22,10 +23,9 @@ public class LottoMain {
         List<Integer> pickedNumbers = InputSpliter.split(winnings);
         WinningNumbers winningNumbers = new WinningNumbers(pickedNumbers, bonusBall);
 
-        LottoStatistic lottoResult = LottoStatistic.createWinningResult(lotto.getLottoTickets(),
-            winningNumbers);
-        ResultView.printStatistic(lottoResult);
-        ResultView.printProfit(lottoResult.getProfit(userMoney));
+        LottoResult lottoResult = new LottoResult(lotto.getLottoTickets(), winningNumbers);
+        LottoStatistic lottoStatistic = LottoStatistic.createLottoStatistic(lottoResult);
+        ResultView.printStatistic(lottoStatistic, lottoStatistic.getProfit(userMoney));
 
     }
 }

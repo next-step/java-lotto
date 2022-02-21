@@ -15,15 +15,12 @@ public class LottoStatistic {
         this.lottoRankStatistic = lottoRankStatistic;
     }
 
-    public static LottoStatistic createWinningResult(List<LottoTicket> lottoTickets,
-        WinningNumbers winningNumbers) {
+    public static LottoStatistic createLottoStatistic(LottoResult lottoResult) {
         Map<LottoRank, Integer> lottoRankMap = new EnumMap<>(LottoRank.class);
-        lottoTickets.forEach(ticket -> {
-            LottoRank rank = winningNumbers.getRankForLottoTicket(ticket);
-            if (rank != null) {
-                lottoRankMap.put(rank, lottoRankMap.getOrDefault(rank, 0) + 1);
-            }
-        });
+        final List<LottoRank> lottoRank = lottoResult.createLottoResult();
+        for (LottoRank rank : lottoRank) {
+            lottoRankMap.put(rank, lottoRankMap.getOrDefault(rank, 0) + 1);
+        }
         return new LottoStatistic(lottoRankMap);
     }
 

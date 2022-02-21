@@ -15,11 +15,12 @@ public class ResultView {
         tickets.forEach(ticket -> System.out.println(ticket.toString()));
     }
 
-    public static void printStatistic(LottoStatistic lottoStatistic) {
+    public static void printStatistic(LottoStatistic lottoStatistic, double profit) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
         System.out.println(lottoStatistic);
+        printProfit(profit);
     }
 
     public static void printProfit(double profit) {
