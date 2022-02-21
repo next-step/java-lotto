@@ -1,29 +1,26 @@
 package lotto.controller;
 
+import lotto.domain.LottoBuy;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
+import lotto.domain.Money;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-import lotto.domain.LottoBuy;
-import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
-import lotto.domain.WinningLotto;
 
 public class LottoGame {
 
     public static void playLotto() {
-        Lottos lottos = new Lottos();
-        LottoBuy lottoBuy = new LottoBuy();
+        Money money = new Money(InputView.getMoney());
+        LottoBuy lottoBuy = new LottoBuy(money);
+        LottoTicket lottoTicket = lottoBuy.buyAutoLottos(lottoBuy.getCount());
 
-        lottoBuy.makeLottoTryCount(InputView.getMoney());
         ResultView.printCount(lottoBuy.getCount());
+        ResultView.printLottos(lottoTicket);
 
-        lottos.makeAutoLottos(lottoBuy.getCount());
-        ResultView.printLottos(lottos.getLottos());
+        WinningLotto winningLotto = InputView.getLottoWinNumber();
+        LottoNumber bonusNumber = InputView.getWinBouns(winningLotto);
 
-        LottoResult lottoResult = new LottoResult(InputView.getLottoWinNumber(),
-            InputView.getWinBouns());
-
-        ResultView.printWin(WinningLotto.getMatchWin(lottos, lottoResult));
-
-        ResultView.printProfit(lottoBuy.getMoney());
+        ResultView.printWin(lottoTicket.getMatchWinning(winningLotto, bonusNumber), money);
     }
 }
