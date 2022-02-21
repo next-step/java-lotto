@@ -2,9 +2,6 @@ package lotto.util;
 
 public class Validator {
 
-    protected Validator() {
-    }
-
     public static int parseToInt(String input) {
         try {
             return Integer.parseInt(input);

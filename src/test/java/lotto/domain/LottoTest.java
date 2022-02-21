@@ -63,5 +63,4 @@ class LottoTest {
             .isThrownBy(() -> new Lotto(splitString(input)))
             .withMessage("[ERROR] 번호는 " + LOTTO_NUMBERS_SIZE + "개여야 합니다.");
     }
-
 }

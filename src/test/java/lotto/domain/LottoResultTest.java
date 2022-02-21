@@ -49,5 +49,4 @@ class LottoResultTest {
 
         assertThat(lottoResult.calculateYield(money)).isEqualTo(310.00);
     }
-
 }

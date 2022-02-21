@@ -18,15 +18,15 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this(Validator.parseToInt(numberString));
     }
 
-    public int getNumber() {
-        return number;
-    }
-
     public static void validateRange(final int number) {
         if (number < MINIMUM_BALL_NUMBER || number > MAXIMUM_BALL_NUMBER) {
             throw new IllegalArgumentException(
                 "[ERROR] " + MINIMUM_BALL_NUMBER + "부터 " + MAXIMUM_BALL_NUMBER + "까지의 숫자만 입력해주세요.");
         }
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     @Override
