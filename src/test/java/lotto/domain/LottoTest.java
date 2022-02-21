@@ -24,4 +24,15 @@ class LottoTest {
             IllegalArgumentException.class);
     }
 
+    @DisplayName(value = "자신이 산 로또번호와 당첨번호를 비교한다")
+    @Test
+    void matchWinningLotto() {
+        WinningLotto winningLotto = new WinningLotto(new Lotto(new HashSet<>(
+            Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)))), new LottoNumber(8));
+        Lotto lotto = new Lotto(
+            new HashSet<>(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))));
+        assertThat(lotto.matchWinningLotto(winningLotto)).isEqualTo(6);
+    }
 }
