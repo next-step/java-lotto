@@ -1,16 +1,19 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+import lotto.util.NumberGenerator;
+
 public class LottoBuy {
 
-    private static final int lottoPrice = 1000;
     private final int MINIMUM_GAME_COUNT = 1;
+    private final int START_NUMBER = 0;
     private final String INVALID_GAME_COUNT = "게임을 시작할 수 없습니다.";
-    private int lottoCount;
-    private int inputMoney;
 
-    public void makeLottoTryCount(String getMoney) {
-        inputMoney = Integer.parseInt(getMoney);
-        lottoCount = inputMoney / lottoPrice;
+    private final int lottoCount;
+
+    public LottoBuy(Money money) {
+        lottoCount = money.divideToMoney();
         validateLottoTryCount(lottoCount);
     }
 
@@ -20,8 +23,14 @@ public class LottoBuy {
         }
     }
 
-    public int getMoney() {
-        return inputMoney;
+    public LottoTicket buyAutoLottos(int lottoCount) {
+        List<Lotto> lottoTicket = new ArrayList<>();
+
+        for (int i = START_NUMBER; i < lottoCount; ++i) {
+            lottoTicket.add(NumberGenerator.makeAutoLotto());
+        }
+
+        return new LottoTicket(lottoTicket);
     }
 
     public int getCount(){
