@@ -1,18 +1,16 @@
-package lotto.domain.statistics;
+package lotto.domain.result;
 
 import java.util.HashMap;
-import lotto.domain.result.LottoResult;
-import lotto.domain.result.LottoResults;
-import lotto.domain.result.NumberOfResults;
+import java.util.List;
 
 public class WinningStatistics {
 
     private final NumberOfResults numberOfResults;
     private final String profitRate;
 
-    public WinningStatistics(LottoResults lottoResults, int purchasePrice) {
-        this.numberOfResults = new NumberOfResults(lottoResults.getRawLottoResults());
-        this.profitRate = applyProfitRate(numberOfResults.getRawNumberOfResults(), purchasePrice);
+    public WinningStatistics(List<LottoResult> lottoResults, int money) {
+        this.numberOfResults = new NumberOfResults(lottoResults);
+        this.profitRate = applyProfitRate(numberOfResults.getRawNumberOfResults(), money);
     }
 
     private static String format(double totalWinning) {
