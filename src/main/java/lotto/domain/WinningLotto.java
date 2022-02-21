@@ -23,6 +23,10 @@ public class WinningLotto {
         }
     }
 
+    public boolean hasContainNumber(LottoNumber lottoNumber) {
+        return winningLotto.getLotto().contains(lottoNumber);
+    }
+
     public List<Rank> matchRank(Lottos lottos) {
         List<Rank> winningRanks = new ArrayList<>();
         for(Lotto lotto : lottos.getLottos()) {
@@ -33,7 +37,7 @@ public class WinningLotto {
     }
 
     private int countMatchNumbers(final Lotto lotto) {
-        return lotto.matchWinningLotto(winningLotto);
+        return lotto.matchWinningLotto(new WinningLotto(winningLotto, bonusNumber));
     }
 
     private void addWinningRanksList(int matchOfNumber, Lotto lotto, List<Rank> winningRanks) {
