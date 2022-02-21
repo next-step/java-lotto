@@ -23,8 +23,8 @@ public class Lottos {
         return this.lottos;
     }
 
-    public int purchaseLottos(List<Lotto> lotto, Money money) {
-        int numberOfLottoManual = lotto.size();
+    public int purchaseLottos(List<Lotto> lotto, String purchaseManual, Money money) {
+        int numberOfLottoManual = Integer.parseInt(purchaseManual);
         LottoBundle lottoBundle = new LottoBundle(new ArrayList<>());
         lottos.addAll(lotto);
         int numberOfLottoAutomatical = calculateNumberOfLottosAutomatical(numberOfLottoManual,

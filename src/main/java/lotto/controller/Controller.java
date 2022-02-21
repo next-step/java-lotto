@@ -46,7 +46,8 @@ public class Controller {
     }
 
     private static void purchaseLotto(Lottos lottos, Money money) {
-        LottoTicketManual lottoTicket = new LottoTicketManual(inputView.inputLottoTicket(),
+        String purchaseManualCount = inputView.inputLottoTicket();
+        LottoTicketManual lottoTicket = new LottoTicketManual(purchaseManualCount,
             lottos.calculateLotto(money));
 
         inputView.inputLottoManual();
@@ -57,7 +58,7 @@ public class Controller {
 
         LottoCalculationDTO lottoCalculationDto = new LottoCalculationDTO(
             purchaseManualLotto.size(),
-            lottos.purchaseLottos(purchaseManualLotto, money),
+            lottos.purchaseLottos(purchaseManualLotto, purchaseManualCount, money),
             lottos);
         outputView.printCountMessage(lottoCalculationDto);
     }
