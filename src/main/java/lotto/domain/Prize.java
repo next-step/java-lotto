@@ -12,7 +12,7 @@ public class Prize {
         return getTotalPrize(rankResult) / (double) money.getValue();
     }
 
-    public int getTotalPrize(RankResult rankResult) {
+    public int getTotalPrize(final RankResult rankResult) {
         return rankResult.getTotalPrize();
     }
 
