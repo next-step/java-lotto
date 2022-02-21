@@ -1,49 +1,44 @@
 package lotto.domain;
 
+@FunctionalInterface
+interface Prize {
+
+    boolean checkWithBonus(int matchCount, boolean bonusMatch);
+}
+
 public enum LottoRank {
-    FIFTH(3, 5_000, "3개 일치"),
-    FOURTH(4, 50_000, "4개 일치"),
-    THIRD(5, 1_500_000, "5개 일치"),
-    SECOND(5, 30_000_000, "5개 일치, 보너스 볼 일치"),
-    FIRST(6, 2_000_000_000, "6개 일치");
+    FIFTH(5_000, "3개 일치", (matchCount, bonusMatch) -> matchCount == 3),
+    FOURTH(50_000, "4개 일치", (matchCount, bonusMatch) -> matchCount == 4),
+    THIRD(1_500_000, "5개 일치", ((matchCount, bonusMatch) -> matchCount == 5 && !bonusMatch)),
+    SECOND(30_000_000, "5개 일치, 보너스 볼 일치",
+        ((matchCount, bonusMatch) -> matchCount == 5 && bonusMatch)),
+    FIRST(2_000_000_000, "6개 일치", (matchCount, bonusMatch) -> matchCount == 6);
 
-    private final int match;
     private final int winningAmount;
-    private final String rankString;
+    private final String rankState;
+    private final Prize prize;
 
-    LottoRank(final int match, final int winningAmount, String rankString) {
-        this.match = match;
+    LottoRank(final int winningAmount, final String rankState, final Prize prize) {
         this.winningAmount = winningAmount;
-        this.rankString = rankString;
+        this.rankState = rankState;
+        this.prize = prize;
     }
 
     public static LottoRank valueOf(int match, boolean bonusBall) {
-        if (match == LottoRank.SECOND.match) {
-            return checkBonusBall(bonusBall);
-        }
-
         for (LottoRank lottoRank : LottoRank.values()) {
-            if (lottoRank.match == match) {
+            if (lottoRank.prize.checkWithBonus(match, bonusBall)) {
                 return lottoRank;
             }
         }
-
         return null;
-    }
-
-    private static LottoRank checkBonusBall(boolean bonusBall) {
-        if (bonusBall) {
-            return LottoRank.SECOND;
-        }
-        return LottoRank.THIRD;
     }
 
     public int getWinningAmount() {
         return this.winningAmount;
     }
 
-    public String getRankString() {
-        return this.rankString;
+    public String getRankState() {
+        return this.rankState;
     }
 
 }

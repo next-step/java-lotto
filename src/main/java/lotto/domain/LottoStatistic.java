@@ -45,7 +45,7 @@ public class LottoStatistic {
                     if (lottoRankStatistic.containsKey(rank)) {
                         rankValue = lottoRankStatistic.get(rank);
                     }
-                    sb.append(rank.getRankString())
+                    sb.append(rank.getRankState())
                         .append(" (")
                         .append(rank.getWinningAmount())
                         .append(") - ")
