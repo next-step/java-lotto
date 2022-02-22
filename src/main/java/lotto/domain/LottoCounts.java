@@ -4,7 +4,7 @@ public class LottoCounts {
 
     private int lottoCounts;
 
-    public LottoCounts(int lottoCounts) {
+    public LottoCounts(final int lottoCounts) {
         this.lottoCounts = lottoCounts;
     }
 

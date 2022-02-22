@@ -28,7 +28,7 @@ public class RandomLottoGenerator implements LottoGenerator {
             Collectors.toList());
     }
 
-    private boolean lottoLengthValidation(List<Integer> line) {
+    private boolean lottoLengthValidation(final List<Integer> line) {
         return line.size() != COUNT;
     }
 

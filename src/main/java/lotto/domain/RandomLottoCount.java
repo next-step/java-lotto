@@ -5,7 +5,7 @@ public class RandomLottoCount {
     private static final int NOT_PURCHASE_RANDOM_LOTTO = 0;
     private int count;
 
-    public RandomLottoCount(LottoCounts lottoCounts, ManualCount manualCount) {
+    public RandomLottoCount(final LottoCounts lottoCounts,final ManualCount manualCount) {
         this.count = lottoCounts.getLottoCounts() - manualCount.getManualCount();
     }
 

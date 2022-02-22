@@ -34,7 +34,7 @@ public class LottoTickets {
     }
 
     private List<Lotto> makeManualLottoTickets(
-        List<List<LottoNumber>> manualLine) {
+        final List<List<LottoNumber>> manualLine) {
         final List<Lotto> lottoTickets = new ArrayList<>();
 
         for (List<LottoNumber> line : manualLine) {

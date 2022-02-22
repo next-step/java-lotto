@@ -4,7 +4,7 @@ public class ManualCount {
 
     private int manualCount;
 
-    public ManualCount(int manualCount) {
+    public ManualCount(final int manualCount) {
         this.manualCount = manualCount;
     }
 

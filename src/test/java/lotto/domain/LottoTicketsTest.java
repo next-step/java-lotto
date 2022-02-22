@@ -25,12 +25,14 @@ class LottoTicketsTest {
         this.winningLottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2),
             new LottoNumber(3),
             new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-        lottoNumbers.add(Arrays.asList(new LottoNumber(1),new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
+        lottoNumbers.add(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+            new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
     }
 
     @Test
     void 로또_장당_당첨번호_개수_일치여부_테스트() {
-        LottoTickets lottoTickets = new LottoTickets(new Price(1000), new ManualCount(1), lottoNumbers);
+        LottoTickets lottoTickets = new LottoTickets(new Price(1000), new ManualCount(1),
+            lottoNumbers);
         List<WinningResult> winningResults = lottoTickets.calculateWinningResult(
             new LottoMachine(firstLottoNumbers, new LottoNumber(8)));
         System.out.println(winningResults.size());
@@ -41,7 +43,8 @@ class LottoTicketsTest {
     void 로또_장당_보너스_개수_일치여부_테스트() {
         TestLottoGenerator testLottoGenerator = new TestLottoGenerator();
         testLottoGenerator.getLottoGeneratorNumbers();
-        LottoTickets lottoTickets = new LottoTickets(new Price(1000), new ManualCount(0), lottoNumbers);
+        LottoTickets lottoTickets = new LottoTickets(new Price(1000), new ManualCount(1),
+            lottoNumbers);
         testLottoGenerator.getLottoGeneratorNumbers();
         List<WinningResult> winningResults = lottoTickets.calculateWinningResult(
             new LottoMachine(secondLottoNumbers, new LottoNumber(6)));
