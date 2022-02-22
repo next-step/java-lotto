@@ -26,7 +26,7 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto handOperatedLotto(final List<LottoNumber> lottoNumbers) {
+    public static Lotto ManualLotto(final List<LottoNumber> lottoNumbers) {
         return new Lotto(lottoNumbers);
     }
 

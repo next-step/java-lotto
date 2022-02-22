@@ -19,12 +19,12 @@ public class LottoInputView {
         return Integer.parseInt(SCANNER.nextLine());
     }
 
-    public int inputHandOperatedLottoAmount() {
+    public int inputManualLottoAmount() {
         System.out.println(INPUT_LOTTO_AMOUNT_MESSAGE);
         return Integer.parseInt(SCANNER.nextLine());
     }
 
-    public String[] inputHandOperatedLottoNumbers() {
+    public String[] inputManualLottoNumbers() {
         final String input = SCANNER.nextLine();
         return splitWinningNumber(input);
     }

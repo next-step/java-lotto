@@ -3,7 +3,6 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,14 +31,14 @@ class LottoGameTest {
 
         final LottoNumber bonusBall = new LottoNumber(8);
 
-        final WinningLotto winningLotto = new WinningLotto(Lotto.handOperatedLotto(winningNumber), bonusBall);
+        final WinningLotto winningLotto = new WinningLotto(Lotto.ManualLotto(winningNumber), bonusBall);
 
         lottoGame = new LottoGame(lottos, winningLotto);
     }
 
     private Lotto createLotto(final List<Integer> numbers) {
         return
-            Lotto.handOperatedLotto(numbers.stream()
+            Lotto.ManualLotto(numbers.stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList()));
     }
