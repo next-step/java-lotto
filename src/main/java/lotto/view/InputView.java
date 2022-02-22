@@ -3,8 +3,9 @@ package lotto.view;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import lotto.domain.lotto.Number;
-import lotto.domain.lotto.Numbers;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoNumbers;
+import lotto.domain.lotto.PurchaseAction;
 
 public class InputView {
 
@@ -16,21 +17,21 @@ public class InputView {
 
     private InputView() {}
 
-    public static int getAmount() {
+    public static PurchaseAction getAmount() {
         System.out.println(MESSAGE_AMOUNT);
-        return scanner.nextInt();
+        return new PurchaseAction(scanner.nextInt());
     }
 
-    public static Numbers getComparisonNumbers() {
+    public static LottoNumbers getComparisonNumbers() {
         scanner.nextLine();
         System.out.println();
         System.out.println(MESSAGE_LAST_WEEK_NUMBERS);
 
-        return new Numbers(
+        return new LottoNumbers(
             Arrays.stream(scanner.nextLine().split(COMMA))
                 .map(String::trim)
                 .map(Integer::parseInt)
-                .map(Number::new)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList())
         );
     }
