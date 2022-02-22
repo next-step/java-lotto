@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
@@ -16,11 +17,12 @@ public class LottoController {
 
     public void start() {
         LottoPrice lottoPrice = new LottoPrice(InputView.readPrice());
+        List<String> manualLotto = InputView.readManualLottoNumber();
+        Lottos lottos = new Lottos(new LottoPrice(lottoPrice.getPrice()), manualLotto);
 
-        Lottos lottos = new Lottos(lottoPrice);
         OutputView.printLottoNumbers(lottos.getLottos());
 
-        OutputView.printLottoCount(lottos.getLottos().size());
+        OutputView.printLottoCount(lottos.getLottos().size() - manualLotto.size(), manualLotto.size());
 
         WinningLotto winningLotto = createWinningLotto();
         LottoStatistics lottoStatistics = new LottoStatistics(winningLotto.matchRank(lottos));
