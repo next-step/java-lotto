@@ -6,18 +6,15 @@ import java.util.stream.Collectors;
 
 public class LottoTickets {
 
-
-    private static final int NOT_PURCHASE_RANDOM_LOTTO = 0;
-
-    private final int randomCounts;
-    private final int manualCount;
+    private final RandomLottoCount randomCounts;
+    private final ManualCount manualCount;
     private final List<Lotto> lottoTickets = new ArrayList<>();
 
     public LottoTickets(final Price price, final ManualCount manualCount) {
         final LottoCounts lottoCounts = price.lottoCountsCalculator();
-        this.randomCounts = lottoCounts.getLottoCounts() - manualCount.getManualCount();
-        this.manualCount = manualCount.getManualCount();
-        if (randomCounts > NOT_PURCHASE_RANDOM_LOTTO) {
+        this.randomCounts = new RandomLottoCount(lottoCounts, manualCount);
+        this.manualCount = manualCount;
+        if (randomCounts.possiblePurchaseRandomLotto()) {
             this.lottoTickets.addAll(makeRandomLottoTickets(randomCounts));
         }
     }
@@ -28,12 +25,10 @@ public class LottoTickets {
         this.lottoTickets.addAll(makeManualLottoTickets(manualLine));
     }
 
-    private List<Lotto> makeRandomLottoTickets(final int lottoCount) {
+    private List<Lotto> makeRandomLottoTickets(final RandomLottoCount randomLottoCount) {
         final List<Lotto> randomLottos = new ArrayList<>();
-        if (lottoCount > 0) {
-            for (int i = 0; i < lottoCount; i++) {
-                randomLottos.add(new Lotto(new RandomLottoGenerator().getLottoGeneratorNumbers()));
-            }
+        for (int i = 0; i < randomLottoCount.getCount(); i++) {
+            randomLottos.add(new Lotto(new RandomLottoGenerator().getLottoGeneratorNumbers()));
         }
         return randomLottos;
     }
@@ -50,11 +45,11 @@ public class LottoTickets {
     }
 
     public int getRandomLottoCounts() {
-        return this.randomCounts;
+        return this.randomCounts.getCount();
     }
 
     public int getManualCount() {
-        return this.manualCount;
+        return this.manualCount.getManualCount();
     }
 
     public List<Lotto> getLottoTickets() {
