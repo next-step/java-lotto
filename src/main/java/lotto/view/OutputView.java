@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
-import lotto.domain.lotto.Number;
-import lotto.domain.lotto.Numbers;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoNumbers;
 import lotto.domain.lotto.Rank;
 
 public class OutputView {
@@ -29,11 +29,11 @@ public class OutputView {
         System.out.println(amount + MESSAGE_BOUGHT_TICKET);
     }
 
-    public static void printLottoTicket(final Numbers numbers) {
+    public static void printLottoTicket(final LottoNumbers numbers) {
         System.out.print(MESSAGE_TICKET_START);
         System.out.print(
             numbers.get().stream()
-                .map(Number::value)
+                .map(LottoNumber::value)
                 .map(String::valueOf)
                 .collect(Collectors.joining(SPLITTER))
         );

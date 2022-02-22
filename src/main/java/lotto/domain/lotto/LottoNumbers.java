@@ -3,25 +3,25 @@ package lotto.domain.lotto;
 import java.util.Collections;
 import java.util.List;
 
-public class Numbers {
+public class LottoNumbers {
 
-    private final List<Number> numbers;
+    private final List<LottoNumber> numbers;
 
-    public Numbers(final List<Number> numbers) {
+    public LottoNumbers(final List<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
-    public List<Number> get() {
+    public List<LottoNumber> get() {
         return Collections.unmodifiableList(numbers);
     }
 
-    public int countMatches(final List<Number> comparison) {
+    public int countMatches(final List<LottoNumber> comparison) {
         return (int) numbers.stream()
             .filter(comparison::contains)
             .count();
     }
 
-    public boolean hasBonus(final Number bonusNumber) {
+    public boolean hasBonus(final LottoNumber bonusNumber) {
         return numbers.contains(bonusNumber);
     }
 

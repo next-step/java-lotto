@@ -1,15 +1,16 @@
 package lotto.domain.lotto;
 
 import java.util.Objects;
-import lotto.domain.generator.LottoGenerator;
 
-public class Number {
+public class LottoNumber {
 
     private final int number;
 
+    private static final int START_NUMBER = 1;
+    private static final int END_NUMBER = 45;
     private static final String EXCEPTION_NUMBER_RANGE = "[ERROR] 숫자의 범위가 올바르지 않습니다.";
 
-    public Number(int number) {
+    public LottoNumber(int number) {
         validateNumber(number);
         this.number = number;
     }
@@ -19,7 +20,7 @@ public class Number {
     }
 
     private void validateNumber(int number) {
-        if (number < LottoGenerator.START_NUMBER || LottoGenerator.END_NUMBER < number) {
+        if (number < START_NUMBER || END_NUMBER < number) {
             throw new IllegalArgumentException(EXCEPTION_NUMBER_RANGE);
         }
     }
@@ -32,7 +33,7 @@ public class Number {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Number that = (Number) o;
+        LottoNumber that = (LottoNumber) o;
         return number == that.number;
     }
 

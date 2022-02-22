@@ -21,24 +21,24 @@ class AnswerTest {
     private static final int MATCHES = 1;
     private static final int BONUS_NUMBER = 11;
 
-    private Numbers numbers;
-    private List<Number> testNumberList;
+    private LottoNumbers numbers;
+    private List<LottoNumber> testNumberList;
 
     @BeforeEach
     void setUp() {
-        List<Number> baseNumberList = BASE_NUMBER_LIST.stream()
-            .map(Number::new)
+        List<LottoNumber> baseNumberList = BASE_NUMBER_LIST.stream()
+            .map(LottoNumber::new)
             .collect(Collectors.toList());
-        numbers = new Numbers(baseNumberList);
+        numbers = new LottoNumbers(baseNumberList);
 
         testNumberList = TEST_NUMBER_LIST.stream()
-            .map(Number::new)
+            .map(LottoNumber::new)
             .collect(Collectors.toList());
     }
 
     Tickets getTickets() {
         List<Ticket> tickets = new ArrayList<>();
-        tickets.add(new Ticket(new Numbers(testNumberList)));
+        tickets.add(new Ticket(new LottoNumbers(testNumberList)));
         return new Tickets(tickets);
     }
 

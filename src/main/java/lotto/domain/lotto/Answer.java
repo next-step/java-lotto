@@ -9,10 +9,10 @@ public class Answer {
     private static final String EXCEPTION_NUMBER_RANGE = "[ERROR] 숫자의 범위가 올바르지 않습니다.";
     private static final String EXCEPTION_NUMBER_DUPLICATED = "[ERROR] 당첨 번호와 보너스는 중복될 수 없습니다.";
 
-    private final Numbers answerNumbers;
+    private final LottoNumbers answerNumbers;
     private final int bonus;
 
-    public Answer(final Numbers comparisonNumbers, final int bonus) {
+    public Answer(final LottoNumbers comparisonNumbers, final int bonus) {
         validateNumbers(comparisonNumbers);
         validateBonus(comparisonNumbers, bonus);
 
@@ -31,14 +31,14 @@ public class Answer {
         return prizeMap;
     }
 
-    private void validateNumbers(final Numbers comparisonNumbers) {
+    private void validateNumbers(final LottoNumbers comparisonNumbers) {
         if (comparisonNumbers.size() != LottoGenerator.LOTTO_NUMBERS) {
             throw new IllegalArgumentException(EXCEPTION_NUMBER_RANGE);
         }
     }
 
-    private void validateBonus(Numbers comparisonNumbers, int bonus) {
-        if (comparisonNumbers.hasBonus(new Number(bonus))) {
+    private void validateBonus(LottoNumbers comparisonNumbers, int bonus) {
+        if (comparisonNumbers.hasBonus(new LottoNumber(bonus))) {
             throw new IllegalArgumentException(EXCEPTION_NUMBER_DUPLICATED);
         }
     }

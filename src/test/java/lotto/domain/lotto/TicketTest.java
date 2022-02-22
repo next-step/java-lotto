@@ -18,18 +18,18 @@ class TicketTest {
     private static final List<Integer> TEST_TICKET_NUMBERS = Arrays.asList(8, 21, 23, 41, 42, 45);
 
     private Ticket ticket;
-    private List<Number> testTicketNumbers;
+    private List<LottoNumber> testTicketNumbers;
 
     @BeforeEach
     void setUp() {
-        List<Number> baseTicketNumbers = BASE_TICKET_NUMBERS.stream()
-            .map(Number::new)
+        List<LottoNumber> baseTicketNumbers = BASE_TICKET_NUMBERS.stream()
+            .map(LottoNumber::new)
             .collect(Collectors.toList());
 
         testTicketNumbers = TEST_TICKET_NUMBERS.stream()
-            .map(Number::new)
+            .map(LottoNumber::new)
             .collect(Collectors.toList());
-        ticket = new Ticket(new Numbers(baseTicketNumbers));
+        ticket = new Ticket(new LottoNumbers(baseTicketNumbers));
     }
 
     @DisplayName("번호 6개에 대한 테스트")

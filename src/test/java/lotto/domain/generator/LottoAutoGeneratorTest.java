@@ -3,20 +3,20 @@ package lotto.domain.generator;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import lotto.domain.lotto.Number;
-import lotto.domain.lotto.Numbers;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoNumbers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoAutoGeneratorTest {
 
-    private List<Number> numberList;
+    private List<LottoNumber> numberList;
 
     @BeforeEach
     void setUp() {
         LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
-        Numbers numbers = lottoAutoGenerator.generateNumbers();
+        LottoNumbers numbers = lottoAutoGenerator.generateNumbers();
         numberList = numbers.get();
     }
 
