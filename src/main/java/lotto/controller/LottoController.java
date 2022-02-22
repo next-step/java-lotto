@@ -6,6 +6,7 @@ import java.util.Map;
 import lotto.domain.generator.LottoAutoGenerator;
 import lotto.domain.lotto.Answer;
 import lotto.domain.lotto.PrizeRatio;
+import lotto.domain.lotto.PurchaseAction;
 import lotto.domain.lotto.Rank;
 import lotto.domain.lotto.Ticket;
 import lotto.domain.lotto.Tickets;
@@ -14,10 +15,10 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
-    private static final int PRICE_PER_ONE_TICKET = 1000;
-
     private static LottoController lottoController = null;
-    private LottoController() {}
+
+    private LottoController() {
+    }
 
     public static LottoController getInstance() {
         if (lottoController == null) {
@@ -27,23 +28,13 @@ public class LottoController {
     }
 
     public void run() {
-        int amount = InputView.getAmount();
-        int count = amount / PRICE_PER_ONE_TICKET;
+        PurchaseAction purchaseAction = InputView.getAmount();
 
-        Tickets tickets = purchase(count);
+        Tickets tickets = purchaseAction.purchase();
+        OutputView.printBuyingTickets(purchaseAction.getCount());
+
         showTickets(tickets);
-        showResult(tickets, amount);
-    }
-
-    private Tickets purchase(final int count) {
-        List<Ticket> tickets = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            Ticket ticket = new Ticket(new LottoAutoGenerator().generateNumbers());
-            tickets.add(ticket);
-        }
-        OutputView.printBuyingTickets(count);
-
-        return new Tickets(tickets);
+        showResult(tickets, purchaseAction.getAmount());
     }
 
     private void showTickets(final Tickets tickets) {
