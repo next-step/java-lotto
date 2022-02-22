@@ -30,17 +30,14 @@ public class LottoController {
     public void run() {
         final Money money = new Money(lottoInputView.inputPrice());
 
-        final int handOperatedLottoAmount = lottoInputView.inputHandOperatedLottoAmount();
+        final int ManualLottoAmount = lottoInputView.inputManualLottoAmount();
 
         final LottoShop lottoShop = LottoShop.getInstance();
-        final int autoLottoAmount = lottoShop.countPossibleLottoAmount(money) - handOperatedLottoAmount;
+        final int autoLottoAmount = lottoShop.countPossibleLottoAmount(money) - ManualLottoAmount;
 
-        final List<Lotto> lottos = new ArrayList<>();
-        final Lottos allLotto = new Lottos(lottos);
+        final Lottos allLotto = createLottos(ManualLottoAmount, lottoShop, autoLottoAmount);
 
-        purchaseAllLottos(handOperatedLottoAmount, lottoShop, autoLottoAmount, allLotto);
-
-        lottoResultView.printLottos(allLotto, autoLottoAmount, handOperatedLottoAmount);
+        lottoResultView.printLottos(allLotto, autoLottoAmount, ManualLottoAmount);
 
         final WinningLotto winningLotto = createWinningLotto();
         final LottoGame lottoGame = new LottoGame(allLotto, winningLotto);
@@ -48,14 +45,23 @@ public class LottoController {
         lottoResultView.finishGame(lottoResults, lottoResults.calculateYield(money));
     }
 
-    private void purchaseAllLottos(final int handOperatedLottoAmount, final LottoShop lottoShop,
-        final int autoLottoAmount, final Lottos allLotto) {
+    private Lottos createLottos(final int ManualLottoAmount, final LottoShop lottoShop,
+        final int autoLottoAmount) {
+        final List<Lotto> lottos = new ArrayList<>();
+        final Lottos allLotto = new Lottos(lottos);
+
         lottoInputView.printMessageInputHandOperatedLottoNumbers();
-        for (int amount = 0; amount < handOperatedLottoAmount; amount++) {
-            lottoShop.buyHandOperatedLotto(allLotto,
-                lottoInputView.inputHandOperatedLottoNumbers());
+        for (int amount = 0; amount < ManualLottoAmount; amount++) {
+            allLotto.storeLotto(lottoShop.buyManualLotto(lottoInputView.inputManualLottoNumbers()));
+//            lottos.add(lottoShop.buyManualLotto(lottoInputView.inputManualLottoNumbers()));
         }
-        lottoShop.buyAutoLotto(allLotto, autoLottoAmount);
+
+        for (int amount = 0; amount < autoLottoAmount; amount++) {
+            allLotto.storeLotto(lottoShop.buyAutoLotto());
+//            lottos.add(lottoShop.buyAutoLotto());
+        }
+
+        return allLotto;
     }
 
     private WinningLotto createWinningLotto() {

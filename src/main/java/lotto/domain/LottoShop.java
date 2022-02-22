@@ -28,18 +28,15 @@ public class LottoShop {
         }
     }
 
-    public void buyHandOperatedLotto(final Lottos lottos, final String[] lottoNumbers) {
-        lottos.storeLotto(
-            Lotto.handOperatedLotto(Arrays.stream(lottoNumbers)
+    public Lotto buyManualLotto(final String[] lottoNumbers) {
+            return Lotto.ManualLotto(Arrays.stream(lottoNumbers)
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList())));
+                .collect(Collectors.toList()));
     }
 
-    public void buyAutoLotto(final Lottos lottos, final int lottoAmount) {
-        for (int amount = ZERO; amount < lottoAmount; amount++) {
-            lottos.storeLotto(Lotto.autoLotto());
-        }
+    public Lotto buyAutoLotto() {
+        return Lotto.autoLotto();
     }
 
 }
