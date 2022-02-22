@@ -23,7 +23,7 @@ public class Lotto {
 
     public int matchWinningLotto(WinningLotto winningLotto) {
         return (int) lotto.stream()
-            .filter(lottoNumber -> winningLotto.hasContainNumber(lottoNumber))
+            .filter(winningLotto::hasContainNumber)
             .count();
     }
 
