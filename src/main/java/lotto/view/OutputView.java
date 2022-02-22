@@ -16,6 +16,8 @@ public class OutputView {
     private static final String REQUEST_WINNING_NUMBER_BEFORE = "\n지난 주 당첨 번호를 입력해주세요.(ex 1, 2, 3, 4, 5)";
     private static final String REQUEST_BONUS_BALL_NUMBER = "보너스 볼을 입력해주세요.";
     private static final String WINNING_STATS = "\n당첨 통계\n------------";
+    private static final String REQUEST_MANUAL_LOTTO_NUMBER = "수동으로 구매할 번호를 입력해 주세요";
+    private static final String REQUEST_MANUAL_LOTTO_NUMBER_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final int CASE_BONUS_BALL_MONEY = 30000000;
 
     private OutputView() {
@@ -29,8 +31,8 @@ public class OutputView {
         System.out.println(REQUEST_LOTTO_PRICE);
     }
 
-    public static void printLottoCount(int count) {
-        System.out.println(count + SYSTEM_LOTTO_COUNT);
+    public static void printLottoCount(int autoCount, int manualCount) {
+        System.out.println("자동" + autoCount + "개 수동" + manualCount +  SYSTEM_LOTTO_COUNT);
     }
 
     public static void printWinningNumberBefore() {
@@ -84,5 +86,13 @@ public class OutputView {
         for (LottoNumber lottoNumber : lottoList) {
             System.out.printf(lottoNumber.getLottoNumber() + " ");
         }
+    }
+
+    public static void printManualLottoNumber() {
+        System.out.println(REQUEST_MANUAL_LOTTO_NUMBER);
+    }
+
+    public static void printManualLottoNumberCount() {
+        System.out.println(REQUEST_MANUAL_LOTTO_NUMBER_COUNT);
     }
 }
