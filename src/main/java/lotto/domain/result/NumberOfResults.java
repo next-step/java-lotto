@@ -2,10 +2,11 @@ package lotto.domain.result;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class NumberOfResults {
 
-    private final HashMap<LottoResult, Integer> numberOfResults = new HashMap<>();
+    private final Map<LottoResult, Integer> numberOfResults = new HashMap<>();
 
     public NumberOfResults(List<LottoResult> lottoResults) {
         applyNumberOfResults(lottoResults);
@@ -22,7 +23,7 @@ public class NumberOfResults {
                 numberOfResults.getOrDefault(lottoResult, 0) + 1));
     }
 
-    public HashMap<LottoResult, Integer> getRawNumberOfResults() {
+    public Map<LottoResult, Integer> getNumberOfResults() {
         return new HashMap<>(numberOfResults);
     }
 }

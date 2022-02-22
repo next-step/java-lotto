@@ -5,6 +5,7 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoMachine;
 import lotto.domain.lotto.RandomLottoCreator;
 import lotto.domain.result.LottoJudgement;
+import lotto.domain.result.NumberOfResults;
 import lotto.domain.result.WinningStatistics;
 import lotto.domain.user.Wallet;
 import lotto.domain.winning.WinningNumbers;
@@ -23,8 +24,9 @@ public class LottoApplication {
 
         WinningNumbers winningNumbers = InputView.getWinningNumbers();
         LottoJudgement judgement = new LottoJudgement(lottos, winningNumbers);
+        NumberOfResults numberOfResults = new NumberOfResults(judgement.getLottoResults());
 
-        WinningStatistics winningStatistics = new WinningStatistics(judgement.getLottoResults(), wallet.getMoney());
-        ResultView.printResult(winningStatistics);
+        WinningStatistics winningStatistics = new WinningStatistics(numberOfResults.getNumberOfResults(), wallet.getMoney());
+        ResultView.printResult(numberOfResults.getNumberOfResults(), winningStatistics.getProfitRate());
     }
 }

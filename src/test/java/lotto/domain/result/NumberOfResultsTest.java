@@ -1,7 +1,6 @@
 package lotto.domain.result;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +17,7 @@ class NumberOfResultsTest {
         );
 
         NumberOfResults numberOfResults = new NumberOfResults(lottoResults);
-        boolean hasNoReward = numberOfResults.getRawNumberOfResults().keySet().stream()
+        boolean hasNoReward = numberOfResults.getNumberOfResults().keySet().stream()
             .anyMatch(lottoResult -> lottoResult == LottoResult.NO_REWARD);
 
         assertThat(hasNoReward).isFalse();

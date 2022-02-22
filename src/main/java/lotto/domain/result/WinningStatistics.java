@@ -1,23 +1,20 @@
 package lotto.domain.result;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 public class WinningStatistics {
 
-    private final NumberOfResults numberOfResults;
-    private final String profitRate;
+    private final Double profitRate;
 
-    public WinningStatistics(List<LottoResult> lottoResults, int money) {
-        this.numberOfResults = new NumberOfResults(lottoResults);
-        this.profitRate = applyProfitRate(numberOfResults.getRawNumberOfResults(), money);
+    public WinningStatistics(Map<LottoResult, Integer> numberOfResults, int money) {
+        this.profitRate = applyProfitRate(numberOfResults, money);
     }
 
-    private static String format(double totalWinning) {
-        return String.format("%.2f", totalWinning);
+    private static Double format(double profitRate) {
+        return Math.floor(profitRate * 100) / 100.0;
     }
 
-    public String applyProfitRate(HashMap<LottoResult, Integer> result, int purchasePrice) {
+    public Double applyProfitRate(Map<LottoResult, Integer> result, int money) {
         double totalWinning = 0;
 
         for (LottoResult lottoResult : result.keySet()) {
@@ -25,14 +22,10 @@ public class WinningStatistics {
             totalWinning += value * lottoResult.getReward();
         }
 
-        return format(totalWinning / purchasePrice);
+        return format(totalWinning / money);
     }
 
-    public NumberOfResults getNumberOfResults() {
-        return numberOfResults;
-    }
-
-    public String getProfitRate() {
+    public Double getProfitRate() {
         return profitRate;
     }
 }
