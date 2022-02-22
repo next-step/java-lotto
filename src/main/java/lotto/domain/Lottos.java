@@ -10,7 +10,7 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(LottoPrice lottoPrice, List<String> manualLotto) {
-        this.lottos = generatorLottos(lottoPrice.getLottoCount() - manualLotto.size());
+        this.lottos = generatorLottos(lottoPrice.calculateLottoNumber() - manualLotto.size());
         addManualLotto(manualLotto);
     }
 

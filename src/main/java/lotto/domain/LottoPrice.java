@@ -20,7 +20,7 @@ public class LottoPrice {
         }
     }
 
-    public int getLottoCount() {
+    public int calculateLottoNumber() {
         return price / LOTTO_PRICE;
     }
 
