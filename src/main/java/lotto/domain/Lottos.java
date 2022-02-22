@@ -10,7 +10,7 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(LottoPrice lottoPrice, List<String> manualLotto) {
-        this.lottos = generatorLottos(lottoPrice.calculateLottoNumber() - manualLotto.size());
+        this.lottos = generateLottos(lottoPrice.calculateLottoNumber() - manualLotto.size());
         addManualLotto(manualLotto);
     }
 
@@ -20,13 +20,11 @@ public class Lottos {
             .collect(Collectors.toSet()))));
     }
 
-    private List<Lotto> generatorLottos(int lottoCount) {
+    private List<Lotto> generateLottos(int lottoCount) {
         List<Lotto> lottoLists = new ArrayList<>();
-
         for (int i = 0; i < lottoCount; i++) {
             lottoLists.add(LottoNumberGenerator.generate());
         }
-
         return lottoLists;
     }
 

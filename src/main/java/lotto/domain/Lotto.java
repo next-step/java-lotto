@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Collections;
+import java.util.Objects;
 import java.util.Set;
 
 public class Lotto {
@@ -31,4 +32,20 @@ public class Lotto {
         return Collections.unmodifiableSet(lottoNumbers);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
+    }
 }
