@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoStatistics;
@@ -9,7 +8,6 @@ import lotto.domain.LottoTicketGenerator;
 import lotto.domain.ManualLottoCount;
 import lotto.domain.Price;
 import lotto.domain.WinningNumbers;
-import lotto.util.Util;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 import lotto.view.ResultView;
@@ -52,8 +50,10 @@ public class LottoMachine {
     }
 
     public LottoStatistics calculateWinningResult(LottoTicket lottoTicket) {
-        final WinningNumbers winningNumbers = WinningNumbers.from(Lotto.from(getWinningNumber()),
-            getBonusBall());
+        final WinningNumbers winningNumbers = WinningNumbers.from(
+            getWinningNumber(),
+            getBonusBall()
+        );
 
         return LottoStatistics.of(winningNumbers, lottoTicket);
     }
@@ -64,31 +64,31 @@ public class LottoMachine {
 
     private int purchaseAmount() {
         OutputView.printRequestLottoPrice();
-        return InputView.readInt();
+        return InputView.purchasingPrice();
     }
 
     private LottoTicket purchaseManualLotto() {
         LottoTicket lottoTicket = LottoTicket.create();
 
         OutputView.printRequestManualLottoCount();
-        ManualLottoCount manualLottoCount = ManualLottoCount.from(InputView.readInt());
+        ManualLottoCount manualLottoCount = ManualLottoCount.from(InputView.manualLottoGameCount());
 
         OutputView.printRequestManualLottoNumbers();
-        for (int i = 0; i < manualLottoCount.getCount(); i++) {
-            Lotto manualLotto = Lotto.from(Util.stringToIntegerList(InputView.readWinningNumber()));
-            lottoTicket.append(manualLotto, LottoTicketGenerator.LOTTO_PRICE);
-        }
+        lottoTicket.concat(
+            InputView.manualLottoGameNumbers(manualLottoCount.getCount()),
+            LottoTicketGenerator.LOTTO_PRICE
+        );
 
         return lottoTicket;
     }
 
-    private List<LottoNumber> getWinningNumber() {
+    private Lotto getWinningNumber() {
         OutputView.printWinningNumberBefore();
-        return Util.stringToIntegerList(InputView.readWinningNumber());
+        return InputView.winningNumbers();
     }
 
     private LottoNumber getBonusBall() {
         OutputView.printBonusBallNumber();
-        return LottoNumber.from(InputView.readBonusNumber());
+        return LottoNumber.from(InputView.bonusNumber());
     }
 }
