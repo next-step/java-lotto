@@ -18,13 +18,13 @@ public class WinningLotto {
     }
 
     private void validate(Lotto winningNumber, LottoNumber bonusNumber) {
-        if (winningNumber.getLotto().contains(bonusNumber)) {
+        if (winningNumber.getLottoNumbers().contains(bonusNumber)) {
             throw new IllegalArgumentException(ERROR_DISTINCT);
         }
     }
 
     public boolean hasContainNumber(LottoNumber lottoNumber) {
-        return winningLotto.getLotto().contains(lottoNumber);
+        return winningLotto.getLottoNumbers().contains(lottoNumber);
     }
 
     public List<Rank> matchRank(Lottos lottos) {
@@ -57,7 +57,7 @@ public class WinningLotto {
     }
 
     private boolean matchBonusNumber(final int matchOfNumber, final Lotto lottoNumberList) {
-        return matchOfNumber == MATCH_FIVE && lottoNumberList.getLotto()
+        return matchOfNumber == MATCH_FIVE && lottoNumberList.getLottoNumbers()
             .contains(bonusNumber);
     }
 

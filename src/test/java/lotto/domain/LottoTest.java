@@ -14,7 +14,7 @@ class LottoTest {
     @Test
     void checkValidSize() {
         Lotto lotto = new Lotto(new HashSet(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        assertThat(lotto.getLotto().size()).isEqualTo(6);
+        assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);
     }
 
     @DisplayName(value = "로또 번호가 6개가 아니면 IllegalArgumentException이 발생한다.")
