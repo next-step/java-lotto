@@ -13,7 +13,7 @@ public class LottoMachine {
     }
 
     public boolean isEqualBonusNumber(final LottoNumber lottoNumber) {
-        return bonusNumber.equals(lottoNumber.getLottoNumber());
+        return bonusNumber.equals(lottoNumber);
     }
 
     public boolean isContain(final LottoNumber lottoNumber) {
