@@ -40,7 +40,7 @@ class WinningResultTest {
                 convertToLotto(third2)
         );
 
-        Lottos testLottos = Lottos.withListLotto(lottos);
+        Lottos testLottos = new Lottos(lottos);
         WinningResult winningResult = WinningResult.of(testLottos, testWinningLotto);
 
         Map<Rank, Integer> actual = winningResult.getResult();
@@ -64,7 +64,7 @@ class WinningResultTest {
                 convertToLotto(none)
         );
 
-        Lottos testLottos = Lottos.withListLotto(lottos);
+        Lottos testLottos = new Lottos(lottos);
 
         WinningResult winningResult = WinningResult.of(testLottos, testWinningLotto);
 
