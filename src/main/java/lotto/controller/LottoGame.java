@@ -6,7 +6,7 @@ import java.util.Map;
 import lotto.model.AutoLottoGenerator;
 import lotto.model.Count;
 import lotto.model.Lotto;
-import lotto.model.LottoDto;
+import lotto.dto.LottoDto;
 import lotto.model.LottoNumber;
 import lotto.model.ManualLottoGenerator;
 import lotto.model.MatchInfo;
