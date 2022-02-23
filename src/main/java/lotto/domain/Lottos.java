@@ -12,7 +12,7 @@ public class Lottos {
     }
 
     public List<Lotto> get() {
-        return lottos;
+        return new ArrayList<>(lottos);
     }
 
     public List<String> getStringLottos() {
