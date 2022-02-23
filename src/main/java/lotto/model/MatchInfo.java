@@ -2,8 +2,8 @@ package lotto.model;
 
 public class MatchInfo {
 
-    private int matchCount;
-    private boolean bonusMatch;
+    private final int matchCount;
+    private final boolean bonusMatch;
 
     public MatchInfo(int matchCount, boolean bonusMatch) {
         this.matchCount = matchCount;
