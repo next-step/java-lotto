@@ -1,25 +1,23 @@
 package lotto.model;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class Lotto {
 
     private static final int MAX_LOTTO_LENGTH = 6;
     private static final int FIVE_MATCHING = 5;
     private static final String LOTTO_NUMBER_VALIDATION_MESSAGE = "로또는 6개의 숫자입니다";
+    private static final String DUPLICATE_MANUAL_LOTTO_MESSAGE = "중복된 로또 번호입니다";
 
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validateLotto(lottoNumbers);
-        Collections.sort(lottoNumbers);
+        checkDuplicateLottoNumber(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
-    }
-
-    public Lotto(List<LottoNumber> lottoNumbers, int matchCount, boolean bonusMatch) {
-        this(lottoNumbers);
     }
 
     private void validateLotto(List<LottoNumber> lottoNumbers) {
@@ -27,6 +25,14 @@ public class Lotto {
             throw new IllegalArgumentException(LOTTO_NUMBER_VALIDATION_MESSAGE);
         }
     }
+
+    private void checkDuplicateLottoNumber(List<LottoNumber> manualLottoNumbers) {
+        Set<LottoNumber> checkSet = new HashSet<>(manualLottoNumbers);
+        if (checkSet.size() < manualLottoNumbers.size()) {
+            throw new IllegalArgumentException(DUPLICATE_MANUAL_LOTTO_MESSAGE);
+        }
+    }
+
 
     public MatchInfo matchLottoWithWinningNumber(WinningNumber winningNumber) {
         int matchCount;
