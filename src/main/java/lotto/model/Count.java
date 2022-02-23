@@ -26,10 +26,6 @@ public class Count {
         }
     }
 
-    public int getCount() {
-        return autoLottoCount + manualLottoCount;
-    }
-
     public int getAutoLottoCount() {
         return autoLottoCount;
     }
