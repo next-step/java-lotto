@@ -7,18 +7,19 @@ import lotto.domain.Rank;
 
 public class OutputView {
 
-    private static final String PURCHASE_AMOUNT_MANAGER_LOG = "%d개를 구매했습니다.";
+    private static final String PURCHASE_AMOUNT_MANAGER_LOG = "수동으로 %d장, 자동으로 %d장을 구매했습니다.";
     private static final String WINNING_RESULT_HEAD_LOG = "\n당첨통계\n---------";
     private static final String MATCH_COUNT_LOG = "%d개 일치 (%d원)- %d개";
     private static final String MATCH_BONUS_LOG = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
     private static final String PROFIT_RATE_LOG = "총 수익률은 %.1f입니다.";
 
-    public static void printPurchaseInfo(int ticketCount, List<String> lottos) {
-        printPurchaseAmount(ticketCount);
+    public static void printPurchaseInfo(int manualCount, int autoCount, List<String> lottos) {
+        System.out.println();
+        printPurchaseAmount(manualCount, autoCount);
         printPurchaseTicket(lottos);
     }
-    private static void printPurchaseAmount(int ticketCount) {
-        System.out.printf((PURCHASE_AMOUNT_MANAGER_LOG) + "%n", ticketCount);
+    private static void printPurchaseAmount(int manualCount, int autoCount) {
+        System.out.printf((PURCHASE_AMOUNT_MANAGER_LOG) + "%n", manualCount, autoCount);
     }
 
     private static void printPurchaseTicket(List<String> lottos) {
