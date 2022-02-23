@@ -24,7 +24,7 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ## 기능 목록
-- [x] 값을 사용자로부터 입력받을 수 있다. - LottoInput
+-  [x] 값을 사용자로부터 입력받을 수 있다. - LottoInput
   - [x] 구입금액
   - [x] 당첨번호
   - [x] 보너스볼
