@@ -3,10 +3,13 @@ package lotto.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import lotto.model.AutoLottoRules;
+import lotto.model.AutoLottoGenerator;
 import lotto.model.Count;
 import lotto.model.Lotto;
-import lotto.model.ManualLotto;
+import lotto.model.LottoDto;
+import lotto.model.LottoNumber;
+import lotto.model.ManualLottoGenerator;
+import lotto.model.MatchInfo;
 import lotto.model.Price;
 import lotto.model.Rank;
 import lotto.model.Ranks;
@@ -18,51 +21,67 @@ import lotto.view.OutputView;
 
 public class LottoGame {
 
-    private static final LottoGame lottoAuto = new LottoGame();
+    private static final LottoGame lottoGame = new LottoGame();
 
     private LottoGame() {
     }
 
     public static LottoGame getInstance() {
-        return lottoAuto;
+        return lottoGame;
     }
 
     public void play() {
         Price price = new Price(InputView.inputPrice());
         Count count = new Count(price.calculateTotalCount(), InputView.inputManualLottoCount());
-        User user = saveAllLottos(InputView.inputManualLottoNumber(count.getManualLottoCount()),
-            count);
-        OutputView.printLottos(count, user.getLottos());
+        List<LottoDto> manualLottoNumbers = InputView.inputManualLottoNumber(
+            count.getManualLottoCount());
+        User user = saveAllLottos(manualLottoNumbers, count);
+        printLottos(count, user);
         WinningNumber winningNumber = new WinningNumber(InputView.inputWinningNumbers(),
             InputView.inputBonusBall());
-        Ranks ranks = new Ranks();
-        Map<Rank, Integer> rankMap = ranks.updateRanks(
-            user.findEachLottoMatchingNumber(winningNumber));
-        Statistics statistics = new Statistics(count.getCount(), ranks.calculateTotalPrize());
-        OutputView.printStatistics(rankMap, statistics.calculateBenefits());
+        List<MatchInfo> matchInfos = user.findEachLottoMatchingNumber(winningNumber);
+        Map<Rank, Integer> totalRanks = updateRankByMatchInfo(matchInfos);
+        printStatistics(count, totalRanks);
     }
 
-    private User saveAllLottos(List<ManualLotto> manualLottoNumberInput, Count count) {
+    private void printLottos(Count count, User user) {
+        OutputView.printLottos(count, user.getLottos());
+    }
+
+    private void printStatistics(Count count, Map<Rank, Integer> totalRanks) {
+        Statistics statistics = new Statistics(count, totalRanks);
+        OutputView.printStatistics(totalRanks, statistics.calculateBenefits());
+    }
+
+    private Map<Rank, Integer> updateRankByMatchInfo(List<MatchInfo> matchInfos) {
+        Ranks ranks = new Ranks();
+        return ranks.updateRanks(matchInfos);
+    }
+
+    private User saveAllLottos(List<LottoDto> manualLottoNumbers, Count count) {
         List<Lotto> lottos = new ArrayList<>();
-        lottos.addAll(createManualLottos(manualLottoNumberInput));
+        lottos.addAll(createManualLottos(manualLottoNumbers));
         lottos.addAll(creatAutoLottos(count));
         return new User(lottos);
     }
 
     private List<Lotto> creatAutoLottos(Count count) {
-        AutoLottoRules autoLottoRules = new AutoLottoRules();
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count.getAutoLottoCount(); i++) {
-            lottos.add(new Lotto(autoLottoRules.makeLottoNumbers()));
+            List<LottoNumber> autoLotto = new AutoLottoGenerator().generateLotto();
+            lottos.add(new Lotto(autoLotto));
         }
         return lottos;
     }
 
-    private List<Lotto> createManualLottos(List<ManualLotto> manualLottoNumberInput) {
+    private List<Lotto> createManualLottos(List<LottoDto> manualLottoNumbers) {
         List<Lotto> manualLottos = new ArrayList<>();
-        for (ManualLotto manualLotto : manualLottoNumberInput) {
-            manualLottos = manualLotto.addManualLotto(manualLottos);
+        for (LottoDto lottoDto : manualLottoNumbers) {
+            List<LottoNumber> manualLotto = new ManualLottoGenerator(
+                lottoDto.getManualLottoNumbers()).generateLotto();
+            manualLottos.add(new Lotto(manualLotto));
         }
         return manualLottos;
     }
+
 }
