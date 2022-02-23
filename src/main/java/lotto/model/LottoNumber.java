@@ -2,7 +2,7 @@ package lotto.model;
 
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber>{
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final String NUMBER_CONDITION_MESSAGE = "로또번호는 1부터 45사이입니다";
     private final static int START_NUM = 1;
@@ -44,6 +44,6 @@ public class LottoNumber implements Comparable<LottoNumber>{
 
     @Override
     public int compareTo(LottoNumber o) {
-        return getNumber()-o.getNumber();
+        return getNumber() - o.getNumber();
     }
 }

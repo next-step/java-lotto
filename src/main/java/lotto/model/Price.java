@@ -18,7 +18,7 @@ public class Price {
         }
     }
 
-    public int calculateTotalCount(){
-        return price/LOTTO_PRICE;
+    public int calculateTotalCount() {
+        return price / LOTTO_PRICE;
     }
 }
