@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -50,6 +51,6 @@ public class Numbers {
     }
 
     public List<Number> getValues() {
-        return Collections.unmodifiableList(values);
+        return new ArrayList<>(values);
     }
 }
