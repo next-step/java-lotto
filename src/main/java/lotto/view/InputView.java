@@ -5,8 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import lotto.model.LottoNumber;
-import lotto.model.ManualLotto;
+import lotto.model.LottoDto;
 
 public class InputView {
 
@@ -16,7 +15,8 @@ public class InputView {
     private static final String BONUS_BALL_INPUT_GUIDE_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String THE_NUMBER_OF_MANUAL_LOTTO_INPUT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String MANUAL_LOTTO_NUMBER_INPUT_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
-    private static final int ZERO =0;
+    private static final int ZERO = 0;
+    private static final String REGEX = "[ ,]";
 
     public static int inputPrice() {
         System.out.println(PRICE_INPUT_GUIDE_MESSAGE);
@@ -28,15 +28,13 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public static List<ManualLotto> inputManualLottoNumber(int amountOfManualLotto) {
-        List<ManualLotto> manualLottos = new ArrayList<>();
+    public static List<LottoDto> inputManualLottoNumber(int manualLottoCount) {
+        List<LottoDto> manualLottos = new ArrayList<>();
         System.out.println(MANUAL_LOTTO_NUMBER_INPUT_MESSAGE);
-        for (int i = ZERO; i < amountOfManualLotto; i++) {
-            String manualLottoNumberInput = SCANNER.next();
-            String[] manualLottoNumbers = manualLottoNumberInput.split("[ ,]");
-            List<Integer> list = Arrays.stream(manualLottoNumbers).map(Integer::parseInt).collect(
-                Collectors.toList());
-            manualLottos.add(new ManualLotto(list.stream().map(LottoNumber::new).collect(Collectors.toList())));
+        for (int i = ZERO; i < manualLottoCount; i++) {
+            String[] lottoNumbersInput = SCANNER.next().split(REGEX);
+            List<Integer> manualLottoNumbers = parseInputNumberToInt(lottoNumbersInput);
+            manualLottos.add(new LottoDto(manualLottoNumbers));
         }
         return manualLottos;
     }
@@ -44,14 +42,16 @@ public class InputView {
     public static List<Integer> inputWinningNumbers() {
         System.out.println(WINNING__NUMBER_INPUT_GUIDE_MESSAGE);
         String inputWinningNumbers = SCANNER.next();
-        String [] winningNumbers = inputWinningNumbers.split("[ ,]");
-        return Arrays.stream(winningNumbers).map(Integer::parseInt).collect(
-            Collectors.toList());
+        String[] winningNumbers = inputWinningNumbers.split(REGEX);
+        return parseInputNumberToInt(winningNumbers);
     }
 
-    public static LottoNumber inputBonusBall() {
+    public static int inputBonusBall() {
         System.out.println(BONUS_BALL_INPUT_GUIDE_MESSAGE);
-        int inputBonusBall = SCANNER.nextInt();
-        return new LottoNumber(inputBonusBall);
+        return SCANNER.nextInt();
+    }
+
+    private static List<Integer> parseInputNumberToInt(String[] inputNumbers) {
+        return Arrays.stream(inputNumbers).map(Integer::parseInt).collect(Collectors.toList());
     }
 }
