@@ -4,12 +4,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.Map;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class RanksTest {
 
+    @DisplayName("랭킹을 업데이트 한다")
     @Test
-    void 랭킹을_업데이트_한다() {
+    void updateRanks() {
         Ranks ranks = new Ranks();
         MatchInfo matchInfo1 = new MatchInfo(5, true);
         MatchInfo matchInfo2 = new MatchInfo(3, false);

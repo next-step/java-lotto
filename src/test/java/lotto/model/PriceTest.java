@@ -15,8 +15,9 @@ class PriceTest {
             () -> new Price(500));
     }
 
+    @DisplayName("금액에 따라 구입가능한 모든 로또개수를 계산한다")
     @Test
-    void 금액에_따라_구입가능한_모든_로또개수를_계산한다() {
+    void calculateTotalCount() {
         Price price = new Price(5000);
         int totalLottoCount = price.calculateTotalCount();
         assertThat(totalLottoCount).isEqualTo(5);
