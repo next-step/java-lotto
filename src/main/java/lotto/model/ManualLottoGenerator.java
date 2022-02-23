@@ -13,7 +13,7 @@ public class ManualLottoGenerator implements LottoGenerator {
 
     @Override
     public List<LottoNumber> generateLotto() {
-        return lottoNumbers.stream().map(LottoNumber::new).collect(
+        return lottoNumbers.stream().map(LottoNumber::valueOf).collect(
             Collectors.toList());
     }
 }

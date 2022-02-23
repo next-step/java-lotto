@@ -13,9 +13,9 @@ public class WinningNumber {
 
     public WinningNumber(List<Integer> winningNumbers, int bonusBall) {
         this.winningNumbers = new Lotto(
-            winningNumbers.stream().map(LottoNumber::new).collect(Collectors.toList()));
+            winningNumbers.stream().map(LottoNumber::valueOf).collect(Collectors.toList()));
+        this.bonusBall = LottoNumber.valueOf(bonusBall);
         isBonusBallInWinningNumbers();
-        this.bonusBall = new LottoNumber(bonusBall);
     }
 
     private void isBonusBallInWinningNumbers() {
