@@ -1,19 +1,16 @@
 package lotto.controller;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGenerator;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
+import lotto.domain.Price;
 import lotto.domain.Rankings;
 import lotto.domain.WinningLotto;
 import lotto.view.LottoInput;
 import lotto.view.LottoOutput;
 
 public class LottoController {
-
-    private static final int LOTTO_PRICE = 1000;
 
     private final LottoGenerator lottoGenerator;
 
@@ -22,25 +19,26 @@ public class LottoController {
     }
 
     public void run() {
-        int buyPrice = LottoInput.inputPrice();
-        int buySum = countBuySum(buyPrice);
+        Price buyPrice = new Price(LottoInput.inputPrice());
+        int manualBuyCount = LottoInput.inputManualBuyCount();
 
-        LottoOutput.printBuySum(buySum);
+        Lottos lottos = createLottos(buyPrice, manualBuyCount);
 
-        Lottos userLottoNumbers = lottoGenerator.generateLottos(buySum);
-
-        LottoOutput.printLottoNumber(userLottoNumbers);
+        LottoOutput.printBuySum(buyPrice.calculateAutoBuyCount(manualBuyCount), manualBuyCount);
+        LottoOutput.printLottoNumber(lottos);
 
         WinningLotto winningLotto = createWinningLotto();
 
-        Rankings rankings = Rankings.of(userLottoNumbers, winningLotto);
+        Rankings rankings = Rankings.of(lottos, winningLotto);
 
         LottoOutput.printLottoResult(rankings, buyPrice);
     }
 
-    private int countBuySum(int buyPrice) {
-        return BigDecimal.valueOf(buyPrice)
-            .divide(BigDecimal.valueOf(LOTTO_PRICE), RoundingMode.DOWN).intValue();
+    private Lottos createLottos(Price buyPrice, int manualBuyCount){
+        Lottos lottos = LottoInput.inputManualLottos(manualBuyCount);
+        int autoBuyCount = buyPrice.calculateAutoBuyCount(manualBuyCount);
+        lottos.add(lottoGenerator.generateLottos(autoBuyCount));
+        return lottos;
     }
 
     private WinningLotto createWinningLotto() {

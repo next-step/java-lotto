@@ -21,7 +21,7 @@ public class Rankings {
     public static Rankings of(Lottos userNumbers,
         WinningLotto winningLotto) {
         List<Ranking> rankings = new ArrayList<>();
-        for (Lotto userNumber : userNumbers.getLottos()) {
+        for (Lotto userNumber : userNumbers.getValues()) {
             rankings.add(Ranking.of(userNumber, winningLotto));
         }
         return new Rankings(rankings);
@@ -41,10 +41,10 @@ public class Rankings {
         return rankingCount.getOrDefault(ranking, DEFAULT_FREQUENCY);
     }
 
-    public double countRewardRate(int buyPrice) {
+    public double countRewardRate(Price buyPrice) {
         int winnerPriceSum = countWinnerPriceSum();
         return BigDecimal.valueOf(winnerPriceSum)
-            .divide(BigDecimal.valueOf(buyPrice), REWARD_SCALE, RoundingMode.HALF_EVEN)
+            .divide(BigDecimal.valueOf(buyPrice.getBuyPrice()), REWARD_SCALE, RoundingMode.HALF_EVEN)
             .doubleValue();
     }
 }

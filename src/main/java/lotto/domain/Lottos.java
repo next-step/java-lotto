@@ -1,22 +1,25 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
 
-    private List<Lotto> lottos;
+    private final List<Lotto> values;
 
     public Lottos(List<Lotto> lottos) {
-        this.lottos = new ArrayList<>(lottos);
+        this.values = new ArrayList<>(lottos);
     }
 
     public int size() {
-        return lottos.size();
+        return values.size();
     }
 
-    public List<Lotto> getLottos() {
-        return Collections.unmodifiableList(lottos);
+    public void add(Lottos lottos){
+        values.addAll(new ArrayList<>(lottos.values));
+    }
+
+    public List<Lotto> getValues() {
+        return new ArrayList<>(values);
     }
 }

@@ -4,7 +4,7 @@ public class Reward {
 
     private final double value;
 
-    public Reward(Rankings rankings, int buyPrice) {
+    public Reward(Rankings rankings, Price buyPrice) {
         this.value = rankings.countRewardRate(buyPrice);
     }
 

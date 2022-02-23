@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.Price;
 import lotto.domain.Ranking;
 import lotto.domain.Rankings;
 import lotto.domain.Reward;
@@ -12,10 +13,10 @@ import lotto.domain.Reward;
 public class LottoOutput {
 
     private static final String ENTER = "\n";
-    private static final String BUYSUM_MESSAGE = "개를 구매했습니다.";
+    private static final String BUYSUM_MESSAGE = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
     private static final String RANKING_STATUS_MESSAGE = "당첨 통계" + ENTER;
     private static final String RANKING_DELIMITER = "-----------" + ENTER;
-    private static final String REWARD_RATE_MESSAGE = "총 수익률은 ";
+    private static final String REWARD_RATE_MESSAGE = "총 수익률은 : %s입니다.";
     private static final String DASH = " - ";
     private static final String PIECE = "개";
     private static final String LOTTO_NUM_SUM_MESSAGE = "%s개 일치%s(%s원)";
@@ -27,17 +28,14 @@ public class LottoOutput {
     private LottoOutput() {
     }
 
-    public static void printBuySum(int buyNum) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder
-            .append(buyNum)
-            .append(BUYSUM_MESSAGE);
-        System.out.println(stringBuilder);
+    public static void printBuySum(int autoBuyCount, int manulBuyCount) {
+        String sumStatus = String.format(BUYSUM_MESSAGE, manulBuyCount, autoBuyCount);
+        System.out.println(sumStatus);
     }
 
-    public static void printLottoResult(Rankings rankings, int buyPrice) {
+    public static void printLottoResult(Rankings rankings, Price buyPrice) {
         StringBuilder rankingStatus = printRankingStatus(rankings);
-        StringBuilder rewardRate = printRewardRate(new Reward(rankings, buyPrice));
+        String rewardRate = printRewardRate(new Reward(rankings, buyPrice));
         System.out.println(rankingStatus
             .append(ENTER)
             .append(rewardRate));
@@ -71,17 +69,14 @@ public class LottoOutput {
             ranking.getWinnerPrice());
     }
 
-    private static StringBuilder printRewardRate(Reward reward) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(REWARD_RATE_MESSAGE);
-        stringBuilder.append(reward.getValue());
-        return stringBuilder;
+    private static String printRewardRate(Reward reward) {
+        return String.format(REWARD_RATE_MESSAGE, reward.getValue());
     }
 
     public static void printLottoNumber(Lottos lottoNumbers) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (Lotto lotto : lottoNumbers.getLottos()) {
+        for (Lotto lotto : lottoNumbers.getValues()) {
             stringBuilder
                 .append(Arrays.toString(lotto.getLottoNumbers().toArray()))
                 .append(ENTER);
