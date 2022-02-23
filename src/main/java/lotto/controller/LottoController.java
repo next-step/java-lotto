@@ -1,17 +1,11 @@
 package lotto.controller;
 
-import java.math.BigDecimal;
-import java.util.Map;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
-import lotto.domain.Ticket;
-import lotto.domain.WinningLotto;
-import lotto.domain.WinningResult;
-import lotto.domain.lottogenerator.RandomLottoGenerator;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+
+import java.math.BigDecimal;
+import java.util.Map;
 
 public class LottoController {
 
@@ -26,22 +20,31 @@ public class LottoController {
 
     public void start() {
         Ticket ticket = getTicket();
-        Lottos lottos = Lottos.withLottoGenerator(new RandomLottoGenerator(), ticket.getBuyCount());
-
+        Lottos lottos = purchaseLottos(ticket);
         printTicketInfo(ticket, lottos);
 
         WinningLotto winningLotto = getWinningLotto();
         WinningResult winningResult = WinningResult.of(lottos, winningLotto);
-
         printResult(winningResult, ticket);
     }
 
     private Ticket getTicket() {
         try {
-            return new Ticket(InputView.inputBuyCash());
+            int cash = InputView.inputBuyCash();
+            int count = InputView.inputManualCount();
+            return Ticket.of(cash, count);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             return getTicket();
+        }
+    }
+
+    private Lottos purchaseLottos(Ticket ticket) {
+        try {
+            return LottoMachine.purchase(ticket, InputView.inputManualLotto(ticket.getManualCount()));
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return purchaseLottos(ticket);
         }
     }
 
@@ -57,7 +60,7 @@ public class LottoController {
     }
 
     private void printTicketInfo(Ticket ticket, Lottos lottos) {
-        OutputView.printPurchaseInfo(ticket.getBuyCount(), lottos.getStringLottos());
+        OutputView.printPurchaseInfo(ticket.getManualCount(), ticket.getAutoCount(), lottos.getStringLottos());
     }
 
     private void printResult(WinningResult winningResult, Ticket ticket) {
