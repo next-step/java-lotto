@@ -9,6 +9,8 @@ import java.util.Map;
 public class Ranks {
 
     private static Map<Rank, Integer> ranks;
+    private static final int ZERO = 0;
+    private static final int ONE = 1;
 
     public Ranks() {
         initializeRanks();
@@ -33,21 +35,14 @@ public class Ranks {
 
     private void incrementRank(Rank rank) {
         if (rank != Rank.MISS) {
-            ranks.put(rank, ranks.get(rank) + 1);
+            ranks.put(rank, ranks.get(rank) + ONE);
         }
     }
 
     private void putRank(Rank rank) {
         if (rank != Rank.MISS) {
-            ranks.put(rank, 0);
+            ranks.put(rank, ZERO);
         }
     }
 
-    public int calculateTotalPrize() {
-        int totalPrize = 0;
-        for (Rank key : ranks.keySet()) {
-            totalPrize += key.getReward() * ranks.get(key);
-        }
-        return totalPrize;
-    }
 }
