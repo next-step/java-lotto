@@ -3,10 +3,10 @@ package lotto.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import lotto.dto.LottoDto;
 import lotto.model.AutoLottoGenerator;
 import lotto.model.Count;
 import lotto.model.Lotto;
-import lotto.dto.LottoDto;
 import lotto.model.LottoNumber;
 import lotto.model.ManualLottoGenerator;
 import lotto.model.MatchInfo;
@@ -40,22 +40,18 @@ public class LottoGame {
         WinningNumber winningNumber = new WinningNumber(InputView.inputWinningNumbers(),
             InputView.inputBonusBall());
         List<MatchInfo> matchInfos = user.findEachLottoMatchingNumber(winningNumber);
-        Map<Rank, Integer> totalRanks = updateRankByMatchInfo(matchInfos);
-        printStatistics(count, totalRanks);
+        printStatistics(matchInfos);
+    }
+
+    private void printStatistics(List<MatchInfo> matchInfos) {
+        Ranks ranks = new Ranks();
+        Map<Rank, Integer> totalRanks = ranks.updateRanks(matchInfos);
+        Statistics statistics = new Statistics(ranks);
+        OutputView.printStatistics(totalRanks, statistics.calculateBenefits());
     }
 
     private void printLottos(Count count, User user) {
         OutputView.printLottos(count, user.getLottos());
-    }
-
-    private void printStatistics(Count count, Map<Rank, Integer> totalRanks) {
-        Statistics statistics = new Statistics(count, totalRanks);
-        OutputView.printStatistics(totalRanks, statistics.calculateBenefits());
-    }
-
-    private Map<Rank, Integer> updateRankByMatchInfo(List<MatchInfo> matchInfos) {
-        Ranks ranks = new Ranks();
-        return ranks.updateRanks(matchInfos);
     }
 
     private User saveAllLottos(List<LottoDto> manualLottoNumbers, Count count) {
