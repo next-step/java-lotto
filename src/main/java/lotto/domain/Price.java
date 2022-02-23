@@ -18,7 +18,7 @@ public class Price {
             .divide(BigDecimal.valueOf(LOTTO_PRICE), RoundingMode.DOWN).intValue();
     }
 
-    public int calculateAutoBuyCount(int manualBuyCount){
+    public int calculateAutoBuyCount(int manualBuyCount) {
         return countBuySum() - manualBuyCount;
     }
 

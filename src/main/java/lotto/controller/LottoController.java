@@ -34,7 +34,7 @@ public class LottoController {
         LottoOutput.printLottoResult(rankings, buyPrice);
     }
 
-    private Lottos createLottos(Price buyPrice, int manualBuyCount){
+    private Lottos createLottos(Price buyPrice, int manualBuyCount) {
         Lottos lottos = LottoInput.inputManualLottos(manualBuyCount);
         int autoBuyCount = buyPrice.calculateAutoBuyCount(manualBuyCount);
         lottos.add(lottoGenerator.generateLottos(autoBuyCount));

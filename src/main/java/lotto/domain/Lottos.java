@@ -15,7 +15,7 @@ public class Lottos {
         return values.size();
     }
 
-    public void add(Lottos lottos){
+    public void add(Lottos lottos) {
         values.addAll(new ArrayList<>(lottos.values));
     }
 

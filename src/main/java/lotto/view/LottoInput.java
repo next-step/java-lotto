@@ -35,7 +35,7 @@ public class LottoInput {
     public static Lottos inputManualLottos(int size) {
         System.out.println(INPUT_MANUL_PURCHASE_NUMBER);
         List<Lotto> lottoInput = new ArrayList<>();
-        for(int i=0; i<size; i++){
+        for (int i = 0; i < size; i++) {
             lottoInput.add(convertInputToLotto(SCANNER.next()));
         }
         return new Lottos(lottoInput);
@@ -53,7 +53,7 @@ public class LottoInput {
         return LottoNumber.from(bonusBall);
     }
 
-    private static Lotto convertInputToLotto(String lottoInput){
+    private static Lotto convertInputToLotto(String lottoInput) {
         return Lotto.of(Arrays.stream(lottoInput.split(COMMA))
             .mapToInt(Integer::new)
             .mapToObj(LottoNumber::from)
