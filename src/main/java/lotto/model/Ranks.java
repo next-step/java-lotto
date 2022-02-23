@@ -8,16 +8,17 @@ import java.util.Map;
 
 public class Ranks {
 
-    private static Map<Rank, Integer> ranks;
     private static final int ZERO = 0;
     private static final int ONE = 1;
 
+    private final Map<Rank, Integer> ranks;
+
     public Ranks() {
+        this.ranks = new EnumMap<>(Rank.class);
         initializeRanks();
     }
 
     private void initializeRanks() {
-        ranks = new EnumMap<>(Rank.class);
         for (Rank rank : Rank.values()) {
             putRank(rank);
         }
@@ -34,15 +35,26 @@ public class Ranks {
     }
 
     private void incrementRank(Rank rank) {
-        if (rank != Rank.MISS) {
-            ranks.put(rank, ranks.get(rank) + ONE);
-        }
+        ranks.put(rank, ranks.get(rank) + ONE);
     }
 
     private void putRank(Rank rank) {
-        if (rank != Rank.MISS) {
-            ranks.put(rank, ZERO);
-        }
+        ranks.put(rank, ZERO);
     }
 
+    public int calculateTotalLottoCount() {
+        int totalCount = 0;
+        for (Rank key : ranks.keySet()) {
+            totalCount += ranks.get(key);
+        }
+        return totalCount;
+    }
+
+    public int calculateTotalPrize() {
+        int totalPrize = ZERO;
+        for (Rank key : ranks.keySet()) {
+            totalPrize += key.getReward() * ranks.get(key);
+        }
+        return totalPrize;
+    }
 }
