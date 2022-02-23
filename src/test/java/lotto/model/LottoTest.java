@@ -65,5 +65,4 @@ class LottoTest {
         assertThat(matchInfo.getMatchCount()).isEqualTo(5);
         assertThat(matchInfo.getBonusMatch()).isEqualTo(true);
     }
-
 }

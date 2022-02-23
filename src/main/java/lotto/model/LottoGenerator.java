@@ -9,5 +9,4 @@ public interface LottoGenerator {
     int LAST_NUM = 45;
 
     List<LottoNumber> generateLotto();
-
 }

@@ -83,5 +83,4 @@ public class LottoGame {
         }
         return manualLottos;
     }
-
 }

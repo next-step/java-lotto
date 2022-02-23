@@ -38,5 +38,4 @@ class UserTest {
         assertThat(matchInfos.get(0).getMatchCount()).isEqualTo(5);
         assertThat(matchInfos.get(1).getMatchCount()).isEqualTo(4);
     }
-
 }

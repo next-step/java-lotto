@@ -18,5 +18,4 @@ class AutoLottoGeneratorTest {
             assertThat(lottoNumber.getNumber()).isBetween(1, 45);
         }
     }
-
 }
