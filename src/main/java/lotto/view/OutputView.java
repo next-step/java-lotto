@@ -13,11 +13,21 @@ public class OutputView {
     private static final String BONUS_BALL_MESSAGE = ", 보너스 볼 일치";
     private static final String LOSS_GUIDE_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String WINNING_STATISTICS_MESSAGE = "\n당첨 통계\n---------";
+    private static final String NOTHING = "";
+    private static final String MANUAL = "수동으로";
+    private static final String AUTO = "장 자동으로";
+    private static final String COUNT_MESSAGE = "개를 구매했습니다.";
+    private static final String MATCH = "개 일치";
+    private static final String PARENTHESES_START = "(";
+    private static final String PARENTHESES_END = ")- ";
+    private static final String COUNT = "개";
+    private static final String TOTAL_WINNING_RATE = "총 수익률은";
+    private static final String END_OF_SENTENCE = "입니다";
 
     private static void printLottoCount(Count count) {
         System.out.println(
-            "수동으로 " + count.getManualLottoCount() + "장 자동으로" + count.getAutoLottoCount()
-                + "개를 구매했습니다.");
+            MANUAL + count.getManualLottoCount() + AUTO + count.getAutoLottoCount()
+                + COUNT_MESSAGE);
     }
 
     public static void printLottos(Count count, List<Lotto> lottos) {
@@ -37,9 +47,10 @@ public class OutputView {
         for (Rank key : rankMap.keySet()) {
             bonusMessage = addMessageForBonus(key);
             System.out.println(
-                key.getMatchCount() + "개 일치" + bonusMessage + "(" + key.getReward() + ")- "
+                key.getMatchCount() + MATCH + bonusMessage + PARENTHESES_START + key.getReward()
+                    + PARENTHESES_END
                     + rankMap.get(key)
-                    + "개");
+                    + COUNT);
         }
         printBenefits(benefits);
     }
@@ -48,11 +59,11 @@ public class OutputView {
         if (rank == Rank.SECOND) {
             return BONUS_BALL_MESSAGE;
         }
-        return "";
+        return NOTHING;
     }
 
     private static void printBenefits(double benefits) {
-        System.out.print("총 수익률은" + benefits + "입니다.");
+        System.out.print(TOTAL_WINNING_RATE + benefits + END_OF_SENTENCE);
         if (benefits < 1) {
             System.out.println(LOSS_GUIDE_MESSAGE);
         }
