@@ -18,8 +18,8 @@ public class LottoController {
         OutputView outputView = new OutputView();
 
         Money money = getMoney();
-        PurchaseTicket ticket = new PurchaseTicket(money, getManualCount());
-        Lottos lottos = ticket.purchase(getManualLottoNumbers(ticket));
+        PurchaseTicket ticket = new PurchaseTicket(money, getManualLottoNumbers());
+        Lottos lottos = ticket.purchase();
 
         outputView.printPurchaseAmount(ticket);
         outputView.printPurchaseTicket(lottos);
@@ -40,14 +40,15 @@ public class LottoController {
         }
     }
 
-    private int getManualCount() {
-        return InputView.getManualTicketCount();
-    }
+    private List<Lotto> getManualLottoNumbers() {
+        int manualTicketCount = getManualCount();
 
-    private List<Lotto> getManualLottoNumbers(final PurchaseTicket ticket) {
-        List<List<LottoNumber>> manualLottoNumbers = InputView.getManualLottoNumbers(
-            ticket.getBuyManualCount());
+        List<List<LottoNumber>> manualLottoNumbers = InputView.getManualLottoNumbers(manualTicketCount);
 
         return LottoSupplier.makeManualLotto(manualLottoNumbers);
+    }
+
+    private int getManualCount() {
+        return InputView.getManualTicketCount();
     }
 }

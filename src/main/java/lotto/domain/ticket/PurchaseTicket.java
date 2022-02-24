@@ -14,6 +14,7 @@ public class PurchaseTicket {
 
     private final int buyTotalCount;
     private int buyManualCount;
+    private List<Lotto> lottos;
 
     public PurchaseTicket(final Money money) {
         if (money.getValue() < TICKET_PRICE) {
@@ -22,10 +23,12 @@ public class PurchaseTicket {
         this.buyTotalCount = money.getValue() / TICKET_PRICE;
     }
 
-    public PurchaseTicket(final Money money, int buyManualCount) {
+    public PurchaseTicket(final Money money, List<Lotto> lottos) {
         this(money);
-        validateManualCount(buyManualCount, buyTotalCount);
-        this.buyManualCount = buyManualCount;
+        int manualLottoSize = lottos.size();
+        validateManualCount(manualLottoSize, buyTotalCount);
+        this.buyManualCount = manualLottoSize;
+        this.lottos = lottos;
     }
 
     private void validateManualCount(final int manualCount, final int totalCount) {
@@ -34,10 +37,9 @@ public class PurchaseTicket {
         }
     }
 
-    public Lottos purchase(final List<Lotto> getManualLottos) {
-        List<Lotto> lottoGames = getManualLottos;
-        lottoGames.addAll(LottoGameManager.getLottosByAuto(new RandomLottoGenerator(), getBuyAutoCount()));
-        return new Lottos(lottoGames);
+    public Lottos purchase() {
+        lottos.addAll(LottoGameManager.getLottosByAuto(new RandomLottoGenerator(), getBuyAutoCount()));
+        return new Lottos(lottos);
     }
 
     public int getBuyManualCount() {
