@@ -26,6 +26,6 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        return Collections.unmodifiableList(lottos);
+        return new ArrayList<>(lottos);
     }
 }
