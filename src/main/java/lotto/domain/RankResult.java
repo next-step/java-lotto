@@ -19,7 +19,7 @@ public class RankResult {
 
     public int getTotalPrize() {
         return rankResult.entrySet().stream()
-            .mapToInt(entry -> entry.getKey().getPrize(entry.getValue()).getValue())
+            .mapToInt(entry -> entry.getKey().getPrize(entry.getValue()))
             .sum();
     }
 

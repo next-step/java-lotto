@@ -48,8 +48,8 @@ public enum Rank {
         return prize.getValue();
     }
 
-    public Money getPrize(final int hit) {
-        return new Money(prize.getValue() * hit);
+    public int getPrize(final int hit) {
+        return new Money(prize.getValue() * hit).getValue();
     }
 
     public boolean isSecond(final Rank rank) {
