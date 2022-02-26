@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -19,4 +20,16 @@ public class LottoGenerator {
     public static Lotto lottoGenerator(Shuffle suffle) {
         return suffle.suffle(lottoNumber);
     }
+
+    public static List<Lotto> lottoBundle(int count, Shuffle suffle) {
+
+        List<Lotto> lottos = new ArrayList<>();
+
+        for (int idx = 0; idx < count; idx++) {
+            lottos.add(LottoGenerator.lottoGenerator(suffle));
+        }
+
+        return lottos;
+    }
+
 }

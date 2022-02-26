@@ -23,12 +23,11 @@ public class Lottos {
 
     public int purchaseLottos(List<Lotto> lotto, String purchaseManual, Money money) {
         int numberOfLottoManual = Integer.parseInt(purchaseManual);
-        LottoBundle lottoBundle = new LottoBundle(new ArrayList<>());
         lottos.addAll(lotto);
         int numberOfLottoAutomatical = calculateNumberOfLottosAutomatical(numberOfLottoManual,
             money);
         lottos.addAll(
-            lottoBundle.lottoBundle(numberOfLottoAutomatical, new ShuffleLottoNumber())
+            LottoGenerator.lottoBundle(numberOfLottoAutomatical, new ShuffleLottoNumber())
         );
 
         return numberOfLottoAutomatical;
