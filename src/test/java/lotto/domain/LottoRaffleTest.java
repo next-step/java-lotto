@@ -8,7 +8,6 @@ import java.util.List;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.WinningLotto;
-import lotto.domain.lotto.number.BonusNumber;
 import lotto.domain.lotto.number.Number;
 import lotto.domain.lotto.number.Numbers;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +24,7 @@ class LottoRaffleTest {
             numbersValues.add(new Number(i));
         }
         final Numbers numbers = new Numbers(numbersValues);
-        final BonusNumber bonusNumber = new BonusNumber(7, numbers);
+        final Number bonusNumber = new Number(7);
         this.winningLotto = new WinningLotto(numbers, bonusNumber);
     }
 

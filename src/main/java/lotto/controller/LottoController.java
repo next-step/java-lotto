@@ -13,7 +13,7 @@ import lotto.domain.lotto.count.ManualCount;
 import lotto.domain.lotto.generator.AutoGenerator;
 import lotto.domain.lotto.generator.Generator;
 import lotto.domain.lotto.generator.ManualGenerator;
-import lotto.domain.lotto.number.BonusNumber;
+import lotto.domain.lotto.number.Number;
 import lotto.domain.lotto.number.Numbers;
 import lotto.domain.money.Money;
 import lotto.view.InputView;
@@ -38,12 +38,11 @@ public class LottoController {
         ResultView.printLottos(autoLottos);
 
         final Numbers winningNumbers = inputWinningNumbers();
-        final BonusNumber bonusNumber = inputBonusNumber(winningNumbers);
-
+        final WinningLotto winningLotto = generateWinningLotto(winningNumbers);
         final Lottos totalLottos = Lottos.combine(manualLottos, autoLottos);
 
         final LottoRaffle lottoRaffle = new LottoRaffle(
-            new WinningLotto(winningNumbers, bonusNumber));
+           winningLotto);
         final MatchResult results = lottoRaffle.compareLottos(totalLottos);
         double yield = YieldCalculator.calculateYield(results, money);
         ResultView.printLottoResults(results, yield);
@@ -79,15 +78,6 @@ public class LottoController {
         }
     }
 
-    private BonusNumber inputBonusNumber(Numbers winningNumbers) {
-        try {
-            return new BonusNumber(InputView.inputBonusNumber(), winningNumbers);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return inputBonusNumber(winningNumbers);
-        }
-    }
-
     private Numbers inputWinningNumbers() {
         try {
             return new Numbers(InputView.inputLastWinningNumbers());
@@ -96,6 +86,26 @@ public class LottoController {
             return inputWinningNumbers();
         }
     }
+
+    private Number inputBonusNumber() {
+        try {
+            return new Number(InputView.inputBonusNumber());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputBonusNumber();
+        }
+    }
+
+
+    private WinningLotto generateWinningLotto(Numbers winningNumbers) {
+        try {
+            return new WinningLotto(winningNumbers, inputBonusNumber());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return generateWinningLotto(winningNumbers);
+        }
+    }
+
 
     private Lottos generateLottos(Count lottoCount, final Generator generator) {
         try {
