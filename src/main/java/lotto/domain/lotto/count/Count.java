@@ -1,10 +1,6 @@
 package lotto.domain.lotto.count;
 
-import lotto.domain.money.Money;
-
 public class Count {
-
-    private static final int LOTTO_MONEY = 1000;
 
     private final int value;
 
@@ -32,10 +28,6 @@ public class Count {
         if (value < 0) {
             throw new IllegalArgumentException("[ERROR] 구매 개수가 0보다 작을 수는 없습니다.");
         }
-    }
-
-    public static Count calculateLottoCount(Money money) {
-        return new Count(money.getValue() / LOTTO_MONEY);
     }
 
     public static Count calculateAutoCount(Count totalCount, ManualCount manualCount) {

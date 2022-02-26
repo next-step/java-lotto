@@ -25,7 +25,7 @@ public class LottoController {
 
     public void start() {
         final Money money = inputMoneyValue();
-        final Count totalCount = Count.calculateLottoCount(money);
+        final Count totalCount = money.calculateLottoCount();
 
         final ManualCount manualCount = inputManualCount(totalCount);
         final Count autoCount = Count.calculateAutoCount(totalCount, manualCount);
@@ -47,12 +47,21 @@ public class LottoController {
         ResultView.printLottoResults(results, yield);
     }
 
-    private Lottos generateManualLottos(ManualCount manualCount, List<Numbers> manualNumbers) {
+    private Money inputMoneyValue() {
         try {
-            return new Lottos(manualCount.getCountValue(), new ManualGenerator(manualNumbers));
+            return new Money(InputView.inputMoney());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return generateManualLottos(manualCount, manualNumbers);
+            return inputMoneyValue();
+        }
+    }
+
+    private ManualCount inputManualCount(Count count) {
+        try {
+            return new ManualCount(new Count(InputView.inputManualCount()), count);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputManualCount(count);
         }
     }
 
@@ -68,12 +77,12 @@ public class LottoController {
         }
     }
 
-    private ManualCount inputManualCount(Count count) {
+    private Lottos generateManualLottos(ManualCount manualCount, List<Numbers> manualNumbers) {
         try {
-            return new ManualCount(new Count(InputView.inputManualCount()), count);
+            return new Lottos(manualCount.getCountValue(), new ManualGenerator(manualNumbers));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return inputManualCount(count);
+            return generateManualLottos(manualCount, manualNumbers);
         }
     }
 
@@ -112,15 +121,6 @@ public class LottoController {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return generateLottos(lottoCount, generator);
-        }
-    }
-
-    private Money inputMoneyValue() {
-        try {
-            return new Money(InputView.inputMoney());
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return inputMoneyValue();
         }
     }
 }
