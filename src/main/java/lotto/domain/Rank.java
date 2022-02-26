@@ -33,7 +33,7 @@ public enum Rank {
     }
 
     public static boolean get(final Rank rank) {
-        return rank != rank.NOTHING;
+        return rank != NOTHING;
     }
 
     public boolean match(final int count) {
@@ -53,7 +53,7 @@ public enum Rank {
     }
 
     public boolean isSecond(final Rank rank) {
-        return rank == Rank.SECOND;
+        return rank == SECOND;
     }
 }
 
