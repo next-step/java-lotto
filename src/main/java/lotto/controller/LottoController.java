@@ -35,11 +35,11 @@ public class LottoController {
         ResultView.printLottoCount(manualCount, autoCount);
 
         final Lottos autoLottos = generateLottos(autoCount, new AutoGenerator());
-        ResultView.printLottos(autoLottos);
+        final Lottos totalLottos = Lottos.combine(manualLottos, autoLottos);
+        ResultView.printLottos(totalLottos);
 
         final Numbers winningNumbers = inputWinningNumbers();
         final WinningLotto winningLotto = generateWinningLotto(winningNumbers);
-        final Lottos totalLottos = Lottos.combine(manualLottos, autoLottos);
 
         final LottoRaffle lottoRaffle = new LottoRaffle(winningLotto);
         final MatchResult results = lottoRaffle.compareLottos(totalLottos);
