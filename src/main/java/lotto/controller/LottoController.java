@@ -41,8 +41,7 @@ public class LottoController {
         final WinningLotto winningLotto = generateWinningLotto(winningNumbers);
         final Lottos totalLottos = Lottos.combine(manualLottos, autoLottos);
 
-        final LottoRaffle lottoRaffle = new LottoRaffle(
-           winningLotto);
+        final LottoRaffle lottoRaffle = new LottoRaffle(winningLotto);
         final MatchResult results = lottoRaffle.compareLottos(totalLottos);
         double yield = YieldCalculator.calculateYield(results, money);
         ResultView.printLottoResults(results, yield);
