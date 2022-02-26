@@ -6,7 +6,7 @@ public class Count {
 
     private static final int LOTTO_MONEY = 1000;
 
-    private final Integer value;
+    private final int value;
 
     public Count(String value) {
         this(parseToInteger(value));

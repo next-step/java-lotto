@@ -5,7 +5,7 @@ import lotto.util.NumberValidator;
 
 public class Number {
 
-    private final Integer value;
+    private final int value;
 
     public Number(String input) {
         this(NumberValidator.validate(input));
