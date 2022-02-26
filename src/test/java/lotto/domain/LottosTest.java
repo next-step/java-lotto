@@ -12,7 +12,8 @@ class LottosTest {
     @Test
     void calculateNumberOfLottosAutomaticalTest() {
         Lottos lottos = new Lottos();
-        int calculateNumberOfLottos = lottos.calculateNumberOfLottosAutomatical(3, new Money(14000));
+        int calculateNumberOfLottos = lottos.calculateNumberOfLottosAutomatical(3,
+            new Money(14000));
         assertThat(calculateNumberOfLottos).isEqualTo(11);
     }
 }

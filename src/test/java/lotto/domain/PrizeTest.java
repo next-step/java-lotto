@@ -16,17 +16,17 @@ class PrizeTest {
     @Test
     void getPrizeTest() {
 
-        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6)
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)
             .stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList()));
 
-        Lotto lotto_two = new Lotto(Arrays.asList(7,8,9,10,11,12)
+        Lotto lotto_two = new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12)
             .stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList()));
 
-        Lotto lotto_three = new Lotto(Arrays.asList(13,14,15,16,17,18)
+        Lotto lotto_three = new Lotto(Arrays.asList(13, 14, 15, 16, 17, 18)
             .stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList()));
@@ -41,6 +41,8 @@ class PrizeTest {
         RankResult rankResult = new RankResult(lotttos, winning);
         RankDTO rankDto = new RankDTO(rankResult, prize);
 
-        assertThat(Math.round(prize.getPrizeRatio(rankResult, new Money(14000))*100)/100.0).isEqualTo(14285.71);
+        assertThat(
+            Math.round(prize.getPrizeRatio(rankResult, new Money(14000)) * 100) / 100.0).isEqualTo(
+            14285.71);
     }
 }

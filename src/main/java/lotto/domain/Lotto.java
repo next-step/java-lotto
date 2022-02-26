@@ -50,7 +50,7 @@ public class Lotto {
     public boolean isContainsConvertInt(final LottoNumber lottoNumber) {
         return this.getLottoNumbers().contains(lottoNumber.getValue());
     }
-    
+
     public List<Integer> getLottoNumbers() {
         return lottoNumbers
             .stream()

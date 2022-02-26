@@ -2,7 +2,6 @@ package lotto.domain.dto;
 
 import java.util.List;
 import lotto.domain.Lotto;
-import lotto.domain.Lottos;
 
 public class LottoCalculationDTO {
 
