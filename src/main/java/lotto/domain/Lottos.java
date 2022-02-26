@@ -16,11 +16,6 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public List<Lotto> add(final Lottos lottos) {
-        this.lottos.addAll(lottos.lottos);
-        return this.lottos;
-    }
-
     public int purchaseLottos(List<Lotto> lotto, String purchaseManual, Money money) {
         int numberOfLottoManual = Integer.parseInt(purchaseManual);
         lottos.addAll(lotto);
