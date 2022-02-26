@@ -14,14 +14,14 @@ public class Lottos {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public static Lottos combine(Lottos lottos1, Lottos lottos2) {
-        return new Lottos(
-            Stream.concat(lottos1.getLottos().stream(), lottos2.getLottos().stream())
-                .collect(Collectors.toList()));
-    }
-
     public Lottos(final int lottoCount, final Generator generator) {
         this.lottos = generator.generateLottos(lottoCount);
+    }
+
+    public static Lottos combine(Lottos lottos, Lottos anotherLottos) {
+        return new Lottos(
+            Stream.concat(lottos.getLottos().stream(), anotherLottos.getLottos().stream())
+                .collect(Collectors.toList()));
     }
 
     public List<Lotto> getLottos() {
