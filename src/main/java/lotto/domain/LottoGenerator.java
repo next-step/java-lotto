@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -17,14 +18,11 @@ public class LottoGenerator {
             .collect(Collectors.toList());
     }
 
-    public static Lotto lottoGenerator(Shuffle suffle) {
-        return suffle.suffle(lottoNumber);
-    }
-
-    public static List<Lotto> lottoBundle(List<Lotto> lottos, int count, Shuffle suffle) {
+    public static List<Lotto> lottoBundle(List<Lotto> lottos, int count) {
 
         for (int idx = 0; idx < count; idx++) {
-            lottos.add(LottoGenerator.lottoGenerator(suffle));
+            Collections.shuffle(lottoNumber);
+            lottos.add(new Lotto(lottoNumber));
         }
 
         return lottos;

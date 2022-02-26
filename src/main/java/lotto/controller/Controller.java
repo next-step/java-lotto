@@ -12,7 +12,6 @@ import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Prize;
 import lotto.domain.RankResult;
-import lotto.domain.ShuffleLottoNumber;
 import lotto.domain.Winning;
 import lotto.domain.dto.LottoCalculationDTO;
 import lotto.domain.dto.RankDTO;
@@ -55,7 +54,7 @@ public class Controller {
         List<Lotto> purchaseManualLotto = purchaseManualLotto(lottoTicket);
         int numberOfLottoAutomatical = calculateLottoCount(lottos, money, purchaseManualCount);
         List<Lotto> calculatedLottos = LottoGenerator.lottoBundle(purchaseManualLotto,
-            numberOfLottoAutomatical, new ShuffleLottoNumber());
+            numberOfLottoAutomatical);
         LottoCalculationDTO lottoCalculationDto = new LottoCalculationDTO(
             purchaseManualLotto.size(), numberOfLottoAutomatical, calculatedLottos);
         outputView.printCountMessage(lottoCalculationDto);
