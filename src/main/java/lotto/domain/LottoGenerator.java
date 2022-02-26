@@ -21,9 +21,7 @@ public class LottoGenerator {
         return suffle.suffle(lottoNumber);
     }
 
-    public static List<Lotto> lottoBundle(int count, Shuffle suffle) {
-
-        List<Lotto> lottos = new ArrayList<>();
+    public static List<Lotto> lottoBundle(List<Lotto> lottos, int count, Shuffle suffle) {
 
         for (int idx = 0; idx < count; idx++) {
             lottos.add(LottoGenerator.lottoGenerator(suffle));
