@@ -45,4 +45,8 @@ public class Count {
     public Integer getValue() {
         return value;
     }
+
+    public boolean overCount(int count) {
+        return value < count;
+    }
 }
