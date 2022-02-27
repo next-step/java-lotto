@@ -53,12 +53,10 @@ public class LottoController {
         lottoInputView.printMessageInputHandOperatedLottoNumbers();
         for (int amount = 0; amount < ManualLottoAmount; amount++) {
             allLotto.storeLotto(lottoShop.buyManualLotto(lottoInputView.inputManualLottoNumbers()));
-//            lottos.add(lottoShop.buyManualLotto(lottoInputView.inputManualLottoNumbers()));
         }
 
         for (int amount = 0; amount < autoLottoAmount; amount++) {
             allLotto.storeLotto(lottoShop.buyAutoLotto());
-//            lottos.add(lottoShop.buyAutoLotto());
         }
 
         return allLotto;
