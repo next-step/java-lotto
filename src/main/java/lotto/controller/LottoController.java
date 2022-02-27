@@ -30,14 +30,14 @@ public class LottoController {
     public void run() {
         final Money money = new Money(lottoInputView.inputPrice());
 
-        final int ManualLottoAmount = lottoInputView.inputManualLottoAmount();
+        final int manualLottoAmount = lottoInputView.inputManualLottoAmount();
 
         final LottoShop lottoShop = LottoShop.getInstance();
-        final int autoLottoAmount = lottoShop.countPossibleLottoAmount(money) - ManualLottoAmount;
+        final int autoLottoAmount = lottoShop.countPossibleLottoAmount(money) - manualLottoAmount;
 
-        final Lottos allLotto = createLottos(ManualLottoAmount, lottoShop, autoLottoAmount);
+        final Lottos allLotto = createLottos(manualLottoAmount, lottoShop, autoLottoAmount);
 
-        lottoResultView.printLottos(allLotto, autoLottoAmount, ManualLottoAmount);
+        lottoResultView.printLottos(allLotto, autoLottoAmount, manualLottoAmount);
 
         final WinningLotto winningLotto = createWinningLotto();
         final LottoGame lottoGame = new LottoGame(allLotto, winningLotto);
