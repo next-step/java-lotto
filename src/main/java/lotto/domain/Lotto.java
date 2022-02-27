@@ -13,12 +13,9 @@ public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
 
-    private Lotto() {
-        this(LottoAutoGenerator.getInstance().generateLotto());
-    }
-
     public static Lotto autoLotto() {
-        return new Lotto();
+        final LottoAutoGenerator lottoAutoGenerator = LottoAutoGenerator.getInstance();
+        return new Lotto(lottoAutoGenerator.generateLotto());
     }
 
     public Lotto(final List<LottoNumber> lottoNumbers) {
