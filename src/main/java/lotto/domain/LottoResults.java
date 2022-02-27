@@ -3,14 +3,12 @@ package lotto.domain;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 public class LottoResults {
 
-    private static final int ZERO = 0;
     private static final int DECIMAL_POINT_PLACE = 2;
 
     private final Map<Ranking, Integer> totalResult;
