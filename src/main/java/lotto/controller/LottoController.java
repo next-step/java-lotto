@@ -104,7 +104,6 @@ public class LottoController {
         }
     }
 
-
     private WinningLotto generateWinningLotto(Numbers winningNumbers) {
         try {
             return new WinningLotto(winningNumbers, inputBonusNumber());
@@ -113,7 +112,6 @@ public class LottoController {
             return generateWinningLotto(winningNumbers);
         }
     }
-
 
     private Lottos generateLottos(Count lottoCount, final Generator generator) {
         try {
