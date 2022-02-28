@@ -12,19 +12,22 @@ public class Winning {
         validationWinningNumber();
     }
 
+    public Winning(String inputWinningLottoNumber,
+        LottoNumber inputBonusLottoNumber) {
+        this(new Lotto(inputWinningLottoNumber), inputBonusLottoNumber);
+    }
 
     private void validationWinningNumber() {
-        if (winningLottoNumber.contains(bonusLottoNumber)) {
+        if (winningLottoNumber.isContainsConvertInt(bonusLottoNumber)) {
             throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
         }
     }
 
-    public long winningLottoNumber(Lotto lotto) {
+    public long winLottoNumber(final Lotto lotto) {
         return winningLottoNumber.countMatch(lotto);
     }
 
-    public boolean bonusLottoNumber(Lotto lotto) {
-        return lotto.contains(bonusLottoNumber);
+    public boolean isbonusLottoNumber(final Lotto lotto) {
+        return lotto.isContainsConvertInt(bonusLottoNumber);
     }
-
 }

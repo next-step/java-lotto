@@ -17,7 +17,14 @@ public class LottoGenerator {
             .collect(Collectors.toList());
     }
 
-    public static Lotto lottoGenerator(Shuffle suffle) {
-        return suffle.suffle(lottoNumber);
+    public static List<Lotto> lottoBundle(List<Lotto> lottos, int count) {
+
+        for (int idx = 0; idx < count; idx++) {
+            Collections.shuffle(lottoNumber);
+            lottos.add(new Lotto(lottoNumber));
+        }
+
+        return lottos;
     }
+
 }

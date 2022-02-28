@@ -1,21 +1,17 @@
 package lotto.domain;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(final List<Lotto> lottos) {
-        this.lottos = lottos;
+    public Lottos() {
+        lottos = new ArrayList<>();
     }
 
-    public List<Lotto> lottos() {
-        return Collections.unmodifiableList(lottos);
-    }
-
-    public int getLottosSize() {
-        return lottos.size();
+    public int calculateNumberOfLottosAutomatical(int numberOfLottoManual, Money money) {
+        return money.calculateLotto() - numberOfLottoManual;
     }
 }

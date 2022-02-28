@@ -17,14 +17,14 @@ public enum Rank {
     private final Money prize;
 
 
-    Rank(int matchCount, int prize) {
+    Rank(final int matchCount, final int prize) {
         this.matchCount = matchCount;
         this.prize = new Money(prize);
     }
 
-    public static Rank countMatch(Winning winning, Lotto lotto) {
-        int lottoCount = (int) winning.winningLottoNumber(lotto);
-        boolean bonusBallMatch = winning.bonusLottoNumber(lotto);
+    public static Rank countMatch(final Winning winning, final Lotto lotto) {
+        int lottoCount = (int) winning.winLottoNumber(lotto);
+        boolean bonusBallMatch = winning.isbonusLottoNumber(lotto);
         if (THIRD.match(lottoCount) && !bonusBallMatch) {
             return THIRD;
         }
@@ -32,11 +32,11 @@ public enum Rank {
             .orElse(NOTHING);
     }
 
-    public static boolean get(Rank rank) {
-        return rank != rank.NOTHING;
+    public static boolean get(final Rank rank) {
+        return rank != NOTHING;
     }
 
-    public boolean match(int count) {
+    public boolean match(final int count) {
         return matchCount == count;
     }
 
@@ -44,12 +44,16 @@ public enum Rank {
         return matchCount;
     }
 
-    public Money getPrize() {
-        return prize;
+    public int getPrize() {
+        return prize.getValue();
     }
 
-    public Money getPrize(int hit) {
-        return new Money(prize.getValue() * hit);
+    public int getPrize(final int hit) {
+        return new Money(prize.getValue() * hit).getValue();
+    }
+
+    public boolean isSecond(final Rank rank) {
+        return rank == SECOND;
     }
 }
 

@@ -1,42 +1,33 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class RankResult {
 
-    private static final int INITIAL_VALUE = 0;
-    private final Lottos lottos;
-    private final Winning winning;
-    private Map<Rank, Integer> rankResult;
+    private static final int DEFAULT_NUMBER = 0;
+    private static final int AUTO_INCREMENT = 1;
 
+    private final Map<Rank, Integer> rankResult;
 
-    public RankResult(Lottos lottos, Winning winning) {
-        this.lottos = lottos;
-        this.winning = winning;
-        this.rankResult = rankCount(this.lottos, this.winning);
+    public RankResult(final List<Lotto> lottos, final Winning winning) {
+        this.rankResult = lottos.stream().collect(
+            Collectors.groupingBy(arg -> Rank.countMatch(winning, arg),
+                Collectors.summingInt(x -> AUTO_INCREMENT)));
     }
 
-    public Map<Rank, Integer> getRankResult() {
-        return rankResult;
+    public int getTotalPrize() {
+        return rankResult.entrySet().stream()
+            .mapToInt(entry -> entry.getKey().getPrize(entry.getValue()))
+            .sum();
     }
 
-    public Money getTotalPrize() {
-        return new Money(rankResult.entrySet().stream()
-            .mapToInt(entry -> entry.getKey().getPrize(entry.getValue()).getValue())
-            .sum());
-    }
-
-    public HashMap<Rank, Integer> rankCount(Lottos lottos, Winning winning) {
-        HashMap<Rank, Integer> rankResult = new HashMap<>();
-        for (Rank rank : Rank.values()) {
-            rankResult.put(rank, INITIAL_VALUE);
+    public int getRankResult(Rank rank) {
+        if (rankResult.get(rank) == null) {
+            return DEFAULT_NUMBER;
         }
-
-        for (Lotto lotto : lottos.lottos()) {
-            Rank rank = Rank.countMatch(winning, lotto);
-            rankResult.put(rank, rankResult.get(rank) + 1);
-        }
-        return rankResult;
+        return rankResult.get(rank);
     }
+
 }
