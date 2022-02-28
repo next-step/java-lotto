@@ -28,7 +28,7 @@ public class LottoController {
         final Count totalCount = money.calculateLottoCount();
 
         final ManualCount manualCount = inputManualCount(totalCount);
-        final Count autoCount = Count.calculateAutoCount(totalCount, manualCount);
+        final Count autoCount = totalCount.calculateAutoCount(manualCount);
 
         final List<Numbers> manualNumbers = inputManualNumbers(manualCount);
         final Lottos manualLottos = generateManualLottos(manualCount, manualNumbers);

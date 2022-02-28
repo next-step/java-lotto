@@ -30,8 +30,8 @@ public class Count {
         }
     }
 
-    public static Count calculateAutoCount(Count totalCount, ManualCount manualCount) {
-        return new Count(totalCount.getValue() - manualCount.getCountValue());
+    public Count calculateAutoCount(ManualCount manualCount) {
+        return new Count(value - manualCount.getCountValue());
     }
 
     public Integer getValue() {
