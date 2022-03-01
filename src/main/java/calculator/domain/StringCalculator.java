@@ -4,6 +4,7 @@ import java.util.List;
 
 public class StringCalculator {
 
+    private static final int RESULT_FOR_EMPTY = 0;
     private final int result;
 
     public StringCalculator(List<Integer> numbers) {
@@ -13,7 +14,7 @@ public class StringCalculator {
 
     private int createResult(List<Integer> numbers)  {
         if(numbers.isEmpty()) {
-            return 0;
+            return RESULT_FOR_EMPTY;
         }
         return numbers.stream().mapToInt(number -> number).sum();
     }
