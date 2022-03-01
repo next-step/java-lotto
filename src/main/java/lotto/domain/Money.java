@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+
 public class Money {
 
     private static final int LOTTO_PRICE = 1_000;
@@ -16,5 +18,9 @@ public class Money {
 
     public int getMoney() {
         return money;
+    }
+
+    public BigDecimal divide(Money operand) {
+        return BigDecimal.valueOf(money / operand.getMoney());
     }
 }
