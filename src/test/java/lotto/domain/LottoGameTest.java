@@ -31,14 +31,14 @@ class LottoGameTest {
 
         final LottoNumber bonusBall = new LottoNumber(8);
 
-        final WinningLotto winningLotto = new WinningLotto(Lotto.ManualLotto(winningNumber), bonusBall);
+        final WinningLotto winningLotto = new WinningLotto(Lotto.from(winningNumber), bonusBall);
 
         lottoGame = new LottoGame(lottos, winningLotto);
     }
 
     private Lotto createLotto(final List<Integer> numbers) {
         return
-            Lotto.ManualLotto(numbers.stream()
+            Lotto.from(numbers.stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList()));
     }
