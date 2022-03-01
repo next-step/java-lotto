@@ -13,17 +13,12 @@ public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public static Lotto autoLotto() {
-        final LottoAutoGenerator lottoAutoGenerator = LottoAutoGenerator.getInstance();
-        return new Lotto(lottoAutoGenerator.generateLotto());
-    }
-
     public Lotto(final List<LottoNumber> lottoNumbers) {
         validateNumber(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto ManualLotto(final List<LottoNumber> lottoNumbers) {
+    public static Lotto from(final List<LottoNumber> lottoNumbers) {
         return new Lotto(lottoNumbers);
     }
 
