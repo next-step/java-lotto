@@ -15,7 +15,7 @@ class LottoTest {
             .map(LottoNumber::new)
             .collect(Collectors.toList());
 
-        assertThatThrownBy(() -> Lotto.ManualLotto(lottoNumbers))
+        assertThatThrownBy(() -> Lotto.from(lottoNumbers))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("복권의 숫자 개수가 유효하지 않습니다.");
     }
@@ -26,7 +26,7 @@ class LottoTest {
             .map(LottoNumber::new)
             .collect(Collectors.toList());
 
-        assertThatThrownBy(() -> Lotto.ManualLotto(lottoNumbers))
+        assertThatThrownBy(() -> Lotto.from(lottoNumbers))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("복권에 중복된 숫자가 존재합니다.");
     }
@@ -37,8 +37,9 @@ class LottoTest {
             .map(LottoNumber::new)
             .collect(Collectors.toList());
 
-        final Lotto lotto = Lotto.ManualLotto(lottoNumbers);
+        final Lotto lotto = Lotto.from(lottoNumbers);
 
         assertThat(lotto.hasBonusBall(new LottoNumber(6))).isTrue();
+        assertThat(lotto.hasBonusBall(new LottoNumber(7))).isFalse();
     }
 }
