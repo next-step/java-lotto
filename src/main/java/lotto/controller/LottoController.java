@@ -1,9 +1,9 @@
 package lotto.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
@@ -45,19 +45,16 @@ public class LottoController {
         lottoResultView.finishGame(lottoResults, lottoResults.calculateYield(money));
     }
 
-    private Lottos createLottos(final int ManualLottoAmount, final LottoShop lottoShop,
+    private Lottos createLottos(final int manualLottoAmount, final LottoShop lottoShop,
         final int autoLottoAmount) {
-        final List<Lotto> lottos = new ArrayList<>();
-        final Lottos allLotto = new Lottos(lottos);
-
         lottoInputView.printMessageInputHandOperatedLottoNumbers();
-        for (int amount = 0; amount < ManualLottoAmount; amount++) {
-            allLotto.storeLotto(lottoShop.buyManualLotto(lottoInputView.inputManualLottoNumbers()));
-        }
 
-        for (int amount = 0; amount < autoLottoAmount; amount++) {
-            allLotto.storeLotto(lottoShop.buyAutoLotto());
-        }
+        Lottos allLotto = Stream.generate(
+                () -> lottoShop.buyManualLotto(lottoInputView.inputManualLottoNumbers()))
+            .limit(manualLottoAmount)
+            .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
+
+        allLotto.storeAllLottos(lottoShop.buyAutoLottos(autoLottoAmount));
 
         return allLotto;
     }
