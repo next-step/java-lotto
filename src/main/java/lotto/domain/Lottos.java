@@ -25,4 +25,8 @@ public class Lottos {
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
+
+    public void storeAllLottos(final List<Lotto> purchasedLottos) {
+        lottos.addAll(purchasedLottos);
+    }
 }
