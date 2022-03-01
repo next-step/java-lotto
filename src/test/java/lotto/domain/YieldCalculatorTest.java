@@ -10,14 +10,15 @@ import org.junit.jupiter.api.Test;
 
 class YieldCalculatorTest {
 
-    Map<LottoResult, Integer> lottoResults;
+    MatchResult lottoResults;
 
     @BeforeEach
     void setUp() {
-        lottoResults = new EnumMap<>(LottoResult.class);
-        lottoResults.put(LottoResult.MATCH3, 5);
-        lottoResults.put(LottoResult.MATCH4, 4);
-        lottoResults.put(LottoResult.MATCH5, 1);
+        final Map<LottoResult, Integer> results = new EnumMap<>(LottoResult.class);
+        results.put(LottoResult.MATCH3, 5);
+        results.put(LottoResult.MATCH4, 4);
+        results.put(LottoResult.MATCH5, 1);
+        lottoResults = new MatchResult(results);
     }
 
     @Test

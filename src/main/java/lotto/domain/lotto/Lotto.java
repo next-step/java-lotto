@@ -11,11 +11,16 @@ public class Lotto {
         this.numbers = new Numbers(numbers);
     }
 
-    public Numbers getLotto() {
-        return numbers;
+    public boolean hasNumber(Number number) {
+        return this.numbers.has(number);
     }
 
-    public boolean hasNumber(Number number) {
-        return this.numbers.getNumbersValue().contains(number);
+    public Integer getMatchCount(Lotto lotto) {
+        return this.numbers.getMatchCount(lotto);
     }
+
+    public Numbers getNumbers() {
+        return new Numbers(numbers);
+    }
+
 }

@@ -9,7 +9,7 @@ public class MoneyValidator extends Validator {
     }
 
     public static int validate(String input) {
-        return validate( parseToInt(input));
+        return validate(parseToInt(input));
     }
 
     public static int validate(int money) {

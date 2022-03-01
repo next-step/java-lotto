@@ -17,12 +17,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 class LottoResultTest {
 
     @ParameterizedTest
-    @MethodSource
+    @MethodSource(value = "source_enum_정확하게_찾은_경우")
     void enum_정확하게_찾은_경우(LottoResult lottoResult, int matchCount, boolean isBonusNumber) {
         assertThat(lottoResult).isEqualTo(LottoResult.findLottoResult(matchCount, isBonusNumber));
     }
 
-    private static Stream<Arguments> enum_정확하게_찾은_경우() {
+    private static Stream<Arguments> source_enum_정확하게_찾은_경우() {
         return Stream.of(
             Arguments.of(MATCH3, 3, false),
             Arguments.of(MATCH4, 4, false),
@@ -33,12 +33,12 @@ class LottoResultTest {
     }
 
     @ParameterizedTest
-    @MethodSource
+    @MethodSource(value = "source_enum_찾을_수_없는_경우")
     void enum_찾을_수_없는_경우(int matchCount, boolean isBonusNumber) {
         assertThat(NO_MATCH).isEqualTo(LottoResult.findLottoResult(matchCount, isBonusNumber));
     }
 
-    private static Stream<Arguments> enum_찾을_수_없는_경우() {
+    private static Stream<Arguments> source_enum_찾을_수_없는_경우() {
         return Stream.of(
             Arguments.of(2, false),
             Arguments.of(1, false),

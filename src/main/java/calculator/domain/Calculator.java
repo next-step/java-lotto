@@ -7,16 +7,10 @@ public class Calculator {
 
     private static final int INTEGER_DEFAULT_VALUE = 0;
 
-    public Calculator() {
-    }
-
-    public int add(String text) {
+    public int add(String text, List<Integer> numbers) {
         if (isNullAndEmptyText(text)) {
             return INTEGER_DEFAULT_VALUE;
         }
-
-        final DelimiterTokenizer delimiterTokenizer = new DelimiterTokenizer(text);
-        final List<Integer> numbers = NumberExtractor.splitNumbersByDelimiter(text, delimiterTokenizer.getDelimiters());
         return numbers.stream().reduce(INTEGER_DEFAULT_VALUE, Integer::sum);
     }
 
@@ -24,4 +18,3 @@ public class Calculator {
         return Objects.isNull(text) || text.isEmpty();
     }
 }
-

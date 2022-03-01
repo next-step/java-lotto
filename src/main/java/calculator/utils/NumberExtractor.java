@@ -1,5 +1,6 @@
-package calculator.domain;
+package calculator.utils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,6 +12,9 @@ public class NumberExtractor {
     private static final String START_REGEX = "[";
     private static final String END_REGEX = "]";
     private static final int LIMIT_MINIMUM_NUMBER = 0;
+
+    private NumberExtractor() {
+    }
 
     private static String trimDelimiter(String text) {
         if (isCustomDelimiter(text)) {
@@ -24,6 +28,9 @@ public class NumberExtractor {
     }
 
     public static List<Integer> splitNumbersByDelimiter(String text, List<String> delimiters) {
+        if (text.isEmpty()) {
+            return new ArrayList<>();
+        }
         final String operation = trimDelimiter(text);
         final String regex = makeRegularExpression(delimiters);
         endByDelimiter(operation, regex);
@@ -56,6 +63,7 @@ public class NumberExtractor {
     }
 
     private static String makeRegularExpression(List<String> delimiters) {
-        return delimiters.stream().reduce(START_REGEX, (origin, value) -> origin + value) + END_REGEX;
+        return delimiters.stream().reduce(START_REGEX, (origin, value) -> origin + value)
+            + END_REGEX;
     }
 }
