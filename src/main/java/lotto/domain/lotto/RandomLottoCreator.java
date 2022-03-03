@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 public class RandomLottoCreator implements LottoCreator {
 
-    private final List<LottoNumber> numberData =
+    private static final List<LottoNumber> numberData =
         IntStream.rangeClosed(LottoNumber.LOTTO_FIRST_NUMBER, LottoNumber.LOTTO_LAST_NUMBER)
             .boxed()
             .map(LottoNumber::new)
