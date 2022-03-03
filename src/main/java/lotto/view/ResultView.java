@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.lotto.Lotto;
@@ -22,7 +23,7 @@ public class ResultView {
         }
     }
 
-    public static void printResult(Map<LottoResult, Integer> numberOfResults, Double profitRate) {
+    public static void printResult(Map<LottoResult, Integer> numberOfResults, BigDecimal profitRate) {
         printStatistics(numberOfResults);
         printProfitRate(profitRate);
     }
@@ -36,7 +37,7 @@ public class ResultView {
                 result.getDescription() + numberOfResults.get(result) + "개"));
     }
 
-    private static void printProfitRate(Double profitRate) {
+    private static void printProfitRate(BigDecimal profitRate) {
         System.out.println(
             "총 수익률은 " + profitRate + "입니다.");
     }
