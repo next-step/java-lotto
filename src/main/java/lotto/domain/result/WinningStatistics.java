@@ -12,7 +12,7 @@ public class WinningStatistics {
         this.profitRate = applyProfitRate(numberOfResults, money);
     }
 
-    public BigDecimal applyProfitRate(Map<LottoResult, Integer> result, int money) {
+    private BigDecimal applyProfitRate(Map<LottoResult, Integer> result, int money) {
         BigDecimal totalWinning = BigDecimal.valueOf(0);
 
         for (LottoResult lottoResult : result.keySet()) {
