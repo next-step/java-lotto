@@ -22,6 +22,6 @@ public class LottoMachine {
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return new ArrayList<>(lottos);
     }
 }
