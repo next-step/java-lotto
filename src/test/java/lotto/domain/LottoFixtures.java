@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.List;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoCreator;
+import lotto.domain.lotto.creator.LottoCreator;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.winning.WinningNumbers;
 

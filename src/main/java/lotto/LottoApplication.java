@@ -3,7 +3,7 @@ package lotto;
 import java.util.List;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoMachine;
-import lotto.domain.lotto.KoreanRandomLottoCreator;
+import lotto.domain.lotto.creator.KoreanRandomLottoCreator;
 import lotto.domain.result.LottoJudgement;
 import lotto.domain.result.NumberOfResults;
 import lotto.domain.result.WinningStatistics;
