@@ -14,8 +14,6 @@ public class ResultView {
     }
 
     public static void printLottos(List<Lotto> lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
-
         for (Lotto lotto : lottos) {
             final StringBuilder sb = new StringBuilder("[");
             lotto.getNumbers().stream()
@@ -25,6 +23,7 @@ public class ResultView {
             sb.append("]").deleteCharAt(sb.lastIndexOf(","));
             System.out.println(sb.toString().trim());
         }
+        System.out.println();
     }
 
     public static void printResult(Map<LottoResult, Integer> numberOfResults, BigDecimal profitRate) {
