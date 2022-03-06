@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
 import lotto.domain.lotto.LottoNumber;
 
 public class WinningNumbers {
@@ -21,8 +22,8 @@ public class WinningNumbers {
 
     private List<LottoNumber> createWinningNumbers(List<String> numbers) {
         return numbers.stream()
-            .map(LottoNumber::new)
-            .collect(Collectors.toList());
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     private void validateBonusNumberDuplication(List<String> numbers, String bonusNumber) {

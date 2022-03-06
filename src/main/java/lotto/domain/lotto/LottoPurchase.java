@@ -16,11 +16,11 @@ public class LottoPurchase {
     }
 
     private void validateMoney(BigDecimal money, BigDecimal handLottoQuantity) {
-        if(money.compareTo(LOTTO_PRICE) < 0) {
+        if (money.compareTo(LOTTO_PRICE) < 0) {
             throw new IllegalArgumentException("[ERROR] 구매 금액이 1000원 이상이어야 합니다.");
         }
 
-        if(money.compareTo(handLottoQuantity.multiply(LOTTO_PRICE)) < 0){
+        if (money.compareTo(handLottoQuantity.multiply(LOTTO_PRICE)) < 0) {
             throw new IllegalArgumentException("[ERROR] 금액이 모자라 수동 로또를 살 수 없습니다.");
         }
     }

@@ -26,7 +26,7 @@ public class InputView {
     public static List<Lotto> getHandLottos(int quantity) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<Lotto> lottos = new ArrayList<>();
-        for(int i = 0; i < quantity; i++) {
+        for (int i = 0; i < quantity; i++) {
             lottos.add(new Lotto(createLottoNumbers(scanner.nextLine().split(", "))));
         }
         System.out.println();
@@ -35,7 +35,7 @@ public class InputView {
 
     private static List<LottoNumber> createLottoNumbers(String[] numbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for(String number : numbers) {
+        for (String number : numbers) {
             lottoNumbers.add(new LottoNumber(number));
         }
         return lottoNumbers;
