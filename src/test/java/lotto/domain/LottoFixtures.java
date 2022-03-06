@@ -37,6 +37,17 @@ public class LottoFixtures {
         new LottoNumber(6)
     );
 
+    public static final List<Lotto> HAND_LOTTOS = Arrays.asList(
+            new Lotto(NORMAL_LOTTO_NUMBER),
+            new Lotto(NORMAL_LOTTO_NUMBER)
+    );
+
+    public static final List<Lotto> AUTOMATIC_LOTTOS = Arrays.asList(
+            new Lotto(NORMAL_LOTTO_NUMBER),
+            new Lotto(NORMAL_LOTTO_NUMBER),
+            new Lotto(NORMAL_LOTTO_NUMBER)
+    );
+
     public static final WinningNumbers WINNING_NUMBERS_TWO_REWARD = new WinningNumbers(
         Arrays.asList("1", "2", "15", "20", "25", "30"),
         "35"
