@@ -29,11 +29,11 @@ public class LottoPurchase {
         return money.subtract(handLottoQuantity.multiply(LOTTO_PRICE)).divide(LOTTO_PRICE, RoundingMode.FLOOR);
     }
 
-    public BigDecimal getHandLottoQuantity() {
-        return handLottoQuantity;
+    public int getHandLottoQuantity() {
+        return handLottoQuantity.intValue();
     }
 
-    public BigDecimal getAutomaticLottoQuantity() {
-        return automaticLottoQuantity;
+    public int getAutomaticLottoQuantity() {
+        return automaticLottoQuantity.intValue();
     }
 }

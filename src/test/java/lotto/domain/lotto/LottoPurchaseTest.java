@@ -23,6 +23,6 @@ class LottoPurchaseTest {
     @Test
     void 자동로또의_개수를_객체_생성_시에_계산한다() {
         LottoPurchase lottoPurchase = new LottoPurchase(14000, 3);
-        assertThat(lottoPurchase.getAutomaticLottoQuantity().intValue()).isEqualTo(11);
+        assertThat(lottoPurchase.getAutomaticLottoQuantity()).isEqualTo(11);
     }
 }
