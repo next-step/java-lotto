@@ -9,7 +9,11 @@ import lotto.domain.result.LottoResult;
 
 public class ResultView {
 
-    public static void printUserLottos(List<Lotto> lottos) {
+    public static void printLottoPurchase(int handLottoQuantity, int automaticLottoQuantity) {
+        System.out.println("수동으로 " +handLottoQuantity + "장, 자동으로 " + automaticLottoQuantity + "개를 구매했습니다.");
+    }
+
+    public static void printLottos(List<Lotto> lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
 
         for (Lotto lotto : lottos) {
