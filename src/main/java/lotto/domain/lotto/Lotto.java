@@ -29,8 +29,8 @@ public class Lotto {
 
     private void validateDuplication(List<LottoNumber> numbers) {
         HashSet<Integer> set = numbers.stream()
-            .map(LottoNumber::getNumber)
-            .collect(Collectors.toCollection(HashSet::new));
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toCollection(HashSet::new));
 
         if (set.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("[ERROR] 로또 넘버에 중복이 있습니다.");

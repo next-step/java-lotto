@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.List;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoCreator;
+import lotto.domain.lotto.creator.LottoCreator;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.winning.WinningNumbers;
 
@@ -35,6 +35,17 @@ public class LottoFixtures {
         new LottoNumber(4),
         new LottoNumber(5),
         new LottoNumber(6)
+    );
+
+    public static final List<Lotto> HAND_LOTTOS = Arrays.asList(
+            new Lotto(NORMAL_LOTTO_NUMBER),
+            new Lotto(NORMAL_LOTTO_NUMBER)
+    );
+
+    public static final List<Lotto> AUTOMATIC_LOTTOS = Arrays.asList(
+            new Lotto(NORMAL_LOTTO_NUMBER),
+            new Lotto(NORMAL_LOTTO_NUMBER),
+            new Lotto(NORMAL_LOTTO_NUMBER)
     );
 
     public static final WinningNumbers WINNING_NUMBERS_TWO_REWARD = new WinningNumbers(

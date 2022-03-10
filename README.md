@@ -13,7 +13,7 @@
 
 ## 기능 목록
 
-[StringCalculator]
+### StringCalculator
 [x] , 또는 : 을 구분자로 가지는 문자열을 입력 받는다.
 [x] Null이나 빈 문자열을 입력할 경우 0을 반환한다.
 [x] 숫자 하나를 입력할 경우 해당 숫자를 반환한다.
@@ -23,26 +23,38 @@
 [ ]// 과 \n 을 사용하여 커스텀 구분자를 생성할 경우 \n 뒤의 문자열에 커스텀 구분자와 숫자 외의 문자열이 있으면 Illegal Exception을 throw한다.
 [x] 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw 한다.
 
-[Lotto]
-[x] 구입 금액을 통해 로또 개수 알기
-    [x] 구입 금액 입력받기 InputView
-    [x] 1000원 미만의 금액일 경우 예외처리
-[x] 로또 생성 
-    [x] 구입 개수 알기
-    [x] 구입 개수 콘솔에 출력하기
-    [x] Lotto 클래스 생성
-        [x] 중복되지 않고 6개의 랜덤 숫자인지 확인
-    [x] 1부터 45까지 범위에 속하는 로또 넘버 List를 생성
-    [x] 랜덤으로 shuffle해서 구입 개수만큼 List<Lotto> 생성
-    [x] 로또 번호들 sort해서 반환 - 생성된
-    
-[x] 지난 주 당첨 번호 입력 
-    [x] 당첨번호를 의미하는 WinningBall 클래스 생성
-    [x] 당첨 번호 6개 입력받기 InputView 
-    [x] 보너스 번호도 함께 입력받기
-    [x] WinningBall List 생링
+### Lotto
+#### checkBox는 Step2에서의 변동 사항
 
-[ ] 당첨 통계
-    [x] Enum으로 LottoResult 생성 (일치 개수, 보너스 여부, 상금, 설명)
-    [ ] WinningBalls(당첨번호)를 순회허면서 contains로 당첨 개수 세기 - WinningCounter
-[ ] 상금 / 구매금액 을 통해 수익률 계산 - 소수점 아래 둘째자리까지 남기고 버림
+[Wallet]
+- 총 구매 금액을 저장한다.
+
+[LottoPurchase]
+- [x] 총 구매 금액과 수동 구매 개수 전달 받아 수동 구매 개수와 자동 구매 개수를 저장한다.
+- [x] 구매 금액에 대한 validation을 적용한다.
+    - [x] 1000원 이하면 살 수 없음을 판단
+    - [x] 입력한 수동 개수만큼 살 수 있는지 판단
+
+[HandLotto]
+- [ ] 수동 구매 로또를 저장한다.
+
+[LottoMachine]
+- [x] 자동 로또 개수를 받아서 자동 구매 로또를 생성해서 저장한다. (수정사항)
+
+[Lottos]
+- 자동 로또와 수동 로또를 받아 전체 로또로 저장한다.
+
+[WinningNumbers]
+- 당첨 번호와 보너스 번호에 대한 validation을 수행한다.
+
+[LottoJudgement]
+- 수동로또와 자동로또와 당첨번호를 받아 LottoResult를 반환한다.
+
+[NumberOfResults]
+- 로또 결과를 받아 각각의 개수를 map으로 저장한다.
+
+[WinningStatistics]
+- 수익률 계산
+
+[InputView]
+- [x] 수동 로또 구매 개수와 내용을 추가로 입력 받는다.

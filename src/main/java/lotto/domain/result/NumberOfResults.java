@@ -18,9 +18,9 @@ public class NumberOfResults {
 
     private void applyNumberOfResults(List<LottoResult> lottoResults) {
         lottoResults.stream()
-            .filter(NumberOfResults::hasReward)
-            .forEach(lottoResult -> numberOfResults.put(lottoResult,
-                numberOfResults.getOrDefault(lottoResult, 0) + 1));
+                .filter(NumberOfResults::hasReward)
+                .forEach(lottoResult -> numberOfResults.put(lottoResult,
+                        numberOfResults.getOrDefault(lottoResult, 0) + 1));
     }
 
     public Map<LottoResult, Integer> getNumberOfResults() {

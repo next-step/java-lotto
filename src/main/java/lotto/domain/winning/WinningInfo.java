@@ -1,6 +1,7 @@
 package lotto.domain.winning;
 
 import java.util.List;
+
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 

@@ -31,9 +31,9 @@ public enum LottoResult {
         }
 
         return Arrays.stream(LottoResult.values())
-            .filter(lottoResult -> isSameCountAndBonus(lottoResult, count, hasBonus))
-            .findAny()
-            .orElseThrow(() -> new IllegalArgumentException("[ERROR] 당첨 결과를 찾지 못했습니다."));
+                .filter(lottoResult -> isSameCountAndBonus(lottoResult, count, hasBonus))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 당첨 결과를 찾지 못했습니다."));
     }
 
     private static boolean isSameCountAndBonus(LottoResult lottoResult, int count, boolean includeBonus) {
