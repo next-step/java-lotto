@@ -92,4 +92,13 @@ class StringCalculatorTest {
 
         assertThat(result).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("0으로 나눌 경우 예외 처리")
+    void divideByZero() {
+        String source = "3 / 0";
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> calculator.splitAndCalculate(source));
+    }
 }
