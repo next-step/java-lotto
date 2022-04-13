@@ -12,7 +12,7 @@ public class PositiveInteger {
         try {
             number = Integer.parseInt(item);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException();
+            throw new NumberFormatException("숫자가 아닌 문자를 치환할 수 없습니다!");
         }
 
         if (number < 0) {
