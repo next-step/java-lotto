@@ -55,4 +55,14 @@ class StringCalculatorTest {
 
         assertThat(result).isEqualTo(5);
     }
+
+    @Test
+    @DisplayName("사칙연산 테스트")
+    void arithmeticOperation() {
+        String source = "2 + 3 * 4 / 2 - 5";
+
+        int result = calculator.splitAndCalculate(source);
+
+        assertThat(result).isEqualTo(5);
+    }
 }
