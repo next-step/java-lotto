@@ -75,4 +75,12 @@ class StringCalculatorTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> calculator.splitAndCalculate(source));
     }
+
+    @Test
+    @DisplayName("사칙연산 이외의 기호 예외 처리")
+    void invalidArithmeticOperation() {
+        String source = "2 _ 3";
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> calculator.splitAndCalculate(source));
+    }
 }
