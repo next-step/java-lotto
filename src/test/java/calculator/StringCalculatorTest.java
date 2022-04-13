@@ -26,4 +26,13 @@ class StringCalculatorTest {
         assertThat(result).isEqualTo(5);
     }
 
+    @Test
+    @DisplayName("뺄셈 테스트")
+    void subtraction() {
+        String source = "5 - 2";
+
+        int result = calculator.splitAndCalculate(source);
+
+        assertThat(result).isEqualTo(3);
+    }
 }
