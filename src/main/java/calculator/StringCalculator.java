@@ -7,15 +7,15 @@ public class StringCalculator {
     public int splitAndCalculate(String source) {
         checkSourceValidation(source);
         String[] splits = source.split(" ");
-        int result = new PositiveInteger(splits[0]).getPositiveNumber();
+        int leftPort = PositiveInteger.toPositiveInteger(splits[0]);
 
         for (int i = 1; i < splits.length; i += 2) {
             validateArithmeticOperation(splits[i]);
-            int rightPort = new PositiveInteger(splits[i + 1]).getPositiveNumber();
-            result = calculateByOperation(splits[i], result, rightPort);
+            int rightPort = PositiveInteger.toPositiveInteger(splits[i + 1]);
+            leftPort = calculateByOperation(splits[i], leftPort, rightPort);
         }
 
-        return result;
+        return leftPort;
     }
 
     private void checkSourceValidation(String source) {

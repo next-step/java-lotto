@@ -2,13 +2,11 @@ package calculator;
 
 public class PositiveInteger {
 
-    private int positiveNumber;
-
-    public PositiveInteger(String item) {
-        this.positiveNumber = toInt(item);
+    public static int toPositiveInteger(String item) {
+        return toInt(item);
     }
 
-    private int toInt(String item) {
+    private static int toInt(String item) {
         int number;
 
         try {
@@ -24,7 +22,4 @@ public class PositiveInteger {
         return number;
     }
 
-    public int getPositiveNumber() {
-        return positiveNumber;
-    }
 }
