@@ -14,6 +14,8 @@ public class StringCalculator {
                 result -= Integer.parseInt(splits[i + 1]);
             } else if (splits[i].equals("*")) {
                 result *= Integer.parseInt(splits[i + 1]);
+            } else if (splits[i].equals("/")) {
+                result /= Integer.parseInt(splits[i + 1]);
             }
         }
 

@@ -46,4 +46,13 @@ class StringCalculatorTest {
         assertThat(result).isEqualTo(10);
     }
 
+    @Test
+    @DisplayName("나눗셈 테스트")
+    void division() {
+        String source = "10 / 2";
+
+        int result = calculator.splitAndCalculate(source);
+
+        assertThat(result).isEqualTo(5);
+    }
 }
