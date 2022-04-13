@@ -83,4 +83,14 @@ class StringCalculatorTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> calculator.splitAndCalculate(source));
     }
+
+    @Test
+    @DisplayName("숫자 하나만 입력 했을 때 그 값을 그대로 결과로 사용")
+    void onlyOneNumber() {
+        String source = "3";
+
+        int result = calculator.splitAndCalculate(source);
+
+        assertThat(result).isEqualTo(3);
+    }
 }
