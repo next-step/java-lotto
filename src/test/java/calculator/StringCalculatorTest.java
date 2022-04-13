@@ -35,4 +35,15 @@ class StringCalculatorTest {
 
         assertThat(result).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("곱셈 테스트")
+    void multiplication() {
+        String source = "5 * 2";
+
+        int result = calculator.splitAndCalculate(source);
+
+        assertThat(result).isEqualTo(10);
+    }
+
 }
