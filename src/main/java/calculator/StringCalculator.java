@@ -2,20 +2,19 @@ package calculator;
 
 public class StringCalculator {
 
-
     public int splitAndCalculate(String source) {
         String[] splits = source.split(" ");
-        int result = Integer.parseInt(splits[0]);
+        int result = new PositiveInteger(splits[0]).getPositiveNumber();
 
         for (int i = 1; i < splits.length; i++) {
             if (splits[i].equals("+")) {
-                result += Integer.parseInt(splits[i + 1]);
+                result += new PositiveInteger(splits[i + 1]).getPositiveNumber();
             } else if (splits[i].equals("-")) {
-                result -= Integer.parseInt(splits[i + 1]);
+                result -= new PositiveInteger(splits[i + 1]).getPositiveNumber();
             } else if (splits[i].equals("*")) {
-                result *= Integer.parseInt(splits[i + 1]);
+                result *= new PositiveInteger(splits[i + 1]).getPositiveNumber();
             } else if (splits[i].equals("/")) {
-                result /= Integer.parseInt(splits[i + 1]);
+                result /= new PositiveInteger(splits[i + 1]).getPositiveNumber();
             }
         }
 
