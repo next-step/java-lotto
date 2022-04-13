@@ -4,6 +4,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -64,5 +66,13 @@ class StringCalculatorTest {
         int result = calculator.splitAndCalculate(source);
 
         assertThat(result).isEqualTo(5);
+    }
+
+    @DisplayName("빈 문자열, Null 예외 처리")
+    @ParameterizedTest
+    @NullAndEmptySource
+    void nullOrEmptySource(String source) {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> calculator.splitAndCalculate(source));
     }
 }

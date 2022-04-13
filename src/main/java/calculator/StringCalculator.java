@@ -5,6 +5,7 @@ import calculator.operation.*;
 public class StringCalculator {
 
     public int splitAndCalculate(String source) {
+        checkSourceValidation(source);
         String[] splits = source.split(" ");
         int result = new PositiveInteger(splits[0]).getPositiveNumber();
 
@@ -15,6 +16,12 @@ public class StringCalculator {
         }
 
         return result;
+    }
+
+    private void checkSourceValidation(String source) {
+        if (source == null || source.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
     }
 
     private int calculateByOperation(String operation, int leftPort, int rightPort) {
