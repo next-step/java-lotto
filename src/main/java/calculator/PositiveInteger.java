@@ -16,7 +16,7 @@ public class PositiveInteger {
         }
 
         if (number < 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("음수는 허용하지 않습니다!");
         }
 
         return number;

@@ -72,7 +72,8 @@ class StringCalculatorTest {
     @NullAndEmptySource
     void nullOrEmptySource(String source) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> calculator.splitAndCalculate(source));
+                .isThrownBy(() -> calculator.splitAndCalculate(source))
+                .withMessage("입력 값이 null 혹은 공백일 수는 없습니다!");
     }
 
     @Test
@@ -80,7 +81,8 @@ class StringCalculatorTest {
     void invalidArithmeticOperation() {
         String source = "2 _ 3";
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> calculator.splitAndCalculate(source));
+                .isThrownBy(() -> calculator.splitAndCalculate(source))
+                .withMessage("적절한 사칙연산이 들어오지 않았습니다!");
     }
 
     @Test
@@ -99,6 +101,7 @@ class StringCalculatorTest {
         String source = "3 / 0";
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> calculator.splitAndCalculate(source));
+                .isThrownBy(() -> calculator.splitAndCalculate(source))
+                .withMessage("0으로 나눌 수는 없습니다!");
     }
 }

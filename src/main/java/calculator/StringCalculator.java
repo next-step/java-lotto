@@ -22,13 +22,13 @@ public class StringCalculator {
 
     private void checkSourceValidation(String source) {
         if (source == null || source.isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("입력 값이 null 혹은 공백일 수는 없습니다!");
         }
     }
 
     private void validateArithmeticOperation(String operation) {
         if (!(isAddition(operation) || isSubtraction(operation) || isMultiplication(operation) || isDivision(operation))) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("적절한 사칙연산이 들어오지 않았습니다!");
         }
     }
 
