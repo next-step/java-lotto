@@ -3,6 +3,7 @@ package calculator;
 import calculator.operation.*;
 
 import static calculator.operation.ArithmeticOperation.*;
+import static java.util.Arrays.*;
 
 public class StringCalculator {
 
@@ -27,7 +28,9 @@ public class StringCalculator {
     }
 
     private void validateArithmeticOperation(String operation) {
-        if (!(isAddition(operation) || isSubtraction(operation) || isMultiplication(operation) || isDivision(operation))) {
+        if (stream(values()).noneMatch(arithmeticOperation -> arithmeticOperation
+                .getOperation()
+                .equals(operation))) {
             throw new IllegalArgumentException("적절한 사칙연산이 들어오지 않았습니다!");
         }
     }
@@ -38,34 +41,12 @@ public class StringCalculator {
     }
 
     private CustomOperation findOperation(String operation) {
-        if (isAddition(operation)) {
-            return new Addition();
-        }
-        if (isSubtraction(operation)) {
-            return new Subtraction();
-        }
-        if (isMultiplication(operation)) {
-            return new Multiplication();
-        }
-        if (isDivision(operation)) {
-            return new Division();
+        for (ArithmeticOperation arithmeticOperation : values()) {
+            if (arithmeticOperation.getOperation().equals(operation)) {
+                return arithmeticOperation.getCustomOperation();
+            }
         }
         throw new IllegalArgumentException("적절한 사칙연산이 들어오지 않았습니다!");
     }
 
-    private boolean isAddition(String operation) {
-        return operation.equals(ADDITION.getOperation());
-    }
-
-    private boolean isSubtraction(String operation) {
-        return operation.equals(SUBTRACTION.getOperation());
-    }
-
-    private boolean isMultiplication(String operation) {
-        return operation.equals(MULTIPLICATION.getOperation());
-    }
-
-    private boolean isDivision(String operation) {
-        return operation.equals(DIVISION.getOperation());
-    }
 }
