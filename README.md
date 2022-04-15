@@ -7,3 +7,14 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+
+### step1 문자열 계산기 기능
+1. 덧셈 (Addition)
+2. 뺄셈 (Subtraction)
+3. 곱셈 (Multiplication)
+4. 나눗셈 (Division)
+5. 1, 2, 3, 4 통합 기능
+6. 빈 문자열 or Null 예외 처리
+7. 적절하지 않은 사칙연산 도입
+8. 숫자 하나만 입력됐을 때 그 값 그대로 결과 출력
