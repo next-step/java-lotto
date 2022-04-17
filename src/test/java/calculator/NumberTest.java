@@ -76,4 +76,16 @@ class NumberTest {
                 .isInstanceOf(ArithmeticException.class)
                 .hasMessage("0으로 나눌 수 없습니다.");
     }
+
+    @Test
+    @DisplayName("나눗셈 결과는 정수로 떨어지는 값이 아닐 경우 한정한다")
+    void dividedNumberExceptionTest() {
+        //given
+        Number number1 = new Number(3);
+        Number number2 = new Number(4);
+
+        //when, then
+        assertThatThrownBy(() -> number1.divide(number2)).isInstanceOf(DividedNumberException.class);
+    }
+
 }
