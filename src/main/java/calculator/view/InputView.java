@@ -1,4 +1,6 @@
-package calculator;
+package calculator.view;
+
+import calculator.exception.BlankExpressionException;
 
 import java.util.Scanner;
 

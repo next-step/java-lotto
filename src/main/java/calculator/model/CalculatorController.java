@@ -1,4 +1,8 @@
-package calculator;
+package calculator.model;
+
+import calculator.util.ExpressionExtractorUtil;
+import calculator.view.InputView;
+import calculator.view.OutputView;
 
 import java.util.List;
 
@@ -28,8 +32,8 @@ public class CalculatorController {
     }
 
     private Calculator generateCalculator(String expression) {
-        List<Number> numbers = ExpressionExtractor.extractNumbers(expression);
-        List<Operator> operators = ExpressionExtractor.extractOperators(expression);
+        List<Number> numbers = ExpressionExtractorUtil.extractNumbers(expression);
+        List<Operator> operators = ExpressionExtractorUtil.extractOperators(expression);
         return new Calculator(numbers, operators);
     }
 

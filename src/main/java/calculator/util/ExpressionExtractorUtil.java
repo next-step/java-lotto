@@ -1,11 +1,14 @@
-package calculator;
+package calculator.util;
+
+import calculator.model.Number;
+import calculator.model.Operator;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static java.util.stream.Collectors.*;
 
-public class ExpressionExtractor {
+public class ExpressionExtractorUtil {
 
     public static final String OPERATOR_REGULAR_EXPRESSION = "[+\\-*/]";
 
@@ -13,7 +16,7 @@ public class ExpressionExtractor {
 
     public static final String BLANK = "";
 
-    private ExpressionExtractor() {
+    private ExpressionExtractorUtil() {
     }
 
     public static List<Number> extractNumbers(String expression) {

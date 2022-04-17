@@ -1,4 +1,6 @@
-package calculator;
+package calculator.model;
+
+import calculator.exception.InvalidOperatorException;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;

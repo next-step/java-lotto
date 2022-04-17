@@ -1,5 +1,7 @@
 package calculator;
 
+import calculator.exception.DividedNumberException;
+import calculator.model.Number;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

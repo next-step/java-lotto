@@ -1,4 +1,6 @@
-package calculator;
+package calculator.model;
+
+import calculator.exception.DividedNumberException;
 
 import java.util.Objects;
 

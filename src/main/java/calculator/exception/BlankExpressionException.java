@@ -1,4 +1,4 @@
-package calculator;
+package calculator.exception;
 
 public class BlankExpressionException extends RuntimeException {
 

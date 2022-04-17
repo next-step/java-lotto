@@ -1,5 +1,8 @@
 package calculator;
 
+import calculator.exception.InvalidOperatorException;
+import calculator.model.Number;
+import calculator.model.Operator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -1,4 +1,6 @@
-package calculator;
+package calculator.view;
+
+import calculator.model.Number;
 
 public class OutputView {
 
