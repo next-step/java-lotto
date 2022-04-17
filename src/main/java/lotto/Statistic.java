@@ -5,6 +5,9 @@ import java.util.List;
 
 public enum Statistic {
 
+    ZERO(0, 0),
+    ONE(1, 0),
+    TWO(2, 0),
     THREE(3, 5_000),
     FOUR(4, 50_000),
     FIVE(5, 1_500_000),
@@ -22,7 +25,7 @@ public enum Statistic {
         return Arrays.stream(values())
                 .filter(statistic -> statistic.matchCount == matchCount)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("3미만의 당첨 개수는 산정하지 않습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("0 ~ 6이외의 matchCount 는 발생할 수 없습니다."));
     }
 
     public static double calculateRate(int price, List<Statistic> statistics) {
@@ -36,5 +39,13 @@ public enum Statistic {
         return statistics.stream()
                 .mapToInt(i -> i.winnings)
                 .sum();
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public int getWinnings() {
+        return winnings;
     }
 }
