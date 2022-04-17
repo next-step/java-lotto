@@ -30,7 +30,13 @@ public class Number {
             throw new ArithmeticException("0으로 나눌 수 없습니다.");
         }
 
-        return new Number(this.value / otherNumber.value);
+        int dividedValue = this.value / otherNumber.value;
+
+        if (this.value % otherNumber.value != 0) {
+            throw new DividedNumberException();
+        }
+
+        return new Number(dividedValue);
     }
 
     private boolean isZero() {
