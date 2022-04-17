@@ -9,6 +9,7 @@ import static java.util.stream.Collectors.*;
 
 public class LottoGenerator {
 
+    private static final int PRICE_PER_LOTTO = 1000;
     private final List<Integer> LOTTO_SET = new ArrayList<>();
 
     public LottoGenerator() {
@@ -23,6 +24,26 @@ public class LottoGenerator {
                 .stream()
                 .sorted(naturalOrder())
                 .collect(toList());
+    }
+
+    public List<List<Integer>> generate(int purchaseAmount) {
+        int lottoCount = calculatePurchasableCount(purchaseAmount);
+        List<List<Integer>> lotteries = new ArrayList<>();
+
+        for (int i = 0; i < lottoCount; i++) {
+            Collections.shuffle(LOTTO_SET);
+
+            lotteries.add(LOTTO_SET
+                    .subList(0, 6)
+                    .stream()
+                    .sorted(naturalOrder())
+                    .collect(toList()));
+        }
+        return lotteries;
+    }
+
+    private int calculatePurchasableCount(int purchaseAmount) {
+        return purchaseAmount / PRICE_PER_LOTTO;
     }
 
 }
