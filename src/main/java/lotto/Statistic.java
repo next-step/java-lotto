@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum Statistic {
 
@@ -22,5 +23,18 @@ public enum Statistic {
                 .filter(statistic -> statistic.matchCount == matchCount)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("3미만의 당첨 개수는 산정하지 않습니다."));
+    }
+
+    public static double calculateRate(int price, List<Statistic> statistics) {
+        int totalWinnings = calculateTotalWinnings(statistics);
+
+        double rate = (double) totalWinnings / price;
+        return Math.floor(rate * 100) / 100;
+    }
+
+    private static int calculateTotalWinnings(List<Statistic> statistics) {
+        return statistics.stream()
+                .mapToInt(i -> i.winnings)
+                .sum();
     }
 }

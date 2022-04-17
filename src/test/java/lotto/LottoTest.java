@@ -73,4 +73,16 @@ public class LottoTest {
         assertThat(frequency(statistics, Statistic.FOUR)).isEqualTo(1);
         assertThat(frequency(statistics, Statistic.THREE)).isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("구입한 로또의 금액과 당첨된 로또 번호를 통해 수익률 계산")
+    void findTotalRate() {
+        int price = 14_000;
+
+        List<Statistic> statistics = List.of(Statistic.THREE);
+
+        double rate = Statistic.calculateRate(price, statistics);
+
+        assertThat(rate).isEqualTo(0.35);
+    }
 }
