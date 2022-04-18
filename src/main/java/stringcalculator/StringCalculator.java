@@ -24,17 +24,13 @@ public class StringCalculator {
 
     private static int calculate(Deque<String> tokens) {
         while (tokens.size() > 1) {
-            calculateFirstThree(tokens);
+            int operand1 = Integer.parseInt(tokens.removeFirst());
+            Operator operator = Operator.findBySymbol(tokens.removeFirst());
+            int operand2 = Integer.parseInt(tokens.removeFirst());
+
+            String result = String.valueOf(operator.apply(operand1, operand2));
+            tokens.addFirst(result);
         }
-        return Integer.parseInt(tokens.removeFirst());
-    }
-
-    private static void calculateFirstThree(Deque<String> tokens) {
-        int operand1 = Integer.parseInt(tokens.removeFirst());
-        Operator operator = Operator.findBySymbol(tokens.removeFirst());
-        int operand2 = Integer.parseInt(tokens.removeFirst());
-
-        String result = String.valueOf(operator.apply(operand1, operand2));
-        tokens.addFirst(result);
+        return Integer.parseInt(tokens.getFirst());
     }
 }
