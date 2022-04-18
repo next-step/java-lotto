@@ -29,4 +29,8 @@ public enum Rank {
                 .orElse(MISS);
     }
 
+    public boolean isMiss() {
+        return this.equals(Rank.MISS);
+    }
+
 }
