@@ -58,20 +58,20 @@ public class LottoTest {
 
     @Test
     @DisplayName("금주의 로또 당첨 번호와 구매한 로또 번호의 통계 구하기")
-    void statisticsOfUsersLotto() {
-        List<Statistic> statistics = new ArrayList<>();
+    void rankOfUsersLotto() {
+        List<Rank> ranks = new ArrayList<>();
 
         for (List<Integer> lotto : userLottoSet) {
             int matchCount = lottoMachine.matchLottoNumber(winLottoNumber, lotto);
-            Statistic lottoRank = Statistic.findRank(matchCount);
-            statistics.add(lottoRank);
+            Rank lottoRank = Rank.findRank(matchCount);
+            ranks.add(lottoRank);
         }
 
-        assertThat(statistics).hasSize(4);
-        assertThat(frequency(statistics, Statistic.SIX)).isEqualTo(1);
-        assertThat(frequency(statistics, Statistic.FIVE)).isEqualTo(1);
-        assertThat(frequency(statistics, Statistic.FOUR)).isEqualTo(1);
-        assertThat(frequency(statistics, Statistic.THREE)).isEqualTo(1);
+        assertThat(ranks).hasSize(4);
+        assertThat(frequency(ranks, Rank.SIX)).isEqualTo(1);
+        assertThat(frequency(ranks, Rank.FIVE)).isEqualTo(1);
+        assertThat(frequency(ranks, Rank.FOUR)).isEqualTo(1);
+        assertThat(frequency(ranks, Rank.THREE)).isEqualTo(1);
     }
 
     @Test
@@ -79,9 +79,9 @@ public class LottoTest {
     void findTotalRate() {
         int price = 14_000;
 
-        List<Statistic> statistics = List.of(Statistic.THREE);
+        List<Rank> ranks = List.of(Rank.THREE);
 
-        double rate = Statistic.calculateRate(price, statistics);
+        double rate = Rank.calculateRate(price, ranks);
 
         assertThat(rate).isEqualTo(0.35);
     }

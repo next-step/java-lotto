@@ -13,19 +13,19 @@ public class ResultView {
         }
     }
 
-    public void printLottoStatistic(List<Statistic> statistics) {
-        for (Statistic statistic : Statistic.values()) {
-            int frequency = Collections.frequency(statistics, statistic);
-            printEachStatistic(statistic, frequency);
+    public void printLottoRank(List<Rank> ranks) {
+        for (Rank rank : Rank.values()) {
+            int frequency = Collections.frequency(ranks, rank);
+            printEachRank(rank, frequency);
         }
     }
 
-    private void printEachStatistic(Statistic statistic, int frequency) {
+    private void printEachRank(Rank rank, int frequency) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(statistic.getMatchCount())
+        sb.append(rank.getMatchCount())
                 .append("개 일치 = ")
-                .append(statistic.getWinnings())
+                .append(rank.getWinnings())
                 .append("원 - ")
                 .append(frequency)
                 .append("개");

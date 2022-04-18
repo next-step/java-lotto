@@ -20,11 +20,11 @@ public class LottoApplication {
         List<Integer> winningLotto = inputView.insertWinningLotto();
 
         LottoMachine lottoMachine = new LottoMachine();
-        List<Statistic> statistics = lottoMachine.findBoughtLottoStatistics(winningLotto, lotteries);
+        List<Rank> ranks = lottoMachine.findBoughtLottoRank(winningLotto, lotteries);
 
-        resultView.printLottoStatistic(statistics);
+        resultView.printLottoRank(ranks);
 
-        double rate = Statistic.calculateRate(insertLottoPrice, statistics);
+        double rate = Rank.calculateRate(insertLottoPrice, ranks);
         resultView.printTotalRate(rate);
     }
 }
