@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class LottoTicket {
 
-    private static final int MAX_LOTTO_SIZE = 6;
+    private static final int LOTTO_NUMBERS_SIZE = 6;
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -17,7 +17,7 @@ public class LottoTicket {
     }
 
     private void validate(Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != MAX_LOTTO_SIZE) {
+        if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new InvalidLottoTicketException();
         }
     }
