@@ -19,8 +19,7 @@ public class LottoApplication {
 
         List<Integer> winningLotto = inputView.insertWinningLotto();
 
-        LottoMachine lottoMachine = new LottoMachine();
-        List<Rank> ranks = lottoMachine.findBoughtLottoRank(winningLotto, lotteries);
+        List<Rank> ranks = LottoMachine.findBoughtLottoRank(winningLotto, lotteries);
 
         resultView.printLottoRank(ranks);
 

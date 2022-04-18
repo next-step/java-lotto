@@ -3,9 +3,9 @@ package lotto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoMachine {
+public abstract class LottoMachine {
 
-    public List<Rank> findBoughtLottoRank(List<Integer> winningLotto, List<List<Integer>> lotteries) {
+    public static List<Rank> findBoughtLottoRank(List<Integer> winningLotto, List<List<Integer>> lotteries) {
         List<Rank> ranks = new ArrayList<>();
 
         for (List<Integer> lottery : lotteries) {
@@ -16,7 +16,7 @@ public class LottoMachine {
         return ranks;
     }
 
-    public int matchLottoNumber(List<Integer> winLotto, List<Integer> generatedLotto) {
+    public static int matchLottoNumber(List<Integer> winLotto, List<Integer> generatedLotto) {
         int sum = 0;
 
         for (Integer lottoNumber : winLotto) {
@@ -26,7 +26,7 @@ public class LottoMachine {
         return sum;
     }
 
-    private int increaseCountIfMatched(Integer lottoNumber, List<Integer> generatedLotto) {
+    private static int increaseCountIfMatched(Integer lottoNumber, List<Integer> generatedLotto) {
         if (generatedLotto.contains(lottoNumber)) {
             return 1;
         }
