@@ -6,7 +6,7 @@ final class MultiplyCalculator implements Calculator {
     private final Number number;
 
     private MultiplyCalculator(Calculator calculator, Number number) {
-        Assert.notNull(calculator, "'calculation' must not be null");
+        Assert.notNull(calculator, "'calculator' must not be null");
         Assert.notNull(number, "'number' to multiply must not be null");
         this.calculator = calculator;
         this.number = number;
@@ -20,5 +20,13 @@ final class MultiplyCalculator implements Calculator {
     public Number calculate() {
         return calculator.calculate()
                 .multiply(number);
+    }
+
+    @Override
+    public String toString() {
+        return "MultiplyCalculator{" +
+                "calculator=" + calculator +
+                ", number=" + number +
+                '}';
     }
 }

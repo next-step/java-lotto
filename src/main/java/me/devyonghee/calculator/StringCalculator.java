@@ -38,4 +38,11 @@ final class StringCalculator {
             throw new IllegalStateException("number string to be calculated is not exists");
         }
     }
+
+    @Override
+    public String toString() {
+        return "StringCalculator{" +
+                "provider=" + provider +
+                '}';
+    }
 }

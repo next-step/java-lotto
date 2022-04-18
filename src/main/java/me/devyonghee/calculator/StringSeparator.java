@@ -23,4 +23,11 @@ final class StringSeparator implements StringsProvider {
     public List<String> strings() {
         return Arrays.asList(string.split(DEFAULT_DELIMITER));
     }
+
+    @Override
+    public String toString() {
+        return "StringSeparator{" +
+                "string='" + string + '\'' +
+                '}';
+    }
 }

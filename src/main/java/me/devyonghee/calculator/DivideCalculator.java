@@ -6,7 +6,7 @@ final class DivideCalculator implements Calculator {
     private final Number number;
 
     private DivideCalculator(Calculator calculator, Number number) {
-        Assert.notNull(calculator, "'calculation' must not be null");
+        Assert.notNull(calculator, "'calculator' must not be null");
         Assert.notNull(number, "'number' to divide must not be null");
         validateNumber(number);
         this.calculator = calculator;
@@ -27,5 +27,13 @@ final class DivideCalculator implements Calculator {
         if (Number.ZERO.equals(number)) {
             throw new IllegalArgumentException("number to divide cannot be zero");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "DivideCalculator{" +
+                "calculator=" + calculator +
+                ", number=" + number +
+                '}';
     }
 }

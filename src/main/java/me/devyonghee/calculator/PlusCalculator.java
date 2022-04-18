@@ -6,7 +6,7 @@ final class PlusCalculator implements Calculator {
     private final Number number;
 
     private PlusCalculator(Calculator calculator, Number number) {
-        Assert.notNull(calculator, "'calculation' must not be null");
+        Assert.notNull(calculator, "'calculator' must not be null");
         Assert.notNull(number, "'number' to plus must not be null");
         this.calculator = calculator;
         this.number = number;
@@ -20,5 +20,13 @@ final class PlusCalculator implements Calculator {
     public Number calculate() {
         return calculator.calculate()
                 .plus(number);
+    }
+
+    @Override
+    public String toString() {
+        return "PlusCalculator{" +
+                "calculator=" + calculator +
+                ", number=" + number +
+                '}';
     }
 }
