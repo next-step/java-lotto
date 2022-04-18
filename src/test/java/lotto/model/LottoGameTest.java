@@ -1,6 +1,5 @@
 package lotto.model;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,24 +11,20 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoGameTest {
 
-    private LottoGame lottoGame;
-
-    @BeforeEach
-    void setUp() {
-        List<LottoTicket> lottoTickets = initLottoTickets();
-        WinningTicket winningTicket = initWinningTicket();
-        lottoGame = new LottoGame(lottoTickets, winningTicket);
-    }
-
     @Test
     @DisplayName("로또 결과를 확인하다")
     void produceResultStrategy() {
-        List<RankResult> rankResults = lottoGame.produceResultStrategy();
+        List<LottoTicket> lottoTickets = initLottoTickets();
+        WinningTicket winningTicket = initWinningTicket();
+        LottoGame lottoGame = new LottoGame(lottoTickets, winningTicket);
+
+        RankResults rankResults = lottoGame.produceResultStrategy();
+        List<RankResult> rankResultList = rankResults.getRankResults();
         assertAll(
-                () -> assertThat(rankResults).contains(new RankResult(Rank.FIRST, 1)),
-                () -> assertThat(rankResults).contains(new RankResult(Rank.SECOND, 0)),
-                () -> assertThat(rankResults).contains(new RankResult(Rank.THIRD, 0)),
-                () -> assertThat(rankResults).contains(new RankResult(Rank.FOURTH, 1))
+                () -> assertThat(rankResultList).contains(new RankResult(Rank.FIRST, 1)),
+                () -> assertThat(rankResultList).contains(new RankResult(Rank.SECOND, 0)),
+                () -> assertThat(rankResultList).contains(new RankResult(Rank.THIRD, 0)),
+                () -> assertThat(rankResultList).contains(new RankResult(Rank.FOURTH, 1))
         );
     }
 

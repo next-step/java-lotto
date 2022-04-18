@@ -9,13 +9,17 @@ public enum Rank {
     FOURTH(3, 5_000),
     MISS(0, 0);
 
-    private final int count;
+    private final int matchCount;
 
     private final long amount;
 
-    Rank(int count, long amount) {
-        this.count = count;
+    Rank(int matchCount, long amount) {
+        this.matchCount = matchCount;
         this.amount = amount;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
     }
 
     public long getAmount() {
@@ -24,7 +28,7 @@ public enum Rank {
 
     public static Rank valueOf(int count) {
         return Arrays.stream(values())
-                .filter(rank -> rank.count == count)
+                .filter(rank -> rank.matchCount == count)
                 .findFirst()
                 .orElse(MISS);
     }
