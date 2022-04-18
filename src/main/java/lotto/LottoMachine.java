@@ -20,16 +20,15 @@ public abstract class LottoMachine {
         int sum = 0;
 
         for (Integer lottoNumber : winLotto) {
-            sum += increaseCountIfMatched(lottoNumber, generatedLotto);
+            if (isMatchedNumber(lottoNumber, generatedLotto)) {
+                sum += 1;
+            }
         }
 
         return sum;
     }
 
-    private static int increaseCountIfMatched(Integer lottoNumber, List<Integer> generatedLotto) {
-        if (generatedLotto.contains(lottoNumber)) {
-            return 1;
-        }
-        return 0;
+    private static boolean isMatchedNumber(Integer lottoNumber, List<Integer> generatedLotto) {
+        return generatedLotto.contains(lottoNumber);
     }
 }
