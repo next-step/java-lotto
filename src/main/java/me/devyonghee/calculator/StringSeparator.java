@@ -4,16 +4,14 @@ package me.devyonghee.calculator;
 import java.util.Arrays;
 import java.util.List;
 
-final class StringSeparator {
+final class StringSeparator implements StringsProvider {
 
     private static final String DEFAULT_DELIMITER = " ";
 
-    private String string;
+    private final String string;
 
     private StringSeparator(String string) {
-        if (isBlank(string)) {
-            throw new IllegalArgumentException("string to split must be provided");
-        }
+        Assert.hasText(string, "string to split must be provided");
         this.string = string;
     }
 
@@ -21,11 +19,8 @@ final class StringSeparator {
         return new StringSeparator(string);
     }
 
-    List<String> separate() {
+    @Override
+    public List<String> strings() {
         return Arrays.asList(string.split(DEFAULT_DELIMITER));
-    }
-
-    private boolean isBlank(String string) {
-        return string == null || string.isBlank();
     }
 }

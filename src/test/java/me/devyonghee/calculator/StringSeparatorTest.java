@@ -25,9 +25,9 @@ class StringSeparatorTest {
 
     @Test
     @DisplayName("기본 구분자로 문자 나누기")
-    void separate() {
-        assertThat(StringSeparator.from("1").separate()).containsExactly("1");
-        assertThat(StringSeparator.from("1 2").separate()).containsExactly("1", "2");
-        assertThat(StringSeparator.from("a b c").separate()).containsExactly("a", "b", "c");
+    void strings() {
+        assertThat(StringSeparator.from("1").strings()).containsExactly("1");
+        assertThat(StringSeparator.from("1 2").strings()).containsExactly("1", "2");
+        assertThat(StringSeparator.from("a b c").strings()).containsExactly("a", "b", "c");
     }
 }
