@@ -26,7 +26,7 @@ public class Calculator {
     }
 
     private boolean isEmptyNumber(List<Number> numbers) {
-        return numbers.size() == 0;
+        return numbers.isEmpty();
     }
 
     public Number calculate() {

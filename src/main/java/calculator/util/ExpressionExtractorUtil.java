@@ -10,11 +10,11 @@ import static java.util.stream.Collectors.*;
 
 public class ExpressionExtractorUtil {
 
-    public static final String OPERATOR_REGULAR_EXPRESSION = "[+\\-*/]";
+    private static final String OPERATOR_REGULAR_EXPRESSION = "[+\\-*/]";
 
-    public static final String NUMBER_REGULAR_EXPRESSION = "[0-9]";
+    private static final String NUMBER_REGULAR_EXPRESSION = "[0-9]";
 
-    public static final String BLANK = "";
+    private static final String BLANK = "";
 
     private ExpressionExtractorUtil() {
     }

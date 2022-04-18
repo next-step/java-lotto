@@ -3,7 +3,7 @@ package calculator.model;
 import calculator.exception.InvalidOperatorException;
 
 import java.util.Arrays;
-import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 
 public enum Operator {
 
@@ -14,9 +14,9 @@ public enum Operator {
 
     private final String value;
 
-    private final BiFunction<Number, Number, Number> calculator;
+    private final BinaryOperator<Number> calculator;
 
-    Operator(String value, BiFunction<Number, Number, Number> calculator) {
+    Operator(String value, BinaryOperator<Number> calculator) {
         this.value = value;
         this.calculator = calculator;
     }
