@@ -1,6 +1,6 @@
 package me.devyonghee.calculator;
 
-public interface Calculator {
+interface Calculator {
 
     Number calculate();
 }

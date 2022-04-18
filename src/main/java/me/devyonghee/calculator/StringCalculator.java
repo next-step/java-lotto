@@ -21,11 +21,21 @@ final class StringCalculator {
 
     private Calculator calculator() {
         Iterator<String> iterator = provider.strings().iterator();
+        validateNext(iterator);
+
         Number fistNumber = Number.from(iterator.next());
         Calculator calculator = () -> fistNumber;
         while (iterator.hasNext()) {
-            calculator = CalculatorFactory.calculator(Operation.of(iterator.next()), calculator, Number.from(iterator.next()));
+            Operation operation = Operation.of(iterator.next());
+            validateNext(iterator);
+            calculator = CalculatorFactory.calculator(operation, calculator, Number.from(iterator.next()));
         }
         return calculator;
+    }
+
+    private void validateNext(Iterator<String> iterator) {
+        if (!iterator.hasNext()) {
+            throw new IllegalStateException("number string to be calculated is not exists");
+        }
     }
 }

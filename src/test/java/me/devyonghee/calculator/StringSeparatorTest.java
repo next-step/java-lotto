@@ -17,7 +17,7 @@ class StringSeparatorTest {
     }
 
     @ParameterizedTest
-    @DisplayName("필터와 구분자 탐지기는 필수")
+    @DisplayName("문자열은 필수")
     @NullAndEmptySource
     void instance_nullOrEmptyArguments_thrownIllegalArgumentException(String string) {
         assertThatIllegalArgumentException().isThrownBy(() -> StringSeparator.from(string));

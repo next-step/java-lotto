@@ -1,6 +1,6 @@
 package me.devyonghee.calculator;
 
-public class MultiplyCalculator implements Calculator {
+final class MultiplyCalculator implements Calculator {
 
     private final Calculator calculator;
     private final Number number;
@@ -12,7 +12,7 @@ public class MultiplyCalculator implements Calculator {
         this.number = number;
     }
 
-    public static MultiplyCalculator of(Calculator calculator, Number number) {
+    static MultiplyCalculator of(Calculator calculator, Number number) {
         return new MultiplyCalculator(calculator, number);
     }
 

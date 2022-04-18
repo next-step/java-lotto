@@ -6,7 +6,7 @@ import org.junit.platform.commons.util.ReflectionUtils;
 
 import static org.assertj.core.api.Assertions.*;
 
-@DisplayName("계산 팩토리")
+@DisplayName("계산기 팩토리")
 class CalculatorFactoryTest {
 
     @Test
@@ -17,7 +17,7 @@ class CalculatorFactoryTest {
     }
 
     @Test
-    @DisplayName("계산 생성")
+    @DisplayName("계산기 생성")
     void calculator() {
         assertThat(CalculatorFactory.calculator(Operation.PLUS, () -> Number.ONE, Number.ONE))
                 .isInstanceOf(PlusCalculator.class);

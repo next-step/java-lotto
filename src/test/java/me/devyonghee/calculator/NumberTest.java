@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
-@DisplayName("숫자 생성")
+@DisplayName("정수 숫자")
 class NumberTest {
 
     @Test

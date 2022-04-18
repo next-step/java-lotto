@@ -2,7 +2,7 @@ package me.devyonghee.calculator;
 
 import java.util.Arrays;
 
-public enum Operation {
+enum Operation {
 
     PLUS("+"),
     MINUS("-"),
@@ -22,19 +22,19 @@ public enum Operation {
                 .orElseThrow(() -> new IllegalArgumentException(String.format("Operation Symbol(%s) is not supported", symbol)));
     }
 
-    public boolean isPlus() {
+    boolean isPlus() {
         return this == PLUS;
     }
 
-    public boolean isMinus() {
+    boolean isMinus() {
         return this == MINUS;
     }
 
-    public boolean isDivide() {
+    boolean isDivide() {
         return this == DIVIDE;
     }
 
-    public boolean isMultiply() {
+    boolean isMultiply() {
         return this == MULTIPLY;
     }
 }

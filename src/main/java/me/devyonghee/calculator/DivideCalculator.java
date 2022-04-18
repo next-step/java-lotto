@@ -1,6 +1,6 @@
 package me.devyonghee.calculator;
 
-public class DivideCalculator implements Calculator {
+final class DivideCalculator implements Calculator {
 
     private final Calculator calculator;
     private final Number number;
@@ -13,7 +13,7 @@ public class DivideCalculator implements Calculator {
         this.number = number;
     }
 
-    public static DivideCalculator of(Calculator calculator, Number number) {
+    static DivideCalculator of(Calculator calculator, Number number) {
         return new DivideCalculator(calculator, number);
     }
 
