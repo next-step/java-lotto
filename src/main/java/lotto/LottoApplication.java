@@ -13,7 +13,7 @@ public class LottoApplication {
         int insertLottoPrice = inputView.insertLottoPrice();
 
         LottoGenerator lottoGenerator = new LottoGenerator();
-        List<List<Integer>> lotteries = lottoGenerator.generate(insertLottoPrice);
+        List<Lotto> lotteries = lottoGenerator.generate(insertLottoPrice);
 
         resultView.printPurchaseLottoList(lotteries);
 

@@ -5,10 +5,10 @@ import java.util.List;
 
 public abstract class LottoMachine {
 
-    public static List<Rank> findBoughtLottoRank(List<Integer> winningLotto, List<List<Integer>> lotteries) {
+    public static List<Rank> findBoughtLottoRank(List<Integer> winningLotto, List<Lotto> lotteries) {
         List<Rank> ranks = new ArrayList<>();
 
-        for (List<Integer> lottery : lotteries) {
+        for (Lotto lottery : lotteries) {
             int matchCount = findMatchedLottoNumberCount(winningLotto, lottery);
             ranks.add(Rank.findRank(matchCount));
         }
@@ -16,7 +16,7 @@ public abstract class LottoMachine {
         return ranks;
     }
 
-    public static int findMatchedLottoNumberCount(List<Integer> winLotto, List<Integer> generatedLotto) {
+    public static int findMatchedLottoNumberCount(List<Integer> winLotto, Lotto generatedLotto) {
         int sum = 0;
 
         for (Integer lottoNumber : winLotto) {
@@ -28,7 +28,9 @@ public abstract class LottoMachine {
         return sum;
     }
 
-    private static boolean isMatchedNumber(Integer lottoNumber, List<Integer> generatedLotto) {
-        return generatedLotto.contains(lottoNumber);
+    private static boolean isMatchedNumber(Integer lottoNumber, Lotto generatedLotto) {
+        return generatedLotto
+                .getLottoNumbers()
+                .contains(lottoNumber);
     }
 }

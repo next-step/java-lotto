@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.*;
 public class LottoTest {
 
     private final List<Integer> winLottoNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-    private List<List<Integer>> userLottoSet = new ArrayList<>();
+    private List<Lotto> userLottoSet = new ArrayList<>();
 
     @BeforeEach
     void setUp() {
@@ -22,10 +22,10 @@ public class LottoTest {
         List<Integer> fourMatched = Arrays.asList(3, 4, 5, 6, 7, 8);
         List<Integer> threeMatched = Arrays.asList(4, 5, 6, 7, 8, 9);
 
-        userLottoSet.add(allMatched);
-        userLottoSet.add(fiveMatched);
-        userLottoSet.add(fourMatched);
-        userLottoSet.add(threeMatched);
+        userLottoSet.add(new Lotto(allMatched));
+        userLottoSet.add(new Lotto(fiveMatched));
+        userLottoSet.add(new Lotto(fourMatched));
+        userLottoSet.add(new Lotto(threeMatched));
     }
 
     @Test
@@ -46,7 +46,7 @@ public class LottoTest {
     @Test
     @DisplayName("당첨 복권 번호와 자동으로 발급된 로또의 일치 로직")
     void matchWinLottoAndGenerateLotto() {
-        List<Integer> randomGeneratedLotto = Arrays.asList(4, 5, 6, 7, 8, 9);
+        Lotto randomGeneratedLotto = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9));
 
         int matchCount = LottoMachine.findMatchedLottoNumberCount(winLottoNumber, randomGeneratedLotto);
 
@@ -58,7 +58,7 @@ public class LottoTest {
     void rankOfUsersLotto() {
         List<Rank> ranks = new ArrayList<>();
 
-        for (List<Integer> lotto : userLottoSet) {
+        for (Lotto lotto : userLottoSet) {
             int matchCount = LottoMachine.findMatchedLottoNumberCount(winLottoNumber, lotto);
             Rank lottoRank = Rank.findRank(matchCount);
             ranks.add(lottoRank);
