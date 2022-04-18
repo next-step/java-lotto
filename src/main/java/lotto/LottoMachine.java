@@ -9,14 +9,14 @@ public abstract class LottoMachine {
         List<Rank> ranks = new ArrayList<>();
 
         for (List<Integer> lottery : lotteries) {
-            int matchCount = matchLottoNumber(winningLotto, lottery);
+            int matchCount = findMatchedLottoNumberCount(winningLotto, lottery);
             ranks.add(Rank.findRank(matchCount));
         }
 
         return ranks;
     }
 
-    public static int matchLottoNumber(List<Integer> winLotto, List<Integer> generatedLotto) {
+    public static int findMatchedLottoNumberCount(List<Integer> winLotto, List<Integer> generatedLotto) {
         int sum = 0;
 
         for (Integer lottoNumber : winLotto) {

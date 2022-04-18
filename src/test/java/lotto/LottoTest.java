@@ -48,7 +48,7 @@ public class LottoTest {
     void matchWinLottoAndGenerateLotto() {
         List<Integer> randomGeneratedLotto = Arrays.asList(4, 5, 6, 7, 8, 9);
 
-        int matchCount = LottoMachine.matchLottoNumber(winLottoNumber, randomGeneratedLotto);
+        int matchCount = LottoMachine.findMatchedLottoNumberCount(winLottoNumber, randomGeneratedLotto);
 
         assertThat(matchCount).isEqualTo(3);
     }
@@ -59,7 +59,7 @@ public class LottoTest {
         List<Rank> ranks = new ArrayList<>();
 
         for (List<Integer> lotto : userLottoSet) {
-            int matchCount = LottoMachine.matchLottoNumber(winLottoNumber, lotto);
+            int matchCount = LottoMachine.findMatchedLottoNumberCount(winLottoNumber, lotto);
             Rank lottoRank = Rank.findRank(matchCount);
             ranks.add(lottoRank);
         }
