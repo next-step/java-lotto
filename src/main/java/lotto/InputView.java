@@ -8,6 +8,7 @@ import static java.util.Arrays.*;
 
 public class InputView {
 
+    private static final String WINNING_LOTTO_DELIMITER = ", ";
     private final Scanner scanner;
 
     public InputView() {
@@ -28,7 +29,7 @@ public class InputView {
         scanner.nextLine();
         String winningLotto = inputScannerString();
 
-        return stream(winningLotto.split(", "))
+        return stream(winningLotto.split(WINNING_LOTTO_DELIMITER))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
