@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.util.LottoGenerator;
+import lotto.util.StatisticCalculator;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class LottoApplication {
 
         resultView.printLottoRank(ranks);
 
-        double rate = Rank.calculateRate(insertLottoPrice, ranks);
+        double rate = StatisticCalculator.calculateRate(insertLottoPrice, ranks);
         resultView.printTotalRate(rate);
     }
 }

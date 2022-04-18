@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.util.LottoGenerator;
+import lotto.util.StatisticCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -78,7 +79,7 @@ public class LottoTest {
 
         List<Rank> ranks = List.of(Rank.THREE);
 
-        double rate = Rank.calculateRate(price, ranks);
+        double rate = StatisticCalculator.calculateRate(price, ranks);
 
         assertThat(rate).isEqualTo(0.35);
     }
