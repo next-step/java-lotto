@@ -26,6 +26,9 @@ public enum Operator {
     }
 
     int apply(int operand1, int operand2) {
+        if (this == DIVIDE && operand2 == 0) {
+            throw new UnsupportedOperationException();
+        }
         return binaryOperator.apply(operand1, operand2);
     }
 }

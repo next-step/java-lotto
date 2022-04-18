@@ -32,6 +32,13 @@ class StringCalculatorTest {
                 .isInstanceOf(NumberFormatException.class);
     }
 
+    @DisplayName("0으로 나눌 경우 예외를 던진다.")
+    @Test
+    void process_WhenDivideBy0_ThrowException() {
+        assertThatThrownBy(() -> StringCalculator.calculate("1 / 0"))
+                .isInstanceOf(UnsupportedOperationException.class);
+    }
+
     @ParameterizedTest(name = "정상 흐름")
     @CsvSource(value = {"2 + 3 * 4 / 2 : 10", "1 + 2 * 3 / 3 : 3"}, delimiter = ':')
     void process(String expression, int result) {
