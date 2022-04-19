@@ -24,4 +24,59 @@ class MoneyTest {
         assertThatThrownBy(() -> new Money(-1)).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    @DisplayName("돈의 합을 계산한다")
+    void add() {
+        //given
+        Money money1 = new Money(2000);
+        Money money2 = new Money(1000);
+
+        //when
+        Money result = money1.add(money2);
+
+        //then
+        assertThat(result).isEqualTo(new Money(3000));
+    }
+
+    @Test
+    @DisplayName("돈의 차이를 계산한다")
+    void subtract() {
+        //given
+        Money money1 = new Money(2000);
+        Money money2 = new Money(1000);
+
+        //when
+        money1.minus(money2);
+
+        //then
+        assertThat(money1).isEqualTo(new Money(1000));
+    }
+
+    @Test
+    @DisplayName("돈의 곱를 계산한다")
+    void times() {
+        //given
+        Money money1 = new Money(2000);
+        int count = 3;
+
+        //when
+        Money result = money1.times(3);
+
+        //then
+        assertThat(result).isEqualTo(new Money(6000));
+    }
+
+    @Test
+    @DisplayName("나누기 테스트")
+    void divide() {
+        //given
+        Money cost = new Money(2000);
+        Money principal = new Money(50000);
+
+        //when
+        double profitRatio = cost.divide(principal);
+
+        //then
+        assertThat(profitRatio).isEqualTo(0.04);
+    }
 }
