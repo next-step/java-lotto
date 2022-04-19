@@ -10,6 +10,10 @@ public class WinningTicket {
         this.lottoTicket = new LottoTicket(lottoNumbers);
     }
 
+    public WinningTicket(LottoTicket lottoTicket) {
+        this.lottoTicket = lottoTicket;
+    }
+
     public Rank getRank(LottoTicket lottoTicket) {
         int count = this.lottoTicket.countMatches(lottoTicket);
         return Rank.valueOf(count);
