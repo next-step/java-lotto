@@ -16,7 +16,7 @@ public class LottoGame {
         this.winningTicket = winningTicket;
     }
 
-    public RankResults produceResultStrategy() {
+    public RankResults start() {
         Map<Rank, Integer> ranks = initLottoResults();
 
         for (LottoTicket lottoTicket : lottoTickets) {
@@ -28,7 +28,7 @@ public class LottoGame {
             ranks.put(rank, count + 1);
         }
 
-        return new RankResults(convertResultList(ranks), lottoTickets.size());
+        return new RankResults(convertResultList(ranks));
     }
 
     private Map<Rank, Integer> initLottoResults() {
