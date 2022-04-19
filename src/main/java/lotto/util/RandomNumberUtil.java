@@ -14,7 +14,6 @@ public class RandomNumberUtil {
 
         while(numbers.size() < numberSize) {
             int number = generateNumber(bound);
-            System.out.println(number);
             if (numbers.contains(number) || isInvalidNumber(number, bound)) {
                 continue;
             }
