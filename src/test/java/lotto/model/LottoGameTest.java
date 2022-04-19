@@ -18,7 +18,7 @@ class LottoGameTest {
         WinningTicket winningTicket = initWinningTicket();
         LottoGame lottoGame = new LottoGame(lottoTickets, winningTicket);
 
-        RankResults rankResults = lottoGame.produceResultStrategy();
+        RankResults rankResults = lottoGame.start();
         List<RankResult> rankResultList = rankResults.getRankResults();
         assertAll(
                 () -> assertThat(rankResultList).contains(new RankResult(Rank.FIRST, 1)),
