@@ -13,6 +13,14 @@ public class RankResult {
         this.count = count;
     }
 
+    public Rank getRank() {
+        return rank;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

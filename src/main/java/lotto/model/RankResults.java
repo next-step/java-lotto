@@ -5,33 +5,29 @@ import java.util.List;
 
 public class RankResults {
 
-    private List<RankResult> rankResults;
+    private final List<RankResult> rankResults;
 
-    private final int purchaseTicketCount;
-
-    public RankResults(List<RankResult> rankResults, int purchaseTicketCount) {
+    public RankResults(List<RankResult> rankResults) {
         this.rankResults = Collections.unmodifiableList(rankResults);
-        this.purchaseTicketCount = purchaseTicketCount;
     }
 
-    public double calculateProfitRatio() {
-        long sumOfMoney = sum();
-        return sumOfMoney % purchaseTicketCount;
+    public double calculateProfitRatio(Money principal) {
+        Money sumOfMoney = sum();
+        return sumOfMoney.divide(principal);
     }
 
     public List<RankResult> getRankResults() {
         return rankResults;
     }
 
-    private long sum() {
-        long sumOfMoney = 0L;
+    private Money sum() {
+        Money sumOfWinnings = new Money();
         for (RankResult rankResult : rankResults) {
             long amount = rankResult.getRank().getAmount();
             int count = rankResult.getCount();
-            sumOfMoney += amount * count;
+            sumOfWinnings = sumOfWinnings.add(new Money(amount * count));
         }
-
-        return sumOfMoney;
+        return sumOfWinnings;
     }
 
 }
