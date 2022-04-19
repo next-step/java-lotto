@@ -20,7 +20,7 @@ public class InputView {
     }
 
     private long readNumber() {
-        return scanner.nextLong();
+        return Long.parseLong(readLine());
     }
 
     public List<Integer> readWinningNumbers() {
