@@ -3,23 +3,10 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static java.util.Map.*;
-
 public class Lotto {
-
-    public static final Map<Integer, Double> PRIZE = ofEntries(
-            entry(0, 0d),
-            entry(1, 0d),
-            entry(2, 0d),
-            entry(3, 5000d),
-            entry(4, 50000d),
-            entry(5, 1_500_000d),
-            entry(6, 2_000_000_000d)
-    );
 
     public static final int LOTTO_PRICE = 1000;
     private static final int MIN_VALID_NUMBER = 1;
@@ -61,7 +48,7 @@ public class Lotto {
     }
 
     public double earnings(Lotto winningLotto) {
-        return PRIZE.get(matchCount(winningLotto));
+        return Prize.findEarningsByMatchCount(matchCount(winningLotto));
     }
 
     public int matchCount(Lotto winningLotto) {
