@@ -5,7 +5,13 @@ public class StringCalculator {
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException("Input cannot be null or empty");
         }
-        return null;
+        String[] split = input.split(" ");
+
+        int result = 0;
+        for (int i = 0; i < split.length; i += 2) {
+            result += Integer.parseInt(split[i]);
+        }
+        return result;
     }
 
 }
