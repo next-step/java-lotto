@@ -53,6 +53,7 @@ public class LottoGameController {
     private List<LottoTicket> generateLottoTickets(Money money) {
         List<LottoTicket> lottoTickets = ticketMachine.buyLottoTickets(money);
         outputView.printTicketCount(lottoTickets.size());
+        outputView.printLottoTickets(lottoTickets);
         return lottoTickets;
     }
 

@@ -11,11 +11,14 @@ public class InputView {
 
     private static final String DEFAULT_DELIMITER = ",";
 
+    private static final String INPUT_MONEY_MESSAGE = "구매금액을 입력해주세요.";
+
     private static final String INPUT_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
 
     private final Scanner scanner = new Scanner(System.in);
 
     public Money readMoney() {
+        System.out.println(INPUT_MONEY_MESSAGE);
         return new Money(readNumber());
     }
 

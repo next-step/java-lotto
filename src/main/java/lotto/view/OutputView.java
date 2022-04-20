@@ -1,8 +1,11 @@
 package lotto.view;
 
+import lotto.model.LottoTicket;
 import lotto.model.Money;
 import lotto.model.RankResult;
 import lotto.model.RankResults;
+
+import java.util.List;
 
 public class OutputView {
 
@@ -14,31 +17,50 @@ public class OutputView {
 
     private static final String WINNING_STRATEGY_MESSAGE = "당첨 통계";
 
-    private static final String WINNING_SEPERATE_MESSAGE = "---------";
+    private static final String WINNING_SEPARATION_MESSAGE = "---------";
+
+    private static final String NEXT_LINE = "\n";
 
 
     public void printTicketCount(int ticketCount) {
         System.out.printf(TICKET_COUNT_MESSAGE_FORMAT, ticketCount);
     }
 
+    public void printLottoTickets(List<LottoTicket> lottoTicketList) {
+        StringBuilder builder = new StringBuilder();
+        lottoTicketList.forEach(lottoTicket -> builder.append(lottoTicket).append(NEXT_LINE));
+        System.out.println(builder);
+
+    }
+
     public void printLottoResults(RankResults rankResults, Money principal) {
         printWinningNotification();
         printWinningResults(rankResults);
-        System.out.printf(PROFIT_RATIO_MESSAGE_FORMAT, rankResults.calculateProfitRatio(principal));
+        printProfitRatioMessage(rankResults.calculateProfitRatio(principal));
+
     }
 
     private void printWinningResults(RankResults rankResults) {
+        StringBuilder builder = new StringBuilder();
         for (RankResult rankResult : rankResults.getRankResults()) {
-            System.out.printf(RESULT_STRATEGY_MESSAGE_FORMAT,
+            builder.append(String.format(RESULT_STRATEGY_MESSAGE_FORMAT,
                     rankResult.getRank().getMatchCount(),
                     rankResult.getRank().getAmount(),
-                    rankResult.getCount());
+                    rankResult.getCount())
+            );
         }
+        System.out.println(builder);
     }
 
     private void printWinningNotification() {
-        System.out.println(WINNING_STRATEGY_MESSAGE);
-        System.out.println(WINNING_SEPERATE_MESSAGE);
+        StringBuilder builder = new StringBuilder();
+        builder.append(WINNING_STRATEGY_MESSAGE).append(NEXT_LINE)
+                .append(WINNING_SEPARATION_MESSAGE);
+        System.out.println(builder);
+    }
+
+    private void printProfitRatioMessage(double calculateProfitRatio) {
+        System.out.printf(PROFIT_RATIO_MESSAGE_FORMAT, calculateProfitRatio);
     }
 
     public void printErrorMessage(String message) {
