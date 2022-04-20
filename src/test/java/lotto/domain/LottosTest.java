@@ -1,7 +1,5 @@
-package lotto.domian;
+package lotto.domain;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,7 +10,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static lotto.domain.Lotto.LOTTO_PRICE;
-import static lotto.domain.Lotto.PRIZE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.withPrecision;
 
@@ -32,11 +29,11 @@ class LottosTest {
 
     private static Stream<Arguments> provideArgumentsForEarningRate() {
         return Stream.of(
-                Arguments.of(new Lotto(List.of(1, 2, 7, 8, 9, 10)), PRIZE.get(2) / LOTTO_PRICE),
-                Arguments.of(new Lotto(List.of(1, 2, 3, 7, 8, 9)), PRIZE.get(3) / LOTTO_PRICE),
-                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 7, 8)), PRIZE.get(4) / LOTTO_PRICE),
-                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 7)), PRIZE.get(5) / LOTTO_PRICE),
-                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), PRIZE.get(6) / LOTTO_PRICE)
+                Arguments.of(new Lotto(List.of(1, 2, 7, 8, 9, 10)), Prize.findEarningsByMatchCount(2) / LOTTO_PRICE),
+                Arguments.of(new Lotto(List.of(1, 2, 3, 7, 8, 9)), Prize.findEarningsByMatchCount(3) / LOTTO_PRICE),
+                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 7, 8)), Prize.findEarningsByMatchCount(4) / LOTTO_PRICE),
+                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 7)), Prize.findEarningsByMatchCount(5) / LOTTO_PRICE),
+                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), Prize.findEarningsByMatchCount(6) / LOTTO_PRICE)
         );
     }
 
