@@ -1,6 +1,7 @@
 package ui;
 
 import exception.InvalidFormularException;
+import exception.InvalidOperatorException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,7 +21,7 @@ class InputViewTest {
     }
 
     @Test
-    void 비정상_입력_테스트() {
+    void 비정상_공백_입력_테스트() {
         assertThatThrownBy(
                 () -> InputView.convertStringToArray("2 +3 * 4 / 2")
         ).isInstanceOf(InvalidFormularException.class);
