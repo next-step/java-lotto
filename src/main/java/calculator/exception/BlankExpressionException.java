@@ -7,4 +7,5 @@ public class BlankExpressionException extends RuntimeException {
     public BlankExpressionException() {
         super(BLANK_EXPRESSION_MESSAGE);
     }
+
 }

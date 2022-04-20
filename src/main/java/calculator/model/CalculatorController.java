@@ -26,8 +26,8 @@ public class CalculatorController {
             Calculator calculator = generateCalculator(inputView.readExpression());
             Number resultNumber = calculator.calculate();
             outputView.printResult(resultNumber);
-        } catch (Exception exception) {
-            outputView.printErrorMessage(exception.getMessage());
+        } catch (RuntimeException runtimeException) {
+            outputView.printErrorMessage(runtimeException.getMessage());
         }
     }
 
