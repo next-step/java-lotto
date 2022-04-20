@@ -15,7 +15,7 @@
     - [x] 공백 없을 경우 예외 발생
     - [x] 공백 있는 경우 String 배열 반환
     - [x] 예외 발생한 경우 재입력 받기
-- [ ] 문자열 계산기 테스트
+- [x] 문자열 계산기 테스트
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
