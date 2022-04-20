@@ -83,4 +83,27 @@ public class LottoTest {
 
         assertThat(rate).isEqualTo(0.35);
     }
+
+    @Test
+    @DisplayName("구입한 로또 중에서 보너스 번호와 일치하는 테스트")
+    void matchBonusNumber() {
+        int bonusNumber = 7;
+        Lotto purchaseLotto = new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7));
+
+        boolean matchedBonusNumber = LottoMachine.isMatchedBonusNumber(bonusNumber, purchaseLotto);
+
+        assertThat(matchedBonusNumber).isTrue();
+    }
+
+    @Test
+    @DisplayName("구입한 로또 중에서 보너스 번호와 일치하지 않는 테스트")
+    void mismatchBonusNumber() {
+        int bonusNumber = 7;
+
+        Lotto purchaseLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        boolean matchedBonusNumber = LottoMachine.isMatchedBonusNumber(bonusNumber, purchaseLotto);
+
+        assertThat(matchedBonusNumber).isFalse();
+    }
 }

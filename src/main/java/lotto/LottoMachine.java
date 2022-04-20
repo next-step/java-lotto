@@ -33,4 +33,9 @@ public abstract class LottoMachine {
                 .getLottoNumbers()
                 .contains(lottoNumber);
     }
+
+    public static boolean isMatchedBonusNumber(int bonusNumber, Lotto generatedLotto) {
+        return generatedLotto.getLottoNumbers()
+                .contains(bonusNumber);
+    }
 }
