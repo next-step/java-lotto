@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import static lotto.domain.Lotto.LOTTO_PRICE;
-
 public class InputView {
 
     private static Scanner scanner = new Scanner(System.in);
@@ -19,14 +17,7 @@ public class InputView {
 
     public static int promptPurchaseAmount() {
         System.out.println("구매 금액을 입력해주세요.");
-        int purchaseAmount = scanner.nextInt();
-        scanner.nextLine(); // 엔터 입력 무시
-
-        if (purchaseAmount % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException(LOTTO_PRICE + "원 단위로 구매하실 수 있습니다.");
-        }
-
-        return purchaseAmount;
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public static Lotto promptWinningLotto() {

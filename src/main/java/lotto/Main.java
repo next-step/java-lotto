@@ -21,6 +21,9 @@ public class Main {
 
     private static Lottos createLottos() {
         int purchaseAmount = InputView.promptPurchaseAmount();
+        if (purchaseAmount % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException(LOTTO_PRICE + "원 단위로 구매하실 수 있습니다.");
+        }
         int lottoSize = purchaseAmount / LOTTO_PRICE;
         return new Lottos(createLottosOfSize(lottoSize));
     }
