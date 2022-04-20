@@ -20,7 +20,7 @@ class CalculationUtilsTest {
 
     @Test
     @DisplayName("문자열로된 숫자 계산")
-    void calculate() {
+    void calculatedNumber() {
         assertThat(CalculationUtils.calculate("2 + 3 * 4 / 2")).isEqualTo(10);
     }
 

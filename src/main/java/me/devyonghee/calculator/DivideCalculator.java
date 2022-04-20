@@ -18,8 +18,8 @@ final class DivideCalculator implements Calculator {
     }
 
     @Override
-    public Number calculate() {
-        return calculator.calculate()
+    public Number calculatedNumber() {
+        return calculator.calculatedNumber()
                 .divide(number);
     }
 

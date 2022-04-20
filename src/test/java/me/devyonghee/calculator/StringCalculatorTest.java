@@ -25,21 +25,21 @@ class StringCalculatorTest {
 
     @Test
     @DisplayName("문자열 계산")
-    void calculate() {
-        assertThat(StringCalculator.from(() -> Arrays.asList("2", "+", "3", "*", "4", "/", "2")).calculate())
+    void calculatedNumber() {
+        assertThat(StringCalculator.from(() -> Arrays.asList("2", "+", "3", "*", "4", "/", "2")).calculatedNumber())
                 .isEqualTo(Number.from("10"));
     }
 
     @Test
     @DisplayName("한개의 문자로된 숫자인 경우 그대로 반환")
-    void calculate_single() {
-        assertThat(StringCalculator.from(() -> Collections.singletonList("1")).calculate())
+    void calculatedNumber_single() {
+        assertThat(StringCalculator.from(() -> Collections.singletonList("1")).calculatedNumber())
                 .isEqualTo(Number.ONE);
     }
 
     @Test
     @DisplayName("연산을 계산할 숫자는 필수")
-    void calculate_notExistNumber_thrownIllegalStateException() {
-        assertThatIllegalStateException().isThrownBy(() -> StringCalculator.from(() -> Arrays.asList("2", "+")).calculate());
+    void calculatedNumber_notExistNumber_thrownIllegalStateException() {
+        assertThatIllegalStateException().isThrownBy(() -> StringCalculator.from(() -> Arrays.asList("2", "+")).calculatedNumber());
     }
 }

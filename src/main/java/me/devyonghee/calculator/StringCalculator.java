@@ -15,8 +15,8 @@ final class StringCalculator {
         return new StringCalculator(provider);
     }
 
-    Number calculate() {
-        return calculator().calculate();
+    Number calculatedNumber() {
+        return calculator().calculatedNumber();
     }
 
     private Calculator calculator() {

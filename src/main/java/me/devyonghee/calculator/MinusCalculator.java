@@ -17,8 +17,8 @@ final class MinusCalculator implements Calculator {
     }
 
     @Override
-    public Number calculate() {
-        return calculator.calculate()
+    public Number calculatedNumber() {
+        return calculator.calculatedNumber()
                 .minus(number);
     }
 

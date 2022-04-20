@@ -8,7 +8,7 @@ final class CalculationUtils {
 
     static int calculate(String string) {
         Assert.hasText(string, "string to calculate must be provided");
-        return StringCalculator.from(StringSeparator.from(string)).calculate()
+        return StringCalculator.from(StringSeparator.from(string)).calculatedNumber()
                 .value();
     }
 }

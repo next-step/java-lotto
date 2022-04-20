@@ -30,8 +30,8 @@ class DivideCalculatorTest {
 
     @Test
     @DisplayName("계산")
-    void calculate() {
-        assertThat(DivideCalculator.of(() -> Number.ZERO, Number.ONE).calculate()).isEqualTo(Number.ZERO);
-        assertThat(DivideCalculator.of(() -> Number.ONE, Number.ONE).calculate()).isEqualTo(Number.ONE);
+    void calculatedNumber() {
+        assertThat(DivideCalculator.of(() -> Number.ZERO, Number.ONE).calculatedNumber()).isEqualTo(Number.ZERO);
+        assertThat(DivideCalculator.of(() -> Number.ONE, Number.ONE).calculatedNumber()).isEqualTo(Number.ONE);
     }
 }

@@ -23,7 +23,7 @@ class PlusCalculatorTest {
 
     @Test
     @DisplayName("계산")
-    void calculate() {
-        assertThat(PlusCalculator.of(() -> Number.ONE, Number.ONE).calculate()).isEqualTo(Number.from("2"));
+    void calculatedNumber() {
+        assertThat(PlusCalculator.of(() -> Number.ONE, Number.ONE).calculatedNumber()).isEqualTo(Number.from("2"));
     }
 }

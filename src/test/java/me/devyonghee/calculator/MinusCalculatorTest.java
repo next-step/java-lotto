@@ -23,7 +23,7 @@ class MinusCalculatorTest {
 
     @Test
     @DisplayName("계산")
-    void calculate() {
-        assertThat(MinusCalculator.of(() -> Number.ONE, Number.ONE).calculate()).isEqualTo(Number.ZERO);
+    void calculatedNumber() {
+        assertThat(MinusCalculator.of(() -> Number.ONE, Number.ONE).calculatedNumber()).isEqualTo(Number.ZERO);
     }
 }

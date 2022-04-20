@@ -23,8 +23,8 @@ class MultiplyCalculatorTest {
 
     @Test
     @DisplayName("계산")
-    void calculate() {
-        assertThat(MultiplyCalculator.of(() -> Number.ONE, Number.ZERO).calculate()).isEqualTo(Number.ZERO);
-        assertThat(MultiplyCalculator.of(() -> Number.ONE, Number.ONE).calculate()).isEqualTo(Number.ONE);
+    void calculatedNumber() {
+        assertThat(MultiplyCalculator.of(() -> Number.ONE, Number.ZERO).calculatedNumber()).isEqualTo(Number.ZERO);
+        assertThat(MultiplyCalculator.of(() -> Number.ONE, Number.ONE).calculatedNumber()).isEqualTo(Number.ONE);
     }
 }
