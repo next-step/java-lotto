@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String DELIMETER = " ";
-    public static final String OPERATOR_REGEX = "[-X/+]";
+    public static final String OPERATOR_REGEX = "[-*/+]";
 
     private InputView() {
     }
@@ -18,12 +18,7 @@ public class InputView {
     }
 
     public static String[] convertStringToArray(String formula) {
-        try {
-            validateFormular(formula);
-        } catch (InvalidFormularException e) {
-            System.out.println(e.getMessage());
-        }
-
+        validateFormular(formula);
         return formula.split(DELIMETER);
     }
 
@@ -31,7 +26,7 @@ public class InputView {
         int numberOfOperators = countNumberOfMatch(formula, OPERATOR_REGEX);
         int numberOfDelimeter = countNumberOfMatch(formula, DELIMETER);
         if (numberOfDelimeter != numberOfOperators * 2) {
-            throw new InvalidFormularException(String.valueOf(numberOfDelimeter), String.valueOf(numberOfOperators * 2));
+            throw new InvalidFormularException(numberOfDelimeter, numberOfOperators * 2);
         }
     }
 

@@ -21,6 +21,8 @@ class InputViewTest {
 
     @Test
     void 비정상_입력_테스트() {
-        assertThatThrownBy(InputView.convertStringToArray("2 +3 * 4 / 2")).isInstanceOf(InvalidFormularException.class);
+        assertThatThrownBy(
+                () -> InputView.convertStringToArray("2 +3 * 4 / 2")
+        ).isInstanceOf(InvalidFormularException.class);
     }
 }
