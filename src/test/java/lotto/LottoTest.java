@@ -61,15 +61,15 @@ public class LottoTest {
 
         for (Lotto lotto : userLottoSet) {
             int matchCount = LottoMachine.findMatchedLottoNumberCount(winLottoNumber, lotto);
-            Rank lottoRank = Rank.findRank(matchCount);
+            Rank lottoRank = Rank.findRank(matchCount, false);
             ranks.add(lottoRank);
         }
 
         assertThat(ranks).hasSize(4);
-        assertThat(frequency(ranks, Rank.SIX)).isEqualTo(1);
-        assertThat(frequency(ranks, Rank.FIVE)).isEqualTo(1);
-        assertThat(frequency(ranks, Rank.FOUR)).isEqualTo(1);
-        assertThat(frequency(ranks, Rank.THREE)).isEqualTo(1);
+        assertThat(frequency(ranks, Rank.FIRST)).isEqualTo(1);
+        assertThat(frequency(ranks, Rank.THIRD)).isEqualTo(1);
+        assertThat(frequency(ranks, Rank.FOURTH)).isEqualTo(1);
+        assertThat(frequency(ranks, Rank.FIFTH)).isEqualTo(1);
     }
 
     @Test
@@ -77,7 +77,7 @@ public class LottoTest {
     void findTotalRate() {
         int price = 14_000;
 
-        List<Rank> ranks = List.of(Rank.THREE);
+        List<Rank> ranks = List.of(Rank.FIFTH);
 
         double rate = StatisticCalculator.calculateRate(price, ranks);
 
