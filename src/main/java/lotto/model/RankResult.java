@@ -6,9 +6,9 @@ public class RankResult {
 
     private final Rank rank;
 
-    private final int count;
+    private final long count;
 
-    public RankResult(Rank rank, int count) {
+    public RankResult(Rank rank, long count) {
         this.rank = rank;
         this.count = count;
     }
@@ -17,7 +17,7 @@ public class RankResult {
         return rank;
     }
 
-    public int getCount() {
+    public long getCount() {
         return count;
     }
 

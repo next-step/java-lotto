@@ -16,18 +16,17 @@ public class RankResults {
         return sumOfMoney.divide(principal);
     }
 
-    public List<RankResult> getRankResults() {
-        return rankResults;
-    }
-
     private Money sum() {
         Money sumOfWinnings = new Money();
         for (RankResult rankResult : rankResults) {
             long amount = rankResult.getRank().getAmount();
-            int count = rankResult.getCount();
+            long count = rankResult.getCount();
             sumOfWinnings = sumOfWinnings.add(new Money(amount * count));
         }
         return sumOfWinnings;
     }
 
+    public List<RankResult> getRankResults() {
+        return rankResults;
+    }
 }
