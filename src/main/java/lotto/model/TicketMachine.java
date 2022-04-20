@@ -4,7 +4,7 @@ import java.util.List;
 
 public class TicketMachine {
 
-    private static final long COST_PER_TICKET = 1000L;
+    private static final long COST_PER_TICKET = 1_000L;
 
     private final LottoTicketGenerator lottoTicketGenerator;
 

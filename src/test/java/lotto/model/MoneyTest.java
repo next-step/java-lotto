@@ -15,7 +15,7 @@ class MoneyTest {
         Money money = new Money(1000);
 
         //then
-        assertThat(money.getValue()).isEqualTo(1000);
+        assertThat(money).isEqualTo(new Money(1000));
     }
 
     @Test
