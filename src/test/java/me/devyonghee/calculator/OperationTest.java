@@ -3,7 +3,11 @@ package me.devyonghee.calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -24,12 +28,19 @@ class OperationTest {
         assertThatIllegalArgumentException().isThrownBy(() -> Operation.of(""));
     }
 
-    @Test
-    @DisplayName("연산 기호 판단하기")
-    void is() {
-        assertThat(Operation.PLUS.isPlus()).isTrue();
-        assertThat(Operation.MINUS.isMinus()).isTrue();
-        assertThat(Operation.DIVIDE.isDivide()).isTrue();
-        assertThat(Operation.MULTIPLY.isMultiply()).isTrue();
+    @ParameterizedTest
+    @DisplayName("계산기 생성")
+    @MethodSource
+    void calculator(Operation operation, Class<? extends Calculator> expected) {
+        assertThat(operation.calculator(() -> Number.ONE, Number.ONE)).isInstanceOf(expected);
+    }
+
+    private static Stream<Arguments> calculator() {
+        return Stream.of(
+                Arguments.of(Operation.PLUS, PlusCalculator.class),
+                Arguments.of(Operation.MINUS, MinusCalculator.class),
+                Arguments.of(Operation.DIVIDE, DivideCalculator.class),
+                Arguments.of(Operation.MULTIPLY, MultiplyCalculator.class)
+        );
     }
 }

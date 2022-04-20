@@ -2,6 +2,11 @@ package me.devyonghee.calculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -28,10 +33,17 @@ class DivideCalculatorTest {
                 .withMessage("number to divide cannot be zero");
     }
 
-    @Test
+    @ParameterizedTest(name = "[{index}] {0} 값을 {1} 로 나누면 {2}")
     @DisplayName("계산")
-    void calculatedNumber() {
-        assertThat(DivideCalculator.of(() -> Number.ZERO, Number.ONE).calculatedNumber()).isEqualTo(Number.ZERO);
-        assertThat(DivideCalculator.of(() -> Number.ONE, Number.ONE).calculatedNumber()).isEqualTo(Number.ONE);
+    @MethodSource
+    void calculatedNumber(Number dividendNumber, Number divisorNumber, Number expected) {
+        assertThat(DivideCalculator.of(() -> dividendNumber, divisorNumber).calculatedNumber()).isEqualTo(expected);
+    }
+
+    public static Stream<Arguments> calculatedNumber() {
+        return Stream.of(
+                Arguments.of(Number.ZERO, Number.ONE, Number.ZERO),
+                Arguments.of(Number.ONE, Number.ONE, Number.ONE)
+        );
     }
 }

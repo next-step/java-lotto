@@ -3,6 +3,7 @@ package me.devyonghee.calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.platform.commons.util.ReflectionUtils;
 
@@ -18,10 +19,11 @@ class CalculationUtilsTest {
                 .isThrownBy(() -> ReflectionUtils.newInstance(CalculationUtils.class));
     }
 
-    @Test
+    @ParameterizedTest(name = "[{index}] {0} 의 연산을 계산하면 {1}")
     @DisplayName("문자열로된 숫자 계산")
-    void calculatedNumber() {
-        assertThat(CalculationUtils.calculate("2 + 3 * 4 / 2")).isEqualTo(10);
+    @CsvSource({"2 + 3 * 4 / 2,10", "20 / 10 + 30 - 3,29"})
+    void calculatedNumber(String expression, int expected) {
+        assertThat(CalculationUtils.calculate(expression)).isEqualTo(expected);
     }
 
     @ParameterizedTest

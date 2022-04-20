@@ -28,7 +28,7 @@ final class StringCalculator {
         while (iterator.hasNext()) {
             Operation operation = Operation.of(iterator.next());
             validateNext(iterator);
-            calculator = CalculatorFactory.calculator(operation, calculator, Number.from(iterator.next()));
+            calculator = operation.calculator(calculator, Number.from(iterator.next()));
         }
         return calculator;
     }
