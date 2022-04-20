@@ -8,7 +8,7 @@ public class Money {
 
     private static final Money ZERO_MONEY = new Money(ZERO);
 
-    private long value;
+    private final long value;
 
     public Money() {
         this(ZERO);
@@ -33,7 +33,7 @@ public class Money {
         return new Money(this.value + money.value);
     }
 
-    public Money times(int count) {
+    public Money multiply(int count) {
         return new Money(this.value * count);
     }
 
@@ -42,14 +42,6 @@ public class Money {
             throw new ArithmeticException("0으로 나눌 수 없습니다");
         }
         return (double) this.value / money.value;
-    }
-
-    public void minus(Money money) {
-        long result = this.value - money.value;
-        if (result < 0) {
-            throw new IllegalArgumentException("돈은 음수일 수 없습니다");
-        }
-        this.value -= money.value;
     }
 
     private boolean isZero() {

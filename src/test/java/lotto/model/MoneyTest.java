@@ -39,28 +39,13 @@ class MoneyTest {
     }
 
     @Test
-    @DisplayName("돈의 차이를 계산한다")
-    void subtract() {
-        //given
-        Money money1 = new Money(2000);
-        Money money2 = new Money(1000);
-
-        //when
-        money1.minus(money2);
-
-        //then
-        assertThat(money1).isEqualTo(new Money(1000));
-    }
-
-    @Test
     @DisplayName("돈의 곱를 계산한다")
-    void times() {
+    void multiply() {
         //given
-        Money money1 = new Money(2000);
-        int count = 3;
+        Money money = new Money(2000);
 
         //when
-        Money result = money1.times(3);
+        Money result = money.multiply(3);
 
         //then
         assertThat(result).isEqualTo(new Money(6000));

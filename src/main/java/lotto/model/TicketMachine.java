@@ -21,11 +21,10 @@ public class TicketMachine {
 
     public List<LottoTicket> buyLottoTickets(Money money) {
         int dividedNumber = (int) money.divide(ticketPrice);
-        return buyLottoTickets(money, dividedNumber);
+        return buyLottoTickets(dividedNumber);
     }
 
-    private List<LottoTicket> buyLottoTickets(Money money, int count) {
-        money.minus(ticketPrice.times(count));
+    private List<LottoTicket> buyLottoTickets(int count) {
         return lottoTicketGenerator.generateLottoTickets(count);
     }
 
