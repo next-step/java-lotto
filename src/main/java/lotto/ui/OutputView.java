@@ -2,15 +2,21 @@ package lotto.ui;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.Prize;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
-import static lotto.domain.Lotto.PRIZE;
 
 public class OutputView {
+
+    private OutputView() {
+        throw new UnsupportedOperationException();
+    }
 
     public static void printLottos(Lottos lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
@@ -37,21 +43,21 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("----------");
 
-        Map<Integer, Long> matchNumberCounting =
-                createMatchNumberCounting(lottos, winningLotto);
-        Set<Integer> matchNumbers = new TreeSet<>(PRIZE.keySet());
+        Map<Integer, Long> matchCountings =
+                createMatchCountings(lottos, winningLotto);
 
-        matchNumbers.forEach(matchNumber -> {
-            System.out.printf("%d개 일치 (%.0f원) - %d개\n",
-                    matchNumber,
-                    PRIZE.get(matchNumber),
-                    matchNumberCounting.getOrDefault(matchNumber, 0L));
-        });
+        List<Integer> matchCounts = Prize.getMatchCounts();
 
-        System.out.printf("총 수익률은 %.2f입니다.\n", lottos.earningRate(winningLotto));
+        matchCounts.forEach(matchCount ->
+            System.out.printf("%d개 일치 (%.0f원) - %d개%n",
+                    matchCount,
+                    Prize.findEarningsByMatchCount(matchCount),
+                    matchCountings.getOrDefault(matchCount, 0L)));
+
+        System.out.printf("총 수익률은 %.2f입니다.%n", lottos.earningRate(winningLotto));
     }
 
-    private static Map<Integer, Long> createMatchNumberCounting(Lottos lottos, Lotto winningLotto) {
+    private static Map<Integer, Long> createMatchCountings(Lottos lottos, Lotto winningLotto) {
         return lottos.getLottos()
                 .stream()
                 .map(lotto -> lotto.matchCount(winningLotto))
