@@ -5,12 +5,12 @@ import java.util.List;
 
 public abstract class LottoMachine {
 
-    public static List<Rank> findBoughtLottoRank(List<Integer> winningLotto, List<Lotto> lotteries) {
+    public static List<Rank> findBoughtLottoRank(List<Integer> winningLotto, List<Lotto> lotteries, int bonusNumber) {
         List<Rank> ranks = new ArrayList<>();
 
         for (Lotto lottery : lotteries) {
             int matchCount = findMatchedLottoNumberCount(winningLotto, lottery);
-            ranks.add(Rank.findRank(matchCount, false));
+            ranks.add(Rank.findRank(matchCount, isMatchedBonusNumber(bonusNumber, lottery)));
         }
 
         return ranks;
