@@ -1,10 +1,10 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoTicketGenerator {
 
@@ -19,11 +19,9 @@ public class LottoTicketGenerator {
     }
 
     public List<LottoTicket> generateLottoTickets(int ticketCount) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int index = 0; index < ticketCount; index++) {
-            lottoTickets.add(generateLottoNumbers());
-        }
-        return lottoTickets;
+        return IntStream.range(0, ticketCount)
+                .mapToObj(index -> generateLottoNumbers())
+                .collect(Collectors.toList());
     }
 
     public WinningTicket generateWinningTicket(List<Integer> numbers) {
