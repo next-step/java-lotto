@@ -21,13 +21,6 @@ public enum Rank {
         this.winnings = winnings;
     }
 
-    public static Rank findRank(int matchCount) {
-        return Arrays.stream(values())
-                .filter(rank -> rank.matchCount == matchCount)
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("0 ~ 6이외의 matchCount 는 발생할 수 없습니다."));
-    }
-
     public static Rank findRank(int matchCount, boolean matchBonus) {
         if (matchCount == 5 && !matchBonus) {
             return THIRD;

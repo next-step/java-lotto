@@ -10,7 +10,7 @@ public abstract class LottoMachine {
 
         for (Lotto lottery : lotteries) {
             int matchCount = findMatchedLottoNumberCount(winningLotto, lottery);
-            ranks.add(Rank.findRank(matchCount));
+            ranks.add(Rank.findRank(matchCount, false));
         }
 
         return ranks;
