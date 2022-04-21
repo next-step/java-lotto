@@ -13,12 +13,16 @@ public class Store {
     }
 
     public void pay(int price) {
-        int count = price / LOTTO_PRICE_PER_ONE;
+        int count = countOfLottos(price);
 
         while(count > 0) {
             lottos.add(LottoFactory.createLottoAutomatically());
             count--;
         }
+    }
+
+    public int countOfLottos(int price) {
+        return price / LOTTO_PRICE_PER_ONE;
     }
 
     public List<Lotto> receive() {
