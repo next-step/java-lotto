@@ -11,7 +11,7 @@ class PlusOperatorTest {
 
     @BeforeEach
     void 생성() {
-        plusOperator = new PlusOperator();
+        plusOperator = PlusOperator.getPlusOperator();
     }
 
     @ParameterizedTest

@@ -34,19 +34,19 @@ public class Calculator {
 
     private Operator createOperator(String operator) {
         if ("+".equals(operator)) {
-            return new PlusOperator();
+            return PlusOperator.getPlusOperator();
         }
 
         if ("-".equals(operator)) {
-            return new MinusOperator();
+            return MinusOperator.getMinusOperator();
         }
 
         if ("*".equals(operator)) {
-            return new MultiplyOperator();
+            return MultiplyOperator.getMultiplyOperator();
         }
 
         if ("/".equals(operator)) {
-            return new DivideOperator();
+            return DivideOperator.getDivideOperator();
         }
 
         throw new InvalidOperatorException(operator);

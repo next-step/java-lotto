@@ -11,7 +11,7 @@ class MultiplyOperatorTest {
 
     @BeforeEach
     void 생성() {
-        multiplyOperator = new MultiplyOperator();
+        multiplyOperator = MultiplyOperator.getMultiplyOperator();
     }
 
     @ParameterizedTest

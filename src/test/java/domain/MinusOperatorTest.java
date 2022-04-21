@@ -11,7 +11,7 @@ class MinusOperatorTest {
 
     @BeforeEach
     void 생성() {
-        minusOperator = new MinusOperator();
+        minusOperator = MinusOperator.getMinusOperator();
     }
 
     @ParameterizedTest

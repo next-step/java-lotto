@@ -13,7 +13,7 @@ class DivideOperatorTest {
 
     @BeforeEach
     void 생성() {
-        divideOperator = new DivideOperator();
+        divideOperator = DivideOperator.getDivideOperator();
     }
 
     @ParameterizedTest
