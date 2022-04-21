@@ -16,8 +16,6 @@ public class Controller {
         List<Lotto> lottos = store.receive();
 
         ResultView.printCountOfLottos(store.countOfLottos(price));
-        for (Lotto lotto : lottos) {
-            System.out.println(lotto.getLottoNumbers());
-        }
+        ResultView.printResultOfPurchase(lottos);
     }
 }

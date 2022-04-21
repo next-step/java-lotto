@@ -20,6 +20,7 @@ public class LottoFactory {
     public static Lotto createLottoAutomatically() {
         Collections.shuffle(LOTTO_BASKET);
         List<Integer> lotto = new ArrayList<>(LOTTO_BASKET.subList(0, 6));
+        Collections.sort(lotto);
         return new Lotto(lotto);
     }
 }
