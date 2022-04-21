@@ -1,9 +1,11 @@
 package stringcalculator.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -39,4 +41,27 @@ class StringCalculatorTest {
         assertThat(StringCalculator.calculate(input)).isEqualTo(expected);
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"4 / 2:2", "4 / 2 / 2:1", "100 / 2 / 5:10"}, delimiter = ':')
+    @DisplayName("입력값을 나누는 경우")
+    void divideTest(String input, Integer expected) {
+        assertThat(StringCalculator.calculate(input)).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("0으로 나눌 경우 IllegalArgumentException 발생")
+    void divideByZero() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> StringCalculator.calculate("4 / 0"))
+                .withMessage("Cannot divide by zero");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"a + b", "! - !", "/ / /"})
+    @DisplayName("입력값이 숫자가 아닐 경우 IllegalArgumentException 발생")
+    void throwIllegalArgumentExceptionWhenInputNotNumber(String input) {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> StringCalculator.calculate(input))
+                .withMessage("Invalid input");
+    }
 }
