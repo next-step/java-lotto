@@ -19,12 +19,12 @@ public class LottoNumber {
 
     private void validate(int value) {
         if (value > MAX_LOTTO_NUMBER || value < MIN_LOTTO_NUMBER) {
-            throw new InvalidLottoNumberException();
+            throw new InvalidLottoNumberException(value);
         }
     }
 
-    public int getValue() {
-        return value;
+    public boolean isBonusNumber(LottoNumber lottoNumber) {
+        return this.equals(lottoNumber);
     }
 
     @Override
@@ -44,4 +44,5 @@ public class LottoNumber {
     public String toString() {
         return String.valueOf(value);
     }
+
 }
