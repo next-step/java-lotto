@@ -9,10 +9,9 @@ public class InputView {
     private static Scanner scanner = new Scanner(System.in);
     public List<Value> values = new ArrayList<Value>();
 
-    public void get() {
+    public String scan() {
         System.out.println("Put your equation.");
-        String equation = scanner.nextLine();
-        parse(equation);
+        return scanner.nextLine();
     }
 
     public void parse(String equation) {
@@ -55,8 +54,6 @@ public class InputView {
 
     @Override
     public String toString() {
-        return "InputView{" +
-                "values=" + values +
-                '}';
+        return "InputView{" + "values=" + values + '}';
     }
 }
