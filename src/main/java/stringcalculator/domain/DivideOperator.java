@@ -1,4 +1,4 @@
-package domain;
+package stringcalculator.domain;
 
 public class DivideOperator implements Operator {
     private static final DivideOperator DIVIDE_OPERATOR = new DivideOperator();

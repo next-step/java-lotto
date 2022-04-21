@@ -1,8 +1,8 @@
-package controller;
+package stringcalculator.controller;
 
-import domain.Calculator;
-import ui.InputView;
-import ui.ResultView;
+import stringcalculator.domain.Calculator;
+import stringcalculator.ui.InputView;
+import stringcalculator.ui.ResultView;
 
 public class Controller {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package ui;
+package stringcalculator.ui;
 
 public class ResultView {
     private static final String RESULT_MESSAGE = "계산결과: %d";

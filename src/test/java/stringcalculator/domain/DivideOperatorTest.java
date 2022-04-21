@@ -1,4 +1,4 @@
-package domain;
+package stringcalculator.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

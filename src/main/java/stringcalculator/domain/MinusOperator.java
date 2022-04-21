@@ -1,4 +1,4 @@
-package domain;
+package stringcalculator.domain;
 
 public class MinusOperator implements Operator {
     private static final MinusOperator MINUS_OPERATOR = new MinusOperator();

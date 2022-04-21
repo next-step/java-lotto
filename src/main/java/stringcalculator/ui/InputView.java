@@ -1,6 +1,6 @@
-package ui;
+package stringcalculator.ui;
 
-import exception.InvalidFormularException;
+import stringcalculator.exception.InvalidFormularException;
 
 import java.util.Scanner;
 

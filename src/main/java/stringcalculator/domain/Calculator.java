@@ -1,6 +1,6 @@
-package domain;
+package stringcalculator.domain;
 
-import exception.InvalidOperatorException;
+import stringcalculator.exception.InvalidOperatorException;
 
 import java.util.Arrays;
 import java.util.LinkedList;

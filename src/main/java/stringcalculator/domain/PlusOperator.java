@@ -1,4 +1,4 @@
-package domain;
+package stringcalculator.domain;
 
 public class PlusOperator implements Operator {
     private static final PlusOperator PLUS_OPERATOR = new PlusOperator();

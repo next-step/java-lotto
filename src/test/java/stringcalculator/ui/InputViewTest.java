@@ -1,7 +1,6 @@
-package ui;
+package stringcalculator.ui;
 
-import exception.InvalidFormularException;
-import exception.InvalidOperatorException;
+import stringcalculator.exception.InvalidFormularException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

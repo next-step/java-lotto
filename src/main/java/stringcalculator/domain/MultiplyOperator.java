@@ -1,4 +1,4 @@
-package domain;
+package stringcalculator.domain;
 
 public class MultiplyOperator implements Operator {
     private static final MultiplyOperator MULTIPLY_OPERATOR = new MultiplyOperator();
