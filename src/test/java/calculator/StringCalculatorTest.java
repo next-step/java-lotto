@@ -32,6 +32,7 @@ public class StringCalculatorTest {
   void minasTest() {
     assertThat(stringCalculator.calculate("2 - 1")).isEqualTo(1);
   }
+
   @Test
   @DisplayName("곱셈 테스트")
   void multipleTest() {
