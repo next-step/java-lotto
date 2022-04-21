@@ -14,7 +14,6 @@ public class Store {
 
     public void pay(int price) {
         int count = price / LOTTO_PRICE_PER_ONE;
-        System.out.println("count : " + count);
 
         while(count > 0) {
             lottos.add(LottoFactory.createLottoAutomatically());
