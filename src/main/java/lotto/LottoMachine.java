@@ -20,7 +20,7 @@ public abstract class LottoMachine {
         int sum = 0;
 
         for (Integer lottoNumber : winLotto) {
-            if (isMatchedNumber(lottoNumber, generatedLotto)) {
+            if (generatedLotto.isMatchedNumber(lottoNumber)) {
                 sum += 1;
             }
         }
@@ -28,9 +28,4 @@ public abstract class LottoMachine {
         return sum;
     }
 
-    private static boolean isMatchedNumber(Integer lottoNumber, Lotto generatedLotto) {
-        return generatedLotto
-                .getLottoNumbers()
-                .contains(lottoNumber);
-    }
 }

@@ -15,6 +15,10 @@ public class Lotto {
         return lottoNumbers;
     }
 
+    public boolean isMatchedNumber(Integer winningLottoNumber) {
+        return lottoNumbers.contains(winningLottoNumber);
+    }
+
     public boolean isBonusNumberMatched(int matchCount, int bonusNumber) {
         if (matchCount != IS_BONUS_NUMBER_COUNT) {
             return false;
