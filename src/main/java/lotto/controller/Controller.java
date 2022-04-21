@@ -17,5 +17,8 @@ public class Controller {
 
         ResultView.printCountOfLottos(store.countOfLottos(price));
         ResultView.printResultOfPurchase(lottos);
+
+        String previousLotto = InputView.inputLottoOfPreviousWeek();
+        System.out.println(previousLotto);
     }
 }
