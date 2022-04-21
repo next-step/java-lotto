@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.exception.InvalidMoneyUnitException;
 import lotto.model.Money;
 
 import java.util.Arrays;
@@ -19,7 +20,19 @@ public class InputView {
 
     public Money readMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
-        return new Money(readNumber());
+        long value = readNumber();
+        validateMoneyUnit(value);
+        return new Money(value);
+    }
+
+    private void validateMoneyUnit(long value) {
+        if (!meetsMoneyUnit(value)) {
+            throw new InvalidMoneyUnitException(value);
+        }
+    }
+
+    private boolean meetsMoneyUnit(long value) {
+        return value % 1_000 == 0;
     }
 
     private long readNumber() {
