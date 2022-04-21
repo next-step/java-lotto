@@ -27,5 +27,9 @@ public class StringCalculatorTest {
     assertThat(stringCalculator.calculate("1 + 1 + 1 + 1")).isEqualTo(4);
   }
 
-
+  @Test
+  @DisplayName("뻴셈 테스트")
+  void minasTest() {
+    assertThat(stringCalculator.calculate("2 - 1")).isEqualTo(1);
+  }
 }
