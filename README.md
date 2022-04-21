@@ -32,7 +32,8 @@
     - 출력 테스트
         - [x] 구매개수 출력
         - [x] 로또 결과 출력
-        - [ ] 당첨 통계 출력
+        - [x] 당첨 통계 출력
+        - [ ] 수익률 출력
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)

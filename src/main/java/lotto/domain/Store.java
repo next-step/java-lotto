@@ -28,4 +28,16 @@ public class Store {
     public List<Lotto> receive() {
         return Collections.unmodifiableList(lottos);
     }
+
+    public int[] calculateStats(Lotto previousLotto) {
+        int[] winningStats = new int[7];
+        for (Lotto lotto : lottos) {
+            winningStats[accumulateStats(lotto, previousLotto)]++;
+        }
+        return winningStats;
+    }
+
+    private int accumulateStats(Lotto lotto, Lotto previousLotto) {
+        return lotto.countDuplicateValue(previousLotto);
+    }
 }
