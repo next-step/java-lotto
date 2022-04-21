@@ -1,5 +1,7 @@
 package lotto.ui;
 
+import lotto.exception.InvalidPriceException;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -11,6 +13,14 @@ public class InputView {
 
     public static int inputPrice() {
         System.out.println(PURCHASE_PRICE);
-        return SCANNER.nextInt();
+        int price = SCANNER.nextInt();
+        validatePrice(price);
+        return price;
+    }
+
+    public static void validatePrice(int price) {
+        if (price < 0) {
+            throw new InvalidPriceException(price);
+        }
     }
 }
