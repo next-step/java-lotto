@@ -38,4 +38,10 @@ public class StringCalculatorTest {
     assertThat(stringCalculator.calculate("2 * 4")).isEqualTo(8);
   }
 
+  @Test
+  @DisplayName("나눗셈 테스트")
+  void divTest() {
+    assertThat(stringCalculator.calculate("4 / 2")).isEqualTo(2);
+  }
+
 }
