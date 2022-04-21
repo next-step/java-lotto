@@ -1,12 +1,12 @@
 package Calculator;
 
-import Calculator.exception.ImpossibleComputeExpException;
+import Calculator.exception.WrongPlaceNumberOrOperatorException;
 import Calculator.exception.OnlyNumberException;
 import Calculator.exception.OnlyOperatorException;
 
 public class ExpressionGenerator {
-    private final static String SPECIAL_DELIMITER = "[+\\-*/]";
-    private final static String NUMBER_DELIMITER = "\\d*(\\.\\d+)?";
+    private static final String SPECIAL_DELIMITER = "[+\\-*/]";
+    private static final String NUMBER_DELIMITER = "\\d*(\\.\\d+)?";
 
     public static boolean isOnlyNumberExp = true;
     public static boolean isOnlyOperatorExp = true;
@@ -49,7 +49,7 @@ public class ExpressionGenerator {
         }
 
         if (isOnlyNumberExp == true)
-            throw new OnlyNumberException();
+            throw new OnlyNumberException("수식에 피연산자만 존재합니다.");
     }
 
     private static void checkNumber(String str) {
@@ -64,7 +64,7 @@ public class ExpressionGenerator {
         }
 
         if (isOnlyOperatorExp == true)
-            throw new OnlyOperatorException();
+            throw new OnlyOperatorException("수식에 연산자만 존재합니다.");
     }
 
     private static void checkOperatorExp(String str) {
@@ -79,17 +79,17 @@ public class ExpressionGenerator {
         for (int i = 0; i < splitExp.length; ++i) {
             if (i % 2 == 0) {
                 if (splitExp[i].matches(SPECIAL_DELIMITER))
-                    throw new ImpossibleComputeExpException();
+                    throw new WrongPlaceNumberOrOperatorException("피연산자 자리에 연산자가 존재합니다.");
             } else {
                 if (splitExp[i].matches(NUMBER_DELIMITER))
-                    throw new ImpossibleComputeExpException();
+                    throw new WrongPlaceNumberOrOperatorException("연산자 자리에 피연산자가 존재합니다.");
             }
         }
     }
 
     private static void splitExpLengthIsOdd(String[] splitExp) {
         if (splitExp.length % 2 == 0)
-            throw new ImpossibleComputeExpException();
+            throw new WrongPlaceNumberOrOperatorException();
     }
 
     public static int compute(String[] arr) {
@@ -100,7 +100,7 @@ public class ExpressionGenerator {
             String op1 = sum;
             String operator = arr[i + 1];
             String op2 = arr[i + 2];
-            Calculator c = Calculator.findOperator(operator);
+            Operator c = Operator.findOperator(operator);
             sum = Integer.toString(c.calc(op1, op2));
             i += 2;
         }

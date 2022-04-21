@@ -1,6 +1,6 @@
 package Calculator;
 
-import Calculator.exception.ImpossibleComputeExpException;
+import Calculator.exception.WrongPlaceNumberOrOperatorException;
 import Calculator.exception.OnlyNumberException;
 import Calculator.exception.OnlyOperatorException;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CalculatorTest {
+public class OperatorTest {
 
     @BeforeEach
     public void setup() {
@@ -61,21 +61,21 @@ public class CalculatorTest {
     @Test
     @DisplayName("계산 가능한 식인지 테스트(1. 홀수자리는 피연산자, 짝수자리는 연산자)")
     public void possibleCompute1ExpTest() {
-        Exception exception = assertThrows(ImpossibleComputeExpException.class, () -> {
+        Exception exception = assertThrows(WrongPlaceNumberOrOperatorException.class, () -> {
             ExpressionGenerator.validateAndSplitExpression("* 10 - 20 *");
         });
 
-        assertEquals(exception.getClass(), ImpossibleComputeExpException.class);
+        assertEquals(exception.getClass(), WrongPlaceNumberOrOperatorException.class);
     }
 
     @Test
     @DisplayName("계산 가능한 식인지 테스트(2. 피연산자와 연산자의 갯수의 합은 무조건 홀수다)")
     public void possibleCompute2ExpTest() {
-        Exception exception = assertThrows(ImpossibleComputeExpException.class, () -> {
+        Exception exception = assertThrows(WrongPlaceNumberOrOperatorException.class, () -> {
             ExpressionGenerator.validateAndSplitExpression("123 * 10 -");
         });
 
-        assertEquals(exception.getClass(), ImpossibleComputeExpException.class);
+        assertEquals(exception.getClass(), WrongPlaceNumberOrOperatorException.class);
     }
 
     @Test
