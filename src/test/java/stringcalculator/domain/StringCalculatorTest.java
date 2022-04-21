@@ -64,4 +64,20 @@ class StringCalculatorTest {
                 .isThrownBy(() -> StringCalculator.calculate(input))
                 .withMessage("Invalid input");
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1 ! 1", "1 - 2 $ 1", "5 ( 1 * 4"})
+    @DisplayName("연산자가 잘못 입력된 경우 IllegalArgumentException 발생")
+    void throwIllegalArgumentExceptionWhenInputInvalidOperator(String input) {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> StringCalculator.calculate(input))
+                .withMessage("Invalid operator");
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1 + 1 * 4:8", "1 - 2 / 1 + 100:99", "1 + 5 + 3 - 1:8", "4 + 4 + 4:12"}, delimiter = ':')
+    @DisplayName("계산기 테스트")
+    void calculatorTest(String input, int expected) {
+        assertThat(StringCalculator.calculate(input)).isEqualTo(expected);
+    }
 }
