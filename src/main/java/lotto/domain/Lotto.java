@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.exception.InvalidLottoLengthException;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class Lotto {
 
     Lotto(List<Integer> lotto) {
         validateLotto(lotto);
-        this.lotto = lotto;
+        this.lotto = new ArrayList<>(lotto);
     }
 
     private void validateLotto(List<Integer> lotto) {
