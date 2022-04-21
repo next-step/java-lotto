@@ -2,15 +2,15 @@ package domain;
 
 import exception.InvalidOperatorException;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Calculator {
     private List<String> queue;
 
     public Calculator(String[] target) {
-        queue = new ArrayList<>(Arrays.asList(target));
+        queue = new LinkedList<>(Arrays.asList(target));
     }
 
     public int calculate() {
