@@ -91,7 +91,7 @@ public class LottoTest {
         int bonusNumber = 7;
         Lotto purchaseLotto = new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7));
 
-        boolean matchedBonusNumber = LottoMachine.isMatchedBonusNumber(matchCount, bonusNumber, purchaseLotto);
+        boolean matchedBonusNumber = purchaseLotto.isBonusNumberMatched(matchCount, bonusNumber);
 
         assertThat(matchedBonusNumber).isTrue();
     }
@@ -103,7 +103,7 @@ public class LottoTest {
         int bonusNumber = 6;
         Lotto purchaseLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        boolean matchedBonusNumber = LottoMachine.isMatchedBonusNumber(matchCount, bonusNumber, purchaseLotto);
+        boolean matchedBonusNumber = purchaseLotto.isBonusNumberMatched(matchCount, bonusNumber);
 
         assertThat(matchedBonusNumber).isFalse();
     }
