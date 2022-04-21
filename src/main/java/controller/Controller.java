@@ -12,7 +12,5 @@ public class Controller {
         } catch (NumberFormatException e) {
             System.out.println(e.getMessage().replaceFirst("For input string: \"[-*/+]\"", "수식의 순서가 잘못되었습니다."));
         }
-
-
     }
 }
