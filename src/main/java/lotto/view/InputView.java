@@ -16,6 +16,8 @@ public class InputView {
 
     private static final String INPUT_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
 
+    private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+
     private final Scanner scanner = new Scanner(System.in);
 
     public Money readMoney() {
@@ -54,4 +56,10 @@ public class InputView {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
+
+    public LottoNumber readBonusNumber() {
+        System.out.println(INPUT_BONUS_NUMBER);
+        return new LottoNumber((int) readNumber());
+    }
+
 }

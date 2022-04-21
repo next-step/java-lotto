@@ -12,9 +12,9 @@ public class LottoTickets {
         this.lottoTickets = Collections.unmodifiableList(lottoTickets);
     }
 
-    public List<Rank> getRanks(WinningTicket winningTicket) {
+    public List<Rank> getRanks(WinningTicket winningTicket, LottoNumber bonusNumber) {
         return lottoTickets.stream()
-                .map(winningTicket::getRank)
+                .map(lottoTicket -> winningTicket.getRank(lottoTicket, bonusNumber))
                 .collect(Collectors.toList());
     }
 

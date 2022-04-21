@@ -17,8 +17,8 @@ public class LottoGame {
         this.winningTicket = winningTicket;
     }
 
-    public RankResults start() {
-        Ranks ranks = new Ranks(lottoTickets.getRanks(winningTicket));
+    public RankResults start(LottoNumber bonusNumber) {
+        Ranks ranks = new Ranks(lottoTickets.getRanks(winningTicket, bonusNumber));
         List<RankResult> rankResults = ranks.groupBy();
         return new RankResults(rankResults);
     }

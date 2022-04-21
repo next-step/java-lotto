@@ -17,12 +17,12 @@ class WinningTicketTest {
     void setUp() {
         winningTicket = new WinningTicket(
                 Set.of(
-                        new LottoNumber(10),
-                        new LottoNumber(30),
-                        new LottoNumber(16),
+                        new LottoNumber(1),
+                        new LottoNumber(2),
                         new LottoNumber(3),
-                        new LottoNumber(17),
-                        new LottoNumber(45)
+                        new LottoNumber(4),
+                        new LottoNumber(5),
+                        new LottoNumber(6)
                 )
         );
     }
@@ -46,17 +46,17 @@ class WinningTicketTest {
         //given
         LottoTicket lottoTicket = new LottoTicket(
                 Set.of(
-                        new LottoNumber(30),
                         new LottoNumber(1),
-                        new LottoNumber(16),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
                         new LottoNumber(7),
-                        new LottoNumber(40),
-                        new LottoNumber(45)
+                        new LottoNumber(8)
                 )
         );
 
         //when
-        Rank rank = winningTicket.getRank(lottoTicket);
+        Rank rank = winningTicket.getRank(lottoTicket, new LottoNumber(4));
 
         //then
         assertThat(rank).isEqualTo(Rank.FOURTH);

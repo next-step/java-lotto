@@ -27,6 +27,6 @@ class RankResultsTest {
         double profitRatio = rankResults.calculateProfitRatio(principal);
 
         //then
-        assertThat(profitRatio).isEqualTo(0.55);
+        assertThat(profitRatio).isEqualTo(15.5);
     }
 }

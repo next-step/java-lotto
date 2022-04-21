@@ -23,8 +23,8 @@ public class LottoNumber {
         }
     }
 
-    public int getValue() {
-        return value;
+    public boolean isBonusNumber(LottoNumber lottoNumber) {
+        return this.equals(lottoNumber);
     }
 
     @Override
@@ -44,4 +44,5 @@ public class LottoNumber {
     public String toString() {
         return String.valueOf(value);
     }
+
 }

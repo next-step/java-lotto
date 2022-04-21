@@ -33,7 +33,7 @@ public class LottoGameController {
         try {
             Money money = inputView.readMoney();
             LottoGame lottoGame = generateLottoGame(money);
-            RankResults rankResults = lottoGame.start();
+            RankResults rankResults = lottoGame.start(inputView.readBonusNumber());
             outputView.printLottoResults(rankResults, money);
         } catch (RuntimeException runtimeException) {
             outputView.printErrorMessage(runtimeException.getMessage());

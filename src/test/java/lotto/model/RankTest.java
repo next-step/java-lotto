@@ -14,17 +14,18 @@ class RankTest {
     @ParameterizedTest
     @MethodSource("rankProvider")
     @DisplayName("일치하는 갯수만큼 등수를 반환한다")
-    void valueOfTest(int count, Rank expectedRank) {
-        assertThat(Rank.valueOf(count)).isEqualTo(expectedRank);
+    void valueOfTest(int count, boolean matchBonus,Rank expectedRank) {
+        assertThat(Rank.valueOf(count, matchBonus)).isEqualTo(expectedRank);
     }
 
     public static Stream<Arguments> rankProvider() {
         return Stream.of(
-                Arguments.of(6, Rank.FIRST),
-                Arguments.of(5, Rank.SECOND),
-                Arguments.of(4, Rank.THIRD),
-                Arguments.of(3, Rank.FOURTH),
-                Arguments.of(0, Rank.MISS)
+                Arguments.of(6, false,Rank.FIRST),
+                Arguments.of(5, true, Rank.SECOND),
+                Arguments.of(5, false, Rank.THIRD),
+                Arguments.of(4, false, Rank.FOURTH),
+                Arguments.of(3, true, Rank.FIFTH),
+                Arguments.of(0, false, Rank.MISS)
         );
     }
 

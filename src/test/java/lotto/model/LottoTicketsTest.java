@@ -45,10 +45,10 @@ class LottoTicketsTest {
         );
 
         //when
-        List<Rank> ranks = lottoTickets.getRanks(winningTicket);
+        List<Rank> ranks = lottoTickets.getRanks(winningTicket, new LottoNumber(12));
 
         //then
-        assertThat(ranks).containsExactly(Rank.FOURTH, Rank.SECOND);
+        assertThat(ranks).containsExactly(Rank.FIFTH, Rank.SECOND);
     }
 
 }
