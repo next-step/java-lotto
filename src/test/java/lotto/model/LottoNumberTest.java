@@ -16,8 +16,11 @@ class LottoNumberTest {
     @ValueSource(ints = {1, 23, 45})
     @DisplayName("로또 숫자일 경우 정상적으로 로또 번호를 생성한다")
     void createLottoNumber(int value) {
-        //given, when, then
-        assertThat(new LottoNumber(value).getValue()).isEqualTo(value);
+        //given, when
+        LottoNumber lottoNumber = new LottoNumber(value);
+
+        //then
+        assertThat(lottoNumber).isEqualTo(new LottoNumber(value));
     }
 
     @Test
