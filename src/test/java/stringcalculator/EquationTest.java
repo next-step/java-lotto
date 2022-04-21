@@ -1,9 +1,11 @@
-import StringCalculator.Equation;
-import StringCalculator.ExceptionMessage;
+package stringcalculator;
+
+import stringcalculator.Equation;
+import stringcalculator.ExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static StringCalculator.ExceptionMessage.WHITESPACE_REQUIRED_BETWEEN_CHARACTER;
+import static stringcalculator.ExceptionMessage.WHITESPACE_REQUIRED_BETWEEN_CHARACTER;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class EquationTest {
