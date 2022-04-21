@@ -21,6 +21,7 @@ public class InputView {
             System.out.println(e.getMessage());
             return inputPrice();
         }
+        SCANNER.nextLine(); // Delete newLine
         return price;
     }
 
