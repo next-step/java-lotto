@@ -2,14 +2,9 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
-import java.util.stream.Stream;
 
-import static lotto.domain.Lotto.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.withPrecision;
 
@@ -17,36 +12,32 @@ class LottosTest {
 
     private static final Lotto WINNING_LOTTO =
             new Lotto(List.of(1, 2, 3, 4, 5, 6));
+    private static final int BONUS_NUMBER = 7;
 
-    @ParameterizedTest(name = "한 개 로또 수익율 계산")
-    @MethodSource("provideArgumentsForEarningRate")
-    void earningRate_SingleLotto(Lotto lotto, double earningRate) {
-        Lottos lottos = new Lottos(lotto);
 
-        assertThat(lottos.earningRate(WINNING_LOTTO))
-                .isEqualTo(earningRate, withPrecision(0.01));
-    }
-
-    private static Stream<Arguments> provideArgumentsForEarningRate() {
-        return Stream.of(
-                Arguments.of(new Lotto(List.of(1, 2, 7, 8, 9, 10)), Prize.findEarningsByMatchCount(2) / LOTTO_PRICE),
-                Arguments.of(new Lotto(List.of(1, 2, 3, 7, 8, 9)), Prize.findEarningsByMatchCount(3) / LOTTO_PRICE),
-                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 7, 8)), Prize.findEarningsByMatchCount(4) / LOTTO_PRICE),
-                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 7)), Prize.findEarningsByMatchCount(5) / LOTTO_PRICE),
-                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), Prize.findEarningsByMatchCount(6) / LOTTO_PRICE)
-        );
-    }
-
-    @DisplayName("여러개 로또 수익율 계산")
+    @DisplayName("로또 묶음 수익율 계산 1번")
     @Test
-    void earningRate_MultipleLottos() {
-        Lotto zeroMatchLotto = new Lotto(List.of(7, 8, 9, 10, 11, 12));
-        Lotto threeMatchLotto = new Lotto(List.of(1, 2, 3, 7, 8, 9));
-        Lotto fourMatchLotto = new Lotto(List.of(1, 2, 3, 4, 7, 8));
+    void earningRate_1() {
+        Lotto zeroMatchLotto = new Lotto(List.of(31, 32, 33, 34, 35, 36));
+        Lotto threeMatchLotto = new Lotto(List.of(1, 2, 3, 31, 32, 33));
+        Lotto fourMatchLotto = new Lotto(List.of(1, 2, 3, 4, 31, 32));
         Lottos lottos = new Lottos(List.of(zeroMatchLotto, threeMatchLotto, fourMatchLotto));
 
         // (0 + 5000 + 50000) / (3 * 1000) = 18.33333..
-        assertThat(lottos.earningRate(WINNING_LOTTO))
+        assertThat(lottos.earningRate(WINNING_LOTTO, BONUS_NUMBER))
                 .isEqualTo(18.33, withPrecision(0.01));
+    }
+
+    @DisplayName("로또 묶음 수익율 계산 2번")
+    @Test
+    void earningRate_2() {
+        Lotto fiveMatchLotto = new Lotto(List.of(1, 2, 3, 4, 5, 31));
+        Lotto bonusLotto = new Lotto(List.of(1, 2, 3, 4, 5, BONUS_NUMBER));
+        Lotto sixMatchLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lottos lottos = new Lottos(List.of(fiveMatchLotto, bonusLotto, sixMatchLotto));
+
+        // (150만 + 3천만 + 20억) / (3 * 1000) = 677166.6666...
+        assertThat(lottos.earningRate(WINNING_LOTTO, BONUS_NUMBER))
+                .isEqualTo(677166.66, withPrecision(0.01));
     }
 }
