@@ -6,6 +6,8 @@ public enum Operator {
     MULTIPLY("*"),
     DIVIDE("/");
 
+    private static final String DIVIDE_BY_ZERO_ERROR_MESSAGE = "0으로 나눌 수 없습니다.";
+    private static final String INVALID_OPERATOR_ERROR_MESSAGE = "연산자는 \"+, -, *, %\" 만 가능합니다.";
     private final String symbol;
 
     Operator(String symbol) {
@@ -20,13 +22,17 @@ public enum Operator {
         } else if (symbol.equals(MULTIPLY.symbol)) {
             precedingOperand *= followingOperand;
         } else if (symbol.equals(DIVIDE.symbol)) {
-            if (followingOperand == 0) {
-                throw new IllegalArgumentException("Cannot divide by zero");
-            }
+            divideValidate(followingOperand);
             precedingOperand /= followingOperand;
         } else {
-            throw new IllegalArgumentException("Invalid operator");
+            throw new IllegalArgumentException(INVALID_OPERATOR_ERROR_MESSAGE);
         }
         return precedingOperand;
+    }
+
+    private static void divideValidate(int followingOperand) {
+        if (followingOperand == 0) {
+            throw new IllegalArgumentException(DIVIDE_BY_ZERO_ERROR_MESSAGE);
+        }
     }
 }
