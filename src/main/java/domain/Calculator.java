@@ -16,13 +16,10 @@ public class Calculator {
     public int calculate() {
         int result = Integer.parseInt(queue.get(0)); // queue.size() == 1
 
-        int num1;
-        String operator;
-        int num2;
         while (queue.size() != 1) {
-            num1 = Integer.parseInt(queue.remove(0));
-            operator = queue.remove(0);
-            num2 = Integer.parseInt(queue.remove(0));
+            int num1 = Integer.parseInt(queue.remove(0));
+            String operator = queue.remove(0);
+            int num2 = Integer.parseInt(queue.remove(0));
 
             result = calculate(createOperator(operator), num1, num2);
 
