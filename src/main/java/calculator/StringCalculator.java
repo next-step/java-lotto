@@ -4,6 +4,10 @@ public class StringCalculator {
 
   public int calculate(String text) {
     String[] split = text.split("[+]");
-    return Integer.parseInt(split[0].trim()) + Integer.parseInt(split[1].trim());
+    int result = 0;
+    for (String str : split) {
+      result += Integer.parseInt(str.trim());
+    }
+    return result;
   }
 }

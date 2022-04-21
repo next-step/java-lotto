@@ -20,4 +20,12 @@ public class StringCalculatorTest {
   void addTest() {
     assertThat(stringCalculator.calculate("1 + 1")).isEqualTo(2);
   }
+
+  @Test
+  @DisplayName("연산 횟수 3개 이상 테스트")
+  void addTripleTest() {
+    assertThat(stringCalculator.calculate("1 + 1 + 1 + 1")).isEqualTo(4);
+  }
+
+
 }
