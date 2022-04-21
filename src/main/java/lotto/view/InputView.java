@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.exception.InvalidMoneyUnitException;
+import lotto.model.LottoNumber;
 import lotto.model.Money;
 
 import java.util.Arrays;

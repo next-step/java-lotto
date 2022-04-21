@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.exception.InvalidBonusNumberException;
+
 import java.util.Set;
 
 public class WinningTicket {
@@ -18,6 +20,12 @@ public class WinningTicket {
         int count = this.lottoTicket.countMatches(lottoTicket);
         boolean matchBonus = lottoTicket.includeBonusNumber(bonusNumber);
         return Rank.valueOf(count, matchBonus);
+    }
+
+    public void validateBonusNumber(LottoNumber bonusNumber) {
+        if(!lottoTicket.includeBonusNumber(bonusNumber)) {
+            throw new InvalidBonusNumberException(bonusNumber);
+        }
     }
 
 }
