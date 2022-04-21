@@ -11,7 +11,7 @@ public class OutputView {
 
     private static final String RESULT_STRATEGY_MESSAGE_FORMAT = "%d개 일치 (%d원)- %d개\n";
 
-    private static final String PROFIT_RATIO_MESSAGE_FORMAT = "총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final String PROFIT_RATIO_MESSAGE_FORMAT = "총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
 
     private static final String TICKET_COUNT_MESSAGE_FORMAT = "%d개를 구매하였습니다.\n";
 
@@ -20,6 +20,8 @@ public class OutputView {
     private static final String WINNING_SEPARATION_MESSAGE = "---------";
 
     private static final String NEXT_LINE = "\n";
+    private static final String PROFIT_MESSAGE = "수익";
+    private static final String LOSS_MESSAGE = "손해";
 
 
     public void printTicketCount(int ticketCount) {
@@ -60,7 +62,8 @@ public class OutputView {
     }
 
     private void printProfitRatioMessage(double calculateProfitRatio) {
-        System.out.printf(PROFIT_RATIO_MESSAGE_FORMAT, calculateProfitRatio);
+        String profitCheckMessage = calculateProfitRatio >= 1 ? PROFIT_MESSAGE : LOSS_MESSAGE;
+        System.out.printf(PROFIT_RATIO_MESSAGE_FORMAT, calculateProfitRatio, profitCheckMessage);
     }
 
     public void printErrorMessage(String message) {
