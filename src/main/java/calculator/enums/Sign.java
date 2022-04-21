@@ -1,21 +1,30 @@
 package calculator.enums;
 
+import calculator.strategy.CalculateStrategy;
+import java.util.function.Function;
+
 public enum Sign {
-  PLUS("+"), MINAS("-"), MULTIPLE("*"), DIVISION("/");
+  PLUS("+", Integer::sum),
+  MINAS("-", (a, b) -> a - b),
+  MULTIPLE("*", (a, b) -> a * b),
+  DIVISION("/", (a, b) -> a / b);
 
   private String value;
+  private CalculateStrategy strategy;
 
-  Sign(String value) {
+  Sign(String value, CalculateStrategy strategy) {
     this.value = value;
+    this.strategy = strategy;
   }
 
-  public static String search(String value) {
-    String result = null;
-    for (Sign sign : values()) {
-      if(sign.value.equals(value)) {
-        result = sign.value;
-      }
-    }
-    return result;
+  public static Sign search(String sign) {
+    if(sign.equals("+")) return Sign.PLUS;
+    if(sign.equals("-")) return Sign.MINAS;
+    if(sign.equals("*")) return Sign.MULTIPLE;
+    return Sign.DIVISION;
+  }
+
+  public int apply(int front, int rear) {
+    return strategy.apply(front, rear);
   }
 }

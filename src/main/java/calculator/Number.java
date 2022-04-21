@@ -29,16 +29,7 @@ public class Number {
   }
 
   public Number calculate(int opponent, String sign) {
-    if (sign.equals("+")) {
-      return new Number(this.value + opponent);
-    }
-    if (sign.equals("-")) {
-      return new Number(this.value - opponent);
-    }
-    if (sign.equals("*")) {
-      return new Number(this.value * opponent);
-    }
-    return new Number(this.value / opponent);
+    return new Number(Sign.search(sign).apply(this.value, opponent));
   }
 
   public int getValue() {
