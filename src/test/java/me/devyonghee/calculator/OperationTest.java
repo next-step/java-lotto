@@ -28,19 +28,19 @@ class OperationTest {
         assertThatIllegalArgumentException().isThrownBy(() -> Operation.of(""));
     }
 
-    @ParameterizedTest
-    @DisplayName("계산기 생성")
+    @ParameterizedTest(name = "[{index}] {1} 와 {2} 을 {0} 연산을 하면 {3}")
+    @DisplayName("더하기 계산")
     @MethodSource
-    void calculator(Operation operation, Class<? extends Calculator> expected) {
-        assertThat(operation.calculator(() -> Number.ONE, Number.ONE)).isInstanceOf(expected);
+    void calculatedNumber(Operation operation, Number number, Number target, Number expected) {
+        assertThat(operation.calculatedNumber(number, target)).isEqualTo(expected);
     }
 
-    private static Stream<Arguments> calculator() {
+    private static Stream<Arguments> calculatedNumber() {
         return Stream.of(
-                Arguments.of(Operation.PLUS, PlusCalculator.class),
-                Arguments.of(Operation.MINUS, MinusCalculator.class),
-                Arguments.of(Operation.DIVIDE, DivideCalculator.class),
-                Arguments.of(Operation.MULTIPLY, MultiplyCalculator.class)
+                Arguments.of(Operation.PLUS, Number.ONE, Number.ONE, Number.from("2")),
+                Arguments.of(Operation.MINUS, Number.ONE, Number.ONE, Number.ZERO),
+                Arguments.of(Operation.MULTIPLY, Number.ONE, Number.ZERO, Number.ZERO),
+                Arguments.of(Operation.DIVIDE, Number.ZERO, Number.ONE, Number.ZERO)
         );
     }
 }

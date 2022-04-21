@@ -2,20 +2,21 @@ package me.devyonghee.calculator;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 
 enum Operation {
 
-    PLUS("+", PlusCalculator::of),
-    MINUS("-", MinusCalculator::of),
-    DIVIDE("/", DivideCalculator::of),
-    MULTIPLY("*", MultiplyCalculator::of);
+    PLUS("+", Number::plus),
+    MINUS("-", Number::minus),
+    DIVIDE("/", Number::divide),
+    MULTIPLY("*", Number::multiply);
 
     private final String symbol;
-    private final BiFunction<Calculator, Number, Calculator> calculatorFactory;
+    private final BiFunction<Number, Number, Number> calculator;
 
-    Operation(String symbol, BiFunction<Calculator, Number, Calculator> calculatorFactory) {
+    Operation(String symbol, BinaryOperator<Number> calculator) {
         this.symbol = symbol;
-        this.calculatorFactory = calculatorFactory;
+        this.calculator = calculator;
     }
 
     static Operation of(String symbol) {
@@ -25,7 +26,7 @@ enum Operation {
                 .orElseThrow(() -> new IllegalArgumentException(String.format("Operation Symbol(%s) is not supported", symbol)));
     }
 
-    Calculator calculator(Calculator calculator, Number number) {
-        return calculatorFactory.apply(calculator, number);
+    Number calculatedNumber(Number number, Number target) {
+        return calculator.apply(number, target);
     }
 }
