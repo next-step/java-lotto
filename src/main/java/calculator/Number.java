@@ -3,6 +3,7 @@ package calculator;
 import java.util.Objects;
 
 public class Number {
+
   private final int value;
 
   public Number(int value) {
@@ -26,14 +27,14 @@ public class Number {
     return Objects.hash(value);
   }
 
-  public Number calculate(String text, int opponent) {
-    if(text.contains("+")) {
+  public Number calculate(String sign, int opponent) {
+    if (sign.equals("+")) {
       return new Number(this.value + opponent);
     }
-    if(text.contains("-")) {
+    if (sign.equals("-")) {
       return new Number(this.value - opponent);
     }
-    if(text.contains("*")) {
+    if (sign.equals("*")) {
       return new Number(this.value * opponent);
     }
     return new Number(this.value / opponent);

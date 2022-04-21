@@ -44,5 +44,10 @@ public class StringCalculatorTest {
   void divTest() {
     assertThat(stringCalculator.calculate("4 / 2")).isEqualTo(2);
   }
+  @Test
+  @DisplayName("복합 테스트")
+  void complexTest() {
+    assertThat(stringCalculator.calculate("4 / 2 * 3")).isEqualTo(6);
+  }
 
 }
