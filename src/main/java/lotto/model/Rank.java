@@ -34,7 +34,7 @@ public enum Rank {
     }
 
     public boolean isMiss() {
-        return this.equals(Rank.MISS);
+        return this == Rank.MISS;
     }
 
 }
