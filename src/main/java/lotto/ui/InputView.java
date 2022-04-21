@@ -30,4 +30,9 @@ public class InputView {
                 .collect(Collectors.toList());
         return new Lotto(numbers);
     }
+
+    public static int promptBonusNumber() {
+        System.out.println("보너스 볼을 입력해주세요.");
+        return Integer.parseInt(scanner.nextLine());
+    }
 }

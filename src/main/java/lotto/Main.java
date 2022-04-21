@@ -15,8 +15,10 @@ public class Main {
         OutputView.printLottos(lottos);
 
         Lotto winningLotto = InputView.promptWinningLotto();
+        int bonusNumber = InputView.promptBonusNumber();
+        Lotto.validateBonusNumber(winningLotto, bonusNumber);
 
-        OutputView.printResult(lottos, winningLotto);
+        OutputView.printResult(lottos, winningLotto, bonusNumber);
     }
 
     private static Lottos createLottos() {

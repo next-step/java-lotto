@@ -1,9 +1,9 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.List;
+
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
+
 
 public enum Prize {
 
@@ -13,6 +13,7 @@ public enum Prize {
     THREE(3, 5000d),
     FOUR(4, 50000d),
     FIVE(5, 1_500_000d),
+    BONUS(5, 30_000_000d),
     SIX(6, 2_000_000_000d);
 
     private int matchCount;
@@ -23,17 +24,26 @@ public enum Prize {
         this.earnings = earnings;
     }
 
-    public static double findEarningsByMatchCount(int matchCount) {
+    public static Prize findPrizeByMatchCount(int matchCount, boolean containsBonus) {
+        if (matchCount != FIVE.matchCount) {
+            return findPrizeByMatchCount(matchCount);
+        }
+        return containsBonus ? BONUS : FIVE;
+    }
+
+    private static Prize findPrizeByMatchCount(int matchCount) {
         return Arrays.stream(Prize.values())
                 .filter(prize -> prize.matchCount == matchCount)
                 .findAny()
-                .map(prize -> prize.earnings)
                 .orElseThrow(NoSuchElementException::new);
     }
 
-    public static List<Integer> getMatchCounts() {
-        return Arrays.stream(Prize.values())
-                .map(prize -> prize.matchCount)
-                .collect(Collectors.toList());
+    public int getMatchCount() {
+        return matchCount;
     }
+
+    public double getEarnings() {
+        return earnings;
+    }
+
 }

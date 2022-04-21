@@ -9,21 +9,17 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(Lotto lotto) {
-        this(List.of(lotto));
-    }
-
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
-    public double earningRate(Lotto winningLotto) {
-        return earnings(winningLotto) / expense();
+    public double earningRate(Lotto winningLotto, int bonusNumber) {
+        return earnings(winningLotto, bonusNumber) / expense();
     }
 
-    private double earnings(Lotto winningLotto) {
+    private double earnings(Lotto winningLotto, int bonusNumber) {
         return lottos.stream()
-                .mapToDouble(lotto -> lotto.earnings(winningLotto))
+                .mapToDouble(lotto -> lotto.earnings(winningLotto, bonusNumber))
                 .sum();
     }
 

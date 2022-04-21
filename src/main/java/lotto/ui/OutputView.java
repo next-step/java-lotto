@@ -4,13 +4,15 @@ import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Prize;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
+import java.util.stream.Collectors;
+
 import static java.util.stream.Collectors.counting;
-import static java.util.stream.Collectors.groupingBy;
 
 public class OutputView {
 
@@ -39,29 +41,27 @@ public class OutputView {
         System.out.println(sb);
     }
 
-    public static void printResult(Lottos lottos, Lotto winningLotto) {
+    public static void printResult(Lottos lottos, Lotto winningLotto, int bonusNumber) {
         System.out.println("당첨 통계");
         System.out.println("----------");
 
-        Map<Integer, Long> matchCountings =
-                createMatchCountings(lottos, winningLotto);
+        Map<Prize, Long> matchCountings =
+                createMatchCountings(lottos, winningLotto, bonusNumber);
 
-        List<Integer> matchCounts = Prize.getMatchCounts();
+        Arrays.stream(Prize.values())
+                        .forEach(prize -> System.out.printf("%d개 일치 (%.0f원) - %d개%n",
+                                prize.getMatchCount(),
+                                prize.getEarnings(),
+                                matchCountings.getOrDefault(prize, 0L)));
 
-        matchCounts.forEach(matchCount ->
-            System.out.printf("%d개 일치 (%.0f원) - %d개%n",
-                    matchCount,
-                    Prize.findEarningsByMatchCount(matchCount),
-                    matchCountings.getOrDefault(matchCount, 0L)));
-
-        System.out.printf("총 수익률은 %.2f입니다.%n", lottos.earningRate(winningLotto));
+        System.out.printf("총 수익률은 %.2f입니다.%n", lottos.earningRate(winningLotto, bonusNumber));
     }
 
-    private static Map<Integer, Long> createMatchCountings(Lottos lottos, Lotto winningLotto) {
+    private static Map<Prize, Long> createMatchCountings(Lottos lottos, Lotto winningLotto, int bonusNumber) {
         return lottos.getLottos()
                 .stream()
-                .map(lotto -> lotto.matchCount(winningLotto))
-                .collect(groupingBy(Function.identity(), counting()));
+                .map(lotto -> lotto.findPrize(winningLotto, bonusNumber))
+                .collect(Collectors.groupingBy(Function.identity(), counting()));
     }
 
 }
