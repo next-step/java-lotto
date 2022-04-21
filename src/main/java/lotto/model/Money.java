@@ -25,10 +25,6 @@ public class Money {
         }
     }
 
-    public long getValue() {
-        return value;
-    }
-
     public Money add(Money money) {
         return new Money(this.value + money.value);
     }

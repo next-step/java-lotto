@@ -26,9 +26,9 @@ public class OutputView {
         System.out.printf(TICKET_COUNT_MESSAGE_FORMAT, ticketCount);
     }
 
-    public void printLottoTickets(List<LottoTicket> lottoTicketList) {
+    public void printLottoTickets(List<LottoTicket> lottoTickets) {
         StringBuilder builder = new StringBuilder();
-        lottoTicketList.forEach(lottoTicket -> builder.append(lottoTicket).append(NEXT_LINE));
+        lottoTickets.forEach(lottoTicket -> builder.append(lottoTicket).append(NEXT_LINE));
         System.out.println(builder);
 
     }
