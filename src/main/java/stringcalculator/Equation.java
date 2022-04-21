@@ -22,6 +22,10 @@ public class Equation {
         this.input = input;
     }
 
+    public String getInput() {
+        return input;
+    }
+
     private boolean isNullOrBlank(String input) {
         return input == null || input.isBlank();
     }
@@ -29,4 +33,5 @@ public class Equation {
     private boolean isWhitespaceNotExists(String chars) {
         return !PATTERN.matcher(chars).matches();
     }
+
 }
