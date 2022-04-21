@@ -85,24 +85,25 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("구입한 로또 중에서 보너스 번호와 일치하는 테스트")
+    @DisplayName("구입한 로또 중에서 당첨 번호가 5개가 일치하고 나머지 하나가 보너스 번호와 일치하는 테스트")
     void matchBonusNumber() {
+        int matchCount = 5;
         int bonusNumber = 7;
         Lotto purchaseLotto = new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7));
 
-        boolean matchedBonusNumber = LottoMachine.isMatchedBonusNumber(bonusNumber, purchaseLotto);
+        boolean matchedBonusNumber = LottoMachine.isMatchedBonusNumber(matchCount, bonusNumber, purchaseLotto);
 
         assertThat(matchedBonusNumber).isTrue();
     }
 
     @Test
-    @DisplayName("구입한 로또 중에서 보너스 번호와 일치하지 않는 테스트")
+    @DisplayName("구입한 로또 중에서 당첨 번호가 5개가 일치하지 않을 경우 다른 번호가 보너스 번호랑 일치해도 false 인 테스트")
     void mismatchBonusNumber() {
-        int bonusNumber = 7;
-
+        int matchCount = 4;
+        int bonusNumber = 6;
         Lotto purchaseLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        boolean matchedBonusNumber = LottoMachine.isMatchedBonusNumber(bonusNumber, purchaseLotto);
+        boolean matchedBonusNumber = LottoMachine.isMatchedBonusNumber(matchCount, bonusNumber, purchaseLotto);
 
         assertThat(matchedBonusNumber).isFalse();
     }

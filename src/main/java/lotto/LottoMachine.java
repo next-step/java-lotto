@@ -10,7 +10,7 @@ public abstract class LottoMachine {
 
         for (Lotto lottery : lotteries) {
             int matchCount = findMatchedLottoNumberCount(winningLotto, lottery);
-            ranks.add(Rank.findRank(matchCount, isMatchedBonusNumber(bonusNumber, lottery)));
+            ranks.add(Rank.findRank(matchCount, isMatchedBonusNumber(matchCount, bonusNumber, lottery)));
         }
 
         return ranks;
@@ -34,8 +34,12 @@ public abstract class LottoMachine {
                 .contains(lottoNumber);
     }
 
-    static boolean isMatchedBonusNumber(int bonusNumber, Lotto generatedLotto) {
-        return generatedLotto.getLottoNumbers()
+    static boolean isMatchedBonusNumber(int matchCount, int bonusNumber, Lotto generatedLotto) {
+        if (matchCount != 5) {
+            return false;
+        }
+        return generatedLotto
+                .getLottoNumbers()
                 .contains(bonusNumber);
     }
 }
