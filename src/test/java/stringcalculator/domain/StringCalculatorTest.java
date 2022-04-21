@@ -17,7 +17,26 @@ class StringCalculatorTest {
     @DisplayName("입력값이 null 혹은 공백일 경우 IllegalArgumentException 발생")
     void throwIllegalArgumentExceptionWhenInputNullOrEmpty(String input) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> StringCalculator.calculate(input));
+                .isThrownBy(() -> StringCalculator.calculate(input))
+                .withMessage("문자열을 입력해야 합니다.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1", "1 &", "4 +"})
+    @DisplayName("입력값이 3개 미만일 경우 IllegalArgumentException 발생")
+    void throwIllegalArgumentExceptionInputLessThanThree(String input) {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> StringCalculator.calculate(input))
+                .withMessage("입력값은 3개 이상이어야 합니다.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"2 + 2 +", "1 + 3 + 4 -", "2 + 2 + 2 2"})
+    @DisplayName("입력값이 짝수개일 경우 IllegalArgumentException 발생")
+    void throwIllegalArgumentExceptionInputEven(String input) {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> StringCalculator.calculate(input))
+                .withMessage("입력값은 홀수개이어야 합니다.");
     }
 
     @ParameterizedTest
@@ -53,7 +72,7 @@ class StringCalculatorTest {
     void divideByZero() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> StringCalculator.calculate("4 / 0"))
-                .withMessage("Cannot divide by zero");
+                .withMessage("0으로 나눌 수 없습니다.");
     }
 
     @ParameterizedTest
@@ -62,7 +81,7 @@ class StringCalculatorTest {
     void throwIllegalArgumentExceptionWhenInputNotNumber(String input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> StringCalculator.calculate(input))
-                .withMessage("Invalid input");
+                .withMessage("피연산자는 숫자를 입력해야 합니다.");
     }
 
     @ParameterizedTest
@@ -71,7 +90,7 @@ class StringCalculatorTest {
     void throwIllegalArgumentExceptionWhenInputInvalidOperator(String input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> StringCalculator.calculate(input))
-                .withMessage("Invalid operator");
+                .withMessage("연산자는 \"+, -, *, %\" 만 가능합니다.");
     }
 
     @ParameterizedTest
