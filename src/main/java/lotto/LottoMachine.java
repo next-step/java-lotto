@@ -16,7 +16,7 @@ public abstract class LottoMachine {
         return ranks;
     }
 
-    public static int findMatchedLottoNumberCount(List<Integer> winLotto, Lotto generatedLotto) {
+    static int findMatchedLottoNumberCount(List<Integer> winLotto, Lotto generatedLotto) {
         int sum = 0;
 
         for (Integer lottoNumber : winLotto) {
@@ -34,7 +34,7 @@ public abstract class LottoMachine {
                 .contains(lottoNumber);
     }
 
-    public static boolean isMatchedBonusNumber(int bonusNumber, Lotto generatedLotto) {
+    static boolean isMatchedBonusNumber(int bonusNumber, Lotto generatedLotto) {
         return generatedLotto.getLottoNumbers()
                 .contains(bonusNumber);
     }
