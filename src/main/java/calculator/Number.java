@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.enums.Sign;
 import java.util.Objects;
 
 public class Number {
@@ -27,7 +28,7 @@ public class Number {
     return Objects.hash(value);
   }
 
-  public Number calculate(String sign, int opponent) {
+  public Number calculate(int opponent, String sign) {
     if (sign.equals("+")) {
       return new Number(this.value + opponent);
     }
