@@ -14,7 +14,12 @@ public class InputView {
     public static int inputPrice() {
         System.out.println(PURCHASE_PRICE);
         int price = SCANNER.nextInt();
-        validatePrice(price);
+        try {
+            validatePrice(price);
+        } catch (InvalidPriceException e) {
+            System.out.println(e.getMessage());
+            return inputPrice();
+        }
         return price;
     }
 
