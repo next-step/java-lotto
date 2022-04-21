@@ -14,7 +14,7 @@ public class Calculator {
     }
 
     public int calculate() {
-        int result = Integer.parseInt(queue.get(0)); // queue.size() == 1
+        int result = Integer.parseInt(queue.get(0));
 
         while (queue.size() != 1) {
             int num1 = Integer.parseInt(queue.remove(0));
