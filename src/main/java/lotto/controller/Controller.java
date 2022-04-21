@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.Store;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
+import lotto.util.Utility;
 
 import java.util.List;
 
@@ -18,7 +19,8 @@ public class Controller {
         ResultView.printCountOfLottos(store.countOfLottos(price));
         ResultView.printResultOfPurchase(lottos);
 
-        String previousLotto = InputView.inputLottoOfPreviousWeek();
-        System.out.println(previousLotto);
+        Integer[] previousLottoNumber = Utility.convertStringArrayToIntegerArray(Utility.split(InputView.inputLottoOfPreviousWeek()));
+        Lotto previousLotto = new Lotto(previousLottoNumber);
+
     }
 }
