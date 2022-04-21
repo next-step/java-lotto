@@ -19,7 +19,7 @@ public class LottoNumber {
 
     private void validate(int value) {
         if (value > MAX_LOTTO_NUMBER || value < MIN_LOTTO_NUMBER) {
-            throw new InvalidLottoNumberException();
+            throw new InvalidLottoNumberException(value);
         }
     }
 
