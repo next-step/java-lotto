@@ -10,17 +10,17 @@ public enum Sign {
   MULTIPLE("*", (a, b) -> a * b),
   DIVISION("/", (a, b) -> a / b);
 
-  private String value;
-  private CalculateStrategy strategy;
+  private final String key;
+  private final CalculateStrategy strategy;
 
-  Sign(String value, CalculateStrategy strategy) {
-    this.value = value;
+  Sign(String key, CalculateStrategy strategy) {
+    this.key = key;
     this.strategy = strategy;
   }
 
   public static Sign search(String value) {
     return Arrays.stream(values())
-        .filter(sign -> sign.value.equals(value))
+        .filter(sign -> sign.key.equals(value))
         .findFirst().orElseThrow(() -> new IllegalArgumentException("잘못된 부호를 넣었습니다. 다시 확인해주세요."));
   }
 
