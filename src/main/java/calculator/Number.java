@@ -28,8 +28,8 @@ public class Number {
     return Objects.hash(value);
   }
 
-  public Number calculate(int opponent, String sign) {
-    return new Number(Sign.search(sign).apply(this.value, opponent));
+  public Number arithmetic(String operation, Integer otherNumber) {
+    return new Number(Sign.search(operation).execute(this.value, otherNumber));
   }
 
   public int getValue() {

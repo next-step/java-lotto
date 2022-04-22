@@ -24,7 +24,7 @@ public enum Sign {
         .findFirst().orElseThrow(() -> new IllegalArgumentException("잘못된 부호를 넣었습니다. 다시 확인해주세요."));
   }
 
-  public int apply(int front, int rear) {
+  public int execute(int front, int rear) {
     return strategy.apply(front, rear);
   }
 }
