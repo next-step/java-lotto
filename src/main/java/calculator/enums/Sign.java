@@ -1,6 +1,7 @@
 package calculator.enums;
 
 import calculator.strategy.CalculateStrategy;
+import java.util.Arrays;
 import java.util.function.Function;
 
 public enum Sign {
@@ -17,11 +18,10 @@ public enum Sign {
     this.strategy = strategy;
   }
 
-  public static Sign search(String sign) {
-    if(sign.equals("+")) return Sign.PLUS;
-    if(sign.equals("-")) return Sign.MINAS;
-    if(sign.equals("*")) return Sign.MULTIPLE;
-    return Sign.DIVISION;
+  public static Sign search(String value) {
+    return Arrays.stream(values())
+        .filter(sign -> sign.value.equals(value))
+        .findFirst().orElseThrow(() -> new IllegalArgumentException("잘못된 부호를 넣었습니다. 다시 확인해주세요."));
   }
 
   public int apply(int front, int rear) {
