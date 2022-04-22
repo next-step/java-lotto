@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
-    public static final int VALID_LOTTO_LENGTH = 6;
+    private static final int VALID_LOTTO_LENGTH = 6;
     private final List<Integer> lotto;
 
     Lotto(List<Integer> lotto) {
