@@ -19,7 +19,7 @@ class WinningTicketTest {
 
     @BeforeEach
     void setUp() {
-        winningTicket = initWinningNumber(List.of(1, 2, 3, 4, 5, 6), 4);
+        winningTicket = initWinningNumber(List.of(1, 2, 3, 4, 5, 6), 7);
     }
 
     private WinningTicket initWinningNumber(List<Integer> numbers, int bonusNumber) {
@@ -43,7 +43,7 @@ class WinningTicketTest {
     @DisplayName("로또 넘버가 6개가 아니면 당첨 티켓을 생성할 수 없다")
     void failValidationOfWinningTicket() {
         assertThatThrownBy(() -> new WinningTicket(
-                new LottoTicket(Set.of(new LottoNumber(2), new LottoNumber(4))),
+                new LottoTicket(Set.of(new LottoNumber(2), new LottoNumber(3))),
                 new LottoNumber(4))
         ).isInstanceOf(InvalidLottoTicketException.class);
     }
@@ -64,10 +64,10 @@ class WinningTicketTest {
         );
 
         //when
-        Rank rank = winningTicket.getRank(lottoTicket);
+        Rank rank = winningTicket.drawLotto(lottoTicket);
 
         //then
-        assertThat(rank).isEqualTo(Rank.FOURTH);
+        assertThat(rank).isEqualTo(Rank.SECOND);
     }
 
 }

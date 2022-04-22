@@ -14,7 +14,7 @@ public class LottoTickets {
 
     public List<Rank> getRanks(WinningTicket winningTicket) {
         return lottoTickets.stream()
-                .map(winningTicket::getRank)
+                .map(winningTicket::drawLotto)
                 .collect(Collectors.toList());
     }
 

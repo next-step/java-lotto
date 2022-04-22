@@ -19,7 +19,7 @@ class LottoGameTest {
     @BeforeEach
     void setUp() {
         List<LottoTicket> lottoTickets = initLottoTickets();
-        WinningTicket winningTicket = initWinningTicket(List.of(1, 2, 3, 4, 5, 6), 6);
+        WinningTicket winningTicket = initWinningTicket(List.of(1, 2, 3, 4, 5, 6), 7);
         lottoGame = new LottoGame(lottoTickets, winningTicket);
     }
 
@@ -31,9 +31,9 @@ class LottoGameTest {
         List<RankResult> rankResultList = rankResults.getRankResults();
         assertAll(
                 () -> assertThat(rankResultList).contains(new RankResult(Rank.FIRST, 1)),
-                () -> assertThat(rankResultList).contains(new RankResult(Rank.SECOND, 1)),
-                () -> assertThat(rankResultList).contains(new RankResult(Rank.THIRD, 1)),
-                () -> assertThat(rankResultList).contains(new RankResult(Rank.FOURTH, 0))
+                () -> assertThat(rankResultList).contains(new RankResult(Rank.SECOND, 2)),
+                () -> assertThat(rankResultList).contains(new RankResult(Rank.THIRD, 0)),
+                () -> assertThat(rankResultList).contains(new RankResult(Rank.FIFTH, 1))
         );
     }
 
@@ -64,7 +64,7 @@ class LottoGameTest {
                         new LottoNumber(3),
                         new LottoNumber(4),
                         new LottoNumber(7),
-                        new LottoNumber(6)
+                        new LottoNumber(8)
                 )
                 ),
                 new LottoTicket(Set.of(
@@ -76,9 +76,9 @@ class LottoGameTest {
                         new LottoNumber(7)
                 )),
                 new LottoTicket(Set.of(
+                        new LottoNumber(1),
+                        new LottoNumber(2),
                         new LottoNumber(3),
-                        new LottoNumber(5),
-                        new LottoNumber(9),
                         new LottoNumber(12),
                         new LottoNumber(15),
                         new LottoNumber(20)

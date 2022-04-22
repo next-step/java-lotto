@@ -29,7 +29,7 @@ class LottoTicketsTest {
                 new LottoNumber(6),
                 new LottoNumber(8),
                 new LottoNumber(10),
-                new LottoNumber(12)
+                new LottoNumber(13)
         ));
 
         LottoTickets lottoTickets = new LottoTickets(List.of(lottoTicket, lottoTicket2));
@@ -42,7 +42,7 @@ class LottoTicketsTest {
                         new LottoNumber(8),
                         new LottoNumber(11),
                         new LottoNumber(12))
-                ), new LottoNumber(8)
+                ), new LottoNumber(13)
         );
 
         //when
