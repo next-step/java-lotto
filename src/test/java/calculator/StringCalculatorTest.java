@@ -77,6 +77,15 @@ public class StringCalculatorTest {
           stringCalculator.calculate("* + 1");
         }).withMessageMatching("For input string: \"\\S+\"");
   }
+  @Test
+  @DisplayName("0으로 나누는 경우")
+  void zeroDivisionTest() {
+    assertThatExceptionOfType(RuntimeException.class)
+        .isThrownBy(() -> {
+          stringCalculator.calculate("1 / 0");
+        }).withMessageMatching("/ by zero");
+  }
+
 
 
 }
