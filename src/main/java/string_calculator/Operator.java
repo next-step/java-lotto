@@ -38,6 +38,18 @@ public class Operator implements Value {
         if (operator.value == "+") {
             return acc.plus(operand);
         }
+        if (operator.value == "-") {
+            return acc.minus(operand);
+        }
+        if (operator.value == "*") {
+            return acc.multiply(operand);
+        }
+        if (operator.value == "/") {
+            return acc.divide(operand);
+        }
+        if (operator.value == "%") {
+            return acc.modulo(operand);
+        }
         throw new IllegalArgumentException("Wrong operator was used.");
     }
 }

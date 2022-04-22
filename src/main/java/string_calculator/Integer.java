@@ -22,7 +22,23 @@ public class Integer implements Value  {
         return Objects.hash(value);
     }
 
-    public Integer plus(Integer i1) {
-        return new Integer(this.value + i1.value);
+    public Integer plus(Integer operand) {
+        return new Integer(this.value + operand.value);
+    }
+
+    public Integer minus(Integer operand) {
+        return new Integer(this.value - operand.value);
+    }
+
+    public Integer multiply(Integer operand) {
+        return new Integer(this.value * operand.value);
+    }
+
+    public Integer divide(Integer operand) {
+        return new Integer(this.value / operand.value);
+    }
+
+    public Integer modulo(Integer operand) {
+        return new Integer(this.value % operand.value);
     }
 }
