@@ -11,12 +11,12 @@ public class StringCalculator {
   public int calculate(String text) {
     StringUtil.isBlank(text);
     String[] prepareData = StringUtil.split(text);
-    Number number = new Number(StringUtil.parseInteger(prepareData[FIRST_KEY]));
+    Number resultNumber = new Number(StringUtil.parseInteger(prepareData[FIRST_KEY]));
     for (int i = START_INDEX; i < prepareData.length; i += STEP) {
       String operation = prepareData[i];
       int otherNumber = StringUtil.parseInteger(prepareData[i + NEXT_INDEX]);
-      number = number.arithmetic(operation, otherNumber);
+      resultNumber = resultNumber.arithmetic(operation, otherNumber);
     }
-    return number.getValue();
+    return resultNumber.getValue();
   }
 }
