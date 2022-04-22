@@ -6,6 +6,10 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOf
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 
 public class StringCalculatorTest {
 
@@ -52,13 +56,13 @@ public class StringCalculatorTest {
     assertThat(stringCalculator.calculate("4 / 2 * 3")).isEqualTo(6);
   }
 
-  @Test
+  @ParameterizedTest
   @DisplayName("입력 값이 null이거나 빈 공백 문자일 경우")
-  void blankCheckTest() {
+  @NullAndEmptySource
+  void blankCheckTest(String input) {
     assertThatExceptionOfType(RuntimeException.class)
         .isThrownBy(() -> {
-          stringCalculator.calculate(null);
-          stringCalculator.calculate("    ");
+          stringCalculator.calculate(input);
         }).withMessageMatching("null 또는 공백을 입력하실 수 없습니다.");
   }
 
