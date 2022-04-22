@@ -69,5 +69,14 @@ public class StringCalculatorTest {
           stringCalculator.calculate("1 ^ 1");
         }).withMessageMatching("잘못된 부호를 넣었습니다. 다시 확인해주세요.");
   }
+  @Test
+  @DisplayName("숫자가 들어갈 자리에 숫자를 넣지 않는 경우")
+  void wrongNumberTest() {
+    assertThatExceptionOfType(RuntimeException.class)
+        .isThrownBy(() -> {
+          stringCalculator.calculate("* + 1");
+        }).withMessageMatching("For input string: \"\\S+\"");
+  }
+
 
 }
