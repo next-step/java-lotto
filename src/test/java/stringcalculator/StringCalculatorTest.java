@@ -2,11 +2,9 @@ package stringcalculator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -30,19 +28,6 @@ public class StringCalculatorTest {
             void IllegalArgumentException을_던진다(String nullOrEmpty) {
                 assertThatIllegalArgumentException()
                         .isThrownBy(() -> stringCalculator.plus(nullOrEmpty));
-            }
-        }
-
-        @Nested
-        class 사칙연산_기호가_아닌_문자열이_주어질경우 {
-
-            @ParameterizedTest
-            @ValueSource(strings = {
-                    "2 & 3"
-            })
-            void IllegalArgumentException을_던진다(String not사칙연산_기호_문자열) {
-                assertThatIllegalArgumentException()
-                        .isThrownBy(() -> stringCalculator.plus(not사칙연산_기호_문자열));
             }
         }
 
