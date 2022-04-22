@@ -12,5 +12,8 @@
 - 예를 들어 2 + 3 * 4 / 2와 같은 문자열을 입력할 경우 2 + 3 * 4 / 2 실행 결과인 10을 출력해야 한다.
 
 ### Todo
-
-- [x] feat: create Arithmetic class with simple add method
+            
+- [x] create classes Arithmetic, Value(Integer, Operator)
+- [x] InputView, InputView
+- [x] parse equation to Value, evaluateOperator, evaluateInteger 
+- [x] compute operaters
