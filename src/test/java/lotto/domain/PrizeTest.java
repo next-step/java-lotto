@@ -23,12 +23,12 @@ class PrizeTest {
 
     private static Stream<Arguments> provideArgumentsForFindPrizeByMatchCount() {
         return Stream.of(
-                Arguments.of(0, false, Prize.ZERO),
-                Arguments.of(4, false, Prize.FOUR),
-                Arguments.of(4, true, Prize.FOUR),
-                Arguments.of(5, false, Prize.FIVE),
-                Arguments.of(5, true, Prize.BONUS),
-                Arguments.of(6, false, Prize.SIX)
+                Arguments.of(0, false, Prize.EIGHTH),
+                Arguments.of(4, false, Prize.FOURTH),
+                Arguments.of(4, true, Prize.FOURTH),
+                Arguments.of(5, false, Prize.THIRD),
+                Arguments.of(5, true, Prize.SECOND),
+                Arguments.of(6, false, Prize.FIRST)
         );
     }
 

@@ -1,40 +1,59 @@
 package lotto.domain;
 
 import java.util.Arrays;
-
+import java.util.Comparator;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 
 public enum Prize {
 
-    ZERO(0, 0d),
-    ONE(1, 0d),
-    TWO(2, 0d),
-    THREE(3, 5000d),
-    FOUR(4, 50000d),
-    FIVE(5, 1_500_000d),
-    BONUS(5, 30_000_000d),
-    SIX(6, 2_000_000_000d);
+    EIGHTH(0, false, 0d),
+    SEVENTH(1, false,  0d),
+    SIXTH(2, false,  0d),
+    FIFTH(3, false,  5000d),
+    FOURTH(4, false,  50000d),
+    THIRD(5, true,  1_500_000d),
+    SECOND(5, true,  30_000_000d),
+    FIRST(6, false,  2_000_000_000d);
 
     private int matchCount;
+    private boolean shouldCheckBonus;
     private double earnings;
 
-    Prize(int matchCount, double earnings) {
+    Prize(int matchCount, boolean shouldCheckBonus, double earnings) {
         this.matchCount = matchCount;
+        this.shouldCheckBonus = shouldCheckBonus;
         this.earnings = earnings;
     }
 
     public static Prize findPrizeByMatchCount(int matchCount, boolean containsBonus) {
-        if (matchCount != FIVE.matchCount) {
-            return findPrizeByMatchCount(matchCount);
+        List<Prize> prizes = findPrizesByMatchCount(matchCount);
+
+        Prize originalPrize = prizes.get(0);
+        if (originalPrize.shouldCheckBonus && containsBonus) {
+            return findPrizeOfMaxEarnings(prizes);
         }
-        return containsBonus ? BONUS : FIVE;
+
+        return originalPrize;
     }
 
-    private static Prize findPrizeByMatchCount(int matchCount) {
-        return Arrays.stream(Prize.values())
+    private static List<Prize> findPrizesByMatchCount(int matchCount) {
+        List<Prize> prizes = Arrays.stream(Prize.values())
                 .filter(prize -> prize.matchCount == matchCount)
-                .findAny()
+                .collect(Collectors.toList());
+
+        if (prizes.isEmpty()) {
+            throw new NoSuchElementException();
+        }
+
+        return prizes;
+    }
+
+    private static Prize findPrizeOfMaxEarnings(List<Prize> prizes) {
+        return prizes.stream()
+                .max(Comparator.comparingDouble(Prize::getEarnings))
                 .orElseThrow(NoSuchElementException::new);
     }
 
