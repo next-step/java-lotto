@@ -61,6 +61,7 @@ public class StringCalculatorTest {
           stringCalculator.calculate("    ");
         }).withMessageMatching("null 또는 공백을 입력하실 수 없습니다.");
   }
+
   @Test
   @DisplayName("사칙연산 기호가 아닌 경우")
   void wrongSignTest() {
@@ -69,6 +70,7 @@ public class StringCalculatorTest {
           stringCalculator.calculate("1 ^ 1");
         }).withMessageMatching("잘못된 부호를 넣었습니다. 다시 확인해주세요.");
   }
+
   @Test
   @DisplayName("숫자가 들어갈 자리에 숫자를 넣지 않는 경우")
   void wrongNumberTest() {
@@ -77,6 +79,7 @@ public class StringCalculatorTest {
           stringCalculator.calculate("* + 1");
         }).withMessageMatching("For input string: \"\\S+\"");
   }
+
   @Test
   @DisplayName("0으로 나누는 경우")
   void zeroDivisionTest() {
