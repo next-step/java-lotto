@@ -15,7 +15,7 @@ public class Operator implements Value {
     private final String value;
 
     public Operator(String s) {
-        if ( Pattern.matches("[^\\+\\-\\*\\/%]", s)) {
+        if (Pattern.matches("[^\\+\\-\\*\\/%]", s)) {
             throw new IllegalArgumentException("only [+, -, *, /, %] are allowed.");
         }
         this.value = s;
@@ -38,16 +38,16 @@ public class Operator implements Value {
         if (operator.value.equals("+")) {
             return acc.plus(operand);
         }
-        if (operator.value == "-") {
+        if (operator.value.equals("-")) {
             return acc.minus(operand);
         }
-        if (operator.value == "*") {
+        if (operator.value.equals("*")) {
             return acc.multiply(operand);
         }
-        if (operator.value == "/") {
+        if (operator.value.equals("/")) {
             return acc.divide(operand);
         }
-        if (operator.value == "%") {
+        if (operator.value.equals("%")) {
             return acc.modulo(operand);
         }
         throw new IllegalArgumentException("Wrong operator was used.");
