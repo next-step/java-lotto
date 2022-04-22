@@ -1,4 +1,7 @@
-package stringcalculator.domain;
+package stringcalculator.enums;
+
+import stringcalculator.exception.DividedByZeroException;
+import stringcalculator.exception.InvalidOperatorException;
 
 public enum Operator {
     PLUS("+"),
@@ -25,14 +28,14 @@ public enum Operator {
             divideValidate(followingOperand);
             precedingOperand /= followingOperand;
         } else {
-            throw new IllegalArgumentException(INVALID_OPERATOR_ERROR_MESSAGE);
+            throw new InvalidOperatorException();
         }
         return precedingOperand;
     }
 
     private static void divideValidate(int followingOperand) {
         if (followingOperand == 0) {
-            throw new IllegalArgumentException(DIVIDE_BY_ZERO_ERROR_MESSAGE);
+            throw new DividedByZeroException();
         }
     }
 }

@@ -1,15 +1,18 @@
 package stringcalculator.domain;
 
+import stringcalculator.exception.BlankInputException;
+import stringcalculator.exception.InvalidNumberException;
+
 public class StringUtils {
 
-    private static final String INVALID_NUMBER_ERROR_MESSAGE = "피연산자는 숫자를 입력해야 합니다.";
-    private static final String EMPTY_OR_NULL_ERROR_MESSAGE = "문자열을 입력해야 합니다.";
+    private StringUtils() {
+    }
 
     static int toInt(String[] split, int index) {
         try {
             return Integer.parseInt(split[index]);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_NUMBER_ERROR_MESSAGE);
+            throw new InvalidNumberException();
         }
     }
 
@@ -35,7 +38,7 @@ public class StringUtils {
 
     private static void validateInput(String input) {
         if (isBlank(input)) {
-            throw new IllegalArgumentException(EMPTY_OR_NULL_ERROR_MESSAGE);
+            throw new BlankInputException();
         }
     }
 

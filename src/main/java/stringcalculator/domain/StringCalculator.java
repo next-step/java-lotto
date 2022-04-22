@@ -1,6 +1,12 @@
 package stringcalculator.domain;
 
+import stringcalculator.enums.Operator;
+
 public class StringCalculator {
+
+    private StringCalculator() {
+    }
+
     public static Integer calculate(String input) {
         String[] split = StringUtils.getStringArray(input);
         int precedingOperand = StringUtils.toInt(split, 0);

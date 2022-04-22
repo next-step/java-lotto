@@ -6,19 +6,21 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
+import stringcalculator.exception.BlankInputException;
+import stringcalculator.exception.DividedByZeroException;
+import stringcalculator.exception.InvalidNumberException;
+import stringcalculator.exception.InvalidOperatorException;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 class StringCalculatorTest {
     
     @ParameterizedTest
     @NullAndEmptySource
-    @DisplayName("입력값이 null 혹은 공백일 경우 IllegalArgumentException 발생")
+    @DisplayName("입력값이 null 혹은 공백일 경우 BlankInputException 발생")
     void throwIllegalArgumentExceptionWhenInputNullOrEmpty(String input) {
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> StringCalculator.calculate(input))
-                .withMessage("문자열을 입력해야 합니다.");
+        assertThatThrownBy(() -> StringCalculator.calculate(input))
+                .isInstanceOf(BlankInputException.class);
     }
 
     @ParameterizedTest
@@ -68,29 +70,26 @@ class StringCalculatorTest {
     }
 
     @Test
-    @DisplayName("0으로 나눌 경우 IllegalArgumentException 발생")
+    @DisplayName("0으로 나눌 경우 DividedByZeroException 발생")
     void divideByZero() {
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> StringCalculator.calculate("4 / 0"))
-                .withMessage("0으로 나눌 수 없습니다.");
+        assertThatThrownBy(() -> StringCalculator.calculate("4 / 0"))
+                .isInstanceOf(DividedByZeroException.class);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"a + b", "! - !", "/ / /"})
-    @DisplayName("입력값이 숫자가 아닐 경우 IllegalArgumentException 발생")
+    @DisplayName("입력값이 숫자가 아닐 경우 InvalidNumberException 발생")
     void throwIllegalArgumentExceptionWhenInputNotNumber(String input) {
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> StringCalculator.calculate(input))
-                .withMessage("피연산자는 숫자를 입력해야 합니다.");
+        assertThatThrownBy(() -> StringCalculator.calculate(input))
+                .isInstanceOf(InvalidNumberException.class);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1 ! 1", "1 - 2 $ 1", "5 ( 1 * 4"})
-    @DisplayName("연산자가 잘못 입력된 경우 IllegalArgumentException 발생")
+    @DisplayName("연산자가 잘못 입력된 경우 InvalidOperatorException 발생")
     void throwIllegalArgumentExceptionWhenInputInvalidOperator(String input) {
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> StringCalculator.calculate(input))
-                .withMessage("연산자는 \"+, -, *, %\" 만 가능합니다.");
+        assertThatThrownBy(() -> StringCalculator.calculate(input))
+                .isInstanceOf(InvalidOperatorException.class);
     }
 
     @ParameterizedTest
