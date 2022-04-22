@@ -8,7 +8,7 @@ public class StringUtils {
     private StringUtils() {
     }
 
-    static int toInt(String[] split, int index) {
+    public static int toInt(String[] split, int index) {
         try {
             return Integer.parseInt(split[index]);
         } catch (NumberFormatException e) {
@@ -16,7 +16,7 @@ public class StringUtils {
         }
     }
 
-    static String[] getStringArray(String input) {
+    public static String[] getStringArray(String input) {
         validateInput(input);
         String[] stringArray = input.split(" ");
         validateArray(stringArray);
@@ -27,9 +27,13 @@ public class StringUtils {
         if (isLessThanThreeValues(stringArray)) {
             throw new IllegalArgumentException("입력값은 3개 이상이어야 합니다.");
         }
-        if (stringArray.length % 2 == 0) {
+        if (isEvenCount(stringArray)) {
             throw new IllegalArgumentException("입력값은 홀수개이어야 합니다.");
         }
+    }
+
+    private static boolean isEvenCount(String[] stringArray) {
+        return stringArray.length % 2 == 0;
     }
 
     private static boolean isLessThanThreeValues(String[] stringArray) {
