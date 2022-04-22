@@ -12,17 +12,15 @@ public class Controller {
     public static void main(String[] args) {
         int price = InputView.inputPrice();
 
-        Store store = new Store();
-        store.pay(price);
-        List<Lotto> lottos = store.receive();
+        List<Lotto> lottos = Store.pay(price);
 
-        ResultView.printCountOfLottos(store.countOfLottos(price));
+        ResultView.printCountOfLottos(Store.countOfLottos(price));
         ResultView.printResultOfPurchase(lottos);
 
         Integer[] previousLottoNumber = Utility.convertStringArrayToIntegerArray(Utility.split(InputView.inputLottoOfPreviousWeek()));
         Lotto previousLotto = new Lotto(previousLottoNumber);
 
-        int[] stats = store.calculateStats(previousLotto);
+        int[] stats = Store.calculateStats(lottos, previousLotto);
         ResultView.printWinningStatistics(stats);
         ResultView.printYield(stats, price);
     }

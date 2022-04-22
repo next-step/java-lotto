@@ -1,35 +1,31 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Store {
     private static final int LOTTO_PRICE_PER_ONE = 1000;
-    private final List<Lotto> lottos;
 
-    public Store() {
-        lottos = new ArrayList<>();
+    private Store() {
     }
 
-    public void pay(int price) {
+    public static List<Lotto> pay(int price) {
+        final List<Lotto> lottos = new ArrayList<>();;
         int count = countOfLottos(price);
 
         while(count > 0) {
             lottos.add(LottoFactory.createLottoAutomatically());
             count--;
         }
+
+        return lottos;
     }
 
-    public int countOfLottos(int price) {
+    public static int countOfLottos(int price) {
         return price / LOTTO_PRICE_PER_ONE;
     }
 
-    public List<Lotto> receive() {
-        return Collections.unmodifiableList(lottos);
-    }
-
-    public int[] calculateStats(Lotto previousLotto) {
+    public static int[] calculateStats(List<Lotto> lottos, Lotto previousLotto) {
         int[] winningStats = new int[7];
         for (Lotto lotto : lottos) {
             winningStats[accumulateStats(lotto, previousLotto)]++;
@@ -37,7 +33,7 @@ public class Store {
         return winningStats;
     }
 
-    private int accumulateStats(Lotto lotto, Lotto previousLotto) {
+    private static int accumulateStats(Lotto lotto, Lotto previousLotto) {
         return lotto.countDuplicateValue(previousLotto);
     }
 }

@@ -9,7 +9,6 @@ class StoreTest {
     @ParameterizedTest
     @CsvSource({"5000,5", "1500,1", "600,0"})
     void 구매_개수_테스트(int price, int count) {
-        Store store = new Store();
-        assertThat(store.countOfLottos(price)).isEqualTo(count);
+        assertThat(Store.countOfLottos(price)).isEqualTo(count);
     }
 }
