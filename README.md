@@ -17,3 +17,11 @@
 - [x] InputView, InputView
 - [x] parse equation to Value, evaluateOperator, evaluateInteger 
 - [x] compute operaters
+
+### Result
+
+```
+Put your equation.
+1 + 2 * 4 / 2 % 5
+Result: 1
+```
