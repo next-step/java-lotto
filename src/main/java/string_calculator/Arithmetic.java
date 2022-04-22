@@ -1,7 +1,31 @@
 package string_calculator;
 
+import java.util.List;
+
 public class Arithmetic {
-    public static int add(int i, int i1) {
-        return i + i1;
+    private Integer accumulator;
+
+    public Integer computes(List<Value> values) {
+        int i = 0;
+        while (i < values.size()) {
+            Value value = values.get(i);
+            if (value instanceof Operator) {
+                compute(this.accumulator, (Operator) value, (Integer) values.get(i+1));
+                i += 2;
+            }
+            if (value instanceof Integer) {
+                this.accumulator = (Integer) value;
+                i++;
+            }
+        }
+        return accumulator;
+    }
+
+    private void compute(Integer acc, Operator operator, Integer operand) {
+        this.accumulator = operator.compute(acc, operator, operand);
+    }
+
+    public static Integer add(Integer i, Integer i1) {
+        return i.plus(i1);
     }
 }

@@ -2,7 +2,7 @@ package string_calculator;
 
 import java.util.Objects;
 
-public class Integer implements Value{
+public class Integer implements Value  {
     private final int value;
 
     public Integer(int i) {
@@ -20,5 +20,9 @@ public class Integer implements Value{
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    public Integer plus(Integer i1) {
+        return new Integer(this.value + i1.value);
     }
 }

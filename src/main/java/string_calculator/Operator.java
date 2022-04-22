@@ -33,4 +33,11 @@ public class Operator implements Value {
     public int hashCode() {
         return Objects.hash(value);
     }
+
+    public Integer compute(Integer acc, Operator operator, Integer operand) {
+        if (operator.value == "+") {
+            return acc.plus(operand);
+        }
+        throw new IllegalArgumentException("Wrong operator was used.");
+    }
 }
