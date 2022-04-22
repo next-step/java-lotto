@@ -28,8 +28,8 @@ public class TicketMachine {
         return lottoTicketGenerator.generateLottoTickets(count);
     }
 
-    public WinningTicket generateWinningTicket(List<Integer> numbers) {
-        return lottoTicketGenerator.generateWinningTicket(numbers);
+    public WinningTicket generateWinningTicket(List<Integer> winningNumbers, LottoNumber bonusNumber) {
+        return lottoTicketGenerator.generateWinningTicket(winningNumbers, bonusNumber);
     }
 
 }

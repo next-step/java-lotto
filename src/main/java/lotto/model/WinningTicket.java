@@ -2,27 +2,25 @@ package lotto.model;
 
 import lotto.exception.InvalidBonusNumberException;
 
-import java.util.Set;
-
 public class WinningTicket {
 
     private final LottoTicket lottoTicket;
 
-    public WinningTicket(Set<LottoNumber> lottoNumbers) {
-        this.lottoTicket = new LottoTicket(lottoNumbers);
-    }
+    private final LottoNumber bonusNumber;
 
-    public WinningTicket(LottoTicket lottoTicket) {
+    public WinningTicket(LottoTicket lottoTicket, LottoNumber bonusNumber) {
         this.lottoTicket = lottoTicket;
+        validateBonusNumber(bonusNumber);
+        this.bonusNumber = bonusNumber;
     }
 
-    public Rank getRank(LottoTicket lottoTicket, LottoNumber bonusNumber) {
+    public Rank getRank(LottoTicket lottoTicket) {
         int count = this.lottoTicket.countMatches(lottoTicket);
         boolean matchBonus = lottoTicket.includeBonusNumber(bonusNumber);
         return Rank.valueOf(count, matchBonus);
     }
 
-    public void validateBonusNumber(LottoNumber bonusNumber) {
+    private void validateBonusNumber(LottoNumber bonusNumber) {
         if(!lottoTicket.includeBonusNumber(bonusNumber)) {
             throw new InvalidBonusNumberException(bonusNumber);
         }

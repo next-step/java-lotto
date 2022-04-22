@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.model.LottoGame;
+import lotto.model.LottoNumber;
 import lotto.model.LottoTicket;
 import lotto.model.Money;
 import lotto.model.RankResults;
@@ -33,7 +34,7 @@ public class LottoGameController {
         try {
             Money money = inputView.readMoney();
             LottoGame lottoGame = generateLottoGame(money);
-            RankResults rankResults = lottoGame.start(inputView.readBonusNumber());
+            RankResults rankResults = lottoGame.start();
             outputView.printLottoResults(rankResults, money);
         } catch (RuntimeException runtimeException) {
             outputView.printErrorMessage(runtimeException.getMessage());
@@ -47,7 +48,9 @@ public class LottoGameController {
     }
 
     private WinningTicket generateWinningTicket() {
-        return ticketMachine.generateWinningTicket(inputView.readWinningNumbers());
+        List<Integer> winningNumbers = inputView.readWinningNumbers();
+        LottoNumber bonusNumber = inputView.readBonusNumber();
+        return ticketMachine.generateWinningTicket(winningNumbers, bonusNumber);
     }
 
     private List<LottoTicket> generateLottoTickets(Money money) {

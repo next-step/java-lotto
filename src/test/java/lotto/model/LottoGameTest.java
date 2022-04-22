@@ -4,8 +4,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -17,7 +19,7 @@ class LottoGameTest {
     @BeforeEach
     void setUp() {
         List<LottoTicket> lottoTickets = initLottoTickets();
-        WinningTicket winningTicket = initWinningTicket();
+        WinningTicket winningTicket = initWinningTicket(List.of(1, 2, 3, 4, 5, 6), 6);
         lottoGame = new LottoGame(lottoTickets, winningTicket);
     }
 
@@ -25,7 +27,7 @@ class LottoGameTest {
     @DisplayName("로또 결과를 확인하다")
     void produceResultStrategy() {
 
-        RankResults rankResults = lottoGame.start(new LottoNumber(6));
+        RankResults rankResults = lottoGame.start();
         List<RankResult> rankResultList = rankResults.getRankResults();
         assertAll(
                 () -> assertThat(rankResultList).contains(new RankResult(Rank.FIRST, 1)),
@@ -35,15 +37,15 @@ class LottoGameTest {
         );
     }
 
-    private WinningTicket initWinningTicket() {
-        return new WinningTicket(Set.of(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
-        ));
+    private WinningTicket initWinningTicket(List<Integer> numbers, int bonusNumber) {
+        List<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        LottoTicket lottoTicket = new LottoTicket(new HashSet<>(lottoNumbers));
+        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
+
+        return new WinningTicket(lottoTicket, bonusLottoNumber);
     }
 
     private List<LottoTicket> initLottoTickets() {

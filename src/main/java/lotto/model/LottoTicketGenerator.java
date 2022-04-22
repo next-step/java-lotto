@@ -24,10 +24,10 @@ public class LottoTicketGenerator {
                 .collect(Collectors.toList());
     }
 
-    public WinningTicket generateWinningTicket(List<Integer> numbers) {
+    public WinningTicket generateWinningTicket(List<Integer> numbers, LottoNumber bonusNumber) {
         Set<Integer> numberSet = new HashSet<>(numbers);
         LottoTicket lottoTicket = generateLottoNumbers(numberSet);
-        return new WinningTicket(lottoTicket);
+        return new WinningTicket(lottoTicket, bonusNumber);
     }
 
     private LottoTicket generateLottoNumbers(Set<Integer> numbers) {

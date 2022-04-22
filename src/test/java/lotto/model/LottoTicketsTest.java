@@ -33,6 +33,7 @@ class LottoTicketsTest {
         ));
 
         LottoTickets lottoTickets = new LottoTickets(List.of(lottoTicket, lottoTicket2));
+
         WinningTicket winningTicket = new WinningTicket(
                 new LottoTicket(Set.of(
                         new LottoNumber(2),
@@ -41,11 +42,11 @@ class LottoTicketsTest {
                         new LottoNumber(8),
                         new LottoNumber(11),
                         new LottoNumber(12))
-                )
+                ), new LottoNumber(8)
         );
 
         //when
-        List<Rank> ranks = lottoTickets.getRanks(winningTicket, new LottoNumber(12));
+        List<Rank> ranks = lottoTickets.getRanks(winningTicket);
 
         //then
         assertThat(ranks).containsExactly(Rank.FIFTH, Rank.SECOND);
