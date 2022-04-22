@@ -22,6 +22,8 @@ public class Controller {
         Integer[] previousLottoNumber = Utility.convertStringArrayToIntegerArray(Utility.split(InputView.inputLottoOfPreviousWeek()));
         Lotto previousLotto = new Lotto(previousLottoNumber);
 
-        ResultView.printWinningStatistics(store.calculateStats(previousLotto));
+        int[] stats = store.calculateStats(previousLotto);
+        ResultView.printWinningStatistics(stats);
+        ResultView.printYield(stats, price);
     }
 }
