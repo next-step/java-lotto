@@ -1,5 +1,8 @@
 package Calculator;
 
+import Calculator.exception.NotFoundOperatorException;
+import Calculator.exception.OnlyNumberException;
+
 import java.util.function.BinaryOperator;
 import java.util.stream.Stream;
 
@@ -21,7 +24,7 @@ public enum Operator {
         return Stream.of(values())
                 .filter(operator -> operator.operator.equals(operatorName))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new NotFoundOperatorException("연산자를 찾을 수 없습니다."));
     }
 
     public int calc(String op1, String op2) {
