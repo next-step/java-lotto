@@ -1,6 +1,7 @@
 package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -44,10 +45,20 @@ public class StringCalculatorTest {
   void divTest() {
     assertThat(stringCalculator.calculate("4 / 2")).isEqualTo(2);
   }
+
   @Test
   @DisplayName("복합 테스트")
   void complexTest() {
     assertThat(stringCalculator.calculate("4 / 2 * 3")).isEqualTo(6);
   }
 
+  @Test
+  @DisplayName("입력 값이 null이거나 빈 공백 문자일 경우")
+  void blankCheckTest() {
+    assertThatExceptionOfType(RuntimeException.class)
+        .isThrownBy(() -> {
+          stringCalculator.calculate(null);
+          stringCalculator.calculate("    ");
+        }).withMessageMatching("null");
+  }
 }

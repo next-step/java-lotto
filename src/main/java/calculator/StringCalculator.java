@@ -6,6 +6,7 @@ import calculator.util.StringUtil;
 public class StringCalculator {
 
   public int calculate(String text) {
+    if(text == null || text.isBlank()) throw new IllegalArgumentException("null");
     String[] split = StringUtil.split(text);
     Number number = new Number(getOpponentValue(split[0]));
     for (int i = 1; i < split.length; i += 2) {
