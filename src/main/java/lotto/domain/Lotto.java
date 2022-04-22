@@ -2,18 +2,15 @@ package lotto.domain;
 
 import lotto.exception.InvalidLottoLengthException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Lotto {
     private static final int VALID_LOTTO_LENGTH = 6;
-    private final List<Integer> lotto;
+    private final Set<Integer> lotto;
 
     Lotto(List<Integer> lotto) {
         validateLotto(lotto);
-        this.lotto = new ArrayList<>(lotto);
+        this.lotto = new HashSet<>(lotto);
     }
 
     private void validateLotto(List<Integer> lotto) {
@@ -23,15 +20,15 @@ public class Lotto {
     }
 
     public Lotto(Integer[] lotto) {
-        this.lotto = Arrays.asList(lotto);
+        this.lotto = new HashSet<>(Arrays.asList(lotto));
     }
 
-    public List<Integer> getLottoNumbers() {
-        return Collections.unmodifiableList(lotto);
+    public Set<Integer> getLottoNumbers() {
+        return new TreeSet<>(lotto);
     }
 
     public int countDuplicateValue(Lotto lotto) {
-        List<Integer> copyOfLotto = new ArrayList<>(this.lotto);
+        Set<Integer> copyOfLotto = new HashSet<>(this.lotto);
         copyOfLotto.retainAll(lotto.getLottoNumbers());
 
         return copyOfLotto.size();
