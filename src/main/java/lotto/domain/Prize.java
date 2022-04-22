@@ -42,6 +42,7 @@ public enum Prize {
     private static List<Prize> findPrizesByMatchCount(int matchCount) {
         List<Prize> prizes = Arrays.stream(Prize.values())
                 .filter(prize -> prize.matchCount == matchCount)
+                .sorted(Comparator.comparingDouble(Prize::getEarnings))
                 .collect(Collectors.toList());
 
         if (prizes.isEmpty()) {
