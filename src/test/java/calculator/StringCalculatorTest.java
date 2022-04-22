@@ -61,4 +61,13 @@ public class StringCalculatorTest {
           stringCalculator.calculate("    ");
         }).withMessageMatching("null");
   }
+  @Test
+  @DisplayName("사칙연산 기호가 아닌 경우")
+  void wrongSignTest() {
+    assertThatExceptionOfType(RuntimeException.class)
+        .isThrownBy(() -> {
+          stringCalculator.calculate("1 ^ 1");
+        }).withMessageMatching("잘못된 부호를 넣었습니다. 다시 확인해주세요.");
+  }
+
 }
