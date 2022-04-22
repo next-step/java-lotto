@@ -5,22 +5,22 @@ import java.util.List;
 
 public abstract class LottoMachine {
 
-    public static List<Rank> findBoughtLottoRank(List<Integer> winningLotto, List<Lotto> lotteries) {
+    public static List<Rank> findBoughtLottoRank(List<Integer> winningLotto, List<Lotto> lotteries, int bonusNumber) {
         List<Rank> ranks = new ArrayList<>();
 
         for (Lotto lottery : lotteries) {
             int matchCount = findMatchedLottoNumberCount(winningLotto, lottery);
-            ranks.add(Rank.findRank(matchCount));
+            ranks.add(Rank.findRank(matchCount, lottery.isBonusNumberMatched(matchCount, bonusNumber)));
         }
 
         return ranks;
     }
 
-    public static int findMatchedLottoNumberCount(List<Integer> winLotto, Lotto generatedLotto) {
+    static int findMatchedLottoNumberCount(List<Integer> winLotto, Lotto generatedLotto) {
         int sum = 0;
 
         for (Integer lottoNumber : winLotto) {
-            if (isMatchedNumber(lottoNumber, generatedLotto)) {
+            if (generatedLotto.isMatchedNumber(lottoNumber)) {
                 sum += 1;
             }
         }
@@ -28,9 +28,4 @@ public abstract class LottoMachine {
         return sum;
     }
 
-    private static boolean isMatchedNumber(Integer lottoNumber, Lotto generatedLotto) {
-        return generatedLotto
-                .getLottoNumbers()
-                .contains(lottoNumber);
-    }
 }
