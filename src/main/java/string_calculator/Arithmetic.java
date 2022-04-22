@@ -12,11 +12,14 @@ public class Arithmetic {
             if (value instanceof Operator) {
                 compute(this.accumulator, (Operator) value, (Integer) values.get(i+1));
                 i += 2;
+                continue;
             }
             if (value instanceof Integer) {
                 this.accumulator = (Integer) value;
                 i++;
+                continue;
             }
+            throw new IllegalArgumentException("Wrong values found.");
         }
         return accumulator;
     }

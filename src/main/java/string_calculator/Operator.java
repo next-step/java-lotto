@@ -35,7 +35,7 @@ public class Operator implements Value {
     }
 
     public Integer compute(Integer acc, Operator operator, Integer operand) {
-        if (operator.value == "+") {
+        if (operator.value.equals("+")) {
             return acc.plus(operand);
         }
         if (operator.value == "-") {

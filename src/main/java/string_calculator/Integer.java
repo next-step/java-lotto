@@ -41,4 +41,8 @@ public class Integer implements Value  {
     public Integer modulo(Integer operand) {
         return new Integer(this.value % operand.value);
     }
+
+    public void print(Integer payload) {
+        System.out.printf("Result: %d\n", payload.value);
+    }
 }

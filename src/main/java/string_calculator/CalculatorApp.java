@@ -6,6 +6,7 @@ public class CalculatorApp {
         String equation = i.scan();
         i.parse(equation);
         Arithmetic a = new Arithmetic();
-        a.computes(i.values);
+        Integer result = a.computes(i.values);
+        ResultView.print(result);
     }
 }
