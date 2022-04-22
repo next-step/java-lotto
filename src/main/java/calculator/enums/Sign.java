@@ -1,5 +1,6 @@
 package calculator.enums;
 
+import calculator.exception.WrongOperationException;
 import calculator.strategy.CalculateStrategy;
 import java.util.Arrays;
 import java.util.function.Function;
@@ -21,7 +22,7 @@ public enum Sign {
   public static Sign search(String value) {
     return Arrays.stream(values())
         .filter(sign -> sign.key.equals(value))
-        .findFirst().orElseThrow(() -> new IllegalArgumentException("잘못된 부호를 넣었습니다. 다시 확인해주세요."));
+        .findFirst().orElseThrow(WrongOperationException::new);
   }
 
   public int execute(int front, int rear) {

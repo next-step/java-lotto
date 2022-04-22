@@ -59,7 +59,7 @@ public class StringCalculatorTest {
         .isThrownBy(() -> {
           stringCalculator.calculate(null);
           stringCalculator.calculate("    ");
-        }).withMessageMatching("null");
+        }).withMessageMatching("null 또는 공백을 입력하실 수 없습니다.");
   }
   @Test
   @DisplayName("사칙연산 기호가 아닌 경우")
