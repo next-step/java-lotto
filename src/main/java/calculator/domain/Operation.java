@@ -1,16 +1,25 @@
 package calculator.domain;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BinaryOperator;
 
 public enum Operation {
-  ADD("+", (a, b) -> a + b),
-  SUBTRACT("-", (a, b) -> a - b),
-  MULTIPLY("*", (a, b) -> a * b),
+  ADD("+", (a, b) -> {
+    validateNull(a, b);
+    return a + b;
+  }),
+  SUBTRACT("-", (a, b) -> {
+    validateNull(a, b);
+    return a - b;
+  }),
+  MULTIPLY("*", (a, b) -> {
+    validateNull(a, b);
+    return a * b;
+  }),
   DIVIDE("/", (a, b) -> {
+    validateNull(a, b);
     if (b == 0) {
       throw new ArithmeticException("0으로 나눌 수 없습니다.");
     }
@@ -42,5 +51,11 @@ public enum Operation {
 
   public static Set<String> getOperatorSet() {
     return BY_OPERATOR.keySet();
+  }
+
+  private static void validateNull(Integer a, Integer b) {
+    if (a == null || b == null) {
+      throw new IllegalArgumentException("계산할 수 없는 값입니다. (ex. null)");
+    }
   }
 }
