@@ -1,6 +1,7 @@
 package stringcalculator;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class Equation {
@@ -12,18 +13,14 @@ public class Equation {
             throw new IllegalArgumentException(ExceptionMessage.INPUT_SHOULD_NOT_NULL_OR_BLANK.getMessage());
         }
 
-        boolean isWhitespaceNotExists =
-                Arrays.stream(input.split(" "))
+        boolean isWhitespaceNotExists = Arrays.stream(input.split(" "))
                         .anyMatch(this::isWhitespaceNotExists);
+
         if (isWhitespaceNotExists) {
             throw new IllegalArgumentException(ExceptionMessage.WHITESPACE_REQUIRED_BETWEEN_CHARACTER.getMessage());
         }
 
         this.input = input;
-    }
-
-    public String getInput() {
-        return input;
     }
 
     private boolean isNullOrBlank(String input) {
@@ -34,4 +31,7 @@ public class Equation {
         return !PATTERN.matcher(chars).matches();
     }
 
+    public List<String> split(String delimiter) {
+        return Arrays.asList(input.split(delimiter));
+    }
 }

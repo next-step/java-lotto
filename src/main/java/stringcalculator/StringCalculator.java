@@ -1,5 +1,6 @@
 package stringcalculator;
 
+import java.util.List;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
@@ -10,8 +11,8 @@ public class StringCalculator {
         Stack<Integer> numbers = new Stack<>();
         Stack<String> operators = new Stack<>();
 
-        String input = equation.getInput();
-        String[] characters = input.split(" ");
+        List<String> characters = equation.split(" ");
+
         for (String character : characters) {
             if (numberPattern.matcher(character).matches()) {
                 if (operators.isEmpty()) {

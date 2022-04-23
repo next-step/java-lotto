@@ -1,12 +1,13 @@
 package stringcalculator;
 
-import stringcalculator.Equation;
-import stringcalculator.ExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static stringcalculator.ExceptionMessage.WHITESPACE_REQUIRED_BETWEEN_CHARACTER;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static stringcalculator.ExceptionMessage.WHITESPACE_REQUIRED_BETWEEN_CHARACTER;
 
 public class EquationTest {
 
@@ -39,5 +40,12 @@ public class EquationTest {
         assertThatThrownBy(() -> new Equation("-1 + 2"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(WHITESPACE_REQUIRED_BETWEEN_CHARACTER.getMessage());
+    }
+
+    @Test
+    void splitDelimiterGiven_ReturnSplitResult() {
+        String delimiter = " ";
+        assertThat(new Equation("1 + 2").split(delimiter)).isEqualTo(List.of("1", "+", "2"));
+        assertThat(new Equation("12 + 22").split(delimiter)).isEqualTo(List.of("12", "+", "22"));
     }
 }
