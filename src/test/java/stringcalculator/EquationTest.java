@@ -2,6 +2,9 @@ package stringcalculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
@@ -11,33 +14,20 @@ import static stringcalculator.ExceptionMessage.WHITESPACE_REQUIRED_BETWEEN_CHAR
 
 public class EquationTest {
 
-    @Test
-    void inputIsNullOrBlankGiven_throwException() {
-        assertThatThrownBy(() -> new Equation(null))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ExceptionMessage.INPUT_SHOULD_NOT_NULL_OR_BLANK.getMessage());
-
-        assertThatThrownBy(() -> new Equation(""))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ExceptionMessage.INPUT_SHOULD_NOT_NULL_OR_BLANK.getMessage());
-
-        assertThatThrownBy(() -> new Equation("   "))
+    @ParameterizedTest
+    @NullAndEmptySource
+    @ValueSource(strings = {"  "})
+    void inputIsNullOrBlankGiven_throwException(String input) {
+        assertThatThrownBy(() -> new Equation(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ExceptionMessage.INPUT_SHOULD_NOT_NULL_OR_BLANK.getMessage());
     }
 
     @DisplayName("문자 사이에 공백이 없을 경우 Exception")
-    @Test
-    void NoWhitespaceBetweenElementsGiven_throwException() {
-        assertThatThrownBy(() -> new Equation("1+2"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(WHITESPACE_REQUIRED_BETWEEN_CHARACTER.getMessage());
-
-        assertThatThrownBy(() -> new Equation("1 +2"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(WHITESPACE_REQUIRED_BETWEEN_CHARACTER.getMessage());
-
-        assertThatThrownBy(() -> new Equation("-1 + 2"))
+    @ParameterizedTest
+    @ValueSource(strings = {"1+2", "1 +2", "-1 + 2"})
+    void NoWhitespaceBetweenElementsGiven_throwException(String input) {
+        assertThatThrownBy(() -> new Equation(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(WHITESPACE_REQUIRED_BETWEEN_CHARACTER.getMessage());
     }
