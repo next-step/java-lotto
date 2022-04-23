@@ -24,16 +24,4 @@ public class Store {
     public static int countOfLottos(int price) {
         return price / LOTTO_PRICE_PER_ONE;
     }
-
-    public static int[] calculateStats(List<Lotto> lottos, Lotto previousLotto) {
-        int[] winningStats = new int[7];
-        for (Lotto lotto : lottos) {
-            winningStats[accumulateStats(lotto, previousLotto)]++;
-        }
-        return winningStats;
-    }
-
-    private static int accumulateStats(Lotto lotto, Lotto previousLotto) {
-        return lotto.countDuplicateValue(previousLotto);
-    }
 }

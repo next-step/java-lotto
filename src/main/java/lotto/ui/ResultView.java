@@ -1,6 +1,7 @@
 package lotto.ui;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoStatistics;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class ResultView {
     private static final String RESULT_TEMPLATE_MESSAGE = "당첨 통계";
     private static final String LINE_DIVIDER = "--------";
     private static final String RESULT_STATS_MESSAGE = "%s개 일치 (%s원)- %s개";
-    private static final String YIELD_OF_LOTTO_MESSAGE = "총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final String YIELD_OF_LOTTO_MESSAGE = "총 수익률은 %s입니다.(기준은 1임)";
     private static final int MIN_LOTTO_WINNER_BOUNDARY = 3;
 
     private ResultView() {
@@ -39,7 +40,7 @@ public class ResultView {
         stringBuilder.append(System.getProperty(LINE_SEPARATOR));
 
         for (int i = 0, len = validStats.length; i < len; i++) {
-            stringBuilder.append(String.format(RESULT_STATS_MESSAGE, i + 3, prize(i + 3), validStats[i]));
+            stringBuilder.append(String.format(RESULT_STATS_MESSAGE, i + 3, LottoStatistics.LottoWinnerType.prize(i + 3), validStats[i]));
             stringBuilder.append(System.getProperty(LINE_SEPARATOR));
         }
 
@@ -54,32 +55,7 @@ public class ResultView {
         return validStats;
     }
 
-    private static int prize(int countOfMatch) {
-        if (countOfMatch == 3) {
-            return 5000;
-        }
-        if (countOfMatch == 4) {
-            return 50000;
-        }
-        if (countOfMatch == 5) {
-            return 1500000;
-        }
-        if (countOfMatch == 6) {
-            return 2000000000;
-        }
-        return 0;
-    }
-
-    public static void printYield(int[] stats, int price) {
-        int profit = 0;
-        int[] validStats = filterValidStats(stats);
-        for (int i = 0, len = validStats.length; i < len; i++) {
-            profit = calculateProfit(profit, i + MIN_LOTTO_WINNER_BOUNDARY, validStats[i]);
-        }
-        System.out.println(String.format(YIELD_OF_LOTTO_MESSAGE, profit / price));
-    }
-
-    private static int calculateProfit(int profit, int countOfMatch, int countOfLotto) {
-        return profit + prize(countOfMatch) * countOfLotto;
+    public static void printYield(int yield) {
+        System.out.println(String.format(YIELD_OF_LOTTO_MESSAGE, yield));
     }
 }
