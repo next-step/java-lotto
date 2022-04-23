@@ -40,7 +40,10 @@ public enum ArithmeticSign {
     }
 
     public static ArithmeticSign findSign(String text) {
-        return Arrays.stream(values()).filter(key -> key.sign.equals(text)).findFirst().orElseThrow(IllegalArgumentException::new);
+        return Arrays.stream(values())
+                .filter(key -> key.sign.equals(text))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     abstract int calculate(int a, int b);
