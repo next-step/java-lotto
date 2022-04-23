@@ -9,7 +9,7 @@ public class InputUtil {
 
     private static final String DEFAULT_DELIMITER = ",";
 
-    private final static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     private InputUtil() {
     }

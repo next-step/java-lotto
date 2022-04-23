@@ -12,8 +12,8 @@ public class WinningTicket {
     private final LottoNumber bonusNumber;
 
     public WinningTicket(LottoTicket lottoTicket, LottoNumber bonusNumber) {
+        validateBonusNumber(lottoTicket, bonusNumber);
         this.lottoTicket = lottoTicket;
-        validateBonusNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
@@ -32,7 +32,7 @@ public class WinningTicket {
         return count == POTENTIAL_SECOND_NUMBER && matchBonus;
     }
 
-    private void validateBonusNumber(LottoNumber bonusNumber) {
+    private void validateBonusNumber(LottoTicket lottoTicket, LottoNumber bonusNumber) {
         if(lottoTicket.includeBonusNumber(bonusNumber)) {
             throw new InvalidBonusNumberException(bonusNumber);
         }

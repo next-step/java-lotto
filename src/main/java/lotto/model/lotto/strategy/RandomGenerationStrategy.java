@@ -15,6 +15,8 @@ public class RandomGenerationStrategy implements NumberGenerationStrategy {
 
     private static final int LOTTO_MIN_NUMBER = 1;
 
+    private static final Random RANDOM = new Random();
+
     @Override
     public Set<LottoNumber> generateLottoNumbers() {
         Set<Integer> numbers = generateRandomNumber();
@@ -42,7 +44,7 @@ public class RandomGenerationStrategy implements NumberGenerationStrategy {
     }
 
     private int generateNumber() {
-        return new Random().nextInt(MAX_LOTTO_NUMBER_BOUND);
+        return RANDOM.nextInt(MAX_LOTTO_NUMBER_BOUND);
     }
 
 }
