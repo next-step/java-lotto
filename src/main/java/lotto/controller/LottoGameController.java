@@ -1,13 +1,13 @@
 package lotto.controller;
 
-import lotto.model.LottoGame;
-import lotto.model.LottoNumber;
-import lotto.model.LottoTicket;
-import lotto.model.Money;
-import lotto.model.RandomGenerationStrategy;
-import lotto.model.RankResults;
-import lotto.model.TicketMachine;
-import lotto.model.WinningTicket;
+import lotto.model.lotto.LottoGame;
+import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.LottoTicket;
+import lotto.model.lotto.Money;
+import lotto.model.lotto.strategy.RandomGenerationStrategy;
+import lotto.model.rank.RankResults;
+import lotto.model.lotto.TicketMachine;
+import lotto.model.lotto.WinningTicket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

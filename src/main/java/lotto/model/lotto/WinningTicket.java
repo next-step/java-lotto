@@ -1,6 +1,7 @@
-package lotto.model;
+package lotto.model.lotto;
 
 import lotto.exception.InvalidBonusNumberException;
+import lotto.model.rank.Rank;
 
 public class WinningTicket {
 

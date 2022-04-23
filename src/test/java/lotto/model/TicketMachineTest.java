@@ -1,5 +1,10 @@
 package lotto.model;
 
+import lotto.model.lotto.LottoTicket;
+import lotto.model.lotto.Money;
+import lotto.model.lotto.TicketMachine;
+import lotto.model.lotto.strategy.NumberGenerationStrategy;
+import lotto.model.lotto.strategy.RandomGenerationStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

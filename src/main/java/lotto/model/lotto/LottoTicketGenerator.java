@@ -1,4 +1,6 @@
-package lotto.model;
+package lotto.model.lotto;
+
+import lotto.model.lotto.strategy.NumberGenerationStrategy;
 
 import java.util.HashSet;
 import java.util.List;
@@ -9,10 +11,6 @@ import java.util.stream.IntStream;
 public class LottoTicketGenerator {
 
     private final NumberGenerationStrategy numberGenerationStrategy;
-
-    public LottoTicketGenerator() {
-        this(new RandomGenerationStrategy());
-    }
 
     public LottoTicketGenerator(NumberGenerationStrategy numberGenerationStrategy) {
         this.numberGenerationStrategy = numberGenerationStrategy;

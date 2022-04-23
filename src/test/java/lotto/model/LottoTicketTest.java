@@ -1,6 +1,8 @@
 package lotto.model;
 
 import lotto.exception.InvalidLottoTicketException;
+import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

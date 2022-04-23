@@ -1,6 +1,6 @@
 package lotto.exception;
 
-import lotto.model.LottoNumber;
+import lotto.model.lotto.LottoNumber;
 
 public class InvalidBonusNumberException extends RuntimeException {
 

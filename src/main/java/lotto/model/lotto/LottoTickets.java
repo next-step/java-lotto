@@ -1,4 +1,6 @@
-package lotto.model;
+package lotto.model.lotto;
+
+import lotto.model.rank.Rank;
 
 import java.util.Collections;
 import java.util.List;

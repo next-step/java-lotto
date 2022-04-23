@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.strategy.RandomGenerationStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

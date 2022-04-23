@@ -1,5 +1,10 @@
 package lotto.model;
 
+import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.LottoTicket;
+import lotto.model.lotto.LottoTickets;
+import lotto.model.lotto.WinningTicket;
+import lotto.model.rank.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

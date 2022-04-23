@@ -1,4 +1,6 @@
-package lotto.model;
+package lotto.model.lotto;
+
+import lotto.model.lotto.strategy.NumberGenerationStrategy;
 
 import java.util.List;
 

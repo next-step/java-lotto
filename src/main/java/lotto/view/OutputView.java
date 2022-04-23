@@ -1,9 +1,9 @@
 package lotto.view;
 
-import lotto.model.LottoTicket;
-import lotto.model.Money;
-import lotto.model.RankResult;
-import lotto.model.RankResults;
+import lotto.model.lotto.LottoTicket;
+import lotto.model.lotto.Money;
+import lotto.model.rank.RankResult;
+import lotto.model.rank.RankResults;
 
 import java.util.List;
 

@@ -1,4 +1,6 @@
-package lotto.model;
+package lotto.model.lotto.strategy;
+
+import lotto.model.lotto.LottoNumber;
 
 import java.util.HashSet;
 import java.util.Random;
