@@ -1,0 +1,44 @@
+package calculator.model;
+
+import calculator.model.Number;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+public class NumberTest {
+
+    @Test
+    @DisplayName("Number 생성 - int")
+    void createNumberByInt() {
+        assertThat(new Number(0)).isEqualTo(new Number(0));
+    }
+
+    @Test
+    @DisplayName("Number 생성 - String")
+    void createNumberByString() {
+        assertThat(new Number("0")).isEqualTo(new Number("0"));
+    }
+
+    @Test
+    @DisplayName("Number 생성 - Number")
+    void createNumberByNumber() {
+        Number number = new Number(0);
+        assertThat(new Number(number)).isEqualTo(number);
+    }
+
+    @Test
+    @DisplayName("음수가 인자로 들어온 경우 예외 처리")
+    void isNegativeException() {
+        assertThatThrownBy(() -> new Number(-1)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest(name = "숫자가 아닌 문자열이 인자로 들어온 경우 예외 처리")
+    @ValueSource(strings = {"", "`"})
+    void isNotNumberException(String value) {
+        assertThatThrownBy(() -> new Number(value)).isInstanceOf(IllegalArgumentException.class);
+    }
+}
