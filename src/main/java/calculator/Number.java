@@ -1,6 +1,7 @@
 package calculator;
 
 import calculator.enums.Sign;
+import java.util.Collections;
 import java.util.Objects;
 
 public class Number {
