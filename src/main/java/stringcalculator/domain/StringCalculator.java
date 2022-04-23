@@ -13,7 +13,8 @@ public class StringCalculator {
 
         for (int i = 1; i < split.length; i += 2) {
             int followingOperand = StringUtils.toInt(split, i + 1);
-            precedingOperand = Operator.operation(split[i], precedingOperand, followingOperand);
+            precedingOperand = Operator.findOperator(split[i])
+                    .operation(new Number(precedingOperand), new Number(followingOperand));
         }
         return precedingOperand;
     }
