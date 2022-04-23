@@ -20,14 +20,14 @@ public enum Operator {
         this.expression = expression;
     }
 
-    public static Operator findOperator(String operatorName) {
+    static Operator findOperator(String operatorName) {
         return Stream.of(values())
                 .filter(operator -> operator.operator.equals(operatorName))
                 .findFirst()
                 .orElseThrow(() -> new NotFoundOperatorException("연산자를 찾을 수 없습니다."));
     }
 
-    public int calc(String op1, String op2) {
+    int calc(String op1, String op2) {
         return expression.apply(Integer.parseInt(op1), Integer.parseInt(op2));
     }
 }

@@ -4,10 +4,15 @@ import Calculator.exception.OnlyNumberException;
 import Calculator.exception.OnlyOperatorException;
 import Calculator.exception.WrongPlaceNumberOrOperatorException;
 
+import java.util.regex.Pattern;
+
 public class ExpressionCaseChecker {
 
-    private static final String SPECIAL_DELIMITER = "[+\\-*/]";
+    private static final String OPERATOR_DELIMITER = "[+\\-*/]";
     private static final String NUMBER_DELIMITER = "\\d*(\\.\\d+)?";
+
+    private static final Pattern OPERATOR_PATTERN = Pattern.compile(OPERATOR_DELIMITER);
+    private static final Pattern NUMBER_PATTERN = Pattern.compile(NUMBER_DELIMITER);
 
     private ExpressionCaseChecker() {
     }
@@ -17,7 +22,7 @@ public class ExpressionCaseChecker {
 
         for (String exp : splitExp) {
             // 연산자가 하나라도 존재하는지 체크
-            if (exp.matches(NUMBER_DELIMITER) == false) {
+            if (NUMBER_PATTERN.matcher(exp).matches() == false) {
                 isOnlyNumberExp = false;
             }
         }
@@ -32,7 +37,7 @@ public class ExpressionCaseChecker {
 
         for (String exp : splitExp) {
             // 피연산자가 하나라도 존재하는지 체크
-            if (exp.matches(SPECIAL_DELIMITER) == false) {
+            if (OPERATOR_PATTERN.matcher(exp).matches() == false) {
                 isOnlyOperatorExp = false;
             }
         }
@@ -47,15 +52,15 @@ public class ExpressionCaseChecker {
 
         // 홀수자리는 무조건 숫자, 짝수자리는 무조건 연산자가 나와야함.
         for (int i = 0; i < splitExp.length; ++i) {
-            if (i % 2 == 0) {
-                if (splitExp[i].matches(SPECIAL_DELIMITER)) {
-                    throw new WrongPlaceNumberOrOperatorException("피연산자 자리에 연산자가 존재합니다.");
-                }
-            } else {
-                if (splitExp[i].matches(NUMBER_DELIMITER)) {
-                    throw new WrongPlaceNumberOrOperatorException("연산자 자리에 피연산자가 존재합니다.");
-                }
-            }
+            checkWrongPlace(splitExp, i);
+        }
+    }
+
+    private static void checkWrongPlace(String[] splitExp, int i) {
+        if ((i % 2 == 0) && (OPERATOR_PATTERN.matcher(splitExp[i]).matches())) {
+            throw new WrongPlaceNumberOrOperatorException("피연산자 자리에 연산자가 존재합니다.");
+        } else if ((i % 2 == 1) && (NUMBER_PATTERN.matcher(splitExp[i]).matches())) {
+            throw new WrongPlaceNumberOrOperatorException("연산자 자리에 피연산자가 존재합니다.");
         }
     }
 
