@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class OperationTest {
 
@@ -21,10 +22,17 @@ class OperationTest {
     );
   }
 
-  @ParameterizedTest
+  @ParameterizedTest(name = "String 타입의 연산자 기호로 Operation을 생성한다.")
   @MethodSource("operatorAndOperation")
   void valueOfOperator(String operator, Operation operation) {
     assertThat(Operation.valueOfOperator(operator)).isEqualTo(operation);
+  }
+
+  @ParameterizedTest(name = "사칙연산 기호가 아닌 경우, 예외가 발생한다.")
+  @ValueSource(strings = {"1", "ㅋ", "", ".", "11"})
+  void valueOfOperator(String invalidInput) {
+    assertThatThrownBy(() -> Operation.valueOfOperator(invalidInput))
+        .isInstanceOf(IllegalArgumentException.class);
   }
 
   @Test
