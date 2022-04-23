@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class ManualGenerationStrategy implements NumberGenerationStrategy {
 
     @Override
-    public Set<LottoNumber> generateNumbers() {
+    public Set<LottoNumber> generateLottoNumbers() {
         List<Integer> numbers = InputUtil.readNumbers();
         return numbers.stream()
                 .map(LottoNumber::new)

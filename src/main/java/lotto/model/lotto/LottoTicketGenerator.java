@@ -13,25 +13,25 @@ public class LottoTicketGenerator {
 
     public List<LottoTicket> generateLottoTickets(int ticketCount, NumberGenerationStrategy numberGenerationStrategy) {
         return IntStream.range(0, ticketCount)
-                .mapToObj(index -> generateLottoNumbers(numberGenerationStrategy))
+                .mapToObj(index -> generateLottoTicket(numberGenerationStrategy))
                 .collect(Collectors.toList());
     }
 
     public WinningTicket generateWinningTicket(List<Integer> numbers, LottoNumber bonusNumber) {
         Set<Integer> numberSet = new HashSet<>(numbers);
-        LottoTicket lottoTicket = generateLottoNumbers(numberSet);
+        LottoTicket lottoTicket = generateLottoTicket(numberSet);
         return new WinningTicket(lottoTicket, bonusNumber);
     }
 
-    private LottoTicket generateLottoNumbers(Set<Integer> numbers) {
+    private LottoTicket generateLottoTicket(Set<Integer> numbers) {
         Set<LottoNumber> lottoNumbers = numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
         return new LottoTicket(lottoNumbers);
     }
 
-    private LottoTicket generateLottoNumbers(NumberGenerationStrategy numberGenerationStrategy) {
-        return new LottoTicket(numberGenerationStrategy.generateNumbers());
+    private LottoTicket generateLottoTicket(NumberGenerationStrategy numberGenerationStrategy) {
+        return new LottoTicket(numberGenerationStrategy.generateLottoNumbers());
     }
 
 }

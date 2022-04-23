@@ -16,7 +16,7 @@ class RandomGenerationStrategyTest {
     @Test
     @DisplayName("램덤 로또 번호들을 생성한다")
     void createRandomNumber() {
-        Set<LottoNumber> numbers = randomGenerationStrategy.generateNumbers();
+        Set<LottoNumber> numbers = randomGenerationStrategy.generateLottoNumbers();
         assertThat(numbers).hasSize(6);
     }
 

@@ -19,6 +19,10 @@ public class Money {
         this.value = value;
     }
 
+    public Money subtract(Money money) {
+        return new Money(this.value - money.value);
+    }
+
     private void validate(long value) {
         if (value < ZERO) {
             throw new IllegalArgumentException("돈은 음수일 수 없습니다");

@@ -15,6 +15,10 @@ public class InputView {
 
     private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 
+    private static final String INPUT_MANUAL_LOTTO_TICKET_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+
+    private static final long PRICE_PER_TICKET = 1_000L;
+
     public Money readMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
         long value = InputUtil.readLongNumber();
@@ -29,7 +33,7 @@ public class InputView {
     }
 
     private boolean meetsMoneyUnit(long value) {
-        return value % 1_000 == 0;
+        return value % PRICE_PER_TICKET == 0;
     }
 
     public List<Integer> readWinningNumbers() {
@@ -42,4 +46,9 @@ public class InputView {
         return new LottoNumber(InputUtil.readIntNumber());
     }
 
+    public Money readManualTicketPrice() {
+        System.out.println(INPUT_MANUAL_LOTTO_TICKET_COUNT);
+        int ticketCount = InputUtil.readIntNumber();
+        return new Money(ticketCount * PRICE_PER_TICKET);
+    }
 }

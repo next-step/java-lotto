@@ -16,7 +16,7 @@ public class RandomGenerationStrategy implements NumberGenerationStrategy {
     private static final int LOTTO_MIN_NUMBER = 1;
 
     @Override
-    public Set<LottoNumber> generateNumbers() {
+    public Set<LottoNumber> generateLottoNumbers() {
         Set<Integer> numbers = generateRandomNumber();
         return numbers.stream()
                 .map(LottoNumber::new)

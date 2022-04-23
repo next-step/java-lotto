@@ -29,8 +29,7 @@ public class LottoTicket {
     }
 
     public boolean includeBonusNumber(LottoNumber bonusNumber) {
-        return lottoNumbers.stream()
-                .anyMatch(lottoNumber -> lottoNumber.isBonusNumber(bonusNumber));
+        return lottoNumbers.stream().anyMatch(lottoNumber -> lottoNumber.isBonusNumber(bonusNumber));
     }
 
     private Set<LottoNumber> getLottoNumbers() {
