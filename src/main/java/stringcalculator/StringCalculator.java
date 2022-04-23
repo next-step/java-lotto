@@ -19,8 +19,7 @@ public class StringCalculator {
         }
 
         Integer result = NUMBERS.pop();
-        NUMBERS.clear();
-        OPERATORS.clear();
+        cleanUp();
         return result;
     }
 
@@ -65,6 +64,7 @@ public class StringCalculator {
                 NUMBERS.push(previous * current);
                 break;
             case "/":
+                validateNumbers(previous, current);
                 validateRemainder(previous % current);
                 NUMBERS.push(previous / current);
             default:
@@ -72,9 +72,20 @@ public class StringCalculator {
         }
     }
 
+    private void validateNumbers(int previous, int current) {
+        if (previous == 0 || current == 0) {
+            throw new IllegalStateException(NUMBER_SHOULD_NOT_BE_ZERO_WHEN_DIVIDING.getMessage());
+        }
+    }
+
     private void validateRemainder(int remainder) {
         if (remainder != 0) {
             throw new IllegalStateException(DIVIDE_RESULT_SHOULD_BE_INTEGER.getMessage());
         }
+    }
+
+    private void cleanUp() {
+        NUMBERS.clear();
+        OPERATORS.clear();
     }
 }
