@@ -38,9 +38,9 @@ class LottoGameTest {
         List<RankResult> rankResultList = rankResults.getRankResults();
         assertAll(
                 () -> assertThat(rankResultList).contains(new RankResult(Rank.FIRST, 1)),
-                () -> assertThat(rankResultList).contains(new RankResult(Rank.SECOND, 2)),
-                () -> assertThat(rankResultList).contains(new RankResult(Rank.THIRD, 0)),
-                () -> assertThat(rankResultList).contains(new RankResult(Rank.FIFTH, 1))
+                () -> assertThat(rankResultList).contains(new RankResult(Rank.SECOND, 1)),
+                () -> assertThat(rankResultList).contains(new RankResult(Rank.THIRD, 1)),
+                () -> assertThat(rankResultList).contains(new RankResult(Rank.FOURTH, 1))
         );
     }
 
@@ -70,8 +70,8 @@ class LottoGameTest {
                         LottoNumber.create(2),
                         LottoNumber.create(3),
                         LottoNumber.create(4),
-                        LottoNumber.create(7),
-                        LottoNumber.create(8)
+                        LottoNumber.create(5),
+                        LottoNumber.create(7)
                 )
                 ),
                 new LottoTicket(Set.of(
@@ -80,13 +80,13 @@ class LottoGameTest {
                         LottoNumber.create(3),
                         LottoNumber.create(4),
                         LottoNumber.create(5),
-                        LottoNumber.create(7)
+                        LottoNumber.create(8)
                 )),
                 new LottoTicket(Set.of(
                         LottoNumber.create(1),
                         LottoNumber.create(2),
                         LottoNumber.create(3),
-                        LottoNumber.create(12),
+                        LottoNumber.create(4),
                         LottoNumber.create(15),
                         LottoNumber.create(20)
                 ))

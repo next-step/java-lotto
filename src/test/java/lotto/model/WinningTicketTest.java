@@ -54,7 +54,7 @@ class WinningTicketTest {
 
     @Test
     @DisplayName("일치하는 숫자에 따라 등수를 반환한다")
-    void getRank() {
+    void drawLotto() {
         //given
         LottoTicket lottoTicket = new LottoTicket(
                 Set.of(
@@ -71,7 +71,6 @@ class WinningTicketTest {
         Rank rank = winningTicket.drawLotto(lottoTicket);
 
         //then
-        assertThat(rank).isEqualTo(Rank.SECOND);
+        assertThat(rank).isEqualTo(Rank.FOURTH);
     }
-
 }

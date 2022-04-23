@@ -20,12 +20,12 @@ class LottoTicketsTest {
     void getRanks() {
         //given
         LottoTicket lottoTicket = new LottoTicket(Set.of(
-                LottoNumber.create(1),
                 LottoNumber.create(2),
-                LottoNumber.create(3),
                 LottoNumber.create(4),
-                LottoNumber.create(5),
-                LottoNumber.create(6)
+                LottoNumber.create(6),
+                LottoNumber.create(8),
+                LottoNumber.create(11),
+                LottoNumber.create(13)
         ));
 
         LottoTicket lottoTicket2 = new LottoTicket(Set.of(
@@ -33,8 +33,8 @@ class LottoTicketsTest {
                 LottoNumber.create(4),
                 LottoNumber.create(6),
                 LottoNumber.create(8),
-                LottoNumber.create(10),
-                LottoNumber.create(13)
+                LottoNumber.create(11),
+                LottoNumber.create(14)
         ));
 
         LottoTickets lottoTickets = new LottoTickets(List.of(lottoTicket, lottoTicket2));
@@ -54,7 +54,7 @@ class LottoTicketsTest {
         List<Rank> ranks = lottoTickets.getRanks(winningTicket);
 
         //then
-        assertThat(ranks).containsExactly(Rank.FIFTH, Rank.SECOND);
+        assertThat(ranks).containsExactly(Rank.SECOND, Rank.THIRD);
     }
 
 }

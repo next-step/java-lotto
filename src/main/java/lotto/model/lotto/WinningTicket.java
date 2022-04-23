@@ -20,16 +20,7 @@ public class WinningTicket {
     public Rank drawLotto(LottoTicket lottoTicket) {
         int count = this.lottoTicket.countMatches(lottoTicket);
         boolean matchBonus = lottoTicket.includeBonusNumber(bonusNumber);
-        count += addCountIfSecondPotential(count, matchBonus);
         return Rank.valueOf(count, matchBonus);
-    }
-
-    private int addCountIfSecondPotential(int count, boolean matchBonus) {
-        return isPotentialSecond(count, matchBonus) ? 1 : 0;
-    }
-
-    private boolean isPotentialSecond(int count, boolean matchBonus) {
-        return count == POTENTIAL_SECOND_NUMBER && matchBonus;
     }
 
     private void validateBonusNumber(LottoTicket lottoTicket, LottoNumber bonusNumber) {
