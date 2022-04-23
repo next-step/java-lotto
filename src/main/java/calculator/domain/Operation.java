@@ -46,7 +46,11 @@ public enum Operation {
   }
 
   public static Operation valueOfOperator(String operator) {
-    return BY_OPERATOR.get(operator);
+    Operation operation = BY_OPERATOR.get(operator);
+    if (operation == null) {
+      throw new IllegalArgumentException("올바른 연산자가 아닙니다. (+, -, *, /)");
+    }
+    return operation;
   }
 
   public static Set<String> getOperatorSet() {
