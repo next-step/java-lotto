@@ -18,10 +18,10 @@ public class OperationMap {
 
   private static final Map<String, BinaryOperator<Integer>> operationMap = new HashMap<>();
   static {
-    operationMap.put(ADDICTION, CalculationOperator::addict);
-    operationMap.put(SUBTRACTION, CalculationOperator::subtract);
-    operationMap.put(MULTIPLICATION, CalculationOperator::multiply);
-    operationMap.put(DIVISION, CalculationOperator::divide);;
+    operationMap.put(ADDICTION, Calculation::addict);
+    operationMap.put(SUBTRACTION, Calculation::subtract);
+    operationMap.put(MULTIPLICATION, Calculation::multiply);
+    operationMap.put(DIVISION, Calculation::divide);;
   }
 
   public static int operatorBy(String operator, int a, int b) {
@@ -36,5 +36,4 @@ public class OperationMap {
         ERROR_MESSAGE_FOR_INVALID_INPUT_OPERATOR
     );
   }
-
 }

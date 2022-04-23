@@ -2,11 +2,11 @@ package StringCalculator;
 
 import static util.Validator.validateArgument;
 
-public class CalculationOperator {
+public class Calculation {
 
   public static final String ERROR_MESSAGE_WHEN_TRY_TO_DIVIDE_BY_ZERO = "0으로 나눌 수 없습니다.";
 
-  private CalculationOperator() {}
+  private Calculation() {}
 
   public static int addict(int a, int b) {
     return a + b;
