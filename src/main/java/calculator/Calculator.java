@@ -17,7 +17,7 @@ public class Calculator {
 
     private static double getAnswer(Queue<String> q) {
         double answer = Double.parseDouble(q.poll());
-        while(q.size() > 0) {
+        while(!q.isEmpty()) {
             answer = OperatorGroup.findByOperator(q.poll())
                     .calculate(answer, Double.parseDouble(q.poll()));
         }

@@ -17,7 +17,7 @@ public class OperatorGroupTest {
             "*,MULTI",
             "/,DIVIDE"
     })
-    void 사칙연산자로_enum_조회(String operator, OperatorGroup operatorGroup) {
+    void 사칙연산자_문자열로_enum_조회(String operator, OperatorGroup operatorGroup) {
         assertThat(OperatorGroup.findByOperator(operator)).isEqualTo(operatorGroup);
     }
 
