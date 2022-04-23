@@ -1,5 +1,6 @@
 package StringCalculator.model;
 
+import StringCalculator.Exception.InvalidArithmethicException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -72,6 +73,14 @@ class StringCalculatorTest {
                 () -> assertThat(StringCalculator.calculate("2 + 4 + 4 / 2")).isEqualTo(5),
                 () -> assertThat(StringCalculator.calculate("2 - 3 * 4 / 2 * 3 + 1")).isEqualTo(-5)
         );
+    }
+
+    @Test
+    @DisplayName("0으로 나눌 수 없다.")
+    void divideWithZero() {
+        assertThatThrownBy(() -> {
+            StringCalculator.calculate("2 + 5 / 0 * 5");
+        }).isInstanceOf(InvalidArithmethicException.class);
     }
 
     @Test
