@@ -2,7 +2,7 @@ package calculator;
 
 import calculator.exception.EmptyValueException;
 import calculator.exception.InvalidValueException;
-import calculator.exception.WrongOperatorException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -13,7 +13,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class CalculatorTest {
 
     @Test
-    void 사칙연산기호_아닌경우_예외() {
+    @DisplayName("사칙연산자, 공백, 숫자 외의 문자가 들어올 경우 예외")
+    void 잘못된_문자열_예외() {
         assertThatThrownBy(() -> Calculator.calculate("1 + 4 * 4 / 2 #"))
                 .isInstanceOf(InvalidValueException.class);
     }
