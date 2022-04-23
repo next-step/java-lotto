@@ -3,7 +3,10 @@ package StringCalculator.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StringCalculatorTest {
@@ -69,5 +72,37 @@ class StringCalculatorTest {
                 () -> assertThat(StringCalculator.calculate("2 + 4 + 4 / 2")).isEqualTo(5),
                 () -> assertThat(StringCalculator.calculate("2 - 3 * 4 / 2 * 3 + 1")).isEqualTo(-5)
         );
+    }
+
+    @Test
+    @DisplayName("처음과 기호 다음에는 숫자가 나와야한다.")
+    void invalidArithmeticNumber() {
+        assertThatThrownBy(() -> {
+            StringCalculator.calculate("2 + 5 + +");
+        }).isInstanceOf(NumberFormatException.class);
+    }
+
+    @Test
+    @DisplayName("숫자 다음에는 기호가 나와야한다.")
+    void invalidArithmeticSign() {
+        assertThatThrownBy(() -> {
+            StringCalculator.calculate("2 + 5 + 5 5 5");
+        }).isInstanceOf(NoSuchElementException.class);
+    }
+
+    @Test
+    @DisplayName("3개 미만이면 계산할 수 없다")
+    void under3() {
+        assertThatThrownBy(() -> {
+            StringCalculator.calculate("2 + ");
+        }).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    @DisplayName("짝수개면 계산할 수 없다")
+    void even() {
+        assertThatThrownBy(() -> {
+            StringCalculator.calculate("2 + 5 +");
+        }).isInstanceOf(RuntimeException.class);
     }
 }

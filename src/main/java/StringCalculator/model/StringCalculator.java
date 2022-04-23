@@ -1,62 +1,52 @@
 package StringCalculator.model;
 
-import java.util.Objects;
+import StringCalculator.Exception.InvalidArithmethicException;
 
 public class StringCalculator {
     private static final String DELIMITER = " ";
 
-    public static int calculate(String problem) {
-        String[] splitedProblem = problem.split(DELIMITER);
-        int result = getIfNumber(splitedProblem[0]);
+    private StringCalculator() {
+    }
 
-        for (int i = 1; i < splitedProblem.length; i += 2) {
-            result = operation(result, splitedProblem[i], splitedProblem[i + 1]);
-        }
+    public static int calculate(String problem) {
+        String[] splitedProblem = split(problem);
+
+        return operation(splitedProblem, getNumber(splitedProblem[0]));
+    }
+
+    private static String[] split(String problem) {
+        String[] result = problem.split(DELIMITER);
+        checkInvalid(result);
 
         return result;
     }
 
-    private static int getIfNumber(String text) {
+    private static void checkInvalid(String[] problem) {
+        if (problem.length < 3) {
+            throw new InvalidArithmethicException("3개 미만은 계산할 수 없습니다.");
+        }
+
+        if ((problem.length % 2) == 0) {
+            throw new InvalidArithmethicException("짝수개는 계산할 수 없습니다.");
+        }
+    }
+
+    private static int operation(String[] problem, int result) {
+        for (int i = 1; i < problem.length; i += 2) {
+            result = arithmetic(result, problem[i], getNumber(problem[i + 1]));
+        }
+        return result;
+    }
+
+    private static int getNumber(String text) {
         try {
             return Integer.parseInt(text);
         } catch (NumberFormatException e) {
-            return 0;
+            throw new NumberFormatException("처음과 기호 다음엔 숫자를 입력하여야 합니다.");
         }
     }
 
-    private static int operation(int a, String b, String c) {
-        if (Objects.equals(b, "+")) {
-            return addtion(a, getIfNumber(c));
-        }
-
-        if (Objects.equals(b, "-")) {
-            return subtraction(a, getIfNumber(c));
-        }
-
-        if (Objects.equals(b, "/")) {
-            return division(a, getIfNumber(c));
-        }
-
-        if (Objects.equals(b, "*")) {
-            return multiplication(a, getIfNumber(c));
-        }
-
-        throw new RuntimeException();
-    }
-
-    private static int addtion(int a, int b) {
-        return a + b;
-    }
-
-    private static int subtraction(int a, int b) {
-        return a - b;
-    }
-
-    private static int division(int a, int b) {
-        return a / b;
-    }
-
-    private static int multiplication(int a, int b) {
-        return a * b;
+    private static int arithmetic(int a, String b, int c) {
+        return ArithmeticSign.findSign(b).calculate(a, c);
     }
 }
