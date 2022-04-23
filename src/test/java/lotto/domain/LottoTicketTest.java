@@ -94,4 +94,11 @@ class LottoTicketTest {
         assertThat(lottoResult.reward()).isEqualTo(REWARD_NONE_GRADE);
     }
 
+    @Test
+    void createTest() {
+        LottoTicket lottoTicket = LottoTicket.create();
+        LottoTicket lottoTicket1 = LottoTicket.create();
+
+        assertThat(lottoTicket).isNotEqualTo(lottoTicket1);
+    }
 }

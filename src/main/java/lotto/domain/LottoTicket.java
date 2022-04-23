@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class LottoTicket {
 
@@ -28,7 +29,7 @@ public class LottoTicket {
     public static LottoTicket create() {
         Collections.shuffle(allLottoNumbers);
 
-        return new LottoTicket(allLottoNumbers.subList(0, ONE_TICKET_LOTTO_NUMBER));
+        return new LottoTicket(new ArrayList<>(allLottoNumbers.subList(0, ONE_TICKET_LOTTO_NUMBER)));
     }
 
     public static LottoTicket create(Integer... numbers) {
@@ -39,15 +40,29 @@ public class LottoTicket {
         return lottoNumbers.size();
     }
 
-    public LottoResult checkLottery(List<Integer> winLottoNumbers) {
-        int fitCount = 0;
-        for (Integer winNumber : winLottoNumbers) {
-            if (lottoNumbers.contains(winNumber)) {
-                ++fitCount;
-            }
-        }
+    public LottoResult checkLottery(final List<Integer> winLottoNumbers) {
+        int count = (int) lottoNumbers.stream()
+            .filter(winLottoNumbers::contains)
+            .count();
 
-        return LottoResult.of(fitCount);
+        return LottoResult.of(count);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 
     @Override

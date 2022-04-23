@@ -28,4 +28,11 @@ public class LottoTickets {
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
     }
+
+    @Override
+    public String toString() {
+        return "LottoTickets{" +
+            "lottoTickets=" + lottoTickets +
+            '}';
+    }
 }

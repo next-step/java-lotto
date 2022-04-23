@@ -6,6 +6,7 @@ import lotto.domain.LottoTickets;
 
 public class LottoGameController {
     private static final int LOTTO_TICKET_PRICE = 1000;
+
     public LottoTickets createLottoTickets(int buyingBudget) {
         int buyingCount = buyingBudget / LOTTO_TICKET_PRICE;
 
