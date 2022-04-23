@@ -1,6 +1,7 @@
 package lotto.model;
 
-import lotto.util.RandomNumberUtil;
+import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.strategy.RandomGenerationStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,10 +11,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class RandomGenerationStrategyTest {
 
+    private final RandomGenerationStrategy randomGenerationStrategy = new RandomGenerationStrategy();
+
     @Test
-    @DisplayName("램덤 숫자들을 생성한다")
+    @DisplayName("램덤 로또 번호들을 생성한다")
     void createRandomNumber() {
-        Set<Integer> numbers = RandomNumberUtil.generateNumbers(46, 6);
+        Set<LottoNumber> numbers = randomGenerationStrategy.generateLottoNumbers();
         assertThat(numbers).hasSize(6);
     }
 

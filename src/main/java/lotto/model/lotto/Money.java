@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.lotto;
 
 import java.util.Objects;
 
@@ -17,6 +17,10 @@ public class Money {
     public Money(long value) {
         validate(value);
         this.value = value;
+    }
+
+    public Money subtract(Money money) {
+        return new Money(this.value - money.value);
     }
 
     private void validate(long value) {

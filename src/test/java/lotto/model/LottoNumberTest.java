@@ -1,6 +1,7 @@
 package lotto.model;
 
 import lotto.exception.InvalidLottoNumberException;
+import lotto.model.lotto.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,18 +18,18 @@ class LottoNumberTest {
     @DisplayName("로또 숫자일 경우 정상적으로 로또 번호를 생성한다")
     void createLottoNumber(int value) {
         //given, when
-        LottoNumber lottoNumber = new LottoNumber(value);
+        LottoNumber lottoNumber = LottoNumber.create(value);
 
         //then
-        assertThat(lottoNumber).isEqualTo(new LottoNumber(value));
+        assertThat(lottoNumber).isEqualTo(LottoNumber.create(value));
     }
 
     @Test
     @DisplayName("로또 숫자가 아니면 예외를 발생한다")
     void throwInvalidLottoNumberException() {
         assertAll(
-                () -> assertThatThrownBy(() -> new LottoNumber(0)).isInstanceOf(InvalidLottoNumberException.class),
-                () -> assertThatThrownBy(() -> new LottoNumber(46)).isInstanceOf(InvalidLottoNumberException.class)
+                () -> assertThatThrownBy(() -> LottoNumber.create(0)).isInstanceOf(InvalidLottoNumberException.class),
+                () -> assertThatThrownBy(() -> LottoNumber.create(46)).isInstanceOf(InvalidLottoNumberException.class)
         );
     }
 

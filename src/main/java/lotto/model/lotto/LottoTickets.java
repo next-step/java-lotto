@@ -1,4 +1,6 @@
-package lotto.model;
+package lotto.model.lotto;
+
+import lotto.model.rank.Rank;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,9 +14,9 @@ public class LottoTickets {
         this.lottoTickets = Collections.unmodifiableList(lottoTickets);
     }
 
-    public List<Rank> getRanks(WinningTicket winningTicket, LottoNumber bonusNumber) {
+    public List<Rank> getRanks(WinningTicket winningTicket) {
         return lottoTickets.stream()
-                .map(lottoTicket -> winningTicket.getRank(lottoTicket, bonusNumber))
+                .map(winningTicket::drawLotto)
                 .collect(Collectors.toList());
     }
 

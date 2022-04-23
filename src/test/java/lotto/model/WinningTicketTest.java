@@ -1,13 +1,21 @@
 package lotto.model;
 
 import lotto.exception.InvalidLottoTicketException;
+import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.LottoTicket;
+import lotto.model.lotto.WinningTicket;
+import lotto.model.rank.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinningTicketTest {
 
@@ -15,16 +23,18 @@ class WinningTicketTest {
 
     @BeforeEach
     void setUp() {
-        winningTicket = new WinningTicket(
-                Set.of(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(5),
-                        new LottoNumber(6)
-                )
-        );
+        winningTicket = initWinningNumber(List.of(1, 2, 3, 4, 5, 6), 7);
+    }
+
+    private WinningTicket initWinningNumber(List<Integer> numbers, int bonusNumber) {
+        List<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::create)
+                .collect(Collectors.toList());
+
+        LottoTicket winningTicket = new LottoTicket(new HashSet<>(lottoNumbers));
+        LottoNumber bonusLottoNumber = LottoNumber.create(bonusNumber);
+
+        return new WinningTicket(winningTicket, bonusLottoNumber);
     }
 
     @Test
@@ -36,30 +46,31 @@ class WinningTicketTest {
     @Test
     @DisplayName("로또 넘버가 6개가 아니면 당첨 티켓을 생성할 수 없다")
     void failValidationOfWinningTicket() {
-        assertThatThrownBy(() -> new WinningTicket(Set.of(new LottoNumber(2))))
-                .isInstanceOf(InvalidLottoTicketException.class);
+        assertThatThrownBy(() -> new WinningTicket(
+                new LottoTicket(Set.of(LottoNumber.create(2), LottoNumber.create(3))),
+                LottoNumber.create(4))
+        ).isInstanceOf(InvalidLottoTicketException.class);
     }
 
     @Test
     @DisplayName("일치하는 숫자에 따라 등수를 반환한다")
-    void getRank() {
+    void drawLotto() {
         //given
         LottoTicket lottoTicket = new LottoTicket(
                 Set.of(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(7),
-                        new LottoNumber(8)
+                        LottoNumber.create(1),
+                        LottoNumber.create(2),
+                        LottoNumber.create(3),
+                        LottoNumber.create(4),
+                        LottoNumber.create(7),
+                        LottoNumber.create(8)
                 )
         );
 
         //when
-        Rank rank = winningTicket.getRank(lottoTicket, new LottoNumber(4));
+        Rank rank = winningTicket.drawLotto(lottoTicket);
 
         //then
         assertThat(rank).isEqualTo(Rank.FOURTH);
     }
-
 }

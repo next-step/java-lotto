@@ -1,17 +1,13 @@
 package lotto.view;
 
 import lotto.exception.InvalidMoneyUnitException;
-import lotto.model.LottoNumber;
-import lotto.model.Money;
+import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.Money;
+import lotto.util.InputUtil;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 public class InputView {
-
-    private static final String DEFAULT_DELIMITER = ",";
 
     private static final String INPUT_MONEY_MESSAGE = "구매금액을 입력해주세요.";
 
@@ -19,11 +15,13 @@ public class InputView {
 
     private static final String INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 
-    private final Scanner scanner = new Scanner(System.in);
+    private static final String INPUT_MANUAL_LOTTO_TICKET_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+
+    private static final long PRICE_PER_TICKET = 1_000L;
 
     public Money readMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
-        long value = readNumber();
+        long value = InputUtil.readLongNumber();
         validateMoneyUnit(value);
         return new Money(value);
     }
@@ -35,32 +33,22 @@ public class InputView {
     }
 
     private boolean meetsMoneyUnit(long value) {
-        return value % 1_000 == 0;
+        return value % PRICE_PER_TICKET == 0;
     }
 
-    private long readNumber() {
-        return Long.parseLong(readLine());
-    }
-
-    public List<Integer> readWinningNumbers() {
+    public Set<LottoNumber> readLottoNumbers() {
         System.out.println(INPUT_WINNING_NUMBERS_MESSAGE);
-        String readNumbers = readLine().replace(" ", "");
-        return convertNumbers(readNumbers);
-    }
-
-    private String readLine() {
-        return scanner.nextLine();
-    }
-
-    private List<Integer> convertNumbers(String readNumbers) {
-        return Arrays.stream(readNumbers.split(DEFAULT_DELIMITER))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        return InputUtil.readNumbers();
     }
 
     public LottoNumber readBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER);
-        return new LottoNumber((int) readNumber());
+        return LottoNumber.create(InputUtil.readIntNumber());
     }
 
+    public Money readManualTicketPrice() {
+        System.out.println(INPUT_MANUAL_LOTTO_TICKET_COUNT);
+        int ticketCount = InputUtil.readIntNumber();
+        return new Money(ticketCount * PRICE_PER_TICKET);
+    }
 }

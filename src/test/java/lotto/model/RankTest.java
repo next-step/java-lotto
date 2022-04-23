@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.model.rank.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -14,7 +15,7 @@ class RankTest {
     @ParameterizedTest
     @MethodSource("rankProvider")
     @DisplayName("일치하는 갯수만큼 등수를 반환한다")
-    void valueOfTest(int count, boolean matchBonus,Rank expectedRank) {
+    void valueOfTest(int count, boolean matchBonus, Rank expectedRank) {
         assertThat(Rank.valueOf(count, matchBonus)).isEqualTo(expectedRank);
     }
 

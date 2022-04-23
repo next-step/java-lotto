@@ -1,5 +1,10 @@
 package lotto.model;
 
+import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.LottoTicket;
+import lotto.model.lotto.LottoTickets;
+import lotto.model.lotto.WinningTicket;
+import lotto.model.rank.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,40 +20,41 @@ class LottoTicketsTest {
     void getRanks() {
         //given
         LottoTicket lottoTicket = new LottoTicket(Set.of(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
+                LottoNumber.create(2),
+                LottoNumber.create(4),
+                LottoNumber.create(6),
+                LottoNumber.create(8),
+                LottoNumber.create(11),
+                LottoNumber.create(13)
         ));
 
         LottoTicket lottoTicket2 = new LottoTicket(Set.of(
-                new LottoNumber(2),
-                new LottoNumber(4),
-                new LottoNumber(6),
-                new LottoNumber(8),
-                new LottoNumber(10),
-                new LottoNumber(12)
+                LottoNumber.create(2),
+                LottoNumber.create(4),
+                LottoNumber.create(6),
+                LottoNumber.create(8),
+                LottoNumber.create(11),
+                LottoNumber.create(14)
         ));
 
         LottoTickets lottoTickets = new LottoTickets(List.of(lottoTicket, lottoTicket2));
+
         WinningTicket winningTicket = new WinningTicket(
                 new LottoTicket(Set.of(
-                        new LottoNumber(2),
-                        new LottoNumber(4),
-                        new LottoNumber(6),
-                        new LottoNumber(8),
-                        new LottoNumber(11),
-                        new LottoNumber(12))
-                )
+                        LottoNumber.create(2),
+                        LottoNumber.create(4),
+                        LottoNumber.create(6),
+                        LottoNumber.create(8),
+                        LottoNumber.create(11),
+                        LottoNumber.create(12))
+                ), LottoNumber.create(13)
         );
 
         //when
-        List<Rank> ranks = lottoTickets.getRanks(winningTicket, new LottoNumber(12));
+        List<Rank> ranks = lottoTickets.getRanks(winningTicket);
 
         //then
-        assertThat(ranks).containsExactly(Rank.FIFTH, Rank.SECOND);
+        assertThat(ranks).containsExactly(Rank.SECOND, Rank.THIRD);
     }
 
 }

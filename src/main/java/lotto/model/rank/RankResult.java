@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.rank;
 
 import java.util.Objects;
 
