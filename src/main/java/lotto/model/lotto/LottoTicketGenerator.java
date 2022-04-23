@@ -25,7 +25,7 @@ public class LottoTicketGenerator {
 
     private LottoTicket generateLottoTicket(Set<Integer> numbers) {
         Set<LottoNumber> lottoNumbers = numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::create)
                 .collect(Collectors.toSet());
         return new LottoTicket(lottoNumbers);
     }

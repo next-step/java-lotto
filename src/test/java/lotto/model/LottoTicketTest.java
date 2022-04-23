@@ -28,35 +28,35 @@ class LottoTicketTest {
         return Stream.of(
                 Arguments.of(
                         Set.of(
-                                new LottoNumber(1),
-                                new LottoNumber(2),
-                                new LottoNumber(3),
-                                new LottoNumber(4),
-                                new LottoNumber(5),
-                                new LottoNumber(6))),
+                                LottoNumber.create(1),
+                                LottoNumber.create(2),
+                                LottoNumber.create(3),
+                                LottoNumber.create(4),
+                                LottoNumber.create(5),
+                                LottoNumber.create(6))),
                 Arguments.of(
                         Set.of(
-                                new LottoNumber(40),
-                                new LottoNumber(41),
-                                new LottoNumber(42),
-                                new LottoNumber(43),
-                                new LottoNumber(44),
-                                new LottoNumber(45))),
+                                LottoNumber.create(40),
+                                LottoNumber.create(41),
+                                LottoNumber.create(42),
+                                LottoNumber.create(43),
+                                LottoNumber.create(44),
+                                LottoNumber.create(45))),
                 Arguments.of(
                         Set.of(
-                                new LottoNumber(20),
-                                new LottoNumber(21),
-                                new LottoNumber(22),
-                                new LottoNumber(23),
-                                new LottoNumber(24),
-                                new LottoNumber(25)))
+                                LottoNumber.create(20),
+                                LottoNumber.create(21),
+                                LottoNumber.create(22),
+                                LottoNumber.create(23),
+                                LottoNumber.create(24),
+                                LottoNumber.create(25)))
         );
     }
 
     @Test
     @DisplayName("로또 티켓 생성 검증에 실패한다")
     void failLottoTicket() {
-        assertThatThrownBy(() -> new LottoTicket(Set.of(new LottoNumber(2))))
+        assertThatThrownBy(() -> new LottoTicket(Set.of(LottoNumber.create(2))))
                 .isInstanceOf(InvalidLottoTicketException.class);
     }
 

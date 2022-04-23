@@ -2,9 +2,12 @@ package lotto.model.lotto;
 
 import lotto.exception.InvalidLottoNumberException;
 
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LottoNumber {
+
+    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
     private static final int MIN_LOTTO_NUMBER = 1;
 
@@ -12,9 +15,14 @@ public class LottoNumber {
 
     private final int value;
 
-    public LottoNumber(int value) {
+    private LottoNumber(int value) {
         validate(value);
         this.value = value;
+    }
+
+    public static LottoNumber create (int value) {
+        lottoNumbers.putIfAbsent(value, new LottoNumber(value));
+        return lottoNumbers.get(value);
     }
 
     private void validate(int value) {
@@ -25,19 +33,6 @@ public class LottoNumber {
 
     public boolean isBonusNumber(LottoNumber lottoNumber) {
         return this.equals(lottoNumber);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof LottoNumber)) return false;
-        LottoNumber lottoNumber = (LottoNumber) o;
-        return value == lottoNumber.value;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
     }
 
     @Override

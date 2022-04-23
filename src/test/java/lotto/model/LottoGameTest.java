@@ -46,11 +46,11 @@ class LottoGameTest {
 
     private WinningTicket initWinningTicket(List<Integer> numbers, int bonusNumber) {
         List<LottoNumber> lottoNumbers = numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::create)
                 .collect(Collectors.toList());
 
         LottoTicket lottoTicket = new LottoTicket(new HashSet<>(lottoNumbers));
-        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
+        LottoNumber bonusLottoNumber = LottoNumber.create(bonusNumber);
 
         return new WinningTicket(lottoTicket, bonusLottoNumber);
     }
@@ -58,37 +58,37 @@ class LottoGameTest {
     private List<LottoTicket> initLottoTickets() {
         return List.of(
                 new LottoTicket(Set.of(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(5),
-                        new LottoNumber(6)
+                        LottoNumber.create(1),
+                        LottoNumber.create(2),
+                        LottoNumber.create(3),
+                        LottoNumber.create(4),
+                        LottoNumber.create(5),
+                        LottoNumber.create(6)
                 )
                 ), new LottoTicket(Set.of(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(7),
-                        new LottoNumber(8)
+                        LottoNumber.create(1),
+                        LottoNumber.create(2),
+                        LottoNumber.create(3),
+                        LottoNumber.create(4),
+                        LottoNumber.create(7),
+                        LottoNumber.create(8)
                 )
                 ),
                 new LottoTicket(Set.of(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(5),
-                        new LottoNumber(7)
+                        LottoNumber.create(1),
+                        LottoNumber.create(2),
+                        LottoNumber.create(3),
+                        LottoNumber.create(4),
+                        LottoNumber.create(5),
+                        LottoNumber.create(7)
                 )),
                 new LottoTicket(Set.of(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(12),
-                        new LottoNumber(15),
-                        new LottoNumber(20)
+                        LottoNumber.create(1),
+                        LottoNumber.create(2),
+                        LottoNumber.create(3),
+                        LottoNumber.create(12),
+                        LottoNumber.create(15),
+                        LottoNumber.create(20)
                 ))
         );
     }

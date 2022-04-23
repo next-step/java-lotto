@@ -20,34 +20,34 @@ class LottoTicketsTest {
     void getRanks() {
         //given
         LottoTicket lottoTicket = new LottoTicket(Set.of(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
+                LottoNumber.create(1),
+                LottoNumber.create(2),
+                LottoNumber.create(3),
+                LottoNumber.create(4),
+                LottoNumber.create(5),
+                LottoNumber.create(6)
         ));
 
         LottoTicket lottoTicket2 = new LottoTicket(Set.of(
-                new LottoNumber(2),
-                new LottoNumber(4),
-                new LottoNumber(6),
-                new LottoNumber(8),
-                new LottoNumber(10),
-                new LottoNumber(13)
+                LottoNumber.create(2),
+                LottoNumber.create(4),
+                LottoNumber.create(6),
+                LottoNumber.create(8),
+                LottoNumber.create(10),
+                LottoNumber.create(13)
         ));
 
         LottoTickets lottoTickets = new LottoTickets(List.of(lottoTicket, lottoTicket2));
 
         WinningTicket winningTicket = new WinningTicket(
                 new LottoTicket(Set.of(
-                        new LottoNumber(2),
-                        new LottoNumber(4),
-                        new LottoNumber(6),
-                        new LottoNumber(8),
-                        new LottoNumber(11),
-                        new LottoNumber(12))
-                ), new LottoNumber(13)
+                        LottoNumber.create(2),
+                        LottoNumber.create(4),
+                        LottoNumber.create(6),
+                        LottoNumber.create(8),
+                        LottoNumber.create(11),
+                        LottoNumber.create(12))
+                ), LottoNumber.create(13)
         );
 
         //when

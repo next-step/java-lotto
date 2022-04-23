@@ -21,7 +21,7 @@ public class RandomGenerationStrategy implements NumberGenerationStrategy {
     public Set<LottoNumber> generateLottoNumbers() {
         Set<Integer> numbers = generateRandomNumber();
         return numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::create)
                 .collect(Collectors.toSet());
     }
 

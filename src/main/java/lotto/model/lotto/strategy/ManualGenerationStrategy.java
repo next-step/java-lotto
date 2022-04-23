@@ -13,7 +13,7 @@ public class ManualGenerationStrategy implements NumberGenerationStrategy {
     public Set<LottoNumber> generateLottoNumbers() {
         List<Integer> numbers = InputUtil.readNumbers();
         return numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::create)
                 .collect(Collectors.toSet());
     }
 

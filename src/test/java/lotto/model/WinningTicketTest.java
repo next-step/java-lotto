@@ -28,11 +28,11 @@ class WinningTicketTest {
 
     private WinningTicket initWinningNumber(List<Integer> numbers, int bonusNumber) {
         List<LottoNumber> lottoNumbers = numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::create)
                 .collect(Collectors.toList());
 
         LottoTicket winningTicket = new LottoTicket(new HashSet<>(lottoNumbers));
-        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
+        LottoNumber bonusLottoNumber = LottoNumber.create(bonusNumber);
 
         return new WinningTicket(winningTicket, bonusLottoNumber);
     }
@@ -47,8 +47,8 @@ class WinningTicketTest {
     @DisplayName("로또 넘버가 6개가 아니면 당첨 티켓을 생성할 수 없다")
     void failValidationOfWinningTicket() {
         assertThatThrownBy(() -> new WinningTicket(
-                new LottoTicket(Set.of(new LottoNumber(2), new LottoNumber(3))),
-                new LottoNumber(4))
+                new LottoTicket(Set.of(LottoNumber.create(2), LottoNumber.create(3))),
+                LottoNumber.create(4))
         ).isInstanceOf(InvalidLottoTicketException.class);
     }
 
@@ -58,12 +58,12 @@ class WinningTicketTest {
         //given
         LottoTicket lottoTicket = new LottoTicket(
                 Set.of(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(7),
-                        new LottoNumber(8)
+                        LottoNumber.create(1),
+                        LottoNumber.create(2),
+                        LottoNumber.create(3),
+                        LottoNumber.create(4),
+                        LottoNumber.create(7),
+                        LottoNumber.create(8)
                 )
         );
 

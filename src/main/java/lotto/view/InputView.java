@@ -43,7 +43,7 @@ public class InputView {
 
     public LottoNumber readBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER);
-        return new LottoNumber(InputUtil.readIntNumber());
+        return LottoNumber.create(InputUtil.readIntNumber());
     }
 
     public Money readManualTicketPrice() {
