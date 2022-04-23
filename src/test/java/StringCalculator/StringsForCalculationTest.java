@@ -57,8 +57,10 @@ public class StringsForCalculationTest {
         Arguments.of(List.of("2", "+", "안", "*", "4", "/", "2")),
         Arguments.of(List.of("1", "+", "+")),
         Arguments.of(List.of("-", "-", "1")),
-        Arguments.of(List.of("1", "2", "1", "1", "2"))
-    );
+        Arguments.of(List.of("1", "2", "1", "1", "2")),
+        Arguments.of(List.of("", "-", "1", "/", "2")),
+        Arguments.of(List.of(" ", "+", "1"))
+        );
   }
 
   @ParameterizedTest

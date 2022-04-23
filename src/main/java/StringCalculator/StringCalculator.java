@@ -1,5 +1,9 @@
 package StringCalculator;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import util.Validator;
 
 public class StringCalculator {
@@ -7,20 +11,29 @@ public class StringCalculator {
   private static final String ERROR_MESSAGE_FOR_INVALID_INPUT = "올바른 텍스트를 입력해주세요.";
   private static final String INPUT_DELIMITER = " ";
 
+  private final StringsForCalculation values;
 
-  private final String input;
-
-  private StringCalculator(String input) {
-    validate(input);
-    this.input = input;
+  private StringCalculator(List<String> stringList) {
+    this(new StringsForCalculation(stringList));
   }
 
-//  public static StringCalculator init(String input) {
-//    StringCalculator stringCalculator = new StringCalculator(input);
-//    String[] values = input.split(INPUT_DELIMITER);
-//  }
+  private StringCalculator(StringsForCalculation values) {
+    this.values = values;
+  }
 
-  protected void validate(String input) {
+  public static StringCalculator init(String input) {
+    validate(input);
+    String[] values = input.split(INPUT_DELIMITER);
+    return new StringCalculator(Stream.of(values)
+        .collect(Collectors.toUnmodifiableList()));
+  }
+
+  public int run() {
+    Objects.requireNonNull(values);
+    return values.calculate();
+  }
+
+  private static void validate(String input) {
     Validator.validateArgument(
         input,
         (arg) -> !input.isEmpty() && !input.isBlank(),
