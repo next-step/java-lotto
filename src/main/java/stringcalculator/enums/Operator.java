@@ -1,20 +1,27 @@
 package stringcalculator.enums;
 
+import stringcalculator.domain.Number;
 import stringcalculator.exception.DividedByZeroException;
 import stringcalculator.exception.InvalidOperatorException;
 
+import java.util.function.BinaryOperator;
+
 public enum Operator {
-    PLUS("+"),
-    MINUS("-"),
-    MULTIPLY("*"),
-    DIVIDE("/");
+    PLUS("+", Number::add),
+    MINUS("-", Number::minus),
+    MULTIPLY("*", Number::multiply),
+    DIVIDE("/", Number::divide);
 
-    private static final String DIVIDE_BY_ZERO_ERROR_MESSAGE = "0으로 나눌 수 없습니다.";
-    private static final String INVALID_OPERATOR_ERROR_MESSAGE = "연산자는 \"+, -, *, %\" 만 가능합니다.";
     private final String symbol;
+    private final BinaryOperator<Number> operation;
 
-    Operator(String symbol) {
+    Operator(String symbol, BinaryOperator<Number> operation) {
         this.symbol = symbol;
+        this.operation = operation;
+    }
+
+    public int operation(Number a, Number b) {
+        return operation.apply(a, b).getValue();
     }
 
     public static int operation(String symbol, int precedingOperand, int followingOperand) {
