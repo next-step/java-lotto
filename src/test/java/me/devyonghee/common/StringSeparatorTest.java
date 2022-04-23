@@ -1,4 +1,4 @@
-package me.devyonghee.calculator;
+package me.devyonghee.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

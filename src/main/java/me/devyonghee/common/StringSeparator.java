@@ -1,10 +1,10 @@
-package me.devyonghee.calculator;
+package me.devyonghee.common;
 
 
 import java.util.Arrays;
 import java.util.List;
 
-final class StringSeparator implements StringsProvider {
+public final class StringSeparator implements StringsProvider {
 
     private static final String DEFAULT_DELIMITER = " ";
 
@@ -15,7 +15,7 @@ final class StringSeparator implements StringsProvider {
         this.string = string;
     }
 
-    static StringSeparator from(String string) {
+    public static StringSeparator from(String string) {
         return new StringSeparator(string);
     }
 
