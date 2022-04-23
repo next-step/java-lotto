@@ -22,7 +22,7 @@ public class LottoGameController {
     private final OutputView outputView;
 
     public LottoGameController() {
-        this(new InputView(), new TicketMachine(new RandomGenerationStrategy()), new OutputView());
+        this(new InputView(), new TicketMachine(), new OutputView());
     }
 
     public LottoGameController(InputView inputView, TicketMachine ticketMachine, OutputView outputView) {
@@ -55,7 +55,7 @@ public class LottoGameController {
     }
 
     private List<LottoTicket> generateLottoTickets(Money money) {
-        List<LottoTicket> lottoTickets = ticketMachine.buyLottoTickets(money);
+        List<LottoTicket> lottoTickets = ticketMachine.buyLottoTickets(money, new RandomGenerationStrategy());
         outputView.printTicketCount(lottoTickets.size());
         outputView.printLottoTickets(lottoTickets);
         return lottoTickets;

@@ -1,5 +1,6 @@
 package lotto.model.lotto;
 
+
 import lotto.model.lotto.strategy.NumberGenerationStrategy;
 
 import java.util.HashSet;
@@ -10,15 +11,9 @@ import java.util.stream.IntStream;
 
 public class LottoTicketGenerator {
 
-    private final NumberGenerationStrategy numberGenerationStrategy;
-
-    public LottoTicketGenerator(NumberGenerationStrategy numberGenerationStrategy) {
-        this.numberGenerationStrategy = numberGenerationStrategy;
-    }
-
-    public List<LottoTicket> generateLottoTickets(int ticketCount) {
+    public List<LottoTicket> generateLottoTickets(int ticketCount, NumberGenerationStrategy numberGenerationStrategy) {
         return IntStream.range(0, ticketCount)
-                .mapToObj(index -> generateLottoNumbers())
+                .mapToObj(index -> generateLottoNumbers(numberGenerationStrategy))
                 .collect(Collectors.toList());
     }
 
@@ -35,7 +30,7 @@ public class LottoTicketGenerator {
         return new LottoTicket(lottoNumbers);
     }
 
-    private LottoTicket generateLottoNumbers() {
+    private LottoTicket generateLottoNumbers(NumberGenerationStrategy numberGenerationStrategy) {
         return new LottoTicket(numberGenerationStrategy.generateNumbers());
     }
 

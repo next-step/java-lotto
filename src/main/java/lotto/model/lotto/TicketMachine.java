@@ -12,8 +12,8 @@ public class TicketMachine {
 
     private final Money ticketPrice;
 
-    public TicketMachine(NumberGenerationStrategy numberGenerationStrategy) {
-        this(new LottoTicketGenerator(numberGenerationStrategy), COST_PER_TICKET);
+    public TicketMachine() {
+        this(new LottoTicketGenerator(), COST_PER_TICKET);
     }
 
     public TicketMachine(LottoTicketGenerator lottoTicketGenerator, long price) {
@@ -21,13 +21,13 @@ public class TicketMachine {
         this.ticketPrice = new Money(price);
     }
 
-    public List<LottoTicket> buyLottoTickets(Money money) {
+    public List<LottoTicket> buyLottoTickets(Money money, NumberGenerationStrategy numberGenerationStrategy) {
         int dividedNumber = (int) money.divide(ticketPrice);
-        return buyLottoTickets(dividedNumber);
+        return buyLottoTickets(dividedNumber, numberGenerationStrategy);
     }
 
-    private List<LottoTicket> buyLottoTickets(int count) {
-        return lottoTicketGenerator.generateLottoTickets(count);
+    private List<LottoTicket> buyLottoTickets(int count, NumberGenerationStrategy numberGenerationStrategy) {
+        return lottoTicketGenerator.generateLottoTickets(count, numberGenerationStrategy);
     }
 
     public WinningTicket generateWinningTicket(List<Integer> winningNumbers, LottoNumber bonusNumber) {
