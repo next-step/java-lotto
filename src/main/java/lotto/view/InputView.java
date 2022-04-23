@@ -3,15 +3,11 @@ package lotto.view;
 import lotto.exception.InvalidMoneyUnitException;
 import lotto.model.lotto.LottoNumber;
 import lotto.model.lotto.Money;
-import lotto.util.ScannerUtil;
+import lotto.util.InputUtil;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class InputView {
-
-    private static final String DEFAULT_DELIMITER = ",";
 
     private static final String INPUT_MONEY_MESSAGE = "구매금액을 입력해주세요.";
 
@@ -21,7 +17,7 @@ public class InputView {
 
     public Money readMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
-        long value = readNumber();
+        long value = InputUtil.readLongNumber();
         validateMoneyUnit(value);
         return new Money(value);
     }
@@ -36,25 +32,14 @@ public class InputView {
         return value % 1_000 == 0;
     }
 
-    private long readNumber() {
-        return Long.parseLong(ScannerUtil.readLine());
-    }
-
     public List<Integer> readWinningNumbers() {
         System.out.println(INPUT_WINNING_NUMBERS_MESSAGE);
-        String readNumbers = ScannerUtil.readLine().replace(" ", "");
-        return convertNumbers(readNumbers);
-    }
-
-    private List<Integer> convertNumbers(String readNumbers) {
-        return Arrays.stream(readNumbers.split(DEFAULT_DELIMITER))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        return InputUtil.readNumbers();
     }
 
     public LottoNumber readBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER);
-        return new LottoNumber((int) readNumber());
+        return new LottoNumber(InputUtil.readIntNumber());
     }
 
 }
