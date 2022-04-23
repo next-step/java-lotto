@@ -3,6 +3,7 @@ package lotto.ui;
 import lotto.domain.Lotto;
 import lotto.domain.LottoStatistics;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class ResultView {
@@ -13,6 +14,8 @@ public class ResultView {
     private static final String RESULT_STATS_MESSAGE = "%s개 일치 (%s원)- %s개";
     private static final String YIELD_OF_LOTTO_MESSAGE = "총 수익률은 %s입니다.(기준은 1임)";
     private static final int MIN_LOTTO_WINNER_BOUNDARY = 3;
+    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat();
+    private static final int DECIMAL_PLACES = 2;
 
     private ResultView() {
     }
@@ -40,7 +43,7 @@ public class ResultView {
         stringBuilder.append(System.getProperty(LINE_SEPARATOR));
 
         for (int i = 0, len = validStats.length; i < len; i++) {
-            stringBuilder.append(String.format(RESULT_STATS_MESSAGE, i + 3, LottoStatistics.LottoWinnerType.prize(i + 3), validStats[i]));
+            stringBuilder.append(String.format(RESULT_STATS_MESSAGE, i + MIN_LOTTO_WINNER_BOUNDARY, LottoStatistics.LottoWinnerType.prize(i + 3), validStats[i]));
             stringBuilder.append(System.getProperty(LINE_SEPARATOR));
         }
 
@@ -55,7 +58,8 @@ public class ResultView {
         return validStats;
     }
 
-    public static void printYield(int yield) {
-        System.out.println(String.format(YIELD_OF_LOTTO_MESSAGE, yield));
+    public static void printYield(float yield) {
+        DECIMAL_FORMAT.setMaximumFractionDigits(DECIMAL_PLACES);
+        System.out.println(String.format(YIELD_OF_LOTTO_MESSAGE, DECIMAL_FORMAT.format(yield)));
     }
 }

@@ -22,7 +22,7 @@ public class Controller {
         Lotto previousLotto = new Lotto(previousLottoNumber);
 
         int[] stats = LottoStatistics.calculateStats(lottos, previousLotto);
-        int yield = LottoStatistics.calculateYield(lottos, previousLotto, price);
+        float yield = LottoStatistics.calculateYield(lottos, previousLotto, price);
         ResultView.printWinningStatistics(stats);
         ResultView.printYield(yield);
     }

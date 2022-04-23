@@ -22,13 +22,13 @@ public class LottoStatistics {
         return lotto.countDuplicateValue(previousLotto);
     }
 
-    public static int calculateYield(List<Lotto> lottos, Lotto previousLotto, int price) {
+    public static float calculateYield(List<Lotto> lottos, Lotto previousLotto, int price) {
         int profit = 0;
         int[] stats = calculateStats(lottos, previousLotto);
         for (int i = 0, len = stats.length; i < len; i++) {
             profit = calculateProfit(profit, i, stats[i]);
         }
-        return profit / price;
+        return (float) profit / price;
     }
 
     private static int calculateProfit(int profit, int countOfDuplicate, int countOfLotto) {
