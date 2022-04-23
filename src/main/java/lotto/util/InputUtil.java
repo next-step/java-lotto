@@ -1,8 +1,10 @@
 package lotto.util;
 
+import lotto.model.lotto.LottoNumber;
+
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class InputUtil {
@@ -26,19 +28,19 @@ public class InputUtil {
         return Integer.parseInt(readLine());
     }
 
-    public static List<Integer> readNumbers() {
+    public static Set<LottoNumber> readNumbers() {
         return readNumbers(DEFAULT_DELIMITER);
     }
 
-    public static List<Integer> readNumbers(String delimiter) {
+    private static Set<LottoNumber> readNumbers(String delimiter) {
         String readNumbers = readLine().replace(" ", "");
         return convertNumbers(readNumbers, delimiter);
     }
 
-    private static List<Integer> convertNumbers(String readNumbers, String delimiter) {
+    private static Set<LottoNumber> convertNumbers(String readNumbers, String delimiter) {
         return Arrays.stream(readNumbers.split(delimiter))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+                .map(number -> LottoNumber.create(Integer.parseInt(number)))
+                .collect(Collectors.toSet());
     }
 
 }

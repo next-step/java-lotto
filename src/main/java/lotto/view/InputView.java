@@ -5,7 +5,7 @@ import lotto.model.lotto.LottoNumber;
 import lotto.model.lotto.Money;
 import lotto.util.InputUtil;
 
-import java.util.List;
+import java.util.Set;
 
 public class InputView {
 
@@ -36,7 +36,7 @@ public class InputView {
         return value % PRICE_PER_TICKET == 0;
     }
 
-    public List<Integer> readWinningNumbers() {
+    public Set<LottoNumber> readLottoNumbers() {
         System.out.println(INPUT_WINNING_NUMBERS_MESSAGE);
         return InputUtil.readNumbers();
     }

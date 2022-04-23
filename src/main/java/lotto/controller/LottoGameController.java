@@ -14,6 +14,7 @@ import lotto.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class LottoGameController {
 
@@ -64,7 +65,7 @@ public class LottoGameController {
     }
 
     private WinningTicket generateWinningTicket() {
-        List<Integer> winningNumbers = inputView.readWinningNumbers();
+        Set<LottoNumber> winningNumbers = inputView.readLottoNumbers();
         LottoNumber bonusNumber = inputView.readBonusNumber();
         return ticketMachine.generateWinningTicket(winningNumbers, bonusNumber);
     }

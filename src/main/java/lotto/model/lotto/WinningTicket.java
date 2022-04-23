@@ -3,13 +3,17 @@ package lotto.model.lotto;
 import lotto.exception.InvalidBonusNumberException;
 import lotto.model.rank.Rank;
 
-public class WinningTicket {
+import java.util.Set;
 
-    private static final int POTENTIAL_SECOND_NUMBER = 4;
+public class WinningTicket {
 
     private final LottoTicket lottoTicket;
 
     private final LottoNumber bonusNumber;
+
+    public WinningTicket(Set<LottoNumber> numbers, LottoNumber bonusNumber) {
+        this(new LottoTicket(numbers), bonusNumber);
+    }
 
     public WinningTicket(LottoTicket lottoTicket, LottoNumber bonusNumber) {
         validateBonusNumber(lottoTicket, bonusNumber);
