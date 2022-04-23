@@ -47,7 +47,8 @@ public class StringCalculatorTest {
         Arguments.of("- - 1"),
         Arguments.of("1 2 1 1 2"),
         Arguments.of(" - 1 / 2"),
-        Arguments.of("  + 1")
+        Arguments.of("  + 1"),
+        Arguments.of("1+1")
     );
   }
 
@@ -55,7 +56,7 @@ public class StringCalculatorTest {
   @MethodSource("runSourcesToFail")
   void run_실패(String value) {
     assertThrows(
-        Exception.class,
+        IllegalArgumentException.class,
         () -> StringCalculator.init(value).run()
     );
   }

@@ -67,7 +67,7 @@ public class StringsForCalculationTest {
   @MethodSource("calculateSourcesToFail")
   void calculate_실패(List<String> stringListToFail) {
     assertThrows(
-        Exception.class,
+        IllegalArgumentException.class,
         () -> new StringsForCalculation(stringListToFail).calculate()
     );
   }

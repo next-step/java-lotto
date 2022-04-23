@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class CalculationOperatorTest {
+public class CalculationTest {
 
   @Test
   void addict_성공() {
