@@ -10,8 +10,8 @@ public class TicketMachine {
 
     private final Money ticketPrice;
 
-    public TicketMachine() {
-        this(new LottoTicketGenerator(), COST_PER_TICKET);
+    public TicketMachine(NumberGenerationStrategy numberGenerationStrategy) {
+        this(new LottoTicketGenerator(numberGenerationStrategy), COST_PER_TICKET);
     }
 
     public TicketMachine(LottoTicketGenerator lottoTicketGenerator, long price) {

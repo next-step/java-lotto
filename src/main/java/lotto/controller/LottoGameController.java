@@ -4,6 +4,7 @@ import lotto.model.LottoGame;
 import lotto.model.LottoNumber;
 import lotto.model.LottoTicket;
 import lotto.model.Money;
+import lotto.model.RandomGenerationStrategy;
 import lotto.model.RankResults;
 import lotto.model.TicketMachine;
 import lotto.model.WinningTicket;
@@ -21,7 +22,7 @@ public class LottoGameController {
     private final OutputView outputView;
 
     public LottoGameController() {
-        this(new InputView(), new TicketMachine(), new OutputView());
+        this(new InputView(), new TicketMachine(new RandomGenerationStrategy()), new OutputView());
     }
 
     public LottoGameController(InputView inputView, TicketMachine ticketMachine, OutputView outputView) {

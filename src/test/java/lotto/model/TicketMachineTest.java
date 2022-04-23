@@ -9,7 +9,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class TicketMachineTest {
 
-    private final TicketMachine ticketMachine = new TicketMachine();
+    NumberGenerationStrategy numberGenerationStrategy = new RandomGenerationStrategy();
+    private final TicketMachine ticketMachine = new TicketMachine(numberGenerationStrategy);
 
     @Test
     @DisplayName("로또 티켓을 구매한다")
