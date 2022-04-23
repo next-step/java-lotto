@@ -47,11 +47,24 @@ public class Lotto {
         return lottos;
     }
 
-    public double earnings(Lotto winningLotto) {
-        return Prize.findEarningsByMatchCount(matchCount(winningLotto));
+    public static void validateBonusNumber(Lotto winningLotto, int bonusNumber) {
+        if (bonusNumber < MIN_VALID_NUMBER || bonusNumber > MAX_VALID_NUMBER) {
+            throw new IllegalArgumentException("bonus number is out of range : " + bonusNumber);
+        }
+        if (winningLotto.contains(bonusNumber)) {
+            throw new IllegalArgumentException("bonus number is already used: " + bonusNumber);
+        }
     }
 
-    public int matchCount(Lotto winningLotto) {
+    public double earnings(Lotto winningLotto, int bonusNumber) {
+        return findPrize(winningLotto, bonusNumber).getEarnings();
+    }
+
+    public Prize findPrize(Lotto winningLotto, int bonusNumber) {
+        return Prize.findPrizeByMatchCount(matchCount(winningLotto), contains(bonusNumber));
+    }
+
+    private int matchCount(Lotto winningLotto) {
         return (int) numbers.stream()
                 .filter(winningLotto::contains)
                 .count();
