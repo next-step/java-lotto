@@ -87,7 +87,7 @@ class StringCalculatorTest {
     void invalidArithmeticSign() {
         assertThatThrownBy(() -> {
             StringCalculator.calculate("2 + 5 + 5 5 5");
-        }).isInstanceOf(NoSuchElementException.class);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -104,5 +104,29 @@ class StringCalculatorTest {
         assertThatThrownBy(() -> {
             StringCalculator.calculate("2 + 5 +");
         }).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    @DisplayName("사칙연산식은 공백이 될 수 없다.")
+    void checkBlank() {
+        assertThatThrownBy(() -> {
+            StringCalculator.calculate(" ");
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("사칙연산식은 null이 될 수 없다.")
+    void checkNull() {
+        assertThatThrownBy(() -> {
+            StringCalculator.calculate(null);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("사칙연산식은 빈문자가 될 수 없다.")
+    void checkEmpty() {
+        assertThatThrownBy(() -> {
+            StringCalculator.calculate("");
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }

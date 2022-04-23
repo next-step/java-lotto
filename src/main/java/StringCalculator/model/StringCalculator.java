@@ -9,6 +9,7 @@ public class StringCalculator {
     }
 
     public static int calculate(String problem) {
+        checkInvalid(problem);
         String[] splitedProblem = split(problem);
 
         return operation(splitedProblem, getNumber(splitedProblem[0]));
@@ -28,6 +29,20 @@ public class StringCalculator {
 
         if ((problem.length % 2) == 0) {
             throw new InvalidArithmethicException("짝수개는 계산할 수 없습니다.");
+        }
+    }
+
+    private static void checkInvalid(String problem) {
+        if (problem == null) {
+            throw new IllegalArgumentException();
+        }
+
+        if (problem.equals(DELIMITER)) {
+            throw new IllegalArgumentException();
+        }
+
+        if (problem.equals("")) {
+            throw new IllegalArgumentException();
         }
     }
 
