@@ -37,7 +37,7 @@ public class StringsForCalculation {
   private void validate(List<String> list, int cursor) {
     validateArgument(
         list,
-        (arg) -> arg.size() >= MIN_LIST_SIZE && isOddNumber(arg.size()),
+        (arg) -> arg.size() >= MIN_LIST_SIZE && isOdd(arg.size()),
         ERROR_MESSAGE_FOR_INVALID_LIST
     );
     validateArgument(
@@ -47,7 +47,7 @@ public class StringsForCalculation {
     );
   }
   
-  private boolean isOddNumber(int number) {
+  private boolean isOdd(int number) {
     return number % 2 == 1;
   }
 }
