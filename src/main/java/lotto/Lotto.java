@@ -4,6 +4,7 @@ import java.util.*;
 
 public class Lotto {
 
+    private static final int IS_BONUS_NUMBER_COUNT = 5;
     Set<LottoNumber> lottoNumberList = new HashSet<>();
 
     public Lotto(List<LottoNumber> lottoNumberList) {
@@ -47,5 +48,12 @@ public class Lotto {
         }
 
         return totalMatchedCount;
+    }
+
+    public boolean isBonusNumberMatched(int matchCount, LottoNumber bonusLottoNumber) {
+        if (matchCount != IS_BONUS_NUMBER_COUNT) {
+            return false;
+        }
+        return lottoNumberList.contains(bonusLottoNumber);
     }
 }

@@ -18,8 +18,9 @@ public class LottoApplication {
         resultView.printBoughtLottoList(generatedUserLottoList);
 
         Lotto winningLotto = inputView.insertWinningLotto();
+        LottoNumber bonusLottoNumber = new LottoNumber(inputView.insertBonusNumber());
 
-        List<Rank> userLottoRanks = LottoMachine.findUserLottoRanks(generatedUserLottoList, winningLotto);
+        List<Rank> userLottoRanks = LottoMachine.findUserLottoRanks(generatedUserLottoList, winningLotto, bonusLottoNumber);
 
         resultView.printTotalRanks(userLottoRanks);
 
