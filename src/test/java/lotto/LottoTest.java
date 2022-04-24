@@ -13,6 +13,7 @@ public class LottoTest {
 
     private List<LottoNumber> userLottoNumbers;
     private List<LottoNumber> invalidCountLottoNumbers;
+    private List<LottoNumber> winningLotto;
 
     @BeforeEach
     void setUp() {
@@ -32,6 +33,15 @@ public class LottoTest {
                 new LottoNumber(5),
                 new LottoNumber(5)
         );
+
+        winningLotto = Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(7),
+                new LottoNumber(8)
+        );
     }
 
     @Test
@@ -44,5 +54,14 @@ public class LottoTest {
     void invalidLottoSet() {
         assertThatThrownBy(() -> new Lotto(invalidCountLottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("유저의 로또와 당첨 로또의 일치 개수 구하기")
+    void findMatchedCount() {
+        Lotto userLotto = new Lotto(userLottoNumbers);
+        Lotto winningLotto = new Lotto(this.winningLotto);
+        assertThat(userLotto.findMatchedLottoNumberCount(winningLotto))
+                .isEqualTo(4);
     }
 }
