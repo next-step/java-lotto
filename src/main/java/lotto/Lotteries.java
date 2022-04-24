@@ -2,12 +2,12 @@ package lotto;
 
 import java.util.List;
 
-public class Lotto {
+public class Lotteries {
 
     private static final int IS_BONUS_NUMBER_COUNT = 5;
     private List<Integer> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotteries(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 

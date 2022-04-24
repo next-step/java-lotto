@@ -11,10 +11,10 @@ import java.util.*;
 import static java.util.Collections.*;
 import static org.assertj.core.api.Assertions.*;
 
-public class LottoTest {
+public class LotteriesTest {
 
     private final List<Integer> winLottoNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-    private List<Lotto> userLottoSet = new ArrayList<>();
+    private List<Lotteries> userLotteriesSet = new ArrayList<>();
 
     @BeforeEach
     void setUp() {
@@ -23,10 +23,10 @@ public class LottoTest {
         List<Integer> fourMatched = Arrays.asList(3, 4, 5, 6, 7, 8);
         List<Integer> threeMatched = Arrays.asList(4, 5, 6, 7, 8, 9);
 
-        userLottoSet.add(new Lotto(allMatched));
-        userLottoSet.add(new Lotto(fiveMatched));
-        userLottoSet.add(new Lotto(fourMatched));
-        userLottoSet.add(new Lotto(threeMatched));
+        userLotteriesSet.add(new Lotteries(allMatched));
+        userLotteriesSet.add(new Lotteries(fiveMatched));
+        userLotteriesSet.add(new Lotteries(fourMatched));
+        userLotteriesSet.add(new Lotteries(threeMatched));
     }
 
     @Test
@@ -47,9 +47,9 @@ public class LottoTest {
     @Test
     @DisplayName("당첨 복권 번호와 자동으로 발급된 로또의 일치 로직")
     void matchWinLottoAndGenerateLotto() {
-        Lotto randomGeneratedLotto = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9));
+        Lotteries randomGeneratedLotteries = new Lotteries(Arrays.asList(4, 5, 6, 7, 8, 9));
 
-        int matchCount = LottoMachine.findMatchedLottoNumberCount(winLottoNumber, randomGeneratedLotto);
+        int matchCount = LottoMachine.findMatchedLottoNumberCount(winLottoNumber, randomGeneratedLotteries);
 
         assertThat(matchCount).isEqualTo(3);
     }
@@ -59,8 +59,8 @@ public class LottoTest {
     void rankOfUsersLotto() {
         List<Rank> ranks = new ArrayList<>();
 
-        for (Lotto lotto : userLottoSet) {
-            int matchCount = LottoMachine.findMatchedLottoNumberCount(winLottoNumber, lotto);
+        for (Lotteries lotteries : userLotteriesSet) {
+            int matchCount = LottoMachine.findMatchedLottoNumberCount(winLottoNumber, lotteries);
             Rank lottoRank = Rank.findRank(matchCount, false);
             ranks.add(lottoRank);
         }
@@ -89,9 +89,9 @@ public class LottoTest {
     void matchBonusNumber() {
         int matchCount = 5;
         int bonusNumber = 7;
-        Lotto purchaseLotto = new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7));
+        Lotteries purchaseLotteries = new Lotteries(Arrays.asList(2, 3, 4, 5, 6, 7));
 
-        boolean matchedBonusNumber = purchaseLotto.isBonusNumberMatched(matchCount, bonusNumber);
+        boolean matchedBonusNumber = purchaseLotteries.isBonusNumberMatched(matchCount, bonusNumber);
 
         assertThat(matchedBonusNumber).isTrue();
     }
@@ -101,9 +101,9 @@ public class LottoTest {
     void mismatchBonusNumber() {
         int matchCount = 4;
         int bonusNumber = 6;
-        Lotto purchaseLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotteries purchaseLotteries = new Lotteries(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        boolean matchedBonusNumber = purchaseLotto.isBonusNumberMatched(matchCount, bonusNumber);
+        boolean matchedBonusNumber = purchaseLotteries.isBonusNumberMatched(matchCount, bonusNumber);
 
         assertThat(matchedBonusNumber).isFalse();
     }

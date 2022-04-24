@@ -5,10 +5,10 @@ import java.util.List;
 
 public class ResultView {
 
-    public void printPurchaseLottoList(List<Lotto> lotteries) {
+    public void printPurchaseLottoList(List<Lotteries> lotteries) {
         System.out.println(lotteries.size() + "개를 구매했습니다.");
 
-        for (Lotto lottery : lotteries) {
+        for (Lotteries lottery : lotteries) {
             System.out.println(lottery.getLottoNumbers());
         }
     }

@@ -1,6 +1,6 @@
 package lotto.util;
 
-import lotto.Lotto;
+import lotto.Lotteries;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,9 +28,9 @@ public class LottoGenerator {
                 .collect(toList());
     }
 
-    public List<Lotto> generate(int purchaseAmount) {
+    public List<Lotteries> generate(int purchaseAmount) {
         int lottoCount = calculatePurchasableCount(purchaseAmount);
-        List<Lotto> lotteries = new ArrayList<>();
+        List<Lotteries> lotteries = new ArrayList<>();
 
         for (int i = 0; i < lottoCount; i++) {
             Collections.shuffle(LOTTO_SET);
@@ -39,7 +39,7 @@ public class LottoGenerator {
                     .subList(0, 6)
                     .stream()
                     .sorted(naturalOrder())
-                    .collect(collectingAndThen(toList(), Lotto::new)));
+                    .collect(collectingAndThen(toList(), Lotteries::new)));
         }
         return lotteries;
     }
