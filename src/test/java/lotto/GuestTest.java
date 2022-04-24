@@ -13,4 +13,11 @@ class GuestTest {
     Guest guest = new Guest(14000);
     assertThat(guest).isEqualTo(new Guest(14000));
   }
+
+  @Test
+  @DisplayName("로또를 가격에 맞게 구입을 하였는지 체크한다.")
+  void buy() {
+    Guest guest = new Guest(14000);
+    assertThat(guest.boughtLottoCount()).isEqualTo(14);
+  }
 }
