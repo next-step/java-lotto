@@ -1,7 +1,7 @@
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class PlusTest {
+public class AdditionTest {
 
     @Test
     void 입력값이_널이거나_비어있는_경우_예외_발생() {
@@ -19,9 +19,12 @@ public class PlusTest {
     }
 
     @Test
-    void 문자열_덧셈() {
-        Plus plus = new Plus();
-        Assertions.assertThat(plus.sum(1, 3)).isEqualTo(4);
+    void 덧셈() {
+        Addition addition = new Addition();
+        Assertions.assertThat(addition.sum(1, 3)).isEqualTo(4);
     }
 
+    @Test
+    void 뺄셈() {
+    }
 }
