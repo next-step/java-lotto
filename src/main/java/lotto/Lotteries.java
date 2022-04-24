@@ -9,8 +9,14 @@ public class Lotteries {
     List<Lotto> lottoList = new ArrayList<>();
 
     public Lotteries(List<Lotto> lottoList) {
-        // TODO : 1장의 로또는 6개의 번호를 가지고 있어야 하며, 중복이 없어야 함. [정렬도 되어 있어야 해]
+        if (invalidLottoSet(lottoList)) {
+            throw new IllegalArgumentException("로또는 6개의 숫자로 구성되어 있어야 합니다.");
+        }
         this.lottoList = lottoList;
+    }
+
+    private boolean invalidLottoSet(List<Lotto> lottoList) {
+        return lottoList.size() != 6;
     }
 
     @Override

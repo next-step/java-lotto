@@ -1,6 +1,7 @@
 package lotto;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -10,22 +11,34 @@ import static org.assertj.core.api.Assertions.*;
 
 public class LotteriesTest {
 
-    private List<Lotto> userLottoNumber;
+    private List<Lotto> userLotteries;
+    private List<Lotto> invalidCountLotteries;
 
     @BeforeEach
     void setUp() {
-        userLottoNumber = Arrays.asList(
+        userLotteries = Arrays.asList(
                 new Lotto(1),
                 new Lotto(2),
                 new Lotto(3),
                 new Lotto(4),
                 new Lotto(5),
                 new Lotto(6));
+
+        invalidCountLotteries = Arrays.asList(
+                new Lotto(1),
+                new Lotto(2)
+        );
     }
 
     @Test
     void create() {
-        assertThat(new Lotteries(userLottoNumber)).isEqualTo(new Lotteries(userLottoNumber));
+        assertThat(new Lotteries(userLotteries)).isEqualTo(new Lotteries(userLotteries));
     }
 
+    @Test
+    @DisplayName("로또 1개의 집합은 6개의 숫자로 이루어져 있어야 합니다.")
+    void invalidLottoSet() {
+        assertThatThrownBy(() -> new Lotteries(invalidCountLotteries))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
