@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static stringcalculator.ExceptionMessage.WHITESPACE_REQUIRED_BETWEEN_CHARACTER;
 
-public class EquationTest {
+class EquationTest {
 
     @ParameterizedTest
     @NullAndEmptySource

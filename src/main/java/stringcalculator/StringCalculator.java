@@ -8,18 +8,17 @@ import static stringcalculator.ExceptionMessage.*;
 
 public class StringCalculator {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+");
-    private static final Stack<Integer> NUMBERS = new Stack<>();
-    private static final Stack<String> OPERATORS = new Stack<>();
+    private final Stack<Integer> numbers = new Stack<>();
+    private final Stack<String> operators = new Stack<>();
 
-    public long calculate(Equation equation) {
+    public int calculate(Equation equation) {
         List<String> characters = equation.split(" ");
 
         for (String character : characters) {
             calculate(character);
         }
 
-        Integer result = NUMBERS.pop();
-        cleanUp();
+        Integer result = numbers.pop();
         return result;
     }
 
@@ -28,7 +27,7 @@ public class StringCalculator {
             pushOrOperate(character);
         }
         if (isOperator(character)) {
-            OPERATORS.push(character);
+            operators.push(character);
         }
     }
 
@@ -37,12 +36,12 @@ public class StringCalculator {
     }
 
     private void pushOrOperate(String character) {
-        if (OPERATORS.isEmpty()) {
-            NUMBERS.push(Integer.parseInt(character));
+        if (operators.isEmpty()) {
+            numbers.push(Integer.parseInt(character));
         }
-        if (!OPERATORS.isEmpty()) {
-            Integer previous = NUMBERS.pop();
-            String operator = OPERATORS.pop();
+        if (!operators.isEmpty()) {
+            Integer previous = numbers.pop();
+            String operator = operators.pop();
             operate(character, previous, operator);
         }
     }
@@ -55,18 +54,18 @@ public class StringCalculator {
         int current = Integer.parseInt(character);
         switch (operator) {
             case "+":
-                NUMBERS.push(previous + current);
+                numbers.push(previous + current);
                 break;
             case "-":
-                NUMBERS.push(previous - current);
+                numbers.push(previous - current);
                 break;
             case "*":
-                NUMBERS.push(previous * current);
+                numbers.push(previous * current);
                 break;
             case "/":
                 validateNumbers(previous, current);
                 validateRemainder(previous % current);
-                NUMBERS.push(previous / current);
+                numbers.push(previous / current);
             default:
                 break;
         }
@@ -82,10 +81,5 @@ public class StringCalculator {
         if (remainder != 0) {
             throw new IllegalStateException(DIVIDE_RESULT_SHOULD_BE_INTEGER.getMessage());
         }
-    }
-
-    private void cleanUp() {
-        NUMBERS.clear();
-        OPERATORS.clear();
     }
 }

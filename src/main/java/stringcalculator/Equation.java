@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class Equation {
-    private final String input;
     private final static Pattern PATTERN = Pattern.compile("[0-9]+|[+-/*]");
+    private final String input;
 
     public Equation(String input) {
         if (isNullOrBlank(input)) {
