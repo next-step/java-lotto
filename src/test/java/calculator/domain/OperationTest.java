@@ -66,11 +66,4 @@ class OperationTest {
     assertThatThrownBy(() -> Operation.DIVIDE.apply(4, 0))
         .isInstanceOf(ArithmeticException.class);
   }
-
-  @ParameterizedTest(name = "null은 계산할 수 없다.")
-  @MethodSource("operatorAndOperation")
-  void operate_null(String operator, Operation operation) {
-    assertThatThrownBy(() -> operation.apply(null, null))
-        .isInstanceOf(IllegalArgumentException.class);
-  }
 }
