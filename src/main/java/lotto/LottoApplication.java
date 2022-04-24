@@ -1,31 +1,7 @@
 package lotto;
 
-import lotto.util.LottoGenerator;
-import lotto.util.StatisticCalculator;
-
-import java.util.List;
-
 public class LottoApplication {
 
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-        ResultView resultView = new ResultView();
-
-        int insertLottoPrice = inputView.insertLottoPrice();
-
-        LottoGenerator lottoGenerator = new LottoGenerator();
-        List<Lotteries> lotteries = lottoGenerator.generate(insertLottoPrice);
-
-        resultView.printPurchaseLottoList(lotteries);
-
-        List<Integer> winningLotto = inputView.insertWinningLotto();
-        int bonusNumber = inputView.insertBonusNumber();
-
-        List<Rank> ranks = LottoMachine.findBoughtLottoRank(winningLotto, lotteries, bonusNumber);
-
-        resultView.printLottoRank(ranks);
-
-        double rate = StatisticCalculator.calculateRate(insertLottoPrice, ranks);
-        resultView.printTotalRate(rate);
     }
 }
