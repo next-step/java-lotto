@@ -18,6 +18,36 @@ public class StringCalculator {
         return firstNumber + secondNumber;
     }
 
+    public int minus(String expression) {
+        checkEmpty(expression);
+        checkLengthExceed(expression);
+
+        int firstNumber = getFirstNumber(expression);
+        int secondNumber = getSecondNumber(expression);
+
+        return firstNumber - secondNumber;
+    }
+
+    public int multiply(String expression) {
+        checkEmpty(expression);
+        checkLengthExceed(expression);
+
+        int firstNumber = getFirstNumber(expression);
+        int secondNumber = getSecondNumber(expression);
+
+        return firstNumber * secondNumber;
+    }
+
+    public int division(String expression) {
+        checkEmpty(expression);
+        checkLengthExceed(expression);
+
+        int firstNumber = getFirstNumber(expression);
+        int secondNumber = getSecondNumber(expression);
+
+        return firstNumber / secondNumber;
+    }
+
     private void checkLengthExceed(String expression) {
         String[] strings = getStrings(expression);
         if (strings.length > ALLOW_STRINGS_LENGTH) {
