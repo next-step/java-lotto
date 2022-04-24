@@ -18,6 +18,13 @@ public class Lotto {
     }
 
     @Override
+    public String toString() {
+        return "Lotto{" +
+                "lottoNumberList=" + lottoNumberList +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -28,5 +35,17 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumberList);
+    }
+
+    public int findMatchedLottoNumberCount(Lotto winningLotto) {
+        int totalMatchedCount = 0;
+
+        for (LottoNumber lottoNumber : lottoNumberList) {
+            if (winningLotto.lottoNumberList.contains(lottoNumber)) {
+                totalMatchedCount++;
+            }
+        }
+
+        return totalMatchedCount;
     }
 }
