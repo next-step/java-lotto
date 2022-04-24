@@ -1,9 +1,11 @@
 package calculator.domain;
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
+import java.util.stream.Collectors;
 
 public enum Operation {
   ADD("+", (a, b) -> a + b),
@@ -19,12 +21,8 @@ public enum Operation {
   private final String operator;
   private final IntBinaryOperator binaryOperator;
 
-  private static final Map<String, Operation> BY_OPERATOR = new HashMap<>();
-  static {
-    for (Operation e : values()) {
-      BY_OPERATOR.put(e.operator, e);
-    }
-  }
+  private static final Map<String, Operation> BY_OPERATOR = Arrays.stream(values())
+      .collect(Collectors.toMap(operation -> operation.operator, Function.identity()));
 
   Operation(String operator, IntBinaryOperator binaryOperator) {
     this.operator = operator;
