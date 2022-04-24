@@ -7,3 +7,10 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+##문자열 사칙 연산 계산기 기능 목록
+1. 사용자 입력 받는 View 구현
+2. 계산기 숫자를 나타내는 Number 구현
+3. 연산자를 나타내는 Operator 구현
+4. 계산식 입력을 계산하는 계산기 구현
+5. 연산 결과 OutputView 구현
