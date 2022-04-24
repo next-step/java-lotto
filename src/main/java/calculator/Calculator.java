@@ -1,28 +1,47 @@
 package calculator;
 
+import calculator.operation.AddOperation;
+import calculator.operation.Operation;
+
+import java.util.Objects;
+
 public class Calculator {
 
-    public static int sum(int num, int num2) {
-        return num + num2;
+    private int initialNumber;
+    private Operation operation;
+
+    public Calculator(int initialNumber) {
+        this(initialNumber, new AddOperation());
     }
 
-    public static int minus(int num, int num2) {
-        return num - num2;
+    public Calculator(Operation operation) {
+        this(0, operation);
     }
 
-    public static int multiply(int num, int num2) {
-        return num * num2;
+    public Calculator(int initialNumber, Operation operation) {
+        this.initialNumber = initialNumber;
+        this.operation = operation;
     }
 
-    public static int divide(int num, int num2) {
-        if (num2 == 0) {
-            throw new IllegalArgumentException();
-        }
+    public int calculate(int number) {
+        this.initialNumber = operation.operate(initialNumber, number);
+        return this.initialNumber;
+    }
 
-        int result = num % num2;
-        if (result > 0) {
-            throw new IllegalArgumentException();
-        }
-        return num / num2;
+    public void changeOperation(Operation operation) {
+        this.operation = operation;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Calculator that = (Calculator) o;
+        return initialNumber == that.initialNumber && Objects.equals(operation, that.operation);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(initialNumber, operation);
     }
 }
