@@ -10,11 +10,11 @@ public class Lotto {
   private static final int LOTTO_SIZE = 6;
   private static final String INVALID_SIZE_MESSAGE = "하나의 로또는 중복되지 않은 6개의 숫자를 가져야합니다.";
 
-  private final Set<LottoNumber> values;
+  private final Set<LottoNumber> values = new TreeSet<>();
 
   public Lotto(Set<LottoNumber> values) {
     validate(values);
-    this.values = values;
+    this.values.addAll(values);
   }
 
   public static Lotto create(Set<Integer> values) {
@@ -53,9 +53,8 @@ public class Lotto {
 
   @Override
   public String toString() {
-    TreeSet<LottoNumber> lottoNumbers = new TreeSet<>(values);
     return "["
-        + lottoNumbers.stream().map(LottoNumber::toString).collect(Collectors.joining(", "))
+        + values.stream().map(LottoNumber::toString).collect(Collectors.joining(", "))
         + "]";
   }
 }
