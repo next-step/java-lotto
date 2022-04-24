@@ -7,20 +7,24 @@ import java.util.Objects;
 public final class Guest {
 
   private final Money money;
+  private final Store store;
 
   public Guest(int money) {
+    this(money, new Store());
+  }
+
+  public Guest(int money, Store store) {
     this.money = new Money(money);
+    this.store = store;
   }
 
   public int boughtLottoCount() {
-    Store store = new Store();
     Store lotto = store.getProductsCount(Integer.parseInt(money.toString()));
     return Integer.parseInt(lotto.toString());
   }
 
   public List<List<Integer>> haveLottoList() {
     List<List<Integer>> lottoList = new ArrayList<>();
-    Store store = new Store();
     int productCount = boughtLottoCount();
     while (productCount-- != 0) {
       lottoList.add(store.deliverLotto());
