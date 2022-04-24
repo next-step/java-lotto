@@ -14,7 +14,6 @@ public class RankResponse {
         this.count = count;
     }
 
-
     public static RankResponse of(Rank rank, int count) {
         return new RankResponse(rank.prize(), rank.matchCount(), count);
     }

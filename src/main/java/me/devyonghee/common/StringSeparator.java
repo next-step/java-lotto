@@ -7,6 +7,9 @@ import java.util.List;
 public final class StringSeparator implements StringsProvider {
 
     private static final String DEFAULT_DELIMITER = " ";
+    private static final String TO_STRING_START = "StringSeparator{";
+    private static final char TO_STRING_END = '}';
+    private static final String TO_STRING_STRING_FIELD = "string=";
 
     private final String string;
     private final String delimiter;
@@ -35,8 +38,8 @@ public final class StringSeparator implements StringsProvider {
 
     @Override
     public String toString() {
-        return "StringSeparator{" +
-                "string='" + string + '\'' +
-                '}';
+        return TO_STRING_START +
+                TO_STRING_STRING_FIELD + string +
+                TO_STRING_END;
     }
 }
