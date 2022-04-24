@@ -1,3 +1,5 @@
+package Calculator;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,7 @@ public class Input {
 
     private void validation(String input) {
         if (input == null) {
-            throw new IllegalArgumentException("입력 값이 존재하지 않습니다.");
+            throw new IllegalArgumentException("입력 값이 존재하지 습니다.");
         }
 
         if (input.isBlank()) {
