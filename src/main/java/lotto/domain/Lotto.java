@@ -22,9 +22,9 @@ public class Lotto {
     public Lotto() {
         Collections.shuffle(NUMBER_POOL);
         IntStream.range(0, LOTTO_SIZE)
-                .mapToObj(i -> {
-                    int number = NUMBER_POOL.get(i);
-                    return new LottoNo(number);
+                .mapToObj(index -> {
+                    int randomNumber = NUMBER_POOL.get(index);
+                    return new LottoNo(randomNumber);
                 })
                 .forEach(lottoNumbers::add);
     }
@@ -35,10 +35,13 @@ public class Lotto {
     }
 
     private void validateNumbers(List<Integer> numbers) {
-        int validNumberCount = new HashSet<>(numbers).size();
+        if (numbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("lotto must contain " + LOTTO_SIZE + " numbers");
+        }
 
-        if (validNumberCount != LOTTO_SIZE) {
-            throw new IllegalArgumentException("invalid lotto numbers");
+        int uniqueNumbersCount = new HashSet<>(numbers).size();
+        if (uniqueNumbersCount != LOTTO_SIZE) {
+            throw new IllegalArgumentException("containing duplicate lotto numbers");
         }
     }
 
