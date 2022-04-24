@@ -42,6 +42,9 @@ public class Integer implements Value  {
     }
 
     public Integer divide(Integer operand) {
+        if (operand.value == 0) {
+            throw new ArithmeticException("Can't divide by Zero.");
+        }
         Boolean isDividable =  this.modulo(operand).value == 0;
         if (isDividable) {
             return new Integer(this.value / operand.value);

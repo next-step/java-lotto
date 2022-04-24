@@ -49,4 +49,12 @@ public class ArithmeticTest {
         Arithmetic a = new Arithmetic();
         assertThatThrownBy(()->a.computes(i.values)).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void shouldThrowErrorIfDividedByZero() {
+        InputView i = new InputView();
+        i.parse("3 / 0");
+        Arithmetic a = new Arithmetic();
+        assertThatThrownBy(()->a.computes(i.values)).isInstanceOf(ArithmeticException.class);
+    }
 }
