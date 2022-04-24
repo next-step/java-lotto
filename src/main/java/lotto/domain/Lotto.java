@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -16,23 +17,25 @@ public class Lotto {
             .boxed()
             .collect(Collectors.toList());
 
-    private final List<Integer> numbers;
+    private final List<LottoNo> lottoNumbers = new ArrayList<>();
 
     public Lotto() {
         Collections.shuffle(NUMBER_POOL);
-        this.numbers = new ArrayList<>(NUMBER_POOL.subList(0, LOTTO_SIZE));
+        IntStream.range(0, LOTTO_SIZE)
+                .mapToObj(i -> {
+                    int number = NUMBER_POOL.get(i);
+                    return new LottoNo(number);
+                })
+                .forEach(lottoNumbers::add);
     }
 
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
-        this.numbers = numbers;
+        numbers.forEach(number -> lottoNumbers.add(new LottoNo(number)));
     }
 
     private void validateNumbers(List<Integer> numbers) {
-        int validNumberCount = numbers.stream()
-                .filter(n -> MIN_VALID_NUMBER <= n && n <= MAX_VALID_NUMBER)
-                .collect(Collectors.toSet())
-                .size();
+        int validNumberCount = new HashSet<>(numbers).size();
 
         if (validNumberCount != LOTTO_SIZE) {
             throw new IllegalArgumentException("invalid lotto numbers");
@@ -65,16 +68,19 @@ public class Lotto {
     }
 
     private int matchCount(Lotto winningLotto) {
-        return (int) numbers.stream()
-                .filter(winningLotto::contains)
+        return (int) lottoNumbers.stream()
+                .filter(lottoNo -> winningLotto.contains(lottoNo.getNumber()))
                 .count();
     }
 
     private boolean contains(int number) {
-        return numbers.contains(number);
+        return lottoNumbers.stream()
+                .anyMatch(lottoNo -> lottoNo.equals(new LottoNo(number)));
     }
 
     public List<Integer> getNumbers() {
-        return new ArrayList<>(numbers);
+        return lottoNumbers.stream()
+                .map(LottoNo::getNumber)
+                .collect(Collectors.toList());
     }
 }
