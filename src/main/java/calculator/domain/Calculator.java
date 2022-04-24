@@ -49,7 +49,7 @@ public class Calculator {
   }
 
   private boolean isNullOrEmpty(String formula) {
-    return formula == null ? true : formula.isEmpty();
+    return formula == null || formula.isEmpty();
   }
 
 }
