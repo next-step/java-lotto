@@ -11,20 +11,21 @@ public class Calculator {
         return compute(validateAndSplitExpression(exp));
     }
 
-    public static int compute(String[] arr) {
+    private static int compute(String[] arr) {
         int i = 0;
-        String sum = arr[0];        // op1
+        int sum = Integer.parseInt(arr[0]);        // op1
 
         while (i + 2 < arr.length) {
-            sum = computeSum(sum, arr[i + 1], arr[i + 2]);
+            int op2 = Integer.parseInt(arr[i + 2]);
+            sum = computeSum(sum, arr[i + 1], op2);
             i += 2;
         }
 
-        return Integer.parseInt(sum);
+        return sum;
     }
 
-    private static String computeSum(String op1, String operator, String op2) {
-        Operator c = Operator.findOperator(operator);
-        return Integer.toString(c.calc(op1, op2));
+    private static int computeSum(int op1, String operator, int op2) {
+        Operator op = Operator.findOperator(operator);
+        return op.calc(op1, op2);
     }
 }
