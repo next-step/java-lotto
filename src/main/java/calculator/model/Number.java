@@ -1,7 +1,7 @@
 package calculator.model;
 
-import calculator.util.Converter;
-import calculator.operator.Operator;
+import calculator.util.IntConverter;
+import calculator.util.Operator;
 
 import java.util.Objects;
 
@@ -17,7 +17,7 @@ public class Number {
     }
 
     public Number(String value) {
-        this(Converter.stringToInteger(value));
+        this(IntConverter.convert(value));
     }
 
     public Number(int value) {
@@ -25,8 +25,8 @@ public class Number {
         this.value = value;
     }
 
-    public Number calculate(Operator operator, Number afterNumber) {
-        int result = operator.calculate(this.value, afterNumber.value);
+    public Number calculate(Operator.Symbol symbol, Number right) {
+        int result = Operator.operator(symbol).apply(this.value, right.value);
         return new Number(result);
     }
 
