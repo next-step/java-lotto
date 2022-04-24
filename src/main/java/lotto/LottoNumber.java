@@ -8,6 +8,10 @@ public class LottoNumber {
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
     private final int lottoNumber;
 
+    public LottoNumber(String lottoNumber) {
+        this(Integer.parseInt(lottoNumber));
+    }
+
     public LottoNumber(int lottoNumber) {
         if (invalidLottoNumber(lottoNumber)) {
             throw new IllegalArgumentException("로또 번호는 1 ~ 45 사이의 숫자여야 합니다.");
@@ -17,6 +21,11 @@ public class LottoNumber {
 
     private boolean invalidLottoNumber(int lottoNumber) {
         return lottoNumber < MINIMUM_LOTTO_NUMBER || lottoNumber > MAXIMUM_LOTTO_NUMBER;
+    }
+
+    @Override
+    public String toString() {
+        return "" + lottoNumber + "";
     }
 
     @Override

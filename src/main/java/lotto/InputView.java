@@ -1,10 +1,10 @@
 package lotto;
 
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 import static java.util.Arrays.*;
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 
 public class InputView {
 
@@ -24,14 +24,14 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public List<Integer> insertWinningLotto() {
+    public Lotto insertWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
         scanner.nextLine();
         String winningLotto = inputScannerString();
 
         return stream(winningLotto.split(WINNING_LOTTO_DELIMITER))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+                .map(LottoNumber::new)
+                .collect(collectingAndThen(toList(), Lotto::new));
     }
 
     private String inputScannerString() {

@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,5 +36,13 @@ public enum Rank {
         return ranks.stream()
                 .mapToInt(rank -> rank.winnings)
                 .sum();
+    }
+
+    @Override
+    public String toString() {
+        return "Rank{" +
+                "matchCount=" + matchCount +
+                ", winnings=" + winnings +
+                '}';
     }
 }
