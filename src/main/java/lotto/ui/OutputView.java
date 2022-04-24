@@ -20,8 +20,8 @@ public class OutputView {
         throw new UnsupportedOperationException();
     }
 
-    public static void printLottos(Lottos lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
+    public static void printLottos(Lottos lottos, int manualLottoSize, int autoLottoSize) {
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다%n", manualLottoSize, autoLottoSize);
         lottos.getLottos()
                 .forEach(OutputView::printLotto);
     }
