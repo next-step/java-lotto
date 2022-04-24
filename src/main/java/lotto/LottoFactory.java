@@ -8,7 +8,9 @@ import java.util.Random;
 public class LottoFactory {
 
   private static final int START_INDEX = 0;
+
   private static final int LOTTO_MAX_COUNT = 6;
+
   private static final int MIN_VALUE = 1;
 
   private static final int MAX_VALUE = 45;
