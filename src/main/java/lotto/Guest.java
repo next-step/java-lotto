@@ -10,7 +10,7 @@ public final class Guest {
   private final Store store;
 
   public Guest(int money) {
-    this(money, new Store());
+    this(money, null);
   }
 
   public Guest(int money, Store store) {
