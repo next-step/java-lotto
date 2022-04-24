@@ -23,6 +23,10 @@ public class Lotto {
     return new Lotto(lottoNumbers);
   }
 
+  public static Lotto autoCreate() {
+    return create(RandomIntegerSetGenerator.getRandomIntegers());
+  }
+
   private void validate(Set<LottoNumber> values) {
     if (values.size() != LOTTO_SIZE) {
       throw new IllegalArgumentException(INVALID_SIZE_MESSAGE);
