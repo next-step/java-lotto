@@ -10,7 +10,7 @@ public class Arithmetic {
         while (i < values.size()) {
             Value value = values.get(i);
             if (value instanceof Operator) {
-                compute(this.accumulator, (Operator) value, (Integer) values.get(i+1));
+                compute(this.accumulator, (Operator) value, (Integer) values.get(i + 1));
                 i += 2;
                 continue;
             }

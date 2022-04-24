@@ -1,9 +1,9 @@
 package string_calculator;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
+import java.util.regex.Pattern;
+
+import static java.lang.Integer.parseInt;
 
 public class InputView {
     private static Scanner scanner = new Scanner(System.in);
@@ -16,28 +16,45 @@ public class InputView {
 
     public void parse(String equation) {
         String[] items = equation.split(" ");
+        if (items.length < 1) {
+            throw new IllegalArgumentException("Wrong equation: " + items.toString());
+        }
         for (String item : items) {
-            try {
-                Operator o = evaluateOperator(item);
-                this.values.add(o);
-            } catch (Exception e) {
-                evaluateInteger(item);
-            }
+            this.values.add(evaluate(item));
+//            try {
+//                Operator o = evaluateOperator(item);
+//                this.values.add(o);
+//            } catch (Exception e) {
+//                evaluateInteger(item);
+//            }
+        }
+        if (this.values.get(this.values.size() - 1) instanceof Operator ) {
+            throw new IllegalArgumentException("Wrong equation, ended with operator");
         }
     }
 
-    private static Operator evaluateOperator(String item) {
-        return new Operator(item);
+    private Value evaluate(String item) {
+        if ((Pattern.matches("\\d+", item))) {
+            return new Integer(parseInt(item));
+        }
+        if ((Pattern.matches("[\\+\\-\\*\\/%]", item))) {
+            return new Operator(item);
+        }
+        throw new IllegalArgumentException("Can't evaluate: " + item);
     }
 
-    private void evaluateInteger(String item) {
-        try {
-            Integer i = new Integer(java.lang.Integer.parseInt(item));
-            this.values.add(i);
-        } catch (Exception e) {
-            throw e;
-        }
-    }
+//    private static Operator evaluateOperator(String item) {
+//        return new Operator(item);
+//    }
+//
+//    private void evaluateInteger(String item) {
+//        try {
+//            Integer i = new Integer(parseInt(item));
+//            this.values.add(i);
+//        } catch (Exception e) {
+//            throw e;
+//        }
+//    }
 
     @Override
     public boolean equals(Object o) {

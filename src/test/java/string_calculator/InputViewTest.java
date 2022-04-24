@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class InputViewTest {
     @Test
@@ -18,5 +19,13 @@ public class InputViewTest {
             add(new Integer(2));
         }};
         assertThat(i.values).isEqualTo(values);
+    }
+
+    @Test
+    void shouldThrowError() {
+        InputView i = new InputView();
+        assertThatThrownBy(() -> i.parse("1+2")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> i.parse("1 + 2 +")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> i.parse("1 + 2 ! 3")).isInstanceOf(IllegalArgumentException.class);
     }
 }
