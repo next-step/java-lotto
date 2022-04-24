@@ -16,6 +16,12 @@ class StringSeparatorTest {
         assertThatNoException().isThrownBy(() -> StringSeparator.from("1 2"));
     }
 
+    @Test
+    @DisplayName("커스텀 구분자 객체화")
+    void instance_delimiter() {
+        assertThatNoException().isThrownBy(() -> StringSeparator.of("1", ","));
+    }
+
     @ParameterizedTest
     @DisplayName("문자열은 필수")
     @NullAndEmptySource

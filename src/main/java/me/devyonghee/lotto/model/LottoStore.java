@@ -26,10 +26,10 @@ public final class LottoStore {
         return new LottoStore(money, generator);
     }
 
-    public LottoTickets lottoTickets() {
-        return LottoTickets.from(
+    public Lottos lottoTickets() {
+        return Lottos.from(
                 IntStream.range(START_SALE_INDEX, availableQuantity())
-                        .mapToObj(i -> generator.lottoTicket())
+                        .mapToObj(i -> generator.lotto())
                         .collect(Collectors.toList())
         );
     }
