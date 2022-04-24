@@ -35,7 +35,6 @@ public class StringUtils {
     private static boolean isEvenCount(String[] stringArray) {
         return stringArray.length % 2 == 0;
     }
-
     private static boolean isLessThanThreeValues(String[] stringArray) {
         return stringArray.length < 3;
     }
@@ -49,6 +48,4 @@ public class StringUtils {
     private static boolean isBlank(String input) {
         return input == null || input.isEmpty();
     }
-
-
 }
