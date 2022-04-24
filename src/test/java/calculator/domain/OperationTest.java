@@ -13,22 +13,15 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class OperationTest {
 
-  private static Stream<Arguments> operatorAndOperation() {
-    return Stream.of(
-        Arguments.of("+", Operation.ADD),
-        Arguments.of("-", Operation.SUBTRACT),
-        Arguments.of("*", Operation.MULTIPLY),
-        Arguments.of("/", Operation.DIVIDE)
-    );
-  }
-
-  @ParameterizedTest(name = "String 타입의 연산자 기호로 Operation을 생성한다.")
+  @DisplayName("String 타입의 연산자 기호로 Operation을 생성한다.")
+  @ParameterizedTest
   @MethodSource("operatorAndOperation")
   void valueOfOperator(String operator, Operation operation) {
     assertThat(Operation.valueOfOperator(operator)).isEqualTo(operation);
   }
 
-  @ParameterizedTest(name = "사칙연산 기호가 아닌 경우, 예외가 발생한다.")
+  @DisplayName("사칙연산 기호가 아닌 경우, 예외가 발생한다.")
+  @ParameterizedTest
   @ValueSource(strings = {"1", "ㅋ", "", ".", "11"})
   void valueOfOperator(String invalidInput) {
     assertThatThrownBy(() -> Operation.valueOfOperator(invalidInput))
@@ -65,5 +58,14 @@ class OperationTest {
   void divide_zero() {
     assertThatThrownBy(() -> Operation.DIVIDE.apply(4, 0))
         .isInstanceOf(ArithmeticException.class);
+  }
+
+  private static Stream<Arguments> operatorAndOperation() {
+    return Stream.of(
+        Arguments.of("+", Operation.ADD),
+        Arguments.of("-", Operation.SUBTRACT),
+        Arguments.of("*", Operation.MULTIPLY),
+        Arguments.of("/", Operation.DIVIDE)
+    );
   }
 }
