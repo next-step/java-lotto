@@ -5,14 +5,14 @@ import java.util.Objects;
 public final class Store {
 
   private static final Integer PRODUCT_PRICE = 1000;
-  private final int priceCount;
+  private final Integer productCount;
 
   public Store() {
     this(0);
   }
 
-  public Store(int priceCount) {
-    this.priceCount = priceCount;
+  public Store(int productCount) {
+    this.productCount = productCount;
   }
 
   public Store getProductsCount(Integer money) {
@@ -28,11 +28,16 @@ public final class Store {
       return false;
     }
     Store store = (Store) o;
-    return priceCount == store.priceCount;
+    return productCount.equals(store.productCount);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(priceCount);
+    return Objects.hash(productCount);
+  }
+
+  @Override
+  public String toString() {
+    return productCount.toString();
   }
 }
