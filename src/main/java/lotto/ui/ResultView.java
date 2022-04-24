@@ -1,7 +1,7 @@
 package lotto.ui;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoStatistics;
+import lotto.domain.LottoWinner;
 import lotto.domain.LottoWinnerType;
 
 import java.text.DecimalFormat;
@@ -36,7 +36,7 @@ public class ResultView {
         System.out.println(stringBuilder.toString());
     }
 
-    public static void printWinnerStats(LottoStatistics.LottoWinner winners) {
+    public static void printWinnerStats(LottoWinner winners) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(RESULT_TEMPLATE_MESSAGE);
         stringBuilder.append(System.getProperty(LINE_SEPARATOR));

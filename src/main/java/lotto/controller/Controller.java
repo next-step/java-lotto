@@ -1,8 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoStatistics;
-import lotto.domain.Store;
+import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 import lotto.util.Utility;
@@ -21,11 +19,11 @@ public class Controller {
         Integer[] previousLottoNumber = Utility.convertStringArrayToIntegerArray(Utility.split(InputView.inputLottoOfPreviousWeek()));
         Lotto previousLotto = new Lotto(previousLottoNumber);
 
-        LottoStatistics lottoStatistics = LottoStatistics.of(lottos, previousLotto);
-        LottoStatistics.LottoWinner lottoWinner = lottoStatistics.calculateStats(lottos, previousLotto);
-        float yield = lottoStatistics.calculateYield(lottos, previousLotto, price);
+        LottoStatistics lottoStatistics = LottoStatistics.of();
+        LottoWinner winner = lottoStatistics.calculateStats(lottos, previousLotto);
+        float yield = lottoStatistics.calculateYield(winner, price);
 
-        ResultView.printWinnerStats(lottoWinner);
+        ResultView.printWinnerStats(winner);
         ResultView.printYield(yield);
     }
 }
