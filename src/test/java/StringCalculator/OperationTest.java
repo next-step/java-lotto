@@ -9,12 +9,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class OperationMapTest {
+public class OperationTest {
 
   @ParameterizedTest(name = "{1} {0} {2} = {3}")
   @MethodSource("operatorTestArguments")
   void operatorBy_수행_성공(String operator, int a, int b, int expected) {
-    assertThat(OperationMap.operatorBy(operator, a, b)).isEqualTo(expected);
+    assertThat(Operation.calculateBy(operator, a, b)).isEqualTo(expected);
   }
 
   private static Stream<Arguments> operatorTestArguments() {
@@ -30,7 +30,7 @@ public class OperationMapTest {
   void operatorBy_나누기_수행_실패() {
     assertThrows(
         IllegalArgumentException.class,
-        () -> OperationMap.operatorBy("/", 1, 0)
+        () -> Operation.calculateBy("/", 1, 0)
     );
   }
 }

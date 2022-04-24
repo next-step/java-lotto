@@ -28,7 +28,7 @@ public class StringsForCalculation {
     int cur = Integer.parseInt(stringsForCalculation.get(0));
     do {
       int target = Integer.parseInt(stringsForCalculation.get(cursor + 1));
-      cur = OperationMap.operatorBy(stringsForCalculation.get(cursor), cur, target);
+      cur = Operation.calculateBy(stringsForCalculation.get(cursor), cur, target);
       cursor += 2;
     } while (cursor < stringsForCalculation.size());
     return cur;
