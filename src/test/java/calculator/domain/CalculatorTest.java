@@ -14,7 +14,7 @@ class CalculatorTest {
   @DisplayName("문자열을 받아 사칙연산을 할 수 있다.")
   @ParameterizedTest
   @CsvSource({"2 + 3 * 4 / 2, 10", "1 + 1, 2", "1 - 1, 0"})
-  void calculate(String input, Integer result) {
+  void calculate(String input, int result) {
     Calculator calculator = new Calculator(input);
     assertThat(calculator.calculate()).isEqualTo(result);
   }
