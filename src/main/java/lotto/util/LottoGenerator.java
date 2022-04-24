@@ -44,4 +44,12 @@ public class LottoGenerator {
     private int calculateTotalCount(int purchaseAmount) {
         return purchaseAmount / PRICE_PER_LOTTO;
     }
+
+    public Lotto generateDirectlyLotto(String[] lottoNumberString) {
+        List<LottoNumber> lottoNumberList = new ArrayList<>();
+        for (String lottoNumber : lottoNumberString) {
+            lottoNumberList.add(new LottoNumber(lottoNumber));
+        }
+        return new Lotto(lottoNumberList);
+    }
 }

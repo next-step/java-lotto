@@ -5,10 +5,10 @@ import java.util.List;
 
 public class ResultView {
 
-    public void printBoughtLottoList(List<Lotto> lottoList) {
-        System.out.println(lottoList.size() + "개를 구매했습니다.");
+    public void printBoughtLottoList( List<Lotto> directlyBoughtLottoList, List<Lotto> autoUserLottoList) {
+        System.out.println("수동으로 " + directlyBoughtLottoList.size() + "장, 자동으로 " + autoUserLottoList.size() + "개를 구매했습니다.");
 
-        for (Lotto lotto : lottoList) {
+        for (Lotto lotto : autoUserLottoList) {
             System.out.println(lotto);
         }
     }
