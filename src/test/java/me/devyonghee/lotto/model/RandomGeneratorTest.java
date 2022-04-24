@@ -18,7 +18,7 @@ class RandomGeneratorTest {
 
     @Test
     @DisplayName("랜덤 로또 생성")
-    void lottoTicket() {
-        assertThat(RandomGenerator.getInstance().lottoTicket()).isNotNull();
+    void lotto() {
+        assertThat(RandomGenerator.getInstance().lotto()).isNotNull();
     }
 }

@@ -25,9 +25,9 @@ public final class RandomGenerator implements LottoTicketGenerator {
     }
 
     @Override
-    public LottoTicket lottoTicket() {
+    public Lotto lotto() {
         List<LottoNumber> numbers = new ArrayList<>(ALL_LOTTO_NUMBERS);
         Collections.shuffle(numbers);
-        return LottoTicket.from(LottoNumbers.from(numbers.subList(START_NUMBER_INDEX, LottoTicket.NUMBER_SIZE)));
+        return Lotto.from(LottoNumbers.from(numbers.subList(START_NUMBER_INDEX, Lotto.NUMBER_SIZE)));
     }
 }
