@@ -7,6 +7,7 @@ import java.util.*;
 public class Score {
 
     private static final int PROFIT_RATIO_SCALE = 2;
+    private static final RoundingMode PROFIT_RATIO_ROUNDING_MODE = RoundingMode.HALF_UP;
     private static final int DEFAULT_COUNT = 0;
     private static final int PLUS_COUNT_SIZE = 1;
     private static final String NULL_RANK_TO_COUNT_ERROR_MESSAGE = "rank to count must not be null";
@@ -28,8 +29,7 @@ public class Score {
         if (ranks.isEmpty()) {
             return BigDecimal.ZERO;
         }
-        return profit()
-                .divide(new BigDecimal(ranks.size() * LottoStore.LOTTO_PRICE), PROFIT_RATIO_SCALE, RoundingMode.HALF_UP);
+        return profit().divide(purchaseAmount(), PROFIT_RATIO_SCALE, PROFIT_RATIO_ROUNDING_MODE);
     }
 
     public int count(Rank rank) {
@@ -38,6 +38,10 @@ public class Score {
             rankToCountCache = rankToCountMap();
         }
         return rankToCountCache.getOrDefault(rank, DEFAULT_COUNT);
+    }
+
+    private BigDecimal purchaseAmount() {
+        return new BigDecimal(ranks.size() * LottoStore.LOTTO_PRICE);
     }
 
     private Map<Rank, Integer> rankToCountMap() {
