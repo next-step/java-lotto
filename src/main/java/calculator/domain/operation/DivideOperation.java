@@ -1,4 +1,4 @@
-package calculator.operation;
+package calculator.domain.operation;
 
 public class DivideOperation implements Operation {
 

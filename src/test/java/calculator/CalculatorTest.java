@@ -1,6 +1,7 @@
 package calculator;
 
-import calculator.operation.*;
+import calculator.domain.Calculator;
+import calculator.domain.operation.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

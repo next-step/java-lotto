@@ -1,7 +1,7 @@
-package calculator;
+package calculator.domain;
 
-import calculator.operation.AddOperation;
-import calculator.operation.Operation;
+import calculator.domain.operation.AddOperation;
+import calculator.domain.operation.Operation;
 
 import java.util.Objects;
 

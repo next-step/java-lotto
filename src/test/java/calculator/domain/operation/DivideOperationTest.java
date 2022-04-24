@@ -1,4 +1,4 @@
-package calculator.operation;
+package calculator.domain.operation;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

@@ -1,4 +1,4 @@
-package calculator.operation;
+package calculator.domain.operation;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
