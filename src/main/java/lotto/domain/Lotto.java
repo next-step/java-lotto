@@ -16,7 +16,7 @@ public class Lotto {
     this.values = values;
   }
 
-  public static Lotto createLotto(Set<Integer> values) {
+  public static Lotto create(Set<Integer> values) {
     Set<LottoNumber> lottoNumbers = values.stream()
         .map(LottoNumber::new)
         .collect(Collectors.toSet());

@@ -11,7 +11,7 @@ class LottoTest {
 
   @DisplayName("Integer Set을 받아 Lotto를 생성할 수 있다.")
   @Test
-  void createLotto() {
+  void create() {
     Set<Integer> integers = Set.of(1, 2, 3, 4, 5, 6);
     Set<LottoNumber> lottoNumbers = Set.of(
       new LottoNumber(1),
@@ -22,14 +22,14 @@ class LottoTest {
       new LottoNumber(6)
     );
     Lotto expectedResult = new Lotto(lottoNumbers);
-    assertThat(Lotto.createLotto(integers)).isEqualTo(expectedResult);
+    assertThat(Lotto.create(integers)).isEqualTo(expectedResult);
   }
 
   @DisplayName("1~45 범위가 아닌 숫자가 포함되어있다면, 예외가 발생한다.")
   @Test
-  void createLotto_invalid_number() {
+  void create_invalid_number() {
     Set<Integer> invalidNumbers = Set.of(-1, 0, 3, 4, 5, 46);
-    assertThatThrownBy(() -> Lotto.createLotto(invalidNumbers))
+    assertThatThrownBy(() -> Lotto.create(invalidNumbers))
         .isInstanceOf(IllegalArgumentException.class);
   }
 }
