@@ -8,6 +8,14 @@ import java.util.Objects;
 public class StringCalculator {
 
     public static final String DELIMITER = " ";
+    public static final int INPUT_LENGTH_LOWER_BOUND = 3;
+    public static final int EVEN_CHECK_VALUE = 2;
+    public static final int BASE_NUMBER_INDEX = 0;
+    public static final int IS_DIVIDED = 0;
+    public static final String PLUS = "+";
+    public static final String MINUS = "-";
+    public static final String DIVIDE = "/";
+    public static final String MULTIPLE = "*";
 
     private StringCalculator() {
         throw new AssertionError();
@@ -32,17 +40,18 @@ public class StringCalculator {
     }
 
     private static void validate(List<String> inputs) {
-        if (inputs.size() < 3) {
+        if (inputs.size() < INPUT_LENGTH_LOWER_BOUND) {
             throw new IllegalArgumentException("입력값은 공백으로 구분하여 3개 이상이어야 합니다. inputs : " + inputs);
         }
-        if (inputs.size() % 2 == 0) {
+        if (inputs.size() % EVEN_CHECK_VALUE == IS_DIVIDED) {
             throw new IllegalArgumentException("입력값은 계산가능한 형태로 주어져야 합니다. inputs : " + inputs);
         }
     }
 
     private static int calculate(List<String> inputs) {
-        int baseNumber = Integer.parseInt(inputs.get(0));
-        for (int i = 1; i < inputs.size() - 1; i++) {
+        int baseNumber = Integer.parseInt(inputs.get(BASE_NUMBER_INDEX));
+        int length = inputs.size();
+        for (int i = 1; i < length - 1; i++) {
             String operator = inputs.get(i);
             int targetNumber = Integer.parseInt(inputs.get(++i));
             baseNumber = calculate(baseNumber, operator, targetNumber);
@@ -51,16 +60,16 @@ public class StringCalculator {
     }
 
     private static int calculate(int baseNumber, String operator, int targetNumber) {
-        if ("+".equals(operator)) {
+        if (PLUS.equals(operator)) {
             return baseNumber + targetNumber;
         }
-        if ("-".equals(operator)) {
+        if (MINUS.equals(operator)) {
             return baseNumber - targetNumber;
         }
-        if ("/".equals(operator)) {
+        if (DIVIDE.equals(operator)) {
             return baseNumber / targetNumber;
         }
-        if ("*".equals(operator)) {
+        if (MULTIPLE.equals(operator)) {
             return baseNumber * targetNumber;
         }
         throw new IllegalArgumentException("올바르지 않은 연산자입니다. : " + operator);
