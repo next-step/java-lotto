@@ -1,21 +1,19 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Lotteries {
 
-    List<Lotto> lottoList = new ArrayList<>();
+    Set<Lotto> lottoList = new HashSet<>();
 
     public Lotteries(List<Lotto> lottoList) {
-        if (invalidLottoSet(lottoList)) {
+        this.lottoList = new HashSet<>(lottoList);
+        if (invalidLottoSet()) {
             throw new IllegalArgumentException("로또는 6개의 숫자로 구성되어 있어야 합니다.");
         }
-        this.lottoList = lottoList;
     }
 
-    private boolean invalidLottoSet(List<Lotto> lottoList) {
+    private boolean invalidLottoSet() {
         return lottoList.size() != 6;
     }
 

@@ -26,7 +26,11 @@ public class LotteriesTest {
 
         invalidCountLotteries = Arrays.asList(
                 new Lotto(1),
-                new Lotto(2)
+                new Lotto(2),
+                new Lotto(3),
+                new Lotto(4),
+                new Lotto(5),
+                new Lotto(5)
         );
     }
 
@@ -36,7 +40,7 @@ public class LotteriesTest {
     }
 
     @Test
-    @DisplayName("로또 1개의 집합은 6개의 숫자로 이루어져 있어야 합니다.")
+    @DisplayName("로또 1개의 집합은 중복 없이 6개의 숫자로 이루어져 있어야 합니다.")
     void invalidLottoSet() {
         assertThatThrownBy(() -> new Lotteries(invalidCountLotteries))
                 .isInstanceOf(IllegalArgumentException.class);
