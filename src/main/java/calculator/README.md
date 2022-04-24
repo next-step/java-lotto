@@ -13,8 +13,9 @@
 - 덧셈 기능을 구현해야한다.
 - 뺄셈 기능을 구현해야한다.
 - 곱셈 기능을 구현해야한다.
-- 나숫셈 기능을 구현해야한다.
-- 나숫셈의 결과값이 정수로 떨어지지 않을 경우 IllegalArgumentException 을 반환한다.
+- 나눗셈 기능을 구현해야한다.
+- 나눗셈의 결과값이 정수로 떨어지지 않을 경우 IllegalArgumentException 을 반환한다.
+- 나눗셈을 할때 0값으로 나눌 경우 IllegalArgumentException 을 반환한다.
 - 입력값이 null 이거나 빈 공백 문자일 경우 IllegalArgumentException 을 반환한다.
 - 사칙연사 기호가 아닌 경우 IllegalArgumentException 을 반환한다.
 - 사칙연산은 입력값 순서에 따라 계산되도록 구현한다.
