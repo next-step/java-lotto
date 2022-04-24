@@ -3,6 +3,7 @@ package stringcalculator;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class StringCalculator {
 
@@ -13,8 +14,16 @@ public class StringCalculator {
     }
 
     public static int calculate(String input) {
+        validate(input);
         List<String> inputs = split(input);
         return calculate(inputs);
+    }
+
+    private static void validate(String input) {
+        Objects.requireNonNull(input, "입력값은 null 일 수 없습니다.");
+        if (input.isBlank()) {
+            throw new IllegalArgumentException("입력값은 빈 문자열일 수 없습니다.");
+        }
     }
 
     private static List<String> split(String input) {
