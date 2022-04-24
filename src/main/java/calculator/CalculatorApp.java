@@ -13,7 +13,6 @@ public class CalculatorApp {
 
     Calculator calculator = new Calculator();
 
-    CalculatorResultView calculatorResultView = new CalculatorResultView();
-    calculatorResultView.printResult(calculator.calc(formula));
+    CalculatorResultView.printResult(calculator.calc(formula));
   }
 }

@@ -20,26 +20,6 @@ public class Number {
     return number;
   }
 
-  public Number plus(Number target) {
-    number += target.number;
-    return this;
-  }
-
-  public Number minus(Number target) {
-    number -= target.number;
-    return this;
-  }
-
-  public Number multiply(Number target) {
-    number *= target.number;
-    return this;
-  }
-
-  public Number divide(Number target) {
-    number /= target.number;
-    return this;
-  }
-
   private long validateNumber(String numberStr) {
     if (!NUMBER_PATTERM.matcher(numberStr).find()) {
       throw new InvalidNumberStrException("잘못된 숫자 문자열입니다. 입력 : " + numberStr);

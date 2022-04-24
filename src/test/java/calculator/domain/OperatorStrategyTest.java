@@ -14,18 +14,62 @@ class OperatorStrategyTest {
   @ParameterizedTest
   @DisplayName("연산자에 맞는 operatorStrategy 를 반환하는지 확인")
   @CsvSource(value = {"+|PLUS", "-|MINUS", "*|MULTIPLY", "/|DIVIDE"}, delimiter = '|')
-  void operators(String operator, OperatorStrategy operatorStrategy) {
-    OperatorStrategy strategy = OperatorStrategy.getStrategy(operator);
+  void operators(String operatorStr, Operator operatorExpected) {
+    Operator operator = Operator.getOperator(operatorStr);
 
-    assertThat(operatorStrategy).isEqualTo(strategy);
+    assertThat(operator).isEqualTo(operatorExpected);
   }
 
   @Test
   @DisplayName("없는 연산자일 경우, 에러 발생 확인")
   void notExistOperator() {
     assertThatThrownBy(() -> {
-      OperatorStrategy.getStrategy("x");
+      Operator.getOperator("x");
     }).isInstanceOf(InvalidOperatorException.class);
+  }
+
+  @Test
+  @DisplayName("덧셈 연산자 결과 확인")
+  void plus() {
+    Number number1 = new Number("100");
+    Number number2 = new Number("200");
+    Operator operator = Operator.getOperator("+");
+
+    assertThat(operator.operate(number1, number2)).usingRecursiveComparison()
+        .isEqualTo(new Number(300));
+  }
+
+  @Test
+  @DisplayName("뺄셈 연산자 결과 확인")
+  void minus() {
+    Number number1 = new Number("100");
+    Number number2 = new Number("200");
+    Operator operator = Operator.getOperator("-");
+
+    assertThat(operator.operate(number1, number2)).usingRecursiveComparison()
+        .isEqualTo(new Number(-100));
+  }
+
+  @Test
+  @DisplayName("곱셈 연산자 결과 확인")
+  void multiply() {
+    Number number1 = new Number("100");
+    Number number2 = new Number("200");
+    Operator operator = Operator.getOperator("*");
+
+    assertThat(operator.operate(number1, number2)).usingRecursiveComparison()
+        .isEqualTo(new Number(20000));
+  }
+
+  @Test
+  @DisplayName("나눗셈 연산자 결과 확인")
+  void divide() {
+    Number number1 = new Number("100");
+    Number number2 = new Number("100");
+    Operator operator = Operator.getOperator("/");
+
+    assertThat(operator.operate(number1, number2)).usingRecursiveComparison()
+        .isEqualTo(new Number(1));
   }
 
 }

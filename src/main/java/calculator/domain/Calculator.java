@@ -40,7 +40,7 @@ public class Calculator {
 
   private Number calcOperator(Number resultNumber, Iterator<String> numOperIter) {
     while (numOperIter.hasNext()) {
-      Operator operator = OperatorStrategy.getStrategy(numOperIter.next());
+      Operator operator = Operator.getOperator(numOperIter.next());
       Number targetNum = new Number(numOperIter.next());
 
       resultNumber = operator.operate(resultNumber, targetNum);
