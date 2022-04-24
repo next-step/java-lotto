@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -48,5 +49,13 @@ public class Lotto {
   @Override
   public int hashCode() {
     return Objects.hash(values);
+  }
+
+  @Override
+  public String toString() {
+    TreeSet<LottoNumber> lottoNumbers = new TreeSet<>(values);
+    return "["
+        + lottoNumbers.stream().map(LottoNumber::toString).collect(Collectors.joining(", "))
+        + "]";
   }
 }

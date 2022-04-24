@@ -8,6 +8,7 @@ public class ResultView {
   }
 
   public static void printLottos(Lottos lottos) {
-    System.out.printf("%d개를 구매했습니다.", lottos.size());
+    System.out.println(lottos.size() + "개를 구매했습니다.");
+    System.out.println(lottos);
   }
 }
