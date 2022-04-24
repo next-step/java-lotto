@@ -1,6 +1,7 @@
 package stringcalculator;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class StringCalculator {
@@ -8,9 +9,9 @@ public class StringCalculator {
     private static final int FIRST_NUMBER_INDEX = 0;
     private static final int SECOND_NUMBER_INDEX = 2;
     private static final int FIRST_EXPRESSION_LENGTH = 3;
-    private static final String ALLOW_LENGTH_EXCEED_MESSAGE = "허용된 길이를 초과했습니다.";
     private static final String STRING_SPLIT_DELIMITER = " ";
     private static final int SYMBOL_INDEX = 1;
+    private static final String NOT_ARITHMETIC_OPERATION_EXPRESSION_IS_NOT_ALLOW_MESSAGE = "사칙연산이 아닌 기호는 허용되지 않습니다.";
 
     public int plus(String expression) {
         int firstNumber = getFirstNumber(expression);
@@ -50,28 +51,31 @@ public class StringCalculator {
         }
 
         String symbol = expressionStrings[SYMBOL_INDEX];
+        if (!isArithmeticOperation(symbol)) {
+            throw new IllegalArgumentException(NOT_ARITHMETIC_OPERATION_EXPRESSION_IS_NOT_ALLOW_MESSAGE);
+        }
         String firstExpression = getFirstExpression(expressionStrings);
 
         int firstExpressionResult = 0;
         if ("+".equals(symbol)) {
             firstExpressionResult = this.plus(firstExpression);
         }
-
         if ("-".equals(symbol)) {
             firstExpressionResult = this.minus(firstExpression);
         }
-
         if ("*".equals(symbol)) {
             firstExpressionResult = this.multiply(firstExpression);
         }
-
         if ("/".equals(symbol)) {
             firstExpressionResult = this.division(firstExpression);
         }
 
         String otherExpression = getOtherExpression(expressionStrings);
-
         return calculate(String.format("%s %s", firstExpressionResult, otherExpression));
+    }
+
+    private boolean isArithmeticOperation(String symbol) {
+        return List.of("+", "-", "*", "/").contains(symbol);
     }
 
     private String getFirstExpression(String[] strings) {
