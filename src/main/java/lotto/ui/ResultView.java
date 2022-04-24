@@ -2,9 +2,13 @@ package lotto.ui;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoStatistics;
+import lotto.domain.LottoWinnerType;
 
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Map;
+
+import static lotto.domain.LottoWinnerType.NON_WIN;
 
 public class ResultView {
     private static final String COUNT_OF_PURCHASE_MESSAGE = "%s개를 구매했습니다.";
@@ -13,7 +17,6 @@ public class ResultView {
     private static final String LINE_DIVIDER = "--------";
     private static final String RESULT_STATS_MESSAGE = "%s개 일치 (%s원)- %s개";
     private static final String YIELD_OF_LOTTO_MESSAGE = "총 수익률은 %s입니다.(기준은 1임)";
-    private static final int MIN_LOTTO_WINNER_BOUNDARY = 3;
     private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat();
     private static final int DECIMAL_PLACES = 2;
 
@@ -33,29 +36,25 @@ public class ResultView {
         System.out.println(stringBuilder.toString());
     }
 
-    public static void printWinningStatistics(int[] stats) {
-        int[] validStats = filterValidStats(stats);
-
+    public static void printWinnerStats(LottoStatistics.LottoWinner winners) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(RESULT_TEMPLATE_MESSAGE);
         stringBuilder.append(System.getProperty(LINE_SEPARATOR));
         stringBuilder.append(LINE_DIVIDER);
         stringBuilder.append(System.getProperty(LINE_SEPARATOR));
 
-        for (int i = 0, len = validStats.length; i < len; i++) {
-            stringBuilder.append(String.format(RESULT_STATS_MESSAGE, i + MIN_LOTTO_WINNER_BOUNDARY, LottoStatistics.LottoWinnerType.prize(i + 3), validStats[i]));
-            stringBuilder.append(System.getProperty(LINE_SEPARATOR));
+        for (Map.Entry<LottoWinnerType, Integer> winner : winners.getWinners().entrySet()) {
+            printWinnerStat(stringBuilder, winner);
         }
 
         System.out.println(stringBuilder.toString());
     }
 
-    private static int[] filterValidStats(int[] stats) {
-        int[] validStats = new int[4];
-        for (int i = 0, len = 4; i < len; i++) {
-           validStats[i] = stats[i + MIN_LOTTO_WINNER_BOUNDARY];
+    private static void printWinnerStat(StringBuilder stringBuilder, Map.Entry<LottoWinnerType, Integer> winner) {
+        if (NON_WIN != winner.getKey()) {
+            stringBuilder.append(String.format(RESULT_STATS_MESSAGE, winner.getKey().getCountOfDuplicate(), LottoWinnerType.prize(winner.getKey().getCountOfDuplicate()), winner.getValue()));
+            stringBuilder.append(System.getProperty(LINE_SEPARATOR));
         }
-        return validStats;
     }
 
     public static void printYield(float yield) {

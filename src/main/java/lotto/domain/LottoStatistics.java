@@ -1,70 +1,70 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LottoStatistics {
-    private static final int LOTTO_DUPLICATE_NUMBER = 7;
+    private final List<Lotto> lottos;
+    private final Lotto previousLotto;
 
-    private LottoStatistics() {
+    private LottoStatistics(List<Lotto> lottos, Lotto previousLotto) {
+        this.lottos = lottos;
+        this.previousLotto = previousLotto;
     }
 
-    public static int[] calculateStats(List<Lotto> lottos, Lotto previousLotto) {
-        int[] stats = new int[LOTTO_DUPLICATE_NUMBER];
-        for (Lotto lotto : lottos) {
-            stats[accumulateStats(lotto, previousLotto)]++;
-        }
-        return stats;
+    public static LottoStatistics of(List<Lotto> lottos, Lotto previousLotto) {
+        return new LottoStatistics(lottos, previousLotto);
     }
 
-    private static int accumulateStats(Lotto lotto, Lotto previousLotto) {
-        return lotto.countDuplicateValue(previousLotto);
+    public LottoWinner calculateStats(List<Lotto> lottos, Lotto previousLotto) {
+        LottoWinner lottoWinner = new LottoWinner();
+        lottoWinner.calculateWinner(lottos, previousLotto);
+
+        return lottoWinner;
     }
 
-    public static float calculateYield(List<Lotto> lottos, Lotto previousLotto, int price) {
-        int profit = 0;
-        int[] stats = calculateStats(lottos, previousLotto);
-        for (int i = 0, len = stats.length; i < len; i++) {
-            profit = calculateProfit(profit, i, stats[i]);
-        }
-        return (float) profit / price;
+    public float calculateYield(List<Lotto> lottos, Lotto previousLotto, int price) {
+        LottoWinner lottoWinner = new LottoWinner();
+
+        return lottoWinner.calculateYield(lottos, previousLotto, price);
     }
 
-    private static int calculateProfit(int profit, int countOfDuplicate, int countOfLotto) {
-        return profit + LottoWinnerType.prize(countOfDuplicate) * countOfLotto;
-    }
+    public class LottoWinner {
+        private final Map<LottoWinnerType, Integer> winners;
 
-    public enum LottoWinnerType {
-        FIRST_PLACE(6, 2000000000),
-        SECOND_PLACE(5, 1500000),
-        THIRD_PLACE(4, 50000),
-        FOURTH_PLACE(3, 5000),
-        NON_WIN(-1, 0);
-
-        private int countOfDuplicate;
-        private int prize;
-
-        LottoWinnerType(int countOfDuplicate, int prize) {
-            this.countOfDuplicate = countOfDuplicate;
-            this.prize = prize;
+        private LottoWinner() {
+            this.winners = new HashMap<>();
         }
 
-        private static final Map<Integer, LottoWinnerType> mapToPrize;
-
-        static {
-            mapToPrize = new HashMap<>();
-            for (LottoWinnerType e : LottoWinnerType.values()) {
-                mapToPrize.put(e.countOfDuplicate, e);
+        public void calculateWinner(List<Lotto> lottos, Lotto previousLotto) {
+            for (Lotto lotto : lottos) {
+                int countOfDuplicate = accumulateStats(lotto, previousLotto);
+                LottoWinnerType winnerType = LottoWinnerType.valueOf(countOfDuplicate);
+                int countOfWinners = winners.get(winnerType) != null ? winners.get(winnerType) : 0;
+                winners.put(winnerType, countOfWinners + 1);
             }
         }
 
-        public static int prize(int countOfDuplicate) {
-            try {
-                return mapToPrize.get(countOfDuplicate).prize;
-            } catch (NullPointerException e) {
-                return NON_WIN.prize;
+        private int accumulateStats(Lotto lotto, Lotto previousLotto) {
+            return lotto.countDuplicateValue(previousLotto);
+        }
+
+        public float calculateYield(List<Lotto> lottos, Lotto previousLotto, int price) {
+            calculateWinner(lottos, previousLotto);
+
+            int profit = 0;
+            for (Map.Entry<LottoWinnerType, Integer> winner : winners.entrySet()) {
+                profit = calculateProfit(profit, winner.getKey().getCountOfDuplicate(), winner.getValue());
             }
+
+            return (float) profit / price;
+        }
+
+        private int calculateProfit(int profit, int countOfDuplicate, int countOfLotto) {
+            return profit + LottoWinnerType.prize(countOfDuplicate) * countOfLotto;
+        }
+
+        public Map<LottoWinnerType, Integer> getWinners() {
+            return Collections.unmodifiableMap(winners);
         }
     }
 }
