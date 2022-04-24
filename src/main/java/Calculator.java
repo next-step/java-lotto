@@ -1,15 +1,15 @@
+import Operator.Operator;
+
 import java.util.ArrayDeque;
-import java.util.Arrays;
 import java.util.Queue;
-import java.util.Stack;
 
 public class Calculator {
-    private static Character operatorsArr[] = { '+', '-', '*', '/' };
+    private static final String space = " ";
     /**
      * 예를 들어 2 + 3 * 4 / 2와 같은 문자열을 입력할 경우 2 + 3 * 4 / 2 실행 결과인 10을 출력해야 한다.
      */
     public static int play(String expression) {
-        String[] partial = expression.split(" ");
+        String[] partial = expression.split(space);
         if (isEmpty(partial)) {
             throw new IllegalArgumentException("입력값이 null이거나 빈 공백문자 입니다.");
         }
@@ -18,8 +18,8 @@ public class Calculator {
         int sum = Character.getNumericValue(queue.poll());
         while( !queue.isEmpty() ){
             Character input = queue.poll();
-            isValidOperator(input);
-            sum = getSumByOperator(queue, sum, input);
+            Operator.isValid(input);
+            sum = calculateByOperator(queue, sum, input);
         }
         return sum;
     }
@@ -40,28 +40,29 @@ public class Calculator {
         return queue;
     }
 
-    private static int getSumByOperator(Queue<Character> queue, int sum, Character input) {
+    private static int calculateByOperator(Queue<Character> queue, int sum, Character input) {
         Character number = queue.poll();
 
-        if ( input == '+' ) {
+        if ( Operator.check(input) == Operator.PLUS ) {
             sum += Character.getNumericValue(number);
         }
-        if ( input == '-' ) {
+        if ( Operator.check(input) == Operator.MINUS ) {
             sum -= Character.getNumericValue(number);
         }
-        if ( input == '*' ) {
+        if ( Operator.check(input) == Operator.MULTIPLY ) {
             sum *= Character.getNumericValue(number);
         }
-        if ( input == '/' ) {
-            sum /= Character.getNumericValue(number);
+        if ( Operator.check(input) == Operator.DIVIDE && isNotZero(number) ) {
+            int intNumber = Character.getNumericValue(number);
+            if(isNotZero(intNumber)){
+                throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+            }
+            sum /= Character.getNumericValue(intNumber);
         }
         return sum;
     }
 
-    private static void isValidOperator(Character input) {
-        boolean retval = Arrays.asList(operatorsArr).contains(input);
-        if( !retval ){
-            throw new IllegalArgumentException("사칙연산 기호가 아닙니다.");
-        }
+    private static boolean isNotZero(int number) {
+        return number != 0;
     }
 }
