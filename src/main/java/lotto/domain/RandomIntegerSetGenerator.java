@@ -3,8 +3,9 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
-public class RandomIntegerListGenerator {
+public class RandomIntegerSetGenerator {
 
   private static final int MIN_NUMBER = 1;
   private static final int MAX_NUMBER = 45;
@@ -18,13 +19,11 @@ public class RandomIntegerListGenerator {
     }
   }
 
-  private RandomIntegerListGenerator() {
+  private RandomIntegerSetGenerator() {
   }
 
-  public static List<Integer> getRandomIntegers() {
+  public static Set<Integer> getRandomIntegers() {
     Collections.shuffle(BASE_NUMBERS);
-    List<Integer> picked = BASE_NUMBERS.subList(START_INDEX, LAST_INDEX);
-    Collections.sort(picked);
-    return picked;
+    return Set.copyOf(BASE_NUMBERS.subList(START_INDEX, LAST_INDEX));
   }
 }

@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -9,21 +9,21 @@ public class Lotto {
   private static final int LOTTO_SIZE = 6;
   private static final String INVALID_SIZE_MESSAGE = "하나의 로또는 중복되지 않은 6개의 숫자를 가져야합니다.";
 
-  private final List<LottoNumber> values;
+  private final Set<LottoNumber> values;
 
-  public Lotto(List<LottoNumber> values) {
+  public Lotto(Set<LottoNumber> values) {
     validate(values);
     this.values = values;
   }
 
-  public static Lotto createLotto(List<Integer> values) {
-    List<LottoNumber> lottoNumbers = values.stream()
+  public static Lotto createLotto(Set<Integer> values) {
+    Set<LottoNumber> lottoNumbers = values.stream()
         .map(LottoNumber::new)
-        .collect(Collectors.toList());
+        .collect(Collectors.toSet());
     return new Lotto(lottoNumbers);
   }
 
-  private void validate(List<LottoNumber> values) {
+  private void validate(Set<LottoNumber> values) {
     if (values.size() != LOTTO_SIZE) {
       throw new IllegalArgumentException(INVALID_SIZE_MESSAGE);
     }
