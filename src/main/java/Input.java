@@ -1,8 +1,8 @@
-public class InputNumber {
+public class Input {
 
     private String input;
 
-    public InputNumber(String input) {
+    public Input(String input) {
         validation(input);
         this.input = input;
     }
