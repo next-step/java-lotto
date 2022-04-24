@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum Rank {
 
@@ -31,11 +32,9 @@ public enum Rank {
                 .orElseThrow(() -> new IllegalArgumentException("0 ~ 6이외의 matchCount 는 발생할 수 없습니다."));
     }
 
-    public int getMatchCount() {
-        return matchCount;
-    }
-
-    public int getWinnings() {
-        return winnings;
+    public static int findTotalWinnings(List<Rank> ranks) {
+        return ranks.stream()
+                .mapToInt(rank -> rank.winnings)
+                .sum();
     }
 }
