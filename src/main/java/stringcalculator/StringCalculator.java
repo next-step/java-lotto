@@ -23,7 +23,7 @@ public class StringCalculator {
 
     private void calculate(String character) {
         if (isNumber(character)) {
-            pushOrOperate(character);
+            push(character);
         }
         if (isOperator(character)) {
             operators.push(character);
@@ -34,14 +34,14 @@ public class StringCalculator {
         return NUMBER_PATTERN.matcher(character).matches();
     }
 
-    private void pushOrOperate(String character) {
+    private void push(String character) {
         if (operators.isEmpty()) {
             numbers.push(Integer.parseInt(character));
         }
         if (!operators.isEmpty()) {
             Integer previous = numbers.pop();
             String operator = operators.pop();
-            operate(character, previous, operator);
+            numbers.push(operate(character, previous, operator));
         }
     }
 
@@ -49,25 +49,20 @@ public class StringCalculator {
         return !isNumber(character);
     }
 
-    private void operate(String character, Integer previous, String operator) {
+    private int operate(String character, Integer previous, String operator) {
         int current = Integer.parseInt(character);
-        switch (operator) {
-            case "+":
-                numbers.push(previous + current);
-                break;
-            case "-":
-                numbers.push(previous - current);
-                break;
-            case "*":
-                numbers.push(previous * current);
-                break;
-            case "/":
-                validateNumbers(previous, current);
-                validateRemainder(previous % current);
-                numbers.push(previous / current);
-            default:
-                break;
+        if (operator.equals("+")) {
+            return previous + current;
         }
+        if (operator.equals("-")) {
+            return previous - current;
+        }
+        if (operator.equals("*")) {
+            return previous * current;
+        }
+        validateNumbers(previous, current);
+        validateRemainder(previous % current);
+        return previous / current;
     }
 
     private void validateNumbers(int previous, int current) {
