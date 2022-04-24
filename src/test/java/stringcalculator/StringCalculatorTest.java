@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
+import static stringcalculator.ExceptionCode.*;
 
 class StringCalculatorTest {
     private StringCalculator stringCalculator;
@@ -29,16 +30,16 @@ class StringCalculatorTest {
     @ValueSource(strings = {"2 / 3"})
     void remainderIsNotZeroGiven_ThrowException(String input) {
         assertThatThrownBy(() -> stringCalculator.calculate(new Equation(input)))
-                .isInstanceOf(IllegalStateException.class)
-                .hasMessage(ExceptionMessage.DIVIDE_RESULT_SHOULD_BE_INTEGER.getMessage());
+                .isInstanceOf(CalculatorException.class)
+                .hasMessage(DIVIDE_RESULT_SHOULD_BE_INTEGER.getMessage());
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"0 / 3", "3 / 0"})
     void numberIsZeroWhenDividingGiven_ThrowException(String input) {
         assertThatThrownBy(() -> stringCalculator.calculate(new Equation(input)))
-                .isInstanceOf(IllegalStateException.class)
-                .hasMessage(ExceptionMessage.NUMBER_SHOULD_NOT_BE_ZERO_WHEN_DIVIDING.getMessage());
+                .isInstanceOf(CalculatorException.class)
+                .hasMessage(NUMBER_SHOULD_NOT_BE_ZERO_WHEN_DIVIDING.getMessage());
     }
 
     @ParameterizedTest

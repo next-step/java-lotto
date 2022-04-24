@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
-import static stringcalculator.ExceptionMessage.*;
+import static stringcalculator.ExceptionCode.*;
 
 public class StringCalculator {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+");
@@ -18,8 +18,7 @@ public class StringCalculator {
             calculate(character);
         }
 
-        Integer result = numbers.pop();
-        return result;
+        return numbers.pop();
     }
 
     private void calculate(String character) {
@@ -73,13 +72,13 @@ public class StringCalculator {
 
     private void validateNumbers(int previous, int current) {
         if (previous == 0 || current == 0) {
-            throw new IllegalStateException(NUMBER_SHOULD_NOT_BE_ZERO_WHEN_DIVIDING.getMessage());
+            throw new CalculatorException(NUMBER_SHOULD_NOT_BE_ZERO_WHEN_DIVIDING);
         }
     }
 
     private void validateRemainder(int remainder) {
         if (remainder != 0) {
-            throw new IllegalStateException(DIVIDE_RESULT_SHOULD_BE_INTEGER.getMessage());
+            throw new CalculatorException(DIVIDE_RESULT_SHOULD_BE_INTEGER);
         }
     }
 }

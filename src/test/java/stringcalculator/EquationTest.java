@@ -10,7 +10,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static stringcalculator.ExceptionMessage.WHITESPACE_REQUIRED_BETWEEN_CHARACTER;
+import static stringcalculator.ExceptionCode.*;
+import static stringcalculator.ExceptionCode.WHITESPACE_REQUIRED_BETWEEN_CHARACTER;
 
 class EquationTest {
 
@@ -19,8 +20,8 @@ class EquationTest {
     @ValueSource(strings = {"  "})
     void inputIsNullOrBlankGiven_throwException(String input) {
         assertThatThrownBy(() -> new Equation(input))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ExceptionMessage.INPUT_SHOULD_NOT_NULL_OR_BLANK.getMessage());
+                .isInstanceOf(CalculatorException.class)
+                .hasMessage(INPUT_SHOULD_NOT_NULL_OR_BLANK.getMessage());
     }
 
     @DisplayName("문자 사이에 공백이 없을 경우 Exception")
@@ -28,7 +29,7 @@ class EquationTest {
     @ValueSource(strings = {"1+2", "1 +2", "-1 + 2"})
     void NoWhitespaceBetweenElementsGiven_throwException(String input) {
         assertThatThrownBy(() -> new Equation(input))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(CalculatorException.class)
                 .hasMessage(WHITESPACE_REQUIRED_BETWEEN_CHARACTER.getMessage());
     }
 
