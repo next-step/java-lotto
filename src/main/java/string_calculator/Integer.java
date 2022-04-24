@@ -10,6 +10,13 @@ public class Integer implements Value  {
     }
 
     @Override
+    public String toString() {
+        return "Integer{" +
+                "value=" + value +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -35,7 +42,11 @@ public class Integer implements Value  {
     }
 
     public Integer divide(Integer operand) {
-        return new Integer(this.value / operand.value);
+        Boolean isDividable =  this.modulo(operand).value == 0;
+        if (isDividable) {
+            return new Integer(this.value / operand.value);
+        }
+        throw new IllegalArgumentException("Can't divide.");
     }
 
     public Integer modulo(Integer operand) {

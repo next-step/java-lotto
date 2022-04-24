@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ArithmeticTest {
     @Test
@@ -39,5 +40,13 @@ public class ArithmeticTest {
         }};
         Arithmetic a = new Arithmetic();
         assertThat(a.computes(values)).isEqualTo(new Integer(1));
+    }
+
+    @Test
+    void shouldThrowErrorIfResultIsNotInteger() {
+        InputView i = new InputView();
+        i.parse("3 / 2");
+        Arithmetic a = new Arithmetic();
+        assertThatThrownBy(()->a.computes(i.values)).isInstanceOf(IllegalArgumentException.class);
     }
 }
