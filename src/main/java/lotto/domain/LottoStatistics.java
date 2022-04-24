@@ -22,8 +22,4 @@ public class LottoStatistics {
     public float calculateYield(LottoWinner winner, int price) {
         return winner.calculateYield(winner, price);
     }
-
-    public float calculateYield(List<Lotto> lottos, Lotto previousLotto, int price) {
-        return winner.calculateYield(lottos, previousLotto, price);
-    }
 }

@@ -38,17 +38,6 @@ public class LottoWinner {
         return (float) profit / price;
     }
 
-    public float calculateYield(List<Lotto> lottos, Lotto previousLotto, int price) {
-        calculateWinner(lottos, previousLotto);
-
-        int profit = 0;
-        for (Map.Entry<LottoWinnerType, Integer> winner : winners.entrySet()) {
-            profit = calculateProfit(profit, winner.getKey().getCountOfDuplicate(), winner.getValue());
-        }
-
-        return (float) profit / price;
-    }
-
     private int calculateProfit(int profit, int countOfDuplicate, int countOfLotto) {
         return profit + LottoWinnerType.prize(countOfDuplicate) * countOfLotto;
     }
