@@ -18,4 +18,10 @@ public class CalculatorTest {
     void minus() {
         assertThat(Calculator.minus(1, 2)).isEqualTo(-1);
     }
+
+    @Test
+    @DisplayName("곱셈을 할때 1과 2값을 넣으면 2를 반환한다.")
+    void multiply() {
+        assertThat(Calculator.multiply(1, 2)).isEqualTo(2);
+    }
 }

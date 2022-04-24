@@ -9,4 +9,8 @@ public class Calculator {
     public static int minus(int num, int num2) {
         return num - num2;
     }
+
+    public static int multiply(int num, int num2) {
+        return num * num2;
+    }
 }
