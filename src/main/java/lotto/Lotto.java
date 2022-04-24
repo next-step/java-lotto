@@ -2,6 +2,8 @@ package lotto;
 
 import java.util.*;
 
+import static java.util.Comparator.*;
+
 public class Lotto {
 
     private static final int IS_BONUS_NUMBER_COUNT = 5;
@@ -20,9 +22,10 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return "Lotto{" +
-                "lottoNumberList=" + lottoNumberList +
-                '}';
+        List<LottoNumber> myLotto = new ArrayList<>(lottoNumberList);
+        myLotto.sort(comparingInt(LottoNumber::getLottoNumber));
+
+        return "MyLotto : " + myLotto;
     }
 
     @Override

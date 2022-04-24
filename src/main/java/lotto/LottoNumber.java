@@ -40,4 +40,8 @@ public class LottoNumber {
     public int hashCode() {
         return Objects.hash(lottoNumber);
     }
+
+    public int getLottoNumber() {
+        return lottoNumber;
+    }
 }
