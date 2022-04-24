@@ -1,10 +1,15 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Input {
 
     private String input;
+    private List<String> values;
 
     public Input(String input) {
         validation(input);
         this.input = input;
+        this.values = new ArrayList<>();
     }
 
     private void validation(String input) {

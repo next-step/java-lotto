@@ -23,8 +23,4 @@ public class AdditionTest {
         Addition addition = new Addition();
         Assertions.assertThat(addition.sum(1, 3)).isEqualTo(4);
     }
-
-    @Test
-    void 뺄셈() {
-    }
 }
