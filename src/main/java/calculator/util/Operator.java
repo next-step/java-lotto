@@ -7,19 +7,21 @@ public abstract class Operator {
     abstract BinaryOperator<Integer> execute();
 
     public static BinaryOperator<Integer> operator(Symbol symbol) {
+        Operator operator = Addition.getInstance();
+
         if (symbol.equals(Symbol.SUBTRACTION)) {
-            return Operator.Subtraction.getInstance().execute();
+            operator = Subtraction.getInstance();
         }
 
         if (symbol.equals(Symbol.MULTIPLICATION)) {
-            return Operator.Multiplication.getInstance().execute();
+            operator = Multiplication.getInstance();
         }
 
         if (symbol.equals(Symbol.DIVISION)) {
-            return Operator.Division.getInstance().execute();
+            operator = Division.getInstance();
         }
 
-        return Operator.Addition.getInstance().execute();
+        return operator.execute();
     }
 
     private static class Addition extends Operator {
