@@ -1,11 +1,11 @@
 package me.devyonghee.lotto.controller;
 
-import me.devyonghee.lotto.model.LottoStore;
-import me.devyonghee.lotto.model.LottoTickets;
-import me.devyonghee.lotto.model.RandomGenerator;
+import me.devyonghee.common.StringSeparator;
+import me.devyonghee.lotto.model.*;
 import me.devyonghee.lotto.view.InputView;
 import me.devyonghee.lotto.view.ResultView;
-import me.devyonghee.lotto.view.dto.LottoTicketsResponse;
+import me.devyonghee.lotto.view.dto.LottosResponse;
+import me.devyonghee.lotto.view.dto.ScoreResponse;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -16,6 +16,8 @@ public final class LottoGame {
 
     private static final String NULL_INPUT_STREAM_ERROR_MESSAGE = "inputStream must not be null";
     private static final String NULL_OUTPUT_ERROR_MESSAGE = "output must not be null";
+    private static final String STRING_NUMBER_DELIMITER = ",";
+
     private final InputView inputView;
     private final ResultView resultView;
 
@@ -31,10 +33,12 @@ public final class LottoGame {
     }
 
     public void start() {
-        LottoTickets tickets = LottoStore.of(inputView.purchaseAmount(), RandomGenerator.getInstance()).lottoTickets();
-        resultView.printTickets(LottoTicketsResponse.from(tickets));
-        inputView.winnerNumbers();
-
+        Lottos lottos = LottoStore.of(inputView.purchaseAmount(), RandomGenerator.getInstance()).lottoTickets();
+        resultView.print(LottosResponse.from(lottos));
+        resultView.print(ScoreResponse.from(lottos.score(winner())));
     }
 
+    private Lotto winner() {
+        return WinnerLottoGenerator.from(StringSeparator.of(inputView.winnerNumbers(), STRING_NUMBER_DELIMITER)).lotto();
+    }
 }
