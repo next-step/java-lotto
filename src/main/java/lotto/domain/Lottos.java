@@ -13,6 +13,14 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public static Lottos createLottos(List<Lotto> manualLottos, List<Lotto> autoLottos) {
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.addAll(manualLottos);
+        lottos.addAll(autoLottos);
+        return new Lottos(lottos);
+    }
+
+
     public double earningRate(Lotto winningLotto, int bonusNumber) {
         return earnings(winningLotto, bonusNumber) / expense();
     }
