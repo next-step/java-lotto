@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public final class Guest {
@@ -15,6 +17,18 @@ public final class Guest {
     Store lotto = store.getProductsCount(Integer.parseInt(money.toString()));
     return Integer.parseInt(lotto.toString());
   }
+
+  public List<List<Integer>> haveLottoList() {
+    List<List<Integer>> lottoList = new ArrayList<>();
+    Store store = new Store();
+    int productCount = boughtLottoCount();
+    while (productCount-- != 0) {
+      lottoList.add(store.deliverLotto());
+    }
+
+    return lottoList;
+  }
+
 
   @Override
   public boolean equals(Object o) {

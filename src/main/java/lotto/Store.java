@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.List;
 import java.util.Objects;
 
 public final class Store {
@@ -17,6 +18,11 @@ public final class Store {
 
   public Store getProductsCount(Integer money) {
     return new Store(money / PRODUCT_PRICE);
+  }
+
+  public List<Integer> deliverLotto() {
+    LottoFactory factory = new LottoFactory();
+    return factory.apply();
   }
 
   @Override
