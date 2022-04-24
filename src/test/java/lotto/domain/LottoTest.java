@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class LottoTest {
 
-  @DisplayName("Integer 리스트를 받아 Lotto를 생성할 수 있다.")
+  @DisplayName("Integer Set을 받아 Lotto를 생성할 수 있다.")
   @Test
   void createLotto() {
     Set<Integer> integers = Set.of(1, 2, 3, 4, 5, 6);
