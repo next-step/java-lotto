@@ -1,28 +1,28 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Lotteries {
 
-    private static final int IS_BONUS_NUMBER_COUNT = 5;
-    private List<Integer> lottoNumbers;
+    List<Lotto> lottoList = new ArrayList<>();
 
-    public Lotteries(List<Integer> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public Lotteries(List<Lotto> lottoList) {
+        // TODO : 1장의 로또는 6개의 번호를 가지고 있어야 하며, 중복이 없어야 함. [정렬도 되어 있어야 해]
+        this.lottoList = lottoList;
     }
 
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotteries lotteries = (Lotteries) o;
+        return Objects.equals(lottoList, lotteries.lottoList);
     }
 
-    public boolean isMatchedNumber(Integer winningLottoNumber) {
-        return lottoNumbers.contains(winningLottoNumber);
-    }
-
-    public boolean isBonusNumberMatched(int matchCount, int bonusNumber) {
-        if (matchCount != IS_BONUS_NUMBER_COUNT) {
-            return false;
-        }
-        return lottoNumbers.contains(bonusNumber);
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoList);
     }
 }
