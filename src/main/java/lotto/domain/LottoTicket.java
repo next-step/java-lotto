@@ -67,8 +67,7 @@ public class LottoTicket {
 
     @Override
     public String toString() {
-        return "LottoTicket{" +
-            "lottoNumbers=" + lottoNumbers +
-            '}';
+        Collections.sort(lottoNumbers);
+        return lottoNumbers.toString();
     }
 }

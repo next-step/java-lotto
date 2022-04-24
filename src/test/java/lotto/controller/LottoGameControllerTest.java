@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import java.util.List;
 import lotto.domain.LottoResult;
+import lotto.domain.LottoResults;
 import lotto.domain.LottoTickets;
 import org.junit.jupiter.api.Test;
 
@@ -23,9 +24,9 @@ class LottoGameControllerTest {
     void analysisTest() {
         LottoTickets lottoTickets = lottoGame.createLottoTickets(3000);
 
-        List<LottoResult> lottoResults = lottoGame.analysisResult(lottoTickets, Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoResults lottoResults = lottoGame.analysisResult(lottoTickets, Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        assertThat(lottoResults).hasSize(3);
+        assertThat(lottoResults.size()).isEqualTo(3);
     }
 
 }

@@ -2,7 +2,7 @@ package lotto;
 
 import java.util.List;
 import lotto.controller.LottoGameController;
-import lotto.domain.LottoResult;
+import lotto.domain.LottoResults;
 import lotto.domain.LottoTickets;
 import lotto.view.CommandlineUserInterface;
 
@@ -18,7 +18,7 @@ public class LottoMainApp {
         cui.printLottoTickets(lottoTickets);
 
         List<Integer> winLottoNumber = cui.inputWinLottoNumber();
-        List<LottoResult> lottoResults = lottoGame.analysisResult(lottoTickets, winLottoNumber);
+        LottoResults lottoResults = lottoGame.analysisResult(lottoTickets, winLottoNumber);
 
         cui.print(lottoResults);
     }

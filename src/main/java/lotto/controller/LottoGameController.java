@@ -2,6 +2,7 @@ package lotto.controller;
 
 import java.util.List;
 import lotto.domain.LottoResult;
+import lotto.domain.LottoResults;
 import lotto.domain.LottoTickets;
 
 public class LottoGameController {
@@ -18,7 +19,7 @@ public class LottoGameController {
         return lottoTickets;
     }
 
-    public List<LottoResult> analysisResult(LottoTickets lottoTickets, List<Integer> winLottoNumber) {
-        return lottoTickets.findLottoResult(winLottoNumber);
+    public LottoResults analysisResult(LottoTickets lottoTickets, List<Integer> winLottoNumber) {
+        return new LottoResults(lottoTickets.findLottoResult(winLottoNumber));
     }
 }
