@@ -16,6 +16,7 @@ public class StringCalculator {
     public static int calculate(String input) {
         validate(input);
         List<String> inputs = split(input);
+        validate(inputs);
         return calculate(inputs);
     }
 
@@ -28,6 +29,15 @@ public class StringCalculator {
 
     private static List<String> split(String input) {
         return Arrays.asList(input.split(DELIMITER));
+    }
+
+    private static void validate(List<String> inputs) {
+        if (inputs.size() < 3) {
+            throw new IllegalArgumentException("입력값은 공백으로 구분하여 3개 이상이어야 합니다. inputs : " + inputs);
+        }
+        if (inputs.size() % 2 == 0) {
+            throw new IllegalArgumentException("입력값은 계산가능한 형태로 주어져야 합니다. inputs : " + inputs);
+        }
     }
 
     private static int calculate(List<String> inputs) {
