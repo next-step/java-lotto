@@ -39,8 +39,4 @@ public class Lottos {
   public String toString() {
     return values.stream().map(Lotto::toString).collect(Collectors.joining("\n"));
   }
-
-  public int checkMatchCount(Lotto lastWeekWinningLotto) {
-    return 0;
-  }
 }

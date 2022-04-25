@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class PurchaseAmount {
 
   private static final int LOTTO_PRICE = 1000;
@@ -14,6 +17,11 @@ public class PurchaseAmount {
 
   public int getLottoCount() {
     return value / 1000;
+  }
+
+  public BigDecimal getYield(int other) {
+    return BigDecimal.valueOf(other)
+        .divide(BigDecimal.valueOf(value), 2, RoundingMode.HALF_EVEN);
   }
 
   private void validate(int value) {
