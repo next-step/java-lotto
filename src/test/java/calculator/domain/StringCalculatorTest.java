@@ -3,6 +3,7 @@ package calculator.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StringCalculatorTest {
@@ -19,5 +20,11 @@ class StringCalculatorTest {
     void nullValidate() {
         assertThatThrownBy(() -> StringCalculator.calculate(null))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("'2 + 3 * 4 / 2' 를 입력하면 10을 반환한다.")
+    void calculate() {
+        assertThat(StringCalculator.calculate("2 + 3 * 4 / 2")).isEqualTo(10);
     }
 }

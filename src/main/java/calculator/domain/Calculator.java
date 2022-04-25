@@ -10,6 +10,10 @@ public class Calculator {
     private int initialNumber;
     private Operation operation;
 
+    public Calculator(String value) {
+        this(Integer.parseInt(value));
+    }
+
     public Calculator(int initialNumber) {
         this(initialNumber, new AddOperation());
     }
