@@ -1,25 +1,24 @@
 package stringcalculator;
 
 import java.util.List;
-import stringcalculator.exception.IllegalNumberException;
 
 public class StringCalculator {
 
   private static final String BASIC_SPLIT_REGEX = " ";
-  private static final String NUMBER_RANGE_REGEX = "^-?\\d+$";
 
-  public int calculate(String expression) {
+  public Operand calculate(String expression) {
     validateNullOrEmptyValue(expression);
 
     List<String> elements = splitCalculation(expression);
 
-    int operand1 = convertToInt(elements.get(0));
+    Operand operand1 = new Operand(elements.get(0));
     for (int i = 1; i < elements.size(); i += 2) {
       String operator = elements.get(i);
-      int operand2 = convertToInt(elements.get(i + 1));
+      Operand operand2 = new Operand(elements.get(i + 1));
 
-      operand1 = Operator.findOperator(operator)
-          .calc(operand1, operand2);
+      int operationResult = Operator.findOperator(operator)
+          .calc(operand1.getValue(), operand2.getValue());
+      operand1.applyCalculationResult(operationResult);
     }
     return operand1;
   }
@@ -32,16 +31,5 @@ public class StringCalculator {
 
   private List<String> splitCalculation(String expression) {
     return List.of(expression.split(BASIC_SPLIT_REGEX));
-  }
-
-  private int convertToInt(String value) {
-    validateOperand(value);
-    return Integer.parseInt(value);
-  }
-
-  public void validateOperand(String value) {
-    if (!value.matches(NUMBER_RANGE_REGEX)) {
-      throw new IllegalNumberException(value);
-    }
   }
 }
