@@ -1,8 +1,9 @@
 package calculator;
 
-import calculator.controller.Calculator;
-import calculator.model.Formula;
+import calculator.model.Number;
+import calculator.util.Calculator;
 import calculator.view.InputView;
+import calculator.view.ResultView;
 
 public class CalculatorApplication {
     public static void main(String[] args) {
@@ -10,8 +11,8 @@ public class CalculatorApplication {
     }
 
     private void run(String[] args) {
-        Formula formula = InputView.getFormula();
-        Calculator calculator = new Calculator();
-        calculator.calculate(formula);
+        String command = InputView.getCommand();
+        Number result = Calculator.calculate(command);
+        ResultView.print(result);
     }
 }

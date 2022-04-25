@@ -5,7 +5,7 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void print(String message) {
-        System.out.println(message);
+    public static <T> void print(T t) {
+        System.out.println(t.toString());
     }
 }

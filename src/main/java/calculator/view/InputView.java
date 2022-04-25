@@ -1,9 +1,5 @@
 package calculator.view;
 
-import calculator.model.Formula;
-import calculator.util.Splitter;
-
-import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -13,14 +9,7 @@ public class InputView {
     private InputView() {
     }
 
-    public static Formula getFormula() {
-        String input = inputStatement();
-        List<String> numberAndOperator = Splitter.split(input);
-
-        return new Formula(numberAndOperator);
-    }
-
-    public static String inputStatement() {
+    public static String getCommand() {
         return SCANNER.nextLine();
     }
 }

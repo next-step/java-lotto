@@ -1,10 +1,12 @@
 package calculator.util;
 
+import calculator.model.Symbol;
+
 import java.util.function.BinaryOperator;
 
 public abstract class Operator {
 
-    abstract BinaryOperator<Integer> execute();
+    abstract BinaryOperator<Integer> operate();
 
     public static BinaryOperator<Integer> operator(Symbol symbol) {
         Operator operator = Addition.getInstance();
@@ -21,7 +23,7 @@ public abstract class Operator {
             operator = Division.getInstance();
         }
 
-        return operator.execute();
+        return operator.operate();
     }
 
     private static class Addition extends Operator {
@@ -40,7 +42,7 @@ public abstract class Operator {
         }
 
         @Override
-        BinaryOperator<Integer> execute() {
+        BinaryOperator<Integer> operate() {
             return Math::addExact;
         }
     }
@@ -61,7 +63,7 @@ public abstract class Operator {
         }
 
         @Override
-        BinaryOperator<Integer> execute() {
+        BinaryOperator<Integer> operate() {
             return Math::subtractExact;
         }
     }
@@ -82,7 +84,7 @@ public abstract class Operator {
         }
 
         @Override
-        BinaryOperator<Integer> execute() {
+        BinaryOperator<Integer> operate() {
             return Math::multiplyExact;
         }
     }
@@ -103,12 +105,8 @@ public abstract class Operator {
         }
 
         @Override
-        BinaryOperator<Integer> execute() {
+        BinaryOperator<Integer> operate() {
             return Math::floorDiv;
         }
-    }
-
-    public enum Symbol {
-        ADDITION, SUBTRACTION, MULTIPLICATION, DIVISION
     }
 }

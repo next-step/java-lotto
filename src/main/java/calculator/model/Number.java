@@ -1,6 +1,6 @@
 package calculator.model;
 
-import calculator.util.IntConverter;
+import calculator.util.IntParser;
 import calculator.util.Operator;
 
 import java.util.Objects;
@@ -12,12 +12,8 @@ public class Number {
         this(0);
     }
 
-    public Number(Number number) {
-        this(number.value);
-    }
-
     public Number(String value) {
-        this(IntConverter.convert(value));
+        this(IntParser.parse(value));
     }
 
     public Number(int value) {
@@ -25,7 +21,7 @@ public class Number {
         this.value = value;
     }
 
-    public Number calculate(Operator.Symbol symbol, Number right) {
+    public Number calculate(Symbol symbol, Number right) {
         int result = Operator.operator(symbol).apply(this.value, right.value);
         return new Number(result);
     }
