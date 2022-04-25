@@ -10,13 +10,13 @@ class CalculatorTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
                     String input = "";
-                    new Input(input);
+                    new Calculator(input);
                 });
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
                     String input = null;
-                    new Input(input);
+                    new Calculator(input);
                 });
     }
 
@@ -36,5 +36,17 @@ class CalculatorTest {
     void 곱셈() {
         Multiplication multiplication = new Multiplication();
         assertThat(multiplication.multiply(2, 2)).isEqualTo(4);
+    }
+
+    @Test
+    void 나눗셈() {
+        Division division = new Division();
+        assertThat(division.division(4, 2)).isEqualTo(2);
+    }
+
+    @Test
+    void 숫자와_연산자를_구별한다() {
+        Calculator operation = new Calculator("1 + 2 - 1 * 2 / 2");
+        assertThat(operation.operation()).isEqualTo(2);
     }
 }
