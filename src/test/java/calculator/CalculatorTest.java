@@ -2,6 +2,7 @@ package calculator;
 
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class CalculatorTest {
 
@@ -27,5 +28,10 @@ class CalculatorTest {
     void divide_나눗셈() {
         int result = Calculator.DIVIDE.calculate(10, 2);
         assertThat(result).isEqualTo(5);
+    }
+
+    @Test
+    void divide_0으로_나눌수_없다() {
+        assertThatThrownBy(() -> Calculator.DIVIDE.calculate(10, 0)).isInstanceOf(ArithmeticException.class);
     }
 }
