@@ -6,10 +6,13 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumbers {
+    private static final int LOTTO_NUMBERS_START_INCLUSIVE = 0;
+    private static final int LOTTO_NUMBERS_SIZE = 6;
+
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers() {
-        this.lottoNumbers = IntStream.range(0, 6)
+        this.lottoNumbers = IntStream.range(LOTTO_NUMBERS_START_INCLUSIVE, LOTTO_NUMBERS_SIZE)
                 .mapToObj(it -> new LottoNumber())
                 .collect(Collectors.toList());
     }
