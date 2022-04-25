@@ -2,25 +2,25 @@ package lotto.domain;
 
 import lotto.exception.InvalidLottoException;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
-public class Lotto {
+public class LottoTicket {
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    public LottoTicket(Set<LottoNumber> lottoNumbers) {
         validLotto(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void validLotto(List<LottoNumber> lottoNumbers) {
+    private void validLotto(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != 6) {
             throw new InvalidLottoException();
         }
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 
@@ -28,7 +28,7 @@ public class Lotto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Lotto lotto = (Lotto) o;
+        LottoTicket lotto = (LottoTicket) o;
         return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
 
