@@ -20,7 +20,7 @@ class SymbolTest {
                 () -> assertThat(Symbol.convert("/")).isEqualTo(Symbol.DIVISION));
     }
 
-    @ParameterizedTest(name = "산술 기호가 아닌 경우 예외 처리")
+    @ParameterizedTest(name = "산술 기호가 아닌 경우 예외 처리 : {0}")
     @ValueSource(strings = {".", ",", "0", "a", "!"})
     void convertException(String value) {
         assertThatThrownBy(() -> Symbol.convert(value)).isInstanceOf(IllegalArgumentException.class);

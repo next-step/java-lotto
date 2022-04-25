@@ -29,13 +29,14 @@ public class NumberTest {
         assertThatThrownBy(() -> new Number(-1)).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @ParameterizedTest(name = "숫자가 아닌 문자열이 인자로 들어온 경우 예외 처리")
+    @ParameterizedTest(name = "숫자가 아닌 문자열이 인자로 들어온 경우 예외 처리 : {0}")
     @ValueSource(strings = {"", "`"})
     void isNotNumberException(String value) {
         assertThatThrownBy(() -> new Number(value)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
+    @DisplayName("Number 산칙연산")
     void calculate() {
         Number left = new Number(2);
         Number right = new Number(1);
