@@ -20,7 +20,7 @@ public final class Store {
     return new Store(money / PRODUCT_PRICE);
   }
 
-  public List<Integer> deliverLotto() {
+  public Product deliverLotto() {
     LottoFactory factory = new LottoFactory();
     return factory.apply();
   }

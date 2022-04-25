@@ -2,23 +2,20 @@ package lotto;
 
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Objects;
 
-public class Statistics {
+public final class Statistics {
 
-  public int coincideLotto(int expectCount, List<List<Integer>> allLotto,
-      List<Integer> winNumbers) {
+  private final int expectCount;
+
+  public Statistics(int expectCount) {
+    this.expectCount = expectCount;
+  }
+
+  public int coincideLotto(List<Product> allProducts, List<Integer> winNumbers) {
     int result = 0;
-    for (List<Integer> lotto : allLotto) {
-      int count = 0;
-      for (Integer winNumber : winNumbers) {
-        if (lotto.contains(winNumber)) {
-          count++;
-        }
-        if (count == expectCount) {
-          result++;
-          break;
-        }
-      }
+    for (Product product : allProducts) {
+      result += LottoConfirm.increaseProductNumber(expectCount,  product, winNumbers);
     }
     return result;
   }
@@ -28,6 +25,23 @@ public class Statistics {
   }
 
   public double yield(int winningAmount, int haveMoney) {
-    return Math.floor((double) winningAmount / haveMoney * 100)/100.0;
+    return Math.floor((double) winningAmount / haveMoney * 100) / 100.0;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Statistics that = (Statistics) o;
+    return expectCount == that.expectCount;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(expectCount);
   }
 }
