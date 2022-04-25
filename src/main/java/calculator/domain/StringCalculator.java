@@ -15,12 +15,12 @@ public class StringCalculator {
         String[] numbersAndSigns = value.split(SEPARATOR);
         Calculator calculator = new Calculator(numbersAndSigns[INITIAL_NUMBER_IDX]);
 
-        int result = 0;
+        Number result = null;
         for (int i = 1; i < numbersAndSigns.length; i=i+2) {
             calculator.changeOperation(OperationConst.findBySign(numbersAndSigns[i]).operation());
-            result = calculator.calculate(Integer.parseInt(numbersAndSigns[i+1]));
+            result = calculator.calculate(new Number(numbersAndSigns[i+1]));
         }
-        return result;
+        return result.toInt();
     }
 
     private static boolean isNullOrBlank(String value) {

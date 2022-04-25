@@ -7,29 +7,25 @@ import java.util.Objects;
 
 public class Calculator {
 
-    private int initialNumber;
+    private Number initialNumber;
     private Operation operation;
 
     public Calculator(String value) {
-        this(Integer.parseInt(value));
-    }
-
-    public Calculator(int initialNumber) {
-        this(initialNumber, new AddOperation());
+        this(new Number(value), new AddOperation());
     }
 
     public Calculator(Operation operation) {
-        this(0, operation);
+        this(new Number(), operation);
     }
 
-    public Calculator(int initialNumber, Operation operation) {
+    public Calculator(Number initialNumber, Operation operation) {
         this.initialNumber = initialNumber;
         this.operation = operation;
     }
 
-    public int calculate(int number) {
-        this.initialNumber = operation.operate(initialNumber, number);
-        return this.initialNumber;
+    public Number calculate(Number number) {
+        initialNumber.calculate(operation, number);
+        return initialNumber;
     }
 
     public void changeOperation(Operation operation) {
@@ -41,7 +37,7 @@ public class Calculator {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Calculator that = (Calculator) o;
-        return initialNumber == that.initialNumber && Objects.equals(operation, that.operation);
+        return Objects.equals(initialNumber, that.initialNumber) && Objects.equals(operation, that.operation);
     }
 
     @Override
