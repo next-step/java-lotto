@@ -8,12 +8,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class ArithmeticTest {
-//    @Test
-//    void add() {
-//        assertThat(Arithmetic.add(new Integer(1), new Integer(2))).isEqualTo(new Integer(3));
-//    }
-
+public class CalculatorTest {
     @Test
     void handlePlusOperator() {
         List<Value> values = new ArrayList<Value>() {{
@@ -21,7 +16,7 @@ public class ArithmeticTest {
             add(Operator.PLUS);
             add(new Integer(2));
         }};
-        Arithmetic a = new Arithmetic();
+        Calculator a = new Calculator();
         assertThat(a.computes(values)).isEqualTo(new Integer(3));
     }
 
@@ -38,7 +33,7 @@ public class ArithmeticTest {
             add(Operator.MODULO);
             add(new Integer(5));
         }};
-        Arithmetic a = new Arithmetic();
+        Calculator a = new Calculator();
         assertThat(a.computes(values)).isEqualTo(new Integer(1));
     }
 
@@ -46,7 +41,7 @@ public class ArithmeticTest {
     void shouldThrowErrorIfResultIsNotInteger() {
         Parser p = new Parser();
         p.parse("3 / 2");
-        Arithmetic a = new Arithmetic();
+        Calculator a = new Calculator();
         assertThatThrownBy(() -> a.computes(p.values)).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -54,7 +49,7 @@ public class ArithmeticTest {
     void shouldThrowErrorIfDividedByZero() {
         Parser p = new Parser();
         p.parse("3 / 0");
-        Arithmetic a = new Arithmetic();
+        Calculator a = new Calculator();
         assertThatThrownBy(() -> a.computes(p.values)).isInstanceOf(ArithmeticException.class);
     }
 
@@ -62,7 +57,7 @@ public class ArithmeticTest {
     void shouldReturnCollectAnswer() {
         Parser p = new Parser();
         p.parse("2 + 3 * 4 / 2");
-        Arithmetic a = new Arithmetic();
+        Calculator a = new Calculator();
         assertThat(a.computes(p.values)).isEqualTo(new Integer(10));
     }
 }

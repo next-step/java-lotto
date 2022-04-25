@@ -2,7 +2,7 @@ package string_calculator;
 
 import java.util.List;
 
-public class Arithmetic {
+public class Calculator {
     private Integer accumulator;
 
     public Integer computes(List<Value> values) {
@@ -27,8 +27,4 @@ public class Arithmetic {
     private void compute(Integer acc, Operator operator, Integer operand) {
         this.accumulator = operator.compute(acc, operator, operand);
     }
-
-//    public static Integer add(Integer i, Integer i1) {
-//        return i.plus(i1);
-//    }
 }

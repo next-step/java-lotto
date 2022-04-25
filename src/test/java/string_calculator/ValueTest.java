@@ -16,7 +16,6 @@ public class ValueTest {
     }
 
     @ParameterizedTest
-//    @CsvSource(value = {"!:false", "@:false", "#:false", "$:false", "%:true", "^:true", "&:false", "*:true", "-:true", "+:true"}, delimiter = ':')
     @ValueSource(strings = {"!", "@", "#", "$", "^", "&"})
     void wrongOperator(String input) {
         Parser p = new Parser();
