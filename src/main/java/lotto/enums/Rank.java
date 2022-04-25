@@ -1,8 +1,8 @@
 package lotto.enums;
 
 import java.util.List;
-import lotto.LottoConfirm;
-import lotto.Product;
+import lotto.model.LottoConfirm;
+import lotto.model.Product;
 
 public enum Rank {
   THREE(3, 5_000),

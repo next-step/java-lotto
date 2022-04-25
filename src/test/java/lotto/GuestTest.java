@@ -2,7 +2,8 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
+import lotto.model.Guest;
+import lotto.model.Store;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
