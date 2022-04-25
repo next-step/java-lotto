@@ -8,7 +8,8 @@ import java.util.stream.Collectors;
 public final class Lottos {
 
     private static final String NULL_TICKETS_ERROR_MESSAGE = "tickets must not be null";
-    private static final String NULL_WINNER_LOTTO_ERROR_MESSAGE = "winner lotto must not be null";
+    private static final String NULL_WINNER_LOTTO_ERROR_MESSAGE = "lotto must not be null";
+    private static final String NULL_WINNER_BONUS_NUMBER_ERROR_MESSAGE = "bonus number must not be null";
 
     private final List<Lotto> lottos;
 
@@ -29,10 +30,11 @@ public final class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public Score score(Lotto winner) {
-        Objects.requireNonNull(winner, NULL_WINNER_LOTTO_ERROR_MESSAGE);
+    public Score score(Lotto target, LottoNumber bonusNumber) {
+        Objects.requireNonNull(target, NULL_WINNER_LOTTO_ERROR_MESSAGE);
+        Objects.requireNonNull(bonusNumber, NULL_WINNER_BONUS_NUMBER_ERROR_MESSAGE);
         return Score.from(lottos.stream()
-                .map(lotto -> lotto.rank(winner))
+                .map(lotto -> lotto.rank(target, bonusNumber))
                 .collect(Collectors.toList()));
     }
 }

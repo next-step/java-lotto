@@ -14,7 +14,7 @@ class LottosTest {
     @Test
     @DisplayName("하나의 로또로 로또들 정상 생성")
     void instance() {
-        assertThatNoException().isThrownBy(() -> Lottos.from(Collections.singletonList(LottoTest.ONE_TO_SIX_LOTTO)));
+        assertThatNoException().isThrownBy(() -> Lottos.from(Collections.singletonList(Lotto.from(LottoNumbersTest.ONE_TO_SIX_NUMBERS))));
     }
 
     @Test
@@ -27,7 +27,7 @@ class LottosTest {
     @DisplayName("주어진 로또들 그대로 반환")
     void list() {
         //given
-        List<Lotto> lottos = Collections.singletonList(LottoTest.ONE_TO_SIX_LOTTO);
+        List<Lotto> lottos = Collections.singletonList(Lotto.from(LottoNumbersTest.ONE_TO_SIX_NUMBERS));
         //when, then
         assertThat(Lottos.from(lottos).list()).isEqualTo(lottos);
     }
@@ -36,8 +36,8 @@ class LottosTest {
     @DisplayName("점수")
     void score() {
         //given, when
-        Score score = Lottos.from(Collections.singletonList(LottoTest.ONE_TO_SIX_LOTTO))
-                .score(LottoTest.ONE_TO_SIX_LOTTO);
+        Score score = Lottos.from(Collections.singletonList(Lotto.from(LottoNumbersTest.ONE_TO_SIX_NUMBERS)))
+                .score(Lotto.from(LottoNumbersTest.ONE_TO_SIX_NUMBERS), LottoNumber.from(7));
         //then
         assertThat(score.count(Rank.FIRST)).isOne();
     }

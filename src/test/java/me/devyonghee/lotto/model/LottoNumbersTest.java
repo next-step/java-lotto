@@ -8,11 +8,17 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("로또 번호들")
 class LottoNumbersTest {
+
+    public static final LottoNumbers ONE_TO_SIX_NUMBERS = LottoNumbers.from(
+            IntStream.rangeClosed(1, 6).mapToObj(LottoNumber::from).collect(Collectors.toList())
+    );
 
     @Test
     @DisplayName("로또 번호 리스트로 로또 번호들 정상 생성")
@@ -42,6 +48,16 @@ class LottoNumbersTest {
     @DisplayName("중복은 허용되지 않음")
     void size_duplicate() {
         assertThat(LottoNumbers.from(Arrays.asList(LottoNumber.from(1), LottoNumber.from(1))).size()).isOne();
+    }
+
+    @ParameterizedTest(name = "[{index}] {0} 은 1 번호들에 포함 {1}")
+    @DisplayName("1 번호들에 번호 포함 여부")
+    @CsvSource({"1,true", "2,false", "3,false"})
+    void contains(int number, boolean expected) {
+        //given
+        LottoNumbers numbers = LottoNumbers.from(Collections.singletonList(LottoNumber.from(1)));
+        //when, then
+        assertThat(numbers.contains(LottoNumber.from(number))).isEqualTo(expected);
     }
 
     @ParameterizedTest(name = "[{index}] 1,2,3과 {0},{1},{2} 일치하는 번호 갯수를 세면 {3}")

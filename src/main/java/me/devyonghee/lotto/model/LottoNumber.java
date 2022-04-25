@@ -21,7 +21,7 @@ public final class LottoNumber {
         this.number = number;
     }
 
-    static LottoNumber from(int number) {
+    public static LottoNumber from(int number) {
         return new LottoNumber(number);
     }
 

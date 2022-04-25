@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
@@ -18,19 +19,10 @@ import static org.assertj.core.api.Assertions.*;
 @DisplayName("로또")
 class LottoTest {
 
-    public static final Lotto ONE_TO_SIX_LOTTO = Lotto.from(LottoNumbers.from(
-            IntStream.rangeClosed(1, 6)
-                    .mapToObj(LottoNumber::from)
-                    .collect(Collectors.toList())
-    ));
-
     @Test
-    @DisplayName("객체화")
+    @DisplayName("로또 번호 6개로 로또 정상 생성")
     void instance() {
-        assertThatNoException().isThrownBy(() ->
-                Lotto.from(LottoNumbers.from(
-                        IntStream.rangeClosed(1, 6).mapToObj(LottoNumber::from).collect(Collectors.toList())
-                )));
+        assertThatNoException().isThrownBy(() -> Lotto.from(LottoNumbersTest.ONE_TO_SIX_NUMBERS));
     }
 
     @Test
@@ -49,20 +41,24 @@ class LottoTest {
     @ParameterizedTest(name = "[{index}] 1,2,3,4,5,6과 {0} 대해서 랭크를 계산하면 {1}")
     @DisplayName("1,2,3,4,5,6 로또에 대한 순위 계산")
     @MethodSource
-    void rank(Lotto target, Rank expected) {
+    void rank(Lotto target, LottoNumber bonusNumber, Rank expected) {
         //given
         Lotto lotto = lotto(1, 2, 3, 4, 5, 6);
         //when
-        assertThat(lotto.rank(target)).isEqualTo(expected);
+        assertThat(lotto.rank(target, bonusNumber)).isEqualTo(expected);
     }
 
     @Test
     @DisplayName("주어진 로또 번호들에 대해서 그대로 반환")
     void numbers() {
-        //given
-        LottoNumbers numbers = LottoNumbers.from(IntStream.rangeClosed(1, 6).mapToObj(LottoNumber::from).collect(Collectors.toList()));
-        //when, then
-        assertThat(Lotto.from(numbers).numbers()).isEqualTo(numbers);
+        assertThat(Lotto.from(LottoNumbersTest.ONE_TO_SIX_NUMBERS).numbers()).isEqualTo(LottoNumbersTest.ONE_TO_SIX_NUMBERS);
+    }
+
+    @ParameterizedTest(name = "[{index}] 1,2,3,4,5,6 로또에 {0} 숫자 포함은 {1}")
+    @DisplayName("1 부터 6까지의 로또에 숫자 포함 여부")
+    @CsvSource({"1,true", "6,true", "7,false"})
+    void contains(int number, boolean expected) {
+        assertThat(Lotto.from(LottoNumbersTest.ONE_TO_SIX_NUMBERS).contains(LottoNumber.from(number))).isEqualTo(expected);
     }
 
     private static Stream<Arguments> instance_invalidNumber_thrownIllegalArgumentException() {
@@ -74,11 +70,12 @@ class LottoTest {
 
     private static Stream<Arguments> rank() {
         return Stream.of(
-                Arguments.of(lotto(1, 2, 3, 4, 5, 6), Rank.FIRST),
-                Arguments.of(lotto(2, 3, 4, 5, 6, 7), Rank.SECOND),
-                Arguments.of(lotto(3, 4, 5, 6, 7, 8), Rank.THIRD),
-                Arguments.of(lotto(4, 5, 6, 7, 8, 9), Rank.FOURTH),
-                Arguments.of(lotto(5, 6, 7, 8, 9, 10), Rank.NOTHING)
+                Arguments.of(lotto(1, 2, 3, 4, 5, 6), LottoNumber.from(7), Rank.FIRST),
+                Arguments.of(lotto(2, 3, 4, 5, 6, 7), LottoNumber.from(1), Rank.SECOND),
+                Arguments.of(lotto(2, 3, 4, 5, 6, 7), LottoNumber.from(8), Rank.THIRD),
+                Arguments.of(lotto(3, 4, 5, 6, 7, 8), LottoNumber.from(1), Rank.FOURTH),
+                Arguments.of(lotto(4, 5, 6, 7, 8, 9), LottoNumber.from(1), Rank.FIFTH),
+                Arguments.of(lotto(5, 6, 7, 8, 9, 10), LottoNumber.from(1), Rank.NOTHING)
         );
     }
 

@@ -1,10 +1,11 @@
 package me.devyonghee.lotto.controller;
 
 import me.devyonghee.common.StringSeparator;
-import me.devyonghee.lotto.model.Lotto;
+import me.devyonghee.lotto.model.LottoNumber;
 import me.devyonghee.lotto.model.LottoStore;
 import me.devyonghee.lotto.model.Lottos;
 import me.devyonghee.lotto.model.RandomGenerator;
+import me.devyonghee.lotto.model.WinnerLotto;
 import me.devyonghee.lotto.model.WinnerLottoGenerator;
 import me.devyonghee.lotto.view.InputView;
 import me.devyonghee.lotto.view.ResultView;
@@ -39,10 +40,13 @@ public final class LottoGame {
     public void start() {
         Lottos lottos = LottoStore.of(inputView.purchaseAmount(), RandomGenerator.getInstance()).lottoTickets();
         resultView.print(LottosResponse.from(lottos));
-        resultView.print(ScoreResponse.from(lottos.score(winner())));
+        resultView.print(ScoreResponse.from(winnerLotto().score(lottos)));
     }
 
-    private Lotto winner() {
-        return WinnerLottoGenerator.from(StringSeparator.of(inputView.winnerNumbers(), STRING_NUMBER_DELIMITER)).lotto();
+    private WinnerLotto winnerLotto() {
+        return WinnerLottoGenerator.of(
+                        StringSeparator.of(inputView.winnerNumbers(), STRING_NUMBER_DELIMITER),
+                        LottoNumber.from(inputView.winnerBonusNumber()))
+                .lotto();
     }
 }
