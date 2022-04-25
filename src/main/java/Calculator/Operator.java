@@ -1,7 +1,6 @@
 package Calculator;
 
 import Calculator.exception.NotFoundOperatorException;
-import Calculator.exception.OnlyNumberException;
 
 import java.util.function.BinaryOperator;
 import java.util.stream.Stream;

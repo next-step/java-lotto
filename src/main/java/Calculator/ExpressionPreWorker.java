@@ -4,17 +4,17 @@ import static Calculator.ExpressionCaseChecker.*;
 
 public class ExpressionPreWorker {
 
+    private static final String EMPTY_STRING = " ";
+
     private ExpressionPreWorker() {
     }
 
-    static String[] validateAndSplitExpression(String exp) {
+    public static String[] validateAndSplitExpression(String exp) {
         validateNotBlank(exp);
 
         String[] splitExp = splitExpression(exp);
 
-        checkOnlyNumber(splitExp);
-        checkOnlyOperator(splitExp);
-        checkPossibleExpression(splitExp);
+        checkExpression(splitExp);
 
         return splitExp;
     }
@@ -26,8 +26,6 @@ public class ExpressionPreWorker {
     }
 
     private static String[] splitExpression(String exp) {
-        return exp.split(" ");
+        return exp.split(EMPTY_STRING);
     }
-
-
 }
