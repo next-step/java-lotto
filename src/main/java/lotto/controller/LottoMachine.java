@@ -12,6 +12,6 @@ public class LottoMachine {
         OutputView.outputLottoNumbers(lottos);
 
         String previousWeekWinningNumber = InputView.inputPreviousWeekWinningNumber();
-        System.out.println("previousWeekWinningNumber = " + previousWeekWinningNumber);
+        OutputView.outputWinningStatistics(lottos, previousWeekWinningNumber);
     }
 }

@@ -16,6 +16,10 @@ public class LottoNumber {
         this(generateRandom());
     }
 
+    public LottoNumber(String string) {
+        this(Integer.parseInt(string));
+    }
+
     protected LottoNumber(int lottoNumber) {
         this.lottoNumber = lottoNumber;
     }

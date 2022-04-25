@@ -12,13 +12,17 @@ public class LottoNumbers {
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers() {
-        this.lottoNumbers = IntStream.range(LOTTO_NUMBERS_START_INCLUSIVE, LOTTO_NUMBERS_SIZE)
-                .mapToObj(it -> new LottoNumber())
-                .collect(Collectors.toList());
+        this(getRandomLottoNumbers());
     }
 
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    protected LottoNumbers(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+    }
+
+    private static List<LottoNumber> getRandomLottoNumbers() {
+        return IntStream.range(LOTTO_NUMBERS_START_INCLUSIVE, LOTTO_NUMBERS_SIZE)
+                .mapToObj(it -> new LottoNumber())
+                .collect(Collectors.toList());
     }
 
     public LottoNumbers sort() {
@@ -29,6 +33,11 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
 
         return new LottoNumbers(sortedLottoNumbers);
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.stream()
+                .anyMatch(lottoNumber::equals);
     }
 
     @Override
