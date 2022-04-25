@@ -8,7 +8,7 @@ public class RandomNumberGenerator {
 
   private static final ThreadLocalRandom RANDOM = ThreadLocalRandom.current();
 
-  public static int generateRandomNumberInRange(int maxNumber) {
-    return RANDOM.nextInt(maxNumber);
+  public static int generateRandomNumberInRange(int minNumber, int bound) {
+    return RANDOM.nextInt(minNumber, bound);
   }
 }
