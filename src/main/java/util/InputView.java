@@ -4,19 +4,19 @@ import java.util.Scanner;
 
 public class InputView {
 
-  private static final Scanner scanner = new Scanner(System.in);
+  private static final Scanner SCANNER = new Scanner(System.in);
 
 
   private InputView() {}
 
-  public static int scanInt(String description) {
+  public static Integer scanInt(String description) {
     printDescription(description);
-    return scanner.nextInt();
+    return Integer.parseInt(SCANNER.nextLine());
   }
 
   public static String scanString(String description) {
     printDescription(description);
-    return scanner.next();
+    return SCANNER.nextLine();
   }
 
   private static void printDescription(String description) {
