@@ -1,10 +1,5 @@
 package lotto.domain;
 
-import static lotto.domain.LottoResult.REWARD_FIRST_GRADE;
-import static lotto.domain.LottoResult.REWARD_FOURTH_GRADE;
-import static lotto.domain.LottoResult.REWARD_NONE_GRADE;
-import static lotto.domain.LottoResult.REWARD_SECOND_GRADE;
-import static lotto.domain.LottoResult.REWARD_THIRD_GRADE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
@@ -40,19 +35,19 @@ class LottoResultTest {
         LottoResult lottoResult6 = LottoResult.of(fitCount6);
 
         assertThat(lottoResult0.fitCount()).isEqualTo(fitCount0);
-        assertThat(lottoResult0.reward()).isEqualTo(REWARD_NONE_GRADE);
+        assertThat(lottoResult0.reward()).isEqualTo(Grade.NONE.getReward());
         assertThat(lottoResult1.fitCount()).isEqualTo(fitCount0);
-        assertThat(lottoResult1.reward()).isEqualTo(REWARD_NONE_GRADE);
+        assertThat(lottoResult1.reward()).isEqualTo(Grade.NONE.getReward());
         assertThat(lottoResult2.fitCount()).isEqualTo(fitCount0);
-        assertThat(lottoResult2.reward()).isEqualTo(REWARD_NONE_GRADE);
+        assertThat(lottoResult2.reward()).isEqualTo(Grade.NONE.getReward());
         assertThat(lottoResult3.fitCount()).isEqualTo(fitCount3);
-        assertThat(lottoResult3.reward()).isEqualTo(REWARD_FOURTH_GRADE);
+        assertThat(lottoResult3.reward()).isEqualTo(Grade.FOURTH.getReward());
         assertThat(lottoResult4.fitCount()).isEqualTo(fitCount4);
-        assertThat(lottoResult4.reward()).isEqualTo(REWARD_THIRD_GRADE);
+        assertThat(lottoResult4.reward()).isEqualTo(Grade.THIRD.getReward());
         assertThat(lottoResult5.fitCount()).isEqualTo(fitCount5);
-        assertThat(lottoResult5.reward()).isEqualTo(REWARD_SECOND_GRADE);
+        assertThat(lottoResult5.reward()).isEqualTo(Grade.SECOND.getReward());
         assertThat(lottoResult6.fitCount()).isEqualTo(fitCount6);
-        assertThat(lottoResult6.reward()).isEqualTo(REWARD_FIRST_GRADE);
+        assertThat(lottoResult6.reward()).isEqualTo(Grade.FIRST.getReward());
     }
 
 }

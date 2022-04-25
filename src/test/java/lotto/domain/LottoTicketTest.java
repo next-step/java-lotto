@@ -1,10 +1,5 @@
 package lotto.domain;
 
-import static lotto.domain.LottoResult.REWARD_FIRST_GRADE;
-import static lotto.domain.LottoResult.REWARD_FOURTH_GRADE;
-import static lotto.domain.LottoResult.REWARD_NONE_GRADE;
-import static lotto.domain.LottoResult.REWARD_SECOND_GRADE;
-import static lotto.domain.LottoResult.REWARD_THIRD_GRADE;
 import static lotto.domain.LottoTicket.ONE_TICKET_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,7 +26,7 @@ class LottoTicketTest {
         LottoResult lottoResult = ticket.checkLottery(winLottoNumbers);
 
         assertThat(lottoResult.fitCount()).isEqualTo(6);
-        assertThat(lottoResult.reward()).isEqualTo(REWARD_FIRST_GRADE);
+        assertThat(lottoResult.reward()).isEqualTo(Grade.FIRST.getReward());
     }
 
     @DisplayName("이등 당첨된 로또 테스트 결과를 확인한다.")
@@ -43,7 +38,7 @@ class LottoTicketTest {
         LottoResult lottoResult = ticket.checkLottery(winLottoNumbers);
 
         assertThat(lottoResult.fitCount()).isEqualTo(5);
-        assertThat(lottoResult.reward()).isEqualTo(REWARD_SECOND_GRADE);
+        assertThat(lottoResult.reward()).isEqualTo(Grade.SECOND.getReward());
     }
 
     @DisplayName("삼등 당첨된 로또 테스트 결과를 확인한다.")
@@ -55,7 +50,7 @@ class LottoTicketTest {
         LottoResult lottoResult = ticket.checkLottery(winLottoNumbers);
 
         assertThat(lottoResult.fitCount()).isEqualTo(4);
-        assertThat(lottoResult.reward()).isEqualTo(REWARD_THIRD_GRADE);
+        assertThat(lottoResult.reward()).isEqualTo(Grade.THIRD.getReward());
     }
 
     @DisplayName("tk등 당첨된 로또 테스트 결과를 확인한다.")
@@ -67,7 +62,7 @@ class LottoTicketTest {
         LottoResult lottoResult = ticket.checkLottery(winLottoNumbers);
 
         assertThat(lottoResult.fitCount()).isEqualTo(3);
-        assertThat(lottoResult.reward()).isEqualTo(REWARD_FOURTH_GRADE);
+        assertThat(lottoResult.reward()).isEqualTo(Grade.FOURTH.getReward());
     }
 
     @DisplayName("맞는게 적어서 당첨되지 않은 로또 테스트 결과를 확인한다.")
@@ -79,7 +74,7 @@ class LottoTicketTest {
         LottoResult lottoResult = ticket.checkLottery(winLottoNumbers);
 
         assertThat(lottoResult.fitCount()).isEqualTo(0);
-        assertThat(lottoResult.reward()).isEqualTo(REWARD_NONE_GRADE);
+        assertThat(lottoResult.reward()).isEqualTo(Grade.NONE.getReward());
     }
 
     @DisplayName("아예 당첨되지 않은 로또 테스트 결과를 확인한다.")
@@ -91,7 +86,7 @@ class LottoTicketTest {
         LottoResult lottoResult = ticket.checkLottery(winLottoNumbers);
 
         assertThat(lottoResult.fitCount()).isEqualTo(0);
-        assertThat(lottoResult.reward()).isEqualTo(REWARD_NONE_GRADE);
+        assertThat(lottoResult.reward()).isEqualTo(Grade.NONE.getReward());
     }
 
     @Test
