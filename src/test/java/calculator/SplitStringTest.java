@@ -15,6 +15,12 @@ class SplitStringTest {
     }
 
     @Test
+    void split_입력문자열_비어있는_경우() {
+        assertThatThrownBy(() -> SplitString.split(null)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> SplitString.split("")).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     void invalid_입력문자열_숫자로_시작_안하는_경우() {
         assertThatThrownBy(() -> SplitString.split("+ 3 - 1")).isInstanceOf(IllegalArgumentException.class);
     }
