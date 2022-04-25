@@ -1,5 +1,8 @@
 package me.devyonghee.calculator;
 
+import me.devyonghee.common.Assert;
+import me.devyonghee.common.StringsProvider;
+
 import java.util.Iterator;
 
 final class StringCalculator {
@@ -16,21 +19,15 @@ final class StringCalculator {
     }
 
     Number calculatedNumber() {
-        return calculator().calculatedNumber();
-    }
-
-    private Calculator calculator() {
         Iterator<String> iterator = provider.strings().iterator();
         validateNext(iterator);
-
-        Number fistNumber = Number.from(iterator.next());
-        Calculator calculator = () -> fistNumber;
+        Number result = Number.from(iterator.next());
         while (iterator.hasNext()) {
             Operation operation = Operation.of(iterator.next());
             validateNext(iterator);
-            calculator = operation.calculator(calculator, Number.from(iterator.next()));
+            result = operation.calculatedNumber(result, Number.from(iterator.next()));
         }
-        return calculator;
+        return result;
     }
 
     private void validateNext(Iterator<String> iterator) {

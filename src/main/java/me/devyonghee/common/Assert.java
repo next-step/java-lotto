@@ -1,18 +1,18 @@
-package me.devyonghee.calculator;
+package me.devyonghee.common;
 
-final class Assert {
+public final class Assert {
 
     private Assert() {
         throw new AssertionError();
     }
 
-    static <T> void notNull(T object, String message) {
+    public static <T> void notNull(T object, String message) {
         if (object == null) {
             throw new IllegalArgumentException(message);
         }
     }
 
-    static void hasText(String text, String message) {
+    public static void hasText(String text, String message) {
         if (text == null || text.isBlank()) {
             throw new IllegalArgumentException(message);
         }

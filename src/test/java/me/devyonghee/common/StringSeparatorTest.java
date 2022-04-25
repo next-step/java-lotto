@@ -1,4 +1,4 @@
-package me.devyonghee.calculator;
+package me.devyonghee.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,6 +14,12 @@ class StringSeparatorTest {
     @DisplayName("객체화")
     void instance() {
         assertThatNoException().isThrownBy(() -> StringSeparator.from("1 2"));
+    }
+
+    @Test
+    @DisplayName("커스텀 구분자 객체화")
+    void instance_delimiter() {
+        assertThatNoException().isThrownBy(() -> StringSeparator.of("1", ","));
     }
 
     @ParameterizedTest
