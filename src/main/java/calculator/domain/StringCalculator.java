@@ -1,6 +1,7 @@
 package calculator.domain;
 
 import calculator.constant.OperationConst;
+import calculator.exception.InvalidInputException;
 
 public class StringCalculator {
 
@@ -9,7 +10,7 @@ public class StringCalculator {
 
     public static int calculate(String value) {
         if (isNullOrBlank(value)) {
-            throw new IllegalArgumentException();
+            throw new InvalidInputException();
         }
 
         String[] numbersAndSigns = value.split(SEPARATOR);

@@ -1,5 +1,6 @@
 package calculator.constant;
 
+import calculator.exception.InvalidSignException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,9 +34,9 @@ class OperationConstTest {
     }
 
     @Test
-    @DisplayName("입력값으로 '+', '-', '/', '*' 외의 값을 입력하면 IllegalArgumentException 를 반환한다.")
+    @DisplayName("입력값으로 '+', '-', '/', '*' 외의 값을 입력하면 InvalidSignException 를 반환한다.")
     void illegalArgumentException() {
         Assertions.assertThatThrownBy(() -> OperationConst.findBySign("="))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(InvalidSignException.class);
     }
 }

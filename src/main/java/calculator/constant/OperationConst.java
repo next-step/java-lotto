@@ -1,6 +1,7 @@
 package calculator.constant;
 
 import calculator.domain.operation.*;
+import calculator.exception.InvalidSignException;
 
 import java.util.Arrays;
 
@@ -24,7 +25,7 @@ public enum OperationConst {
                 .stream()
                 .filter(operationConst -> operationConst.sign.equals(sign))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException());
+                .orElseThrow(InvalidSignException::new);
     }
 
     public Operation operation() {
