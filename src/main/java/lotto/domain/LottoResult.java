@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class LottoResult {
 
-    public static final int REWARD_FIRST_GRADE = 2000000000;
+    public static final int REWARD_FIRST_GRADE = 2_000_000_000;
     public static final int REWARD_SECOND_GRADE = 1500000;
     public static final int REWARD_THIRD_GRADE = 50000;
     public static final int REWARD_FOURTH_GRADE = 5000;
