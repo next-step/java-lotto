@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.*;
 class LottoStoreTest {
 
     @Test
-    @DisplayName("객체화")
+    @DisplayName("돈과 로또 생성기로 로또 상점 정상 생성")
     void instance() {
         assertThatNoException().isThrownBy(() -> LottoStore.of(100, RandomGenerator.getInstance()));
     }

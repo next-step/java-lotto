@@ -8,7 +8,7 @@ public enum Rank {
     SECOND(1_500_000, Lotto.NUMBER_SIZE - 1),
     THIRD(50_000, Lotto.NUMBER_SIZE - 2),
     FOURTH(5_000, Lotto.NUMBER_SIZE - 3),
-    NOTING(0, 0);
+    NOTHING(0, 0);
 
     private final int prize;
     private final int matchCount;
@@ -22,7 +22,7 @@ public enum Rank {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.matchCount == matchCount)
                 .findFirst()
-                .orElse(Rank.NOTING);
+                .orElse(Rank.NOTHING);
     }
 
     public int prize() {

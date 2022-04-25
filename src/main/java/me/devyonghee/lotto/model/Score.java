@@ -2,7 +2,11 @@ package me.devyonghee.lotto.model;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.EnumMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class Score {
 
@@ -47,7 +51,7 @@ public class Score {
     private Map<Rank, Integer> rankToCountMap() {
         Map<Rank, Integer> rankToMap = new EnumMap<>(Rank.class);
         for (Rank rank : ranks) {
-            rankToMap.put(rank, rankToMap.getOrDefault(rank, DEFAULT_COUNT) + PLUS_COUNT_SIZE);
+            rankToMap.merge(rank, PLUS_COUNT_SIZE, Integer::sum);
         }
         return rankToMap;
     }

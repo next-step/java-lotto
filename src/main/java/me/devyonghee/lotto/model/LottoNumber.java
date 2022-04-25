@@ -12,6 +12,7 @@ public final class LottoNumber {
     private static final String TO_STRING_START = "LottoNumber{";
     private static final String TO_STRING_NUMBER_FIELD = "number=";
     private static final char TO_STRING_END = '}';
+    private static final String NULL_NUMBER_ERROR_MESSAGE = "number must not be null";
 
     private final int number;
 
@@ -29,11 +30,11 @@ public final class LottoNumber {
     }
 
     private static int parseInt(String number) {
-        try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException e) {
+        Objects.requireNonNull(number, NULL_NUMBER_ERROR_MESSAGE);
+        if (!number.chars().allMatch(Character::isDigit)) {
             throw new NumberFormatException(String.format(INVALID_FORMAT_NUMBER_ERROR_MESSAGE, number));
         }
+        return Integer.parseInt(number);
     }
 
     public int number() {

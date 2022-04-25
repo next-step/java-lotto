@@ -18,6 +18,12 @@ import static org.assertj.core.api.Assertions.*;
 @DisplayName("로또")
 class LottoTest {
 
+    public static final Lotto ONE_TO_SIX_LOTTO = Lotto.from(LottoNumbers.from(
+            IntStream.rangeClosed(1, 6)
+                    .mapToObj(LottoNumber::from)
+                    .collect(Collectors.toList())
+    ));
+
     @Test
     @DisplayName("객체화")
     void instance() {
@@ -50,6 +56,15 @@ class LottoTest {
         assertThat(lotto.rank(target)).isEqualTo(expected);
     }
 
+    @Test
+    @DisplayName("주어진 로또 번호들에 대해서 그대로 반환")
+    void numbers() {
+        //given
+        LottoNumbers numbers = LottoNumbers.from(IntStream.rangeClosed(1, 6).mapToObj(LottoNumber::from).collect(Collectors.toList()));
+        //when, then
+        assertThat(Lotto.from(numbers).numbers()).isEqualTo(numbers);
+    }
+
     private static Stream<Arguments> instance_invalidNumber_thrownIllegalArgumentException() {
         return Stream.of(
                 Arguments.of(Collections.singletonList(LottoNumber.from(1))),
@@ -63,7 +78,7 @@ class LottoTest {
                 Arguments.of(lotto(2, 3, 4, 5, 6, 7), Rank.SECOND),
                 Arguments.of(lotto(3, 4, 5, 6, 7, 8), Rank.THIRD),
                 Arguments.of(lotto(4, 5, 6, 7, 8, 9), Rank.FOURTH),
-                Arguments.of(lotto(5, 6, 7, 8, 9, 10), Rank.NOTING)
+                Arguments.of(lotto(5, 6, 7, 8, 9, 10), Rank.NOTHING)
         );
     }
 

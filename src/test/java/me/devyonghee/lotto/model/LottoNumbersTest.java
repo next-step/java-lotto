@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -14,7 +15,7 @@ import static org.assertj.core.api.Assertions.*;
 class LottoNumbersTest {
 
     @Test
-    @DisplayName("객체화")
+    @DisplayName("로또 번호 리스트로 로또 번호들 정상 생성")
     void instance() {
         assertThatNoException().isThrownBy(() -> LottoNumbers.from(Arrays.asList(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3))));
     }
@@ -52,5 +53,14 @@ class LottoNumbersTest {
         LottoNumbers target = LottoNumbers.from(Arrays.asList(LottoNumber.from(first), LottoNumber.from(second), LottoNumber.from(third)));
         //when, then
         assertThat(lottoNumbers.matchCount(target)).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("주어진 컬렉션 원소대로 반환")
+    void collection() {
+        //given
+        List<LottoNumber> numbers = Collections.singletonList(LottoNumber.from(1));
+        //when, then
+        assertThat(LottoNumbers.from(numbers).collection()).containsExactlyElementsOf(numbers);
     }
 }

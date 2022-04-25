@@ -1,7 +1,11 @@
 package me.devyonghee.lotto.controller;
 
 import me.devyonghee.common.StringSeparator;
-import me.devyonghee.lotto.model.*;
+import me.devyonghee.lotto.model.Lotto;
+import me.devyonghee.lotto.model.LottoStore;
+import me.devyonghee.lotto.model.Lottos;
+import me.devyonghee.lotto.model.RandomGenerator;
+import me.devyonghee.lotto.model.WinnerLottoGenerator;
 import me.devyonghee.lotto.view.InputView;
 import me.devyonghee.lotto.view.ResultView;
 import me.devyonghee.lotto.view.dto.LottosResponse;

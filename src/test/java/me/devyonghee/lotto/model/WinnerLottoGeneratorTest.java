@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.*;
 class WinnerLottoGeneratorTest {
 
     @Test
-    @DisplayName("객체화")
+    @DisplayName("문자 제공자로 우승 로또 생성기 정상 생성")
     void instance() {
         assertThatNoException().isThrownBy(() -> WinnerLottoGenerator.from(() -> Collections.singletonList("1")));
     }

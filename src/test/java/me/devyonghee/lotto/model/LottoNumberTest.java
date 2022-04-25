@@ -11,14 +11,14 @@ import static org.assertj.core.api.Assertions.*;
 class LottoNumberTest {
 
     @ParameterizedTest
-    @DisplayName("숫자 객체화")
+    @DisplayName("숫자로 로또 번호 정상 생성")
     @ValueSource(ints = {1, 45})
     void instance(int number) {
         assertThatNoException().isThrownBy(() -> LottoNumber.from(number));
     }
 
     @ParameterizedTest
-    @DisplayName("문자 객체화")
+    @DisplayName("문자로 로또 번호 정상 생성")
     @ValueSource(strings = {"1", "45"})
     void instance(String number) {
         assertThatNoException().isThrownBy(() -> LottoNumber.from(number));
@@ -35,5 +35,14 @@ class LottoNumberTest {
     @ValueSource(ints = {0, 46})
     void instance_outOrRange_thrownIllegalArgumentsException(int number) {
         assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.from(number));
+    }
+
+    @Test
+    @DisplayName("주어진 숫자대로 반환")
+    void number() {
+        //given
+        int number = 1;
+        //when, then
+        assertThat(LottoNumber.from(number).number()).isEqualTo(number);
     }
 }
