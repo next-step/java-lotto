@@ -23,8 +23,8 @@ public final class Guest {
     return Integer.parseInt(lotto.toString());
   }
 
-  public List<List<Integer>> haveLottoList() {
-    List<List<Integer>> lottoList = new ArrayList<>();
+  public List<Product> haveLottoList() {
+    List<Product> lottoList = new ArrayList<>();
     int productCount = boughtLottoCount();
     while (productCount-- != 0) {
       lottoList.add(store.deliverLotto());
