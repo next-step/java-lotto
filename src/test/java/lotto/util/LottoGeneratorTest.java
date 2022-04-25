@@ -10,7 +10,7 @@ class LottoGeneratorTest {
     void generateLotteries() {
         LottoGenerator lottoGenerator = new LottoGenerator();
 
-        assertThat(lottoGenerator.generateLotteries(3_000))
+        assertThat(lottoGenerator.generateLotteries(3_000, 0))
                 .hasSize(3);
     }
 }
