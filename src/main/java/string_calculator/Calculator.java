@@ -7,15 +7,15 @@ public class Calculator {
     private Integer accumulator;
 
     public Integer computes(List<Value> values) {
-        ListIterator<Value> it = values.listIterator();
-        while (it.hasNext()) {
-            Value v = it.next();
-            if (v instanceof Operator) {
-                compute(this.accumulator, (Operator) v, (Integer) it.next());
+        ListIterator<Value> iterator = values.listIterator();
+        while (iterator.hasNext()) {
+            Value value = iterator.next();
+            if (value instanceof Operator) {
+                compute(this.accumulator, (Operator) value, (Integer) iterator.next());
                 continue;
             }
-            if (v instanceof Integer) {
-                this.accumulator = (Integer) v;
+            if (value instanceof Integer) {
+                this.accumulator = (Integer) value;
                 continue;
             }
             throw new IllegalArgumentException("Wrong values found.");

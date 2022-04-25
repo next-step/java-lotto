@@ -51,6 +51,6 @@ Result: 1
 - [x] operator parse 에 대한 성공과 예외 테스트 분리
 - [x] InputView 역할 분리
 - [x] 순차적 연산 방식 while with index에서 다른 방식으로 수정 -> Iterator.next
+- [x] 축약된 변수명 수정
 - [ ] 한 단계의 indent만 수행
-- [ ] 축약된 변수명 수정
 - 
