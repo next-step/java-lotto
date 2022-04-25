@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.InvalidLottoException;
+import lotto.exception.InvalidLottoTicketException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -39,7 +39,7 @@ class LottoTicketTest {
         );
         // when, then
         assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
-                .isInstanceOf(InvalidLottoException.class);
+                .isInstanceOf(InvalidLottoTicketException.class);
     }
 
 }

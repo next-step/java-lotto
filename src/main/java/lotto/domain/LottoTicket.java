@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.InvalidLottoException;
+import lotto.exception.InvalidLottoTicketException;
 
 import java.util.Objects;
 import java.util.Set;
@@ -16,7 +16,7 @@ public class LottoTicket {
 
     private void validLotto(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != 6) {
-            throw new InvalidLottoException();
+            throw new InvalidLottoTicketException();
         }
     }
 
