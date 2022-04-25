@@ -38,10 +38,22 @@ public class InputView {
             return new Integer(parseInt(item));
         }
         if ((Pattern.matches("[\\+\\-\\*\\/%]", item))) {
-            return new Operator(item);
+            return evaluateOperator(item);
         }
         throw new IllegalArgumentException("Can't evaluate: " + item);
     }
+
+    public Operator evaluateOperator(String value){
+        switch (value) {
+            case "+": return Operator.PLUS;
+            case "-": return Operator.MINUS;
+            case "*": return Operator.MULTIPLY;
+            case "/": return Operator.DIVIDE;
+            case "%": return Operator.MODULO;
+        }
+        throw new IllegalArgumentException("only [+, -, *, /, %] are allowed.");
+    }
+
 
 //    private static Operator evaluateOperator(String item) {
 //        return new Operator(item);

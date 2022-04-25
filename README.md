@@ -46,9 +46,9 @@ Result: 1
 
 - [x] 요구사항 기능별 분리 작성
 - [x] 미션에서 요구한 예제에 대한 테스트 추가
+- [x] Operator Enum 으로 변경
+  - [x] Operator 가 연산 부분을 포함하게?
 - [ ] operator parse 에 대한 성공과 예외 테스트 분리
-- [ ] Operator Enum 으로 변경
-    - [ ] Operator 가 연산 부분을 포함하게?
 - [ ] InputView 역할 분리
 - [ ] 순차적 연산 방식 while에서 다른 방식으로 수정
 - [ ] 한 단계의 indent만 수행

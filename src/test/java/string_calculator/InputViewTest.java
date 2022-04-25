@@ -15,7 +15,7 @@ public class InputViewTest {
         i.parse("1 + 2");
         List<Value> values = new ArrayList<Value>() {{
             add(new Integer(1));
-            add(new Operator("+"));
+            add(Operator.PLUS);
             add(new Integer(2));
         }};
         assertThat(i.values).isEqualTo(values);

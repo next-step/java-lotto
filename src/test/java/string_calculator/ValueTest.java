@@ -12,13 +12,14 @@ public class ValueTest {
     @Test
     void create() {
         assertThat(new Integer(1)).isInstanceOf(Integer.class);
-        assertThat(new Operator("*")).isInstanceOf(Operator.class);
+        assertThat(Operator.MULTIPLY).isInstanceOf(Operator.class);
     }
 
     @ParameterizedTest
 //    @CsvSource(value = {"!:false", "@:false", "#:false", "$:false", "%:true", "^:true", "&:false", "*:true", "-:true", "+:true"}, delimiter = ':')
     @ValueSource(strings = {"!", "@", "#", "$", "^", "&"})
     void wrongArgs(String input) {
-        assertThatThrownBy(() -> new Operator(input)).isInstanceOf(IllegalArgumentException.class);
+        InputView i = new InputView();
+        assertThatThrownBy(() -> i.evaluateOperator(input)).isInstanceOf(IllegalArgumentException.class);
     }
 }

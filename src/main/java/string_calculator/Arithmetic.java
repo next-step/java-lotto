@@ -28,7 +28,7 @@ public class Arithmetic {
         this.accumulator = operator.compute(acc, operator, operand);
     }
 
-    public static Integer add(Integer i, Integer i1) {
-        return i.plus(i1);
-    }
+//    public static Integer add(Integer i, Integer i1) {
+//        return i.plus(i1);
+//    }
 }
