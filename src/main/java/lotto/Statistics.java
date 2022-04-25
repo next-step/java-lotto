@@ -1,5 +1,6 @@
 package lotto;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class Statistics {
@@ -10,15 +11,23 @@ public class Statistics {
     for (List<Integer> lotto : allLotto) {
       int count = 0;
       for (Integer winNumber : winNumbers) {
-        if(lotto.contains(winNumber)) {
+        if (lotto.contains(winNumber)) {
           count++;
         }
-        if(count == expectCount) {
+        if (count == expectCount) {
           result++;
           break;
         }
       }
     }
     return result;
+  }
+
+  public int winningAmount(int cost, int count) {
+    return cost * count;
+  }
+
+  public double yield(int winningAmount, int haveMoney) {
+    return Math.floor((double) winningAmount / haveMoney * 100)/100.0;
   }
 }
