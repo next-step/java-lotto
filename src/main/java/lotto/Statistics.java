@@ -1,27 +1,14 @@
 package lotto;
 
-import java.text.DecimalFormat;
-import java.util.List;
 import java.util.Objects;
+import lotto.enums.Rank;
 
 public final class Statistics {
 
-  private final int expectCount;
+  private final Rank rank;
 
-  public Statistics(int expectCount) {
-    this.expectCount = expectCount;
-  }
-
-  public int coincideLotto(List<Product> allProducts, List<Integer> winNumbers) {
-    int result = 0;
-    for (Product product : allProducts) {
-      result += LottoConfirm.increaseProductNumber(expectCount,  product, winNumbers);
-    }
-    return result;
-  }
-
-  public int winningAmount(int cost, int count) {
-    return cost * count;
+  public Statistics(Rank rank) {
+    this.rank = rank;
   }
 
   public double yield(int winningAmount, int haveMoney) {
@@ -37,11 +24,11 @@ public final class Statistics {
       return false;
     }
     Statistics that = (Statistics) o;
-    return expectCount == that.expectCount;
+    return rank == that.rank;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(expectCount);
+    return Objects.hash(rank);
   }
 }
