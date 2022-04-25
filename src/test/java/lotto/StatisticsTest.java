@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.enums.Rank;
+import lotto.enums.Release;
 import lotto.model.Product;
 import lotto.model.Statistics;
 import org.junit.jupiter.api.DisplayName;
@@ -18,13 +18,13 @@ class StatisticsTest {
     List<Product> allLotto = Arrays.asList(new Product(List.of(1, 2, 3, 4, 5, 6)),
         new Product(List.of(6, 7, 8, 9, 11, 30)));
     List<Integer> winNumbers = Arrays.asList(6, 7, 21, 29, 30, 45);
-    assertThat(Rank.THREE.coincideLotto(allLotto, winNumbers)).isEqualTo(1);
+    assertThat(Release.THREE.coincideLotto(allLotto, winNumbers)).isEqualTo(1);
   }
 
   @Test
   @DisplayName("수익률 테스트")
   void yield() {
-    Statistics statistics = new Statistics(Rank.THREE);
+    Statistics statistics = new Statistics(Release.THREE);
     assertThat(statistics.yield(5000, 14000)).isEqualTo(0.35);
   }
 }
