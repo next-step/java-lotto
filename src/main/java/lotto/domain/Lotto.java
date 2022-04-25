@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -17,15 +14,12 @@ public class Lotto {
             .boxed()
             .collect(Collectors.toList());
 
-    private final List<LottoNo> lottoNumbers = new ArrayList<>();
+    private final Set<LottoNo> lottoNumbers = new HashSet<>();
 
     public Lotto() {
         Collections.shuffle(NUMBER_POOL);
         IntStream.range(0, LOTTO_SIZE)
-                .mapToObj(index -> {
-                    int randomNumber = NUMBER_POOL.get(index);
-                    return new LottoNo(randomNumber);
-                })
+                .mapToObj(i -> new LottoNo(NUMBER_POOL.get(i)))
                 .forEach(lottoNumbers::add);
     }
 
@@ -35,13 +29,10 @@ public class Lotto {
     }
 
     private void validateNumbers(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("lotto must contain " + LOTTO_SIZE + " numbers");
-        }
+        HashSet<Integer> uniqueNumbers = new HashSet<>(numbers);
 
-        int uniqueNumbersCount = new HashSet<>(numbers).size();
-        if (uniqueNumbersCount != LOTTO_SIZE) {
-            throw new IllegalArgumentException("containing duplicate lotto numbers");
+        if (uniqueNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("lotto must contain non duplicate " + LOTTO_SIZE + " numbers");
         }
     }
 
