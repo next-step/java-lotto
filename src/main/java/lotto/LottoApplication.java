@@ -15,8 +15,9 @@ public class LottoApplication {
         int purchasePrice = inputView.insertLottoPrice();
         int directlyBoughtCount = inputView.insertDirectlyBoughtCount();
 
-        List<Lotto> directlyUserLottoList = inputView.insertDirectlyBoughtLottoList(directlyBoughtCount, lottoGenerator);
+        List<String[]> directlyUserLottoStringList = inputView.insertDirectlyBoughtLottoList(directlyBoughtCount);
 
+        List<Lotto> directlyUserLottoList = lottoGenerator.generateDirectlyLotto(directlyUserLottoStringList);
         List<Lotto> autoUserLottoList = lottoGenerator.generateLotteries(purchasePrice, directlyBoughtCount);
 
         resultView.printBoughtLottoList(directlyUserLottoList, autoUserLottoList);

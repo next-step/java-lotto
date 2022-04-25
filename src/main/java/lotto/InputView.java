@@ -51,17 +51,16 @@ public class InputView {
         return inputScannerInt();
     }
 
-    public List<Lotto> insertDirectlyBoughtLottoList(int directlyBoughtCount, LottoGenerator lottoGenerator) {
+    public List<String[]> insertDirectlyBoughtLottoList(int directlyBoughtCount) {
         scanner.nextLine();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
-        List<Lotto> directlyLottoList = new ArrayList<>();
+        List<String[]> directlyStringList = new ArrayList<>();
 
         for (int i = 0; i < directlyBoughtCount; i++) {
-            String[] lottoNumberString = scanner.nextLine().split(USER_INPUT_DELIMITER);
-            directlyLottoList.add(lottoGenerator.generateDirectlyLotto(lottoNumberString));
+            directlyStringList.add(scanner.nextLine().split(USER_INPUT_DELIMITER));
         }
 
-        return directlyLottoList;
+        return directlyStringList;
     }
 }

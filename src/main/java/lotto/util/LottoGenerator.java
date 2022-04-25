@@ -46,11 +46,22 @@ public class LottoGenerator {
         return purchaseAmount / PRICE_PER_LOTTO;
     }
 
-    public Lotto generateDirectlyLotto(String[] lottoNumberString) {
-        List<LottoNumber> lottoNumberList = new ArrayList<>();
-        for (String lottoNumber : lottoNumberString) {
-            lottoNumberList.add(new LottoNumber(lottoNumber));
+    public List<Lotto> generateDirectlyLotto(List<String[]> directlyUserLottoStringList) {
+        List<Lotto> directlyUserLottoList = new ArrayList<>();
+
+        for (String[] stringLotteries : directlyUserLottoStringList) {
+            directlyUserLottoList.add(new Lotto(stringLotteriesToListLottoNumber(stringLotteries)));
         }
-        return new Lotto(lottoNumberList);
+
+        return directlyUserLottoList;
+    }
+
+    private List<LottoNumber> stringLotteriesToListLottoNumber(String[] stringLotteries) {
+        List<LottoNumber> lottoNumberList = new ArrayList<>();
+
+        for (String stringLottery : stringLotteries) {
+            lottoNumberList.add(new LottoNumber(stringLottery));
+        }
+        return lottoNumberList;
     }
 }
