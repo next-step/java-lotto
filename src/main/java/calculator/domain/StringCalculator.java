@@ -4,22 +4,22 @@ import calculator.constant.OperationConst;
 
 public class StringCalculator {
 
+    private static final String SEPARATOR = " ";
+    private static final int INITIAL_NUMBER_IDX = 0;
+
     public static int calculate(String value) {
         if (isNullOrBlank(value)) {
             throw new IllegalArgumentException();
         }
 
-        String[] values = value.split(" ");
-        Calculator calculator = new Calculator(values[0]);
-        int result = 0;
-        for (int i = 1; i < values.length; i++) {
-            if (i % 2 == 1) {
-                calculator.changeOperation(OperationConst.findBySign(values[i]).operation());
-            } else {
-                result = calculator.calculate(Integer.parseInt(values[i]));
-            }
-        }
+        String[] numbersAndSigns = value.split(SEPARATOR);
+        Calculator calculator = new Calculator(numbersAndSigns[INITIAL_NUMBER_IDX]);
 
+        int result = 0;
+        for (int i = 1; i < numbersAndSigns.length; i=i+2) {
+            calculator.changeOperation(OperationConst.findBySign(numbersAndSigns[i]).operation());
+            result = calculator.calculate(Integer.parseInt(numbersAndSigns[i+1]));
+        }
         return result;
     }
 
