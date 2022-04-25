@@ -18,8 +18,15 @@ public class ValueTest {
     @ParameterizedTest
 //    @CsvSource(value = {"!:false", "@:false", "#:false", "$:false", "%:true", "^:true", "&:false", "*:true", "-:true", "+:true"}, delimiter = ':')
     @ValueSource(strings = {"!", "@", "#", "$", "^", "&"})
-    void wrongArgs(String input) {
+    void wrongOperator(String input) {
         InputView i = new InputView();
         assertThatThrownBy(() -> i.evaluateOperator(input)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"+", "-", "*", "/", "%"})
+    void collectOperator(String input) {
+        InputView i = new InputView();
+        assertThat(i.evaluateOperator(input)).isInstanceOf(Operator.class);
     }
 }
