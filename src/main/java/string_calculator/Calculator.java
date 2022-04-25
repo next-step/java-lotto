@@ -8,19 +8,26 @@ public class Calculator {
 
     public Integer computes(List<Value> values) {
         ListIterator<Value> iterator = values.listIterator();
-        while (iterator.hasNext()) {
-            Value value = iterator.next();
-            if (value instanceof Operator) {
-                compute(this.accumulator, (Operator) value, (Integer) iterator.next());
-                continue;
-            }
-            if (value instanceof Integer) {
-                this.accumulator = (Integer) value;
-                continue;
-            }
-            throw new IllegalArgumentException("Wrong values found.");
-        }
+        computeNext(iterator);
         return accumulator;
+    }
+
+    private void computeNext(ListIterator<Value> iterator) {
+        if (!iterator.hasNext()) {
+            return;
+        }
+        Value value = iterator.next();
+        if (value instanceof Operator) {
+            compute(this.accumulator, (Operator) value, (Integer) iterator.next());
+            computeNext(iterator);
+            return;
+        }
+        if (value instanceof Integer) {
+            this.accumulator = (Integer) value;
+            computeNext(iterator);
+            return;
+        }
+        throw new IllegalArgumentException("Wrong values found.");
     }
 
     private void compute(Integer acc, Operator operator, Integer operand) {
