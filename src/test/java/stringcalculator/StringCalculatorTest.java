@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-import stringcalculator.commons.Constant;
-import stringcalculator.exception.InputValueException;
+import stringcalculator.exception.IllegalNumberException;
+import stringcalculator.exception.IllegalOperatorException;
 
 public class StringCalculatorTest {
 
@@ -22,24 +22,18 @@ public class StringCalculatorTest {
   }
 
   @ParameterizedTest
+  @DisplayName("null 및 empty가 입력으로 들어온 경우 예외처리")
   @NullAndEmptySource
   void inputNullOrEmptyException(String expression) {
-    // given
-
-    // when
-
-    // then
+    // when & then
     assertThatThrownBy(() -> stringCalculator.calculate(expression))
-        .isInstanceOf(InputValueException.class)
-        .hasMessage(Constant.INPUT_NULL_ERR_MSG);
+        .isInstanceOf(NullPointerException.class);
   }
 
   @ParameterizedTest
   @DisplayName("덧셈 연산 결과")
   @CsvSource({"1 + 1,2", "1 + 1 + 1,3", "2 + 1,3"})
   void resultAdditionOperation(String expression, int expected) {
-    // given
-
     // when
     int result = stringCalculator.calculate(expression);
 
@@ -51,8 +45,6 @@ public class StringCalculatorTest {
   @DisplayName("뺄셈 연산 결과")
   @CsvSource({"1 - 1,0", "1 - 1 - 1,-1", "12 - 5,7"})
   void resultMinusOperation(String expression, int expected) {
-    // given
-
     // when
     int result = stringCalculator.calculate(expression);
 
@@ -64,8 +56,6 @@ public class StringCalculatorTest {
   @DisplayName("곱셈 연산 결과")
   @CsvSource({"1 * 1,1", "1 * 3 * 5,15", "4 * -1,-4"})
   void resultMultiplyOperation(String expression, int expected) {
-    // given
-
     // when
     int result = stringCalculator.calculate(expression);
 
@@ -77,8 +67,6 @@ public class StringCalculatorTest {
   @DisplayName("나눗셈 연산 결과")
   @CsvSource({"1 / 1,1", "4 / 2 / 2,1", "12 / 3,4", "4 / -1,-4"})
   void resultDivideOperation(String expression, int expected) {
-    // given
-
     // when
     int result = stringCalculator.calculate(expression);
 
@@ -90,8 +78,6 @@ public class StringCalculatorTest {
   @DisplayName("여러개의 연산자를 통한 계산 결과")
   @CsvSource({"1 + 2 / 3, 1", "2 + 3 * 4 / 2 - 3,7"})
   void resultCalculationMultipleOperators(String expression, int expected) {
-    // given
-
     // when
     int result = stringCalculator.calculate(expression);
 
@@ -105,12 +91,9 @@ public class StringCalculatorTest {
     // given
     String expression = "1 & 4";
 
-    // when
-
-    // then
+    // when & then
     assertThatThrownBy(() -> stringCalculator.calculate(expression))
-        .isInstanceOf(InputValueException.class)
-        .hasMessage(Constant.INVALID_OPERATOR_INPUT_ERR_MSG);
+        .isInstanceOf(IllegalOperatorException.class);
   }
 
   @Test
@@ -119,12 +102,9 @@ public class StringCalculatorTest {
     // given
     String expression = "1 / 0";
 
-    // when
-
-    // then
+    // when & then
     assertThatThrownBy(() -> stringCalculator.calculate(expression))
-        .isInstanceOf(InputValueException.class)
-        .hasMessage(Constant.DIVIDE_BY_ZERO_ERR_MSG);
+        .isInstanceOf(ArithmeticException.class);
   }
 
   @Test
@@ -133,11 +113,8 @@ public class StringCalculatorTest {
     // given
     String expression = "& - 3";
 
-    // when
-
-    // then
+    // when & then
     assertThatThrownBy(() -> stringCalculator.calculate(expression))
-        .isInstanceOf(InputValueException.class)
-        .hasMessage(Constant.INPUT_NOT_NUMBER_ERR_MSG);
+        .isInstanceOf(IllegalNumberException.class);
   }
 }

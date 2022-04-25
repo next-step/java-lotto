@@ -1,8 +1,7 @@
 package stringcalculator;
 
 import java.util.List;
-import stringcalculator.commons.Constant;
-import stringcalculator.exception.InputValueException;
+import stringcalculator.exception.IllegalNumberException;
 
 public class StringCalculator {
 
@@ -20,17 +19,15 @@ public class StringCalculator {
       String operator = elements.get(i);
       int operand2 = convertToInt(elements.get(i + 1));
 
-      Operator operatorResult = Operator.findOperator(operator);
-      operatorValidate(operatorResult, operand2);
-
-      operand1 = operatorResult.calc(operand1, operand2);
+      operand1 = Operator.findOperator(operator)
+          .calc(operand1, operand2);
     }
     return operand1;
   }
 
   public void validateNullOrEmptyValue(String expression) {
     if (expression == null || expression.isEmpty()) {
-      throw new InputValueException(Constant.INPUT_NULL_ERR_MSG);
+      throw new NullPointerException();
     }
   }
 
@@ -45,19 +42,7 @@ public class StringCalculator {
 
   public void validateOperand(String value) {
     if (!value.matches(NUMBER_RANGE_REGEX)) {
-      throw new InputValueException(Constant.INPUT_NOT_NUMBER_ERR_MSG);
-    }
-  }
-
-  private void operatorValidate(Operator operatorResult, int operand) {
-    if (operatorResult == Operator.DIVIDE) {
-      divisionValueValidate(operand);
-    }
-  }
-
-  private void divisionValueValidate(int operand) {
-    if (operand == INDIVISIBLE_NUMBER_ZERO) {
-      throw new InputValueException(Constant.DIVIDE_BY_ZERO_ERR_MSG);
+      throw new IllegalNumberException(value);
     }
   }
 }

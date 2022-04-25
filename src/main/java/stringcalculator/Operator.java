@@ -2,8 +2,7 @@ package stringcalculator;
 
 import java.util.function.BinaryOperator;
 import java.util.stream.Stream;
-import stringcalculator.commons.Constant;
-import stringcalculator.exception.InputValueException;
+import stringcalculator.exception.IllegalOperatorException;
 
 public enum Operator {
 
@@ -24,7 +23,7 @@ public enum Operator {
     return Stream.of(values())
         .filter(operator -> operator.operator.equals(value))
         .findFirst()
-        .orElseThrow(() -> new InputValueException(Constant.INVALID_OPERATOR_INPUT_ERR_MSG));
+        .orElseThrow(() -> new IllegalOperatorException(value));
   }
 
   int calc(int operand1, int operand2) {
