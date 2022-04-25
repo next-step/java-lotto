@@ -8,9 +8,11 @@ public class RandomNumberGeneratorTest {
 
   @Test
   void generate() {
+    final int minNumber = 1;
     final int maxNumber = 10;
     for (int i = 0 ; i < 100 ; i++) {
-      assertThat(RandomNumberGenerator.generateRandomNumberInRange(maxNumber)).isLessThan(maxNumber);
+      int result = RandomNumberGenerator.generateRandomNumberInRange(minNumber, maxNumber);
+      assertThat(result).isBetween(minNumber, maxNumber);
     }
   }
 }
