@@ -1,14 +1,14 @@
 package lotto.model;
 
 import java.util.Objects;
-import lotto.enums.Rank;
+import lotto.enums.Release;
 
 public final class Statistics {
 
-  private final Rank rank;
+  private final Release release;
 
-  public Statistics(Rank rank) {
-    this.rank = rank;
+  public Statistics(Release release) {
+    this.release = release;
   }
 
   public double yield(int winningAmount, int haveMoney) {
@@ -24,11 +24,11 @@ public final class Statistics {
       return false;
     }
     Statistics that = (Statistics) o;
-    return rank == that.rank;
+    return release == that.release;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(rank);
+    return Objects.hash(release);
   }
 }
