@@ -30,7 +30,7 @@ public class StringCalculatorTest {
   @CsvSource({"1 + 1,2", "1 + 1 + 1,3", "2 + 1,3"})
   void resultAdditionOperation(String expression, int expected) {
     // when
-    int result = stringCalculator.calculate(expression);
+    int result = stringCalculator.calculate(expression).getValue();
 
     // then
     assertThat(result).isEqualTo(expected);
@@ -41,7 +41,7 @@ public class StringCalculatorTest {
   @CsvSource({"1 - 1,0", "1 - 1 - 1,-1", "12 - 5,7"})
   void resultMinusOperation(String expression, int expected) {
     // when
-    int result = stringCalculator.calculate(expression);
+    int result = stringCalculator.calculate(expression).getValue();
 
     // then
     assertThat(result).isEqualTo(expected);
@@ -52,7 +52,7 @@ public class StringCalculatorTest {
   @CsvSource({"1 * 1,1", "1 * 3 * 5,15", "4 * -1,-4"})
   void resultMultiplyOperation(String expression, int expected) {
     // when
-    int result = stringCalculator.calculate(expression);
+    int result = stringCalculator.calculate(expression).getValue();
 
     // then
     assertThat(result).isEqualTo(expected);
@@ -63,7 +63,7 @@ public class StringCalculatorTest {
   @CsvSource({"1 / 1,1", "4 / 2 / 2,1", "12 / 3,4", "4 / -1,-4"})
   void resultDivideOperation(String expression, int expected) {
     // when
-    int result = stringCalculator.calculate(expression);
+    int result = stringCalculator.calculate(expression).getValue();
 
     // then
     assertThat(result).isEqualTo(expected);
@@ -74,7 +74,7 @@ public class StringCalculatorTest {
   @CsvSource({"1 + 2 / 3, 1", "2 + 3 * 4 / 2 - 3,7"})
   void resultCalculationMultipleOperators(String expression, int expected) {
     // when
-    int result = stringCalculator.calculate(expression);
+    int result = stringCalculator.calculate(expression).getValue();
 
     // then
     assertThat(result).isEqualTo(expected);
