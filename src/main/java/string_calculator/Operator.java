@@ -38,17 +38,25 @@ public enum Operator implements Value {
             case MULTIPLY:
                 return new Integer(acc.value() * operand.value());
             case DIVIDE:
-                if (operand.value() == 0) {
-                    throw new ArithmeticException("Can't divide by Zero.");
-                }
-                Boolean isDividable =  acc.value() % operand.value() == 0;
-                if (isDividable) {
-                    return new Integer(acc.value() / operand.value());
-                }
-                throw new IllegalArgumentException("Can't divide.");
+                divideByZeroChecker(operand);
+                return divideToInteger(acc, operand);
             case MODULO:
                 return new Integer(acc.value() % operand.value());
         }
         throw new IllegalArgumentException("Wrong operator was used.");
+    }
+
+    private Integer divideToInteger(Integer acc, Integer operand) {
+        Boolean isDividable =  acc.value() % operand.value() == 0;
+        if (isDividable) {
+            return new Integer(acc.value() / operand.value());
+        }
+        throw new IllegalArgumentException("Can't divide.");
+    }
+
+    private void divideByZeroChecker(Integer operand) {
+        if (operand.value() == 0) {
+            throw new ArithmeticException("Can't divide by Zero.");
+        }
     }
 }

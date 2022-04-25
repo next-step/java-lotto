@@ -52,4 +52,4 @@ Result: 1
 - [x] InputView 역할 분리
 - [x] 순차적 연산 방식 while with index에서 다른 방식으로 수정 -> Iterator.next
 - [x] 축약된 변수명 수정
-- [ ] 한 단계의 indent만 수행
+- [x] 한 단계의 indent만 수행
