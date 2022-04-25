@@ -5,12 +5,11 @@ import java.util.List;
 
 public class ResultView {
 
-    public void printBoughtLottoList( List<Lotto> directlyBoughtLottoList, List<Lotto> autoUserLottoList) {
+    public void printBoughtLottoList(List<Lotto> directlyBoughtLottoList, List<Lotto> autoUserLottoList) {
         System.out.println("수동으로 " + directlyBoughtLottoList.size() + "장, 자동으로 " + autoUserLottoList.size() + "개를 구매했습니다.");
 
-        for (Lotto lotto : autoUserLottoList) {
-            System.out.println(lotto);
-        }
+        directlyBoughtLottoList.forEach(System.out::println);
+        autoUserLottoList.forEach(System.out::println);
     }
 
     public void printTotalRanks(List<Rank> ranks) {
