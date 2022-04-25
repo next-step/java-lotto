@@ -12,6 +12,7 @@ public class Lottos {
     public Lottos(int lottoAmount) {
         this.lottoNumbers = IntStream.range(START_INCLUSIVE, lottoAmount)
                 .mapToObj(it -> new LottoNumbers())
+                .map(LottoNumbers::sort)
                 .collect(Collectors.toList());
     }
 
