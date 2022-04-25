@@ -37,7 +37,6 @@ public class NumberTest {
 
     @Test
     void calculate() {
-
         Number left = new Number(2);
         Number right = new Number(1);
 
