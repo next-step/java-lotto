@@ -1,22 +1,36 @@
 package calculator;
 
-public class Calculator {
-    private Calculator() {
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.IntBinaryOperator;
+
+public enum Calculator {
+
+    PLUS("+", (a, b) -> a + b),
+    MINUS("-", (a, b) -> a - b),
+    MULTIPLY("*", (a, b) -> a * b),
+    DIVIDE("/", (a, b) -> a / b);
+
+    private static final Map<String, Calculator> BY_OPERATOR = new HashMap<>();
+    static {
+        for (Calculator calculator : values()) {
+            BY_OPERATOR.put(calculator.operator, calculator);
+        }
     }
 
-    public static int plus(int a, int b) {
-        return a + b;
+    private String operator;
+    private IntBinaryOperator intBinaryOperator;
+
+    Calculator(String operator, IntBinaryOperator intBinaryOperator) {
+        this.operator = operator;
+        this.intBinaryOperator = intBinaryOperator;
     }
 
-    public static int minus(int a, int b) {
-        return a - b;
+    public static Calculator valueOfOperator(String operator) {
+        return BY_OPERATOR.get(operator);
     }
 
-    public static int multiply(int a, int b) {
-        return a * b;
-    }
-
-    public static int divide(int a, int b) {
-        return a / b;
+    public int calculate(int a, int b) {
+        return intBinaryOperator.applyAsInt(a, b);
     }
 }

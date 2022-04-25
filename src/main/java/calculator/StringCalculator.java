@@ -8,21 +8,15 @@ public class StringCalculator {
 
     public static int calculate(String text) {
         List<String> elements = SplitString.split(text);
-        int result = Integer.parseInt(elements.get(0));
-        for (int i = 1; i < elements.size(); i++) {
-            if (elements.get(i).equals("+")) {
-                result = Calculator.plus(result, Integer.parseInt(elements.get(i + 1)));
-            }
-            if (elements.get(i).equals("-")) {
-                result = Calculator.minus(result, Integer.parseInt(elements.get(i + 1)));
-            }
-            if (elements.get(i).equals("*")) {
-                result = Calculator.multiply(result, Integer.parseInt(elements.get(i + 1)));
-            }
-            if (elements.get(i).equals("/")) {
-                result = Calculator.divide(result, Integer.parseInt(elements.get(i + 1)));
-            }
+        int resultValue = Integer.parseInt(elements.get(0));
+        for (int index = 1; index < elements.size(); index += 2) {
+            Calculator calculator = Calculator.valueOfOperator(elements.get(index));
+            resultValue = calculator.calculate(resultValue, getOperand(elements.get(index + 1)));
         }
-        return result;
+        return resultValue;
+    }
+
+    private static int getOperand(String value) {
+        return Integer.parseInt(value);
     }
 }
