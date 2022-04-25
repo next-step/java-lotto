@@ -1,9 +1,9 @@
 package calculator.util;
 
 import calculator.model.Number;
-import calculator.model.Numbers;
+import calculator.model.collection.Numbers;
 import calculator.model.Symbol;
-import calculator.model.Symbols;
+import calculator.model.collection.Symbols;
 
 import java.util.List;
 import java.util.function.Function;
