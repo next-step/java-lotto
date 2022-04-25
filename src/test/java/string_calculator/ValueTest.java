@@ -19,14 +19,14 @@ public class ValueTest {
 //    @CsvSource(value = {"!:false", "@:false", "#:false", "$:false", "%:true", "^:true", "&:false", "*:true", "-:true", "+:true"}, delimiter = ':')
     @ValueSource(strings = {"!", "@", "#", "$", "^", "&"})
     void wrongOperator(String input) {
-        InputView i = new InputView();
-        assertThatThrownBy(() -> i.evaluateOperator(input)).isInstanceOf(IllegalArgumentException.class);
+        Parser p = new Parser();
+        assertThatThrownBy(() -> p.evaluateOperator(input)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"+", "-", "*", "/", "%"})
     void collectOperator(String input) {
-        InputView i = new InputView();
-        assertThat(i.evaluateOperator(input)).isInstanceOf(Operator.class);
+        Parser p = new Parser();
+        assertThat(p.evaluateOperator(input)).isInstanceOf(Operator.class);
     }
 }

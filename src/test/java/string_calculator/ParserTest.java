@@ -8,24 +8,24 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class InputViewTest {
+public class ParserTest {
     @Test
     void parseTest() {
-        InputView i = new InputView();
-        i.parse("1 + 2");
+        Parser p = new Parser();
+        p.parse("1 + 2");
         List<Value> values = new ArrayList<Value>() {{
             add(new Integer(1));
             add(Operator.PLUS);
             add(new Integer(2));
         }};
-        assertThat(i.values).isEqualTo(values);
+        assertThat(p.values).isEqualTo(values);
     }
 
     @Test
     void shouldThrowError() {
-        InputView i = new InputView();
-        assertThatThrownBy(() -> i.parse("1+2")).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> i.parse("1 + 2 +")).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> i.parse("1 + 2 ! 3")).isInstanceOf(IllegalArgumentException.class);
+        Parser p = new Parser();
+        assertThatThrownBy(() -> p.parse("1+2")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> p.parse("1 + 2 +")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> p.parse("1 + 2 ! 3")).isInstanceOf(IllegalArgumentException.class);
     }
 }

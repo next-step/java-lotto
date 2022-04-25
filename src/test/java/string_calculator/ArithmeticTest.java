@@ -44,25 +44,25 @@ public class ArithmeticTest {
 
     @Test
     void shouldThrowErrorIfResultIsNotInteger() {
-        InputView i = new InputView();
-        i.parse("3 / 2");
+        Parser p = new Parser();
+        p.parse("3 / 2");
         Arithmetic a = new Arithmetic();
-        assertThatThrownBy(() -> a.computes(i.values)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> a.computes(p.values)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void shouldThrowErrorIfDividedByZero() {
-        InputView i = new InputView();
-        i.parse("3 / 0");
+        Parser p = new Parser();
+        p.parse("3 / 0");
         Arithmetic a = new Arithmetic();
-        assertThatThrownBy(() -> a.computes(i.values)).isInstanceOf(ArithmeticException.class);
+        assertThatThrownBy(() -> a.computes(p.values)).isInstanceOf(ArithmeticException.class);
     }
 
     @Test
     void shouldReturnCollectAnswer() {
-        InputView i = new InputView();
-        i.parse("2 + 3 * 4 / 2");
+        Parser p = new Parser();
+        p.parse("2 + 3 * 4 / 2");
         Arithmetic a = new Arithmetic();
-        assertThat(a.computes(i.values)).isEqualTo(new Integer(10));
+        assertThat(a.computes(p.values)).isEqualTo(new Integer(10));
     }
 }
