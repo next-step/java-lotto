@@ -14,12 +14,7 @@ import stringcalculator.exception.IllegalOperatorException;
 
 public class StringCalculatorTest {
 
-  private StringCalculator stringCalculator;
-
-  @BeforeEach
-  void beforeEach() {
-    stringCalculator = new StringCalculator();
-  }
+  private static final StringCalculator stringCalculator = new StringCalculator();
 
   @ParameterizedTest
   @DisplayName("null 및 empty가 입력으로 들어온 경우 예외처리")

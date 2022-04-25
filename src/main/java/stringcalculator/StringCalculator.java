@@ -7,7 +7,6 @@ public class StringCalculator {
 
   private static final String BASIC_SPLIT_REGEX = " ";
   private static final String NUMBER_RANGE_REGEX = "^-?\\d+$";
-  private static final int INDIVISIBLE_NUMBER_ZERO = 0;
 
   public int calculate(String expression) {
     validateNullOrEmptyValue(expression);
