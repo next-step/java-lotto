@@ -1,3 +1,4 @@
+
 # 로또
 ## 진행 방법
 * 로또 요구사항을 파악한다.
@@ -15,16 +16,43 @@
 - 사칙 연산을 모두 포함하는 기능 구현
 
 # 기능 목록
-## StringCalculator
+## LottoApplication
+### LottoController
+- 로또를 구입할 금액을 설정할 수 있다.
+- 로또를 구입할 금액은 최소 로또 금액(1000원)보다 커야한다.
+- 당첨 번호를 입력할 수 있다.
+- 구입한 로또의 수익률을 계산할 수 있다.
+
+### LottoNumber
+- 번호는 1에서 45사이의 숫자이다.
+- 번호를 문자열로 출력할 수 있다.
+- 번호의 비교가 가능하다.
+
+### Lotto
+- 중복되지 않는 6개의 LottoNumber를 가진다.
+- 임의의 로또와 비교하여 x개의 LottoNumber가 일치하는 지를 알 수 있다.
+- 문자열로 출력할 수 있다.
+
+### LottoList
+- 몇 개의 로또가 있는지를 알 수 있다.
+- 보유한 로또를 문자열로 출력할 수 있다.
+- 임의의 로또와 비교하여 x개의 LottoNumber가 일치하는 Lotto의 갯수를 알 수 있다.
+
+### LottoPrize
+- 임의의 로또와 비교하여 특정 갯수의 숫자가 일치하는 지를 알 수 있다.
+- 일치하는 Lotto의 갯수로 수익을 알 수 있다.
+
+## 문자열 사칙연산 계산기
+### StringCalculator
 - 사칙연산이 가능한 문자열을 입력받아 계산할 수 있다.
 
-## StringsForCalculation
+### StringsForCalculation
 - 파싱된 사칙연산할 문자열을 계산할 수 있다.
 
-## OperationMap
+### OperationMap
 - 사칙연사 문자와 숫자 두개를 받아 해당 연산을 수행한다.
 
-## Calculation
+### Calculation
 - 숫자 두개로 사칙연산을 할 수 있다.
 
 ## 온라인 코드 리뷰 과정
