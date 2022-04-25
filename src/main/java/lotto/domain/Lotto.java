@@ -28,6 +28,16 @@ public class Lotto {
     return create(RandomIntegerSetGenerator.getRandomIntegers());
   }
 
+  public Rank getRank(Lotto other) {
+    return Rank.valueOf(getInterSectionSize(other));
+  }
+
+  private int getInterSectionSize(Lotto other) {
+    Set<LottoNumber> intersection = new TreeSet<>(values);
+    intersection.retainAll(other.values);
+    return intersection.size();
+  }
+
   private void validate(Set<LottoNumber> values) {
     if (values.size() != LOTTO_SIZE) {
       throw new IllegalArgumentException(INVALID_SIZE_MESSAGE);
