@@ -1,30 +1,26 @@
 package calculator.model;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Numbers {
-
-    private final List<Number> numbers;
+public class Numbers extends Collection<Number> {
 
     public Numbers() {
-        this.numbers = new ArrayList<>();
+        this.values = new ArrayList<>();
     }
 
+    @Override
     public void add(Number number) {
-        this.numbers.add(number);
+        this.values.add(number);
     }
 
-    public void addAll(Numbers numbers) {
-        this.numbers.addAll(numbers.numbers);
+    @Override
+    public void addAll(Collection<Number> numbers) {
+        this.values.addAll(numbers.values);
     }
 
     public Number calculate(Symbols symbols) {
         AtomicInteger index = new AtomicInteger();
-        return this.numbers
-                .stream()
-                .reduce((left, right) -> left.calculate(symbols.get(index.getAndIncrement()), right))
-                .orElseThrow();
+        return this.values.stream().reduce((left, right) -> left.calculate(symbols.get(index.getAndIncrement()), right)).orElseThrow();
     }
 }

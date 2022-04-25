@@ -1,25 +1,24 @@
 package calculator.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class Symbols {
-
-    private final List<Symbol> symbols;
+public class Symbols extends Collection<Symbol> {
 
     public Symbols() {
-        this.symbols = new ArrayList<>();
+        this.values = new ArrayList<>();
     }
 
+    @Override
     public void add(Symbol symbol) {
-        this.symbols.add(symbol);
+        this.values.add(symbol);
     }
 
-    public void addAll(Symbols symbols) {
-        this.symbols.addAll(symbols.symbols);
+    @Override
+    public void addAll(Collection<Symbol> symbols) {
+        this.values.addAll(symbols.values);
     }
 
     public Symbol get(int index) {
-        return this.symbols.get(index);
+        return this.values.get(index);
     }
 }
