@@ -1,13 +1,15 @@
 package lotto.controller;
 
+import lotto.domain.Lottos;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoMachine {
     public void pull() {
-        int price = InputView.inputPrice();
-        OutputView.outputLottoNumbers(price);
-        System.out.println();
+        int userAmount = InputView.inputUserAmount();
+
+        Lottos lottos = new Lottos(userAmount);
+        OutputView.outputLottoNumbers(lottos);
 
         String previousWeekWinningNumber = InputView.inputPreviousWeekWinningNumber();
         System.out.println("previousWeekWinningNumber = " + previousWeekWinningNumber);

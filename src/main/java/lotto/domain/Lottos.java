@@ -6,14 +6,19 @@ import java.util.stream.IntStream;
 
 public class Lottos {
     private static final int START_INCLUSIVE = 0;
+    private static final int LOTTO_PRICE = 1000;
 
     private final List<LottoNumbers> lottoNumbers;
 
-    public Lottos(int lottoAmount) {
-        this.lottoNumbers = IntStream.range(START_INCLUSIVE, lottoAmount)
+    public Lottos(int userAmount) {
+        this.lottoNumbers = IntStream.range(START_INCLUSIVE, userAmount / LOTTO_PRICE)
                 .mapToObj(it -> new LottoNumbers())
                 .map(LottoNumbers::sort)
                 .collect(Collectors.toList());
+    }
+
+    public int length() {
+        return this.lottoNumbers.size();
     }
 
     @Override
