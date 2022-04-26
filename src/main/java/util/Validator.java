@@ -16,11 +16,4 @@ public class Validator {
       throw new IllegalArgumentException(errorMessage);
     }
   }
-
-  public static String buildArgumentErrorMessage(
-      String mainMessage,
-      Object... formatArguments
-  ) {
-    return String.format(mainMessage, formatArguments);
-  }
 }
