@@ -10,22 +10,27 @@ public class LottoApplication {
     public static void main(String[] args) {
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
-
-        int insertLottoPrice = inputView.insertLottoPrice();
-
         LottoGenerator lottoGenerator = new LottoGenerator();
-        List<Lotto> lotteries = lottoGenerator.generate(insertLottoPrice);
 
-        resultView.printPurchaseLottoList(lotteries);
+        int purchasePrice = inputView.insertLottoPrice();
+        int directlyBoughtCount = inputView.insertDirectlyBoughtCount();
 
-        List<Integer> winningLotto = inputView.insertWinningLotto();
-        int bonusNumber = inputView.insertBonusNumber();
+        List<String[]> directlyUserLottoStringList = inputView.insertDirectlyBoughtLottoList(directlyBoughtCount);
 
-        List<Rank> ranks = LottoMachine.findBoughtLottoRank(winningLotto, lotteries, bonusNumber);
+        List<Lotto> directlyUserLottoList = lottoGenerator.generateDirectlyLotto(directlyUserLottoStringList);
+        List<Lotto> autoUserLottoList = lottoGenerator.generateLotteries(purchasePrice, directlyBoughtCount);
 
-        resultView.printLottoRank(ranks);
+        resultView.printBoughtLottoList(directlyUserLottoList, autoUserLottoList);
+        directlyUserLottoList.addAll(autoUserLottoList);
 
-        double rate = StatisticCalculator.calculateRate(insertLottoPrice, ranks);
-        resultView.printTotalRate(rate);
+        Lotto winningLotto = inputView.insertWinningLotto();
+        LottoNumber bonusLottoNumber = new LottoNumber(inputView.insertBonusNumber());
+
+        List<Rank> directlyLottoRank = LottoMachine.findUserLottoRanks(directlyUserLottoList, winningLotto, bonusLottoNumber);
+
+        resultView.printTotalRanks(directlyLottoRank);
+
+        double totalRate = StatisticCalculator.calculateRate(purchasePrice, directlyLottoRank);
+        resultView.printTotalRate(totalRate);
     }
 }
