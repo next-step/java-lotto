@@ -24,26 +24,26 @@ class LottoWinnerTest {
                     String previousLottoString = "1, 5, 15, 20, 30, 43";
                     Lotto previousLotto = new Lotto(Utility.convertStringArrayToIntegerArray(Utility.split(previousLottoString)));
 
-                    LottoWinner winner = new LottoWinner();
-                    winner.calculateWinner(lottos, previousLotto);
+                    LottoWinner lottoMachine = LottoWinner.createLottoMachine();
+                    lottoMachine.calculateWinner(lottos, previousLotto);
 
                     Map<LottoWinnerType, Integer> winners = new HashMap<>();
                     winners.put(LottoWinnerType.SECOND_PLACE, 1);
                     winners.put(LottoWinnerType.FOURTH_PLACE, 1);
 
-                    assertTrue(winner.getWinners().equals(winners));
+                    assertTrue(lottoMachine.getWinners().equals(winners));
                 },
                 () -> {
                     String previousLottoString = "2, 5, 15, 20, 30, 43";
                     Lotto previousLotto = new Lotto(Utility.convertStringArrayToIntegerArray(Utility.split(previousLottoString)));
 
-                    LottoWinner winner = new LottoWinner();
-                    winner.calculateWinner(lottos, previousLotto);
+                    LottoWinner lottoMachine = LottoWinner.createLottoMachine();
+                    lottoMachine.calculateWinner(lottos, previousLotto);
 
                     Map<LottoWinnerType, Integer> winners = new HashMap<>();
                     winners.put(LottoWinnerType.THIRD_PLACE, 2);
 
-                    assertTrue(winner.getWinners().equals(winners));
+                    assertTrue(lottoMachine.getWinners().equals(winners));
                 }
 
         );
@@ -60,17 +60,17 @@ class LottoWinnerTest {
                     String previousLottoString = "1, 5, 15, 20, 30, 43";
                     Lotto previousLotto = new Lotto(Utility.convertStringArrayToIntegerArray(Utility.split(previousLottoString)));
 
-                    LottoWinner winner = new LottoWinner();
-                    winner.calculateWinner(lottos, previousLotto);
-                    assertThat(winner.calculateYield(winner, 10000)).isEqualTo(150.5f);
+                    LottoWinner lottoMachine = LottoWinner.createLottoMachine();
+                    lottoMachine.calculateWinner(lottos, previousLotto);
+                    assertThat(lottoMachine.calculateYield(lottoMachine, 10000)).isEqualTo(150.5f);
                 },
                 () -> {
                     String previousLottoString = "2, 5, 15, 20, 30, 43";
                     Lotto previousLotto = new Lotto(Utility.convertStringArrayToIntegerArray(Utility.split(previousLottoString)));
 
-                    LottoWinner winner = new LottoWinner();
-                    winner.calculateWinner(lottos, previousLotto);
-                    assertThat(winner.calculateYield(winner, 10000)).isEqualTo(10.0f);
+                    LottoWinner lottoMachine = LottoWinner.createLottoMachine();
+                    lottoMachine.calculateWinner(lottos, previousLotto);
+                    assertThat(lottoMachine.calculateYield(lottoMachine, 10000)).isEqualTo(10.0f);
                 }
 
         );

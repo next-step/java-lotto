@@ -8,21 +8,27 @@ import java.util.Map;
 public class LottoWinner {
     private final Map<LottoWinnerType, Integer> winners;
 
-    LottoWinner() {
+    private LottoWinner() {
         this.winners = new HashMap<>();
+    }
+
+    public static LottoWinner createLottoMachine() {
+        return new LottoWinner();
     }
 
     LottoWinner(Map<LottoWinnerType, Integer> winners) {
         this.winners = winners;
     }
 
-    public void calculateWinner(List<Lotto> lottos, Lotto previousLotto) {
+    public LottoWinner calculateWinner(List<Lotto> lottos, Lotto previousLotto) {
         for (Lotto lotto : lottos) {
             int countOfDuplicate = accumulateStats(lotto, previousLotto);
             LottoWinnerType winnerType = LottoWinnerType.valueOf(countOfDuplicate);
             int countOfWinners = winners.get(winnerType) != null ? winners.get(winnerType) : 0;
             winners.put(winnerType, countOfWinners + 1);
         }
+
+        return this;
     }
 
     private int accumulateStats(Lotto lotto, Lotto previousLotto) {
