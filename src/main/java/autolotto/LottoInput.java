@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class LottoInput {
     private static final Scanner scanner = new Scanner(System.in);
+
     public int prompt(String question) {
         System.out.println(question);
 
