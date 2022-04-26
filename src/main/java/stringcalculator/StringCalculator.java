@@ -1,11 +1,11 @@
 package stringcalculator;
 
 
-import java.util.List;
 import java.util.Objects;
 
 public class StringCalculator {
-    public static final int BASE_NUMBER_INDEX = 0;
+
+    public static final int LAST_CONDITION = 3;
 
     private StringCalculator() {
         throw new AssertionError();
@@ -13,8 +13,8 @@ public class StringCalculator {
 
     public static int calculate(String input) {
         validate(input);
-        List<String> inputs = ExtractFormula.splitText(input);
-        return calculate(inputs);
+        Items items = new Items(ExtractFormula.splitText(input));
+        return calculate(items);
     }
 
     private static void validate(String input) {
@@ -24,18 +24,19 @@ public class StringCalculator {
         }
     }
 
-    private static int calculate(List<String> inputs) {
-        int baseNumber = getNumber(inputs.get(BASE_NUMBER_INDEX));
-        int length = inputs.size();
-        for (int i = 1; i < length - 1; i++) {
-            Calculator calculator = new Calculator(inputs.get(i));
-            int targetNumber = getNumber(inputs.get(++i));
-            baseNumber = calculator.calculate(baseNumber, targetNumber);
+    private static int calculate(Items items) {
+        int result = getResult(items);
+        if (items.size() == LAST_CONDITION) {
+            return result;
         }
-        return baseNumber;
+        return calculate(Items.of(result, items));
     }
 
-    private static int getNumber(String text) {
-        return Integer.parseInt(text);
+    private static int getResult(Items items) {
+        int baseNumber = items.getFirstOperand();
+        int targetNumber = items.getSecondOperand();
+        Calculator calculator = new Calculator(items.getOperator());
+
+        return calculator.calculate(baseNumber, targetNumber);
     }
 }
