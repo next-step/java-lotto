@@ -17,10 +17,7 @@ public class Lotto {
     private final Set<LottoNo> lottoNumbers = new HashSet<>();
 
     public Lotto() {
-        Collections.shuffle(NUMBER_POOL);
-        IntStream.range(0, LOTTO_SIZE)
-                .mapToObj(i -> new LottoNo(NUMBER_POOL.get(i)))
-                .forEach(lottoNumbers::add);
+        this(generateRandomList());
     }
 
     public Lotto(List<Integer> numbers) {
@@ -28,7 +25,14 @@ public class Lotto {
         numbers.forEach(number -> lottoNumbers.add(new LottoNo(number)));
     }
 
-    private void validateNumbers(List<Integer> numbers) {
+    private static List<Integer> generateRandomList() {
+        Collections.shuffle(NUMBER_POOL);
+        return IntStream.range(0, LOTTO_SIZE)
+                .mapToObj(NUMBER_POOL::get)
+                .collect(Collectors.toList());
+    }
+
+    private static void validateNumbers(List<Integer> numbers) {
         HashSet<Integer> uniqueNumbers = new HashSet<>(numbers);
 
         if (uniqueNumbers.size() != LOTTO_SIZE) {
@@ -67,7 +71,7 @@ public class Lotto {
                 .count();
     }
 
-    private boolean contains(int number) {
+    public boolean contains(int number) {
         return lottoNumbers.stream()
                 .anyMatch(lottoNo -> lottoNo.equals(new LottoNo(number)));
     }
