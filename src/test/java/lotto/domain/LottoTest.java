@@ -66,4 +66,50 @@ class LottoTest {
                 }
         );
     }
+
+    @Test
+    void 로또_당첨_타입_반환_테스트() {
+        List<Integer> lottoNumber = Arrays.asList(new Integer[]{5,27,29,35,39,44});
+        Lotto lotto = new Lotto(lottoNumber);
+
+        assertAll(
+                () -> {
+                    List<Integer> previousLottoNumber = Arrays.asList(new Integer[]{5,28,29,35,39,44});
+                    Lotto previousLotto = new Lotto(previousLottoNumber);
+                    int bonusNumber = 28;
+
+                    assertThat(lotto.winLotto(previousLotto, bonusNumber)).isEqualTo(LottoWinnerType.valueOf(5, false));
+                },
+                () -> {
+                    List<Integer> previousLottoNumber = Arrays.asList(new Integer[]{5,28,29,35,39,44});
+                    Lotto previousLotto = new Lotto(previousLottoNumber);
+                    int bonusNumber = 27;
+
+                    assertThat(lotto.winLotto(previousLotto, bonusNumber)).isEqualTo(LottoWinnerType.valueOf(5, true));
+                }
+        );
+    }
+
+    @Test
+    void 로또_당첨_상금_반환_테스트() {
+        List<Integer> lottoNumber = Arrays.asList(new Integer[]{5,27,29,35,39,44});
+        Lotto lotto = new Lotto(lottoNumber);
+
+        assertAll(
+                () -> {
+                    List<Integer> previousLottoNumber = Arrays.asList(new Integer[]{5,28,29,35,39,44});
+                    Lotto previousLotto = new Lotto(previousLottoNumber);
+                    int bonusNumber = 28;
+
+                    assertThat(lotto.winLotto(previousLotto, bonusNumber).getPrize()).isEqualTo(LottoWinnerType.prize(5, false));
+                },
+                () -> {
+                    List<Integer> previousLottoNumber = Arrays.asList(new Integer[]{5,28,29,35,39,44});
+                    Lotto previousLotto = new Lotto(previousLottoNumber);
+                    int bonusNumber = 27;
+
+                    assertThat(lotto.winLotto(previousLotto, bonusNumber).getPrize()).isEqualTo(LottoWinnerType.prize(5, true));
+                }
+        );
+    }
 }
