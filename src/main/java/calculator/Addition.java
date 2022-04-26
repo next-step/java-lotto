@@ -1,7 +1,4 @@
-package Calculator;
-
-import java.util.ArrayList;
-import java.util.List;
+package calculator;
 
 public class Addition {
     public int sum(int firstNumber, int secondNumber) {

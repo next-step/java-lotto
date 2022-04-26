@@ -1,4 +1,4 @@
-package Calculator;
+package calculator;
 
 public class Division {
 
