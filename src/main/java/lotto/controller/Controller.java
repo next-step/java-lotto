@@ -18,9 +18,10 @@ public class Controller {
 
         Integer[] previousLottoNumber = Utility.convertStringArrayToIntegerArray(Utility.split(InputView.inputLottoOfPreviousWeek()));
         Lotto previousLotto = new Lotto(previousLottoNumber);
+        int bonusNumber = InputView.inputBonusNumber();
 
         LottoWinner lottoMachine = LottoWinner.createLottoMachine();
-        LottoWinner winner = lottoMachine.calculateWinner(lottos, previousLotto);
+        LottoWinner winner = lottoMachine.calculateWinner(lottos, previousLotto, bonusNumber);
         float yield = lottoMachine.calculateYield(winner, price);
 
         ResultView.printWinnerStats(winner);
