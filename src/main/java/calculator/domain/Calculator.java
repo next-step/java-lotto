@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Calculator {
 
+  private static final int OPERATOR_START_INDEX = 1;
+  private static final int DISTANCE_TO_NEXT_OPERATOR = 2;
   private static final String EMPTY_INPUT_MESSAGE = "계산할 문자열을 입력해주세요.";
   private static final String INVALID_INPUT_MESSAGE = "올바른 계산식을 입력해주세요.";
   private static final String DELIMITER = " ";
@@ -19,9 +21,9 @@ public class Calculator {
     this.values = values;
   }
 
-  public Integer calculate() {
-    Integer result = Integer.parseInt(values.get(0));
-    for (int i = 1; i < values.size() - 1; i += 2) {
+  public int calculate() {
+    int result = Integer.parseInt(values.get(0));
+    for (int i = OPERATOR_START_INDEX; i < values.size() - 1; i += DISTANCE_TO_NEXT_OPERATOR) {
       Operation operation = Operation.valueOfOperator(values.get(i));
       result = operation.apply(result, Integer.parseInt(values.get(i + 1)));
     }

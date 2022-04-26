@@ -1,25 +1,17 @@
 package calculator.domain;
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.function.IntBinaryOperator;
+import java.util.stream.Collectors;
 
 public enum Operation {
-  ADD("+", (a, b) -> {
-    validateNull(a, b);
-    return a + b;
-  }),
-  SUBTRACT("-", (a, b) -> {
-    validateNull(a, b);
-    return a - b;
-  }),
-  MULTIPLY("*", (a, b) -> {
-    validateNull(a, b);
-    return a * b;
-  }),
+  ADD("+", (a, b) -> a + b),
+  SUBTRACT("-", (a, b) -> a - b),
+  MULTIPLY("*", (a, b) -> a * b),
   DIVIDE("/", (a, b) -> {
-    validateNull(a, b);
     if (b == 0) {
       throw new ArithmeticException("0으로 나눌 수 없습니다.");
     }
@@ -27,22 +19,18 @@ public enum Operation {
   });
 
   private final String operator;
-  private final BinaryOperator<Integer> binaryOperator;
+  private final IntBinaryOperator binaryOperator;
 
-  private static final Map<String, Operation> BY_OPERATOR = new HashMap<>();
-  static {
-    for (Operation e : values()) {
-      BY_OPERATOR.put(e.operator, e);
-    }
-  }
+  private static final Map<String, Operation> BY_OPERATOR = Arrays.stream(values())
+      .collect(Collectors.toMap(operation -> operation.operator, Function.identity()));
 
-  Operation(String operator, BinaryOperator<Integer> binaryOperator) {
+  Operation(String operator, IntBinaryOperator binaryOperator) {
     this.operator = operator;
     this.binaryOperator = binaryOperator;
   }
 
-  public Integer apply(Integer a, Integer b) {
-    return binaryOperator.apply(a, b);
+  public int apply(int a, int b) {
+    return binaryOperator.applyAsInt(a, b);
   }
 
   public static Operation valueOfOperator(String operator) {
@@ -55,11 +43,5 @@ public enum Operation {
 
   public static Set<String> getOperatorSet() {
     return BY_OPERATOR.keySet();
-  }
-
-  private static void validateNull(Integer a, Integer b) {
-    if (a == null || b == null) {
-      throw new IllegalArgumentException("계산할 수 없는 값입니다. (ex. null)");
-    }
   }
 }
