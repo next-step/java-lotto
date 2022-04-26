@@ -3,7 +3,7 @@ package lotto.enums;
 import java.util.List;
 import lotto.model.Product;
 
-public enum Release {
+public enum Grade {
 
   THREE(3, 5_000),
   FOUR(4, 50_000),
@@ -16,7 +16,7 @@ public enum Release {
   private final int awardPrice;
 
 
-  Release(int expectNumber, int awardPrice) {
+  Grade(int expectNumber, int awardPrice) {
     this.expectNumber = expectNumber;
     this.awardPrice = awardPrice;
   }

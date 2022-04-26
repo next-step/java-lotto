@@ -2,7 +2,7 @@ package lotto.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.enums.Release;
+import lotto.enums.Grade;
 import lotto.model.Guest;
 import lotto.model.Product;
 import lotto.model.Statistics;
@@ -25,8 +25,8 @@ public class LottoService {
 
   public List<Statistics> getStatistics(List<Product> products, List<Integer> awardNumberList) {
     List<Statistics> statistics = new ArrayList<>();
-    for (Release release : Release.values()) {
-      Statistics statistic = new Statistics(release).awardCount(products, awardNumberList);
+    for (Grade grade : Grade.values()) {
+      Statistics statistic = new Statistics(grade).awardCount(products, awardNumberList);
       statistics.add(statistic);
     }
     return statistics;
