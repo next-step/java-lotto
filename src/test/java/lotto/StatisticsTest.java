@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import lotto.enums.Release;
 import lotto.model.Product;
-import lotto.model.Statistics;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,10 +20,4 @@ class StatisticsTest {
     assertThat(Release.THREE.coincideLotto(allLotto, winNumbers)).isEqualTo(1);
   }
 
-  @Test
-  @DisplayName("수익률 테스트")
-  void yield() {
-    Statistics statistics = new Statistics(Release.THREE);
-    assertThat(statistics.yield(5000, 14000)).isEqualTo(0.35);
-  }
 }
