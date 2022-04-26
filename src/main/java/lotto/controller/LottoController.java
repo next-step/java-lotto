@@ -3,6 +3,7 @@ package lotto.controller;
 import java.util.List;
 import lotto.model.Guest;
 import lotto.model.Product;
+import lotto.model.Statistics;
 import lotto.model.Store;
 import lotto.service.LottoService;
 import lotto.view.InputTable;
@@ -26,7 +27,7 @@ public class LottoController {
     OutputTable.lastWeekAwardNumber();
     List<Integer> awardNumberList = getAwardNumberList(InputTable.inputAwardNumber());
     OutputTable.resultStatistics();
-//    OutputTable.printStatistics(statistics(products, awardNumberList));
+    OutputTable.printStatistics(statistics(products, awardNumberList));
   }
 
   public Guest visit(Integer money, Store store) {
@@ -45,7 +46,7 @@ public class LottoController {
     return lottoService.getAwardNumberList(awardNumber);
   }
 
-//  public int statistics(List<Product> products, List<Integer> awardNumberList) {
-//    return lottoService.statistics(products, awardNumberList);
-//  }
+  public List<Statistics> statistics(List<Product> products, List<Integer> awardNumberList) {
+    return lottoService.getStatistics(products,awardNumberList);
+  }
 }

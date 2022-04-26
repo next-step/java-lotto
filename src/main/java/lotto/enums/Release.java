@@ -7,7 +7,7 @@ public enum Release {
 
   THREE(3, 5_000),
   FOUR(4, 50_000),
-  FIX(5, 1_500_000),
+  FIVE(5, 1_500_000),
   SIX(6, 2_000_000_000);
 
   private static final Integer GUESSED = 1;
@@ -19,6 +19,14 @@ public enum Release {
   Release(int expectNumber, int awardPrice) {
     this.expectNumber = expectNumber;
     this.awardPrice = awardPrice;
+  }
+
+  public int getExpectNumber() {
+    return expectNumber;
+  }
+
+  public int getAwardPrice() {
+    return awardPrice;
   }
 
   public int coincideLotto(List<Product> allProducts, List<Integer> winNumbers) {
