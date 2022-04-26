@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.WinningLotto;
 import lotto.ui.InputView;
 import lotto.ui.OutputView;
 
@@ -13,12 +14,8 @@ public class Main {
 
     public static void main(String[] args) {
         Lottos lottos = createLottos();
-
-        Lotto winningLotto = InputView.promptWinningLotto();
-        int bonusNumber = InputView.promptBonusNumber();
-        Lotto.validateBonusNumber(winningLotto, bonusNumber);
-
-        OutputView.printResult(lottos, winningLotto, bonusNumber);
+        WinningLotto winningLotto = createWinningLotto();
+        OutputView.printResult(lottos, winningLotto);
     }
 
     private static Lottos createLottos() {
@@ -37,6 +34,12 @@ public class Main {
         Lottos lottos = Lottos.createLottos(manualLottos, autoLottos);
         OutputView.printLottos(lottos, manualLottoSize, autoLottoSize);
         return lottos;
+    }
+
+    private static WinningLotto createWinningLotto() {
+        Lotto winningLotto = InputView.promptWinningLotto();
+        int bonusNumber = InputView.promptBonusNumber();
+        return new WinningLotto(winningLotto, bonusNumber);
     }
 
     private static int promptPurchaseAmount() {

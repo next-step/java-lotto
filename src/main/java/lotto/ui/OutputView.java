@@ -3,6 +3,7 @@ package lotto.ui;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Prize;
+import lotto.domain.WinningLotto;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -41,12 +42,12 @@ public class OutputView {
         System.out.println(sb);
     }
 
-    public static void printResult(Lottos lottos, Lotto winningLotto, int bonusNumber) {
+    public static void printResult(Lottos lottos, WinningLotto winningLotto) {
         System.out.println("당첨 통계");
         System.out.println("----------");
 
         Map<Prize, Long> matchCountings =
-                createMatchCountings(lottos, winningLotto, bonusNumber);
+                createMatchCountings(lottos, winningLotto);
 
         Arrays.stream(Prize.values())
                         .forEach(prize -> System.out.printf("%d개 일치 (%.0f원) - %d개%n",
@@ -54,13 +55,13 @@ public class OutputView {
                                 prize.getEarnings(),
                                 matchCountings.getOrDefault(prize, 0L)));
 
-        System.out.printf("총 수익률은 %.2f입니다.%n", lottos.earningRate(winningLotto, bonusNumber));
+        System.out.printf("총 수익률은 %.2f입니다.%n", lottos.earningRate(winningLotto));
     }
 
-    private static Map<Prize, Long> createMatchCountings(Lottos lottos, Lotto winningLotto, int bonusNumber) {
+    private static Map<Prize, Long> createMatchCountings(Lottos lottos, WinningLotto winningLotto) {
         return lottos.getLottos()
                 .stream()
-                .map(lotto -> lotto.findPrize(winningLotto, bonusNumber))
+                .map(lotto -> lotto.findPrize(winningLotto))
                 .collect(Collectors.groupingBy(Function.identity(), counting()));
     }
 

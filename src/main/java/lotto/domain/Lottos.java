@@ -20,23 +20,18 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-
-    public double earningRate(Lotto winningLotto, int bonusNumber) {
-        return earnings(winningLotto, bonusNumber) / expense();
+    public double earningRate(WinningLotto winningLotto) {
+        return earnings(winningLotto) / expense();
     }
 
-    private double earnings(Lotto winningLotto, int bonusNumber) {
+    private double earnings(WinningLotto winningLotto) {
         return lottos.stream()
-                .mapToDouble(lotto -> lotto.earnings(winningLotto, bonusNumber))
+                .mapToDouble(lotto -> lotto.earnings(winningLotto))
                 .sum();
     }
 
     private int expense() {
         return lottos.size() * LOTTO_PRICE;
-    }
-
-    public int size() {
-        return lottos.size();
     }
 
     public List<Lotto> getLottos() {

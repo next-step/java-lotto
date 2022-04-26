@@ -22,7 +22,7 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
-        numbers.forEach(number -> lottoNumbers.add(new LottoNo(number)));
+        numbers.forEach(number -> lottoNumbers.add(LottoNo.of(number)));
     }
 
     private static List<Integer> generateRandomList() {
@@ -48,24 +48,16 @@ public class Lotto {
         return lottos;
     }
 
-    public static void validateBonusNumber(Lotto winningLotto, int bonusNumber) {
-        if (bonusNumber < MIN_VALID_NUMBER || bonusNumber > MAX_VALID_NUMBER) {
-            throw new IllegalArgumentException("bonus number is out of range : " + bonusNumber);
-        }
-        if (winningLotto.contains(bonusNumber)) {
-            throw new IllegalArgumentException("bonus number is already used: " + bonusNumber);
-        }
+    public double earnings(WinningLotto winningLotto) {
+        return findPrize(winningLotto).getEarnings();
     }
 
-    public double earnings(Lotto winningLotto, int bonusNumber) {
-        return findPrize(winningLotto, bonusNumber).getEarnings();
+    public Prize findPrize(WinningLotto winningLotto) {
+        return Prize.findPrizeByMatchCount(
+                winningLotto.matchCount(this), winningLotto.matchBonus(this));
     }
 
-    public Prize findPrize(Lotto winningLotto, int bonusNumber) {
-        return Prize.findPrizeByMatchCount(matchCount(winningLotto), contains(bonusNumber));
-    }
-
-    private int matchCount(Lotto winningLotto) {
+    public int matchCount(Lotto winningLotto) {
         return (int) lottoNumbers.stream()
                 .filter(lottoNo -> winningLotto.contains(lottoNo.getNumber()))
                 .count();
@@ -73,7 +65,7 @@ public class Lotto {
 
     public boolean contains(int number) {
         return lottoNumbers.stream()
-                .anyMatch(lottoNo -> lottoNo.equals(new LottoNo(number)));
+                .anyMatch(lottoNo -> lottoNo.equals(LottoNo.of(number)));
     }
 
     public List<Integer> getNumbers() {
