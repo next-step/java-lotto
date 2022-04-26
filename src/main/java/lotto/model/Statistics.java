@@ -2,33 +2,33 @@ package lotto.model;
 
 import java.util.List;
 import java.util.Objects;
-import lotto.enums.Release;
+import lotto.enums.Grade;
 
 public class Statistics {
 
-  private final Release release;
+  private final Grade grade;
   private final Integer count;
 
   private final Integer reward;
 
 
-  public Statistics(Release release) {
-    this(release, 0);
+  public Statistics(Grade grade) {
+    this(grade, 0);
   }
 
-  public Statistics(Release release, Integer count) {
-    this(release, count, 0);
+  public Statistics(Grade grade, Integer count) {
+    this(grade, count, 0);
   }
 
-  public Statistics(Release release, Integer count, Integer reward) {
-    this.release = release;
+  public Statistics(Grade grade, Integer count, Integer reward) {
+    this.grade = grade;
     this.count = count;
     this.reward = reward;
   }
 
   public Statistics awardCount(List<Product> allProduct, List<Integer> winnerList) {
-    int count = release.coincideLotto(allProduct, winnerList);
-    return new Statistics(release, count, this.reward + release.winningAmount(count));
+    int count = grade.coincideLotto(allProduct, winnerList);
+    return new Statistics(grade, count, this.reward + grade.winningAmount(count));
   }
 
 
@@ -41,18 +41,18 @@ public class Statistics {
       return false;
     }
     Statistics that = (Statistics) o;
-    return release == that.release && Objects.equals(count, that.count);
+    return grade == that.grade && Objects.equals(count, that.count);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(release, count);
+    return Objects.hash(grade, count);
   }
 
   @Override
   public String toString() {
-    return release.getExpectNumber() +
-        "개 일치 (" + release.getAwardPrice() + ")"
+    return grade.getExpectNumber() +
+        "개 일치 (" + grade.getAwardPrice() + ")"
         + "- " + count + "개";
   }
 }
