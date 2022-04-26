@@ -29,7 +29,14 @@ public class Lotto {
         return copy;
     }
 
-    public int countDuplicateValue(Lotto lotto) {
+    public LottoWinnerType winLotto(Lotto previousLotto, int bonus) {
+        int countOfDuplicate = countDuplicateValue(previousLotto);
+        boolean isBonus = lotto.contains(bonus);
+
+        return LottoWinnerType.valueOf(countOfDuplicate, isBonus);
+    }
+
+    int countDuplicateValue(Lotto lotto) {
         Set<Integer> copyOfLotto = new HashSet<>(this.lotto);
         copyOfLotto.retainAll(lotto.getLottoNumbers());
 
