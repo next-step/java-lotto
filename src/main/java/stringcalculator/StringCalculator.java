@@ -1,17 +1,11 @@
 package stringcalculator;
 
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class StringCalculator {
-
-    public static final String DELIMITER = " ";
-    public static final int INPUT_LENGTH_LOWER_BOUND = 3;
-    public static final int EVEN_CHECK_VALUE = 2;
     public static final int BASE_NUMBER_INDEX = 0;
-    public static final int IS_DIVIDED = 0;
     public static final String PLUS = "+";
     public static final String MINUS = "-";
     public static final String DIVIDE = "/";
@@ -23,8 +17,7 @@ public class StringCalculator {
 
     public static int calculate(String input) {
         validate(input);
-        List<String> inputs = split(input);
-        validate(inputs);
+        List<String> inputs = ExtractFormula.splitText(input);
         return calculate(inputs);
     }
 
@@ -32,19 +25,6 @@ public class StringCalculator {
         Objects.requireNonNull(input, "입력값은 null 일 수 없습니다.");
         if (input.isBlank()) {
             throw new IllegalArgumentException("입력값은 빈 문자열일 수 없습니다.");
-        }
-    }
-
-    private static List<String> split(String input) {
-        return Arrays.asList(input.split(DELIMITER));
-    }
-
-    private static void validate(List<String> inputs) {
-        if (inputs.size() < INPUT_LENGTH_LOWER_BOUND) {
-            throw new IllegalArgumentException("입력값은 공백으로 구분하여 3개 이상이어야 합니다. inputs : " + inputs);
-        }
-        if (inputs.size() % EVEN_CHECK_VALUE == IS_DIVIDED) {
-            throw new IllegalArgumentException("입력값은 계산가능한 형태로 주어져야 합니다. inputs : " + inputs);
         }
     }
 

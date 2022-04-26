@@ -51,7 +51,7 @@ public class StringCalculatorTest {
     void inputsLengthEvenFailTest() {
         assertThatThrownBy(() -> StringCalculator.calculate("2 * 2 *"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("계산가능한 형태로 주어져야 합니다.");
+                .hasMessageContaining("계산가능한 홀수 개수 형태로 주어져야 합니다.");
     }
 
     @Test
