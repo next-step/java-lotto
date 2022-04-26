@@ -6,10 +6,6 @@ import java.util.Objects;
 
 public class StringCalculator {
     public static final int BASE_NUMBER_INDEX = 0;
-    public static final String PLUS = "+";
-    public static final String MINUS = "-";
-    public static final String DIVIDE = "/";
-    public static final String MULTIPLE = "*";
 
     private StringCalculator() {
         throw new AssertionError();
@@ -29,29 +25,21 @@ public class StringCalculator {
     }
 
     private static int calculate(List<String> inputs) {
-        int baseNumber = Integer.parseInt(inputs.get(BASE_NUMBER_INDEX));
+        int baseNumber = getNumber(inputs.get(BASE_NUMBER_INDEX));
         int length = inputs.size();
         for (int i = 1; i < length - 1; i++) {
             String operator = inputs.get(i);
-            int targetNumber = Integer.parseInt(inputs.get(++i));
+            int targetNumber = getNumber(inputs.get(++i));
             baseNumber = calculate(baseNumber, operator, targetNumber);
         }
         return baseNumber;
     }
 
+    private static int getNumber(String text) {
+        return Integer.parseInt(text);
+    }
+
     private static int calculate(int baseNumber, String operator, int targetNumber) {
-        if (PLUS.equals(operator)) {
-            return baseNumber + targetNumber;
-        }
-        if (MINUS.equals(operator)) {
-            return baseNumber - targetNumber;
-        }
-        if (DIVIDE.equals(operator)) {
-            return baseNumber / targetNumber;
-        }
-        if (MULTIPLE.equals(operator)) {
-            return baseNumber * targetNumber;
-        }
-        throw new IllegalArgumentException("올바르지 않은 연산자입니다. : " + operator);
+        return OperatorFactory.get(operator).calculate(baseNumber, targetNumber);
     }
 }
