@@ -52,7 +52,7 @@ public class ResultView {
 
     private static void printWinnerStat(StringBuilder stringBuilder, Map.Entry<LottoWinnerType, Integer> winner) {
         if (NON_WIN != winner.getKey()) {
-            stringBuilder.append(String.format(RESULT_STATS_MESSAGE, winner.getKey().getCountOfDuplicate(), LottoWinnerType.prize(winner.getKey().getCountOfDuplicate()), winner.getValue()));
+            stringBuilder.append(String.format(RESULT_STATS_MESSAGE, winner.getKey().getCountOfDuplicate(), LottoWinnerType.prize(winner.getKey()), winner.getValue()));
             stringBuilder.append(System.getProperty(LINE_SEPARATOR));
         }
     }
