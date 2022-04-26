@@ -1,9 +1,11 @@
 package lotto.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import lotto.enums.Release;
 import lotto.model.Guest;
 import lotto.model.Product;
+import lotto.model.Statistics;
 import lotto.model.Store;
 import lotto.util.AwardNumberUtil;
 
@@ -21,13 +23,14 @@ public class LottoService {
     return guest.haveLottoList();
   }
 
-//  public int statistics(List<Product> products, List<Integer> awardNumberList) {
-//    for (Release release : Release.values()) {
-//
-//    }
-//    Statistics statistics = new Statistics()
-//    return Release.THREE.coincideLotto(products, awardNumberList);
-//  }
+  public List<Statistics> getStatistics(List<Product> products, List<Integer> awardNumberList) {
+    List<Statistics> statistics = new ArrayList<>();
+    for (Release release : Release.values()) {
+      Statistics statistic = new Statistics(release).awardCount(products, awardNumberList);
+      statistics.add(statistic);
+    }
+    return statistics;
+  }
 
   public List<Integer> getAwardNumberList(String awardNumber) {
     return AwardNumberUtil.getAwadNumberList(awardNumber);

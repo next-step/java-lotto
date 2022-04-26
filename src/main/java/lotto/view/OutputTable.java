@@ -3,6 +3,7 @@ package lotto.view;
 import java.util.List;
 import lotto.controller.LottoController;
 import lotto.model.Product;
+import lotto.model.Statistics;
 import lotto.service.LottoService;
 
 public final class OutputTable {
@@ -44,7 +45,9 @@ public final class OutputTable {
     System.out.println(UNDER_BAR);
   }
 
-  public static void printStatistics(int statistics) {
-    System.out.printf("3개 일치 (5000원)- %d개", statistics);
+  public static void printStatistics(List<Statistics> statistics) {
+    for (Statistics statistic : statistics) {
+      System.out.println(statistic);
+    }
   }
 }
