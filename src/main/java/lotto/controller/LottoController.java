@@ -26,7 +26,7 @@ public class LottoController {
     OutputTable.lastWeekAwardNumber();
     List<Integer> awardNumberList = getAwardNumberList(InputTable.inputAwardNumber());
     OutputTable.resultStatistics();
-    OutputTable.printStatistics(statistics(products, awardNumberList));
+//    OutputTable.printStatistics(statistics(products, awardNumberList));
   }
 
   public Guest visit(Integer money, Store store) {
@@ -45,7 +45,7 @@ public class LottoController {
     return lottoService.getAwardNumberList(awardNumber);
   }
 
-  public int statistics(List<Product> products, List<Integer> awardNumberList) {
-    return lottoService.statistics(products, awardNumberList);
-  }
+//  public int statistics(List<Product> products, List<Integer> awardNumberList) {
+//    return lottoService.statistics(products, awardNumberList);
+//  }
 }

@@ -45,6 +45,6 @@ public final class OutputTable {
   }
 
   public static void printStatistics(int statistics) {
-    System.out.printf("3개 일치 (5000원)- %d원", statistics);
+    System.out.printf("3개 일치 (5000원)- %d개", statistics);
   }
 }
