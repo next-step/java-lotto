@@ -9,7 +9,7 @@ public class LottoWinner {
     private final Map<LottoWinnerType, Integer> winners;
 
     private LottoWinner() {
-        this.winners = new HashMap<>();
+        this(new HashMap<>());
     }
 
     public static LottoWinner createLottoMachine() {
