@@ -31,23 +31,23 @@ public class Calculator {
     }
 
     private List<Integer> findNumber(String input) {
-        ArrayList<Integer> numbers = new ArrayList<>();
+        ArrayList<Integer> extractNumbers = new ArrayList<>();
 
         Matcher matcher = Pattern.compile(NUMBER_REGULAR).matcher(input);
         while (matcher.find()) {
-            numbers.add(Integer.parseInt(matcher.group()));
+            extractNumbers.add(Integer.parseInt(matcher.group()));
         }
-        return numbers;
+        return extractNumbers;
     }
 
     private List<String> findOperator(String input) {
-        List<String> operators = new ArrayList<>();
+        List<String> extractOperators = new ArrayList<>();
 
         Matcher matcher = Pattern.compile(OPERATION_REGULAR).matcher(input);
         while (matcher.find()) {
-            operators.add(matcher.group());
+            extractOperators.add(matcher.group());
         }
-        return operators;
+        return extractOperators;
     }
 
     public Integer operation() {
