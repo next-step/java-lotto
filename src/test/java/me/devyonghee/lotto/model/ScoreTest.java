@@ -29,23 +29,25 @@ class ScoreTest {
 
     @ParameterizedTest(name = "[{index}] {0} 의 갯수는 {1}")
     @DisplayName("순위들 개수 세기")
-    @CsvSource({"FIRST,1", "SECOND,2", "THIRD,3", "FOURTH,4", "NOTING,0"})
+    @CsvSource({"FIRST,1", "SECOND,2", "THIRD,3", "FOURTH,4", "FIFTH,5", "NOTHING,0"})
     void count(Rank target, int expected) {
         //given
         List<Rank> ranks = Arrays.asList(
                 Rank.FIRST,
                 Rank.SECOND, Rank.SECOND,
                 Rank.THIRD, Rank.THIRD, Rank.THIRD,
-                Rank.FOURTH, Rank.FOURTH, Rank.FOURTH, Rank.FOURTH);
+                Rank.FOURTH, Rank.FOURTH, Rank.FOURTH, Rank.FOURTH,
+                Rank.FIFTH, Rank.FIFTH, Rank.FIFTH, Rank.FIFTH, Rank.FIFTH
+        );
         //when, then
         assertThat(Score.from(ranks).count(target)).isEqualTo(expected);
     }
 
     @Test
-    @DisplayName("순위들 개수 세기")
+    @DisplayName("수익률 구하기")
     void profitRatio() {
         //given
-        List<Rank> ranks = Arrays.asList(Rank.FOURTH, Rank.NOTING, Rank.NOTING, Rank.NOTING, Rank.NOTING);
+        List<Rank> ranks = Arrays.asList(Rank.FIFTH, Rank.NOTHING, Rank.NOTHING, Rank.NOTHING, Rank.NOTHING);
         //when, then
         assertThat(Score.from(ranks).profitRatio()).isEqualByComparingTo(BigDecimal.ONE);
     }

@@ -8,6 +8,7 @@ public final class InputView {
 
     private static final String PURCHASE_AMOUNT_INPUT_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String WINNER_NUMBER_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String WINNER_BONUS_NUMBER_INPUT_MESSAGE = "보너스 볼을 입력해 주세요.";
 
     private static final String NULL_SCANNER_ERROR = "scanner must not be null";
     private static final String NULL_GUIDE_PRINTER_ERROR_MESSAGE = "guidePrinter must not be null";
@@ -34,6 +35,11 @@ public final class InputView {
     public String winnerNumbers() {
         guidePrinter.println(WINNER_NUMBER_INPUT_MESSAGE);
         return scanner.next();
+    }
+
+    public int winnerBonusNumber() {
+        guidePrinter.println(WINNER_BONUS_NUMBER_INPUT_MESSAGE);
+        return scanner.nextInt();
     }
 }
 

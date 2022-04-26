@@ -39,6 +39,10 @@ public final class LottoNumbers {
                 .count();
     }
 
+    boolean contains(LottoNumber number) {
+        return numbers.contains(number);
+    }
+
     private void validateEmpty(Collection<LottoNumber> numbers) {
         if (numbers.isEmpty()) {
             throw new IllegalArgumentException(EMPTY_NUMBERS_ERROR_MESSAGE);

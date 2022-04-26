@@ -29,9 +29,14 @@ public final class Lotto {
         return numbers;
     }
 
-    Rank rank(Lotto lotto) {
+    Rank rank(Lotto lotto, LottoNumber bonusNumber) {
         Objects.requireNonNull(lotto, NULL_LOTTO_TO_RANK_ERROR_MESSAGE);
-        return Rank.of(numbers.matchCount(lotto.numbers));
+        Objects.requireNonNull(bonusNumber, NULL_LOTTO_TO_RANK_ERROR_MESSAGE);
+        return Rank.of(numbers.matchCount(lotto.numbers), numbers.contains(bonusNumber));
+    }
+
+    boolean contains(LottoNumber number) {
+        return numbers.contains(number);
     }
 
     private void validateSize(LottoNumbers numbers) {

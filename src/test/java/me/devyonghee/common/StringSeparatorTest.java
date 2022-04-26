@@ -11,13 +11,19 @@ import static org.assertj.core.api.Assertions.*;
 class StringSeparatorTest {
 
     @Test
-    @DisplayName("객체화")
+    @DisplayName("구분할 문자열로 문자열 분리 정상 생성")
     void instance() {
         assertThatNoException().isThrownBy(() -> StringSeparator.from("1 2"));
     }
 
     @Test
-    @DisplayName("커스텀 구분자 객체화")
+    @DisplayName("구분자가 없으면 기본 구분자로 생성")
+    void instance_nullDelimiter() {
+        assertThatNoException().isThrownBy(() -> StringSeparator.of("1 2", null));
+    }
+
+    @Test
+    @DisplayName("문자와 커스텀 구분자로 문자열 분리 정상 생성")
     void instance_delimiter() {
         assertThatNoException().isThrownBy(() -> StringSeparator.of("1", ","));
     }

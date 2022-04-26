@@ -4,8 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -13,11 +12,9 @@ import static org.assertj.core.api.Assertions.*;
 class LottosTest {
 
     @Test
-    @DisplayName("객체화")
+    @DisplayName("하나의 로또로 로또들 정상 생성")
     void instance() {
-        assertThatNoException().isThrownBy(() -> Lottos.from(Collections.singletonList(
-                Lotto.from(LottoNumbers.from(IntStream.rangeClosed(1, 6).mapToObj(LottoNumber::from).collect(Collectors.toList()))
-                ))));
+        assertThatNoException().isThrownBy(() -> Lottos.from(Collections.singletonList(Lotto.from(LottoNumbersTest.ONE_TO_SIX_NUMBERS))));
     }
 
     @Test
@@ -27,16 +24,20 @@ class LottosTest {
     }
 
     @Test
+    @DisplayName("주어진 로또들 그대로 반환")
+    void list() {
+        //given
+        List<Lotto> lottos = Collections.singletonList(Lotto.from(LottoNumbersTest.ONE_TO_SIX_NUMBERS));
+        //when, then
+        assertThat(Lottos.from(lottos).list()).isEqualTo(lottos);
+    }
+
+    @Test
     @DisplayName("점수")
     void score() {
-        //given
-        Lotto lotto = Lotto.from(LottoNumbers.from(
-                IntStream.rangeClosed(1, 6)
-                        .mapToObj(LottoNumber::from)
-                        .collect(Collectors.toList())
-        ));
-        //when
-        Score score = Lottos.from(Collections.singletonList(lotto)).score(lotto);
+        //given, when
+        Score score = Lottos.from(Collections.singletonList(Lotto.from(LottoNumbersTest.ONE_TO_SIX_NUMBERS)))
+                .score(Lotto.from(LottoNumbersTest.ONE_TO_SIX_NUMBERS), LottoNumber.from(7));
         //then
         assertThat(score.count(Rank.FIRST)).isOne();
     }

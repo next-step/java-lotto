@@ -6,16 +6,18 @@ public class RankResponse {
 
     private final int prize;
     private final int matchCount;
+    private final boolean matchedBonus;
     private final int count;
 
-    public RankResponse(int prize, int matchCount, int count) {
+    public RankResponse(int prize, int matchCount, boolean matchedBonus, int count) {
         this.prize = prize;
         this.matchCount = matchCount;
+        this.matchedBonus = matchedBonus;
         this.count = count;
     }
 
     public static RankResponse of(Rank rank, int count) {
-        return new RankResponse(rank.prize(), rank.matchCount(), count);
+        return new RankResponse(rank.prize(), rank.matchCount(), rank.matchedBonus(), count);
     }
 
     public int getPrize() {
@@ -24,6 +26,10 @@ public class RankResponse {
 
     public int getMatchCount() {
         return matchCount;
+    }
+
+    public boolean isMatchedBonus() {
+        return matchedBonus;
     }
 
     public int getCount() {

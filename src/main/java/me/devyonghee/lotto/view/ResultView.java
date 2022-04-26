@@ -14,7 +14,9 @@ public final class ResultView {
     private static final String NULL_OUTPUT_ERROR_MESSAGE = "output must not be null";
     private static final String PURCHASE_TICKETS_NUMBER_MESSAGE_FORMAT = "%d개를 구매했습니다.\n";
 
-    private static final String RANK_RESULT_MESSAGE_FORMAT = "%d개 일치 (%d원)- %d개\n";
+    private static final String RANK_RESULT_MESSAGE_FORMAT = "%d개 일치%s (%d원)- %d개\n";
+    private static final String UNMATCHED_BONUS_MESSAGE_FORMAT = "";
+    private static final String MATCHED_BONUS_MESSAGE_FORMAT = ", 보너스 볼 일치";
     private static final String PROFIT_RATE_RESULT_MESSAGE_FORMAT = "총 수익률은 %s입니다.";
     private static final String PROFIT_LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
@@ -51,6 +53,10 @@ public final class ResultView {
     }
 
     private void printRank(RankResponse rank) {
-        output.printf(RANK_RESULT_MESSAGE_FORMAT, rank.getMatchCount(), rank.getPrize(), rank.getCount());
+        if (rank.isMatchedBonus()) {
+            output.printf(RANK_RESULT_MESSAGE_FORMAT, rank.getMatchCount(), MATCHED_BONUS_MESSAGE_FORMAT, rank.getPrize(), rank.getCount());
+            return;
+        }
+        output.printf(RANK_RESULT_MESSAGE_FORMAT, rank.getMatchCount(), UNMATCHED_BONUS_MESSAGE_FORMAT, rank.getPrize(), rank.getCount());
     }
 }
