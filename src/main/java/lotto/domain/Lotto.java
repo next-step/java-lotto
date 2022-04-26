@@ -23,8 +23,10 @@ public class Lotto {
         this.lotto = new HashSet<>(Arrays.asList(lotto));
     }
 
-    public Set<Integer> getLottoNumbers() {
-        return new TreeSet<>(lotto);
+    public List<Integer> getLottoNumbers() {
+        List copy = new ArrayList(this.lotto);
+        Collections.sort(copy);
+        return copy;
     }
 
     public int countDuplicateValue(Lotto lotto) {
@@ -32,5 +34,10 @@ public class Lotto {
         copyOfLotto.retainAll(lotto.getLottoNumbers());
 
         return copyOfLotto.size();
+    }
+
+    @Override
+    public String toString() {
+        return lotto.toString();
     }
 }
