@@ -1,5 +1,6 @@
 package me.devyonghee.lotto.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -36,5 +37,40 @@ public final class Lottos {
         return Score.from(lottos.stream()
                 .map(lotto -> lotto.rank(target, bonusNumber))
                 .collect(Collectors.toList()));
+    }
+
+    Lottos merge(Lottos lottos) {
+        List<Lotto> newLottos = new ArrayList<>(this.lottos);
+        newLottos.addAll(lottos.lottos);
+        return from(newLottos);
+    }
+
+    public long autoCount() {
+        return lottos.stream()
+                .filter(Lotto::isAuto)
+                .count();
+    }
+
+    public long manualCount() {
+        return lottos.stream()
+                .filter(Lotto::isManual)
+                .count();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottos);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lottos lottos1 = (Lottos) o;
+        return Objects.equals(lottos, lottos1.lottos);
     }
 }

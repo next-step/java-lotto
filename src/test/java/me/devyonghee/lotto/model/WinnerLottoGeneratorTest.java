@@ -9,8 +9,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
@@ -38,7 +36,7 @@ class WinnerLottoGeneratorTest {
         LottoNumber bonusNumber = LottoNumber.from(7);
         //when, then
         assertThat(WinnerLottoGenerator.of(() -> Arrays.asList("1", "2", "3", "4", "5", "6"), bonusNumber).lotto())
-                .isEqualTo(WinnerLotto.of(Lotto.from(LottoNumbersTest.ONE_TO_SIX_NUMBERS), bonusNumber));
+                .isEqualTo(WinnerLotto.of(Lotto.auto(LottoNumbersTest.ONE_TO_SIX_NUMBERS), bonusNumber));
     }
 
     private static Stream<Arguments> instance_nullArguments_thrownNullPointerException() {
