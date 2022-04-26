@@ -12,16 +12,16 @@ public class OperatorFactory {
 
     public static Operator get(String operator) {
         if (PLUS.equals(operator)) {
-            return new AddOperator();
+            return (a, b) -> a + b;
         }
         if (MINUS.equals(operator)) {
-            return new MinusOperator();
+            return (a, b) -> a - b;
         }
         if (DIVIDE.equals(operator)) {
-            return new DivideOperator();
+            return (a, b) -> a / b;
         }
         if (MULTIPLE.equals(operator)) {
-            return new MultipleOperator();
+            return (a, b) -> a * b;
         }
         throw new IllegalArgumentException("올바르지 않은 연산자입니다. : " + operator);
     }
