@@ -16,6 +16,7 @@ public class LottoGenerator {
             .collect(Collectors.toList());
     private static final int START_SUB_INDEX = 0;
     private static final int START_RANGE_INDEX = 0;
+
     private final List<StringsProvider> providers;
 
     private LottoGenerator(List<StringsProvider> providers) {
@@ -33,17 +34,17 @@ public class LottoGenerator {
                 .collect(Collectors.toList()));
     }
 
+    Lottos autoLottos(int count) {
+        return Lottos.from(IntStream.range(START_RANGE_INDEX, count)
+                .mapToObj(i -> autoLotto())
+                .collect(Collectors.toList()));
+    }
+
     private Lotto manualLotto(StringsProvider provider) {
         return Lotto.manual(LottoNumbers.from(provider.strings()
                 .stream()
                 .map(LottoNumber::from)
                 .collect(Collectors.toList())));
-    }
-
-    Lottos autoLottos(int count) {
-        return Lottos.from(IntStream.range(START_RANGE_INDEX, count)
-                .mapToObj(i -> autoLotto())
-                .collect(Collectors.toList()));
     }
 
     private Lotto autoLotto() {
