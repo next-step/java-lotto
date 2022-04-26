@@ -12,7 +12,7 @@ import java.util.Objects;
 public final class ResultView {
 
     private static final String NULL_OUTPUT_ERROR_MESSAGE = "output must not be null";
-    private static final String PURCHASE_TICKETS_NUMBER_MESSAGE_FORMAT = "%d개를 구매했습니다.\n";
+    private static final String PURCHASE_LOTTOS_MESSAGE_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
 
     private static final String RANK_RESULT_MESSAGE_FORMAT = "%d개 일치%s (%d원)- %d개\n";
     private static final String UNMATCHED_BONUS_MESSAGE_FORMAT = "";
@@ -33,9 +33,8 @@ public final class ResultView {
     }
 
     public void print(LottosResponse response) {
-        List<List<Integer>> tickets = response.getTickets();
-        output.printf(PURCHASE_TICKETS_NUMBER_MESSAGE_FORMAT, tickets.size());
-        for (List<Integer> ticket : tickets) {
+        output.printf(PURCHASE_LOTTOS_MESSAGE_FORMAT, response.getManualCount(), response.getAutoCount());
+        for (List<Integer> ticket : response.getLottos()) {
             output.println(ticket);
         }
     }

@@ -22,9 +22,15 @@ import static org.assertj.core.api.Assertions.*;
 class LottoTest {
 
     @Test
-    @DisplayName("로또 번호 6개로 로또 정상 생성")
-    void instance() {
+    @DisplayName("로또 번호 6개로 랜덤 로또 정상 생성")
+    void instance_auto() {
         assertThatNoException().isThrownBy(() -> Lotto.auto(LottoNumbersTest.ONE_TO_SIX_NUMBERS));
+    }
+
+    @Test
+    @DisplayName("로또 번호 6개로 수동 로또 정상 생성")
+    void instance_manual() {
+        assertThatNoException().isThrownBy(() -> Lotto.manual(LottoNumbersTest.ONE_TO_SIX_NUMBERS));
     }
 
     @Test
