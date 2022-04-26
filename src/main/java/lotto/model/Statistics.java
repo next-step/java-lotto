@@ -9,18 +9,26 @@ public class Statistics {
   private final Release release;
   private final Integer count;
 
+  private final Integer reward;
+
 
   public Statistics(Release release) {
     this(release, 0);
   }
 
   public Statistics(Release release, Integer count) {
+    this(release, count, 0);
+  }
+
+  public Statistics(Release release, Integer count, Integer reward) {
     this.release = release;
     this.count = count;
+    this.reward = reward;
   }
 
   public Statistics awardCount(List<Product> allProduct, List<Integer> winnerList) {
-    return new Statistics(release, release.coincideLotto(allProduct, winnerList));
+    int count = release.coincideLotto(allProduct, winnerList);
+    return new Statistics(release, count, this.reward + release.winningAmount(count));
   }
 
 
