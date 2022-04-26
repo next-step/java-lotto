@@ -28,18 +28,14 @@ public class StringCalculator {
         int baseNumber = getNumber(inputs.get(BASE_NUMBER_INDEX));
         int length = inputs.size();
         for (int i = 1; i < length - 1; i++) {
-            String operator = inputs.get(i);
+            Calculator calculator = new Calculator(inputs.get(i));
             int targetNumber = getNumber(inputs.get(++i));
-            baseNumber = calculate(baseNumber, operator, targetNumber);
+            baseNumber = calculator.calculate(baseNumber, targetNumber);
         }
         return baseNumber;
     }
 
     private static int getNumber(String text) {
         return Integer.parseInt(text);
-    }
-
-    private static int calculate(int baseNumber, String operator, int targetNumber) {
-        return OperatorFactory.get(operator).calculate(baseNumber, targetNumber);
     }
 }
