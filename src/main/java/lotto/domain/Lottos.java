@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 public class Lottos {
 
+  private static final String LOTTOS_DELIMITER = "\n";
+
   private final List<Lotto> values;
 
   public Lottos(List<Lotto> values) {
@@ -37,6 +39,6 @@ public class Lottos {
 
   @Override
   public String toString() {
-    return values.stream().map(Lotto::toString).collect(Collectors.joining("\n"));
+    return values.stream().map(Lotto::toString).collect(Collectors.joining(LOTTOS_DELIMITER));
   }
 }

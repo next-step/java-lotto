@@ -24,6 +24,16 @@ class LottosTest {
         new LottoNumber(5),
         new LottoNumber(6)
     ));
+    Lottos lottos = prepareLottos();
+
+    Map<Rank, Integer> rankMap = lottos.calculate(lotto);
+    assertThat(rankMap.get(Rank.FIRST)).isEqualTo(1);
+    assertThat(rankMap.get(Rank.SECOND)).isEqualTo(1);
+    assertThat(rankMap.get(Rank.THIRD)).isEqualTo(1);
+    assertThat(rankMap.get(Rank.FOURTH)).isEqualTo(1);
+  }
+
+  private Lottos prepareLottos() {
     Lotto matchThree = new Lotto(Set.of(
         new LottoNumber(1),
         new LottoNumber(2),
@@ -56,12 +66,6 @@ class LottosTest {
         new LottoNumber(5),
         new LottoNumber(6)
     ));
-    Lottos lottos = new Lottos(List.of(matchThree, matchFour, matchFive, matchSix));
-
-    Map<Rank, Integer> rankMap = lottos.calculate(lotto);
-    assertThat(rankMap.get(Rank.FIRST)).isEqualTo(1);
-    assertThat(rankMap.get(Rank.SECOND)).isEqualTo(1);
-    assertThat(rankMap.get(Rank.THIRD)).isEqualTo(1);
-    assertThat(rankMap.get(Rank.FOURTH)).isEqualTo(1);
+    return new Lottos(List.of(matchThree, matchFour, matchFive, matchSix));
   }
 }
