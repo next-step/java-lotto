@@ -22,7 +22,7 @@ public class ItemsTest {
     }
 
     @Test
-    @DisplayName("Items 의 길이가 2 미만일 경우 예외가 발생한다. ")
+    @DisplayName("Items 의 길이가 3 미만일 경우 예외가 발생한다. ")
     void sizeFailTest() {
         Assertions.assertThatThrownBy(() -> new Items(Lists.newArrayList("1")))
                 .isInstanceOf(IllegalArgumentException.class);

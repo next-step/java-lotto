@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public final class Items {
-    public static final int LOWER_BOUND = 2;
+    public static final int LOWER_BOUND = 3;
     public static final int FIRST_OPERAND_INDEX = 0;
     public static final int OPERATOR_INDEX = 1;
     public static final int SECOND_OPERAND_INDEX = 2;
@@ -19,7 +19,7 @@ public final class Items {
     private void validate(List<String> items) {
         Objects.requireNonNull(items, "Items 는 null일 수 없습니다.");
         if (items.size() < LOWER_BOUND) {
-            throw new IllegalArgumentException("Items 는 2개 이상의 Item 으로 이루어져야 합니다.");
+            throw new IllegalArgumentException("Items 는 3개 이상의 Item 으로 이루어져야 합니다.");
         }
     }
 
