@@ -10,10 +10,11 @@ import static org.assertj.core.api.Assertions.withPrecision;
 
 class LottosTest {
 
-    private static final Lotto WINNING_LOTTO =
-            new Lotto(List.of(1, 2, 3, 4, 5, 6));
-
     private static final int BONUS_NUMBER = 7;
+
+    private static final WinningLotto WINNING_LOTTO =
+            new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), BONUS_NUMBER);
+
 
 
     @DisplayName("로또 묶음 수익율 계산 1번")
@@ -22,10 +23,11 @@ class LottosTest {
         Lotto zeroMatchLotto = new Lotto(List.of(31, 32, 33, 34, 35, 36));
         Lotto threeMatchLotto = new Lotto(List.of(1, 2, 3, 31, 32, 33));
         Lotto fourMatchLotto = new Lotto(List.of(1, 2, 3, 4, 31, 32));
+
         Lottos lottos = new Lottos(List.of(zeroMatchLotto, threeMatchLotto, fourMatchLotto));
 
         // (0 + 5000 + 50000) / (3 * 1000) = 18.33333..
-        assertThat(lottos.earningRate(WINNING_LOTTO, BONUS_NUMBER))
+        assertThat(lottos.earningRate(WINNING_LOTTO))
                 .isEqualTo(18.33, withPrecision(0.01));
     }
 
@@ -38,7 +40,7 @@ class LottosTest {
         Lottos lottos = new Lottos(List.of(fiveMatchLotto, bonusLotto, sixMatchLotto));
 
         // (150만 + 3천만 + 20억) / (3 * 1000) = 677166.6666...
-        assertThat(lottos.earningRate(WINNING_LOTTO, BONUS_NUMBER))
+        assertThat(lottos.earningRate(WINNING_LOTTO))
                 .isEqualTo(677166.66, withPrecision(0.01));
     }
 

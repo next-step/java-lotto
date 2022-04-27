@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -16,26 +14,29 @@ public class Lotto {
             .boxed()
             .collect(Collectors.toList());
 
-    private final List<Integer> numbers;
+    private final Set<LottoNo> lottoNumbers = new HashSet<>();
 
     public Lotto() {
-        Collections.shuffle(NUMBER_POOL);
-        this.numbers = new ArrayList<>(NUMBER_POOL.subList(0, LOTTO_SIZE));
+        this(generateRandomList());
     }
 
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
-        this.numbers = numbers;
+        numbers.forEach(number -> lottoNumbers.add(LottoNo.of(number)));
     }
 
-    private void validateNumbers(List<Integer> numbers) {
-        int validNumberCount = numbers.stream()
-                .filter(n -> MIN_VALID_NUMBER <= n && n <= MAX_VALID_NUMBER)
-                .collect(Collectors.toSet())
-                .size();
+    private static List<Integer> generateRandomList() {
+        Collections.shuffle(NUMBER_POOL);
+        return IntStream.range(0, LOTTO_SIZE)
+                .mapToObj(NUMBER_POOL::get)
+                .collect(Collectors.toList());
+    }
 
-        if (validNumberCount != LOTTO_SIZE) {
-            throw new IllegalArgumentException("invalid lotto numbers");
+    private static void validateNumbers(List<Integer> numbers) {
+        HashSet<Integer> uniqueNumbers = new HashSet<>(numbers);
+
+        if (uniqueNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("lotto must contain non duplicate " + LOTTO_SIZE + " numbers");
         }
     }
 
@@ -47,34 +48,29 @@ public class Lotto {
         return lottos;
     }
 
-    public static void validateBonusNumber(Lotto winningLotto, int bonusNumber) {
-        if (bonusNumber < MIN_VALID_NUMBER || bonusNumber > MAX_VALID_NUMBER) {
-            throw new IllegalArgumentException("bonus number is out of range : " + bonusNumber);
-        }
-        if (winningLotto.contains(bonusNumber)) {
-            throw new IllegalArgumentException("bonus number is already used: " + bonusNumber);
-        }
+    public double earnings(WinningLotto winningLotto) {
+        return findPrize(winningLotto).getEarnings();
     }
 
-    public double earnings(Lotto winningLotto, int bonusNumber) {
-        return findPrize(winningLotto, bonusNumber).getEarnings();
+    public Prize findPrize(WinningLotto winningLotto) {
+        return Prize.findPrizeByMatchCount(
+                winningLotto.matchCount(this), winningLotto.matchBonus(this));
     }
 
-    public Prize findPrize(Lotto winningLotto, int bonusNumber) {
-        return Prize.findPrizeByMatchCount(matchCount(winningLotto), contains(bonusNumber));
-    }
-
-    private int matchCount(Lotto winningLotto) {
-        return (int) numbers.stream()
-                .filter(winningLotto::contains)
+    public int matchCount(Lotto winningLotto) {
+        return (int) lottoNumbers.stream()
+                .filter(lottoNo -> winningLotto.contains(lottoNo.getNumber()))
                 .count();
     }
 
-    private boolean contains(int number) {
-        return numbers.contains(number);
+    public boolean contains(int number) {
+        return lottoNumbers.stream()
+                .anyMatch(lottoNo -> lottoNo.equals(LottoNo.of(number)));
     }
 
     public List<Integer> getNumbers() {
-        return new ArrayList<>(numbers);
+        return lottoNumbers.stream()
+                .map(LottoNo::getNumber)
+                .collect(Collectors.toList());
     }
 }
