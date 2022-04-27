@@ -31,6 +31,8 @@ public class LottoController {
     OutputTable.resultStatisticsMessage();
     List<History> histories = histories(products, winnerProduct);
     OutputTable.resultStatistics(histories);
+    double percent = yieldCalculate(haveMoney, allAddReward(histories));
+    OutputTable.printYield(percent, isStandard(percent));
   }
 
   public List<Product> visit(Guest guest, Store store) {
@@ -43,6 +45,18 @@ public class LottoController {
 
   public List<History> histories(List<Product> products, Product winProduct) {
     return lottoService.histories(products, winProduct);
+  }
+
+  public Long allAddReward(List<History> histories) {
+    return lottoService.allAddReward(histories);
+  }
+
+  public double yieldCalculate(int money, Long reward) {
+    return lottoService.yieldCalculate(money, reward);
+  }
+
+  public boolean isStandard(double percent) {
+    return percent > 1;
   }
 
 }
