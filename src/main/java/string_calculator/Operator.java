@@ -29,8 +29,8 @@ public enum Operator implements Value {
         throw new IllegalArgumentException("only [+, -, *, /, %] are allowed.");
     }
 
-    public Integer compute(Integer acc, Operator operator, Integer operand) {
-        switch (operator) {
+    public Integer compute(Integer acc, Integer operand) {
+        switch (this) {
             case PLUS:
                 return new Integer(acc.value() + operand.value());
             case MINUS:
