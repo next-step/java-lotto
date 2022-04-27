@@ -23,8 +23,8 @@ public enum Calculator {
         }
     }
 
-    private String operator;
-    private IntBinaryOperator intBinaryOperator;
+    private final String operator;
+    private final IntBinaryOperator intBinaryOperator;
 
     Calculator(String operator, IntBinaryOperator intBinaryOperator) {
         this.operator = operator;
