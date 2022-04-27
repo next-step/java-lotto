@@ -26,8 +26,20 @@ public class LottoService {
     for (Grade grade : Grade.values()) {
       int result = statistics.result(grade, products, winProduct);
       statistics = statistics.winReward(grade, result);
-      histories.add(new History(Long.parseLong(statistics.toString()), grade, result));
+      histories.add(new History(grade, result));
     }
     return histories;
+  }
+
+  public Long allAddReward(List<History> histories) {
+    long result = 0L;
+    for (History history : histories) {
+      result += ((long) history.getGrade().getAwardPrice() * history.getCount());
+    }
+    return result;
+  }
+
+  public double yieldCalculate(int money, Long reward) {
+    return (double) reward / money;
   }
 }
