@@ -1,11 +1,13 @@
 package step1;
 
+import step1.impl.DivideStrategy;
+
 public enum Operator {
 
     ADD("+", (a, b) -> a + b),
     SUBTRACT("-", (a, b) -> a - b),
     MULTIPLY("*", (a, b) -> a * b),
-    DIVIDE("/", (a, b) -> a / b),
+    DIVIDE("/", new DivideStrategy()),
     ;
     private final String value;
     private final OperationStrategy operationStrategy;
