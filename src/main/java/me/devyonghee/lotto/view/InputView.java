@@ -1,14 +1,19 @@
 package me.devyonghee.lotto.view;
 
 import java.io.PrintStream;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public final class InputView {
 
     private static final String PURCHASE_AMOUNT_INPUT_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String WINNER_NUMBER_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String WINNER_BONUS_NUMBER_INPUT_MESSAGE = "보너스 볼을 입력해 주세요.";
+    private static final String MANUAL_COUNT_INPUT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUAL_NUMBER_INPUT_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 
     private static final String NULL_SCANNER_ERROR = "scanner must not be null";
     private static final String NULL_GUIDE_PRINTER_ERROR_MESSAGE = "guidePrinter must not be null";
@@ -35,6 +40,15 @@ public final class InputView {
     public String winnerNumbers() {
         guidePrinter.println(WINNER_NUMBER_INPUT_MESSAGE);
         return scanner.next();
+    }
+
+    public List<String> manualNumbers() {
+        guidePrinter.println(MANUAL_COUNT_INPUT_MESSAGE);
+        int count = scanner.nextInt();
+        guidePrinter.println(MANUAL_NUMBER_INPUT_MESSAGE);
+        return IntStream.range(0, count)
+                .mapToObj(i -> scanner.next())
+                .collect(Collectors.toList());
     }
 
     public int winnerBonusNumber() {

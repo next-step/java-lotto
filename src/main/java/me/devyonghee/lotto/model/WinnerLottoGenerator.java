@@ -26,7 +26,7 @@ public final class WinnerLottoGenerator {
 
     public WinnerLotto lotto() {
         return WinnerLotto.of(
-                Lotto.from(LottoNumbers.from(provider.strings()
+                Lotto.auto(LottoNumbers.from(provider.strings()
                         .stream()
                         .map(LottoNumber::from)
                         .collect(Collectors.toList()))),

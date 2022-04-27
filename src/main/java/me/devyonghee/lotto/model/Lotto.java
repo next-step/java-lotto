@@ -14,15 +14,21 @@ public final class Lotto {
     private static final String TO_STRING_NUMBERS_FIELD = "numbers=";
 
     private final LottoNumbers numbers;
+    private final LottoType type;
 
-    private Lotto(LottoNumbers numbers) {
+    private Lotto(LottoNumbers numbers, LottoType type) {
+        this.type = type;
         Objects.requireNonNull(numbers, NULL_NUMBERS_ERROR_MESSAGE);
         validateSize(numbers);
         this.numbers = numbers;
     }
 
-    static Lotto from(LottoNumbers numbers) {
-        return new Lotto(numbers);
+    static Lotto auto(LottoNumbers numbers) {
+        return new Lotto(numbers, LottoType.AUTO);
+    }
+
+    static Lotto manual(LottoNumbers numbers) {
+        return new Lotto(numbers, LottoType.MANUAL);
     }
 
     public LottoNumbers numbers() {
@@ -43,6 +49,14 @@ public final class Lotto {
         if (numbers.size() != NUMBER_SIZE) {
             throw new IllegalArgumentException(String.format(INVALID_NUMBERS_SIZE_ERROR_MESSAGE_FORMAT, numbers.size(), NUMBER_SIZE));
         }
+    }
+
+    boolean isManual() {
+        return type == LottoType.MANUAL;
+    }
+
+    boolean isAuto() {
+        return type == LottoType.AUTO;
     }
 
     @Override

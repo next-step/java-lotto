@@ -19,7 +19,7 @@ class WinnerLottoTest {
     @Test
     @DisplayName("로또와 로또 보너스 숫자로 우승 로또 정상 생성")
     void instance() {
-        assertThatNoException().isThrownBy(() -> WinnerLotto.of(Lotto.from(LottoNumbersTest.ONE_TO_SIX_NUMBERS), LottoNumber.from(7)));
+        assertThatNoException().isThrownBy(() -> WinnerLotto.of(Lotto.auto(LottoNumbersTest.ONE_TO_SIX_NUMBERS), LottoNumber.from(7)));
     }
 
     @ParameterizedTest
@@ -32,16 +32,16 @@ class WinnerLottoTest {
     @Test
     @DisplayName("로또 번호에 보너스 번호가 포함될 수 없음")
     void instance_containsBonusNumber_thrownIllegalArgumentException() {
-        assertThatIllegalArgumentException().isThrownBy(() -> WinnerLotto.of(Lotto.from(LottoNumbersTest.ONE_TO_SIX_NUMBERS), LottoNumber.from(1)));
+        assertThatIllegalArgumentException().isThrownBy(() -> WinnerLotto.of(Lotto.auto(LottoNumbersTest.ONE_TO_SIX_NUMBERS), LottoNumber.from(1)));
     }
 
     @Test
     @DisplayName("주어진 로또들에 대해서 점수 계산")
     void score() {
         //given
-        Lottos lottos = Lottos.from(Collections.singletonList(Lotto.from(LottoNumbersTest.ONE_TO_SIX_NUMBERS)));
+        Lottos lottos = Lottos.from(Collections.singletonList(Lotto.auto(LottoNumbersTest.ONE_TO_SIX_NUMBERS)));
         //when, then
-        assertThat(WinnerLotto.of(Lotto.from(LottoNumbersTest.ONE_TO_SIX_NUMBERS), LottoNumber.from(7)).score(lottos))
+        assertThat(WinnerLotto.of(Lotto.auto(LottoNumbersTest.ONE_TO_SIX_NUMBERS), LottoNumber.from(7)).score(lottos))
                 .isEqualTo(Score.from(Collections.singleton(Rank.FIRST)));
     }
 
@@ -54,7 +54,7 @@ class WinnerLottoTest {
 
     private static Stream<Arguments> instance_nullArguments_thrownNullPointerException() {
         return Stream.of(
-                Arguments.of(Lotto.from(LottoNumbersTest.ONE_TO_SIX_NUMBERS), null),
+                Arguments.of(Lotto.auto(LottoNumbersTest.ONE_TO_SIX_NUMBERS), null),
                 Arguments.of(null, LottoNumber.from(1))
         );
     }
