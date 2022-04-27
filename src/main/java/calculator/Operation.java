@@ -1,6 +1,7 @@
 package calculator;
 
 import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 
 enum Operation {
 
@@ -10,9 +11,9 @@ enum Operation {
     DIVIDE("/", (a, b) -> (a / b));
 
     public final String operator;
-    private final BiFunction<Integer, Integer, Integer> function;
+    private final BinaryOperator<Integer> function;
 
-    Operation(String operator, BiFunction<Integer, Integer, Integer> function) {
+    Operation(String operator, BinaryOperator<Integer> function) {
         this.operator = operator;
         this.function = function;
     }
