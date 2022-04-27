@@ -33,6 +33,14 @@ public enum Grade {
     return this.awardPrice * count;
   }
 
+  public int getExpectNumber() {
+    return expectNumber;
+  }
+
+  public int getAwardPrice() {
+    return awardPrice;
+  }
+
   private int increaseProductNumber(int expect, Product product, Product winProduct) {
     int count = 0;
     for (Integer winNumber : winProduct.getLottoNumbers()) {
