@@ -11,6 +11,7 @@ public enum Operator implements Value {
     Operator(String value) {
         this.value = value;
     }
+    private static int ZERO = 0;
 
     public static Operator create(String value) {
         if (PLUS.value.equals(value)) {
@@ -57,7 +58,7 @@ public enum Operator implements Value {
     }
 
     private void divideByZeroChecker(Integer operand) {
-        if (operand.value() == 0) {
+        if (operand.value() == ZERO) {
             throw new ArithmeticException("Can't divide by Zero.");
         }
     }
