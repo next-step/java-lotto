@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public class RandomIntegerSetGenerator {
+public class LottoNumberGenerator {
 
   private static final int MIN_NUMBER = 1;
   private static final int MAX_NUMBER = 45;
@@ -19,7 +19,7 @@ public class RandomIntegerSetGenerator {
     }
   }
 
-  private RandomIntegerSetGenerator() {
+  private LottoNumberGenerator() {
   }
 
   public static Set<Integer> getRandomIntegers() {

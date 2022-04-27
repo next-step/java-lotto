@@ -20,10 +20,10 @@ public class LottoController {
     Lotto lastWeekWinningLotto = InputView.getLastWeekWinningLotto();
 
     Map<Rank, Integer> result = lottos.calculate(lastWeekWinningLotto);
-    ResultView.printResult(result, getYield(result, purchaseAmount));
+    ResultView.printResult(result, calculateYield(result, purchaseAmount));
   }
 
-  private static BigDecimal getYield(Map<Rank, Integer> result, PurchaseAmount amount) {
+  private static BigDecimal calculateYield(Map<Rank, Integer> result, PurchaseAmount amount) {
     int sum = 0;
     for (Map.Entry<Rank, Integer> entry : result.entrySet()) {
       sum += entry.getKey().getPrizeMoney() * entry.getValue();

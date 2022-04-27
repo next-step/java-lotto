@@ -25,7 +25,7 @@ public class Lotto {
   }
 
   public static Lotto autoCreate() {
-    return create(RandomIntegerSetGenerator.getRandomIntegers());
+    return create(LottoNumberGenerator.getRandomIntegers());
   }
 
   public Rank getRank(Lotto other) {
