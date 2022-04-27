@@ -3,6 +3,7 @@ package string_calculator;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class OperatorTest {
     @Test
@@ -12,5 +13,15 @@ public class OperatorTest {
         assertThat(Operator.MULTIPLY.compute(new Integer(2),new Integer(1))).isEqualTo(new Integer(2));
         assertThat(Operator.DIVIDE.compute(new Integer(2),new Integer(1))).isEqualTo(new Integer(2));
         assertThat(Operator.MODULO.compute(new Integer(2),new Integer(1))).isEqualTo(new Integer(0));
+    }
+
+    @Test
+    void createShouldCreateProperOperator() {
+        assertThat(Operator.create("+")).isEqualTo(Operator.PLUS);
+        assertThat(Operator.create("-")).isEqualTo(Operator.MINUS);
+        assertThat(Operator.create("*")).isEqualTo(Operator.MULTIPLY);
+        assertThat(Operator.create("/")).isEqualTo(Operator.DIVIDE);
+        assertThat(Operator.create("%")).isEqualTo(Operator.MODULO);
+        assertThatThrownBy(()->Operator.create("$")).isInstanceOf(IllegalArgumentException.class);
     }
 }

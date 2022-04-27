@@ -1,32 +1,34 @@
 package string_calculator;
 
-import java.math.BigDecimal;
-import java.nio.file.Path;
-import java.util.Objects;
-import java.util.function.DoublePredicate;
-import java.util.function.IntPredicate;
-import java.util.function.LongPredicate;
-import java.util.regex.Pattern;
-import java.util.stream.DoubleStream;
-import java.util.stream.IntStream;
-import java.util.stream.LongStream;
-
 public enum Operator implements Value {
-    PLUS,
-    MINUS,
-    MULTIPLY,
-    DIVIDE,
-    MODULO;
+    PLUS("+"),
+    MINUS("-"),
+    MULTIPLY("*"),
+    DIVIDE("/"),
+    MODULO("%");
 
-    public Operator evaluateOperator(String value){
-        switch (value) {
-            case "+": return Operator.PLUS;
-            case "-": return Operator.MINUS;
-            case "*": return Operator.MULTIPLY;
-            case "/": return Operator.DIVIDE;
-            case "%": return Operator.MODULO;
+    private String value;
+    Operator(String value) {
+        this.value = value;
+    }
+
+    public static Operator create(String value) {
+        if (PLUS.value.equals(value)) {
+            return PLUS;
         }
-        throw new IllegalArgumentException("only [+, -, *, /, %] are allowed.");
+        if (MINUS.value.equals(value)) {
+            return MINUS;
+        }
+        if (MULTIPLY.value.equals(value)) {
+            return MULTIPLY;
+        }
+        if (DIVIDE.value.equals(value)) {
+            return DIVIDE;
+        }
+        if (MODULO.value.equals(value)) {
+            return MODULO;
+        }
+        throw new IllegalArgumentException("only [+, -, *, /, %] are allowed. but: " + value);
     }
 
     public Integer compute(Integer acc, Integer operand) {
@@ -59,4 +61,5 @@ public enum Operator implements Value {
             throw new ArithmeticException("Can't divide by Zero.");
         }
     }
+
 }

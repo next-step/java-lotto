@@ -28,20 +28,9 @@ public class Parser {
             return new Integer(parseInt(item));
         }
         if ((Pattern.matches("[\\+\\-\\*\\/%]", item))) {
-            return evaluateOperator(item);
+            return Operator.create(item);
         }
         throw new IllegalArgumentException("Can't evaluate: " + item);
-    }
-
-    public Operator evaluateOperator(String value){
-        switch (value) {
-            case "+": return Operator.PLUS;
-            case "-": return Operator.MINUS;
-            case "*": return Operator.MULTIPLY;
-            case "/": return Operator.DIVIDE;
-            case "%": return Operator.MODULO;
-        }
-        throw new IllegalArgumentException("only [+, -, *, /, %] are allowed.");
     }
 
     @Override
