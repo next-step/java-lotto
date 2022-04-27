@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public final class Store {
@@ -16,7 +18,16 @@ public final class Store {
   }
 
 
-  public Product deliverLotto() {
+  public List<Product> delivery(int money) {
+    int count = money / PRODUCT_PRICE;
+    List<Product> products = new ArrayList<>();
+    while (count-- != 0) {
+      products.add(deliverLotto());
+    }
+    return products;
+  }
+
+  private Product deliverLotto() {
     LottoFactory factory = new LottoFactory();
     return factory.apply();
   }
