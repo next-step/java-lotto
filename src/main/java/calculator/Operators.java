@@ -23,6 +23,7 @@ public class Operators {
                 return value;
             }
         }
-        return null;
+
+        throw new NullPointerException("존재하는 연산자가 없습니다.");
     }
 }
