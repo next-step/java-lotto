@@ -18,10 +18,9 @@ public class Lotto {
   }
 
   public static Lotto create(Set<Integer> values) {
-    Set<LottoNumber> lottoNumbers = values.stream()
+    return values.stream()
         .map(LottoNumber::new)
-        .collect(Collectors.toSet());
-    return new Lotto(lottoNumbers);
+        .collect(Collectors.collectingAndThen(Collectors.toSet(), Lotto::new));
   }
 
   public static Lotto autoCreate() {
