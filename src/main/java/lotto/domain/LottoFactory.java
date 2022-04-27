@@ -12,7 +12,7 @@ public class LottoFactory {
     private static final int MAX_BALL_NUMBER_TO_SELECT = 6;
 
     static {
-        ArrayList<Integer> lottoNumbers = new ArrayList<>();
+        List<Integer> lottoNumbers = new ArrayList<>();
         for (int i = MIN_LOTTO_NUMBER, len = MAX_LOTTO_NUMBER; i <= len; i++) {
             lottoNumbers.add(i);
         }
