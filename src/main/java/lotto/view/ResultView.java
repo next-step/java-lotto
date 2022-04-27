@@ -1,7 +1,7 @@
 package lotto.view;
 
-import java.math.BigDecimal;
 import java.util.Map;
+import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
@@ -18,16 +18,16 @@ public class ResultView {
     System.out.println(lottos);
   }
 
-  public static void printResult(Map<Rank, Integer> result, BigDecimal yield) {
+  public static void printResult(LottoResult result, double yield) {
     System.out.println("당첨 통계");
     System.out.println("---------");
     System.out.println(getFormattedResult(result));
     System.out.printf(YIELD_FORMAT, yield);
   }
 
-  private static String getFormattedResult(Map<Rank, Integer> result) {
+  private static String getFormattedResult(LottoResult result) {
     StringBuilder stringBuilder = new StringBuilder();
-    for (Map.Entry<Rank, Integer> entry : result.entrySet()) {
+    for (Map.Entry<Rank, Integer> entry : result.getValue().entrySet()) {
       if (entry.getKey() == Rank.MISS) {
         continue;
       }

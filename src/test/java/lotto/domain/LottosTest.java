@@ -3,7 +3,6 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 
@@ -26,11 +25,11 @@ class LottosTest {
     ));
     Lottos lottos = prepareLottos();
 
-    Map<Rank, Integer> rankMap = lottos.calculate(lotto);
-    assertThat(rankMap.get(Rank.FIRST)).isEqualTo(1);
-    assertThat(rankMap.get(Rank.SECOND)).isEqualTo(1);
-    assertThat(rankMap.get(Rank.THIRD)).isEqualTo(1);
-    assertThat(rankMap.get(Rank.FOURTH)).isEqualTo(1);
+    LottoResult result = lottos.calculate(lotto);
+    assertThat(result.getRankCount(Rank.FIRST)).isEqualTo(1);
+    assertThat(result.getRankCount(Rank.SECOND)).isEqualTo(1);
+    assertThat(result.getRankCount(Rank.THIRD)).isEqualTo(1);
+    assertThat(result.getRankCount(Rank.FOURTH)).isEqualTo(1);
   }
 
   private Lottos prepareLottos() {

@@ -28,13 +28,13 @@ public class Lottos {
     return values.size();
   }
 
-  public Map<Rank, Integer> calculate(Lotto winningLotto) {
+  public LottoResult calculate(Lotto winningLotto) {
     Map<Rank, Integer> result = new EnumMap<>(Rank.class);
     for (Lotto lotto : values) {
       Rank rank = lotto.getRank(winningLotto);
       result.put(rank, result.getOrDefault(rank, 0) + 1);
     }
-    return result;
+    return new LottoResult(result);
   }
 
   @Override
