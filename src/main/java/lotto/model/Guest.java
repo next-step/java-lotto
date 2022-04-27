@@ -18,10 +18,6 @@ public final class Guest {
     this.allLottoList = allLottoList;
   }
 
-  public boolean visit(Store store) {
-    return store.prepareProduct();
-  }
-
   public List<Product> choiceProduct(Store store) {
     return store.delivery(Integer.parseInt(money.toString()));
   }
