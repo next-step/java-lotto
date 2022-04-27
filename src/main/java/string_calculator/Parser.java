@@ -9,9 +9,12 @@ import static java.lang.Integer.parseInt;
 
 public class Parser {
     public List<Value> values = new ArrayList<Value>();
+    private static String REGEX_INT = "\\d+";
+    private static String REGEX_OPERATOR = "[\\+\\-\\*\\/%]";
+    private static String EMPTY_STR = " ";
 
     public void parse(String equation) {
-        String[] items = equation.split(" ");
+        String[] items = equation.split(EMPTY_STR);
         if (items.length < 1) {
             throw new IllegalArgumentException("Wrong equation: " + items.toString());
         }
@@ -24,10 +27,10 @@ public class Parser {
     }
 
     private Value evaluate(String item) {
-        if ((Pattern.matches("\\d+", item))) {
+        if ((Pattern.matches(REGEX_INT, item))) {
             return new Integer(parseInt(item));
         }
-        if ((Pattern.matches("[\\+\\-\\*\\/%]", item))) {
+        if ((Pattern.matches(REGEX_OPERATOR, item))) {
             return Operator.create(item);
         }
         throw new IllegalArgumentException("Can't evaluate: " + item);
