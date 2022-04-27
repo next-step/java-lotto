@@ -2,7 +2,10 @@ package lotto.view;
 
 import java.util.List;
 import lotto.controller.LottoController;
+import lotto.enums.Grade;
+import lotto.model.History;
 import lotto.model.Product;
+import lotto.model.Statistics;
 import lotto.service.LottoService;
 
 public final class OutputTable {
@@ -40,8 +43,15 @@ public final class OutputTable {
     System.out.println(LAST_WEEK_AWARD_NUMBER_MESSAGE);
   }
 
-  public static void resultStatistics() {
+  public static void resultStatisticsMessage() {
     System.out.println(STATISTICS_MESSAGE);
     System.out.println(UNDER_BAR);
+  }
+
+  public static void resultStatistics(List<History> histories) {
+    for (History history : histories) {
+      System.out.printf("%d개 일치 (%d원)- %d개\n", history.getGrade().getExpectNumber(),
+          history.getGrade().getAwardPrice(), history.getCount());
+    }
   }
 }
