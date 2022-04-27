@@ -1,8 +1,10 @@
 package calculator;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum Operator {
 
@@ -16,12 +18,8 @@ public enum Operator {
         return a / b;
     });
 
-    private static final Map<String, Operator> BY_OPERATOR = new HashMap<>();
-    static {
-        for (Operator operator : values()) {
-            BY_OPERATOR.put(operator.operatorSymbol, operator);
-        }
-    }
+    private static final Map<String, Operator> BY_OPERATOR = Stream.of(values())
+            .collect(Collectors.toMap(operator -> operator.operatorSymbol, Function.identity()));
 
     private final String operatorSymbol;
     private final IntBinaryOperator intBinaryOperator;
