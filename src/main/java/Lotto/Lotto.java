@@ -16,13 +16,18 @@ public class Lotto {
     public int checkLottoNumbers(int[] lottoAnswers) {
         int cnt = 0;
         for (int ans : lottoAnswers) {
-            for (int n : numbers) {
-                if(ans == n) {
-                    cnt += 1;
-                }
-            }
+            cnt = checkLottoNumbers(cnt, ans);
         }
 
+        return cnt;
+    }
+
+    private int checkLottoNumbers(int cnt, int answerNum) {
+        for (int myLottoNum : numbers) {
+            if(myLottoNum == answerNum) {
+                cnt += 1;
+            }
+        }
         return cnt;
     }
 }

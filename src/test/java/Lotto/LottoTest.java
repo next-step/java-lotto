@@ -1,6 +1,7 @@
 package Lotto;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -22,6 +23,7 @@ public class LottoTest {
 
     @ParameterizedTest
     @MethodSource("lottoArgs")
+    @DisplayName("당첨된 번호가 몇개인지 확인한다")
     public void checkEqualLottoNumber(int[] numbers, int[] answers, int equalNum) {
         Lotto lotto = new Lotto(numbers);
         Assertions.assertThat(lotto.checkLottoNumbers(answers)).isEqualTo(equalNum);

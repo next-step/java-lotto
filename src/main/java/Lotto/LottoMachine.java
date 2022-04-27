@@ -4,19 +4,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoMachine {
-    private final Map<Integer,Integer> winningRankMap = new HashMap<>();
+    private final Map<String,Integer> winningRankMap = new HashMap<>();
 
     public LottoMachine() {
-        this(new int[] {});
+        this(new String[] {});
     }
 
-    public LottoMachine(int [] winningRanks) {
-        for(int rank : winningRanks) {
+    public LottoMachine(String [] winningRanks) {
+        for(String rank : winningRanks) {
             addWinningRank(rank);
         }
     }
 
-    private void addWinningRank(int rank) {
+    private void addWinningRank(String rank) {
         if (!winningRankMap.containsKey(rank))
             winningRankMap.put(rank,1);
         else {
@@ -27,22 +27,17 @@ public class LottoMachine {
 
     public int getWinningSumPrice() {
         int sum = 0;
-        for (Integer key : winningRankMap.keySet()) {
-            if(winningRankMap.containsKey(key)) {
-                int winningNum = winningRankMap.get(key);
-                if (key == 1) {
-                    sum += (2000000000 * winningNum);
-                }
-                if (key == 2) {
-                    sum += (1500000 * winningNum);
-                }
-                if (key == 3) {
-                    sum += (50000 * winningNum);
-                }
-                if (key == 4) {
-                    sum += (5000 * winningNum);
-                }
-            }
+        for (String rank : winningRankMap.keySet()) {
+            sum = getWinningSumPrice(sum, rank);
+        }
+
+        return sum;
+    }
+
+    private int getWinningSumPrice(int sum, String rank) {
+        if(winningRankMap.containsKey(rank)) {
+            int winningNum = winningRankMap.get(rank);
+            sum += WinningSumPrice.findWinningRank(rank).sum(winningNum);
         }
 
         return sum;
