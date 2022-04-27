@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum LottoWinnerType {
-    FIRST_PLACE(6, false, 2000000000),
-    SECOND_PLACE(5, true, 30000000),
-    THIRD_PLACE(5, false, 1500000),
-    FOURTH_PLACE(4, false, 50000),
-    FIFTH_PLACE(3, false, 5000),
+    FIRST_PLACE(6, false, 2_000_000_000),
+    SECOND_PLACE(5, true, 30_000_000),
+    THIRD_PLACE(5, false, 1_500_000),
+    FOURTH_PLACE(4, false, 50_000),
+    FIFTH_PLACE(3, false, 5_000),
     NON_WIN(-1, false, 0);
 
     private int countOfDuplicate;
