@@ -15,4 +15,16 @@ public class Numbers {
     public Integer next() {
         return numbers.get(index);
     }
+
+    public Integer get(int index) {
+        return numbers.get(index);
+    }
+
+    public Integer nextAndGet() {
+        if (index < numbers.size()) {
+            return numbers.get(index++);
+        }
+
+        return 0;
+    }
 }

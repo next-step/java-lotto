@@ -6,18 +6,22 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
+
     private static final String NUMBER_REGULAR = "[0-9]";
     private static final String OPERATION_REGULAR = "[+*-/]";
-    
+    private static final Pattern NUMBER_PATTERN = Pattern.compile(NUMBER_REGULAR);
+    private static final Pattern OPERATION_PATTERN = Pattern.compile(OPERATION_REGULAR);
+
+
     private Numbers numbers;
-    private Operations operators;
+    private Operators operators;
     private Integer result;
 
     public Calculator(String input) {
         validation(input);
         result = 0;
         numbers = new Numbers(findNumber(input));
-        operators = new Operations(findOperator(input));
+        operators = new Operators(findOperator(input));
     }
 
     private void validation(String input) {
@@ -33,7 +37,7 @@ public class Calculator {
     private List<Integer> findNumber(String input) {
         ArrayList<Integer> extractNumbers = new ArrayList<>();
 
-        Matcher matcher = Pattern.compile(NUMBER_REGULAR).matcher(input);
+        Matcher matcher = NUMBER_PATTERN.matcher(input);
         while (matcher.find()) {
             extractNumbers.add(Integer.parseInt(matcher.group()));
         }
@@ -43,7 +47,7 @@ public class Calculator {
     private List<String> findOperator(String input) {
         List<String> extractOperators = new ArrayList<>();
 
-        Matcher matcher = Pattern.compile(OPERATION_REGULAR).matcher(input);
+        Matcher matcher = OPERATION_PATTERN.matcher(input);
         while (matcher.find()) {
             extractOperators.add(matcher.group());
         }
@@ -51,26 +55,11 @@ public class Calculator {
     }
 
     public Integer operation() {
-        if (operators.isAddition()) {
-            Addition addition = new Addition();
-            result += addition.sum(numbers.next(), numbers.next());
+        result = numbers.nextAndGet();
+        while (operators.next()) {
+            result = operators.findOperator().calculate(result, numbers.nextAndGet());
         }
-
-        if (operators.isSubtraction()) {
-            Subtraction subtraction = new Subtraction();
-            result += subtraction.subtract(numbers.next(), numbers.next());
-        }
-
-        if (operators.isMultiplication()) {
-            Multiplication multiplication = new Multiplication();
-            result += multiplication.multiply(numbers.next(), numbers.next());
-        }
-
-        if (operators.isDivision()) {
-            Division division = new Division();
-            result += division.division(numbers.next(), numbers.next());
-        }
-
         return result;
+
     }
 }
