@@ -29,11 +29,12 @@ public class Lotto {
         return copy;
     }
 
-    public LottoWinnerType winLotto(Lotto previousLotto, int bonus) {
+    public LottoWinnerType winLotto(Lotto previousLotto, int bonusNumber) {
         int countOfDuplicate = countDuplicateValue(previousLotto);
-        boolean isBonus = countOfDuplicate != 5 ? false : lotto.contains(bonus);
-
-        return LottoWinnerType.valueOf(countOfDuplicate, isBonus);
+        if (LottoWinnerType.isMatchingCountWithBonus(countOfDuplicate)) {
+            return LottoWinnerType.valueOf(countOfDuplicate, lotto.contains(bonusNumber));
+        }
+        return LottoWinnerType.valueOf(countOfDuplicate, false);
     }
 
     int countDuplicateValue(Lotto lotto) {

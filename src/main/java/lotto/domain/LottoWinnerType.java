@@ -48,7 +48,6 @@ public enum LottoWinnerType {
         if (cache.containsKey(key)) {
             return cache.get(key);
         }
-
         return NON_WIN;
     }
 
@@ -57,6 +56,13 @@ public enum LottoWinnerType {
         String key = countOfDuplicate + bonusYn;
 
         return key;
+    }
+
+    public static boolean isMatchingCountWithBonus(int countOfDuplicate) {
+        if (countOfDuplicate != SECOND_PLACE.countOfDuplicate) {
+            return false;
+        }
+        return true;
     }
 
     public int getCountOfDuplicate() {
