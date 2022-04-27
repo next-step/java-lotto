@@ -10,8 +10,8 @@ public class StringCalculator {
         List<String> elements = SplitString.split(text);
         int resultValue = Integer.parseInt(elements.get(0));
         for (int index = 1; index < elements.size(); index += 2) {
-            Calculator calculator = Calculator.valueOfOperator(elements.get(index));
-            resultValue = calculator.calculate(resultValue, getOperand(elements.get(index + 1)));
+            Operator operator = Operator.valueOfOperatorSymbol(elements.get(index));
+            resultValue = operator.operate(resultValue, getOperand(elements.get(index + 1)));
         }
         return resultValue;
     }
