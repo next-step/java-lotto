@@ -5,26 +5,31 @@ import calculator.domain.operation.Operation;
 
 import java.util.Objects;
 
-public class Calculator {
+public class Operator {
 
-    private Number initialNumber;
+    private static final int INITIAL_NUMBER = 0;
+
+    private int initialNumber;
     private Operation operation;
 
-    public Calculator(String value) {
-        this(new Number(value), new AddOperation());
+    public Operator(String value) {
+        this(Integer.parseInt(value), new AddOperation());
     }
 
-    public Calculator(Operation operation) {
-        this(new Number(), operation);
+    public Operator(Operation operation) {
+        this(INITIAL_NUMBER, operation);
     }
 
-    public Calculator(Number initialNumber, Operation operation) {
+    public Operator(int initialNumber, Operation operation) {
         this.initialNumber = initialNumber;
         this.operation = operation;
     }
 
-    public Number calculate(Number number) {
-        initialNumber.calculate(operation, number);
+    public void calculate(int number) {
+        initialNumber = operation.operate(initialNumber, number);
+    }
+
+    public int result() {
         return initialNumber;
     }
 
@@ -36,8 +41,8 @@ public class Calculator {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Calculator that = (Calculator) o;
-        return Objects.equals(initialNumber, that.initialNumber) && Objects.equals(operation, that.operation);
+        Operator operator = (Operator) o;
+        return initialNumber == operator.initialNumber && Objects.equals(operation, operator.operation);
     }
 
     @Override
