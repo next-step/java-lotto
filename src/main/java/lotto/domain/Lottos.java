@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -24,6 +23,10 @@ public class Lottos {
     return new Lottos(lottos);
   }
 
+  public List<Lotto> getValues() {
+    return values;
+  }
+
   public int size() {
     return values.size();
   }
@@ -35,10 +38,5 @@ public class Lottos {
       result.put(rank, result.getOrDefault(rank, 0) + 1);
     }
     return new LottoResult(result);
-  }
-
-  @Override
-  public String toString() {
-    return values.stream().map(Lotto::toString).collect(Collectors.joining(LOTTOS_DELIMITER));
   }
 }

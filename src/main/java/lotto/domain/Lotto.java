@@ -27,6 +27,10 @@ public class Lotto {
     return create(LottoNumberGenerator.getRandomIntegers());
   }
 
+  public Set<LottoNumber> getValues() {
+    return values;
+  }
+
   public Rank getRank(Lotto other) {
     return Rank.valueOf(getInterSectionSize(other));
   }
@@ -58,12 +62,5 @@ public class Lotto {
   @Override
   public int hashCode() {
     return Objects.hash(values);
-  }
-
-  @Override
-  public String toString() {
-    return "["
-        + values.stream().map(LottoNumber::toString).collect(Collectors.joining(", "))
-        + "]";
   }
 }
