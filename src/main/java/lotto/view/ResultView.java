@@ -1,6 +1,7 @@
 package lotto.view;
 
-import java.util.Map;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
@@ -11,7 +12,7 @@ import lotto.domain.Rank;
 public class ResultView {
 
   private static final String RESULT_FORMAT = "%d개 일치 (%d원)- %d개\n";
-  private static final String YIELD_FORMAT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+  private static final String YIELD_FORMAT = "총 수익률은 %.2f입니다.";
 
   private ResultView() {
   }
@@ -29,15 +30,17 @@ public class ResultView {
   }
 
   private static void printRank(LottoResult result) {
-    for (Map.Entry<Rank, Integer> entry : result.getValue().entrySet()) {
-      if (entry.getKey() == Rank.MISS) {
+    List<Rank> ranks = Arrays.asList(Rank.values());
+    for (Rank rank : ranks) {
+      if (rank == Rank.MISS) {
         continue;
       }
+      int count = result.getValue().getOrDefault(rank, 0);
       System.out.printf(
-          (RESULT_FORMAT) + "%n",
-          entry.getKey().getMatchCount(),
-          entry.getKey().getPrizeMoney(),
-          entry.getValue()
+          RESULT_FORMAT,
+          rank.getMatchCount(),
+          rank.getPrizeMoney(),
+          count
       );
     }
   }

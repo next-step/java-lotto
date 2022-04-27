@@ -7,8 +7,6 @@ import java.util.Map;
 
 public class Lottos {
 
-  private static final String LOTTOS_DELIMITER = "\n";
-
   private final List<Lotto> values;
 
   public Lottos(List<Lotto> values) {
