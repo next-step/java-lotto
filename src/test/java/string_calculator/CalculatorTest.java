@@ -54,7 +54,7 @@ public class CalculatorTest {
     }
 
     @Test
-    void shouldReturnCollectAnswer() {
+    void shouldReturnCorrectAnswer() {
         Parser p = new Parser();
         p.parse("2 + 3 * 4 / 2");
         Calculator a = new Calculator();
