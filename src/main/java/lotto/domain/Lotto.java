@@ -31,7 +31,7 @@ public class Lotto {
 
     public LottoWinnerType winLotto(Lotto previousLotto, int bonus) {
         int countOfDuplicate = countDuplicateValue(previousLotto);
-        boolean isBonus = lotto.contains(bonus);
+        boolean isBonus = countOfDuplicate != 5 ? false : lotto.contains(bonus);
 
         return LottoWinnerType.valueOf(countOfDuplicate, isBonus);
     }
