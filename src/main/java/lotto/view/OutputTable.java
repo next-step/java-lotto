@@ -1,10 +1,7 @@
 package lotto.view;
 
 import java.util.List;
-import lotto.controller.LottoController;
 import lotto.model.Product;
-import lotto.model.Statistics;
-import lotto.service.LottoService;
 
 public final class OutputTable {
 
@@ -18,8 +15,7 @@ public final class OutputTable {
   }
 
   public static void main(String[] args) {
-    LottoController lottoController = new LottoController(new LottoService());
-    lottoController.run();
+
   }
 
   public static void inputPurchaseAmount() {
@@ -43,11 +39,5 @@ public final class OutputTable {
   public static void resultStatistics() {
     System.out.println(STATISTICS_MESSAGE);
     System.out.println(UNDER_BAR);
-  }
-
-  public static void printStatistics(List<Statistics> statistics) {
-    for (Statistics statistic : statistics) {
-      System.out.println(statistic);
-    }
   }
 }

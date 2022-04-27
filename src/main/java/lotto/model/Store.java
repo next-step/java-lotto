@@ -15,13 +15,14 @@ public final class Store {
     this.productCount = productCount;
   }
 
-  public Store getProductsCount(Integer money) {
-    return new Store(money / PRODUCT_PRICE);
-  }
 
   public Product deliverLotto() {
     LottoFactory factory = new LottoFactory();
     return factory.apply();
+  }
+
+  public boolean prepareProduct() {
+    return true;
   }
 
   @Override
@@ -45,4 +46,5 @@ public final class Store {
   public String toString() {
     return productCount.toString();
   }
+
 }
