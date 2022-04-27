@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,5 +16,13 @@ class GuestTest {
   void visit() {
     Guest guest = new Guest(14000);
     assertThat(guest.visit(new Store())).isEqualTo(true);
+  }
+
+  @Test
+  @DisplayName("고객은 상품을 선택한다.")
+  void choiceProduct() {
+    Guest guest = new Guest(14000);
+    List<Product> products = guest.choiceProduct(new Store());
+    assertThat(products).hasSize(14);
   }
 }

@@ -21,4 +21,8 @@ public final class Guest {
   public boolean visit(Store store) {
     return store.prepareProduct();
   }
+
+  public List<Product> choiceProduct(Store store) {
+    return store.delivery(Integer.parseInt(money.toString()));
+  }
 }
