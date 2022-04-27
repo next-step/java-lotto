@@ -10,10 +10,10 @@ public final class InputTable {
   }
 
   public static Integer inputHaveMoney() {
-    return SCANNER.nextInt();
+    return Integer.parseInt(SCANNER.nextLine());
   }
 
   public static String inputAwardNumber() {
-    return SCANNER.next();
+    return SCANNER.nextLine();
   }
 }

@@ -10,6 +10,6 @@ class AwardNumberUtilTest {
 
   @Test
   void getAwadNumberList() {
-    assertThat(AwardNumberUtil.getAwadNumberList("1,2,4")).isEqualTo(List.of(1, 2, 4));
+    assertThat(AwardNumberUtil.getAwadNumberList("1, 2, 4, 5")).isEqualTo(List.of(1, 2, 4, 5));
   }
 }

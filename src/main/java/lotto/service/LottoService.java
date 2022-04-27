@@ -4,6 +4,7 @@ import java.util.List;
 import lotto.model.Guest;
 import lotto.model.Product;
 import lotto.model.Store;
+import lotto.util.AwardNumberUtil;
 
 public class LottoService {
 
@@ -11,4 +12,7 @@ public class LottoService {
     return guest.choiceProduct(store);
   }
 
+  public Product insertWinnerNumber(String winnerNumber) {
+    return new Product(AwardNumberUtil.getAwadNumberList(winnerNumber));
+  }
 }
