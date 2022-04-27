@@ -15,6 +15,10 @@ public final class Product {
     return lottoNumbers;
   }
 
+  public Product winningProduct(List<Integer> winningNumbers) {
+    return new Product(winningNumbers);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {

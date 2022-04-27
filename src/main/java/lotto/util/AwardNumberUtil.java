@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class AwardNumberUtil {
 
-  private static final String DELIMITER = ",";
+  private static final String DELIMITER = ", ";
 
   private static String[] split(String str) {
     return str.split(DELIMITER);
