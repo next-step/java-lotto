@@ -16,8 +16,8 @@ public class CalculatorTest {
             add(Operator.PLUS);
             add(new Integer(2));
         }};
-        Calculator a = new Calculator();
-        assertThat(a.computes(values)).isEqualTo(new Integer(3));
+        Calculator calculator = new Calculator();
+        assertThat(calculator.computes(values)).isEqualTo(new Integer(3));
     }
 
     @Test
@@ -33,31 +33,31 @@ public class CalculatorTest {
             add(Operator.MODULO);
             add(new Integer(5));
         }};
-        Calculator a = new Calculator();
-        assertThat(a.computes(values)).isEqualTo(new Integer(1));
+        Calculator calculator = new Calculator();
+        assertThat(calculator.computes(values)).isEqualTo(new Integer(1));
     }
 
     @Test
     void shouldThrowErrorIfResultIsNotInteger() {
-        Parser p = new Parser();
-        p.parse("3 / 2");
-        Calculator a = new Calculator();
-        assertThatThrownBy(() -> a.computes(p.values)).isInstanceOf(IllegalArgumentException.class);
+        Parser parser = new Parser();
+        parser.parse("3 / 2");
+        Calculator calculator = new Calculator();
+        assertThatThrownBy(() -> calculator.computes(parser.values)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void shouldThrowErrorIfDividedByZero() {
-        Parser p = new Parser();
-        p.parse("3 / 0");
-        Calculator a = new Calculator();
-        assertThatThrownBy(() -> a.computes(p.values)).isInstanceOf(ArithmeticException.class);
+        Parser parser = new Parser();
+        parser.parse("3 / 0");
+        Calculator calculator = new Calculator();
+        assertThatThrownBy(() -> calculator.computes(parser.values)).isInstanceOf(ArithmeticException.class);
     }
 
     @Test
     void shouldReturnCorrectAnswer() {
-        Parser p = new Parser();
-        p.parse("2 + 3 * 4 / 2");
-        Calculator a = new Calculator();
-        assertThat(a.computes(p.values)).isEqualTo(new Integer(10));
+        Parser parser = new Parser();
+        parser.parse("2 + 3 * 4 / 2");
+        Calculator calculator = new Calculator();
+        assertThat(calculator.computes(parser.values)).isEqualTo(new Integer(10));
     }
 }

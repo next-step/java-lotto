@@ -6,12 +6,12 @@ public class CalculatorApp {
             String equation = InputView.scan();
             Parser parser = new Parser();
             parser.parse(equation);
-            Calculator a = new Calculator();
-            Integer result = a.computes(parser.values);
+            Calculator calculator = new Calculator();
+            Integer result = calculator.computes(parser.values);
             ResultView.print(result);
         }
-        catch (Exception e) {
-            System.out.println(e);
+        catch (Exception exception) {
+            System.out.println(exception);
         }
     }
 }

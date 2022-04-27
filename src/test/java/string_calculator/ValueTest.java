@@ -17,14 +17,14 @@ public class ValueTest {
     @ParameterizedTest
     @ValueSource(strings = {"!", "@", "#", "$", "^", "&"})
     void wrongOperator(String input) {
-        Parser p = new Parser();
-        assertThatThrownBy(() -> p.evaluateOperator(input)).isInstanceOf(IllegalArgumentException.class);
+        Parser parser = new Parser();
+        assertThatThrownBy(() -> parser.evaluateOperator(input)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"+", "-", "*", "/", "%"})
     void collectOperator(String input) {
-        Parser p = new Parser();
-        assertThat(p.evaluateOperator(input)).isInstanceOf(Operator.class);
+        Parser parser = new Parser();
+        assertThat(parser.evaluateOperator(input)).isInstanceOf(Operator.class);
     }
 }
