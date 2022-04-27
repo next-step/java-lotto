@@ -21,14 +21,6 @@ public enum Grade {
     this.awardPrice = awardPrice;
   }
 
-  public int getExpectNumber() {
-    return expectNumber;
-  }
-
-  public int getAwardPrice() {
-    return awardPrice;
-  }
-
   public int coincideLotto(List<Product> allProducts, List<Integer> winNumbers) {
     int result = 0;
     for (Product product : allProducts) {
