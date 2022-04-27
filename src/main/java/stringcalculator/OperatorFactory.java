@@ -1,10 +1,10 @@
 package stringcalculator;
 
 public class OperatorFactory {
-    public static final String PLUS = "+";
-    public static final String MINUS = "-";
-    public static final String DIVIDE = "/";
-    public static final String MULTIPLE = "*";
+    private static final String PLUS = "+";
+    private static final String MINUS = "-";
+    private static final String DIVIDE = "/";
+    private static final String MULTIPLE = "*";
 
     private OperatorFactory() {
         throw new AssertionError();

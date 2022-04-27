@@ -35,8 +35,6 @@ public class StringCalculator {
     private static int getResult(Items items) {
         int baseNumber = items.getFirstOperand();
         int targetNumber = items.getSecondOperand();
-        Calculator calculator = new Calculator(items.getOperator());
-
-        return calculator.calculate(baseNumber, targetNumber);
+        return OperatorFactory.get(items.getOperator()).calculate(baseNumber, targetNumber);
     }
 }
