@@ -1,7 +1,9 @@
 package lotto.view;
 
 import java.util.List;
+import lotto.controller.LottoController;
 import lotto.model.Product;
+import lotto.service.LottoService;
 
 public final class OutputTable {
 
@@ -15,7 +17,8 @@ public final class OutputTable {
   }
 
   public static void main(String[] args) {
-
+    LottoController controller = new LottoController(new LottoService());
+    controller.run();
   }
 
   public static void inputPurchaseAmount() {
@@ -33,6 +36,7 @@ public final class OutputTable {
   }
 
   public static void lastWeekAwardNumber() {
+    System.out.println();
     System.out.println(LAST_WEEK_AWARD_NUMBER_MESSAGE);
   }
 
