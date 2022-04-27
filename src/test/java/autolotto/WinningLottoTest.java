@@ -1,9 +1,11 @@
 package autolotto;
 
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static autolotto.LottoExceptionCode.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinningLottoTest {
@@ -38,5 +40,11 @@ class WinningLottoTest {
         assertThatThrownBy(() -> new WinningLotto(number))
                 .isInstanceOf(LottoException.class)
                 .hasMessage(DUPLICATED_WINNING_NUMBER.getMessage());
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1, 2, 3, 4 ,5, 6:3"}, delimiter = ':')
+    void numberGiven_ReturnContainResult(String number, int compare) {
+        assertThat(new WinningLotto(number).contains(compare)).isTrue();
     }
 }

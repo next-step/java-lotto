@@ -37,4 +37,8 @@ public class WinningLotto {
             throw new LottoException(DUPLICATED_WINNING_NUMBER);
         }
     }
+
+    public boolean contains(int number) {
+        return winningNumbers.contains(number);
+    }
 }
