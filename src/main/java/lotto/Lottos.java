@@ -25,4 +25,14 @@ public final class Lottos {
     public List<Integer> get() {
         return Collections.unmodifiableList(lottos);
     }
+
+    public int getMatchCount(Lottos result) {
+        int count = 0;
+        for (int i = 0; i < result.get().size(); i++) {
+            if (lottos.contains(result.get().get(i))) {
+                count++;
+            }
+        }
+        return count;
+    }
 }
