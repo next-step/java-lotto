@@ -3,7 +3,12 @@ package lotto.controller;
 import lotto.model.LottoGenerator;
 import lotto.model.Lottos;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
 
 public class LottoMarket {
 
