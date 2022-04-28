@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("로또 생성 테스트")
+@DisplayName("랜덤 로또 생성 테스트")
 public class RandomLottoGeneratorTest {
 
     @Test
@@ -33,7 +33,7 @@ public class RandomLottoGeneratorTest {
     @Test
     @DisplayName("생성된 로또 번호의 개수는 6개이다.")
     void lottosTest() {
-        Lottos lottos = RandomLottoGenerator.get();
+        Lottos lottos = new RandomLottoGenerator().get();
 
         List<Integer> lottoNums = lottos.get();
 
@@ -44,7 +44,7 @@ public class RandomLottoGeneratorTest {
     @DisplayName("로또 번호 6개 모두 1-45사이의 값을 가지고 있다. ")
     void getTest() {
         // given
-        Lottos lottos = RandomLottoGenerator.get();
+        Lottos lottos = new RandomLottoGenerator().get();
 
         // when
         List<Integer> lottoNums = lottos.get();
