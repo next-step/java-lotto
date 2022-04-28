@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.Objects;
+import lotto.exception.LottoNegativeException;
 
 public class LottoNo {
   private Integer value;
@@ -11,7 +12,9 @@ public class LottoNo {
   }
 
   private void valid(Integer value) {
-
+    if(value < 0) {
+      throw new LottoNegativeException();
+    }
   }
 
   @Override
