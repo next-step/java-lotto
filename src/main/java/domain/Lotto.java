@@ -1,14 +1,16 @@
 package domain;
 
-public class Lotto {
-    private final int money;
-    private final int LOTTO_PRICE = 1000;
+import java.util.List;
 
-    public Lotto(int money) {
-        this.money = money;
+public class Lotto {
+    private final List<Integer> lottoNumbers;
+
+    public Lotto(List<Integer> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public int boughtLottoCount() {
-        return money / LOTTO_PRICE;
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
     }
 }

@@ -1,12 +1,14 @@
 package controller;
 
-import domain.Lotto;
+import domain.BuyLotto;
+import domain.Lottos;
 import view.InputView;
 import view.ResultView;
 
 public class LottoGame {
     public static void main(String[] args) {
-        Lotto lotto =  new Lotto(InputView.inputHowMoney());
-        ResultView.printHowLottoCount(lotto.boughtLottoCount());
+        BuyLotto buyLotto = new BuyLotto(InputView.inputHowMoney());
+        ResultView.printHowLottoCount(buyLotto.buyLottoCount());
+        ResultView.printLottoList(buyLotto.buyLottoList());
     }
 }
