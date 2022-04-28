@@ -15,12 +15,7 @@ public class Results {
     }
 
     public Optional<Result> find(int numberOfWins) {
-        for (Result result : results) {
-            if (result.isMatch(numberOfWins)) {
-                return Optional.of(result);
-            }
-        }
-        return Optional.empty();
+        return results.stream().filter(result -> result.isMatch(numberOfWins)).findFirst();
     }
 
     public long prize() {

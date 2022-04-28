@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
-    private final List<Lotto> lottos = new ArrayList<>();
     private static final int LOTTO_PRICE = 1000;
+    private final List<Lotto> lottos = new ArrayList<>();
 
     public void add(Lotto lotto) {
         lottos.add(lotto);
