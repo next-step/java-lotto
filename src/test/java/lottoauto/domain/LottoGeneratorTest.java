@@ -1,5 +1,6 @@
-package lottoauto;
+package lottoauto.domain;
 
+import lottoauto.domain.LottoGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

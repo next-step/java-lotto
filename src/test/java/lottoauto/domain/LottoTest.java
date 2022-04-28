@@ -1,7 +1,8 @@
-package lottoauto;
+package lottoauto.domain;
 
+import lottoauto.domain.Lotto;
+import lottoauto.domain.LottoGenerator;
 import org.assertj.core.api.AssertionsForClassTypes;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +39,7 @@ class LottoTest {
     @Test
     @DisplayName("로또 숫자 범위 테스트")
     void lotto_number_valid_test(){
-        lotto = new Lotto(lottoGenerator.makeLotto());
+        lotto = new Lotto(LottoGenerator.makeLotto());
         AssertionsForClassTypes.assertThat(lotto.getNumbers().get(0)).isLessThanOrEqualTo(45);
         AssertionsForClassTypes.assertThat(lotto.getNumbers().get(0)).isGreaterThanOrEqualTo(1);
     }
