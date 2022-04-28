@@ -28,8 +28,9 @@ public final class Lottos {
 
     public int getMatchCount(Lottos result) {
         List<Integer> resultLottos = result.get();
+        int length = resultLottos.size();
         int count = 0;
-        for (int i = 0; i < result.get().size(); i++) {
+        for (int i = 0; i < length; i++) {
             count = updateCount(resultLottos.get(i), count);
         }
         return count;

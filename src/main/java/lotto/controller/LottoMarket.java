@@ -13,6 +13,9 @@ import java.util.Objects;
 
 public class LottoMarket {
 
+    private static final int DEFAULT_VALUE = 0;
+    private static final int ADD_COUNT = 1;
+
     private LottoMarket() {
         throw new AssertionError();
     }
@@ -42,7 +45,7 @@ public class LottoMarket {
         Map<Integer, Integer> result = new HashMap<>();
         for (Lottos lottos : buyingLottos) {
             int key = lottos.getMatchCount(winnerLottos);
-            result.put(key, result.getOrDefault(key, 0) + 1);
+            result.put(key, result.getOrDefault(key, DEFAULT_VALUE) + ADD_COUNT);
         }
         return result;
     }

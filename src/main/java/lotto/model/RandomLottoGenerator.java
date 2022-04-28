@@ -8,6 +8,8 @@ import java.util.List;
 public class RandomLottoGenerator implements LottoGenerator {
 
     private static final int LOTTO_SIZE = 6;
+    private static final int LOTTO_NUM_LOWER_BOUND = 1;
+    private static final int LOTTO_NUM_UPPER_BOUND = 45;
 
     public RandomLottoGenerator() {
     }
@@ -30,7 +32,7 @@ public class RandomLottoGenerator implements LottoGenerator {
 
     private List<Integer> initNumbers() {
         List<Integer> numbers = new LinkedList<>();
-        for (int i = 1; i <= 45; i++) {
+        for (int i = LOTTO_NUM_LOWER_BOUND; i <= LOTTO_NUM_UPPER_BOUND; i++) {
             numbers.add(i);
         }
         return numbers;
