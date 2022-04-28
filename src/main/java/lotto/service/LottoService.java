@@ -12,7 +12,7 @@ import lotto.util.AwardNumberUtil;
 
 public class LottoService {
 
-  public List<Product> visit(Guest guest, Store store) {
+  public Guest visit(Guest guest, Store store) {
     return guest.choiceProduct(store);
   }
 

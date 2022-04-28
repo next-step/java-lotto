@@ -12,7 +12,15 @@ class GuestTest {
   @DisplayName("고객은 상품을 선택한다.")
   void choiceProduct() {
     Guest guest = new Guest(14000);
-    List<Product> products = guest.choiceProduct(new Store());
-    assertThat(products).hasSize(14);
+    guest = guest.choiceProduct(new Store());
+    assertThat(guest).isEqualTo(new Guest(0, guest.hasAllLotto()));
   }
+  @Test
+  @DisplayName("고객이 구입한 로또 갯수 테스트")
+  void lottoCountTest() {
+    Guest guest = new Guest(14000);
+    guest = guest.choiceProduct(new Store());
+    assertThat(guest.hasAllLotto()).hasSize(14);
+  }
+
 }
