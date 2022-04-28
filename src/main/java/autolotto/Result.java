@@ -8,8 +8,13 @@ public class Result {
     private int winners;
 
     public Result(int numberOfWins, long prize) {
+        this(numberOfWins, prize, 0);
+    }
+
+    public Result(int numberOfWins, long prize, int winners) {
         this.numberOfWins = numberOfWins;
         this.prize = prize;
+        this.winners = winners;
     }
 
     public boolean isMatch(int name) {
@@ -35,5 +40,9 @@ public class Result {
     @Override
     public int hashCode() {
         return Objects.hash(numberOfWins, prize, winners);
+    }
+
+    public long prize() {
+        return prize * winners;
     }
 }
