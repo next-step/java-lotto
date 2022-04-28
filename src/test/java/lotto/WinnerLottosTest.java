@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.dto.WinnerLottos;
+import lotto.model.Lottos;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

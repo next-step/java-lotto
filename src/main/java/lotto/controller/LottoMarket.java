@@ -1,4 +1,7 @@
-package lotto;
+package lotto.controller;
+
+import lotto.model.LottoGenerator;
+import lotto.model.Lottos;
 
 import java.util.ArrayList;
 import java.util.List;

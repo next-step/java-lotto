@@ -1,6 +1,6 @@
 package lotto.dto;
 
-import lotto.Lottos;
+import lotto.model.Lottos;
 
 import java.util.Arrays;
 import java.util.List;

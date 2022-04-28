@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.controller.LottoMarket;
+import lotto.model.Lottos;
+import lotto.model.RandomLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 

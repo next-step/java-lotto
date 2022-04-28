@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 @FunctionalInterface
 public interface LottoGenerator {

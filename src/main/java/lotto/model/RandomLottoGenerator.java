@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,7 +9,7 @@ public class RandomLottoGenerator implements LottoGenerator {
 
     private static final int LOTTO_SIZE = 6;
 
-    RandomLottoGenerator() {
+    public RandomLottoGenerator() {
     }
 
     @Override
