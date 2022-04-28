@@ -20,7 +20,7 @@ class GuestTest {
   void lottoCountTest() {
     Guest guest = new Guest(14000);
     guest = guest.choiceProduct(new Store());
-    assertThat(guest.hasAllLotto()).hasSize(14);
+    assertThat(guest).isEqualTo(new Guest(0, guest.hasAllLotto()));
   }
 
 }

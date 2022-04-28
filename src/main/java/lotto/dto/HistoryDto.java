@@ -1,13 +1,13 @@
-package lotto.model;
+package lotto.dto;
 
 import lotto.enums.Grade;
 
-public final class History {
+public class HistoryDto {
 
   private final Grade grade;
   private final int count;
 
-  public History(Grade grade, int count) {
+  public HistoryDto(Grade grade, int count) {
     this.grade = grade;
     this.count = count;
   }
