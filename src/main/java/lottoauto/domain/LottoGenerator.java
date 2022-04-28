@@ -17,7 +17,6 @@ public class LottoGenerator {
         }
     }
 
-
     public static List<Integer> makeLotto() {
         Collections.shuffle(NUMBER_CANDIDATES);
         List<Integer> newLotto = new ArrayList<>();

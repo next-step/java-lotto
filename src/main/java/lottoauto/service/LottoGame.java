@@ -1,6 +1,9 @@
 package lottoauto.service;
 
 import lottoauto.domain.Lotto;
+import lottoauto.domain.LottoGenerator;
+
+import java.util.*;
 
 /**
  * - 금액을 입력 받아 로또 게임을 하는 클래스를 만든다.
@@ -11,6 +14,8 @@ import lottoauto.domain.Lotto;
 public class LottoGame {
     private final int money;
     private final int lottoCount;
+    private final List<Lotto> lottos = new ArrayList<>();
+    private final LottoGenerator lottoGenerator = new LottoGenerator();
 
     public LottoGame(int money) {
         if(money < Lotto.PRICE) {
@@ -24,4 +29,13 @@ public class LottoGame {
         return lottoCount;
     }
 
+    public List<Lotto> all() {
+        return Collections.unmodifiableList(lottos);
+    }
+
+    public void start() {
+        for (int i = 0; i < lottoCount; i++) {
+             lottos.add(new Lotto(lottoGenerator.makeLotto()));
+        }
+    }
 }

@@ -24,6 +24,8 @@ class LottoGameTest {
 
     @Test
     void lotto_generate_test(){
-
+        lottoGame = new LottoGame(17600);
+        lottoGame.start();
+        assertThat(lottoGame.all().size()).isEqualTo(17);
     }
 }
