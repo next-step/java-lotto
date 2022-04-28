@@ -26,4 +26,8 @@ public class Results {
     public long prize() {
         return results.stream().mapToLong(Result::prize).sum();
     }
+
+    public List<Result> getResults() {
+        return results;
+    }
 }

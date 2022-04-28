@@ -16,25 +16,19 @@ public class WinningLotto {
     private final Set<Integer> winningNumbers = new HashSet<>();
 
     public WinningLotto(String winningNumber) {
-        List<String> splitNumbers = Arrays.stream(winningNumber.split(DELIMITER))
-                .map(String::trim)
-                .collect(Collectors.toList());
-
+        List<String> splitNumbers = Arrays.stream(winningNumber.split(DELIMITER)).map(String::trim).collect(Collectors.toList());
         if (splitNumbers.size() < NUMBER_COUNT) {
-            throw new LottoException(INVALID_WINNING_NUMBER_COUNT);
+            throw new LottoException(INVALID_WINNING_NUMBER_COUNT, winningNumber);
         }
 
-        boolean isValid = splitNumbers.stream()
-                .allMatch(number -> NUMBER_PATTERN.matcher(number).matches());
-
+        boolean isValid = splitNumbers.stream().allMatch(number -> NUMBER_PATTERN.matcher(number).matches());
         if (!isValid) {
-            throw new LottoException(INVALID_WINNING_NUMBER_TYPE);
+            throw new LottoException(INVALID_WINNING_NUMBER_TYPE, winningNumber);
         }
 
         splitNumbers.stream().mapToInt(Integer::parseInt).forEach(winningNumbers::add);
-
         if (winningNumbers.size() < NUMBER_COUNT) {
-            throw new LottoException(DUPLICATED_WINNING_NUMBER);
+            throw new LottoException(DUPLICATED_WINNING_NUMBER, winningNumber);
         }
     }
 

@@ -29,6 +29,14 @@ public class Result {
         return winners;
     }
 
+    public long prize() {
+        return prize * winners;
+    }
+
+    public String format() {
+        return String.format("%s개 일치 (%d원) - %s개", numberOfWins, prize, winners);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,9 +48,5 @@ public class Result {
     @Override
     public int hashCode() {
         return Objects.hash(numberOfWins, prize, winners);
-    }
-
-    public long prize() {
-        return prize * winners;
     }
 }
