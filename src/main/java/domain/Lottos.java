@@ -19,6 +19,17 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
+    public int calculateNumbers(Lotto winningNumbers, int count) {
+        return Math.toIntExact(this.lottoList
+                .stream()
+                .filter(lotto -> lotto.compare(winningNumbers).size() == count)
+                .count());
+    }
+
+    public int size() {
+        return lottoList.size();
+    }
+
     @Override
     public String toString() {
         return lottoList.stream()
