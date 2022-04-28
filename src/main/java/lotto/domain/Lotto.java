@@ -26,7 +26,7 @@ public class Lotto {
     public List<Integer> getLottoNumbers() {
         List copy = new ArrayList(this.lotto);
         Collections.sort(copy);
-        return copy;
+        return Collections.unmodifiableList(copy);
     }
 
     public LottoWinnerType winLotto(Lotto previousLotto, int bonusNumber) {
