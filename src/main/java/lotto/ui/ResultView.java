@@ -9,13 +9,15 @@ import java.util.List;
 import java.util.Map;
 
 import static lotto.domain.LottoWinnerType.NON_WIN;
+import static lotto.domain.LottoWinnerType.SECOND_PLACE;
 
 public class ResultView {
     private static final String COUNT_OF_PURCHASE_MESSAGE = "%s개를 구매했습니다.";
     private static final String LINE_SEPARATOR = "line.separator";
     private static final String RESULT_TEMPLATE_MESSAGE = "당첨 통계";
     private static final String LINE_DIVIDER = "--------";
-    private static final String RESULT_STATS_MESSAGE = "%s개 일치 (%s원)- %s개";
+    private static final String RESULT_STATS_MESSAGE_WITHOUT_BONUS = "%s개 일치 (%s원)- %s개";
+    private static final String RESULT_STATS_MESSAGE_WITH_BONUS = "%s개 일치, 보너스 볼 일치(%s원)- %s개";
     private static final String YIELD_OF_LOTTO_MESSAGE = "총 수익률은 %s입니다.(기준은 1임)";
     private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat();
     private static final int DECIMAL_PLACES = 2;
@@ -51,8 +53,14 @@ public class ResultView {
     }
 
     private static void printWinnerStat(StringBuilder stringBuilder, Map.Entry<LottoWinnerType, Integer> winner) {
+        if (SECOND_PLACE == winner.getKey()) {
+            stringBuilder.append(String.format(RESULT_STATS_MESSAGE_WITH_BONUS, winner.getKey().getCountOfDuplicate(), LottoWinnerType.prize(winner.getKey()), winner.getValue()));
+            stringBuilder.append(System.getProperty(LINE_SEPARATOR));
+            return;
+        }
+
         if (NON_WIN != winner.getKey()) {
-            stringBuilder.append(String.format(RESULT_STATS_MESSAGE, winner.getKey().getCountOfDuplicate(), LottoWinnerType.prize(winner.getKey().getCountOfDuplicate()), winner.getValue()));
+            stringBuilder.append(String.format(RESULT_STATS_MESSAGE_WITHOUT_BONUS, winner.getKey().getCountOfDuplicate(), LottoWinnerType.prize(winner.getKey()), winner.getValue()));
             stringBuilder.append(System.getProperty(LINE_SEPARATOR));
         }
     }
