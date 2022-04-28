@@ -18,7 +18,7 @@ public final class Lottos {
     private void validate(List<Integer> lottos) {
         Objects.requireNonNull(lottos, "lottos는 null일 수 없습니다.");
         if (lottos.size() != LOTTO_COUNT) {
-            throw new IllegalArgumentException("lottos 의 사이즈는 6이어야 합니다.");
+            throw new IllegalArgumentException("lottos 의 사이즈는 6이어야 합니다. 입력 사이즈: " + lottos.size());
         }
     }
 
