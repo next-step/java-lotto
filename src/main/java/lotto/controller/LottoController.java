@@ -1,8 +1,9 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
+import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -14,11 +15,9 @@ public class LottoController {
     Lottos lottos = Lottos.autoCreate(lottoCount);
     ResultView.printLottos(lottos);
 
-    Lotto lastWeekWinningLotto = InputView.getLastWeekWinningLotto();
+    WinningLotto lastWeekWinningLotto = InputView.getLastWeekWinningLotto();
 
-//    LottoResult result = lottos.calculate(lastWeekWinningLotto);
-//    ResultView.printResult(result, result.calculateYield(purchaseAmount));
+    LottoResult result = lottos.calculate(lastWeekWinningLotto);
+    ResultView.printResult(result, result.calculateYield(purchaseAmount));
   }
-
-
 }

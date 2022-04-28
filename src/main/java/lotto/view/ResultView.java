@@ -12,6 +12,7 @@ import lotto.domain.Rank;
 public class ResultView {
 
   private static final String RESULT_FORMAT = "%d개 일치 (%d원)- %d개\n";
+  private static final String RESULT_SECOND_RANK_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개\n";
   private static final String YIELD_FORMAT = "총 수익률은 %.2f입니다.";
 
   private ResultView() {
@@ -37,12 +38,19 @@ public class ResultView {
       }
       int count = result.getValue().getOrDefault(rank, 0);
       System.out.printf(
-          RESULT_FORMAT,
+          getResultFormat(rank),
           rank.getMatchCount(),
           rank.getPrizeMoney(),
           count
       );
     }
+  }
+
+  private static String getResultFormat(Rank rank) {
+    if (rank == Rank.SECOND) {
+      return RESULT_SECOND_RANK_FORMAT;
+    }
+    return RESULT_FORMAT;
   }
 
   private static void printFormattedLottos(Lottos lottos) {
