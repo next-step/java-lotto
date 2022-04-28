@@ -52,10 +52,7 @@ public enum LottoWinnerType {
     }
 
     static boolean matchCountWithBonus(int countOfDuplicate) {
-        if (countOfDuplicate != SECOND_PLACE.key.getCountOfDuplicate()) {
-            return false;
-        }
-        return true;
+        return countOfDuplicate == SECOND_PLACE.key.getCountOfDuplicate();
     }
 
     public int getCountOfDuplicate() {
