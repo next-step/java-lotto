@@ -9,20 +9,8 @@ public class Store {
     private Store() {
     }
 
-//    public static List<Lotto> pay(int price) {
-//        final List<Lotto> lottos = new ArrayList<>();;
-//        int count = countOfLottos(price);
-//
-//        while(count > 0) {
-//            lottos.add(LottoFactory.createLottoAutomatically());
-//            count--;
-//        }
-//
-//        return lottos;
-//    }
-
     public static Lottos pay(int price) {
-        final List<Lotto> lottos = new ArrayList<>();;
+        final List<Lotto> lottos = new ArrayList<>();
         int count = countOfLottos(price);
 
         while(count > 0) {
