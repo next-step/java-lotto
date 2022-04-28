@@ -31,8 +31,13 @@ public class Lotto {
     return values;
   }
 
-  public Rank getRank(Lotto other) {
-    return Rank.valueOf(getInterSectionSize(other));
+  public Rank getRank(WinningLotto winningLotto) {
+    boolean matchBonus = winningLotto.matchBonus(this);
+    return Rank.valueOf(getInterSectionSize(winningLotto.getLotto()), matchBonus);
+  }
+
+  public boolean contains(LottoNumber number) {
+    return values.contains(number);
   }
 
   private int getInterSectionSize(Lotto other) {

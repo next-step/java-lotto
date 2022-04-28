@@ -1,26 +1,23 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public enum Rank {
-  FIRST(6, 2_000_000_000),
-  SECOND(5, 1_500_000),
-  THIRD(4, 50_000),
-  FOURTH(3, 5_000),
-  MISS(0, 0);
+  FIRST(6, 2_000_000_000, false),
+  SECOND(5, 30_000_000, true),
+  THIRD(5, 1_500_000, false),
+  FOURTH(4, 50_000, false),
+  FIFTH(3, 5_000, false),
+  MISS(0, 0, false);
 
   private final int matchCount;
   private final int prizeMoney;
+  private final boolean matchBonus;
 
-  private static final Map<Integer, Rank> BY_MATCH_COUNT = Arrays.stream(values())
-      .collect(Collectors.toMap(rank -> rank.matchCount, Function.identity()));
-
-  Rank(int countOfMatch, int winningMoney) {
+  Rank(int countOfMatch, int winningMoney, boolean matchBonus) {
     this.matchCount = countOfMatch;
     this.prizeMoney = winningMoney;
+    this.matchBonus = matchBonus;
   }
 
   public int getMatchCount() {
@@ -31,7 +28,13 @@ public enum Rank {
     return prizeMoney;
   }
 
-  public static Rank valueOf(int matchCount) {
-    return BY_MATCH_COUNT.getOrDefault(matchCount, MISS);
+  public static Rank valueOf(int matchCount, boolean matchBonus) {
+    if (matchBonus && matchCount == 5) {
+      return Rank.SECOND;
+    }
+    return Arrays.stream(values())
+        .filter(rank -> !rank.matchBonus && rank.getMatchCount() == matchCount)
+        .findFirst()
+        .orElse(MISS);
   }
 }

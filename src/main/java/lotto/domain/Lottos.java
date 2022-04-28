@@ -29,7 +29,7 @@ public class Lottos {
     return values.size();
   }
 
-  public LottoResult calculate(Lotto winningLotto) {
+  public LottoResult calculate(WinningLotto winningLotto) {
     Map<Rank, Integer> result = new EnumMap<>(Rank.class);
     for (Lotto lotto : values) {
       Rank rank = lotto.getRank(winningLotto);

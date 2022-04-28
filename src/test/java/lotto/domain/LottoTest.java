@@ -43,51 +43,25 @@ class LottoTest {
         .isInstanceOf(IllegalArgumentException.class);
   }
 
-  @DisplayName("두 로또의 일치하는 원소 개수로 Rank를 구할 수 있다.")
+  @DisplayName("WinningLotto와 비교하여 Rank를 구할 수 있다.")
   @ParameterizedTest
-  @MethodSource("lottos")
-  void getRank(Lotto other, int matchCount) {
-    assertThat(lotto.getRank(other)).isEqualTo(Rank.valueOf(matchCount));
+  @MethodSource("winningLottos")
+  void getRank(WinningLotto winningLotto, Rank rank) {
+    assertThat(lotto.getRank(winningLotto)).isEqualTo(rank);
   }
 
-  private static Stream<Arguments> lottos() {
-    Lotto matchThree = new Lotto(Set.of(
-        new LottoNumber(1),
-        new LottoNumber(2),
-        new LottoNumber(3),
-        new LottoNumber(30),
-        new LottoNumber(40),
-        new LottoNumber(45)
-    ));
-    Lotto matchFour = new Lotto(Set.of(
-        new LottoNumber(1),
-        new LottoNumber(2),
-        new LottoNumber(3),
-        new LottoNumber(4),
-        new LottoNumber(40),
-        new LottoNumber(45)
-    ));
-    Lotto matchFive = new Lotto(Set.of(
-        new LottoNumber(1),
-        new LottoNumber(2),
-        new LottoNumber(3),
-        new LottoNumber(4),
-        new LottoNumber(5),
-        new LottoNumber(45)
-    ));
-    Lotto matchSix = new Lotto(Set.of(
-        new LottoNumber(1),
-        new LottoNumber(2),
-        new LottoNumber(3),
-        new LottoNumber(4),
-        new LottoNumber(5),
-        new LottoNumber(6)
-    ));
+  private static Stream<Arguments> winningLottos() {
+    WinningLotto matchThree = WinningLotto.create(Set.of(1, 2, 3, 30, 40, 45), 7);
+    WinningLotto matchFour = WinningLotto.create(Set.of(1, 2, 3, 4, 40, 45), 7);
+    WinningLotto matchFive = WinningLotto.create(Set.of(1, 2, 3, 4, 5, 45), 7);
+    WinningLotto matchFiveAndBonus = WinningLotto.create(Set.of(1, 2, 3, 4, 5, 45), 6);
+    WinningLotto matchSix = WinningLotto.create(Set.of(1, 2, 3, 4, 5, 6), 7);
     return Stream.of(
-        Arguments.of(matchThree, 3),
-        Arguments.of(matchFour, 4),
-        Arguments.of(matchFive, 5),
-        Arguments.of(matchSix, 6)
+        Arguments.of(matchThree, Rank.FIFTH),
+        Arguments.of(matchFour, Rank.FOURTH),
+        Arguments.of(matchFive, Rank.THIRD),
+        Arguments.of(matchFiveAndBonus, Rank.SECOND),
+        Arguments.of(matchSix, Rank.FIRST)
     );
   }
 }
