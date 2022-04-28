@@ -24,7 +24,7 @@ class LottoTicketTest {
                 new LottoNumber(6)
         );
         // when
-        LottoTicket lotto = new LottoTicket(lottoNumbers);
+        LottoTicket lotto = getLottoTicket(lottoNumbers);
         // then
         assertThat(lotto.getLottoNumbers()).hasSize(6);
     }
@@ -38,8 +38,47 @@ class LottoTicketTest {
                 new LottoNumber(2)
         );
         // when, then
-        assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
+        assertThatThrownBy(() -> getLottoTicket(lottoNumbers))
                 .isInstanceOf(InvalidLottoTicketException.class);
+    }
+
+    @Test
+    @DisplayName("일치하는 숫자 개수 확인")
+    void countMatchNumbers() {
+        // given
+        Set<LottoNumber> lottoNumbers = Set.of(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
+        );
+        Set<LottoNumber> lottoNumbers_expect5 = Set.of(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(7)
+        );
+        Set<LottoNumber> lottoNumbers_expect0 = Set.of(
+                new LottoNumber(11),
+                new LottoNumber(21),
+                new LottoNumber(31),
+                new LottoNumber(41),
+                new LottoNumber(15),
+                new LottoNumber(17)
+        );
+        // when, then
+        assertThat(getLottoTicket(lottoNumbers).countMatchNumbers(getLottoTicket(lottoNumbers))).isEqualTo(6);
+        assertThat(getLottoTicket(lottoNumbers).countMatchNumbers(getLottoTicket(lottoNumbers_expect5))).isEqualTo(5);
+        assertThat(getLottoTicket(lottoNumbers).countMatchNumbers(getLottoTicket(lottoNumbers_expect0))).isEqualTo(0);
+
+    }
+
+    private LottoTicket getLottoTicket(Set<LottoNumber> lottoNumbers1) {
+        return new LottoTicket(lottoNumbers1);
     }
 
 }

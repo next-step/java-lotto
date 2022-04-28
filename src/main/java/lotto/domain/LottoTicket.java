@@ -14,6 +14,12 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public int countMatchNumbers(LottoTicket lottoTicket) {
+        return (int) lottoTicket.getLottoNumbers().stream()
+                .filter(this.lottoNumbers::contains)
+                .count();
+    }
+
     private void validLotto(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != 6) {
             throw new InvalidLottoTicketException();
@@ -35,5 +41,10 @@ public class LottoTicket {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
     }
 }
