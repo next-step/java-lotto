@@ -2,7 +2,7 @@ package lotto.view;
 
 import java.util.List;
 import lotto.controller.LottoController;
-import lotto.model.History;
+import lotto.dto.HistoryDto;
 import lotto.model.Product;
 import lotto.service.LottoService;
 
@@ -50,8 +50,8 @@ public final class OutputTable {
     System.out.println(UNDER_BAR);
   }
 
-  public static void resultStatistics(List<History> histories) {
-    for (History history : histories) {
+  public static void resultStatistics(List<HistoryDto> histories) {
+    for (HistoryDto history : histories) {
       System.out.printf(HISTORY_MESSAGE, history.getGrade().getExpectNumber(),
           history.getGrade().getAwardPrice(), history.getCount());
     }

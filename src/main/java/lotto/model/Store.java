@@ -32,26 +32,6 @@ public final class Store {
     return factory.apply();
   }
 
-  public boolean prepareProduct() {
-    return true;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Store store = (Store) o;
-    return productCount.equals(store.productCount);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(productCount);
-  }
 
   @Override
   public String toString() {

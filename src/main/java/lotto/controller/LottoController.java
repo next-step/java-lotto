@@ -1,12 +1,9 @@
 package lotto.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-import lotto.enums.Grade;
+import lotto.dto.HistoryDto;
 import lotto.model.Guest;
-import lotto.model.History;
 import lotto.model.Product;
-import lotto.model.Statistics;
 import lotto.model.Store;
 import lotto.service.LottoService;
 import lotto.view.InputTable;
@@ -29,7 +26,7 @@ public class LottoController {
     OutputTable.lastWeekAwardNumber();
     Product winnerProduct = insertWinnerNumber(InputTable.inputAwardNumber());
     OutputTable.resultStatisticsMessage();
-    List<History> histories = histories(products, winnerProduct);
+    List<HistoryDto> histories = histories(products, winnerProduct);
     OutputTable.resultStatistics(histories);
     double percent = yieldCalculate(haveMoney, allAddReward(histories));
     OutputTable.printYield(percent, isStandard(percent));
@@ -43,11 +40,11 @@ public class LottoController {
     return lottoService.insertWinnerNumber(winnerNumber);
   }
 
-  public List<History> histories(List<Product> products, Product winProduct) {
+  public List<HistoryDto> histories(List<Product> products, Product winProduct) {
     return lottoService.histories(products, winProduct);
   }
 
-  public Long allAddReward(List<History> histories) {
+  public Long allAddReward(List<HistoryDto> histories) {
     return lottoService.allAddReward(histories);
   }
 
