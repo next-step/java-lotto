@@ -10,7 +10,7 @@ public final class Lottos {
 
     private final List<Integer> lottos;
 
-    Lottos(List<Integer> lottos) {
+    public Lottos(List<Integer> lottos) {
         validate(lottos);
         this.lottos = new ArrayList<>(lottos);
     }
