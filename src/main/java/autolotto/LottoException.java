@@ -9,8 +9,12 @@ public class LottoException extends RuntimeException {
         this(lottoExceptionCode, lottoExceptionCode.getMessage());
     }
 
-    public LottoException(LottoExceptionCode lottoExceptionCode, String errorMessage) {
-        super(errorMessage);
+    public LottoException(LottoExceptionCode lottoExceptionCode, String value) {
+        this(lottoExceptionCode, lottoExceptionCode.getMessage(), value);
+    }
+
+    public LottoException(LottoExceptionCode lottoExceptionCode, String errorMessage, String value) {
+        super(errorMessage + " : " + value);
         this.lottoExceptionCode = lottoExceptionCode;
         this.errorMessage = errorMessage;
     }

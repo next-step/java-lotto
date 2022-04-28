@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class LottoInput {
     private static final Scanner scanner = new Scanner(System.in);
 
-    public int prompt(String question) {
+    public int askQuantity(String question) {
         System.out.println(question);
 
         int purchaseAmount = scanner.nextInt();
@@ -14,5 +14,10 @@ public class LottoInput {
         }
 
         return purchaseAmount;
+    }
+
+    public String askWinningNumber(String question) {
+        System.out.println(question);
+        return scanner.next();
     }
 }
