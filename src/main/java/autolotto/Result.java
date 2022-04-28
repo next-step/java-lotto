@@ -17,8 +17,8 @@ public class Result {
         this.winners = winners;
     }
 
-    public boolean isMatch(int name) {
-        return this.numberOfWins == name;
+    public boolean isMatch(int numberOfWins) {
+        return this.numberOfWins == numberOfWins;
     }
 
     public void plusWinners() {

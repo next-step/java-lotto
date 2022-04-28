@@ -15,7 +15,7 @@ class WinningLottoTest {
     void LengthIsNotSixGiven_ReturnThrow(String number) {
         assertThatThrownBy(() -> new WinningLotto(number))
                 .isInstanceOf(LottoException.class)
-                .hasMessage(INVALID_WINNING_NUMBER_COUNT.getMessage());
+                .hasMessageContaining(INVALID_WINNING_NUMBER_COUNT.getMessage());
     }
 
     @ParameterizedTest
@@ -23,7 +23,7 @@ class WinningLottoTest {
     void numberIsNotAllNumberGiven_ReturnThrow(String number) {
         assertThatThrownBy(() -> new WinningLotto(number))
                 .isInstanceOf(LottoException.class)
-                .hasMessage(INVALID_WINNING_NUMBER_TYPE.getMessage());
+                .hasMessageContaining(INVALID_WINNING_NUMBER_TYPE.getMessage());
     }
 
     @ParameterizedTest
@@ -31,7 +31,7 @@ class WinningLottoTest {
     void numberIsOver45Given_ReturnThrow(String number) {
         assertThatThrownBy(() -> new WinningLotto(number))
                 .isInstanceOf(LottoException.class)
-                .hasMessage(INVALID_WINNING_NUMBER_TYPE.getMessage());
+                .hasMessageContaining(INVALID_WINNING_NUMBER_TYPE.getMessage());
     }
 
     @ParameterizedTest
@@ -39,7 +39,7 @@ class WinningLottoTest {
     void numberIsDuplicatedGiven_ReturnThrow(String number) {
         assertThatThrownBy(() -> new WinningLotto(number))
                 .isInstanceOf(LottoException.class)
-                .hasMessage(DUPLICATED_WINNING_NUMBER.getMessage());
+                .hasMessageContaining(DUPLICATED_WINNING_NUMBER.getMessage());
     }
 
     @ParameterizedTest

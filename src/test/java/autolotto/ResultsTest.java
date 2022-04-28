@@ -1,7 +1,6 @@
 package autolotto;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -27,8 +26,14 @@ public class ResultsTest {
         assertThat(results.find(expect)).isEqualTo(Optional.of(new Result(actual, prize)));
     }
 
-    @Test
-    void ReturnPrize() {
-        assertThat(results.prize()).isEqualTo(0);
+    @ParameterizedTest
+    @CsvSource(value = {
+            "3:5000",
+            "4:50000"
+    }, delimiter = ':')
+    void ReturnPrize(int numberOfWins, long prize) {
+        results.find(numberOfWins).ifPresent(Result::plusWinners);
+
+        assertThat(results.prize()).isEqualTo(prize);
     }
 }
