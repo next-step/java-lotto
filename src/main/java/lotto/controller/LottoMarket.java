@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.model.LottoGenerator;
 import lotto.model.Lottos;
+import lotto.model.Money;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,22 +17,17 @@ public class LottoMarket {
         throw new AssertionError();
     }
 
-    public static List<Lottos> buyLottos(int money, LottoGenerator lottoGenerator) {
+    public static List<Lottos> buyLottos(Money money, LottoGenerator lottoGenerator) {
         validate(money);
         return getLottos(money, lottoGenerator);
     }
 
-    private static void validate(int money) {
-        if (money < 0) {
-            throw new IllegalArgumentException("로또 구매시 지불하는 금액은 음수일 수 없습니다. money: " + money);
-        }
-        if (money % 1000 != 0) {
-            throw new IllegalArgumentException("로또 구매시 지불하는 금액은 천원 단위여야 합니다. money: " + money);
-        }
+    private static void validate(Money money) {
+        Objects.requireNonNull(money, "로또 구매시 지불하는 금액은 null일 수 없습니다.");
     }
 
-    private static List<Lottos> getLottos(int money, LottoGenerator lottoGenerator) {
-        int count = getCount(money);
+    private static List<Lottos> getLottos(Money money, LottoGenerator lottoGenerator) {
+        int count = money.getUnitCount();
 
         List<Lottos> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
@@ -39,10 +35,6 @@ public class LottoMarket {
         }
 
         return lottos;
-    }
-
-    private static int getCount(int money) {
-        return money / 1000;
     }
 
     public static Map<Integer, Integer> getLottoStatistics(List<Lottos> buyingLottos, Lottos winnerLottos) {

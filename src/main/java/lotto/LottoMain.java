@@ -3,6 +3,7 @@ package lotto;
 import lotto.controller.LottoMarket;
 import lotto.dto.WinnerLottos;
 import lotto.model.Lottos;
+import lotto.model.Money;
 import lotto.model.RandomLottoGenerator;
 import lotto.view.BuyInputView;
 import lotto.view.BuyResultView;
@@ -15,7 +16,7 @@ import java.util.Map;
 public class LottoMain {
     public static void main(String[] args) {
         int buyingMoney = BuyInputView.inputBuyingMoney();
-        List<Lottos> buyingLottos = LottoMarket.buyLottos(buyingMoney, new RandomLottoGenerator());
+        List<Lottos> buyingLottos = LottoMarket.buyLottos(new Money(buyingMoney), new RandomLottoGenerator());
 
         BuyResultView.printBuyingLottos(buyingLottos);
 

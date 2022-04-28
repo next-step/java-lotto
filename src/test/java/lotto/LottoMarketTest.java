@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.controller.LottoMarket;
 import lotto.model.Lottos;
+import lotto.model.Money;
 import lotto.model.RandomLottoGenerator;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.DisplayName;
@@ -11,7 +12,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -23,25 +23,16 @@ public class LottoMarketTest {
     @CsvSource(value = {"14000:14", "1000:1"}, delimiter = ':')
     @DisplayName("지불한 금액만큼 로또를 구매한다. 1000원당 1개")
     void buyLottoTest(int money, int count) {
-        List<Lottos> lottos = LottoMarket.buyLottos(money, new RandomLottoGenerator());
+        List<Lottos> lottos = LottoMarket.buyLottos(new Money(money), new RandomLottoGenerator());
 
         assertThat(lottos).hasSize(count);
     }
 
     @Test
-    @DisplayName("로또 구입시 지불한 금액이 음수이면 예외가 발생한다.")
+    @DisplayName("로또 구입시 지불한 금액이 null이면 예외가 발생한다.")
     void minusMoneyTest() {
-        assertThatThrownBy(() -> LottoMarket.buyLottos(-1, new RandomLottoGenerator()))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("음수");
-    }
-
-    @Test
-    @DisplayName("로또 구입시 지불한 금액이 천원 단위가 아니면 예외가 발생한다.")
-    void notThousandMoneyTest() {
-        assertThatThrownBy(() -> LottoMarket.buyLottos(13350, new RandomLottoGenerator()))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("천원");
+        assertThatThrownBy(() -> LottoMarket.buyLottos(null, new RandomLottoGenerator()))
+                .isInstanceOf(NullPointerException.class);
     }
 
     @Test
