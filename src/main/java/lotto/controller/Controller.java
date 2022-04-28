@@ -19,7 +19,7 @@ public class Controller {
         int bonusNumber = InputView.inputBonusNumber();
 
         LottoWinner winner = lottos.calculateWinner(previousLotto, bonusNumber);
-        float yield = lottos.calculateYield(winner, price);
+        float yield = winner.calculateYield(price);
 
         ResultView.printWinnerStats(winner);
         ResultView.printYield(yield);
