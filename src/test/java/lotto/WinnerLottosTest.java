@@ -2,7 +2,6 @@ package lotto;
 
 import lotto.dto.WinnerLottos;
 import lotto.model.Lottos;
-import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +10,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("로또 당첨번호를 로또로 변환해주는 클래스 테스트")
 public class WinnerLottosTest {
+
+    public static final WinnerLottos WINNER_LOTTOS = new WinnerLottos("1, 2, 3, 4, 5, 6");
 
     @Test
     @DisplayName("로또 당첨번호 문자가 null일 경우 NullPointerException이 발생한다.")
@@ -46,10 +47,10 @@ public class WinnerLottosTest {
     @DisplayName("로또 당첨번호를 입력하면 로또를 반환해준다.")
     void winnerLottosTest() {
         // given
-        Lottos winnerLottos = new WinnerLottos("1, 2, 3, 4, 5, 6").getLottos();
+        Lottos winnerLottos = WINNER_LOTTOS.getLottos();
 
         // when
-        Lottos matchLottos = new Lottos(Lists.newArrayList(1, 2, 3, 4, 5, 6));
+        Lottos matchLottos = LottosTest.TEST_LOTTO;
 
         // then
         assertThat(matchLottos.getMatchCount(winnerLottos)).isEqualTo(6);
