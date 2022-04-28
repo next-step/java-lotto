@@ -24,6 +24,6 @@ public class LottoMain {
 
         Map<Integer, Integer> lottoStatistics = LottoMarket.getLottoStatistics(buyingLottos, winnerLottos);
 
-        StatisticsResultView.printStatistics(lottoStatistics);
+        StatisticsResultView.printStatistics(buyingMoney, lottoStatistics);
     }
 }
