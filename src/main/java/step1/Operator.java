@@ -1,27 +1,27 @@
 package step1;
 
-import step1.impl.DivideStrategy;
+import java.util.function.BinaryOperator;
 
 public enum Operator {
 
-    ADD("+", (a, b) -> a + b),
-    SUBTRACT("-", (a, b) -> a - b),
-    MULTIPLY("*", (a, b) -> a * b),
-    DIVIDE("/", new DivideStrategy()),
+    ADD("+", (first, second) -> first + second),
+    SUBTRACT("-", (first, second) -> first - second),
+    MULTIPLY("*", (first, second) -> first * second),
+    DIVIDE("/", (first, second) -> first / second),
     ;
     private final String value;
-    private final OperationStrategy operationStrategy;
+    private final BinaryOperator<Integer> operation;
 
-    Operator(String value, OperationStrategy operationStrategy) {
+    Operator(String value, BinaryOperator<Integer> operation) {
         this.value = value;
-        this.operationStrategy = operationStrategy;
+        this.operation = operation;
     }
 
     public String getValue() {
         return value;
     }
 
-    public OperationStrategy getOperationStrategy() {
-        return operationStrategy;
+    public BinaryOperator<Integer> getOperationStrategy() {
+        return operation;
     }
 }
