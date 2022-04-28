@@ -3,17 +3,25 @@ package autolotto;
 import java.util.Objects;
 
 public class Result {
-    private final int name;
+    private final int numberOfWins;
     private final long prize;
-    private int matchCount;
+    private int winners;
 
-    public Result(int name, long prize) {
-        this.name = name;
+    public Result(int numberOfWins, long prize) {
+        this.numberOfWins = numberOfWins;
         this.prize = prize;
     }
 
     public boolean isMatch(int name) {
-        return this.name == name;
+        return this.numberOfWins == name;
+    }
+
+    public void plusWinners() {
+        winners++;
+    }
+
+    public int getWinners() {
+        return winners;
     }
 
     @Override
@@ -21,11 +29,11 @@ public class Result {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Result result = (Result) o;
-        return name == result.name && prize == result.prize && matchCount == result.matchCount;
+        return numberOfWins == result.numberOfWins && prize == result.prize && winners == result.winners;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, prize, matchCount);
+        return Objects.hash(numberOfWins, prize, winners);
     }
 }

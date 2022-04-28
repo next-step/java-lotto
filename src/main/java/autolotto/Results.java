@@ -14,9 +14,9 @@ public class Results {
         results.add(new Result(6, 2_000_000_000));
     }
 
-    public Optional<Result> find(int name) {
+    public Optional<Result> find(int numberOfWins) {
         for (Result result : results) {
-            if (result.isMatch(name)) {
+            if (result.isMatch(numberOfWins)) {
                 return Optional.of(result);
             }
         }

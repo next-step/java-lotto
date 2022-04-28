@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Map;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,8 +26,8 @@ class LottosTest {
             "4:0",
             "3:0"
     }, delimiter = ':')
-    void winningLottoGiven_ReturnResult(int key, int value) {
-        Map<Integer, Integer> results = lottos.confirm(new WinningLotto("1, 2, 3, 4, 5, 6"));
-        assertThat(results.get(key)).isEqualTo(value);
+    void winningLottoGiven_ReturnResult(int numberOfWins, int winners) {
+        Results results = lottos.confirm(new WinningLotto("1, 2, 3, 4, 5, 6"));
+        assertThat(results.find(numberOfWins).get().getWinners()).isEqualTo(winners);
     }
 }

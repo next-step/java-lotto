@@ -1,9 +1,7 @@
 package autolotto;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
@@ -12,15 +10,13 @@ public class Lottos {
         lottos.add(lotto);
     }
 
-    public Map<Integer, Integer> confirm(WinningLotto winningLotto) {
-        Map<Integer, Integer> results = new HashMap<>();
-        for (int key=3; key < 7; key++) {
-            results.put(key, 0);
-        }
+    public Results confirm(WinningLotto winningLotto) {
+        Results results = new Results();
+        results.initialize();
 
         for (Lotto lotto : lottos) {
-            int key = lotto.match(winningLotto);
-            results.compute(key, (k, v) -> v+1);
+            int numberOfWins = lotto.match(winningLotto);
+            results.find(numberOfWins).ifPresent(Result::plusWinners);
         }
         return results;
     }
