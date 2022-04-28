@@ -27,11 +27,17 @@ public final class Lottos {
     }
 
     public int getMatchCount(Lottos result) {
+        List<Integer> resultLottos = result.get();
         int count = 0;
         for (int i = 0; i < result.get().size(); i++) {
-            if (lottos.contains(result.get().get(i))) {
-                count++;
-            }
+            count = updateCount(resultLottos.get(i), count);
+        }
+        return count;
+    }
+
+    private int updateCount(int number, int count) {
+        if (lottos.contains(number)) {
+            count++;
         }
         return count;
     }
