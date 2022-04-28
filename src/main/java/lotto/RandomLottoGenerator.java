@@ -7,7 +7,7 @@ import java.util.List;
 
 public class RandomLottoGenerator implements LottoGenerator {
 
-    public static final int LOTTO_SIZE = 6;
+    private static final int LOTTO_SIZE = 6;
 
     RandomLottoGenerator() {
     }
