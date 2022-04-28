@@ -23,7 +23,7 @@ class StatisticsTest {
 
   @Test
   @DisplayName("승리 수당 테스트")
-  void win() {
+  void winBenefit() {
     Statistics statistics = new Statistics();
     statistics = statistics.winReward(Grade.THREE,1);
     statistics = statistics.winReward(Grade.FOUR,2);
