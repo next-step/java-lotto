@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.Objects;
+import lotto.exception.MoneyNegativeException;
 
 public final class Money {
 
@@ -11,7 +12,14 @@ public final class Money {
   }
 
   public Money(Integer value) {
+    valid(value);
     this.value = value;
+  }
+
+  private void valid(Integer value) {
+    if(value < 0) {
+      throw new MoneyNegativeException();
+    }
   }
 
   @Override

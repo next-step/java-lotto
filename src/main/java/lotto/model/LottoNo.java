@@ -12,7 +12,7 @@ public class LottoNo {
   }
 
   private void valid(Integer value) {
-    if(value < 0) {
+    if(value <= 0) {
       throw new LottoNegativeException();
     }
   }
