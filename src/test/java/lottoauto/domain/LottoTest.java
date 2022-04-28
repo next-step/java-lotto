@@ -54,4 +54,16 @@ class LottoTest {
         AssertionsForClassTypes.assertThat(lotto.getNumbers().get(0) <= lotto.getNumbers().get(1)).isTrue();
     }
 
+    /**
+     * 당첨 숫자와 비교하는 테스트
+     * 3개(5000원), 4개(50000원), 5개(1500000원), 6개(2000000000) 일치갯수(당첨금액) 별 결과를 통계 점수에 보여준다.
+     */
+    @Test
+    @DisplayName("당첨 결과 테스트")
+    void winning_lotto_compare_test(){
+        Lotto winningLotto = new Lotto(List.of(1,2,3,4,5,6));
+        lotto = new Lotto(List.of(1,2,3,11,12,13));
+        lotto.match(winningLotto);
+        assertThat(lotto.getMatchCount()).isEqualTo(3);
+    }
 }

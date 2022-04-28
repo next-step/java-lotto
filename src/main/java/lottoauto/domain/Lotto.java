@@ -5,7 +5,12 @@ import java.util.List;
 public class Lotto {
     public static final int PRICE = 1000;
 
-    private final List<Integer> numbers;
+    private List<Integer> numbers;
+    private int matchCount;
+
+    public Lotto(){
+        this.numbers = LottoGenerator.makeLotto();
+    }
 
     public Lotto(List<Integer> inputNumbers) {
         if(inputNumbers.size() > 6){
@@ -16,5 +21,16 @@ public class Lotto {
 
     public List<Integer> getNumbers() {
         return numbers;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public void match(Lotto winnerLotto) {
+        matchCount = 0;
+        for (Integer number : winnerLotto.getNumbers()) {
+            if(numbers.contains(number)) matchCount += 1;
+        }
     }
 }
