@@ -1,6 +1,7 @@
 package calculator;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
 import java.util.stream.Collectors;
@@ -24,16 +25,16 @@ public enum Operator {
     private final String operatorSymbol;
     private final IntBinaryOperator intBinaryOperator;
 
-    Operator(String operatorSign, IntBinaryOperator intBinaryOperator) {
-        this.operatorSymbol = operatorSign;
+    Operator(String operatorSymbol, IntBinaryOperator intBinaryOperator) {
+        this.operatorSymbol = operatorSymbol;
         this.intBinaryOperator = intBinaryOperator;
     }
 
     public static Operator valueOfOperatorSymbol(String operatorSymbol) {
-        return BY_OPERATOR.get(operatorSymbol);
+        return Optional.ofNullable(BY_OPERATOR.get(operatorSymbol)).orElseThrow(() -> new IllegalArgumentException("사칙 연산자가 아닙니다."));
     }
 
-    public int operate(int a, int b) {
-        return intBinaryOperator.applyAsInt(a, b);
+    public Operand operate(Operand a, Operand b) {
+        return new Operand(intBinaryOperator.applyAsInt(a.getNumber(), b.getNumber()));
     }
 }
