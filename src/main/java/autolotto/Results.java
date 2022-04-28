@@ -22,4 +22,8 @@ public class Results {
         }
         return Optional.empty();
     }
+
+    public long prize() {
+        return results.stream().mapToLong(Result::prize).sum();
+    }
 }
