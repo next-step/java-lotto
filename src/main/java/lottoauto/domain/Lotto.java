@@ -3,7 +3,7 @@ package lottoauto.domain;
 import java.util.List;
 
 public class Lotto {
-    private static final int price = 1000;
+    public static final int PRICE = 1000;
 
     private final List<Integer> numbers;
 
