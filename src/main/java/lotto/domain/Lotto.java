@@ -20,7 +20,7 @@ public class Lotto {
     }
 
     public Lotto(Integer[] lotto) {
-        this.lotto = new HashSet<>(Arrays.asList(lotto));
+        this(Arrays.asList(lotto));
     }
 
     public List<Integer> getLottoNumbers() {
