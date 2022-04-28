@@ -31,7 +31,7 @@ public enum Operator {
     }
 
     public static Operator valueOfOperatorSymbol(String operatorSymbol) {
-        return Optional.ofNullable(BY_OPERATOR.get(operatorSymbol)).orElseThrow(() -> new IllegalArgumentException("사칙 연산자가 아닙니다."));
+        return Optional.ofNullable(BY_OPERATOR.get(operatorSymbol)).orElseThrow(() -> new IllegalArgumentException(String.format("%s는 사칙 연산자가 아닙니다.", operatorSymbol)));
     }
 
     public Operand operate(Operand a, Operand b) {

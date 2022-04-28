@@ -9,7 +9,7 @@ public class Operand {
 
     Operand(String number) {
         if (!isDigit(number)) {
-            throw new IllegalArgumentException("피연산자가 숫자가 아닙니다.");
+            throw new IllegalArgumentException(String.format("%s는 숫자가 아닙니다.", number));
         }
         this.number = Integer.parseInt(number);
     }
