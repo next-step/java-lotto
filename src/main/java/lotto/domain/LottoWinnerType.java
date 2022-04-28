@@ -21,19 +21,19 @@ public enum LottoWinnerType {
         this.prize = prize;
     }
 
-    private static final Map<Identifier, LottoWinnerType> cache;
+    private static final Map<Identifier, LottoWinnerType> CACHE;
 
     static {
-        cache = new HashMap<>();
+        CACHE = new HashMap<>();
         for (LottoWinnerType e : LottoWinnerType.values()) {
-            cache.put(e.key, e);
+            CACHE.put(e.key, e);
         }
     }
 
     public static int prize(int countOfDuplicate, boolean isBonus) {
         try {
             Identifier key = Identifier.getMatchedIdentifierInstance(countOfDuplicate, isBonus);
-            return cache.get(key).prize;
+            return CACHE.get(key).prize;
         } catch (NullPointerException e) {
             return NON_WIN.prize;
         }
@@ -45,8 +45,8 @@ public enum LottoWinnerType {
 
     public static LottoWinnerType valueOf(int countOfDuplicate, boolean isBonus) {
         Identifier key = Identifier.getMatchedIdentifierInstance(countOfDuplicate, isBonus);
-        if (cache.containsKey(key)) {
-            return cache.get(key);
+        if (CACHE.containsKey(key)) {
+            return CACHE.get(key);
         }
         return NON_WIN;
     }
