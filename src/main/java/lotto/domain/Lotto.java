@@ -31,7 +31,7 @@ public class Lotto {
 
     public LottoWinnerType winLotto(Lotto previousLotto, int bonusNumber) {
         int countOfDuplicate = countDuplicateValue(previousLotto);
-        if (LottoWinnerType.isMatchingCountWithBonus(countOfDuplicate)) {
+        if (LottoWinnerType.matchCountWithBonus(countOfDuplicate)) {
             return LottoWinnerType.valueOf(countOfDuplicate, lotto.contains(bonusNumber));
         }
         return LottoWinnerType.valueOf(countOfDuplicate, false);
