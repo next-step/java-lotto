@@ -15,15 +15,15 @@ public class LottoFactory {
   private static final int MAX_VALUE = 45;
 
   public Product apply() {
-    List<Integer> initNumbers = init();
+    List<LottoNo> initNumbers = init();
     Collections.shuffle(initNumbers);
     return new Product(initNumbers.subList(START_INDEX, LOTTO_MAX_COUNT));
   }
 
-  private List<Integer> init() {
-    List<Integer> lottoNumbers = new ArrayList<>();
+  private List<LottoNo> init() {
+    List<LottoNo> lottoNumbers = new ArrayList<>();
     for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
-      lottoNumbers.add(i);
+      lottoNumbers.add(new LottoNo(i));
     }
     return lottoNumbers;
   }
