@@ -21,13 +21,6 @@ public enum Grade {
     this.awardPrice = awardPrice;
   }
 
-  public int coincideLotto(List<Product> allProducts, Product winNumbers) {
-    int result = 0;
-    for (Product product : allProducts) {
-      result += increaseProductNumber(this.expectNumber, product, winNumbers);
-    }
-    return result;
-  }
 
   public int winningAmount(int count) {
     return this.awardPrice * count;
@@ -41,21 +34,4 @@ public enum Grade {
     return awardPrice;
   }
 
-  private int increaseProductNumber(int expect, Product product, Product winProduct) {
-    int count = 0;
-    for (Integer winNumber : winProduct.getLottoNumbers()) {
-      count += containsWinnerNumber(product, winNumber);
-    }
-    if (expect == count) {
-      return GUESSED;
-    }
-    return WRONG;
-  }
-
-  private int containsWinnerNumber(Product product, Integer winNumber) {
-    if (product.getLottoNumbers().contains(winNumber)) {
-      return GUESSED;
-    }
-    return WRONG;
-  }
 }
