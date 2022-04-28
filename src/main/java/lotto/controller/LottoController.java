@@ -22,8 +22,8 @@ public class LottoController {
 
   public void run() {
     OutputTable.inputPurchaseAmount();
-    Integer haveMoney = InputTable.inputHaveMoney();
-    List<Product> products = visit(new Guest(haveMoney), new Store());
+    int haveMoney = InputTable.inputHaveMoney();
+    List<Product> products = visit(new Guest(haveMoney), new Store()).hasAllLotto();
     OutputTable.buyThings(products.size());
     OutputTable.printProductInfos(products);
     OutputTable.lastWeekAwardNumber();
@@ -35,7 +35,7 @@ public class LottoController {
     OutputTable.printYield(percent, isStandard(percent));
   }
 
-  public List<Product> visit(Guest guest, Store store) {
+  public Guest visit(Guest guest, Store store) {
     return lottoService.visit(guest, store);
   }
 
