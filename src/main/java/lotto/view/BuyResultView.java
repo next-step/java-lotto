@@ -3,16 +3,17 @@ package lotto.view;
 import lotto.model.Lottos;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
-public class ResultView {
+public class BuyResultView {
 
     private static final String OUTPUT_BUYING_LOTTOS = "%d개를 구매했습니다.";
     private static final String DELIMITER = ", ";
     private static final String OUTPUT_OPEN_BRACKET = "[";
     private static final String OUTPUT_CLOSE_BRACKET = "]";
 
-    private ResultView() {
+    private BuyResultView() {
         throw new AssertionError();
     }
 
@@ -22,7 +23,6 @@ public class ResultView {
         for (Lottos lottos : buyingLottos) {
             printLottos(lottos);
         }
-        System.lineSeparator();
     }
 
     private static void printLottos(Lottos lottos) {
