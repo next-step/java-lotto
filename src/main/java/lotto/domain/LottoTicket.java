@@ -5,10 +5,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 public class LottoTicket {
 
-    public static final int ONE_TICKET_LOTTO_NUMBER = 6;
+    public static final int LOTTO_NUMBER_COUNT = 6;
     public static final int ONE_TICKET_PRICE = 1000;
     public static final int LOTTO_NUMBER_MIN = 1;
     public static final int LOTTO_NUMBER_MAX = 45;
@@ -20,32 +21,42 @@ public class LottoTicket {
         }
     }
 
+    private final int bonusNumber;
+
     private List<Integer> lottoNumbers;
 
-    private LottoTicket(List<Integer> lottoNumbers) {
+    private LottoTicket(List<Integer> lottoNumbers, int bonusNumber) {
         this.lottoNumbers = lottoNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
     public static LottoTicket create() {
         Collections.shuffle(allLottoNumbers);
 
-        return new LottoTicket(new ArrayList<>(allLottoNumbers.subList(0, ONE_TICKET_LOTTO_NUMBER)));
+        return new LottoTicket(
+            new ArrayList<>(allLottoNumbers.subList(0, LOTTO_NUMBER_COUNT)),
+            new Random().nextInt(LOTTO_NUMBER_MAX+1)
+        );
     }
 
-    public static LottoTicket create(Integer... numbers) {
-        return new LottoTicket(Arrays.asList(numbers));
+    public static LottoTicket create(int bonusNumber, Integer... numbers) {
+        return new LottoTicket(Arrays.asList(numbers), bonusNumber);
     }
 
     public int countLottoNumber() {
         return lottoNumbers.size();
     }
 
-    public LottoResult checkLottery(final List<Integer> winLottoNumbers) {
-        int count = (int) lottoNumbers.stream()
+    public LottoResult checkLottery(final List<Integer> winLottoNumbers, int bonusNumber) {
+        int fitCount = (int) lottoNumbers.stream()
             .filter(winLottoNumbers::contains)
             .count();
 
-        return LottoResult.of(count);
+        return LottoResult.of(fitCount, isFitBonusNumber(bonusNumber));
+    }
+
+    private boolean isFitBonusNumber(int bonusNumber) {
+        return this.bonusNumber == bonusNumber;
     }
 
     @Override
@@ -69,5 +80,9 @@ public class LottoTicket {
     public String toString() {
         Collections.sort(lottoNumbers);
         return lottoNumbers.toString();
+    }
+
+    public int getBonusNumber() {
+        return bonusNumber;
     }
 }
