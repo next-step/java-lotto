@@ -1,6 +1,7 @@
 package autolotto;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -29,5 +30,10 @@ class LottosTest {
     void winningLottoGiven_ReturnResult(int numberOfWins, int winners) {
         Results results = lottos.confirm(new WinningLotto("1, 2, 3, 4, 5, 6"));
         assertThat(results.find(numberOfWins).get().getWinners()).isEqualTo(winners);
+    }
+
+    @Test
+    void ReturnCost() {
+        assertThat(lottos.cost()).isEqualTo(2000);
     }
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
+    private static final int LOTTO_PRICE = 1000;
 
     public void add(Lotto lotto) {
         lottos.add(lotto);
@@ -19,5 +20,9 @@ public class Lottos {
             results.find(numberOfWins).ifPresent(Result::plusWinners);
         }
         return results;
+    }
+
+    public int cost() {
+        return lottos.size() * LOTTO_PRICE;
     }
 }
