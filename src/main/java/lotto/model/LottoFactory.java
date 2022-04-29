@@ -2,7 +2,9 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LottoFactory {
 
@@ -17,7 +19,7 @@ public class LottoFactory {
   public Product apply() {
     List<LottoNo> initNumbers = init();
     Collections.shuffle(initNumbers);
-    return new Product(initNumbers.subList(START_INDEX, LOTTO_MAX_COUNT));
+    return new Product(new HashSet<>(initNumbers.subList(START_INDEX, LOTTO_MAX_COUNT)));
   }
 
   private List<LottoNo> init() {
