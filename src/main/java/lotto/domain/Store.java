@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Store {
-    private static final int LOTTO_PRICE_PER_ONE = 1000;
+    public static final int LOTTO_PRICE_PER_ONE = 1000;
 
     private Store() {
     }

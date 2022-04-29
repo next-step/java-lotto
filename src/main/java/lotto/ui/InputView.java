@@ -1,9 +1,11 @@
 package lotto.ui;
 
 import lotto.domain.Lotto;
+import lotto.domain.Store;
+import lotto.exception.InvalidCountOfManualLotto;
 import lotto.exception.InvalidLottoLengthException;
 import lotto.exception.InvalidLottoNumberException;
-import lotto.exception.InvalidPriceException;
+import lotto.exception.InvalidNegativeNumberException;
 import lotto.util.Utility;
 
 import java.util.InputMismatchException;
@@ -25,10 +27,10 @@ public class InputView {
         try {
             System.out.println(PURCHASE_PRICE_MESSAGE);
             int price = SCANNER.nextInt();
-            validatePrice(price);
+            validateNegativeNumber("구입금액", price);
             SCANNER.nextLine(); // Delete newLine
             return price;
-        } catch (InvalidPriceException e) {
+        } catch (InvalidNegativeNumberException e) {
             SCANNER.nextLine(); // Delete newLine
             System.out.println(e.getMessage());
             return inputPrice();
@@ -39,9 +41,9 @@ public class InputView {
         }
     }
 
-    public static void validatePrice(int price) {
-        if (price < 0) {
-            throw new InvalidPriceException(price);
+    public static void validateNegativeNumber(String target, int value) {
+        if (value < 0) {
+            throw new InvalidNegativeNumberException(target, value);
         }
     }
 
@@ -64,16 +66,33 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public static int inputCountOfManualLotto() {
+    public static int inputCountOfManualLotto(int price) {
         try {
             System.out.println(COUNT_OF_MANUAL_LOTTO_MESSAGE);
             int countOfManualLotto = SCANNER.nextInt();
+            validateNegativeNumber("수동입력 로또 개수", countOfManualLotto);
+            validateCountOfManualLotto(price, countOfManualLotto);
             SCANNER.nextLine(); // Delete newLine
             return countOfManualLotto;
+        } catch (InvalidNegativeNumberException e) {
+            SCANNER.nextLine(); // Delete newLine
+            System.out.println(e.getMessage());
+            return inputCountOfManualLotto(price);
+        } catch (InvalidCountOfManualLotto e) {
+            SCANNER.nextLine(); // Delete newLine
+            System.out.println(e.getMessage());
+            return inputCountOfManualLotto(price);
         } catch (InputMismatchException e) {
             SCANNER.nextLine(); // Delete newLine
             System.out.println(INVALID_INPUT_NUMBER_MESSAGE);
-            return inputCountOfManualLotto();
+            return inputCountOfManualLotto(price);
+        }
+    }
+
+    static void validateCountOfManualLotto(int price, int countOfManualLotto) {
+        int countOfTotalLotto = price / Store.LOTTO_PRICE_PER_ONE;
+        if (countOfTotalLotto < countOfManualLotto) {
+            throw new InvalidCountOfManualLotto(countOfTotalLotto, countOfManualLotto);
         }
     }
 }
