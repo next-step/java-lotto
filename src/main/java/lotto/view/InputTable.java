@@ -9,8 +9,8 @@ public final class InputTable {
   private InputTable() {
   }
 
-  public static Integer inputHaveMoney() {
-    return Integer.parseInt(SCANNER.nextLine());
+  public static Long inputHaveMoney() {
+    return Long.parseLong(SCANNER.nextLine());
   }
 
   public static String inputAwardNumber() {

@@ -5,19 +5,19 @@ import lotto.exception.MoneyNegativeException;
 
 public final class Money {
 
-  private final Integer value;
+  private final Long value;
 
   public Money() {
-    this(0);
+    this(0L);
   }
 
-  public Money(Integer value) {
+  public Money(Long value) {
     valid(value);
     this.value = value;
   }
 
-  private void valid(Integer value) {
-    if(value < 0) {
+  private void valid(Long value) {
+    if(value < 0L) {
       throw new MoneyNegativeException();
     }
   }
