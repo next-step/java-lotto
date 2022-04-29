@@ -18,7 +18,7 @@ public class LottoService {
   }
 
   public Product insertWinnerNumber(String winnerNumber) {
-    return new Product(new HashSet<>(AwardNumberUtil.getAwadNumberList(winnerNumber)));
+    return new Product(AwardNumberUtil.getAwadNumberList(winnerNumber));
   }
 
   public List<HistoryDto> histories(List<Product> products, Product winProduct) {
