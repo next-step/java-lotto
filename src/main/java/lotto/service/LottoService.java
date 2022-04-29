@@ -1,6 +1,7 @@
 package lotto.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import lotto.dto.HistoryDto;
 import lotto.enums.Grade;
@@ -17,7 +18,7 @@ public class LottoService {
   }
 
   public Product insertWinnerNumber(String winnerNumber) {
-    return new Product(AwardNumberUtil.getAwadNumberList(winnerNumber));
+    return new Product(new HashSet<>(AwardNumberUtil.getAwadNumberList(winnerNumber)));
   }
 
   public List<HistoryDto> histories(List<Product> products, Product winProduct) {

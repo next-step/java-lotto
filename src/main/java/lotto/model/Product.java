@@ -2,15 +2,25 @@ package lotto.model;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import lotto.enums.ChoiceType;
 import lotto.enums.Grade;
+import lotto.exception.LottoSizeException;
 
 public final class Product {
 
-  private final List<LottoNo> lottoNumbers;
+  private static final Integer DEFAULT_LOTTO_SIZE = 6;
+  private final Set<LottoNo> lottoNumbers;
 
-  public Product(List<LottoNo> lottoNumbers) {
+  public Product(Set<LottoNo> lottoNumbers) {
+    valid(lottoNumbers);
     this.lottoNumbers = lottoNumbers;
+  }
+
+  private void valid(Set<LottoNo> lottoNumbers) {
+    if (DEFAULT_LOTTO_SIZE != lottoNumbers.size()) {
+      throw new LottoSizeException();
+    }
   }
 
   public int coincideLotto(Grade grade, List<Product> allProducts) {

@@ -4,7 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import lotto.enums.Grade;
 import lotto.model.Product;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +18,7 @@ class StatisticsTest {
   @DisplayName("로또 번호가 맞는지 테스트")
   void awardCount() {
 
-    List<LottoNo> fistLotto = new ArrayList<>();
+    Set<LottoNo> fistLotto = new HashSet<>();
     fistLotto.add(new LottoNo(8));
     fistLotto.add(new LottoNo(6));
     fistLotto.add(new LottoNo(3));
@@ -24,7 +26,7 @@ class StatisticsTest {
     fistLotto.add(new LottoNo(5));
     fistLotto.add(new LottoNo(7));
 
-    List<LottoNo> secondLotto = new ArrayList<>();
+    Set<LottoNo> secondLotto = new HashSet<>();
     secondLotto.add(new LottoNo(6));
     secondLotto.add(new LottoNo(7));
     secondLotto.add(new LottoNo(8));
@@ -32,7 +34,7 @@ class StatisticsTest {
     secondLotto.add(new LottoNo(11));
     secondLotto.add(new LottoNo(30));
 
-    List<LottoNo> winLotto = new ArrayList<>();
+    Set<LottoNo> winLotto = new HashSet<>();
     winLotto.add(new LottoNo(8));
     winLotto.add(new LottoNo(7));
     winLotto.add(new LottoNo(6));
