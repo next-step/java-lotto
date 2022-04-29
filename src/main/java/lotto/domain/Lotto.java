@@ -13,7 +13,8 @@ public class Lotto {
         this.lotto = new HashSet<>(lotto);
     }
 
-    private void validateLotto(List<Integer> lotto) {
+    private void validateLotto(List<Integer> lottoNumber) {
+        final Set<Integer> lotto = new HashSet<>(lottoNumber);
         if (VALID_LOTTO_LENGTH != lotto.size()) {
             throw new InvalidLottoLengthException(lotto.size());
         }

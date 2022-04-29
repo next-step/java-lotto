@@ -1,6 +1,9 @@
 package lotto.ui;
 
+import lotto.domain.Lotto;
+import lotto.exception.InvalidLottoLengthException;
 import lotto.exception.InvalidPriceException;
+import lotto.util.Utility;
 
 import java.util.Scanner;
 
@@ -32,9 +35,15 @@ public class InputView {
         }
     }
 
-    public static String inputLottoOfPreviousWeek() {
-        System.out.println(PREVIOUS_WEEK_LOTTO_MESSAGE);
-        return SCANNER.nextLine();
+    public static Lotto inputLottoOfPreviousWeek() {
+        try {
+            System.out.println(PREVIOUS_WEEK_LOTTO_MESSAGE);
+            Integer[] lottoNumber = Utility.convertStringArrayToIntegerArray(Utility.split(SCANNER.nextLine()));
+            return new Lotto(lottoNumber);
+        } catch (InvalidLottoLengthException e) {
+            System.out.println(e.getMessage());
+            return inputLottoOfPreviousWeek();
+        }
     }
 
     public static int inputBonusNumber() {
