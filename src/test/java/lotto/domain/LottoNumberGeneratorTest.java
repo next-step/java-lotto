@@ -4,10 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-class RandomIntegerSetGeneratorTest {
+class LottoNumberGeneratorTest {
 
   @Test
   void getRandomIntegers() {
-    assertThat(RandomIntegerSetGenerator.getRandomIntegers()).hasSize(6);
+    assertThat(LottoNumberGenerator.getRandomIntegers()).hasSize(6);
   }
 }

@@ -18,18 +18,26 @@ public class Lotto {
   }
 
   public static Lotto create(Set<Integer> values) {
-    Set<LottoNumber> lottoNumbers = values.stream()
+    return values.stream()
         .map(LottoNumber::new)
-        .collect(Collectors.toSet());
-    return new Lotto(lottoNumbers);
+        .collect(Collectors.collectingAndThen(Collectors.toSet(), Lotto::new));
   }
 
   public static Lotto autoCreate() {
-    return create(RandomIntegerSetGenerator.getRandomIntegers());
+    return create(LottoNumberGenerator.getRandomIntegers());
   }
 
-  public Rank getRank(Lotto other) {
-    return Rank.valueOf(getInterSectionSize(other));
+  public Set<LottoNumber> getValues() {
+    return values;
+  }
+
+  public Rank getRank(WinningLotto winningLotto) {
+    boolean matchBonus = winningLotto.matchBonus(this);
+    return Rank.valueOf(getInterSectionSize(winningLotto.getLotto()), matchBonus);
+  }
+
+  public boolean contains(LottoNumber number) {
+    return values.contains(number);
   }
 
   private int getInterSectionSize(Lotto other) {
@@ -59,12 +67,5 @@ public class Lotto {
   @Override
   public int hashCode() {
     return Objects.hash(values);
-  }
-
-  @Override
-  public String toString() {
-    return "["
-        + values.stream().map(LottoNumber::toString).collect(Collectors.joining(", "))
-        + "]";
   }
 }

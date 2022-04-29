@@ -22,11 +22,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
   }
 
   @Override
-  public String toString() {
-    return String.valueOf(value);
-  }
-
-  @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;
@@ -46,5 +41,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
   @Override
   public int compareTo(LottoNumber o) {
     return Integer.compare(value, o.value);
+  }
+
+  @Override
+  public String toString() {
+    return String.valueOf(value);
   }
 }

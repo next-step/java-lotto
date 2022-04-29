@@ -3,7 +3,6 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 
@@ -16,21 +15,15 @@ class LottosTest {
 
   @Test
   void calculate() {
-    Lotto lotto = new Lotto(Set.of(
-        new LottoNumber(1),
-        new LottoNumber(2),
-        new LottoNumber(3),
-        new LottoNumber(4),
-        new LottoNumber(5),
-        new LottoNumber(6)
-    ));
+    WinningLotto lotto = WinningLotto.create(Set.of(1, 2, 3, 4, 5, 6), 7);
     Lottos lottos = prepareLottos();
 
-    Map<Rank, Integer> rankMap = lottos.calculate(lotto);
-    assertThat(rankMap.get(Rank.FIRST)).isEqualTo(1);
-    assertThat(rankMap.get(Rank.SECOND)).isEqualTo(1);
-    assertThat(rankMap.get(Rank.THIRD)).isEqualTo(1);
-    assertThat(rankMap.get(Rank.FOURTH)).isEqualTo(1);
+    LottoResult result = lottos.calculate(lotto);
+    assertThat(result.getRankCount(Rank.FIRST)).isEqualTo(1);
+    assertThat(result.getRankCount(Rank.SECOND)).isEqualTo(1);
+    assertThat(result.getRankCount(Rank.THIRD)).isEqualTo(1);
+    assertThat(result.getRankCount(Rank.FOURTH)).isEqualTo(1);
+    assertThat(result.getRankCount(Rank.FIFTH)).isEqualTo(1);
   }
 
   private Lottos prepareLottos() {
@@ -58,6 +51,14 @@ class LottosTest {
         new LottoNumber(5),
         new LottoNumber(45)
     ));
+    Lotto matchFiveAndBonus = new Lotto(Set.of(
+        new LottoNumber(1),
+        new LottoNumber(2),
+        new LottoNumber(3),
+        new LottoNumber(4),
+        new LottoNumber(5),
+        new LottoNumber(7)
+    ));
     Lotto matchSix = new Lotto(Set.of(
         new LottoNumber(1),
         new LottoNumber(2),
@@ -66,6 +67,6 @@ class LottosTest {
         new LottoNumber(5),
         new LottoNumber(6)
     ));
-    return new Lottos(List.of(matchThree, matchFour, matchFive, matchSix));
+    return new Lottos(List.of(matchThree, matchFour, matchFive, matchFiveAndBonus, matchSix));
   }
 }
