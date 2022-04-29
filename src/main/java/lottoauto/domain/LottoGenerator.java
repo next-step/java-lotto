@@ -12,6 +12,9 @@ public class LottoGenerator {
     private static final List<Integer> NUMBER_CANDIDATES = new ArrayList<>(){};
 
     private static void generateLottoRange() {
+        if(NUMBER_CANDIDATES.size() == 45){
+            return;
+        }
         for (int i = MIN_NUMBER ; i < MAX_NUMBER; i++) {
             NUMBER_CANDIDATES.add(i);
         }
