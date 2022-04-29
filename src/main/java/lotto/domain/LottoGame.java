@@ -14,13 +14,6 @@ public class LottoGame {
     this.lottoNumbers = new LottoNumbers(lottoNumbers);
   }
 
-  private void checkNumberLength(String lottoNumbers) {
-    int numberLength = lottoNumbers.split(LottoNumbers.LOTTO_NUMBER_DELIMITER).length;
-    if (numberLength != NUMBER_COUNT) {
-      throw new InvalidLottoGameException(NUMBER_COUNT);
-    }
-  }
-
   public LottoGame(NumberGenerator numberGenerator) {
     this.lottoNumbers = new LottoNumbers(NUMBER_COUNT, numberGenerator);
   }
@@ -32,5 +25,12 @@ public class LottoGame {
 
   public LottoNumbers getLottoNumbers() {
     return lottoNumbers;
+  }
+
+  private void checkNumberLength(String lottoNumbers) {
+    int numberLength = lottoNumbers.split(LottoNumbers.LOTTO_NUMBER_DELIMITER).length;
+    if (numberLength != NUMBER_COUNT) {
+      throw new InvalidLottoGameException(NUMBER_COUNT);
+    }
   }
 }

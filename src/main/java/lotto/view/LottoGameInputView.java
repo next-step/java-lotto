@@ -31,11 +31,6 @@ public class LottoGameInputView {
 
   }
 
-  private void inputPurchaseAmount() {
-    purchaseAmount = scanner.nextInt() / LottoGame.GAME_PRICE;
-    scanner.nextLine();
-  }
-
   public void setWinNumbers() {
     System.out.println(WIN_NUMBER_MESSAGE);
     try {
@@ -45,15 +40,20 @@ public class LottoGameInputView {
     }
   }
 
-  private void inputWinNumbers() {
-    winNumbers = scanner.nextLine();
-  }
-
   public int getPurchaseAmount() {
     return purchaseAmount;
   }
 
   public String getWinNumbers() {
     return winNumbers;
+  }
+
+  private void inputWinNumbers() {
+    winNumbers = scanner.nextLine();
+  }
+
+  private void inputPurchaseAmount() {
+    purchaseAmount = scanner.nextInt() / LottoGame.GAME_PRICE;
+    scanner.nextLine();
   }
 }

@@ -27,14 +27,14 @@ public class LottoDrawResults {
     return new LottoDrawResults(lottoDrawResults);
   }
 
+  public List<LottoDrawResult> getValues() {
+    return values;
+  }
+
   private void addIfMatchCountEqual(LottoDrawResult lottoDrawResult,
       List<LottoDrawResult> lottoDrawResults, int matchCount) {
     if (lottoDrawResult.isMatchCountEqual(matchCount)) {
       lottoDrawResults.add(lottoDrawResult);
     }
-  }
-
-  public List<LottoDrawResult> getValues() {
-    return values;
   }
 }

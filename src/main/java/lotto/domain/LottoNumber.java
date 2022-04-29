@@ -25,10 +25,6 @@ public class LottoNumber {
     this.value = Integer.valueOf(value);
   }
 
-  private boolean checkBound(int value) {
-    return value < MIN || value > MAX;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -48,5 +44,9 @@ public class LottoNumber {
 
   public int getValue() {
     return value;
+  }
+
+  private boolean checkBound(int value) {
+    return value < MIN || value > MAX;
   }
 }
