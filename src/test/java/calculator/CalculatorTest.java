@@ -25,4 +25,16 @@ class CalculatorTest {
     assertThat(Calculator.calculate("10 * 20 * 30")).isEqualTo(6000);
   }
 
+  @Test
+  @DisplayName("나누기")
+  void divideTest() {
+    assertThat(Calculator.calculate("10 + 20 / 3")).isEqualTo(10);
+  }
+
+  @Test
+  @DisplayName("복합 사칙 연산")
+  void complexTest() {
+    assertThat(Calculator.calculate("2 + 3 * 4 / 2 - 5")).isEqualTo(5);
+  }
+
 }

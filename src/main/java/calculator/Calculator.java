@@ -25,6 +25,8 @@ public class Calculator {
         result = minus(result, operands.get(i + 1));
       } else if ("*".equals(operators.get(i))) {
         result = times(result, operands.get(i + 1));
+      } else if ("/".equals(operators.get(i))) {
+        result = divide(result, operands.get(i + 1));
       }
     }
     return result;
@@ -40,6 +42,10 @@ public class Calculator {
 
   private static int times(int a, int b) {
     return a * b;
+  }
+
+  private static int divide(int a, int b) {
+    return a / b;
   }
 
 }
