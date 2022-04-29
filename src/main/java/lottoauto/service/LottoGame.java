@@ -1,7 +1,6 @@
 package lottoauto.service;
 
 import lottoauto.domain.Lotto;
-import lottoauto.domain.LottoGenerator;
 
 import java.util.*;
 
@@ -14,10 +13,20 @@ import java.util.*;
  * - 총 수익률을 계산한다.(로또게임 입력 금액 / 당첨금액)
  */
 public class LottoGame {
+    public static final int THREE_MATCH_WINNING_MONEY = 5000;
+    public static final int FOUR_MATCH_WINNING_MONEY = 50000;
+    public static final int FIVE_MATCH_WINNING_MONEY = 1500000;
+    public static final int SIX_MATCH_WINNING_MONEY = 2000000000;
+
     private final int money;
     private final int lottoCount;
+
     private final List<Lotto> lottos = new ArrayList<>();
     private Lotto winningLotto;
+    private int matchThreeCount = 0;
+    private int matchFourCount = 0;
+    private int matchFiveCount = 0;
+    private int matchSixCount = 0;
 
     public LottoGame(int money) {
         if(money < Lotto.PRICE) {
@@ -30,6 +39,22 @@ public class LottoGame {
 
     public int getLottoCount() {
         return lottoCount;
+    }
+
+    public int getMatchThreeCount() {
+        return matchThreeCount;
+    }
+
+    public int getMatchFourCount() {
+        return matchFourCount;
+    }
+
+    public int getMatchFiveCount() {
+        return matchFiveCount;
+    }
+
+    public int getMatchSixCount() {
+        return matchSixCount;
     }
 
     public List<Lotto> all() {
@@ -50,6 +75,16 @@ public class LottoGame {
     public void start() {
         for (Lotto lotto : lottos) {
             lotto.match(winningLotto);
+            if(lotto.isMatchThree()) matchThreeCount += 1;
+            if(lotto.isMatchFour()) matchFourCount += 1;
+            if(lotto.isMatchFive()) matchFiveCount += 1;
+            if(lotto.isMatchSix()) matchSixCount += 1;
         }
+    }
+
+    public int getProfitRate() {
+        int totalWinningMoney = THREE_MATCH_WINNING_MONEY * getMatchThreeCount() + FOUR_MATCH_WINNING_MONEY * getMatchFourCount()
+                                + FIVE_MATCH_WINNING_MONEY * getMatchFiveCount() + SIX_MATCH_WINNING_MONEY * getMatchSixCount();
+        return totalWinningMoney / this.money;
     }
 }

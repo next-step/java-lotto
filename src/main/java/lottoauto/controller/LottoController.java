@@ -41,19 +41,31 @@ public class LottoController {
         System.out.println("구입금액을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
 
-        int moneyToBuyLotto = scanner.nextInt();
+        int moneyToBuyLotto = Integer.parseInt(scanner.nextLine());
         LottoGame lottoGame = new LottoGame(moneyToBuyLotto);
         lottoGame.buyLotto();
 
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String winningLottoString = scanner.nextLine();
-        String[] winningLottoSplits = winningLottoString.split(", ");
+
+        String[] winningLottoSplits = winningLottoString.split(",");
         List<Integer> winningLotto = new ArrayList<>();
-        for (String winningLottoSplit : winningLottoSplits) {
-            winningLotto.add(Integer.parseInt(winningLottoSplit));
+        for (int i = 0; i < winningLottoSplits.length; i++) {
+            winningLotto.add(Integer.parseInt(winningLottoSplits[i]));
         }
         lottoGame.checkWinningLotto(winningLotto);
 
         lottoGame.start();
 
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        System.out.println("3개 일치 (5000원)- " + lottoGame.getMatchThreeCount() + "개");
+        System.out.println("4개 일치 (50000원)- " + lottoGame.getMatchFourCount() + "개");
+        System.out.println("5개 일치 (1500000원)- " + lottoGame.getMatchFiveCount() + "개");
+        System.out.println("6개 일치 (2000000000원)- " + lottoGame.getMatchSixCount() + "개");
+        System.out.print("총 수익률은 " + lottoGame.getProfitRate() + "입니다.");
+        if(lottoGame.getLottoCount() < 1){
+            System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        }
     }
 }
