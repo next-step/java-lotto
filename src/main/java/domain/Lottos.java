@@ -5,12 +5,18 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottos {
+    private static final String NEXT_LINE = "\n";
     private final List<Lotto> lottoList;
     private final LottoGenerator lottoGenerator;
 
     public Lottos(LottoGenerator lottoGenerator, int count) {
         this.lottoGenerator = lottoGenerator;
         this.lottoList = create(count);
+    }
+
+    public Lottos(List<Lotto> lottoList) {
+        this.lottoList = lottoList;
+        this.lottoGenerator = null;
     }
 
     private List<Lotto> create(int count) {
@@ -33,7 +39,7 @@ public class Lottos {
     @Override
     public String toString() {
         return lottoList.stream()
-                .map(lotto -> lotto + "\n")
+                .map(lotto -> lotto + NEXT_LINE)
                 .collect(Collectors.joining());
     }
 }

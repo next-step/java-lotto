@@ -1,6 +1,7 @@
 package controller;
 
 import domain.BuyLotto;
+import domain.LottoStatistics;
 import view.InputView;
 import view.ResultView;
 
@@ -9,6 +10,7 @@ public class LottoGame {
         BuyLotto buyLotto = new BuyLotto(InputView.inputHowMoney());
         ResultView.printHowLottoCount(buyLotto.buyLottoCount());
         ResultView.printLottoList(buyLotto.buyLottoList());
-        ResultView.printStatistics(buyLotto.winningStatistics(InputView.inputWinningNumbers()));
+
+        ResultView.printStatistics(new LottoStatistics(buyLotto, InputView.inputWinningNumbers()));
     }
 }

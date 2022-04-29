@@ -1,8 +1,5 @@
 package domain;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 public class BuyLotto {
     private static final int START_NUMBER = 1;
     private static final int END_NUMBER = 45;
@@ -11,8 +8,15 @@ public class BuyLotto {
     private final Lottos lottos;
 
     public BuyLotto(int money) {
+        validate(money);
         this.money = money;
         this.lottos = new Lottos(new LottoGenerator(START_NUMBER, END_NUMBER), buyLottoCount());
+    }
+
+    private void validate(int money) {
+        if (money < LOTTO_PRICE) {
+            throw new IllegalArgumentException("로또는 1게임 당 1,000원 입니다.");
+        }
     }
 
     public int buyLottoCount() {
@@ -21,12 +25,6 @@ public class BuyLotto {
 
     public String buyLottoList() {
         return lottos.toString();
-    }
-
-    public LottoStatistics winningStatistics(String winningNumbers) {
-        return new LottoStatistics(lottos, new Lotto(Arrays.stream(winningNumbers.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList())));
     }
 
 }
