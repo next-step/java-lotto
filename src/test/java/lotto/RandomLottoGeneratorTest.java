@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.model.LottoNumber;
-import lotto.model.Lottos;
+import lotto.model.Lotto;
 import lotto.model.RandomLottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,10 +35,10 @@ public class RandomLottoGeneratorTest {
 
     @Test
     @DisplayName("생성된 로또 번호의 개수는 6개이다.")
-    void lottosTest() {
-        Lottos lottos = new RandomLottoGenerator().get();
+    void lottoTest() {
+        Lotto lotto = new RandomLottoGenerator().get();
 
-        List<LottoNumber> lottoNums = lottos.get();
+        List<LottoNumber> lottoNums = lotto.get();
 
         assertThat(lottoNums).hasSize(6);
     }

@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.controller.LottoMarket;
 import lotto.model.LottoNumber;
-import lotto.model.Lottos;
+import lotto.model.Lotto;
 import lotto.model.Money;
 import lotto.model.RandomLottoGenerator;
 import org.assertj.core.util.Lists;
@@ -25,7 +25,7 @@ public class LottoMarketTest {
     @CsvSource(value = {"14000:14", "1000:1"}, delimiter = ':')
     @DisplayName("지불한 금액만큼 로또를 구매한다. 1000원당 1개")
     void buyLottoTest(int money, int count) {
-        List<Lottos> lottos = LottoMarket.buyLottos(new Money(money), new RandomLottoGenerator());
+        List<Lotto> lottos = LottoMarket.buyLottos(new Money(money), new RandomLottoGenerator());
 
         assertThat(lottos).hasSize(count);
     }
@@ -40,10 +40,10 @@ public class LottoMarketTest {
     @Test
     @DisplayName("구매한 로또와 당첨 로또를 입력해 통계를 계산할 때 입력값이 null이면 예외가 발생한다.")
     void getLottoStatisticNullTest() {
-        assertThatThrownBy(() -> LottoMarket.getLottoStatistics(null, LottosTest.TEST_LOTTO))
+        assertThatThrownBy(() -> LottoMarket.getLottoStatistics(null, LottoTest.TEST_LOTTO))
                 .isInstanceOf(NullPointerException.class);
 
-        assertThatThrownBy(() -> LottoMarket.getLottoStatistics(Lists.newArrayList(LottosTest.TEST_LOTTO), null))
+        assertThatThrownBy(() -> LottoMarket.getLottoStatistics(Lists.newArrayList(LottoTest.TEST_LOTTO), null))
                 .isInstanceOf(NullPointerException.class);
     }
 
@@ -54,14 +54,14 @@ public class LottoMarketTest {
         LottoNumber eleven = new LottoNumber(11);
         LottoNumber twelve = new LottoNumber(12);
         // given
-        Lottos winnerLottos = WinnerLottosTest.WINNER_LOTTOS.getLottos();
-        Lottos threeMatchLottos = new Lottos(Lists.newArrayList(ONE, TWO, THREE, ten, eleven, twelve));
-        Lottos fourMatchLottos = new Lottos(Lists.newArrayList(ONE, TWO, THREE, FOUR, eleven, twelve));
-        Lottos fiveMatchLottos = new Lottos(Lists.newArrayList(ONE, TWO, THREE, FOUR, FIVE, twelve));
-        Lottos sixMatchLottos = new Lottos(Lists.newArrayList(ONE, TWO, THREE, FOUR, FIVE, SIX));
+        Lotto winnerLotto = WinnerLottoTest.WINNER_LOTTO.getLotto();
+        Lotto threeMatchLotto = new Lotto(Lists.newArrayList(ONE, TWO, THREE, ten, eleven, twelve));
+        Lotto fourMatchLotto = new Lotto(Lists.newArrayList(ONE, TWO, THREE, FOUR, eleven, twelve));
+        Lotto fiveMatchLotto = new Lotto(Lists.newArrayList(ONE, TWO, THREE, FOUR, FIVE, twelve));
+        Lotto sixMatchLotto = new Lotto(Lists.newArrayList(ONE, TWO, THREE, FOUR, FIVE, SIX));
 
         // when
-        Map<Integer, Integer> lottoStatistics = LottoMarket.getLottoStatistics(Lists.newArrayList(threeMatchLottos, fourMatchLottos, fiveMatchLottos, sixMatchLottos), winnerLottos);
+        Map<Integer, Integer> lottoStatistics = LottoMarket.getLottoStatistics(Lists.newArrayList(threeMatchLotto, fourMatchLotto, fiveMatchLotto, sixMatchLotto), winnerLotto);
 
         // then
         assertThat(lottoStatistics.get(3)).isEqualTo(1);

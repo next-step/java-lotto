@@ -15,19 +15,19 @@ public class RandomLottoGenerator implements LottoGenerator {
     }
 
     @Override
-    public Lottos get() {
-        return new Lottos(getLottoNumbers());
+    public Lotto get() {
+        return new Lotto(getLottoNumbers());
     }
 
     private List<LottoNumber> getLottoNumbers() {
         List<LottoNumber> numbers = initNumbers();
 
-        List<LottoNumber> lottos = new ArrayList<>(LOTTO_SIZE);
+        List<LottoNumber> lotto = new ArrayList<>(LOTTO_SIZE);
         for (int i = 0; i < LOTTO_SIZE; i++) {
             Collections.shuffle(numbers);
-            lottos.add(numbers.remove(i));
+            lotto.add(numbers.remove(i));
         }
-        return lottos;
+        return lotto;
     }
 
     private List<LottoNumber> initNumbers() {

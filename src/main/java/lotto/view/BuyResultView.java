@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.model.Lottos;
+import lotto.model.Lotto;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,18 +16,18 @@ public class BuyResultView {
         throw new AssertionError();
     }
 
-    public static void printBuyingLottos(List<Lottos> buyingLottos) {
+    public static void printBuyingLottos(List<Lotto> buyingLottos) {
         System.out.println(String.format(OUTPUT_BUYING_LOTTOS, buyingLottos.size()));
 
-        for (Lottos lottos : buyingLottos) {
-            printLottos(lottos);
+        for (Lotto lotto : buyingLottos) {
+            printLottos(lotto);
         }
     }
 
-    private static void printLottos(Lottos lottos) {
+    private static void printLottos(Lotto lotto) {
         StringBuilder sb = new StringBuilder();
         sb.append(OUTPUT_OPEN_BRACKET);
-        sb.append(lottos.get()
+        sb.append(lotto.get()
                 .stream()
                 .map(num -> String.valueOf(num))
                 .collect(Collectors.joining(DELIMITER)));
