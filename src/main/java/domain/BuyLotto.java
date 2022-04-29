@@ -1,8 +1,6 @@
 package domain;
 
 public class BuyLotto {
-    private static final int START_NUMBER = 1;
-    private static final int END_NUMBER = 45;
     private static final int LOTTO_PRICE = 1000;
     private final int money;
     private final Lottos lottos;
@@ -10,7 +8,13 @@ public class BuyLotto {
     public BuyLotto(int money) {
         validate(money);
         this.money = money;
-        this.lottos = new Lottos(new LottoGenerator(START_NUMBER, END_NUMBER), buyLottoCount());
+        this.lottos = new Lottos(new LottoGenerator(), buyLottoCount());
+    }
+
+    public BuyLotto(int money, LottoGenerator lottoGenerator) {
+        validate(money);
+        this.money = money;
+        this.lottos = new Lottos(lottoGenerator, buyLottoCount());
     }
 
     private void validate(int money) {

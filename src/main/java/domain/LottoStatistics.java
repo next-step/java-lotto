@@ -1,5 +1,7 @@
 package domain;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,12 +19,13 @@ public class LottoStatistics {
     private static final int ALL_WINNING = 6;
     private static final int FIRST_INDEX = 0;
     private static final String SPLIT_REGEX = ",";
-    private static final String MAKE_LOTTOLIST_REGEX = ", ";
+    private static final String MAKE_LOTTO_LIST_REGEX = ", ";
     private static final String NEXT_LINE = "\n";
     private static final String LEFT_BRACKETS = "[";
     private static final String RIGHT_BRACKETS = "]";
     private final Lottos lottos;
     private final Lotto winningLotto;
+    private final DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
     public LottoStatistics(BuyLotto buyLotto, String winningNumbers) {
         this.lottos = buyLottoListToLottos(buyLotto.buyLottoList());
@@ -37,7 +40,7 @@ public class LottoStatistics {
 
     private List<Lotto> stringListToList(String[] lottoList) {
        return Arrays.stream(lottoList)
-                .map(s -> new Lotto(makeStringToIntegerList(s.split(MAKE_LOTTOLIST_REGEX))))
+                .map(s -> new Lotto(makeStringToIntegerList(s.split(MAKE_LOTTO_LIST_REGEX))))
                 .collect(Collectors.toList());
     }
 
@@ -69,10 +72,12 @@ public class LottoStatistics {
     }
 
     public double statistics() {
-        return ((calculateNumbersCount(THREE_WINNING) * EQUAL_THREE_NUMBERS)
-                + (calculateNumbersCount(FOUR_WINNING) * EQUAL_FOUR_NUMBERS)
-                + (calculateNumbersCount(FIVE_WINNING) * EQUAL_FIVE_NUMBERS)
-                + (calculateNumbersCount(ALL_WINNING) * EQUAL_SIX_NUMBERS)) / (lottos.size() * LOTTO_PRICE);
+        decimalFormat.setRoundingMode(RoundingMode.DOWN);
+        return Double.parseDouble(decimalFormat.format(
+                ((calculateNumbersCount(THREE_WINNING) * EQUAL_THREE_NUMBERS)
+                        + (calculateNumbersCount(FOUR_WINNING) * EQUAL_FOUR_NUMBERS)
+                        + (calculateNumbersCount(FIVE_WINNING) * EQUAL_FIVE_NUMBERS)
+                        + (calculateNumbersCount(ALL_WINNING) * EQUAL_SIX_NUMBERS)) / (lottos.size() * LOTTO_PRICE)));
     }
 
 }

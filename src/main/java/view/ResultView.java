@@ -18,11 +18,7 @@ public class ResultView {
         System.out.println("4개 일치 (50000원) - " + (int) lottoStatistics.calculateNumbersCount(4) + "개");
         System.out.println("5개 일치 (1500000원) - " + (int) lottoStatistics.calculateNumbersCount(5) + "개");
         System.out.println("6개 일치 (2000000000원) - " + (int) lottoStatistics.calculateNumbersCount(6) + "개");
-        System.out.print("총 수익률은 " + printTwoPointStatistics(lottoStatistics.statistics()) + "입니다.");
-    }
-
-    private static double printTwoPointStatistics(double result) {
-        return Math.floor(result * 100) / 100.0;
+        System.out.print("총 수익률은 " + lottoStatistics.statistics() + "입니다.");
     }
 
 }

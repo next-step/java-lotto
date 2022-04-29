@@ -28,7 +28,7 @@ public class Lottos {
     public int calculateNumbers(Lotto winningNumbers, int count) {
         return Math.toIntExact(this.lottoList
                 .stream()
-                .filter(lotto -> lotto.compare(winningNumbers).size() == count)
+                .filter(lotto -> lotto.compareSameNumberList(winningNumbers).size() == count)
                 .count());
     }
 
