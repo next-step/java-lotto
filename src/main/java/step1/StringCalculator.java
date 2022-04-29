@@ -1,45 +1,23 @@
 package step1;
 
-import java.util.List;
-
 public class StringCalculator {
 
-
-    private static final OperationMapper OPERATION_MAPPER = new OperationMapper();
-    private static final OperationStrategy INITIALIZE_STRATEGY = Operator.ADD.getOperationStrategy();
-
-    private final List<String> splits;
-    private OperationStrategy operationStrategy;
-    private Number result;
+    private final Input input;
 
     public StringCalculator(String text) {
-        this.splits = initSplits(text);
-        this.result = new Number(0);
-        this.operationStrategy = INITIALIZE_STRATEGY;
+        this.input = new Input(text);
     }
 
-    private List<String> initSplits(String text) {
-        return List.of(new Input(text).split());
-    }
+    public int calculate() {
 
-    public Number calculate() {
-        splits.forEach(this::calculateEach);
-        return result;
-    }
+        int result = input.getFirstOperand();
 
-    private void calculateEach(String each) {
-        if (OPERATION_MAPPER.isOperator(each)) {
-            changeOperation(each);
-            return;
+        for (int i = 0; i < input.getOperationBundleCount(); i++) {
+            Operator operator = input.getOperator();
+            int operand = input.getOperand();
+            result = operator.operate(result, operand);
         }
-        updateResult(operationStrategy, each);
-    }
 
-    private void changeOperation(String each) {
-        this.operationStrategy = OPERATION_MAPPER.getOperationStrategy(each);
-    }
-
-    private void updateResult(OperationStrategy operationStrategy, String each) {
-        this.result = this.result.operate(operationStrategy, new Number(each));
+        return result;
     }
 }
