@@ -13,10 +13,29 @@ public class StringCalculator {
         }
 
         String[] calculations = input.split(" ");
-        for (int i = 0; i < calculations.length; i++) {
-            validateOperation(calculations[i]);
+
+        for (int i = 0; i < calculations.length-2; i+=2) {
+            calculations[i+2] = String.valueOf(calculate(calculations[i+1], calculations[i], calculations[i+2]));
+            answer = Integer.parseInt(calculations[i+2]);
         }
         return answer;
+    }
+
+    private static int calculate(String operator, String firstOperand, String secondOperand) {
+        validateOperation(operator);
+        if("+".equals(operator)) {
+            return add(Integer.parseInt(firstOperand), Integer.parseInt(secondOperand));
+        }
+
+        if("-".equals(operator)) {
+            return subtract(Integer.parseInt(firstOperand), Integer.parseInt(secondOperand));
+        }
+
+        if("*".equals(operator)) {
+            return multiply(Integer.parseInt(firstOperand), Integer.parseInt(secondOperand));
+        }
+
+        return divide(Integer.parseInt(firstOperand), Integer.parseInt(secondOperand));
     }
 
     private static void validateOperation(String calculation) {

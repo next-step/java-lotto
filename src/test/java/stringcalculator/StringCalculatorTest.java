@@ -45,4 +45,9 @@ public class StringCalculatorTest {
             StringCalculator.splitAndCalculate(input);
         });
     }
+
+    @Test
+    void 사칙연산_모두_포함하여_계산() {
+        assertThat(StringCalculator.splitAndCalculate("2 + 3 * 4 / 2")).isEqualTo(10);
+    }
 }
