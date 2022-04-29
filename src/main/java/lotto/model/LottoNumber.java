@@ -23,6 +23,7 @@ public class LottoNumber {
     }
 
     public LottoNumber(int value) {
+        validateLottoNumber(value);
         this.value = value;
     }
 
@@ -36,5 +37,11 @@ public class LottoNumber {
             .limit(LIMIT_ONE_NUMBER)
             .collect(Collectors.toList())
             .get(ONE_NUMBER_INDEX);
+    }
+
+    private void validateLottoNumber(int value) {
+        if(value < LOTTO_NUMBER_RANGE_START || value > LOTTO_NUMBER_RANGE_END) {
+            throw new IllegalArgumentException();
+        }
     }
 }
