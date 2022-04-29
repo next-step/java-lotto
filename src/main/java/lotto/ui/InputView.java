@@ -8,7 +8,9 @@ import lotto.exception.InvalidLottoNumberException;
 import lotto.exception.InvalidNegativeNumberException;
 import lotto.util.Utility;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -93,6 +95,34 @@ public class InputView {
         int countOfTotalLotto = price / Store.LOTTO_PRICE_PER_ONE;
         if (countOfTotalLotto < countOfManualLotto) {
             throw new InvalidCountOfManualLotto(countOfTotalLotto, countOfManualLotto);
+        }
+    }
+
+    public static List<Lotto> inputManualLottos(int countOfManualLotto) {
+        final List<Lotto> manualLottos = new ArrayList<>(countOfManualLotto);
+        while (countOfManualLotto > 0) {
+            inputManualLotto(manualLottos);
+            countOfManualLotto--;
+        }
+
+        return manualLottos;
+    }
+
+    private static void inputManualLotto(List<Lotto> manualLottos) {
+        System.out.println(MANUAL_LOTTO_MESSAGE);
+
+        try {
+            Integer[] lottoNumber = Utility.convertStringArrayToIntegerArray(Utility.split(SCANNER.nextLine()));
+            manualLottos.add(new Lotto(lottoNumber));
+        } catch (InvalidLottoLengthException e) {
+            System.out.println(e.getMessage());
+            inputManualLotto(manualLottos);
+        } catch (InvalidLottoNumberException e) {
+            System.out.println(e.getMessage());
+            inputManualLotto(manualLottos);
+        } catch (InputMismatchException e) {
+            System.out.println(INVALID_INPUT_NUMBER_MESSAGE);
+            inputManualLotto(manualLottos);
         }
     }
 }
