@@ -6,6 +6,7 @@ import lotto.exception.InvalidLottoNumberException;
 import lotto.exception.InvalidPriceException;
 import lotto.util.Utility;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class InputView {
@@ -15,6 +16,7 @@ public class InputView {
     private static final String BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해주세요.";
     private static final String COUNT_OF_MANUAL_LOTTO_MESSAGE = "수동으로 구매할 로또 수를 입력해주세요.";
     private static final String MANUAL_LOTTO_MESSAGE = "수동으로 구매할 번호를 입력해주세요.";
+    private static final String INVALID_INPUT_NUMBER_MESSAGE = "숫자를 입력해주세요.";
 
     private InputView() {
     }
@@ -58,9 +60,15 @@ public class InputView {
     }
 
     public static int inputCountOfManualLotto() {
-        System.out.println(COUNT_OF_MANUAL_LOTTO_MESSAGE);
-        int countOfManualLotto = SCANNER.nextInt();
-        SCANNER.nextLine(); // Delete newLine
-        return countOfManualLotto;
+        try {
+            System.out.println(COUNT_OF_MANUAL_LOTTO_MESSAGE);
+            int countOfManualLotto = SCANNER.nextInt();
+            SCANNER.nextLine(); // Delete newLine
+            return countOfManualLotto;
+        } catch (InputMismatchException e) {
+            SCANNER.nextLine(); // Delete newLine
+            System.out.println(INVALID_INPUT_NUMBER_MESSAGE);
+            return inputCountOfManualLotto();
+        }
     }
 }
