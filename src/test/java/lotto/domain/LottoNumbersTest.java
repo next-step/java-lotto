@@ -4,8 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import lotto.domain.strategy.FixedNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoNumbersTest {
@@ -21,22 +21,23 @@ class LottoNumbersTest {
 
   @ParameterizedTest
   @DisplayName("번호 생성 클래스를 받아 잘 생성되는지 확인")
-  @ValueSource(ints = {1, 5, 10, 45})
-  void generate(int fixValue) {
-    LottoNumbers lottoNumbers = new LottoNumbers(6, new FixedNumberGenerator(fixValue));
+  @ValueSource(strings = {"1,5,10", "1,10", "1,10,13"})
+  void generator(String numbers) {
+    LottoNumbers lottoNumbers = new LottoNumbers(numbers.split(",").length, new FixedNumberGenerator(numbers));
 
     assertThat(lottoNumbers).usingRecursiveComparison()
-        .isEqualTo(new LottoNumbers(6, new FixedNumberGenerator(fixValue)));
+        .isEqualTo(new LottoNumbers(numbers.split(",").length, new FixedNumberGenerator(numbers)));
   }
 
   @ParameterizedTest
   @DisplayName("매칭된 번호를 잘 가져오는지 확인")
-  @ValueSource(ints = {1, 10, 15, 20, 45})
-  void match() {
-    LottoNumbers lottoNumbers = new LottoNumbers(6, new FixedNumberGenerator(5));
-    LottoNumbers winNumbers = new LottoNumbers(6, new FixedNumberGenerator(5));
+  @CsvSource(value = {"1,5,10|1,20,25|1", "1,10|2,20|0", "1,10,13|1,10,13|3"}, delimiter = '|')
+  void match(String numbers, String winNumbers, int matchCount) {
+    LottoNumbers lottoNumbers = new LottoNumbers(numbers.split(",").length,
+        new FixedNumberGenerator(numbers));
+    LottoNumbers winLottoNumbers = new LottoNumbers(numbers.split(",").length,
+        new FixedNumberGenerator(winNumbers));
 
-    assertThat(lottoNumbers.getMatchNumbers(winNumbers)).usingRecursiveComparison()
-        .isEqualTo(lottoNumbers);
+    assertThat(lottoNumbers.getMatchNumbers(winLottoNumbers).getNumberSize()).isEqualTo(matchCount);
   }
 }

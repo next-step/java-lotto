@@ -55,7 +55,6 @@ class LottoDrawResultsTest {
     List<LottoDrawResult> lottoDrawResults = new ArrayList<>();
     HashMap<Integer, Integer> rewordByMatchCount = new HashMap<>();
 
-
     for (int i = 0; i < 100; i++) {
       int reword = random.nextInt(10000);
       int matchCount = random.nextInt(6);
@@ -63,7 +62,6 @@ class LottoDrawResultsTest {
       rewordByMatchCount.putIfAbsent(matchCount, 0);
       rewordByMatchCount.put(matchCount, rewordByMatchCount.get(matchCount) + reword);
     }
-
 
     for (Entry<Integer, Integer> rewordEntry : rewordByMatchCount.entrySet()) {
       int matchCount = rewordEntry.getKey();

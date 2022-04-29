@@ -7,7 +7,7 @@ import lotto.domain.strategy.NumberGenerator;
 public class LottoNumbers {
 
   private final List<LottoNumber> lottoNumbers;
-  private static final String LOTTO_NUMBER_DELIMITER = ",";
+  public static final String LOTTO_NUMBER_DELIMITER = ",";
 
   public LottoNumbers(String lottoNumbers) {
     this.lottoNumbers = new ArrayList<>();
@@ -26,5 +26,9 @@ public class LottoNumbers {
   public LottoNumbers getMatchNumbers(LottoNumbers winNumbers) {
     lottoNumbers.retainAll(winNumbers.lottoNumbers);
     return this;
+  }
+
+  public int getNumberSize() {
+    return lottoNumbers.size();
   }
 }
