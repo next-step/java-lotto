@@ -35,12 +35,12 @@ public class LottoService {
   public Long allAddReward(List<HistoryDto> histories) {
     long result = 0L;
     for (HistoryDto history : histories) {
-      result += ((long) history.getGrade().getAwardPrice() * history.getCount());
+      result += (history.getGrade().getAwardPrice() * history.getCount());
     }
     return result;
   }
 
-  public double yieldCalculate(int money, Long reward) {
+  public double yieldCalculate(Long money, Long reward) {
     return (double) reward / money;
   }
 }

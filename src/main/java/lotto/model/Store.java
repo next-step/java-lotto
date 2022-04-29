@@ -5,7 +5,7 @@ import java.util.List;
 
 public final class Store {
 
-  private static final Integer PRODUCT_PRICE = 1000;
+  private static final Long PRODUCT_PRICE = 1_000L;
   private final Integer productCount;
 
   public Store() {
@@ -17,8 +17,8 @@ public final class Store {
   }
 
 
-  public List<Product> delivery(int money) {
-    int count = money / PRODUCT_PRICE;
+  public List<Product> delivery(long money) {
+    long count = money / PRODUCT_PRICE;
     List<Product> products = new ArrayList<>();
     while (count-- != 0) {
       products.add(deliverLotto());

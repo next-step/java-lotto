@@ -27,7 +27,7 @@ public enum Grade {
     return expectNumber;
   }
 
-  public int getAwardPrice() {
+  public long getAwardPrice() {
     return awardPrice;
   }
 

@@ -11,7 +11,7 @@ class MoneyTest {
   @DisplayName("돈은 음수를 가질 수 없습니다.")
   void moneyNotNegativeException() {
     assertThrows(RuntimeException.class, () -> {
-      Money money = new Money(-1);
+      Money money = new Money(-1L);
     }).printStackTrace();
   }
 }

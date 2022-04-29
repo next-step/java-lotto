@@ -19,7 +19,7 @@ public class LottoController {
 
   public void run() {
     OutputTable.inputPurchaseAmount();
-    int haveMoney = InputTable.inputHaveMoney();
+    long haveMoney = InputTable.inputHaveMoney();
     List<Product> products = visit(new Guest(haveMoney), new Store()).hasAllLotto();
     OutputTable.buyThings(products.size());
     OutputTable.printProductInfos(products);
@@ -48,7 +48,7 @@ public class LottoController {
     return lottoService.allAddReward(histories);
   }
 
-  public double yieldCalculate(int money, Long reward) {
+  public double yieldCalculate(Long money, Long reward) {
     return lottoService.yieldCalculate(money, reward);
   }
 

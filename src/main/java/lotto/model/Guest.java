@@ -8,17 +8,17 @@ public final class Guest {
   private final Money money;
   private final List<Product> allLottoList;
 
-  public Guest(int money) {
+  public Guest(long money) {
     this(money, null);
   }
 
-  public Guest(int money, List<Product> allLottoList) {
+  public Guest(long money, List<Product> allLottoList) {
     this.money = new Money(money);
     this.allLottoList = allLottoList;
   }
 
   public Guest choiceProduct(Store store) {
-    return new Guest(0,store.delivery(Integer.parseInt(money.toString())));
+    return new Guest(0,store.delivery(Long.parseLong(money.toString())));
   }
 
   public List<Product> hasAllLotto() {
