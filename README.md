@@ -47,9 +47,43 @@ Result: 1
 - [x] 요구사항 기능별 분리 작성
 - [x] 미션에서 요구한 예제에 대한 테스트 추가
 - [x] Operator Enum 으로 변경
-  - [x] Operator 가 연산 부분을 포함하게?
+    - [x] Operator 가 연산 부분을 포함하게?
 - [x] operator parse 에 대한 성공과 예외 테스트 분리
 - [x] InputView 역할 분리
 - [x] 순차적 연산 방식 while with index에서 다른 방식으로 수정 -> Iterator.next
 - [x] 축약된 변수명 수정
 - [x] 한 단계의 indent만 수행
+
+## Step2: Lotto auto
+
+### Requirements
+
+- 로또 구입 금액을 입력
+    - [x] LottoController 통해 전체 로직 관리
+    - [x] LottoController.money = InputView.scan
+- 로또 1장의 가격은 1000원, money로 살 수 있는 로또 개수 연산
+    - [ ] LottoController.numberOfLottos = money / 1000
+- numberOfLottos 만큼 Lotto class 생성
+    - [ ] for 1..numberOfLottos: new Lotto()
+    - [ ] Lotto.numbers 는 Collections.shuffle() 로 생성
+    - [ ] Collections.sort() 로 정렬해서 보관
+- 자동으로 생성 된 로또 번호들을 출력
+    - [ ] ResultView.toString(lotto)
+    - [ ] ResultView.printLottos
+- 정답 번호를 입력
+    - [ ] LottoController.answerNumbers = LottoController.parse(InputView.scan)
+- 정답 번호와 비교하여 win 횟수 세기
+    - [ ] for lotto of lottos: lotto == answer ? cnt++ : null
+    - [ ] 비교는 ArrayList.contains() 활용
+- 당첨 통계 출력
+    - [ ] ResultView.printResult
+- 수익률 계산
+    - [ ] LottoController.calculateEarningRate
+- 수익률 출력
+    - [ ] ResultView.printEarningRate
+
+### Questions
+
+- ResultView.print 로 출력을 모두 통일시킬 순 없을까? 
+
+### Result output
