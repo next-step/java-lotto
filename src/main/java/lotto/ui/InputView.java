@@ -22,16 +22,21 @@ public class InputView {
     }
 
     public static int inputPrice() {
-        System.out.println(PURCHASE_PRICE_MESSAGE);
-        int price = SCANNER.nextInt();
         try {
+            System.out.println(PURCHASE_PRICE_MESSAGE);
+            int price = SCANNER.nextInt();
             validatePrice(price);
+            SCANNER.nextLine(); // Delete newLine
+            return price;
         } catch (InvalidPriceException e) {
+            SCANNER.nextLine(); // Delete newLine
             System.out.println(e.getMessage());
             return inputPrice();
+        } catch (InputMismatchException e) {
+            SCANNER.nextLine(); // Delete newLine
+            System.out.println(INVALID_INPUT_NUMBER_MESSAGE);
+            return inputPrice();
         }
-        SCANNER.nextLine(); // Delete newLine
-        return price;
     }
 
     public static void validatePrice(int price) {
