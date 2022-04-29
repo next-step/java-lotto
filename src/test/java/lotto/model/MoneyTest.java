@@ -14,4 +14,12 @@ class MoneyTest {
       Money money = new Money(-1L);
     }).printStackTrace();
   }
+
+  @Test
+  @DisplayName("돈을 가지고 있지 않으면 로또를 가질 수 없습니다.")
+  void moneyEmptyException() {
+    assertThrows(RuntimeException.class, () -> {
+      Money money = new Money();
+    }).printStackTrace();
+  }
 }
