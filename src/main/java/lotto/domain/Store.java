@@ -13,7 +13,7 @@ public class Store {
         final List<Lotto> lottos = new ArrayList<>();
         int count = countOfLottos(price);
 
-        while (count > 0) {
+        while(count > 0) {
             lottos.add(LottoFactory.createLottoAutomatically());
             count--;
         }

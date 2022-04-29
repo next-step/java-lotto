@@ -6,11 +6,11 @@ import java.util.*;
 
 public class Lotto {
     private static final int VALID_LOTTO_LENGTH = 6;
-    private final Set<Integer> lotto;
+    private final Set<Integer> lottoNumber;
 
-    Lotto(List<Integer> lotto) {
-        validateLotto(lotto);
-        this.lotto = new HashSet<>(lotto);
+    Lotto(List<Integer> lottoNumber) {
+        validateLotto(lottoNumber);
+        this.lottoNumber = new HashSet<>(lottoNumber);
     }
 
     private void validateLotto(List<Integer> lottoNumber) {
@@ -20,12 +20,12 @@ public class Lotto {
         }
     }
 
-    public Lotto(Integer[] lotto) {
-        this(Arrays.asList(lotto));
+    public Lotto(Integer[] lottoNumber) {
+        this(Arrays.asList(lottoNumber));
     }
 
     public List<Integer> getLottoNumbers() {
-        List<Integer> copy = new ArrayList<>(this.lotto);
+        List<Integer> copy = new ArrayList<>(this.lottoNumber);
         Collections.sort(copy);
         return Collections.unmodifiableList(copy);
     }
@@ -33,13 +33,13 @@ public class Lotto {
     public LottoWinnerType winLotto(Lotto previousLotto, int bonusNumber) {
         int countOfDuplicate = countDuplicateValue(previousLotto);
         if (LottoWinnerType.matchCountWithBonus(countOfDuplicate)) {
-            return LottoWinnerType.valueOf(countOfDuplicate, lotto.contains(bonusNumber));
+            return LottoWinnerType.valueOf(countOfDuplicate, lottoNumber.contains(bonusNumber));
         }
         return LottoWinnerType.valueOf(countOfDuplicate, false);
     }
 
     int countDuplicateValue(Lotto lotto) {
-        Set<Integer> copyOfLotto = new HashSet<>(this.lotto);
+        Set<Integer> copyOfLotto = new HashSet<>(this.lottoNumber);
         copyOfLotto.retainAll(lotto.getLottoNumbers());
 
         return copyOfLotto.size();
@@ -47,6 +47,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return lotto.toString();
+        return lottoNumber.toString();
     }
 }
