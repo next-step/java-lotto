@@ -12,7 +12,7 @@ import static lotto.domain.LottoWinnerType.NON_WIN;
 import static lotto.domain.LottoWinnerType.SECOND_PLACE;
 
 public class ResultView {
-    private static final String COUNT_OF_PURCHASE_MESSAGE = "%s개를 구매했습니다.";
+    private static final String COUNT_OF_PURCHASE_MESSAGE = "수동으로 %s장, 자동으로 %s장을 구매했습니다.";
     private static final String LINE_SEPARATOR = "line.separator";
     private static final String RESULT_TEMPLATE_MESSAGE = "당첨 통계";
     private static final String LINE_DIVIDER = "--------";
@@ -25,8 +25,8 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printCountOfLottos(int count) {
-        System.out.println(String.format(COUNT_OF_PURCHASE_MESSAGE, count));
+    public static void printCountOfLottos(int countOfTotalLotto, int countOfManualLotto) {
+        System.out.println(String.format(COUNT_OF_PURCHASE_MESSAGE, countOfManualLotto, countOfTotalLotto - countOfManualLotto));
     }
 
     public static void printResultOfPurchase(List<Lotto> lottos) {
