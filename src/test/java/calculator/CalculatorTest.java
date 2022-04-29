@@ -13,5 +13,11 @@ class CalculatorTest {
     assertThat(Calculator.calculate("10 + 20 + 30")).isEqualTo(60);
   }
 
+  @Test
+  @DisplayName("뺄셈")
+  void minusTest() {
+    assertThat(Calculator.calculate("10 - 20 - 30")).isEqualTo(-40);
+  }
+
 
 }

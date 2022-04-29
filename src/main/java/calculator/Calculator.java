@@ -21,12 +21,19 @@ public class Calculator {
     for (int i = 0; i < operators.size(); i++) {
       if ("+".equals(operators.get(i))) {
         result = plus(result, operands.get(i + 1));
+      } else if ("-".equals(operators.get(i))) {
+        result = minus(result, operands.get(i + 1));
       }
     }
     return result;
   }
 
-  public static int plus(int a, int b) {
+  private static int plus(int a, int b) {
     return a + b;
   }
+
+  private static int minus(int a, int b) {
+    return a - b;
+  }
+
 }
