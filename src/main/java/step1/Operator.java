@@ -10,7 +10,12 @@ public enum Operator {
     ADD("+", (first, second) -> first + second),
     SUBTRACT("-", (first, second) -> first - second),
     MULTIPLY("*", (first, second) -> first * second),
-    DIVIDE("/", (first, second) -> first / second),
+    DIVIDE("/", (first, second) -> {
+        if (first % second != 0) {
+            throw new IllegalArgumentException("나누어 떨어지는 연산만 가능합니다.");
+        }
+        return first / second;
+    }),
     ;
     private final String value;
     private final BinaryOperator<Integer> operation;
