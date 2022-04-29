@@ -13,7 +13,7 @@ public class CaculaterTest {
     void plus() {
         Caculater caculater = new Caculater("3 + 5 + 2");
 
-        assertThat(caculater.impl()).isEqualTo(10);
+        assertThat(caculater.result()).isEqualTo(10);
     }
     
     @DisplayName("뺄셈 테스트")
@@ -21,7 +21,7 @@ public class CaculaterTest {
     void sub() {
         Caculater caculater = new Caculater("3 - 5 - 2");
 
-        assertThat(caculater.impl()).isEqualTo(-4);
+        assertThat(caculater.result()).isEqualTo(-4);
     }
 
     @DisplayName("나눗셈 테스트")
@@ -29,7 +29,7 @@ public class CaculaterTest {
     void divide() {
         Caculater caculater = new Caculater("15 / 2 / 3");
 
-        assertThat(caculater.impl()).isEqualTo(2);
+        assertThat(caculater.result()).isEqualTo(2);
     }
 
     @DisplayName("곱셈 테스트")
@@ -37,7 +37,7 @@ public class CaculaterTest {
     void multiple() {
         Caculater caculater = new Caculater("3 * 5 * 2");
 
-        assertThat(caculater.impl()).isEqualTo(30);
+        assertThat(caculater.result()).isEqualTo(30);
     }
     
     

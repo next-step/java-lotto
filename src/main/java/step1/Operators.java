@@ -10,14 +10,7 @@ public class Operators {
         operators.add(input);
     }
 
-    public int impl(Integer x, Integer y) {
-        String operator = operators.poll();
-
-        for (OperatorCaculate value : OperatorCaculate.values()) {
-            if (operator.equals(value.getOperator())) {
-                return OperatorCaculate.valueOf(value.name()).caclulate(x, y);
-            }
-        }
-        return 0;
+    public String peek() {
+        return operators.poll();
     }
 }

@@ -33,10 +33,20 @@ public class Caculater {
         return numbers;
     }
 
-    public int impl() {
+    private int calculation(int operand) {
+        String operator = operators.peek();
+        for (OperatorCaculate value : OperatorCaculate.values()) {
+            if (operator.equals(value.getOperator())) {
+                return OperatorCaculate.valueOf(value.name()).caclulate(operand, numbers.pick());
+            }
+        }
+        return 0;
+    }
+
+    public int result() {
         int result = numbers.pick();
         while(numbers.isNotEmpty()) {
-            result = operators.impl(result, numbers.pick());
+            result = calculation(result);
         }
         return result;
     }
