@@ -1,6 +1,7 @@
 package step1;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class Input {
@@ -14,10 +15,14 @@ public class Input {
     private final Index index;
 
     public Input(String input) {
+        this(input, Index.ofStart());
+    }
+
+    public Input(String input, Index index) {
         validate(input);
         validatePattern(input);
         this.values = List.of(input.split(DELIMITER));
-        this.index = Index.ofStart();
+        this.index = index;
     }
 
     private void validate(String input) {
@@ -41,17 +46,30 @@ public class Input {
         return toInt(values.get(firstOperandIndex));
     }
 
-    public Operator getOperator() {
+    public Operator getNextOperator() {
         int operatorIndex = this.index.getNextOperatorIndex();
         return Operator.toEnum(values.get(operatorIndex));
     }
 
-    public int getOperand() {
+    public int getNextOperand() {
         int operandIndex = this.index.getNextOperandIndex();
         return toInt(values.get(operandIndex));
     }
 
     private int toInt(String value) {
         return Integer.parseInt(value);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Input input = (Input) o;
+        return Objects.equals(values, input.values) && Objects.equals(index, input.index);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(values, index);
     }
 }
