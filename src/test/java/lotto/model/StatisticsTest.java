@@ -2,13 +2,10 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import lotto.enums.Grade;
-import lotto.model.Product;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,36 +14,31 @@ class StatisticsTest {
   @Test
   @DisplayName("로또 번호가 맞는지 테스트")
   void awardCount() {
+    List<Product> allLotto = Arrays.asList(new Product(
+            Set.of(new LottoNo(8),
+                new LottoNo(6),
+                new LottoNo(3),
+                new LottoNo(4),
+                new LottoNo(5),
+                new LottoNo(7))),
+        new Product(Set.of(
+            new LottoNo(6),
+            new LottoNo(7),
+            new LottoNo(8),
+            new LottoNo(9),
+            new LottoNo(11),
+            new LottoNo(30))));
 
-    Set<LottoNo> fistLotto = new HashSet<>();
-    fistLotto.add(new LottoNo(8));
-    fistLotto.add(new LottoNo(6));
-    fistLotto.add(new LottoNo(3));
-    fistLotto.add(new LottoNo(4));
-    fistLotto.add(new LottoNo(5));
-    fistLotto.add(new LottoNo(7));
-
-    Set<LottoNo> secondLotto = new HashSet<>();
-    secondLotto.add(new LottoNo(6));
-    secondLotto.add(new LottoNo(7));
-    secondLotto.add(new LottoNo(8));
-    secondLotto.add(new LottoNo(9));
-    secondLotto.add(new LottoNo(11));
-    secondLotto.add(new LottoNo(30));
-
-    Set<LottoNo> winLotto = new HashSet<>();
-    winLotto.add(new LottoNo(8));
-    winLotto.add(new LottoNo(7));
-    winLotto.add(new LottoNo(6));
-    winLotto.add(new LottoNo(21));
-    winLotto.add(new LottoNo(45));
-    winLotto.add(new LottoNo(29));
-
-
-
-    List<Product> allLotto = Arrays.asList(new Product(fistLotto),
-        new Product(secondLotto));
-    Product winNumbers = new Product(winLotto);
+    Product winNumbers = new Product(
+        Set.of(
+            new LottoNo(8),
+            new LottoNo(7),
+            new LottoNo(6),
+            new LottoNo(21),
+            new LottoNo(45),
+            new LottoNo(29)
+        )
+    );
     Statistics statistics = new Statistics();
     assertThat(statistics.result(Grade.THREE, allLotto, winNumbers)).isEqualTo(2);
   }
@@ -55,10 +47,10 @@ class StatisticsTest {
   @DisplayName("승리 수당 테스트")
   void winBenefit() {
     Statistics statistics = new Statistics();
-    statistics = statistics.winReward(Grade.THREE,1);
-    statistics = statistics.winReward(Grade.FOUR,2);
-    statistics = statistics.winReward(Grade.FIVE,1);
-    statistics = statistics.winReward(Grade.SIX,1);
+    statistics = statistics.winReward(Grade.THREE, 1);
+    statistics = statistics.winReward(Grade.FOUR, 2);
+    statistics = statistics.winReward(Grade.FIVE, 1);
+    statistics = statistics.winReward(Grade.SIX, 1);
     assertThat(statistics).isEqualTo(new Statistics(2001605000L));
   }
 }

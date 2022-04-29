@@ -1,8 +1,5 @@
 package lotto.enums;
 
-import java.util.List;
-import lotto.model.Product;
-
 public enum Grade {
 
   THREE(3, 5_000),
