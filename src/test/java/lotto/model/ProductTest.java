@@ -14,6 +14,24 @@ import org.junit.jupiter.api.Test;
 class ProductTest {
 
   @Test
+  @DisplayName("당첨 번호와 상품으로 만들어진 로또의 번호가 일치하는지 확인한다.")
+  void winningProduct() {
+    assertThat(new Product(Set.of(
+        new LottoNo(1),
+        new LottoNo(2),
+        new LottoNo(3),
+        new LottoNo(4),
+        new LottoNo(5),
+        new LottoNo(6)))).isEqualTo(Product.from(Set.of(
+        new LottoNo(1),
+        new LottoNo(2),
+        new LottoNo(3),
+        new LottoNo(4),
+        new LottoNo(5),
+        new LottoNo(6))));
+  }
+
+  @Test
   @DisplayName("당첨 번호와 몇개가 맞는지 테스트한다")
   void coincide() {
     Product product = new Product(
