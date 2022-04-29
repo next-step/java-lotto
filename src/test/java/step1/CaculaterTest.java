@@ -39,6 +39,12 @@ public class CaculaterTest {
 
         assertThat(caculater.result()).isEqualTo(30);
     }
-    
-    
+
+    @DisplayName("계산기 테스트")
+    @Test
+    void calculator() {
+        Caculater caculater = new Caculater("5 * 2 / 3 + 1 * 2 - 1");
+
+        assertThat(caculater.result()).isEqualTo(7);
+    }
 }
