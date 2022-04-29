@@ -1,6 +1,8 @@
 package lottoauto.controller;
 
 import lottoauto.service.LottoGame;
+import lottoauto.view.InputView;
+import lottoauto.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,41 +33,21 @@ import java.util.Scanner;
  * 당첨 통계
  * ---------
  * 3개 일치 (5000원)- 1개
+ * 총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)
  * 4개 일치 (50000원)- 0개
  * 5개 일치 (1500000원)- 0개
  * 6개 일치 (2000000000원)- 0개
- * 총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)
  */
 public class LottoController {
     public static void main(String[] args) {
-        System.out.println("구입금액을 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
-
-        int moneyToBuyLotto = Integer.parseInt(scanner.nextLine());
-        LottoGame lottoGame = new LottoGame(moneyToBuyLotto);
+        LottoGame lottoGame = new LottoGame(InputView.askLottoMoney());
         lottoGame.buyLotto();
 
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String winningLottoString = scanner.nextLine();
-
-        String[] winningLottoSplits = winningLottoString.split(",");
-        List<Integer> winningLotto = new ArrayList<>();
-        for (int i = 0; i < winningLottoSplits.length; i++) {
-            winningLotto.add(Integer.parseInt(winningLottoSplits[i]));
-        }
-        lottoGame.checkWinningLotto(winningLotto);
+        lottoGame.checkWinningLotto(InputView.askWinningLotto());
 
         lottoGame.start();
 
-        System.out.println("당첨 통계");
-        System.out.println("---------");
-        System.out.println("3개 일치 (5000원)- " + lottoGame.getMatchThreeCount() + "개");
-        System.out.println("4개 일치 (50000원)- " + lottoGame.getMatchFourCount() + "개");
-        System.out.println("5개 일치 (1500000원)- " + lottoGame.getMatchFiveCount() + "개");
-        System.out.println("6개 일치 (2000000000원)- " + lottoGame.getMatchSixCount() + "개");
-        System.out.print("총 수익률은 " + lottoGame.getProfitRate() + "입니다.");
-        if(lottoGame.getLottoCount() < 1){
-            System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
-        }
+        ResultView.printLottoGameResult(lottoGame);
+        ResultView.printLottoGameProfitRate(lottoGame);
     }
 }
