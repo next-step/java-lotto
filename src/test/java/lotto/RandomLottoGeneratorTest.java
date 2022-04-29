@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.model.LottoNumber;
 import lotto.model.Lottos;
 import lotto.model.RandomLottoGenerator;
 import org.junit.jupiter.api.DisplayName;
@@ -37,23 +38,8 @@ public class RandomLottoGeneratorTest {
     void lottosTest() {
         Lottos lottos = new RandomLottoGenerator().get();
 
-        List<Integer> lottoNums = lottos.get();
+        List<LottoNumber> lottoNums = lottos.get();
 
         assertThat(lottoNums).hasSize(6);
-    }
-
-    @Test
-    @DisplayName("로또 번호 6개 모두 1-45사이의 값을 가지고 있다. ")
-    void getTest() {
-        // given
-        Lottos lottos = new RandomLottoGenerator().get();
-
-        // when
-        List<Integer> lottoNums = lottos.get();
-
-        // then
-        for (int i = 0; i < lottoNums.size(); i++) {
-            assertThat(lottoNums.get(i)).isBetween(1, 45);
-        }
     }
 }

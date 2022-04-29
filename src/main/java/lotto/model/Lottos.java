@@ -8,26 +8,26 @@ import java.util.Objects;
 public final class Lottos {
     private static final int LOTTO_COUNT = 6;
 
-    private final List<Integer> lottos;
+    private final List<LottoNumber> lottos;
 
-    public Lottos(List<Integer> lottos) {
+    public Lottos(List<LottoNumber> lottos) {
         validate(lottos);
         this.lottos = new ArrayList<>(lottos);
     }
 
-    private void validate(List<Integer> lottos) {
+    private void validate(List<LottoNumber> lottos) {
         Objects.requireNonNull(lottos, "lottos는 null일 수 없습니다.");
         if (lottos.size() != LOTTO_COUNT) {
             throw new IllegalArgumentException("lottos 의 사이즈는 6이어야 합니다. 입력 사이즈: " + lottos.size());
         }
     }
 
-    public List<Integer> get() {
+    public List<LottoNumber> get() {
         return Collections.unmodifiableList(lottos);
     }
 
     public int getMatchCount(Lottos result) {
-        List<Integer> resultLottos = result.get();
+        List<LottoNumber> resultLottos = result.get();
         int length = resultLottos.size();
         int count = 0;
         for (int i = 0; i < length; i++) {
@@ -36,7 +36,7 @@ public final class Lottos {
         return count;
     }
 
-    private int updateCount(int number, int count) {
+    private int updateCount(LottoNumber number, int count) {
         if (lottos.contains(number)) {
             count++;
         }

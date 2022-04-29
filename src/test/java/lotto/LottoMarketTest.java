@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.controller.LottoMarket;
+import lotto.model.LottoNumber;
 import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.RandomLottoGenerator;
@@ -13,6 +14,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.List;
 import java.util.Map;
 
+import static lotto.LottoNumberTest.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -48,12 +50,15 @@ public class LottoMarketTest {
     @Test
     @DisplayName("구매한 로또와 당첨 로또를 입력하면 통계를 계산할 수 있다.")
     void getLottoStatisticTest() {
+        LottoNumber ten = new LottoNumber(10);
+        LottoNumber eleven = new LottoNumber(11);
+        LottoNumber twelve = new LottoNumber(12);
         // given
         Lottos winnerLottos = WinnerLottosTest.WINNER_LOTTOS.getLottos();
-        Lottos threeMatchLottos = new Lottos(Lists.newArrayList(1, 2, 3, 10, 11, 12));
-        Lottos fourMatchLottos = new Lottos(Lists.newArrayList(1, 2, 3, 4, 11, 12));
-        Lottos fiveMatchLottos = new Lottos(Lists.newArrayList(1, 2, 3, 4, 5, 12));
-        Lottos sixMatchLottos = new Lottos(Lists.newArrayList(1, 2, 3, 4, 5, 6));
+        Lottos threeMatchLottos = new Lottos(Lists.newArrayList(ONE, TWO, THREE, ten, eleven, twelve));
+        Lottos fourMatchLottos = new Lottos(Lists.newArrayList(ONE, TWO, THREE, FOUR, eleven, twelve));
+        Lottos fiveMatchLottos = new Lottos(Lists.newArrayList(ONE, TWO, THREE, FOUR, FIVE, twelve));
+        Lottos sixMatchLottos = new Lottos(Lists.newArrayList(ONE, TWO, THREE, FOUR, FIVE, SIX));
 
         // when
         Map<Integer, Integer> lottoStatistics = LottoMarket.getLottoStatistics(Lists.newArrayList(threeMatchLottos, fourMatchLottos, fiveMatchLottos, sixMatchLottos), winnerLottos);

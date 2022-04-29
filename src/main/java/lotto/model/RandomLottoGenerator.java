@@ -19,10 +19,10 @@ public class RandomLottoGenerator implements LottoGenerator {
         return new Lottos(getLottoNumbers());
     }
 
-    private List<Integer> getLottoNumbers() {
-        List<Integer> numbers = initNumbers();
+    private List<LottoNumber> getLottoNumbers() {
+        List<LottoNumber> numbers = initNumbers();
 
-        List<Integer> lottos = new ArrayList<>(LOTTO_SIZE);
+        List<LottoNumber> lottos = new ArrayList<>(LOTTO_SIZE);
         for (int i = 0; i < LOTTO_SIZE; i++) {
             Collections.shuffle(numbers);
             lottos.add(numbers.remove(i));
@@ -30,10 +30,10 @@ public class RandomLottoGenerator implements LottoGenerator {
         return lottos;
     }
 
-    private List<Integer> initNumbers() {
-        List<Integer> numbers = new LinkedList<>();
+    private List<LottoNumber> initNumbers() {
+        List<LottoNumber> numbers = new LinkedList<>();
         for (int i = LOTTO_NUM_LOWER_BOUND; i <= LOTTO_NUM_UPPER_BOUND; i++) {
-            numbers.add(i);
+            numbers.add(new LottoNumber(i));
         }
         return numbers;
     }

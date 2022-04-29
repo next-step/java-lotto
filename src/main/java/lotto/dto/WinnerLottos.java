@@ -1,5 +1,6 @@
 package lotto.dto;
 
+import lotto.model.LottoNumber;
 import lotto.model.Lottos;
 
 import java.util.Arrays;
@@ -26,7 +27,7 @@ public class WinnerLottos {
     }
 
     private Lottos getLottos(String lottoNumbers) {
-        List<Integer> lottos = splitNumbers(lottoNumbers);
+        List<LottoNumber> lottos = splitNumbers(lottoNumbers);
 
         if (lottos.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 당첨 번호는 6개로 이루어져야 합니다. lottos:" + lottoNumbers);
@@ -35,11 +36,11 @@ public class WinnerLottos {
         return new Lottos(lottos);
     }
 
-    private List<Integer> splitNumbers(String lottoNumbers) {
+    private List<LottoNumber> splitNumbers(String lottoNumbers) {
         try {
-            List<Integer> lottos = Arrays
+            List<LottoNumber> lottos = Arrays
                     .stream(lottoNumbers.split(DELIMITER))
-                    .map(Integer::parseInt)
+                    .map(LottoNumber::new)
                     .collect(Collectors.toList());
             return lottos;
         } catch (NumberFormatException e) {
