@@ -30,6 +30,7 @@ public class LottoGame {
         }
         this.money = money;
         this.lottoCount = money / Lotto.PRICE;
+        System.out.println(this.lottoCount+"개를 구매했습니다.");
     }
 
     public int getLottoCount() {
@@ -51,5 +52,4 @@ public class LottoGame {
             lottos.add(lotto);
         }
     }
-
 }

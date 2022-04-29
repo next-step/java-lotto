@@ -32,5 +32,6 @@ public class Lotto {
         for (Integer number : winnerLotto.getNumbers()) {
             if(numbers.contains(number)) matchCount += 1;
         }
+        System.out.println("matchCount : " + matchCount);
     }
 }
