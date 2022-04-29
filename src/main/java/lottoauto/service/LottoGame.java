@@ -19,11 +19,6 @@ public class LottoGame {
     private final List<Lotto> lottos = new ArrayList<>();
     private Lotto winningLotto;
 
-//    private final int matchThree;
-//    private final int matchFour;
-//    private final int matchFive;
-//    private final int matchSix;
-
     public LottoGame(int money) {
         if(money < Lotto.PRICE) {
             throw new IllegalArgumentException("로또를 살 수 없습니다.");
@@ -45,11 +40,16 @@ public class LottoGame {
         winningLotto = new Lotto(numbers);
     }
 
-    public void start() {
+    public void buyLotto() {
         for (int i = 0; i < lottoCount; i++) {
             Lotto lotto = new Lotto();
-            lotto.match(winningLotto);
             lottos.add(lotto);
+        }
+    }
+
+    public void start() {
+        for (Lotto lotto : lottos) {
+            lotto.match(winningLotto);
         }
     }
 }

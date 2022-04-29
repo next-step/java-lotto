@@ -7,9 +7,14 @@ public class Lotto {
 
     private List<Integer> numbers;
     private int matchCount;
+    private boolean matchThree = false;
+    private boolean matchFour = false;
+    private boolean matchFive = false;
+    private boolean matchSix = false;
 
     public Lotto(){
         this.numbers = LottoGenerator.makeLotto();
+        System.out.println(this.numbers);
     }
 
     public Lotto(List<Integer> inputNumbers) {
@@ -23,8 +28,20 @@ public class Lotto {
         return numbers;
     }
 
-    public int getMatchCount() {
-        return matchCount;
+    public boolean isMatchThree() {
+        return matchThree;
+    }
+
+    public boolean isMatchFour() {
+        return matchFour;
+    }
+
+    public boolean isMatchFive() {
+        return matchFive;
+    }
+
+    public boolean isMatchSix() {
+        return matchSix;
     }
 
     public void match(Lotto winnerLotto) {
@@ -33,5 +50,17 @@ public class Lotto {
             if(numbers.contains(number)) matchCount += 1;
         }
         System.out.println("matchCount : " + matchCount);
+        if (matchCount == 3){
+            matchThree = true;
+        }
+        if (matchCount == 4){
+            matchFour = true;
+        }
+        if (matchCount == 5){
+            matchFive = true;
+        }
+        if (matchCount == 6){
+            matchSix = true;
+        }
     }
 }

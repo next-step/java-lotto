@@ -2,6 +2,8 @@ package lottoauto.controller;
 
 import lottoauto.service.LottoGame;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -41,6 +43,16 @@ public class LottoController {
 
         int moneyToBuyLotto = scanner.nextInt();
         LottoGame lottoGame = new LottoGame(moneyToBuyLotto);
+        lottoGame.buyLotto();
+
+        String winningLottoString = scanner.nextLine();
+        String[] winningLottoSplits = winningLottoString.split(", ");
+        List<Integer> winningLotto = new ArrayList<>();
+        for (String winningLottoSplit : winningLottoSplits) {
+            winningLotto.add(Integer.parseInt(winningLottoSplit));
+        }
+        lottoGame.checkWinningLotto(winningLotto);
+
         lottoGame.start();
 
     }

@@ -64,6 +64,6 @@ class LottoTest {
         Lotto winningLotto = new Lotto(List.of(1,2,3,4,5,6));
         lotto = new Lotto(List.of(1,2,3,11,12,13));
         lotto.match(winningLotto);
-        assertThat(lotto.getMatchCount()).isEqualTo(3);
+        assertThat(lotto.isMatchThree()).isTrue();
     }
 }

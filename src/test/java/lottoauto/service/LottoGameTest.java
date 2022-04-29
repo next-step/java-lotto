@@ -28,7 +28,7 @@ class LottoGameTest {
     void lotto_generate_test(){
         lottoGame = new LottoGame(17600);
         lottoGame.checkWinningLotto(List.of(1,2,3,4,5,6));
-        lottoGame.start();
+        lottoGame.buyLotto();
         assertThat(lottoGame.all().size()).isEqualTo(17);
     }
 }
