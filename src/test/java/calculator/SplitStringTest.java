@@ -1,6 +1,8 @@
 package calculator;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.List;
 
@@ -14,9 +16,9 @@ class SplitStringTest {
         assertThat(result).isEqualTo(List.of("1", "+", "3", "-", "2", "*", "5", "/", "2"));
     }
 
-    @Test
-    void split_입력문자열_비어있는_경우() {
-        assertThatThrownBy(() -> SplitString.split(null)).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> SplitString.split("")).isInstanceOf(IllegalArgumentException.class);
+    @ParameterizedTest
+    @NullAndEmptySource
+    void split_입력문자열_비어있는_경우(String elem) {
+        assertThatThrownBy(() -> SplitString.split(elem)).isInstanceOf(IllegalArgumentException.class);
     }
 }
