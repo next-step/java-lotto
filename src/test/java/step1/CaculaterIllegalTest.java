@@ -39,14 +39,14 @@ public class CaculaterIllegalTest {
     }
 
 
-//    @DisplayName("사칙연산 기호가 아닌 경우 exception")
-//    @ParameterizedTest
-//    @ValueSource(strings = {"1 x 2 + 3", "1 $ 3"})
-//    void opereatorCheck(String input) {
-//        assertThatThrownBy(() -> {
-//            Caculater caculater = new Caculater(input);
-//            caculater.result();
-//        }).isInstanceOf(IllegalArgumentException.class)
-//                .hasMessage("잘못된 연산기호");
-//    }
+    @DisplayName("사칙연산 기호가 아닌 경우 exception")
+    @ParameterizedTest
+    @ValueSource(strings = {"1 x 2 + 3", "1 $ 3"})
+    void opereatorCheck(String input) {
+        assertThatThrownBy(() -> {
+            Caculater caculater = new Caculater(input);
+            caculater.result();
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("사칙연산 기호가 아닙니다");
+    }
 }

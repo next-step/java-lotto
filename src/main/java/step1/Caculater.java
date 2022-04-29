@@ -4,8 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Caculater {
-    private static final String OPERATOR_PATTERN = "[+*/-]";
-    private static final String NUMBERS_PATTERN = "[0-9]+";
     private static final String EMPTY_SPACE_PATTERN = "([0-9]+ . )+[0-9]";
     private static final String MUST_INCLUDE_EMPTY = "반드시 빈 공백이 포함되어야 합니다";
     private static final String MUST_NOT_NULL = "입력값은 NULL 이 될 수 없다";
@@ -16,8 +14,8 @@ public class Caculater {
 
     public Caculater(String input) {
         validation(input);
-        numbers = findNumber(input);
-        operators = findOperator(input);
+        numbers = new Numbers(input);
+        operators = new Operators(input);
     }
 
     private void validation(String input) {
@@ -33,24 +31,6 @@ public class Caculater {
 
     private boolean isInclueEmptySpace(String input) {
         return Pattern.compile(EMPTY_SPACE_PATTERN).matcher(input).matches();
-    }
-
-    private Operators findOperator(String input) {
-        Operators operators = new Operators();
-        Matcher matcher = Pattern.compile(OPERATOR_PATTERN).matcher(input);
-        while(matcher.find()) {
-            operators.add(matcher.group());
-        }
-        return operators;
-    }
-
-    private Numbers findNumber(String input) {
-        Numbers numbers = new Numbers();
-        Matcher matcher = Pattern.compile(NUMBERS_PATTERN).matcher(input);
-        while(matcher.find()) {
-            numbers.add(Integer.valueOf(matcher.group()));
-        }
-        return numbers;
     }
 
     private int calculation(int operand) {
