@@ -1,0 +1,44 @@
+package step1;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+@DisplayName("사칙연산 테스트")
+public class CaculaterTest {
+
+    @DisplayName("덧셈 테스트")
+    @Test
+    void plus() {
+        Caculater caculater = new Caculater("3 + 5 + 2");
+
+        assertThat(caculater.impl()).isEqualTo(10);
+    }
+    
+    @DisplayName("뺄셈 테스트")
+    @Test
+    void sub() {
+        Caculater caculater = new Caculater("3 - 5 - 2");
+
+        assertThat(caculater.impl()).isEqualTo(-4);
+    }
+
+    @DisplayName("나눗셈 테스트")
+    @Test
+    void divide() {
+        Caculater caculater = new Caculater("15 / 2 / 3");
+
+        assertThat(caculater.impl()).isEqualTo(2);
+    }
+
+    @DisplayName("곱셈 테스트")
+    @Test
+    void multiple() {
+        Caculater caculater = new Caculater("3 * 5 * 2");
+
+        assertThat(caculater.impl()).isEqualTo(30);
+    }
+    
+    
+}
