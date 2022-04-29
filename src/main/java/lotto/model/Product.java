@@ -6,6 +6,7 @@ import java.util.Set;
 import lotto.enums.ChoiceType;
 import lotto.enums.Grade;
 import lotto.exception.LottoSizeException;
+import lotto.util.AwardNumberUtil;
 
 public final class Product {
 
@@ -15,6 +16,10 @@ public final class Product {
   public Product(Set<LottoNo> lottoNumbers) {
     valid(lottoNumbers);
     this.lottoNumbers = lottoNumbers;
+  }
+
+  public static Product from(Set<LottoNo> winnerNumbers) {
+    return new Product(winnerNumbers);
   }
 
   private void valid(Set<LottoNo> lottoNumbers) {
