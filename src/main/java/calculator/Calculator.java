@@ -23,6 +23,8 @@ public class Calculator {
         result = plus(result, operands.get(i + 1));
       } else if ("-".equals(operators.get(i))) {
         result = minus(result, operands.get(i + 1));
+      } else if ("*".equals(operators.get(i))) {
+        result = times(result, operands.get(i + 1));
       }
     }
     return result;
@@ -34,6 +36,10 @@ public class Calculator {
 
   private static int minus(int a, int b) {
     return a - b;
+  }
+
+  private static int times(int a, int b) {
+    return a * b;
   }
 
 }

@@ -19,5 +19,10 @@ class CalculatorTest {
     assertThat(Calculator.calculate("10 - 20 - 30")).isEqualTo(-40);
   }
 
+  @Test
+  @DisplayName("곱하기")
+  void timesTest() {
+    assertThat(Calculator.calculate("10 * 20 * 30")).isEqualTo(6000);
+  }
 
 }
