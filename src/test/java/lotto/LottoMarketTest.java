@@ -1,11 +1,12 @@
 package lotto;
 
 import lotto.controller.LottoMarket;
-import lotto.model.LottoNumber;
 import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 import lotto.model.Money;
 import lotto.model.RandomLottoGenerator;
 import org.assertj.core.util.Lists;
+import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -55,10 +56,10 @@ public class LottoMarketTest {
         LottoNumber twelve = new LottoNumber(12);
         // given
         Lotto winnerLotto = WinnerLottoTest.WINNER_LOTTO.getLotto();
-        Lotto threeMatchLotto = new Lotto(Lists.newArrayList(ONE, TWO, THREE, ten, eleven, twelve));
-        Lotto fourMatchLotto = new Lotto(Lists.newArrayList(ONE, TWO, THREE, FOUR, eleven, twelve));
-        Lotto fiveMatchLotto = new Lotto(Lists.newArrayList(ONE, TWO, THREE, FOUR, FIVE, twelve));
-        Lotto sixMatchLotto = new Lotto(Lists.newArrayList(ONE, TWO, THREE, FOUR, FIVE, SIX));
+        Lotto threeMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, ten, eleven, twelve));
+        Lotto fourMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, eleven, twelve));
+        Lotto fiveMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, twelve));
+        Lotto sixMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, SIX));
 
         // when
         Map<Integer, Integer> lottoStatistics = LottoMarket.getLottoStatistics(Lists.newArrayList(threeMatchLotto, fourMatchLotto, fiveMatchLotto, sixMatchLotto), winnerLotto);

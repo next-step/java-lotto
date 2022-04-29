@@ -1,11 +1,11 @@
 package lotto.dto;
 
-import lotto.model.LottoNumber;
 import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinnerLotto {
@@ -27,7 +27,7 @@ public class WinnerLotto {
     }
 
     private Lotto getLotto(String lottoNumbers) {
-        List<LottoNumber> lotto = splitNumbers(lottoNumbers);
+        Set<LottoNumber> lotto = splitNumbers(lottoNumbers);
 
         if (lotto.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 당첨 번호는 6개로 이루어져야 합니다. lottos:" + lottoNumbers);
@@ -36,12 +36,12 @@ public class WinnerLotto {
         return new Lotto(lotto);
     }
 
-    private List<LottoNumber> splitNumbers(String lottoNumbers) {
+    private Set<LottoNumber> splitNumbers(String lottoNumbers) {
         try {
-            List<LottoNumber> lotto = Arrays
+            Set<LottoNumber> lotto = Arrays
                     .stream(lottoNumbers.split(DELIMITER))
                     .map(LottoNumber::new)
-                    .collect(Collectors.toList());
+                    .collect(Collectors.toSet());
             return lotto;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("로또 당첨 번호 입력이 올바르지 않습니다. ', '로 구분해서 숫자 6개를 입력해주세요. lottos:" + lottoNumbers);

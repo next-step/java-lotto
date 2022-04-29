@@ -1,9 +1,10 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class RandomLottoGenerator implements LottoGenerator {
 
@@ -19,10 +20,10 @@ public class RandomLottoGenerator implements LottoGenerator {
         return new Lotto(getLottoNumbers());
     }
 
-    private List<LottoNumber> getLottoNumbers() {
+    private Set<LottoNumber> getLottoNumbers() {
         List<LottoNumber> numbers = initNumbers();
 
-        List<LottoNumber> lotto = new ArrayList<>(LOTTO_SIZE);
+        Set<LottoNumber> lotto = new LinkedHashSet<>(LOTTO_SIZE);
         for (int i = 0; i < LOTTO_SIZE; i++) {
             Collections.shuffle(numbers);
             lotto.add(numbers.remove(i));

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -38,7 +39,7 @@ public class RandomLottoGeneratorTest {
     void lottoTest() {
         Lotto lotto = new RandomLottoGenerator().get();
 
-        List<LottoNumber> lottoNums = lotto.get();
+        Set<LottoNumber> lottoNums = lotto.get();
 
         assertThat(lottoNums).hasSize(6);
     }
