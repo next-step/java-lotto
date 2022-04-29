@@ -23,7 +23,8 @@ class LottoNumbersTest {
   @DisplayName("번호 생성 클래스를 받아 잘 생성되는지 확인")
   @ValueSource(strings = {"1,5,10", "1,10", "1,10,13"})
   void generator(String numbers) {
-    LottoNumbers lottoNumbers = new LottoNumbers(numbers.split(",").length, new FixedNumberGenerator(numbers));
+    LottoNumbers lottoNumbers = new LottoNumbers(numbers.split(",").length,
+        new FixedNumberGenerator(numbers));
 
     assertThat(lottoNumbers).usingRecursiveComparison()
         .isEqualTo(new LottoNumbers(numbers.split(",").length, new FixedNumberGenerator(numbers)));

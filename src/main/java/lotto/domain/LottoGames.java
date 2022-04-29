@@ -23,4 +23,7 @@ public class LottoGames {
     return new LottoDrawResults(lottoDrawResults);
   }
 
+  public List<LottoGame> getValues() {
+    return values;
+  }
 }

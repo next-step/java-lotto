@@ -5,7 +5,8 @@ import lotto.exception.InvalidLottoGameException;
 
 public class LottoGame {
 
-  private static final int NUMBER_COUNT = 6;
+  public static final int NUMBER_COUNT = 6;
+  public static final int GAME_PRICE = 1000;
   private final LottoNumbers lottoNumbers;
 
   public LottoGame(String lottoNumbers) {
@@ -29,4 +30,7 @@ public class LottoGame {
     return new LottoDrawResult(matchCount, LottoReword.getWinMoney(matchCount));
   }
 
+  public LottoNumbers getLottoNumbers() {
+    return lottoNumbers;
+  }
 }

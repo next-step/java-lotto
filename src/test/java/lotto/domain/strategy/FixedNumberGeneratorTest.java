@@ -15,7 +15,7 @@ class FixedNumberGeneratorTest {
     FixedNumberGenerator fixedNumberGenerator = new FixedNumberGenerator(numbers);
     String[] numberSplitted = numbers.split(",");
 
-    for (int i=0;i<numberSplitted.length;i++){
+    for (int i = 0; i < numberSplitted.length; i++) {
       assertThat(fixedNumberGenerator.generate()).isEqualTo(Integer.valueOf(numberSplitted[i]));
     }
 

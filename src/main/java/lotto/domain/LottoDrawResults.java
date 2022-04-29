@@ -34,4 +34,7 @@ public class LottoDrawResults {
     }
   }
 
+  public List<LottoDrawResult> getValues() {
+    return values;
+  }
 }
