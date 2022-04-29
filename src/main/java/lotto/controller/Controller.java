@@ -7,6 +7,7 @@ import lotto.ui.ResultView;
 public class Controller {
     public static void main(String[] args) {
         int price = InputView.inputPrice();
+        int countOfManualLotto = InputView.inputCountOfManualLotto();
 
         Lottos lottos = Store.pay(price);
 

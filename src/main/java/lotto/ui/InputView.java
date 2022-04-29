@@ -13,6 +13,8 @@ public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String PREVIOUS_WEEK_LOTTO_MESSAGE = "지난 주 당첨번호를 입력해주세요.";
     private static final String BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해주세요.";
+    private static final String COUNT_OF_MANUAL_LOTTO_MESSAGE = "수동으로 구매할 로또 수를 입력해주세요.";
+    private static final String MANUAL_LOTTO_MESSAGE = "수동으로 구매할 번호를 입력해주세요.";
 
     private InputView() {
     }
@@ -53,5 +55,12 @@ public class InputView {
     public static int inputBonusNumber() {
         System.out.println(BONUS_NUMBER_MESSAGE);
         return SCANNER.nextInt();
+    }
+
+    public static int inputCountOfManualLotto() {
+        System.out.println(COUNT_OF_MANUAL_LOTTO_MESSAGE);
+        int countOfManualLotto = SCANNER.nextInt();
+        SCANNER.nextLine(); // Delete newLine
+        return countOfManualLotto;
     }
 }
