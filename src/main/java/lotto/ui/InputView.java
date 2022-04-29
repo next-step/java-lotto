@@ -2,6 +2,7 @@ package lotto.ui;
 
 import lotto.domain.Lotto;
 import lotto.exception.InvalidLottoLengthException;
+import lotto.exception.InvalidLottoNumberException;
 import lotto.exception.InvalidPriceException;
 import lotto.util.Utility;
 
@@ -41,6 +42,9 @@ public class InputView {
             Integer[] lottoNumber = Utility.convertStringArrayToIntegerArray(Utility.split(SCANNER.nextLine()));
             return new Lotto(lottoNumber);
         } catch (InvalidLottoLengthException e) {
+            System.out.println(e.getMessage());
+            return inputLottoOfPreviousWeek();
+        } catch (InvalidLottoNumberException e) {
             System.out.println(e.getMessage());
             return inputLottoOfPreviousWeek();
         }

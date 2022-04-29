@@ -14,4 +14,8 @@ public class Utility {
         }
         return integerArray;
     }
+
+    public static boolean checkNumberRange(int number, int minNumber, int maxNumber) {
+        return (number < minNumber) || (number > maxNumber);
+    }
 }

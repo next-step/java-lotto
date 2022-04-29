@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import lotto.exception.InvalidLottoLengthException;
+import lotto.exception.InvalidLottoNumberException;
+import lotto.util.Utility;
 
 import java.util.*;
 
@@ -17,6 +19,16 @@ public class Lotto {
         final Set<Integer> lotto = new HashSet<>(lottoNumber);
         if (VALID_LOTTO_LENGTH != lotto.size()) {
             throw new InvalidLottoLengthException(lotto.size());
+        }
+
+        for (Integer number : lotto) {
+            checkLottoNumberRange(number);
+        }
+    }
+
+    private void checkLottoNumberRange(Integer number) {
+        if (Utility.checkNumberRange(number, LottoFactory.MIN_LOTTO_NUMBER, LottoFactory.MAX_LOTTO_NUMBER)) {
+            throw new InvalidLottoNumberException(number);
         }
     }
 
