@@ -1,8 +1,5 @@
 package lotto.model;
 
-import lotto.strategy.NumberGenerateStrategy;
-import lotto.strategy.RandomNumberGenerateStrategy;
-
 public class LottoNumber {
 
   private static final int LOTTO_NUMBER_RANGE_START = 1;
@@ -20,6 +17,10 @@ public class LottoNumber {
     return new LottoNumber(value);
   }
 
+  public static LottoNumber create(String winningLottoNumber) {
+    return new LottoNumber(convertToNumber(winningLottoNumber));
+  }
+
   public int getValue() {
     return this.value;
   }
@@ -28,5 +29,9 @@ public class LottoNumber {
     if (value < LOTTO_NUMBER_RANGE_START || value > LOTTO_NUMBER_RANGE_END) {
       throw new IllegalArgumentException();
     }
+  }
+
+  private static int convertToNumber(String winningLottoNumber) {
+    return Integer.parseInt(winningLottoNumber);
   }
 }
