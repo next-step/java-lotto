@@ -1,4 +1,4 @@
-package Calculator.domain;
+package calculator.domain;
 
 public abstract class MathematicalExpression {
 }

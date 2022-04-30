@@ -1,6 +1,6 @@
-package Calculator.domain;
+package calculator.domain;
 
-import Calculator.domain.Calculation.Calculation;
+import calculator.domain.Calculation.Calculation;
 
 public class Operator extends MathematicalExpression {
     private final Calculation calculation;

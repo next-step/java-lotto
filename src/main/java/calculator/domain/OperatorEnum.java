@@ -1,10 +1,10 @@
-package Calculator.domain;
+package calculator.domain;
 
-import Calculator.domain.Calculation.Calculation;
-import Calculator.domain.Calculation.DivisionCalculation;
-import Calculator.domain.Calculation.MinusCalculation;
-import Calculator.domain.Calculation.PlusCalculation;
-import Calculator.domain.Calculation.TimesCalculation;
+import calculator.domain.Calculation.Calculation;
+import calculator.domain.Calculation.DivisionCalculation;
+import calculator.domain.Calculation.MinusCalculation;
+import calculator.domain.Calculation.PlusCalculation;
+import calculator.domain.Calculation.TimesCalculation;
 
 import java.util.Arrays;
 import java.util.Map;

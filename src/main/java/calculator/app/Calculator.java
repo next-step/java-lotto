@@ -1,6 +1,6 @@
-package Calculator.app;
+package calculator.app;
 
-import Calculator.domain.MathematicalExpressions;
+import calculator.domain.MathematicalExpressions;
 import utils.StringSplitter;
 
 public class Calculator {

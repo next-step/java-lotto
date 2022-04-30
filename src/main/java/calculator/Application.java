@@ -1,7 +1,7 @@
-package Calculator;
+package calculator;
 
 
-import Calculator.app.Calculator;
+import calculator.app.Calculator;
 
 import java.util.Scanner;
 

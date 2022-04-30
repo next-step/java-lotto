@@ -1,4 +1,4 @@
-package Calculator.domain;
+package calculator.domain;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -6,9 +6,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static Calculator.domain.OperandTest.ONE;
-import static Calculator.domain.OperandTest.THREE;
-import static Calculator.domain.OperandTest.TWO;
+import static calculator.domain.OperandTest.ONE;
+import static calculator.domain.OperandTest.THREE;
+import static calculator.domain.OperandTest.TWO;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,6 +1,6 @@
-package Calculator;
+package calculator;
 
-import Calculator.app.Calculator;
+import calculator.app.Calculator;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -26,7 +26,7 @@ class CalculatorTest {
     @Test
     void calculate는_수식이_올바르지_않으면_예외를_발생시킨다() {
         Calculator calc = new Calculator();
-        
+
         assertThatThrownBy(() -> {
             calc.calculate("10 / 2 1");
         }).isInstanceOf(IllegalArgumentException.class);
