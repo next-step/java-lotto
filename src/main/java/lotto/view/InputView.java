@@ -1,6 +1,8 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
@@ -23,6 +25,20 @@ public class InputView {
 
   public static WinningLotto getLastWeekWinningLotto() {
     return new WinningLotto(getLastWeekLotto(), getLastWeekBonus());
+  }
+
+  public static int getManualLottoCount() {
+    System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    return Integer.parseInt(SCANNER.nextLine());
+  }
+
+  public static List<String> getManualLottoInput(int count) {
+    System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    List<String> inputs = new ArrayList<>();
+    for (int i = 0; i < count; i++) {
+      inputs.add(SCANNER.nextLine());
+    }
+    return inputs;
   }
 
   private static Lotto getLastWeekLotto() {
