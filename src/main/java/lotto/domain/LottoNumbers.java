@@ -22,17 +22,10 @@ public class LottoNumbers {
     private static List<LottoNumber> getRandomLottoNumbers() {
         return IntStream.range(LOTTO_NUMBERS_START_INCLUSIVE, LOTTO_NUMBERS_SIZE)
                 .mapToObj(it -> new LottoNumber())
-                .collect(Collectors.toList());
-    }
-
-    public LottoNumbers sort() {
-        List<LottoNumber> sortedLottoNumbers = this.lottoNumbers.stream()
                 .map(LottoNumber::getLottoNumber)
                 .sorted()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
-
-        return new LottoNumbers(sortedLottoNumbers);
     }
 
     public boolean contains(LottoNumber lottoNumber) {

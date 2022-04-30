@@ -22,7 +22,6 @@ public class Lottos {
     private static List<LottoNumbers> getRandomLottoNumbers(int userAmount) {
         return IntStream.range(START_INCLUSIVE, userAmount / LOTTO_PRICE)
                 .mapToObj(it -> new LottoNumbers())
-                .map(LottoNumbers::sort)
                 .collect(Collectors.toList());
     }
 

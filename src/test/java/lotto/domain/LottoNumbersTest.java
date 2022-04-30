@@ -21,22 +21,6 @@ class LottoNumbersTest {
     }
 
     @Nested
-    class sort_메서드는 {
-
-        @Test
-        void 정렬된_로또번호_목록을_리턴한다() {
-            LottoNumbers actual = lottoNumbers.sort();
-
-            assertThat(actual)
-                    .isEqualTo(new LottoNumbers(Arrays.asList(
-                            new LottoNumber(1),
-                            new LottoNumber(2),
-                            new LottoNumber(3)
-                    )));
-        }
-    }
-
-    @Nested
     class contains_메서드는 {
 
         @Nested
