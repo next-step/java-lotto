@@ -2,12 +2,12 @@ package lotto.dto;
 
 import lotto.enums.Grade;
 
-public class HistoryDto {
+public class WinningResultDto {
 
   private final Grade grade;
   private final int count;
 
-  public HistoryDto(Grade grade, int count) {
+  public WinningResultDto(Grade grade, int count) {
     this.grade = grade;
     this.count = count;
   }
