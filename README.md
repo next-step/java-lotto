@@ -62,7 +62,7 @@ Result: 1
     - [x] LottoController 통해 전체 로직 관리
     - [x] LottoController.money = InputView.scan
 - 로또 1장의 가격은 1000원, money로 살 수 있는 로또 개수 연산
-    - [ ] LottoController.numberOfLottos = money / 1000
+    - [x] LottoController.numberOfLottos = money / 1000
 - numberOfLottos 만큼 Lotto class 생성
     - [ ] for 1..numberOfLottos: new Lotto()
     - [ ] Lotto.numbers 는 Collections.shuffle() 로 생성

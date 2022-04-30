@@ -13,4 +13,11 @@ public class LottoControllerTest {
     void shouldCreateMoney() {
         assertThat(lottoController.money).isInstanceOf(Money.class);
     }
+
+    @Test
+    void NumberOfLottosShouldBeMoneyDivide1000() {
+        assertThat(lottoController.numberOfLottos).isEqualTo(lottoController.money.price / 1000);
+    }
+
+
 }
