@@ -7,10 +7,6 @@ public class Lotto {
 
     private List<Integer> numbers;
     private int matchCount;
-    private boolean matchThree = false;
-    private boolean matchFour = false;
-    private boolean matchFive = false;
-    private boolean matchSix = false;
 
     public Lotto(){
         this.numbers = LottoGenerator.makeLotto();
@@ -28,38 +24,26 @@ public class Lotto {
         return numbers;
     }
 
-    public boolean isMatchThree() {
-        return matchThree;
-    }
-
-    public boolean isMatchFour() {
-        return matchFour;
-    }
-
-    public boolean isMatchFive() {
-        return matchFive;
-    }
-
-    public boolean isMatchSix() {
-        return matchSix;
-    }
-
     public void match(Lotto winnerLotto) {
         matchCount = 0;
         for (Integer number : winnerLotto.getNumbers()) {
             if(numbers.contains(number)) matchCount += 1;
         }
+    }
+
+    public LottoStatus isStatus() {
         if (matchCount == 3){
-            matchThree = true;
+            return LottoStatus.MatchThree;
         }
         if (matchCount == 4){
-            matchFour = true;
+            return LottoStatus.MatchFour;
         }
         if (matchCount == 5){
-            matchFive = true;
+            return LottoStatus.MatchFive;
         }
         if (matchCount == 6){
-            matchSix = true;
+            return LottoStatus.MatchSix;
         }
+        return LottoStatus.Nothing;
     }
 }

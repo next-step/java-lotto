@@ -1,7 +1,5 @@
 package lottoauto.domain;
 
-import lottoauto.domain.Lotto;
-import lottoauto.domain.LottoGenerator;
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -64,6 +62,6 @@ class LottoTest {
         Lotto winningLotto = new Lotto(List.of(1,2,3,4,5,6));
         lotto = new Lotto(List.of(1,2,3,11,12,13));
         lotto.match(winningLotto);
-        assertThat(lotto.isMatchThree()).isTrue();
+        assertThat(lotto.isStatus()).isEqualTo(LottoStatus.MatchThree);
     }
 }

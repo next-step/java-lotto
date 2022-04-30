@@ -1,6 +1,7 @@
 package lottoauto.service;
 
 import lottoauto.domain.Lotto;
+import lottoauto.domain.LottoStatus;
 
 import java.util.*;
 
@@ -75,10 +76,10 @@ public class LottoGame {
     public void start() {
         for (Lotto lotto : lottos) {
             lotto.match(winningLotto);
-            if(lotto.isMatchThree()) matchThreeCount += 1;
-            if(lotto.isMatchFour()) matchFourCount += 1;
-            if(lotto.isMatchFive()) matchFiveCount += 1;
-            if(lotto.isMatchSix()) matchSixCount += 1;
+            if(lotto.isStatus() == LottoStatus.MatchThree) matchThreeCount += 1;
+            if(lotto.isStatus() == LottoStatus.MatchFour) matchFourCount += 1;
+            if(lotto.isStatus() == LottoStatus.MatchFive) matchFiveCount += 1;
+            if(lotto.isStatus() == LottoStatus.MatchSix) matchSixCount += 1;
         }
     }
 
