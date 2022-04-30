@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.view.MatchCount;
-
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;

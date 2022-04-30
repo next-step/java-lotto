@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoNumbers;
 import lotto.domain.Lottos;
+import lotto.domain.MatchCount;
 
 import java.util.List;
 import java.util.function.IntConsumer;
