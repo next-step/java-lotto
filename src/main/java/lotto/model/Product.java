@@ -9,7 +9,7 @@ import lotto.exception.LottoSizeException;
 
 public final class Product {
 
-  private static final Integer DEFAULT_LOTTO_SIZE = 6;
+  private static final int DEFAULT_LOTTO_SIZE = 6;
   private final Set<LottoNumber> lottoNumbers;
 
   public Product(Set<LottoNumber> lottoNumbers) {
