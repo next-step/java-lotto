@@ -1,6 +1,6 @@
 package lotto.view;
 
-import calculator.exception.UserInputFailException;
+import lotto.exception.UserInputFailException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import lotto.domain.LottoGame;
