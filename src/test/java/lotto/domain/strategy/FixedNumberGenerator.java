@@ -1,21 +1,20 @@
 package lotto.domain.strategy;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class FixedNumberGenerator implements NumberGenerator {
 
-  private final Iterator<Integer> numberIter;
+  private final List<Integer> numbers;
 
   public FixedNumberGenerator(String numbers) {
-    this.numberIter = toIntList(numbers).iterator();
+    this.numbers = toIntList(numbers);
   }
 
   @Override
-  public int generate() {
-    return numberIter.next();
+  public List<Integer> generate() {
+    return numbers;
   }
 
   private List<Integer> toIntList(String numbers) {

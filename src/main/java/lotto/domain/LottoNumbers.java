@@ -17,10 +17,11 @@ public class LottoNumbers {
     }
   }
 
-  public LottoNumbers(int numberCount, NumberGenerator numberGenerator) {
+  public LottoNumbers(NumberGenerator numberGenerator) {
     this.values = new ArrayList<>();
-    for (int i = 0; i < numberCount; i++) {
-      this.values.add(new LottoNumber(numberGenerator.generate()));
+    List<Integer> numbers = numberGenerator.generate();
+    for (Integer number : numbers) {
+      this.values.add(new LottoNumber(number));
     }
   }
 

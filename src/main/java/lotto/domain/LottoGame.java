@@ -15,7 +15,7 @@ public class LottoGame {
   }
 
   public LottoGame(NumberGenerator numberGenerator) {
-    this.lottoNumbers = new LottoNumbers(NUMBER_COUNT, numberGenerator);
+    this.lottoNumbers = new LottoNumbers(numberGenerator);
   }
 
   public LottoDrawResult draw(LottoNumbers winNumbers) {

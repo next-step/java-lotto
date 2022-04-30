@@ -1,6 +1,8 @@
 package lotto.domain.strategy;
 
+import java.util.List;
+
 public interface NumberGenerator {
 
-  int generate();
+  List<Integer> generate();
 }

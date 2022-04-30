@@ -1,30 +1,26 @@
 package lotto.domain.strategy;
 
-import java.util.HashSet;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
 
 public class LottoNumberGenerator implements NumberGenerator {
 
-  private final Random random;
-  private final HashSet<Integer> generatedSet;
+  private static final List<Integer> lottoNumberCandidates = new ArrayList<>();
 
-  public LottoNumberGenerator() {
-    this.random = new Random();
-    this.generatedSet = new HashSet<>();
+  static {
+    for (int number = LottoNumber.MIN; number <= LottoNumber.MAX; number++) {
+      lottoNumberCandidates.add(number);
+    }
   }
 
   @Override
-  public int generate() {
-    int lottoNum = makeNumber();
-    while (generatedSet.contains(lottoNum)) {
-      lottoNum = makeNumber();
-    }
-    generatedSet.add(lottoNum);
-    return lottoNum;
-  }
-
-  private int makeNumber() {
-    return random.nextInt(LottoNumber.MAX - LottoNumber.MIN) + LottoNumber.MIN;
+  public List<Integer> generate() {
+    Collections.shuffle(lottoNumberCandidates);
+    List<Integer> lottoNumbers = lottoNumberCandidates.subList(0, LottoGame.NUMBER_COUNT);
+    Collections.sort(lottoNumbers);
+    return lottoNumbers;
   }
 }
