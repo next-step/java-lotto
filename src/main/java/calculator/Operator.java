@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum Operator {
-
     PLUS("+", (a, b) -> a + b),
     MINUS("-", (a, b) -> a - b),
     MULTIPLY("*", (a, b) -> a * b),

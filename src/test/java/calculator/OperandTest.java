@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class OperandTest {
-
     @Test
     void Operand_피연산자_생성() {
         Operand operand = new Operand("3");

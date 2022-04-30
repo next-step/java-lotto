@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class OperatorTest {
-
     @Test
     void plus_덧셈() {
         assertThat(Operator.PLUS.operate(new Operand(1), new Operand(2))).isEqualTo(new Operand(3));
