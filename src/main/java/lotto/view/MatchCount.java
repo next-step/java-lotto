@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -18,6 +19,7 @@ public enum MatchCount {
                     it -> it.matchCount,
                     it -> it.winningAmount
             ));
+    private static final int DEFAULT_WINNING_AMOUNT = 0;
 
     private final int matchCount;
     private final int winningAmount;
@@ -28,6 +30,7 @@ public enum MatchCount {
     }
 
     public static int getWinningAmountWith(int matchCount) {
-        return MATCH_COUNT_WINNING_AMOUNT_MAP.get(matchCount);
+        return Optional.ofNullable(MATCH_COUNT_WINNING_AMOUNT_MAP.get(matchCount))
+                .orElse(DEFAULT_WINNING_AMOUNT);
     }
 }

@@ -13,5 +13,6 @@ public class LottoMachine {
 
         String previousWeekWinningNumber = InputView.inputPreviousWeekWinningNumber();
         OutputView.outputWinningStatistics(lottos, previousWeekWinningNumber);
+        OutputView.outputRevenueRate(lottos, previousWeekWinningNumber);
     }
 }

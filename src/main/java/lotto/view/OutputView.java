@@ -40,5 +40,10 @@ public class OutputView {
                 .filter(it -> it == matchLotto)
                 .count();
     }
+
+    public static void outputRevenueRate(Lottos lottos, String previousWeekWinningNumber) {
+        double revenueRate = lottos.getRevenueRate(new LottoNumbers(previousWeekWinningNumber));
+        System.out.printf("총 수익률은 %s입니다.", revenueRate);
+    }
 }
 
