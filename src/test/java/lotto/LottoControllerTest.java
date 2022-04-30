@@ -18,7 +18,8 @@ public class LottoControllerTest {
     }
 
     @Test
-    void shouldCreateLottery() {
-//        lottoController.createLotto()
+    void shouldCreate14Lotteries() {
+        lottoController.createLotteries();
+        assertThat(lottoController.lotteries).hasSize(14);
     }
 }

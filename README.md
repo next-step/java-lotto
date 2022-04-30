@@ -67,7 +67,7 @@ Result: 1
     - [x] Lottery Class with box[45], numbers[6]
     - [x] Lottery.numbers 는 Collections.shuffle() 로 생성
 - numberOfLotteries 만큼 Lottery class 생성
-    - [ ] for 1..numberOfLotteries: new Lottery()
+    - [x] for 1..numberOfLotteries: new Lottery()
     - [ ] Collections.sort() 로 정렬해서 보관
 - 자동으로 생성 된 로또 번호들을 출력
     - [ ] ResultView.toString(lotto)
