@@ -1,41 +1,57 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoNumbers {
-    private static final int LOTTO_NUMBERS_START_INCLUSIVE = 0;
     private static final int LOTTO_NUMBERS_SIZE = 6;
     private static final String LOTTO_NUMBERS_STRING_DELIMITER = ", ";
 
     private final List<LottoNumber> lottoNumbers;
 
+    public LottoNumbers(String lottoNumbersString) {
+        this(toLottoNumbers(lottoNumbersString));
+    }
+
+    protected LottoNumbers(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
     public static LottoNumbers ofRandom() {
-        List<LottoNumber> randomLottoNumbers = IntStream.range(LOTTO_NUMBERS_START_INCLUSIVE, LOTTO_NUMBERS_SIZE)
-                .mapToObj(it -> LottoNumber.ofRandom())
-                .map(LottoNumber::getLottoNumber)
-                .sorted()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+        List<LottoNumber> randomLottoNumbers = getRandomLottoNumbers();
 
         return new LottoNumbers(randomLottoNumbers);
     }
 
-    public LottoNumbers(String lottoNumbersString) {
-        this(toLottoNumbers(lottoNumbersString));
+    private static List<LottoNumber> getRandomLottoNumbers() {
+        Set<LottoNumber> randomLottoNumbers = new HashSet<>();
+        while (randomLottoNumbers.size() < LOTTO_NUMBERS_SIZE) {
+            LottoNumber randomLottoNumber = LottoNumber.ofRandom();
+            randomLottoNumbers.add(randomLottoNumber);
+        }
+
+        return sort(toList(randomLottoNumbers));
+    }
+
+    private static List<LottoNumber> toList(Set<LottoNumber> lottoNumbers) {
+        return new ArrayList<>(lottoNumbers);
+    }
+
+    private static List<LottoNumber> sort(List<LottoNumber> lottoNumbers) {
+        lottoNumbers.sort(Comparator.comparingInt(LottoNumber::getLottoNumber));
+        return lottoNumbers;
     }
 
     private static List<LottoNumber> toLottoNumbers(String lottoNumbersString) {
         return Arrays.stream(lottoNumbersString.split(LOTTO_NUMBERS_STRING_DELIMITER))
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
-    }
-
-    protected LottoNumbers(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
     }
 
     public boolean contains(LottoNumber lottoNumber) {
