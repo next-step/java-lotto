@@ -70,8 +70,8 @@ Result: 1
     - [x] for 1..numberOfLotteries: new Lottery()
     - [x] Collections.sort() 로 정렬해서 보관
 - 자동으로 생성 된 로또 번호들을 출력
-    - [ ] ResultView.toString(lotto)
-    - [ ] ResultView.printLotteries
+    - [x] ResultView.toString(lotto)
+    - [x] ResultView.printLotteries
 - 정답 번호를 입력
     - [ ] LotteryController.answerNumbers = LotteryController.parse(InputView.scan)
 - 정답 번호와 비교하여 win 횟수 세기

@@ -30,4 +30,8 @@ public class LotteryController {
             lotteries.add(new Lottery());
         }
     }
+
+    public void printLotteries() {
+        ResultView.print(this.lotteries);
+    }
 }

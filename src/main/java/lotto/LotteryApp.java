@@ -1,7 +1,10 @@
 package lotto;
 
 public class LotteryApp {
-    LotteryController lotteryController = new LotteryController();
-    InputView inputView = new InputView();
-
+    public static void main(String[] args) {
+        LotteryController lotteryController = new LotteryController();
+        lotteryController.scan();
+        lotteryController.createLotteries();
+        lotteryController.printLotteries();
+    }
 }
