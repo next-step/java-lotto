@@ -2,6 +2,8 @@ package lotto.model;
 
 import java.util.List;
 import java.util.Objects;
+import lotto.exception.LottoSizeException;
+import lotto.exception.MoneyNumberException;
 
 public final class Guest {
 
@@ -22,7 +24,14 @@ public final class Guest {
   }
 
   public List<Lotto> hasAllLotto() {
+    emptySizeValid(allLottoList.size());
     return allLottoList;
+  }
+
+  private void emptySizeValid(int size) {
+    if(size <= 0) {
+      throw new LottoSizeException();
+    }
   }
 
   @Override

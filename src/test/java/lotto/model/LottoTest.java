@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import lotto.enums.Grade;
-import lotto.exception.LottoSizeException;
+import lotto.exception.LottoLengthException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -67,7 +67,7 @@ class LottoTest {
   @Test
   @DisplayName("로또 사이즈는 6자리입니다.")
   void lottoSizeException() {
-    assertThrows(LottoSizeException.class, () -> {
+    assertThrows(LottoLengthException.class, () -> {
       List<LottoNumber> lottoNumbers = List.of(new LottoNumber(7),
           new LottoNumber(8),
           new LottoNumber(8),

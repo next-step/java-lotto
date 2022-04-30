@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Set;
 import lotto.enums.ChoiceType;
 import lotto.enums.Grade;
-import lotto.exception.LottoSizeException;
+import lotto.exception.LottoLengthException;
 
 public final class Lotto {
 
@@ -23,7 +23,7 @@ public final class Lotto {
 
   private void valid(Set<LottoNumber> lottoNumbers) {
     if (DEFAULT_LOTTO_SIZE != lottoNumbers.size()) {
-      throw new LottoSizeException();
+      throw new LottoLengthException();
     }
   }
 

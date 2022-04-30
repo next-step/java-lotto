@@ -20,13 +20,13 @@ public class LottoController {
   public void run() {
     OutputTable.inputPurchaseAmount();
     long haveMoney = InputTable.inputHaveMoney();
-    List<Lotto> lottos = visit(new Guest(haveMoney), new Store()).hasAllLotto();
-    OutputTable.buyThings(lottos.size());
-    OutputTable.printProductInfos(lottos);
+    List<Lotto> lottoProducts = visit(new Guest(haveMoney), new Store()).hasAllLotto();
+    OutputTable.buyThings(lottoProducts.size());
+    OutputTable.printProductInfos(lottoProducts);
     OutputTable.lastWeekAwardNumber();
     Lotto winnerLotto = insertWinnerNumber(InputTable.inputAwardNumber());
     OutputTable.resultStatisticsMessage();
-    List<WinningResultDto> histories = histories(lottos, winnerLotto);
+    List<WinningResultDto> histories = histories(lottoProducts, winnerLotto);
     OutputTable.resultStatistics(histories);
     double percent = yieldCalculate(haveMoney, allAddReward(histories));
     OutputTable.printYield(percent, isStandard(percent));
