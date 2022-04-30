@@ -6,7 +6,7 @@ import lotto.enums.Grade;
 
 public class Statistics {
 
-  private final Long reward;
+  private final long reward;
 
   public Statistics() {
     this(0L);
@@ -43,6 +43,6 @@ public class Statistics {
 
   @Override
   public String toString() {
-    return reward.toString();
+    return String.valueOf(reward);
   }
 }

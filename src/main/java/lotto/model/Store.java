@@ -5,8 +5,8 @@ import java.util.List;
 
 public final class Store {
 
-  private static final Long PRODUCT_PRICE = 1_000L;
-  private final Integer productCount;
+  private static final long PRODUCT_PRICE = 1_000L;
+  private final int productCount;
 
   public Store() {
     this(0);
@@ -34,7 +34,7 @@ public final class Store {
 
   @Override
   public String toString() {
-    return productCount.toString();
+    return String.valueOf(productCount);
   }
 
 }

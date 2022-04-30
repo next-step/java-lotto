@@ -4,14 +4,16 @@ import java.util.Objects;
 import lotto.exception.LottoNegativeException;
 
 public final class LottoNumber {
-  private final Integer value;
-  public LottoNumber(Integer value) {
+
+  private final int value;
+
+  public LottoNumber(int value) {
     valid(value);
     this.value = value;
   }
 
-  private void valid(Integer value) {
-    if(value <= 0) {
+  private void valid(int value) {
+    if (value <= 0) {
       throw new LottoNegativeException();
     }
   }
@@ -27,6 +29,7 @@ public final class LottoNumber {
     LottoNumber lottoNumber = (LottoNumber) o;
     return Objects.equals(value, lottoNumber.value);
   }
+
   @Override
   public int hashCode() {
     return Objects.hash(value);
@@ -35,6 +38,6 @@ public final class LottoNumber {
 
   @Override
   public String toString() {
-    return value.toString();
+    return String.valueOf(value);
   }
 }
