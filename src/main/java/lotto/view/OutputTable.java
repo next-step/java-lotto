@@ -1,12 +1,8 @@
 package lotto.view;
 
 import java.util.List;
-import lotto.controller.LottoController;
 import lotto.dto.WinningResultDto;
-import lotto.model.Guest;
-import lotto.model.Product;
-import lotto.model.Store;
-import lotto.service.LottoService;
+import lotto.model.Lotto;
 
 public final class OutputTable {
 
@@ -35,9 +31,9 @@ public final class OutputTable {
     System.out.printf(BUY_THING_MESSAGE, productCount);
   }
 
-  public static void printProductInfos(List<Product> products) {
-    for (Product product : products) {
-      System.out.println(product);
+  public static void printProductInfos(List<Lotto> lottos) {
+    for (Lotto lotto : lottos) {
+      System.out.println(lotto);
     }
   }
 

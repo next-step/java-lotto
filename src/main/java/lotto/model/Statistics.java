@@ -16,8 +16,8 @@ public class Statistics {
     this.reward = reward;
   }
 
-  public int result(Grade grade, List<Product> sellerProduct, Product winningProduct) {
-    return winningProduct.coincideLotto(grade, sellerProduct);
+  public int result(Grade grade, List<Lotto> sellerLotto, Lotto winningLotto) {
+    return winningLotto.coincideLotto(grade, sellerLotto);
   }
 
   public Statistics winReward(Grade grade, int count) {

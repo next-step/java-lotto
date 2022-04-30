@@ -3,7 +3,7 @@ package lotto.controller;
 import java.util.List;
 import lotto.dto.WinningResultDto;
 import lotto.model.Guest;
-import lotto.model.Product;
+import lotto.model.Lotto;
 import lotto.model.Store;
 import lotto.service.LottoService;
 import lotto.view.InputTable;
@@ -20,13 +20,13 @@ public class LottoController {
   public void run() {
     OutputTable.inputPurchaseAmount();
     long haveMoney = InputTable.inputHaveMoney();
-    List<Product> products = visit(new Guest(haveMoney), new Store()).hasAllLotto();
-    OutputTable.buyThings(products.size());
-    OutputTable.printProductInfos(products);
+    List<Lotto> lottos = visit(new Guest(haveMoney), new Store()).hasAllLotto();
+    OutputTable.buyThings(lottos.size());
+    OutputTable.printProductInfos(lottos);
     OutputTable.lastWeekAwardNumber();
-    Product winnerProduct = insertWinnerNumber(InputTable.inputAwardNumber());
+    Lotto winnerLotto = insertWinnerNumber(InputTable.inputAwardNumber());
     OutputTable.resultStatisticsMessage();
-    List<WinningResultDto> histories = histories(products, winnerProduct);
+    List<WinningResultDto> histories = histories(lottos, winnerLotto);
     OutputTable.resultStatistics(histories);
     double percent = yieldCalculate(haveMoney, allAddReward(histories));
     OutputTable.printYield(percent, isStandard(percent));
@@ -37,12 +37,12 @@ public class LottoController {
     return lottoService.visit(guest, store);
   }
 
-  public Product insertWinnerNumber(String winnerNumber) {
+  public Lotto insertWinnerNumber(String winnerNumber) {
     return lottoService.insertWinnerNumber(winnerNumber);
   }
 
-  public List<WinningResultDto> histories(List<Product> products, Product winProduct) {
-    return lottoService.histories(products, winProduct);
+  public List<WinningResultDto> histories(List<Lotto> lottos, Lotto winLotto) {
+    return lottoService.histories(lottos, winLotto);
   }
 
   public Long allAddReward(List<WinningResultDto> histories) {

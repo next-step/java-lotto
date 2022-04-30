@@ -17,16 +17,16 @@ public final class Store {
   }
 
 
-  public List<Product> delivery(long money) {
+  public List<Lotto> delivery(long money) {
     long count = money / PRODUCT_PRICE;
-    List<Product> products = new ArrayList<>();
+    List<Lotto> lottos = new ArrayList<>();
     while (count-- != 0) {
-      products.add(deliverLotto());
+      lottos.add(deliverLotto());
     }
-    return products;
+    return lottos;
   }
 
-  private Product deliverLotto() {
+  private Lotto deliverLotto() {
     return LottoFactory.getInstance().apply();
   }
 
