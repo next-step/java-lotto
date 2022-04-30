@@ -6,6 +6,7 @@ import lotto.model.Guest;
 import lotto.model.Product;
 import lotto.model.Store;
 import lotto.service.LottoService;
+import lotto.view.InputTable;
 import lotto.view.OutputTable;
 
 public class LottoController {
@@ -16,9 +17,21 @@ public class LottoController {
     this.lottoService = lottoService;
   }
 
-  public static void main(String[] args) {
-    OutputTable.run();
+  public void run() {
+    OutputTable.inputPurchaseAmount();
+    long haveMoney = InputTable.inputHaveMoney();
+    List<Product> products = visit(new Guest(haveMoney), new Store()).hasAllLotto();
+    OutputTable.buyThings(products.size());
+    OutputTable.printProductInfos(products);
+    OutputTable.lastWeekAwardNumber();
+    Product winnerProduct = insertWinnerNumber(InputTable.inputAwardNumber());
+    OutputTable.resultStatisticsMessage();
+    List<WinningResultDto> histories = histories(products, winnerProduct);
+    OutputTable.resultStatistics(histories);
+    double percent = yieldCalculate(haveMoney, allAddReward(histories));
+    OutputTable.printYield(percent, isStandard(percent));
   }
+
 
   public Guest visit(Guest guest, Store store) {
     return lottoService.visit(guest, store);
