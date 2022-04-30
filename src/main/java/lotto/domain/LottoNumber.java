@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumber {
+    private static final String NOT_NUMBER_STRING_NOT_ALLOW_MESSAGE = "숫자가 아닌 문자열은 허용되지 않습니다.";
     private static final int START_LOTTO_NUMBER = 1;
     private static final int END_LOTTO_NUMBER = 45;
 
@@ -17,7 +18,15 @@ public class LottoNumber {
     }
 
     public LottoNumber(String string) {
-        this(Integer.parseInt(string));
+        this(toInt(string));
+    }
+
+    private static int toInt(String string) {
+        try {
+            return Integer.parseInt(string);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(NOT_NUMBER_STRING_NOT_ALLOW_MESSAGE);
+        }
     }
 
     protected LottoNumber(int lottoNumber) {
