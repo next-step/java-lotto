@@ -16,7 +16,6 @@ class MatchCountTest {
             "4, 50000",
             "5, 1500000",
             "6, 2000000000",
-            "7, 0"
     })
     void getWinningAmountWith(int matchCount, int winningAmount) {
         int actual = MatchCount.getWinningAmountWith(matchCount);
