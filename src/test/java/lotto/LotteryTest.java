@@ -3,6 +3,7 @@ package lotto;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,5 +31,10 @@ public class LotteryTest {
     void shouldFindSixNumbers() {
         assertThat(lottery.findSixNumbers()).hasSize(6);
         assertThat(lottery.numbers).hasSize(6);
+    }
+
+    @Test
+    void shouldSortAscend() {
+        assertThat(lottery.sort(Arrays.asList(2,3,1))).isEqualTo(Arrays.asList(1,2,3));
     }
 }

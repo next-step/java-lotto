@@ -24,6 +24,11 @@ public class Lottery {
         for (int i = 1; i <= 6; i++) {
             list.add(box.get(i));
         }
+        return sort(list);
+    }
+
+    public List<Integer> sort(List<Integer> list) {
+        Collections.sort(list);
         return list;
     }
 
