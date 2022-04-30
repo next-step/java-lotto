@@ -1,12 +1,18 @@
 import calculator.Calculator;
 import lotto.Lotto;
 import lotto.LottoWinning;
+import lotto.Rank;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
+import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
+
 public class App {
     public static void main(String[] args) {
-        Calculator.calculate("1 - 3 + 55 * 1");
+        Map<Rank, Integer> results = new HashMap<>();
+
         String price = InputView.getPrice();
         Lotto lotto = new Lotto(price);
         lotto.auto();
