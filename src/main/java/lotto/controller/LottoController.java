@@ -6,7 +6,6 @@ import lotto.model.Guest;
 import lotto.model.Product;
 import lotto.model.Store;
 import lotto.service.LottoService;
-import lotto.view.InputTable;
 import lotto.view.OutputTable;
 
 public class LottoController {
