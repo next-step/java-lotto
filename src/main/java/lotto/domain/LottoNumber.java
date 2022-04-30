@@ -22,7 +22,7 @@ public class LottoNumber {
     if (!CONTAINS_ONLY_NUMBER_PATTERN.matcher(value).find()) {
       throw new InvalidLottoNumberException(value);
     }
-    this.value = Integer.valueOf(value);
+    this.value = Integer.parseInt(value);
   }
 
   @Override
