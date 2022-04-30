@@ -27,7 +27,7 @@ public class StringCalculatorTest {
   @EmptySource
   public void validateEmptyInput(String input) {
     assertThatIllegalArgumentException().isThrownBy(() -> StringCalculator.calculate(input))
-        .withMessage(StringCalculator.EMPTY_EXCEPTION);
+        .withMessage(StringCalculator.EMPTY_EQUATION_MESSAGE);
   }
 
   @DisplayName("문자열 계산기 덧셈")
@@ -65,10 +65,18 @@ public class StringCalculatorTest {
         () -> StringCalculator.calculate("1 / 0"));
   }
 
-  @DisplayName("사칙연산")
+  @DisplayName("문자열 계산기 사칙연산 입출력값 검증")
   @ParameterizedTest
   @CsvSource(value = {"2 + 3 * 4 / 2=10", "1 / 2 * 4 + 2 - 1=1"}, delimiter = '=')
   public void calculate(String left, String expected) {
     assertThat(StringCalculator.calculate(left)).isEqualTo(Number.from(expected));
+  }
+
+  @DisplayName("사칙연산 기호가 아닌 경우 예외 던짐")
+  @Test
+  public void notOperator() {
+    assertThatIllegalArgumentException().isThrownBy(
+            () -> StringCalculator.calculate("2 ^ 3"))
+        .withMessage(StringCalculator.INVALID_OPERATOR_MESSAGE);
   }
 }

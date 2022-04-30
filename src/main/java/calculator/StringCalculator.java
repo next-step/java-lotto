@@ -5,12 +5,18 @@ import java.util.Objects;
 
 public class StringCalculator {
 
-  static final String EMPTY_EXCEPTION = "계산식을 입력하세요";
+  static final String EMPTY_EQUATION_MESSAGE = "계산식을 입력하세요";
+  static final String INVALID_OPERATOR_MESSAGE = "사칙연산 기호가 아닙니다.";
+
+  private static final String SIGN_ADD = "+";
+  private static final String SIGN_SUBTRACT = "-";
+  private static final String SIGN_MULTIPLY = "*";
+  private static final String SIGN_DIVIDE = "/";
 
   public static Number calculate(String s) {
     Objects.requireNonNull(s);
     if (s.isBlank()) {
-      throw new IllegalArgumentException(EMPTY_EXCEPTION);
+      throw new IllegalArgumentException(EMPTY_EQUATION_MESSAGE);
     }
 
     List<String> strings = Splitter.from(s);
@@ -25,22 +31,22 @@ public class StringCalculator {
   }
 
   private static Number calculate(String operator, Number result, Number current) {
-    if (Objects.equals(operator, "+")) {
+    if (Objects.equals(operator, SIGN_ADD)) {
       return result.add(current);
     }
 
-    if (Objects.equals(operator, "-")) {
+    if (Objects.equals(operator, SIGN_SUBTRACT)) {
       return result.subtract(current);
     }
 
-    if (Objects.equals(operator, "*")) {
+    if (Objects.equals(operator, SIGN_MULTIPLY)) {
       return result.multiply(current);
     }
 
-    if (Objects.equals(operator, "/")) {
+    if (Objects.equals(operator, SIGN_DIVIDE)) {
       return result.divide(current);
     }
 
-    return result;
+    throw new IllegalArgumentException(INVALID_OPERATOR_MESSAGE);
   }
 }
