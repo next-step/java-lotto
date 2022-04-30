@@ -1,13 +1,11 @@
 package lotto;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoControllerTest {
-    LottoController lottoController = new LottoController(14000);
+    LotteryController lottoController = new LotteryController(14000);
 
     @Test
     void shouldCreateMoney() {
@@ -15,9 +13,12 @@ public class LottoControllerTest {
     }
 
     @Test
-    void NumberOfLottosShouldBeMoneyDivide1000() {
-        assertThat(lottoController.numberOfLottos).isEqualTo(lottoController.money.price / 1000);
+    void numberOfLotteriesShouldBeMoneyDivide1000() {
+        assertThat(lottoController.numberOfLotteries).isEqualTo(lottoController.money.price / 1000);
     }
 
-
+    @Test
+    void shouldCreateLottery() {
+//        lottoController.createLotto()
+    }
 }
