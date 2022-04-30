@@ -5,7 +5,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.model.LottoNumber;
 
-public class AwardNumberUtil {
+public final class AwardNumberUtil {
+
+  private AwardNumberUtil() {
+  }
 
   private static final String DELIMITER = ", ";
 
