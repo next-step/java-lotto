@@ -16,15 +16,16 @@ public class Lottos {
 
   public static Lottos create(int numberOfPurchasedLotto) {
     List<Lotto> lottos = new ArrayList<>();
-    for(int i = 0; i < numberOfPurchasedLotto; i++) {
+    for (int i = 0; i < numberOfPurchasedLotto; i++) {
       lottos.add(Lotto.create(new RandomNumberGenerateStrategy()));
     }
     return new Lottos(lottos);
   }
 
-  public static Lottos create(int numberOfPurchasedLotto, NumberGenerateStrategy numberGenerateStrategy) {
+  public static Lottos create(int numberOfPurchasedLotto,
+      NumberGenerateStrategy numberGenerateStrategy) {
     List<Lotto> lottos = new ArrayList<>();
-    for(int i = 0; i < numberOfPurchasedLotto; i++) {
+    for (int i = 0; i < numberOfPurchasedLotto; i++) {
       lottos.add(Lotto.create(numberGenerateStrategy));
     }
     return new Lottos(lottos);
@@ -54,7 +55,7 @@ public class Lottos {
 
     int purchasedAmount = lottos.size() * Lotto.PRICE_OF_ONE_LOTTO;
 
-    return profitRatio/purchasedAmount;
+    return profitRatio / purchasedAmount;
   }
 
   @Override

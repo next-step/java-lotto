@@ -24,13 +24,15 @@ public class OutputView {
     matchResult.entrySet().stream()
         .filter(entry -> entry.getKey() != LottoRank.NON_MATCH)
         .forEach(entry -> {
-          System.out.println(entry.getKey().getNumberOfMatch() + "개 일치 (" + entry.getKey().getReward() + "원) - " + entry.getValue() + "개");
+          System.out.println(
+              entry.getKey().getNumberOfMatch() + "개 일치 (" + entry.getKey().getReward() + "원) - "
+                  + entry.getValue() + "개");
         });
   }
 
   public static void outputProfitRatio(double calculateProfitRatio) {
     System.out.print("총 수익률은 " + calculateProfitRatio + "입니다.");
-    if(calculateProfitRatio < 1) {
+    if (calculateProfitRatio < 1) {
       System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
   }

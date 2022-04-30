@@ -1,14 +1,13 @@
 package lotto.model;
 
 import java.util.Arrays;
-import java.util.function.Predicate;
 
 public enum LottoRank {
 
   FIRST(6, 2000000000),
   SECOND(5, 1500000),
   THIRD(4, 50000),
-  FOURTH(3,5000),
+  FOURTH(3, 5000),
   NON_MATCH(0, 0);
 
   private int numberOfMatch;
