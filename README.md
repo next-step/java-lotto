@@ -79,7 +79,8 @@ Result: 1
     - [x] 비교는 ArrayList.contains() 활용
     - [x] WinStatistics Class 생성하여 3,4,5,6 field 에 save
 - 당첨 통계 출력
-    - [ ] ResultView.printResult
+    - [x] WinStatistics.toPayload 에서 출력할 문구 생성
+    - [x] ResultView.printResult 에서 해당 문구를 출력
 - 수익률 계산
     - [ ] LotteryController.calculateEarningRate
 - 수익률 출력

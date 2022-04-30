@@ -8,6 +8,6 @@ public class LotteryApp {
         lotteryController.printLotteries();
         lotteryController.scanAnswer();
         lotteryController.findWins();
-        System.out.println(lotteryController.winStatistics);
+        lotteryController.printWinStatistics();
     }
 }

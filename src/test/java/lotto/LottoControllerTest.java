@@ -56,4 +56,6 @@ public class LottoControllerTest {
         lottoController.findWin(lottery, answerNumber);
         assertThat(lottoController.winStatistics).isEqualTo(new WinStatistics(0, 0, 0, 1));
     }
+
+
 }

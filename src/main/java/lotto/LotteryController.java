@@ -36,7 +36,7 @@ public class LotteryController {
     }
 
     public void printLotteries() {
-        ResultView.print(this.lotteries);
+        ResultView.printLotteries(this.lotteries);
     }
 
     public void scanAnswer() {
@@ -80,5 +80,9 @@ public class LotteryController {
         if (counter >= 3) {
             winStatistics.save(counter);
         }
+    }
+
+    public void printWinStatistics() {
+        ResultView.printWinStatistics(this.winStatistics.toPayload());
     }
 }

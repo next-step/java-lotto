@@ -56,4 +56,8 @@ public class WinStatistics {
     public int hashCode() {
         return Objects.hash(three, four, five, six);
     }
+
+    public String toPayload() {
+        return "3 matches (₩5000): " + this.three + "\n" + "4 matches (₩50000): " + this.four + "\n" + "5 matches (₩1500000): " + this.five + "\n" + "6 matches (₩2000000000): " + this.six;
+    }
 }
