@@ -28,6 +28,10 @@ public final class Money {
         return this.money / unit.money;
     }
 
+    public double getYield(long result) {
+        return result / (double) this.money;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Money) {
@@ -40,4 +44,5 @@ public final class Money {
     public int hashCode() {
         return Integer.valueOf(money).hashCode();
     }
+
 }

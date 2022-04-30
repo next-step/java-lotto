@@ -41,4 +41,12 @@ public class MoneyTest {
 
         assertThat(money.getUnitCount(THOUSAND)).isEqualTo(14);
     }
+
+    @Test
+    @DisplayName("getYield로 수익률을 구할 수 있다.")
+    void getYieldTest() {
+        Money money = new Money(14000);
+
+        assertThat(String.format("%.2f", money.getYield(5000))).isEqualTo("0.36");
+    }
 }
