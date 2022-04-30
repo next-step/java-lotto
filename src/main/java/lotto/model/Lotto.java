@@ -11,6 +11,7 @@ import lotto.strategy.NumberGenerateStrategy;
 public class Lotto {
 
   private static final int LOTTO_NUMBER_COUNT = 6;
+  public static final int PRICE_OF_ONE_LOTTO = 1000;
 
   private final List<LottoNumber> lottoNumbers;
 

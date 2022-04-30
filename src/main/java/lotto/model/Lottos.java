@@ -46,6 +46,17 @@ public class Lottos {
     return LottoRank.findRank(matchCountOfLotto);
   }
 
+  public double calculateProfitRatio(WinningLotto winningLotto) {
+    double profitRatio = lottos.stream()
+        .map(lotto -> matchLottoRank(winningLotto, lotto))
+        .mapToDouble(LottoRank::getReward)
+        .sum();
+
+    int purchasedAmount = lottos.size() * Lotto.PRICE_OF_ONE_LOTTO;
+
+    return profitRatio/purchasedAmount;
+  }
+
   @Override
   public String toString() {
     return this.lottos.stream()

@@ -15,11 +15,13 @@ public class LottoNumberComparsion {
   private final Lottos lottos;
   private final WinningLotto winningLotto;
   private final Map<LottoRank, Integer> matchResult;
+  private final double profitRatio;
 
   public LottoNumberComparsion(Lottos lottos, WinningLotto winningLotto) {
     this.lottos = lottos;
     this.winningLotto = winningLotto;
     this.matchResult = matchLottoRankResult();
+    this.profitRatio = calculateProfitRatio();
   }
 
   public Map<LottoRank, Integer> matchLottoRankResult() {
@@ -31,7 +33,15 @@ public class LottoNumberComparsion {
     return lottos.matchLottoRankResult(lottoRank, winningLotto);
   }
 
+  private double calculateProfitRatio() {
+    return lottos.calculateProfitRatio(winningLotto);
+  }
+
   public Map<LottoRank, Integer> getMatchResult() {
     return matchResult;
+  }
+
+  public double getProfitRatio() {
+    return profitRatio;
   }
 }
