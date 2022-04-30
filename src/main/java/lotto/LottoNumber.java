@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.exception.InvalidBoundLottoNumber;
+
 import java.util.Objects;
 
 public class LottoNumber {
@@ -10,7 +12,7 @@ public class LottoNumber {
 
     public LottoNumber(int lottoNumber) {
         if (isInValidBound(lottoNumber)) {
-            throw new IndexOutOfBoundsException();
+            throw new InvalidBoundLottoNumber();
         }
         this.lottoNumber = lottoNumber;
     }
