@@ -13,8 +13,15 @@ public class LottoNumbers {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers() {
-        this(getRandomLottoNumbers());
+    public static LottoNumbers ofRandom() {
+        List<LottoNumber> randomLottoNumbers = IntStream.range(LOTTO_NUMBERS_START_INCLUSIVE, LOTTO_NUMBERS_SIZE)
+                .mapToObj(it -> LottoNumber.ofRandom())
+                .map(LottoNumber::getLottoNumber)
+                .sorted()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        return new LottoNumbers(randomLottoNumbers);
     }
 
     public LottoNumbers(String lottoNumbersString) {
@@ -29,15 +36,6 @@ public class LottoNumbers {
 
     protected LottoNumbers(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
-    }
-
-    private static List<LottoNumber> getRandomLottoNumbers() {
-        return IntStream.range(LOTTO_NUMBERS_START_INCLUSIVE, LOTTO_NUMBERS_SIZE)
-                .mapToObj(it -> LottoNumber.ofRandom())
-                .map(LottoNumber::getLottoNumber)
-                .sorted()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
     }
 
     public boolean contains(LottoNumber lottoNumber) {
