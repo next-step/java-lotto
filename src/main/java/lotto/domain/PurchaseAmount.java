@@ -12,17 +12,17 @@ public class PurchaseAmount {
     this.value = value;
   }
 
+  private void validate(int value) {
+    if (value <= 0 || value % LOTTO_PRICE != 0) {
+      throw new IllegalArgumentException(INVALID_PURCHASE_AMOUNT_MESSAGE);
+    }
+  }
+
   public int getLottoCount() {
     return value / LOTTO_PRICE;
   }
 
   public double getYield(int other) {
     return ((double) other) / value;
-  }
-
-  private void validate(int value) {
-    if (value <= 0 || value % LOTTO_PRICE != 0) {
-      throw new IllegalArgumentException(INVALID_PURCHASE_AMOUNT_MESSAGE);
-    }
   }
 }

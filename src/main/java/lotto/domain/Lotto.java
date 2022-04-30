@@ -19,6 +19,12 @@ public class Lotto {
     this.values.addAll(values);
   }
 
+  private void validate(Set<LottoNumber> values) {
+    if (values.size() != LOTTO_SIZE) {
+      throw new IllegalArgumentException(INVALID_SIZE_MESSAGE);
+    }
+  }
+
   public static Lotto create(Set<Integer> values) {
     return values.stream()
         .map(LottoNumber::new)
@@ -46,12 +52,6 @@ public class Lotto {
     Set<LottoNumber> intersection = new TreeSet<>(values);
     intersection.retainAll(other.values);
     return intersection.size();
-  }
-
-  private void validate(Set<LottoNumber> values) {
-    if (values.size() != LOTTO_SIZE) {
-      throw new IllegalArgumentException(INVALID_SIZE_MESSAGE);
-    }
   }
 
   @Override
