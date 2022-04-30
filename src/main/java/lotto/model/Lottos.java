@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.strategy.NumberGenerateStrategy;
-import lotto.strategy.RandomNumberGenerateStrategy;
 
 public class Lottos {
 
@@ -12,14 +11,6 @@ public class Lottos {
 
   public Lottos(List<Lotto> lottos) {
     this.lottos = lottos;
-  }
-
-  public static Lottos create(int numberOfPurchasedLotto) {
-    List<Lotto> lottos = new ArrayList<>();
-    for (int i = 0; i < numberOfPurchasedLotto; i++) {
-      lottos.add(Lotto.create(new RandomNumberGenerateStrategy()));
-    }
-    return new Lottos(lottos);
   }
 
   public static Lottos create(int numberOfPurchasedLotto,

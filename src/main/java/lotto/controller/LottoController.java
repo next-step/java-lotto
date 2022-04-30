@@ -4,18 +4,18 @@ import lotto.model.Lotto;
 import lotto.model.LottoNumberComparsion;
 import lotto.model.Lottos;
 import lotto.model.WinningLotto;
-import lotto.strategy.RandomNumberGenerateStrategy;
+import lotto.strategy.NumberGenerateStrategy;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
 
-  public void lottoDraw() {
+  public void lottoDraw(NumberGenerateStrategy numberGenerateStrategy) {
     int amount = Integer.parseInt(InputView.inputPurchasedAmount());
     int purchasedLotto = countPurchasedLotto(amount);
     OutputView.outputCountPurchasedLotto(purchasedLotto);
 
-    Lottos lottos = Lottos.create(purchasedLotto, new RandomNumberGenerateStrategy());
+    Lottos lottos = Lottos.create(purchasedLotto, numberGenerateStrategy);
     OutputView.outputPurchasedLottoInfo(lottos);
 
     WinningLotto winningLotto = WinningLotto.create(InputView.inputLastWeekWinningLotto());

@@ -3,6 +3,7 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import lotto.strategy.FixedNumberGenerateStrategy;
+import lotto.strategy.RandomNumberGenerateStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +16,7 @@ class LottosTest {
     int purchasedLotto = 3;
 
     // when
-    Lottos lottos = Lottos.create(purchasedLotto);
+    Lottos lottos = Lottos.create(purchasedLotto, new RandomNumberGenerateStrategy());
 
     // then
     assertThat(lottos.getLottos()).hasSize(purchasedLotto);
