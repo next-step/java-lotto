@@ -1,5 +1,6 @@
 package lottoauto.controller;
 
+import lottoauto.domain.LottoReport;
 import lottoauto.service.LottoGame;
 import lottoauto.view.InputView;
 import lottoauto.view.ResultView;
@@ -47,7 +48,8 @@ public class LottoController {
 
         lottoGame.start();
 
-        ResultView.printLottoGameResult(lottoGame);
-        ResultView.printLottoGameProfitRate(lottoGame);
+        LottoReport lottoReport = lottoGame.report();
+        ResultView.printLottoGameResult(lottoReport);
+        ResultView.printLottoGameProfitRate(lottoReport);
     }
 }

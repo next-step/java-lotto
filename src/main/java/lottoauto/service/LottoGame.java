@@ -1,6 +1,7 @@
 package lottoauto.service;
 
 import lottoauto.domain.Lotto;
+import lottoauto.domain.LottoReport;
 import lottoauto.domain.LottoStatus;
 
 import java.util.*;
@@ -87,5 +88,9 @@ public class LottoGame {
         int totalWinningMoney = THREE_MATCH_WINNING_MONEY * getMatchThreeCount() + FOUR_MATCH_WINNING_MONEY * getMatchFourCount()
                                 + FIVE_MATCH_WINNING_MONEY * getMatchFiveCount() + SIX_MATCH_WINNING_MONEY * getMatchSixCount();
         return totalWinningMoney / this.money;
+    }
+
+    public LottoReport report(){
+        return new LottoReport(matchThreeCount, matchFourCount, matchFiveCount, matchSixCount, getProfitRate());
     }
 }
