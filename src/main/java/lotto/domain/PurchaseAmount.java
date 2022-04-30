@@ -22,7 +22,7 @@ public class PurchaseAmount {
     return value / LOTTO_PRICE;
   }
 
-  public double getYield(int other) {
-    return ((double) other) / value;
+  public double getYield(double other) {
+    return other / value;
   }
 }

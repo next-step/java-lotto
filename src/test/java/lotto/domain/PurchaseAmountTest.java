@@ -28,6 +28,6 @@ class PurchaseAmountTest {
   void getYield() {
     PurchaseAmount purchaseAmount = new PurchaseAmount(14000);
     assertThat(purchaseAmount.getYield(14000)).isEqualTo(1);
-    assertThat(purchaseAmount.getYield(14000 / 2)).isEqualTo(0.5);
+    assertThat(purchaseAmount.getYield(7000)).isEqualTo(0.5);
   }
 }
