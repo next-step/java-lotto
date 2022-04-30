@@ -4,10 +4,10 @@ import lotto.exception.InvalidBoundLottoNumber;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
     private final int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
@@ -37,5 +37,10 @@ public class LottoNumber {
     @Override
     public String toString() {
         return String.valueOf(lottoNumber);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return this.lottoNumber - o.lottoNumber;
     }
 }

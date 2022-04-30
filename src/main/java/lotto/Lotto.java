@@ -6,11 +6,15 @@ import java.util.List;
 
 public class Lotto {
 
-    private static final int LOTTO_NUMBER_COUNT = 6;
-    private List<LottoNumber> lottoNumbers;
+    public static final int LOTTO_NUMBER_COUNT = 6;
+    private final LottoNumbers lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+        this(new LottoNumbers(lottoNumbers));
+    }
+
+    public Lotto(LottoNumbers lottoNumbers) {
+        if (!lottoNumbers.isSameCount(LOTTO_NUMBER_COUNT)) {
             throw new InvalidLottoNumberCount();
         }
         this.lottoNumbers = lottoNumbers;
