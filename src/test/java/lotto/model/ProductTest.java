@@ -86,6 +86,6 @@ class ProductTest {
               new LottoNumber(17)
           ));
 
-    }).printStackTrace();
+    });
   }
 }

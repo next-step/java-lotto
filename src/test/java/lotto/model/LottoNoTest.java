@@ -12,6 +12,6 @@ class LottoNoTest {
   void lottoNotNegativeNumber() {
     assertThrows(RuntimeException.class, () -> {
       new LottoNumber(-1);
-    }).printStackTrace();
+    });
   }
 }

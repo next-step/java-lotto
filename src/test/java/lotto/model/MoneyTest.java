@@ -12,7 +12,7 @@ class MoneyTest {
   void moneyNotNegativeException() {
     assertThrows(RuntimeException.class, () -> {
       Money money = new Money(-1L);
-    }).printStackTrace();
+    });
   }
 
   @Test
@@ -20,6 +20,6 @@ class MoneyTest {
   void moneyEmptyException() {
     assertThrows(RuntimeException.class, () -> {
       Money money = new Money();
-    }).printStackTrace();
+    });
   }
 }
