@@ -14,12 +14,12 @@ class CalculatorTest {
         Calculator calculator = new Calculator();
 
         assertAll(
-                () -> assertEquals(calculator.calculate("1 + 2"), 3),
-                () -> assertEquals(calculator.calculate("1 + 2 + 2"), 5),
-                () -> assertEquals(calculator.calculate("2 - 2"), 0),
-                () -> assertEquals(calculator.calculate("1 * 2"), 2),
-                () -> assertEquals(calculator.calculate("2 / 2"), 1),
-                () -> assertEquals(calculator.calculate("1 + 2 / 3"), 1)
+                () -> assertEquals(3, calculator.calculate("1 + 2")),
+                () -> assertEquals(5, calculator.calculate("1 + 2 + 2")),
+                () -> assertEquals(0, calculator.calculate("2 - 2")),
+                () -> assertEquals(2, calculator.calculate("1 * 2")),
+                () -> assertEquals(1, calculator.calculate("2 / 2")),
+                () -> assertEquals(1, calculator.calculate("1 + 2 / 3"))
         );
     }
 

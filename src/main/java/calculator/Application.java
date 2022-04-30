@@ -6,11 +6,11 @@ import calculator.app.Calculator;
 import java.util.Scanner;
 
 public class Application {
-    private static final Scanner scanner = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
 
     private static String inputLine() {
         System.out.print("수식 : ");
-        return scanner.nextLine();
+        return SCANNER.nextLine();
     }
 
     private static void printResult(int result) {
