@@ -2,6 +2,7 @@ package lotto.model;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import lotto.exception.LottoNumberDuplicateException;
 import lotto.strategy.NumberGenerateStrategy;
@@ -24,7 +25,6 @@ public class LottoNumbers {
   public List<LottoNumber> getLottoNumbers() {
     return lottoNumbers;
   }
-
 
   private void validateDuplicateNumber(List<LottoNumber> lottoNumbers) {
     Set<Integer> validateLottoNumbers = new HashSet<>();
