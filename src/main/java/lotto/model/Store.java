@@ -27,8 +27,7 @@ public final class Store {
   }
 
   private Product deliverLotto() {
-    LottoFactory factory = new LottoFactory();
-    return factory.apply();
+    return LottoFactory.getInstance().apply();
   }
 
 

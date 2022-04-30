@@ -18,9 +18,6 @@ public final class Money {
     if (value < EMPTY_VALUE) {
       throw new MoneyNegativeException();
     }
-    if (value == EMPTY_VALUE) {
-      throw new MoneyEmptyException();
-    }
   }
 
   @Override
