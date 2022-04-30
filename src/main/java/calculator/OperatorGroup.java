@@ -4,6 +4,7 @@ import calculator.exception.WrongOperatorException;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 
 public enum OperatorGroup {
     PLUS("+", (n1, n2) -> n1 + n2),
@@ -11,11 +12,10 @@ public enum OperatorGroup {
     MULTI("*", (n1, n2) -> n1 * n2),
     DIVIDE("/", (n1, n2) -> n1 / n2);
 
-
     private final String operator;
-    private final BiFunction<Double, Double, Double> exp;
+    private final BinaryOperator<Double> exp;
 
-    OperatorGroup(String operator, BiFunction<Double, Double, Double> exp) {
+    OperatorGroup(String operator, BinaryOperator<Double> exp) {
         this.operator = operator;
         this.exp = exp;
     }
@@ -27,7 +27,7 @@ public enum OperatorGroup {
                 .orElseThrow(WrongOperatorException::new);
     }
 
-    public double calculate(double opd1, double opd2) {
-        return this.exp.apply(opd1, opd2);
+    public double calculate(double left, double right) {
+        return this.exp.apply(left, right);
     }
 }
