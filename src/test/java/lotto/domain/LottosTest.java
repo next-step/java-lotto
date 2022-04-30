@@ -15,6 +15,29 @@ class LottosTest {
   }
 
   @Test
+  void manualAndAutoCreate() {
+    List<Lotto> manualLottos = List.of(
+        new Lotto(Set.of(
+            new LottoNumber(1),
+            new LottoNumber(2),
+            new LottoNumber(3),
+            new LottoNumber(30),
+            new LottoNumber(40),
+            new LottoNumber(45)
+        )),
+        new Lotto(Set.of(
+            new LottoNumber(1),
+            new LottoNumber(2),
+            new LottoNumber(3),
+            new LottoNumber(4),
+            new LottoNumber(40),
+            new LottoNumber(45)
+        ))
+    );
+    assertThat(Lottos.create(manualLottos, 8).size()).isEqualTo(10);
+  }
+
+  @Test
   void calculate() {
     WinningLotto lotto = WinningLotto.create(Set.of(1, 2, 3, 4, 5, 6), 7);
     Lottos lottos = prepareLottos();
