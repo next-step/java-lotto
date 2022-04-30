@@ -1,8 +1,11 @@
 package calculator;
 
+import calculator.domain.Element;
+import calculator.domain.ElementBuilder;
+import calculator.domain.NumberElement;
+import calculator.domain.Operator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Queue;
 
 public class Calculator {
@@ -13,33 +16,19 @@ public class Calculator {
     }
 
     public static int execute(List<String> elements) {
-        Queue<String> es = new LinkedList<>();
+        Queue<Element> es = new LinkedList<>();
         for (String element: elements) {
-            es.add(element);
+            es.add(ElementBuilder.of(element));
         }
 
-        int result = Integer.parseInt(es.poll());
+        NumberElement result = (NumberElement) es.poll();
         while (!es.isEmpty()) {
-            String operator = es.poll();
-            int b = Integer.parseInt(es.poll());
+            Operator operator = (Operator) es.poll();
+            NumberElement b = (NumberElement) es.poll();
 
-            if (Objects.equals(operator, "+")) {
-                result = result + b;
-            }
-
-            if (Objects.equals(operator, "*")) {
-                result = result * b;
-            }
-
-            if (Objects.equals(operator, "-")) {
-                result = result - b;
-            }
-
-            if (Objects.equals(operator, "/")) {
-                result = result / b;
-            }
+            result = operator.execute(result, b);
         }
 
-        return result;
+        return result.getValue();
     }
 }
