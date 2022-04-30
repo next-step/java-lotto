@@ -2,6 +2,7 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.strategy.NumberGenerateStrategy;
 import lotto.strategy.RandomNumberGenerateStrategy;
 
 public class Lottos {
@@ -20,7 +21,27 @@ public class Lottos {
     return new Lottos(lottos);
   }
 
+  public static Lottos create(int numberOfPurchasedLotto, NumberGenerateStrategy numberGenerateStrategy) {
+    List<Lotto> lottos = new ArrayList<>();
+    for(int i = 0; i < numberOfPurchasedLotto; i++) {
+      lottos.add(Lotto.create(numberGenerateStrategy));
+    }
+    return new Lottos(lottos);
+  }
+
   public List<Lotto> getLottos() {
     return lottos;
+  }
+
+  public int matchLottoRankResult(LottoRank lottoRank, WinningLotto winningLotto) {
+    return Math.toIntExact(lottos.stream()
+        .map(lotto -> matchLottoRank(winningLotto, lotto))
+        .filter(matchRank -> matchRank == lottoRank)
+        .count());
+  }
+
+  public LottoRank matchLottoRank(WinningLotto winningLotto, Lotto lotto) {
+    int matchCountOfLotto = lotto.matchWinningLottoNumbers(winningLotto);
+    return LottoRank.findRank(matchCountOfLotto);
   }
 }

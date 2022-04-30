@@ -3,6 +3,8 @@ package lotto.model;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import lotto.exception.LottoNumberDuplicateException;
 import lotto.strategy.NumberGenerateStrategy;
 
@@ -33,5 +35,11 @@ public class Lotto {
     if (validateLottoNumbers.size() != LOTTO_NUMBER_COUNT) {
       throw new LottoNumberDuplicateException();
     }
+  }
+
+  public int matchWinningLottoNumbers(WinningLotto winningLottoNumbers) {
+    return Math.toIntExact(lottoNumbers.stream()
+        .filter(winningLottoNumbers::contains)
+        .count());
   }
 }

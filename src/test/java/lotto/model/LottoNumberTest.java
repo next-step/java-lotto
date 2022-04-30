@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoNumberTest {
@@ -30,5 +31,19 @@ public class LottoNumberTest {
     // when & then
     assertThatThrownBy(() -> new LottoNumber(value))
         .isInstanceOf(IllegalArgumentException.class);
+  }
+
+  @ParameterizedTest(name = "로또 번호인 {0}와 지난주 우승 번호인 {1}이 같은지 비교")
+  @CsvSource({"1,1,true", "1,2,false"})
+  void compareLottoNumberForSame(int purchasedNumber, int winningNumber, boolean expected) {
+    // given
+    LottoNumber lottoNumber1 = LottoNumber.create(purchasedNumber);
+    LottoNumber lottoNumber2 = LottoNumber.create(winningNumber);
+
+    // when
+    boolean result = lottoNumber1.equals(lottoNumber2);
+
+    // then
+    assertThat(result).isEqualTo(expected);
   }
 }

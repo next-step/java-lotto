@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.util.Objects;
+
 public class LottoNumber {
 
   private static final int LOTTO_NUMBER_RANGE_START = 1;
@@ -33,5 +35,22 @@ public class LottoNumber {
 
   private static int convertToNumber(String winningLottoNumber) {
     return Integer.parseInt(winningLottoNumber);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    LottoNumber that = (LottoNumber) o;
+    return value == that.value;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(value);
   }
 }
