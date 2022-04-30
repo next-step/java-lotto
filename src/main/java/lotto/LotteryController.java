@@ -66,13 +66,13 @@ public class LotteryController {
 
     public void findWins() {
         for (Lottery lottery : lotteries) {
-            findWin(lottery);
+            findWin(lottery.numbers, this.answerNumbers);
         }
     }
 
-    private void findWin(Lottery lottery) {
+    public void findWin(List<Integer> numbers, List<Integer> answerNumbers) {
         int counter = 0;
-        for (int number : lottery.numbers) {
+        for (int number : numbers) {
             if (answerNumbers.contains(number)) {
                 counter++;
             }
