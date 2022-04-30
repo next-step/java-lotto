@@ -18,5 +18,9 @@ public class WinStatisticsTest {
         assertThat(winStatistics.toPayload()).isEqualTo("3 matches (₩5000): 1\n" + "4 matches (₩50000): 0\n" + "5 matches (₩1500000): 0\n" + "6 matches (₩2000000000): 0\n");
     }
 
-
+    @Test
+    void earnedMoneyShouldBe55000() {
+        WinStatistics winStatistics = new WinStatistics(1, 1, 0, 0);
+        assertThat(winStatistics.getEarnedMoney()).isEqualTo(55000);
+    }
 }

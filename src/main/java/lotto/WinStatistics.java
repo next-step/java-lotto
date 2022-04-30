@@ -41,5 +41,11 @@ public class WinStatistics {
         return payload.toString();
     }
 
-
+    public int getEarnedMoney() {
+        int earnedMoney = 0;
+        for (int key : matches.keySet()) {
+            earnedMoney += rewordMap.get(key) * matches.get(key);
+        }
+        return earnedMoney;
+    }
 }
