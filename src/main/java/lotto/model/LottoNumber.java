@@ -1,10 +1,12 @@
 package lotto.model;
 
 import java.util.Objects;
-import lotto.exception.LottoNegativeException;
+import lotto.exception.LottoNumberException;
 
 public final class LottoNumber {
 
+  private static final int MIN_VALUE = 1;
+  private static final int MAX_VALUE = 45;
   private final int value;
 
   public LottoNumber(int value) {
@@ -13,8 +15,8 @@ public final class LottoNumber {
   }
 
   private void valid(int value) {
-    if (value <= 0) {
-      throw new LottoNegativeException();
+    if (value < MIN_VALUE || MAX_VALUE < value) {
+      throw new LottoNumberException(value);
     }
   }
 
