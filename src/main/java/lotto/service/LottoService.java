@@ -20,11 +20,11 @@ public class LottoService {
     return Lotto.from(AwardNumberUtil.getAwadNumberList(winnerNumber));
   }
 
-  public List<WinningResultDto> histories(List<Lotto> lottos, Lotto winLotto) {
+  public List<WinningResultDto> histories(List<Lotto> lotto, Lotto winLotto) {
     List<WinningResultDto> histories = new ArrayList<>();
     Statistics statistics = new Statistics();
     for (Grade grade : Grade.values()) {
-      int result = statistics.result(grade, lottos, winLotto);
+      int result = statistics.result(grade, lotto, winLotto);
       statistics = statistics.winReward(grade, result);
       histories.add(new WinningResultDto(grade, result));
     }
