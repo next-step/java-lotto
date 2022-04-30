@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class WinStatistics {
@@ -7,6 +9,7 @@ public class WinStatistics {
     private int four;
     private int five;
     private int six;
+    private final static Map<Integer, Integer> rewordMap = new HashMap(Map.of(3, 5000, 4, 50000, 5, 1500000, 6, 2000000000));
 
     public WinStatistics() {
         this.three = 0;
@@ -59,5 +62,8 @@ public class WinStatistics {
 
     public String toPayload() {
         return "3 matches (₩5000): " + this.three + "\n" + "4 matches (₩50000): " + this.four + "\n" + "5 matches (₩1500000): " + this.five + "\n" + "6 matches (₩2000000000): " + this.six;
+    }
+
+    public void getEarnedMoney() {
     }
 }
