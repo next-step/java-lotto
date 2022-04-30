@@ -38,7 +38,7 @@ class ProductTest {
         Set.of(new LottoNo(1), new LottoNo(2), new LottoNo(3), new LottoNo(4), new LottoNo(5),
             new LottoNo(6)));
 
-    assertThat(product.coincideLotto(Grade.THREE, List.of
+    assertThat(product.coincideLotto(Grade.FOURTH, List.of
         (
             new Product
                 (
