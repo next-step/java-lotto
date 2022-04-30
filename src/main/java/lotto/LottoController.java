@@ -1,9 +1,9 @@
 package lotto;
 
 public class LottoController {
-    public int money;
+    public Money money;
 
     public LottoController(int money) {
-        this.money = money;
+        this.money = new Money(money);
     }
 }

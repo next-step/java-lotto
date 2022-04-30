@@ -1,13 +1,16 @@
 package lotto;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoControllerTest {
+    LottoController lottoController = new LottoController(14000);
+
     @Test
-    void inputShouldBePositiveInt() {
-        LottoController lottoController = new LottoController(14000);
-        assertThat(lottoController.money).isPositive();
+    void shouldCreateMoney() {
+        assertThat(lottoController.money).isInstanceOf(Money.class);
     }
 }
