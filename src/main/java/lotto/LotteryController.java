@@ -6,12 +6,23 @@ import java.util.List;
 
 public class LotteryController {
     public Money money;
-    public final int numberOfLotteries;
+    private int numberOfLotteries;
     public final List<Lottery> lotteries = new ArrayList<>();
+
+    public LotteryController() {}
 
     public LotteryController(int money) {
         this.money = new Money(money);
         this.numberOfLotteries = this.money.price / 1000;
+    }
+
+    public void scan() {
+        this.money = new Money(InputView.scan());
+        this.numberOfLotteries = this.money.price / 1000;
+    }
+
+    public int getNumberOfLotteries() {
+        return this.numberOfLotteries;
     }
 
     public void createLotteries() {

@@ -14,7 +14,7 @@ public class LottoControllerTest {
 
     @Test
     void numberOfLotteriesShouldBeMoneyDivide1000() {
-        assertThat(lottoController.numberOfLotteries).isEqualTo(lottoController.money.price / 1000);
+        assertThat(lottoController.getNumberOfLotteries()).isEqualTo(lottoController.money.price / 1000);
     }
 
     @Test
