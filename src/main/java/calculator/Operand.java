@@ -1,7 +1,7 @@
 package calculator;
 
 public class Operand {
-    private int number;
+    private final int number;
 
     Operand(int number) {
         this.number = number;
