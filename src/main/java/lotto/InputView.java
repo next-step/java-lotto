@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class InputView {
     private static Scanner scanner = new Scanner(System.in);
 
-    public static int scan() {
-        System.out.println("Put your money.");
-        return scanner.nextInt();
+    public static String scan(String payload) {
+        System.out.println(payload);
+        return scanner.next();
     }
 }

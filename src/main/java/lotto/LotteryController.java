@@ -8,6 +8,7 @@ public class LotteryController {
     public Money money;
     private int numberOfLotteries;
     public final List<Lottery> lotteries = new ArrayList<>();
+    private List<Integer> answerNumbers;
 
     public LotteryController() {}
 
@@ -16,8 +17,9 @@ public class LotteryController {
         this.numberOfLotteries = this.money.price / 1000;
     }
 
-    public void scan() {
-        this.money = new Money(InputView.scan());
+    public void scanMoney() {
+        String scanned = InputView.scan("Put your money.");
+        this.money = new Money(Integer.parseInt(scanned));
         this.numberOfLotteries = this.money.price / 1000;
     }
 
@@ -33,5 +35,31 @@ public class LotteryController {
 
     public void printLotteries() {
         ResultView.print(this.lotteries);
+    }
+
+    public void scanAnswer() {
+        String scanned = InputView.scan("Put lottery answer.");
+        this.answerNumbers = parseAnswerNumbers(scanned);
+    }
+
+    public List<Integer> parseAnswerNumbers(String scanned) {
+        return toIntegers(scanned.split("\\s*,\\s*"));
+    }
+
+    public List<Integer> toIntegers(String[] split) {
+        List<Integer> list = new ArrayList();
+        for (String s:split
+             ) {
+            list.add(toInteger(s));
+        }
+        return list;
+    }
+
+    public int toInteger(String s) {
+        int number = Integer.parseInt(s);
+        if (number < 1 || number > 45) {
+            throw new IllegalArgumentException("answer number should be between 1 to 45.");
+        }
+        return number;
     }
 }

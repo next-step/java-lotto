@@ -73,7 +73,7 @@ Result: 1
     - [x] ResultView.toString(lotto)
     - [x] ResultView.printLotteries
 - 정답 번호를 입력
-    - [ ] LotteryController.answerNumbers = LotteryController.parse(InputView.scan)
+    - [x] LotteryController.answerNumbers = LotteryController.parse(InputView.scan)
 - 정답 번호와 비교하여 win 횟수 세기
     - [ ] for lotto of lotteries: lotto == answer ? cnt++ : null
     - [ ] 비교는 ArrayList.contains() 활용
