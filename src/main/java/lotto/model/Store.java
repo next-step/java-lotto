@@ -19,11 +19,11 @@ public final class Store {
 
   public List<Lotto> delivery(long money) {
     long count = money / PRODUCT_PRICE;
-    List<Lotto> lottos = new ArrayList<>();
+    List<Lotto> lottoList = new ArrayList<>();
     while (count-- != 0) {
-      lottos.add(deliverLotto());
+      lottoList.add(deliverLotto());
     }
-    return lottos;
+    return lottoList;
   }
 
   private Lotto deliverLotto() {
