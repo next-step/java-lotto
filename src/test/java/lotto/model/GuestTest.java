@@ -3,6 +3,9 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import lotto.exception.LottoSizeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,7 +33,7 @@ class GuestTest {
     assertThrows(LottoSizeException.class, () -> {
       Guest guest = new Guest(999);
       guest = guest.choiceProduct(new Store());
-      assertThat(guest).isEqualTo(new Guest(0, guest.hasAllLotto()));
+      new Guest(0, guest.hasAllLotto());
     });
   }
 
