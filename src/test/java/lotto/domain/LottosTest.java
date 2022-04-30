@@ -44,13 +44,15 @@ class LottosTest {
     }
 
     @Nested
-    class findMatch_메서드는 {
+    class getMatchNumberCounts_메서드는 {
 
         @Test
-        void 일치하는_숫자_개수를_리턴한다() {
-            List<Integer> actual = lottos.findMatch("3, 4, 5, 6, 7, 8");
+        void 일치하는_번호_개수를_리턴한다() {
+            LottoNumbers lottoNumbers = new LottoNumbers("4, 5, 6, 7, 8, 9");
 
-            assertThat(actual).containsExactly(4, 2);
+            List<Integer> actual = lottos.getMatchNumberCounts(lottoNumbers);
+
+            assertThat(actual).containsExactly(3, 3);
         }
     }
 }

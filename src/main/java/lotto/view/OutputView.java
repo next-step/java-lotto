@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoNumbers;
 import lotto.domain.Lottos;
 
 import java.util.List;
@@ -19,12 +20,12 @@ public class OutputView {
     }
 
     public static void outputWinningStatistics(Lottos lottos, String previousWeekWinningNumber) {
-        List<Integer> matchLottos = lottos.findMatch(previousWeekWinningNumber);
-
         System.out.println(WINNING_STATISTICS);
         System.out.println(SEPARATOR);
+
+        List<Integer> matchNumberCounts = lottos.getMatchNumberCounts(new LottoNumbers(previousWeekWinningNumber));
         IntStream.rangeClosed(START_MATCH_COUNT, END_MATCH_COUNT)
-                .forEach(outputMatchStatistics(matchLottos));
+                .forEach(outputMatchStatistics(matchNumberCounts));
     }
 
     private static IntConsumer outputMatchStatistics(List<Integer> matchLottos) {

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -8,7 +7,6 @@ import java.util.stream.IntStream;
 public class Lottos {
     private static final int START_INCLUSIVE = 0;
     private static final int LOTTO_PRICE = 1000;
-    private static final String PREVIOUS_WEEK_WINNING_NUMBER_REGEX = ", ";
 
     private final List<LottoNumbers> lottoNumbers;
 
@@ -36,20 +34,9 @@ public class Lottos {
                 .forEach(System.out::println);
     }
 
-    public List<Integer> findMatch(String previousWeekWinningNumber) {
-        String[] winningNumbers = previousWeekWinningNumber.split(PREVIOUS_WEEK_WINNING_NUMBER_REGEX);
-
+    public List<Integer> getMatchNumberCounts(LottoNumbers lottoNumbers) {
         return this.lottoNumbers.stream()
-                .map(lottoNumber -> (int) Arrays.stream(winningNumbers)
-                        .filter(winningNumber -> lottoNumber.contains(new LottoNumber(winningNumber)))
-                        .count()
-                ).collect(Collectors.toList());
-    }
-
-    @Override
-    public String toString() {
-        return this.lottoNumbers.stream()
-                .map(LottoNumbers::toString)
-                .collect(Collectors.joining("\n"));
+                .map(lottoNumbers::getMatchNumberCount)
+                .collect(Collectors.toList());
     }
 }
