@@ -7,9 +7,9 @@ import lotto.exception.InvalidLottoNumberException;
 public class LottoNumber {
 
   private final int value;
-  public final static int MIN = 1;
-  public final static int MAX = 45;
-  private static Pattern NUMBER_PATTERN = Pattern.compile("^\\d+$");
+  public static final int MIN = 1;
+  public static final int MAX = 45;
+  private static final Pattern NUMBER_PATTERN = Pattern.compile("^\\d+$");
 
   public LottoNumber(int value) {
     if (checkBound(value)) {
