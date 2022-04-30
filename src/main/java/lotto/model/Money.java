@@ -1,8 +1,7 @@
 package lotto.model;
 
 import java.util.Objects;
-import lotto.exception.MoneyEmptyException;
-import lotto.exception.MoneyNegativeException;
+import lotto.exception.MoneyNumberException;
 
 public final class Money {
 
@@ -14,9 +13,9 @@ public final class Money {
     this.value = value;
   }
 
-  private void valid(Long value) {
+  private void valid(long value) {
     if (value < EMPTY_VALUE) {
-      throw new MoneyNegativeException();
+      throw new MoneyNumberException(value);
     }
   }
 
