@@ -81,6 +81,8 @@ Result: 1
 - 당첨 통계 출력
     - [x] WinStatistics.toPayload 에서 출력할 문구 생성
     - [x] ResultView.printResult 에서 해당 문구를 출력
+- 총 당첨 금액 계산
+    - [x] winStatistics.getEarnedMoney
 - 수익률 계산
     - [ ] LotteryController.calculateEarningRate
 - 수익률 출력
