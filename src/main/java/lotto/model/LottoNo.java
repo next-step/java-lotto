@@ -5,7 +5,6 @@ import lotto.exception.LottoNegativeException;
 
 public class LottoNo {
   private Integer value;
-
   public LottoNo(Integer value) {
     valid(value);
     this.value = value;

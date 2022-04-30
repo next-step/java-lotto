@@ -6,7 +6,6 @@ import java.util.Set;
 import lotto.enums.ChoiceType;
 import lotto.enums.Grade;
 import lotto.exception.LottoSizeException;
-import lotto.util.AwardNumberUtil;
 
 public final class Product {
 
