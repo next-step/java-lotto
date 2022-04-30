@@ -1,10 +1,9 @@
 package lotto.util;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import lotto.model.LottoNo;
+import lotto.model.LottoNumber;
 
 public class AwardNumberUtil {
 
@@ -14,10 +13,10 @@ public class AwardNumberUtil {
     return str.split(DELIMITER);
   }
 
-  public static Set<LottoNo> getAwadNumberList(String str) {
+  public static Set<LottoNumber> getAwadNumberList(String str) {
     return Arrays.stream(split(str))
         .map(Integer::parseInt)
-        .map(LottoNo::new)
+        .map(LottoNumber::new)
         .collect(Collectors.toSet());
   }
 

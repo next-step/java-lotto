@@ -1,11 +1,8 @@
 package lotto.util;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.List;
-import java.util.Set;
-import lotto.model.LottoNo;
+import lotto.model.LottoNumber;
 import org.junit.jupiter.api.Test;
 
 class AwardNumberUtilTest {
@@ -13,9 +10,9 @@ class AwardNumberUtilTest {
   @Test
   void getAwadNumberList() {
     assertThat(AwardNumberUtil.getAwadNumberList("1, 2, 4, 5")).contains(
-        new LottoNo(1),
-        new LottoNo(2),
-        new LottoNo(4),
-        new LottoNo(5));
+        new LottoNumber(1),
+        new LottoNumber(2),
+        new LottoNumber(4),
+        new LottoNumber(5));
   }
 }
