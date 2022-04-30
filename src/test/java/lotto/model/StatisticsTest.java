@@ -40,17 +40,17 @@ class StatisticsTest {
         )
     );
     Statistics statistics = new Statistics();
-    assertThat(statistics.result(Grade.THREE, allLotto, winNumbers)).isEqualTo(2);
+    assertThat(statistics.result(Grade.FOURTH, allLotto, winNumbers)).isEqualTo(2);
   }
 
   @Test
   @DisplayName("승리 수당 테스트")
   void winBenefit() {
     Statistics statistics = new Statistics();
-    statistics = statistics.winReward(Grade.THREE, 1);
-    statistics = statistics.winReward(Grade.FOUR, 2);
-    statistics = statistics.winReward(Grade.FIVE, 1);
-    statistics = statistics.winReward(Grade.SIX, 1);
+    statistics = statistics.winReward(Grade.FOURTH, 1);
+    statistics = statistics.winReward(Grade.THIRD, 2);
+    statistics = statistics.winReward(Grade.SECOND, 1);
+    statistics = statistics.winReward(Grade.FIRST, 1);
     assertThat(statistics).isEqualTo(new Statistics(2001605000L));
   }
 }
