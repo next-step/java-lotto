@@ -14,9 +14,9 @@ public class Lottos {
     this.values = values;
   }
 
-  public static Lottos autoCreate(int lottoCount) {
-    List<Lotto> lottos = new ArrayList<>();
-    for (int i = 0; i < lottoCount; i++) {
+  public static Lottos create(List<Lotto> manualLottos, int autoLottoCount) {
+    List<Lotto> lottos = new ArrayList<>(manualLottos);
+    for (int i = 0; i < autoLottoCount; i++) {
       lottos.add(Lotto.autoCreate());
     }
     return new Lottos(lottos);

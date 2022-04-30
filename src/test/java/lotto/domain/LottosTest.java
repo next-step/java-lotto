@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,7 @@ class LottosTest {
 
   @Test
   void autoCreate() {
-    assertThat(Lottos.autoCreate(10).size()).isEqualTo(10);
+    assertThat(Lottos.create(Collections.EMPTY_LIST, 10).size()).isEqualTo(10);
   }
 
   @Test
