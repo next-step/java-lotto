@@ -9,8 +9,10 @@ public class LotteryController {
     private int numberOfLotteries;
     public final List<Lottery> lotteries = new ArrayList<>();
     private List<Integer> answerNumbers;
+    public final WinStatistics winStatistics = new WinStatistics();
 
-    public LotteryController() {}
+    public LotteryController() {
+    }
 
     public LotteryController(int money) {
         this.money = new Money(money);
@@ -48,8 +50,7 @@ public class LotteryController {
 
     public List<Integer> toIntegers(String[] split) {
         List<Integer> list = new ArrayList();
-        for (String s:split
-             ) {
+        for (String s : split) {
             list.add(toInteger(s));
         }
         return list;
@@ -61,5 +62,23 @@ public class LotteryController {
             throw new IllegalArgumentException("answer number should be between 1 to 45.");
         }
         return number;
+    }
+
+    public void findWins() {
+        for (Lottery lottery : lotteries) {
+            findWin(lottery);
+        }
+    }
+
+    private void findWin(Lottery lottery) {
+        int counter = 0;
+        for (int number : lottery.numbers) {
+            if (answerNumbers.contains(number)) {
+                counter++;
+            }
+        }
+        if (counter >= 3) {
+            winStatistics.save(counter);
+        }
     }
 }

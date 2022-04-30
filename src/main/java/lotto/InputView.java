@@ -7,6 +7,6 @@ public class InputView {
 
     public static String scan(String payload) {
         System.out.println(payload);
-        return scanner.next();
+        return scanner.nextLine();
     }
 }

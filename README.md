@@ -75,8 +75,9 @@ Result: 1
 - 정답 번호를 입력
     - [x] LotteryController.answerNumbers = LotteryController.parse(InputView.scan)
 - 정답 번호와 비교하여 win 횟수 세기
-    - [ ] for lotto of lotteries: lotto == answer ? cnt++ : null
-    - [ ] 비교는 ArrayList.contains() 활용
+    - [x] for lotto of lotteries: lotto == answer ? cnt++ : null
+    - [x] 비교는 ArrayList.contains() 활용
+    - [x] WinStatistics Class 생성하여 3,4,5,6 field 에 save
 - 당첨 통계 출력
     - [ ] ResultView.printResult
 - 수익률 계산
