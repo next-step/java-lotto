@@ -24,40 +24,4 @@ class NumberTest {
       Number number = new Number("100123k");
     }).isInstanceOf(InvalidNumberStrException.class);
   }
-
-  @Test
-  @DisplayName("Number 클래스 간 덧셈 결과 확인")
-  void plus() {
-    Number number1 = new Number("100");
-    Number number2 = new Number("200");
-
-    assertThat(number1.plus(number2)).usingRecursiveComparison().isEqualTo(new Number(300));
-  }
-
-  @Test
-  @DisplayName("Number 클래스 간 뺄셈 결과 확인")
-  void minus() {
-    Number number1 = new Number("100");
-    Number number2 = new Number("200");
-
-    assertThat(number1.minus(number2)).usingRecursiveComparison().isEqualTo(new Number(-100));
-  }
-
-  @Test
-  @DisplayName("Number 클래스 간 곱셈 결과 확인")
-  void multiply() {
-    Number number1 = new Number("100");
-    Number number2 = new Number("200");
-
-    assertThat(number1.multiply(number2)).usingRecursiveComparison().isEqualTo(new Number(20000));
-  }
-
-  @Test
-  @DisplayName("Number 클래스 간 나눗셈 결과 확인")
-  void divide() {
-    Number number1 = new Number("100");
-    Number number2 = new Number("100");
-
-    assertThat(number1.divide(number2)).usingRecursiveComparison().isEqualTo(new Number(1));
-  }
 }
