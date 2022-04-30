@@ -2,6 +2,7 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.strategy.NumberGenerateStrategy;
 import lotto.strategy.RandomNumberGenerateStrategy;
 
@@ -43,5 +44,12 @@ public class Lottos {
   public LottoRank matchLottoRank(WinningLotto winningLotto, Lotto lotto) {
     int matchCountOfLotto = lotto.matchWinningLottoNumbers(winningLotto);
     return LottoRank.findRank(matchCountOfLotto);
+  }
+
+  @Override
+  public String toString() {
+    return this.lottos.stream()
+        .map(Lotto::toString)
+        .collect(Collectors.joining("\n"));
   }
 }
