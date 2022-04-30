@@ -6,6 +6,7 @@ import lotto.domain.LottoGames;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoReword;
+import lotto.domain.ProfitRate;
 
 public class LottoGameOutputView {
 
@@ -42,8 +43,9 @@ public class LottoGameOutputView {
 
   private static void printProfitRate(LottoDrawResults lottoDrawResults) {
     long rewordAll = lottoDrawResults.getRewordAll();
-    int purchaseAmount = lottoDrawResults.getValues().size() * LottoGame.GAME_PRICE;
-    System.out.printf(PROFIT_RATE_MESSAGE, (double) rewordAll / purchaseAmount);
+    int gameCount = lottoDrawResults.getValues().size();
+    ProfitRate profitRate = new ProfitRate(gameCount, rewordAll);
+    System.out.printf(PROFIT_RATE_MESSAGE, profitRate.getValue());
   }
 
   private static void printGameResultByMatchCount(LottoDrawResults lottoDrawResults) {
