@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +18,6 @@ class LottoNumbersTest {
         lottoNumbers.add(new LottoNumber(1));
         lottoNumbers.add(new LottoNumber(5));
 
-        assertThat(new LottoNumbers(lottoNumbers).lottoNumbers()).containsExactly(new LottoNumber(1), new LottoNumber(3), new LottoNumber(5));
+        assertThat(new LottoNumbers(lottoNumbers).toList()).containsExactly(new LottoNumber(1), new LottoNumber(3), new LottoNumber(5));
     }
 }

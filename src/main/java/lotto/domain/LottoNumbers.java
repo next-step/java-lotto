@@ -26,7 +26,7 @@ public class LottoNumbers {
         return lottoNumbers.size() == count;
     }
 
-    public List<LottoNumber> lottoNumbers() {
+    public List<LottoNumber> toList() {
         return lottoNumbers;
     }
 
