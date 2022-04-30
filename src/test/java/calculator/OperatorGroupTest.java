@@ -17,7 +17,8 @@ public class OperatorGroupTest {
             "*,MULTI",
             "/,DIVIDE"
     })
-    void 사칙연산자_문자열로_enum_조회(String operator, OperatorGroup operatorGroup) {
+    @DisplayName("사칙연산자 문자열로 enum을 조회한다")
+    void findEnumByOperatorString(String operator, OperatorGroup operatorGroup) {
         assertThat(OperatorGroup.findByOperator(operator)).isEqualTo(operatorGroup);
     }
 
@@ -28,12 +29,14 @@ public class OperatorGroupTest {
             "*,3,2,6",
             "/,6,2,3"
     })
-    void 사칙연산_계산(String operator, double ond1, double ond2, double expected) {
+    @DisplayName("사칙연산자를 계산한다")
+    void calculate(String operator, double ond1, double ond2, double expected) {
         assertThat(OperatorGroup.findByOperator(operator).calculate(ond1, ond2)).isEqualTo(expected);
     }
 
     @Test
-    void 사칙연산자_잘못된_기호_예외() {
+    @DisplayName("사칙연산자 외의 문자가 사용되면 예외가 발생한다")
+    void wrongOperator() {
         assertThatThrownBy(() -> OperatorGroup.findByOperator("?"))
                 .isInstanceOf(WrongOperatorException.class);
     }
