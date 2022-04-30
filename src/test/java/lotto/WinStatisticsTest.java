@@ -23,4 +23,10 @@ public class WinStatisticsTest {
         WinStatistics winStatistics = new WinStatistics(1, 1, 0, 0);
         assertThat(winStatistics.getEarnedMoney()).isEqualTo(55000);
     }
+
+    @Test
+    void earningRateShouldBeFiveTenth() {
+        WinStatistics winStatistics = new WinStatistics(1, 0, 0, 0);
+        assertThat(winStatistics.getEarningRate(10000)).isEqualTo(0.5);
+    }
 }

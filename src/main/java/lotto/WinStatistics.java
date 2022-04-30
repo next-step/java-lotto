@@ -48,4 +48,9 @@ public class WinStatistics {
         }
         return earnedMoney;
     }
+
+    public double getEarningRate(int money) {
+        int earnedMoney = this.getEarnedMoney();
+        return earnedMoney / (double) money;
+    }
 }

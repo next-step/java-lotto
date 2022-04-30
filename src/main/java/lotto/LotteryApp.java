@@ -9,5 +9,6 @@ public class LotteryApp {
         lotteryController.scanAnswer();
         lotteryController.findWins();
         lotteryController.printWinStatistics();
+        lotteryController.getEarningRate();
     }
 }

@@ -84,7 +84,7 @@ Result: 1
 - 총 당첨 금액 계산
     - [x] winStatistics.getEarnedMoney
 - 수익률 계산
-    - [ ] LotteryController.calculateEarningRate
+    - [ ] winStatistics.getEarningRate
 - 수익률 출력
     - [ ] ResultView.printEarningRate
 

@@ -10,6 +10,7 @@ public class LotteryController {
     public final List<Lottery> lotteries = new ArrayList<>();
     private List<Integer> answerNumbers;
     public final WinStatistics winStatistics = new WinStatistics();
+    private double earningRate;
 
     public LotteryController() {
     }
@@ -84,5 +85,9 @@ public class LotteryController {
 
     public void printWinStatistics() {
         ResultView.printWinStatistics(this.winStatistics.toPayload());
+    }
+    
+    public void getEarningRate() {
+        this.earningRate = winStatistics.getEarningRate(this.money.price);
     }
 }
