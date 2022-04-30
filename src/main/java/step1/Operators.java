@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class Operators {
     private static final String OPERATOR_PATTERN = "[+*/-]";
-    private static final String DIGIT = "\\d";
+    private static final String EXTRACT_CHAR_PATTERN = "([0-9]+ [-+*/] )+[0-9]";
     private static final String NOT_OPERATOR_PATTERN = "사칙연산 기호가 아닙니다";
 
     private Queue<String> operators = new LinkedList<>();
@@ -18,11 +18,9 @@ public class Operators {
             operators.add(matcher.group());
         }
 
-        String s = input.replaceAll(OPERATOR_PATTERN, "");
-        String s1 = s.replaceAll("", "");
-        if(!Pattern.compile(DIGIT).matcher(s1).matches()) {
+        String extractChar = Pattern.compile(EXTRACT_CHAR_PATTERN).matcher(input).replaceAll("");
+        if(!extractChar.isEmpty())
             throw new IllegalArgumentException(NOT_OPERATOR_PATTERN);
-        }
     }
 
     public void add(String input) {
