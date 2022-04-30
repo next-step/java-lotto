@@ -59,31 +59,33 @@ Result: 1
 ### Requirements
 
 - 로또 구입 금액을 입력
-    - [x] LottoController 통해 전체 로직 관리
-    - [x] LottoController.money = InputView.scan
+    - [x] LotteryController 통해 전체 로직 관리
+    - [x] LotteryController.money = InputView.scan
 - 로또 1장의 가격은 1000원, money로 살 수 있는 로또 개수 연산
-    - [x] LottoController.numberOfLottos = money / 1000
-- numberOfLottos 만큼 Lotto class 생성
-    - [ ] for 1..numberOfLottos: new Lotto()
-    - [ ] Lotto.numbers 는 Collections.shuffle() 로 생성
+    - [x] LotteryController.numberOfLotterys = money / 1000
+- 로또 객체 생성
+    - [x] Lottery Class with box[45], numbers[6]
+    - [x] Lottery.numbers 는 Collections.shuffle() 로 생성
+- numberOfLotteries 만큼 Lottery class 생성
+    - [ ] for 1..numberOfLotteries: new Lottery()
     - [ ] Collections.sort() 로 정렬해서 보관
 - 자동으로 생성 된 로또 번호들을 출력
     - [ ] ResultView.toString(lotto)
-    - [ ] ResultView.printLottos
+    - [ ] ResultView.printLotteries
 - 정답 번호를 입력
-    - [ ] LottoController.answerNumbers = LottoController.parse(InputView.scan)
+    - [ ] LotteryController.answerNumbers = LotteryController.parse(InputView.scan)
 - 정답 번호와 비교하여 win 횟수 세기
-    - [ ] for lotto of lottos: lotto == answer ? cnt++ : null
+    - [ ] for lotto of lotteries: lotto == answer ? cnt++ : null
     - [ ] 비교는 ArrayList.contains() 활용
 - 당첨 통계 출력
     - [ ] ResultView.printResult
 - 수익률 계산
-    - [ ] LottoController.calculateEarningRate
+    - [ ] LotteryController.calculateEarningRate
 - 수익률 출력
     - [ ] ResultView.printEarningRate
 
 ### Questions
 
-- ResultView.print 로 출력을 모두 통일시킬 순 없을까? 
+- ResultView.print 로 출력을 모두 통일시킬 순 없을까?
 
 ### Result output
