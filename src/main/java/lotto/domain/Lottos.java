@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
 public class Lottos {
     private static final int START_INCLUSIVE = 0;
     private static final int LOTTO_PRICE = 1000;
+    private static final String PREVIOUS_WEEK_WINNING_NUMBER_REGEX = ", ";
 
     private final List<LottoNumbers> lottoNumbers;
 
@@ -36,7 +37,7 @@ public class Lottos {
     }
 
     public List<Integer> findMatch(String previousWeekWinningNumber) {
-        String[] winningNumbers = previousWeekWinningNumber.split(", ");
+        String[] winningNumbers = previousWeekWinningNumber.split(PREVIOUS_WEEK_WINNING_NUMBER_REGEX);
 
         return this.lottoNumbers.stream()
                 .map(lottoNumber -> (int) Arrays.stream(winningNumbers)
