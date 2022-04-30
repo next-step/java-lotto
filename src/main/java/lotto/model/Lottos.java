@@ -34,11 +34,11 @@ public final class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public Map<Integer, Integer> getLottoStatistics(Lotto winnerLotto) {
+    public Map<Rank, Integer> getLottoStatistics(Lotto winnerLotto) {
         validate(winnerLotto);
-        Map<Integer, Integer> result = new HashMap<>();
+        Map<Rank, Integer> result = new HashMap<>();
         for (Lotto lotto : lottos) {
-            int key = lotto.getMatchCount(winnerLotto);
+            Rank key = Rank.of(lotto.getMatchCount(winnerLotto));
             result.put(key, result.getOrDefault(key, DEFAULT_VALUE) + ADD_COUNT);
         }
         return result;

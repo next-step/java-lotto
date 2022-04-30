@@ -3,6 +3,7 @@ package lotto;
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 import lotto.model.Lottos;
+import lotto.model.Rank;
 import org.assertj.core.util.Lists;
 import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.DisplayName;
@@ -66,12 +67,12 @@ public class LottosTest {
         Lotto sixMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, SIX));
 
         // when
-        Map<Integer, Integer> lottoStatistics = new Lottos(Lists.newArrayList(threeMatchLotto, fourMatchLotto, fiveMatchLotto, sixMatchLotto)).getLottoStatistics(winnerLotto);
+        Map<Rank, Integer> lottoStatistics = new Lottos(Lists.newArrayList(threeMatchLotto, fourMatchLotto, fiveMatchLotto, sixMatchLotto)).getLottoStatistics(winnerLotto);
 
         // then
-        assertThat(lottoStatistics.get(3)).isEqualTo(1);
-        assertThat(lottoStatistics.get(4)).isEqualTo(1);
-        assertThat(lottoStatistics.get(5)).isEqualTo(1);
-        assertThat(lottoStatistics.get(6)).isEqualTo(1);
+        assertThat(lottoStatistics.get(Rank.FIRST)).isEqualTo(1);
+        assertThat(lottoStatistics.get(Rank.SECOND)).isEqualTo(1);
+        assertThat(lottoStatistics.get(Rank.THIRD)).isEqualTo(1);
+        assertThat(lottoStatistics.get(Rank.FOURTH)).isEqualTo(1);
     }
 }

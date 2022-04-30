@@ -6,6 +6,7 @@ import lotto.model.Lotto;
 import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.RandomLottoGenerator;
+import lotto.model.Rank;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -21,7 +22,7 @@ public class LottoMain {
         String winnerLottoNumbers = InputView.inputWinnerLottoNumbers();
         Lotto winnerLotto = new Lotto(ExtractLottoNumbers.split(winnerLottoNumbers));
 
-        Map<Integer, Integer> lottoStatistics = buyingLottos.getLottoStatistics(winnerLotto);
+        Map<Rank, Integer> lottoStatistics = buyingLottos.getLottoStatistics(winnerLotto);
 
         ResultView.printStatistics(buyingMoney, lottoStatistics);
     }
