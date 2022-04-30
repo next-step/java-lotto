@@ -1,7 +1,6 @@
 package lotto;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class LottoWinning {
     private static final String FLOOR = "%.2f";
@@ -11,26 +10,23 @@ public class LottoWinning {
 
     public LottoWinning(String winningNumber, Lotto lotto) {
         this.winningNumber = new LottoNumber(winningNumber);
-        for (Rank rank : Rank.values()) {
-            results.put(rank, 0);
-        }
         this.lotto = lotto;
-        setResults();
+        setWinningResults();
     }
 
-    private void setResults() {
+    private void setWinningResults() {
         for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
             Rank rank = lottoNumber.getRank(winningNumber);
-            results.replace(rank, getWinningCount(rank) + 1);
+            results.put(rank, getWinningCount(rank) + 1);
         }
     }
 
     public int getWinningCount(Rank rank) {
-        return results.get(rank);
-    }
-
-    public int getWinningCountByCountOfMatch(int countOfMatch) {
-        return results.get(Rank.valueOf(countOfMatch));
+        Integer count = results.get(rank);
+        if (count == null) {
+            return 0;
+        }
+        return count;
     }
 
     public String getReturnRate() {
