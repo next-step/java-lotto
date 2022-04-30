@@ -12,7 +12,7 @@ public class LottoGenerator {
     private static final List<Integer> NUMBER_CANDIDATES = new ArrayList<>(){};
 
     private static void generateLottoRange() {
-        if(NUMBER_CANDIDATES.size() == 45){
+        if(NUMBER_CANDIDATES.size() == MAX_NUMBER){
             return;
         }
         for (int i = MIN_NUMBER ; i < MAX_NUMBER; i++) {
@@ -20,8 +20,11 @@ public class LottoGenerator {
         }
     }
 
-    public static List<Integer> makeLotto() {
+    static {
         generateLottoRange();
+    }
+
+    public static List<Integer> makeLotto() {
         Collections.shuffle(NUMBER_CANDIDATES);
         List<Integer> newLotto = new ArrayList<>();
         for (int i = 0; i < LOTTO_LENGTH; i++) {
