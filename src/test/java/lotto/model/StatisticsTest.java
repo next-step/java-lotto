@@ -14,14 +14,14 @@ class StatisticsTest {
   @Test
   @DisplayName("로또 번호가 맞는지 테스트")
   void awardCount() {
-    List<Product> allLotto = Arrays.asList(new Product(
+    List<Lotto> allLotto = Arrays.asList(new Lotto(
             Set.of(new LottoNumber(8),
                 new LottoNumber(6),
                 new LottoNumber(3),
                 new LottoNumber(4),
                 new LottoNumber(5),
                 new LottoNumber(7))),
-        new Product(Set.of(
+        new Lotto(Set.of(
             new LottoNumber(6),
             new LottoNumber(7),
             new LottoNumber(8),
@@ -29,7 +29,7 @@ class StatisticsTest {
             new LottoNumber(11),
             new LottoNumber(30))));
 
-    Product winNumbers = new Product(
+    Lotto winNumbers = new Lotto(
         Set.of(
             new LottoNumber(8),
             new LottoNumber(7),

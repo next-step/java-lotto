@@ -7,18 +7,18 @@ import lotto.enums.ChoiceType;
 import lotto.enums.Grade;
 import lotto.exception.LottoSizeException;
 
-public final class Product {
+public final class Lotto {
 
   private static final int DEFAULT_LOTTO_SIZE = 6;
   private final Set<LottoNumber> lottoNumbers;
 
-  public Product(Set<LottoNumber> lottoNumbers) {
+  public Lotto(Set<LottoNumber> lottoNumbers) {
     valid(lottoNumbers);
     this.lottoNumbers = lottoNumbers;
   }
 
-  public static Product from(Set<LottoNumber> winnerNumbers) {
-    return new Product(winnerNumbers);
+  public static Lotto from(Set<LottoNumber> winnerNumbers) {
+    return new Lotto(winnerNumbers);
   }
 
   private void valid(Set<LottoNumber> lottoNumbers) {
@@ -27,17 +27,17 @@ public final class Product {
     }
   }
 
-  public int coincideLotto(Grade grade, List<Product> allProducts) {
+  public int coincideLotto(Grade grade, List<Lotto> allLottos) {
     int result = 0;
-    for (Product product : allProducts) {
-      result += increaseProductNumber(grade.getExpectNumber(), product).getIncreaseValue();
+    for (Lotto lotto : allLottos) {
+      result += increaseProductNumber(grade.getExpectNumber(), lotto).getIncreaseValue();
     }
     return result;
   }
 
-  private ChoiceType increaseProductNumber(int expect, Product product) {
+  private ChoiceType increaseProductNumber(int expect, Lotto lotto) {
     int count = 0;
-    for (LottoNumber winNumber : product.lottoNumbers) {
+    for (LottoNumber winNumber : lotto.lottoNumbers) {
       count += containsWinnerNumber(
           Integer.parseInt(winNumber.toString())).getIncreaseValue();
     }
@@ -62,8 +62,8 @@ public final class Product {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Product product = (Product) o;
-    return Objects.equals(lottoNumbers, product.lottoNumbers);
+    Lotto lotto = (Lotto) o;
+    return Objects.equals(lottoNumbers, lotto.lottoNumbers);
   }
 
   @Override

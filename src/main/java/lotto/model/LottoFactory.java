@@ -22,8 +22,8 @@ public final class LottoFactory {
     return LottoFactory.instance;
   }
 
-  public Product apply() {
-    return new Product(init());
+  public Lotto apply() {
+    return new Lotto(init());
   }
 
   private static Set<LottoNumber> init() {

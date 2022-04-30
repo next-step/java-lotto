@@ -6,13 +6,13 @@ import java.util.Objects;
 public final class Guest {
 
   private final Money money;
-  private final List<Product> allLottoList;
+  private final List<Lotto> allLottoList;
 
   public Guest(long money) {
     this(money, null);
   }
 
-  public Guest(long money, List<Product> allLottoList) {
+  public Guest(long money, List<Lotto> allLottoList) {
     this.money = new Money(money);
     this.allLottoList = allLottoList;
   }
@@ -21,7 +21,7 @@ public final class Guest {
     return new Guest(0,store.delivery(Long.parseLong(money.toString())));
   }
 
-  public List<Product> hasAllLotto() {
+  public List<Lotto> hasAllLotto() {
     return allLottoList;
   }
 
