@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.controller.LottoMarket;
-import lotto.dto.WinnerLotto;
+import lotto.dto.ExtractLottoNumbers;
 import lotto.model.Lotto;
 import lotto.model.Money;
 import lotto.model.RandomLottoGenerator;
@@ -19,7 +19,7 @@ public class LottoMain {
         ResultView.printBuyingLottos(buyingLottos);
 
         String winnerLottoNumbers = InputView.inputWinnerLottoNumbers();
-        Lotto winnerLotto = new WinnerLotto(winnerLottoNumbers).getLotto();
+        Lotto winnerLotto = new Lotto(ExtractLottoNumbers.split(winnerLottoNumbers));
 
         Map<Integer, Integer> lottoStatistics = LottoMarket.getLottoStatistics(buyingLottos, winnerLotto);
 

@@ -62,7 +62,7 @@ public class LottoMarketTest {
         LottoNumber eleven = new LottoNumber(11);
         LottoNumber twelve = new LottoNumber(12);
         // given
-        Lotto winnerLotto = WinnerLottoTest.WINNER_LOTTO.getLotto();
+        Lotto winnerLotto = new Lotto(ExtractLottoNumbersTest.LOTTO_NUMBERS);
         Lotto threeMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, ten, eleven, twelve));
         Lotto fourMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, eleven, twelve));
         Lotto fiveMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, twelve));
