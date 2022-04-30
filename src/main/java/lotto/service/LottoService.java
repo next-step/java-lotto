@@ -6,7 +6,7 @@ import lotto.dto.WinningResultDto;
 import lotto.enums.Grade;
 import lotto.model.Guest;
 import lotto.model.Lotto;
-import lotto.model.Statistics;
+import lotto.model.Reward;
 import lotto.model.Store;
 import lotto.util.AwardNumberUtil;
 
@@ -22,10 +22,10 @@ public class LottoService {
 
   public List<WinningResultDto> histories(List<Lotto> lotto, Lotto winLotto) {
     List<WinningResultDto> histories = new ArrayList<>();
-    Statistics statistics = new Statistics();
+    Reward reward = new Reward();
     for (Grade grade : Grade.values()) {
-      int result = statistics.result(grade, lotto, winLotto);
-      statistics = statistics.winReward(grade, result);
+      int result = reward.result(grade, lotto, winLotto);
+      reward = reward.winReward(grade, result);
       histories.add(new WinningResultDto(grade, result));
     }
     return histories;

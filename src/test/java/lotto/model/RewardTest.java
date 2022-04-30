@@ -9,7 +9,7 @@ import lotto.enums.Grade;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class StatisticsTest {
+class RewardTest {
 
   @Test
   @DisplayName("로또 번호가 맞는지 테스트")
@@ -39,18 +39,18 @@ class StatisticsTest {
             new LottoNumber(29)
         )
     );
-    Statistics statistics = new Statistics();
-    assertThat(statistics.result(Grade.FOURTH, allLotto, winNumbers)).isEqualTo(2);
+    Reward reward = new Reward();
+    assertThat(reward.result(Grade.FOURTH, allLotto, winNumbers)).isEqualTo(2);
   }
 
   @Test
   @DisplayName("승리 수당 테스트")
   void winBenefit() {
-    Statistics statistics = new Statistics();
-    statistics = statistics.winReward(Grade.FOURTH, 1);
-    statistics = statistics.winReward(Grade.THIRD, 2);
-    statistics = statistics.winReward(Grade.SECOND, 1);
-    statistics = statistics.winReward(Grade.FIRST, 1);
-    assertThat(statistics).isEqualTo(new Statistics(2001605000L));
+    Reward reward = new Reward();
+    reward = reward.winReward(Grade.FOURTH, 1);
+    reward = reward.winReward(Grade.THIRD, 2);
+    reward = reward.winReward(Grade.SECOND, 1);
+    reward = reward.winReward(Grade.FIRST, 1);
+    assertThat(reward).isEqualTo(new Reward(2001605000L));
   }
 }
