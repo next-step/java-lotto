@@ -1,9 +1,9 @@
 package lotto.view;
 
-import lotto.exception.UserInputFailException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import lotto.domain.LottoGame;
+import lotto.exception.UserInputFailException;
 
 public class LottoGameInputView {
 
