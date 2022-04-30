@@ -9,10 +9,6 @@ public final class Money {
   private static final long EMPTY_VALUE = 0L;
   private final long value;
 
-  public Money() {
-    this(EMPTY_VALUE);
-  }
-
   public Money(long value) {
     valid(value);
     this.value = value;
