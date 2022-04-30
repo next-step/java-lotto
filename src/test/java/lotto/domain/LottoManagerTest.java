@@ -11,6 +11,6 @@ class LottoManagerTest {
     @Test
     @DisplayName("15000원을 입력 시 15개의 로또를 반환한다.")
     void createLottos() {
-        assertThat(new LottoManager().createLottos("15000").size()).isEqualTo(15);
+        assertThat(new LottoManager().createLottos("15000").count()).isEqualTo(15);
     }
 }

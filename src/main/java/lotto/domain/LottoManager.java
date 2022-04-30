@@ -15,7 +15,7 @@ public class LottoManager {
         this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }
 
-    public List<Lotto> createLottos(String value) {
+    public Lottos createLottos(String value) {
         int lottoCount = Integer.parseInt(value) / 1000;
 
         List<Lotto> lottos = new ArrayList<>();
@@ -23,6 +23,6 @@ public class LottoManager {
             lottos.add(new Lotto(lottoNumbers.randomLottoNumbers()));
         }
 
-        return lottos;
+        return new Lottos(lottos);
     }
 }
