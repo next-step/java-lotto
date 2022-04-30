@@ -12,7 +12,7 @@ class StoreTest {
   @DisplayName("돈을 받을 뒤 그에 해당하는 물건을 제작한다.")
   void delivery() {
     Store store = new Store();
-    List<Lotto> lottos = store.delivery(14000);
-    assertThat(lottos).hasSize(14);
+    List<Lotto> lottoList = store.delivery(14000);
+    assertThat(lottoList).hasSize(14);
   }
 }

@@ -41,8 +41,8 @@ public class LottoController {
     return lottoService.insertWinnerNumber(winnerNumber);
   }
 
-  public List<WinningResultDto> histories(List<Lotto> lottos, Lotto winLotto) {
-    return lottoService.histories(lottos, winLotto);
+  public List<WinningResultDto> histories(List<Lotto> lottoList, Lotto winLotto) {
+    return lottoService.histories(lottoList, winLotto);
   }
 
   public Long allAddReward(List<WinningResultDto> histories) {
