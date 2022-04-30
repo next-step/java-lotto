@@ -43,7 +43,7 @@ public class OutputView {
 
     public static void outputRevenueRate(Lottos lottos, String previousWeekWinningNumber) {
         double revenueRate = lottos.getRevenueRate(new LottoNumbers(previousWeekWinningNumber));
-        System.out.printf("총 수익률은 %s입니다.", revenueRate);
+        System.out.printf("총 수익률은 %.2f입니다.", revenueRate);
     }
 }
 
