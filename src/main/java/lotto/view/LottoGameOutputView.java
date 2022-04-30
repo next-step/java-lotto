@@ -47,7 +47,7 @@ public class LottoGameOutputView {
   }
 
   private static void printGameResultByMatchCount(LottoDrawResults lottoDrawResults) {
-    for (int i = 0; i <= LottoGame.NUMBER_COUNT; i++) {
+    for (int i = 3; i <= LottoGame.NUMBER_COUNT; i++) {
       LottoDrawResults result = lottoDrawResults.getDrawResultsByMatchCount(i);
       System.out.printf(LOTTO_MATCH_MESSAGE, i, LottoReword.getWinMoney(i),
           result.getValues().size());

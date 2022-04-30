@@ -19,12 +19,9 @@ class LottoRewordTest {
   }
 
   @ParameterizedTest
-  @DisplayName("상금이 정의되지 않았을 시 에러 발생")
+  @DisplayName("상금이 정의되지 않았을 시 0원")
   @ValueSource(ints = {10, 100, 200})
   void noReword(int matchCount) {
-    assertThatThrownBy(
-        () -> {
-          LottoReword.getWinMoney(matchCount);
-        });
+    assertThat(LottoReword.getWinMoney(matchCount)).isEqualTo(0);
   }
 }
