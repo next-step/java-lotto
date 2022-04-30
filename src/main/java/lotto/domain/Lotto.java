@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
@@ -10,6 +11,7 @@ import lotto.util.LottoNumberGenerator;
 public class Lotto {
 
   private static final int LOTTO_SIZE = 6;
+  private static final String DELIMITER = ", ";
   private static final String INVALID_SIZE_MESSAGE = "하나의 로또는 중복되지 않은 6개의 숫자를 가져야합니다.";
 
   private final Set<LottoNumber> values = new TreeSet<>();
@@ -29,6 +31,13 @@ public class Lotto {
     return values.stream()
         .map(LottoNumber::new)
         .collect(Collectors.collectingAndThen(Collectors.toSet(), Lotto::new));
+  }
+
+  public static Lotto manualCreate(String value) {
+    Set<Integer> integers = Arrays.stream(value.split(DELIMITER))
+        .map(Integer::parseInt)
+        .collect(Collectors.toSet());
+    return create(integers);
   }
 
   public static Lotto autoCreate() {
