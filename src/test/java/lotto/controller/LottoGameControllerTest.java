@@ -24,7 +24,7 @@ class LottoGameControllerTest {
     void analysisTest() {
         LottoTickets lottoTickets = lottoGame.createLottoTickets(3000);
 
-        LottoResults lottoResults = lottoGame.analysisResult(lottoTickets, Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoResults lottoResults = lottoGame.analysisResult(lottoTickets, Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
         assertThat(lottoResults.size()).isEqualTo(3);
     }

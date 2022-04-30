@@ -18,7 +18,9 @@ public class LottoMainApp {
         cui.printLottoTickets(lottoTickets);
 
         List<Integer> winLottoNumber = cui.inputWinLottoNumber();
-        LottoResults lottoResults = lottoGame.analysisResult(lottoTickets, winLottoNumber);
+        int bonusBallNumber = cui.inputBonusBallNumber();
+
+        LottoResults lottoResults = lottoGame.analysisResult(lottoTickets, winLottoNumber, bonusBallNumber);
 
         cui.print(lottoResults);
     }

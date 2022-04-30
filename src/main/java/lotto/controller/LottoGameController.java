@@ -19,7 +19,7 @@ public class LottoGameController {
         return lottoTickets;
     }
 
-    public LottoResults analysisResult(LottoTickets lottoTickets, List<Integer> winLottoNumber) {
-        return new LottoResults(lottoTickets.findLottoResult(winLottoNumber));
+    public LottoResults analysisResult(LottoTickets lottoTickets, List<Integer> winLottoNumber, int bonusNumber) {
+        return new LottoResults(lottoTickets.findLottoResult(winLottoNumber, bonusNumber));
     }
 }

@@ -5,7 +5,14 @@ import java.util.List;
 
 public class LottoTickets {
 
-    private final List<LottoTicket> lottoTickets = new LinkedList<>();
+    private  List<LottoTicket> lottoTickets = new LinkedList<>();
+
+    public LottoTickets() {
+    }
+
+    public LottoTickets(List<LottoTicket> lottoTickets) {
+        this.lottoTickets = lottoTickets;
+    }
 
     public void add() {
         lottoTickets.add(LottoTicket.create());
@@ -15,11 +22,11 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    public List<LottoResult> findLottoResult(List<Integer> winLottoNumber) {
+    public List<LottoResult> findLottoResult(List<Integer> winLottoNumber, int bonusNumber) {
         List<LottoResult> lottoResults = new LinkedList<>();
 
         for (LottoTicket lottoTicket : lottoTickets) {
-            lottoResults.add(lottoTicket.checkLottery(winLottoNumber));
+            lottoResults.add(lottoTicket.checkLottery(winLottoNumber, bonusNumber));
         }
 
         return lottoResults;

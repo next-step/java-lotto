@@ -1,7 +1,7 @@
 package lotto.view;
 
 import static java.lang.System.out;
-import static lotto.domain.LottoTicket.ONE_TICKET_LOTTO_NUMBER;
+import static lotto.domain.LottoTicket.LOTTO_NUMBER_COUNT;
 import static lotto.domain.LottoTicket.ONE_TICKET_PRICE;
 
 import java.util.Arrays;
@@ -40,14 +40,20 @@ public class CommandlineUserInterface {
             .map(Integer::parseInt)
             .collect(Collectors.toList());
 
-        if (lottoNumbers.size() != ONE_TICKET_LOTTO_NUMBER) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             out.println("로또 당첨 숫자는 "
-                +ONE_TICKET_LOTTO_NUMBER+"개 입력해야 합니다.");
+                + LOTTO_NUMBER_COUNT +"개 입력해야 합니다.");
             out.println("다시 입력, ex) 1,2,3,4,5,6 ");
             return inputWinLottoNumber();
         }
 
         return lottoNumbers;
+    }
+
+    public int inputBonusBallNumber() {
+        out.println("보너스 볼을 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
     }
 
     public void printLottoTickets(LottoTickets lottoTickets) {

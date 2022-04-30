@@ -1,26 +1,15 @@
 package lotto.domain;
 
-import java.util.Arrays;
-
 public class LottoResult {
 
     private Grade grade;
 
-    private LottoResult(int fitCount) {
-        this.grade = Arrays.stream(Grade.values())
-            .filter(gradeValue -> gradeValue.getFitCount() == fitCount)
-            .findFirst().orElse(Grade.NONE);
+    private LottoResult(int fitCount, boolean isFitBonusNumber) {
+        this.grade = Grade.valueOf(fitCount, isFitBonusNumber);
     }
 
-    public static LottoResult of(int fitCount) {
-        return new LottoResult(fitCount);
-    }
-
-    @Override
-    public String toString() {
-        return "LottoResult{" +
-            "grade=" + grade +
-            '}';
+    public static LottoResult of(int fitCount, boolean isFitBonusNumber) {
+        return new LottoResult(fitCount, isFitBonusNumber);
     }
 
     public int fitCount() {
