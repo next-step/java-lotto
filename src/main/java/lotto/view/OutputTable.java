@@ -24,53 +24,41 @@ public final class OutputTable {
   }
 
   public static void run() {
-    LottoController controller = new LottoController(new LottoService());
-    inputPurchaseAmount();
-    long haveMoney = InputTable.inputHaveMoney();
-    List<Product> products = controller.visit(new Guest(haveMoney), new Store()).hasAllLotto();
-    buyThings(products.size());
-    printProductInfos(products);
-    lastWeekAwardNumber();
-    Product winnerProduct = controller.insertWinnerNumber(InputTable.inputAwardNumber());
-    resultStatisticsMessage();
-    List<WinningResultDto> histories = controller.histories(products, winnerProduct);
-    resultStatistics(histories);
-    double percent = controller.yieldCalculate(haveMoney, controller.allAddReward(histories));
-    printYield(percent, controller.isStandard(percent));
+
   }
 
-  private static void inputPurchaseAmount() {
+  public static void inputPurchaseAmount() {
     System.out.println(PURCHASE_AMOUNT_MESSAGE);
   }
 
-  private static void buyThings(Integer productCount) {
+  public static void buyThings(Integer productCount) {
     System.out.printf(BUY_THING_MESSAGE, productCount);
   }
 
-  private static void printProductInfos(List<Product> products) {
+  public static void printProductInfos(List<Product> products) {
     for (Product product : products) {
       System.out.println(product);
     }
   }
 
-  private static void lastWeekAwardNumber() {
+  public static void lastWeekAwardNumber() {
     System.out.println();
     System.out.println(LAST_WEEK_AWARD_NUMBER_MESSAGE);
   }
 
-  private static void resultStatisticsMessage() {
+  public static void resultStatisticsMessage() {
     System.out.println(STATISTICS_MESSAGE);
     System.out.println(UNDER_BAR);
   }
 
-  private static void resultStatistics(List<WinningResultDto> histories) {
+  public static void resultStatistics(List<WinningResultDto> histories) {
     for (WinningResultDto history : histories) {
       System.out.printf(HISTORY_MESSAGE, history.getGrade().getExpectNumber(),
           history.getGrade().getAwardPrice(), history.getCount());
     }
   }
 
-  private static void printYield(double yield, boolean isStandard) {
+  public static void printYield(double yield, boolean isStandard) {
     System.out.printf(YIELD_MESSAGE, yield,
         standardMessage(isStandard));
   }
