@@ -4,6 +4,7 @@ import java.util.List;
 
 public class SplitString {
     private static final String BLANK_DELIMITER = " ";
+
     private SplitString() {
     }
 

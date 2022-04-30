@@ -4,6 +4,7 @@ import java.util.List;
 
 public class StringCalculator {
     private static final int FIRST_OPERAND_INDEX = 0;
+
     private StringCalculator() {
     }
 
