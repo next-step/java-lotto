@@ -39,6 +39,13 @@ public class LottoMarketTest {
     }
 
     @Test
+    @DisplayName("로또 구입시 지불한 금액이 1개당 가격의 배수가 아니면 예외가 발생한다.")
+    void moneyUnitTest() {
+        assertThatThrownBy(() -> LottoMarket.buyLottos(new Money(12345), new RandomLottoGenerator()))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     @DisplayName("구매한 로또와 당첨 로또를 입력해 통계를 계산할 때 입력값이 null이면 예외가 발생한다.")
     void getLottoStatisticNullTest() {
         assertThatThrownBy(() -> LottoMarket.getLottoStatistics(null, LottoTest.TEST_LOTTO))

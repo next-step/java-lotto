@@ -1,10 +1,7 @@
 package lotto.model;
 
 public final class Money {
-    public static final Money MONEY_BASE = new Money(1000);
-
     private static final int ZERO = 0;
-    private static final int BASE = 1000;
 
     private final int money;
 
@@ -15,23 +12,20 @@ public final class Money {
 
     private void validate(int money) {
         if (isNegative(money)) {
-            throw new IllegalArgumentException("로또 구매시 지불하는 금액은 음수일 수 없습니다. money: " + money);
+            throw new IllegalArgumentException("돈은 음수일 수 없습니다. money: " + money);
         }
-        if (isBaseMoneyUnit(money)) {
-            throw new IllegalArgumentException("로또 구매시 지불하는 금액은 천원 단위여야 합니다. money: " + money);
-        }
-    }
-
-    private boolean isBaseMoneyUnit(int money) {
-        return money % BASE != ZERO;
     }
 
     private boolean isNegative(int money) {
         return money < ZERO;
     }
 
-    public int getUnitCount() {
-        return this.money / MONEY_BASE.money;
+    public boolean isDivided(Money unit) {
+        return this.money % unit.money == 0;
+    }
+
+    public int getUnitCount(Money unit) {
+        return this.money / unit.money;
     }
 
     @Override

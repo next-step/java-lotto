@@ -1,7 +1,7 @@
 package lotto.controller;
 
-import lotto.model.LottoGenerator;
 import lotto.model.Lotto;
+import lotto.model.LottoGenerator;
 import lotto.model.Money;
 
 import java.util.ArrayList;
@@ -15,6 +15,7 @@ public class LottoMarket {
 
     private static final int DEFAULT_VALUE = 0;
     private static final int ADD_COUNT = 1;
+    private static final Money BASE_MONEY_UNIT = new Money(1000);
 
     private LottoMarket() {
         throw new AssertionError();
@@ -30,7 +31,7 @@ public class LottoMarket {
     }
 
     private static List<Lotto> getLottos(Money money, LottoGenerator lottoGenerator) {
-        int count = money.getUnitCount();
+        int count = getUnitCount(money);
 
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
@@ -38,6 +39,13 @@ public class LottoMarket {
         }
 
         return lottos;
+    }
+
+    private static int getUnitCount(Money money) {
+        if (!money.isDivided(BASE_MONEY_UNIT)) {
+            throw new IllegalArgumentException("로또 구매시 지불하는 금액 단위가 올바르지 않습니다. money: " + money);
+        }
+        return money.getUnitCount(BASE_MONEY_UNIT);
     }
 
     public static Map<Integer, Integer> getLottoStatistics(List<Lotto> buyingLottos, Lotto winnerLotto) {
