@@ -9,7 +9,7 @@ public class LottoNumber {
   private final int value;
   public static final int MIN = 1;
   public static final int MAX = 45;
-  private static final Pattern NUMBER_PATTERN = Pattern.compile("^\\d+$");
+  private static final Pattern CONTAINS_ONLY_NUMBER_PATTERN = Pattern.compile("^\\d+$");
 
   public LottoNumber(int value) {
     if (checkBound(value)) {
@@ -19,7 +19,7 @@ public class LottoNumber {
   }
 
   public LottoNumber(String value) {
-    if (!NUMBER_PATTERN.matcher(value).find()) {
+    if (!CONTAINS_ONLY_NUMBER_PATTERN.matcher(value).find()) {
       throw new InvalidLottoNumberException(value);
     }
     this.value = Integer.valueOf(value);
