@@ -28,15 +28,15 @@ public class OutputView {
     }
 
     private static IntConsumer outputMatchStatistics(List<Integer> matchLottos) {
-        return i -> System.out.printf("%s개 일치 (%s원)- %s\n",
-                i,
-                MatchCount.getWinningAmountWith(i),
-                getCount(matchLottos, i));
+        return matchLotto -> System.out.printf("%s개 일치 (%s원)- %s\n",
+                matchLotto,
+                MatchCount.getWinningAmountWith(matchLotto),
+                getCount(matchLottos, matchLotto));
     }
 
-    private static int getCount(List<Integer> matchLottos, int i) {
+    private static int getCount(List<Integer> matchLottos, int matchLotto) {
         return (int) matchLottos.stream()
-                .filter(matchLotto -> matchLotto == i)
+                .filter(it -> it == matchLotto)
                 .count();
     }
 }
