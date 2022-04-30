@@ -29,6 +29,12 @@ public class Lottos {
         return this.lottoNumbers.size();
     }
 
+    public void print() {
+        this.lottoNumbers.stream()
+                .map(LottoNumbers::toString)
+                .forEach(System.out::println);
+    }
+
     public List<Integer> findMatch(String previousWeekWinningNumber) {
         String[] winningNumbers = previousWeekWinningNumber.split(", ");
 
