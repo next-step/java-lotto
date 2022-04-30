@@ -90,4 +90,8 @@ public class LotteryController {
     public void getEarningRate() {
         this.earningRate = winStatistics.getEarningRate(this.money.price);
     }
+
+    public void printEarningRate() {
+        ResultView.printEarningRate(this.earningRate);
+    }
 }
