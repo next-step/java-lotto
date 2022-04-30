@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.model.Lotto;
+import lotto.model.Lottos;
 import lotto.model.Money;
 
 import java.util.List;
@@ -26,10 +27,11 @@ public class ResultView {
         throw new AssertionError();
     }
 
-    public static void printBuyingLottos(List<Lotto> buyingLottos) {
+    public static void printBuyingLottos(Lottos buyingLottos) {
         System.out.println(String.format(OUTPUT_BUYING_LOTTOS, buyingLottos.size()));
 
-        for (Lotto lotto : buyingLottos) {
+        List<Lotto> lottos = buyingLottos.get();
+        for (Lotto lotto : lottos) {
             printLottos(lotto);
         }
     }
