@@ -1,5 +1,9 @@
 package lotto.strategy;
 
+import java.util.List;
+import lotto.model.LottoNumber;
+
+@FunctionalInterface
 public interface NumberGenerateStrategy {
-  int generate();
+  List<LottoNumber> generate();
 }
