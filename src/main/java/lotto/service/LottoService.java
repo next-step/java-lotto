@@ -1,9 +1,8 @@
 package lotto.service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import lotto.dto.HistoryDto;
+import lotto.dto.WinningResultDto;
 import lotto.enums.Grade;
 import lotto.model.Guest;
 import lotto.model.Product;
@@ -21,20 +20,20 @@ public class LottoService {
     return Product.from(AwardNumberUtil.getAwadNumberList(winnerNumber));
   }
 
-  public List<HistoryDto> histories(List<Product> products, Product winProduct) {
-    List<HistoryDto> histories = new ArrayList<>();
+  public List<WinningResultDto> histories(List<Product> products, Product winProduct) {
+    List<WinningResultDto> histories = new ArrayList<>();
     Statistics statistics = new Statistics();
     for (Grade grade : Grade.values()) {
       int result = statistics.result(grade, products, winProduct);
       statistics = statistics.winReward(grade, result);
-      histories.add(new HistoryDto(grade, result));
+      histories.add(new WinningResultDto(grade, result));
     }
     return histories;
   }
 
-  public Long allAddReward(List<HistoryDto> histories) {
+  public Long allAddReward(List<WinningResultDto> histories) {
     long result = 0L;
-    for (HistoryDto history : histories) {
+    for (WinningResultDto history : histories) {
       result += (history.getGrade().getAwardPrice() * history.getCount());
     }
     return result;
