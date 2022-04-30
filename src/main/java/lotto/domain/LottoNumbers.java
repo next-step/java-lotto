@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import lotto.domain.strategy.NumberGenerator;
 
@@ -33,6 +34,6 @@ public class LottoNumbers {
   }
 
   public List<LottoNumber> getValues() {
-    return values;
+    return Collections.unmodifiableList(values);
   }
 }

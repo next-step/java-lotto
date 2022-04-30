@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoDrawResults {
@@ -28,7 +29,7 @@ public class LottoDrawResults {
   }
 
   public List<LottoDrawResult> getValues() {
-    return values;
+    return Collections.unmodifiableList(values);
   }
 
   private void addIfMatchCountEqual(LottoDrawResult lottoDrawResult,
