@@ -3,9 +3,9 @@ package lotto.model;
 import java.util.Objects;
 import lotto.exception.LottoNegativeException;
 
-public class LottoNo {
-  private Integer value;
-  public LottoNo(Integer value) {
+public final class LottoNumber {
+  private final Integer value;
+  public LottoNumber(Integer value) {
     valid(value);
     this.value = value;
   }
@@ -24,8 +24,8 @@ public class LottoNo {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    LottoNo lottoNo = (LottoNo) o;
-    return Objects.equals(value, lottoNo.value);
+    LottoNumber lottoNumber = (LottoNumber) o;
+    return Objects.equals(value, lottoNumber.value);
   }
   @Override
   public int hashCode() {

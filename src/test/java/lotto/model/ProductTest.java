@@ -17,47 +17,47 @@ class ProductTest {
   @DisplayName("당첨 번호와 상품으로 만들어진 로또의 번호가 일치하는지 확인한다.")
   void winningProduct() {
     assertThat(new Product(Set.of(
-        new LottoNo(1),
-        new LottoNo(2),
-        new LottoNo(3),
-        new LottoNo(4),
-        new LottoNo(5),
-        new LottoNo(6)))).isEqualTo(Product.from(Set.of(
-        new LottoNo(1),
-        new LottoNo(2),
-        new LottoNo(3),
-        new LottoNo(4),
-        new LottoNo(5),
-        new LottoNo(6))));
+        new LottoNumber(1),
+        new LottoNumber(2),
+        new LottoNumber(3),
+        new LottoNumber(4),
+        new LottoNumber(5),
+        new LottoNumber(6)))).isEqualTo(Product.from(Set.of(
+        new LottoNumber(1),
+        new LottoNumber(2),
+        new LottoNumber(3),
+        new LottoNumber(4),
+        new LottoNumber(5),
+        new LottoNumber(6))));
   }
 
   @Test
   @DisplayName("당첨 번호와 몇개가 맞는지 테스트한다")
   void coincide() {
     Product product = new Product(
-        Set.of(new LottoNo(1), new LottoNo(2), new LottoNo(3), new LottoNo(4), new LottoNo(5),
-            new LottoNo(6)));
+        Set.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5),
+            new LottoNumber(6)));
 
     assertThat(product.coincideLotto(Grade.FOURTH, List.of
         (
             new Product
                 (
-                    Set.of(new LottoNo(1),
-                        new LottoNo(2),
-                        new LottoNo(3),
-                        new LottoNo(7),
-                        new LottoNo(8),
-                        new LottoNo(9)
+                    Set.of(new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(7),
+                        new LottoNumber(8),
+                        new LottoNumber(9)
                     )
                 ),
             new Product
                 (
-                    Set.of(new LottoNo(7),
-                        new LottoNo(8),
-                        new LottoNo(9),
-                        new LottoNo(5),
-                        new LottoNo(6),
-                        new LottoNo(1)
+                    Set.of(new LottoNumber(7),
+                        new LottoNumber(8),
+                        new LottoNumber(9),
+                        new LottoNumber(5),
+                        new LottoNumber(6),
+                        new LottoNumber(1)
                     )
                 )
         )
@@ -68,22 +68,22 @@ class ProductTest {
   @DisplayName("로또 사이즈는 6자리입니다.")
   void lottoSizeException() {
     assertThrows(LottoSizeException.class, () -> {
-      List<LottoNo> lottoNos = List.of(new LottoNo(7),
-          new LottoNo(8),
-          new LottoNo(8),
-          new LottoNo(9),
-          new LottoNo(5),
-          new LottoNo(6));
-      new Product(new HashSet<>(lottoNos));
+      List<LottoNumber> lottoNumbers = List.of(new LottoNumber(7),
+          new LottoNumber(8),
+          new LottoNumber(8),
+          new LottoNumber(9),
+          new LottoNumber(5),
+          new LottoNumber(6));
+      new Product(new HashSet<>(lottoNumbers));
 
       new Product(
-          Set.of(new LottoNo(7),
-              new LottoNo(8),
-              new LottoNo(9),
-              new LottoNo(5),
-              new LottoNo(6),
-              new LottoNo(10),
-              new LottoNo(17)
+          Set.of(new LottoNumber(7),
+              new LottoNumber(8),
+              new LottoNumber(9),
+              new LottoNumber(5),
+              new LottoNumber(6),
+              new LottoNumber(10),
+              new LottoNumber(17)
           ));
 
     }).printStackTrace();

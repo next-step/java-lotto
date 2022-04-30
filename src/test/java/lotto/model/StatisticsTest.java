@@ -15,28 +15,28 @@ class StatisticsTest {
   @DisplayName("로또 번호가 맞는지 테스트")
   void awardCount() {
     List<Product> allLotto = Arrays.asList(new Product(
-            Set.of(new LottoNo(8),
-                new LottoNo(6),
-                new LottoNo(3),
-                new LottoNo(4),
-                new LottoNo(5),
-                new LottoNo(7))),
+            Set.of(new LottoNumber(8),
+                new LottoNumber(6),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(7))),
         new Product(Set.of(
-            new LottoNo(6),
-            new LottoNo(7),
-            new LottoNo(8),
-            new LottoNo(9),
-            new LottoNo(11),
-            new LottoNo(30))));
+            new LottoNumber(6),
+            new LottoNumber(7),
+            new LottoNumber(8),
+            new LottoNumber(9),
+            new LottoNumber(11),
+            new LottoNumber(30))));
 
     Product winNumbers = new Product(
         Set.of(
-            new LottoNo(8),
-            new LottoNo(7),
-            new LottoNo(6),
-            new LottoNo(21),
-            new LottoNo(45),
-            new LottoNo(29)
+            new LottoNumber(8),
+            new LottoNumber(7),
+            new LottoNumber(6),
+            new LottoNumber(21),
+            new LottoNumber(45),
+            new LottoNumber(29)
         )
     );
     Statistics statistics = new Statistics();

@@ -10,18 +10,18 @@ import lotto.exception.LottoSizeException;
 public final class Product {
 
   private static final Integer DEFAULT_LOTTO_SIZE = 6;
-  private final Set<LottoNo> lottoNumbers;
+  private final Set<LottoNumber> lottoNumbers;
 
-  public Product(Set<LottoNo> lottoNumbers) {
+  public Product(Set<LottoNumber> lottoNumbers) {
     valid(lottoNumbers);
     this.lottoNumbers = lottoNumbers;
   }
 
-  public static Product from(Set<LottoNo> winnerNumbers) {
+  public static Product from(Set<LottoNumber> winnerNumbers) {
     return new Product(winnerNumbers);
   }
 
-  private void valid(Set<LottoNo> lottoNumbers) {
+  private void valid(Set<LottoNumber> lottoNumbers) {
     if (DEFAULT_LOTTO_SIZE != lottoNumbers.size()) {
       throw new LottoSizeException();
     }
@@ -37,7 +37,7 @@ public final class Product {
 
   private ChoiceType increaseProductNumber(int expect, Product product) {
     int count = 0;
-    for (LottoNo winNumber : product.lottoNumbers) {
+    for (LottoNumber winNumber : product.lottoNumbers) {
       count += containsWinnerNumber(
           Integer.parseInt(winNumber.toString())).getIncreaseValue();
     }
@@ -48,7 +48,7 @@ public final class Product {
   }
 
   private ChoiceType containsWinnerNumber(Integer winNumber) {
-    if (this.lottoNumbers.contains(new LottoNo(winNumber))) {
+    if (this.lottoNumbers.contains(new LottoNumber(winNumber))) {
       return ChoiceType.GUESSED;
     }
     return ChoiceType.WRONG;
