@@ -6,7 +6,7 @@ import java.util.Map;
 public enum LottoReword {
   MATCH_THREE(5000), MATCH_FOUR(50000), MATCH_FIVE(1500000), MATCH_SIX(2000000000);
 
-  private static final Map<Integer, LottoReword> lookup = new HashMap<Integer, LottoReword>();
+  private static final Map<Integer, LottoReword> lookup = new HashMap<>();
 
   static {
     lookup.put(3, MATCH_THREE);

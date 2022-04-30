@@ -30,7 +30,7 @@ public class LottoGameOutputView {
       messageSb.append(lottoNumber.getValue() + ",");
     }
     messageSb.delete(messageSb.length() - 1, messageSb.length());
-    System.out.print(messageSb.toString());
+    System.out.print(messageSb);
   }
 
   public static void printGameResult(LottoDrawResults lottoDrawResults) {
