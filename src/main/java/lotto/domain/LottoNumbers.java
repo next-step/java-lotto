@@ -21,7 +21,7 @@ public class LottoNumbers {
 
     private static List<LottoNumber> getRandomLottoNumbers() {
         return IntStream.range(LOTTO_NUMBERS_START_INCLUSIVE, LOTTO_NUMBERS_SIZE)
-                .mapToObj(it -> new LottoNumber())
+                .mapToObj(it -> LottoNumber.ofRandom())
                 .map(LottoNumber::getLottoNumber)
                 .sorted()
                 .map(LottoNumber::new)

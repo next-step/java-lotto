@@ -10,15 +10,31 @@ public class LottoNumber {
     private static final String NOT_NUMBER_STRING_NOT_ALLOW_MESSAGE = "숫자가 아닌 문자열은 허용되지 않습니다.";
     private static final int START_LOTTO_NUMBER = 1;
     private static final int END_LOTTO_NUMBER = 45;
+    private static final List<Integer> LOTTO_NUMBERS;
+
+    static {
+        LOTTO_NUMBERS = IntStream.rangeClosed(START_LOTTO_NUMBER, END_LOTTO_NUMBER)
+                .boxed()
+                .collect(Collectors.toList());
+    }
 
     private final int lottoNumber;
 
-    public LottoNumber() {
-        this(generateRandom());
+    public static LottoNumber ofRandom() {
+        Collections.shuffle(LOTTO_NUMBERS);
+
+        return new LottoNumber(LOTTO_NUMBERS.stream()
+                .limit(1)
+                .collect(Collectors.toList())
+                .get(0));
     }
 
     public LottoNumber(String string) {
         this(toInt(string));
+    }
+
+    protected LottoNumber(int lottoNumber) {
+        this.lottoNumber = lottoNumber;
     }
 
     private static int toInt(String string) {
@@ -27,23 +43,6 @@ public class LottoNumber {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(NOT_NUMBER_STRING_NOT_ALLOW_MESSAGE);
         }
-    }
-
-    protected LottoNumber(int lottoNumber) {
-        this.lottoNumber = lottoNumber;
-    }
-
-    private static int generateRandom() {
-        List<Integer> lottoNumbers = IntStream.rangeClosed(START_LOTTO_NUMBER, END_LOTTO_NUMBER)
-                .boxed()
-                .collect(Collectors.toList());
-
-        Collections.shuffle(lottoNumbers);
-
-        return lottoNumbers.stream()
-                .limit(1)
-                .collect(Collectors.toList())
-                .get(0);
     }
 
     public int getLottoNumber() {
