@@ -3,7 +3,9 @@ package lotto.view;
 import java.util.List;
 import lotto.controller.LottoController;
 import lotto.dto.WinningResultDto;
+import lotto.model.Guest;
 import lotto.model.Product;
+import lotto.model.Store;
 import lotto.service.LottoService;
 
 public final class OutputTable {
@@ -21,43 +23,54 @@ public final class OutputTable {
   private OutputTable() {
   }
 
-  public static void main(String[] args) {
+  public static void run() {
     LottoController controller = new LottoController(new LottoService());
-    controller.run();
+    inputPurchaseAmount();
+    long haveMoney = InputTable.inputHaveMoney();
+    List<Product> products = controller.visit(new Guest(haveMoney), new Store()).hasAllLotto();
+    buyThings(products.size());
+    printProductInfos(products);
+    lastWeekAwardNumber();
+    Product winnerProduct = controller.insertWinnerNumber(InputTable.inputAwardNumber());
+    resultStatisticsMessage();
+    List<WinningResultDto> histories = controller.histories(products, winnerProduct);
+    resultStatistics(histories);
+    double percent = controller.yieldCalculate(haveMoney, controller.allAddReward(histories));
+    printYield(percent, controller.isStandard(percent));
   }
 
-  public static void inputPurchaseAmount() {
+  private static void inputPurchaseAmount() {
     System.out.println(PURCHASE_AMOUNT_MESSAGE);
   }
 
-  public static void buyThings(Integer productCount) {
+  private static void buyThings(Integer productCount) {
     System.out.printf(BUY_THING_MESSAGE, productCount);
   }
 
-  public static void printProductInfos(List<Product> products) {
+  private static void printProductInfos(List<Product> products) {
     for (Product product : products) {
       System.out.println(product);
     }
   }
 
-  public static void lastWeekAwardNumber() {
+  private static void lastWeekAwardNumber() {
     System.out.println();
     System.out.println(LAST_WEEK_AWARD_NUMBER_MESSAGE);
   }
 
-  public static void resultStatisticsMessage() {
+  private static void resultStatisticsMessage() {
     System.out.println(STATISTICS_MESSAGE);
     System.out.println(UNDER_BAR);
   }
 
-  public static void resultStatistics(List<WinningResultDto> histories) {
+  private static void resultStatistics(List<WinningResultDto> histories) {
     for (WinningResultDto history : histories) {
       System.out.printf(HISTORY_MESSAGE, history.getGrade().getExpectNumber(),
           history.getGrade().getAwardPrice(), history.getCount());
     }
   }
 
-  public static void printYield(double yield, boolean isStandard) {
+  private static void printYield(double yield, boolean isStandard) {
     System.out.printf(YIELD_MESSAGE, yield,
         standardMessage(isStandard));
   }
