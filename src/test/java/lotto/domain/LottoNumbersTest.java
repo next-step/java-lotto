@@ -61,4 +61,15 @@ class LottoNumbersTest {
             assertThat(actual).isEqualTo(2);
         }
     }
+
+    @Nested
+    class toString_메서드는 {
+
+        @Test
+        void 번호목록_문자를_리턴한다() {
+            String actual = lottoNumbers.toString();
+
+            assertThat(actual).isEqualTo("[3, 2, 1]");
+        }
+    }
 }
