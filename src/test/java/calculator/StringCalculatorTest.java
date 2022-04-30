@@ -17,5 +17,4 @@ class StringCalculatorTest {
     void calculate_문자열_계산하기(String text, int result) {
         assertThat(StringCalculator.calculate(text)).isEqualTo(result);
     }
-
 }
