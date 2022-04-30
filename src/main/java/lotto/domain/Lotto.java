@@ -1,9 +1,11 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
+import lotto.util.LottoNumberGenerator;
 
 public class Lotto {
 
@@ -28,7 +30,7 @@ public class Lotto {
   }
 
   public Set<LottoNumber> getValues() {
-    return values;
+    return Collections.unmodifiableSet(values);
   }
 
   public Rank getRank(WinningLotto winningLotto) {

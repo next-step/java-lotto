@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.Map;
 
 public class LottoResult {
@@ -11,7 +12,7 @@ public class LottoResult {
   }
 
   public Map<Rank, Integer> getValue() {
-    return value;
+    return Collections.unmodifiableMap(value);
   }
 
   public int getRankCount(Rank rank) {

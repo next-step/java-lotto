@@ -54,7 +54,6 @@ public class ResultView {
   }
 
   private static void printFormattedLottos(Lottos lottos) {
-    new StringBuilder();
     for (Lotto lotto : lottos.getValues()) {
       System.out.print("[");
       System.out.print(getFormattedLotto(lotto));
