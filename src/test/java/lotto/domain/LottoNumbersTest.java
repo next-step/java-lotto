@@ -45,4 +45,20 @@ class LottoNumbersTest {
             }
         }
     }
+
+    @Nested
+    class getMatchNumberCount_메서드는 {
+
+        @Test
+        void 일치하는_번호_개수를_리턴한다() {
+            LottoNumbers newLottoNumbers = new LottoNumbers(Arrays.asList(
+                    new LottoNumber(1),
+                    new LottoNumber(2)
+            ));
+
+            int actual = lottoNumbers.getMatchNumberCount(newLottoNumbers);
+
+            assertThat(actual).isEqualTo(2);
+        }
+    }
 }

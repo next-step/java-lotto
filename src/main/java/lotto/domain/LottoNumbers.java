@@ -33,6 +33,12 @@ public class LottoNumbers {
                 .anyMatch(lottoNumber::equals);
     }
 
+    public int getMatchNumberCount(LottoNumbers lottoNumbers) {
+        return (int) this.lottoNumbers.stream()
+                .filter(lottoNumbers::contains)
+                .count();
+    }
+
     @Override
     public String toString() {
         return this.lottoNumbers.toString();
