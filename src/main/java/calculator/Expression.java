@@ -1,17 +1,17 @@
 package calculator;
 
 public class Expression {
-    private final Operand operand1;
-    private final Operand operand2;
+    private final Operand firstOperand;
     private final Operator operator;
+    private final Operand secondOperand;
 
-    Expression(Operand operand1, Operator operator, Operand operand2) {
-        this.operand1 = operand1;
+    Expression(Operand firstOperand, Operator operator, Operand secondOperand) {
+        this.firstOperand = firstOperand;
         this.operator = operator;
-        this.operand2 = operand2;
+        this.secondOperand = secondOperand;
     }
 
     public int operation() {
-        return this.operator.operate(operand1.getNumber(), operand2.getNumber());
+        return this.operator.operate(firstOperand.getNumber(), secondOperand.getNumber());
     }
 }
