@@ -17,14 +17,14 @@ class LottoDrawResultsTest {
 
   @ParameterizedTest
   @DisplayName("로또 추첨 결과들이 잘 생성되는지 확인")
-  @CsvSource(value = {"1|100", "5|5", "4|400", "0|0"}, delimiter = '|')
-  void generate(int matchCount, int reword) {
+  @CsvSource(value = {"1|100|true", "5|5|false", "4|400|true", "0|0|false"}, delimiter = '|')
+  void generate(int matchCount, int reword, boolean bonusMatch) {
     LottoDrawResults lottoDrawResults = new LottoDrawResults(Arrays.asList(
-        new LottoDrawResult[]{new LottoDrawResult(matchCount, reword),
-            new LottoDrawResult(matchCount, reword)}));
+        new LottoDrawResult[]{new LottoDrawResult(matchCount, reword, bonusMatch),
+            new LottoDrawResult(matchCount, reword, bonusMatch)}));
     LottoDrawResults exptected = new LottoDrawResults(Arrays.asList(
-        new LottoDrawResult[]{new LottoDrawResult(matchCount, reword),
-            new LottoDrawResult(matchCount, reword)}));
+        new LottoDrawResult[]{new LottoDrawResult(matchCount, reword, bonusMatch),
+            new LottoDrawResult(matchCount, reword, bonusMatch)}));
 
     assertThat(lottoDrawResults).usingRecursiveComparison().isEqualTo(exptected);
 
@@ -40,11 +40,32 @@ class LottoDrawResultsTest {
 
     for (int i = 0; i < drawCount; i++) {
       int reword = random.nextInt(10000);
-      lottoDrawResults.add(new LottoDrawResult(random.nextInt(10), reword));
+      lottoDrawResults.add(new LottoDrawResult(random.nextInt(10), reword, false));
       rewordAll += reword;
     }
 
     assertThat(new LottoDrawResults(lottoDrawResults).getRewordAll()).isEqualTo(rewordAll);
+
+  }
+
+  @RepeatedTest(100)
+  @DisplayName("로또 보너스 추첨 결과가 잘 필터링되는지 확인")
+  void filterBonus() {
+    Random random = new Random();
+    List<LottoDrawResult> lottoDrawResults = new ArrayList<>();
+    int filteredSizeExpect = 0;
+    int loopCount = random.nextInt(100);
+
+    for (int i = 0; i < loopCount; i++) {
+      int randomNumber = random.nextInt(2);
+      filteredSizeExpect += randomNumber;
+      lottoDrawResults.add(new LottoDrawResult(10, 1000, randomNumber == 1));
+    }
+    LottoDrawResults bonusResult = new LottoDrawResults(lottoDrawResults).filterBonusBall(true);
+    LottoDrawResults notBonusResult = new LottoDrawResults(lottoDrawResults).filterBonusBall(false);
+
+    assertThat(bonusResult.getValues()).hasSize(filteredSizeExpect);
+    assertThat(notBonusResult.getValues()).hasSize(loopCount - filteredSizeExpect);
 
   }
 
@@ -58,7 +79,7 @@ class LottoDrawResultsTest {
     for (int i = 0; i < 100; i++) {
       int reword = random.nextInt(10000);
       int matchCount = random.nextInt(6);
-      lottoDrawResults.add(new LottoDrawResult(matchCount, reword));
+      lottoDrawResults.add(new LottoDrawResult(matchCount, reword, false));
       rewordByMatchCount.putIfAbsent(matchCount, 0);
       rewordByMatchCount.put(matchCount, rewordByMatchCount.get(matchCount) + reword);
     }

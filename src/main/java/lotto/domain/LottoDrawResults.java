@@ -28,6 +28,21 @@ public class LottoDrawResults {
     return new LottoDrawResults(lottoDrawResults);
   }
 
+  public LottoDrawResults filterBonusBall(boolean bonusMatch) {
+    List<LottoDrawResult> lottoDrawResults = new ArrayList<>();
+    for (LottoDrawResult lottoDrawResult : values) {
+      addBonusMatch(lottoDrawResult, lottoDrawResults, bonusMatch);
+    }
+    return new LottoDrawResults(lottoDrawResults);
+  }
+
+  private void addBonusMatch(LottoDrawResult lottoDrawResult,
+      List<LottoDrawResult> lottoDrawResults, boolean bonusMatch) {
+    if (bonusMatch == lottoDrawResult.isBonusMatch()) {
+      lottoDrawResults.add(lottoDrawResult);
+    }
+  }
+
   public List<LottoDrawResult> getValues() {
     return Collections.unmodifiableList(values);
   }

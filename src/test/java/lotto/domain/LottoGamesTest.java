@@ -42,9 +42,30 @@ class LottoGamesTest {
     LottoGames lottoGames = new LottoGames(gameCount, numberGenerators);
     LottoNumbers winLottoNumbers = new LottoNumbers(winNumbers);
 
-    LottoDrawResults lottoDrawResults = lottoGames.draw(winLottoNumbers);
+    LottoDrawResults lottoDrawResults = lottoGames.draw(winLottoNumbers, null);
 
     assertThat(lottoDrawResults.getRewordAll()).isEqualTo(
-        LottoReword.getWinMoney(matchCount) * gameCount);
+        LottoReword.getWinMoney(matchCount, false) * gameCount);
+  }
+
+  @ParameterizedTest
+  @DisplayName("보너스 번호가 포함된 로또 추첨 결과 잘 가져오는지 확인")
+  @CsvSource(value = {"4,8,19,23,11,7|1,5,10,15,20,2|4|50|0",
+      "5,11,16,20,35,40|5,11,16,20,35,45|45|20|5",
+      "1,9,12,26,35,38|1,9,12,26,35,38|40|1|6"}, delimiter = '|')
+  void drawWithBonus(String lottoNumbers, String winNumbers, String bonusNumber, int gameCount,
+      int matchCount) {
+    List<NumberGenerator> numberGenerators = new ArrayList<>();
+    for (int i = 0; i < gameCount; i++) {
+      numberGenerators.add(new FixedNumberGenerator(lottoNumbers));
+    }
+    LottoGames lottoGames = new LottoGames(gameCount, numberGenerators);
+    LottoNumbers winLottoNumbers = new LottoNumbers(winNumbers);
+
+    LottoDrawResults lottoDrawResults = lottoGames
+        .draw(winLottoNumbers, new LottoNumber(bonusNumber));
+
+    assertThat(lottoDrawResults.getRewordAll()).isEqualTo(
+        LottoReword.getWinMoney(matchCount, true) * gameCount);
   }
 }
