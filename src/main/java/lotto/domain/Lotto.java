@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.constant.MatchResult;
 import lotto.exception.InvalidLottoNumberCount;
 
 import java.util.List;
@@ -8,7 +9,7 @@ public class Lotto {
 
     public static final int LOTTO_NUMBER_COUNT = 6;
 
-    private int matchCount;
+    private MatchResult matchResult;
     private final LottoNumbers lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
@@ -23,7 +24,8 @@ public class Lotto {
     }
 
     public void confirm(List<LottoNumber> winningNumbers) {
-        matchCount = lottoNumbers.matchCount(winningNumbers);
+        int matchCount = lottoNumbers.matchCount(winningNumbers);
+        this.matchResult = MatchResult.findByMatchCount(matchCount);
     }
 
     @Override
