@@ -44,13 +44,6 @@ public class LottoListTest {
   }
 
   @Test
-  void getTotalLottoCount_성공() {
-    LottoList lottoList = new LottoList(6);
-
-    assertThat(lottoList.getTotalLottoCount()).isEqualTo(6);
-  }
-
-  @Test
   void toStringForPrinting_성공() {
     Lotto lotto1 = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
     Lotto lotto2 = new Lotto(Set.of(1, 2, 3, 4, 5, 16));

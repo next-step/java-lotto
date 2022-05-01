@@ -6,24 +6,18 @@ import util.LottoOutputView;
 
 public class LottoController {
 
-  private static final int LOTTO_PRICE = 1000;
-
   public void proceed() {
-    int paymentAmount = LottoInputView.insertPaymentAmount();
-    int purchaseAmount = getLottoAmount(paymentAmount);
-    LottoList lottoList = new LottoList(purchaseAmount);
+    PaymentAmount paymentAmount = LottoInputView.insertPaymentAmount();
+    LottoList lottoList = new LottoList(paymentAmount);
+
     LottoOutputView.print(lottoList.toStringForPrinting());
-    LottoOutputView.printPurchaseAmount(purchaseAmount);
+    LottoOutputView.printPurchaseAmount(lottoList.getTotalLottoCount());
     LottoOutputView.print(lottoList.toStringForPrinting());
 
     Lotto winningLotto = new Lotto(LottoInputView.insertWinningLotto());
     BigDecimal revenueRate = lottoList.calculateRevenueWithWinningNumber(winningLotto);
 
     LottoOutputView.printRevenue(revenueRate);
-  }
-
-  private int getLottoAmount(int money) {
-    return money / LOTTO_PRICE;
   }
 
   public static LottoController init() {

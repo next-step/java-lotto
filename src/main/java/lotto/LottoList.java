@@ -20,11 +20,15 @@ public class LottoList {
   private static final int LOTTO_PRICE = 1000;
   private static final int REVENUE_RATE_SCALE = 2;
 
-  LottoList(int amount) {
-    validateAmount(amount);
-    for (int i = 0; i < amount; i++) {
+  LottoList(int lottoAmount) {
+    validateAmount(lottoAmount);
+    for (int i = 0; i < lottoAmount; i++) {
       lottoList.add(new Lotto());
     }
+  }
+
+  LottoList(PaymentAmount paymentAmount) {
+    this(paymentAmount.purchaseLotto(LOTTO_PRICE));
   }
 
   LottoList(List<Lotto> lottoList) {
