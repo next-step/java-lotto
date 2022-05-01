@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.StringJoiner;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lotto {
 
@@ -16,6 +17,7 @@ public class Lotto {
   private static final String LOTTO_BEGIN_STRING = "[";
   private static final String LOTTO_END_STRING = "]";
   private static final String LOTTO_NUMBER_DELIMITER = ", ";
+  private static final String NUMBERS_DELIMITER = ", ";
   private static final int LOTTO_NUMBER_BOUND = 46;
   private static final int LOTTO_NUMBER_SIZE = 6;
 
@@ -43,14 +45,19 @@ public class Lotto {
         .collect(Collectors.toUnmodifiableSet()));
   }
 
+  Lotto(String lotto) {
+    this(Stream.of(lotto.split(NUMBERS_DELIMITER))
+            .map(Integer::parseInt)
+            .collect(Collectors.toSet()));
+  }
+
   public boolean matches(int expectedMatchedCount, Lotto other) {
     return expectedMatchedCount == other.lotto.stream()
         .filter(this.lotto::contains)
         .count();
   }
 
-  @Override
-  public String toString() {
+  public String toStringForPrinting() {
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append(LOTTO_BEGIN_STRING);
 

@@ -1,6 +1,6 @@
 package lotto;
 
-import util.OutputView;
+import util.LottoOutputView;
 
 public enum LottoPrize {
   THREE(3, 5000, "3개 일치 (%s원)- %s개"),
@@ -28,6 +28,6 @@ public enum LottoPrize {
   }
 
   public void printingRevenue(int matchedLottoCount) {
-    OutputView.print(String.format(revenueMessageToPrint, revenue, matchedLottoCount));
+    LottoOutputView.print(String.format(revenueMessageToPrint, revenue, matchedLottoCount));
   }
 }
