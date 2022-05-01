@@ -43,10 +43,10 @@ public class LottoTest {
 
   @ParameterizedTest(name = "{1}과 {0}개 일치함")
   @MethodSource("expectedMatchedCountAndOtherLotto")
-  void matches_true_반환(int expectedMatchedCount, Lotto other) {
+  void getMatchedCount_성공(int expectedMatchedCount, Lotto other) {
     Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
 
-    assertThat(lotto.matches(expectedMatchedCount, other)).isTrue();
+    assertThat(lotto.getMatchedCount(other)).isEqualTo(expectedMatchedCount);
   }
 
   private static Stream<Arguments> expectedMatchedCountAndOtherLotto() {
@@ -58,15 +58,6 @@ public class LottoTest {
         Arguments.of(5, new Lotto(Set.of(1, 2, 3, 4, 5, 16))),
         Arguments.of(6, new Lotto(Set.of(1, 2, 3, 4, 5, 6)))
         );
-  }
-
-  @Test
-  void matches_false_반환() {
-    Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
-    Lotto otherLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
-    int expectedMatchedCount = 0;
-
-    assertThat(lotto.matches(expectedMatchedCount, otherLotto)).isFalse();
   }
 
   @Test

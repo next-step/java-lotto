@@ -33,7 +33,7 @@ public class LottoList {
 
   public int getMatchedLottoCount(int matchedCount, Lotto otherLotto) {
     return (int) lottoList.stream()
-        .filter(lotto -> lotto.matches(matchedCount, otherLotto))
+        .filter(lotto -> matchedCount == lotto.getMatchedCount(otherLotto))
         .count();
   }
 

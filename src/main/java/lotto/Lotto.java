@@ -47,12 +47,12 @@ public class Lotto {
 
   Lotto(String lotto) {
     this(Stream.of(lotto.split(NUMBERS_DELIMITER))
-            .map(Integer::parseInt)
-            .collect(Collectors.toSet()));
+        .map(Integer::parseInt)
+        .collect(Collectors.toSet()));
   }
 
-  public boolean matches(int expectedMatchedCount, Lotto other) {
-    return expectedMatchedCount == other.lotto.stream()
+  public int getMatchedCount(Lotto other) {
+    return (int) other.lotto.stream()
         .filter(this.lotto::contains)
         .count();
   }
