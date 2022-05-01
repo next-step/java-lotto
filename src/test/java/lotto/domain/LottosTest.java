@@ -12,7 +12,7 @@ class LottosTest {
 
     @Test
     @DisplayName("3개의 복권 중 2개가 MatchResult.Three 경우 10000을 반환한다.")
-    void name() {
+    void calculateTotalWinPrice() {
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(new Lotto(new LottoNumbers(new LottoNumber[]{new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)})));
         lottoList.add(new Lotto(new LottoNumbers(new LottoNumber[]{new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(7), new LottoNumber(8), new LottoNumber(9)})));
