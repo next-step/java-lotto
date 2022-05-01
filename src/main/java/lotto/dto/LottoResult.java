@@ -10,6 +10,7 @@ public class LottoResult {
     private static final int WINNINGS_START = 3;
     private static final int WINNINGS_END = 6;
     private static final int ZERO = 0;
+    private static final int DEFAULT_VALUE = 0;
 
     private final Map<Rank, Integer> rankResult;
     private final long winningsSum;
@@ -29,7 +30,7 @@ public class LottoResult {
     private void fillRankDefault(Map<Rank, Integer> rankResult) {
         for (int i = WINNINGS_START; i <= WINNINGS_END; i++) {
             Rank rank = Rank.of(i);
-            rankResult.put(rank, rankResult.getOrDefault(rank, 0));
+            rankResult.put(rank, rankResult.getOrDefault(rank, DEFAULT_VALUE));
         }
     }
 
