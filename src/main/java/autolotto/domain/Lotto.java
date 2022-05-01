@@ -1,22 +1,18 @@
 package autolotto.domain;
 
-import java.util.Set;
-
 public class Lotto {
-    private Set<Integer> numbers;
+    private LottoNumbers lottoNumbers;
 
-    public Lotto(Set<Integer> numbers) {
-        this.numbers = numbers;
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     public int match(WinningLotto winningLotto) {
-        return (int) numbers.stream()
-                .filter(winningLotto::contains)
-                .count();
+        return lottoNumbers.match(winningLotto);
     }
 
     @Override
     public String toString() {
-        return numbers.toString();
+        return lottoNumbers.toString();
     }
 }
