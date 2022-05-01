@@ -21,7 +21,8 @@ public class LottoGame {
   public LottoDrawResult draw(LottoNumbers winNumbers, LottoNumber bonusNumber) {
     int matchCount = lottoNumbers.getMatchNumbers(winNumbers).getNumberSize();
     boolean isBonusMatch = winNumbers.isBonusMatch(bonusNumber);
-    return new LottoDrawResult(matchCount, LottoReword.getWinMoney(matchCount, isBonusMatch));
+    return new LottoDrawResult(matchCount, LottoReword.getWinMoney(matchCount, isBonusMatch),
+        isBonusMatch);
   }
 
   public LottoNumbers getLottoNumbers() {
