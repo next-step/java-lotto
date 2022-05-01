@@ -38,4 +38,19 @@ public class CalculatorTest {
         assertThat(calculator.divide("1", "3")).isEqualTo(0);
     }
 
+    @Test
+    @DisplayName("연산자 인식")
+    void calculationType() {
+        Calculator calculator = new Calculator();
+        int PLUS = 1;
+        int MINUS = 2;
+        int MULTIPLY = 3;
+        int DIVIDE = 4;
+
+        assertThat(calculator.operatorType("+")).isEqualTo(PLUS);
+        assertThat(calculator.operatorType("-")).isEqualTo(MINUS);
+        assertThat(calculator.operatorType("*")).isEqualTo(MULTIPLY);
+        assertThat(calculator.operatorType("/")).isEqualTo(DIVIDE);
+    }
+
 }
