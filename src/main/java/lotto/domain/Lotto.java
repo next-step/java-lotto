@@ -4,6 +4,7 @@ import lotto.constant.MatchResult;
 import lotto.exception.InvalidLottoNumberCount;
 
 import java.util.List;
+import java.util.Optional;
 
 public class Lotto {
 
@@ -26,6 +27,10 @@ public class Lotto {
     public void confirm(List<LottoNumber> winningNumbers) {
         int matchCount = lottoNumbers.matchCount(winningNumbers);
         this.matchResult = MatchResult.findByMatchCount(matchCount);
+    }
+
+    public Optional<MatchResult> findMatchResult() {
+        return Optional.ofNullable(matchResult);
     }
 
     @Override

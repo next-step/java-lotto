@@ -1,6 +1,9 @@
 package lotto.domain;
 
+import lotto.constant.MatchResult;
+
 import java.util.List;
+import java.util.Optional;
 
 public class Lottos {
 
@@ -22,5 +25,14 @@ public class Lottos {
 
     public List<Lotto> toList() {
         return lottos;
+    }
+
+    public int calculateTotalWinPrice() {
+        return lottos.stream()
+                .map(Lotto::findMatchResult)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .mapToInt(MatchResult::winPrice)
+                .sum();
     }
 }
