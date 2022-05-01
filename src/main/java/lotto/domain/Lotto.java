@@ -20,10 +20,6 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoNumbers lottoNumbers() {
-        return lottoNumbers;
-    }
-
     @Override
     public String toString() {
         return lottoNumbers.toString();
