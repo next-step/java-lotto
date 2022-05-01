@@ -1,43 +1,39 @@
 package lotto.domain;
 
 import lotto.exception.InvalidLottoLengthException;
-import lotto.exception.InvalidLottoNumberException;
-import lotto.util.Utility;
 
 import java.util.*;
 
 public class Lotto {
     private static final int VALID_LOTTO_LENGTH = 6;
-    private final Set<Integer> lottoNumber;
+    private final Set<LottoNumber> lotto;
 
-    Lotto(List<Integer> lottoNumber) {
-        validateLotto(lottoNumber);
-        this.lottoNumber = new HashSet<>(lottoNumber);
+    Lotto(List<Integer> lottoNumbers) {
+        validateLengthOfLotto(lottoNumbers);
+        this.lotto = new HashSet<>(castIntegersToLottoNumbers(lottoNumbers));
     }
 
-    private void validateLotto(List<Integer> lottoNumber) {
-        final Set<Integer> lotto = new HashSet<>(lottoNumber);
-        if (VALID_LOTTO_LENGTH != lotto.size()) {
-            throw new InvalidLottoLengthException(lotto.size());
-        }
-
-        for (Integer number : lotto) {
-            checkLottoNumberRange(number);
+    private void validateLengthOfLotto(List<Integer> lottoNumbers) {
+        final Set<Integer> noDuplicateLottoNumbers = new HashSet<>(lottoNumbers);
+        if (VALID_LOTTO_LENGTH != noDuplicateLottoNumbers.size()) {
+            throw new InvalidLottoLengthException(noDuplicateLottoNumbers.size());
         }
     }
 
-    private void checkLottoNumberRange(Integer number) {
-        if (Utility.checkNumberRange(number, LottoFactory.MIN_LOTTO_NUMBER, LottoFactory.MAX_LOTTO_NUMBER)) {
-            throw new InvalidLottoNumberException(number);
+    private List<LottoNumber> castIntegersToLottoNumbers(List<Integer> lottoNumbers) {
+        final List<LottoNumber> lotto = new ArrayList<>();
+        for (Integer number : lottoNumbers) {
+            lotto.add(new LottoNumber(number));
         }
+        return lotto;
     }
 
-    public Lotto(Integer[] lottoNumber) {
-        this(Arrays.asList(lottoNumber));
+    public Lotto(Integer[] lottoNumbers) {
+        this(Arrays.asList(lottoNumbers));
     }
 
-    public List<Integer> getLottoNumbers() {
-        List<Integer> copy = new ArrayList<>(this.lottoNumber);
+    public List<LottoNumber> getLottoNumbers() {
+        List<LottoNumber> copy = new ArrayList<>(this.lotto);
         Collections.sort(copy);
         return Collections.unmodifiableList(copy);
     }
@@ -45,13 +41,13 @@ public class Lotto {
     public LottoWinnerType winLotto(Lotto previousLotto, int bonusNumber) {
         int countOfDuplicate = countDuplicateValue(previousLotto);
         if (LottoWinnerType.matchCountWithBonus(countOfDuplicate)) {
-            return LottoWinnerType.valueOf(countOfDuplicate, lottoNumber.contains(bonusNumber));
+            return LottoWinnerType.valueOf(countOfDuplicate, lotto.contains(new LottoNumber(bonusNumber)));
         }
         return LottoWinnerType.valueOf(countOfDuplicate, false);
     }
 
     int countDuplicateValue(Lotto lotto) {
-        Set<Integer> copyOfLotto = new HashSet<>(this.lottoNumber);
+        Set<LottoNumber> copyOfLotto = new HashSet<>(this.lotto);
         copyOfLotto.retainAll(lotto.getLottoNumbers());
 
         return copyOfLotto.size();
@@ -59,6 +55,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return lottoNumber.toString();
+        return lotto.toString();
     }
 }

@@ -12,10 +12,11 @@ class LottoFactoryTest {
 
     @DisplayName("생성된 로또의 숫자 범위는 1과 45 사이이다.")
     @Test
-    void 로또_생성_숫자_범위_테스트() {
+    void 로또_자동_생성_숫자_범위_테스트() {
         Lotto lotto = LottoFactory.createLottoAutomatically();
-        for (Integer number : lotto.getLottoNumbers()) {
-            assertThat(number >= MIN_LOTTO_NUMBER && number <= MAX_LOTTO_NUMBER).isTrue();
+        System.out.println(lotto.toString());
+        for (LottoNumber number : lotto.getLottoNumbers()) {
+            assertThat(number.getLottoNumber() >= MIN_LOTTO_NUMBER && number.getLottoNumber() <= MAX_LOTTO_NUMBER).isTrue();
         }
     }
 
@@ -23,7 +24,7 @@ class LottoFactoryTest {
     @Test
     void 로또_생성_불변_테스트() {
         Lotto lotto = LottoFactory.createLottoAutomatically();
-        assertThatThrownBy(() -> lotto.getLottoNumbers().add(2))
+        assertThatThrownBy(() -> lotto.getLottoNumbers().add(new LottoNumber(2)))
                         .isInstanceOf(UnsupportedOperationException.class);
     }
 }
