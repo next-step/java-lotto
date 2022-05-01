@@ -14,6 +14,6 @@ class StringCalculatorTest {
             "100 - 101 + 1 * 0 / 1=0"
     }, delimiter = '=')
     void calculate_문자열_계산하기(String text, int result) {
-        assertThat(StringCalculator.calculate(text)).isEqualTo(result);
+        assertThat(StringCalculator.stringCalculate(text)).isEqualTo(result);
     }
 }

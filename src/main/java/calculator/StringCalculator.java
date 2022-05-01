@@ -11,13 +11,29 @@ public class StringCalculator {
     private StringCalculator() {
     }
 
-    public static int calculate(String text) {
+    public static int stringCalculate(String text) {
         List<String> elements = SplitString.split(text);
-        Operand resultValue = new Operand(elements.get(FIRST_OPERAND));
+        int resultValue = getValidOperand(elements.get(FIRST_OPERAND));
         for (int index = SECOND_OPERATOR; index < elements.size(); index += TWO_STEP_INDEX) {
-            Operator operator = Operator.valueOfOperatorSymbol(elements.get(index));
-            resultValue = operator.operate(resultValue, new Operand(elements.get(index + GET_OPERAND)));
+            resultValue = calculate(
+                    new Operand(resultValue),
+                    getValidOperator(elements.get(index)),
+                    new Operand(elements.get(index + GET_OPERAND))
+            );
         }
-        return resultValue.getNumber();
+        return resultValue;
+    }
+
+    private static int calculate(Operand operand1, Operator operator, Operand operand2) {
+        Expression expression = new Expression(operand1, operator, operand2);
+        return expression.operation();
+    }
+
+    private static Operator getValidOperator(String operatorSymbol) {
+        return Operator.valueOfOperatorSymbol(operatorSymbol);
+    }
+
+    private static int getValidOperand(String value) {
+        return new Operand(value).getNumber();
     }
 }

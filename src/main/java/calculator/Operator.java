@@ -33,7 +33,7 @@ public enum Operator {
         return Optional.ofNullable(BY_OPERATOR.get(operatorSymbol)).orElseThrow(() -> new IllegalArgumentException(String.format("%s는 사칙 연산자가 아닙니다.", operatorSymbol)));
     }
 
-    public Operand operate(Operand a, Operand b) {
-        return new Operand(intBinaryOperator.applyAsInt(a.getNumber(), b.getNumber()));
+    public int operate(int operand1, int operand2) {
+        return intBinaryOperator.applyAsInt(operand1, operand2);
     }
 }
