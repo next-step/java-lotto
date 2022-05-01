@@ -18,6 +18,10 @@ public class Elements {
 
 
     public static Elements of(String formula) {
+        if (formula.isEmpty()) {
+            throw new IllegalArgumentException("빈 수식은 입력이 불가능합니다");
+        }
+
         List<String> elements = List.of(formula.split(" "));
         Elements es = new Elements();
 

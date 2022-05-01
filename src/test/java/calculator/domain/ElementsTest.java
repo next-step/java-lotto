@@ -3,6 +3,7 @@ package calculator.domain;
 import java.util.LinkedList;
 import java.util.Queue;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import org.junit.jupiter.api.Test;
 
 public class ElementsTest {
@@ -32,5 +33,13 @@ public class ElementsTest {
         assertThat(e.hasNextElements()).isTrue();
         e.poll();
         assertThat(e.hasNextElements()).isFalse();
+    }
+
+    @Test
+    void 빈_수식_테스트() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    Elements.of("");
+                }).withMessageMatching("빈 수식은 입력이 불가능합니다");
     }
 }

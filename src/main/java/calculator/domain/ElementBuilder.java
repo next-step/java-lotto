@@ -28,7 +28,7 @@ public class ElementBuilder {
                 return new Division();
             }
 
-            throw new RuntimeException("정의 되지 않은 연산자");
+            throw new IllegalArgumentException("정의 되지 않은 연산자 : " + operator);
         }
     }
 }
