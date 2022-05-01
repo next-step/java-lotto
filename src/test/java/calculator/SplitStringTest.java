@@ -11,7 +11,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class SplitStringTest {
     @Test
-    void split_공백자로_구분() {
+    void split_공백으로_구분() {
         List<String> result = SplitString.split("1 + 3 - 2 * 5 / 2");
         assertThat(result).isEqualTo(List.of("1", "+", "3", "-", "2", "*", "5", "/", "2"));
     }
