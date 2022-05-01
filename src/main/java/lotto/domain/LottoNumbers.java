@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class LottoNumbers {
 
@@ -11,6 +12,14 @@ public class LottoNumbers {
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         Collections.sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public static LottoNumbers fullLottoNumbers() {
+        List<LottoNumber> fullLottoNumbers = new ArrayList<>();
+        for (int i = LottoNumber.MIN_NUMBER; i <= LottoNumber.MAX_NUMBER; i++) {
+            fullLottoNumbers.add(new LottoNumber(i));
+        }
+        return new LottoNumbers(fullLottoNumbers);
     }
 
     public LottoNumbers randomLottoNumbers() {
@@ -28,6 +37,19 @@ public class LottoNumbers {
 
     public List<LottoNumber> toList() {
         return lottoNumbers;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumbers that = (LottoNumbers) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 
     @Override
