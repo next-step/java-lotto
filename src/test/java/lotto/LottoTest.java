@@ -70,10 +70,10 @@ public class LottoTest {
   }
 
   @Test
-  void toString_성공() {
+  void toStringForPrinting_성공() {
     Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
     String expectedLottoString = "[1, 2, 3, 4, 5, 6]";
 
-    assertThat(lotto.toString()).isEqualTo(expectedLottoString);
+    assertThat(lotto.toStringForPrinting()).isEqualTo(expectedLottoString);
   }
 }

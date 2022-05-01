@@ -51,15 +51,15 @@ public class LottoListTest {
   }
 
   @Test
-  void toString_성공() {
+  void toStringForPrinting_성공() {
     Lotto lotto1 = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
     Lotto lotto2 = new Lotto(Set.of(1, 2, 3, 4, 5, 16));
     LottoList lottoList = new LottoList(List.of(lotto1, lotto2));
     String expected = new StringJoiner("\n")
-        .add(lotto1.toString())
-        .add(lotto2.toString())
+        .add(lotto1.toStringForPrinting())
+        .add(lotto2.toStringForPrinting())
         .toString();
 
-    assertThat(lottoList.toString()).isEqualTo(expected);
+    assertThat(lottoList.toStringForPrinting()).isEqualTo(expected);
   }
 }
