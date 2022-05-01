@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.LinkedList;
 import java.util.List;
 
-public class LottoTickets {
+public class LottoTickets implements Cloneable {
 
     private  List<LottoTicket> lottoTickets = new LinkedList<>();
 
@@ -14,8 +14,22 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
+    public LottoTickets(LottoTickets lottoTickets) {
+        lottoTickets.getLottoTickets()
+            .forEach(this.lottoTickets::add);
+    }
+
+    @Override
+    public LottoTickets clone() {
+        return new LottoTickets(this);
+    }
+
     public void add() {
         lottoTickets.add(LottoTicket.create());
+    }
+
+    public void add(LottoTicket lottoTicket) {
+        lottoTickets.add(lottoTicket);
     }
 
     public int count() {
@@ -42,4 +56,9 @@ public class LottoTickets {
             "lottoTickets=" + lottoTickets +
             '}';
     }
+
+    public int size() {
+        return lottoTickets.size();
+    }
+
 }
