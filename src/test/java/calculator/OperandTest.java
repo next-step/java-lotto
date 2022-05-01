@@ -8,8 +8,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 class OperandTest {
     @Test
     void Operand_피연산자_생성() {
-        Operand operand = new Operand("3");
-        assertThat(operand).isEqualTo(new Operand(3));
+        assertThat(new Operand("3")).isEqualTo(new Operand(3));
     }
 
     @Test
