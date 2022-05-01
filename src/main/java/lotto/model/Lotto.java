@@ -1,49 +1,62 @@
 package lotto.model;
 
-import lotto.util.Roulette;
+import lotto.common.Delimiter;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
 
-    private static final int MAX_SIZE = 6;
-    private final Set<Number> numbers;
+    private static final List<Integer> LOTTO_NUMBERS = IntStream.range(1, 46).boxed().collect(Collectors.toList());
+    private List<Number> numbers;
 
-    public Lotto() {
-        this.numbers = new HashSet<>(MAX_SIZE);
+    public Lotto draw() {
+        Collections.shuffle(LOTTO_NUMBERS);
+        List<Integer> shuffleResult = LOTTO_NUMBERS.subList(0, 6);
+        Collections.sort(shuffleResult);
+
+        this.numbers = shuffleResult
+                .stream()
+                .map(Number::new)
+                .collect(Collectors.toList());
+
+        return this;
     }
 
-    public void draw() {
-        Set<Number> numbers = IntStream.range(0, MAX_SIZE)
-                .mapToObj(index -> Roulette.spin())
-                .collect(Collectors.toSet());
-        this.checkSize(numbers);
-        this.draw(numbers);
+    public Lotto draw(List<Number> numbers) {
+        this.numbers = numbers;
+
+        return this;
     }
 
-    public void draw(Collection<Number> numbers) {
-        this.checkSizeException(numbers);
-        this.numbers.addAll(numbers);
+    public int contains(Collection<Number> numbers) {
+        return (int) numbers.stream()
+                .filter(this::contains)
+                .count();
     }
 
-    private void checkSize(Collection<Number> numbers) {
-        if (numbers.size() < MAX_SIZE) {
-            IntStream.range(numbers.size(), MAX_SIZE)
-                    .forEach(index -> numbers.add(Roulette.spin()));
-        }
+    public int contains(Lotto lotto) {
+        return this.contains(lotto.numbers);
     }
 
-    private void checkSizeException(Collection<Number> numbers) {
-        if (numbers.size() < MAX_SIZE) {
-            throw new IllegalArgumentException("선택된 로또 번호 개수가 부족합니다.");
-        }
+    public boolean contains(Number number) {
+        return this.numbers.contains(number);
     }
 
-    public Set<Number> getNumbers() {
+    public List<Number> getNumbers() {
         return this.numbers;
+    }
+
+    @Override
+    public String toString() {
+        String numbers = this.numbers
+                .stream()
+                .map(Number::toString)
+                .collect(Collectors.joining(Delimiter.COMMA.symbol));
+
+        return "[" + numbers + "]";
     }
 }
