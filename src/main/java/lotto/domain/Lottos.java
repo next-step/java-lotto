@@ -27,6 +27,15 @@ public class Lottos {
         return lottos;
     }
 
+    public int countMatchResult(MatchResult matchResult) {
+        return (int) lottos.stream()
+                .map(Lotto::findMatchResult)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .filter(mr -> mr == matchResult)
+                .count();
+    }
+
     public int calculateTotalWinPrice() {
         return lottos.stream()
                 .map(Lotto::findMatchResult)

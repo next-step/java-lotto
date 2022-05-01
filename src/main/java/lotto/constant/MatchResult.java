@@ -24,6 +24,10 @@ public enum MatchResult {
                 .orElse(null);
     }
 
+    public int matchCount() {
+        return this.matchCount;
+    }
+
     public int winPrice() {
         return this.winPrice;
     }
