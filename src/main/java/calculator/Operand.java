@@ -15,7 +15,7 @@ public class Operand {
     }
 
     private boolean isDigit(String number) {
-        return number.chars().allMatch(Character::isDigit);
+        return number.chars().filter(c -> c != '-').allMatch(Character::isDigit);
     }
 
     public int getNumber() {
