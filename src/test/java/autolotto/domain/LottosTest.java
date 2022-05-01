@@ -1,5 +1,9 @@
-package autolotto;
+package autolotto.domain;
 
+import autolotto.domain.Lotto;
+import autolotto.domain.Lottos;
+import autolotto.domain.Results;
+import autolotto.domain.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

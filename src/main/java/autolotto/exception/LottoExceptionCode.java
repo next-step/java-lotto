@@ -1,4 +1,4 @@
-package autolotto;
+package autolotto.exception;
 
 public enum LottoExceptionCode {
     INVALID_WINNING_NUMBER_COUNT("당첨 번호는 6개여야 합니다."),

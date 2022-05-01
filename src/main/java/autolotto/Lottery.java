@@ -1,5 +1,9 @@
 package autolotto;
 
+import autolotto.domain.*;
+import autolotto.view.LottoInput;
+import autolotto.view.LottoOutput;
+
 public class Lottery {
     public static void main(String[] args) {
         LottoInput lottoInput = new LottoInput();

@@ -1,4 +1,6 @@
-package autolotto;
+package autolotto.domain;
+
+import autolotto.exception.LottoException;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -7,7 +9,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static autolotto.LottoExceptionCode.*;
+import static autolotto.exception.LottoExceptionCode.*;
 
 public class WinningLotto {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("[1-9]|1[0-9]|2[0-9]|3[0-9]|4[0-5]");

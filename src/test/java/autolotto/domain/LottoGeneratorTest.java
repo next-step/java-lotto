@@ -1,5 +1,6 @@
-package autolotto;
+package autolotto.domain;
 
+import autolotto.domain.LottoGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;

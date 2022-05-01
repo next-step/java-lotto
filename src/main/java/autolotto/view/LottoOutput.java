@@ -1,4 +1,7 @@
-package autolotto;
+package autolotto.view;
+
+import autolotto.domain.Lottos;
+import autolotto.domain.Results;
 
 public class LottoOutput {
     public void println(String printable) {

@@ -1,4 +1,4 @@
-package autolotto;
+package autolotto.exception;
 
 public class LottoException extends RuntimeException {
 

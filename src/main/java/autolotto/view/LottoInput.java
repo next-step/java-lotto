@@ -1,4 +1,4 @@
-package autolotto;
+package autolotto.view;
 
 import java.util.Scanner;
 

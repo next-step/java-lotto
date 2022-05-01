@@ -1,10 +1,12 @@
-package autolotto;
+package autolotto.domain;
 
+import autolotto.domain.WinningLotto;
+import autolotto.exception.LottoException;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static autolotto.LottoExceptionCode.*;
+import static autolotto.exception.LottoExceptionCode.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

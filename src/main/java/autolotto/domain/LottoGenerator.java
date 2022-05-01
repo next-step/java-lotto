@@ -1,4 +1,4 @@
-package autolotto;
+package autolotto.domain;
 
 import java.util.*;
 
