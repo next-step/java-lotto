@@ -2,8 +2,8 @@ package calculator.domain;
 
 public class Multiply extends Operator {
     @Override
-    public NumberElement execute(NumberElement a, NumberElement b) {
-        return new NumberElement(a.getValue() * b.getValue());
+    public NumberElement execute(NumberElement operandA, NumberElement operandB) {
+        return new NumberElement(operandA.getValue() * operandB.getValue());
     }
 
     @Override
