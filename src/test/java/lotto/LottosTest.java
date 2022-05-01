@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.dto.LottoResult;
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 import lotto.model.Lottos;
@@ -47,15 +48,15 @@ public class LottosTest {
     }
 
     @Test
-    @DisplayName("당첨 로또를 입력해 통계를 계산할 때 입력값이 null이면 예외가 발생한다.")
-    void getLottoStatisticNullTest() {
-        assertThatThrownBy(() -> TEST_LOTTOS.getLottoStatistics(null))
+    @DisplayName("당첨 로또를 입력해 결과를 계산할 때 입력값이 null이면 예외가 발생한다.")
+    void getLottoResultNullTest() {
+        assertThatThrownBy(() -> TEST_LOTTOS.getLottoResult(null))
                 .isInstanceOf(NullPointerException.class);
     }
 
     @Test
-    @DisplayName("구매한 로또와 당첨 로또를 입력하면 통계를 계산할 수 있다.")
-    void getLottoStatisticTest() {
+    @DisplayName("구매한 로또와 당첨 로또를 입력하면 통계 결과를 얻을 수 있다.")
+    void getLottoResultTest() {
         LottoNumber ten = new LottoNumber(10);
         LottoNumber eleven = new LottoNumber(11);
         LottoNumber twelve = new LottoNumber(12);
@@ -67,12 +68,35 @@ public class LottosTest {
         Lotto sixMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, SIX));
 
         // when
-        Map<Rank, Integer> lottoStatistics = new Lottos(Lists.newArrayList(threeMatchLotto, fourMatchLotto, fiveMatchLotto, sixMatchLotto)).getLottoStatistics(winnerLotto);
+        LottoResult lottoResult = new Lottos(Lists.newArrayList(threeMatchLotto, fourMatchLotto, fiveMatchLotto, sixMatchLotto)).getLottoResult(winnerLotto);
 
         // then
-        assertThat(lottoStatistics.get(Rank.FIRST)).isEqualTo(1);
-        assertThat(lottoStatistics.get(Rank.SECOND)).isEqualTo(1);
-        assertThat(lottoStatistics.get(Rank.THIRD)).isEqualTo(1);
-        assertThat(lottoStatistics.get(Rank.FOURTH)).isEqualTo(1);
+        assertThat(lottoResult.getRankResult().get(Rank.FIRST)).isEqualTo(1);
+        assertThat(lottoResult.getRankResult().get(Rank.SECOND)).isEqualTo(1);
+        assertThat(lottoResult.getRankResult().get(Rank.THIRD)).isEqualTo(1);
+        assertThat(lottoResult.getRankResult().get(Rank.FOURTH)).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("구매한 로또와 당첨 로또를 입력하면 통계 결과를 얻을 수 있다. 없는 값은 0으로 초기화된다")
+    void getLottoResultDefaultTest() {
+        LottoNumber ten = new LottoNumber(10);
+        LottoNumber eleven = new LottoNumber(11);
+        LottoNumber twelve = new LottoNumber(12);
+        // given
+        Lotto winnerLotto = new Lotto(ExtractLottoNumbersTest.LOTTO_NUMBERS);
+        Lotto threeMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, ten, eleven, twelve));
+        Lotto threeMatchLotto1 = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, ten, eleven, twelve));
+        Lotto fiveMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, twelve));
+
+        // when
+        LottoResult lottoResult = new Lottos(Lists.newArrayList(threeMatchLotto, threeMatchLotto1, fiveMatchLotto)).getLottoResult(winnerLotto);
+
+        // then
+        assertThat(lottoResult.getRankResult().get(Rank.FIRST)).isEqualTo(0);
+        assertThat(lottoResult.getRankResult().get(Rank.SECOND)).isEqualTo(1);
+        assertThat(lottoResult.getRankResult().get(Rank.THIRD)).isEqualTo(0);
+        assertThat(lottoResult.getRankResult().get(Rank.FOURTH)).isEqualTo(2);
+        assertThat(lottoResult.getRankResult().get(Rank.OTHER)).isEqualTo(null);
     }
 }

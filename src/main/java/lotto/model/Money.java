@@ -45,4 +45,8 @@ public final class Money {
         return Integer.valueOf(money).hashCode();
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(money);
+    }
 }

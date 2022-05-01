@@ -17,6 +17,10 @@ public enum Rank {
         this.winnings = winnings;
     }
 
+    public int matchCount() {
+        return matchCount;
+    }
+
     public long winnings() {
         return winnings;
     }

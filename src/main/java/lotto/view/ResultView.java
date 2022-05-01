@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.dto.LottoResult;
 import lotto.model.Lotto;
 import lotto.model.Lottos;
 import lotto.model.Money;
@@ -19,9 +20,6 @@ public class ResultView {
     private static final String OUTPUT_LINE = "=========";
     private static final String OUTPUT_WINNINGS = "%d개 일치 (%d원)- %d개";
     private static final String OUTPUT_YIELD = "총 수익률은 %.2f 입니다.";
-    private static final int DEFAULT_VALUE = 0;
-    private static final int WINNINGS_START = 3;
-    private static final int WINNINGS_END = 6;
 
     private ResultView() {
         throw new AssertionError();
@@ -47,23 +45,24 @@ public class ResultView {
         System.out.println(sb);
     }
 
-    public static void printStatistics(Money buyingMoney, Map<Rank, Integer> statistics) {
+    public static void printResult(Money buyingMoney, LottoResult lottoResult) {
         System.out.println(OUTPUT_STATISTICS);
         System.out.println(OUTPUT_LINE);
 
-        long result = printWinningsAndGetSum(statistics);
-        printYield(buyingMoney, result);
+        long winningsSum = printStatistics(lottoResult);
+
+        printYield(buyingMoney, winningsSum);
     }
 
-    private static long printWinningsAndGetSum(Map<Rank, Integer> statistics) {
-        long result = 0;
-        for (int i = WINNINGS_START; i <= WINNINGS_END; i++) {
-            Rank rank = Rank.of(i);
-            int count = statistics.getOrDefault(rank, DEFAULT_VALUE);
-            System.out.println(String.format(OUTPUT_WINNINGS, i, rank.winnings(), count));
-            result += count * rank.winnings();
+    private static long printStatistics(LottoResult lottoResult) {
+        Map<Rank, Integer> rankResult = lottoResult.getRankResult();
+        long winningsSum = lottoResult.getWinningsSum();
+        for (Map.Entry<Rank, Integer> result : rankResult.entrySet()) {
+            Rank rank = result.getKey();
+            int count = result.getValue();
+            System.out.println(String.format(OUTPUT_WINNINGS, rank.matchCount(), rank.winnings(), count));
         }
-        return result;
+        return winningsSum;
     }
 
     private static void printYield(Money buyingMoney, long result) {

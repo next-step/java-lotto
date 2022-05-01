@@ -2,15 +2,13 @@ package lotto;
 
 import lotto.controller.LottoMarket;
 import lotto.dto.ExtractLottoNumbers;
+import lotto.dto.LottoResult;
 import lotto.model.Lotto;
 import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.RandomLottoGenerator;
-import lotto.model.Rank;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-
-import java.util.Map;
 
 public class LottoMain {
     public static void main(String[] args) {
@@ -22,8 +20,8 @@ public class LottoMain {
         String winnerLottoNumbers = InputView.inputWinnerLottoNumbers();
         Lotto winnerLotto = new Lotto(ExtractLottoNumbers.split(winnerLottoNumbers));
 
-        Map<Rank, Integer> lottoStatistics = buyingLottos.getLottoStatistics(winnerLotto);
+        LottoResult lottoResult = buyingLottos.getLottoResult(winnerLotto);
 
-        ResultView.printStatistics(buyingMoney, lottoStatistics);
+        ResultView.printResult(buyingMoney, lottoResult);
     }
 }
