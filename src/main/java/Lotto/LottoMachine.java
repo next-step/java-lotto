@@ -28,16 +28,16 @@ public class LottoMachine {
     public int getWinningSumPrice() {
         int sum = 0;
         for (String rank : winningRankMap.keySet()) {
-            sum = getWinningSumPrice(sum, rank);
+            sum = getWinningSumMoney(sum, rank);
         }
 
         return sum;
     }
 
-    private int getWinningSumPrice(int sum, String rank) {
+    private int getWinningSumMoney(int sum, String rank) {
         if(winningRankMap.containsKey(rank)) {
             int winningNum = winningRankMap.get(rank);
-            sum += WinningSumPrice.findWinningRank(rank).sum(winningNum);
+            sum += WinningSumMoney.findWinningRank(rank).sum(winningNum);
         }
 
         return sum;

@@ -2,7 +2,7 @@ package Lotto;
 
 import java.util.stream.Stream;
 
-public enum WinningSumPrice {
+public enum WinningSumMoney {
 
     FIRST("1th", 2000000000),
     SECOND("2th", 1500000),
@@ -10,22 +10,22 @@ public enum WinningSumPrice {
     fourth("4th", 5000);
 
     private final String rank;
-    private final int winningPrice;
+    private final int winningMoney;
 
-    WinningSumPrice(String rank, int winningPrice) {
+    WinningSumMoney(String rank, int winningMoney) {
         this.rank = rank;
-        this.winningPrice = winningPrice;
+        this.winningMoney = winningMoney;
     }
 
-    static WinningSumPrice findWinningRank(String Rank) {
+    static WinningSumMoney findWinningRank(String Rank) {
         return Stream.of(values())
                 .filter(rank -> rank.rank.equals(Rank))
                 .findFirst()
                 .orElseThrow();
     }
 
-    int sum(int winningPriceNum) {
-        return winningPrice * winningPriceNum;
+    int sum(int winningMoneyNum) {
+        return winningMoney * winningMoneyNum;
     }
 
 }
