@@ -38,10 +38,14 @@ public class Lotto {
         return Collections.unmodifiableList(copy);
     }
 
-    public LottoWinnerType winLotto(Lotto previousLotto, int bonusNumber) {
+    public LottoWinnerType winLotto(LottoWinningCondition winningCondition) {
+        return winLotto(winningCondition.getPreviousLotto(), winningCondition.getBonusNumber());
+    }
+
+    LottoWinnerType winLotto(Lotto previousLotto, LottoNumber bonusNumber) {
         int countOfDuplicate = countDuplicateValue(previousLotto);
         if (LottoWinnerType.matchCountWithBonus(countOfDuplicate)) {
-            return LottoWinnerType.valueOf(countOfDuplicate, lotto.contains(new LottoNumber(bonusNumber)));
+            return LottoWinnerType.valueOf(countOfDuplicate, lotto.contains(bonusNumber));
         }
         return LottoWinnerType.valueOf(countOfDuplicate, false);
     }

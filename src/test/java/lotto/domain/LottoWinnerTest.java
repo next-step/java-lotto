@@ -22,7 +22,7 @@ class LottoWinnerTest {
                     Lotto previousLotto = new Lotto(Utility.convertStringArrayToIntegerArray(Utility.split(previousLottoString)));
 
                     Lottos lottos = Lottos.supplyLottos(testCases);
-                    LottoWinner winner = lottos.calculateWinner(previousLotto, 10);
+                    LottoWinner winner = lottos.calculateWinner(new LottoWinningCondition(previousLotto, new LottoNumber(10)));
                     assertThat(winner.calculateYield(10000)).isEqualTo(3000.5f);
                 },
                 () -> {
@@ -30,10 +30,9 @@ class LottoWinnerTest {
                     Lotto previousLotto = new Lotto(Utility.convertStringArrayToIntegerArray(Utility.split(previousLottoString)));
 
                     Lottos lottos = Lottos.supplyLottos(testCases);
-                    LottoWinner winner = lottos.calculateWinner(previousLotto, 5);
+                    LottoWinner winner = lottos.calculateWinner(new LottoWinningCondition(previousLotto, new LottoNumber(5)));
                     assertThat(winner.calculateYield(10000)).isEqualTo(10.0f);
                 }
-
         );
     }
 }

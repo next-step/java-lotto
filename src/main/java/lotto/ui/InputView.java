@@ -1,6 +1,8 @@
 package lotto.ui;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoWinningCondition;
 import lotto.domain.Store;
 import lotto.exception.InvalidCountOfManualLotto;
 import lotto.exception.InvalidLottoLengthException;
@@ -43,13 +45,19 @@ public class InputView {
         }
     }
 
-    public static void validateNegativeNumber(String target, int value) {
+    static void validateNegativeNumber(String target, int value) {
         if (value < 0) {
             throw new InvalidNegativeNumberException(target, value);
         }
     }
 
-    public static Lotto inputLottoOfPreviousWeek() {
+    public static LottoWinningCondition inputWinningConditionOfLotto() {
+        Lotto previousLotto = inputLottoOfPreviousWeek();
+        LottoNumber bonusNumber = inputBonusNumber();
+        return new LottoWinningCondition(previousLotto, bonusNumber);
+    }
+
+    private static Lotto inputLottoOfPreviousWeek() {
         try {
             System.out.println(PREVIOUS_WEEK_LOTTO_MESSAGE);
             Integer[] lottoNumber = Utility.convertStringArrayToIntegerArray(Utility.split(SCANNER.nextLine()));
@@ -63,9 +71,15 @@ public class InputView {
         }
     }
 
-    public static int inputBonusNumber() {
-        System.out.println(BONUS_NUMBER_MESSAGE);
-        return SCANNER.nextInt();
+    private static LottoNumber inputBonusNumber() {
+        try {
+            System.out.println(BONUS_NUMBER_MESSAGE);
+            return new LottoNumber(SCANNER.nextInt());
+        } catch (InvalidLottoNumberException e) {
+            SCANNER.nextLine(); // Delete newLine
+            System.out.println(e.getMessage());
+            return inputBonusNumber();
+        }
     }
 
     public static int inputCountOfManualLotto(int price) {

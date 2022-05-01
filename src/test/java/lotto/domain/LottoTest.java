@@ -92,23 +92,23 @@ class LottoTest {
                 () -> {
                     List<Integer> previousLottoNumber = Arrays.asList(new Integer[]{5,28,29,35,39,44});
                     Lotto previousLotto = new Lotto(previousLottoNumber);
-                    int bonusNumber = 28;
+                    LottoNumber bonusNumber = new LottoNumber(28);
 
-                    assertThat(lotto.winLotto(previousLotto, bonusNumber)).isEqualTo(LottoWinnerType.valueOf(5, false));
+                    assertThat(lotto.winLotto(new LottoWinningCondition(previousLotto, bonusNumber))).isEqualTo(LottoWinnerType.valueOf(5, false));
                 },
                 () -> {
                     List<Integer> previousLottoNumber = Arrays.asList(new Integer[]{5,28,29,35,39,44});
                     Lotto previousLotto = new Lotto(previousLottoNumber);
-                    int bonusNumber = 27;
+                    LottoNumber bonusNumber = new LottoNumber(27);
 
-                    assertThat(lotto.winLotto(previousLotto, bonusNumber)).isEqualTo(LottoWinnerType.valueOf(5, true));
+                    assertThat(lotto.winLotto(new LottoWinningCondition(previousLotto, bonusNumber))).isEqualTo(LottoWinnerType.valueOf(5, true));
                 },
                 () -> {
                     List<Integer> previousLottoNumber = Arrays.asList(new Integer[]{4,28,29,35,39,44});
                     Lotto previousLotto = new Lotto(previousLottoNumber);
-                    int bonusNumber = 4;
+                    LottoNumber bonusNumber = new LottoNumber(4);
 
-                    assertThat(lotto.winLotto(previousLotto, bonusNumber)).isEqualTo(LottoWinnerType.valueOf(4, false));
+                    assertThat(lotto.winLotto(new LottoWinningCondition(previousLotto, bonusNumber))).isEqualTo(LottoWinnerType.valueOf(4, false));
                 }
         );
     }
@@ -122,23 +122,23 @@ class LottoTest {
                 () -> {
                     List<Integer> previousLottoNumber = Arrays.asList(new Integer[]{5,28,29,35,39,44});
                     Lotto previousLotto = new Lotto(previousLottoNumber);
-                    int bonusNumber = 28;
+                    LottoNumber bonusNumber = new LottoNumber(28);
 
-                    assertThat(lotto.winLotto(previousLotto, bonusNumber).getPrize()).isEqualTo(LottoWinnerType.prize(5, false));
+                    assertThat(lotto.winLotto(new LottoWinningCondition(previousLotto, bonusNumber)).getPrize()).isEqualTo(LottoWinnerType.prize(5, false));
                 },
                 () -> {
                     List<Integer> previousLottoNumber = Arrays.asList(new Integer[]{5,28,29,35,39,44});
                     Lotto previousLotto = new Lotto(previousLottoNumber);
-                    int bonusNumber = 27;
+                    LottoNumber bonusNumber = new LottoNumber(27);
 
-                    assertThat(lotto.winLotto(previousLotto, bonusNumber).getPrize()).isEqualTo(LottoWinnerType.prize(5, true));
+                    assertThat(lotto.winLotto(new LottoWinningCondition(previousLotto, bonusNumber)).getPrize()).isEqualTo(LottoWinnerType.prize(5, true));
                 },
                 () -> {
                     List<Integer> previousLottoNumber = Arrays.asList(new Integer[]{4,28,29,35,39,44});
                     Lotto previousLotto = new Lotto(previousLottoNumber);
-                    int bonusNumber = 4;
+                    LottoNumber bonusNumber = new LottoNumber(4);
 
-                    assertThat(lotto.winLotto(previousLotto, bonusNumber).getPrize()).isEqualTo(LottoWinnerType.prize(4, false));
+                    assertThat(lotto.winLotto(new LottoWinningCondition(previousLotto, bonusNumber)).getPrize()).isEqualTo(LottoWinnerType.prize(4, false));
                 }
         );
     }

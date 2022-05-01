@@ -17,10 +17,9 @@ public class Controller {
         ResultView.printCountOfLottos(Store.countOfLottos(price), countOfManualLotto);
         ResultView.printResultOfPurchase(lottos.getLottos());
 
-        Lotto previousLotto = InputView.inputLottoOfPreviousWeek();
-        int bonusNumber = InputView.inputBonusNumber();
+        LottoWinningCondition winningCondition = InputView.inputWinningConditionOfLotto();
 
-        LottoWinner winner = lottos.calculateWinner(previousLotto, bonusNumber);
+        LottoWinner winner = lottos.calculateWinner(winningCondition);
         float yield = winner.calculateYield(price);
 
         ResultView.printWinnerStats(winner);

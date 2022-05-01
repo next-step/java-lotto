@@ -20,10 +20,10 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public LottoWinner calculateWinner(Lotto previousLotto, int bonusNumber) {
+    public LottoWinner calculateWinner(LottoWinningCondition winningCondition) {
         final Map<LottoWinnerType, Integer> winners = new HashMap<>();
         for (Lotto lotto : lottos) {
-            LottoWinnerType winnerType = lotto.winLotto(previousLotto, bonusNumber);
+            LottoWinnerType winnerType = lotto.winLotto(winningCondition);
             int countOfWinners = winners.get(winnerType) != null ? winners.get(winnerType) : 0;
             winners.put(winnerType, countOfWinners + 1);
         }
