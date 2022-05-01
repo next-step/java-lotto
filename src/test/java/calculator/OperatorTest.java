@@ -1,6 +1,8 @@
 package calculator;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -34,5 +36,17 @@ class OperatorTest {
     @Test
     void valueOfOperatorSymbol_사칙연산_기호가_아닌_경우() {
         assertThatThrownBy(() -> Operator.valueOfOperatorSymbol("%")).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"+", "-", "*", "/"})
+    void isOperator_사칙연산자인_경우(String operatorSymbol) {
+        assertThat(Operator.isOperator(operatorSymbol)).isTrue();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"&", "$", ".", "@"})
+    void isOperator_사칙연산자_아닌_경우(String operatorSymbol) {
+        assertThat(Operator.isOperator(operatorSymbol)).isFalse();
     }
 }

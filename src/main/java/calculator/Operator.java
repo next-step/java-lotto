@@ -36,4 +36,8 @@ public enum Operator {
     public int operate(int operand1, int operand2) {
         return intBinaryOperator.applyAsInt(operand1, operand2);
     }
+
+    public static boolean isOperator(String element) {
+        return BY_OPERATOR.containsKey(element);
+    }
 }
