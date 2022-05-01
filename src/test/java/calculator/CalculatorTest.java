@@ -2,6 +2,8 @@ package calculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -40,17 +42,20 @@ public class CalculatorTest {
 
     @Test
     @DisplayName("연산자 인식")
-    void calculationType() {
+    void calculatorByOperatorType() {
         Calculator calculator = new Calculator();
-        int PLUS = 1;
-        int MINUS = 2;
-        int MULTIPLY = 3;
-        int DIVIDE = 4;
+        assertThat(calculator.calculateOperatorType("+", "1", "2")).isEqualTo(3);
+        assertThat(calculator.calculateOperatorType("-", "3", "1")).isEqualTo(2);
+        assertThat(calculator.calculateOperatorType("*", "3", "1")).isEqualTo(3);
+        assertThat(calculator.calculateOperatorType("/", "3", "1")).isEqualTo(3);
+    }
 
-        assertThat(calculator.operatorType("+")).isEqualTo(PLUS);
-        assertThat(calculator.operatorType("-")).isEqualTo(MINUS);
-        assertThat(calculator.operatorType("*")).isEqualTo(MULTIPLY);
-        assertThat(calculator.operatorType("/")).isEqualTo(DIVIDE);
+    @ParameterizedTest
+    @DisplayName("연산")
+    @CsvSource(value = {"3 + 4 * 5 / 6:5", "3 + 4 * 5:35", "5 - 3 * 3 * 5 / 15:2", "10 - 5 - 3 / 2:1"}, delimiter = ':')
+    void calculate(String input, int result) {
+        Calculator calculator = new Calculator(input);
+        assertThat(calculator.calculate()).isEqualTo(result);
     }
 
 }

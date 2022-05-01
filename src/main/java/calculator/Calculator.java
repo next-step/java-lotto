@@ -2,12 +2,8 @@ package calculator;
 
 public class Calculator {
 
-    private static final int PLUS = 1;
-    private static final int MINUS = 2;
-    private static final int MULTIPLY = 3;
-    private static final int DIVIDE = 4;
+    private final String[] strings;
 
-    private String[] strings;
     public Calculator() {
         this("");
     }
@@ -33,20 +29,32 @@ public class Calculator {
         return Integer.parseInt(a) / Integer.parseInt(b);
     }
 
-    int operatorType(String operator) {
+    int calculateOperatorType(String operator, String a, String b) {
         if (operator.equals("+")) {
-            return PLUS;
+            return plus(a, b);
         }
         if (operator.equals("-")) {
-            return MINUS;
+            return minus(a, b);
         }
         if (operator.equals("*")) {
-            return MULTIPLY;
+            return multiply(a, b);
         }
         if (operator.equals("/")) {
-            return DIVIDE;
+            return divide(a, b);
         }
 
         return 0;
+    }
+
+    int calculate() {
+        String currentResult = strings[0];
+        int currentIndex = 1;
+
+        while (currentIndex < strings.length) {
+            currentResult = String.valueOf(calculateOperatorType(strings[currentIndex], currentResult, strings[currentIndex + 1]));
+            currentIndex += 2;
+        }
+
+        return Integer.parseInt(currentResult);
     }
 }
