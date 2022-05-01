@@ -110,6 +110,5 @@ class LottoTicketTest {
         LottoTicket lottoTicket = LottoTicket.create(1,2,3,4,5,6);
 
         assertThat(lottoTicket.countLottoNumber()).isEqualTo(6);
-//        assertThat(lottoTicket.getBonusNumber()).isEqualTo(bonusNumber);
     }
 }

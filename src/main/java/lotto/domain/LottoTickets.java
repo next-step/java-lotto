@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTickets implements Cloneable {
 
@@ -10,8 +11,10 @@ public class LottoTickets implements Cloneable {
     public LottoTickets() {
     }
 
-    public LottoTickets(List<LottoTicket> lottoTickets) {
-        this.lottoTickets = lottoTickets;
+    public LottoTickets(List<List<Integer>> lottoNumbersList) {
+        lottoTickets = lottoNumbersList.stream()
+            .map(LottoTicket::create)
+            .collect(Collectors.toList());
     }
 
     public LottoTickets(LottoTickets lottoTickets) {

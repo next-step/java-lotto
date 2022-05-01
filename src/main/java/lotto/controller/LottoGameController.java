@@ -18,10 +18,10 @@ public class LottoGameController {
         return lottoTickets;
     }
 
-    public LottoTickets createLottoTicketsWithManual(int buyingBudget, LottoTickets manualLottoTickets) {
+    public LottoTickets createLottoTicketsWithManual(int buyingBudget, List<List<Integer>> manualLottoTickets) {
         int buyingCount = buyingBudget / LOTTO_TICKET_PRICE - manualLottoTickets.size();
 
-        LottoTickets lottoTickets = manualLottoTickets.clone();
+        LottoTickets lottoTickets = new LottoTickets(manualLottoTickets);
 
         while (buyingCount-- > 0) {
             lottoTickets.add();

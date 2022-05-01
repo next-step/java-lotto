@@ -40,6 +40,10 @@ public class LottoTicket {
         return new LottoTicket(Arrays.asList(numbers));
     }
 
+    public static LottoTicket create(List<Integer> integers) {
+        return new LottoTicket(integers);
+    }
+
     public int countLottoNumber() {
         return lottoNumbers.size();
     }

@@ -18,11 +18,11 @@ class LottoGameControllerTest {
     @Test
     void createLottoTicketsWithManualTest() {
         final int buyingMoney = 5000;
-        LottoTickets manualLottoTickets = new LottoTickets(Arrays.asList(
-            LottoTicket.create(1,2,3,4,5,6),
-            LottoTicket.create(2,3,4,5,6,7),
-            LottoTicket.create(3,4,5,6,7,8)
-        ));
+        List<List<Integer>> manualLottoTickets = Arrays.asList(
+            Arrays.asList(1, 2, 3, 4, 5, 6),
+            List.of(2, 3, 4, 5, 6, 7),
+            List.of(3, 4, 5, 6, 7, 8)
+        );
 
         LottoTickets lottoTickets = lottoGame.createLottoTicketsWithManual(buyingMoney, manualLottoTickets);
 

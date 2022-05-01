@@ -13,9 +13,12 @@ public class LottoMainApp {
         LottoGameController lottoGame = new LottoGameController();
 
         int buyingBudget = cui.inputLottoBuyingBudget();
-        LottoTickets lottoTickets = lottoGame.createLottoTickets(buyingBudget);
+        int buyingManualCount = cui.inputLottoBuyingManual();
+        List<List<Integer>> manualLottoNumbers = cui.inputManualLottoNumbers(buyingManualCount);
 
-        cui.printLottoTickets(lottoTickets);
+        LottoTickets lottoTickets = lottoGame.createLottoTicketsWithManual(buyingBudget, manualLottoNumbers);
+
+        cui.printLottoTickets(lottoTickets, buyingManualCount);
 
         List<Integer> winLottoNumber = cui.inputWinLottoNumber();
         int bonusBallNumber = cui.inputBonusBallNumber();
