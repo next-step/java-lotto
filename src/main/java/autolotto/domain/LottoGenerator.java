@@ -8,7 +8,7 @@ public class LottoGenerator {
     private static final int RANDOM_BOUND = 45;
     private static final int LOTTO_START_NUMBER = 1;
 
-    public Set<Integer> generate() {
+    public static Set<Integer> generate() {
         Set<Integer> lotto = new HashSet<>(LOTTO_SIZE);
         do {
             lotto.add(getRandom());
@@ -16,7 +16,7 @@ public class LottoGenerator {
         return lotto;
     }
 
-    private int getRandom() {
+    private static int getRandom() {
         return RANDOM.nextInt(RANDOM_BOUND) + LOTTO_START_NUMBER;
     }
 }
