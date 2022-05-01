@@ -18,9 +18,10 @@ public class LottoGame {
     this.lottoNumbers = new LottoNumbers(numberGenerator);
   }
 
-  public LottoDrawResult draw(LottoNumbers winNumbers) {
+  public LottoDrawResult draw(LottoNumbers winNumbers, LottoNumber bonusNumber) {
     int matchCount = lottoNumbers.getMatchNumbers(winNumbers).getNumberSize();
-    return new LottoDrawResult(matchCount, LottoReword.getWinMoney(matchCount));
+    boolean isBonusMatch = winNumbers.isBonusMatch(bonusNumber);
+    return new LottoDrawResult(matchCount, LottoReword.getWinMoney(matchCount, isBonusMatch));
   }
 
   public LottoNumbers getLottoNumbers() {

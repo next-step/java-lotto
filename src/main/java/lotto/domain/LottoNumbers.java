@@ -25,9 +25,14 @@ public class LottoNumbers {
     }
   }
 
+  private LottoNumbers(List<LottoNumber> lottoNumbers) {
+    this.values = lottoNumbers;
+  }
+
   public LottoNumbers getMatchNumbers(LottoNumbers winNumbers) {
-    values.retainAll(winNumbers.values);
-    return this;
+    ArrayList<LottoNumber> numbers = new ArrayList<>(values);
+    numbers.retainAll(winNumbers.values);
+    return new LottoNumbers(numbers);
   }
 
   public int getNumberSize() {
@@ -36,5 +41,12 @@ public class LottoNumbers {
 
   public List<LottoNumber> getValues() {
     return Collections.unmodifiableList(values);
+  }
+
+  public boolean isBonusMatch(LottoNumber bonusNumber) {
+    if (bonusNumber == null) {
+      return false;
+    }
+    return values.contains(bonusNumber);
   }
 }

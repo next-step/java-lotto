@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.LottoDrawResults;
 import lotto.domain.LottoGames;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.strategy.LottoNumberGenerator;
 import lotto.domain.strategy.NumberGenerator;
@@ -28,7 +29,8 @@ public class LottoGameApp {
     lottoGameInputView.setBonusBall();
 
     LottoDrawResults lottoDrawResults = lottoGames.draw(
-        new LottoNumbers(lottoGameInputView.getWinNumbers()));
+        new LottoNumbers(lottoGameInputView.getWinNumbers()),
+        new LottoNumber(lottoGameInputView.getBonusBallNumber()));
 
     LottoGameOutputView.printGameResult(lottoDrawResults);
 

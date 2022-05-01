@@ -16,10 +16,10 @@ public class LottoGames {
     }
   }
 
-  public LottoDrawResults draw(LottoNumbers winNumbers) {
+  public LottoDrawResults draw(LottoNumbers winNumbers, LottoNumber bonusNumber) {
     List<LottoDrawResult> lottoDrawResults = new ArrayList<>();
     for (LottoGame lottoGame : values) {
-      lottoDrawResults.add(lottoGame.draw(winNumbers));
+      lottoDrawResults.add(lottoGame.draw(winNumbers, bonusNumber));
     }
     return new LottoDrawResults(lottoDrawResults);
   }
