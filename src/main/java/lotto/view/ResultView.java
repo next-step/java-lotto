@@ -23,5 +23,6 @@ public class ResultView {
         System.out.println(MESSAGE_WIN_RESULT);
         System.out.println(MESSAGE_SEPARATOR_LINE);
         System.out.println(ResultBuilder.buildLottosResult(lottoBuyer.lottos()));
+        System.out.println(ResultBuilder.buildLottosProfitRate(lottoBuyer.calculateProfitRate()));
     }
 }

@@ -31,9 +31,9 @@ public class LottoBuyer {
         lottos.confirmAll(LottoNumbers.winningLottoNumbers(winningNumbers));
     }
 
-    public String calculateProfitRate() {
+    public double calculateProfitRate() {
         int totalWinPrice = lottos.calculateTotalWinPrice();
-        return Calculator.divide(totalWinPrice, purchaseAmount);
+        return Double.valueOf(Calculator.divide(totalWinPrice, purchaseAmount));
     }
 
     public Lottos lottos() {
