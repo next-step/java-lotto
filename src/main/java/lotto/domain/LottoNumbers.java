@@ -22,6 +22,14 @@ public class LottoNumbers {
         return new LottoNumbers(fullLottoNumbers);
     }
 
+    public static LottoNumbers winningLottoNumbers(String[] values) {
+        List<LottoNumber> winningLottoNumbers = new ArrayList<>();
+        for (String value : values) {
+            winningLottoNumbers.add(new LottoNumber(value));
+        }
+        return new LottoNumbers(winningLottoNumbers);
+    }
+
     public LottoNumbers randomLottoNumbers() {
         List<LottoNumber> random = new ArrayList<>();
         Collections.shuffle(lottoNumbers);
@@ -33,6 +41,12 @@ public class LottoNumbers {
 
     public boolean isSameCount(int count) {
         return lottoNumbers.size() == count;
+    }
+
+    public int matchCount(List<LottoNumber> winningNumbers) {
+        return (int) lottoNumbers.stream()
+                .filter(lottoNumber -> winningNumbers.contains(lottoNumber))
+                .count();
     }
 
     public List<LottoNumber> toList() {

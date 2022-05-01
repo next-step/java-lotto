@@ -7,6 +7,8 @@ import java.util.List;
 public class Lotto {
 
     public static final int LOTTO_NUMBER_COUNT = 6;
+
+    private int matchCount;
     private final LottoNumbers lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
@@ -18,6 +20,10 @@ public class Lotto {
             throw new InvalidLottoNumberCount();
         }
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public void confirm(List<LottoNumber> winningNumbers) {
+        matchCount = lottoNumbers.matchCount(winningNumbers);
     }
 
     @Override

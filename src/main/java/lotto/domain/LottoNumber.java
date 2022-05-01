@@ -10,6 +10,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MAX_NUMBER = 45;
     private final int lottoNumber;
 
+    public LottoNumber(String value) {
+        this(Integer.parseInt(value));
+    }
+
     public LottoNumber(int lottoNumber) {
         if (isInValidBound(lottoNumber)) {
             throw new InvalidBoundLottoNumber();

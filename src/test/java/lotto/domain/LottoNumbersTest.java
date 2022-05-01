@@ -31,4 +31,20 @@ class LottoNumbersTest {
 
         assertThat(LottoNumbers.fullLottoNumbers()).isEqualTo(new LottoNumbers(lottoNumbers));
     }
+
+    @Test
+    @DisplayName("1,2,3을 가지고 있는 LottoNumbers와 2,3,4를 가지고 있는 List와의 matchCount는 2이다.")
+    void matchCount() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        lottoNumbers.add(new LottoNumber(1));
+        lottoNumbers.add(new LottoNumber(2));
+        lottoNumbers.add(new LottoNumber(3));
+
+        List<LottoNumber> lottoNumbers2 = new ArrayList<>();
+        lottoNumbers2.add(new LottoNumber(2));
+        lottoNumbers2.add(new LottoNumber(3));
+        lottoNumbers2.add(new LottoNumber(4));
+
+        assertThat(new LottoNumbers(lottoNumbers).matchCount(lottoNumbers2)).isEqualTo(2);
+    }
 }

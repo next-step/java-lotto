@@ -15,5 +15,7 @@ public class LottoSimulator {
         ResultView.purchasedLottosView(lottoBuyer.lottos());
 
         String lastWinningLottoNumbers = InputView.lastWinningLottoNumberView();
+        lottoBuyer.confirmLottos(lastWinningLottoNumbers);
+        
     }
 }
