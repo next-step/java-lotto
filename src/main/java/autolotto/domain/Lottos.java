@@ -25,4 +25,8 @@ public class Lottos {
     public int cost() {
         return lottos.size() * LOTTO_PRICE;
     }
+
+    public int getQuantity(int amount) {
+        return amount / LOTTO_PRICE;
+    }
 }

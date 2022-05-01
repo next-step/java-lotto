@@ -4,22 +4,26 @@ import autolotto.domain.*;
 import autolotto.view.LottoInput;
 import autolotto.view.LottoOutput;
 
+import static autolotto.view.LottoInput.AMOUNT_QUESTION;
+import static autolotto.view.LottoInput.WINNGING_NUMBER_QUESTION;
+
 public class Lottery {
     public static void main(String[] args) {
         LottoInput lottoInput = new LottoInput();
         LottoOutput lottoOutput = new LottoOutput();
         Lottos lottos = new Lottos();
 
-        int lottoQuantity = lottoInput.askQuantity("구입 장수를 입력해주세요. 1장 당 1000원이며 양수만 입력 가능합니다. ex. 14000 -> 14");
+        int amount = lottoInput.askAmount(AMOUNT_QUESTION);
+        int lottoQuantity = lottos.getQuantity(amount);
         lottoOutput.println(lottoQuantity + "장을 구입했습니다.");
 
         for (int count = 0; count < lottoQuantity; count++) {
-            Lotto lotto = new Lotto(new LottoGenerator().generate());
+            Lotto lotto = new Lotto(LottoGenerator.generate());
             lottos.add(lotto);
             lottoOutput.println(lotto.toString());
         }
 
-        String numbers = lottoInput.askWinningNumber("지난주 당첨 번호를 콤마(,)를 기준으로 입력해주세요. ex. 1,2,3,4,5,6");
+        String numbers = lottoInput.askWinningNumber(WINNGING_NUMBER_QUESTION);
         WinningLotto winningLotto = new WinningLotto(numbers);
 
         Results results = lottos.confirm(winningLotto);
