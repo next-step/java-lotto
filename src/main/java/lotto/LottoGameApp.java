@@ -25,6 +25,7 @@ public class LottoGameApp {
 
     LottoGameOutputView.printLottoNumbers(lottoGames);
     lottoGameInputView.setWinNumbers();
+    lottoGameInputView.setBonusBall();
 
     LottoDrawResults lottoDrawResults = lottoGames.draw(
         new LottoNumbers(lottoGameInputView.getWinNumbers()));
