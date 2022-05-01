@@ -19,10 +19,6 @@ public final class OutputTable {
   private OutputTable() {
   }
 
-  public static void run() {
-
-  }
-
   public static void inputPurchaseAmount() {
     System.out.println(PURCHASE_AMOUNT_MESSAGE);
   }

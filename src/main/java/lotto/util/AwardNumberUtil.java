@@ -12,12 +12,12 @@ public final class AwardNumberUtil {
 
   private static final String DELIMITER = ", ";
 
-  private static String[] split(String str) {
-    return str.split(DELIMITER);
+  private static String[] split(String string) {
+    return string.split(DELIMITER);
   }
 
-  public static Set<LottoNumber> getAwadNumberList(String str) {
-    return Arrays.stream(split(str))
+  public static Set<LottoNumber> getAwadNumberList(String string) {
+    return Arrays.stream(split(string))
         .map(Integer::parseInt)
         .map(LottoNumber::new)
         .collect(Collectors.toSet());
