@@ -4,19 +4,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoMachine {
-    private final Map<String,Integer> winningRankMap = new HashMap<>();
+    private Map<Integer,Integer> winningRankMap = new HashMap<>();
 
-    public LottoMachine() {
-        this(new String[] {});
-    }
-
-    public LottoMachine(String [] winningRanks) {
-        for(String rank : winningRanks) {
+    public LottoMachine(int [] winningRanks) {
+        for(int rank : winningRanks) {
             addWinningRank(rank);
         }
     }
 
-    private void addWinningRank(String rank) {
+    public LottoMachine(Map<Integer, Integer> result) {
+        winningRankMap = result;
+    }
+
+    private void addWinningRank(int rank) {
         if (!winningRankMap.containsKey(rank))
             winningRankMap.put(rank,1);
         else {
@@ -27,17 +27,17 @@ public class LottoMachine {
 
     public int getWinningSumPrice() {
         int sum = 0;
-        for (String rank : winningRankMap.keySet()) {
+        for (int rank : winningRankMap.keySet()) {
             sum = getWinningSumMoney(sum, rank);
         }
 
         return sum;
     }
 
-    private int getWinningSumMoney(int sum, String rank) {
+    private int getWinningSumMoney(int sum, int rank) {
         if(winningRankMap.containsKey(rank)) {
             int winningNum = winningRankMap.get(rank);
-            sum += WinningSumMoney.findWinningRank(rank).sum(winningNum);
+            sum += WinningRankInfo.findWinningRank(rank).sum(winningNum);
         }
 
         return sum;

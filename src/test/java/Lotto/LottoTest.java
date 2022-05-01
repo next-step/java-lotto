@@ -26,6 +26,6 @@ public class LottoTest {
     @DisplayName("당첨된 번호가 몇개인지 확인한다")
     public void checkEqualLottoNumber(int[] numbers, int[] answers, int equalNum) {
         Lotto lotto = new Lotto(numbers);
-        Assertions.assertThat(lotto.checkLottoNumbers(answers)).isEqualTo(equalNum);
+        Assertions.assertThat(lotto.checkWinningLottoNumbers(answers)).isEqualTo(equalNum);
     }
 }

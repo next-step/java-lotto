@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Lotto {
 
-    List<Integer> numbers = new ArrayList<>();
+    private List<Integer> numbers = new ArrayList<>();
 
     public Lotto(int[] numbers) {
         for (int n : numbers) {
@@ -13,16 +13,20 @@ public class Lotto {
         }
     }
 
-    public int checkLottoNumbers(int[] lottoAnswers) {
+    public int getLottoNumber(int idx) {
+        return numbers.get(idx);
+    }
+
+    public int checkWinningLottoNumbers(int[] winningNumbers) {
         int cnt = 0;
-        for (int ans : lottoAnswers) {
-            cnt = checkLottoNumbers(cnt, ans);
+        for (int num : winningNumbers) {
+            cnt = checkWinningLottoNumbers(cnt, num);
         }
 
         return cnt;
     }
 
-    private int checkLottoNumbers(int cnt, int answerNum) {
+    private int checkWinningLottoNumbers(int cnt, int answerNum) {
         for (int myLottoNum : numbers) {
             if(myLottoNum == answerNum) {
                 cnt += 1;

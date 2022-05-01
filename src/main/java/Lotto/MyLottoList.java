@@ -1,29 +1,24 @@
 package Lotto;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
-public class LottoList {
+public class MyLottoList {
 
     private List<Lotto> list = new ArrayList<>();
 
     private static int LOTTO_MAX_NUMBER = 45;
     private static int LOTTO_LAST_NUMBER = 6;
 
-    public LottoList() {
+    public MyLottoList() {
     }
 
-    public List<Lotto> createLottoNumbers(int lottoCount) {
+    public void createLottoNumbers(int lottoCount) {
         List<Integer> tmpNumbers = new ArrayList<>();
         createAllNumbers(tmpNumbers);
 
         for (int i = 0; i < lottoCount; ++i) {
             pickLottoNumbers(tmpNumbers);
         }
-
-        return list;
     }
 
     private void createAllNumbers(List<Integer> tmpNumbers) {
@@ -43,5 +38,33 @@ public class LottoList {
         Arrays.sort(lottoNumbers);
 
         list.add(new Lotto(lottoNumbers));
+    }
+
+    public Lotto getLotto(int idx) {
+        return list.get(idx);
+    }
+
+    public int getLottoCnt() {
+        return list.size();
+    }
+
+    public Map<Integer,Integer> checkWinningLotto(int[] winningNumbers) {
+        Map<Integer,Integer> winningLottoMap = new HashMap<>();
+
+        for(Lotto lotto : list) {
+            int winningCount = lotto.checkWinningLottoNumbers(winningNumbers);
+            int rank = 7 - winningCount;
+
+            int cnt;
+            if (winningLottoMap.containsKey(rank)) {
+                cnt = winningLottoMap.get(rank);
+                cnt += 1;
+            } else {
+                cnt = 1;
+            }
+            winningLottoMap.put(rank, cnt);
+        }
+
+        return winningLottoMap;
     }
 }
