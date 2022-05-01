@@ -1,9 +1,12 @@
 package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class CalculatorTest {
 
@@ -35,6 +38,19 @@ class CalculatorTest {
   @DisplayName("복합 사칙 연산")
   void complexTest() {
     assertThat(Calculator.calculate("2 + 3 * 4 / 2 - 5")).isEqualTo(5);
+  }
+
+  @Test
+  @DisplayName("입력값이 null 일 경우 IllegalArgumentException throw")
+  void givenNull_ShouldIllegalArgumentExceptionThrow() {
+    assertThatIllegalArgumentException().isThrownBy(() -> Calculator.calculate(null));
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {"", " ", "  "})
+  @DisplayName("입력값이 빈 문자열일 경우 IllegalArgumentException throw")
+  void givenEmptyString_ShouldIllegalArgumentExceptionThrow() {
+    assertThatIllegalArgumentException().isThrownBy(() -> Calculator.calculate(""));
   }
 
 }
