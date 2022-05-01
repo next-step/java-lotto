@@ -53,4 +53,10 @@ class CalculatorTest {
     assertThatIllegalArgumentException().isThrownBy(() -> Calculator.calculate(""));
   }
 
+  @Test
+  @DisplayName("사칙연산 기호가 아닐 경우 IllegalArgumentException throw")
+  void givenNonOperator_ShouldIllegalArgumentExceptionThrow() {
+    assertThatIllegalArgumentException().isThrownBy(() -> Calculator.calculate("2 % 6"));
+  }
+
 }
