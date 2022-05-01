@@ -27,9 +27,6 @@ public class LottoApplication {
         List<Integer> matchNumbers = lottoTickets.stream()
                 .map(t -> t.countMatchNumbers(lottoTicket))
                 .collect(Collectors.toList());
-
-        System.out.println(matchNumbers);
-        List<Integer> matchNumbers1 = matchNumbers;
-        outputView.printResult(matchNumbers1);
+        outputView.printResult(matchNumbers);
     }
 }
