@@ -2,9 +2,13 @@ package lotto;
 
 import static util.Validator.validateArgument;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.StringJoiner;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -12,25 +16,36 @@ public class Lotto {
   private static final String LOTTO_BEGIN_STRING = "[";
   private static final String LOTTO_END_STRING = "]";
   private static final String LOTTO_NUMBER_DELIMITER = ", ";
+  private static final int LOTTO_NUMBER_BOUND = 46;
   private static final int LOTTO_NUMBER_SIZE = 6;
 
-  private final TreeSet<LottoNumber> lottoNumbersSet = new TreeSet<>();
+  private static final List<LottoNumber> ENTIRE_LOTTO_NUMBERS = new ArrayList<>();
 
+  static {
+    for (int lottoNumber = 1; lottoNumber < LOTTO_NUMBER_BOUND; lottoNumber++) {
+      ENTIRE_LOTTO_NUMBERS.add(new LottoNumber(lottoNumber));
+    }
+  }
+
+  private final TreeSet<LottoNumber> lotto;
 
   Lotto() {
-    do {
-      lottoNumbersSet.add(new LottoNumber());
-    } while (lottoNumbersSet.size() < LOTTO_NUMBER_SIZE );
+    Collections.shuffle(ENTIRE_LOTTO_NUMBERS);
+    lotto = new TreeSet<>(ENTIRE_LOTTO_NUMBERS.subList(0, LOTTO_NUMBER_SIZE)
+        .stream()
+        .collect(Collectors.toUnmodifiableSet()));
   }
 
   Lotto(Set<Integer> numbers) {
     validateNumbers(numbers);
-    numbers.forEach(number -> lottoNumbersSet.add(new LottoNumber(number)));
+    lotto = new TreeSet<>(numbers.stream()
+        .map(number -> new LottoNumber(number))
+        .collect(Collectors.toUnmodifiableSet()));
   }
 
   public boolean matches(int expectedMatchedCount, Lotto other) {
-    return expectedMatchedCount == other.lottoNumbersSet.stream()
-        .filter(this.lottoNumbersSet::contains)
+    return expectedMatchedCount == other.lotto.stream()
+        .filter(this.lotto::contains)
         .count();
   }
 
@@ -40,7 +55,7 @@ public class Lotto {
     stringBuilder.append(LOTTO_BEGIN_STRING);
 
     StringJoiner stringJoiner = new StringJoiner(LOTTO_NUMBER_DELIMITER);
-    lottoNumbersSet.forEach(lottoNumber -> stringJoiner.add(lottoNumber.toString()));
+    lotto.forEach(lottoNumber -> stringJoiner.add(lottoNumber.toString()));
 
     stringBuilder.append(stringJoiner);
     stringBuilder.append(LOTTO_END_STRING);

@@ -36,7 +36,7 @@ public class LottoTest {
   private static Stream<Arguments> invalidLottoNumberSet() {
     return Stream.of(
         Arguments.of(Set.of(1, 2, 3, 4, 5)),
-        Arguments.of(Set.of("hi, hello")),
+        Arguments.of(Set.of(1, 2, 3, 4, 5, -1)),
         Arguments.of(Set.of())
     );
   }
