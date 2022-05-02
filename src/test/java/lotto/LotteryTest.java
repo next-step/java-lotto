@@ -2,9 +2,7 @@ package lotto;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,6 +11,13 @@ public class LotteryTest {
     @Test
     void create45NumbersInBox() {
         assertThat(lottery.boxNumbers).hasSize(45);
+    }
+
+    @Test
+    void numbersInBoxShouldBeUnique() {
+        int actual = new HashSet<>(lottery.boxNumbers).size();
+        int expected = lottery.boxNumbers.size();
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
