@@ -22,4 +22,10 @@ public class InputView {
         }
         return winningLotto;
     }
+
+    public static int askWinningBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String winningBonusNumberString = scanner.nextLine();
+        return Integer.parseInt(winningBonusNumberString);
+    }
 }

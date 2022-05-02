@@ -1,37 +1,44 @@
 package lottoauto.domain;
 
 public class LottoReport {
-    private int matchThreeCount = 0;
-    private int matchFourCount = 0;
-    private int matchFiveCount = 0;
-    private int matchSixCount = 0;
-    private int profitRate = 0;
 
-    public LottoReport(int matchThreeCount, int matchFourCount, int matchFiveCount, int matchSixCount, int profitRate) {
-        this.matchThreeCount = matchThreeCount;
-        this.matchFourCount = matchFourCount;
-        this.matchFiveCount = matchFiveCount;
-        this.matchSixCount = matchSixCount;
+    private int firstWinningCount = 0;
+    private int secondWinningCount = 0;
+    private int thirdWinningCount = 0;
+    private int fourthWinningCount = 0;
+    private int fifthWinningCount = 0;
+    private long profitRate;
+
+    public LottoReport(int fifthWinningCount, int fourthWinningCount, int thirdWinningCount, int secondWinningCount, int firstWinningCount, int profitRate) {
+        this.fifthWinningCount = fifthWinningCount;
+        this.fourthWinningCount = fourthWinningCount;
+        this.thirdWinningCount = thirdWinningCount;
+        this.secondWinningCount = secondWinningCount;
+        this.firstWinningCount = firstWinningCount;
         this.profitRate = profitRate;
     }
 
-    public int getMatchThreeCount() {
-        return matchThreeCount;
+    public int getFirstWinningCount() {
+        return firstWinningCount;
     }
 
-    public int getMatchFourCount() {
-        return matchFourCount;
+    public int getSecondWinningCount() {
+        return secondWinningCount;
     }
 
-    public int getMatchFiveCount() {
-        return matchFiveCount;
+    public int getThirdWinningCount() {
+        return thirdWinningCount;
     }
 
-    public int getMatchSixCount() {
-        return matchSixCount;
+    public int getFourthWinningCount() {
+        return fourthWinningCount;
     }
 
-    public int getProfitRate() {
+    public int getFifthWinningCount() {
+        return fifthWinningCount;
+    }
+
+    public long getProfitRate() {
         return profitRate;
     }
 }

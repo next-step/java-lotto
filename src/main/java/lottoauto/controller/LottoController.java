@@ -1,13 +1,10 @@
 package lottoauto.controller;
 
+import lottoauto.domain.Lotto;
 import lottoauto.domain.LottoReport;
 import lottoauto.service.LottoGame;
 import lottoauto.view.InputView;
 import lottoauto.view.ResultView;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 /**
  * 구입금액을 입력해 주세요.
@@ -44,7 +41,7 @@ public class LottoController {
         LottoGame lottoGame = new LottoGame(InputView.askLottoMoney());
         lottoGame.buyLotto();
 
-        lottoGame.checkWinningLotto(InputView.askWinningLotto());
+        lottoGame.checkWinningLotto(new Lotto(InputView.askWinningLotto(), InputView.askWinningBonusNumber()));
 
         lottoGame.start();
 
