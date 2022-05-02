@@ -18,10 +18,12 @@ public class CommandlineUserInterface {
 
     private static final int MINIMUM_WIN_COUNT = 3;
 
+    private Scanner scanner = new Scanner(System.in);
+
     public int inputLottoBuyingBudget() {
         out.println("구입금액을 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
         int buyingBudget = scanner.nextInt();
+        scanner.nextLine();
 
         if (buyingBudget <= 0 || buyingBudget % ONE_TICKET_PRICE != 0) {
             out.println("로또 구입 금액은 0 이상, "+
@@ -34,8 +36,8 @@ public class CommandlineUserInterface {
 
     public int inputLottoBuyingManual() {
         out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
         int buyingManual = scanner.nextInt();
+        scanner.nextLine();
 
         if (buyingManual <= 0) {
             out.println("수동로또 구입 개수는 0 이상 입니다. ");
@@ -49,7 +51,6 @@ public class CommandlineUserInterface {
         out.println("수동로또 번호(들을)를 입력해 주세요.");
         List<String> manualLottoNumberStrings = new ArrayList<>();
         while (buyingManualCount-- > 0) {
-            Scanner scanner = new Scanner(System.in);
             manualLottoNumberStrings.add(scanner.nextLine());
         }
 
@@ -78,7 +79,6 @@ public class CommandlineUserInterface {
 
     public List<Integer> inputWinLottoNumber() {
         out.println("지난 주 당첨 번호를 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
         String lottoNumberString = scanner.nextLine();
 
         List<Integer> lottoNumbers = Arrays.stream(lottoNumberString.replaceAll(" ", "").split(","))
@@ -97,12 +97,11 @@ public class CommandlineUserInterface {
 
     public int inputBonusBallNumber() {
         out.println("보너스 볼을 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
 
     public void printLottoTickets(LottoTickets lottoTickets, int buyingManualCount) {
-        out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.",
+        out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n",
             buyingManualCount, lottoTickets.size()-buyingManualCount);
         List<LottoTicket> lottoTickets1 = lottoTickets.getLottoTickets();
         for (LottoTicket lottoTicket : lottoTickets1) {

@@ -19,7 +19,7 @@ public class LottoTickets implements Cloneable {
 
     public LottoTickets(LottoTickets lottoTickets) {
         lottoTickets.getLottoTickets()
-            .forEach(this.lottoTickets::add);
+            .forEach(lottoTicket -> this.lottoTickets.add(lottoTicket.clone()));
     }
 
     @Override

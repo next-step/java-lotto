@@ -3,10 +3,11 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-public class LottoTicket {
+public class LottoTicket implements Cloneable {
 
     public static final int LOTTO_NUMBER_COUNT = 6;
     public static final int ONE_TICKET_PRICE = 1000;
@@ -20,10 +21,14 @@ public class LottoTicket {
         }
     }
 
-    private List<Integer> lottoNumbers;
+    private List<Integer> lottoNumbers = new LinkedList<>();
 
     private LottoTicket(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public LottoTicket(LottoTicket lottoTicket) {
+        this.lottoNumbers.addAll(lottoTicket.lottoNumbers);
     }
 
     public static LottoTicket create() {
@@ -34,6 +39,15 @@ public class LottoTicket {
         return new LottoTicket(
             lottoNumbers.subList(0, LOTTO_NUMBER_COUNT)
         );
+    }
+
+    @Override
+    public LottoTicket clone() {
+        return new LottoTicket(this);
+    }
+
+    public void changeSomething() {
+        this.lottoNumbers.set(0, -1);
     }
 
     public static LottoTicket create(Integer... numbers) {
@@ -82,5 +96,4 @@ public class LottoTicket {
         Collections.sort(lottoNumbers);
         return lottoNumbers.toString();
     }
-
 }
