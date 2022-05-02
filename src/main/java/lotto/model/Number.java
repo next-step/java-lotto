@@ -4,22 +4,31 @@ import java.util.Objects;
 
 public class Number {
 
-    private final int value;
+    private long value;
 
     public Number() {
-        this(0);
     }
 
-    public Number(int value) {
+    public Number(long value) {
         this.value = value;
     }
 
+    public Number incrementAndGet() {
+        this.value++;
+        return this;
+    }
+
     public Number add(Number number) {
-        int value = this.value + number.value;
+        long value = this.value + number.value;
         return new Number(value);
     }
 
-    public int getValue() {
+    public Number multiple(Number number) {
+        long value = this.value * number.value;
+        return new Number(value);
+    }
+
+    public long getValue() {
         return this.value;
     }
 

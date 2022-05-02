@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.common.Delimiter;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -39,13 +37,16 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
-    public int contains(Collection<Number> numbers) {
-        return (int) numbers.stream()
+    public Number contains(Collection<Number> numbers) {
+        long count = numbers
+                .stream()
                 .filter(this::contains)
                 .count();
+
+        return new Number(count);
     }
 
-    public int contains(Lotto lotto) {
+    public Number contains(Lotto lotto) {
         return this.contains(lotto.numbers);
     }
 
@@ -55,15 +56,5 @@ public class Lotto {
 
     public List<Number> getNumbers() {
         return this.numbers;
-    }
-
-    @Override
-    public String toString() {
-        String numbers = this.numbers
-                .stream()
-                .map(Number::toString)
-                .collect(Collectors.joining(Delimiter.COMMA.symbol));
-
-        return "[" + numbers + "]";
     }
 }

@@ -34,7 +34,7 @@ class GameTest {
                 .range(1, 7)
                 .mapToObj(Number::new)
                 .collect(Collectors.toList());
-        Lotto beforeLotto = new Lotto().draw(beforeLottoNumber);
+        Lotto beforeLotto = Lotto.draw(beforeLottoNumber);
 
         assertThat(game.result(beforeLotto)).isLessThan(1.0);
     }

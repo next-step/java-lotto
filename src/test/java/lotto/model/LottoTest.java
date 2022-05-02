@@ -48,6 +48,6 @@ public class LottoTest {
     void isWin() {
         List<Number> numbers = this.numbers.subList(0, 6);
 
-        assertThat(Lotto.draw(numbers).contains(numbers)).isEqualTo(6);
+        assertThat(Lotto.draw(numbers).contains(numbers)).isEqualTo(new Number(6));
     }
 }

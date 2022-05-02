@@ -26,7 +26,7 @@ public class Game {
         ResultView.print(BUY_LOTTO_MESSAGE.apply(lottoCount));
 
         this.lottoList = IntStream.range(0, lottoCount)
-                .mapToObj(count -> new Lotto().draw())
+                .mapToObj(count -> Lotto.draw())
                 .peek(lotto -> ResultView.print(lotto.toString()))
                 .collect(Collectors.toList());
 
