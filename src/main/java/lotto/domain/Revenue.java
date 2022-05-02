@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Revenue {
@@ -21,6 +22,10 @@ public class Revenue {
 
     }
 
+    public Revenue(int revenue) {
+        this.revenue = revenue;
+    }
+
     private int findByRanking(List<List<Integer>> lottos, int count) {
         return lottos.stream()
                 .filter(lotto -> lotto.size() == count)
@@ -32,6 +37,19 @@ public class Revenue {
         revenue += lotto2ed * 1500000;
         revenue += lotto3rd * 50000;
         revenue += lotto4th * 5000;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Revenue revenue1 = (Revenue) o;
+        return revenue == revenue1.revenue;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(revenue);
     }
 
     @Override
