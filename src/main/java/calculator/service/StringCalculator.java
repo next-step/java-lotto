@@ -20,10 +20,10 @@ public class StringCalculator {
     }
 
     private static StringNumber calculate(String[] s) {
-        StringNumber result = new StringNumber(s[0]);
+        StringNumber stringNumber = new StringNumber(s[0]);
         for (int i = 1; i < s.length; i += 2) {
-            result = result.calculate(new StringOperator(s[i]), new StringNumber(s[i + 1]));
+            stringNumber = stringNumber.calculate(new StringOperator(s[i]), new StringNumber(s[i + 1]));
         }
-        return result;
+        return stringNumber;
     }
 }
