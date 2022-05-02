@@ -4,12 +4,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import lotto.exception.LottoNumberDuplicateException;
-import lotto.strategy.NumberGenerateStrategy;
+import lotto.strategy.LottoNumberGenerateStrategy;
 
 public class Lotto {
 
   public static final int PRICE_OF_ONE_LOTTO = 1000;
-  private static final int LOTTO_NUMBER_COUNT = 6;
+  public static final int LOTTO_NUMBER_COUNT = 6;
 
   private final List<LottoNumber> lottoNumbers;
 
@@ -18,7 +18,7 @@ public class Lotto {
     this.lottoNumbers = lottoNumbers;
   }
 
-  public static Lotto create(NumberGenerateStrategy numberGenerateStrategy) {
+  public static Lotto create(LottoNumberGenerateStrategy numberGenerateStrategy) {
     return new Lotto(numberGenerateStrategy.generate());
   }
 
