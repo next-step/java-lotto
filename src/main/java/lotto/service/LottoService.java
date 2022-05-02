@@ -25,7 +25,7 @@ public class LottoService {
     List<Lotto> LotteryTickets = new ArrayList<>();
     for (Lotto lotto : lotteryTickets) {
       LotteryTickets.add(
-          lotto.reflectLottoGrade(Reward.matchCount(lotto.numbers(), winLotto.numbers()), false));
+          lotto.reflectLottoGrade(AwardNumberUtil.matchCount(lotto.numbers(), winLotto.numbers()), false));
     }
     return LotteryTickets;
   }
