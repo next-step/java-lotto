@@ -1,22 +1,18 @@
 package autolotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoGenerator {
-    private static final Random RANDOM = new Random();
-    private static final int LOTTO_SIZE = 6;
-    private static final int RANDOM_BOUND = 45;
-    private static final int LOTTO_START_NUMBER = 1;
+    private static final List<Integer> numbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
+    private static final int FROM_INDEX = 0;
+    private static final int TO_INDEX = 6;
 
     public static Set<Integer> generate() {
-        Set<Integer> lotto = new HashSet<>(LOTTO_SIZE);
-        do {
-            lotto.add(getRandom());
-        } while (lotto.size() < LOTTO_SIZE);
-        return lotto;
-    }
-
-    private static int getRandom() {
-        return RANDOM.nextInt(RANDOM_BOUND) + LOTTO_START_NUMBER;
+        Collections.shuffle(numbers);
+        List<Integer> lotto = numbers.subList(FROM_INDEX, TO_INDEX);
+        Collections.sort(lotto);
+        return new HashSet<>(lotto);
     }
 }
