@@ -1,42 +1,55 @@
 package calculator;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
+import java.util.regex.Pattern;
 
 public class Calculator {
 
   public static final String BLANK_DELIMITER = " ";
+
+  private static final Pattern NUMERIC_PATTERN = Pattern.compile("\\d+");
 
   public static int calculate(String input) {
     if (isEmpty(input)) {
       throw new IllegalArgumentException("입력값이 올바르지 않습니다.");
     }
 
-    String[] strings = input.split(BLANK_DELIMITER);
-    List<Operator> operators = new ArrayList<>();
-    List<Integer> operands = new ArrayList<>();
-    for (int i = 0; i < strings.length; i++) {
-      if (i % 2 == 0) {
-        operands.add(Integer.parseInt(strings[i]));
-      } else {
-        operators.add(OperatorFactory.from(strings[i]));
-      }
-    }
-
-    return calculate(operators, operands.listIterator());
+    String[] inputs = input.split(BLANK_DELIMITER);
+    return calculate(getOperators(inputs), getOperands(inputs).iterator());
   }
 
-  private static int calculate(List<Operator> operators, ListIterator<Integer> operands) {
+  private static boolean isEmpty(String input) {
+    return input == null || input.isBlank();
+  }
+
+  private static List<Operator> getOperators(String[] inputs) {
+    List<Operator> operators = new ArrayList<>();
+    for (String input : inputs) {
+      if (!NUMERIC_PATTERN.matcher(input).matches()) {
+        operators.add(OperatorFactory.from(input));
+      }
+    }
+    return operators;
+  }
+
+  private static List<Integer> getOperands(String[] inputs) {
+    List<Integer> operands = new ArrayList<>();
+    for (String input : inputs) {
+      if (NUMERIC_PATTERN.matcher(input).matches()) {
+        operands.add(Integer.parseInt(input));
+      }
+    }
+    return operands;
+  }
+
+  private static int calculate(List<Operator> operators, Iterator<Integer> operands) {
     int result = operands.next();
     for (Operator operator : operators) {
       result = operator.calculate(result, operands.next());
     }
     return result;
-  }
-
-  private static boolean isEmpty(String input) {
-    return input == null || input.isBlank();
   }
 
 }
