@@ -26,12 +26,10 @@ public final class LottoFactory {
     return new Lotto(init());
   }
 
-  private static Set<LottoNumber> init() {
-    Set<LottoNumber> lottoNumbers = new HashSet<>();
+  private static Set<Integer> init() {
+    Set<Integer> lottoNumbers = new HashSet<>();
     while (lottoNumbers.size() < LOTTO_MAX_COUNT) {
-      lottoNumbers.add(
-          new LottoNumber(
-              new Random().nextInt(MAX_VALUE) + MIN_VALUE));
+      lottoNumbers.add(new Random().nextInt(MAX_VALUE) + MIN_VALUE);
     }
     return lottoNumbers;
   }

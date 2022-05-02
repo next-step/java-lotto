@@ -13,16 +13,18 @@ public final class Lotto {
   private static final int DEFAULT_LOTTO_SIZE = 6;
   private final Set<LottoNumber> lottoNumbers;
 
-  public Lotto(Set<LottoNumber> lottoNumbers) {
+  public Lotto(Set<Integer> lottoNumbers) {
     valid(lottoNumbers);
-    this.lottoNumbers = lottoNumbers;
+    this.lottoNumbers = lottoNumbers
+        .stream().map(LottoNumber::new)
+        .collect(Collectors.toSet());
   }
 
-  public static Lotto from(Set<LottoNumber> winnerNumbers) {
+  public static Lotto from(Set<Integer> winnerNumbers) {
     return new Lotto(winnerNumbers);
   }
 
-  private void valid(Set<LottoNumber> lottoNumbers) {
+  private void valid(Set<Integer> lottoNumbers) {
     if (DEFAULT_LOTTO_SIZE != lottoNumbers.size()) {
       throw new LottoLengthException();
     }

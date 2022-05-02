@@ -16,10 +16,9 @@ public final class AwardNumberUtil {
     return string.split(DELIMITER);
   }
 
-  public static Set<LottoNumber> getAwadNumberList(String string) {
+  public static Set<Integer> getAwadNumberList(String string) {
     return Arrays.stream(split(string))
         .map(Integer::parseInt)
-        .map(LottoNumber::new)
         .collect(Collectors.toSet());
   }
 
