@@ -33,8 +33,12 @@ public class Result {
         return prize * winners;
     }
 
-    public String format() {
-        return String.format("%s개 일치 (%d원) - %s개", numberOfWins, prize, winners);
+    public int getNumberOfWins() {
+        return numberOfWins;
+    }
+
+    public long getPrize() {
+        return prize;
     }
 
     @Override

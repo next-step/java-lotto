@@ -11,7 +11,7 @@ public class LottoOutput {
     public void printResult(Results results) {
         println("당첨통계");
         println("----------------");
-        results.getResults().forEach(result -> println(result.format()));
+        results.getResults().forEach(result -> println(String.format("%s개 일치 (%d원) - %s개", result.getNumberOfWins(), result.getPrize(), result.getWinners())));
     }
 
     public void printProfit(Lottos lottos, Results results) {
