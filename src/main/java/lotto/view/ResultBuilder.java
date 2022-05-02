@@ -62,7 +62,7 @@ public class ResultBuilder {
         initializeStringBuilder();
 
         sb.append(MESSAGE_TOTAL_PROFIT_RATE_INFO_START);
-        sb.append(profitRate);
+        sb.append(String.format("%.2f", profitRate));
         sb.append(MESSAGE_TOTAL_PROFIT_RATE_INFO_FINISH);
         sb.append(MESSAGE_BRACKET_OPEN);
         sb.append(profitResultMessage(profitRate));

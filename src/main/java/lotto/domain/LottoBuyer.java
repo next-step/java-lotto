@@ -28,8 +28,7 @@ public class LottoBuyer {
     }
 
     public double calculateProfitRate() {
-        int totalWinPrice = lottos.calculateTotalWinPrice();
-        return Double.valueOf(Calculator.divide(totalWinPrice, purchaseAmount));
+        return Calculator.divide(lottos.calculateTotalWinPrice(), purchaseAmount);
     }
 
     public Lottos lottos() {
