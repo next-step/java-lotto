@@ -20,13 +20,11 @@ public class LottoService {
     return Lotto.from(AwardNumberUtil.getAwadNumberList(winnerNumber));
   }
 
-  public List<WinningResultDto> histories(List<Lotto> lotto, Lotto winLotto) {
+  public List<WinningResultDto> histories(List<Lotto> lotteryTickets, Lotto winLotto) {
     List<WinningResultDto> histories = new ArrayList<>();
-    Reward reward = new Reward();
-    for (Grade grade : Grade.values()) {
-      int result = reward.result(grade, lotto, winLotto);
-      reward = reward.winReward(grade, result);
-      histories.add(new WinningResultDto(grade, result));
+    for (Lotto lotto : lotteryTickets) {
+      histories.add(new WinningResultDto(
+          Grade.valueOf(Reward.matchCount(lotto.numbers(), winLotto.numbers()), false)));
     }
     return histories;
   }
@@ -34,7 +32,7 @@ public class LottoService {
   public Long allAddReward(List<WinningResultDto> histories) {
     long result = 0L;
     for (WinningResultDto history : histories) {
-      result += (history.getGrade().getAwardPrice() * history.getCount());
+      result += (history.getGrade().getAwardPrice() * 100);
     }
     return result;
   }

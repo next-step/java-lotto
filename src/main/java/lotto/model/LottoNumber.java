@@ -20,6 +20,10 @@ public final class LottoNumber {
     }
   }
 
+  public int currentNumber() {
+    return this.value;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -38,8 +42,4 @@ public final class LottoNumber {
   }
 
 
-  @Override
-  public String toString() {
-    return String.valueOf(value);
-  }
 }

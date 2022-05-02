@@ -28,8 +28,12 @@ public class LottoController {
     OutputTable.resultStatisticsMessage();
     List<WinningResultDto> histories = histories(lottoProducts, winnerLotto);
     OutputTable.resultStatistics(histories);
-    double percent = yieldCalculate(haveMoney, allAddReward(histories));
-    OutputTable.printYield(percent, isStandard(percent));
+//    double percent = yieldCalculate(haveMoney, allAddReward(histories));
+//    OutputTable.printYield(percent, isStandard(percent));
+  }
+
+  private List<WinningResultDto> histories(List<Lotto> lottoProducts, Lotto winnerLotto) {
+    return lottoService.histories(lottoProducts, winnerLotto);
   }
 
 
@@ -39,10 +43,6 @@ public class LottoController {
 
   public Lotto insertWinnerNumber(String winnerNumber) {
     return lottoService.insertWinnerNumber(winnerNumber);
-  }
-
-  public List<WinningResultDto> histories(List<Lotto> lottoList, Lotto winLotto) {
-    return lottoService.histories(lottoList, winLotto);
   }
 
   public Long allAddReward(List<WinningResultDto> histories) {

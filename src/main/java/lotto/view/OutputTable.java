@@ -29,7 +29,7 @@ public final class OutputTable {
 
   public static void printProductInfos(List<Lotto> lottoList) {
     for (Lotto lotto : lottoList) {
-      System.out.println(lotto);
+      System.out.println(lotto.numbers());
     }
   }
 
@@ -46,7 +46,7 @@ public final class OutputTable {
   public static void resultStatistics(List<WinningResultDto> histories) {
     for (WinningResultDto history : histories) {
       System.out.printf(HISTORY_MESSAGE, history.getGrade().getExpectNumber(),
-          history.getGrade().getAwardPrice(), history.getCount());
+          history.getGrade().getAwardPrice(), 1);
     }
   }
 

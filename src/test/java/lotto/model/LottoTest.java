@@ -16,13 +16,15 @@ class LottoTest {
   @Test
   @DisplayName("당첨 번호와 상품으로 만들어진 로또의 번호가 일치하는지 확인한다.")
   void winningProduct() {
-    assertThat(new Lotto(Set.of(
+    Lotto lotto = Lotto.from(Set.of(
         new LottoNumber(1),
         new LottoNumber(2),
         new LottoNumber(3),
         new LottoNumber(4),
         new LottoNumber(5),
-        new LottoNumber(6)))).isEqualTo(Lotto.from(Set.of(
+        new LottoNumber(6)));
+
+    assertThat(lotto).isEqualTo(new Lotto(Set.of(
         new LottoNumber(1),
         new LottoNumber(2),
         new LottoNumber(3),

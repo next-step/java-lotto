@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 import lotto.enums.ChoiceType;
 import lotto.enums.Grade;
 import lotto.exception.LottoLengthException;
@@ -52,6 +53,12 @@ public final class Lotto {
       return ChoiceType.GUESSED;
     }
     return ChoiceType.WRONG;
+  }
+
+  public List<Integer> numbers() {
+    return lottoNumbers.stream()
+        .map(LottoNumber::currentNumber)
+        .collect(Collectors.toList());
   }
 
   @Override
