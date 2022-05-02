@@ -2,6 +2,7 @@ package lotto.model;
 
 import lotto.common.Delimiter;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -11,25 +12,31 @@ import java.util.stream.IntStream;
 public class Lotto {
 
     private static final List<Integer> LOTTO_NUMBERS = IntStream.range(1, 46).boxed().collect(Collectors.toList());
-    private List<Number> numbers;
+    private final List<Number> numbers;
 
-    public Lotto draw() {
+    public Lotto() {
+        this(new ArrayList<>());
+    }
+
+    private Lotto(List<Number> numbers) {
+        this.numbers = numbers;
+    }
+
+    public static Lotto draw() {
         Collections.shuffle(LOTTO_NUMBERS);
         List<Integer> shuffleResult = LOTTO_NUMBERS.subList(0, 6);
         Collections.sort(shuffleResult);
 
-        this.numbers = shuffleResult
+        List<Number> numbers = shuffleResult
                 .stream()
                 .map(Number::new)
                 .collect(Collectors.toList());
 
-        return this;
+        return new Lotto(numbers);
     }
 
-    public Lotto draw(List<Number> numbers) {
-        this.numbers = numbers;
-
-        return this;
+    public static Lotto draw(List<Number> numbers) {
+        return new Lotto(numbers);
     }
 
     public int contains(Collection<Number> numbers) {
