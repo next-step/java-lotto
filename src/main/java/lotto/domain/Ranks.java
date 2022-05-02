@@ -19,7 +19,6 @@ public class Ranks {
                 .filter(r -> r >= 3)
                 .map(Rank::getRank)
                 .collect(Collectors.toList())).groupBy();
-
     }
 
     public List<Rank> getRanks() {
