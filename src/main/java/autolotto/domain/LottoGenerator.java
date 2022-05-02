@@ -13,6 +13,6 @@ public class LottoGenerator {
         Collections.shuffle(numbers);
         List<Integer> lotto = numbers.subList(FROM_INDEX, TO_INDEX);
         Collections.sort(lotto);
-        return new HashSet<>(lotto);
+        return new LinkedHashSet<>(lotto);
     }
 }

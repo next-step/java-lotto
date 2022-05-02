@@ -13,7 +13,6 @@ public class Lottos {
 
     public Results confirm(WinningLotto winningLotto) {
         Results results = new Results();
-        results.initialize();
 
         for (Lotto lotto : lottos) {
             int numberOfWins = lotto.match(winningLotto);

@@ -1,7 +1,5 @@
 package autolotto.domain;
 
-import autolotto.domain.Result;
-import autolotto.domain.Results;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -16,7 +14,6 @@ public class ResultsTest {
     @BeforeEach
     void setUp() {
         results = new Results();
-        results.initialize();
     }
 
     @ParameterizedTest

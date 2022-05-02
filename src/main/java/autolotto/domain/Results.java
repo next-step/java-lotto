@@ -7,7 +7,7 @@ import java.util.Optional;
 public class Results {
     private List<Result> results = new ArrayList<>();
 
-    public void initialize() {
+    public Results() {
         results.add(new Result(3, 5000));
         results.add(new Result(4, 50000));
         results.add(new Result(5, 1_500_000));

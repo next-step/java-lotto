@@ -4,6 +4,7 @@ import autolotto.exception.LottoException;
 import autolotto.exception.LottoExceptionCode;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -20,6 +21,7 @@ public class LottoInput {
         System.out.println(question);
 
         int purchaseAmount = scanner.nextInt();
+        scanner.nextLine();
         if (purchaseAmount < 0) {
             throw new IllegalArgumentException("양수만 입력 가능합니다.");
         }
@@ -29,18 +31,20 @@ public class LottoInput {
 
     public Set<Integer> askWinningNumber(String question) {
         System.out.println(question);
-        String winningNumberInput = scanner.next();
+        String winningNumberInput = scanner.nextLine();
 
-        String[] splitedNumbers = winningNumberInput.split(DELIMITER);
+        List<String> splitedNumbers = Arrays.stream(winningNumberInput.split(DELIMITER))
+                .map(String::trim)
+                .collect(Collectors.toList());
 
-        boolean isNumber = Arrays.stream(splitedNumbers)
+        boolean isNumber = splitedNumbers.stream()
                 .allMatch(number -> NUMBER_PATTERN.matcher(number).matches());
 
         if (!isNumber) {
             throw new LottoException(LottoExceptionCode.INVALID_LOTTO_NUMBER_TYPE, winningNumberInput);
         }
 
-        return Arrays.stream(splitedNumbers)
+        return splitedNumbers.stream()
                 .map(Integer::parseInt)
                 .collect(Collectors.toSet());
     }
