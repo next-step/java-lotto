@@ -7,8 +7,4 @@ public class InvalidBoundLottoNumber extends IndexOutOfBoundsException {
     public InvalidBoundLottoNumber() {
         super(MESSAGE);
     }
-
-    public InvalidBoundLottoNumber(String message) {
-        super(message);
-    }
 }

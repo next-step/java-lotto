@@ -7,8 +7,4 @@ public class NotSupportInstanceException extends RuntimeException {
     public NotSupportInstanceException() {
         super(MESSAGE);
     }
-
-    public NotSupportInstanceException(String message) {
-        super(message);
-    }
 }

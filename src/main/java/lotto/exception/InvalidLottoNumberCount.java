@@ -7,8 +7,4 @@ public class InvalidLottoNumberCount extends IllegalArgumentException {
     public InvalidLottoNumberCount() {
         super(MESSAGE);
     }
-
-    public InvalidLottoNumberCount(String message) {
-        super(message);
-    }
 }
