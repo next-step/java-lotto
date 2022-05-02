@@ -5,7 +5,7 @@ import java.util.Objects;
 public class StringNumber {
 
     private static final String WRONG_NUMBER_MESSAGE = "숫자는 0이상의 정수여야 합니다.";
-    private static final String CORRECT_INPUT_PATTERN = "[0-9]*";
+    private static final String CORRECT_INPUT_PATTERN = "[-]?[0-9]*";
     private final int number;
 
     public StringNumber(String number) {
@@ -17,13 +17,10 @@ public class StringNumber {
             throw new IllegalArgumentException(WRONG_NUMBER_MESSAGE);
         }
 
-        if (Integer.parseInt(number) < 0) {
-            throw new IllegalArgumentException(WRONG_NUMBER_MESSAGE);
-        }
         return Integer.parseInt(number);
     }
 
-    public StringNumber calculate(StringOperator operator, StringNumber other) {
+    public StringNumber calculate(Operator operator, StringNumber other) {
         int result = operator.calculate(number, other.number);
         return new StringNumber(Integer.toString(result));
     }
