@@ -1,11 +1,20 @@
 package autolotto.view;
 
+import autolotto.exception.LottoException;
+import autolotto.exception.LottoExceptionCode;
+
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class LottoInput {
     public static final String AMOUNT_QUESTION = "구입 금액을 입력해주세요. ex. 14000";
     public static final String WINNING_NUMBER_QUESTION = "지난주 당첨 번호를 콤마(,)를 기준으로 입력해주세요. ex. 1,2,3,4,5,6";
     private static final Scanner scanner = new Scanner(System.in);
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("[1-9]|1[0-9]|2[0-9]|3[0-9]|4[0-5]");
+    private static final String DELIMITER = ",";
 
     public int askAmount(String question) {
         System.out.println(question);
@@ -18,8 +27,21 @@ public class LottoInput {
         return purchaseAmount;
     }
 
-    public String askWinningNumber(String question) {
+    public Set<Integer> askWinningNumber(String question) {
         System.out.println(question);
-        return scanner.next();
+        String winningNumberInput = scanner.next();
+
+        String[] splitedNumbers = winningNumberInput.split(DELIMITER);
+
+        boolean isNumber = Arrays.stream(splitedNumbers)
+                .allMatch(number -> NUMBER_PATTERN.matcher(number).matches());
+
+        if (!isNumber) {
+            throw new LottoException(LottoExceptionCode.INVALID_LOTTO_NUMBER_TYPE, winningNumberInput);
+        }
+
+        return Arrays.stream(splitedNumbers)
+                .map(Integer::parseInt)
+                .collect(Collectors.toSet());
     }
 }

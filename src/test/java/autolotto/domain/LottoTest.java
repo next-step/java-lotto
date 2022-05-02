@@ -4,7 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,6 +26,10 @@ public class LottoTest {
             "1, 2, 3, 4, 41, 42:4"
     }, delimiter = ':')
     void winningLottoGiven_ReturnMatchCount(String number, int matchCount) {
-        assertThat(lotto.match(new WinningLotto(number))).isEqualTo(matchCount);
+        Set<Integer> numbers = Arrays.stream(number.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toSet());
+        assertThat(lotto.match(new WinningLotto(new LottoNumbers(numbers)))).isEqualTo(matchCount);
     }
 }

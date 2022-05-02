@@ -6,8 +6,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -17,7 +20,7 @@ class LottoNumbersTest {
 
     @BeforeEach
     void setUp() {
-        lottoNumbers = new LottoNumbers(Set.of(1,2,3,4,5,6));
+        lottoNumbers = new LottoNumbers(Set.of(1, 2, 3, 4, 5, 6));
     }
 
     @Test
@@ -34,6 +37,16 @@ class LottoNumbersTest {
             "1, 2, 3, 4, 41, 42:4"
     }, delimiter = ':')
     void winningLottoGiven_ReturnMatchCount(String number, int matchCount) {
-        assertThat(lottoNumbers.match(new WinningLotto(number))).isEqualTo(matchCount);
+        Set<Integer> numbers = Arrays.stream(number.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toSet());
+        assertThat(lottoNumbers.match(new WinningLotto(new LottoNumbers(numbers)))).isEqualTo(matchCount);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3})
+    void numberIsContainedGiven_ReturnTrue(int number) {
+        assertThat(lottoNumbers.contains(number)).isTrue();
     }
 }

@@ -4,6 +4,8 @@ import autolotto.domain.*;
 import autolotto.view.LottoInput;
 import autolotto.view.LottoOutput;
 
+import java.util.Set;
+
 import static autolotto.view.LottoInput.AMOUNT_QUESTION;
 import static autolotto.view.LottoInput.WINNING_NUMBER_QUESTION;
 
@@ -23,8 +25,8 @@ public class Lottery {
             lottoOutput.println(lotto.toString());
         }
 
-        String numbers = lottoInput.askWinningNumber(WINNING_NUMBER_QUESTION);
-        WinningLotto winningLotto = new WinningLotto(numbers);
+        Set<Integer> winningNumbers = lottoInput.askWinningNumber(WINNING_NUMBER_QUESTION);
+        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(winningNumbers));
 
         Results results = lottos.confirm(winningLotto);
 
