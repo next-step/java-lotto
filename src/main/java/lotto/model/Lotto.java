@@ -28,9 +28,9 @@ public final class Lotto {
     }
   }
 
-  public int coincideLotto(Grade grade, List<Lotto> allLottoList) {
+  public int coincideLotto(Grade grade, List<Lotto> allLotteryTickets) {
     int result = 0;
-    for (Lotto lotto : allLottoList) {
+    for (Lotto lotto : allLotteryTickets) {
       result += increaseProductNumber(grade.getExpectNumber(), lotto).getIncreaseValue();
     }
     return result;

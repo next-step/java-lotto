@@ -27,8 +27,8 @@ public final class OutputTable {
     System.out.printf(BUY_THING_MESSAGE, productCount);
   }
 
-  public static void printProductInfos(List<Lotto> lottoList) {
-    for (Lotto lotto : lottoList) {
+  public static void printProductInfos(List<Lotto> lotteryTickets) {
+    for (Lotto lotto : lotteryTickets) {
       System.out.println(lotto.numbers());
     }
   }

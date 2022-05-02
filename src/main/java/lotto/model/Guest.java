@@ -8,15 +8,15 @@ import lotto.exception.MoneyNumberException;
 public final class Guest {
 
   private final Money money;
-  private final List<Lotto> allLottoList;
+  private final List<Lotto> allLotteryTickets;
 
   public Guest(long money) {
     this(money, null);
   }
 
-  public Guest(long money, List<Lotto> allLottoList) {
+  public Guest(long money, List<Lotto> allLotteryTickets) {
     this.money = new Money(money);
-    this.allLottoList = allLottoList;
+    this.allLotteryTickets = allLotteryTickets;
   }
 
   public Guest choiceProduct(Store store) {
@@ -24,8 +24,8 @@ public final class Guest {
   }
 
   public List<Lotto> hasAllLotto() {
-    emptySizeValid(allLottoList.size());
-    return allLottoList;
+    emptySizeValid(allLotteryTickets.size());
+    return allLotteryTickets;
   }
 
   private void emptySizeValid(int size) {
@@ -43,12 +43,12 @@ public final class Guest {
       return false;
     }
     Guest guest = (Guest) o;
-    return Objects.equals(money, guest.money) && Objects.equals(allLottoList,
-        guest.allLottoList);
+    return Objects.equals(money, guest.money) && Objects.equals(allLotteryTickets,
+        guest.allLotteryTickets);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(money, allLottoList);
+    return Objects.hash(money, allLotteryTickets);
   }
 }
