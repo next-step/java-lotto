@@ -20,9 +20,6 @@ public class WinningLotto {
 
   private void validateDuplicateNumber(List<LottoNumber> winningLottoNumbers) {
     Set<LottoNumber> validateLottoNumbers = new HashSet<>(winningLottoNumbers);
-//    for (LottoNumber winningLottoNumber : winningLottoNumbers) {
-//      validateLottoNumbers.add(winningLottoNumber.getValue());
-//    }
     if (validateLottoNumbers.size() != LOTTO_NUMBER_COUNT) {
       throw new LottoNumberDuplicateException(winningLottoNumbers);
     }
