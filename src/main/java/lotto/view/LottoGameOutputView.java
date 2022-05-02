@@ -16,6 +16,10 @@ public class LottoGameOutputView {
   private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %.2f 입니다.";
   private static final int MATCH_COUNT_PRINT_BONUS = 5;
 
+  private LottoGameOutputView(){
+  }
+
+
   public static void printLottoNumbers(LottoGames lottoGames) {
     for (LottoGame lottoGame : lottoGames.getValues()) {
       System.out.print("[");
