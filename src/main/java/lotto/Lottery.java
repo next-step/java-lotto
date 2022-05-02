@@ -7,16 +7,17 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottery {
-    public final static List<Integer> box = IntStream.rangeClosed(1,45).boxed().collect(Collectors.toList());
+    public final List<Integer> box;
     public final List<Integer> numbers;
 
-    public Lottery() {
-        shuffleBox();
+    public Lottery(List<Integer> lotteryBoxNumbers) {
+        shuffleBox(lotteryBoxNumbers);
+        this.box = lotteryBoxNumbers;
         this.numbers = findSixNumbers();
     }
 
-    public void shuffleBox() {
-        Collections.shuffle(this.box);
+    public void shuffleBox(List<Integer> lotteryBoxNumbers) {
+        Collections.shuffle(lotteryBoxNumbers);
     }
 
     public List<Integer> findSixNumbers() {

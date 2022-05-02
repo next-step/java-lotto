@@ -32,7 +32,7 @@ public class LotteryController {
 
     public void createLotteries() {
         for (int i = 0; i < numberOfLotteries; i++) {
-            lotteries.add(new Lottery());
+            lotteries.add(new Lottery(LotteryBox.numbers));
         }
     }
 
