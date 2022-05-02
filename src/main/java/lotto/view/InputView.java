@@ -14,9 +14,15 @@ public class InputView {
         throw new NotSupportInstanceException();
     }
 
-    public static String purchaseAmountView() {
+    public static int purchaseAmountView() {
         System.out.println(MESSAGE_PURCHASE_AMOUNT);
-        return scanner.nextLine();
+        return inputInt();
+    }
+
+    private static int inputInt() {
+        int input = scanner.nextInt();
+        scanner.nextLine();
+        return input;
     }
 
     public static String lastWinningLottoNumberView() {

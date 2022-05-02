@@ -10,10 +10,6 @@ public class LottoBuyer {
     private final int purchaseAmount;
     private Lottos lottos;
 
-    public LottoBuyer(String purchaseAmount) {
-        this(Integer.parseInt(purchaseAmount));
-    }
-
     public LottoBuyer(int purchaseAmount) {
         this.purchaseAmount = purchaseAmount;
     }

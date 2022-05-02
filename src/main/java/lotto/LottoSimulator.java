@@ -7,7 +7,7 @@ import lotto.view.ResultView;
 public class LottoSimulator {
 
     public static void main(String[] args) {
-        String purchaseAmount = InputView.purchaseAmountView();
+        int purchaseAmount = InputView.purchaseAmountView();
 
         LottoBuyer lottoBuyer = new LottoBuyer(purchaseAmount);
         lottoBuyer.buyLottos();
