@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class LottoNumber {
 
-  private static final int LOTTO_NUMBER_RANGE_START = 1;
-  private static final int LOTTO_NUMBER_RANGE_END = 45;
+  public static final int LOTTO_NUMBER_RANGE_START = 1;
+  public static final int LOTTO_NUMBER_RANGE_END = 45;
   private static final String LOTTO_NUMBER_OUT_OT_RANGE_ERROR_MSG = "입력된 로또 번호는 %d으로 로또 번호는 1~45 범위 안에 있어야합니다.";
 
   private final int value;
