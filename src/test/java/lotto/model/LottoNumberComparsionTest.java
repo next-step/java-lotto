@@ -23,4 +23,19 @@ class LottoNumberComparsionTest {
     // then
     assertThat(matchResult.get(LottoRank.FIRST)).isEqualTo(3);
   }
+
+  @Test
+  @DisplayName("우승한 로또번호와 구매한 로또번호를 비교하여 수익률 계산한 결과 확인")
+  void checkRateOfReturnPurchasedLotto() {
+    // given
+    Lottos lottos = Lottos.create(3, new FixedNumberGenerateStrategy());
+    WinningLotto winningLotto = WinningLotto.create("1, 2, 3, 4, 5, 6");
+
+    // when
+    LottoNumberComparison lottoNumberComparsion = new LottoNumberComparison(lottos, winningLotto);
+    double profitRatioResult = lottoNumberComparsion.getProfitRatio();
+
+    // then
+    assertThat(profitRatioResult).isEqualTo(2000000.0);
+  }
 }
