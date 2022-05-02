@@ -2,45 +2,47 @@ package calculator;
 
 public class Calculator {
 
+    private static final String DEFAULT_INPUT = "";
+
     private final String[] strings;
 
     public Calculator() {
-        this("");
+        this(DEFAULT_INPUT);
     }
 
-    public Calculator(String s) {
+    public Calculator(String calculation) {
         Splitter splitter = new Splitter();
-        this.strings = splitter.split(s);
+        this.strings = splitter.split(calculation);
     }
 
-    int plus(String a, String b) {
-        return Integer.parseInt(a) + Integer.parseInt(b);
+    int plus(String num1, String num2) {
+        return Integer.parseInt(num1) + Integer.parseInt(num2);
     }
 
-    int minus(String a, String b) {
-        return Integer.parseInt(a) - Integer.parseInt(b);
+    int minus(String num1, String num2) {
+        return Integer.parseInt(num1) - Integer.parseInt(num2);
     }
 
-    int multiply(String a, String b) {
-        return Integer.parseInt(a) * Integer.parseInt(b);
+    int multiply(String num1, String num2) {
+        return Integer.parseInt(num1) * Integer.parseInt(num2);
     }
 
-    int divide(String a, String b) {
-        return Integer.parseInt(a) / Integer.parseInt(b);
+    int divide(String numerator, String denominator) {
+        return Integer.parseInt(numerator) / Integer.parseInt(denominator);
     }
 
-    int calculateOperatorType(String operator, String a, String b) {
+    int calculateOperatorType(String operator, String num1, String num2) {
         if (operator.equals("+")) {
-            return plus(a, b);
+            return plus(num1, num2);
         }
         if (operator.equals("-")) {
-            return minus(a, b);
+            return minus(num1, num2);
         }
         if (operator.equals("*")) {
-            return multiply(a, b);
+            return multiply(num1, num2);
         }
         if (operator.equals("/")) {
-            return divide(a, b);
+            return divide(num1, num2);
         }
 
         return 0;
