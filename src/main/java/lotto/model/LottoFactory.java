@@ -1,14 +1,15 @@
 package lotto.model;
 
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import lotto.util.AwardNumberUtil;
 
 public final class LottoFactory {
-
   private static final int LOTTO_MAX_COUNT = 6;
-  private static final int MIN_VALUE = 1;
-  private static final int MAX_VALUE = 45;
+  private static final int LOTTO_START_INDEX = 0;
   private static LottoFactory instance;
 
 
@@ -22,16 +23,10 @@ public final class LottoFactory {
     return LottoFactory.instance;
   }
 
-  public Lotto apply() {
-    return new Lotto(init());
+  public Lotto apply(List<Integer> init) {
+    Collections.shuffle(init);
+    return new Lotto(new HashSet<>(init.subList(LOTTO_START_INDEX,LOTTO_MAX_COUNT)));
   }
 
-  private static Set<Integer> init() {
-    Set<Integer> lottoNumbers = new HashSet<>();
-    while (lottoNumbers.size() < LOTTO_MAX_COUNT) {
-      lottoNumbers.add(new Random().nextInt(MAX_VALUE) + MIN_VALUE);
-    }
-    return lottoNumbers;
-  }
 
 }

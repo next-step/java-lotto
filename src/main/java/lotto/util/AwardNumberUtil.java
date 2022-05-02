@@ -1,11 +1,19 @@
 package lotto.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.model.LottoNumber;
 
 public final class AwardNumberUtil {
+
+
+  private static final int MIN_VALUE = 1;
+  private static final int MAX_VALUE = 45;
 
   private AwardNumberUtil() {
   }
@@ -24,6 +32,14 @@ public final class AwardNumberUtil {
       count = getCount(winningLotto, count, lottoNumber);
     }
     return count;
+  }
+
+  public static List<Integer> init() {
+    List<Integer> lottoNumbers = new ArrayList<>();
+    for (int i = MIN_VALUE; i < MAX_VALUE; i++) {
+      lottoNumbers.add(i);
+    }
+    return lottoNumbers;
   }
 
   private static String[] split(String string) {

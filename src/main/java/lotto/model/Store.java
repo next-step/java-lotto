@@ -10,17 +10,17 @@ public final class Store {
   public Store() {
   }
 
-  public List<Lotto> delivery(long money) {
+  public List<Lotto> delivery(long money, List<Integer> init) {
     long count = money / PRODUCT_PRICE;
     List<Lotto> lotteryTickets = new ArrayList<>();
     while (count-- != 0) {
-      lotteryTickets.add(deliverLotto());
+      lotteryTickets.add(deliverLotto(init));
     }
     return lotteryTickets;
   }
 
-  private Lotto deliverLotto() {
-    return LottoFactory.getInstance().apply();
+  private Lotto deliverLotto(List<Integer> lottoFullValue) {
+    return LottoFactory.getInstance().apply(lottoFullValue);
   }
 
 }

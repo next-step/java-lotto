@@ -8,6 +8,7 @@ import lotto.model.Guest;
 import lotto.model.Lotto;
 import lotto.model.Store;
 import lotto.service.LottoService;
+import lotto.util.AwardNumberUtil;
 import lotto.view.InputTable;
 import lotto.view.OutputTable;
 
@@ -22,7 +23,8 @@ public class LottoController {
   public void run() {
     OutputTable.inputPurchaseAmount();
     long haveMoney = InputTable.inputHaveMoney();
-    List<Lotto> lottoProducts = visit(new Guest(haveMoney), new Store()).hasAllLotto();
+    List<Lotto> lottoProducts = visit(new Guest(haveMoney), new Store(),
+        AwardNumberUtil.init()).hasAllLotto();
     OutputTable.buyThings(lottoProducts.size());
     OutputTable.printProductInfos(lottoProducts);
     OutputTable.lastWeekAwardNumber();
@@ -43,8 +45,8 @@ public class LottoController {
   }
 
 
-  public Guest visit(Guest guest, Store store) {
-    return lottoService.visit(guest, store);
+  public Guest visit(Guest guest, Store store, List<Integer> init) {
+    return lottoService.visit(guest, store, init);
   }
 
   public Lotto insertWinnerNumber(String winnerNumber) {

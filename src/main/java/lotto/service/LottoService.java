@@ -12,8 +12,8 @@ import lotto.util.AwardNumberUtil;
 
 public class LottoService {
 
-  public Guest visit(Guest guest, Store store) {
-    return guest.choiceProduct(store);
+  public Guest visit(Guest guest, Store store, List<Integer> init) {
+    return guest.choiceProduct(store, init);
   }
 
   public Lotto insertWinnerNumber(String winnerNumber) {
@@ -24,7 +24,8 @@ public class LottoService {
     List<Lotto> LotteryTickets = new ArrayList<>();
     for (Lotto lotto : lotteryTickets) {
       LotteryTickets.add(
-          lotto.reflectLottoGrade(AwardNumberUtil.matchCount(lotto.numbers(), winLotto.numbers()), false));
+          lotto.reflectLottoGrade(AwardNumberUtil.matchCount(lotto.numbers(), winLotto.numbers()),
+              false));
     }
     return LotteryTickets;
   }

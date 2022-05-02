@@ -19,8 +19,8 @@ public final class Guest {
     this.allLotteryTickets = allLotteryTickets;
   }
 
-  public Guest choiceProduct(Store store) {
-    return new Guest(0, store.delivery(money.currentValue()));
+  public Guest choiceProduct(Store store, List<Integer> init) {
+    return new Guest(0, store.delivery(money.currentValue(), init));
   }
 
   public List<Lotto> hasAllLotto() {

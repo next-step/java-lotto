@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import lotto.exception.LottoSizeException;
+import lotto.util.AwardNumberUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,7 @@ class GuestTest {
   @DisplayName("고객이 구입한 로또 갯수 테스트")
   void lottoCountTest() {
     Guest guest = new Guest(14000);
-    guest = guest.choiceProduct(new Store());
+    guest = guest.choiceProduct(new Store(), AwardNumberUtil.init());
     assertThat(guest).isEqualTo(new Guest(0, guest.hasAllLotto()));
   }
 
@@ -25,7 +26,7 @@ class GuestTest {
   void lottoEmptySizeTest() {
     assertThrows(LottoSizeException.class, () -> {
       Guest guest = new Guest(999);
-      guest = guest.choiceProduct(new Store());
+      guest = guest.choiceProduct(new Store(), AwardNumberUtil.init());
       new Guest(0, guest.hasAllLotto());
     });
   }
