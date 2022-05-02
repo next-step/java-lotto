@@ -7,8 +7,11 @@ public class Lottos {
     private static final int LOTTO_PRICE = 1000;
     private final List<LottoNumbers> lottoNumbers = new ArrayList<>();
 
-    public void add(LottoNumbers lottoNumbers) {
-        this.lottoNumbers.add(lottoNumbers);
+    public void createLotto(int quantity) {
+        for (int count = 0; count < quantity; count++) {
+            LottoNumbers lottoNumbers = new LottoNumbers(LottoGenerator.generate());
+            add(lottoNumbers);
+        }
     }
 
     public Results confirm(WinningLotto winningLotto) {
@@ -27,5 +30,13 @@ public class Lottos {
 
     public int getQuantity(int amount) {
         return amount / LOTTO_PRICE;
+    }
+
+    public List<LottoNumbers> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
+    protected void add(LottoNumbers lottoNumbers) {
+        this.lottoNumbers.add(lottoNumbers);
     }
 }

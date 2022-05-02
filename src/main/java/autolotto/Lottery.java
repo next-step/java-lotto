@@ -16,10 +16,9 @@ public class Lottery {
         int lottoQuantity = lottos.getQuantity(amount);
         lottoOutput.println(lottoQuantity + "장을 구입했습니다.");
 
-        for (int count = 0; count < lottoQuantity; count++) {
-            LottoNumbers lottoNumbers = new LottoNumbers(LottoGenerator.generate());
-            lottos.add(lottoNumbers);
-            lottoOutput.println(lottoNumbers.toString());
+        lottos.createLotto(lottoQuantity);
+        for (LottoNumbers lottoNumber : lottos.getLottoNumbers()) {
+            lottoOutput.println(lottoNumber.toString());
         }
 
         Set<Integer> winningNumbers = lottoInput.askWinningNumber();
