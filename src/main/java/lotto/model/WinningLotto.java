@@ -19,12 +19,12 @@ public class WinningLotto {
   }
 
   private void validateDuplicateNumber(List<LottoNumber> winningLottoNumbers) {
-    Set<Integer> validateLottoNumbers = new HashSet<>();
-    for (LottoNumber winningLottoNumber : winningLottoNumbers) {
-      validateLottoNumbers.add(winningLottoNumber.getValue());
-    }
+    Set<LottoNumber> validateLottoNumbers = new HashSet<>(winningLottoNumbers);
+//    for (LottoNumber winningLottoNumber : winningLottoNumbers) {
+//      validateLottoNumbers.add(winningLottoNumber.getValue());
+//    }
     if (validateLottoNumbers.size() != LOTTO_NUMBER_COUNT) {
-      throw new LottoNumberDuplicateException();
+      throw new LottoNumberDuplicateException(winningLottoNumbers);
     }
   }
 
@@ -32,7 +32,7 @@ public class WinningLotto {
     String[] splitWinningLotto = splitWinningLotto(winningLotto);
     List<LottoNumber> winningLottoNumbers = new ArrayList<>();
     for (String lottoNumber : splitWinningLotto) {
-      winningLottoNumbers.add(LottoNumber.create(lottoNumber));
+      winningLottoNumbers.add(LottoNumber.create(convertToNumber(lottoNumber)));
     }
     return new WinningLotto(winningLottoNumbers);
   }
@@ -47,5 +47,9 @@ public class WinningLotto {
 
   public boolean contains(LottoNumber lottoNumber) {
     return winningLottoNumbers.contains(lottoNumber);
+  }
+
+  private static int convertToNumber(String winningLottoNumber) {
+    return Integer.parseInt(winningLottoNumber);
   }
 }

@@ -6,6 +6,7 @@ public class LottoNumber {
 
   private static final int LOTTO_NUMBER_RANGE_START = 1;
   private static final int LOTTO_NUMBER_RANGE_END = 45;
+  private static final String LOTTO_NUMBER_OUT_OT_RANGE_ERROR_MSG = "입력된 로또 번호는 %d으로 로또 번호는 1~45 범위 안에 있어야합니다.";
 
   private final int value;
 
@@ -18,22 +19,14 @@ public class LottoNumber {
     return new LottoNumber(value);
   }
 
-  public static LottoNumber create(String winningLottoNumber) {
-    return new LottoNumber(convertToNumber(winningLottoNumber));
-  }
-
   public int getValue() {
     return this.value;
   }
 
   private void validateLottoNumber(int value) {
     if (value < LOTTO_NUMBER_RANGE_START || value > LOTTO_NUMBER_RANGE_END) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException(String.format(LOTTO_NUMBER_OUT_OT_RANGE_ERROR_MSG, value));
     }
-  }
-
-  private static int convertToNumber(String winningLottoNumber) {
-    return Integer.parseInt(winningLottoNumber);
   }
 
   @Override
