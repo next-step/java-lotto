@@ -7,17 +7,24 @@ import java.util.List;
 public class LotteryController {
     public Money money;
     private int numberOfLotteries;
-    public final List<Lottery> lotteries = new ArrayList<>();
+    public final List<Lottery> lotteries;
     private List<Integer> answerNumbers;
     public final WinStatistics winStatistics = new WinStatistics();
     private double earningRate;
 
     public LotteryController() {
+        this.lotteries = new ArrayList<>();
+    }
+
+    public LotteryController(List<Lottery> lotteries, List<Integer> answerNumbers) {
+        this.lotteries = lotteries;
+        this.answerNumbers = answerNumbers;
     }
 
     public LotteryController(int money) {
         this.money = new Money(money);
         this.numberOfLotteries = this.money.price / 1000;
+        this.lotteries = new ArrayList<>();
     }
 
     public void scanMoney() {
@@ -32,7 +39,7 @@ public class LotteryController {
 
     public void createLotteries() {
         for (int i = 0; i < numberOfLotteries; i++) {
-            lotteries.add(new Lottery(LotteryBox.numbers));
+            lotteries.add(new Lottery());
         }
     }
 
@@ -67,26 +74,36 @@ public class LotteryController {
 
     public void findWins() {
         for (Lottery lottery : lotteries) {
-            findWin(lottery.numbers, this.answerNumbers);
+            int win = findWin(lottery.numbers, this.answerNumbers);
+            saveWin(win);
         }
     }
 
-    public void findWin(List<Integer> numbers, List<Integer> answerNumbers) {
-        int counter = 0;
+    public int findWin(List<Integer> numbers, List<Integer> answerNumbers) {
+        int win = 0;
         for (int number : numbers) {
-            if (answerNumbers.contains(number)) {
-                counter++;
-            }
+            win += matchNumber(answerNumbers, number);
         }
-        if (counter >= 3) {
-            winStatistics.save(counter);
+        return win;
+    }
+
+    private int matchNumber(List<Integer> answerNumbers, int number) {
+        if (answerNumbers.contains(number)) {
+            return 1;
+        }
+        return 0;
+    }
+
+    public void saveWin(int win) {
+        if (win >= 3) {
+            winStatistics.save(win);
         }
     }
 
     public void printWinStatistics() {
         ResultView.printWinStatistics(this.winStatistics.toPayload());
     }
-    
+
     public void getEarningRate() {
         this.earningRate = winStatistics.getEarningRate(this.money.price);
     }

@@ -3,17 +3,18 @@ package lotto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Lottery {
-    public final List<Integer> box;
+    public final List<Integer> boxNumbers = LotteryBox.numbers;
     public final List<Integer> numbers;
 
-    public Lottery(List<Integer> lotteryBoxNumbers) {
-        shuffleBox(lotteryBoxNumbers);
-        this.box = lotteryBoxNumbers;
+    public Lottery() {
+        shuffleBox(boxNumbers);
         this.numbers = findSixNumbers();
+    }
+
+    public Lottery(List<Integer> numbers) {
+        this.numbers = numbers;
     }
 
     public void shuffleBox(List<Integer> lotteryBoxNumbers) {
@@ -23,7 +24,7 @@ public class Lottery {
     public List<Integer> findSixNumbers() {
         List<Integer> list = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            list.add(box.get(i));
+            list.add(boxNumbers.get(i));
         }
         return sort(list);
     }

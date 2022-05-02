@@ -29,6 +29,13 @@ public class WinStatistics {
         return Objects.hash(matches);
     }
 
+    @Override
+    public String toString() {
+        return "WinStatistics{" +
+                "matches=" + matches +
+                '}';
+    }
+
     public void save(int wins) {
         matches.put(wins, matches.get(wins) + 1);
     }

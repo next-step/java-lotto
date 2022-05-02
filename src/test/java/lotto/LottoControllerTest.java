@@ -53,9 +53,21 @@ public class LottoControllerTest {
     void findWin() {
         List<Integer> lottery = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<Integer> answerNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-        lottoController.findWin(lottery, answerNumber);
-        assertThat(lottoController.winStatistics).isEqualTo(new WinStatistics(0, 0, 0, 1));
+        assertThat(lottoController.findWin(lottery, answerNumber)).isEqualTo(6);
     }
 
+    @Test
+    void moreThan3WinShouldBeSaved() {
+        lottoController.saveWin(2);
+        assertThat(lottoController.winStatistics).isEqualTo(new WinStatistics(0, 0, 0, 0));
+        lottoController.saveWin(3);
+        assertThat(lottoController.winStatistics).isEqualTo(new WinStatistics(1, 0, 0, 0));
+    }
 
+    @Test
+    void findWins() {
+        LotteryController lotteryController2 = new LotteryController(Arrays.asList(new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6))), Arrays.asList(1, 2, 3, 14, 15, 16));
+        lotteryController2.findWins();
+        assertThat(lotteryController2.winStatistics).isEqualTo(new WinStatistics(1, 0, 0, 0));
+    }
 }

@@ -9,10 +9,10 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LotteryTest {
-    Lottery lottery = new Lottery(LotteryBox.numbers);
+    Lottery lottery = new Lottery();
     @Test
     void create45NumbersInBox() {
-        assertThat(lottery.box).hasSize(45);
+        assertThat(lottery.boxNumbers).hasSize(45);
     }
 
     @Test
@@ -22,9 +22,9 @@ public class LotteryTest {
 
     @Test
     void shuffledBoxShouldDifferWithOrigin() {
-        List<Integer> origin = new ArrayList<>(lottery.box);
+        List<Integer> origin = new ArrayList<>(lottery.boxNumbers);
         lottery.shuffleBox(LotteryBox.numbers);
-        assertThat(lottery.box).isNotEqualTo(origin);
+        assertThat(lottery.boxNumbers).isNotEqualTo(origin);
     }
 
     @Test
