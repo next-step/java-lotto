@@ -13,4 +13,5 @@ class LottoGeneratorTest {
         assertThat(LottoGenerator.makeLotto().size()).isEqualTo(6);
     }
 
+
 }
