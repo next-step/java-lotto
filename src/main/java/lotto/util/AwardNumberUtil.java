@@ -47,18 +47,10 @@ public final class AwardNumberUtil {
   }
 
   private static int getCount(Set<Integer> winningLotto, int count, int lottoNumber) {
-    for (int winningNumber : winningLotto) {
-      count = numberMatch(lottoNumber, count, winningNumber);
-    }
-    return count;
-  }
-
-  private static int numberMatch(int lottoNumber, int count, int winningNumber) {
-    if (lottoNumber == winningNumber) {
+    if (winningLotto.contains(lottoNumber)) {
       count++;
     }
     return count;
   }
-
 
 }
