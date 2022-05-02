@@ -4,10 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoWinningCondition;
 import lotto.domain.Store;
-import lotto.exception.InvalidCountOfManualLotto;
-import lotto.exception.InvalidLottoLengthException;
-import lotto.exception.InvalidLottoNumberException;
-import lotto.exception.InvalidNegativeNumberException;
+import lotto.exception.*;
 import lotto.util.Utility;
 
 import java.util.ArrayList;
@@ -52,9 +49,15 @@ public class InputView {
     }
 
     public static LottoWinningCondition inputWinningConditionOfLotto() {
-        Lotto previousLotto = inputLottoOfPreviousWeek();
-        LottoNumber bonusNumber = inputBonusNumber();
-        return new LottoWinningCondition(previousLotto, bonusNumber);
+        try {
+            Lotto previousLotto = inputLottoOfPreviousWeek();
+            LottoNumber bonusNumber = inputBonusNumber();
+            return new LottoWinningCondition(previousLotto, bonusNumber);
+        } catch (InvalidBonusNumberException e) {
+            SCANNER.nextLine(); // Delete newLine
+            System.out.println(e.getMessage());
+            return inputWinningConditionOfLotto();
+        }
     }
 
     private static Lotto inputLottoOfPreviousWeek() {
