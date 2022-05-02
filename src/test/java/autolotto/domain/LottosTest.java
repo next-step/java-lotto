@@ -16,8 +16,8 @@ class LottosTest {
     @BeforeEach
     void setUp() {
         lottos = new Lottos();
-        lottos.add(new Lotto(new LottoNumbers(Set.of(1, 2, 3, 4, 5, 6))));
-        lottos.add(new Lotto(new LottoNumbers(Set.of(1, 2, 3, 4, 5, 43))));
+        lottos.add(new LottoNumbers(Set.of(1, 2, 3, 4, 5, 6)));
+        lottos.add(new LottoNumbers(Set.of(1, 2, 3, 4, 5, 43)));
     }
 
     @ParameterizedTest

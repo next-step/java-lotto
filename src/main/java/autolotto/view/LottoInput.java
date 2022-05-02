@@ -17,9 +17,8 @@ public class LottoInput {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("[1-9]|1[0-9]|2[0-9]|3[0-9]|4[0-5]");
     private static final String DELIMITER = ",";
 
-    public int askAmount(String question) {
-        System.out.println(question);
-
+    public int askAmount() {
+        System.out.println(AMOUNT_QUESTION);
         int purchaseAmount = scanner.nextInt();
         scanner.nextLine();
         if (purchaseAmount < 0) {
@@ -29,8 +28,8 @@ public class LottoInput {
         return purchaseAmount;
     }
 
-    public Set<Integer> askWinningNumber(String question) {
-        System.out.println(question);
+    public Set<Integer> askWinningNumber() {
+        System.out.println(WINNING_NUMBER_QUESTION);
         String winningNumberInput = scanner.nextLine();
 
         List<String> splitedNumbers = Arrays.stream(winningNumberInput.split(DELIMITER))
