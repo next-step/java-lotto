@@ -3,6 +3,7 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import static lotto.Const.LOTTERY_PRICE;
 
 public class LotteryController {
     public Money money;
@@ -23,14 +24,14 @@ public class LotteryController {
 
     public LotteryController(int money) {
         this.money = new Money(money);
-        this.numberOfLotteries = this.money.price / 1000;
+        this.numberOfLotteries = this.money.price / LOTTERY_PRICE;
         this.lotteries = new ArrayList<>();
     }
 
     public void scanMoney() {
         String scanned = InputView.scan("Put your money.");
         this.money = new Money(Integer.parseInt(scanned));
-        this.numberOfLotteries = this.money.price / 1000;
+        this.numberOfLotteries = this.money.price / LOTTERY_PRICE;
     }
 
     public int getNumberOfLotteries() {

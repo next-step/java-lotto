@@ -9,11 +9,12 @@ import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
+import static lotto.Const.LOTTERY_PRICE;
+
 public class Money {
     public final int price;
-
     public Money(int price) {
-        if (price < 1000) {
+        if (price < LOTTERY_PRICE) {
             throw new IllegalArgumentException("Please give more than 1000 won. but: " + price);
         }
         this.price = price;
