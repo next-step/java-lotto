@@ -3,11 +3,7 @@ package calculator;
 public class Calculator {
 
     public static int calculate(String input) {
-        if (input == null || input.trim().equals("")) {
-            throw new IllegalArgumentException("Input cannot be null or empty.");
-        }
-
-        String[] tokens = input.split(" ");
+        String[] tokens = parse(input);
 
         int result = Integer.parseInt(tokens[0]);
 
@@ -18,6 +14,14 @@ public class Calculator {
         }
 
         return result;
+    }
+
+    private static String[] parse(String input) {
+        if (input == null || input.trim().equals("")) {
+            throw new IllegalArgumentException("Input cannot be null or empty.");
+        }
+
+        return input.split(" ");
     }
 
     private static int calculate(String operator, int operand1, int operand2) {
