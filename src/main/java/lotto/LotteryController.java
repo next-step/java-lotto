@@ -6,51 +6,33 @@ import java.util.List;
 import static lotto.Const.LOTTERY_PRICE;
 
 public class LotteryController {
-    public Money money;
-    private int numberOfLotteries;
-    public final List<Lottery> lotteries;
-    private List<Integer> answerNumbers;
+    public Wallet wallet;
     public final WinStatistics winStatistics = new WinStatistics();
     private double earningRate;
 
-    public LotteryController() {
-        this.lotteries = new ArrayList<>();
-    }
-
-    public LotteryController(List<Lottery> lotteries, List<Integer> answerNumbers) {
-        this.lotteries = lotteries;
-        this.answerNumbers = answerNumbers;
-    }
-
-    public LotteryController(int money) {
-        this.money = new Money(money);
-        this.numberOfLotteries = this.money.price / LOTTERY_PRICE;
-        this.lotteries = new ArrayList<>();
-    }
+    LotteryController() {}
 
     public void scanMoney() {
         String scanned = InputView.scan("Put your money.");
-        this.money = new Money(Integer.parseInt(scanned));
-        this.numberOfLotteries = this.money.price / LOTTERY_PRICE;
+        attachWallet(new Wallet(Integer.parseInt(scanned)));
+        this.wallet.numberOfLotteries = this.wallet.money / LOTTERY_PRICE;
     }
 
-    public int getNumberOfLotteries() {
-        return this.numberOfLotteries;
+    public void attachWallet(Wallet wallet) {
+        this.wallet = wallet;
     }
 
     public void createLotteries() {
-        for (int i = 0; i < numberOfLotteries; i++) {
-            lotteries.add(new Lottery());
-        }
+        this.wallet.createLotteries();
     }
 
     public void printLotteries() {
-        ResultView.printLotteries(this.lotteries);
+        ResultView.printLotteries(this.wallet.lotteries);
     }
 
     public void scanAnswer() {
         String scanned = InputView.scan("Put lottery answer.");
-        this.answerNumbers = parseAnswerNumbers(scanned);
+        this.wallet.answerNumbers = parseAnswerNumbers(scanned);
     }
 
     public List<Integer> parseAnswerNumbers(String scanned) {
@@ -74,8 +56,8 @@ public class LotteryController {
     }
 
     public void findWins() {
-        for (Lottery lottery : lotteries) {
-            int win = findWin(lottery.numbers, this.answerNumbers);
+        for (Lottery lottery : this.wallet.lotteries) {
+            int win = findWin(lottery.numbers, this.wallet.answerNumbers);
             saveWin(win);
         }
     }
@@ -106,7 +88,7 @@ public class LotteryController {
     }
 
     public void getEarningRate() {
-        this.earningRate = winStatistics.getEarningRate(this.money.price);
+        this.earningRate = winStatistics.getEarningRate(this.wallet.money);
     }
 
     public void printEarningRate() {
@@ -115,7 +97,7 @@ public class LotteryController {
     }
 
     public void printEarned() {
-        String payload = winStatistics.DidEarn(this.money.price) + " (More than 1.0 means 'Earned')";
+        String payload = winStatistics.DidEarn(this.wallet.money) + " (More than 1.0 means 'Earned')";
         ResultView.print(payload);
     }
 }
