@@ -23,8 +23,8 @@ public class LottoService {
   public List<WinningResultDto> histories(List<Lotto> lotteryTickets, Lotto winLotto) {
     List<WinningResultDto> histories = new ArrayList<>();
     for (Lotto lotto : lotteryTickets) {
-      histories.add(new WinningResultDto(
-          Grade.valueOf(Reward.matchCount(lotto.numbers(), winLotto.numbers()), false)));
+      lotto = lotto.reflectLottoGrade(Reward.matchCount(lotto.numbers(), winLotto.numbers()),false);
+      histories.add(new WinningResultDto(lotto.currentGrade()));
     }
     return histories;
   }

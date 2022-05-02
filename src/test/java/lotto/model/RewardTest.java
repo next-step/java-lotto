@@ -14,7 +14,7 @@ class RewardTest {
   @Test
   @DisplayName("당첨 번호가 몇개 일치 하는지 확인")
   void awardCount() {
-    assertThat(Reward.matchCount(List.of(1, 2, 3, 4, 5, 6), List.of(1, 2, 3, 9, 10, 20)))
+    assertThat(Reward.matchCount(Set.of(1, 2, 3, 4, 5, 6), Set.of(1, 2, 3, 9, 10, 20)))
         .isEqualTo(3);
   }
 

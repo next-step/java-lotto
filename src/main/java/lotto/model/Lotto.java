@@ -11,10 +11,17 @@ import lotto.exception.LottoLengthException;
 public final class Lotto {
 
   private static final int DEFAULT_LOTTO_SIZE = 6;
+
+  private final Grade grade;
   private final Set<LottoNumber> lottoNumbers;
 
   public Lotto(Set<Integer> lottoNumbers) {
+    this(lottoNumbers, Grade.NONE);
+  }
+
+  public Lotto(Set<Integer> lottoNumbers, Grade grade) {
     valid(lottoNumbers);
+    this.grade = grade;
     this.lottoNumbers = lottoNumbers
         .stream().map(LottoNumber::new)
         .collect(Collectors.toSet());
@@ -30,37 +37,18 @@ public final class Lotto {
     }
   }
 
-  public int coincideLotto(Grade grade, List<Lotto> allLotteryTickets) {
-    int result = 0;
-    for (Lotto lotto : allLotteryTickets) {
-      result += increaseProductNumber(grade.getExpectNumber(), lotto).getIncreaseValue();
-    }
-    return result;
+  public Lotto reflectLottoGrade(int matchCount, boolean matchBonus) {
+    return new Lotto(numbers(), Grade.valueOf(matchCount, matchBonus));
   }
 
-  private ChoiceType increaseProductNumber(int expect, Lotto lotto) {
-    int count = 0;
-    for (LottoNumber winNumber : lotto.lottoNumbers) {
-      count += containsWinnerNumber(
-          Integer.parseInt(winNumber.toString())).getIncreaseValue();
-    }
-    if (expect == count) {
-      return ChoiceType.GUESSED;
-    }
-    return ChoiceType.WRONG;
-  }
-
-  private ChoiceType containsWinnerNumber(Integer winNumber) {
-    if (this.lottoNumbers.contains(new LottoNumber(winNumber))) {
-      return ChoiceType.GUESSED;
-    }
-    return ChoiceType.WRONG;
-  }
-
-  public List<Integer> numbers() {
+  public Set<Integer> numbers() {
     return lottoNumbers.stream()
         .map(LottoNumber::currentNumber)
-        .collect(Collectors.toList());
+        .collect(Collectors.toSet());
+  }
+
+  public Grade currentGrade() {
+    return this.grade;
   }
 
   @Override

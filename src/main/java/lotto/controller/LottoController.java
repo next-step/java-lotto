@@ -1,7 +1,9 @@
 package lotto.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.dto.WinningResultDto;
+import lotto.enums.Grade;
 import lotto.model.Guest;
 import lotto.model.Lotto;
 import lotto.model.Store;
@@ -33,7 +35,10 @@ public class LottoController {
   }
 
   private List<WinningResultDto> histories(List<Lotto> lottoProducts, Lotto winnerLotto) {
-    return lottoService.histories(lottoProducts, winnerLotto);
+    return lottoService.histories(lottoProducts, winnerLotto)
+        .stream()
+        .filter(grade -> grade.getGrade() != Grade.NONE)
+        .collect(Collectors.toList());
   }
 
 

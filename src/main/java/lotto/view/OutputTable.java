@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.List;
 import lotto.dto.WinningResultDto;
+import lotto.enums.Grade;
 import lotto.model.Lotto;
 
 public final class OutputTable {
