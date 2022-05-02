@@ -35,4 +35,18 @@ class LottosTest {
     // then
     assertThat(matchResult).isEqualTo(3);
   }
+
+  @Test
+  @DisplayName("구매한 로또 전체와 우승 로또번호를 비교 결과에 따른 수익률 계산하기")
+  void calculateReturnProfitRatioWinningLottoAndComparisonResult() {
+    // given
+    Lottos lottos = Lottos.create(3, new FixedNumberGenerateStrategy());
+    WinningLotto winningLotto = WinningLotto.create("1, 2, 3, 4, 5, 6");
+
+    // when
+    double rewordResult = lottos.calculateProfitRatio(winningLotto);
+
+    // then
+    assertThat(rewordResult).isEqualTo(2000000.0);
+  }
 }
