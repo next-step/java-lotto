@@ -23,7 +23,7 @@ public final class Store {
   }
 
   private Lotto deliverLotto(List<Integer> init) {
-    return LottoFactory.getInstance().apply(init);
+    return LottoFactory.getInstance(init).apply();
   }
 
 }
