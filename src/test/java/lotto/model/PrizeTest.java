@@ -29,9 +29,9 @@ class PrizeTest {
     }
 
     @Test
-    @DisplayName("Prize 객체 생성")
+    @DisplayName("Prize 객체 생성 - 랭킹 별 카운드 사이즈")
     void create() {
-        assertThat(Prize.counting().apply(Lotto.draw(), Collections.emptyList()).getCountByRank()).hasSize(0);
+        assertThat(Prize.counting(Lotto.draw(), Collections.emptyList()).getCountByRank()).hasSize(7);
     }
 
     @Test
@@ -45,7 +45,7 @@ class PrizeTest {
 
         List<Lotto> lottoList = List.of(fourth, third, second, first);
 
-        Prize prize = Prize.counting().apply(beforeLotto, lottoList);
+        Prize prize = Prize.counting(beforeLotto, lottoList);
 
         assertAll(() -> assertThat(prize.getCountByRank()).containsKeys(this.numberMap.get(3), this.numberMap.get(4), this.numberMap.get(5), this.numberMap.get(6)).containsValue(this.numberMap.get(1)),
                 () -> assertThat(prize.getWinningRate()).isEqualTo(500388.75));
@@ -68,8 +68,8 @@ class PrizeTest {
                 .limit(6)
                 .collect(Collectors.toList());
 
-        Prize prize = Prize.counting().apply(beforeLotto, lottoList);
-        
+        Prize prize = Prize.counting(beforeLotto, lottoList);
+
         assertAll(() -> assertThat(prize.getCountByRank()).containsKey(this.numberMap.get(rank)).containsValue(this.numberMap.get(6)));
     }
 }
