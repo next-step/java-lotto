@@ -1,6 +1,6 @@
-package step2.impl;
+package step2.domain.impl;
 
-import step2.PurchaseStrategy;
+import step2.domain.PurchaseStrategy;
 
 import java.util.*;
 
