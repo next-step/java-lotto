@@ -7,7 +7,6 @@ import lotto.enums.Grade;
 import lotto.model.Guest;
 import lotto.model.LotteryNoteCounter;
 import lotto.model.Lotto;
-import lotto.model.Reward;
 import lotto.model.Store;
 import lotto.util.AwardNumberUtil;
 
