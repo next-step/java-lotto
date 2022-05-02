@@ -3,7 +3,9 @@ package lotto.view;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import lotto.domain.LottoGame;
+import lotto.exception.InvalidPurchaseAmountException;
 import lotto.exception.UserInputFailException;
+import org.omg.CORBA.DynAnyPackage.Invalid;
 
 public class LottoGameInputView {
 
@@ -69,6 +71,9 @@ public class LottoGameInputView {
 
   private void inputPurchaseAmount() {
     purchaseAmount = scanner.nextInt() / LottoGame.GAME_PRICE;
+    if(purchaseAmount == 0){
+      throw new InvalidPurchaseAmountException();
+    }
     scanner.nextLine();
   }
 
