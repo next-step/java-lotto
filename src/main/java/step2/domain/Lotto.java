@@ -26,6 +26,10 @@ public class Lotto {
         }
     }
 
+    public List<LottoNumber> getValues() {
+        return values;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

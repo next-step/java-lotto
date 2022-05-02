@@ -21,4 +21,8 @@ public class PurchaseList {
             values.add(new Lotto(AUTO_PURCHASE));
         }
     }
+
+    public List<Lotto> getValues() {
+        return this.values;
+    }
 }
