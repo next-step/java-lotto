@@ -3,8 +3,6 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Map;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class RankTest {
@@ -21,11 +19,4 @@ class RankTest {
         assertThat(Rank.getRank(0)).isEqualTo(Rank.LOSE);
     }
 
-    @Test
-    @DisplayName("꽝을 뺀 초기 맵 생성")
-    void createInitialMapExceptLose() {
-        Map<Rank, Integer> resultRankMap = Rank.getResultRankMap();
-        assertThat(resultRankMap).containsKeys(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH)
-                .doesNotContainKey(Rank.LOSE);
-    }
 }

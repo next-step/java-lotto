@@ -1,8 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 public enum Rank {
 
@@ -35,11 +33,4 @@ public enum Rank {
                 .orElse(LOSE);
     }
 
-    public static Map<Rank, Integer> getResultRankMap() {
-        Map<Rank, Integer> resultRankMap = new LinkedHashMap<>();
-        Arrays.stream(values())
-                .filter(r -> !r.equals(Rank.LOSE))
-                .forEach(r -> resultRankMap.put(r, 0));
-        return resultRankMap;
-    }
 }
