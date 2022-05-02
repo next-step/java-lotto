@@ -42,7 +42,7 @@ public class LottoService {
   public Long allAddReward(List<WinningResultDto> histories) {
     long result = 0L;
     for (WinningResultDto history : histories) {
-      result += (history.getGrade().getAwardPrice() * 100);
+      result += (history.getGrade().getAwardPrice() * history.getCount());
     }
     return result;
   }
