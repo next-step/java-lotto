@@ -39,14 +39,18 @@ public class Lottos {
   }
 
   public double calculateProfitRatio(WinningLotto winningLotto) {
-    double profitRatio = lottos.stream()
+    return calculateTotalRewardAmountByRanking(winningLotto) / calculatePurchasedAmount();
+  }
+
+  private double calculateTotalRewardAmountByRanking(WinningLotto winningLotto) {
+    return lottos.stream()
         .map(lotto -> matchLottoRank(winningLotto, lotto))
         .mapToDouble(LottoRank::getReward)
         .sum();
+  }
 
-    int purchasedAmount = lottos.size() * Lotto.PRICE_OF_ONE_LOTTO;
-
-    return profitRatio / purchasedAmount;
+  private int calculatePurchasedAmount() {
+    return lottos.size() * Lotto.PRICE_OF_ONE_LOTTO;
   }
 
   @Override
