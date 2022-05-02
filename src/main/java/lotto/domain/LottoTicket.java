@@ -5,13 +5,14 @@ import java.util.List;
 import java.util.Set;
 
 public class LottoTicket {
-    private final int LOTTO_NUMBER_COUNT = 6;
-    private final List<LottoNumber> LottoTicket;
+    private static final int LOTTO_NUMBER_COUNT = 6;
+
+    private final List<LottoNumber> lottoTicket;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
         validateLottoSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
-        this.LottoTicket = lottoNumbers;
+        this.lottoTicket = lottoNumbers;
     }
 
     private void validateLottoSize(List<LottoNumber> lottoNumbers) {
