@@ -6,7 +6,7 @@ public class TimesOperator implements Operator {
   }
 
   @Override
-  public int calculate(int op1, int op2) {
-    return op1 * op2;
+  public Operand calculate(Operand op1, Operand op2) {
+    return op1.times(op2);
   }
 }

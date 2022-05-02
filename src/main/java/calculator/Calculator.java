@@ -34,22 +34,22 @@ public class Calculator {
     return operators;
   }
 
-  private static List<Integer> getOperands(String[] inputs) {
-    List<Integer> operands = new ArrayList<>();
+  private static List<Operand> getOperands(String[] inputs) {
+    List<Operand> operands = new ArrayList<>();
     for (String input : inputs) {
       if (NUMERIC_PATTERN.matcher(input).matches()) {
-        operands.add(Integer.parseInt(input));
+        operands.add(Operand.valueOf(input));
       }
     }
     return operands;
   }
 
-  private static int calculate(List<Operator> operators, Iterator<Integer> operands) {
-    int result = operands.next();
+  private static int calculate(List<Operator> operators, Iterator<Operand> operands) {
+    Operand result = operands.next();
     for (Operator operator : operators) {
       result = operator.calculate(result, operands.next());
     }
-    return result;
+    return result.getValue();
   }
 
 }
