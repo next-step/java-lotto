@@ -17,14 +17,14 @@ class SplitterTest {
   @DisplayName("기본 구분자가 없는 문자열을 값을 그대로 반환한다")
   @Test
   void withoutDelim() {
-    assertThat(Splitter.from("1")).containsExactly("1");
+    assertThat(Splitter.split("1")).containsExactly("1");
   }
 
   @DisplayName("기본 구분자로 나누어진 문자 리스트를 반환한다")
   @ParameterizedTest
   @MethodSource("withDelimProvider")
   void withDelim(String input, String... expected) {
-    assertThat(Splitter.from(input)).containsExactly(expected);
+    assertThat(Splitter.split(input)).containsExactly(expected);
   }
 
   static Stream<Arguments> withDelimProvider() {
@@ -38,7 +38,7 @@ class SplitterTest {
   @ParameterizedTest
   @NullAndEmptySource
   void exception(String input) {
-    assertThatIllegalArgumentException().isThrownBy(() -> Splitter.from(input))
+    assertThatIllegalArgumentException().isThrownBy(() -> Splitter.split(input))
         .withMessage("나누려는 문자열을 입력하세요");
   }
 }

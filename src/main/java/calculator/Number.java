@@ -9,7 +9,7 @@ public final class Number {
   private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d");
   private final int number;
 
-  public static Number from(String value) {
+  public static Number createNumber(String value) {
     validateInputValue(value);
     validateNumberFormat(value);
     return new Number(Integer.parseInt(value));

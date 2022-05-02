@@ -19,12 +19,12 @@ public class StringCalculator {
       throw new IllegalArgumentException(EMPTY_EQUATION_MESSAGE);
     }
 
-    List<String> strings = Splitter.from(s);
-    Number result = Number.from(strings.get(0));
+    List<String> strings = Splitter.split(s);
+    Number result = Number.createNumber(strings.get(0));
     int size = strings.size();
     for (int i = 1; i < size - 1; i = i + 2) {
       String operator = strings.get(i);
-      Number current = Number.from(strings.get(i + 1));
+      Number current = Number.createNumber(strings.get(i + 1));
       result = calculate(operator, result, current);
     }
     return result;

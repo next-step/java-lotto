@@ -21,42 +21,43 @@ class NumberTest {
   @ParameterizedTest
   @ValueSource(strings = {"-1", "0", "1"})
   void number(String value) {
-    assertThatNoException().isThrownBy(() -> Number.from(value));
+    assertThatNoException().isThrownBy(() -> Number.createNumber(value));
   }
 
   @DisplayName("문자 형태의 숫자를 전달받아 숫자 객체를 생성한다")
   @ParameterizedTest
   @CsvSource(value = {"-100:-100", "0:0", "100:100"}, delimiter = ':')
   void numberValue(String value, Integer expected) {
-    assertThat(Number.from(value).number()).isEqualTo(expected);
+    assertThat(Number.createNumber(value).number()).isEqualTo(expected);
   }
 
   @DisplayName("숫자 객체의 값을 반환한다")
   @ParameterizedTest
   @CsvSource(value = {"-1:-1", "0:0", "1:1"}, delimiter = ':')
   void value(String value, Integer expected) {
-    assertThat(Number.from(value).number()).isEqualTo(expected);
+    assertThat(Number.createNumber(value).number()).isEqualTo(expected);
   }
 
   @DisplayName("숫자형식이 아니면 NumberFormat 예외를 던진다")
   @ParameterizedTest
   @ValueSource(strings = {"👍", "ab"})
   void constructorThrowsNumberFormatException(String input) {
-    assertThatExceptionOfType(NumberFormatException.class).isThrownBy(() -> Number.from(input));
+    assertThatExceptionOfType(NumberFormatException.class).isThrownBy(
+        () -> Number.createNumber(input));
   }
 
   @DisplayName("null 또는 빈 문자열은 IllegalArgument 예외를 던진다")
   @ParameterizedTest
   @NullAndEmptySource
   void constructorThrowsIllegalArgumentException(String input) {
-    assertThatIllegalArgumentException().isThrownBy(() -> Number.from(input));
+    assertThatIllegalArgumentException().isThrownBy(() -> Number.createNumber(input));
   }
 
   @Test
   @DisplayName("숫자 객체를 0으로 나누는 경우 Arithmetic 예외를 던진다")
   void dividedByZero() {
-    Number one = Number.from("1");
-    Number zero = Number.from("0");
+    Number one = Number.createNumber("1");
+    Number zero = Number.createNumber("0");
     assertThatExceptionOfType(ArithmeticException.class).isThrownBy(() -> one.divide(zero));
   }
 
@@ -68,10 +69,13 @@ class NumberTest {
   }
 
   private static Stream<Arguments> provideStringsForDivide() {
-    return Stream.of(Arguments.of(Number.from("1"), Number.from("1"), Number.from("1")),
-        Arguments.of(Number.from("1"), Number.from("-1"), Number.from("-1")),
-        Arguments.of(Number.from("-1"), Number.from("2"), Number.from("0")),
-        Arguments.of(Number.from("-1"), Number.from("-1"), Number.from("1")));
+    return Stream.of(
+        Arguments.of(Number.createNumber("1"), Number.createNumber("1"), Number.createNumber("1")),
+        Arguments.of(Number.createNumber("1"), Number.createNumber("-1"),
+            Number.createNumber("-1")),
+        Arguments.of(Number.createNumber("-1"), Number.createNumber("2"), Number.createNumber("0")),
+        Arguments.of(Number.createNumber("-1"), Number.createNumber("-1"),
+            Number.createNumber("1")));
   }
 
   @DisplayName("덧셈")
@@ -82,10 +86,12 @@ class NumberTest {
   }
 
   private static Stream<Arguments> provideStringsForAdd() {
-    return Stream.of(Arguments.of(Number.from("1"), Number.from("1"), Number.from("2")),
-        Arguments.of(Number.from("1"), Number.from("-1"), Number.from("0")),
-        Arguments.of(Number.from("-1"), Number.from("2"), Number.from("1")),
-        Arguments.of(Number.from("-1"), Number.from("-1"), Number.from("-2")));
+    return Stream.of(
+        Arguments.of(Number.createNumber("1"), Number.createNumber("1"), Number.createNumber("2")),
+        Arguments.of(Number.createNumber("1"), Number.createNumber("-1"), Number.createNumber("0")),
+        Arguments.of(Number.createNumber("-1"), Number.createNumber("2"), Number.createNumber("1")),
+        Arguments.of(Number.createNumber("-1"), Number.createNumber("-1"),
+            Number.createNumber("-2")));
   }
 
   @DisplayName("뺄셈")
@@ -96,10 +102,13 @@ class NumberTest {
   }
 
   private static Stream<Arguments> provideStringsForSubtract() {
-    return Stream.of(Arguments.of(Number.from("1"), Number.from("1"), Number.from("0")),
-        Arguments.of(Number.from("1"), Number.from("0"), Number.from("1")),
-        Arguments.of(Number.from("-1"), Number.from("2"), Number.from("-3")),
-        Arguments.of(Number.from("-1"), Number.from("-1"), Number.from("0")));
+    return Stream.of(
+        Arguments.of(Number.createNumber("1"), Number.createNumber("1"), Number.createNumber("0")),
+        Arguments.of(Number.createNumber("1"), Number.createNumber("0"), Number.createNumber("1")),
+        Arguments.of(Number.createNumber("-1"), Number.createNumber("2"),
+            Number.createNumber("-3")),
+        Arguments.of(Number.createNumber("-1"), Number.createNumber("-1"),
+            Number.createNumber("0")));
   }
 
   @DisplayName("곱셈")
@@ -110,9 +119,12 @@ class NumberTest {
   }
 
   private static Stream<Arguments> provideStringsForMultiply() {
-    return Stream.of(Arguments.of(Number.from("1"), Number.from("2"), Number.from("2")),
-        Arguments.of(Number.from("1"), Number.from("0"), Number.from("0")),
-        Arguments.of(Number.from("-1"), Number.from("2"), Number.from("-2")),
-        Arguments.of(Number.from("-1"), Number.from("-1"), Number.from("1")));
+    return Stream.of(
+        Arguments.of(Number.createNumber("1"), Number.createNumber("2"), Number.createNumber("2")),
+        Arguments.of(Number.createNumber("1"), Number.createNumber("0"), Number.createNumber("0")),
+        Arguments.of(Number.createNumber("-1"), Number.createNumber("2"),
+            Number.createNumber("-2")),
+        Arguments.of(Number.createNumber("-1"), Number.createNumber("-1"),
+            Number.createNumber("1")));
   }
 }
