@@ -1,13 +1,28 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class LottoTicket {
     private static final int LOTTO_NUMBER_COUNT = 6;
+    private static final String DELIMITER = ", ";
 
     private final List<LottoNumber> lottoTicket;
+
+    public LottoTicket(String lottoNumbers) {
+        this(toLottoNumberList(lottoNumbers));
+    }
+
+    private static List<LottoNumber> toLottoNumberList(String stringLottoNumbers) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+
+        for (String lottoNumber : stringLottoNumbers.split(DELIMITER)) {
+            lottoNumbers.add(new LottoNumber(lottoNumber));
+        }
+        return lottoNumbers;
+    }
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
         validateLottoSize(lottoNumbers);
