@@ -24,7 +24,7 @@ public class Lottery {
         Set<Integer> winningNumbers = lottoInput.askWinningNumber();
         int bonusBall = lottoInput.askBonusBall(winningNumbers);
 
-        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(winningNumbers));
+        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(winningNumbers), bonusBall);
 
         Results results = lottos.confirm(winningLotto);
 
