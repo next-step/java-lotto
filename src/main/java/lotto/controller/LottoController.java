@@ -23,8 +23,8 @@ public class LottoController {
   public void run() {
     OutputTable.inputPurchaseAmount();
     long haveMoney = InputTable.inputHaveMoney();
-    List<Lotto> lottoProducts = visit(new Guest(haveMoney), new Store(),
-        AwardNumberUtil.init()).hasAllLotto();
+    List<Lotto> lottoProducts = visit(new Guest(haveMoney),
+        new Store(AwardNumberUtil.init())).hasAllLotto();
     OutputTable.buyThings(lottoProducts.size());
     OutputTable.printProductInfos(lottoProducts);
     OutputTable.lastWeekAwardNumber();
@@ -45,8 +45,8 @@ public class LottoController {
   }
 
 
-  public Guest visit(Guest guest, Store store, List<Integer> init) {
-    return lottoService.visit(guest, store, init);
+  public Guest visit(Guest guest, Store store) {
+    return lottoService.visit(guest, store);
   }
 
   public Lotto insertWinnerNumber(String winnerNumber) {

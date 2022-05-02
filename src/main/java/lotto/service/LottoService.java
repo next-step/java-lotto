@@ -12,8 +12,8 @@ import lotto.util.AwardNumberUtil;
 
 public class LottoService {
 
-  public Guest visit(Guest guest, Store store, List<Integer> init) {
-    return guest.choiceProduct(store, init);
+  public Guest visit(Guest guest, Store store) {
+    return guest.choiceProduct(store);
   }
 
   public Lotto insertWinnerNumber(String winnerNumber) {

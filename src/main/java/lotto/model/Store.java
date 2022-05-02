@@ -7,10 +7,13 @@ public final class Store {
 
   private static final long PRODUCT_PRICE = 1_000L;
 
-  public Store() {
+  List<Integer> init;
+
+  public Store(List<Integer> init) {
+    this.init = init;
   }
 
-  public List<Lotto> delivery(long money, List<Integer> init) {
+  public List<Lotto> delivery(long money) {
     long count = money / PRODUCT_PRICE;
     List<Lotto> lotteryTickets = new ArrayList<>();
     while (count-- != 0) {
@@ -19,8 +22,8 @@ public final class Store {
     return lotteryTickets;
   }
 
-  private Lotto deliverLotto(List<Integer> lottoFullValue) {
-    return LottoFactory.getInstance().apply(lottoFullValue);
+  private Lotto deliverLotto(List<Integer> init) {
+    return LottoFactory.getInstance().apply(init);
   }
 
 }
