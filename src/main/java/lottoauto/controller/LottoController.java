@@ -1,5 +1,6 @@
 package lottoauto.controller;
 
+import lottoauto.domain.Lotto;
 import lottoauto.domain.LottoReport;
 import lottoauto.service.LottoGame;
 import lottoauto.view.InputView;
@@ -44,7 +45,7 @@ public class LottoController {
         LottoGame lottoGame = new LottoGame(InputView.askLottoMoney());
         lottoGame.buyLotto();
 
-        lottoGame.checkWinningLotto(InputView.askWinningLotto());
+        lottoGame.checkWinningLotto(new Lotto(InputView.askWinningLotto(), InputView.askWinningBonusNumber()));
 
         lottoGame.start();
 

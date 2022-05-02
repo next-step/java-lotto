@@ -1,5 +1,6 @@
 package lottoauto.service;
 
+import lottoauto.domain.Lotto;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -27,7 +28,7 @@ class LottoGameTest {
     @Test
     void lotto_generate_test(){
         lottoGame = new LottoGame(17600);
-        lottoGame.checkWinningLotto(List.of(1,2,3,4,5,6));
+        lottoGame.checkWinningLotto(new Lotto(List.of(1,2,3,4,5,6), 7));
         lottoGame.buyLotto();
         assertThat(lottoGame.all().size()).isEqualTo(17);
     }

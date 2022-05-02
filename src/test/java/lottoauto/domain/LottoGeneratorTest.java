@@ -10,7 +10,7 @@ class LottoGeneratorTest {
 
     @Test
     void lotto_valid_test(){
-        assertThat(LottoGenerator.makeLotto().size()).isEqualTo(6);
+        assertThat(LottoGenerator.makeLotto().getClass().getName()).isEqualTo(Lotto.class.getName());
     }
 
 }

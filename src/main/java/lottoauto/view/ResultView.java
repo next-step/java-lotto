@@ -1,16 +1,16 @@
 package lottoauto.view;
 
 import lottoauto.domain.LottoReport;
-import lottoauto.service.LottoGame;
 
 public class ResultView {
     public static void printLottoGameResult(LottoReport lottoReport){
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원)- " + lottoReport.getMatchThreeCount() + "개");
-        System.out.println("4개 일치 (50000원)- " + lottoReport.getMatchFourCount() + "개");
-        System.out.println("5개 일치 (1500000원)- " + lottoReport.getMatchFiveCount() + "개");
-        System.out.println("6개 일치 (2000000000원)- " + lottoReport.getMatchSixCount() + "개");
+        System.out.println("3개 일치 (5000원)- " + lottoReport.getFifthWinningCount() + "개");
+        System.out.println("4개 일치 (50000원)- " + lottoReport.getFourthWinningCount() + "개");
+        System.out.println("5개 일치 (1500000원)- " + lottoReport.getThirdWinningCount() + "개");
+        System.out.println("5개 일치 보너스 볼 일치(30000000원) - " + lottoReport.getSecondWinningCount() + "개");
+        System.out.println("6개 일치 (2000000000원)- " + lottoReport.getFirstWinningCount() + "개");
     }
 
     public static void printLottoGameProfitRate(LottoReport lottoReport) {
