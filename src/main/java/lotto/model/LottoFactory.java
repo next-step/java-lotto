@@ -3,9 +3,6 @@ package lotto.model;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
-import java.util.Set;
-import lotto.util.AwardNumberUtil;
 
 public final class LottoFactory {
   private static final int LOTTO_MAX_COUNT = 6;
