@@ -59,7 +59,7 @@ public class LottoGameOutputView {
 
   private static void printGameResult(int matchCount, LottoDrawResults result) {
     if (matchCount == MATCH_COUNT_PRINT_BONUS) {
-      printGameResultWithBouns(MATCH_COUNT_PRINT_BONUS, result);
+      printGameResultWithBonus(MATCH_COUNT_PRINT_BONUS, result);
       return;
     }
     printGameResultMessage(matchCount, result);
@@ -70,7 +70,7 @@ public class LottoGameOutputView {
         result.getValues().size());
   }
 
-  private static void printGameResultWithBouns(int matchCount, LottoDrawResults result) {
+  private static void printGameResultWithBonus(int matchCount, LottoDrawResults result) {
     printGameResultMessage(matchCount, result.filterBonusBall(false));
     printGameResultMessageWithBonus(matchCount, result.filterBonusBall(true));
   }
