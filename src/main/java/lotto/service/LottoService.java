@@ -5,6 +5,7 @@ import java.util.List;
 import lotto.dto.WinningResultDto;
 import lotto.enums.Grade;
 import lotto.model.Guest;
+import lotto.model.LotteryNoteCounter;
 import lotto.model.Lotto;
 import lotto.model.Reward;
 import lotto.model.Store;
@@ -20,11 +21,20 @@ public class LottoService {
     return Lotto.from(AwardNumberUtil.getAwadNumberList(winnerNumber));
   }
 
-  public List<WinningResultDto> histories(List<Lotto> lotteryTickets, Lotto winLotto) {
-    List<WinningResultDto> histories = new ArrayList<>();
+  public List<Lotto> allLotteryTickets(List<Lotto> lotteryTickets, Lotto winLotto) {
+    List<Lotto> LotteryTickets = new ArrayList<>();
     for (Lotto lotto : lotteryTickets) {
-      lotto = lotto.reflectLottoGrade(Reward.matchCount(lotto.numbers(), winLotto.numbers()),false);
-      histories.add(new WinningResultDto(lotto.currentGrade()));
+      LotteryTickets.add(
+          lotto.reflectLottoGrade(Reward.matchCount(lotto.numbers(), winLotto.numbers()), false));
+    }
+    return LotteryTickets;
+  }
+
+  public List<WinningResultDto> histories(List<Lotto> lotteryTickets) {
+    List<WinningResultDto> histories = new ArrayList<>();
+    LotteryNoteCounter lotteryNoteCount = new LotteryNoteCounter(lotteryTickets);
+    for (Grade grade : Grade.values()) {
+      histories.add(new WinningResultDto(grade, lotteryNoteCount.lotteryCount(grade)));
     }
     return histories;
   }

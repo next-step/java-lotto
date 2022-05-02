@@ -30,12 +30,13 @@ public class LottoController {
     OutputTable.resultStatisticsMessage();
     List<WinningResultDto> histories = histories(lottoProducts, winnerLotto);
     OutputTable.resultStatistics(histories);
-//    double percent = yieldCalculate(haveMoney, allAddReward(histories));
-//    OutputTable.printYield(percent, isStandard(percent));
+    double percent = yieldCalculate(haveMoney, allAddReward(histories));
+    OutputTable.printYield(percent, isStandard(percent));
   }
 
   private List<WinningResultDto> histories(List<Lotto> lottoProducts, Lotto winnerLotto) {
-    return lottoService.histories(lottoProducts, winnerLotto)
+    List<Lotto> lotteryTickets = lottoService.allLotteryTickets(lottoProducts, winnerLotto);
+    return lottoService.histories(lotteryTickets)
         .stream()
         .filter(grade -> grade.getGrade() != Grade.NONE)
         .collect(Collectors.toList());
