@@ -20,12 +20,12 @@ public class LottoService {
     return Lotto.from(AwardNumberUtil.getAwadNumberList(winnerNumber));
   }
 
-  public List<Lotto> allLotteryTickets(List<Lotto> lotteryTickets, Lotto winLotto) {
+  public List<Lotto> allLotteryTickets(List<Lotto> lotteryTickets, Lotto winLotto, int bonus) {
     List<Lotto> LotteryTickets = new ArrayList<>();
     for (Lotto lotto : lotteryTickets) {
       LotteryTickets.add(
           lotto.reflectLottoGrade(AwardNumberUtil.matchCount(lotto.numbers(), winLotto.numbers()),
-              false));
+              AwardNumberUtil.getBonusCheck(lotto.numbers(), bonus)));
     }
     return LotteryTickets;
   }
@@ -49,5 +49,9 @@ public class LottoService {
 
   public double yieldCalculate(Long money, Long reward) {
     return (double) reward / money;
+  }
+
+  public Integer insertBonusNumber(int bonus) {
+    return bonus;
   }
 }

@@ -16,4 +16,8 @@ public final class InputTable {
   public static String inputAwardNumber() {
     return SCANNER.nextLine();
   }
+
+  public static Integer inputBonusNumber() {
+    return Integer.parseInt(SCANNER.nextLine());
+  }
 }

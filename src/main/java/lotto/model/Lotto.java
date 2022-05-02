@@ -36,6 +36,9 @@ public final class Lotto {
   }
 
   public Lotto reflectLottoGrade(int matchCount, boolean matchBonus) {
+    if (matchBonus) {
+      matchCount++;
+    }
     return new Lotto(numbers(), Grade.valueOf(matchCount, matchBonus));
   }
 

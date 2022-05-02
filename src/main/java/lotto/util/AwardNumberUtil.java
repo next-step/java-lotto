@@ -29,7 +29,7 @@ public final class AwardNumberUtil {
   public static int matchCount(Set<Integer> lotteryTicket, Set<Integer> winningLotto) {
     int count = 0;
     for (int lottoNumber : lotteryTicket) {
-      count = getCount(winningLotto, count, lottoNumber);
+      count = lottoMatchCount(winningLotto, count, lottoNumber);
     }
     return count;
   }
@@ -42,15 +42,19 @@ public final class AwardNumberUtil {
     return lottoNumbers;
   }
 
-  private static String[] split(String string) {
-    return string.split(DELIMITER);
+  public static boolean getBonusCheck(Set<Integer> winningLotto, int lottoNumber) {
+    return winningLotto.contains(lottoNumber);
   }
 
-  private static int getCount(Set<Integer> winningLotto, int count, int lottoNumber) {
+  private static int lottoMatchCount(Set<Integer> winningLotto, int count, int lottoNumber) {
     if (winningLotto.contains(lottoNumber)) {
       count++;
     }
     return count;
+  }
+
+  private static String[] split(String string) {
+    return string.split(DELIMITER);
   }
 
 }

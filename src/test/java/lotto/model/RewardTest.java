@@ -18,5 +18,12 @@ class RewardTest {
     assertThat(AwardNumberUtil.matchCount(Set.of(1, 2, 3, 4, 5, 6), Set.of(1, 2, 3, 9, 10, 20)))
         .isEqualTo(3);
   }
+  @Test
+  @DisplayName("보너스 당첨번호 유무를 확인")
+  void awardBonus() {
+    assertThat(AwardNumberUtil.getBonusCheck(Set.of(1, 2, 3, 4, 5, 6), 6))
+        .isEqualTo(true);
+  }
+
 
 }
