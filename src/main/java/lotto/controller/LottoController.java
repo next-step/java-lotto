@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.model.Lotto;
-import lotto.model.LottoNumberComparsion;
+import lotto.model.LottoNumberComparison;
 import lotto.model.Lottos;
 import lotto.model.WinningLotto;
 import lotto.strategy.NumberGenerateStrategy;
@@ -20,7 +20,7 @@ public class LottoController {
 
     WinningLotto winningLotto = WinningLotto.create(InputView.inputLastWeekWinningLotto());
 
-    LottoNumberComparsion lottoNumberComparsion = new LottoNumberComparsion(lottos, winningLotto);
+    LottoNumberComparison lottoNumberComparsion = new LottoNumberComparison(lottos, winningLotto);
     OutputView.outputWinningRate(lottoNumberComparsion.getMatchResult());
     OutputView.outputProfitRatio(lottoNumberComparsion.getProfitRatio());
   }

@@ -5,21 +5,21 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class LottoNumberComparsion {
+public class LottoNumberComparison {
 
   private final Lottos lottos;
   private final WinningLotto winningLotto;
   private final Map<LottoRank, Integer> matchResult;
   private final double profitRatio;
 
-  public LottoNumberComparsion(Lottos lottos, WinningLotto winningLotto) {
+  public LottoNumberComparison(Lottos lottos, WinningLotto winningLotto) {
     this.lottos = lottos;
     this.winningLotto = winningLotto;
     this.matchResult = matchLottoRankResult();
     this.profitRatio = calculateProfitRatio();
   }
 
-  public Map<LottoRank, Integer> matchLottoRankResult() {
+  private Map<LottoRank, Integer> matchLottoRankResult() {
     return Arrays.stream(LottoRank.values())
         .collect(Collectors.toMap(Function.identity(), this::matchLottoRank));
   }

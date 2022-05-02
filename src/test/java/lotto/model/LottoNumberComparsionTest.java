@@ -17,7 +17,7 @@ class LottoNumberComparsionTest {
     WinningLotto winningLotto = WinningLotto.create("1, 2, 3, 4, 5, 6");
 
     // when
-    LottoNumberComparsion lottoNumberComparsion = new LottoNumberComparsion(lottos, winningLotto);
+    LottoNumberComparison lottoNumberComparsion = new LottoNumberComparison(lottos, winningLotto);
     Map<LottoRank, Integer> matchResult = lottoNumberComparsion.getMatchResult();
 
     // then
