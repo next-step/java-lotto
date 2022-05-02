@@ -62,7 +62,6 @@ public class LottoGame {
         return fifthWinningCount;
     }
 
-
     public List<Lotto> all() {
         return Collections.unmodifiableList(lottos);
     }

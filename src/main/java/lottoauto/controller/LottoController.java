@@ -5,7 +5,6 @@ import lottoauto.domain.LottoReport;
 import lottoauto.service.LottoGame;
 import lottoauto.view.InputView;
 import lottoauto.view.ResultView;
-
 /**
  * 구입금액을 입력해 주세요.
  * 14000
