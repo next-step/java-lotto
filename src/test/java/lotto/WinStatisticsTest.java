@@ -29,4 +29,10 @@ public class WinStatisticsTest {
         WinStatistics winStatistics = new WinStatistics(1, 0, 0, 0);
         assertThat(winStatistics.getEarningRate(10000)).isEqualTo(0.5);
     }
+
+    @Test
+    void returnTrueIfEarnMoney() {
+        WinStatistics winStatistics = new WinStatistics(1, 0, 0, 0);
+        assertThat(winStatistics.DidEarn(4000)).isEqualTo("📈Earned!");
+    }
 }

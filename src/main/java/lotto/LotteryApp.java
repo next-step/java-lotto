@@ -11,5 +11,6 @@ public class LotteryApp {
         lotteryController.printWinStatistics();
         lotteryController.getEarningRate();
         lotteryController.printEarningRate();
+        lotteryController.printEarned();
     }
 }

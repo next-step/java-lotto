@@ -109,6 +109,12 @@ public class LotteryController {
     }
 
     public void printEarningRate() {
-        ResultView.printEarningRate(this.earningRate);
+        String payload = "Earning rate: " + this.earningRate;
+        ResultView.print(payload);
+    }
+
+    public void printEarned() {
+        String payload = winStatistics.DidEarn(this.money.price) + " (More than 1.0 means 'Earned')";
+        ResultView.print(payload);
     }
 }

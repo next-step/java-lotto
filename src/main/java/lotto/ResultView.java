@@ -16,7 +16,7 @@ public class ResultView {
         System.out.println(payload);
     }
 
-    public static void printEarningRate(double earningRate) {
-        System.out.println("Earning rate: " + earningRate);
+    public static void print(String payload) {
+        System.out.println(payload);
     }
 }

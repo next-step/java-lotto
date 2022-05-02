@@ -31,9 +31,7 @@ public class WinStatistics {
 
     @Override
     public String toString() {
-        return "WinStatistics{" +
-                "matches=" + matches +
-                '}';
+        return "WinStatistics{" + "matches=" + matches + '}';
     }
 
     public void save(int wins) {
@@ -60,4 +58,14 @@ public class WinStatistics {
         int earnedMoney = this.getEarnedMoney();
         return earnedMoney / (double) money;
     }
+
+
+    public String DidEarn(int money) {
+        if (getEarningRate(money) >= 1) {
+            return "📈Earned!";
+        };
+        return "📉Lost..";
+    }
+
+
 }
