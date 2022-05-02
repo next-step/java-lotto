@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.model.LottoNumber;
 
-public class RandomNumberGenerateStrategy implements NumberGenerateStrategy {
+public class RandomNumberGenerateStrategy implements LottoNumberGenerateStrategy {
 
   private static final int LOTTO_NUMBER_RANGE_START = 1;
   private static final int LOTTO_NUMBER_RANGE_END = 45;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.model.LottoNumber;
 
-public class FixedNumberGenerateStrategy implements NumberGenerateStrategy {
+public class FixedNumberGenerateStrategy implements LottoNumberGenerateStrategy {
 
   @Override
   public List<LottoNumber> generate() {

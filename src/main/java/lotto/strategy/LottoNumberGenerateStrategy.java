@@ -4,7 +4,7 @@ import java.util.List;
 import lotto.model.LottoNumber;
 
 @FunctionalInterface
-public interface NumberGenerateStrategy {
+public interface LottoNumberGenerateStrategy {
 
   List<LottoNumber> generate();
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.model.LottoNumber;
 
-public class DuplicateNumberGenerateStrategy implements NumberGenerateStrategy {
+public class DuplicateNumberGenerateStrategy implements LottoNumberGenerateStrategy {
 
   @Override
   public List<LottoNumber> generate() {

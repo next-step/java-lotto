@@ -3,7 +3,7 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.strategy.NumberGenerateStrategy;
+import lotto.strategy.LottoNumberGenerateStrategy;
 
 public class Lottos {
 
@@ -14,7 +14,7 @@ public class Lottos {
   }
 
   public static Lottos create(int numberOfPurchasedLotto,
-      NumberGenerateStrategy numberGenerateStrategy) {
+      LottoNumberGenerateStrategy numberGenerateStrategy) {
     List<Lotto> lottos = new ArrayList<>();
     for (int i = 0; i < numberOfPurchasedLotto; i++) {
       lottos.add(Lotto.create(numberGenerateStrategy));
@@ -33,7 +33,7 @@ public class Lottos {
         .count());
   }
 
-  public LottoRank matchLottoRank(WinningLotto winningLotto, Lotto lotto) {
+  private LottoRank matchLottoRank(WinningLotto winningLotto, Lotto lotto) {
     int matchCountOfLotto = lotto.matchWinningLottoNumbers(winningLotto);
     return LottoRank.findRank(matchCountOfLotto);
   }

@@ -4,13 +4,13 @@ import lotto.model.Lotto;
 import lotto.model.LottoNumberComparison;
 import lotto.model.Lottos;
 import lotto.model.WinningLotto;
-import lotto.strategy.NumberGenerateStrategy;
+import lotto.strategy.LottoNumberGenerateStrategy;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
 
-  public void lottoDraw(NumberGenerateStrategy numberGenerateStrategy) {
+  public void lottoDraw(LottoNumberGenerateStrategy numberGenerateStrategy) {
     int amount = Integer.parseInt(InputView.inputPurchasedAmount());
     int purchasedLotto = countPurchasedLotto(amount);
     OutputView.outputCountPurchasedLotto(purchasedLotto);
