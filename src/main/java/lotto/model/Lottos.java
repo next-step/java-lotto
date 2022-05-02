@@ -4,11 +4,8 @@ import lotto.dto.LottoResult;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -48,43 +45,19 @@ public final class Lottos {
     }
 
     public LottoResult getLottoResult(Lotto winnerLotto) {
-        Map<Rank, Integer> lottoStatistics = getLottoStatistics(winnerLotto);
-        long winningsSum = getWinningsSum(lottoStatistics);
-        return new LottoResult(lottoStatistics, winningsSum);
+        List<Rank> lottoStatistics = getLottoStatistics(winnerLotto);
+        return new LottoResult(lottoStatistics);
     }
 
-    private Map<Rank, Integer> getLottoStatistics(Lotto winnerLotto) {
+    private List<Rank> getLottoStatistics(Lotto winnerLotto) {
         validate(winnerLotto);
 
-        Map<Rank, Integer> result = initMap();
-
-        for (Lotto lotto : lottos) {
-            Rank key = Rank.of(lotto.getMatchCount(winnerLotto));
-            result.put(key, result.getOrDefault(key, DEFAULT_VALUE) + ADD_COUNT);
-        }
-        return result;
-    }
-
-    private TreeMap<Rank, Integer> initMap() {
-        return new TreeMap<>(new Comparator<Rank>() {
-            @Override
-            public int compare(Rank rank, Rank t1) {
-                return rank.matchCount() - t1.matchCount();
-            }
-        });
+        return lottos.stream()
+                .map(lotto -> lotto.getRank(winnerLotto))
+                .collect(Collectors.toList());
     }
 
     private static void validate(Lotto winnerLotto) {
         Objects.requireNonNull(winnerLotto, "당첨 로또를 올바르게 입력해주세요. input is null");
-    }
-
-    private static long getWinningsSum(Map<Rank, Integer> statistics) {
-        long result = 0;
-        for (int i = WINNINGS_START; i <= WINNINGS_END; i++) {
-            Rank rank = Rank.of(i);
-            int count = statistics.getOrDefault(rank, DEFAULT_VALUE);
-            result += count * rank.winnings();
-        }
-        return result;
     }
 }

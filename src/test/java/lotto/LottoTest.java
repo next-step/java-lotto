@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.model.Lotto;
+import lotto.model.Rank;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.DisplayName;
@@ -33,6 +34,6 @@ public class LottoTest {
     void resultMatchTest() {
         Lotto winLottoNums = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, SIX));
 
-        assertThat(TEST_LOTTO.getMatchCount(winLottoNums)).isEqualTo(6);
+        assertThat(TEST_LOTTO.getRank(winLottoNums)).isEqualTo(Rank.FIRST);
     }
 }

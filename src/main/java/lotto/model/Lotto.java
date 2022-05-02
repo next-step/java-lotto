@@ -26,19 +26,10 @@ public final class Lotto {
         return Collections.unmodifiableSet(lotto);
     }
 
-    public int getMatchCount(Lotto result) {
+    public Rank getRank(Lotto result) {
         Set<LottoNumber> resultLotto = result.get();
-        int count = 0;
-        for (LottoNumber lottoNumber : resultLotto) {
-            count = updateCount(lottoNumber, count);
-        }
-        return count;
-    }
+        lotto.retainAll(resultLotto);
 
-    private int updateCount(LottoNumber number, int count) {
-        if (lotto.contains(number)) {
-            count++;
-        }
-        return count;
+        return Rank.of(lotto.size());
     }
 }

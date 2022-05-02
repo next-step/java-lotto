@@ -47,7 +47,7 @@ public class LottosTest {
 
         assertThat(lottos.size()).isEqualTo(5);
         for (Lotto lotto : lottos.get()) {
-            assertThat(lotto.getMatchCount(LottoTest.TEST_LOTTO)).isEqualTo(6);
+            assertThat(lotto.getRank(LottoTest.TEST_LOTTO)).isEqualTo(Rank.FIRST);
         }
     }
 
@@ -67,46 +67,28 @@ public class LottosTest {
     @Test
     @DisplayName("구매한 로또와 당첨 로또를 입력하면 통계 결과를 얻을 수 있다.")
     void getLottoResultTest() {
-        LottoNumber ten = new LottoNumber(10);
-        LottoNumber eleven = new LottoNumber(11);
-        LottoNumber twelve = new LottoNumber(12);
         // given
         Lotto winnerLotto = new Lotto(ExtractLottoNumbersTest.LOTTO_NUMBERS);
-        Lotto threeMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, ten, eleven, twelve));
-        Lotto fourMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, eleven, twelve));
-        Lotto fiveMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, twelve));
-        Lotto sixMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, SIX));
+        Lotto sixMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, new LottoNumber(10)));
 
         // when
-        LottoResult lottoResult = new Lottos(Lists.newArrayList(threeMatchLotto, fourMatchLotto, fiveMatchLotto, sixMatchLotto)).getLottoResult(winnerLotto);
+        LottoResult lottoResult = new Lottos(Lists.newArrayList(sixMatchLotto)).getLottoResult(winnerLotto);
 
         // then
-        assertThat(lottoResult.getRankResult().get(Rank.FIRST)).isEqualTo(1);
-        assertThat(lottoResult.getRankResult().get(Rank.SECOND)).isEqualTo(1);
-        assertThat(lottoResult.getRankResult().get(Rank.THIRD)).isEqualTo(1);
-        assertThat(lottoResult.getRankResult().get(Rank.FOURTH)).isEqualTo(1);
+        assertThat(lottoResult.getRankResult().get(0)).isEqualTo(Rank.SECOND);
     }
 
     @Test
     @DisplayName("구매한 로또와 당첨 로또를 입력하면 통계 결과를 얻을 수 있다. 없는 값은 0으로 초기화된다")
     void getLottoResultDefaultTest() {
-        LottoNumber ten = new LottoNumber(10);
-        LottoNumber eleven = new LottoNumber(11);
-        LottoNumber twelve = new LottoNumber(12);
         // given
         Lotto winnerLotto = new Lotto(ExtractLottoNumbersTest.LOTTO_NUMBERS);
-        Lotto threeMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, ten, eleven, twelve));
-        Lotto threeMatchLotto1 = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, ten, eleven, twelve));
-        Lotto fiveMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, twelve));
+        Lotto twoMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, new LottoNumber(9), new LottoNumber(10), new LottoNumber(11), new LottoNumber(12)));
 
         // when
-        LottoResult lottoResult = new Lottos(Lists.newArrayList(threeMatchLotto, threeMatchLotto1, fiveMatchLotto)).getLottoResult(winnerLotto);
+        LottoResult lottoResult = new Lottos(Lists.newArrayList(twoMatchLotto)).getLottoResult(winnerLotto);
 
         // then
-        assertThat(lottoResult.getRankResult().get(Rank.FIRST)).isEqualTo(0);
-        assertThat(lottoResult.getRankResult().get(Rank.SECOND)).isEqualTo(1);
-        assertThat(lottoResult.getRankResult().get(Rank.THIRD)).isEqualTo(0);
-        assertThat(lottoResult.getRankResult().get(Rank.FOURTH)).isEqualTo(2);
-        assertThat(lottoResult.getRankResult().get(Rank.OTHER)).isEqualTo(null);
+        assertThat(lottoResult.getRankResult().get(0)).isEqualTo(Rank.OTHER);
     }
 }
