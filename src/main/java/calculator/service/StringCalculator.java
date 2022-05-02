@@ -1,7 +1,7 @@
 package calculator.service;
 
+import calculator.domain.Operator;
 import calculator.domain.StringNumber;
-import calculator.domain.StringOperator;
 
 public class StringCalculator {
     private static final String BLANK_INPUT_EXCEPTION = "입력은 빈칸일 수 없습니다.";
@@ -19,10 +19,10 @@ public class StringCalculator {
         }
     }
 
-    private static StringNumber calculate(String[] s) {
-        StringNumber stringNumber = new StringNumber(s[0]);
-        for (int i = 1; i < s.length; i += 2) {
-            stringNumber = stringNumber.calculate(new StringOperator(s[i]), new StringNumber(s[i + 1]));
+    private static StringNumber calculate(String[] splitInput) {
+        StringNumber stringNumber = new StringNumber(splitInput[0]);
+        for (int index = 1; index < splitInput.length; index += 2) {
+            stringNumber = stringNumber.calculate(Operator.findOperatorFromSymbol(splitInput[index]), new StringNumber(splitInput[index + 1]));
         }
         return stringNumber;
     }
