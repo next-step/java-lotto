@@ -41,5 +41,4 @@ public final class LottoNumber {
     return Objects.hash(value);
   }
 
-
 }

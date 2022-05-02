@@ -19,6 +19,10 @@ public final class Money {
     }
   }
 
+  public long currentValue() {
+    return value;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -36,8 +40,4 @@ public final class Money {
     return Objects.hash(value);
   }
 
-  @Override
-  public String toString() {
-    return String.valueOf(value);
-  }
 }
