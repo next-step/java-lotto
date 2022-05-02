@@ -3,7 +3,7 @@ package lotto.ui;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoWinningCondition;
-import lotto.domain.Store;
+import lotto.domain.Lottos;
 import lotto.exception.*;
 import lotto.util.Utility;
 
@@ -109,7 +109,7 @@ public class InputView {
     }
 
     static void validateCountOfManualLotto(int price, int countOfManualLotto) {
-        int countOfTotalLotto = price / Store.LOTTO_PRICE_PER_ONE;
+        int countOfTotalLotto = price / Lottos.LOTTO_PRICE_PER_ONE;
         if (countOfTotalLotto < countOfManualLotto) {
             throw new InvalidCountOfManualLotto(countOfTotalLotto, countOfManualLotto);
         }

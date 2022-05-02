@@ -2,6 +2,8 @@ package lotto.domain;
 
 import lotto.util.Utility;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 class LottosTest {
+    @ParameterizedTest
+    @CsvSource({"5000,5", "1500,1", "600,0"})
+    void 구매_개수_테스트(int price, int count) {
+        assertThat(Lottos.countOfLottos(price)).isEqualTo(count);
+    }
+
     @Test
     void 당첨자_확인() {
         List<Lotto> testCases = new ArrayList<>();
