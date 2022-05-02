@@ -15,5 +15,8 @@
   * 나눗셈
   * 곱셈
 
-
 * 연산식 문자열 Array 나누기 (Splitter) 
+
+### Step 2 로또 (자동)
+* View
+  * InputView - 로또 구입 금액 입력받기
