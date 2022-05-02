@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@DisplayName("로또 상점 판매 테스트")
+@DisplayName("구매 금액에 맞는 로또를 판매하는 로또 상점 테스트")
 public class LottoMarketTest {
 
     @ParameterizedTest
@@ -26,8 +26,15 @@ public class LottoMarketTest {
 
     @Test
     @DisplayName("로또 구입시 지불한 금액이 null이면 예외가 발생한다.")
-    void minusMoneyTest() {
+    void buyingMoneyNullTest() {
         assertThatThrownBy(() -> LottoMarket.buyLottos(null, new RandomLottoGenerator()))
+                .isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
+    @DisplayName("로또 구입시 생성 전략이 null이면 예외가 발생한다.")
+    void lottoGeneratorNullTest() {
+        assertThatThrownBy(() -> LottoMarket.buyLottos(new Money(1234), null))
                 .isInstanceOf(NullPointerException.class);
     }
 

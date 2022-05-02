@@ -14,7 +14,6 @@ import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.List;
-import java.util.Map;
 
 import static lotto.LottoNumberTest.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,6 +38,17 @@ public class LottosTest {
     void emptyTest(List<Lotto> lottos) {
         assertThatThrownBy(() -> new Lottos(lottos))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("로또 개수와 생성 전략을 입력하면 Lottos가 생성된다.")
+    void newLottosTest() {
+        Lottos lottos = new Lottos(5, () -> LottoTest.TEST_LOTTO);
+
+        assertThat(lottos.size()).isEqualTo(5);
+        for (Lotto lotto : lottos.get()) {
+            assertThat(lotto.getMatchCount(LottoTest.TEST_LOTTO)).isEqualTo(6);
+        }
     }
 
     @Test

@@ -18,22 +18,19 @@ public class LottoMarket {
     }
 
     public static Lottos buyLottos(Money money, LottoGenerator lottoGenerator) {
-        validate(money);
+        validate(money, lottoGenerator);
         return getLottos(money, lottoGenerator);
     }
 
-    private static void validate(Money money) {
+    private static void validate(Money money, LottoGenerator lottoGenerator) {
         Objects.requireNonNull(money, "로또 구매시 지불하는 금액은 null일 수 없습니다.");
+        Objects.requireNonNull(lottoGenerator, "로또 생성 전략은 null일 수 없습니다.");
     }
 
     private static Lottos getLottos(Money money, LottoGenerator lottoGenerator) {
         int count = getUnitCount(money);
 
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(lottoGenerator.get());
-        }
-        return new Lottos(lottos);
+        return new Lottos(count, lottoGenerator);
     }
 
     private static int getUnitCount(Money money) {

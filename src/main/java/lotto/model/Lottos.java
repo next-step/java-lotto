@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public final class Lottos {
     private static final int DEFAULT_VALUE = 0;
@@ -17,6 +19,12 @@ public final class Lottos {
     private static final int WINNINGS_END = 6;
 
     private final List<Lotto> lottos;
+
+    public Lottos(int count, LottoGenerator lottoGenerator) {
+        this(IntStream.range(0, count)
+                .mapToObj(i -> lottoGenerator.get())
+                .collect(Collectors.toList()));
+    }
 
     public Lottos(List<Lotto> lottos) {
         validate(lottos);
