@@ -27,12 +27,9 @@ public class Lotto {
   }
 
   private void validateDuplicateNumber(List<LottoNumber> lottoNumbers) {
-    Set<Integer> validateLottoNumbers = new HashSet<>();
-    for (LottoNumber lottoNumber : lottoNumbers) {
-      validateLottoNumbers.add(lottoNumber.getValue());
-    }
+    Set<LottoNumber> validateLottoNumbers = new HashSet<>(lottoNumbers);
     if (validateLottoNumbers.size() != LOTTO_NUMBER_COUNT) {
-      throw new LottoNumberDuplicateException();
+      throw new LottoNumberDuplicateException(lottoNumbers);
     }
   }
 
