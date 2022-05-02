@@ -9,7 +9,7 @@ public final class LottoFactory {
   private static final int LOTTO_START_INDEX = 0;
 
   private static LottoFactory instance;
-  private List<Integer> init;
+  private final List<Integer> init;
   private LottoFactory(List<Integer> init) {
     this.init = init;
   }
