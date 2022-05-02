@@ -1,10 +1,8 @@
 package lotto.model;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import lotto.enums.ChoiceType;
 import lotto.enums.Grade;
 import lotto.exception.LottoLengthException;
 
