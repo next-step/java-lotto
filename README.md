@@ -7,3 +7,13 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+### Step 1 문자열 계산기
+* 사칙연산 구현
+  * 덧셈
+  * 뺄셈
+  * 나눗셈
+  * 곱셈
+
+
+* 연산식 문자열 Array 나누기 (Splitter) 
