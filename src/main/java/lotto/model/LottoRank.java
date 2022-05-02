@@ -10,8 +10,8 @@ public enum LottoRank {
   FOURTH(3, 5000),
   NON_MATCH(0, 0);
 
-  private int numberOfMatch;
-  private int reward;
+  private final int numberOfMatch;
+  private final int reward;
 
   LottoRank(int numberOfMatch, int reward) {
     this.numberOfMatch = numberOfMatch;
