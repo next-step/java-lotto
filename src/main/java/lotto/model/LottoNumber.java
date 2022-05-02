@@ -10,11 +10,11 @@ public final class LottoNumber {
   private final int value;
 
   public LottoNumber(int value) {
-    valid(value);
+    isValid(value);
     this.value = value;
   }
 
-  private void valid(int value) {
+  private void isValid(int value) {
     if (value < MIN_VALUE || MAX_VALUE < value) {
       throw new LottoNumberException(value);
     }

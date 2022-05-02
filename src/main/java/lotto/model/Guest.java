@@ -24,11 +24,11 @@ public final class Guest {
   }
 
   public List<Lotto> hasAllLotto() {
-    emptySizeValid(allLotteryTickets.size());
+    emptySizeIsValid(allLotteryTickets.size());
     return allLotteryTickets;
   }
 
-  private void emptySizeValid(int size) {
+  private void emptySizeIsValid(int size) {
     if (size <= 0) {
       throw new LottoSizeException();
     }
