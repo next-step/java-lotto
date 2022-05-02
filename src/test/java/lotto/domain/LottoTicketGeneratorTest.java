@@ -18,7 +18,7 @@ class LottoTicketGeneratorTest {
     @DisplayName("input 개수 만큼의 로또 티켓 생성")
     void createLottoTickets(int input) {
         // given
-        LottoTicketGenerator lottoTicketGenerator = new LottoTicketGenerator(new RandomGenerateStrategy());
+        LottoTicketGenerator lottoTicketGenerator = new LottoTicketGenerator();
         // when
         List<LottoTicket> lottoTickets = lottoTicketGenerator.generateLottoTickets(input);
         // then
@@ -30,7 +30,7 @@ class LottoTicketGeneratorTest {
     @DisplayName("입력된 금액으로 살 수 있는 만큼 로또 구매")
     void buyLottoTickets(int money, int count) {
         // given
-        LottoTicketGenerator lottoTicketGenerator = new LottoTicketGenerator(new RandomGenerateStrategy());
+        LottoTicketGenerator lottoTicketGenerator = new LottoTicketGenerator();
         // when
         List<LottoTicket> lottoTickets = lottoTicketGenerator.buyLottoTickets(money);
         // then
@@ -42,7 +42,7 @@ class LottoTicketGeneratorTest {
     @DisplayName("1000원 이하 입력 시 InvalidInputMoneyExcetpion 발생")
     void throwInvalidInputMoneyExceptionTest(int money) {
         // given
-        LottoTicketGenerator lottoTicketGenerator = new LottoTicketGenerator(new RandomGenerateStrategy());
+        LottoTicketGenerator lottoTicketGenerator = new LottoTicketGenerator();
         // when, then
         assertThatThrownBy(() -> lottoTicketGenerator.buyLottoTickets(money))
                 .isInstanceOf(InvalidMoneyInputException.class);

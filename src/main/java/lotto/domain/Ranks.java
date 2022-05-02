@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -9,6 +8,7 @@ import java.util.stream.Collectors;
 
 public class Ranks {
 
+    private static final int MINIMUM_WINNING_COUNT = 3;
     private final List<Rank> ranks;
 
     public Ranks(List<Rank> ranks) {
@@ -16,17 +16,9 @@ public class Ranks {
     }
     public static Map<Rank, Integer> getGroupByMap(List<Integer> matchNumbers) {
         return new Ranks(matchNumbers.stream()
-                .filter(r -> r >= 3)
+                .filter(r -> r >= MINIMUM_WINNING_COUNT)
                 .map(Rank::getRank)
                 .collect(Collectors.toList())).groupBy();
-    }
-
-    public List<Rank> getRanks() {
-        return ranks;
-    }
-
-    public double getProfitRatio(BigDecimal totalPrize) {
-        return 100d;
     }
 
     private Map<Rank, Integer> groupBy() {

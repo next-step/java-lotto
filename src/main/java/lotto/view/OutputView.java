@@ -9,11 +9,23 @@ import java.util.Map;
 
 public class OutputView {
 
-    public void printLottoTicketCount(int count) {
-        System.out.println(count + "개를 구매했습니다.");
+    private static final String WINNING_STATISTICS_MESSAGE = "\n당첨 통계\n--------";
+    private static final String TOTAL_RATE_OF_RETURN_MESSAGE = "총 수익률은 ";
+    private static final String GAIN_RESULT_MESSAGE = "입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
+    private static final String DAMAGE_RESULT_MESSAGE = "입니다.(기준이 1이기 대문에 결과적으로 손해라는 의미임)";
+    private static final String PRINT_RATIO_FORMAT = "%.2f";
+    private static final String TICKET_COUNT_MESSAGE = "개를 구매했습니다.";
+
+    private void printLottoTicketCount(int count) {
+        System.out.println(count + TICKET_COUNT_MESSAGE);
     }
 
     public void printLottoTickets(List<LottoTicket> lottoTickets) {
+        printLottoTicketCount(lottoTickets.size());
+        printLottoNumbers(lottoTickets);
+    }
+
+    private void printLottoNumbers(List<LottoTicket> lottoTickets) {
         StringBuilder builder = new StringBuilder();
         lottoTickets.forEach(lottoTicket ->
                 builder.append(lottoTicket.getLottoNumbers()).append("\n"));
@@ -21,7 +33,7 @@ public class OutputView {
     }
 
     public void printResult(List<Integer> matchNumbers, int money) {
-        System.out.println("\n당첨 통계\n--------");
+        System.out.println(WINNING_STATISTICS_MESSAGE);
         Map<Rank, Integer> resultMap = Ranks.getGroupByMap(matchNumbers);
         printPrize(resultMap);
         printProfitRatio(resultMap, money);
@@ -39,20 +51,20 @@ public class OutputView {
 
     private String getRatioString(double profitRatio) {
         StringBuilder builder = new StringBuilder();
-        builder.append("총 수익률은 ");
+        builder.append(TOTAL_RATE_OF_RETURN_MESSAGE);
         String ratioString = getFormat(profitRatio);
         builder.append(ratioString);
         if (profitRatio > 1) {
-            builder.append("입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
+            builder.append(GAIN_RESULT_MESSAGE);
             return builder.toString();
         }
-        builder.append("입니다.(기준이 1이기 대문에 결과적으로 손해라는 의미임)");
+        builder.append(DAMAGE_RESULT_MESSAGE);
 
         return builder.toString();
     }
 
     private String getFormat(double profitRatio) {
-        return String.format("%.2f", profitRatio);
+        return String.format(PRINT_RATIO_FORMAT, profitRatio);
     }
 
     private void printPrize(Map<Rank, Integer> resultMap) {
