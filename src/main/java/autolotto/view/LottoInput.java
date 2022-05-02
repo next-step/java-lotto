@@ -47,4 +47,21 @@ public class LottoInput {
                 .map(Integer::parseInt)
                 .collect(Collectors.toSet());
     }
+
+    public int askBonusBall(Set<Integer> winningNumbers) {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String bonusBallInput = scanner.nextLine();
+
+        boolean isNumber = NUMBER_PATTERN.matcher(bonusBallInput).matches();
+        if (!isNumber) {
+            throw new LottoException(LottoExceptionCode.INVALID_LOTTO_NUMBER_TYPE, bonusBallInput);
+        }
+
+        int bonusBall = Integer.parseInt(bonusBallInput);
+
+        if (winningNumbers.contains(bonusBall)) {
+            throw new LottoException(LottoExceptionCode.DUPLICATED_LOTTO_NUMBER, bonusBallInput);
+        }
+        return bonusBall;
+    }
 }
