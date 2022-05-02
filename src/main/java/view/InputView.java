@@ -15,4 +15,9 @@ public class InputView {
         return INPUT.next();
     }
 
+    public static int inputBonusNumber() {
+        System.out.println("보너스 번호를 입력해 주세요.");
+        return INPUT.nextInt();
+    }
+
 }
