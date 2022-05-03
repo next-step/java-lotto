@@ -19,4 +19,16 @@
 
 ### Step 2 로또 (자동)
 * View
-  * InputView - 로또 구입 금액 입력받기
+  * InputView - 로또 구입 금액 입력
+* Domain
+  * Draw
+    * Variables 
+      * 구매한 로또 개수
+      * 구입한 로또
+    * Functions
+      * 로또 생성 요청
+  * Lotto
+    * Variables
+      * 로또
+    * Functions
+      * 로또 생성
