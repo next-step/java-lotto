@@ -36,7 +36,7 @@ public final class AwardNumberUtil {
 
   public static List<Integer> init() {
     List<Integer> lottoNumbers = new ArrayList<>();
-    for (int i = MIN_VALUE; i < MAX_VALUE; i++) {
+    for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
       lottoNumbers.add(i);
     }
     return lottoNumbers;
