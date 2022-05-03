@@ -23,7 +23,7 @@ public class LottoBuyer {
 
     public PurchasedLottos buyLottos() {
         lottos = new LottoStore().createLottos(lottoCount());
-        return PurchasedLottos.of(this);
+        return PurchasedLottos.from(this);
     }
 
     private int lottoCount() {
@@ -32,7 +32,7 @@ public class LottoBuyer {
 
     public WinningStats confirmLottos(LastWinningData lastWinningData) {
         lottos.confirmAll(lastWinningData.toWinningLottoNumbers());
-        return WinningStats.of(this);
+        return WinningStats.from(this);
     }
 
     public double calculateProfitRate() {

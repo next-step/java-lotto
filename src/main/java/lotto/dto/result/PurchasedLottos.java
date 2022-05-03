@@ -11,7 +11,7 @@ public class PurchasedLottos {
         this.lottos = lottos;
     }
 
-    public static PurchasedLottos of(LottoBuyer lottoBuyer) {
+    public static PurchasedLottos from(LottoBuyer lottoBuyer) {
         return new PurchasedLottos(lottoBuyer.lottos());
     }
 

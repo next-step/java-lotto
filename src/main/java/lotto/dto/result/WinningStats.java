@@ -16,7 +16,7 @@ public class WinningStats {
         this.matchStatsList = matchStatsList;
     }
 
-    public static WinningStats of(LottoBuyer lottoBuyer) {
+    public static WinningStats from(LottoBuyer lottoBuyer) {
         return new WinningStats(lottoBuyer.calculateProfitRate(), findMatchStatsList(lottoBuyer));
     }
 
