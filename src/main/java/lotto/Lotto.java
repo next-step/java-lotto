@@ -1,10 +1,12 @@
 package lotto;
 
+import lotto.pattern.LottoNumberGenerateStrategy;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.List;
+import java.util.Set;
+import java.util.Collections;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -20,6 +22,13 @@ public class Lotto {
     }
 
     public Lotto(List<LottoNumber> numbers) {
+        validateNumberSize(numbers.size());
+        validateDuplicateNumbers(numbers);
+        this.numbers = numbers;
+    }
+
+    public Lotto(LottoNumberGenerateStrategy lottoNumberGenerateStrategy) {
+        List<LottoNumber> numbers = lottoNumberGenerateStrategy.generate();
         validateNumberSize(numbers.size());
         validateDuplicateNumbers(numbers);
         this.numbers = numbers;
