@@ -44,6 +44,36 @@ public class LottoListTest {
   }
 
   @Test
+  void getTotalLottoCount_성공() {
+    Lotto lottoMatched6 = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+    Lotto lottoMatched5 = new Lotto(Set.of(1, 2, 3, 4, 5, 16));
+    Lotto lottoMatched4 = new Lotto(Set.of(1, 2, 3, 4, 15, 16));
+    Lotto lottoMatched3 = new Lotto(Set.of(1, 2, 3, 14, 15, 16));
+    Lotto lottoMatched2 = new Lotto(Set.of(1, 2, 13, 14, 15, 16));
+    Lotto lottoMatched1 = new Lotto(Set.of(1, 12, 13, 14, 15, 16));
+
+    LottoList lottoList = new LottoList(List.of(
+        lottoMatched1, lottoMatched2, lottoMatched3, lottoMatched4, lottoMatched5, lottoMatched6));
+
+    assertThat(lottoList.getTotalLottoCount()).isEqualTo(6);
+  }
+
+  @Test
+  void getTotalPurchaseAmount_성공() {
+    Lotto lottoMatched6 = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+    Lotto lottoMatched5 = new Lotto(Set.of(1, 2, 3, 4, 5, 16));
+    Lotto lottoMatched4 = new Lotto(Set.of(1, 2, 3, 4, 15, 16));
+    Lotto lottoMatched3 = new Lotto(Set.of(1, 2, 3, 14, 15, 16));
+    Lotto lottoMatched2 = new Lotto(Set.of(1, 2, 13, 14, 15, 16));
+    Lotto lottoMatched1 = new Lotto(Set.of(1, 12, 13, 14, 15, 16));
+
+    LottoList lottoList = new LottoList(List.of(
+        lottoMatched1, lottoMatched2, lottoMatched3, lottoMatched4, lottoMatched5, lottoMatched6));
+
+    assertThat(lottoList.getTotalPurchaseAmount()).isEqualTo(6000);
+  }
+
+  @Test
   void toStringForPrinting_성공() {
     Lotto lotto1 = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
     Lotto lotto2 = new Lotto(Set.of(1, 2, 3, 4, 5, 16));
