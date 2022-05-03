@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.LottoGroupResult;
-import lotto.domain.Rank;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -50,5 +48,4 @@ class LottoGroupResultTest {
                 ), 20000, 3.25)
         );
     }
-
 }

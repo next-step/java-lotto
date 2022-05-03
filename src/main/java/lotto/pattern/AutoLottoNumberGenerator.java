@@ -9,11 +9,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class AutoLottoNumberGenerator implements LottoNumberGenerateStrategy {
+    private static final AutoLottoNumberGenerator INSTANCE = new AutoLottoNumberGenerator();
 
     private AutoLottoNumberGenerator() {
     }
-
-    private static final AutoLottoNumberGenerator INSTANCE = new AutoLottoNumberGenerator();
 
     public static AutoLottoNumberGenerator getInstance() {
         return INSTANCE;

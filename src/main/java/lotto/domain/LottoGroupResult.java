@@ -6,6 +6,7 @@ public class LottoGroupResult {
     private static final int DECIMAL_SECOND_POSITION = 100;
     private static final int ZERO = 0;
     private static final double REFERENCE_POINT = 1.00;
+
     private final Map<Rank, Integer> lottoGroupResult;
 
     public LottoGroupResult(Map<Rank, Integer> lottoGroupResult) {

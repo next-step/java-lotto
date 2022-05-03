@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -43,7 +42,6 @@ class LottoGroupTest {
                 new LottoNumber(6))));
     }
 
-
     @Test
     void getLottoGroupResult_로또그룹_결과를_반환한다() {
         LottoGroup lottoGroup = new LottoGroup(List.of(
@@ -60,6 +58,5 @@ class LottoGroupTest {
                 Rank.FOURTH, 2,
                 Rank.THIRD, 1
         )));
-
     }
 }
