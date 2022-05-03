@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lottos;
+import lotto.dto.result.PurchasedLottos;
 import lotto.dto.result.WinningStats;
 import lotto.exception.NotSupportInstanceException;
 
@@ -14,9 +14,9 @@ public class ResultView {
         throw new NotSupportInstanceException();
     }
 
-    public static void purchasedLottosView(Lottos lottos) {
-        System.out.println(lottos.count() + MESSAGE_PURCHASED_LOTTO);
-        System.out.println(ResultBuilder.buildLottosInfo(lottos.toList()));
+    public static void purchasedLottosView(PurchasedLottos purchasedLottos) {
+        System.out.println(purchasedLottos.lottos().count() + MESSAGE_PURCHASED_LOTTO);
+        System.out.println(ResultBuilder.buildLottosInfo(purchasedLottos.lottos().toList()));
     }
 
     public static void lottosResultView(WinningStats winningStats) {

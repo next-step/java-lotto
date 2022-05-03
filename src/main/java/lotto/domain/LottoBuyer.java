@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.dto.input.BuyerData;
 import lotto.dto.input.LastWinningData;
+import lotto.dto.result.PurchasedLottos;
 import lotto.dto.result.WinningStats;
 import lotto.util.Calculator;
 
@@ -20,8 +21,9 @@ public class LottoBuyer {
         this.purchaseAmount = purchaseAmount;
     }
 
-    public void buyLottos() {
+    public PurchasedLottos buyLottos() {
         lottos = new LottoStore().createLottos(lottoCount());
+        return PurchasedLottos.of(this);
     }
 
     private int lottoCount() {
