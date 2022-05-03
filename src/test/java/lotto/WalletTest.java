@@ -26,11 +26,6 @@ public class WalletTest {
     }
 
     @Test
-    void numberOfLotteriesShouldBeMoneyDivide1000() {
-        assertThat(wallet.getNumberOfLotteries()).isEqualTo(wallet.money / LOTTERY_PRICE);
-    }
-
-    @Test
     void buyLotteryShouldTake1000() {
         int expected = wallet.money - LOTTERY_PRICE;
         wallet.buyLottery();

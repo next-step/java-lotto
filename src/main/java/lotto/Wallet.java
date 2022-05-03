@@ -8,7 +8,6 @@ import static lotto.Const.LOTTERY_PRICE;
 public class Wallet {
     public int money;
     public List<Integer> answerNumbers;
-    public int numberOfLotteries;
     public final List<Lottery> lotteries;
 
     public Wallet(int money) {
@@ -18,7 +17,6 @@ public class Wallet {
         this.money = money;
         this.lotteries = new ArrayList<>();
         this.answerNumbers = new ArrayList<>();
-        this.numberOfLotteries = this.money / LOTTERY_PRICE;
     }
 
     public Wallet(List<Lottery> lotteries, List<Integer> answerNumbers) {
@@ -31,10 +29,6 @@ public class Wallet {
         while (this.money >= LOTTERY_PRICE) {
             buyLottery();
         }
-    }
-
-    public int getNumberOfLotteries() {
-        return this.numberOfLotteries;
     }
 
     public void buyLottery() {
