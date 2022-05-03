@@ -4,7 +4,7 @@ import java.util.Set;
 
 public class WinningLotto {
 
-  private static final String INVALID_BONUS_MESSAGE = "보너스볼은 로또와 중복된 숫자일 수 없습니다.";
+  public static final String INVALID_BONUS_MESSAGE = "보너스볼은 로또와 중복된 숫자일 수 없습니다.";
 
   private final Lotto lotto;
 
