@@ -29,9 +29,14 @@ public class InputView {
             System.out.println(PURCHASE_PRICE_MESSAGE);
             int price = SCANNER.nextInt();
             validateNegativeNumber("구입금액", price);
+            validateMinPriceToBuyLotto(price);
             SCANNER.nextLine(); // Delete newLine
             return price;
         } catch (InvalidNegativeNumberException e) {
+            SCANNER.nextLine(); // Delete newLine
+            System.out.println(e.getMessage());
+            return inputPrice();
+        } catch (InvalidPriceToBuyLottoExcpetion e) {
             SCANNER.nextLine(); // Delete newLine
             System.out.println(e.getMessage());
             return inputPrice();
@@ -45,6 +50,12 @@ public class InputView {
     static void validateNegativeNumber(String target, int value) {
         if (value < 0) {
             throw new InvalidNegativeNumberException(target, value);
+        }
+    }
+
+    static void validateMinPriceToBuyLotto(int price) {
+        if (price < 1000) {
+            throw new InvalidPriceToBuyLottoExcpetion(price);
         }
     }
 
