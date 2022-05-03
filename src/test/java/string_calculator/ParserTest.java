@@ -13,7 +13,7 @@ public class ParserTest {
     void parseTest() {
         Parser parser = new Parser();
         parser.parse("1 + 2");
-        List<Value> values = new ArrayList<Value>() {{
+        List<Object> values = new ArrayList<Object>() {{
             add(new Integer(1));
             add(Operator.PLUS);
             add(new Integer(2));

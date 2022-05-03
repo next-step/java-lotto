@@ -11,10 +11,10 @@ public class ControllerTest {
     void parseShouldReturnEqualValuesInBothControllerAndParser() {
         Controller controller = new Controller("1 + 2");
         controller.parse();
-        List<Value> actual = controller.parser.values;
+        List<Object> actual = controller.parser.values;
         Parser parser = new Parser();
         parser.parse("1 + 2");
-        List<Value> expected = parser.values;
+        List<Object> expected = parser.values;
         assertThat(actual).isEqualTo(expected);
     }
 

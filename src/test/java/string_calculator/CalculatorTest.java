@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class CalculatorTest {
     @Test
     void handlePlusOperator() {
-        List<Value> values = new ArrayList<Value>() {{
+        List<Object> values = new ArrayList<>() {{
             add(new Integer(1));
             add(Operator.PLUS);
             add(new Integer(2));
@@ -22,7 +22,7 @@ public class CalculatorTest {
 
     @Test
     void handleOperators() {
-        List<Value> values = new ArrayList<Value>() {{
+        List<Object> values = new ArrayList<>() {{
             add(new Integer(1));
             add(Operator.PLUS);
             add(new Integer(2));

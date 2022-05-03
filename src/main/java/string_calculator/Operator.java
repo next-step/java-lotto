@@ -2,7 +2,7 @@ package string_calculator;
 
 import java.util.function.BiFunction;
 
-public enum Operator implements Value {
+public enum Operator {
     PLUS("+", (acc, operand) -> new Integer(acc.value() + operand.value())),
     MINUS("-", (acc, operand) -> new Integer(acc.value() - operand.value())),
     MULTIPLY("*", (acc, operand) -> new Integer(acc.value() * operand.value())),

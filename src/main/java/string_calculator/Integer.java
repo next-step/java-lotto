@@ -2,7 +2,7 @@ package string_calculator;
 
 import java.util.Objects;
 
-public class Integer implements Value  {
+public class Integer {
     private final int value;
 
     public Integer(int value) {
