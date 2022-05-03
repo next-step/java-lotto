@@ -8,10 +8,10 @@ import java.util.regex.Pattern;
 import static java.lang.Integer.parseInt;
 
 public class Parser {
-    public List<Value> values = new ArrayList<Value>();
     private static String REGEX_INT = "\\d+";
     private static String REGEX_OPERATOR = "[\\+\\-\\*\\/%]";
     private static String EMPTY_STR = " ";
+    public List<Value> values = new ArrayList<Value>();
 
     public void parse(String equation) {
         String[] items = equation.split(EMPTY_STR);
