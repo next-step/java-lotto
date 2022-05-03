@@ -39,15 +39,7 @@ public class Lotto {
     }
 
     public LottoWinnerType winLotto(LottoWinningCondition winningCondition) {
-        return winLotto(winningCondition.getPreviousLotto(), winningCondition.getBonusNumber());
-    }
-
-    LottoWinnerType winLotto(Lotto previousLotto, LottoNumber bonusNumber) {
-        int countOfDuplicate = countDuplicateValue(previousLotto);
-        if (LottoWinnerType.matchCountWithBonus(countOfDuplicate)) {
-            return LottoWinnerType.valueOf(countOfDuplicate, contains(bonusNumber));
-        }
-        return LottoWinnerType.valueOf(countOfDuplicate, false);
+        return winningCondition.check(this);
     }
 
     int countDuplicateValue(Lotto lotto) {

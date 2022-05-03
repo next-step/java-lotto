@@ -18,11 +18,11 @@ public class LottoWinningCondition {
         }
     }
 
-    Lotto getPreviousLotto() {
-        return previousLotto;
-    }
-
-    LottoNumber getBonusNumber() {
-        return bonusNumber;
+    LottoWinnerType check(Lotto lotto) {
+        int countOfDuplicate = lotto.countDuplicateValue(previousLotto);
+        if (LottoWinnerType.matchCountWithBonus(countOfDuplicate)) {
+            return LottoWinnerType.valueOf(countOfDuplicate, previousLotto.contains(bonusNumber));
+        }
+        return LottoWinnerType.valueOf(countOfDuplicate, false);
     }
 }
