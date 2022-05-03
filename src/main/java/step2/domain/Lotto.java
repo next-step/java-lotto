@@ -42,4 +42,10 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(values);
     }
+
+    public long calculateHitCount(Winner winner) {
+        return values.stream()
+                .filter(winner::isContain)
+                .count();
+    }
 }
