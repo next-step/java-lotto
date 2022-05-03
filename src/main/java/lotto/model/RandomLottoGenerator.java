@@ -1,7 +1,7 @@
 package lotto.model;
 
 import java.util.Collections;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -26,6 +26,6 @@ public class RandomLottoGenerator implements LottoGenerator {
 
     private Set<LottoNumber> getLottoNumbers() {
         Collections.shuffle(LOTTO_NUMBERS);
-        return new LinkedHashSet<>(LOTTO_NUMBERS.subList(0, LOTTO_SIZE));
+        return new HashSet<>(LOTTO_NUMBERS.subList(0, LOTTO_SIZE));
     }
 }

@@ -1,7 +1,7 @@
 package lotto.model;
 
 import java.util.Collections;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -12,7 +12,7 @@ public final class Lotto {
 
     public Lotto(Set<LottoNumber> lotto) {
         validate(lotto);
-        this.lotto = new LinkedHashSet<>(lotto);
+        this.lotto = new HashSet<>(lotto);
     }
 
     private void validate(Set<LottoNumber> lotto) {
