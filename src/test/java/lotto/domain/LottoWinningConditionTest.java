@@ -20,7 +20,7 @@ class LottoWinningConditionTest {
                 () -> {
                     List<Integer> previousLottoNumber = Arrays.asList(new Integer[]{5,28,29,35,39,44});
                     Lotto previousLotto = new Lotto(previousLottoNumber);
-                    LottoNumber bonusNumber = new LottoNumber(28);
+                    LottoNumber bonusNumber = LottoNumberFactory.valueOf(28);
 
                     assertThatThrownBy(() -> {
                         new LottoWinningCondition(previousLotto, bonusNumber);
@@ -29,7 +29,7 @@ class LottoWinningConditionTest {
                 () -> {
                     List<Integer> previousLottoNumber = Arrays.asList(new Integer[]{5,28,29,35,39,44});
                     Lotto previousLotto = new Lotto(previousLottoNumber);
-                    LottoNumber bonusNumber = new LottoNumber(27);
+                    LottoNumber bonusNumber = LottoNumberFactory.valueOf(27);
 
                     assertThat(lotto.winLotto(new LottoWinningCondition(previousLotto, bonusNumber))).isEqualTo(LottoWinnerType.valueOf(5, true));
                 }
