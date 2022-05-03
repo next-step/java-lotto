@@ -1,4 +1,4 @@
-package lotto.dto;
+package lotto.dto.result;
 
 import lotto.constant.MatchResult;
 

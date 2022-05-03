@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.dto.MatchStats;
+import lotto.dto.result.MatchStats;
 import lotto.exception.NotSupportInstanceException;
 
 import java.util.List;

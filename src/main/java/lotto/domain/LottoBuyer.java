@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.dto.WinningStats;
+import lotto.dto.result.WinningStats;
 import lotto.util.Calculator;
 import lotto.util.SplitUtil;
 

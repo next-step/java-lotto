@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lottos;
-import lotto.dto.WinningStats;
+import lotto.dto.result.WinningStats;
 import lotto.exception.NotSupportInstanceException;
 
 public class ResultView {
