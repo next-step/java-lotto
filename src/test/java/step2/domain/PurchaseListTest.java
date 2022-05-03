@@ -13,6 +13,6 @@ class PurchaseListTest {
 
     @Test
     void 구매_갯수를_입력으로_받아_갯수만큼_로또를_생성합니다() {
-        assertThat(new PurchaseList(3)).extracting("values").asList().hasSize(3);
+        assertThat(new PurchaseList(3).getValues()).hasSize(3);
     }
 }
