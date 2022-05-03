@@ -9,6 +9,7 @@ import lotto.model.Rank;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ResultView {
 
@@ -20,6 +21,8 @@ public class ResultView {
     private static final String OUTPUT_LINE = "=========";
     private static final String OUTPUT_WINNINGS = "%d개 일치 (%d원)- %d개";
     private static final String OUTPUT_YIELD = "총 수익률은 %.2f 입니다.";
+    private static final long DEFAULT_COUNT = 0L;
+    private static final List<Integer> PRINT_MATCH_COUNTS = IntStream.range(3, 7).boxed().collect(Collectors.toList());
 
     private ResultView() {
         throw new AssertionError();
@@ -49,23 +52,27 @@ public class ResultView {
         System.out.println(OUTPUT_STATISTICS);
         System.out.println(OUTPUT_LINE);
 
-        long winningsSum = printStatistics(lottoResult);
+        printStatistics(lottoResult);
 
-        printYield(buyingMoney, winningsSum);
+        printYield(lottoResult.getYield(buyingMoney));
     }
 
-    private static long printStatistics(LottoResult lottoResult) {
-        Map<Rank, Integer> rankResult = lottoResult.getRankResult();
-        long winningsSum = lottoResult.getWinningsSum();
-        for (Map.Entry<Rank, Integer> result : rankResult.entrySet()) {
-            Rank rank = result.getKey();
-            int count = result.getValue();
-            System.out.println(String.format(OUTPUT_WINNINGS, rank.matchCount(), rank.winnings(), count));
+    private static void printStatistics(LottoResult lottoResult) {
+        Map<Integer, Long> rankResult = getRankResult(lottoResult.getRankResult());
+
+        for (Integer count : PRINT_MATCH_COUNTS) {
+            Rank rank = Rank.of(count);
+            System.out.println(String.format(OUTPUT_WINNINGS, rank.matchCount(), rank.winnings(), rankResult.getOrDefault(count, DEFAULT_COUNT)));
         }
-        return winningsSum;
     }
 
-    private static void printYield(Money buyingMoney, long result) {
-        System.out.println(String.format(OUTPUT_YIELD, buyingMoney.getYield(result)));
+    private static Map<Integer, Long> getRankResult(List<Rank> rankResult) {
+        return rankResult.stream()
+                .filter(rank -> rank != Rank.OTHER)
+                .collect(Collectors.groupingBy(Rank::matchCount, Collectors.counting()));
+    }
+
+    private static void printYield(double yield) {
+        System.out.println(String.format(OUTPUT_YIELD, yield));
     }
 }
