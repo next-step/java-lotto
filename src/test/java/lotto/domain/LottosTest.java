@@ -18,20 +18,20 @@ class LottosTest {
   void manualAndAutoCreate() {
     List<Lotto> manualLottos = List.of(
         new Lotto(Set.of(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(30),
-            new LottoNumber(40),
-            new LottoNumber(45)
+            LottoNumber.of(1),
+            LottoNumber.of(2),
+            LottoNumber.of(3),
+            LottoNumber.of(30),
+            LottoNumber.of(40),
+            LottoNumber.of(45)
         )),
         new Lotto(Set.of(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(40),
-            new LottoNumber(45)
+            LottoNumber.of(1),
+            LottoNumber.of(2),
+            LottoNumber.of(3),
+            LottoNumber.of(4),
+            LottoNumber.of(40),
+            LottoNumber.of(45)
         ))
     );
     assertThat(Lottos.create(manualLottos, 8).size()).isEqualTo(10);
@@ -52,44 +52,44 @@ class LottosTest {
 
   private Lottos prepareLottos() {
     Lotto matchThree = new Lotto(Set.of(
-        new LottoNumber(1),
-        new LottoNumber(2),
-        new LottoNumber(3),
-        new LottoNumber(30),
-        new LottoNumber(40),
-        new LottoNumber(45)
+        LottoNumber.of(1),
+        LottoNumber.of(2),
+        LottoNumber.of(3),
+        LottoNumber.of(30),
+        LottoNumber.of(40),
+        LottoNumber.of(45)
     ));
     Lotto matchFour = new Lotto(Set.of(
-        new LottoNumber(1),
-        new LottoNumber(2),
-        new LottoNumber(3),
-        new LottoNumber(4),
-        new LottoNumber(40),
-        new LottoNumber(45)
+        LottoNumber.of(1),
+        LottoNumber.of(2),
+        LottoNumber.of(3),
+        LottoNumber.of(4),
+        LottoNumber.of(40),
+        LottoNumber.of(45)
     ));
     Lotto matchFive = new Lotto(Set.of(
-        new LottoNumber(1),
-        new LottoNumber(2),
-        new LottoNumber(3),
-        new LottoNumber(4),
-        new LottoNumber(5),
-        new LottoNumber(45)
+        LottoNumber.of(1),
+        LottoNumber.of(2),
+        LottoNumber.of(3),
+        LottoNumber.of(4),
+        LottoNumber.of(5),
+        LottoNumber.of(45)
     ));
     Lotto matchFiveAndBonus = new Lotto(Set.of(
-        new LottoNumber(1),
-        new LottoNumber(2),
-        new LottoNumber(3),
-        new LottoNumber(4),
-        new LottoNumber(5),
-        new LottoNumber(7)
+        LottoNumber.of(1),
+        LottoNumber.of(2),
+        LottoNumber.of(3),
+        LottoNumber.of(4),
+        LottoNumber.of(5),
+        LottoNumber.of(7)
     ));
     Lotto matchSix = new Lotto(Set.of(
-        new LottoNumber(1),
-        new LottoNumber(2),
-        new LottoNumber(3),
-        new LottoNumber(4),
-        new LottoNumber(5),
-        new LottoNumber(6)
+        LottoNumber.of(1),
+        LottoNumber.of(2),
+        LottoNumber.of(3),
+        LottoNumber.of(4),
+        LottoNumber.of(5),
+        LottoNumber.of(6)
     ));
     return new Lottos(List.of(matchThree, matchFour, matchFive, matchFiveAndBonus, matchSix));
   }

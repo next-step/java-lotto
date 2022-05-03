@@ -29,7 +29,7 @@ public class Lotto {
 
   public static Lotto create(Set<Integer> values) {
     return values.stream()
-        .map(LottoNumber::new)
+        .map(LottoNumber::of)
         .collect(Collectors.collectingAndThen(Collectors.toSet(), Lotto::new));
   }
 

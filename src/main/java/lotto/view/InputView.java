@@ -60,7 +60,7 @@ public class InputView {
 
   private static LottoNumber getLastWeekBonus() {
     System.out.println("보너스 볼을 입력해 주세요.");
-    return new LottoNumber(Integer.parseInt(SCANNER.nextLine()));
+    return LottoNumber.of(Integer.parseInt(SCANNER.nextLine()));
   }
 
   private static void validateCount(int lottoCount, int manualLottoCount) {

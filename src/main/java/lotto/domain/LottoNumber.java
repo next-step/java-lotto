@@ -1,18 +1,35 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
   private static final int MIN_NUMBER = 1;
   private static final int MAX_NUMBER = 45;
+  private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
   private static final String INVALID_NUMBER_MESSAGE = "1과 45 사이의 자연수만 입력할 수 있습니다.";
 
   private final int value;
 
-  public LottoNumber(int value) {
+  static {
+    for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+      CACHE.put(i, new LottoNumber(i));
+    }
+  }
+
+  private LottoNumber(int value) {
     validate(value);
     this.value = value;
+  }
+
+  public static LottoNumber of(int value) {
+    LottoNumber lottoNumber = CACHE.get(value);
+    if (lottoNumber != null) {
+      return lottoNumber;
+    }
+    return new LottoNumber(value);
   }
 
   private void validate(int value) {

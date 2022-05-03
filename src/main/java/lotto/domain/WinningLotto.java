@@ -24,7 +24,7 @@ public class WinningLotto {
 
   public static WinningLotto create(Set<Integer> lottoNumbers, int bonus) {
     Lotto lotto = Lotto.create(lottoNumbers);
-    LottoNumber bonusNumber = new LottoNumber(bonus);
+    LottoNumber bonusNumber = LottoNumber.of(bonus);
     return new WinningLotto(lotto, bonusNumber);
   }
 
