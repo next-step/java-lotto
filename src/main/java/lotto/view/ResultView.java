@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.domain.LottoBuyer;
 import lotto.domain.Lottos;
+import lotto.dto.WinningStats;
 import lotto.exception.NotSupportInstanceException;
 
 public class ResultView {
@@ -19,10 +19,10 @@ public class ResultView {
         System.out.println(ResultBuilder.buildLottosInfo(lottos.toList()));
     }
 
-    public static void lottosResultView(LottoBuyer lottoBuyer) {
+    public static void lottosResultView(WinningStats winningStats) {
         System.out.println(MESSAGE_WIN_RESULT);
         System.out.println(MESSAGE_SEPARATOR_LINE);
-        System.out.println(ResultBuilder.buildLottosResult(lottoBuyer.lottos()));
-        System.out.println(ResultBuilder.buildLottosProfitRate(lottoBuyer.calculateProfitRate()));
+        System.out.println(ResultBuilder.buildLottosResult(winningStats.matchStatsList()));
+        System.out.println(ResultBuilder.buildLottosProfitRate(winningStats.profitRate()));
     }
 }

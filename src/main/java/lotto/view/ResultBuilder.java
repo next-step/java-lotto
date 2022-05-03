@@ -1,8 +1,7 @@
 package lotto.view;
 
-import lotto.constant.MatchResult;
 import lotto.domain.Lotto;
-import lotto.domain.Lottos;
+import lotto.dto.MatchStats;
 import lotto.exception.NotSupportInstanceException;
 
 import java.util.List;
@@ -41,17 +40,17 @@ public class ResultBuilder {
         return sb.toString();
     }
 
-    public static String buildLottosResult(Lottos lottos) {
+    public static String buildLottosResult(List<MatchStats> matchStatsList) {
         initializeStringBuilder();
 
-        for (MatchResult matchResult : MatchResult.values()) {
-            sb.append(matchResult.matchCount());
+        for (MatchStats matchStats : matchStatsList) {
+            sb.append(matchStats.matchResult().matchCount());
             sb.append(MESSAGE_MATCH);
             sb.append(MESSAGE_BRACKET_OPEN);
-            sb.append(matchResult.winPrice());
+            sb.append(matchStats.matchResult().winPrice());
             sb.append(MESSAGE_BRACKET_CLOSE);
             sb.append(MESSAGE_DASH);
-            sb.append(lottos.countMatchResult(matchResult));
+            sb.append(matchStats.count());
             sb.append(MESSAGE_MATCH_COUNT_UNIT);
             sb.append(BLANK_LINE);
         }

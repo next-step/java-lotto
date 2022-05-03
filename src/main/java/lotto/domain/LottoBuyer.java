@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.dto.WinningStats;
 import lotto.util.Calculator;
 import lotto.util.SplitUtil;
 
@@ -22,9 +23,10 @@ public class LottoBuyer {
         return purchaseAmount / LOTTO_PRICE;
     }
 
-    public void confirmLottos(String winningNumberValue) {
+    public WinningStats confirmLottos(String winningNumberValue) {
         String[] winningNumbers = SplitUtil.split(winningNumberValue);
         lottos.confirmAll(LottoNumbers.winningLottoNumbers(winningNumbers));
+        return WinningStats.of(this);
     }
 
     public double calculateProfitRate() {
