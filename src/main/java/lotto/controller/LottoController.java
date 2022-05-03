@@ -1,14 +1,11 @@
 package lotto.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import lotto.dto.WinningResultDto;
-import lotto.enums.Grade;
 import lotto.model.Guest;
 import lotto.model.Lotto;
 import lotto.model.Store;
 import lotto.service.LottoService;
-import lotto.util.AwardNumberUtil;
 import lotto.view.InputTable;
 import lotto.view.OutputTable;
 
