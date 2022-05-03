@@ -20,7 +20,7 @@ public class Lottos {
         for (LottoNumbers lottoNumber : lottoNumbers) {
             int numberOfWins = lottoNumber.match(winningLotto);
             boolean isBonus = lottoNumber.checkBonus(winningLotto, numberOfWins);
-            results.find(numberOfWins).ifPresent(Result::plusWinners);
+            results.find(numberOfWins, isBonus).ifPresent(Result::plusWinners);
         }
         return results;
     }

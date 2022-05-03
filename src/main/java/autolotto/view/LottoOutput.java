@@ -1,6 +1,8 @@
 package autolotto.view;
 
+import autolotto.constant.Rank;
 import autolotto.domain.Lottos;
+import autolotto.domain.Result;
 import autolotto.domain.Results;
 
 public class LottoOutput {
@@ -11,7 +13,18 @@ public class LottoOutput {
     public void printResult(Results results) {
         println("당첨통계");
         println("----------------");
-        results.getResults().forEach(result -> println(String.format("%s개 일치 (%d원) - %s개", result.getNumberOfWins(), result.getPrize(), result.getWinners())));
+
+        for (Result result : results.getResults()) {
+            long prize = Rank.find(result.getCountOfMatch(), result.hasBonusBall())
+                    .map(Rank::getWinningMoney)
+                    .orElse(0L);
+
+            String outputFormat = "%s개 일치 (%d원) - %s개";
+            if (result.hasBonusBall()) {
+                outputFormat = "%s개 일치, 보너스 볼 일치 (%d원) - %s개";
+            }
+            println(String.format(outputFormat, result.getCountOfMatch(), prize, result.getWinners()));
+        }
     }
 
     public void printProfit(Lottos lottos, Results results) {

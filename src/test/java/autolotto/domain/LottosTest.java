@@ -27,9 +27,9 @@ class LottosTest {
             "4:0",
             "3:0"
     }, delimiter = ':')
-    void winningLottoGiven_ReturnResult(int numberOfWins, int winners) {
-        Results results = lottos.confirm(new WinningLotto(new LottoNumbers(Set.of(1, 2, 3, 4, 5, 6))));
-        assertThat(results.find(numberOfWins).get().getWinners()).isEqualTo(winners);
+    void winningLottoGiven_ReturnResult(int countOfMatch, int winners) {
+        Results results = lottos.confirm(new WinningLotto(new LottoNumbers(Set.of(1, 2, 3, 4, 5, 6)), 7));
+        assertThat(results.find(countOfMatch, false).get().getWinners()).isEqualTo(winners);
     }
 
     @Test

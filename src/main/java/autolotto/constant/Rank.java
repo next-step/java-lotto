@@ -11,7 +11,7 @@ public enum Rank {
     FIFTH(3, 5_000);
 
     private final int countOfMatch;
-    private final int winningMoney;
+    private final long winningMoney;
 
     Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
@@ -35,7 +35,7 @@ public enum Rank {
         return countOfMatch;
     }
 
-    public int getWinningMoney() {
+    public long getWinningMoney() {
         return winningMoney;
     }
 }
