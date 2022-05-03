@@ -1,4 +1,4 @@
-package Lotto;
+package Lotto.controller;
 
 public class Main {
 

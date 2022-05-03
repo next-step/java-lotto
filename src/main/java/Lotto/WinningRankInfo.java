@@ -1,5 +1,7 @@
 package Lotto;
 
+import Lotto.exception.NotFoundRankException;
+
 import java.util.stream.Stream;
 
 public enum WinningRankInfo {

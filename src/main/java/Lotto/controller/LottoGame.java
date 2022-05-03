@@ -1,16 +1,19 @@
-package Lotto;
+package Lotto.controller;
 
+import Lotto.Lottos;
 import Lotto.view.InputView;
 import Lotto.view.ResultView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class LottoGame {
 
-    private MyLottoList myLottoList = new MyLottoList();
+    private Lottos lottos = new Lottos();
 
     private int buyMoney = 0;
-    private int[] winningNumbers = new int[6];
+    private List<Integer> winningNumbers = new ArrayList<>();
 
     public void start() {
         inputBuyMoney();
@@ -23,7 +26,7 @@ public class LottoGame {
     }
 
     private void inputBuyMoney() {
-        myLottoList.createLottoNumbers(changeMoneyToLottoNum());
+        lottos.createLottoNumbers(changeMoneyToLottoNum());
     }
 
     private int changeMoneyToLottoNum() {
@@ -32,7 +35,7 @@ public class LottoGame {
     }
 
     private void viewMyLottoNumbers() {
-        ResultView.viewLottoNumbers(myLottoList);
+        ResultView.viewLottoNumbers(lottos);
     }
 
     private void inputWinningLottoNumbers() {
@@ -42,13 +45,13 @@ public class LottoGame {
     private void splitAndCastWinningNumber(String winningLottoNumbersStr) {
         String[] winningNumbersArr = winningLottoNumbersStr.split(",");
 
-        for (int i = 0; i < winningNumbersArr.length; ++i) {
-            winningNumbers[i] = Integer.parseInt(winningNumbersArr[i]);
+        for (int i = 0; i < 6; ++i) {
+            winningNumbers.add(Integer.parseInt(winningNumbersArr[i]));
         }
     }
 
     private void viewResult() {
-        Map<Integer,Integer> result = myLottoList.checkWinningLotto(winningNumbers);
+        Map<Integer, Integer> result = lottos.checkWinningLotto(winningNumbers);
 
         ResultView.viewResultBoard(result);
 

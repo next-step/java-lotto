@@ -7,17 +7,13 @@ public class Lotto {
 
     private List<Integer> numbers = new ArrayList<>();
 
-    public Lotto(int[] numbers) {
+    public Lotto(List<Integer> numbers) {
         for (int n : numbers) {
             this.numbers.add(n);
         }
     }
 
-    public int getLottoNumber(int idx) {
-        return numbers.get(idx);
-    }
-
-    public int checkWinningLottoNumbers(int[] winningNumbers) {
+    public int checkWinningLottoNumbers(List<Integer> winningNumbers) {
         int cnt = 0;
         for (int num : winningNumbers) {
             cnt = checkWinningLottoNumbers(cnt, num);
@@ -27,11 +23,14 @@ public class Lotto {
     }
 
     private int checkWinningLottoNumbers(int cnt, int answerNum) {
-        for (int myLottoNum : numbers) {
-            if(myLottoNum == answerNum) {
-                cnt += 1;
-            }
+        if (numbers.contains(answerNum)) {
+            cnt += 1;
         }
+
         return cnt;
+    }
+
+    public int getLottoNumber(int idx) {
+        return numbers.get(idx);
     }
 }

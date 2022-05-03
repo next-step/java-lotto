@@ -1,4 +1,4 @@
-package Lotto;
+package Lotto.exception;
 
 public class NotFoundRankException extends RuntimeException {
 

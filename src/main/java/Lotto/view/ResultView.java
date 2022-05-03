@@ -1,7 +1,7 @@
 package Lotto.view;
 
 import Lotto.LottoMachine;
-import Lotto.MyLottoList;
+import Lotto.Lottos;
 import Lotto.WinningRankInfo;
 
 import java.util.Map;
@@ -12,22 +12,22 @@ public class ResultView {
 
     private static int LOTTO_LAST_NUMBER = 6;
 
-    public static void viewLottoNumbers(MyLottoList myLottoList) {
-        int lottoNum = myLottoList.getLottoCnt();
+    public static void viewLottoNumbers(Lottos lottos) {
+        int lottoNum = lottos.getLottoCnt();
         System.out.println(lottoNum + "개를 구매했습니다.");
 
         for (int i = 0; i < lottoNum; ++i) {
             System.out.print("[");
-            viewLottoNumbers(myLottoList, i);
+            viewLottoNumbers(lottos, i);
             System.out.print("]");
             System.out.println();
         }
         System.out.println();
     }
 
-    private static void viewLottoNumbers(MyLottoList myLottoList, int i) {
+    private static void viewLottoNumbers(Lottos lottos, int i) {
         for (int k = 0; k < LOTTO_LAST_NUMBER; ++k) {
-            System.out.print(myLottoList.getLotto(i).getLottoNumber(k));
+            System.out.print(lottos.getLotto(i).getLottoNumber(k));
             if (k < LOTTO_LAST_NUMBER - 1)
                 System.out.print(", ");
         }

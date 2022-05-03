@@ -2,14 +2,14 @@ package Lotto;
 
 import java.util.*;
 
-public class MyLottoList {
+public class Lottos {
 
     private List<Lotto> list = new ArrayList<>();
 
-    private static int LOTTO_MAX_NUMBER = 45;
-    private static int LOTTO_LAST_NUMBER = 6;
+    private static final int LOTTO_MAX_NUMBER = 45;
+    private static final int LOTTO_NUMBER_SIZE = 6;
 
-    public MyLottoList() {
+    public Lottos() {
     }
 
     public void createLottoNumbers(int lottoCount) {
@@ -28,14 +28,15 @@ public class MyLottoList {
     }
 
     private void pickLottoNumbers(List<Integer> tmpNumbers) {
-        int[] lottoNumbers = new int[LOTTO_LAST_NUMBER];
+        //int[] lottoNumbers = new int[LOTTO_NUMBER_SIZE];
+        List<Integer> lottoNumbers = new ArrayList<>();
 
         Collections.shuffle(tmpNumbers);
-        for (int j = 0; j < LOTTO_LAST_NUMBER; ++j) {
-            lottoNumbers[j] = tmpNumbers.get(j);
+        for (int j = 0; j < LOTTO_NUMBER_SIZE; ++j) {
+            lottoNumbers.add(tmpNumbers.get(j));
         }
 
-        Arrays.sort(lottoNumbers);
+        Collections.sort(lottoNumbers);
 
         list.add(new Lotto(lottoNumbers));
     }
@@ -48,7 +49,7 @@ public class MyLottoList {
         return list.size();
     }
 
-    public Map<Integer,Integer> checkWinningLotto(int[] winningNumbers) {
+    public Map<Integer,Integer> checkWinningLotto(List<Integer> winningNumbers) {
         Map<Integer,Integer> winningLottoMap = new HashMap<>();
 
         for(Lotto lotto : list) {
