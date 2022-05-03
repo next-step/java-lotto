@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottoWinningConditionTest {
     @Test
-    void 로또_당첨번호_중복_테스트() {
+    void 로또_당첨번호_및_보너스번호_중복_테스트() {
         List<Integer> lottoNumber = Arrays.asList(new Integer[]{5,27,29,35,39,44});
         Lotto lotto = new Lotto(lottoNumber);
 
@@ -31,7 +31,7 @@ class LottoWinningConditionTest {
                     Lotto previousLotto = new Lotto(previousLottoNumber);
                     LottoNumber bonusNumber = LottoNumber.valueOf(27);
 
-                    assertThat(lotto.winLotto(new LottoWinningCondition(previousLotto, bonusNumber))).isEqualTo(LottoWinnerType.valueOf(5, true));
+                    assertThat(new LottoWinningCondition(previousLotto, bonusNumber).winLotto(lotto)).isEqualTo(LottoWinnerType.valueOf(5, true));
                 }
         );
     }
