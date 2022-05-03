@@ -15,13 +15,11 @@ public class LottoStatistics {
         this.lottoWinningNumbers = lottoWinningNumbers;
     }
 
-    public double calculateNumbersCount(int winningMoney) {
-        if(winningMoney == LottoRank.valueOf("FIVE_NUMBERS_AND_BONUS").getLottoRankMoney()) {
+    public double calculateNumbersCount(LottoRank lottoRank) {
+        if (LottoRank.checkBonusRank(lottoRank)) {
             return calculateNumbersAndBonusNumberCount();
         }
-        return lottos.calculateNumbers(lottoWinningNumbers
-            , LottoRank.valueOf(winningMoney)
-                .getLottoRank());
+        return lottos.calculateNumbers(lottoWinningNumbers, lottoRank.getLottoMatchCount());
     }
 
     private double calculateNumbersAndBonusNumberCount() {
@@ -30,12 +28,10 @@ public class LottoStatistics {
     }
 
     public double statistics() {
-        double result;
         decimalFormat.setRoundingMode(RoundingMode.DOWN);
-
-        result = Arrays.stream(LottoRank.values())
-            .mapToDouble(lottoRank -> calculateNumbersCount(lottoRank.getLottoRankMoney()) * lottoRank.getLottoRankMoney())
-            .sum();
+        double result = Arrays.stream(LottoRank.values())
+                .mapToDouble(lottoRank -> calculateNumbersCount(lottoRank) * lottoRank.getLottoRankMoney())
+                .sum();
 
         return Double.parseDouble(decimalFormat.format(result / (lottos.size() * LOTTO_PRICE)));
     }
