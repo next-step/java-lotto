@@ -17,13 +17,13 @@ public final class Store {
     long count = money / PRODUCT_PRICE;
     List<Lotto> lotteryTickets = new ArrayList<>();
     while (count-- != 0) {
-      lotteryTickets.add(deliverLotto(init));
+      lotteryTickets.add(deliverLotto());
     }
     return lotteryTickets;
   }
 
-  private Lotto deliverLotto(List<Integer> init) {
-    return LottoFactory.getInstance(init).apply();
+  private Lotto deliverLotto() {
+    return LottoFactory.getInstance().apply();
   }
 
 }

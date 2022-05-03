@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import lotto.util.AwardNumberUtil;
 
 public final class LottoFactory {
 
@@ -16,9 +17,9 @@ public final class LottoFactory {
     this.init = init;
   }
 
-  public static LottoFactory getInstance(List<Integer> init) {
+  public static LottoFactory getInstance() {
     if (instance == null) {
-      instance = new LottoFactory(init);
+      instance = new LottoFactory(AwardNumberUtil.init());
     }
     return LottoFactory.instance;
   }
