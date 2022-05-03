@@ -7,3 +7,19 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 테스트 목록
+MainTest
+* 계산 전체 프로세스 확인
+
+CalculatorTest
+* 숫자와 연산 기호 배열을 넣었을 때 결과값 반환 확인
+* 4가지 연산 기호 입력 결과 확인
+* 더하기 계산 확인
+* 빼기 계산 확인
+* 곱하기 계산 확인
+* 나누기 계산 확인
+
+OperationUtilTest
+* 입력 받은 문자열을 문자 배열로 반환
+* 입력 받은 문자열이 빈값일 때 예외 반환
