@@ -7,7 +7,7 @@ import java.util.Objects;
 public class LottoNumber implements Comparable<LottoNumber> {
     private Integer lottoNumber;
 
-    public LottoNumber(Integer lottoNumber) {
+    LottoNumber(Integer lottoNumber) {
         checkRangeOfLottoNumber(lottoNumber);
         this.lottoNumber = lottoNumber;
     }

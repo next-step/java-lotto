@@ -23,7 +23,7 @@ public class Lotto {
     private List<LottoNumber> castIntegersToLottoNumbers(List<Integer> lottoNumbers) {
         final List<LottoNumber> lotto = new ArrayList<>();
         for (Integer number : lottoNumbers) {
-            lotto.add(new LottoNumber(number));
+            lotto.add(LottoNumberFactory.valueOf(number));
         }
         return lotto;
     }

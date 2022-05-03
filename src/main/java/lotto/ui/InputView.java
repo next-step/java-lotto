@@ -1,9 +1,6 @@
 package lotto.ui;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoWinningCondition;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.exception.*;
 import lotto.util.Utility;
 
@@ -88,7 +85,7 @@ public class InputView {
     private static LottoNumber inputBonusNumber() {
         try {
             System.out.println(BONUS_NUMBER_MESSAGE);
-            return new LottoNumber(SCANNER.nextInt());
+            return LottoNumberFactory.valueOf(SCANNER.nextInt());
         } catch (InvalidLottoNumberException e) {
             SCANNER.nextLine(); // Delete newLine
             System.out.println(e.getMessage());
