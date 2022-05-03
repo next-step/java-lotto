@@ -16,4 +16,8 @@ public class WinningLotto {
     public boolean contains(int number) {
         return lottoNumbers.contains(number);
     }
+
+    public int getBonusBall() {
+        return bonusBall;
+    }
 }
