@@ -7,8 +7,6 @@ public final class Store {
 
   private static final long PRODUCT_PRICE = 1_000L;
 
-
-
   public Store() {
   }
 
