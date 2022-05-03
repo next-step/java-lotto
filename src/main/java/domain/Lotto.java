@@ -1,13 +1,14 @@
 package domain;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
-    private static final int SAME_FIVE_NUMBERS = 5;
-    private static final int SAME_BONUS_NUMBER = 1;
+    private static final int SAME_FIVE_NUMBERS = 6;
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
@@ -25,16 +26,14 @@ public class Lotto {
     }
 
     public boolean sameFiveNumberListWithBonusNumber(Lotto lotto, int bonus) {
-        int sameLottoNumberCount = Math.toIntExact(this.lottoNumbers
-                .stream()
-                .filter(lotto.lottoNumbers::contains)
-                .count());
-        int sameBonusCount = Math.toIntExact(this.lottoNumbers
-                .stream()
-                .filter(lottoNumber -> lottoNumber.getLottoNumber() == bonus)
-                .count());
+        Set<LottoNumber> checkLotto = new HashSet<>(lotto.lottoNumbers);
+        checkLotto.add(new LottoNumber(bonus));
 
-        return sameLottoNumberCount == SAME_FIVE_NUMBERS && sameBonusCount == SAME_BONUS_NUMBER;
+        int sameLottoNumberCount = (int) checkLotto.stream()
+            .filter(lottoNumbers::contains)
+            .count();
+
+        return sameLottoNumberCount == SAME_FIVE_NUMBERS;
     }
 
     @Override

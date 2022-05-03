@@ -4,16 +4,15 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class LottoWinningNumbers {
-    private static final String SPLIT_REGEX = ",";
     private static final int RANGE_FROM = 1;
     private static final int RANGE_TO = 45;
     private final Lotto winningLotto;
     private final int bonusNumber;
 
 
-    public LottoWinningNumbers(String winningNumbers, int bonusNumber) {
+    public LottoWinningNumbers(String[] winningNumbers, int bonusNumber) {
         validateBonusNumber(bonusNumber);
-        this.winningLotto = new Lotto(Arrays.stream(winningNumbers.split(SPLIT_REGEX))
+        this.winningLotto = new Lotto(Arrays.stream(winningNumbers)
                 .map(s -> new LottoNumber(Integer.parseInt(s)))
                 .collect(Collectors.toList()));
         this.bonusNumber = bonusNumber;
