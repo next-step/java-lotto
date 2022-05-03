@@ -14,7 +14,6 @@ public class RankResults {
         return rankResults;
     }
 
-    // todo test
     public double getProfitRatio(int money) {
         Integer totalPrize = getTotalPrize();
         return (double) totalPrize / money;
