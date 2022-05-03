@@ -2,6 +2,8 @@ package lotto.controller;
 
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTicketGenerator;
+import lotto.domain.RankResults;
+import lotto.domain.Ranks;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -28,9 +30,14 @@ public class LottoGameController {
         int money = getMoney();
         List<LottoTicket> lottoTickets = getLottoTickets(money);
         outputView.printLottoTickets(lottoTickets);
+        RankResults rankResults = getRankResults(lottoTickets);
+        outputView.printResult(rankResults, money);
+    }
+
+    private RankResults getRankResults(List<LottoTicket> lottoTickets) {
         LottoTicket winningTicket = getWinningTicket();
         List<Integer> matchNumbers = getMatchNumbers(lottoTickets, winningTicket);
-        outputView.printResult(matchNumbers, money);
+        return new RankResults(Ranks.getRankResults(matchNumbers));
     }
 
     private LottoTicket getWinningTicket() {
@@ -38,9 +45,9 @@ public class LottoGameController {
         return lottoTicketGenerator.generateWinningTicket(integers);
     }
 
-    private List<Integer> getMatchNumbers(List<LottoTicket> lottoTickets, LottoTicket lottoTicket) {
+    private List<Integer> getMatchNumbers(List<LottoTicket> lottoTickets, LottoTicket winningTicket) {
         return lottoTickets.stream()
-                .map(t -> t.countMatchNumbers(lottoTicket))
+                .map(t -> t.countMatchNumbers(winningTicket))
                 .collect(Collectors.toList());
     }
 

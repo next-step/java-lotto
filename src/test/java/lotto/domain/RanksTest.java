@@ -4,10 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.entry;
 
 class RanksTest {
 
@@ -17,13 +15,14 @@ class RanksTest {
         // given
         List<Integer> matchNumbers = List.of(4, 4, 6, 5, 5, 4);
         // when
-        Map<Rank, Integer> rankIntegerMap = Ranks.getGroupByMap(matchNumbers);
+        List<RankResult> rankResults = Ranks.getRankResults(matchNumbers);
+
         // then
-        assertThat(rankIntegerMap).containsExactly(
-                entry(Rank.FIRST, 1),
-                entry(Rank.SECOND, 2),
-                entry(Rank.THIRD, 3),
-                entry(Rank.FOURTH, 0));
+        assertThat(rankResults).containsExactly(
+                new RankResult(Rank.FIRST, 1),
+                new RankResult(Rank.SECOND, 2),
+                new RankResult(Rank.THIRD, 3),
+                new RankResult(Rank.FOURTH, 0));
     }
 
 
