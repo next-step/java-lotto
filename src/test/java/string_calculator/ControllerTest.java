@@ -9,8 +9,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ControllerTest {
     @Test
     void parseShouldReturnEqualValuesInBothControllerAndParser() {
-        Controller controller = new Controller("1 + 2");
-        controller.parse();
+        Controller controller = new Controller();
+        controller.parse("1 + 2");
         List<Object> actual = controller.parser.values;
         Parser parser = new Parser();
         parser.parse("1 + 2");
@@ -20,10 +20,9 @@ public class ControllerTest {
 
     @Test
     void computesShouldReturnEqualValuesInBothControllerAndCalculator() {
-        Controller controller = new Controller("1 + 2");
-        controller.parse();
-        controller.computes();
-        Integer actual = controller.result;
+        Controller controller = new Controller();
+        controller.parse("1 + 2");
+        Integer actual = controller.computes();;
         Calculator calculator = new Calculator();
         Integer expected = calculator.computes(controller.parser.values);
         assertThat(actual).isEqualTo(expected);
