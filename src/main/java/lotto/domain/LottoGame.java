@@ -9,13 +9,17 @@ public class LottoGame {
   public static final int GAME_PRICE = 1000;
   private final LottoNumbers lottoNumbers;
 
-  public LottoGame(String lottoNumbers) {
-    checkNumberLength(lottoNumbers);
-    this.lottoNumbers = new LottoNumbers(lottoNumbers);
+  private LottoGame(LottoNumbers lottoNumbers) {
+    this.lottoNumbers = lottoNumbers;
   }
 
-  public LottoGame(NumberGenerator numberGenerator) {
-    this.lottoNumbers = new LottoNumbers(numberGenerator);
+  public static LottoGame of(String lottoNumbers) {
+    checkNumberLength(lottoNumbers);
+    return new LottoGame(LottoNumbers.of(lottoNumbers));
+  }
+
+  public static LottoGame of(NumberGenerator numberGenerator) {
+    return new LottoGame(LottoNumbers.of(numberGenerator.generate()));
   }
 
   public LottoDrawResult draw(LottoNumbers winNumbers, LottoNumber bonusNumber) {
@@ -29,7 +33,7 @@ public class LottoGame {
     return lottoNumbers;
   }
 
-  private void checkNumberLength(String lottoNumbers) {
+  private static void checkNumberLength(String lottoNumbers) {
     int numberLength = lottoNumbers.split(LottoNumbers.LOTTO_NUMBER_DELIMITER).length;
     if (numberLength != NUMBER_COUNT) {
       throw new InvalidLottoGameException(NUMBER_COUNT);

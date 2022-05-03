@@ -21,7 +21,7 @@ public class LottoGameApp {
     LottoGameInputView lottoGameInputView = new LottoGameInputView();
     lottoGameInputView.setPurchaseAmount();
 
-    LottoGames lottoGames = new LottoGames(lottoGameInputView.getPurchaseAmount(),
+    LottoGames lottoGames = LottoGames.of(
         makeNumberGenerators(lottoGameInputView.getPurchaseAmount()));
 
     LottoGameOutputView.printLottoNumbers(lottoGames);
@@ -29,8 +29,8 @@ public class LottoGameApp {
     lottoGameInputView.setBonusBall();
 
     LottoDrawResults lottoDrawResults = lottoGames.draw(
-        new LottoNumbers(lottoGameInputView.getWinNumbers()),
-        new LottoNumber(lottoGameInputView.getBonusBallNumber()));
+        LottoNumbers.of(lottoGameInputView.getWinNumbers()),
+        LottoNumber.of(lottoGameInputView.getBonusBallNumber()));
 
     LottoGameOutputView.printGameResult(lottoDrawResults);
 

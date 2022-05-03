@@ -13,9 +13,9 @@ class LottoGameTest {
   @DisplayName("로또 게임이 잘 생성되는지 확인")
   @ValueSource(strings = {"1,5,10,15,20,2", "5,11,18,20,35,45", "1,9,12,26,35,38"})
   void generate(String numbers) {
-    LottoGame lottoGame = new LottoGame(numbers);
+    LottoGame lottoGame = LottoGame.of(numbers);
 
-    assertThat(lottoGame).usingRecursiveComparison().isEqualTo(new LottoGame(numbers));
+    assertThat(lottoGame).usingRecursiveComparison().isEqualTo(LottoGame.of(numbers));
   }
 
   @ParameterizedTest
@@ -23,8 +23,8 @@ class LottoGameTest {
   @CsvSource(value = {"1,5,10,15,20,2|1,2,10,40,44,45|3", "5,11,18,20,35,45|5,11,18,20,35,45|6",
       "1,9,12,26,35,38|38,35,11,12,9,1|5"}, delimiter = '|')
   void draw(String winNumbers, String lottoNumbers, int matchCount) {
-    LottoGame lottoGame = new LottoGame(lottoNumbers);
-    LottoDrawResult lottoDrawResult = lottoGame.draw(new LottoNumbers(winNumbers), null);
+    LottoGame lottoGame = LottoGame.of(lottoNumbers);
+    LottoDrawResult lottoDrawResult = lottoGame.draw(LottoNumbers.of(winNumbers), null);
 
     assertThat(lottoDrawResult.isMatchCountEqual(matchCount)).isTrue();
     assertThat(lottoDrawResult.getReword()).isEqualTo(LottoReword.getWinMoney(matchCount,
@@ -37,10 +37,10 @@ class LottoGameTest {
   @CsvSource(value = {"1,5,10,15,20,2|1,2,10,40,44,45|20|3",
       "5,11,18,20,35,45|5,11,18,20,35,45|44|6",
       "1,9,12,26,35,38|38,35,11,12,9,1|26|5"}, delimiter = '|')
-  void draw(String winNumbers, String lottoNumbers, String bonusNumber, int matchCount) {
-    LottoGame lottoGame = new LottoGame(lottoNumbers);
+  void draw(String winNumbers, String lottoNumbers, int bonusNumber, int matchCount) {
+    LottoGame lottoGame = LottoGame.of(lottoNumbers);
     LottoDrawResult lottoDrawResult = lottoGame
-        .draw(new LottoNumbers(winNumbers), new LottoNumber(bonusNumber));
+        .draw(LottoNumbers.of(winNumbers), LottoNumber.of(bonusNumber));
 
     assertThat(lottoDrawResult.isMatchCountEqual(matchCount)).isTrue();
     assertThat(lottoDrawResult.getReword()).isEqualTo(LottoReword.getWinMoney(matchCount,

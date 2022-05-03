@@ -3,17 +3,22 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.domain.strategy.NumberGenerator;
 
 public class LottoGames {
 
   private final List<LottoGame> values;
 
-  public LottoGames(int gameCount, List<NumberGenerator> numberGenerator) {
-    values = new ArrayList<>();
-    for (int i = 0; i < gameCount; i++) {
-      values.add(new LottoGame(numberGenerator.get(i)));
-    }
+  private LottoGames(List<LottoGame> values) {
+    this.values = values;
+  }
+
+  public static LottoGames of(List<NumberGenerator> numberGenerators) {
+    List<LottoGame> lottoGames = numberGenerators.stream()
+        .map(numberGenerator -> LottoGame.of(numberGenerator))
+        .collect(Collectors.toList());
+    return new LottoGames(lottoGames);
   }
 
   public LottoDrawResults draw(LottoNumbers winNumbers, LottoNumber bonusNumber) {

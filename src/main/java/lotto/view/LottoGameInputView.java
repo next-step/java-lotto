@@ -5,7 +5,6 @@ import java.util.Scanner;
 import lotto.domain.LottoGame;
 import lotto.exception.InvalidPurchaseAmountException;
 import lotto.exception.UserInputFailException;
-import org.omg.CORBA.DynAnyPackage.Invalid;
 
 public class LottoGameInputView {
 

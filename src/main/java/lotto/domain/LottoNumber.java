@@ -11,18 +11,22 @@ public class LottoNumber {
   public static final int MAX = 45;
   private static final Pattern CONTAINS_ONLY_NUMBER_PATTERN = Pattern.compile("^\\d+$");
 
-  public LottoNumber(int value) {
-    if (checkBound(value)) {
-      throw new InvalidLottoNumberException(String.valueOf(value));
-    }
+  private LottoNumber(int value) {
     this.value = value;
   }
 
-  public LottoNumber(String value) {
+  public static LottoNumber of(int value) {
+    if (checkBound(value)) {
+      throw new InvalidLottoNumberException(String.valueOf(value));
+    }
+    return new LottoNumber(value);
+  }
+
+  public static LottoNumber of(String value) {
     if (!CONTAINS_ONLY_NUMBER_PATTERN.matcher(value).find()) {
       throw new InvalidLottoNumberException(value);
     }
-    this.value = Integer.parseInt(value);
+    return of(Integer.parseInt(value));
   }
 
   @Override
@@ -46,7 +50,7 @@ public class LottoNumber {
     return value;
   }
 
-  private boolean checkBound(int value) {
+  private static boolean checkBound(int value) {
     return value < MIN || value > MAX;
   }
 }
