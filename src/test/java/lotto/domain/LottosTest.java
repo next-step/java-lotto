@@ -11,7 +11,7 @@ class LottosTest {
 
   @Test
   void autoCreate() {
-    assertThat(Lottos.create(Collections.EMPTY_LIST, 10).size()).isEqualTo(10);
+    assertThat(Lottos.create(Collections.emptyList(), 10).size()).isEqualTo(10);
   }
 
   @Test

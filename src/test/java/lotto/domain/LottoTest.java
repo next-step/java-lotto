@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
@@ -65,25 +66,25 @@ class LottoTest {
     );
   }
 
-  @DisplayName("String을 받아서 수동 로또를 생성할 수 있다.")
+  @DisplayName("List<String>을 받아서 수동 로또를 생성할 수 있다.")
   @Test
   void manualCreate() {
-    String input = "1, 2, 3, 4, 5, 6";
+    List<String> input = List.of("1", "2", "3", "4", "5", "6");
     assertThat(Lotto.manualCreate(input)).isEqualTo(lotto);
   }
 
   @DisplayName("로또를 생성할 수 없는 String이 들어오면 예외가 발생한다.")
   @ParameterizedTest
   @MethodSource("invalidInputAndExceptions")
-  void manualCreate(String input, Class<Exception> e) {
+  void manualCreate(List<String> input, Class<Exception> e) {
     assertThatThrownBy(() -> Lotto.manualCreate(input)).isInstanceOf(e);
   }
 
   private static Stream<Arguments> invalidInputAndExceptions() {
     return Stream.of(
-        Arguments.of("a, b, c, 1, 2, 3", NumberFormatException.class),
-        Arguments.of("0, -1, 46, 1, 2, 3", IllegalArgumentException.class),
-        Arguments.of("1, 2, 3, 4, 5", IllegalArgumentException.class)
+        Arguments.of(List.of("a", "b", "c", "1", "2", "3"), NumberFormatException.class),
+        Arguments.of(List.of("0", "-1", "46", "1", "2", "3"), IllegalArgumentException.class),
+        Arguments.of(List.of("1", "2", "3", "4", "5"), IllegalArgumentException.class)
     );
   }
 }

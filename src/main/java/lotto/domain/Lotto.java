@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
@@ -33,8 +33,8 @@ public class Lotto {
         .collect(Collectors.collectingAndThen(Collectors.toSet(), Lotto::new));
   }
 
-  public static Lotto manualCreate(String value) {
-    Set<Integer> integers = Arrays.stream(value.split(DELIMITER))
+  public static Lotto manualCreate(List<String> value) {
+    Set<Integer> integers = value.stream()
         .map(Integer::parseInt)
         .collect(Collectors.toSet());
     return create(integers);
