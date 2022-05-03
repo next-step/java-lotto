@@ -10,7 +10,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 class LottoTotalPriceTest {
     @Test
     void LottoTotalPrice_구매금액이_생성된다() {
-        assertThat(new LottoTotalPrice("1000")).isEqualTo(new LottoTotalPrice(1));
+        assertThat(new LottoTotalPrice("1000")).isEqualTo(new LottoTotalPrice(1000));
     }
 
     @ParameterizedTest
