@@ -5,11 +5,7 @@ import java.util.*;
 public class LottoNumbers {
 
     private final List<LottoNumber> lottoNumbers;
-
-    public LottoNumbers(LottoNumber[] lottoNumbersArray) {
-        this(Arrays.asList(lottoNumbersArray));
-    }
-
+    
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         Collections.sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
