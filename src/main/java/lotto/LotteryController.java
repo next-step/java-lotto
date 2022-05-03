@@ -3,12 +3,10 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
-import static lotto.Const.LOTTERY_PRICE;
 
 public class LotteryController {
     public Wallet wallet;
     public final WinStatistics winStatistics = new WinStatistics();
-    private double earningRate;
 
     LotteryController() {}
 
@@ -29,9 +27,9 @@ public class LotteryController {
         ResultView.printLotteries(this.wallet.lotteries);
     }
 
-    public void scanAnswer() {
+    public Answer scanAnswer() {
         String scanned = InputView.scan("Put lottery answer.");
-        this.wallet.answerNumbers = parseAnswerNumbers(scanned);
+        return new Answer(parseAnswerNumbers(scanned));
     }
 
     public List<Integer> parseAnswerNumbers(String scanned) {
@@ -54,9 +52,9 @@ public class LotteryController {
         return number;
     }
 
-    public void findWins() {
+    public void findWins(Answer answer) {
         for (Lottery lottery : this.wallet.lotteries) {
-            int win = findWin(lottery.numbers, this.wallet.answerNumbers);
+            int win = findWin(lottery.numbers, answer.numbers);
             saveWin(win);
         }
     }
@@ -86,12 +84,8 @@ public class LotteryController {
         ResultView.printWinStatistics(this.winStatistics.toPayload());
     }
 
-    public void getEarningRate() {
-        this.earningRate = winStatistics.getEarningRate(this.wallet.money);
-    }
-
     public void printEarningRate() {
-        String payload = "Earning rate: " + this.earningRate;
+        String payload = "Earning rate: " + winStatistics.getEarningRate(this.wallet.money);
         ResultView.print(payload);
     }
 

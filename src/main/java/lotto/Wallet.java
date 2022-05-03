@@ -7,7 +7,6 @@ import static lotto.Const.LOTTERY_PRICE;
 
 public class Wallet {
     public int money;
-    public List<Integer> answerNumbers;
     public final List<Lottery> lotteries;
 
     public Wallet(int money) {
@@ -16,13 +15,11 @@ public class Wallet {
         }
         this.money = money;
         this.lotteries = new ArrayList<>();
-        this.answerNumbers = new ArrayList<>();
     }
 
-    public Wallet(List<Lottery> lotteries, List<Integer> answerNumbers) {
+    public Wallet(List<Lottery> lotteries) {
         this.money = 0;
         this.lotteries = lotteries;
-        this.answerNumbers = answerNumbers;
     }
 
     public void createLotteries() {

@@ -6,10 +6,8 @@ public class LotteryApp {
         lotteryController.scanMoney();
         lotteryController.createLotteries();
         lotteryController.printLotteries();
-        lotteryController.scanAnswer();
-        lotteryController.findWins();
+        lotteryController.findWins(lotteryController.scanAnswer());
         lotteryController.printWinStatistics();
-        lotteryController.getEarningRate();
         lotteryController.printEarningRate();
         lotteryController.printEarned();
     }
