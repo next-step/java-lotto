@@ -20,8 +20,8 @@ public final class AwardNumberUtil {
 
   private static final String DELIMITER = ", ";
 
-  public static Set<Integer> getAwadNumberList(String string) {
-    return Arrays.stream(split(string))
+  public static Set<Integer> getAwadNumberList(String numberString) {
+    return Arrays.stream(split(numberString))
         .map(Integer::parseInt)
         .collect(Collectors.toSet());
   }
