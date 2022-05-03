@@ -11,6 +11,7 @@ public class ResultView {
             printLotto(lotto);
             System.out.print("\n");
         }
+        System.out.print("\n");
     }
 
     void printLotto(Lotto lotto) {
