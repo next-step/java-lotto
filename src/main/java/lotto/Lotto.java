@@ -29,7 +29,7 @@ public class Lotto {
     }
   }
 
-  private final TreeSet<LottoNumber> lotto;
+  private final Set<LottoNumber> lotto;
 
   Lotto() {
     Collections.shuffle(ENTIRE_LOTTO_NUMBERS);
@@ -45,8 +45,8 @@ public class Lotto {
         .collect(Collectors.toUnmodifiableSet()));
   }
 
-  Lotto(String lotto) {
-    this(Stream.of(lotto.split(NUMBERS_DELIMITER))
+  Lotto(String text) {
+    this(Stream.of(text.split(NUMBERS_DELIMITER))
         .map(Integer::parseInt)
         .collect(Collectors.toSet()));
   }
