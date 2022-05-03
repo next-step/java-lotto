@@ -69,7 +69,7 @@ public class LottosTest {
     void getLottoResultTest() {
         // given
         Lotto winnerLotto = new Lotto(ExtractLottoNumbersTest.LOTTO_NUMBERS);
-        Lotto sixMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, new LottoNumber(10)));
+        Lotto sixMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, LottoNumber.valueOf(10)));
 
         // when
         LottoResult lottoResult = new Lottos(Lists.newArrayList(sixMatchLotto)).getLottoResult(winnerLotto);
@@ -83,7 +83,7 @@ public class LottosTest {
     void getLottoResultDefaultTest() {
         // given
         Lotto winnerLotto = new Lotto(ExtractLottoNumbersTest.LOTTO_NUMBERS);
-        Lotto twoMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, new LottoNumber(9), new LottoNumber(10), new LottoNumber(11), new LottoNumber(12)));
+        Lotto twoMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, LottoNumber.valueOf(9), LottoNumber.valueOf(10), LottoNumber.valueOf(11), LottoNumber.valueOf(12)));
 
         // when
         LottoResult lottoResult = new Lottos(Lists.newArrayList(twoMatchLotto)).getLottoResult(winnerLotto);
