@@ -10,10 +10,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public final class Lottos {
-    private static final int DEFAULT_VALUE = 0;
-    private static final int ADD_COUNT = 1;
-    private static final int WINNINGS_START = 3;
-    private static final int WINNINGS_END = 6;
 
     private final List<Lotto> lottos;
 

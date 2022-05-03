@@ -1,5 +1,6 @@
 package lotto.dto;
 
+import lotto.model.Money;
 import lotto.model.Rank;
 
 import java.util.ArrayList;
@@ -21,5 +22,12 @@ public class LottoResult {
 
     public List<Rank> getRankResult() {
         return Collections.unmodifiableList(rankResult);
+    }
+
+    public double getYield(Money buyingMoney) {
+        long earnedMoney = rankResult.stream()
+                .mapToLong(Rank::winnings)
+                .sum();
+        return buyingMoney.getYield(earnedMoney);
     }
 }
