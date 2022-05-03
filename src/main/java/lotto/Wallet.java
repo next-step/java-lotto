@@ -13,7 +13,7 @@ public class Wallet {
 
     public Wallet(int money) {
         if (money < LOTTERY_PRICE) {
-            throw new IllegalArgumentException("Please give more than 1000 won. but: " + money);
+            throw new IllegalArgumentException("Please give more than " + LOTTERY_PRICE + " won. but: " + money);
         }
         this.money = money;
         this.lotteries = new ArrayList<>();
