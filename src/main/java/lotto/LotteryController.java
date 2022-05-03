@@ -39,16 +39,16 @@ public class LotteryController {
         return toIntegers(scanned.split("\\s*,\\s*"));
     }
 
-    public List<Integer> toIntegers(String[] split) {
+    public List<Integer> toIntegers(String[] numberStrings) {
         List<Integer> list = new ArrayList();
-        for (String s : split) {
-            list.add(toInteger(s));
+        for (String numberString : numberStrings) {
+            list.add(toInteger(numberString));
         }
         return list;
     }
 
-    public int toInteger(String s) {
-        int number = Integer.parseInt(s);
+    public int toInteger(String numberString) {
+        int number = Integer.parseInt(numberString);
         if (number < 1 || number > 45) {
             throw new IllegalArgumentException("answer number should be between 1 to 45.");
         }
