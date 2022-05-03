@@ -13,6 +13,12 @@ public class LottoNumber {
 		this.number = number;
 	}
 
+	private void validateNumber(int number) {
+		if (Range.of(LOTTO_RANGE_MIN, LOTTO_RANGE_MAX).notContain(number)) {
+			throw new OutOfRangeException("생성된 로또번호가 범위를 벗어났습니다. (범위 : "+ Range.of(LOTTO_RANGE_MIN, LOTTO_RANGE_MAX) + ")");
+		}
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -30,9 +36,8 @@ public class LottoNumber {
 		return number;
 	}
 
-	private void validateNumber(int number) {
-		if (Range.of(LOTTO_RANGE_MIN, LOTTO_RANGE_MAX).notContain(number)) {
-			throw new OutOfRangeException("생성된 로또번호가 범위를 벗어났습니다. (범위 : "+ Range.of(LOTTO_RANGE_MIN, LOTTO_RANGE_MAX) + ")");
-		}
+	@Override
+	public String toString() {
+		return String.valueOf(number);
 	}
 }
