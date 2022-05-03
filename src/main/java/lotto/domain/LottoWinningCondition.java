@@ -13,7 +13,7 @@ public class LottoWinningCondition {
     }
 
     void checkLottoWinningCondition(Lotto previousLotto, LottoNumber bonusNumber) {
-        if (previousLotto.getLottoNumbers().contains(bonusNumber)) {
+        if (previousLotto.contains(bonusNumber)) {
             throw new InvalidBonusNumberException(bonusNumber.getLottoNumber());
         }
     }
