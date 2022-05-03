@@ -18,7 +18,7 @@ public class ExtractLottoNumbers {
         try {
             Set<LottoNumber> lotto = Arrays
                     .stream(lottoNumbers.split(DELIMITER))
-                    .map(LottoNumber::new)
+                    .map(LottoNumber::valueOf)
                     .collect(Collectors.toSet());
             return lotto;
         } catch (NumberFormatException e) {

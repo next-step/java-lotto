@@ -14,10 +14,6 @@ public class LottoNumber {
 
     private final int number;
 
-    public LottoNumber(String number) {
-        this(Integer.parseInt(number));
-    }
-
     private LottoNumber(int number) {
         validate(number);
         this.number = number;
@@ -26,6 +22,10 @@ public class LottoNumber {
     public static LottoNumber valueOf(int number) {
         validate(number);
         return NUMBER_CACHE.get(number - 1);
+    }
+
+    public static LottoNumber valueOf(String number) {
+        return valueOf(Integer.parseInt(number));
     }
 
     private static void validate(int number) {
