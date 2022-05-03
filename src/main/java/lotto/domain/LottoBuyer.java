@@ -1,8 +1,9 @@
 package lotto.domain;
 
+import lotto.dto.input.BuyerData;
+import lotto.dto.input.LastWinningData;
 import lotto.dto.result.WinningStats;
 import lotto.util.Calculator;
-import lotto.util.SplitUtil;
 
 public class LottoBuyer {
 
@@ -10,6 +11,10 @@ public class LottoBuyer {
 
     private final int purchaseAmount;
     private Lottos lottos;
+
+    public LottoBuyer(BuyerData buyerData) {
+        this(buyerData.purchaseAmount());
+    }
 
     public LottoBuyer(int purchaseAmount) {
         this.purchaseAmount = purchaseAmount;
@@ -23,9 +28,8 @@ public class LottoBuyer {
         return purchaseAmount / LOTTO_PRICE;
     }
 
-    public WinningStats confirmLottos(String winningNumberValue) {
-        String[] winningNumbers = SplitUtil.split(winningNumberValue);
-        lottos.confirmAll(LottoNumbers.winningLottoNumbers(winningNumbers));
+    public WinningStats confirmLottos(LastWinningData lastWinningData) {
+        lottos.confirmAll(lastWinningData.toWinningLottoNumbers());
         return WinningStats.of(this);
     }
 
