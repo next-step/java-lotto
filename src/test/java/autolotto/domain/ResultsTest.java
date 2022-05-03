@@ -22,7 +22,7 @@ public class ResultsTest {
             "4:4:50000"
     }, delimiter = ':')
     void matchCountGiven_ReturnResult(int expect, int actual, int prize) {
-        assertThat(results.find(expect)).isEqualTo(Optional.of(new Result(actual, prize)));
+        assertThat(results.find(expect, false)).isEqualTo(Optional.of(new Result(actual, false)));
     }
 
     @ParameterizedTest
@@ -31,7 +31,7 @@ public class ResultsTest {
             "4:50000"
     }, delimiter = ':')
     void ReturnPrize(int numberOfWins, long prize) {
-        results.find(numberOfWins).ifPresent(Result::plusWinners);
+        results.find(numberOfWins, false).ifPresent(Result::plusWinners);
 
         assertThat(results.prize()).isEqualTo(prize);
     }

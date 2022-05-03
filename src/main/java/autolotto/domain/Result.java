@@ -1,56 +1,50 @@
 package autolotto.domain;
 
-import java.util.Objects;
+import autolotto.constant.Rank;
 
 public class Result {
-    private final int numberOfWins;
-    private final long prize;
+    private final int countOfMatch;
+    private final boolean hasBonusBall;
     private int winners;
 
-    public Result(int numberOfWins, long prize) {
-        this(numberOfWins, prize, 0);
+    public Result(int countOfMatch, boolean hasBonusBall) {
+        this(countOfMatch, hasBonusBall, 0);
     }
 
-    public Result(int numberOfWins, long prize, int winners) {
-        this.numberOfWins = numberOfWins;
-        this.prize = prize;
+    private Result(int countOfMatch, boolean hasBonusBall, int winners) {
+        this.countOfMatch = countOfMatch;
+        this.hasBonusBall = hasBonusBall;
         this.winners = winners;
     }
 
     public boolean isMatch(int numberOfWins) {
-        return this.numberOfWins == numberOfWins;
+        return this.countOfMatch == numberOfWins;
     }
 
     public void plusWinners() {
         winners++;
     }
 
+    public long prize() {
+        long prize = Rank.find(countOfMatch, hasBonusBall)
+                .map(Rank::getWinningMoney)
+                .orElse(0L);
+        return prize * winners;
+    }
+
     public int getWinners() {
         return winners;
     }
 
-    public long prize() {
-        return prize * winners;
+    public int getCountOfMatch() {
+        return countOfMatch;
     }
 
-    public int getNumberOfWins() {
-        return numberOfWins;
+    public boolean hasBonusBall() {
+        return hasBonusBall;
     }
 
-    public long getPrize() {
-        return prize;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Result result = (Result) o;
-        return numberOfWins == result.numberOfWins && prize == result.prize && winners == result.winners;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(numberOfWins, prize, winners);
+    public boolean checkBonus(boolean isBonus) {
+        return this.hasBonusBall == isBonus;
     }
 }
