@@ -1,18 +1,22 @@
 package calculator;
 
 import java.util.Objects;
+import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
 public enum Operator {
-  PLUS("+"),
-  MINUS("-"),
-  MULTIPLICATION("*"),
-  DIVISION("/");
+  PLUS("+", Number::add),
+  MINUS("-", Number::subtract),
+  MULTIPLICATION("*", Number::multiply),
+  DIVISION("/", Number::divide);
 
   private final String sign;
+  private final BiFunction<Number, Number, Number> expression;
 
-  Operator(String sign) {
+  Operator(String sign,
+      BiFunction<Number, Number, Number> expression) {
     this.sign = sign;
+    this.expression = expression;
   }
 
   public static Operator find(String sign) {
@@ -24,22 +28,6 @@ public enum Operator {
   }
 
   public static Number operate(Operator operator, Number a, Number b) {
-    if (operator == PLUS) {
-      return a.add(b);
-    }
-
-    if (operator == MINUS) {
-      return a.subtract(b);
-    }
-
-    if (operator == MULTIPLICATION) {
-      return a.multiply(b);
-    }
-
-    if (operator == DIVISION) {
-      return a.divide(b);
-    }
-
-    return a;
+    return operator.expression.apply(a, b);
   }
 }

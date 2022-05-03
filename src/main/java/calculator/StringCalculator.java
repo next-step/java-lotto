@@ -19,7 +19,7 @@ public class StringCalculator {
       String sign = strings.get(i);
       Operator operator = Operator.find(sign);
       Number current = Number.createNumber(strings.get(i + 1));
-      result = calculate(operator, result, current);
+      result = Operator.operate(operator, result, current);
     }
     return result;
   }
@@ -29,9 +29,5 @@ public class StringCalculator {
     if (s.isBlank()) {
       throw new IllegalArgumentException(EMPTY_EQUATION_MESSAGE);
     }
-  }
-
-  private static Number calculate(Operator operator, Number result, Number current) {
-    return Operator.operate(operator, result, current);
   }
 }
