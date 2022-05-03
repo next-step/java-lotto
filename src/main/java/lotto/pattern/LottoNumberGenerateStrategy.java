@@ -1,6 +1,6 @@
 package lotto.pattern;
 
-import lotto.LottoNumber;
+import lotto.domain.LottoNumber;
 
 import java.util.List;
 

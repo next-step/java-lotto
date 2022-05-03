@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.LottoGroup;
-import lotto.LottoGroupResult;
-import lotto.Rank;
+import lotto.domain.LottoGroup;
+import lotto.domain.LottoGroupResult;
+import lotto.domain.Rank;
 
 import java.util.List;
 import java.util.Map;

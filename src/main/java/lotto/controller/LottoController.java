@@ -1,10 +1,10 @@
 package lotto.controller;
 
-import lotto.Lotto;
-import lotto.LottoGroup;
-import lotto.LottoNumber;
-import lotto.LottoTotalPrice;
-import lotto.LottoGroupResult;
+import lotto.domain.Lotto;
+import lotto.domain.LottoGroup;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTotalPrice;
+import lotto.domain.LottoGroupResult;
 import lotto.pattern.LottoNumberGenerateStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;

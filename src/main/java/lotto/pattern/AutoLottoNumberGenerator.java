@@ -1,7 +1,7 @@
 package lotto.pattern;
 
-import lotto.Lotto;
-import lotto.LottoNumber;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 import java.util.Collections;
 import java.util.List;
