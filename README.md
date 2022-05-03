@@ -136,6 +136,6 @@ Earning rate: 3.9285714285714284
 - [ ] 1단계 string_calculator 추가 수정
   - [x] 연산(계산식)도 BiFunction을 활용해서 Operator Enum이 가지게 적용
   - [x] 상수와 멤버 변수의 선언 순서 변경
-  - [ ] Value 인터페이스를 없앨 수 있는지
-  - [ ] Integer class 제거
+  - [x] Interface Value 제거 
+  - [x] Class Integer 제거
   - [ ] 규칙 7: 3개 이상의 인스턴스 변수를 가진 클래스를 쓰지 않는다.

@@ -22,8 +22,6 @@ public enum Operator {
 
     private static int ZERO = 0;
 
-
-
     public static Operator create(String value) {
         if (PLUS.value.equals(value)) {
             return PLUS;
