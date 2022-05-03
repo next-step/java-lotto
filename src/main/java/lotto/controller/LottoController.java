@@ -25,7 +25,7 @@ public class LottoController {
     long haveMoney = InputTable.inputHaveMoney();
 
     List<Lotto> lottoProducts = visit(new Guest(haveMoney),
-        new Store(AwardNumberUtil.init())).hasAllLotto();
+        new Store()).hasAllLotto();
 
     OutputTable.buyThings(lottoProducts.size());
     OutputTable.printProductInfos(lottoProducts);
@@ -37,20 +37,20 @@ public class LottoController {
     int bonus = insertBonusNumber(InputTable.inputBonusNumber());
 
     OutputTable.resultStatisticsMessage();
-    List<WinningResultDto> histories = histories(lottoProducts, winnerLotto, bonus);
+
+    List<WinningResultDto> histories = histories(allLotteryTickets(lottoProducts, winnerLotto, bonus));
     OutputTable.resultStatistics(histories);
 
-    double percent = yieldCalculate(haveMoney, allAddReward(histories));
-    OutputTable.printYield(percent, isStandard(percent));
+    OutputTable.printYield(yieldCalculate(haveMoney, allAddReward(histories)), 1);
 
   }
 
-  private List<WinningResultDto> histories(List<Lotto> lottoProducts, Lotto winnerLotto,int bonus) {
-    List<Lotto> lotteryTickets = lottoService.allLotteryTickets(lottoProducts, winnerLotto, bonus);
-    return lottoService.histories(lotteryTickets)
-        .stream()
-        .filter(grade -> grade.getGrade() != Grade.NONE)
-        .collect(Collectors.toList());
+  public List<Lotto> allLotteryTickets(List<Lotto> lottoProducts, Lotto winnerLotto,int bonus) {
+    return lottoService.allLotteryTickets(lottoProducts, winnerLotto, bonus);
+  }
+
+  private List<WinningResultDto> histories( List<Lotto> lotteryTickets) {
+    return lottoService.histories(lotteryTickets);
   }
 
 
@@ -66,7 +66,7 @@ public class LottoController {
     return lottoService.insertBonusNumber(bonus);
   }
 
-  public Long allAddReward(List<WinningResultDto> histories) {
+  public long allAddReward(List<WinningResultDto> histories) {
     return lottoService.allAddReward(histories);
   }
 
@@ -74,8 +74,5 @@ public class LottoController {
     return lottoService.yieldCalculate(money, reward);
   }
 
-  public boolean isStandard(double percent) {
-    return percent > 1;
-  }
 
 }

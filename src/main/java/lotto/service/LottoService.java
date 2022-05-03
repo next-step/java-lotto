@@ -1,7 +1,9 @@
 package lotto.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.dto.WinningResultDto;
 import lotto.enums.Grade;
 import lotto.model.Guest;
@@ -33,13 +35,16 @@ public class LottoService {
   public List<WinningResultDto> histories(List<Lotto> lotteryTickets) {
     List<WinningResultDto> histories = new ArrayList<>();
     LotteryNoteCounter lotteryNoteCount = new LotteryNoteCounter(lotteryTickets);
-    for (Grade grade : Grade.values()) {
+    List<Grade> grades = Arrays.stream(Grade.values())
+                               .filter(grade -> grade != Grade.NONE)
+                               .collect(Collectors.toList());
+    for (Grade grade : grades) {
       histories.add(new WinningResultDto(grade, lotteryNoteCount.lotteryCount(grade)));
     }
     return histories;
   }
 
-  public Long allAddReward(List<WinningResultDto> histories) {
+  public long allAddReward(List<WinningResultDto> histories) {
     long result = 0L;
     for (WinningResultDto history : histories) {
       result += (history.getGrade().getAwardPrice() * history.getCount());

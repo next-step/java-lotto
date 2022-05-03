@@ -15,7 +15,7 @@ public final class OutputTable {
   private static final String UNDER_BAR = "_________";
   private static final String HISTORY_MESSAGE = "%d개 일치 (%d원)- %d개";
   private static final String HISTORY_BONUS_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
-  private static final String YIELD_MESSAGE = "총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 %s라는 의미임)";
+  private static final String YIELD_MESSAGE = "총 수익률은 %.2f입니다. (기준이 %d이기 때문에 결과적으로 %s라는 의미임)";
   private static final String WIN_MESSAGE = "이득";
   private static final String LOSE_MESSAGE = "손해";
 
@@ -48,20 +48,20 @@ public final class OutputTable {
 
   public static void resultStatistics(List<WinningResultDto> histories) {
     for (WinningResultDto history : histories) {
-      System.out.println(getMessage(history.getGrade(),history.getCount()));
+      System.out.println(getMessage(history.getGrade(), history.getCount()));
     }
   }
 
   private static String getMessage(Grade grade, int count) {
     if (Grade.SECOND == grade) {
-      return String.format(HISTORY_BONUS_MESSAGE, grade.getExpectNumber(),grade.getAwardPrice(), count);
+      return String.format(HISTORY_BONUS_MESSAGE, grade.getExpectNumber(), grade.getAwardPrice(),
+          count);
     }
-    return String.format(HISTORY_MESSAGE, grade.getExpectNumber(),grade.getAwardPrice(), count);
+    return String.format(HISTORY_MESSAGE, grade.getExpectNumber(), grade.getAwardPrice(), count);
   }
 
-  public static void printYield(double yield, boolean isStandard) {
-    System.out.printf(YIELD_MESSAGE, yield,
-        standardMessage(isStandard));
+  public static void printYield(double yield, int isStandard) {
+    System.out.printf(YIELD_MESSAGE, yield, isStandard, standardMessage(yield < isStandard));
   }
 
   private static String standardMessage(boolean isStandard) {

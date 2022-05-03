@@ -7,10 +7,9 @@ public final class Store {
 
   private static final long PRODUCT_PRICE = 1_000L;
 
-  List<Integer> init;
 
-  public Store(List<Integer> init) {
-    this.init = init;
+
+  public Store() {
   }
 
   public List<Lotto> delivery(long money) {

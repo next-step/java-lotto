@@ -17,7 +17,7 @@ class GuestTest {
   @DisplayName("고객이 구입한 로또 갯수 테스트")
   void lottoCountTest() {
     Guest guest = new Guest(14000);
-    guest = guest.choiceProduct(new Store(AwardNumberUtil.init()));
+    guest = guest.choiceProduct(new Store());
     assertThat(guest).isEqualTo(new Guest(0, guest.hasAllLotto()));
   }
 
@@ -26,7 +26,7 @@ class GuestTest {
   void lottoEmptySizeTest() {
     assertThrows(LottoSizeException.class, () -> {
       Guest guest = new Guest(999);
-      guest = guest.choiceProduct(new Store(AwardNumberUtil.init()));
+      guest = guest.choiceProduct(new Store());
       new Guest(0, guest.hasAllLotto());
     });
   }
