@@ -6,7 +6,6 @@ import java.util.Objects;
 
 public class WinStatistics {
     private Map<Integer, Integer> matches;
-    private final static Map<Integer, Integer> rewordMap = new HashMap(Map.of(3, 5000, 4, 50000, 5, 1500000, 6, 2000000000));
 
     public WinStatistics() {
         this.matches = new HashMap(Map.of(3, 0, 4, 0, 5, 0, 6, 0));
@@ -41,7 +40,7 @@ public class WinStatistics {
     public String toPayload() {
         StringBuilder payload = new StringBuilder("");
         for (int key : matches.keySet()) {
-            payload.append(key + " matches (₩" + rewordMap.get(key) + "): " + matches.get(key) + "\n");
+            payload.append(key + " matches (₩" + Reward.of(key).value + "): " + matches.get(key) + "\n");
         }
         return payload.toString();
     }
@@ -49,7 +48,7 @@ public class WinStatistics {
     public int getEarnedMoney() {
         int earnedMoney = 0;
         for (int key : matches.keySet()) {
-            earnedMoney += rewordMap.get(key) * matches.get(key);
+            earnedMoney += Reward.of(key).value * matches.get(key);
         }
         return earnedMoney;
     }
