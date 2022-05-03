@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,5 +44,11 @@ class WinnerTest {
         assertThatIllegalArgumentException().isThrownBy(
                 () -> new Winner("1, 1, 2")
         );
+    }
+
+    @ParameterizedTest(name = "{displayName} -> [{index}] : {arguments}")
+    @CsvSource(value = {"1:true", "45:false"}, delimiter = ':')
+    void 주어진_로또_번호가_지난_당첨_번호에_포함되는지_반환(String input, boolean result) {
+        assertThat(new Winner("1, 2, 3, 4, 5, 6").isContain(new LottoNumber(input))).isEqualTo(result);
     }
 }
