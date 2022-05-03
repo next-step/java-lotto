@@ -45,4 +45,13 @@ public class LottoPrizeTest {
           assertThat(revenue).isEqualTo(lottoPrize.getRevenue(MATCHED_LOTTO_COUNT));
         });
   }
+
+  @Test
+  void toStringForPrinting_성공() {
+    String expected = "3개 일치 (5000)- 1";
+
+    String actual = LottoPrize.THREE.toStringForPrinting(1);
+
+    assertThat(actual).isEqualTo(expected);
+  }
 }

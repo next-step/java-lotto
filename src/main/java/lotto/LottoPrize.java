@@ -1,33 +1,31 @@
 package lotto;
 
-import util.LottoOutputView;
-
 public enum LottoPrize {
-  THREE(3, 5000, "3개 일치 (%s원)- %s개"),
-  FOUR(4, 50000, "4개 일치 (%s원)- %s개"),
-  FIVE(5, 1500000, "5개 일치 (%s원)- %s개"),
-  SIX(6, 2000000000, "6개 일치 (%s원)- %s개");
+  THREE(3, 5000),
+  FOUR(4, 5_0000),
+  FIVE(5, 150_0000),
+  SIX(6, 20_0000_0000);
 
-  private final int matched;
-  private final int revenue;
-  private final String revenueMessageToPrint;
+  private static final String MESSAGE_FOR_MATCHED_LOTTO_COUNT = "%s개 일치 (%s)- %s";
+
+  private final int matchedCount;
+  private final int prize;
 
 
-  LottoPrize(int matched, int revenue, String resultMessage) {
-    this.matched = matched;
-    this.revenue = revenue;
-    this.revenueMessageToPrint = resultMessage;
-  }
-
-  public int getMatchedLottoCount(Lotto winningLotto, LottoList lottoList) {
-    return lottoList.getMatchedLottoCount(matched, winningLotto);
+  LottoPrize(int matched, int prize) {
+    this.matchedCount = matched;
+    this.prize = prize;
   }
 
   public int getRevenue(int matchedLottoCount) {
-    return matchedLottoCount * revenue;
+    return prize * matchedLottoCount;
   }
 
-  public void printingRevenue(int matchedLottoCount) {
-    LottoOutputView.print(String.format(revenueMessageToPrint, revenue, matchedLottoCount));
+  public String toStringForPrinting(int matchedLottoCount) {
+    return String.format(MESSAGE_FOR_MATCHED_LOTTO_COUNT, matchedCount, prize, matchedLottoCount);
+  }
+
+  public int getMatchedLottoCount(Lotto winningLotto, LottoList lottoList) {
+    return lottoList.getMatchedLottoCount(matchedCount, winningLotto);
   }
 }
