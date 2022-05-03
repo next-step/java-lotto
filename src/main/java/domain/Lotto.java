@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
-    private static final int SAME_FIVE_NUMBERS = 6;
+    private static final int SAME_FIVE_NUMBERS_AND_BONUS = 6;
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
@@ -33,7 +33,7 @@ public class Lotto {
             .filter(lottoNumbers::contains)
             .count();
 
-        return sameLottoNumberCount == SAME_FIVE_NUMBERS;
+        return sameLottoNumberCount == SAME_FIVE_NUMBERS_AND_BONUS;
     }
 
     @Override
