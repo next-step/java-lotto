@@ -31,6 +31,6 @@ public class Calculator {
     }
 
     private void compute(Integer acc, Operator operator, Integer operand) {
-        this.accumulator = operator.compute(acc, operand);
+        this.accumulator = operator.compute.apply(acc, operand);
     }
 }

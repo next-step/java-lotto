@@ -8,11 +8,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class OperatorTest {
     @Test
     void computeShouldWork() {
-        assertThat(Operator.PLUS.compute(new Integer(2),new Integer(1))).isEqualTo(new Integer(3));
-        assertThat(Operator.MINUS.compute(new Integer(2),new Integer(1))).isEqualTo(new Integer(1));
-        assertThat(Operator.MULTIPLY.compute(new Integer(2),new Integer(1))).isEqualTo(new Integer(2));
-        assertThat(Operator.DIVIDE.compute(new Integer(2),new Integer(1))).isEqualTo(new Integer(2));
-        assertThat(Operator.MODULO.compute(new Integer(2),new Integer(1))).isEqualTo(new Integer(0));
+        assertThat(Operator.PLUS.compute.apply(new Integer(2),new Integer(1))).isEqualTo(new Integer(3));
+        assertThat(Operator.MINUS.compute.apply(new Integer(2),new Integer(1))).isEqualTo(new Integer(1));
+        assertThat(Operator.MULTIPLY.compute.apply(new Integer(2),new Integer(1))).isEqualTo(new Integer(2));
+        assertThat(Operator.DIVIDE.compute.apply(new Integer(2),new Integer(1))).isEqualTo(new Integer(2));
+        assertThat(Operator.MODULO.compute.apply(new Integer(2),new Integer(1))).isEqualTo(new Integer(0));
     }
 
     @Test

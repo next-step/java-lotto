@@ -1,17 +1,28 @@
 package string_calculator;
 
+import java.util.function.BiFunction;
+
 public enum Operator implements Value {
-    PLUS("+"),
-    MINUS("-"),
-    MULTIPLY("*"),
-    DIVIDE("/"),
-    MODULO("%");
+    PLUS("+", (acc, operand) -> new Integer(acc.value() + operand.value())),
+    MINUS("-", (acc, operand) -> new Integer(acc.value() - operand.value())),
+    MULTIPLY("*", (acc, operand) -> new Integer(acc.value() * operand.value())),
+    DIVIDE("/", (acc, operand) -> {
+        divideByZeroChecker(operand);
+        return divideToInteger(acc, operand);
+    }),
+    MODULO("%", (acc, operand) -> new Integer(acc.value() % operand.value()));
 
     private String value;
-    Operator(String value) {
+    public BiFunction<Integer, Integer, Integer> compute;
+
+    Operator(String value, BiFunction<Integer, Integer, Integer> compute) {
         this.value = value;
+        this.compute = compute;
     }
+
     private static int ZERO = 0;
+
+
 
     public static Operator create(String value) {
         if (PLUS.value.equals(value)) {
@@ -32,32 +43,15 @@ public enum Operator implements Value {
         throw new IllegalArgumentException("only [+, -, *, /, %] are allowed. but: " + value);
     }
 
-    public Integer compute(Integer acc, Integer operand) {
-        switch (this) {
-            case PLUS:
-                return new Integer(acc.value() + operand.value());
-            case MINUS:
-                return new Integer(acc.value() - operand.value());
-            case MULTIPLY:
-                return new Integer(acc.value() * operand.value());
-            case DIVIDE:
-                divideByZeroChecker(operand);
-                return divideToInteger(acc, operand);
-            case MODULO:
-                return new Integer(acc.value() % operand.value());
-        }
-        throw new IllegalArgumentException("Wrong operator was used.");
-    }
-
-    private Integer divideToInteger(Integer acc, Integer operand) {
-        Boolean isDividable =  acc.value() % operand.value() == 0;
+    private static Integer divideToInteger(Integer acc, Integer operand) {
+        Boolean isDividable = acc.value() % operand.value() == 0;
         if (isDividable) {
             return new Integer(acc.value() / operand.value());
         }
         throw new IllegalArgumentException("Can't divide.");
     }
 
-    private void divideByZeroChecker(Integer operand) {
+    private static void divideByZeroChecker(Integer operand) {
         if (operand.value() == ZERO) {
             throw new ArithmeticException("Can't divide by Zero.");
         }
