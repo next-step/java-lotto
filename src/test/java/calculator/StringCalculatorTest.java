@@ -29,6 +29,13 @@ public class StringCalculatorTest {
     assertThatIllegalArgumentException().isThrownBy(() -> StringCalculator.calculate(input))
         .withMessage(StringCalculator.EMPTY_EQUATION_MESSAGE);
   }
+//
+//  @DisplayName("입력받은 문자열을 연산자와 숫자 객체로 분리한다")
+//  @Test
+//  void splitOperatorAndNumbers() {
+//    String input = "1 + 2";
+//    assertThat(StringCalculator.splitOperatorAndNumbers(input)).isEqualTo()
+//  }
 
   @DisplayName("문자열 계산기 덧셈")
   @ParameterizedTest
@@ -77,6 +84,6 @@ public class StringCalculatorTest {
   public void notOperator() {
     assertThatIllegalArgumentException().isThrownBy(
             () -> StringCalculator.calculate("2 ^ 3"))
-        .withMessage(StringCalculator.INVALID_OPERATOR_MESSAGE);
+        .withMessageContaining("지원되지 않는 기호입니다");
   }
 }
