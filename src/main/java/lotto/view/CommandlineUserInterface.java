@@ -4,6 +4,7 @@ import static java.lang.System.out;
 import static lotto.domain.LottoTicket.LOTTO_NUMBER_COUNT;
 import static lotto.domain.LottoTicket.ONE_TICKET_PRICE;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -17,10 +18,12 @@ public class CommandlineUserInterface {
 
     private static final int MINIMUM_WIN_COUNT = 3;
 
+    private Scanner scanner = new Scanner(System.in);
+
     public int inputLottoBuyingBudget() {
         out.println("구입금액을 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
         int buyingBudget = scanner.nextInt();
+        scanner.nextLine();
 
         if (buyingBudget <= 0 || buyingBudget % ONE_TICKET_PRICE != 0) {
             out.println("로또 구입 금액은 0 이상, "+
@@ -31,9 +34,51 @@ public class CommandlineUserInterface {
         return buyingBudget;
     }
 
+    public int inputLottoBuyingManual() {
+        out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int buyingManual = scanner.nextInt();
+        scanner.nextLine();
+
+        if (buyingManual <= 0) {
+            out.println("수동로또 구입 개수는 0 이상 입니다. ");
+            return inputLottoBuyingManual();
+        }
+
+        return buyingManual;
+    }
+
+    public List<List<Integer>> inputManualLottoNumbers(int buyingManualCount) {
+        out.println("수동로또 번호(들을)를 입력해 주세요.");
+        List<String> manualLottoNumberStrings = new ArrayList<>();
+        while (buyingManualCount-- > 0) {
+            manualLottoNumberStrings.add(scanner.nextLine());
+        }
+
+        List<List<Integer>> manualLottos = new ArrayList<>();
+        for (String manualLottoNumberString : manualLottoNumberStrings) {
+            List<Integer> lottoNumbers = Arrays.stream(manualLottoNumberString.replaceAll(" ", "").split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+            validateLottoNumbers(lottoNumbers);
+
+            manualLottos.add(lottoNumbers);
+        }
+
+        return manualLottos;
+    }
+
+    private void validateLottoNumbers(List<Integer> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+            out.println("로또 당첨 숫자는 "
+                + LOTTO_NUMBER_COUNT +"개 입력해야 합니다.");
+            out.println("다시 입력, ex) 1,2,3,4,5,6 ");
+            System.exit(1);
+        }
+    }
+
     public List<Integer> inputWinLottoNumber() {
         out.println("지난 주 당첨 번호를 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
         String lottoNumberString = scanner.nextLine();
 
         List<Integer> lottoNumbers = Arrays.stream(lottoNumberString.replaceAll(" ", "").split(","))
@@ -52,12 +97,12 @@ public class CommandlineUserInterface {
 
     public int inputBonusBallNumber() {
         out.println("보너스 볼을 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
 
-    public void printLottoTickets(LottoTickets lottoTickets) {
-        out.println(lottoTickets.count() + "개를 구매했습니다.");
+    public void printLottoTickets(LottoTickets lottoTickets, int buyingManualCount) {
+        out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n",
+            buyingManualCount, lottoTickets.size()-buyingManualCount);
         List<LottoTicket> lottoTickets1 = lottoTickets.getLottoTickets();
         for (LottoTicket lottoTicket : lottoTickets1) {
             out.println(lottoTicket);

@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.domain.LottoResult;
 import lotto.domain.LottoResults;
 import lotto.domain.LottoTickets;
 
@@ -12,6 +11,18 @@ public class LottoGameController {
         int buyingCount = buyingBudget / LOTTO_TICKET_PRICE;
 
         LottoTickets lottoTickets = new LottoTickets();
+        while (buyingCount-- > 0) {
+            lottoTickets.add();
+        }
+
+        return lottoTickets;
+    }
+
+    public LottoTickets createLottoTicketsWithManual(int buyingBudget, List<List<Integer>> manualLottoTickets) {
+        int buyingCount = buyingBudget / LOTTO_TICKET_PRICE - manualLottoTickets.size();
+
+        LottoTickets lottoTickets = new LottoTickets(manualLottoTickets);
+
         while (buyingCount-- > 0) {
             lottoTickets.add();
         }

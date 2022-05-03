@@ -22,7 +22,7 @@ class LottoTicketTest {
     @DisplayName("일등 당첨된 로또 테스트 결과를 확인한다.")
     @Test
     void checkLotteryTest0() {
-        LottoTicket ticket = LottoTicket.create(7, 1,2,3,4,5,6);
+        LottoTicket ticket = LottoTicket.create(1,2,3,4,5,6);
 
         LottoResult lottoResult = ticket.checkLottery(winLottoNumbers, bonusNumber);
 
@@ -33,7 +33,7 @@ class LottoTicketTest {
     @DisplayName("이등 당첨된 로또 테스트 결과를 확인한다.")
     @Test
     void checkLotteryTest1() {
-        LottoTicket ticket = LottoTicket.create(7,1,2,3,4,5,9);
+        LottoTicket ticket = LottoTicket.create(1,2,3,4,5,7);
 
         LottoResult lottoResult = ticket.checkLottery(winLottoNumbers, bonusNumber);
 
@@ -44,7 +44,7 @@ class LottoTicketTest {
     @DisplayName("삼등 당첨된 로또 테스트 결과를 확인한다.")
     @Test
     void checkLotteryTest2() {
-        LottoTicket ticket = LottoTicket.create(8,1,2,3,4,5,9);
+        LottoTicket ticket = LottoTicket.create(1,2,3,4,5,9);
 
         LottoResult lottoResult = ticket.checkLottery(winLottoNumbers, bonusNumber);
 
@@ -55,7 +55,7 @@ class LottoTicketTest {
     @DisplayName("사등 당첨된 로또 테스트 결과를 확인한다.")
     @Test
     void checkLotteryTest3() {
-        LottoTicket ticket = LottoTicket.create(45,1,2,3,4,7,8);
+        LottoTicket ticket = LottoTicket.create(1,2,3,4,7,8);
 
         LottoResult lottoResult = ticket.checkLottery(winLottoNumbers, bonusNumber);
 
@@ -66,7 +66,7 @@ class LottoTicketTest {
     @DisplayName("오등 당첨된 로또 테스트 결과를 확인한다.")
     @Test
     void checkLotteryTest4() {
-        LottoTicket ticket = LottoTicket.create(45, 1,2,3,7,8,9);
+        LottoTicket ticket = LottoTicket.create(1,2,3,7,8,9);
 
         LottoResult lottoResult = ticket.checkLottery(winLottoNumbers, bonusNumber);
 
@@ -77,7 +77,7 @@ class LottoTicketTest {
     @DisplayName("맞는게 적어서 당첨되지 않은 로또 테스트 결과를 확인한다.")
     @Test
     void checkLotteryTest5() {
-        LottoTicket ticket = LottoTicket.create(45, 1,2,7,8,9,10);
+        LottoTicket ticket = LottoTicket.create(1,2,7,8,9,10);
 
         LottoResult lottoResult = ticket.checkLottery(winLottoNumbers, bonusNumber);
 
@@ -88,7 +88,7 @@ class LottoTicketTest {
     @DisplayName("아예 당첨되지 않은 로또 테스트 결과를 확인한다.")
     @Test
     void checkLotteryTest6() {
-        LottoTicket ticket = LottoTicket.create(1, 11,12,13,14,15,16);
+        LottoTicket ticket = LottoTicket.create(11,12,13,14,15,16);
 
         LottoResult lottoResult = ticket.checkLottery(winLottoNumbers, bonusNumber);
 
@@ -107,10 +107,8 @@ class LottoTicketTest {
     @DisplayName("수동으로 보너스 넘버를 포함한 로또 생성을 테스트한다.")
     @Test
     void createTest2() {
-        int bonusNumber = 7;
-        LottoTicket lottoTicket = LottoTicket.create(bonusNumber, 1,2,3,4,5,6);
+        LottoTicket lottoTicket = LottoTicket.create(1,2,3,4,5,6);
 
         assertThat(lottoTicket.countLottoNumber()).isEqualTo(6);
-        assertThat(lottoTicket.getBonusNumber()).isEqualTo(bonusNumber);
     }
 }

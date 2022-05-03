@@ -30,9 +30,9 @@ class LottoTicketsTest {
     @Test
     void findLottoResultTest() {
         lottoTickets = new LottoTickets(List.of(
-            LottoTicket.create(0, 1,2,3,4,5,6),
-            LottoTicket.create(0, 1,2,3,4,5,6),
-            LottoTicket.create(0, 1,2,3,4,5,6)
+            List.of(1,2,3,4,5,6),
+            List.of(1,2,3,4,5,6),
+            List.of(1,2,3,4,5,6)
         ));
 
         List<LottoResult> lottoResult = lottoTickets.findLottoResult(List.of(1, 2, 3, 4, 5, 6), 0);

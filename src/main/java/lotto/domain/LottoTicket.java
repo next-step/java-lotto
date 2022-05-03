@@ -3,14 +3,13 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 
-public class LottoTicket {
+public class LottoTicket implements Cloneable {
 
     public static final int LOTTO_NUMBER_COUNT = 6;
-    public static final int LOTTO_BONUS_NUMBER_COUNT = 1;
     public static final int ONE_TICKET_PRICE = 1000;
     public static final int LOTTO_NUMBER_MIN = 1;
     public static final int LOTTO_NUMBER_MAX = 45;
@@ -22,29 +21,41 @@ public class LottoTicket {
         }
     }
 
-    private final BonusNumber bonusNumber;
+    private List<Integer> lottoNumbers = new LinkedList<>();
 
-    private List<Integer> lottoNumbers;
-
-    private LottoTicket(List<Integer> lottoNumbers, int bonusNumber) {
+    private LottoTicket(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
-        this.bonusNumber = BonusNumber.withValidate(bonusNumber, lottoNumbers);
+    }
+
+    public LottoTicket(LottoTicket lottoTicket) {
+        this.lottoNumbers.addAll(lottoTicket.lottoNumbers);
     }
 
     public static LottoTicket create() {
         Collections.shuffle(allLottoNumbers);
 
-        final List<Integer> lottoNumbers = new ArrayList<>(allLottoNumbers.subList(0, LOTTO_NUMBER_COUNT + LOTTO_BONUS_NUMBER_COUNT));
-        final int indexOffset = 1;
+        final List<Integer> lottoNumbers = new ArrayList<>(allLottoNumbers.subList(0, LOTTO_NUMBER_COUNT));
 
         return new LottoTicket(
-            lottoNumbers.subList(0, LOTTO_NUMBER_COUNT),
-            lottoNumbers.get(LOTTO_NUMBER_COUNT + LOTTO_BONUS_NUMBER_COUNT - indexOffset)
+            lottoNumbers.subList(0, LOTTO_NUMBER_COUNT)
         );
     }
 
-    public static LottoTicket create(int bonusNumber, Integer... numbers) {
-        return new LottoTicket(Arrays.asList(numbers), bonusNumber);
+    @Override
+    public LottoTicket clone() {
+        return new LottoTicket(this);
+    }
+
+    public void changeSomething() {
+        this.lottoNumbers.set(0, -1);
+    }
+
+    public static LottoTicket create(Integer... numbers) {
+        return new LottoTicket(Arrays.asList(numbers));
+    }
+
+    public static LottoTicket create(List<Integer> integers) {
+        return new LottoTicket(integers);
     }
 
     public int countLottoNumber() {
@@ -60,7 +71,7 @@ public class LottoTicket {
     }
 
     private boolean isFitBonusNumber(int bonusNumber) {
-        return this.bonusNumber.isEqualTo(bonusNumber);
+        return this.lottoNumbers.contains(bonusNumber);
     }
 
     @Override
@@ -84,9 +95,5 @@ public class LottoTicket {
     public String toString() {
         Collections.sort(lottoNumbers);
         return lottoNumbers.toString();
-    }
-
-    public int getBonusNumber() {
-        return bonusNumber.get();
     }
 }

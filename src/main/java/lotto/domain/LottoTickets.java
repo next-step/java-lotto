@@ -2,20 +2,37 @@ package lotto.domain;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class LottoTickets {
+public class LottoTickets implements Cloneable {
 
     private  List<LottoTicket> lottoTickets = new LinkedList<>();
 
     public LottoTickets() {
     }
 
-    public LottoTickets(List<LottoTicket> lottoTickets) {
-        this.lottoTickets = lottoTickets;
+    public LottoTickets(List<List<Integer>> lottoNumbersList) {
+        lottoTickets = lottoNumbersList.stream()
+            .map(LottoTicket::create)
+            .collect(Collectors.toList());
+    }
+
+    public LottoTickets(LottoTickets lottoTickets) {
+        lottoTickets.getLottoTickets()
+            .forEach(lottoTicket -> this.lottoTickets.add(lottoTicket.clone()));
+    }
+
+    @Override
+    public LottoTickets clone() {
+        return new LottoTickets(this);
     }
 
     public void add() {
         lottoTickets.add(LottoTicket.create());
+    }
+
+    public void add(LottoTicket lottoTicket) {
+        lottoTickets.add(lottoTicket);
     }
 
     public int count() {
@@ -42,4 +59,9 @@ public class LottoTickets {
             "lottoTickets=" + lottoTickets +
             '}';
     }
+
+    public int size() {
+        return lottoTickets.size();
+    }
+
 }
