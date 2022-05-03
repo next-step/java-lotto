@@ -22,7 +22,7 @@ public class LottoBuyer {
     }
 
     public PurchasedLottos buyLottos() {
-        lottos = new LottoStore().createLottos(lottoCount());
+        lottos = LottoStore.createLottos(lottoCount());
         return PurchasedLottos.from(this);
     }
 

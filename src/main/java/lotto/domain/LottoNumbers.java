@@ -1,22 +1,23 @@
 package lotto.domain;
 
+import lotto.exception.InvalidLottoNumberCount;
+
 import java.util.*;
 
 public class LottoNumbers {
 
+    public static final int LOTTO_NUMBER_COUNT = 6;
     private final List<LottoNumber> lottoNumbers;
-    
+
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
-        Collections.sort(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        this(new TreeSet<>(lottoNumbers));
     }
 
-    public static LottoNumbers fullLottoNumbers() {
-        List<LottoNumber> fullLottoNumbers = new ArrayList<>();
-        for (int i = LottoNumber.MIN_NUMBER; i <= LottoNumber.MAX_NUMBER; i++) {
-            fullLottoNumbers.add(new LottoNumber(i));
+    public LottoNumbers(TreeSet<LottoNumber> lottoNumberTreeSet) {
+        if (lottoNumberTreeSet.size() != LOTTO_NUMBER_COUNT) {
+            throw new InvalidLottoNumberCount();
         }
-        return new LottoNumbers(fullLottoNumbers);
+        this.lottoNumbers = new ArrayList<>(lottoNumberTreeSet);
     }
 
     public static LottoNumbers winningLottoNumbers(String[] values) {
@@ -25,19 +26,6 @@ public class LottoNumbers {
             winningLottoNumbers.add(new LottoNumber(value));
         }
         return new LottoNumbers(winningLottoNumbers);
-    }
-
-    public LottoNumbers randomLottoNumbers() {
-        List<LottoNumber> random = new ArrayList<>();
-        Collections.shuffle(lottoNumbers);
-        for (int i = 0; i < Lotto.LOTTO_NUMBER_COUNT; i++) {
-            random.add(lottoNumbers.get(i));
-        }
-        return new LottoNumbers(random);
-    }
-
-    public boolean isSameCount(int count) {
-        return lottoNumbers.size() == count;
     }
 
     public int matchCount(List<LottoNumber> winningNumbers) {
