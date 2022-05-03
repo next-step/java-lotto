@@ -38,25 +38,26 @@ public class LottoController {
 
     OutputTable.resultStatisticsMessage();
 
-    List<WinningResultDto> histories = histories(allLotteryTickets(lottoProducts, winnerLotto, bonus));
+    List<WinningResultDto> histories = histories(
+        allLotteryTickets(lottoProducts, winnerLotto, bonus));
     OutputTable.resultStatistics(histories);
 
     OutputTable.printYield(yieldCalculate(haveMoney, allAddReward(histories)), 1);
 
   }
 
-  public List<Lotto> allLotteryTickets(List<Lotto> lottoProducts, Lotto winnerLotto,int bonus) {
-    return lottoService.allLotteryTickets(lottoProducts, winnerLotto, bonus);
-  }
-
-  private List<WinningResultDto> histories( List<Lotto> lotteryTickets) {
-    return lottoService.histories(lotteryTickets);
-  }
-
-
   public Guest visit(Guest guest, Store store) {
     return lottoService.visit(guest, store);
   }
+
+  public List<Lotto> allLotteryTickets(List<Lotto> lottoProducts, Lotto winnerLotto, int bonus) {
+    return lottoService.allLotteryTickets(lottoProducts, winnerLotto, bonus);
+  }
+
+  private List<WinningResultDto> histories(List<Lotto> lotteryTickets) {
+    return lottoService.histories(lotteryTickets);
+  }
+
 
   public Lotto insertWinnerNumber(String winnerNumber) {
     return lottoService.insertWinnerNumber(winnerNumber);
