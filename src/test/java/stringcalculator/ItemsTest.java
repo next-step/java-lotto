@@ -67,8 +67,8 @@ public class ItemsTest {
         Items items = new Items(TEST_INPUTS);
 
         // when
-        Calculator calculator = new Calculator(items.getOperator());
-        int baseNumber = calculator.calculate(items.getFirstOperand(), items.getSecondOperand());
+        Operator operator = OperatorFactory.get(items.getOperator());
+        int baseNumber = operator.calculate(items.getFirstOperand(), items.getSecondOperand());
         Items newItems = Items.of(baseNumber, items);
 
         // then
