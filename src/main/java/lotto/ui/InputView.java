@@ -54,7 +54,7 @@ public class InputView {
     }
 
     static void validateMinPriceToBuyLotto(int price) {
-        if (price < 1000) {
+        if (price < Lottos.LOTTO_PRICE_PER_ONE) {
             throw new InvalidPriceToBuyLottoExcpetion(price);
         }
     }
@@ -142,14 +142,15 @@ public class InputView {
         try {
             Integer[] lottoNumber = Utility.convertStringArrayToIntegerArray(Utility.split(SCANNER.nextLine()));
             manualLottos.add(new Lotto(lottoNumber));
+        } catch (NumberFormatException e) {
+            System.out.print(e.getMessage().replaceFirst(".*For input string: ", INVALID_INPUT_NUMBER_MESSAGE + "(현재 입력: "));
+            System.out.println(")");
+            inputManualLotto(manualLottos);
         } catch (InvalidLottoLengthException e) {
             System.out.println(e.getMessage());
             inputManualLotto(manualLottos);
         } catch (InvalidLottoNumberException e) {
             System.out.println(e.getMessage());
-            inputManualLotto(manualLottos);
-        } catch (InputMismatchException e) {
-            System.out.println(INVALID_INPUT_NUMBER_MESSAGE);
             inputManualLotto(manualLottos);
         }
     }
