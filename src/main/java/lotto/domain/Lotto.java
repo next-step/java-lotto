@@ -29,6 +29,23 @@ public class Lotto {
         Collections.sort(numbers);
     }
 
+    public int hasWinningNumbers(List<Integer> winningNumbers) {
+        int result = 0;
+        for (int winningNumber : winningNumbers) {
+            result += hasNumber(winningNumber);
+        }
+
+        return result;
+    }
+
+    private int hasNumber(int number) {
+        if (numbers.contains(number)) {
+            return 1;
+        }
+
+        return 0;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

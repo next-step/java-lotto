@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.assertj.core.api.Assertions;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,7 @@ public class LottoTest {
         numbers.add(7);
         numbers.add(8);
 
-        Assertions.assertThat(new Lotto(numbers)).isEqualTo(new Lotto(1, 3, 5, 6, 7, 8));
+        assertThat(new Lotto(numbers)).isEqualTo(new Lotto(1, 3, 5, 6, 7, 8));
     }
 
     @Test
