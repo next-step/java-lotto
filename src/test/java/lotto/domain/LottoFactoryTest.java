@@ -24,7 +24,7 @@ class LottoFactoryTest {
     @Test
     void 로또_생성_불변_테스트() {
         Lotto lotto = LottoFactory.createLottoAutomatically();
-        assertThatThrownBy(() -> lotto.getLottoNumbers().add(new LottoNumber(2)))
+        assertThatThrownBy(() -> lotto.getLottoNumbers().add(LottoNumber.valueOf(2)))
                         .isInstanceOf(UnsupportedOperationException.class);
     }
 }

@@ -34,7 +34,7 @@ class LottosTest {
                     Lotto previousLotto = new Lotto(Utility.convertStringArrayToIntegerArray(Utility.split(previousLottoString)));
 
                     Lottos lottos = Lottos.supplyLottos(testCases);
-                    LottoWinner winner = lottos.calculateWinner(new LottoWinningCondition(previousLotto, LottoNumberFactory.valueOf(10)));
+                    LottoWinner winner = lottos.calculateWinner(new LottoWinningCondition(previousLotto, LottoNumber.valueOf(10)));
 
                     Map<LottoWinnerType, Integer> winners = new HashMap<>();
                     winners.put(LottoWinnerType.SECOND_PLACE, 1);
@@ -47,7 +47,7 @@ class LottosTest {
                     Lotto previousLotto = new Lotto(Utility.convertStringArrayToIntegerArray(Utility.split(previousLottoString)));
 
                     Lottos lottos = Lottos.supplyLottos(testCases);
-                    LottoWinner winner = lottos.calculateWinner(new LottoWinningCondition(previousLotto, LottoNumberFactory.valueOf(4)));
+                    LottoWinner winner = lottos.calculateWinner(new LottoWinningCondition(previousLotto, LottoNumber.valueOf(4)));
 
                     Map<LottoWinnerType, Integer> winners = new HashMap<>();
                     winners.put(LottoWinnerType.FOURTH_PLACE, 2);

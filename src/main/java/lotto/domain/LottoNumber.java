@@ -2,23 +2,38 @@ package lotto.domain;
 
 import lotto.exception.InvalidLottoNumberException;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+    private static final Map<Integer, LottoNumber> LOTTO_NUMBER_CACHE = new HashMap<>();
+
+    static {
+        for (int i = LottoFactory.MIN_LOTTO_NUMBER, len = LottoFactory.MAX_LOTTO_NUMBER; i <= len; i++) {
+            LOTTO_NUMBER_CACHE.put(i, new LottoNumber(i));
+        }
+    }
+
     private Integer lottoNumber;
 
-    LottoNumber(Integer lottoNumber) {
-        checkRangeOfLottoNumber(lottoNumber);
+    private LottoNumber(Integer lottoNumber) {
         this.lottoNumber = lottoNumber;
     }
 
-    void checkRangeOfLottoNumber(int lottoNumber) {
+    static void checkRangeOfLottoNumber(int lottoNumber) {
         if (checkNumberRange(lottoNumber, LottoFactory.MIN_LOTTO_NUMBER, LottoFactory.MAX_LOTTO_NUMBER)) {
             throw new InvalidLottoNumberException(lottoNumber);
         }
     }
 
-    private boolean checkNumberRange(int lottoNumber, int minNumber, int maxNumber) {
+    public static LottoNumber valueOf(int lottoNumber) {
+        checkRangeOfLottoNumber(lottoNumber);
+        new LottoNumber(lottoNumber);
+        return LOTTO_NUMBER_CACHE.get(lottoNumber);
+    }
+
+    private static boolean checkNumberRange(int lottoNumber, int minNumber, int maxNumber) {
         return (lottoNumber < minNumber) || (lottoNumber > maxNumber);
     }
 
