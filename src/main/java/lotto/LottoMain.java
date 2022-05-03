@@ -1,10 +1,15 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.NumbersGenerator;
+import lotto.domain.Lottos;
+import lotto.domain.Winner;
+import lotto.ui.LottoScanner;
 
 public class LottoMain {
     public static void main(String[] args) {
-        Lotto lotto = new Lotto(NumbersGenerator.generate(6));
+        int purchaseAmount = LottoScanner.insertPurchaseAmount();
+        Lottos lottos = Lottos.of(purchaseAmount/1000);
+
+        String s = LottoScanner.insertWinningNumbers();
+        Winner winner = Winner.of(s);
     }
 }

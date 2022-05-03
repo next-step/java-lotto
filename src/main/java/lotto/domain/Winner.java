@@ -23,6 +23,17 @@ public class Winner {
         this.numbers.add(num6);
     }
 
+    public static Winner of(String numberString) {
+        String[] numberArray = numberString.split(", ");
+
+        List<Integer> winningNumbers = new ArrayList<>();
+        for (String number : numberArray) {
+            winningNumbers.add(Integer.parseInt(number));
+        }
+
+        return new Winner(winningNumbers);
+    }
+
     public int findWinner(Lotto lotto) {
 
         return lotto.hasWinningNumbers(numbers);
