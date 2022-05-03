@@ -1,20 +1,21 @@
 package lotto;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Map;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoGroupResultTest {
-    @Test
-    void getEarningRatio_총수익률_계산() {
-        LottoGroupResult lottoGroupResult = new LottoGroupResult(Map.of(
-                Rank.FOURTH, 1
-        ));
-        assertThat(lottoGroupResult.getEarningRatio(14000)).isEqualTo(0.35);
+    @ParameterizedTest
+    @MethodSource("generateLottoResultData")
+    void getEarningRatio_총수익률_계산(Map<Rank, Integer> lottoGroupResultMap, int totalPrice, double earningRatio) {
+        LottoGroupResult lottoGroupResult = new LottoGroupResult(lottoGroupResultMap);
+        assertThat(lottoGroupResult.getEarningRatio(totalPrice)).isEqualTo(earningRatio);
     }
 
     @ParameterizedTest
@@ -29,4 +30,23 @@ class LottoGroupResultTest {
         ));
         assertThat(lottoGroupResult.getLottoMatchCount(rank)).isEqualTo(count);
     }
+
+    private static Stream<Arguments> generateLottoResultData() {
+        return Stream.of(
+                Arguments.of(Map.of(Rank.FOURTH, 1), 14000, 0.35),
+                Arguments.of(Map.of(), 0, 1.00),
+                Arguments.of(Map.of(
+                        Rank.FIRST, 1
+                ), 1000, 2000000.00),
+                Arguments.of(Map.of(
+                        Rank.FOURTH, 3,
+                        Rank.MISS, 2
+                ), 20000, 0.75),
+                Arguments.of(Map.of(
+                        Rank.FOURTH, 3,
+                        Rank.THIRD, 1
+                ), 20000, 3.25)
+        );
+    }
+
 }

@@ -26,4 +26,19 @@ public class LottoGroupResult {
     private int winningPrice() {
         return this.lottoGroupResult.entrySet().stream().mapToInt(result -> result.getKey().winningMoney() * result.getValue()).sum();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LottoGroupResult that = (LottoGroupResult) o;
+
+        return lottoGroupResult != null ? lottoGroupResult.equals(that.lottoGroupResult) : that.lottoGroupResult == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return lottoGroupResult != null ? lottoGroupResult.hashCode() : 0;
+    }
 }
