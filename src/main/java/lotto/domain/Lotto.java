@@ -39,7 +39,7 @@ public class Lotto {
     }
 
     public LottoWinnerType winLotto(LottoWinningCondition winningCondition) {
-        return winningCondition.check(this);
+        return winningCondition.winLotto(this);
     }
 
     int countDuplicateValue(Lotto lotto) {
