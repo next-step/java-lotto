@@ -1,13 +1,13 @@
 package lotto.domain;
 
 import lotto.exception.InvalidLottoLengthException;
+import lotto.exception.InvalidLottoNumberException;
 import lotto.util.Utility;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,10 +16,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTest {
-    @DisplayName("로또 생성을 위해서 유효 길이(6)의 리스트가 인자로 전달되어야 한다.")
+    @DisplayName("로또 생성을 위해서 1부터 45 내의 중복 없는 유효 길이(6)의 리스트가 인자로 전달되어야 한다.")
     @Test
     void 로또_생성_성공() {
-        List<Integer> lottoNumbers = Arrays.asList(new Integer[]{1, 3, 4, 7, 22, 59});
+        List<Integer> lottoNumbers = Arrays.asList(new Integer[]{1,3,4,7,22,39});
         Lotto lotto = new Lotto(lottoNumbers);
 
         assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);
@@ -28,10 +28,26 @@ class LottoTest {
     @DisplayName("유효 길이(6)의 리스트가 인자로 전달되지 않는 경우 로또 생성 실패한다.")
     @Test
     void 로또_생성_실패() {
-        assertThatThrownBy(() -> {
-            List<Integer> lottoNumbers = Arrays.asList(new Integer[]{1, 3, 4, 7, 22, 59, 60});
-            Lotto lotto = new Lotto(lottoNumbers);
-        }).isInstanceOf(InvalidLottoLengthException.class);
+        assertAll(
+                () -> {
+                    assertThatThrownBy(() -> {
+                        List<Integer> lottoNumbers = Arrays.asList(new Integer[]{1,3,4,7,22,59,60});
+                        Lotto lotto = new Lotto(lottoNumbers);
+                    }).isInstanceOf(InvalidLottoLengthException.class);
+                },
+                () -> {
+                    assertThatThrownBy(() -> {
+                        List<Integer> lottoNumbers = Arrays.asList(new Integer[]{1,4,4,7,22,59});
+                        Lotto lotto = new Lotto(lottoNumbers);
+                    }).isInstanceOf(InvalidLottoLengthException.class);
+                },
+                () -> {
+                    assertThatThrownBy(() -> {
+                        List<Integer> lottoNumbers = Arrays.asList(new Integer[]{1,4,5,7,22,59});
+                        Lotto lotto = new Lotto(lottoNumbers);
+                    }).isInstanceOf(InvalidLottoNumberException.class);
+                }
+        );
     }
 
     @ParameterizedTest
@@ -76,23 +92,23 @@ class LottoTest {
                 () -> {
                     List<Integer> previousLottoNumber = Arrays.asList(new Integer[]{5,28,29,35,39,44});
                     Lotto previousLotto = new Lotto(previousLottoNumber);
-                    int bonusNumber = 28;
+                    LottoNumber bonusNumber = LottoNumberFactory.valueOf(26);
 
-                    assertThat(lotto.winLotto(previousLotto, bonusNumber)).isEqualTo(LottoWinnerType.valueOf(5, false));
+                    assertThat(lotto.winLotto(new LottoWinningCondition(previousLotto, bonusNumber))).isEqualTo(LottoWinnerType.valueOf(5, false));
                 },
                 () -> {
                     List<Integer> previousLottoNumber = Arrays.asList(new Integer[]{5,28,29,35,39,44});
                     Lotto previousLotto = new Lotto(previousLottoNumber);
-                    int bonusNumber = 27;
+                    LottoNumber bonusNumber = LottoNumberFactory.valueOf(27);
 
-                    assertThat(lotto.winLotto(previousLotto, bonusNumber)).isEqualTo(LottoWinnerType.valueOf(5, true));
+                    assertThat(lotto.winLotto(new LottoWinningCondition(previousLotto, bonusNumber))).isEqualTo(LottoWinnerType.valueOf(5, true));
                 },
                 () -> {
                     List<Integer> previousLottoNumber = Arrays.asList(new Integer[]{4,28,29,35,39,44});
                     Lotto previousLotto = new Lotto(previousLottoNumber);
-                    int bonusNumber = 4;
+                    LottoNumber bonusNumber = LottoNumberFactory.valueOf(3);
 
-                    assertThat(lotto.winLotto(previousLotto, bonusNumber)).isEqualTo(LottoWinnerType.valueOf(4, false));
+                    assertThat(lotto.winLotto(new LottoWinningCondition(previousLotto, bonusNumber))).isEqualTo(LottoWinnerType.valueOf(4, false));
                 }
         );
     }
@@ -106,23 +122,23 @@ class LottoTest {
                 () -> {
                     List<Integer> previousLottoNumber = Arrays.asList(new Integer[]{5,28,29,35,39,44});
                     Lotto previousLotto = new Lotto(previousLottoNumber);
-                    int bonusNumber = 28;
+                    LottoNumber bonusNumber = LottoNumberFactory.valueOf(26);
 
-                    assertThat(lotto.winLotto(previousLotto, bonusNumber).getPrize()).isEqualTo(LottoWinnerType.prize(5, false));
+                    assertThat(lotto.winLotto(new LottoWinningCondition(previousLotto, bonusNumber)).getPrize()).isEqualTo(LottoWinnerType.prize(5, false));
                 },
                 () -> {
                     List<Integer> previousLottoNumber = Arrays.asList(new Integer[]{5,28,29,35,39,44});
                     Lotto previousLotto = new Lotto(previousLottoNumber);
-                    int bonusNumber = 27;
+                    LottoNumber bonusNumber = LottoNumberFactory.valueOf(27);
 
-                    assertThat(lotto.winLotto(previousLotto, bonusNumber).getPrize()).isEqualTo(LottoWinnerType.prize(5, true));
+                    assertThat(lotto.winLotto(new LottoWinningCondition(previousLotto, bonusNumber)).getPrize()).isEqualTo(LottoWinnerType.prize(5, true));
                 },
                 () -> {
                     List<Integer> previousLottoNumber = Arrays.asList(new Integer[]{4,28,29,35,39,44});
                     Lotto previousLotto = new Lotto(previousLottoNumber);
-                    int bonusNumber = 4;
+                    LottoNumber bonusNumber = LottoNumberFactory.valueOf(3);
 
-                    assertThat(lotto.winLotto(previousLotto, bonusNumber).getPrize()).isEqualTo(LottoWinnerType.prize(4, false));
+                    assertThat(lotto.winLotto(new LottoWinningCondition(previousLotto, bonusNumber)).getPrize()).isEqualTo(LottoWinnerType.prize(4, false));
                 }
         );
     }

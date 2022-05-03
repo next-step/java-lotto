@@ -45,17 +45,11 @@ public enum LottoWinnerType {
 
     public static LottoWinnerType valueOf(int countOfDuplicate, boolean isBonus) {
         Identifier key = Identifier.getMatchedIdentifierInstance(countOfDuplicate, isBonus);
-        if (CACHE.containsKey(key)) {
-            return CACHE.get(key);
-        }
-        return NON_WIN;
+        return CACHE.getOrDefault(key, NON_WIN);
     }
 
     static boolean matchCountWithBonus(int countOfDuplicate) {
-        if (countOfDuplicate != SECOND_PLACE.key.getCountOfDuplicate()) {
-            return false;
-        }
-        return true;
+        return countOfDuplicate == SECOND_PLACE.key.getCountOfDuplicate();
     }
 
     public int getCountOfDuplicate() {

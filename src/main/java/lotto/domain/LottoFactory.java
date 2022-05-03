@@ -6,8 +6,8 @@ import java.util.List;
 
 public class LottoFactory {
     private static final List<Integer> LOTTO_BASKET;
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
+    static final int MIN_LOTTO_NUMBER = 1;
+    static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_BALL_NUMBER_TO_SELECT = 0;
     private static final int MAX_BALL_NUMBER_TO_SELECT = 6;
 
