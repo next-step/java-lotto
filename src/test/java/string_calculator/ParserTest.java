@@ -14,9 +14,9 @@ public class ParserTest {
         Parser parser = new Parser();
         parser.parse("1 + 2");
         List<Object> values = new ArrayList<Object>() {{
-            add(new Integer(1));
+            add(1);
             add(Operator.PLUS);
-            add(new Integer(2));
+            add(2);
         }};
         assertThat(parser.values).isEqualTo(values);
     }

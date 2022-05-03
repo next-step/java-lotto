@@ -3,14 +3,14 @@ package string_calculator;
 import java.util.function.BiFunction;
 
 public enum Operator {
-    PLUS("+", (acc, operand) -> new Integer(acc.value() + operand.value())),
-    MINUS("-", (acc, operand) -> new Integer(acc.value() - operand.value())),
-    MULTIPLY("*", (acc, operand) -> new Integer(acc.value() * operand.value())),
+    PLUS("+", (acc, operand) -> acc + operand),
+    MINUS("-", (acc, operand) -> acc - operand),
+    MULTIPLY("*", (acc, operand) -> acc * operand),
     DIVIDE("/", (acc, operand) -> {
         divideByZeroChecker(operand);
         return divideToInteger(acc, operand);
     }),
-    MODULO("%", (acc, operand) -> new Integer(acc.value() % operand.value()));
+    MODULO("%", (acc, operand) -> acc % operand);
 
     private String value;
     public BiFunction<Integer, Integer, Integer> compute;
@@ -44,15 +44,15 @@ public enum Operator {
     }
 
     private static Integer divideToInteger(Integer acc, Integer operand) {
-        Boolean isDividable = acc.value() % operand.value() == 0;
+        Boolean isDividable = acc % operand == 0;
         if (isDividable) {
-            return new Integer(acc.value() / operand.value());
+            return acc / operand;
         }
         throw new IllegalArgumentException("Can't divide.");
     }
 
     private static void divideByZeroChecker(Integer operand) {
-        if (operand.value() == ZERO) {
+        if (operand == ZERO) {
             throw new ArithmeticException("Can't divide by Zero.");
         }
     }
