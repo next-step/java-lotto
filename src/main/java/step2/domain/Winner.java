@@ -41,6 +41,10 @@ public class Winner {
         }
     }
 
+    public boolean isContain(LottoNumber lottoNumber) {
+        return this.values.contains(lottoNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
