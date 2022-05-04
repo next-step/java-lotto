@@ -27,8 +27,7 @@ public class BuyLotto {
         return this.money / LOTTO_PRICE;
     }
 
-    public String buyLottoList() {
-        return lottos.toString();
+    public Lottos getLottos() {
+        return lottos;
     }
-
 }

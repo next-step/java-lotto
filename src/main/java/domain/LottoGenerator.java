@@ -10,7 +10,7 @@ public class LottoGenerator {
     private static final int END_INDEX = 6;
     private static final int CHECK_LOTTO_COUNT = 5;
     private static final int LOTTO_SIZE = 45;
-    private final List<Integer> lottoNumbers = new ArrayList<>();
+    private static final List<LottoNumber> lottoNumbers = new ArrayList<>();
     private final int from;
     private final int to;
 
@@ -18,7 +18,7 @@ public class LottoGenerator {
         this.from = LOTTO_GENERATOR_FIRST_INDEX;
         this.to = LOTTO_SIZE;
         for (int i = this.from; i <= this.to; i++) {
-            this.lottoNumbers.add(i);
+            lottoNumbers.add(new LottoNumber(i));
         }
     }
 
@@ -29,7 +29,7 @@ public class LottoGenerator {
             throw new IllegalArgumentException("to - from 값은 5 이여야 합니다. (로또는 6자리)");
         }
         for (int i = LOTTO_GENERATOR_FIRST_INDEX; i <= LOTTO_SIZE; i++) {
-            this.lottoNumbers.add(i);
+            lottoNumbers.add(new LottoNumber(i));
         }
     }
 
@@ -40,15 +40,15 @@ public class LottoGenerator {
         return to - from == CHECK_LOTTO_COUNT;
     }
 
-    public List<Integer> generate() {
-        List<Integer> numbers = new ArrayList<>(lottoNumbers).subList(this.from - 1, this.to);
+    public List<LottoNumber> generate() {
+        List<LottoNumber> numbers = new ArrayList<>(lottoNumbers).subList(this.from - 1, this.to);
         Collections.shuffle(numbers);
         return numbers.subList(START_INDEX, END_INDEX);
     }
 
     public boolean equals(List<Integer> list) {
         int count = Math.toIntExact(generate().stream()
-                .filter(list::contains)
+                .filter(lottoNumber -> list.contains(lottoNumber.getLottoNumber()))
                 .count());
 
         return count == 6;

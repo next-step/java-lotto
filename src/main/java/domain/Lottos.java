@@ -25,10 +25,19 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
-    public int calculateNumbers(Lotto winningNumbers, int count) {
+    public int calculateNumbers(LottoWinningNumbers winningNumbers, int count) {
         return Math.toIntExact(this.lottoList
                 .stream()
-                .filter(lotto -> lotto.compareSameNumberList(winningNumbers).size() == count)
+                .filter(lotto -> lotto.compareSameNumberList(winningNumbers.getWinningLotto()).size() == count)
+                .filter(lotto -> !lotto.sameFiveNumberListWithBonusNumber(winningNumbers.getWinningLotto()
+                        , winningNumbers.getBonusNumber()))
+                .count());
+    }
+
+    public int calculateNumbersAndBonusNumber(Lotto winningNumbers, int bonusNumber) {
+        return Math.toIntExact(this.lottoList
+                .stream()
+                .filter(lotto -> lotto.sameFiveNumberListWithBonusNumber(winningNumbers, bonusNumber))
                 .count());
     }
 
