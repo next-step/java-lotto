@@ -1,5 +1,7 @@
 package autolotto.domain;
 
+import autolotto.constant.Rank;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,9 +20,9 @@ public class Lottos {
         Results results = new Results();
 
         for (LottoNumbers lottoNumber : lottoNumbers) {
-            int numberOfWins = lottoNumber.match(winningLotto);
-            boolean isBonus = lottoNumber.checkBonus(winningLotto, numberOfWins);
-            results.find(numberOfWins, isBonus).ifPresent(Result::plusWinners);
+            int countOfMatch = lottoNumber.match(winningLotto);
+            boolean isBonus = lottoNumber.checkBonus(winningLotto, countOfMatch);
+            results.plusWinners(Rank.find(countOfMatch, isBonus));
         }
         return results;
     }

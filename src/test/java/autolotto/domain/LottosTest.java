@@ -2,8 +2,6 @@ package autolotto.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Set;
 
@@ -18,18 +16,6 @@ class LottosTest {
         lottos = new Lottos();
         lottos.add(new LottoNumbers(Set.of(1, 2, 3, 4, 5, 6)));
         lottos.add(new LottoNumbers(Set.of(1, 2, 3, 4, 5, 43)));
-    }
-
-    @ParameterizedTest
-    @CsvSource(value = {
-            "6:1",
-            "5:1",
-            "4:0",
-            "3:0"
-    }, delimiter = ':')
-    void winningLottoGiven_ReturnResult(int countOfMatch, int winners) {
-        Results results = lottos.confirm(new WinningLotto(new LottoNumbers(Set.of(1, 2, 3, 4, 5, 6)), 7));
-        assertThat(results.find(countOfMatch, false).get().getWinners()).isEqualTo(winners);
     }
 
     @Test
