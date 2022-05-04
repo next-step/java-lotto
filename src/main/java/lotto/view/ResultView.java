@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Draw;
 import lotto.domain.Lotto;
+import lotto.domain.Ratio;
 import lotto.domain.Winnings;
 
 public class ResultView {
@@ -40,6 +41,28 @@ public class ResultView {
         for (int i = 3; i < winnings.recordMatched().length; i++) {
             System.out.println(i + "개 일치 (" + winnings.rewards()[i] + "원) - "
                     + winnings.recordMatched()[i] + "개");
+        }
+    }
+
+    public void printEarningsRatio(int price, int earnings) {
+        Ratio ratio = new Ratio();
+        double result = ratio.lottoPer(price, earnings);
+        System.out.println("총 수익률은 " + String.format("%.2f", result) + "입니다.");
+
+        printResult(result);
+    }
+
+    private void printResult(double result) {
+        if (result < 1) {
+            System.out.println("손해");
+            return ;
+        }
+        if (result == 1) {
+            System.out.println("본전");
+            return ;
+        }
+        if (result > 1) {
+            System.out.println("이득");
         }
     }
 }

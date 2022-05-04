@@ -21,5 +21,6 @@ public class LottoMain {
         Winnings winnings = new Winnings(inputNumbers);
         draw.checkWinnings(winnings);
         resultView.checkWinningsLotto(draw.winnings());
+        resultView.printEarningsRatio(price, winnings.winningsRewards());
     }
 }
