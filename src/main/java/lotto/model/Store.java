@@ -20,7 +20,7 @@ public final class Store {
   }
 
   private Lotto deliverLotto() {
-    return LottoFactory.getInstance().apply();
+    return LottoFactory.apply();
   }
 
 }

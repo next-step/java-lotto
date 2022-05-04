@@ -1,5 +1,8 @@
 package lotto.util;
 
+import static lotto.model.LottoNumber.MAX_VALUE;
+import static lotto.model.LottoNumber.MIN_VALUE;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -11,9 +14,6 @@ import lotto.model.LottoNumber;
 
 public final class AwardNumberUtil {
 
-
-  private static final int MIN_VALUE = 1;
-  private static final int MAX_VALUE = 45;
 
   private AwardNumberUtil() {
   }
@@ -34,13 +34,6 @@ public final class AwardNumberUtil {
     return count;
   }
 
-  public static List<Integer> init() {
-    List<Integer> lottoNumbers = new ArrayList<>();
-    for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
-      lottoNumbers.add(i);
-    }
-    return lottoNumbers;
-  }
 
   public static boolean getBonusCheck(Set<Integer> winningLotto, int lottoNumber) {
     return winningLotto.contains(lottoNumber);
