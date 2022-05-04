@@ -15,14 +15,8 @@ class RewardTest {
   @Test
   @DisplayName("당첨 번호가 몇개 일치 하는지 확인")
   void awardCount() {
-    assertThat(AwardNumberUtil.matchCount(Set.of(1, 2, 3, 4, 5, 6), Set.of(1, 2, 3, 9, 10, 20)))
-        .isEqualTo(3);
-  }
-  @Test
-  @DisplayName("보너스 당첨번호 유무를 확인")
-  void awardBonus() {
-    assertThat(AwardNumberUtil.getBonusCheck(Set.of(1, 2, 3, 4, 5, 6), 6))
-        .isEqualTo(true);
+    assertThat(AwardNumberUtil.matchCount(Set.of(1, 2, 3, 4, 5, 6), Set.of(1, 2, 3, 9, 10, 20), 6))
+        .isEqualTo(Grade.FIFTH);
   }
 
 

@@ -26,8 +26,8 @@ public class LottoService {
     List<Lotto> LotteryTickets = new ArrayList<>();
     for (Lotto lotto : lotteryTickets) {
       LotteryTickets.add(
-          lotto.reflectLottoGrade(AwardNumberUtil.matchCount(lotto.numbers(), winLotto.numbers()),
-              AwardNumberUtil.getBonusCheck(lotto.numbers(), bonus)));
+          lotto.reflectLottoGrade(
+              AwardNumberUtil.matchCount(lotto.numbers(), winLotto.numbers(), bonus)));
     }
     return LotteryTickets;
   }
@@ -36,8 +36,8 @@ public class LottoService {
     List<WinningResultDto> histories = new ArrayList<>();
     LotteryNoteCounter lotteryNoteCount = new LotteryNoteCounter(lotteryTickets);
     List<Grade> grades = Arrays.stream(Grade.values())
-                               .filter(grade -> grade != Grade.NONE)
-                               .collect(Collectors.toList());
+        .filter(grade -> grade != Grade.NONE)
+        .collect(Collectors.toList());
     for (Grade grade : grades) {
       histories.add(new WinningResultDto(grade, lotteryNoteCount.lotteryCount(grade)));
     }

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
+import lotto.enums.Grade;
 import lotto.model.LottoNumber;
 
 public final class AwardNumberUtil {
@@ -26,16 +27,16 @@ public final class AwardNumberUtil {
         .collect(Collectors.toSet());
   }
 
-  public static int matchCount(Set<Integer> lotteryTicket, Set<Integer> winningLotto) {
+  public static Grade matchCount(Set<Integer> lotteryTicket, Set<Integer> winningLotto,
+      int bonusNumber) {
     int count = 0;
     for (int lottoNumber : lotteryTicket) {
       count = lottoMatchCount(winningLotto, count, lottoNumber);
     }
-    return count;
+    return Grade.valueOf(count, getBonusCheck(lotteryTicket, bonusNumber));
   }
 
-
-  public static boolean getBonusCheck(Set<Integer> winningLotto, int lottoNumber) {
+  private static boolean getBonusCheck(Set<Integer> winningLotto, int lottoNumber) {
     return winningLotto.contains(lottoNumber);
   }
 
