@@ -10,9 +10,8 @@ import lotto.util.LottoNumberGenerator;
 
 public class Lotto {
 
-  private static final int LOTTO_SIZE = 6;
-  private static final String DELIMITER = ", ";
   public static final String INVALID_SIZE_MESSAGE = "하나의 로또는 중복되지 않은 6개의 숫자를 가져야합니다.";
+  private static final int LOTTO_SIZE = 6;
 
   private final Set<LottoNumber> values = new TreeSet<>();
 

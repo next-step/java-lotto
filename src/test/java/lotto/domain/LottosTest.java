@@ -17,22 +17,8 @@ class LottosTest {
   @Test
   void manualAndAutoCreate() {
     List<Lotto> manualLottos = List.of(
-        new Lotto(Set.of(
-            LottoNumber.of(1),
-            LottoNumber.of(2),
-            LottoNumber.of(3),
-            LottoNumber.of(30),
-            LottoNumber.of(40),
-            LottoNumber.of(45)
-        )),
-        new Lotto(Set.of(
-            LottoNumber.of(1),
-            LottoNumber.of(2),
-            LottoNumber.of(3),
-            LottoNumber.of(4),
-            LottoNumber.of(40),
-            LottoNumber.of(45)
-        ))
+        Lotto.create(Set.of(1, 2, 3, 30, 40, 45)),
+        Lotto.create(Set.of(1, 2, 3, 4, 40, 45))
     );
     assertThat(Lottos.create(manualLottos, 8).size()).isEqualTo(10);
   }
@@ -51,46 +37,11 @@ class LottosTest {
   }
 
   private Lottos prepareLottos() {
-    Lotto matchThree = new Lotto(Set.of(
-        LottoNumber.of(1),
-        LottoNumber.of(2),
-        LottoNumber.of(3),
-        LottoNumber.of(30),
-        LottoNumber.of(40),
-        LottoNumber.of(45)
-    ));
-    Lotto matchFour = new Lotto(Set.of(
-        LottoNumber.of(1),
-        LottoNumber.of(2),
-        LottoNumber.of(3),
-        LottoNumber.of(4),
-        LottoNumber.of(40),
-        LottoNumber.of(45)
-    ));
-    Lotto matchFive = new Lotto(Set.of(
-        LottoNumber.of(1),
-        LottoNumber.of(2),
-        LottoNumber.of(3),
-        LottoNumber.of(4),
-        LottoNumber.of(5),
-        LottoNumber.of(45)
-    ));
-    Lotto matchFiveAndBonus = new Lotto(Set.of(
-        LottoNumber.of(1),
-        LottoNumber.of(2),
-        LottoNumber.of(3),
-        LottoNumber.of(4),
-        LottoNumber.of(5),
-        LottoNumber.of(7)
-    ));
-    Lotto matchSix = new Lotto(Set.of(
-        LottoNumber.of(1),
-        LottoNumber.of(2),
-        LottoNumber.of(3),
-        LottoNumber.of(4),
-        LottoNumber.of(5),
-        LottoNumber.of(6)
-    ));
+    Lotto matchThree = Lotto.create(Set.of(1, 2, 3, 30, 40, 45));
+    Lotto matchFour = Lotto.create(Set.of(1, 2, 3, 4, 40, 45));
+    Lotto matchFive = Lotto.create(Set.of(1, 2, 3, 4, 5, 45));
+    Lotto matchFiveAndBonus = Lotto.create(Set.of(1, 2, 3, 4, 5, 7));
+    Lotto matchSix = Lotto.create(Set.of(1, 2, 3, 4, 5, 6));
     return new Lottos(List.of(matchThree, matchFour, matchFive, matchFiveAndBonus, matchSix));
   }
 }
