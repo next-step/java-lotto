@@ -22,7 +22,7 @@ public class LottoMain {
         Lotto winnerLotto = new Lotto(ExtractLottoNumbers.split(winnerLottoNumbers));
         LottoNumber bonusNumber = LottoNumber.valueOf(InputView.inputBonusLottoNumber());
 
-        LottoResult lottoResult = buyingLottos.getLottoResult(winnerLotto);
+        LottoResult lottoResult = buyingLottos.getLottoResult(winnerLotto, bonusNumber);
 
         ResultView.printResult(buyingMoney, lottoResult);
     }

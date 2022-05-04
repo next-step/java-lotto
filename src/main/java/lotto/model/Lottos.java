@@ -40,20 +40,21 @@ public final class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public LottoResult getLottoResult(Lotto winnerLotto) {
-        List<Rank> lottoStatistics = getLottoStatistics(winnerLotto);
-        return new LottoResult(lottoStatistics);
+    public LottoResult getLottoResult(Lotto winnerLotto, LottoNumber bonusNumber) {
+        return new LottoResult(getLottoStatistics(winnerLotto, bonusNumber));
     }
 
-    private List<Rank> getLottoStatistics(Lotto winnerLotto) {
-        validate(winnerLotto);
+    private List<Rank> getLottoStatistics(Lotto winnerLotto, LottoNumber bonusNumber) {
+        validate(winnerLotto, bonusNumber);
 
         return lottos.stream()
-                .map(lotto -> lotto.getRank(winnerLotto))
+                .map(lotto -> lotto.getRank(winnerLotto, bonusNumber))
                 .collect(Collectors.toList());
     }
 
-    private static void validate(Lotto winnerLotto) {
-        Objects.requireNonNull(winnerLotto, "당첨 로또를 올바르게 입력해주세요. input is null");
+    private static void validate(Lotto winnerLotto, LottoNumber bonusNumber) {
+        Objects.requireNonNull(winnerLotto, "당첨 로또를 올바르게 입력해주세요. winnerLotto is null");
+        Objects.requireNonNull(bonusNumber, "보너스 로또 번호를 올바르게 입력해주세요. bonusNumber is null");
+
     }
 }

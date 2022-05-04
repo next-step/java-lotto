@@ -1,6 +1,9 @@
 package lotto.model;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Rank {
     FIRST(6, new Money(2_000_000_000)),
@@ -37,4 +40,15 @@ public enum Rank {
     private boolean isSameMatchCount(int matchCount) {
         return this.matchCount == matchCount;
     }
+
+    public static List<Rank> reverseValues() {
+        return Arrays
+                .stream(Rank.values())
+                .filter(rank -> rank != Rank.OTHER)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), list -> {
+                    Collections.reverse(list);
+                    return list;
+                }));
+    }
+
 }

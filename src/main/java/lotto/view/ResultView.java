@@ -8,8 +8,8 @@ import lotto.model.Rank;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class ResultView {
 
@@ -21,12 +21,13 @@ public class ResultView {
     private static final String OUTPUT_STATISTICS = "당첨 통계";
     private static final String OUTPUT_LINE = "=========";
     private static final String OUTPUT_WINNINGS = "%d개 일치 (%s원)- %d개";
+    private static final String OUTPUT_SECOND_WINNINGS = "%d개 일치, 보너스 볼 일치(%s원)- %d개";
 
     private static final String OUTPUT_YIELD = "총 수익률은 %.2f 입니다. (기준이 1이기 때문에 결과적으로 %s(이)라는 의미임)";
     private static final String YIELD_LOSS = "손해";
     private static final String YIELD_PROFIT = "이익";
 
-    private static final List<Integer> PRINT_MATCH_COUNTS = IntStream.range(3, 7).boxed().collect(Collectors.toList());
+    private static final List<Rank> PRINT_RANKS = Rank.reverseValues();
     private static final long DEFAULT_COUNT = 0L;
 
     private ResultView() {
@@ -63,25 +64,30 @@ public class ResultView {
     }
 
     private static void printStatistics(LottoResult lottoResult) {
-        Map<Integer, Long> rankResult = getRankResult(lottoResult.getRankResult());
+        Map<Rank, Long> rankResult = getRankResult(lottoResult.getRankResult());
 
-        for (Integer count : PRINT_MATCH_COUNTS) {
-            Rank rank = Rank.of(count);
-            System.out.println(String.format(OUTPUT_WINNINGS, rank.matchCount(), rank.winnings(), rankResult.getOrDefault(count, DEFAULT_COUNT)));
-        }
+        PRINT_RANKS.stream()
+                .forEach(rank -> printStatistics(rank, rankResult.getOrDefault(rank, DEFAULT_COUNT)));
     }
 
-    private static Map<Integer, Long> getRankResult(List<Rank> rankResult) {
+    private static Map<Rank, Long> getRankResult(List<Rank> rankResult) {
         return rankResult.stream()
                 .filter(rank -> rank != Rank.OTHER)
-                .collect(Collectors.groupingBy(Rank::matchCount, Collectors.counting()));
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    }
+
+    private static void printStatistics(Rank rank, Long count) {
+        if (rank == Rank.SECOND) {
+            System.out.println(String.format(OUTPUT_SECOND_WINNINGS, rank.matchCount(), rank.winnings(), count));
+            return;
+        }
+        System.out.println(String.format(OUTPUT_WINNINGS, rank.matchCount(), rank.winnings(), count));
     }
 
     private static String getYieldText(double yield) {
         if (yield < 1) {
             return String.format(OUTPUT_YIELD, yield, YIELD_LOSS);
         }
-        return String.format(OUTPUT_YIELD, yield, YIELD_PROFIT)
-                ;
+        return String.format(OUTPUT_YIELD, yield, YIELD_PROFIT);
     }
 }
