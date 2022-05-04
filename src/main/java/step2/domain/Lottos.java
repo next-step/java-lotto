@@ -6,10 +6,10 @@ import java.util.List;
 public class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(int inputMoney) {
+    public Lottos(int inputMoney, LottoPickStrategy lottoPickStrategy) {
         int lottoNum = inputMoney / Lotto.price;
         for (int i = 0; i < lottoNum; i++) {
-            lottos.add(new Lotto());
+            lottos.add(new Lotto(lottoPickStrategy));
         }
     }
 
@@ -17,14 +17,17 @@ public class Lottos {
         return lottos.size();
     }
 
-    public List<Integer> numbers(int i) {
-        return lottos.get(i).pick();
+    public List<Integer> numbers(int index) {
+        return lottos.get(index).pick();
     }
 
-    public void matching(String numbers) {
-    }
+    public LottoWinners check(List<Integer> pickLottoNumberOfWeek) {
+        LottoWinners lottoWinners = new LottoWinners();
+        for (Lotto lotto : lottos) {
+            int count = lotto.numberCheck(pickLottoNumberOfWeek);
+            lottoWinners.refresh(count);
+        }
 
-    public double moneyProfitRate() {
-        return 0.0;
+        return lottoWinners;
     }
 }

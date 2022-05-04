@@ -1,18 +1,31 @@
 package step2.service;
 
+import step2.domain.LottoWinners;
 import step2.domain.Lottos;
 
-public class LottoGameService {
-    private static final int REWARD_4TH = 5000;
-    private static final int REWARD_3RD = 50000;
-    private static final int REWARD_2ND = 1500000;
-    private static final int REWARD_1ST = 2000000000;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
-    public LottoGameService(Lottos lottos, String numbers) {
-        lottos.matching(numbers);
+public class LottoGameService {
+
+    public List<Integer> pickLottoNumberOfWeek(String input) {
+        String newInput = input.replace(" ", "");
+        String[] split = newInput.split(",");
+        return Arrays.stream(split).map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
+    public LottoWinners match(Lottos lottos, List<Integer> pickLottoNumberOfWeek) {
+        //매칭
+        return lottos.check(pickLottoNumberOfWeek);
+    }
+
+    public double moneyProfitRate(int investMoney, LottoWinners winners) {
+        return investMoney / (double) winners.totalMoney() * 100;
+    }
 
     public void result() {
     }
+
 }
