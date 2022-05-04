@@ -4,6 +4,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.List;
+import lotto.domain.LottoFactory;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoResult;
+import lotto.domain.LottoStatistics;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -65,7 +71,7 @@ class LottoTicketTest {
         )
     );
     LottoStatistics resultStatistics = lottoTickets.getResultStatistics(winLottoTicket);
-    assertThat(resultStatistics.getLottoResultList()).contains(new LottoResult(3),
+    assertThat(resultStatistics.getLottoResults()).contains(new LottoResult(3),
         new LottoResult(1));
   }
 

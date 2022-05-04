@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Objects;
 
@@ -8,6 +8,10 @@ public class LottoResult {
 
   public LottoResult(int matchedCount) {
     this.matchedCount = matchedCount;
+  }
+
+  LottoRank getLottoRank() {
+    return LottoRank.findByMatchCount(matchedCount);
   }
 
   @Override
