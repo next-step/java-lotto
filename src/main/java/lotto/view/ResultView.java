@@ -23,6 +23,7 @@ public class ResultView {
     private static final String OUTPUT_WINNINGS = "%d개 일치 (%s원)- %d개";
     private static final String OUTPUT_SECOND_WINNINGS = "%d개 일치, 보너스 볼 일치(%s원)- %d개";
 
+    private static final int YIELD_BASIS = 1;
     private static final String OUTPUT_YIELD = "총 수익률은 %.2f 입니다. (기준이 1이기 때문에 결과적으로 %s(이)라는 의미임)";
     private static final String YIELD_LOSS = "손해";
     private static final String YIELD_PROFIT = "이익";
@@ -85,9 +86,13 @@ public class ResultView {
     }
 
     private static String getYieldText(double yield) {
-        if (yield < 1) {
+        if (isLoss(yield)) {
             return String.format(OUTPUT_YIELD, yield, YIELD_LOSS);
         }
         return String.format(OUTPUT_YIELD, yield, YIELD_PROFIT);
+    }
+
+    private static boolean isLoss(double yield) {
+        return yield < YIELD_BASIS;
     }
 }
