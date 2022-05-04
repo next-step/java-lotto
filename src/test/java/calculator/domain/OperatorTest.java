@@ -6,16 +6,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CalculatorTest {
+public class OperatorTest {
 
     @Test
     @DisplayName("operation 을 곱셈으로 변경하면 Calculator 의 operation 이 곱셈으로 변경된다.")
     void changeOperation() {
-        Calculator calculator = new Calculator(new AddOperation());
+        Operator operator = new Operator(new AddOperation());
 
         Operation operation = new MultiplyOperation();
-        calculator.changeOperation(operation);
+        operator.changeOperation(operation);
 
-        assertThat(calculator).isEqualTo(new Calculator(operation));
+        assertThat(operator).isEqualTo(new Operator(operation));
     }
 }
