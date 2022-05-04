@@ -10,10 +10,18 @@ import java.util.stream.Collectors;
 public class LottoGameService {
 
     public List<Integer> pickLottoNumberOfWeek(String input) {
+        if (input == null || input.isEmpty())
+            throw new IllegalArgumentException("로또 당첨번호가 비어있습니다");
+
         String newInput = input.replace(" ", "");
         String[] split = newInput.split(",");
-        return Arrays.stream(split).map(Integer::parseInt)
+        List<Integer> result = Arrays.stream(split).map(Integer::parseInt)
                 .collect(Collectors.toList());
+
+        if (result.size() != 6)
+            throw new IllegalArgumentException("로또 당첨번호는 6개이다");
+
+        return result;
     }
 
     public LottoWinners match(Lottos lottos, List<Integer> pickLottoNumberOfWeek) {
