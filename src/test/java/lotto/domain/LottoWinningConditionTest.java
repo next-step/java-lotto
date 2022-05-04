@@ -21,7 +21,6 @@ class LottoWinningConditionTest {
                     List<Integer> previousLottoNumber = Arrays.asList(new Integer[]{5,28,29,35,39,44});
                     Lotto previousLotto = new Lotto(previousLottoNumber);
                     LottoNumber bonusNumber = LottoNumber.valueOf(28);
-
                     assertThatThrownBy(() -> {
                         new LottoWinningCondition(previousLotto, bonusNumber);
                     }).isInstanceOf(InvalidBonusNumberException.class);
@@ -30,7 +29,6 @@ class LottoWinningConditionTest {
                     List<Integer> previousLottoNumber = Arrays.asList(new Integer[]{5,28,29,35,39,44});
                     Lotto previousLotto = new Lotto(previousLottoNumber);
                     LottoNumber bonusNumber = LottoNumber.valueOf(27);
-
                     assertThat(new LottoWinningCondition(previousLotto, bonusNumber).winLotto(lotto)).isEqualTo(LottoWinnerType.valueOf(5, true));
                 }
         );
