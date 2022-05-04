@@ -27,9 +27,18 @@ public class ResultsTest {
 
 
     @Test
-    void rankGiven_ReturnWinners() {
+    void rankGiven_ReturnIncreasedWinners() {
         assertThat(results.plusWinners(Rank.FIRST)).isEqualTo(1);
         assertThat(results.plusWinners(Rank.FIRST)).isEqualTo(2);
         assertThat(results.plusWinners(Rank.SECOND)).isEqualTo(1);
+    }
+
+    @Test
+    void rankGiven_ReturnWinners() {
+        results.plusWinners(Rank.FIRST);
+        results.plusWinners(Rank.SECOND);
+        assertThat(results.countOfWinners(Rank.FIRST)).isEqualTo(1);
+        assertThat(results.countOfWinners(Rank.SECOND)).isEqualTo(1);
+        assertThat(results.countOfWinners(Rank.THIRD)).isEqualTo(0);
     }
 }

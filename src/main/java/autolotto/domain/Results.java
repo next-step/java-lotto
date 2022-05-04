@@ -12,4 +12,8 @@ public class Results {
         results.put(rank, ++winners);
         return winners;
     }
+
+    public int countOfWinners(Rank rank) {
+        return results.getOrDefault(rank, 0);
+    }
 }
