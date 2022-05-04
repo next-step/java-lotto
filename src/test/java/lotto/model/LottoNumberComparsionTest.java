@@ -17,8 +17,8 @@ class LottoNumberComparsionTest {
     WinningLotto winningLotto = WinningLotto.create("1, 2, 3, 4, 5, 6");
 
     // when
-    LottoNumberComparison lottoNumberComparsion = new LottoNumberComparison(lottos, winningLotto);
-    Map<LottoRank, Integer> matchResult = lottoNumberComparsion.getMatchResult();
+    LottoWinStatistocs lottoWinStatistocs = new LottoWinStatistocs(lottos, winningLotto);
+    Map<LottoRank, Integer> matchResult = lottoWinStatistocs.isMatchResult();
 
     // then
     assertThat(matchResult.get(LottoRank.FIRST)).isEqualTo(3);
@@ -32,8 +32,8 @@ class LottoNumberComparsionTest {
     WinningLotto winningLotto = WinningLotto.create("1, 2, 3, 4, 5, 6");
 
     // when
-    LottoNumberComparison lottoNumberComparsion = new LottoNumberComparison(lottos, winningLotto);
-    double profitRatioResult = lottoNumberComparsion.getProfitRatio();
+    LottoWinStatistocs lottoWinStatistocs = new LottoWinStatistocs(lottos, winningLotto);
+    double profitRatioResult = lottoWinStatistocs.isProfitRatio();
 
     // then
     assertThat(profitRatioResult).isEqualTo(2000000.0);

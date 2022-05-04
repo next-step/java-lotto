@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.model.Lotto;
-import lotto.model.LottoNumberComparison;
+import lotto.model.LottoWinStatistocs;
 import lotto.model.Lottos;
 import lotto.model.WinningLotto;
 import lotto.strategy.LottoNumberGenerateStrategy;
@@ -20,9 +20,9 @@ public class LottoController {
 
     WinningLotto winningLotto = WinningLotto.create(InputView.inputLastWeekWinningLotto());
 
-    LottoNumberComparison lottoNumberComparsion = new LottoNumberComparison(lottos, winningLotto);
-    OutputView.outputWinningRate(lottoNumberComparsion.getMatchResult());
-    OutputView.outputProfitRatio(lottoNumberComparsion.getProfitRatio());
+    LottoWinStatistocs lottoWinStatistocs = new LottoWinStatistocs(lottos, winningLotto);
+    OutputView.outputWinningRate(lottoWinStatistocs.isMatchResult());
+    OutputView.outputProfitRatio(lottoWinStatistocs.isProfitRatio());
   }
 
   private int countPurchasedLotto(int amount) {
