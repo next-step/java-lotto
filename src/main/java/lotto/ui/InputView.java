@@ -85,7 +85,7 @@ public class InputView {
     private static LottoNumber inputBonusNumber() {
         try {
             System.out.println(BONUS_NUMBER_MESSAGE);
-            return LottoNumberFactory.valueOf(SCANNER.nextInt());
+            return LottoNumber.valueOf(SCANNER.nextInt());
         } catch (InvalidLottoNumberException e) {
             SCANNER.nextLine(); // Delete newLine
             System.out.println(e.getMessage());

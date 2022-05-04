@@ -12,26 +12,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottoWinningConditionTest {
     @Test
-    void 로또_당첨번호_중복_테스트() {
-        List<Integer> lottoNumber = Arrays.asList(new Integer[]{5,27,29,35,39,44});
-        Lotto lotto = new Lotto(lottoNumber);
+    void 로또_당첨번호_및_보너스번호_중복_테스트() {
+        Lotto lotto = new Lotto(new Integer[]{5,27,29,35,39,44});
 
         assertAll(
                 () -> {
-                    List<Integer> previousLottoNumber = Arrays.asList(new Integer[]{5,28,29,35,39,44});
-                    Lotto previousLotto = new Lotto(previousLottoNumber);
-                    LottoNumber bonusNumber = LottoNumberFactory.valueOf(28);
-
+                    Lotto previousLotto = new Lotto(new Integer[]{5,28,29,35,39,44});
+                    LottoNumber bonusNumber = LottoNumber.valueOf(28);
                     assertThatThrownBy(() -> {
                         new LottoWinningCondition(previousLotto, bonusNumber);
                     }).isInstanceOf(InvalidBonusNumberException.class);
                 },
                 () -> {
-                    List<Integer> previousLottoNumber = Arrays.asList(new Integer[]{5,28,29,35,39,44});
-                    Lotto previousLotto = new Lotto(previousLottoNumber);
-                    LottoNumber bonusNumber = LottoNumberFactory.valueOf(27);
-
-                    assertThat(lotto.winLotto(new LottoWinningCondition(previousLotto, bonusNumber))).isEqualTo(LottoWinnerType.valueOf(5, true));
+                    Lotto previousLotto = new Lotto(new Integer[]{5,28,29,35,39,44});
+                    LottoNumber bonusNumber = LottoNumber.valueOf(27);
+                    assertThat(new LottoWinningCondition(previousLotto, bonusNumber).winLotto(lotto)).isEqualTo(LottoWinnerType.valueOf(5, true));
                 }
         );
     }

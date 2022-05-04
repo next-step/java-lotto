@@ -14,7 +14,6 @@ class LottoFactoryTest {
     @Test
     void 로또_자동_생성_숫자_범위_테스트() {
         Lotto lotto = LottoFactory.createLottoAutomatically();
-        System.out.println(lotto.toString());
         for (LottoNumber number : lotto.getLottoNumbers()) {
             assertThat(number.getLottoNumber() >= MIN_LOTTO_NUMBER && number.getLottoNumber() <= MAX_LOTTO_NUMBER).isTrue();
         }
@@ -24,7 +23,7 @@ class LottoFactoryTest {
     @Test
     void 로또_생성_불변_테스트() {
         Lotto lotto = LottoFactory.createLottoAutomatically();
-        assertThatThrownBy(() -> lotto.getLottoNumbers().add(new LottoNumber(2)))
+        assertThatThrownBy(() -> lotto.getLottoNumbers().add(LottoNumber.valueOf(2)))
                         .isInstanceOf(UnsupportedOperationException.class);
     }
 }

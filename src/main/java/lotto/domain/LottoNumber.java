@@ -2,24 +2,43 @@ package lotto.domain;
 
 import lotto.exception.InvalidLottoNumberException;
 
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private Integer lottoNumber;
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
+    private static final List<LottoNumber> LOTTO_NUMBER_CACHE = new ArrayList<>();
+    private static final int CONSTANT_TO_CONVERT_NUMBER_TO_INDEX = 1;
 
-    LottoNumber(Integer lottoNumber) {
-        checkRangeOfLottoNumber(lottoNumber);
+    static {
+        for (int i = MIN_LOTTO_NUMBER, len = MAX_LOTTO_NUMBER; i <= len; i++) {
+            LOTTO_NUMBER_CACHE.add(new LottoNumber(i));
+        }
+    }
+
+    private final Integer lottoNumber;
+
+    private LottoNumber(final Integer lottoNumber) {
         this.lottoNumber = lottoNumber;
     }
 
-    void checkRangeOfLottoNumber(int lottoNumber) {
-        if (checkNumberRange(lottoNumber, LottoFactory.MIN_LOTTO_NUMBER, LottoFactory.MAX_LOTTO_NUMBER)) {
+    static void checkRangeOfLottoNumber(int lottoNumber) {
+        if (checkNumberRange(lottoNumber, MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)) {
             throw new InvalidLottoNumberException(lottoNumber);
         }
     }
 
-    private boolean checkNumberRange(int lottoNumber, int minNumber, int maxNumber) {
+    public static LottoNumber valueOf(final Integer lottoNumber) {
+        checkRangeOfLottoNumber(lottoNumber);
+        return LOTTO_NUMBER_CACHE.get(lottoNumber - CONSTANT_TO_CONVERT_NUMBER_TO_INDEX);
+    }
+
+    private static boolean checkNumberRange(int lottoNumber, int minNumber, int maxNumber) {
         return (lottoNumber < minNumber) || (lottoNumber > maxNumber);
+    }
+
+    static List<LottoNumber> values() {
+        return LOTTO_NUMBER_CACHE;
     }
 
     @Override

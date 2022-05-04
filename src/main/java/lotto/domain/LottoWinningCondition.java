@@ -18,11 +18,7 @@ public class LottoWinningCondition {
         }
     }
 
-    Lotto getPreviousLotto() {
-        return previousLotto;
-    }
-
-    LottoNumber getBonusNumber() {
-        return bonusNumber;
+    LottoWinnerType winLotto(Lotto lotto) {
+        return LottoWinnerType.valueOf(lotto.countDuplicateValue(previousLotto), lotto.contains(bonusNumber));
     }
 }

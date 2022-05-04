@@ -8,9 +8,10 @@ public class Lotto {
     private static final int VALID_LOTTO_LENGTH = 6;
     private final Set<LottoNumber> lotto;
 
-    Lotto(List<Integer> lottoNumbers) {
-        validateLengthOfLotto(lottoNumbers);
-        this.lotto = new HashSet<>(castIntegersToLottoNumbers(lottoNumbers));
+    public Lotto(Integer[] lottoNumbers) {
+        final List<Integer> lotto = Arrays.asList(lottoNumbers);
+        validateLengthOfLotto(lotto);
+        this.lotto = new HashSet<>(castIntegersToLottoNumbers(lotto));
     }
 
     private void validateLengthOfLotto(List<Integer> lottoNumbers) {
@@ -23,13 +24,13 @@ public class Lotto {
     private List<LottoNumber> castIntegersToLottoNumbers(List<Integer> lottoNumbers) {
         final List<LottoNumber> lotto = new ArrayList<>();
         for (Integer number : lottoNumbers) {
-            lotto.add(LottoNumberFactory.valueOf(number));
+            lotto.add(LottoNumber.valueOf(number));
         }
         return lotto;
     }
 
-    public Lotto(Integer[] lottoNumbers) {
-        this(Arrays.asList(lottoNumbers));
+    Lotto(List<LottoNumber> lotto) {
+        this.lotto = new HashSet<>(lotto);
     }
 
     public List<LottoNumber> getLottoNumbers() {
@@ -39,15 +40,7 @@ public class Lotto {
     }
 
     public LottoWinnerType winLotto(LottoWinningCondition winningCondition) {
-        return winLotto(winningCondition.getPreviousLotto(), winningCondition.getBonusNumber());
-    }
-
-    LottoWinnerType winLotto(Lotto previousLotto, LottoNumber bonusNumber) {
-        int countOfDuplicate = countDuplicateValue(previousLotto);
-        if (LottoWinnerType.matchCountWithBonus(countOfDuplicate)) {
-            return LottoWinnerType.valueOf(countOfDuplicate, contains(bonusNumber));
-        }
-        return LottoWinnerType.valueOf(countOfDuplicate, false);
+        return winningCondition.winLotto(this);
     }
 
     int countDuplicateValue(Lotto lotto) {
