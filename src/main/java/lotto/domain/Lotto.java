@@ -9,9 +9,16 @@ public class Lotto {
     private final int LOTTO_LENGTH = 6;
     private final int MAX_VALUE = 45;
 
-    List<Integer> selectedNumbers;
+    private List<Integer> selectedNumbers;
+
+    private int numberOfMatched;
+
+    public Lotto(List<Integer> selectedNumbers) {
+        this.selectedNumbers = selectedNumbers;
+    }
 
     public Lotto() {
+        this.numberOfMatched = 0;
         List<Integer> candidateNumbers = candidateNumbers();
 
         Collections.shuffle(candidateNumbers);
@@ -25,6 +32,10 @@ public class Lotto {
             candidateNumbers.add(number);
         }
         return candidateNumbers;
+    }
+
+    void checkWinnings(Winnings winnings) {
+        this.numberOfMatched = winnings.countMatchedNumbers(selectedNumbers);
     }
 
     public List<Integer> selectedNumbers() {

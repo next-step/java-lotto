@@ -24,6 +24,12 @@ public class Draw {
         }
     }
 
+    public void checkWinnings(Winnings winnings) {
+        for (Lotto lotto : this.lottos) {
+            lotto.checkWinnings(winnings);
+        }
+    }
+
     public List<Lotto> lottos() {
         return Collections.unmodifiableList(lottos);
     }

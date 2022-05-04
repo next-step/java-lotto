@@ -36,3 +36,8 @@
       * 로또
     * Functions
       * 로또 생성
+  * Winnings
+    * Variables
+      * 당첨 번호
+    * Functions
+      * 당첨된 번호 개수 확인
