@@ -16,11 +16,11 @@ public class StringCalculator {
     validateInput(s);
 
     List<String> strings = Splitter.split(s);
-    Operand result = Operand.createOperand(strings.get(FIRST_INDEX));
+    Operand result = new Operand(strings.get(FIRST_INDEX));
     int size = strings.size();
     for (int i = 1; i < size - 1; i = i + 2) {
       String sign = strings.get(i);
-      Operand current = Operand.createOperand(strings.get(i + 1));
+      Operand current = new Operand(strings.get(i + 1));
       result = Operator.operate(sign, result, current);
     }
     return result;

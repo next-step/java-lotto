@@ -10,10 +10,14 @@ public final class Operand {
 
   private final int number;
 
-  public static Operand createOperand(String value) {
+  public Operand(int number) {
+    this.number = number;
+  }
+
+  public Operand(String value) {
     validateInputValue(value);
     validateNumberFormat(value);
-    return new Operand(Integer.parseInt(value));
+    number = Integer.parseInt(value);
   }
 
   private static void validateInputValue(String value) {
@@ -27,10 +31,6 @@ public final class Operand {
     if (!m.find()) {
       throw new NumberFormatException(String.format("%s 지원하지 않는 숫자 형식입니다", value));
     }
-  }
-
-  private Operand(int number) {
-    this.number = number;
   }
 
   int number() {
