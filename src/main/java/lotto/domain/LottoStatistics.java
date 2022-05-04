@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class LottoStatistics {
 
@@ -16,9 +17,16 @@ public class LottoStatistics {
     return Collections.unmodifiableList(lottoResults);
   }
 
-  public Money getRateOfReturn() {
+  public double getRateOfReturn() {
     return Money.wons(getTotalCashPrizeAmount())
-        .divide(getTotalPaidAmount());
+        .divide(getTotalPaidAmount()).doubleValue();
+  }
+
+  public long getCountByLottoRank(final LottoRank lottoRank) {
+    return lottoResults.stream()
+        .filter(
+            lottoResult -> Objects.equals(lottoResult, new LottoResult(lottoRank.getMatchCount())))
+        .count();
   }
 
   private int getTotalPaidAmount() {

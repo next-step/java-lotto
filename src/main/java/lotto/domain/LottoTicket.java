@@ -46,4 +46,9 @@ public class LottoTicket {
       throw new IllegalArgumentException("로또 번호가 중복되었습니다.");
     }
   }
+
+  @Override
+  public String toString() {
+    return lottoNumbers.toString();
+  }
 }

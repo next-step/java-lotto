@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoStatistics;
-import lotto.domain.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +21,7 @@ class LottoStatisticsTest {
         new LottoResult(0),
         new LottoResult(0)
     ));
-    Money rateOfReturn = lottoStatistics.getRateOfReturn();
-    assertThat(rateOfReturn.doubleValue()).isEqualTo(0.83);
+    double rateOfReturn = lottoStatistics.getRateOfReturn();
+    assertThat(rateOfReturn).isEqualTo(0.83);
   }
 }

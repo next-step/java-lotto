@@ -6,6 +6,10 @@ public class LottoNumber {
 
   private final int number;
 
+  public LottoNumber(String number) {
+    this(Integer.parseInt(number));
+  }
+
   public LottoNumber(int number) {
     if (number < 1 || number > 45) {
       throw new IllegalArgumentException("로또번호가 1보다 작거나 45보다 클 수 없습니다.");

@@ -11,6 +11,6 @@ class LottoFactoryTest {
   @Test
   @DisplayName("로또 번호 생성")
   void create() {
-    assertThat(LottoFactory.create()).hasSize(6);
+    assertThat(LottoFactory.create().getLottoNumbers()).hasSize(6);
   }
 }

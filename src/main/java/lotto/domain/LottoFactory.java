@@ -1,8 +1,10 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoFactory {
 
@@ -18,9 +20,27 @@ public class LottoFactory {
     }
   }
 
-  public static List<LottoNumber> create() {
+  public static LottoTicket create() {
     Collections.shuffle(allLottoNumbers);
-    return allLottoNumbers.subList(0, LOTTO_NUMBERS_SIZE);
+    return new LottoTicket(allLottoNumbers.stream()
+        .limit(LOTTO_NUMBERS_SIZE)
+        .collect(Collectors.toList()));
+  }
+
+  public static LottoTicket create(String... numbers) {
+    return create(Arrays.stream(numbers)
+        .map(LottoNumber::new)
+        .collect(Collectors.toList()));
+  }
+
+  public static LottoTicket create(Integer... numbers) {
+    return create(Arrays.stream(numbers)
+        .map(LottoNumber::new)
+        .collect(Collectors.toList()));
+  }
+
+  private static LottoTicket create(List<LottoNumber> lottoNumbers) {
+    return new LottoTicket(lottoNumbers);
   }
 
 }
