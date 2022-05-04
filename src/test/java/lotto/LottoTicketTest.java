@@ -38,4 +38,17 @@ class LottoTicketTest {
                 new LottoNumber(6), new LottoNumber(6))));
   }
 
+  @Test
+  void givenWinNumbers_ShouldResult() {
+    List<LottoNumber> winNumbers = List.of(new LottoNumber(1), new LottoNumber(2),
+        new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+
+    LottoTicket lottoTicket = new LottoTicket(
+        List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(5), new LottoNumber(14),
+            new LottoNumber(22), new LottoNumber(45)));
+
+    assertThat(lottoTicket.getWinLottoNumbers(winNumbers)).contains(new LottoNumber(1),
+        new LottoNumber(3), new LottoNumber(5));
+  }
+
 }
