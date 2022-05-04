@@ -48,7 +48,7 @@ public class LottoController {
   }
 
   public List<Lotto> allLotteryTickets(List<Lotto> lottoProducts, Lotto winnerLotto, int bonus) {
-    return lottoService.allLotteryTickets(lottoProducts, winnerLotto, bonus);
+    return lottoService.holdingLotteryTickets(lottoProducts, winnerLotto, bonus);
   }
 
   private List<WinningResultDto> histories(List<Lotto> lotteryTickets) {

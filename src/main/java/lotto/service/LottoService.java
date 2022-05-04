@@ -22,7 +22,7 @@ public class LottoService {
     return Lotto.from(AwardNumberUtil.getAwardNumberList(winnerNumber));
   }
 
-  public List<Lotto> allLotteryTickets(List<Lotto> lotteryTickets, Lotto winLotto, int bonus) {
+  public List<Lotto> holdingLotteryTickets(List<Lotto> lotteryTickets, Lotto winLotto, int bonus) {
     List<Lotto> LotteryTickets = new ArrayList<>();
     for (Lotto lotto : lotteryTickets) {
       LotteryTickets.add(

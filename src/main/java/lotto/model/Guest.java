@@ -7,15 +7,15 @@ import lotto.exception.LottoSizeException;
 public final class Guest {
 
   private final Money money;
-  private final List<Lotto> allLotteryTickets;
+  private final List<Lotto> holdingLotteryTickets;
 
   public Guest(long money) {
     this(money, null);
   }
 
-  public Guest(long money, List<Lotto> allLotteryTickets) {
+  public Guest(long money, List<Lotto> holdingLotteryTickets) {
     this.money = new Money(money);
-    this.allLotteryTickets = allLotteryTickets;
+    this.holdingLotteryTickets = holdingLotteryTickets;
   }
 
   public Guest choiceProduct(Store store) {
@@ -23,8 +23,8 @@ public final class Guest {
   }
 
   public List<Lotto> hasAllLotto() {
-    emptySizeIsValid(allLotteryTickets.size());
-    return allLotteryTickets;
+    emptySizeIsValid(holdingLotteryTickets.size());
+    return holdingLotteryTickets;
   }
 
   private void emptySizeIsValid(int size) {
@@ -42,12 +42,12 @@ public final class Guest {
       return false;
     }
     Guest guest = (Guest) o;
-    return Objects.equals(money, guest.money) && Objects.equals(allLotteryTickets,
-        guest.allLotteryTickets);
+    return Objects.equals(money, guest.money) && Objects.equals(holdingLotteryTickets,
+        guest.holdingLotteryTickets);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(money, allLotteryTickets);
+    return Objects.hash(money, holdingLotteryTickets);
   }
 }
