@@ -6,12 +6,10 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 import static java.lang.Integer.parseInt;
+import static string_calculator.Const.*;
 
 public class Parser {
-    public List<Value> values = new ArrayList<Value>();
-    private static String REGEX_INT = "\\d+";
-    private static String REGEX_OPERATOR = "[\\+\\-\\*\\/%]";
-    private static String EMPTY_STR = " ";
+    public List<Object> values = new ArrayList();
 
     public void parse(String equation) {
         String[] items = equation.split(EMPTY_STR);
@@ -26,9 +24,9 @@ public class Parser {
         }
     }
 
-    private Value evaluate(String item) {
+    private Object evaluate(String item) {
         if ((Pattern.matches(REGEX_INT, item))) {
-            return new Integer(parseInt(item));
+            return parseInt(item);
         }
         if ((Pattern.matches(REGEX_OPERATOR, item))) {
             return Operator.create(item);

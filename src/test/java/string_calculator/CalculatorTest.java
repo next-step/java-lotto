@@ -11,30 +11,30 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class CalculatorTest {
     @Test
     void handlePlusOperator() {
-        List<Value> values = new ArrayList<Value>() {{
-            add(new Integer(1));
+        List<Object> values = new ArrayList<>() {{
+            add(1);
             add(Operator.PLUS);
-            add(new Integer(2));
+            add(2);
         }};
         Calculator calculator = new Calculator();
-        assertThat(calculator.computes(values)).isEqualTo(new Integer(3));
+        assertThat(calculator.computes(values)).isEqualTo(3);
     }
 
     @Test
     void handleOperators() {
-        List<Value> values = new ArrayList<Value>() {{
-            add(new Integer(1));
+        List<Object> values = new ArrayList<>() {{
+            add(1);
             add(Operator.PLUS);
-            add(new Integer(2));
+            add(2);
             add(Operator.MULTIPLY);
-            add(new Integer(4));
+            add(4);
             add(Operator.DIVIDE);
-            add(new Integer(2));
+            add(2);
             add(Operator.MODULO);
-            add(new Integer(5));
+            add(5);
         }};
         Calculator calculator = new Calculator();
-        assertThat(calculator.computes(values)).isEqualTo(new Integer(1));
+        assertThat(calculator.computes(values)).isEqualTo(1);
     }
 
     @Test
@@ -58,6 +58,6 @@ public class CalculatorTest {
         Parser parser = new Parser();
         parser.parse("2 + 3 * 4 / 2");
         Calculator calculator = new Calculator();
-        assertThat(calculator.computes(parser.values)).isEqualTo(new Integer(10));
+        assertThat(calculator.computes(parser.values)).isEqualTo(10);
     }
 }

@@ -10,21 +10,19 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class ValueTest {
     @Test
     void create() {
-        assertThat(new Integer(1)).isInstanceOf(Integer.class);
+        assertThat(1).isInstanceOf(Integer.class);
         assertThat(Operator.MULTIPLY).isInstanceOf(Operator.class);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"!", "@", "#", "$", "^", "&"})
     void wrongOperator(String input) {
-        Parser parser = new Parser();
         assertThatThrownBy(() -> Operator.create(input)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"+", "-", "*", "/", "%"})
     void collectOperator(String input) {
-        Parser parser = new Parser();
         assertThat(Operator.create(input)).isInstanceOf(Operator.class);
     }
 }

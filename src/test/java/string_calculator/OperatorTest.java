@@ -8,11 +8,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class OperatorTest {
     @Test
     void computeShouldWork() {
-        assertThat(Operator.PLUS.compute(new Integer(2),new Integer(1))).isEqualTo(new Integer(3));
-        assertThat(Operator.MINUS.compute(new Integer(2),new Integer(1))).isEqualTo(new Integer(1));
-        assertThat(Operator.MULTIPLY.compute(new Integer(2),new Integer(1))).isEqualTo(new Integer(2));
-        assertThat(Operator.DIVIDE.compute(new Integer(2),new Integer(1))).isEqualTo(new Integer(2));
-        assertThat(Operator.MODULO.compute(new Integer(2),new Integer(1))).isEqualTo(new Integer(0));
+        assertThat(Operator.PLUS.compute.apply(2, 1)).isEqualTo(3);
+        assertThat(Operator.MINUS.compute.apply(2, 1)).isEqualTo(1);
+        assertThat(Operator.MULTIPLY.compute.apply(2, 1)).isEqualTo(2);
+        assertThat(Operator.DIVIDE.compute.apply(2, 1)).isEqualTo(2);
+        assertThat(Operator.MODULO.compute.apply(2, 1)).isEqualTo(0);
     }
 
     @Test
@@ -22,6 +22,6 @@ public class OperatorTest {
         assertThat(Operator.create("*")).isEqualTo(Operator.MULTIPLY);
         assertThat(Operator.create("/")).isEqualTo(Operator.DIVIDE);
         assertThat(Operator.create("%")).isEqualTo(Operator.MODULO);
-        assertThatThrownBy(()->Operator.create("$")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Operator.create("$")).isInstanceOf(IllegalArgumentException.class);
     }
 }
