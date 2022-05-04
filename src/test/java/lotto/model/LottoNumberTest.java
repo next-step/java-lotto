@@ -35,10 +35,10 @@ public class LottoNumberTest {
 
   @ParameterizedTest(name = "로또 번호인 {0}와 지난주 우승 번호인 {1}이 같은지 비교")
   @CsvSource({"1,1,true", "1,2,false"})
-  void compareLottoNumberForSame(int purchasedNumber, int winningNumber, boolean expected) {
+  void compareLottoNumberForSame(int purchasedNumber, int otherNumber, boolean expected) {
     // given
     LottoNumber lottoNumber1 = LottoNumber.create(purchasedNumber);
-    LottoNumber lottoNumber2 = LottoNumber.create(winningNumber);
+    LottoNumber lottoNumber2 = LottoNumber.create(otherNumber);
 
     // when
     boolean result = lottoNumber1.equals(lottoNumber2);
