@@ -14,7 +14,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoGameServiceTest {
 
@@ -40,13 +39,24 @@ class LottoGameServiceTest {
 
     @DisplayName("로또 당첨번호는 6개이다")
     @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5", "3,2,1", "3,3","1", "1,2,3,4,5,6,7"})
+    @ValueSource(strings = {"1,2,3,4,5", "3,2,1", "3,4","1", "1,2,3,4,5,6,7"})
     void pickLottoNumberOfWeekNumberCountTest(String input) {
         assertThatThrownBy(() -> {
             LottoGameService lottoGameService = new LottoGameService();
             List<Integer> result = lottoGameService.pickLottoNumberOfWeek(input);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 당첨번호는 6개이다");
+    }
+
+    @DisplayName("로또 당첨번호는 중복을 허용하지 않는다")
+    @ParameterizedTest
+    @ValueSource(strings = {"3,3,3,2,1,4", "2,4,5,6,7,2", "1,1,1,1,1,1","2,3,4,5,6,6"})
+    void pickLottoNumberOfWeekDuplicateTest(String input) {
+        assertThatThrownBy(() -> {
+            LottoGameService lottoGameService = new LottoGameService();
+            List<Integer> result = lottoGameService.pickLottoNumberOfWeek(input);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("로또 당첨번호는 유니크 합니다");
     }
 
     @DisplayName("로또 당첨자들 추출")
@@ -56,7 +66,7 @@ class LottoGameServiceTest {
         Lottos lottos = new Lottos(3000, new TestPick(Arrays.asList(10, 2, 3, 4, 5, 9)));
         LottoWinners winners = lottoGameService.match(lottos, Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        assertThat(winners.count(Rank.POSTION_3)).isEqualTo(3);
+        assertThat(winners.countByRank(Rank.POSTION_3)).isEqualTo(3);
     }
     
     @DisplayName("수익률 테스트")
@@ -64,7 +74,7 @@ class LottoGameServiceTest {
     void moneyRateTest() {
         LottoGameService lottoGameService = new LottoGameService();
         LottoWinners lottoWinners = new LottoWinners();
-        lottoWinners.refresh(3);
+        lottoWinners.addWiners(3);
 
         double result = lottoGameService.moneyProfitRate(1000, lottoWinners);
         assertThat(result).isEqualTo(20);

@@ -6,11 +6,11 @@ public enum Rank {
     POSTION_2(1500000, 5),
     POSTION_1(2000000000, 6);
 
-    public int price;
-    public int matchNum;
+    public final int price;
+    public final int matchCount;
 
-    Rank(int price, int matchNum) {
+    Rank(int price, int matchCount) {
         this.price = price;
-        this.matchNum = matchNum;
+        this.matchCount = matchCount;
     }
 }

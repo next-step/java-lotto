@@ -17,7 +17,7 @@ public class LottoWinners {
         winner.put(REWARD_4TH, 0);
     }
 
-    public void refresh(int count) {
+    public void addWiners(int count) {
         switch (count) {
             case 3:
                 winner.put(REWARD_4TH, winner.get(REWARD_4TH) + 1);
@@ -34,7 +34,7 @@ public class LottoWinners {
         }
     }
 
-    public int count(Rank rank) {
+    public int countByRank(Rank rank) {
         if (rank == Rank.POSTION_1)
             return winner.get(REWARD_1ST);
         if (rank == Rank.POSTION_2)
@@ -50,7 +50,7 @@ public class LottoWinners {
     public int totalMoney() {
         int total = 0;
         for (Rank rank : Rank.values()) {
-            total += count(rank) * rank.price;
+            total += countByRank(rank) * rank.price;
         }
         return total;
     }

@@ -15,11 +15,15 @@ public class LottoGameService {
 
         String newInput = input.replace(" ", "");
         String[] split = newInput.split(",");
-        List<Integer> result = Arrays.stream(split).map(Integer::parseInt)
+        List<Integer> result = Arrays.stream(split)
+                .map(Integer::parseInt)
                 .collect(Collectors.toList());
 
         if (result.size() != 6)
             throw new IllegalArgumentException("로또 당첨번호는 6개이다");
+
+        if (result.size() != result.stream().distinct().count())
+            throw new IllegalArgumentException("로또 당첨번호는 유니크 합니다");
 
         return result;
     }

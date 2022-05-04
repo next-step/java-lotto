@@ -25,7 +25,7 @@ public class Lottos {
         LottoWinners lottoWinners = new LottoWinners();
         for (Lotto lotto : lottos) {
             int count = lotto.numberCheck(pickLottoNumberOfWeek);
-            lottoWinners.refresh(count);
+            lottoWinners.addWiners(count);
         }
 
         return lottoWinners;
