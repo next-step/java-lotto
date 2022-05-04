@@ -28,7 +28,8 @@
   * Draw
     * Variables 
       * 구매한 로또 개수
-      * 구입한 로또
+      * 구입한 로또 
+      * 구입한 로또의 당첨 현황
     * Functions
       * 로또 생성 요청
   * Lotto
@@ -39,5 +40,8 @@
   * Winnings
     * Variables
       * 당첨 번호
+      * 당첨된 번호 개수 현황(List)
+      * 당첨 개수별 상금
     * Functions
       * 당첨된 번호 개수 확인
+      * 당첨된 번호 개수별 로또 개수

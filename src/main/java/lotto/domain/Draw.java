@@ -13,9 +13,12 @@ public class Draw {
 
     private final List<Lotto> lottos;
 
+    private Winnings winnings;
+
     public Draw(int totalPrice) {
         this.numberOfLotto = totalPrice / UNIT_PRICE;
         this.lottos = new ArrayList<>();
+        this.winnings = null;
     }
 
     public void drawLottos() {
@@ -25,6 +28,7 @@ public class Draw {
     }
 
     public void checkWinnings(Winnings winnings) {
+        this.winnings = winnings;
         for (Lotto lotto : this.lottos) {
             lotto.checkWinnings(winnings);
         }
@@ -32,5 +36,9 @@ public class Draw {
 
     public List<Lotto> lottos() {
         return Collections.unmodifiableList(lottos);
+    }
+
+    public Winnings winnings() {
+        return winnings;
     }
 }
