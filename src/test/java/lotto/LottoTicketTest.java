@@ -51,4 +51,22 @@ class LottoTicketTest {
     assertThat(lottoTicket.getWinLottoNumbers(winLottoTicket)).isEqualTo(new LottoResult(3));
   }
 
+  @Test
+  @DisplayName("로또 여러장장 결과 확인")
+  void givenWinNumbers_ShouldResultStatistics() {
+    LottoTicket winLottoTicket = new LottoTicket(List.of(new LottoNumber(1), new LottoNumber(2),
+        new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
+    LottoTickets lottoTickets = new LottoTickets(
+        List.of(
+            new LottoTicket(List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(5),
+                new LottoNumber(14), new LottoNumber(22), new LottoNumber(45))),
+            new LottoTicket(List.of(new LottoNumber(13), new LottoNumber(44), new LottoNumber(6),
+                new LottoNumber(11), new LottoNumber(17), new LottoNumber(41)))
+        )
+    );
+    LottoStatistics resultStatistics = lottoTickets.getResultStatistics(winLottoTicket);
+    assertThat(resultStatistics.getLottoResultList()).contains(new LottoResult(3),
+        new LottoResult(1));
+  }
+
 }
