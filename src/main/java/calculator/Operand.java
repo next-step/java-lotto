@@ -4,15 +4,15 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public final class Number {
+public final class Operand {
 
   private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d");
   private final int number;
 
-  public static Number createNumber(String value) {
+  public static Operand createNumber(String value) {
     validateInputValue(value);
     validateNumberFormat(value);
-    return new Number(Integer.parseInt(value));
+    return new Operand(Integer.parseInt(value));
   }
 
   private static void validateInputValue(String value) {
@@ -28,7 +28,7 @@ public final class Number {
     }
   }
 
-  private Number(int number) {
+  private Operand(int number) {
     this.number = number;
   }
 
@@ -36,20 +36,20 @@ public final class Number {
     return number;
   }
 
-  Number add(Number target) {
-    return new Number(number + target.number);
+  Operand add(Operand target) {
+    return new Operand(number + target.number);
   }
 
-  Number subtract(Number target) {
-    return new Number(number - target.number);
+  Operand subtract(Operand target) {
+    return new Operand(number - target.number);
   }
 
-  Number multiply(Number target) {
-    return new Number(number * target.number);
+  Operand multiply(Operand target) {
+    return new Operand(number * target.number);
   }
 
-  Number divide(Number target) {
-    return new Number(number / target.number);
+  Operand divide(Operand target) {
+    return new Operand(number / target.number);
   }
 
   @Override
@@ -65,7 +65,7 @@ public final class Number {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Number number = (Number) o;
-    return this.number == number.number;
+    Operand operand = (Operand) o;
+    return this.number == operand.number;
   }
 }

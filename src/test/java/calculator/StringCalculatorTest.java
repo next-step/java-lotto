@@ -34,28 +34,28 @@ public class StringCalculatorTest {
   @ParameterizedTest
   @CsvSource(value = {"1 + 2=3", "1 + 2 + 3=6"}, delimiter = '=')
   public void add(String left, String expected) {
-    assertThat(StringCalculator.calculate(left)).isEqualTo(Number.createNumber(expected));
+    assertThat(StringCalculator.calculate(left)).isEqualTo(Operand.createNumber(expected));
   }
 
   @DisplayName("문자열 계산기 뺄셈")
   @ParameterizedTest
   @CsvSource(value = {"0 - 1=-1", "2 - 1=1"}, delimiter = '=')
   public void subtract(String left, String expected) {
-    assertThat(StringCalculator.calculate(left)).isEqualTo(Number.createNumber(expected));
+    assertThat(StringCalculator.calculate(left)).isEqualTo(Operand.createNumber(expected));
   }
 
   @DisplayName("문자열 계산기 곱셈")
   @ParameterizedTest
   @CsvSource(value = {"0 * 1=0", "1 * 2=2"}, delimiter = '=')
   public void multiply(String left, String expected) {
-    assertThat(StringCalculator.calculate(left)).isEqualTo(Number.createNumber(expected));
+    assertThat(StringCalculator.calculate(left)).isEqualTo(Operand.createNumber(expected));
   }
 
   @DisplayName("문자열 계산기 나눗셈")
   @ParameterizedTest
   @CsvSource(value = {"0 / 1=0", "1 / 2=0", "2 / 1=2"}, delimiter = '=')
   public void divide(String left, String expected) {
-    assertThat(StringCalculator.calculate(left)).isEqualTo(Number.createNumber(expected));
+    assertThat(StringCalculator.calculate(left)).isEqualTo(Operand.createNumber(expected));
   }
 
   @DisplayName("0으로 나눈경우 예외를 던진다")
@@ -69,7 +69,7 @@ public class StringCalculatorTest {
   @ParameterizedTest
   @CsvSource(value = {"2 + 3 * 4 / 2=10", "1 / 2 * 4 + 2 - 1=1"}, delimiter = '=')
   public void calculate(String left, String expected) {
-    assertThat(StringCalculator.calculate(left)).isEqualTo(Number.createNumber(expected));
+    assertThat(StringCalculator.calculate(left)).isEqualTo(Operand.createNumber(expected));
   }
 
   @DisplayName("사칙연산 기호가 아닌 경우 예외 던짐")

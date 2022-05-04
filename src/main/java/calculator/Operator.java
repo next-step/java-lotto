@@ -5,16 +5,16 @@ import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
 public enum Operator {
-  PLUS("+", Number::add),
-  MINUS("-", Number::subtract),
-  MULTIPLICATION("*", Number::multiply),
-  DIVISION("/", Number::divide);
+  PLUS("+", Operand::add),
+  MINUS("-", Operand::subtract),
+  MULTIPLICATION("*", Operand::multiply),
+  DIVISION("/", Operand::divide);
 
   private final String sign;
-  private final BiFunction<Number, Number, Number> expression;
+  private final BiFunction<Operand, Operand, Operand> expression;
 
   Operator(String sign,
-      BiFunction<Number, Number, Number> expression) {
+      BiFunction<Operand, Operand, Operand> expression) {
     this.sign = sign;
     this.expression = expression;
   }
@@ -27,7 +27,7 @@ public enum Operator {
             () -> new IllegalArgumentException(String.format("%s 는 지원하지 않는 기호입니다.", sign)));
   }
 
-  public static Number operate(String sign, Number a, Number b) {
+  public static Operand operate(String sign, Operand a, Operand b) {
     Operator operator = Operator.find(sign);
     return operator.expression.apply(a, b);
   }

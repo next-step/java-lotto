@@ -9,15 +9,15 @@ public class StringCalculator {
 
   private static final int FIRST_INDEX = 0;
 
-  public static Number calculate(String s) {
+  public static Operand calculate(String s) {
     validateInput(s);
 
     List<String> strings = Splitter.split(s);
-    Number result = Number.createNumber(strings.get(FIRST_INDEX));
+    Operand result = Operand.createNumber(strings.get(FIRST_INDEX));
     int size = strings.size();
     for (int i = 1; i < size - 1; i = i + 2) {
       String sign = strings.get(i);
-      Number current = Number.createNumber(strings.get(i + 1));
+      Operand current = Operand.createNumber(strings.get(i + 1));
       result = Operator.operate(sign, result, current);
     }
     return result;

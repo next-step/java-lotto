@@ -47,36 +47,36 @@ public class OperatorTest {
   @DisplayName("덧셈 연산자는 숫자 객체 2개를 인자로 받아 두 객체를 더한 결과를 반환한다")
   @Test
   void add() {
-    Number a = Number.createNumber("1");
-    Number b = Number.createNumber("2");
-    Number result = Number.createNumber("3");
+    Operand a = Operand.createNumber("1");
+    Operand b = Operand.createNumber("2");
+    Operand result = Operand.createNumber("3");
     assertThat(Operator.operate("+", a, b)).isEqualTo(result);
   }
 
   @DisplayName("뺄셈 연산자는 숫자 객체 2개를 인자로 받아 두 객체를 더한 뺀 반환한다")
   @Test
   void subtract() {
-    Number a = Number.createNumber("1");
-    Number b = Number.createNumber("2");
-    Number result = Number.createNumber("-1");
+    Operand a = Operand.createNumber("1");
+    Operand b = Operand.createNumber("2");
+    Operand result = Operand.createNumber("-1");
     assertThat(Operator.operate("-", a, b)).isEqualTo(result);
   }
 
   @DisplayName("곱셈 연산자는 숫자 객체 2개를 인자로 받아 두 객체를 곱한 결과를 반환한다")
   @Test
   void multiply() {
-    Number a = Number.createNumber("1");
-    Number b = Number.createNumber("2");
-    Number result = Number.createNumber("2");
+    Operand a = Operand.createNumber("1");
+    Operand b = Operand.createNumber("2");
+    Operand result = Operand.createNumber("2");
     assertThat(Operator.operate("*", a, b)).isEqualTo(result);
   }
 
   @DisplayName("나눗셈 연산자는 숫자 객체 2개를 인자로 받아 두 객체를 나눈 결과를 반환한다")
   @Test
   void divide() {
-    Number a = Number.createNumber("2");
-    Number b = Number.createNumber("1");
-    Number result = Number.createNumber("2");
+    Operand a = Operand.createNumber("2");
+    Operand b = Operand.createNumber("1");
+    Operand result = Operand.createNumber("2");
     assertThat(Operator.operate("/", a, b)).isEqualTo(result);
   }
 }
