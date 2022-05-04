@@ -1,9 +1,9 @@
-package lotto;
+package lotto.controller;
 
-import lotto.controller.LottoMarket;
 import lotto.dto.ExtractLottoNumbers;
 import lotto.dto.LottoResult;
 import lotto.model.Lotto;
+import lotto.model.LottoMarket;
 import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.RandomLottoGenerator;

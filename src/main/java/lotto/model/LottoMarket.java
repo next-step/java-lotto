@@ -1,8 +1,4 @@
-package lotto.controller;
-
-import lotto.model.LottoGenerator;
-import lotto.model.Lottos;
-import lotto.model.Money;
+package lotto.model;
 
 import java.util.Objects;
 
