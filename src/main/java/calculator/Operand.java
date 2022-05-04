@@ -7,9 +7,10 @@ import java.util.regex.Pattern;
 public final class Operand {
 
   private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d");
+
   private final int number;
 
-  public static Operand createNumber(String value) {
+  public static Operand createOperand(String value) {
     validateInputValue(value);
     validateNumberFormat(value);
     return new Operand(Integer.parseInt(value));
