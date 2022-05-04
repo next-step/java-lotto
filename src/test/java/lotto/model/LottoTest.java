@@ -3,13 +3,19 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
+import java.util.stream.Stream;
 import lotto.exception.LottoNumberDuplicateException;
 import lotto.strategy.DuplicateNumberGenerateStrategy;
 import lotto.strategy.FixedNumberGenerateStrategy;
 import lotto.strategy.RandomNumberGenerateStrategy;
+import org.assertj.core.internal.bytebuddy.asm.Advice.Argument;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottoTest {
 
@@ -31,22 +37,25 @@ public class LottoTest {
         .isInstanceOf(LottoNumberDuplicateException.class);
   }
 
-  @Test
+  @ParameterizedTest
+  @MethodSource("winningLottoNumberAndMatchedCount")
   @DisplayName("구매한 로또번호와 지난 우승 로또번호와 일치하는 갯수")
-  void checkNumberMatchingLottoNumbers() {
+  void checkNumberMatchingLottoNumbers(String winningLottoNumbers, int matchedCount) {
     // given
     Lotto lotto = Lotto.create(new FixedNumberGenerateStrategy());
-    WinningLotto winningLotto1 = WinningLotto.create("1, 2, 3, 4, 5, 6");
-    WinningLotto winningLotto2 = WinningLotto.create("1, 2, 3, 4, 10, 6");
+    WinningLotto winningLotto = WinningLotto.create(winningLottoNumbers);
 
     // when
-    int matchResult1 = lotto.matchWinningLottoNumbers(winningLotto1);
-    int matchResult2 = lotto.matchWinningLottoNumbers(winningLotto2);
+    int matchResult = lotto.matchWinningLottoNumbers(winningLotto);
 
     // then
-    assertAll(
-        () -> assertThat(matchResult1).isEqualTo(6),
-        () -> assertThat(matchResult2).isEqualTo(5)
+    assertThat(matchResult).isEqualTo(matchedCount);
+  }
+
+  private static Stream<Arguments> winningLottoNumberAndMatchedCount() {
+    return Stream.of(
+        arguments("1, 2, 3, 4, 5, 6", 6),
+        arguments("1, 2, 3, 4, 10, 6", 5)
     );
   }
 }
