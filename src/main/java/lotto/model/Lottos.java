@@ -7,15 +7,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public final class Lottos {
 
     private final List<Lotto> lottos;
 
     public Lottos(int count, LottoGenerator lottoGenerator) {
-        this(IntStream.range(0, count)
-                .mapToObj(i -> lottoGenerator.get())
+        this(Stream.generate(lottoGenerator::get)
+                .limit(count)
                 .collect(Collectors.toList()));
     }
 

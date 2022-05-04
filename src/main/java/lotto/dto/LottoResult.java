@@ -25,9 +25,10 @@ public class LottoResult {
     }
 
     public double getYield(Money buyingMoney) {
-        long earnedMoney = rankResult.stream()
-                .mapToLong(Rank::winnings)
-                .sum();
-        return buyingMoney.getYield(earnedMoney);
+        Money earnedMoney = rankResult.stream()
+                .map(Rank::winnings)
+                .reduce(Money::add)
+                .orElseGet(() -> new Money(0));
+        return buyingMoney.calculateYieldFrom(earnedMoney);
     }
 }

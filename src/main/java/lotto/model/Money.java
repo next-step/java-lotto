@@ -28,8 +28,12 @@ public final class Money {
         return this.money / unit.money;
     }
 
-    public double getYield(long result) {
-        return result / (double) this.money;
+    public double calculateYieldFrom(Money result) {
+        return result.money / (double) this.money;
+    }
+
+    public static Money add(Money a, Money b) {
+        return new Money(a.money + b.money);
     }
 
     @Override
