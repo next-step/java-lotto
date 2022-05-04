@@ -47,22 +47,21 @@ public class ResultView {
     public void printEarningsRatio(int price, int earnings) {
         Ratio ratio = new Ratio();
         double result = ratio.lottoPer(price, earnings);
-        System.out.println("총 수익률은 " + String.format("%.2f", result) + "입니다.");
-
+        System.out.print("총 수익률은 " + String.format("%.2f", result) + "입니다.");
         printResult(result);
     }
 
     private void printResult(double result) {
         if (result < 1) {
-            System.out.println("손해");
+            System.out.println("(손해)");
             return ;
         }
         if (result == 1) {
-            System.out.println("본전");
+            System.out.println("(본전)");
             return ;
         }
         if (result > 1) {
-            System.out.println("이득");
+            System.out.println("(이득)");
         }
     }
 }
