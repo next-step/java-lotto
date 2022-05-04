@@ -8,9 +8,10 @@ public class Lotto {
     private static final int VALID_LOTTO_LENGTH = 6;
     private final Set<LottoNumber> lotto;
 
-    Lotto(List<Integer> lottoNumbers) {
-        validateLengthOfLotto(lottoNumbers);
-        this.lotto = new HashSet<>(castIntegersToLottoNumbers(lottoNumbers));
+    public Lotto(Integer[] lottoNumbers) {
+        final List<Integer> lotto = Arrays.asList(lottoNumbers);
+        validateLengthOfLotto(lotto);
+        this.lotto = new HashSet<>(castIntegersToLottoNumbers(lotto));
     }
 
     private void validateLengthOfLotto(List<Integer> lottoNumbers) {
@@ -28,8 +29,8 @@ public class Lotto {
         return lotto;
     }
 
-    public Lotto(Integer[] lottoNumbers) {
-        this(Arrays.asList(lottoNumbers));
+    Lotto(List<LottoNumber> lotto) {
+        this.lotto = new HashSet<>(lotto);
     }
 
     public List<LottoNumber> getLottoNumbers() {
