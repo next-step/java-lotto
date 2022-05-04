@@ -22,10 +22,6 @@ public class LottoGameService {
     }
 
     public double moneyProfitRate(int investMoney, LottoWinners winners) {
-        return investMoney / (double) winners.totalMoney() * 100;
+        return winners.totalMoney() / (double) investMoney;
     }
-
-    public void result() {
-    }
-
 }

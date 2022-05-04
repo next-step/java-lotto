@@ -9,7 +9,7 @@ public enum Rank {
     public int price;
     public int matchNum;
 
-    Rank(int value, int matchNum) {
+    Rank(int price, int matchNum) {
         this.price = price;
         this.matchNum = matchNum;
     }
