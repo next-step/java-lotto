@@ -31,11 +31,27 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("로또 당첨 번호 리스트와 일치하는 개수를 반환한다.")
-    void resultMatchTest() {
+    @DisplayName("로또 당첨 번호 리스트와 일치하는 개수를 반환한다. - 1등")
+    void firstRankTest() {
         Lotto winLottoNums = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, SIX));
 
-        assertThat(TEST_LOTTO.getRank(winLottoNums)).isEqualTo(Rank.FIRST);
+        assertThat(TEST_LOTTO.getRank(winLottoNums,ONE)).isEqualTo(Rank.FIRST);
+    }
+
+    @Test
+    @DisplayName("로또 당첨 번호 리스트와 일치하는 개수를 반환한다. - 2등")
+    void secondRankTest() {
+        Lotto winLottoNums = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, LottoNumber.valueOf(11)));
+
+        assertThat(TEST_LOTTO.getRank(winLottoNums,ONE)).isEqualTo(Rank.SECOND);
+    }
+
+    @Test
+    @DisplayName("로또 당첨 번호 리스트와 일치하는 개수를 반환한다. - 3등")
+    void thirdRankTest() {
+        Lotto winLottoNums = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, LottoNumber.valueOf(11)));
+
+        assertThat(TEST_LOTTO.getRank(winLottoNums,LottoNumber.valueOf(12))).isEqualTo(Rank.THIRD);
     }
 
     @Test

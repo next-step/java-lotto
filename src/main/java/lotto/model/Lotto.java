@@ -26,11 +26,13 @@ public final class Lotto {
         return Collections.unmodifiableSet(lotto);
     }
 
-    public Rank getRank(Lotto result) {
+    public Rank getRank(Lotto result, LottoNumber bonusNumber) {
         Set<LottoNumber> resultLotto = result.get();
-        lotto.retainAll(resultLotto);
+        Set<LottoNumber> originLotto = new HashSet<>(lotto);
 
-        return Rank.of(lotto.size());
+        originLotto.retainAll(resultLotto);
+
+        return Rank.of(originLotto.size(), contains(bonusNumber));
     }
 
     public boolean contains(LottoNumber lottoNumber) {

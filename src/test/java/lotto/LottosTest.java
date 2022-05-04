@@ -47,7 +47,7 @@ public class LottosTest {
 
         assertThat(lottos.size()).isEqualTo(5);
         for (Lotto lotto : lottos.get()) {
-            assertThat(lotto.getRank(LottoTest.TEST_LOTTO)).isEqualTo(Rank.FIRST);
+            assertThat(lotto.getRank(LottoTest.TEST_LOTTO, ONE)).isEqualTo(Rank.FIRST);
         }
     }
 

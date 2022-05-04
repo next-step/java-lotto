@@ -30,7 +30,7 @@ public enum Rank {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.isSameMatchCount(matchCount))
                 .filter(rank -> rank != SECOND || matchBonusNumber)
-                .findAny()
+                .findFirst()
                 .orElse(OTHER);
     }
 

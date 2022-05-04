@@ -17,7 +17,7 @@ public class LottoResultTest {
     @Test
     @DisplayName("로또 결과와 구매 금액으로 수익률을 계산한다.")
     void getYieldTest() {
-        List<Rank> ranks = Lists.newArrayList(Rank.FOURTH, Rank.OTHER);
+        List<Rank> ranks = Lists.newArrayList(Rank.FIFTH, Rank.OTHER);
         Money buyingMoney = new Money(14000);
 
         LottoResult lottoResult = new LottoResult(ranks);
