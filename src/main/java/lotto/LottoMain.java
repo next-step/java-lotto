@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Draw;
+import lotto.domain.Winnings;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -17,5 +18,8 @@ public class LottoMain {
         resultView.printLottos(draw);
 
         String[] inputNumbers = inputView.inputLastWinningNumbers();
+        Winnings winnings = new Winnings(inputNumbers);
+        draw.checkWinnings(winnings);
+        resultView.checkWinningsLotto(draw.winnings());
     }
 }

@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Draw;
 import lotto.domain.Lotto;
+import lotto.domain.Winnings;
 
 public class ResultView {
 
@@ -29,6 +30,16 @@ public class ResultView {
     void printComma(int i, int size) {
         if (i != size) {
             System.out.print(", ");
+        }
+    }
+
+    public void checkWinningsLotto(Winnings winnings) {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+
+        for (int i = 3; i < winnings.recordMatched().length; i++) {
+            System.out.println(i + "개 일치 (" + winnings.rewards()[i] + "원) - "
+                    + winnings.recordMatched()[i] + "개");
         }
     }
 }
