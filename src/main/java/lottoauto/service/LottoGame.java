@@ -42,7 +42,7 @@ public class LottoGame {
     }
 
     public List<Lotto> all() {
-        return Collections.unmodifiableList(lottos);
+        return new ArrayList<>(lottos);
     }
 
     public void reportLottoCount(LottoReport lottoReport){

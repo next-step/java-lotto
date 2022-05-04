@@ -39,6 +39,9 @@ public class LottoController {
     public static void main(String[] args) {
         LottoGame lottoGame = new LottoGame(InputView.askLottoMoney());
         lottoGame.buyLotto();
+
+        ResultView.printLottos(lottoGame.all());
+
         LottoReport lottoReport = new LottoReport();
         lottoGame.reportLottos(lottoReport);
 

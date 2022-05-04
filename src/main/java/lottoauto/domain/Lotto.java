@@ -1,5 +1,6 @@
 package lottoauto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
@@ -9,22 +10,16 @@ public class Lotto {
     private List<Integer> numbers;
     private int matchCount;
 
-//    public Lotto(){
-//        this.numbers = LottoGenerator.makeLotto();
-//        System.out.println(this.numbers);
-//    }
-
     public Lotto(List<Integer> inputNumbers, int bonusNumber) {
         if(inputNumbers.size() > LottoGenerator.LOTTO_LENGTH){
             throw new IllegalArgumentException("로또의 숫자는 6개 입니다.");
         }
         this.numbers = inputNumbers;
         this.bonusNumber = bonusNumber;
-        System.out.println(this.numbers);
     }
 
     public List<Integer> getNumbers() {
-        return numbers;
+        return new ArrayList<>(numbers);
     }
 
     public void match(Lotto winnerLotto) {

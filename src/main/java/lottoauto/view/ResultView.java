@@ -1,8 +1,10 @@
 package lottoauto.view;
 
+import lottoauto.domain.Lotto;
 import lottoauto.domain.LottoReport;
 import lottoauto.domain.LottoStatus;
 
+import java.util.List;
 import java.util.Map;
 
 public class ResultView {
@@ -21,6 +23,12 @@ public class ResultView {
         System.out.print("총 수익률은 " + lottoReport.getProfitRate() + "입니다.");
         if(lottoReport.getProfitRate() < 1){
             System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        }
+    }
+
+    public static void printLottos(List<Lotto> all) {
+        for (Lotto lotto : all) {
+            System.out.println(lotto.getNumbers());
         }
     }
 }
