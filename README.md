@@ -145,7 +145,7 @@ Earning rate: Infinity
 
 ### Requested Changes phase2
 
-- [ ] BiFunction 를 무명 -> 유명 람다로 수정
+- [x] BiFunction 를 무명 -> 유명 람다로 수정
 - [ ] WalletTest 의 객체를 개별로 선언하고 Given-When-Then 적용
 - [ ] money 를 객체로 포장
     - [ ] money 에서 수익률 계산
