@@ -5,9 +5,7 @@ import lottoauto.domain.LottoGenerator;
 import lottoauto.domain.LottoReport;
 import lottoauto.domain.LottoStatus;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * - 금액을 입력 받아 로또 게임을 하는 클래스를 만든다.
@@ -23,11 +21,7 @@ public class LottoGame {
 
     private final List<Lotto> lottos = new ArrayList<>();
     private Lotto winningLotto;
-    private int firstWinningCount = 0;
-    private int secondWinningCount = 0;
-    private int thirdWinningCount = 0;
-    private int fourthWinningCount = 0;
-    private int fifthWinningCount = 0;
+    private Map<LottoStatus, Integer> winningMap = new HashMap<>();
 
     public LottoGame(int money) {
         if(money < Lotto.PRICE) {
@@ -35,35 +29,32 @@ public class LottoGame {
         }
         this.money = money;
         this.lottoCount = money / Lotto.PRICE;
-        System.out.println(this.lottoCount+"개를 구매했습니다.");
+
+        this.winningMap.put(LottoStatus.FIRST, 0);
+        this.winningMap.put(LottoStatus.SECOND, 0);
+        this.winningMap.put(LottoStatus.THIRD, 0);
+        this.winningMap.put(LottoStatus.FOURTH, 0);
+        this.winningMap.put(LottoStatus.FIFTH, 0);
     }
 
     public int getLottoCount() {
         return lottoCount;
     }
 
-    public int getFirstWinningCount() {
-        return firstWinningCount;
-    }
-
-    public int getSecondWinningCount() {
-        return secondWinningCount;
-    }
-
-    public int getThirdWinningCount() {
-        return thirdWinningCount;
-    }
-
-    public int getFourthWinningCount() {
-        return fourthWinningCount;
-    }
-
-    public int getFifthWinningCount() {
-        return fifthWinningCount;
-    }
-
     public List<Lotto> all() {
         return Collections.unmodifiableList(lottos);
+    }
+
+    public void reportLottoCount(LottoReport lottoReport){
+        lottoReport.reportLottoCount(this.winningMap);
+    }
+
+    public void reportLottos(LottoReport lottoReport){
+        lottoReport.reportLottos(this.lottos);
+    }
+
+    public void reportProfitRate(LottoReport lottoReport){
+        lottoReport.reportProfitRate(getProfitRate());
     }
 
     public void checkWinningLotto(Lotto winningLotto) {
@@ -79,24 +70,20 @@ public class LottoGame {
     public void start() {
         for (Lotto lotto : lottos) {
             lotto.match(winningLotto);
-            if(lotto.isStatus() == LottoStatus.FIFTH) fifthWinningCount += 1;
-            if(lotto.isStatus() == LottoStatus.FOURTH) fourthWinningCount += 1;
-            if(lotto.isStatus() == LottoStatus.THIRD) thirdWinningCount += 1;
-            if(lotto.isStatus() == LottoStatus.SECOND) secondWinningCount += 1;
-            if(lotto.isStatus() == LottoStatus.FIRST) firstWinningCount += 1;
+            if(lotto.isStatus() == LottoStatus.FIFTH) winningMap.put(LottoStatus.FIFTH, winningMap.get(LottoStatus.FIFTH) + 1);
+            if(lotto.isStatus() == LottoStatus.FOURTH) winningMap.put(LottoStatus.FOURTH, winningMap.get(LottoStatus.FOURTH) + 1);
+            if(lotto.isStatus() == LottoStatus.THIRD) winningMap.put(LottoStatus.THIRD, winningMap.get(LottoStatus.THIRD) + 1);
+            if(lotto.isStatus() == LottoStatus.SECOND) winningMap.put(LottoStatus.SECOND, winningMap.get(LottoStatus.SECOND) + 1);
+            if(lotto.isStatus() == LottoStatus.FIRST) winningMap.put(LottoStatus.FIRST, winningMap.get(LottoStatus.FIRST) + 1);
         }
     }
 
     public int getProfitRate() {
-        int totalWinningMoney = LottoStatus.FIFTH.getWinningMoney() * getFifthWinningCount()
-                + LottoStatus.FOURTH.getWinningMoney() * getFourthWinningCount()
-                + LottoStatus.THIRD.getWinningMoney() * getThirdWinningCount()
-                + LottoStatus.SECOND.getWinningMoney() * getSecondWinningCount()
-                + LottoStatus.FIRST.getWinningMoney() * getFirstWinningCount();
+        int totalWinningMoney = LottoStatus.FIFTH.getWinningMoney() * winningMap.get(LottoStatus.FIFTH)
+                + LottoStatus.FOURTH.getWinningMoney() * winningMap.get(LottoStatus.FOURTH)
+                + LottoStatus.THIRD.getWinningMoney() * winningMap.get(LottoStatus.THIRD)
+                + LottoStatus.SECOND.getWinningMoney() * winningMap.get(LottoStatus.SECOND)
+                + LottoStatus.FIRST.getWinningMoney() * winningMap.get(LottoStatus.FIRST);
         return totalWinningMoney / this.money;
-    }
-
-    public LottoReport report(){
-        return new LottoReport(getFifthWinningCount(), getFourthWinningCount(), getThirdWinningCount(), getSecondWinningCount(), getFirstWinningCount(), getProfitRate());
     }
 }

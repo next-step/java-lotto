@@ -1,44 +1,36 @@
 package lottoauto.domain;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class LottoReport {
 
-    private int firstWinningCount = 0;
-    private int secondWinningCount = 0;
-    private int thirdWinningCount = 0;
-    private int fourthWinningCount = 0;
-    private int fifthWinningCount = 0;
+    private int lottoCount = 0;
+    private List<Lotto> lottos = new ArrayList<>();
+    private Map<LottoStatus, Integer> winningMap = new HashMap<>();
     private long profitRate;
 
-    public LottoReport(int fifthWinningCount, int fourthWinningCount, int thirdWinningCount, int secondWinningCount, int firstWinningCount, int profitRate) {
-        this.fifthWinningCount = fifthWinningCount;
-        this.fourthWinningCount = fourthWinningCount;
-        this.thirdWinningCount = thirdWinningCount;
-        this.secondWinningCount = secondWinningCount;
-        this.firstWinningCount = firstWinningCount;
-        this.profitRate = profitRate;
-    }
-
-    public int getFirstWinningCount() {
-        return firstWinningCount;
-    }
-
-    public int getSecondWinningCount() {
-        return secondWinningCount;
-    }
-
-    public int getThirdWinningCount() {
-        return thirdWinningCount;
-    }
-
-    public int getFourthWinningCount() {
-        return fourthWinningCount;
-    }
-
-    public int getFifthWinningCount() {
-        return fifthWinningCount;
-    }
+    public LottoReport(){}
 
     public long getProfitRate() {
         return profitRate;
+    }
+
+    public Map<LottoStatus, Integer> getWinningMap() {
+        return new HashMap<>(winningMap);
+    }
+
+    public void reportLottoCount(Map<LottoStatus, Integer> winningMap) {
+        this.winningMap = winningMap;
+    }
+
+    public void reportLottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
+    public void reportProfitRate(long profitRate) {
+        this.profitRate = profitRate;
     }
 }

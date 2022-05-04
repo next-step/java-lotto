@@ -39,12 +39,16 @@ public class LottoController {
     public static void main(String[] args) {
         LottoGame lottoGame = new LottoGame(InputView.askLottoMoney());
         lottoGame.buyLotto();
+        LottoReport lottoReport = new LottoReport();
+        lottoGame.reportLottos(lottoReport);
 
         lottoGame.checkWinningLotto(new Lotto(InputView.askWinningLotto(), InputView.askWinningBonusNumber()));
 
         lottoGame.start();
 
-        LottoReport lottoReport = lottoGame.report();
+        lottoGame.reportLottoCount(lottoReport);
+        lottoGame.reportProfitRate(lottoReport);
+
         ResultView.printLottoGameResult(lottoReport);
         ResultView.printLottoGameProfitRate(lottoReport);
     }
