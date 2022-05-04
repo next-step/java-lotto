@@ -2,6 +2,8 @@ package autolotto.domain;
 
 import autolotto.constant.Rank;
 
+import java.util.Objects;
+
 public class Result {
     private final int countOfMatch;
     private final boolean hasBonusBall;
@@ -46,5 +48,18 @@ public class Result {
 
     public boolean checkBonus(boolean isBonus) {
         return this.hasBonusBall == isBonus;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Result result = (Result) o;
+        return getCountOfMatch() == result.getCountOfMatch() && hasBonusBall == result.hasBonusBall && getWinners() == result.getWinners();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCountOfMatch(), hasBonusBall, getWinners());
     }
 }
