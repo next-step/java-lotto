@@ -17,10 +17,6 @@ public class LottoTicketGenerator {
         this.generateStrategy = generateStrategy;
     }
 
-    public LottoTicketGenerator() {
-        this(new RandomGenerateStrategy());
-    }
-
     public List<LottoTicket> generateLottoTickets(int count) {
         return IntStream.range(0, count)
                 .mapToObj(i -> generateLottoTicket())

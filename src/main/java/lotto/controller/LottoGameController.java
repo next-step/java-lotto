@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTicketGenerator;
-import lotto.domain.RankResults;
-import lotto.domain.Ranks;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -23,7 +20,7 @@ public class LottoGameController {
     }
 
     public LottoGameController() {
-        this(new InputView(), new OutputView(), new LottoTicketGenerator());
+        this(new InputView(), new OutputView(), new LottoTicketGenerator(new RandomGenerateStrategy()));
     }
 
     public void play() {

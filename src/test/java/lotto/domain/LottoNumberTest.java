@@ -15,7 +15,7 @@ class LottoNumberTest {
     @DisplayName("생성 가능 범위에 속할 경우 해당 숫자로 로또 숫자 생성")
     void createLottoNumberTest(int value) {
         LottoNumber lottoNumber = new LottoNumber(value);
-        assertThat(lottoNumber.getValue()).isEqualTo(value);
+        assertThat(lottoNumber.toInt()).isEqualTo(value);
     }
 
     @ParameterizedTest

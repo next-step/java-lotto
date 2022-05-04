@@ -21,7 +21,7 @@ public class LottoNumber {
         }
     }
 
-    public int getValue() {
+    public int toInt() {
         return value;
     }
 
