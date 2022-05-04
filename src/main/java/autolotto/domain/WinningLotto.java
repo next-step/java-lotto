@@ -1,8 +1,8 @@
 package autolotto.domain;
 
 public class WinningLotto {
-    private LottoNumbers lottoNumbers;
-    private int bonusBall;
+    private final LottoNumbers lottoNumbers;
+    private final int bonusBall;
 
     public WinningLotto(LottoNumbers lottoNumbers) {
         this(lottoNumbers, 0);

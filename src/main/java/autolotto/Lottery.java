@@ -14,7 +14,7 @@ public class Lottery {
 
         int amount = lottoInput.askAmount();
         int lottoQuantity = lottos.getQuantity(amount);
-        lottoOutput.println(lottoQuantity + "장을 구입했습니다.");
+        lottoOutput.printQuantity(lottoQuantity);
 
         lottos.createLotto(lottoQuantity);
         for (LottoNumbers lottoNumber : lottos.getLottoNumbers()) {
