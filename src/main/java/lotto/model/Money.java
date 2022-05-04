@@ -24,12 +24,12 @@ public final class Money {
         return this.money % unit.money == 0;
     }
 
-    public int getUnitCount(Money unit) {
-        return this.money / unit.money;
+    public double divideBy(Money denominator) {
+        return this.money / (double) denominator.money;
     }
 
-    public double calculateYieldFrom(Money result) {
-        return result.money / (double) this.money;
+    public int getUnitCount(Money unit) {
+        return this.money / unit.money;
     }
 
     public static Money add(Money a, Money b) {

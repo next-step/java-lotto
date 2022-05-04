@@ -47,6 +47,6 @@ public class MoneyTest {
     void getYieldTest() {
         Money money = new Money(14000);
 
-        assertThat(String.format("%.2f", money.calculateYieldFrom(new Money(5000)))).isEqualTo("0.36");
+        assertThat(String.format("%.2f", new Money(5000).divideBy(money))).isEqualTo("0.36");
     }
 }

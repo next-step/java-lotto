@@ -29,6 +29,6 @@ public class LottoResult {
                 .map(Rank::winnings)
                 .reduce(Money::add)
                 .orElseGet(() -> new Money(0));
-        return buyingMoney.calculateYieldFrom(earnedMoney);
+        return earnedMoney.divideBy(buyingMoney);
     }
 }
