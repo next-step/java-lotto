@@ -9,10 +9,14 @@ class RankTest {
 
     @ParameterizedTest
     @CsvSource(value = {
-            "5:true:30000000",
-            "5:false:1500000"
+            "6:false:2_000_000_000",
+            "5:true:30_000_000",
+            "5:false:1_500_000",
+            "4:false:50000",
+            "3:false:5000",
+            "0:false:0"
     }, delimiter = ':')
     void countOfMatchAndIsBonusGiven_ReturnRank(int countOfMatch, boolean hasBonusBall, long prize) {
-        assertThat(Rank.find(countOfMatch, hasBonusBall).get().getWinningMoney()).isEqualTo(prize);
+        assertThat(Rank.find(countOfMatch, hasBonusBall).getWinningMoney()).isEqualTo(prize);
     }
 }

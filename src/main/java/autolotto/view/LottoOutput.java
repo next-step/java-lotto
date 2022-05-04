@@ -15,9 +15,7 @@ public class LottoOutput {
         println("----------------");
 
         for (Result result : results.getResults()) {
-            long prize = Rank.find(result.getCountOfMatch(), result.hasBonusBall())
-                    .map(Rank::getWinningMoney)
-                    .orElse(0L);
+            long prize = Rank.find(result.getCountOfMatch(), result.hasBonusBall()).getWinningMoney();
 
             String outputFormat = "%s개 일치 (%d원) - %s개";
             if (result.hasBonusBall()) {
