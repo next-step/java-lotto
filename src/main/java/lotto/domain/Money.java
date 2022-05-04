@@ -12,6 +12,10 @@ public class Money {
 
   private final BigDecimal amount;
 
+  public static Money wons(String amount) {
+    return new Money(BigDecimal.valueOf(Long.parseLong(amount)));
+  }
+
   public static Money wons(long amount) {
     return new Money(BigDecimal.valueOf(amount));
   }
