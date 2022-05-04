@@ -1,5 +1,6 @@
 package autolotto;
 
+import autolotto.constant.Rank;
 import autolotto.domain.*;
 import autolotto.view.LottoInput;
 import autolotto.view.LottoOutput;
@@ -28,7 +29,11 @@ public class Lottery {
 
         Results results = lottos.confirm(winningLotto);
 
-        lottoOutput.printResult(results);
-        lottoOutput.printProfit(lottos, results);
+        lottoOutput.printBoard();
+        for (Rank rank : Rank.valuesExceptMiss()) {
+            int countOfWinners = results.countOfWinners(rank);
+            lottoOutput.printResult(rank, countOfWinners);
+        }
+        lottoOutput.printROI(results.roi(lottos.cost()));
     }
 }

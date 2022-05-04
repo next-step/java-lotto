@@ -14,17 +14,12 @@ public class ResultsTest {
         results = new Results();
     }
 
-//    @ParameterizedTest
-//    @CsvSource(value = {
-//            "3:5000",
-//            "4:50000"
-//    }, delimiter = ':')
-//    void ReturnPrize(int numberOfWins, long prize) {
-//        results.find(numberOfWins, false).ifPresent(Result::plusWinners);
-//
-//        assertThat(results.prize()).isEqualTo(prize);
-//    }
-
+    @Test
+    void ReturnPrize() {
+        results.plusWinners(Rank.FIRST);
+        results.plusWinners(Rank.SECOND);
+        assertThat(results.profit()).isEqualTo(2_030_000_000L);
+    }
 
     @Test
     void rankGiven_ReturnIncreasedWinners() {
@@ -40,5 +35,11 @@ public class ResultsTest {
         assertThat(results.countOfWinners(Rank.FIRST)).isEqualTo(1);
         assertThat(results.countOfWinners(Rank.SECOND)).isEqualTo(1);
         assertThat(results.countOfWinners(Rank.THIRD)).isEqualTo(0);
+    }
+
+    @Test
+    void roi() {
+        results.plusWinners(Rank.FIFTH);
+        assertThat(results.roi(5000)).isEqualTo(100);
     }
 }

@@ -1,6 +1,9 @@
 package autolotto.constant;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
@@ -30,6 +33,22 @@ public enum Rank {
 
     private static boolean isSecond(int countOfMatch, boolean hasBonusBall) {
         return countOfMatch == SECOND.getCountOfMatch() && hasBonusBall;
+    }
+
+    public static boolean isSecond(Rank rank) {
+        return rank == SECOND;
+    }
+
+    public static List<Rank> valuesExceptMiss() {
+        return reverse().stream()
+                .filter(rank -> rank != MISS)
+                .collect(Collectors.toList());
+    }
+
+    private static List<Rank> reverse() {
+        return Arrays.stream(values())
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
     }
 
     public int getCountOfMatch() {

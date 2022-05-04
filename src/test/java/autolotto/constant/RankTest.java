@@ -1,5 +1,6 @@
 package autolotto.constant;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -18,5 +19,16 @@ class RankTest {
     }, delimiter = ':')
     void countOfMatchAndIsBonusGiven_ReturnRank(int countOfMatch, boolean hasBonusBall, long prize) {
         assertThat(Rank.find(countOfMatch, hasBonusBall).getWinningMoney()).isEqualTo(prize);
+    }
+
+    @Test
+    void isSecond() {
+        assertThat(Rank.isSecond(Rank.FIRST)).isFalse();
+        assertThat(Rank.isSecond(Rank.SECOND)).isTrue();
+    }
+
+    @Test
+    void valuesExceptMISS() {
+        assertThat(Rank.valuesExceptMiss().size()).isEqualTo(5);
     }
 }
