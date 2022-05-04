@@ -17,9 +17,8 @@ public class StringCalculator {
     int size = strings.size();
     for (int i = 1; i < size - 1; i = i + 2) {
       String sign = strings.get(i);
-      Operator operator = Operator.find(sign);
       Number current = Number.createNumber(strings.get(i + 1));
-      result = Operator.operate(operator, result, current);
+      result = Operator.operate(sign, result, current);
     }
     return result;
   }

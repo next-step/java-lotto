@@ -12,6 +12,7 @@ import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+@DisplayName("사칙 연산자 검증")
 public class OperatorTest {
 
   @DisplayName("매개변수로 받은 숫자 객체 값이 null인 경우 NullPoint 예외를 던진다")
@@ -33,7 +34,7 @@ public class OperatorTest {
   @ValueSource(strings = {"=", "!", "@", "🥲", "a", "1"})
   void notOperatorSignThrowsIllegalArgumentException(String invalidSign) {
     assertThatIllegalArgumentException().isThrownBy(() -> Operator.find(invalidSign))
-        .withMessageContaining("지원되지 않는 기호입니다");
+        .withMessageMatching(".\\s+?는 지원하지 않는 기호입니다.?");
   }
 
   @DisplayName("연산자 객체는 +, -, *, / 로 구성된다")
@@ -49,7 +50,7 @@ public class OperatorTest {
     Number a = Number.createNumber("1");
     Number b = Number.createNumber("2");
     Number result = Number.createNumber("3");
-    assertThat(Operator.operate(Operator.PLUS, a, b)).isEqualTo(result);
+    assertThat(Operator.operate("+", a, b)).isEqualTo(result);
   }
 
   @DisplayName("뺄셈 연산자는 숫자 객체 2개를 인자로 받아 두 객체를 더한 뺀 반환한다")
@@ -58,7 +59,7 @@ public class OperatorTest {
     Number a = Number.createNumber("1");
     Number b = Number.createNumber("2");
     Number result = Number.createNumber("-1");
-    assertThat(Operator.operate(Operator.MINUS, a, b)).isEqualTo(result);
+    assertThat(Operator.operate("-", a, b)).isEqualTo(result);
   }
 
   @DisplayName("곱셈 연산자는 숫자 객체 2개를 인자로 받아 두 객체를 곱한 결과를 반환한다")
@@ -67,7 +68,7 @@ public class OperatorTest {
     Number a = Number.createNumber("1");
     Number b = Number.createNumber("2");
     Number result = Number.createNumber("2");
-    assertThat(Operator.operate(Operator.MULTIPLICATION, a, b)).isEqualTo(result);
+    assertThat(Operator.operate("*", a, b)).isEqualTo(result);
   }
 
   @DisplayName("나눗셈 연산자는 숫자 객체 2개를 인자로 받아 두 객체를 나눈 결과를 반환한다")
@@ -76,6 +77,6 @@ public class OperatorTest {
     Number a = Number.createNumber("2");
     Number b = Number.createNumber("1");
     Number result = Number.createNumber("2");
-    assertThat(Operator.operate(Operator.DIVISION, a, b)).isEqualTo(result);
+    assertThat(Operator.operate("/", a, b)).isEqualTo(result);
   }
 }

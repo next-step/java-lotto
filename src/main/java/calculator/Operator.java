@@ -19,15 +19,16 @@ public enum Operator {
     this.expression = expression;
   }
 
-  public static Operator find(String sign) {
+  static Operator find(String sign) {
     return Stream.of(values())
         .filter(operator -> Objects.equals(operator.sign, sign))
         .findAny()
         .orElseThrow(
-            () -> new IllegalArgumentException(String.format("%s 는 지원되지 않는 기호입니다.", sign)));
+            () -> new IllegalArgumentException(String.format("%s 는 지원하지 않는 기호입니다.", sign)));
   }
 
-  public static Number operate(Operator operator, Number a, Number b) {
+  public static Number operate(String sign, Number a, Number b) {
+    Operator operator = Operator.find(sign);
     return operator.expression.apply(a, b);
   }
 }

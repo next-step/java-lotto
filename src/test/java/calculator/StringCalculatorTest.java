@@ -12,8 +12,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 
+@DisplayName("문자열 사칙 연산 계산기")
 public class StringCalculatorTest {
-
 
   @DisplayName("null 입력값인 경우 예외를 던진다")
   @ParameterizedTest
@@ -75,8 +75,7 @@ public class StringCalculatorTest {
   @DisplayName("사칙연산 기호가 아닌 경우 예외 던짐")
   @Test
   public void notOperator() {
-    assertThatIllegalArgumentException().isThrownBy(
-            () -> StringCalculator.calculate("2 ^ 3"))
-        .withMessageContaining("지원되지 않는 기호입니다");
+    assertThatIllegalArgumentException().isThrownBy(() -> StringCalculator.calculate("2 ^ 3"))
+        .withMessageMatching(".\\s+?는 지원하지 않는 기호입니다.?");
   }
 }
