@@ -6,10 +6,10 @@ import java.util.List;
 
 public class Lotto {
 
-    private final int LOTTO_LENGTH = 6;
-    private final int MAX_VALUE = 45;
+    private static final int LOTTO_LENGTH = 6;
+    private static final int MAX_VALUE = 45;
 
-    private List<Integer> selectedNumbers;
+    private final List<Integer> selectedNumbers;
 
     private int numberOfMatched;
 

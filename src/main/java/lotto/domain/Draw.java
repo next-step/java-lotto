@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Draw {
 
-    private final int UNIT_PRICE = 1000;
+    private static final int UNIT_PRICE = 1000;
 
     private final int numberOfLotto;
 

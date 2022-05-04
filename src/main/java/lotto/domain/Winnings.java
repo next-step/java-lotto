@@ -6,24 +6,24 @@ import java.util.List;
 
 public class Winnings {
 
-    private final int MATCHED_THREE = 3;
-    private final int MATCHED_FOUR = 4;
-    private final int MATCHED_FIVE = 5;
-    private final int MATCHED_ALL = 6;
+    private static final int MATCHED_THREE = 3;
+    private static final int MATCHED_FOUR = 4;
+    private static final int MATCHED_FIVE = 5;
+    private static final int MATCHED_ALL = 6;
 
-    private final int REWARD_NONE = 0;
-    private final int REWARD_MATCHED_THREE = 5000;
-    private final int REWARD_MATCHED_FOUR = 50000;
-    private final int REWARD_MATCHED_FIVE = 1500000;
-    private final int REWARD_MATCHED_ALL = 2000000000;
+    private static final int REWARD_NONE = 0;
+    private static final int REWARD_MATCHED_THREE = 5000;
+    private static final int REWARD_MATCHED_FOUR = 50000;
+    private static final int REWARD_MATCHED_FIVE = 1500000;
+    private static final int REWARD_MATCHED_ALL = 2000000000;
 
     private final StringUtils stringUtils = new StringUtils();
 
-    private List<Integer> winningNumbers;
+    private final List<Integer> winningNumbers;
 
-    private int[] recordMatched;
+    private final int[] recordMatched;
 
-    private int[] rewards = {
+    private final int[] rewards = {
             REWARD_NONE, REWARD_NONE, REWARD_NONE,
             REWARD_MATCHED_THREE, REWARD_MATCHED_FOUR, REWARD_MATCHED_FIVE, REWARD_MATCHED_ALL};
 
