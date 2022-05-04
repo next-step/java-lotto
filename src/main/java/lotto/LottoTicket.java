@@ -1,6 +1,6 @@
 package lotto;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +16,24 @@ public class LottoTicket {
     this.lottoNumbers = lottoNumbers;
   }
 
+  public LottoResult getWinLottoNumbers(LottoTicket winLottoTicket) {
+    return new LottoResult(getMatchedLottoNumberCount(winLottoTicket.getLottoNumbers()));
+  }
+
+  public List<LottoNumber> getLottoNumbers() {
+    return Collections.unmodifiableList(lottoNumbers);
+  }
+
+  private int getMatchedLottoNumberCount(List<LottoNumber> winLottoNumbers) {
+    int matchedCount = 0;
+    for (LottoNumber lottoNumber : lottoNumbers) {
+      if (winLottoNumbers.contains(lottoNumber)) {
+        matchedCount++;
+      }
+    }
+    return matchedCount;
+  }
+
   private void validateSize(List<LottoNumber> lottoNumbers) {
     if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
       throw new IllegalArgumentException("로또 번호가 6자리가 아닙니다.");
@@ -27,15 +45,5 @@ public class LottoTicket {
     if (noDuplicateNumbers.size() != LOTTO_NUMBERS_SIZE) {
       throw new IllegalArgumentException("로또 번호가 중복되었습니다.");
     }
-  }
-
-  public List<LottoNumber> getWinLottoNumbers(List<LottoNumber> winNumbers) {
-    List<LottoNumber> winLottoNumbers = new ArrayList<>();
-    for (LottoNumber lottoNumber : lottoNumbers) {
-      if (winNumbers.contains(lottoNumber)) {
-        winLottoNumbers.add(lottoNumber);
-      }
-    }
-    return winLottoNumbers;
   }
 }
