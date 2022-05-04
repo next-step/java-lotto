@@ -1,16 +1,20 @@
 package lotto.enums;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.InstanceOfAssertFactories.BOOLEAN;
-import static org.junit.jupiter.api.Assertions.*;
 
-import calculator.util.StringUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class GradeTest {
+
+  @Test
+  @DisplayName("로또 2등 테스트")
+  void second() {
+    Grade second = Grade.SECOND;
+    assertThat(second.isSecond()).isTrue();
+  }
 
   @ParameterizedTest
   @DisplayName("로또 결과를 테스트한다.")

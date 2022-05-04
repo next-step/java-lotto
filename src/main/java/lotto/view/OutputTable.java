@@ -53,7 +53,7 @@ public final class OutputTable {
   }
 
   private static String getMessage(Grade grade, int count) {
-    if (Grade.SECOND == grade) {
+    if (grade.isSecond()) {
       return String.format(HISTORY_BONUS_MESSAGE, grade.getExpectNumber(), grade.getAwardPrice(),
           count);
     }

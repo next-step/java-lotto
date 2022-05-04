@@ -39,4 +39,7 @@ public enum Grade {
         .orElse(Grade.NONE);
   }
 
+  public boolean isSecond() {
+    return this == Grade.SECOND;
+  }
 }
