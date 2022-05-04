@@ -122,10 +122,11 @@ Earning rate: Infinity
 ```
 
 ### Requested Changes
+
 - [x] 1~45 box 생성 별도 분리
 - [x] 로또 번호 생성 부분 별도 객체 분리해서 Lottery 에 전달
 - [x] findWins를 반환 형태로 변환하여 테스트
-  - 테스트는 작성하였으나 반환형태가 아닌 인스턴스 변수활용 
+    - 테스트는 작성하였으나 반환형태가 아닌 인스턴스 변수활용
 - [x] 적자, 흑자 여부 출력
 - [x] 로또 번호가 중복되지 않는 유일한 45개의 수인지 테스트 추가
 - [x] 1000은 const 선언
@@ -135,9 +136,25 @@ Earning rate: Infinity
 - [x] 축약된 변수명 제거
 - [x] Controller포함 모든 Class의 3개 이하로 인스턴스 변수 줄이기
 - [x] 1단계 string_calculator 추가 수정
-  - [x] 연산(계산식)도 BiFunction을 활용해서 Operator Enum이 가지게 적용
-  - [x] 상수와 멤버 변수의 선언 순서 변경
-  - [x] Interface Value 제거 
-  - [x] Class Integer 제거
-  - [x] step1: 규칙 7: 3개 이상의 인스턴스 변수를 가진 클래스를 쓰지 않는다.
+    - [x] 연산(계산식)도 BiFunction을 활용해서 Operator Enum이 가지게 적용
+    - [x] 상수와 멤버 변수의 선언 순서 변경
+    - [x] Interface Value 제거
+    - [x] Class Integer 제거
+    - [x] step1: 규칙 7: 3개 이상의 인스턴스 변수를 가진 클래스를 쓰지 않는다.
 - [x] step2: 규칙 7: 3개 이상의 인스턴스 변수를 가진 클래스를 쓰지 않는다.
+
+### Requested Changes phase2
+
+- [ ] BiFunction 를 무명 -> 유명 람다로 수정
+- [ ] WalletTest 의 객체를 개별로 선언하고 Given-When-Then 적용
+- [ ] money 를 객체로 포장
+    - [ ] money 에서 수익률 계산
+- [ ] Answer 대신 Lottery 사용
+- [ ] Reward.value -> money 변수명 수정
+- [ ] Reward 가 당첨 번호 개수(matches) 도 함께 포장
+- [ ] number를 일일히 비교하는게 아닌 Lottery를 사용하여 matchNumber 수행
+- [ ] findWins에서 saveWin(win) 을 분리
+- [ ] Lottery.shuffleBox()와 Lottery.findSixNumbers()를 LotteryBox의 메소드로 이동
+- [ ] infinity, NaN 출력 에러 수정
+
+## Step3: Lotto 2nd place
