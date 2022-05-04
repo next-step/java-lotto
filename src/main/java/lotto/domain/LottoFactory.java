@@ -12,6 +12,8 @@ public class LottoFactory {
   private static final int MIN_LOTTO_NUMBER = 1;
   private static final int MAX_LOTTO_NUMBER = 45;
 
+  public static final String DELIMITER = ",";
+
   private static final List<LottoNumber> allLottoNumbers = new ArrayList<>(MAX_LOTTO_NUMBER);
 
   static {
@@ -25,6 +27,10 @@ public class LottoFactory {
     return new LottoTicket(allLottoNumbers.stream()
         .limit(LOTTO_NUMBERS_SIZE)
         .collect(Collectors.toList()));
+  }
+
+  public static LottoTicket create(String numbers) {
+    return create(numbers.split(DELIMITER));
   }
 
   public static LottoTicket create(String... numbers) {

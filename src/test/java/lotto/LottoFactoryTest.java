@@ -13,4 +13,11 @@ class LottoFactoryTest {
   void create() {
     assertThat(LottoFactory.create().getLottoNumbers()).hasSize(6);
   }
+
+  @Test
+  @DisplayName("문자열로 로또 번호 생성")
+  void givenNumber_shouldCreate() {
+    assertThat(LottoFactory.create("1,2,3,4,5,6").getLottoNumbers()).hasSize(6);
+  }
+
 }
