@@ -20,7 +20,7 @@ public class ResultView {
 
     private static final String OUTPUT_STATISTICS = "당첨 통계";
     private static final String OUTPUT_LINE = "=========";
-    private static final String OUTPUT_WINNINGS = "%d개 일치 (%d원)- %d개";
+    private static final String OUTPUT_WINNINGS = "%d개 일치 (%s원)- %d개";
 
     private static final String OUTPUT_YIELD = "총 수익률은 %.2f 입니다. (기준이 1이기 때문에 결과적으로 %s(이)라는 의미임)";
     private static final String YIELD_LOSS = "손해";
