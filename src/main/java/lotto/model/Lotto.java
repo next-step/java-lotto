@@ -18,7 +18,7 @@ public final class Lotto {
   }
 
   public Lotto(Set<Integer> lottoNumbers, Grade grade) {
-    valid(lottoNumbers);
+    validate(lottoNumbers);
     this.grade = grade;
     this.lottoNumbers = lottoNumbers
         .stream().map(LottoNumber::new)
@@ -29,7 +29,7 @@ public final class Lotto {
     return new Lotto(winnerNumbers);
   }
 
-  private void valid(Set<Integer> lottoNumbers) {
+  private void validate(Set<Integer> lottoNumbers) {
     if (DEFAULT_LOTTO_SIZE != lottoNumbers.size()) {
       throw new LottoLengthException();
     }

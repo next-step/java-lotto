@@ -9,11 +9,11 @@ public final class Money {
   private final long value;
 
   public Money(long value) {
-    isValid(value);
+    validate(value);
     this.value = value;
   }
 
-  private void isValid(long value) {
+  private void validate(long value) {
     if (value < EMPTY_VALUE) {
       throw new MoneyNumberException(value);
     }

@@ -19,7 +19,7 @@ public class LottoService {
   }
 
   public Lotto insertWinnerNumber(String winnerNumber) {
-    return Lotto.from(AwardNumberUtil.getAwadNumberList(winnerNumber));
+    return Lotto.from(AwardNumberUtil.getAwardNumberList(winnerNumber));
   }
 
   public List<Lotto> allLotteryTickets(List<Lotto> lotteryTickets, Lotto winLotto, int bonus) {

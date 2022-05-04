@@ -5,16 +5,16 @@ import lotto.exception.LottoNumberException;
 
 public final class LottoNumber {
 
-  public static final int MIN_VALUE = 1;
-  public static final int MAX_VALUE = 45;
+  static final int MIN_VALUE = 1;
+  static final int MAX_VALUE = 45;
   private final int value;
 
   public LottoNumber(int value) {
-    isValid(value);
+    validate(value);
     this.value = value;
   }
 
-  private void isValid(int value) {
+  private void validate(int value) {
     if (value < MIN_VALUE || MAX_VALUE < value) {
       throw new LottoNumberException(value);
     }

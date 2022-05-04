@@ -1,17 +1,9 @@
 package lotto.util;
 
-import static lotto.model.LottoNumber.MAX_VALUE;
-import static lotto.model.LottoNumber.MIN_VALUE;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.enums.Grade;
-import lotto.model.LottoNumber;
 
 public final class AwardNumberUtil {
 
@@ -21,8 +13,8 @@ public final class AwardNumberUtil {
 
   private static final String DELIMITER = ", ";
 
-  public static Set<Integer> getAwadNumberList(String numberString) {
-    return Arrays.stream(split(numberString))
+  public static Set<Integer> getAwardNumberList(String numbers) {
+    return Arrays.stream(split(numbers))
         .map(Integer::parseInt)
         .collect(Collectors.toSet());
   }
