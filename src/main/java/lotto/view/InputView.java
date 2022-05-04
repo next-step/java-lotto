@@ -14,6 +14,9 @@ public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String DELIMITER = ",";
 
+    private InputView() {
+    }
+
     public static Amount inputPurchaseAmount() {
         System.out.println("구매 금액을 입력해 주세요.");
         return new Amount(SCANNER.nextLine());

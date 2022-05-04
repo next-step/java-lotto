@@ -31,18 +31,12 @@ public class LottoStatistics {
     }
 
     public long getPrizeCount(LottoPrize lottoPrize) {
-        Long count = prizeMap.get(lottoPrize);
-
-        if (count == null) {
-            return ZERO;
-        }
-
-        return count;
+        return prizeMap.getOrDefault(lottoPrize, ZERO);
     }
 
     public static LottoStatistics from(LottoPrizes lottoPrizes) {
         return new LottoStatistics(
-                EarningRate.of(lottoPrizes.prizeAmount(), lottoPrizes.purchaseAmount()),
+                lottoPrizes.toEarningRate(),
                 lottoPrizes.getLottoPrizes().stream()
                         .collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
     }

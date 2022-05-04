@@ -12,6 +12,11 @@ public class LottoNumbers {
 
     private final List<LottoNumber> lottoNumbers;
 
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+        validate(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
+    }
+
     static LottoNumbers generateLottoNumbers(int from, int to) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
 
@@ -24,11 +29,6 @@ public class LottoNumbers {
 
     public static LottoNumbers all() {
         return generateLottoNumbers(MIN_VALUE, MAX_VALUE);
-    }
-
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
-        validate(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
     }
 
     private void validate(List<LottoNumber> lottoNumbers) {
@@ -73,10 +73,10 @@ public class LottoNumbers {
         return new LottoNumbers(new ArrayList<>(lottoNumbers.subList(ZERO, size)));
     }
 
-    public int match(LottoNumbers lottoNumbers) {
+    public Match match(LottoNumbers lottoNumbers) {
         List<LottoNumber> matchedNumbers = new ArrayList<>(this.lottoNumbers);
         matchedNumbers.retainAll(lottoNumbers.lottoNumbers);
-        return matchedNumbers.size();
+        return new Match(matchedNumbers.size());
     }
 
     public List<LottoNumber> getLottoNumbers() {

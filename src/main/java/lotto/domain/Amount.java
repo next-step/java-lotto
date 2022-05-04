@@ -3,15 +3,15 @@ package lotto.domain;
 public class Amount {
     static final long MIN = 0;
 
-    private final long value;
+    private final long amount;
 
-    public Amount(String value) {
-        this(Integer.parseInt(value));
+    public Amount(String amount) {
+        this(Integer.parseInt(amount));
     }
 
-    public Amount(long value) {
-        validate(value);
-        this.value = value;
+    public Amount(long amount) {
+        validate(amount);
+        this.amount = amount;
     }
 
     private void validate(long value) {
@@ -24,7 +24,7 @@ public class Amount {
         return value < MIN;
     }
 
-    public long getValue() {
-        return value;
+    public long getAmount() {
+        return amount;
     }
 }

@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.domain.LottoRule.ALL_NUMBERS;
 import static lotto.domain.LottoRule.NUMBERS_IN_GAME;
 
 public class LottoVendingMachine {
-    final static int PRICE = 1000;
+    static final int PRICE = 1_000;
+    private static final LottoNumbers ALL_NUMBERS = LottoNumbers.all();
 
     private final LottoNumbers lottoNumbers;
 
@@ -29,7 +29,7 @@ public class LottoVendingMachine {
     public LottoTickets vend(Amount amount) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
-        for (int i = 0; i < amount.getValue() / PRICE; i++) {
+        for (int i = 0; i < amount.getAmount() / PRICE; i++) {
             lottoTickets.add(new LottoTicket(lottoNumbers.getRandomNumbers(NUMBERS_IN_GAME)));
         }
 

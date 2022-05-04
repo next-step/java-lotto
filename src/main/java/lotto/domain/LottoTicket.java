@@ -20,6 +20,12 @@ public class LottoTicket {
         }
     }
 
+    public LottoPrize check(LottoNumbers lottoNumbers) {
+        return LottoPrize.fromMatch(
+                this.lottoNumbers.match(lottoNumbers)
+        );
+    }
+
     public LottoNumbers getLottoNumbers() {
         return lottoNumbers;
     }

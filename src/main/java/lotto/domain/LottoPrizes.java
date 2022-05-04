@@ -24,8 +24,12 @@ public class LottoPrizes {
 
     public Amount prizeAmount() {
         return new Amount(lottoPrizes.stream()
-                .mapToLong(lottoPrizes -> lottoPrizes.getAmount().getValue())
+                .mapToLong(LottoPrize::getAmount)
                 .sum());
+    }
+
+    public EarningRate toEarningRate() {
+        return new EarningRate((double) prizeAmount().getAmount() / (double) purchaseAmount().getAmount());
     }
 
     public Amount purchaseAmount() {

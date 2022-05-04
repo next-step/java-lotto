@@ -1,23 +1,19 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-import java.util.Collections;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTicketsTest {
-    @Test
-    void LottoTickets는_numbers없이_생성시_예외를_발생시킨다() {
-        assertThatThrownBy(() -> {
-            new LottoTickets(null);
-        }).isInstanceOf(IllegalArgumentException.class);
-    }
 
-    @Test
-    void LottoTickets는_빈_numbers로_생성시_예외를_발생시킨다() {
+    @ParameterizedTest
+    @NullAndEmptySource
+    void LottoTickets는_lottoTickets없이_생성시_예외를_발생시킨다(List<LottoTicket> lottoTickets) {
         assertThatThrownBy(() -> {
-            new LottoTickets(Collections.emptyList());
+            new LottoTickets(lottoTickets);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

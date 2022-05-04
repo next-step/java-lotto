@@ -5,44 +5,43 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public enum LottoPrize {
-    FIRST(6, new Amount(2000000000)),
-    SECOND(5, new Amount(1500000)),
-    THIRD(4, new Amount(50000)),
-    FOURTH(3, new Amount(5000)),
-    NONE(0, new Amount(0));
+    FIRST(new Match(6), new Amount(2_000_000_000)),
+    SECOND(new Match(5), new Amount(1_500_000)),
+    THIRD(new Match(4), new Amount(50_000)),
+    FOURTH(new Match(3), new Amount(5_000)),
+    NONE(new Match(0), new Amount(0));
 
-    private static final Map<Integer, LottoPrize> ENUM_MAP;
+    private static final Map<Match, LottoPrize> ENUM_MAP;
 
-    private final int matched;
+    private final Match match;
     private final Amount amount;
 
-
-    LottoPrize(int matched, Amount amount) {
-        this.matched = matched;
+    LottoPrize(Match match, Amount amount) {
+        this.match = match;
         this.amount = amount;
     }
 
-    public static LottoPrize fromMatched(int matched) {
-        if (!containMatched(matched)) {
+    public static LottoPrize fromMatch(Match match) {
+        if (!containMatch(match)) {
             return NONE;
         }
-        return ENUM_MAP.get(matched);
+        return ENUM_MAP.get(match);
     }
 
-    private static boolean containMatched(int matched) {
-        return ENUM_MAP.containsKey(matched);
+    private static boolean containMatch(Match match) {
+        return ENUM_MAP.containsKey(match);
     }
 
     static {
         ENUM_MAP = Arrays.stream(LottoPrize.values())
-                .collect(Collectors.toUnmodifiableMap(LottoPrize::getMatched, lottoPrize -> lottoPrize));
+                .collect(Collectors.toUnmodifiableMap(LottoPrize::getMatch, lottoPrize -> lottoPrize));
     }
 
-    public int getMatched() {
-        return matched;
+    public Match getMatch() {
+        return match;
     }
 
-    public Amount getAmount() {
-        return amount;
+    public long getAmount() {
+        return amount.getAmount();
     }
 }

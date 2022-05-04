@@ -1,8 +1,9 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-import java.util.Collections;
 import java.util.List;
 
 import static lotto.domain.LottoNumber.MAX_VALUE;
@@ -14,17 +15,11 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottoNumbersTest {
-    @Test
-    void LottoNumbers는_numbers없이_생성시_예외를_발생시킨다() {
+    @ParameterizedTest
+    @NullAndEmptySource
+    void LottoNumbers는_numbers없이_생성시_예외를_발생시킨다(List<LottoNumber> lottoNumbers) {
         assertThatThrownBy(() -> {
-            new LottoNumbers(null);
-        }).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    void LottoNumbers는_빈_numbers로_생성시_예외를_발생시킨다() {
-        assertThatThrownBy(() -> {
-            new LottoNumbers(Collections.emptyList());
+            new LottoNumbers(lottoNumbers);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -55,8 +50,6 @@ class LottoNumbersTest {
     @Test
     void match는_두_numbers의_겹치는_개수를_반환한다() {
         assertThat(LottoNumbers.all().match(LottoNumbers.all()))
-                .isEqualTo(MAX_VALUE);
+                .isEqualTo(new Match(MAX_VALUE));
     }
-
-
 }
