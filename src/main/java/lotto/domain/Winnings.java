@@ -24,8 +24,8 @@ public class Winnings {
     private int[] recordMatched;
 
     private int[] rewards = {
-            REWARD_NONE, REWARD_NONE, REWARD_NONE, REWARD_NONE
-            , REWARD_MATCHED_THREE, REWARD_MATCHED_FOUR, REWARD_MATCHED_FIVE, REWARD_MATCHED_ALL};
+            REWARD_NONE, REWARD_NONE, REWARD_NONE,
+            REWARD_MATCHED_THREE, REWARD_MATCHED_FOUR, REWARD_MATCHED_FIVE, REWARD_MATCHED_ALL};
 
     public Winnings(String[] winningNumbers) {
         StringUtils stringUtils = new StringUtils();
@@ -69,6 +69,14 @@ public class Winnings {
                 this.recordMatched[MATCHED_ALL]++;
                 break;
         }
+    }
+
+    public int winningsRewards() {
+        int winningsRewards = 0;
+        for (int i = 3; i < recordMatched.length; i++) {
+            winningsRewards += recordMatched[i] * rewards[i];
+        }
+        return winningsRewards;
     }
 
     public int[] recordMatched() {
