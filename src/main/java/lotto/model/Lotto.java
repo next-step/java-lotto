@@ -32,4 +32,8 @@ public final class Lotto {
 
         return Rank.of(lotto.size());
     }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
+    }
 }

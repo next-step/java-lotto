@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 import lotto.model.Rank;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.util.Sets;
@@ -35,5 +36,17 @@ public class LottoTest {
         Lotto winLottoNums = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, SIX));
 
         assertThat(TEST_LOTTO.getRank(winLottoNums)).isEqualTo(Rank.FIRST);
+    }
+
+    @Test
+    @DisplayName("로또 번호가 특정 로또 넘버를 포함하면 true를 반환한다.")
+    void containsTrueTest() {
+        assertThat(TEST_LOTTO.contains(ONE)).isTrue();
+    }
+
+    @Test
+    @DisplayName("로또 번호가 특정 로또 넘버를 포함하지 않으면 false를 반환한다.")
+    void containsFalseTest() {
+        assertThat(TEST_LOTTO.contains(LottoNumber.valueOf(11))).isFalse();
     }
 }
