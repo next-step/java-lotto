@@ -19,10 +19,6 @@ public class LottoWinningCondition {
     }
 
     LottoWinnerType winLotto(Lotto lotto) {
-        int countOfDuplicate = lotto.countDuplicateValue(previousLotto);
-        if (LottoWinnerType.matchCountWithBonus(countOfDuplicate)) {
-            return LottoWinnerType.valueOf(countOfDuplicate, lotto.contains(bonusNumber));
-        }
-        return LottoWinnerType.valueOf(countOfDuplicate, false);
+        return LottoWinnerType.valueOf(lotto.countDuplicateValue(previousLotto), lotto.contains(bonusNumber));
     }
 }
