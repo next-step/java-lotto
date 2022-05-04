@@ -24,8 +24,8 @@ public class Lottos {
     public LottoWinners check(List<Integer> pickLottoNumberOfWeek) {
         LottoWinners lottoWinners = new LottoWinners();
         for (Lotto lotto : lottos) {
-            int count = lotto.numberCheck(pickLottoNumberOfWeek);
-            lottoWinners.addWiners(count);
+            int matchCount = lotto.matching(pickLottoNumberOfWeek);
+            lottoWinners.addWiners(matchCount);
         }
 
         return lottoWinners;

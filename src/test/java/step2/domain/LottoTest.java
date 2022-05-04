@@ -7,7 +7,6 @@ import step2.service.TestPick;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTest {
 
@@ -23,6 +22,6 @@ class LottoTest {
     void pickNumberCheck() {
         Lotto lotto = new Lotto(new TestPick(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-        assertThat(lotto.numberCheck(Arrays.asList(11, 12, 13, 4, 5, 6))).isEqualTo(3);
+        assertThat(lotto.matching(Arrays.asList(11, 12, 13, 4, 5, 6))).isEqualTo(3);
     }
 }

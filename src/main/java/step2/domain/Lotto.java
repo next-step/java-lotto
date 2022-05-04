@@ -1,10 +1,8 @@
 package step2.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class Lotto {
     public static final int price = 1000;
@@ -19,7 +17,7 @@ public class Lotto {
         return pick;
     }
 
-    public int numberCheck(List<Integer> pickLottoNumberOfWeek) {
+    public int matching(List<Integer> pickLottoNumberOfWeek) {
         return (int) pickLottoNumberOfWeek
                 .stream()
                 .filter(pick::contains)
