@@ -12,6 +12,6 @@ class LottoNumberTest {
   @ParameterizedTest
   @ValueSource(ints = {0, 46})
   void create_invalid_number(int input) {
-    assertThatThrownBy(() -> new LottoNumber(input)).isInstanceOf(IllegalArgumentException.class);
+    assertThatThrownBy(() -> LottoNumber.of(input)).isInstanceOf(IllegalArgumentException.class);
   }
 }

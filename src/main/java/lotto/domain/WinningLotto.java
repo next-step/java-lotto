@@ -16,9 +16,15 @@ public class WinningLotto {
     this.bonus = bonus;
   }
 
+  private void validateBonus(Lotto lotto, LottoNumber bonus) {
+    if (lotto.contains(bonus)) {
+      throw new IllegalArgumentException(INVALID_BONUS_MESSAGE);
+    }
+  }
+
   public static WinningLotto create(Set<Integer> lottoNumbers, int bonus) {
     Lotto lotto = Lotto.create(lottoNumbers);
-    LottoNumber bonusNumber = new LottoNumber(bonus);
+    LottoNumber bonusNumber = LottoNumber.of(bonus);
     return new WinningLotto(lotto, bonusNumber);
   }
 
@@ -28,11 +34,5 @@ public class WinningLotto {
 
   public boolean matchBonus(Lotto other) {
     return other.contains(bonus);
-  }
-
-  private void validateBonus(Lotto lotto, LottoNumber bonus) {
-    if (lotto.contains(bonus)) {
-      throw new IllegalArgumentException(INVALID_BONUS_MESSAGE);
-    }
   }
 }

@@ -1,9 +1,12 @@
 package lotto.domain;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
+import lotto.util.LottoNumberGenerator;
 
 public class Lotto {
 
@@ -17,10 +20,23 @@ public class Lotto {
     this.values.addAll(values);
   }
 
+  private void validate(Set<LottoNumber> values) {
+    if (values.size() != LOTTO_SIZE) {
+      throw new IllegalArgumentException(INVALID_SIZE_MESSAGE);
+    }
+  }
+
   public static Lotto create(Set<Integer> values) {
     return values.stream()
-        .map(LottoNumber::new)
+        .map(LottoNumber::of)
         .collect(Collectors.collectingAndThen(Collectors.toSet(), Lotto::new));
+  }
+
+  public static Lotto manualCreate(List<String> value) {
+    Set<Integer> integers = value.stream()
+        .map(Integer::parseInt)
+        .collect(Collectors.toSet());
+    return create(integers);
   }
 
   public static Lotto autoCreate() {
@@ -28,7 +44,7 @@ public class Lotto {
   }
 
   public Set<LottoNumber> getValues() {
-    return values;
+    return Collections.unmodifiableSet(values);
   }
 
   public Rank getRank(WinningLotto winningLotto) {
@@ -44,12 +60,6 @@ public class Lotto {
     Set<LottoNumber> intersection = new TreeSet<>(values);
     intersection.retainAll(other.values);
     return intersection.size();
-  }
-
-  private void validate(Set<LottoNumber> values) {
-    if (values.size() != LOTTO_SIZE) {
-      throw new IllegalArgumentException(INVALID_SIZE_MESSAGE);
-    }
   }
 
   @Override
