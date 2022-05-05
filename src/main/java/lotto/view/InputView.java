@@ -23,16 +23,25 @@ public class InputView {
     }
 
     public static LottoResult inputLottoResult() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-
         return new LottoResult(
-                new LottoNumbers(
-                        split(SCANNER.nextLine(), DELIMITER)
-                                .stream()
-                                .map(LottoNumber::new)
-                                .collect(Collectors.toList())
-                )
+                inputLottoNumbers(),
+                inputBonusNumber()
         );
+    }
+
+    private static LottoNumbers inputLottoNumbers() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        return new LottoNumbers(
+                split(SCANNER.nextLine(), DELIMITER)
+                        .stream()
+                        .map(LottoNumber::new)
+                        .collect(Collectors.toList())
+        );
+    }
+
+    private static LottoNumber inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return new LottoNumber(SCANNER.nextLine().trim());
     }
 
     private static List<String> split(String numbers, String delimiter) {

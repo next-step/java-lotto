@@ -1,28 +1,21 @@
 package lotto.domain;
 
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
 public class LottoStatistics {
-    private static final long ZERO = 0L;
-
     private final EarningRate earningRate;
-    private final Map<LottoPrize, Long> prizeMap;
+    private final LottoPrizes lottoPrizes;
 
-    public LottoStatistics(EarningRate earningRate, Map<LottoPrize, Long> prizeMap) {
-        validate(earningRate, prizeMap);
+    public LottoStatistics(EarningRate earningRate, LottoPrizes lottoPrizes) {
+        validate(earningRate, lottoPrizes);
         this.earningRate = earningRate;
-        this.prizeMap = prizeMap;
+        this.lottoPrizes = lottoPrizes;
     }
 
-    private void validate(EarningRate earningRate, Map<LottoPrize, Long> prizeMap) {
+    private void validate(EarningRate earningRate, LottoPrizes lottoPrizes) {
         if (earningRate == null) {
             throw new IllegalArgumentException("earningRate는 null 일 수 없습니다.");
         }
-
-        if (prizeMap == null) {
-            throw new IllegalArgumentException("prizeMap은 null 일 수 업습니다.");
+        if (lottoPrizes == null) {
+            throw new IllegalArgumentException("lottoPrizes는 null 일 수 없습니다.");
         }
     }
 
@@ -31,13 +24,13 @@ public class LottoStatistics {
     }
 
     public long getPrizeCount(LottoPrize lottoPrize) {
-        return prizeMap.getOrDefault(lottoPrize, ZERO);
+        return lottoPrizes.countPrize(lottoPrize);
     }
 
     public static LottoStatistics from(LottoPrizes lottoPrizes) {
         return new LottoStatistics(
                 lottoPrizes.toEarningRate(),
-                lottoPrizes.getLottoPrizes().stream()
-                        .collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
+                lottoPrizes
+        );
     }
 }

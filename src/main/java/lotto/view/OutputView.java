@@ -7,7 +7,8 @@ import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTickets;
 
 import java.util.Arrays;
-import java.util.Comparator;
+import java.util.Collections;
+import java.util.List;
 
 public class OutputView {
     private static final String PROFIT = "이득";
@@ -25,7 +26,7 @@ public class OutputView {
     }
 
     private static void printNumbers(LottoNumbers lottoNumbers) {
-        System.out.println(lottoNumbers.getLottoNumbers());
+        System.out.println(lottoNumbers);
     }
 
     public static void printStatistics(LottoStatistics lottoStatistics) {
@@ -37,12 +38,27 @@ public class OutputView {
     }
 
     private static void printMatchedPrizes(LottoStatistics lottoStatistics) {
-        Arrays.stream(LottoPrize.values())
+        List<LottoPrize> lottoPrizes = Arrays.asList(LottoPrize.values());
+        Collections.reverse(lottoPrizes);
+
+        lottoPrizes.stream()
                 .filter(lottoPrize -> lottoPrize != LottoPrize.NONE)
-                .sorted(Comparator.comparing(LottoPrize::getMatch))
                 .forEach(lottoPrize -> {
-                    System.out.printf("%s개 일치 (%s원) - %s%n", lottoPrize.getMatch(), lottoPrize.getAmount(), lottoStatistics.getPrizeCount(lottoPrize));
+                    printMatch(lottoPrize);
+                    System.out.printf("(%s원) - %s%n", lottoPrize.getAmount(), lottoStatistics.getPrizeCount(lottoPrize));
                 });
+    }
+
+    private static void printMatch(LottoPrize lottoPrize) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(lottoPrize.getMatch());
+        stringBuilder.append("개 일치");
+
+        if (lottoPrize.hasBonusNumber()) {
+            stringBuilder.append(", 보너스볼 일치");
+        }
+
+        System.out.print(stringBuilder);
     }
 
     private static void printEarningRate(EarningRate earningRate) {

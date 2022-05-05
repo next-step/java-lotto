@@ -20,9 +20,10 @@ public class LottoTicket {
         }
     }
 
-    public LottoPrize check(LottoNumbers lottoNumbers) {
-        return LottoPrize.fromMatch(
-                this.lottoNumbers.match(lottoNumbers)
+    public LottoPrize check(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
+        return LottoPrize.of(
+                this.lottoNumbers.match(lottoNumbers),
+                this.lottoNumbers.contains(bonusNumber)
         );
     }
 

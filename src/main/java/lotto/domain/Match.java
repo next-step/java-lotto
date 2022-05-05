@@ -31,4 +31,9 @@ public class Match implements Comparable<Match> {
         }
         return 0;
     }
+
+    @Override
+    public String toString() {
+        return Integer.toString(match);
+    }
 }

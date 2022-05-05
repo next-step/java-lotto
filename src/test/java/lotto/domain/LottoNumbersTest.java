@@ -13,6 +13,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LottoNumbersTest {
     @ParameterizedTest
@@ -51,5 +53,13 @@ class LottoNumbersTest {
     void match는_두_numbers의_겹치는_개수를_반환한다() {
         assertThat(LottoNumbers.all().match(LottoNumbers.all()))
                 .isEqualTo(new Match(MAX_VALUE));
+    }
+
+    @Test
+    void contains는_lottoNumber_포함_여부를_반환한다() {
+        assertAll(
+                () -> assertTrue(new LottoNumbers(List.of(new LottoNumber(1))).contains(new LottoNumber(1))),
+                () -> assertFalse(new LottoNumbers(List.of(new LottoNumber(1))).contains(new LottoNumber(2)))
+        );
     }
 }
