@@ -1,45 +1,42 @@
 package lotto;
 
+import static util.LottoOutputView.print;
+import static util.LottoOutputView.printPurchaseAmount;
 import static util.LottoOutputView.printResultInfo;
 import static util.LottoOutputView.printRevenueRate;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Arrays;
 import util.LottoInputView;
-import util.LottoOutputView;
 
 public class LottoController {
 
-  private static final int REVENUE_RATE_SCALE = 2;
 
   public void proceed() {
     PaymentAmount paymentAmount = LottoInputView.insertPaymentAmount();
     LottoList lottoList = new LottoList(paymentAmount);
 
-    LottoOutputView.print(lottoList.toStringForPrinting());
-    LottoOutputView.printPurchaseAmount(lottoList.getTotalLottoCount());
-    LottoOutputView.print(lottoList.toStringForPrinting());
+    print(lottoList.toStringForPrinting());
+    printPurchaseAmount(lottoList.getTotalLottoCount());
+    print(lottoList.toStringForPrinting());
 
-    Lotto winningLotto = new Lotto(LottoInputView.insertWinningLotto());
+    Lotto winning = new Lotto(LottoInputView.insertWinningLotto());
+    LottoNumber bonus = new LottoNumber(LottoInputView.insertBonusNumber());
+
+    WinningLotto winningLotto = new WinningLotto(winning, bonus);
+    Result result = lottoList.drawing(winningLotto);
 
     printResultInfo();
-    int totalRevenue = Arrays.stream(LottoPrize.values())
-        .mapToInt(lottoPrize -> {
-          int matchedLottoCount = lottoPrize.getMatchedLottoCount(winningLotto, lottoList);
-          LottoOutputView.printMatchedLottoCount(lottoPrize, matchedLottoCount);
-          return lottoPrize.getRevenue(matchedLottoCount);
-        })
-        .sum();
 
-    BigDecimal revenueRate = BigDecimal.valueOf(totalRevenue)
-        .divide(
-            BigDecimal.valueOf(lottoList.getTotalPurchaseAmount()),
-            REVENUE_RATE_SCALE,
-            RoundingMode.HALF_UP
-        );
+    int totalRevenue = 0;
+    for (LottoPrize lottoPrize : LottoPrize.values()) {
+      if (lottoPrize.equals(LottoPrize.NONE)) {
+        continue;
+      }
+      int matchedLottoCount = result.getMatchedLottoCount(lottoPrize);
+      totalRevenue += lottoPrize.getRevenue(matchedLottoCount);
+      print(result.buildResultMessage(lottoPrize));
+    }
 
-    printRevenueRate(revenueRate);
+    printRevenueRate(lottoList.getRevenueRate(totalRevenue));
   }
 
   public static LottoController init() {

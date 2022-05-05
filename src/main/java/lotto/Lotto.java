@@ -57,6 +57,10 @@ public class Lotto {
         .count();
   }
 
+  public boolean hasNumber(LottoNumber number) {
+    return lotto.contains(number);
+  }
+
   public String toStringForPrinting() {
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append(LOTTO_BEGIN_STRING);
