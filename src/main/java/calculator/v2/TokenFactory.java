@@ -2,7 +2,7 @@ package calculator.v2;
 
 public class TokenFactory {
 
-  public static final String NOT_SUPPORT_TOKEN_FORMAT = "%s : 지원하지 않는 토큰 형식입니다.";
+  public static final String NOT_SUPPORT_TOKEN_FORMAT = "[%s] : 지원하지 않는 토큰 형식입니다.";
 
   private TokenFactory() {
   }
