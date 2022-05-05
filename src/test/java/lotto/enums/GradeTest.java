@@ -2,10 +2,15 @@ package lotto.enums;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Set;
+import java.util.stream.Stream;
+import lotto.model.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class GradeTest {
 
@@ -16,18 +21,23 @@ class GradeTest {
     assertThat(second.isSecond()).isTrue();
   }
 
-  @ParameterizedTest
+
+  @ParameterizedTest(name = "일치횟수 : {0}, 보너스 여부 : {1} 결과 : {2}")
+  @MethodSource("lottoCountAndGrade")
   @DisplayName("로또 결과를 테스트한다.")
-  @CsvSource(value = {"6,true:FIRST",
-                      "6,false:FIRST",
-                      "5,true:SECOND",
-                      "5,false:THIRD",
-                      "0,false:NONE"},delimiter = ':')
-  void valueOf(String input, String output) {
-    String[] gradeInput = input.split(",");
-    int countOfMatch = Integer.parseInt(gradeInput[0]);
-    boolean matchBonus = Boolean.parseBoolean(gradeInput[1]);
-    Grade grade = Grade.valueOf(countOfMatch, matchBonus);
-    assertThat(grade).isEqualTo(Grade.valueOf(output));
+  void valueOf(int count, boolean isBonus, Grade grade) {
+    assertThat(Grade.valueOf(count, isBonus)).isEqualTo(grade);
+  }
+
+  static Stream<Arguments> lottoCountAndGrade() {
+    return Stream.of(
+        Arguments.arguments(6, false, Grade.FIRST),
+        Arguments.arguments(6, true, Grade.FIRST),
+        Arguments.arguments(5, true, Grade.SECOND),
+        Arguments.arguments(5, false, Grade.THIRD),
+        Arguments.arguments(4, false, Grade.FOURTH),
+        Arguments.arguments(3, true, Grade.FIFTH),
+        Arguments.arguments(0, true, Grade.NONE)
+    );
   }
 }

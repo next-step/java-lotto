@@ -1,13 +1,7 @@
 package lotto.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import lotto.dto.WinningResultDto;
-import lotto.enums.Grade;
 import lotto.model.Guest;
-import lotto.model.LotteryNoteCounter;
 import lotto.model.Lotto;
 import lotto.model.Store;
 import lotto.util.AwardNumberUtil;
@@ -22,35 +16,12 @@ public class LottoService {
     return Lotto.from(AwardNumberUtil.getAwardNumberList(winnerNumber));
   }
 
-  public List<Lotto> holdingLotteryTickets(List<Lotto> lotteryTickets, Lotto winLotto, int bonus) {
-    List<Lotto> LotteryTickets = new ArrayList<>();
-    for (Lotto lotto : lotteryTickets) {
-      LotteryTickets.add(
-          lotto.reflectLottoGrade(
-              AwardNumberUtil.matchCount(lotto.numbers(), winLotto.numbers(), bonus)));
-    }
-    return LotteryTickets;
+  public void holdingLotteryTickets(List<Lotto> lotteryTickets, Lotto winLotto,
+      int bonus) {
+
+
   }
 
-  public List<WinningResultDto> histories(List<Lotto> lotteryTickets) {
-    List<WinningResultDto> histories = new ArrayList<>();
-    LotteryNoteCounter lotteryNoteCount = new LotteryNoteCounter(lotteryTickets);
-    List<Grade> grades = Arrays.stream(Grade.values())
-        .filter(grade -> grade != Grade.NONE)
-        .collect(Collectors.toList());
-    for (Grade grade : grades) {
-      histories.add(new WinningResultDto(grade, lotteryNoteCount.lotteryCount(grade)));
-    }
-    return histories;
-  }
-
-  public long allAddReward(List<WinningResultDto> histories) {
-    long result = 0L;
-    for (WinningResultDto history : histories) {
-      result += (history.getGrade().getAwardPrice() * history.getCount());
-    }
-    return result;
-  }
 
   public double yieldCalculate(Long money, Long reward) {
     return (double) reward / money;

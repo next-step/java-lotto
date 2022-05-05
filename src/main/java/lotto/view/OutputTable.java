@@ -1,7 +1,6 @@
 package lotto.view;
 
 import java.util.List;
-import lotto.dto.WinningResultDto;
 import lotto.enums.Grade;
 import lotto.model.Lotto;
 
@@ -46,11 +45,11 @@ public final class OutputTable {
     System.out.println(UNDER_BAR);
   }
 
-  public static void resultStatistics(List<WinningResultDto> histories) {
-    for (WinningResultDto history : histories) {
-      System.out.println(getMessage(history.getGrade(), history.getCount()));
-    }
-  }
+//  public static void resultStatistics(List<WinningResultDto> histories) {
+//    for (WinningResultDto history : histories) {
+//      System.out.println(getMessage(history.getGrade(), history.getCount()));
+//    }
+//  }
 
   private static String getMessage(Grade grade, int count) {
     if (grade.isSecond()) {

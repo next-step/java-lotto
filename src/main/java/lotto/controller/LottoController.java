@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.dto.WinningResultDto;
 import lotto.model.Guest;
 import lotto.model.Lotto;
 import lotto.model.Store;
@@ -35,11 +34,11 @@ public class LottoController {
 
     OutputTable.resultStatisticsMessage();
 
-    List<WinningResultDto> histories = histories(
-        allLotteryTickets(lottoProducts, winnerLotto, bonus));
-    OutputTable.resultStatistics(histories);
-
-    OutputTable.printYield(yieldCalculate(haveMoney, allAddReward(histories)), 1);
+//    List<WinningResultDto> histories = histories(
+//        allLotteryTickets(lottoProducts, winnerLotto, bonus));
+//    OutputTable.resultStatistics(histories);
+//
+//    OutputTable.printYield(yieldCalculate(haveMoney, allAddReward(histories)), 1);
 
   }
 
@@ -47,13 +46,13 @@ public class LottoController {
     return lottoService.visit(guest, store);
   }
 
-  public List<Lotto> allLotteryTickets(List<Lotto> lottoProducts, Lotto winnerLotto, int bonus) {
-    return lottoService.holdingLotteryTickets(lottoProducts, winnerLotto, bonus);
+  public void allLotteryTickets(List<Lotto> lottoProducts, Lotto winnerLotto, int bonus) {
+    lottoService.holdingLotteryTickets(lottoProducts, winnerLotto, bonus);
   }
 
-  private List<WinningResultDto> histories(List<Lotto> lotteryTickets) {
-    return lottoService.histories(lotteryTickets);
-  }
+//  private List<WinningResultDto> histories(List<Lotto> lotteryTickets) {
+//    return lottoService.histories(lotteryTickets);
+//  }
 
 
   public Lotto insertWinnerNumber(String winnerNumber) {
@@ -64,9 +63,9 @@ public class LottoController {
     return lottoService.insertBonusNumber(bonus);
   }
 
-  public long allAddReward(List<WinningResultDto> histories) {
-    return lottoService.allAddReward(histories);
-  }
+//  public long allAddReward(List<WinningResultDto> histories) {
+//    return lottoService.allAddReward(histories);
+//  }
 
   public double yieldCalculate(Long money, Long reward) {
     return lottoService.yieldCalculate(money, reward);
