@@ -7,7 +7,6 @@ import java.util.Map;
 
 public class LottoReport {
 
-    private int lottoCount = 0;
     private List<Lotto> lottos = new ArrayList<>();
     private Map<LottoStatus, Integer> winningMap = new HashMap<>();
     private long profitRate;

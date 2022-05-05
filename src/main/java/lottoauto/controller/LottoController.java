@@ -42,9 +42,12 @@ import java.util.List;
 public class LottoController {
     public static void main(String[] args) {
 
-        LottoGame lottoGame = new LottoGame(InputView.askLottoMoney());
+        int userMoney = InputView.askLottoMoney();
+        int tryManualCount = InputView.askTryManualLotto();
+        LottoGame lottoGame = new LottoGame(userMoney, tryManualCount);
 
-        Lottos lottos = lottoGame.start();
+        List<Lotto> manualLottos = InputView.inputEachLottos(tryManualCount);
+        Lottos lottos = lottoGame.start(manualLottos);
 
         ResultView.printLottos(lottos.all());
 
