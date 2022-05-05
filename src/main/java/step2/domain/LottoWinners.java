@@ -12,13 +12,11 @@ public class LottoWinners {
         winner.put(Rank.RANK_3, 0);
         winner.put(Rank.RANK_4, 0);
         winner.put(Rank.RANK_5, 0);
+        winner.put(Rank.NO_RANK, 0);
     }
 
-    public void addWiners(int rankMatchCount) {
-        for (Rank rank : Rank.values()) {
-            if (rank.matchCount == rankMatchCount)
-                winner.put(rank, winner.get(rank) + 1);
-        }
+    public void addWiners(Rank rank) {
+        winner.put(rank, winner.get(rank) + 1);
     }
 
     public int countByRank(Rank rank) {

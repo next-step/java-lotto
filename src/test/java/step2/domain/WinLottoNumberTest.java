@@ -36,13 +36,12 @@ class WinLottoNumberTest {
 
     @DisplayName("로또 당첨번호는 보너스 포함 7개이다")
     @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5", "3,2,1", "3,4","1", "1,2,3,4,5,6,7"})
+    @ValueSource(strings = {"1,2,3,4,5", "3,2,1", "3,4","1,2,3", "1,2,3,4,5,6,7"})
     void pickLottoNumberOfWeekNumberCountWithBounusTest(String input) {
         assertThatThrownBy(() -> {
-            WinLottoNumber winLottoNumber = new WinLottoNumber(input);
-            winLottoNumber.add("45");
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("로또 당첨번호는 보너스 포함하여 7개입니다");
+            WinLottoNumber winLottoNumber = new WinLottoNumber("1,2,3,4,5,6");
+            winLottoNumber.add(input);
+        }).isInstanceOf(NumberFormatException.class);
     }
 
     @DisplayName("로또 당첨번호는 중복을 허용하지 않는다")

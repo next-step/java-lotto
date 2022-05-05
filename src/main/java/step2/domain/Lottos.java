@@ -21,11 +21,11 @@ public class Lottos {
         return lottos.get(index).pick();
     }
 
-    public LottoWinners match(List<Integer> pickLottoNumberOfWeek) {
+    public LottoWinners match(List<Integer> pickLottoNumberOfWeek, int bonusBall) {
         LottoWinners lottoWinners = new LottoWinners();
         for (Lotto lotto : lottos) {
-            int matchCount = lotto.matching(pickLottoNumberOfWeek);
-            lottoWinners.addWiners(matchCount);
+            Rank rank = lotto.matching(pickLottoNumberOfWeek, bonusBall);
+            lottoWinners.addWiners(rank);
         }
 
         return lottoWinners;

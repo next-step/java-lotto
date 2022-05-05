@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class LottoGameService {
     private WinLottoNumber winLottoNumber;
+    private int bonusBall;
 
     public LottoGameService(String lottoNumbers, String bonusBall) {
         pickLottoNumberOfWeek(lottoNumbers);
@@ -20,11 +21,11 @@ public class LottoGameService {
     }
 
     private void addBonusBall(String bonusBall) {
-        winLottoNumber.add(bonusBall);
+        this.bonusBall = Integer.parseInt(bonusBall);
     }
 
     public LottoWinners match(Lottos lottos) {
-        return lottos.match(winLottoNumber.pickLottoNumberOfWeek());
+        return lottos.match(winLottoNumber.pickLottoNumberOfWeek(), bonusBall);
     }
 
     public double moneyProfitRate(int investMoney, LottoWinners winners) {
