@@ -23,7 +23,7 @@ public class LottoGroupResult {
         if (totalPrice == ZERO) {
             return REFERENCE_POINT;
         }
-        return Math.floor(winningPrice() / Double.valueOf(totalPrice) * DECIMAL_SECOND_POSITION) / Double.valueOf(DECIMAL_SECOND_POSITION);
+        return Math.floor(winningPrice() / (double) totalPrice * DECIMAL_SECOND_POSITION) / DECIMAL_SECOND_POSITION;
     }
 
     private int winningPrice() {
