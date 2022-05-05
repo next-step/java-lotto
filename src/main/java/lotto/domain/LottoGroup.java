@@ -5,6 +5,7 @@ import lotto.pattern.LottoNumberGenerateStrategy;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -42,7 +43,7 @@ public class LottoGroup {
 
         LottoGroup that = (LottoGroup) o;
 
-        return lottos != null ? lottos.equals(that.lottos) : that.lottos == null;
+        return Objects.equals(lottos, that.lottos);
     }
 
     @Override
