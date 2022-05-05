@@ -25,14 +25,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
   }
 
   public static LottoNumber of(int value) {
-    LottoNumber lottoNumber = CACHE.get(value);
-    if (lottoNumber != null) {
-      return lottoNumber;
-    }
-    return new LottoNumber(value);
+    validate(value);
+    return CACHE.get(value);
   }
 
-  private void validate(int value) {
+  private static void validate(int value) {
     if (value < MIN_NUMBER || value > MAX_NUMBER) {
       throw new IllegalArgumentException(INVALID_NUMBER_MESSAGE);
     }

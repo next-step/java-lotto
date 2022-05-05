@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -37,9 +36,9 @@ public enum Rank {
   }
 
   public static Rank valueOf(int matchCount, boolean matchBonus) {
-    if (matchCount == 5 && matchBonus) {
+    if (matchCount == SECOND.matchCount && matchBonus) {
       return Rank.SECOND;
     }
-    return Optional.ofNullable(BY_MATCH_COUNT.get(matchCount)).orElse(MISS);
+    return BY_MATCH_COUNT.getOrDefault(matchCount, MISS);
   }
 }
