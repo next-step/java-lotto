@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Rank;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -45,8 +42,8 @@ class LottoTest {
             "1,41,42,43,44,45, MISS",
             "40,41,42,43,44,45, MISS"
     })
-    void getRank_로또_등수_판별(int num1, int num2, int num3, int num4, int num5, int num6, String rank) {
+    void getRank_로또_등수_판별(int num1, int num2, int num3, int num4, int num5, int num6, String lottoRankString) {
         Lotto lotto = new Lotto(new int[]{num1, num2, num3, num4, num5, num6});
-        assertThat(lotto.getRank(new Lotto(new int[]{1, 2, 3, 4, 5, 6}))).isEqualTo(Rank.valueOf(rank));
+        assertThat(lotto.getLottoRank(new Lotto(new int[]{1, 2, 3, 4, 5, 6}))).isEqualTo(LottoRank.valueOf(lottoRankString));
     }
 }

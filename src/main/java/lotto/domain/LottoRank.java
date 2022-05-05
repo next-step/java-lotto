@@ -6,7 +6,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public enum Rank {
+public enum LottoRank {
     MISS(0, 0),
     FOURTH(3, 5_000),
     THIRD(4, 50_000),
@@ -15,7 +15,7 @@ public enum Rank {
 
     private static final int MIN_MATCH_COUNT = 0;
     private static final int MAX_MATCH_COUNT = 6;
-    private static final Map<Integer, Rank> BY_RANK = Stream.of(values())
+    private static final Map<Integer, LottoRank> BY_LOTTO_RANK = Stream.of(values())
             .collect(Collectors.toMap(rank -> rank.matchCount, Function.identity()));
 
     private final int matchCount;
@@ -29,14 +29,14 @@ public enum Rank {
         return this.winningMoney;
     }
 
-    Rank(int matchCount, int winningMoney) {
+    LottoRank(int matchCount, int winningMoney) {
         this.matchCount = matchCount;
         this.winningMoney = winningMoney;
     }
 
-    public static Rank valueOfMatchCount(int matchCount) {
+    public static LottoRank valueOfMatchCount(int matchCount) {
         validateMatchCount(matchCount);
-        return Optional.ofNullable(BY_RANK.get(matchCount)).orElse(MISS);
+        return Optional.ofNullable(BY_LOTTO_RANK.get(matchCount)).orElse(MISS);
     }
 
     private static void validateMatchCount(int matchCount) {

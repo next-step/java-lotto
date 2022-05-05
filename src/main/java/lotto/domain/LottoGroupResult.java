@@ -8,15 +8,15 @@ public class LottoGroupResult {
     private static final int ZERO = 0;
     private static final double REFERENCE_POINT = 1.00;
 
-    private final Map<Rank, Integer> lottoGroupResult;
+    private final Map<LottoRank, Integer> lottoGroupResult;
 
-    public LottoGroupResult(Map<Rank, Integer> lottoGroupResult) {
+    public LottoGroupResult(Map<LottoRank, Integer> lottoGroupResult) {
         validateLottoGroupResult(lottoGroupResult);
         this.lottoGroupResult = lottoGroupResult;
     }
 
-    public int getLottoMatchCount(Rank rank) {
-        return lottoGroupResult.getOrDefault(rank, ZERO);
+    public int getLottoMatchCount(LottoRank lottoRank) {
+        return lottoGroupResult.getOrDefault(lottoRank, ZERO);
     }
 
     public double getEarningRatio(int totalPrice) {
@@ -30,7 +30,7 @@ public class LottoGroupResult {
         return this.lottoGroupResult.entrySet().stream().mapToInt(result -> result.getKey().winningMoney() * result.getValue()).sum();
     }
 
-    private void validateLottoGroupResult(Map<Rank, Integer> lottoGroupResult) {
+    private void validateLottoGroupResult(Map<LottoRank, Integer> lottoGroupResult) {
         if (lottoGroupResult == null) {
             throw new IllegalArgumentException("로또 그룹의 결과는 null 일 수 없습니다.");
         }

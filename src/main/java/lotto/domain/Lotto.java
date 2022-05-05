@@ -31,8 +31,8 @@ public class Lotto {
         this(lottoNumberGenerateStrategy.generate());
     }
 
-    public Rank getRank(Lotto winningLotto) {
-        return Rank.valueOfMatchCount(matchLottoNumberCount(winningLotto));
+    public LottoRank getLottoRank(Lotto winningLotto) {
+        return LottoRank.valueOfMatchCount(matchLottoNumberCount(winningLotto));
     }
 
     private int matchLottoNumberCount(Lotto winningLotto) {

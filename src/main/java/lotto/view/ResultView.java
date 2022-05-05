@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoGroup;
 import lotto.domain.LottoGroupResult;
-import lotto.domain.Rank;
+import lotto.domain.LottoRank;
 
 import java.util.List;
 import java.util.Map;
@@ -41,11 +41,11 @@ public class ResultView {
         System.out.println();
         System.out.println(WINNING_STATISTIC_MESSAGE);
         System.out.println(SPLIT_LINE_MESSAGE);
-        Stream.of(Rank.values()).filter(rank -> !rank.equals(Rank.MISS)).forEach(rank -> System.out.println(String.format(
+        Stream.of(LottoRank.values()).filter(lottoRank -> !lottoRank.equals(LottoRank.MISS)).forEach(lottoRank -> System.out.println(String.format(
                 CORRECT_STATISTIC_MESSAGE,
-                rank.matchCount(),
-                rank.winningMoney(),
-                lottoGroupResult.getLottoMatchCount(rank)
+                lottoRank.matchCount(),
+                lottoRank.winningMoney(),
+                lottoGroupResult.getLottoMatchCount(lottoRank)
         )));
         Double earningRatio = lottoGroupResult.getEarningRatio(totalPrice);
         System.out.println(String.format(EARNINGS_RATIO_MESSAGE, earningRatio, ADVANTAGE_STATUS.get(earningRatio.compareTo(1.00))));

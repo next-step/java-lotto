@@ -57,9 +57,9 @@ class LottoGroupTest {
                 new Lotto(new int[]{37, 38, 39, 40, 41, 42}))
         );
         assertThat(lottoGroup.getLottoGroupResult(new Lotto(new int[]{4, 5, 6, 8, 9, 10}))).isEqualTo(new LottoGroupResult(Map.of(
-                Rank.MISS, 4,
-                Rank.FOURTH, 2,
-                Rank.THIRD, 1
+                LottoRank.MISS, 4,
+                LottoRank.FOURTH, 2,
+                LottoRank.THIRD, 1
         )));
     }
 

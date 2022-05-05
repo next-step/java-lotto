@@ -25,10 +25,10 @@ public class LottoGroup {
     }
 
     public LottoGroupResult getLottoGroupResult(Lotto winningLotto) {
-        final Map<Rank, Integer> lottoGroupResult = new EnumMap<>(Rank.class);
+        final Map<LottoRank, Integer> lottoGroupResult = new EnumMap<>(LottoRank.class);
         for (Lotto lotto : this.lottos) {
-            Rank rank = lotto.getRank(winningLotto);
-            lottoGroupResult.put(rank, lottoGroupResult.getOrDefault(rank, NO_COUNT) + UNIT_COUNT);
+            LottoRank lottoRank = lotto.getLottoRank(winningLotto);
+            lottoGroupResult.put(lottoRank, lottoGroupResult.getOrDefault(lottoRank, NO_COUNT) + UNIT_COUNT);
         }
         return new LottoGroupResult(lottoGroupResult);
     }
