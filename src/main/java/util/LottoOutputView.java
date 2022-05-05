@@ -1,7 +1,6 @@
 package util;
 
 import java.math.BigDecimal;
-import lotto.LottoPrize;
 
 public class LottoOutputView {
 
@@ -19,10 +18,6 @@ public class LottoOutputView {
 
   public static void printRevenueRate(BigDecimal revenueRate) {
     print(String.format(MESSAGE_FOR_PRINTING_RESULT, revenueRate));
-  }
-
-  public static void printMatchedLottoCount(LottoPrize lottoPrize, int matchedLottoCount) {
-    print(lottoPrize.toStringForPrinting(matchedLottoCount));
   }
 
   public static void print(String text) {
