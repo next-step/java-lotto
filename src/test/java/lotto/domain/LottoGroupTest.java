@@ -1,11 +1,14 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
 class LottoGroupTest {
@@ -58,5 +61,11 @@ class LottoGroupTest {
                 Rank.FOURTH, 2,
                 Rank.THIRD, 1
         )));
+    }
+
+    @ParameterizedTest
+    @NullSource
+    void LottoGroup_로또리스트가_null_인_경우(List<Lotto> lottos) {
+        assertThatThrownBy(() -> new LottoGroup(lottos)).isInstanceOf(IllegalArgumentException.class);
     }
 }

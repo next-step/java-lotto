@@ -16,6 +16,7 @@ public class LottoGroup {
     private final List<Lotto> lottos;
 
     public LottoGroup(List<Lotto> lottos) {
+        validateLottos(lottos);
         this.lottos = lottos;
     }
 
@@ -34,6 +35,12 @@ public class LottoGroup {
 
     public List<List<Integer>> getLottoGroupNumber() {
         return lottos.stream().map(Lotto::getNumbers).collect(Collectors.toList());
+    }
+
+    private void validateLottos(List<Lotto> lottos) {
+        if (lottos == null) {
+            throw new IllegalArgumentException("로또 리스트가 null 일 수 없습니다.");
+        }
     }
 
     @Override
