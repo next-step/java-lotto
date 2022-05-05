@@ -77,6 +77,6 @@ class LottoGameServiceTest {
         lottoWinners.addWiners(3);
 
         double result = lottoGameService.moneyProfitRate(1000, lottoWinners);
-        assertThat(result).isEqualTo(20);
+        assertThat(result).isEqualTo(5);
     }
 }
