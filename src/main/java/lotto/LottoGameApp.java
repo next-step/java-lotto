@@ -46,8 +46,9 @@ public class LottoGameApp {
   private List<NumberGenerator> makeNumberGenerators(int auto, int manual,
       List<String> manualNumbers) {
     List<NumberGenerator> lottoNumberGenerators = new ArrayList<>();
+    AutoLottoNumberGenerator autoLottoNumberGenerator = new AutoLottoNumberGenerator();
     for (int i = 0; i < auto; i++) {
-      lottoNumberGenerators.add(new AutoLottoNumberGenerator());
+      lottoNumberGenerators.add(autoLottoNumberGenerator);
     }
     for (int i = 0; i < manual; i++) {
       lottoNumberGenerators.add(new ManualLottoNumberGenerator(manualNumbers.get(i)));
