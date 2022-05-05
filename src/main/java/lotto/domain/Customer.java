@@ -16,12 +16,15 @@ public class Customer {
         lottos.add(lotto);
     }
 
-    public Lotto buy(int price) {
-        this.money -= price;
+    public List<Lotto> buy(int price) {
 
-        Lotto lotto = new Lotto();
-        lottos.add(lotto);
-        return lotto;
+        while (this.money > 0) {
+            Lotto lotto = new Lotto();
+            this.money -= price;
+            lottos.add(lotto);
+        }
+
+        return lottos;
     }
 
 
