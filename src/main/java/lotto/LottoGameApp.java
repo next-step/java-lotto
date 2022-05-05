@@ -6,7 +6,8 @@ import lotto.domain.LottoGames;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoRewords;
-import lotto.domain.strategy.LottoNumberGenerator;
+import lotto.domain.strategy.AutoLottoNumberGenerator;
+import lotto.domain.strategy.ManualLottoNumberGenerator;
 import lotto.domain.strategy.NumberGenerator;
 import lotto.view.LottoGameInputView;
 import lotto.view.LottoGameOutputView;
@@ -20,10 +21,16 @@ public class LottoGameApp {
   private void start() {
     LottoGameInputView lottoGameInputView = new LottoGameInputView();
     lottoGameInputView.setPurchaseAmount();
+    lottoGameInputView.setManualAmount();
+    lottoGameInputView.setManualNumbers();
 
-    LottoGames lottoGames = LottoGames.from(
-        makeNumberGenerators(lottoGameInputView.getPurchaseAmount()));
+    List<NumberGenerator> numberGenerators = makeNumberGenerators(
+        lottoGameInputView.getAutoAmount(), lottoGameInputView.getManualAmount(),
+        lottoGameInputView.getManualNumbers());
+    LottoGames lottoGames = LottoGames.from(numberGenerators);
 
+    LottoGameOutputView.printLottoPurchase(lottoGameInputView.getAutoAmount(),
+        lottoGameInputView.getManualAmount());
     LottoGameOutputView.printLottoNumbers(lottoGames);
     lottoGameInputView.setWinNumbers();
     lottoGameInputView.setBonusBall();
@@ -36,10 +43,14 @@ public class LottoGameApp {
 
   }
 
-  private List<NumberGenerator> makeNumberGenerators(int purchaseAmount) {
+  private List<NumberGenerator> makeNumberGenerators(int auto, int manual,
+      List<String> manualNumbers) {
     List<NumberGenerator> lottoNumberGenerators = new ArrayList<>();
-    for (int i = 0; i < purchaseAmount; i++) {
-      lottoNumberGenerators.add(new LottoNumberGenerator());
+    for (int i = 0; i < auto; i++) {
+      lottoNumberGenerators.add(new AutoLottoNumberGenerator());
+    }
+    for (int i = 0; i < manual; i++) {
+      lottoNumberGenerators.add(new ManualLottoNumberGenerator(manualNumbers.get(i)));
     }
     return lottoNumberGenerators;
   }

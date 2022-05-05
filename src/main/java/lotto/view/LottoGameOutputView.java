@@ -14,6 +14,8 @@ public class LottoGameOutputView {
   public static final String LOTTO_MATCH_WITH_BONUS_MESSAGE = "%d 개 일치, 보너스 볼 일치(%d)- %d개\n";
   private static final String LOTTO_STATS_MESSAGE = "당첨 통계";
   private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %.2f 입니다.";
+  private static final String LOTTO_PURCHASE_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
+
 
   private LottoGameOutputView() {
   }
@@ -68,12 +70,16 @@ public class LottoGameOutputView {
   }
 
   private static void printGameResultMessage(LottoReword targetReword, LottoRewords rewords) {
-    System.out.printf(LOTTO_MATCH_MESSAGE, targetReword.getMatchCount(), rewords.getRewordSum(),
+    System.out.printf(LOTTO_MATCH_MESSAGE, targetReword.getMatchCount(), targetReword.getMoney(),
         rewords.getSize());
   }
 
   private static void printGameResultWithBonus(LottoReword targetReword, LottoRewords rewords) {
     System.out.printf(LOTTO_MATCH_WITH_BONUS_MESSAGE, targetReword.getMatchCount(),
-        rewords.getRewordSum(), rewords.getSize());
+        targetReword.getMoney(), rewords.getSize());
+  }
+
+  public static void printLottoPurchase(int autoAmount, int manualAmount) {
+    System.out.printf(LOTTO_PURCHASE_MESSAGE, manualAmount, autoAmount);
   }
 }
