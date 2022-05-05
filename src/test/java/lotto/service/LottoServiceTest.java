@@ -3,7 +3,6 @@ package lotto.service;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.RandomNumberGenerator;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -21,6 +20,6 @@ class LottoServiceTest {
         Lottos lottos = lottoService.generateRandomLottos(new RandomNumberGenerator(), totalPrice, eachPrice);
         List<Lotto> lottoList = (List< Lotto >) ReflectionTestUtils.getField(lottos, "lottos");
 
-        assertThat(lottoList.size()).isEqualTo(resultCount);
+        assertThat(lottoList).hasSize(resultCount);
     }
 }
