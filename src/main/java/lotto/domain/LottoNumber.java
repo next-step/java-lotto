@@ -15,18 +15,18 @@ public class LottoNumber {
     this.value = value;
   }
 
-  public static LottoNumber of(int value) {
+  public static LottoNumber from(int value) {
     if (checkBound(value)) {
       throw new InvalidLottoNumberException(String.valueOf(value));
     }
     return new LottoNumber(value);
   }
 
-  public static LottoNumber of(String value) {
+  public static LottoNumber from(String value) {
     if (!CONTAINS_ONLY_NUMBER_PATTERN.matcher(value).find()) {
       throw new InvalidLottoNumberException(value);
     }
-    return of(Integer.parseInt(value));
+    return from(Integer.parseInt(value));
   }
 
   @Override

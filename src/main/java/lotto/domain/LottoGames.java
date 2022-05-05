@@ -14,19 +14,19 @@ public class LottoGames {
     this.values = values;
   }
 
-  public static LottoGames of(List<NumberGenerator> numberGenerators) {
+  public static LottoGames from(List<NumberGenerator> numberGenerators) {
     List<LottoGame> lottoGames = numberGenerators.stream()
-        .map(numberGenerator -> LottoGame.of(numberGenerator))
+        .map(numberGenerator -> LottoGame.from(numberGenerator))
         .collect(Collectors.toList());
     return new LottoGames(lottoGames);
   }
 
-  public LottoDrawResults draw(LottoNumbers winNumbers, LottoNumber bonusNumber) {
-    List<LottoDrawResult> lottoDrawResults = new ArrayList<>();
+  public LottoRewords draw(LottoNumbers winNumbers, LottoNumber bonusNumber) {
+    List<LottoReword> lottoRewords = new ArrayList<>();
     for (LottoGame lottoGame : values) {
-      lottoDrawResults.add(lottoGame.draw(winNumbers, bonusNumber));
+      lottoRewords.add(lottoGame.draw(winNumbers, bonusNumber));
     }
-    return new LottoDrawResults(lottoDrawResults);
+    return LottoRewords.from(lottoRewords);
   }
 
   public List<LottoGame> getValues() {

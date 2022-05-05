@@ -1,8 +1,8 @@
 package calculator;
 
 import calculator.domain.Calculator;
-import calculator.view.CalculatorInputView;
-import calculator.view.CalculatorResultView;
+import lotto.domain.strategy.view.CalculatorInputView;
+import lotto.domain.strategy.view.CalculatorResultView;
 
 public class CalculatorApp {
 

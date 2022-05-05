@@ -13,18 +13,18 @@ public class LottoNumbers {
     this.values = values;
   }
 
-  public static LottoNumbers of(List<Integer> lottoNumbers) {
+  public static LottoNumbers from(List<Integer> lottoNumbers) {
     List<LottoNumber> values = new ArrayList<>();
     for (Integer number : lottoNumbers) {
-      values.add(LottoNumber.of(number));
+      values.add(LottoNumber.from(number));
     }
     return new LottoNumbers(values);
   }
 
-  public static LottoNumbers of(String lottoNumbers) {
+  public static LottoNumbers from(String lottoNumbers) {
     List<LottoNumber> values = new ArrayList<>();
     for (String lottoNumber : lottoNumbers.split(LOTTO_NUMBER_DELIMITER)) {
-      values.add(LottoNumber.of(lottoNumber.trim()));
+      values.add(LottoNumber.from(lottoNumber.trim()));
     }
     return new LottoNumbers(values);
   }

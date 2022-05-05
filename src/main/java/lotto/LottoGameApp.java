@@ -2,10 +2,10 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.LottoDrawResults;
 import lotto.domain.LottoGames;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
+import lotto.domain.LottoRewords;
 import lotto.domain.strategy.LottoNumberGenerator;
 import lotto.domain.strategy.NumberGenerator;
 import lotto.view.LottoGameInputView;
@@ -21,18 +21,18 @@ public class LottoGameApp {
     LottoGameInputView lottoGameInputView = new LottoGameInputView();
     lottoGameInputView.setPurchaseAmount();
 
-    LottoGames lottoGames = LottoGames.of(
+    LottoGames lottoGames = LottoGames.from(
         makeNumberGenerators(lottoGameInputView.getPurchaseAmount()));
 
     LottoGameOutputView.printLottoNumbers(lottoGames);
     lottoGameInputView.setWinNumbers();
     lottoGameInputView.setBonusBall();
 
-    LottoDrawResults lottoDrawResults = lottoGames.draw(
-        LottoNumbers.of(lottoGameInputView.getWinNumbers()),
-        LottoNumber.of(lottoGameInputView.getBonusBallNumber()));
+    LottoRewords lottoRewords = lottoGames.draw(
+        LottoNumbers.from(lottoGameInputView.getWinNumbers()),
+        LottoNumber.from(lottoGameInputView.getBonusBallNumber()));
 
-    LottoGameOutputView.printGameResult(lottoDrawResults);
+    LottoGameOutputView.printGameResult(lottoRewords);
 
   }
 

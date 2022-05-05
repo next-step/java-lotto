@@ -13,20 +13,19 @@ public class LottoGame {
     this.lottoNumbers = lottoNumbers;
   }
 
-  public static LottoGame of(String lottoNumbers) {
+  public static LottoGame from(String lottoNumbers) {
     checkNumberLength(lottoNumbers);
-    return new LottoGame(LottoNumbers.of(lottoNumbers));
+    return new LottoGame(LottoNumbers.from(lottoNumbers));
   }
 
-  public static LottoGame of(NumberGenerator numberGenerator) {
-    return new LottoGame(LottoNumbers.of(numberGenerator.generate()));
+  public static LottoGame from(NumberGenerator numberGenerator) {
+    return new LottoGame(LottoNumbers.from(numberGenerator.generate()));
   }
 
-  public LottoDrawResult draw(LottoNumbers winNumbers, LottoNumber bonusNumber) {
+  public LottoReword draw(LottoNumbers winNumbers, LottoNumber bonusNumber) {
     int matchCount = lottoNumbers.getMatchNumbers(winNumbers).getNumberSize();
     boolean isBonusMatch = winNumbers.isBonusMatch(bonusNumber);
-    return new LottoDrawResult(matchCount, LottoReword.getWinMoney(matchCount, isBonusMatch),
-        isBonusMatch);
+    return LottoReword.getReword(matchCount, isBonusMatch);
   }
 
   public LottoNumbers getLottoNumbers() {

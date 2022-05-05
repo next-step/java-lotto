@@ -1,4 +1,4 @@
-package calculator.view;
+package lotto.domain.strategy.view;
 
 import calculator.exception.UserInputFailException;
 import java.util.NoSuchElementException;

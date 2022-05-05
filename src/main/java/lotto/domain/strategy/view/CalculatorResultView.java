@@ -1,4 +1,4 @@
-package calculator.view;
+package lotto.domain.strategy.view;
 
 import calculator.domain.Number;
 

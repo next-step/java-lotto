@@ -23,10 +23,10 @@ class LottoGamesTest {
       numberGenerators.add(new FixedNumberGenerator(numbers));
       expectGenerators.add(new FixedNumberGenerator(numbers));
     }
-    LottoGames lottoGames = LottoGames.of(numberGenerators);
+    LottoGames lottoGames = LottoGames.from(numberGenerators);
 
     assertThat(lottoGames).usingRecursiveComparison()
-        .isEqualTo(LottoGames.of(expectGenerators));
+        .isEqualTo(LottoGames.from(expectGenerators));
   }
 
   @ParameterizedTest
@@ -39,13 +39,13 @@ class LottoGamesTest {
     for (int i = 0; i < gameCount; i++) {
       numberGenerators.add(new FixedNumberGenerator(lottoNumbers));
     }
-    LottoGames lottoGames = LottoGames.of(numberGenerators);
-    LottoNumbers winLottoNumbers = LottoNumbers.of(winNumbers);
+    LottoGames lottoGames = LottoGames.from(numberGenerators);
+    LottoNumbers winLottoNumbers = LottoNumbers.from(winNumbers);
 
-    LottoDrawResults lottoDrawResults = lottoGames.draw(winLottoNumbers, null);
+    LottoRewords lottoRewords = lottoGames.draw(winLottoNumbers, null);
 
-    assertThat(lottoDrawResults.getRewordAll()).isEqualTo(
-        LottoReword.getWinMoney(matchCount, false) * gameCount);
+    assertThat(lottoRewords.getRewordSum()).isEqualTo(
+        LottoReword.getReword(matchCount, false).getMoney() * gameCount);
   }
 
   @ParameterizedTest
@@ -59,13 +59,13 @@ class LottoGamesTest {
     for (int i = 0; i < gameCount; i++) {
       numberGenerators.add(new FixedNumberGenerator(lottoNumbers));
     }
-    LottoGames lottoGames = LottoGames.of(numberGenerators);
-    LottoNumbers winLottoNumbers = LottoNumbers.of(winNumbers);
+    LottoGames lottoGames = LottoGames.from(numberGenerators);
+    LottoNumbers winLottoNumbers = LottoNumbers.from(winNumbers);
 
-    LottoDrawResults lottoDrawResults = lottoGames
-        .draw(winLottoNumbers, LottoNumber.of(bonusNumber));
+    LottoRewords lottoRewords = lottoGames
+        .draw(winLottoNumbers, LottoNumber.from(bonusNumber));
 
-    assertThat(lottoDrawResults.getRewordAll()).isEqualTo(
-        LottoReword.getWinMoney(matchCount, true) * gameCount);
+    assertThat(lottoRewords.getRewordSum()).isEqualTo(
+        LottoReword.getReword(matchCount, true).getMoney() * gameCount);
   }
 }

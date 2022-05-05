@@ -70,7 +70,7 @@ public class LottoGameInputView {
 
   private void inputPurchaseAmount() {
     purchaseAmount = scanner.nextInt() / LottoGame.GAME_PRICE;
-    if(purchaseAmount == 0){
+    if (purchaseAmount == 0) {
       throw new InvalidPurchaseAmountException();
     }
     scanner.nextLine();
