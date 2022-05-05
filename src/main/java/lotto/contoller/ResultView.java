@@ -23,8 +23,6 @@ public class ResultView {
     }
 
     public void printLottos(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
-            System.out.println(lotto);
-        }
+        lottos.stream().forEach(System.out::println);
     }
 }
