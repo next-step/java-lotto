@@ -13,14 +13,11 @@ public class LottoNumber {
         this.number = validateNumberRange(number);
     }
     public LottoNumber(String number) {
-        if (!isDigit(number)) {
-            throw new IllegalArgumentException(String.format("%s는 숫자가 아닙니다.", number));
+        try {
+            this.number = validateNumberRange(Integer.parseInt(number));
+        } catch (NumberFormatException exception) {
+            throw new NumberFormatException(String.format("%s는 숫자가 아닙니다.", number));
         }
-        this.number = validateNumberRange(Integer.parseInt(number));
-    }
-
-    private boolean isDigit(String number) {
-        return number.chars().allMatch(Character::isDigit);
     }
 
     private int validateNumberRange(int number) {

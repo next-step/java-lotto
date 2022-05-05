@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -10,7 +9,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 class LottoNumberTest {
     @Test
     void LottoNumber_숫자가_아닌경우() {
-        assertThatThrownBy(() -> new LottoNumber("a")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new LottoNumber("a")).isInstanceOf(NumberFormatException.class);
     }
 
     @ParameterizedTest

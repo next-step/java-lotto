@@ -8,14 +8,11 @@ public class Operand {
     }
 
     Operand(String number) {
-        if (!isDigit(number)) {
-            throw new IllegalArgumentException(String.format("%s는 숫자가 아닙니다.", number));
+        try {
+            this.number = Integer.parseInt(number);
+        } catch (NumberFormatException exception) {
+            throw new NumberFormatException(String.format("%s는 숫자가 아닙니다.", number));
         }
-        this.number = Integer.parseInt(number);
-    }
-
-    private boolean isDigit(String number) {
-        return number.chars().filter(c -> c != '-').allMatch(Character::isDigit);
     }
 
     public int getNumber() {
