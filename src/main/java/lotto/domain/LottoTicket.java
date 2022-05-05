@@ -27,11 +27,16 @@ public class LottoTicket {
   private int getMatchedLottoNumberCount(List<LottoNumber> winLottoNumbers) {
     int matchedCount = 0;
     for (LottoNumber lottoNumber : lottoNumbers) {
-      if (winLottoNumbers.contains(lottoNumber)) {
-        matchedCount++;
-      }
+      matchedCount += getMatchedCount(winLottoNumbers, lottoNumber);
     }
     return matchedCount;
+  }
+
+  private int getMatchedCount(List<LottoNumber> winLottoNumbers, LottoNumber lottoNumber) {
+    if (winLottoNumbers.contains(lottoNumber)) {
+      return 1;
+    }
+    return 0;
   }
 
   private void validateSize(List<LottoNumber> lottoNumbers) {
