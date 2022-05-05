@@ -67,4 +67,20 @@ public class LottoTest {
 
     assertThat(lotto.toStringForPrinting()).isEqualTo(expectedLottoString);
   }
+
+  @Test
+  void hasNumber_성공() {
+    Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+    LottoNumber number = new LottoNumber(6);
+
+    assertThat(lotto.hasNumber(number)).isTrue();
+  }
+
+  @Test
+  void hasNumber_실패() {
+    Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+    LottoNumber number = new LottoNumber(7);
+
+    assertThat(lotto.hasNumber(number)).isFalse();
+  }
 }
