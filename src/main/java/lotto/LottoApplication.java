@@ -13,7 +13,7 @@ public class LottoApplication {
   public static void main(String[] args) {
     LottoTickets lottoTickets = LottoStore.buy(Money.wons(InputView.getAmount()));
     ResultView.print(lottoTickets);
-    LottoTicket winLottoTicket = LottoFactory.create(InputView.getWinNumbers());
+    LottoTicket winLottoTicket = LottoFactory.createManual(InputView.getWinNumbers());
     ResultView.print(lottoTickets.getResultStatistics(winLottoTicket));
   }
 

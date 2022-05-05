@@ -33,4 +33,8 @@ public enum LottoRank {
     return matchCount;
   }
 
+  @Override
+  public String toString() {
+    return matchCount + "개 일치 (" + cashPrize + "원)";
+  }
 }

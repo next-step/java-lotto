@@ -12,14 +12,14 @@ class LottoNumberTest {
   @Test
   @DisplayName("로또번호 생성")
   void givenNumber_ShouldCreated() {
-    assertThat(new LottoNumber(1)).isEqualTo(new LottoNumber(1));
+    assertThat(LottoNumber.from(1)).isEqualTo(LottoNumber.from(1));
   }
 
   @Test
   @DisplayName("로또번호에 포함되지 않는 번호 생성 예외")
   void givenNumber_ShouldException() {
-    assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(0));
-    assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(46));
+    assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.from(0));
+    assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.from(46));
   }
 
 }

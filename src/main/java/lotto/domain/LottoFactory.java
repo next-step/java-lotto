@@ -9,44 +9,45 @@ import java.util.stream.Collectors;
 public class LottoFactory {
 
   private static final int LOTTO_NUMBERS_SIZE = 6;
+
   private static final int MIN_LOTTO_NUMBER = 1;
   private static final int MAX_LOTTO_NUMBER = 45;
-
   public static final String DELIMITER = ",";
 
   private static final List<LottoNumber> allLottoNumbers = new ArrayList<>(MAX_LOTTO_NUMBER);
 
   static {
     for (int number = MIN_LOTTO_NUMBER; number < MAX_LOTTO_NUMBER; number++) {
-      allLottoNumbers.add(new LottoNumber(number));
+      allLottoNumbers.add(LottoNumber.from(number));
     }
   }
 
-  public static LottoTicket create() {
+  public static LottoTicket createAuto() {
     Collections.shuffle(allLottoNumbers);
     return new LottoTicket(allLottoNumbers.stream()
         .limit(LOTTO_NUMBERS_SIZE)
         .collect(Collectors.toList()));
   }
 
-  public static LottoTicket create(String numbers) {
-    return create(numbers.split(DELIMITER));
+  public static LottoTicket createManual(String numbers) {
+    if (isBlank(numbers)) {
+      throw new IllegalArgumentException("로또 번호가 비어있습니다.");
+    }
+    return createManual(numbers.split(DELIMITER));
   }
 
-  public static LottoTicket create(String... numbers) {
-    return create(Arrays.stream(numbers)
-        .map(LottoNumber::new)
+  private static LottoTicket createManual(String... numbers) {
+    return createManual(Arrays.stream(numbers)
+        .map(LottoNumber::from)
         .collect(Collectors.toList()));
   }
 
-  public static LottoTicket create(Integer... numbers) {
-    return create(Arrays.stream(numbers)
-        .map(LottoNumber::new)
-        .collect(Collectors.toList()));
-  }
-
-  private static LottoTicket create(List<LottoNumber> lottoNumbers) {
+  private static LottoTicket createManual(List<LottoNumber> lottoNumbers) {
     return new LottoTicket(lottoNumbers);
+  }
+
+  private static boolean isBlank(String numbers) {
+    return numbers == null || numbers.isBlank();
   }
 
 }

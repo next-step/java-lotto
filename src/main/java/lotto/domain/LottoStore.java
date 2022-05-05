@@ -11,7 +11,7 @@ public class LottoStore {
     long ticketCount = getTicketCount(amount);
     List<LottoTicket> lottoTickets = new ArrayList<>();
     for (int i = 0; i < ticketCount; i++) {
-      lottoTickets.add((LottoFactory.create()));
+      lottoTickets.add((LottoFactory.createAuto()));
     }
     return new LottoTickets(lottoTickets);
   }

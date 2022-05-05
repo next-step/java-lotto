@@ -19,7 +19,8 @@ public class LottoStatistics {
 
   public double getRateOfReturn() {
     return Money.wons(getTotalCashPrizeAmount())
-        .divide(getTotalPaidAmount()).doubleValue();
+        .divide(getTotalPaidAmount())
+        .doubleValue();
   }
 
   public long getCountByLottoRank(final LottoRank lottoRank) {

@@ -18,11 +18,10 @@ public class ResultView {
   public static void print(LottoStatistics resultStatistics) {
     out.println("당첨 통계");
     out.println("---------");
-    out.println("3개 일치 (5000원)- " + resultStatistics.getCountByLottoRank(LottoRank.FOURTH) + "개");
-    out.println("4개 일치 (50000원)- " + resultStatistics.getCountByLottoRank(LottoRank.THIRD) + "개");
-    out.println("5개 일치 (5000원)- " + resultStatistics.getCountByLottoRank(LottoRank.SECOND) + "개");
-    out.println(
-        "6개 일치 (2000000000원)- " + resultStatistics.getCountByLottoRank(LottoRank.TOP) + "개");
-    out.print("총수익률은 " + resultStatistics.getRateOfReturn() + "입니다.");
+    out.println(LottoRank.FOURTH + "- " + resultStatistics.getCountByLottoRank(LottoRank.FOURTH) + "개");
+    out.println(LottoRank.THIRD + "- " + resultStatistics.getCountByLottoRank(LottoRank.THIRD) + "개");
+    out.println(LottoRank.SECOND + "- " + resultStatistics.getCountByLottoRank(LottoRank.SECOND) + "개");
+    out.println(LottoRank.TOP + "- " + resultStatistics.getCountByLottoRank(LottoRank.TOP) + "개");
+    out.print("총 수익률은 " + resultStatistics.getRateOfReturn() + "입니다.");
   }
 }
