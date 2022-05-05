@@ -21,7 +21,7 @@ public class LottoGroup {
     }
 
     public LottoGroup(int lottoCount, LottoNumberGenerateStrategy lottoNumberGenerateStrategy) {
-        this.lottos = IntStream.range(0, lottoCount).mapToObj(i -> new Lotto(lottoNumberGenerateStrategy)).collect(Collectors.toList());
+        this(IntStream.range(0, lottoCount).mapToObj(i -> new Lotto(lottoNumberGenerateStrategy)).collect(Collectors.toList()));
     }
 
     public LottoGroupResult getLottoGroupResult(Lotto winningLotto) {

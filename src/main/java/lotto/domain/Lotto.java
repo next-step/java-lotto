@@ -2,7 +2,11 @@ package lotto.domain;
 
 import lotto.pattern.LottoNumberGenerateStrategy;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -11,6 +15,11 @@ public class Lotto {
 
     private final List<LottoNumber> numbers;
 
+    public Lotto(List<LottoNumber> numbers) {
+        validateLottoNumber(numbers);
+        this.numbers = numbers;
+    }
+
     public Lotto(int[] numbers) {
         this(IntStream.of(numbers)
                 .boxed()
@@ -18,16 +27,8 @@ public class Lotto {
                 .collect(Collectors.toList()));
     }
 
-    public Lotto(List<LottoNumber> numbers) {
-        validateLottoNumber(numbers);
-        this.numbers = numbers;
-    }
-
     public Lotto(LottoNumberGenerateStrategy lottoNumberGenerateStrategy) {
-        List<LottoNumber> numbers = lottoNumberGenerateStrategy.generate();
-        validateNumberSize(numbers.size());
-        validateDuplicateNumbers(numbers);
-        this.numbers = numbers;
+        this(lottoNumberGenerateStrategy.generate());
     }
 
     public Rank getRank(Lotto winningLotto) {
