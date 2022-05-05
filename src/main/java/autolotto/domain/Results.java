@@ -1,28 +1,30 @@
 package autolotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import autolotto.constant.Rank;
+
+import java.util.*;
 
 public class Results {
-    private List<Result> results = new ArrayList<>();
+    private final Map<Rank, Integer> results = new LinkedHashMap<>();
 
-    public Results() {
-        results.add(new Result(3, 5000));
-        results.add(new Result(4, 50000));
-        results.add(new Result(5, 1_500_000));
-        results.add(new Result(6, 2_000_000_000));
+    public int plusWinners(Rank rank) {
+        int winners = results.getOrDefault(rank, 0);
+        results.put(rank, ++winners);
+        return winners;
     }
 
-    public Optional<Result> find(int numberOfWins) {
-        return results.stream().filter(result -> result.isMatch(numberOfWins)).findFirst();
+    public int countOfWinners(Rank rank) {
+        return results.getOrDefault(rank, 0);
     }
 
-    public long prize() {
-        return results.stream().mapToLong(Result::prize).sum();
+    public double roi(int cost) {
+        return (double) profit() / cost * 100;
     }
 
-    public List<Result> getResults() {
-        return results;
+    long profit() {
+        return results.keySet()
+                .stream()
+                .mapToLong(rank -> rank.getWinningMoney() * countOfWinners(rank))
+                .sum();
     }
 }

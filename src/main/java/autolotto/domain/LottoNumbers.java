@@ -7,6 +7,7 @@ import java.util.Set;
 
 public class LottoNumbers {
     private static final int LOTTO_NUMBER = 6;
+    private static final int BONUS_BALL_CONDITION = 5;
     private Set<Integer> lottoNumbers;
 
     public LottoNumbers(Set<Integer> lottoNumbers) {
@@ -28,6 +29,14 @@ public class LottoNumbers {
 
     public boolean contains(int number) {
         return lottoNumbers.contains(number);
+    }
+
+    public boolean checkBonus(WinningLotto winningLotto, int countOfMatch) {
+        boolean isBonus = false;
+        if (countOfMatch == BONUS_BALL_CONDITION) {
+            return lottoNumbers.contains(winningLotto.getBonusBall());
+        }
+        return isBonus;
     }
 
     @Override

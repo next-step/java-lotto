@@ -1,10 +1,8 @@
 package autolotto.domain;
 
+import autolotto.constant.Rank;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-
-import java.util.Optional;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,23 +14,32 @@ public class ResultsTest {
         results = new Results();
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {
-            "3:3:5000",
-            "4:4:50000"
-    }, delimiter = ':')
-    void matchCountGiven_ReturnResult(int expect, int actual, int prize) {
-        assertThat(results.find(expect)).isEqualTo(Optional.of(new Result(actual, prize)));
+    @Test
+    void ReturnPrize() {
+        results.plusWinners(Rank.FIRST);
+        results.plusWinners(Rank.SECOND);
+        assertThat(results.profit()).isEqualTo(2_030_000_000L);
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {
-            "3:5000",
-            "4:50000"
-    }, delimiter = ':')
-    void ReturnPrize(int numberOfWins, long prize) {
-        results.find(numberOfWins).ifPresent(Result::plusWinners);
+    @Test
+    void rankGiven_ReturnIncreasedWinners() {
+        assertThat(results.plusWinners(Rank.FIRST)).isEqualTo(1);
+        assertThat(results.plusWinners(Rank.FIRST)).isEqualTo(2);
+        assertThat(results.plusWinners(Rank.SECOND)).isEqualTo(1);
+    }
 
-        assertThat(results.prize()).isEqualTo(prize);
+    @Test
+    void rankGiven_ReturnWinners() {
+        results.plusWinners(Rank.FIRST);
+        results.plusWinners(Rank.SECOND);
+        assertThat(results.countOfWinners(Rank.FIRST)).isEqualTo(1);
+        assertThat(results.countOfWinners(Rank.SECOND)).isEqualTo(1);
+        assertThat(results.countOfWinners(Rank.THIRD)).isEqualTo(0);
+    }
+
+    @Test
+    void roi() {
+        results.plusWinners(Rank.FIFTH);
+        assertThat(results.roi(5000)).isEqualTo(100);
     }
 }
