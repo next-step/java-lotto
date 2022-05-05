@@ -1,7 +1,10 @@
 package lotto.dto.input;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.LottoNumber;
+import lotto.domain.WinningNumbers;
 import lotto.util.SplitUtil;
+
+import java.util.TreeSet;
 
 public class LastWinningData {
 
@@ -11,8 +14,12 @@ public class LastWinningData {
         this.winningNumberValue = winningNumberValue;
     }
 
-    public LottoNumbers toWinningLottoNumbers() {
-        String[] winningNumbers = SplitUtil.split(winningNumberValue);
-        return LottoNumbers.winningLottoNumbers(winningNumbers);
+    public WinningNumbers toWinningLottoNumbers() {
+        String[] winningNumberValues = SplitUtil.split(winningNumberValue);
+        TreeSet<LottoNumber> winningNumberTreeSet = new TreeSet<>();
+        for (String value : winningNumberValues) {
+            winningNumberTreeSet.add(new LottoNumber(value));
+        }
+        return new WinningNumbers(winningNumberTreeSet);
     }
 }

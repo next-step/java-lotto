@@ -17,7 +17,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public void confirmAll(LottoNumbers winningNumbers) {
+    public void confirmAll(WinningNumbers winningNumbers) {
         for (Lotto lotto : lottos) {
             lotto.confirm(winningNumbers);
         }

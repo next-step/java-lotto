@@ -22,13 +22,13 @@ public class LottoStore {
         return fullLottoNumbers;
     }
 
-    private static LottoNumbers randomLottoNumbers() {
+    private static LottoMarkingNumbers randomLottoNumbers() {
         List<LottoNumber> random = new ArrayList<>();
         Collections.shuffle(FULL_LOTTO_NUMBERS);
-        for (int i = 0; i < LottoNumbers.LOTTO_NUMBER_COUNT; i++) {
+        for (int i = 0; i < LottoMarkingNumbers.LOTTO_NUMBER_COUNT; i++) {
             random.add(FULL_LOTTO_NUMBERS.get(i));
         }
-        return new LottoNumbers(random);
+        return new LottoMarkingNumbers(random);
     }
 
     public static Lottos createLottos(int count) {

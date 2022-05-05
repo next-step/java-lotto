@@ -7,25 +7,12 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.TreeSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoNumbersTest {
-
-    @Test
-    @DisplayName("LottoNumbers 3,1,5,7,8,2 순서의 리스트로 생성하면 1,2,3,5,7,8로 정렬되여 생성된다.")
-    void sort() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(new LottoNumber(3));
-        lottoNumbers.add(new LottoNumber(1));
-        lottoNumbers.add(new LottoNumber(5));
-        lottoNumbers.add(new LottoNumber(7));
-        lottoNumbers.add(new LottoNumber(8));
-        lottoNumbers.add(new LottoNumber(2));
-
-        assertThat(new LottoNumbers(lottoNumbers).toList()).containsExactly(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(5), new LottoNumber(7), new LottoNumber(8));
-    }
+class LottoMarkingNumbersTest {
 
     @Test
     @DisplayName("1,2,3,11,12,13을 가지고 있는 LottoNumbers와 2,3,4,14,24,34를 가지고 있는 List와의 matchCount는 2이다.")
@@ -38,7 +25,7 @@ class LottoNumbersTest {
         lottoNumbers.add(new LottoNumber(12));
         lottoNumbers.add(new LottoNumber(13));
 
-        List<LottoNumber> lottoNumbers2 = new ArrayList<>();
+        TreeSet<LottoNumber> lottoNumbers2 = new TreeSet<>();
         lottoNumbers2.add(new LottoNumber(2));
         lottoNumbers2.add(new LottoNumber(3));
         lottoNumbers2.add(new LottoNumber(4));
@@ -46,7 +33,7 @@ class LottoNumbersTest {
         lottoNumbers2.add(new LottoNumber(24));
         lottoNumbers2.add(new LottoNumber(34));
 
-        assertThat(new LottoNumbers(lottoNumbers).matchCount(new LottoNumbers(lottoNumbers2))).isEqualTo(2);
+        assertThat(new LottoMarkingNumbers(lottoNumbers).matchCount(new WinningNumbers(lottoNumbers2))).isEqualTo(2);
     }
 
     @Test
@@ -69,12 +56,12 @@ class LottoNumbersTest {
         lottoNumbers2.add(new LottoNumber(5));
         lottoNumbers2.add(new LottoNumber(6));
 
-        assertThat(new LottoNumbers(lottoNumbers)).isEqualTo(new LottoNumbers(lottoNumbers2));
+        assertThat(new LottoMarkingNumbers(lottoNumbers)).isEqualTo(new LottoMarkingNumbers(lottoNumbers2));
     }
 
     @Test
     @DisplayName("로또 번호가 6개가 아닐경우 InvalidLottoNumberCount 를 반환한다.")
     void InvalidNumberException() {
-        assertThatThrownBy(() -> new LottoNumbers(Arrays.asList(new LottoNumber(1)))).isInstanceOf(InvalidLottoNumberCount.class);
+        assertThatThrownBy(() -> new LottoMarkingNumbers(Arrays.asList(new LottoNumber(1)))).isInstanceOf(InvalidLottoNumberCount.class);
     }
 }

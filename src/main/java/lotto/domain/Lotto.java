@@ -7,14 +7,14 @@ import java.util.Optional;
 public class Lotto {
 
     private MatchResult matchResult;
-    private final LottoNumbers lottoNumbers;
+    private final LottoMarkingNumbers lottoMarkingNumbers;
 
-    public Lotto(LottoNumbers lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public Lotto(LottoMarkingNumbers lottoMarkingNumbers) {
+        this.lottoMarkingNumbers = lottoMarkingNumbers;
     }
 
-    public void confirm(LottoNumbers winningNumbers) {
-        int matchCount = lottoNumbers.matchCount(winningNumbers);
+    public void confirm(WinningNumbers winningNumbers) {
+        int matchCount = lottoMarkingNumbers.matchCount(winningNumbers);
         this.matchResult = MatchResult.findByMatchCount(matchCount);
     }
 
@@ -24,6 +24,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return lottoNumbers.toString();
+        return lottoMarkingNumbers.toString();
     }
 }

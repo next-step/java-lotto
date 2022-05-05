@@ -19,7 +19,7 @@ public class LottoBuyer {
         return purchaseAmount / LOTTO_PRICE;
     }
 
-    public void confirmLottos(LottoNumbers lastWinningNumbers) {
+    public void confirmLottos(WinningNumbers lastWinningNumbers) {
         lottos.confirmAll(lastWinningNumbers);
     }
 
