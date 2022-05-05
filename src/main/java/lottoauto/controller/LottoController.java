@@ -1,13 +1,13 @@
 package lottoauto.controller;
 
+import lottoauto.domain.Lotto;
+import lottoauto.domain.LottoGame;
 import lottoauto.domain.LottoReport;
-import lottoauto.service.LottoGame;
+import lottoauto.domain.Lottos;
 import lottoauto.view.InputView;
 import lottoauto.view.ResultView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * 구입금액을 입력해 주세요.
@@ -41,14 +41,24 @@ import java.util.Scanner;
  */
 public class LottoController {
     public static void main(String[] args) {
+
         LottoGame lottoGame = new LottoGame(InputView.askLottoMoney());
-        lottoGame.buyLotto();
 
-        lottoGame.checkWinningLotto(InputView.askWinningLotto());
+        Lottos lottos = lottoGame.start();
 
-        lottoGame.start();
+        ResultView.printLottos(lottos.all());
 
-        LottoReport lottoReport = lottoGame.report();
+        LottoReport lottoReport = new LottoReport();
+
+        lottos.reportLottos(lottoReport);
+
+        lottos.checkWinningLotto(new Lotto(InputView.askWinningLotto(), InputView.askWinningBonusNumber()));
+        lottos.match();
+
+        lottos.reportLottoCount(lottoReport);
+
+        lottoReport.reportProfitRate(lottoGame.getProfitRate(lottos));
+
         ResultView.printLottoGameResult(lottoReport);
         ResultView.printLottoGameProfitRate(lottoReport);
     }
