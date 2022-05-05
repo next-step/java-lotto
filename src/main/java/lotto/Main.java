@@ -19,9 +19,7 @@ public class Main {
         List<Lotto> lottos = customer.buy(1000);
         resultView.printLottos(lottos);
 
-
-
-        List<Integer> winningLottoNumbers = inputView.findPrevLottoNumbers();
+        List<Integer> winningLottoNumbers = inputView.findWinningLottoNumbers();
         List<List<Integer>> lists = customer.compareTo(winningLottoNumbers);
 
 //        ResultView resultView = new ResultView(new Revenue(lists, price));

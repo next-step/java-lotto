@@ -17,7 +17,7 @@ public class InputView {
         return value;
     }
 
-    public List<Integer> findPrevLottoNumbers() {
+    public List<Integer> findWinningLottoNumbers() {
         List<Integer> prevLottoNumber = new ArrayList<>();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String value = scanner.nextLine();
