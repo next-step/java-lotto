@@ -29,7 +29,17 @@ public class Lotto {
         if (lottoNumbers.size() != LOTTO_COUNT) {
             throw new IllegalArgumentException("로또 숫자는 6개여야 합니다.");
         }
+
+        if (countDistinctLottoSize(lottoNumbers) < LOTTO_COUNT) {
+            throw new IllegalArgumentException("로또는 중복을 허용하지 않습니다.");
+        }
+
         return lottoNumbers;
+    }
+
+    private int countDistinctLottoSize(List<LottoNumber> lottoNumbers) {
+        return (int) lottoNumbers.stream()
+                .distinct().count();
     }
 
     public int countMatchNumber(Lotto lotto) {

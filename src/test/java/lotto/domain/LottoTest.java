@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 
@@ -15,6 +16,22 @@ public class LottoTest {
     void createLottoTest(String numbers) {
         assertThat(new Lotto(numbers))
                 .isEqualTo(new Lotto(numbers));
+    }
+
+    @DisplayName("로또는 중복된 번호를 가질 수 없다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,1,1,1,1,1", "1,2,3,4,5,5"})
+    void createLottoDistinctTest(String numbers) {
+        assertThatThrownBy(() -> new Lotto(numbers))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("로또는 6개의 숫자로 이루어져야 한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7"})
+    void createLottoLengthTest(String numbers) {
+        assertThatThrownBy(() -> new Lotto(numbers))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("두 로또를 비교해서 일치하는 개수를 반환한다.")
