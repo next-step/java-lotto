@@ -22,11 +22,15 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public static LottoNumber of(int number) {
+    public static LottoNumber from(int number) {
         return lottoNumberCache.get(number);
     }
 
-    public static IntStream fixedRangeClosed() {
+    public static LottoNumber from(String number) {
+        return lottoNumberCache.get(Integer.parseInt(number));
+    }
+
+    public static IntStream rangedClosed() {
         return IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
     }
 
@@ -45,9 +49,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public String toString() {
-        return "LottoNumber{" +
-                "number=" + number +
-                '}';
+//        return "LottoNumber{" +
+//                "number=" + number +
+//                '}';
+        return "" + number;
     }
 
     @Override
