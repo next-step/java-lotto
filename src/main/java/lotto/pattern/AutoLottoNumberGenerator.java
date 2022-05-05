@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class AutoLottoNumberGenerator implements LottoNumberGenerateStrategy {
+    private static final int LOTTO_NUMBER_FIRST_INDEX = 0;
     private static final AutoLottoNumberGenerator INSTANCE = new AutoLottoNumberGenerator();
 
     private AutoLottoNumberGenerator() {
@@ -25,6 +26,6 @@ public class AutoLottoNumberGenerator implements LottoNumberGenerateStrategy {
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
         Collections.shuffle(lottoNumberRange);
-        return lottoNumberRange.subList(0, Lotto.LOTTO_NUMBER_SIZE);
+        return lottoNumberRange.subList(LOTTO_NUMBER_FIRST_INDEX, Lotto.LOTTO_NUMBER_SIZE);
     }
 }
