@@ -5,19 +5,21 @@ import autolotto.domain.*;
 import autolotto.view.LottoInput;
 import autolotto.view.LottoOutput;
 
+import java.util.List;
 import java.util.Set;
 
 public class Lottery {
     public static void main(String[] args) {
         LottoInput lottoInput = new LottoInput();
         LottoOutput lottoOutput = new LottoOutput();
-        Lottos lottos = new Lottos();
 
         int amount = lottoInput.askAmount();
-        int lottoQuantity = lottos.getQuantity(amount);
+        int lottoQuantity = Lottos.getQuantity(amount);
         lottoOutput.printQuantity(lottoQuantity);
 
-        lottos.createLotto(lottoQuantity);
+        List<LottoNumbers> lottoNumbers = Lottos.createLottos(lottoQuantity);
+        Lottos lottos = new Lottos(lottoNumbers);
+
         for (LottoNumbers lottoNumber : lottos.getLottoNumbers()) {
             lottoOutput.println(lottoNumber.toString());
         }

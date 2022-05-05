@@ -3,17 +3,27 @@ package autolotto.domain;
 import autolotto.constant.Rank;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
     private static final int LOTTO_PRICE = 1000;
-    private final List<LottoNumbers> lottoNumbers = new ArrayList<>();
+    private final List<LottoNumbers> lottoNumbers;
 
-    public void createLotto(int quantity) {
+    public Lottos(List<LottoNumbers> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    public static List<LottoNumbers> createLottos(int quantity) {
+        List<LottoNumbers> lottoNumbersByQuantity = new ArrayList<>(quantity);
         for (int count = 0; count < quantity; count++) {
-            LottoNumbers lottoNumbers = new LottoNumbers(LottoGenerator.generate());
-            add(lottoNumbers);
+            lottoNumbersByQuantity.add(new LottoNumbers(LottoGenerator.generate()));
         }
+        return lottoNumbersByQuantity;
+    }
+
+    public static int getQuantity(int amount) {
+        return amount / LOTTO_PRICE;
     }
 
     public Results confirm(WinningLotto winningLotto) {
@@ -31,15 +41,7 @@ public class Lottos {
         return lottoNumbers.size() * LOTTO_PRICE;
     }
 
-    public int getQuantity(int amount) {
-        return amount / LOTTO_PRICE;
-    }
-
     public List<LottoNumbers> getLottoNumbers() {
-        return lottoNumbers;
-    }
-
-    protected void add(LottoNumbers lottoNumbers) {
-        this.lottoNumbers.add(lottoNumbers);
+        return Collections.unmodifiableList(lottoNumbers);
     }
 }
