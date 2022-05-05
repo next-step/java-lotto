@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class LottoGroupResult {
     private static final int DECIMAL_SECOND_POSITION = 100;
@@ -35,7 +36,7 @@ public class LottoGroupResult {
 
         LottoGroupResult that = (LottoGroupResult) o;
 
-        return lottoGroupResult != null ? lottoGroupResult.equals(that.lottoGroupResult) : that.lottoGroupResult == null;
+        return Objects.equals(lottoGroupResult, that.lottoGroupResult);
     }
 
     @Override

@@ -2,10 +2,7 @@ package lotto.domain;
 
 import lotto.pattern.LottoNumberGenerateStrategy;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -72,7 +69,7 @@ public class Lotto {
 
         Lotto lotto = (Lotto) o;
 
-        return numbers != null ? numbers.equals(lotto.numbers) : lotto.numbers == null;
+        return Objects.equals(numbers, lotto.numbers);
     }
 
     @Override
