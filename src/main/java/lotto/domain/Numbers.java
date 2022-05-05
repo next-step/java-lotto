@@ -5,11 +5,13 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Numbers {
+    public static final int START_NUMBER = 1;
+    public static final int END_NUMBER = 45;
     private final List<Integer> numbers = new ArrayList<>();
     private final List<Integer> lottoNumbers = new ArrayList<>();
 
     public Numbers() {
-        for (int i = 1; i <= 45; i++) {
+        for (int i = START_NUMBER; i <= END_NUMBER; i++) {
             numbers.add(i);
         }
 
