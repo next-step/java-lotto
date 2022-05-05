@@ -30,9 +30,9 @@ public class LottoGameControl {
             resultView.displayLottoNumber(lottos.numbers(i));
         }
 
-        LottoGameService lottoGameService = new LottoGameService();
-        List<Integer> pickLottoNumberOfWeek = lottoGameService.pickLottoNumberOfWeek(inputView.lottoNumbers());
-        LottoWinners winners = lottoGameService.match(lottos, pickLottoNumberOfWeek);
+        LottoGameService lottoGameService =
+                new LottoGameService(inputView.lottoNumbers(), inputView.bonusBall());
+        LottoWinners winners = lottoGameService.match(lottos);
         double rate = lottoGameService.moneyProfitRate(money, winners);
 
         resultView.display(winners, rate);

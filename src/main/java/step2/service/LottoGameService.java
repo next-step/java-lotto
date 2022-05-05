@@ -2,35 +2,29 @@ package step2.service;
 
 import step2.domain.LottoWinners;
 import step2.domain.Lottos;
+import step2.domain.WinLottoNumber;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoGameService {
+    private WinLottoNumber winLottoNumber;
 
-    public List<Integer> pickLottoNumberOfWeek(String input) {
-        if (input == null || input.isEmpty())
-            throw new IllegalArgumentException("로또 당첨번호가 비어있습니다");
-
-        String newInput = input.replace(" ", "");
-        String[] split = newInput.split(",");
-        List<Integer> result = Arrays.stream(split)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-
-        if (result.size() != 6)
-            throw new IllegalArgumentException("로또 당첨번호는 6개이다");
-
-        if (result.size() != result.stream().distinct().count())
-            throw new IllegalArgumentException("로또 당첨번호는 유니크 합니다");
-
-        return result;
+    public LottoGameService(String lottoNumbers, String bonusBall) {
+        pickLottoNumberOfWeek(lottoNumbers);
+        addBonusBall(bonusBall);
     }
 
-    public LottoWinners match(Lottos lottos, List<Integer> pickLottoNumberOfWeek) {
-        //매칭
-        return lottos.check(pickLottoNumberOfWeek);
+    private void pickLottoNumberOfWeek(String input) {
+        winLottoNumber = new WinLottoNumber(input);
+    }
+
+    private void addBonusBall(String bonusBall) {
+        winLottoNumber.add(bonusBall);
+    }
+
+    public LottoWinners match(Lottos lottos) {
+        return lottos.match(winLottoNumber.pickLottoNumberOfWeek());
     }
 
     public double moneyProfitRate(int investMoney, LottoWinners winners) {
@@ -38,4 +32,5 @@ public class LottoGameService {
 
         return Math.floor(rate * 100) / 100.0;
     }
+
 }

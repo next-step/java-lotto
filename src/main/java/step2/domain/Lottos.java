@@ -21,7 +21,7 @@ public class Lottos {
         return lottos.get(index).pick();
     }
 
-    public LottoWinners check(List<Integer> pickLottoNumberOfWeek) {
+    public LottoWinners match(List<Integer> pickLottoNumberOfWeek) {
         LottoWinners lottoWinners = new LottoWinners();
         for (Lotto lotto : lottos) {
             int matchCount = lotto.matching(pickLottoNumberOfWeek);
