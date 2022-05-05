@@ -23,6 +23,18 @@ public class ResultView {
     printFormattedLottos(lottos);
   }
 
+  private static void printFormattedLottos(Lottos lottos) {
+    for (Lotto lotto : lottos.getValues()) {
+      System.out.println("[" + getFormattedLotto(lotto) + "]");
+    }
+  }
+
+  private static String getFormattedLotto(Lotto lotto) {
+    return lotto.getValues().stream()
+        .map(LottoNumber::toString)
+        .collect(Collectors.joining(", "));
+  }
+
   public static void printResult(LottoResult result, double yield) {
     System.out.println("당첨 통계");
     System.out.println("---------");
@@ -51,19 +63,5 @@ public class ResultView {
       return RESULT_SECOND_RANK_FORMAT;
     }
     return RESULT_FORMAT;
-  }
-
-  private static void printFormattedLottos(Lottos lottos) {
-    for (Lotto lotto : lottos.getValues()) {
-      System.out.print("[");
-      System.out.print(getFormattedLotto(lotto));
-      System.out.println("]");
-    }
-  }
-
-  private static String getFormattedLotto(Lotto lotto) {
-    return lotto.getValues().stream()
-        .map(LottoNumber::toString)
-        .collect(Collectors.joining(", "));
   }
 }
