@@ -17,7 +17,7 @@ class LottoNumberComparsionTest {
     WinningLotto winningLotto = WinningLotto.create("1, 2, 3, 4, 5, 6");
 
     // when
-    LottoWinStatistocs lottoWinStatistocs = new LottoWinStatistocs(lottos, winningLotto);
+    LottoWinStatistics lottoWinStatistocs = new LottoWinStatistics(lottos, winningLotto);
     Map<LottoRank, Integer> matchResult = lottoWinStatistocs.isMatchResult();
 
     // then
@@ -32,7 +32,7 @@ class LottoNumberComparsionTest {
     WinningLotto winningLotto = WinningLotto.create("1, 2, 3, 4, 5, 6");
 
     // when
-    LottoWinStatistocs lottoWinStatistocs = new LottoWinStatistocs(lottos, winningLotto);
+    LottoWinStatistics lottoWinStatistocs = new LottoWinStatistics(lottos, winningLotto);
     double profitRatioResult = lottoWinStatistocs.isProfitRatio();
 
     // then

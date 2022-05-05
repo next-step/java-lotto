@@ -5,12 +5,12 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class LottoWinStatistocs {
+public class LottoWinStatistics {
 
   private final Lottos lottos;
   private final WinningLotto winningLotto;
 
-  public LottoWinStatistocs(Lottos lottos, WinningLotto winningLotto) {
+  public LottoWinStatistics(Lottos lottos, WinningLotto winningLotto) {
     this.lottos = lottos;
     this.winningLotto = winningLotto;
   }
