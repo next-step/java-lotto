@@ -1,4 +1,4 @@
-package Lotto;
+package Lotto.domain;
 
 import java.util.*;
 
@@ -13,22 +13,24 @@ public class Lottos {
     }
 
     public void createLottoNumbers(int lottoCount) {
-        List<Integer> tmpNumbers = new ArrayList<>();
-        createAllNumbers(tmpNumbers);
+        List<Integer> tmpNumbers = createAllNumbers();
 
         for (int i = 0; i < lottoCount; ++i) {
             pickLottoNumbers(tmpNumbers);
         }
     }
 
-    private void createAllNumbers(List<Integer> tmpNumbers) {
+    private List<Integer> createAllNumbers() {
+        List<Integer> tmpNumbers = new ArrayList<>();
+
         for (int i = 0; i < LOTTO_MAX_NUMBER; ++i) {
             tmpNumbers.add(i+1);
         }
+
+        return tmpNumbers;
     }
 
     private void pickLottoNumbers(List<Integer> tmpNumbers) {
-        //int[] lottoNumbers = new int[LOTTO_NUMBER_SIZE];
         List<Integer> lottoNumbers = new ArrayList<>();
 
         Collections.shuffle(tmpNumbers);
@@ -49,23 +51,7 @@ public class Lottos {
         return list.size();
     }
 
-    public Map<Integer,Integer> checkWinningLotto(List<Integer> winningNumbers) {
-        Map<Integer,Integer> winningLottoMap = new HashMap<>();
-
-        for(Lotto lotto : list) {
-            int winningCount = lotto.checkWinningLottoNumbers(winningNumbers);
-            int rank = 7 - winningCount;
-
-            int cnt;
-            if (winningLottoMap.containsKey(rank)) {
-                cnt = winningLottoMap.get(rank);
-                cnt += 1;
-            } else {
-                cnt = 1;
-            }
-            winningLottoMap.put(rank, cnt);
-        }
-
-        return winningLottoMap;
+    public List<Lotto> getLottoList() {
+        return list;
     }
 }

@@ -1,4 +1,4 @@
-package Lotto;
+package Lotto.domain;
 
 import Lotto.exception.NotFoundRankException;
 
@@ -13,6 +13,8 @@ public enum WinningRankInfo {
     FIFTH(5, 0, ""),
     SIX(6, 0, ""),
     NONE(7, 0, "");
+
+    private static final int VALID_RANK = 4;
 
     private final int rank;
     private final int winningMoney;
@@ -38,4 +40,9 @@ public enum WinningRankInfo {
     public String getRankMessage() {
         return resultMessage;
     }
+
+    public boolean isValidRank() {
+        return rank <= VALID_RANK;
+    }
+
 }

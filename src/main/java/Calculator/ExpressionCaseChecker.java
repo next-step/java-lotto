@@ -24,7 +24,6 @@ public class ExpressionCaseChecker {
     private static void checkPossibleExpression(String[] splitExp) {
         checkExpressionLengthOdd(splitExp);
 
-        // TODO
         Stream<String> stream = Arrays.stream(splitExp);
 
         // 홀수자리는 무조건 숫자, 짝수자리는 무조건 연산자가 나와야함.

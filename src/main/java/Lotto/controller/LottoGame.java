@@ -1,19 +1,17 @@
 package Lotto.controller;
 
-import Lotto.Lottos;
+import Lotto.domain.*;
 import Lotto.view.InputView;
 import Lotto.view.ResultView;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class LottoGame {
 
     private Lottos lottos = new Lottos();
 
-    private int buyMoney = 0;
-    private List<Integer> winningNumbers = new ArrayList<>();
+    private Money money;
+    private WinningLottoNumbers winningNumbers;
 
     public void start() {
         inputBuyMoney();
@@ -26,12 +24,13 @@ public class LottoGame {
     }
 
     private void inputBuyMoney() {
-        lottos.createLottoNumbers(changeMoneyToLottoNum());
+        money = new Money(InputView.inputBuyMoney());
+
+        createMyLottos();
     }
 
-    private int changeMoneyToLottoNum() {
-        buyMoney = InputView.inputBuyMoney();
-        return buyMoney / 1000;
+    private void createMyLottos() {
+        lottos.createLottoNumbers(money.changeMoneyToLottoNum());
     }
 
     private void viewMyLottoNumbers() {
@@ -39,22 +38,20 @@ public class LottoGame {
     }
 
     private void inputWinningLottoNumbers() {
-        splitAndCastWinningNumber(InputView.inputWinningLottoNumbers());
-    }
-
-    private void splitAndCastWinningNumber(String winningLottoNumbersStr) {
-        String[] winningNumbersArr = winningLottoNumbersStr.split(",");
-
-        for (int i = 0; i < 6; ++i) {
-            winningNumbers.add(Integer.parseInt(winningNumbersArr[i]));
-        }
+        winningNumbers = new WinningLottoNumbers(InputView.inputWinningLottoNumbers());
     }
 
     private void viewResult() {
-        Map<Integer, Integer> result = lottos.checkWinningLotto(winningNumbers);
+        Map<WinningRankInfo, Integer> totalRankInfo = LottoMachine.checkWinningLotto(lottos, winningNumbers);
 
-        ResultView.viewResultBoard(result);
+        ResultView.viewResultBoard(totalRankInfo);
 
-        ResultView.viewLottoYield(result, buyMoney);
+        viewYield(totalRankInfo);
+    }
+
+    private void viewYield(Map<WinningRankInfo, Integer> totalRankInfo) {
+        int totalWinningMoney = LottoMachine.calcTotalWinningMoney(totalRankInfo);
+
+        ResultView.viewLottoYield(LottoMachine.calculateYield(totalWinningMoney, money.getMoney()));
     }
 }
