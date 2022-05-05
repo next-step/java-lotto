@@ -35,8 +35,8 @@ public class StringCalculator {
         MULT("*", (n1, n2) -> n1 * n2),
         DIVIDE("/", (n1, n2) -> n1 / n2);
 
-        private String operator;
-        private ToIntBiFunction<Integer, Integer> expression;
+        private final String operator;
+        private final ToIntBiFunction<Integer, Integer> expression;
 
         Operator(String operator, ToIntBiFunction<Integer, Integer> expression) {
             this.operator = operator;
