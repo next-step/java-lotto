@@ -13,7 +13,7 @@ public class LottoControllerTest {
 
     @Test
     void shouldAttachWallet() {
-        lotteryController.attachWallet(new Wallet(14000));
+        lotteryController.attachWallet(new Wallet(new Money(14000)));
         assertThat(lotteryController.wallet).isInstanceOf(Wallet.class);
     }
 

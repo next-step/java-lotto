@@ -27,12 +27,12 @@ public class WinStatisticsTest {
     @Test
     void earningRateShouldBeFiveTenth() {
         WinStatistics winStatistics = new WinStatistics(1, 0, 0, 0);
-        assertThat(winStatistics.getEarningRate(10000)).isEqualTo(0.5);
+        assertThat(winStatistics.getEarningRate(new Money(10000))).isEqualTo(0.5);
     }
 
     @Test
     void returnTrueIfEarnMoney() {
         WinStatistics winStatistics = new WinStatistics(1, 0, 0, 0);
-        assertThat(winStatistics.DidEarn(4000)).isEqualTo("📈Earned!");
+        assertThat(winStatistics.didEarn(new Money(4000))).isEqualTo("📈Earned!");
     }
 }

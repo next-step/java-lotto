@@ -8,27 +8,18 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WalletTest {
 
-    @Test
-    void priceShouldBePositive() {
-        // given
-        Wallet wallet = new Wallet(14000);
-        // when
-        int actual = wallet.money;
-        // - then
-        assertThat(actual).isPositive();
-    }
 
     @Test
     void priceLessThan1000GetsError() {
         // given - when - then
-        assertThatThrownBy(() -> new Wallet(999)).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new Wallet(-1000)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Wallet(new Money(999))).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Wallet(new Money(-1000))).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void shouldCreate14Lotteries() {
         // given
-        Wallet wallet = new Wallet(14000);
+        Wallet wallet = new Wallet(new Money(14000));
         // when
         wallet.createLotteries();
         // then
@@ -37,22 +28,17 @@ public class WalletTest {
 
     @Test
     void buyLotteryShouldTake1000() {
-        // given
-        Wallet wallet = new Wallet(14000);
-        // when
-        int expected = wallet.money - LOTTERY_PRICE;
+        Wallet wallet = new Wallet(new Money(14000));
         wallet.buyLottery();
-        int actual = wallet.money;
-        // then
-        assertThat(expected).isEqualTo(actual);
+        Wallet expected = new Wallet(new Money(14000 - LOTTERY_PRICE));
+        assertThat(wallet).isEqualTo(expected);
     }
 
     @Test
     void lessThan1000CannotBuyLottery() {
         // given
-        Wallet wallet = new Wallet(14000);
+        Wallet wallet = new Wallet(new Money(999));
         // when
-        wallet.money = 999;
         // then
         assertThatThrownBy(() -> wallet.buyLottery()).isInstanceOf(IllegalCallerException.class);
     }

@@ -53,18 +53,12 @@ public class WinStatistics {
         return earnedMoney;
     }
 
-    public double getEarningRate(int money) {
-        int earnedMoney = this.getEarnedMoney();
-        return earnedMoney / (double) money;
+
+    public String didEarn(Money money) {
+        return money.didEarn(this.getEarnedMoney());
     }
 
-
-    public String DidEarn(int money) {
-        if (getEarningRate(money) >= 1) {
-            return "📈Earned!";
-        };
-        return "📉Lost..";
+    public double getEarningRate(Money money) {
+        return money.getEarningRate(this.getEarnedMoney());
     }
-
-
 }

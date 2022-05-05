@@ -6,33 +6,38 @@ import java.util.List;
 import static lotto.Const.LOTTERY_PRICE;
 
 public class Wallet {
-    public int money;
+    private final Money money;
     public final List<Lottery> lotteries;
 
-    public Wallet(int money) {
-        if (money < LOTTERY_PRICE) {
-            throw new IllegalArgumentException("Please give more than " + LOTTERY_PRICE + " won. but: " + money);
-        }
+    public Wallet(Money money) {
         this.money = money;
         this.lotteries = new ArrayList<>();
     }
 
+
+
     public Wallet(List<Lottery> lotteries) {
-        this.money = 0;
+        this.money = new Money(0);
         this.lotteries = lotteries;
     }
 
     public void createLotteries() {
-        while (this.money >= LOTTERY_PRICE) {
+        while (money.enough()) {
             buyLottery();
         }
     }
 
+
+
     public void buyLottery() {
-        if (this.money < LOTTERY_PRICE) {
+        if (!money.enough()) {
             throw new IllegalCallerException("Not enough money.");
         }
-        this.money -= LOTTERY_PRICE;
+        this.money.pay();
         this.lotteries.add(new Lottery());
+    }
+
+    public double getEarnedMoney(int earnedMoney) {
+        return this.money.getEarningRate(earnedMoney);
     }
 }

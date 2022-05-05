@@ -12,7 +12,7 @@ public class LotteryController {
 
     public void scanMoney() {
         String scanned = InputView.scan("Put your money.");
-        attachWallet(new Wallet(Integer.parseInt(scanned)));
+        attachWallet(new Wallet(new Money(Integer.parseInt(scanned))));
     }
 
     public void attachWallet(Wallet wallet) {
@@ -85,12 +85,12 @@ public class LotteryController {
     }
 
     public void printEarningRate() {
-        String payload = "Earning rate: " + winStatistics.getEarningRate(this.wallet.money);
+        String payload = "Earning rate: " + wallet.getEarnedMoney(winStatistics.getEarnedMoney());
         ResultView.print(payload);
     }
 
     public void printEarned() {
-        String payload = winStatistics.DidEarn(this.wallet.money) + " (More than 1.0 means 'Earned')";
+        String payload = winStatistics.didEarn(new Money(1000)) + " (More than 1.0 means 'Earned')";
         ResultView.print(payload);
     }
 }

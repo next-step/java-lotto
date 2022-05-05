@@ -146,9 +146,9 @@ Earning rate: Infinity
 ### Requested Changes phase2
 
 - [x] BiFunction 를 무명 -> 유명 람다로 수정
-- [ ] WalletTest 의 객체를 개별로 선언하고 Given-When-Then 적용
-- [ ] money 를 객체로 포장
-    - [ ] money 에서 수익률 계산
+- [x] WalletTest 의 객체를 개별로 선언하고 Given-When-Then 적용
+- [x] money 를 객체로 포장
+    - [x] money 에서 수익률 계산
 - [ ] Answer 대신 Lottery 사용
 - [ ] Reward.value -> money 변수명 수정
 - [ ] Reward 가 당첨 번호 개수(matches) 도 함께 포장
