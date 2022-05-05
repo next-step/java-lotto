@@ -7,15 +7,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WalletTest {
-
-
-    @Test
-    void priceLessThan1000GetsError() {
-        // given - when - then
-        assertThatThrownBy(() -> new Wallet(new Money(999))).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new Wallet(new Money(-1000))).isInstanceOf(IllegalArgumentException.class);
-    }
-
     @Test
     void shouldCreate14Lotteries() {
         // given
@@ -31,7 +22,7 @@ public class WalletTest {
         Wallet wallet = new Wallet(new Money(14000));
         wallet.buyLottery();
         Wallet expected = new Wallet(new Money(14000 - LOTTERY_PRICE));
-        assertThat(wallet).isEqualTo(expected);
+        assertThat(wallet.moneyEquals(expected)).isTrue();
     }
 
     @Test

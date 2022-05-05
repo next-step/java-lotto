@@ -27,9 +27,9 @@ public class LotteryController {
         ResultView.printLotteries(this.wallet.lotteries);
     }
 
-    public Answer scanAnswer() {
+    public Lottery scanAnswer() {
         String scanned = InputView.scan("Put lottery answer.");
-        return new Answer(parseAnswerNumbers(scanned));
+        return new Lottery(parseAnswerNumbers(scanned));
     }
 
     public List<Integer> parseAnswerNumbers(String scanned) {
@@ -52,7 +52,7 @@ public class LotteryController {
         return number;
     }
 
-    public void findWins(Answer answer) {
+    public void findWins(Lottery answer) {
         for (Lottery lottery : this.wallet.lotteries) {
             int win = findWin(lottery.numbers, answer.numbers);
             saveWin(win);

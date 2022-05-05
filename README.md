@@ -149,7 +149,7 @@ Earning rate: Infinity
 - [x] WalletTest 의 객체를 개별로 선언하고 Given-When-Then 적용
 - [x] money 를 객체로 포장
     - [x] money 에서 수익률 계산
-- [ ] Answer 대신 Lottery 사용
+- [x] Answer 대신 Lottery 사용
 - [ ] Reward.value -> money 변수명 수정
 - [ ] Reward 가 당첨 번호 개수(matches) 도 함께 포장
 - [ ] number를 일일히 비교하는게 아닌 Lottery를 사용하여 matchNumber 수행
