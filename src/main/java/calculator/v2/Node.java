@@ -2,9 +2,9 @@ package calculator.v2;
 
 public class Node {
 
-  private final Token token;
-  private Node left;
-  private Node right;
+  final Token token;
+  Node left;
+  Node right;
 
   public Node(Token token) {
     this.token = token;

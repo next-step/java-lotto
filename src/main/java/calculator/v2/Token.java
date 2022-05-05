@@ -4,9 +4,12 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public abstract class Token {
+public abstract class Token implements Comparable<Token> {
 
   private static final String EMPTY_OR_NULL = "빈 값일 수 없습니다.";
+  private static final int DEFAULT_PRIORITY = 0;
+
+  private int priority = DEFAULT_PRIORITY;
   private final String token;
   private final Pattern pattern;
 
@@ -16,6 +19,10 @@ public abstract class Token {
     this.pattern = pattern;
     checkTokenFormat(token);
     this.token = token;
+  }
+
+  protected void updateTokenPriority(int priority) {
+    this.priority = priority;
   }
 
   private void checkValidRegex(Pattern regex) {
@@ -35,6 +42,11 @@ public abstract class Token {
     if (token == null || token.isEmpty()) {
       throw new IllegalArgumentException(EMPTY_OR_NULL);
     }
+  }
+
+  @Override
+  public int compareTo(Token o) {
+    return this.priority - o.priority;
   }
 
   @Override
