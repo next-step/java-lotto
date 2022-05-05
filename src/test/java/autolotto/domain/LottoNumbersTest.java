@@ -52,6 +52,6 @@ class LottoNumbersTest {
 
     @Test
     void bonusBallGiven_ReturnTrue() {
-        assertThat(lottoNumbers.checkBonus(new WinningLotto(new LottoNumbers(Set.of(1,2,3,4,5,7)),6), 5)).isTrue();
+        assertThat(lottoNumbers.checkBonus(new WinningLotto(new LottoNumbers(Set.of(1,2,3,4,5,7)),6))).isTrue();
     }
 }

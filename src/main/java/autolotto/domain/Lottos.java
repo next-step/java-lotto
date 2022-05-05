@@ -21,7 +21,7 @@ public class Lottos {
 
         for (LottoNumbers lottoNumber : lottoNumbers) {
             int countOfMatch = lottoNumber.match(winningLotto);
-            boolean isBonus = lottoNumber.checkBonus(winningLotto, countOfMatch);
+            boolean isBonus = lottoNumber.checkBonus(winningLotto);
             results.plusWinners(Rank.find(countOfMatch, isBonus));
         }
         return results;
