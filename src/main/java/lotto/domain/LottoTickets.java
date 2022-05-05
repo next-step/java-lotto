@@ -17,11 +17,11 @@ public class LottoTickets {
         }
     }
 
-    public LottoPrizes check(LottoNumbers lottoNumbers) {
+    public LottoPrizes check(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
         return new LottoPrizes(
                 lottoTickets
                         .stream()
-                        .map(lottoTicket -> lottoTicket.check(lottoNumbers))
+                        .map(lottoTicket -> lottoTicket.check(lottoNumbers, bonusNumber))
                         .collect(Collectors.toList())
         );
     }

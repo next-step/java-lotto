@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static lotto.domain.LottoNumbers.generateLottoNumbers;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTicketTest {
@@ -21,5 +22,11 @@ class LottoTicketTest {
         assertThatThrownBy(() -> {
             new LottoTicket(generateLottoNumbers(from, to));
         }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void check는_lottoPrize를_반환한다() {
+        assertThat(new LottoTicket(generateLottoNumbers(1, 6)).check(generateLottoNumbers(1, 6), new LottoNumber(7)))
+                .isEqualTo(LottoPrize.FIRST);
     }
 }

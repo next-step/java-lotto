@@ -35,4 +35,10 @@ public class LottoPrizes {
     public Amount purchaseAmount() {
         return new Amount((long) lottoPrizes.size() * PRICE);
     }
+
+    public long countPrize(LottoPrize lottoPrize) {
+        return lottoPrizes.stream()
+                .filter(prize -> prize == lottoPrize)
+                .count();
+    }
 }

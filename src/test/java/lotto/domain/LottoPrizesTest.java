@@ -37,4 +37,10 @@ class LottoPrizesTest {
         assertThat(lottoPrizes.toEarningRate().getEarningRate())
                 .isEqualTo((double) lottoPrizes.prizeAmount().getAmount() / lottoPrizes.purchaseAmount().getAmount());
     }
+
+    @Test
+    void countPrize는_포함한_prize_개수를_반환한다() {
+        assertThat(new LottoPrizes(List.of(LottoPrize.FIRST, LottoPrize.FIRST, LottoPrize.NONE)).countPrize(LottoPrize.FIRST))
+                .isEqualTo(2);
+    }
 }

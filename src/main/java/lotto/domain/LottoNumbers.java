@@ -79,8 +79,16 @@ public class LottoNumbers {
         return new Match(matchedNumbers.size());
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     public List<LottoNumber> getLottoNumbers() {
         return new ArrayList<>(lottoNumbers);
     }
 
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
 }
