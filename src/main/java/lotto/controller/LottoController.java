@@ -4,6 +4,7 @@ import lotto.domain.Lottos;
 import lotto.domain.RandomNumberGenerator;
 import lotto.domain.Ranking;
 import lotto.service.LottoService;
+import lotto.util.YieldCalculator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -21,6 +22,6 @@ public class LottoController {
 
         String lastWeekWinningNumber = InputView.inputLastWeekWinningNumber();
         Map<Ranking, Integer> winningMap = lottoService.registerWinningNumbers(lastWeekWinningNumber);
-        ResultView.printWinningMessage(winningMap, purchasePrice - purchasePrice % EACH_PRICE);
+        ResultView.printWinningMessage(winningMap, YieldCalculator.calculate(winningMap, purchasePrice - purchasePrice % EACH_PRICE));
     }
 }
