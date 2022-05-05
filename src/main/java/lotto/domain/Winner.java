@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.result.LottoGameResult;
 
 public class Winner {
     private List<Integer> numbers = new ArrayList<>();
@@ -34,8 +35,7 @@ public class Winner {
         return new Winner(winningNumbers);
     }
 
-    public int findWinner(Lotto lotto) {
-
-        return lotto.hasWinningNumbers(numbers);
+    public LottoGameResult findWinners(Lottos lottos) {
+        return lottos.matchNumbers(numbers);
     }
 }

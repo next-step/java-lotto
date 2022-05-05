@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.result.LottoGameResult;
 import lotto.domain.Lottos;
 import lotto.domain.Winner;
 import lotto.ui.LottoScanner;
@@ -11,5 +12,7 @@ public class LottoMain {
 
         String s = LottoScanner.insertWinningNumbers();
         Winner winner = Winner.of(s);
+
+        LottoGameResult lottoGameResult = winner.findWinners(lottos);
     }
 }

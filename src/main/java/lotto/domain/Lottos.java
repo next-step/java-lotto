@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.result.LottoGameResult;
 
 public class Lottos {
     private List<Lotto> lottos;
@@ -18,5 +19,15 @@ public class Lottos {
         }
 
         return new Lottos(lottos);
+    }
+
+    public LottoGameResult matchNumbers(List<Integer> numbers) {
+        LottoGameResult lottoGameResult = new LottoGameResult();
+
+        for (Lotto lotto : lottos) {
+            lottoGameResult.addMatchResult(lotto.hasWinningNumbers(numbers));
+        }
+
+        return lottoGameResult;
     }
 }
