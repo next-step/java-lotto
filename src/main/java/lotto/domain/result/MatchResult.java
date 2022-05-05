@@ -11,7 +11,7 @@ class MatchResult {
         this.reward = reward;
     }
 
-    int getReward() {
+    int getTotalReward() {
         return matchCount * reward;
     }
 
@@ -34,5 +34,10 @@ class MatchResult {
     @Override
     public int hashCode() {
         return Objects.hash(matchCount, reward);
+    }
+
+    @Override
+    public String toString() {
+        return "(" + reward + ")- " + matchCount + "개";
     }
 }

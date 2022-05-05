@@ -17,17 +17,17 @@ import java.util.Objects;
     }
 
     void addMatchNumber(int matchNumber) {
-        try {
-            matchResults.get(matchNumber - 1).addMatchCount();
-        } catch (IndexOutOfBoundsException exception) {
-            throw new RuntimeException("로또 숫자 범위를 넘는 숫자는 입력 불가능합니다");
+        if (matchNumber < 1 || matchNumber > 6) {
+            return;
         }
+
+        matchResults.get(matchNumber - 1).addMatchCount();
     }
 
     int getLottoReward() {
         int totalReward = 0;
         for (MatchResult matchResult : matchResults) {
-            totalReward += matchResult.getReward();
+            totalReward += matchResult.getTotalReward();
         }
 
         return totalReward;
@@ -49,4 +49,16 @@ import java.util.Objects;
     public int hashCode() {
         return Objects.hash(matchResults);
     }
-}
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 2; i < 6; ++i) {
+            result.append(i + 1).append("개 일치 ");
+            result.append(matchResults.get(i)).append("\n");
+        }
+
+        return result.substring(0, result.length() - 1);
+    }
+ }

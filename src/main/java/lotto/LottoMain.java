@@ -4,15 +4,18 @@ import lotto.domain.result.LottoGameResult;
 import lotto.domain.Lottos;
 import lotto.domain.Winner;
 import lotto.ui.LottoScanner;
+import lotto.ui.ResultView;
 
 public class LottoMain {
     public static void main(String[] args) {
         int purchaseAmount = LottoScanner.insertPurchaseAmount();
-        Lottos lottos = Lottos.of(purchaseAmount/1000);
+        Lottos lottos = Lottos.of(purchaseAmount);
+        ResultView.printLottos(lottos);
 
-        String s = LottoScanner.insertWinningNumbers();
-        Winner winner = Winner.of(s);
+        String winningNumbers = LottoScanner.insertWinningNumbers();
+        Winner winner = Winner.of(winningNumbers);
 
         LottoGameResult lottoGameResult = winner.findWinners(lottos);
+        ResultView.printLottoGameResult(lottoGameResult);
     }
 }

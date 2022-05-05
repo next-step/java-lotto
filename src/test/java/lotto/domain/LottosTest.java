@@ -26,10 +26,10 @@ public class LottosTest {
         lottoList.add(new Lotto(1, 2, 3, 7, 8, 9));
         lottoList.add(new Lotto(1, 2, 10, 11, 12, 13));
 
-        LottoGameResult lottoGameResult = new LottoGameResult();
+        LottoGameResult lottoGameResult = new LottoGameResult(2000);
         lottoGameResult.addMatchResult(3);
         lottoGameResult.addMatchResult(2);
 
-        assertThat(new Lottos(lottoList).matchNumbers(numbers)).isEqualTo(lottoGameResult);
+        assertThat(new Lottos(lottoList, 2000).matchNumbers(numbers)).isEqualTo(lottoGameResult);
     }
 }
