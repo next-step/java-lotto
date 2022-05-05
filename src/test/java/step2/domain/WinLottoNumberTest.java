@@ -34,6 +34,17 @@ class WinLottoNumberTest {
                 .hasMessageContaining("로또 당첨번호는 6개이다");
     }
 
+    @DisplayName("로또 당첨번호는 보너스 포함 7개이다")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3,4,5", "3,2,1", "3,4","1", "1,2,3,4,5,6,7"})
+    void pickLottoNumberOfWeekNumberCountWithBounusTest(String input) {
+        assertThatThrownBy(() -> {
+            WinLottoNumber winLottoNumber = new WinLottoNumber(input);
+            winLottoNumber.add("45");
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("로또 당첨번호는 보너스 포함하여 7개입니다");
+    }
+
     @DisplayName("로또 당첨번호는 중복을 허용하지 않는다")
     @ParameterizedTest
     @ValueSource(strings = {"3,3,3,2,1,4", "2,4,5,6,7,2", "1,1,1,1,1,1","2,3,4,5,6,6"})
@@ -42,6 +53,16 @@ class WinLottoNumberTest {
             WinLottoNumber winLottoNumber = new WinLottoNumber(input);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 당첨번호는 유니크 합니다");
+    }
+
+    @DisplayName("로또 당첨번호는 중복을 허용하지 않는다(보너스 포함)")
+    @Test
+    void pickLottoNumberOfWeekDuplicateWithBonusTest() {
+        assertThatThrownBy(() -> {
+            WinLottoNumber winLottoNumber = new WinLottoNumber("1,2,3,4,5,6");
+            winLottoNumber.add("2");
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("로또 당첨번호는 유니크 합니다(보너스포함)");
     }
 
     @DisplayName("로또 당첨번호 추출")

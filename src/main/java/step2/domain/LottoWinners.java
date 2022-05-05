@@ -7,10 +7,11 @@ public class LottoWinners {
     Map<Rank, Integer> winner = new HashMap<>();
 
     public LottoWinners() {
-        winner.put(Rank.POSTION_1, 0);
-        winner.put(Rank.POSTION_2, 0);
-        winner.put(Rank.POSTION_3, 0);
-        winner.put(Rank.POSTION_4, 0);
+        winner.put(Rank.RANK_1, 0);
+        winner.put(Rank.RANK_2, 0);
+        winner.put(Rank.RANK_3, 0);
+        winner.put(Rank.RANK_4, 0);
+        winner.put(Rank.RANK_5, 0);
     }
 
     public void addWiners(int rankMatchCount) {
