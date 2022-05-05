@@ -12,6 +12,9 @@ public class Operator extends Token {
   }
 
   public static boolean isMatched(String s) {
+    if (s == null || s.isEmpty()) {
+      throw new IllegalArgumentException("빈 문자열입니다.");
+    }
     return PATTERN.matcher(s).find();
   }
 }

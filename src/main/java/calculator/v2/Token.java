@@ -25,6 +25,16 @@ public abstract class Token implements Comparable<Token> {
     this.priority = priority;
   }
 
+  protected static boolean isMatched(Pattern pattern, String s) {
+    if (pattern == null) {
+      throw new IllegalArgumentException("패턴은 빈값일 수 없습니다.");
+    }
+    if (s == null || s.isEmpty()) {
+      throw new IllegalArgumentException("빈 문자열입니다.");
+    }
+    return pattern.matcher(s).find();
+  }
+
   private void checkValidRegex(Pattern regex) {
     if (regex == null) {
       throw new IllegalArgumentException(EMPTY_OR_NULL);

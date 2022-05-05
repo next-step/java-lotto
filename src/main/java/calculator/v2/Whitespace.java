@@ -12,6 +12,6 @@ public class Whitespace extends Token {
   }
 
   public static boolean isMatched(String s) {
-    return PATTERN.matcher(s).find();
+    return Token.isMatched(PATTERN, s);
   }
 }
