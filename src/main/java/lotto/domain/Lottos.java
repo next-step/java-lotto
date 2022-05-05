@@ -24,6 +24,7 @@ public class Lottos {
         Map<Ranking, Integer> winningLottoMap = new HashMap<>();
         lottos.stream().map(lotto -> lotto.countMatchNumber(winningLotto))
                 .forEach(count -> saveWinner(winningLottoMap, count));
+        putDefaultValueToWinningMap(winningLottoMap);
         return winningLottoMap;
     }
 
@@ -32,6 +33,11 @@ public class Lottos {
             Ranking ranking = Ranking.findMatchRanking(count);
             winningLottoMap.put(ranking, winningLottoMap.getOrDefault(ranking, 0) + 1);
         }
+    }
+
+    private void putDefaultValueToWinningMap(Map<Ranking, Integer> winningLottoMap) {
+        Arrays.stream(Ranking.values())
+                .forEach(ranking -> winningLottoMap.putIfAbsent(ranking, 0));
     }
 
     @Override
