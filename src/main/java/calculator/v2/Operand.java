@@ -16,4 +16,8 @@ public class Operand extends Token {
   public static boolean isMatched(String s) {
     return Token.isMatched(PATTERN, s);
   }
+
+  public int getValue() {
+    return Integer.parseInt(token);
+  }
 }

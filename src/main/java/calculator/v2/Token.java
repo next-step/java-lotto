@@ -10,8 +10,8 @@ public abstract class Token implements Comparable<Token> {
   private static final int DEFAULT_PRIORITY = 0;
 
   private int priority = DEFAULT_PRIORITY;
-  private final String token;
   private final Pattern pattern;
+  protected final String token;
 
   protected Token(String token, Pattern pattern) {
     checkValidToken(token);
