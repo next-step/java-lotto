@@ -11,6 +11,7 @@ import java.util.stream.IntStream;
 public class LottoGroup {
     private static final int NO_COUNT = 0;
     private static final int UNIT_COUNT = 1;
+
     private final List<Lotto> lottos;
 
     public LottoGroup(List<Lotto> lottos) {
