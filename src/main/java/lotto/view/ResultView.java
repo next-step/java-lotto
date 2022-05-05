@@ -41,13 +41,17 @@ public class ResultView {
         System.out.println();
         System.out.println(WINNING_STATISTIC_MESSAGE);
         System.out.println(SPLIT_LINE_MESSAGE);
+        printLottoGroupResult(lottoGroupResult);
+        Double earningRatio = lottoGroupResult.getEarningRatio(totalPrice);
+        System.out.println(String.format(EARNINGS_RATIO_MESSAGE, earningRatio, ADVANTAGE_STATUS.get(earningRatio.compareTo(1.00))));
+    }
+
+    private static void printLottoGroupResult(LottoGroupResult lottoGroupResult) {
         Stream.of(LottoRank.values()).filter(lottoRank -> !lottoRank.equals(LottoRank.MISS)).forEach(lottoRank -> System.out.println(String.format(
                 CORRECT_STATISTIC_MESSAGE,
                 lottoRank.matchCount(),
                 lottoRank.winningMoney(),
                 lottoGroupResult.getLottoMatchCount(lottoRank)
         )));
-        Double earningRatio = lottoGroupResult.getEarningRatio(totalPrice);
-        System.out.println(String.format(EARNINGS_RATIO_MESSAGE, earningRatio, ADVANTAGE_STATUS.get(earningRatio.compareTo(1.00))));
     }
 }
