@@ -38,20 +38,18 @@ public class WinStatistics {
     }
 
     public String toPayload() {
-        StringBuilder payload = new StringBuilder("");
-        for (int key : matches.keySet()) {
-            payload.append(key + " matches (₩" + Reward.of(key).value + "): " + matches.get(key) + "\n");
-        }
-        return payload.toString();
+        return Money.toPayload(this.matches);
     }
 
     public int getEarnedMoney() {
         int earnedMoney = 0;
         for (int key : matches.keySet()) {
-            earnedMoney += Reward.of(key).value * matches.get(key);
+            earnedMoney += Money.multiply(Reward.of(key).money, matches.get(key));
         }
         return earnedMoney;
     }
+
+
 
 
     public String didEarn(Money money) {

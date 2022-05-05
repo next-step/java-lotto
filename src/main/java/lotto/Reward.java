@@ -1,10 +1,11 @@
 package lotto;
 
 public enum Reward {
-    Blank(0), THREE(5000), FOUR(50000), FIVE(1500000), SIX(2000000000);
-    public int value;
-    Reward(int win) {
-        this.value = win;
+    Blank(new Money(0)), THREE(new Money(5000)), FOUR(new Money(50000)), FIVE(new Money(1500000)), SIX(new Money(2000000000));
+    public Money money;
+
+    Reward(Money money) {
+        this.money = money;
     }
 
     public static Reward of(int win) {

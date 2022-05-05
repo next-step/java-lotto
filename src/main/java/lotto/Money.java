@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Map;
 import java.util.Objects;
 
 import static lotto.Const.LOTTERY_PRICE;
@@ -7,12 +8,23 @@ import static lotto.Const.LOTTERY_PRICE;
 public class Money {
     private int value;
 
+
+
     Money(int value) {
         if (value < 0) {
             throw new IllegalArgumentException("Money should be more than 0.");
         }
         this.value = value;
     }
+
+    public static String toPayload(Map<Integer, Integer> matches) {
+        StringBuilder payload = new StringBuilder("");
+        for (int key : matches.keySet()) {
+            payload.append(key + " matches (₩" + Reward.of(key).money.value + "): " + matches.get(key) + "\n");
+        }
+        return payload.toString();
+    }
+
 
     boolean enough() {
         return this.value >= LOTTERY_PRICE;
@@ -51,5 +63,9 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    public static int multiply(Money money, int wonNumbers) {
+        return money.value * wonNumbers;
     }
 }
