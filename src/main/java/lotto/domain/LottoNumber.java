@@ -10,21 +10,23 @@ public class LottoNumber {
     }
 
     public LottoNumber(int number) {
-        this.number = validateNumberRange(number);
+        validateNumberRange(number);
+        this.number = number;
     }
-    public LottoNumber(String number) {
+    public LottoNumber(String stringNumber) {
         try {
-            this.number = validateNumberRange(Integer.parseInt(number));
+            int number = Integer.parseInt(stringNumber);
+            validateNumberRange(number);
+            this.number = number;
         } catch (NumberFormatException exception) {
-            throw new NumberFormatException(String.format("%s는 숫자가 아닙니다.", number));
+            throw new NumberFormatException(String.format("%s는 숫자가 아닙니다.", stringNumber));
         }
     }
 
-    private int validateNumberRange(int number) {
+    private void validateNumberRange(int number) {
         if (inValidNumberRange(number)) {
             throw new IllegalArgumentException(String.format("%d는 로또 숫자 범위(%d ~ %d)를 벗어났습니다.", number, LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER));
         }
-        return number;
     }
 
     private boolean inValidNumberRange(int number) {
