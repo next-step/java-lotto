@@ -25,10 +25,10 @@ public class LottoNumber {
   }
 
   public static LottoNumber from(int value) {
-    if (checkBound(value)) {
+    if (assertBound(value)) {
       throw new InvalidLottoNumberException(String.valueOf(value));
     }
-    return new LottoNumber(value);
+    return lottoNumberMap.get(value);
   }
 
   public static LottoNumber from(String value) {
@@ -59,7 +59,7 @@ public class LottoNumber {
     return value;
   }
 
-  private static boolean checkBound(int value) {
+  private static boolean assertBound(int value) {
     return value < MIN || value > MAX;
   }
 }
