@@ -23,8 +23,7 @@ public class LottoStatistics {
     }
 
     private double calculateNumbersAndBonusNumberCount() {
-        return lottos.calculateNumbersAndBonusNumber(lottoWinningNumbers.getWinningLotto()
-                , lottoWinningNumbers.getBonusNumber());
+        return lottos.calculateNumbersAndBonusNumber(lottoWinningNumbers);
     }
 
     public double statistics() {
