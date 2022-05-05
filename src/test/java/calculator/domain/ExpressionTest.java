@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,7 +23,7 @@ class ExpressionTest {
     }
 
     @Test
-    void operation_표현식_요소가_null인_경우() {
+    void operation_표현식_요소가_null_인_경우() {
         assertThatThrownBy(() -> new Expression(new Operand(1), Operator.DIVIDE, null))
                 .isInstanceOf(IllegalArgumentException.class);
     }

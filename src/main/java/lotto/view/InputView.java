@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.util.SplitString;
+import lotto.util.SplitStringUtils;
 
 import java.util.List;
 import java.util.Scanner;
@@ -20,6 +20,6 @@ public class InputView {
 
     public static List<String> scanWinningNumbers() {
         System.out.println(WINNING_NUMBER_GUIDE);
-        return SplitString.split(scanner.nextLine());
+        return SplitStringUtils.split(scanner.nextLine());
     }
 }

@@ -1,9 +1,13 @@
-package calculator;
+package calculator.util;
 
-import java.util.*;
+import calculator.domain.Operator;
 
-public class ExpressionConverter {
-    private ExpressionConverter() {
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.List;
+
+public class ExpressionUtils {
+    private ExpressionUtils() {
     }
 
     public static Deque<String> convertToPostFixExpression(List<String> inFixExpression) {

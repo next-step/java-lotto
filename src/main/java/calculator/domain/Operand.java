@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 public class Operand {
     private final int number;
