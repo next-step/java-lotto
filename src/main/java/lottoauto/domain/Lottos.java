@@ -1,4 +1,4 @@
-package lottoauto.service;
+package lottoauto.domain;
 
 import lottoauto.domain.Lotto;
 import lottoauto.domain.LottoGenerator;
@@ -15,21 +15,16 @@ import java.util.*;
  * - 3개(5000원), 4개(50000원), 5개(1500000원), 6개(2000000000) 일치갯수(당첨금액) 별 결과를 통계 점수에 보여준다.
  * - 총 수익률을 계산한다.(로또게임 입력 금액 / 당첨금액)
  */
-public class LottoGame {
-    private final int money;
-    private final int lottoCount;
+public class Lottos {
 
     private final List<Lotto> lottos = new ArrayList<>();
     private Lotto winningLotto;
     private Map<LottoStatus, Integer> winningMap = new HashMap<>();
 
-    public LottoGame(int money) {
-        if(money < Lotto.PRICE) {
-            throw new IllegalArgumentException("로또를 살 수 없습니다.");
+    public Lottos(List<Lotto> inputLottos) {
+        for (int i = 0; i < inputLottos.size(); i++) {
+            this.lottos.add(inputLottos.get(i));
         }
-        this.money = money;
-        this.lottoCount = money / Lotto.PRICE;
-
         this.winningMap.put(LottoStatus.FIRST, 0);
         this.winningMap.put(LottoStatus.SECOND, 0);
         this.winningMap.put(LottoStatus.THIRD, 0);
@@ -37,8 +32,8 @@ public class LottoGame {
         this.winningMap.put(LottoStatus.FIFTH, 0);
     }
 
-    public int getLottoCount() {
-        return lottoCount;
+    public Map<LottoStatus, Integer> getWinningMap() {
+        return winningMap;
     }
 
     public List<Lotto> all() {
@@ -53,21 +48,11 @@ public class LottoGame {
         lottoReport.reportLottos(this.lottos);
     }
 
-    public void reportProfitRate(LottoReport lottoReport){
-        lottoReport.reportProfitRate(getProfitRate());
-    }
-
     public void checkWinningLotto(Lotto winningLotto) {
         this.winningLotto = winningLotto;
     }
 
-    public void buyLotto() {
-        for (int i = 0; i < lottoCount; i++) {
-            lottos.add(LottoGenerator.makeLotto());
-        }
-    }
-
-    public void start() {
+    public void match() {
         for (Lotto lotto : lottos) {
             lotto.match(winningLotto);
             if(lotto.isStatus() == LottoStatus.FIFTH) winningMap.put(LottoStatus.FIFTH, winningMap.get(LottoStatus.FIFTH) + 1);
@@ -78,12 +63,5 @@ public class LottoGame {
         }
     }
 
-    public int getProfitRate() {
-        int totalWinningMoney = LottoStatus.FIFTH.getWinningMoney() * winningMap.get(LottoStatus.FIFTH)
-                + LottoStatus.FOURTH.getWinningMoney() * winningMap.get(LottoStatus.FOURTH)
-                + LottoStatus.THIRD.getWinningMoney() * winningMap.get(LottoStatus.THIRD)
-                + LottoStatus.SECOND.getWinningMoney() * winningMap.get(LottoStatus.SECOND)
-                + LottoStatus.FIRST.getWinningMoney() * winningMap.get(LottoStatus.FIRST);
-        return totalWinningMoney / this.money;
-    }
+
 }

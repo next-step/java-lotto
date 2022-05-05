@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Lotto {
     public static final int PRICE = 1000;
+
     private final int bonusNumber;
     private boolean isBonusNumberSame = false;
     private List<Integer> numbers;
