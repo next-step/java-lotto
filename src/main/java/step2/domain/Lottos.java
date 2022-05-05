@@ -7,6 +7,9 @@ public class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
 
     public Lottos(int inputMoney, LottoPickStrategy lottoPickStrategy) {
+        if (inputMoney < 1000)
+            throw new IllegalArgumentException("로또 최소가격은 1000원 입니다");
+
         int lottoNum = inputMoney / Lotto.price;
         for (int i = 0; i < lottoNum; i++) {
             lottos.add(new Lotto(lottoPickStrategy));
