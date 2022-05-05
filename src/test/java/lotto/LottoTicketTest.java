@@ -43,7 +43,7 @@ class LottoTicketTest {
   }
 
   @Test
-  @DisplayName("로또 여러장장 결과 확인")
+  @DisplayName("로또 여러장 결과 확인")
   void givenWinNumbers_ShouldResultStatistics() {
     LottoTicket winLottoTicket = LottoFactory.createManual("1,2,3,4,5,6");
     LottoTickets lottoTickets = new LottoTickets(List.of(LottoFactory.createManual("1,3,5,14,22,45"),
