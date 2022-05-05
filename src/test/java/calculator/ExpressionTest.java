@@ -1,9 +1,11 @@
 package calculator;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ExpressionTest {
     @ParameterizedTest
@@ -18,5 +20,11 @@ class ExpressionTest {
                 new Operand(operand1),
                 Operator.valueOf(operatorName),
                 new Operand(operand2)).operation()).isEqualTo(result);
+    }
+
+    @Test
+    void operation_표현식_요소가_null인_경우() {
+        assertThatThrownBy(() -> new Expression(new Operand(1), Operator.DIVIDE, null))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -33,4 +33,11 @@ public class Operand {
     public int hashCode() {
         return number;
     }
+
+    @Override
+    public String toString() {
+        return "Operand{" +
+                "number=" + number +
+                '}';
+    }
 }
