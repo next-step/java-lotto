@@ -22,8 +22,7 @@ public class Lotto {
     }
 
     public Lotto(List<LottoNumber> numbers) {
-        validateNumberSize(numbers.size());
-        validateDuplicateNumbers(numbers);
+        validateLottoNumber(numbers);
         this.numbers = numbers;
     }
 
@@ -46,6 +45,11 @@ public class Lotto {
 
     public List<Integer> getNumbers() {
         return this.numbers.stream().map(LottoNumber::getNumber).sorted().collect(Collectors.toUnmodifiableList());
+    }
+
+    private void validateLottoNumber(List<LottoNumber> numbers) {
+        validateNumberSize(numbers.size());
+        validateDuplicateNumbers(numbers);
     }
 
     private void validateNumberSize(int numberSize) {
