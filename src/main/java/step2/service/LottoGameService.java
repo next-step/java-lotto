@@ -34,6 +34,8 @@ public class LottoGameService {
     }
 
     public double moneyProfitRate(int investMoney, LottoWinners winners) {
-        return winners.totalMoney() / (double) investMoney;
+        double rate = winners.totalMoney() / (double) investMoney;
+
+        return Math.floor(rate * 100) / 100.0;
     }
 }
