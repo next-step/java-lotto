@@ -3,11 +3,11 @@ package lottoauto;
 import java.util.Arrays;
 
 public enum Rating {
-    FIRST(6, 2000000000),
-    SECOND(5, 1500000),
-    THIRD(4, 50000),
+    LOSING(0, 0),
     FOURTH(3, 5000),
-    LOSING(0, 0);
+    THIRD(4, 50000),
+    SECOND(5, 1500000),
+    FIRST(6, 2000000000);
 
     private int matchCount;
     private int reward;
@@ -20,14 +20,15 @@ public enum Rating {
     public static Rating from(int matchCount) {
         return Arrays.stream(values())
                 .filter(rating -> rating.matchCount == matchCount)
-                .findFirst().orElseThrow(() -> new IllegalArgumentException("해당하는 등수 정보가 존재하지 않습니다."));
+                .findFirst().orElse(LOSING);
+    }
+
+    public int rewardAmount(int number) {
+        return this.reward * number;
     }
 
     @Override
     public String toString() {
-        return "Rating{" +
-                "matchCount=" + matchCount +
-                ", reward=" + reward +
-                '}';
+        return matchCount + "개 일치 (" + reward + "원)";
     }
 }

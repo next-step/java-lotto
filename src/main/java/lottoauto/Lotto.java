@@ -1,12 +1,10 @@
 package lottoauto;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
+    private static final String LOTTO_NUMBER_DELIMITER = ", ";
     private static final int LOTTO_SIZE = 6;
     private static List<LottoNumber> lottoNumbersCache = LottoNumber.rangedClosed().mapToObj(LottoNumber::from).collect(Collectors.toList());
 
@@ -22,10 +20,6 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
-    }
-
     private boolean isDuplicated(List<LottoNumber> lottoNumbers) {
         return lottoNumbers.size() != lottoNumbers.stream().distinct().count();
     }
@@ -39,24 +33,25 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    public static Lotto from(List<LottoNumber> lottoNumbers) {
-        return new Lotto(lottoNumbers);
+    public static Lotto from(String numbers) {
+        return from(numbers.split(LOTTO_NUMBER_DELIMITER));
+    }
+
+    public static Lotto from(List<LottoNumber> numbers) {
+        return new Lotto(numbers);
     }
 
     public static Lotto from(String[] numbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (String number : numbers) {
-            lottoNumbers.add(LottoNumber.from(number));
-        }
+        List<LottoNumber> lottoNumbers = Arrays.stream(numbers).map(LottoNumber::from).collect(Collectors.toList());
         return new Lotto(lottoNumbers);
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
-        for(LottoNumber number : lottoNumbers) {
-            if(lottoNumber.equals(number))
-                return true;
-        }
-        return false;
+    public int findMatchingCount(Lotto lotto) {
+        return (int) lottoNumbers.stream().filter(lottoNumber -> lotto.contains(lottoNumber)).count();
+    }
+
+    private boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.stream().anyMatch(lottoNumber::equals);
     }
 
     @Override

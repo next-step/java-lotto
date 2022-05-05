@@ -1,38 +1,31 @@
 package lottoauto;
 
-import java.util.Objects;
-
 public class WinningLotto {
-    private final Lotto winnigLotto;
+    private final Lotto winnig;
+    private final LottoNumber bonus;
 
-    private WinningLotto(Lotto winningLottoNumbers) {
-        this.winnigLotto = winningLottoNumbers;
+    private WinningLotto(Lotto winnig, LottoNumber bonus) {
+        this.winnig = winnig;
+        this.bonus = bonus;
     }
 
-    public static WinningLotto from(String[] numbers) {
-        return new WinningLotto(Lotto.from(numbers));
+    public static WinningLotto of(Lotto winnig, LottoNumber bonus) {
+        return new WinningLotto(winnig, bonus);
     }
 
-    public Rating matchingCount(Lotto lottoNumbers) {
-        int count = 0;
-        for (LottoNumber lottoNumber : lottoNumbers.getLottoNumbers()) {
-            if(winnigLotto.contains(lottoNumber)) {
-                count++;
-            }
-        }
-        return Rating.from(count);
+    public static WinningLotto from(Lotto lotto) {
+        return new WinningLotto(lotto, null);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        WinningLotto that = (WinningLotto) o;
-        return Objects.equals(winnigLotto, that.winnigLotto);
+    public Rating findRating(Lotto lotto) {
+        return Rating.from(winnig.findMatchingCount(lotto));
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(winnigLotto);
+    public String toString() {
+        return "WinningLotto{" +
+                "winnig=" + winnig +
+                ", bonus=" + bonus +
+                '}';
     }
 }
