@@ -9,13 +9,13 @@ public class Lotto {
     private List<Integer> numbers = new ArrayList<>();
 
     public Lotto(List<Integer> numbers) {
-        if (numbers.size() != 6) {
+        if (numbers == null || numbers.size() != 6) {
             throw new IllegalArgumentException("숫자 6개만 입력 가능합니다");
         }
 
-        this.numbers = numbers;
+        this.numbers = new ArrayList<>(numbers);
 
-        Collections.sort(numbers);
+        Collections.sort(this.numbers);
     }
 
     Lotto(int num1, int num2, int num3, int num4, int num5, int num6) {
@@ -26,7 +26,7 @@ public class Lotto {
         this.numbers.add(num5);
         this.numbers.add(num6);
 
-        Collections.sort(numbers);
+        Collections.sort(this.numbers);
     }
 
     public int hasWinningNumbers(List<Integer> winningNumbers) {
