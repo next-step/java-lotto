@@ -42,10 +42,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return lottoNumberMap.put(newNumber, new LottoNumber(newNumber));
     }
 
-    public static Map<Integer, LottoNumber> returnMap() {
-        return lottoNumberMap;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
