@@ -5,6 +5,6 @@ import lotto.pattern.AutoLottoNumberGenerator;
 
 public class LottoApp {
     public static void main(String[] args) {
-        new LottoController(AutoLottoNumberGenerator.getInstance()).autoLottoProgram();
+        new LottoController(AutoLottoNumberGenerator.getInstance()).autoLottoProgramStart();
     }
 }

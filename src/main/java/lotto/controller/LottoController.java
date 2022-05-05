@@ -18,7 +18,7 @@ public class LottoController {
         this.lottoNumberGenerateStrategy = lottoNumberGenerateStrategy;
     }
 
-    public void autoLottoProgram() {
+    public void autoLottoProgramStart() {
         LottoTotalPrice lottoPurchaseAmount = new LottoTotalPrice(InputView.scanPurchaseAmount());
         int lottoCount = lottoPurchaseAmount.getPurchaseLottoCount();
         ResultView.printLottoCount(lottoCount);
