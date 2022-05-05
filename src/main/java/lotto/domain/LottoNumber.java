@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 import lotto.exception.InvalidLottoNumberException;
@@ -10,6 +12,13 @@ public class LottoNumber {
   public static final int MIN = 1;
   public static final int MAX = 45;
   private static final Pattern CONTAINS_ONLY_NUMBER_PATTERN = Pattern.compile("^\\d+$");
+  private static Map<Integer, LottoNumber> lottoNumberMap = new HashMap<>();
+
+  static {
+    for (int i = MIN; i <= MAX; i++) {
+      lottoNumberMap.put(i, LottoNumber.from(i));
+    }
+  }
 
   private LottoNumber(int value) {
     this.value = value;
