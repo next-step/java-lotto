@@ -1,5 +1,7 @@
 package step2.domain;
 
+import java.util.Arrays;
+
 public enum Rank {
     RANK_5(5_000, 3, false),
     RANK_4(50_000, 4, false),
@@ -19,10 +21,8 @@ public enum Rank {
     }
 
     public static Rank of(int count, boolean bonus) {
-        for (Rank rank : Rank.values()) {
-            if (rank.matchCount == count && rank.bonus == bonus)
-                return rank;
-        }
-        return NO_RANK;
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.matchCount == count && rank.bonus == bonus)
+                .findFirst().orElse(NO_RANK);
     }
 }

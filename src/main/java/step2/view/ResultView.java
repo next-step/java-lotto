@@ -15,7 +15,7 @@ public class ResultView {
     }
 
     public void display(LottoWinners winners, double rate) {
-        for (Rank rank : Rank.values()) {
+        for (Rank rank : winners.ranks()) {
             System.out.println(rank.matchCount + "개 일치" + secondBall(rank) + "(" + rank.price +"원)-" + winners.countByRank(rank) + "개");
         }
         System.out.println("총 수익률은 " + rate + " 입니다");
