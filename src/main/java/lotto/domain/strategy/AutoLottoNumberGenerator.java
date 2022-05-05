@@ -3,8 +3,8 @@ package lotto.domain.strategy;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 
 public class AutoLottoNumberGenerator implements NumberGenerator {
 
@@ -19,7 +19,7 @@ public class AutoLottoNumberGenerator implements NumberGenerator {
   @Override
   public List<Integer> generate() {
     Collections.shuffle(lottoNumberCandidates);
-    List<Integer> lottoNumbers = lottoNumberCandidates.subList(0, LottoGame.NUMBER_COUNT);
+    List<Integer> lottoNumbers = lottoNumberCandidates.subList(0, LottoNumbers.NUMBER_COUNT);
     Collections.sort(lottoNumbers);
     return lottoNumbers;
   }

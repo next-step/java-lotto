@@ -3,13 +3,18 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lotto.exception.InvalidLottoNumbersException;
 
 public class LottoNumbers {
 
+  public static final int NUMBER_COUNT = 6;
   private final List<LottoNumber> values;
   public static final String LOTTO_NUMBER_DELIMITER = ",";
 
   private LottoNumbers(List<LottoNumber> values) {
+    if (values.size() != NUMBER_COUNT) {
+      throw new InvalidLottoNumbersException(NUMBER_COUNT);
+    }
     this.values = values;
   }
 
@@ -29,14 +34,10 @@ public class LottoNumbers {
     return new LottoNumbers(values);
   }
 
-  public LottoNumbers getMatchNumbers(LottoNumbers winNumbers) {
+  public int getMatchNumbers(LottoNumbers winNumbers) {
     ArrayList<LottoNumber> numbers = new ArrayList<>(values);
     numbers.retainAll(winNumbers.values);
-    return new LottoNumbers(numbers);
-  }
-
-  public int getNumberSize() {
-    return values.size();
+    return numbers.size();
   }
 
   public List<LottoNumber> getValues() {
