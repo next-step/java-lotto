@@ -4,11 +4,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoGroupResultTest {
     @ParameterizedTest
@@ -29,6 +31,12 @@ class LottoGroupResultTest {
                 rank, count
         ));
         assertThat(lottoGroupResult.getLottoMatchCount(rank)).isEqualTo(count);
+    }
+
+    @ParameterizedTest
+    @NullSource
+    void LottoGroupResult_로또_그룹_결과가_null_인_경우(Map<Rank, Integer> lottoGroupResult ) {
+        assertThatThrownBy(() -> new LottoGroupResult(lottoGroupResult)).isInstanceOf(IllegalArgumentException.class);
     }
 
     private static Stream<Arguments> generateLottoResultData() {

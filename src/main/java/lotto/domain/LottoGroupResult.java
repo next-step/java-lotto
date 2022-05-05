@@ -11,6 +11,7 @@ public class LottoGroupResult {
     private final Map<Rank, Integer> lottoGroupResult;
 
     public LottoGroupResult(Map<Rank, Integer> lottoGroupResult) {
+        validateLottoGroupResult(lottoGroupResult);
         this.lottoGroupResult = lottoGroupResult;
     }
 
@@ -27,6 +28,12 @@ public class LottoGroupResult {
 
     private int winningPrice() {
         return this.lottoGroupResult.entrySet().stream().mapToInt(result -> result.getKey().winningMoney() * result.getValue()).sum();
+    }
+
+    private void validateLottoGroupResult(Map<Rank, Integer> lottoGroupResult) {
+        if (lottoGroupResult == null) {
+            throw new IllegalArgumentException("로또 그룹의 결과는 null 일 수 없습니다.");
+        }
     }
 
     @Override
