@@ -5,14 +5,11 @@ public class LottoNumber {
     public static final int LOTTO_MAX_NUMBER = 45;
     private final int number;
 
-    public LottoNumber(Integer number) {
-        this.number = number;
-    }
-
     public LottoNumber(int number) {
         validateNumberRange(number);
         this.number = number;
     }
+
     public LottoNumber(String stringNumber) {
         try {
             int number = Integer.parseInt(stringNumber);
