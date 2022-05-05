@@ -20,9 +20,7 @@ public class LottoController {
     OutputTable.inputPurchaseAmount();
     long haveMoney = InputTable.inputHaveMoney();
 
-    List<Lotto> lottoProducts = visit(new Guest(haveMoney),
-        new Store()).hasAllLotto();
-
+    List<Lotto> lottoProducts = visit(new Guest(haveMoney), new Store());
     OutputTable.buyThings(lottoProducts.size());
     OutputTable.printProductInfos(lottoProducts);
 
@@ -42,7 +40,7 @@ public class LottoController {
 
   }
 
-  public Guest visit(Guest guest, Store store) {
+  public List<Lotto> visit(Guest guest, Store store) {
     return lottoService.visit(guest, store);
   }
 

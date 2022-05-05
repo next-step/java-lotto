@@ -3,34 +3,19 @@ package lotto.model;
 import java.util.List;
 import java.util.Objects;
 import lotto.exception.LottoSizeException;
+import lotto.exception.MoneyNumberException;
 
 public final class Guest {
 
   private final Money money;
-  private final List<Lotto> holdingLotteryTickets;
+
 
   public Guest(long money) {
-    this(money, null);
-  }
-
-  public Guest(long money, List<Lotto> holdingLotteryTickets) {
     this.money = new Money(money);
-    this.holdingLotteryTickets = holdingLotteryTickets;
   }
 
-  public Guest choiceProduct(Store store) {
-    return new Guest(0, store.delivery(money.currentValue()));
-  }
-
-  public List<Lotto> hasAllLotto() {
-    emptySizeIsValid(holdingLotteryTickets.size());
-    return holdingLotteryTickets;
-  }
-
-  private void emptySizeIsValid(int size) {
-    if (size <= 0) {
-      throw new LottoSizeException();
-    }
+  public long currentMoney() {
+    return money.currentValue();
   }
 
   @Override
@@ -42,12 +27,11 @@ public final class Guest {
       return false;
     }
     Guest guest = (Guest) o;
-    return Objects.equals(money, guest.money) && Objects.equals(holdingLotteryTickets,
-        guest.holdingLotteryTickets);
+    return Objects.equals(money, guest.money);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(money, holdingLotteryTickets);
+    return Objects.hash(money);
   }
 }

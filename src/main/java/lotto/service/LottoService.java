@@ -8,8 +8,8 @@ import lotto.util.AwardNumberUtil;
 
 public class LottoService {
 
-  public Guest visit(Guest guest, Store store) {
-    return guest.choiceProduct(store);
+  public List<Lotto> visit(Guest guest, Store store) {
+    return store.delivery(guest.currentMoney());
   }
 
   public Lotto insertWinnerNumber(String winnerNumber) {
@@ -18,7 +18,6 @@ public class LottoService {
 
   public void holdingLotteryTickets(List<Lotto> lotteryTickets, Lotto winLotto,
       int bonus) {
-
 
   }
 

@@ -5,7 +5,7 @@ import lotto.exception.MoneyNumberException;
 
 public final class Money {
 
-  private static final long EMPTY_VALUE = 0L;
+  private static final long MIN_VALUE = 1000L;
   private final long value;
 
   public Money(long value) {
@@ -14,7 +14,7 @@ public final class Money {
   }
 
   private void validate(long value) {
-    if (value < EMPTY_VALUE) {
+    if (value < MIN_VALUE) {
       throw new MoneyNumberException(value);
     }
   }
