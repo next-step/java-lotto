@@ -39,7 +39,8 @@ class LottoNumbersTest {
   @CsvSource(value = {"1,5,10|1,20,25|1", "1,10|2,20|0", "1,10,13|1,10,13|3"}, delimiter = '|')
   void match(String numbers, String winNumbers, int matchCount) {
     LottoNumbers lottoNumbers = LottoNumbers.from(new FixedNumberGenerator(numbers).generate());
-    LottoNumbers winLottoNumbers = LottoNumbers.from(new FixedNumberGenerator(winNumbers).generate());
+    LottoNumbers winLottoNumbers = LottoNumbers.from(
+        new FixedNumberGenerator(winNumbers).generate());
 
     assertThat(lottoNumbers.getMatchNumbers(winLottoNumbers).getNumberSize()).isEqualTo(matchCount);
   }
