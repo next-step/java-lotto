@@ -8,15 +8,15 @@ public class LottoGroupResult {
     private static final int ZERO = 0;
     private static final double REFERENCE_POINT = 1.00;
 
-    private final Map<LottoRank, Integer> lottoGroupResult;
+    private final Map<LottoRank, Integer> lottoRankCount;
 
-    public LottoGroupResult(Map<LottoRank, Integer> lottoGroupResult) {
-        validateLottoGroupResult(lottoGroupResult);
-        this.lottoGroupResult = lottoGroupResult;
+    public LottoGroupResult(Map<LottoRank, Integer> lottoRankCount) {
+        validateLottoGroupResult(lottoRankCount);
+        this.lottoRankCount = lottoRankCount;
     }
 
     public int getLottoMatchCount(LottoRank lottoRank) {
-        return lottoGroupResult.getOrDefault(lottoRank, ZERO);
+        return lottoRankCount.getOrDefault(lottoRank, ZERO);
     }
 
     public double getEarningRatio(int totalPrice) {
@@ -27,7 +27,7 @@ public class LottoGroupResult {
     }
 
     private int winningPrice() {
-        return this.lottoGroupResult.entrySet().stream().mapToInt(result -> result.getKey().winningMoney() * result.getValue()).sum();
+        return this.lottoRankCount.entrySet().stream().mapToInt(result -> result.getKey().winningMoney() * result.getValue()).sum();
     }
 
     private void validateLottoGroupResult(Map<LottoRank, Integer> lottoGroupResult) {
@@ -43,11 +43,11 @@ public class LottoGroupResult {
 
         LottoGroupResult that = (LottoGroupResult) o;
 
-        return Objects.equals(lottoGroupResult, that.lottoGroupResult);
+        return Objects.equals(lottoRankCount, that.lottoRankCount);
     }
 
     @Override
     public int hashCode() {
-        return lottoGroupResult != null ? lottoGroupResult.hashCode() : 0;
+        return lottoRankCount != null ? lottoRankCount.hashCode() : 0;
     }
 }
