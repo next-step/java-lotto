@@ -10,32 +10,36 @@ import java.util.Set;
 
 public class Lottery {
     public static void main(String[] args) {
-        LottoInput lottoInput = new LottoInput();
-        LottoOutput lottoOutput = new LottoOutput();
+        runLottery(createLotto(), createWinningNumbers());
+    }
 
-        int amount = lottoInput.askAmount();
+    private static Lottos createLotto() {
+        int amount = LottoInput.askAmount();
         int lottoQuantity = Lottos.getQuantity(amount);
-        lottoOutput.printQuantity(lottoQuantity);
+        LottoOutput.printQuantity(lottoQuantity);
 
         List<LottoNumbers> lottoNumbers = Lottos.createLottos(lottoQuantity);
         Lottos lottos = new Lottos(lottoNumbers);
 
-        for (LottoNumbers lottoNumber : lottos.getLottoNumbers()) {
-            lottoOutput.println(lottoNumber.toString());
-        }
+        LottoOutput.printLottoNumbers(lottos);
+        return lottos;
+    }
 
-        Set<Integer> winningNumbers = lottoInput.askWinningNumber();
-        int bonusBall = lottoInput.askBonusBall(winningNumbers);
+    private static WinningLotto createWinningNumbers() {
+        Set<Integer> winningNumbers = LottoInput.askWinningNumber();
+        int bonusBall = LottoInput.askBonusBall(winningNumbers);
 
-        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(winningNumbers), bonusBall);
+        return new WinningLotto(new LottoNumbers(winningNumbers), bonusBall);
+    }
 
+    private static void runLottery(Lottos lottos, WinningLotto winningLotto) {
         Results results = lottos.confirm(winningLotto);
 
-        lottoOutput.printBoard();
+        LottoOutput.printBoard();
         for (Rank rank : Rank.valuesExceptMiss()) {
             int countOfWinners = results.countOfWinners(rank);
-            lottoOutput.printResult(rank, countOfWinners);
+            LottoOutput.printResult(rank, countOfWinners);
         }
-        lottoOutput.printROI(results.roi(lottos.cost()));
+        LottoOutput.printROI(results.roi(lottos.cost()));
     }
 }

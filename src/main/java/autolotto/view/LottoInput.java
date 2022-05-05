@@ -15,13 +15,9 @@ public class LottoInput {
     public static final String WINNING_NUMBER_QUESTION = "지난주 당첨 번호를 콤마(,)를 기준으로 입력해주세요. ex. 1,2,3,4,5,6";
     private static final Scanner scanner = new Scanner(System.in);
     private static final String DELIMITER = ",";
-    private final LottoNumberPattern lottoNumberPattern;
+    private static final LottoNumberPattern lottoNumberPattern = new LottoNumberPattern();
 
-    public LottoInput() {
-        this.lottoNumberPattern = new LottoNumberPattern();
-    }
-
-    public int askAmount() {
+    public static int askAmount() {
         System.out.println(AMOUNT_QUESTION);
         int purchaseAmount = scanner.nextInt();
         scanner.nextLine();
@@ -32,7 +28,7 @@ public class LottoInput {
         return purchaseAmount;
     }
 
-    public Set<Integer> askWinningNumber() {
+    public static Set<Integer> askWinningNumber() {
         System.out.println(WINNING_NUMBER_QUESTION);
         String winningNumberInput = scanner.nextLine();
 
@@ -52,7 +48,7 @@ public class LottoInput {
                 .collect(Collectors.toSet());
     }
 
-    public int askBonusBall(Set<Integer> winningNumbers) {
+    public static int askBonusBall(Set<Integer> winningNumbers) {
         System.out.println("보너스 볼을 입력해 주세요.");
         String bonusBallInput = scanner.nextLine();
 
