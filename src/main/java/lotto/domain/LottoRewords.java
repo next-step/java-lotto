@@ -25,7 +25,7 @@ public class LottoRewords {
   }
 
   public long getRewordSum() {
-    return values.stream().mapToLong(lottoReword -> lottoReword.getMoney()).sum();
+    return values.stream().mapToLong(LottoReword::getMoney).sum();
   }
 
   public int getSize() {

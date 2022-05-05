@@ -16,7 +16,7 @@ public class LottoGames {
 
   public static LottoGames from(List<NumberGenerator> numberGenerators) {
     List<LottoGame> lottoGames = numberGenerators.stream()
-        .map(numberGenerator -> LottoGame.from(numberGenerator))
+        .map(LottoGame::from)
         .collect(Collectors.toList());
     return new LottoGames(lottoGames);
   }
