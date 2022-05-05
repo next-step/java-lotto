@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.strategy.FixedNumberGenerator;
+import lotto.domain.strategy.ManualLottoNumberGenerator;
 import lotto.domain.strategy.NumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,8 +20,8 @@ class LottoGamesTest {
     List<NumberGenerator> numberGenerators = new ArrayList<>();
     List<NumberGenerator> expectGenerators = new ArrayList<>();
     for (int i = 0; i < gameCount; i++) {
-      numberGenerators.add(new FixedNumberGenerator(numbers));
-      expectGenerators.add(new FixedNumberGenerator(numbers));
+      numberGenerators.add(new ManualLottoNumberGenerator(numbers));
+      expectGenerators.add(new ManualLottoNumberGenerator(numbers));
     }
     LottoGames lottoGames = LottoGames.from(numberGenerators);
 
@@ -37,7 +37,7 @@ class LottoGamesTest {
   void draw(String lottoNumbers, String winNumbers, int gameCount, int matchCount) {
     List<NumberGenerator> numberGenerators = new ArrayList<>();
     for (int i = 0; i < gameCount; i++) {
-      numberGenerators.add(new FixedNumberGenerator(lottoNumbers));
+      numberGenerators.add(new ManualLottoNumberGenerator(lottoNumbers));
     }
     LottoGames lottoGames = LottoGames.from(numberGenerators);
     LottoNumbers winLottoNumbers = LottoNumbers.from(winNumbers);
@@ -57,7 +57,7 @@ class LottoGamesTest {
       int matchCount) {
     List<NumberGenerator> numberGenerators = new ArrayList<>();
     for (int i = 0; i < gameCount; i++) {
-      numberGenerators.add(new FixedNumberGenerator(lottoNumbers));
+      numberGenerators.add(new ManualLottoNumberGenerator(lottoNumbers));
     }
     LottoGames lottoGames = LottoGames.from(numberGenerators);
     LottoNumbers winLottoNumbers = LottoNumbers.from(winNumbers);

@@ -6,7 +6,7 @@ import java.util.List;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
 
-public class LottoNumberGenerator implements NumberGenerator {
+public class AutoLottoNumberGenerator implements NumberGenerator {
 
   private static final List<Integer> lottoNumberCandidates = new ArrayList<>();
 

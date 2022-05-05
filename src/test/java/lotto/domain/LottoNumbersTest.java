@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.strategy.FixedNumberGenerator;
+import lotto.domain.strategy.ManualLottoNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -38,9 +38,10 @@ class LottoNumbersTest {
   @DisplayName("매칭된 번호를 잘 가져오는지 확인")
   @CsvSource(value = {"1,5,10|1,20,25|1", "1,10|2,20|0", "1,10,13|1,10,13|3"}, delimiter = '|')
   void match(String numbers, String winNumbers, int matchCount) {
-    LottoNumbers lottoNumbers = LottoNumbers.from(new FixedNumberGenerator(numbers).generate());
+    LottoNumbers lottoNumbers = LottoNumbers.from(
+        new ManualLottoNumberGenerator(numbers).generate());
     LottoNumbers winLottoNumbers = LottoNumbers.from(
-        new FixedNumberGenerator(winNumbers).generate());
+        new ManualLottoNumberGenerator(winNumbers).generate());
 
     assertThat(lottoNumbers.getMatchNumbers(winLottoNumbers).getNumberSize()).isEqualTo(matchCount);
   }
