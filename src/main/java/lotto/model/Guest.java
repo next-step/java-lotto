@@ -1,9 +1,6 @@
 package lotto.model;
 
-import java.util.List;
 import java.util.Objects;
-import lotto.exception.LottoSizeException;
-import lotto.exception.MoneyNumberException;
 
 public final class Guest {
 
