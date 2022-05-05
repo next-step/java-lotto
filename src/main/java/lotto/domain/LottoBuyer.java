@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import lotto.constant.MatchResult;
+
+import java.util.List;
+
 public class LottoBuyer {
 
     private static final int LOTTO_PRICE = 1000;
@@ -29,5 +33,9 @@ public class LottoBuyer {
 
     public Lottos lottos() {
         return lottos;
+    }
+
+    public int countMatchResult(MatchResult matchResult) {
+        return lottos.countMatchResult(matchResult);
     }
 }

@@ -23,7 +23,7 @@ public class WinningStats {
     private static List<MatchStats> findMatchStatsList(LottoBuyer lottoBuyer) {
         List<MatchStats> matchStats = new ArrayList<>();
         for (MatchResult matchResult : MatchResult.values()) {
-            int count = lottoBuyer.lottos().countMatchResult(matchResult);
+            int count = lottoBuyer.countMatchResult(matchResult);
             matchStats.add(new MatchStats(count, matchResult));
         }
         return matchStats;
