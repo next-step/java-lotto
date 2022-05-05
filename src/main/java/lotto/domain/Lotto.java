@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.constant.MatchResult;
 
-import java.util.List;
 import java.util.Optional;
 
 public class Lotto {
@@ -14,7 +13,7 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public void confirm(List<LottoNumber> winningNumbers) {
+    public void confirm(LottoNumbers winningNumbers) {
         int matchCount = lottoNumbers.matchCount(winningNumbers);
         this.matchResult = MatchResult.findByMatchCount(matchCount);
     }

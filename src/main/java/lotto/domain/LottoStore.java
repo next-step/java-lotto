@@ -8,7 +8,7 @@ import java.util.List;
 
 public class LottoStore {
 
-    private static final List<LottoNumber> fullLottoNumbers = fullLottoNumbers();
+    private static final List<LottoNumber> FULL_LOTTO_NUMBERS = fullLottoNumbers();
 
     private LottoStore() {
         throw new NotSupportInstanceException();
@@ -24,9 +24,9 @@ public class LottoStore {
 
     private static LottoNumbers randomLottoNumbers() {
         List<LottoNumber> random = new ArrayList<>();
-        Collections.shuffle(fullLottoNumbers);
+        Collections.shuffle(FULL_LOTTO_NUMBERS);
         for (int i = 0; i < LottoNumbers.LOTTO_NUMBER_COUNT; i++) {
-            random.add(fullLottoNumbers.get(i));
+            random.add(FULL_LOTTO_NUMBERS.get(i));
         }
         return new LottoNumbers(random);
     }

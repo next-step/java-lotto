@@ -28,10 +28,14 @@ public class LottoNumbers {
         return new LottoNumbers(winningLottoNumbers);
     }
 
-    public int matchCount(List<LottoNumber> winningNumbers) {
+    public int matchCount(LottoNumbers winningNumbers) {
         return (int) lottoNumbers.stream()
-                .filter(lottoNumber -> winningNumbers.contains(lottoNumber))
+                .filter(lottoNumber -> winningNumbers.isContains(lottoNumber))
                 .count();
+    }
+
+    private boolean isContains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     public List<LottoNumber> toList() {

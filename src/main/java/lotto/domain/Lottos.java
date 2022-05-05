@@ -19,7 +19,7 @@ public class Lottos {
 
     public void confirmAll(LottoNumbers winningNumbers) {
         for (Lotto lotto : lottos) {
-            lotto.confirm(winningNumbers.toList());
+            lotto.confirm(winningNumbers);
         }
     }
 

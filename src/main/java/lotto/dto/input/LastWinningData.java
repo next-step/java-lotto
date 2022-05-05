@@ -11,10 +11,6 @@ public class LastWinningData {
         this.winningNumberValue = winningNumberValue;
     }
 
-    public String winningNumberValue() {
-        return winningNumberValue;
-    }
-
     public LottoNumbers toWinningLottoNumbers() {
         String[] winningNumbers = SplitUtil.split(winningNumberValue);
         return LottoNumbers.winningLottoNumbers(winningNumbers);

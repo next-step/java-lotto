@@ -46,7 +46,7 @@ class LottoNumbersTest {
         lottoNumbers2.add(new LottoNumber(24));
         lottoNumbers2.add(new LottoNumber(34));
 
-        assertThat(new LottoNumbers(lottoNumbers).matchCount(lottoNumbers2)).isEqualTo(2);
+        assertThat(new LottoNumbers(lottoNumbers).matchCount(new LottoNumbers(lottoNumbers2))).isEqualTo(2);
     }
 
     @Test
