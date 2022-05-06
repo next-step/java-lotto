@@ -26,7 +26,7 @@ class LottoTest {
         lottoNumbers.add(12);
         lottoNumbers.add(40);
         lottoNumbers.add(45);
-        assertThatThrownBy(() -> lotto = new Lotto(lottoNumbers, 1))
+        assertThatThrownBy(() -> lotto = new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또의 숫자는 6개 입니다.");
     }
@@ -59,19 +59,10 @@ class LottoTest {
     @Test
     @DisplayName("당첨 결과 테스트 - 5등")
     void winning_lotto_compare_test(){
-        Lotto winningLotto = new Lotto(List.of(1,2,3,4,5,6), 1);
-        lotto = new Lotto(List.of(1,2,3,11,12,13) ,1);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1,2,3,4,5,6)), 1);
+        lotto = new Lotto(List.of(1,2,3,11,12,13));
         lotto.match(winningLotto);
         assertThat(lotto.isStatus()).isEqualTo(LottoStatus.FIFTH);
-    }
-
-    @Test
-    @DisplayName("당첨 결과 테스트 - 2등")
-    void winning_lotto_compare_test2(){
-        Lotto winningLotto = new Lotto(List.of(1,2,3,4,5,6), 1);
-        lotto = new Lotto(List.of(1,2,3,4,5,13) ,1);
-        lotto.match(winningLotto);
-        assertThat(lotto.isStatus()).isEqualTo(LottoStatus.SECOND);
     }
 
 }

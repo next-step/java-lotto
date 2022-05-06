@@ -30,6 +30,6 @@ public class LottoGenerator {
             newLotto.add(NUMBER_CANDIDATES.get(i));
         }
         Collections.sort(newLotto);
-        return new Lotto(newLotto, NUMBER_CANDIDATES.get(LOTTO_LENGTH));
+        return new Lotto(newLotto);
     }
 }

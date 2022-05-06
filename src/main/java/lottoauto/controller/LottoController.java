@@ -1,9 +1,6 @@
 package lottoauto.controller;
 
-import lottoauto.domain.Lotto;
-import lottoauto.domain.LottoGame;
-import lottoauto.domain.LottoReport;
-import lottoauto.domain.Lottos;
+import lottoauto.domain.*;
 import lottoauto.view.InputView;
 import lottoauto.view.ResultView;
 
@@ -41,18 +38,23 @@ import java.util.List;
  */
 public class LottoController {
     public static void main(String[] args) {
+        int userMoney = InputView.askLottoMoney();
+        int tryManualCount = InputView.askTryManualLotto();
+        LottoGame lottoGame = new LottoGame(userMoney, tryManualCount);
 
-        LottoGame lottoGame = new LottoGame(InputView.askLottoMoney());
+        List<Lotto> manualLottos = InputView.inputEachLottos(tryManualCount);
 
-        Lottos lottos = lottoGame.start();
+        ResultView.printLottoCountInfo(tryManualCount, lottoGame.getLottoAutoCount());
+        Lottos lottos = lottoGame.start(manualLottos);
+
 
         ResultView.printLottos(lottos.all());
 
         LottoReport lottoReport = new LottoReport();
-
         lottos.reportLottos(lottoReport);
 
-        lottos.checkWinningLotto(new Lotto(InputView.askWinningLotto(), InputView.askWinningBonusNumber()));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(InputView.askWinningLotto()), InputView.askWinningBonusNumber());
+        lottos.checkWinningLotto(winningLotto);
         lottos.match();
 
         lottos.reportLottoCount(lottoReport);

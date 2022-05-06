@@ -6,36 +6,30 @@ import java.util.List;
 public class Lotto {
     public static final int PRICE = 1000;
 
-    private final int bonusNumber;
     private boolean isBonusNumberSame = false;
     private List<Integer> numbers;
     private int matchCount;
 
-    public Lotto(List<Integer> inputNumbers, int bonusNumber) {
+    public Lotto(List<Integer> inputNumbers) {
         if(inputNumbers.size() > LottoGenerator.LOTTO_LENGTH){
             throw new IllegalArgumentException("로또의 숫자는 6개 입니다.");
         }
         this.numbers = inputNumbers;
-        this.bonusNumber = bonusNumber;
     }
 
     public List<Integer> getNumbers() {
         return new ArrayList<>(numbers);
     }
 
-    public void match(Lotto winnerLotto) {
-        matchCount = 0;
-        for (Integer number : winnerLotto.getNumbers()) {
-            if(numbers.contains(number)) matchCount += 1;
+    public void match(WinningLotto winningLotto){
+            matchCount = 0;
+            for (Integer number : winningLotto.getWinnerLottoNumbers()) {
+                if (numbers.contains(number)) matchCount += 1;
+            }
+            if (numbers.contains(winningLotto.getBonusNumber())) {
+                isBonusNumberSame = true;
+            }
         }
-        if (winnerLotto.getBonusNumber() == getBonusNumber()){
-            isBonusNumberSame = true;
-        }
-    }
-
-    private int getBonusNumber() {
-        return bonusNumber;
-    }
 
     public LottoStatus isStatus() {
         if (matchCount == 3){

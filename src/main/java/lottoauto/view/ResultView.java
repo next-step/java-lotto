@@ -31,4 +31,9 @@ public class ResultView {
             System.out.println(lotto.getNumbers());
         }
     }
+
+    //수동으로 3장, 자동으로 11개를 구매했습니다.
+    public static void printLottoCountInfo(int manualCount, int autoCount) {
+        System.out.println("수동으로 " + manualCount + "장, 자동으로 " + autoCount + "개를 구매했습니다.");
+    }
 }

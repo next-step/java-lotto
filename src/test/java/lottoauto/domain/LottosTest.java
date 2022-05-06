@@ -14,14 +14,14 @@ class LottosTest {
 
     @Test
     void lotto_generate_test(){
-        Lotto lotto1 = new Lotto(List.of(1,2,3,4,5,6),1);
-        Lotto lotto2 = new Lotto(List.of(2,3,4,5,6,7),2);
+        Lotto lotto1 = new Lotto(List.of(1,2,3,4,5,6));
+        Lotto lotto2 = new Lotto(List.of(2,3,4,5,6,7));
         List<Lotto> list = new ArrayList<>();
         list.add(lotto1);
         list.add(lotto2);
 
         lottos = new Lottos(list);
-        lottos.checkWinningLotto(new Lotto(List.of(1,2,3,4,5,6), 7));
+        lottos.checkWinningLotto(new WinningLotto(new Lotto(List.of(1,2,3,4,5,6)), 4));
 
         assertThat(lottos.all().size()).isEqualTo(2);
     }

@@ -6,18 +6,23 @@ import java.util.List;
 public class LottoGame {
     private final int money;
     private final int lottoCount;
+    private final int lottoAutoCount;
+    private final int lottoManualCount;
 
-    public LottoGame(int money) {
+    public LottoGame(int money, int tryManualCount) {
         if (money < Lotto.PRICE) {
             throw new IllegalArgumentException("로또를 살 수 없습니다.");
         }
         this.money = money;
         this.lottoCount = money / Lotto.PRICE;
+        this.lottoManualCount = tryManualCount;
+        this.lottoAutoCount = this.lottoCount - tryManualCount;
     }
 
-    public Lottos start(){
+    public Lottos start(List<Lotto> manualLottos){
         List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
+        lottoList.addAll(manualLottos);
+        for (int i = 0; i < lottoAutoCount; i++) {
             lottoList.add(LottoGenerator.makeLotto());
         }
         Lottos lottos = new Lottos(lottoList);
@@ -28,6 +33,14 @@ public class LottoGame {
         return lottoCount;
     }
 
+    public int getLottoAutoCount() {
+        return lottoAutoCount;
+    }
+
+    public int getLottoManualCount() {
+        return lottoManualCount;
+    }
+
     public int getProfitRate(Lottos lottos) {
         int totalWinningMoney = LottoStatus.FIFTH.getWinningMoney() * lottos.getWinningMap().get(LottoStatus.FIFTH)
                 + LottoStatus.FOURTH.getWinningMoney() * lottos.getWinningMap().get(LottoStatus.FOURTH)
@@ -36,5 +49,4 @@ public class LottoGame {
                 + LottoStatus.FIRST.getWinningMoney() * lottos.getWinningMap().get(LottoStatus.FIRST);
         return totalWinningMoney / this.money;
     }
-
 }
