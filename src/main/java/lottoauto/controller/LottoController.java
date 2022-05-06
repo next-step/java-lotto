@@ -38,7 +38,6 @@ import java.util.List;
  */
 public class LottoController {
     public static void main(String[] args) {
-
         int userMoney = InputView.askLottoMoney();
         int tryManualCount = InputView.askTryManualLotto();
         LottoGame lottoGame = new LottoGame(userMoney, tryManualCount);
