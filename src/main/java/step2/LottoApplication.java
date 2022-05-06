@@ -5,7 +5,6 @@ import step2.view.InputView;
 import step2.view.OutPutView;
 import step2.view.dto.GameResultDto;
 import step2.view.dto.PurchaseCountDto;
-import step2.view.dto.PurchaseListDto;
 import step2.view.dto.ReturnRateDto;
 
 public class LottoApplication {
@@ -20,7 +19,7 @@ public class LottoApplication {
         outPutView.show(new PurchaseCountDto(purchaseMoney).toString());
 
         PurchaseList purchaseList = new PurchaseList(purchaseMoney);
-        outPutView.show(new PurchaseListDto(purchaseList).toString());
+        outPutView.show(purchaseList.toString());
 
         String winnerInput = inputView.askWinnerInput();
         Winner winner = new Winner(winnerInput);

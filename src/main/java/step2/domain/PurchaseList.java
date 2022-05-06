@@ -36,4 +36,11 @@ public class PurchaseList {
                 .map(lotto -> lotto.calculateHitCount(winner))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public String toString() {
+        return this.values.stream()
+                .map(Lotto::toString)
+                .collect(Collectors.joining("\n"));
+    }
 }

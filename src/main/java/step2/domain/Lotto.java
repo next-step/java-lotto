@@ -1,6 +1,7 @@
 package step2.domain;
 
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -26,8 +27,10 @@ public class Lotto {
         }
     }
 
-    public List<LottoNumber> getValues() {
-        return values;
+    public long calculateHitCount(Winner winner) {
+        return values.stream()
+                .filter(winner::isContain)
+                .count();
     }
 
     @Override
@@ -43,9 +46,11 @@ public class Lotto {
         return Objects.hash(values);
     }
 
-    public long calculateHitCount(Winner winner) {
+    @Override
+    public String toString() {
         return values.stream()
-                .filter(winner::isContain)
-                .count();
+                .sorted(Comparator.comparing(LottoNumber::getValue))
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(" "));
     }
 }
