@@ -44,12 +44,14 @@ public class LottoController {
         LottoGame lottoGame = new LottoGame(userMoney, tryManualCount);
 
         List<Lotto> manualLottos = InputView.inputEachLottos(tryManualCount);
+
+        ResultView.printLottoCountInfo(tryManualCount, lottoGame.getLottoAutoCount());
         Lottos lottos = lottoGame.start(manualLottos);
+
 
         ResultView.printLottos(lottos.all());
 
         LottoReport lottoReport = new LottoReport();
-
         lottos.reportLottos(lottoReport);
 
         WinningLotto winningLotto = new WinningLotto(new Lotto(InputView.askWinningLotto()), InputView.askWinningBonusNumber());

@@ -33,6 +33,14 @@ public class LottoGame {
         return lottoCount;
     }
 
+    public int getLottoAutoCount() {
+        return lottoAutoCount;
+    }
+
+    public int getLottoManualCount() {
+        return lottoManualCount;
+    }
+
     public int getProfitRate(Lottos lottos) {
         int totalWinningMoney = LottoStatus.FIFTH.getWinningMoney() * lottos.getWinningMap().get(LottoStatus.FIFTH)
                 + LottoStatus.FOURTH.getWinningMoney() * lottos.getWinningMap().get(LottoStatus.FOURTH)
@@ -41,5 +49,4 @@ public class LottoGame {
                 + LottoStatus.FIRST.getWinningMoney() * lottos.getWinningMap().get(LottoStatus.FIRST);
         return totalWinningMoney / this.money;
     }
-
 }
