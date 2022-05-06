@@ -12,8 +12,8 @@ public class PurchaseList {
 
     private final List<Lotto> values;
 
-    public PurchaseList(PurchaseCount purchaseCount) {
-        this(purchaseCount.getValue());
+    public PurchaseList(PurchaseMoney purchaseMoney) {
+        this(purchaseMoney.getPurchaseCount());
     }
 
     public PurchaseList(int purchaseCount) {

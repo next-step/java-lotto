@@ -41,10 +41,11 @@ class GameResultTest {
             delimiter = ':'
     )
     void 구매금액을_입력받아서_수익률을_계산(int purchaseAmount, Long hitCount, double returnRate) {
+        PurchaseMoney purchaseMoney = new PurchaseMoney(purchaseAmount);
         List<Long> hitCounts = List.of(hitCount);
 
         GameResult gameResult = new GameResult(hitCounts);
 
-        assertThat(gameResult.calculateReturnRate(purchaseAmount)).isEqualTo(returnRate);
+        assertThat(gameResult.calculateReturnRate(purchaseMoney)).isEqualTo(returnRate);
     }
 }

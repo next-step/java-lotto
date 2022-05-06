@@ -16,10 +16,10 @@ public class LottoApplication {
         OutPutView outPutView = new OutPutView();
 
         int purchaseAmount = inputView.askPurchaseAmount();
-        PurchaseCount purchaseCount = new PurchaseCount(purchaseAmount);
-        outPutView.show(new PurchaseCountDto(purchaseCount).toString());
+        PurchaseMoney purchaseMoney = new PurchaseMoney(purchaseAmount);
+        outPutView.show(new PurchaseCountDto(purchaseMoney).toString());
 
-        PurchaseList purchaseList = new PurchaseList(purchaseCount);
+        PurchaseList purchaseList = new PurchaseList(purchaseMoney);
         outPutView.show(new PurchaseListDto(purchaseList).toString());
 
         String winnerInput = inputView.askWinnerInput();
@@ -30,7 +30,7 @@ public class LottoApplication {
         GameResult gameResult = lottoGame.calculateGameResult();
 
         GameResultDto gameResultDto = new GameResultDto(gameResult);
-        ReturnRateDto returnRateDto = new ReturnRateDto(gameResult.calculateReturnRate(purchaseAmount));
+        ReturnRateDto returnRateDto = new ReturnRateDto(gameResult.calculateReturnRate(purchaseMoney));
 
         outPutView.showResultLine();
         outPutView.show(gameResultDto.toString());

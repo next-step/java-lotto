@@ -2,22 +2,24 @@ package step2.domain;
 
 import java.util.Objects;
 
-public class PurchaseCount {
+public class PurchaseMoney {
 
     private static final int DEFAULT_EACH_LOTTO_PRICE = 1000;
 
-    private final int value;
+    private final int purchaseAmount;
+    private final int purchaseCount;
 
-    public PurchaseCount(int purchaseAmount) {
+    public PurchaseMoney(int purchaseAmount) {
         this(purchaseAmount, DEFAULT_EACH_LOTTO_PRICE);
     }
 
-    public PurchaseCount(int purchaseAmount, int eachPrice) {
+    public PurchaseMoney(int purchaseAmount, int eachPrice) {
         validateEachLottoPrice(eachPrice);
         validateInput(purchaseAmount);
         validateLeast(purchaseAmount, eachPrice);
         validateDivisible(purchaseAmount, eachPrice);
-        this.value = purchaseAmount / eachPrice;
+        this.purchaseAmount = purchaseAmount;
+        this.purchaseCount = purchaseAmount / eachPrice;
     }
 
     private void validateEachLottoPrice(int eachPrice) {
@@ -44,20 +46,24 @@ public class PurchaseCount {
         }
     }
 
-    public int getValue() {
-        return value;
+    public int getPurchaseAmount() {
+        return purchaseAmount;
+    }
+
+    public int getPurchaseCount() {
+        return purchaseCount;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PurchaseCount that = (PurchaseCount) o;
-        return value == that.value;
+        PurchaseMoney that = (PurchaseMoney) o;
+        return purchaseCount == that.purchaseCount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return Objects.hash(purchaseCount);
     }
 }

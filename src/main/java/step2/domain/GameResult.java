@@ -28,8 +28,8 @@ public class GameResult {
         this.rankCount.computeIfPresent(lottoRank, (lottoRank1, integer) -> integer + 1);
     }
 
-    public double calculateReturnRate(int purchaseAmount) {
-        return getPrizeMoneySum() / (double) purchaseAmount;
+    public double calculateReturnRate(PurchaseMoney purchaseMoney) {
+        return getPrizeMoneySum() / (double) purchaseMoney.getPurchaseAmount();
     }
 
     private int getPrizeMoneySum() {
