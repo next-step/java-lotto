@@ -26,15 +26,6 @@ public final class Lotto {
         return Collections.unmodifiableSet(lotto);
     }
 
-    public Rank getRank(Lotto result, LottoNumber bonusNumber) {
-        Set<LottoNumber> resultLotto = result.get();
-        Set<LottoNumber> originLotto = new HashSet<>(lotto);
-
-        originLotto.retainAll(resultLotto);
-
-        return Rank.of(originLotto.size(), contains(bonusNumber));
-    }
-
     public int getMatchCount(Lotto result) {
         Objects.requireNonNull(result, "matchCount를 계산하기 위한 Lotto는 null일 수 없습니다.");
         Set<LottoNumber> intersectionLotto = intersectionBy(result);
