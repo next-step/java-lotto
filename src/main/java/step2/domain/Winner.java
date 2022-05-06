@@ -18,7 +18,7 @@ public class Winner {
         validateLength(splits);
         validateDuplicate(splits);
         this.values = Arrays.stream(splits)
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(Collectors.toList());
     }
 

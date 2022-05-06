@@ -1,22 +1,39 @@
 package step2.domain;
 
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
 
+    private static final int MIN = 1;
+    private static final int MAX = 45;
+    private static final Map<String, LottoNumber> CACHE = initCache();
+
     private final int value;
 
-    public LottoNumber(String text) {
-        int input = Integer.parseInt(text);
-        validate(input);
-        this.value = input;
+    private LottoNumber(int number) {
+        this.value = number;
     }
 
-    private void validate(int input) {
-        if (input < 1 || input > 45) {
-            throw new IllegalArgumentException("범위를 벗어나는 번호입니다.");
+    private static Map<String, LottoNumber> initCache() {
+        Map<String, LottoNumber> result = new HashMap<>();
+        for (int index = MIN; index <= MAX; index++) {
+            result.put(String.valueOf(index), new LottoNumber(index));
         }
+        return result;
+    }
+
+    public static LottoNumber from(String text) {
+        if (CACHE.containsKey(text)) {
+            return CACHE.get(text);
+        }
+        throw new IllegalArgumentException("범위를 벗어나는 번호입니다.");
+    }
+
+    public int getValue() {
+        return this.value;
     }
 
     @Override
@@ -30,9 +47,5 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(value);
-    }
-
-    public int getValue() {
-        return this.value;
     }
 }

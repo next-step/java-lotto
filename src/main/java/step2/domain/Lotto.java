@@ -16,7 +16,7 @@ public class Lotto {
         Set<String> numbers = purchaseStrategy.getNumbers(COUNT);
         validate(numbers);
         this.values = numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(Collectors.toList());
     }
 

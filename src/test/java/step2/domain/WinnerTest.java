@@ -49,6 +49,6 @@ class WinnerTest {
     @ParameterizedTest(name = "{displayName} -> [{index}] : {arguments}")
     @CsvSource(value = {"1:true", "45:false"}, delimiter = ':')
     void 주어진_로또_번호가_지난_당첨_번호에_포함되는지_반환(String input, boolean result) {
-        assertThat(new Winner("1, 2, 3, 4, 5, 6").isContain(new LottoNumber(input))).isEqualTo(result);
+        assertThat(new Winner("1, 2, 3, 4, 5, 6").isContain(LottoNumber.from(input))).isEqualTo(result);
     }
 }
