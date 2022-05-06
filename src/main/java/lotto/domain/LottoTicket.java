@@ -24,19 +24,10 @@ public class LottoTicket {
     return Collections.unmodifiableList(lottoNumbers);
   }
 
-  private int getMatchedLottoNumberCount(List<LottoNumber> winLottoNumbers) {
-    int matchedCount = 0;
-    for (LottoNumber lottoNumber : lottoNumbers) {
-      matchedCount += getMatchedCount(winLottoNumbers, lottoNumber);
-    }
-    return matchedCount;
-  }
-
-  private int getMatchedCount(List<LottoNumber> winLottoNumbers, LottoNumber lottoNumber) {
-    if (winLottoNumbers.contains(lottoNumber)) {
-      return 1;
-    }
-    return 0;
+  private long getMatchedLottoNumberCount(List<LottoNumber> winLottoNumbers) {
+    return lottoNumbers.stream()
+        .filter(winLottoNumbers::contains)
+        .count();
   }
 
   private void validateSize(List<LottoNumber> lottoNumbers) {

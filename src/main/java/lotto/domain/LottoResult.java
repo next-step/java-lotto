@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class LottoResult {
 
-  private final int matchedCount;
+  private final long matchedCount;
 
-  public LottoResult(int matchedCount) {
+  public LottoResult(long matchedCount) {
     this.matchedCount = matchedCount;
   }
 

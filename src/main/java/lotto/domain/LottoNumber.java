@@ -3,24 +3,22 @@ package lotto.domain;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
 
-  private static final int MIN_LOTTO_NUMBER = 1;
-  private static final int MAX_LOTTO_NUMBER = 45;
+  static final int MIN_LOTTO_NUMBER = 1;
+  static final int MAX_LOTTO_NUMBER = 45;
 
-  private static final Map<Integer, LottoNumber> cachedLottoNumbers = new HashMap<>(MAX_LOTTO_NUMBER);
+  private static final Map<Integer, LottoNumber> cachedLottoNumbers = new HashMap<>(
+      MAX_LOTTO_NUMBER);
 
   static {
-    for (int number = MIN_LOTTO_NUMBER; number < MAX_LOTTO_NUMBER; number++) {
-      cachedLottoNumbers.put(number, new LottoNumber(number));
-    }
+    IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+        .forEach(number -> cachedLottoNumbers.put(number, new LottoNumber(number)));
   }
-  private final int number;
 
-  private LottoNumber(String number) {
-    this(Integer.parseInt(number.trim()));
-  }
+  private final int number;
 
   private LottoNumber(int number) {
     validateLottoNumber(number);

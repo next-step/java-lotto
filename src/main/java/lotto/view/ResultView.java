@@ -2,6 +2,8 @@ package lotto.view;
 
 import static java.lang.System.out;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTicket;
@@ -18,10 +20,11 @@ public class ResultView {
   public static void print(LottoStatistics resultStatistics) {
     out.println("당첨 통계");
     out.println("---------");
-    out.println(LottoRank.FOURTH + "- " + resultStatistics.getCountByLottoRank(LottoRank.FOURTH) + "개");
-    out.println(LottoRank.THIRD + "- " + resultStatistics.getCountByLottoRank(LottoRank.THIRD) + "개");
-    out.println(LottoRank.SECOND + "- " + resultStatistics.getCountByLottoRank(LottoRank.SECOND) + "개");
-    out.println(LottoRank.TOP + "- " + resultStatistics.getCountByLottoRank(LottoRank.TOP) + "개");
+    Arrays.stream(LottoRank.values())
+        .sorted(Comparator.comparing(LottoRank::getMatchCount))
+        .filter(LottoRank::isRewarded)
+        .forEach(lottoRank -> out.println(
+            lottoRank + "- " + resultStatistics.getCountByLottoRank(lottoRank) + "개"));
     out.print("총 수익률은 " + resultStatistics.getRateOfReturn() + "입니다.");
   }
 }
