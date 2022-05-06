@@ -8,6 +8,7 @@ import lotto.model.LottoNumber;
 import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.RandomLottoGenerator;
+import lotto.model.WinnerLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -22,7 +23,7 @@ public class LottoMain {
         Lotto winnerLotto = new Lotto(ExtractLottoNumbers.split(winnerLottoNumbers));
         LottoNumber bonusNumber = LottoNumber.valueOf(InputView.inputBonusLottoNumber());
 
-        LottoResult lottoResult = buyingLottos.getLottoResult(winnerLotto, bonusNumber);
+        LottoResult lottoResult = buyingLottos.getLottoResult(new WinnerLotto(winnerLotto, bonusNumber));
 
         ResultView.printResult(buyingMoney, lottoResult);
     }
