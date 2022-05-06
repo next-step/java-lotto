@@ -78,4 +78,8 @@ public class OutputView {
                 });
         return builder.toString();
     }
+
+    public void printErrorMessage(String message) {
+        System.out.println(message);
+    }
 }

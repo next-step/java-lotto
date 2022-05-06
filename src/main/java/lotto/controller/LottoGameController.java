@@ -24,11 +24,15 @@ public class LottoGameController {
     }
 
     public void play() {
-        int money = getMoney();
-        List<LottoTicket> lottoTickets = getLottoTickets(money);
-        outputView.printLottoTickets(lottoTickets);
-        RankResults rankResults = getRankResults(lottoTickets);
-        outputView.printResult(rankResults, money);
+        try {
+            int money = getMoney();
+            List<LottoTicket> lottoTickets = getLottoTickets(money);
+            outputView.printLottoTickets(lottoTickets);
+            RankResults rankResults = getRankResults(lottoTickets);
+            outputView.printResult(rankResults, money);
+        } catch (RuntimeException e) {
+            outputView.printErrorMessage(e.getMessage());
+        }
     }
 
     private RankResults getRankResults(List<LottoTicket> lottoTickets) {
