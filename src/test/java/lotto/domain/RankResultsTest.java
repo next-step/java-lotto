@@ -16,9 +16,9 @@ class RankResultsTest {
     void profitRatioTest(int money, double ratio) {
         List<RankResult> rankResultList = List.of(
                 new RankResult(Rank.FIRST, 0),
-                new RankResult(Rank.SECOND, 1),
-                new RankResult(Rank.THIRD, 9),
-                new RankResult(Rank.FOURTH, 10)
+                new RankResult(Rank.THIRD, 1),
+                new RankResult(Rank.FOURTH, 9),
+                new RankResult(Rank.FIFTH, 10)
         );
 
         RankResults rankResults = new RankResults(rankResultList);

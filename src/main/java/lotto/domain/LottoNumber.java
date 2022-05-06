@@ -21,6 +21,10 @@ public class LottoNumber {
         }
     }
 
+    public boolean isEqualToBonusNumber(LottoNumber bonusNumber) {
+        return bonusNumber.equals(this);
+    }
+
     public int toInt() {
         return value;
     }

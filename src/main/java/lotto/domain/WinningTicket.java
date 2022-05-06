@@ -13,12 +13,14 @@ public class WinningTicket {
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoTicket getLottoTicket() {
-        return lottoTicket;
-    }
-
     public boolean isMatchBonusNumber(LottoNumber bonusNumber) {
         return this.bonusNumber.equals(bonusNumber);
+    }
+
+    public Rank getRank(LottoTicket lottoTicket) {
+        int count = this.lottoTicket.countMatchNumbers(lottoTicket);
+        boolean isMatchBonusNumber = lottoTicket.includeBonusNumber(this.bonusNumber);
+        return Rank.getRank(count, isMatchBonusNumber);
     }
 
     private void validBonusNumber(LottoTicket lottoTicket, LottoNumber bonusNumber) {

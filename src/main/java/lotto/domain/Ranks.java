@@ -8,17 +8,14 @@ import java.util.stream.Collectors;
 
 public class Ranks {
 
-    private static final int MINIMUM_WINNING_COUNT = 3;
     private final List<Rank> ranks;
 
     public Ranks(List<Rank> ranks) {
         this.ranks = ranks;
     }
-    public static List<RankResult> getRankResults(List<Integer> matchNumbers) {
-        return new Ranks(matchNumbers.stream()
-                .filter(r -> r >= MINIMUM_WINNING_COUNT)
-                .map(Rank::getRank)
-                .collect(Collectors.toList())).groupBy();
+
+    public static List<RankResult> getRankResults(List<Rank> ranks) {
+        return new Ranks(ranks).groupBy();
     }
 
     private List<RankResult> groupBy() {

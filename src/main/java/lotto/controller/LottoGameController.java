@@ -33,8 +33,8 @@ public class LottoGameController {
 
     private RankResults getRankResults(List<LottoTicket> lottoTickets) {
         WinningTicket winningTicket = getWinningTicket();
-        List<Integer> matchNumbers = getMatchNumbers(lottoTickets, winningTicket.getLottoTicket());
-        return new RankResults(Ranks.getRankResults(matchNumbers));
+        List<Rank> ranks = getRanks(lottoTickets, winningTicket);
+        return new RankResults(Ranks.getRankResults(ranks));
     }
 
     private WinningTicket getWinningTicket() {
@@ -43,9 +43,9 @@ public class LottoGameController {
         return lottoTicketGenerator.generateWinningTicket(integers, bonusNumber);
     }
 
-    private List<Integer> getMatchNumbers(List<LottoTicket> lottoTickets, LottoTicket winningTicket) {
+    private List<Rank> getRanks(List<LottoTicket> lottoTickets, WinningTicket winningTicket) {
         return lottoTickets.stream()
-                .map(t -> t.countMatchNumbers(winningTicket))
+                .map(winningTicket::getRank)
                 .collect(Collectors.toList());
     }
 
