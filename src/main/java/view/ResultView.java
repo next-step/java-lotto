@@ -5,8 +5,9 @@ import domain.LottoStatistics;
 import domain.Lottos;
 
 public class ResultView {
-    public static void printHowLottoCount(int count) {
-        System.out.println(count + "개를 구매했습니다.");
+    public static void printHowLottoCount(int count, int buyManualLottoCount) {
+        System.out.print("수동으로" + buyManualLottoCount + "개, ");
+        System.out.println("자동으로" + count + "개를 구매했습니다.");
     }
 
     public static void printLottoList(Lottos lottos) {

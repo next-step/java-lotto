@@ -13,4 +13,5 @@ class LottoStatisticsTest {
                         , new LottoWinningNumbers(winningNumbers.split(","),10));
         assertThat(lottoStatistics.statistics()).isEqualTo(5);
     }
+
 }

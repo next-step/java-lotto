@@ -8,8 +8,10 @@ import view.ResultView;
 
 public class LottoGame {
     public static void main(String[] args) {
-        BuyLotto buyLotto = new BuyLotto(InputView.inputHowMoney());
-        ResultView.printHowLottoCount(buyLotto.buyLottoCount());
+        int buyMoney = InputView.inputHowMoney();
+        int buyManualLottoCount = InputView.inputManualLottoCount();
+        BuyLotto buyLotto = new BuyLotto(buyMoney, InputView.inputManualLottoNumbers(buyManualLottoCount));
+        ResultView.printHowLottoCount(buyLotto.buyLottoCount(), buyManualLottoCount);
         ResultView.printLottoList(buyLotto.getLottos());
 
         ResultView.printStatistics(new LottoStatistics(buyLotto

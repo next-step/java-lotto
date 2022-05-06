@@ -14,10 +14,12 @@ public class Lottos {
         this.lottoList = create(count);
     }
 
-    public Lottos(List<Lotto> lottoList) {
-        this.lottoList = lottoList;
-        this.lottoGenerator = null;
+    public Lottos(LottoGenerator lottoGenerator, List<Lotto> manualLotto, int count) {
+        this.lottoGenerator = lottoGenerator;
+        this.lottoList = create(count);
+        addManualLotto(manualLotto);
     }
+
 
     private List<Lotto> create(int count) {
         return IntStream.range(0, count)
@@ -25,19 +27,24 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
+    private void addManualLotto(List<Lotto> manualLotto) {
+        this.lottoList.addAll(manualLotto);
+    }
+
     public int calculateNumbers(LottoWinningNumbers winningNumbers, int count) {
         return Math.toIntExact(this.lottoList
                 .stream()
+                .filter(lotto -> !lotto.sameFiveNumberListWithBonusNumber(winningNumbers.getWinningLotto(),
+                        winningNumbers.getBonusNumber()))
                 .filter(lotto -> lotto.compareSameNumberList(winningNumbers.getWinningLotto()).size() == count)
-                .filter(lotto -> !lotto.sameFiveNumberListWithBonusNumber(winningNumbers.getWinningLotto()
-                        , winningNumbers.getBonusNumber()))
                 .count());
     }
 
-    public int calculateNumbersAndBonusNumber(Lotto winningNumbers, int bonusNumber) {
+    public int calculateNumbersAndBonusNumber(LottoWinningNumbers winningNumbers) {
         return Math.toIntExact(this.lottoList
                 .stream()
-                .filter(lotto -> lotto.sameFiveNumberListWithBonusNumber(winningNumbers, bonusNumber))
+                .filter(lotto -> lotto.sameFiveNumberListWithBonusNumber(winningNumbers.getWinningLotto()
+                        , winningNumbers.getBonusNumber()))
                 .count());
     }
 

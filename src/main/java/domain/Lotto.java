@@ -27,13 +27,18 @@ public class Lotto {
 
     public boolean sameFiveNumberListWithBonusNumber(Lotto lotto, int bonus) {
         Set<LottoNumber> checkLotto = new HashSet<>(lotto.lottoNumbers);
-        checkLotto.add(new LottoNumber(bonus));
-
         int sameLottoNumberCount = (int) checkLotto.stream()
-            .filter(lottoNumbers::contains)
-            .count();
+                .filter(this.lottoNumbers::contains)
+                .count();
 
-        return sameLottoNumberCount == SAME_FIVE_NUMBERS_AND_BONUS;
+        Set<LottoNumber> checkBonusLotto = new HashSet<>(lotto.lottoNumbers);
+        checkBonusLotto.add(new LottoNumber(bonus));
+        int withBonusNumberCount = (int) checkBonusLotto.stream()
+                .filter(this.lottoNumbers::contains)
+                .count();
+
+        return sameLottoNumberCount != SAME_FIVE_NUMBERS_AND_BONUS
+                && withBonusNumberCount == SAME_FIVE_NUMBERS_AND_BONUS;
     }
 
     @Override
