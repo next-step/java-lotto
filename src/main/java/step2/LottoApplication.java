@@ -22,6 +22,7 @@ public class LottoApplication {
         outPutView.show(purchaseList.toString());
 
         String winnerInput = inputView.askWinnerInput();
+        String bonusInput = inputView.askBonusInput();
         Winner winner = new Winner(winnerInput);
         inputView.close();
 
