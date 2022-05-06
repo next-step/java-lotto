@@ -19,12 +19,12 @@ class LottosTest {
     @BeforeEach
     void beforeEach() {
         TreeSet<LottoNumber> winningNumberTreeSet = new TreeSet<>();
-        winningNumberTreeSet.add(new LottoNumber(1));
-        winningNumberTreeSet.add(new LottoNumber(2));
-        winningNumberTreeSet.add(new LottoNumber(3));
-        winningNumberTreeSet.add(new LottoNumber(20));
-        winningNumberTreeSet.add(new LottoNumber(21));
-        winningNumberTreeSet.add(new LottoNumber(22));
+        winningNumberTreeSet.add(LottoNumber.valueOf(1));
+        winningNumberTreeSet.add(LottoNumber.valueOf(2));
+        winningNumberTreeSet.add(LottoNumber.valueOf(3));
+        winningNumberTreeSet.add(LottoNumber.valueOf(20));
+        winningNumberTreeSet.add(LottoNumber.valueOf(21));
+        winningNumberTreeSet.add(LottoNumber.valueOf(22));
 
         winningLottoNumbers = new WinningNumbers(winningNumberTreeSet);
     }
@@ -34,9 +34,9 @@ class LottosTest {
     @DisplayName("3개의 복권 중 2개가 MatchResult.Three 경우 10000을 반환한다.")
     void calculateTotalWinPrice() {
         List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add(new Lotto(new LottoMarkingNumbers(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)))));
-        lottoList.add(new Lotto(new LottoMarkingNumbers(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(7), new LottoNumber(8), new LottoNumber(9)))));
-        lottoList.add(new Lotto(new LottoMarkingNumbers(Arrays.asList(new LottoNumber(11), new LottoNumber(12), new LottoNumber(13), new LottoNumber(14), new LottoNumber(15), new LottoNumber(16)))));;
+        lottoList.add(new Lotto(new LottoMarkingNumbers(Arrays.asList(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3), LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)))));
+        lottoList.add(new Lotto(new LottoMarkingNumbers(Arrays.asList(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3), LottoNumber.valueOf(7), LottoNumber.valueOf(8), LottoNumber.valueOf(9)))));
+        lottoList.add(new Lotto(new LottoMarkingNumbers(Arrays.asList(LottoNumber.valueOf(11), LottoNumber.valueOf(12), LottoNumber.valueOf(13), LottoNumber.valueOf(14), LottoNumber.valueOf(15), LottoNumber.valueOf(16)))));;
 
         Lottos lottos = new Lottos(lottoList);
         lottos.confirmAll(winningLottoNumbers);
@@ -48,9 +48,9 @@ class LottosTest {
     @DisplayName("3개의 복권 중 2개가 MatchResult.Three 일때 MatchResult.Three 개수를 구하면 2개를 반환한다.")
     void countMatchResult() {
         List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add(new Lotto(new LottoMarkingNumbers(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)))));
-        lottoList.add(new Lotto(new LottoMarkingNumbers(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(7), new LottoNumber(8), new LottoNumber(9)))));
-        lottoList.add(new Lotto(new LottoMarkingNumbers(Arrays.asList(new LottoNumber(11), new LottoNumber(12), new LottoNumber(13), new LottoNumber(14), new LottoNumber(15), new LottoNumber(16)))));
+        lottoList.add(new Lotto(new LottoMarkingNumbers(Arrays.asList(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3), LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)))));
+        lottoList.add(new Lotto(new LottoMarkingNumbers(Arrays.asList(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3), LottoNumber.valueOf(7), LottoNumber.valueOf(8), LottoNumber.valueOf(9)))));
+        lottoList.add(new Lotto(new LottoMarkingNumbers(Arrays.asList(LottoNumber.valueOf(11), LottoNumber.valueOf(12), LottoNumber.valueOf(13), LottoNumber.valueOf(14), LottoNumber.valueOf(15), LottoNumber.valueOf(16)))));
 
         Lottos lottos = new Lottos(lottoList);
         lottos.confirmAll(winningLottoNumbers);

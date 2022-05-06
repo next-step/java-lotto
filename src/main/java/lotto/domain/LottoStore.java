@@ -1,40 +1,23 @@
 package lotto.domain;
 
-import lotto.exception.NotSupportInstanceException;
+import lotto.generator.RandomNumberGenerator;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class LottoStore {
 
-    private static final List<LottoNumber> FULL_LOTTO_NUMBERS = fullLottoNumbers();
+    private static final int LOTTO_PRICE = 1000;
+    private final int availablePurchaseLottoCount;
 
-    private LottoStore() {
-        throw new NotSupportInstanceException();
+    public LottoStore(int purchasePrice) {
+        this.availablePurchaseLottoCount = purchasePrice / LOTTO_PRICE;
     }
 
-    private static List<LottoNumber> fullLottoNumbers() {
-        List<LottoNumber> fullLottoNumbers = new ArrayList<>();
-        for (int i = LottoNumber.MIN_NUMBER; i <= LottoNumber.MAX_NUMBER; i++) {
-            fullLottoNumbers.add(new LottoNumber(i));
-        }
-        return fullLottoNumbers;
-    }
-
-    private static LottoMarkingNumbers randomLottoNumbers() {
-        List<LottoNumber> random = new ArrayList<>();
-        Collections.shuffle(FULL_LOTTO_NUMBERS);
-        for (int i = 0; i < LottoMarkingNumbers.LOTTO_NUMBER_COUNT; i++) {
-            random.add(FULL_LOTTO_NUMBERS.get(i));
-        }
-        return new LottoMarkingNumbers(random);
-    }
-
-    public static Lottos createLottos(int count) {
+    public Lottos sellLotto() {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto(randomLottoNumbers()));
+        for (int i = 0; i < availablePurchaseLottoCount; i++) {
+            lottos.add(new Lotto(RandomNumberGenerator.generate()));
         }
         return new Lottos(lottos);
     }

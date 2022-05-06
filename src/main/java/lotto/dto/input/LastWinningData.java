@@ -18,7 +18,7 @@ public class LastWinningData {
         String[] winningNumberValues = SplitUtil.split(winningNumberValue);
         TreeSet<LottoNumber> winningNumberTreeSet = new TreeSet<>();
         for (String value : winningNumberValues) {
-            winningNumberTreeSet.add(new LottoNumber(value));
+            winningNumberTreeSet.add(LottoNumber.valueOf(value));
         }
         return new WinningNumbers(winningNumberTreeSet);
     }

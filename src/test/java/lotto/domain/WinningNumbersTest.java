@@ -17,12 +17,12 @@ class WinningNumbersTest {
     @BeforeEach
     void beforeEach() {
         TreeSet<LottoNumber> winningNumberTreeSet = new TreeSet<>();
-        winningNumberTreeSet.add(new LottoNumber(1));
-        winningNumberTreeSet.add(new LottoNumber(2));
-        winningNumberTreeSet.add(new LottoNumber(3));
-        winningNumberTreeSet.add(new LottoNumber(4));
-        winningNumberTreeSet.add(new LottoNumber(5));
-        winningNumberTreeSet.add(new LottoNumber(6));
+        winningNumberTreeSet.add(LottoNumber.valueOf(1));
+        winningNumberTreeSet.add(LottoNumber.valueOf(2));
+        winningNumberTreeSet.add(LottoNumber.valueOf(3));
+        winningNumberTreeSet.add(LottoNumber.valueOf(4));
+        winningNumberTreeSet.add(LottoNumber.valueOf(5));
+        winningNumberTreeSet.add(LottoNumber.valueOf(6));
 
         winningLottoNumbers = new WinningNumbers(winningNumberTreeSet);
     }
@@ -30,7 +30,7 @@ class WinningNumbersTest {
     @Test
     @DisplayName("로또 번호가 당첨번호이면 true 반환한다.")
     void isWinning() {
-        assertThat(winningLottoNumbers.isWinningNumber(new LottoNumber(1))).isTrue();
+        assertThat(winningLottoNumbers.isWinningNumber(LottoNumber.valueOf(1))).isTrue();
     }
 
     @Test
@@ -39,17 +39,17 @@ class WinningNumbersTest {
         int[] winningNumber = {1,2,3,4,5,6};
         TreeSet<LottoNumber> winningNumberTreeSet = new TreeSet<>();
         for (int number : winningNumber) {
-            winningNumberTreeSet.add(new LottoNumber(number));
+            winningNumberTreeSet.add(LottoNumber.valueOf(number));
         }
 
-        assertThat(winningLottoNumbers.isWinningNumber(new LottoNumber(7))).isFalse();
+        assertThat(winningLottoNumbers.isWinningNumber(LottoNumber.valueOf(7))).isFalse();
     }
 
     @Test
     @DisplayName("당첨 번호가 6개가 아닐경우 InvalidLottoNumberCount 를 반환한다.")
     void InvalidNumberException() {
         TreeSet<LottoNumber> lottoNumberTreeSet = new TreeSet<>();
-        lottoNumberTreeSet.add(new LottoNumber(1));
+        lottoNumberTreeSet.add(LottoNumber.valueOf(1));
 
         assertThatThrownBy(() -> new WinningNumbers(lottoNumberTreeSet)).isInstanceOf(InvalidLottoNumberCount.class);
     }

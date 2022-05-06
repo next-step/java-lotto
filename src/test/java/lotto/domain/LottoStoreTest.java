@@ -8,9 +8,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoStoreTest {
 
     @Test
-    @DisplayName("10 개의 로또를 생성 시 10개의 로또를 반환한다.")
-    void createLottos() {
-        assertThat(LottoStore.createLottos(10).count()).isEqualTo(10);
+    @DisplayName("입력 금액을 1000으로 나눈 값만큼 로또를 반환한다.")
+    void sellLotto() {
+        assertThat(new LottoStore(10000).sellLotto().count()).isEqualTo(10);
     }
 
 }

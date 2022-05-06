@@ -2,11 +2,7 @@ package lotto.domain;
 
 import lotto.constant.MatchResult;
 
-import java.util.List;
-
 public class LottoBuyer {
-
-    private static final int LOTTO_PRICE = 1000;
 
     private final int purchaseAmount;
     private Lottos lottos;
@@ -16,11 +12,8 @@ public class LottoBuyer {
     }
 
     public void buyLottos() {
-        lottos = LottoStore.createLottos(lottoCount());
-    }
-
-    private int lottoCount() {
-        return purchaseAmount / LOTTO_PRICE;
+        LottoStore lottoStore = new LottoStore(purchaseAmount);
+        lottos = lottoStore.sellLotto();
     }
 
     public void confirmLottos(WinningNumbers lastWinningNumbers) {
