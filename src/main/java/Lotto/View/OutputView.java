@@ -55,7 +55,12 @@ public class OutputView {
                 continue;
             }
 
-            System.out.println(prize.getString() + Collections.frequency(prizes, prize) + "개");
+            if(prize.getCheckBonus()){
+                System.out.println(prize.getCountOfMatch() + "개 일치, 보너스 볼 일치 (" + prize.getWinningMoney() + "원) - " + Collections.frequency(prizes, prize) + "개");
+                continue;
+            }
+
+            System.out.println(prize.getCountOfMatch() + "개 일치 (" + prize.getWinningMoney() + "원) - " + Collections.frequency(prizes, prize) + "개");
         }
 
         System.out.printf("총 수익률은 %.2f입니다.%n", lottoGame.getWinningRate());

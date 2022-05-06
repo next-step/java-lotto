@@ -1,54 +1,53 @@
 package Lotto.Model;
 
 public enum Prize {
-    MISS(0, 0),
-    FIFTH(3, 5_000),
-    FOURTH(4, 50_000),
-    THIRD(5, 1_500_000),
-    SECOND(5, 30_000_000),
-    FIRST(6, 2_000_000_000);
+    MISS(0, 0, false),
+    FIFTH(3, 5_000, false),
+    FOURTH(4, 50_000, false),
+    THIRD(5, 1_500_000, true),
+    SECOND(5, 30_000_000, true),
+    FIRST(6, 2_000_000_000, false);
 
     private final int countOfMatch;
     private final int winningMoney;
+    private final boolean checkBonus;
 
-    Prize(int countOfMatch, int winningMoney) {
+    Prize(int countOfMatch, int winningMoney, boolean checkBonus) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
+        this.checkBonus = checkBonus;
     }
 
     public int getWinningMoney() {
         return winningMoney;
     }
 
-    public static Prize valueOf(int countOfMatch, boolean matchBonus) {
-        if(countOfMatch == 3){
-            return FIFTH;
-        }
-
-        if(countOfMatch == 4){
-            return FOURTH;
-        }
-
-        if(countOfMatch == 5 && !matchBonus){
-            return THIRD;
-        }
-
-        if(countOfMatch == 5){
-            return SECOND;
-        }
-
-        if(countOfMatch == 6){
-            return FIRST;
-        }
-
-        return MISS;
+    public int getCountOfMatch() {
+        return countOfMatch;
     }
 
-    public String getString() {
-        if(winningMoney == 30_000_000){
-            return countOfMatch + "개 일치, 보너스 볼 일치 (" + winningMoney + "원) - ";
+    public boolean getCheckBonus() {
+        return checkBonus;
+    }
+
+    public static Prize valueOf(int countOfMatch, boolean matchBonus) {
+        Prize[] prizes = values();
+
+        for(Prize prize : prizes){
+            if(prize.getCheckBonus()){
+                if(matchBonus){
+                    return SECOND;
+                }
+
+                return THIRD;
+            }
+
+            if(prize.getCountOfMatch() == countOfMatch){
+                return prize;
+            }
         }
 
-        return countOfMatch + "개 일치 (" + winningMoney + "원) - ";
+
+        return MISS;
     }
 }
