@@ -44,7 +44,7 @@ public class WinnerLottoTest {
         Rank rank = winnerLotto.getRank(firstLotto);
 
         // then
-        assertThat(rank == Rank.FIRST).isTrue();
+        assertThat(rank).isEqualTo(Rank.FIRST);
     }
 
     @Test
@@ -58,8 +58,9 @@ public class WinnerLottoTest {
         Rank rank = winnerLotto.getRank(secondLotto);
 
         // then
-        assertThat(rank == Rank.SECOND).isTrue();
+        assertThat(rank).isEqualTo(Rank.SECOND);
     }
+
     @Test
     @DisplayName("로또 3등 당첨 테스트")
     void rankThirdTest() {
@@ -71,7 +72,7 @@ public class WinnerLottoTest {
         Rank rank = winnerLotto.getRank(thirdLotto);
 
         // then
-        assertThat(rank == Rank.THIRD).isTrue();
+        assertThat(rank).isEqualTo(Rank.THIRD);
     }
 
     @Test
@@ -85,7 +86,7 @@ public class WinnerLottoTest {
         Rank rank = winnerLotto.getRank(fourthLotto);
 
         // then
-        assertThat(rank == Rank.FOURTH).isTrue();
+        assertThat(rank).isEqualTo(rank.FOURTH);
     }
 
 
@@ -100,7 +101,7 @@ public class WinnerLottoTest {
         Rank rank = winnerLotto.getRank(fifthLotto);
 
         // then
-        assertThat(rank == Rank.FIFTH).isTrue();
+        assertThat(rank).isEqualTo(rank.FIFTH);
     }
 
 }
