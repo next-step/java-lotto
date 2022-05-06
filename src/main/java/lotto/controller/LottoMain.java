@@ -19,12 +19,17 @@ public class LottoMain {
 
         ResultView.printBuyingLottos(buyingLottos);
 
+        LottoResult lottoResult = buyingLottos.getLottoResult(inputWinnerLotto());
+
+        ResultView.printResult(buyingMoney, lottoResult);
+    }
+
+    private static WinnerLotto inputWinnerLotto() {
         String winnerLottoNumbers = InputView.inputWinnerLottoNumbers();
+
         Lotto winnerLotto = new Lotto(ExtractLottoNumbers.split(winnerLottoNumbers));
         LottoNumber bonusNumber = LottoNumber.valueOf(InputView.inputBonusLottoNumber());
 
-        LottoResult lottoResult = buyingLottos.getLottoResult(new WinnerLotto(winnerLotto, bonusNumber));
-
-        ResultView.printResult(buyingMoney, lottoResult);
+        return new WinnerLotto(winnerLotto, bonusNumber);
     }
 }
