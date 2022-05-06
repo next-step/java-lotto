@@ -30,9 +30,13 @@ public enum Rank {
     }
 
     public static Rank of(int matchCount, boolean matchBonusNumber) {
+        if (SECOND.isSameMatchCount(matchCount) && matchBonusNumber) {
+            return Rank.SECOND;
+        }
+
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.isSameMatchCount(matchCount))
-                .filter(rank -> rank != SECOND || matchBonusNumber)
+                .filter(rank -> rank != SECOND)
                 .findFirst()
                 .orElse(OTHER);
     }
