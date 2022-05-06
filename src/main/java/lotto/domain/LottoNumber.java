@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 import lotto.exception.InvalidLottoNumberException;
@@ -10,19 +12,30 @@ public class LottoNumber {
   public static final int MIN = 1;
   public static final int MAX = 45;
   private static final Pattern CONTAINS_ONLY_NUMBER_PATTERN = Pattern.compile("^\\d+$");
+  private static Map<Integer, LottoNumber> lottoNumberMap = new HashMap<>();
 
-  public LottoNumber(int value) {
-    if (checkBound(value)) {
-      throw new InvalidLottoNumberException(String.valueOf(value));
+  static {
+    for (int i = MIN; i <= MAX; i++) {
+      lottoNumberMap.put(i, LottoNumber.from(i));
     }
+  }
+
+  private LottoNumber(int value) {
     this.value = value;
   }
 
-  public LottoNumber(String value) {
+  public static LottoNumber from(int value) {
+    if (assertBound(value)) {
+      throw new InvalidLottoNumberException(String.valueOf(value));
+    }
+    return lottoNumberMap.get(value);
+  }
+
+  public static LottoNumber from(String value) {
     if (!CONTAINS_ONLY_NUMBER_PATTERN.matcher(value).find()) {
       throw new InvalidLottoNumberException(value);
     }
-    this.value = Integer.parseInt(value);
+    return from(Integer.parseInt(value));
   }
 
   @Override
@@ -46,7 +59,7 @@ public class LottoNumber {
     return value;
   }
 
-  private boolean checkBound(int value) {
+  private static boolean assertBound(int value) {
     return value < MIN || value > MAX;
   }
 }

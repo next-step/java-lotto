@@ -2,11 +2,12 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.LottoDrawResults;
 import lotto.domain.LottoGames;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
-import lotto.domain.strategy.LottoNumberGenerator;
+import lotto.domain.LottoRewords;
+import lotto.domain.strategy.AutoLottoNumberGenerator;
+import lotto.domain.strategy.ManualLottoNumberGenerator;
 import lotto.domain.strategy.NumberGenerator;
 import lotto.view.LottoGameInputView;
 import lotto.view.LottoGameOutputView;
@@ -20,26 +21,37 @@ public class LottoGameApp {
   private void start() {
     LottoGameInputView lottoGameInputView = new LottoGameInputView();
     lottoGameInputView.setPurchaseAmount();
+    lottoGameInputView.setManualAmount();
+    lottoGameInputView.setManualNumbers();
 
-    LottoGames lottoGames = new LottoGames(lottoGameInputView.getPurchaseAmount(),
-        makeNumberGenerators(lottoGameInputView.getPurchaseAmount()));
+    List<NumberGenerator> numberGenerators = makeNumberGenerators(
+        lottoGameInputView.getAutoAmount(), lottoGameInputView.getManualAmount(),
+        lottoGameInputView.getManualNumbers());
+    LottoGames lottoGames = LottoGames.from(numberGenerators);
 
+    LottoGameOutputView.printLottoPurchase(lottoGameInputView.getAutoAmount(),
+        lottoGameInputView.getManualAmount());
     LottoGameOutputView.printLottoNumbers(lottoGames);
     lottoGameInputView.setWinNumbers();
     lottoGameInputView.setBonusBall();
 
-    LottoDrawResults lottoDrawResults = lottoGames.draw(
-        new LottoNumbers(lottoGameInputView.getWinNumbers()),
-        new LottoNumber(lottoGameInputView.getBonusBallNumber()));
+    LottoRewords lottoRewords = lottoGames.draw(
+        LottoNumbers.from(lottoGameInputView.getWinNumbers()),
+        LottoNumber.from(lottoGameInputView.getBonusBallNumber()));
 
-    LottoGameOutputView.printGameResult(lottoDrawResults);
+    LottoGameOutputView.printGameResult(lottoRewords);
 
   }
 
-  private List<NumberGenerator> makeNumberGenerators(int purchaseAmount) {
+  private List<NumberGenerator> makeNumberGenerators(int auto, int manual,
+      List<String> manualNumbers) {
     List<NumberGenerator> lottoNumberGenerators = new ArrayList<>();
-    for (int i = 0; i < purchaseAmount; i++) {
-      lottoNumberGenerators.add(new LottoNumberGenerator());
+    AutoLottoNumberGenerator autoLottoNumberGenerator = new AutoLottoNumberGenerator();
+    for (int i = 0; i < auto; i++) {
+      lottoNumberGenerators.add(autoLottoNumberGenerator);
+    }
+    for (int i = 0; i < manual; i++) {
+      lottoNumberGenerators.add(new ManualLottoNumberGenerator(manualNumbers.get(i)));
     }
     return lottoNumberGenerators;
   }

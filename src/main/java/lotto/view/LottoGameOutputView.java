@@ -1,11 +1,11 @@
 package lotto.view;
 
-import lotto.domain.LottoDrawResults;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoGames;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoReword;
+import lotto.domain.LottoRewords;
 import lotto.domain.ProfitRate;
 
 public class LottoGameOutputView {
@@ -14,7 +14,12 @@ public class LottoGameOutputView {
   public static final String LOTTO_MATCH_WITH_BONUS_MESSAGE = "%d 개 일치, 보너스 볼 일치(%d)- %d개\n";
   private static final String LOTTO_STATS_MESSAGE = "당첨 통계";
   private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %.2f 입니다.";
-  private static final int MATCH_COUNT_PRINT_BONUS = 5;
+  private static final String LOTTO_PURCHASE_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
+
+
+  private LottoGameOutputView() {
+  }
+
 
   public static void printLottoNumbers(LottoGames lottoGames) {
     for (LottoGame lottoGame : lottoGames.getValues()) {
@@ -35,50 +40,46 @@ public class LottoGameOutputView {
     System.out.print(messageSb);
   }
 
-  public static void printGameResult(LottoDrawResults lottoDrawResults) {
+  public static void printGameResult(LottoRewords lottoRewords) {
     System.out.println(LOTTO_STATS_MESSAGE);
     System.out.println("---------");
-    printGameResultByMatchCount(lottoDrawResults);
-    printProfitRate(lottoDrawResults);
+    printGameResultByRank(lottoRewords);
+    printProfitRate(lottoRewords);
 
   }
 
-  private static void printProfitRate(LottoDrawResults lottoDrawResults) {
-    long rewordAll = lottoDrawResults.getRewordAll();
-    int gameCount = lottoDrawResults.getValues().size();
-    ProfitRate profitRate = new ProfitRate(gameCount, rewordAll);
+  private static void printGameResultByRank(LottoRewords lottoRewords) {
+    for (int i = LottoReword.values().length - 2; i >= 0; i--) {
+      LottoReword targetReword = LottoReword.values()[i];
+      LottoRewords rewords = lottoRewords.getRewords(targetReword);
+      printReword(targetReword, rewords);
+    }
+  }
+
+  private static void printProfitRate(LottoRewords lottoRewords) {
+    ProfitRate profitRate = new ProfitRate(lottoRewords.getSize(), lottoRewords.getRewordSum());
     System.out.printf(PROFIT_RATE_MESSAGE, profitRate.getValue());
   }
 
-  private static void printGameResultByMatchCount(LottoDrawResults lottoDrawResults) {
-    for (int i = 3; i <= LottoGame.NUMBER_COUNT; i++) {
-      LottoDrawResults result = lottoDrawResults.getDrawResultsByMatchCount(i);
-      printGameResult(i, result);
-    }
-  }
-
-  private static void printGameResult(int matchCount, LottoDrawResults result) {
-    if (matchCount == MATCH_COUNT_PRINT_BONUS) {
-      printGameResultWithBouns(MATCH_COUNT_PRINT_BONUS, result);
+  private static void printReword(LottoReword targetReword, LottoRewords rewords) {
+    if (targetReword.isBonusMatch()) {
+      printGameResultWithBonus(targetReword, rewords);
       return;
     }
-    printGameResultMessage(matchCount, result);
+    printGameResultMessage(targetReword, rewords);
   }
 
-  private static void printGameResultMessage(int matchCount, LottoDrawResults result) {
-    System.out.printf(LOTTO_MATCH_MESSAGE, matchCount, LottoReword.getWinMoney(matchCount, false),
-        result.getValues().size());
+  private static void printGameResultMessage(LottoReword targetReword, LottoRewords rewords) {
+    System.out.printf(LOTTO_MATCH_MESSAGE, targetReword.getMatchCount(), targetReword.getMoney(),
+        rewords.getSize());
   }
 
-  private static void printGameResultWithBouns(int matchCount, LottoDrawResults result) {
-    printGameResultMessage(matchCount, result.filterBonusBall(false));
-    printGameResultMessageWithBonus(matchCount, result.filterBonusBall(true));
+  private static void printGameResultWithBonus(LottoReword targetReword, LottoRewords rewords) {
+    System.out.printf(LOTTO_MATCH_WITH_BONUS_MESSAGE, targetReword.getMatchCount(),
+        targetReword.getMoney(), rewords.getSize());
   }
 
-  private static void printGameResultMessageWithBonus(int matchCount,
-      LottoDrawResults matchResult) {
-    System.out.printf(LOTTO_MATCH_WITH_BONUS_MESSAGE, matchCount,
-        LottoReword.getWinMoney(matchCount, true),
-        matchResult.getValues().size());
+  public static void printLottoPurchase(int autoAmount, int manualAmount) {
+    System.out.printf(LOTTO_PURCHASE_MESSAGE, manualAmount, autoAmount);
   }
 }

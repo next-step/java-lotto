@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.strategy.FixedNumberGenerator;
+import lotto.domain.strategy.ManualLottoNumberGenerator;
 import lotto.domain.strategy.NumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,13 +20,13 @@ class LottoGamesTest {
     List<NumberGenerator> numberGenerators = new ArrayList<>();
     List<NumberGenerator> expectGenerators = new ArrayList<>();
     for (int i = 0; i < gameCount; i++) {
-      numberGenerators.add(new FixedNumberGenerator(numbers));
-      expectGenerators.add(new FixedNumberGenerator(numbers));
+      numberGenerators.add(new ManualLottoNumberGenerator(numbers));
+      expectGenerators.add(new ManualLottoNumberGenerator(numbers));
     }
-    LottoGames lottoGames = new LottoGames(gameCount, numberGenerators);
+    LottoGames lottoGames = LottoGames.from(numberGenerators);
 
     assertThat(lottoGames).usingRecursiveComparison()
-        .isEqualTo(new LottoGames(gameCount, expectGenerators));
+        .isEqualTo(LottoGames.from(expectGenerators));
   }
 
   @ParameterizedTest
@@ -37,15 +37,15 @@ class LottoGamesTest {
   void draw(String lottoNumbers, String winNumbers, int gameCount, int matchCount) {
     List<NumberGenerator> numberGenerators = new ArrayList<>();
     for (int i = 0; i < gameCount; i++) {
-      numberGenerators.add(new FixedNumberGenerator(lottoNumbers));
+      numberGenerators.add(new ManualLottoNumberGenerator(lottoNumbers));
     }
-    LottoGames lottoGames = new LottoGames(gameCount, numberGenerators);
-    LottoNumbers winLottoNumbers = new LottoNumbers(winNumbers);
+    LottoGames lottoGames = LottoGames.from(numberGenerators);
+    LottoNumbers winLottoNumbers = LottoNumbers.from(winNumbers);
 
-    LottoDrawResults lottoDrawResults = lottoGames.draw(winLottoNumbers, null);
+    LottoRewords lottoRewords = lottoGames.draw(winLottoNumbers, null);
 
-    assertThat(lottoDrawResults.getRewordAll()).isEqualTo(
-        LottoReword.getWinMoney(matchCount, false) * gameCount);
+    assertThat(lottoRewords.getRewordSum()).isEqualTo(
+        LottoReword.getReword(matchCount, false).getMoney() * gameCount);
   }
 
   @ParameterizedTest
@@ -53,19 +53,19 @@ class LottoGamesTest {
   @CsvSource(value = {"4,8,19,23,11,7|1,5,10,15,20,2|4|50|0",
       "5,11,16,20,35,40|5,11,16,20,35,45|45|20|5",
       "1,9,12,26,35,38|1,9,12,26,35,38|40|1|6"}, delimiter = '|')
-  void drawWithBonus(String lottoNumbers, String winNumbers, String bonusNumber, int gameCount,
+  void drawWithBonus(String lottoNumbers, String winNumbers, int bonusNumber, int gameCount,
       int matchCount) {
     List<NumberGenerator> numberGenerators = new ArrayList<>();
     for (int i = 0; i < gameCount; i++) {
-      numberGenerators.add(new FixedNumberGenerator(lottoNumbers));
+      numberGenerators.add(new ManualLottoNumberGenerator(lottoNumbers));
     }
-    LottoGames lottoGames = new LottoGames(gameCount, numberGenerators);
-    LottoNumbers winLottoNumbers = new LottoNumbers(winNumbers);
+    LottoGames lottoGames = LottoGames.from(numberGenerators);
+    LottoNumbers winLottoNumbers = LottoNumbers.from(winNumbers);
 
-    LottoDrawResults lottoDrawResults = lottoGames
-        .draw(winLottoNumbers, new LottoNumber(bonusNumber));
+    LottoRewords lottoRewords = lottoGames
+        .draw(winLottoNumbers, LottoNumber.from(bonusNumber));
 
-    assertThat(lottoDrawResults.getRewordAll()).isEqualTo(
-        LottoReword.getWinMoney(matchCount, true) * gameCount);
+    assertThat(lottoRewords.getRewordSum()).isEqualTo(
+        LottoReword.getReword(matchCount, true).getMoney() * gameCount);
   }
 }

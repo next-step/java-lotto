@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FixedNumberGenerator implements NumberGenerator {
+public class ManualLottoNumberGenerator implements NumberGenerator {
 
   private final List<Integer> numbers;
 
-  public FixedNumberGenerator(String numbers) {
+  public ManualLottoNumberGenerator(String numbers) {
     this.numbers = toIntList(numbers);
   }
 

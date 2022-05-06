@@ -4,50 +4,70 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum LottoReword {
-  MATCH_THREE(5000), MATCH_FOUR(50000), MATCH_FIVE(1500000), MATCH_FIVE_WITH_BONUS(
-      30000000), MATCH_SIX(2000000000);
+  FIRST(6, false, 2000000000),
+  SECOND(5, true, 30000000),
+  THIRD(5, false, 1500000),
+  FOURTH(4, false, 50000),
+  FIFTH(3, false, 5000),
+  NO_REWORD(0, false, 0);
 
   private static final Map<Integer, LottoReword> lookup = new HashMap<>();
   private static final Map<Integer, LottoReword> bonusLookup = new HashMap<>();
 
   static {
-    lookup.put(3, MATCH_THREE);
-    lookup.put(4, MATCH_FOUR);
-    lookup.put(5, MATCH_FIVE);
-    lookup.put(6, MATCH_SIX);
-    bonusLookup.put(5, MATCH_FIVE_WITH_BONUS);
+    lookup.put(3, FIFTH);
+    lookup.put(4, FOURTH);
+    lookup.put(5, THIRD);
+    lookup.put(6, FIRST);
+    bonusLookup.put(5, SECOND);
   }
 
+  private final int matchCount;
+  private final boolean isBonusMatch;
   private final int money;
 
-  LottoReword(int money) {
+  LottoReword(int matchCount, boolean isBonusMatch, int money) {
+    this.matchCount = matchCount;
+    this.isBonusMatch = isBonusMatch;
     this.money = money;
   }
 
-  public static int getWinMoney(int matchCount, boolean isBonusMatch) {
+  public static LottoReword getReword(int matchCount, boolean isBonusMatch) {
     if (isBonusMatch) {
-      return getWinMoneyWithBonus(matchCount);
+      return getRewordWithBonus(matchCount);
     }
-    return getWinMoneyNoBonus(matchCount);
-
+    return getRewordNoBonus(matchCount);
   }
 
-  private static int getWinMoneyWithBonus(int matchCount) {
+  public boolean isBonusMatch() {
+    return isBonusMatch;
+  }
+
+  public int getMatchCount() {
+    return matchCount;
+  }
+
+  public int getMoney() {
+    return money;
+  }
+
+  private static LottoReword getRewordWithBonus(int matchCount) {
     LottoReword lottoReword = bonusLookup.get(matchCount);
-    if (lottoReword == null) {
-      return getWinMoneyNoBonus(matchCount);
+    if (lottoReword != null) {
+      return lottoReword;
     }
 
-    return lottoReword.money;
+    return getRewordNoBonus(matchCount);
   }
 
-  private static int getWinMoneyNoBonus(int matchCount) {
+  private static LottoReword getRewordNoBonus(int matchCount) {
     LottoReword lottoReword = lookup.get(matchCount);
     if (lottoReword == null) {
-      return 0;
+      return NO_REWORD;
     }
 
-    return lottoReword.money;
+    return lottoReword;
   }
+
 
 }

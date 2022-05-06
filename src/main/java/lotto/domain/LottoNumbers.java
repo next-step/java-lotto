@@ -3,40 +3,41 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import lotto.domain.strategy.NumberGenerator;
+import lotto.exception.InvalidLottoNumbersException;
 
 public class LottoNumbers {
 
+  public static final int NUMBER_COUNT = 6;
   private final List<LottoNumber> values;
   public static final String LOTTO_NUMBER_DELIMITER = ",";
 
-  public LottoNumbers(String lottoNumbers) {
-    this.values = new ArrayList<>();
+  private LottoNumbers(List<LottoNumber> values) {
+    if (values.size() != NUMBER_COUNT) {
+      throw new InvalidLottoNumbersException(NUMBER_COUNT);
+    }
+    this.values = values;
+  }
+
+  public static LottoNumbers from(List<Integer> lottoNumbers) {
+    List<LottoNumber> values = new ArrayList<>();
+    for (Integer number : lottoNumbers) {
+      values.add(LottoNumber.from(number));
+    }
+    return new LottoNumbers(values);
+  }
+
+  public static LottoNumbers from(String lottoNumbers) {
+    List<LottoNumber> values = new ArrayList<>();
     for (String lottoNumber : lottoNumbers.split(LOTTO_NUMBER_DELIMITER)) {
-      this.values.add(new LottoNumber(lottoNumber.trim()));
+      values.add(LottoNumber.from(lottoNumber.trim()));
     }
+    return new LottoNumbers(values);
   }
 
-  public LottoNumbers(NumberGenerator numberGenerator) {
-    this.values = new ArrayList<>();
-    List<Integer> numbers = numberGenerator.generate();
-    for (Integer number : numbers) {
-      this.values.add(new LottoNumber(number));
-    }
-  }
-
-  private LottoNumbers(List<LottoNumber> lottoNumbers) {
-    this.values = lottoNumbers;
-  }
-
-  public LottoNumbers getMatchNumbers(LottoNumbers winNumbers) {
+  public int getMatchNumbers(LottoNumbers winNumbers) {
     ArrayList<LottoNumber> numbers = new ArrayList<>(values);
     numbers.retainAll(winNumbers.values);
-    return new LottoNumbers(numbers);
-  }
-
-  public int getNumberSize() {
-    return values.size();
+    return numbers.size();
   }
 
   public List<LottoNumber> getValues() {
