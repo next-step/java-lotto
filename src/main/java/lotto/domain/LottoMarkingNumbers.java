@@ -26,6 +26,10 @@ public class LottoMarkingNumbers {
                 .count();
     }
 
+    public Set<LottoNumber> lottoNumbers() {
+        return lottoNumbers;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

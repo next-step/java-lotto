@@ -22,6 +22,10 @@ public class Lotto {
         return Optional.ofNullable(matchResult);
     }
 
+    public LottoMarkingNumbers lottoMarkingNumbers() {
+        return lottoMarkingNumbers;
+    }
+
     @Override
     public String toString() {
         return lottoMarkingNumbers.toString();

@@ -15,8 +15,8 @@ public class ResultView {
     }
 
     public static void purchasedLottosView(PurchasedLottos purchasedLottos) {
-        System.out.println(purchasedLottos.lottos().count() + MESSAGE_PURCHASED_LOTTO);
-        System.out.println(ResultBuilder.buildLottosInfo(purchasedLottos.lottos().toList()));
+        System.out.println(purchasedLottos.lottos().size() + MESSAGE_PURCHASED_LOTTO);
+        System.out.println(ResultBuilder.buildLottosInfo(purchasedLottos.lottos()));
     }
 
     public static void lottosResultView(WinningStats winningStats) {

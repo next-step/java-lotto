@@ -41,6 +41,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return lottoNumber < MIN_NUMBER || lottoNumber > MAX_NUMBER;
     }
 
+    public int toInt() {
+        return lottoNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
