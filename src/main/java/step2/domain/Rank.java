@@ -1,16 +1,28 @@
 package step2.domain;
 
+import java.util.Arrays;
+
 public enum Rank {
-    POSTION_4(5000, 3),
-    POSTION_3(50000, 4),
-    POSTION_2(1500000, 5),
-    POSTION_1(2000000000, 6);
+    RANK_5(5_000, 3, false),
+    RANK_4(50_000, 4, false),
+    RANK_3(1_500_000, 5, false),
+    RANK_2(30_000_000, 5, true),
+    RANK_1(2_000_000_000, 6, false),
+    NO_RANK(0, 0, false);
 
     public final int price;
     public final int matchCount;
+    public final boolean bonus;
 
-    Rank(int price, int matchCount) {
+    Rank(int price, int matchCount, boolean bonus) {
         this.price = price;
         this.matchCount = matchCount;
+        this.bonus = bonus;
+    }
+
+    public static Rank of(int count, boolean bonus) {
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.matchCount == count && rank.bonus == bonus)
+                .findFirst().orElse(NO_RANK);
     }
 }

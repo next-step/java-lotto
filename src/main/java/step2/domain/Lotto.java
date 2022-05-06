@@ -3,6 +3,7 @@ package step2.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int price = 1000;
@@ -17,10 +18,13 @@ public class Lotto {
         return pick;
     }
 
-    public int matching(List<Integer> pickLottoNumberOfWeek) {
-        return (int) pickLottoNumberOfWeek
+    public Rank matching(List<Integer> pickLottoNumberOfWeek, int bonusBall) {
+        int count = (int) pickLottoNumberOfWeek
                 .stream()
                 .filter(pick::contains)
                 .count();
+
+        return Rank.of(count, pick.contains(bonusBall));
     }
+
 }
