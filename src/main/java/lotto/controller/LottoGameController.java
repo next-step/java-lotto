@@ -1,7 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTicketGenerator;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -21,26 +20,36 @@ public class LottoGameController {
     }
 
     public LottoGameController() {
-        this(new InputView(), new OutputView(), new LottoTicketGenerator());
+        this(new InputView(), new OutputView(), new LottoTicketGenerator(new RandomGenerateStrategy()));
     }
 
     public void play() {
-        int money = getMoney();
-        List<LottoTicket> lottoTickets = getLottoTickets(money);
-        outputView.printLottoTickets(lottoTickets);
-        LottoTicket winningTicket = getWinningTicket();
-        List<Integer> matchNumbers = getMatchNumbers(lottoTickets, winningTicket);
-        outputView.printResult(matchNumbers, money);
+        try {
+            int money = getMoney();
+            List<LottoTicket> lottoTickets = getLottoTickets(money);
+            outputView.printLottoTickets(lottoTickets);
+            RankResults rankResults = getRankResults(lottoTickets);
+            outputView.printResult(rankResults, money);
+        } catch (RuntimeException e) {
+            outputView.printErrorMessage(e.getMessage());
+        }
     }
 
-    private LottoTicket getWinningTicket() {
+    private RankResults getRankResults(List<LottoTicket> lottoTickets) {
+        WinningTicket winningTicket = getWinningTicket();
+        List<Rank> ranks = getRanks(lottoTickets, winningTicket);
+        return new RankResults(Ranks.getRankResults(ranks));
+    }
+
+    private WinningTicket getWinningTicket() {
         List<Integer> integers = inputView.readWinningNumber();
-        return lottoTicketGenerator.generateWinningTicket(integers);
+        Integer bonusNumber = inputView.readBonusNumber();
+        return lottoTicketGenerator.generateWinningTicket(integers, bonusNumber);
     }
 
-    private List<Integer> getMatchNumbers(List<LottoTicket> lottoTickets, LottoTicket lottoTicket) {
+    private List<Rank> getRanks(List<LottoTicket> lottoTickets, WinningTicket winningTicket) {
         return lottoTickets.stream()
-                .map(t -> t.countMatchNumbers(lottoTicket))
+                .map(winningTicket::getRank)
                 .collect(Collectors.toList());
     }
 

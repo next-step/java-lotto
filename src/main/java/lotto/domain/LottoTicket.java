@@ -20,6 +20,11 @@ public class LottoTicket {
                 .count();
     }
 
+    public boolean includeBonusNumber(LottoNumber bonusNumber) {
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.isEqualToBonusNumber(bonusNumber));
+    }
+
     private void validLotto(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != 6) {
             throw new InvalidLottoTicketException();

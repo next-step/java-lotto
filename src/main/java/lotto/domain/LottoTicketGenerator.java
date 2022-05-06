@@ -17,10 +17,6 @@ public class LottoTicketGenerator {
         this.generateStrategy = generateStrategy;
     }
 
-    public LottoTicketGenerator() {
-        this(new RandomGenerateStrategy());
-    }
-
     public List<LottoTicket> generateLottoTickets(int count) {
         return IntStream.range(0, count)
                 .mapToObj(i -> generateLottoTicket())
@@ -39,22 +35,21 @@ public class LottoTicketGenerator {
 
     private void validInputPrice(int count) {
         if (count == 0) {
-           throw new InvalidMoneyInputException();
+            throw new InvalidMoneyInputException();
         }
     }
 
-    public LottoTicket generateWinningTicket(List<Integer> winningNumbers) {
+    public WinningTicket generateWinningTicket(List<Integer> winningNumbers, Integer bonusNumber) {
         HashSet<Integer> numbers = new HashSet<>(winningNumbers);
-        return this.generateLottoNumbers(numbers);
+        LottoTicket lottoTicket = new LottoTicket(this.generateLottoNumbers(numbers));
+        return new WinningTicket(lottoTicket, new LottoNumber(bonusNumber));
     }
 
-    private LottoTicket generateLottoNumbers(Set<Integer> numbers) {
-        Set<LottoNumber> numberSet = numbers.stream()
+    private Set<LottoNumber> generateLottoNumbers(Set<Integer> numbers) {
+        return numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
-        return new LottoTicket(numberSet);
     }
-
 
     private Set<LottoNumber> generateLottoNumbers() {
         return generateStrategy.generateLottoNumbers();

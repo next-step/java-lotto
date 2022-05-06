@@ -1,11 +1,10 @@
 package lotto.view;
 
 import lotto.domain.LottoTicket;
-import lotto.domain.Rank;
-import lotto.domain.Ranks;
+import lotto.domain.RankResult;
+import lotto.domain.RankResults;
 
 import java.util.List;
-import java.util.Map;
 
 public class OutputView {
 
@@ -32,19 +31,13 @@ public class OutputView {
         System.out.println(builder);
     }
 
-    public void printResult(List<Integer> matchNumbers, int money) {
+    public void printResult(RankResults rankResults, int money) {
         System.out.println(WINNING_STATISTICS_MESSAGE);
-        Map<Rank, Integer> resultMap = Ranks.getGroupByMap(matchNumbers);
-        printPrize(resultMap);
-        printProfitRatio(resultMap, money);
+        printPrize(rankResults);
+        printProfitRatio(rankResults.getProfitRatio(money));
     }
 
-    private void printProfitRatio(Map<Rank, Integer> resultMap, int money) {
-        Integer reduce = resultMap.entrySet()
-                .stream()
-                .map(e -> e.getKey().getPrize() * e.getValue())
-                .reduce(0, Integer::sum);
-        double profitRatio = (double) reduce / money;
+    private void printProfitRatio(double profitRatio) {
         String ratioString = this.getRatioString(profitRatio);
         System.out.println(ratioString);
     }
@@ -67,22 +60,26 @@ public class OutputView {
         return String.format(PRINT_RATIO_FORMAT, profitRatio);
     }
 
-    private void printPrize(Map<Rank, Integer> resultMap) {
-        String resultMapString = this.getResultString(resultMap);
-        System.out.println(resultMapString);
+    public void printPrize(RankResults rankResults) {
+        String resultString = this.getResultString(rankResults.getRankResults());
+        System.out.println(resultString);
     }
 
-    private String getResultString(Map<Rank, Integer> resultMap) {
+    private String getResultString(List<RankResult> rankResults) {
         StringBuilder builder = new StringBuilder();
-        resultMap.forEach((rank, count) -> {
-            builder.append(rank.getMatchNumberCount());
-            builder.append("개 일치 ");
-            builder.append(rank.getPrize() * count);
-            builder.append("원 - ");
-            builder.append(count);
-            builder.append("개");
-            builder.append("\n");
-        });
+        rankResults.forEach(r -> {
+                    builder.append(r.getRank().getMatchNumberCount());
+                    builder.append("개 일치 ");
+                    builder.append(r.getPrizePerRank());
+                    builder.append("원 - ");
+                    builder.append(r.getCount());
+                    builder.append("개");
+                    builder.append("\n");
+                });
         return builder.toString();
+    }
+
+    public void printErrorMessage(String message) {
+        System.out.println(message);
     }
 }
