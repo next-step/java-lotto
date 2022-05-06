@@ -12,6 +12,8 @@ public final class LotteryResult {
 
   private static final Map<Grade, Integer> gradeMap = new EnumMap<>(Grade.class);
 
+  private LotteryResult() {
+  }
 
   static {
     for (Grade value : Grade.values()) {
