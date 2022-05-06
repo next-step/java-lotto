@@ -6,6 +6,8 @@ import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.Rank;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -28,7 +30,14 @@ public class ResultView {
     private static final String YIELD_LOSS = "손해";
     private static final String YIELD_PROFIT = "이익";
 
-    private static final List<Rank> PRINT_RANKS = Rank.reverseValues();
+    private static final List<Rank> PRINT_RANKS = Arrays
+            .stream(Rank.values())
+            .filter(rank -> rank != Rank.OTHER)
+            .collect(Collectors.collectingAndThen(Collectors.toList(), list -> {
+                Collections.reverse(list);
+                return list;
+            }));
+
     private static final long DEFAULT_COUNT = 0L;
 
     private ResultView() {
