@@ -1,6 +1,5 @@
 package calculator.model;
 
-import calculator.model.Formula;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -14,25 +13,25 @@ class FormulaTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    public void 입력_문자가_빈_문자열_일때(String inputString) {
-        assertThatThrownBy(() -> new Formula(inputString))
+    public void 입력_문자가_빈_문자열_일때(String inputText) {
+        assertThatThrownBy(() -> new Formula(inputText))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(EMPTY_INPUT_STRING);
+                .hasMessageContaining(EMPTY_INPUT_STRING);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1 + 2+3", "1+2 +5", "d+1,4"})
-    public void 입력_문자_패턴이_올바르지_않음(String inputString) {
-        assertThatThrownBy(() -> new Formula(inputString))
+    public void 입력_문자_패턴이_올바르지_않음(String inputText) {
+        assertThatThrownBy(() -> new Formula(inputText))
                 .isInstanceOf(IllegalStateException.class)
-                .hasMessage(NOT_MATCHED_PATTERN);
+                .hasMessageContaining(NOT_MATCHED_PATTERN);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1 + 2 ! 3", "1 @ 2 +5", "1 , 1 4"})
-    public void 사칙_연산_기호가_아닌_경우(String inputString) {
-        assertThatThrownBy(() -> new Formula(inputString))
+    public void 사칙_연산_기호가_아닌_경우(String inputText) {
+        assertThatThrownBy(() -> new Formula(inputText))
                 .isInstanceOf(IllegalStateException.class)
-                .hasMessage(NOT_MATCHED_PATTERN);
+                .hasMessageContaining(NOT_MATCHED_PATTERN);
     }
 }

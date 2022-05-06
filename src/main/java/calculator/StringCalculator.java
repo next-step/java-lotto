@@ -1,74 +1,36 @@
 package calculator;
 
 import calculator.model.Formula;
+import calculator.model.Number;
+import calculator.model.Operator;
 
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
-import java.util.regex.Pattern;
 
 public class StringCalculator {
     private static final String CALCULATION_DELIMITER = " ";
-    private static final String NUMBER_REGEX = "[0-9]";
-    private static final Pattern NUMBER_PATTERN = Pattern.compile(NUMBER_REGEX);
-    private static final String OPERATOR_REGEX = "[-+*/]";
-    private static final Pattern OPERATOR_PATTERN = Pattern.compile(OPERATOR_REGEX);
 
-    private final Queue<Integer> numbers = new LinkedList<>();
-    private final Queue<String> operators = new LinkedList<>();
-
+    private final Queue<String> numberOperators = new LinkedList<>();
 
     public StringCalculator(Formula formula) {
-        String[] formulaCharacters = formula.split(CALCULATION_DELIMITER);
-
-        for (String formulaCharacter : formulaCharacters) {
-            separateFormula(formulaCharacter);
-        }
+        this(Arrays.asList(formula.split(CALCULATION_DELIMITER)));
     }
 
-    private void separateFormula(String formulaCharacter) {
-        if (isNumber(formulaCharacter)) {
-            numbers.add(toNumber(formulaCharacter));
-        }
-
-        if (isOperator(formulaCharacter)) {
-            operators.add(formulaCharacter);
-        }
+    public StringCalculator(List<String> formulas) {
+        numberOperators.addAll(formulas);
     }
 
-    private boolean isNumber(String formulaCharacter) {
-        return NUMBER_PATTERN.matcher(formulaCharacter).matches();
-    }
+    public Number calculate() {
+        Number resultNumber = new Number(numberOperators.poll());
 
-    private Integer toNumber(String formulaCharacter) {
-        return Integer.parseInt(formulaCharacter);
-    }
-
-    private boolean isOperator(String formulaCharacter) {
-        return OPERATOR_PATTERN.matcher(formulaCharacter).matches();
-    }
-
-    public int start() {
-        int number = this.numbers.poll();
-        while (!numbers.isEmpty()) {
-            number = calculate(number, operators.poll(), this.numbers.poll());
+        while (!numberOperators.isEmpty()) {
+            Operator operator = Operator.create(this.numberOperators.poll());
+            Number operand = new Number(this.numberOperators.poll());
+            resultNumber = operator.calculate(resultNumber, operand);
         }
 
-        return number;
+        return resultNumber;
     }
-
-    private int calculate(int number1, String operator, int number2) {
-        switch (operator) {
-            case "+":
-                return number1 + number2;
-            case "*":
-                return number1 * number2;
-            case "-":
-                return number1 - number2;
-            case "/":
-                return number1 / number2;
-            default:
-                throw new IllegalStateException();
-        }
-    }
-
 }
