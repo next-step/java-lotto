@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import static lotto.LottoNumberTest.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("로또 번호 6개를 담는 lotto 클래스 테스트")
 public class LottoTest {
@@ -35,7 +36,7 @@ public class LottoTest {
     void firstRankTest() {
         Lotto winLottoNums = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, SIX));
 
-        assertThat(TEST_LOTTO.getRank(winLottoNums,ONE)).isEqualTo(Rank.FIRST);
+        assertThat(TEST_LOTTO.getRank(winLottoNums, ONE)).isEqualTo(Rank.FIRST);
     }
 
     @Test
@@ -43,7 +44,7 @@ public class LottoTest {
     void secondRankTest() {
         Lotto winLottoNums = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, LottoNumber.valueOf(11)));
 
-        assertThat(TEST_LOTTO.getRank(winLottoNums,ONE)).isEqualTo(Rank.SECOND);
+        assertThat(TEST_LOTTO.getRank(winLottoNums, ONE)).isEqualTo(Rank.SECOND);
     }
 
     @Test
@@ -51,7 +52,7 @@ public class LottoTest {
     void thirdRankTest() {
         Lotto winLottoNums = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, LottoNumber.valueOf(11)));
 
-        assertThat(TEST_LOTTO.getRank(winLottoNums,LottoNumber.valueOf(12))).isEqualTo(Rank.THIRD);
+        assertThat(TEST_LOTTO.getRank(winLottoNums, LottoNumber.valueOf(12))).isEqualTo(Rank.THIRD);
     }
 
     @Test
@@ -64,5 +65,23 @@ public class LottoTest {
     @DisplayName("로또 번호가 특정 로또 넘버를 포함하지 않으면 false를 반환한다.")
     void containsFalseTest() {
         assertThat(TEST_LOTTO.contains(LottoNumber.valueOf(11))).isFalse();
+    }
+
+    @Test
+    @DisplayName("현재 로또와 입력 로또의 matchCount를 반환할 때 null이 들어오면 예외가 발생한다.")
+    void matchCountNullTest() {
+        Lotto fourMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, LottoNumber.valueOf(10), LottoNumber.valueOf(11)));
+
+        assertThatThrownBy(() -> fourMatchLotto.getMatchCount(null))
+                .isInstanceOf(NullPointerException.class)
+                .hasMessageContaining("null일 수 없습니다.");
+    }
+
+    @Test
+    @DisplayName("현재 로또와 입력 로또의 matchCount를 반환한다.")
+    void matchCountTest() {
+        Lotto fourMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, LottoNumber.valueOf(10), LottoNumber.valueOf(11)));
+
+        assertThat(fourMatchLotto.getMatchCount(TEST_LOTTO)).isEqualTo(4);
     }
 }
