@@ -16,9 +16,6 @@ public final class Lotto {
   private final Grade grade;
   private final Set<LottoNumber> lottoNumbers;
 
-  public Lotto(Grade grade) {
-    this(Set.of(1, 2, 3, 4, 5, 6), grade);
-  }
 
   public Lotto(Set<Integer> lottoNumbers) {
     this(lottoNumbers, Grade.NONE);

@@ -1,8 +1,12 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import lotto.enums.Grade;
 import lotto.exception.LottoSizeException;
+import lotto.util.AwardNumberUtil;
 
 public final class LotteryTickets {
 
@@ -15,6 +19,15 @@ public final class LotteryTickets {
 
   public List<Lotto> currentTickets() {
     return value;
+  }
+
+
+  public void findGrade(Lotto winLotto, int bonus) {
+    Set<Integer> winningNumbers = winLotto.numbers();
+    for (Lotto lotto : value) {
+      Set<Integer> selectNumbers = lotto.numbers();
+      LotteryResult.increase(AwardNumberUtil.matchCount(selectNumbers, winningNumbers, bonus));
+    }
   }
 
   private void validate(int size) {
