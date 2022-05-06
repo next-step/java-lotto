@@ -12,6 +12,8 @@ public class Main {
         OutputView.printBuyCount(lottoGame.getLottoList().size());
         OutputView.printLottoGame(lottoGame.getLottoList());
 
-        OutputView.printPrize(lottoGame, new LottoCard(InputView.inputLastWeekWinningNumber()));
+        lottoGame.calculate(new LottoCard(InputView.inputLastWeekWinningNumber()), InputView.inputBonus());
+
+        OutputView.printPrize(lottoGame);
     }
 }
