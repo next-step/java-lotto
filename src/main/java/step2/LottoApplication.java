@@ -28,9 +28,10 @@ public class LottoApplication {
 
         LottoGame lottoGame = new LottoGame(purchaseList, winner);
         GameResult gameResult = lottoGame.calculateGameResult();
+        ReturnRate returnRate = gameResult.calculateReturnRate(purchaseMoney);
 
         GameResultDto gameResultDto = new GameResultDto(gameResult);
-        ReturnRateDto returnRateDto = new ReturnRateDto(gameResult.calculateReturnRate(purchaseMoney));
+        ReturnRateDto returnRateDto = new ReturnRateDto(returnRate);
 
         outPutView.showResultLine();
         outPutView.show(gameResultDto.toString());

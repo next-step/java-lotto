@@ -46,6 +46,6 @@ class GameResultTest {
 
         GameResult gameResult = new GameResult(hitCounts);
 
-        assertThat(gameResult.calculateReturnRate(purchaseMoney)).isEqualTo(returnRate);
+        assertThat(gameResult.calculateReturnRate(purchaseMoney)).isEqualTo(new ReturnRate(returnRate));
     }
 }

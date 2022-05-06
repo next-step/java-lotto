@@ -28,11 +28,13 @@ public class GameResult {
         this.rankCount.computeIfPresent(lottoRank, (lottoRank1, integer) -> integer + 1);
     }
 
-    public double calculateReturnRate(PurchaseMoney purchaseMoney) {
-        return getPrizeMoneySum() / (double) purchaseMoney.getPurchaseAmount();
+    public ReturnRate calculateReturnRate(PurchaseMoney purchaseMoney) {
+        int sumOfPrizeMoney = getSumOfPrizeMoney();
+        int purchaseAmount = purchaseMoney.getPurchaseAmount();
+        return new ReturnRate(sumOfPrizeMoney, purchaseAmount);
     }
 
-    private int getPrizeMoneySum() {
+    private int getSumOfPrizeMoney() {
         return rankCount.entrySet()
                 .stream()
                 .mapToInt(entry -> entry.getKey().getPrizeMoney() * entry.getValue())

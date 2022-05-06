@@ -1,5 +1,7 @@
 package step2.view.dto;
 
+import step2.domain.ReturnRate;
+
 public class ReturnRateDto {
 
     private static final String PROFIT_MESSAGE = "이득입니다.";
@@ -8,17 +10,17 @@ public class ReturnRateDto {
     private final String roundReturnRate;
     private final String profitMessage;
 
-    public ReturnRateDto(double returnRate) {
-        this.roundReturnRate = roundToString(returnRate);
+    public ReturnRateDto(ReturnRate returnRate) {
+        this.roundReturnRate = round(returnRate.getValue());
         this.profitMessage = initProfitMessage(returnRate);
     }
 
-    private String roundToString(double returnRate) {
+    private String round(double returnRate) {
         return String.format("%.2f", returnRate);
     }
 
-    private String initProfitMessage(double returnRate) {
-        if (1 < returnRate) {
+    private String initProfitMessage(ReturnRate returnRate) {
+        if (returnRate.isProfitable()) {
             return PROFIT_MESSAGE;
         }
         return LOSS_MESSAGE;
