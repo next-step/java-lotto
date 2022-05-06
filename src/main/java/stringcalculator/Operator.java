@@ -1,49 +1,37 @@
 package stringcalculator;
 
-import java.util.Objects;
-import java.util.regex.Pattern;
+import java.util.Arrays;
+import java.util.function.BiFunction;
 
-public class Operator {
-    private static final String OPERATORS = "[-*/+]";
-    private String operator;
+public enum Operator {
+    ADDITION("+", (firstOperand, secondOperand) -> firstOperand + secondOperand),
+    SUBTRACTION("-", (firstOperand, secondOperand) -> firstOperand - secondOperand),
+    MULTIPLICATION("*", (firstOperand, secondOperand) -> firstOperand * secondOperand),
+    DIVISION("/", (firstOperand, secondOperand) -> firstOperand / secondOperand);
 
-    public Operator(String operator) {
-        if(isOperator(operator)) {
-            throw new IllegalArgumentException("연산자는 +, -, *, / 기호만 입력 가능합니다.");
-        }
-        this.operator = operator;
+    private String operatorCode;
+    private BiFunction<Integer, Integer, Integer> calculation;
+
+    Operator(String operatorCode, BiFunction<Integer, Integer, Integer> calculation) {
+        this.operatorCode = operatorCode;
+        this.calculation = calculation;
     }
 
-    private boolean isOperator(String operator) {
-        return !Pattern.matches(OPERATORS, operator);
+    public static Operator from(String operatorCode) {
+        return Arrays.stream(values())
+                .filter(operator -> operator.operatorCode.equals(operatorCode))
+                .findFirst().orElseThrow(() -> new IllegalArgumentException("연산자는 +, -, *, / 기호만 입력 가능합니다."));
     }
 
-    public static boolean isAddition(Operator operator) {
-        return operator.equals(new Operator("+"));
+    public static String calculate(String operatorCode, String firstOperand, String secondOperand) {
+        return toString(from(operatorCode).calculation.apply(toInt(firstOperand), toInt(secondOperand)));
     }
 
-    public static boolean isSubtraction(Operator operator) {
-        return operator.equals(new Operator("-"));
+    private static int toInt(String operand) {
+        return Integer.parseInt(operand);
     }
 
-    public static boolean isMultiplication(Operator operator) {
-        return operator.equals(new Operator("*"));
-    }
-
-    public static boolean isDivision(Operator operator) {
-        return operator.equals(new Operator("/"));
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Operator operator1 = (Operator) o;
-        return Objects.equals(operator, operator1.operator);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(operator);
+    private static String toString(int operand) {
+        return String.valueOf(operand);
     }
 }

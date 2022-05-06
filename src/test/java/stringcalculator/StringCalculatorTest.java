@@ -14,12 +14,12 @@ public class StringCalculatorTest {
     @NullAndEmptySource
     void 입력값_null_이거나_빈공백문자열(String input) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            StringCalculator.splitAndCalculate(input);
+            StringCalculator.splitAndCalculate(StringExpression.from(input));
         });
     }
 
     @Test
     void 사칙연산_모두_포함하여_계산() {
-        assertThat(StringCalculator.splitAndCalculate("2 + 3 * 4 / 2")).isEqualTo(10);
+        assertThat(StringCalculator.splitAndCalculate(StringExpression.from("2 + 3 * 4 / 2"))).isEqualTo("10");
     }
 }
