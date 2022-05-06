@@ -1,21 +1,18 @@
-package calculator;
+package calculator.domain;
 
 public class Operand {
-    private int number;
+    private final int number;
 
     Operand(int number) {
         this.number = number;
     }
 
     Operand(String number) {
-        if (!isDigit(number)) {
-            throw new IllegalArgumentException(String.format("%s는 숫자가 아닙니다.", number));
+        try {
+            this.number = Integer.parseInt(number);
+        } catch (NumberFormatException exception) {
+            throw new NumberFormatException(String.format("%s는 숫자가 아닙니다.", number));
         }
-        this.number = Integer.parseInt(number);
-    }
-
-    private boolean isDigit(String number) {
-        return number.chars().allMatch(Character::isDigit);
     }
 
     public int getNumber() {
@@ -35,5 +32,12 @@ public class Operand {
     @Override
     public int hashCode() {
         return number;
+    }
+
+    @Override
+    public String toString() {
+        return "Operand{" +
+                "number=" + number +
+                '}';
     }
 }

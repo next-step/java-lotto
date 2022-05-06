@@ -1,10 +1,11 @@
-package calculator;
+package calculator.util;
 
 import java.util.List;
 
-public class SplitString {
+public class SplitStringUtils {
     private static final String BLANK_DELIMITER = " ";
-    private SplitString() {
+
+    private SplitStringUtils() {
     }
 
     public static List<String> split(String text) {
