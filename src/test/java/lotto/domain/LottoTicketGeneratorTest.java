@@ -66,4 +66,12 @@ class LottoTicketGeneratorTest {
                 .isInstanceOf(InvalidMoneyInputException.class);
     }
 
+    @Test
+    @DisplayName("lottoTicket 과 1개의 보너스 숫자로 이루어진 당첨 티켓 생성")
+    void generateWinningTicketTest() {
+        LottoTicketGenerator lottoTicketGenerator = new LottoTicketGenerator(new TestGeneratorStrategy());
+        WinningTicket winningTicket = lottoTicketGenerator.generateWinningTicket(List.of(1, 2, 3, 4, 5, 6), 7);
+        assertThat(winningTicket).isInstanceOf(WinningTicket.class);
+    }
+
 }

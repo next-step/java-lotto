@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -25,5 +26,20 @@ class RankResultsTest {
         double profitRatio = rankResults.getProfitRatio(money);
 
         assertThat(profitRatio).isEqualTo(ratio);
+    }
+
+    @Test
+    @DisplayName("RankResult 리스트를 반환")
+    void getRankResultListTest() {
+        List<RankResult> rankResultList = List.of(
+                new RankResult(Rank.FIRST, 0),
+                new RankResult(Rank.THIRD, 1),
+                new RankResult(Rank.FOURTH, 9),
+                new RankResult(Rank.FIFTH, 10)
+        );
+
+        RankResults rankResults = new RankResults(rankResultList);
+
+        assertThat(rankResults.getRankResults()).isEqualTo(rankResultList);
     }
 }

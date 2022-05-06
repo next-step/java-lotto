@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.exception.InvalidLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -24,5 +25,13 @@ class LottoNumberTest {
     void throwInvalidLottoNumberException(int value) {
         assertThatThrownBy(() -> new LottoNumber(value))
                 .isInstanceOf(InvalidLottoNumberException.class);
+    }
+
+    @Test
+    @DisplayName("보너스 숫자와 같으면 true 반환")
+    void isEqualToBonusNumberTest() {
+        LottoNumber lottoNumber = new LottoNumber(10);
+        assertThat(lottoNumber.isEqualToBonusNumber(new LottoNumber(10))).isTrue();
+        assertThat(lottoNumber.isEqualToBonusNumber(new LottoNumber(11))).isFalse();
     }
 }
