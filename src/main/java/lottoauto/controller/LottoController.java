@@ -1,9 +1,6 @@
 package lottoauto.controller;
 
-import lottoauto.domain.Lotto;
-import lottoauto.domain.LottoGame;
-import lottoauto.domain.LottoReport;
-import lottoauto.domain.Lottos;
+import lottoauto.domain.*;
 import lottoauto.view.InputView;
 import lottoauto.view.ResultView;
 
@@ -55,7 +52,8 @@ public class LottoController {
 
         lottos.reportLottos(lottoReport);
 
-        lottos.checkWinningLotto(new Lotto(InputView.askWinningLotto(), InputView.askWinningBonusNumber()));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(InputView.askWinningLotto()), InputView.askWinningBonusNumber());
+        lottos.checkWinningLotto(winningLotto);
         lottos.match();
 
         lottos.reportLottoCount(lottoReport);

@@ -18,7 +18,7 @@ import java.util.*;
 public class Lottos {
 
     private final List<Lotto> lottos = new ArrayList<>();
-    private Lotto winningLotto;
+    private WinningLotto winningLotto;
     private Map<LottoStatus, Integer> winningMap = new HashMap<>();
 
     public Lottos(List<Lotto> inputLottos) {
@@ -48,7 +48,7 @@ public class Lottos {
         lottoReport.reportLottos(this.lottos);
     }
 
-    public void checkWinningLotto(Lotto winningLotto) {
+    public void checkWinningLotto(WinningLotto winningLotto) {
         this.winningLotto = winningLotto;
     }
 

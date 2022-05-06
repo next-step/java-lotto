@@ -42,9 +42,10 @@ public class InputView {
     }
 
     public static List<Lotto> inputEachLottos(int tryManualCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<Lotto> returnLottos = new ArrayList<>();
         for (int i = 0; i < tryManualCount; i++) {
-            returnLottos.add(new Lotto(parseLottoNumber(), 0));
+            returnLottos.add(new Lotto(parseLottoNumber()));
         }
         return returnLottos;
     }
