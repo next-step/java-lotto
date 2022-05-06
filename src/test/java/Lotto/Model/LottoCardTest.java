@@ -1,5 +1,6 @@
 package Lotto.Model;
 
+import Lotto.Exception.InvalidBonusForLottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -42,4 +43,15 @@ class LottoCardTest {
             LottoCard lottoCard = new LottoCard(new ArrayList<>(Arrays.asList(2, 3, 4, 5, 6)));
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("보너스볼이 범위밖일때 오류 발생")
+    void bonusIsNotBetween() {
+        LottoCard lottoCard = new LottoCard(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+
+        assertThatThrownBy(() -> {
+            lottoCard.matchPrize(new LottoCard(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 10, 6))), 0);
+        }).isInstanceOf(InvalidBonusForLottoException.class);
+    }
+
 }
