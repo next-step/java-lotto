@@ -64,4 +64,9 @@ public class InputView {
     private String[] splitInputByDelimiter(String input) {
         return input.split(DELIMITER);
     }
+
+    public Integer readBonusNumber() {
+        System.out.println("보너스 볼을 입력해주세요.");
+        return Integer.valueOf(readInput());
+    }
 }

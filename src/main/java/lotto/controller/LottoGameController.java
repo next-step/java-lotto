@@ -32,14 +32,15 @@ public class LottoGameController {
     }
 
     private RankResults getRankResults(List<LottoTicket> lottoTickets) {
-        LottoTicket winningTicket = getWinningTicket();
-        List<Integer> matchNumbers = getMatchNumbers(lottoTickets, winningTicket);
+        WinningTicket winningTicket = getWinningTicket();
+        List<Integer> matchNumbers = getMatchNumbers(lottoTickets, winningTicket.getLottoTicket());
         return new RankResults(Ranks.getRankResults(matchNumbers));
     }
 
-    private LottoTicket getWinningTicket() {
+    private WinningTicket getWinningTicket() {
         List<Integer> integers = inputView.readWinningNumber();
-        return lottoTicketGenerator.generateWinningTicket(integers);
+        Integer bonusNumber = inputView.readBonusNumber();
+        return lottoTicketGenerator.generateWinningTicket(integers, bonusNumber);
     }
 
     private List<Integer> getMatchNumbers(List<LottoTicket> lottoTickets, LottoTicket winningTicket) {

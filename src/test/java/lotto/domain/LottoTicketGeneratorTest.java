@@ -9,27 +9,16 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTicketGeneratorTest {
 
-    static class TestGeneratorStrategyTest implements LottoNumberGenerateStrategy {
-        @Override
-        public Set<LottoNumber> generateLottoNumbers() {
-            return IntStream.range(1, 7)
-                    .mapToObj(LottoNumber::new)
-                    .collect(Collectors.toSet());
-        }
-    }
-
     @Test
     @DisplayName("번호 생성 전략에 따른 로또 티켓 생성")
     void generateLottoTicketsByGenerateStrategy() {
-        LottoTicketGenerator lottoTicketGenerator = new LottoTicketGenerator(new TestGeneratorStrategyTest());
+        LottoTicketGenerator lottoTicketGenerator = new LottoTicketGenerator(new TestGeneratorStrategy());
         List<LottoTicket> lottoTickets = lottoTicketGenerator.generateLottoTickets(5);
         Set<LottoNumber> lottoNumbers = Set.of(
                 new LottoNumber(1),
