@@ -18,7 +18,7 @@ public class Lottos {
         int size = purchaseAmount/1000;
 
         for (int i = 0; i < size; ++i) {
-            lottos.add(new Lotto(NumbersGenerator.generate(6)));
+            lottos.add(new Lotto(LottoNumberGenerator.generate()));
         }
 
         return new Lottos(lottos, purchaseAmount);

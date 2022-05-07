@@ -1,32 +1,25 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class Lotto {
-    private List<Integer> numbers = new ArrayList<>();
+    public static int LOTTO_LENGTH = 6;
+    private List<Integer> numbers;
+
+    Lotto(int num1, int num2, int num3, int num4, int num5, int num6) {
+        this(List.of(num1, num2, num3, num4, num5, num6));
+    }
 
     public Lotto(List<Integer> numbers) {
-        if (numbers == null || numbers.size() != 6) {
-            throw new IllegalArgumentException("숫자 6개만 입력 가능합니다");
+        if (numbers == null || numbers.size() != LOTTO_LENGTH) {
+            throw new IllegalArgumentException("숫자 " + LOTTO_LENGTH + "개만 입력 가능합니다");
         }
 
         this.numbers = new ArrayList<>(numbers);
-
-        Collections.sort(this.numbers);
-    }
-
-    Lotto(int num1, int num2, int num3, int num4, int num5, int num6) {
-        this.numbers.add(num1);
-        this.numbers.add(num2);
-        this.numbers.add(num3);
-        this.numbers.add(num4);
-        this.numbers.add(num5);
-        this.numbers.add(num6);
-
-        Collections.sort(this.numbers);
     }
 
     public int hasWinningNumbers(List<Integer> winningNumbers) {
