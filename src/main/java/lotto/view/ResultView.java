@@ -70,7 +70,7 @@ public class ResultView {
 
         printStatistics(lottoResult);
 
-        System.out.println(getYieldText(lottoResult.getYield(buyingMoney)));
+        System.out.println(getYieldText(lottoResult.calculateYield(buyingMoney)));
     }
 
     private static void printStatistics(LottoResult lottoResult) {

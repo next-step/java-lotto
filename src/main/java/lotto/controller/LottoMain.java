@@ -19,7 +19,7 @@ public class LottoMain {
 
         ResultView.printBuyingLottos(buyingLottos);
 
-        LottoResult lottoResult = buyingLottos.getLottoResult(inputWinnerLotto());
+        LottoResult lottoResult = buyingLottos.extractLottoResult(inputWinnerLotto());
 
         ResultView.printResult(buyingMoney, lottoResult);
     }

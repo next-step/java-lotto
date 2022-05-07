@@ -40,16 +40,12 @@ public final class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public LottoResult getLottoResult(WinnerLotto winnerLotto) {
-        return new LottoResult(getLottoStatistics(winnerLotto));
-    }
-
-    private List<Rank> getLottoStatistics(WinnerLotto winnerLotto) {
+    public LottoResult extractLottoResult(WinnerLotto winnerLotto) {
         validate(winnerLotto);
 
         return lottos.stream()
                 .map(winnerLotto::getRank)
-                .collect(Collectors.toList());
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoResult::new));
     }
 
     private static void validate(WinnerLotto winnerLotto) {

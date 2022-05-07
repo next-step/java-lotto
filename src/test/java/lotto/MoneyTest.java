@@ -53,7 +53,7 @@ public class MoneyTest {
     void getUnitCountTest() {
         Money money = new Money(14000);
 
-        assertThat(money.getUnitCount(THOUSAND)).isEqualTo(14);
+        assertThat(money.calculateUnitCount(THOUSAND)).isEqualTo(14);
     }
 
     @Test

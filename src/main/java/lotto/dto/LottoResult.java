@@ -24,7 +24,7 @@ public class LottoResult {
         return Collections.unmodifiableList(rankResult);
     }
 
-    public double getYield(Money buyingMoney) {
+    public double calculateYield(Money buyingMoney) {
         Money earnedMoney = rankResult.stream()
                 .map(Rank::winnings)
                 .reduce(new Money(0), Money::add);

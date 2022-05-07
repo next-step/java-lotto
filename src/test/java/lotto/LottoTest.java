@@ -2,7 +2,6 @@ package lotto;
 
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
-import lotto.model.Rank;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.DisplayName;
@@ -48,7 +47,7 @@ public class LottoTest {
     void matchCountNullTest() {
         Lotto fourMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, LottoNumber.valueOf(10), LottoNumber.valueOf(11)));
 
-        assertThatThrownBy(() -> fourMatchLotto.getMatchCount(null))
+        assertThatThrownBy(() -> fourMatchLotto.countMatchNumber(null))
                 .isInstanceOf(NullPointerException.class)
                 .hasMessageContaining("null일 수 없습니다.");
     }
@@ -58,6 +57,6 @@ public class LottoTest {
     void matchCountTest() {
         Lotto fourMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, LottoNumber.valueOf(10), LottoNumber.valueOf(11)));
 
-        assertThat(fourMatchLotto.getMatchCount(TEST_LOTTO)).isEqualTo(4);
+        assertThat(fourMatchLotto.countMatchNumber(TEST_LOTTO)).isEqualTo(4);
     }
 }

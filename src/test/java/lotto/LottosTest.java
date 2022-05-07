@@ -59,7 +59,7 @@ public class LottosTest {
     @Test
     @DisplayName("당첨 로또를 입력해 결과를 계산할 때 입력값이 null이면 예외가 발생한다.")
     void getLottoResultNullTest() {
-        assertThatThrownBy(() -> TEST_LOTTOS.getLottoResult(null))
+        assertThatThrownBy(() -> TEST_LOTTOS.extractLottoResult(null))
                 .isInstanceOf(NullPointerException.class);
     }
 
@@ -71,7 +71,7 @@ public class LottosTest {
         Lotto buyingLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, LottoNumber.valueOf(10)));
 
         // when
-        LottoResult lottoResult = new Lottos(Lists.newArrayList(buyingLotto)).getLottoResult(new WinnerLotto(winnerLotto, LottoNumber.valueOf(10)));
+        LottoResult lottoResult = new Lottos(Lists.newArrayList(buyingLotto)).extractLottoResult(new WinnerLotto(winnerLotto, LottoNumber.valueOf(10)));
 
         // then
         assertThat(lottoResult.getRankResult().get(0)).isEqualTo(Rank.SECOND);
@@ -85,7 +85,7 @@ public class LottosTest {
         Lotto twoMatchLotto = new Lotto(Sets.newLinkedHashSet(ONE, TWO, LottoNumber.valueOf(9), LottoNumber.valueOf(10), LottoNumber.valueOf(11), LottoNumber.valueOf(12)));
 
         // when
-        LottoResult lottoResult = new Lottos(Lists.newArrayList(twoMatchLotto)).getLottoResult(new WinnerLotto(winnerLotto, LottoNumber.valueOf(15)));
+        LottoResult lottoResult = new Lottos(Lists.newArrayList(twoMatchLotto)).extractLottoResult(new WinnerLotto(winnerLotto, LottoNumber.valueOf(15)));
 
         // then
         assertThat(lottoResult.getRankResult().get(0)).isEqualTo(Rank.OTHER);

@@ -23,6 +23,6 @@ public class WinnerLotto {
     }
 
     public Rank getRank(Lotto lotto) {
-        return Rank.of(lotto.getMatchCount(this.winnerLotto), lotto.contains(bonusNumber));
+        return Rank.of(lotto.countMatchNumber(this.winnerLotto), lotto.contains(bonusNumber));
     }
 }

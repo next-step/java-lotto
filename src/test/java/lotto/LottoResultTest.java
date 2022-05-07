@@ -22,6 +22,6 @@ public class LottoResultTest {
 
         LottoResult lottoResult = new LottoResult(ranks);
 
-        assertThat(String.format("%.2f", lottoResult.getYield(buyingMoney))).isEqualTo("0.36");
+        assertThat(String.format("%.2f", lottoResult.calculateYield(buyingMoney))).isEqualTo("0.36");
     }
 }

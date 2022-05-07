@@ -28,7 +28,7 @@ public final class Money {
         return this.money / (double) denominator.money;
     }
 
-    public int getUnitCount(Money unit) {
+    public int calculateUnitCount(Money unit) {
         return this.money / unit.money;
     }
 
