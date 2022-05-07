@@ -2,7 +2,6 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.stream.Stream;
@@ -10,7 +9,6 @@ import lotto.exception.LottoNumberDuplicateException;
 import lotto.strategy.DuplicateNumberGenerateStrategy;
 import lotto.strategy.FixedNumberGenerateStrategy;
 import lotto.strategy.RandomNumberGenerateStrategy;
-import org.assertj.core.internal.bytebuddy.asm.Advice.Argument;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

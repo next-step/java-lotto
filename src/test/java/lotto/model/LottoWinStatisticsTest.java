@@ -7,7 +7,7 @@ import lotto.strategy.FixedNumberGenerateStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class LottoNumberComparsionTest {
+class LottoWinStatisticsTest {
 
   @Test
   @DisplayName("우승한 로또번호와 구매한 로또번호를 비교한 전체 결과확인")
