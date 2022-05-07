@@ -27,13 +27,9 @@ public class PurchaseList {
         }
     }
 
-    public List<Lotto> getValues() {
-        return this.values;
-    }
-
-    public List<Long> calculateHitCount(Winner winner) {
+    public List<LottoRank> calculateRankEach(Winner winner) {
         return values.stream()
-                .map(lotto -> lotto.calculateHitCount(winner))
+                .map(lotto -> LottoRank.toRank(lotto, winner))
                 .collect(Collectors.toList());
     }
 

@@ -27,7 +27,7 @@ public class LottoApplication {
         inputView.close();
 
         LottoGame lottoGame = new LottoGame(purchaseList, winner);
-        GameResult gameResult = lottoGame.calculateGameResult();
+        GameResult gameResult = lottoGame.calculateResult();
         ReturnRate returnRate = gameResult.calculateReturnRate(purchaseMoney);
 
         GameResultDto gameResultDto = new GameResultDto(gameResult);

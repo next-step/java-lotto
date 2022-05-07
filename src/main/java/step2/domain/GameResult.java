@@ -6,26 +6,16 @@ import java.util.Map;
 
 public class GameResult {
 
-    private final Map<LottoRank, Integer> rankCount;
+    private final Map<LottoRank, Integer> result;
 
-    public GameResult(List<Long> hitCounts) {
-        this.rankCount = initRankCount();
-        hitCounts.stream()
-                .map(LottoRank::toRank)
-                .forEach(this::putToRankCount);
+    public GameResult(List<LottoRank> lottoRanks) {
+        this.result = new EnumMap<>(LottoRank.class);
+        lottoRanks.forEach(this::putToResult);
     }
 
-    private EnumMap<LottoRank, Integer> initRankCount() {
-        EnumMap<LottoRank, Integer> result = new EnumMap<>(LottoRank.class);
-        for (LottoRank rank : LottoRank.values()) {
-            result.put(rank, 0);
-        }
-        result.remove(LottoRank.ETC);
-        return result;
-    }
-
-    private void putToRankCount(LottoRank lottoRank) {
-        this.rankCount.computeIfPresent(lottoRank, (lottoRank1, integer) -> integer + 1);
+    private void putToResult(LottoRank lottoRank) {
+        this.result.putIfAbsent(lottoRank, 0);
+        this.result.computeIfPresent(lottoRank, (key, value) -> value + 1);
     }
 
     public ReturnRate calculateReturnRate(PurchaseMoney purchaseMoney) {
@@ -35,13 +25,13 @@ public class GameResult {
     }
 
     private int getSumOfPrizeMoney() {
-        return rankCount.entrySet()
+        return result.entrySet()
                 .stream()
                 .mapToInt(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
                 .sum();
     }
 
-    public Map<LottoRank, Integer> getRankCount() {
-        return rankCount;
+    public Map<LottoRank, Integer> getResult() {
+        return result;
     }
 }

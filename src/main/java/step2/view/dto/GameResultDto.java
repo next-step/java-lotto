@@ -14,8 +14,16 @@ public class GameResultDto {
     Map<LottoRank, Integer> rankCountMap;
 
     public GameResultDto(GameResult gameResult) {
-        this.rankCountMap = new EnumMap<>(LottoRank.class);
-        this.rankCountMap.putAll(gameResult.getRankCount());
+        this.rankCountMap = initBaseMap();
+        this.rankCountMap.putAll(gameResult.getResult());
+    }
+
+    private EnumMap<LottoRank, Integer> initBaseMap() {
+        EnumMap<LottoRank, Integer> result = new EnumMap<>(LottoRank.class);
+        for (LottoRank rank : LottoRank.values()) {
+            result.put(rank, 0);
+        }
+        return result;
     }
 
     public String toString() {
@@ -28,6 +36,6 @@ public class GameResultDto {
     private String createString(Map.Entry<LottoRank, Integer> entry) {
         LottoRank rank = entry.getKey();
         Integer count = entry.getValue();
-        return rank.getHitCount() + "개 일치 (" + rank.getPrizeMoney() + "원) - " + count + "개";
+        return rank.toString() + " - " + count + "개";
     }
 }

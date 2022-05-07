@@ -12,8 +12,8 @@ public class LottoGame {
         this.winner = winner;
     }
 
-    public GameResult calculateGameResult() {
-        List<Long> hitCounts = purchaseList.calculateHitCount(winner);
-        return new GameResult(hitCounts);
+    public GameResult calculateResult() {
+        List<LottoRank> result = purchaseList.calculateRankEach(winner);
+        return new GameResult(result);
     }
 }
