@@ -4,7 +4,6 @@ import Lotto.Exception.InvalidMoneyForLottoException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoGame {
     private static final int LOTTO_PRICE_PER = 1000;
@@ -27,10 +26,10 @@ public class LottoGame {
         return lottoCardList;
     }
 
-    public List<Integer> earnMatchCount(LottoCard lottoCard){
-        return lottoCardList.stream()
-                .map(lotto -> lotto.getMatchCount(lottoCard))
-                .collect(Collectors.toList());
+    public void calculate(LottoCard winningLotto, int bonus){
+        for (LottoCard lottoCard: lottoCardList) {
+            lottoCard.matchPrize(winningLotto, bonus);
+        }
     }
 
     private void validateMoney(int money){
@@ -39,7 +38,12 @@ public class LottoGame {
         }
     }
 
-    public double getWinningRate(double totalMoney){
-        return totalMoney / (lottoCardList.size() * LOTTO_PRICE_PER);
+    public double getWinningRate(){
+        double money = 0;
+        for (LottoCard lottoCard: lottoCardList) {
+            money += lottoCard.getPrize().getWinningMoney();
+        }
+
+        return money / (lottoCardList.size() * LOTTO_PRICE_PER);
     }
 }

@@ -1,5 +1,8 @@
 package Lotto.Model;
 
+import Lotto.Exception.InvalidBonusForLottoException;
+import Lotto.Exception.InvalidMoneyForLottoException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,7 +15,7 @@ public class LottoCard {
     private static final int LOTTO_SIZE = 6;
     private static final List<Integer> LOTTO_POOL = IntStream.range(MIN_VALID_NUMBER, MAX_VALID_NUMBER + 1).boxed().collect(Collectors.toList());
     private final List<Integer> lotto;
-
+    private Prize prize;
 
     public LottoCard() {
         Collections.shuffle(LOTTO_POOL);
@@ -39,11 +42,27 @@ public class LottoCard {
         return lotto;
     }
 
-    public int getMatchCount(LottoCard winningCard) {
-        return (int)lotto.stream()
+    public void matchPrize(LottoCard winningCard, int bonus){
+        validateBonus(bonus);
+
+        int matchCount = (int)lotto.stream()
                 .filter(winningCard::contains)
                 .count();
+
+        prize = Prize.valueOf(matchCount, lotto.contains(bonus));
     }
+
+    private void validateBonus(int bonus){
+        if(bonus < MIN_VALID_NUMBER || bonus > MAX_VALID_NUMBER){
+            throw new InvalidBonusForLottoException();
+        }
+    }
+
+
+    public Prize getPrize() {
+        return prize;
+    }
+
 
     private boolean contains(int number) {
         return lotto.contains(number);

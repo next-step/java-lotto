@@ -5,6 +5,8 @@ import Lotto.Model.LottoCard;
 import Lotto.Model.LottoGame;
 import Lotto.Model.Prize;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,26 +38,31 @@ public class OutputView {
                 .collect(Collectors.joining(", ")));
     }
 
-    public static void printPrize(LottoGame lottoGame, LottoCard lotto) {
+    public static void printPrize(LottoGame lottoGame) {
         System.out.println("");
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        List<Integer> matchCount = lottoGame.earnMatchCount(lotto);
+        List<LottoCard> lottoCards = lottoGame.getLottoList();
+        List<Prize> prizes =new ArrayList<>();
 
-        double totalMoney = 0;
-        for (Prize prize : Prize.values()) {
-            int match = prize.getCountOfMatch();
-            int winningMoney = prize.getWinningMoney();
-            int winningCount = (int) matchCount.stream()
-                    .filter(w -> w.equals(prize.getCountOfMatch()))
-                    .count();
-
-            totalMoney += winningMoney * winningCount;
-
-            System.out.println(match + "개 일치 (" + winningMoney + "원) - " + winningCount + "개");
+        for(LottoCard lottoCard : lottoCards){
+            prizes.add(lottoCard.getPrize());
         }
 
-        System.out.printf("총 수익률은 %.2f입니다.%n", lottoGame.getWinningRate(totalMoney));
+        for (Prize prize : Prize.values()) {
+            if(prize == Prize.MISS){
+                continue;
+            }
+
+            if(prize.getCheckBonus()){
+                System.out.println(prize.getCountOfMatch() + "개 일치, 보너스 볼 일치 (" + prize.getWinningMoney() + "원) - " + Collections.frequency(prizes, prize) + "개");
+                continue;
+            }
+
+            System.out.println(prize.getCountOfMatch() + "개 일치 (" + prize.getWinningMoney() + "원) - " + Collections.frequency(prizes, prize) + "개");
+        }
+
+        System.out.printf("총 수익률은 %.2f입니다.%n", lottoGame.getWinningRate());
     }
 }

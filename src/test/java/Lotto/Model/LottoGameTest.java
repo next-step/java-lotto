@@ -21,21 +21,16 @@ class LottoGameTest {
     }
 
     @Test
-    @DisplayName("당첨 로또와 맞는 숫자의 갯수가 일치하는지 확인")
-    void earnMatchCount() {
+    @DisplayName("수익률이 맞는지 확인")
+    void getWinningRate() {
         List<LottoCard> lottoCardList = new ArrayList<>();
         LottoCard lottoCard = new LottoCard(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
         lottoCardList.add(lottoCard);
 
         LottoGame lottoGame = new LottoGame(lottoCardList);
-        assertThat(lottoGame.earnMatchCount(new LottoCard(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 7)))).get(0)).isEqualTo(5);
-    }
+        lottoGame.calculate(new LottoCard(new ArrayList<>(Arrays.asList(1, 2, 3, 7, 8, 9))),10);
 
-    @Test
-    @DisplayName("수익률이 맞는지 확인")
-    void getWinningRate() {
-        LottoGame lottoGame = new LottoGame(10000);
-        assertThat(lottoGame.getWinningRate(1000)).isEqualTo(0.1);
+        assertThat(lottoGame.getWinningRate()).isEqualTo(5);
     }
 
     @Test
