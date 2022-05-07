@@ -46,11 +46,11 @@ public class OutputView {
       message += String.format(PROFIT_RATIO_MESSAGE, PROFIT);
     }
 
-    if(calculateProfitRatio == 1) {
+    if (calculateProfitRatio == 1) {
       message += String.format(PROFIT_RATIO_MESSAGE, SAME);
     }
 
-    if(calculateProfitRatio < 1) {
+    if (calculateProfitRatio < 1) {
       message += String.format(PROFIT_RATIO_MESSAGE, LOSS);
     }
 

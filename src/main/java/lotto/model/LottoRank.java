@@ -20,7 +20,7 @@ public enum LottoRank {
   }
 
   public static LottoRank findRank(int numberOfMatch, boolean matchOfBonusLottoNumber) {
-    if(matchOfBonusLottoNumber) {
+    if (matchOfBonusLottoNumber) {
       return BONUS_SECOND;
     }
 

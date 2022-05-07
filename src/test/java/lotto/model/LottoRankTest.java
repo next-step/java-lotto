@@ -32,7 +32,8 @@ class LottoRankTest {
   }
 
   @ParameterizedTest(name = "로또 당첨 랭킹이 {0}이면 우승상금은 {1}이다")
-  @CsvSource({"FIRST,2000000000", "BONUS_SECOND,30000000", "SECOND,1500000", "THIRD,50000", "FOURTH,5000", "NON_MATCH,0"})
+  @CsvSource({"FIRST,2000000000", "BONUS_SECOND,30000000", "SECOND,1500000", "THIRD,50000",
+      "FOURTH,5000", "NON_MATCH,0"})
   void checkWinningPrizeAccordingToTheLottoRanking(LottoRank lottoRank, int expected) {
     // when
     int reward = lottoRank.getReward();

@@ -30,7 +30,8 @@ public class InputView {
 
   private static void validate(String winningLottoNumber) {
     if (!WINNING_NUMBER_PATTERN.matcher(winningLottoNumber).matches()) {
-      throw new IllegalArgumentException(String.format(WINNING_NUMBER_PATTERN_NOT_MATCH_ERROR_MESSAGE, winningLottoNumber));
+      throw new IllegalArgumentException(
+          String.format(WINNING_NUMBER_PATTERN_NOT_MATCH_ERROR_MESSAGE, winningLottoNumber));
     }
   }
 

@@ -18,7 +18,8 @@ public class LottoController {
     Lottos lottos = Lottos.create(purchasedLotto, numberGenerateStrategy);
     OutputView.outputPurchasedLottoInfo(lottos);
 
-    WinningLotto winningLotto = WinningLotto.create(InputView.inputLastWeekWinningLotto(), InputView.inputBonusLottoNumber());
+    WinningLotto winningLotto = WinningLotto.create(InputView.inputLastWeekWinningLotto(),
+        InputView.inputBonusLottoNumber());
 
     LottoWinStatistics lottoWinStatistics = new LottoWinStatistics(lottos, winningLotto);
     OutputView.outputWinningRate(lottoWinStatistics.isMatchResult());

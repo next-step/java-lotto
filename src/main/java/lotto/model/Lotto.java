@@ -57,7 +57,7 @@ public class Lotto {
   }
 
   private void validateNullOrEmpty(List<LottoNumber> lottoNumbers) {
-    if(lottoNumbers == null || lottoNumbers.isEmpty()) {
+    if (lottoNumbers == null || lottoNumbers.isEmpty()) {
       throw new IllegalArgumentException(LOTTO_NULL_OR_EMPTY_ERROR_MESSAGE);
     }
   }
