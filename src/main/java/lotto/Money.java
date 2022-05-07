@@ -8,8 +8,6 @@ import static lotto.Const.LOTTERY_PRICE;
 public class Money {
     private int value;
 
-
-
     Money(int value) {
         if (value < 0) {
             throw new IllegalArgumentException("Money should be more than 0.");
@@ -17,12 +15,8 @@ public class Money {
         this.value = value;
     }
 
-    public static String toPayload(Map<Integer, Integer> matches) {
-        StringBuilder payload = new StringBuilder("");
-        for (int key : matches.keySet()) {
-            payload.append(key + " matches (₩" + Reward.of(key).money.value + "): " + matches.get(key) + "\n");
-        }
-        return payload.toString();
+    public String toPayload() {
+        return "₩" + this.value;
     }
 
 
@@ -41,15 +35,14 @@ public class Money {
     public String didEarn(int earnedMoney) {
         if (getEarningRate(earnedMoney) >= 1) {
             return "📈Earned!";
-        };
+        }
+        ;
         return "📉Lost..";
     }
 
     @Override
     public String toString() {
-        return "Money{" +
-                "value=" + value +
-                '}';
+        return "Money{" + "value=" + value + '}';
     }
 
     @Override

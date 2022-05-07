@@ -151,7 +151,7 @@ Earning rate: Infinity
     - [x] money 에서 수익률 계산
 - [x] Answer 대신 Lottery 사용
 - [x] Reward.value -> money 변수명 수정, Money class 사용
-- [ ] Reward 가 당첨 번호 개수(matches) 도 함께 포장
+- [x] Reward 가 당첨 번호 개수(win) 도 함께 포장
 - [ ] number를 일일히 비교하는게 아닌 Lottery를 사용하여 matchNumber 수행
 - [ ] findWins에서 saveWin(win) 을 분리
 - [ ] Lottery.shuffleBox()와 Lottery.findSixNumbers()를 LotteryBox의 메소드로 이동
