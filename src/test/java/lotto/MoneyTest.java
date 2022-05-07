@@ -1,8 +1,11 @@
 package lotto;
 
 import lotto.model.Money;
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -27,6 +30,17 @@ public class MoneyTest {
     }
 
     @Test
+    @DisplayName("stream에서 reduce와 add로 값을 더할 수 있다.")
+    void addTest() {
+        List<Money> monies = Lists.newArrayList(new Money(0), new Money(1), new Money(2), new Money(3));
+
+        Money result = monies.stream()
+                .reduce(new Money(0), Money::add);
+
+        assertThat(result).isEqualTo(new Money(6));
+    }
+
+    @Test
     @DisplayName("Money가 입력받은 단위의 배수인지 isDivided(money) 로 확인할 수 있다.")
     void notThousandMoneyTest() {
         Money money = new Money(14000);
@@ -39,7 +53,7 @@ public class MoneyTest {
     void getUnitCountTest() {
         Money money = new Money(14000);
 
-        assertThat(money.getUnitCount(THOUSAND)).isEqualTo(14);
+        assertThat(money.calculateUnitCount(THOUSAND)).isEqualTo(14);
     }
 
     @Test
@@ -47,6 +61,6 @@ public class MoneyTest {
     void getYieldTest() {
         Money money = new Money(14000);
 
-        assertThat(String.format("%.2f", money.getYield(5000))).isEqualTo("0.36");
+        assertThat(String.format("%.2f", new Money(5000).divideBy(money))).isEqualTo("0.36");
     }
 }

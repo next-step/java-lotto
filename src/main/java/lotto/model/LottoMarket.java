@@ -1,8 +1,4 @@
-package lotto.controller;
-
-import lotto.model.LottoGenerator;
-import lotto.model.Lottos;
-import lotto.model.Money;
+package lotto.model;
 
 import java.util.Objects;
 
@@ -16,7 +12,7 @@ public class LottoMarket {
 
     public static Lottos buyLottos(Money money, LottoGenerator lottoGenerator) {
         validate(money, lottoGenerator);
-        return getLottos(money, lottoGenerator);
+        return generateLottos(money, lottoGenerator);
     }
 
     private static void validate(Money money, LottoGenerator lottoGenerator) {
@@ -24,16 +20,11 @@ public class LottoMarket {
         Objects.requireNonNull(lottoGenerator, "로또 생성 전략은 null일 수 없습니다.");
     }
 
-    private static Lottos getLottos(Money money, LottoGenerator lottoGenerator) {
-        int count = getUnitCount(money);
-
-        return new Lottos(count, lottoGenerator);
-    }
-
-    private static int getUnitCount(Money money) {
+    private static Lottos generateLottos(Money money, LottoGenerator lottoGenerator) {
         if (!money.isDivided(BASE_MONEY_UNIT)) {
             throw new IllegalArgumentException("로또 구매시 지불하는 금액 단위가 올바르지 않습니다. money: " + money);
         }
-        return money.getUnitCount(BASE_MONEY_UNIT);
+
+        return new Lottos(money.calculateUnitCount(BASE_MONEY_UNIT), lottoGenerator);
     }
 }

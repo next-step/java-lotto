@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.controller.LottoMarket;
+import lotto.model.LottoMarket;
 import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.RandomLottoGenerator;

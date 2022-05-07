@@ -7,15 +7,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public final class Lottos {
 
     private final List<Lotto> lottos;
 
     public Lottos(int count, LottoGenerator lottoGenerator) {
-        this(IntStream.range(0, count)
-                .mapToObj(i -> lottoGenerator.get())
+        this(Stream.generate(lottoGenerator::get)
+                .limit(count)
                 .collect(Collectors.toList()));
     }
 
@@ -40,20 +40,15 @@ public final class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public LottoResult getLottoResult(Lotto winnerLotto) {
-        List<Rank> lottoStatistics = getLottoStatistics(winnerLotto);
-        return new LottoResult(lottoStatistics);
-    }
-
-    private List<Rank> getLottoStatistics(Lotto winnerLotto) {
+    public LottoResult extractLottoResult(WinnerLotto winnerLotto) {
         validate(winnerLotto);
 
         return lottos.stream()
-                .map(lotto -> lotto.getRank(winnerLotto))
-                .collect(Collectors.toList());
+                .map(winnerLotto::getRank)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoResult::new));
     }
 
-    private static void validate(Lotto winnerLotto) {
-        Objects.requireNonNull(winnerLotto, "당첨 로또를 올바르게 입력해주세요. input is null");
+    private static void validate(WinnerLotto winnerLotto) {
+        Objects.requireNonNull(winnerLotto, "당첨 로또 번호 입력이 올바르지 않습니다. winnerLotto is null");
     }
 }

@@ -24,12 +24,16 @@ public final class Money {
         return this.money % unit.money == 0;
     }
 
-    public int getUnitCount(Money unit) {
+    public double divideBy(Money denominator) {
+        return this.money / (double) denominator.money;
+    }
+
+    public int calculateUnitCount(Money unit) {
         return this.money / unit.money;
     }
 
-    public double getYield(long result) {
-        return result / (double) this.money;
+    public Money add(Money addMoney) {
+        return new Money(this.money + addMoney.money);
     }
 
     @Override

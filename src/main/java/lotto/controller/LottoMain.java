@@ -1,12 +1,14 @@
-package lotto;
+package lotto.controller;
 
-import lotto.controller.LottoMarket;
 import lotto.dto.ExtractLottoNumbers;
 import lotto.dto.LottoResult;
 import lotto.model.Lotto;
+import lotto.model.LottoMarket;
+import lotto.model.LottoNumber;
 import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.RandomLottoGenerator;
+import lotto.model.WinnerLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -17,11 +19,17 @@ public class LottoMain {
 
         ResultView.printBuyingLottos(buyingLottos);
 
-        String winnerLottoNumbers = InputView.inputWinnerLottoNumbers();
-        Lotto winnerLotto = new Lotto(ExtractLottoNumbers.split(winnerLottoNumbers));
-
-        LottoResult lottoResult = buyingLottos.getLottoResult(winnerLotto);
+        LottoResult lottoResult = buyingLottos.extractLottoResult(inputWinnerLotto());
 
         ResultView.printResult(buyingMoney, lottoResult);
+    }
+
+    private static WinnerLotto inputWinnerLotto() {
+        String winnerLottoNumbers = InputView.inputWinnerLottoNumbers();
+
+        Lotto winnerLotto = new Lotto(ExtractLottoNumbers.split(winnerLottoNumbers));
+        LottoNumber bonusNumber = LottoNumber.valueOf(InputView.inputBonusLottoNumber());
+
+        return new WinnerLotto(winnerLotto, bonusNumber);
     }
 }
