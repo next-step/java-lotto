@@ -24,7 +24,7 @@ public class LottoGroup {
         this(IntStream.range(0, lottoCount).mapToObj(i -> new Lotto(lottoNumberGenerateStrategy)).collect(Collectors.toList()));
     }
 
-    public LottoGroupResult getLottoGroupResult(Lotto winningLotto) {
+    public LottoGroupResult getLottoGroupResult(WinningLotto winningLotto) {
         final Map<LottoRank, Integer> lottoGroupResult = new EnumMap<>(LottoRank.class);
         for (Lotto lotto : this.lottos) {
             LottoRank lottoRank = lotto.getLottoRank(winningLotto);

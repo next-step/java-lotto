@@ -45,4 +45,11 @@ public class LottoNumber {
     public int hashCode() {
         return number;
     }
+
+    @Override
+    public String toString() {
+        return "LottoNumber{" +
+                "number=" + number +
+                '}';
+    }
 }

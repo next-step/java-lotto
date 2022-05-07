@@ -31,8 +31,12 @@ public class Lotto {
         this(lottoNumberGenerateStrategy.generate());
     }
 
-    public LottoRank getLottoRank(Lotto winningLotto) {
-        return LottoRank.valueOfMatchCount(matchLottoNumberCount(winningLotto));
+    public LottoRank getLottoRank(WinningLotto winningLotto) {
+        return LottoRank.findLottoRank(matchLottoNumberCount(winningLotto.getWinningLotto()), containsBonusNumber(winningLotto.getBonusNumber()));
+    }
+
+    public boolean containsBonusNumber(LottoNumber bonusNumber) {
+        return this.numbers.contains(bonusNumber);
     }
 
     private int matchLottoNumberCount(Lotto winningLotto) {
@@ -76,5 +80,12 @@ public class Lotto {
     @Override
     public int hashCode() {
         return numbers != null ? numbers.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "numbers=" + numbers +
+                '}';
     }
 }

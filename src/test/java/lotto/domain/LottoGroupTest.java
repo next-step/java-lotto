@@ -49,17 +49,21 @@ class LottoGroupTest {
     void getLottoGroupResult_로또그룹_결과를_반환한다() {
         LottoGroup lottoGroup = new LottoGroup(List.of(
                 new Lotto(new int[]{1, 2, 3, 4, 5, 6}),
-                new Lotto(new int[]{6, 8, 9, 10, 11, 12}),
+                new Lotto(new int[]{6, 8, 9, 10, 1, 12}),
+                new Lotto(new int[]{6, 8, 9, 10, 4, 12}),
+                new Lotto(new int[]{6, 8, 9, 10, 5, 1}),
                 new Lotto(new int[]{4, 5, 6, 16, 17, 18}),
                 new Lotto(new int[]{19, 20, 21, 22, 23, 24}),
                 new Lotto(new int[]{25, 26, 27, 28, 29, 30}),
                 new Lotto(new int[]{31, 32, 33, 34, 35, 36}),
                 new Lotto(new int[]{37, 38, 39, 40, 41, 42}))
         );
-        assertThat(lottoGroup.getLottoGroupResult(new Lotto(new int[]{4, 5, 6, 8, 9, 10}))).isEqualTo(new LottoGroupResult(Map.of(
+        assertThat(lottoGroup.getLottoGroupResult(new WinningLotto(new Lotto(new int[]{4, 5, 6, 8, 9, 10}), new LottoNumber(1)))).isEqualTo(new LottoGroupResult(Map.of(
                 LottoRank.MISS, 4,
-                LottoRank.FOURTH, 2,
-                LottoRank.THIRD, 1
+                LottoRank.FIFTH, 2,
+                LottoRank.FOURTH, 1,
+                LottoRank.THIRD, 1,
+                LottoRank.SECOND, 1
         )));
     }
 

@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.Lotto;
+import lotto.domain.WinningLotto;
 import lotto.domain.LottoGroup;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTotalPrice;
@@ -29,7 +30,10 @@ public class LottoController {
 
         Lotto winningNumbers = new Lotto(InputView.scanWinningNumbers()
                 .stream().map(LottoNumber::new).collect(Collectors.toList()));
-        LottoGroupResult lottoGroupResult = lottoGroup.getLottoGroupResult(winningNumbers);
+
+        LottoNumber bonusNumber = new LottoNumber(InputView.scanBonusNumber());
+
+        LottoGroupResult lottoGroupResult = lottoGroup.getLottoGroupResult(new WinningLotto(winningNumbers, bonusNumber));
         ResultView.printWinningStatistic(lottoGroupResult, lottoPurchaseAmount.getTotalPrice());
     }
 }

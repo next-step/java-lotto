@@ -13,6 +13,7 @@ public class ResultView {
     private static final String WINNING_STATISTIC_MESSAGE = "당첨 통계";
     private static final String SPLIT_LINE_MESSAGE = "---------";
     private static final String CORRECT_STATISTIC_MESSAGE = "%d개 일치 (%d원) - %d개";
+    private static final String CORRECT_SECOND_RANK_STATISTIC_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String EARNINGS_RATIO_MESSAGE = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s(이)라는 의미임)";
     private static final String ADVANTAGE_MESSAGE = "이익";
     private static final String DISADVANTAGE_MESSAGE = "손해";
@@ -48,10 +49,17 @@ public class ResultView {
 
     private static void printLottoGroupResult(LottoGroupResult lottoGroupResult) {
         Stream.of(LottoRank.values()).filter(lottoRank -> !lottoRank.equals(LottoRank.MISS)).forEach(lottoRank -> System.out.println(String.format(
-                CORRECT_STATISTIC_MESSAGE,
+                getCorrectStatisticMessage(lottoRank),
                 lottoRank.matchCount(),
                 lottoRank.winningMoney(),
                 lottoGroupResult.getLottoMatchCount(lottoRank)
         )));
+    }
+
+    private static String getCorrectStatisticMessage(LottoRank lottoRank) {
+        if (lottoRank.equals(LottoRank.SECOND)) {
+            return CORRECT_SECOND_RANK_STATISTIC_MESSAGE;
+        }
+        return CORRECT_STATISTIC_MESSAGE;
     }
 }
