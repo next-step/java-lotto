@@ -27,7 +27,7 @@ class LottosTest {
   void checkResultOfCompareAllPurchasedLottoAndWinningLotto() {
     // given
     Lottos lottos = Lottos.create(3, new FixedNumberGenerateStrategy());
-    WinningLotto winningLotto = WinningLotto.create("1, 2, 3, 4, 5, 6");
+    WinningLotto winningLotto = WinningLotto.create("1, 2, 3, 4, 5, 6", 10);
 
     // when
     int matchResult = lottos.matchLottoRankResult(LottoRank.FIRST, winningLotto);
@@ -41,7 +41,7 @@ class LottosTest {
   void calculateReturnProfitRatioWinningLottoAndComparisonResult() {
     // given
     Lottos lottos = Lottos.create(3, new FixedNumberGenerateStrategy());
-    WinningLotto winningLotto = WinningLotto.create("1, 2, 3, 4, 5, 6");
+    WinningLotto winningLotto = WinningLotto.create("1, 2, 3, 4, 5, 6", 10);
 
     // when
     double rewordResult = lottos.calculateProfitRatio(winningLotto);

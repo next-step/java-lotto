@@ -64,7 +64,7 @@ public class LottoTest {
   void checkNumberMatchingLottoNumbers(String winningLottoNumbers, int matchedCount) {
     // given
     Lotto lotto = Lotto.create(new FixedNumberGenerateStrategy());
-    WinningLotto winningLotto = WinningLotto.create(winningLottoNumbers);
+    WinningLotto winningLotto = WinningLotto.create(winningLottoNumbers, 10);
 
     // when
     int matchResult = lotto.matchWinningLottoNumbers(winningLotto.getWinningLottoNumbers());
