@@ -3,20 +3,20 @@ package lotto.domain.result;
 import java.util.Objects;
 
 class MatchResult {
-    private int matchCount;
+    private int matchedLottoNumberCount;
     private int reward;
 
-    MatchResult(int matchCount, int reward) {
-        this.matchCount = matchCount;
+    MatchResult(int matchedLottoNumberCount, int reward) {
+        this.matchedLottoNumberCount = matchedLottoNumberCount;
         this.reward = reward;
     }
 
     int getTotalReward() {
-        return matchCount * reward;
+        return matchedLottoNumberCount * reward;
     }
 
     void addMatchCount() {
-        ++matchCount;
+        ++matchedLottoNumberCount;
     }
 
     @Override
@@ -28,16 +28,16 @@ class MatchResult {
             return false;
         }
         MatchResult matchResult = (MatchResult) obj;
-        return this.matchCount == matchResult.matchCount && this.reward == matchResult.reward;
+        return this.matchedLottoNumberCount == matchResult.matchedLottoNumberCount && this.reward == matchResult.reward;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(matchCount, reward);
+        return Objects.hash(matchedLottoNumberCount, reward);
     }
 
     @Override
     public String toString() {
-        return "(" + reward + ")- " + matchCount + "개";
+        return "(" + reward + ")- " + matchedLottoNumberCount + "개";
     }
 }
