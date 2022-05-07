@@ -32,8 +32,8 @@ public final class Money {
         return this.money / unit.money;
     }
 
-    public static Money add(Money a, Money b) {
-        return new Money(a.money + b.money);
+    public Money add(Money addMoney) {
+        return new Money(this.money + addMoney.money);
     }
 
     @Override

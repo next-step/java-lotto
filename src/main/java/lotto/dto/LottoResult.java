@@ -27,8 +27,7 @@ public class LottoResult {
     public double getYield(Money buyingMoney) {
         Money earnedMoney = rankResult.stream()
                 .map(Rank::winnings)
-                .reduce(Money::add)
-                .orElseGet(() -> new Money(0));
+                .reduce(new Money(0), Money::add);
         return earnedMoney.divideBy(buyingMoney);
     }
 }
