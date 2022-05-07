@@ -2,6 +2,7 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
 import lotto.strategy.FixedNumberGenerateStrategy;
 import lotto.strategy.RandomNumberGenerateStrategy;
 import org.junit.jupiter.api.DisplayName;
@@ -48,5 +49,33 @@ class LottosTest {
 
     // then
     assertThat(rewordResult).isEqualTo(2000000.0);
+  }
+
+  @Test
+  @DisplayName("보너스번호를 맞춘 2등의 경우 수익률 계산하기")
+  void calculateReturnProfitRatioBonusSecond() {
+    // given
+    Lottos lottos = new Lottos(List.of(Lotto.create("1, 2, 3, 4, 5, 10")));
+    WinningLotto winningLotto = WinningLotto.create("1, 2, 3, 4, 20, 30", 10);
+
+    // when
+    double profit = lottos.calculateProfitRatio(winningLotto);
+
+    // then
+    assertThat(profit).isEqualTo(30000.0);
+  }
+
+  @Test
+  @DisplayName("보너스번호를 맞추지 않고 2등의 경우 수익률 계산하기")
+  void calculateReturnProfitRatioSecond() {
+    // given
+    Lottos lottos = new Lottos(List.of(Lotto.create("1, 2, 3, 4, 5, 20")));
+    WinningLotto winningLotto = WinningLotto.create("1, 2, 3, 4, 5, 30", 10);
+
+    // when
+    double profit = lottos.calculateProfitRatio(winningLotto);
+
+    // then
+    assertThat(profit).isEqualTo(1500.0);
   }
 }
