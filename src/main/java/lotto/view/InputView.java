@@ -14,6 +14,10 @@ public class InputView {
 
   private static final Scanner SCANNER = new Scanner(System.in);
 
+  private InputView() {
+    throw new AssertionError();
+  }
+
   public static String inputPurchasedAmount() {
     System.out.println(INPUT_PURCHASED_AMOUNT_PROMPT);
     return SCANNER.nextLine();
