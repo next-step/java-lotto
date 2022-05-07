@@ -7,13 +7,13 @@ public class LottoStore {
 
   private static final int LOTTO_TICKET_PRICE = 1000;
 
-  public static LottoTickets buy(final Money amount) {
+  public static Lotto buy(final Money amount) {
     long ticketCount = getTicketCount(amount);
     List<LottoTicket> lottoTickets = new ArrayList<>();
     for (int i = 0; i < ticketCount; i++) {
       lottoTickets.add((LottoFactory.createAuto()));
     }
-    return new LottoTickets(lottoTickets);
+    return new Lotto(lottoTickets);
   }
 
   private static long getTicketCount(final Money amount) {

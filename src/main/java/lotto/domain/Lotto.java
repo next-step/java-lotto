@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoTickets {
+public class Lotto {
 
   private final List<LottoTicket> lottoTickets;
 
-  public LottoTickets(List<LottoTicket> lottoTickets) {
+  public Lotto(List<LottoTicket> lottoTickets) {
     this.lottoTickets = lottoTickets;
   }
 
-  public LottoStatistics getResultStatistics(LottoTicket winLottoTicket) {
-    List<LottoResult> lottoResults = new ArrayList<>();
+  public LottoResult result(WinLotto winLotto) {
+    List<LottoRank> lottoRanks = new ArrayList<>();
     for (LottoTicket lottoTicket : lottoTickets) {
-      lottoResults.add(lottoTicket.getWinLottoNumbers(winLottoTicket));
+      lottoRanks.add(lottoTicket.getWinLottoNumbers(winLotto));
     }
-    return new LottoStatistics(lottoResults);
+    return new LottoResult(lottoRanks);
   }
 
   public List<LottoTicket> getLottoTickets() {

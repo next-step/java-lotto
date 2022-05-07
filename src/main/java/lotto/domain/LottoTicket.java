@@ -16,18 +16,23 @@ public class LottoTicket {
     this.lottoNumbers = lottoNumbers;
   }
 
-  public LottoResult getWinLottoNumbers(LottoTicket winLottoTicket) {
-    return new LottoResult(getMatchedLottoNumberCount(winLottoTicket.getLottoNumbers()));
+  public LottoRank getWinLottoNumbers(WinLotto winLotto) {
+    return LottoRank.of(countByMatched(winLotto.getLottoNumbers()), matchBonus(winLotto.getBonusNumber()));
+  }
+
+  private long countByMatched(List<LottoNumber> winLottoNumbers) {
+    return lottoNumbers.stream()
+        .filter(winLottoNumbers::contains)
+        .count();
+  }
+
+  private boolean matchBonus(LottoNumber bonusNumber) {
+    return lottoNumbers.stream()
+        .anyMatch(lottoNumber -> lottoNumber.equals(bonusNumber));
   }
 
   public List<LottoNumber> getLottoNumbers() {
     return Collections.unmodifiableList(lottoNumbers);
-  }
-
-  private long getMatchedLottoNumberCount(List<LottoNumber> winLottoNumbers) {
-    return lottoNumbers.stream()
-        .filter(winLottoNumbers::contains)
-        .count();
   }
 
   private void validateSize(List<LottoNumber> lottoNumbers) {
