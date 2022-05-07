@@ -5,6 +5,7 @@ import java.util.Arrays;
 public enum LottoRank {
 
   FIRST(6, 2000000000),
+  BONUS_SECOND(5, 30000000),
   SECOND(5, 1500000),
   THIRD(4, 50000),
   FOURTH(3, 5000),
@@ -18,7 +19,11 @@ public enum LottoRank {
     this.reward = reward;
   }
 
-  public static LottoRank findRank(int numberOfMatch) {
+  public static LottoRank findRank(int numberOfMatch, boolean matchOfBonusLottoNumber) {
+    if(matchOfBonusLottoNumber) {
+      return BONUS_SECOND;
+    }
+
     return Arrays.stream(values())
         .filter(lottoRank -> matchRank(lottoRank, numberOfMatch))
         .findFirst()
@@ -26,7 +31,7 @@ public enum LottoRank {
   }
 
   private static boolean matchRank(LottoRank lottoRank, int numberOfMatch) {
-    return lottoRank.numberOfMatch == numberOfMatch;
+    return lottoRank != BONUS_SECOND && lottoRank.numberOfMatch == numberOfMatch;
   }
 
   public int getNumberOfMatch() {
