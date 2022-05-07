@@ -34,5 +34,17 @@ public class LottoTest {
                     Lotto lotto = new Lotto(numbers);
                 }).withMessageMatching("숫자 6개만 입력 가능합니다");
 
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    List<Integer> numbers = new ArrayList<>();
+                    numbers.add(1);
+                    numbers.add(3);
+                    numbers.add(3);
+                    numbers.add(6);
+                    numbers.add(7);
+                    numbers.add(8);
+
+                    Lotto lotto = new Lotto(numbers);
+                }).withMessageMatching("중복 숫자는 입력할 수 없습니다");
     }
 }

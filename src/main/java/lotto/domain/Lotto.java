@@ -20,6 +20,11 @@ public class Lotto {
             throw new IllegalArgumentException("숫자 " + LOTTO_LENGTH + "개만 입력 가능합니다");
         }
 
+        Set<Integer> numberSet = new HashSet<>(numbers);
+        if (numberSet.size() != numbers.size()) {
+            throw new IllegalArgumentException("중복 숫자는 입력할 수 없습니다");
+        }
+
         this.numbers = new ArrayList<>(numbers);
     }
 
