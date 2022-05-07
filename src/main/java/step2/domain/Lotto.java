@@ -33,6 +33,11 @@ public class Lotto {
                 .count();
     }
 
+    public boolean containBonusNumber(Winner winner) {
+        return values.stream()
+                .anyMatch(winner::isBonusNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

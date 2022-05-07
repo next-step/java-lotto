@@ -63,6 +63,10 @@ public class Winner {
         return this.winningNumbers.contains(lottoNumber);
     }
 
+    public boolean isBonusNumber(LottoNumber lottoNumber) {
+        return this.bonusNumber.equals(lottoNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
