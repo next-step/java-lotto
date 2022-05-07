@@ -15,10 +15,16 @@ public class Lottery {
 
     private static Lottos createLotto() {
         int amount = LottoInput.askAmount();
-        int lottoQuantity = Lottos.getQuantity(amount);
-        LottoOutput.printQuantity(lottoQuantity);
+        int totalQuantity = Lottos.getQuantity(amount);
+//        int lottoQuantity = Lottos.getQuantity(amount);
+        int manualQuantity = LottoInput.askManualLottoQuantity();
+        int autoQuantity = totalQuantity - manualQuantity;
+//        LottoOutput.printQuantity(lottoQuantity); // remove
 
-        List<LottoNumbers> lottoNumbers = Lottos.createLottos(lottoQuantity);
+        // List<LottoNumbers> ManualLottoNumbers = createManualLotto(manualQuantity)
+
+        LottoInput.printQuantities(manualQuantity, autoQuantity);
+        List<LottoNumbers> lottoNumbers = Lottos.createLottos(autoQuantity); // -> createAutoLotto
         Lottos lottos = new Lottos(lottoNumbers);
 
         LottoOutput.printLottoNumbers(lottos);
