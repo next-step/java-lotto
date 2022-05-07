@@ -12,13 +12,13 @@ public class Extractor {
     private Extractor(){}
 
     public static List<Number> extractNumbers(String string) {
-        return Arrays.stream(string.split(NUMBER_PATTERN))
+        return Arrays.stream(string.split(OPERATOR_PATTERN))
                 .map(Number::new)
                 .collect(Collectors.toList());
     }
 
     public static List<Operator> extractOperator(String string) {
-        String replaced = string.replaceAll(OPERATOR_PATTERN,"");
+        String replaced = string.replaceAll(NUMBER_PATTERN,"");
         return Arrays.stream(replaced.split(""))
                 .map(Operator::of)
                 .collect(Collectors.toList());
