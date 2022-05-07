@@ -29,11 +29,11 @@ public enum Operator {
         this.function = function;
     }
 
-    public static Operator create(String operator) {
+    public static Operator create(String sign) {
         return Arrays.stream(values())
-                .filter(operatorEnum -> operatorEnum.operator.equals(operator))
+                .filter(operator -> operator.operator.equals(sign))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException(String.format("%s는 잘못된 연산자입니다.", operator)));
+                .orElseThrow(() -> new IllegalArgumentException(String.format("%s는 잘못된 연산자입니다.", sign)));
     }
 
     public Number calculate(Number number1, Number number2) {
