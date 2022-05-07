@@ -9,6 +9,22 @@ import java.util.Set;
 
 public class Lotto {
     public static int LOTTO_LENGTH = 6;
+    public static int LOTTO_START_NUMBER = 1;
+    public static int LOTTO_END_NUMBER = 45;
+    public static int LOTTO_PRICE = 1000;
+
+    public enum LOTTO_REWARD {
+        MATCH_1(0), MATCH_2(0), MATCH_3(5000), MATCH_4(50000), MATCH_5(1500000), MATCH_6(2000000000);
+
+        private final int reward;
+        LOTTO_REWARD(int reward) {
+            this.reward = reward;
+        }
+        public int getReward() {
+            return reward;
+        }
+    }
+
     private List<Integer> numbers;
 
     Lotto(int num1, int num2, int num3, int num4, int num5, int num6) {

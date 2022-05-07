@@ -3,17 +3,19 @@ package lotto.domain.result;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import lotto.domain.Lotto.LOTTO_REWARD;
 
- class LottoMatchResults{
+class LottoMatchResults{
     private List<MatchResult> matchResults = new ArrayList<>();
 
+
     LottoMatchResults() {
-        matchResults.add(new MatchResult(0, 0));
-        matchResults.add(new MatchResult(0, 0));
-        matchResults.add(new MatchResult(0, 5000));
-        matchResults.add(new MatchResult(0, 50000));
-        matchResults.add(new MatchResult(0, 1500000));;
-        matchResults.add(new MatchResult(0, 2000000000));
+        matchResults.add(new MatchResult(0, LOTTO_REWARD.MATCH_1.getReward()));
+        matchResults.add(new MatchResult(0, LOTTO_REWARD.MATCH_2.getReward()));
+        matchResults.add(new MatchResult(0, LOTTO_REWARD.MATCH_3.getReward()));
+        matchResults.add(new MatchResult(0, LOTTO_REWARD.MATCH_4.getReward()));
+        matchResults.add(new MatchResult(0, LOTTO_REWARD.MATCH_5.getReward()));;
+        matchResults.add(new MatchResult(0, LOTTO_REWARD.MATCH_6.getReward()));
     }
 
     void addMatchNumber(int matchNumber) {

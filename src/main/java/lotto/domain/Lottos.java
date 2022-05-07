@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import static lotto.domain.Lotto.LOTTO_PRICE;
 import lotto.domain.result.LottoGameResult;
 
 public class Lottos {
@@ -15,7 +16,7 @@ public class Lottos {
 
     public static Lottos of(int purchaseAmount) {
         List<Lotto> lottos = new ArrayList<>();
-        int size = purchaseAmount/1000;
+        int size = purchaseAmount/LOTTO_PRICE;
 
         for (int i = 0; i < size; ++i) {
             lottos.add(new Lotto(LottoNumberGenerator.generate()));
