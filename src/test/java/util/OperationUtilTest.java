@@ -1,6 +1,7 @@
 package util;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,13 +20,15 @@ class OperationUtilTest {
         expected = new String[]{"3", "+", "5", "/", "2", "*", "3"};
     }
 
+    @DisplayName("문자열로 된 계산식을 입력했을 때 숫자와 기호로 나눠진 문자 배열 반환")
     @Test
-    public void 문자열_식을_입력했을때_문자_배열_반환() {
+    void splitStringIntoNumbersAndOperators() {
         assertThat(OperationUtil.splitString(line)).isEqualTo(expected);
     }
 
+    @DisplayName("빈 문자열을 계산식으로 입력하면 예외 반환")
     @Test
-    public void 빈_문자열_입력시_예외_반환() {
+    void throwExceptionWhenEnteredEmptyString() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
                     OperationUtil.splitString(blank);

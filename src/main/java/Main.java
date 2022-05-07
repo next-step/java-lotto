@@ -9,27 +9,27 @@ import java.util.regex.Pattern;
 
 public class Main {
 
+    private static final Pattern OPERATORS_PATTERN = Pattern.compile("[-+*/]");
+    private static final Calculator calculator = new Calculator();
+
     public static void main(String[] args) {
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
 
-        int result = calculateInput(inputView.scanInput());
-        resultView.printResult(result);
-    }
-
-    public static int calculateInput(String line) {
-        String[] divided = OperationUtil.splitString(line);
+        String input = inputView.scanInput();
+        String[] splitString = OperationUtil.splitString(input);
 
         List<String> numbers = new LinkedList<>();
         List<String> signs = new LinkedList<>();
 
-        for (String s : divided) {
-            if (Pattern.compile("[-+*/]").matcher(s).find()) {
+        for (String s : splitString) {
+            if (OPERATORS_PATTERN.matcher(input).find()) {
                 signs.add(s);
                 continue;
             }
             numbers.add(s);
         }
-        return Calculator.operate(numbers, signs);
+        int result = calculator.operate(numbers, signs);
+        resultView.printResult(result);
     }
 }
