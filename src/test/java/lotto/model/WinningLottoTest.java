@@ -2,10 +2,15 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
+import java.util.stream.Stream;
 import lotto.exception.LottoNumberDuplicateException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class WinningLottoTest {
 
@@ -16,7 +21,7 @@ class WinningLottoTest {
     WinningLotto lottoNumbers = WinningLotto.create("1, 2, 3, 4, 5, 6");
 
     // then
-    assertThat(lottoNumbers.getWinningLottoNumbers()).hasSize(6);
+    assertThat(lottoNumbers.getWinningLottoNumbers().getLottoNumbers()).hasSize(6);
   }
 
   @Test
@@ -25,5 +30,32 @@ class WinningLottoTest {
     // when & then
     assertThatThrownBy(() -> WinningLotto.create("1, 1, 1, 1, 1, 1"))
         .isInstanceOf(LottoNumberDuplicateException.class);
+  }
+
+  @ParameterizedTest(name = "지난 우승 로또번호 {0}와 구매한 로또번호 {1}가 일치하는 갯수는 {2}개 이다")
+  @MethodSource("winningLottoNumberAndMatchedCount")
+  void checkCompareWinningLottoNumberMatches(String lastWinningLotto, String purchasedLotto,
+      int expected) {
+    // given
+    WinningLotto winningLotto = WinningLotto.create(lastWinningLotto);
+    Lotto lotto = Lotto.create(purchasedLotto);
+
+    // when
+    int matchOfCount = winningLotto.matchWinningLottoNumbers(lotto);
+
+    // then
+    assertThat(matchOfCount).isEqualTo(expected);
+  }
+
+  private static Stream<Arguments> winningLottoNumberAndMatchedCount() {
+    return Stream.of(
+        arguments("1, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 6", 6),
+        arguments("1, 2, 3, 4, 5, 6", "10, 2, 3, 4, 5, 6", 5),
+        arguments("1, 2, 3, 4, 5, 6", "10, 20, 3, 4, 5, 6", 4),
+        arguments("1, 2, 3, 4, 5, 6", "10, 20, 30, 4, 5, 6", 3),
+        arguments("1, 2, 3, 4, 5, 6", "10, 20, 30, 40, 5, 6", 2),
+        arguments("1, 2, 3, 4, 5, 6", "10, 20, 30, 40, 15, 6", 1),
+        arguments("1, 2, 3, 4, 5, 6", "10, 20, 30, 40, 15, 16", 0)
+    );
   }
 }
