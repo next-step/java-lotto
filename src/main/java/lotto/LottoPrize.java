@@ -1,33 +1,48 @@
 package lotto;
 
-import util.OutputView;
+import java.util.Arrays;
 
 public enum LottoPrize {
-  THREE(3, 5000, "3개 일치 (%s원)- %s개"),
-  FOUR(4, 50000, "4개 일치 (%s원)- %s개"),
-  FIVE(5, 1500000, "5개 일치 (%s원)- %s개"),
-  SIX(6, 2000000000, "6개 일치 (%s원)- %s개");
+  NONE(0, 0, false),
+  THREE(3, 5000, false),
+  FOUR(4, 5_0000, false),
+  FIVE(5, 150_0000, false),
+  FIVE_AND_BONUS(5, 3000_0000, true),
+  SIX(6, 20_0000_0000, false);
 
-  private final int matched;
-  private final int revenue;
-  private final String revenueMessageToPrint;
+  private static final String MESSAGE_FOR_PRIZE = "%s개 일치 (%s)";
+  private static final String MESSAGE_FOR_PRIZE_WITH_BONUS = "%s개 일치, 보너스 볼 일치(%s)";
+
+  private final int matchedCount;
+  private final int prize;
+  private final boolean hasBonus;
 
 
-  LottoPrize(int matched, int revenue, String resultMessage) {
-    this.matched = matched;
-    this.revenue = revenue;
-    this.revenueMessageToPrint = resultMessage;
-  }
-
-  public int getMatchedLottoCount(Lotto winningLotto, LottoList lottoList) {
-    return lottoList.getMatchedLottoCount(matched, winningLotto);
+  LottoPrize(int matched, int prize, boolean hasBonus) {
+    this.matchedCount = matched;
+    this.prize = prize;
+    this.hasBonus = hasBonus;
   }
 
   public int getRevenue(int matchedLottoCount) {
-    return matchedLottoCount * revenue;
+    return prize * matchedLottoCount;
   }
 
-  public void printingRevenue(int matchedLottoCount) {
-    OutputView.print(String.format(revenueMessageToPrint, revenue, matchedLottoCount));
+  public String buildPrizeMessage() {
+    if (hasBonus) {
+      return String.format(MESSAGE_FOR_PRIZE_WITH_BONUS, matchedCount, prize);
+    }
+    return String.format(MESSAGE_FOR_PRIZE, matchedCount, prize);
+  }
+
+  private boolean is(int matchedCount, boolean hasBonus) {
+    return this.matchedCount == matchedCount && this.hasBonus == hasBonus;
+  }
+
+  public static LottoPrize valueOf(int matchedCount, boolean hasPrize) {
+    return Arrays.stream(LottoPrize.values())
+        .filter(lottoPrize -> lottoPrize.is(matchedCount, hasPrize))
+        .findFirst()
+        .orElse(LottoPrize.NONE);
   }
 }

@@ -36,17 +36,17 @@ public class LottoTest {
   private static Stream<Arguments> invalidLottoNumberSet() {
     return Stream.of(
         Arguments.of(Set.of(1, 2, 3, 4, 5)),
-        Arguments.of(Set.of("hi, hello")),
+        Arguments.of(Set.of(1, 2, 3, 4, 5, -1)),
         Arguments.of(Set.of())
     );
   }
 
   @ParameterizedTest(name = "{1}과 {0}개 일치함")
   @MethodSource("expectedMatchedCountAndOtherLotto")
-  void matches_true_반환(int expectedMatchedCount, Lotto other) {
+  void getMatchedCount_성공(int expectedMatchedCount, Lotto other) {
     Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
 
-    assertThat(lotto.matches(expectedMatchedCount, other)).isTrue();
+    assertThat(lotto.getMatchedCount(other)).isEqualTo(expectedMatchedCount);
   }
 
   private static Stream<Arguments> expectedMatchedCountAndOtherLotto() {
@@ -61,19 +61,26 @@ public class LottoTest {
   }
 
   @Test
-  void matches_false_반환() {
-    Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
-    Lotto otherLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
-    int expectedMatchedCount = 0;
-
-    assertThat(lotto.matches(expectedMatchedCount, otherLotto)).isFalse();
-  }
-
-  @Test
-  void toString_성공() {
+  void toStringForPrinting_성공() {
     Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
     String expectedLottoString = "[1, 2, 3, 4, 5, 6]";
 
-    assertThat(lotto.toString()).isEqualTo(expectedLottoString);
+    assertThat(lotto.toStringForPrinting()).isEqualTo(expectedLottoString);
+  }
+
+  @Test
+  void hasNumber_성공() {
+    Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+    LottoNumber number = new LottoNumber(6);
+
+    assertThat(lotto.hasNumber(number)).isTrue();
+  }
+
+  @Test
+  void hasNumber_실패() {
+    Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+    LottoNumber number = new LottoNumber(7);
+
+    assertThat(lotto.hasNumber(number)).isFalse();
   }
 }

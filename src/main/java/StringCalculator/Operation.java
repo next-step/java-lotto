@@ -15,10 +15,6 @@ public enum Operation {
   DIVISION("/", Calculation::divide);
 
   private static final String ERROR_MESSAGE_FOR_INVALID_INPUT_OPERATOR = "잘못된 연산자입니다.";
-  private static final Map<String, IntBinaryOperator> operationMap = Arrays.stream(
-          Operation.values())
-      .collect(Collectors.toMap(operation -> operation.operator,
-          operation -> operation.calculation));
 
   private final String operator;
   private final IntBinaryOperator calculation;
@@ -30,15 +26,11 @@ public enum Operation {
   }
 
   public static int calculateBy(String operator, int a, int b) {
-    validate(operator);
-    return operationMap.get(operator).applyAsInt(a, b);
-  }
+    Operation found =  Arrays.stream(values())
+        .filter(operation -> operation.operator.equals(operator))
+        .findFirst()
+        .orElseThrow(() -> new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_INPUT_OPERATOR));
 
-  private static void validate(String operator) {
-    validateArgument(
-        operator,
-        (arg) -> operationMap.containsKey(operator),
-        ERROR_MESSAGE_FOR_INVALID_INPUT_OPERATOR
-    );
+    return found.calculation.applyAsInt(a, b);
   }
 }

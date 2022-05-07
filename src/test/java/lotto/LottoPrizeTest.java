@@ -2,47 +2,29 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import java.util.stream.Stream;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottoPrizeTest {
 
-  private static final int MATCHED_LOTTO_COUNT = 1;
-  private static Lotto winningLotto;
-  private static LottoList lottoList;
-
-  @BeforeAll
-  static void setup() {
-    winningLotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
-    Lotto lottoMatched6 = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
-    Lotto lottoMatched5 = new Lotto(Set.of(1, 2, 3, 4, 5, 16));
-    Lotto lottoMatched4 = new Lotto(Set.of(1, 2, 3, 4, 15, 16));
-    Lotto lottoMatched3 = new Lotto(Set.of(1, 2, 3, 14, 15, 16));
-    Lotto lottoMatched2 = new Lotto(Set.of(1, 2, 13, 14, 15, 16));
-    Lotto lottoMatched1 = new Lotto(Set.of(1, 12, 13, 14, 15, 16));
-
-    lottoList = new LottoList(List.of(
-        lottoMatched1, lottoMatched2, lottoMatched3, lottoMatched4, lottoMatched5, lottoMatched6));
+  @ParameterizedTest(name = "matchedCount:{1}, hasPrize:{2}로 {0}생성")
+  @MethodSource("parametersAndLottoPrize")
+  void valueOf_성공(LottoPrize expected, int matchedCount, boolean hasPrize) {
+    assertThat(LottoPrize.valueOf(matchedCount, hasPrize)).isEqualTo(expected);
   }
 
-  @Test
-  void getMatchedLottoCount_성공() {
-
-    Arrays.stream(LottoPrize.values())
-        .map(lottoPrize -> lottoPrize.getMatchedLottoCount(winningLotto, lottoList))
-        .forEach(matchedLottoCount -> assertThat(matchedLottoCount).isEqualTo(MATCHED_LOTTO_COUNT));
-  }
-
-  @Test
-  void getRevenue_성공() {
-    Arrays.stream(LottoPrize.values())
-        .forEach(lottoPrize -> {
-          int matchedLottoCount = lottoPrize.getMatchedLottoCount(winningLotto, lottoList);
-          int revenue = lottoPrize.getRevenue(matchedLottoCount);
-          assertThat(revenue).isEqualTo(lottoPrize.getRevenue(MATCHED_LOTTO_COUNT));
-        });
+  private static Stream<Arguments> parametersAndLottoPrize() {
+    return Stream.of(
+        Arguments.of(LottoPrize.NONE, 0, false),
+        Arguments.of(LottoPrize.NONE, 1, false),
+        Arguments.of(LottoPrize.NONE, 2, false),
+        Arguments.of(LottoPrize.THREE, 3, false),
+        Arguments.of(LottoPrize.FOUR, 4, false),
+        Arguments.of(LottoPrize.FIVE, 5, false),
+        Arguments.of(LottoPrize.FIVE_AND_BONUS, 5, true),
+        Arguments.of(LottoPrize.SIX, 6, false)
+    );
   }
 }
