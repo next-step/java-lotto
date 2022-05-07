@@ -1,8 +1,6 @@
 package step2.controller;
 
-import step2.domain.LottoWinners;
-import step2.domain.Lottos;
-import step2.domain.RandomPick;
+import step2.domain.*;
 import step2.service.LottoGameService;
 import step2.view.InputView;
 import step2.view.ResultView;
@@ -23,8 +21,13 @@ public class LottoGameControl {
     }
 
     public void start() {
-        int money = inputView.inputMoney();
-        Lottos lottos = new Lottos(money, new RandomPick());
+        PurchaseMount purchaseMount = new PurchaseMount(inputView.inputMoney());
+        int manualCount = inputView.manualCount();
+        int autoCount = purchaseMount.mount() - manualCount;
+        List<String> manualPick = inputView.manualPick(manualCount);
+        inputView.resultPurchase(manualCount, autoCount);
+
+        Lottos lottos = new Lottos(manualPick, autoCount);
         resultView.lottoCount(lottos.size());
         for (int i = 0; i < lottos.size(); i++) {
             resultView.displayLottoNumber(lottos.numbers(i));
@@ -33,7 +36,7 @@ public class LottoGameControl {
         LottoGameService lottoGameService =
                 new LottoGameService(inputView.lottoNumbers(), inputView.bonusBall());
         LottoWinners winners = lottoGameService.match(lottos);
-        double rate = lottoGameService.moneyProfitRate(money, winners);
+        double rate = lottoGameService.moneyProfitRate(purchaseMount.money(), winners);
 
         resultView.display(winners, rate);
     }

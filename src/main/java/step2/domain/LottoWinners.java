@@ -1,18 +1,19 @@
 package step2.domain;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
 public class LottoWinners {
-    Map<Rank, Integer> winner = new HashMap<>();
+    Map<Rank, Integer> winner = new LinkedHashMap<>();
 
     public LottoWinners() {
-        winner.put(Rank.RANK_1, 0);
-        winner.put(Rank.RANK_2, 0);
-        winner.put(Rank.RANK_3, 0);
-        winner.put(Rank.RANK_4, 0);
         winner.put(Rank.RANK_5, 0);
+        winner.put(Rank.RANK_4, 0);
+        winner.put(Rank.RANK_3, 0);
+        winner.put(Rank.RANK_2, 0);
+        winner.put(Rank.RANK_1, 0);
     }
 
     public void addWiners(Rank rank) {

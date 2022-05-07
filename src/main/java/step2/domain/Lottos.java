@@ -1,19 +1,19 @@
 package step2.domain;
 
+import step2.controller.ManualPick;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(int inputMoney, LottoPickStrategy lottoPickStrategy) {
-        if (inputMoney < 1000)
-            throw new IllegalArgumentException("로또 최소가격은 1000원 입니다");
+    public Lottos(List<String> manualPick, int autoCount) {
+        for (String pick : manualPick)
+            lottos.add(new Lotto(new ManualPick(pick)));
 
-        int lottoNum = inputMoney / Lotto.price;
-        for (int i = 0; i < lottoNum; i++) {
-            lottos.add(new Lotto(lottoPickStrategy));
-        }
+        for (int i = 0; i < autoCount; i++)
+            lottos.add(new Lotto(new RandomPick()));
     }
 
     public int size() {
@@ -32,5 +32,9 @@ public class Lottos {
         }
 
         return lottoWinners;
+    }
+
+    public void add(Lotto lotto) {
+        lottos.add(lotto);
     }
 }
