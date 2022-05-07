@@ -64,9 +64,24 @@ class LottosTest {
         void 수익률을_리턴한다() {
             LottoNumbers lottoNumbers = new LottoNumbers("4, 5, 6, 7, 8, 9");
 
-            double actual = lottos.getRevenueRate(lottoNumbers);
+            double actual = lottos.getRevenueRate(lottoNumbers, new LottoNumber(10));
 
             assertThat(actual).isEqualTo(5.00, offset(0.01));
+        }
+    }
+
+    @Nested
+    class getRankCount_메서드는 {
+
+        @Test
+        void rank예_해당하는_개수를_리턴한다() {
+            LottoNumbers lottoNumbers = new LottoNumbers("4, 5, 6, 7, 8, 9");
+            LottoNumber bonusBall = new LottoNumber(10);
+            WinningLotto winningLotto = new WinningLotto(lottoNumbers, bonusBall);
+
+            int rankCount = lottos.getRankCount(winningLotto, Rank.FIFTH);
+
+            assertThat(rankCount).isEqualTo(2);
         }
     }
 }

@@ -46,12 +46,23 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
-    public double getRevenueRate(LottoNumbers lottoNumbers) {
+    public double getRevenueRate(LottoNumbers lottoNumbers, LottoNumber bonusBall) {
         int sum = this.getMatchNumberCounts(lottoNumbers).stream()
-                .map(MatchCount::getWinningAmountWith)
+                .map(it -> Rank.valueOf(it, lottoNumbers.contains(bonusBall)))
+                .map(Rank::getWinningMoney)
                 .reduce(Integer::sum)
                 .orElseThrow(IllegalArgumentException::new);
 
         return sum / this.userAmount;
+    }
+
+    public int getRankCount(WinningLotto winningLotto, Rank rank) {
+        LottoNumbers winningLottoNumbers = winningLotto.getWinningLottoNumbers();
+        LottoNumber bonusBall = winningLotto.getBonusBall();
+
+        return (int) this.lottos.stream()
+                .map(it -> Rank.valueOf(it.getMatchNumberCount(winningLottoNumbers), it.contains(bonusBall)))
+                .filter(it -> it == rank)
+                .count();
     }
 }
