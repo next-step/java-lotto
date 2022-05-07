@@ -1,4 +1,4 @@
-package model;
+package calculator.model;
 
 import java.util.List;
 
@@ -7,7 +7,6 @@ public class Calculator {
     private final List<Number> numbers;
     private final List<Operator> operators;
 
-
     public Calculator(List<Number> numbers, List<Operator> operators) {
         validate(numbers, operators);
         this.numbers = numbers;
@@ -15,15 +14,15 @@ public class Calculator {
     }
 
     public int calculate() {
-        int res = numbers.get(0).getNumber();
+        Number res = numbers.get(0);
         int index = 1;
 
         for(Operator op: operators){
-            res = op.calculate(res, numbers.get(index).getNumber());
+            res = res.calculate(op, numbers.get(index));
             index += 1;
         }
 
-        return res;
+        return res.getNumber();
     }
 
     private void validate(List<Number> numbers, List<Operator> operators){
