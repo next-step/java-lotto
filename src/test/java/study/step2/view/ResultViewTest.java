@@ -13,15 +13,15 @@ public class ResultViewTest {
     @DisplayName("로또구입금액만큼 로또를 발급하는 경우")
     @ParameterizedTest
     @CsvSource(value = {"14000:14", "2000:2", "50000:50"}, delimiter = ':')
-    void 로또구입금액만큼_로또를_발급하는_경우(String input, int expected) {
-        assertThat(ResultView.issueLottos(input)).isEqualTo(expected);
+    void 로또구입금액만큼_로또를_발급하는_경우(int input, int expected) {
+        assertThat(ResultView.printTicketCount(input)).isEqualTo(expected);
     }
 
     @DisplayName("로또구입금액은 천단위의 양의 정수인 경우")
     @ParameterizedTest
-    @ValueSource(strings = {"14001", "2001", "50001"})
-    void 로또구입금액은_천단위의_양의_정수인_경우(String input) {
-        assertThatThrownBy(()->ResultView.issueLottos(input))
+    @ValueSource(ints = {14001, 2001, 50001})
+    void 로또구입금액은_천단위의_양의_정수인_경우(int input) {
+        assertThatThrownBy(()->ResultView.printTicketCount(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
