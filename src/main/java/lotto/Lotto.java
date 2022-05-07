@@ -13,11 +13,9 @@ import java.util.stream.Stream;
 
 public class Lotto {
 
-  private static final String ERROR_MESSAGE_FOR_INVALID_NUMBERS = "로또를 생성할 숫자의 갯수가 적절하지 않습니다.";
-  private static final String LOTTO_BEGIN_STRING = "[";
-  private static final String LOTTO_END_STRING = "]";
-  private static final String LOTTO_NUMBER_DELIMITER = ", ";
-  private static final String NUMBERS_DELIMITER = ", ";
+  private static final String ERROR_MESSAGE_FOR_INVALID_NUMBERS = "로또를 구성하는 숫자가 중복되었거나 %s개가 아닙니다.";
+  private static final String OUTPUT_LOTTO_NUMBER_DELIMITER = ", ";
+  private static final String LOTTO_NUMBER_DELIMITER = ",";
   private static final int LOTTO_NUMBER_BOUND = 46;
   private static final int LOTTO_NUMBER_SIZE = 6;
 
@@ -31,24 +29,9 @@ public class Lotto {
 
   private final Set<LottoNumber> lotto;
 
-  Lotto() {
-    Collections.shuffle(ENTIRE_LOTTO_NUMBERS);
-    lotto = new TreeSet<>(ENTIRE_LOTTO_NUMBERS.subList(0, LOTTO_NUMBER_SIZE)
-        .stream()
-        .collect(Collectors.toUnmodifiableSet()));
-  }
-
-  Lotto(Set<Integer> numbers) {
+  private Lotto(Set<LottoNumber> numbers) {
     validateNumbers(numbers);
-    lotto = new TreeSet<>(numbers.stream()
-        .map(number -> new LottoNumber(number))
-        .collect(Collectors.toUnmodifiableSet()));
-  }
-
-  Lotto(String text) {
-    this(Stream.of(text.split(NUMBERS_DELIMITER))
-        .map(Integer::parseInt)
-        .collect(Collectors.toSet()));
+    lotto = new TreeSet<>(numbers);
   }
 
   public int getMatchedCount(Lotto other) {
@@ -61,23 +44,41 @@ public class Lotto {
     return lotto.contains(number);
   }
 
-  public String toStringForPrinting() {
-    StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append(LOTTO_BEGIN_STRING);
-
-    StringJoiner stringJoiner = new StringJoiner(LOTTO_NUMBER_DELIMITER);
-    lotto.forEach(lottoNumber -> stringJoiner.add(lottoNumber.toString()));
-
-    stringBuilder.append(stringJoiner);
-    stringBuilder.append(LOTTO_END_STRING);
-    return stringBuilder.toString();
+  @Override
+  public String toString() {
+    StringJoiner joiner = new StringJoiner(OUTPUT_LOTTO_NUMBER_DELIMITER);
+    for (LottoNumber number : lotto) {
+      joiner.add(number.toString());
+    }
+    return joiner.toString();
   }
 
-  private void validateNumbers(Set<Integer> numbers) {
+  public static Lotto create() {
+    Collections.shuffle(ENTIRE_LOTTO_NUMBERS);
+    Set<LottoNumber> lotto = ENTIRE_LOTTO_NUMBERS.subList(0, LOTTO_NUMBER_SIZE)
+        .stream()
+        .collect(Collectors.toUnmodifiableSet());
+    return new Lotto(lotto);
+  }
+
+  public static Lotto create(Set<Integer> numberSet) {
+    return new Lotto(numberSet.stream()
+        .map(LottoNumber::new)
+        .collect(Collectors.toUnmodifiableSet()));
+  }
+
+  public static Lotto create(String text) {
+    return create(Stream.of(text.split(LOTTO_NUMBER_DELIMITER))
+        .map(String::strip)
+        .map(Integer::parseInt)
+        .collect(Collectors.toSet()));
+  }
+
+  private void validateNumbers(Set<LottoNumber> numbers) {
     validateArgument(
         numbers,
         (arg) -> numbers.size() == LOTTO_NUMBER_SIZE,
-        ERROR_MESSAGE_FOR_INVALID_NUMBERS
+        String.format(ERROR_MESSAGE_FOR_INVALID_NUMBERS, LOTTO_NUMBER_SIZE)
     );
   }
 }
