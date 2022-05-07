@@ -10,8 +10,6 @@ public enum LottoPrize {
   FIVE_AND_BONUS(5, 3000_0000, true),
   SIX(6, 20_0000_0000, false);
 
-  private static final String MESSAGE_FOR_PRIZE = "%s개 일치 (%s)";
-  private static final String MESSAGE_FOR_PRIZE_WITH_BONUS = "%s개 일치, 보너스 볼 일치(%s)";
 
   private final int matchedCount;
   private final int prize;
@@ -28,11 +26,16 @@ public enum LottoPrize {
     return prize * matchedLottoCount;
   }
 
-  public String buildPrizeMessage() {
-    if (hasBonus) {
-      return String.format(MESSAGE_FOR_PRIZE_WITH_BONUS, matchedCount, prize);
-    }
-    return String.format(MESSAGE_FOR_PRIZE, matchedCount, prize);
+  public boolean hasBonus() {
+    return this.hasBonus;
+  }
+
+  public int getMatchedCount() {
+    return this.matchedCount;
+  }
+
+  public int getPrize() {
+    return this.prize;
   }
 
   private boolean is(int matchedCount, boolean hasBonus) {
