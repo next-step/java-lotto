@@ -42,5 +42,7 @@ public enum Rank {
         return this.countOfMatch;
     }
 
-
+    public boolean isMiss() {
+        return this == MISS;
+    }
 }

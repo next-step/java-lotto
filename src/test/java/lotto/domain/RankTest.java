@@ -87,4 +87,37 @@ class RankTest {
             }
         }
     }
+
+    @Nested
+    class isMiss_메서드는 {
+
+        @Nested
+        class miss_rank가_주어진경우 {
+
+            @Test
+            void true를_리턴한다() {
+                Rank rank = Rank.MISS;
+
+                boolean actual = rank.isMiss();
+
+                assertThat(actual).isTrue();
+            }
+        }
+
+        @Nested
+        class miss가아닌_rank가_주어진경우 {
+
+            @ParameterizedTest
+            @EnumSource(
+                    value = Rank.class,
+                    mode = EnumSource.Mode.EXCLUDE,
+                    names = "MISS"
+            )
+            void false를_리턴한다(Rank rank) {
+                boolean actual = rank.isMiss();
+
+                assertThat(actual).isFalse();
+            }
+        }
+    }
 }

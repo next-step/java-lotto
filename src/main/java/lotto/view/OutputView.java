@@ -25,7 +25,7 @@ public class OutputView {
         System.out.println(SEPARATOR);
 
         Arrays.stream(Rank.values())
-                .filter(rank -> rank != Rank.MISS)
+                .filter(rank -> !rank.isMiss())
                 .sorted(Comparator.comparingInt(Rank::getWinningMoney))
                 .forEach(outputStatistics(lottos, winningLotto));
     }
