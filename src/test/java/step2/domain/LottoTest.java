@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -52,10 +51,9 @@ class LottoTest {
             delimiter = ':'
     )
     void 현재_로또와_지난회차_당첨_번호를_비교하여_맞춘_개수를_반환(String input, int hitCount) {
-        PurchaseStrategy purchaseStrategy = (count) -> new HashSet<>(Arrays.asList("1", "2", "3", "4", "5", "6"));
-        Winner winner = new Winner(input);
+        Winner winner = new Winner(input, "7");
 
-        Lotto lotto = new Lotto(purchaseStrategy);
+        Lotto lotto = new Lotto(DEFAULT_STRATEGY);
 
         assertThat(lotto.calculateHitCount(winner)).isEqualTo(hitCount);
     }

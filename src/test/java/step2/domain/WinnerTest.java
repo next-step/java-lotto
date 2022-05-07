@@ -16,10 +16,10 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 class WinnerTest {
 
     @Test
-    void 문자열을_입력_받아서_컴마로_구분하여_지난_당첨_번호_객체를_생성() {
+    void 문자열과_보너스_번호를_입력_받아서_컴마로_구분하여_지난_당첨_번호_객체를_생성() {
 
-        Winner winner = new Winner("1, 2, 3, 4, 5, 6");
-        Winner winner2 = new Winner("1, 2, 3, 4, 5, 6");
+        Winner winner = new Winner("1, 2, 3, 4, 5, 6", "7");
+        Winner winner2 = new Winner("1, 2, 3, 4, 5, 6", "7");
 
         assertThat(winner).isEqualTo(winner2);
     }
@@ -28,27 +28,42 @@ class WinnerTest {
     @NullAndEmptySource
     void 주어진_문자열이_널이거나_공백으로만_이루어져있으면_예외(String input) {
         assertThatIllegalArgumentException().isThrownBy(
-                () -> new Winner(input)
+                () -> new Winner(input, "7")
         );
     }
 
     @Test
     void 주어진_문자열의_컴마로_구분된_번호_갯수가_각_회차에_할당된_당첨번호_수와_다르면_예외() {
         assertThatIllegalArgumentException().isThrownBy(
-                () -> new Winner("1, 2")
+                () -> new Winner("1, 2", "7")
         );
     }
 
     @Test
     void 주어진_문자열의_컴마로_구분된_번호에_중복이_존재하면_예외() {
         assertThatIllegalArgumentException().isThrownBy(
-                () -> new Winner("1, 1, 2")
+                () -> new Winner("1, 1, 2, 3, 4, 5", "7")
+        );
+    }
+
+    @ParameterizedTest(name = "{displayName} -> [{index}] : {arguments}")
+    @NullAndEmptySource
+    void 주어진_보너스_번호가_널이거나_공백이면_예외(String input) {
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> new Winner("1, 2, 3, 4, 5, 6", input)
+        );
+    }
+
+    @Test
+    void 주어진_보너스_번호가_지난_당첨_번호와_중복되면_예외() {
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> new Winner("1, 2, 3, 4, 5, 6", "6")
         );
     }
 
     @ParameterizedTest(name = "{displayName} -> [{index}] : {arguments}")
     @CsvSource(value = {"1:true", "45:false"}, delimiter = ':')
     void 주어진_로또_번호가_지난_당첨_번호에_포함되는지_반환(String input, boolean result) {
-        assertThat(new Winner("1, 2, 3, 4, 5, 6").isContain(LottoNumber.from(input))).isEqualTo(result);
+        assertThat(new Winner("1, 2, 3, 4, 5, 6", "7").isContain(LottoNumber.from(input))).isEqualTo(result);
     }
 }
