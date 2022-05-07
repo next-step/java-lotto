@@ -1,11 +1,8 @@
-import model.Calculator;
-import model.Extractor;
-import model.Number;
-import model.Operator;
+import calculator.model.Calculator;
+import calculator.model.Number;
+import calculator.model.Operator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.List;
