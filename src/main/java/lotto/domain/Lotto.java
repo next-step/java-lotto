@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -61,7 +62,9 @@ public class Lotto {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append("[");
-        for (int number : numbers) {
+        List<Integer> printNumbers = new ArrayList<>(numbers);
+        Collections.sort(printNumbers);
+        for (int number : printNumbers) {
             stringBuilder.append(number).append(", ");
         }
 
