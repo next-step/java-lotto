@@ -34,7 +34,11 @@ public class OutputView {
         return rank -> {
             int countOfMatchNumber = lottos.getRankCount(winningLotto, rank);
 
-            System.out.printf("%s개 일치 (%s원)- %s개\n", rank.getCountOfMatch(), rank.getWinningMoney(), countOfMatchNumber);
+            System.out.printf("%s개 일치", rank.getCountOfMatch());
+            if (rank.isSecond()) {
+                System.out.print(", 보너스 볼 일치");
+            }
+            System.out.printf("(%s원)- %s개\n", rank.getWinningMoney(), countOfMatchNumber);
         };
     }
 

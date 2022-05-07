@@ -30,6 +30,10 @@ public enum Rank {
                 .orElse(Rank.MISS);
     }
 
+    public boolean isSecond() {
+        return this == SECOND;
+    }
+
     public int getWinningMoney() {
         return this.winningMoney;
     }
@@ -37,4 +41,6 @@ public enum Rank {
     public int getCountOfMatch() {
         return this.countOfMatch;
     }
+
+
 }

@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -50,6 +51,39 @@ class RankTest {
                 final Rank rank = Rank.valueOf(matchOfCount);
 
                 assertThat(rank).isEqualTo(Rank.MISS);
+            }
+        }
+    }
+
+    @Nested
+    class isSecond_메서드는 {
+
+        @Nested
+        class second_rank가_주어진경우 {
+
+            @Test
+            void true를_리턴한다() {
+                Rank rank = Rank.SECOND;
+
+                boolean actual = rank.isSecond();
+
+                assertThat(actual).isTrue();
+            }
+        }
+
+        @Nested
+        class second가아닌_rank가_주어진경우 {
+
+            @ParameterizedTest
+            @EnumSource(
+                    value = Rank.class,
+                    mode = EnumSource.Mode.EXCLUDE,
+                    names = "SECOND"
+            )
+            void false를_리턴한다(Rank rank) {
+                boolean actual = rank.isSecond();
+
+                assertThat(actual).isFalse();
             }
         }
     }
