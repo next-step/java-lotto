@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 import lotto.exception.LottoNumberDuplicateException;
 import lotto.strategy.DuplicateNumberGenerateStrategy;
@@ -20,11 +22,32 @@ public class LottoTest {
   @Test
   @DisplayName("생성된 로또번호들의 갯수는 6개이다")
   void checkNumberOfGeneratedLottoNumbers() {
-    // given
+    // given & when
     Lotto lotto = Lotto.create(new RandomNumberGenerateStrategy());
 
     // then
     assertThat(lotto.getLottoNumbers()).hasSize(6);
+  }
+
+  @Test
+  @DisplayName("문자열로 생성된 로또번호들의 갯수는 6개이다")
+  void checkListNumberOfGeneratedLottoNumbers() {
+    // given & when
+    Lotto lotto = Lotto.create("1, 2, 3, 4, 5, 6");
+
+    // then
+    assertThat(lotto.getLottoNumbers()).hasSize(6);
+  }
+
+  @Test
+  @DisplayName("로또가 NULL이거나 EMPTY인 경우, 예외처리를 한다.")
+  void exceptionNullOrEmptyLotto() {
+    // given
+    List<LottoNumber> lottoNumbers = new ArrayList<>();
+
+    // when & then
+    assertThatThrownBy(() -> new Lotto(lottoNumbers))
+        .isInstanceOf(IllegalArgumentException.class);
   }
 
   @Test
@@ -44,7 +67,7 @@ public class LottoTest {
     WinningLotto winningLotto = WinningLotto.create(winningLottoNumbers);
 
     // when
-    int matchResult = lotto.matchWinningLottoNumbers(winningLotto);
+    int matchResult = lotto.matchWinningLottoNumbers(winningLotto.getWinningLottoNumbers());
 
     // then
     assertThat(matchResult).isEqualTo(matchedCount);
