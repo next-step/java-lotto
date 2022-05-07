@@ -34,8 +34,9 @@ public class Lottos {
   }
 
   private LottoRank matchLottoRank(WinningLotto winningLotto, Lotto lotto) {
-    int matchCountOfLotto = lotto.matchWinningLottoNumbers(winningLotto);
-    return LottoRank.findRank(matchCountOfLotto);
+    int matchCountOfLotto = winningLotto.matchWinningLottoNumbers(lotto);
+    boolean matchBonusLottoNumber = winningLotto.isWinningBonusLottoNumber(lotto);
+    return LottoRank.findRank(matchCountOfLotto, matchBonusLottoNumber);
   }
 
   public double calculateProfitRatio(WinningLotto winningLotto) {
