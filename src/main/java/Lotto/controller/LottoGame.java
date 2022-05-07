@@ -11,7 +11,7 @@ public class LottoGame {
     private Lottos lottos = new Lottos();
 
     private Money money;
-    private WinningLottoNumbers winningNumbers;
+    private Lotto winningNumbers;
 
     public void start() {
         inputBuyMoney();
@@ -38,11 +38,11 @@ public class LottoGame {
     }
 
     private void inputWinningLottoNumbers() {
-        winningNumbers = new WinningLottoNumbers(InputView.inputWinningLottoNumbers());
+        winningNumbers = new Lotto(InputView.inputWinningLottoNumbers());
     }
 
     private void viewResult() {
-        Map<WinningRankInfo, Integer> totalRankInfo = LottoMachine.checkWinningLotto(lottos, winningNumbers);
+        Map<WinningRankInfo, Integer> totalRankInfo = LottoResultMachine.findWinningLotto(lottos, winningNumbers);
 
         ResultView.viewResultBoard(totalRankInfo);
 
@@ -50,8 +50,8 @@ public class LottoGame {
     }
 
     private void viewYield(Map<WinningRankInfo, Integer> totalRankInfo) {
-        int totalWinningMoney = LottoMachine.calcTotalWinningMoney(totalRankInfo);
+        int totalWinningMoney = LottoResultMachine.calcTotalWinningMoney(totalRankInfo);
 
-        ResultView.viewLottoYield(LottoMachine.calculateYield(totalWinningMoney, money.getMoney()));
+        ResultView.viewLottoYield(LottoResultMachine.calculateYield(totalWinningMoney, money.getMoney()));
     }
 }

@@ -1,7 +1,5 @@
-package Lotto;
+package Lotto.domain;
 
-import Lotto.domain.LottoMachine;
-import Lotto.domain.WinningRankInfo;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,7 +12,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-public class LottoMachineTest {
+public class LottoResultMachineTest {
 
     private static Stream<Arguments> lottoWinningMaps() {
         return Stream.of(
@@ -45,7 +43,7 @@ public class LottoMachineTest {
     @MethodSource("lottoWinningMaps")
     @DisplayName("총 당첨금액을 구한다")
     public void winningTotalMoneyTest(Map<WinningRankInfo, Integer> winningRanks, int winningTotalMoney) {
-        Assertions.assertThat(LottoMachine.calcTotalWinningMoney(winningRanks)).isEqualTo(winningTotalMoney);
+        Assertions.assertThat(LottoResultMachine.calcTotalWinningMoney(winningRanks)).isEqualTo(winningTotalMoney);
     }
 
     private static Stream<Arguments> totalWinningMoneyArgs() {
@@ -61,6 +59,6 @@ public class LottoMachineTest {
     @MethodSource("totalWinningMoneyArgs")
     @DisplayName("이익률을 구한다.")
     public void test(int totalMoney, int buyMoney, double yield) {
-        Assertions.assertThat(LottoMachine.calculateYield(totalMoney, buyMoney)).isEqualTo(yield);
+        Assertions.assertThat(LottoResultMachine.calculateYield(totalMoney, buyMoney)).isEqualTo(yield);
     }
 }
