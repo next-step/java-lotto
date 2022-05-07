@@ -23,7 +23,7 @@ public class LottoApplication {
 
         String winnerInput = inputView.askWinnerInput();
         String bonusInput = inputView.askBonusInput();
-        Winner winner = new Winner(winnerInput);
+        Winner winner = new Winner(winnerInput, bonusInput);
         inputView.close();
 
         LottoGame lottoGame = new LottoGame(purchaseList, winner);
