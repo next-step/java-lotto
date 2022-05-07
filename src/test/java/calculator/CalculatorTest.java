@@ -1,3 +1,5 @@
+package calculator;
+
 import calculator.model.Calculator;
 import calculator.model.Number;
 import calculator.model.Operator;

@@ -1,3 +1,5 @@
+package calculator;
+
 import calculator.model.Application;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
