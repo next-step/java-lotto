@@ -1,5 +1,8 @@
 package calculator.domain;
 
+
+import calculator.util.StringNumberUtils;
+
 public class Operand {
     private final int number;
 
@@ -7,12 +10,8 @@ public class Operand {
         this.number = number;
     }
 
-    Operand(String number) {
-        try {
-            this.number = Integer.parseInt(number);
-        } catch (NumberFormatException exception) {
-            throw new NumberFormatException(String.format("%s는 숫자가 아닙니다.", number));
-        }
+    Operand(String stringNumber) {
+        this(StringNumberUtils.parse(stringNumber));
     }
 
     public int getNumber() {

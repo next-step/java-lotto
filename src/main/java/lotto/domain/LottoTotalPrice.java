@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.util.StringNumberUtils;
+
 public class LottoTotalPrice {
     private static final int UNIT_LOTTO_PRICE = 1000;
     private static final int ZERO = 0;
@@ -12,13 +14,7 @@ public class LottoTotalPrice {
     }
 
     public LottoTotalPrice(String stringTotalPrice) {
-        try {
-            int totalPrice = Integer.parseInt(stringTotalPrice);
-            validateTotalPriceRange(totalPrice);
-            this.totalPrice = totalPrice;
-        } catch (NumberFormatException exception) {
-            throw new NumberFormatException(String.format("%s는 숫자가 아닙니다.", stringTotalPrice));
-        }
+        this(StringNumberUtils.parse(stringTotalPrice));
     }
 
     public int getTotalPrice() {
