@@ -6,14 +6,14 @@ import lotto.enums.Grade;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class LotteryResultTest {
+class LotteryResultsTest {
 
   @Test
   @DisplayName("특정 등급의 결과를 테스트합니다.")
   void result() {
-    LotteryResult.increase(Grade.SECOND);
-    LotteryResult.increase(Grade.SECOND);
-    LotteryResult.increase(Grade.FIRST);
-    assertThat(LotteryResult.result()).containsEntry(Grade.SECOND, 2);
+    LotteryResults.increase(Grade.SECOND);
+    LotteryResults.increase(Grade.SECOND);
+    LotteryResults.increase(Grade.FIRST);
+    assertThat(LotteryResults.result()).containsEntry(Grade.SECOND, 2);
   }
 }

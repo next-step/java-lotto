@@ -1,9 +1,9 @@
 package lotto.controller;
 
 import java.util.List;
+import java.util.Map;
+import lotto.enums.Grade;
 import lotto.model.Guest;
-import lotto.model.LotteryResult;
-import lotto.model.LotteryTickets;
 import lotto.model.Lotto;
 import lotto.model.Store;
 import lotto.service.LottoService;
@@ -41,8 +41,8 @@ public class LottoController {
     return lottoService.visit(guest, store);
   }
 
-  public void holdingLotteryTickets(List<Lotto> lottoProducts, Lotto winnerLotto, int bonus) {
-    lottoService.holdingLotteryTickets(lottoProducts, winnerLotto, bonus);
+  public Map<Grade, Integer> holdingLotteryTickets(List<Lotto> lottoProducts, Lotto winnerLotto, int bonus) {
+   return lottoService.holdingLotteryTickets(lottoProducts, winnerLotto, bonus);
   }
 
 
@@ -54,7 +54,7 @@ public class LottoController {
     return lottoService.insertBonusNumber(bonus);
   }
 
-//  public long allAddReward(List<LotteryResult> histories) {
+//  public long allAddReward(List<LotteryResults> histories) {
 //    return lottoService.allAddReward(histories);
 //  }
 

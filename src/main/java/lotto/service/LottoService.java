@@ -1,8 +1,9 @@
 package lotto.service;
 
 import java.util.List;
+import java.util.Map;
+import lotto.enums.Grade;
 import lotto.model.Guest;
-import lotto.model.LotteryResult;
 import lotto.model.LotteryTickets;
 import lotto.model.Lotto;
 import lotto.model.Store;
@@ -18,9 +19,8 @@ public class LottoService {
     return Lotto.from(AwardNumberUtil.getAwardNumberList(winnerNumber));
   }
 
-  public void holdingLotteryTickets(List<Lotto> lottoProducts, Lotto winLotto, int bonus) {
-    new LotteryTickets(lottoProducts).findGrade(winLotto, bonus);
-    System.out.println(LotteryResult.result());
+  public Map<Grade, Integer> holdingLotteryTickets(List<Lotto> lottoProducts, Lotto winLotto, int bonus) {
+    return new LotteryTickets(lottoProducts).findGrade(winLotto, bonus);
   }
 
   public double yieldCalculate(Long money, Long reward) {

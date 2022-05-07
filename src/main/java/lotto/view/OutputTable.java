@@ -2,7 +2,7 @@ package lotto.view;
 
 import java.util.List;
 import lotto.enums.Grade;
-import lotto.model.LotteryResult;
+import lotto.model.LotteryResults;
 import lotto.model.Lotto;
 
 public final class OutputTable {
@@ -46,8 +46,8 @@ public final class OutputTable {
     System.out.println(UNDER_BAR);
   }
 
-  public static void resultStatistics(List<LotteryResult> histories) {
-    for (LotteryResult history : histories) {
+  public static void resultStatistics(List<LotteryResults> histories) {
+    for (LotteryResults history : histories) {
 //      System.out.println(getMessage(history.getGrade(), history.getCount()));
     }
   }
