@@ -56,7 +56,10 @@ public class Lottos {
         return sum / this.userAmount;
     }
 
-    public int getRankCount(LottoNumbers winningLottoNumbers, LottoNumber bonusBall, Rank rank) {
+    public int getRankCount(WinningLotto winningLotto, Rank rank) {
+        LottoNumbers winningLottoNumbers = winningLotto.getWinningLottoNumbers();
+        LottoNumber bonusBall = winningLotto.getBonusBall();
+
         return (int) this.lottos.stream()
                 .map(it -> Rank.valueOf(it.getMatchNumberCount(winningLottoNumbers), it.contains(bonusBall)))
                 .filter(it -> it == rank)

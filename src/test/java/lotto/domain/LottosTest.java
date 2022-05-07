@@ -77,8 +77,9 @@ class LottosTest {
         void rank예_해당하는_개수를_리턴한다() {
             LottoNumbers lottoNumbers = new LottoNumbers("4, 5, 6, 7, 8, 9");
             LottoNumber bonusBall = new LottoNumber(10);
+            WinningLotto winningLotto = new WinningLotto(lottoNumbers, bonusBall);
 
-            int rankCount = lottos.getRankCount(lottoNumbers, bonusBall, Rank.FIFTH);
+            int rankCount = lottos.getRankCount(winningLotto, Rank.FIFTH);
 
             assertThat(rankCount).isEqualTo(2);
         }

@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Lottos;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -18,8 +19,10 @@ public class LottoMachine {
         String bonusBall = InputView.inputBonusBall();
         LottoNumber lottoNumber = new LottoNumber(bonusBall);
 
-        OutputView.outputWinningStatistics(lottos, lottoNumbers, lottoNumber);
-        OutputView.outputRevenueRate(lottos, lottoNumbers, lottoNumber);
+        WinningLotto winningLotto = new WinningLotto(lottoNumbers, lottoNumber);
+
+        OutputView.outputWinningStatistics(lottos, winningLotto);
+        OutputView.outputRevenueRate(lottos, winningLotto);
     }
 }
 
