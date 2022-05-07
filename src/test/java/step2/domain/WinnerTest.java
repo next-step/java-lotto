@@ -62,8 +62,37 @@ class WinnerTest {
     }
 
     @ParameterizedTest(name = "{displayName} -> [{index}] : {arguments}")
-    @CsvSource(value = {"1:true", "45:false"}, delimiter = ':')
-    void 주어진_로또_번호가_지난_당첨_번호에_포함되는지_반환(String input, boolean result) {
-        assertThat(new Winner("1, 2, 3, 4, 5, 6", "7").isContain(LottoNumber.from(input))).isEqualTo(result);
+    @CsvSource(
+            delimiter = ':',
+            value = {
+                    "1:true",
+                    "7:false",
+                    "45:false"
+            }
+    )
+    void 주어진_로또_번호가_지난_당첨_번호에_포함되는지_반환(String input, boolean expect) {
+        Winner winner = new Winner("1, 2, 3, 4, 5, 6", "7");
+        LottoNumber lottoNumber = LottoNumber.from(input);
+
+        boolean result = winner.isContain(lottoNumber);
+
+        assertThat(result).isEqualTo(expect);
+    }
+
+    @ParameterizedTest(name = "{displayName} -> [{index}] : {arguments}")
+    @CsvSource(
+            delimiter = ':',
+            value = {
+                    "7:true",
+                    "45:false"
+            }
+    )
+    void 주어진_로또_번호가_보너스번호인지_반환(String input, boolean expect) {
+        Winner winner = new Winner("1, 2, 3, 4, 5, 6", "7");
+        LottoNumber bonusNumber = LottoNumber.from(input);
+
+        boolean result = winner.isBonusNumber(bonusNumber);
+
+        assertThat(result).isEqualTo(expect);
     }
 }
