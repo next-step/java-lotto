@@ -2,7 +2,7 @@ package step2.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.controller.ManualPick;
+import step2.domain.strategy.ManualPick;
 
 import java.util.Arrays;
 

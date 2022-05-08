@@ -1,10 +1,10 @@
-package step2.domain;
+package step2.domain.strategy;
+
+import step2.domain.LottoNumber;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class RandomPick implements LottoPickStrategy {
     private static final int MIN_NUMBER = 1;

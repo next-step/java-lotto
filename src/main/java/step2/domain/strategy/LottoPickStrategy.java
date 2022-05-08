@@ -1,4 +1,6 @@
-package step2.domain;
+package step2.domain.strategy;
+
+import step2.domain.LottoNumber;
 
 import java.util.List;
 

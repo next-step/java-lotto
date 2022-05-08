@@ -1,7 +1,6 @@
-package step2.controller;
+package step2.domain.strategy;
 
 import step2.domain.LottoNumber;
-import step2.domain.LottoPickStrategy;
 
 import java.util.Arrays;
 import java.util.List;

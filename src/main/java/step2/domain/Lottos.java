@@ -1,6 +1,7 @@
 package step2.domain;
 
-import step2.controller.ManualPick;
+import step2.domain.strategy.ManualPick;
+import step2.domain.strategy.RandomPick;
 
 import java.util.ArrayList;
 import java.util.List;
