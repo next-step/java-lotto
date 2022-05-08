@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.view.InputView;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +25,7 @@ public class Lottos {
     }
 
     private static List<LottoNumbers> toLottoNumbers(String lottoOfUser) {
-        return Arrays.stream(lottoOfUser.split("\n"))
+        return Arrays.stream(lottoOfUser.split(InputView.USER_INPUT_LOTTO_DELIMITER))
                 .map(LottoNumbers::new)
                 .collect(Collectors.toList());
     }

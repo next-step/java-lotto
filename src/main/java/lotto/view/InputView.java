@@ -9,7 +9,7 @@ public class InputView {
     private static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String INPUT_NUMBER_OF_USER_GENERATE_LOTTO_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String INPUT_LOTTOS_OF_USER_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
-    private static final String USER_INPUT_LOTTO_DELIMITER = System.getProperty("line.separator");
+    public static final String USER_INPUT_LOTTO_DELIMITER = System.getProperty("line.separator");
 
     public static int inputUserAmount() {
         System.out.println(INPUT_USER_AMOUNT_MESSAGE);
