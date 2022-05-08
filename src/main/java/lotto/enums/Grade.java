@@ -33,7 +33,7 @@ public enum Grade {
         }
 
         return Arrays.stream(values())
-                .filter(grade -> grade != second)
+                .filter(grade -> !grade.isSecond())
                 .filter(grade -> grade.expectNumber == countOfMatch)
                 .findFirst()
                 .orElse(Grade.NONE);
