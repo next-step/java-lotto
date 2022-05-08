@@ -1,6 +1,7 @@
 package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.List;
@@ -70,4 +71,14 @@ class LottoTicketTest {
         arguments(winLottoTicket, List.of(7, 8, 9, 10, 11, 12), 0)
     );
   }
+
+  @DisplayName("반환한 로또번호를 수정할 경우 예외를 던진다")
+  @Test
+  void unmodifiableException() {
+    LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+    List<Integer> unmodifiedNumbers = lottoTicket.getLottoNumbers();
+    assertThatExceptionOfType(UnsupportedOperationException.class).isThrownBy(
+        () -> unmodifiedNumbers.add(1));
+  }
+
 }

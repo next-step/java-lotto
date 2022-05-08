@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -17,6 +18,10 @@ public class LottoTicket {
     checkDuplicatedNumbers(lottoNumbers);
 
     this.lottoNumbers = lottoNumbers;
+  }
+
+  public List<Integer> getLottoNumbers() {
+    return Collections.unmodifiableList(lottoNumbers);
   }
 
   private void checkLottoNullOrEmpty(List<Integer> lottoNumbers) {
