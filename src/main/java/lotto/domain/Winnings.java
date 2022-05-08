@@ -21,12 +21,12 @@ public class Winnings {
 
     public Winnings(String[] winningNumbers, int bonusNumber) {
         this.winningNumbers = new WinningNumbers(parseWinningNumbers(winningNumbers), bonusNumber);
-        this.recordMatched = new int[7];
+        this.recordMatched = new int[Matched.values().length];
     }
 
     public Winnings(List<Integer> winningNumbers, int bonusNumber) {
         this.winningNumbers = new WinningNumbers(winningNumbers, bonusNumber);
-        this.recordMatched = new int[7];
+        this.recordMatched = new int[Matched.values().length];
     }
 
     public void countMatchedNumbers(List<Integer> numbers) {

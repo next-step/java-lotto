@@ -19,7 +19,7 @@ class WinningsTest {
 
     @BeforeEach
     void setUp() {
-        winnings = new Winnings(Arrays.asList(1, 5, 10, 23, 35, 44));
+        winnings = new Winnings(Arrays.asList(1, 5, 10, 23, 35, 44), 2);
         matchedThree = Arrays.asList(1, 5, 10, 21, 32, 41);
         matchedFour = Arrays.asList(1, 5, 10, 23, 32, 41);
         matchedFive = Arrays.asList(1, 5, 10, 23, 35, 41);

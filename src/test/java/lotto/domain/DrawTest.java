@@ -27,7 +27,7 @@ class DrawTest {
     @Test
     @DisplayName("로또 당첨 확인이 로또 개수만큼 진행되었는 지 확인")
     void checkWinnings() {
-        Winnings winnings = new Winnings(Arrays.asList(3, 5, 10, 23, 34, 45));
+        Winnings winnings = new Winnings(Arrays.asList(3, 5, 10, 23, 34, 45), 2);
         draw.drawLottos();
         draw.checkWinnings(winnings);
 
