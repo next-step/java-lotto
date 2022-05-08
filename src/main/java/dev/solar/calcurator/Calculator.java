@@ -43,12 +43,9 @@ public class Calculator {
         operators.add(Operator.getEnum(str));
     }
 
-    private static boolean isNumber(final String str) {
-        try {
-            Integer.parseInt(str);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-        return true;
+    private static boolean isNumber(final String input) {
+        String regExp = "^[0-9]+$";
+
+        return input.matches(regExp);
     }
 }
