@@ -9,8 +9,10 @@ import lotto.WinningLotto;
 
 public class LottoOutputView {
 
-  private static final String MESSAGE_FOR_PRINTING_PURCHASE_AMOUNT = "%s개를 구매했습니다.";
+  private static final String MESSAGE_FOR_PRINTING_PURCHASE_AMOUNT =
+      "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
   private static final String MESSAGE_FOR_PRINTING_RESULT = "총 수익률은 %s 입니다.";
+  private static final String MESSAGE_FOR_INSERT_MANUAL_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
   private static final String MESSAGE_FOR_RESULT_INFO = "당첨 통계\n--------";
   private static final String MESSAGE_FOR_MATCHED_COUNT = "%s개 일치";
   private static final String MESSAGE_FOR_RESULT_DELIMITER = ", ";
@@ -24,11 +26,8 @@ public class LottoOutputView {
   private LottoOutputView() {
   }
 
-  public static void printPurchaseAmount(LottoList lottoList) {
-    print(buildPurchaseAmountMessage(lottoList.getTotalLottoCount()));
-  }
-
   public static void printResult(LottoList lottoList, WinningLotto winningLotto) {
+    printResultInfo();
     Result result = lottoList.drawing(winningLotto);
     int totalRevenue = 0;
     for (LottoPrize lottoPrize : LottoPrize.values()) {
@@ -43,8 +42,18 @@ public class LottoOutputView {
     printRevenueRate(lottoList.getRevenueRate(totalRevenue));
   }
 
+  public static void printDescriptionForInsertManualLotto() {
+    print(MESSAGE_FOR_INSERT_MANUAL_NUMBERS);
+  }
+
   public static void printRevenueRate(BigDecimal revenueRate) {
     print(String.format(MESSAGE_FOR_PRINTING_RESULT, revenueRate));
+  }
+
+  public static void printManualPurchaseDone(int manualPurchaseAmount, int autoPurchaseAmount) {
+    print(String.format(
+        MESSAGE_FOR_PRINTING_PURCHASE_AMOUNT, manualPurchaseAmount, autoPurchaseAmount)
+    );
   }
 
   public static void print(String text) {
@@ -73,9 +82,5 @@ public class LottoOutputView {
         MESSAGE_FOR_MATCHED_LOTTO_COUNT, result.getMatchedLottoCount(lottoPrize)
     );
     print(message);
-  }
-
-  private static String buildPurchaseAmountMessage(int purchaseAmount) {
-    return String.format(MESSAGE_FOR_PRINTING_PURCHASE_AMOUNT, purchaseAmount);
   }
 }
