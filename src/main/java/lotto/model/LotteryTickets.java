@@ -1,11 +1,9 @@
 package lotto.model;
 
-import lotto.enums.Grade;
 import lotto.exception.LottoSizeException;
 import lotto.util.AwardNumberUtil;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -18,13 +16,12 @@ public final class LotteryTickets {
         this.value = value;
     }
 
-    public Map<Grade, Integer> findGrade(Lotto winLotto, int bonus) {
+    public void findGrade(Lotto winLotto, int bonus) {
         Set<Integer> winningNumbers = winLotto.numbers();
         for (Lotto lotto : value) {
             Set<Integer> selectNumbers = lotto.numbers();
             LotteryResults.increase(AwardNumberUtil.matchCount(selectNumbers, winningNumbers, bonus));
         }
-        return LotteryResults.result();
     }
 
     private void validate(int size) {
