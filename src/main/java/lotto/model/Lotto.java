@@ -1,78 +1,62 @@
 package lotto.model;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import lotto.enums.ChoiceType;
 import lotto.enums.Grade;
 import lotto.exception.LottoLengthException;
 
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public final class Lotto {
 
-  private static final int DEFAULT_LOTTO_SIZE = 6;
-  private final Set<LottoNumber> lottoNumbers;
+    private static final int DEFAULT_LOTTO_SIZE = 6;
 
-  public Lotto(Set<LottoNumber> lottoNumbers) {
-    valid(lottoNumbers);
-    this.lottoNumbers = lottoNumbers;
-  }
+    private final Set<LottoNumber> lottoNumbers;
 
-  public static Lotto from(Set<LottoNumber> winnerNumbers) {
-    return new Lotto(winnerNumbers);
-  }
-
-  private void valid(Set<LottoNumber> lottoNumbers) {
-    if (DEFAULT_LOTTO_SIZE != lottoNumbers.size()) {
-      throw new LottoLengthException();
+    public Lotto(Set<Integer> lottoNumbers) {
+        validate(lottoNumbers);
+        this.lottoNumbers = lottoNumbers
+                .stream().map(LottoNumber::new)
+                .collect(Collectors.toSet());
     }
-  }
 
-  public int coincideLotto(Grade grade, List<Lotto> allLottoList) {
-    int result = 0;
-    for (Lotto lotto : allLottoList) {
-      result += increaseProductNumber(grade.getExpectNumber(), lotto).getIncreaseValue();
+    public static Lotto from(Set<Integer> winnerNumbers) {
+        return new Lotto(winnerNumbers);
     }
-    return result;
-  }
 
-  private ChoiceType increaseProductNumber(int expect, Lotto lotto) {
-    int count = 0;
-    for (LottoNumber winNumber : lotto.lottoNumbers) {
-      count += containsWinnerNumber(
-          Integer.parseInt(winNumber.toString())).getIncreaseValue();
+    private void validate(Set<Integer> lottoNumbers) {
+        if (DEFAULT_LOTTO_SIZE != lottoNumbers.size()) {
+            throw new LottoLengthException();
+        }
     }
-    if (expect == count) {
-      return ChoiceType.GUESSED;
-    }
-    return ChoiceType.WRONG;
-  }
 
-  private ChoiceType containsWinnerNumber(Integer winNumber) {
-    if (this.lottoNumbers.contains(new LottoNumber(winNumber))) {
-      return ChoiceType.GUESSED;
-    }
-    return ChoiceType.WRONG;
-  }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
+    public Set<Integer> numbers() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::currentNumber)
+                .collect(Collectors.toSet());
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
-    Lotto lotto = (Lotto) o;
-    return Objects.equals(lottoNumbers, lotto.lottoNumbers);
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(lottoNumbers);
-  }
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
+    }
 
-  @Override
-  public String toString() {
-    return lottoNumbers.toString();
-  }
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
 }

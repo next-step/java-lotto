@@ -1,23 +1,28 @@
 package lotto.model;
 
-import java.util.Objects;
 import lotto.exception.LottoNumberException;
+
+import java.util.Objects;
 
 public final class LottoNumber {
 
-  private static final int MIN_VALUE = 1;
-  private static final int MAX_VALUE = 45;
+  static final int MIN_VALUE = 1;
+  static final int MAX_VALUE = 45;
   private final int value;
 
   public LottoNumber(int value) {
-    valid(value);
+    validate(value);
     this.value = value;
   }
 
-  private void valid(int value) {
+  private void validate(int value) {
     if (value < MIN_VALUE || MAX_VALUE < value) {
       throw new LottoNumberException(value);
     }
+  }
+
+  public int currentNumber() {
+    return this.value;
   }
 
   @Override
@@ -37,9 +42,4 @@ public final class LottoNumber {
     return Objects.hash(value);
   }
 
-
-  @Override
-  public String toString() {
-    return String.valueOf(value);
-  }
 }

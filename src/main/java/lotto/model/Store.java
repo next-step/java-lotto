@@ -5,35 +5,22 @@ import java.util.List;
 
 public final class Store {
 
-  private static final long PRODUCT_PRICE = 1_000L;
-  private final int productCount;
+    private static final long PRODUCT_PRICE = 1_000L;
 
-  public Store() {
-    this(0);
-  }
-
-  public Store(int productCount) {
-    this.productCount = productCount;
-  }
-
-
-  public List<Lotto> delivery(long money) {
-    long count = money / PRODUCT_PRICE;
-    List<Lotto> lottoList = new ArrayList<>();
-    while (count-- != 0) {
-      lottoList.add(deliverLotto());
+    public Store() {
     }
-    return lottoList;
-  }
 
-  private Lotto deliverLotto() {
-    return LottoFactory.getInstance().apply();
-  }
+    public List<Lotto> delivery(long money) {
+        long count = money / PRODUCT_PRICE;
+        List<Lotto> lotteryTickets = new ArrayList<>();
+        while (count-- != 0) {
+            lotteryTickets.add(deliverLotto());
+        }
+        return lotteryTickets;
+    }
 
-
-  @Override
-  public String toString() {
-    return String.valueOf(productCount);
-  }
+    private Lotto deliverLotto() {
+        return LottoFactory.apply();
+    }
 
 }
