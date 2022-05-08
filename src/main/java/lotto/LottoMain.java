@@ -11,7 +11,10 @@ public class LottoMain {
     public static void main(String[] args) {
         int userAmount = InputView.inputUserAmount();
 
-        Lottos lottos = new Lottos(userAmount);
+        int numberOfUserGenerateLotto = InputView.inputNumberOfUserGenerateLotto();
+        String lottoOfUser = InputView.inputLottoOfUser(numberOfUserGenerateLotto);
+
+        Lottos lottos = new Lottos(userAmount, lottoOfUser);
         OutputView.outputLottoNumbers(lottos);
 
         String previousWeekWinningNumber = InputView.inputPreviousWeekWinningNumber();

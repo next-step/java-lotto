@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -12,20 +14,49 @@ public class Lottos {
     private final List<LottoNumbers> lottos;
 
     public Lottos(int userAmount) {
-        this(userAmount, getRandomLottoNumbers(userAmount));
+        this.userAmount = userAmount;
+        this.lottos = getRandomLottoNumbers();
+    }
+
+    public Lottos(int userAmount, List<LottoNumbers> userInputLottos) {
+        this.userAmount = userAmount;
+        this.lottos = getRandomLottoNumbersWith(userInputLottos);
+    }
+
+    public Lottos(int userAmount, String lottoOfUser) {
+        this.userAmount = userAmount;
+        this.lottos = getRandomLottoNumbersWith(toLottoNumbers(lottoOfUser));
     }
 
     protected Lottos(List<LottoNumbers> lottos) {
-        this(lottos.size() * LOTTO_PRICE, lottos);
-    }
-
-    protected Lottos(int userAmount, List<LottoNumbers> lottos) {
-        this.userAmount = userAmount;
+        this.userAmount = lottos.size() * LOTTO_PRICE;
         this.lottos = lottos;
     }
 
-    private static List<LottoNumbers> getRandomLottoNumbers(int userAmount) {
-        return IntStream.range(START_INCLUSIVE, userAmount / LOTTO_PRICE)
+    protected static List<LottoNumbers> toLottoNumbers(String lottoOfUser) {
+        return Arrays.stream(lottoOfUser.split("\n"))
+                .map(LottoNumbers::new)
+                .collect(Collectors.toList());
+    }
+
+    private List<LottoNumbers> getRandomLottoNumbersWith(List<LottoNumbers> userInputLottos) {
+        List<LottoNumbers> randomLottoNumbers = IntStream.range(START_INCLUSIVE, (this.userAmount / LOTTO_PRICE) - userInputLottos.size())
+                .mapToObj(it -> LottoNumbers.ofRandom())
+                .collect(Collectors.toList());
+
+        return attach(userInputLottos, randomLottoNumbers);
+    }
+
+    private List<LottoNumbers> attach(List<LottoNumbers> userInputLottos, List<LottoNumbers> randomLottoNumbers) {
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        lottoNumbers.addAll(userInputLottos);
+        lottoNumbers.addAll(randomLottoNumbers);
+
+        return lottoNumbers;
+    }
+
+    private List<LottoNumbers> getRandomLottoNumbers() {
+        return IntStream.range(START_INCLUSIVE, this.userAmount / LOTTO_PRICE)
                 .mapToObj(it -> LottoNumbers.ofRandom())
                 .collect(Collectors.toList());
     }

@@ -23,6 +23,10 @@ public class LottoNumbers {
     }
 
     private static List<LottoNumber> toLottoNumbers(String lottoNumbersString) {
+        if (lottoNumbersString == null) {
+            throw new IllegalArgumentException("null은 허용되지 않습니다.");
+        }
+
         return Arrays.stream(lottoNumbersString.split(LOTTO_NUMBERS_STRING_DELIMITER))
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
