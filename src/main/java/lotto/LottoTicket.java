@@ -12,20 +12,30 @@ public class LottoTicket {
   private final List<Integer> lottoNumbers;
 
   public LottoTicket(List<Integer> lottoNumbers) {
+    checkLottoNullOrEmpty(lottoNumbers);
+    checkLottoNumberSize(lottoNumbers);
+    checkDuplicatedNumbers(lottoNumbers);
+
+    this.lottoNumbers = lottoNumbers;
+  }
+
+  private void checkLottoNullOrEmpty(List<Integer> lottoNumbers) {
     if (lottoNumbers == null || lottoNumbers.isEmpty()) {
       throw new IllegalArgumentException(EMPTY_LOTTO_NUMBERS);
     }
+  }
 
+  private void checkLottoNumberSize(List<Integer> lottoNumbers) {
     if (lottoNumbers.size() != 6) {
       throw new IllegalArgumentException(LOTTO_NUMBERS_SIZE);
     }
+  }
 
+  private void checkDuplicatedNumbers(List<Integer> lottoNumbers) {
     HashSet<Integer> hashSet = new HashSet<>(lottoNumbers);
     if (hashSet.size() != lottoNumbers.size()) {
       throw new IllegalArgumentException(DUPLICATED_LOTTO_NUMBERS);
     }
-
-    this.lottoNumbers = lottoNumbers;
   }
 
   public int countMatched(LottoTicket winLotto) {

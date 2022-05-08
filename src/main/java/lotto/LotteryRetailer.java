@@ -11,14 +11,21 @@ public class LotteryRetailer {
   public static final String PRICE_EXCEPTION_MESSAGE = "로또 1장의 가격은 1000원 입니다";
 
   public List<LottoTicket> sell(Integer receivedMoney, LottoNumberGenerator lottoNumberGenerator) {
+    checkGreaterThanMinimumPrice(receivedMoney);
+
+    return IntStream.range(0, getLottoCount(receivedMoney))
+        .mapToObj(i -> createLottoTicket(lottoNumberGenerator))
+        .collect(toList());
+  }
+
+  private int getLottoCount(Integer receivedMoney) {
+    return receivedMoney / PRICE_PER_PLAY_FOR_LOTTO;
+  }
+
+  private void checkGreaterThanMinimumPrice(Integer receivedMoney) {
     if (receivedMoney < PRICE_PER_PLAY_FOR_LOTTO) {
       throw new IllegalArgumentException(PRICE_EXCEPTION_MESSAGE);
     }
-
-    int lottoCount = receivedMoney / PRICE_PER_PLAY_FOR_LOTTO;
-    return IntStream.range(0, lottoCount)
-        .mapToObj(i -> createLottoTicket(lottoNumberGenerator))
-        .collect(toList());
   }
 
   private LottoTicket createLottoTicket(LottoNumberGenerator lottoNumberGenerator) {
