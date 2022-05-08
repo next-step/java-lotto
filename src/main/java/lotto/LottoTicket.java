@@ -27,4 +27,14 @@ public class LottoTicket {
 
     this.lottoNumbers = lottoNumbers;
   }
+
+  public int countMatched(List<Integer> winNumbers) {
+    if (winNumbers == null || winNumbers.isEmpty()) {
+      throw new IllegalArgumentException(EMPTY_LOTTO_NUMBERS);
+    }
+
+    return (int) lottoNumbers.stream()
+        .filter(winNumbers::contains)
+        .count();
+  }
 }
