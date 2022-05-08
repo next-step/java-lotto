@@ -33,6 +33,6 @@
     - [x] 보너스 볼 일치 경우 추가
   - [x] 수익률
 
-- [ ] userAmount 원시타입 포장
-  - [ ] 수익률 계산 메서드 추가
+- [x] userAmount 원시타입 포장
+  - [x] 수익률 계산 메서드 추가
 - [ ] winningAmount#getRank

@@ -10,16 +10,16 @@ public class Lottos {
     private static final int START_INCLUSIVE = 0;
     private static final int LOTTO_PRICE = 1000;
 
-    private final int userAmount;
     private final List<LottoNumbers> lottos;
+    private final UserAmount userAmount;
 
     public Lottos(int userAmount, String lottoOfUser) {
-        this.userAmount = userAmount;
+        this.userAmount = new UserAmount(userAmount);
         this.lottos = getRandomLottoNumbersWith(toLottoNumbers(lottoOfUser));
     }
 
     protected Lottos(List<LottoNumbers> lottos) {
-        this.userAmount = lottos.size() * LOTTO_PRICE;
+        this.userAmount = new UserAmount(lottos.size() * LOTTO_PRICE);
         this.lottos = lottos;
     }
 
@@ -46,7 +46,7 @@ public class Lottos {
                 .reduce(Integer::sum)
                 .orElseThrow(IllegalArgumentException::new);
 
-        return sum / this.userAmount;
+        return this.userAmount.calculateRevenue(sum);
     }
 
     public int getRankCount(WinningLotto winningLotto, Rank rank) {
@@ -60,7 +60,9 @@ public class Lottos {
     }
 
     private List<LottoNumbers> getRandomLottoNumbersWith(List<LottoNumbers> userInputLottos) {
-        List<LottoNumbers> randomLottoNumbers = IntStream.range(START_INCLUSIVE, (this.userAmount / LOTTO_PRICE) - userInputLottos.size())
+        List<LottoNumbers> randomLottoNumbers = IntStream.range(
+                        START_INCLUSIVE, this.userAmount.getRandomLottoSize(LOTTO_PRICE, userInputLottos)
+                )
                 .mapToObj(it -> LottoNumbers.ofRandom())
                 .collect(Collectors.toList());
 
