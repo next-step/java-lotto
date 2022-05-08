@@ -8,7 +8,6 @@ import java.util.stream.IntStream;
 
 public class Lottos {
     private static final int START_INCLUSIVE = 0;
-    private static final int LOTTO_PRICE = 1000;
 
     private final List<LottoNumbers> lottos;
     private final UserAmount userAmount;
@@ -19,7 +18,7 @@ public class Lottos {
     }
 
     protected Lottos(List<LottoNumbers> lottos) {
-        this.userAmount = new UserAmount(lottos.size() * LOTTO_PRICE);
+        this.userAmount = new UserAmount(lottos);
         this.lottos = lottos;
     }
 
@@ -61,7 +60,7 @@ public class Lottos {
 
     private List<LottoNumbers> getRandomLottoNumbersWith(List<LottoNumbers> userInputLottos) {
         List<LottoNumbers> randomLottoNumbers = IntStream.range(
-                        START_INCLUSIVE, this.userAmount.getRandomLottoSize(LOTTO_PRICE, userInputLottos)
+                        START_INCLUSIVE, this.userAmount.getRandomLottoSize(userInputLottos)
                 )
                 .mapToObj(it -> LottoNumbers.ofRandom())
                 .collect(Collectors.toList());

@@ -57,7 +57,7 @@ class UserAmountTest {
         void 리턴한다() {
             UserAmount userAmount = new UserAmount(10000);
 
-            int actual = userAmount.getRandomLottoSize(1000, 3);
+            int actual = userAmount.getRandomLottoSize(3);
 
             assertThat(actual).isEqualTo(7);
         }
