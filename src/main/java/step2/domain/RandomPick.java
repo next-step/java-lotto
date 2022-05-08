@@ -11,16 +11,16 @@ public class RandomPick implements LottoPickStrategy {
     private static final int MAX_NUMBER = 45;
     private static final int START_INDEX = 0;
     private static final int LAST_INDEX = 6;
-    private static final List<Integer> BASE_NUMBERS = new ArrayList<>();
+    private static final List<LottoNumber> BASE_NUMBERS = new ArrayList<>();
 
     static {
         for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-            BASE_NUMBERS.add(i);
+            BASE_NUMBERS.add(new LottoNumber(i));
         }
     }
 
     @Override
-    public List<Integer> numberPick() {
+    public List<LottoNumber> numberPick() {
         Collections.shuffle(BASE_NUMBERS);
         return List.copyOf(BASE_NUMBERS.subList(START_INDEX, LAST_INDEX));
     }

@@ -1,17 +1,21 @@
 package step2.view;
 
+import step2.domain.LottoNumber;
 import step2.domain.LottoWinners;
 import step2.domain.Rank;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
     public void lottoCount(int number) {
         System.out.println(number + "개를 구매했습니다");
     }
 
-    public void displayLottoNumber(List<Integer> numbers) {
-        System.out.println(numbers);
+    public void displayLottoNumber(List<LottoNumber> numbers) {
+        System.out.println(numbers.stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(", ")));
     }
 
     public void display(LottoWinners winners, double rate) {

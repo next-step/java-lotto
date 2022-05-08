@@ -20,7 +20,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public List<Integer> numbers(int index) {
+    public List<LottoNumber> numbers(int index) {
         return lottos.get(index).pick();
     }
 
