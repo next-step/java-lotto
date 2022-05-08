@@ -3,10 +3,7 @@ package lotto.service;
 import java.util.List;
 import java.util.Map;
 import lotto.enums.Grade;
-import lotto.model.Guest;
-import lotto.model.LotteryTickets;
-import lotto.model.Lotto;
-import lotto.model.Store;
+import lotto.model.*;
 import lotto.util.AwardNumberUtil;
 
 public class LottoService {
@@ -19,12 +16,12 @@ public class LottoService {
     return Lotto.from(AwardNumberUtil.getAwardNumberList(winnerNumber));
   }
 
-  public Map<Grade, Integer> holdingLotteryTickets(List<Lotto> lottoProducts, Lotto winLotto, int bonus) {
-    return new LotteryTickets(lottoProducts).findGrade(winLotto, bonus);
+  public void holdingLotteryTickets(List<Lotto> lottoProducts, Lotto winLotto, int bonus) {
+    new LotteryTickets(lottoProducts).findGrade(winLotto, bonus);
   }
 
-  public double yieldCalculate(Long money, Long reward) {
-    return (double) reward / money;
+  public double yieldCalculate(long money) {
+    return LotteryResults.yield(money);
   }
 
   public Integer insertBonusNumber(int bonus) {
