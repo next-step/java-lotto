@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 import lotto.domain.LotteryRetailer;
 import lotto.domain.LottoNumberGenerator;
 import lotto.domain.LottoTicket;
+import lotto.domain.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -27,7 +28,7 @@ class LotteryRetailerTest {
   @ParameterizedTest
   @CsvSource(value = {"1000:1", "1100:1", "2000:2"}, delimiter = ':')
   void payForPlayLotto(Integer moneyWon, Integer lottoCount) {
-    List<LottoTicket> tickets = lotteryRetailer.sell(moneyWon, lottoNumberGenerator);
+    List<LottoTicket> tickets = lotteryRetailer.sell(Money.of(moneyWon), lottoNumberGenerator);
     assertThat(tickets).hasSize(lottoCount);
   }
 
@@ -36,7 +37,7 @@ class LotteryRetailerTest {
   @ValueSource(ints = {999, -1})
   void payThrowsIllegalArgumentException(Integer moneyWon) {
     assertThatIllegalArgumentException().isThrownBy(
-            () -> lotteryRetailer.sell(moneyWon, lottoNumberGenerator))
+            () -> lotteryRetailer.sell(Money.of(moneyWon), lottoNumberGenerator))
         .withMessage("로또 1장의 가격은 1000원 입니다");
   }
 
@@ -45,7 +46,7 @@ class LotteryRetailerTest {
   @NullSource
   void payThrowsNullPointExceptionException(Integer moneyWon) {
     assertThatNullPointerException().isThrownBy(
-        () -> lotteryRetailer.sell(moneyWon, lottoNumberGenerator));
+        () -> lotteryRetailer.sell(Money.of(moneyWon), lottoNumberGenerator));
   }
 
   @DisplayName("당첨금 계산")

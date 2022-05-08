@@ -41,4 +41,12 @@ public class Money {
   public Money multiply(double rate) {
     return new Money((int) (amount * rate));
   }
+
+  public boolean lessThan(int money) {
+    return this.amount < money;
+  }
+
+  public int divide(int pricePerPlayForLotto) {
+    return this.amount / pricePerPlayForLotto;
+  }
 }
