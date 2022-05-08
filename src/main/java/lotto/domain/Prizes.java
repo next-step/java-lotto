@@ -3,24 +3,32 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Prizes {
-  FIRST(6, 2_000_000_000),
-  SECOND(5, 1_500_000),
-  THIRD(4, 50_000),
-  FOURTH(3, 5_000);
+  FIRST(6, Money.of(2_000_000_000)),
+  SECOND(5, Money.of(1_500_000)),
+  THIRD(4, Money.of(50_000)),
+  FOURTH(3, Money.of(5_000));
 
   private final int matchCount;
-  private final long prize;
+  private final Money prize;
 
-  Prizes(int matchCount, long prize) {
+  Prizes(int matchCount, Money prize) {
     this.matchCount = matchCount;
     this.prize = prize;
   }
 
-  public static long of(int count) {
+  public static Money of(int count) {
     return Arrays.stream(values())
         .filter(prizes -> prizes.matchCount == count)
         .findAny()
         .map(prizes -> prizes.prize)
-        .orElse(0L);
+        .orElse(Money.ZERO);
+  }
+
+  public Money getPrize() {
+    return prize;
+  }
+
+  public int getMatchCount() {
+    return matchCount;
   }
 }

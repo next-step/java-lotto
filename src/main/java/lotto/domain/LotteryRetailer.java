@@ -36,7 +36,7 @@ public class LotteryRetailer {
     return lottoNumberGenerator.generate();
   }
 
-  public long exchange(LottoTicket lottoTicket, LottoTicket winLottoTicket) {
+  public Money exchange(LottoTicket lottoTicket, LottoTicket winLottoTicket) {
     if (winLottoTicket == null) {
       throw new IllegalArgumentException("지난 주 당첨 번호를 입력해 주세요.");
     }

@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class Money {
 
+  public static final Money ZERO = Money.of(0);
+
   private static final String WON_FORMAT = "%d원";
 
   private final int amount;

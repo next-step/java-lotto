@@ -48,20 +48,21 @@ class LotteryRetailerTest {
   @DisplayName("당첨금 계산")
   @ParameterizedTest
   @MethodSource("provideForWinPrizes")
-  void winPrizes(LottoTicket winLottoTicket, LottoTicket lottoTicket, long prize) {
+  void winPrizes(LottoTicket winLottoTicket, LottoTicket lottoTicket, Money prize) {
     assertThat(lotteryRetailer.exchange(lottoTicket, winLottoTicket)).isEqualTo(prize);
   }
 
   private static Stream<Arguments> provideForWinPrizes() {
     LottoTicket winLottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
     return Stream.of(
-        arguments(winLottoTicket, new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 2_000_000_000),
-        arguments(winLottoTicket, new LottoTicket(List.of(1, 2, 3, 4, 5, 7)), 1_500_000),
-        arguments(winLottoTicket, new LottoTicket(List.of(1, 2, 3, 4, 7, 8)), 50_000),
-        arguments(winLottoTicket, new LottoTicket(List.of(1, 2, 3, 7, 8, 9)), 5_000),
-        arguments(winLottoTicket, new LottoTicket(List.of(1, 2, 7, 8, 9, 10)), 0),
-        arguments(winLottoTicket, new LottoTicket(List.of(1, 7, 8, 9, 10, 11)), 0),
-        arguments(winLottoTicket, new LottoTicket(List.of(7, 8, 9, 10, 11, 12)), 0)
+        arguments(winLottoTicket, new LottoTicket(List.of(1, 2, 3, 4, 5, 6)),
+            Money.of(2_000_000_000)),
+        arguments(winLottoTicket, new LottoTicket(List.of(1, 2, 3, 4, 5, 7)), Money.of(1_500_000)),
+        arguments(winLottoTicket, new LottoTicket(List.of(1, 2, 3, 4, 7, 8)), Money.of(50_000)),
+        arguments(winLottoTicket, new LottoTicket(List.of(1, 2, 3, 7, 8, 9)), Money.of(5_000)),
+        arguments(winLottoTicket, new LottoTicket(List.of(1, 2, 7, 8, 9, 10)), Money.of(0)),
+        arguments(winLottoTicket, new LottoTicket(List.of(1, 7, 8, 9, 10, 11)), Money.of(0)),
+        arguments(winLottoTicket, new LottoTicket(List.of(7, 8, 9, 10, 11, 12)), Money.of(0))
     );
   }
 }
