@@ -27,10 +27,6 @@ public class Lotto {
         return candidateNumbers;
     }
 
-    public void checkWinnings(Winnings winnings) {
-        winnings.countMatchedNumbers(selectedNumbers);
-    }
-
     public List<Integer> selectedNumbers() {
         return Collections.unmodifiableList(selectedNumbers);
     }

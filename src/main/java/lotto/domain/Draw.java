@@ -11,13 +11,13 @@ public class Draw {
 
     private final int numberOfLotto;
 
-    private final List<Lotto> lottos;
+    private final Lottos lottos;
 
     private Winnings winnings;
 
     public Draw(int totalPrice) {
         this.numberOfLotto = totalPrice / UNIT_PRICE;
-        this.lottos = new ArrayList<>();
+        this.lottos = new Lottos();
         this.winnings = null;
     }
 
@@ -29,13 +29,13 @@ public class Draw {
 
     public void checkWinnings(Winnings winnings) {
         this.winnings = winnings;
-        for (Lotto lotto : this.lottos) {
-            lotto.checkWinnings(winnings);
+        for (Lotto lotto : lottos()) {
+            winnings.countMatchedNumbers(lotto.selectedNumbers());
         }
     }
 
     public List<Lotto> lottos() {
-        return Collections.unmodifiableList(lottos);
+        return this.lottos.lottos();
     }
 
     public Winnings winnings() {
