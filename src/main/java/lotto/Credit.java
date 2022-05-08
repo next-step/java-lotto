@@ -4,7 +4,7 @@ import static util.Validator.validateArgument;
 
 public class Credit {
 
-  private static final String MESSAGE_FOR_INVALID_CREDIT_AMOUNT = "구입 금액은 양수이어야 합니다.";
+  private static final String MESSAGE_FOR_INVALID_CREDIT_AMOUNT = "크레딧은 0 이상 이어야 합니다.";
   private static final String MESSAGE_FOR_INVALID_CREDIT_AMOUNT_WITH_LOTTO_PRICE = "구입 금액은 최소 로또가격(%s) 이상이어야 합니다.";
 
   private int balance;
@@ -14,11 +14,9 @@ public class Credit {
     this.balance = credit;
   }
 
-  public int purchase(int productPrice) {
+  public Credit purchase(int productPrice) {
     validateProductPrice(productPrice);
-    int purchaseAmount = balance / productPrice;
-    balance -= productPrice;
-    return purchaseAmount;
+    return new Credit(balance - productPrice);
   }
 
   public int calculatePurchaseAmount(int productPrice) {
@@ -29,7 +27,7 @@ public class Credit {
   private void validateCredit(int credit) {
     validateArgument(
         credit,
-        (arg) -> credit > 0,
+        (arg) -> credit >= 0,
         MESSAGE_FOR_INVALID_CREDIT_AMOUNT
     );
   }

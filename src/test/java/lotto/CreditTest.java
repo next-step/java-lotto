@@ -24,14 +24,12 @@ class CreditTest {
     assertThrows(IllegalArgumentException.class, () -> new Credit(invalidCredit));
   }
 
-  @ParameterizedTest(name = "상품 가격이 {0}일 때, Credit.purchase() 성공")
+  @ParameterizedTest(name = "상품 가격 및 크레딧이 {0}일 때, Credit.purchase() 성공")
   @ValueSource(ints = {1000, 2000, 10000})
   void purchase_성공(int productPrice) {
     Credit credit = new Credit(productPrice);
 
-    int purchaseAmount = credit.purchase(productPrice);
-
-    assertThat(purchaseAmount).isEqualTo(1);
+    assertDoesNotThrow(() -> credit.purchase(productPrice));
   }
 
   @ParameterizedTest(name = "상품 가격이 {0}일 때, Credit.purchase() 실패")
