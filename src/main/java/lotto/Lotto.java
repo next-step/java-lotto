@@ -13,6 +13,8 @@ import java.util.stream.Stream;
 
 public class Lotto {
 
+  public static final int LOTTO_PRICE = 1000;
+
   private static final String ERROR_MESSAGE_FOR_INVALID_NUMBERS = "로또를 구성하는 숫자가 중복되었거나 %s개가 아닙니다.";
   private static final String OUTPUT_LOTTO_NUMBER_DELIMITER = ", ";
   private static final String LOTTO_NUMBER_DELIMITER = ",";
