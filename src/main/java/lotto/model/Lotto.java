@@ -1,57 +1,56 @@
 package lotto.model;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import lotto.enums.ChoiceType;
+import java.util.stream.Collectors;
 import lotto.enums.Grade;
 import lotto.exception.LottoLengthException;
 
 public final class Lotto {
 
   private static final int DEFAULT_LOTTO_SIZE = 6;
+
+  private final Grade grade;
   private final Set<LottoNumber> lottoNumbers;
 
-  public Lotto(Set<LottoNumber> lottoNumbers) {
-    valid(lottoNumbers);
-    this.lottoNumbers = lottoNumbers;
+
+  public Lotto(Set<Integer> lottoNumbers) {
+    this(lottoNumbers, Grade.NONE);
   }
 
-  public static Lotto from(Set<LottoNumber> winnerNumbers) {
+  public Lotto(Set<Integer> lottoNumbers, Grade grade) {
+    validate(lottoNumbers);
+    this.grade = grade;
+    this.lottoNumbers = lottoNumbers
+        .stream().map(LottoNumber::new)
+        .collect(Collectors.toSet());
+  }
+
+  public static Lotto from(Set<Integer> winnerNumbers) {
     return new Lotto(winnerNumbers);
   }
 
-  private void valid(Set<LottoNumber> lottoNumbers) {
+  private void validate(Set<Integer> lottoNumbers) {
     if (DEFAULT_LOTTO_SIZE != lottoNumbers.size()) {
       throw new LottoLengthException();
     }
   }
 
-  public int coincideLotto(Grade grade, List<Lotto> allLottoList) {
-    int result = 0;
-    for (Lotto lotto : allLottoList) {
-      result += increaseProductNumber(grade.getExpectNumber(), lotto).getIncreaseValue();
-    }
-    return result;
+  public Lotto reflectLottoGrade(Grade grade) {
+    return new Lotto(numbers(), grade);
   }
 
-  private ChoiceType increaseProductNumber(int expect, Lotto lotto) {
-    int count = 0;
-    for (LottoNumber winNumber : lotto.lottoNumbers) {
-      count += containsWinnerNumber(
-          Integer.parseInt(winNumber.toString())).getIncreaseValue();
-    }
-    if (expect == count) {
-      return ChoiceType.GUESSED;
-    }
-    return ChoiceType.WRONG;
+  public Set<Integer> numbers() {
+    return lottoNumbers.stream()
+        .map(LottoNumber::currentNumber)
+        .collect(Collectors.toSet());
   }
 
-  private ChoiceType containsWinnerNumber(Integer winNumber) {
-    if (this.lottoNumbers.contains(new LottoNumber(winNumber))) {
-      return ChoiceType.GUESSED;
-    }
-    return ChoiceType.WRONG;
+  public Grade currentGrade() {
+    return this.grade;
   }
 
   @Override

@@ -3,16 +3,19 @@ package lotto.model;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoNumberTest {
 
-  @Test
+  @ParameterizedTest
   @DisplayName("로또의 범위에 넘어서는 숫자를 입력하실 수 없습니다.")
-  void lottoNotNegativeNumber() {
+  @ValueSource(ints = {0, 46})
+  void lottoNotNegativeNumber(int value) {
     assertThrows(RuntimeException.class, () -> {
-      new LottoNumber(-1);
-      new LottoNumber(46);
+      new LottoNumber(value);
     });
   }
 }
