@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private static final LottoNumberPattern LOTTO_NUMBER_PATTERN = new LottoNumberPattern();
     private static final Map<Integer, LottoNumber> cache = new HashMap<>();
     private static final int LOTTO_START_NUMBER = 1;
     private static final int LOTTO_END_NUMBER = 45;
@@ -25,7 +24,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber of(String number) {
-        if (!LOTTO_NUMBER_PATTERN.match(number)) {
+        if (!LottoNumberPattern.match(number)) {
             throw new LottoException(LottoExceptionCode.INVALID_LOTTO_NUMBER_TYPE, number);
         }
         return cache.get(Integer.parseInt(number));
