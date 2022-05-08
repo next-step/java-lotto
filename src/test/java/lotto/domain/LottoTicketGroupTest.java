@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 class LottoTicketGroupTest {
 
-    @ParameterizedTest()
+    @ParameterizedTest
     @CsvSource(value = {"2100:2", "2000:2"}, delimiter = ':')
     @DisplayName("1000원 단위로 로또를 살 수 있다.")
     void getOneTicket(int money, int ticketCount) {

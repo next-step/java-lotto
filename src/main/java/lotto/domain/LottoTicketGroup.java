@@ -40,4 +40,13 @@ public class LottoTicketGroup {
     public List<LottoTicket> getTickets() {
         return this.lottoTicketGroup;
     }
+
+    public RankGroup getLottoRankings(LottoTicket winningLotto) {
+        List<Rank> myRanks = new ArrayList<>();
+
+        for (LottoTicket lottoTicket: lottoTicketGroup) {
+            myRanks.add(Rank.of(lottoTicket.getMatchResult(winningLotto)));
+        }
+        return new RankGroup(myRanks);
+    }
 }
