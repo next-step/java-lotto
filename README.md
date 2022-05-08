@@ -35,3 +35,4 @@
 
 - [ ] userAmount 원시타입 포장
   - [ ] 수익률 계산 메서드 추가
+- [ ] winningAmount#getRank
