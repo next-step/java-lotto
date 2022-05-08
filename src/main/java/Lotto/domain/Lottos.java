@@ -4,12 +4,10 @@ import java.util.*;
 
 public class Lottos {
 
-    private List<Lotto> list = new ArrayList<>();
+    private final List<Lotto> list = new ArrayList<>();
 
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_NUMBER_SIZE = 6;
-
-    private static final int MAX_RANK_SIZE = 7;
 
     public Lottos(int lottoCount) {
         List<Integer> tmpNumbers = createAllNumbers();
