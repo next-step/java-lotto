@@ -2,12 +2,11 @@ package autolotto.view;
 
 import autolotto.domain.LottoNumber;
 import autolotto.domain.LottoNumberPattern;
+import autolotto.domain.LottoNumbers;
 import autolotto.exception.LottoException;
 import autolotto.exception.LottoExceptionCode;
 
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoInput {
@@ -31,11 +30,35 @@ public class LottoInput {
     public static Set<LottoNumber> askWinningNumber() {
         System.out.println(WINNING_NUMBER_QUESTION);
         String winningNumberInput = scanner.nextLine();
+        return of(winningNumberInput);
+    }
 
-        return Arrays.stream(winningNumberInput.split(DELIMITER))
+    public static List<LottoNumbers> createManualLotto(int manualQuantity) {
+        List<LottoNumbers> lottoNumbers = new ArrayList<>(manualQuantity);
+
+        System.out.println("수동으로 구매할 번호를 입력해주세요.");
+
+        for (int count = 0; count < manualQuantity; count++) {
+            lottoNumbers.add(new LottoNumbers(of(scanner.nextLine())));
+        }
+
+        return lottoNumbers;
+    }
+
+    private static Set<LottoNumber> of(String LottoInput) {
+        return Arrays.stream(LottoInput.split(DELIMITER))
                 .map(String::trim)
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
+    }
+
+    public static int askManualLottoQuantity() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int quantity = Integer.parseInt(scanner.nextLine());
+        if (quantity < 0) {
+            throw new LottoException(LottoExceptionCode.INVALID_QUANTITY_NUMBER_TYPE, String.valueOf(quantity));
+        }
+        return quantity;
     }
 
     public static LottoNumber askBonusBall(Set<LottoNumber> winningNumbers) {
@@ -47,15 +70,6 @@ public class LottoInput {
             throw new LottoException(LottoExceptionCode.DUPLICATED_LOTTO_NUMBER, bonusBallInput);
         }
         return lottoNumber;
-    }
-
-    public static int askManualLottoQuantity() {
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        int quantity = Integer.parseInt(scanner.nextLine());
-        if (quantity < 0) {
-            throw new LottoException(LottoExceptionCode.INVALID_QUANTITY_NUMBER_TYPE, String.valueOf(quantity));
-        }
-        return quantity;
     }
 
     public static void printQuantities(int manualQuantity, int autoQuantity) {
