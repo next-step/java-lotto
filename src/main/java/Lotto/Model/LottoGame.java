@@ -18,29 +18,46 @@ public class LottoGame {
         }
     }
 
+    public LottoGame(int money, List<LottoCard> manualLottoCards) {
+        lottoCardList = new ArrayList<>();
+        validateMoney(money - (manualLottoCards.size() * LOTTO_PRICE_PER));
+
+        int autoLottoCount = (money / LOTTO_PRICE_PER) - manualLottoCards.size();
+
+        lottoCardList.addAll(manualLottoCards);
+
+        for (int i = 0; i < autoLottoCount; i++) {
+            lottoCardList.add(new LottoCard());
+        }
+    }
+
     public LottoGame(List<LottoCard> lottoCards) {
         lottoCardList = lottoCards;
     }
 
-    public List<LottoCard> getLottoList(){
+    public List<LottoCard> getLottoList() {
         return lottoCardList;
     }
 
-    public void calculate(LottoCard winningLotto, int bonus){
-        for (LottoCard lottoCard: lottoCardList) {
+    public void calculate(LottoCard winningLotto, int bonus) {
+        for (LottoCard lottoCard : lottoCardList) {
             lottoCard.matchPrize(winningLotto, bonus);
         }
     }
 
-    private void validateMoney(int money){
-        if((money % LOTTO_PRICE_PER) != 0){
+    private void validateMoney(int money) {
+        if ((money % LOTTO_PRICE_PER) != 0) {
+            throw new InvalidMoneyForLottoException();
+        }
+
+        if (money < 0) {
             throw new InvalidMoneyForLottoException();
         }
     }
 
-    public double getWinningRate(){
+    public double getWinningRate() {
         double money = 0;
-        for (LottoCard lottoCard: lottoCardList) {
+        for (LottoCard lottoCard : lottoCardList) {
             money += lottoCard.getPrize().getWinningMoney();
         }
 
