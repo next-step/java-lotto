@@ -31,6 +31,10 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
+    public int checkWinningNumbers(final Set<LottoNumber> winningNumbers) {
+        return (int) winningNumbers.stream().filter(lottoNumbers::contains).count();
+    }
+
     @Override
     public String toString() {
         return "LottoTicket{" +
