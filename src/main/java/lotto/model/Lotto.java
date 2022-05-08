@@ -27,7 +27,7 @@ public class Lotto {
 
         List<Number> numbers = shuffleResult
                 .stream()
-                .map(Number::new)
+                .map(Number::of)
                 .collect(Collectors.toList());
 
         return new Lotto(numbers);
@@ -43,7 +43,7 @@ public class Lotto {
                 .filter(this::contains)
                 .count();
 
-        return new Number(count);
+        return Number.of(count);
     }
 
     public Number contains(Lotto lotto) {

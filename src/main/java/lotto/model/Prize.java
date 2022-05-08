@@ -1,12 +1,13 @@
 package lotto.model;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static lotto.model.Rank.NOT_WON;
 
 public class Prize {
 
@@ -16,7 +17,7 @@ public class Prize {
         this.countByRank = IntStream
                 .range(0, 7)
                 .boxed()
-                .collect(Collectors.toMap(Number::new, i -> new Number(), (b, n) -> b, LinkedHashMap::new));
+                .collect(Collectors.toMap(Number::of, i -> Number.of(), (b, n) -> b, LinkedHashMap::new));
     }
 
     public static Prize counting(Lotto beforeLotto, List<Lotto> lottoList) {
@@ -29,42 +30,34 @@ public class Prize {
         return prize;
     }
 
-    public static Number prizeByRank(Number rank) {
-        if (rank.equals(new Number(4))) {
-            return new Number(50000);
-        }
+    public static Rank prizeByRank(Number thisRank) {
 
-        if (rank.equals(new Number(5))) {
-            return new Number(1500000);
-        }
-
-        if (rank.equals(new Number(6))) {
-            return new Number(2000000000);
-        }
-
-        return new Number(5000);
+        return Arrays
+                .stream(Rank.values())
+                .filter(rank -> thisRank.equals(rank.getCorrectCount()))
+                .findFirst()
+                .orElse(NOT_WON);
     }
 
-    public double getWinningRate() {
-        long price = this.countByRank
+    public Number getWinningRate() {
+        Number price = this.countByRank
                 .values()
                 .stream()
                 .reduce(Number::add)
-                .orElse(new Number())
-                .getValue() * 1000;
+                .orElse(Number.of())
+                .multiple(Number.of(1000));
 
-        long prize = this.countByRank
+        Number prize = this.countByRank
                 .entrySet()
                 .stream()
-                .filter(result -> result.getKey().getValue() > 2)
-                .mapToLong(countByRank -> prizeByRank(countByRank.getKey())
-                        .multiple(countByRank.getValue())
-                        .getValue())
-                .sum();
+                .filter(result -> result.getKey().getLongValue() > 2)
+                .map(countByRank -> prizeByRank(countByRank.getKey())
+                        .getPrize()
+                        .multiple(countByRank.getValue()))
+                .reduce(Number::add)
+                .orElse(Number.of());
 
-        return new BigDecimal(prize)
-                .divide(new BigDecimal(price), 2, RoundingMode.HALF_EVEN)
-                .doubleValue();
+        return prize.divide(price);
     }
 
     public Map<Number, Number> getCountByRank() {

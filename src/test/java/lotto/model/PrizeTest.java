@@ -25,7 +25,7 @@ class PrizeTest {
     void beforeEach() {
         this.numberMap = IntStream.range(0, 7)
                 .boxed()
-                .collect(Collectors.toMap(Function.identity(), Number::new));
+                .collect(Collectors.toMap(Function.identity(), Number::of));
     }
 
     @Test

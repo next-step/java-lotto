@@ -10,7 +10,7 @@ public class ResultView {
 
     private static final String RESULT_MESSAGE = String.format("%s당첨 통계%s---------", System.lineSeparator(), System.lineSeparator());
     private static final String LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
-    private static final Function<Double, String> WINNING_RATE_MESSAGE = winningRate -> String.format("총 수익률은 %s입니다.", winningRate);
+    private static final Function<Number, String> WINNING_RATE_MESSAGE = winningRate -> String.format("총 수익률은 %s입니다.", winningRate.getDoubleValue());
 
     private ResultView() {
     }
@@ -28,13 +28,13 @@ public class ResultView {
         prize.getCountByRank()
                 .entrySet()
                 .stream()
-                .filter(result -> result.getKey().getValue() > 2)
-                .forEach(result -> printResult(result.getKey(), Prize.prizeByRank(result.getKey()), result.getValue()));
+                .filter(result -> result.getKey().getLongValue() > 2)
+                .forEach(result -> printResult(result.getKey(), Prize.prizeByRank(result.getKey()).getPrize(), result.getValue()));
 
-        double winningRate = prize.getWinningRate();
+        Number winningRate = prize.getWinningRate();
         String winningRateMessage = WINNING_RATE_MESSAGE.apply(winningRate);
 
-        if (winningRate < 1) {
+        if (winningRate.getLongValue() < 1) {
             winningRateMessage += LOSS_MESSAGE;
         }
 

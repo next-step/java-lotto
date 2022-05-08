@@ -18,7 +18,7 @@ public class LottoTest {
     @BeforeEach
     void beforeEach() {
         this.numbers = IntStream.range(1, 46)
-                .mapToObj(Number::new)
+                .mapToObj(Number::of)
                 .collect(Collectors.toList());
     }
 
@@ -39,8 +39,8 @@ public class LottoTest {
     void contains() {
         List<Number> numbers = this.numbers.subList(0, 6);
 
-        assertAll(() -> assertThat(Lotto.draw(numbers).contains(new Number(6))).isTrue(),
-                () -> assertThat(Lotto.draw(numbers).contains(new Number(7))).isFalse());
+        assertAll(() -> assertThat(Lotto.draw(numbers).contains(Number.of(6))).isTrue(),
+                () -> assertThat(Lotto.draw(numbers).contains(Number.of(7))).isFalse());
     }
 
     @Test
@@ -48,6 +48,6 @@ public class LottoTest {
     void isWin() {
         List<Number> numbers = this.numbers.subList(0, 6);
 
-        assertThat(Lotto.draw(numbers).contains(numbers)).isEqualTo(new Number(6));
+        assertThat(Lotto.draw(numbers).contains(numbers)).isEqualTo(Number.of(6));
     }
 }

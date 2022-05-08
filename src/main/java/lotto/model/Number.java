@@ -1,35 +1,59 @@
 package lotto.model;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Number {
 
-    private long value;
+    private BigDecimal value;
 
-    public Number() {
+    private Number() {
+        this.value = BigDecimal.ZERO;
     }
 
-    public Number(long value) {
+    private Number(long value) {
+        this.value = new BigDecimal(value);
+    }
+
+    private Number(BigDecimal value) {
         this.value = value;
     }
 
+    public static Number of() {
+        return new Number();
+    }
+
+    public static Number of(long value) {
+        return new Number(value);
+    }
+
     public Number incrementAndGet() {
-        this.value++;
+        this.value = this.value.add(BigDecimal.ONE);
         return this;
     }
 
     public Number add(Number number) {
-        long value = this.value + number.value;
-        return new Number(value);
+        return new Number(this.value.add(number.value));
     }
 
     public Number multiple(Number number) {
-        long value = this.value * number.value;
-        return new Number(value);
+        return new Number(this.value.multiply(number.value));
     }
 
-    public long getValue() {
-        return this.value;
+    public Number divide(Number number) {
+        if (this.value.equals(BigDecimal.ZERO) || number.value.equals(BigDecimal.ZERO)) {
+            return new Number();
+        }
+        return new Number(this.value.divide(number.value, 2, RoundingMode.HALF_EVEN));
+    }
+
+    public long getLongValue() {
+        return this.value.longValue();
+    }
+
+    public double getDoubleValue() {
+        return this.value.doubleValue();
     }
 
     @Override
@@ -37,7 +61,7 @@ public class Number {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Number number = (Number) o;
-        return value == number.value;
+        return this.value.equals(number.value);
     }
 
     @Override

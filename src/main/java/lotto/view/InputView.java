@@ -45,7 +45,7 @@ public class InputView {
         List<Number> beforeLotto = Arrays
                 .stream(input.split(COMMA))
                 .sorted()
-                .map(number -> new Number(Integer.parseInt(number)))
+                .map(number -> Number.of(Integer.parseInt(number)))
                 .collect(Collectors.toList());
 
         return Lotto.draw(beforeLotto);

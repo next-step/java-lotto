@@ -13,25 +13,25 @@ class NumberTest {
     @Test
     @DisplayName("Number 객체 생성")
     void createDefaultNumber() {
-        Number number = new Number();
-        assertAll(() -> assertThat(number).isEqualTo(new Number()),
-                () -> assertThat(number.getValue()).isEqualTo(0));
+        Number number = Number.of();
+        assertAll(() -> assertThat(number).isEqualTo(Number.of()),
+                () -> assertThat(number.getLongValue()).isEqualTo(0));
     }
 
     @ParameterizedTest(name = "Number 객체 생성 - {0}")
     @ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
     void createInitNumber(int value) {
-        Number number = new Number(value);
-        assertAll(() -> assertThat(number).isEqualTo(new Number(value)),
-                () -> assertThat(number.getValue()).isEqualTo(value));
+        Number number = Number.of(value);
+        assertAll(() -> assertThat(number).isEqualTo(Number.of(value)),
+                () -> assertThat(number.getLongValue()).isEqualTo(value));
     }
 
     @Test
     @DisplayName("Number 더하기")
     void add() {
-        Number left = new Number(1);
-        Number right = new Number(2);
+        Number left = Number.of(1);
+        Number right = Number.of(2);
 
-        assertThat(left.add(right)).isEqualTo(new Number(3));
+        assertThat(left.add(right)).isEqualTo(Number.of(3));
     }
 }
