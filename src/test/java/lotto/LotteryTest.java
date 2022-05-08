@@ -42,4 +42,12 @@ public class LotteryTest {
     void shouldSortAscend() {
         assertThat(lottery.sort(Arrays.asList(2,3,1))).isEqualTo(Arrays.asList(1,2,3));
     }
+
+
+    @Test
+    void findWin() {
+        Lottery lottery = new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lottery answer = new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lottery.findWin(answer)).isEqualTo(6);
+    }
 }

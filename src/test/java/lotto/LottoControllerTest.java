@@ -41,12 +41,6 @@ public class LottoControllerTest {
         assertThat(lotteryController.parseAnswerNumbers("6, 11, 18, 22, 24, 38")).isEqualTo(Arrays.asList(6, 11, 18, 22, 24, 38));
     }
 
-    @Test
-    void findWin() {
-        List<Integer> lottery = Arrays.asList(1, 2, 3, 4, 5, 6);
-        List<Integer> answerNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-        assertThat(lotteryController.findWin(lottery, answerNumber)).isEqualTo(6);
-    }
 
     @Test
     void moreThan3WinShouldBeSaved() {

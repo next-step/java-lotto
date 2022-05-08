@@ -54,24 +54,9 @@ public class LotteryController {
 
     public void findWins(Lottery answer) {
         for (Lottery lottery : this.wallet.lotteries) {
-            int win = findWin(lottery.numbers, answer.numbers);
+            int win = lottery.findWin(answer);
             saveWin(win);
         }
-    }
-
-    public int findWin(List<Integer> numbers, List<Integer> answerNumbers) {
-        int win = 0;
-        for (int number : numbers) {
-            win += matchNumber(answerNumbers, number);
-        }
-        return win;
-    }
-
-    private int matchNumber(List<Integer> answerNumbers, int number) {
-        if (answerNumbers.contains(number)) {
-            return 1;
-        }
-        return 0;
     }
 
     public void saveWin(int win) {
