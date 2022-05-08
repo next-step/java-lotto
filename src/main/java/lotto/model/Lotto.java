@@ -11,17 +11,10 @@ public final class Lotto {
 
     private static final int DEFAULT_LOTTO_SIZE = 6;
 
-    private final Grade grade;
     private final Set<LottoNumber> lottoNumbers;
 
-
     public Lotto(Set<Integer> lottoNumbers) {
-        this(lottoNumbers, Grade.NONE);
-    }
-
-    public Lotto(Set<Integer> lottoNumbers, Grade grade) {
         validate(lottoNumbers);
-        this.grade = grade;
         this.lottoNumbers = lottoNumbers
                 .stream().map(LottoNumber::new)
                 .collect(Collectors.toSet());
