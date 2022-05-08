@@ -2,23 +2,20 @@ package lotto.domain;
 
 import lotto.exception.InvalidBoundLottoNumber;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
-    private final int lottoNumber;
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
 
-    @Deprecated
-    private LottoNumber(int lottoNumber) {
-        if (isInValidBound(lottoNumber)) {
+    private final int value;
+
+    private LottoNumber(int number) {
+        if (isInValidBound(number)) {
             throw new InvalidBoundLottoNumber();
         }
-        this.lottoNumber = lottoNumber;
+        this.value = number;
     }
 
     public static LottoNumber valueOf(String value) {
@@ -26,15 +23,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber valueOf(int number) {
-        return LottoNumberCache.lottoNumbersCache
-                .stream()
-                .filter(n -> n.lottoNumber == number)
-                .findAny()
-                .orElseThrow(InvalidBoundLottoNumber::new);
-    }
+        LottoNumber cacheNumber = LottoNumberCache.findByNumber(number);
+        if (cacheNumber != null) {
+            return cacheNumber;
+        }
 
-    public static List<LottoNumber> cacheValues() {
-        return Collections.unmodifiableList(LottoNumberCache.lottoNumbersCache);
+        return LottoNumberCache.cacheLottoNumber(new LottoNumber(number));
     }
 
     private boolean isInValidBound(int lottoNumber) {
@@ -42,7 +36,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public int toInt() {
-        return lottoNumber;
+        return value;
     }
 
     @Override
@@ -50,32 +44,34 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return lottoNumber == that.lottoNumber;
+        return value == that.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumber);
+        return Objects.hash(value);
     }
 
     @Override
     public String toString() {
-        return String.valueOf(lottoNumber);
+        return String.valueOf(value);
     }
 
     @Override
     public int compareTo(LottoNumber o) {
-        return Integer.compare(this.lottoNumber, o.lottoNumber);
+        return Integer.compare(this.value, o.value);
     }
 
     private static class LottoNumberCache {
-        private static final List<LottoNumber> lottoNumbersCache;
+        private static final Map<Integer, LottoNumber> lottoNumbersCache = new HashMap<>();
 
-        static {
-            lottoNumbersCache = new ArrayList<>();
-            for (int i = LottoNumber.MIN_NUMBER; i <= LottoNumber.MAX_NUMBER; i++) {
-                lottoNumbersCache.add(new LottoNumber(i));
-            }
+        private static LottoNumber cacheLottoNumber(LottoNumber lottoNumber) {
+            lottoNumbersCache.put(lottoNumber.toInt(), lottoNumber);
+            return lottoNumber;
+        }
+
+        private static LottoNumber findByNumber(int number) {
+            return lottoNumbersCache.get(number);
         }
     }
 }
