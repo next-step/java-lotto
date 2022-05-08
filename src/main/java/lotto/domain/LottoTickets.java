@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
@@ -32,6 +33,14 @@ public class LottoTickets {
 
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
+    }
+
+    public LottoTickets add(LottoTickets lottoTickets) {
+        return new LottoTickets(
+                Stream.concat(
+                        this.lottoTickets.stream(),
+                        lottoTickets.lottoTickets.stream()
+                ).collect(Collectors.toList()));
     }
 
     public long size(LottoTicketType lottoTicketType) {

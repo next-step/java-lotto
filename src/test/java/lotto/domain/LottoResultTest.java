@@ -44,12 +44,12 @@ class LottoResultTest {
     void check는_당첨_정보_목록를_반환한다() {
         LottoResult lottoResult = new LottoResult(generateLottoNumbers(2, 7), new LottoNumber(1));
         LottoTickets lottoTickets = new LottoTickets(List.of(
-                new LottoTicket(generateLottoNumbers(2, 7)),
-                new LottoTicket(generateLottoNumbers(1, 6)),
-                new LottoTicket(generateLottoNumbers(3, 8)),
-                new LottoTicket(generateLottoNumbers(4, 9)),
-                new LottoTicket(generateLottoNumbers(5, 10)),
-                new LottoTicket(generateLottoNumbers(6, 11)))
+                new LottoTicket(generateLottoNumbers(2, 7), LottoTicketType.AUTO),
+                new LottoTicket(generateLottoNumbers(1, 6), LottoTicketType.AUTO),
+                new LottoTicket(generateLottoNumbers(3, 8), LottoTicketType.AUTO),
+                new LottoTicket(generateLottoNumbers(4, 9), LottoTicketType.AUTO),
+                new LottoTicket(generateLottoNumbers(5, 10), LottoTicketType.AUTO),
+                new LottoTicket(generateLottoNumbers(6, 11), LottoTicketType.AUTO))
         );
 
         LottoPrizes lottoPrizes = new LottoPrizes(List.of(

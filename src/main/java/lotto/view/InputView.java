@@ -9,10 +9,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String DELIMITER = ",";
+    private static final int START_OF_RANGE = 0;
 
     private InputView() {
     }
@@ -22,15 +24,28 @@ public class InputView {
         return new Amount(SCANNER.nextLine());
     }
 
+    public static int inputManualTicketsCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return Integer.parseInt(SCANNER.nextLine().trim());
+    }
+
     public static LottoResult inputLottoResult() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return new LottoResult(
                 inputLottoNumbers(),
                 inputBonusNumber()
         );
     }
 
+    public static List<LottoNumbers> inputLottoNumbers(int manualTicketsCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        return IntStream.range(START_OF_RANGE, manualTicketsCount)
+                .mapToObj(index -> inputLottoNumbers())
+                .collect(Collectors.toList());
+    }
+
+
     private static LottoNumbers inputLottoNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return new LottoNumbers(
                 split(SCANNER.nextLine(), DELIMITER)
                         .stream()
