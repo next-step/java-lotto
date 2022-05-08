@@ -9,10 +9,10 @@ class AwardNumberUtilTest {
 
   @Test
   void getAwadNumberList() {
-    assertThat(AwardNumberUtil.getAwadNumberList("1, 2, 4, 5")).contains(
+    assertThat(AwardNumberUtil.getAwadNumberList("1, 2, 4, 6")).contains(
         new LottoNumber(1),
         new LottoNumber(2),
         new LottoNumber(4),
-        new LottoNumber(5));
+        new LottoNumber(6));
   }
 }
