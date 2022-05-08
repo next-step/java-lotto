@@ -1,10 +1,10 @@
 package lotto.model;
 
+import lotto.enums.Grade;
+
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
-
-import lotto.enums.Grade;
 
 public final class LotteryResults {
 

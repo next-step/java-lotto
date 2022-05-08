@@ -1,7 +1,8 @@
 package lotto.model;
 
-import java.util.Objects;
 import lotto.exception.LottoNumberException;
+
+import java.util.Objects;
 
 public final class LottoNumber {
 

@@ -5,8 +5,8 @@ import lotto.service.LottoService;
 
 public class LottoApplication {
 
-  public static void main(String[] args) {
-    LottoController controller = new LottoController(new LottoService());
-    controller.run();
-  }
+    public static void main(String[] args) {
+        LottoController controller = new LottoController(new LottoService());
+        controller.run();
+    }
 }

@@ -1,9 +1,5 @@
 package lotto.controller;
 
-import java.util.List;
-import java.util.Map;
-
-import lotto.enums.Grade;
 import lotto.model.Guest;
 import lotto.model.LotteryResults;
 import lotto.model.Lotto;
@@ -11,6 +7,8 @@ import lotto.model.Store;
 import lotto.service.LottoService;
 import lotto.view.InputTable;
 import lotto.view.OutputTable;
+
+import java.util.List;
 
 public class LottoController {
 
