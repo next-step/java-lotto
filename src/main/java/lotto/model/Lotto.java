@@ -37,9 +37,6 @@ public final class Lotto {
         }
     }
 
-    public Lotto reflectLottoGrade(Grade grade) {
-        return new Lotto(numbers(), grade);
-    }
 
     public Set<Integer> numbers() {
         return lottoNumbers.stream()
@@ -47,9 +44,6 @@ public final class Lotto {
                 .collect(Collectors.toSet());
     }
 
-    public Grade currentGrade() {
-        return this.grade;
-    }
 
     @Override
     public boolean equals(Object o) {
