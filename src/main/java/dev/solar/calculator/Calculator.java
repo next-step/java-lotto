@@ -1,4 +1,4 @@
-package dev.solar.calcurator;
+package dev.solar.calculator;
 
 import java.util.LinkedList;
 import java.util.Objects;

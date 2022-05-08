@@ -9,12 +9,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-import dev.solar.calcurator.Calculator;
-
-public class InputTest {
+public class CalculatorTest {
 
     @DisplayName("입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException 예외를 던진다.")
     @NullAndEmptySource
@@ -30,7 +28,8 @@ public class InputTest {
     }
 
     @DisplayName("연산 결과를 반환한다.")
-    @MethodSource("calculateData")
+//    @MethodSource("calculateData")
+    @CsvSource(value = {"1 + 2:3", "1 - 2:-1", "2 * 3:6", "4 / 2:2", "3 / 2:1", "2 + 3 * 4 / 2:10"}, delimiter = ':')
     @ParameterizedTest
     void plus_success(String calculationFormula, Integer result) {
         assertThat(Calculator.calculate(calculationFormula)).isEqualTo(result);
