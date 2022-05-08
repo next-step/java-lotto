@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.enums.Grade;
+import lotto.exception.BonusContainWinningResultException;
 
 public final class AwardNumberUtil {
 
@@ -25,11 +26,18 @@ public final class AwardNumberUtil {
     for (int lottoNumber : lotteryTicket) {
       count = lottoMatchCount(winningLotto, count, lottoNumber);
     }
-    return Grade.valueOf(count, getBonusCheck(lotteryTicket, bonusNumber));
+    return Grade.valueOf(count, getBonusCheck(lotteryTicket, winningLotto, bonusNumber));
   }
 
-  private static boolean getBonusCheck(Set<Integer> winningLotto, int lottoNumber) {
-    return winningLotto.contains(lottoNumber);
+  private static boolean getBonusCheck(Set<Integer> lotteryTicket, Set<Integer> winningLotto, int bonusNumber) {
+    bonusContainValidate(winningLotto,bonusNumber);
+    return lotteryTicket.contains(bonusNumber);
+  }
+
+  private static void bonusContainValidate(Set<Integer> winningLotto, int bonusNumber) {
+    if(winningLotto.contains(bonusNumber)) {
+      throw new BonusContainWinningResultException();
+    }
   }
 
   private static int lottoMatchCount(Set<Integer> winningLotto, int count, int lottoNumber) {
