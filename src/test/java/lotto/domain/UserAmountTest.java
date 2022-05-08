@@ -23,11 +23,21 @@ class UserAmountTest {
         }
 
         @Nested
-        class 양수값이_주어지면 {
+        class 로또가격보다_작은값이_주어지면 {
+
+            @Test
+            void IllegalArgumentException을_던진다() {
+                assertThatIllegalArgumentException()
+                        .isThrownBy(() -> new UserAmount(999));
+            }
+        }
+
+        @Nested
+        class 로또가격보다_같거나_큰값이_주어지면 {
 
             @Test
             void 에러가_발생하지_않는다() {
-                assertThatCode(() -> new UserAmount(0))
+                assertThatCode(() -> new UserAmount(1000))
                         .doesNotThrowAnyException();
             }
         }
