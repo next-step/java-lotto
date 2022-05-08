@@ -2,10 +2,7 @@ package lotto;
 
 import lotto.contoller.InputView;
 import lotto.contoller.ResultView;
-import lotto.domain.Customer;
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Revenue;
+import lotto.domain.*;
 
 import java.util.List;
 
@@ -19,12 +16,10 @@ public class Main {
         customer.buy(1000);
 
         resultView.printLottos(customer);
-
         List<Integer> winningLottoNumbers = inputView.findWinningLottoNumbers();
-        List<List<Integer>> lists = customer.compareTo(winningLottoNumbers);
 
-//        ResultView resultView = new ResultView(new Revenue(lists, price));
-//        resultView.print(customer);
-
+        List<Rank> winningList = customer.getWinningList(winningLottoNumbers);
+        resultView.printWinningList(winningList);
+        resultView.printProfit(customer.profit(winningList));
     }
 }

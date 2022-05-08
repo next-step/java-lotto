@@ -2,6 +2,11 @@ package lotto.contoller;
 
 import lotto.domain.Customer;
 import lotto.domain.Lottos;
+import lotto.domain.Rank;
+
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 
 public class ResultView {
@@ -10,19 +15,21 @@ public class ResultView {
 
     }
 
-    // NOTE: 로또 findLottoList()함수로 리스트를 반환하는게 맞는걸까요?
-    //       customer 객체에 메시지를 보내서 그 안에서 출력하는게 맞는걸까요?
-    //       객체 안에서 처리하면 프린트를 하는 대상에 대한 역할이 애매해지는거 같아서 질문드립니다!
     public void printLottos(Customer customer) {
-        Lottos lottoList = customer.findLottoList();
-        System.out.println(lottoList);
+      customer.printLottoList();
+    }
 
-/**
- *      customer.printLottoList() {
- *          System.out.println(lottoList);
- *      }
- *
- */
+    public void printWinningList(List<Rank> winningList) {
+        System.out.println(" 당첨 통계 ");
+        System.out.println(" --------- ");
+        System.out.println("3개 일치 (5000원)- " + winningList.stream().filter(rank -> rank == Rank.FOUR).collect(Collectors.toList()).size());
+        System.out.println("4개 일치 (50000원)- " + winningList.stream().filter(rank -> rank == Rank.THREE).collect(Collectors.toList()).size());
+        System.out.println("5개 일치 (1500000원)- " + winningList.stream().filter(rank -> rank == Rank.TWO).collect(Collectors.toList()).size());
+        System.out.println("6개 일치 (2000000000원)- " + winningList.stream().filter(rank -> rank == Rank.ONE).collect(Collectors.toList()).size());
 
+    }
+
+    public void printProfit(double profit) {
+        System.out.println("총 수익률은 " + profit + "입니다.");
     }
 }

@@ -7,34 +7,26 @@ import java.util.stream.Collectors;
 public class Numbers {
     public static final int START_NUMBER = 1;
     public static final int END_NUMBER = 45;
-    private final List<Integer> numbers = new ArrayList<>();
-    private final List<Integer> lottoNumbers = new ArrayList<>();
+    private List<Integer> lottoNumbers = new ArrayList<>();
 
     public Numbers() {
+        List<Integer> numbers = new ArrayList<>();
+
         for (int i = START_NUMBER; i <= END_NUMBER; i++) {
             numbers.add(i);
         }
 
         Collections.shuffle(numbers);
-        lottoNumbers.addAll(numbers.subList(0, 6));
-        Collections.sort(lottoNumbers);
+
+        this.lottoNumbers = numbers.stream()
+                .limit(6)
+                .collect(Collectors.toList());
     }
 
     public Numbers(List<Integer> numbers) {
-        for (Integer number : numbers) {
-            lottoNumbers.add(number);
-        }
+        numbers.stream()
+                .forEach(number -> lottoNumbers.add(number));
         Collections.sort(lottoNumbers);
-    }
-
-    public int size() {
-        return lottoNumbers.size();
-    }
-
-    public List<Integer> contains(List<Integer> prevLottoNumbers) {
-        return lottoNumbers.stream()
-                .filter(lottoNumber -> prevLottoNumbers.stream().anyMatch(Predicate.isEqual(lottoNumber)))
-                .collect(Collectors.toList());
     }
 
     @Override
@@ -55,4 +47,10 @@ public class Numbers {
         return Objects.hash(lottoNumbers);
     }
 
+    public int matchCount(List<Integer> winningNumbers) {
+        List<Integer> collect = lottoNumbers.stream()
+                .filter(lottoNumber -> winningNumbers.stream().anyMatch(Predicate.isEqual(lottoNumber)))
+                .collect(Collectors.toList());
+        return collect.size();
+    }
 }
