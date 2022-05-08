@@ -30,8 +30,6 @@ public class Lottos {
     public int countMatchResult(MatchResult matchResult) {
         return (int) lottos.stream()
                 .map(Lotto::findMatchResult)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
                 .filter(mr -> mr == matchResult)
                 .count();
     }
@@ -39,8 +37,6 @@ public class Lottos {
     public int calculateTotalWinPrice() {
         return lottos.stream()
                 .map(Lotto::findMatchResult)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
                 .mapToInt(MatchResult::winPrice)
                 .sum();
     }

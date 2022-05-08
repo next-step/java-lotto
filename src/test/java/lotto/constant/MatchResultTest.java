@@ -16,9 +16,9 @@ class MatchResultTest {
     }
 
     @Test
-    @DisplayName("숫자 1로 MatchCount 를 찾으면 null 를 반환한다.")
+    @DisplayName("숫자 1로 MatchCount 를 찾으면 MISS 를 반환한다.")
     void invalidMaxBound() {
-        assertThat(MatchResult.findByMatchCount(1)).isEqualTo(null);
+        assertThat(MatchResult.findByMatchCount(1)).isEqualTo(MatchResult.MISS);
     }
 
     @ParameterizedTest(name = "MatchCount value 가 {0} 인 당첨금은 {1} 이다.")

@@ -2,8 +2,6 @@ package lotto.domain;
 
 import lotto.constant.MatchResult;
 
-import java.util.Optional;
-
 public class Lotto {
 
     private MatchResult matchResult;
@@ -18,8 +16,8 @@ public class Lotto {
         this.matchResult = MatchResult.findByMatchCount(matchCount);
     }
 
-    public Optional<MatchResult> findMatchResult() {
-        return Optional.ofNullable(matchResult);
+    public MatchResult findMatchResult() {
+        return matchResult;
     }
 
     public LottoMarkingNumbers lottoMarkingNumbers() {
