@@ -1,9 +1,5 @@
 package lottoauto.domain;
 
-import lottoauto.domain.Lotto;
-import lottoauto.domain.Lottos;
-import lottoauto.domain.RatingStatics;
-import lottoauto.domain.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -43,10 +43,12 @@ public class Lotto {
     }
 
     public int findMatchingCount(Lotto lotto) {
-        return (int) lottoNumbers.stream().filter(lottoNumber -> lotto.contains(lottoNumber)).count();
+        return (int) lottoNumbers.stream()
+                .filter(lottoNumber -> lotto.contains(lottoNumber))
+                .count();
     }
 
-    private boolean contains(LottoNumber lottoNumber) {
+    public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.stream().anyMatch(lottoNumber::equals);
     }
 

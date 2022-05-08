@@ -36,7 +36,7 @@ public class RatingStatics {
     @Override
     public String toString() {
         return statics.entrySet().stream()
-                .filter(set -> !set.getKey().equals(Rating.LOSING))
+                .filter(set -> !set.getKey().equals(Rating.MISS))
                 .map(set -> set.getKey() + "- " + set.getValue() + "개\n")
                 .collect(Collectors.joining());
     }

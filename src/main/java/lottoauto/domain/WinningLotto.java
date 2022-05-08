@@ -9,16 +9,27 @@ public class WinningLotto {
         this.bonus = bonus;
     }
 
-    public static WinningLotto of(Lotto winnig, LottoNumber bonus) {
-        return new WinningLotto(winnig, bonus);
-    }
-
     public static WinningLotto from(Lotto lotto) {
         return new WinningLotto(lotto, null);
     }
 
+    public static WinningLotto of(Lotto winnig, LottoNumber bonus) {
+        if (winnig.contains(bonus)) {
+            throw new IllegalArgumentException("보너스 번호가 중복되었습니다.");
+        }
+        return new WinningLotto(winnig, bonus);
+    }
+
     public Rating findRating(Lotto lotto) {
-        return Rating.from(winnig.findMatchingCount(lotto));
+        int countOfMatch = winnig.findMatchingCount(lotto);
+        if (!hasBonusNumber(lotto)) {
+            return Rating.valueOf(countOfMatch, false);
+        }
+        return Rating.valueOf(countOfMatch, lotto.contains(bonus));
+    }
+
+    private boolean hasBonusNumber(Lotto lotto) {
+        return bonus != null && lotto.contains(bonus);
     }
 
     @Override
