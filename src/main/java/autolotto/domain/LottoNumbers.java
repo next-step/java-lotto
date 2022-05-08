@@ -4,19 +4,27 @@ import autolotto.exception.LottoException;
 import autolotto.exception.LottoExceptionCode;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private static final int LOTTO_NUMBER = 6;
-    private Set<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(Set<LottoNumber> lottoNumbers) {
-        if (isNotLottoSize(lottoNumbers)) {
+    public static LottoNumbers of(Set<Integer> lottoNumbers) {
+        if (isNotLottoSize2(lottoNumbers)) {
             throw new LottoException(LottoExceptionCode.INVALID_LOTTO_NUMBER_COUNT, lottoNumbers.toString());
         }
+        return new LottoNumbers(
+                lottoNumbers.stream()
+                        .map(LottoNumber::of)
+                        .collect(Collectors.toSet()));
+    }
+
+    public LottoNumbers(Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    private boolean isNotLottoSize(Set<LottoNumber> lottoNumbers) {
+    private static boolean isNotLottoSize2(Set<Integer> lottoNumbers) {
         return lottoNumbers.size() != LOTTO_NUMBER;
     }
 

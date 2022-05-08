@@ -15,8 +15,8 @@ class LottosTest extends LottoNumbersFactory {
 
     @BeforeEach
     void setUp() {
-        LottoNumbers lottoNumbers1 = new LottoNumbers(from(Set.of(1, 2, 3, 4, 5, 6)));
-        LottoNumbers lottoNumbers2 = new LottoNumbers(from(Set.of(1, 2, 3, 4, 5, 43)));
+        LottoNumbers lottoNumbers1 = LottoNumbers.of(Set.of(1, 2, 3, 4, 5, 6));
+        LottoNumbers lottoNumbers2 = LottoNumbers.of(Set.of(1, 2, 3, 4, 5, 43));
         lottos = new Lottos(List.of(lottoNumbers1, lottoNumbers2));
     }
 
@@ -27,7 +27,7 @@ class LottosTest extends LottoNumbersFactory {
 
     @Test
     void confirm() {
-        lottos.confirm(new WinningLotto(new LottoNumbers(from(Set.of(1,2,3,4,5,6))), LottoNumber.of(7)));
+        lottos.confirm(new WinningLotto(LottoNumbers.of(Set.of(1,2,3,4,5,6)), LottoNumber.of(7)));
         assertThat(lottos.getResult().countOfWinners(Rank.FIRST)).isEqualTo(1);
         assertThat(lottos.getResult().countOfWinners(Rank.THIRD)).isEqualTo(1);
     }

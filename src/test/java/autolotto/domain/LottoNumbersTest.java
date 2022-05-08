@@ -18,12 +18,12 @@ class LottoNumbersTest extends LottoNumbersFactory {
 
     @BeforeEach
     void setUp() {
-        lottoNumbers = new LottoNumbers(from(Set.of(1, 2, 3, 4, 5, 6)));
+        lottoNumbers = LottoNumbers.of(Set.of(1, 2, 3, 4, 5, 6));
     }
 
     @Test
     void lengthIsNotSixGiven_ThrowException() {
-        assertThatThrownBy(() -> new LottoNumbers(from(Set.of(1, 2, 3, 4, 5))))
+        assertThatThrownBy(() -> LottoNumbers.of(Set.of(1, 2, 3, 4, 5)))
                 .isInstanceOf(LottoException.class)
                 .hasMessageContaining(LottoExceptionCode.INVALID_LOTTO_NUMBER_COUNT.getMessage());
     }
@@ -46,7 +46,7 @@ class LottoNumbersTest extends LottoNumbersFactory {
 
     @Test
     void bonusBallGiven_ReturnTrue() {
-        assertThat(lottoNumbers.checkBonus(new WinningLotto(new LottoNumbers(from(Set.of(1,2,3,4,5,7))),LottoNumber.of(6)))).isTrue();
+        assertThat(lottoNumbers.checkBonus(new WinningLotto(LottoNumbers.of(Set.of(1,2,3,4,5,7)),LottoNumber.of(6)))).isTrue();
     }
 }
 

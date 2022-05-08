@@ -13,10 +13,4 @@ public class LottoNumbersFactory {
                 .map(LottoNumber::of)
                 .collect(Collectors.toSet());
     }
-
-    public Set<LottoNumber> from(Set<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::of)
-                .collect(Collectors.toSet());
-    }
 }
