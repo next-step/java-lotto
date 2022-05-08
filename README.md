@@ -29,25 +29,40 @@
 * Domain
   * Draw
     * Variables 
+      * Lottos (Class)
+      * Winnings (Class)
       * 구매한 로또 개수
-      * 구입한 로또 
-      * 구입한 로또의 당첨 현황
     * Functions
       * 로또 생성 요청
+      * 로또 당첨 확인
+  * Lottos
+    * Variables
+      * List<Lotto>
+    * Functions
+      * List에 Lotto 추가
+      * Lottos getter
   * Lotto
     * Variables
       * 로또
     * Functions
       * 로또 생성
+      * Lotto getter
   * Winnings
     * Variables
-      * 당첨 번호
+      * WinningNumbers (Class)
+      * 당첨 금액(5가지)
       * 당첨된 번호 개수 현황(List)
       * 당첨 개수별 상금
     * Functions
-      * 당첨된 번호 개수 확인
-      * 당첨된 번호 개수별 로또 개수
+      * 당첨된 번호 개수 Array에 저장
       * 총 당첨금액 계산
+      * 당첨번호 파싱
+  * WinningNumbers
+    * Variables
+      * 당첨 번호
+      * 보너스 번호
+    * 당첨 번호 여부 확인
+* Util
   * Ratio
     * Functions
       * 로또 구입 금액 대비 효율 계산
