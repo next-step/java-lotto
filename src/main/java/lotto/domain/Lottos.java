@@ -13,16 +13,6 @@ public class Lottos {
     private final int userAmount;
     private final List<LottoNumbers> lottos;
 
-    public Lottos(int userAmount) {
-        this.userAmount = userAmount;
-        this.lottos = getRandomLottoNumbers();
-    }
-
-    public Lottos(int userAmount, List<LottoNumbers> userInputLottos) {
-        this.userAmount = userAmount;
-        this.lottos = getRandomLottoNumbersWith(userInputLottos);
-    }
-
     public Lottos(int userAmount, String lottoOfUser) {
         this.userAmount = userAmount;
         this.lottos = getRandomLottoNumbersWith(toLottoNumbers(lottoOfUser));
@@ -53,12 +43,6 @@ public class Lottos {
         lottoNumbers.addAll(randomLottoNumbers);
 
         return lottoNumbers;
-    }
-
-    private List<LottoNumbers> getRandomLottoNumbers() {
-        return IntStream.range(START_INCLUSIVE, this.userAmount / LOTTO_PRICE)
-                .mapToObj(it -> LottoNumbers.ofRandom())
-                .collect(Collectors.toList());
     }
 
     public int length() {
