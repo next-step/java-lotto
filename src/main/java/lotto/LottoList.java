@@ -1,5 +1,6 @@
 package lotto;
 
+import static lotto.Lotto.LOTTO_PRICE;
 import static util.Validator.validateArgument;
 
 import java.math.BigDecimal;
@@ -11,7 +12,6 @@ import java.util.stream.Collectors;
 public class LottoList {
 
   private static final String ERROR_MESSAGE_FOR_INVALID_AMOUNT = "Lotto를 생성할 숫자는 0보다 커야합니다.";
-  private static final int LOTTO_PRICE = 1000;
   private static final int REVENUE_RATE_SCALE = 2;
 
   private final List<Lotto> lottoList = new ArrayList<>();
@@ -24,12 +24,16 @@ public class LottoList {
     }
   }
 
-  LottoList(PaymentAmount paymentAmount) {
-    this(paymentAmount.purchaseLotto(LOTTO_PRICE));
-  }
-
   LottoList(List<Lotto> lottoList) {
     this.lottoList.addAll(lottoList);
+  }
+
+  public LottoList addLotto(int amount) {
+    validateAmount(amount);
+    for (int i = 0; i < amount; i++) {
+      lottoList.add(Lotto.create());
+    }
+    return this;
   }
 
   public Result drawing(WinningLotto winningLotto) {
@@ -46,12 +50,8 @@ public class LottoList {
     return result;
   }
 
-  public int getTotalLottoCount() {
-    return lottoList.size();
-  }
-
-  public int getTotalPurchaseAmount() {
-    return getTotalLottoCount() * LOTTO_PRICE;
+  public int getTotalPaymentAmount(int price) {
+    return lottoList.size() * price;
   }
 
   public List<Lotto> getListOfLotto() {
@@ -61,7 +61,7 @@ public class LottoList {
   public BigDecimal getRevenueRate(int totalRevenue) {
     return BigDecimal.valueOf(totalRevenue)
         .divide(
-            BigDecimal.valueOf(getTotalPurchaseAmount()),
+            BigDecimal.valueOf(getTotalPaymentAmount(LOTTO_PRICE)),
             REVENUE_RATE_SCALE,
             RoundingMode.HALF_UP
         );
@@ -73,5 +73,13 @@ public class LottoList {
         (arg) -> amount > 0,
         ERROR_MESSAGE_FOR_INVALID_AMOUNT
     );
+  }
+
+  public static LottoList createWithManualLottoList(
+      List<Lotto> manualLottoList,
+      int additionalPurchaseAmount
+  )  {
+    LottoList lottoList = new LottoList(manualLottoList);
+    return lottoList.addLotto(additionalPurchaseAmount);
   }
 }

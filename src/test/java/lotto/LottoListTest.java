@@ -76,24 +76,24 @@ public class LottoListTest {
   }
 
   @Test
-  void getTotalLottoCount_성공() {
-    assertThat(lottoList.getTotalLottoCount()).isEqualTo(7);
-  }
-
-  @Test
   void getTotalPurchaseAmount_성공() {
     int lottoPrice = 1000;
-    assertThat(lottoList.getTotalPurchaseAmount())
-        .isEqualTo(lottoPrice * lottoList.getTotalLottoCount());
+    assertThat(lottoList.getTotalPaymentAmount(1000))
+        .isEqualTo(lottoPrice * lottoList.getListOfLotto().size());
   }
 
   @Test
   void getRevenueRate_성공() {
     int totalRevenue = 2000;
 
-    assertThat(lottoList.getRevenueRate(totalRevenue)).isEqualTo(BigDecimal.valueOf(totalRevenue)
-        .divide(BigDecimal.valueOf(lottoList.getTotalLottoCount()), REVENUE_RATE_SCALE,
-            RoundingMode.HALF_UP));
+    assertThat(lottoList.getRevenueRate(totalRevenue))
+        .isEqualTo(BigDecimal.valueOf(totalRevenue)
+            .divide(BigDecimal.valueOf(
+                lottoList.getTotalPaymentAmount(1000)),
+                REVENUE_RATE_SCALE,
+                RoundingMode.HALF_UP
+            )
+        );
   }
 
   @Test
@@ -111,5 +111,27 @@ public class LottoListTest {
     List<Lotto> listOfLotto = lottoList.getListOfLotto();
 
     assertThat(listOfLotto).containsAll(expected);
+  }
+
+  @Test
+  void createWithManualLottoList_성공() {
+    List<Lotto> manualLotto = List.of(Lotto.create());
+    int autoLottoSize = 5;
+
+    LottoList lottoList = LottoList.createWithManualLottoList(manualLotto, autoLottoSize);
+
+    assertThat(lottoList.getListOfLotto().size())
+        .isEqualTo(autoLottoSize + manualLotto.size());
+    assertThat(lottoList.getListOfLotto()).containsAll(manualLotto);
+  }
+
+  @Test
+  void addLotto_성공() {
+    int addAmount = 3;
+    int sizeBeforeAdd = lottoList.getListOfLotto().size();
+
+    lottoList.addLotto(addAmount);
+
+    assertThat(lottoList.getListOfLotto().size()).isEqualTo(sizeBeforeAdd + addAmount);
   }
 }
