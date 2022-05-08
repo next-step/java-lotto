@@ -15,7 +15,9 @@ public class ResultView {
   private static final String STATISTICS_HEAD = "당첨 통계";
   private static final String HEAD_BODY_SPLIT_LINE = "---------";
   private static final String STATISTIC_DETAIL_FORMAT = "%d개 일치 (%s)- %d개";
-  private static final String RATE_OF_RETURN_FORMAT = "총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+  private static final String RATE_OF_RETURN_FORMAT = "총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
+  private static final String GAIN = "이득";
+  private static final String LOSS = "손해";
   private static final PrintStream printStream = System.out;
 
   public static void printLottoCount(int lottoCount) {
@@ -50,6 +52,11 @@ public class ResultView {
   }
 
   private static void printRateOfReturn(Statistics statistic) {
-    printStream.println(format(RATE_OF_RETURN_FORMAT, statistic.rateOfReturn()));
+    printStream.println(format(RATE_OF_RETURN_FORMAT, statistic.rateOfReturn(),
+        getProfitOrLoss(statistic)));
+  }
+
+  private static String getProfitOrLoss(Statistics statistic) {
+    return statistic.rateOfReturn() >= 1.0 ? GAIN : LOSS;
   }
 }

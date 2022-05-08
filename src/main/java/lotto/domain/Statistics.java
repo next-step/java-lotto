@@ -30,8 +30,6 @@ public class Statistics {
         .map(Statistic::getTotalPrize)
         .reduce(Money::sum)
         .orElse(Money.ZERO);
-    System.out.println("winAmount = " + winAmount);
-    System.out.println("purchaseAmount = " + purchaseAmount);
     Rate divide = Rate.of((double) winAmount.value() / purchaseAmount.value());
     return divide.getRate();
   }
