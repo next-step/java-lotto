@@ -6,7 +6,6 @@ public final class Guest {
 
     private final Money money;
 
-
     public Guest(long money) {
         this.money = new Money(money);
     }

@@ -16,7 +16,8 @@ public final class LotteryResult {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(grade.getExpectNumber()).append(COINCIDE_MESSAGE);
+        sb.append(grade.getExpectNumber())
+                .append(COINCIDE_MESSAGE);
         if (grade.isSecond()) {
             sb.append(SECOND_MESSAGE);
         }
