@@ -33,4 +33,8 @@ public class LottoTickets {
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
     }
+
+    public long size(LottoTicketType lottoTicketType) {
+        return lottoTickets.stream().filter(lottoTicket -> lottoTicket.getLottoTicketType() == lottoTicketType).count();
+    }
 }

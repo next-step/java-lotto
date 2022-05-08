@@ -30,7 +30,7 @@ public class LottoVendingMachine {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
         for (int i = 0; i < amount.getAmount() / PRICE; i++) {
-            lottoTickets.add(new LottoTicket(lottoNumbers.getRandomNumbers(NUMBERS_IN_GAME)));
+            lottoTickets.add(new LottoTicket(lottoNumbers.getRandomNumbers(NUMBERS_IN_GAME), LottoTicketType.AUTO));
         }
 
         return new LottoTickets(lottoTickets);
