@@ -1,33 +1,40 @@
 package lotto.domain;
 
-import java.util.Objects;
+import java.util.Collections;
+import java.util.List;
 
 public class LottoResult {
 
-  private final int matchedCount;
+  public static final int LOTTO_TICKET_PRICE = 1000;
+  private final List<LottoRank> lottoRanks;
 
-  public LottoResult(int matchedCount) {
-    this.matchedCount = matchedCount;
+  public LottoResult(List<LottoRank> lottoRanks) {
+    this.lottoRanks = lottoRanks;
   }
 
-  LottoRank getLottoRank() {
-    return LottoRank.findByMatchCount(matchedCount);
+  public List<LottoRank> getLottoResults() {
+    return Collections.unmodifiableList(lottoRanks);
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    LottoResult that = (LottoResult) o;
-    return matchedCount == that.matchedCount;
+  public double getRateOfReturn() {
+    return Money.wons(getTotalCashPrizeAmount())
+        .divide(getTotalPaidAmount())
+        .doubleValue();
   }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(matchedCount);
+  public long getCountByLottoRank(final LottoRank lottoRank) {
+    return lottoRanks.stream()
+        .filter(rank -> rank.equals(lottoRank))
+        .count();
+  }
+
+  private int getTotalPaidAmount() {
+    return lottoRanks.size() * LOTTO_TICKET_PRICE;
+  }
+
+  private long getTotalCashPrizeAmount() {
+    return lottoRanks.stream()
+        .mapToLong(LottoRank::getCashPrize)
+        .sum();
   }
 }

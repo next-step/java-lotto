@@ -5,21 +5,20 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoFactory {
 
   private static final int LOTTO_NUMBERS_SIZE = 6;
 
-  private static final int MIN_LOTTO_NUMBER = 1;
-  private static final int MAX_LOTTO_NUMBER = 45;
   public static final String DELIMITER = ",";
 
-  private static final List<LottoNumber> allLottoNumbers = new ArrayList<>(MAX_LOTTO_NUMBER);
+  private static final List<LottoNumber> allLottoNumbers = new ArrayList<>(
+      LottoNumber.MAX_LOTTO_NUMBER);
 
   static {
-    for (int number = MIN_LOTTO_NUMBER; number < MAX_LOTTO_NUMBER; number++) {
-      allLottoNumbers.add(LottoNumber.from(number));
-    }
+    IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
+        .forEach(number -> allLottoNumbers.add(LottoNumber.from(number)));
   }
 
   public static LottoTicket createAuto() {

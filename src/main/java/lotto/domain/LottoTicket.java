@@ -16,27 +16,23 @@ public class LottoTicket {
     this.lottoNumbers = lottoNumbers;
   }
 
-  public LottoResult getWinLottoNumbers(LottoTicket winLottoTicket) {
-    return new LottoResult(getMatchedLottoNumberCount(winLottoTicket.getLottoNumbers()));
+  public LottoRank getWinLottoNumbers(WinLotto winLotto) {
+    return LottoRank.of(countByMatched(winLotto.getLottoNumbers()), matchBonus(winLotto.getBonusNumber()));
+  }
+
+  private long countByMatched(List<LottoNumber> winLottoNumbers) {
+    return lottoNumbers.stream()
+        .filter(winLottoNumbers::contains)
+        .count();
+  }
+
+  private boolean matchBonus(LottoNumber bonusNumber) {
+    return lottoNumbers.stream()
+        .anyMatch(lottoNumber -> lottoNumber.equals(bonusNumber));
   }
 
   public List<LottoNumber> getLottoNumbers() {
     return Collections.unmodifiableList(lottoNumbers);
-  }
-
-  private int getMatchedLottoNumberCount(List<LottoNumber> winLottoNumbers) {
-    int matchedCount = 0;
-    for (LottoNumber lottoNumber : lottoNumbers) {
-      matchedCount += getMatchedCount(winLottoNumbers, lottoNumber);
-    }
-    return matchedCount;
-  }
-
-  private int getMatchedCount(List<LottoNumber> winLottoNumbers, LottoNumber lottoNumber) {
-    if (winLottoNumbers.contains(lottoNumber)) {
-      return 1;
-    }
-    return 0;
   }
 
   private void validateSize(List<LottoNumber> lottoNumbers) {

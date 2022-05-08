@@ -1,20 +1,23 @@
 package lotto;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoFactory;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoStore;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
 import lotto.domain.Money;
+import lotto.domain.WinLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoApplication {
 
   public static void main(String[] args) {
-    LottoTickets lottoTickets = LottoStore.buy(Money.wons(InputView.getAmount()));
-    ResultView.print(lottoTickets);
-    LottoTicket winLottoTicket = LottoFactory.createManual(InputView.getWinNumbers());
-    ResultView.print(lottoTickets.getResultStatistics(winLottoTicket));
+    Lotto lotto = LottoStore.buy(Money.wons(InputView.getAmount()));
+    ResultView.print(lotto);
+
+    WinLotto winLotto = new WinLotto(LottoFactory.createManual(InputView.getWinNumbers()),
+        LottoNumber.from(InputView.getBonusNumber()));
+    ResultView.print(lotto.result(winLotto));
   }
 
 }
