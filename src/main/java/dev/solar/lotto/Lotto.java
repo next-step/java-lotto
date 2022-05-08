@@ -6,4 +6,8 @@ public class Lotto {
     public int buyLotto(final int purchaseAmount) {
         return purchaseAmount / LOTTO_PRICE;
     }
+
+    public LottoTicket pick() {
+        return LottoTicket.buyOne();
+    }
 }

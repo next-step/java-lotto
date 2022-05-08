@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -20,5 +21,13 @@ public class LottoTest {
     @ParameterizedTest
     void issue_lotto_equal_purchase_amount(int purchaseAmount, int amountOfLotto) {
         assertThat(lotto.buyLotto(purchaseAmount)).isEqualTo(amountOfLotto);
+    }
+
+    @DisplayName("로또 한 장당 6개의 번호를 랜덤으로 선택한다.")
+    @Test
+    void pick_lotto_random_number() {
+        LottoTicket lottoTicket = lotto.pick();
+        System.out.println(lottoTicket);
+        assertThat(lottoTicket.getLottoNumbers()).hasSize(6);
     }
 }
