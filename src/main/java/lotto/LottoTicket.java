@@ -28,13 +28,13 @@ public class LottoTicket {
     this.lottoNumbers = lottoNumbers;
   }
 
-  public int countMatched(List<Integer> winNumbers) {
-    if (winNumbers == null || winNumbers.isEmpty()) {
-      throw new IllegalArgumentException(EMPTY_LOTTO_NUMBERS);
-    }
-
+  public int countMatched(LottoTicket winLotto) {
     return (int) lottoNumbers.stream()
-        .filter(winNumbers::contains)
+        .filter(winLotto::contains)
         .count();
+  }
+
+  private boolean contains(Integer number) {
+    return lottoNumbers.contains(number);
   }
 }
