@@ -23,26 +23,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    protected static List<LottoNumbers> toLottoNumbers(String lottoOfUser) {
+    private static List<LottoNumbers> toLottoNumbers(String lottoOfUser) {
         return Arrays.stream(lottoOfUser.split("\n"))
                 .map(LottoNumbers::new)
                 .collect(Collectors.toList());
-    }
-
-    private List<LottoNumbers> getRandomLottoNumbersWith(List<LottoNumbers> userInputLottos) {
-        List<LottoNumbers> randomLottoNumbers = IntStream.range(START_INCLUSIVE, (this.userAmount / LOTTO_PRICE) - userInputLottos.size())
-                .mapToObj(it -> LottoNumbers.ofRandom())
-                .collect(Collectors.toList());
-
-        return attach(userInputLottos, randomLottoNumbers);
-    }
-
-    private List<LottoNumbers> attach(List<LottoNumbers> userInputLottos, List<LottoNumbers> randomLottoNumbers) {
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        lottoNumbers.addAll(userInputLottos);
-        lottoNumbers.addAll(randomLottoNumbers);
-
-        return lottoNumbers;
     }
 
     public int length() {
@@ -53,12 +37,6 @@ public class Lottos {
         this.lottos.stream()
                 .map(LottoNumbers::toString)
                 .forEach(System.out::println);
-    }
-
-    public List<Integer> getMatchNumberCounts(LottoNumbers lottos) {
-        return this.lottos.stream()
-                .map(lottos::getMatchNumberCount)
-                .collect(Collectors.toList());
     }
 
     public double getRevenueRate(LottoNumbers lottoNumbers, LottoNumber bonusBall) {
@@ -80,4 +58,27 @@ public class Lottos {
                 .filter(it -> it == rank)
                 .count();
     }
+
+    private List<LottoNumbers> getRandomLottoNumbersWith(List<LottoNumbers> userInputLottos) {
+        List<LottoNumbers> randomLottoNumbers = IntStream.range(START_INCLUSIVE, (this.userAmount / LOTTO_PRICE) - userInputLottos.size())
+                .mapToObj(it -> LottoNumbers.ofRandom())
+                .collect(Collectors.toList());
+
+        return attach(userInputLottos, randomLottoNumbers);
+    }
+
+    private List<LottoNumbers> attach(List<LottoNumbers> userInputLottos, List<LottoNumbers> randomLottoNumbers) {
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        lottoNumbers.addAll(userInputLottos);
+        lottoNumbers.addAll(randomLottoNumbers);
+
+        return lottoNumbers;
+    }
+
+    private List<Integer> getMatchNumberCounts(LottoNumbers lottos) {
+        return this.lottos.stream()
+                .map(lottos::getMatchNumberCount)
+                .collect(Collectors.toList());
+    }
+
 }
