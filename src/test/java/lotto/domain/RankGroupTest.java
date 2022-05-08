@@ -24,4 +24,13 @@ public class RankGroupTest {
         assertThat(rankGroup.getCountOfMatchCount(5)).isEqualTo(2);
         assertThat(rankGroup.getCountOfMatchCount(6)).isEqualTo(1);
     }
+
+
+    @Test
+    @DisplayName("수익률 테스트")
+    void returnMoneyPercentage() {
+        RankGroup rankGroup = new RankGroup(Arrays.asList(Rank.FOURTH, Rank.NO_MATCH, Rank.NO_MATCH, Rank.NO_MATCH));
+
+        assertThat(rankGroup.returnMoneyPercentage(4000)).isEqualTo(1.25);
+    }
 }

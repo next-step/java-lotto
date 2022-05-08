@@ -21,9 +21,10 @@ public class ResultView {
         System.out.println(ticketCount + "개를 구매했습니다.");
     }
 
-    public static void printWinningStatistics(RankGroup rankGroup) {
+    public static void printWinningStatistics(RankGroup rankGroup, int totalTicketPrice) {
         for (int i = MIN_COUNT_OF_WINNING_LOTTO_NUMBER; i <= MAX_COUNT_OF_WINNING_LOTTO_NUMBER; i++) {
-            System.out.println(i + "개 일치 (" + Rank.getMoneyByMatchCount(i) + "원)" + rankGroup.getCountOfMatchCount(i) + " 개");
+            System.out.println(i + "개 일치 (" + Rank.getMoneyByMatchCount(i) + "원) " + rankGroup.getCountOfMatchCount(i) + " 개");
         }
+        System.out.println("총 수익률은 "+ rankGroup.returnMoneyPercentage(totalTicketPrice)+" 입니다.");
     }
 }

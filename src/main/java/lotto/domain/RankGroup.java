@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.List;
 
 public class RankGroup {
+    private static final int SECOND_DIGIT = 100;
     private final List<Rank> rankGroup;
 
     public RankGroup(List<Rank> rankList) {
@@ -28,9 +29,13 @@ public class RankGroup {
     }
 
     private int getCount(int matchCount, int count, Rank rank) {
-        if(rank.isSameMatchCount(matchCount)) {
+        if (rank.isSameMatchCount(matchCount)) {
             count++;
         }
         return count;
+    }
+
+    public double returnMoneyPercentage(int totalTicketPrice) {
+        return Math.floor((sumMoney() / (double) totalTicketPrice) * SECOND_DIGIT) / SECOND_DIGIT;
     }
 }

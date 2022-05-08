@@ -18,6 +18,6 @@ public class Main {
 
         Lotto lotto = new Lotto(new LottoTicket(InputView.getWinnerTicket()));
 
-        ResultView.printWinningStatistics(lotto.compareLotto(lottoTicketGroup));
+        ResultView.printWinningStatistics(lotto.compareLotto(lottoTicketGroup), money);
     }
 }
