@@ -31,12 +31,16 @@ public class Calculator {
     private static void parse(final String input, final Queue<Integer> operands, final Queue<Operator> operators) {
         final String[] formula = input.split(DELIMITER);
         for (final String str : formula) {
-            if (isNumber(str)) {
-                operands.add(Integer.parseInt(str));
-                continue;
-            }
-            operators.add(Operator.getEnum(str));
+            classifyOperandOrOperator(operands, operators, str);
         }
+    }
+
+    private static void classifyOperandOrOperator(final Queue<Integer> operands, final Queue<Operator> operators, final String str) {
+        if (isNumber(str)) {
+            operands.add(Integer.parseInt(str));
+            return;
+        }
+        operators.add(Operator.getEnum(str));
     }
 
     private static boolean isNumber(final String str) {
