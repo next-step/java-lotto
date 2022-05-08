@@ -11,14 +11,11 @@ public class Lotto {
 
     private final List<Integer> selectedNumbers;
 
-    private int numberOfMatched;
-
     public Lotto(List<Integer> selectedNumbers) {
         this.selectedNumbers = selectedNumbers;
     }
 
     public Lotto() {
-        this.numberOfMatched = 0;
         List<Integer> candidateNumbers = candidateNumbers();
 
         Collections.shuffle(candidateNumbers);
@@ -26,7 +23,7 @@ public class Lotto {
         Collections.sort(this.selectedNumbers);
     }
 
-    List<Integer> candidateNumbers() {
+    private List<Integer> candidateNumbers() {
         List<Integer> candidateNumbers = new ArrayList<>();
         for (int number = 1; number <= MAX_VALUE; number++) {
             candidateNumbers.add(number);
@@ -34,8 +31,8 @@ public class Lotto {
         return candidateNumbers;
     }
 
-    void checkWinnings(Winnings winnings) {
-        this.numberOfMatched = winnings.countMatchedNumbers(selectedNumbers);
+    public void checkWinnings(Winnings winnings) {
+        winnings.countMatchedNumbers(selectedNumbers);
     }
 
     public List<Integer> selectedNumbers() {

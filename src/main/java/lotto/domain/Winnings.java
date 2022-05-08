@@ -1,23 +1,16 @@
 package lotto.domain;
 
-import lotto.util.StringUtils;
-
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Winnings {
-
-    private static final int MATCHED_THREE = 3;
-    private static final int MATCHED_FOUR = 4;
-    private static final int MATCHED_FIVE = 5;
-    private static final int MATCHED_ALL = 6;
 
     private static final int REWARD_NONE = 0;
     private static final int REWARD_MATCHED_THREE = 5000;
     private static final int REWARD_MATCHED_FOUR = 50000;
     private static final int REWARD_MATCHED_FIVE = 1500000;
     private static final int REWARD_MATCHED_ALL = 2000000000;
-
-    private final StringUtils stringUtils = new StringUtils();
 
     private final List<Integer> winningNumbers;
 
@@ -28,8 +21,7 @@ public class Winnings {
             REWARD_MATCHED_THREE, REWARD_MATCHED_FOUR, REWARD_MATCHED_FIVE, REWARD_MATCHED_ALL};
 
     public Winnings(String[] winningNumbers) {
-        StringUtils stringUtils = new StringUtils();
-        this.winningNumbers = stringUtils.stringArrayToIntArray(winningNumbers);
+        this.winningNumbers = parseWinningNumbers(winningNumbers);
         this.recordMatched = new int[7];
     }
 
@@ -38,13 +30,12 @@ public class Winnings {
         this.recordMatched = new int[7];
     }
 
-    public int countMatchedNumbers(List<Integer> numbers) {
+    public void countMatchedNumbers(List<Integer> numbers) {
         int matchedNumber = 0;
         for (int number : numbers) {
             matchedNumber += checkNumber(number);
         }
         recordNumberOfMatched(matchedNumber);
-        return matchedNumber;
     }
 
     private int checkNumber(int number) {
@@ -55,20 +46,7 @@ public class Winnings {
     }
 
     private void recordNumberOfMatched(int matchedNumber) {
-        switch (matchedNumber) {
-            case MATCHED_THREE:
-                this.recordMatched[MATCHED_THREE]++;
-                break;
-            case MATCHED_FOUR:
-                this.recordMatched[MATCHED_FOUR]++;
-                break;
-            case MATCHED_FIVE:
-                this.recordMatched[MATCHED_FIVE]++;
-                break;
-            case MATCHED_ALL:
-                this.recordMatched[MATCHED_ALL]++;
-                break;
-        }
+        this.recordMatched[matchedNumber]++;
     }
 
     public int winningsRewards() {
@@ -77,6 +55,15 @@ public class Winnings {
             winningsRewards += recordMatched[i] * rewards[i];
         }
         return winningsRewards;
+    }
+
+    private List<Integer> parseWinningNumbers(String[] strings) {
+        List<Integer> winningNumbers = new ArrayList<>();
+        for (String string : strings) {
+            winningNumbers.add(Integer.parseInt(string));
+        }
+
+        return winningNumbers;
     }
 
     public int[] recordMatched() {

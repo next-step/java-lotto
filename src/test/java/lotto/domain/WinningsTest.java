@@ -24,15 +24,20 @@ class WinningsTest {
         matchedFour = Arrays.asList(1, 5, 10, 23, 32, 41);
         matchedFive = Arrays.asList(1, 5, 10, 23, 35, 41);
         matchedAll = Arrays.asList(1, 5, 10, 23, 35, 44);
+
+        winnings.countMatchedNumbers(matchedThree);
+        winnings.countMatchedNumbers(matchedFour);
+        winnings.countMatchedNumbers(matchedFive);
+        winnings.countMatchedNumbers(matchedAll);
     }
 
     @Test
     @DisplayName("당첨 개수 확인")
     void check() {
-        assertThat(winnings.countMatchedNumbers(matchedThree)).isEqualTo(3);
-        assertThat(winnings.countMatchedNumbers(matchedFour)).isEqualTo(4);
-        assertThat(winnings.countMatchedNumbers(matchedFive)).isEqualTo(5);
-        assertThat(winnings.countMatchedNumbers(matchedAll)).isEqualTo(6);
+        assertThat(winnings.recordMatched()[3]).isEqualTo(1);
+        assertThat(winnings.recordMatched()[4]).isEqualTo(1);
+        assertThat(winnings.recordMatched()[5]).isEqualTo(1);
+        assertThat(winnings.recordMatched()[6]).isEqualTo(1);
     }
 
 }
