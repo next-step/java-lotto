@@ -1,3 +1,5 @@
+package dev.solar.calcurator;
+
 import java.util.Scanner;
 
 public class InputView {

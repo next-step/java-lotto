@@ -1,3 +1,5 @@
+package dev.solar.calcurator;
+
 import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Queue;
