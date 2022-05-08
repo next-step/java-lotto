@@ -6,6 +6,7 @@ import static util.LottoInputView.insertManualLotto;
 import static util.LottoInputView.insertManualPurchaseAmount;
 import static util.LottoInputView.insertPaymentAmount;
 import static util.LottoInputView.insertWinningLotto;
+import static util.LottoOutputView.print;
 import static util.LottoOutputView.printDescriptionForInsertManualLotto;
 import static util.LottoOutputView.printLottoList;
 import static util.LottoOutputView.printManualPurchaseDone;
@@ -16,7 +17,16 @@ import java.util.List;
 
 public class LottoController {
 
-  public void proceed() {
+  public void start() {
+    try {
+      proceed();
+    } catch (Exception e) {
+      print(e.getMessage());
+      throw e;
+    }
+  }
+
+  private void proceed() {
     Credit credit = insertPaymentAmount();
     int manualPurchaseAmount = insertManualPurchaseAmount();
     int autoPurchaseAmount = credit.calculatePurchaseAmount(LOTTO_PRICE);
