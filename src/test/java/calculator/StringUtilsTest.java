@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-public class SplitterTest {
+public class StringUtilsTest {
 
     @ParameterizedTest
     @DisplayName("문자열 스플릿 테스트")
