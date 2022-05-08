@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Winnings {
@@ -12,7 +11,7 @@ public class Winnings {
     private static final int REWARD_MATCHED_FIVE = 1500000;
     private static final int REWARD_MATCHED_ALL = 2000000000;
 
-    private final List<Integer> winningNumbers;
+    private final WinningNumbers winningNumbers;
 
     private final int[] recordMatched;
 
@@ -21,28 +20,21 @@ public class Winnings {
             REWARD_MATCHED_THREE, REWARD_MATCHED_FOUR, REWARD_MATCHED_FIVE, REWARD_MATCHED_ALL};
 
     public Winnings(String[] winningNumbers) {
-        this.winningNumbers = parseWinningNumbers(winningNumbers);
+        this.winningNumbers = new WinningNumbers(parseWinningNumbers(winningNumbers));
         this.recordMatched = new int[7];
     }
 
     public Winnings(List<Integer> winningNumbers) {
-        this.winningNumbers = winningNumbers;
+        this.winningNumbers = new WinningNumbers(winningNumbers);
         this.recordMatched = new int[7];
     }
 
     public void countMatchedNumbers(List<Integer> numbers) {
         int matchedNumber = 0;
         for (int number : numbers) {
-            matchedNumber += checkNumber(number);
+            matchedNumber += winningNumbers.checkNumber(number);
         }
         recordNumberOfMatched(matchedNumber);
-    }
-
-    private int checkNumber(int number) {
-        if (winningNumbers.contains(number)) {
-            return 1;  
-        }
-        return 0;
     }
 
     private void recordNumberOfMatched(int matchedNumber) {

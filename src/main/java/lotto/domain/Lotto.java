@@ -11,10 +11,6 @@ public class Lotto {
 
     private final List<Integer> selectedNumbers;
 
-    public Lotto(List<Integer> selectedNumbers) {
-        this.selectedNumbers = selectedNumbers;
-    }
-
     public Lotto() {
         List<Integer> candidateNumbers = candidateNumbers();
 
@@ -36,6 +32,6 @@ public class Lotto {
     }
 
     public List<Integer> selectedNumbers() {
-        return selectedNumbers;
+        return Collections.unmodifiableList(selectedNumbers);
     }
 }
