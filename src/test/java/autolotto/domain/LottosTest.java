@@ -1,5 +1,6 @@
 package autolotto.domain;
 
+import autolotto.constant.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,5 +23,12 @@ class LottosTest extends LottoNumbersFactory {
     @Test
     void returnCost() {
         assertThat(lottos.cost()).isEqualTo(2000);
+    }
+
+    @Test
+    void confirm() {
+        lottos.confirm(new WinningLotto(new LottoNumbers(from(Set.of(1,2,3,4,5,6))), new LottoNumber(7)));
+        assertThat(lottos.getResult().countOfWinners(Rank.FIRST)).isEqualTo(1);
+        assertThat(lottos.getResult().countOfWinners(Rank.THIRD)).isEqualTo(1);
     }
 }
