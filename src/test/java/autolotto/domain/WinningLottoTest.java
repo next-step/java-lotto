@@ -10,6 +10,6 @@ class WinningLottoTest extends LottoNumbersFactory {
     @ParameterizedTest
     @CsvSource(value = {"1, 2, 3, 4 ,5, 6:3"}, delimiter = ':')
     void numberGiven_ReturnContainResult(String number, int compare) {
-        assertThat(new WinningLotto(new LottoNumbers(of(number))).contains(new LottoNumber(compare))).isTrue();
+        assertThat(new WinningLotto(new LottoNumbers(of(number))).contains(LottoNumber.of(compare))).isTrue();
     }
 }

@@ -48,7 +48,7 @@ public class LottoInput {
     private static Set<LottoNumber> of(String LottoInput) {
         return Arrays.stream(LottoInput.split(DELIMITER))
                 .map(String::trim)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet());
     }
 
@@ -65,7 +65,7 @@ public class LottoInput {
         System.out.println("보너스 볼을 입력해 주세요.");
         String bonusBallInput = scanner.nextLine();
 
-        LottoNumber lottoNumber = new LottoNumber(bonusBallInput);
+        LottoNumber lottoNumber = LottoNumber.of(bonusBallInput);
         if (winningNumbers.contains(lottoNumber)) {
             throw new LottoException(LottoExceptionCode.DUPLICATED_LOTTO_NUMBER, bonusBallInput);
         }
