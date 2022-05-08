@@ -4,11 +4,16 @@ import lotto.domain.LottoGroup;
 import lotto.domain.LottoGroupResult;
 import lotto.domain.LottoRank;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
 public class ResultView {
+    private static final double STANDARD_POINT = 1.00;
+    private static final int ADVANTAGE_FLAG = 1;
+    private static final int EVEN_FLAG = 0;
+    private static final int DISADVANTAGE_FLAG = -1;
     private static final String LOTTO_COUNT_MESSAGE = "%d개를 구매했습니다.";
     private static final String WINNING_STATISTIC_MESSAGE = "당첨 통계";
     private static final String SPLIT_LINE_MESSAGE = "---------";
@@ -19,9 +24,9 @@ public class ResultView {
     private static final String DISADVANTAGE_MESSAGE = "손해";
     private static final String EVEN_MESSAGE = "본전";
     private static final Map<Integer, String> ADVANTAGE_STATUS = Map.of(
-            1, ADVANTAGE_MESSAGE,
-            0, EVEN_MESSAGE,
-            -1, DISADVANTAGE_MESSAGE
+            ADVANTAGE_FLAG, ADVANTAGE_MESSAGE,
+            EVEN_FLAG, EVEN_MESSAGE,
+            DISADVANTAGE_FLAG, DISADVANTAGE_MESSAGE
     );
 
     private ResultView() {
@@ -44,11 +49,11 @@ public class ResultView {
         System.out.println(SPLIT_LINE_MESSAGE);
         printLottoGroupResult(lottoGroupResult);
         Double earningRatio = lottoGroupResult.getEarningRatio(totalPrice);
-        System.out.println(String.format(EARNINGS_RATIO_MESSAGE, earningRatio, ADVANTAGE_STATUS.get(earningRatio.compareTo(1.00))));
+        System.out.println(String.format(EARNINGS_RATIO_MESSAGE, earningRatio, ADVANTAGE_STATUS.get(earningRatio.compareTo(STANDARD_POINT))));
     }
 
     private static void printLottoGroupResult(LottoGroupResult lottoGroupResult) {
-        Stream.of(LottoRank.values()).filter(lottoRank -> !lottoRank.equals(LottoRank.MISS)).forEach(lottoRank -> System.out.println(String.format(
+        Arrays.stream(LottoRank.values()).sorted(Comparator.reverseOrder()).filter(lottoRank -> !lottoRank.equals(LottoRank.MISS)).forEach(lottoRank -> System.out.println(String.format(
                 getCorrectStatisticMessage(lottoRank),
                 lottoRank.matchCount(),
                 lottoRank.winningMoney(),
