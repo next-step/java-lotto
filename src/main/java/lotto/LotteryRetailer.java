@@ -28,4 +28,12 @@ public class LotteryRetailer {
   private List<Integer> createLottoNumbers(LottoNumberGenerator lottoNumberGenerator) {
     return lottoNumberGenerator.generate();
   }
+
+  public long exchange(LottoTicket lottoTicket, List<Integer> winNumbers) {
+    if (winNumbers == null || winNumbers.isEmpty()) {
+      throw new IllegalArgumentException("지난 주 당첨 번호를 입력해 주세요.");
+    }
+    int count = lottoTicket.countMatched(winNumbers);
+    return Prizes.of(count);
+  }
 }

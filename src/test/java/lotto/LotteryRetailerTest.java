@@ -3,11 +3,15 @@ package lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -39,5 +43,25 @@ class LotteryRetailerTest {
   void payThrowsNullPointExceptionException(Integer moneyWon) {
     assertThatNullPointerException().isThrownBy(
         () -> lotteryRetailer.sell(moneyWon, lottoNumberGenerator));
+  }
+
+  @DisplayName("당첨금 계산")
+  @ParameterizedTest
+  @MethodSource("provideForWinPrizes")
+  void winPrizes(List<Integer> winNumbers, LottoTicket lottoTicket, long prize) {
+    assertThat(lotteryRetailer.exchange(lottoTicket, winNumbers)).isEqualTo(prize);
+  }
+
+  private static Stream<Arguments> provideForWinPrizes() {
+    List<Integer> winNumbers = List.of(1, 2, 3, 4, 5, 6);
+    return Stream.of(
+        arguments(winNumbers, new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), 2_000_000_000),
+        arguments(winNumbers, new LottoTicket(List.of(1, 2, 3, 4, 5, 7)), 1_500_000),
+        arguments(winNumbers, new LottoTicket(List.of(1, 2, 3, 4, 7, 8)), 50_000),
+        arguments(winNumbers, new LottoTicket(List.of(1, 2, 3, 7, 8, 9)), 5_000),
+        arguments(winNumbers, new LottoTicket(List.of(1, 2, 7, 8, 9, 10)), 0),
+        arguments(winNumbers, new LottoTicket(List.of(1, 7, 8, 9, 10, 11)), 0),
+        arguments(winNumbers, new LottoTicket(List.of(7, 8, 9, 10, 11, 12)), 0)
+    );
   }
 }
