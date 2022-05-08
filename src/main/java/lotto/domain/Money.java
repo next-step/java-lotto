@@ -44,11 +44,22 @@ public class Money {
     return new Money((int) (amount * rate));
   }
 
-  public boolean lessThan(int money) {
-    return this.amount < money;
+  public boolean lessThan(Money money) {
+    Objects.requireNonNull(money);
+    return this.amount < money.amount;
   }
 
-  public int divide(int pricePerPlayForLotto) {
-    return this.amount / pricePerPlayForLotto;
+  public Money sum(Money money) {
+    Objects.requireNonNull(money);
+    return Money.of(amount + money.amount);
+  }
+
+  public Money divide(Money money) {
+    Objects.requireNonNull(money);
+    return Money.of(amount / money.amount);
+  }
+
+  public int value() {
+    return amount;
   }
 }

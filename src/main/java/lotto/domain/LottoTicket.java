@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 public class LottoTicket {
 
@@ -18,6 +19,11 @@ public class LottoTicket {
     checkDuplicatedNumbers(lottoNumbers);
 
     this.lottoNumbers = lottoNumbers;
+  }
+
+  public LottoTicket(LottoTicket winLottoNumbers) {
+    Objects.requireNonNull(winLottoNumbers, EMPTY_LOTTO_NUMBERS);
+    this.lottoNumbers = List.copyOf(winLottoNumbers.lottoNumbers);
   }
 
   public List<Integer> getLottoNumbers() {

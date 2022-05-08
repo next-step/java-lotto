@@ -16,13 +16,21 @@ public enum Prizes {
     this.prize = prize;
   }
 
-  public static Money of(int count) {
+  public static Money getPrizeMoney(int count) {
     return Arrays.stream(values())
         .filter(prizes -> prizes.matchCount == count)
         .findAny()
         .map(prizes -> prizes.prize)
         .orElse(Money.ZERO);
   }
+
+  public static Prizes of(int count) {
+    return Arrays.stream(values())
+        .filter(prizes -> prizes.matchCount == count)
+        .findAny()
+        .orElse(null);
+  }
+
 
   public Money getPrize() {
     return prize;

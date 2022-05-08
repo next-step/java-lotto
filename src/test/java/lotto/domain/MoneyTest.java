@@ -21,6 +21,6 @@ public class MoneyTest {
   @ParameterizedTest
   @CsvSource(value = {"999, 1000, true", "1000, 1000, false"})
   void lessThan(int moenyA, int moneyB, boolean expect) {
-    assertThat(Money.of(moenyA).lessThan(moneyB)).isEqualTo(expect);
+    assertThat(Money.of(moenyA).lessThan(Money.of(moneyB))).isEqualTo(expect);
   }
 }

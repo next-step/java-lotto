@@ -7,19 +7,21 @@ import java.util.stream.IntStream;
 
 public class LotteryRetailer {
 
-  public static final int PRICE_PER_PLAY_FOR_LOTTO = 1000;
+  public static final Money PRICE_PER_PLAY_FOR_LOTTO = Money.of(1000);
   public static final String PRICE_EXCEPTION_MESSAGE = "로또 1장의 가격은 1000원 입니다";
 
-  public List<LottoTicket> sell(Money purchaseAmount, LottoNumberGenerator lottoNumberGenerator) {
+  public LottoTickets sell(Money purchaseAmount, LottoNumberGenerator lottoNumberGenerator) {
     checkGreaterThanMinimumPrice(purchaseAmount);
 
-    return IntStream.range(0, getAvailableLottoTicketCount(purchaseAmount))
+    List<LottoTicket> lottoTickets = IntStream.range(0,
+            getAvailableLottoTicketCount(purchaseAmount))
         .mapToObj(i -> createLottoTicket(lottoNumberGenerator))
         .collect(toList());
+    return new LottoTickets(lottoTickets);
   }
 
   private int getAvailableLottoTicketCount(Money receivedMoney) {
-    return receivedMoney.divide(PRICE_PER_PLAY_FOR_LOTTO);
+    return receivedMoney.divide(PRICE_PER_PLAY_FOR_LOTTO).value();
   }
 
   private void checkGreaterThanMinimumPrice(Money purchaseMoney) {
@@ -34,13 +36,5 @@ public class LotteryRetailer {
 
   private List<Integer> createLottoNumbers(LottoNumberGenerator lottoNumberGenerator) {
     return lottoNumberGenerator.generate();
-  }
-
-  public Money exchange(LottoTicket lottoTicket, LottoTicket winLottoTicket) {
-    if (winLottoTicket == null) {
-      throw new IllegalArgumentException("지난 주 당첨 번호를 입력해 주세요.");
-    }
-    int count = lottoTicket.countMatched(winLottoTicket);
-    return Prizes.of(count);
   }
 }

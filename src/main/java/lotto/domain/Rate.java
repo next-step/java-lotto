@@ -35,4 +35,8 @@ public class Rate {
   public String toString() {
     return String.valueOf(rate);
   }
+
+  public double getRate() {
+    return rate;
+  }
 }

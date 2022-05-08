@@ -15,7 +15,7 @@ class PrizesTest {
   @ParameterizedTest
   @MethodSource("provideForPrizes")
   void prizes(int count, Money prize) {
-    assertThat(Prizes.of(count)).isEqualTo(prize);
+    assertThat(Prizes.getPrizeMoney(count)).isEqualTo(prize);
   }
 
   private static Stream<Arguments> provideForPrizes() {
