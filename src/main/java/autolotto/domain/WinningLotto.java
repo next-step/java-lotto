@@ -2,22 +2,22 @@ package autolotto.domain;
 
 public class WinningLotto {
     private final LottoNumbers lottoNumbers;
-    private final int bonusBall;
+    private final LottoNumber bonusBall;
 
     public WinningLotto(LottoNumbers lottoNumbers) {
-        this(lottoNumbers, 0);
+        this(lottoNumbers, null);
     }
 
-    public WinningLotto(LottoNumbers lottoNumbers, int bonusBall) {
+    public WinningLotto(LottoNumbers lottoNumbers, LottoNumber bonusBall) {
         this.lottoNumbers = lottoNumbers;
         this.bonusBall = bonusBall;
     }
 
-    public boolean contains(int number) {
+    public boolean contains(LottoNumber number) {
         return lottoNumbers.contains(number);
     }
 
-    public int getBonusBall() {
+    public LottoNumber getBonusBall() {
         return bonusBall;
     }
 }

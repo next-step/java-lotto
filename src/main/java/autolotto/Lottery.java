@@ -16,7 +16,7 @@ public class Lottery {
     private static Lottos createLotto() {
         int amount = LottoInput.askAmount();
         int totalQuantity = Lottos.getQuantity(amount);
-//        int lottoQuantity = Lottos.getQuantity(amount);
+//        int lottoQuantity = Lottos.getQuantity(amount); // remove
         int manualQuantity = LottoInput.askManualLottoQuantity();
         int autoQuantity = totalQuantity - manualQuantity;
 //        LottoOutput.printQuantity(lottoQuantity); // remove
@@ -32,8 +32,8 @@ public class Lottery {
     }
 
     private static WinningLotto createWinningNumbers() {
-        Set<Integer> winningNumbers = LottoInput.askWinningNumber();
-        int bonusBall = LottoInput.askBonusBall(winningNumbers);
+        Set<LottoNumber> winningNumbers = LottoInput.askWinningNumber();
+        LottoNumber bonusBall = LottoInput.askBonusBall(winningNumbers);
 
         return new WinningLotto(new LottoNumbers(winningNumbers), bonusBall);
     }

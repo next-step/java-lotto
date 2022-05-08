@@ -7,16 +7,16 @@ import java.util.Set;
 
 public class LottoNumbers {
     private static final int LOTTO_NUMBER = 6;
-    private Set<Integer> lottoNumbers;
+    private Set<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(Set<Integer> lottoNumbers) {
+    public LottoNumbers(Set<LottoNumber> lottoNumbers) {
         if (isNotLottoSize(lottoNumbers)) {
             throw new LottoException(LottoExceptionCode.INVALID_LOTTO_NUMBER_COUNT, lottoNumbers.toString());
         }
         this.lottoNumbers = lottoNumbers;
     }
 
-    private boolean isNotLottoSize(Set<Integer> lottoNumbers) {
+    private boolean isNotLottoSize(Set<LottoNumber> lottoNumbers) {
         return lottoNumbers.size() != LOTTO_NUMBER;
     }
 
@@ -26,8 +26,9 @@ public class LottoNumbers {
                 .count();
     }
 
-    public boolean contains(int number) {
-        return lottoNumbers.contains(number);
+    public boolean contains(LottoNumber number) {
+        return lottoNumbers
+                .contains(number);
     }
 
     public boolean checkBonus(WinningLotto winningLotto) {

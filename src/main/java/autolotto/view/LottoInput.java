@@ -1,11 +1,11 @@
 package autolotto.view;
 
+import autolotto.domain.LottoNumber;
 import autolotto.domain.LottoNumberPattern;
 import autolotto.exception.LottoException;
 import autolotto.exception.LottoExceptionCode;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,41 +28,25 @@ public class LottoInput {
         return purchaseAmount;
     }
 
-    public static Set<Integer> askWinningNumber() {
+    public static Set<LottoNumber> askWinningNumber() {
         System.out.println(WINNING_NUMBER_QUESTION);
         String winningNumberInput = scanner.nextLine();
 
-        List<String> splitedNumbers = Arrays.stream(winningNumberInput.split(DELIMITER))
+        return Arrays.stream(winningNumberInput.split(DELIMITER))
                 .map(String::trim)
-                .collect(Collectors.toList());
-
-        boolean isNumber = splitedNumbers.stream()
-                .allMatch(lottoNumberPattern::match);
-
-        if (!isNumber) {
-            throw new LottoException(LottoExceptionCode.INVALID_LOTTO_NUMBER_TYPE, winningNumberInput);
-        }
-
-        return splitedNumbers.stream()
-                .map(Integer::parseInt)
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet());
     }
 
-    public static int askBonusBall(Set<Integer> winningNumbers) {
+    public static LottoNumber askBonusBall(Set<LottoNumber> winningNumbers) {
         System.out.println("보너스 볼을 입력해 주세요.");
         String bonusBallInput = scanner.nextLine();
 
-        boolean isNumber = lottoNumberPattern.match(bonusBallInput);
-        if (!isNumber) {
-            throw new LottoException(LottoExceptionCode.INVALID_LOTTO_NUMBER_TYPE, bonusBallInput);
-        }
-
-        int bonusBall = Integer.parseInt(bonusBallInput);
-
-        if (winningNumbers.contains(bonusBall)) {
+        LottoNumber lottoNumber = new LottoNumber(bonusBallInput);
+        if (winningNumbers.contains(lottoNumber)) {
             throw new LottoException(LottoExceptionCode.DUPLICATED_LOTTO_NUMBER, bonusBallInput);
         }
-        return bonusBall;
+        return lottoNumber;
     }
 
     public static int askManualLottoQuantity() {

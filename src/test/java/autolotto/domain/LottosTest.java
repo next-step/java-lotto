@@ -8,14 +8,14 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottosTest {
+class LottosTest extends LottoNumbersFactory {
 
     private Lottos lottos;
 
     @BeforeEach
     void setUp() {
-        LottoNumbers lottoNumbers1 = new LottoNumbers(Set.of(1, 2, 3, 4, 5, 6));
-        LottoNumbers lottoNumbers2 = new LottoNumbers(Set.of(1, 2, 3, 4, 5, 43));
+        LottoNumbers lottoNumbers1 = new LottoNumbers(from(Set.of(1, 2, 3, 4, 5, 6)));
+        LottoNumbers lottoNumbers2 = new LottoNumbers(from(Set.of(1, 2, 3, 4, 5, 43)));
         lottos = new Lottos(List.of(lottoNumbers1, lottoNumbers2));
     }
 
