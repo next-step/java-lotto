@@ -29,4 +29,17 @@ class LottoRankTest {
     void valueOfMatchCount_잘못된_일치하는_숫자갯수(int count) {
         assertThatThrownBy(() -> LottoRank.findLottoRank(count, false)).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "MISS, 10, 0",
+            "FIFTH, 10, 50_000",
+            "FOURTH, 10, 500_000",
+            "THIRD, 10, 15_000_000",
+            "SECOND, 10, 300_000_000",
+            "FIRST, 1, 2_000_000_000"
+    })
+    void countWinningMoney_해당등수에_해당하는_로또갯수만큼의_금액(String lottoRankString, int matchLottoCount, int countWinningPrice) {
+        assertThat(LottoRank.valueOf(lottoRankString).countWinningMoney(matchLottoCount)).isEqualTo(countWinningPrice);
+    }
 }

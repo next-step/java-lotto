@@ -24,6 +24,10 @@ public enum LottoRank {
         return this.winningMoney;
     }
 
+    public int countWinningMoney(int matchLottoCount) {
+        return this.winningMoney * matchLottoCount;
+    }
+
     LottoRank(int matchCount, int winningMoney) {
         this.matchCount = matchCount;
         this.winningMoney = winningMoney;

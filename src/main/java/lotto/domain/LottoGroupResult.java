@@ -27,7 +27,7 @@ public class LottoGroupResult {
     }
 
     private int winningPrice() {
-        return this.lottoRankCount.entrySet().stream().mapToInt(result -> result.getKey().winningMoney() * result.getValue()).sum();
+        return this.lottoRankCount.entrySet().stream().mapToInt(result -> result.getKey().countWinningMoney(result.getValue())).sum();
     }
 
     private void validateLottoGroupResult(Map<LottoRank, Integer> lottoGroupResult) {
