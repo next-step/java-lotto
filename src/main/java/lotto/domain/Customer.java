@@ -1,40 +1,51 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Customer {
-    private int money;
-    private final List<Lotto> lottos = new ArrayList<>();
+    private double money;
+    private double totalAmount;
+    private Lottos lottos;
 
     public Customer(int money) {
         this.money = money;
+        this.totalAmount = money;
+        this.lottos = new Lottos();
     }
 
     public Customer(int money, Lotto lotto) {
-        this(money);
-        lottos.add(lotto);
+        this.totalAmount = 14000;
+        this.money = 0;
+        this.lottos = new Lottos(lotto);
     }
 
-    public Lotto buy(int price) {
-        this.money -= price;
-
-        Lotto lotto = new Lotto();
-        lottos.add(lotto);
-        return lotto;
-    }
-
-
-    public boolean balanceCheck(int money) {
-        return this.money == money;
-    }
-
-    public List<List<Integer>> compareTo(List<Integer> prevLottoNumbers) {
-        List<List<Integer>> result = new ArrayList<>();
-
-        for (Lotto lotto : lottos) {
-            result.add(lotto.contains(prevLottoNumbers));
+    public void buy(int price) {
+        while (hasMoney()) {
+            lottos.createLotto();
+            this.money -= price;
         }
-        return result;
+    }
+
+    private boolean hasMoney() {
+        return this.money > 0;
+    }
+
+    public void printLottoList() {
+        lottos.printLottoList();
+    }
+
+    public List<Rank> getWinningList(List<Integer> winningNumbers) {
+        return lottos.getWinningList(winningNumbers);
+    }
+
+    private void sumMoney(int money) {
+        this.money += money;
+    }
+
+    public double profit(List<Rank> winningList) {
+        winningList.stream()
+                .forEach(rank -> sumMoney(rank.getMoney()));
+
+        return Math.floor((money / totalAmount) * 100) / 100.0;
     }
 }

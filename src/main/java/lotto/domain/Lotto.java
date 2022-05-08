@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class Lotto {
     private Numbers numbers;
+    private int price;
 
     public Lotto() {
         this.numbers = new Numbers();
@@ -14,8 +15,8 @@ public class Lotto {
         this.numbers = new Numbers(numbers);
     }
 
-    public int size() {
-        return numbers.size();
+    public int matchCount(List<Integer> winningNumbers) {
+        return numbers.matchCount(winningNumbers);
     }
 
     @Override
@@ -36,7 +37,4 @@ public class Lotto {
         return "numbers=" + numbers + '}';
     }
 
-    public List<Integer> contains(List<Integer> prevLottoNumbers) {
-        return numbers.contains(prevLottoNumbers);
-    }
 }
