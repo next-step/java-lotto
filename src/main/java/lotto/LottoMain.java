@@ -5,6 +5,8 @@ import lotto.domain.Winnings;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import static lotto.util.Ratio.lottoPer;
+
 public class LottoMain {
 
     public static void main(String[] args) {
@@ -20,7 +22,7 @@ public class LottoMain {
         String[] inputNumbers = inputView.inputLastWinningNumbers();
         Winnings winnings = new Winnings(inputNumbers);
         draw.checkWinnings(winnings);
-        resultView.checkWinningsLotto(draw.winnings());
-        resultView.printEarningsRatio(winnings.winningsRewards(), price);
+        resultView.printWinningsLotto(draw.winnings());
+        resultView.printEarningsRatio(lottoPer(winnings.winningsRewards(), price));
     }
 }
