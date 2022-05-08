@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class LottoGame {
 
-    private Lottos lottos = new Lottos();
+    private Lottos lottos;
 
     private Money money;
     private Lotto winningNumbers;
@@ -16,41 +16,41 @@ public class LottoGame {
     public void start() {
         inputBuyMoney();
 
+        createMyLottos();
+
         viewMyLottoNumbers();
 
-        inputWinningLottoNumbers();
+        inputAndCreateWinningLottoNumbers();
 
         viewResult();
     }
 
     private void inputBuyMoney() {
         money = new Money(InputView.inputBuyMoney());
-
-        createMyLottos();
     }
 
     private void createMyLottos() {
-        lottos.createLottoNumbers(money.changeMoneyToLottoNum());
+        lottos = new Lottos(money.changeMoneyToLottoNum());
     }
 
     private void viewMyLottoNumbers() {
         ResultView.viewLottoNumbers(lottos);
     }
 
-    private void inputWinningLottoNumbers() {
+    private void inputAndCreateWinningLottoNumbers() {
         winningNumbers = new Lotto(InputView.inputWinningLottoNumbers());
     }
 
     private void viewResult() {
-        Map<WinningRankInfo, Integer> totalRankInfo = LottoResultMachine.findWinningLotto(lottos, winningNumbers);
+        Map<EqualLottoCntInfo, Integer> resultInfo = lottos.findWinningLotto(winningNumbers);
 
-        ResultView.viewResultBoard(totalRankInfo);
+        ResultView.viewResultBoard(resultInfo);
 
-        viewYield(totalRankInfo);
+        viewYield(resultInfo);
     }
 
-    private void viewYield(Map<WinningRankInfo, Integer> totalRankInfo) {
-        int totalWinningMoney = LottoResultMachine.calcTotalWinningMoney(totalRankInfo);
+    private void viewYield(Map<EqualLottoCntInfo, Integer> resultInfo) {
+        int totalWinningMoney = LottoResultMachine.calcTotalWinningMoney(resultInfo);
 
         ResultView.viewLottoYield(LottoResultMachine.calculateYield(totalWinningMoney, money.getMoney()));
     }

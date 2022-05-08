@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Lotto {
 
-    private static final String COMMA = ", ";
+    private static final String DELIMITER = ", ";
     private static final int WINNING_NUMBER_SIZE = 6;
 
     private List<Number> myNumbers = new ArrayList<>();
@@ -21,7 +21,7 @@ public class Lotto {
     }
 
     public Lotto(String winningNumbers) {
-        String[] winningNumberArr = winningNumbers.split(COMMA);
+        String[] winningNumberArr = winningNumbers.split(DELIMITER);
 
         validate(winningNumberArr);
 
@@ -44,23 +44,27 @@ public class Lotto {
 
     private void validateSameLottoNumber(String[] winningNumberArr) {
         ArrayList<String> tmpList = new ArrayList<>(Arrays.asList(winningNumberArr));
-        if (tmpList.size() != tmpList.stream().distinct().count()) {
+        if (tmpList.size() != sizeOfDuplicatesRemoved(tmpList)) {
             throw new SameNumberException("중복된 로또 번호가 있습니다.");
         }
+    }
+
+    private long sizeOfDuplicatesRemoved(ArrayList<String> tmpList) {
+        return tmpList.stream().distinct().count();
     }
 
     public int findWinningLottoCnt(Lotto winningNumbers) {
         int cnt = 0;
 
         for (Number number : myNumbers) {
-            cnt = findWinningLottoCnt(cnt, number.getNumber(), winningNumbers);
+            cnt = findWinningLottoCnt(cnt, number, winningNumbers);
         }
 
         return cnt;
     }
 
-    private int findWinningLottoCnt(int cnt, int answerNum, Lotto winningNumbers) {
-        if (winningNumbers.getList().contains(answerNum)) {
+    private int findWinningLottoCnt(int cnt, Number number, Lotto winningNumbers) {
+        if (winningNumbers.getList().contains(number)) {
             cnt += 1;
         }
 
@@ -74,5 +78,4 @@ public class Lotto {
     public int getLottoNumber(int idx) {
         return myNumbers.get(idx).getNumber();
     }
-
 }

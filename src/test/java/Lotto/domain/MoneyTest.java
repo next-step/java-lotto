@@ -16,6 +16,7 @@ public class MoneyTest {
         Assertions.assertThatExceptionOfType(TooSmallMoneyException.class).isThrownBy(
                 () -> new Money(money).getMoney()
         );
+
     }
 
     @ParameterizedTest

@@ -1,39 +1,9 @@
 package Lotto.view;
 
 import Lotto.domain.Lottos;
-import Lotto.domain.WinningRankInfo;
-import Lotto.exception.NotFoundRankException;
+import Lotto.domain.EqualLottoCntInfo;
 
 import java.util.Map;
-import java.util.stream.Stream;
-
-enum ResultRankMessage {
-    FIRST(WinningRankInfo.FIRST,"6개 일치 (2000000000원)"),
-    SECOND(WinningRankInfo.SECOND, "5개 일치 (1500000원)"),
-    THIRD(WinningRankInfo.THIRD, "4개 일치 (50000원)"),
-    FOURTH(WinningRankInfo.FOURTH, "3개 일치 (5000원)"),
-    FIFTH(WinningRankInfo.FIFTH,  ""),
-    SIX(WinningRankInfo.SIX,  ""),
-    NONE(WinningRankInfo.NONE,  "");
-
-    private final WinningRankInfo rankInfo;
-    private final String resultMessage;
-
-    ResultRankMessage(WinningRankInfo rankInfo, String message) {
-        this.rankInfo = rankInfo;
-        this.resultMessage = message;
-    }
-
-    public static ResultRankMessage findRankMessage(WinningRankInfo rankInfo) {
-        return Stream.of(values())
-                .filter(ResultRankMessage -> (ResultRankMessage.rankInfo == (rankInfo)))
-                .findFirst()
-                .orElseThrow(() -> new NotFoundRankException("등수를 찾을 수 없습니다."));
-    }
-
-    public String getRankMessage() { return resultMessage; }
-}
-
 
 public class ResultView {
 
@@ -62,19 +32,22 @@ public class ResultView {
         }
     }
 
-    public static void viewResultBoard(Map<WinningRankInfo, Integer> result) {
+    public static void viewResultBoard(Map<EqualLottoCntInfo, Integer> result) {
         System.out.println("당첨 통계");
         System.out.println("--------");
 
-        for (WinningRankInfo rank : result.keySet()) {
-            viewResultMessage(result, rank);
+        for (EqualLottoCntInfo equalLottoCntInfo : EqualLottoCntInfo.values()) {
+            viewResultMessage(result, equalLottoCntInfo);
         }
-    }
+            }
 
-    private static void viewResultMessage(Map<WinningRankInfo, Integer> result, WinningRankInfo rank) {
-        if (rank.isValidRank()) {
-            ResultRankMessage rankMessage = ResultRankMessage.findRankMessage(rank);
-            System.out.println(rankMessage.getRankMessage() + "- " + result.get(rank) + "개");
+    private static void viewResultMessage(Map<EqualLottoCntInfo, Integer> result, EqualLottoCntInfo equalLottoCntInfo) {
+        if (equalLottoCntInfo.isValidEqualCnt()) {
+            Integer sameRankCount = result.get(equalLottoCntInfo);
+            if (sameRankCount == null) {
+                sameRankCount = 0;
+            }
+            System.out.println(equalLottoCntInfo.getEqualCnt() + "개 일치 (" + equalLottoCntInfo.getWinningMoney() + "원)" + " - " + sameRankCount + "개");
         }
     }
 

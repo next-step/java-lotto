@@ -2,7 +2,7 @@ package Lotto.domain;
 
 import Lotto.exception.SameNumberException;
 import Lotto.exception.WrongNumberFormatException;
-import org.junit.jupiter.api.Assertions;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -13,6 +13,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 
@@ -30,14 +31,14 @@ public class LottoTest {
     @MethodSource("lottoArgs")
     @DisplayName("당첨된 번호가 몇개인지 확인한다")
     public void checkEqualLottoNumber(Lotto lotto, Lotto winningLotto, int equalNum) {
-        Assertions.assertEquals(lotto.findWinningLottoCnt(winningLotto), equalNum);
+        Assertions.assertThat(lotto.findWinningLottoCnt(winningLotto)).isEqualTo(equalNum);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4,5,6", "1, 2, 3"})
     @DisplayName("당첨번호의 갯수나 형식이 맞지않으면 예외를 던진다")
     public void validateWrongNumberFormatTest(String numbers) {
-        Assertions.assertThrows(WrongNumberFormatException.class, (
+        assertThrows(WrongNumberFormatException.class, (
         ) -> new Lotto(numbers));
     }
 
@@ -45,7 +46,7 @@ public class LottoTest {
     @ValueSource(strings = {"1, 1, 1, 1, 1, 1", "1, 2, 3, 4, 5, 5"})
     @DisplayName("당첨숫자 중에 중복이 있으면 예외를 던진다")
     public void validateSameNumberFormatTest(String numbers) {
-        Assertions.assertThrows(SameNumberException.class, (
+        assertThrows(SameNumberException.class, (
         ) -> new Lotto(numbers));
     }
 }

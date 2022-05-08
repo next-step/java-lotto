@@ -16,25 +16,25 @@ public class LottoResultMachineTest {
 
     private static Stream<Arguments> lottoWinningMaps() {
         return Stream.of(
-                arguments(new HashMap<WinningRankInfo, Integer>()
+                arguments(new HashMap<EqualLottoCntInfo, Integer>()
                 {{
-                    put(WinningRankInfo.FIRST, 1);
+                    put(EqualLottoCntInfo.FIRST, 1);
                 }}, 2000000000),
-                arguments(new HashMap<WinningRankInfo, Integer>()
+                arguments(new HashMap<EqualLottoCntInfo, Integer>()
                 {{
-                    put(WinningRankInfo.SECOND, 1);
+                    put(EqualLottoCntInfo.SECOND, 1);
                 }}, 1500000),
-                arguments(new HashMap<WinningRankInfo, Integer>()
+                arguments(new HashMap<EqualLottoCntInfo, Integer>()
                 {{
-                    put(WinningRankInfo.FIRST, 1);
-                    put(WinningRankInfo.SECOND, 1);
+                    put(EqualLottoCntInfo.FIRST, 1);
+                    put(EqualLottoCntInfo.SECOND, 1);
                 }}, 2001500000),
-                arguments(new HashMap<WinningRankInfo, Integer>()
+                arguments(new HashMap<EqualLottoCntInfo, Integer>()
                 {{
-                    put(WinningRankInfo.FIRST, 1);
-                    put(WinningRankInfo.SECOND, 1);
-                    put(WinningRankInfo.THIRD, 1);
-                    put(WinningRankInfo.FOURTH, 1);
+                    put(EqualLottoCntInfo.FIRST, 1);
+                    put(EqualLottoCntInfo.SECOND, 1);
+                    put(EqualLottoCntInfo.THIRD, 1);
+                    put(EqualLottoCntInfo.FOURTH, 1);
                 }}, 2001555000)
         );
     }
@@ -42,7 +42,7 @@ public class LottoResultMachineTest {
     @ParameterizedTest
     @MethodSource("lottoWinningMaps")
     @DisplayName("총 당첨금액을 구한다")
-    public void winningTotalMoneyTest(Map<WinningRankInfo, Integer> winningRanks, int winningTotalMoney) {
+    public void winningTotalMoneyTest(Map<EqualLottoCntInfo, Integer> winningRanks, int winningTotalMoney) {
         Assertions.assertThat(LottoResultMachine.calcTotalWinningMoney(winningRanks)).isEqualTo(winningTotalMoney);
     }
 
