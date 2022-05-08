@@ -1,6 +1,5 @@
 package lotto;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.List;
@@ -47,26 +46,5 @@ class LottoTicketTest {
     Assertions.assertThatIllegalArgumentException()
         .isThrownBy(() -> new LottoTicket(lottoNumbers))
         .withMessage("로또 번호가 중복될 수 없습니다");
-  }
-
-  @DisplayName("로또 번호와 당첨 번호가 몇개나 일치하는지 계산")
-  @ParameterizedTest
-  @MethodSource("provideForMatchCount")
-  void matchCount(List<Integer> winNumbers, List<Integer> lottoNumbers, int matchCount) {
-    LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-    assertThat(lottoTicket.countMatched(winNumbers)).isEqualTo(matchCount);
-  }
-
-  private static Stream<Arguments> provideForMatchCount() {
-    List<Integer> winNumbers = List.of(1, 2, 3, 4, 5, 6);
-    return Stream.of(
-        arguments(winNumbers, List.of(1, 2, 3, 4, 5, 6), 6),
-        arguments(winNumbers, List.of(1, 2, 3, 4, 5, 7), 5),
-        arguments(winNumbers, List.of(1, 2, 3, 4, 7, 8), 4),
-        arguments(winNumbers, List.of(1, 2, 3, 7, 8, 9), 3),
-        arguments(winNumbers, List.of(1, 2, 7, 8, 9, 10), 2),
-        arguments(winNumbers, List.of(1, 7, 8, 9, 10, 11), 1),
-        arguments(winNumbers, List.of(7, 8, 9, 10, 11, 12), 0)
-    );
   }
 }
