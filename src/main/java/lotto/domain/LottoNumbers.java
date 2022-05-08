@@ -19,8 +19,7 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers ofRandom() {
-        List<LottoNumber> randomLottoNumbers = RandomLottoNumbersGenerator.generate();
-        return new LottoNumbers(randomLottoNumbers);
+        return new LottoNumbers(RandomLottoNumbersGenerator.generate());
     }
 
     private static List<LottoNumber> toLottoNumbers(String lottoNumbersString) {
