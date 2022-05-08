@@ -1,4 +1,7 @@
-package lottoauto;
+package lottoauto.view;
+
+import lottoauto.domain.Lottos;
+import lottoauto.domain.RatingStatics;
 
 public class ResultView {
     private ResultView() {}

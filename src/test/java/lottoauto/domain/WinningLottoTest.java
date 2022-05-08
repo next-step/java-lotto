@@ -1,5 +1,8 @@
-package lottoauto;
+package lottoauto.domain;
 
+import lottoauto.domain.Lotto;
+import lottoauto.domain.Rating;
+import lottoauto.domain.WinningLotto;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;

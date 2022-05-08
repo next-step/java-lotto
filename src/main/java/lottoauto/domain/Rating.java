@@ -1,6 +1,9 @@
-package lottoauto;
+package lottoauto.domain;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 public enum Rating {
     LOSING(0, 0),
@@ -9,8 +12,14 @@ public enum Rating {
     SECOND(5, 1500000),
     FIRST(6, 2000000000);
 
-    private int matchCount;
-    private int reward;
+    private final static Map<Integer, Rating> ratingCache = new HashMap<>();
+
+    static {
+        Arrays.stream(values()).forEach(rating -> ratingCache.put(rating.matchCount, rating));
+    }
+
+    private final int matchCount;
+    private final int reward;
 
     Rating(int matchCount, int reward) {
         this.matchCount = matchCount;
@@ -18,9 +27,7 @@ public enum Rating {
     }
 
     public static Rating from(int matchCount) {
-        return Arrays.stream(values())
-                .filter(rating -> rating.matchCount == matchCount)
-                .findFirst().orElse(LOSING);
+        return Optional.ofNullable(ratingCache.get(matchCount)).orElse(Rating.LOSING);
     }
 
     public int rewardAmount(int number) {

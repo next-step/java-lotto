@@ -1,5 +1,6 @@
-package lottoauto;
+package lottoauto.domain;
 
+import lottoauto.domain.LottoNumber;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
