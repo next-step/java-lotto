@@ -20,7 +20,8 @@ public class LottoMain {
         resultView.printLottos(draw);
 
         String[] inputNumbers = inputView.inputLastWinningNumbers();
-        Winnings winnings = new Winnings(inputNumbers);
+        int bonusNumber = inputView.inputBonusNumber();
+        Winnings winnings = new Winnings(inputNumbers, bonusNumber);
         draw.checkWinnings(winnings);
         resultView.printWinningsLotto(draw.winnings());
         resultView.printEarningsRatio(lottoEarningRatio(winnings.winningsRewards(), price));

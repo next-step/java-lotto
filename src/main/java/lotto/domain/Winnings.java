@@ -19,13 +19,13 @@ public class Winnings {
             REWARD_NONE, REWARD_NONE, REWARD_NONE,
             REWARD_MATCHED_THREE, REWARD_MATCHED_FOUR, REWARD_MATCHED_FIVE, REWARD_MATCHED_ALL};
 
-    public Winnings(String[] winningNumbers) {
-        this.winningNumbers = new WinningNumbers(parseWinningNumbers(winningNumbers));
+    public Winnings(String[] winningNumbers, int bonusNumber) {
+        this.winningNumbers = new WinningNumbers(parseWinningNumbers(winningNumbers), bonusNumber);
         this.recordMatched = new int[7];
     }
 
-    public Winnings(List<Integer> winningNumbers) {
-        this.winningNumbers = new WinningNumbers(winningNumbers);
+    public Winnings(List<Integer> winningNumbers, int bonusNumber) {
+        this.winningNumbers = new WinningNumbers(winningNumbers, bonusNumber);
         this.recordMatched = new int[7];
     }
 
