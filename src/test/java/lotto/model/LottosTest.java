@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import lotto.strategy.FixedNumberGenerateStrategy;
 import lotto.strategy.RandomNumberGenerateStrategy;
@@ -16,7 +17,7 @@ class LottosTest {
   @DisplayName("Lotto의 리스트가 Null이거나 Empty인 경우 예외처리를 한다")
   void exceptionLottosNullOrEmpty() {
     // given
-    List<Lotto> purchasedLottos = new ArrayList<>();
+    List<Lotto> purchasedLottos = Collections.emptyList();
 
     // when & then
     assertThatThrownBy(() -> new Lottos(purchasedLottos))
