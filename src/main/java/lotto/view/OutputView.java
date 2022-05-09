@@ -1,7 +1,7 @@
 package lotto.view;
 
-import java.util.Comparator;
 import java.util.Map;
+
 import lotto.model.LottoRank;
 import lotto.model.Lottos;
 
