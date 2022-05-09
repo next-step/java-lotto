@@ -21,7 +21,8 @@ public class LottoController {
         ResultView.printPurchaseMessage(registerLotts, purchasePrice / EACH_PRICE);
 
         String lastWeekWinningNumber = InputView.inputLastWeekWinningNumber();
-        Map<Ranking, Integer> winningMap = lottoService.registerWinningNumbers(lastWeekWinningNumber);
+        String bonusNumber = InputView.inputLastWeekBonusNumber();
+        Map<Ranking, Integer> winningMap = lottoService.registerWinningNumbers(lastWeekWinningNumber, bonusNumber);
         ResultView.printWinningMessage(winningMap, YieldCalculator.calculate(winningMap, purchasePrice - purchasePrice % EACH_PRICE));
     }
 }
