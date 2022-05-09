@@ -1,5 +1,6 @@
 package step2.domain;
 
+import step2.domain.strategy.LottoPickStrategy;
 import step2.domain.strategy.ManualPick;
 import step2.domain.strategy.RandomPick;
 
@@ -9,12 +10,14 @@ import java.util.List;
 public class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(List<String> manualPick, int autoCount) {
+    public Lottos(List<String> manualPick) {
         for (String pick : manualPick)
             lottos.add(new Lotto(new ManualPick(pick)));
+    }
 
+    public Lottos(int autoCount, LottoPickStrategy lottoPickStrategy) {
         for (int i = 0; i < autoCount; i++)
-            lottos.add(new Lotto(new RandomPick()));
+            lottos.add(new Lotto(lottoPickStrategy));
     }
 
     public int size() {
@@ -25,7 +28,7 @@ public class Lottos {
         return lottos.get(index).pick();
     }
 
-    public LottoWinners match(List<Integer> pickLottoNumberOfWeek, int bonusBall) {
+    public LottoWinners match(List<LottoNumber> pickLottoNumberOfWeek, LottoNumber bonusBall) {
         LottoWinners lottoWinners = new LottoWinners();
         for (Lotto lotto : lottos) {
             Rank rank = lotto.matching(pickLottoNumberOfWeek, bonusBall);
@@ -35,7 +38,11 @@ public class Lottos {
         return lottoWinners;
     }
 
-    public void add(Lotto lotto) {
-        lottos.add(lotto);
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
+    public void add(Lottos lottos) {
+        this.lottos.addAll(lottos.getLottos());
     }
 }

@@ -1,6 +1,7 @@
 package step2.controller;
 
 import step2.domain.*;
+import step2.domain.strategy.RandomPick;
 import step2.service.LottoGameService;
 import step2.view.InputView;
 import step2.view.ResultView;
@@ -27,7 +28,8 @@ public class LottoGameControl {
         List<String> manualPick = inputView.manualPick(manualCount);
         inputView.resultPurchase(manualCount, autoCount);
 
-        Lottos lottos = new Lottos(manualPick, autoCount);
+        Lottos lottos = new Lottos(manualPick);
+        lottos.add(new Lottos(autoCount, new RandomPick()));
         resultView.lottoCount(lottos.size());
         for (int i = 0; i < lottos.size(); i++) {
             resultView.displayLottoNumber(lottos.numbers(i));

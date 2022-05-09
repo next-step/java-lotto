@@ -18,7 +18,7 @@ public class Lotto {
         return pick;
     }
 
-    public Rank matching(List<Integer> pickLottoNumberOfWeek, int bonusBall) {
+    public Rank matching(List<LottoNumber> pickLottoNumberOfWeek, LottoNumber bonusBall) {
         int count = (int) pickLottoNumberOfWeek
                 .stream()
                 .filter(pick::contains)
