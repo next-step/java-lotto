@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exceptions.PurchaseLottoTicketException;
 import lotto.pattern.NumberGenerator;
 
 import java.util.ArrayList;
@@ -25,11 +26,11 @@ public class LottoTicketGroup {
 
     private static void validatePays(int money) {
         if (money < LOTTO_TICKET_PRICE) {
-            throw new IllegalArgumentException("1000원 이하로는 로또를 구매할 수 없습니다.");
+            throw new PurchaseLottoTicketException("1000원 이하로는 로또를 구매할 수 없습니다.");
         }
 
         if (money % LOTTO_TICKET_PRICE != 0) {
-            throw new IllegalArgumentException("로또는 1000원 단위로만 구매할 수 있습니다.");
+            throw new PurchaseLottoTicketException("로또는 1000원 단위로만 구매할 수 있습니다.");
         }
     }
 

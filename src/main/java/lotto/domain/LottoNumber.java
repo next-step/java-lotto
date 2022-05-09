@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exceptions.LottoNumberRangeException;
+
 import java.util.Objects;
 
 public class LottoNumber {
@@ -18,7 +20,7 @@ public class LottoNumber {
 
     private void validateLottoNumber(int i) {
         if (i < MIN_NUMBER || i > MAX_NUMBER) {
-            throw new IllegalArgumentException("로또번호는 1부터 45사이 숫자만 생성 가능합니다.");
+            throw new LottoNumberRangeException();
         }
     }
 
