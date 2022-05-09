@@ -14,14 +14,14 @@ public class Lottos {
     private final List<LottoNumbers> lottos;
     private final UserAmount userAmount;
 
-    public Lottos(int userAmount, String lottoOfUser) {
-        this.userAmount = new UserAmount(userAmount);
-        this.lottos = getRandomLottoNumbersWith(toLottoNumbers(lottoOfUser));
-    }
-
     protected Lottos(List<LottoNumbers> lottos) {
         this.userAmount = new UserAmount(lottos);
         this.lottos = lottos;
+    }
+
+    public Lottos(UserAmount userAmount, String lottoOfUser) {
+        this.userAmount = userAmount;
+        this.lottos = getRandomLottoNumbersWith(toLottoNumbers(lottoOfUser));
     }
 
     private static List<LottoNumbers> toLottoNumbers(String lottoOfUser) {

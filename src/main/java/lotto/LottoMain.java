@@ -3,17 +3,18 @@ package lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Lottos;
+import lotto.domain.UserAmount;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoMain {
     public static void main(String[] args) {
-        int userAmount = InputView.inputUserAmount();
+        UserAmount userAmount = InputView.inputUserAmount();
 
         int numberOfUserGenerateLotto = InputView.inputNumberOfUserGenerateLotto();
-        String lottoOfUser = InputView.inputLottoOfUser(numberOfUserGenerateLotto);
 
+        String lottoOfUser = InputView.inputLottoOfUser(numberOfUserGenerateLotto);
         Lottos lottos = new Lottos(userAmount, lottoOfUser);
         OutputView.outputLottoNumbers(lottos);
 
