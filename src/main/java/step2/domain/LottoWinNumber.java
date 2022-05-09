@@ -1,14 +1,13 @@
 package step2.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WinLottoNumber {
+public class LottoWinNumber {
     private final List<LottoNumber> winLottoNumber;
 
-    public WinLottoNumber(String input) {
+    public LottoWinNumber(String input) {
         if (input == null || input.isEmpty())
             throw new IllegalArgumentException("로또 당첨번호가 비어있습니다");
 

@@ -3,23 +3,15 @@ package step2.service;
 import step2.domain.LottoNumber;
 import step2.domain.LottoWinners;
 import step2.domain.Lottos;
-import step2.domain.WinLottoNumber;
+import step2.domain.LottoWinNumber;
 
 public class LottoGameService {
-    private WinLottoNumber winLottoNumber;
-    private LottoNumber bonusBall;
+    private final LottoWinNumber winLottoNumber;
+    private final LottoNumber bonusBall;
 
     public LottoGameService(String lottoNumbers, String bonusBall) {
-        pickLottoNumberOfWeek(lottoNumbers);
-        addBonusBall(bonusBall);
-    }
-
-    private void pickLottoNumberOfWeek(String input) {
-        winLottoNumber = new WinLottoNumber(input);
-    }
-
-    private void addBonusBall(String bonusBall) {
-        this. bonusBall = LottoNumber.create(bonusBall);
+        winLottoNumber = new LottoWinNumber(lottoNumbers);
+        this.bonusBall = LottoNumber.create(bonusBall);
     }
 
     public LottoWinners match(Lottos lottos) {
