@@ -6,6 +6,7 @@ import lotto.domain.LottoResult;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTickets;
 import lotto.domain.LottoVendingMachine;
+import lotto.domain.TicketCount;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -34,18 +35,24 @@ public class Lotto {
     }
 
     private LottoTickets vendLottoTickets() {
-        return vendManualTickets(InputView.inputManualTicketsCount())
+        TicketCount manualTicketsCount = InputView.inputManualTicketsCount();
+
+        if (manualTicketsCount.isZero()) {
+            return vendAutomaticTickets();
+        }
+
+        return vendManualTickets(manualTicketsCount)
                 .add(vendAutomaticTickets());
+    }
+
+    private LottoTickets vendManualTickets(TicketCount manualTicketsCount) {
+        return lottoVendingMachine.vend(
+                InputView.inputLottoNumbers(manualTicketsCount)
+        );
     }
 
     private LottoTickets vendAutomaticTickets() {
         return lottoVendingMachine.vend();
-    }
-
-    private LottoTickets vendManualTickets(int manualTicketsCount) {
-        return lottoVendingMachine.vend(
-                InputView.inputLottoNumbers(manualTicketsCount)
-        );
     }
 
     private LottoResult generateLottoResult() {

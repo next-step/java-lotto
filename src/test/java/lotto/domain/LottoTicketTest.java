@@ -7,6 +7,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static lotto.domain.LottoNumbers.generateLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LottoTicketTest {
     @Test
@@ -36,5 +39,15 @@ class LottoTicketTest {
         assertThat(new LottoTicket(generateLottoNumbers(1, 6), LottoTicketType.AUTO)
                 .check(generateLottoNumbers(1, 6), new LottoNumber(7)))
                 .isEqualTo(LottoPrize.FIRST);
+    }
+
+    @Test
+    void isSameTicketType은_type이_같으면_true를_반환한다() {
+        assertAll(
+                () -> assertTrue(new LottoTicket(generateLottoNumbers(1, 6), LottoTicketType.AUTO)
+                        .isSameTicketType(LottoTicketType.AUTO)),
+                () -> assertFalse(new LottoTicket(generateLottoNumbers(1, 6), LottoTicketType.AUTO)
+                        .isSameTicketType(LottoTicketType.MANUAL))
+        );
     }
 }

@@ -37,7 +37,7 @@ public class LottoTicket {
         return lottoNumbers;
     }
 
-    public LottoTicketType getLottoTicketType() {
-        return lottoTicketType;
+    public boolean isSameTicketType(LottoTicketType lottoTicketType) {
+        return this.lottoTicketType == lottoTicketType;
     }
 }

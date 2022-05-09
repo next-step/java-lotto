@@ -4,6 +4,7 @@ import lotto.domain.Amount;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoResult;
+import lotto.domain.TicketCount;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,9 +25,9 @@ public class InputView {
         return new Amount(SCANNER.nextLine());
     }
 
-    public static int inputManualTicketsCount() {
+    public static TicketCount inputManualTicketsCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return Integer.parseInt(SCANNER.nextLine().trim());
+        return new TicketCount(SCANNER.nextLine().trim());
     }
 
     public static LottoResult inputLottoResult() {
@@ -37,9 +38,9 @@ public class InputView {
         );
     }
 
-    public static List<LottoNumbers> inputLottoNumbers(int manualTicketsCount) {
+    public static List<LottoNumbers> inputLottoNumbers(TicketCount manualTicketsCount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        return IntStream.range(START_OF_RANGE, manualTicketsCount)
+        return IntStream.range(START_OF_RANGE, manualTicketsCount.getTicketCount())
                 .mapToObj(index -> inputLottoNumbers())
                 .collect(Collectors.toList());
     }

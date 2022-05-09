@@ -44,6 +44,8 @@ public class LottoTickets {
     }
 
     public long size(LottoTicketType lottoTicketType) {
-        return lottoTickets.stream().filter(lottoTicket -> lottoTicket.getLottoTicketType() == lottoTicketType).count();
+        return lottoTickets.stream()
+                .filter(lottoTicket -> lottoTicket.isSameTicketType(lottoTicketType))
+                .count();
     }
 }
