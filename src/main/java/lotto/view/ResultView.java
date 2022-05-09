@@ -1,10 +1,9 @@
 package lotto.view;
 
 import lotto.domain.Lottos;
-import lotto.domain.Ranking;
+import lotto.domain.RankingResult;
 
 import java.util.Collections;
-import java.util.Map;
 
 public class ResultView {
     private static final String PURCHASE_RESULT_MESSAGE = "%d개를 구매했습니다.";
@@ -19,12 +18,12 @@ public class ResultView {
         System.out.println(lottos.toString());
     }
 
-    public static void printWinningMessage(Map<Ranking, Integer> winningMap, double yield) {
+    public static void printWinningMessage(RankingResult rankingResult, double yield) {
         System.out.println(WINNING_RESULT_MESSAGE);
-        winningMap.keySet()
+        rankingResult.getWinningLottoMap().keySet()
                 .stream()
                 .sorted(Collections.reverseOrder())
-                .forEach(ranking -> System.out.printf((RANKING_RESULT_MESSAGE) + "%n", ranking.toString(), winningMap.get(ranking)));
+                .forEach(ranking -> System.out.printf((RANKING_RESULT_MESSAGE) + "%n", ranking.toString(), rankingResult.findRankingCount(ranking)));
 
         System.out.printf((TOTAL_YIELD_MESSAGE) + "%n", yield);
     }

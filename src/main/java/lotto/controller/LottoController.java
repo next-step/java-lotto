@@ -1,14 +1,9 @@
 package lotto.controller;
 
-import lotto.domain.Lottos;
-import lotto.domain.RandomNumberGenerator;
-import lotto.domain.Ranking;
+import lotto.domain.*;
 import lotto.service.LottoService;
-import lotto.util.YieldCalculator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-
-import java.util.Map;
 
 public class LottoController {
 
@@ -17,12 +12,15 @@ public class LottoController {
 
     public void startLotto() {
         int purchasePrice = InputView.inputPurchaseAmount();
-        Lottos registerLotts = lottoService.generateRandomLottos(new RandomNumberGenerator(), purchasePrice, EACH_PRICE);
-        ResultView.printPurchaseMessage(registerLotts, purchasePrice / EACH_PRICE);
+        Money purchaseMoney = new Money(purchasePrice - purchasePrice % EACH_PRICE);
+
+        Lottos registerLottos = lottoService.generateRandomLottos(new RandomNumberGenerator(), purchasePrice, EACH_PRICE);
+        ResultView.printPurchaseMessage(registerLottos, purchasePrice / EACH_PRICE);
 
         String lastWeekWinningNumber = InputView.inputLastWeekWinningNumber();
         String bonusNumber = InputView.inputLastWeekBonusNumber();
-        Map<Ranking, Integer> winningMap = lottoService.registerWinningNumbers(lastWeekWinningNumber, bonusNumber);
-        ResultView.printWinningMessage(winningMap, YieldCalculator.calculate(winningMap, purchasePrice - purchasePrice % EACH_PRICE));
+        RankingResult rankingResult = lottoService.registerWinningNumbers(lastWeekWinningNumber, bonusNumber);
+        ResultView.printWinningMessage(rankingResult, rankingResult.calculateProfit()
+                .profitRate(purchaseMoney));
     }
 }
