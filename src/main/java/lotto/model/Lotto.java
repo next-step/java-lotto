@@ -25,14 +25,14 @@ public class Lotto {
     return new Lotto(numberGenerateStrategy.generate());
   }
 
-  public static Lotto create(String winningLotto) {
-    String[] splitLottoNumbers = splitLotto(winningLotto);
-    List<LottoNumber> lottoNumbers = new ArrayList<>();
+  public static Lotto create(String lottoNumbers) {
+    String[] splitLottoNumbers = splitLotto(lottoNumbers);
+    List<LottoNumber> lottoNumbersGeneration = new ArrayList<>();
     for (String lottoNumber : splitLottoNumbers) {
-      lottoNumbers.add(LottoNumber.create(convertToNumber(lottoNumber)));
+      lottoNumbersGeneration.add(LottoNumber.create(convertToNumber(lottoNumber)));
     }
 
-    return create(lottoNumbers);
+    return create(lottoNumbersGeneration);
   }
 
   private static Lotto create(List<LottoNumber> winningLottoNumbers) {
