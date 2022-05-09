@@ -28,6 +28,14 @@ public enum Matched {
 
     private final int reward;
 
+    public int index() {
+        return index;
+    }
+
+    public int reward() {
+        return reward;
+    }
+
     public static Matched valueOf(int numberOfMatched, boolean isMatchedBonus) {
         Matched[] matcheds = values();
 

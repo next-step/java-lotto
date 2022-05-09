@@ -34,17 +34,19 @@ public class Winnings {
         for (int number : numbers) {
             matchedNumber += winningNumbers.checkNumber(number);
         }
-        recordNumberOfMatched(matchedNumber);
+        Matched matched = Matched.valueOf(matchedNumber, winningNumbers.checkBonus(numbers));
+        recordNumberOfMatched(matched.index());
     }
 
-    private void recordNumberOfMatched(int matchedNumber) {
-        this.recordMatched[matchedNumber]++;
+    private void recordNumberOfMatched(int index) {
+        this.recordMatched[index]++;
     }
 
     public int winningsRewards() {
         int winningsRewards = 0;
-        for (int i = 3; i < recordMatched.length; i++) {
-            winningsRewards += recordMatched[i] * rewards[i];
+        Matched[] matcheds = Matched.values();
+        for (int i = 0; i < recordMatched.length; i++) {
+            winningsRewards += recordMatched[i] * matcheds[i].reward();
         }
         return winningsRewards;
     }
