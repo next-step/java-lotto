@@ -14,6 +14,7 @@ class LottoPrizeTest {
                 () -> assertEquals(LottoPrize.THIRD, LottoPrize.of(new Match(5), false)),
                 () -> assertEquals(LottoPrize.FOURTH, LottoPrize.of(new Match(4), false)),
                 () -> assertEquals(LottoPrize.FIFTH, LottoPrize.of(new Match(3), false)),
+                () -> assertEquals(LottoPrize.NONE, LottoPrize.of(new Match(2), false)),
                 () -> assertEquals(LottoPrize.NONE, LottoPrize.of(new Match(1), false)),
                 () -> assertEquals(LottoPrize.NONE, LottoPrize.of(new Match(0), false))
         );

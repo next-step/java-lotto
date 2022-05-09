@@ -4,6 +4,7 @@ import lotto.domain.EarningRate;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoPrize;
 import lotto.domain.LottoStatistics;
+import lotto.domain.LottoTicketType;
 import lotto.domain.LottoTickets;
 
 import java.util.Arrays;
@@ -18,7 +19,7 @@ public class OutputView {
     }
 
     public static void printTickets(LottoTickets lottoTickets) {
-        System.out.printf("%s개를 구매했습니다.%n", lottoTickets.size());
+        System.out.printf("수동으로 %s장, 자동으로 %s장을 구매했습니다.%n", lottoTickets.size(LottoTicketType.MANUAL), lottoTickets.size(LottoTicketType.AUTO));
 
         lottoTickets.getLottoTickets().forEach(lottoTicket ->
                 printNumbers(lottoTicket.getLottoNumbers())
