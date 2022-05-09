@@ -56,12 +56,12 @@ public class InputView {
         }
     }
 
-    public static List<LottoNumbers> inputLottoOfUser(int numberOfUserGenereateLotto) {
+    public static List<LottoNumbers> inputLottoOfUser(int numberOfUserGenerateLotto) {
         System.out.println(Message.INPUT_LOTTOS_OF_USER);
         SCANNER.nextLine();
 
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < numberOfUserGenereateLotto; i++) {
+        for (int i = 0; i < numberOfUserGenerateLotto; i++) {
             String inputString = SCANNER.nextLine();
             lottoNumbers.add(new LottoNumbers(inputString));
         }
