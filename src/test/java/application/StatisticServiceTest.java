@@ -19,18 +19,15 @@ class StatisticServiceTest {
     List<Integer> mockWinningNumbers;
     List<Integer> mockLottoNumbers;
 
-    @BeforeEach
-    void setUp() {
+    @DisplayName("구매한 로또와 지난주 우승 번호와 매칭되는 개수 반환")
+    @Test
+    void getNumberOfMatches() {
         mockStatisticService = new StatisticService();
 
         mockLottoNumbers = new LinkedList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         mockWinningNumbers = new LinkedList<>(Arrays.asList(4, 5, 6, 7, 8, 9));
         mockLottoTicket = new LottoTicket(mockLottoNumbers);
-    }
 
-    @DisplayName("구매한 로또와 지난주 우승 번호와 매칭되는 개수 반환")
-    @Test
-    void getNumberOfMatches() {
         assertThat(mockStatisticService.getNumberOfMatches(mockLottoTicket, mockWinningNumbers))
                 .isEqualTo(3);
     }

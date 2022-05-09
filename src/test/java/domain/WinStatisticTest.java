@@ -13,13 +13,14 @@ class WinStatisticTest {
 
     @BeforeEach
     void setUp() {
-        mockEmptyStatistic = new WinStatistic();
         mockFullStatistic = new WinStatistic(3, 2, 5000);
     }
 
     @DisplayName("생성된 객체가 빈 값인지 확인")
     @Test
     void isEmpty() {
+        mockEmptyStatistic = new WinStatistic();
+
         assertThat(mockEmptyStatistic.isEmpty())
                 .isTrue();
     }

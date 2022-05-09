@@ -17,17 +17,6 @@ class OperationUtilTest {
     int mockPrizeAmount;
     int mockPurchasedAmount;
 
-    @BeforeEach
-    void setUp() {
-        mockInput = "1, 2, 3, 4, 5, 6";
-        mockNumbers = IntStream.rangeClosed(1, 6)
-                .boxed()
-                .collect(Collectors.toList());
-
-        mockPrizeAmount = 5000;
-        mockPurchasedAmount = 4000;
-    }
-
     @DisplayName("입력된 가격에 따라 구매 가능한 로또 횟수 반환")
     @Test
     void getNumberOfPurchasedTickets() {
@@ -37,12 +26,20 @@ class OperationUtilTest {
 
     @Test
     void splitStringToNumbers() {
+        mockInput = "1, 2, 3, 4, 5, 6";
+        mockNumbers = IntStream.rangeClosed(1, 6)
+                .boxed()
+                .collect(Collectors.toList());
+
         assertThat(OperationUtil.splitStringToNumbers(mockInput))
                 .isEqualTo(mockNumbers);
     }
 
     @Test
     void getRateOfReturn() {
+        mockPrizeAmount = 5000;
+        mockPurchasedAmount = 4000;
+
         double result = (double) 1.25;
 
         assertThat(OperationUtil.getRateOfReturn(mockPrizeAmount, mockPurchasedAmount))
