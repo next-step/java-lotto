@@ -1,6 +1,6 @@
 package lotto.dto.result;
 
-import lotto.constant.MatchResult;
+import lotto.constant.Rank;
 import lotto.domain.LottoGame;
 
 import java.util.ArrayList;
@@ -22,9 +22,9 @@ public class WinningStats {
 
     private static List<MatchStats> findMatchStatsList(LottoGame lottoGame) {
         List<MatchStats> matchStats = new ArrayList<>();
-        for (MatchResult matchResult : MatchResult.values()) {
-            int count = lottoGame.countMatchResult(matchResult);
-            matchStats.add(new MatchStats(count, matchResult));
+        for (Rank rank : Rank.values()) {
+            int count = lottoGame.countMatchResult(rank);
+            matchStats.add(new MatchStats(count, rank));
         }
         return matchStats;
     }

@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.constant.MatchResult;
+import lotto.constant.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +27,7 @@ class LottosTest {
     }
 
     @Test
-    @DisplayName("3개의 복권 중 2개가 MatchResult.Three 일때 MatchResult.Three 개수를 구하면 2개를 반환한다.")
+    @DisplayName("3개의 복권 중 2개가 4등 일때 4등의 개수를 구하면 2개를 반환한다.")
     void countMatchResult() {
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(new Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6)));
@@ -37,7 +37,7 @@ class LottosTest {
         Lottos lottos = new Lottos(lottoList);
         lottos.confirmAll(LottoNumbers.createWinningNumbers(new String[]{"1", "2", "3", "20", "21", "22"}));
 
-        assertThat(lottos.countMatchResult(MatchResult.THREE)).isEqualTo(2);
+        assertThat(lottos.countMatchResult(Rank.FIFTH)).isEqualTo(2);
     }
 
     private LottoNumbers createLottoNumbers(int... numbers) {

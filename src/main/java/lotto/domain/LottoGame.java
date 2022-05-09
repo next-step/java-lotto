@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.constant.MatchResult;
+import lotto.constant.Rank;
 
 public class LottoGame {
 
@@ -30,7 +30,7 @@ public class LottoGame {
         return lottos;
     }
 
-    public int countMatchResult(MatchResult matchResult) {
-        return lottos.countMatchResult(matchResult);
+    public int countMatchResult(Rank rank) {
+        return lottos.countMatchResult(rank);
     }
 }

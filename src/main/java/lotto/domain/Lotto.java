@@ -1,10 +1,10 @@
 package lotto.domain;
 
-import lotto.constant.MatchResult;
+import lotto.constant.Rank;
 
 public class Lotto {
 
-    private MatchResult matchResult;
+    private Rank rank;
     private final LottoNumbers lottoNumbers;
 
     public Lotto(LottoNumbers lottoNumbers) {
@@ -13,11 +13,11 @@ public class Lotto {
 
     public void confirm(LottoNumbers winningNumbers) {
         int matchCount = lottoNumbers.matchCount(winningNumbers);
-        this.matchResult = MatchResult.findByMatchCount(matchCount);
+        this.rank = Rank.valueOf(matchCount);
     }
 
-    public MatchResult findMatchResult() {
-        return matchResult;
+    public Rank findMatchResult() {
+        return rank;
     }
 
     public LottoNumbers lottoNumbers() {

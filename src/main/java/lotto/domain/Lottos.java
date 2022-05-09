@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.constant.MatchResult;
+import lotto.constant.Rank;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,17 +35,17 @@ public class Lottos {
         return lottos;
     }
 
-    public int countMatchResult(MatchResult matchResult) {
+    public int countMatchResult(Rank rank) {
         return (int) lottos.stream()
                 .map(Lotto::findMatchResult)
-                .filter(mr -> mr == matchResult)
+                .filter(mr -> mr == rank)
                 .count();
     }
 
     public int calculateTotalWinPrice() {
         return lottos.stream()
                 .map(Lotto::findMatchResult)
-                .mapToInt(MatchResult::winPrice)
+                .mapToInt(Rank::winPrice)
                 .sum();
     }
 }
