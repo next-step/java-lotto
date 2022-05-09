@@ -7,3 +7,22 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 테스트 리스트
+StatisticServiceTest
+* 구매한 로또와 지난주 우승 번호와 매칭되는 개수 반환
+
+LottoTicketTest
+* 로또 번호가 6자리이면서 모두 다 다른 값일 때 성공
+* 로또 번호가 6자리를 넘기면 예외 반환
+* 로또 번호가 동일한 숫자가 있으면 예외 반환
+
+WinStatisticTest
+* 생성된 객체가 빈 값인지 확인
+* 일치하는 숫자의 로또 갯수를 1 올리기
+* 당첨된 로또 횟수와 가격을 곱해서 반환
+
+OperationUtilTest
+* 입력된 가격에 따라 구매 가능한 로또 횟수 반환
+* 입력된 문자열을 6개의 정수로 이뤄진 리스트로 반환
+* 로또의 수익률을 계산해서 반환
