@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class StringCalculatorTest {
@@ -24,6 +25,12 @@ class StringCalculatorTest {
         assertThatIllegalArgumentException().isThrownBy(()-> {
             StringCalculator.classify(2, ")", 4);
         }).withMessage("사칙연산 기호만 입력받을 수 있습니다.");
+    }
+
+    @Test
+    @DisplayName("덧셈 테스트")
+    void plusTest() {
+        assertThat(Integer.parseInt(StringCalculator.classify(4, "+", 5))).isEqualTo(9);
     }
 
 }
