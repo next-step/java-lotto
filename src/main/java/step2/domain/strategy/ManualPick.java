@@ -20,7 +20,7 @@ public class ManualPick implements LottoPickStrategy {
     }
 
     private static LottoNumber apply(String input) {
-        return new LottoNumber(parseInt(input));
+        return LottoNumber.create(input);
     }
 
     @Override

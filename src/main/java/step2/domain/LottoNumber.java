@@ -1,12 +1,27 @@
 package step2.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber>{
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
+    private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
     private int value;
+
+    static {
+        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+            CACHE.put(i, new LottoNumber(i));
+        }
+    }
 
     public LottoNumber(int value) {
         this.value = value;
+    }
+
+    public static LottoNumber create(String input) {
+        return CACHE.get(Integer.parseInt(input));
     }
 
     @Override
@@ -17,10 +32,6 @@ public class LottoNumber implements Comparable<LottoNumber>{
     @Override
     public String toString() {
         return String.valueOf(value);
-    }
-
-    public static LottoNumber create(String input) {
-        return new LottoNumber(Integer.parseInt(input));
     }
 
     @Override
