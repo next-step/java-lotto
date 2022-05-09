@@ -20,12 +20,18 @@ public enum LottoRank {
         this.prizeMoney = prizeMoney;
     }
 
-    public static LottoRank toRank(Lotto lotto, WinningLotto winningLotto) {
-        long hitCount = lotto.calculateHitCount(winningLotto);
+    public static LottoRank toRank(long hitCount, boolean isContainBonusNumber) {
+        validateHitCountRange(hitCount);
         if (hitCount != BONUS_COUNT_THRESHOLD) {
             return withoutBonusNumber(hitCount);
         }
-        return withBonusNumber(lotto, winningLotto);
+        return withBonusNumber(isContainBonusNumber);
+    }
+
+    private static void validateHitCountRange(long hitCount) {
+        if (hitCount < 0 || hitCount > 6) {
+            throw new IllegalArgumentException("hitCount 범위는 1과 6사이여야 합니다.");
+        }
     }
 
     private static LottoRank withoutBonusNumber(Long hitCount) {
@@ -36,8 +42,8 @@ public enum LottoRank {
                 .orElse(ETC);
     }
 
-    private static LottoRank withBonusNumber(Lotto lotto, WinningLotto winningLotto) {
-        if (lotto.containBonusNumber(winningLotto)) {
+    private static LottoRank withBonusNumber(boolean isContainBonusNumber) {
+        if (isContainBonusNumber) {
             return SECOND;
         }
         return THIRD;

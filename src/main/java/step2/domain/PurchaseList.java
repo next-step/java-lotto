@@ -29,8 +29,14 @@ public class PurchaseList {
 
     public List<LottoRank> calculateRankEach(WinningLotto winningLotto) {
         return values.stream()
-                .map(lotto -> LottoRank.toRank(lotto, winningLotto))
+                .map(lotto -> calculateRank(lotto, winningLotto))
                 .collect(Collectors.toList());
+    }
+
+    private LottoRank calculateRank(Lotto lotto, WinningLotto winningLotto) {
+        long hitCount = lotto.calculateHitCount(winningLotto);
+        boolean isContainBonusNumber = lotto.containBonusNumber(winningLotto);
+        return LottoRank.toRank(hitCount, isContainBonusNumber);
     }
 
     @Override
