@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.UserAmount;
 
@@ -31,10 +32,15 @@ public class InputView {
         }
     }
 
-    public static String inputBonusBall() {
+    public static LottoNumber inputBonusBall() {
         System.out.println(Message.INPUT_BONUS_BALL);
 
-        return SCANNER.nextLine();
+        try {
+            return new LottoNumber(SCANNER.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+            return inputBonusBall();
+        }
     }
 
     public static int inputNumberOfUserGenerateLotto() {
