@@ -2,6 +2,7 @@ import application.LottoService;
 import application.StatisticService;
 import domain.LottoTicket;
 import domain.WinStatistic;
+
 import util.OperationUtil;
 import view.InputView;
 import view.ResultView;
