@@ -14,8 +14,8 @@ public class LottoMain {
     public static void main(String[] args) {
         UserAmount userAmount = InputView.inputUserAmount();
         int numberOfUserGenerateLotto = InputView.inputNumberOfUserGenerateLotto();
-
         List<LottoNumbers> lottoOfUser = InputView.inputLottoOfUser(numberOfUserGenerateLotto);
+
         Lottos lottos = new Lottos(userAmount, lottoOfUser);
         OutputView.outputLottoNumbers(lottos);
 
@@ -23,7 +23,6 @@ public class LottoMain {
         LottoNumber bonusBall = InputView.inputBonusBall();
 
         WinningLotto winningLotto = new WinningLotto(lottoNumbers, bonusBall);
-
         OutputView.outputWinningStatistics(lottos, winningLotto);
         OutputView.outputRevenueRate(lottos, winningLotto);
     }
