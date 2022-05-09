@@ -4,10 +4,10 @@ import java.util.*;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
+    private static final Map<Integer, LottoNumber> lottoNumberMap = new HashMap<>();
     private static final String LOTTO_NUMBER_FORMAT = "[0-9]*";
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
-    private static final Map<Integer, LottoNumber> lottoNumberMap = new HashMap<>();
 
     private final int number;
 
