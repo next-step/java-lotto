@@ -48,6 +48,22 @@ public class Lotto {
                 .count();
     }
 
+    public MatchResult countMatchNumber(Lotto lotto, LottoNumber bonus) {
+        int matchCount = (int) lottoNumbers.stream()
+                .filter(lotto.lottoNumbers::contains)
+                .count();
+
+        int matchBonus = 0;
+        if (lottoNumbers.contains(bonus))
+            matchBonus++;
+
+        return new MatchResult(matchCount, matchBonus);
+    }
+
+    public boolean hasBonusNumber(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
     private boolean checkAlreadyContainNumber(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
