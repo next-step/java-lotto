@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumber {
-    private static final String NOT_NUMBER_STRING_NOT_ALLOW_MESSAGE = "숫자가 아닌 문자열은 허용되지 않습니다.";
     private static final int START_LOTTO_NUMBER = 1;
     private static final int END_LOTTO_NUMBER = 45;
     private static final List<Integer> LOTTO_NUMBERS = IntStream.rangeClosed(START_LOTTO_NUMBER, END_LOTTO_NUMBER)
@@ -37,7 +36,7 @@ public class LottoNumber {
         try {
             return Integer.parseInt(string);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(NOT_NUMBER_STRING_NOT_ALLOW_MESSAGE);
+            throw new IllegalArgumentException(Message.NOT_NUMBER_STRING_NOT_ALLOW.toString());
         }
     }
 
@@ -67,5 +66,20 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
+    }
+
+    private enum Message {
+        NOT_NUMBER_STRING_NOT_ALLOW("숫자가 아닌 문자열은 허용되지 않습니다.");
+
+        private final String message;
+
+        Message(String message) {
+            this.message = message;
+        }
+
+        @Override
+        public String toString() {
+            return this.message;
+        }
     }
 }

@@ -24,7 +24,7 @@ public class LottoNumbers {
 
     private static List<LottoNumber> toLottoNumbers(String lottoNumbersString) {
         if (lottoNumbersString == null) {
-            throw new IllegalArgumentException("null은 허용되지 않습니다.");
+            throw new IllegalArgumentException(Message.NULL_NOT_ALLOW.toString());
         }
 
         return Arrays.stream(lottoNumbersString.split(LOTTO_NUMBERS_STRING_DELIMITER))
@@ -65,5 +65,20 @@ public class LottoNumbers {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    private enum Message {
+        NULL_NOT_ALLOW("null은 허용되지 않습니다.");
+
+        private final String message;
+
+        Message(String message) {
+            this.message = message;
+        }
+
+        @Override
+        public String toString() {
+            return this.message;
+        }
     }
 }
