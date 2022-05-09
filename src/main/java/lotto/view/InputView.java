@@ -14,7 +14,21 @@ public class InputView {
     public static int inputUserAmount() {
         System.out.println(Message.INPUT_USER_AMOUNT);
 
-        return SCANNER.nextInt();
+        return Integer.parseInt(SCANNER.nextLine());
+    }
+
+    public static int inputNumberOfUserGenerateLotto() {
+        System.out.println(Message.INPUT_NUMBER_OF_USER_GENERATE_LOTTO);
+
+        return Integer.parseInt(SCANNER.nextLine());
+    }
+
+    public static List<LottoNumbers> inputLottoOfUser(NumberOfUserGenerateLotto numberOfUserGenerateLotto) {
+        System.out.println(Message.INPUT_LOTTOS_OF_USER);
+
+        return IntStream.range(0, numberOfUserGenerateLotto.getNumberOfUserGenerateLotto())
+                .mapToObj(it -> new LottoNumbers(SCANNER.nextLine()))
+                .collect(Collectors.toList());
     }
 
     public static String inputPreviousWeekWinningNumber() {
@@ -27,21 +41,6 @@ public class InputView {
         System.out.println(Message.INPUT_BONUS_BALL);
 
         return SCANNER.nextLine();
-    }
-
-    public static int inputNumberOfUserGenerateLotto() {
-        System.out.println(Message.INPUT_NUMBER_OF_USER_GENERATE_LOTTO);
-
-        return SCANNER.nextInt();
-    }
-
-    public static List<LottoNumbers> inputLottoOfUser(NumberOfUserGenerateLotto numberOfUserGenerateLotto) {
-        System.out.println(Message.INPUT_LOTTOS_OF_USER);
-        SCANNER.nextLine();
-
-        return IntStream.range(0, numberOfUserGenerateLotto.getNumberOfUserGenerateLotto())
-                .mapToObj(it -> new LottoNumbers(SCANNER.nextLine()))
-                .collect(Collectors.toList());
     }
 
     private enum Message {

@@ -16,11 +16,7 @@ class LottoNumbersTest {
 
     @BeforeEach
     void setUp() {
-        this.lottoNumbers = new LottoNumbers(Arrays.asList(
-                new LottoNumber(3),
-                new LottoNumber(2),
-                new LottoNumber(1)
-        ));
+        this.lottoNumbers = LottoNumbers.of(Arrays.asList(6, 5, 4, 3, 2, 1));
     }
 
     @Nested
@@ -36,6 +32,19 @@ class LottoNumbersTest {
                         .isThrownBy(() -> new LottoNumbers(nullOrEmptySource));
             }
         }
+
+        @Nested
+        class _6개가아닌_개수가_주어진경우 {
+
+            @Test
+            void IllegalArgumentException을_던진다() {
+                assertThatIllegalArgumentException()
+                        .isThrownBy(() -> LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5)));
+                assertThatIllegalArgumentException()
+                        .isThrownBy(() -> LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
+            }
+            
+        }
     }
 
     @Nested
@@ -46,7 +55,7 @@ class LottoNumbersTest {
 
             @Test
             void true를_리턴한다() {
-                boolean actual = lottoNumbers.contains(new LottoNumber(3));
+                boolean actual = lottoNumbers.contains(new LottoNumber(1));
 
                 assertThat(actual).isTrue();
             }
@@ -57,7 +66,7 @@ class LottoNumbersTest {
 
             @Test
             void false를_리턴한다() {
-                boolean actual = lottoNumbers.contains(new LottoNumber(4));
+                boolean actual = lottoNumbers.contains(new LottoNumber(7));
 
                 assertThat(actual).isFalse();
             }
@@ -69,14 +78,11 @@ class LottoNumbersTest {
 
         @Test
         void 일치하는_번호_개수를_리턴한다() {
-            LottoNumbers newLottoNumbers = new LottoNumbers(Arrays.asList(
-                    new LottoNumber(1),
-                    new LottoNumber(2)
-            ));
+            LottoNumbers newLottoNumbers = LottoNumbers.of(Arrays.asList(4, 5, 6, 7, 8, 9));
 
             int actual = lottoNumbers.getMatchNumberCount(newLottoNumbers);
 
-            assertThat(actual).isEqualTo(2);
+            assertThat(actual).isEqualTo(3);
         }
     }
 
@@ -87,7 +93,7 @@ class LottoNumbersTest {
         void 번호목록_문자를_리턴한다() {
             String actual = lottoNumbers.toString();
 
-            assertThat(actual).isEqualTo("[3, 2, 1]");
+            assertThat(actual).isEqualTo("[1, 2, 3, 4, 5, 6]");
         }
     }
 }

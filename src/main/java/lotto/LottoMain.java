@@ -9,14 +9,13 @@ import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.InputMismatchException;
 import java.util.List;
 
 public class LottoMain {
     public static void main(String[] args) {
         UserAmount userAmount = getUserAmount();
         NumberOfUserGenerateLotto numberOfUserGenerateLotto = getNumberOfUserGenerateLotto(userAmount);
-        List<LottoNumbers> lottoOfUser = InputView.inputLottoOfUser(numberOfUserGenerateLotto);
+        List<LottoNumbers> lottoOfUser = getLottoOfUser(numberOfUserGenerateLotto);
 
         Lottos lottos = new Lottos(userAmount, lottoOfUser);
         OutputView.outputLottoNumbers(lottos);
@@ -28,10 +27,20 @@ public class LottoMain {
         OutputView.outputRevenueRate(lottos, winningLotto);
     }
 
+    private static List<LottoNumbers> getLottoOfUser(NumberOfUserGenerateLotto numberOfUserGenerateLotto) {
+        try {
+            return InputView.inputLottoOfUser(numberOfUserGenerateLotto);
+        } catch (IllegalArgumentException e) {
+            printExceptionMessage(e);
+        }
+
+        return getLottoOfUser(numberOfUserGenerateLotto);
+    }
+
     private static LottoNumbers getLottoNumbers() {
         try {
             return new LottoNumbers(InputView.inputPreviousWeekWinningNumber());
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             printExceptionMessage(e);
         }
 
@@ -42,7 +51,7 @@ public class LottoMain {
         try {
             int numberOfUserGenerateLotto = InputView.inputNumberOfUserGenerateLotto();
             return new NumberOfUserGenerateLotto(numberOfUserGenerateLotto, userAmount);
-        } catch (InputMismatchException | IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             printExceptionMessage(e);
         }
 

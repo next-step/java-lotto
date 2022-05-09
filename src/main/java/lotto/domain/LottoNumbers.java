@@ -1,17 +1,31 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private static final String LOTTO_NUMBERS_STRING_DELIMITER = ", ";
+    private static final int LOTTO_SIZE = 6;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers(String lottoNumbersString) {
         this(wrap(lottoNumbersString));
+    }
+
+    LottoNumbers(List<LottoNumber> lottoNumbers) {
+        this(toSet(lottoNumbers));
+    }
+
+    LottoNumbers(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(Message.LOTTO_SIZE_NOT_MATCH.toString());
+        }
+        this.lottoNumbers = lottoNumbers;
     }
 
     public static LottoNumbers ofRandom() {
@@ -22,8 +36,8 @@ public class LottoNumbers {
         return new LottoNumbers(wrap(numbers));
     }
 
-    LottoNumbers(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    private static Set<LottoNumber> toSet(List<LottoNumber> lottoNumbers) {
+        return new HashSet<>(lottoNumbers);
     }
 
     private static List<LottoNumber> wrap(String lottoNumbersString) {
@@ -78,7 +92,8 @@ public class LottoNumbers {
     }
 
     private enum Message {
-        NULL_NOT_ALLOW("null은 허용되지 않습니다.");
+        NULL_NOT_ALLOW("null은 허용되지 않습니다."),
+        LOTTO_SIZE_NOT_MATCH("로또 번호 개수가 일치하지 않습니다.");
 
         private final String message;
 
