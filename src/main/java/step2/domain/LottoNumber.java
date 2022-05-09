@@ -9,7 +9,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int MIN = 1;
     private static final int MAX = 45;
-    private static final Map<String, LottoNumber> CACHE = initCache();
+    private static final Map<Integer, LottoNumber> CACHE = initCache();
 
     private final int value;
 
@@ -17,17 +17,18 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.value = number;
     }
 
-    private static Map<String, LottoNumber> initCache() {
-        Map<String, LottoNumber> result = new HashMap<>();
+    private static Map<Integer, LottoNumber> initCache() {
+        Map<Integer, LottoNumber> result = new HashMap<>();
         for (int index = MIN; index <= MAX; index++) {
-            result.put(String.valueOf(index), new LottoNumber(index));
+            result.put(index, new LottoNumber(index));
         }
         return result;
     }
 
     public static LottoNumber from(String text) {
-        if (CACHE.containsKey(text)) {
-            return CACHE.get(text);
+        int key = Integer.parseInt(text);
+        if (CACHE.containsKey(key)) {
+            return CACHE.get(key);
         }
         throw new IllegalArgumentException("범위를 벗어나는 번호입니다.");
     }
