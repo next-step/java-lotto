@@ -35,8 +35,8 @@ public enum Ranking {
         return this != MISS;
     }
 
-    public int getPriceByCount(int count) {
-        return money * count;
+    public int getMoney() {
+        return money;
     }
 
 
