@@ -46,8 +46,8 @@ public class PurchaseMoney {
         }
     }
 
-    public int getPurchaseAmount() {
-        return purchaseAmount;
+    public ReturnRate calculateReturnRate(int sumOfPrizeMoney) {
+        return new ReturnRate(sumOfPrizeMoney, purchaseAmount);
     }
 
     public int getPurchaseCount() {

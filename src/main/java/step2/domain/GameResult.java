@@ -20,8 +20,7 @@ public class GameResult {
 
     public ReturnRate calculateReturnRate(PurchaseMoney purchaseMoney) {
         int sumOfPrizeMoney = getSumOfPrizeMoney();
-        int purchaseAmount = purchaseMoney.getPurchaseAmount();
-        return new ReturnRate(sumOfPrizeMoney, purchaseAmount);
+        return purchaseMoney.calculateReturnRate(sumOfPrizeMoney);
     }
 
     private int getSumOfPrizeMoney() {
