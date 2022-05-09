@@ -39,7 +39,7 @@ public class InputView {
 
         try {
             return new LottoNumber(SCANNER.nextLine());
-        } catch (NumberFormatException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputBonusBall();
         }

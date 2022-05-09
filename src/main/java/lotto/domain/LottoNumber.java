@@ -20,6 +20,7 @@ public class LottoNumber {
     }
 
     protected LottoNumber(int lottoNumber) {
+        checkInvalid(lottoNumber);
         this.lottoNumber = lottoNumber;
     }
 
@@ -68,8 +69,15 @@ public class LottoNumber {
         return Objects.hash(lottoNumber);
     }
 
+    private void checkInvalid(int lottoNumber) {
+        if (lottoNumber < START_LOTTO_NUMBER || lottoNumber > END_LOTTO_NUMBER) {
+            throw new IllegalArgumentException(Message.INVALID_NUMBER.toString());
+        }
+    }
+
     private enum Message {
-        NOT_NUMBER_STRING_NOT_ALLOW("숫자가 아닌 문자열은 허용되지 않습니다.");
+        NOT_NUMBER_STRING_NOT_ALLOW("숫자가 아닌 문자열은 허용되지 않습니다."),
+        INVALID_NUMBER("유효하지 않은 숫자입니다.");
 
         private final String message;
 
