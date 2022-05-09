@@ -18,4 +18,8 @@ public class WinningNumbers {
         }
         return 0;
     }
+
+    public boolean checkBonus(int bonus) {
+        return bonusNumber == bonus;
+    }
 }

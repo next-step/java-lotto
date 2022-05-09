@@ -61,7 +61,10 @@
     * Variables
       * 당첨 번호
       * 보너스 번호
-    * 당첨 번호 여부 확인
+    * Functions
+      * 당첨 번호 여부 확인
+      * 보너스 번호 당첨 여부 확인
+    * 
 * Util
   * Ratio
     * Functions
