@@ -3,26 +3,16 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class RankingTest {
 
     @DisplayName("3 ~ 6개를 입력하면 일치하는 당첨 순위를 반환한다.")
     @ParameterizedTest
-    @CsvSource(value = {"3:FOURTH", "4:THIRD", "5:SECOND", "6:FIRST"}, delimiter = ':')
-    void findMatchRankingTest(int matchCount, Ranking ranking) {
-        assertThat(Ranking.findMatchRanking(matchCount))
+    @CsvSource(value = {"1:0:MISS", "3:0:FIFTH", "3:1:FIFTH", "5:0:THIRD", "5:1:SECOND", "6:0:FIRST", "6:1:FIRST"}, delimiter = ':')
+    void findMatchRankingTest(int matchCount, int matchBonus, Ranking ranking) {
+        assertThat(Ranking.findMatchRanking(new MatchResult(matchCount, matchBonus)))
                 .isEqualTo(ranking);
-    }
-
-    @DisplayName("당첨 개수가 아닌 숫자를 입력하면 예외를 반환한다.")
-    @ParameterizedTest
-    @ValueSource(ints = {-1, 0, 2, 7})
-    void findMatchRankingTestFail(int matchCount) {
-        assertThatThrownBy(() -> Ranking.findMatchRanking(matchCount))
-                .isInstanceOf(IllegalArgumentException.class);
     }
 }
