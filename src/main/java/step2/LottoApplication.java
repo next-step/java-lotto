@@ -3,9 +3,6 @@ package step2;
 import step2.domain.*;
 import step2.view.InputView;
 import step2.view.OutPutView;
-import step2.view.dto.GameResultDto;
-import step2.view.dto.PurchaseCountDto;
-import step2.view.dto.ReturnRateDto;
 
 public class LottoApplication {
 
@@ -16,7 +13,7 @@ public class LottoApplication {
 
         int purchaseAmount = inputView.askPurchaseAmount();
         PurchaseMoney purchaseMoney = new PurchaseMoney(purchaseAmount);
-        outPutView.show(new PurchaseCountDto(purchaseMoney).toString());
+        outPutView.showPurchaseCount(purchaseMoney.getPurchaseCount());
 
         PurchaseList purchaseList = new PurchaseList(purchaseMoney);
         outPutView.show(purchaseList.toString());
@@ -30,12 +27,9 @@ public class LottoApplication {
         GameResult gameResult = lottoGame.calculateResult();
         ReturnRate returnRate = gameResult.calculateReturnRate(purchaseMoney);
 
-        GameResultDto gameResultDto = new GameResultDto(gameResult);
-        ReturnRateDto returnRateDto = new ReturnRateDto(returnRate);
-
         outPutView.showResultLine();
-        outPutView.show(gameResultDto.toString());
-        outPutView.show(returnRateDto.toString());
+        outPutView.showGameResult(gameResult.getResult());
+        outPutView.showReturnRate(returnRate.getValue(), returnRate.isProfitable());
         outPutView.showEnd();
 
     }
