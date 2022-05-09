@@ -1,6 +1,10 @@
 package study.step1.domain;
 
+import java.util.Collections;
+import java.util.Map;
 import java.util.function.ToIntBiFunction;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class StringCalculator {
     private static final String SPACE = " ";
@@ -20,13 +24,7 @@ public class StringCalculator {
     }
 
     public int run(int num1, String operator, int num2) {
-        int result = 0;
-        for (Operator value : Operator.values()) {
-            if (operator.equals(value.getOperator())) {
-                result = Operator.valueOf(value.name()).calculate(num1, num2);
-            }
-        }
-        return result;
+        return Operator.of(operator).calculate(num1, num2);
     }
 
     enum Operator {
@@ -34,6 +32,9 @@ public class StringCalculator {
         MINUS("-", (n1, n2) -> n1 - n2),
         MULT("*", (n1, n2) -> n1 * n2),
         DIVIDE("/", (n1, n2) -> n1 / n2);
+
+        private static final Map<String, String> OPERATOR_MAP =
+                Collections.unmodifiableMap(Stream.of(values()).collect(Collectors.toMap(Operator::getOperator, Operator::name)));
 
         private final String operator;
         private final ToIntBiFunction<Integer, Integer> expression;
@@ -49,6 +50,10 @@ public class StringCalculator {
 
         public int calculate(int num1, int num2) {
             return expression.applyAsInt(num1, num2);
+        }
+
+        public static Operator of(final String operator) {
+            return Operator.valueOf(OPERATOR_MAP.get(operator));
         }
     }
 }

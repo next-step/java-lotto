@@ -1,4 +1,4 @@
-package study.teacher;
+package teacher;
 
 import java.util.Arrays;
 
