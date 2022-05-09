@@ -1,71 +1,47 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
-import lotto.domain.UserAmount;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
+    public static final String LINE_SEPARATOR = System.getProperty("line.separator");
 
-    public static UserAmount inputUserAmount() {
+    public static int inputUserAmount() {
         System.out.println(Message.INPUT_USER_AMOUNT);
 
-        try {
-            return new UserAmount(SCANNER.nextInt());
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return inputUserAmount();
-        }
+        return SCANNER.nextInt();
     }
 
-    public static LottoNumbers inputPreviousWeekWinningNumber() {
+    public static String inputPreviousWeekWinningNumber() {
         System.out.println(Message.INPUT_PREVIOUS_WEEK_WINNING_NUMBER);
 
-        try {
-            return new LottoNumbers(SCANNER.nextLine());
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return inputPreviousWeekWinningNumber();
-        }
+        return SCANNER.nextLine();
     }
 
-    public static LottoNumber inputBonusBall() {
+    public static String inputBonusBall() {
         System.out.println(Message.INPUT_BONUS_BALL);
 
-        try {
-            return new LottoNumber(SCANNER.nextLine());
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return inputBonusBall();
-        }
+        return SCANNER.nextLine();
     }
 
     public static int inputNumberOfUserGenerateLotto() {
         System.out.println(Message.INPUT_NUMBER_OF_USER_GENERATE_LOTTO);
 
-        try {
-            return SCANNER.nextInt();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return inputNumberOfUserGenerateLotto();
-        }
+        return SCANNER.nextInt();
     }
 
-    public static List<LottoNumbers> inputLottoOfUser(int numberOfUserGenerateLotto) {
+    public static String inputLottoOfUser(int numberOfUserGenerateLotto) {
         System.out.println(Message.INPUT_LOTTOS_OF_USER);
         SCANNER.nextLine();
 
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < numberOfUserGenerateLotto; i++) {
             String inputString = SCANNER.nextLine();
-            lottoNumbers.add(new LottoNumbers(inputString));
+            stringBuilder.append(inputString);
+            stringBuilder.append(LINE_SEPARATOR);
         }
 
-        return lottoNumbers;
+        return stringBuilder.toString();
     }
 
     private enum Message {
