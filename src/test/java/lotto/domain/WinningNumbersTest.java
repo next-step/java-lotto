@@ -21,7 +21,8 @@ class WinningNumbersTest {
     @DisplayName("보너스 번호 당첨 여부 확인")
     void checkBonus() {
         WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(3, 4, 10, 14, 35, 45), 2);
-        assertThat(winningNumbers.checkBonus(2)).isTrue();
+        assertThat(winningNumbers.checkBonus(Arrays.asList(2, 5, 10, 24, 40, 44))).isTrue();
+        assertThat(winningNumbers.checkBonus(Arrays.asList(3, 5, 10, 24, 40, 44))).isFalse();
     }
 
 }

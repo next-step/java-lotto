@@ -19,7 +19,7 @@ public class WinningNumbers {
         return 0;
     }
 
-    public boolean checkBonus(int bonus) {
-        return bonusNumber == bonus;
+    public boolean checkBonus(List<Integer> selectedNumbers) {
+        return selectedNumbers.contains(bonusNumber);
     }
 }
