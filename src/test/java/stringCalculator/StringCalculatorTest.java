@@ -51,4 +51,10 @@ class StringCalculatorTest {
         assertThat(Integer.parseInt(StringCalculator.classify(4, "/", 2))).isEqualTo(2);
     }
 
+    @Test
+    @DisplayName("사칙연산을 모두 포함하는 기능 구현 테스트")
+    void calculateTest() {
+        String str = "2 + 3 * 4 / 2";
+        assertThat(StringCalculator.calculate(str)).isEqualTo(10);
+    }
 }
