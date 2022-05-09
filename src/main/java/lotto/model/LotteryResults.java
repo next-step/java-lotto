@@ -17,9 +17,9 @@ public final class LotteryResults {
     }
 
     static {
-        for (Grade value : Grade.values()) {
-            gradeMap.put(value, START_COUNT);
-        }
+        Arrays.stream(Grade.values())
+                .filter(grade -> grade != Grade.NONE)
+                .forEach(grade -> gradeMap.put(grade, START_COUNT));
     }
 
 
@@ -30,11 +30,8 @@ public final class LotteryResults {
 
     public static List<LotteryResult> getLotteryResult() {
         List<LotteryResult> lotteryResults = new ArrayList<>();
-        for (Entry<Grade, Integer> gradeIntegerEntry : array()) {
-            lotteryResults.add(
-                    new LotteryResult(gradeIntegerEntry.getKey(), gradeIntegerEntry.getValue()));
-        }
-
+        array().forEach(gradeIntegerEntry ->
+                lotteryResults.add(new LotteryResult(gradeIntegerEntry.getKey(), gradeIntegerEntry.getValue())));
         return lotteryResults;
     }
 
@@ -53,7 +50,6 @@ public final class LotteryResults {
         return gradeMap
                 .entrySet()
                 .stream()
-                .filter(g -> g.getKey() != Grade.NONE)
                 .sorted((c, o) -> o.getKey().getExpectNumber() - (c.getKey().getExpectNumber()))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }

@@ -19,8 +19,7 @@ public final class LotteryTickets {
     public void findGrade(Lotto winLotto, int bonus) {
         Set<Integer> winningNumbers = winLotto.numbers();
         for (Lotto lotto : value) {
-            Set<Integer> selectNumbers = lotto.numbers();
-            LotteryResults.increase(AwardNumberUtil.matchCount(selectNumbers, winningNumbers, bonus));
+            LotteryResults.increase(lotto.matchCount(winningNumbers, bonus));
         }
     }
 

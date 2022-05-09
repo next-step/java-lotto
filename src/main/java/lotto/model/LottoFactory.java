@@ -13,12 +13,9 @@ public final class LottoFactory {
     private static final int LOTTO_MAX_COUNT = 6;
     private static final int LOTTO_START_INDEX = 0;
 
-    private static final List<Integer> init = init();
+    private static final List<Integer> INIT = init();
 
-
-    public static Lotto apply() {
-        Collections.shuffle(init);
-        return new Lotto(new HashSet<>(init.subList(LOTTO_START_INDEX, LOTTO_MAX_COUNT)));
+    private LottoFactory() {
     }
 
     private static List<Integer> init() {
@@ -27,5 +24,10 @@ public final class LottoFactory {
             lottoNumbers.add(i);
         }
         return lottoNumbers;
+    }
+
+    public static Lotto apply() {
+        Collections.shuffle(INIT);
+        return new Lotto(new HashSet<>(INIT.subList(LOTTO_START_INDEX, LOTTO_MAX_COUNT)));
     }
 }
