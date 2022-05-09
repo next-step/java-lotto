@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
-    public static final String USER_INPUT_LOTTO_DELIMITER = System.getProperty("line.separator");
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public static UserAmount inputUserAmount() {
