@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoNumbers;
 import lotto.domain.UserAmount;
 
 import java.util.Scanner;
@@ -19,10 +20,15 @@ public class InputView {
         }
     }
 
-    public static String inputPreviousWeekWinningNumber() {
+    public static LottoNumbers inputPreviousWeekWinningNumber() {
         System.out.println(Message.INPUT_PREVIOUS_WEEK_WINNING_NUMBER);
 
-        return SCANNER.nextLine();
+        try {
+            return new LottoNumbers(SCANNER.nextLine());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputPreviousWeekWinningNumber();
+        }
     }
 
     public static String inputBonusBall() {

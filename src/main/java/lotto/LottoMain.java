@@ -18,8 +18,8 @@ public class LottoMain {
         Lottos lottos = new Lottos(userAmount, lottoOfUser);
         OutputView.outputLottoNumbers(lottos);
 
-        String previousWeekWinningNumber = InputView.inputPreviousWeekWinningNumber();
-        LottoNumbers lottoNumbers = new LottoNumbers(previousWeekWinningNumber);
+        LottoNumbers lottoNumbers = InputView.inputPreviousWeekWinningNumber();
+
         String bonusBall = InputView.inputBonusBall();
         LottoNumber lottoNumber = new LottoNumber(bonusBall);
 
