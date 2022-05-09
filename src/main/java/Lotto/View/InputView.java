@@ -1,7 +1,9 @@
 package Lotto.View;
 
 import Lotto.Exception.CustomException;
+import Lotto.Model.LottoCard;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -17,6 +19,27 @@ public class InputView {
     public static int inputCash() {
         System.out.println("구입금액을 입력해 주세요.");
         return Integer.parseInt(SCANNER.nextLine());
+    }
+
+    public static int inputManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return Integer.parseInt(SCANNER.nextLine());
+    }
+
+    public static List<LottoCard> inputManualLotto(int count) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+        List<LottoCard> lottoCards = new ArrayList<>();
+
+        for (int i = 0; i < count; i++) {
+            lottoCards.add(new LottoCard(Arrays.stream(SCANNER.nextLine()
+                            .trim()
+                            .split(","))
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList())));
+        }
+
+        return lottoCards;
     }
 
     public static List<Integer> inputLastWeekWinningNumber() {

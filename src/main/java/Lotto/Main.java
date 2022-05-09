@@ -7,7 +7,7 @@ import Lotto.View.OutputView;
 
 public class Main {
     public static void main(String[] args) {
-        LottoGame lottoGame = new LottoGame(InputView.inputCash());
+        LottoGame lottoGame = new LottoGame(InputView.inputCash(), InputView.inputManualLotto(InputView.inputManualLottoCount()));
 
         OutputView.printBuyCount(lottoGame.getLottoList().size());
         OutputView.printLottoGame(lottoGame.getLottoList());
