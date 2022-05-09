@@ -11,23 +11,33 @@ public class LottoNumbers {
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(String lottoNumbersString) {
-        this(toLottoNumbers(lottoNumbersString));
-    }
-
-    protected LottoNumbers(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+        this(wrap(lottoNumbersString));
     }
 
     public static LottoNumbers ofRandom() {
         return new LottoNumbers(RandomLottoNumbersGenerator.generate());
     }
 
-    private static List<LottoNumber> toLottoNumbers(String lottoNumbersString) {
+    static LottoNumbers of(List<Integer> numbers) {
+        return new LottoNumbers(wrap(numbers));
+    }
+
+    LottoNumbers(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    private static List<LottoNumber> wrap(String lottoNumbersString) {
         if (lottoNumbersString == null) {
             throw new IllegalArgumentException(Message.NULL_NOT_ALLOW.toString());
         }
 
         return Arrays.stream(lottoNumbersString.split(LOTTO_NUMBERS_STRING_DELIMITER))
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
+
+    private static List<LottoNumber> wrap(List<Integer> numbers) {
+        return numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }

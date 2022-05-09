@@ -3,10 +3,13 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class LottoNumbersTest {
     private LottoNumbers lottoNumbers;
@@ -18,6 +21,21 @@ class LottoNumbersTest {
                 new LottoNumber(2),
                 new LottoNumber(1)
         ));
+    }
+
+    @Nested
+    class 생성자는 {
+
+        @Nested
+        class null혹은_빈값이_주어진경우 {
+
+            @ParameterizedTest
+            @NullAndEmptySource
+            void IllegalArgumentException을_던진다(String nullOrEmptySource) {
+                assertThatIllegalArgumentException()
+                        .isThrownBy(() -> new LottoNumbers(nullOrEmptySource));
+            }
+        }
     }
 
     @Nested

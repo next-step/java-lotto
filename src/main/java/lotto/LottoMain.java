@@ -20,10 +20,20 @@ public class LottoMain {
         OutputView.outputLottoNumbers(lottos);
 
         LottoNumbers lottoNumbers = InputView.inputPreviousWeekWinningNumber();
-        LottoNumber bonusBall = InputView.inputBonusBall();
 
-        WinningLotto winningLotto = new WinningLotto(lottoNumbers, bonusBall);
+        WinningLotto winningLotto = getWinningLotto(lottoNumbers);
         OutputView.outputWinningStatistics(lottos, winningLotto);
         OutputView.outputRevenueRate(lottos, winningLotto);
+    }
+
+    private static WinningLotto getWinningLotto(LottoNumbers lottoNumbers) {
+        LottoNumber bonusBall = InputView.inputBonusBall();
+
+        try {
+            return new WinningLotto(lottoNumbers, bonusBall);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getWinningLotto(lottoNumbers);
+        }
     }
 }
