@@ -1,8 +1,8 @@
 package step2.domain;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinningLotto {
@@ -10,7 +10,7 @@ public class WinningLotto {
     private static final String DELIIMITER = ", ";
     private static final int WINNER_COUNT = 6;
 
-    private final List<LottoNumber> winningNumbers;
+    private final Set<LottoNumber> winningNumbers;
     private final LottoNumber bonusNumber;
 
     public WinningLotto(String input, String bonus) {
@@ -19,14 +19,14 @@ public class WinningLotto {
         validateBonusNumberDuplicate();
     }
 
-    private List<LottoNumber> initWinningNumbers(String input) {
+    private Set<LottoNumber> initWinningNumbers(String input) {
         validateNullAndEmpty(input);
         String[] splits = input.split(DELIIMITER);
         validateLength(splits);
         validateDuplicate(splits);
         return Arrays.stream(splits)
                 .map(LottoNumber::from)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     private LottoNumber initBonusNumber(String bonus) {

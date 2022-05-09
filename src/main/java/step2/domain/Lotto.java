@@ -2,7 +2,6 @@ package step2.domain;
 
 
 import java.util.Comparator;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,14 +10,14 @@ public class Lotto {
 
     private static final int COUNT = 6;
 
-    private final List<LottoNumber> values;
+    private final Set<LottoNumber> values;
 
     public Lotto(PurchaseStrategy purchaseStrategy) {
         Set<String> numbers = purchaseStrategy.getNumbers(COUNT);
         validate(numbers);
         this.values = numbers.stream()
                 .map(LottoNumber::from)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     private void validate(Set<String> numbers) {

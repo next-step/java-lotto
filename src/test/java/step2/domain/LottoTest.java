@@ -21,11 +21,6 @@ class LottoTest {
     private static final PurchaseStrategy MALFORMED_STRATEGY = (count) -> new HashSet<>();
 
     @Test
-    void 구매전략을_입력받아_로또_번호_6개를_갖는_Wrapping_하는_일급컬렉션_객체를_생성() {
-        assertThat(new Lotto(DEFAULT_STRATEGY)).extracting("values").asList().hasSize(6);
-    }
-
-    @Test
     void 구매전략이_반환하는_SET의_사이즈가_6개_아닌_경우_예외() {
         assertThatIllegalArgumentException().isThrownBy(
                 () -> new Lotto(MALFORMED_STRATEGY)
