@@ -32,6 +32,10 @@ public enum Matched {
         return index;
     }
 
+    public int numberOfMatched() {
+        return numberOfMatched;
+    }
+
     public int reward() {
         return reward;
     }
