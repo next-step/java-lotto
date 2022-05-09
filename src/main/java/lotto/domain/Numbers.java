@@ -53,4 +53,8 @@ public class Numbers {
                 .collect(Collectors.toList());
         return collect.size();
     }
+
+    public boolean contains(int bonusNumber) {
+        return this.lottoNumbers.contains(bonusNumber);
+    }
 }

@@ -34,8 +34,8 @@ public class Customer {
         lottos.printLottoList();
     }
 
-    public List<Rank> getWinningList(List<Integer> winningNumbers) {
-        return lottos.getWinningList(winningNumbers);
+    public List<Rank> getWinningList(List<Integer> winningNumbers, int bonusNumber) {
+        return lottos.getWinningList(winningNumbers, bonusNumber);
     }
 
     private void sumMoney(int money) {

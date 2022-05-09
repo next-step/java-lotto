@@ -26,9 +26,9 @@ public class Lottos {
                 .forEach(System.out::println);
     }
 
-    public List<Rank> getWinningList(List<Integer> winningNumbers) {
+    public List<Rank> getWinningList(List<Integer> winningNumbers, int bonusNumber) {
         return lottos.stream()
-                .map(lotto -> Rank.of(lotto.matchCount(winningNumbers)))
+                .map(lotto -> Rank.of(lotto.matchCount(winningNumbers), lotto.hasBonusNumber(bonusNumber)))
                 .collect(Collectors.toList());
     }
 }
