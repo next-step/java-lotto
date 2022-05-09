@@ -45,4 +45,10 @@ class StringCalculatorTest {
         assertThat(Integer.parseInt(StringCalculator.classify(3, "*", 4))).isEqualTo(12);
     }
 
+    @Test
+    @DisplayName("나누기 테스트")
+    void divideTest() {
+        assertThat(Integer.parseInt(StringCalculator.classify(4, "/", 2))).isEqualTo(2);
+    }
+
 }
