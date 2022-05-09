@@ -1,10 +1,15 @@
 package lotto.view;
 
+import lotto.domain.LottoNumbers;
+import lotto.domain.NumberOfUserGenerateLotto;
+
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
-    public static final String LINE_SEPARATOR = System.getProperty("line.separator");
 
     public static int inputUserAmount() {
         System.out.println(Message.INPUT_USER_AMOUNT);
@@ -30,18 +35,13 @@ public class InputView {
         return SCANNER.nextInt();
     }
 
-    public static String inputLottoOfUser(int numberOfUserGenerateLotto) {
+    public static List<LottoNumbers> inputLottoOfUser(NumberOfUserGenerateLotto numberOfUserGenerateLotto) {
         System.out.println(Message.INPUT_LOTTOS_OF_USER);
         SCANNER.nextLine();
 
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < numberOfUserGenerateLotto; i++) {
-            String inputString = SCANNER.nextLine();
-            stringBuilder.append(inputString);
-            stringBuilder.append(LINE_SEPARATOR);
-        }
-
-        return stringBuilder.toString();
+        return IntStream.range(0, numberOfUserGenerateLotto.getNumberOfUserGenerateLotto())
+                .mapToObj(it -> new LottoNumbers(SCANNER.nextLine()))
+                .collect(Collectors.toList());
     }
 
     private enum Message {

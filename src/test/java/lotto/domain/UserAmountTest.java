@@ -72,4 +72,35 @@ class UserAmountTest {
             assertThat(actual).isEqualTo(7);
         }
     }
+
+    @Nested
+    class canBuy_메서드는 {
+
+        @Nested
+        class 충분한_개수가_주어지면 {
+
+            @Test
+            void true를_리턴한다() {
+                UserAmount userAmount = new UserAmount(10000);
+
+                boolean actual = userAmount.canBuy(10);
+
+                assertThat(actual).isTrue();
+            }
+        }
+
+        @Nested
+        class 초과한_개수가_주어지면 {
+
+            @Test
+            void false를_리턴한다() {
+                UserAmount userAmount = new UserAmount(10000);
+
+                boolean actual = userAmount.canBuy(11);
+
+                assertThat(actual).isFalse();
+            }
+
+        }
+    }
 }

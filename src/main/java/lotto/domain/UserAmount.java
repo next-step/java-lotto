@@ -4,7 +4,7 @@ import java.util.List;
 
 public class UserAmount {
     private static final int MIN_USER_AMOUNT = 0;
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
 
     private final int userAmount;
 
@@ -40,6 +40,10 @@ public class UserAmount {
 
     int getRandomLottoSize(int userInputLottosSize) {
         return (this.userAmount / LOTTO_PRICE) - userInputLottosSize;
+    }
+
+    public boolean canBuy(int numberOfUserGenerateLotto) {
+        return this.userAmount >= (numberOfUserGenerateLotto * LOTTO_PRICE);
     }
 
     private enum Message {

@@ -3,21 +3,20 @@ package lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Lottos;
+import lotto.domain.NumberOfUserGenerateLotto;
 import lotto.domain.UserAmount;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoMain {
     public static void main(String[] args) {
         UserAmount userAmount = getUserAmount();
-        int numberOfUserGenerateLotto = getNumberOfUserGenerateLotto();
-        List<LottoNumbers> lottoOfUser = getLottoOfUser(numberOfUserGenerateLotto);
+        NumberOfUserGenerateLotto numberOfUserGenerateLotto = getNumberOfUserGenerateLotto(userAmount);
+        List<LottoNumbers> lottoOfUser = InputView.inputLottoOfUser(numberOfUserGenerateLotto);
 
         Lottos lottos = new Lottos(userAmount, lottoOfUser);
         OutputView.outputLottoNumbers(lottos);
@@ -27,20 +26,6 @@ public class LottoMain {
         WinningLotto winningLotto = getWinningLotto(lottoNumbers);
         OutputView.outputWinningStatistics(lottos, winningLotto);
         OutputView.outputRevenueRate(lottos, winningLotto);
-    }
-
-    private static List<LottoNumbers> getLottoOfUser(int numberOfUserGenerateLotto) {
-        try {
-            String inputLottoOfUSer = InputView.inputLottoOfUser(numberOfUserGenerateLotto);
-
-            return Arrays.stream(inputLottoOfUSer.split(InputView.LINE_SEPARATOR))
-                    .map(LottoNumbers::new)
-                    .collect(Collectors.toList());
-        } catch (IllegalArgumentException e) {
-            printExceptionMessage(e);
-        }
-
-        return getLottoOfUser(numberOfUserGenerateLotto);
     }
 
     private static LottoNumbers getLottoNumbers() {
@@ -53,14 +38,15 @@ public class LottoMain {
         return getLottoNumbers();
     }
 
-    private static int getNumberOfUserGenerateLotto() {
+    private static NumberOfUserGenerateLotto getNumberOfUserGenerateLotto(UserAmount userAmount) {
         try {
-            return InputView.inputNumberOfUserGenerateLotto();
-        } catch (InputMismatchException e) {
+            int numberOfUserGenerateLotto = InputView.inputNumberOfUserGenerateLotto();
+            return new NumberOfUserGenerateLotto(numberOfUserGenerateLotto, userAmount);
+        } catch (InputMismatchException | IllegalArgumentException e) {
             printExceptionMessage(e);
         }
 
-        return getNumberOfUserGenerateLotto();
+        return getNumberOfUserGenerateLotto(userAmount);
     }
 
     private static UserAmount getUserAmount() {
