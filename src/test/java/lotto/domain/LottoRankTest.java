@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -41,5 +42,10 @@ class LottoRankTest {
     })
     void countWinningMoney_해당등수에_해당하는_로또갯수만큼의_금액(String lottoRankString, int matchLottoCount, int countWinningPrice) {
         assertThat(LottoRank.valueOf(lottoRankString).countWinningMoney(matchLottoCount)).isEqualTo(countWinningPrice);
+    }
+
+    @Test
+    void countWinningMoney_일치하는_로또_갯수가_음수인_경우() {
+        assertThatThrownBy(() -> LottoRank.FIFTH.countWinningMoney(-1)).isInstanceOf(IllegalArgumentException.class);
     }
 }

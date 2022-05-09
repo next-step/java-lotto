@@ -10,11 +10,17 @@ public enum LottoRank {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
+    private static final int ZERO = 0;
     private static final int MIN_MATCH_COUNT = 0;
     private static final int MAX_MATCH_COUNT = 6;
 
     private final int matchCount;
     private final int winningMoney;
+
+    LottoRank(int matchCount, int winningMoney) {
+        this.matchCount = matchCount;
+        this.winningMoney = winningMoney;
+    }
 
     public int matchCount() {
         return this.matchCount;
@@ -25,12 +31,18 @@ public enum LottoRank {
     }
 
     public int countWinningMoney(int matchLottoCount) {
+        validateMatchLottoCount(matchLottoCount);
         return this.winningMoney * matchLottoCount;
     }
 
-    LottoRank(int matchCount, int winningMoney) {
-        this.matchCount = matchCount;
-        this.winningMoney = winningMoney;
+    private void validateMatchLottoCount(int matchLottoCount) {
+        if (matchLottoCount < ZERO) {
+            throw new IllegalArgumentException(String.format("일치하는 로또 갯수가 음수일 수 없습니다. (입력받은 로또 갯수 : %d)", matchLottoCount));
+        }
+    }
+
+    private boolean isSameMatchCount(int matchCount) {
+        return this.matchCount == matchCount;
     }
 
     public static LottoRank findLottoRank(int matchCount, boolean matchBonus) {
@@ -42,13 +54,9 @@ public enum LottoRank {
                 .orElse(MISS);
     }
 
-    private boolean isSameMatchCount(int matchCount) {
-        return this.matchCount == matchCount;
-    }
-
     private static void validateMatchCount(int matchCount) {
         if (matchCount > MAX_MATCH_COUNT || matchCount < MIN_MATCH_COUNT) {
-            throw new IllegalArgumentException(String.format("일치하는 로또 갯수가 0에서 6을 벗어날 수 없습니다. (현재 찾고자 하는 로또 갯수 : %d)", matchCount));
+            throw new IllegalArgumentException(String.format("일치하는 로또 번호 갯수가 0에서 6을 벗어날 수 없습니다. (현재 찾고자 하는 로또 번호 갯수 : %d)", matchCount));
         }
     }
 }
