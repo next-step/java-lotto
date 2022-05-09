@@ -15,6 +15,8 @@ public class OutputView {
   private static final String SAME = "동일";
   private static final String PROFIT_RATIO_MESSAGE = "(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
 
+  private static final int BASIC_PROFIT_RATIO = 1;
+
   private OutputView() {
     throw new AssertionError();
   }
@@ -46,15 +48,15 @@ public class OutputView {
   public static void outputProfitRatio(double calculateProfitRatio) {
     String message = String.format(TOTAL_PROFIT_RATIO_MESSAGE, calculateProfitRatio);
 
-    if (calculateProfitRatio > 1) {
+    if (calculateProfitRatio > BASIC_PROFIT_RATIO) {
       message += String.format(PROFIT_RATIO_MESSAGE, PROFIT);
     }
 
-    if (calculateProfitRatio == 1) {
+    if (calculateProfitRatio == BASIC_PROFIT_RATIO) {
       message += String.format(PROFIT_RATIO_MESSAGE, SAME);
     }
 
-    if (calculateProfitRatio < 1) {
+    if (calculateProfitRatio < BASIC_PROFIT_RATIO) {
       message += String.format(PROFIT_RATIO_MESSAGE, LOSS);
     }
 
