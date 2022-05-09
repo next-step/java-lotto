@@ -12,6 +12,8 @@ public class StringCalculator {
     public static final int FIRST_NUMBER = 0;
     public static final int FIRST_SIGN = 1;
     public static final int SECOND_NUMBER = 2;
+    public static final int NEXT_NUMBER = 1;
+
 
     public int calculate(int numberOne, String sign, int numberTwo) {
         if (isNotSign(sign)) {
@@ -54,7 +56,7 @@ public class StringCalculator {
         for (int i = 3; i < inputStringList.size() - 1; i += 2) {
             result = calculate(result,
                     inputStringList.get(i),
-                    Integer.parseInt(inputStringList.get(i + 1)));
+                    Integer.parseInt(inputStringList.get(i + NEXT_NUMBER)));
         }
         return result;
     }
