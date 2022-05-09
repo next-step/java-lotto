@@ -68,7 +68,7 @@ public class OutputView {
     private String getResultString(List<RankResult> rankResults) {
         StringBuilder builder = new StringBuilder();
         rankResults.forEach(r -> {
-                    builder.append(r.getRank().getMatchNumberCount());
+                    builder.append(r.getMatchNumberCount());
                     builder.append("개 일치 ");
                     builder.append(r.getPrizePerRank());
                     builder.append("원 - ");

@@ -12,16 +12,16 @@ public class RankResult {
         this.count = count;
     }
 
-    public Rank getRank() {
-        return rank;
-    }
-
     public int getCount() {
         return count;
     }
 
     public Integer getPrizePerRank() {
         return rank.getPrize() * count;
+    }
+
+    public int getMatchNumberCount() {
+        return rank.getMatchNumberCount();
     }
 
     @Override
