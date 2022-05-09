@@ -1,6 +1,6 @@
 package lotto.constant;
 
-import lotto.domain.LottoMarkingNumbers;
+import lotto.domain.LottoNumbers;
 import lotto.exception.InvalidMatchCount;
 
 import java.util.stream.Stream;
@@ -22,7 +22,7 @@ public enum MatchResult {
     }
 
     public static MatchResult findByMatchCount(int matchCount) {
-        if (matchCount > LottoMarkingNumbers.LOTTO_NUMBER_COUNT) {
+        if (matchCount > LottoNumbers.LOTTO_NUMBER_COUNT) {
             throw new InvalidMatchCount();
         }
         return Stream.of(MatchResult.values())

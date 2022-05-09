@@ -12,8 +12,8 @@ public class PurchasedLotto {
 
     public PurchasedLotto(Lotto lotto) {
         this.lottoNumbers = lotto
-                .lottoMarkingNumbers()
                 .lottoNumbers()
+                .toSet()
                 .stream()
                 .map(LottoNumber::toInt)
                 .collect(Collectors.toList());

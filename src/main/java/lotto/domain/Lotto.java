@@ -5,14 +5,14 @@ import lotto.constant.MatchResult;
 public class Lotto {
 
     private MatchResult matchResult;
-    private final LottoMarkingNumbers lottoMarkingNumbers;
+    private final LottoNumbers lottoNumbers;
 
-    public Lotto(LottoMarkingNumbers lottoMarkingNumbers) {
-        this.lottoMarkingNumbers = lottoMarkingNumbers;
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public void confirm(WinningNumbers winningNumbers) {
-        int matchCount = lottoMarkingNumbers.matchCount(winningNumbers);
+    public void confirm(LottoNumbers winningNumbers) {
+        int matchCount = lottoNumbers.matchCount(winningNumbers);
         this.matchResult = MatchResult.findByMatchCount(matchCount);
     }
 
@@ -20,12 +20,12 @@ public class Lotto {
         return matchResult;
     }
 
-    public LottoMarkingNumbers lottoMarkingNumbers() {
-        return lottoMarkingNumbers;
+    public LottoNumbers lottoNumbers() {
+        return lottoNumbers;
     }
 
     @Override
     public String toString() {
-        return lottoMarkingNumbers.toString();
+        return lottoNumbers.toString();
     }
 }

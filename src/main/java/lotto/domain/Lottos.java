@@ -2,8 +2,8 @@ package lotto.domain;
 
 import lotto.constant.MatchResult;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class Lottos {
 
@@ -13,11 +13,19 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public static Lottos createAutoLotto(int count) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            lottos.add(new Lotto(LottoNumbers.createRandomLottoNumbers()));
+        }
+        return new Lottos(lottos);
+    }
+
     public int count() {
         return lottos.size();
     }
 
-    public void confirmAll(WinningNumbers winningNumbers) {
+    public void confirmAll(LottoNumbers winningNumbers) {
         for (Lotto lotto : lottos) {
             lotto.confirm(winningNumbers);
         }

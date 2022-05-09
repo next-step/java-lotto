@@ -1,6 +1,6 @@
 package lotto.generator;
 
-import lotto.domain.LottoMarkingNumbers;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoNumber;
 import lotto.exception.NotSupportInstanceException;
 
@@ -22,6 +22,6 @@ public class RandomNumberGenerator {
 
     public static List<Integer> generate() {
         Collections.shuffle(NUMBERS);
-        return NUMBERS.subList(INITIAL_INDEX, LottoMarkingNumbers.LOTTO_NUMBER_COUNT);
+        return NUMBERS.subList(INITIAL_INDEX, LottoNumbers.LOTTO_NUMBER_COUNT);
     }
 }

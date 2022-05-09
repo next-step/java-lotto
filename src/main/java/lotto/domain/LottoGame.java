@@ -2,21 +2,23 @@ package lotto.domain;
 
 import lotto.constant.MatchResult;
 
-public class LottoBuyer {
+public class LottoGame {
+
+    private static final int LOTTO_PRICE = 1000;
 
     private final int purchaseAmount;
-    private Lottos lottos;
+    private final Lottos lottos;
 
-    public LottoBuyer(int purchaseAmount) {
+    public LottoGame(int purchaseAmount) {
         this.purchaseAmount = purchaseAmount;
+        this.lottos = Lottos.createAutoLotto(purchaseCount());
     }
 
-    public void buyLottos() {
-        LottoStore lottoStore = new LottoStore(purchaseAmount);
-        lottos = lottoStore.sellLotto();
+    private int purchaseCount() {
+        return purchaseAmount / LOTTO_PRICE;
     }
 
-    public void confirmLottos(WinningNumbers lastWinningNumbers) {
+    public void confirmLottos(LottoNumbers lastWinningNumbers) {
         lottos.confirmAll(lastWinningNumbers);
     }
 
