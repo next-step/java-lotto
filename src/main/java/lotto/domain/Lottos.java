@@ -15,9 +15,9 @@ public class Lottos {
         this(new UserAmount(lottos), lottos);
     }
 
-    public Lottos(UserAmount userAmount, List<LottoNumbers> lottoNumbers) {
+    public Lottos(UserAmount userAmount, List<LottoNumbers> userLottos) {
         this.userAmount = userAmount;
-        this.lottos = attachRandomLottoNumbersWith(lottoNumbers);
+        this.lottos = attachRandomLottosWith(userLottos);
     }
 
     public int length() {
@@ -50,20 +50,20 @@ public class Lottos {
                 .count();
     }
 
-    private List<LottoNumbers> attachRandomLottoNumbersWith(List<LottoNumbers> userInputLottos) {
-        List<LottoNumbers> randomLottoNumbers = IntStream.range(
-                        START_INCLUSIVE, this.userAmount.getRandomLottoSize(userInputLottos)
+    private List<LottoNumbers> attachRandomLottosWith(List<LottoNumbers> userLottos) {
+        List<LottoNumbers> randomLottos = IntStream.range(
+                        START_INCLUSIVE, this.userAmount.getRandomLottoSize(userLottos)
                 )
                 .mapToObj(it -> LottoNumbers.ofRandom())
                 .collect(Collectors.toList());
 
-        return attach(userInputLottos, randomLottoNumbers);
+        return attach(userLottos, randomLottos);
     }
 
-    private List<LottoNumbers> attach(List<LottoNumbers> userInputLottos, List<LottoNumbers> randomLottoNumbers) {
+    private List<LottoNumbers> attach(List<LottoNumbers> userLottos, List<LottoNumbers> randomLottos) {
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        lottoNumbers.addAll(userInputLottos);
-        lottoNumbers.addAll(randomLottoNumbers);
+        lottoNumbers.addAll(userLottos);
+        lottoNumbers.addAll(randomLottos);
 
         return lottoNumbers;
     }
