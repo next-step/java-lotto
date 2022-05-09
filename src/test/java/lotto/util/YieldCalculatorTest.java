@@ -21,6 +21,6 @@ class YieldCalculatorTest {
         winningMap.put(THIRD, 2);
         winningMap.put(FOURTH, 3);
 
-        assertThat(YieldCalculator.calculate(winningMap, 2000000)).isEqualTo(0.8075);
+        assertThat(YieldCalculator.calculate(winningMap, 2000000)).isEqualTo(16.575);
     }
 }
