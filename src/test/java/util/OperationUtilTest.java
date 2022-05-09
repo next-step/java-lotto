@@ -23,6 +23,7 @@ class OperationUtilTest {
                 .isEqualTo(5);
     }
 
+    @DisplayName("입력된 문자열을 6개의 정수로 이뤄진 리스트로 반환")
     @Test
     void splitStringToNumbers() {
         mockInput = "1, 2, 3, 4, 5, 6";
@@ -34,6 +35,7 @@ class OperationUtilTest {
                 .isEqualTo(mockNumbers);
     }
 
+    @DisplayName("로또의 수익률을 계산해서 반환")
     @Test
     void getRateOfReturn() {
         mockPrizeAmount = 5000;

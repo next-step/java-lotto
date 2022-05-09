@@ -25,7 +25,7 @@ class WinStatisticTest {
                 .isTrue();
     }
 
-    @DisplayName("일치하는 숫자의 로또 갯수를 1 올려준다.")
+    @DisplayName("일치하는 숫자의 로또 갯수를 1 올리기")
     @Test
     void increaseCount() {
         mockFullStatistic.increaseCount();
@@ -34,7 +34,7 @@ class WinStatisticTest {
                 .isEqualTo(3);
     }
 
-    @DisplayName("당첨된 로또 횟수와 가격을 곱해서 반환한다.")
+    @DisplayName("당첨된 로또 횟수와 가격을 곱해서 반환")
     @Test
     void getPrizeAmount() {
         assertThat(mockFullStatistic.getPrizeAmount(mockFullStatistic))

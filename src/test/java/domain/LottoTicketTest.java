@@ -17,14 +17,14 @@ class LottoTicketTest {
     List<Integer> mockOverSixNumbers;
     List<Integer> mockRedundantNumbers;
 
-    @DisplayName("로또 번호가 6자리이면서 모두 다 다른 값이다.")
+    @DisplayName("로또 번호가 6자리이면서 모두 다 다른 값일 때 성공")
     @Test
     void correctLottoNumbers() {
         mockLottoNumbers = new LinkedList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         mockLottoTicket = new LottoTicket(mockLottoNumbers);
     }
 
-    @DisplayName("로또 번호가 6자리를 넘긴다.")
+    @DisplayName("로또 번호가 6자리를 넘기면 예외 반환")
     @Test
     void lottoNumbersOverSix() {
         mockOverSixNumbers = new LinkedList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
@@ -34,7 +34,7 @@ class LottoTicketTest {
         });
     }
 
-    @DisplayName("로또 번호가 동일한 숫자가 있다.")
+    @DisplayName("로또 번호가 동일한 숫자가 있으면 예외 반환")
     @Test
     void lottoNumbersAreOverlapping() {
         mockRedundantNumbers = new LinkedList<>(Arrays.asList(1, 1, 3, 4, 5, 6));
