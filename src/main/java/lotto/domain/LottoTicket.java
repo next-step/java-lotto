@@ -50,4 +50,8 @@ public class LottoTicket {
 
         return lottoTicket.size() + winningLotto.getLottoTicket().size() - lottoNumbers.size();
     }
+
+    public boolean isMatchedBonus(LottoNumber bonusNumber) {
+        return lottoTicket.contains(bonusNumber);
+    }
 }

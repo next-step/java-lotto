@@ -12,7 +12,7 @@ public class RankGroupTest {
     @Test
     @DisplayName("당첨금 테스트")
     void winningPrizeTest() {
-        RankGroup rankGroup = new RankGroup(Arrays.asList(Rank.FIRST, Rank.SECOND));
+        RankGroup rankGroup = new RankGroup(Arrays.asList(Rank.FIRST, Rank.THIRD));
         assertThat(rankGroup.sumMoney()).isEqualTo(2001500000);
     }
 
@@ -29,7 +29,7 @@ public class RankGroupTest {
     @Test
     @DisplayName("수익률 테스트")
     void returnMoneyPercentage() {
-        RankGroup rankGroup = new RankGroup(Arrays.asList(Rank.FOURTH, Rank.NO_MATCH, Rank.NO_MATCH, Rank.NO_MATCH));
+        RankGroup rankGroup = new RankGroup(Arrays.asList(Rank.FIFTH, Rank.NO_MATCH, Rank.NO_MATCH, Rank.NO_MATCH));
 
         assertThat(rankGroup.returnMoneyPercentage(4000)).isEqualTo(1.25);
     }

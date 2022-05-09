@@ -48,11 +48,11 @@ public class LottoTicketGroup {
         return this.lottoTicketGroup;
     }
 
-    public RankGroup getLottoRankings(LottoTicket winningLotto) {
+    public RankGroup getLottoRankings(LottoTicket winningLotto, LottoNumber bonusNumber) {
         List<Rank> myRanks = new ArrayList<>();
 
         for (LottoTicket lottoTicket : lottoTicketGroup) {
-            myRanks.add(Rank.of(lottoTicket.getMatchResult(winningLotto)));
+            myRanks.add(Rank.of(lottoTicket.getMatchResult(winningLotto), lottoTicket.isMatchedBonus(bonusNumber)));
         }
         return new RankGroup(myRanks);
     }
