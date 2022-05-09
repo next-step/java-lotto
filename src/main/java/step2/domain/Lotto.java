@@ -20,7 +20,7 @@ public class Lotto {
 
     public Rank matching(LottoWeeklyNumber lottoWeeklyNumber) {
         return Rank.of(lottoWeeklyNumber.matchCount(pick),
-                lottoWeeklyNumber.matchBonus(pick));
+                lottoWeeklyNumber.matchBonus());
     }
 
 }

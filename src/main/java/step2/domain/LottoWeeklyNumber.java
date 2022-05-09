@@ -18,7 +18,7 @@ public class LottoWeeklyNumber {
                 .count();
     }
 
-    public boolean matchBonus(List<LottoNumber> pick) {
+    public boolean matchBonus() {
         return lottoWinNumber
                 .pickLottoNumberOfWeek()
                 .contains(bonusBall);

@@ -6,6 +6,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -38,14 +42,6 @@ class WinLottoNumberTest {
             LottoWinNumber winLottoNumber = new LottoWinNumber(input);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 당첨번호는 유니크 합니다");
-    }
-
-    @DisplayName("로또 당첨번호 추출")
-    @Test
-    void pickLottoNumberOfWeekTest() {
-        LottoWinNumber winLottoNumber = new LottoWinNumber("10, 2, 3, 4, 5, 6");
-        assertThat(winLottoNumber.pickLottoNumberOfWeek())
-                .containsExactly(10, 2, 3, 4, 5, 6);
     }
 
 }
