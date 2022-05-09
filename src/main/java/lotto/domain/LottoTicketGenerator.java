@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.domain.strategy.LottoNumberGenerateStrategy;
 import lotto.exception.InvalidMoneyInputException;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -40,16 +39,8 @@ public class LottoTicketGenerator {
         }
     }
 
-    public WinningTicket generateWinningTicket(List<Integer> winningNumbers, Integer bonusNumber) {
-        HashSet<Integer> numbers = new HashSet<>(winningNumbers);
-        LottoTicket lottoTicket = new LottoTicket(this.generateLottoNumbers(numbers));
-        return new WinningTicket(lottoTicket, new LottoNumber(bonusNumber));
-    }
-
-    private Set<LottoNumber> generateLottoNumbers(Set<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet());
+    public WinningTicket generateWinningTicket(Set<LottoNumber> lottoNumbers, Integer bonusNumber) {
+        return new WinningTicket(new LottoTicket(lottoNumbers), new LottoNumber(bonusNumber));
     }
 
     private Set<LottoNumber> generateLottoNumbers() {

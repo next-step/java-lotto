@@ -1,10 +1,11 @@
 package lotto.util;
 
+import lotto.domain.LottoNumber;
 import lotto.exception.InvalidInputLottoNumberException;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class InputUtil {
@@ -17,7 +18,7 @@ public class InputUtil {
         return BigDecimal.valueOf(parseLong(input));
     }
 
-    public static List<Integer> readLottoNumbers(String input) {
+    public static Set<LottoNumber> readLottoNumbers(String input) {
         String replacedString = input.replaceAll(" ", "");
         return getLottoNumbers(replacedString);
     }
@@ -36,7 +37,7 @@ public class InputUtil {
         return integer;
     }
 
-    private static List<Integer> getLottoNumbers(String input) {
+    private static Set<LottoNumber> getLottoNumbers(String input) {
         String[] split = splitInputByDelimiter(input);
         return convertNumbers(split);
     }
@@ -45,16 +46,18 @@ public class InputUtil {
         return input.split(DELIMITER);
     }
 
-    private static List<Integer> convertNumbers(String[] split) {
-        List<Integer> collect;
+    private static Set<LottoNumber> convertNumbers(String[] split) {
+        Set<LottoNumber> collect;
         collect = Arrays.stream(split)
                 .map(InputUtil::getInteger)
-                .collect(Collectors.toList());
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
         validLottoNumbers(collect);
         return collect;
     }
 
-    private static void validLottoNumbers(List<Integer> lottoNumbers) {
+
+    private static void validLottoNumbers(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new InvalidInputLottoNumberException();
         }

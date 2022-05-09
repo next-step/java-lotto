@@ -1,10 +1,11 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
 import lotto.util.InputUtil;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class InputView {
 
@@ -18,7 +19,7 @@ public class InputView {
         return InputUtil.readMoney(readInput());
     }
 
-    public List<Integer> readLottoNumbers() {
+    public Set<LottoNumber> readLottoNumbers() {
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
         return InputUtil.readLottoNumbers(readInput());
     }

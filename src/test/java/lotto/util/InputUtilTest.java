@@ -1,5 +1,6 @@
 package lotto.util;
 
+import lotto.domain.LottoNumber;
 import lotto.exception.InvalidInputLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,7 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -35,10 +36,17 @@ class InputUtilTest {
     @DisplayName("쉼표와 공백을 기준으로 숫자 배열 생성")
     void returnListByDelimiterAndBlank() {
         String input = "1, 2, 3, 4, 5, 6";
-        List<Integer> integers = InputUtil.readLottoNumbers(input);
+        Set<LottoNumber> integers = InputUtil.readLottoNumbers(input);
         assertThat(integers)
                 .hasSize(6)
-                .containsExactly(1, 2, 3, 4, 5, 6);
+                .containsExactly(
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
+                        new LottoNumber(5),
+                        new LottoNumber(6)
+                );
     }
 
     @ParameterizedTest
@@ -74,6 +82,4 @@ class InputUtilTest {
                 .isInstanceOf(NumberFormatException.class)
                 .hasMessageContaining("숫자를 입력해주세요.");
     }
-
-
 }

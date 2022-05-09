@@ -70,7 +70,14 @@ class LottoTicketGeneratorTest {
     @DisplayName("생성된 당첨 티켓과 보너스 넘버가 같을 경우 true 반환")
     void returnTrueWhenGeneratedWinningTicketHasSameBonusNumber() {
         LottoTicketGenerator lottoTicketGenerator = new LottoTicketGenerator(new TestGeneratorStrategy());
-        WinningTicket winningTicket = lottoTicketGenerator.generateWinningTicket(List.of(1, 2, 3, 4, 5, 6), 7);
+        WinningTicket winningTicket = lottoTicketGenerator.generateWinningTicket(Set.of(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)), 7);
+
         assertThat(winningTicket.isMatchBonusNumber(new LottoNumber(7))).isTrue();
     }
 
