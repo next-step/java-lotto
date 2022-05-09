@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.strategy.LottoNumberGenerateStrategy;
 import lotto.exception.InvalidMoneyInputException;
 
 import java.util.HashSet;

@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.*;
+import lotto.domain.strategy.RandomGenerateStrategy;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -42,7 +43,7 @@ public class LottoGameController {
     }
 
     private WinningTicket getWinningTicket() {
-        List<Integer> integers = inputView.readWinningNumber();
+        List<Integer> integers = inputView.readLottoNumbers();
         Integer bonusNumber = inputView.readBonusNumber();
         return lottoTicketGenerator.generateWinningTicket(integers, bonusNumber);
     }
