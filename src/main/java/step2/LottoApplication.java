@@ -13,7 +13,7 @@ public class LottoApplication {
 
         int purchaseAmount = inputView.askPurchaseAmount();
         PurchaseMoney purchaseMoney = new PurchaseMoney(purchaseAmount);
-        outPutView.showPurchaseCount(purchaseMoney.getPurchaseCount());
+        outPutView.showPurchaseCount(purchaseMoney.calculatePurchaseCount());
 
         PurchaseList purchaseList = new PurchaseList(purchaseMoney);
         outPutView.show(purchaseList.toString());

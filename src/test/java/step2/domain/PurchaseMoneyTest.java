@@ -20,14 +20,6 @@ class PurchaseMoneyTest {
     }
 
     @Test
-    void 로또_한_개의_가격이_0보다_작으면_예외() {
-        assertThatIllegalArgumentException().isThrownBy(
-                () -> new PurchaseMoney(1000, -1)
-        );
-    }
-
-
-    @Test
     void 구매가격이_0보다_작으면_예외() {
         assertThatIllegalArgumentException().isThrownBy(
                 () -> new PurchaseMoney(-1)
@@ -37,14 +29,14 @@ class PurchaseMoneyTest {
     @Test
     void 구매가격으로_한_장도_살_수_없으면_예외() {
         assertThatIllegalArgumentException().isThrownBy(
-                () -> new PurchaseMoney(10, 100)
+                () -> new PurchaseMoney(999)
         );
     }
 
     @Test
     void 구매가격이_나누어떨어지지_않으면_예외() {
         assertThatIllegalArgumentException().isThrownBy(
-                () -> new PurchaseMoney(10, 3)
+                () -> new PurchaseMoney(1001)
         );
     }
 
