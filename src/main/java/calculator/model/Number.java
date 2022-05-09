@@ -12,6 +12,13 @@ public class Number {
         this.number = Integer.parseInt(number);
     }
 
+    public Number(int number) {
+        String stringNum = String.valueOf(number);
+        validate(stringNum);
+        this.number = Integer.parseInt(stringNum);
+    }
+
+
     private void validate(String number){
         if(number == null || !NUMBER_PATTERN.matcher(number).matches()){
             throw new IllegalArgumentException(number+":0이상의 숫자가 아닙니다");
@@ -19,7 +26,7 @@ public class Number {
     }
 
     public Number calculate(Operator op, Number number){
-        return new Number(String.valueOf(op.calculate(this.number, number.getNumber())));
+        return new Number(op.calculate(this.number, number.getNumber()));
     }
 
     public int getNumber(){
