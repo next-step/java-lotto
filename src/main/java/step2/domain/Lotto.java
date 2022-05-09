@@ -1,7 +1,6 @@
 package step2.domain;
 
 
-import java.util.Comparator;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -53,7 +52,7 @@ public class Lotto {
     @Override
     public String toString() {
         return values.stream()
-                .sorted(Comparator.comparing(LottoNumber::getValue))
+                .sorted(LottoNumber::compareTo)
                 .map(LottoNumber::toString)
                 .collect(Collectors.joining(" "));
     }

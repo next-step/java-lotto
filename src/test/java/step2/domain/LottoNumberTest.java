@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,5 +26,21 @@ class LottoNumberTest {
         assertThatIllegalArgumentException().isThrownBy(
                 () -> LottoNumber.from(input)
         );
+    }
+
+    @ParameterizedTest(name = "{displayName} -> [{index}] : {arguments}")
+    @CsvSource(
+            delimiter = '/',
+            value = {
+                    "5/5/0",
+                    "4/5/-1",
+                    "5/4/1"
+            }
+    )
+    void LottoNumber_간_크기_비교(String left, String right, int reuslt) {
+        LottoNumber leftLotto = LottoNumber.from(left);
+        LottoNumber rightLotto = LottoNumber.from(right);
+
+        assertThat(leftLotto.compareTo(rightLotto)).isEqualTo(reuslt);
     }
 }

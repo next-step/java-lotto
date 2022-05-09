@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int MIN = 1;
     private static final int MAX = 45;
@@ -32,10 +32,6 @@ public class LottoNumber {
         throw new IllegalArgumentException("범위를 벗어나는 번호입니다.");
     }
 
-    public int getValue() {
-        return this.value;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -52,5 +48,10 @@ public class LottoNumber {
     @Override
     public String toString() {
         return String.valueOf(this.value);
+    }
+
+    @Override
+    public int compareTo(LottoNumber operand) {
+        return Integer.compare(this.value, operand.value);
     }
 }
