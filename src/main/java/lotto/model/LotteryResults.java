@@ -18,7 +18,6 @@ public final class LotteryResults {
 
     static {
         Arrays.stream(Grade.values())
-                .filter(grade -> grade != Grade.NONE)
                 .forEach(grade -> gradeMap.put(grade, START_COUNT));
     }
 
@@ -30,7 +29,7 @@ public final class LotteryResults {
 
     public static List<LotteryResult> getLotteryResult() {
         List<LotteryResult> lotteryResults = new ArrayList<>();
-        array().forEach(gradeIntegerEntry ->
+        array().stream().filter(grade-> grade.getKey() != Grade.NONE).forEach(gradeIntegerEntry ->
                 lotteryResults.add(new LotteryResult(gradeIntegerEntry.getKey(), gradeIntegerEntry.getValue())));
         return lotteryResults;
     }
