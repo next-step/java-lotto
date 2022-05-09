@@ -42,6 +42,8 @@ public enum Ranking {
 
     @Override
     public String toString() {
+        if (requireBonusCount > 0)
+            return matchCount +"개 일치, 보너스 볼 일치 (" + money + ")원";
         return matchCount +"개 일치 (" + money + ")원";
     }
 }
