@@ -33,4 +33,10 @@ class StringCalculatorTest {
         assertThat(Integer.parseInt(StringCalculator.classify(4, "+", 5))).isEqualTo(9);
     }
 
+    @Test
+    @DisplayName("뺄셈 테스트")
+    void minusTest() {
+        assertThat(Integer.parseInt(StringCalculator.classify(5, "-", 4))).isEqualTo(1);
+    }
+
 }
