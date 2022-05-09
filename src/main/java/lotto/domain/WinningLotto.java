@@ -20,6 +20,10 @@ public class WinningLotto {
         return bonusBall;
     }
 
+    public boolean containsBonus(LottoNumbers lottoNumbers) {
+        return lottoNumbers.contains(bonusBall);
+    }
+
     private enum Message {
         BONUS_BALL_CANNOT_CONTAIN_WINNING_LOTTO_NUMBERS("보너스 볼은 당첨 번호에 포함될 수 없습니다.");
 

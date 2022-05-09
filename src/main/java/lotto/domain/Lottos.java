@@ -41,11 +41,8 @@ public class Lottos {
     }
 
     public int getRankCount(WinningLotto winningLotto, Rank rank) {
-        LottoNumbers winningLottoNumbers = winningLotto.getWinningLottoNumbers();
-        LottoNumber bonusBall = winningLotto.getBonusBall();
-
         return (int) this.lottos.stream()
-                .map(it -> Rank.valueOf(it.getMatchNumberCount(winningLottoNumbers), it.contains(bonusBall)))
+                .map(it -> Rank.valueOf(winningLotto, it))
                 .filter(it -> it == rank)
                 .count();
     }

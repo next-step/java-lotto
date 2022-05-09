@@ -22,6 +22,11 @@ public enum Rank {
         return valueOf(rank.countOfMatch, matchBonus);
     }
 
+    public static Rank valueOf(WinningLotto winningLotto, LottoNumbers lottoNumbers) {
+        int matchNumberCount = lottoNumbers.getMatchNumberCount(winningLotto.getWinningLottoNumbers());
+        return valueOf(matchNumberCount, winningLotto.containsBonus(lottoNumbers));
+    }
+
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
         return Arrays.stream(values())
                 .filter(rank -> rank.countOfMatch == countOfMatch)
