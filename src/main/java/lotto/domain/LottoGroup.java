@@ -55,6 +55,6 @@ public class LottoGroup {
 
     @Override
     public int hashCode() {
-        return lottos != null ? lottos.hashCode() : 0;
+        return lottos.hashCode();
     }
 }

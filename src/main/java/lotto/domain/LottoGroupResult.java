@@ -48,6 +48,6 @@ public class LottoGroupResult {
 
     @Override
     public int hashCode() {
-        return lottoRankCount != null ? lottoRankCount.hashCode() : 0;
+        return lottoRankCount.hashCode();
     }
 }

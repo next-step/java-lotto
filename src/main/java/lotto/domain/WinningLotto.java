@@ -50,8 +50,8 @@ public class WinningLotto {
 
     @Override
     public int hashCode() {
-        int result = winningLotto != null ? winningLotto.hashCode() : 0;
-        result = 31 * result + (bonusNumber != null ? bonusNumber.hashCode() : 0);
+        int result = winningLotto.hashCode();
+        result = 31 * result + bonusNumber.hashCode();
         return result;
     }
 }

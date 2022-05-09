@@ -79,7 +79,7 @@ public class Lotto {
 
     @Override
     public int hashCode() {
-        return numbers != null ? numbers.hashCode() : 0;
+        return numbers.hashCode();
     }
 
     @Override
