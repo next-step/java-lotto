@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Lottos {
-    private static final int WINNER_BOUNDARY = 3;
     private final List<Lotto> lottos = new ArrayList<>();
 
     public int generateLottosFromStrategy(GenerateNumberStrategy strategy, int count) {
