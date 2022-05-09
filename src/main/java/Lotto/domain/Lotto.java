@@ -71,6 +71,16 @@ public class Lotto {
         return cnt;
     }
 
+    public void isDuplicateNumber(Number bonusNumber) {
+        if(myNumbers.contains(bonusNumber)) {
+            throw new SameNumberException("당첨번호와 보너스 번호가 중복됩니다.");
+        }
+    }
+
+    public boolean isMatchBonusNumber(Number bonusNumber) {
+        return myNumbers.contains(bonusNumber);
+    }
+
     private List<Number> getList() {
         return this.myNumbers;
     }
@@ -78,4 +88,6 @@ public class Lotto {
     public int getLottoNumber(int idx) {
         return myNumbers.get(idx).getNumber();
     }
+
+
 }

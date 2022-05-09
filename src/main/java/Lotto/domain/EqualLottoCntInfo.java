@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 public enum EqualLottoCntInfo {
 
     FIRST(6, 2000000000),
+    BONUS(5,30000000),
     SECOND(5, 1500000),
     THIRD(4, 50000),
     FOURTH(3, 5000),
@@ -24,11 +25,14 @@ public enum EqualLottoCntInfo {
         this.winningMoney = winningMoney;
     }
 
-    public static EqualLottoCntInfo findEqualLottoInfo(int equalCnt) {
-        return Stream.of(values())
-                .filter(WinningRankInfo -> (WinningRankInfo.equalCnt == (equalCnt)))
-                .findFirst()
-                .orElseThrow(() -> new NotFoundRankException("등수를 찾을 수 없습니다."));
+    public static EqualLottoCntInfo findEqualLottoInfo(int equalCnt, boolean isMatchBonus) {
+        if (equalCnt != 5 || !isMatchBonus) {
+            return Stream.of(values())
+                    .filter(WinningRankInfo -> (WinningRankInfo.equalCnt == (equalCnt)))
+                    .findFirst()
+                    .orElseThrow(() -> new NotFoundRankException("등수를 찾을 수 없습니다."));
+        }
+        return EqualLottoCntInfo.BONUS;
     }
 
     public int calcTotalWinningMoney(int winningNumberCount) {

@@ -19,7 +19,7 @@ class EqualLottoCntInfoTest {
     @DisplayName("등수를 찾을 수 없으면 예외를 던진다.")
     public void NotFoundWinningRankTest(int rank) {
         Assertions.assertThatExceptionOfType(NotFoundRankException.class).isThrownBy(
-                () -> EqualLottoCntInfo.findEqualLottoInfo(rank)
+                () -> EqualLottoCntInfo.findEqualLottoInfo(rank, false)
         );
     }
 

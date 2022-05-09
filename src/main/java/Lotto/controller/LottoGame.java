@@ -1,6 +1,7 @@
 package Lotto.controller;
 
 import Lotto.domain.*;
+import Lotto.domain.Number;
 import Lotto.view.InputView;
 import Lotto.view.ResultView;
 
@@ -9,9 +10,9 @@ import java.util.Map;
 public class LottoGame {
 
     private Lottos lottos;
-
     private Money money;
     private Lotto winningNumbers;
+    private Number bonusNumber;
 
     public void start() {
         inputBuyMoney();
@@ -39,10 +40,18 @@ public class LottoGame {
 
     private void inputAndCreateWinningLottoNumbers() {
         winningNumbers = new Lotto(InputView.inputWinningLottoNumbers());
+
+        inputAndCreateBonusLottoNumber();
+    }
+
+    private void inputAndCreateBonusLottoNumber() {
+        bonusNumber = new Number(InputView.inputBonusLottoNumbers());
+
+        winningNumbers.isDuplicateNumber(bonusNumber);
     }
 
     private void viewResult() {
-        Map<EqualLottoCntInfo, Integer> resultInfo = lottos.findWinningLotto(winningNumbers);
+        Map<EqualLottoCntInfo, Integer> resultInfo = lottos.findWinningLotto(winningNumbers, bonusNumber);
 
         ResultView.viewResultBoard(resultInfo);
 

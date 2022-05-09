@@ -39,7 +39,7 @@ public class ResultView {
         for (EqualLottoCntInfo equalLottoCntInfo : EqualLottoCntInfo.values()) {
             viewResultMessage(result, equalLottoCntInfo);
         }
-            }
+    }
 
     private static void viewResultMessage(Map<EqualLottoCntInfo, Integer> result, EqualLottoCntInfo equalLottoCntInfo) {
         if (equalLottoCntInfo.isValidEqualCnt()) {
@@ -47,8 +47,18 @@ public class ResultView {
             if (sameRankCount == null) {
                 sameRankCount = 0;
             }
-            System.out.println(equalLottoCntInfo.getEqualCnt() + "개 일치 (" + equalLottoCntInfo.getWinningMoney() + "원)" + " - " + sameRankCount + "개");
+
+            String bonusStr = isWinningBonusNumber(equalLottoCntInfo);
+
+            System.out.println(equalLottoCntInfo.getEqualCnt() + "개 일치 " + bonusStr + "(" + equalLottoCntInfo.getWinningMoney() + "원)" + " - " + sameRankCount + "개");
         }
+    }
+
+    private static String isWinningBonusNumber(EqualLottoCntInfo equalLottoCntInfo) {
+        String str = "";
+        if ((equalLottoCntInfo == EqualLottoCntInfo.BONUS) && (equalLottoCntInfo.getEqualCnt() == 5))
+            str = ", 보너스 볼 일치";
+        return str;
     }
 
     public static void viewLottoYield(double yield) {
