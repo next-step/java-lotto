@@ -25,7 +25,7 @@ class StringNumberUtilsTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"+", "abc", "%", "-", "1-1", "*", "/"})
-    void parse_숫자가_아닌_꼉우(String oddValue) {
-        assertThatThrownBy(() -> StringNumberUtils.parse(oddValue));
+    void parse_숫자가_아닌_경우(String nonNumber) {
+        assertThatThrownBy(() -> StringNumberUtils.parse(nonNumber));
     }
 }
