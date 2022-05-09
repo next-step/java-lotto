@@ -9,9 +9,13 @@ import java.util.stream.IntStream;
 public class LottoNumber {
     private static final int START_LOTTO_NUMBER = 1;
     private static final int END_LOTTO_NUMBER = 45;
-    private static final List<Integer> LOTTO_NUMBERS = IntStream.rangeClosed(START_LOTTO_NUMBER, END_LOTTO_NUMBER)
-            .boxed()
-            .collect(Collectors.toList());
+    private static final List<LottoNumber> LOTTO_NUMBERS;
+
+    static {
+        LOTTO_NUMBERS = IntStream.rangeClosed(START_LOTTO_NUMBER, END_LOTTO_NUMBER)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
 
     private final int lottoNumber;
 
@@ -27,10 +31,9 @@ public class LottoNumber {
     public static LottoNumber ofRandom() {
         Collections.shuffle(LOTTO_NUMBERS);
 
-        return new LottoNumber(LOTTO_NUMBERS.stream()
-                .limit(1)
-                .collect(Collectors.toList())
-                .get(0));
+        return LOTTO_NUMBERS.stream()
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     private static int toInt(String string) {
@@ -43,6 +46,12 @@ public class LottoNumber {
 
     public int getLottoNumber() {
         return this.lottoNumber;
+    }
+
+    private void checkInvalid(int lottoNumber) {
+        if (lottoNumber < START_LOTTO_NUMBER || lottoNumber > END_LOTTO_NUMBER) {
+            throw new IllegalArgumentException(Message.INVALID_NUMBER.toString());
+        }
     }
 
     @Override
@@ -67,12 +76,6 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
-    }
-
-    private void checkInvalid(int lottoNumber) {
-        if (lottoNumber < START_LOTTO_NUMBER || lottoNumber > END_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(Message.INVALID_NUMBER.toString());
-        }
     }
 
     private enum Message {
