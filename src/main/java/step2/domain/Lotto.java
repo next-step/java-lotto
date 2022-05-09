@@ -27,15 +27,15 @@ public class Lotto {
         }
     }
 
-    public long calculateHitCount(Winner winner) {
+    public long calculateHitCount(WinningLotto winningLotto) {
         return values.stream()
-                .filter(winner::isContain)
+                .filter(winningLotto::isContain)
                 .count();
     }
 
-    public boolean containBonusNumber(Winner winner) {
+    public boolean containBonusNumber(WinningLotto winningLotto) {
         return values.stream()
-                .anyMatch(winner::isBonusNumber);
+                .anyMatch(winningLotto::isBonusNumber);
     }
 
     @Override

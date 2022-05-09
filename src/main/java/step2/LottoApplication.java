@@ -23,10 +23,10 @@ public class LottoApplication {
 
         String winnerInput = inputView.askWinnerInput();
         String bonusInput = inputView.askBonusInput();
-        Winner winner = new Winner(winnerInput, bonusInput);
+        WinningLotto winningLotto = new WinningLotto(winnerInput, bonusInput);
         inputView.close();
 
-        LottoGame lottoGame = new LottoGame(purchaseList, winner);
+        LottoGame lottoGame = new LottoGame(purchaseList, winningLotto);
         GameResult gameResult = lottoGame.calculateResult();
         ReturnRate returnRate = gameResult.calculateReturnRate(purchaseMoney);
 

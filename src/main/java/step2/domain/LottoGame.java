@@ -5,15 +5,15 @@ import java.util.List;
 public class LottoGame {
 
     private final PurchaseList purchaseList;
-    private final Winner winner;
+    private final WinningLotto winningLotto;
 
-    public LottoGame(PurchaseList purchaseList, Winner winner) {
+    public LottoGame(PurchaseList purchaseList, WinningLotto winningLotto) {
         this.purchaseList = purchaseList;
-        this.winner = winner;
+        this.winningLotto = winningLotto;
     }
 
     public GameResult calculateResult() {
-        List<LottoRank> result = purchaseList.calculateRankEach(winner);
+        List<LottoRank> result = purchaseList.calculateRankEach(winningLotto);
         return new GameResult(result);
     }
 }

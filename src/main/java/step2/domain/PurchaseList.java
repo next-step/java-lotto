@@ -27,9 +27,9 @@ public class PurchaseList {
         }
     }
 
-    public List<LottoRank> calculateRankEach(Winner winner) {
+    public List<LottoRank> calculateRankEach(WinningLotto winningLotto) {
         return values.stream()
-                .map(lotto -> LottoRank.toRank(lotto, winner))
+                .map(lotto -> LottoRank.toRank(lotto, winningLotto))
                 .collect(Collectors.toList());
     }
 

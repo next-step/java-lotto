@@ -33,9 +33,9 @@ class LottoRankTest {
     void 로또와_당첨_객체를_받아서_등수를_계산(String winnerNumber, String bonusNumber, LottoRank expect) {
         PurchaseStrategy strategy = (count) -> new HashSet<>(List.of("1", "2", "3", "4", "5", "6"));
         Lotto lotto = new Lotto(strategy);
-        Winner winner = new Winner(winnerNumber, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(winnerNumber, bonusNumber);
 
-        LottoRank result = LottoRank.toRank(lotto, winner);
+        LottoRank result = LottoRank.toRank(lotto, winningLotto);
 
         assertThat(result).isEqualTo(expect);
     }

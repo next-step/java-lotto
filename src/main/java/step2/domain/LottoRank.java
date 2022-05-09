@@ -20,12 +20,12 @@ public enum LottoRank {
         this.prizeMoney = prizeMoney;
     }
 
-    public static LottoRank toRank(Lotto lotto, Winner winner) {
-        long hitCount = lotto.calculateHitCount(winner);
+    public static LottoRank toRank(Lotto lotto, WinningLotto winningLotto) {
+        long hitCount = lotto.calculateHitCount(winningLotto);
         if (hitCount != BONUS_COUNT_THRESHOLD) {
             return withoutBonusNumber(hitCount);
         }
-        return withBonusNumber(lotto, winner);
+        return withBonusNumber(lotto, winningLotto);
     }
 
     private static LottoRank withoutBonusNumber(Long hitCount) {
@@ -36,8 +36,8 @@ public enum LottoRank {
                 .orElse(ETC);
     }
 
-    private static LottoRank withBonusNumber(Lotto lotto, Winner winner) {
-        if (lotto.containBonusNumber(winner)) {
+    private static LottoRank withBonusNumber(Lotto lotto, WinningLotto winningLotto) {
+        if (lotto.containBonusNumber(winningLotto)) {
             return SECOND;
         }
         return THIRD;

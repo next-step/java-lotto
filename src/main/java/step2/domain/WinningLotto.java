@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class Winner {
+public class WinningLotto {
 
     private static final String DELIIMITER = ", ";
     private static final int WINNER_COUNT = 6;
@@ -13,7 +13,7 @@ public class Winner {
     private final List<LottoNumber> winningNumbers;
     private final LottoNumber bonusNumber;
 
-    public Winner(String input, String bonus) {
+    public WinningLotto(String input, String bonus) {
         this.winningNumbers = initWinningNumbers(input);
         this.bonusNumber = initBonusNumber(bonus);
         validateBonusNumberDuplicate();
@@ -71,8 +71,8 @@ public class Winner {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Winner winner = (Winner) o;
-        return Objects.equals(winningNumbers, winner.winningNumbers) && Objects.equals(bonusNumber, winner.bonusNumber);
+        WinningLotto winningLotto = (WinningLotto) o;
+        return Objects.equals(winningNumbers, winningLotto.winningNumbers) && Objects.equals(bonusNumber, winningLotto.bonusNumber);
     }
 
     @Override

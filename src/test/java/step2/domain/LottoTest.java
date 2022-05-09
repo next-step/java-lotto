@@ -45,11 +45,11 @@ class LottoTest {
             delimiter = ':'
     )
     void 현재_로또와_지난회차_당첨_번호를_비교하여_맞춘_개수를_반환(String input, int hitCount) {
-        Winner winner = new Winner(input, "7");
+        WinningLotto winningLotto = new WinningLotto(input, "7");
 
         Lotto lotto = new Lotto(DEFAULT_STRATEGY);
 
-        assertThat(lotto.calculateHitCount(winner)).isEqualTo(hitCount);
+        assertThat(lotto.calculateHitCount(winningLotto)).isEqualTo(hitCount);
     }
 
     @ParameterizedTest
@@ -62,9 +62,9 @@ class LottoTest {
     )
     void 현재_로또가_보너스_번호를_포함하는지_반환(String bonus, boolean expect) {
         Lotto lotto = new Lotto(DEFAULT_STRATEGY);
-        Winner winner = new Winner("40, 41, 42, 43, 44, 45", bonus);
+        WinningLotto winningLotto = new WinningLotto("40, 41, 42, 43, 44, 45", bonus);
 
-        boolean result = lotto.containBonusNumber(winner);
+        boolean result = lotto.containBonusNumber(winningLotto);
 
         assertThat(result).isEqualTo(expect);
     }
