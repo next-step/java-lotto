@@ -3,14 +3,14 @@ package dev.solar.lotto;
 import java.util.Objects;
 import java.util.Random;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
     private static final Random random = new Random();
     private final int value;
 
     public static LottoNumber random() {
-        return new LottoNumber(random.nextInt(MIN_NUMBER + MAX_NUMBER) + MIN_NUMBER);
+        return new LottoNumber(random.nextInt(MAX_NUMBER) + MIN_NUMBER);
     }
 
     public LottoNumber(final int number) {
@@ -22,6 +22,10 @@ public class LottoNumber {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException("로또 번호 범위는 " + MIN_NUMBER + " ~ " + MAX_NUMBER + " 입니다.");
         }
+    }
+
+    public int getValue() {
+        return value;
     }
 
     @Override
@@ -42,5 +46,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public int compareTo(final LottoNumber o) {
+        return Integer.compare(value, o.value);
     }
 }

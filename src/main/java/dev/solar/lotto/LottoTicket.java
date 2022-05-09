@@ -1,22 +1,23 @@
 package dev.solar.lotto;
 
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class LottoTicket {
     private static final int LOTTO_NUMBERS_SIZE = 6;
-    private final Set<LottoNumber> lottoNumbers;
+    private final TreeSet<LottoNumber> lottoNumbers;
+    private Integer prizeMoney;
 
     public static LottoTicket buyOne() {
-        final HashSet<LottoNumber> lottoNumbers = new HashSet<>();
+        final TreeSet<LottoNumber> lottoNumbers = new TreeSet<>();
         while (lottoNumbers.size() < LOTTO_NUMBERS_SIZE) {
             lottoNumbers.add(LottoNumber.random());
         }
         return new LottoTicket(lottoNumbers);
     }
 
-    public LottoTicket(final Set<LottoNumber> lottoNumbers) {
+    public LottoTicket(final TreeSet<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
@@ -27,12 +28,38 @@ public class LottoTicket {
         }
     }
 
+    public int checkWinningNumbers(final Set<LottoNumber> winningNumbers) {
+        final int count = (int) winningNumbers.stream().filter(lottoNumbers::contains).count();
+        decidePrizeMoney(count);
+        return count;
+    }
+
+    private void decidePrizeMoney(final int count) {
+        if (count == 3) {
+            this.prizeMoney = 5000;
+            return;
+        }
+        if (count == 4) {
+            this.prizeMoney = 50000;
+            return;
+        }
+        if (count == 5) {
+            this.prizeMoney = 1500000;
+            return;
+        }
+        if (count == 6) {
+            this.prizeMoney = 2000000000;
+            return;
+        }
+        this.prizeMoney = 0;
+    }
+
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 
-    public int checkWinningNumbers(final Set<LottoNumber> winningNumbers) {
-        return (int) winningNumbers.stream().filter(lottoNumbers::contains).count();
+    public Integer getPrizeMoney() {
+        return prizeMoney;
     }
 
     @Override
