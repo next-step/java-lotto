@@ -4,6 +4,8 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.UserAmount;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -46,20 +48,25 @@ public class InputView {
     public static int inputNumberOfUserGenerateLotto() {
         System.out.println(Message.INPUT_NUMBER_OF_USER_GENERATE_LOTTO);
 
-        return SCANNER.nextInt();
+        try {
+            return SCANNER.nextInt();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return inputNumberOfUserGenerateLotto();
+        }
     }
 
-    public static String inputLottoOfUser(int numberOfUserGenereateLotto) {
+    public static List<LottoNumbers> inputLottoOfUser(int numberOfUserGenereateLotto) {
         System.out.println(Message.INPUT_LOTTOS_OF_USER);
         SCANNER.nextLine();
 
-        StringBuilder stringBuilder = new StringBuilder();
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < numberOfUserGenereateLotto; i++) {
-            stringBuilder.append(SCANNER.nextLine());
-            stringBuilder.append(USER_INPUT_LOTTO_DELIMITER);
+            String inputString = SCANNER.nextLine();
+            lottoNumbers.add(new LottoNumbers(inputString));
         }
 
-        return stringBuilder.toString();
+        return lottoNumbers;
     }
 
     private enum Message {

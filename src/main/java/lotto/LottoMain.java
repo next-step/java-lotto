@@ -8,12 +8,14 @@ import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
+
 public class LottoMain {
     public static void main(String[] args) {
         UserAmount userAmount = InputView.inputUserAmount();
         int numberOfUserGenerateLotto = InputView.inputNumberOfUserGenerateLotto();
 
-        String lottoOfUser = InputView.inputLottoOfUser(numberOfUserGenerateLotto);
+        List<LottoNumbers> lottoOfUser = InputView.inputLottoOfUser(numberOfUserGenerateLotto);
         Lottos lottos = new Lottos(userAmount, lottoOfUser);
         OutputView.outputLottoNumbers(lottos);
 

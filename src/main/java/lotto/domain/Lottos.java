@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import lotto.view.InputView;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -15,19 +12,12 @@ public class Lottos {
     private final UserAmount userAmount;
 
     protected Lottos(List<LottoNumbers> lottos) {
-        this.userAmount = new UserAmount(lottos);
-        this.lottos = lottos;
+        this(new UserAmount(lottos), lottos);
     }
 
-    public Lottos(UserAmount userAmount, String lottoOfUser) {
+    public Lottos(UserAmount userAmount, List<LottoNumbers> lottoNumbers) {
         this.userAmount = userAmount;
-        this.lottos = getRandomLottoNumbersWith(toLottoNumbers(lottoOfUser));
-    }
-
-    private static List<LottoNumbers> toLottoNumbers(String lottoOfUser) {
-        return Arrays.stream(lottoOfUser.split(InputView.USER_INPUT_LOTTO_DELIMITER))
-                .map(LottoNumbers::new)
-                .collect(Collectors.toList());
+        this.lottos = attachRandomLottoNumbersWith(lottoNumbers);
     }
 
     public int length() {
@@ -60,7 +50,7 @@ public class Lottos {
                 .count();
     }
 
-    private List<LottoNumbers> getRandomLottoNumbersWith(List<LottoNumbers> userInputLottos) {
+    private List<LottoNumbers> attachRandomLottoNumbersWith(List<LottoNumbers> userInputLottos) {
         List<LottoNumbers> randomLottoNumbers = IntStream.range(
                         START_INCLUSIVE, this.userAmount.getRandomLottoSize(userInputLottos)
                 )
