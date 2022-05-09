@@ -27,3 +27,4 @@
 * /계산기 (나눗셈의 경우 결과 값을 정수로 떨어지는 값으로 한정)
 * 입력값이 null이 거나 비었을기경우 예외처리(IllegalArgumentException)
 * 입력값이 사칙연산 기호가 아닐경우 예외처리(IllegalArgumentException)
+* 입력값이 잘못된 계산식일 경우 예외처리(IllegalArgumentException)
