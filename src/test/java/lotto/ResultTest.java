@@ -2,6 +2,7 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
@@ -11,14 +12,8 @@ class ResultTest {
   @Test
   void add_성공() {
     LottoPrize target = LottoPrize.SIX;
-    Map<LottoPrize, Integer> resultMap = new HashMap<>();
-    for (LottoPrize lottoPrize : LottoPrize.values()) {
-      if (lottoPrize == target) {
-        resultMap.put(target, 1);
-        continue;
-      }
-      resultMap.put(lottoPrize, 0);
-    }
+    Map<LottoPrize, Integer> resultMap = new EnumMap<>(LottoPrize.class);
+    resultMap.put(target, 1);
     Result expected = new Result(resultMap);
     Result result = new Result();
 

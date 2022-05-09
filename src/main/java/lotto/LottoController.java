@@ -1,42 +1,58 @@
 package lotto;
 
+import static lotto.Lotto.LOTTO_PRICE;
+import static util.LottoInputView.insertBonusNumber;
+import static util.LottoInputView.insertManualLotto;
+import static util.LottoInputView.insertManualPurchaseAmount;
+import static util.LottoInputView.insertPaymentAmount;
+import static util.LottoInputView.insertWinningLotto;
 import static util.LottoOutputView.print;
-import static util.LottoOutputView.printPurchaseAmount;
-import static util.LottoOutputView.printResultInfo;
-import static util.LottoOutputView.printRevenueRate;
+import static util.LottoOutputView.printDescriptionForInsertManualLotto;
+import static util.LottoOutputView.printLottoList;
+import static util.LottoOutputView.printManualPurchaseDone;
+import static util.LottoOutputView.printResult;
 
-import util.LottoInputView;
+import java.util.LinkedList;
+import java.util.List;
 
 public class LottoController {
 
+  public void start() {
+    try {
+      proceed();
+    } catch (Exception e) {
+      print(e.getMessage());
+      throw e;
+    }
+  }
 
-  public void proceed() {
-    PaymentAmount paymentAmount = LottoInputView.insertPaymentAmount();
-    LottoList lottoList = new LottoList(paymentAmount);
+  private void proceed() {
+    Credit credit = insertPaymentAmount();
+    int manualPurchaseAmount = insertManualPurchaseAmount();
+    int autoPurchaseAmount = credit.calculatePurchaseAmount(LOTTO_PRICE);
+    List<Lotto> manualLottoList = purchaseManualLotto(credit, manualPurchaseAmount);
+    printManualPurchaseDone(manualPurchaseAmount, autoPurchaseAmount);
 
-    print(lottoList.toStringForPrinting());
-    printPurchaseAmount(lottoList.getTotalLottoCount());
-    print(lottoList.toStringForPrinting());
+    LottoList lottoList = LottoList.createWithManualLottoList(manualLottoList, autoPurchaseAmount);
+    printLottoList(lottoList);
 
-    Lotto winning = new Lotto(LottoInputView.insertWinningLotto());
-    LottoNumber bonus = new LottoNumber(LottoInputView.insertBonusNumber());
+    WinningLotto winningLotto = new WinningLotto(
+        Lotto.create(insertWinningLotto()),
+        new LottoNumber(insertBonusNumber())
+    );
 
-    WinningLotto winningLotto = new WinningLotto(winning, bonus);
-    Result result = lottoList.drawing(winningLotto);
+    printResult(lottoList, winningLotto);
+  }
 
-    printResultInfo();
-
-    int totalRevenue = 0;
-    for (LottoPrize lottoPrize : LottoPrize.values()) {
-      if (lottoPrize.equals(LottoPrize.NONE)) {
-        continue;
-      }
-      int matchedLottoCount = result.getMatchedLottoCount(lottoPrize);
-      totalRevenue += lottoPrize.getRevenue(matchedLottoCount);
-      print(result.buildResultMessage(lottoPrize));
+  private List<Lotto> purchaseManualLotto(Credit credit, int manualPurchaseAmount) {
+    List<Lotto> manualLottoList = new LinkedList<>();
+    printDescriptionForInsertManualLotto();
+    for (int i = 0; i < manualPurchaseAmount; i++) {
+      manualLottoList.add(Lotto.create(insertManualLotto()));
+      credit.purchase(LOTTO_PRICE);
     }
 
-    printRevenueRate(lottoList.getRevenueRate(totalRevenue));
+    return manualLottoList;
   }
 
   public static LottoController init() {

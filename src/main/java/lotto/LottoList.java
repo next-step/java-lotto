@@ -1,18 +1,17 @@
 package lotto;
 
+import static lotto.Lotto.LOTTO_PRICE;
 import static util.Validator.validateArgument;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 public class LottoList {
 
   private static final String ERROR_MESSAGE_FOR_INVALID_AMOUNT = "Lotto를 생성할 숫자는 0보다 커야합니다.";
-  private static final String LOTTO_DELIMITER = "\n";
-  private static final int LOTTO_PRICE = 1000;
   private static final int REVENUE_RATE_SCALE = 2;
 
   private final List<Lotto> lottoList = new ArrayList<>();
@@ -21,16 +20,20 @@ public class LottoList {
   LottoList(int lottoAmount) {
     validateAmount(lottoAmount);
     for (int i = 0; i < lottoAmount; i++) {
-      lottoList.add(new Lotto());
+      lottoList.add(Lotto.create());
     }
-  }
-
-  LottoList(PaymentAmount paymentAmount) {
-    this(paymentAmount.purchaseLotto(LOTTO_PRICE));
   }
 
   LottoList(List<Lotto> lottoList) {
     this.lottoList.addAll(lottoList);
+  }
+
+  public LottoList addLotto(int amount) {
+    validateAmount(amount);
+    for (int i = 0; i < amount; i++) {
+      lottoList.add(Lotto.create());
+    }
+    return this;
   }
 
   public Result drawing(WinningLotto winningLotto) {
@@ -47,24 +50,18 @@ public class LottoList {
     return result;
   }
 
-  public int getTotalLottoCount() {
-    return lottoList.size();
+  public int getTotalPaymentAmount(int price) {
+    return lottoList.size() * price;
   }
 
-  public int getTotalPurchaseAmount() {
-    return getTotalLottoCount() * LOTTO_PRICE;
-  }
-
-  public String toStringForPrinting() {
-    StringJoiner joiner = new StringJoiner(LOTTO_DELIMITER);
-    lottoList.forEach(lotto -> joiner.add(lotto.toStringForPrinting()));
-    return joiner.toString();
+  public List<Lotto> getListOfLotto() {
+    return lottoList.stream().collect(Collectors.toUnmodifiableList());
   }
 
   public BigDecimal getRevenueRate(int totalRevenue) {
     return BigDecimal.valueOf(totalRevenue)
         .divide(
-            BigDecimal.valueOf(lottoList.size()),
+            BigDecimal.valueOf(getTotalPaymentAmount(LOTTO_PRICE)),
             REVENUE_RATE_SCALE,
             RoundingMode.HALF_UP
         );
@@ -76,5 +73,13 @@ public class LottoList {
         (arg) -> amount > 0,
         ERROR_MESSAGE_FOR_INVALID_AMOUNT
     );
+  }
+
+  public static LottoList createWithManualLottoList(
+      List<Lotto> manualLottoList,
+      int additionalPurchaseAmount
+  )  {
+    LottoList lottoList = new LottoList(manualLottoList);
+    return lottoList.addLotto(additionalPurchaseAmount);
   }
 }

@@ -13,7 +13,7 @@ class WinningLottoTest {
 
   @Test
   void WinningLotto_생성_성공() {
-    Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+    Lotto lotto = Lotto.create(Set.of(1, 2, 3, 4, 5, 6));
     LottoNumber bonus = new LottoNumber(7);
 
     assertDoesNotThrow(() -> new WinningLotto(lotto, bonus));
@@ -22,7 +22,7 @@ class WinningLottoTest {
   @ParameterizedTest(name = "{0}는 이미 당첨번호이므로 실패함")
   @ValueSource(ints = {1, 2, 3, 4, 5, 6})
   void WinningLotto_생성_실패(int duplicatedNumber) {
-    Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+    Lotto lotto = Lotto.create(Set.of(1, 2, 3, 4, 5, 6));
     LottoNumber bonus = new LottoNumber(duplicatedNumber);
 
     assertThrows(IllegalArgumentException.class, () -> new WinningLotto(lotto, bonus));
@@ -30,7 +30,7 @@ class WinningLottoTest {
 
   @Test
   void matchedCount_성공() {
-    Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+    Lotto lotto = Lotto.create(Set.of(1, 2, 3, 4, 5, 6));
     LottoNumber bonus = new LottoNumber(7);
     WinningLotto winningLotto = new WinningLotto(lotto, bonus);
 
@@ -39,8 +39,8 @@ class WinningLottoTest {
 
   @Test
   void matchedBonus_성공() {
-    Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
-    Lotto other = new Lotto(Set.of(1, 2, 3, 4, 5, 7));
+    Lotto lotto = Lotto.create(Set.of(1, 2, 3, 4, 5, 6));
+    Lotto other = Lotto.create(Set.of(1, 2, 3, 4, 5, 7));
     LottoNumber bonus = new LottoNumber(7);
     WinningLotto winningLotto = new WinningLotto(lotto, bonus);
 
@@ -49,7 +49,7 @@ class WinningLottoTest {
 
   @Test
   void matchedBonus_실패() {
-    Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+    Lotto lotto = Lotto.create(Set.of(1, 2, 3, 4, 5, 6));
     LottoNumber bonus = new LottoNumber(7);
     WinningLotto winningLotto = new WinningLotto(lotto, bonus);
 

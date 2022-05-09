@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-  private static final String MESSAGE_FOR_INVALID_LOTTO_NUMBER = "잘못된 로또 번호입니다.";
+  private static final String MESSAGE_FOR_INVALID_LOTTO_NUMBER = "로또 번호는 %s~%s의 숫자이어야 합니다.";
   private static final int MIN_LOTTO_NUMBER = 1;
   private static final int LOTTO_NUMBER_BOUND = 46;
   private final int value;
@@ -55,7 +55,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     validateArgument(
         value,
         (arg) -> MIN_LOTTO_NUMBER <= arg && arg < LOTTO_NUMBER_BOUND,
-        MESSAGE_FOR_INVALID_LOTTO_NUMBER
+        String.format(MESSAGE_FOR_INVALID_LOTTO_NUMBER, MIN_LOTTO_NUMBER, LOTTO_NUMBER_BOUND - 1)
     );
   }
 }
