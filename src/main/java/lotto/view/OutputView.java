@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.Comparator;
 import java.util.Map;
 import lotto.model.LottoRank;
 import lotto.model.Lottos;
@@ -35,6 +36,7 @@ public class OutputView {
 
     matchResult.entrySet().stream()
         .filter(entry -> entry.getKey() != LottoRank.NON_MATCH)
+        .sorted(Map.Entry.comparingByKey())
         .forEach(entry -> {
           System.out.println(makeWinningLottoRateMessage(entry.getKey().getNumberOfMatch(),
               entry.getKey().getReward(), entry.getValue()));

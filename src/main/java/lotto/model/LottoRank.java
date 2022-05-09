@@ -4,12 +4,12 @@ import java.util.Arrays;
 
 public enum LottoRank {
 
-  FIRST(6, 2000000000),
-  BONUS_SECOND(5, 30000000),
-  SECOND(5, 1500000),
-  THIRD(4, 50000),
+  NON_MATCH(0, 0),
   FOURTH(3, 5000),
-  NON_MATCH(0, 0);
+  THIRD(4, 50000),
+  SECOND(5, 1500000),
+  BONUS_SECOND(5, 30000000),
+  FIRST(6, 2000000000);
 
   private final int numberOfMatch;
   private final int reward;
