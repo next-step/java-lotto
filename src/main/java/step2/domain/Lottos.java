@@ -1,6 +1,5 @@
 package step2.domain;
 
-import step2.domain.strategy.LottoPickStrategy;
 import step2.domain.strategy.ManualPick;
 import step2.domain.strategy.RandomPick;
 
@@ -10,14 +9,19 @@ import java.util.List;
 public class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(List<String> manualPick) {
-        for (String pick : manualPick)
+    public Lottos(PurchaseLotto input) {
+        manaualLottos(input);
+        autoLottos(input);
+    }
+
+    private void manaualLottos(PurchaseLotto input) {
+        for (String pick : input.getManualPick())
             lottos.add(new Lotto(new ManualPick(pick)));
     }
 
-    public Lottos(int autoCount, LottoPickStrategy lottoPickStrategy) {
-        for (int i = 0; i < autoCount; i++)
-            lottos.add(new Lotto(lottoPickStrategy));
+    private void autoLottos(PurchaseLotto input) {
+        for (int i = 0; i < input.getAutoCount(); i++)
+            lottos.add(new Lotto(new RandomPick()));
     }
 
     public int size() {
@@ -28,13 +32,12 @@ public class Lottos {
         return lottos.get(index).pick();
     }
 
-    public LottoWinners match(List<LottoNumber> pickLottoNumberOfWeek, LottoNumber bonusBall) {
+    public LottoWinners match(LottoWeeklyNumber lottoWeeklyNumber) {
         LottoWinners lottoWinners = new LottoWinners();
         for (Lotto lotto : lottos) {
-            Rank rank = lotto.matching(pickLottoNumberOfWeek, bonusBall);
-            lottoWinners.addWiners(rank);
+            Rank rank = lotto.matching(lottoWeeklyNumber);
+            lottoWinners.add(rank);
         }
-
         return lottoWinners;
     }
 

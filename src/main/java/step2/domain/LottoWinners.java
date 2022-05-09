@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class LottoWinners {
-    Map<Rank, Integer> winner = new LinkedHashMap<>();
+    private Map<Rank, Integer> winner = new LinkedHashMap<>();
 
     public LottoWinners() {
         winner.put(Rank.RANK_5, 0);
@@ -16,7 +16,7 @@ public class LottoWinners {
         winner.put(Rank.RANK_1, 0);
     }
 
-    public void addWiners(Rank rank) {
+    public void add(Rank rank) {
         if (rank == Rank.NO_RANK)
             return;
 
@@ -27,7 +27,7 @@ public class LottoWinners {
         return winner.get(rank);
     }
 
-    public int totalMoney() {
+    private int totalMoney() {
         int total = 0;
         for (Rank rank : winner.keySet()) {
             total += countByRank(rank) * rank.price;
@@ -37,5 +37,11 @@ public class LottoWinners {
 
     public Set<Rank> ranks() {
         return winner.keySet();
+    }
+
+    public Double rate(int money) {
+        double rate = totalMoney() / (double) money;
+
+        return Math.floor(rate * 100) / 100.0;
     }
 }

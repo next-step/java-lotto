@@ -1,12 +1,8 @@
 package step2.controller;
 
 import step2.domain.*;
-import step2.domain.strategy.RandomPick;
-import step2.service.LottoGameService;
 import step2.view.InputView;
 import step2.view.ResultView;
-
-import java.util.List;
 
 public class LottoGameControl {
     private final InputView inputView;
@@ -22,24 +18,17 @@ public class LottoGameControl {
     }
 
     public void start() {
-        PurchaseMount purchaseMount = new PurchaseMount(inputView.inputMoney());
-        int manualCount = inputView.manualCount();
-        int autoCount = purchaseMount.mount() - manualCount;
-        List<String> manualPick = inputView.manualPick(manualCount);
-        inputView.resultPurchase(manualCount, autoCount);
+        PurchaseLotto purchaseLotto = new PurchaseLotto(inputView.inputMoney());
+        purchaseLotto.update(inputView.manualPick());
+        inputView.resultPurchase(purchaseLotto);
 
-        Lottos lottos = new Lottos(manualPick);
-        lottos.add(new Lottos(autoCount, new RandomPick()));
-        resultView.lottoCount(lottos.size());
-        for (int i = 0; i < lottos.size(); i++) {
-            resultView.displayLottoNumber(lottos.numbers(i));
-        }
+        Lottos lottos = new Lottos(purchaseLotto);
+        resultView.lottoPick(lottos);
 
-        LottoGameService lottoGameService =
-                new LottoGameService(inputView.lottoNumbers(), inputView.bonusBall());
-        LottoWinners winners = lottoGameService.match(lottos);
-        double rate = lottoGameService.moneyProfitRate(purchaseMount.money(), winners);
+        LottoWeeklyNumber lottoWeeklyNumber =
+                new LottoWeeklyNumber(inputView.lottoNumbers(), inputView.bonusBall());
+        LottoWinners winner = lottos.match(lottoWeeklyNumber);
 
-        resultView.display(winners, rate);
+        resultView.display(winner, purchaseLotto.getMoney());
     }
 }
