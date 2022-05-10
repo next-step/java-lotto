@@ -78,7 +78,7 @@ public class Lotto {
         }
     }
 
-    public boolean isMatchBonusNumber(Number bonusNumber) {
+    public boolean isBonusNumber(Number bonusNumber) {
         return myNumbers.contains(bonusNumber);
     }
 

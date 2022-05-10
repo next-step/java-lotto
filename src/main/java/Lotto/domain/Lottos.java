@@ -45,10 +45,9 @@ public class Lottos {
 
         for (Lotto lotto : list) {
             int equalCount = lotto.findWinningLottoCnt(winningNumbers);
+            boolean isBonus = lotto.isBonusNumber(bonusNumber);
 
-            boolean isMatchBonus = lotto.isMatchBonusNumber(bonusNumber);
-
-            EqualLottoCntInfo equalLottoCntInfo = EqualLottoCntInfo.findEqualLottoInfo(equalCount, isMatchBonus);
+            EqualLottoCntInfo equalLottoCntInfo = EqualLottoCntInfo.findEqualLottoInfo(equalCount, isBonus);
 
             int cnt = getSameRankCnt(winningLottoRankMap, equalLottoCntInfo);
             winningLottoRankMap.put(equalLottoCntInfo, cnt);

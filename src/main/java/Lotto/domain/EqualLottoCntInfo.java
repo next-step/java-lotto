@@ -16,6 +16,7 @@ public enum EqualLottoCntInfo {
     NONE(0, 0);
 
     private static final int MIN_COUNT = 3;
+    private static final int BONUS_EQUAL_COUNT = 5;
 
     private final int equalCnt;
     private final int winningMoney;
@@ -25,8 +26,8 @@ public enum EqualLottoCntInfo {
         this.winningMoney = winningMoney;
     }
 
-    public static EqualLottoCntInfo findEqualLottoInfo(int equalCnt, boolean isMatchBonus) {
-        if (equalCnt != 5 || !isMatchBonus) {
+    public static EqualLottoCntInfo findEqualLottoInfo(int equalCnt, boolean isBonus) {
+        if (equalCnt != BONUS_EQUAL_COUNT || !isBonus) {
             return Stream.of(values())
                     .filter(EqualLottoCntInfo -> (EqualLottoCntInfo.equalCnt == (equalCnt)))
                     .findFirst()

@@ -43,15 +43,20 @@ public class ResultView {
 
     private static void viewResultMessage(Map<EqualLottoCntInfo, Integer> result, EqualLottoCntInfo equalLottoCntInfo) {
         if (equalLottoCntInfo.isWinning()) {
-            Integer sameRankCount = result.get(equalLottoCntInfo);
-            if (sameRankCount == null) {
-                sameRankCount = 0;
-            }
+            Integer sameRankCount = getSameRankCount(result, equalLottoCntInfo);
 
             String bonusStr = isWinningBonusNumber(equalLottoCntInfo);
 
             System.out.println(equalLottoCntInfo.getEqualCnt() + "개 일치 " + bonusStr + "(" + equalLottoCntInfo.getWinningMoney() + "원)" + " - " + sameRankCount + "개");
         }
+    }
+
+    private static Integer getSameRankCount(Map<EqualLottoCntInfo, Integer> result, EqualLottoCntInfo equalLottoCntInfo) {
+        Integer sameRankCount = result.get(equalLottoCntInfo);
+        if (sameRankCount == null) {
+            sameRankCount = 0;
+        }
+        return sameRankCount;
     }
 
     private static String isWinningBonusNumber(EqualLottoCntInfo equalLottoCntInfo) {
