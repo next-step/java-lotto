@@ -27,8 +27,8 @@ class LottosTest extends LottoNumbersFactory {
 
     @Test
     void confirm() {
-        lottos.confirm(new WinningLotto(LottoNumbers.of(Set.of(1,2,3,4,5,6)), LottoNumber.of(7)));
-        assertThat(lottos.getResult().countOfWinners(Rank.FIRST)).isEqualTo(1);
-        assertThat(lottos.getResult().countOfWinners(Rank.THIRD)).isEqualTo(1);
+        Results result = lottos.confirm(new WinningLotto(LottoNumbers.of(Set.of(1, 2, 3, 4, 5, 6)), LottoNumber.of(7)));
+        assertThat(result.countOfWinners(Rank.FIRST)).isEqualTo(1);
+        assertThat(result.countOfWinners(Rank.THIRD)).isEqualTo(1);
     }
 }

@@ -15,7 +15,6 @@ public class LottoGenerator {
         return numbers.subList(FROM_INDEX, TO_INDEX)
                 .stream()
                 .map(LottoNumber::of)
-                .sorted()
-                .collect(Collectors.toCollection(LinkedHashSet::new));
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 }

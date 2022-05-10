@@ -36,8 +36,7 @@ public class Lottery {
     }
 
     private static void runLottery(Lottos lottos, WinningLotto winningLotto) {
-        lottos.confirm(winningLotto);
-        Results results = lottos.getResult();
+        Results results = lottos.confirm(winningLotto);
 
         LottoOutput.printBoard();
         for (Rank rank : Rank.valuesExceptMiss()) {

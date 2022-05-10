@@ -9,11 +9,9 @@ import java.util.List;
 public class Lottos {
     private static final int LOTTO_PRICE = 1000;
     private final List<LottoNumbers> lottoNumbers;
-    private final Results results;
 
     public Lottos(List<LottoNumbers> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
-        this.results = new Results();
     }
 
     public static Lottos of(int autoLottoQuantity, List<LottoNumbers> manuelLottos) {
@@ -30,12 +28,14 @@ public class Lottos {
         return amount / LOTTO_PRICE;
     }
 
-    public void confirm(WinningLotto winningLotto) {
+    public Results confirm(WinningLotto winningLotto) {
+        Results results = new Results();
         for (LottoNumbers lottoNumber : lottoNumbers) {
             int countOfMatch = lottoNumber.match(winningLotto);
             boolean isBonus = lottoNumber.checkBonus(winningLotto);
             results.plusWinners(Rank.find(countOfMatch, isBonus));
         }
+        return results;
     }
 
     public int cost() {
@@ -44,9 +44,5 @@ public class Lottos {
 
     public List<LottoNumbers> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
-    }
-
-    public Results getResult() {
-        return results;
     }
 }

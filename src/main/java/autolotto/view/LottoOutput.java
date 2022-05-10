@@ -1,7 +1,6 @@
 package autolotto.view;
 
 import autolotto.constant.Rank;
-import autolotto.domain.LottoNumbers;
 import autolotto.domain.Lottos;
 
 public class LottoOutput {
@@ -28,8 +27,7 @@ public class LottoOutput {
     }
 
     public static void printLottoNumbers(Lottos lottos) {
-        for (LottoNumbers lottoNumber : lottos.getLottoNumbers()) {
-            println(lottoNumber.toString());
-        }
+        lottos.getLottoNumbers()
+                .forEach(lottoNumber -> println(lottoNumber.toString()));
     }
 }
