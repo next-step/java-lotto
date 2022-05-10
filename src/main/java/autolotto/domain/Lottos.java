@@ -32,7 +32,7 @@ public class Lottos {
         Results results = new Results();
         for (LottoNumbers lottoNumber : lottoNumbers) {
             int countOfMatch = lottoNumber.match(winningLotto);
-            boolean isBonus = lottoNumber.checkBonus(winningLotto);
+            boolean isBonus = winningLotto.checkBonus(lottoNumber);
             results.plusWinners(Rank.find(countOfMatch, isBonus));
         }
         return results;

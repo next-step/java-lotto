@@ -19,7 +19,7 @@ public class WinningLotto {
         return lottoNumbers.contains(number);
     }
 
-    public LottoNumber getBonusBall() {
-        return bonusBall;
+    public boolean checkBonus(LottoNumbers lottoNumbers) {
+        return lottoNumbers.contains(bonusBall);
     }
 }

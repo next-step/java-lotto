@@ -44,10 +44,5 @@ class LottoNumbersTest {
     void numberIsContainedGiven_ReturnTrue(int number) {
         assertThat(lottoNumbers.contains(LottoNumber.of(number))).isTrue();
     }
-
-    @Test
-    void bonusBallGiven_ReturnTrue() {
-        assertThat(lottoNumbers.checkBonus(new WinningLotto(LottoNumbers.of(Set.of(1,2,3,4,5,7)),LottoNumber.of(6)))).isTrue();
-    }
 }
 

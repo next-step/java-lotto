@@ -39,10 +39,6 @@ public class LottoNumbers {
                 .contains(number);
     }
 
-    public boolean checkBonus(WinningLotto winningLotto) {
-        return lottoNumbers.contains(winningLotto.getBonusBall());
-    }
-
     @Override
     public String toString() {
         return lottoNumbers.toString();
