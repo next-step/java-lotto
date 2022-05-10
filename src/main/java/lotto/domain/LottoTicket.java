@@ -7,8 +7,10 @@ import java.util.Objects;
 
 public class LottoTicket {
 
+  private static final int LOTTO_NUMBER_COUNT = 6;
   private static final String EMPTY_LOTTO_NUMBERS = "로또 번호는 빈 값일 수 없습니다";
-  private static final String LOTTO_NUMBERS_SIZE = "로또 번호는 6개여야 합니다";
+  private static final String VALID_LOTTO_NUMBERS_SIZE = String.format("로또 번호는 %d개여야 합니다",
+      LOTTO_NUMBER_COUNT);
   private static final String DUPLICATED_LOTTO_NUMBERS = "로또 번호가 중복될 수 없습니다";
 
   private final List<Integer> lottoNumbers;
@@ -22,8 +24,8 @@ public class LottoTicket {
     if (lottoNumbers == null || lottoNumbers.isEmpty()) {
       throw new IllegalArgumentException(EMPTY_LOTTO_NUMBERS);
     }
-    if (lottoNumbers.size() != 6) {
-      throw new IllegalArgumentException(LOTTO_NUMBERS_SIZE);
+    if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+      throw new IllegalArgumentException(VALID_LOTTO_NUMBERS_SIZE);
     }
     HashSet<Integer> hashSet = new HashSet<>(lottoNumbers);
     if (hashSet.size() != lottoNumbers.size()) {
