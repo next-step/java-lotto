@@ -14,8 +14,6 @@ public class LottoService {
         Lotto lastWeekWinning = new Lotto(numbers);
         LottoNumber bonusNumber = LottoNumber.createNewNumber(bonus);
 
-        if (lastWeekWinning.hasBonusNumber(bonusNumber))
-            throw new IllegalArgumentException("당첨 번호와 보너스 번호는 중복되면 안됩니다.");
-        return new RankingResult(lottos.countWinningLotto(new Lotto(numbers), LottoNumber.createNewNumber(bonus)));
+        return new RankingResult(lottos.countWinningLotto(new WinningLotto(lastWeekWinning, bonusNumber)));
     }
 }
