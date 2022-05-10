@@ -24,7 +24,7 @@ public class InputView {
         String value = scanner.nextLine();
 
         return Arrays.stream(value.split(", "))
-                .map(number -> Integer.parseInt(number))
+                .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
