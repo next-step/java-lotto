@@ -8,9 +8,11 @@ import java.util.List;
 public final class OutputTable {
 
     private static final String PURCHASE_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";
-    private static final String BUY_THING_MESSAGE = "%d개를 구입하였습니다.\n";
+    private static final String BUY_THING_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구입했습니다.\n";
     private static final String LAST_WEEK_AWARD_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
+    private static final String INSERT_MANUAL_LOTTO_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INSERT_MANUAL_LOTTO_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String STATISTICS_MESSAGE = "당첨 통계";
     private static final String UNDER_BAR = "_________";
 
@@ -25,10 +27,17 @@ public final class OutputTable {
         System.out.println(PURCHASE_AMOUNT_MESSAGE);
     }
 
-    public static void buyThings(Integer productCount) {
-        System.out.printf(BUY_THING_MESSAGE, productCount);
+    public static void buyThings(int manualProductCount , int autoProductCount) {
+        System.out.printf(BUY_THING_MESSAGE, manualProductCount, autoProductCount);
     }
 
+    public static void boughtManualLottoCountMessage() {
+        System.out.println(INSERT_MANUAL_LOTTO_COUNT_MESSAGE);
+    }
+
+    public static void boughtManualLottoMessage() {
+        System.out.println(INSERT_MANUAL_LOTTO_MESSAGE);
+    }
     public static void printProductInfos(List<Lotto> lotteryTickets) {
         for (Lotto lotto : lotteryTickets) {
             System.out.println(lotto.numbers());

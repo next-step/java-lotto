@@ -21,9 +21,14 @@ public class LottoController {
     public void run() {
         OutputTable.inputPurchaseAmount();
         long haveMoney = InputTable.inputHaveMoney();
+        OutputTable.boughtManualLottoCountMessage();
+        int manalLottoCount = InputTable.inputManualCount();
 
-        List<Lotto> lottoProducts = visit(new Guest(haveMoney), new Store());
-        OutputTable.buyThings(lottoProducts.size());
+        OutputTable.boughtManualLottoMessage();
+        List<List<Integer>> manualLotto = InputTable.inputManualLotto(manalLottoCount);
+        Store store = new Store(manalLottoCount);
+        List<Lotto> lottoProducts = boughtAutoLotto(new Guest(haveMoney), store);
+        OutputTable.buyThings(manalLottoCount, lottoProducts.size());
         OutputTable.printProductInfos(lottoProducts);
 
         OutputTable.lastWeekAwardNumber();
@@ -37,8 +42,8 @@ public class LottoController {
         OutputTable.printYield(yieldCalculate(haveMoney), 1);
     }
 
-    public List<Lotto> visit(Guest guest, Store store) {
-        return lottoService.visit(guest, store);
+    public List<Lotto> boughtAutoLotto(Guest guest, Store store) {
+        return lottoService.boughtAutoLotto(guest, store);
     }
 
     public void holdingLotteryTickets(List<Lotto> lottoProducts, Lotto winnerLotto, int bonus) {
