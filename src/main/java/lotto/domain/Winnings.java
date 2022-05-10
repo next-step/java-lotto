@@ -13,16 +13,16 @@ public class Winnings {
 
     private final WinningNumbers winningNumbers;
 
-    private final int[] recordMatched;
+    private RecordMatched recordMatched;
 
     public Winnings(String[] winningNumbers, int bonusNumber) {
         this.winningNumbers = new WinningNumbers(parseWinningNumbers(winningNumbers), bonusNumber);
-        this.recordMatched = new int[Matched.values().length];
+        this.recordMatched = new RecordMatched(Matched.values().length);
     }
 
     public Winnings(List<Integer> winningNumbers, int bonusNumber) {
         this.winningNumbers = new WinningNumbers(winningNumbers, bonusNumber);
-        this.recordMatched = new int[Matched.values().length];
+        this.recordMatched = new RecordMatched(Matched.values().length);
     }
 
     public void countMatchedNumbers(List<Integer> numbers) {
@@ -35,14 +35,14 @@ public class Winnings {
     }
 
     private void recordNumberOfMatched(int index) {
-        this.recordMatched[index]++;
+        this.recordMatched = this.recordMatched.addByMatchedIndex(index);
     }
 
     public int winningsRewards() {
         int winningsRewards = 0;
         Matched[] matcheds = Matched.values();
-        for (int i = 0; i < recordMatched.length; i++) {
-            winningsRewards += recordMatched[i] * matcheds[i].reward();
+        for (int i = 0; i < recordMatched.recordMatched().length; i++) {
+            winningsRewards += recordMatched.recordMatched()[i] * matcheds[i].reward();
         }
         return winningsRewards;
     }
@@ -57,6 +57,6 @@ public class Winnings {
     }
 
     public int[] recordMatched() {
-        return recordMatched;
+        return recordMatched.recordMatched();
     }
 }
