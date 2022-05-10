@@ -2,36 +2,55 @@ package lotto.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-class NumberTest {
+public class NumberTest {
 
     @Test
-    @DisplayName("Number 객체 생성")
-    void createDefaultNumber() {
-        Number number = Number.of();
-        assertAll(() -> assertThat(number).isEqualTo(Number.of()),
-                () -> assertThat(number.getLongValue()).isEqualTo(0));
-    }
-
-    @ParameterizedTest(name = "Number 객체 생성 - {0}")
-    @ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
-    void createInitNumber(int value) {
-        Number number = Number.of(value);
-        assertAll(() -> assertThat(number).isEqualTo(Number.of(value)),
-                () -> assertThat(number.getLongValue()).isEqualTo(value));
+    @DisplayName("Number 생성 - 0")
+    void createNumber() {
+        assertAll(() -> assertThat(Number.of().longValue()).isEqualTo(0),
+                () -> assertThat(Number.of().doubleValue()).isEqualTo(0.0));
     }
 
     @Test
-    @DisplayName("Number 더하기")
+    @DisplayName("Number 생성 - Value 주입")
+    void injectValue() {
+        assertAll(() -> assertThat(Number.of(1).longValue()).isEqualTo(1),
+                () -> assertThat(Number.of(1).doubleValue()).isEqualTo(1.0),
+                () -> assertThat(Number.of(1.0).longValue()).isEqualTo(1),
+                () -> assertThat(Number.of(1.0).doubleValue()).isEqualTo(1.0),
+                () -> assertThat(Number.of("1").longValue()).isEqualTo(1),
+                () -> assertThat(Number.of("1").doubleValue()).isEqualTo(1.0));
+    }
+
+    @Test
+    @DisplayName("Number 사칙연산")
     void add() {
-        Number left = Number.of(1);
-        Number right = Number.of(2);
+        Number left = Number.of(100);
+        Number right = Number.of(50);
 
-        assertThat(left.add(right)).isEqualTo(Number.of(3));
+        assertAll(
+                () -> assertThat(left.add(right)).isEqualTo(Number.of(150)),
+                () -> assertThat(right.add(left)).isEqualTo(Number.of(150)),
+                () -> assertThat(left.subtract(right)).isEqualTo(Number.of(50)),
+                () -> assertThat(right.subtract(left)).isEqualTo(Number.of(-50)),
+                () -> assertThat(left.multiple(right)).isEqualTo(Number.of(5000)),
+                () -> assertThat(right.multiple(left)).isEqualTo(Number.of(5000)),
+                () -> assertThat(left.divide(right)).isEqualTo(Number.of(2.0)),
+                () -> assertThat(right.divide(left)).isEqualTo(Number.of(0.5)));
+    }
+
+    @Test
+    @DisplayName("Number 최소 / 최대")
+    void minAndMax() {
+        Number left = Number.of(100);
+        Number right = Number.of(50);
+
+        assertAll(
+                () -> assertThat(Number.min(left, right)).isEqualTo(right),
+                () -> assertThat(Number.max(right, left)).isEqualTo(left));
     }
 }
