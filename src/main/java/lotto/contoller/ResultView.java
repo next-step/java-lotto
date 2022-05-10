@@ -11,20 +11,17 @@ import java.util.stream.Collectors;
 
 public class ResultView {
     public void printLottos(Customer customer) {
-      customer.findLottos().forEach(System.out::println);
+      customer.printLottoList();
     }
 
     public void printWinningList(List<Rank> winningList) {
-        StringBuilder builder = new StringBuilder();
-        builder.append(" 당첨 통계 ");
-        builder.append("\n --------- ");
-        builder.append("\n 3개 일치 (5000원)- " + winningList.stream().filter(rank -> rank == Rank.FIVE).collect(Collectors.toList()).size());
-        builder.append("\n 4개 일치 (50000원)- " + winningList.stream().filter(rank -> rank == Rank.FOUR).collect(Collectors.toList()).size());
-        builder.append("\n 5개 일치 (1_500_000원)- " + winningList.stream().filter(rank -> rank == Rank.THREE).collect(Collectors.toList()).size());
-        builder.append("\n 5개 일치, 보너스 볼 일치(30_000_000원)- " + winningList.stream().filter(rank -> rank == Rank.TWO).collect(Collectors.toList()).size());
-        builder.append("\n 6개 일치 (2_000_000_000원)- " + winningList.stream().filter(rank -> rank == Rank.ONE).collect(Collectors.toList()).size());
-
-        System.out.println(builder.toString());
+        System.out.println(" 당첨 통계 ");
+        System.out.println(" --------- ");
+        System.out.println("3개 일치 (5000원)- " + winningList.stream().filter(rank -> rank == Rank.FIVE).collect(Collectors.toList()).size());
+        System.out.println("4개 일치 (50000원)- " + winningList.stream().filter(rank -> rank == Rank.FOUR).collect(Collectors.toList()).size());
+        System.out.println("5개 일치 (1500000원)- " + winningList.stream().filter(rank -> rank == Rank.THREE).collect(Collectors.toList()).size());
+        System.out.println("5개 일치, 보너스 볼 일치(30000000원)- " + winningList.stream().filter(rank -> rank == Rank.TWO).collect(Collectors.toList()).size());
+        System.out.println("6개 일치 (2000000000원)- " + winningList.stream().filter(rank -> rank == Rank.ONE).collect(Collectors.toList()).size());
     }
 
     public void printProfit(double profit) {
