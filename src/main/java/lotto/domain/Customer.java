@@ -30,8 +30,8 @@ public class Customer {
         return this.money > 0;
     }
 
-    public void printLottoList() {
-        lottos.printLottoList();
+    public List<Lotto> findLottos() {
+        return lottos.findLottos();
     }
 
     public List<Rank> getWinningList(List<Integer> winningNumbers, int bonusNumber) {
