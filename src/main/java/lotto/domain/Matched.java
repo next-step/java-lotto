@@ -10,8 +10,7 @@ public enum Matched {
     THREE(4, 3, false, 5000),
     TWO(5, 2, false, 0),
     ONE(6, 1, false, 0),
-    NONE(7, 0, false, 0),
-    ;
+    NONE(7, 0, false, 0);
 
     Matched(int index, int numberOfMatched, boolean isMatchedBonus, int reward) {
         this.index = index;
