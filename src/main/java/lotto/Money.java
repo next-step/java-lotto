@@ -1,17 +1,19 @@
 package lotto;
 
-public class Purchase {
+import jdk.swing.interop.SwingInterOpUtils;
+
+public class Money {
+    private static final int LOTTO_PRICE = 1000;
     private static final String BUY_PRICE_VALID_ERROR_MESSAGE = "1,000원 단위로만 구매 가능합니다.";
     private static final String WRONG_NUMBER_EXCEPTION = "숫자형식이 아닙니다.";
     private static final String EXCEED_QUANTITY_MESSAGE = "수량을 초과하였습니다. ";
-    private static final int LOTTO_PRICE = 1000;
 
     private final int buyPrice;
     private final int maxPurchasableQuantity;
 
     private int purchasedQuantity;
 
-    public Purchase(String buyPrice, int purchasedQuantity) {
+    public Money(String buyPrice, int purchasedQuantity) {
         this.buyPrice = parseInt(buyPrice);
         this.maxPurchasableQuantity = this.buyPrice / LOTTO_PRICE;
         this.purchasedQuantity = purchasedQuantity;
@@ -50,12 +52,8 @@ public class Purchase {
         return maxPurchasableQuantity;
     }
 
-    public int getBuyPrice() {
-        return buyPrice;
-    }
-
-    public boolean isAvailable() {
-        return false;
+    public double getReturnRate(int winningMoney) {
+        return (double) winningMoney / this.buyPrice;
     }
 
     @Override
@@ -66,4 +64,5 @@ public class Purchase {
                 ", maxPurchasableQuantity=" + maxPurchasableQuantity +
                 '}';
     }
+
 }

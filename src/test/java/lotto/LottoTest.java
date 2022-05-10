@@ -1,53 +1,100 @@
 package lotto;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
+    private Lotto lotto;
 
-    @Test
-    @DisplayName("구매금액 3,000 원의 구매가능수량은 3이다")
-    void getQuantity() {
-        assertThat(new Lotto("3000").getBuyQuantity()).isEqualTo(3);
+    @BeforeEach
+    void setLotto() {
+        lotto = new Lotto("1,2,3,4,6,7");
     }
-
     @Test
-    @DisplayName("구매금액 5000 원으로 자동을 돌린 후의 로또수량은 5이다")
-    void auto() {
-        Lotto lotto = new Lotto("5000");
-        lotto.auto();
-        assertThat(lotto.getLottoNumbers().size()).isEqualTo(5);
-    }
-
-    @Test
-    @DisplayName("로또 1000원으로 자동을 여러 번 호출해도 로또수량은 1개이다")
-    void lottoMultipleTimesCallAuto() {
-        Lotto lotto = new Lotto("1000");
-        lotto.auto();
-        lotto.auto();
-        lotto.auto();
-        assertThat(lotto.getLottoNumbers().size()).isEqualTo(1);
-    }
-
-    @Test
-    @DisplayName("로또구매가능수량을 초과하면 예외가 발생한다")
-    void maxQuantityException() {
-        LottoNumbers lottoNumbers = new LottoNumbers();
-        lottoNumbers.add(LottoGenerator.generate());
-        lottoNumbers.add(LottoGenerator.generate());
-        assertThatThrownBy(() -> new Lotto("1000", lottoNumbers))
+    @DisplayName("숫자, 문자 , 외 입력시 예외가 발생한다")
+    void wrongInputException() {
+        assertThatThrownBy(() -> new Lotto("1,2,3,4,5,`"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("생성할 수 있는 수량을 초과하였습니다.");
+                .hasMessage("숫자, 공백 및 문자 , 만 사용 가능합니다.");
     }
 
     @Test
-    @DisplayName("구매금액이 1,000 단위가 아닐경우 예외가 발생한다")
-    void buyPriceException() {
-        assertThatThrownBy(() -> new Lotto("1001"))
+    @DisplayName("로또숫자가 6개가 아니면 예외가 발생한다")
+    void wrongSizeException() {
+        assertThatThrownBy(() -> new Lotto("1,2,3,4,5"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("1,000원 단위로만 구매 가능합니다.");
+                .hasMessage("로또 번호는 6개여야 합니다.");
+
+        assertThatThrownBy(() -> new Lotto("1,2,3,4,5,6,7"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또 번호는 6개여야 합니다.");
+    }
+
+    @ParameterizedTest
+    @DisplayName("중복된 번호가 있으면 예외가 발생한다")
+    @ValueSource(strings = {"1,2,3,4,5,5"})
+    void wrongNumberException(String lottoNumber) {
+        assertThatThrownBy(() -> new Lotto(lottoNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("중복된 번호가 있습니다.");
+    }
+
+    @Test
+    @DisplayName("로또번호에 많은 공백이 있어도 객체가 정상적으로 생성된다")
+    void name() {
+        Lotto lotto = new Lotto("1,   2, 3, 4, 5, 6");
+        assertThat(lotto).isEqualTo(new Lotto("1,2,3,4,5,6"));
+    }
+
+    @ParameterizedTest
+    @DisplayName("당첨번호를 기준으로 Rank 를 조회한다.")
+    @CsvSource(value = {
+            "1,2,10,11,12,13:MISS",
+            "1,2,3,8,9,10:FIFTH",
+            "1,2,3,4,5,9:FOURTH",
+            "1,2,3,4,6,10:THIRD",
+            "1,2,3,4,6,8:SECOND",
+            "1,2,3,4,6,7:FIRST"
+    }, delimiter = ':')
+    void getRank(String lottoNumbers, Rank expected) {
+        Lotto lotto = new Lotto(lottoNumbers);
+        WinningLotto winningLotto = new WinningLotto(this.lotto, LottoNumber.valueOf("8"));
+        Rank rank = lotto.getRank(winningLotto);
+        assertThat(rank).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @DisplayName("당첨번호를 기준으로 Rank 를 조회한다.")
+    @CsvSource(value = {
+            "1,2,10,11,12,13:2",
+            "1,2,3,8,9,10:3",
+            "1,2,3,4,5,9:4",
+            "1,2,3,4,6,10:5",
+            "1,2,3,4,6,8:5",
+            "1,2,3,4,6,7:6"
+    }, delimiter = ':')
+    void matchCount(String lottoNumbers, int expected) {
+        assertThat(new Lotto(lottoNumbers).matchCount(this.lotto)).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @DisplayName("로또 번호 포함 여부를 true 리턴한다")
+    @ValueSource(ints = {1,2,3,4,6,7})
+    void containsTrue(int lottoNumber) {
+        assertThat(lotto.contains(LottoNumber.valueOf(lottoNumber))).isTrue();
+    }
+
+    @ParameterizedTest
+    @DisplayName("로또 번호 포함 여부를 false 리턴한다")
+    @ValueSource(ints = {8,9,10,45})
+    void containsFalse(int lottoNumber) {
+        assertThat(lotto.contains(LottoNumber.valueOf(lottoNumber))).isFalse();
     }
 }

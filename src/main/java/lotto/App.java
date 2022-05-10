@@ -1,26 +1,21 @@
-import calculator.Calculator;
-import lotto.Lotto;
-import lotto.LottoWinning;
-import lotto.Rank;
+package lotto;
+
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
-import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.Map;
-
 public class App {
     public static void main(String[] args) {
-        Map<Rank, Integer> results = new HashMap<>();
-
         String price = InputView.getPrice();
-        Lotto lotto = new Lotto(price);
-        lotto.auto();
-        ResultView.printBuyQuantityMessage(lotto.getBuyQuantity());
-        ResultView.printBuyLottoNumbers(lotto);
+        LottoGame lottoGame = new LottoGame(price);
+        lottoGame.auto();
+        ResultView.printBuyQuantityMessage(lottoGame.getMaxPurchasableQuantity());
+        ResultView.printBuyLottoNumbers(lottoGame);
 
         String winningNumber = InputView.getLastWinningNumber();
-        ResultView.printWinningTitle();;
-        ResultView.printWinningResultsAndReturnRate(new LottoWinning(winningNumber, lotto));
+        String bonusNumber = InputView.getBonusNumber();
+        WinningLotto winningLottoNumber = new WinningLotto(winningNumber, bonusNumber);
+        ResultView.printWinningTitle();
+        ResultView.printWinningResults(lottoGame.getLottoGameResults(winningLottoNumber));
+        ResultView.printReturnRate(lottoGame.getReturnRate(winningLottoNumber));
     }
 }

@@ -1,9 +1,11 @@
 package lotto.ui;
 
+import lotto.LottoGame;
 import lotto.Lotto;
-import lotto.LottoNumber;
-import lotto.LottoWinning;
+import lotto.LottoResults;
 import lotto.Rank;
+
+import java.text.DecimalFormat;
 
 public class ResultView {
     private static final String BUY_QUANTITY_MESSAGE = "개를 구매했습니다.";
@@ -12,12 +14,16 @@ public class ResultView {
     private static final String LOSS = "손해";
     private static final String WINNER_TITLE = "당첨 통계";
     private static final String PERFORATION = "-------";
-    private static final String WINNING_RESULT = "%d개 일치 (%d원)- %d개%n";
+    private static final String WINNING_RESULT = "%d개 일치%s (%s원)- %d개%n";
     private static final String RETURN_RATE = "총 수익률은 %s입니다.";
     private static final String RETURN_RATE_RESULT = "(기준이 1이기 때문에 결과적으로 %s(이)라는 의미임)";
+    private static final String FLOOR = "%.2f";
+    private static final String BONUS_MATCH_MESSAGE = ", 보너스 볼 일치";
 
-    public static void printBuyLottoNumbers(Lotto lotto) {
-        System.out.println(lotto);
+    public static void printBuyLottoNumbers(LottoGame lotto) {
+        for(Lotto lottoNumbers : lotto.getBuyLottoNumbers()) {
+            System.out.println(lottoNumbers.toString());
+        }
     }
 
     public static void printWinningTitle() {
@@ -29,24 +35,31 @@ public class ResultView {
         System.out.println(qty + BUY_QUANTITY_MESSAGE);
     }
 
-    public static void printWinningResultsAndReturnRate(LottoWinning lottoWinning) {
-        printWinningResults(lottoWinning);
-        printReturnRate(lottoWinning.getReturnRate());
-    }
-
-    private static void printWinningResults(LottoWinning lottoWinning) {
+    public static void printWinningResults(LottoResults results) {
         for (Rank rank : Rank.values()) {
-            System.out.printf(WINNING_RESULT, rank.getCountOfMatch(), rank.getWinningMoney(), lottoWinning.getWinningCount(rank));
+            printWinningResult(results, rank);
         }
     }
 
-    private static void printReturnRate(String returnRate) {
-        System.out.printf(RETURN_RATE, returnRate);
+    private static void printWinningResult(LottoResults results, Rank rank) {
+        String message = "";
+        if (rank == Rank.SECOND) {
+            message = BONUS_MATCH_MESSAGE;
+        }
+        System.out.printf(WINNING_RESULT, rank.getCountOfMatch(), message,
+                new DecimalFormat("###,###").format(rank.getWinningMoney()), results.getWinningCount(rank));
+    }
+
+    public static void printReturnRate(double returnRate) {
+        System.out.printf(RETURN_RATE, getFloorValue(returnRate));
         System.out.printf(RETURN_RATE_RESULT, getReturnRate(returnRate));
     }
 
-    private static String getReturnRate(String returnRateString) {
-        double returnRate = Double.parseDouble(returnRateString);
+    private static String getFloorValue(double returnRate) {
+        return String.format(FLOOR, Math.floor(returnRate * 100) / 100.0);
+    }
+
+    private static String getReturnRate(double returnRate) {
         if (returnRate == 1) {
             return SAME;
         }
@@ -55,5 +68,4 @@ public class ResultView {
         }
         return LOSS;
     }
-
 }

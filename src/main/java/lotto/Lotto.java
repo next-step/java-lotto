@@ -1,65 +1,104 @@
 package lotto;
 
-import java.util.List;
+import java.util.*;
+import java.util.regex.Pattern;
 
 public class Lotto {
-    private static final int PRICE = 1000;
-    private static final String BUY_PRICE_VALID_ERROR_MESSAGE = "1,000원 단위로만 구매 가능합니다.";
-    private static final String MAX_QUANTITY_ERROR_MESSAGE = "생성할 수 있는 수량을 초과하였습니다.";
+    private static final String WRONG_NUMBER_SIZE_MESSAGE = "로또 번호는 6개여야 합니다.";
+    private static final String WRONG_INPUT_MESSAGE = "숫자, 공백 및 문자 , 만 사용 가능합니다.";
+    private static final String DUPLICATED_NUMBER_ERROR = "중복된 번호가 있습니다.";
+    private static final String DELIMITER = ",";
+    private static final String OPERATOR_PATTERN_REGEX = "^[\\d,\\s]*$";
+    private static final int LOTTO_NUMBER_COUNT = 6;
+    private static final Pattern operatorPattern = Pattern.compile(OPERATOR_PATTERN_REGEX);
+    private static final String SPACE_TARGET = "\\s+";
+    private static final String REPLACEMENT_BLANK = "";
 
-    private final LottoNumbers lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    private final int buyPrice;
-
-    public Lotto(String buyPrice) {
-        this(buyPrice, new LottoNumbers());
+    public Lotto(String lottoNumbers) {
+        this(toLottoNumberList(lottoNumbers));
     }
 
-    public Lotto(String buyPrice, LottoNumbers lottoNumbers) {
-        this(Integer.parseInt(buyPrice), lottoNumbers);
-    }
-
-    public Lotto(int buyPrice, LottoNumbers lottoNumbers) {
-        this.buyPrice = buyPrice;
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        validateLottoNumbers(lottoNumbers);
+        sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
-        validate();
     }
 
-    private void validate() {
-        if (buyPrice % PRICE != 0) {
-            throw new IllegalArgumentException(BUY_PRICE_VALID_ERROR_MESSAGE);
+    private static List<LottoNumber> toLottoNumberList(String lottoNumbers) {
+        validateInputString(lottoNumbers);
+        List<LottoNumber> lottoNumberList = new ArrayList<>();
+        for (String lottoNumber : split(lottoNumbers)) {
+            lottoNumberList.add(LottoNumber.valueOf(lottoNumber));
         }
-        if (!isRemainedQty()) {
-            throw new IllegalArgumentException(MAX_QUANTITY_ERROR_MESSAGE);
-        }
+        return lottoNumberList;
     }
 
-    public void auto() {
-        validate();
-        int remainedQty = getRemainedQty();
-        for (int i = 0; i < remainedQty; i++) {
-            this.lottoNumbers.add(LottoGenerator.generate());
+    private static void validateInputString(String lottoNumber) {
+        if (!isOperatorMatchers(lottoNumber)) {
+            throw new IllegalArgumentException(WRONG_INPUT_MESSAGE);
         }
     }
 
-    private boolean isRemainedQty() {
-        return getRemainedQty() >= 0;
+    private static boolean isOperatorMatchers(String lottoNumber) {
+        return operatorPattern.matcher(replace(lottoNumber)).matches();
     }
 
-    private int getRemainedQty() {
-        return getBuyQuantity() - lottoNumbers.getQuantity();
+    private static String replace(String lottoNumber) {
+        return lottoNumber.replaceAll(SPACE_TARGET, REPLACEMENT_BLANK);
     }
 
-    public int getBuyQuantity() {
-        return buyPrice / PRICE;
+    private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException(WRONG_NUMBER_SIZE_MESSAGE);
+        }
+        HashSet<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers);
+        if (lottoNumberSet.size() < lottoNumbers.size()) {
+            throw new IllegalArgumentException(DUPLICATED_NUMBER_ERROR);
+        }
     }
 
-    public int getBuyPrice() {
-        return buyPrice;
+    private void sort(List<LottoNumber> lottoNumbers) {
+        lottoNumbers.sort(Comparator.comparingInt(LottoNumber::getLottoNumber));
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers.getLottoNumbers();
+    private static String[] split(String lottoNumber) {
+        return replace(lottoNumber).split(DELIMITER);
+    }
+
+    public boolean isSize(int size) {
+        return size == LOTTO_NUMBER_COUNT;
+    }
+
+    public Rank getRank(WinningLotto winningLottoNumber) {
+        boolean bonus = winningLottoNumber.hasBonus(this);
+        int matchCount = winningLottoNumber.matchCount(this);
+        return Rank.valueOf(matchCount, bonus);
+    }
+
+    public int matchCount(Lotto winningLotto) {
+        return (int) winningLotto.lottoNumbers
+                .stream()
+                .filter(this.lottoNumbers::contains)
+                .count();
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto that = (Lotto) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 
     @Override
