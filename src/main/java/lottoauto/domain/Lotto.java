@@ -1,4 +1,4 @@
-package lottoauto;
+package lottoauto.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -28,17 +28,13 @@ public class Lotto {
         Collections.shuffle(lottoNumbersCache);
         List<LottoNumber> lottoNumbers = lottoNumbersCache.stream()
                 .limit(LOTTO_SIZE)
+                .sorted()
                 .collect(Collectors.toList());
-        Collections.sort(lottoNumbers);
         return new Lotto(lottoNumbers);
     }
 
     public static Lotto from(String numbers) {
         return from(numbers.split(LOTTO_NUMBER_DELIMITER));
-    }
-
-    public static Lotto from(List<LottoNumber> numbers) {
-        return new Lotto(numbers);
     }
 
     public static Lotto from(String[] numbers) {
@@ -47,10 +43,12 @@ public class Lotto {
     }
 
     public int findMatchingCount(Lotto lotto) {
-        return (int) lottoNumbers.stream().filter(lottoNumber -> lotto.contains(lottoNumber)).count();
+        return (int) lottoNumbers.stream()
+                .filter(lottoNumber -> lotto.contains(lottoNumber))
+                .count();
     }
 
-    private boolean contains(LottoNumber lottoNumber) {
+    public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.stream().anyMatch(lottoNumber::equals);
     }
 
@@ -69,9 +67,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-//        return "Lotto{" +
-//                "lottoNumbers=" + lottoNumbers +
-//                '}';
         return "" + lottoNumbers;
     }
 }

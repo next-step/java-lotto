@@ -1,11 +1,14 @@
-package lottoauto;
+package lottoauto.view;
+
+import lottoauto.domain.Lottos;
+import lottoauto.domain.RatingStatics;
 
 public class ResultView {
     private ResultView() {}
 
     public static void printLottosInfo(Lottos lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
-        System.out.println(lottos.toString());
+        System.out.println(lottos);
     }
 
     public static void printRatingStatics(RatingStatics ratingStatics) {

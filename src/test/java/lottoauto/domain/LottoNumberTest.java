@@ -1,4 +1,4 @@
-package lottoauto;
+package lottoauto.domain;
 
 import org.junit.jupiter.api.Test;
 

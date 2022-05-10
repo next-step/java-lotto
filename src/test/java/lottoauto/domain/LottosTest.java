@@ -1,4 +1,4 @@
-package lottoauto;
+package lottoauto.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,18 +13,18 @@ class LottosTest {
     private WinningLotto winningLotto;
     private String[] numberInput;
 
-    @Test
-    void 구입금액만큼_발급() {
-        Lottos lottos = Lottos.from(14000);
-        System.out.println(lottos);
-        assertThat(lottos.size()).isEqualTo(14);
-    }
-
     @BeforeEach
     void setUp() {
         numberInput = "1,2,3,4,5,6".split(",");
         lottos = Lottos.from(new ArrayList<>(List.of(Lotto.from(numberInput), Lotto.from(numberInput))));
         winningLotto = WinningLotto.from(Lotto.from(numberInput));
+    }
+
+    @Test
+    void 구입금액만큼_발급() {
+        Lottos lottos = Lottos.from(14000);
+        System.out.println(lottos);
+        assertThat(lottos.size()).isEqualTo(14);
     }
 
     @Test

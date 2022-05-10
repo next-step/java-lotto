@@ -1,4 +1,4 @@
-package lottoauto;
+package lottoauto.domain;
 
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -23,7 +23,9 @@ public class RatingStatics {
     }
 
     public String rateOfReturn(int totalPrice) {
-        int sum = statics.entrySet().stream().mapToInt(e -> e.getKey().rewardAmount(e.getValue())).sum();
+        int sum = statics.entrySet().stream()
+                .mapToInt(e -> e.getKey().rewardAmount(e.getValue()))
+                .sum();
         return String.valueOf(floorToTwoDecimalPlaces(sum * 1.0 / totalPrice));
     }
 
@@ -33,6 +35,9 @@ public class RatingStatics {
 
     @Override
     public String toString() {
-        return statics.entrySet().stream().filter(set -> !set.getKey().equals(Rating.LOSING)).map(set -> set.getKey() + "- " + set.getValue() + "개\n").collect(Collectors.joining());
+        return statics.entrySet().stream()
+                .filter(set -> !set.getKey().equals(Rating.MISS))
+                .map(set -> set.getKey() + "- " + set.getValue() + "개\n")
+                .collect(Collectors.joining());
     }
 }
