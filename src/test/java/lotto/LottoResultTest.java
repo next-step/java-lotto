@@ -1,14 +1,16 @@
 package lotto;
 
 import lotto.model.LottoResult;
+import lotto.model.Money;
 import lotto.model.Rank;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.provider.EnumSource;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoResultTest {
 
@@ -16,12 +18,13 @@ public class LottoResultTest {
     @DisplayName("로또 결과 테스트")
     @EnumSource(value = Rank.class)
     void 로또_결과_테스트() {
-        LottoResult lottoResult = new LottoResult();
+        Map<Rank, Long> rankMap = new HashMap<>();
+        rankMap.put(Rank.three, 2L);
+        rankMap.put(Rank.four, 1L);
+        rankMap.put(Rank.five, 2L);
+        rankMap.put(Rank.six, 1L);
 
-        Integer[] nums = {3, 3, 4, 5, 5, 6};
-        for (int i = 0; i < nums.length; i++) {
-            lottoResult.addCoincidenceCnt(nums[i]);
-        }
+        LottoResult lottoResult = new LottoResult(rankMap);
 
         Integer[] res = {2, 1, 2, 1};
         int coincidence = 3;
@@ -36,12 +39,13 @@ public class LottoResultTest {
     @DisplayName("수익률 테스트")
     @EnumSource(value = Rank.class)
     void 당첨_수익률_테스트(){
-        int buy = 14000;
-        int profitPriceRes = Rank.of(3).getReward().getValue();
-        double profitRateRes =  (double) profitPriceRes / buy;
+        Money buy = new Money(14000);
+        Money profitPriceRes = Rank.of(3).getReward();
+        double profitRateRes =  profitPriceRes.divide(buy);
 
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.addCoincidenceCnt(3);
+        Map<Rank, Long> rankMap = new HashMap<>();
+        rankMap.put(Rank.three, 1L);
+        LottoResult lottoResult = new LottoResult(rankMap);
 
         assertThat(lottoResult.getProfitRate(buy)).isEqualTo(profitRateRes);
      }
@@ -50,16 +54,17 @@ public class LottoResultTest {
     @DisplayName("수익률 테스트")
     @EnumSource(value = Rank.class)
     void 당첨_수익률_테스트2(){
-        int buy = 14000;
-        int profitPriceRes = Rank.of(3).getReward()
-                .add(Rank.of(6).getReward())
-                .getValue();
+        Money buy = new Money(14000);
+        Money profitPriceRes = Rank.of(3).getReward()
+                .add(Rank.of(6).getReward());
 
-        double profitRateRes =  (double) profitPriceRes / buy;
+        double profitRateRes =  profitPriceRes.divide(buy);
 
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.addCoincidenceCnt(3);
-        lottoResult.addCoincidenceCnt(6);
+        Map<Rank, Long> rankMap = new HashMap<>();
+        rankMap.put(Rank.three, 1L);
+        rankMap.put(Rank.six, 1L);
+        LottoResult lottoResult = new LottoResult(rankMap);
+
 
         assertThat(lottoResult.getProfitRate(buy)).isEqualTo(profitRateRes);
      }

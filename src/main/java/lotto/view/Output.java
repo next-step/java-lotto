@@ -2,6 +2,8 @@ package lotto.view;
 
 import lotto.model.LottoResult;
 import lotto.model.LottoTicket;
+import lotto.model.Money;
+import lotto.model.Rank;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -21,13 +23,13 @@ public class Output {
         }
     }
 
-    public static void printWinningStatics(int buyPrice, LottoResult lottoResult){
+    public static void printWinningStatics(Money buyPrice, LottoResult lottoResult){
         System.out.println(LOTTO_WINNING_STATICS);
 
         for (int i=3; i<= 6; i++){
             String s = i +
                     "개 일치 (" +
-                    lottoResult.getPrice(i) +
+                    Rank.of(i).getReward() +
                     ")-" +
                     lottoResult.getResult(i) +
                     "개";

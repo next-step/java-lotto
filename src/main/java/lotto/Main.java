@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.model.LottoController;
-import lotto.model.LottoResult;
-import lotto.model.LottoTicket;
-import lotto.model.RandomLottoTicketGenerator;
+import lotto.model.*;
 import lotto.view.Input;
 import lotto.view.Output;
 
@@ -14,15 +11,15 @@ public class Main {
         try {
             LottoController lottoController = new LottoController();
 
-            int money = Input.readMoney();
-            int ticketCnt = lottoController.calculateTicketCnt(money);
+            Money money = new Money(Input.readMoney());
+            int ticketCnt = money.calculateTicketCnt();
             Output.printLottoCnt(ticketCnt);
 
-            List<LottoTicket> lottoTickets = lottoController.generateTickets(ticketCnt, new RandomLottoTicketGenerator());
-            Output.printLottoTicketList(lottoTickets);
+            List<LottoTicket> lottoTicketList = lottoController.generateTickets(ticketCnt, new RandomLottoTicketGenerator());
+            LottoTickets lottoTickets = new LottoTickets(lottoTicketList);
+            Output.printLottoTicketList(lottoTicketList);
 
             LottoTicket preWinningLottoTicket =  Input.readPreWeekWinningLottoNums();
-
             LottoResult lottoResult = lottoController.start(lottoTickets, preWinningLottoTicket);
             Output.printWinningStatics(money, lottoResult);
         }catch (Exception exception){
