@@ -6,7 +6,8 @@ public enum Prizes {
   FIRST(6, Money.of(2_000_000_000)),
   SECOND(5, Money.of(1_500_000)),
   THIRD(4, Money.of(50_000)),
-  FOURTH(3, Money.of(5_000));
+  FOURTH(3, Money.of(5_000)),
+  NOT_PRIZE(0, Money.ZERO);
 
   private final int matchCount;
   private final Money prize;
@@ -28,7 +29,7 @@ public enum Prizes {
     return Arrays.stream(values())
         .filter(prizes -> prizes.matchCount == count)
         .findAny()
-        .orElse(null);
+        .orElse(NOT_PRIZE);
   }
 
 
