@@ -8,7 +8,9 @@ import java.util.stream.IntStream;
 public class LotteryRetailer {
 
   public static final Money PRICE_PER_PLAY_FOR_LOTTO = Money.of(1000);
-  public static final String PRICE_EXCEPTION_MESSAGE = "로또 1장의 가격은 1000원 입니다";
+
+  private static final String PRICE_EXCEPTION_MESSAGE = String.format("로또 1장의 가격은 %s원 입니다",
+      PRICE_PER_PLAY_FOR_LOTTO);
 
   public LottoTickets sell(Money purchaseAmount, LottoNumberGenerator lottoNumberGenerator) {
     checkGreaterThanMinimumPrice(purchaseAmount);
