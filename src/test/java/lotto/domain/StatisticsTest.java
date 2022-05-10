@@ -17,14 +17,14 @@ class StatisticsTest {
   @DisplayName("당첨통계는 수익율을 반환한다")
   @ParameterizedTest
   @MethodSource("provideForStatistics")
-  void statistics(WinNumbers winNumbers, LottoTickets lottoTickets) {
-    Statistics statistics = new Statistics(winNumbers, lottoTickets, Money.createWon(1000));
+  void statistics(WinningLottoTicket winningLottoTicket, LottoTickets lottoTickets) {
+    Statistics statistics = new Statistics(winningLottoTicket, lottoTickets, Money.createWon(1000));
     assertThat(statistics.rateOfReturn()).isCloseTo(0.35, offset(0.1));
   }
 
   private static Stream<Arguments> provideForStatistics() {
 
-    WinNumbers winNumbers = new WinNumbers("1,2,3,4,5,6");
+    WinningLottoTicket winningLottoTicket = new WinningLottoTicket("1,2,3,4,5,6");
     List<LottoTicket> lottos = List.of(
         new LottoTicket(List.of(26, 14, 37, 20, 8, 15)),
         new LottoTicket(List.of(13, 8, 29, 37, 11, 6)),
@@ -43,7 +43,7 @@ class StatisticsTest {
     );
     LottoTickets lottoTickets = new LottoTickets(lottos);
     return Stream.of(
-        arguments(winNumbers, lottoTickets)
+        arguments(winningLottoTicket, lottoTickets)
     );
   }
 }

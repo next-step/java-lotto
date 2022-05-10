@@ -24,9 +24,9 @@ public class LottoTickets {
     return Collections.unmodifiableList(lottoTickets);
   }
 
-  public int getMatchedCountPerPrize(Prizes prize, WinNumbers winNumbers) {
+  public int getMatchedCountPerPrize(Prizes prize, LottoTicket winningLottoTicket) {
     return (int) lottoTickets.stream()
-        .map(lottoTicket -> lottoTicket.countMatched(winNumbers.getTicket()))
+        .map(lottoTicket -> lottoTicket.countMatched(winningLottoTicket))
         .map(Prizes::of)
         .filter(prize::equals)
         .count();

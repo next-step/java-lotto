@@ -42,9 +42,9 @@ public class LottoTicket {
     return Collections.unmodifiableList(lottoNumbers);
   }
 
-  public int countMatched(LottoTicket winLotto) {
+  public int countMatched(LottoTicket lottoTicket) {
     return (int) lottoNumbers.stream()
-        .filter(winLotto::contains)
+        .filter(lottoTicket::contains)
         .count();
   }
 

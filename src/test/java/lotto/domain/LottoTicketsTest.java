@@ -69,13 +69,15 @@ class LottoTicketsTest {
   @DisplayName("로또 묶음에서 당첨금 별 로또 일치 갯수를 반환한다")
   @ParameterizedTest
   @MethodSource("provideForGetMatchedCountPerPrize")
-  void getMatchedCountPerPrize(LottoTickets lottoTickets, WinNumbers winNumbers, Prizes prize,
+  void getMatchedCountPerPrize(LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket,
+      Prizes prize,
       int matchCount) {
-    assertThat(lottoTickets.getMatchedCountPerPrize(prize, winNumbers)).isEqualTo(matchCount);
+    assertThat(lottoTickets.getMatchedCountPerPrize(prize, winningLottoTicket)).isEqualTo(
+        matchCount);
   }
 
   private static Stream<Arguments> provideForGetMatchedCountPerPrize() {
-    WinNumbers winNumbers = new WinNumbers("1,2,3,4,5,6");
+    WinningLottoTicket winningLottoTicket = new WinningLottoTicket("1,2,3,4,5,6");
     LottoTicket firstPrizeTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
     LottoTicket secondPrizeTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 7));
     LottoTicket thirdPrizeTicket = new LottoTicket(List.of(1, 2, 3, 4, 7, 8));
@@ -85,16 +87,16 @@ class LottoTicketsTest {
     return Stream.of(
         arguments(new LottoTickets(
                 List.of(firstPrizeTicket, nonePrizeTicket, nonePrizeTicket, nonePrizeTicket)),
-            winNumbers, Prizes.FIRST, 1),
+            winningLottoTicket, Prizes.FIRST, 1),
         arguments(new LottoTickets(
             List.of(secondPrizeTicket, secondPrizeTicket, nonePrizeTicket, nonePrizeTicket,
-                nonePrizeTicket)), winNumbers, Prizes.SECOND, 2),
+                nonePrizeTicket)), winningLottoTicket, Prizes.SECOND, 2),
         arguments(new LottoTickets(
             List.of(thirdPrizeTicket, thirdPrizeTicket, thirdPrizeTicket, nonePrizeTicket,
-                nonePrizeTicket)), winNumbers, Prizes.THIRD, 3),
+                nonePrizeTicket)), winningLottoTicket, Prizes.THIRD, 3),
         arguments(new LottoTickets(
             List.of(fourthPrizeTicket, fourthPrizeTicket, fourthPrizeTicket, fourthPrizeTicket,
-                nonePrizeTicket)), winNumbers, Prizes.FOURTH, 4)
+                nonePrizeTicket)), winningLottoTicket, Prizes.FOURTH, 4)
     );
   }
 }

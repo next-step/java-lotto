@@ -11,15 +11,18 @@ public class Statistics {
   private final List<Statistic> statistics;
   private final Money purchaseAmount;
 
-  public Statistics(WinNumbers winNumbers, LottoTickets lottoTickets, Money lottoPrice) {
-    this.statistics = createStatistics(winNumbers, lottoTickets);
+  public Statistics(WinningLottoTicket winningLottoTicket, LottoTickets lottoTickets,
+      Money lottoPrice) {
+    this.statistics = createStatistics(winningLottoTicket, lottoTickets);
     this.purchaseAmount = lottoPrice.multiply(lottoTickets.size());
   }
 
-  private List<Statistic> createStatistics(WinNumbers winNumbers, LottoTickets lottoTickets) {
+  private List<Statistic> createStatistics(WinningLottoTicket winningLottoTicket,
+      LottoTickets lottoTickets) {
     return Arrays.stream(Prizes.values())
         .filter(prizes -> prizes != Prizes.NOT_PRIZE)
-        .map(prize -> new Statistic(lottoTickets.getMatchedCountPerPrize(prize, winNumbers), prize))
+        .map(prize -> new Statistic(lottoTickets.getMatchedCountPerPrize(prize, winningLottoTicket),
+            prize))
         .collect(Collectors.toList());
   }
 
