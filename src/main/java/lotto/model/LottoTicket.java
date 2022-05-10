@@ -18,14 +18,14 @@ public class LottoTicket {
         }
     }
 
-    public int getCoincidenceCnt(LottoTicket winningNumbers){
-        int cnt = 0;
+    public Rank getRank(LottoTicket winningNumbers){
+        int rank = 0;
         for(LottoNumber lottoNumber: winningNumbers.getLottoNumbers()){
             if(this.lottoNumbers.contains(lottoNumber)){
-                cnt += 1;
+                rank += 1;
             }
         }
-        return cnt;
+        return Rank.of(rank);
     }
 
     private List<LottoNumber> getLottoNumbers(){

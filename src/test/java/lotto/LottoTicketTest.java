@@ -28,7 +28,7 @@ public class LottoTicketTest {
 
 
     @Test
-    @DisplayName("")
+    @DisplayName("티켓 생성 테스트")
     void 티켓_생성_테스트(){
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         lottoNumbers.add(new LottoNumber(1));
@@ -47,7 +47,7 @@ public class LottoTicketTest {
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
         LottoTicket lottoTicket =  new LottoTicket(lottoNumbers);
-        assertThat(lottoTicket.getCoincidenceCnt(winningTicket)).isEqualTo(4);
+        assertThat(lottoTicket.getRank(winningTicket)).isEqualTo(Rank.four);
     }
 
 
