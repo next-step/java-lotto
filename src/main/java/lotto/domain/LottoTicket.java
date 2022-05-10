@@ -58,4 +58,11 @@ public class LottoTicket {
   private boolean contains(Integer number) {
     return lottoNumbers.contains(number);
   }
+
+  @Override
+  public String toString() {
+    return "LottoTicket{" +
+        "lottoNumbers=" + lottoNumbers +
+        '}';
+  }
 }
