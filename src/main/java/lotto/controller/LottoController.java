@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import java.util.Collections;
+import java.util.List;
 import lotto.model.Lotto;
 import lotto.model.LottoWinStatistics;
 import lotto.model.Lottos;
@@ -13,9 +15,12 @@ public class LottoController {
   public void lottoDraw(LottoNumberGenerateStrategy numberGenerateStrategy) {
     int amount = Integer.parseInt(InputView.inputPurchasedAmount());
     int purchasedLotto = countPurchasedLotto(amount);
-    OutputView.outputCountPurchasedLotto(purchasedLotto);
+    int purchasedManual = InputView.inputNumberOfManual(purchasedLotto);
+    List<String> manualLottos = InputView.inputManualLottoNumbers(purchasedManual);
 
-    Lottos lottos = Lottos.create(purchasedLotto, numberGenerateStrategy);
+    OutputView.outputCountPurchasedLotto(purchasedManual, purchasedLotto);
+
+    Lottos lottos = Lottos.create(purchasedLotto, manualLottos, numberGenerateStrategy);
     OutputView.outputPurchasedLottoInfo(lottos);
 
     WinningLotto winningLotto = WinningLotto.create(InputView.inputLastWeekWinningLotto(),
