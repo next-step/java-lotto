@@ -1,6 +1,7 @@
 package lotto.util;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.Money;
 import lotto.exception.InvalidInputLottoNumberException;
 import lotto.exception.InvalidLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
@@ -8,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.math.BigDecimal;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,8 +20,8 @@ class InputUtilTest {
     @ValueSource(strings = {"0", "10", "1000"})
     @DisplayName("입력된 문자열을 BigDecimal 로 변환")
     void convertToBigDecimalTest(String input) {
-        BigDecimal bigDecimal = InputUtil.readMoney(input);
-        assertThat(bigDecimal).isEqualTo(new BigDecimal(input));
+        Money money = InputUtil.readMoney(input);
+        assertThat(money).isEqualTo(new Money(input));
     }
 
     @ParameterizedTest

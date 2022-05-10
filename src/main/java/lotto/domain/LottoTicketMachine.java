@@ -7,9 +7,9 @@ import java.util.Set;
 
 public class LottoTicketMachine {
 
-    public List<LottoTicket> buyLottoTickets(int price, LottoNumberGenerateStrategy generateStrategy) {
+    public List<LottoTicket> buyLottoTickets(Money money, LottoNumberGenerateStrategy generateStrategy) {
         LottoTicketGenerator autoGenerateStrategy = new LottoTicketGenerator(generateStrategy);
-        return autoGenerateStrategy.buyLottoTickets(price);
+        return autoGenerateStrategy.buyLottoTickets(money);
     }
 
     public WinningTicket generateWinningTicket(Set<LottoNumber> winningNumbers, LottoNumber bonusNumber) {

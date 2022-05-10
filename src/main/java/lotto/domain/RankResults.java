@@ -14,15 +14,16 @@ public class RankResults {
         return rankResults;
     }
 
-    public double getProfitRatio(int money) {
-        Integer totalPrize = getTotalPrize();
-        return (double) totalPrize / money;
+    public double getProfitRatio(Money money) {
+        Long totalPrizeInteger = getTotalPrize();
+        Money totalPrize = new Money(totalPrizeInteger);
+        return totalPrize.divide(money);
     }
 
-    private Integer getTotalPrize() {
+    private Long getTotalPrize() {
         return rankResults
                 .stream()
                 .map(RankResult::getPrizePerRank)
-                .reduce(0, Integer::sum);
+                .reduce(0L, Long::sum);
     }
 }

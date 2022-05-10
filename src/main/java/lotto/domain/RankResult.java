@@ -16,7 +16,7 @@ public class RankResult {
         return count;
     }
 
-    public Integer getPrizePerRank() {
+    public Long getPrizePerRank() {
         return rank.getPrize() * count;
     }
 

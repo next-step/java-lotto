@@ -1,10 +1,12 @@
 package lotto.controller;
 
 import lotto.domain.*;
+import lotto.domain.strategy.ManualGenerateStrategy;
 import lotto.domain.strategy.RandomGenerateStrategy;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -27,7 +29,7 @@ public class LottoGameController {
 
     public void play() {
         try {
-            int money = getMoney();
+            Money money = getMoney();
             List<LottoTicket> lottoTickets = getLottoTickets(money);
             outputView.printLottoTickets(lottoTickets);
             RankResults rankResults = getRankResults(lottoTickets);
@@ -55,12 +57,43 @@ public class LottoGameController {
                 .collect(Collectors.toList());
     }
 
-    private List<LottoTicket> getLottoTickets(int money) {
-        return ticketMachine.buyLottoTickets(money, new RandomGenerateStrategy());
+    private List<LottoTicket> getLottoTickets(Money money) {
+        Money manualTicketPrice = inputView.readManualTicketPrice();
+        Money randomTicketPrice = money.subtract(manualTicketPrice);
+
+        return getTotalLottoTickets(manualTicketPrice, randomTicketPrice);
     }
 
-    private int getMoney() {
-        return inputView.readMoney().intValue();
+    private ArrayList<LottoTicket> getTotalLottoTickets(Money manualTicketPrice, Money randomTicketPrice) {
+
+        outputView.printManualTicketNumberMessage();
+
+        ArrayList<LottoTicket> totalLottoTickets = new ArrayList<>();
+        List<LottoTicket> manualLottoTickets = getManualLottoTickets(manualTicketPrice);
+        List<LottoTicket> randomLottoTickets = getRandomLottoTickets(randomTicketPrice);
+
+        outputView.printTicketCount(manualLottoTickets.size(), randomLottoTickets.size());
+
+        totalLottoTickets.addAll(manualLottoTickets);
+        totalLottoTickets.addAll(randomLottoTickets);
+
+        return totalLottoTickets;
+    }
+
+    private List<LottoTicket> getRandomLottoTickets(Money randomTicketPrice) {
+        return ticketMachine.buyLottoTickets(randomTicketPrice, new RandomGenerateStrategy());
+    }
+
+    private List<LottoTicket> getManualLottoTickets(Money manualTicketPrice) {
+        return ticketMachine.buyLottoTickets(manualTicketPrice, new ManualGenerateStrategy());
+    }
+
+//    private List<LottoTicket> getManualLottoTickets(int money) {
+//        ticketMachine.buyLottoTickets()
+//    }
+
+    private Money getMoney() {
+        return inputView.readMoney();
     }
 }
 

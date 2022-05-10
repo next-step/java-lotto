@@ -19,7 +19,7 @@ class LottoTicketMachineTest {
         // given
         LottoTicketMachine ticketMachine = new LottoTicketMachine();
         // when
-        List<LottoTicket> lottoTickets = ticketMachine.buyLottoTickets(money, new TestGeneratorStrategy());
+        List<LottoTicket> lottoTickets = ticketMachine.buyLottoTickets(new Money(money), new TestGeneratorStrategy());
         // then
         assertThat(lottoTickets).hasSize(count);
     }
@@ -30,7 +30,7 @@ class LottoTicketMachineTest {
         // given
         LottoTicketMachine ticketMachine = new LottoTicketMachine();
         // when
-        List<LottoTicket> lottoTickets = ticketMachine.buyLottoTickets(1000, new TestGeneratorStrategy());
+        List<LottoTicket> lottoTickets = ticketMachine.buyLottoTickets(new Money(1000), new TestGeneratorStrategy());
         // then
         Set<LottoNumber> lottoNumbers = lottoTickets.get(0).getLottoNumbers();
         assertThat(lottoNumbers).containsExactly(

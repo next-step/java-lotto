@@ -11,6 +11,7 @@ import java.util.stream.IntStream;
 public class LottoTicketGenerator {
 
     public static final int LOTTO_COST_PER_TICKET = 1000;
+    public static final Money LOTTO_MONEY_PER_TICKET = new Money(LOTTO_COST_PER_TICKET);
     private final LottoNumberGenerateStrategy generateStrategy;
 
     public LottoTicketGenerator(LottoNumberGenerateStrategy generateStrategy) {
@@ -23,12 +24,12 @@ public class LottoTicketGenerator {
                 .collect(Collectors.toList());
     }
 
-    public List<LottoTicket> buyLottoTickets(int price) {
-        return generateLottoTickets(getCountToBuy(price));
+    public List<LottoTicket> buyLottoTickets(Money money) {
+        return generateLottoTickets(getCountToBuy(money));
     }
 
-    private int getCountToBuy(int price) {
-        int count = price / LOTTO_COST_PER_TICKET;
+    private int getCountToBuy(Money money) {
+        int count = (int) money.divide(LOTTO_MONEY_PER_TICKET);
         validInputPrice(count);
         return count;
     }

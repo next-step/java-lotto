@@ -20,7 +20,7 @@ class LottoTicketGeneratorTest {
         // given
         LottoTicketGenerator lottoTicketGenerator = new LottoTicketGenerator(new TestGeneratorStrategy());
         // when
-        List<LottoTicket> lottoTickets = lottoTicketGenerator.buyLottoTickets(money);
+        List<LottoTicket> lottoTickets = lottoTicketGenerator.buyLottoTickets(new Money(money));
         // then
         assertThat(lottoTickets).hasSize(count);
     }
@@ -32,7 +32,7 @@ class LottoTicketGeneratorTest {
         // given
         LottoTicketGenerator lottoTicketGenerator = new LottoTicketGenerator(new TestGeneratorStrategy());
         // when, then
-        assertThatThrownBy(() -> lottoTicketGenerator.buyLottoTickets(money))
+        assertThatThrownBy(() -> lottoTicketGenerator.buyLottoTickets(new Money(money)))
                 .isInstanceOf(InvalidMoneyInputException.class);
     }
 

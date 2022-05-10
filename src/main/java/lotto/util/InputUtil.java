@@ -1,9 +1,9 @@
 package lotto.util;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.Money;
 import lotto.exception.InvalidInputLottoNumberException;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,8 +14,8 @@ public class InputUtil {
     private static final String DELIMITER = ",";
     private static final int LOTTO_NUMBER_COUNT = 6;
 
-    public static BigDecimal readMoney(String input) {
-        return BigDecimal.valueOf(parseLong(input));
+    public static Money readMoney(String input) {
+        return new Money(parseLong(input));
     }
 
     public static Set<LottoNumber> readLottoNumbers(String input) {
@@ -63,7 +63,7 @@ public class InputUtil {
         }
     }
 
-    private static long parseLong(String input) {
+    public static long parseLong(String input) {
         long longValue;
         try {
             longValue = Long.parseLong(input);

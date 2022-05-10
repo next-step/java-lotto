@@ -23,7 +23,7 @@ class RankResultsTest {
         );
 
         RankResults rankResults = new RankResults(rankResultList);
-        double profitRatio = rankResults.getProfitRatio(money);
+        double profitRatio = rankResults.getProfitRatio(new Money(money));
 
         assertThat(profitRatio).isEqualTo(ratio);
     }
