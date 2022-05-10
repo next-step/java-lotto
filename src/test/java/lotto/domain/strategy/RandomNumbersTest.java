@@ -1,6 +1,7 @@
 package lotto.domain.strategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -13,8 +14,10 @@ public class RandomNumbersTest {
   void generateLottoNumber() {
     GenerateNumbersStrategy generateNumbersStrategy = new RandomNumbers();
     List<Integer> generate = generateNumbersStrategy.generate();
-    assertThat(generate).hasSize(6);
-    assertThat(generate).doesNotHaveDuplicates();
-    assertThat(generate).hasSizeBetween(1, 45);
+    assertAll(
+        () -> assertThat(generate).hasSize(6),
+        () -> assertThat(generate).doesNotHaveDuplicates(),
+        () -> assertThat(generate).hasSizeBetween(1, 45)
+    );
   }
 }
