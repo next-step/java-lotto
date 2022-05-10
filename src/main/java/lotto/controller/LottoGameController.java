@@ -88,10 +88,6 @@ public class LottoGameController {
         return ticketMachine.buyLottoTickets(manualTicketPrice, new ManualGenerateStrategy());
     }
 
-//    private List<LottoTicket> getManualLottoTickets(int money) {
-//        ticketMachine.buyLottoTickets()
-//    }
-
     private Money getMoney() {
         return inputView.readMoney();
     }

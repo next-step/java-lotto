@@ -58,7 +58,7 @@ public class OutputView {
     }
 
     public void printPrize(RankResults rankResults) {
-        String resultString = this.getResultString(rankResults.getRankResults());
+        String resultString = this.getResultString(rankResults.getRankResultList());
         System.out.println(resultString);
     }
 

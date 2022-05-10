@@ -40,6 +40,6 @@ class RankResultsTest {
 
         RankResults rankResults = new RankResults(rankResultList);
 
-        assertThat(rankResults.getRankResults()).isEqualTo(rankResultList);
+        assertThat(rankResults.getRankResultList()).isEqualTo(rankResultList);
     }
 }

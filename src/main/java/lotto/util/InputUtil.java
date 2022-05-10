@@ -13,13 +13,18 @@ public class InputUtil {
     private static final String INVALID_READ_MONEY_ERROR_MESSAGE = "구매 금액을 제대로 입력해주세요.";
     private static final String DELIMITER = ",";
     private static final int LOTTO_NUMBER_COUNT = 6;
+    private static final String BLANK_REGX = "\\s";
+    private static final String REPLACEMENT = "";
 
     public static Money readMoney(String input) {
         return new Money(parseLong(input));
     }
 
+    private InputUtil() {
+    }
+
     public static Set<LottoNumber> readLottoNumbers(String input) {
-        String replacedString = input.replaceAll(" ", "");
+        String replacedString = input.replaceAll(BLANK_REGX, REPLACEMENT);
         return getLottoNumbers(replacedString);
     }
 
