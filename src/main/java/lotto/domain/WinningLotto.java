@@ -7,11 +7,15 @@ public class WinningLotto {
     private final LottoNumber bonusBall;
 
     public WinningLotto(LottoNumbers winningLottoNumbers, LottoNumber bonusBall) {
+        checkContains(winningLottoNumbers, bonusBall);
+        this.winningLottoNumbers = winningLottoNumbers;
+        this.bonusBall = bonusBall;
+    }
+
+    private void checkContains(LottoNumbers winningLottoNumbers, LottoNumber bonusBall) {
         if (winningLottoNumbers.contains(bonusBall)) {
             throw new IllegalArgumentException(BONUS_BALL_CANNOT_CONTAIN_WINNING_LOTTO_NUMBERS_MESSAGE);
         }
-        this.winningLottoNumbers = winningLottoNumbers;
-        this.bonusBall = bonusBall;
     }
 
     public LottoNumbers getWinningLottoNumbers() {

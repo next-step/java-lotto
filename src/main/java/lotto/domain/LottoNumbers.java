@@ -12,6 +12,7 @@ public class LottoNumbers {
     private static final String NULL_NOT_ALLOW_MESSAGE = "null은 허용되지 않습니다.";
     private static final String LOTTO_SIZE_NOT_MATCH_MESSAGE = "로또 번호 개수가 일치하지 않습니다.";
     private static final String LOTTO_NUMBERS_STRING_DELIMITER = ", ";
+
     private final Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers(String lottoNumbersString) {
@@ -23,9 +24,7 @@ public class LottoNumbers {
     }
 
     LottoNumbers(Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(LOTTO_SIZE_NOT_MATCH_MESSAGE);
-        }
+        checkSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -42,19 +41,29 @@ public class LottoNumbers {
     }
 
     private static List<LottoNumber> wrap(String lottoNumbersString) {
-        if (lottoNumbersString == null) {
-            throw new IllegalArgumentException(NULL_NOT_ALLOW_MESSAGE);
-        }
+        checkNull(lottoNumbersString);
 
         return Arrays.stream(lottoNumbersString.split(LOTTO_NUMBERS_STRING_DELIMITER))
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
+    private static void checkNull(String lottoNumbersString) {
+        if (lottoNumbersString == null) {
+            throw new IllegalArgumentException(NULL_NOT_ALLOW_MESSAGE);
+        }
+    }
+
     private static List<LottoNumber> wrap(List<Integer> numbers) {
         return numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
+    }
+
+    private void checkSize(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(LOTTO_SIZE_NOT_MATCH_MESSAGE);
+        }
     }
 
     public boolean contains(LottoNumber lottoNumber) {
