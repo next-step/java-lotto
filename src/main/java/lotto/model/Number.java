@@ -68,6 +68,10 @@ public class Number {
         return calculator(right, (l, r) -> new Number(l.value.divide(r.value, 2, RoundingMode.HALF_EVEN)));
     }
 
+    public Number incrementAndGet() {
+        return new Number(this.value.add(BigDecimal.ONE));
+    }
+
     public long longValue() {
         return this.value.longValue();
     }
@@ -87,5 +91,10 @@ public class Number {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return this.value.toPlainString();
     }
 }
