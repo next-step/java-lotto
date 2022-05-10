@@ -39,7 +39,7 @@ public class ResultView {
         System.out.println("---------");
 
         Matched[] matcheds = Matched.values();
-        for (int i = 5; i >= 0; i--) {
+        for (int i = 4; i >= 0; i--) {
             System.out.print(matcheds[i].numberOfMatched() + "개 일치");
             printBonus(i);
             System.out.print(" (" + matcheds[i].reward() + "원) - ");
