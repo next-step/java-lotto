@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class ResultView {
     public void printLottos(Customer customer) {
-      customer.printLottoList();
+      customer.findLottos().forEach(System.out::println);
     }
 
     public void printWinningList(List<Rank> winningList) {
