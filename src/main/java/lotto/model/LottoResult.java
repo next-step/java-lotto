@@ -1,32 +1,36 @@
 package lotto.model;
 
+import java.util.HashMap;
+import java.util.Map;
 
 public class LottoResult {
+    private final Map<Rank, Long> rankMap;
 
-    public int addCoincidenceCnt(int coincidenceCnt){
-        return CoincidenceNumber
-                .of(coincidenceCnt)
-                .addRes();
-    }
-
-    public int getResult(int coincidenceCnt){
-        return CoincidenceNumber.of(coincidenceCnt).getRes();
-    }
-
-    public int getPrice(int coincidenceCnt) {
-        return CoincidenceNumber.of(coincidenceCnt).getPrice();
-    }
-
-    public double getProfitRate(int buyPrice){
-        return (double) getProfit() / buyPrice;
-    }
-
-    public int getProfit(){
-        int profit = 0;
-        for(int i=3; i<=6; i++){
-            CoincidenceNumber num = CoincidenceNumber.of(i);
-            profit += num.getPrice() * num.getRes();
+    public LottoResult() {
+        rankMap = new HashMap<>();
+        for (Rank rank: Rank.values()) {
+            rankMap.put(rank, 0L);
         }
-        return profit;
+    }
+
+    public void addCoincidenceCnt(int coincidence) {
+        Rank rank = Rank.of(coincidence);
+        rankMap.put(rank, rankMap.get(rank) + 1);
+    }
+
+
+    public int getResult(int coincidence) {
+        Rank rank = Rank.of(coincidence);
+        return rankMap.get(rank).intValue();
+    }
+
+    public double getProfitRate(int buy) {
+        Money profit = new Money();
+        for (Map.Entry<Rank, Long> entry: rankMap.entrySet()){
+            int cnt = entry.getValue().intValue();
+            Money reward = entry.getKey().getReward();
+            profit = profit.add(reward.multiply(cnt));
+        }
+        return profit.getValue() / (double) buy;
     }
 }
