@@ -6,6 +6,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.List;
 import java.util.stream.Stream;
+import lotto.domain.money.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -17,7 +18,7 @@ class StatisticsTest {
   @ParameterizedTest
   @MethodSource("provideForStatistics")
   void statistics(WinNumbers winNumbers, LottoTickets lottoTickets) {
-    Statistics statistics = new Statistics(winNumbers, lottoTickets, Money.of(1000));
+    Statistics statistics = new Statistics(winNumbers, lottoTickets, Money.createWon(1000));
     assertThat(statistics.rateOfReturn()).isCloseTo(0.35, offset(0.1));
   }
 

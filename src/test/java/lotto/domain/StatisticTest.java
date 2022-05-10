@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.stream.Stream;
+import lotto.domain.money.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -22,10 +23,10 @@ class StatisticTest {
 
   private static Stream<Arguments> provideForStatistic() {
     return Stream.of(
-        arguments(0, Prizes.FIRST, Money.ZERO),
-        arguments(0, Prizes.SECOND, Money.ZERO),
-        arguments(2, Prizes.THIRD, Money.of(50_000 * 2)),
-        arguments(1, Prizes.FOURTH, Money.of(5_000))
+        arguments(0, Prizes.FIRST, Money.createWon(0)),
+        arguments(0, Prizes.SECOND, Money.createWon(0)),
+        arguments(2, Prizes.THIRD, Money.createWon(50_000 * 2)),
+        arguments(1, Prizes.FOURTH, Money.createWon(5_000))
     );
   }
 }

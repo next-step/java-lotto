@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.money.Money;
 
 public class Statistics {
 
@@ -30,7 +31,7 @@ public class Statistics {
     Money winAmount = statistics.stream()
         .map(Statistic::getTotalPrize)
         .reduce(Money::sum)
-        .orElse(Money.ZERO);
+        .orElse(Money.createWon(0));
     Rate divide = Rate.of((double) winAmount.value() / purchaseAmount.value());
     return divide.getRate();
   }

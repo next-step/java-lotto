@@ -1,25 +1,27 @@
-package lotto.domain;
+package lotto.domain.money;
 
+import java.util.Currency;
+import java.util.Locale;
 import java.util.Objects;
 
 public class Money {
 
-  public static final Money ZERO = Money.of(0);
-
   private static final String WON_FORMAT = "%d원";
 
   private final int amount;
+  private final Currency currency;
 
-  public static Money of(int amount) {
-    return new Money(amount);
+  public static Money createWon(int amount) {
+    return new Money(Currency.getInstance(Locale.KOREA), amount);
   }
 
-  private Money(int amount) {
+  private Money(Currency currency, int amount) {
     this.amount = amount;
+    this.currency = currency;
   }
 
   public Money multiply(double rate) {
-    return new Money((int) (amount * rate));
+    return new Money(currency, (int) (amount * rate));
   }
 
   public boolean lessThan(Money money) {
@@ -29,12 +31,12 @@ public class Money {
 
   public Money sum(Money money) {
     Objects.requireNonNull(money);
-    return Money.of(amount + money.amount);
+    return Money.createWon(amount + money.amount);
   }
 
   public Money divide(Money money) {
     Objects.requireNonNull(money);
-    return Money.of(amount / money.amount);
+    return Money.createWon(amount / money.amount);
   }
 
   public int value() {
@@ -54,12 +56,12 @@ public class Money {
       return false;
     }
     Money money = (Money) o;
-    return Objects.equals(amount, money.amount);
+    return amount == money.amount && currency.equals(money.currency);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(amount);
+    return Objects.hash(amount, currency);
   }
 
   @Override

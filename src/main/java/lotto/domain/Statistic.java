@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.money.Money;
+
 public class Statistic {
 
   private final Prizes prizes;

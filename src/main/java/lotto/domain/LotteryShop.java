@@ -4,11 +4,12 @@ import static java.util.stream.Collectors.toList;
 
 import java.util.List;
 import java.util.stream.IntStream;
+import lotto.domain.money.Money;
 import lotto.domain.strategy.GenerateNumbersStrategy;
 
 public class LotteryShop {
 
-  public static final Money PRICE_PER_PLAY_FOR_LOTTO = Money.of(1000);
+  public static final Money PRICE_PER_PLAY_FOR_LOTTO = Money.createWon(1000);
 
   private static final String PRICE_EXCEPTION_MESSAGE = String.format("로또 1장의 가격은 %s 입니다",
       PRICE_PER_PLAY_FOR_LOTTO.won());
