@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.PurchaseAmount;
+import lotto.domain.Money;
 
 import java.util.Scanner;
 
@@ -9,9 +9,9 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static PurchaseAmount getPurchaseAmount() {
+    public static Money getPurchaseAmount() {
         printPurchaseAmount();
-        return new PurchaseAmount(scanner.nextInt());
+        return new Money(scanner.nextInt());
     }
 
     private static void printPurchaseAmount() {

@@ -7,7 +7,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class StoreTest {
@@ -15,7 +14,7 @@ class StoreTest {
     @ParameterizedTest
     @MethodSource("로또_구매_갯수_매개변수")
     void 로또_구매_성공(int purchaseAmount, int lottoAmount) {
-        assertThat(Store.buyLotto(new PurchaseAmount(purchaseAmount))).isEqualTo(lottoAmount);
+        assertThat(Store.buyLotto(new Money(purchaseAmount))).isEqualTo(lottoAmount);
     }
 
     static Stream<Arguments> 로또_구매_갯수_매개변수() {

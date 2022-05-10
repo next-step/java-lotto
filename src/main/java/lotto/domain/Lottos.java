@@ -8,12 +8,12 @@ public class Lottos {
 
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(PurchaseLotto purchaseLotto) {
-        createAutoLottos(purchaseLotto);
+    public Lottos(PurchaseAmount purchaseAmount) {
+        createAutoLottos(purchaseAmount);
     }
 
-    private void createAutoLottos(PurchaseLotto purchaseLotto) {
-        for (int i = 0; i < purchaseLotto.getAmount(); i++) {
+    private void createAutoLottos(PurchaseAmount purchaseAmount) {
+        for (int i = 0; i < purchaseAmount.getAmount(); i++) {
             lottos.add(new Lotto(LottoFactory.createAutoLottoNumbers()));
         }
     }
