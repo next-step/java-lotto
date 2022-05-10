@@ -12,6 +12,7 @@ public class Number {
         this.number = Integer.parseInt(number);
     }
 
+<<<<<<< HEAD
     public Number(int number) {
         String stringNum = String.valueOf(number);
         validate(stringNum);
@@ -19,6 +20,8 @@ public class Number {
     }
 
 
+=======
+>>>>>>> upstream/dmswjd4117
     private void validate(String number){
         if(number == null || !NUMBER_PATTERN.matcher(number).matches()){
             throw new IllegalArgumentException(number+":0이상의 숫자가 아닙니다");
