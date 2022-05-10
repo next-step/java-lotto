@@ -5,17 +5,17 @@ import java.util.List;
 import java.util.Objects;
 import lotto.domain.Lotto.LOTTO_REWARD;
 
-class LottoMatchResults{
+public class LottoMatchResults{
     private List<MatchResult> matchResults = new ArrayList<>();
 
 
     LottoMatchResults() {
-        matchResults.add(new MatchResult(0, LOTTO_REWARD.MATCH_1.getReward()));
-        matchResults.add(new MatchResult(0, LOTTO_REWARD.MATCH_2.getReward()));
-        matchResults.add(new MatchResult(0, LOTTO_REWARD.MATCH_3.getReward()));
-        matchResults.add(new MatchResult(0, LOTTO_REWARD.MATCH_4.getReward()));
-        matchResults.add(new MatchResult(0, LOTTO_REWARD.MATCH_5.getReward()));;
-        matchResults.add(new MatchResult(0, LOTTO_REWARD.MATCH_6.getReward()));
+        matchResults.add(new MatchResult(0, LOTTO_REWARD.valueOf(1)));
+        matchResults.add(new MatchResult(0, LOTTO_REWARD.valueOf(2)));
+        matchResults.add(new MatchResult(0, LOTTO_REWARD.valueOf(3)));
+        matchResults.add(new MatchResult(0, LOTTO_REWARD.valueOf(4)));
+        matchResults.add(new MatchResult(0, LOTTO_REWARD.valueOf(5)));
+        matchResults.add(new MatchResult(0, LOTTO_REWARD.valueOf(6)));
     }
 
     void addMatchNumber(int matchNumber) {
@@ -52,15 +52,7 @@ class LottoMatchResults{
         return Objects.hash(matchResults);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder result = new StringBuilder();
-
-        for (int i = 2; i < 6; ++i) {
-            result.append(i + 1).append("개 일치 ");
-            result.append(matchResults.get(i)).append("\n");
-        }
-
-        return result.substring(0, result.length() - 1);
+    public List<MatchResult> getMatchResults() {
+        return matchResults;
     }
- }
+}

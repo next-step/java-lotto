@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import static lotto.domain.Lotto.LOTTO_PRICE;
 import lotto.domain.result.LottoGameResult;
 
@@ -25,7 +26,7 @@ public class Lottos {
         return new Lottos(lottos, purchaseAmount);
     }
 
-    public LottoGameResult matchNumbers(List<Integer> numbers) {
+    public LottoGameResult matchNumbers(Set<Integer> numbers) {
         LottoGameResult lottoGameResult = new LottoGameResult(purchaseAmount);
 
         for (Lotto lotto : lottos) {
@@ -35,14 +36,7 @@ public class Lottos {
         return lottoGameResult;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (Lotto lotto : lottos) {
-            stringBuilder.append(lotto);
-        }
-
-        return stringBuilder.toString();
+    public List<Lotto> getLottoList() {
+        return lottos;
     }
 }

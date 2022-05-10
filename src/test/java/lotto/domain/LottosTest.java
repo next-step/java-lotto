@@ -1,14 +1,16 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import lotto.domain.result.LottoGameResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
-    List<Integer> numbers = new ArrayList<>();
+    Set<Integer> numbers = new HashSet<>();
 
     @BeforeEach
     void setUp() {

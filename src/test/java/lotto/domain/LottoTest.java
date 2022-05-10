@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class LottoTest {
     @Test
     void 생성_테스트() {
-        List<Integer> numbers = new ArrayList<>();
+        Set<Integer> numbers = new HashSet<>();
         numbers.add(1);
         numbers.add(3);
         numbers.add(5);
@@ -24,7 +24,7 @@ public class LottoTest {
     void 생성_에러_테스트() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    List<Integer> numbers = new ArrayList<>();
+                    Set<Integer> numbers = new HashSet<>();
                     numbers.add(1);
                     numbers.add(3);
                     numbers.add(5);
@@ -33,18 +33,5 @@ public class LottoTest {
 
                     Lotto lotto = new Lotto(numbers);
                 }).withMessageMatching("숫자 6개만 입력 가능합니다");
-
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> {
-                    List<Integer> numbers = new ArrayList<>();
-                    numbers.add(1);
-                    numbers.add(3);
-                    numbers.add(3);
-                    numbers.add(6);
-                    numbers.add(7);
-                    numbers.add(8);
-
-                    Lotto lotto = new Lotto(numbers);
-                }).withMessageMatching("중복 숫자는 입력할 수 없습니다");
     }
 }

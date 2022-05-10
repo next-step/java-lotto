@@ -28,8 +28,11 @@ public class LottoGameResult {
         return lottoMatchResults.getLottoReward();
     }
 
-    double getYield() {
+    public double getYield() {
         return (double) getTotalReward() / purchaseAmount;
+    }
+    public LottoMatchResults getLottoMatchResults() {
+        return lottoMatchResults;
     }
 
     @Override
@@ -47,23 +50,5 @@ public class LottoGameResult {
     @Override
     public int hashCode() {
         return Objects.hash(lottoMatchResults);
-    }
-
-    @Override
-    public String toString() {
-        double yield = getYield();
-
-        StringBuilder result = new StringBuilder();
-        result.append("당첨 통계\n");
-        result.append("---------\n");
-        result.append(lottoMatchResults);
-        result.append("\n");
-        result.append("총 수익률은 ").append(yield).append("입니다.");
-
-        if (yield < 1) {
-            result.append("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
-        }
-
-        return result.toString();
     }
 }
