@@ -1,6 +1,5 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.strategy.LottoNumberGenerateStrategy;
@@ -16,17 +15,21 @@ public class Lottos {
     this.lottos = lottos;
   }
 
-  public static Lottos create(int numberOfPurchasedLotto,
+  public static Lottos create(int numberOfPurchasedLotto, List<String> manualLottos,
       LottoNumberGenerateStrategy numberGenerateStrategy) {
-    List<Lotto> lottos = new ArrayList<>();
-    for (int i = 0; i < numberOfPurchasedLotto; i++) {
+    List<Lotto> lottos = manualLottos.stream()
+        .map(Lotto::create)
+        .collect(Collectors.toList());
+
+    for (int i = 0; i < numberOfPurchasedLotto - manualLottos.size(); i++) {
       lottos.add(Lotto.create(numberGenerateStrategy));
     }
+
     return new Lottos(lottos);
   }
 
   private void validate(List<Lotto> lottos) {
-    if(lottos == null || lottos.isEmpty()) {
+    if (lottos == null || lottos.isEmpty()) {
       throw new IllegalArgumentException(LOTTOS_NULL_OR_EMPTY_ERROR_MESSAGE);
     }
   }

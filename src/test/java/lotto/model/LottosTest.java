@@ -31,7 +31,8 @@ class LottosTest {
     int purchasedLotto = 3;
 
     // when
-    Lottos lottos = Lottos.create(purchasedLotto, new RandomNumberGenerateStrategy());
+    Lottos lottos = Lottos.create(purchasedLotto, Collections.emptyList(),
+        new RandomNumberGenerateStrategy());
 
     // then
     assertThat(lottos.getLottos()).hasSize(purchasedLotto);
@@ -56,7 +57,7 @@ class LottosTest {
   @DisplayName("구매한 로또 전체와 우승 로또번호를 비교한 결과")
   void checkResultOfCompareAllPurchasedLottoAndWinningLotto() {
     // given
-    Lottos lottos = Lottos.create(3, new FixedNumberGenerateStrategy());
+    Lottos lottos = Lottos.create(3, Collections.emptyList(), new FixedNumberGenerateStrategy());
     WinningLotto winningLotto = WinningLotto.create("1, 2, 3, 4, 5, 6", 10);
 
     // when
@@ -70,7 +71,7 @@ class LottosTest {
   @DisplayName("구매한 로또 전체와 우승 로또번호를 비교 결과에 따른 수익률 계산하기")
   void calculateReturnProfitRatioWinningLottoAndComparisonResult() {
     // given
-    Lottos lottos = Lottos.create(3, new FixedNumberGenerateStrategy());
+    Lottos lottos = Lottos.create(3, Collections.emptyList(), new FixedNumberGenerateStrategy());
     WinningLotto winningLotto = WinningLotto.create("1, 2, 3, 4, 5, 6", 10);
 
     // when
