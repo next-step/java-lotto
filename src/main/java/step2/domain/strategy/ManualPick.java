@@ -1,6 +1,7 @@
 package step2.domain.strategy;
 
 import step2.domain.LottoNumber;
+import step2.util.UserInputParser;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,9 +13,7 @@ public class ManualPick implements LottoPickStrategy {
     private List<LottoNumber> list;
 
     public ManualPick(String input) {
-        String newInput = input.replace(" ", "");
-        String[] split = newInput.split(",");
-        list = Arrays.stream(split)
+        list = Arrays.stream(UserInputParser.impl(input))
                 .map(ManualPick::apply)
                 .collect(Collectors.toList());
     }

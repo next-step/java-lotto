@@ -1,5 +1,7 @@
 package step2.domain;
 
+import step2.util.UserInputParser;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,9 +13,7 @@ public class LottoWinNumber {
         if (input == null || input.isEmpty())
             throw new IllegalArgumentException("로또 당첨번호가 비어있습니다");
 
-        String newInput = input.replace(" ", "");
-        String[] split = newInput.split(",");
-        winLottoNumber = Arrays.stream(split)
+        winLottoNumber = Arrays.stream(UserInputParser.impl(input))
                 .map(LottoNumber::create)
                 .collect(Collectors.toList());
 
