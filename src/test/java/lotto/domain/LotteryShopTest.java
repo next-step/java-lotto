@@ -10,16 +10,16 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class LotteryRetailerTest {
+class LotteryShopTest {
 
   private final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-  private final LotteryRetailer lotteryRetailer = new LotteryRetailer();
+  private final LotteryShop lotteryShop = new LotteryShop();
 
   @DisplayName("금액에 맞는 횟수만큼 로또 발급")
   @ParameterizedTest
   @CsvSource(value = {"1000:1", "1100:1", "2000:2"}, delimiter = ':')
   void payForPlayLotto(Integer moneyWon, Integer lottoCount) {
-    LottoTickets tickets = lotteryRetailer.sell(Money.of(moneyWon), lottoNumberGenerator);
+    LottoTickets tickets = lotteryShop.sell(Money.of(moneyWon), lottoNumberGenerator);
     assertThat(tickets.size()).isEqualTo(lottoCount);
   }
 
@@ -28,7 +28,7 @@ class LotteryRetailerTest {
   @ValueSource(ints = {999, -1})
   void payThrowsIllegalArgumentException(Integer moneyWon) {
     assertThatIllegalArgumentException().isThrownBy(
-            () -> lotteryRetailer.sell(Money.of(moneyWon), lottoNumberGenerator))
+            () -> lotteryShop.sell(Money.of(moneyWon), lottoNumberGenerator))
         .withMessage("로또 1장의 가격은 1000원 입니다");
   }
 
@@ -37,6 +37,6 @@ class LotteryRetailerTest {
   @NullSource
   void payThrowsNullPointExceptionException(Integer moneyWon) {
     assertThatNullPointerException().isThrownBy(
-        () -> lotteryRetailer.sell(Money.of(moneyWon), lottoNumberGenerator));
+        () -> lotteryShop.sell(Money.of(moneyWon), lottoNumberGenerator));
   }
 }

@@ -5,7 +5,7 @@ import static java.util.stream.Collectors.toList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class LotteryRetailer {
+public class LotteryShop {
 
   public static final Money PRICE_PER_PLAY_FOR_LOTTO = Money.of(1000);
 
