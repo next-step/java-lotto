@@ -1,7 +1,9 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.NumberOfUserGenerateLotto;
+import lotto.domain.UserAmount;
 
 import java.util.List;
 import java.util.Scanner;
@@ -11,36 +13,74 @@ import java.util.stream.IntStream;
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public static int inputUserAmount() {
+    public static UserAmount inputUserAmount() {
         System.out.println(Message.INPUT_USER_AMOUNT);
 
-        return Integer.parseInt(SCANNER.nextLine());
+        try {
+            int userAmount = Integer.parseInt(SCANNER.nextLine());
+            return new UserAmount(userAmount);
+        } catch (NumberFormatException e) {
+            printExceptionMessage(e);
+        }
+
+        return inputUserAmount();
     }
 
-    public static int inputNumberOfUserGenerateLotto() {
+    public static NumberOfUserGenerateLotto inputNumberOfUserGenerateLotto(UserAmount userAmount) {
         System.out.println(Message.INPUT_NUMBER_OF_USER_GENERATE_LOTTO);
 
-        return Integer.parseInt(SCANNER.nextLine());
+        try {
+            int numberOfUserGenerateLotto = Integer.parseInt(SCANNER.nextLine());
+            return new NumberOfUserGenerateLotto(numberOfUserGenerateLotto, userAmount);
+        } catch (NumberFormatException e) {
+            printExceptionMessage(e);
+        }
+
+        return inputNumberOfUserGenerateLotto(userAmount);
     }
 
     public static List<LottoNumbers> inputLottoOfUser(NumberOfUserGenerateLotto numberOfUserGenerateLotto) {
         System.out.println(Message.INPUT_LOTTOS_OF_USER);
 
-        return IntStream.range(0, numberOfUserGenerateLotto.getNumberOfUserGenerateLotto())
-                .mapToObj(it -> new LottoNumbers(SCANNER.nextLine()))
-                .collect(Collectors.toList());
+        try {
+            return IntStream.range(0, numberOfUserGenerateLotto.getNumberOfUserGenerateLotto())
+                    .mapToObj(it -> new LottoNumbers(SCANNER.nextLine()))
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            printExceptionMessage(e);
+        }
+
+        return inputLottoOfUser(numberOfUserGenerateLotto);
     }
 
-    public static String inputPreviousWeekWinningNumber() {
+    public static LottoNumbers inputPreviousWeekWinningNumber() {
         System.out.println(Message.INPUT_PREVIOUS_WEEK_WINNING_NUMBER);
 
-        return SCANNER.nextLine();
+        try {
+            String lottoNumbers = SCANNER.nextLine();
+            return new LottoNumbers(lottoNumbers);
+        } catch (Exception e) {
+            printExceptionMessage(e);
+        }
+
+        return inputPreviousWeekWinningNumber();
     }
 
-    public static String inputBonusBall() {
+    public static LottoNumber inputBonusBall() {
         System.out.println(Message.INPUT_BONUS_BALL);
 
-        return SCANNER.nextLine();
+        try {
+            String s = SCANNER.nextLine();
+            return new LottoNumber(s);
+        } catch (Exception e) {
+            printExceptionMessage(e);
+        }
+
+        return inputBonusBall();
+    }
+
+    private static void printExceptionMessage(Exception e) {
+        System.out.println(e.getMessage());
     }
 
     private enum Message {
