@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.toList;
 
 import java.util.List;
 import java.util.stream.IntStream;
+import lotto.domain.strategy.GenerateNumbersStrategy;
 
 public class LotteryShop {
 
@@ -12,12 +13,12 @@ public class LotteryShop {
   private static final String PRICE_EXCEPTION_MESSAGE = String.format("로또 1장의 가격은 %s 입니다",
       PRICE_PER_PLAY_FOR_LOTTO);
 
-  public LottoTickets sell(Money purchaseAmount, LottoNumberGenerator lottoNumberGenerator) {
+  public LottoTickets sell(Money purchaseAmount, GenerateNumbersStrategy generateNumbersStrategy) {
     checkGreaterThanMinimumPrice(purchaseAmount);
 
     List<LottoTicket> lottoTickets = IntStream.range(0,
             getAvailableLottoTicketCount(purchaseAmount))
-        .mapToObj(i -> createLottoTicket(lottoNumberGenerator))
+        .mapToObj(i -> createLottoTicket(generateNumbersStrategy))
         .collect(toList());
     return new LottoTickets(lottoTickets);
   }
@@ -32,11 +33,11 @@ public class LotteryShop {
     }
   }
 
-  private LottoTicket createLottoTicket(LottoNumberGenerator lottoNumberGenerator) {
-    return new LottoTicket(createLottoNumbers(lottoNumberGenerator));
+  private LottoTicket createLottoTicket(GenerateNumbersStrategy generateNumbersStrategy) {
+    return new LottoTicket(createLottoNumbers(generateNumbersStrategy));
   }
 
-  private List<Integer> createLottoNumbers(LottoNumberGenerator lottoNumberGenerator) {
-    return lottoNumberGenerator.generate();
+  private List<Integer> createLottoNumbers(GenerateNumbersStrategy generateNumbersStrategy) {
+    return generateNumbersStrategy.generate();
   }
 }
