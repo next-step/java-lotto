@@ -9,7 +9,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
 
-    private final static Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
+    private static final Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
 
     static {
         // 1 ~ 45 각 숫자별 LottoNumber 맵핑
