@@ -47,7 +47,7 @@ public class ResultView {
 
   private static void printStatistic(Statistic statistic) {
     printStream.println(
-        format(STATISTIC_DETAIL_FORMAT, statistic.getMatchCount(), statistic.getPrizeMoney(),
+        format(STATISTIC_DETAIL_FORMAT, statistic.getMatchCount(), statistic.getPrizeMoney().won(),
             statistic.getMatchedPrizeCount()));
   }
 

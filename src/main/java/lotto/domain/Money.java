@@ -41,6 +41,10 @@ public class Money {
     return amount;
   }
 
+  public String won() {
+    return String.format(WON_FORMAT, amount);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -60,6 +64,6 @@ public class Money {
 
   @Override
   public String toString() {
-    return String.format(WON_FORMAT, amount);
+    return String.format("Money{amount=%d}", amount);
   }
 }
