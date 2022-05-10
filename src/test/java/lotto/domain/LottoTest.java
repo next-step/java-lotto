@@ -18,6 +18,14 @@ public class LottoTest {
                 .isEqualTo(new Lotto(numbers));
     }
 
+    @DisplayName("숫자를 다른 순서로 입력해도 구성하는 번호가 같다면 같은 로또가 생성된다.")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,4,5,6:2,3,1,4,6,5", "2,3,4,5,6,7:7,6,5,4,3,2"}, delimiter = ':')
+    void createLottoTestDifferentOrder(String numbers1, String numbers2) {
+        assertThat(new Lotto(numbers1))
+                .isEqualTo(new Lotto(numbers2));
+    }
+
     @DisplayName("로또는 중복된 번호를 가질 수 없다.")
     @ParameterizedTest
     @ValueSource(strings = {"1,1,1,1,1,1", "1,2,3,4,5,5"})

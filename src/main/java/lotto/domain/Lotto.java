@@ -37,6 +37,10 @@ public class Lotto {
         return lottoNumbers;
     }
 
+    public boolean hasBonusNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     private int countDistinctLottoSize(List<LottoNumber> lottoNumbers) {
         return (int) lottoNumbers.stream()
                 .distinct().count();

@@ -4,9 +4,11 @@ import java.util.Arrays;
 
 public enum Ranking {
     FIRST(6, 2000000000),
-    SECOND(5, 1500000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000);
+    SECOND(5, 30000000),
+    THIRD(5, 1500000),
+    FOURTH(4, 50000),
+    FIFTH(3, 5000),
+    MISS(0, 0);
 
     private final int matchCount;
     private final int money;
@@ -16,23 +18,30 @@ public enum Ranking {
         this.money = money;
     }
 
-    public static Ranking findMatchRanking(int matchCount) {
+    public static Ranking findMatchRanking(int matchCount, boolean matchBonus) {
         return Arrays.stream(Ranking.values())
-                .filter(ranking -> ranking.isEqualRanking(matchCount))
+                .filter(ranking -> ranking.isEqualRanking(matchCount, matchBonus))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("당첨자가 아닙니다."));
+                .orElse(MISS);
     }
 
-    public int getPriceByCount(int count) {
-        return money * count;
-    }
-
-    private boolean isEqualRanking(int matchCount) {
+    private boolean isEqualRanking(int matchCount, boolean matchBonus) {
+        if (this == SECOND && matchCount == SECOND.matchCount && !matchBonus) {
+            return false;
+        }
         return this.matchCount == matchCount;
     }
 
+    public int getMoney() {
+        return money;
+    }
+
+
     @Override
     public String toString() {
+        if (this == SECOND) {
+            return matchCount +"개 일치, 보너스 볼 일치 (" + money + ")원";
+        }
         return matchCount +"개 일치 (" + money + ")원";
     }
 }

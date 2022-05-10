@@ -26,17 +26,22 @@ public class LottosTest {
                 .isEqualTo(1);
     }
 
-    @DisplayName("당첨 번호를 입력하면, 각 당첨별 개수를 담은 Map을 반환한다.")
+    @DisplayName("당첨 번호와 보너스 번호를 입력하면, 각 당첨별 개수를 담은 Map을 반환한다.")
     @Test
     void countWinningLottoTest() {
         Lottos lottos = new Lottos();
         lottos.generateLottoFromUserInput("1,2,3,4,5,6");
         lottos.generateLottoFromUserInput("1,2,3,4,5,7");
         lottos.generateLottoFromUserInput("1,2,3,4,7,8");
-        Map<Ranking, Integer> rankingMap = lottos.countWinningLotto(new Lotto("1,2,3,4,5,6"));
+        WinningLotto winningLotto = new WinningLotto(
+                new Lotto("1,2,3,4,5,6"),
+                LottoNumber.createNewNumber(7)
+        );
+
+        Map<Ranking, Integer> rankingMap = lottos.countWinningLotto(winningLotto);
 
         assertThat(rankingMap.get(FIRST)).isEqualTo(1);
         assertThat(rankingMap.get(SECOND)).isEqualTo(1);
-        assertThat(rankingMap.get(THIRD)).isEqualTo(1);
+        assertThat(rankingMap.get(FOURTH)).isEqualTo(1);
     }
 }

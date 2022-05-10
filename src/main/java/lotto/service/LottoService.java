@@ -1,11 +1,6 @@
 package lotto.service;
 
-import lotto.domain.GenerateNumberStrategy;
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Ranking;
-
-import java.util.Map;
+import lotto.domain.*;
 
 public class LottoService {
     private final Lottos lottos = new Lottos();
@@ -15,7 +10,10 @@ public class LottoService {
         return lottos;
     }
 
-    public Map<Ranking, Integer> registerWinningNumbers(String numbers) {
-        return lottos.countWinningLotto(new Lotto(numbers));
+    public RankingResult registerWinningNumbers(String numbers, String bonus) {
+        Lotto lastWeekWinning = new Lotto(numbers);
+        LottoNumber bonusNumber = LottoNumber.createNewNumber(bonus);
+
+        return new RankingResult(lottos.countWinningLotto(new WinningLotto(lastWeekWinning, bonusNumber)));
     }
 }
