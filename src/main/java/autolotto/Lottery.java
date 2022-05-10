@@ -22,10 +22,7 @@ public class Lottery {
         List<LottoNumbers> manualLottoNumbers = LottoInput.createManualLotto(manualQuantity);
 
         LottoInput.printQuantities(manualQuantity, autoQuantity);
-        List<LottoNumbers> autoLottoNumbers = Lottos.createAutoLottos(autoQuantity);
-        autoLottoNumbers.addAll(0, manualLottoNumbers);
-
-        Lottos lottos = new Lottos(autoLottoNumbers);
+        Lottos lottos = Lottos.of(autoQuantity, manualLottoNumbers);
 
         LottoOutput.printLottoNumbers(lottos);
         return lottos;

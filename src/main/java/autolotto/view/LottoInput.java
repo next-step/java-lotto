@@ -1,7 +1,6 @@
 package autolotto.view;
 
 import autolotto.domain.LottoNumber;
-import autolotto.domain.LottoNumberPattern;
 import autolotto.domain.LottoNumbers;
 import autolotto.exception.LottoException;
 import autolotto.exception.LottoExceptionCode;
@@ -14,7 +13,6 @@ public class LottoInput {
     public static final String WINNING_NUMBER_QUESTION = "지난주 당첨 번호를 콤마(,)를 기준으로 입력해주세요. ex. 1,2,3,4,5,6";
     private static final Scanner scanner = new Scanner(System.in);
     private static final String DELIMITER = ",";
-    private static final LottoNumberPattern lottoNumberPattern = new LottoNumberPattern();
 
     public static int askAmount() {
         System.out.println(AMOUNT_QUESTION);

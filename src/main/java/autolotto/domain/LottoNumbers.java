@@ -11,7 +11,7 @@ public class LottoNumbers {
     private final Set<LottoNumber> lottoNumbers;
 
     public static LottoNumbers of(Set<Integer> lottoNumbers) {
-        if (isNotLottoSize2(lottoNumbers)) {
+        if (isNotLottoSize(lottoNumbers)) {
             throw new LottoException(LottoExceptionCode.INVALID_LOTTO_NUMBER_COUNT, lottoNumbers.toString());
         }
         return new LottoNumbers(
@@ -24,7 +24,7 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
-    private static boolean isNotLottoSize2(Set<Integer> lottoNumbers) {
+    private static boolean isNotLottoSize(Set<Integer> lottoNumbers) {
         return lottoNumbers.size() != LOTTO_NUMBER;
     }
 

@@ -16,12 +16,14 @@ public class Lottos {
         this.results = new Results();
     }
 
-    public static List<LottoNumbers> createAutoLottos(int quantity) {
-        List<LottoNumbers> lottoNumbersByQuantity = new ArrayList<>(quantity);
-        for (int count = 0; count < quantity; count++) {
+    public static Lottos of(int autoLottoQuantity, List<LottoNumbers> manuelLottos) {
+        List<LottoNumbers> lottoNumbersByQuantity = new ArrayList<>(autoLottoQuantity);
+        for (int count = 0; count < autoLottoQuantity; count++) {
             lottoNumbersByQuantity.add(new LottoNumbers(LottoGenerator.generate()));
         }
-        return lottoNumbersByQuantity;
+        lottoNumbersByQuantity.addAll(0, manuelLottos);
+
+        return new Lottos(lottoNumbersByQuantity);
     }
 
     public static int getQuantity(int amount) {
