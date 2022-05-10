@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.util.StringNumberUtils;
+
 public class LottoNumber {
     public static final int LOTTO_MIN_NUMBER = 1;
     public static final int LOTTO_MAX_NUMBER = 45;
@@ -12,13 +14,7 @@ public class LottoNumber {
     }
 
     public LottoNumber(String stringNumber) {
-        try {
-            int number = Integer.parseInt(stringNumber);
-            validateNumberRange(number);
-            this.number = number;
-        } catch (NumberFormatException exception) {
-            throw new NumberFormatException(String.format("%s는 숫자가 아닙니다.", stringNumber));
-        }
+        this(StringNumberUtils.parse(stringNumber));
     }
 
     private void validateNumberRange(int number) {
@@ -48,5 +44,12 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return number;
+    }
+
+    @Override
+    public String toString() {
+        return "LottoNumber{" +
+                "number=" + number +
+                '}';
     }
 }

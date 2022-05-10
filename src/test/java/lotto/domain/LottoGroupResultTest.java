@@ -41,19 +41,11 @@ class LottoGroupResultTest {
 
     private static Stream<Arguments> generateLottoResultData() {
         return Stream.of(
-                Arguments.of(Map.of(LottoRank.FOURTH, 1), 14000, 0.35),
+                Arguments.of(Map.of(LottoRank.FIFTH, 1), 14000, 0.35),
                 Arguments.of(Map.of(), 0, 1.00),
-                Arguments.of(Map.of(
-                        LottoRank.FIRST, 1
-                ), 1000, 2000000.00),
-                Arguments.of(Map.of(
-                        LottoRank.FOURTH, 3,
-                        LottoRank.MISS, 2
-                ), 20000, 0.75),
-                Arguments.of(Map.of(
-                        LottoRank.FOURTH, 3,
-                        LottoRank.THIRD, 1
-                ), 20000, 3.25)
+                Arguments.of(Map.of(LottoRank.FIRST, 1), 1000, 2000000.00),
+                Arguments.of(Map.of(LottoRank.FIFTH, 3, LottoRank.MISS, 2), 20000, 0.75),
+                Arguments.of(Map.of(LottoRank.FIFTH, 3, LottoRank.FOURTH, 1), 20000, 3.25)
         );
     }
 }

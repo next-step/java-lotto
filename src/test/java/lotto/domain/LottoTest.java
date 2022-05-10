@@ -34,16 +34,17 @@ class LottoTest {
 
     @ParameterizedTest
     @CsvSource(value = {
-            "1,2,3,4,5,6, FIRST",
-            "1,2,3,4,5,45, SECOND",
-            "1,2,3,4,44,45, THIRD",
-            "1,2,3,43,44,45, FOURTH",
-            "1,2,42,43,44,45, MISS",
-            "1,41,42,43,44,45, MISS",
-            "40,41,42,43,44,45, MISS"
+            "1,2,3,4,5,6, 7 ,FIRST",
+            "1,2,3,4,5,7, 7, SECOND",
+            "1,2,3,4,5,45, 7, THIRD",
+            "1,2,3,4,44,45, 7, FOURTH",
+            "1,2,3,43,44,45, 7, FIFTH",
+            "1,2,42,43,44,45, 7, MISS",
+            "1,41,42,43,44,45, 7, MISS",
+            "40,41,42,43,44,45, 7, MISS"
     })
-    void getRank_로또_등수_판별(int num1, int num2, int num3, int num4, int num5, int num6, String lottoRankString) {
+    void getRank_로또_등수_판별(int num1, int num2, int num3, int num4, int num5, int num6, int bonusNumber, String lottoRankString) {
         Lotto lotto = new Lotto(new int[]{num1, num2, num3, num4, num5, num6});
-        assertThat(lotto.getLottoRank(new Lotto(new int[]{1, 2, 3, 4, 5, 6}))).isEqualTo(LottoRank.valueOf(lottoRankString));
+        assertThat(lotto.getLottoRank(new WinningLotto(new Lotto(new int[]{1, 2, 3, 4, 5, 6}), new LottoNumber(bonusNumber)))).isEqualTo(LottoRank.valueOf(lottoRankString));
     }
 }

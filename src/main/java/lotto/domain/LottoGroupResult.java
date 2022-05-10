@@ -27,7 +27,7 @@ public class LottoGroupResult {
     }
 
     private int winningPrice() {
-        return this.lottoRankCount.entrySet().stream().mapToInt(result -> result.getKey().winningMoney() * result.getValue()).sum();
+        return this.lottoRankCount.entrySet().stream().mapToInt(result -> result.getKey().countWinningMoney(result.getValue())).sum();
     }
 
     private void validateLottoGroupResult(Map<LottoRank, Integer> lottoGroupResult) {
@@ -48,6 +48,6 @@ public class LottoGroupResult {
 
     @Override
     public int hashCode() {
-        return lottoRankCount != null ? lottoRankCount.hashCode() : 0;
+        return lottoRankCount.hashCode();
     }
 }
