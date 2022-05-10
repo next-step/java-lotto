@@ -10,11 +10,6 @@ import java.util.stream.Collectors;
 
 
 public class ResultView {
-
-    public ResultView() {
-
-    }
-
     public void printLottos(Customer customer) {
       customer.printLottoList();
     }
@@ -27,7 +22,6 @@ public class ResultView {
         System.out.println("5개 일치 (1500000원)- " + winningList.stream().filter(rank -> rank == Rank.THREE).collect(Collectors.toList()).size());
         System.out.println("5개 일치, 보너스 볼 일치(30000000원)- " + winningList.stream().filter(rank -> rank == Rank.TWO).collect(Collectors.toList()).size());
         System.out.println("6개 일치 (2000000000원)- " + winningList.stream().filter(rank -> rank == Rank.ONE).collect(Collectors.toList()).size());
-
     }
 
     public void printProfit(double profit) {
