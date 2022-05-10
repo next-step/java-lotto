@@ -18,16 +18,12 @@ public enum Rank {
         this.money = money;
     }
 
-    static Rank of(int matchCount, boolean isMatchedBonusNumber) {
+    public static Rank of(int matchCount, boolean isMatchedBonusNumber) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.isSameMatchCount(matchCount))
                 .filter(rank -> !rank.equals(Rank.SECOND) || isMatchedBonusNumber)
                 .findFirst()
                 .orElse(NO_MATCH);
-    }
-
-    public static int getMoneyByMatchCount(int matchCount, boolean isMatchedBonus) {
-        return Rank.of(matchCount, isMatchedBonus).getMoney();
     }
 
     public int addMoney(int totalMoney) {

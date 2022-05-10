@@ -24,11 +24,10 @@ class LottoTest {
         ));
         LottoTicketGroup myLottoTickets = new LottoTicketGroup(Arrays.asList(winningLotto));
         LottoNumber bonusNumber = new LottoNumber(7);
-        Lotto lotto = new Lotto(winningLotto, bonusNumber);
-
+        Lotto lotto = new Lotto(new WinningLotto(winningLotto, bonusNumber));
 
         //when then
-        assertThat(lotto.compareLotto(myLottoTickets, bonusNumber).sumMoney()).isEqualTo(winningPrize);
+        assertThat(lotto.compareLotto(myLottoTickets).sumMoney()).isEqualTo(winningPrize);
     }
 
     @Test
@@ -46,8 +45,8 @@ class LottoTest {
         ));
         LottoNumber bonusNumber = new LottoNumber(6);
         LottoTicketGroup myLottoTickets = new LottoTicketGroup(1000, new TestNumberGenerator());
-        Lotto lotto = new Lotto(winningLotto, bonusNumber);
+        Lotto lotto = new Lotto(new WinningLotto(winningLotto, bonusNumber));
 
-        assertThat(lotto.compareLotto(myLottoTickets, bonusNumber).sumMoney()).isEqualTo(secondWinningPrize);
+        assertThat(lotto.compareLotto(myLottoTickets).sumMoney()).isEqualTo(secondWinningPrize);
     }
 }

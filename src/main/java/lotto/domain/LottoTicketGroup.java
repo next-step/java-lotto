@@ -36,11 +36,9 @@ public class LottoTicketGroup {
 
     private static List<LottoTicket> generateLottoTicketGroup(int ticketCount, NumberGenerator numberGenerator) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-
         for (int i = 0; i < ticketCount; i++) {
             lottoTickets.add(new LottoTicket(numberGenerator.generateLottoNumbers()));
         }
-
         return lottoTickets;
     }
 
@@ -48,11 +46,10 @@ public class LottoTicketGroup {
         return this.lottoTicketGroup;
     }
 
-    public RankGroup getLottoRankings(LottoTicket winningLotto, LottoNumber bonusNumber) {
+    public RankGroup getLottoRankings(WinningLotto winningLotto) {
         List<Rank> myRanks = new ArrayList<>();
-
         for (LottoTicket lottoTicket : lottoTicketGroup) {
-            myRanks.add(Rank.of(lottoTicket.getMatchResult(winningLotto), lottoTicket.isMatchedBonus(bonusNumber)));
+            myRanks.add(Rank.of(lottoTicket.getMatchResult(winningLotto), lottoTicket.isMatchedBonus(winningLotto)));
         }
         return new RankGroup(myRanks);
     }

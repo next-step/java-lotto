@@ -21,10 +21,20 @@ public class ResultView {
         System.out.println(ticketCount + "개를 구매했습니다.");
     }
 
-    public static void printWinningStatistics(RankGroup rankGroup, int totalTicketPrice) {
+    public static void printWinningStatistics(RankGroup rankGroup, int totalTicketPrice) { // 여기에 Rank 파라미터 추가
         for (int i = MIN_COUNT_OF_WINNING_LOTTO_NUMBER; i <= MAX_COUNT_OF_WINNING_LOTTO_NUMBER; i++) {
-            System.out.println(i + "개 일치 (" + Rank.getMoneyByMatchCount(i) + "원) " + rankGroup.getCountOfMatchCount(i) + " 개");
+
+            Rank rank = Rank.of(i, false);
+            System.out.println(i + "개 일치 (" + rank.getMoney() + "원) " + rankGroup.getCountOf(rank) + " 개");
+            printBonusBall(rankGroup, i);
         }
-        System.out.println("총 수익률은 "+ rankGroup.returnMoneyPercentage(totalTicketPrice)+" 입니다.");
+        System.out.println("총 수익률은 " + rankGroup.returnMoneyPercentage(totalTicketPrice) + " 입니다.");
+    }
+
+    private static void printBonusBall(RankGroup rankGroup, int i) {
+        if (i == 5) {
+            Rank rank = Rank.of(i, true);
+            System.out.println(i + "개 일치, 보너스볼 일치 (" + rank.getMoney() + "원) " + rankGroup.getCountOf(rank) + " 개");
+        }
     }
 }

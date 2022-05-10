@@ -1,15 +1,13 @@
 package lotto.domain;
 
 public class Lotto {
-    private final LottoTicket winningLotto;
-    private final LottoNumber bonusNumber;
+    private final WinningLotto winningLotto;
 
-    public Lotto(LottoTicket winningLotto, LottoNumber bonusNumber) {
+    public Lotto(WinningLotto winningLotto) {
         this.winningLotto = winningLotto;
-        this.bonusNumber = bonusNumber;
     }
 
-    public RankGroup compareLotto(LottoTicketGroup lottoTicketGroup, LottoNumber bonusNumber) {
-        return lottoTicketGroup.getLottoRankings(winningLotto, bonusNumber);
+    public RankGroup compareLotto(LottoTicketGroup lottoTicketGroup) {
+        return lottoTicketGroup.getLottoRankings(winningLotto);
     }
 }
