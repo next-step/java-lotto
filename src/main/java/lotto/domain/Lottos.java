@@ -25,11 +25,6 @@ public class Lottos {
         return lottos.size();
     }
 
-    public void confirmAll(LottoNumbers winningNumbers) {
-        for (Lotto lotto : lottos) {
-            lotto.confirm(winningNumbers);
-        }
-    }
     public void confirmAll(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
         for (Lotto lotto : lottos) {
             lotto.confirm(winningNumbers, bonusNumber);

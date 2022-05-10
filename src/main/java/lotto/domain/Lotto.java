@@ -11,11 +11,6 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public void confirm(LottoNumbers winningNumbers) {
-        int matchCount = lottoNumbers.matchCount(winningNumbers);
-        this.rank = Rank.valueOf(matchCount);
-    }
-
     public void confirm(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
         int matchCount = lottoNumbers.matchCount(winningNumbers);
         boolean matchBonus = lottoNumbers.isContain(bonusNumber);
