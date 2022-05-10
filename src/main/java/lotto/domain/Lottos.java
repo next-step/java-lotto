@@ -19,18 +19,16 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Map<Ranking, Integer> countWinningLotto(Lotto winningLotto, LottoNumber bonus) {
+    public Map<Ranking, Integer> countWinningLotto(WinningLotto winningLotto) {
         Map<Ranking, Integer> winningLottoMap = new HashMap<>();
-        lottos.stream().map(lotto -> lotto.countMatchNumber(winningLotto, bonus))
+        lottos.stream().map(winningLotto::findMatchRanking)
                 .forEach(matchResult -> saveWinner(winningLottoMap, matchResult));
         putDefaultValueToWinningMap(winningLottoMap);
         return winningLottoMap;
     }
 
-    private void saveWinner(Map<Ranking, Integer> winningLottoMap, MatchResult matchResult) {
-        Ranking ranking = Ranking.findMatchRanking(matchResult);
-        if (ranking.isWinner())
-            winningLottoMap.put(ranking, winningLottoMap.getOrDefault(ranking, 0) + 1);
+    private void saveWinner(Map<Ranking, Integer> winningLottoMap, Ranking ranking) {
+        winningLottoMap.put(ranking, winningLottoMap.getOrDefault(ranking, 0) + 1);
     }
 
     private void putDefaultValueToWinningMap(Map<Ranking, Integer> winningLottoMap) {
@@ -43,5 +41,18 @@ public class Lottos {
         return lottos.stream()
                 .map(Lotto::toString)
                 .collect(Collectors.joining("\n"));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lottos lottos1 = (Lottos) o;
+        return Objects.equals(lottos, lottos1.lottos);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottos);
     }
 }
