@@ -18,8 +18,8 @@ public class LottoGame {
         return purchaseAmount / LOTTO_PRICE;
     }
 
-    public void confirmLottos(LottoNumbers lastWinningNumbers) {
-        lottos.confirmAll(lastWinningNumbers);
+    public void confirmLottos(LottoNumbers lastWinningNumbers, LottoNumber bonusNumber) {
+        lottos.confirmAll(lastWinningNumbers, bonusNumber);
     }
 
     public double calculateProfitRate() {

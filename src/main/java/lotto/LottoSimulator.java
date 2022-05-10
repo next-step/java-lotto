@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoGame;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.dto.result.PurchasedLottos;
 import lotto.dto.result.WinningStats;
@@ -17,7 +18,8 @@ public class LottoSimulator {
         ResultView.purchasedLottosView(PurchasedLottos.from(lottoGame));
 
         String lastWinningLottoNumbers = InputView.lastWinningLottoNumberView();
-        lottoGame.confirmLottos(LottoNumbers.createWinningNumbers(SplitUtil.split(lastWinningLottoNumbers)));
+        int bonusNumber = InputView.bonusBallView();
+        lottoGame.confirmLottos(LottoNumbers.createWinningNumbers(SplitUtil.split(lastWinningLottoNumbers)), LottoNumber.valueOf(bonusNumber));
 
         ResultView.lottosResultView(WinningStats.from(lottoGame));
     }
