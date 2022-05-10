@@ -14,9 +14,16 @@ public class Lotto {
     private static final int INCREASE_COUNT = 1;
 
     private final List<LottoTicket> lottoTickets = new ArrayList<>();
-    private final TreeMap<PrizeMoney, Integer> winningResult = new TreeMap<>();
+    private TreeMap<PrizeMoney, Integer> winningResult = new TreeMap<>();
     private int payment;
     private int remainingLottoTicket = 0;
+
+    private Lotto() {}
+
+    public Lotto(final int payment, final TreeMap<PrizeMoney, Integer> winningResult) {
+        this.payment = payment;
+        this.winningResult = winningResult;
+    }
 
     public static Lotto buyLottoTickets(final int payment) {
         final Lotto lotto = new Lotto();
@@ -66,11 +73,20 @@ public class Lotto {
         }
         final PrizeMoney prizeMoney = prizeMoneyKey.get();
         winningResult.put(prizeMoney, winningResult.get(prizeMoney) + INCREASE_COUNT);
-        // 아래 코드에서 money 타입을 읽지 못해 오류가 나서 위에 코드로 작성
+        // 아래 코드에서 money 타입을 읽지 못해 오류가 나서 위에 코드로 작성했습니다.
         // error - required type object provided lambda parameter
 //        prizeMoneyKey.isPresent(money -> {
 //            winningResult.put(money, winningResult.get(money) + INCREASE_COUNT);
 //        });
+    }
+
+    public double calculateProfitMargin() {
+        final long totalPrizeMoney = winningResult.keySet()
+                                                  .stream()
+                                                  .mapToInt(
+                                                          prizeMoney -> prizeMoney.getPrizeMoney() * winningResult.get(prizeMoney)
+                                                  ).sum();
+        return (double) totalPrizeMoney / payment;
     }
 
     public int getRemainingLottoTicket() {

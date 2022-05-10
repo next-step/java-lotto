@@ -1,7 +1,6 @@
 package dev.solar.lotto;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -26,6 +25,7 @@ public class LottoMachine {
         final Set<LottoNumber> winningNumbers = InputView.inputWinningNumbers();
         final TreeMap<PrizeMoney, Integer> winningResult = lotto.checkWinningResult(winningNumbers);
         OutputView.printResult(winningResult);
+        OutputView.printProfitMargin(lotto);
     }
 
 }

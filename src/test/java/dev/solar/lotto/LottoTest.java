@@ -1,12 +1,15 @@
 package dev.solar.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.withPrecision;
 
 import java.util.Arrays;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.stream.Stream;
 
+import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -49,5 +52,20 @@ public class LottoTest {
                                  Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(45)))), 5),
                          Arguments.of(new LottoTicket(new TreeSet<>(
                                  Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)))), 6));
+    }
+
+    @DisplayName("수익률을 계산한다.")
+    @Test
+    void calculate_profit_margin() {
+        final TreeMap<PrizeMoney, Integer> winningResult = new TreeMap<>();
+        winningResult.put(PrizeMoney.THREE, 1);
+        winningResult.put(PrizeMoney.FOUR, 0);
+        winningResult.put(PrizeMoney.FIVE, 0);
+        winningResult.put(PrizeMoney.SIX, 0);
+        final Lotto lotto = new Lotto(14000, winningResult);
+
+        final double actual = lotto.calculateProfitMargin();
+        assertThat(actual).isEqualTo(0.35, withPrecision(0.01));
+
     }
 }

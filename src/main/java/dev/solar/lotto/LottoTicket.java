@@ -7,7 +7,6 @@ import java.util.TreeSet;
 public class LottoTicket {
     private static final int LOTTO_NUMBERS_SIZE = 6;
     private final TreeSet<LottoNumber> lottoNumbers;
-    private Integer prizeMoney;
 
     public static LottoTicket buyOne() {
         final TreeSet<LottoNumber> lottoNumbers = new TreeSet<>();
@@ -32,17 +31,8 @@ public class LottoTicket {
         return (int) winningNumbers.stream().filter(lottoNumbers::contains).count();
     }
 
-    //TODO: 총 수익률 구하기
-    private void decidePrizeMoney(final int count) {
-
-    }
-
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
-    }
-
-    public Integer getPrizeMoney() {
-        return prizeMoney;
     }
 
     @Override
