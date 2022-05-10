@@ -29,6 +29,17 @@ public class Numbers {
         Collections.sort(lottoNumbers);
     }
 
+    public int matchCount(List<Integer> winningNumbers) {
+        List<Integer> collect = lottoNumbers.stream()
+                .filter(lottoNumber -> winningNumbers.stream().anyMatch(Predicate.isEqual(lottoNumber)))
+                .collect(Collectors.toList());
+        return collect.size();
+    }
+
+    public boolean contains(int bonusNumber) {
+        return this.lottoNumbers.contains(bonusNumber);
+    }
+
     @Override
     public String toString() {
         return String.valueOf(lottoNumbers);
@@ -45,16 +56,5 @@ public class Numbers {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
-    }
-
-    public int matchCount(List<Integer> winningNumbers) {
-        List<Integer> collect = lottoNumbers.stream()
-                .filter(lottoNumber -> winningNumbers.stream().anyMatch(Predicate.isEqual(lottoNumber)))
-                .collect(Collectors.toList());
-        return collect.size();
-    }
-
-    public boolean contains(int bonusNumber) {
-        return this.lottoNumbers.contains(bonusNumber);
     }
 }
