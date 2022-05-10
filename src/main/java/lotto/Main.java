@@ -17,10 +17,9 @@ public class Main {
 
         resultView.printLottos(customer);
         List<Integer> winningLottoNumbers = inputView.findWinningLottoNumbers();
-
         int bonusNumber = inputView.getBonusNumber();
 
-        List<Rank> winningList = customer.getWinningList(winningLottoNumbers, bonusNumber);
+        List<Rank> winningList = customer.getWinningList(new WinningNumbers(winningLottoNumbers, bonusNumber));
         resultView.printWinningList(winningList);
         resultView.printProfit(customer.profit(winningList));
     }

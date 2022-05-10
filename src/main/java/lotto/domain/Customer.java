@@ -38,6 +38,10 @@ public class Customer {
         return lottos.getWinningList(winningNumbers, bonusNumber);
     }
 
+    public List<Rank> getWinningList(WinningNumbers winningNumbers) {
+        return lottos.getWinningList(winningNumbers);
+    }
+
     private void sumMoney(int money) {
         this.money += money;
     }

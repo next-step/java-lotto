@@ -44,5 +44,11 @@ public class lottoTest {
 
         assertThat(isTwo).isTrue();
     }
+
+    @Test
+    void 당첨번호와_보너스를_확인한다() {
+        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 7, 8, 0), 9);
+        assertThat(winningNumbers.findRank(new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9)))).isEqualTo(Rank.TWO);
+    }
 }
 
