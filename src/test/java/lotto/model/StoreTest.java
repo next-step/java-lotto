@@ -24,16 +24,13 @@ class StoreTest {
     @DisplayName("수동으로 로또를 구입한다.")
     void manualBoughtLotto() {
         Store store = new Store(3);
-        ManualLottos lotteryTickets = store.manual(
+        List<Lotto> lotteryTickets = store.manualLottos(
+                List.of(
                         Set.of(1, 2, 3, 4, 5, 6),
                         Set.of(2, 3, 4, 5, 6, 7),
-                        Set.of(3, 4, 5, 6, 7, 8)
+                        Set.of(3, 4, 5, 6, 7, 8))
         );
 
-        assertThat(lotteryTickets).isEqualTo(
-                new ManualLottos(Set.of(1, 2, 3, 4, 5, 6),
-                                Set.of(2, 3, 4, 5, 6, 7),
-                                Set.of(3, 4, 5, 6, 7, 8)));
 
     }
     @Test
@@ -41,11 +38,13 @@ class StoreTest {
     void manualExceptionLottoSize() {
         assertThrows(ManualLottoSizeException.class, () -> {
             Store store = new Store(3);
-            ManualLottos lotteryTickets = store.manual(
+            List<Lotto> lotteryTickets = store.manualLottos(
+                    List.of(
                     Set.of(1, 2, 3, 4, 5, 6),
                     Set.of(2, 3, 4, 5, 6, 7),
                     Set.of(3, 4, 5, 6, 7, 8),
                     Set.of(3, 4, 5, 6, 7, 9)
+                    )
             );
         });
 

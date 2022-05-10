@@ -2,9 +2,7 @@ package lotto.view;
 
 import lotto.util.AwardNumberUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public final class InputTable {
 
@@ -29,10 +27,10 @@ public final class InputTable {
         return Integer.parseInt(SCANNER.nextLine());
     }
 
-    public static List<List<Integer>> inputManualLotto(int manalLottoCount) {
-        List<List<Integer>> lottos = new ArrayList<>();
+    public static List<Set<Integer>> inputManualLotto(int manalLottoCount) {
+        List<Set<Integer>> lottos = new ArrayList<>();
         while (manalLottoCount-- != 0) {
-            lottos.add(new ArrayList<>(AwardNumberUtil.getAwardNumberList(SCANNER.nextLine())));
+            lottos.add(new HashSet<>(AwardNumberUtil.getAwardNumberList(SCANNER.nextLine())));
         }
         return lottos;
     }

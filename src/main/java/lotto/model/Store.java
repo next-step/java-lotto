@@ -15,10 +15,6 @@ public final class Store {
         this.manualLottoCount = manualLottoCount;
     }
 
-    public ManualLottos manual(Set<Integer>... inputLottos) {
-        return new ManualLottos(manualLottoCount, AwardNumberUtil.convertLotto(inputLottos));
-    }
-
     public List<Lotto> auto(long money) {
         long count = (money / PRODUCT_PRICE) - manualLottoCount;
         List<Lotto> lotteryTickets = new ArrayList<>();
@@ -30,5 +26,14 @@ public final class Store {
 
     private Lotto deliverLotto() {
         return LottoFactory.apply();
+    }
+
+    public List<Lotto> manualLottos(List<Set<Integer>> inputLottos) {
+        return AwardNumberUtil.convertLotto(inputLottos);
+    }
+
+    public List<Lotto> boughtAllLottos(List<Lotto> autoLottos, List<Lotto> manualLottos) {
+        autoLottos.addAll(manualLottos);
+        return autoLottos;
     }
 }

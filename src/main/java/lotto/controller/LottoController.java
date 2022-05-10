@@ -9,6 +9,7 @@ import lotto.view.InputTable;
 import lotto.view.OutputTable;
 
 import java.util.List;
+import java.util.Set;
 
 public class LottoController {
 
@@ -25,9 +26,10 @@ public class LottoController {
         int manalLottoCount = InputTable.inputManualCount();
 
         OutputTable.boughtManualLottoMessage();
-        List<List<Integer>> manualLotto = InputTable.inputManualLotto(manalLottoCount);
         Store store = new Store(manalLottoCount);
+        List<Lotto> manualLottos = store.manualLottos(InputTable.inputManualLotto(manalLottoCount));
         List<Lotto> lottoProducts = boughtAutoLotto(new Guest(haveMoney), store);
+        List<Lotto> boughtAllLottos = store.boughtAllLottos(manualLottos, lottoProducts);
         OutputTable.buyThings(manalLottoCount, lottoProducts.size());
         OutputTable.printProductInfos(lottoProducts);
 
@@ -36,7 +38,7 @@ public class LottoController {
 
         OutputTable.getBonus();
         int bonus = insertBonusNumber(InputTable.inputBonusNumber());
-        holdingLotteryTickets(lottoProducts, winnerLotto, bonus);
+        holdingLotteryTickets(boughtAllLottos, winnerLotto, bonus);
         OutputTable.resultStatisticsMessage();
         OutputTable.resultStatistics(LotteryResults.getLotteryResult());
         OutputTable.printYield(yieldCalculate(haveMoney), 1);

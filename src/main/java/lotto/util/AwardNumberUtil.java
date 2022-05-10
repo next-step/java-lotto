@@ -29,7 +29,7 @@ public final class AwardNumberUtil {
         return string.split(DELIMITER);
     }
 
-    public static List<Lotto> convertLotto(Set<Integer>[] inputLottos) {
+    public static List<Lotto> convertLotto(List<Set<Integer>> inputLottos) {
         List<Lotto> lottos = new ArrayList<>();
         for (Set<Integer> lotto : inputLottos) {
             lottos.add(new Lotto(lotto));

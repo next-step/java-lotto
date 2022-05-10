@@ -11,8 +11,8 @@ public final class ManualLottos {
     private final int manualLottoCount;
     private final List<Lotto> lottos;
 
-    public ManualLottos(Set<Integer>... lottos) {
-        this(lottos.length, AwardNumberUtil.convertLotto(lottos));
+    public ManualLottos(List<Set<Integer>> lottos) {
+        this(lottos.size(), AwardNumberUtil.convertLotto(lottos));
     }
 
     public ManualLottos(int manualLottoCount, List<Lotto> lottos) {
