@@ -52,6 +52,21 @@ class LottosTest {
     // then
     assertThat(lottos.getLottos()).hasSize(numberOfManual);
   }
+  
+  @Test
+  @DisplayName("수동과 자동으로 구매한 로또가 섞여 있는 경우의 로또 객체 생성을 확인한다.")
+  void createObjectNumberOfPurchasedManualLottoAndAutomaticLotto() {
+    // given
+    int numberOfManual = 6;
+    List<String> manualLottos = Arrays.asList("8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38",
+        "7, 11, 16, 35, 36, 44");
+
+    // when
+    Lottos lottos = Lottos.create(numberOfManual, manualLottos, new RandomNumberGenerateStrategy());
+    
+    // then
+    assertThat(lottos.getLottos()).hasSize(numberOfManual);
+  }
 
   @Test
   @DisplayName("구매한 로또 전체와 우승 로또번호를 비교한 결과")
