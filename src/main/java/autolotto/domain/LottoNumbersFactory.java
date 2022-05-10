@@ -5,8 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbersFactory {
-
-    public Set<LottoNumber> of(String numbersAsString) {
+    public static Set<LottoNumber> of(String numbersAsString) {
         return Arrays.stream(numbersAsString.split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)

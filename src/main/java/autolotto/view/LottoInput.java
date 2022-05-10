@@ -62,12 +62,7 @@ public class LottoInput {
     public static LottoNumber askBonusBall(Set<LottoNumber> winningNumbers) {
         System.out.println("보너스 볼을 입력해 주세요.");
         String bonusBallInput = scanner.nextLine();
-
-        LottoNumber lottoNumber = LottoNumber.of(bonusBallInput);
-        if (winningNumbers.contains(lottoNumber)) {
-            throw new LottoException(LottoExceptionCode.DUPLICATED_LOTTO_NUMBER, bonusBallInput);
-        }
-        return lottoNumber;
+        return LottoNumber.of(bonusBallInput);
     }
 
     public static void printQuantities(int manualQuantity, int autoQuantity) {

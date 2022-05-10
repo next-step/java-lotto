@@ -10,10 +10,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Set;
 
+import static autolotto.domain.LottoNumbersFactory.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoNumbersTest extends LottoNumbersFactory {
+class LottoNumbersTest {
     private LottoNumbers lottoNumbers;
 
     @BeforeEach
@@ -35,7 +36,7 @@ class LottoNumbersTest extends LottoNumbersFactory {
             "1, 2, 3, 4, 41, 42:4"
     }, delimiter = ':')
     void winningLottoGiven_ReturnMatchCount(String number, int matchCount) {
-        assertThat(lottoNumbers.match(new WinningLotto(new LottoNumbers(of(number))))).isEqualTo(matchCount);
+        assertThat(lottoNumbers.match(new WinningLotto(new LottoNumbers(of(number)), LottoNumber.of(7)))).isEqualTo(matchCount);
     }
 
     @ParameterizedTest
