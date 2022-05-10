@@ -33,7 +33,12 @@ public class LottosTest {
         lottos.generateLottoFromUserInput("1,2,3,4,5,6");
         lottos.generateLottoFromUserInput("1,2,3,4,5,7");
         lottos.generateLottoFromUserInput("1,2,3,4,7,8");
-        Map<Ranking, Integer> rankingMap = lottos.countWinningLotto(new Lotto("1,2,3,4,5,6"), LottoNumber.createNewNumber(7));
+        WinningLotto winningLotto = new WinningLotto(
+                new Lotto("1,2,3,4,5,6"),
+                LottoNumber.createNewNumber(7)
+        );
+
+        Map<Ranking, Integer> rankingMap = lottos.countWinningLotto(winningLotto);
 
         assertThat(rankingMap.get(FIRST)).isEqualTo(1);
         assertThat(rankingMap.get(SECOND)).isEqualTo(1);
