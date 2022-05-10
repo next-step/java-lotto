@@ -19,14 +19,14 @@ public class WinningLotto {
     }
 
     public LottoNumbers getWinningLottoNumbers() {
-        return winningLottoNumbers;
+        return this.winningLottoNumbers;
     }
 
     public LottoNumber getBonusBall() {
-        return bonusBall;
+        return this.bonusBall;
     }
 
     public boolean containsBonus(LottoNumbers lottoNumbers) {
-        return lottoNumbers.contains(bonusBall);
+        return lottoNumbers.contains(this.bonusBall);
     }
 }
