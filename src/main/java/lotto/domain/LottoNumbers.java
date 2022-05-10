@@ -1,16 +1,18 @@
 package lotto.domain;
 
 import lotto.exception.InvalidLottoNumberCount;
-import lotto.generator.RandomNumberGenerator;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
     public static final int LOTTO_NUMBER_COUNT = 6;
 
     private final Set<LottoNumber> values;
+
+    public LottoNumbers(String[] values) {
+        this(stringArrToTreeSet(values));
+    }
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         this(new TreeSet<>(lottoNumbers));
@@ -23,20 +25,12 @@ public class LottoNumbers {
         this.values = lottoNumberTreeSet;
     }
 
-    public static LottoNumbers createWinningNumbers(String[] winningNumberValues) {
-        TreeSet<LottoNumber> winningNumberTreeSet = new TreeSet<>();
-        for (String value : winningNumberValues) {
-            winningNumberTreeSet.add(LottoNumber.valueOf(value));
+    private static TreeSet<LottoNumber> stringArrToTreeSet(String[] values) {
+        TreeSet<LottoNumber> numberTreeSet = new TreeSet<>();
+        for (String value : values) {
+            numberTreeSet.add(LottoNumber.valueOf(value));
         }
-        return new LottoNumbers(winningNumberTreeSet);
-    }
-
-    public static LottoNumbers createRandomLottoNumbers() {
-        List<LottoNumber> randomLottoNumbers = RandomNumberGenerator.generate()
-                .stream()
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toList());
-        return new LottoNumbers(randomLottoNumbers);
+        return numberTreeSet;
     }
 
     public int matchCount(LottoNumbers lottoNumbers) {

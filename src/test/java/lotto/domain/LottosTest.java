@@ -12,12 +12,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosTest {
 
+
+
     @Test
     @DisplayName("복권들의 총 당첨금을 계산해서 반환한다.")
     void calculateTotalWinPrice() {
-        Lotto rankFifthLotto1 = new Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6));
-        Lotto rankFifthLotto2 = new Lotto(createLottoNumbers(1, 2, 3, 7, 8, 9));
-        Lotto rankMissLotto = new Lotto(createLottoNumbers(11, 12, 13, 14, 15, 16));
+        Lotto rankFifthLotto1 = Lotto.valueOf(createLottoNumbers(1, 2, 3, 4, 5, 6));
+        Lotto rankFifthLotto2 = Lotto.valueOf(createLottoNumbers(1, 2, 3, 7, 8, 9));
+        Lotto rankMissLotto = Lotto.valueOf(createLottoNumbers(11, 12, 13, 14, 15, 16));
 
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(rankFifthLotto1);
@@ -25,7 +27,7 @@ class LottosTest {
         lottoList.add(rankMissLotto);
 
         Lottos lottos = new Lottos(lottoList);
-        lottos.confirmAll(LottoNumbers.createWinningNumbers(new String[]{"1", "2", "3", "20", "21", "22"}), LottoNumber.valueOf(23));
+        lottos.confirmAll(new LottoNumbers(new String[]{"1", "2", "3", "20", "21", "22"}), LottoNumber.valueOf(23));
 
         assertThat(lottos.calculateTotalWinPrice()).isEqualTo(Rank.FIFTH.winPrice() + Rank.FIFTH.winPrice());
     }
@@ -33,9 +35,9 @@ class LottosTest {
     @Test
     @DisplayName("복권중에 해당하는 Rank 개수를 반환한다.")
     void countMatchResult() {
-        Lotto rankFifthLotto1 = new Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6));
-        Lotto rankFifthLotto2 = new Lotto(createLottoNumbers(1, 2, 3, 7, 8, 9));
-        Lotto rankMissLotto = new Lotto(createLottoNumbers(11, 12, 13, 14, 15, 16));
+        Lotto rankFifthLotto1 = Lotto.valueOf(createLottoNumbers(1, 2, 3, 4, 5, 6));
+        Lotto rankFifthLotto2 = Lotto.valueOf(createLottoNumbers(1, 2, 3, 7, 8, 9));
+        Lotto rankMissLotto = Lotto.valueOf(createLottoNumbers(11, 12, 13, 14, 15, 16));
 
         List<Lotto> lottoList = new ArrayList<>();
         lottoList.add(rankFifthLotto1);
@@ -43,7 +45,7 @@ class LottosTest {
         lottoList.add(rankMissLotto);
 
         Lottos lottos = new Lottos(lottoList);
-        lottos.confirmAll(LottoNumbers.createWinningNumbers(new String[]{"1", "2", "3", "20", "21", "22"}), LottoNumber.valueOf(23));
+        lottos.confirmAll(new LottoNumbers(new String[]{"1", "2", "3", "20", "21", "22"}), LottoNumber.valueOf(23));
 
         assertThat(lottos.countMatchResult(Rank.FIFTH)).isEqualTo(2);
     }

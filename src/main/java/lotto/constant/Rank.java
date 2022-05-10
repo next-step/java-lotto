@@ -24,16 +24,6 @@ public enum Rank {
         this.winPrice = winPrice;
     }
 
-    public static Rank valueOf(int matchCount) {
-        if (matchCount > LottoNumbers.LOTTO_NUMBER_COUNT) {
-            throw new InvalidMatchCount();
-        }
-        return Stream.of(Rank.values())
-                .filter(matchResult -> matchResult.matchCount == matchCount)
-                .findAny()
-                .orElse(MISS);
-    }
-
     public static Rank valueOf(int matchCount, boolean matchBonus) {
         if (matchCount > LottoNumbers.LOTTO_NUMBER_COUNT) {
             throw new InvalidMatchCount();

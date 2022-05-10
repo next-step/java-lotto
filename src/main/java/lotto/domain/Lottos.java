@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.constant.Rank;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
@@ -11,14 +10,6 @@ public class Lottos {
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
-    }
-
-    public static Lottos createAutoLotto(int count) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto(LottoNumbers.createRandomLottoNumbers()));
-        }
-        return new Lottos(lottos);
     }
 
     public int count() {

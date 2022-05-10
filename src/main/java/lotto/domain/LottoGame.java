@@ -2,6 +2,9 @@ package lotto.domain;
 
 import lotto.constant.Rank;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoGame {
 
     private static final int LOTTO_PRICE = 1000;
@@ -10,11 +13,16 @@ public class LottoGame {
     private final Lottos lottos;
 
     public LottoGame(int purchaseAmount) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < purchaseCount(purchaseAmount); i++) {
+            lottos.add(Lotto.createAutoLotto());
+        }
+
+        this.lottos = new Lottos(lottos);
         this.purchaseAmount = purchaseAmount;
-        this.lottos = Lottos.createAutoLotto(purchaseCount());
     }
 
-    private int purchaseCount() {
+    private int purchaseCount(int purchaseAmount) {
         return purchaseAmount / LOTTO_PRICE;
     }
 
