@@ -7,9 +7,12 @@ import lotto.strategy.LottoNumberGenerateStrategy;
 
 public class Lottos {
 
+  private static final String LOTTOS_NULL_OR_EMPTY_ERROR_MESSAGE = "로또 묶음이 Null 또는 Empty입니다.";
+
   private final List<Lotto> lottos;
 
   public Lottos(List<Lotto> lottos) {
+    validate(lottos);
     this.lottos = lottos;
   }
 
@@ -20,6 +23,12 @@ public class Lottos {
       lottos.add(Lotto.create(numberGenerateStrategy));
     }
     return new Lottos(lottos);
+  }
+
+  private void validate(List<Lotto> lottos) {
+    if(lottos == null || lottos.isEmpty()) {
+      throw new IllegalArgumentException(LOTTOS_NULL_OR_EMPTY_ERROR_MESSAGE);
+    }
   }
 
   public List<Lotto> getLottos() {
@@ -34,8 +43,9 @@ public class Lottos {
   }
 
   private LottoRank matchLottoRank(WinningLotto winningLotto, Lotto lotto) {
-    int matchCountOfLotto = lotto.matchWinningLottoNumbers(winningLotto);
-    return LottoRank.findRank(matchCountOfLotto);
+    int matchCountOfLotto = winningLotto.matchWinningLottoNumbers(lotto);
+    boolean matchBonusLottoNumber = winningLotto.isWinningBonusLottoNumber(lotto);
+    return LottoRank.findRank(matchCountOfLotto, matchBonusLottoNumber);
   }
 
   public double calculateProfitRatio(WinningLotto winningLotto) {
