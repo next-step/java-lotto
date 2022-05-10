@@ -15,22 +15,8 @@ class LottosTest {
     @BeforeEach
     void setUp() {
         this.lottos = new Lottos(Arrays.asList(
-                new LottoNumbers(Arrays.asList(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(5),
-                        new LottoNumber(6)
-                )),
-                new LottoNumbers(Arrays.asList(
-                        new LottoNumber(7),
-                        new LottoNumber(8),
-                        new LottoNumber(9),
-                        new LottoNumber(10),
-                        new LottoNumber(11),
-                        new LottoNumber(12)
-                ))
+                LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                LottoNumbers.of(Arrays.asList(7, 8, 9, 10, 11, 12))
         ));
     }
 

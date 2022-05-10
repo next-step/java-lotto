@@ -8,11 +8,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
+    public static final int LOTTO_SIZE = 6;
     private static final String NULL_NOT_ALLOW_MESSAGE = "null은 허용되지 않습니다.";
     private static final String LOTTO_SIZE_NOT_MATCH_MESSAGE = "로또 번호 개수가 일치하지 않습니다.";
     private static final String LOTTO_NUMBERS_STRING_DELIMITER = ", ";
-    private static final int LOTTO_SIZE = 6;
-
     private final Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers(String lottoNumbersString) {
