@@ -16,7 +16,7 @@ class LottoNumbersTest {
 
     @BeforeEach
     void setUp() {
-        this.lottoNumbers = LottoNumbers.of(Arrays.asList(6, 5, 4, 3, 2, 1));
+        this.lottoNumbers = LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @Nested
