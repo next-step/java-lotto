@@ -31,17 +31,6 @@ class NumberOfUserGenerateLottoTest {
         }
 
         @Nested
-        class _0이_주어지면 {
-
-            @ParameterizedTest
-            @ValueSource(ints = {0})
-            void 에러가_발생하지_않는다(int aInt) {
-                assertThatCode(() -> new NumberOfUserGenerateLotto(aInt, userAmount))
-                        .doesNotThrowAnyException();
-            }
-        }
-
-        @Nested
         class 살수있는_개수보다_많은값이_주어지면 {
 
             @ParameterizedTest
@@ -50,7 +39,17 @@ class NumberOfUserGenerateLottoTest {
                 assertThatIllegalArgumentException()
                         .isThrownBy(() -> new NumberOfUserGenerateLotto(aInt, userAmount));
             }
+        }
 
+        @Nested
+        class 살수있는_개수만큼의_값이_주어지면 {
+
+            @ParameterizedTest
+            @ValueSource(ints = {0, 10})
+            void 에러가_발생하지_않는다(int aInt) {
+                assertThatCode(() -> new NumberOfUserGenerateLotto(aInt, userAmount))
+                        .doesNotThrowAnyException();
+            }
         }
     }
 }
