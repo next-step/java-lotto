@@ -29,7 +29,7 @@ class LotteryShopTest {
   void payThrowsIllegalArgumentException(Integer moneyWon) {
     assertThatIllegalArgumentException().isThrownBy(
             () -> lotteryShop.sell(Money.of(moneyWon), lottoNumberGenerator))
-        .withMessage("로또 1장의 가격은 1000원 입니다");
+        .withMessageMatching("로또 1장의 가격은 \\d+원 입니다");
   }
 
   @DisplayName("null 값 입력시 Null Pointer 예외를 던진다")
