@@ -14,7 +14,7 @@ public class Customer {
     }
 
     public Customer(int money, Lotto lotto) {
-        this.totalAmount = 14000;
+        this.totalAmount = money;
         this.money = 0;
         this.lottos = new Lottos(lotto);
     }
