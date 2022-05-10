@@ -25,6 +25,11 @@ public class InputView {
         return this.scanner.nextLine();
     }
 
+    public String askBonusInput() {
+        show("\n보너스볼을 입력해주세요");
+        return this.scanner.next();
+    }
+
     private void show(String output) {
         out.println(output);
     }

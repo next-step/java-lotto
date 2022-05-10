@@ -1,7 +1,6 @@
 package step2.domain;
 
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -10,14 +9,14 @@ public class Lotto {
 
     private static final int COUNT = 6;
 
-    private final List<LottoNumber> values;
+    private final Set<LottoNumber> values;
 
     public Lotto(PurchaseStrategy purchaseStrategy) {
         Set<String> numbers = purchaseStrategy.getNumbers(COUNT);
         validate(numbers);
         this.values = numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .map(LottoNumber::from)
+                .collect(Collectors.toSet());
     }
 
     private void validate(Set<String> numbers) {
@@ -26,8 +25,15 @@ public class Lotto {
         }
     }
 
-    public List<LottoNumber> getValues() {
-        return values;
+    public long calculateHitCount(WinningLotto winningLotto) {
+        return values.stream()
+                .filter(winningLotto::isContain)
+                .count();
+    }
+
+    public boolean containBonusNumber(WinningLotto winningLotto) {
+        return values.stream()
+                .anyMatch(winningLotto::isBonusNumber);
     }
 
     @Override
@@ -43,9 +49,11 @@ public class Lotto {
         return Objects.hash(values);
     }
 
-    public long calculateHitCount(Winner winner) {
+    @Override
+    public String toString() {
         return values.stream()
-                .filter(winner::isContain)
-                .count();
+                .sorted(LottoNumber::compareTo)
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(" "));
     }
 }

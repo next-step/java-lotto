@@ -3,10 +3,6 @@ package step2;
 import step2.domain.*;
 import step2.view.InputView;
 import step2.view.OutPutView;
-import step2.view.dto.GameResultDto;
-import step2.view.dto.PurchaseCountDto;
-import step2.view.dto.PurchaseListDto;
-import step2.view.dto.ReturnRateDto;
 
 public class LottoApplication {
 
@@ -16,25 +12,24 @@ public class LottoApplication {
         OutPutView outPutView = new OutPutView();
 
         int purchaseAmount = inputView.askPurchaseAmount();
-        PurchaseCount purchaseCount = new PurchaseCount(purchaseAmount);
-        outPutView.show(new PurchaseCountDto(purchaseCount).toString());
+        PurchaseMoney purchaseMoney = new PurchaseMoney(purchaseAmount);
+        outPutView.showPurchaseCount(purchaseMoney.calculatePurchaseCount());
 
-        PurchaseList purchaseList = new PurchaseList(purchaseCount);
-        outPutView.show(new PurchaseListDto(purchaseList).toString());
+        PurchaseList purchaseList = new PurchaseList(purchaseMoney);
+        outPutView.show(purchaseList.toString());
 
         String winnerInput = inputView.askWinnerInput();
-        Winner winner = new Winner(winnerInput);
+        String bonusInput = inputView.askBonusInput();
+        WinningLotto winningLotto = new WinningLotto(winnerInput, bonusInput);
         inputView.close();
 
-        LottoGame lottoGame = new LottoGame(purchaseList, winner);
-        GameResult gameResult = lottoGame.calculateGameResult();
-
-        GameResultDto gameResultDto = new GameResultDto(gameResult);
-        ReturnRateDto returnRateDto = new ReturnRateDto(gameResult.calculateReturnRate(purchaseAmount));
+        LottoGame lottoGame = new LottoGame(purchaseList, winningLotto);
+        GameResult gameResult = lottoGame.calculateResult();
+        ReturnRate returnRate = gameResult.calculateReturnRate(purchaseMoney);
 
         outPutView.showResultLine();
-        outPutView.show(gameResultDto.toString());
-        outPutView.show(returnRateDto.toString());
+        outPutView.showGameResult(gameResult.getResult());
+        outPutView.showReturnRate(returnRate.getValue(), returnRate.isProfitable());
         outPutView.showEnd();
 
     }

@@ -21,6 +21,6 @@ public class AutoPurchase implements PurchaseStrategy {
     @Override
     public Set<String> getNumbers(Integer count) {
         Collections.shuffle(baseNumber);
-        return new HashSet<>(baseNumber.subList(0, 6));
+        return new HashSet<>(baseNumber.subList(0, count));
     }
 }

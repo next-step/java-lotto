@@ -12,8 +12,8 @@ public class PurchaseList {
 
     private final List<Lotto> values;
 
-    public PurchaseList(PurchaseCount purchaseCount) {
-        this(purchaseCount.getValue());
+    public PurchaseList(PurchaseMoney purchaseMoney) {
+        this(purchaseMoney.calculatePurchaseCount());
     }
 
     public PurchaseList(int purchaseCount) {
@@ -27,13 +27,22 @@ public class PurchaseList {
         }
     }
 
-    public List<Lotto> getValues() {
-        return this.values;
+    public List<LottoRank> calculateRankEach(WinningLotto winningLotto) {
+        return values.stream()
+                .map(lotto -> calculateRank(lotto, winningLotto))
+                .collect(Collectors.toList());
     }
 
-    public List<Long> calculateHitCount(Winner winner) {
-        return values.stream()
-                .map(lotto -> lotto.calculateHitCount(winner))
-                .collect(Collectors.toList());
+    private LottoRank calculateRank(Lotto lotto, WinningLotto winningLotto) {
+        long hitCount = lotto.calculateHitCount(winningLotto);
+        boolean isContainBonusNumber = lotto.containBonusNumber(winningLotto);
+        return LottoRank.toRank(hitCount, isContainBonusNumber);
+    }
+
+    @Override
+    public String toString() {
+        return this.values.stream()
+                .map(Lotto::toString)
+                .collect(Collectors.joining("\n"));
     }
 }

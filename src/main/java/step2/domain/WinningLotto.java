@@ -1,25 +1,37 @@
 package step2.domain;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Winner {
+public class WinningLotto {
 
     private static final String DELIIMITER = ", ";
     private static final int WINNER_COUNT = 6;
 
-    private final List<LottoNumber> values;
+    private final Set<LottoNumber> winningNumbers;
+    private final LottoNumber bonusNumber;
 
-    public Winner(String input) {
+    public WinningLotto(String input, String bonus) {
+        this.winningNumbers = initWinningNumbers(input);
+        this.bonusNumber = initBonusNumber(bonus);
+        validateBonusNumberDuplicate();
+    }
+
+    private Set<LottoNumber> initWinningNumbers(String input) {
         validateNullAndEmpty(input);
         String[] splits = input.split(DELIIMITER);
         validateLength(splits);
         validateDuplicate(splits);
-        this.values = Arrays.stream(splits)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+        return Arrays.stream(splits)
+                .map(LottoNumber::from)
+                .collect(Collectors.toSet());
+    }
+
+    private LottoNumber initBonusNumber(String bonus) {
+        validateNullAndEmpty(bonus);
+        return LottoNumber.from(bonus);
     }
 
     private void validateNullAndEmpty(String input) {
@@ -41,20 +53,30 @@ public class Winner {
         }
     }
 
+    private void validateBonusNumberDuplicate() {
+        if (this.winningNumbers.contains(this.bonusNumber)) {
+            throw new IllegalArgumentException("당첨번호와 보너스 번호가 중복될 수 없습니다.");
+        }
+    }
+
     public boolean isContain(LottoNumber lottoNumber) {
-        return this.values.contains(lottoNumber);
+        return this.winningNumbers.contains(lottoNumber);
+    }
+
+    public boolean isBonusNumber(LottoNumber lottoNumber) {
+        return this.bonusNumber.equals(lottoNumber);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Winner winner = (Winner) o;
-        return Objects.equals(values, winner.values);
+        WinningLotto winningLotto = (WinningLotto) o;
+        return Objects.equals(winningNumbers, winningLotto.winningNumbers) && Objects.equals(bonusNumber, winningLotto.bonusNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(values);
+        return Objects.hash(winningNumbers, bonusNumber);
     }
 }
