@@ -8,6 +8,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
+    private static final String NULL_NOT_ALLOW_MESSAGE = "null은 허용되지 않습니다.";
+    private static final String LOTTO_SIZE_NOT_MATCH_MESSAGE = "로또 번호 개수가 일치하지 않습니다.";
     private static final String LOTTO_NUMBERS_STRING_DELIMITER = ", ";
     private static final int LOTTO_SIZE = 6;
 
@@ -23,7 +25,7 @@ public class LottoNumbers {
 
     LottoNumbers(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(Message.LOTTO_SIZE_NOT_MATCH.toString());
+            throw new IllegalArgumentException(LOTTO_SIZE_NOT_MATCH_MESSAGE);
         }
         this.lottoNumbers = lottoNumbers;
     }
@@ -42,7 +44,7 @@ public class LottoNumbers {
 
     private static List<LottoNumber> wrap(String lottoNumbersString) {
         if (lottoNumbersString == null) {
-            throw new IllegalArgumentException(Message.NULL_NOT_ALLOW.toString());
+            throw new IllegalArgumentException(NULL_NOT_ALLOW_MESSAGE);
         }
 
         return Arrays.stream(lottoNumbersString.split(LOTTO_NUMBERS_STRING_DELIMITER))
@@ -89,21 +91,5 @@ public class LottoNumbers {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
-    }
-
-    private enum Message {
-        NULL_NOT_ALLOW("null은 허용되지 않습니다."),
-        LOTTO_SIZE_NOT_MATCH("로또 번호 개수가 일치하지 않습니다.");
-
-        private final String message;
-
-        Message(String message) {
-            this.message = message;
-        }
-
-        @Override
-        public String toString() {
-            return this.message;
-        }
     }
 }

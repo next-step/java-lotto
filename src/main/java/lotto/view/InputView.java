@@ -12,9 +12,14 @@ import java.util.stream.IntStream;
 
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
+    private static final String INPUT_USER_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";
+    private static final String INPUT_NUMBER_OF_USER_GENERATE_LOTTO_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String INPUT_LOTTOS_OF_USER_MESSAGE = "보너스 볼을 입력해 주세요.";
+    private static final String INPUT_PREVIOUS_WEEK_WINNING_NUMBER_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INPUT_BONUS_BALL_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 
     public static UserAmount inputUserAmount() {
-        System.out.println(Message.INPUT_USER_AMOUNT);
+        System.out.println(INPUT_USER_AMOUNT_MESSAGE);
 
         try {
             int userAmount = Integer.parseInt(SCANNER.nextLine());
@@ -27,7 +32,7 @@ public class InputView {
     }
 
     public static NumberOfUserGenerateLotto inputNumberOfUserGenerateLotto(UserAmount userAmount) {
-        System.out.println(Message.INPUT_NUMBER_OF_USER_GENERATE_LOTTO);
+        System.out.println(INPUT_NUMBER_OF_USER_GENERATE_LOTTO_MESSAGE);
 
         try {
             int numberOfUserGenerateLotto = Integer.parseInt(SCANNER.nextLine());
@@ -40,7 +45,7 @@ public class InputView {
     }
 
     public static List<LottoNumbers> inputLottoOfUser(NumberOfUserGenerateLotto numberOfUserGenerateLotto) {
-        System.out.println(Message.INPUT_LOTTOS_OF_USER);
+        System.out.println(INPUT_LOTTOS_OF_USER_MESSAGE);
 
         try {
             return IntStream.range(0, numberOfUserGenerateLotto.getNumberOfUserGenerateLotto())
@@ -54,7 +59,7 @@ public class InputView {
     }
 
     public static LottoNumbers inputPreviousWeekWinningNumber() {
-        System.out.println(Message.INPUT_PREVIOUS_WEEK_WINNING_NUMBER);
+        System.out.println(INPUT_PREVIOUS_WEEK_WINNING_NUMBER_MESSAGE);
 
         try {
             String lottoNumbers = SCANNER.nextLine();
@@ -67,7 +72,7 @@ public class InputView {
     }
 
     public static LottoNumber inputBonusBall() {
-        System.out.println(Message.INPUT_BONUS_BALL);
+        System.out.println(INPUT_BONUS_BALL_MESSAGE);
 
         try {
             String s = SCANNER.nextLine();
@@ -81,24 +86,5 @@ public class InputView {
 
     private static void printExceptionMessage(Exception e) {
         System.out.println(e.getMessage());
-    }
-
-    private enum Message {
-        INPUT_USER_AMOUNT("구입금액을 입력해 주세요."),
-        INPUT_PREVIOUS_WEEK_WINNING_NUMBER("지난 주 당첨 번호를 입력해 주세요."),
-        INPUT_BONUS_BALL("보너스 볼을 입력해 주세요."),
-        INPUT_NUMBER_OF_USER_GENERATE_LOTTO("수동으로 구매할 로또 수를 입력해 주세요."),
-        INPUT_LOTTOS_OF_USER("수동으로 구매할 번호를 입력해 주세요.");
-
-        private final String message;
-
-        Message(String message) {
-            this.message = message;
-        }
-
-        @Override
-        public String toString() {
-            return message;
-        }
     }
 }

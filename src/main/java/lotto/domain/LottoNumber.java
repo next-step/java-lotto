@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumber {
+    private static final String NOT_NUMBER_STRING_NOT_ALLOW_MESSAGE = "숫자가 아닌 문자열은 허용되지 않습니다.";
+    private static final String INVALID_NUMBER_MESSAGE = "유효하지 않은 숫자입니다.";
     private static final int START_LOTTO_NUMBER = 1;
     private static final int END_LOTTO_NUMBER = 45;
     private static final List<LottoNumber> LOTTO_NUMBERS;
@@ -40,7 +42,7 @@ public class LottoNumber {
         try {
             return Integer.parseInt(string);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(Message.NOT_NUMBER_STRING_NOT_ALLOW.toString());
+            throw new IllegalArgumentException(NOT_NUMBER_STRING_NOT_ALLOW_MESSAGE);
         }
     }
 
@@ -50,7 +52,7 @@ public class LottoNumber {
 
     private void checkInvalid(int lottoNumber) {
         if (lottoNumber < START_LOTTO_NUMBER || lottoNumber > END_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(Message.INVALID_NUMBER.toString());
+            throw new IllegalArgumentException(INVALID_NUMBER_MESSAGE);
         }
     }
 
@@ -76,21 +78,5 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
-    }
-
-    private enum Message {
-        NOT_NUMBER_STRING_NOT_ALLOW("숫자가 아닌 문자열은 허용되지 않습니다."),
-        INVALID_NUMBER("유효하지 않은 숫자입니다.");
-
-        private final String message;
-
-        Message(String message) {
-            this.message = message;
-        }
-
-        @Override
-        public String toString() {
-            return this.message;
-        }
     }
 }
