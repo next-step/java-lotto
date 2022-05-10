@@ -6,13 +6,13 @@ public class PurchaseMoney {
 
     private static final int DEFAULT_EACH_LOTTO_PRICE = 1000;
 
-    private final int purchaseAmount;
+    private final int amount;
 
-    public PurchaseMoney(int purchaseAmount) {
-        validateInput(purchaseAmount);
-        validateLeast(purchaseAmount);
-        validateDivisible(purchaseAmount);
-        this.purchaseAmount = purchaseAmount;
+    public PurchaseMoney(int amount) {
+        validateInput(amount);
+        validateLeast(amount);
+        validateDivisible(amount);
+        this.amount = amount;
     }
 
     private void validateInput(int purchaseAmount) {
@@ -34,11 +34,11 @@ public class PurchaseMoney {
     }
 
     public ReturnRate calculateReturnRate(int sumOfPrizeMoney) {
-        return new ReturnRate(sumOfPrizeMoney, purchaseAmount);
+        return new ReturnRate(sumOfPrizeMoney, amount);
     }
 
     public int calculatePurchaseCount() {
-        return purchaseAmount / DEFAULT_EACH_LOTTO_PRICE;
+        return amount / DEFAULT_EACH_LOTTO_PRICE;
     }
 
     @Override
@@ -46,11 +46,11 @@ public class PurchaseMoney {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PurchaseMoney that = (PurchaseMoney) o;
-        return purchaseAmount == that.purchaseAmount;
+        return amount == that.amount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(purchaseAmount);
+        return Objects.hash(amount);
     }
 }
