@@ -7,13 +7,14 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
+    public static final int LOTTO_PRICE = 1000;
     private final Scanner scanner = new Scanner(System.in);
 
     public int purchaseAmountQuestion() {
         System.out.println("구입금액을 입력해 주세요.");
         int value = scanner.nextInt();
         scanner.nextLine();
-        System.out.println(value / 1000 + "개를 구매했습니다.");
+        System.out.println(value / LOTTO_PRICE + "개를 구매했습니다.");
 
         return value;
     }
