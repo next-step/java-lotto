@@ -44,15 +44,10 @@ public class LottoTicket {
         return this.lottoTicket;
     }
 
-
     public Integer getMatchResult(WinningLotto winningLotto) {
         Set<LottoNumber> lottoNumbers = new HashSet<>(lottoTicket);
         lottoNumbers.addAll(winningLotto.getLottoTicket());
         return lottoTicket.size() + winningLotto.getLottoTicket().size() - lottoNumbers.size();
-    }
-
-    public boolean isMatchedBonus(WinningLotto winningLotto) {
-        return lottoTicket.contains(winningLotto.getBonusNumber());
     }
 
     public boolean hasLottoNumber(LottoNumber lottoNumber) {

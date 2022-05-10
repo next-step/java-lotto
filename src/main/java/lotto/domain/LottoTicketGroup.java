@@ -49,7 +49,7 @@ public class LottoTicketGroup {
     public RankGroup getLottoRankings(WinningLotto winningLotto) {
         List<Rank> myRanks = new ArrayList<>();
         for (LottoTicket lottoTicket : lottoTicketGroup) {
-            myRanks.add(Rank.of(lottoTicket.getMatchResult(winningLotto), lottoTicket.isMatchedBonus(winningLotto)));
+            myRanks.add(Rank.of(lottoTicket.getMatchResult(winningLotto), lottoTicket.hasLottoNumber(winningLotto.getBonusNumber())));
         }
         return new RankGroup(myRanks);
     }
