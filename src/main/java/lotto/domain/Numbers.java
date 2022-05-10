@@ -36,10 +36,6 @@ public class Numbers {
         return collect.size();
     }
 
-    public List<Integer> getList() {
-        return lottoNumbers;
-    }
-
     public boolean contains(int bonusNumber) {
         return this.lottoNumbers.contains(bonusNumber);
     }
