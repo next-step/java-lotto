@@ -3,7 +3,7 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import lotto.strategy.FixedNumberGenerateStrategy;
@@ -35,6 +35,21 @@ class LottosTest {
 
     // then
     assertThat(lottos.getLottos()).hasSize(purchasedLotto);
+  }
+
+  @Test
+  @DisplayName("수동으로 구매한 로또의 갯수만큼 로또 객체를 생성한다")
+  void createObjectNumberOfPurchasedManualLotto() {
+    // given
+    int numberOfManual = 3;
+    List<String> manualLottos = Arrays.asList("8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38",
+        "7, 11, 16, 35, 36, 44");
+
+    // when
+    Lottos lottos = Lottos.create(numberOfManual, manualLottos, new RandomNumberGenerateStrategy());
+
+    // then
+    assertThat(lottos.getLottos()).hasSize(numberOfManual);
   }
 
   @Test
