@@ -22,6 +22,22 @@ class LottoNumbersTest {
     }
 
     @Test
+    @DisplayName("LottoNumbers 에 같은 값이 있으면 true 를 반환한다.")
+    void isContain() {
+        LottoNumbers lottoNumbers = createLottoNumbers(1, 2, 3, 4, 5, 6);
+
+        assertThat(lottoNumbers.isContain(LottoNumber.valueOf(1))).isTrue();
+    }
+
+    @Test
+    @DisplayName("LottoNumbers 에 같은 값이 없으면 false 를 반환한다.")
+    void isNotContain() {
+        LottoNumbers lottoNumbers = createLottoNumbers(1, 2, 3, 4, 5, 6);
+
+        assertThat(lottoNumbers.isContain(LottoNumber.valueOf(7))).isFalse();
+    }
+
+    @Test
     @DisplayName("로또 번호를 중복으로 입력 시 중복이 제거되서 생성된다.")
     void duplicate() {
         LottoNumbers lottoNumbers1 = createLottoNumbers(1, 2, 3, 4, 5, 6, 6);

@@ -16,6 +16,12 @@ public class Lotto {
         this.rank = Rank.valueOf(matchCount);
     }
 
+    public void confirm(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        int matchCount = lottoNumbers.matchCount(winningNumbers);
+        boolean matchBonus = lottoNumbers.isContain(bonusNumber);
+        rank = Rank.valueOf(matchCount, matchBonus);
+    }
+
     public Rank findMatchResult() {
         return rank;
     }

@@ -30,6 +30,11 @@ public class Lottos {
             lotto.confirm(winningNumbers);
         }
     }
+    public void confirmAll(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        for (Lotto lotto : lottos) {
+            lotto.confirm(winningNumbers, bonusNumber);
+        }
+    }
 
     public List<Lotto> toList() {
         return lottos;
