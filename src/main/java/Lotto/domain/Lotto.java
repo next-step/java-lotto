@@ -2,6 +2,7 @@ package Lotto.domain;
 
 import Lotto.exception.SameNumberException;
 import Lotto.exception.WrongNumberFormatException;
+import Lotto.util.NumberFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,8 +16,8 @@ public class Lotto {
     private List<Number> myNumbers = new ArrayList<>();
 
     public Lotto(List<Integer> numbers) {
-        for (int n : numbers) {
-            this.myNumbers.add(new Number(n));
+        for (int number : numbers) {
+            this.myNumbers.add(NumberFactory.getNumber(number));
         }
     }
 
@@ -26,7 +27,7 @@ public class Lotto {
         validate(winningNumberArr);
 
         for (String number : winningNumberArr) {
-            myNumbers.add(new Number(Integer.parseInt(number)));
+            myNumbers.add(NumberFactory.getNumber(Integer.parseInt(number)));
         }
     }
 
@@ -71,6 +72,16 @@ public class Lotto {
         return cnt;
     }
 
+    public void isDuplicateNumber(Number bonusNumber) {
+        if(myNumbers.contains(bonusNumber)) {
+            throw new SameNumberException("당첨번호와 보너스 번호가 중복됩니다.");
+        }
+    }
+
+    public boolean isBonusNumber(Number bonusNumber) {
+        return myNumbers.contains(bonusNumber);
+    }
+
     private List<Number> getList() {
         return this.myNumbers;
     }
@@ -78,4 +89,6 @@ public class Lotto {
     public int getLottoNumber(int idx) {
         return myNumbers.get(idx).getNumber();
     }
+
+
 }

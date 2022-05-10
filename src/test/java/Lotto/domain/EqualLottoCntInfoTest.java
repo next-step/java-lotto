@@ -19,7 +19,7 @@ class EqualLottoCntInfoTest {
     @DisplayName("등수를 찾을 수 없으면 예외를 던진다.")
     public void NotFoundWinningRankTest(int rank) {
         Assertions.assertThatExceptionOfType(NotFoundRankException.class).isThrownBy(
-                () -> EqualLottoCntInfo.findEqualLottoInfo(rank)
+                () -> EqualLottoCntInfo.findEqualLottoInfo(rank, false)
         );
     }
 
@@ -55,6 +55,6 @@ class EqualLottoCntInfoTest {
     @MethodSource("validRankTestArgs")
     @DisplayName("상금이 있는 등수만 유효한 등수다.")
     public void validRankTest(EqualLottoCntInfo winningRankInfo, boolean result) {
-        Assertions.assertThat(winningRankInfo.isValidEqualCnt()).isEqualTo(result);
+        Assertions.assertThat(winningRankInfo.isWinning()).isEqualTo(result);
     }
 }

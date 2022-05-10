@@ -40,13 +40,14 @@ public class Lottos {
         list.add(new Lotto(lottoNumbers));
     }
 
-    public Map<EqualLottoCntInfo, Integer> findWinningLotto(Lotto winningNumbers) {
+    public Map<EqualLottoCntInfo, Integer> findWinningLotto(Lotto winningNumbers, Number bonusNumber) {
         Map<EqualLottoCntInfo, Integer> winningLottoRankMap = new HashMap<>();
 
         for (Lotto lotto : list) {
             int equalCount = lotto.findWinningLottoCnt(winningNumbers);
+            boolean isBonus = lotto.isBonusNumber(bonusNumber);
 
-            EqualLottoCntInfo equalLottoCntInfo = EqualLottoCntInfo.findEqualLottoInfo(equalCount);
+            EqualLottoCntInfo equalLottoCntInfo = EqualLottoCntInfo.findEqualLottoInfo(equalCount, isBonus);
 
             int cnt = getSameRankCnt(winningLottoRankMap, equalLottoCntInfo);
             winningLottoRankMap.put(equalLottoCntInfo, cnt);
