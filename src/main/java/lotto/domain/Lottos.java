@@ -27,10 +27,4 @@ public class Lottos {
                 .map(lotto -> winningNumbers.findRank(lotto))
                 .collect(Collectors.toList());
     }
-
-    public List<Rank> getWinningList(WinningNumbers winningNumbers) {
-        return lottos.stream()
-                .map(lotto -> winningNumbers.findRank(lotto))
-                .collect(Collectors.toList());
-    }
 }
