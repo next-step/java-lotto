@@ -35,16 +35,16 @@ public class Lotto {
     return create(lottoNumbersGeneration);
   }
 
-  private static Lotto create(List<LottoNumber> winningLottoNumbers) {
-    return new Lotto(winningLottoNumbers);
+  private static Lotto create(List<LottoNumber> lottoNumbers) {
+    return new Lotto(lottoNumbers);
   }
 
-  private static String[] splitLotto(String winningLotto) {
-    return winningLotto.split(LOTTO_BASED_SPLIT_REGEX);
+  private static String[] splitLotto(String lottoNumbers) {
+    return lottoNumbers.split(LOTTO_BASED_SPLIT_REGEX);
   }
 
-  private static int convertToNumber(String winningLottoNumber) {
-    return Integer.parseInt(winningLottoNumber);
+  private static int convertToNumber(String lottoNumber) {
+    return Integer.parseInt(lottoNumber);
   }
 
   private void validate(List<LottoNumber> lottoNumbers) {
