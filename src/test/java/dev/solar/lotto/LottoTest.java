@@ -20,7 +20,7 @@ public class LottoTest {
     @CsvSource(value = { "14000:14", "13500:13", "0:0" }, delimiter = ':')
     @ParameterizedTest
     void issue_lotto_equal_purchase_amount(int payment, int purchaseAmount) {
-        assertThat(Lotto.buyLottoTickets(payment).getPurchaseAmount()).isEqualTo(purchaseAmount);
+        assertThat(Lotto.buyLottoTickets(payment).getRemainingLottoTicket()).isEqualTo(purchaseAmount);
     }
 
     @DisplayName("로또 한 장당 6개의 번호를 랜덤으로 선택한다.")
@@ -50,16 +50,4 @@ public class LottoTest {
                          Arguments.of(new LottoTicket(new TreeSet<>(
                                  Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)))), 6));
     }
-
-//    @DisplayName("총 수익률을 구한다.")
-//    @Test
-//    void profit_margin() {
-//        LottoTicket lottoTicket = new LottoTicket(
-//                new HashSet<>(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))));
-//
-//        lottoTicket.checkWinningNumbers(
-//                new HashSet<>(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(45))));
-//
-//        assertThat(lottoTicket.getProfitMargin()).isEqualTo(5000 / 1500000);
-//    }
 }

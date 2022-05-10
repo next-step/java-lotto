@@ -29,29 +29,12 @@ public class LottoTicket {
     }
 
     public int checkWinningNumbers(final Set<LottoNumber> winningNumbers) {
-        final int count = (int) winningNumbers.stream().filter(lottoNumbers::contains).count();
-        decidePrizeMoney(count);
-        return count;
+        return (int) winningNumbers.stream().filter(lottoNumbers::contains).count();
     }
 
+    //TODO: 총 수익률 구하기
     private void decidePrizeMoney(final int count) {
-        if (count == 3) {
-            this.prizeMoney = 5000;
-            return;
-        }
-        if (count == 4) {
-            this.prizeMoney = 50000;
-            return;
-        }
-        if (count == 5) {
-            this.prizeMoney = 1500000;
-            return;
-        }
-        if (count == 6) {
-            this.prizeMoney = 2000000000;
-            return;
-        }
-        this.prizeMoney = 0;
+
     }
 
     public Set<LottoNumber> getLottoNumbers() {
