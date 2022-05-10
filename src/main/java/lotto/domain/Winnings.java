@@ -15,10 +15,6 @@ public class Winnings {
 
     private final int[] recordMatched;
 
-    private final int[] rewards = {
-            REWARD_NONE, REWARD_NONE, REWARD_NONE,
-            REWARD_MATCHED_THREE, REWARD_MATCHED_FOUR, REWARD_MATCHED_FIVE, REWARD_MATCHED_ALL};
-
     public Winnings(String[] winningNumbers, int bonusNumber) {
         this.winningNumbers = new WinningNumbers(parseWinningNumbers(winningNumbers), bonusNumber);
         this.recordMatched = new int[Matched.values().length];
@@ -62,9 +58,5 @@ public class Winnings {
 
     public int[] recordMatched() {
         return recordMatched;
-    }
-
-    public int[] rewards() {
-        return rewards;
     }
 }
