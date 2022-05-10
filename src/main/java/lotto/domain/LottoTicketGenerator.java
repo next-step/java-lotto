@@ -17,7 +17,7 @@ public class LottoTicketGenerator {
         this.generateStrategy = generateStrategy;
     }
 
-    public List<LottoTicket> generateLottoTickets(int count) {
+    private List<LottoTicket> generateLottoTickets(int count) {
         return IntStream.range(0, count)
                 .mapToObj(i -> generateLottoTicket())
                 .collect(Collectors.toList());
@@ -37,10 +37,6 @@ public class LottoTicketGenerator {
         if (count == 0) {
             throw new InvalidMoneyInputException();
         }
-    }
-
-    public WinningTicket generateWinningTicket(Set<LottoNumber> lottoNumbers, Integer bonusNumber) {
-        return new WinningTicket(new LottoTicket(lottoNumbers), new LottoNumber(bonusNumber));
     }
 
     private Set<LottoNumber> generateLottoNumbers() {

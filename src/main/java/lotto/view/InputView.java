@@ -24,7 +24,7 @@ public class InputView {
         return InputUtil.readLottoNumbers(readInput());
     }
 
-    public Integer readBonusNumber() {
+    public LottoNumber readBonusNumber() {
         System.out.println("보너스 볼을 입력해주세요.");
         return InputUtil.readBonusNumber(readInput());
     }

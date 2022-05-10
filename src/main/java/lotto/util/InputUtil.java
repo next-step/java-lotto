@@ -23,8 +23,8 @@ public class InputUtil {
         return getLottoNumbers(replacedString);
     }
 
-    public static Integer readBonusNumber(String input) {
-        return getInteger(input);
+    public static LottoNumber readBonusNumber(String input) {
+        return new LottoNumber(getInteger(input));
     }
 
     private static Integer getInteger(String input) {

@@ -2,10 +2,16 @@ package lotto.domain;
 
 import lotto.exception.InvalidBonusNumberException;
 
+import java.util.Set;
+
 public class WinningTicket {
 
     private final LottoTicket lottoTicket;
     private final LottoNumber bonusNumber;
+
+    public WinningTicket(Set<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+        this(new LottoTicket(winningNumbers), bonusNumber);
+    }
 
     public WinningTicket(LottoTicket lottoTicket, LottoNumber bonusNumber) {
         this.lottoTicket = lottoTicket;

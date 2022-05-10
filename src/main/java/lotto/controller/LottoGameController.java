@@ -13,16 +13,16 @@ public class LottoGameController {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private final LottoTicketGenerator lottoTicketGenerator;
+    private final LottoTicketMachine ticketMachine;
 
-    public LottoGameController(InputView inputView, OutputView outputView, LottoTicketGenerator lottoTicketGenerator) {
+    public LottoGameController(InputView inputView, OutputView outputView, LottoTicketMachine ticketMachine) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.lottoTicketGenerator = lottoTicketGenerator;
+        this.ticketMachine = ticketMachine;
     }
 
     public LottoGameController() {
-        this(new InputView(), new OutputView(), new LottoTicketGenerator(new RandomGenerateStrategy()));
+        this(new InputView(), new OutputView(), new LottoTicketMachine());
     }
 
     public void play() {
@@ -44,9 +44,9 @@ public class LottoGameController {
     }
 
     private WinningTicket getWinningTicket() {
-        Set<LottoNumber> integers = inputView.readLottoNumbers();
-        Integer bonusNumber = inputView.readBonusNumber();
-        return lottoTicketGenerator.generateWinningTicket(integers, bonusNumber);
+        Set<LottoNumber> winningNumbers = inputView.readLottoNumbers();
+        LottoNumber bonusNumber = inputView.readBonusNumber();
+        return ticketMachine.generateWinningTicket(winningNumbers, bonusNumber);
     }
 
     private List<Rank> getRanks(List<LottoTicket> lottoTickets, WinningTicket winningTicket) {
@@ -56,7 +56,7 @@ public class LottoGameController {
     }
 
     private List<LottoTicket> getLottoTickets(int money) {
-        return lottoTicketGenerator.buyLottoTickets(money);
+        return ticketMachine.buyLottoTickets(money, new RandomGenerateStrategy());
     }
 
     private int getMoney() {

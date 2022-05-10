@@ -2,6 +2,7 @@ package lotto.util;
 
 import lotto.domain.LottoNumber;
 import lotto.exception.InvalidInputLottoNumberException;
+import lotto.exception.InvalidLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -67,11 +68,19 @@ class InputUtilTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1", "500", "10"})
+    @ValueSource(strings = {"1", "40", "10"})
     @DisplayName("보너스 번호 입력 시 Integer 로 반환")
     void convertBonusNumberToInteger(String input) {
-        Integer integer = InputUtil.readBonusNumber(input);
-        assertThat(integer).isEqualTo(Integer.valueOf(input));
+        LottoNumber lottoNumber = InputUtil.readBonusNumber(input);
+        assertThat(lottoNumber).isEqualTo(new LottoNumber(Integer.parseInt(input)));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"100", "0", "-1"})
+    @DisplayName("1-45 를 벗어난 숫자 입력시 InvalidLottoNumberException 발생")
+    void throwInvalidLottoNumberExceptionTest(String input) {
+        assertThatThrownBy(() -> InputUtil.readLottoNumbers(input))
+                .isInstanceOf(InvalidLottoNumberException.class);
     }
 
     @ParameterizedTest
