@@ -34,10 +34,6 @@ public class Customer {
         return lottos.findLottos();
     }
 
-    public List<Rank> getWinningList(List<Integer> winningNumbers, int bonusNumber) {
-        return lottos.getWinningList(winningNumbers, bonusNumber);
-    }
-
     public List<Rank> getWinningList(WinningNumbers winningNumbers) {
         return lottos.getWinningList(winningNumbers);
     }
