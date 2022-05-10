@@ -55,6 +55,6 @@ class EqualLottoCntInfoTest {
     @MethodSource("validRankTestArgs")
     @DisplayName("상금이 있는 등수만 유효한 등수다.")
     public void validRankTest(EqualLottoCntInfo winningRankInfo, boolean result) {
-        Assertions.assertThat(winningRankInfo.isValidEqualCnt()).isEqualTo(result);
+        Assertions.assertThat(winningRankInfo.isWinning()).isEqualTo(result);
     }
 }

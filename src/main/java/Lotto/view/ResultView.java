@@ -42,7 +42,7 @@ public class ResultView {
     }
 
     private static void viewResultMessage(Map<EqualLottoCntInfo, Integer> result, EqualLottoCntInfo equalLottoCntInfo) {
-        if (equalLottoCntInfo.isValidEqualCnt()) {
+        if (equalLottoCntInfo.isWinning()) {
             Integer sameRankCount = result.get(equalLottoCntInfo);
             if (sameRankCount == null) {
                 sameRankCount = 0;

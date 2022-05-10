@@ -2,6 +2,7 @@ package Lotto.domain;
 
 import Lotto.exception.SameNumberException;
 import Lotto.exception.WrongNumberFormatException;
+import Lotto.util.NumberFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,8 +16,8 @@ public class Lotto {
     private List<Number> myNumbers = new ArrayList<>();
 
     public Lotto(List<Integer> numbers) {
-        for (int n : numbers) {
-            this.myNumbers.add(new Number(n));
+        for (int number : numbers) {
+            this.myNumbers.add(NumberFactory.getNumber(number));
         }
     }
 
@@ -26,7 +27,7 @@ public class Lotto {
         validate(winningNumberArr);
 
         for (String number : winningNumberArr) {
-            myNumbers.add(new Number(Integer.parseInt(number)));
+            myNumbers.add(NumberFactory.getNumber(Integer.parseInt(number)));
         }
     }
 

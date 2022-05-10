@@ -28,7 +28,7 @@ public enum EqualLottoCntInfo {
     public static EqualLottoCntInfo findEqualLottoInfo(int equalCnt, boolean isMatchBonus) {
         if (equalCnt != 5 || !isMatchBonus) {
             return Stream.of(values())
-                    .filter(WinningRankInfo -> (WinningRankInfo.equalCnt == (equalCnt)))
+                    .filter(EqualLottoCntInfo -> (EqualLottoCntInfo.equalCnt == (equalCnt)))
                     .findFirst()
                     .orElseThrow(() -> new NotFoundRankException("등수를 찾을 수 없습니다."));
         }
@@ -47,7 +47,7 @@ public enum EqualLottoCntInfo {
         return winningMoney;
     }
 
-    public boolean isValidEqualCnt() {
+    public boolean isWinning() {
         return equalCnt >= MIN_COUNT;
     }
 }
