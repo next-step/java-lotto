@@ -5,7 +5,6 @@ import java.util.Objects;
 
 public class Lotto {
     private Numbers numbers;
-    private int price;
 
     public Lotto() {
         this.numbers = new Numbers();
