@@ -36,9 +36,17 @@ public class Amount {
 	}
 
 	public long divide(Amount lottoPrice) {
+		validateZero(lottoPrice);
 		if (this.amount % lottoPrice.amount != 0) {
 			throw new IllegalArgumentException(this.amount + "원은 " + lottoPrice.amount + "원의 배수가 아닙니다.");
 		}
 		return this.amount / lottoPrice.amount;
 	}
+
+	private void validateZero(Amount lottoPrice) {
+		if (lottoPrice.amount == 0 || this.amount == 0) {
+			throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+		}
+	}
+
 }

@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class RankingResult {
-	private Map<LottoRank, Long> ranking;
+	private final Map<LottoRank, Long> ranking;
 
 	public RankingResult() {
 		ranking = new LinkedHashMap<>();

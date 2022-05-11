@@ -34,6 +34,6 @@ public class WinningNumberTest {
 		WinningNumber winningNumber = new WinningNumber(winningNumberInput);
 		Lotto lotto = new Lotto(lottoInput);
 
-		assertThat(winningNumber.match(lotto)).isEqualTo(quantity);
+		assertThat(winningNumber.matchQuantity(lotto)).isEqualTo(quantity);
 	}
 }
