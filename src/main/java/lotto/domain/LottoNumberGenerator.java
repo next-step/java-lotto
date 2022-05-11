@@ -8,25 +8,26 @@ import java.util.stream.Collectors;
 public class LottoNumberGenerator {
     public static final int START_NUMBER = 1;
     public static final int END_NUMBER = 45;
-    private static List<Integer> lottoNumbers = new ArrayList<>();
 
     public static List<Integer> createLottoNumber() {
-        List<Integer> numbers = new ArrayList<>();
+        List<Integer> lottoNumber = new ArrayList<>();
 
         for (int i = START_NUMBER; i <= END_NUMBER; i++) {
-            numbers.add(i);
+            lottoNumber.add(i);
         }
-        Collections.shuffle(numbers);
+        Collections.shuffle(lottoNumber);
 
-        return lottoNumbers = numbers.stream()
+        return lottoNumber.stream()
                 .limit(6)
                 .collect(Collectors.toList());
     }
 
     public static List<Integer> createLottoNumber(List<Integer> numbers) {
+        List<Integer> lottoNumber = new ArrayList<>();
+
         numbers.stream()
-                .forEach(number -> lottoNumbers.add(number));
-        Collections.sort(lottoNumbers);
-        return lottoNumbers;
+                .forEach(number -> lottoNumber.add(number));
+        Collections.sort(lottoNumber);
+        return lottoNumber;
     }
 }
