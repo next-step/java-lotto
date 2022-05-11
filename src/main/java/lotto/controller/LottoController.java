@@ -17,23 +17,15 @@ public class LottoController {
     }
 
     public void run() {
-        OutputTable.inputPurchaseAmount();
         long haveMoney = InputTable.inputHaveMoney();
-        OutputTable.boughtManualLottoCountMessage();
         int manalLottoCount = InputTable.inputManualCount();
-
-        OutputTable.boughtManualLottoMessage();
         Store store = new Store(manalLottoCount);
         Lottos manualLottos = store.manualLottos(InputTable.inputManualLotto(manalLottoCount));
         Lottos autoLottos = boughtAutoLotto(new Guest(haveMoney), store);
         Lottos boughtAllLottos = Lottos.plus(manualLottos, autoLottos);
         OutputTable.buyThings(manalLottoCount, autoLottos.getLottos().size());
         OutputTable.printProductInfos(autoLottos.getLottos());
-
-        OutputTable.lastWeekAwardNumber();
         Lotto winnerLotto = insertWinnerNumber(InputTable.inputAwardNumber());
-
-        OutputTable.getBonus();
         int bonus = insertBonusNumber(InputTable.inputBonusNumber());
         holdingLotteryTickets(boughtAllLottos.getLottos(), winnerLotto, bonus);
         OutputTable.resultStatisticsMessage();
