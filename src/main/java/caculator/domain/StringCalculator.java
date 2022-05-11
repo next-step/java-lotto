@@ -15,6 +15,8 @@ public class StringCalculator {
     public static final int FIRST_SIGN = 1;
     public static final int SECOND_NUMBER = 2;
     public static final int NEXT_NUMBER = 1;
+    public static final int SECOND_FORMULA_INDEX = 3;
+    public static final int NEXT_FORMULA_INDEX = 2;
 
 
     public int calculate(int numberOne, String sign, int numberTwo) {
@@ -22,19 +24,19 @@ public class StringCalculator {
             throw new IllegalArgumentException("제대로된 사칙연산기호를 입력해 주세요. 입력 값: " + sign);
         }
 
-        if (sign.equals("+")) {
-            return numberOne + numberTwo;
+        if (Operator.PLUS.getOperator().equals(sign)) {
+            return Operator.PLUS.calculate(numberOne, numberTwo);
         }
-        if (sign.equals("-")) {
-            return numberOne - numberTwo;
+        if (Operator.MINUS.getOperator().equals(sign)) {
+            return Operator.MINUS.calculate(numberOne, numberTwo);
         }
-        if (sign.equals("*")) {
-            return numberOne * numberTwo;
+        if (Operator.MULTIPLY.getOperator().equals(sign)) {
+            return Operator.MULTIPLY.calculate(numberOne, numberTwo);
         }
-        if (sign.equals("/")) {
-            isDividedByZero(numberTwo);
-            return numberOne / numberTwo;
+        if (Operator.DIVIDE.getOperator().equals(sign)) {
+            return Operator.DIVIDE.calculate(numberOne, numberTwo);
         }
+
         return WRONG_RESULT;
     }
 
@@ -45,21 +47,20 @@ public class StringCalculator {
         if (inputString.isEmpty()) {
             throw new IllegalArgumentException("입력값이 공백이면 안됩니다.");
         }
+        List<String> inputStrings = Arrays.asList(inputString.split(" "));
 
-        List<String> inputStringList = Arrays.asList(inputString.split(" "));
-
-        if (!isNormalFormula(inputStringList.size())) {
+        if (!isNormalFormula(inputStrings.size())) {
             throw new IllegalArgumentException("제대로된 계산식을 입력하여 주세요.");
         }
 
-        int result = calculate(Integer.parseInt(inputStringList.get(FIRST_NUMBER)),
-                inputStringList.get(FIRST_SIGN),
-                Integer.parseInt(inputStringList.get(SECOND_NUMBER)));
+        int result = calculate(Integer.parseInt(inputStrings.get(FIRST_NUMBER)),
+                inputStrings.get(FIRST_SIGN),
+                Integer.parseInt(inputStrings.get(SECOND_NUMBER)));
 
-        for (int i = 3; i < inputStringList.size() - 1; i += 2) {
+        for (int i = SECOND_FORMULA_INDEX; i < inputStrings.size() - 1; i += NEXT_FORMULA_INDEX) {
             result = calculate(result,
-                    inputStringList.get(i),
-                    Integer.parseInt(inputStringList.get(i + NEXT_NUMBER)));
+                    inputStrings.get(i),
+                    Integer.parseInt(inputStrings.get(i + NEXT_NUMBER)));
         }
         return result;
     }
