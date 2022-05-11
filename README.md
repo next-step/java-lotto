@@ -168,3 +168,4 @@ Earning rate: 2142.8571428571427
 - [x] bonusBall 여부 Reward 에 추가
   - [x] Reward 가 bonusBall 을 가진 경우 바로 BONUS return
 - [x] Remove Answer
+- [x] Add Reward.BONUS test case

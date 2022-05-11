@@ -15,4 +15,9 @@ public class RewardTest {
         Money expected = new Money(Integer.parseInt(price));
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    void bonusShouldReturnBONUSReward() {
+        assertThat(Reward.of(5, true)).isEqualTo(Reward.BONUS);
+    }
 }
