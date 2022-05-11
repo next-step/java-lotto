@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exceptions.DuplicateLottoNumberException;
+import lotto.exceptions.InvalidLottoCountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +21,7 @@ class LottoTicketTest {
         }
 
         assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(InvalidLottoCountException.class)
                 .hasMessage("로또 번호는 6자리여야 합니다.");
     }
 
@@ -33,7 +35,7 @@ class LottoTicketTest {
         lottoNumbers.add(new LottoNumber(1));
 
         assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(DuplicateLottoNumberException.class)
                 .hasMessage("로또 번호는 중복이 될 수 없습니다.");
     }
 

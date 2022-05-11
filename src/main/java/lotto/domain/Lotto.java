@@ -1,9 +1,9 @@
 package lotto.domain;
 
 public class Lotto {
-    private final LottoTicket winningLotto;
+    private final WinningLotto winningLotto;
 
-    public Lotto(LottoTicket winningLotto) {
+    public Lotto(WinningLotto winningLotto) {
         this.winningLotto = winningLotto;
     }
 

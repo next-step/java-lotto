@@ -1,12 +1,12 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTicketGroup;
+import lotto.domain.*;
 import lotto.pattern.LottoNumberGenerator;
 import lotto.utils.StringLottoNumber;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,7 +17,10 @@ public class Main {
         ResultView.printLottoTicketsCount(lottoTicketGroup);
         ResultView.printLottoTickets(lottoTicketGroup);
 
-        Lotto lotto = new Lotto(new LottoTicket(StringLottoNumber.toList(InputView.getWinnerTicket())));
+        List<LottoNumber> winningLottoNumbers = StringLottoNumber.toList(InputView.getWinnerTicket());
+        int bonusNumber = InputView.getBonusBall();
+
+        Lotto lotto = new Lotto(new WinningLotto(new LottoTicket(winningLottoNumbers), new LottoNumber(bonusNumber)));
 
         ResultView.printWinningStatistics(lotto.compareLotto(lottoTicketGroup), money);
     }

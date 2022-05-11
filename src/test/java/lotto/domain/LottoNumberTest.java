@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exceptions.LottoNumberRangeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -13,7 +14,7 @@ class LottoNumberTest {
     @DisplayName("로또번호는 1부터 45사이 숫자만 생성 가능합니다.")
     void validateNumberTest(int lottoNumber) {
         assertThatThrownBy(() -> new LottoNumber(lottoNumber))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(LottoNumberRangeException.class)
                 .hasMessage("로또번호는 1부터 45사이 숫자만 생성 가능합니다.");
     }
 }
