@@ -2,6 +2,7 @@ package lotto.model;
 
 public final class Money {
     private static final int ZERO = 0;
+    private static final Money BASE_MONEY_UNIT = new Money(1000);
 
     private final int money;
 

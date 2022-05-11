@@ -21,10 +21,6 @@ public class LottoMarket {
     }
 
     private static Lottos generateLottos(Money money, LottoGenerator lottoGenerator) {
-        if (!money.isDivided(BASE_MONEY_UNIT)) {
-            throw new IllegalArgumentException("로또 구매시 지불하는 금액 단위가 올바르지 않습니다. money: " + money);
-        }
-
         return new Lottos(money.calculateUnitCount(BASE_MONEY_UNIT), lottoGenerator);
     }
 }
