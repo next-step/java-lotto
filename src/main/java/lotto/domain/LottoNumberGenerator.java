@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoGenerator {
+public class LottoNumberGenerator {
     public static final int START_NUMBER = 1;
     public static final int END_NUMBER = 45;
     private List<Integer> lottoNumbers = new ArrayList<>();
