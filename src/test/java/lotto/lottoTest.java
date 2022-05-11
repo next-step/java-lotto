@@ -70,5 +70,14 @@ public class lottoTest {
         WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 7, 8, 9), 4);
         assertThat(winningNumbers.findRank(new Lotto(Arrays.asList(1, 2, 3, 0, 0, 0)))).isEqualTo(Rank.FIVE);
     }
+
+    @Test
+    void 수동로또_구매() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9));
+        Customer customer = new Customer(10000);
+        customer.buy(1000, lotto);
+
+        assertThat(customer.findLottos().contains(lotto)).isTrue();
+    }
 }
 

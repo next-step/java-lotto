@@ -21,11 +21,7 @@ public class InputView {
 
     public List<Integer> findWinningLottoNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String value = scanner.nextLine();
-
-        return Arrays.stream(value.split(", "))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        return toList();
     }
 
     public int getBonusNumber() {
@@ -34,5 +30,28 @@ public class InputView {
         scanner.nextLine();
 
         return bonus;
+    }
+
+    public int autoLottoPurchaseCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int lottoCount = scanner.nextInt();
+        scanner.nextLine();
+
+        return lottoCount;
+    }
+
+    public List<List<Integer>> getAutoNumbers(int lottoCount) {
+        List<List<Integer>> autoNumbers = new ArrayList<>();
+        for (int i = 0; i < lottoCount; i++) {
+            autoNumbers.add(toList());
+        }
+        return autoNumbers;
+    }
+
+    private List<Integer> toList() {
+        String value = scanner.nextLine();
+        return Arrays.stream(value.split(", "))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 }
