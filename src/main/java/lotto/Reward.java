@@ -19,17 +19,15 @@ public enum Reward {
         if (isBonus) {
             return BONUS;
         }
-        for (Reward reward : Reward.values()) {
-            if (reward.win == win) {
-                return reward;
-            }
-        }
-        return Blank;
+        return Arrays.stream(Reward.values())
+                .filter(reward -> reward.win == win)
+                .findFirst()
+                .orElse(Blank);
     }
 
     public static String toPayload(Map<Reward, Integer> matches) {
         StringBuilder payload = new StringBuilder("");
-        for (Reward reward: Arrays.stream(Reward.values()).filter(reward -> reward != Blank).collect(Collectors.toList())) {
+        for (Reward reward : Arrays.stream(Reward.values()).filter(reward -> reward != Blank).collect(Collectors.toList())) {
             String sentence = reward.money.toPayload();
             payload.append(reward.toString() + " matches (" + sentence + "): " + matches.get(reward) + "\n");
         }
