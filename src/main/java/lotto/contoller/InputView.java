@@ -42,6 +42,11 @@ public class InputView {
 
     public List<List<Integer>> getAutoNumbers(int lottoCount) {
         List<List<Integer>> autoNumbers = new ArrayList<>();
+
+        if (lottoCount > 0) {
+            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        }
+
         for (int i = 0; i < lottoCount; i++) {
             autoNumbers.add(toList());
         }
