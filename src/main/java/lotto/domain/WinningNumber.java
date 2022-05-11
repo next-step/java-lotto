@@ -28,7 +28,7 @@ public class WinningNumber {
 		}
 	}
 
-	public long match(Lotto lotto) {
+	public long matchQuantity(Lotto lotto) {
 		return this.numbers.stream()
 			.filter(lotto::contain)
 			.count();

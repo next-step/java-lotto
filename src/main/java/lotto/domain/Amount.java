@@ -30,6 +30,11 @@ public class Amount {
 		return (int)(amount ^ (amount >>> 32));
 	}
 
+	@Override
+	public String toString() {
+		return String.valueOf(amount);
+	}
+
 	public long divide(Amount lottoPrice) {
 		if (this.amount % lottoPrice.amount != 0) {
 			throw new IllegalArgumentException(this.amount + "원은 " + lottoPrice.amount + "원의 배수가 아닙니다.");

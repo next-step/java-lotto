@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.PurchaseLottoGroup;
+import lotto.domain.RankingResult;
 
 public class OutputView {
 
@@ -12,5 +13,11 @@ public class OutputView {
 
 	public static void printPurchaseQuantity(long quantity) {
 		System.out.println(quantity + "개를 구매했습니다.");
+	}
+
+	public static void printWinningStatistics(RankingResult rankingResult) {
+		System.out.println("당첨 통계");
+		System.out.println("---------");
+		System.out.println(rankingResult.toString());
 	}
 }

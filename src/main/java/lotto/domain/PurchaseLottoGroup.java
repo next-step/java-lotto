@@ -32,4 +32,10 @@ public class PurchaseLottoGroup {
 			.map(Lotto::toString)
 			.collect(Collectors.joining("\n"));
 	}
+
+	public List<LottoRank> ranking(WinningNumber winningNumber) {
+		return lottoList.stream()
+			.map(lotto -> LottoRank.findBySameQuantity(winningNumber.matchQuantity(lotto)))
+			.collect(Collectors.toList());
+	}
 }
