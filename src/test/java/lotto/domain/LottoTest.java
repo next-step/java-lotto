@@ -6,6 +6,8 @@ import java.util.Set;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class LottoTest {
 
@@ -48,5 +50,15 @@ public class LottoTest {
 			new LottoNumber(4),
 			new LottoNumber(5)
 		))).isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@DisplayName("로또숫자 포함 여부")
+	@CsvSource(value = {"1,2,3,4,5,6:3:true", "1,2,3,4,5,6:7:false"})
+	@ParameterizedTest
+	public void When_GivenLottoNumber_Expected_ContainOrNot(String lottoInput, int number, boolean expected) {
+		Lotto lotto = new Lotto(lottoInput);
+
+		assertThat(lotto.contain(new LottoNumber(number)))
+			.isEqualTo(expected);
 	}
 }

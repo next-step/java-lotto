@@ -1,6 +1,6 @@
 package lotto.util;
 
-import exception.StringParsingToIntegerException;
+import exception.StringParsingToNumberException;
 
 public class Parser {
 
@@ -8,7 +8,15 @@ public class Parser {
 		try {
 			return Integer.parseInt(value);
 		} catch (Exception e) {
-			throw new StringParsingToIntegerException("정수로 변환할 수 없는 값입니다.");
+			throw new StringParsingToNumberException("정수로 변환할 수 없는 값입니다. [value=" + value + "]");
+		}
+	}
+
+	public static long toLong(String value) {
+		try {
+			return Long.parseLong(value);
+		} catch (Exception e) {
+			throw new StringParsingToNumberException("정수로 변환할 수 없는 값입니다.");
 		}
 	}
 }
