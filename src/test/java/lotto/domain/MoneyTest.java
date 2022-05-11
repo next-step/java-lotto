@@ -8,7 +8,6 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import static org.junit.jupiter.api.Assertions.*;
 
 class MoneyTest {
-
     @Test
     @DisplayName("구매금액이 1000 단위가 아니면 예외가 발생한다")
     void moneyThousandsException() {
@@ -24,14 +23,9 @@ class MoneyTest {
     }
 
     @Test
-    void isPurchasable() {
-    }
-
-    @Test
-    void getMaxPurchasableQuantity() {
-    }
-
-    @Test
-    void getReturnRate() {
+    @DisplayName("구매금액 14000, 당첨금 5000 이면 수익률은 약 0.35이다")
+    void calculateReturnRate() {
+        Money money = new Money("14000", 14);
+        assertThat(money.calculateReturnRate(5000)).isBetween(0.35, 0.36);
     }
 }

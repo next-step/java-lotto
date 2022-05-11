@@ -41,6 +41,10 @@ public class UserLottos {
         return userLottos.size();
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.userLottos.contains(lottoNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -63,7 +67,4 @@ public class UserLottos {
         return lottoNumbers.toString();
     }
 
-    public boolean contains(LottoNumber bonusNumber) {
-        return this.userLottos.contains(bonusNumber);
-    }
 }

@@ -26,7 +26,7 @@ public class LottoGame {
     }
 
     public double getReturnRate(WinningLotto winningLottoNumber) {
-        return this.money.getReturnRate(userLottos.getWinningMoney(winningLottoNumber));
+        return this.money.calculateReturnRate(userLottos.getWinningMoney(winningLottoNumber));
     }
 
     public LottoResults getLottoGameResults(WinningLotto winningLottoNumber) {
