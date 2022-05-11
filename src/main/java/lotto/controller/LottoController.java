@@ -6,7 +6,6 @@ import lotto.view.InputTable;
 import lotto.view.OutputTable;
 
 import java.util.List;
-import java.util.Set;
 
 public class LottoController {
 

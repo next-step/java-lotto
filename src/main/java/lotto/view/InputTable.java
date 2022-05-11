@@ -11,7 +11,6 @@ public final class InputTable {
     private static final String BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String INSERT_MANUAL_LOTTO_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String INSERT_MANUAL_LOTTO_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
-
     private static final Scanner SCANNER = new Scanner(System.in);
 
     private InputTable() {
@@ -38,7 +37,7 @@ public final class InputTable {
     }
 
     public static List<Set<Integer>> inputManualLotto(int manalLottoCount) {
-        if(manalLottoCount == 0) {
+        if (manalLottoCount == 0) {
             return new ArrayList<>();
         }
         System.out.println(INSERT_MANUAL_LOTTO_MESSAGE);

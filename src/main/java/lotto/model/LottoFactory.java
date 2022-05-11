@@ -12,7 +12,6 @@ public final class LottoFactory {
 
     private static final int LOTTO_MAX_COUNT = 6;
     private static final int LOTTO_START_INDEX = 0;
-
     private static final List<Integer> INIT = init();
 
     private LottoFactory() {

@@ -1,7 +1,6 @@
 package lotto.model;
 
 import lotto.exception.LottoSizeException;
-import lotto.util.AwardNumberUtil;
 
 import java.util.List;
 import java.util.Objects;

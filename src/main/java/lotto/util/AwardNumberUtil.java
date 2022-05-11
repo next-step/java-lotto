@@ -1,7 +1,5 @@
 package lotto.util;
 
-import lotto.enums.Grade;
-import lotto.exception.BonusContainWinningResultException;
 import lotto.model.Lotto;
 
 import java.util.ArrayList;
@@ -12,11 +10,10 @@ import java.util.stream.Collectors;
 
 public final class AwardNumberUtil {
 
+    private static final String DELIMITER = ", ";
 
     private AwardNumberUtil() {
     }
-
-    private static final String DELIMITER = ", ";
 
     public static Set<Integer> getAwardNumberList(String numbers) {
         return Arrays.stream(split(numbers))
