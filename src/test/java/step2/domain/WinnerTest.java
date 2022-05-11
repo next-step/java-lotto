@@ -61,38 +61,32 @@ class WinnerTest {
         );
     }
 
-    @ParameterizedTest(name = "{displayName} -> [{index}] : {arguments}")
+    @ParameterizedTest(name = "{displayName} -> [{index}] : {0} -> {1}")
     @CsvSource(
             delimiter = ':',
             value = {
-                    "1:true",
-                    "7:false",
-                    "45:false"
+                    "1,2,3,4,5,6,7:FIRST",
+                    "1,2,3,4,5,6,17:FIRST",
+                    "1,2,3,4,5,16,7:SECOND",
+                    "1,2,3,4,5,16,17:THIRD",
+                    "1,2,3,4,15,16,7:FOURTH",
+                    "1,2,3,4,15,16,17:FOURTH",
+                    "1,2,3,14,15,16,7:FIFTH",
+                    "1,2,3,14,15,16,17:FIFTH",
+                    "1,2,13,14,15,16,7:ETC",
+                    "1,2,13,14,15,16,17:ETC",
+                    "1,12,13,14,15,16,7:ETC",
+                    "1,12,13,14,15,16,17:ETC",
+                    "11,12,13,14,15,16,7:ETC",
+                    "11,12,13,14,15,16,17:ETC"
             }
     )
-    void 주어진_로또_번호가_지난_당첨_번호에_포함되는지_반환(String input, boolean expect) {
+    void 주어진_로또_번호의_등수를_반환(String input, LottoRank expect) {
         WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", "7");
-        LottoNumber lottoNumber = LottoNumber.from(input);
+        Lotto lotto = new Lotto(input);
 
-        boolean result = winningLotto.isContain(lottoNumber);
+        LottoRank rank = winningLotto.calculateRank(lotto);
 
-        assertThat(result).isEqualTo(expect);
-    }
-
-    @ParameterizedTest(name = "{displayName} -> [{index}] : {arguments}")
-    @CsvSource(
-            delimiter = ':',
-            value = {
-                    "7:true",
-                    "45:false"
-            }
-    )
-    void 주어진_로또_번호가_보너스번호인지_반환(String input, boolean expect) {
-        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", "7");
-        LottoNumber bonusNumber = LottoNumber.from(input);
-
-        boolean result = winningLotto.isBonusNumber(bonusNumber);
-
-        assertThat(result).isEqualTo(expect);
+        assertThat(rank).isEqualTo(expect);
     }
 }

@@ -30,36 +30,16 @@ class LottoTest {
     @ParameterizedTest
     @CsvSource(
             value = {
-                    "1, 2, 3, 4, 5, 6:6",
-                    "11, 2, 3, 4, 5, 6:5",
-                    "11, 12, 3, 4, 5, 6:4",
-                    "11, 12, 13, 4, 5, 6:3",
-                    "11, 12, 13, 14, 5, 6:2",
-                    "11, 12, 13, 14, 15, 6:1"
-            },
-            delimiter = ':'
-    )
-    void 현재_로또와_지난회차_당첨_번호를_비교하여_맞춘_개수를_반환(String input, int hitCount) {
-        WinningLotto winningLotto = new WinningLotto(input, "7");
-
-        Lotto lotto = new Lotto(DEFAULT_STRATEGY);
-
-        assertThat(lotto.calculateHitCount(winningLotto)).isEqualTo(hitCount);
-    }
-
-    @ParameterizedTest
-    @CsvSource(
-            value = {
                     "1:true",
                     "11:false"
             },
             delimiter = ':'
     )
-    void 현재_로또가_보너스_번호를_포함하는지_반환(String bonus, boolean expect) {
+    void 현재_로또가_주어진_번호를_포함하는지_반환(String number, boolean expect) {
         Lotto lotto = new Lotto(DEFAULT_STRATEGY);
-        WinningLotto winningLotto = new WinningLotto("40, 41, 42, 43, 44, 45", bonus);
+        LottoNumber operand = LottoNumber.from(number);
 
-        boolean result = lotto.containBonusNumber(winningLotto);
+        boolean result = lotto.contain(operand);
 
         assertThat(result).isEqualTo(expect);
     }
