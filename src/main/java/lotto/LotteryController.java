@@ -8,7 +8,8 @@ public class LotteryController {
     public Wallet wallet;
     public final WinStatistics winStatistics = new WinStatistics();
 
-    LotteryController() {}
+    LotteryController() {
+    }
 
     public void scanMoney() {
         String scanned = InputView.scan("Put your money.");
@@ -52,9 +53,17 @@ public class LotteryController {
         return number;
     }
 
-    public void findWins(Lottery answer) {
+    public List<Integer> findWins(Lottery answer) {
+        List<Integer> wins = new ArrayList();
         for (Lottery lottery : this.wallet.lotteries) {
             int win = lottery.findWin(answer);
+            wins.add(win);
+        }
+        return wins;
+    }
+
+    public void saveWins(List<Integer> wins) {
+        for (int win : wins) {
             saveWin(win);
         }
     }
