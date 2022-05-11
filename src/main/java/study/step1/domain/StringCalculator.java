@@ -33,11 +33,14 @@ public class StringCalculator {
         MULT("*", (n1, n2) -> n1 * n2),
         DIVIDE("/", (n1, n2) -> n1 / n2);
 
+        private static final String REGULAR_EXPRESSION = "^[+\\-*/\\d]*$";
+        private static final String EXCEPTION_MESSAGE = "올바른 수식을 입력해주세요.";
         private static final Map<String, String> OPERATOR_MAP =
                 Collections.unmodifiableMap(Stream.of(values()).collect(Collectors.toMap(Operator::getOperator, Operator::name)));
 
         private final String operator;
         private final ToIntBiFunction<Integer, Integer> expression;
+
 
         Operator(String operator, ToIntBiFunction<Integer, Integer> expression) {
             this.operator = operator;
@@ -53,7 +56,14 @@ public class StringCalculator {
         }
 
         public static Operator of(final String operator) {
+            isOperator(operator);
             return Operator.valueOf(OPERATOR_MAP.get(operator));
+        }
+
+        private static void isOperator(String operator) {
+            if (!operator.matches(REGULAR_EXPRESSION)) {
+                throw new IllegalArgumentException(EXCEPTION_MESSAGE);
+            }
         }
     }
 }
