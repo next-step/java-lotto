@@ -28,9 +28,12 @@ public class Lotto {
     }
 
     public void confirm(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
-        int matchCount = lottoNumbers.matchCount(winningNumbers);
-        boolean matchBonus = lottoNumbers.isContain(bonusNumber);
-        rank = Rank.valueOf(matchCount, matchBonus);
+        rank = Rank.valueOf(lottoNumbers.matchCount(winningNumbers),
+                lottoNumbers.isContain(bonusNumber));
+    }
+
+    public boolean isSameRank(Rank rank) {
+        return this.rank == rank;
     }
 
     public Rank findMatchResult() {

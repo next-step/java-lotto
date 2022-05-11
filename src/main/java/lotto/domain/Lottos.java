@@ -28,8 +28,7 @@ public class Lottos {
 
     public int countMatchResult(Rank rank) {
         return (int) lottos.stream()
-                .map(Lotto::findMatchResult)
-                .filter(mr -> mr == rank)
+                .filter(lotto -> lotto.isSameRank(rank))
                 .count();
     }
 
