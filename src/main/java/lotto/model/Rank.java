@@ -1,14 +1,15 @@
 package lotto.model;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum Rank {
-    FIRST(6, 2000000000),
-    SECOND(5, 30000000),
-    THIRD(5, 1500000),
-    FORTH(4, 50000),
+    MISS(0, 0),
     FIFTH(3, 5000),
-    MISS(0, 0);
+    FORTH(4, 50000),
+    THIRD(5, 1500000),
+    SECOND(5, 30000000),
+    FIRST(6, 2000000000);
 
     private final Number correctCount;
     private final Number prizeMoney;
@@ -32,5 +33,18 @@ public enum Rank {
                 .filter(rank -> rank.correctCount.equals(correctCount))
                 .findFirst()
                 .orElse(MISS);
+    }
+
+    public Rank checkBonus(Number bonusNumber, Lotto lotto) {
+        if (!this.equals(THIRD)) {
+            return this;
+        }
+
+        Number correctBonus = lotto.match(List.of(bonusNumber));
+        if (correctBonus.equals(Number.of(1L))) {
+            return SECOND;
+        }
+
+        return this;
     }
 }

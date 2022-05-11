@@ -18,12 +18,16 @@ public class NumberTest {
     @Test
     @DisplayName("Number 생성 - Value 주입")
     void injectValue() {
-        assertAll(() -> assertThat(Number.of(1).longValue()).isEqualTo(1),
-                () -> assertThat(Number.of(1).doubleValue()).isEqualTo(1.0),
-                () -> assertThat(Number.of(1.0).longValue()).isEqualTo(1),
-                () -> assertThat(Number.of(1.0).doubleValue()).isEqualTo(1.0),
-                () -> assertThat(Number.of("1").longValue()).isEqualTo(1),
-                () -> assertThat(Number.of("1").doubleValue()).isEqualTo(1.0));
+        long longOne = 1L;
+        double doubleOne = 1.0;
+        String stringOne = "1";
+
+        assertAll(() -> assertThat(Number.of(longOne).longValue()).isEqualTo(longOne),
+                () -> assertThat(Number.of(longOne).doubleValue()).isEqualTo(doubleOne),
+                () -> assertThat(Number.of(doubleOne).longValue()).isEqualTo(longOne),
+                () -> assertThat(Number.of(doubleOne).doubleValue()).isEqualTo(doubleOne),
+                () -> assertThat(Number.of(stringOne).longValue()).isEqualTo(longOne),
+                () -> assertThat(Number.of(stringOne).doubleValue()).isEqualTo(doubleOne));
     }
 
     @Test

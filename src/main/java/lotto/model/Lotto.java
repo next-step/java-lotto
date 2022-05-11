@@ -10,6 +10,8 @@ public class Lotto {
 
     private static final int START_NUMBER = 1;
     private static final int END_NUMBER = 46;
+    private static final int START_INDEX = 0;
+    private static final int END_INDEX = 6;
     private List<Number> lotto;
 
     private Lotto() {
@@ -24,8 +26,9 @@ public class Lotto {
         Collections.shuffle(numbers);
 
         this.lotto = numbers
-                .subList(0, 6)
+                .subList(START_INDEX, END_INDEX)
                 .stream()
+                .sorted()
                 .map(Number::of)
                 .collect(Collectors.toList());
 
@@ -52,16 +55,25 @@ public class Lotto {
         return new Lotto(lotto);
     }
 
-    public static Number match(Lotto criteria, Lotto target) {
-        long correctCount = criteria.lotto
+    public Number match(List<Number> target) {
+        long correctCount = this.lotto
                 .stream()
-                .filter(number -> target.lotto.contains(number))
+                .filter(target::contains)
                 .count();
 
         return Number.of(correctCount);
     }
 
+    public static Rank getRank(Lotto criteria, Lotto target) {
+        return Rank.valueOf(criteria.match(target.lotto));
+    }
+
     public List<Number> getLotto() {
         return this.lotto;
+    }
+
+    @Override
+    public String toString() {
+        return this.lotto.toString();
     }
 }
