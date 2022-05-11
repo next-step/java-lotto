@@ -26,8 +26,8 @@ public class LottoMatchResults{
         matchResults.get(matchNumber - 1).addMatchCount();
     }
 
-    int getLottoReward() {
-        int totalReward = 0;
+    long getLottoReward() {
+        long totalReward = 0;
         for (MatchResult matchResult : matchResults) {
             totalReward += matchResult.getTotalReward();
         }

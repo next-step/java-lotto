@@ -24,7 +24,7 @@ public class LottoGameResult {
         lottoMatchResults.addMatchNumber(matchNumber);
     }
 
-    int getTotalReward() {
+    long getTotalReward() {
         return lottoMatchResults.getLottoReward();
     }
 
