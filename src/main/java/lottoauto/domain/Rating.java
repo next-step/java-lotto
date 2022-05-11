@@ -13,7 +13,7 @@ public enum Rating {
     SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
-    private final static Map<Integer, Rating> ratingCache = new HashMap<>();
+    private static final Map<Integer, Rating> ratingCache = new HashMap<>();
 
     static {
         Arrays.stream(values()).forEach(rating -> ratingCache.put(rating.countOfMatch, rating));

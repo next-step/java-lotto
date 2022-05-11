@@ -20,7 +20,10 @@ public class LottoTest {
 
     @Test
     void 생성_정상() {
-        assertThat(Lotto.from(new String[]{"1", "2", "3", "4", "5", "6"}).equals(Lotto.from("1, 2, 3, 4, 5, 6"))).isTrue();
+        Lotto lottoArray = Lotto.from(new String[]{"1", "2", "3", "4", "5", "6"});
+        Lotto lottoString = Lotto.from("1, 2, 3, 4, 5, 6");
+
+        assertThat(lottoArray.equals(lottoString)).isTrue();
     }
 
     @Test
@@ -36,7 +39,7 @@ public class LottoTest {
         String[] numbers = new String[]{"1", "2", "3", "5", "5", "5"};
         assertThatIllegalArgumentException().isThrownBy(() -> {
             Lotto.from(numbers);
-        }).withMessageContaining("중복된 번호가 존재합니다.");
+        }).withMessageContaining("로또 번호를 입력해야 합니다.");
     }
 
     @ParameterizedTest
