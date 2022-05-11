@@ -48,7 +48,7 @@ public final class Lottos {
                 .collect(Collectors.collectingAndThen(Collectors.toList(), LottoResult::new));
     }
 
-    private static void validate(WinnerLotto winnerLotto) {
+    private void validate(WinnerLotto winnerLotto) {
         Objects.requireNonNull(winnerLotto, "당첨 로또 번호 입력이 올바르지 않습니다. winnerLotto is null");
     }
 }
