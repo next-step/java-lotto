@@ -9,13 +9,13 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     private static final int COUNT = 6;
-    private static final String DELIMITER = ",";
+    private static final String DELIMITER = ", ";
 
     private final Set<LottoNumber> values;
 
-    public Lotto(PurchaseStrategy purchaseStrategy) {
-        validateNull(purchaseStrategy);
-        Set<String> numbers = purchaseStrategy.getNumbers(COUNT);
+    public Lotto(NumberProvider numberProvider) {
+        validateNull(numberProvider);
+        Set<String> numbers = numberProvider.getNumbers(COUNT);
         validateSize(numbers);
         this.values = numbers.stream()
                 .map(LottoNumber::from)

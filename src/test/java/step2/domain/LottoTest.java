@@ -17,8 +17,8 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 @DisplayName(value = "로또 테스트")
 class LottoTest {
 
-    private static final PurchaseStrategy DEFAULT_STRATEGY = (count) -> new HashSet<>(List.of("1", "2", "3", "4", "5", "6"));
-    private static final PurchaseStrategy MALFORMED_STRATEGY = (count) -> new HashSet<>();
+    private static final NumberProvider DEFAULT_STRATEGY = (count) -> new HashSet<>(List.of("1", "2", "3", "4", "5", "6"));
+    private static final NumberProvider MALFORMED_STRATEGY = (count) -> new HashSet<>();
 
     @Test
     void 구매전략이_반환하는_SET의_사이즈가_6개_아닌_경우_예외() {

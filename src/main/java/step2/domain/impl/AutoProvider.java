@@ -1,10 +1,10 @@
 package step2.domain.impl;
 
-import step2.domain.PurchaseStrategy;
+import step2.domain.NumberProvider;
 
 import java.util.*;
 
-public class AutoPurchase implements PurchaseStrategy {
+public class AutoProvider implements NumberProvider {
 
     private static final List<String> baseNumber = initBaseNumber();
     private static final int START = 1;
