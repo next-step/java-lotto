@@ -5,7 +5,6 @@ import java.util.Objects;
 
 public class Lotto {
     private Numbers numbers;
-    private int price;
 
     public Lotto() {
         this.numbers = new Numbers();
@@ -17,6 +16,14 @@ public class Lotto {
 
     public int matchCount(List<Integer> winningNumbers) {
         return numbers.matchCount(winningNumbers);
+    }
+
+    public boolean hasBonusNumber(int bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers.getList();
     }
 
     @Override

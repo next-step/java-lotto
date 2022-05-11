@@ -3,17 +3,14 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
 
+    public Lottos() { }
+
     public Lottos(Lotto lotto) {
         lottos.add(lotto);
-    }
-
-    public Lottos() {
-
     }
 
     public void createLotto() {
@@ -21,14 +18,13 @@ public class Lottos {
         lottos.add(lotto);
     }
 
-    public void printLottoList() {
-        lottos.stream()
-                .forEach(System.out::println);
+    public List<Lotto> findLottos() {
+        return lottos;
     }
 
-    public List<Rank> getWinningList(List<Integer> winningNumbers) {
+    public List<Rank> getWinningList(WinningNumbers winningNumbers) {
         return lottos.stream()
-                .map(lotto -> Rank.of(lotto.matchCount(winningNumbers)))
+                .map(lotto -> winningNumbers.findRank(lotto))
                 .collect(Collectors.toList());
     }
 }

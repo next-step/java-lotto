@@ -14,7 +14,7 @@ public class Customer {
     }
 
     public Customer(int money, Lotto lotto) {
-        this.totalAmount = 14000;
+        this.totalAmount = money;
         this.money = 0;
         this.lottos = new Lottos(lotto);
     }
@@ -30,11 +30,11 @@ public class Customer {
         return this.money > 0;
     }
 
-    public void printLottoList() {
-        lottos.printLottoList();
+    public List<Lotto> findLottos() {
+        return lottos.findLottos();
     }
 
-    public List<Rank> getWinningList(List<Integer> winningNumbers) {
+    public List<Rank> getWinningList(WinningNumbers winningNumbers) {
         return lottos.getWinningList(winningNumbers);
     }
 
