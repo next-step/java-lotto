@@ -29,7 +29,6 @@ public class LottoController {
         Lotto winnerLotto = insertWinnerNumber(InputTable.inputAwardNumber());
         int bonus = insertBonusNumber(InputTable.inputBonusNumber());
         holdingLotteryTickets(boughtAllLottos.getLottos(), winnerLotto, bonus);
-        OutputTable.resultStatisticsMessage();
         OutputTable.resultStatistics(LotteryResults.getLotteryResult());
         OutputTable.printYield(yieldCalculate(haveMoney), 1);
     }

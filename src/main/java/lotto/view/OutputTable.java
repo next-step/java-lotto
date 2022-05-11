@@ -28,12 +28,9 @@ public final class OutputTable {
         }
     }
 
-    public static void resultStatisticsMessage() {
+    public static void resultStatistics(List<LotteryResult> lotteryResults) {
         System.out.println(STATISTICS_MESSAGE);
         System.out.println(UNDER_BAR);
-    }
-
-    public static void resultStatistics(List<LotteryResult> lotteryResults) {
         for (LotteryResult lotteryResult : lotteryResults) {
             System.out.println(lotteryResult);
         }
