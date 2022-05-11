@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -39,10 +38,6 @@ public enum Reward {
 
     public Money getMoney() {
         return this.money;
-    }
-
-    public int getWin() {
-        return win;
     }
 };
 
