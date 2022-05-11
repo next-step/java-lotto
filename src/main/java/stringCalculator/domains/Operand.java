@@ -6,4 +6,8 @@ public class Operand {
     public Operand(String number) {
         this.number = Integer.parseInt(number);
     }
+
+    public int getInt() {
+        return this.number;
+    }
 }
