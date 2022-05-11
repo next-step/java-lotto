@@ -24,9 +24,7 @@ public class LottoNumberGenerator {
 
     public static List<Integer> createLottoNumber(List<Integer> numbers) {
         List<Integer> lottoNumber = new ArrayList<>();
-
-        numbers.stream()
-                .forEach(number -> lottoNumber.add(number));
+        lottoNumber.addAll(numbers);
         Collections.sort(lottoNumber);
         return lottoNumber;
     }
