@@ -13,7 +13,7 @@ public final class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(int count, LottoGenerator lottoGenerator) {
+    public Lottos(long count, LottoGenerator lottoGenerator) {
         this(Stream.generate(lottoGenerator::get)
                 .limit(count)
                 .collect(Collectors.toList()));

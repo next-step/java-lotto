@@ -6,16 +6,16 @@ public class CountInfo {
     private static final int ZERO = 0;
     private static final Money BASE_MONEY_UNIT = new Money(1000);
 
-    private final int randomCount;
-    private final int manualCount;
+    private final long randomCount;
+    private final long manualCount;
 
-    public CountInfo(Money buyingMoney, int manualCount) {
+    public CountInfo(Money buyingMoney, long manualCount) {
         validate(buyingMoney, manualCount);
         this.randomCount = buyingMoney.calculateUnitCount(BASE_MONEY_UNIT) - manualCount;
         this.manualCount = manualCount;
     }
 
-    private void validate(Money money, int manualCount) {
+    private void validate(Money money, long manualCount) {
         Objects.requireNonNull(money, "구매 금액은 null일 수 없습니다.");
 
         if (!money.isDivided(BASE_MONEY_UNIT)) {
@@ -29,16 +29,16 @@ public class CountInfo {
         }
     }
 
-    private boolean isNegative(int manualCount) {
+    private boolean isNegative(long manualCount) {
         if (manualCount < ZERO) return true;
         return false;
     }
 
-    public int getRandomCount() {
+    public long getRandomCount() {
         return randomCount;
     }
 
-    public int getManualCount() {
+    public long getManualCount() {
         return manualCount;
     }
 }

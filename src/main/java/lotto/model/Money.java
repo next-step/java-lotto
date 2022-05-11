@@ -1,23 +1,23 @@
 package lotto.model;
 
 public final class Money {
-    private static final int ZERO = 0;
+    private static final long ZERO = 0;
     private static final Money BASE_MONEY_UNIT = new Money(1000);
 
-    private final int money;
+    private final long money;
 
-    public Money(int money) {
+    public Money(long money) {
         validate(money);
         this.money = money;
     }
 
-    private void validate(int money) {
+    private void validate(long money) {
         if (isNegative(money)) {
             throw new IllegalArgumentException("돈은 음수일 수 없습니다. money: " + money);
         }
     }
 
-    private boolean isNegative(int money) {
+    private boolean isNegative(long money) {
         return money < ZERO;
     }
 
@@ -30,7 +30,7 @@ public final class Money {
         return this.money / (double) denominator.money;
     }
 
-    public int calculateUnitCount(Money unit) {
+    public long calculateUnitCount(Money unit) {
         return this.money / unit.money;
     }
 
@@ -51,7 +51,7 @@ public final class Money {
 
     @Override
     public int hashCode() {
-        return Integer.valueOf(money).hashCode();
+        return Long.valueOf(money).hashCode();
     }
 
     @Override
