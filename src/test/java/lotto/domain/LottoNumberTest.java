@@ -32,6 +32,17 @@ class LottoNumberTest {
                         .isThrownBy(() -> new LottoNumber(notNumberString));
             }
         }
+
+        @Nested
+        class 유효하지_않은_범위의_숫자가_주어질경우 {
+
+            @ParameterizedTest
+            @ValueSource(ints = {0, 46})
+            void IllegalArgumentException을_던진다(int invalidNumber) {
+                assertThatIllegalArgumentException()
+                        .isThrownBy(() -> new LottoNumber(invalidNumber));
+            }
+        }
     }
 
     @Nested

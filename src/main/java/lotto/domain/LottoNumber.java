@@ -1,18 +1,12 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoNumber {
+    public static final int START_LOTTO_NUMBER = 1;
+    public static final int END_LOTTO_NUMBER = 45;
     private static final String NOT_NUMBER_STRING_NOT_ALLOW_MESSAGE = "숫자가 아닌 문자열은 허용되지 않습니다.";
-    private static final int START_LOTTO_NUMBER = 1;
-    private static final int END_LOTTO_NUMBER = 45;
-    private static final List<Integer> LOTTO_NUMBERS = IntStream.rangeClosed(START_LOTTO_NUMBER, END_LOTTO_NUMBER)
-            .boxed()
-            .collect(Collectors.toList());
+    private static final String INVALID_NUMBER_MESSAGE = "유효하지 않은 숫자입니다.";
 
     private final int lottoNumber;
 
@@ -20,17 +14,9 @@ public class LottoNumber {
         this(toInt(string));
     }
 
-    protected LottoNumber(int lottoNumber) {
+    LottoNumber(int lottoNumber) {
+        checkInvalid(lottoNumber);
         this.lottoNumber = lottoNumber;
-    }
-
-    public static LottoNumber ofRandom() {
-        Collections.shuffle(LOTTO_NUMBERS);
-
-        return new LottoNumber(LOTTO_NUMBERS.stream()
-                .limit(1)
-                .collect(Collectors.toList())
-                .get(0));
     }
 
     private static int toInt(String string) {
@@ -43,6 +29,12 @@ public class LottoNumber {
 
     public int getLottoNumber() {
         return this.lottoNumber;
+    }
+
+    private void checkInvalid(int lottoNumber) {
+        if (lottoNumber < START_LOTTO_NUMBER || lottoNumber > END_LOTTO_NUMBER) {
+            throw new IllegalArgumentException(INVALID_NUMBER_MESSAGE);
+        }
     }
 
     @Override

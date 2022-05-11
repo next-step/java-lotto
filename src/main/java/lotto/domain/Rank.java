@@ -18,8 +18,13 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
-    protected static Rank valueOf(int matchOfCount) {
-        return Rank.valueOf(matchOfCount, false);
+    static Rank valueOf(Rank rank, boolean matchBonus) {
+        return valueOf(rank.countOfMatch, matchBonus);
+    }
+
+    public static Rank valueOf(WinningLotto winningLotto, LottoNumbers lottoNumbers) {
+        int matchNumberCount = lottoNumbers.getMatchNumberCount(winningLotto.getWinningLottoNumbers());
+        return valueOf(matchNumberCount, winningLotto.containsBonus(lottoNumbers));
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {

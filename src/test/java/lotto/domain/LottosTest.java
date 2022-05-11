@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.offset;
@@ -16,22 +15,8 @@ class LottosTest {
     @BeforeEach
     void setUp() {
         this.lottos = new Lottos(Arrays.asList(
-                new LottoNumbers(Arrays.asList(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(5),
-                        new LottoNumber(6)
-                )),
-                new LottoNumbers(Arrays.asList(
-                        new LottoNumber(7),
-                        new LottoNumber(8),
-                        new LottoNumber(9),
-                        new LottoNumber(10),
-                        new LottoNumber(11),
-                        new LottoNumber(12)
-                ))
+                LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                LottoNumbers.of(Arrays.asList(7, 8, 9, 10, 11, 12))
         ));
     }
 
@@ -41,19 +26,6 @@ class LottosTest {
         @Test
         void 길이를_리턴한다() {
             assertThat(lottos.length()).isEqualTo(2);
-        }
-    }
-
-    @Nested
-    class getMatchNumberCounts_메서드는 {
-
-        @Test
-        void 일치하는_번호_개수를_리턴한다() {
-            LottoNumbers lottoNumbers = new LottoNumbers("4, 5, 6, 7, 8, 9");
-
-            List<Integer> actual = lottos.getMatchNumberCounts(lottoNumbers);
-
-            assertThat(actual).containsExactly(3, 3);
         }
     }
 

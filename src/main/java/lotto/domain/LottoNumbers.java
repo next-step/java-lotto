@@ -1,32 +1,69 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
+    public static final int LOTTO_SIZE = 6;
+    private static final String NULL_NOT_ALLOW_MESSAGE = "null은 허용되지 않습니다.";
+    private static final String LOTTO_SIZE_NOT_MATCH_MESSAGE = "로또 번호 개수가 일치하지 않습니다.";
     private static final String LOTTO_NUMBERS_STRING_DELIMITER = ", ";
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers(String lottoNumbersString) {
-        this(toLottoNumbers(lottoNumbersString));
+        this(wrap(lottoNumbersString));
     }
 
-    protected LottoNumbers(List<LottoNumber> lottoNumbers) {
+    LottoNumbers(List<LottoNumber> lottoNumbers) {
+        this(toSet(lottoNumbers));
+    }
+
+    LottoNumbers(Set<LottoNumber> lottoNumbers) {
+        checkSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
     public static LottoNumbers ofRandom() {
-        List<LottoNumber> randomLottoNumbers = RandomLottoNumbersGenerator.generate();
-        return new LottoNumbers(randomLottoNumbers);
+        return new LottoNumbers(RandomLottoNumbersGenerator.generate());
     }
 
-    private static List<LottoNumber> toLottoNumbers(String lottoNumbersString) {
+    static LottoNumbers of(List<Integer> numbers) {
+        return new LottoNumbers(wrap(numbers));
+    }
+
+    private static Set<LottoNumber> toSet(List<LottoNumber> lottoNumbers) {
+        return new HashSet<>(lottoNumbers);
+    }
+
+    private static List<LottoNumber> wrap(String lottoNumbersString) {
+        checkNull(lottoNumbersString);
+
         return Arrays.stream(lottoNumbersString.split(LOTTO_NUMBERS_STRING_DELIMITER))
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
+    }
+
+    private static void checkNull(String lottoNumbersString) {
+        if (lottoNumbersString == null) {
+            throw new IllegalArgumentException(NULL_NOT_ALLOW_MESSAGE);
+        }
+    }
+
+    private static List<LottoNumber> wrap(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
+
+    private void checkSize(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(LOTTO_SIZE_NOT_MATCH_MESSAGE);
+        }
     }
 
     public boolean contains(LottoNumber lottoNumber) {

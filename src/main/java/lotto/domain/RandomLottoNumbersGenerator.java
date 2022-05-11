@@ -7,12 +7,10 @@ import java.util.List;
 import java.util.Set;
 
 public class RandomLottoNumbersGenerator {
-    private static final int LOTTO_NUMBERS_SIZE = 6;
-
     public static List<LottoNumber> generate() {
         Set<LottoNumber> randomLottoNumbers = new HashSet<>();
-        while (randomLottoNumbers.size() < LOTTO_NUMBERS_SIZE) {
-            LottoNumber randomLottoNumber = LottoNumber.ofRandom();
+        while (randomLottoNumbers.size() < LottoNumbers.LOTTO_SIZE) {
+            LottoNumber randomLottoNumber = LottoPot.getOneRandomLottoNumber();
             randomLottoNumbers.add(randomLottoNumber);
         }
 

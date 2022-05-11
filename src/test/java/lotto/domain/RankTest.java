@@ -48,9 +48,23 @@ class RankTest {
             @ParameterizedTest
             @ValueSource(ints = {0, 1, 2})
             void _MISS를_리턴한다(int matchOfCount) {
-                final Rank rank = Rank.valueOf(matchOfCount);
+                assertThat(Rank.valueOf(matchOfCount, true)).isEqualTo(Rank.MISS);
+                assertThat(Rank.valueOf(matchOfCount, false)).isEqualTo(Rank.MISS);
+            }
+        }
 
-                assertThat(rank).isEqualTo(Rank.MISS);
+        @Nested
+        class _5개가_아닌_숫자가_주어질경우 {
+
+            @ParameterizedTest
+            @EnumSource(
+                    value = Rank.class,
+                    names = {"SECOND", "THIRD"},
+                    mode = EnumSource.Mode.EXCLUDE
+            )
+            void 본인의_rank를_리턴한다(Rank rank) {
+                assertThat(Rank.valueOf(rank, true)).isEqualTo(rank);
+                assertThat(Rank.valueOf(rank, false)).isEqualTo(rank);
             }
         }
     }
