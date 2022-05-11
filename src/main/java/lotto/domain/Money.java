@@ -1,22 +1,22 @@
 package lotto.domain;
 
-import jdk.swing.interop.SwingInterOpUtils;
+import java.util.Objects;
 
 public class Money {
     private static final int LOTTO_PRICE = 1000;
     private static final String BUY_PRICE_VALID_ERROR_MESSAGE = "1,000원 단위로만 구매 가능합니다.";
     private static final String WRONG_NUMBER_EXCEPTION = "숫자형식이 아닙니다.";
-    private static final String EXCEED_QUANTITY_MESSAGE = "수량을 초과하였습니다. ";
 
     private final int buyPrice;
-    private final int maxPurchasableQuantity;
+    private Quantity quantity;
 
-    private int purchasedQuantity;
+    public Money(String buyPrice) {
+        this(buyPrice, 0);
+    }
 
     public Money(String buyPrice, int purchasedQuantity) {
         this.buyPrice = parseInt(buyPrice);
-        this.maxPurchasableQuantity = this.buyPrice / LOTTO_PRICE;
-        this.purchasedQuantity = purchasedQuantity;
+        this.quantity = new Quantity(this.buyPrice / LOTTO_PRICE, purchasedQuantity);
         validate();
     }
 
@@ -32,37 +32,42 @@ public class Money {
         if (this.buyPrice % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(BUY_PRICE_VALID_ERROR_MESSAGE);
         }
-        if (maxPurchasableQuantity < purchasedQuantity) {
-            throw new IllegalArgumentException(EXCEED_QUANTITY_MESSAGE + this);
-        }
     }
 
     public void addQuantity() {
-        if (!isPurchasable()) {
-            throw new IllegalArgumentException("구매가능수량을 초과하였습니다.");
-        }
-        purchasedQuantity++;
+        this.quantity = quantity.increase();
     }
 
     public boolean isPurchasable() {
-        return maxPurchasableQuantity > purchasedQuantity;
+        return quantity.isPurchasable();
     }
 
     public int getMaxPurchasableQuantity() {
-        return maxPurchasableQuantity;
+        return quantity.getMaxPurchasableQuantity();
     }
 
-    public double getReturnRate(int winningMoney) {
+    public double calculateReturnRate(int winningMoney) {
         return (double) winningMoney / this.buyPrice;
     }
 
     @Override
-    public String toString() {
-        return "Purchase{" +
-                "buyPrice=" + buyPrice +
-                ", purchasedQuantity=" + purchasedQuantity +
-                ", maxPurchasableQuantity=" + maxPurchasableQuantity +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Money money = (Money) o;
+        return buyPrice == money.buyPrice && Objects.equals(quantity, money.quantity);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(buyPrice, quantity);
+    }
+
+    @Override
+    public String toString() {
+        return "Money{" +
+                "buyPrice=" + buyPrice +
+                ", quantity=" + quantity +
+                '}';
+    }
 }
