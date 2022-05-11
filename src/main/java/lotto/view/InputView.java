@@ -19,6 +19,11 @@ public class InputView {
         return splitLottoNumbers(input);
     }
 
+    public int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해주세요.");
+        return scanner.nextInt();
+    }
+
     private String[] splitLottoNumbers(String input) {
         return input.replace(" ", "").split("[, ]");
     }

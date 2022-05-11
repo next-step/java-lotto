@@ -13,20 +13,16 @@ public class Winnings {
 
     private final WinningNumbers winningNumbers;
 
-    private final int[] recordMatched;
+    private RecordMatched recordMatched;
 
-    private final int[] rewards = {
-            REWARD_NONE, REWARD_NONE, REWARD_NONE,
-            REWARD_MATCHED_THREE, REWARD_MATCHED_FOUR, REWARD_MATCHED_FIVE, REWARD_MATCHED_ALL};
-
-    public Winnings(String[] winningNumbers) {
-        this.winningNumbers = new WinningNumbers(parseWinningNumbers(winningNumbers));
-        this.recordMatched = new int[7];
+    public Winnings(String[] winningNumbers, int bonusNumber) {
+        this.winningNumbers = new WinningNumbers(parseWinningNumbers(winningNumbers), bonusNumber);
+        this.recordMatched = new RecordMatched(Matched.values().length);
     }
 
-    public Winnings(List<Integer> winningNumbers) {
-        this.winningNumbers = new WinningNumbers(winningNumbers);
-        this.recordMatched = new int[7];
+    public Winnings(List<Integer> winningNumbers, int bonusNumber) {
+        this.winningNumbers = new WinningNumbers(winningNumbers, bonusNumber);
+        this.recordMatched = new RecordMatched(Matched.values().length);
     }
 
     public void countMatchedNumbers(List<Integer> numbers) {
@@ -34,17 +30,19 @@ public class Winnings {
         for (int number : numbers) {
             matchedNumber += winningNumbers.checkNumber(number);
         }
-        recordNumberOfMatched(matchedNumber);
+        Matched matched = Matched.valueOf(matchedNumber, winningNumbers.checkBonus(numbers));
+        recordNumberOfMatched(matched.index());
     }
 
-    private void recordNumberOfMatched(int matchedNumber) {
-        this.recordMatched[matchedNumber]++;
+    private void recordNumberOfMatched(int index) {
+        this.recordMatched = this.recordMatched.addByMatchedIndex(index);
     }
 
     public int winningsRewards() {
         int winningsRewards = 0;
-        for (int i = 3; i < recordMatched.length; i++) {
-            winningsRewards += recordMatched[i] * rewards[i];
+        Matched[] matcheds = Matched.values();
+        for (int i = 0; i < recordMatched.recordMatched().length; i++) {
+            winningsRewards += recordMatched.recordMatched()[i] * matcheds[i].reward();
         }
         return winningsRewards;
     }
@@ -59,10 +57,6 @@ public class Winnings {
     }
 
     public int[] recordMatched() {
-        return recordMatched;
-    }
-
-    public int[] rewards() {
-        return rewards;
+        return recordMatched.recordMatched();
     }
 }

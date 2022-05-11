@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Draw;
 import lotto.domain.Lotto;
+import lotto.domain.Matched;
 import lotto.domain.Winnings;
 
 public class ResultView {
@@ -34,12 +35,21 @@ public class ResultView {
     }
 
     public void printWinningsLotto(Winnings winnings) {
-        System.out.println("당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("---------");
 
-        for (int i = 3; i < winnings.recordMatched().length; i++) {
-            System.out.println(i + "개 일치 (" + winnings.rewards()[i] + "원) - "
-                    + winnings.recordMatched()[i] + "개");
+        Matched[] matcheds = Matched.values();
+        for (int i = 4; i >= 0; i--) {
+            System.out.print(matcheds[i].numberOfMatched() + "개 일치");
+            printBonus(i);
+            System.out.print(" (" + matcheds[i].reward() + "원) - ");
+            System.out.println(winnings.recordMatched()[i] + "개");
+        }
+    }
+
+    private void printBonus(int index) {
+        if (index == Matched.FIVE_AND_BONUS.index()) {
+            System.out.print(", 보너스 볼 일치");
         }
     }
 
