@@ -4,15 +4,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static lotto.Reward.*;
+
 public class WinStatistics {
-    private Map<Integer, Integer> matches;
+    private Map<Reward, Integer> matches;
 
     public WinStatistics() {
-        this.matches = new HashMap(Map.of(3, 0, 4, 0, 5, 0, 6, 0));
+        this.matches = new HashMap(Map.of(THREE, 0, FOUR, 0, FIVE, 0, BONUS, 0, SIX, 0));
     }
 
-    public WinStatistics(int three, int four, int five, int six) {
-        this.matches = new HashMap(Map.of(3, three, 4, four, 5, five, 6, six));
+    public WinStatistics(int three, int four, int five, int bonus, int six) {
+        this.matches = new HashMap(Map.of(THREE, three, FOUR, four, FIVE, five, BONUS, bonus, SIX, six));
     }
 
     @Override
@@ -33,25 +35,21 @@ public class WinStatistics {
         return "WinStatistics{" + "matches=" + matches + '}';
     }
 
-    public void save(int wins) {
-        matches.put(wins, matches.get(wins) + 1);
+    public void save(Reward reward) {
+        matches.put(reward, matches.get(reward) + 1);
     }
 
     public String toPayload() {
-//        return Money.toPayload(this.matches);
         return Reward.toPayload(this.matches);
     }
 
     public int getEarnedMoney() {
         int earnedMoney = 0;
-        for (int key : matches.keySet()) {
-            earnedMoney += Money.multiply(Reward.of(key).getMoney(), matches.get(key));
+        for (Reward reward: matches.keySet()) {
+            earnedMoney += Money.multiply(reward.getMoney(), matches.get(reward));
         }
         return earnedMoney;
     }
-
-
-
 
     public String didEarn(Money money) {
         return money.didEarn(this.getEarnedMoney());

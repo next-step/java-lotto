@@ -6,7 +6,9 @@ public class LotteryApp {
         lotteryController.scanMoney();
         lotteryController.createLotteries();
         lotteryController.printLotteries();
-        lotteryController.saveWins(lotteryController.findWins(lotteryController.scanAnswer()));
+        Lottery answer = lotteryController.scanAnswer();
+        int bonusNumber = lotteryController.scanBonus();
+        lotteryController.saveWins(lotteryController.findWins(answer, bonusNumber));
         lotteryController.printWinStatistics();
         lotteryController.printEarningRate();
         lotteryController.printEarned();

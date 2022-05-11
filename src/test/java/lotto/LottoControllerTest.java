@@ -18,7 +18,6 @@ public class LottoControllerTest {
     }
 
 
-
     @Test
     void stringShouldBeInteger() {
         assertThat(lotteryController.toInteger("1")).isEqualTo(1);
@@ -44,10 +43,10 @@ public class LottoControllerTest {
 
     @Test
     void moreThan3WinShouldBeSaved() {
-        lotteryController.saveWin(2);
-        assertThat(lotteryController.winStatistics).isEqualTo(new WinStatistics(0, 0, 0, 0));
-        lotteryController.saveWin(3);
-        assertThat(lotteryController.winStatistics).isEqualTo(new WinStatistics(1, 0, 0, 0));
+        lotteryController.saveWin(Reward.of(2, false));
+        assertThat(lotteryController.winStatistics).isEqualTo(new WinStatistics(0, 0, 0, 0, 0));
+        lotteryController.saveWin(Reward.of(3, false));
+        assertThat(lotteryController.winStatistics).isEqualTo(new WinStatistics(1, 0, 0, 0, 0));
     }
 
     @Test
@@ -55,8 +54,8 @@ public class LottoControllerTest {
         List<Lottery> lotteries = Arrays.asList(new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6)));
         Wallet wallet = new Wallet(lotteries);
         lotteryController.attachWallet(wallet);
-        List<Integer> wins = lotteryController.findWins(new Lottery(Arrays.asList(1, 2, 3, 14, 15, 16)));
-        lotteryController.saveWins(wins);
-        assertThat(lotteryController.winStatistics).isEqualTo(new WinStatistics(1, 0, 0, 0));
+        List<Reward> rewards = lotteryController.findWins(new Lottery(Arrays.asList(1, 2, 3, 14, 15, 16)), 0);
+        lotteryController.saveWins(rewards);
+        assertThat(lotteryController.winStatistics).isEqualTo(new WinStatistics(1, 0, 0, 0, 0));
     }
 }

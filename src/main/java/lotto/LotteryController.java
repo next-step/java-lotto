@@ -53,24 +53,24 @@ public class LotteryController {
         return number;
     }
 
-    public List<Integer> findWins(Lottery answer) {
-        List<Integer> wins = new ArrayList();
+    public List<Reward> findWins(Lottery answer, int bonusNumber) {
+        List<Reward> rewards = new ArrayList();
         for (Lottery lottery : this.wallet.lotteries) {
-            int win = lottery.findWin(answer);
-            wins.add(win);
+            Reward reward = lottery.findWin(answer, bonusNumber);
+            rewards.add(reward);
         }
-        return wins;
+        return rewards;
     }
 
-    public void saveWins(List<Integer> wins) {
-        for (int win : wins) {
-            saveWin(win);
+    public void saveWins(List<Reward> rewards) {
+        for (Reward reward : rewards) {
+            saveWin(reward);
         }
     }
 
-    public void saveWin(int win) {
-        if (win >= 3) {
-            winStatistics.save(win);
+    public void saveWin(Reward reward) {
+        if (reward != Reward.Blank) {
+            winStatistics.save(reward);
         }
     }
 
@@ -87,4 +87,15 @@ public class LotteryController {
         String payload = winStatistics.didEarn(new Money(1000)) + " (More than 1.0 means 'Earned')";
         ResultView.print(payload);
     }
+
+    public int scanBonus() {
+        String scanned = InputView.scan("Put bonus number.");
+        return Integer.parseInt(scanned);
+    }
+
+//    public void findBonuses(int bonusNumber, Lottery answer) {
+//        for (Lottery lottery : this.wallet.lotteries) {
+//            lottery.findBonus(bonusNumber, answer);
+//        }
+//    }
 }
