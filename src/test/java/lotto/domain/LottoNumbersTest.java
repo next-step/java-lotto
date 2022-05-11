@@ -4,7 +4,6 @@ import lotto.exception.InvalidLottoNumberCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.TreeSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -49,7 +48,7 @@ class LottoNumbersTest {
     @Test
     @DisplayName("로또 번호가 6개가 아닐경우 InvalidLottoNumberCount 를 반환한다.")
     void InvalidNumberException() {
-        assertThatThrownBy(() -> new LottoNumbers(Arrays.asList(LottoNumber.valueOf(1)))).isInstanceOf(InvalidLottoNumberCount.class)
+        assertThatThrownBy(() -> new LottoNumbers(new String[]{"1"})).isInstanceOf(InvalidLottoNumberCount.class)
                 .hasMessage("로또번호는 " + LottoNumbers.LOTTO_NUMBER_COUNT + "개를 가져야합니다.");
     }
 
