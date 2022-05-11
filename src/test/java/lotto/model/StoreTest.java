@@ -1,6 +1,6 @@
 package lotto.model;
 
-import lotto.exception.ManualLottoSizeException;
+import lotto.exception.LottoCountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -30,6 +30,23 @@ class StoreTest {
                         Set.of(2, 3, 4, 5, 6, 7),
                         Set.of(3, 4, 5, 6, 7, 8))
         );
+
+
+    }
+    @Test
+    @DisplayName("입력 받은 수동 로또의 갯수랑 실제로 생성된 로또의 갯수가 다르면 예외를 던진다.")
+    void manualExceptionLottoSize() {
+        assertThrows(LottoCountException.class, () -> {
+            Store store = new Store(3);
+            Lottos lotteryTickets = store.manualLottos(
+                    List.of(
+                    Set.of(1, 2, 3, 4, 5, 6),
+                    Set.of(2, 3, 4, 5, 6, 7),
+                    Set.of(3, 4, 5, 6, 7, 8),
+                    Set.of(3, 4, 5, 6, 7, 9)
+                    )
+            );
+        });
 
 
     }

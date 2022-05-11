@@ -21,7 +21,7 @@ public final class Store {
         while (count-- != 0) {
             lotteryTickets.add(deliverLotto());
         }
-        return new Lottos(lotteryTickets);
+        return new Lottos(lotteryTickets, lotteryTickets.size());
     }
 
     private Lotto deliverLotto() {
@@ -29,7 +29,7 @@ public final class Store {
     }
 
     public Lottos manualLottos(List<Set<Integer>> inputLottos) {
-        return new Lottos(AwardNumberUtil.convertLotto(inputLottos));
+        return new Lottos(AwardNumberUtil.convertLotto(inputLottos), manualLottoCount);
     }
 
 }
