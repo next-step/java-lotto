@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Rank;
 import lotto.exception.WrongLottoMatchCountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

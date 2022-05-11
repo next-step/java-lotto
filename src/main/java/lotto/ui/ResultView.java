@@ -1,9 +1,9 @@
 package lotto.ui;
 
-import lotto.LottoGame;
-import lotto.Lotto;
-import lotto.LottoResults;
-import lotto.Rank;
+import lotto.domain.LottoGame;
+import lotto.domain.Lotto;
+import lotto.domain.LottoResults;
+import lotto.domain.Rank;
 
 import java.text.DecimalFormat;
 

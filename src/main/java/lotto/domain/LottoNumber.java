@@ -1,6 +1,4 @@
-package lotto;
-
-import jdk.swing.interop.SwingInterOpUtils;
+package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
