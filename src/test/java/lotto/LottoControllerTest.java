@@ -55,7 +55,8 @@ public class LottoControllerTest {
         List<Lottery> lotteries = Arrays.asList(new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6)));
         Wallet wallet = new Wallet(lotteries);
         lotteryController.attachWallet(wallet);
-        lotteryController.findWins(new Lottery(Arrays.asList(1, 2, 3, 14, 15, 16)));
+        List<Integer> wins = lotteryController.findWins(new Lottery(Arrays.asList(1, 2, 3, 14, 15, 16)));
+        lotteryController.saveWins(wins);
         assertThat(lotteryController.winStatistics).isEqualTo(new WinStatistics(1, 0, 0, 0));
     }
 }

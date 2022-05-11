@@ -10,13 +10,13 @@ public class LotteryTest {
     Lottery lottery = new Lottery();
     @Test
     void create45NumbersInBox() {
-        assertThat(lottery.boxNumbers).hasSize(45);
+        assertThat(lottery.lotteryBox.numbers).hasSize(45);
     }
 
     @Test
     void numbersInBoxShouldBeUnique() {
-        int actual = new HashSet<>(lottery.boxNumbers).size();
-        int expected = lottery.boxNumbers.size();
+        int actual = new HashSet<>(lottery.lotteryBox.numbers).size();
+        int expected = lottery.lotteryBox.numbers.size();
         assertThat(actual).isEqualTo(expected);
     }
 
@@ -27,9 +27,9 @@ public class LotteryTest {
 
     @Test
     void shuffledBoxShouldDifferWithOrigin() {
-        List<Integer> origin = new ArrayList<>(lottery.boxNumbers);
-        lottery.shuffleBox(LotteryBox.numbers);
-        assertThat(lottery.boxNumbers).isNotEqualTo(origin);
+        List<Integer> origin = new ArrayList(lottery.lotteryBox.numbers);
+        LotteryBox.shuffleBox();
+        assertThat(lottery.lotteryBox.numbers).isNotEqualTo(origin);
     }
 
     @Test

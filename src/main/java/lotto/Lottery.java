@@ -5,26 +5,26 @@ import java.util.List;
 import java.util.Collections;
 
 public class Lottery {
-    public final List<Integer> boxNumbers = LotteryBox.numbers;
+    public final LotteryBox lotteryBox;
     public final List<Integer> numbers;
 
     public Lottery() {
-        shuffleBox(boxNumbers);
+        this.lotteryBox = new LotteryBox();
+        lotteryBox.shuffleBox();
         this.numbers = findSixNumbers();
     }
 
     public Lottery(List<Integer> numbers) {
+        this.lotteryBox = new LotteryBox();
+        lotteryBox.shuffleBox();
         this.numbers = numbers;
     }
 
-    public void shuffleBox(List<Integer> lotteryBoxNumbers) {
-        Collections.shuffle(lotteryBoxNumbers);
-    }
 
     public List<Integer> findSixNumbers() {
         List<Integer> list = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            list.add(boxNumbers.get(i));
+            list.add(lotteryBox.numbers.get(i));
         }
         return sort(list);
     }
