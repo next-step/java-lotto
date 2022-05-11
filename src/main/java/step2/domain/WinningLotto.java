@@ -59,12 +59,23 @@ public class WinningLotto {
         }
     }
 
-    public boolean isContain(LottoNumber lottoNumber) {
-        return this.winningNumbers.contains(lottoNumber);
+    public LottoRank calculateRank(Lotto operand) {
+        if (operand == null) {
+            throw new IllegalArgumentException("등수를 계산할 로또가 널 입니다.");
+        }
+        long hitCount = calculateHitCount(operand);
+        boolean containBonusNumber = containBonusNumber(operand);
+        return LottoRank.toRank(hitCount, containBonusNumber);
     }
 
-    public boolean isBonusNumber(LottoNumber lottoNumber) {
-        return this.bonusNumber.equals(lottoNumber);
+    private long calculateHitCount(Lotto operand) {
+        return this.winningNumbers.stream()
+                .filter(operand::contain)
+                .count();
+    }
+
+    private boolean containBonusNumber(Lotto operand) {
+        return operand.contain(this.bonusNumber);
     }
 
     @Override
