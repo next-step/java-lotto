@@ -53,7 +53,7 @@ public class LottoTest {
 	}
 
 	@DisplayName("로또숫자 포함 여부")
-	@CsvSource(value = {"1,2,3,4,5,6:3:true", "1,2,3,4,5,6:7:false"})
+	@CsvSource(value = {"1,2,3,4,5,6:3:true", "1,2,3,4,5,6:7:false"}, delimiter = ':')
 	@ParameterizedTest
 	public void When_GivenLottoNumber_Expected_ContainOrNot(String lottoInput, int number, boolean expected) {
 		Lotto lotto = new Lotto(lottoInput);
