@@ -15,10 +15,8 @@ class LottoNumberTest {
     @ValueSource(ints = {1,45})
     @DisplayName("번호 범위 1~45 테스트")
     void 번호범위_1_45_테스트(int inputNumber) {
-        // given
         LottoNumber number = new LottoNumber(inputNumber);
-        // when
-        // then
+
         assertThat(number).isNotNull();
     }
 
@@ -26,8 +24,6 @@ class LottoNumberTest {
     @ValueSource(ints = {0,46})
     @DisplayName("잘못된 번호 예외 테스트")
     void 잘못된_번호_예외_테스트(int inputNumber) {
-        // given
-        // when, then
         assertThatIllegalArgumentException().isThrownBy(() -> {
            new LottoNumbers(inputNumber);
         });
