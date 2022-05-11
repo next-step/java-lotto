@@ -9,11 +9,7 @@ public class ReturnRate {
     private final double value;
 
     public ReturnRate(int sumOfPrizeMoney, int purchaseAmount) {
-        this(calculate(sumOfPrizeMoney, purchaseAmount));
-    }
-
-    private static double calculate(int sumOfPrizeMoney, double purchaseAmount) {
-        return sumOfPrizeMoney / purchaseAmount;
+        this(sumOfPrizeMoney / (double) purchaseAmount);
     }
 
     public ReturnRate(double value) {
