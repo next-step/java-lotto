@@ -27,8 +27,8 @@ public class LottoMain {
 
         ResultView.printBuyingLottos(manualLottos, buyingLottos);
 
-        // Lottos 합쳐서 result 결과 자동, 수동 모두 합친 Lotts에서 결과 추출 필요
-        LottoResult lottoResult = buyingLottos.extractLottoResult(inputWinnerLotto());
+        Lottos lottos = Lottos.concatOf(manualLottos, buyingLottos);
+        LottoResult lottoResult = lottos.extractLottoResult(inputWinnerLotto());
 
         ResultView.printResult(buyingMoney, lottoResult);
     }

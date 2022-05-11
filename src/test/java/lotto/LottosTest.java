@@ -82,4 +82,12 @@ public class LottosTest {
         // then
         assertThat(lottoResult.getRankResult().get(0)).isEqualTo(Rank.OTHER);
     }
+
+    @Test
+    @DisplayName("두개의 Lottos 객체를 합해 하나의 Lottos를 반환한다.")
+    void combineTest() {
+        Lottos lottos = Lottos.concatOf(TEST_LOTTOS, TEST_LOTTOS);
+
+        assertThat(lottos.size()).isEqualTo(2);
+    }
 }
