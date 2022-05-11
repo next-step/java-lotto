@@ -19,10 +19,19 @@ public class Customer {
         this.lottos = new Lottos(lotto);
     }
 
+    public void buy(int price, Lotto lotto) {
+        lottos.createLotto(lotto);
+        this.money -= price;
+    }
+
     public void buy(int price) {
+        lottos.createLotto(new Lotto());
+        this.money -= price;
+    }
+
+    public void allBuy(int price) {
         while (hasMoney()) {
-            lottos.createLotto();
-            this.money -= price;
+            buy(price);
         }
     }
 

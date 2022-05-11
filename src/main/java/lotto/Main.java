@@ -13,7 +13,7 @@ public class Main {
 
         int money = inputView.purchaseAmountQuestion();
         Customer customer = new Customer(money);
-        customer.buy(1000);
+        customer.allBuy(1000);
 
         resultView.printLottos(customer);
         List<Integer> winningLottoNumbers = inputView.findWinningLottoNumbers();
