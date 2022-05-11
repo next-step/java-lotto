@@ -15,25 +15,21 @@ public final class Store {
         this.manualLottoCount = manualLottoCount;
     }
 
-    public List<Lotto> auto(long money) {
+    public Lottos auto(long money) {
         long count = (money / PRODUCT_PRICE) - manualLottoCount;
         List<Lotto> lotteryTickets = new ArrayList<>();
         while (count-- != 0) {
             lotteryTickets.add(deliverLotto());
         }
-        return lotteryTickets;
+        return new Lottos(lotteryTickets);
     }
 
     private Lotto deliverLotto() {
         return LottoFactory.apply();
     }
 
-    public List<Lotto> manualLottos(List<Set<Integer>> inputLottos) {
-        return AwardNumberUtil.convertLotto(inputLottos);
+    public Lottos manualLottos(List<Set<Integer>> inputLottos) {
+        return new Lottos(AwardNumberUtil.convertLotto(inputLottos));
     }
 
-    public List<Lotto> boughtAllLottos(List<Lotto> autoLottos, List<Lotto> manualLottos) {
-        autoLottos.addAll(manualLottos);
-        return autoLottos;
-    }
 }

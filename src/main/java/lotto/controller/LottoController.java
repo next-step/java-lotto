@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.model.Guest;
-import lotto.model.LotteryResults;
-import lotto.model.Lotto;
-import lotto.model.Store;
+import lotto.model.*;
 import lotto.service.LottoService;
 import lotto.view.InputTable;
 import lotto.view.OutputTable;
@@ -27,24 +24,24 @@ public class LottoController {
 
         OutputTable.boughtManualLottoMessage();
         Store store = new Store(manalLottoCount);
-        List<Lotto> manualLottos = store.manualLottos(InputTable.inputManualLotto(manalLottoCount));
-        List<Lotto> lottoProducts = boughtAutoLotto(new Guest(haveMoney), store);
-        List<Lotto> boughtAllLottos = store.boughtAllLottos(manualLottos, lottoProducts);
-        OutputTable.buyThings(manalLottoCount, lottoProducts.size());
-        OutputTable.printProductInfos(lottoProducts);
+        Lottos manualLottos = store.manualLottos(InputTable.inputManualLotto(manalLottoCount));
+        Lottos autoLottos = boughtAutoLotto(new Guest(haveMoney), store);
+        Lottos boughtAllLottos = Lottos.plus(manualLottos, autoLottos);
+        OutputTable.buyThings(manalLottoCount, autoLottos.getLottos().size());
+        OutputTable.printProductInfos(autoLottos.getLottos());
 
         OutputTable.lastWeekAwardNumber();
         Lotto winnerLotto = insertWinnerNumber(InputTable.inputAwardNumber());
 
         OutputTable.getBonus();
         int bonus = insertBonusNumber(InputTable.inputBonusNumber());
-        holdingLotteryTickets(boughtAllLottos, winnerLotto, bonus);
+        holdingLotteryTickets(boughtAllLottos.getLottos(), winnerLotto, bonus);
         OutputTable.resultStatisticsMessage();
         OutputTable.resultStatistics(LotteryResults.getLotteryResult());
         OutputTable.printYield(yieldCalculate(haveMoney), 1);
     }
 
-    public List<Lotto> boughtAutoLotto(Guest guest, Store store) {
+    public Lottos boughtAutoLotto(Guest guest, Store store) {
         return lottoService.boughtAutoLotto(guest, store);
     }
 
