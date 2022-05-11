@@ -27,4 +27,10 @@ public class WinningNumber {
 			throw new IllegalArgumentException("당첨번호는 " + NUMBER_SIZE + "개로 입력해주세요.");
 		}
 	}
+
+	public long match(Lotto lotto) {
+		return this.numbers.stream()
+			.filter(lotto::contain)
+			.count();
+	}
 }
