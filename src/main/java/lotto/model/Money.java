@@ -32,8 +32,11 @@ public final class Money {
         return this.money / unit.money;
     }
 
-    public Money add(Money addMoney) {
-        return new Money(this.money + addMoney.money);
+    public Money add(Money other) {
+        if (other.money == ZERO) {
+            return this;
+        }
+        return new Money(this.money + other.money);
     }
 
     @Override
