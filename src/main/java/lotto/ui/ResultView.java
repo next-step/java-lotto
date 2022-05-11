@@ -6,6 +6,7 @@ import lotto.domain.LottoResults;
 import lotto.domain.Rank;
 
 import java.text.DecimalFormat;
+import java.util.List;
 
 public class ResultView {
     private static final String BUY_QUANTITY_MESSAGE = "개를 구매했습니다.";
@@ -20,22 +21,27 @@ public class ResultView {
     private static final String FLOOR = "%.2f";
     private static final String BONUS_MATCH_MESSAGE = ", 보너스 볼 일치";
 
-    public static void printBuyLottoNumbers(LottoGame lotto) {
-        for(Lotto lottoNumbers : lotto.getBuyLottoNumbers()) {
-            System.out.println(lottoNumbers.toString());
+    public static void printBuyLottoNumbers(List<Lotto> lottoNumbers) {
+        for(Lotto lotto : lottoNumbers) {
+            System.out.println(lotto.toString());
         }
-    }
-
-    public static void printWinningTitle() {
-        System.out.println(WINNER_TITLE);
-        System.out.println(PERFORATION);
     }
 
     public static void printBuyQuantityMessage(int qty) {
         System.out.println(qty + BUY_QUANTITY_MESSAGE);
     }
 
-    public static void printWinningResults(LottoResults results) {
+    public static void printWinningTitleAndResults(LottoResults results) {
+        printWinningTitle();
+        printWinningResults(results);
+    }
+
+    private static void printWinningTitle() {
+        System.out.println(WINNER_TITLE);
+        System.out.println(PERFORATION);
+    }
+
+    private static void printWinningResults(LottoResults results) {
         for (Rank rank : Rank.values()) {
             printWinningResult(results, rank);
         }

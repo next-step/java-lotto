@@ -5,17 +5,12 @@ import lotto.ui.ResultView;
 
 public class App {
     public static void main(String[] args) {
-        String price = InputView.getPrice();
-        LottoGame lottoGame = new LottoGame(price);
+        LottoGame lottoGame = new LottoGame(InputView.getPrice());
         lottoGame.auto();
         ResultView.printBuyQuantityMessage(lottoGame.getMaxPurchasableQuantity());
-        ResultView.printBuyLottoNumbers(lottoGame);
-
-        String winningNumber = InputView.getLastWinningNumber();
-        String bonusNumber = InputView.getBonusNumber();
-        WinningLotto winningLottoNumber = new WinningLotto(winningNumber, bonusNumber);
-        ResultView.printWinningTitle();
-        ResultView.printWinningResults(lottoGame.getLottoGameResults(winningLottoNumber));
+        ResultView.printBuyLottoNumbers(lottoGame.getBuyLottoNumbers());
+        WinningLotto winningLottoNumber = new WinningLotto(InputView.getWinningNumber(), InputView.getBonusNumber());
+        ResultView.printWinningTitleAndResults(lottoGame.getLottoGameResults(winningLottoNumber));
         ResultView.printReturnRate(lottoGame.getReturnRate(winningLottoNumber));
     }
 }
