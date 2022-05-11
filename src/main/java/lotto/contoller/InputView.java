@@ -8,15 +8,15 @@ import java.util.stream.Collectors;
 
 public class InputView {
     public static final int LOTTO_PRICE = 1000;
+    private int purchaseAmount;
     private final Scanner scanner = new Scanner(System.in);
 
     public int purchaseAmountQuestion() {
         System.out.println("구입금액을 입력해 주세요.");
-        int value = scanner.nextInt();
+        purchaseAmount = scanner.nextInt();
         scanner.nextLine();
-        System.out.println(value / LOTTO_PRICE + "개를 구매했습니다.");
 
-        return value;
+        return purchaseAmount;
     }
 
     public List<Integer> findWinningLottoNumbers() {
@@ -45,6 +45,7 @@ public class InputView {
         for (int i = 0; i < lottoCount; i++) {
             autoNumbers.add(toList());
         }
+        System.out.println( "수동으로 " + lottoCount + "장, 자동으로 " + ((purchaseAmount / LOTTO_PRICE) - lottoCount ) + "개를 구매했습니다.");
         return autoNumbers;
     }
 
