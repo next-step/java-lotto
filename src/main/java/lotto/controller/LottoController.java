@@ -18,10 +18,11 @@ public class LottoController {
 
     public void run() {
         long haveMoney = InputTable.inputHaveMoney();
+        Guest guest = new Guest(haveMoney);
         int manalLottoCount = InputTable.inputManualCount();
         Store store = new Store(manalLottoCount);
         Lottos manualLottos = store.manualLottos(InputTable.inputManualLotto(manalLottoCount));
-        Lottos autoLottos = boughtAutoLotto(new Guest(haveMoney), store);
+        Lottos autoLottos = boughtAutoLotto(guest, store);
         Lottos boughtAllLottos = Lottos.plus(manualLottos, autoLottos);
         OutputTable.buyThings(manalLottoCount, autoLottos.getLottos().size());
         OutputTable.printProductInfos(autoLottos.getLottos());
