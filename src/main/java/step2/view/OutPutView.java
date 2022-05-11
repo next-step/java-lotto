@@ -1,6 +1,7 @@
 package step2.view;
 
 import step2.domain.LottoRank;
+import step2.domain.PurchaseMoney;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -19,8 +20,10 @@ public class OutPutView {
     public OutPutView() {
     }
 
-    public void showPurchaseCount(int purchaseCount) {
-        show(String.format("%d 개를 구매했습니다.", purchaseCount));
+    public void showPurchaseCount(PurchaseMoney purchaseMoney) {
+        int manualCount = purchaseMoney.calculateManualPurchaseCount();
+        int autoCount = purchaseMoney.calculateAutoPurchaseCount();
+        show(String.format("수동으로 %d 개, 자동으로 %d 개를 구매했습니다.", manualCount, autoCount));
     }
 
     public void showGameResult(Map<LottoRank, Integer> gameResult) {

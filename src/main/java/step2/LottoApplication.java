@@ -4,6 +4,8 @@ import step2.domain.*;
 import step2.view.InputView;
 import step2.view.OutPutView;
 
+import java.util.List;
+
 public class LottoApplication {
 
     public static void main(String[] args) {
@@ -12,10 +14,13 @@ public class LottoApplication {
         OutPutView outPutView = new OutPutView();
 
         int purchaseAmount = inputView.askPurchaseAmount();
-        PurchaseMoney purchaseMoney = new PurchaseMoney(purchaseAmount);
-        outPutView.showPurchaseCount(purchaseMoney.calculatePurchaseCount());
+        int manualCount = inputView.askManualCount();
+        PurchaseMoney purchaseMoney = new PurchaseMoney(purchaseAmount, manualCount);
+        List<String> manualNumbers = inputView.askManualNumbers(purchaseMoney.calculateManualPurchaseCount());
 
-        PurchaseList purchaseList = new PurchaseList(purchaseMoney);
+        outPutView.showPurchaseCount(purchaseMoney);
+
+        PurchaseList purchaseList = new PurchaseList(purchaseMoney, manualNumbers);
         outPutView.show(purchaseList.toString());
 
         String winnerInput = inputView.askWinnerInput();
