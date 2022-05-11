@@ -155,6 +155,6 @@ Earning rate: Infinity
 - [x] number를 일일히 비교하는게 아닌 Lottery를 사용하여 matchNumber 수행
 - [x] findWins에서 saveWin(win) 을 분리
 - [x] Lottery.shuffleBox()와 Lottery.findSixNumbers()를 LotteryBox의 메소드로 이동
-- [ ] infinity, NaN 출력 에러 수정
+- [x] infinity, NaN 출력 에러 수정
 
 ## Step3: Lotto 2nd place

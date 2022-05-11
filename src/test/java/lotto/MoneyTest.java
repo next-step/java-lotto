@@ -15,6 +15,7 @@ public class MoneyTest {
     @Test
     void earningRateShouldBeFiveTenth() {
         assertThat(new Money(10000).getEarningRate(5000)).isEqualTo(0.5);
+//        System.out.println("::::::" + new Money(14000).getEarningRate(2000000000));
     }
 
     @Test
