@@ -92,10 +92,4 @@ public class LotteryController {
         String scanned = InputView.scan("Put bonus number.");
         return Integer.parseInt(scanned);
     }
-
-//    public void findBonuses(int bonusNumber, Lottery answer) {
-//        for (Lottery lottery : this.wallet.lotteries) {
-//            lottery.findBonus(bonusNumber, answer);
-//        }
-//    }
 }
