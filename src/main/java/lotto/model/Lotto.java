@@ -25,7 +25,7 @@ public final class Lotto {
                 .collect(Collectors.toSet());
     }
 
-    public static Lotto from(Set<Integer> winnerNumbers) {
+    public static Lotto asWinnerLotto(Set<Integer> winnerNumbers) {
         return new Lotto(winnerNumbers);
     }
 

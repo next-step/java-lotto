@@ -41,7 +41,7 @@ class LottoTest {
     @Test
     @DisplayName("당첨 번호와 상품으로 만들어진 로또의 번호가 일치하는지 확인한다.")
     void winningProduct() {
-        Lotto lotto = Lotto.from(Set.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto = Lotto.asWinnerLotto(Set.of(1, 2, 3, 4, 5, 6));
         assertThat(lotto).isEqualTo(new Lotto(Set.of(
                 1, 2, 3, 4, 5, 6)));
     }
