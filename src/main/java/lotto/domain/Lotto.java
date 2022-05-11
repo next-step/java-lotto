@@ -2,24 +2,29 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Lotto {
-    private Numbers numbers;
+    private List<Integer> numbers;
 
     public Lotto() {
-        this.numbers = new Numbers();
+        this.numbers = LottoNumberGenerator.createLottoNumber();
     }
 
     public Lotto(List<Integer> numbers) {
-        this.numbers = new Numbers(numbers);
+        this.numbers = LottoNumberGenerator.createLottoNumber(numbers);
     }
 
     public int matchCount(List<Integer> winningNumbers) {
-        return numbers.matchCount(winningNumbers);
+        List<Integer> collect = numbers.stream()
+                .filter(lottoNumber -> winningNumbers.stream().anyMatch(Predicate.isEqual(lottoNumber)))
+                .collect(Collectors.toList());
+        return collect.size();
     }
 
     public List<Integer> getNumbers() {
-        return numbers.getList();
+        return numbers;
     }
 
     @Override
