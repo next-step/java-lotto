@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import exception.OutOfRangeException;
+import lotto.util.Parser;
 import lotto.util.Range;
 
 public class LottoNumber {
@@ -11,6 +12,17 @@ public class LottoNumber {
 	public LottoNumber(int number) {
 		validateNumber(number);
 		this.number = number;
+	}
+
+	public LottoNumber(String number) {
+		validateTextNumber(number);
+		this.number = Parser.toInt(number);
+	}
+
+	private void validateTextNumber(String number) {
+		if (number == null || number.isBlank()) {
+			throw new IllegalArgumentException("로또번호는 빈 값이거나 null 이면 생성할 수 없습니다.");
+		}
 	}
 
 	private void validateNumber(int number) {

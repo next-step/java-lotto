@@ -23,4 +23,13 @@ public class LottoNumberTest {
 		assertThatThrownBy(() -> new LottoNumber(46))
 			.isInstanceOf(OutOfRangeException.class);
 	}
+
+	@DisplayName("로또번호가 빈 값이거나 null 인 경우 IllegalArgumentException")
+	@Test
+	public void When_lottoNumberBlankOrNull_expected_IllegalArgumentException() {
+		assertThatThrownBy(() -> new LottoNumber(""))
+			.isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(() -> new LottoNumber(null))
+			.isInstanceOf(IllegalArgumentException.class);
+	}
 }
