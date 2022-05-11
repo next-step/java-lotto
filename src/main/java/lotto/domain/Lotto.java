@@ -18,10 +18,6 @@ public class Lotto {
         return numbers.matchCount(winningNumbers);
     }
 
-    public boolean hasBonusNumber(int bonusNumber) {
-        return numbers.contains(bonusNumber);
-    }
-
     public List<Integer> getNumbers() {
         return numbers.getList();
     }
