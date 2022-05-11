@@ -26,10 +26,6 @@ public final class Lottos {
 
     private void validate(List<Lotto> lottos) {
         Objects.requireNonNull(lottos, "lottos 생성을 위한 입력이 올바르지 않습니다. lottos is null");
-
-        if (lottos.isEmpty()) {
-            throw new IllegalArgumentException("lottos 생성을 위한 입력이 올바르지 않습니다. lottos is empty");
-        }
     }
 
     public int size() {

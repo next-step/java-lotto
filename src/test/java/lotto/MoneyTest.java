@@ -63,4 +63,10 @@ public class MoneyTest {
 
         assertThat(String.format("%.2f", new Money(5000).divideBy(money))).isEqualTo("0.36");
     }
+
+    @Test
+    @DisplayName("0으로 나누면 0을 반환한다.")
+    void zeroDivideTest() {
+        assertThat(THOUSAND.divideBy(new Money(0))).isEqualTo(0);
+    }
 }

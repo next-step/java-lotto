@@ -34,14 +34,6 @@ public class LottosTest {
                 .isInstanceOf(NullPointerException.class);
     }
 
-    @ParameterizedTest
-    @EmptySource
-    @DisplayName("Lottos 생성시 인자로 빈 리스트가 들어오면 예외가 발생한다.")
-    void emptyTest(List<Lotto> lottos) {
-        assertThatThrownBy(() -> new Lottos(lottos))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
     @Test
     @DisplayName("로또 개수와 생성 전략을 입력하면 Lottos가 생성된다.")
     void newLottosTest() {
