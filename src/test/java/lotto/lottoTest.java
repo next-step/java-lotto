@@ -13,7 +13,7 @@ public class lottoTest {
     @Test
     void 로또를_구매하면_자동으로_번호를_생성한다() {
         Lotto lotto = new Lotto();
-        assertThat(lotto.getNumbers().size()).isEqualTo(6);
+        assertThat(lotto.hasLottoNumber()).isTrue();
     }
 
     @Test

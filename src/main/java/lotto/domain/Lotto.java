@@ -23,8 +23,8 @@ public class Lotto {
         return collect.size();
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public boolean hasLottoNumber() {
+        return numbers.size() == 0;
     }
 
     public boolean isMatchingBonus(Integer bonusNumber) {
