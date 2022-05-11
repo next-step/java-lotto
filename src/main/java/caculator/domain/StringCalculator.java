@@ -6,8 +6,6 @@ import java.util.Objects;
 
 public class StringCalculator {
 
-    public static final int WRONG_RESULT = 0;
-    public static final int ZERO_NUMBER = 0;
     public static final int MINIMUM_FORMULA = 3;
     public static final int EVEN = 2;
     public static final int ODD_RESULT = 1;
@@ -18,26 +16,9 @@ public class StringCalculator {
     public static final int SECOND_FORMULA_INDEX = 3;
     public static final int NEXT_FORMULA_INDEX = 2;
 
-
     public int calculate(int numberOne, String sign, int numberTwo) {
-        if (isNotSign(sign)) {
-            throw new IllegalArgumentException("제대로된 사칙연산기호를 입력해 주세요. 입력 값: " + sign);
-        }
-
-        if (Operator.PLUS.getOperator().equals(sign)) {
-            return Operator.PLUS.calculate(numberOne, numberTwo);
-        }
-        if (Operator.MINUS.getOperator().equals(sign)) {
-            return Operator.MINUS.calculate(numberOne, numberTwo);
-        }
-        if (Operator.MULTIPLY.getOperator().equals(sign)) {
-            return Operator.MULTIPLY.calculate(numberOne, numberTwo);
-        }
-        if (Operator.DIVIDE.getOperator().equals(sign)) {
-            return Operator.DIVIDE.calculate(numberOne, numberTwo);
-        }
-
-        return WRONG_RESULT;
+        CalculatorType calculatorType = CalculatorType.selectType(sign);
+        return calculatorType.calculate(numberOne, numberTwo);
     }
 
     public int playCalculate(String inputString) {
@@ -65,19 +46,8 @@ public class StringCalculator {
         return result;
     }
 
-    private void isDividedByZero(int numberTwo) {
-        if (numberTwo == ZERO_NUMBER) {
-            throw new ArithmeticException("0으로 나눌수 없습니다.");
-        }
-    }
-
-    private boolean isNotSign(String sign) {
-        return !sign.equals("+") && !sign.equals("-") && !sign.equals("*") && !sign.equals("/");
-    }
-
     private boolean isNormalFormula(int listSize) {
         return (listSize >= MINIMUM_FORMULA && isOdd(listSize));
-
     }
 
     private boolean isOdd(int listSize) {
