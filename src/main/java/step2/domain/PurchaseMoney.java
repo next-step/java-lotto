@@ -4,21 +4,24 @@ import java.util.Objects;
 
 public class PurchaseMoney {
 
+
     private static final int DEFAULT_EACH_LOTTO_PRICE = 1000;
 
     private final int amount;
+    private final int manualCount;
 
     public PurchaseMoney(int amount) {
-        validateInput(amount);
+        this(amount, 0);
+    }
+
+    public PurchaseMoney(int amount, int manualCount) {
         validateLeast(amount);
         validateDivisible(amount);
         this.amount = amount;
-    }
 
-    private void validateInput(int purchaseAmount) {
-        if (purchaseAmount < DEFAULT_EACH_LOTTO_PRICE) {
-            throw new IllegalArgumentException("구매 금액은 " + DEFAULT_EACH_LOTTO_PRICE + " 보다 작을 수 없습니다.");
-        }
+        validateManualCount(manualCount);
+        validateMaxManualCount(manualCount);
+        this.manualCount = manualCount;
     }
 
     private void validateLeast(int purchaseAmount) {
@@ -33,12 +36,29 @@ public class PurchaseMoney {
         }
     }
 
+    private void validateManualCount(int manualCount) {
+        if (manualCount < 0) {
+            throw new IllegalArgumentException("수동 구매 갯수는 0 보다 작을 수 없습니다.");
+        }
+    }
+
+    private void validateMaxManualCount(int manualCount) {
+        int sumOfManual = DEFAULT_EACH_LOTTO_PRICE * manualCount;
+        if (amount - sumOfManual < 0) {
+            throw new IllegalArgumentException("수동 구매 갯수가 총 구매금액을 초과합니다.");
+        }
+    }
+
     public ReturnRate calculateReturnRate(int sumOfPrizeMoney) {
         return new ReturnRate(sumOfPrizeMoney, amount);
     }
 
-    public int calculatePurchaseCount() {
-        return amount / DEFAULT_EACH_LOTTO_PRICE;
+    public int calculateManualPurchaseCount() {
+        return this.manualCount;
+    }
+
+    public int calculateAutoPurchaseCount() {
+        return amount / DEFAULT_EACH_LOTTO_PRICE - this.manualCount;
     }
 
     @Override
@@ -46,11 +66,11 @@ public class PurchaseMoney {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PurchaseMoney that = (PurchaseMoney) o;
-        return amount == that.amount;
+        return amount == that.amount && manualCount == that.manualCount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(amount);
+        return Objects.hash(amount, manualCount);
     }
 }
