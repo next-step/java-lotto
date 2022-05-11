@@ -1,8 +1,6 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Collections;
 
 public class Lottery {
     public final LotteryBox lotteryBox;
@@ -11,7 +9,7 @@ public class Lottery {
     public Lottery() {
         this.lotteryBox = new LotteryBox();
         lotteryBox.shuffleBox();
-        this.numbers = findSixNumbers();
+        this.numbers = LotteryBox.findSixNumbers();
     }
 
     public Lottery(List<Integer> numbers) {
@@ -20,25 +18,9 @@ public class Lottery {
         this.numbers = numbers;
     }
 
-
-    public List<Integer> findSixNumbers() {
-        List<Integer> list = new ArrayList<>();
-        for (int i = 1; i <= 6; i++) {
-            list.add(lotteryBox.numbers.get(i));
-        }
-        return sort(list);
-    }
-
-    public List<Integer> sort(List<Integer> list) {
-        Collections.sort(list);
-        return list;
-    }
-
     @Override
     public String toString() {
-        return "Lottery{" +
-                "numbers=" + numbers +
-                '}';
+        return "Lottery{" + "numbers=" + numbers + '}';
     }
 
     public int findWin(Lottery answer) {
