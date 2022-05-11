@@ -1,22 +1,22 @@
 package lotto.dto.result;
 
-import lotto.constant.MatchResult;
+import lotto.constant.Rank;
 
 public class MatchStats {
 
     private int count;
-    private MatchResult matchResult;
+    private Rank rank;
 
-    public MatchStats(int count, MatchResult matchResult) {
+    public MatchStats(int count, Rank rank) {
         this.count = count;
-        this.matchResult = matchResult;
+        this.rank = rank;
     }
 
     public int count() {
         return count;
     }
 
-    public MatchResult matchResult() {
-        return matchResult;
+    public Rank matchResult() {
+        return rank;
     }
 }

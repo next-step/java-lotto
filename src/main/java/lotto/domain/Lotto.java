@@ -1,26 +1,47 @@
 package lotto.domain;
 
-import lotto.constant.MatchResult;
+import lotto.constant.Rank;
+import lotto.generator.RandomNumberGenerator;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private MatchResult matchResult;
     private final LottoNumbers lottoNumbers;
+    private Rank rank;
 
-    public Lotto(LottoNumbers lottoNumbers) {
+    private Lotto(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public void confirm(List<LottoNumber> winningNumbers) {
-        int matchCount = lottoNumbers.matchCount(winningNumbers);
-        this.matchResult = MatchResult.findByMatchCount(matchCount);
+    public static Lotto createAutoLotto() {
+        List<LottoNumber> randomLottoNumbers = RandomNumberGenerator.generate()
+                .stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
+        return new Lotto(new LottoNumbers(randomLottoNumbers));
     }
 
-    public Optional<MatchResult> findMatchResult() {
-        return Optional.ofNullable(matchResult);
+    public static Lotto valueOf(LottoNumbers lottoNumbers) {
+        return new Lotto(lottoNumbers);
+    }
+
+    public void confirm(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        rank = Rank.valueOf(lottoNumbers.matchCount(winningNumbers),
+                lottoNumbers.isContain(bonusNumber));
+    }
+
+    public boolean isSameRank(Rank rank) {
+        return this.rank == rank;
+    }
+
+    public Rank findMatchResult() {
+        return rank;
+    }
+
+    public LottoNumbers lottoNumbers() {
+        return lottoNumbers;
     }
 
     @Override

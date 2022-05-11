@@ -1,21 +1,28 @@
 package lotto.dto.result;
 
-import lotto.domain.LottoBuyer;
-import lotto.domain.Lottos;
+import lotto.domain.Lotto;
+import lotto.domain.LottoGame;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PurchasedLottos {
 
-    private Lottos lottos;
+    private List<PurchasedLotto> purchasedLottos;
 
-    private PurchasedLottos(Lottos lottos) {
-        this.lottos = lottos;
+    private PurchasedLottos(List<PurchasedLotto> purchasedLottos) {
+        this.purchasedLottos = purchasedLottos;
     }
 
-    public static PurchasedLottos from(LottoBuyer lottoBuyer) {
-        return new PurchasedLottos(lottoBuyer.lottos());
+    public static PurchasedLottos from(LottoGame lottoGame) {
+        List<PurchasedLotto> purchasedLottos = new ArrayList<>();
+        for (Lotto lotto : lottoGame.lottos().toList()) {
+            purchasedLottos.add(new PurchasedLotto(lotto));
+        }
+        return new PurchasedLottos(purchasedLottos);
     }
 
-    public Lottos lottos() {
-        return lottos;
+    public List<PurchasedLotto> lottos() {
+        return purchasedLottos;
     }
 }

@@ -1,10 +1,11 @@
 package lotto;
 
-import lotto.domain.LottoBuyer;
-import lotto.dto.input.BuyerData;
-import lotto.dto.input.LastWinningData;
+import lotto.domain.LottoGame;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.dto.result.PurchasedLottos;
 import lotto.dto.result.WinningStats;
+import lotto.util.SplitUtil;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -12,15 +13,14 @@ public class LottoSimulator {
 
     public static void main(String[] args) {
         int purchaseAmount = InputView.purchaseAmountView();
+        LottoGame lottoGame = new LottoGame(purchaseAmount);
 
-        LottoBuyer lottoBuyer = new LottoBuyer(new BuyerData(purchaseAmount));
-        PurchasedLottos purchasedLottos = lottoBuyer.buyLottos();
-
-        ResultView.purchasedLottosView(purchasedLottos);
+        ResultView.purchasedLottosView(PurchasedLottos.from(lottoGame));
 
         String lastWinningLottoNumbers = InputView.lastWinningLottoNumberView();
-        WinningStats winningStats = lottoBuyer.confirmLottos(new LastWinningData(lastWinningLottoNumbers));
+        int bonusNumber = InputView.bonusBallView();
+        lottoGame.confirmLottos(new LottoNumbers(SplitUtil.split(lastWinningLottoNumbers)), LottoNumber.valueOf(bonusNumber));
 
-        ResultView.lottosResultView(winningStats);
+        ResultView.lottosResultView(WinningStats.from(lottoGame));
     }
 }

@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.dto.result.MatchStats;
+import lotto.dto.result.PurchasedLotto;
 import lotto.exception.NotSupportInstanceException;
 
 import java.util.List;
@@ -30,11 +31,11 @@ public class ResultBuilder {
         throw new NotSupportInstanceException();
     }
 
-    public static String buildLottosInfo(List<Lotto> lottos) {
+    public static String buildLottosInfo(List<PurchasedLotto> purchasedLottos) {
         initializeStringBuilder();
 
-        for (Lotto lotto : lottos) {
-            sb.append(lotto);
+        for (PurchasedLotto lotto : purchasedLottos) {
+            sb.append(lotto.lottoNumbers());
             sb.append(BLANK_LINE);
         }
         return sb.toString();

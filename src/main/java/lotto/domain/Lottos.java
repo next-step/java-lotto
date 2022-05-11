@@ -1,9 +1,8 @@
 package lotto.domain;
 
-import lotto.constant.MatchResult;
+import lotto.constant.Rank;
 
 import java.util.List;
-import java.util.Optional;
 
 public class Lottos {
 
@@ -17,9 +16,9 @@ public class Lottos {
         return lottos.size();
     }
 
-    public void confirmAll(LottoNumbers winningNumbers) {
+    public void confirmAll(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
         for (Lotto lotto : lottos) {
-            lotto.confirm(winningNumbers.toList());
+            lotto.confirm(winningNumbers, bonusNumber);
         }
     }
 
@@ -27,21 +26,16 @@ public class Lottos {
         return lottos;
     }
 
-    public int countMatchResult(MatchResult matchResult) {
+    public int countMatchResult(Rank rank) {
         return (int) lottos.stream()
-                .map(Lotto::findMatchResult)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .filter(mr -> mr == matchResult)
+                .filter(lotto -> lotto.isSameRank(rank))
                 .count();
     }
 
     public int calculateTotalWinPrice() {
         return lottos.stream()
                 .map(Lotto::findMatchResult)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .mapToInt(MatchResult::winPrice)
+                .mapToInt(Rank::winPrice)
                 .sum();
     }
 }

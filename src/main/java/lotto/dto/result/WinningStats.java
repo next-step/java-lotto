@@ -1,7 +1,7 @@
 package lotto.dto.result;
 
-import lotto.constant.MatchResult;
-import lotto.domain.LottoBuyer;
+import lotto.constant.Rank;
+import lotto.domain.LottoGame;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,15 +16,15 @@ public class WinningStats {
         this.matchStatsList = matchStatsList;
     }
 
-    public static WinningStats from(LottoBuyer lottoBuyer) {
-        return new WinningStats(lottoBuyer.calculateProfitRate(), findMatchStatsList(lottoBuyer));
+    public static WinningStats from(LottoGame lottoGame) {
+        return new WinningStats(lottoGame.calculateProfitRate(), findMatchStatsList(lottoGame));
     }
 
-    private static List<MatchStats> findMatchStatsList(LottoBuyer lottoBuyer) {
+    private static List<MatchStats> findMatchStatsList(LottoGame lottoGame) {
         List<MatchStats> matchStats = new ArrayList<>();
-        for (MatchResult matchResult : MatchResult.values()) {
-            int count = lottoBuyer.lottos().countMatchResult(matchResult);
-            matchStats.add(new MatchStats(count, matchResult));
+        for (Rank rank : Rank.values()) {
+            int count = lottoGame.countMatchResult(rank);
+            matchStats.add(new MatchStats(count, rank));
         }
         return matchStats;
     }
