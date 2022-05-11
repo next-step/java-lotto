@@ -6,8 +6,9 @@ import lottoauto.domain.RatingStatics;
 public class ResultView {
     private ResultView() {}
 
-    public static void printLottosInfo(Lottos lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
+    public static void printLottosInfo(Lottos lottos, int theNumberOfManualLottos) {
+        int theNumberOfAutoLottos = lottos.size() - theNumberOfManualLottos;
+        System.out.println("\n수동으로 " + theNumberOfManualLottos + "장, 자동으로 " + theNumberOfAutoLottos + "개를 구매했습니다.");
         System.out.println(lottos);
     }
 

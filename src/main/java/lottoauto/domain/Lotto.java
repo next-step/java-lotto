@@ -8,19 +8,18 @@ public class Lotto {
     private static final int LOTTO_SIZE = 6;
     private static List<LottoNumber> lottoNumbersCache = LottoNumber.rangedClosed().mapToObj(LottoNumber::from).collect(Collectors.toList());
 
-    private final TreeSet<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    private Lotto(TreeSet<LottoNumber> lottoNumbers) {
+    private Lotto(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(LOTTO_SIZE + "개의 로또 번호를 입력해야 합니다.(중복된 번호 입력 불가)");
         }
         this.lottoNumbers = lottoNumbers;
-        System.out.println(this.lottoNumbers);
     }
 
     public static Lotto createAuto() {
         Collections.shuffle(lottoNumbersCache);
-        TreeSet<LottoNumber> lottoNumbers = lottoNumbersCache.stream()
+        Set<LottoNumber> lottoNumbers = lottoNumbersCache.stream()
                 .limit(LOTTO_SIZE)
                 .collect(Collectors.toCollection(TreeSet::new));
         return new Lotto(lottoNumbers);
@@ -31,7 +30,7 @@ public class Lotto {
     }
 
     public static Lotto from(String[] numbers) {
-        TreeSet<LottoNumber> lottoNumbers = Arrays.stream(numbers).map(LottoNumber::from).collect(Collectors.toCollection(TreeSet::new));
+        Set<LottoNumber> lottoNumbers = Arrays.stream(numbers).map(LottoNumber::from).collect(Collectors.toCollection(TreeSet::new));
         return new Lotto(lottoNumbers);
     }
 

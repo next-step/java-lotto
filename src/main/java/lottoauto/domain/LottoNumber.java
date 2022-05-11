@@ -60,6 +60,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if(this.number < o.number) {
             return -1;
         }
+        if(this.number == o.number) {
+            return 0;
+        }
         return 1;
     }
 }

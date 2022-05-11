@@ -21,13 +21,8 @@ public class LottoTest {
     @Test
     void 생성_정상() {
         Lotto lottoArray = Lotto.from(new String[]{"1", "2", "3", "4", "5", "6"});
-        System.out.println(lottoArray);
-        System.out.println(lottoArray.hashCode());
         Lotto lottoString = Lotto.from("1, 2, 3, 4, 5, 6");
-        System.out.println(lottoString);
-        System.out.println(lottoString.hashCode());
 
-        System.out.println(lottoArray.equals(lottoString));
         assertThat(lottoArray.equals(lottoString)).isTrue();
     }
 

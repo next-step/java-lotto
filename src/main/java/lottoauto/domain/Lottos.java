@@ -1,7 +1,6 @@
 package lottoauto.domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Lottos {
     private static final int LOTTO_PRICE = 1000;
@@ -12,17 +11,47 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public static Lottos from(List<Lotto> manualLottos) {
+        return new Lottos(manualLottos);
+    }
+
     public static Lottos from(int amount) {
-        int numberOfLottos = amount / LOTTO_PRICE;
-        List<Lotto> lottos = new ArrayList<>();
-        while (numberOfLottos-- > 0) {
-            lottos.add(Lotto.createAuto());
+        return Lottos.of(amount, null);
+    }
+
+    public static Lottos of(int amount, List<Lotto> manualLottos) {
+        if (isBlank(manualLottos)) {
+            manualLottos = new ArrayList<>();
         }
+
+        List<Lotto> lottos = new ArrayList<>();
+
+        int theNumberOfAutoLottos = theNumberOfPurchasedLottos(amount) - manualLottos.size();
+
+        addManualLottos(manualLottos, lottos);
+        addAutoLottos(theNumberOfAutoLottos, lottos);
+
         return new Lottos(lottos);
     }
 
-    public static Lottos from(List<Lotto> lottos) {
-        return new Lottos(lottos);
+    private static boolean isBlank(List<Lotto> manualLottos) {
+        return manualLottos == null || manualLottos.isEmpty();
+    }
+
+    public static int theNumberOfPurchasedLottos(int amount) {
+        return amount / LOTTO_PRICE;
+    }
+
+    private static void addAutoLottos(int numberOfAutoLottos, List<Lotto> lottos) {
+        while (numberOfAutoLottos-- > 0) {
+            lottos.add(Lotto.createAuto());
+        }
+    }
+
+    private static void addManualLottos(List<Lotto> manualLottos, List<Lotto> lottos) {
+        for (Lotto lotto : manualLottos) {
+            lottos.add(lotto);
+        }
     }
 
     public int size() {
@@ -41,6 +70,11 @@ public class Lottos {
 
     @Override
     public String toString() {
-        return lottos.stream().map(lotto -> lotto.toString() + "\n").collect(Collectors.joining());
+        StringBuilder sb = new StringBuilder();
+        for (Lotto lotto : lottos) {
+            String s = lotto.toString() + "\n";
+            sb.append(s);
+        }
+        return sb.toString();
     }
 }
