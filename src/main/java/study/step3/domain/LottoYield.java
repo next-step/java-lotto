@@ -3,10 +3,7 @@ package study.step3.domain;
 import java.util.List;
 
 public class LottoYield {
-    private static final String STRING_PROFIT = "이익";
-    private static final String STRING_LOSS = "손해";
     private static final int LOTTO_AMOUNT = 1000;
-
 
     private LottoYield() {}
 
