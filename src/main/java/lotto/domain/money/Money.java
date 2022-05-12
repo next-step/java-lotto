@@ -16,6 +16,7 @@ public class Money {
   }
 
   private Money(Currency currency, int amount) {
+    Objects.requireNonNull(currency, "통화 객체는 null 일 수 없습니다!");
     this.amount = amount;
     this.currency = currency;
   }
