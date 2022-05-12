@@ -29,7 +29,7 @@ public class Customer {
         this.money -= price;
     }
 
-    public void allBuy(int price) {
+    public void buyRemainingAutoLotto(int price) {
         while (hasMoney()) {
             buy(price);
         }

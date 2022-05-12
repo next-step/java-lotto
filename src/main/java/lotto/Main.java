@@ -18,7 +18,7 @@ public class Main {
 
         Customer customer = new Customer(money);
         manualLottoNumbers.forEach(numbers -> customer.buy(1000, new Lotto(numbers)));
-        customer.allBuy(1000);
+        customer.buyRemainingAutoLotto(1000);
 
         resultView.printLottos(customer);
         List<Integer> winningLottoNumbers = inputView.findWinningLottoNumbers();
