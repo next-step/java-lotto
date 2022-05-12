@@ -94,6 +94,88 @@ Result: 1
 Put your money.
 14000
 14 lotteries are purchased.
+[1, 8, 27, 37, 38, 45]
+[6, 17, 19, 24, 25, 41]
+[2, 21, 22, 29, 40, 44]
+[4, 8, 26, 27, 31, 39]
+[5, 8, 16, 19, 28, 41]
+[2, 17, 18, 23, 25, 43]
+[4, 6, 13, 15, 32, 43]
+[8, 25, 33, 40, 41, 42]
+[1, 7, 16, 26, 36, 37]
+[1, 19, 26, 29, 34, 45]
+[3, 9, 13, 15, 18, 42]
+[3, 11, 17, 22, 36, 37]
+[4, 13, 25, 28, 31, 36]
+[17, 21, 22, 30, 31, 45]
+Put lottery answer.
+17, 21, 22, 28, 31, 36
+Win Statistics
+------------------
+3 matches (₩5000): 2
+4 matches (₩50000): 1
+5 matches (₩1500000): 0
+6 matches (₩2000000000): 0
+
+Earning rate: Infinity
+📈Earned! (More than 1.0 means 'Earned')
+```
+
+### Requested Changes
+
+- [x] 1~45 box 생성 별도 분리
+- [x] 로또 번호 생성 부분 별도 객체 분리해서 Lottery 에 전달
+- [x] findWins를 반환 형태로 변환하여 테스트
+    - 테스트는 작성하였으나 반환형태가 아닌 인스턴스 변수활용
+- [x] 적자, 흑자 여부 출력
+- [x] 로또 번호가 중복되지 않는 유일한 45개의 수인지 테스트 추가
+- [x] 1000은 const 선언
+- [x] MoneyTest에 로또는 장당 1000원으로 구매 할 수 있다에 대한 테스트를 추가
+- [x] 로또 당첨 등급을 Map 대신 Enum을 사용해서 정의
+- [x] 2단 indent 제거
+- [x] 축약된 변수명 제거
+- [x] Controller 포함 모든 Class 의 3개 이하로 인스턴스 변수 줄이기
+- [x] 1단계 string_calculator 추가 수정
+    - [x] 연산(계산식)도 BiFunction 을 활용해서 Operator Enum이 가지게 적용
+    - [x] 상수와 멤버 변수의 선언 순서 변경
+    - [x] Interface Value 제거
+    - [x] Class Integer 제거
+    - [x] step1: 규칙 7: 3개 이상의 인스턴스 변수를 가진 클래스를 쓰지 않는다.
+- [x] step2: 규칙 7: 3개 이상의 인스턴스 변수를 가진 클래스를 쓰지 않는다.
+
+### Requested Changes phase2
+
+- [x] BiFunction 를 무명 -> 유명 람다로 수정
+- [x] WalletTest 의 객체를 개별로 선언하고 Given-When-Then 적용
+- [x] money 를 객체로 포장
+    - [x] money 에서 수익률 계산
+- [x] Answer 대신 Lottery 사용
+- [x] Reward.value -> money 변수명 수정, Money class 사용
+- [x] Reward 가 당첨 번호 개수(win) 도 함께 포장
+- [x] number 를 일일히 비교하는게 아닌 Lottery를 사용하여 matchNumber 수행
+- [x] findWins 에서 saveWin(win) 을 분리
+- [x] Lottery.shuffleBox()와 Lottery.findSixNumbers()를 LotteryBox 의 메소드로 이동
+- [x] infinity, NaN 출력 에러 수정
+
+## Step3: Lotto 2nd place
+
+### Requirements
+
+- [x] 2등 보너스 볼 추가 입력 받음
+- [x] WinStatistics.matches 에 Reward 를 key 로 저장하게 수정
+    - [x] Reward.toPayload 가 Reward.win 순으로 출력되게 수정
+- [x] bonusBall 여부 Reward 에 추가
+    - [x] Reward 가 bonusBall 을 가진 경우 바로 BONUS return
+- [x] Remove Answer
+- [x] Add Reward.BONUS test case
+- [x] Remove double indent with stream
+
+### Result output
+
+```
+Put your money.
+14000
+14 lotteries are purchased.
 [7, 11, 33, 34, 35, 45]
 [5, 10, 21, 22, 33, 38]
 [4, 23, 33, 39, 41, 43]
@@ -124,49 +206,13 @@ Earning rate: 2142.8571428571427
 📈Earned! (More than 1.0 means 'Earned')
 ```
 
-### Requested Changes
+### Requested changes
 
-- [x] 1~45 box 생성 별도 분리
-- [x] 로또 번호 생성 부분 별도 객체 분리해서 Lottery 에 전달
-- [x] findWins를 반환 형태로 변환하여 테스트
-    - 테스트는 작성하였으나 반환형태가 아닌 인스턴스 변수활용
-- [x] 적자, 흑자 여부 출력
-- [x] 로또 번호가 중복되지 않는 유일한 45개의 수인지 테스트 추가
-- [x] 1000은 const 선언
-- [x] MoneyTest에 로또는 장당 1000원으로 구매 할 수 있다에 대한 테스트를 추가
-- [x] 로또 당첨 등급을 Map 대신 Enum을 사용해서 정의
-- [x] 2단 indent 제거
-- [x] 축약된 변수명 제거
-- [x] Controller포함 모든 Class의 3개 이하로 인스턴스 변수 줄이기
-- [x] 1단계 string_calculator 추가 수정
-    - [x] 연산(계산식)도 BiFunction을 활용해서 Operator Enum이 가지게 적용
-    - [x] 상수와 멤버 변수의 선언 순서 변경
-    - [x] Interface Value 제거
-    - [x] Class Integer 제거
-    - [x] step1: 규칙 7: 3개 이상의 인스턴스 변수를 가진 클래스를 쓰지 않는다.
-- [x] step2: 규칙 7: 3개 이상의 인스턴스 변수를 가진 클래스를 쓰지 않는다.
-
-### Requested Changes phase2
-
-- [x] BiFunction 를 무명 -> 유명 람다로 수정
-- [x] WalletTest 의 객체를 개별로 선언하고 Given-When-Then 적용
-- [x] money 를 객체로 포장
-    - [x] money 에서 수익률 계산
-- [x] Answer 대신 Lottery 사용
-- [x] Reward.value -> money 변수명 수정, Money class 사용
-- [x] Reward 가 당첨 번호 개수(win) 도 함께 포장
-- [x] number를 일일히 비교하는게 아닌 Lottery를 사용하여 matchNumber 수행
-- [x] findWins에서 saveWin(win) 을 분리
-- [x] Lottery.shuffleBox()와 Lottery.findSixNumbers()를 LotteryBox의 메소드로 이동
-- [x] infinity, NaN 출력 에러 수정
-
-## Step3: Lotto 2nd place
-
-- [x] 2등 보너스 볼 추가 입력 받음
-- [x] WinStatistics.matches 에 Reward 를 key 로 저장하게 수정
-  - [x] Reward.toPayload 가 Reward.win 순으로 출력되게 수정
-- [x] bonusBall 여부 Reward 에 추가
-  - [x] Reward 가 bonusBall 을 가진 경우 바로 BONUS return
-- [x] Remove Answer
-- [x] Add Reward.BONUS test case
-- [x] Remove double indent with stream
+- [ ] 로또 번호를 표현하는 일급 콜렉션 -> 로또 번호 발급
+- [ ] LotteryBox.findSixNumbers 안에서 shuffle 수행
+- [ ] 당첨번호 객체 분리 (Lottery, bonusNumber 포함)
+- [ ] 이름 변경 getEarningRate -> profitRate
+- [ ] Money.didEarn -> ResultView 로 이동
+- [ ] Reward.getMoney 제거
+- [ ] Wallet은 로또 구매 갯수만 가지고 구매한 로또는 별도 저장
+- [ ] Reward.of 로 2등 당첨 테스트 추가
