@@ -27,4 +27,16 @@ class LottoTotalPriceTest {
     void LottoTotalPrice_구매금액이_음수인_경우() {
         assertThatThrownBy(() -> new LottoTotalPrice(-1000)).isInstanceOf(IllegalArgumentException.class);
     }
+
+
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "100, 1, false",
+            "1000, 1000, false",
+            "1000, 1001, true"
+    })
+    void LottoTotalPrice_총구매금액과_구입한_로또갯수_금액_비교(int totalPrice, int countPurchaseAmount, boolean trueOrFalse) {
+        assertThat(new LottoTotalPrice(totalPrice).lessThan(countPurchaseAmount)).isEqualTo(trueOrFalse);
+    }
 }

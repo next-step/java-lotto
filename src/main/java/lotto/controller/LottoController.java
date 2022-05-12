@@ -3,11 +3,9 @@ package lotto.controller;
 import lotto.domain.Lotto;
 import lotto.domain.WinningLotto;
 import lotto.domain.LottoGroup;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoTotalPrice;
 import lotto.domain.LottoGroupResult;
 import lotto.pattern.LottoNumberGenerateStrategy;
-import lotto.util.StringNumberUtils;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -21,21 +19,20 @@ public class LottoController {
     }
 
     public void autoLottoProgramStart() {
-        LottoTotalPrice lottoPurchaseAmount = LottoTotalPrice.create(InputView.scanPurchaseAmount());
+        LottoTotalPrice lottoTotalPrice = InputView.scanPurchaseAmount();
 
-        int manualLottoCount = StringNumberUtils.parse(InputView.scanManualLottoCount());
+        int manualLottoCount = InputView.scanManualLottosCount(lottoTotalPrice);
         List<Lotto> manualLottos = InputView.scanManualLottos(manualLottoCount);
 
-        int lottoCount = lottoPurchaseAmount.getPurchaseLottoCount();
+        int lottoCount = lottoTotalPrice.getPurchaseLottoCount();
         ResultView.printLottoCount(manualLottoCount, lottoCount - manualLottoCount);
 
         LottoGroup lottoGroup = LottoGroup.create(manualLottos, LottoGroup.createLottos(lottoCount - manualLottoCount, lottoNumberGenerateStrategy));
         ResultView.printLottoGroup(lottoGroup);
 
-        Lotto winningNumbers = Lotto.create(InputView.scanWinningNumbers());
-        LottoNumber bonusNumber = LottoNumber.create(InputView.scanBonusNumber());
+        WinningLotto winningLotto = InputView.getWinningLotto(InputView.scanWinningLotto());
 
-        LottoGroupResult lottoGroupResult = lottoGroup.getLottoGroupResult(new WinningLotto(winningNumbers, bonusNumber));
-        ResultView.printWinningStatistic(lottoGroupResult, lottoPurchaseAmount.getTotalPrice());
+        LottoGroupResult lottoGroupResult = lottoGroup.getLottoGroupResult(winningLotto);
+        ResultView.printWinningStatistic(lottoGroupResult, lottoTotalPrice.getTotalPrice());
     }
 }
