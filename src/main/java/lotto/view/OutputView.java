@@ -11,6 +11,7 @@ public class OutputView {
   private static final String WINNING_RATE_INTRO = "당첨 통계";
   private static final String WINNING_STATISTIC_CLASSIFICATION = "---------";
   private static final String WINNING_RATE_INFO_MESSAGE = "%d개 일치 (%d원) - %d개";
+  private static final String WINNING_RATE_BONUS_SECOND_INFO_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
   private static final String TOTAL_PROFIT_RATIO_MESSAGE = "총 수익률은 %.2f입니다.";
   private static final String PROFIT = "이득";
   private static final String LOSS = "손해";
@@ -39,12 +40,15 @@ public class OutputView {
         .filter(entry -> entry.getKey() != LottoRank.NON_MATCH)
         .sorted(Map.Entry.comparingByKey())
         .forEach(entry -> {
-          System.out.println(makeWinningLottoRateMessage(entry.getKey().getNumberOfMatch(),
+          System.out.println(makeWinningLottoRateMessage(entry.getKey(), entry.getKey().getNumberOfMatch(),
               entry.getKey().getReward(), entry.getValue()));
         });
   }
 
-  private static String makeWinningLottoRateMessage(int numberOfMatch, int reward, int totalMatch) {
+  private static String makeWinningLottoRateMessage(LottoRank lottoRank, int numberOfMatch, int reward, int totalMatch) {
+    if(lottoRank == LottoRank.BONUS_SECOND) {
+      return String.format(WINNING_RATE_BONUS_SECOND_INFO_MESSAGE, numberOfMatch, reward, totalMatch);
+    }
     return String.format(WINNING_RATE_INFO_MESSAGE, numberOfMatch, reward, totalMatch);
   }
 
