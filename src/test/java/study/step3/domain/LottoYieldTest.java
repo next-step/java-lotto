@@ -40,28 +40,4 @@ class LottoYieldTest {
 
         assertThat(LottoYield.operationYield(tickets, winners)).isEqualTo(profit);
     }
-
-    @Test
-    @DisplayName("이익 문자열 테스트")
-    void 이익_문자열_테스트() {
-        LottoTickets tickets = createTickets();
-        LottoWinners winners = createWinners("1,2,3,4,15,16", inputBonus);
-        String result = "이익";
-
-        double profit = LottoYield.operationYield(tickets, winners);
-
-        assertThat(LottoYield.stringYield(profit)).isEqualTo(result);
-    }
-
-    @Test
-    @DisplayName("손해 문자열 테스트")
-    void 손해_문자열_테스트() {
-        LottoTickets tickets = createTickets();
-        LottoWinners winners = createWinners("1,2,13,14,15,16", inputBonus);
-        String result = "손해";
-
-        double profit = LottoYield.operationYield(tickets, winners);
-
-        assertThat(LottoYield.stringYield(profit)).isEqualTo(result);
-    }
 }

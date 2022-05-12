@@ -6,7 +6,7 @@ public class LottoYield {
     private static final String STRING_PROFIT = "이익";
     private static final String STRING_LOSS = "손해";
     private static final int LOTTO_AMOUNT = 1000;
-    private static final int DEFAULT_LOTTO_YIELD = 1;
+
 
     private LottoYield() {}
 
@@ -17,12 +17,5 @@ public class LottoYield {
                 .sum();
         double buyAmount = lottoTickets.lottoQuantity() * LOTTO_AMOUNT;
         return lottoPrize/buyAmount;
-    }
-
-    public static String stringYield(double yield) {
-        if (yield >= DEFAULT_LOTTO_YIELD) {
-            return STRING_PROFIT;
-        }
-        return STRING_LOSS;
     }
 }

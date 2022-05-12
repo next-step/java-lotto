@@ -11,6 +11,7 @@ public class ResultView {
     private static final String RESULT_WINNER_LINE = "----------";
     private static final String STRING_BONUS = ", 보너스 볼 일치";
     private static final String STRING_EMPTY = "";
+    private static final int DEFAULT_LOTTO_YIELD = 1;
 
     private final LottoTickets lottoTickets;
 
@@ -38,7 +39,13 @@ public class ResultView {
 
     public void printLottoYield(LottoTickets lottoTickets, LottoWinners lottoWinners) {
         double yield = LottoYield.operationYield(lottoTickets, lottoWinners);
-        System.out.println("총 수익률을 " + String.format("%.2f", yield) + "입니다. (기준이 1이기 때문에 결과적으로 " + LottoYield.stringYield(yield) + "라는 의미임)");
+        System.out.print("총 수익률을 " + String.format("%.2f", yield) + "입니다. ");
+
+        if (yield >= DEFAULT_LOTTO_YIELD) {
+            System.out.print("(기준이 1이기 때문에 결과적으로 이익이라는 의미임)");
+            return;
+        }
+        System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 
     private void printLottoRank(LottoRank lottoRank, LottoWinners lottoWinners) {
