@@ -20,14 +20,14 @@ class StatisticTest {
   @DisplayName("당첨금 개수 정보가 음수이면 예외를 던진다")
   @Test
   void statistic() {
-    assertThatIllegalArgumentException().isThrownBy(() -> new Statistic(-1, Prizes.NOT_PRIZE))
+    assertThatIllegalArgumentException().isThrownBy(() -> new Statistic(-1, Prize.NOT_PRIZE))
         .withMessage("당첨 개수는 음수일 수 없습니다.");
   }
 
   @DisplayName("당첨금 정보가 null 이면 예외를 던진다")
   @ParameterizedTest
   @NullSource
-  void statistic(Prizes prize) {
+  void statistic(Prize prize) {
     assertThatNullPointerException().isThrownBy(() -> new Statistic(0, prize))
         .withMessage("당첨금은 null일 수 없습니다.");
   }
@@ -35,17 +35,17 @@ class StatisticTest {
   @DisplayName("Statistic은 당첨금 총액을 반환한다")
   @ParameterizedTest
   @MethodSource("provideForStatistic")
-  void statistic(int prizeCount, Prizes prize, Money money) {
+  void statistic(int prizeCount, Prize prize, Money money) {
     Statistic statistic = new Statistic(prizeCount, prize);
     assertThat(statistic.getTotalPrize()).isEqualTo(money);
   }
 
   private static Stream<Arguments> provideForStatistic() {
     return Stream.of(
-        arguments(0, Prizes.FIRST, Money.createWon(0)),
-        arguments(0, Prizes.SECOND, Money.createWon(0)),
-        arguments(2, Prizes.THIRD, Money.createWon(50_000 * 2)),
-        arguments(1, Prizes.FOURTH, Money.createWon(5_000))
+        arguments(0, Prize.FIRST, Money.createWon(0)),
+        arguments(0, Prize.SECOND, Money.createWon(0)),
+        arguments(2, Prize.THIRD, Money.createWon(50_000 * 2)),
+        arguments(1, Prize.FOURTH, Money.createWon(5_000))
     );
   }
 }

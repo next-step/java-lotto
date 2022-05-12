@@ -70,7 +70,7 @@ class LottoTicketsTest {
   @ParameterizedTest
   @MethodSource("provideForGetMatchedCountPerPrize")
   void getMatchedCountPerPrize(LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket,
-      Prizes prize,
+      Prize prize,
       int matchCount) {
     assertThat(lottoTickets.getMatchedCountPerPrize(prize, winningLottoTicket)).isEqualTo(
         matchCount);
@@ -87,16 +87,16 @@ class LottoTicketsTest {
     return Stream.of(
         arguments(new LottoTickets(
                 List.of(firstPrizeTicket, nonePrizeTicket, nonePrizeTicket, nonePrizeTicket)),
-            winningLottoTicket, Prizes.FIRST, 1),
+            winningLottoTicket, Prize.FIRST, 1),
         arguments(new LottoTickets(
             List.of(secondPrizeTicket, secondPrizeTicket, nonePrizeTicket, nonePrizeTicket,
-                nonePrizeTicket)), winningLottoTicket, Prizes.SECOND, 2),
+                nonePrizeTicket)), winningLottoTicket, Prize.SECOND, 2),
         arguments(new LottoTickets(
             List.of(thirdPrizeTicket, thirdPrizeTicket, thirdPrizeTicket, nonePrizeTicket,
-                nonePrizeTicket)), winningLottoTicket, Prizes.THIRD, 3),
+                nonePrizeTicket)), winningLottoTicket, Prize.THIRD, 3),
         arguments(new LottoTickets(
             List.of(fourthPrizeTicket, fourthPrizeTicket, fourthPrizeTicket, fourthPrizeTicket,
-                nonePrizeTicket)), winningLottoTicket, Prizes.FOURTH, 4)
+                nonePrizeTicket)), winningLottoTicket, Prize.FOURTH, 4)
     );
   }
 }

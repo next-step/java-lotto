@@ -19,8 +19,8 @@ public class Statistics {
 
   private List<Statistic> createStatistics(WinningLottoTicket winningLottoTicket,
       LottoTickets lottoTickets) {
-    return Arrays.stream(Prizes.values())
-        .filter(prizes -> prizes != Prizes.NOT_PRIZE)
+    return Arrays.stream(Prize.values())
+        .filter(prize -> prize != Prize.NOT_PRIZE)
         .map(prize -> new Statistic(lottoTickets.getMatchedCountPerPrize(prize, winningLottoTicket),
             prize))
         .collect(Collectors.toList());

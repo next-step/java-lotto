@@ -5,17 +5,17 @@ import lotto.domain.money.Money;
 
 public class Statistic {
 
-  private static final String NULL_PRIZES = "당첨금은 null일 수 없습니다.";
+  private static final String NULL_PRIZE = "당첨금은 null일 수 없습니다.";
   private static final String NEGATIVE_MATCHED_PRICE_COUNT = "당첨 개수는 음수일 수 없습니다.";
 
-  private final Prizes prizes;
+  private final Prize prize;
   private final int matchedPrizeCount;
 
-  public Statistic(int matchedPriceCount, Prizes prizes) {
+  public Statistic(int matchedPriceCount, Prize prize) {
     requireNonNegative(matchedPriceCount);
-    Objects.requireNonNull(prizes, NULL_PRIZES);
+    Objects.requireNonNull(prize, NULL_PRIZE);
     this.matchedPrizeCount = matchedPriceCount;
-    this.prizes = prizes;
+    this.prize = prize;
   }
 
   private void requireNonNegative(int matchedPriceCount) {
@@ -33,11 +33,11 @@ public class Statistic {
   }
 
   public int getMatchCount() {
-    return prizes.getMatchCount();
+    return prize.getMatchCount();
   }
 
   public Money getPrizeMoney() {
-    return prizes.getPrize();
+    return prize.getPrize();
   }
 
   public Money getTotalPrize() {
