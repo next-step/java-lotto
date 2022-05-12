@@ -18,6 +18,8 @@ public class LottoMachine {
                     .boxed()
                     .collect(Collectors.toList());
 
+    private LottoMachine() {}
+
     public static LottoTickets createLottoTickets(int buyAmount) {
         LottoQuantity lottoQuantity = new LottoQuantity(buyAmount);
 
