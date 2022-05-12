@@ -56,11 +56,11 @@ public class StringCalculator {
         }
 
         public static Operator of(final String operator) {
-            isOperator(operator);
+            checkOperator(operator);
             return Operator.valueOf(OPERATOR_MAP.get(operator));
         }
 
-        private static void isOperator(String operator) {
+        private static void checkOperator(String operator) {
             if (!operator.matches(REGULAR_EXPRESSION)) {
                 throw new IllegalArgumentException(EXCEPTION_MESSAGE);
             }
