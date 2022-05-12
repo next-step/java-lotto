@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class LottoNumberGenerator {
     public static final int START_NUMBER = 1;
     public static final int END_NUMBER = 45;
+    public static final int MAX_SIZE = 6;
 
     public static List<Integer> createLottoNumber() {
         List<Integer> lottoNumber = new ArrayList<>();
@@ -18,7 +19,7 @@ public class LottoNumberGenerator {
         Collections.shuffle(lottoNumber);
 
         return lottoNumber.stream()
-                .limit(6)
+                .limit(MAX_SIZE)
                 .collect(Collectors.toList());
     }
 
