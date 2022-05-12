@@ -16,7 +16,6 @@ public class LottoResultTest {
 
     @Test
     @DisplayName("로또 결과 테스트")
-    @EnumSource(value = Rank.class)
     void 로또_결과_테스트() {
         Map<Rank, Long> rankMap = new HashMap<>();
         rankMap.put(Rank.three, 2L);
@@ -37,7 +36,6 @@ public class LottoResultTest {
 
     @Test
     @DisplayName("수익률 테스트")
-    @EnumSource(value = Rank.class)
     void 당첨_수익률_테스트(){
         Money buy = new Money(14000);
         Money profitPriceRes = Rank.of(3).getReward();
@@ -52,7 +50,6 @@ public class LottoResultTest {
 
     @Test
     @DisplayName("수익률 테스트")
-    @EnumSource(value = Rank.class)
     void 당첨_수익률_테스트2(){
         Money buy = new Money(14000);
         Money profitPriceRes = Rank.of(3).getReward()
