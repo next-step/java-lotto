@@ -13,11 +13,12 @@ public class LotteryShop {
 
   private static final String PRICE_EXCEPTION_MESSAGE = String.format("로또 1장의 가격은 %s 입니다",
       PRICE_PER_PLAY_FOR_LOTTO.won());
+  private static final int START_TICKET_COUNT = 0;
 
   public LottoTickets sell(Money purchaseAmount, GenerateNumbersStrategy generateNumbersStrategy) {
     checkGreaterThanMinimumPrice(purchaseAmount);
 
-    List<LottoTicket> lottoTickets = IntStream.range(0,
+    List<LottoTicket> lottoTickets = IntStream.range(START_TICKET_COUNT,
             getAvailableLottoTicketCount(purchaseAmount))
         .mapToObj(i -> createLottoTicket(generateNumbersStrategy))
         .collect(toList());
