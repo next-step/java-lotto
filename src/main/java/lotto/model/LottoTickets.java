@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -24,5 +25,12 @@ public class LottoTickets {
         return res;
     }
 
-
+    public static List<LottoTicket> generateTickets(int ticketCnt){
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (int i = 0; i < ticketCnt; i++) {
+            LottoTicket lottoTicket = LottoNumber.generateLottoTicket();
+            lottoTickets.add(lottoTicket);
+        }
+        return lottoTickets;
+    }
 }

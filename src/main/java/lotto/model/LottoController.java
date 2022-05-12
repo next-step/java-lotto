@@ -1,22 +1,35 @@
 package lotto.model;
 
-import java.util.ArrayList;
+import lotto.view.Input;
+import lotto.view.Output;
+
 import java.util.List;
 import java.util.Map;
 
 public class LottoController {
 
-    public List<LottoTicket> generateTickets(int ticketCnt, LottoTicketGenerator lottoTicketGenerator){
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < ticketCnt; i++) {
-            LottoTicket lottoTicket = lottoTicketGenerator.generateNumberList();
-            lottoTickets.add(lottoTicket);
-        }
-        return lottoTickets;
+    public void start(){
+        Money money = new Money(Input.readMoney());
+        int ticketCnt = getTicketCnt(money);
+
+        LottoTickets lottoTickets = generateLottoTickets(ticketCnt);
+        LottoTicket winningTicket =  Input.readPreWeekWinningLottoNums();
+
+        Map<Rank, Long> rankMap = lottoTickets.getRankMap(winningTicket);
+        LottoResult lottoResult = new LottoResult(rankMap);
+
+        Output.printWinningStatics(money, lottoResult);
     }
 
-    public LottoResult start(LottoTickets lottoTickets, LottoTicket winningTicket){
-        Map<Rank, Long> rankMap = lottoTickets.getRankMap(winningTicket);
-        return new LottoResult(rankMap);
+    private int getTicketCnt(Money money) {
+        int cnt = money.calculateTicketCnt();
+        Output.printLottoCnt(cnt);
+        return cnt;
+    }
+
+    private LottoTickets generateLottoTickets(int ticketCnt){
+        List<LottoTicket> lottoTicketList = LottoTickets.generateTickets(ticketCnt);
+        Output.printLottoTicketList(lottoTicketList);
+        return new LottoTickets(lottoTicketList);
     }
 }
