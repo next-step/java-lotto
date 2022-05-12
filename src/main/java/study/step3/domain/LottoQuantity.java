@@ -15,11 +15,11 @@ public class LottoQuantity {
     }
 
     private int amountToQuantity(int buyAmount) {
-        isBuyAmountValid(buyAmount);
+        checkBuyAmountValid(buyAmount);
         return buyAmount / LOTTO_AMOUNT;
     }
 
-    private void isBuyAmountValid(int buyAmount) {
+    private void checkBuyAmountValid(int buyAmount) {
         if (buyAmount < LOTTO_AMOUNT) {
             throw new IllegalArgumentException(BUY_AMOUNT_ERROR);
         }

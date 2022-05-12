@@ -6,12 +6,12 @@ public class LottoWinners {
     private final LottoNumber bonusNumber;
 
     public LottoWinners(LottoNumbers winnerNumbers, LottoNumber bonusNumber) {
-        isDuplicateWinnersInBonus(winnerNumbers, bonusNumber);
+        checkDuplicateWinnersInBonus(winnerNumbers, bonusNumber);
         this.winnerNumbers = winnerNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    private void isDuplicateWinnersInBonus(LottoNumbers winnerNumbers, LottoNumber bonusNumber) {
+    private void checkDuplicateWinnersInBonus(LottoNumbers winnerNumbers, LottoNumber bonusNumber) {
         boolean result = winnerNumbers.readOnlyNumbers().contains(bonusNumber);
         if (result) {
             throw new IllegalArgumentException(WINNER_BONUS_DUPLICATE_ERROR);

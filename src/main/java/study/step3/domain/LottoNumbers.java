@@ -14,8 +14,8 @@ public class LottoNumbers {
     private final List<LottoNumber> numbers;
 
     public LottoNumbers(List<Integer> lottoNumbers) {
-        isLottoNumberCount(lottoNumbers);
-        isDuplicateNumbers(lottoNumbers);
+        checkLottoNumberCount(lottoNumbers);
+        checkDuplicateNumbers(lottoNumbers);
         this.numbers = createLottoNumbers(lottoNumbers);
     }
 
@@ -37,13 +37,13 @@ public class LottoNumbers {
         return Arrays.asList(new LottoNumber(inputBonusNumber));
     }
 
-    private void isLottoNumberCount(List<Integer> result) {
+    private void checkLottoNumberCount(List<Integer> result) {
         if (result.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(LOTTO_NUMBER_COUNT_ERROR);
         }
     }
 
-    private void isDuplicateNumbers(List<Integer> result) {
+    private void checkDuplicateNumbers(List<Integer> result) {
         int count = (int) result.stream()
                 .distinct()
                 .count();

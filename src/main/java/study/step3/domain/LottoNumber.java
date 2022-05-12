@@ -10,17 +10,17 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(int number) {
-        isLottoNumberRange(number);
+        checkLottoNumberRange(number);
         this.number = number;
     }
 
-    private void isLottoNumberRange(int result) {
-        if (isLottoNumberSize(result)) {
+    private void checkLottoNumberRange(int result) {
+        if (checkLottoNumberSize(result)) {
             throw new IllegalArgumentException(LOTTO_NUMBER_SIZE_ERROR);
         }
     }
 
-    private boolean isLottoNumberSize(int number) {
+    private boolean checkLottoNumberSize(int number) {
         return (MIN_NUMBER > number) || (MAX_NUMBER < number);
     }
 
