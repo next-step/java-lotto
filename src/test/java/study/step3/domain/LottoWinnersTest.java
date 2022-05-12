@@ -3,7 +3,7 @@ package study.step3.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -12,10 +12,10 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 @DisplayName("당첨 번호 세팅")
 class LottoWinnersTest {
 
-    public List<Integer> createLottoNumber() {
+    public Set<Integer> createLottoNumber() {
         return IntStream.range(1,7)
                 .boxed()
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     @Test

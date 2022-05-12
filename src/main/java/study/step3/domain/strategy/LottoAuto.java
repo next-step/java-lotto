@@ -2,6 +2,7 @@ package study.step3.domain.strategy;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -15,12 +16,11 @@ public class LottoAuto implements LottoCreationStrategy {
                     .collect(Collectors.toList());
 
     @Override
-    public List<Integer> createLottoNumber() {
+    public Set<Integer> createLottoNumber() {
         Collections.shuffle(DEFAULT_NUMBER_RANGE);
-        List<Integer> result = DEFAULT_NUMBER_RANGE.stream()
+        Set<Integer> result = DEFAULT_NUMBER_RANGE.stream()
                 .limit(LOTTO_NUMBER_COUNT)
-                .collect(Collectors.toList());
-        Collections.sort(result);
+                .collect(Collectors.toSet());
         return result;
     }
 }

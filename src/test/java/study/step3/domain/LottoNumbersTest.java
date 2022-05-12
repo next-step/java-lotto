@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -14,15 +14,15 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 @DisplayName("번호 그룹")
 class LottoNumbersTest {
-    public List<Integer> createLottoNumber() {
+    public Set<Integer> createLottoNumber() {
         return IntStream.range(1,7)
                 .boxed()
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
-    public List<Integer> createLottoNumber_2() {
+    public Set<Integer> createLottoNumber_2() {
         return IntStream.range(2, 8)
                 .boxed()
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     @Test
@@ -36,7 +36,7 @@ class LottoNumbersTest {
     @Test
     @DisplayName("번호 일치 확인")
     void 번호_일치_확인() {
-        List<Integer> intList = createLottoNumber();
+        Set<Integer> intList = createLottoNumber();
         LottoNumbers numbers = new LottoNumbers(intList);
         LottoNumbers numbers2 = new LottoNumbers(intList);
 

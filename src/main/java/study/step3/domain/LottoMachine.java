@@ -4,6 +4,7 @@ import study.step3.domain.strategy.LottoCreationStrategy;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -40,14 +41,14 @@ public class LottoMachine {
         return new LottoTicket(lottoNumberRandom());
     }
 
-    private static List<Integer> lottoNumberRandom() {
+    private static Set<Integer> lottoNumberRandom() {
         return lottoCreationStrategy.createLottoNumber();
     }
 
-    private static List<Integer> createLottoNumbers(String numbers) {
-        List<Integer> result = stringToList(numbers).stream()
+    private static Set<Integer> createLottoNumbers(String numbers) {
+        Set<Integer> result = stringToList(numbers).stream()
                 .map(Integer::parseInt)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         return result;
     }
 

@@ -1,16 +1,16 @@
 package study.step3.domain;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
 public class LottoTicket {
     private final LottoNumbers lottoNumbers;
 
-    public LottoTicket(List<Integer> numbers) {
+    public LottoTicket(Set<Integer> numbers) {
         this.lottoNumbers = new LottoNumbers(numbers);
     }
 
-    public List<LottoNumber> readOnlyLottoNumber() {
-        return Collections.unmodifiableList(lottoNumbers.readOnlyNumbers());
+    public Set<LottoNumber> readOnlyLottoNumber() {
+        return Collections.unmodifiableSet(lottoNumbers.readOnlyNumbers());
     }
 }

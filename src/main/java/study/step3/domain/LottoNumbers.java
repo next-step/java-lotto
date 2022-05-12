@@ -1,21 +1,16 @@
 package study.step3.domain;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private static final String LOTTO_NUMBER_DUPLICATE_ERROR = "중복된 당첨 번호가 존재합니다.";
     private static final String LOTTO_NUMBER_COUNT_ERROR = "당첨 번호는 6개 입력해주세요.";
     private static final int LOTTO_NUMBER_COUNT = 6;
 
-    private final List<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
-    public LottoNumbers(List<Integer> lottoNumbers) {
+    public LottoNumbers(Set<Integer> lottoNumbers) {
         checkLottoNumberCount(lottoNumbers);
-        checkDuplicateNumbers(lottoNumbers);
         this.numbers = createLottoNumbers(lottoNumbers);
     }
 
@@ -23,32 +18,23 @@ public class LottoNumbers {
         this.numbers = createBonusNumber(inputBonusNumber);
     }
 
-    public List<LottoNumber> readOnlyNumbers() {
-        return Collections.unmodifiableList(numbers);
+    public Set<LottoNumber> readOnlyNumbers() {
+        return Collections.unmodifiableSet(numbers);
     }
 
-    private List<LottoNumber> createLottoNumbers(List<Integer> lottoNumbers) {
+    private Set<LottoNumber> createLottoNumbers(Set<Integer> lottoNumbers) {
         return lottoNumbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
-    private List<LottoNumber> createBonusNumber(int inputBonusNumber) {
-        return Arrays.asList(new LottoNumber(inputBonusNumber));
+    private Set<LottoNumber> createBonusNumber(int inputBonusNumber) {
+        return Set.copyOf(Arrays.asList(new LottoNumber(inputBonusNumber)));
     }
 
-    private void checkLottoNumberCount(List<Integer> result) {
+    private void checkLottoNumberCount(Set<Integer> result) {
         if (result.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(LOTTO_NUMBER_COUNT_ERROR);
-        }
-    }
-
-    private void checkDuplicateNumbers(List<Integer> result) {
-        int count = (int) result.stream()
-                .distinct()
-                .count();
-        if (count != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_DUPLICATE_ERROR);
         }
     }
 
