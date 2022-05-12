@@ -11,6 +11,8 @@ import java.util.stream.Stream;
 
 public final class Lottos {
 
+    private static final int ZERO = 0;
+
     private final List<Lotto> lottos;
 
     public Lottos(long count, LottoGenerator lottoGenerator) {
@@ -51,6 +53,9 @@ public final class Lottos {
     public Lottos addAll(Lottos other) {
         Objects.requireNonNull(other, "합치려는 Lottos 객체는 null일 수 없습니다.");
 
+        if (other.size() == ZERO) {
+            return this;
+        }
         return new Lottos(Stream.concat(lottos.stream(), other.get().stream())
                 .collect(Collectors.toList()));
     }
