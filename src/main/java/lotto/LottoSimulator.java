@@ -19,7 +19,7 @@ public class LottoSimulator {
 
         String lastWinningLottoNumbers = InputView.lastWinningLottoNumberView();
         int bonusNumber = InputView.bonusBallView();
-        lottoGame.confirmLottos(new LottoNumbers(SplitUtil.split(lastWinningLottoNumbers)), LottoNumber.valueOf(bonusNumber));
+        lottoGame.confirmLottos(new LottoNumbers(lastWinningLottoNumbers), LottoNumber.valueOf(bonusNumber));
 
         ResultView.lottosResultView(WinningStats.from(lottoGame));
     }

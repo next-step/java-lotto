@@ -48,7 +48,7 @@ class LottoNumbersTest {
     @Test
     @DisplayName("로또 번호가 6개가 아닐경우 InvalidLottoNumberCount 를 반환한다.")
     void InvalidNumberException() {
-        assertThatThrownBy(() -> new LottoNumbers(new String[]{"1"})).isInstanceOf(InvalidLottoNumberCount.class)
+        assertThatThrownBy(() -> new LottoNumbers("1")).isInstanceOf(InvalidLottoNumberCount.class)
                 .hasMessage("로또번호는 " + LottoNumbers.LOTTO_NUMBER_COUNT + "개를 가져야합니다.");
     }
 

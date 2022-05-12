@@ -27,7 +27,7 @@ class LottosTest {
         lottoList.add(rankMissLotto);
 
         Lottos lottos = new Lottos(lottoList);
-        lottos.confirmAll(new LottoNumbers(new String[]{"1", "2", "3", "20", "21", "22"}), LottoNumber.valueOf(23));
+        lottos.confirmAll(new LottoNumbers("1, 2, 3, 20, 21, 22"), LottoNumber.valueOf(23));
 
         assertThat(lottos.calculateTotalWinPrice()).isEqualTo(Rank.FIFTH.winPrice() + Rank.FIFTH.winPrice());
     }
@@ -45,7 +45,7 @@ class LottosTest {
         lottoList.add(rankMissLotto);
 
         Lottos lottos = new Lottos(lottoList);
-        lottos.confirmAll(new LottoNumbers(new String[]{"1", "2", "3", "20", "21", "22"}), LottoNumber.valueOf(23));
+        lottos.confirmAll(new LottoNumbers("1, 2, 3, 20, 21, 22"), LottoNumber.valueOf(23));
 
         assertThat(lottos.countMatchResult(Rank.FIFTH)).isEqualTo(2);
     }
