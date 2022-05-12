@@ -24,7 +24,7 @@ public class ResultView {
         builder.append("\n 5개 일치, 보너스 볼 일치(30,000,000원)- " + winningList.stream().filter(rank -> rank == Rank.TWO).count());
         builder.append("\n 6개 일치 (2,000,000,000원)- " + winningList.stream().filter(rank -> rank == Rank.ONE).count());
 
-        System.out.println(builder.toString());
+        System.out.println(builder);
     }
 
     public void printProfit(double profit) {
