@@ -14,7 +14,7 @@ public class MoneyTest {
     @DisplayName("구매 금액이 1000원 미만이면 예외를 던진다.")
     public void validateTest(int money) {
         Assertions.assertThatExceptionOfType(TooSmallMoneyException.class).isThrownBy(
-                () -> new Money(money).getMoney()
+                () -> new Money(money, false).getMoney()
         );
 
     }
@@ -23,6 +23,6 @@ public class MoneyTest {
     @CsvSource(value = {"10000:10", "25000:25", "25321:25"}, delimiter = ':')
     @DisplayName("구매 금액에 1000을 나누면 구매한 로또 장수가 나온다")
     public void lottoNumTest(int money, int lottoNum) {
-        Assertions.assertThat(new Money(money).changeMoneyToLottoNum()).isEqualTo(lottoNum);
+        Assertions.assertThat(new Money(money, false).changeMoneyToLottoNum()).isEqualTo(lottoNum);
     }
 }

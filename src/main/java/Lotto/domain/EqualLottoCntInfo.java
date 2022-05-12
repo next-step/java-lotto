@@ -7,8 +7,8 @@ import java.util.stream.Stream;
 public enum EqualLottoCntInfo {
 
     FIRST(6, 2000000000),
-    BONUS(5,30000000),
     SECOND(5, 1500000),
+    BONUS(5, 30000000),
     THIRD(4, 50000),
     FOURTH(3, 5000),
     FIFTH(2, 0),
@@ -19,15 +19,15 @@ public enum EqualLottoCntInfo {
     private static final int BONUS_EQUAL_COUNT = 5;
 
     private final int equalCnt;
-    private final int winningMoney;
+    private final Money winningMoney;
 
     EqualLottoCntInfo(int equalCnt, int winningMoney) {
         this.equalCnt = equalCnt;
-        this.winningMoney = winningMoney;
+        this.winningMoney = new Money(winningMoney, true);
     }
 
     public static EqualLottoCntInfo findEqualLottoInfo(int equalCnt, boolean isBonus) {
-        if (equalCnt != BONUS_EQUAL_COUNT || !isBonus) {
+        if (isNotBonusRank(equalCnt, isBonus)) {
             return Stream.of(values())
                     .filter(EqualLottoCntInfo -> (EqualLottoCntInfo.equalCnt == (equalCnt)))
                     .findFirst()
@@ -36,8 +36,16 @@ public enum EqualLottoCntInfo {
         return EqualLottoCntInfo.BONUS;
     }
 
+    private static boolean isNotBonusRank(int equalCnt, boolean isBonus) {
+        return equalCnt != BONUS_EQUAL_COUNT || !isBonus;
+    }
+
     public int calcTotalWinningMoney(int winningNumberCount) {
-        return winningMoney * winningNumberCount;
+        return winningMoney.getMoney() * winningNumberCount;
+    }
+
+    public boolean isWinningBonus() {
+        return ((this == EqualLottoCntInfo.BONUS) && (equalCnt == 5));
     }
 
     public int getEqualCnt() {
@@ -45,7 +53,7 @@ public enum EqualLottoCntInfo {
     }
 
     public int getWinningMoney() {
-        return winningMoney;
+        return winningMoney.getMoney();
     }
 
     public boolean isWinning() {

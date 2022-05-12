@@ -49,4 +49,21 @@ public class LottoTest {
         assertThrows(SameNumberException.class, (
         ) -> new Lotto(numbers));
     }
+
+    private static Stream<Arguments> bonusValidateArgs() {
+        return Stream.of(
+                arguments("1, 2, 3, 4, 5, 6", new Number(4)),
+                arguments("10, 12, 13, 14, 25, 36", new Number(12)),
+                arguments("8, 12, 31, 41, 25, 45", new Number(45))
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("bonusValidateArgs")
+    @DisplayName("당첨숫자와 보너스번호가 겹치면 예외를 던진다.")
+    public void sameBonusNumberExceptionTest(String winningNumber, Number bonus ) {
+        assertThrows(SameNumberException.class, (
+        ) -> new Lotto(winningNumber, bonus));
+    }
+
 }

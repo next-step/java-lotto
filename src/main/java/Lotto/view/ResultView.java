@@ -61,7 +61,7 @@ public class ResultView {
 
     private static String isWinningBonusNumber(EqualLottoCntInfo equalLottoCntInfo) {
         String str = "";
-        if ((equalLottoCntInfo == EqualLottoCntInfo.BONUS) && (equalLottoCntInfo.getEqualCnt() == 5))
+        if (equalLottoCntInfo.isWinningBonus())
             str = ", 보너스 볼 일치";
         return str;
     }

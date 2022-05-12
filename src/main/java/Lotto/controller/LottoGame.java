@@ -9,48 +9,40 @@ import java.util.Map;
 
 public class LottoGame {
 
-    private Lottos lottos;
     private Money money;
     private Lotto winningNumbers;
     private Number bonusNumber;
 
     public void start() {
-        inputBuyMoney();
 
-        createMyLottos();
+        Lottos lottos = createLottos();
 
-        viewMyLottoNumbers();
+        viewMyLottoNumbers(lottos);
 
         inputAndCreateWinningLottoNumbers();
 
-        viewResult();
+        viewResult(lottos);
     }
 
-    private void inputBuyMoney() {
-        money = new Money(InputView.inputBuyMoney());
+    private Lottos createLottos() {
+        money = new Money(InputView.inputBuyMoney(), true);
+
+        return new Lottos(money.changeMoneyToLottoNum());
     }
 
-    private void createMyLottos() {
-        lottos = new Lottos(money.changeMoneyToLottoNum());
-    }
-
-    private void viewMyLottoNumbers() {
+    private void viewMyLottoNumbers(Lottos lottos) {
         ResultView.viewLottoNumbers(lottos);
     }
 
     private void inputAndCreateWinningLottoNumbers() {
-        winningNumbers = new Lotto(InputView.inputWinningLottoNumbers());
+        String winningNumberStr = InputView.inputWinningLottoNumbers();
 
-        inputAndCreateBonusLottoNumber();
-    }
-
-    private void inputAndCreateBonusLottoNumber() {
         bonusNumber = new Number(InputView.inputBonusLottoNumbers());
 
-        winningNumbers.isDuplicateNumber(bonusNumber);
+        winningNumbers = new Lotto(winningNumberStr, bonusNumber);
     }
 
-    private void viewResult() {
+    private void viewResult(Lottos lottos) {
         Map<EqualLottoCntInfo, Integer> resultInfo = lottos.findWinningLotto(winningNumbers, bonusNumber);
 
         ResultView.viewResultBoard(resultInfo);

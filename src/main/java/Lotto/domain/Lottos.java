@@ -9,6 +9,12 @@ public class Lottos {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_NUMBER_SIZE = 6;
 
+    public Lottos(Lotto [] lottos) {
+        for (Lotto lotto : lottos) {
+            list.add(lotto);
+        }
+    }
+
     public Lottos(int lottoCount) {
         List<Integer> tmpNumbers = createAllNumbers();
 

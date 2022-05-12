@@ -7,8 +7,12 @@ public class Money {
     private int money = 0;
     private static final int MIN_MONEY  = 1000;
 
-    public Money(int money) {
-        validate(money);
+
+    public Money(int money, boolean isWinningMoney) {
+        if (!isWinningMoney) {
+            validate(money);
+        }
+
         this.money = money;
     }
 

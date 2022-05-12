@@ -17,7 +17,7 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         for (int number : numbers) {
-            this.myNumbers.add(NumberFactory.getNumber(number));
+            this.myNumbers.add(Number.getNumber(number));
         }
     }
 
@@ -27,8 +27,14 @@ public class Lotto {
         validate(winningNumberArr);
 
         for (String number : winningNumberArr) {
-            myNumbers.add(NumberFactory.getNumber(Integer.parseInt(number)));
+            myNumbers.add(Number.getNumber(Integer.parseInt(number)));
         }
+    }
+
+    public Lotto(String winningNumberStr, Number bonusNumber) {
+        this(winningNumberStr);
+
+        isDuplicateNumber(bonusNumber);
     }
 
     private void validate(String[] winningNumberArr) {
@@ -72,7 +78,7 @@ public class Lotto {
         return cnt;
     }
 
-    public void isDuplicateNumber(Number bonusNumber) {
+    private void isDuplicateNumber(Number bonusNumber) {
         if(myNumbers.contains(bonusNumber)) {
             throw new SameNumberException("당첨번호와 보너스 번호가 중복됩니다.");
         }
