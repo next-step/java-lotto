@@ -24,7 +24,7 @@ public class Lotto {
     }
 
     public boolean hasLottoNumber() {
-        return numbers.size() == 0;
+        return numbers.isEmpty();
     }
 
     public boolean isMatchingBonus(Integer bonusNumber) {
