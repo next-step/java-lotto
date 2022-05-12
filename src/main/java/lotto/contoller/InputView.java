@@ -47,7 +47,7 @@ public class InputView {
         for (int i = 0; i < lottoCount; i++) {
             manualNumbers.add(toList());
         }
-        System.out.println( "수동으로 " + lottoCount + "장, 자동으로 " + ((purchaseAmount / LOTTO_PRICE) - lottoCount ) + "개를 구매했습니다.");
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", lottoCount, (purchaseAmount / LOTTO_PRICE) - lottoCount));
         return manualNumbers;
     }
 
