@@ -14,12 +14,12 @@ class WinningLottoTest {
     void WinningLotto_당첨로또_생성() {
         WinningLotto winningLotto = new WinningLotto(Lotto.create(new int[]{1, 2, 3, 4, 5, 6}), 7);
         assertThat(winningLotto).isEqualTo(new WinningLotto(new Lotto(List.of(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6))), new LottoNumber(7)));
+                LottoNumber.create(1),
+                LottoNumber.create(2),
+                LottoNumber.create(3),
+                LottoNumber.create(4),
+                LottoNumber.create(5),
+                LottoNumber.create(6))), LottoNumber.create(7)));
     }
 
     @ParameterizedTest

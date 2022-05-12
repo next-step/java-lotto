@@ -13,7 +13,7 @@ public class WinningLotto {
     }
 
     WinningLotto(Lotto winningLotto, int bonusNumber) {
-        this(winningLotto, new LottoNumber(bonusNumber));
+        this(winningLotto, LottoNumber.create(bonusNumber));
     }
 
     public Lotto getWinningLotto() {

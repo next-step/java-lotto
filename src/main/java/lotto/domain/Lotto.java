@@ -23,7 +23,7 @@ public class Lotto {
     public static Lotto create(int[] numbers) {
         return new Lotto(IntStream.of(numbers)
                 .boxed()
-                .map(LottoNumber::new)
+                .map(LottoNumber::create)
                 .collect(Collectors.toList()));
     }
 

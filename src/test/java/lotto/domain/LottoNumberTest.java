@@ -9,6 +9,6 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 46, 47})
     void LottoNumber_숫자범위를_넘어선경우(int number) {
-        assertThatThrownBy(() -> new LottoNumber(number)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> LottoNumber.create(number)).isInstanceOf(IllegalArgumentException.class);
     }
 }

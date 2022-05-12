@@ -21,10 +21,10 @@ class LottoGroupTest {
         assertThat(lottoGroup).isEqualTo(new LottoGroup(
                 List.of(
                         new Lotto(List.of(
-                                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
+                                LottoNumber.create(1), LottoNumber.create(2), LottoNumber.create(3), LottoNumber.create(4), LottoNumber.create(5), LottoNumber.create(6)
                         )),
                         new Lotto(List.of(
-                                new LottoNumber(7), new LottoNumber(8), new LottoNumber(9), new LottoNumber(10), new LottoNumber(11), new LottoNumber(12)
+                                LottoNumber.create(7), LottoNumber.create(8), LottoNumber.create(9), LottoNumber.create(10), LottoNumber.create(11), LottoNumber.create(12)
                         ))
                 )
         )).isEqualTo(lottoGroup);
@@ -37,23 +37,23 @@ class LottoGroupTest {
                 Lotto.create(new int[]{1, 2, 3, 4, 5, 6}))
         );
         assertThat(lottoGroup).isEqualTo(LottoGroup.create(2, () -> List.of(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6))));
+                LottoNumber.create(1),
+                LottoNumber.create(2),
+                LottoNumber.create(3),
+                LottoNumber.create(4),
+                LottoNumber.create(5),
+                LottoNumber.create(6))));
     }
 
     @Test
     void LottoGroup_로또갯수가_음수인_경우() {
         assertThatThrownBy(() -> LottoGroup.createLottos(-1, () -> List.of(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)))).isInstanceOf(IllegalArgumentException.class);
+                LottoNumber.create(1),
+                LottoNumber.create(2),
+                LottoNumber.create(3),
+                LottoNumber.create(4),
+                LottoNumber.create(5),
+                LottoNumber.create(6)))).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -69,7 +69,7 @@ class LottoGroupTest {
                 Lotto.create(new int[]{31, 32, 33, 34, 35, 36}),
                 Lotto.create(new int[]{37, 38, 39, 40, 41, 42}))
         );
-        assertThat(lottoGroup.getLottoGroupResult(new WinningLotto(Lotto.create(new int[]{4, 5, 6, 8, 9, 10}), new LottoNumber(1)))).isEqualTo(new LottoGroupResult(Map.of(
+        assertThat(lottoGroup.getLottoGroupResult(new WinningLotto(Lotto.create(new int[]{4, 5, 6, 8, 9, 10}), LottoNumber.create(1)))).isEqualTo(new LottoGroupResult(Map.of(
                 LottoRank.MISS, 4,
                 LottoRank.FIFTH, 2,
                 LottoRank.FOURTH, 1,

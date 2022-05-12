@@ -13,12 +13,12 @@ class LottoTest {
     @Test
     void LottoNumber_로또가_생성된다() {
         assertThat(Lotto.create(new int[]{1, 2, 3, 4, 5, 6})).isEqualTo(new Lotto(List.of(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
+                LottoNumber.create(1),
+                LottoNumber.create(2),
+                LottoNumber.create(3),
+                LottoNumber.create(4),
+                LottoNumber.create(5),
+                LottoNumber.create(6)
         )));
     }
 
@@ -45,6 +45,6 @@ class LottoTest {
     })
     void getRank_로또_등수_판별(int num1, int num2, int num3, int num4, int num5, int num6, int bonusNumber, String lottoRankString) {
         Lotto lotto = Lotto.create(new int[]{num1, num2, num3, num4, num5, num6});
-        assertThat(lotto.getLottoRank(new WinningLotto(Lotto.create(new int[]{1, 2, 3, 4, 5, 6}), new LottoNumber(bonusNumber)))).isEqualTo(LottoRank.valueOf(lottoRankString));
+        assertThat(lotto.getLottoRank(new WinningLotto(Lotto.create(new int[]{1, 2, 3, 4, 5, 6}), LottoNumber.create(bonusNumber)))).isEqualTo(LottoRank.valueOf(lottoRankString));
     }
 }
