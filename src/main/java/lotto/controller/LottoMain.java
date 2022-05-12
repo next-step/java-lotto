@@ -2,7 +2,7 @@ package lotto.controller;
 
 import lotto.dto.ExtractLottoNumbers;
 import lotto.dto.LottoResult;
-import lotto.model.CountInfo;
+import lotto.model.LottoCount;
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 import lotto.model.Lottos;
@@ -21,9 +21,9 @@ public class LottoMain {
         int manualLottoCount = InputView.inputManualLottoCount();
         List<String> manualLottoNumbers = InputView.inputManualLottoNumbers(manualLottoCount);
 
-        CountInfo countInfo = new CountInfo(buyingMoney, manualLottoCount);
+        LottoCount lottoCount = new LottoCount(buyingMoney, manualLottoCount);
         Lottos manualLottos = inputManualLottos(manualLottoNumbers);
-        Lottos buyingLottos = new Lottos(countInfo.getRandomCount(), new RandomLottoGenerator());
+        Lottos buyingLottos = new Lottos(lottoCount.getRandomCount(), new RandomLottoGenerator());
 
         ResultView.printBuyingLottos(manualLottos, buyingLottos);
 

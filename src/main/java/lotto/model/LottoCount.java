@@ -2,14 +2,14 @@ package lotto.model;
 
 import java.util.Objects;
 
-public class CountInfo {
+public class LottoCount {
     private static final int ZERO = 0;
     private static final Money BASE_MONEY_UNIT = new Money(1000);
 
     private final long randomCount;
     private final long manualCount;
 
-    public CountInfo(Money buyingMoney, long manualCount) {
+    public LottoCount(Money buyingMoney, long manualCount) {
         validate(buyingMoney, manualCount);
         this.randomCount = buyingMoney.calculateUnitCount(BASE_MONEY_UNIT) - manualCount;
         this.manualCount = manualCount;
