@@ -13,8 +13,7 @@ public class Lottos {
         lottos.add(lotto);
     }
 
-    public void createLotto() {
-        Lotto lotto = new Lotto();
+    public void createLotto(Lotto lotto) {
         lottos.add(lotto);
     }
 

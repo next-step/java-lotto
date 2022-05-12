@@ -18,13 +18,13 @@ public class ResultView {
         StringBuilder builder = new StringBuilder();
         builder.append(" 당첨 통계 ");
         builder.append("\n --------- ");
-        builder.append("\n 3개 일치 (5000원)- " + winningList.stream().filter(rank -> rank == Rank.FIVE).collect(Collectors.toList()).size());
-        builder.append("\n 4개 일치 (50000원)- " + winningList.stream().filter(rank -> rank == Rank.FOUR).collect(Collectors.toList()).size());
-        builder.append("\n 5개 일치 (1_500_000원)- " + winningList.stream().filter(rank -> rank == Rank.THREE).collect(Collectors.toList()).size());
-        builder.append("\n 5개 일치, 보너스 볼 일치(30_000_000원)- " + winningList.stream().filter(rank -> rank == Rank.TWO).collect(Collectors.toList()).size());
-        builder.append("\n 6개 일치 (2_000_000_000원)- " + winningList.stream().filter(rank -> rank == Rank.ONE).collect(Collectors.toList()).size());
+        builder.append("\n 3개 일치 (5,000원)- " + winningList.stream().filter(rank -> rank == Rank.FIVE).count());
+        builder.append("\n 4개 일치 (50,000원)- " + winningList.stream().filter(rank -> rank == Rank.FOUR).count());
+        builder.append("\n 5개 일치 (1,500,000원)- " + winningList.stream().filter(rank -> rank == Rank.THREE).count());
+        builder.append("\n 5개 일치, 보너스 볼 일치(30,000,000원)- " + winningList.stream().filter(rank -> rank == Rank.TWO).count());
+        builder.append("\n 6개 일치 (2,000,000,000원)- " + winningList.stream().filter(rank -> rank == Rank.ONE).count());
 
-        System.out.println(builder.toString());
+        System.out.println(builder);
     }
 
     public void printProfit(double profit) {

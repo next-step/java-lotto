@@ -12,8 +12,13 @@ public class Main {
         ResultView resultView = new ResultView();
 
         int money = inputView.purchaseAmountQuestion();
+        int manualLottoCount = inputView.manualLottoPurchaseCount();
+
+        List<List<Integer>> manualLottoNumbers = inputView.getManualNumbers(manualLottoCount);
+
         Customer customer = new Customer(money);
-        customer.buy(1000);
+        manualLottoNumbers.forEach(numbers -> customer.buy(1000, new Lotto(numbers)));
+        customer.buyRemainingAutoLotto(1000);
 
         resultView.printLottos(customer);
         List<Integer> winningLottoNumbers = inputView.findWinningLottoNumbers();
