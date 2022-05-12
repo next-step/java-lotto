@@ -13,8 +13,8 @@ public class LottoTotalPrice {
         this.totalPrice = totalPrice;
     }
 
-    public LottoTotalPrice(String stringTotalPrice) {
-        this(StringNumberUtils.parse(stringTotalPrice));
+    public static LottoTotalPrice create(String stringTotalPrice) {
+        return new LottoTotalPrice(StringNumberUtils.parse(stringTotalPrice));
     }
 
     public int getTotalPrice() {

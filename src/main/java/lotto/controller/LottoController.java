@@ -20,7 +20,7 @@ public class LottoController {
     }
 
     public void autoLottoProgramStart() {
-        LottoTotalPrice lottoPurchaseAmount = new LottoTotalPrice(InputView.scanPurchaseAmount());
+        LottoTotalPrice lottoPurchaseAmount = LottoTotalPrice.create(InputView.scanPurchaseAmount());
         int lottoCount = lottoPurchaseAmount.getPurchaseLottoCount();
         ResultView.printLottoCount(lottoCount);
 
@@ -29,9 +29,9 @@ public class LottoController {
         ResultView.printLottoGroup(lottoGroup);
 
         Lotto winningNumbers = new Lotto(InputView.scanWinningNumbers()
-                .stream().map(LottoNumber::new).collect(Collectors.toList()));
+                .stream().map(LottoNumber::create).collect(Collectors.toList()));
 
-        LottoNumber bonusNumber = new LottoNumber(InputView.scanBonusNumber());
+        LottoNumber bonusNumber = LottoNumber.create(InputView.scanBonusNumber());
 
         LottoGroupResult lottoGroupResult = lottoGroup.getLottoGroupResult(new WinningLotto(winningNumbers, bonusNumber));
         ResultView.printWinningStatistic(lottoGroupResult, lottoPurchaseAmount.getTotalPrice());

@@ -15,13 +15,13 @@ public class StringCalculator {
         Deque<String> postFixExpressionStack = ExpressionUtils.convertToPostFixExpression(SplitStringUtils.split(text));
         while (!postFixExpressionStack.isEmpty()) {
             if (postFixExpressionStack.size() == ONLY_ONE_OPERAND) {
-                return new Operand(postFixExpressionStack.pollLast()).getNumber();
+                return Operand.create(postFixExpressionStack.pollLast()).getNumber();
             }
-            Operand firstOperand = new Operand(postFixExpressionStack.pollFirst());
-            Operand secondOperand = new Operand(postFixExpressionStack.pollFirst());
+            Operand firstOperand = Operand.create(postFixExpressionStack.pollFirst());
+            Operand secondOperand = Operand.create(postFixExpressionStack.pollFirst());
             Operator operator = Operator.valueOfOperatorSymbol(postFixExpressionStack.pollFirst());
             postFixExpressionStack.offerFirst(String.valueOf(new Expression(firstOperand, operator, secondOperand).operation()));
         }
-        return new Operand(postFixExpressionStack.pollLast()).getNumber();
+        return Operand.create(postFixExpressionStack.pollLast()).getNumber();
     }
 }

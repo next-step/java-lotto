@@ -13,8 +13,8 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public LottoNumber(String stringNumber) {
-        this(StringNumberUtils.parse(stringNumber));
+    public static LottoNumber create(String stringNumber) {
+        return new LottoNumber(StringNumberUtils.parse(stringNumber));
     }
 
     private void validateNumberRange(int number) {
