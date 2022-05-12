@@ -20,8 +20,8 @@ public class LottoGroup {
         this.lottos = lottos;
     }
 
-    public LottoGroup(int lottoCount, LottoNumberGenerateStrategy lottoNumberGenerateStrategy) {
-        this(IntStream.range(0, lottoCount).mapToObj(i -> new Lotto(lottoNumberGenerateStrategy)).collect(Collectors.toList()));
+    public static LottoGroup create(int lottoCount, LottoNumberGenerateStrategy lottoNumberGenerateStrategy) {
+        return new LottoGroup(IntStream.range(0, lottoCount).mapToObj(i -> new Lotto(lottoNumberGenerateStrategy)).collect(Collectors.toList()));
     }
 
     public LottoGroupResult getLottoGroupResult(WinningLotto winningLotto) {

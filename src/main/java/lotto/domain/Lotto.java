@@ -20,8 +20,8 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public Lotto(int[] numbers) {
-        this(IntStream.of(numbers)
+    public static Lotto create(int[] numbers) {
+        return new Lotto(IntStream.of(numbers)
                 .boxed()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));
