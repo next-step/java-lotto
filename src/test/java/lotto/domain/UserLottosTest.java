@@ -14,12 +14,12 @@ public class UserLottosTest {
 
     @BeforeEach
     void set() {
-        userLottos = new UserLottos(List.of(new Lotto("1,2,3,4,5,6"), new Lotto("1,2,3,4,5,6")));
+        userLottos = new UserLottos(List.of(new Lotto("1,2,3,4,5,6"), new Lotto("1,2,3,4,5,6")), 2000);
     }
     @Test
     @DisplayName("로또 번호를 3번 추가 하면 수량은 3개이다.")
     void name() {
-        UserLottos userLottos = new UserLottos();
+        UserLottos userLottos = new UserLottos(3000);
         userLottos.autoCreate();
         userLottos.autoCreate();
         userLottos.autoCreate();
@@ -34,9 +34,9 @@ public class UserLottosTest {
     }
 
     @Test
-    @DisplayName("로또 2등 수량 2개의 당첨금은 60,000,000 이다")
+    @DisplayName("로또 2등 수량 2개의 당첨금은 60000000 이다")
     void getWinningMoney() {
         WinningLotto winningLotto = new WinningLotto(new Lotto("1,2,3,4,5,8"), LottoNumber.valueOf("6"));
-        assertThat(userLottos.getWinningMoney(winningLotto)).isEqualTo(60000000);
+        assertThat(userLottos.getWinningMoney(winningLotto)).isEqualTo(new Money(60000000));
     }
 }

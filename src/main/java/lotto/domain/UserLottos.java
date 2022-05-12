@@ -4,17 +4,28 @@ import java.util.*;
 
 public class UserLottos {
     private final List<Lotto> userLottos;
+    private Quantity quantity;
 
-    public UserLottos() {
-        this(new ArrayList<>());
+    public UserLottos(String money) {
+        this(new ArrayList<>(), new Money(money));
     }
 
-    public UserLottos(List<Lotto> buyLottoNumbers) {
+    public UserLottos(int money) {
+        this(new ArrayList<>(), new Money(money));
+    }
+
+    public UserLottos(List<Lotto> buyLottoNumbers, int money) {
+        this(buyLottoNumbers, new Money(money));
+    }
+
+    public UserLottos(List<Lotto> buyLottoNumbers, Money money) {
         this.userLottos = buyLottoNumbers;
+        this.quantity = new Quantity(money.getQuantity(), userLottos.size());
     }
 
     public void autoCreate() {
         this.userLottos.add(LottoFactory.createAutoLotto());
+        this.quantity = this.quantity.increase();
     }
 
     public LottoResults getWinningResults(WinningLotto winningLottoNumber) {
@@ -25,12 +36,12 @@ public class UserLottos {
         return results;
     }
 
-    public int getWinningMoney(WinningLotto winningLotto) {
-        int sum = 0;
+    public Money getWinningMoney(WinningLotto winningLotto) {
+        Money moneySum = new Money();
         for (Lotto lotto : userLottos) {
-            sum = lotto.getRank(winningLotto).sumRankMoney(sum);
+            moneySum = lotto.getRank(winningLotto).sumWinningMoney(moneySum);
         }
-        return sum;
+        return moneySum;
     }
 
     public List<Lotto> getUserLottos() {
@@ -43,6 +54,14 @@ public class UserLottos {
 
     public boolean contains(LottoNumber lottoNumber) {
         return this.userLottos.contains(lottoNumber);
+    }
+
+    public boolean isPurchasable() {
+        return quantity.isPurchasable();
+    }
+
+    public int getMaxPurchasableQuantity() {
+        return quantity.getMaxPurchasableQuantity();
     }
 
     @Override

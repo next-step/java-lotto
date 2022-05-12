@@ -9,19 +9,18 @@ public class LottoGame {
     private final Money money;
 
     public LottoGame(String buyPrice) {
-        this(buyPrice, new UserLottos());
+        this(buyPrice, new UserLottos(buyPrice));
     }
 
     public LottoGame(String buyPrice, UserLottos lottoNumbers) {
         this.userLottos = lottoNumbers;
-        this.money = new Money(buyPrice, lottoNumbers.getSize());
+        this.money = new Money(buyPrice);
     }
 
     public void auto() {
         validate();
         while (isPurchasable()) {
             userLottos.autoCreate();
-            money.addQuantity();
         }
     }
 
@@ -40,11 +39,11 @@ public class LottoGame {
     }
 
     private boolean isPurchasable() {
-        return money.isPurchasable();
+        return userLottos.isPurchasable();
     }
 
     public int getMaxPurchasableQuantity() {
-        return money.getMaxPurchasableQuantity();
+        return userLottos.getMaxPurchasableQuantity();
     }
 
     public List<Lotto> getBuyLottoNumbers() {

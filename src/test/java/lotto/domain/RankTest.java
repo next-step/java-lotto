@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.Rank;
 import lotto.exception.WrongLottoMatchCountException;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -32,5 +33,11 @@ public class RankTest {
     void wrongNumberException(int expected) {
         assertThatThrownBy(() -> Rank.valueOf(expected))
                 .isInstanceOf(WrongLottoMatchCountException.class);
+    }
+
+    @Test
+    @DisplayName("합")
+    void sumWinningMoney() {
+        assertThat(Rank.FIFTH.sumWinningMoney(new Money(1000))).isEqualTo(new Money(6000));
     }
 }

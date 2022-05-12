@@ -25,7 +25,14 @@ class MoneyTest {
     @Test
     @DisplayName("구매금액 14000, 당첨금 5000 이면 수익률은 약 0.35이다")
     void calculateReturnRate() {
-        Money money = new Money("14000", 14);
-        assertThat(money.calculateReturnRate(5000)).isBetween(0.35, 0.36);
+        Money money = new Money("14000");
+        assertThat(money.calculateReturnRate(new Money(5000))).isBetween(0.35, 0.36);
+    }
+
+    @Test
+    @DisplayName("합")
+    void sumMoney() {
+        Money money = new Money(1000);
+        assertThat(money.sumMoney(new Money(2000))).isEqualTo(new Money(3000));
     }
 }

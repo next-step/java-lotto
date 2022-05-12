@@ -7,20 +7,22 @@ public class Money {
     private static final String BUY_PRICE_VALID_ERROR_MESSAGE = "1,000원 단위로만 구매 가능합니다.";
     private static final String WRONG_NUMBER_EXCEPTION = "숫자형식이 아닙니다.";
 
-    private final int buyPrice;
-    private Quantity quantity;
+    private final int money;
 
-    public Money(String buyPrice) {
-        this(buyPrice, 0);
+    public Money(String money) {
+        this(parseInt(money));
     }
 
-    public Money(String buyPrice, int purchasedQuantity) {
-        this.buyPrice = parseInt(buyPrice);
-        this.quantity = new Quantity(this.buyPrice / LOTTO_PRICE, purchasedQuantity);
-        validate();
+    public Money() {
+        this(0);
     }
 
-    private int parseInt(String buyPrice) {
+    public Money(int money) {
+        validate(money);
+        this.money = money;
+    }
+
+    private static int parseInt(String buyPrice) {
         try {
             return Integer.parseInt(buyPrice);
         } catch (Exception e) {
@@ -28,46 +30,40 @@ public class Money {
         }
     }
 
-    private void validate() {
-        if (this.buyPrice % LOTTO_PRICE != 0) {
+    private void validate(int money) {
+        if (money % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(BUY_PRICE_VALID_ERROR_MESSAGE);
         }
     }
 
-    public void addQuantity() {
-        this.quantity = quantity.increase();
+    public double calculateReturnRate(Money winningMoney) {
+        return (double) winningMoney.money / this.money;
     }
 
-    public boolean isPurchasable() {
-        return quantity.isPurchasable();
+    public Money sumMoney(Money money) {
+        return new Money(this.money + money.money);
     }
 
-    public int getMaxPurchasableQuantity() {
-        return quantity.getMaxPurchasableQuantity();
-    }
 
-    public double calculateReturnRate(int winningMoney) {
-        return (double) winningMoney / this.buyPrice;
+    public int getQuantity() {
+        return money / LOTTO_PRICE;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Money money = (Money) o;
-        return buyPrice == money.buyPrice && Objects.equals(quantity, money.quantity);
+        Money money1 = (Money) o;
+        return money == money1.money;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(buyPrice, quantity);
+        return Objects.hash(money);
     }
 
     @Override
     public String toString() {
-        return "Money{" +
-                "buyPrice=" + buyPrice +
-                ", quantity=" + quantity +
-                '}';
+        return Integer.toString(money);
     }
 }

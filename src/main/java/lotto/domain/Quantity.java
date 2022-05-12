@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class Quantity {
     private static final String EXCEED_QUANTITY_MESSAGE = "수량을 초과하였습니다.";
 
@@ -28,6 +30,19 @@ public class Quantity {
 
     public int getMaxPurchasableQuantity() {
         return maxPurchasableQuantity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Quantity quantity = (Quantity) o;
+        return maxPurchasableQuantity == quantity.maxPurchasableQuantity && purchasedQuantity == quantity.purchasedQuantity;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(maxPurchasableQuantity, purchasedQuantity);
     }
 
     @Override

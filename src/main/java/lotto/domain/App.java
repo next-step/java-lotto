@@ -9,7 +9,9 @@ public class App {
         lottoGame.auto();
         ResultView.printBuyQuantityMessage(lottoGame.getMaxPurchasableQuantity());
         ResultView.printBuyLottoNumbers(lottoGame.getBuyLottoNumbers());
+
         WinningLotto winningLottoNumber = new WinningLotto(InputView.getWinningNumber(), InputView.getBonusNumber());
+
         ResultView.printWinningTitleAndResults(lottoGame.getLottoGameResults(winningLottoNumber));
         ResultView.printReturnRate(lottoGame.getReturnRate(winningLottoNumber));
     }

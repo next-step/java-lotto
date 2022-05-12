@@ -8,8 +8,6 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import static org.junit.jupiter.api.Assertions.*;
 
 class QuantityTest {
-
-
     @Test
     @DisplayName("구매가능 수량을 초과하면 예외가 발생한다")
     void wrongQuantityException() {

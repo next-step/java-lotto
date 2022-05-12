@@ -53,7 +53,8 @@ public class ResultView {
             message = BONUS_MATCH_MESSAGE;
         }
         System.out.printf(WINNING_RESULT, rank.getCountOfMatch(), message,
-                new DecimalFormat("###,###").format(rank.getWinningMoney()), results.getWinningCount(rank));
+                new DecimalFormat("###,###").format(Integer.parseInt(rank.getWinningMoney().toString()))
+                , results.getWinningCount(rank));
     }
 
     public static void printReturnRate(double returnRate) {
