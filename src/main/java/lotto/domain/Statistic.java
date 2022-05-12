@@ -19,9 +19,13 @@ public class Statistic {
   }
 
   private void requireNonNegative(int matchedPriceCount) {
-    if (matchedPriceCount < 0) {
+    if (isNegative(matchedPriceCount)) {
       throw new IllegalArgumentException(NEGATIVE_MATCHED_PRICE_COUNT);
     }
+  }
+
+  private boolean isNegative(int matchedPriceCount) {
+    return matchedPriceCount < 0;
   }
 
   public int getMatchedPrizeCount() {
