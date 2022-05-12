@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.util.Objects;
+
 public class Money {
     private static final int LOTTO_PRICE = 1000;
     private final int value;
@@ -39,18 +41,30 @@ public class Money {
         return this.value / LOTTO_PRICE;
     }
 
-
     private void validate(double money) {
         if (money < 0) {
             throw new IllegalArgumentException("돈은 음수값을 가질 수 없습니다.");
         }
     }
 
-
     @Override
     public String toString(){
         return value+"";
     }
 
+    @Override
+    public boolean equals(Object obj){
+        if(obj == this){
+            return true;
+        }
+        if(obj.getClass() != getClass()){
+            return false;
+        }
+        return ((Money) obj).getValue() == getValue();
+    }
 
+    @Override
+    public int hashCode(){
+        return Objects.hashCode(value);
+    }
 }
