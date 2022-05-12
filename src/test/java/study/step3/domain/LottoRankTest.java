@@ -46,7 +46,7 @@ class LottoRankTest {
     @Test
     @DisplayName("로또 당첨 3등 생성 확인")
     void 로또당첨_3등_생성확인() {
-        String inputLottoFive = "1,2,3,4,5,45";
+        String inputLottoFive = "1,2,3,4,5,44";
         LottoTicket ticket = LottoMachine.createLottoTicket(inputLottoFive);
 
         assertThat(LottoRank.valueOf(ticket, winners)).isEqualTo(LottoRank.THIRD);
