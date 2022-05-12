@@ -27,7 +27,7 @@ public class LottoMain {
 
         ResultView.printBuyingLottos(manualLottos, buyingLottos);
 
-        Lottos lottos = Lottos.concatOf(manualLottos, buyingLottos);
+        Lottos lottos = manualLottos.addAll(buyingLottos);
         LottoResult lottoResult = lottos.extractLottoResult(inputWinnerLotto());
 
         ResultView.printResult(buyingMoney, lottoResult);

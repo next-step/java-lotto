@@ -86,7 +86,7 @@ public class LottosTest {
     @Test
     @DisplayName("두개의 Lottos 객체를 합해 하나의 Lottos를 반환한다.")
     void combineTest() {
-        Lottos lottos = Lottos.concatOf(TEST_LOTTOS, TEST_LOTTOS);
+        Lottos lottos = TEST_LOTTOS.addAll(TEST_LOTTOS);
 
         assertThat(lottos.size()).isEqualTo(2);
     }

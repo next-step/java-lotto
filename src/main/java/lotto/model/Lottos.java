@@ -48,11 +48,10 @@ public final class Lottos {
         Objects.requireNonNull(winnerLotto, "당첨 로또 번호 입력이 올바르지 않습니다. winnerLotto is null");
     }
 
-    public static Lottos concatOf(Lottos oneLottos, Lottos anotherLottos) {
-        Objects.requireNonNull(oneLottos, "합치려는 Lottos 객체는 null일 수 없습니다.");
-        Objects.requireNonNull(anotherLottos, "합치려는 Lottos 객체는 null일 수 없습니다.");
+    public Lottos addAll(Lottos other) {
+        Objects.requireNonNull(other, "합치려는 Lottos 객체는 null일 수 없습니다.");
 
-        return new Lottos(Stream.concat(oneLottos.get().stream(), anotherLottos.get().stream())
+        return new Lottos(Stream.concat(lottos.stream(), other.get().stream())
                 .collect(Collectors.toList()));
     }
 }
