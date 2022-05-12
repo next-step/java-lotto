@@ -47,7 +47,7 @@ class LottoTicketTest {
     List<Integer> lottoNumbers = List.of(1, 1, 3, 4, 5, 6);
     Assertions.assertThatIllegalArgumentException()
         .isThrownBy(() -> new LottoTicket(lottoNumbers))
-        .withMessage("로또 번호가 중복될 수 없습니다");
+        .withMessageMatching(".+? 중복된 번호 포함. 로또 번호가 중복될 수 없습니다");
   }
 
   @DisplayName("로또 번호와 당첨 번호가 몇개나 일치하는지 계산")

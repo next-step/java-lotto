@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
@@ -11,7 +12,7 @@ public class LottoTicket {
   private static final String EMPTY_LOTTO_NUMBERS = "로또 번호는 빈 값일 수 없습니다";
   private static final String VALID_LOTTO_NUMBERS_SIZE = String.format("로또 번호는 %d개여야 합니다",
       LOTTO_NUMBER_COUNT);
-  private static final String DUPLICATED_LOTTO_NUMBERS = "로또 번호가 중복될 수 없습니다";
+  private static final String DUPLICATED_LOTTO_NUMBERS = "[%s] 중복된 번호 포함. 로또 번호가 중복될 수 없습니다";
 
   private final List<Integer> lottoNumbers;
 
@@ -29,7 +30,8 @@ public class LottoTicket {
     }
     HashSet<Integer> hashSet = new HashSet<>(lottoNumbers);
     if (hashSet.size() != lottoNumbers.size()) {
-      throw new IllegalArgumentException(DUPLICATED_LOTTO_NUMBERS);
+      String numbers = lottoNumbers.stream().map(Object::toString).collect(Collectors.joining(","));
+      throw new IllegalArgumentException(String.format(DUPLICATED_LOTTO_NUMBERS, numbers));
     }
   }
 
