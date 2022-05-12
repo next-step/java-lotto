@@ -33,7 +33,6 @@ public enum Prizes {
         .orElse(NOT_PRIZE);
   }
 
-
   public Money getPrize() {
     return prize;
   }
