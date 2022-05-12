@@ -25,7 +25,9 @@ public final class Money {
     }
 
     public double divideBy(Money denominator) {
-        if (denominator.money == ZERO) return ZERO;
+        if (denominator.money == ZERO) {
+            return ZERO;
+        }
         return this.money / (double) denominator.money;
     }
 
