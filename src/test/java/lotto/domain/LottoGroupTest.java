@@ -15,8 +15,8 @@ class LottoGroupTest {
     @Test
     void LottoGroup_로또그룹_생성한다() {
         LottoGroup lottoGroup = new LottoGroup(List.of(
-                new Lotto(new int[]{1, 2, 3, 4, 5, 6}),
-                new Lotto(new int[]{7, 8, 9, 10, 11, 12}))
+                Lotto.create(new int[]{1, 2, 3, 4, 5, 6}),
+                Lotto.create(new int[]{7, 8, 9, 10, 11, 12}))
         );
         assertThat(lottoGroup).isEqualTo(new LottoGroup(
                 List.of(
@@ -33,10 +33,10 @@ class LottoGroupTest {
     @Test
     void LottoGroup_로또그룹_생성한다_전략패턴이용() {
         LottoGroup lottoGroup = new LottoGroup(List.of(
-                new Lotto(new int[]{1, 2, 3, 4, 5, 6}),
-                new Lotto(new int[]{1, 2, 3, 4, 5, 6}))
+                Lotto.create(new int[]{1, 2, 3, 4, 5, 6}),
+                Lotto.create(new int[]{1, 2, 3, 4, 5, 6}))
         );
-        assertThat(lottoGroup).isEqualTo(new LottoGroup(2, () -> List.of(
+        assertThat(lottoGroup).isEqualTo(LottoGroup.create(2, () -> List.of(
                 new LottoNumber(1),
                 new LottoNumber(2),
                 new LottoNumber(3),
@@ -46,19 +46,30 @@ class LottoGroupTest {
     }
 
     @Test
+    void LottoGroup_로또갯수가_음수인_경우() {
+        assertThatThrownBy(() -> LottoGroup.createLottos(-1, () -> List.of(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)))).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     void getLottoGroupResult_로또그룹_결과를_반환한다() {
         LottoGroup lottoGroup = new LottoGroup(List.of(
-                new Lotto(new int[]{1, 2, 3, 4, 5, 6}),
-                new Lotto(new int[]{6, 8, 9, 10, 1, 12}),
-                new Lotto(new int[]{6, 8, 9, 10, 4, 12}),
-                new Lotto(new int[]{6, 8, 9, 10, 5, 1}),
-                new Lotto(new int[]{4, 5, 6, 16, 17, 18}),
-                new Lotto(new int[]{19, 20, 21, 22, 23, 24}),
-                new Lotto(new int[]{25, 26, 27, 28, 29, 30}),
-                new Lotto(new int[]{31, 32, 33, 34, 35, 36}),
-                new Lotto(new int[]{37, 38, 39, 40, 41, 42}))
+                Lotto.create(new int[]{1, 2, 3, 4, 5, 6}),
+                Lotto.create(new int[]{6, 8, 9, 10, 1, 12}),
+                Lotto.create(new int[]{6, 8, 9, 10, 4, 12}),
+                Lotto.create(new int[]{6, 8, 9, 10, 5, 1}),
+                Lotto.create(new int[]{4, 5, 6, 16, 17, 18}),
+                Lotto.create(new int[]{19, 20, 21, 22, 23, 24}),
+                Lotto.create(new int[]{25, 26, 27, 28, 29, 30}),
+                Lotto.create(new int[]{31, 32, 33, 34, 35, 36}),
+                Lotto.create(new int[]{37, 38, 39, 40, 41, 42}))
         );
-        assertThat(lottoGroup.getLottoGroupResult(new WinningLotto(new Lotto(new int[]{4, 5, 6, 8, 9, 10}), new LottoNumber(1)))).isEqualTo(new LottoGroupResult(Map.of(
+        assertThat(lottoGroup.getLottoGroupResult(new WinningLotto(Lotto.create(new int[]{4, 5, 6, 8, 9, 10}), new LottoNumber(1)))).isEqualTo(new LottoGroupResult(Map.of(
                 LottoRank.MISS, 4,
                 LottoRank.FIFTH, 2,
                 LottoRank.FOURTH, 1,
