@@ -32,7 +32,7 @@ public class InputView {
         return bonus;
     }
 
-    public int autoLottoPurchaseCount() {
+    public int manualLottoPurchaseCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         int lottoCount = scanner.nextInt();
         scanner.nextLine();
@@ -40,18 +40,18 @@ public class InputView {
         return lottoCount;
     }
 
-    public List<List<Integer>> getAutoNumbers(int lottoCount) {
-        List<List<Integer>> autoNumbers = new ArrayList<>();
+    public List<List<Integer>> getManualNumbers(int lottoCount) {
+        List<List<Integer>> manualNumbers = new ArrayList<>();
 
         if (lottoCount > 0) {
             System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         }
 
         for (int i = 0; i < lottoCount; i++) {
-            autoNumbers.add(toList());
+            manualNumbers.add(toList());
         }
         System.out.println( "수동으로 " + lottoCount + "장, 자동으로 " + ((purchaseAmount / LOTTO_PRICE) - lottoCount ) + "개를 구매했습니다.");
-        return autoNumbers;
+        return manualNumbers;
     }
 
     private List<Integer> toList() {
