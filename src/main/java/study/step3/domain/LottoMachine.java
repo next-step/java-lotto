@@ -8,6 +8,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.toList;
+
 public class LottoMachine {
     private static final String DEFAULT_SPLIT_REGEX = ",";
 
@@ -20,11 +22,9 @@ public class LottoMachine {
     public static LottoTickets createLottoTickets(int buyAmount) {
         LottoQuantity lottoQuantity = new LottoQuantity(buyAmount);
 
-        List<LottoTicket> tickets = Stream.generate(LottoMachine::createLottoTicket)
+        return Stream.generate(LottoMachine::createLottoTicket)
                 .limit(lottoQuantity.quantity())
-                .collect(Collectors.toList());
-
-        return new LottoTickets(lottoQuantity, tickets);
+                .collect(Collectors.collectingAndThen(toList(), LottoTickets::new));
     }
 
     public static LottoTicket createLottoTicket(String numbers) {
@@ -55,6 +55,6 @@ public class LottoMachine {
     private static List<String> stringToList(String winnerNumbers) {
         return Arrays.stream(winnerNumbers.split(DEFAULT_SPLIT_REGEX))
                 .map(String::trim)
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 }

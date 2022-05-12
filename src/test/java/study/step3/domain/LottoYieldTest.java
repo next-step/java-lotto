@@ -22,9 +22,8 @@ class LottoYieldTest {
     }
 
     public LottoTickets createTickets() {
-        LottoQuantity lottoQuantity = new LottoQuantity(5000);
         List<LottoTicket> lottoTickets = Arrays.asList(LottoMachine.createLottoTicket(inputNumbers));
-        return new LottoTickets(lottoQuantity, lottoTickets);
+        return new LottoTickets(lottoTickets);
     }
 
     public LottoWinners createWinners(String winners, int bonus) {
@@ -36,7 +35,7 @@ class LottoYieldTest {
     void 수익_통계_일치_테스트() {
         LottoTickets tickets = createTickets();
         LottoWinners winners = createWinners("1,2,3,14,15,16", inputBonus);
-        double profit = 1;
+        double profit = 5.0;
 
         assertThat(LottoYield.operationYield(tickets, winners)).isEqualTo(profit);
     }
