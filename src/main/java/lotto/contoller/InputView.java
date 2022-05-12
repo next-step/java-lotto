@@ -34,10 +34,7 @@ public class InputView {
 
     public int manualLottoPurchaseCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        int lottoCount = scanner.nextInt();
-        scanner.nextLine();
-
-        return lottoCount;
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public List<List<Integer>> getManualNumbers(int lottoCount) {
