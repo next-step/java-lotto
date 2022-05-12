@@ -24,7 +24,7 @@ public class LottoController {
         Lottos autoLottos = boughtAutoLotto(guest, store);
         Lottos boughtAllLottos = Lottos.plus(manualLottos, autoLottos);
         OutputTable.buyThings(manalLottoCount, autoLottos.getLottos().size());
-        OutputTable.printProductInfos(autoLottos.getLottos());
+        OutputTable.printProductInfos(boughtAllLottos.getLottos());
         Lotto winnerLotto = insertWinnerNumber(InputTable.inputAwardNumber());
         int bonus = insertBonusNumber(InputTable.inputBonusNumber());
         holdingLotteryTickets(boughtAllLottos.getLottos(), winnerLotto, bonus);
