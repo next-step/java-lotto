@@ -3,7 +3,7 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import lotto.strategy.FixedNumberGenerateStrategy;
@@ -31,17 +31,63 @@ class LottosTest {
     int purchasedLotto = 3;
 
     // when
-    Lottos lottos = Lottos.create(purchasedLotto, new RandomNumberGenerateStrategy());
+    Lottos lottos = Lottos.create(purchasedLotto, Collections.emptyList(),
+        new RandomNumberGenerateStrategy());
 
     // then
     assertThat(lottos.getLottos()).hasSize(purchasedLotto);
   }
 
   @Test
+  @DisplayName("수동으로 구매한 로또의 갯수만큼 로또 객체를 생성한다")
+  void createObjectNumberOfPurchasedManualLotto() {
+    // given
+    int numberOfManual = 3;
+    List<String> manualLottos = Arrays.asList("8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38",
+        "7, 11, 16, 35, 36, 44");
+
+    // when
+    Lottos lottos = Lottos.create(numberOfManual, manualLottos, new RandomNumberGenerateStrategy());
+
+    // then
+    assertThat(lottos.getLottos()).hasSize(numberOfManual);
+  }
+  
+  @Test
+  @DisplayName("수동과 자동으로 구매한 로또가 섞여 있는 경우의 로또 객체 생성을 확인한다.")
+  void createObjectNumberOfPurchasedManualLottoAndAutomaticLotto() {
+    // given
+    int numberOfManual = 6;
+    List<String> manualLottos = Arrays.asList("8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38",
+        "7, 11, 16, 35, 36, 44");
+
+    // when
+    Lottos lottos = Lottos.create(numberOfManual, manualLottos, new RandomNumberGenerateStrategy());
+    
+    // then
+    assertThat(lottos.getLottos()).hasSize(numberOfManual);
+  }
+
+  @Test
+  @DisplayName("수동과 자동으로 구매한 로또가 섞여 있는 경우의 로또 객체 생성을 확인한다.")
+  void checkTheCreatedLottoIncludeManualLotto() {
+    // given
+    int numberOfManual = 6;
+    List<String> manualLottos = Arrays.asList("8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38",
+        "7, 11, 16, 35, 36, 44");
+
+    // when
+    Lottos lottos = Lottos.create(numberOfManual, manualLottos, new RandomNumberGenerateStrategy());
+
+    // then
+    assertThat(lottos.getLottos().toString()).contains(manualLottos);
+  }
+
+  @Test
   @DisplayName("구매한 로또 전체와 우승 로또번호를 비교한 결과")
   void checkResultOfCompareAllPurchasedLottoAndWinningLotto() {
     // given
-    Lottos lottos = Lottos.create(3, new FixedNumberGenerateStrategy());
+    Lottos lottos = Lottos.create(3, Collections.emptyList(), new FixedNumberGenerateStrategy());
     WinningLotto winningLotto = WinningLotto.create("1, 2, 3, 4, 5, 6", 10);
 
     // when
@@ -55,7 +101,7 @@ class LottosTest {
   @DisplayName("구매한 로또 전체와 우승 로또번호를 비교 결과에 따른 수익률 계산하기")
   void calculateReturnProfitRatioWinningLottoAndComparisonResult() {
     // given
-    Lottos lottos = Lottos.create(3, new FixedNumberGenerateStrategy());
+    Lottos lottos = Lottos.create(3, Collections.emptyList(), new FixedNumberGenerateStrategy());
     WinningLotto winningLotto = WinningLotto.create("1, 2, 3, 4, 5, 6", 10);
 
     // when
@@ -70,7 +116,7 @@ class LottosTest {
   void calculateReturnProfitRatioBonusSecond() {
     // given
     Lottos lottos = new Lottos(List.of(Lotto.create("1, 2, 3, 4, 5, 10")));
-    WinningLotto winningLotto = WinningLotto.create("1, 2, 3, 4, 20, 30", 10);
+    WinningLotto winningLotto = WinningLotto.create("1, 2, 3, 4, 5, 30", 10);
 
     // when
     double profit = lottos.calculateProfitRatio(winningLotto);

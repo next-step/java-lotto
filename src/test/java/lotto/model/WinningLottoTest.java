@@ -12,6 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 class WinningLottoTest {
 
@@ -31,6 +32,14 @@ class WinningLottoTest {
     // when & then
     assertThatThrownBy(() -> WinningLotto.create("1, 1, 1, 1, 1, 1", 10))
         .isInstanceOf(LottoNumberDuplicateException.class);
+  }
+
+  @ParameterizedTest(name = "지난 주 당첨 번호가 null 또는 empty인 경우 예외처리를 해준다")
+  @NullAndEmptySource
+  void exceptionWinningNumberIsNullOrEmpty(String value) {
+    // when & then
+    assertThatThrownBy(() -> WinningLotto.create(value, 10))
+        .isInstanceOf(IllegalArgumentException.class);
   }
 
   @ParameterizedTest(name = "지난 우승 로또번호 {0}와 구매한 로또번호 {1}가 일치하는 갯수는 {2}개 이다")
