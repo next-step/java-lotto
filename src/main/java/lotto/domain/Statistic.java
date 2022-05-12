@@ -7,6 +7,7 @@ public class Statistic {
 
   private static final String NULL_PRIZES = "당첨금은 null일 수 없습니다.";
   private static final String NEGATIVE_MATCHED_PRICE_COUNT = "당첨 개수는 음수일 수 없습니다.";
+
   private final Prizes prizes;
   private final int matchedPrizeCount;
 
