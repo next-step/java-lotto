@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.exception.InvalidLottoNumberCount;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
@@ -11,26 +12,26 @@ public class LottoNumbers {
     private final Set<LottoNumber> values;
 
     public LottoNumbers(String[] values) {
-        this(stringArrToTreeSet(values));
+        this(convertToSet(values));
     }
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
-        this(new TreeSet<>(lottoNumbers));
+        this(new HashSet<>(lottoNumbers));
     }
 
-    public LottoNumbers(TreeSet<LottoNumber> lottoNumberTreeSet) {
+    public LottoNumbers(Set<LottoNumber> lottoNumberTreeSet) {
         if (lottoNumberTreeSet.size() != LOTTO_NUMBER_COUNT) {
             throw new InvalidLottoNumberCount();
         }
         this.values = lottoNumberTreeSet;
     }
 
-    private static TreeSet<LottoNumber> stringArrToTreeSet(String[] values) {
-        TreeSet<LottoNumber> numberTreeSet = new TreeSet<>();
+    private static Set<LottoNumber> convertToSet(String[] values) {
+        Set<LottoNumber> numberSet = new HashSet<>();
         for (String value : values) {
-            numberTreeSet.add(LottoNumber.valueOf(value));
+            numberSet.add(LottoNumber.valueOf(value));
         }
-        return numberTreeSet;
+        return numberSet;
     }
 
     public int matchCount(LottoNumbers lottoNumbers) {
@@ -43,8 +44,10 @@ public class LottoNumbers {
         return values.contains(lottoNumber);
     }
 
-    public Set<LottoNumber> toSet() {
-        return values;
+    public List<LottoNumber> toList() {
+        return values.stream()
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     @Override
