@@ -29,8 +29,7 @@ public class InputView {
     }
 
 
-    public static List<Integer> inputWinningNumbers() {
-        String winningNumbers = InputUtils.scan("지난 주 당첨 번호를 입력해 주세요.");
-        return WinningNumbers.get(winningNumbers);
+    public static String inputWinningNumbers() {
+        return InputUtils.scan("지난 주 당첨 번호를 입력해 주세요.");
     }
 }

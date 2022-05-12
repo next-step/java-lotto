@@ -6,20 +6,20 @@ import java.util.List;
 public class LotteryGames {
     private List<LotteryGame> lotteryGames;
 
-    public LotteryGames() {
-        this.lotteryGames = new ArrayList<>();
+    public LotteryGames(int numberOfGames) {
+        this(new ArrayList<>(), numberOfGames);
     }
 
-    public LotteryGames(List<LotteryGame> lotteryGames) {
+    public LotteryGames(List<LotteryGame> lotteryGames, int numberOfGames) {
         this.lotteryGames = lotteryGames;
+        create(numberOfGames);
     }
 
-    public LotteryGames create(int number) {
+    public void create(int number) {
         for (int i = 0; i < number; i++) {
             LotteryGame lotteryGame = new LotteryGame().create();
             lotteryGames.add(lotteryGame);
         }
-        return new LotteryGames(lotteryGames);
     }
 
     public List<LotteryGame> getLotteryGames() {

@@ -32,10 +32,6 @@ public class LotteryGame {
         return new LotteryGame(Collections.unmodifiableList(subList));
     }
 
-    public List<Integer> getLotteries() {
-        return lotteries;
-    }
-
     public boolean isContain(int number) {
         return this.lotteries.contains(number);
     }
