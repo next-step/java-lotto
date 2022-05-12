@@ -7,8 +7,9 @@ import study.step3.view.InputView;
 import study.step3.view.ResultView;
 
 public class Application {
+    private static final InputView inputView = new InputView();
+
     public static void main(String[] args) {
-        InputView inputView = new InputView();
         int buyAmount = inputView.inputBuyAmount();
 
         LottoTickets lottoTickets = LottoMachine.createLottoTickets(buyAmount);
