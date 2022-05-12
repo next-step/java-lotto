@@ -49,4 +49,11 @@ public class Amount {
 		}
 	}
 
+	public long value() {
+		return amount;
+	}
+
+	public long multi(long count) {
+		return this.amount * count;
+	}
 }

@@ -19,5 +19,6 @@ public class OutputView {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 		System.out.println(rankingResult.toString());
+		System.out.println("총 수익률은 " + String.format("%.2f", rankingResult.yield()) + "입니다.");
 	}
 }

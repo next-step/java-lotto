@@ -29,6 +29,10 @@ public enum LottoRank {
 		return this != LottoRank.NOTHING;
 	}
 
+	public long amount() {
+		return amount.value();
+	}
+
 	@Override
 	public String toString() {
 		return sameQuantity + "개 일치 (" + amount.toString() + "원)";
