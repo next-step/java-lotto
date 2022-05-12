@@ -12,7 +12,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 class WinningLottoTest {
     @Test
     void WinningLotto_당첨로또_생성() {
-        WinningLotto winningLotto = new WinningLotto(new Lotto(new int[]{1, 2, 3, 4, 5, 6}), 7);
+        WinningLotto winningLotto = new WinningLotto(Lotto.create(new int[]{1, 2, 3, 4, 5, 6}), 7);
         assertThat(winningLotto).isEqualTo(new WinningLotto(new Lotto(List.of(
                 new LottoNumber(1),
                 new LottoNumber(2),
@@ -31,11 +31,11 @@ class WinningLottoTest {
     @ParameterizedTest
     @NullSource
     void WinningLotto_보너스_번호가_null_인_경우(LottoNumber bonusNumber) {
-        assertThatThrownBy(() -> new WinningLotto(new Lotto(new int[]{1, 2, 3, 4, 5, 6}), bonusNumber)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new WinningLotto(Lotto.create(new int[]{1, 2, 3, 4, 5, 6}), bonusNumber)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void WinningLotto_보너스_번호가_당첨로또에_포함된_경우() {
-        assertThatThrownBy(() -> new WinningLotto(new Lotto(new int[]{1, 2, 3, 4, 5, 6}), 6)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new WinningLotto(Lotto.create(new int[]{1, 2, 3, 4, 5, 6}), 6)).isInstanceOf(IllegalArgumentException.class);
     }
 }

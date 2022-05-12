@@ -27,6 +27,10 @@ public class Lotto {
                 .collect(Collectors.toList()));
     }
 
+    public static Lotto create(List<String> stringLottoNumbers) {
+        return new Lotto(stringLottoNumbers.stream().map(LottoNumber::create).collect(Collectors.toList()));
+    }
+
     public Lotto(LottoNumberGenerateStrategy lottoNumberGenerateStrategy) {
         this(lottoNumberGenerateStrategy.generate());
     }
