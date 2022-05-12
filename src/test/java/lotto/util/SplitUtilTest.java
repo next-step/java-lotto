@@ -13,4 +13,9 @@ class SplitUtilTest {
         assertThat(SplitUtil.split("1, 2, 3, 5")).containsExactly("1", "2", "3", "5");
     }
 
+    @Test
+    @DisplayName("구분자 없는 경우 그대로 반환한다.")
+    void noSeparator() {
+        assertThat(SplitUtil.split("1")).containsExactly("1");
+    }
 }
