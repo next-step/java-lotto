@@ -12,7 +12,7 @@ public class LottoService {
     }
 
     public Lotto insertWinnerNumber(String winnerNumber) {
-        return Lotto.asWinnerLotto(AwardNumberUtil.getAwardNumberList(winnerNumber));
+        return Lotto.asWinnerLotto(AwardNumberUtil.getAwardNumbers(winnerNumber));
     }
 
     public void holdingLotteryTickets(List<Lotto> lottoProducts, Lotto winLotto, int bonus) {

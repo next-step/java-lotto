@@ -15,7 +15,7 @@ public final class AwardNumberUtil {
     private AwardNumberUtil() {
     }
 
-    public static Set<Integer> getAwardNumberList(String numbers) {
+    public static Set<Integer> getAwardNumbers(String numbers) {
         return Arrays.stream(split(numbers))
                 .map(Integer::parseInt)
                 .collect(Collectors.toSet());

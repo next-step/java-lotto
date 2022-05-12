@@ -18,7 +18,7 @@ class LottoTest {
 
     @Test
     void getAwadNumberList() {
-        assertThat(AwardNumberUtil.getAwardNumberList("1, 2, 4, 6")).contains(1, 2, 4, 6);
+        assertThat(AwardNumberUtil.getAwardNumbers("1, 2, 4, 6")).contains(1, 2, 4, 6);
     }
 
     @Test

@@ -43,7 +43,7 @@ public final class InputTable {
         System.out.println(INSERT_MANUAL_LOTTO_MESSAGE);
         List<Set<Integer>> lottos = new ArrayList<>();
         while (manalLottoCount-- != 0) {
-            lottos.add(AwardNumberUtil.getAwardNumberList(SCANNER.nextLine()));
+            lottos.add(AwardNumberUtil.getAwardNumbers(SCANNER.nextLine()));
         }
         return lottos;
     }
