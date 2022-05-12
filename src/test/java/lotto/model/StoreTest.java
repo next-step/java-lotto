@@ -31,6 +31,13 @@ class StoreTest {
                         Set.of(3, 4, 5, 6, 7, 8))
         );
 
+        assertThat(lotteryTickets).isEqualTo(new LotteryTickets(
+                List.of(
+                        new Lotto(Set.of(1, 2, 3, 4, 5, 6)),
+                        new Lotto(Set.of(2, 3, 4, 5, 6, 7)),
+                        new Lotto(Set.of(3, 4, 5, 6, 7, 8))
+                )
+        ));
 
     }
 

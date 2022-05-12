@@ -17,8 +17,8 @@ public final class LotteryTickets {
     }
 
     public LotteryTickets(List<Lotto> lottos, int inputCount) {
-        validate(lottos.size());
-        inputValidate(lottos, inputCount);
+        lottoSizeValidate(lottos.size());
+        inputValueNotMatchValidate(lottos, inputCount);
         this.lottos = lottos;
         this.inputCount = inputCount;
     }
@@ -40,13 +40,13 @@ public final class LotteryTickets {
         return lottos;
     }
 
-    private void inputValidate(List<Lotto> lottos, int inputCount) {
+    private void inputValueNotMatchValidate(List<Lotto> lottos, int inputCount) {
         if (lottos.size() != inputCount) {
             throw new LottoCountException(inputCount);
         }
     }
 
-    private void validate(int size) {
+    private void lottoSizeValidate(int size) {
         if (size < 0) {
             throw new LottoSizeException();
         }
