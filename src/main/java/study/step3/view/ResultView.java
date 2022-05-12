@@ -25,13 +25,15 @@ public class ResultView {
                 .forEach(ticket -> System.out.println(ticket.readOnlyLottoNumber().toString()));
     }
 
-    public void printLottoRanksInfos(LottoWinners lottoWinners) {
+    public void printLottoResultInfos(LottoTickets lottoTickets, LottoWinners lottoWinners) {
         System.out.println(RESULT_WINNER_RANK);
         System.out.println(RESULT_WINNER_LINE);
 
         Arrays.asList(LottoRank.values())
                 .stream()
                 .forEach(lottoRank -> printLottoRank(lottoRank, lottoWinners));
+
+        printLottoYield(lottoTickets, lottoWinners);
     }
 
     public void printLottoYield(LottoTickets lottoTickets, LottoWinners lottoWinners) {

@@ -21,8 +21,6 @@ public class Application {
         int inputBonusNumber = inputView.inputBonusNumber();
         LottoWinners lottoWinners = LottoMachine.createWinners(inputNumber, inputBonusNumber);
 
-        resultView.printLottoRanksInfos(lottoWinners);
-        resultView.printLottoYield(lottoTickets, lottoWinners);
-
+        resultView.printLottoResultInfos(lottoTickets, lottoWinners);
     }
 }
