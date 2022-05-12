@@ -2,7 +2,7 @@ package lotto.controller;
 
 import lotto.dto.ExtractLottoNumbers;
 import lotto.dto.LottoResult;
-import lotto.model.LottoCount;
+import lotto.dto.LottoCount;
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 import lotto.model.Lottos;
@@ -17,12 +17,9 @@ import java.util.stream.Collectors;
 
 public class LottoMain {
     public static void main(String[] args) {
-        Money buyingMoney = new Money(InputView.askBuyingMoney());
-        int manualLottoCount = InputView.askManualLottoCount();
-        List<String> manualLottoNumbers = InputView.askManualLottoNumbers(manualLottoCount);
+        LottoCount lottoCount = payLottoMoney();
 
-        LottoCount lottoCount = new LottoCount(buyingMoney, manualLottoCount);
-        Lottos manual = askManualLottos(manualLottoNumbers);
+        Lottos manual = askManualLottos(InputView.askManualLottoNumbers(lottoCount.getManualCount()));
         Lottos random = new Lottos(lottoCount.getRandomCount(), new RandomLottoGenerator());
 
         ResultView.printBuyingLottos(manual, random);
@@ -30,7 +27,14 @@ public class LottoMain {
         Lottos lottos = manual.addAll(random);
         LottoResult lottoResult = lottos.extractLottoResult(askWinnerLotto());
 
+        Money buyingMoney = new Money((lottoCount.getManualCount()+lottoCount.getRandomCount())*1000);
         ResultView.printResult(buyingMoney, lottoResult);
+    }
+
+    private static LottoCount payLottoMoney() {
+        Money buyingMoney = new Money(InputView.askBuyingMoney());
+        int manualLottoCount = InputView.askManualLottoCount();
+        return new LottoCount(buyingMoney, manualLottoCount);
     }
 
     private static WinnerLotto askWinnerLotto() {

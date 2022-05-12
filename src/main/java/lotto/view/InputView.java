@@ -57,7 +57,7 @@ public class InputView {
         }
     }
 
-    public static List<String> askManualLottoNumbers(int count) {
+    public static List<String> askManualLottoNumbers(long count) {
         System.out.println(LINE_SEPARATOR + INPUT_MANUAL_LOTTO_NUMBERS);
         try {
             return Stream.generate(() -> SCANNER.nextLine())

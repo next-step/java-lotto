@@ -1,4 +1,6 @@
-package lotto.model;
+package lotto.dto;
+
+import lotto.model.Money;
 
 import java.util.Objects;
 
