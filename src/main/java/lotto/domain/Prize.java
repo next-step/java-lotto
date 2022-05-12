@@ -40,4 +40,8 @@ public enum Prize {
   public int getMatchCount() {
     return matchCount;
   }
+
+  public boolean winning() {
+    return this != Prize.NOT_PRIZE;
+  }
 }
