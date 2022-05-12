@@ -12,8 +12,7 @@ public class LottoWinners {
     }
 
     private void checkDuplicateWinnersInBonus(LottoNumbers winnerNumbers, LottoNumber bonusNumber) {
-        boolean result = winnerNumbers.readOnlyNumbers().contains(bonusNumber);
-        if (result) {
+        if (winnerNumbers.readOnlyNumbers().contains(bonusNumber)) {
             throw new IllegalArgumentException(WINNER_BONUS_DUPLICATE_ERROR);
         }
     }
