@@ -1,9 +1,11 @@
 package lotto.domain;
 
 import lotto.constant.Rank;
+import lotto.exception.InvalidManualLottoNumberCount;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGame {
 
@@ -18,6 +20,23 @@ public class LottoGame {
             lottos.add(Lotto.createAutoLotto());
         }
 
+        this.lottos = new Lottos(lottos);
+        this.purchaseAmount = purchaseAmount;
+    }
+
+    public LottoGame(int purchaseAmount, List<String> manualLottoNumbers) {
+        if (manualLottoNumbers.size() > purchaseCount(purchaseAmount)) {
+            throw new InvalidManualLottoNumberCount(purchaseCount(purchaseAmount));
+        }
+
+        List<Lotto> lottos = manualLottoNumbers.stream()
+                .map(LottoNumbers::new)
+                .map(Lotto::valueOf)
+                .collect(Collectors.toList());
+
+        while (lottos.size() < purchaseCount(purchaseAmount)) {
+            lottos.add(Lotto.createAutoLotto());
+        }
         this.lottos = new Lottos(lottos);
         this.purchaseAmount = purchaseAmount;
     }

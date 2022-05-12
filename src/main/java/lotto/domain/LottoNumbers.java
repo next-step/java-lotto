@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.exception.InvalidLottoNumberCount;
+import lotto.util.SplitUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -10,6 +11,10 @@ public class LottoNumbers {
     public static final int LOTTO_NUMBER_COUNT = 6;
 
     private final Set<LottoNumber> values;
+
+    public LottoNumbers(String values) {
+        this(SplitUtil.split(values));
+    }
 
     public LottoNumbers(String[] values) {
         this(convertToSet(values));
