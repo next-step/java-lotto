@@ -11,6 +11,7 @@ import lotto.domain.StatisticInfo;
 
 public class ResultView {
 
+  private static final double MINIMUM_PROFIT_RATE = 1.0;
   private static final String PURCHASED_LOTTO_COUNT = "개를 구매했습니다.";
   private static final String STATISTICS_HEAD = "당첨 통계";
   private static final String HEAD_BODY_SPLIT_LINE = "---------";
@@ -57,6 +58,6 @@ public class ResultView {
   }
 
   private static String getProfitOrLoss(StatisticInfo statistic) {
-    return statistic.rateOfReturn() >= 1.0 ? GAIN : LOSS;
+    return statistic.rateOfReturn() >= MINIMUM_PROFIT_RATE ? GAIN : LOSS;
   }
 }
