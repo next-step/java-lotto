@@ -7,7 +7,7 @@ import java.util.List;
 
 public class LottoService {
 
-    public Lottos boughtAutoLotto(Guest guest, Store store) {
+    public LotteryTickets boughtAutoLotto(Guest guest, Store store) {
         return store.auto(guest.currentMoney());
     }
 

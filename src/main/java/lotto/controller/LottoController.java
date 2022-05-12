@@ -20,9 +20,9 @@ public class LottoController {
         Guest guest = new Guest(haveMoney);
         int manalLottoCount = InputTable.inputManualCount();
         Store store = new Store(manalLottoCount);
-        Lottos manualLottos = store.manualLottos(InputTable.inputManualLotto(manalLottoCount));
-        Lottos autoLottos = boughtAutoLotto(guest, store);
-        Lottos boughtAllLottos = Lottos.plus(manualLottos, autoLottos);
+        LotteryTickets manualLottos = store.manualLottos(InputTable.inputManualLotto(manalLottoCount));
+        LotteryTickets autoLottos = boughtAutoLotto(guest, store);
+        LotteryTickets boughtAllLottos = LotteryTickets.plus(manualLottos, autoLottos);
         OutputTable.buyThings(manalLottoCount, autoLottos.getLottos().size());
         OutputTable.printProductInfos(boughtAllLottos.getLottos());
         Lotto winnerLotto = insertWinnerNumber(InputTable.inputAwardNumber());
@@ -32,7 +32,7 @@ public class LottoController {
         OutputTable.printYield(yieldCalculate(haveMoney), 1);
     }
 
-    public Lottos boughtAutoLotto(Guest guest, Store store) {
+    public LotteryTickets boughtAutoLotto(Guest guest, Store store) {
         return lottoService.boughtAutoLotto(guest, store);
     }
 
