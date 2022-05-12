@@ -116,7 +116,7 @@ class LottosTest {
   void calculateReturnProfitRatioBonusSecond() {
     // given
     Lottos lottos = new Lottos(List.of(Lotto.create("1, 2, 3, 4, 5, 10")));
-    WinningLotto winningLotto = WinningLotto.create("1, 2, 3, 4, 20, 30", 10);
+    WinningLotto winningLotto = WinningLotto.create("1, 2, 3, 4, 5, 30", 10);
 
     // when
     double profit = lottos.calculateProfitRatio(winningLotto);

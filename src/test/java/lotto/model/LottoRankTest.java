@@ -1,6 +1,7 @@
 package lotto.model;
 
 import static lotto.model.LottoRank.BONUS_SECOND;
+import static lotto.model.LottoRank.FOURTH;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
@@ -50,5 +51,15 @@ class LottoRankTest {
 
     // then
     assertThat(findLottoRank).isEqualTo(BONUS_SECOND);
+  }
+
+  @Test
+  @DisplayName("보너스 로또 번호가 일치하지만 일치하는 로또 번호가 3개이므로 FOURTH 결과를 갖는다")
+  void checkMatchedBonusLottoNumberButNonBonusSecondRanking() {
+    // given & when
+    LottoRank findLottoRank = LottoRank.findRank(3, true);
+
+    // then
+    assertThat(findLottoRank).isEqualTo(FOURTH);
   }
 }
