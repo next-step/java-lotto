@@ -15,12 +15,12 @@ public class LottoNumber {
     }
 
     private void checkLottoNumberRange(int result) {
-        if (checkLottoNumberSize(result)) {
+        if (isLottoNumberSize(result)) {
             throw new IllegalArgumentException(LOTTO_NUMBER_SIZE_ERROR);
         }
     }
 
-    private boolean checkLottoNumberSize(int number) {
+    private boolean isLottoNumberSize(int number) {
         return (MIN_NUMBER > number) || (MAX_NUMBER < number);
     }
 
