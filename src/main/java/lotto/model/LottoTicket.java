@@ -1,7 +1,13 @@
 package lotto.model;
 
+import lotto.exception.DuplicatedLottoNumberException;
+import lotto.exception.InvalidLottoTicketSizeException;
+
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
@@ -12,9 +18,23 @@ public class LottoTicket {
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
+    public LottoTicket(Integer[] nums) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(nums)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        validate(lottoNumbers);
+
+        this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+    }
+
     private void validate(List<LottoNumber> lottoNumbers) {
         if(lottoNumbers.size() != 6){
-            throw new IllegalArgumentException("로또는 6개의 번호로 구성되어야합니다.");
+            throw new InvalidLottoTicketSizeException();
+        }
+        Set<LottoNumber> lottoNumberSet = Set.copyOf(lottoNumbers);
+        if(lottoNumberSet.size() != 6){
+            throw new DuplicatedLottoNumberException();
         }
     }
 
