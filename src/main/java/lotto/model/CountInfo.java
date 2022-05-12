@@ -30,8 +30,7 @@ public class CountInfo {
     }
 
     private boolean isNegative(long manualCount) {
-        if (manualCount < ZERO) return true;
-        return false;
+        return manualCount < ZERO;
     }
 
     public long getRandomCount() {
