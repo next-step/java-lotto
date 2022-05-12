@@ -17,32 +17,32 @@ import java.util.stream.Collectors;
 
 public class LottoMain {
     public static void main(String[] args) {
-        Money buyingMoney = new Money(InputView.inputBuyingMoney());
-        int manualLottoCount = InputView.inputManualLottoCount();
-        List<String> manualLottoNumbers = InputView.inputManualLottoNumbers(manualLottoCount);
+        Money buyingMoney = new Money(InputView.askBuyingMoney());
+        int manualLottoCount = InputView.askManualLottoCount();
+        List<String> manualLottoNumbers = InputView.askManualLottoNumbers(manualLottoCount);
 
         LottoCount lottoCount = new LottoCount(buyingMoney, manualLottoCount);
-        Lottos manualLottos = inputManualLottos(manualLottoNumbers);
-        Lottos buyingLottos = new Lottos(lottoCount.getRandomCount(), new RandomLottoGenerator());
+        Lottos manual = askManualLottos(manualLottoNumbers);
+        Lottos random = new Lottos(lottoCount.getRandomCount(), new RandomLottoGenerator());
 
-        ResultView.printBuyingLottos(manualLottos, buyingLottos);
+        ResultView.printBuyingLottos(manual, random);
 
-        Lottos lottos = manualLottos.addAll(buyingLottos);
-        LottoResult lottoResult = lottos.extractLottoResult(inputWinnerLotto());
+        Lottos lottos = manual.addAll(random);
+        LottoResult lottoResult = lottos.extractLottoResult(askWinnerLotto());
 
         ResultView.printResult(buyingMoney, lottoResult);
     }
 
-    private static WinnerLotto inputWinnerLotto() {
-        String winnerLottoNumbers = InputView.inputWinnerLottoNumbers();
+    private static WinnerLotto askWinnerLotto() {
+        String winnerLottoNumbers = InputView.askWinnerLottoNumbers();
 
         Lotto winnerLotto = new Lotto(ExtractLottoNumbers.split(winnerLottoNumbers));
-        LottoNumber bonusNumber = LottoNumber.valueOf(InputView.inputBonusLottoNumber());
+        LottoNumber bonusNumber = LottoNumber.valueOf(InputView.askBonusLottoNumber());
 
         return new WinnerLotto(winnerLotto, bonusNumber);
     }
 
-    private static Lottos inputManualLottos(List<String> manualLottoNumbers) {
+    private static Lottos askManualLottos(List<String> manualLottoNumbers) {
         return manualLottoNumbers.stream()
                 .map(lottoNumbers -> ExtractLottoNumbers.split(lottoNumbers))
                 .map(Lotto::new)

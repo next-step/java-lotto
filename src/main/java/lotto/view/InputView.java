@@ -21,7 +21,7 @@ public class InputView {
         throw new AssertionError();
     }
 
-    public static int inputBuyingMoney() {
+    public static int askBuyingMoney() {
         System.out.println(INPUT_BUYING_MONEY);
         try {
             return Integer.parseInt(SCANNER.nextLine());
@@ -30,7 +30,7 @@ public class InputView {
         }
     }
 
-    public static String inputWinnerLottoNumbers() {
+    public static String askWinnerLottoNumbers() {
         System.out.println(LINE_SEPARATOR + INPUT_WINNER_LOTTO_NUMBERS);
         try {
             return SCANNER.nextLine();
@@ -39,7 +39,7 @@ public class InputView {
         }
     }
 
-    public static Integer inputBonusLottoNumber() {
+    public static Integer askBonusLottoNumber() {
         System.out.println(LINE_SEPARATOR + INPUT_BONUS_LOTTO_NUMBER);
         try {
             return Integer.parseInt(SCANNER.nextLine());
@@ -48,7 +48,7 @@ public class InputView {
         }
     }
 
-    public static Integer inputManualLottoCount() {
+    public static Integer askManualLottoCount() {
         System.out.println(LINE_SEPARATOR + INPUT_MANUAL_LOTTO_COUNT);
         try {
             return Integer.parseInt(SCANNER.nextLine());
@@ -57,7 +57,7 @@ public class InputView {
         }
     }
 
-    public static List<String> inputManualLottoNumbers(int count) {
+    public static List<String> askManualLottoNumbers(int count) {
         System.out.println(LINE_SEPARATOR + INPUT_MANUAL_LOTTO_NUMBERS);
         try {
             return Stream.generate(() -> SCANNER.nextLine())
