@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Statistic;
-import lotto.domain.Statistics;
+import lotto.domain.StatisticInfo;
 
 public class ResultView {
 
@@ -38,11 +38,11 @@ public class ResultView {
         .collect(Collectors.joining(", ", "[", "]"));
   }
 
-  public static void printStatistics(Statistics statistics) {
+  public static void printStatistics(StatisticInfo statisticInfo) {
     printStream.println(STATISTICS_HEAD);
     printStream.println(HEAD_BODY_SPLIT_LINE);
-    statistics.getStatistics().forEach(ResultView::printStatistic);
-    printRateOfReturn(statistics);
+    statisticInfo.getStatistics().forEach(ResultView::printStatistic);
+    printRateOfReturn(statisticInfo);
   }
 
   private static void printStatistic(Statistic statistic) {
@@ -51,12 +51,12 @@ public class ResultView {
             statistic.getMatchedPrizeCount()));
   }
 
-  private static void printRateOfReturn(Statistics statistic) {
+  private static void printRateOfReturn(StatisticInfo statistic) {
     printStream.println(format(RATE_OF_RETURN_FORMAT, statistic.rateOfReturn(),
         getProfitOrLoss(statistic)));
   }
 
-  private static String getProfitOrLoss(Statistics statistic) {
+  private static String getProfitOrLoss(StatisticInfo statistic) {
     return statistic.rateOfReturn() >= 1.0 ? GAIN : LOSS;
   }
 }

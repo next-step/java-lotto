@@ -1,41 +1,34 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import lotto.domain.money.Money;
 
 public class Statistics {
 
   private final List<Statistic> statistics;
-  private final Money purchaseAmount;
 
-  public Statistics(WinningLottoTicket winningLottoTicket, LottoTickets lottoTickets,
-      Money lottoPrice) {
-    this.statistics = createStatistics(winningLottoTicket, lottoTickets);
-    this.purchaseAmount = lottoPrice.multiply(lottoTickets.size());
+  private static final String EMPTY_STATISTICS = "통계는 빈 값일 수 없습니다.";
+
+  public Statistics(List<Statistic> statistics) {
+    validate(statistics);
+    this.statistics = statistics;
   }
 
-  private List<Statistic> createStatistics(WinningLottoTicket winningLottoTicket,
-      LottoTickets lottoTickets) {
-    return Arrays.stream(Prize.values())
-        .filter(prize -> prize != Prize.NOT_PRIZE)
-        .map(prize -> new Statistic(lottoTickets.getMatchedCountPerPrize(prize, winningLottoTicket),
-            prize))
-        .collect(Collectors.toList());
+  private void validate(List<Statistic> statistics) {
+    if (statistics == null || statistics.isEmpty()) {
+      throw new IllegalArgumentException(EMPTY_STATISTICS);
+    }
+  }
+
+  public Money summingTotalPrizeAmount() {
+    return statistics.stream()
+        .map(Statistic::getTotalPrize)
+        .reduce(Money::sum)
+        .orElse(Money.createWon(0));
   }
 
   public List<Statistic> getStatistics() {
     return Collections.unmodifiableList(statistics);
-  }
-
-  public double rateOfReturn() {
-    Money winAmount = statistics.stream()
-        .map(Statistic::getTotalPrize)
-        .reduce(Money::sum)
-        .orElse(Money.createWon(0));
-    Rate divide = Rate.of((double) winAmount.value() / purchaseAmount.value());
-    return divide.getRate();
   }
 }

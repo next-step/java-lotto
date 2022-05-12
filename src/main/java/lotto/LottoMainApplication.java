@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.domain.LotteryShop;
 import lotto.domain.LottoTickets;
-import lotto.domain.Statistics;
+import lotto.domain.StatisticInfo;
 import lotto.domain.WinningLottoTicket;
 import lotto.domain.money.Money;
 import lotto.domain.strategy.RandomNumbers;
@@ -20,8 +20,8 @@ public class LottoMainApplication {
 
     String inputWinningLottoNumbers = InputView.requestLastWeekWinNumbers();
     WinningLottoTicket winningLottoTicket = new WinningLottoTicket(inputWinningLottoNumbers);
-    Statistics statistics = new Statistics(winningLottoTicket, lottoTickets,
+    StatisticInfo statisticInfo = new StatisticInfo(winningLottoTicket, lottoTickets,
         LotteryShop.PRICE_PER_PLAY_FOR_LOTTO);
-    ResultView.printStatistics(statistics);
+    ResultView.printStatistics(statisticInfo);
   }
 }
