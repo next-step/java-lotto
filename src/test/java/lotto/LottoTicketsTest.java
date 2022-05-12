@@ -7,8 +7,6 @@ import lotto.model.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -41,11 +39,12 @@ public class LottoTicketsTest {
         LottoTickets lottoTickets = new LottoTickets(List.of(lottoTicket1, lottoTicket2));
 
         Map<Rank, Long> rankMap = lottoTickets.getRankMap(winningTicket);
+
         Map<Rank, Long> result = Map.ofEntries(
                 entry(Rank.three, 1L),
                 entry(Rank.four, 1L)
         );
 
-        assertThat(rankMap).containsExactlyEntriesOf(result);
+        assertThat(rankMap).containsExactlyInAnyOrderEntriesOf(result);
     }
 }
