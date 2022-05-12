@@ -19,16 +19,20 @@ public class LottoMain {
     public static void main(String[] args) {
         LottoCount lottoCount = payLottoMoney();
 
+        Lottos lottos = buyAndPrintLottos(lottoCount);
+        LottoResult lottoResult = lottos.extractLottoResult(askWinnerLotto());
+
+        Money buyingMoney = new Money((lottoCount.getManualCount()+lottoCount.getRandomCount())*1000);
+        ResultView.printResult(buyingMoney, lottoResult);
+    }
+
+    private static Lottos buyAndPrintLottos(LottoCount lottoCount) {
         Lottos manual = askManualLottos(InputView.askManualLottoNumbers(lottoCount.getManualCount()));
         Lottos random = new Lottos(lottoCount.getRandomCount(), new RandomLottoGenerator());
 
         ResultView.printBuyingLottos(manual, random);
 
-        Lottos lottos = manual.addAll(random);
-        LottoResult lottoResult = lottos.extractLottoResult(askWinnerLotto());
-
-        Money buyingMoney = new Money((lottoCount.getManualCount()+lottoCount.getRandomCount())*1000);
-        ResultView.printResult(buyingMoney, lottoResult);
+        return manual.addAll(random);
     }
 
     private static LottoCount payLottoMoney() {
