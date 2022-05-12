@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import lotto.dto.ExtractLottoNumbers;
 import lotto.dto.LottoCount;
 import lotto.dto.LottoResult;
 import lotto.model.Lotto;
@@ -42,15 +41,12 @@ public class LottoMain {
 
     private static Lottos askManualLottos(List<String> manualLottoNumbers) {
         return manualLottoNumbers.stream()
-                .map(lottoNumbers -> ExtractLottoNumbers.split(lottoNumbers))
                 .map(Lotto::new)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
     }
 
     private static WinnerLotto askWinnerLotto() {
-        String winnerLottoNumbers = InputView.askWinnerLottoNumbers();
-
-        Lotto winnerLotto = new Lotto(ExtractLottoNumbers.split(winnerLottoNumbers));
+        Lotto winnerLotto = new Lotto(InputView.askWinnerLottoNumbers());
         LottoNumber bonusNumber = LottoNumber.valueOf(InputView.askBonusLottoNumber());
 
         return new WinnerLotto(winnerLotto, bonusNumber);

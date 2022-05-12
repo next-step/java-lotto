@@ -7,6 +7,8 @@ import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Set;
+
 import static lotto.LottoNumberTest.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -17,9 +19,22 @@ public class LottoTest {
     public static final Lotto TEST_LOTTO = new Lotto(Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, SIX));
 
     @Test
+    @DisplayName("로또 번호를 입력한 문자열로 로또를 생성한다.")
+    void stringLottoGenerateTest() {
+        // given
+        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
+        Set<LottoNumber> lottoNumbers = Sets.newHashSet(lotto.get());
+
+        // when
+        lottoNumbers.retainAll(TEST_LOTTO.get());
+        // then
+        assertThat(lottoNumbers).hasSize(6);
+    }
+
+    @Test
     @DisplayName("lotto 생성시 null이 들어오면 NullPointerException이 발생한다.")
     void nullTest() {
-        Assertions.assertThatThrownBy(() -> new Lotto(null))
+        Assertions.assertThatThrownBy(() -> new Lotto((String) null))
                 .isInstanceOf(NullPointerException.class);
     }
 
