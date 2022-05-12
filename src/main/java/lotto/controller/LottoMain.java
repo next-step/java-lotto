@@ -19,7 +19,7 @@ public class LottoMain {
         LottoCount lottoCount = payLottoMoney();
 
         Lottos lottos = buyAndPrintLottos(lottoCount);
-        LottoResult lottoResult = lottos.extractLottoResult(askWinnerLotto());
+        LottoResult lottoResult = lottos.extractLottoResult(makeWinnerLottos());
 
         ResultView.printResult(lottoCount.multiplyUnit(), lottoResult);
     }
@@ -31,7 +31,7 @@ public class LottoMain {
     }
 
     private static Lottos buyAndPrintLottos(LottoCount lottoCount) {
-        Lottos manual = askManualLottos(InputView.askManualLottoNumbers(lottoCount.getManualCount()));
+        Lottos manual = makeManualLottos(InputView.askManualLottoNumbers(lottoCount.getManualCount()));
         Lottos random = new Lottos(lottoCount.getRandomCount(), new RandomLottoGenerator());
 
         ResultView.printBuyingLottos(manual, random);
@@ -39,13 +39,13 @@ public class LottoMain {
         return manual.addAll(random);
     }
 
-    private static Lottos askManualLottos(List<String> manualLottoNumbers) {
+    private static Lottos makeManualLottos(List<String> manualLottoNumbers) {
         return manualLottoNumbers.stream()
                 .map(Lotto::new)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
     }
 
-    private static WinnerLotto askWinnerLotto() {
+    private static WinnerLotto makeWinnerLottos() {
         Lotto winnerLotto = new Lotto(InputView.askWinnerLottoNumbers());
         LottoNumber bonusNumber = LottoNumber.valueOf(InputView.askBonusLottoNumber());
 
