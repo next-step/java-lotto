@@ -35,6 +35,10 @@ public class LottoCount {
         return manualCount < ZERO;
     }
 
+    public Money multiplyUnit() {
+        return BASE_MONEY_UNIT.multiply(randomCount + manualCount);
+    }
+
     public long getRandomCount() {
         return randomCount;
     }

@@ -42,6 +42,12 @@ public final class Money {
         return new Money(this.money + other.money);
     }
 
+    public Money multiply(long count) {
+        long multiplyMoney = this.money * count;
+        validate(multiplyMoney);
+        return new Money(multiplyMoney);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Money) {

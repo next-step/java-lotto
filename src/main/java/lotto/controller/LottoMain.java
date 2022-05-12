@@ -1,8 +1,8 @@
 package lotto.controller;
 
 import lotto.dto.ExtractLottoNumbers;
-import lotto.dto.LottoResult;
 import lotto.dto.LottoCount;
+import lotto.dto.LottoResult;
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 import lotto.model.Lottos;
@@ -22,8 +22,13 @@ public class LottoMain {
         Lottos lottos = buyAndPrintLottos(lottoCount);
         LottoResult lottoResult = lottos.extractLottoResult(askWinnerLotto());
 
-        Money buyingMoney = new Money((lottoCount.getManualCount()+lottoCount.getRandomCount())*1000);
-        ResultView.printResult(buyingMoney, lottoResult);
+        ResultView.printResult(lottoCount.multiplyUnit(), lottoResult);
+    }
+
+    private static LottoCount payLottoMoney() {
+        Money buyingMoney = new Money(InputView.askBuyingMoney());
+        int manualLottoCount = InputView.askManualLottoCount();
+        return new LottoCount(buyingMoney, manualLottoCount);
     }
 
     private static Lottos buyAndPrintLottos(LottoCount lottoCount) {
@@ -35,10 +40,11 @@ public class LottoMain {
         return manual.addAll(random);
     }
 
-    private static LottoCount payLottoMoney() {
-        Money buyingMoney = new Money(InputView.askBuyingMoney());
-        int manualLottoCount = InputView.askManualLottoCount();
-        return new LottoCount(buyingMoney, manualLottoCount);
+    private static Lottos askManualLottos(List<String> manualLottoNumbers) {
+        return manualLottoNumbers.stream()
+                .map(lottoNumbers -> ExtractLottoNumbers.split(lottoNumbers))
+                .map(Lotto::new)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
     }
 
     private static WinnerLotto askWinnerLotto() {
@@ -48,12 +54,5 @@ public class LottoMain {
         LottoNumber bonusNumber = LottoNumber.valueOf(InputView.askBonusLottoNumber());
 
         return new WinnerLotto(winnerLotto, bonusNumber);
-    }
-
-    private static Lottos askManualLottos(List<String> manualLottoNumbers) {
-        return manualLottoNumbers.stream()
-                .map(lottoNumbers -> ExtractLottoNumbers.split(lottoNumbers))
-                .map(Lotto::new)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
     }
 }

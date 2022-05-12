@@ -69,4 +69,17 @@ public class MoneyTest {
     void zeroDivideTest() {
         assertThat(THOUSAND.divideBy(new Money(0))).isEqualTo(0);
     }
+
+    @Test
+    @DisplayName("현재 금액과 입력받은 개수를 곱해 새로운 Money를 생성한다.")
+    void multiplyTest() {
+        assertThat(THOUSAND.multiply(1)).isEqualTo(THOUSAND);
+    }
+
+    @Test
+    @DisplayName("현재 금액과 입력받은 개수를 곱해 새로운 Money를 생성할 때 count가 음수이면 예외가 발생한다.")
+    void multiplyNegativeTest() {
+        assertThatThrownBy(() -> THOUSAND.multiply(-1))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
