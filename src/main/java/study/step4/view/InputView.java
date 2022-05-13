@@ -16,7 +16,7 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public int inputManualLottoAmount(int buyAmount) {
+    public int inputManualLottoQuantity(int buyAmount) {
         System.out.println(INPUT_MANUAL_QUANTITY_MESSAGE);
 
         Scanner scanner = new Scanner(System.in);
