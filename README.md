@@ -209,7 +209,7 @@ Earning rate: 2142.8571428571427
 ### Requested changes
 
 - [x] LotteryBox.findSixNumbers 안에서 shuffle 수행
-- [ ] 당첨번호 객체 분리 (Lottery, bonusNumber 포함)
+- [x] 당첨번호 객체 분리 (answer, bonusNumber 포함)
 - [ ] 이름 변경 getEarningRate -> profitRate
 - [ ] Money.didEarn -> ResultView 로 이동
 - [ ] Reward.getMoney 제거

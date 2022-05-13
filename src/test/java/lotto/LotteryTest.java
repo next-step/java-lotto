@@ -47,7 +47,7 @@ public class LotteryTest {
     @Test
     void findWin() {
         Lottery lottery = new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lottery answer = new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lottery.findWin(answer, 0)).isEqualTo(Reward.of(6, false));
+        Winning winning = new Winning(new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6)),0);
+        assertThat(lottery.findWin(winning)).isEqualTo(Reward.of(6, false));
     }
 }

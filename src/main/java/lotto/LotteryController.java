@@ -53,10 +53,10 @@ public class LotteryController {
         return number;
     }
 
-    public List<Reward> findWins(Lottery answer, int bonusNumber) {
+    public List<Reward> findWins(Winning winning) {
         List<Reward> rewards = new ArrayList();
         for (Lottery lottery : this.wallet.lotteries) {
-            Reward reward = lottery.findWin(answer, bonusNumber);
+            Reward reward = lottery.findWin(winning);
             rewards.add(reward);
         }
         return rewards;
