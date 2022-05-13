@@ -54,11 +54,14 @@ public class LottoTicketTest {
     @Test
     @DisplayName("몇개 일치하는지 테스트")
     void 일치_수_테스트(){
+        // given
         Integer[] nums = {1, 2, 3, 4, 11, 14};
-        List<LottoNumber> lottoNumbers = Arrays.stream(nums)
-                .map(LottoNumber::getLottoNumber)
-                .collect(Collectors.toList());
-        LottoTicket lottoTicket =  new LottoTicket(lottoNumbers);
-        assertThat(lottoTicket.getRank(winningTicket)).isEqualTo(Rank.four);
+        LottoTicket lottoTicket =  new LottoTicket(nums);
+
+        // when
+        Rank rankRes = lottoTicket.getRank(winningTicket);
+
+        // then
+        assertThat(rankRes).isEqualTo(Rank.four);
     }
 }
