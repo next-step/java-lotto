@@ -14,6 +14,7 @@ public class LotteryBox {
     }
 
     public static List<Integer> findSixNumbers() {
+        LotteryBox.shuffleBox();
         List<Integer> list = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
             list.add(LotteryBox.numbers.get(i));

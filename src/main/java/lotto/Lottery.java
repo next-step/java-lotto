@@ -8,7 +8,7 @@ public class Lottery {
 
     public Lottery() {
 //        this.lotteryBox = new LotteryBox();
-        LotteryBox.shuffleBox();
+//        LotteryBox.shuffleBox();
         this.numbers = LotteryBox.findSixNumbers();
     }
 
