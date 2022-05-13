@@ -27,7 +27,14 @@ public class LottoNumber {
         validate(number);
         this.number = number;
     }
-    
+
+    public static LottoNumber getLottoNumber(Integer number){
+        if(lottoNumberMap.containsKey(number)){
+            throw new InvalidLottoNumberException();
+        }
+        return lottoNumberMap.get(number);
+    }
+
     private void validate(int number) {
         if(number < MIN_NUMBER || number > MAX_NUMBER){
             throw new InvalidLottoNumberException();
