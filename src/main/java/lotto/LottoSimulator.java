@@ -14,16 +14,16 @@ import java.util.List;
 public class LottoSimulator {
 
     public static void main(String[] args) {
-        int purchaseAmount = InputView.purchaseAmountView();
-        int manualLottoCount = InputView.manualLottoCountView();
-        List<LottoNumbers> manualLottoNumberValues = InputView.manualLottoNumberValuesView(manualLottoCount);
+        Cash purchaseAmount = InputView.purchaseAmountView();
+        int manualLottoCount = InputView.manualLottoCountView(purchaseAmount.totalLottoCount());
+        List<LottoNumbers> manualLottoNumberValues = InputView.manualLottoNumbersView(manualLottoCount);
 
-        LottoGame lottoGame = new LottoGame(new Cash(purchaseAmount), manualLottoNumberValues);
+        LottoGame lottoGame = new LottoGame(purchaseAmount, manualLottoNumberValues);
         ResultView.purchasedLottosView(PurchasedLottos.from(lottoGame));
 
-        String lastWinningLottoNumbers = InputView.lastWinningLottoNumberView();
-        int bonusNumber = InputView.bonusBallView();
-        lottoGame.confirmLottos(new LottoNumbers(lastWinningLottoNumbers), LottoNumber.valueOf(bonusNumber));
+        LottoNumbers lastWinningLottoNumbers = InputView.lastWinningLottoNumberView();
+        LottoNumber bonusNumber = InputView.bonusBallView(lastWinningLottoNumbers);
+        lottoGame.confirmLottos(lastWinningLottoNumbers, bonusNumber);
 
         ResultView.lottosResultView(WinningStats.from(lottoGame));
     }
