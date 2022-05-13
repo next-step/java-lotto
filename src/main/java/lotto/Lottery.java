@@ -3,18 +3,18 @@ package lotto;
 import java.util.List;
 
 public class Lottery {
-    public final LotteryBox lotteryBox;
+//    public final LotteryBox lotteryBox;
     public final List<Integer> numbers;
 
     public Lottery() {
-        this.lotteryBox = new LotteryBox();
-        lotteryBox.shuffleBox();
+//        this.lotteryBox = new LotteryBox();
+        LotteryBox.shuffleBox();
         this.numbers = LotteryBox.findSixNumbers();
     }
 
     public Lottery(List<Integer> numbers) {
-        this.lotteryBox = new LotteryBox();
-        lotteryBox.shuffleBox();
+//        this.lotteryBox = new LotteryBox();
+//        LotteryBox.shuffleBox();
         this.numbers = numbers;
     }
 
