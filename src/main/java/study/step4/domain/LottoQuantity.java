@@ -6,6 +6,10 @@ public class LottoQuantity {
 
     private final int quantity;
 
+    public LottoQuantity(int buyAmount, int manualLottoQuantity) {
+        this.quantity = amountToQuantity(buyAmount) - manualLottoQuantity;
+    }
+
     public LottoQuantity(int buyAmount) {
         this.quantity = amountToQuantity(buyAmount);
     }

@@ -19,8 +19,8 @@ public class LottoMachine {
         this.lottoCreationStrategy = lottoCreationStrategy;
     }
 
-    public static LottoTickets createLottoTickets(int buyAmount) {
-        LottoQuantity lottoQuantity = new LottoQuantity(buyAmount);
+    public static LottoTickets createLottoTickets(int buyAmount, int manualLottoQuantity) {
+        LottoQuantity lottoQuantity = new LottoQuantity(buyAmount, manualLottoQuantity);
 
         return Stream.generate(LottoMachine::createLottoTicket)
                 .limit(lottoQuantity.quantity())

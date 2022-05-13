@@ -7,6 +7,8 @@ import study.step4.domain.strategy.LottoAuto;
 import study.step4.view.InputView;
 import study.step4.view.ResultView;
 
+import java.util.List;
+
 public class Application {
     private static final InputView inputView = new InputView();
 
@@ -14,11 +16,13 @@ public class Application {
         int buyAmount = inputView.inputBuyAmount();
         int manualLottoQuantity = inputView.inputManualLottoQuantity(buyAmount);
 
+        List<List<Integer>> inputManual = inputView.inputManualLottoNumbers(manualLottoQuantity);
+
         LottoMachine lottoMachine = new LottoMachine(new LottoAuto());
-        LottoTickets lottoTickets = lottoMachine.createLottoTickets(buyAmount);
+        LottoTickets lottoTickets = lottoMachine.createLottoTickets(buyAmount, manualLottoQuantity);
 
         ResultView resultView = new ResultView(lottoTickets);
-        resultView.printLottoTicketInfos();
+        resultView.printLottoTicketInfos(inputManual.size());
 
         String inputNumber = inputView.inputWinnerNumbers();
         int inputBonusNumber = inputView.inputBonusNumber();

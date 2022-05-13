@@ -11,6 +11,8 @@ public class ResultView {
     private static final String RESULT_WINNER_LINE = "----------";
     private static final String STRING_BONUS = ", 보너스 볼 일치";
     private static final String STRING_EMPTY = "";
+    private static final String INPUT_RESULT_MANUAL_MESSAGE = "수동으로 ";
+    private static final String INPUT_RESULT_AUTO_MESSAGE = "장, 자동으로 ";
     private static final int DEFAULT_LOTTO_YIELD = 1;
 
     private final LottoTickets lottoTickets;
@@ -19,9 +21,9 @@ public class ResultView {
         this.lottoTickets = lottoTickets;
     }
 
-    public void printLottoTicketInfos() {
+    public void printLottoTicketInfos(int manualNumber) {
         List<LottoTicket> tickets = lottoTickets.readOnlyLottoTicket();
-        System.out.println(lottoTickets.lottoQuantity() + BUY_QUANTITY_MESSAGE);
+        System.out.println(INPUT_RESULT_MANUAL_MESSAGE + manualNumber + INPUT_RESULT_AUTO_MESSAGE + lottoTickets.lottoQuantity() + BUY_QUANTITY_MESSAGE);
         tickets.stream()
                 .forEach(ticket -> System.out.println(ticket.readOnlyLottoNumber().toString()));
     }
