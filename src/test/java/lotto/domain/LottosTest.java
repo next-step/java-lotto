@@ -23,6 +23,6 @@ public class LottosTest {
         lottoGameResult.addMatchResult(LOTTO_REWARD.SECOND);
         lottoGameResult.addMatchResult(LOTTO_REWARD.MISS);
 
-        assertThat(new Lottos(lottoList, 3000).matchNumbers(numbers, bonusNumber)).isEqualTo(lottoGameResult);
+        assertThat(new Lottos(lottoList).matchNumbers(numbers, bonusNumber)).isEqualTo(lottoGameResult);
     }
 }

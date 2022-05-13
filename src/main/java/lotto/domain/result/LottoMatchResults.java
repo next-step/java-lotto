@@ -8,7 +8,6 @@ import lotto.domain.LOTTO_REWARD;
 public class LottoMatchResults{
     private List<MatchResult> matchResults = new ArrayList<>();
 
-
     LottoMatchResults() {
         matchResults.add(new MatchResult(0, LOTTO_REWARD.MISS));
         matchResults.add(new MatchResult(0, LOTTO_REWARD.FIFTH));

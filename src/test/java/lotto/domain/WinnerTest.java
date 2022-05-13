@@ -21,7 +21,7 @@ public class WinnerTest {
         lottoGameResult.addMatchResult(LOTTO_REWARD.SECOND);
         lottoGameResult.addMatchResult(LOTTO_REWARD.FIFTH);
 
-        LottoGameResult expectedLottoGameResult = winner.findWinners(new Lottos(lottoList, 3000));
+        LottoGameResult expectedLottoGameResult = winner.findWinners(new Lottos(lottoList));
 
         assertThat(expectedLottoGameResult).isEqualTo(lottoGameResult);
     }
@@ -38,7 +38,7 @@ public class WinnerTest {
         lottoGameResult.addMatchResult(LOTTO_REWARD.MISS);
         lottoGameResult.addMatchResult(LOTTO_REWARD.MISS);
 
-        assertThat(winner.findWinners(new Lottos(lottoList, 2000))).isEqualTo(lottoGameResult);
+        assertThat(winner.findWinners(new Lottos(lottoList))).isEqualTo(lottoGameResult);
     }
 
     @Test
@@ -51,7 +51,7 @@ public class WinnerTest {
         LottoGameResult lottoGameResult = new LottoGameResult(2000);
         lottoGameResult.addMatchResult(LOTTO_REWARD.SECOND);
 
-        assertThat(winner.findWinners(new Lottos(lottoList, 1000))).isEqualTo(lottoGameResult);
+        assertThat(winner.findWinners(new Lottos(lottoList))).isEqualTo(lottoGameResult);
 
     }
 }

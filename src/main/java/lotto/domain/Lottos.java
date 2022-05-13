@@ -8,11 +8,9 @@ import lotto.domain.result.LottoGameResult;
 
 public class Lottos {
     private List<Lotto> lottos;
-    private int purchaseAmount;
 
-    Lottos(List<Lotto> lottos, int purchaseAmount) {
+    Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
-        this.purchaseAmount = purchaseAmount;
     }
 
     public static Lottos of(int purchaseAmount) {
@@ -23,11 +21,11 @@ public class Lottos {
             lottos.add(new Lotto(LottoNumberGenerator.generate()));
         }
 
-        return new Lottos(lottos, purchaseAmount);
+        return new Lottos(lottos);
     }
 
     public LottoGameResult matchNumbers(Set<Integer> numbers, int bonusNumber) {
-        LottoGameResult lottoGameResult = new LottoGameResult(purchaseAmount);
+        LottoGameResult lottoGameResult = new LottoGameResult(LOTTO_PRICE * lottos.size());
 
         for (Lotto lotto : lottos) {
             lottoGameResult.addMatchResult(lotto.hasWinningNumbers(numbers, bonusNumber));
