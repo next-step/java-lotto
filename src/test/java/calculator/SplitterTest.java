@@ -41,4 +41,26 @@ class SplitterTest {
     assertThatIllegalArgumentException().isThrownBy(() -> Splitter.split(input))
         .withMessage("나누려는 문자열을 입력하세요");
   }
+
+  @DisplayName("커스텀 구분자로 나누어진 문자 리스트를 반환한다")
+  @ParameterizedTest
+  @MethodSource("withCustomDelimProvider")
+  void withCustomDelim(String input, String delim, String... expected) {
+    assertThat(Splitter.split(input, delim)).containsExactly(expected);
+  }
+
+  static Stream<Arguments> withCustomDelimProvider() {
+    return Stream.of(
+        arguments("a,b", ",", new String[]{"a", "b"}),
+        arguments("a-b-c", "-", new String[]{"a", "b", "c"})
+    );
+  }
+
+  @DisplayName("커스텀 구분자가 null 또는 빈 문자열인 경우 IllegalArgument 예외를 던진다")
+  @ParameterizedTest
+  @NullAndEmptySource
+  void delimNullOrEmpty(String delim) {
+    assertThatIllegalArgumentException().isThrownBy(() -> Splitter.split("1 2 3", delim))
+        .withMessage("구분자를 입력하세요");
+  }
 }
