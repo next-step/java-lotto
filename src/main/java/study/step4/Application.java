@@ -12,6 +12,7 @@ public class Application {
 
     public static void main(String[] args) {
         int buyAmount = inputView.inputBuyAmount();
+        int manualLottoAmount = inputView.inputManualLottoAmount(buyAmount);
 
         LottoMachine lottoMachine = new LottoMachine(new LottoAuto());
         LottoTickets lottoTickets = lottoMachine.createLottoTickets(buyAmount);
