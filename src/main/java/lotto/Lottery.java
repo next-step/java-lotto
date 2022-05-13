@@ -9,7 +9,11 @@ public class Lottery {
     public Lottery() {
 //        this.lotteryBox = new LotteryBox();
 //        LotteryBox.shuffleBox();
-        this.numbers = LotteryBox.findSixNumbers();
+        this.numbers = createLottery();
+    }
+
+    private List<Integer> createLottery() {
+        return LotteryBox.findSixNumbers();
     }
 
     public Lottery(List<Integer> numbers) {
