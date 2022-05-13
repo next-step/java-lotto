@@ -2,6 +2,7 @@ package study.step4.domain;
 
 import study.step4.domain.strategy.LottoCreationStrategy;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -19,12 +20,31 @@ public class LottoMachine {
         this.lottoCreationStrategy = lottoCreationStrategy;
     }
 
-    public static LottoTickets createLottoTickets(int buyAmount, int manualLottoQuantity) {
-        LottoQuantity lottoQuantity = new LottoQuantity(buyAmount, manualLottoQuantity);
+    public static LottoTickets createLottoTickets(int buyAmount, List<List<Integer>> inputManual) {
+        LottoQuantity lottoQuantity = new LottoQuantity(buyAmount, inputManual.size());
 
-        return Stream.generate(LottoMachine::createLottoTicket)
+        List<LottoTicket> lottoManualTickets = inputManual.stream()
+                .map(LottoMachine::createManualLotto)
+                .collect(Collectors.toList());
+
+        List<LottoTicket> lottoAutoTickets = Stream.generate(LottoMachine::createLottoTicket)
                 .limit(lottoQuantity.quantity())
-                .collect(Collectors.collectingAndThen(toList(), LottoTickets::new));
+                .collect(Collectors.collectingAndThen(toList(), LottoTickets::new)).readOnlyLottoTicket();
+
+        return joinLottoTickets(lottoAutoTickets, lottoManualTickets);
+    }
+
+    public static LottoTickets joinLottoTickets(List<LottoTicket> autoTickets, List<LottoTicket> manualTickets) {
+        List<LottoTicket> result = new ArrayList<>();
+
+        result.addAll(manualTickets);
+        result.addAll(autoTickets);
+
+        return new LottoTickets(result);
+    }
+
+    private static LottoTicket createManualLotto(List<Integer> numbers) {
+        return new LottoTicket(Set.copyOf(numbers));
     }
 
     public static LottoTicket createLottoTicket(String numbers) {

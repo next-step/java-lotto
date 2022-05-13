@@ -23,7 +23,7 @@ public class ResultView {
 
     public void printLottoTicketInfos(int manualNumber) {
         List<LottoTicket> tickets = lottoTickets.readOnlyLottoTicket();
-        System.out.println(INPUT_RESULT_MANUAL_MESSAGE + manualNumber + INPUT_RESULT_AUTO_MESSAGE + lottoTickets.lottoQuantity() + BUY_QUANTITY_MESSAGE);
+        System.out.println(INPUT_RESULT_MANUAL_MESSAGE + manualNumber + INPUT_RESULT_AUTO_MESSAGE + (lottoTickets.lottoQuantity() - manualNumber) + BUY_QUANTITY_MESSAGE);
         tickets.stream()
                 .forEach(ticket -> System.out.println(ticket.readOnlyLottoNumber().toString()));
     }

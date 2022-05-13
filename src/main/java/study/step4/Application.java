@@ -17,7 +17,7 @@ public class Application {
         List<List<Integer>> inputManual = InputView.getInstance().inputManualLottoNumbers(manualLottoQuantity);
 
         LottoMachine lottoMachine = new LottoMachine(new LottoAuto());
-        LottoTickets lottoTickets = lottoMachine.createLottoTickets(buyAmount, manualLottoQuantity);
+        LottoTickets lottoTickets = lottoMachine.createLottoTickets(buyAmount, inputManual);
 
         ResultView resultView = new ResultView(lottoTickets);
         resultView.printLottoTicketInfos(inputManual.size());
