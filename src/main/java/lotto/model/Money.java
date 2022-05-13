@@ -7,6 +7,7 @@ import java.util.Objects;
 public final class Money {
 
     private static final long MIN_VALUE = 1000L;
+
     private final long value;
 
     public Money(long value) {

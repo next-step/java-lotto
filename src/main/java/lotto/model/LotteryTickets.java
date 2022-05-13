@@ -1,7 +1,7 @@
 package lotto.model;
 
+import lotto.exception.LottoCountException;
 import lotto.exception.LottoSizeException;
-import lotto.util.AwardNumberUtil;
 
 import java.util.List;
 import java.util.Objects;
@@ -9,22 +9,44 @@ import java.util.Set;
 
 public final class LotteryTickets {
 
-    private final List<Lotto> value;
+    private final List<Lotto> lottos;
+    private final int inputCount;
 
-    public LotteryTickets(List<Lotto> value) {
-        validate(value.size());
-        this.value = value;
+    public LotteryTickets(List<Lotto> lottos) {
+        this(lottos, lottos.size());
+    }
+
+    public LotteryTickets(List<Lotto> lottos, int inputCount) {
+        lottoSizeValidate(lottos.size());
+        inputValueNotMatchValidate(lottos, inputCount);
+        this.lottos = lottos;
+        this.inputCount = inputCount;
     }
 
     public void findGrade(Lotto winLotto, int bonus) {
         Set<Integer> winningNumbers = winLotto.numbers();
-        for (Lotto lotto : value) {
-            Set<Integer> selectNumbers = lotto.numbers();
-            LotteryResults.increase(AwardNumberUtil.matchCount(selectNumbers, winningNumbers, bonus));
+        for (Lotto lotto : lottos) {
+            LotteryResults.increase(lotto.matchCount(winningNumbers, bonus));
         }
     }
 
-    private void validate(int size) {
+
+    public static LotteryTickets plus(LotteryTickets manualLottos, LotteryTickets autoLottos) {
+        manualLottos.lottos.addAll(autoLottos.lottos);
+        return new LotteryTickets(manualLottos.lottos, manualLottos.lottos.size());
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
+    private void inputValueNotMatchValidate(List<Lotto> lottos, int inputCount) {
+        if (lottos.size() != inputCount) {
+            throw new LottoCountException(inputCount);
+        }
+    }
+
+    private void lottoSizeValidate(int size) {
         if (size < 0) {
             throw new LottoSizeException();
         }
@@ -32,18 +54,14 @@ public final class LotteryTickets {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         LotteryTickets that = (LotteryTickets) o;
-        return Objects.equals(value, that.value);
+        return inputCount == that.inputCount && Objects.equals(lottos, that.lottos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return Objects.hash(lottos, inputCount);
     }
 }

@@ -7,12 +7,12 @@ import java.util.List;
 
 public class LottoService {
 
-    public List<Lotto> visit(Guest guest, Store store) {
-        return store.delivery(guest.currentMoney());
+    public LotteryTickets boughtAutoLotto(Guest guest, Store store) {
+        return store.auto(guest.currentMoney());
     }
 
     public Lotto insertWinnerNumber(String winnerNumber) {
-        return Lotto.from(AwardNumberUtil.getAwardNumberList(winnerNumber));
+        return Lotto.asWinnerLotto(AwardNumberUtil.getAwardNumbers(winnerNumber));
     }
 
     public void holdingLotteryTickets(List<Lotto> lottoProducts, Lotto winLotto, int bonus) {

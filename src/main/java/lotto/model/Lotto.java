@@ -1,6 +1,7 @@
 package lotto.model;
 
 import lotto.enums.Grade;
+import lotto.exception.BonusContainWinningResultException;
 import lotto.exception.LottoLengthException;
 
 import java.util.Objects;
@@ -15,12 +16,16 @@ public final class Lotto {
 
     public Lotto(Set<Integer> lottoNumbers) {
         validate(lottoNumbers);
-        this.lottoNumbers = lottoNumbers
-                .stream().map(LottoNumber::new)
+        this.lottoNumbers = Lotto.convertLottoNumberToInteger(lottoNumbers);
+    }
+
+    private static Set<LottoNumber> convertLottoNumberToInteger(Set<Integer> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet());
     }
 
-    public static Lotto from(Set<Integer> winnerNumbers) {
+    public static Lotto asWinnerLotto(Set<Integer> winnerNumbers) {
         return new Lotto(winnerNumbers);
     }
 
@@ -37,6 +42,31 @@ public final class Lotto {
                 .collect(Collectors.toSet());
     }
 
+
+    public Grade matchCount(Set<Integer> winningLotto, int bonusNumber) {
+        bonusContainValidate(winningLotto, bonusNumber);
+        return Grade.valueOf(this.numbers()
+                        .stream()
+                        .reduce(0,(count, lottoNumber) -> lottoMatchCount(winningLotto, count, lottoNumber))
+                , getBonusCheck(bonusNumber));
+    }
+
+    private int lottoMatchCount(Set<Integer> winningLotto, int count, int lottoNumber) {
+        if (winningLotto.contains(lottoNumber)) {
+            count++;
+        }
+        return count;
+    }
+
+    private boolean getBonusCheck(int bonusNumber) {
+        return this.numbers().contains(bonusNumber);
+    }
+
+    private void bonusContainValidate(Set<Integer> winningLotto, int bonusNumber) {
+        if (winningLotto.contains(bonusNumber)) {
+            throw new BonusContainWinningResultException(bonusNumber);
+        }
+    }
 
     @Override
     public boolean equals(Object o) {

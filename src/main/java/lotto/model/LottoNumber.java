@@ -8,6 +8,7 @@ public final class LottoNumber {
 
   static final int MIN_VALUE = 1;
   static final int MAX_VALUE = 45;
+
   private final int value;
 
   public LottoNumber(int value) {

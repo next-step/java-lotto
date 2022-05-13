@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.model.Guest;
-import lotto.model.LotteryResults;
-import lotto.model.Lotto;
-import lotto.model.Store;
+import lotto.model.*;
 import lotto.service.LottoService;
 import lotto.view.InputTable;
 import lotto.view.OutputTable;
@@ -19,26 +16,24 @@ public class LottoController {
     }
 
     public void run() {
-        OutputTable.inputPurchaseAmount();
         long haveMoney = InputTable.inputHaveMoney();
-
-        List<Lotto> lottoProducts = visit(new Guest(haveMoney), new Store());
-        OutputTable.buyThings(lottoProducts.size());
-        OutputTable.printProductInfos(lottoProducts);
-
-        OutputTable.lastWeekAwardNumber();
+        Guest guest = new Guest(haveMoney);
+        int manalLottoCount = InputTable.inputManualCount();
+        Store store = new Store(manalLottoCount);
+        LotteryTickets manualLottos = store.manualLottos(InputTable.inputManualLotto(manalLottoCount));
+        LotteryTickets autoLottos = boughtAutoLotto(guest, store);
+        LotteryTickets boughtAllLottos = LotteryTickets.plus(manualLottos, autoLottos);
+        OutputTable.buyThings(manalLottoCount, autoLottos.getLottos().size());
+        OutputTable.printProductInfos(boughtAllLottos.getLottos());
         Lotto winnerLotto = insertWinnerNumber(InputTable.inputAwardNumber());
-
-        OutputTable.getBonus();
         int bonus = insertBonusNumber(InputTable.inputBonusNumber());
-        holdingLotteryTickets(lottoProducts, winnerLotto, bonus);
-        OutputTable.resultStatisticsMessage();
+        holdingLotteryTickets(boughtAllLottos.getLottos(), winnerLotto, bonus);
         OutputTable.resultStatistics(LotteryResults.getLotteryResult());
         OutputTable.printYield(yieldCalculate(haveMoney), 1);
     }
 
-    public List<Lotto> visit(Guest guest, Store store) {
-        return lottoService.visit(guest, store);
+    public LotteryTickets boughtAutoLotto(Guest guest, Store store) {
+        return lottoService.boughtAutoLotto(guest, store);
     }
 
     public void holdingLotteryTickets(List<Lotto> lottoProducts, Lotto winnerLotto, int bonus) {
