@@ -22,7 +22,7 @@ public class LottoTicketsTest {
     void before(){
         Integer[] nums = {1, 2, 3, 4, 5, 6};
         List<LottoNumber> lottoNumbers = Arrays.stream(nums)
-                .map(LottoNumber::new)
+                .map(LottoNumber::getLottoNumber)
                 .collect(Collectors.toList());
         winningTicket = new LottoTicket(lottoNumbers);
     }

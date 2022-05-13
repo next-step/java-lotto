@@ -29,7 +29,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber getLottoNumber(Integer number){
-        if(lottoNumberMap.containsKey(number)){
+        if(!lottoNumberMap.containsKey(number)){
             throw new InvalidLottoNumberException();
         }
         return lottoNumberMap.get(number);
