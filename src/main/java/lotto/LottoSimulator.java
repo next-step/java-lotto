@@ -9,12 +9,16 @@ import lotto.util.SplitUtil;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
+
 public class LottoSimulator {
 
     public static void main(String[] args) {
         int purchaseAmount = InputView.purchaseAmountView();
-        LottoGame lottoGame = new LottoGame(purchaseAmount);
+        int manualLottoCount = InputView.manualLottoCountView();
+        List<String> manualLottoNumberValues = InputView.manualLottoNumberValuesView(manualLottoCount);
 
+        LottoGame lottoGame = new LottoGame(purchaseAmount, manualLottoNumberValues);
         ResultView.purchasedLottosView(PurchasedLottos.from(lottoGame));
 
         String lastWinningLottoNumbers = InputView.lastWinningLottoNumberView();

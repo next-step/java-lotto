@@ -14,16 +14,6 @@ public class LottoGame {
     private final int purchaseAmount;
     private final Lottos lottos;
 
-    public LottoGame(int purchaseAmount) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < purchaseCount(purchaseAmount); i++) {
-            lottos.add(Lotto.createAutoLotto());
-        }
-
-        this.lottos = new Lottos(lottos);
-        this.purchaseAmount = purchaseAmount;
-    }
-
     public LottoGame(int purchaseAmount, List<String> manualLottoNumbers) {
         if (manualLottoNumbers.size() > purchaseCount(purchaseAmount)) {
             throw new InvalidManualLottoNumberCount(purchaseCount(purchaseAmount));
