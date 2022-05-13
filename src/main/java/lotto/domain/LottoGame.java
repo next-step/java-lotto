@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.List;
 
@@ -9,24 +9,23 @@ public class LottoGame {
     private final Money money;
 
     public LottoGame(String buyPrice) {
-        this(buyPrice, new UserLottos());
+        this(buyPrice, new UserLottos(buyPrice));
     }
 
     public LottoGame(String buyPrice, UserLottos lottoNumbers) {
         this.userLottos = lottoNumbers;
-        this.money = new Money(buyPrice, lottoNumbers.getSize());
+        this.money = new Money(buyPrice);
     }
 
     public void auto() {
         validate();
         while (isPurchasable()) {
             userLottos.autoCreate();
-            money.addQuantity();
         }
     }
 
     public double getReturnRate(WinningLotto winningLottoNumber) {
-        return this.money.getReturnRate(userLottos.getWinningMoney(winningLottoNumber));
+        return this.money.calculateReturnRate(userLottos.getWinningMoney(winningLottoNumber));
     }
 
     public LottoResults getLottoGameResults(WinningLotto winningLottoNumber) {
@@ -40,11 +39,11 @@ public class LottoGame {
     }
 
     private boolean isPurchasable() {
-        return money.isPurchasable();
+        return userLottos.isPurchasable();
     }
 
     public int getMaxPurchasableQuantity() {
-        return money.getMaxPurchasableQuantity();
+        return userLottos.getMaxPurchasableQuantity();
     }
 
     public List<Lotto> getBuyLottoNumbers() {

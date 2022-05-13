@@ -1,5 +1,9 @@
-package lotto;
+package lotto.domain;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.Rank;
+import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,8 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class LottoTest {
     private Lotto lotto;
@@ -17,33 +20,28 @@ public class LottoTest {
     void setLotto() {
         lotto = new Lotto("1,2,3,4,6,7");
     }
+
     @Test
     @DisplayName("숫자, 문자 , 외 입력시 예외가 발생한다")
     void wrongInputException() {
-        assertThatThrownBy(() -> new Lotto("1,2,3,4,5,`"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("숫자, 공백 및 문자 , 만 사용 가능합니다.");
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto("1,2,3,4,5,`"))
+                .withMessage("숫자, 공백 및 문자 , 만 사용 가능합니다.");
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("로또숫자가 6개가 아니면 예외가 발생한다")
-    void wrongSizeException() {
-        assertThatThrownBy(() -> new Lotto("1,2,3,4,5"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호는 6개여야 합니다.");
-
-        assertThatThrownBy(() -> new Lotto("1,2,3,4,5,6,7"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호는 6개여야 합니다.");
+    @ValueSource(strings={"1", "1,2", "1,2,3", "1,2,3,4", "1,2,3,4,5", "1,2,3,4,5,6,7"})
+    void wrongSizeException(String lottoNumbers) {
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(lottoNumbers))
+                .withMessage("로또 번호는 6개여야 합니다.");
     }
 
     @ParameterizedTest
     @DisplayName("중복된 번호가 있으면 예외가 발생한다")
     @ValueSource(strings = {"1,2,3,4,5,5"})
     void wrongNumberException(String lottoNumber) {
-        assertThatThrownBy(() -> new Lotto(lottoNumber))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("중복된 번호가 있습니다.");
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(lottoNumber))
+                .withMessage("중복된 번호가 있습니다.");
     }
 
     @Test
