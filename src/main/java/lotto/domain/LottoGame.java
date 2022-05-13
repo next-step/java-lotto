@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 public class LottoGame {
 
-    private final int manualLottoCount;
     private final Cash purchaseAmount;
     private final Lottos lottos;
 
@@ -20,13 +19,11 @@ public class LottoGame {
         List<Lotto> lottos = manualLottoNumbers.stream()
                 .map(Lotto::valueOf)
                 .collect(Collectors.toList());
-
         while (lottos.size() < purchaseAmount.totalLottoCount()) {
             lottos.add(Lotto.createAutoLotto());
         }
         this.lottos = new Lottos(lottos);
         this.purchaseAmount = purchaseAmount;
-        this.manualLottoCount = manualLottoNumbers.size();
     }
 
     public void confirmLottos(LottoNumbers lastWinningNumbers, LottoNumber bonusNumber) {
@@ -46,10 +43,10 @@ public class LottoGame {
     }
 
     public int manualLottoCount() {
-        return manualLottoCount;
+        return lottos.countManualLotto();
     }
 
     public int autoLottoCount() {
-        return lottos.count() - manualLottoCount;
+        return lottos.count() - lottos.countManualLotto();
     }
 }

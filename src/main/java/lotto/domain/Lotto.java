@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.constant.Rank;
+import lotto.constant.Type;
 import lotto.generator.RandomNumberGenerator;
 
 import java.util.List;
@@ -10,10 +11,12 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     private final LottoNumbers lottoNumbers;
+    private final Type type;
     private Rank rank;
 
-    private Lotto(LottoNumbers lottoNumbers) {
+    private Lotto(LottoNumbers lottoNumbers, Type type) {
         this.lottoNumbers = lottoNumbers;
+        this.type = type;
     }
 
     public static Lotto createAutoLotto() {
@@ -21,11 +24,11 @@ public class Lotto {
                 .stream()
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
-        return new Lotto(new LottoNumbers(randomLottoNumbers));
+        return new Lotto(new LottoNumbers(randomLottoNumbers), Type.AUTO);
     }
 
     public static Lotto valueOf(LottoNumbers lottoNumbers) {
-        return new Lotto(lottoNumbers);
+        return new Lotto(lottoNumbers, Type.MANUAL);
     }
 
     public void confirm(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
@@ -35,6 +38,10 @@ public class Lotto {
 
     public boolean isSameRank(Rank rank) {
         return this.rank == rank;
+    }
+
+    public boolean isManual() {
+        return type == Type.MANUAL;
     }
 
     public Rank findMatchResult() {
