@@ -11,9 +11,11 @@ import java.util.stream.Stream;
 
 public final class Lottos {
 
+    private static final int ZERO = 0;
+
     private final List<Lotto> lottos;
 
-    public Lottos(int count, LottoGenerator lottoGenerator) {
+    public Lottos(long count, LottoGenerator lottoGenerator) {
         this(Stream.generate(lottoGenerator::get)
                 .limit(count)
                 .collect(Collectors.toList()));
@@ -26,10 +28,6 @@ public final class Lottos {
 
     private void validate(List<Lotto> lottos) {
         Objects.requireNonNull(lottos, "lottos 생성을 위한 입력이 올바르지 않습니다. lottos is null");
-
-        if (lottos.isEmpty()) {
-            throw new IllegalArgumentException("lottos 생성을 위한 입력이 올바르지 않습니다. lottos is empty");
-        }
     }
 
     public int size() {
@@ -48,7 +46,17 @@ public final class Lottos {
                 .collect(Collectors.collectingAndThen(Collectors.toList(), LottoResult::new));
     }
 
-    private static void validate(WinnerLotto winnerLotto) {
+    private void validate(WinnerLotto winnerLotto) {
         Objects.requireNonNull(winnerLotto, "당첨 로또 번호 입력이 올바르지 않습니다. winnerLotto is null");
+    }
+
+    public Lottos addAll(Lottos other) {
+        Objects.requireNonNull(other, "합치려는 Lottos 객체는 null일 수 없습니다.");
+
+        if (other.size() == ZERO) {
+            return this;
+        }
+        return new Lottos(Stream.concat(lottos.stream(), other.get().stream())
+                .collect(Collectors.toList()));
     }
 }

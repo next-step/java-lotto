@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    private static final String OUTPUT_BUYING_LOTTOS = "%d개를 구매했습니다.";
+    private static final String OUTPUT_BUYING_LOTTOS = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String DELIMITER = ", ";
     private static final String OUTPUT_OPEN_BRACKET = "[";
     private static final String OUTPUT_CLOSE_BRACKET = "]";
@@ -44,11 +44,15 @@ public class ResultView {
         throw new AssertionError();
     }
 
-    public static void printBuyingLottos(Lottos buyingLottos) {
-        System.out.println(String.format(OUTPUT_BUYING_LOTTOS, buyingLottos.size()));
+    public static void printBuyingLottos(Lottos manual, Lottos random) {
+        System.out.println(String.format(OUTPUT_BUYING_LOTTOS, manual.size(), random.size()));
 
-        List<Lotto> lottos = buyingLottos.get();
-        for (Lotto lotto : lottos) {
+        List<Lotto> manualLottos = manual.get();
+        for (Lotto lotto : manualLottos) {
+            printLottos(lotto);
+        }
+        List<Lotto> randomLottos = random.get();
+        for (Lotto lotto : randomLottos) {
             printLottos(lotto);
         }
     }

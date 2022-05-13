@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.dto.ExtractLottoNumbers;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -13,6 +15,10 @@ public final class Lotto {
     public Lotto(Set<LottoNumber> lotto) {
         validate(lotto);
         this.lotto = new HashSet<>(lotto);
+    }
+
+    public Lotto(String lottoNumbers) {
+        this(ExtractLottoNumbers.split(lottoNumbers));
     }
 
     private void validate(Set<LottoNumber> lotto) {

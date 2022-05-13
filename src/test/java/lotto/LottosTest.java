@@ -34,14 +34,6 @@ public class LottosTest {
                 .isInstanceOf(NullPointerException.class);
     }
 
-    @ParameterizedTest
-    @EmptySource
-    @DisplayName("Lottos 생성시 인자로 빈 리스트가 들어오면 예외가 발생한다.")
-    void emptyTest(List<Lotto> lottos) {
-        assertThatThrownBy(() -> new Lottos(lottos))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
     @Test
     @DisplayName("로또 개수와 생성 전략을 입력하면 Lottos가 생성된다.")
     void newLottosTest() {
@@ -89,5 +81,13 @@ public class LottosTest {
 
         // then
         assertThat(lottoResult.getRankResult().get(0)).isEqualTo(Rank.OTHER);
+    }
+
+    @Test
+    @DisplayName("두개의 Lottos 객체를 합해 하나의 Lottos를 반환한다.")
+    void combineTest() {
+        Lottos lottos = TEST_LOTTOS.addAll(TEST_LOTTOS);
+
+        assertThat(lottos.size()).isEqualTo(2);
     }
 }
