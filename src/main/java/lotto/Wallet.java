@@ -55,6 +55,6 @@ public class Wallet {
     }
 
     public double getEarnedMoney(int earnedMoney) {
-        return this.money.getEarningRate(earnedMoney);
+        return this.money.profitRate(earnedMoney);
     }
 }

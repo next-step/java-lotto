@@ -28,12 +28,12 @@ public class Money {
         this.value -= LOTTERY_PRICE;
     }
 
-    public double getEarningRate(int earnedMoney) {
+    public double profitRate(int earnedMoney) {
         return earnedMoney / (double) this.investedMoney;
     }
 
     public String didEarn(int earnedMoney) {
-        if (getEarningRate(earnedMoney) >= 1) {
+        if (profitRate(earnedMoney) >= 1) {
             return "📈Earned!";
         }
         return "📉Lost..";

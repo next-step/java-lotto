@@ -56,6 +56,6 @@ public class WinStatistics {
     }
 
     public double getEarningRate(Money money) {
-        return money.getEarningRate(this.getEarnedMoney());
+        return money.profitRate(this.getEarnedMoney());
     }
 }
