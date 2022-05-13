@@ -12,6 +12,7 @@ public class LottoGame {
     private static final int LOTTO_PRICE = 1000;
 
     private final int purchaseAmount;
+    private final int manualLottoCount;
     private final Lottos lottos;
 
     public LottoGame(int purchaseAmount, List<String> manualLottoNumbers) {
@@ -29,6 +30,7 @@ public class LottoGame {
         }
         this.lottos = new Lottos(lottos);
         this.purchaseAmount = purchaseAmount;
+        this.manualLottoCount = manualLottoNumbers.size();
     }
 
     private int purchaseCount(int purchaseAmount) {
@@ -49,5 +51,13 @@ public class LottoGame {
 
     public int countMatchResult(Rank rank) {
         return lottos.countMatchResult(rank);
+    }
+
+    public int manualLottoCount() {
+        return manualLottoCount;
+    }
+
+    public int autoLottoCount() {
+        return lottos.count() - manualLottoCount;
     }
 }

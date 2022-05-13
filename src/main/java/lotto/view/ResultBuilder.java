@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
 import lotto.dto.result.MatchStats;
 import lotto.dto.result.PurchasedLotto;
+import lotto.dto.result.PurchasedLottos;
 import lotto.exception.NotSupportInstanceException;
 
 import java.util.List;
@@ -23,6 +23,7 @@ public class ResultBuilder {
     private static final String MESSAGE_PROFIT_MINUS = "기준이 1이기 때문에 결과적으로 손해라는 의미임";
     private static final String MESSAGE_PROFIT_PLUS = "기준이 1이기 때문에 결과적으로 이익이라는 의미임";
     private static final String MESSAGE_PROFIT_NONE = "기준이 1이기 때문에 결과적으로 원점이라는 의미임";
+    private static final String MESSAGE_PURCHASED_LOTTO_COUNT = "수동으로 %d장, 자동으로 %d장을 구매했습니다.";
 
     private static final StringBuilder sb = new StringBuilder();
 
@@ -78,6 +79,10 @@ public class ResultBuilder {
             return MESSAGE_PROFIT_NONE;
         }
         return MESSAGE_PROFIT_PLUS;
+    }
+
+    public static String buildPurchasedLottoCount(PurchasedLottos purchasedLottos) {
+        return String.format(MESSAGE_PURCHASED_LOTTO_COUNT, purchasedLottos.manualLottoCount(), purchasedLottos.autoLottoCount());
     }
 
     private static void initializeStringBuilder() {
