@@ -60,4 +60,8 @@ public class Money {
     public static int multiply(Money money, int wonNumbers) {
         return money.value * wonNumbers;
     }
+
+    public int calc(Integer win) {
+        return this.value * win;
+    }
 }

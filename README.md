@@ -211,8 +211,8 @@ Earning rate: 2142.8571428571427
 - [x] LotteryBox.findSixNumbers 안에서 shuffle 수행
 - [x] 당첨번호 객체 분리 (answer, bonusNumber 포함)
 - [x] 이름 변경 getEarningRate -> profitRate
-- [ ] Money.didEarn -> ResultView 로 이동
-- [ ] Reward.getMoney 제거
+- [?] Money.didEarn -> ResultView 로 이동
+- [x] Reward.getMoney 제거
 - [ ] Wallet은 로또 구매 갯수만 가지고 구매한 로또는 별도 저장
 - [ ] Reward.of 로 2등 당첨 테스트 추가
 - [ ] 로또 번호를 표현하는 일급 콜렉션 -> 로또 번호 발급

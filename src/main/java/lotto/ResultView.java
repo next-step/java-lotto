@@ -19,4 +19,6 @@ public class ResultView {
     public static void print(String payload) {
         System.out.println(payload);
     }
+
+
 }

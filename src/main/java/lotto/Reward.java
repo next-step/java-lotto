@@ -37,6 +37,10 @@ public enum Reward {
     public Money getMoney() {
         return this.money;
     }
+
+    public int calc(Integer win) {
+        return this.money.calc(win);
+    }
 };
 
 
