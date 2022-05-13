@@ -17,13 +17,29 @@ public class MoneyTest {
     }
 
     @Test
-    @DisplayName("돈 더하기 곱하기 나누기 테스트")
-    void operator_test(){
+    @DisplayName("돈 나누기 테스트")
+    void plus_test(){
         Money a = new Money(10);
         Money b = new Money(2);
 
         assertThat(a.divide(b)).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("돈 더하기 테스트")
+    void divide_test(){
+        Money a = new Money(10);
+        Money b = new Money(2);
+
         assertThat(a.add(b)).isEqualTo(new Money(12));
+    }
+
+    @Test
+    @DisplayName("돈 곱하기 테스트")
+    void multiply_test(){
+        Money a = new Money(10);
+        Money b = new Money(2);
+
         assertThat(a.multiply(3)).isEqualTo(new Money(30));
     }
 
