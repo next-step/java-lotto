@@ -11,13 +11,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoControllerTest {
     LotteryController lotteryController = new LotteryController();
 
-//    @Test
-//    void shouldAttachWallet() {
-//        lotteryController.attachWallet(new Wallet(new Money(14000)));
-//        assertThat(lotteryController.wallet).isInstanceOf(Wallet.class);
-//    }
-
-
     @Test
     void stringShouldBeInteger() {
         assertThat(lotteryController.toInteger("1")).isEqualTo(1);

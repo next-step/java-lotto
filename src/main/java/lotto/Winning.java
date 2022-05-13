@@ -25,15 +25,4 @@ public class Winning {
         return 0;
     }
 
-//    public Reward findWin(Lottery lottery) {
-//        int win = 0;
-//        for (int number : lottery.numbers) {
-//            win += lottery.matchNumber(answer, number);
-//        }
-//        if (win == 5 && hasBonus(bonusNumber)) {
-//            return Reward.of(5, true);
-//        }
-//        return Reward.of(win, false);
-//
-//    }
 }

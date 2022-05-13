@@ -3,12 +3,9 @@ package lotto;
 import java.util.List;
 
 public class Lottery {
-    //    public final LotteryBox lotteryBox;
     public final List<Integer> numbers;
 
     public Lottery() {
-//        this.lotteryBox = new LotteryBox();
-//        LotteryBox.shuffleBox();
         this.numbers = createLottery();
     }
 
@@ -17,8 +14,6 @@ public class Lottery {
     }
 
     public Lottery(List<Integer> numbers) {
-//        this.lotteryBox = new LotteryBox();
-//        LotteryBox.shuffleBox();
         this.numbers = numbers;
     }
 
@@ -37,10 +32,6 @@ public class Lottery {
         }
         return Reward.of(win, false);
     }
-
-//    public int matchAnswer(Winning winning) {
-//        return winning.doesMatchAnswer(this.numbers);
-//    }
 
     public boolean hasBonus(Winning winning) {
         return winning.doesMatchBonus(this.numbers) == 1;

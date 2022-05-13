@@ -14,12 +14,7 @@ public class LotteryController {
     public Money scanMoney() {
         String scanned = InputView.scan("Put your money.");
         return new Money(Integer.parseInt(scanned));
-//        attachWallet(new Wallet(new Money(Integer.parseInt(scanned))));
     }
-
-//    public void attachWallet(Wallet inventory) {
-//        this.inventory = inventory;
-//    }
 
     public void createLotteries(Money money) {
         this.inventory.createLotteries(money);
