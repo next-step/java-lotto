@@ -16,6 +16,12 @@ public class InputView {
     private static final String DEFAULT_SPLIT_REGEX = ",";
     private static final int LOTTO_AMOUNT = 1000;
 
+    private static final InputView instance = new InputView();
+
+    public static InputView getInstance() {
+        return instance;
+    }
+
     public int inputBuyAmount() {
         System.out.println(INPUT_BUY_AMOUNT_MESSAGE);
         Scanner scanner = new Scanner(System.in);

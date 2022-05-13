@@ -10,13 +10,11 @@ import study.step4.view.ResultView;
 import java.util.List;
 
 public class Application {
-    private static final InputView inputView = new InputView();
-
     public static void main(String[] args) {
-        int buyAmount = inputView.inputBuyAmount();
-        int manualLottoQuantity = inputView.inputManualLottoQuantity(buyAmount);
+        int buyAmount = InputView.getInstance().inputBuyAmount();
+        int manualLottoQuantity = InputView.getInstance().inputManualLottoQuantity(buyAmount);
 
-        List<List<Integer>> inputManual = inputView.inputManualLottoNumbers(manualLottoQuantity);
+        List<List<Integer>> inputManual = InputView.getInstance().inputManualLottoNumbers(manualLottoQuantity);
 
         LottoMachine lottoMachine = new LottoMachine(new LottoAuto());
         LottoTickets lottoTickets = lottoMachine.createLottoTickets(buyAmount, manualLottoQuantity);
@@ -24,8 +22,8 @@ public class Application {
         ResultView resultView = new ResultView(lottoTickets);
         resultView.printLottoTicketInfos(inputManual.size());
 
-        String inputNumber = inputView.inputWinnerNumbers();
-        int inputBonusNumber = inputView.inputBonusNumber();
+        String inputNumber = InputView.getInstance().inputWinnerNumbers();
+        int inputBonusNumber = InputView.getInstance().inputBonusNumber();
         LottoWinners lottoWinners = LottoMachine.createWinners(inputNumber, inputBonusNumber);
 
         resultView.printLottoResultInfos(lottoTickets, lottoWinners);
