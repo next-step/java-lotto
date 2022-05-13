@@ -20,4 +20,9 @@ public class RewardTest {
     void bonusShouldReturnBONUSReward() {
         assertThat(Reward.of(5, true)).isEqualTo(Reward.BONUS);
     }
+
+    @Test
+    void FiveWithNoBonusShouldReturnFIVE() {
+        assertThat(Reward.of(5, false)).isEqualTo(Reward.FIVE);
+    }
 }
