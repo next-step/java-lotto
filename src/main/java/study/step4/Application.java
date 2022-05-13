@@ -3,7 +3,7 @@ package study.step4;
 import study.step4.domain.LottoMachine;
 import study.step4.domain.LottoTickets;
 import study.step4.domain.LottoWinners;
-import study.step4.domain.strategy.LottoAuto;
+import study.step4.domain.strategy.LottoAutoCreationStrategy;
 import study.step4.view.InputView;
 import study.step4.view.ResultView;
 
@@ -16,7 +16,7 @@ public class Application {
 
         List<List<Integer>> inputManual = InputView.getInstance().inputManualLottoNumbers(manualLottoQuantity);
 
-        LottoMachine lottoMachine = new LottoMachine(new LottoAuto());
+        LottoMachine lottoMachine = new LottoMachine(new LottoAutoCreationStrategy());
         LottoTickets lottoTickets = lottoMachine.createLottoTickets(buyAmount, inputManual);
 
         ResultView resultView = new ResultView(lottoTickets);

@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoAuto implements LottoCreationStrategy {
+public class LottoAutoCreationStrategy implements LottoCreationStrategy {
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final int MIN_NUMBER_RANGE = 1;
     private static final int MAX_NUMBER_RANGE = 46;
