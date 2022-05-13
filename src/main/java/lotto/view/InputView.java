@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.exception.NotSupportInstanceException;
 
 import java.util.ArrayList;
@@ -25,6 +27,20 @@ public class InputView {
         return inputInt();
     }
 
+//    public static int purchaseAmountView() {
+//        try {
+//            System.out.println(MESSAGE_PURCHASE_AMOUNT);
+//            return inputPurchaseAmount();
+//        } catch (IllegalArgumentException e) {
+//            System.out.println(e.getMessage());
+//            return inputPurchaseAmount();
+//        }
+//    }
+//
+//    private static int inputPurchaseAmount() {
+//        return inputInt();
+//    }
+
     public static int bonusBallView() {
         System.out.println(MESSAGE_BONUS_BALL);
         return inputInt();
@@ -35,12 +51,12 @@ public class InputView {
         return inputInt();
     }
 
-    public static List<String> manualLottoNumberValuesView(int manualLottoCount) {
+    public static List<LottoNumbers> manualLottoNumberValuesView(int manualLottoCount) {
         System.out.println(MESSAGE_MANUAL_LOTTO_NUMBERS);
-        List<String> manualLottoNumberValues = new ArrayList<>();
+        List<LottoNumbers> manualLottoNumberValues = new ArrayList<>();
         while (manualLottoNumberValues.size() < manualLottoCount) {
             String value = scanner.nextLine();
-            manualLottoNumberValues.add(value);
+            manualLottoNumberValues.add(new LottoNumbers(value));
         }
         return manualLottoNumberValues;
     }
