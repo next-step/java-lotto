@@ -23,7 +23,7 @@ public class LottoTicketTest {
     void before(){
         Integer[] nums = {1, 2, 3, 4, 5, 6};
         List<LottoNumber> lottoNumbers = Arrays.stream(nums)
-                .map(LottoNumber::new)
+                .map(LottoNumber::getLottoNumber)
                 .collect(Collectors.toList());
         winningTicket = new LottoTicket(lottoNumbers);
     }
@@ -56,12 +56,9 @@ public class LottoTicketTest {
     void 일치_수_테스트(){
         Integer[] nums = {1, 2, 3, 4, 11, 14};
         List<LottoNumber> lottoNumbers = Arrays.stream(nums)
-                .map(LottoNumber::new)
+                .map(LottoNumber::getLottoNumber)
                 .collect(Collectors.toList());
         LottoTicket lottoTicket =  new LottoTicket(lottoNumbers);
         assertThat(lottoTicket.getRank(winningTicket)).isEqualTo(Rank.four);
     }
-
-
-
 }
