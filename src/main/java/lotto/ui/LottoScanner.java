@@ -16,4 +16,9 @@ public class LottoScanner {
         InputView.printInsertWinningNumbersPhrase();
         return scanner.nextLine();
     }
+
+    public static int insertBonusNumber() {
+        InputView.printBonusNumberPhrase();
+        return scanner.nextInt();
+    }
 }

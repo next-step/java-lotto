@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -10,26 +9,6 @@ public class Lotto {
     public final static int LOTTO_START_NUMBER = 1;
     public final static int LOTTO_END_NUMBER = 45;
     public final static int LOTTO_PRICE = 1000;
-
-    public enum LOTTO_REWARD {
-        MATCH_1(1, 0),
-        MATCH_2(2, 0),
-        MATCH_3(3, 5_000),
-        MATCH_4(4, 50_000),
-        MATCH_5(5, 1_500_000),
-        MATCH_6(6, 2_000_000_000);
-
-        private final int matches;
-        private final long reward;
-        LOTTO_REWARD(int mathes, long reward) {
-            this.matches = mathes;
-            this.reward = reward;
-        }
-        public static long valueOf(int matches) {
-            return Arrays.stream(LOTTO_REWARD.values()).filter(it -> it.matches == matches)
-                    .findFirst().get().reward;
-        }
-    }
 
     protected Set<Integer> numbers;
 
@@ -49,13 +28,15 @@ public class Lotto {
         return numbers;
     }
 
-    public int hasWinningNumbers(Set<Integer> winningNumbers) {
+    public LOTTO_REWARD hasWinningNumbers(Set<Integer> winningNumbers, int bonusNumber) {
         int result = 0;
         for (int winningNumber : winningNumbers) {
             result += hasNumber(winningNumber);
         }
 
-        return result;
+        boolean isBonusMatched = numbers.contains(bonusNumber);
+
+        return LOTTO_REWARD.of(result, isBonusMatched);
     }
 
     private int hasNumber(int number) {

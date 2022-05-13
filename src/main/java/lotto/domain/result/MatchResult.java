@@ -1,18 +1,19 @@
 package lotto.domain.result;
 
 import java.util.Objects;
+import lotto.domain.LOTTO_REWARD;
 
 public class MatchResult {
     private int matchedLottoNumberCount;
-    private long reward;
+    private LOTTO_REWARD lottoReward;
 
-    MatchResult(int matchedLottoNumberCount, long reward) {
+    MatchResult(int matchedLottoNumberCount, LOTTO_REWARD lottoReward) {
         this.matchedLottoNumberCount = matchedLottoNumberCount;
-        this.reward = reward;
+        this.lottoReward = lottoReward;
     }
 
-    long getTotalReward() {
-        return matchedLottoNumberCount * reward;
+    long getMatchReward() {
+        return matchedLottoNumberCount * lottoReward.getReward();
     }
 
     void addMatchCount() {
@@ -23,8 +24,8 @@ public class MatchResult {
         return matchedLottoNumberCount;
     }
 
-    public long getReward() {
-        return reward;
+    public LOTTO_REWARD getLottoReward() {
+        return lottoReward;
     }
 
     @Override
@@ -36,11 +37,11 @@ public class MatchResult {
             return false;
         }
         MatchResult matchResult = (MatchResult) obj;
-        return this.matchedLottoNumberCount == matchResult.matchedLottoNumberCount && this.reward == matchResult.reward;
+        return this.matchedLottoNumberCount == matchResult.matchedLottoNumberCount && this.lottoReward == matchResult.lottoReward;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(matchedLottoNumberCount, reward);
+        return Objects.hash(matchedLottoNumberCount, lottoReward);
     }
 }

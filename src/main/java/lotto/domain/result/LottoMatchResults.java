@@ -3,33 +3,30 @@ package lotto.domain.result;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import lotto.domain.Lotto.LOTTO_REWARD;
+import lotto.domain.LOTTO_REWARD;
 
 public class LottoMatchResults{
     private List<MatchResult> matchResults = new ArrayList<>();
 
 
     LottoMatchResults() {
-        matchResults.add(new MatchResult(0, LOTTO_REWARD.valueOf(1)));
-        matchResults.add(new MatchResult(0, LOTTO_REWARD.valueOf(2)));
-        matchResults.add(new MatchResult(0, LOTTO_REWARD.valueOf(3)));
-        matchResults.add(new MatchResult(0, LOTTO_REWARD.valueOf(4)));
-        matchResults.add(new MatchResult(0, LOTTO_REWARD.valueOf(5)));
-        matchResults.add(new MatchResult(0, LOTTO_REWARD.valueOf(6)));
+        matchResults.add(new MatchResult(0, LOTTO_REWARD.MISS));
+        matchResults.add(new MatchResult(0, LOTTO_REWARD.FIFTH));
+        matchResults.add(new MatchResult(0, LOTTO_REWARD.FOURTH));
+        matchResults.add(new MatchResult(0, LOTTO_REWARD.THIRD));
+        matchResults.add(new MatchResult(0, LOTTO_REWARD.SECOND));
+        matchResults.add(new MatchResult(0, LOTTO_REWARD.FIRST));
     }
 
-    void addMatchNumber(int matchNumber) {
-        if (matchNumber < 1 || matchNumber > 6) {
-            return;
-        }
-
-        matchResults.get(matchNumber - 1).addMatchCount();
+    void addMatchNumber(LOTTO_REWARD lottoReward) {
+        MatchResult matchResult = matchResults.stream().filter(it -> it.getLottoReward() == lottoReward).findFirst().orElseThrow(); // TODO error 처리?
+        matchResult.addMatchCount();
     }
 
     long getLottoReward() {
         long totalReward = 0;
         for (MatchResult matchResult : matchResults) {
-            totalReward += matchResult.getTotalReward();
+            totalReward += matchResult.getMatchReward();
         }
 
         return totalReward;

@@ -26,11 +26,11 @@ public class Lottos {
         return new Lottos(lottos, purchaseAmount);
     }
 
-    public LottoGameResult matchNumbers(Set<Integer> numbers) {
+    public LottoGameResult matchNumbers(Set<Integer> numbers, int bonusNumber) {
         LottoGameResult lottoGameResult = new LottoGameResult(purchaseAmount);
 
         for (Lotto lotto : lottos) {
-            lottoGameResult.addMatchResult(lotto.hasWinningNumbers(numbers));
+            lottoGameResult.addMatchResult(lotto.hasWinningNumbers(numbers, bonusNumber));
         }
 
         return lottoGameResult;

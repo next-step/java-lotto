@@ -1,13 +1,20 @@
 package lotto.domain.result;
 
+import lotto.domain.LOTTO_REWARD;
 import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.api.Test;
 
 public class MatchResultTest {
-    @ParameterizedTest
-    @CsvSource(value = {"3:5000:15000", "4:50000:200000"}, delimiter = ':')
-    void 상금_테스트(int matchNumber, int reward, int totalReward) {
-        assertThat(new MatchResult(matchNumber, reward).getTotalReward()).isEqualTo(totalReward);
+    @Test
+    void 상금_테스트() {
+        assertThat(new MatchResult(1, LOTTO_REWARD.FIFTH).getMatchReward()).isEqualTo(5_000);
+    }
+
+    @Test
+    void 당첨_증가_테스트() {
+        MatchResult matchResult = new MatchResult(0, LOTTO_REWARD.FIFTH);
+        matchResult.addMatchCount();
+
+        assertThat(matchResult.getMatchReward()).isEqualTo(5000);
     }
 }

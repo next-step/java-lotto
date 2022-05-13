@@ -1,6 +1,7 @@
 package lotto.domain.result;
 
 import java.util.Objects;
+import lotto.domain.LOTTO_REWARD;
 
 public class LottoGameResult {
     private LottoMatchResults lottoMatchResults;
@@ -20,8 +21,8 @@ public class LottoGameResult {
         this.lottoMatchResults = lottoMatchResults;
     }
 
-    public void addMatchResult(int matchNumber) {
-        lottoMatchResults.addMatchNumber(matchNumber);
+    public void addMatchResult(LOTTO_REWARD lottoReward) {
+        lottoMatchResults.addMatchNumber(lottoReward);
     }
 
     long getTotalReward() {
