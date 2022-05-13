@@ -64,4 +64,8 @@ public class Money {
     public int calc(Integer win) {
         return this.value * win;
     }
+
+//    public double getEarnedMoney(int earnedMoney) {
+//        return this.profitRate(earnedMoney);
+//    }
 }

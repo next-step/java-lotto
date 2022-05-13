@@ -11,11 +11,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoControllerTest {
     LotteryController lotteryController = new LotteryController();
 
-    @Test
-    void shouldAttachWallet() {
-        lotteryController.attachWallet(new Wallet(new Money(14000)));
-        assertThat(lotteryController.wallet).isInstanceOf(Wallet.class);
-    }
+//    @Test
+//    void shouldAttachWallet() {
+//        lotteryController.attachWallet(new Wallet(new Money(14000)));
+//        assertThat(lotteryController.wallet).isInstanceOf(Wallet.class);
+//    }
 
 
     @Test
@@ -46,16 +46,6 @@ public class LottoControllerTest {
         lotteryController.saveWin(Reward.of(2, false));
         assertThat(lotteryController.winStatistics).isEqualTo(new WinStatistics(0, 0, 0, 0, 0));
         lotteryController.saveWin(Reward.of(3, false));
-        assertThat(lotteryController.winStatistics).isEqualTo(new WinStatistics(1, 0, 0, 0, 0));
-    }
-
-    @Test
-    void findWins() {
-        List<Lottery> lotteries = Arrays.asList(new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        Wallet wallet = new Wallet(lotteries);
-        lotteryController.attachWallet(wallet);
-        List<Reward> rewards = lotteryController.findWins(new Winning(new Lottery(Arrays.asList(1, 2, 3, 14, 15, 16)), 0));
-        lotteryController.saveWins(rewards);
         assertThat(lotteryController.winStatistics).isEqualTo(new WinStatistics(1, 0, 0, 0, 0));
     }
 }

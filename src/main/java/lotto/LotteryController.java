@@ -5,27 +5,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LotteryController {
-    public Wallet wallet;
+    public Inventory inventory = new Inventory();
     public final WinStatistics winStatistics = new WinStatistics();
 
     LotteryController() {
     }
 
-    public void scanMoney() {
+    public Money scanMoney() {
         String scanned = InputView.scan("Put your money.");
-        attachWallet(new Wallet(new Money(Integer.parseInt(scanned))));
+        return new Money(Integer.parseInt(scanned));
+//        attachWallet(new Wallet(new Money(Integer.parseInt(scanned))));
     }
 
-    public void attachWallet(Wallet wallet) {
-        this.wallet = wallet;
-    }
+//    public void attachWallet(Wallet inventory) {
+//        this.inventory = inventory;
+//    }
 
-    public void createLotteries() {
-        this.wallet.createLotteries();
+    public void createLotteries(Money money) {
+        this.inventory.createLotteries(money);
     }
 
     public void printLotteries() {
-        ResultView.printLotteries(this.wallet.lotteries);
+        this.inventory.printLotteries();
     }
 
     public Lottery scanAnswer() {
@@ -54,12 +55,7 @@ public class LotteryController {
     }
 
     public List<Reward> findWins(Winning winning) {
-        List<Reward> rewards = new ArrayList();
-        for (Lottery lottery : this.wallet.lotteries) {
-            Reward reward = lottery.findWin(winning);
-            rewards.add(reward);
-        }
-        return rewards;
+        return this.inventory.findWins(winning);
     }
 
     public void saveWins(List<Reward> rewards) {
@@ -78,8 +74,8 @@ public class LotteryController {
         ResultView.printWinStatistics(this.winStatistics.toPayload());
     }
 
-    public void printEarningRate() {
-        String payload = "Earning rate: " + wallet.getEarnedMoney(winStatistics.getEarnedMoney());
+    public void printEarningRate(Money money) {
+        String payload = "Earning rate: " + money.profitRate(winStatistics.getEarnedMoney());
         ResultView.print(payload);
     }
 
