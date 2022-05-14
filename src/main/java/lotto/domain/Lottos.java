@@ -38,4 +38,10 @@ public class Lottos {
                 .mapToInt(Rank::winPrice)
                 .sum();
     }
+
+    public int countManualLotto() {
+        return (int) lottos.stream()
+                .filter(Lotto::isManual)
+                .count();
+    }
 }

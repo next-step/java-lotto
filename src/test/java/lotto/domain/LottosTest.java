@@ -12,8 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosTest {
 
-
-
     @Test
     @DisplayName("복권들의 총 당첨금을 계산해서 반환한다.")
     void calculateTotalWinPrice() {
@@ -27,7 +25,7 @@ class LottosTest {
         lottoList.add(rankMissLotto);
 
         Lottos lottos = new Lottos(lottoList);
-        lottos.confirmAll(new LottoNumbers(new String[]{"1", "2", "3", "20", "21", "22"}), LottoNumber.valueOf(23));
+        lottos.confirmAll(new LottoNumbers("1, 2, 3, 20, 21, 22"), LottoNumber.valueOf(23));
 
         assertThat(lottos.calculateTotalWinPrice()).isEqualTo(Rank.FIFTH.winPrice() + Rank.FIFTH.winPrice());
     }
@@ -45,9 +43,20 @@ class LottosTest {
         lottoList.add(rankMissLotto);
 
         Lottos lottos = new Lottos(lottoList);
-        lottos.confirmAll(new LottoNumbers(new String[]{"1", "2", "3", "20", "21", "22"}), LottoNumber.valueOf(23));
+        lottos.confirmAll(new LottoNumbers("1, 2, 3, 20, 21, 22"), LottoNumber.valueOf(23));
 
         assertThat(lottos.countMatchResult(Rank.FIFTH)).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("3개의 복권 중 수동 복권이 2개일때 2개를 반환한다.")
+    void countManualLotto() {
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.add(Lotto.valueOf(createLottoNumbers(1, 2, 3, 4, 5, 6)));
+        lottos.add(Lotto.valueOf(createLottoNumbers(1, 2, 3, 7, 8, 9)));
+        lottos.add(Lotto.createAutoLotto());
+
+        assertThat(new Lottos(lottos).countManualLotto()).isEqualTo(2);
     }
 
     private LottoNumbers createLottoNumbers(int... numbers) {

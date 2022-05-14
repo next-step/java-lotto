@@ -11,9 +11,8 @@ public class PurchasedLotto {
     private List<Integer> lottoNumbers;
 
     public PurchasedLotto(Lotto lotto) {
-        this.lottoNumbers = lotto
-                .lottoNumbers()
-                .toSet()
+        this.lottoNumbers = lotto.lottoNumbers()
+                .toList()
                 .stream()
                 .map(LottoNumber::toInt)
                 .collect(Collectors.toList());

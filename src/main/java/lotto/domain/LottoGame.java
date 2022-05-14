@@ -1,29 +1,29 @@
 package lotto.domain;
 
 import lotto.constant.Rank;
+import lotto.exception.InvalidManualLottoNumberCount;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGame {
 
-    private static final int LOTTO_PRICE = 1000;
-
-    private final int purchaseAmount;
+    private final Cash purchaseAmount;
     private final Lottos lottos;
 
-    public LottoGame(int purchaseAmount) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < purchaseCount(purchaseAmount); i++) {
-            lottos.add(Lotto.createAutoLotto());
+    public LottoGame(Cash purchaseAmount, List<LottoNumbers> manualLottoNumbers) {
+        if (purchaseAmount.overTotalCount(manualLottoNumbers)) {
+            throw new InvalidManualLottoNumberCount(purchaseAmount.totalLottoCount());
         }
 
+        List<Lotto> lottos = manualLottoNumbers.stream()
+                .map(Lotto::valueOf)
+                .collect(Collectors.toList());
+        while (lottos.size() < purchaseAmount.totalLottoCount()) {
+            lottos.add(Lotto.createAutoLotto());
+        }
         this.lottos = new Lottos(lottos);
         this.purchaseAmount = purchaseAmount;
-    }
-
-    private int purchaseCount(int purchaseAmount) {
-        return purchaseAmount / LOTTO_PRICE;
     }
 
     public void confirmLottos(LottoNumbers lastWinningNumbers, LottoNumber bonusNumber) {
@@ -31,7 +31,7 @@ public class LottoGame {
     }
 
     public double calculateProfitRate() {
-        return (double) lottos.calculateTotalWinPrice() / (double) purchaseAmount;
+        return (double) lottos.calculateTotalWinPrice() / purchaseAmount.toDouble();
     }
 
     public Lottos lottos() {
@@ -40,5 +40,13 @@ public class LottoGame {
 
     public int countMatchResult(Rank rank) {
         return lottos.countMatchResult(rank);
+    }
+
+    public int manualLottoCount() {
+        return lottos.countManualLotto();
+    }
+
+    public int autoLottoCount() {
+        return lottos.count() - lottos.countManualLotto();
     }
 }
