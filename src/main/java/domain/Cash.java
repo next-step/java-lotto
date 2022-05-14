@@ -10,4 +10,17 @@ public class Cash {
     public int capableLottoCount(int lottoPrice) {
         return cashAmount / lottoPrice;
     }
+
+    public boolean isLessThan(int comparedNumber) {
+        return cashAmount < comparedNumber;
+    }
+
+    public boolean isMultipleOf(int price) {
+        return cashAmount % price == 0;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(cashAmount);
+    }
 }
