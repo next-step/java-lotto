@@ -11,9 +11,9 @@ public class LottoMachine {
         this.selectRule = selectRule;
     }
 
-    public List<Lotto> issue(int cash) {
+    public List<Lotto> issue(Cash cash) {
         List<Lotto> lottos = new ArrayList<>();
-        int lottoCount = cash / Lotto.PRICE;
+        int lottoCount = cash.capableLottoCount(Lotto.PRICE);
         for (int i = 0; i < lottoCount; i++) {
             lottos.add(new Lotto(selectRule.select()));
         }

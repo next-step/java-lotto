@@ -23,7 +23,7 @@ public class LottoMachineTest {
     @Test
     void issue() {
         //given
-        int cash = 3000;
+        Cash cash = new Cash(3000);
         LottoMachine lottoMachine = new LottoMachine(TestObjectSupport.createSelectRule());
         Lotto lotto = TestObjectSupport.createLotto();
         List<Lotto> expectedLottos = Arrays.asList(lotto, lotto, lotto);
