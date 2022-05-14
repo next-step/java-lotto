@@ -38,8 +38,6 @@ public class MoneyTest {
     @DisplayName("돈 곱하기 테스트")
     void multiply_test(){
         Money a = new Money(10);
-        Money b = new Money(2);
-
         assertThat(a.multiply(3)).isEqualTo(new Money(30));
     }
 

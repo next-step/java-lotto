@@ -6,6 +6,7 @@ import lotto.model.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+
 import java.util.HashMap;
 import java.util.Map;
 

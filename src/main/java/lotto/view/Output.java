@@ -33,7 +33,6 @@ public class Output {
                 s = getResult(lottoResult, i, true);
                 System.out.println(s);
             }
-
         }
 
 
