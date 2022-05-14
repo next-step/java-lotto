@@ -27,17 +27,32 @@ public class Output {
         System.out.println(LOTTO_WINNING_STATICS);
 
         for (int i=3; i<= 6; i++){
-            String s = i +
-                    "개 일치 (" +
-                    Rank.of(i).getReward() +
-                    ")-" +
-                    lottoResult.getResult(i) +
-                    "개";
+            String s = getResult(lottoResult, i, false);
             System.out.println(s);
+            if(i == 5){
+                s = getResult(lottoResult, i, true);
+                System.out.println(s);
+            }
+
         }
 
 
         String profitRate = df.format(lottoResult.getProfitRate(buyPrice));
         System.out.println("총 수익룰은 "+profitRate+"입니다.");
+    }
+
+    private static String getResult(LottoResult lottoResult, int i, boolean bonus){
+
+        String info = i+"개 일치";
+        if(bonus){
+            info+=", 보너스 볼 일치";
+        }
+
+        return info +
+                "(" +
+                Rank.of(i, bonus).getReward() +
+                ")-" +
+                lottoResult.getResult(i, bonus) +
+                "개";
     }
 }
