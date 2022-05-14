@@ -2,10 +2,6 @@ package lotto.domain;
 
 import lotto.domain.constant.Rank;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class Lotto {
     private static final String DELIMITER = ", ";
     private static final String PREFIX = "[";
@@ -25,6 +21,10 @@ public class Lotto {
 
     public boolean isSameRank(Rank rank) {
         return this.rank == rank;
+    }
+
+    public int getPrizeMoney() {
+        return rank.getPrizeMoney();
     }
 
     public LottoNumbers getLottoNumbers() {

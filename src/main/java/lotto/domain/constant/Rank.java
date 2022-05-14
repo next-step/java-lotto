@@ -10,11 +10,11 @@ public enum Rank {
     NONE(0, 0);
 
     private final int correspondCount;
-    private final int prize;
+    private final int prizeMoney;
 
-    Rank(int correspondCount, int prize) {
+    Rank(int correspondCount, int prizeMoney) {
         this.correspondCount = correspondCount;
-        this.prize = prize;
+        this.prizeMoney = prizeMoney;
     }
 
     public static Rank create(int correspondCount) {
@@ -24,7 +24,11 @@ public enum Rank {
                 .orElse(NONE);
     }
 
+    public int getPrizeMoney() {
+        return prizeMoney;
+    }
 
-
-
+    public int getCorrespondCount() {
+        return correspondCount;
+    }
 }

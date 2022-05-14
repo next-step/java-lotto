@@ -1,10 +1,11 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.LottoGame;
+import lotto.domain.LottoNumbers;
+import lotto.domain.Money;
+import lotto.dto.MatchRankDto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-
-import java.util.List;
 
 public class Application {
 
@@ -17,5 +18,6 @@ public class Application {
         LottoNumbers winningLottoNumbers = new LottoNumbers(winningNumbers);
         lottoGame.confirmLottos(winningLottoNumbers);
 
+        OutputView.printWinningResult(MatchRankDto.from(lottoGame));
     }
 }

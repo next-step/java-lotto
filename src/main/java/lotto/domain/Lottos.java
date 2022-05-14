@@ -44,6 +44,10 @@ public class Lottos {
         return lottoNumbers;
     }
 
+    public int getTotalPrizeMoney() {
+        return lottos.stream().mapToInt(Lotto::getPrizeMoney).sum();
+    }
+
 
     @Override
     public String toString() {

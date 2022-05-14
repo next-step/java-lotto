@@ -12,7 +12,7 @@ public class LottoNumber {
     private static final Pattern pattern = Pattern.compile(NUMBER_REGEX);
     private static final String INVALID_NUMBER_MESSAGE = "정상적인 범위의 숫자 값이 아닙니다.";
 
-    private int number;
+    private final int number;
 
     public LottoNumber(int number) {
         if (number > MAX_NUMBER || number < MIN_NUMBER) {
@@ -32,7 +32,6 @@ public class LottoNumber {
     }
 
     private void validate(String numberText) {
-        System.out.println("numberText = " + numberText);
         Matcher matcher = pattern.matcher(numberText);
         if (!matcher.matches()) {
             throw new IllegalArgumentException(INVALID_NUMBER_MESSAGE);

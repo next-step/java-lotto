@@ -1,15 +1,18 @@
 package lotto.domain;
 
 import lotto.domain.constant.Rank;
+
 import java.util.List;
 
 public class LottoGame {
 
+    private final Money money;
     private final PurchaseAmount purchaseAmount;
     private final Lottos lottos;
 
     public LottoGame(Money money) {
         this.purchaseAmount = Store.buyLotto(money);
+        this.money = money;
         this.lottos = new Lottos(purchaseAmount);
     }
 
@@ -25,7 +28,11 @@ public class LottoGame {
         return this.lottos.getLottoNumbers();
     }
 
-    public int isSameRank(Lottos lottos, Rank rank) {
+    public int matchRankCount(Rank rank) {
         return lottos.countMatchRank(rank);
+    }
+
+    public double calculateBenefitRate() {
+        return (double) lottos.getTotalPrizeMoney() / (double) money.getMoney();
     }
 }

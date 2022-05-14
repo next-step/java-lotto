@@ -14,7 +14,7 @@ class StoreTest {
     @ParameterizedTest
     @MethodSource("로또_구매_갯수_매개변수")
     void 로또_구매_성공(int purchaseAmount, int lottoAmount) {
-        assertThat(Store.buyLotto(new Money(purchaseAmount))).isEqualTo(lottoAmount);
+        assertThat(Store.buyLotto(new Money(purchaseAmount))).isEqualTo(new PurchaseAmount(lottoAmount));
     }
 
     static Stream<Arguments> 로또_구매_갯수_매개변수() {
