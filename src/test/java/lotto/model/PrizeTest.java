@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.model.Rank.SECOND;
+import static lotto.model.Rank.THIRD;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PrizeTest {
@@ -26,8 +26,8 @@ public class PrizeTest {
     @CsvSource(delimiter = '|',
             value = {"1,2,3,4,5,6|FIRST",
                     "1,2,3,4,5,0|SECOND",
-                    "1,2,3,4,0,0|THIRD",
-                    "1,2,3,0,0,0|FORTH",
+                    "1,2,3,4,0,0|FORTH",
+                    "1,2,3,0,0,0|FIFTH",
                     "0,0,0,0,0,0|MISS"})
     void classify(String value, String stringRank) {
         List<Integer> numbers = Arrays
@@ -36,19 +36,20 @@ public class PrizeTest {
                 .collect(Collectors.toList());
 
         Rank rank = Rank.valueOf(stringRank);
-        List<Lotto> lottoList = List.of(Lotto.manual(numbers));
+        Lotto lotto = Lotto.manual(numbers);
+        List<Lotto> lottoList = List.of(lotto);
         Prize prize = Prize.init(this.beforeLotto).classify(lottoList);
 
-        assertThat(prize.getRanks()).containsKeys(rank).containsValue(Number.of(1L));
+        assertThat(rank.getTotalCorrectCount(prize.getRanks())).isEqualTo(Number.of(1L));
     }
 
     @Test
     @DisplayName("자동 로또 보너스 결과 확인")
     void classify() {
-        Lotto third = Lotto.manual(List.of(1, 2, 3, 4, 5, 0));
+        Lotto third = Lotto.manual(List.of(1, 2, 3, 4, 0, 7));
         List<Lotto> lottoList = List.of(third);
-        Prize prize = Prize.init(this.beforeLotto, Number.of()).classify(lottoList);
+        Prize prize = Prize.init(this.beforeLotto, Number.of(7L)).classify(lottoList);
 
-        assertThat(prize.getRanks()).containsKeys(SECOND).containsValue(Number.of(1L));
+        assertThat(THIRD.getTotalCorrectCount(prize.getRanks())).isEqualTo(Number.of(1L));
     }
 }

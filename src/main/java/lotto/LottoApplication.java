@@ -2,7 +2,6 @@ package lotto;
 
 import lotto.controller.GameController;
 
-import static lotto.controller.GameController.GameType.AUTO;
 import static lotto.controller.GameController.GameType.BONUS;
 
 public class LottoApplication {

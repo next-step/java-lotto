@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.util.Calculator;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,21 +32,36 @@ public enum Rank {
     public static Rank valueOf(Number correctCount) {
         return Arrays
                 .stream(Rank.values())
+                .filter(rank -> !rank.equals(THIRD))
                 .filter(rank -> rank.correctCount.equals(correctCount))
                 .findFirst()
                 .orElse(MISS);
     }
 
     public Rank checkBonus(Number bonusNumber, Lotto lotto) {
-        if (!this.equals(THIRD)) {
-            return this;
-        }
-
         Number correctBonus = lotto.match(List.of(bonusNumber));
-        if (correctBonus.equals(Number.of(1L))) {
-            return SECOND;
+        if (this.equals(FORTH) && correctBonus.equals(Number.of(1L))) {
+            return THIRD;
         }
 
         return this;
+    }
+
+    public Number getTotalCorrectCount(List<Rank> ranks) {
+        long count = ranks
+                .stream()
+                .filter(this::equals)
+                .count();
+
+        return Number.of(count);
+    }
+
+    public Number getTotalPrizeMoney(List<Rank> ranks) {
+        long count = ranks
+                .stream()
+                .filter(this::equals)
+                .count();
+
+        return Calculator.multiply(Number.of(count), this.prizeMoney);
     }
 }

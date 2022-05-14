@@ -2,15 +2,14 @@ package lotto.model;
 
 import lotto.util.Calculator;
 
-import java.util.EnumMap;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Stream;
 
 public class Prize {
     private final Lotto beforeLotto;
     private final Number bonusNumber;
-    private final Map<Rank, Number> ranks;
+    private final List<Rank> ranks;
 
     private Prize(Lotto beforeLotto) {
         this(beforeLotto, Number.of());
@@ -19,8 +18,7 @@ public class Prize {
     private Prize(Lotto beforeLotto, Number bonusNumber) {
         this.beforeLotto = beforeLotto;
         this.bonusNumber = bonusNumber;
-        this.ranks = new EnumMap<>(Rank.class);
-        Stream.of(Rank.values()).forEach(this::computeIfAbsent);
+        this.ranks = new ArrayList<>();
     }
 
     public static Prize init(Lotto beforeLotto) {
@@ -36,42 +34,28 @@ public class Prize {
             Rank rank = Lotto
                     .getRank(this.beforeLotto, lotto)
                     .checkBonus(this.bonusNumber, lotto);
-            this.computeIfPresent(rank);
+            this.ranks.add(rank);
         });
 
         return this;
     }
 
-    public void computeIfPresent(Rank rank) {
-        this.ranks.computeIfPresent(rank, (r, count) -> count.incrementAndGet());
-    }
-
-    public void computeIfAbsent(Rank rank) {
-        this.ranks.computeIfAbsent(rank, r -> Number.of());
-    }
-
     private Number getTotalPrize() {
-        long prize = this.ranks
-                .entrySet()
-                .stream()
-                .map(rank -> Calculator.multiply(rank.getValue(), rank.getKey().getPrizeMoney()))
-                .mapToLong(Number::longValue)
+        long prize = Arrays.stream(Rank.values())
+                .mapToLong(rank -> rank.getTotalPrizeMoney(this.ranks).longValue())
                 .sum();
 
         return Number.of(prize);
     }
 
     private Number getPrice() {
-        long price = this.ranks
-                .values()
-                .stream()
-                .mapToLong(Number::longValue)
-                .sum() * 1000;
+        Number left = Number.of(this.ranks.size());
+        Number right = Number.of(1000L);
 
-        return Number.of(price);
+        return Calculator.multiply(left, right);
     }
 
-    public Map<Rank, Number> getRanks() {
+    public List<Rank> getRanks() {
         return this.ranks;
     }
 

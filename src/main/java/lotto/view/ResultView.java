@@ -5,7 +5,7 @@ import lotto.model.Number;
 import lotto.model.Prize;
 import lotto.model.Rank;
 
-import java.util.Map;
+import java.util.Arrays;
 import java.util.function.UnaryOperator;
 
 import static lotto.model.Rank.MISS;
@@ -19,12 +19,12 @@ public class ResultView {
     private static final String LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final UnaryOperator<String> RESULT_MESSAGE = winningRate -> String.format("총 수익률은 %s입니다.", winningRate);
 
-    private static void print(Map.Entry<Rank, Number> rank) {
+    private static void print(Rank rank, Number totalCorrectCount) {
         String format = FORMAT;
-        if (rank.getKey().equals(SECOND)) {
+        if (rank.equals(SECOND)) {
             format = BONUS_FORMAT;
         }
-        String message = String.format(format, rank.getKey().getCorrectCount(), rank.getKey().getPrizeMoney(), rank.getValue());
+        String message = String.format(format, rank.getCorrectCount(), rank.getPrizeMoney(), totalCorrectCount);
         print(message);
     }
 
@@ -40,11 +40,9 @@ public class ResultView {
     public static void print(Prize prize) {
         print();
         print(RESULT_SEPARATE_MESSAGE);
-        prize.getRanks()
-                .entrySet()
-                .stream()
-                .filter(rank -> !rank.getKey().equals(MISS))
-                .forEach(ResultView::print);
+        Arrays.stream(Rank.values())
+                .filter(rank -> !rank.equals(MISS))
+                .forEach(rank -> ResultView.print(rank, rank.getTotalCorrectCount(prize.getRanks())));
         print(prize.getWinningRate());
     }
 
