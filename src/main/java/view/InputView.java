@@ -2,6 +2,7 @@ package view;
 
 import domain.Cash;
 import domain.Lotto;
+import domain.Lottos;
 
 import java.util.Scanner;
 
@@ -12,6 +13,12 @@ public class InputView {
 
     public InputView(Scanner scanner) {
         this.scanner = scanner;
+    }
+
+    public static Lottos printLottos(Lottos lottos) {
+        System.out.println(lottos.size() + "개를 구매했습니다.");
+        lottos.toList().forEach(System.out::println);
+        return lottos;
     }
 
     public Cash scanCashWithAnnouncement() {
@@ -42,5 +49,9 @@ public class InputView {
         if (!inputCash.isMultipleOf(Lotto.PRICE)) {
             throw new IllegalArgumentException(String.format("구입금액은 %d의 배수여야 합니다.", Lotto.PRICE));
         }
+    }
+
+    public Cash getCash() {
+        return cash;
     }
 }

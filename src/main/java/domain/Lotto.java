@@ -1,6 +1,9 @@
 package domain;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static int PRICE = 1000;
@@ -21,5 +24,13 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        List<String> lottoNumbersString = lottoNumbers.toList().stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.toList());
+        return "[" + String.join(", ", lottoNumbersString) + "]";
     }
 }

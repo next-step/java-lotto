@@ -52,4 +52,17 @@ public class LottoNumbersTest {
         assertThatThrownBy(() -> new LottoNumbers(duplicateNumbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void toList() {
+        //given
+        LottoNumbers lottoNumbers = TestObjectSupport.createLottoNumbers();
+        List<LottoNumber> expectedLottoNumbers = TestObjectSupport.convertToLottoNumberList(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        //when
+        List<LottoNumber> result = lottoNumbers.toList();
+
+        //then
+        assertThat(result).isEqualTo(expectedLottoNumbers);
+    }
 }

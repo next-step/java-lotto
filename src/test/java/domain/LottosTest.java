@@ -2,6 +2,7 @@ package domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,5 +19,31 @@ public class LottosTest {
 
         //then
         assertThat(result).isEqualTo(new Lottos(lottos));
+    }
+
+    @Test
+    void size() {
+        //given
+        Lottos lottos = TestObjectSupport.createLottos();
+
+        //when
+        int result = lottos.size();
+
+        //then
+        assertThat(result).isEqualTo(3);
+    }
+
+    @Test
+    void toList() {
+        //given
+        Lottos lottos = TestObjectSupport.createLottos();
+        Lotto lotto = TestObjectSupport.createLotto();
+        List<Lotto> expectedLottos = Arrays.asList(lotto, lotto, lotto);
+
+        //when
+        List<Lotto> result = lottos.toList();
+
+        //then
+        assertThat(result).isEqualTo(expectedLottos);
     }
 }
