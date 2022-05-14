@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.util.Calculator;
+
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +54,7 @@ public class Prize {
         long prize = this.ranks
                 .entrySet()
                 .stream()
-                .map(rank -> rank.getValue().multiple(rank.getKey().getPrizeMoney()))
+                .map(rank -> Calculator.multiply(rank.getValue(), rank.getKey().getPrizeMoney()))
                 .mapToLong(Number::longValue)
                 .sum();
 
@@ -74,8 +76,8 @@ public class Prize {
     }
 
     public double getWinningRate() {
-        return this.getTotalPrize()
-                .divide(this.getPrice())
+        return Calculator
+                .divide(this.getTotalPrize(), this.getPrice())
                 .doubleValue();
     }
 }
