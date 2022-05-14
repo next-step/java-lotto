@@ -18,7 +18,7 @@ class StatisticInfoTest {
   @ParameterizedTest
   @MethodSource("provideForStatistics")
   void statistics(WinningLottoTicket winningLottoTicket, LottoTickets lottoTickets) {
-    StatisticInfo statisticInfo = new StatisticInfo(winningLottoTicket, lottoTickets,
+    StatisticInfo statisticInfo = StatisticInfo.of(winningLottoTicket, lottoTickets,
         Money.createWon(1000));
     assertThat(statisticInfo.rateOfReturn()).isCloseTo(0.35, offset(0.1));
   }
