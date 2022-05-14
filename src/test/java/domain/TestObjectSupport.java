@@ -21,4 +21,9 @@ public class TestObjectSupport {
     public static Lotto createLotto() {
         return new Lotto(createLottoNumbers());
     }
+
+    public static Lottos createLottos() {
+        Lotto lotto = createLotto();
+        return new Lottos(Arrays.asList(lotto, lotto, lotto));
+    }
 }

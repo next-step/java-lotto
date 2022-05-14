@@ -11,13 +11,13 @@ public class LottoMachine {
         this.selectRule = selectRule;
     }
 
-    public List<Lotto> issue(Cash cash) {
+    public Lottos issue(Cash cash) {
         List<Lotto> lottos = new ArrayList<>();
         int lottoCount = cash.capableLottoCount(Lotto.PRICE);
         for (int i = 0; i < lottoCount; i++) {
             lottos.add(new Lotto(selectRule.select()));
         }
-        return lottos;
+        return new Lottos(lottos);
     }
 
     @Override

@@ -2,9 +2,6 @@ package domain;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoMachineTest {
@@ -25,11 +22,10 @@ public class LottoMachineTest {
         //given
         Cash cash = new Cash(3000);
         LottoMachine lottoMachine = new LottoMachine(TestObjectSupport.createSelectRule());
-        Lotto lotto = TestObjectSupport.createLotto();
-        List<Lotto> expectedLottos = Arrays.asList(lotto, lotto, lotto);
+        Lottos expectedLottos = TestObjectSupport.createLottos();
 
         //when
-        List<Lotto> result = lottoMachine.issue(cash);
+        Lottos result = lottoMachine.issue(cash);
 
         //then
         assertThat(result).isEqualTo(expectedLottos);
