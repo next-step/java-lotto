@@ -22,10 +22,12 @@
   * InputView
     * 로또 구입 금액 입력
     * 지난 주 당첨 번호 입력
+    * 보너스 볼 입력
   * ResultView
     * 구매한 로또 출력
     * 구매한 로또 당첨 현황 출력
     * 로또 구입 금액 대비 효율 출력
+    * Matched enum에 따른 보너스볼 일치 문구 출력
 * Domain
   * Draw
     * Variables 
@@ -64,7 +66,16 @@
     * Functions
       * 당첨 번호 여부 확인
       * 보너스 번호 당첨 여부 확인
-    * 
+  * Matched
+    * Variables
+      * 당첨된 번호 개수 enums
+    * Functions
+      * 당청된 번호 개수에 따른 enum 리턴
+  * RecordMatched
+    * Variables
+      * 당첨된 번호 개수별 로또 현황(Array)
+    * Functions
+      * 당첨된 번호 개수별 로또 카운트
 * Util
   * Ratio
     * Functions
