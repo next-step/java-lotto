@@ -45,13 +45,12 @@ public class ResultView {
         throw new AssertionError();
     }
 
-    public static void printBuyingLottos(LottoCount lottoCount, Lottos buyingLottos) {
+    public static void printLottoCount(LottoCount lottoCount) {
         System.out.println(String.format(OUTPUT_BUYING_LOTTOS, lottoCount.getManualCount(), lottoCount.getRandomCount()));
-
-        List<Lotto> lottos = buyingLottos.get();
-        for (Lotto lotto : lottos) {
-            printLottos(lotto);
-        }
+    }
+    public static void printBuyingLottos(Lottos buyingLottos) {
+        buyingLottos.get().stream()
+                .forEach(ResultView::printLottos);
     }
 
     private static void printLottos(Lotto lotto) {

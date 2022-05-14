@@ -33,7 +33,8 @@ public class LottoMain {
         List<Lotto> manual = makeManualLottos(InputView.askManualLottoNumbers(lottoCount.getManualCount()));
         Lottos lottos = Lottos.makeWithBaseAndCount(manual, lottoCount.getRandomCount());
 
-        ResultView.printBuyingLottos(lottoCount, lottos);
+        ResultView.printLottoCount(lottoCount);
+        ResultView.printBuyingLottos(lottos);
         return lottos;
     }
 
