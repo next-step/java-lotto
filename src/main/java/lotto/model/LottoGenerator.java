@@ -1,6 +1,8 @@
 package lotto.model;
 
+import java.util.Set;
+
 @FunctionalInterface
 public interface LottoGenerator {
-    Lotto get();
+    Set<LottoNumber> get();
 }

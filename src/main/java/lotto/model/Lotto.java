@@ -12,15 +12,18 @@ public final class Lotto {
 
     private final Set<LottoNumber> lotto;
 
-    public Lotto(Set<LottoNumber> lotto) {
-        validate(lotto);
-        this.lotto = new HashSet<>(lotto);
+    public Lotto(LottoGenerator lottoGenerator) {
+        this(lottoGenerator.get());
     }
 
     public Lotto(String lottoNumbers) {
         this(ExtractLottoNumbers.split(lottoNumbers));
     }
 
+    public Lotto(Set<LottoNumber> lotto) {
+        validate(lotto);
+        this.lotto = new HashSet<>(lotto);
+    }
     private void validate(Set<LottoNumber> lotto) {
         Objects.requireNonNull(lotto, "lotto는 null일 수 없습니다.");
         if (lotto.size() != LOTTO_COUNT) {

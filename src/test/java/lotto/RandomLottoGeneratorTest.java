@@ -35,11 +35,9 @@ public class RandomLottoGeneratorTest {
     }
 
     @Test
-    @DisplayName("생성된 로또 번호의 개수는 6개이다.")
+    @DisplayName("RandomLottoGenerator로 생성된 로또 번호의 개수는 6개이다.")
     void lottoTest() {
-        Lotto lotto = new RandomLottoGenerator().get();
-
-        Set<LottoNumber> lottoNums = lotto.get();
+        Set<LottoNumber> lottoNums = new RandomLottoGenerator().get();
 
         assertThat(lottoNums).hasSize(6);
     }

@@ -20,11 +20,7 @@ public class RandomLottoGenerator implements LottoGenerator {
     }
 
     @Override
-    public Lotto get() {
-        return new Lotto(getLottoNumbers());
-    }
-
-    private Set<LottoNumber> getLottoNumbers() {
+    public Set<LottoNumber> get() {
         Collections.shuffle(LOTTO_NUMBERS);
         return new HashSet<>(LOTTO_NUMBERS.subList(0, LOTTO_SIZE));
     }

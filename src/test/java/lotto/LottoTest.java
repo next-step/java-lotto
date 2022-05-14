@@ -46,6 +46,14 @@ public class LottoTest {
     }
 
     @Test
+    @DisplayName("로또 생성 전략을 입력하면 Lotto가 생성된다.")
+    void newLottoTest() {
+        Lotto lotto = new Lotto(() -> Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, SIX));
+
+        assertThat(lotto.get()).contains(ONE);
+    }
+
+    @Test
     @DisplayName("로또 번호가 특정 로또 넘버를 포함하면 true를 반환한다.")
     void containsTrueTest() {
         assertThat(TEST_LOTTO.contains(ONE)).isTrue();
