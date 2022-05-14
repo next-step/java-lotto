@@ -57,11 +57,27 @@ public class LottoTicketTest {
         // given
         Integer[] nums = {1, 2, 3, 4, 11, 14};
         LottoTicket lottoTicket =  new LottoTicket(nums);
+        LottoNumber bonusBall = new LottoNumber(15);
 
         // when
-        Rank rankRes = lottoTicket.getRank(winningTicket);
+        Rank rankRes = lottoTicket.getRank(winningTicket, bonusBall);
 
         // then
-        assertThat(rankRes).isEqualTo(Rank.four);
+        assertThat(rankRes).isEqualTo(Rank.FOURTH);
+    }
+
+    @Test
+    @DisplayName("보너스볼 일치하는지 테스트")
+    void 보너스볼_테스트(){
+        // given
+        Integer[] nums = {1, 2, 3, 4, 5, 44};
+        LottoTicket lottoTicket =  new LottoTicket(nums);
+        LottoNumber bonusBall = new LottoNumber(1);
+
+        // when
+        Rank rankRes = lottoTicket.getRank(winningTicket, bonusBall);
+
+        // then
+        assertThat(rankRes).isEqualTo(Rank.SECOND);
     }
 }

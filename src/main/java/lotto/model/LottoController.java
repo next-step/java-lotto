@@ -14,8 +14,9 @@ public class LottoController {
 
         LottoTickets lottoTickets = generateLottoTickets(ticketCnt);
         LottoTicket winningTicket =  Input.readPreWeekWinningLottoNums();
+        LottoNumber bonusBall = Input.readLottoNumber();
 
-        Map<Rank, Long> rankMap = lottoTickets.getRankMap(winningTicket);
+        Map<Rank, Long> rankMap = lottoTickets.getRankMap(winningTicket, bonusBall);
         LottoResult lottoResult = new LottoResult(rankMap);
 
         Output.printWinningStatics(money, lottoResult);

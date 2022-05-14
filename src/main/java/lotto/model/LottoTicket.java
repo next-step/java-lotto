@@ -3,10 +3,7 @@ package lotto.model;
 import lotto.exception.DuplicatedLottoNumberException;
 import lotto.exception.InvalidLottoTicketSizeException;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
@@ -38,14 +35,14 @@ public class LottoTicket {
         }
     }
 
-    public Rank getRank(LottoTicket winningNumbers){
+    public Rank getRank(LottoTicket winningNumbers, LottoNumber bonusBall){
         int rank = 0;
         for(LottoNumber lottoNumber: winningNumbers.getLottoNumbers()){
             if(this.lottoNumbers.contains(lottoNumber)){
                 rank += 1;
             }
         }
-        return Rank.of(rank);
+        return Rank.of(rank, this.lottoNumbers.contains(bonusBall));
     }
 
     private List<LottoNumber> getLottoNumbers(){

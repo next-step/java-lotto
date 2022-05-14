@@ -17,9 +17,9 @@ public class LottoTickets {
         this.lottoTicketList = Collections.unmodifiableList(lottoTicketList);
     }
 
-    public Map<Rank, Long> getRankMap(LottoTicket winningNumbers){
+    public Map<Rank, Long> getRankMap(LottoTicket winningNumbers, LottoNumber bonusBall){
         Map<Rank, Long> res = lottoTicketList.stream()
-                .map(ticket -> ticket.getRank(winningNumbers))
+                .map(ticket -> ticket.getRank(winningNumbers, bonusBall))
                 .filter(Rank::isWin)
                 .collect(groupingBy(Function.identity(), Collectors.counting()));
         return res;
