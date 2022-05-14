@@ -14,7 +14,7 @@ public class LottoMain {
         int price = inputView.inputPrice();
 
         Draw draw = new Draw(price);
-        draw.drawLottos();
+        draw.drawLottos(null);
 
         ResultView resultView = new ResultView();
         resultView.printLottos(draw);

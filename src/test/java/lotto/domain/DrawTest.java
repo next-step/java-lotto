@@ -20,7 +20,7 @@ class DrawTest {
     @Test
     @DisplayName("구매금액에 따른 로또 생성 개수 확인")
     void checkNumberOfLottos() {
-        draw.drawLottos();
+        draw.drawLottos(null);
         assertThat(draw.lottos().size()).isEqualTo(5);
     }
 
@@ -28,7 +28,7 @@ class DrawTest {
     @DisplayName("로또 당첨 확인이 로또 개수만큼 진행되었는 지 확인")
     void checkWinnings() {
         Winnings winnings = new Winnings(Arrays.asList(3, 5, 10, 23, 34, 45), 2);
-        draw.drawLottos();
+        draw.drawLottos(null);
         draw.checkWinnings(winnings);
 
         assertThat(Arrays.stream(winnings.recordMatched()).sum()).isEqualTo(5);
