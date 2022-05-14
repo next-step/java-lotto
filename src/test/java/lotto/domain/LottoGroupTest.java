@@ -83,4 +83,22 @@ class LottoGroupTest {
     void LottoGroup_로또리스트가_null_인_경우(List<Lotto> lottos) {
         assertThatThrownBy(() -> new LottoGroup(lottos)).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @ParameterizedTest
+    @NullSource
+    void create_수동_로또_null_인_경우(List<Lotto> lottos) {
+        assertThatThrownBy(() -> LottoGroup.create(lottos, List.of(Lotto.create(new int[]{1, 2, 3, 4, 5, 6})))).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @NullSource
+    void create_자동_로또_null_인_경우(List<Lotto> lottos) {
+        assertThatThrownBy(() -> LottoGroup.create(List.of(Lotto.create(new int[]{1, 2, 3, 4, 5, 6})), lottos)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @NullSource
+    void create_수동_자동_로또_null_인_경우(List<Lotto> lottos) {
+        assertThatThrownBy(() -> LottoGroup.create(lottos, lottos)).isInstanceOf(IllegalArgumentException.class);
+    }
 }

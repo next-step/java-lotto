@@ -26,7 +26,14 @@ public class LottoGroup {
     }
 
     public static LottoGroup create(List<Lotto> manualLottos, List<Lotto> autoLottos) {
+        validateManualAndAutoLottos(manualLottos, autoLottos);
         return new LottoGroup(Stream.concat(manualLottos.stream(), autoLottos.stream()).collect(Collectors.toList()));
+    }
+
+    private static void validateManualAndAutoLottos(List<Lotto> manualLottos, List<Lotto> autoLottos) {
+        if (manualLottos == null || autoLottos == null) {
+            throw new IllegalArgumentException(String.format("입력받은 수동로또 또는 자동로또는 null 일 수 없습니다. 입력받은 수동 로또 : %s , 자동 로또 : %s", manualLottos, autoLottos));
+        }
     }
 
     public static List<Lotto> createLottos(int lottoCount, LottoNumberGenerateStrategy lottoNumberGenerateStrategy) {
