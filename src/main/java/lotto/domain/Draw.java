@@ -28,15 +28,15 @@ public class Draw {
         this.lottos = new Lottos();
     }
 
-    public void drawLottos(List<Integer[]> lottosByHand) {
+    public void drawLottos(List<String[]> lottosByHand) {
         if (lottosByHand != null) {
             drawByHand(lottosByHand);
         }
         drawAuto();
     }
 
-    private void drawByHand(List<Integer[]> lottosByHand) {
-        for(Integer[] lotto : lottosByHand) {
+    private void drawByHand(List<String[]> lottosByHand) {
+        for(String[] lotto : lottosByHand) {
             this.lottos.add(new Lotto(lotto));
         }
     }

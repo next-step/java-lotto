@@ -5,6 +5,8 @@ import lotto.domain.Winnings;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
+
 import static lotto.util.Ratio.lottoEarningRatio;
 
 public class LottoMain {
@@ -13,8 +15,11 @@ public class LottoMain {
         InputView inputView = new InputView();
         int price = inputView.inputPrice();
 
-        Draw draw = new Draw(price);
-        draw.drawLottos(null);
+        int numberOfLottosByHand = inputView.inputNumberOfLottosByHand();
+        List<String[]> lottosByHand = inputView.inputLottosByHand(numberOfLottosByHand);
+
+        Draw draw = new Draw(price, numberOfLottosByHand);
+        draw.drawLottos(lottosByHand);
 
         ResultView resultView = new ResultView();
         resultView.printLottos(draw);

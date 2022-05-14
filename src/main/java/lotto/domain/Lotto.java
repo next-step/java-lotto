@@ -24,6 +24,10 @@ public class Lotto {
         this.selectedNumbers = Arrays.asList(lottoByHand);
     }
 
+    public Lotto(String[] lottoByHand) {
+        this.selectedNumbers = parseStringArrayToIntegerArray(lottoByHand);
+    }
+
     private List<Integer> candidateNumbers() {
         List<Integer> candidateNumbers = new ArrayList<>();
         for (int number = 1; number <= MAX_VALUE; number++) {
@@ -34,6 +38,15 @@ public class Lotto {
 
     public List<Integer> selectedNumbers() {
         return Collections.unmodifiableList(selectedNumbers);
+    }
+
+    private List<Integer> parseStringArrayToIntegerArray(String[] stringInputs) {
+        List<Integer> integers = new ArrayList<>();
+
+        for (String input : stringInputs) {
+            integers.add(Integer.parseInt(input));
+        }
+        return integers;
     }
 
     @Override
