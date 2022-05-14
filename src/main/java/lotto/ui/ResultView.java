@@ -1,6 +1,5 @@
 package lotto.ui;
 
-import lotto.domain.LottoGame;
 import lotto.domain.Lotto;
 import lotto.domain.LottoResults;
 import lotto.domain.Rank;
@@ -27,8 +26,8 @@ public class ResultView {
         }
     }
 
-    public static void printBuyQuantityMessage(int qty) {
-        System.out.println(qty + BUY_QUANTITY_MESSAGE);
+    public static void printBuyQuantityMessage(int maxQuantity, int manualQuantity) {
+        System.out.println("수동으로 " + manualQuantity + "장, " + "자동으로 " + (maxQuantity - manualQuantity) + BUY_QUANTITY_MESSAGE);
     }
 
     public static void printWinningTitleAndResults(LottoResults results) {
@@ -53,7 +52,7 @@ public class ResultView {
             message = BONUS_MATCH_MESSAGE;
         }
         System.out.printf(WINNING_RESULT, rank.getCountOfMatch(), message,
-                new DecimalFormat("###,###").format(Integer.parseInt(rank.getWinningMoney().toString()))
+                new DecimalFormat("###,###").format(Double.parseDouble(rank.getWinningMoney().toString()))
                 , results.getWinningCount(rank));
     }
 

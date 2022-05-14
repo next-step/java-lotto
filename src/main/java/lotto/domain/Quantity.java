@@ -7,21 +7,27 @@ public class Quantity {
 
     private final int maxPurchasableQuantity;
     private final int purchasedQuantity;
+    private final int manualBuyQuantity;
 
-    public Quantity(int maxPurchasableQuantity, int purchasedQuantity) {
-        this.maxPurchasableQuantity = maxPurchasableQuantity;
-        this.purchasedQuantity = purchasedQuantity;
-        validate(maxPurchasableQuantity, purchasedQuantity);
+    public Quantity(int maxPurchasableQuantity, String manualBuyQuantity) {
+        this(maxPurchasableQuantity, Integer.parseInt(manualBuyQuantity), Integer.parseInt(manualBuyQuantity));
     }
 
-    private void validate(int maxPurchasableQuantity, int purchasedQuantity) {
+    private Quantity(int maxPurchasableQuantity, int manualBuyQuantity, int purchasedQuantity) {
+        this.maxPurchasableQuantity = maxPurchasableQuantity;
+        this.manualBuyQuantity = manualBuyQuantity;
+        this.purchasedQuantity = purchasedQuantity;
+        validate();
+    }
+
+    private void validate() {
         if (maxPurchasableQuantity < purchasedQuantity) {
             throw new IllegalArgumentException(EXCEED_QUANTITY_MESSAGE + this);
         }
     }
 
     public Quantity increase() {
-        return new Quantity(maxPurchasableQuantity, purchasedQuantity + 1);
+        return new Quantity(maxPurchasableQuantity, manualBuyQuantity, purchasedQuantity + 1);
     }
 
     public boolean isPurchasable() {
@@ -30,6 +36,10 @@ public class Quantity {
 
     public int getMaxPurchasableQuantity() {
         return maxPurchasableQuantity;
+    }
+
+    public int getManualBuyCount() {
+        return this.manualBuyQuantity;
     }
 
     @Override
@@ -52,4 +62,5 @@ public class Quantity {
                 ", purchasedQuantity=" + purchasedQuantity +
                 '}';
     }
+
 }

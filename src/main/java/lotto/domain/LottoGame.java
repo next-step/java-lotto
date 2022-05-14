@@ -3,56 +3,47 @@ package lotto.domain;
 import java.util.List;
 
 public class LottoGame {
-    private static final String MAX_QUANTITY_ERROR_MESSAGE = "생성할 수 있는 수량을 초과하였습니다.";
-
-    private final UserLottos userLottos;
     private final Money money;
+    private Quantity quantity;
 
-    public LottoGame(String buyPrice) {
-        this(buyPrice, new UserLottos(buyPrice));
-    }
-
-    public LottoGame(String buyPrice, UserLottos lottoNumbers) {
-        this.userLottos = lottoNumbers;
+    public LottoGame(String buyPrice, String manualBuyCount) {
         this.money = new Money(buyPrice);
+        this.quantity = new Quantity(money.getMaxPurchasableQuantity(), manualBuyCount);
     }
 
-    public void auto() {
-        validate();
-        while (isPurchasable()) {
-            userLottos.autoCreate();
+    public UserLottos buyLotto(List<String> manualLottos) {
+        UserLottos userLottos = new UserLottos();
+        manual(manualLottos, userLottos);
+        auto(userLottos);
+        return userLottos;
+    }
+
+    private void manual(List<String> manualLottos, UserLottos userLottos) {
+        for (String lotto : manualLottos) {
+            userLottos.createManual(new Lotto(lotto));
         }
     }
 
-    public double getReturnRate(WinningLotto winningLottoNumber) {
+    private void auto(UserLottos userLottos) {
+        while (isPurchasable()) {
+            userLottos.createAuto();
+            quantity = quantity.increase();
+        }
+    }
+
+    public double getReturnRate(WinningLotto winningLottoNumber, UserLottos userLottos) {
         return this.money.calculateReturnRate(userLottos.getWinningMoney(winningLottoNumber));
     }
 
-    public LottoResults getLottoGameResults(WinningLotto winningLottoNumber) {
-        return userLottos.getWinningResults(winningLottoNumber);
-    }
-
-    private void validate() {
-        if (!isPurchasable()) {
-            throw new IllegalArgumentException(MAX_QUANTITY_ERROR_MESSAGE);
-        }
-    }
-
     private boolean isPurchasable() {
-        return userLottos.isPurchasable();
+        return quantity.isPurchasable();
     }
 
     public int getMaxPurchasableQuantity() {
-        return userLottos.getMaxPurchasableQuantity();
+        return quantity.getMaxPurchasableQuantity();
     }
 
-    public List<Lotto> getBuyLottoNumbers() {
-        return userLottos.getUserLottos();
+    public int getManualBuyCount() {
+        return quantity.getManualBuyCount();
     }
-
-    @Override
-    public String toString() {
-        return userLottos.toString();
-    }
-
 }

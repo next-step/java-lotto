@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,15 +13,15 @@ public class UserLottosTest {
 
     @BeforeEach
     void set() {
-        userLottos = new UserLottos(List.of(new Lotto("1,2,3,4,5,6"), new Lotto("1,2,3,4,5,6")), 2000);
+        userLottos = new UserLottos(List.of(new Lotto("1,2,3,4,5,6"), new Lotto("1,2,3,4,5,6")));
     }
     @Test
     @DisplayName("로또 번호를 3번 추가 하면 수량은 3개이다.")
     void name() {
-        UserLottos userLottos = new UserLottos(3000);
-        userLottos.autoCreate();
-        userLottos.autoCreate();
-        userLottos.autoCreate();
+        UserLottos userLottos = new UserLottos();
+        userLottos.createAuto();
+        userLottos.createAuto();
+        userLottos.createAuto();
         assertThat(userLottos.getSize()).isEqualTo(3);
     }
 
@@ -38,5 +37,14 @@ public class UserLottosTest {
     void getWinningMoney() {
         WinningLotto winningLotto = new WinningLotto(new Lotto("1,2,3,4,5,8"), LottoNumber.valueOf("6"));
         assertThat(userLottos.getWinningMoney(winningLotto)).isEqualTo(new Money(60000000));
+    }
+
+    @Test
+    @DisplayName("로또를 수동으로 추가한다")
+    void manualLotto() {
+        UserLottos userLottos = new UserLottos();
+        userLottos.createManual(new Lotto("1,2,3,4,5,6"));
+        userLottos.createManual(new Lotto("1,2,3,4,5,6"));
+        assertThat(userLottos.getSize()).isEqualTo(2);
     }
 }

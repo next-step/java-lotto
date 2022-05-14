@@ -25,7 +25,7 @@ public class LottoFactory {
         Collections.shuffle(lottoBaseNumbers);
         return new Lotto(
                 lottoBaseNumbers.stream()
-                .limit(LOTTO_COUNT)
-                .collect(Collectors.toList()));
+                        .limit(LOTTO_COUNT)
+                        .collect(Collectors.toList()));
     }
 }
