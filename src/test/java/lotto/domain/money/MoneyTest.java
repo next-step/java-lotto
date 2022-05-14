@@ -25,7 +25,7 @@ public class MoneyTest {
     assertThat(Money.createWon(moenyA).lessThan(Money.createWon(moneyB))).isEqualTo(expect);
   }
 
-  @DisplayName("")
+  @DisplayName("돈 객체는 비율객체와 곱셈 결과 정수를 반환한다")
   @ParameterizedTest
   @CsvSource(value = {"1, 0.0, 0", "0, 1.0, 0", "1000, 0.25, 250", "1000, 0.1, 100",
       "1500, 0.24, 360", "1500, 1.1, 1650", "-1000, 1.0, -1000", "1000, -1.0, -1000"})
