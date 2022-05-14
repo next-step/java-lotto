@@ -15,12 +15,15 @@ public class GameController {
     }
 
     public static void start(GameType gameType) {
+        Game game = InputView.createGame();
+        Lotto beforeLotto = InputView.getBeforeLotto();
+
         if (gameType.equals(AUTO)) {
-            gameStartByAuto();
+            gameStartByAuto(game, beforeLotto);
         }
 
         if (gameType.equals(BONUS)) {
-            gameStartByBonus();
+            gameStartByBonus(game, beforeLotto);
         }
 
         if (gameType.equals(MANUAL)) {
@@ -28,16 +31,12 @@ public class GameController {
         }
     }
 
-    private static void gameStartByAuto() {
-        Game game = InputView.createGame();
-        Lotto beforeLotto = InputView.getBeforeLotto();
+    private static void gameStartByAuto(Game game, Lotto beforeLotto) {
         Prize prize = game.findWinners(beforeLotto);
         ResultView.print(prize);
     }
 
-    private static void gameStartByBonus() {
-        Game game = InputView.createGame();
-        Lotto beforeLotto = InputView.getBeforeLotto();
+    private static void gameStartByBonus(Game game, Lotto beforeLotto) {
         Number bonusNumber = InputView.getBonusNumber();
         Prize prize = game.findWinners(beforeLotto, bonusNumber);
         ResultView.print(prize);
