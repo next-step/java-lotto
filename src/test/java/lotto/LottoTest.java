@@ -49,7 +49,7 @@ public class LottoTest {
     @Test
     @DisplayName("로또 생성 전략과 count를 입력하면 Lotto 리스트가 생성된다.")
     void ofCountAndGeneratorTest() {
-        List<Lotto> lotto = Lotto.ofCountAndGenerator(1,() -> Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, SIX));
+        List<Lotto> lotto = Lotto.listOfCountAndGenerator(1, () -> Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, SIX));
 
         assertThat(lotto).hasSize(1);
         assertThat(lotto.get(0).get()).contains(ONE);
@@ -58,14 +58,14 @@ public class LottoTest {
     @Test
     @DisplayName("Lotto 리스트 생성시 count가 음수이면 예외가 발생한다..")
     void ofCountAndGeneratorNegativeTest() {
-        assertThatThrownBy(()->Lotto.ofCountAndGenerator(-1,() -> Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, SIX)))
+        assertThatThrownBy(() -> Lotto.listOfCountAndGenerator(-1, () -> Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, SIX)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("Lotto 리스트 생성시 generator가 null이면 NullPointerException가 발생한다..")
     void ofCountAndGeneratorNulTest() {
-        assertThatThrownBy(()->Lotto.ofCountAndGenerator(1,null))
+        assertThatThrownBy(() -> Lotto.listOfCountAndGenerator(1, null))
                 .isInstanceOf(NullPointerException.class);
     }
 

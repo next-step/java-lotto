@@ -35,14 +35,6 @@ public class LottosTest {
     }
 
     @Test
-    @DisplayName("로또 개수와 생성 전략을 입력하면 Lottos가 생성된다.")
-    void newLottosTest() {
-        Lottos lottos = new Lottos(5, () -> TEST_LOTTO);
-
-        assertThat(lottos.size()).isEqualTo(5);
-    }
-
-    @Test
     @DisplayName("size() 메서드로 로또들의 개수를 구할 수 있다.")
     void sizeTest() {
         assertThat(TEST_LOTTOS.size()).isEqualTo(1);
@@ -84,9 +76,9 @@ public class LottosTest {
     }
 
     @Test
-    @DisplayName("두개의 Lottos 객체를 합해 하나의 Lottos를 반환한다.")
-    void combineTest() {
-        Lottos lottos = TEST_LOTTOS.addAll(TEST_LOTTOS);
+    @DisplayName("기준 리스트와 generator로 생성할 count를 입력받으면 하나의 Lottos 객체가 생성된다.")
+    void makeWithBaseAndCountTest() {
+        Lottos lottos = Lottos.makeWithBaseAndCount(Lists.newArrayList(TEST_LOTTO), 1L);
 
         assertThat(lottos.size()).isEqualTo(2);
     }

@@ -6,7 +6,6 @@ import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 import lotto.model.Lottos;
 import lotto.model.Money;
-import lotto.model.RandomLottoGenerator;
 import lotto.model.WinnerLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -31,18 +30,17 @@ public class LottoMain {
     }
 
     private static Lottos buyAndPrintLottos(LottoCount lottoCount) {
-        Lottos manual = makeManualLottos(InputView.askManualLottoNumbers(lottoCount.getManualCount()));
-        Lottos random = new Lottos(lottoCount.getRandomCount(), new RandomLottoGenerator());
+        List<Lotto> manual = makeManualLottos(InputView.askManualLottoNumbers(lottoCount.getManualCount()));
+        Lottos lottos = Lottos.makeWithBaseAndCount(manual, lottoCount.getRandomCount());
 
-        ResultView.printBuyingLottos(manual, random);
-
-        return manual.addAll(random);
+        ResultView.printBuyingLottos(lottoCount, lottos);
+        return lottos;
     }
 
-    private static Lottos makeManualLottos(List<String> manualLottoNumbers) {
+    private static List<Lotto> makeManualLottos(List<String> manualLottoNumbers) {
         return manualLottoNumbers.stream()
                 .map(Lotto::new)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
+                .collect(Collectors.toList());
     }
 
     private static WinnerLotto makeWinnerLottos() {

@@ -50,17 +50,17 @@ public final class Lotto {
         return lotto.contains(lottoNumber);
     }
 
-    public static List<Lotto> ofCountAndGenerator(long count, LottoGenerator lottoGenerator) {
+    public static List<Lotto> listOfCountAndGenerator(long count, LottoGenerator lottoGenerator) {
         validate(count, lottoGenerator);
-        return Stream.generate(()->new Lotto(lottoGenerator.get()))
+        return Stream.generate(() -> new Lotto(lottoGenerator.get()))
                 .limit(count)
                 .collect(Collectors.toList());
     }
 
     private static void validate(long count, LottoGenerator lottoGenerator) {
         Objects.requireNonNull(lottoGenerator, "로또 생성을 위한 generator는 null일 수 없습니다.");
-        if(isNegative(count)){
-            throw new IllegalArgumentException("Generator 로 생성할 로또의 개수는 음수일 수 없습니다. count:"+ count);
+        if (isNegative(count)) {
+            throw new IllegalArgumentException("Generator 로 생성할 로또의 개수는 음수일 수 없습니다. count:" + count);
         }
     }
 

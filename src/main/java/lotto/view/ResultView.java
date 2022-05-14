@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.dto.LottoCount;
 import lotto.dto.LottoResult;
 import lotto.model.Lotto;
 import lotto.model.Lottos;
@@ -44,15 +45,11 @@ public class ResultView {
         throw new AssertionError();
     }
 
-    public static void printBuyingLottos(Lottos manual, Lottos random) {
-        System.out.println(String.format(OUTPUT_BUYING_LOTTOS, manual.size(), random.size()));
+    public static void printBuyingLottos(LottoCount lottoCount, Lottos buyingLottos) {
+        System.out.println(String.format(OUTPUT_BUYING_LOTTOS, lottoCount.getManualCount(), lottoCount.getRandomCount()));
 
-        List<Lotto> manualLottos = manual.get();
-        for (Lotto lotto : manualLottos) {
-            printLottos(lotto);
-        }
-        List<Lotto> randomLottos = random.get();
-        for (Lotto lotto : randomLottos) {
+        List<Lotto> lottos = buyingLottos.get();
+        for (Lotto lotto : lottos) {
             printLottos(lotto);
         }
     }
