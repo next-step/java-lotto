@@ -11,13 +11,12 @@ import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.List;
 
 import static lotto.LottoNumberTest.*;
-import static lotto.LottoTest.*;
+import static lotto.LottoTest.TEST_LOTTO;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -32,14 +31,6 @@ public class LottosTest {
     void nullTest(List<Lotto> lottos) {
         assertThatThrownBy(() -> new Lottos(lottos))
                 .isInstanceOf(NullPointerException.class);
-    }
-
-    @Test
-    @DisplayName("로또 개수와 생성 전략을 입력하면 Lottos가 생성된다.")
-    void newLottosTest() {
-        Lottos lottos = new Lottos(5, () -> TEST_LOTTO);
-
-        assertThat(lottos.size()).isEqualTo(5);
     }
 
     @Test
@@ -84,9 +75,9 @@ public class LottosTest {
     }
 
     @Test
-    @DisplayName("두개의 Lottos 객체를 합해 하나의 Lottos를 반환한다.")
-    void combineTest() {
-        Lottos lottos = TEST_LOTTOS.addAll(TEST_LOTTOS);
+    @DisplayName("기준 리스트와 generator로 생성할 count를 입력받으면 하나의 Lottos 객체가 생성된다.")
+    void makeWithBaseAndCountTest() {
+        Lottos lottos = Lottos.makeWithBaseAndCount(Lists.newArrayList(TEST_LOTTO), 1L);
 
         assertThat(lottos.size()).isEqualTo(2);
     }
