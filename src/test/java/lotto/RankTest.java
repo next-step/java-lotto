@@ -14,7 +14,7 @@ public class RankTest {
     }
 
     @Test
-    @DisplayName("2등 Rank 테스트")
+    @DisplayName("3등 Rank 테스트")
     void Rank_3등_테스트(){
         assertThat(Rank.of(5, false)).isEqualTo(Rank.THIRD);
     }
