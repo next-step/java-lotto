@@ -34,11 +34,13 @@ public class Money {
 
     @Override
     public String toString() {
-        return "Money{" + "value=" + value + '}';
+        return "Money{" +
+                "value=" + value +
+                ", investedMoney=" + investedMoney +
+                '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
+    public boolean hasEqualValue(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Money money = (Money) o;
@@ -46,13 +48,21 @@ public class Money {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(value);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Money money = (Money) o;
+        return value == money.value && investedMoney == money.investedMoney;
     }
 
-    public static int multiply(Money money, int wonNumbers) {
-        return money.value * wonNumbers;
+    @Override
+    public int hashCode() {
+        return Objects.hash(value, investedMoney);
     }
+
+    //    public static int multiply(Money money, int wonNumbers) {
+//        return money.value * wonNumbers;
+//    }
 
     public int calc(Integer win) {
         return this.value * win;

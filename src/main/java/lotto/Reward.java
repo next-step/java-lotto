@@ -34,12 +34,12 @@ public enum Reward {
         return payload.toString();
     }
 
-    public Money getMoney() {
-        return this.money;
-    }
-
     public int calc(Integer win) {
         return this.money.calc(win);
+    }
+
+    public boolean hasEqualMoney(Money expected) {
+        return this.money.equals(expected);
     }
 };
 

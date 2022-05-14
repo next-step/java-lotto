@@ -26,7 +26,7 @@ public class InventoryTest {
         Inventory inventory = new Inventory();
         inventory.buyLottery(actual);
         Money expected = new Money(14000 - LOTTERY_PRICE);
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual.hasEqualValue(expected)).isTrue();
     }
 
     @Test
