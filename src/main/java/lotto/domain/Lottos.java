@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.constant.Rank;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,8 +20,35 @@ public class Lottos {
         }
     }
 
+    public int getLottoAmount() {
+        return this.lottos.size();
+    }
+
+    public void confirmAll(LottoNumbers winningLottoNumbers) {
+        for (Lotto lotto : this.lottos) {
+            lotto.confirm(winningLottoNumbers);
+        }
+    }
+
+    public int countMatchRank(Rank rank) {
+        return (int) lottos.stream()
+                .filter(lotto -> lotto.isSameRank(rank))
+                .count();
+    }
+
+    public List<LottoNumbers> getLottoNumbers() {
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            lottoNumbers.add(lotto.getLottoNumbers());
+        }
+        return lottoNumbers;
+    }
+
+
     @Override
     public String toString() {
         return lottos.stream().map(lotto -> lotto.toString() + "\n").collect(Collectors.joining());
     }
+
+
 }

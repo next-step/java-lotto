@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,6 +11,7 @@ public class LottoFactory {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int LOTTO_NUMBER_COUNT = 6;
+
     private static final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     static {
@@ -17,8 +19,13 @@ public class LottoFactory {
                 .forEach(number -> lottoNumbers.add(new LottoNumber(number)));
     }
 
-    public static List<LottoNumber> createAutoLottoNumbers() {
+    public static LottoNumbers createAutoLottoNumbers() {
         Collections.shuffle(lottoNumbers);
-        return lottoNumbers.stream().limit(LOTTO_NUMBER_COUNT).collect(Collectors.toList());
+        List<LottoNumber> lottoNumbers = LottoFactory.lottoNumbers.stream()
+                .limit(LOTTO_NUMBER_COUNT)
+                .collect(Collectors.toList());
+
+        return new LottoNumbers(lottoNumbers);
     }
+
 }
