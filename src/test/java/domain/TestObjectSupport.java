@@ -13,4 +13,12 @@ public class TestObjectSupport {
     public static LottoNumbers createLottoNumbers() {
         return new LottoNumbers(convertToLottoNumberList(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
+
+    public static SelectRule createSelectRule() {
+        return () -> LottoNumbers.create(Arrays.asList(1, 2, 3, 4, 5, 6));
+    }
+
+    public static Lotto createLotto() {
+        return new Lotto(createLottoNumbers());
+    }
 }

@@ -3,6 +3,7 @@ package domain;
 import java.util.Objects;
 
 public class Lotto {
+    public static int PRICE = 1000;
     private LottoNumbers lottoNumbers;
 
     public Lotto(LottoNumbers lottoNumbers) {

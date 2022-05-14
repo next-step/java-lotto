@@ -22,6 +22,18 @@ public class LottoNumbersTest {
     }
 
     @Test
+    void createByStaticFactoryMethod() {
+        //given
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+
+        //when
+        LottoNumbers result = LottoNumbers.create(lottoNumbers);
+
+        //then
+        assertThat(result).isEqualTo(new LottoNumbers(TestObjectSupport.convertToLottoNumberList(lottoNumbers)));
+    }
+
+    @Test
     void numberCount() {
         //given
         List<LottoNumber> fiveLottoNumbers = TestObjectSupport.convertToLottoNumberList(Arrays.asList(1, 2, 3, 4, 5));

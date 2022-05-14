@@ -4,9 +4,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private static int LOTTO_NUMBER_COUNT = 6;
+    public final static int LOTTO_NUMBER_COUNT = 6;
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -14,6 +15,13 @@ public class LottoNumbers {
         validateDuplicate(lottoNumbers);
 
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public static LottoNumbers create(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        return new LottoNumbers(lottoNumbers);
     }
 
     private void validateDuplicate(List<LottoNumber> lottoNumbers) {
