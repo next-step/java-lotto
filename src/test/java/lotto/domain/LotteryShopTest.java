@@ -25,9 +25,9 @@ class LotteryShopTest {
     assertThat(tickets.size()).isEqualTo(lottoCount);
   }
 
-  @DisplayName("1000원 미만, 음수값 입력시 IllegalArgument 예외를 던진다")
+  @DisplayName("1000원 미만값 입력시 IllegalArgument 예외를 던진다")
   @ParameterizedTest
-  @ValueSource(ints = {999, -1})
+  @ValueSource(ints = {999, 0})
   void payThrowsIllegalArgumentException(Integer moneyWon) {
     assertThatIllegalArgumentException().isThrownBy(
             () -> lotteryShop.sell(Money.createWon(moneyWon), randomNumbers))

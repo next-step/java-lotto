@@ -15,19 +15,20 @@ class PrizeTest {
   @DisplayName("일치하는 번호개수 별 당첨금 수령액 검증")
   @ParameterizedTest
   @MethodSource("provideForPrize")
-  void prize(int count, Money prize) {
-    assertThat(Prize.getPrizeMoney(count)).isEqualTo(prize);
+  void prize(int count, boolean matchBonus, Money prize) {
+    assertThat(Prize.getPrizeMoney(count, matchBonus)).isEqualTo(prize);
   }
 
   private static Stream<Arguments> provideForPrize() {
     return Stream.of(
-        arguments(6, Money.createWon(2_000_000_000)),
-        arguments(5, Money.createWon(1_500_000)),
-        arguments(4, Money.createWon(50_000)),
-        arguments(3, Money.createWon(5_000)),
-        arguments(2, Money.createWon(0)),
-        arguments(1, Money.createWon(0)),
-        arguments(0, Money.createWon(0))
+        arguments(6, false, Money.createWon(2_000_000_000)),
+        arguments(5, true, Money.createWon(30_000_000)),
+        arguments(5, false, Money.createWon(1_500_000)),
+        arguments(4, false, Money.createWon(50_000)),
+        arguments(3, false, Money.createWon(5_000)),
+        arguments(2, false, Money.createWon(0)),
+        arguments(1, false, Money.createWon(0)),
+        arguments(0, false, Money.createWon(0))
     );
   }
 
@@ -41,9 +42,10 @@ class PrizeTest {
   private static Stream<Arguments> provideForGetPrize() {
     return Stream.of(
         arguments(Prize.FIRST, Money.createWon(2_000_000_000)),
-        arguments(Prize.SECOND, Money.createWon(1_500_000)),
-        arguments(Prize.THIRD, Money.createWon(50_000)),
-        arguments(Prize.FOURTH, Money.createWon(5_000)),
+        arguments(Prize.SECOND, Money.createWon(30_000_000)),
+        arguments(Prize.THIRD, Money.createWon(1_500_000)),
+        arguments(Prize.FOURTH, Money.createWon(50_000)),
+        arguments(Prize.FIFTH, Money.createWon(5_000)),
         arguments(Prize.NOT_PRIZE, Money.createWon(0))
     );
   }
@@ -59,8 +61,9 @@ class PrizeTest {
     return Stream.of(
         arguments(Prize.FIRST, 6),
         arguments(Prize.SECOND, 5),
-        arguments(Prize.THIRD, 4),
-        arguments(Prize.FOURTH, 3),
+        arguments(Prize.THIRD, 5),
+        arguments(Prize.FOURTH, 4),
+        arguments(Prize.FIFTH, 3),
         arguments(Prize.NOT_PRIZE, 0)
     );
   }
@@ -78,6 +81,7 @@ class PrizeTest {
         arguments(Prize.SECOND, true),
         arguments(Prize.THIRD, true),
         arguments(Prize.FOURTH, true),
+        arguments(Prize.FIFTH, true),
         arguments(Prize.NOT_PRIZE, false),
         arguments(Prize.NOT_PRIZE, false),
         arguments(Prize.NOT_PRIZE, false)
