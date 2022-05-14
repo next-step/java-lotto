@@ -4,10 +4,11 @@ package lotto.model;
 import java.util.Arrays;
 
 public enum Rank {
-    three(3, 5000),
-    four(4, 50000),
-    five(5, 1500000),
-    six(6, 2000000000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     NONE(0, 0);
 
     private final int coincidence;
@@ -27,8 +28,15 @@ public enum Rank {
         return this.coincidence == coincidence;
     }
 
-    public static Rank of(int num){
-        return Arrays.stream(Rank.values())
+    public static Rank of(int num, boolean bonesBall){
+        if(num == 5 && bonesBall){
+            return Rank.SECOND;
+        }
+        if(num == 5){
+            return Rank.THIRD;
+        }
+
+        return  Arrays.stream(Rank.values())
                 .filter(op -> op.isEqual(num))
                 .findAny()
                 .orElse(NONE);
