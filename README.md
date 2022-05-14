@@ -17,7 +17,7 @@
 
 * 연산식 문자열 Array 나누기 (Splitter) 
 
-### Step 2 로또 (자동)
+### 로또 (자동/수동)
 * View
   * InputView
     * 로또 구입 금액 입력
@@ -47,7 +47,8 @@
     * Variables
       * 로또
     * Functions
-      * 로또 생성
+      * 로또 자동 생성
+      * 로또 수동 생성
       * Lotto getter
   * Winnings
     * Variables
