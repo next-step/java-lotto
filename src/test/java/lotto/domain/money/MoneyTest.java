@@ -1,6 +1,7 @@
 package lotto.domain.money;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,7 @@ public class MoneyTest {
   @DisplayName("돈 객체는 비율객체와 곱셈 결과 정수를 반환한다")
   @ParameterizedTest
   @CsvSource(value = {"1, 0.0, 0", "0, 1.0, 0", "1000, 0.25, 250", "1000, 0.1, 100",
-      "1500, 0.24, 360", "1500, 1.1, 1650", "-1000, 1.0, -1000", "1000, -1.0, -1000"})
+      "1500, 0.24, 360", "1500, 1.1, 1650"})
   void multiply(int amount, double rate, int result) {
     assertThat(Money.createWon(amount).multiply(rate)).isEqualTo(Money.createWon(result));
   }
@@ -37,5 +38,12 @@ public class MoneyTest {
   @Test
   void won() {
     assertThat(Money.createWon(1000).won()).isEqualTo("1000원");
+  }
+
+  @DisplayName("Money 생성 시 금액이 음수인 경우 예외를 던진다")
+  @Test
+  void notMoneyException() {
+    assertThatIllegalArgumentException().isThrownBy(() -> Money.createWon(-1))
+        .withMessageContaining("금액은 음수일 수 없습니다");
   }
 }
