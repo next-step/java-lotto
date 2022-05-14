@@ -7,6 +7,7 @@ import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Set;
 
 import static lotto.LottoNumberTest.*;
@@ -46,11 +47,26 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("로또 생성 전략을 입력하면 Lotto가 생성된다.")
-    void newLottoTest() {
-        Lotto lotto = new Lotto(() -> Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, SIX));
+    @DisplayName("로또 생성 전략과 count를 입력하면 Lotto 리스트가 생성된다.")
+    void ofCountAndGeneratorTest() {
+        List<Lotto> lotto = Lotto.ofCountAndGenerator(1,() -> Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, SIX));
 
-        assertThat(lotto.get()).contains(ONE);
+        assertThat(lotto).hasSize(1);
+        assertThat(lotto.get(0).get()).contains(ONE);
+    }
+
+    @Test
+    @DisplayName("Lotto 리스트 생성시 count가 음수이면 예외가 발생한다..")
+    void ofCountAndGeneratorNegativeTest() {
+        assertThatThrownBy(()->Lotto.ofCountAndGenerator(-1,() -> Sets.newLinkedHashSet(ONE, TWO, THREE, FOUR, FIVE, SIX)))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("Lotto 리스트 생성시 generator가 null이면 NullPointerException가 발생한다..")
+    void ofCountAndGeneratorNulTest() {
+        assertThatThrownBy(()->Lotto.ofCountAndGenerator(1,null))
+                .isInstanceOf(NullPointerException.class);
     }
 
     @Test

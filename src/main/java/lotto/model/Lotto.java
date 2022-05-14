@@ -4,17 +4,17 @@ import lotto.dto.ExtractLottoNumbers;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public final class Lotto {
+    private static final int ZERO = 0;
     private static final int LOTTO_COUNT = 6;
 
     private final Set<LottoNumber> lotto;
-
-    public Lotto(LottoGenerator lottoGenerator) {
-        this(lottoGenerator.get());
-    }
 
     public Lotto(String lottoNumbers) {
         this(ExtractLottoNumbers.split(lottoNumbers));
@@ -24,6 +24,7 @@ public final class Lotto {
         validate(lotto);
         this.lotto = new HashSet<>(lotto);
     }
+
     private void validate(Set<LottoNumber> lotto) {
         Objects.requireNonNull(lotto, "lotto는 null일 수 없습니다.");
         if (lotto.size() != LOTTO_COUNT) {
@@ -47,5 +48,23 @@ public final class Lotto {
 
     public boolean contains(LottoNumber lottoNumber) {
         return lotto.contains(lottoNumber);
+    }
+
+    public static List<Lotto> ofCountAndGenerator(long count, LottoGenerator lottoGenerator) {
+        validate(count, lottoGenerator);
+        return Stream.generate(()->new Lotto(lottoGenerator.get()))
+                .limit(count)
+                .collect(Collectors.toList());
+    }
+
+    private static void validate(long count, LottoGenerator lottoGenerator) {
+        Objects.requireNonNull(lottoGenerator, "로또 생성을 위한 generator는 null일 수 없습니다.");
+        if(isNegative(count)){
+            throw new IllegalArgumentException("Generator 로 생성할 로또의 개수는 음수일 수 없습니다. count:"+ count);
+        }
+    }
+
+    private static boolean isNegative(long number) {
+        return number < ZERO;
     }
 }
