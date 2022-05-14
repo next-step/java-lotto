@@ -14,5 +14,4 @@ class LottosTest {
         lottos.add(new Lotto());
         assertThat(lottos.lottos().size()).isEqualTo(1);
     }
-
 }

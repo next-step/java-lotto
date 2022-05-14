@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,6 +20,10 @@ public class Lotto {
         Collections.sort(this.selectedNumbers);
     }
 
+    public Lotto(Integer[] lottoByHand) {
+        this.selectedNumbers = Arrays.asList(lottoByHand);
+    }
+
     private List<Integer> candidateNumbers() {
         List<Integer> candidateNumbers = new ArrayList<>();
         for (int number = 1; number <= MAX_VALUE; number++) {
@@ -29,5 +34,20 @@ public class Lotto {
 
     public List<Integer> selectedNumbers() {
         return Collections.unmodifiableList(selectedNumbers);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Lotto lotto = (Lotto) o;
+
+        return selectedNumbers != null ? selectedNumbers.equals(lotto.selectedNumbers) : lotto.selectedNumbers == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return selectedNumbers != null ? selectedNumbers.hashCode() : 0;
     }
 }
