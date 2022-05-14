@@ -23,19 +23,19 @@ public class InputView {
 
     public Cash scanCashWithAnnouncement() {
         System.out.println(CASH_INPUT_ANNOUNCEMENT);
-        scanCash();
+        this.cash = scanCash();
         return this.cash;
     }
 
-    private void scanCash() {
+    private Cash scanCash() {
         Cash inputCash = new Cash(scanner.nextInt());
         try {
             validateMin(inputCash);
             validateMultiple(inputCash);
-            this.cash = inputCash;
+            return inputCash;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            scanCash();
+            return scanCash();
         }
     }
 
