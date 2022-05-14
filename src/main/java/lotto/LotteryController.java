@@ -74,9 +74,8 @@ public class LotteryController {
         ResultView.print(payload);
     }
 
-    public void printEarned() {
-        String payload = winStatistics.didEarn(new Money(1000)) + " (More than 1.0 means 'Earned')";
-        ResultView.print(payload);
+    public void printEarned(Money money) {
+        ResultView.printEarned(money.profitRate(winStatistics.getEarnedMoney()));
     }
 
     public int scanBonus() {

@@ -32,13 +32,6 @@ public class Money {
         return earnedMoney / (double) this.investedMoney;
     }
 
-    public String didEarn(int earnedMoney) {
-        if (profitRate(earnedMoney) >= 1) {
-            return "📈Earned!";
-        }
-        return "📉Lost..";
-    }
-
     @Override
     public String toString() {
         return "Money{" + "value=" + value + '}';

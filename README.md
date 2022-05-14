@@ -219,7 +219,7 @@ Earning rate: 2142.8571428571427
 
 ### Requested changes - phase2
 
-- [ ] didEarn 대신 profitRate() 를 사용해서 득실 여부 판별
+- [x] didEarn 대신 profitRate() 를 사용해서 득실 여부 판별
 - [ ] Interger (number) 를 객체로 포장
 - [ ] 사용되지 않는 getMoney() 제거
 - [ ] LotteryController 부분을 하나의 메서드로 묶기

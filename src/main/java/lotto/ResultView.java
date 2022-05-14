@@ -21,4 +21,15 @@ public class ResultView {
     }
 
 
+    public static void printEarned(double profitRate) {
+        String payload = evaluateRate(profitRate);
+        print(payload);
+    }
+
+    public static String evaluateRate(double profitRate) {
+        if (profitRate >= 1) {
+            return "📈Earned!";
+        }
+        return "📉Lost..";
+    }
 }

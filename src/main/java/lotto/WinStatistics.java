@@ -51,10 +51,6 @@ public class WinStatistics {
         return earnedMoney;
     }
 
-    public String didEarn(Money money) {
-        return money.didEarn(this.getEarnedMoney());
-    }
-
     public double getEarningRate(Money money) {
         return money.profitRate(this.getEarnedMoney());
     }

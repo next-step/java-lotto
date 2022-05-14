@@ -17,8 +17,4 @@ public class MoneyTest {
         assertThat(new Money(10000).profitRate(5000)).isEqualTo(0.5);
     }
 
-    @Test
-    void returnTrueIfEarnMoney() {
-        assertThat(new Money(4000).didEarn(5000)).isEqualTo("📈Earned!");
-    }
 }

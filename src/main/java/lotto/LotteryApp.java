@@ -10,6 +10,6 @@ public class LotteryApp {
         lotteryController.saveWins(lotteryController.findWins(winning));
         lotteryController.printWinStatistics();
         lotteryController.printEarningRate(money);
-        lotteryController.printEarned();
+        lotteryController.printEarned(money);
     }
 }
