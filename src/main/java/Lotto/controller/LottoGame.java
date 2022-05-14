@@ -5,6 +5,8 @@ import Lotto.domain.Number;
 import Lotto.view.InputView;
 import Lotto.view.ResultView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class LottoGame {
@@ -26,7 +28,24 @@ public class LottoGame {
     private Lottos createLottos() {
         money = new Money(InputView.inputBuyMoney(), true);
 
-        return new Lottos(money.changeMoneyToLottoNum());
+        List<Lotto> passiveLottos = inputAndCreatePassiveLotto();
+
+        int automaticLottosCnt = money.changeMoneyToLottoNum() - passiveLottos.size();
+
+        return new Lottos(automaticLottosCnt, passiveLottos);
+    }
+
+    private List<Lotto> inputAndCreatePassiveLotto() {
+        int passiveLottoCnt = InputView.inputPassiveLottoCount();
+
+        InputView.showPassiveLottoNumbers();
+
+        List<Lotto> passiveLottos= new ArrayList<>();
+        for (int i = 0; i < passiveLottoCnt; ++i) {
+            passiveLottos.add(new Lotto(InputView.inputPassiveLotto()));
+        }
+
+        return passiveLottos;
     }
 
     private void viewMyLottoNumbers(Lottos lottos) {

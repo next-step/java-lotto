@@ -12,10 +12,12 @@ public class ResultView {
     private static int LOTTO_LAST_NUMBER = 6;
 
     public static void viewLottoNumbers(Lottos lottos) {
-        int lottoNum = lottos.getLottoCnt();
-        System.out.println(lottoNum + "개를 구매했습니다.");
+        int passiveLottoCnt = lottos.getPassiveLottoCnt();
+        int automaticLottoCnt = lottos.getAutomaticLottoCnt();
+        int allLottoCnt = passiveLottoCnt + automaticLottoCnt;
 
-        for (int i = 0; i < lottoNum; ++i) {
+        System.out.println("수동으로 " + passiveLottoCnt + "장, 자동으로" + automaticLottoCnt + "개를 구매했습니다.");
+        for (int i = 0; i < allLottoCnt; ++i) {
             System.out.print("[");
             viewLottoNumbers(lottos, i);
             System.out.print("]");

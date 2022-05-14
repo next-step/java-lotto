@@ -9,17 +9,35 @@ public class Lottos {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_NUMBER_SIZE = 6;
 
+    private int passiveLottoCnt;
+    private int automaticLottoCnt;
+
     public Lottos(Lotto [] lottos) {
         for (Lotto lotto : lottos) {
             list.add(lotto);
         }
     }
 
-    public Lottos(int lottoCount) {
+    public Lottos(int automaticLottosCnt, List<Lotto> passiveLottos) {
+        initLottoCount(automaticLottosCnt, passiveLottos.size());
+
         List<Integer> tmpNumbers = createAllNumbers();
 
-        for (int i = 0; i < lottoCount; ++i) {
+        addPassiveLottos(passiveLottos);
+
+        for (int i = 0; i < automaticLottoCnt; ++i) {
             pickLottoNumbers(tmpNumbers);
+        }
+    }
+
+    private void initLottoCount(int automaticLottosCnt, int passiveLottoCnt) {
+        this.automaticLottoCnt = automaticLottosCnt;
+        this.passiveLottoCnt = passiveLottoCnt;
+    }
+
+    private void addPassiveLottos(List<Lotto> passiveLottos) {
+        for (int i = 0; i < passiveLottos.size(); ++i) {
+            list.add(passiveLottos.get(i));
         }
     }
 
@@ -77,7 +95,13 @@ public class Lottos {
         return list.get(idx);
     }
 
-    public int getLottoCnt() {
-        return list.size();
+    public int getPassiveLottoCnt() {
+        return this.passiveLottoCnt;
     }
+
+    public int getAutomaticLottoCnt() {
+        return this.automaticLottoCnt;
+    }
+
+
 }
