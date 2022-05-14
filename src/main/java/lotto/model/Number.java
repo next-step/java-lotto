@@ -38,10 +38,6 @@ public class Number {
         return this.value.equals(BigDecimal.ZERO);
     }
 
-    public Number incrementAndGet() {
-        return new Number(this.value.add(BigDecimal.ONE));
-    }
-
     public long longValue() {
         return this.value.longValue();
     }
