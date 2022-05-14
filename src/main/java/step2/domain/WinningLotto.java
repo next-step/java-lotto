@@ -1,32 +1,16 @@
 package step2.domain;
 
-import java.util.Arrays;
 import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class WinningLotto {
 
-    private static final String DELIIMITER = ", ";
-    private static final int WINNER_COUNT = 6;
-
-    private final Set<LottoNumber> winningNumbers;
+    private final Lotto winningNumbers;
     private final LottoNumber bonusNumber;
 
     public WinningLotto(String input, String bonus) {
-        this.winningNumbers = initWinningNumbers(input);
+        this.winningNumbers = new Lotto(input);
         this.bonusNumber = initBonusNumber(bonus);
         validateBonusNumberDuplicate();
-    }
-
-    private Set<LottoNumber> initWinningNumbers(String input) {
-        validateNullAndEmpty(input);
-        String[] splits = input.split(DELIIMITER);
-        validateLength(splits);
-        validateDuplicate(splits);
-        return Arrays.stream(splits)
-                .map(LottoNumber::from)
-                .collect(Collectors.toSet());
     }
 
     private LottoNumber initBonusNumber(String bonus) {
@@ -40,21 +24,8 @@ public class WinningLotto {
         }
     }
 
-    private void validateLength(String[] splits) {
-        if (splits.length != WINNER_COUNT) {
-            throw new IllegalArgumentException("입력된 지난 당첨회차 번호가 " + WINNER_COUNT + " 가 아닙니다.");
-        }
-    }
-
-    private void validateDuplicate(String[] splits) {
-        long distinctCount = Arrays.stream(splits).distinct().count();
-        if (distinctCount != splits.length) {
-            throw new IllegalArgumentException("입력 값에 중복된 번호가 있습니다.");
-        }
-    }
-
     private void validateBonusNumberDuplicate() {
-        if (this.winningNumbers.contains(this.bonusNumber)) {
+        if (this.winningNumbers.contain(this.bonusNumber)) {
             throw new IllegalArgumentException("당첨번호와 보너스 번호가 중복될 수 없습니다.");
         }
     }
@@ -63,27 +34,17 @@ public class WinningLotto {
         if (operand == null) {
             throw new IllegalArgumentException("등수를 계산할 로또가 널 입니다.");
         }
-        long hitCount = calculateHitCount(operand);
-        boolean containBonusNumber = containBonusNumber(operand);
+        long hitCount = winningNumbers.calculateHitCount(operand);
+        boolean containBonusNumber = operand.contain(bonusNumber);
         return LottoRank.toRank(hitCount, containBonusNumber);
-    }
-
-    private long calculateHitCount(Lotto operand) {
-        return this.winningNumbers.stream()
-                .filter(operand::contain)
-                .count();
-    }
-
-    private boolean containBonusNumber(Lotto operand) {
-        return operand.contain(this.bonusNumber);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        WinningLotto winningLotto = (WinningLotto) o;
-        return Objects.equals(winningNumbers, winningLotto.winningNumbers) && Objects.equals(bonusNumber, winningLotto.bonusNumber);
+        WinningLotto that = (WinningLotto) o;
+        return Objects.equals(winningNumbers, that.winningNumbers) && Objects.equals(bonusNumber, that.bonusNumber);
     }
 
     @Override

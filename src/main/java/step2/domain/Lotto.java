@@ -13,33 +13,39 @@ public class Lotto {
 
     private final Set<LottoNumber> values;
 
-    public Lotto(NumberProvider numberProvider) {
-        validateNull(numberProvider);
-        Set<String> numbers = numberProvider.getNumbers(COUNT);
-        validateSize(numbers);
+    public Lotto(String input) {
+        validateNull(input);
+        List<String> numbers = List.of(input.split(DELIMITER));
+        validateLength(numbers);
+        validateDuplicate(numbers);
         this.values = numbers.stream()
                 .map(LottoNumber::from)
                 .collect(Collectors.toSet());
     }
 
-    public Lotto(String numbers) {
-        validateNull(numbers);
-        List<String> splits = List.of(numbers.split(DELIMITER));
-        this.values = splits.stream()
-                .map(LottoNumber::from)
-                .collect(Collectors.toSet());
-    }
-
-    private <T> void validateNull(T param) {
-        if (param == null) {
-            throw new IllegalArgumentException("주어진 파라미터가 널 입니다.");
+    private void validateNull(String numbers) {
+        if (numbers == null || numbers.isBlank()) {
+            throw new IllegalArgumentException("입력 값이 Null 이거나 Blank 입니다.");
         }
     }
 
-    private void validateSize(Set<String> numbers) {
+    private void validateLength(List<String> numbers) {
         if (numbers.size() != COUNT) {
-            throw new IllegalArgumentException("주어진 번호의 수가 " + COUNT + "와 다릅니다.");
+            throw new IllegalArgumentException("입력된 번호 갯수가 " + COUNT + " 가 아닙니다.");
         }
+    }
+
+    private void validateDuplicate(List<String> splits) {
+        long distinctCount = splits.stream().distinct().count();
+        if (distinctCount != splits.size()) {
+            throw new IllegalArgumentException("입력 값에 중복된 번호가 있습니다.");
+        }
+    }
+
+    public long calculateHitCount(Lotto operand) {
+        return operand.values.stream()
+                .filter(this::contain)
+                .count();
     }
 
     public boolean contain(LottoNumber operand) {

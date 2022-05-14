@@ -15,9 +15,10 @@ public class PurchaseList {
 
     public PurchaseList(PurchaseMoney purchaseMoney, List<String> manualNumbers) {
         List<NumberProvider> strategies = initStrategies(purchaseMoney, manualNumbers);
-        this.values = strategies.stream()
-                .map(Lotto::new)
-                .collect(Collectors.toList());
+//        this.values = strategies.stream()
+//                .map(Lotto::new)
+//                .collect(Collectors.toList());
+        values = null;
     }
 
     private List<NumberProvider> initStrategies(PurchaseMoney purchaseMoney, List<String> manualNumbers) {
