@@ -23,7 +23,6 @@ class StatisticsTest {
         .withMessage("통계는 빈 값일 수 없습니다.");
   }
 
-
   @DisplayName("총 상금을 반환한다")
   @ParameterizedTest
   @MethodSource("provideForStatistics")
