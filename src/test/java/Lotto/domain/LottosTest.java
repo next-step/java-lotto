@@ -23,7 +23,7 @@ public class LottosTest {
                                 new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7)),
                                 new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7)),
                                 new Lotto(Arrays.asList(8, 9, 10, 11, 12, 13))
-                        }), new Lotto(Arrays.asList(1,2,3,4,5,6)), new Number(7),
+                        }), new Lotto("1, 2, 3, 4, 5, 6", new Number(7)),
                         Map.of(EqualLottoCntInfo.FIRST, 1, EqualLottoCntInfo.BONUS, 2, EqualLottoCntInfo.NONE, 1)
                 )
         );
@@ -32,8 +32,8 @@ public class LottosTest {
     @ParameterizedTest
     @MethodSource("lottosArgs")
     @DisplayName("로또 여러장 중에 당첨 갯수를 구한다.")
-    void test(Lottos lottos, Lotto winningLotto, Number bonusNumber, Map<EqualLottoCntInfo, Integer> result) {
-        Assertions.assertThat(lottos.findWinningLotto(winningLotto,bonusNumber)).isEqualTo(result);
+    void test(Lottos lottos, Lotto winningLotto, Map<EqualLottoCntInfo, Integer> result) {
+        Assertions.assertThat(lottos.findWinningLotto(winningLotto)).isEqualTo(result);
     }
 
 }

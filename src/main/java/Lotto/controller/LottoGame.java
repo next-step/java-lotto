@@ -11,7 +11,6 @@ public class LottoGame {
 
     private Money money;
     private Lotto winningNumbers;
-    private Number bonusNumber;
 
     public void start() {
 
@@ -37,13 +36,13 @@ public class LottoGame {
     private void inputAndCreateWinningLottoNumbers() {
         String winningNumberStr = InputView.inputWinningLottoNumbers();
 
-        bonusNumber = new Number(InputView.inputBonusLottoNumbers());
+        Number bonusNumber = new Number(InputView.inputBonusLottoNumbers());
 
         winningNumbers = new Lotto(winningNumberStr, bonusNumber);
     }
 
     private void viewResult(Lottos lottos) {
-        Map<EqualLottoCntInfo, Integer> resultInfo = lottos.findWinningLotto(winningNumbers, bonusNumber);
+        Map<EqualLottoCntInfo, Integer> resultInfo = lottos.findWinningLotto(winningNumbers);
 
         ResultView.viewResultBoard(resultInfo);
 

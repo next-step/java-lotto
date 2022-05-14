@@ -15,6 +15,8 @@ public class Lotto {
 
     private List<Number> myNumbers = new ArrayList<>();
 
+    private Number bonusNumber;
+
     public Lotto(List<Integer> numbers) {
         for (int number : numbers) {
             this.myNumbers.add(Number.getNumber(number));
@@ -34,7 +36,9 @@ public class Lotto {
     public Lotto(String winningNumberStr, Number bonusNumber) {
         this(winningNumberStr);
 
-        isDuplicateNumber(bonusNumber);
+        this.bonusNumber = bonusNumber;
+
+        isDuplicateNumber();
     }
 
     private void validate(String[] winningNumberArr) {
@@ -78,14 +82,14 @@ public class Lotto {
         return cnt;
     }
 
-    private void isDuplicateNumber(Number bonusNumber) {
+    private void isDuplicateNumber() {
         if(myNumbers.contains(bonusNumber)) {
             throw new SameNumberException("당첨번호와 보너스 번호가 중복됩니다.");
         }
     }
 
-    public boolean isBonusNumber(Number bonusNumber) {
-        return myNumbers.contains(bonusNumber);
+    public boolean isBonusNumber(Lotto winningLotto) {
+        return myNumbers.contains(winningLotto.getBonusNumber());
     }
 
     private List<Number> getList() {
@@ -95,6 +99,8 @@ public class Lotto {
     public int getLottoNumber(int idx) {
         return myNumbers.get(idx).getNumber();
     }
+
+    public Number getBonusNumber() { return bonusNumber; }
 
 
 }
