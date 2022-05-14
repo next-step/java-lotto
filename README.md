@@ -216,3 +216,12 @@ Earning rate: 2142.8571428571427
 - [x] Wallet 은 로또 구매 갯수만 가지고 구매한 로또는 별도 저장
 - [x] Reward.of 로 2등 당첨 테스트 추가
 - [x] 로또 번호를 표현하는 일급 콜렉션 -> 로또 번호 발급
+
+### Requested changes - phase2
+
+- [ ] didEarn 대신 profitRate() 를 사용해서 득실 여부 판별
+- [ ] Interger (number) 를 객체로 포장
+- [ ] 사용되지 않는 getMoney() 제거
+- [ ] LotteryController 부분을 하나의 메서드로 묶기
+- [ ] 각 클래스에 대한 패키지 분리
+- [ ] Winning이 Reward를 반환
