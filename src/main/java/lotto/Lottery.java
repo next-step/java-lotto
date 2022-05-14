@@ -3,17 +3,17 @@ package lotto;
 import java.util.List;
 
 public class Lottery {
-    public final List<Integer> numbers;
+    public final List<LotteryNumber> numbers;
 
     public Lottery() {
         this.numbers = createLottery();
     }
 
-    private List<Integer> createLottery() {
+    private List<LotteryNumber> createLottery() {
         return LotteryBox.findSixNumbers();
     }
 
-    public Lottery(List<Integer> numbers) {
+    public Lottery(List<LotteryNumber> numbers) {
         this.numbers = numbers;
     }
 
