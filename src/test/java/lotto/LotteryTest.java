@@ -3,6 +3,7 @@ package lotto;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,7 +24,7 @@ public class LotteryTest {
 
     @Test
     void generate6Numbers() {
-        assertThat(lottery.numbers).hasSize(6);
+        assertThat(lottery.lotteryNumbers).hasSize(6);
     }
 
     @Test
@@ -36,18 +37,18 @@ public class LotteryTest {
     @Test
     void shouldFindSixNumbers() {
         assertThat(LotteryBox.findSixNumbers()).hasSize(6);
-        assertThat(lottery.numbers).hasSize(6);
+        assertThat(lottery.lotteryNumbers).hasSize(6);
     }
 
     @Test
     void shouldSortAscend() {
-        assertThat(LotteryBox.sort(Arrays.asList(2, 3, 1))).isEqualTo(Arrays.asList(1, 2, 3));
+        assertThat(LotteryBox.sort(Lottery.toLotteryNumbers(Arrays.asList(2, 3, 1)))).isEqualTo(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3)));
     }
 
     @Test
     void findWin() {
-        Lottery lottery = new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Winning winning = new Winning(new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6)),0);
+        Lottery lottery = new Lottery(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Winning winning = new Winning(new Lottery(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6))),0);
         assertThat(lottery.findWin(winning)).isEqualTo(Reward.of(6, false));
     }
 }

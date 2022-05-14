@@ -3,7 +3,6 @@ package lotto;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -13,24 +12,24 @@ public class LottoControllerTest {
 
     @Test
     void stringShouldBeInteger() {
-        assertThat(lotteryController.toInteger("1")).isEqualTo(1);
+        assertThat(lotteryController.toLotteryNumber("1")).isEqualTo(new LotteryNumber(1));
     }
 
     @Test
     void stringOverRange1to45GetError() {
-        assertThatThrownBy(() -> lotteryController.toInteger("0")).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> lotteryController.toInteger("46")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> lotteryController.toLotteryNumber("0")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> lotteryController.toLotteryNumber("46")).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void stringsShouldBeIntegers() {
-        assertThat(lotteryController.toIntegers(new String[]{"1", "2"})).isEqualTo(Arrays.asList(1, 2));
+        assertThat(lotteryController.toLotteryNumbers(new String[]{"1", "2"})).isEqualTo(Lottery.toLotteryNumbers(Arrays.asList(1, 2)));
     }
 
     @Test
     void inputNumberSeparatedByCommaShouldReturnListOfInteger() {
-        assertThat(lotteryController.parseAnswerNumbers("1, 2 ,  3")).isEqualTo(Arrays.asList(1, 2, 3));
-        assertThat(lotteryController.parseAnswerNumbers("6, 11, 18, 22, 24, 38")).isEqualTo(Arrays.asList(6, 11, 18, 22, 24, 38));
+        assertThat(lotteryController.parseAnswerNumbers("1, 2 ,  3")).isEqualTo(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3)));
+        assertThat(lotteryController.parseAnswerNumbers("6, 11, 18, 22, 24, 38")).isEqualTo(Lottery.toLotteryNumbers(Arrays.asList(6, 11, 18, 22, 24, 38)));
     }
 
 

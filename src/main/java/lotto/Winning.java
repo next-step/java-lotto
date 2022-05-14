@@ -11,14 +11,14 @@ public class Winning {
         this.bonusNumber = bonusNumber;
     }
 
-    public int doesMatchAnswer(int number) {
-        if (this.answer.numbers.contains(number)) {
+    public int doesMatchAnswer(LotteryNumber number) {
+        if (this.answer.lotteryNumbers.contains(number)) {
             return 1;
         }
         return 0;
     }
 
-    public int doesMatchBonus(List<Integer> numbers) {
+    public int doesMatchBonus(List<LotteryNumber> numbers) {
         if (numbers.contains(this.bonusNumber)) {
             return 1;
         }

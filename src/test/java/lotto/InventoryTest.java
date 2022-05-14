@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static lotto.Const.LOTTERY_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -36,9 +37,9 @@ public class InventoryTest {
 
     @Test
     void findWins() {
-        List<Lottery> lotteries = Arrays.asList(new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        List<Lottery> lotteries = Arrays.asList(new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6).stream().map(n -> new LotteryNumber(n)).collect(Collectors.toList())));
         Inventory inventory = new Inventory(lotteries);
-        List<Reward> rewards = inventory.findWins(new Winning(new Lottery(Arrays.asList(1, 2, 3, 14, 15, 16)), 0));
-        assertThat(rewards).isEqualTo(Arrays.asList(Reward.of(3,false)));
+        List<Reward> rewards = inventory.findWins(new Winning(new Lottery(Arrays.asList(1, 2, 3, 14, 15, 16).stream().map(n -> new LotteryNumber(n)).collect(Collectors.toList())), 0));
+        assertThat(rewards).isEqualTo(Arrays.asList(Reward.of(3, false)));
     }
 }

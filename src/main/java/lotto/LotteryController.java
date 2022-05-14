@@ -29,24 +29,24 @@ public class LotteryController {
         return new Lottery(parseAnswerNumbers(scanned));
     }
 
-    public List<Integer> parseAnswerNumbers(String scanned) {
-        return toIntegers(scanned.split("\\s*,\\s*"));
+    public List<LotteryNumber> parseAnswerNumbers(String scanned) {
+        return toLotteryNumbers(scanned.split("\\s*,\\s*"));
     }
 
-    public List<Integer> toIntegers(String[] numberStrings) {
-        List<Integer> list = new ArrayList();
+    public List<LotteryNumber> toLotteryNumbers(String[] numberStrings) {
+        List<LotteryNumber> list = new ArrayList();
         for (String numberString : numberStrings) {
-            list.add(toInteger(numberString));
+            list.add(toLotteryNumber(numberString));
         }
         return list;
     }
 
-    public int toInteger(String numberString) {
+    public LotteryNumber toLotteryNumber(String numberString) {
         int number = Integer.parseInt(numberString);
-        if (number < 1 || number > 45) {
-            throw new IllegalArgumentException("answer number should be between 1 to 45.");
-        }
-        return number;
+//        if (number < 1 || number > 45) {
+//            throw new IllegalArgumentException("answer number should be between 1 to 45.");
+//        }
+        return new LotteryNumber(number);
     }
 
     public List<Reward> findWins(Winning winning) {

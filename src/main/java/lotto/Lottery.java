@@ -1,31 +1,36 @@
 package lotto;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottery {
-    public final List<LotteryNumber> numbers;
+    public final List<LotteryNumber> lotteryNumbers;
 
     public Lottery() {
-        this.numbers = createLottery();
+        this.lotteryNumbers = createLottery();
+    }
+
+    public Lottery(List<LotteryNumber> lotteryNumbers) {
+        this.lotteryNumbers = lotteryNumbers;
+    }
+
+    public static List<LotteryNumber> toLotteryNumbers(List<Integer> numbers) {
+        return numbers.stream().map(number -> new LotteryNumber(number)).collect(Collectors.toList());
     }
 
     private List<LotteryNumber> createLottery() {
         return LotteryBox.findSixNumbers();
     }
 
-    public Lottery(List<LotteryNumber> numbers) {
-        this.numbers = numbers;
-    }
-
     @Override
     public String toString() {
-        return "Lottery{" + "numbers=" + numbers + '}';
+        return "Lottery{" + "numbers=" + lotteryNumbers + '}';
     }
 
     public Reward findWin(Winning winning) {
         int win = 0;
-        for (int number : this.numbers) {
-            win += winning.doesMatchAnswer(number);
+        for (LotteryNumber lotteryNumber : this.lotteryNumbers) {
+            win += winning.doesMatchAnswer(lotteryNumber);
         }
         if (win == 5 && hasBonus(winning)) {
             return Reward.of(5, true);
@@ -34,7 +39,7 @@ public class Lottery {
     }
 
     public boolean hasBonus(Winning winning) {
-        return winning.doesMatchBonus(this.numbers) == 1;
+        return winning.doesMatchBonus(this.lotteryNumbers) == 1;
     }
 }
 
