@@ -67,12 +67,16 @@ public class InputView {
     }
 
     private static void validateLottoCount(int manualLottoCount, LottoTotalPrice lottoTotalPrice) {
-        if (manualLottoCount < ZERO) {
-            throw new IllegalArgumentException(String.format("입력받은 로또 갯수(%d)는 음수일 수 없습니다.", manualLottoCount));
+        if (isNegativeManualLottoCount(manualLottoCount)) {
+            throw new IllegalArgumentException(String.format("입력받은 수동 로또 갯수(%d)는 음수일 수 없습니다.", manualLottoCount));
         }
         if (lottoTotalPrice.lessThan(manualLottoCount * UNIT_LOTTO_PRICE)) {
             throw new IllegalArgumentException(String.format("총 구매 금액을 초과하는 로또 갯수(%d)를 입력 받았습니다.", manualLottoCount));
         }
+    }
+
+    private static boolean isNegativeManualLottoCount(int manualLottoCount) {
+        return manualLottoCount < ZERO;
     }
 
     public static Lotto scanWinningLotto() {

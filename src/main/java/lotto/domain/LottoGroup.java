@@ -54,9 +54,13 @@ public class LottoGroup {
     }
 
     private static void validateLottoCount(int lottoCount) {
-        if (lottoCount < NO_COUNT) {
+        if (isNegativeLottoCount(lottoCount)) {
             throw new IllegalArgumentException(String.format("생성하고자 하는 로또 갯수가 음수일 수 없습니다. 입력한 로또 갯수 : %d", lottoCount));
         }
+    }
+
+    private static boolean isNegativeLottoCount(int lottoCount) {
+        return lottoCount < NO_COUNT;
     }
 
     @Override
