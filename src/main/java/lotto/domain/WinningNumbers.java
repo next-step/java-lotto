@@ -11,12 +11,12 @@ public class WinningNumbers {
 
     public WinningNumbers(String[] winningNumber, int bonusNumber) {
         this.winningNumbers = parseStringWinningNumbers(winningNumber);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = LottoNumber.of(bonusNumber);
     }
 
     public WinningNumbers(List<Integer> winningNumber, int bonusNumber) {
         this.winningNumbers = parseIntegerWinningNumbers(winningNumber);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = LottoNumber.of(bonusNumber);
     }
 
     public List<LottoNumber> winningNumbers() {
@@ -30,7 +30,7 @@ public class WinningNumbers {
     private Lotto parseStringWinningNumbers(String[] strings) {
         List<LottoNumber> winningNumbers = new ArrayList<>();
         for (String string : strings) {
-            winningNumbers.add(new LottoNumber(string));
+            winningNumbers.add(LottoNumber.of(string));
         }
 
         return new Lotto(winningNumbers);
@@ -39,7 +39,7 @@ public class WinningNumbers {
     private Lotto parseIntegerWinningNumbers(List<Integer> numbers) {
         List<LottoNumber> winningNumbers = new ArrayList<>();
         for (int number : numbers) {
-            winningNumbers.add(new LottoNumber(number));
+            winningNumbers.add(LottoNumber.of(number));
         }
 
         return new Lotto(winningNumbers);

@@ -35,7 +35,7 @@ public class Lotto {
     private List<LottoNumber> candidateNumbers() {
         List<LottoNumber> candidateNumbers = new ArrayList<>();
         for (int number = MIN_LOTTO_NUMBER; number <= MAX_LOTTO_NUMBER; number++) {
-            candidateNumbers.add(new LottoNumber(number));
+            candidateNumbers.add(LottoNumber.of(number));
         }
         return candidateNumbers;
     }
@@ -51,7 +51,7 @@ public class Lotto {
     private List<LottoNumber> parseStringArrayToLotto(String[] stringInputs) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (String input : stringInputs) {
-            lottoNumbers.add(new LottoNumber(Integer.parseInt(input)));
+            lottoNumbers.add(LottoNumber.of(Integer.parseInt(input)));
         }
         return lottoNumbers;
     }
@@ -59,7 +59,7 @@ public class Lotto {
     private List<LottoNumber> parseIntegerArrayToLotto(int[] inputs) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int input : inputs) {
-            lottoNumbers.add(new LottoNumber(input));
+            lottoNumbers.add(LottoNumber.of(input));
         }
 
         return lottoNumbers;
