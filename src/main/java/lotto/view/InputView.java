@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.WinningNumbers;
 import lotto.util.InputUtils;
-
-import java.util.List;
 
 public class InputView {
     private static final int EACH_PRICE = 1000;
@@ -31,5 +28,9 @@ public class InputView {
 
     public static String inputWinningNumbers() {
         return InputUtils.scan("지난 주 당첨 번호를 입력해 주세요.");
+    }
+
+    public static int inputBonusNumber() {
+        return InputUtils.scanNumber("보너스 볼을 입력해 주세요.");
     }
 }

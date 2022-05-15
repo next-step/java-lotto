@@ -10,7 +10,7 @@ public class LotteryGamesTest {
     @DisplayName("로또 게임 생성")
     @Test
     void create() {
-        LotteryGames lotteryGames = new LotteryGames();
-        assertThat(lotteryGames.create(10).getLotteryGames()).hasSize(10);
+        LotteryGames lotteryGames = new LotteryGames(10);
+        assertThat(lotteryGames.getLotteryGames()).hasSize(10);
     }
 }
