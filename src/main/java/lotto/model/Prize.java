@@ -1,73 +1,67 @@
 package lotto.model;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.LinkedHashMap;
+import lotto.util.Calculator;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Prize {
+    private final Lotto beforeLotto;
+    private final Number bonusNumber;
+    private final List<Rank> ranks;
 
-    private final Map<Number, Number> countByRank;
-
-    private Prize() {
-        this.countByRank = IntStream
-                .range(0, 7)
-                .boxed()
-                .collect(Collectors.toMap(Number::new, i -> new Number(), (b, n) -> b, LinkedHashMap::new));
+    private Prize(Lotto beforeLotto) {
+        this(beforeLotto, Number.of());
     }
 
-    public static Prize counting(Lotto beforeLotto, List<Lotto> lottoList) {
-        Prize prize = new Prize();
-
-        lottoList.stream()
-                .map(lotto -> lotto.contains(beforeLotto))
-                .forEach(count -> prize.countByRank.computeIfPresent(count, (rank, beforeCount) -> beforeCount.incrementAndGet()));
-
-        return prize;
+    private Prize(Lotto beforeLotto, Number bonusNumber) {
+        this.beforeLotto = beforeLotto;
+        this.bonusNumber = bonusNumber;
+        this.ranks = new ArrayList<>();
     }
 
-    public static Number prizeByRank(Number rank) {
-        if (rank.equals(new Number(4))) {
-            return new Number(50000);
-        }
+    public static Prize init(Lotto beforeLotto) {
+        return new Prize(beforeLotto);
+    }
 
-        if (rank.equals(new Number(5))) {
-            return new Number(1500000);
-        }
+    public static Prize init(Lotto beforeLotto, Number bonusNumber) {
+        return new Prize(beforeLotto, bonusNumber);
+    }
 
-        if (rank.equals(new Number(6))) {
-            return new Number(2000000000);
-        }
+    public Prize classify(List<Lotto> lottoList) {
+        lottoList.forEach(lotto -> {
+            Rank rank = Lotto
+                    .getRank(this.beforeLotto, lotto)
+                    .checkBonus(this.bonusNumber, lotto);
+            this.ranks.add(rank);
+        });
 
-        return new Number(5000);
+        return this;
+    }
+
+    private Number getTotalPrize() {
+        long prize = Arrays.stream(Rank.values())
+                .mapToLong(rank -> rank.getTotalPrizeMoney(this.ranks).longValue())
+                .sum();
+
+        return Number.of(prize);
+    }
+
+    private Number getPrice() {
+        Number left = Number.of(this.ranks.size());
+        Number right = Number.of(1000L);
+
+        return Calculator.multiply(left, right);
+    }
+
+    public List<Rank> getRanks() {
+        return this.ranks;
     }
 
     public double getWinningRate() {
-        long price = this.countByRank
-                .values()
-                .stream()
-                .reduce(Number::add)
-                .orElse(new Number())
-                .getValue() * 1000;
-
-        long prize = this.countByRank
-                .entrySet()
-                .stream()
-                .filter(result -> result.getKey().getValue() > 2)
-                .mapToLong(countByRank -> prizeByRank(countByRank.getKey())
-                        .multiple(countByRank.getValue())
-                        .getValue())
-                .sum();
-
-        return new BigDecimal(prize)
-                .divide(new BigDecimal(price), 2, RoundingMode.HALF_EVEN)
+        return Calculator
+                .divide(this.getTotalPrize(), this.getPrice())
                 .doubleValue();
-    }
-
-    public Map<Number, Number> getCountByRank() {
-        return this.countByRank;
     }
 }

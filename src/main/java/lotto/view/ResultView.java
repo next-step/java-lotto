@@ -3,45 +3,58 @@ package lotto.view;
 import lotto.model.Lotto;
 import lotto.model.Number;
 import lotto.model.Prize;
+import lotto.model.Rank;
 
-import java.util.function.Function;
+import java.util.Arrays;
+import java.util.function.UnaryOperator;
+
+import static lotto.model.Rank.MISS;
+import static lotto.model.Rank.SECOND;
 
 public class ResultView {
 
-    private static final String RESULT_MESSAGE = String.format("%s당첨 통계%s---------", System.lineSeparator(), System.lineSeparator());
+    private static final String FORMAT = "%s개 일치(%s원)- %s개";
+    private static final String BONUS_FORMAT = "%s개, 보너스 볼 일치(%s원)- %s개";
+    private static final String RESULT_SEPARATE_MESSAGE = String.format("당첨통계%s---------", System.lineSeparator());
     private static final String LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
-    private static final Function<Double, String> WINNING_RATE_MESSAGE = winningRate -> String.format("총 수익률은 %s입니다.", winningRate);
+    private static final UnaryOperator<String> RESULT_MESSAGE = winningRate -> String.format("총 수익률은 %s입니다.", winningRate);
 
-    private ResultView() {
+    private static void print(Rank rank, Number totalCorrectCount) {
+        String format = FORMAT;
+        if (rank.equals(SECOND)) {
+            format = BONUS_FORMAT;
+        }
+        String message = String.format(format, rank.getCorrectCount(), rank.getPrizeMoney(), totalCorrectCount);
+        print(message);
+    }
+
+    private static void print(double winningRate) {
+        String message = RESULT_MESSAGE.apply(String.valueOf(winningRate));
+        if (winningRate < 1) {
+            message += LOSS_MESSAGE;
+        }
+
+        print(message);
+    }
+
+    public static void print(Prize prize) {
+        print();
+        print(RESULT_SEPARATE_MESSAGE);
+        Arrays.stream(Rank.values())
+                .filter(rank -> !rank.equals(MISS))
+                .forEach(rank -> ResultView.print(rank, rank.getTotalCorrectCount(prize.getRanks())));
+        print(prize.getWinningRate());
+    }
+
+    public static void print() {
+        print("");
+    }
+
+    public static void print(Lotto lotto) {
+        print(lotto.toString());
     }
 
     public static void print(String message) {
         System.out.println(message);
-    }
-
-    public static void printLotto(Lotto lotto) {
-        System.out.println(lotto.getNumbers());
-    }
-
-    public static void printPrize(Prize prize) {
-        print(RESULT_MESSAGE);
-        prize.getCountByRank()
-                .entrySet()
-                .stream()
-                .filter(result -> result.getKey().getValue() > 2)
-                .forEach(result -> printResult(result.getKey(), Prize.prizeByRank(result.getKey()), result.getValue()));
-
-        double winningRate = prize.getWinningRate();
-        String winningRateMessage = WINNING_RATE_MESSAGE.apply(winningRate);
-
-        if (winningRate < 1) {
-            winningRateMessage += LOSS_MESSAGE;
-        }
-
-        print(winningRateMessage);
-    }
-
-    public static void printResult(Number rank, Number prize, Number resultCount) {
-        print(String.format("%s개 일치 (%s원)- %s개", rank, prize, resultCount));
     }
 }

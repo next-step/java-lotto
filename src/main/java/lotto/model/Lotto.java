@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,52 +8,72 @@ import java.util.stream.IntStream;
 
 public class Lotto {
 
-    private static final List<Integer> LOTTO_NUMBERS = IntStream.range(1, 46).boxed().collect(Collectors.toList());
-    private final List<Number> numbers;
+    private static final int START_NUMBER = 1;
+    private static final int END_NUMBER = 46;
+    private static final int START_INDEX = 0;
+    private static final int END_INDEX = 6;
+    private List<Number> lotto;
 
-    public Lotto() {
-        this(new ArrayList<>());
+    private Lotto() {
+        this.lotto = new ArrayList<>();
     }
 
-    private Lotto(List<Number> numbers) {
-        this.numbers = numbers;
+    private Lotto(List<Number> lotto) {
+        this.lotto = lotto;
     }
 
-    public static Lotto draw() {
-        Collections.shuffle(LOTTO_NUMBERS);
-        List<Integer> shuffleResult = LOTTO_NUMBERS.subList(0, 6);
-        Collections.sort(shuffleResult);
+    private Lotto shuffle(List<Integer> numbers) {
+        Collections.shuffle(numbers);
 
-        List<Number> numbers = shuffleResult
+        this.lotto = numbers
+                .subList(START_INDEX, END_INDEX)
                 .stream()
-                .map(Number::new)
+                .sorted()
+                .map(Number::of)
                 .collect(Collectors.toList());
 
-        return new Lotto(numbers);
+        return this;
     }
 
-    public static Lotto draw(List<Number> numbers) {
-        return new Lotto(numbers);
+    public static Lotto auto() {
+        List<Integer> numbers = IntStream
+                .range(START_NUMBER, END_NUMBER)
+                .boxed()
+                .collect(Collectors.toList());
+
+        return new Lotto()
+                .shuffle(numbers);
     }
 
-    public Number contains(Collection<Number> numbers) {
-        long count = numbers
+    public static Lotto manual(List<Integer> numbers) {
+        List<Number> lotto = numbers
                 .stream()
-                .filter(this::contains)
+                .sorted()
+                .map(Number::of)
+                .collect(Collectors.toList());
+
+        return new Lotto(lotto);
+    }
+
+    public Number match(List<Number> target) {
+        long correctCount = this.lotto
+                .stream()
+                .filter(target::contains)
                 .count();
 
-        return new Number(count);
+        return Number.of(correctCount);
     }
 
-    public Number contains(Lotto lotto) {
-        return this.contains(lotto.numbers);
+    public static Rank getRank(Lotto criteria, Lotto target) {
+        return Rank.valueOf(criteria.match(target.lotto));
     }
 
-    public boolean contains(Number number) {
-        return this.numbers.contains(number);
+    public List<Number> getLotto() {
+        return this.lotto;
     }
 
-    public List<Number> getNumbers() {
-        return this.numbers;
+    @Override
+    public String toString() {
+        return this.lotto.toString();
     }
 }

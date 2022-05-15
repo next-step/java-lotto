@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.view.ResultView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,47 +8,69 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoTest {
 
-    List<Number> numbers;
+    List<Integer> integers;
+    Number[] numbers;
 
     @BeforeEach
     void beforeEach() {
-        this.numbers = IntStream.range(1, 46)
-                .mapToObj(Number::new)
+        this.integers = IntStream
+                .range(1, 46)
+                .boxed()
                 .collect(Collectors.toList());
+
+        this.numbers = this.integers
+                .stream()
+                .map(Number::of)
+                .toArray(Number[]::new);
     }
 
     @Test
-    @DisplayName("로또 생성")
-    void createLotto() {
-        assertThat(new Lotto().getNumbers()).hasSize(0);
+    @DisplayName("로또 구매 - 자동")
+    void auto() {
+        assertThat(Lotto.auto().getLotto()).hasSize(6).containsAnyOf(this.numbers);
     }
 
     @Test
-    @DisplayName("로또 번호 자동 추첨")
-    void autoDraw() {
-        assertThat(Lotto.draw().getNumbers()).hasSize(6).containsAnyOf(this.numbers.toArray(new Number[0]));
+    @DisplayName("로또 구매 - 수동")
+    void manual() {
+        List<Integer> integers = this.integers.subList(0, 6);
+        List<Number> numbers = integers
+                .stream()
+                .map(Number::of)
+                .collect(Collectors.toList());
+
+        assertThat(Lotto.manual(integers).getLotto()).hasSize(6).containsAll(numbers);
     }
 
     @Test
-    @DisplayName("번호 존재 여부 확인")
-    void contains() {
-        List<Number> numbers = this.numbers.subList(0, 6);
+    @DisplayName("구매한 로또 출력 로직 성능 테스트")
+    void performance() {
+        long count = 100000;
+        String message = "시작 : %s, 종료 : %s, 소요시간 : %s, 크기 : %s";
 
-        assertAll(() -> assertThat(Lotto.draw(numbers).contains(new Number(6))).isTrue(),
-                () -> assertThat(Lotto.draw(numbers).contains(new Number(7))).isFalse());
-    }
+        // Stream.generate()
+        long start = System.currentTimeMillis();
+        List<Lotto> lottoList_1 = Stream
+                .generate(Lotto::auto)
+                .limit(count)
+                .collect(Collectors.toList());
+        long end = System.currentTimeMillis();
+        ResultView.print(String.format(message, start, end, Math.subtractExact(end, start), lottoList_1.size()));
 
-    @Test
-    @DisplayName("로또 당첨 결과 확인")
-    void isWin() {
-        List<Number> numbers = this.numbers.subList(0, 6);
-
-        assertThat(Lotto.draw(numbers).contains(numbers)).isEqualTo(new Number(6));
+        // IntStream.range()
+        start = System.currentTimeMillis();
+        List<Lotto> lottoList_2 = LongStream
+                .range(0, count)
+                .mapToObj(index -> Lotto.auto())
+                .collect(Collectors.toList());
+        end = System.currentTimeMillis();
+        ResultView.print(String.format(message, start, end, Math.subtractExact(end, start), lottoList_2.size()));
     }
 }

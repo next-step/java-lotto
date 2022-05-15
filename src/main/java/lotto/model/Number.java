@@ -1,34 +1,52 @@
 package lotto.model;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Number {
+    private final BigDecimal value;
 
-    private long value;
-
-    public Number() {
+    private Number(String value) {
+        this(new BigDecimal(value));
     }
 
-    public Number(long value) {
+    private Number(BigDecimal value) {
         this.value = value;
     }
 
-    public Number incrementAndGet() {
-        this.value++;
-        return this;
+    public static Number of() {
+        return new Number(BigDecimal.ZERO);
     }
 
-    public Number add(Number number) {
-        long value = this.value + number.value;
+    public static Number of(String value) {
         return new Number(value);
     }
 
-    public Number multiple(Number number) {
-        long value = this.value * number.value;
+    public static Number of(BigDecimal value) {
         return new Number(value);
     }
 
-    public long getValue() {
+    public static Number of(long value) {
+        return of(String.valueOf(value));
+    }
+
+    public static Number of(double value) {
+        return of(String.valueOf(value));
+    }
+
+    public boolean isZero() {
+        return this.value.equals(BigDecimal.ZERO);
+    }
+
+    public long longValue() {
+        return this.value.longValue();
+    }
+
+    public double doubleValue() {
+        return this.value.doubleValue();
+    }
+
+    public BigDecimal getValue() {
         return this.value;
     }
 
@@ -37,7 +55,7 @@ public class Number {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Number number = (Number) o;
-        return value == number.value;
+        return Objects.equals(this.doubleValue(), number.doubleValue());
     }
 
     @Override
@@ -47,6 +65,6 @@ public class Number {
 
     @Override
     public String toString() {
-        return String.valueOf(this.value);
+        return this.value.toPlainString();
     }
 }

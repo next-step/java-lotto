@@ -7,37 +7,39 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Game {
-    private static final String BUY_EXCEPTION_MESSAGE = "로또 구매 가격은 장당 1000원입니다.";
-    private List<Lotto> lottoList;
+    private static final String BUY_MESSAGE = "%s개를 구매했습니다.";
+    private final List<Lotto> lottoList;
 
-    private Game() {
+    private Game(List<Lotto> lottoList) {
+        this.lottoList = lottoList;
     }
 
-    public static Game buyingLotto(int prise) {
-        Game game = new Game();
-        int lottoCount = game.checkPrise(prise);
+    public static Game pay(int price) {
+        ResultView.print(String.format(BUY_MESSAGE, price));
 
-        game.lottoList = IntStream.range(0, lottoCount)
-                .mapToObj(count -> Lotto.draw())
-                .peek(ResultView::printLotto)
+        int count = price / 1000;
+        List<Lotto> lottoList = IntStream
+                .range(0, count)
+                .mapToObj(i -> Lotto.auto())
+                .peek(ResultView::print)
                 .collect(Collectors.toList());
 
-        return game;
+        return new Game(lottoList);
     }
 
-    public Prize result(Lotto beforeLotto) {
-        return Prize.counting(beforeLotto, this.lottoList);
+    public Prize findWinners(Lotto beforeLotto, Number bonusNumber) {
+        return Prize
+                .init(beforeLotto, bonusNumber)
+                .classify(this.getLottoList());
+    }
+
+    public Prize findWinners(Lotto beforeLotto) {
+        return Prize
+                .init(beforeLotto)
+                .classify(this.getLottoList());
     }
 
     public List<Lotto> getLottoList() {
         return this.lottoList;
-    }
-
-    private int checkPrise(int prise) {
-        int lottoCount = prise / 1000;
-        if (prise < 1000 || prise % 1000 != 0) {
-            throw new IllegalArgumentException(BUY_EXCEPTION_MESSAGE);
-        }
-        return lottoCount;
     }
 }
