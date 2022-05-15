@@ -1,57 +1,53 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.List;
 
 public class Lotto {
     public static final int LOTTO_UNIT_NUMBER = 6;
-    public static final int LOTTO_MAX_NUMBER = 45;
+    public static final int LOTTO_ALL_NUMBER = 45;
     public static final int LOTTO_MINIMUM_NUMBER = 1;
+    public static final int COUNT_INITIAL_VALUE = 0;
 
-    private final Integer[][] lottoNumber;
-    private HashMap<String, Integer> Winners = new HashMap<>();
+    private List<Integer> lotto = new ArrayList<>();
 
-    public Lotto(int lottoOfNumber) {
-        this.lottoNumber = new Integer[lottoOfNumber][LOTTO_UNIT_NUMBER];
-        for (int i = 0; i < lottoOfNumber; i++) {
-            generateLotto(i);
+    public Lotto() {
+        List<Integer> lottoNumber = new ArrayList<>();
+        for (int i = LOTTO_MINIMUM_NUMBER; i <= LOTTO_ALL_NUMBER; i++) {
+            lottoNumber.add(i);
         }
-    }
+        Collections.shuffle(lottoNumber);
 
-    public Lotto(Integer[][] lottoNumber) {
-        this.lottoNumber = lottoNumber;
-
-    }
-
-
-    private void generateLotto(int rowIndex) {
         for (int i = 0; i < LOTTO_UNIT_NUMBER; i++) {
-            lottoNumber[rowIndex][i] = ((int) (Math.random() * LOTTO_MAX_NUMBER)) + LOTTO_MINIMUM_NUMBER;
+            lotto.add(lottoNumber.get(i));
         }
+        Collections.sort(lotto);
+
     }
 
-
-    public void findWinners(Integer[] answer) {
-        for (int i = 0; i < lottoNumber.length; i++) {
-            int count = 0;
-            for (int j = 0; j < LOTTO_UNIT_NUMBER; j++) {
-                if (Arrays.asList(answer).contains(lottoNumber[i][j])) {
-                    count++;
-                }
-            }
-            if (count >= 3) {
-                Winners.put(count + "개", Winners.getOrDefault(count + "개", 0) + 1);
-            }
-        }
+    public Lotto(List<Integer> lotto) {
+        this.lotto = lotto;
     }
 
-    public HashMap<String, Integer> getWinners() {
-        return Winners;
+    public int numberOfSame(Lotto lotto) {
+        int count = COUNT_INITIAL_VALUE;
+        for (int i = 0; i < LOTTO_UNIT_NUMBER; i++) {
+            count = numberOfSameLotto(lotto, i, count);
+        }
+        return count;
+    }
+
+    private int numberOfSameLotto(Lotto lotto, int index, int count) {
+        if (this.lotto.contains(lotto.lotto.get(index))) {
+            return ++count;
+        }
+        return count;
     }
 
     @Override
     public String toString() {
-        return Arrays.deepToString(lottoNumber);
+        return lotto.toString();
     }
-
 }

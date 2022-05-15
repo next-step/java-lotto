@@ -1,9 +1,9 @@
 package lotto;
 
-import lotto.domain.Lotto;
+import lotto.domain.*;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -11,28 +11,31 @@ import static org.assertj.core.api.Assertions.*;
 public class LottoTest {
     @Test
     void 로또번호생성() {
-        Lotto lotto = new Lotto(3);
-        assertThat(lotto.toString().split("],").length).isEqualTo(3);
+        Lottos lottos = new Lottos(3);
+        assertThat(lottos.toString().split("]\n").length).isEqualTo(3);
+
     }
 
-    /*
-    for(char c: t.toCharArray()){
-            tm.put(c,tm.getOrDefault(c,0)+1);
-        }
-    */
     @Test
     void 당첨자찾기() {
-        Integer[][] answer = {{1, 2, 3, 4, 5, 6}};
-        Lotto lotto = new Lotto(answer);
+        List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(winningNumber);
+        Winners winners = new Winners();
+        winners.addWinner(6);
 
-        HashMap<String, Integer> winners = new HashMap<>();
-        winners.put("6개", 1);
-        lotto.findWinners(answer[0]);
-        assertThat(lotto.getWinners()).isEqualTo(winners);
+        WinningNumbers winningNumbers = new WinningNumbers(lotto);
+        winningNumbers.findWinners(lotto);
+        assertThat(winningNumbers.isWinners(winners)).isTrue();
+
     }
 
     @Test
     void 총수익률계산() {
+        int buyMoney = 10000;
 
+        Winners winners = new Winners();
+        winners.addWinner(3);
+
+        assertThat(winners.revenue(buyMoney)).isEqualTo(0.50);
     }
 }
