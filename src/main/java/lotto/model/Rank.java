@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.util.Calculator;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -62,6 +60,6 @@ public enum Rank {
                 .filter(this::equals)
                 .count();
 
-        return Calculator.multiply(Number.of(count), this.prizeMoney);
+        return Number.of(count).multiply(this.prizeMoney);
     }
 }

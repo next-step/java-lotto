@@ -1,6 +1,5 @@
 package lotto.model;
 
-import lotto.util.Calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -38,14 +37,14 @@ public class NumberTest {
         Number right = Number.of(50);
 
         assertAll(
-                () -> assertThat(Calculator.add(left, right)).isEqualTo(Number.of(150)),
-                () -> assertThat(Calculator.add(right, left)).isEqualTo(Number.of(150)),
-                () -> assertThat(Calculator.subtract(left, right)).isEqualTo(Number.of(50)),
-                () -> assertThat(Calculator.subtract(right, left)).isEqualTo(Number.of(-50)),
-                () -> assertThat(Calculator.multiply(left, right)).isEqualTo(Number.of(5000)),
-                () -> assertThat(Calculator.multiply(right, left)).isEqualTo(Number.of(5000)),
-                () -> assertThat(Calculator.divide(left, right)).isEqualTo(Number.of(2.0)),
-                () -> assertThat(Calculator.divide(right, left)).isEqualTo(Number.of(0.5)));
+                () -> assertThat(left.add(right)).isEqualTo(Number.of(150)),
+                () -> assertThat(right.add(left)).isEqualTo(Number.of(150)),
+                () -> assertThat(left.subtract(right)).isEqualTo(Number.of(50)),
+                () -> assertThat(right.subtract(left)).isEqualTo(Number.of(-50)),
+                () -> assertThat(left.multiply(right)).isEqualTo(Number.of(5000)),
+                () -> assertThat(right.multiply(left)).isEqualTo(Number.of(5000)),
+                () -> assertThat(left.divide(right)).isEqualTo(Number.of(2.0)),
+                () -> assertThat(right.divide(left)).isEqualTo(Number.of(0.5)));
     }
 
     @Test
@@ -55,7 +54,7 @@ public class NumberTest {
         Number right = Number.of(50);
 
         assertAll(
-                () -> assertThat(Calculator.min(left, right)).isEqualTo(right),
-                () -> assertThat(Calculator.max(right, left)).isEqualTo(left));
+                () -> assertThat(left.min(right)).isEqualTo(right),
+                () -> assertThat(right.max(left)).isEqualTo(left));
     }
 }
