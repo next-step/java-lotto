@@ -18,11 +18,11 @@ public class Winning {
         return 0;
     }
 
-    public int doesMatchBonus(List<LotteryNumber> numbers) {
+    public Reward doesMatchBonus(List<LotteryNumber> numbers) {
         if (numbers.contains(this.bonusNumber)) {
-            return 1;
+            return Reward.of(5, true);
         }
-        return 0;
+        return null;
     }
 
 }

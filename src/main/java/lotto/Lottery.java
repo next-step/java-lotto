@@ -32,17 +32,15 @@ public class Lottery {
         for (LotteryNumber lotteryNumber : this.lotteryNumbers) {
             win += winning.doesMatchAnswer(lotteryNumber);
         }
-        if (win == 5 && hasBonus(winning)) {
-            return Reward.of(5, true);
+        if (win == 5 && hasBonus(winning) != null) {
+            return hasBonus(winning);
         }
         return Reward.of(win, false);
     }
 
-    public boolean hasBonus(Winning winning) {
-        return winning.doesMatchBonus(this.lotteryNumbers) == 1;
+    public Reward hasBonus(Winning winning) {
+        return winning.doesMatchBonus(this.lotteryNumbers);
     }
-
-
 }
 
 

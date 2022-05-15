@@ -223,5 +223,5 @@ Earning rate: 2142.8571428571427
 - [x] Integer (number) 를 객체로 포장
 - [x] 사용되지 않는 getMoney() 제거
 - [x] LotteryController 부분을 하나의 메서드로 묶기
+- [x] Winning이 Reward를 반환
 - [ ] 각 클래스에 대한 패키지 분리
-- [ ] Winning이 Reward를 반환
