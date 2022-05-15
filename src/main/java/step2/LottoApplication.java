@@ -1,6 +1,8 @@
 package step2;
 
 import step2.domain.*;
+import step2.domain.impl.AutoProvider;
+import step2.domain.impl.ManualProvider;
 import step2.view.InputView;
 import step2.view.OutPutView;
 
@@ -16,18 +18,24 @@ public class LottoApplication {
         OutPutView outPutView = new OutPutView();
 
         int purchaseAmount = inputView.askPurchaseAmount();
-        int manualCount = inputView.askManualCount();
-        PurchaseMoney purchaseMoney = new PurchaseMoney(purchaseAmount, manualCount);
+        PurchaseMoney purchaseMoney = new PurchaseMoney(purchaseAmount);
 
+        PurchaseCount manualCount = new PurchaseCount(inputView.askManualCount());
         List<String> manualNumbers = inputView.askManualNumbers(manualCount);
 
-        List<Lotto> manualLottos = purchaseMoney.buyManual(manualNumbers);
-        List<Lotto> autoLottos = purchaseMoney.buyAuto();
-        outPutView.showPurchaseCount(manualLottos.size(), autoLottos.size());
+        ManualProvider manualProvider = new ManualProvider(manualCount, manualNumbers);
+        AutoProvider autoProvider = new AutoProvider();
 
-        List<Lotto> collect = Stream.concat(manualLottos.stream(), autoLottos.stream())
+        List<Lotto> manualLottos = manualProvider.generate();
+        ChangeMoney changeMoney = purchaseMoney.buyManual(manualLottos.size());
+        List<Lotto> autoLottos = autoProvider.generate(changeMoney);
+
+        List<Lotto> merge = Stream.concat(manualLottos.stream(), autoLottos.stream())
                 .collect(Collectors.toList());
-        PurchaseList purchaseList = new PurchaseList(collect);
+
+        PurchaseList purchaseList = new PurchaseList(merge);
+
+        outPutView.showPurchaseCount(manualCount.getValue(), changeMoney.getRemainCount().getValue());
         outPutView.show(purchaseList.toString());
 
         String winnerInput = inputView.askWinnerInput();
