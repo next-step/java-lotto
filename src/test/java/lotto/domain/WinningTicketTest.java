@@ -114,4 +114,19 @@ class WinningTicketTest {
         assertThat(rank_5).isEqualTo(Rank.FIFTH);
         assertThat(rank_6).isEqualTo(Rank.LOSE);
     }
+
+    @Test
+    @DisplayName("생성된 당첨 티켓과 보너스 넘버가 같을 경우 true 반환")
+    void returnTrueWhenGeneratedWinningTicketHasSameBonusNumber() {
+        Set<LottoNumber> lottoNumbers = Set.of(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6));
+        WinningTicket winningTicket = new WinningTicket(lottoNumbers, new LottoNumber(7));
+
+        assertThat(winningTicket.isMatchBonusNumber(new LottoNumber(7))).isTrue();
+    }
 }

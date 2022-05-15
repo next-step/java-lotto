@@ -1,6 +1,7 @@
-package lotto.domain.strategy;
+package lotto.strategy;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.strategy.LottoNumberGenerateStrategy;
 import lotto.util.InputUtil;
 
 import java.util.Scanner;

@@ -44,7 +44,7 @@ public class Money {
         long longValue;
         try {
             longValue = Long.parseLong(input);
-        } catch (RuntimeException e) {
+        } catch (NumberFormatException e) {
             throw new NumberFormatException(INVALID_READ_MONEY_ERROR_MESSAGE);
         }
         return longValue;
