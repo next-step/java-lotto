@@ -13,6 +13,29 @@ public class Amount {
 		this.amount = Parser.toLong(amount);
 	}
 
+
+	public long divide(Amount lottoPrice) {
+		validateZero(lottoPrice);
+		if (this.amount % lottoPrice.amount != 0) {
+			throw new IllegalArgumentException(this.amount + "원은 " + lottoPrice.amount + "원의 배수가 아닙니다.");
+		}
+		return this.amount / lottoPrice.amount;
+	}
+
+	public long value() {
+		return amount;
+	}
+
+	public long multi(long count) {
+		return this.amount * count;
+	}
+
+	private void validateZero(Amount lottoPrice) {
+		if (lottoPrice.amount == 0 || this.amount == 0) {
+			throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
+		}
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -33,27 +56,5 @@ public class Amount {
 	@Override
 	public String toString() {
 		return String.valueOf(amount);
-	}
-
-	public long divide(Amount lottoPrice) {
-		validateZero(lottoPrice);
-		if (this.amount % lottoPrice.amount != 0) {
-			throw new IllegalArgumentException(this.amount + "원은 " + lottoPrice.amount + "원의 배수가 아닙니다.");
-		}
-		return this.amount / lottoPrice.amount;
-	}
-
-	private void validateZero(Amount lottoPrice) {
-		if (lottoPrice.amount == 0 || this.amount == 0) {
-			throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
-		}
-	}
-
-	public long value() {
-		return amount;
-	}
-
-	public long multi(long count) {
-		return this.amount * count;
 	}
 }
