@@ -10,7 +10,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 public class LottoRankTest {
 
 	@DisplayName("일치수량에 따라 당첨등수 찾기")
-	// @Test
 	@CsvSource(value = {"6:FIRST", "5:SECOND", "4:THIRD", "3:FOURTH", "2:NOTHING", "1:NOTHING", "0:NOTHING"}, delimiter = ':')
 	@ParameterizedTest
 	public void test(int sameQuantity, LottoRank lottoRank) {

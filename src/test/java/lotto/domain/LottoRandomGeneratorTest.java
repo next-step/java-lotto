@@ -12,7 +12,7 @@ public class LottoRandomGeneratorTest {
 	@ValueSource(ints = {2, 6, 8})
 	@ParameterizedTest
 	public void when_GivenLottoSize_Expected_GenerateLotto(int size) {
-		assertThat(LottoRandomGenerator.generate(size).size())
-			.isEqualTo(size);
+		assertThat(LottoRandomGenerator.generate(size))
+			.hasSize(size);
 	}
 }

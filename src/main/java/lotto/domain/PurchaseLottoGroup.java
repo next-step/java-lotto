@@ -8,15 +8,9 @@ import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
 public class PurchaseLottoGroup {
-	private final List<Lotto> lottoList;
-
-	public PurchaseLottoGroup() {
-		lottoList = new ArrayList<>();
-	}
+	private final List<Lotto> lottoList = new ArrayList<>();
 
 	public PurchaseLottoGroup(long quantity) {
-		this();
-
 		lottoList.addAll(LongStream.rangeClosed(1, quantity)
 			.mapToObj(num -> new Lotto())
 			.collect(Collectors.toList()));
@@ -26,16 +20,16 @@ public class PurchaseLottoGroup {
 		return lottoList.size();
 	}
 
+	public List<LottoRank> ranking(WinningNumber winningNumber) {
+		return lottoList.stream()
+			.map(lotto -> LottoRank.findBySameQuantity(winningNumber.matchQuantity(lotto)))
+			.collect(Collectors.toList());
+	}
+
 	@Override
 	public String toString() {
 		return lottoList.stream()
 			.map(Lotto::toString)
 			.collect(Collectors.joining("\n"));
-	}
-
-	public List<LottoRank> ranking(WinningNumber winningNumber) {
-		return lottoList.stream()
-			.map(lotto -> LottoRank.findBySameQuantity(winningNumber.matchQuantity(lotto)))
-			.collect(Collectors.toList());
 	}
 }

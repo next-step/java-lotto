@@ -4,10 +4,12 @@ import exception.StringParsingToNumberException;
 
 public class Parser {
 
+	private Parser() {}
+
 	public static int toInt(String value) {
 		try {
 			return Integer.parseInt(value);
-		} catch (Exception e) {
+		} catch (NumberFormatException e) {
 			throw new StringParsingToNumberException("정수로 변환할 수 없는 값입니다. [value=" + value + "]");
 		}
 	}
@@ -15,7 +17,7 @@ public class Parser {
 	public static long toLong(String value) {
 		try {
 			return Long.parseLong(value);
-		} catch (Exception e) {
+		} catch (NumberFormatException e) {
 			throw new StringParsingToNumberException("정수로 변환할 수 없는 값입니다.");
 		}
 	}

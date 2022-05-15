@@ -16,7 +16,7 @@ public class LottoNumber {
 
 	public LottoNumber(String number) {
 		validateTextNumber(number);
-		this.number = Parser.toInt(number);
+		this.number = Parser.toInt(number.trim());
 	}
 
 	private void validateTextNumber(String number) {

@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class WinningNumber {
-	public final String DELIMITER = ",";
+	public static final String DELIMITER = ",";
 	public static final int NUMBER_SIZE = 6;
 	private final List<LottoNumber> numbers;
 
