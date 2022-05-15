@@ -24,7 +24,7 @@ public class Lottery {
 
     @Override
     public String toString() {
-        return "Lottery{" + "numbers=" + lotteryNumbers + '}';
+        return lotteryNumbers + "";
     }
 
     public Reward findWin(Winning winning) {
@@ -41,6 +41,8 @@ public class Lottery {
     public boolean hasBonus(Winning winning) {
         return winning.doesMatchBonus(this.lotteryNumbers) == 1;
     }
+
+
 }
 
 

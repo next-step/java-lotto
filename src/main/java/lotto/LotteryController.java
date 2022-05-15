@@ -82,4 +82,15 @@ public class LotteryController {
         String scanned = InputView.scan("Put bonus number.");
         return Integer.parseInt(scanned);
     }
+
+    public void start() {
+        Money money = this.scanMoney();
+        this.createLotteries(money);
+        this.printLotteries();
+        Winning winning = new Winning(this.scanAnswer(), this.scanBonus());
+        this.saveWins(this.findWins(winning));
+        this.printWinStatistics();
+        this.printEarningRate(money);
+        this.printEarned(money);
+    }
 }
