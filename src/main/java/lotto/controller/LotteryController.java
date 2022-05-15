@@ -47,9 +47,6 @@ public class LotteryController {
 
     public LotteryNumber toLotteryNumber(String numberString) {
         int number = Integer.parseInt(numberString);
-//        if (number < 1 || number > 45) {
-//            throw new IllegalArgumentException("answer number should be between 1 to 45.");
-//        }
         return new LotteryNumber(number);
     }
 
