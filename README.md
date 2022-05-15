@@ -56,7 +56,7 @@
 - [X] else 예약어를 쓰지 않는다.
     - [X] 힌트: if 조건절에서 값을 return 하는 방식으로 구현하면 else 를 사용하지 않아도 된다.
     - [X] else 를 쓰지 말라고 하니 switch/case 로 구현하는 경우가 있는데 switch/case 도 허용하지 않는다.
-- [ ] 예외 처리를 통해 에러가 발생하지 않도록 한다.
+- [X] 예외 처리를 통해 에러가 발생하지 않도록 한다.
     - 사용자가 잘못된 값을 입력했을 때 java exception 으로 에러 처리를 한다.
     - java 8 에 추가된 Optional 을 적용해 NullPointerException 이 발생하지 않도록 한다.
 - [X] 모든 원시값과 문자열을 포장한다.
