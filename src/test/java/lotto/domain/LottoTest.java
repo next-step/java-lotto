@@ -7,12 +7,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTest {
 
+    @Test
+    @DisplayName("수동 Lotto 생성 확인")
+    void createByHand() {
+        Lotto lotto = new Lotto(new int[]{1, 5, 13, 24, 35, 45});
+        assertThat(lotto).isEqualTo(new Lotto(new int[]{1, 5, 13, 24, 35, 45}));
+    }
 
     @Test
-    @DisplayName("수동 Lotton 생성 확인")
-    void createByHand() {
-        Lotto lotto = new Lotto(new Integer[]{1, 5, 13, 24, 35, 45});
-        assertThat(lotto).isEqualTo(new Lotto(new Integer[]{1, 5, 13, 24, 35, 45}));
+    @DisplayName("로또 번호 확인")
+    void hasNumbers() {
+        Lotto lotto = new Lotto(new int[]{1, 5, 13, 24, 35, 45});
+        assertThat(lotto.hasNumbers(new LottoNumber(1))).isTrue();
     }
 
 }
