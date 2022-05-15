@@ -17,6 +17,13 @@ public class LottoResult {
         return rankMap.get(rank).intValue();
     }
 
+    public int getResult(Rank rank) {
+        if(rankMap.get(rank) == null){
+            return 0;
+        }
+        return rankMap.get(rank).intValue();
+    }
+
 
     public double getProfitRate(Money buy) {
         Money profit = new Money();

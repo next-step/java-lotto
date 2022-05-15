@@ -46,6 +46,10 @@ public enum Rank {
         return reward;
     }
 
+    public int getCoincidence() {
+        return coincidence;
+    }
+
     public boolean isWin(){
         return this != NONE;
     }
