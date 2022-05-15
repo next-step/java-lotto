@@ -29,5 +29,6 @@ public class LottoController {
 		RankingResult rankingResult = new RankingResult(ranking);
 
 		OutputView.printWinningStatistics(rankingResult);
+		OutputView.printYield(rankingResult.calculateYield());
 	}
 }
