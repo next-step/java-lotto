@@ -122,10 +122,11 @@ Earning rate: Infinity
 ```
 
 ### Requested Changes
+
 - [x] 1~45 box 생성 별도 분리
 - [x] 로또 번호 생성 부분 별도 객체 분리해서 Lottery 에 전달
 - [x] findWins를 반환 형태로 변환하여 테스트
-  - 테스트는 작성하였으나 반환형태가 아닌 인스턴스 변수활용 
+    - 테스트는 작성하였으나 반환형태가 아닌 인스턴스 변수활용
 - [x] 적자, 흑자 여부 출력
 - [x] 로또 번호가 중복되지 않는 유일한 45개의 수인지 테스트 추가
 - [x] 1000은 const 선언
@@ -133,11 +134,94 @@ Earning rate: Infinity
 - [x] 로또 당첨 등급을 Map 대신 Enum을 사용해서 정의
 - [x] 2단 indent 제거
 - [x] 축약된 변수명 제거
-- [x] Controller포함 모든 Class의 3개 이하로 인스턴스 변수 줄이기
+- [x] Controller 포함 모든 Class 의 3개 이하로 인스턴스 변수 줄이기
 - [x] 1단계 string_calculator 추가 수정
-  - [x] 연산(계산식)도 BiFunction을 활용해서 Operator Enum이 가지게 적용
-  - [x] 상수와 멤버 변수의 선언 순서 변경
-  - [x] Interface Value 제거 
-  - [x] Class Integer 제거
-  - [x] step1: 규칙 7: 3개 이상의 인스턴스 변수를 가진 클래스를 쓰지 않는다.
+    - [x] 연산(계산식)도 BiFunction 을 활용해서 Operator Enum이 가지게 적용
+    - [x] 상수와 멤버 변수의 선언 순서 변경
+    - [x] Interface Value 제거
+    - [x] Class Integer 제거
+    - [x] step1: 규칙 7: 3개 이상의 인스턴스 변수를 가진 클래스를 쓰지 않는다.
 - [x] step2: 규칙 7: 3개 이상의 인스턴스 변수를 가진 클래스를 쓰지 않는다.
+
+### Requested Changes phase2
+
+- [x] BiFunction 를 무명 -> 유명 람다로 수정
+- [x] WalletTest 의 객체를 개별로 선언하고 Given-When-Then 적용
+- [x] money 를 객체로 포장
+    - [x] money 에서 수익률 계산
+- [x] Answer 대신 Lottery 사용
+- [x] Reward.value -> money 변수명 수정, Money class 사용
+- [x] Reward 가 당첨 번호 개수(win) 도 함께 포장
+- [x] number 를 일일히 비교하는게 아닌 Lottery를 사용하여 matchNumber 수행
+- [x] findWins 에서 saveWin(win) 을 분리
+- [x] Lottery.shuffleBox()와 Lottery.findSixNumbers()를 LotteryBox 의 메소드로 이동
+- [x] infinity, NaN 출력 에러 수정
+
+## Step3: Lotto 2nd place
+
+### Requirements
+
+- [x] 2등 보너스 볼 추가 입력 받음
+- [x] WinStatistics.matches 에 Reward 를 key 로 저장하게 수정
+    - [x] Reward.toPayload 가 Reward.win 순으로 출력되게 수정
+- [x] bonusBall 여부 Reward 에 추가
+    - [x] Reward 가 bonusBall 을 가진 경우 바로 BONUS return
+- [x] Remove Answer
+- [x] Add Reward.BONUS test case
+- [x] Remove double indent with stream
+
+### Result output
+
+```
+Put your money.
+14000
+14 lotteries are purchased.
+[7, 11, 33, 34, 35, 45]
+[5, 10, 21, 22, 33, 38]
+[4, 23, 33, 39, 41, 43]
+[11, 27, 28, 29, 41, 43]
+[9, 16, 24, 31, 34, 35]
+[11, 27, 29, 35, 40, 43]
+[5, 8, 14, 17, 30, 44]
+[7, 9, 33, 35, 40, 43]
+[4, 12, 22, 27, 33, 41]
+[11, 13, 16, 22, 36, 38]
+[4, 30, 31, 33, 37, 43]
+[8, 9, 12, 15, 19, 34]
+[4, 11, 22, 24, 26, 34]
+[12, 18, 21, 22, 26, 37]
+Put lottery answer.
+12,18,21,22,26,36
+Put bonus number.
+37
+Win Statistics
+------------------
+THREE matches (₩5000): 0
+FOUR matches (₩50000): 0
+FIVE matches (₩1500000): 0
+BONUS matches (₩30000000): 1
+SIX matches (₩2000000000): 0
+
+Earning rate: 2142.8571428571427
+📈Earned! (More than 1.0 means 'Earned')
+```
+
+### Requested changes
+
+- [x] LotteryBox.findSixNumbers 안에서 shuffle 수행
+- [x] 당첨번호 객체 분리 (answer, bonusNumber 포함)
+- [x] 이름 변경 getEarningRate -> profitRate
+- [?] Money.didEarn -> ResultView 로 이동
+- [x] Reward.getMoney 제거
+- [x] Wallet 은 로또 구매 갯수만 가지고 구매한 로또는 별도 저장
+- [x] Reward.of 로 2등 당첨 테스트 추가
+- [x] 로또 번호를 표현하는 일급 콜렉션 -> 로또 번호 발급
+
+### Requested changes - phase2
+
+- [x] didEarn 대신 profitRate() 를 사용해서 득실 여부 판별
+- [x] Integer (number) 를 객체로 포장
+- [x] 사용되지 않는 getMoney() 제거
+- [x] LotteryController 부분을 하나의 메서드로 묶기
+- [x] Winning이 Reward를 반환
+- [x] 각 클래스에 대한 패키지 분리

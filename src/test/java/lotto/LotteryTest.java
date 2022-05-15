@@ -1,5 +1,9 @@
 package lotto;
 
+import lotto.model.Lottery;
+import lotto.model.LotteryBox;
+import lotto.model.Reward;
+import lotto.model.Winning;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -8,38 +12,46 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LotteryTest {
     Lottery lottery = new Lottery();
+
     @Test
     void create45NumbersInBox() {
-        assertThat(lottery.boxNumbers).hasSize(45);
+        assertThat(LotteryBox.numbers).hasSize(45);
     }
 
     @Test
     void numbersInBoxShouldBeUnique() {
-        int actual = new HashSet<>(lottery.boxNumbers).size();
-        int expected = lottery.boxNumbers.size();
+        int actual = new HashSet<>(LotteryBox.numbers).size();
+        int expected = LotteryBox.numbers.size();
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     void generate6Numbers() {
-        assertThat(lottery.numbers).hasSize(6);
+        assertThat(lottery.lotteryNumbers).hasSize(6);
     }
 
     @Test
     void shuffledBoxShouldDifferWithOrigin() {
-        List<Integer> origin = new ArrayList<>(lottery.boxNumbers);
-        lottery.shuffleBox(LotteryBox.numbers);
-        assertThat(lottery.boxNumbers).isNotEqualTo(origin);
+        List<Integer> origin = new ArrayList(LotteryBox.numbers);
+        LotteryBox.shuffleBox();
+        assertThat(LotteryBox.numbers).isNotEqualTo(origin);
     }
 
     @Test
     void shouldFindSixNumbers() {
-        assertThat(lottery.findSixNumbers()).hasSize(6);
-        assertThat(lottery.numbers).hasSize(6);
+        assertThat(LotteryBox.findSixNumbers()).hasSize(6);
+        assertThat(lottery.lotteryNumbers).hasSize(6);
     }
 
     @Test
     void shouldSortAscend() {
-        assertThat(lottery.sort(Arrays.asList(2,3,1))).isEqualTo(Arrays.asList(1,2,3));
+        assertThat(LotteryBox.sort(Lottery.toLotteryNumbers(Arrays.asList(2, 3, 1)))).isEqualTo(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3)));
+    }
+
+    @Test
+    void findWin() {
+        Lottery lottery = new Lottery(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Winning winning = new Winning(new Lottery(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6))),0);
+        assertThat(lottery.findWin(winning)).isEqualTo(Reward.of(6, false));
     }
 }

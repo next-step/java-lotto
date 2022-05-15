@@ -3,17 +3,33 @@ package string_calculator;
 import java.util.function.BiFunction;
 
 public enum Operator {
-    PLUS("+", (acc, operand) -> acc + operand),
-    MINUS("-", (acc, operand) -> acc - operand),
-    MULTIPLY("*", (acc, operand) -> acc * operand),
-    DIVIDE("/", (acc, operand) -> {
-        divideByZeroChecker(operand);
-        return divideToInteger(acc, operand);
-    }),
-    MODULO("%", (acc, operand) -> acc % operand);
+    PLUS("+", plus()), MINUS("-", minus()), MULTIPLY("*", multiply()), DIVIDE("/", divide()), MODULO("%", modulo());
 
     private String value;
     public BiFunction<Integer, Integer, Integer> compute;
+
+    private static BiFunction<Integer, Integer, Integer> plus() {
+        return (acc, operand) -> acc + operand;
+    }
+
+    private static BiFunction<Integer, Integer, Integer> minus() {
+        return (acc, operand) -> acc - operand;
+    }
+
+    private static BiFunction<Integer, Integer, Integer> multiply() {
+        return (acc, operand) -> acc * operand;
+    }
+
+    private static BiFunction<Integer, Integer, Integer> divide() {
+        return (acc, operand) -> {
+            divideByZeroChecker(operand);
+            return divideToInteger(acc, operand);
+        };
+    }
+
+    private static BiFunction<Integer, Integer, Integer> modulo() {
+        return (acc, operand) -> acc % operand;
+    }
 
     Operator(String value, BiFunction<Integer, Integer, Integer> compute) {
         this.value = value;
