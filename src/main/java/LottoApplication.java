@@ -14,5 +14,6 @@ public class LottoApplication {
         ResultView resultView = new ResultView(new Scanner(System.in));
         Winner winner = resultView.scanWinnerNumbersWithAnnouncement();
         LottoResult lottoResult = LottoResult.create(winner, lottos);
+        ResultView.printLottoResult(lottoResult);
     }
 }

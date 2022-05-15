@@ -36,4 +36,8 @@ public class TestObjectSupport {
         }
         return countByRank;
     }
+
+    public static Winner createWinner() {
+        return new Winner(createLottoNumbers());
+    }
 }

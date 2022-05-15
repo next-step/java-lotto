@@ -1,5 +1,6 @@
 package domain;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Cash {
@@ -19,6 +20,10 @@ public class Cash {
 
     public boolean isMultipleOf(int price) {
         return cashAmount % price == 0;
+    }
+
+    public BigDecimal toBigDecimal() {
+        return BigDecimal.valueOf(cashAmount);
     }
 
     @Override

@@ -2,6 +2,8 @@ package domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CashTest {
@@ -59,5 +61,17 @@ public class CashTest {
         //then
         assertThat(result1).isTrue();
         assertThat(result2).isFalse();
+    }
+
+    @Test
+    void toBigDecimal() {
+        //given
+        Cash cash = new Cash(3000);
+
+        //when
+        BigDecimal result = cash.toBigDecimal();
+
+        //then
+        assertThat(result).isEqualByComparingTo(BigDecimal.valueOf(3000));
     }
 }
