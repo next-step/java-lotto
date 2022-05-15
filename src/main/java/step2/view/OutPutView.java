@@ -20,7 +20,7 @@ public class OutPutView {
     }
 
     public void showPurchaseCount(int manualCount, int autoCount) {
-        show(String.format("수동으로 %d 개, 자동으로 %d 개를 구매했습니다.", manualCount, autoCount));
+        show(String.format("수동으로 %s 개, 자동으로 %s 개를 구매했습니다.", manualCount, autoCount));
     }
 
     public void showGameResult(Map<LottoRank, Integer> gameResult) {

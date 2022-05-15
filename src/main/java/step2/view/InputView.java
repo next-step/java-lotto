@@ -1,5 +1,7 @@
 package step2.view;
 
+import step2.domain.PurchaseCount;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,10 +24,10 @@ public class InputView {
         return Integer.parseInt(this.scanner.nextLine());
     }
 
-    public List<String> askManualNumbers(int manualCount) {
+    public List<String> askManualNumbers(PurchaseCount purchaseCount) {
         List<String> result = new ArrayList<>();
         show("수동으로 구매할 번호를 입력해 주세요.");
-        for (int i = 0; i < manualCount; i++) {
+        for (int i = 0; i < purchaseCount.getValue(); i++) {
             result.add(this.scanner.nextLine());
         }
 
