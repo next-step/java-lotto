@@ -4,6 +4,7 @@ import lotto.model.Game;
 import lotto.model.Lotto;
 import lotto.model.Number;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -20,6 +21,7 @@ public class InputView {
     private static final String BEFORE_LOTTO_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String IS_NOT_NUMBER_MESSAGE = "숫자를 입력해주세요.";
+    private static final String IS_NOT_LOTTO_NUMBER_MESSAGE = "입력한 로또 번호가 잘못되었습니다. \", \" 를 구분자로 입력해주세요.";
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public static Game createGameByAuto() {
@@ -57,7 +59,8 @@ public class InputView {
     }
 
     public static Number numberValue() {
-        String stringValue = Optional.ofNullable(stringValue())
+        String stringValue = Optional
+                .ofNullable(stringValue())
                 .filter(isNumber())
                 .orElseThrow(() -> new IllegalArgumentException(IS_NOT_NUMBER_MESSAGE));
         long value = Long.parseLong(stringValue);
@@ -73,16 +76,28 @@ public class InputView {
         return value -> !value.isBlank() && value.chars().boxed().allMatch(c -> '0' <= c && c <= '9');
     }
 
+    private static Predicate<String[]> isLotto() {
+        return value -> Optional
+                .of(value)
+                .stream()
+                .anyMatch(array -> Arrays.stream(array).allMatch(isNumber()));
+    }
+
     private static Number getPrice() {
         ResultView.print(PAYMENT_MESSAGE);
 
         return numberValue();
     }
 
-    private static Lotto getLotto(String plainLotto) {
-        List<Integer> values = Stream
-                .of(plainLotto.split(DELIMITER))
-                .map(Integer::parseInt)
+    private static Lotto getLotto(String lotto) {
+        String[] lottoNumberArray = Optional.of(lotto.split(DELIMITER))
+                .filter(isLotto())
+                .orElseThrow(() -> new IllegalArgumentException(IS_NOT_LOTTO_NUMBER_MESSAGE));
+
+        List<Number> values = Stream
+                .of(lottoNumberArray)
+                .sorted()
+                .map(Number::of)
                 .collect(Collectors.toList());
 
         return Lotto.manual(values);

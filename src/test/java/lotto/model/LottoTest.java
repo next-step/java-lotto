@@ -40,13 +40,12 @@ public class LottoTest {
     @Test
     @DisplayName("로또 구매 - 수동")
     void manual() {
-        List<Integer> integers = this.integers.subList(0, 6);
-        List<Number> numbers = integers
+        List<Number> numbers = this.integers.subList(0, 6)
                 .stream()
                 .map(Number::of)
                 .collect(Collectors.toList());
 
-        assertThat(Lotto.manual(integers).getLotto()).hasSize(6).containsAll(numbers);
+        assertThat(Lotto.manual(numbers).getLotto()).hasSize(6).containsAll(numbers);
     }
 
     @Test

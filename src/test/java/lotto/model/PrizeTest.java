@@ -19,7 +19,13 @@ public class PrizeTest {
 
     @BeforeEach
     void beforeEach() {
-        this.beforeLotto = Lotto.manual(List.of(1, 2, 3, 4, 5, 6));
+        this.beforeLotto = Lotto.manual(List.of(
+                Number.of(1L),
+                Number.of(2L),
+                Number.of(3L),
+                Number.of(4L),
+                Number.of(5L),
+                Number.of(6L)));
     }
 
     @ParameterizedTest(name = "자동 로또 결과 확인 - {index}등")
@@ -30,9 +36,9 @@ public class PrizeTest {
                     "1,2,3,0,0,0|FIFTH",
                     "0,0,0,0,0,0|MISS"})
     void classify(String value, String stringRank) {
-        List<Integer> numbers = Arrays
+        List<Number> numbers = Arrays
                 .stream(value.split(","))
-                .map(Integer::parseInt)
+                .map(Number::of)
                 .collect(Collectors.toList());
 
         Rank rank = Rank.valueOf(stringRank);
@@ -46,7 +52,13 @@ public class PrizeTest {
     @Test
     @DisplayName("자동 로또 보너스 결과 확인")
     void classify() {
-        Lotto third = Lotto.manual(List.of(1, 2, 3, 4, 0, 7));
+        Lotto third = Lotto.manual(List.of(
+                Number.of(1L),
+                Number.of(2L),
+                Number.of(3L),
+                Number.of(4L),
+                Number.of(0L),
+                Number.of(7L)));
         List<Lotto> lottoList = List.of(third);
         Prize prize = Prize.init(this.beforeLotto, Number.of(7L)).classify(lottoList);
 

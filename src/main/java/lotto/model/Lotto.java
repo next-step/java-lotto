@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -12,6 +13,7 @@ public class Lotto {
     private static final Number END_NUMBER = Number.of(46);
     private static final Number START_INDEX = Number.of();
     private static final Number END_INDEX = Number.of(6);
+    private static final String LESS_THAN_SIZE_MESSAGE = "로또 번호는 총 6개입니다. 다시 확인해주세요.";
     private List<Number> lotto;
 
     private Lotto() {
@@ -45,14 +47,12 @@ public class Lotto {
                 .shuffle(numbers);
     }
 
-    public static Lotto manual(List<Integer> numbers) {
-        List<Number> lotto = numbers
-                .stream()
-                .sorted()
-                .map(Number::of)
-                .collect(Collectors.toList());
+    public static Lotto manual(List<Number> numbers) {
+        Optional.of(numbers)
+                .filter(v -> !Number.of(v.size()).isLessThan(Number.of(6)))
+                .orElseThrow(() -> new IndexOutOfBoundsException(LESS_THAN_SIZE_MESSAGE));
 
-        return new Lotto(lotto);
+        return new Lotto(numbers);
     }
 
     public Number match(List<Number> target) {
