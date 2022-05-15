@@ -5,6 +5,8 @@ import step2.view.InputView;
 import step2.view.OutPutView;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoApplication {
 
@@ -16,11 +18,16 @@ public class LottoApplication {
         int purchaseAmount = inputView.askPurchaseAmount();
         int manualCount = inputView.askManualCount();
         PurchaseMoney purchaseMoney = new PurchaseMoney(purchaseAmount, manualCount);
-        List<String> manualNumbers = inputView.askManualNumbers(purchaseMoney.calculateManualPurchaseCount());
 
-        outPutView.showPurchaseCount(purchaseMoney);
+        List<String> manualNumbers = inputView.askManualNumbers(manualCount);
 
-        PurchaseList purchaseList = new PurchaseList(purchaseMoney, manualNumbers);
+        List<Lotto> manualLottos = purchaseMoney.buyManual(manualNumbers);
+        List<Lotto> autoLottos = purchaseMoney.buyAuto();
+        outPutView.showPurchaseCount(manualLottos.size(), autoLottos.size());
+
+        List<Lotto> collect = Stream.concat(manualLottos.stream(), autoLottos.stream())
+                .collect(Collectors.toList());
+        PurchaseList purchaseList = new PurchaseList(collect);
         outPutView.show(purchaseList.toString());
 
         String winnerInput = inputView.askWinnerInput();

@@ -1,13 +1,17 @@
 package step2.domain;
 
+import step2.domain.impl.AutoProvider;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class PurchaseMoney {
 
-
     private static final int DEFAULT_EACH_LOTTO_PRICE = 1000;
 
-    private final int amount;
+    private int amount;
     private final int manualCount;
 
     public PurchaseMoney(int amount) {
@@ -49,16 +53,40 @@ public class PurchaseMoney {
         }
     }
 
+    public List<Lotto> buyManual(List<String> manualNumbers) {
+        validateNull(manualNumbers);
+        validateNumberSize(manualNumbers.size());
+        this.amount = amount - manualCount * DEFAULT_EACH_LOTTO_PRICE;
+        return manualNumbers.stream()
+                .map(Lotto::new)
+                .collect(Collectors.toList());
+    }
+
+    private <T> void validateNull(T input) {
+        if (input == null) {
+            throw new IllegalArgumentException("입력이 널 입니다.");
+        }
+    }
+
+    private void validateNumberSize(int inputSize) {
+        if (this.manualCount != inputSize) {
+            throw new IllegalArgumentException("입력 번호 갯수가 수동 번호 갯수와 일치하지 않습니다.");
+        }
+    }
+
+    public List<Lotto> buyAuto() {
+        int remain = this.amount / DEFAULT_EACH_LOTTO_PRICE;
+        List<String> numbers = new ArrayList<>();
+        for (int i = 0; i < remain; i++) {
+            numbers.add(AutoProvider.getNumbers());
+        }
+        return numbers.stream()
+                .map(Lotto::new)
+                .collect(Collectors.toList());
+    }
+
     public ReturnRate calculateReturnRate(int sumOfPrizeMoney) {
         return new ReturnRate(sumOfPrizeMoney, amount);
-    }
-
-    public int calculateManualPurchaseCount() {
-        return this.manualCount;
-    }
-
-    public int calculateAutoPurchaseCount() {
-        return amount / DEFAULT_EACH_LOTTO_PRICE - this.manualCount;
     }
 
     @Override

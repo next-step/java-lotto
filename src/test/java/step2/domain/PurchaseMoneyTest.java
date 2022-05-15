@@ -6,9 +6,13 @@ import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullSource;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 @DisplayName(value = "구매 금액 테스트")
@@ -67,17 +71,49 @@ class PurchaseMoneyTest {
         assertThat(returnRate).isEqualTo(new ReturnRate(sumOfPrize / (double) bought));
     }
 
-    @ParameterizedTest(name = "{displayName} -> [{index}] : 전체:{0} = 수동:{1} + 자동:{2}")
-    @CsvSource(
-            delimiter = ':',
-            value = {
-                    "10000:10:0", "10000:5:5", "10000:0:10"}
-    )
-    void 자동구매_갯수_계산(int totalAmount, int manualCount, int expectAutoCount) {
-        PurchaseMoney purchaseMoney = new PurchaseMoney(totalAmount, manualCount);
 
-        int result = purchaseMoney.calculateAutoPurchaseCount();
+    @Test
+    void 수동_로또_구매() {
+        PurchaseMoney purchaseMoney = new PurchaseMoney(2000, 2);
+        String number1 = "1, 2, 3, 4, 5, 6";
+        String number2 = "7, 8, 9, 10, 11, 12";
 
-        assertThat(result).isEqualTo(expectAutoCount);
+        List<Lotto> lottos = purchaseMoney.buyManual(List.of(number1, number2));
+
+        assertThat(lottos).containsExactly(new Lotto(number1), new Lotto(number2));
+    }
+
+
+    @ParameterizedTest
+    @NullSource
+    void 수동_로또_구매_시_입력이_널이면_예외(List<String> input) {
+        PurchaseMoney purchaseMoney = new PurchaseMoney(2000, 2);
+
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> purchaseMoney.buyManual(input)
+        );
+    }
+
+    @Test
+    void 수동_로또_구매_갯수와_번호_리스트의_사이즈가_맞지_않으면_예외() {
+        PurchaseMoney purchaseMoney = new PurchaseMoney(2000, 2);
+        String number1 = "1, 2, 3, 4, 5, 6";
+        String number2 = "7, 8, 9, 10, 11, 12";
+        String number3 = "13, 14, 15, 16, 17, 18";
+
+        assertThatIllegalArgumentException().isThrownBy(
+                () -> purchaseMoney.buyManual(List.of(number1, number2, number3))
+        );
+    }
+
+    @Test
+    void 자동_구매() {
+        PurchaseMoney purchaseMoney = new PurchaseMoney(5000);
+
+        List<Lotto> lottos = purchaseMoney.buyAuto();
+        assertAll(
+                () -> assertThat(lottos).doesNotContainNull(),
+                () -> assertThat(lottos).hasSize(5)
+        );
     }
 }
