@@ -13,18 +13,18 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 class WinningsTest {
 
     Winnings winnings = null;
-    List<Integer> matchedFour = null;
-    List<Integer> matchedFive = null;
-    List<Integer> matchedFiveAndBonus = null;
-    List<Integer> matchedAll = null;
+    Lotto matchedFour = null;
+    Lotto matchedFive = null;
+    Lotto matchedFiveAndBonus = null;
+    Lotto matchedAll = null;
 
     @BeforeEach
     void setUp() {
         winnings = new Winnings(Arrays.asList(1, 5, 10, 23, 35, 44), 2);
-        matchedFour = Arrays.asList(1, 5, 10, 23, 32, 41);
-        matchedFive = Arrays.asList(1, 5, 10, 23, 35, 41);
-        matchedFiveAndBonus = Arrays.asList(2, 5, 10, 23, 35, 44);
-        matchedAll = Arrays.asList(1, 5, 10, 23, 35, 44);
+        matchedFour = new Lotto(new int[]{1, 5, 10, 23, 32, 41});
+        matchedFive = new Lotto(new int[]{1, 5, 10, 23, 35, 41});
+        matchedFiveAndBonus = new Lotto(new int[]{2, 5, 10, 23, 35, 44});
+        matchedAll = new Lotto(new int[]{1, 5, 10, 23, 35, 44});
 
         winnings.countMatchedNumbers(matchedFour);
         winnings.countMatchedNumbers(matchedFive);
