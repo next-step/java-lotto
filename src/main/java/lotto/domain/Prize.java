@@ -21,22 +21,14 @@ public enum Prize {
     this.matchBonus = matchBonus;
   }
 
-  public static Money getPrizeMoney(int count, boolean matchBonus) {
-    return Arrays.stream(values())
-        .filter(prize -> equalMatchCount(prize, count))
-        .filter(prize -> matchBonus || !prize.matchBonus)
-        .findAny()
-        .map(prize -> prize.prize)
-        .orElse(NOT_PRIZE.prize);
-  }
-
   private static boolean equalMatchCount(Prize prize, int count) {
     return prize.matchCount == count;
   }
 
-  public static Prize of(int count) {
+  public static Prize of(int count, boolean matchBonus) {
     return Arrays.stream(values())
         .filter(prize -> equalMatchCount(prize, count))
+        .filter(prize -> matchBonus || !prize.matchBonus)
         .findAny()
         .orElse(NOT_PRIZE);
   }

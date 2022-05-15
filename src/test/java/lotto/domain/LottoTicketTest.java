@@ -71,26 +71,6 @@ class LottoTicketTest {
     );
   }
 
-  @DisplayName("로또 티켓의 보너스볼 일치여부를 반환한다")
-  @ParameterizedTest
-  @MethodSource("provideFormMatchBonus")
-  void matchBonus(LottoTicket lottoTicket, Integer bonusNumber, boolean matchBonus) {
-    assertThat(lottoTicket.bonusMatched(bonusNumber)).isEqualTo(matchBonus);
-  }
-
-  private static Stream<Arguments> provideFormMatchBonus() {
-    LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
-    return Stream.of(
-        arguments(lottoTicket, 1, true),
-        arguments(lottoTicket, 2, true),
-        arguments(lottoTicket, 3, true),
-        arguments(lottoTicket, 4, true),
-        arguments(lottoTicket, 5, true),
-        arguments(lottoTicket, 6, true),
-        arguments(lottoTicket, 7, false)
-    );
-  }
-
   @DisplayName("반환한 로또번호를 수정할 경우 예외를 던진다")
   @Test
   void unmodifiableException() {

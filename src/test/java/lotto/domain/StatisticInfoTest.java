@@ -25,7 +25,7 @@ class StatisticInfoTest {
 
   private static Stream<Arguments> provideForStatistics() {
 
-    WinningLottoTicket winningLottoTicket = new WinningLottoTicket("1,2,3,4,5,6");
+    WinningLottoTicket winningLottoTicket = WinningLottoTicket.of("1,2,3,4,5,6", "7");
     List<LottoTicket> lottos = List.of(
         new LottoTicket(List.of(26, 14, 37, 20, 8, 15)),
         new LottoTicket(List.of(13, 8, 29, 37, 11, 6)),

@@ -20,7 +20,8 @@ public class LottoMainApplication {
 
     String inputWinningLottoNumbers = InputView.requestLastWeekWinNumbers();
     String bonusBallNumber = InputView.requestBonusBallNumber();
-    WinningLottoTicket winningLottoTicket = new WinningLottoTicket(inputWinningLottoNumbers);
+    WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(inputWinningLottoNumbers,
+        bonusBallNumber);
     StatisticInfo statisticInfo = StatisticInfo.of(winningLottoTicket, lottoTickets,
         LotteryShop.PRICE_PER_PLAY_FOR_LOTTO);
     ResultView.printStatistics(statisticInfo);

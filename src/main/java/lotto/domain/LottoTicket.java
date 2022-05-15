@@ -50,11 +50,7 @@ public class LottoTicket {
         .count();
   }
 
-  public boolean bonusMatched(Integer bonusNumber) {
-    return contains(bonusNumber);
-  }
-
-  private boolean contains(Integer number) {
+  public boolean contains(Integer number) {
     return lottoNumbers.contains(number);
   }
 

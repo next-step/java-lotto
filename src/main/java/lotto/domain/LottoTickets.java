@@ -24,10 +24,10 @@ public class LottoTickets {
     return Collections.unmodifiableList(lottoTickets);
   }
 
-  public int getMatchedCountPerPrize(Prize prize, LottoTicket winningLottoTicket) {
+  public int getMatchedCountPerPrize(Prize prize, WinningLottoTicket winningLottoTicket) {
     return (int) lottoTickets.stream()
-        .map(lottoTicket -> lottoTicket.countMatched(winningLottoTicket))
-        .map(Prize::of)
+        .map(lottoTicket -> Prize.of(lottoTicket.countMatched(winningLottoTicket),
+            winningLottoTicket.matchBonusBall(lottoTicket)))
         .filter(prize::equals)
         .count();
   }
