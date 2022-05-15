@@ -17,12 +17,12 @@ public class Lotto {
 	}
 
 	public Lotto(String lottoNumbersInput) {
-		Set<LottoNumber> lottoNumbers = Stream.of(lottoNumbersInput.split(SPLIT_DELIMITER))
+		Set<LottoNumber> generationLottoNumber = Stream.of(lottoNumbersInput.split(SPLIT_DELIMITER))
 			.map(LottoNumber::new)
 			.collect(Collectors.toSet());
 
-		validateNumberSize(lottoNumbers);
-		this.lottoNumbers = lottoNumbers;
+		validateNumberSize(generationLottoNumber);
+		this.lottoNumbers = generationLottoNumber;
 	}
 
 	public Lotto(Set<LottoNumber> lottoNumbers) {
@@ -32,7 +32,7 @@ public class Lotto {
 
 	private void validateNumberSize(Set<LottoNumber> lottoNumbers) {
 		if (lottoNumbers.size() != LOTTO_SIZE) {
-			throw new IllegalArgumentException("로또는 "+ LOTTO_SIZE + "개 숫자로 생성되어야 합니다. (size=" + lottoNumbers.size() + ")");
+			throw new IllegalArgumentException(String.format("로또는 %d개 숫자로 생성되어야 합니다. (size=%d)", LOTTO_SIZE, lottoNumbers.size()));
 		}
 	}
 
