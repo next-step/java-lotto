@@ -50,7 +50,7 @@ public class Draw {
     public void checkWinnings(Winnings winnings) {
         this.winnings = winnings;
         for (Lotto lotto : lottos()) {
-            winnings.countMatchedNumbers(lotto.selectedNumbers());
+            winnings.countMatchedNumbers(lotto);
         }
     }
 
