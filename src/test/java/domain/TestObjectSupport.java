@@ -1,7 +1,9 @@
 package domain;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class TestObjectSupport {
@@ -25,5 +27,13 @@ public class TestObjectSupport {
     public static Lottos createLottos() {
         Lotto lotto = createLotto();
         return new Lottos(Arrays.asList(lotto, lotto, lotto));
+    }
+
+    public static Map<Rank, Integer> createRankIntegerMap() {
+        Map<Rank, Integer> countByRank = new HashMap<>();
+        for (Rank rank : Rank.values()) {
+            countByRank.put(rank, 0);
+        }
+        return countByRank;
     }
 }

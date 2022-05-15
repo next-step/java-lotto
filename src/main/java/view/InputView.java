@@ -9,7 +9,6 @@ import java.util.Scanner;
 public class InputView {
     private static final String CASH_INPUT_ANNOUNCEMENT = "구입금액을 입력해 주세요.";
     private final Scanner scanner;
-    private Cash cash;
 
     public InputView(Scanner scanner) {
         this.scanner = scanner;
@@ -18,13 +17,13 @@ public class InputView {
     public static Lottos printLottos(Lottos lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
         lottos.toList().forEach(System.out::println);
+        System.out.println();
         return lottos;
     }
 
     public Cash scanCashWithAnnouncement() {
         System.out.println(CASH_INPUT_ANNOUNCEMENT);
-        this.cash = scanCash();
-        return this.cash;
+        return scanCash();
     }
 
     private Cash scanCash() {
@@ -49,9 +48,5 @@ public class InputView {
         if (!inputCash.isMultipleOf(Lotto.PRICE)) {
             throw new IllegalArgumentException(String.format("구입금액은 %d의 배수여야 합니다.", Lotto.PRICE));
         }
-    }
-
-    public Cash getCash() {
-        return cash;
     }
 }

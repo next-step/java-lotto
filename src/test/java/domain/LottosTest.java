@@ -46,4 +46,16 @@ public class LottosTest {
         //then
         assertThat(result).isEqualTo(expectedLottos);
     }
+
+    @Test
+    void totalPrice() {
+        //given
+        Lottos lottos = TestObjectSupport.createLottos();
+
+        //when
+        int result = lottos.totalPrice();
+
+        //then
+        assertThat(result).isEqualTo(3000);
+    }
 }

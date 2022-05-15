@@ -19,6 +19,10 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
+    public int totalPrice() {
+        return Lotto.PRICE * size();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
