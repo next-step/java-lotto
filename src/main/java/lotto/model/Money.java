@@ -1,14 +1,14 @@
-package lotto;
+package lotto.model;
 
 import java.util.Objects;
 
-import static lotto.Const.LOTTERY_PRICE;
+import static lotto.util.Const.LOTTERY_PRICE;
 
 public class Money {
     private int value;
     private int investedMoney;
 
-    Money(int value) {
+    public Money(int value) {
         if (value < 0) {
             throw new IllegalArgumentException("Money should be more than 0.");
         }

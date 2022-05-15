@@ -1,13 +1,13 @@
 package lotto;
 
+import lotto.model.*;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.Const.LOTTERY_PRICE;
+import static lotto.util.Const.LOTTERY_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

@@ -1,4 +1,8 @@
-package lotto;
+package lotto.model;
+
+import lotto.model.Lottery;
+import lotto.model.LotteryNumber;
+import lotto.model.Reward;
 
 import java.util.List;
 

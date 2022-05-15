@@ -1,4 +1,6 @@
-package lotto;
+package lotto.model;
+
+import lotto.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;

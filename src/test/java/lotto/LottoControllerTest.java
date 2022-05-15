@@ -1,5 +1,10 @@
 package lotto;
 
+import lotto.controller.LotteryController;
+import lotto.controller.WinStatistics;
+import lotto.model.Lottery;
+import lotto.model.LotteryNumber;
+import lotto.model.Reward;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

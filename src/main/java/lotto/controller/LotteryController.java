@@ -1,5 +1,9 @@
-package lotto;
+package lotto.controller;
 
+
+import lotto.model.*;
+import lotto.view.InputView;
+import lotto.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +12,7 @@ public class LotteryController {
     public Inventory inventory = new Inventory();
     public final WinStatistics winStatistics = new WinStatistics();
 
-    LotteryController() {
+    public LotteryController() {
     }
 
     public Money scanMoney() {

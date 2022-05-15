@@ -1,4 +1,4 @@
-package lotto;
+package lotto.controller;
 
 public class LotteryApp {
     public static void main(String[] args) {

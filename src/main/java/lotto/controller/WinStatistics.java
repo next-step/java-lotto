@@ -1,10 +1,13 @@
-package lotto;
+package lotto.controller;
+
+import lotto.model.Money;
+import lotto.model.Reward;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static lotto.Reward.*;
+import static lotto.model.Reward.*;
 
 public class WinStatistics {
     private Map<Reward, Integer> matches;

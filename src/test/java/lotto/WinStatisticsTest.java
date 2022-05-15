@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.controller.WinStatistics;
+import lotto.model.Money;
+import lotto.model.Reward;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
