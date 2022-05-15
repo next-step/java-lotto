@@ -41,6 +41,10 @@ public enum Prize {
     return matchCount;
   }
 
+  public boolean isMatchBonus() {
+    return matchBonus;
+  }
+
   public boolean winning() {
     return this != Prize.NOT_PRIZE;
   }

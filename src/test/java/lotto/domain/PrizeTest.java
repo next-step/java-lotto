@@ -68,6 +68,24 @@ class PrizeTest {
     );
   }
 
+  @DisplayName("보너스 번호 일치여부를 반환한다")
+  @ParameterizedTest
+  @MethodSource("provideForIsMatchBonus")
+  void isMatchBonus(Prize prize, boolean matched) {
+    assertThat(prize.isMatchBonus()).isEqualTo(matched);
+  }
+
+  private static Stream<Arguments> provideForIsMatchBonus() {
+    return Stream.of(
+        arguments(Prize.FIRST, false),
+        arguments(Prize.SECOND, true),
+        arguments(Prize.THIRD, false),
+        arguments(Prize.FOURTH, false),
+        arguments(Prize.FIFTH, false),
+        arguments(Prize.NOT_PRIZE, false)
+    );
+  }
+
   @DisplayName("당첨 여부를 반환한다.")
   @ParameterizedTest
   @MethodSource("provideForWinning")

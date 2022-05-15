@@ -48,4 +48,18 @@ class StatisticTest {
         arguments(1, Prize.FIFTH, Money.createWon(5_000))
     );
   }
+
+  @DisplayName("통계에 표시되는 상금을 반환한다")
+  @Test
+  void getPrizeMoney() {
+    Statistic statistic = new Statistic(Prize.SECOND.getMatchCount(), Prize.SECOND);
+    assertThat(statistic.getPrizeMoney()).isEqualTo(Prize.SECOND.getPrize());
+  }
+
+  @DisplayName("통계에 보너스볼 넘버 여부를 반환한다")
+  @Test
+  void isMatchBonus() {
+    Statistic statistic = new Statistic(Prize.SECOND.getMatchCount(), Prize.SECOND);
+    assertThat(statistic.isMatchBonus()).isEqualTo(true);
+  }
 }
