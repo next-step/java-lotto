@@ -15,35 +15,35 @@ public class GameController {
     }
 
     public static void start(GameType gameType) {
-        Game game = InputView.createGame();
+        Game game = createGame(gameType);
         Lotto beforeLotto = InputView.getBeforeLotto();
 
         if (gameType.equals(AUTO)) {
-            gameStartByAuto(game, beforeLotto);
+            gameStart(game, beforeLotto);
         }
 
-        if (gameType.equals(BONUS)) {
-            gameStartByBonus(game, beforeLotto);
-        }
-
-        if (gameType.equals(MANUAL)) {
-            gameStartByManual();
+        if (gameType.equals(BONUS) || gameType.equals(MANUAL)) {
+            gameStartWithBonus(game, beforeLotto);
         }
     }
 
-    private static void gameStartByAuto(Game game, Lotto beforeLotto) {
+    private static Game createGame(GameType gameType) {
+        if (gameType.equals(MANUAL)) {
+            return InputView.createGameByManual();
+        }
+
+        return InputView.createGameByAuto();
+    }
+
+    private static void gameStart(Game game, Lotto beforeLotto) {
         Prize prize = game.findWinners(beforeLotto);
         ResultView.print(prize);
     }
 
-    private static void gameStartByBonus(Game game, Lotto beforeLotto) {
+    private static void gameStartWithBonus(Game game, Lotto beforeLotto) {
         Number bonusNumber = InputView.getBonusNumber();
         Prize prize = game.findWinners(beforeLotto, bonusNumber);
         ResultView.print(prize);
-    }
-
-    private static void gameStartByManual() {
-        // 미션 진행 예정
     }
 
     public enum GameType {

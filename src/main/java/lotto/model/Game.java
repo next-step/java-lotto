@@ -4,25 +4,43 @@ import lotto.view.ResultView;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 public class Game {
-    private static final String BUY_MESSAGE = "%s개를 구매했습니다.";
+    private static final String BUY_MESSAGE_BY_AUTO = "%s개를 구매했습니다.";
+    private static final String BUY_MESSAGE_BY_MANUAL = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
     private final List<Lotto> lottoList;
 
     private Game(List<Lotto> lottoList) {
         this.lottoList = lottoList;
     }
 
-    public static Game pay(int price) {
-        ResultView.print(String.format(BUY_MESSAGE, price));
+    private static Number getBuyingCount(Number price) {
+        return price.divide(Number.of(1000L));
+    }
 
-        int count = price / 1000;
-        List<Lotto> lottoList = IntStream
-                .range(0, count)
+    public static Game pay(Number price) {
+        long count = getBuyingCount(price).longValue();
+        ResultView.print(String.format(BUY_MESSAGE_BY_AUTO, count));
+
+        List<Lotto> lottoList = LongStream
+                .range(0L, count)
                 .mapToObj(i -> Lotto.auto())
                 .peek(ResultView::print)
                 .collect(Collectors.toList());
+
+        return new Game(lottoList);
+    }
+
+    public static Game pay(Number price, List<Lotto> lottoList) {
+        long count = getBuyingCount(price).longValue();
+        ResultView.print();
+        ResultView.print(String.format(BUY_MESSAGE_BY_MANUAL, count, lottoList.size()));
+
+        LongStream
+                .range(lottoList.size(), count)
+                .forEach(i -> lottoList.add(Lotto.auto()));
+        lottoList.forEach(ResultView::print);
 
         return new Game(lottoList);
     }
