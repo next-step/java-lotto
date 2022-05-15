@@ -10,8 +10,8 @@ public class Operand {
         this.number = number;
     }
 
-    Operand(String stringNumber) {
-        this(StringNumberUtils.parse(stringNumber));
+    public static Operand create(String stringNumber) {
+        return new Operand(StringNumberUtils.parse(stringNumber));
     }
 
     public int getNumber() {

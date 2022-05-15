@@ -15,6 +15,6 @@ class OperandTest {
             "-0, 0"
     })
     void Operand_피연산자_생성(String numString, int num) {
-        assertThat(new Operand(numString)).isEqualTo(new Operand(num));
+        assertThat(Operand.create(numString)).isEqualTo(new Operand(num));
     }
 }

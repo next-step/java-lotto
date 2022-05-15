@@ -14,8 +14,8 @@ public class ResultView {
     private static final int ADVANTAGE_FLAG = 1;
     private static final int EVEN_FLAG = 0;
     private static final int DISADVANTAGE_FLAG = -1;
-    private static final String LOTTO_COUNT_MESSAGE = "%d개를 구매했습니다.";
-    private static final String WINNING_STATISTIC_MESSAGE = "당첨 통계";
+    private static final String LOTTO_COUNT_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.";
+    private static final String WINNING_STATISTIC_MESSAGE = "\n당첨 통계";
     private static final String SPLIT_LINE_MESSAGE = "---------";
     private static final String CORRECT_STATISTIC_MESSAGE = "%d개 일치 (%d원) - %d개";
     private static final String CORRECT_SECOND_RANK_STATISTIC_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
@@ -32,8 +32,8 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void printLottoCount(int lottoCount) {
-        System.out.println(String.format(LOTTO_COUNT_MESSAGE, lottoCount));
+    public static void printLottoCount(int manualLottoCount, int autoLottoCount) {
+        System.out.println(String.format(LOTTO_COUNT_MESSAGE, manualLottoCount, autoLottoCount));
     }
 
     public static void printLottoGroup(LottoGroup lottoGroup) {
@@ -44,7 +44,6 @@ public class ResultView {
     }
 
     public static void printWinningStatistic(LottoGroupResult lottoGroupResult, int totalPrice) {
-        System.out.println();
         System.out.println(WINNING_STATISTIC_MESSAGE);
         System.out.println(SPLIT_LINE_MESSAGE);
         printLottoGroupResult(lottoGroupResult);

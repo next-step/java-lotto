@@ -3,14 +3,13 @@ package lotto.controller;
 import lotto.domain.Lotto;
 import lotto.domain.WinningLotto;
 import lotto.domain.LottoGroup;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoTotalPrice;
 import lotto.domain.LottoGroupResult;
 import lotto.pattern.LottoNumberGenerateStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.stream.Collectors;
+import java.util.List;
 
 public class LottoController {
     private final LottoNumberGenerateStrategy lottoNumberGenerateStrategy;
@@ -20,20 +19,20 @@ public class LottoController {
     }
 
     public void autoLottoProgramStart() {
-        LottoTotalPrice lottoPurchaseAmount = new LottoTotalPrice(InputView.scanPurchaseAmount());
-        int lottoCount = lottoPurchaseAmount.getPurchaseLottoCount();
-        ResultView.printLottoCount(lottoCount);
+        LottoTotalPrice lottoTotalPrice = InputView.scanPurchaseAmount();
 
-        LottoGroup lottoGroup = new LottoGroup(lottoCount, lottoNumberGenerateStrategy);
+        int manualLottoCount = InputView.scanManualLottosCount(lottoTotalPrice);
+        List<Lotto> manualLottos = InputView.scanManualLottos(manualLottoCount);
 
+        int lottoCount = lottoTotalPrice.getPurchaseLottoCount();
+        ResultView.printLottoCount(manualLottoCount, lottoCount - manualLottoCount);
+
+        LottoGroup lottoGroup = LottoGroup.create(manualLottos, LottoGroup.createLottos(lottoCount - manualLottoCount, lottoNumberGenerateStrategy));
         ResultView.printLottoGroup(lottoGroup);
 
-        Lotto winningNumbers = new Lotto(InputView.scanWinningNumbers()
-                .stream().map(LottoNumber::new).collect(Collectors.toList()));
+        WinningLotto winningLotto = InputView.getWinningLotto(InputView.scanWinningLotto());
 
-        LottoNumber bonusNumber = new LottoNumber(InputView.scanBonusNumber());
-
-        LottoGroupResult lottoGroupResult = lottoGroup.getLottoGroupResult(new WinningLotto(winningNumbers, bonusNumber));
-        ResultView.printWinningStatistic(lottoGroupResult, lottoPurchaseAmount.getTotalPrice());
+        LottoGroupResult lottoGroupResult = lottoGroup.getLottoGroupResult(winningLotto);
+        ResultView.printWinningStatistic(lottoGroupResult, lottoTotalPrice.getTotalPrice());
     }
 }

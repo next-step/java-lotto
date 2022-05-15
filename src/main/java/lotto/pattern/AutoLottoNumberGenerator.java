@@ -23,7 +23,7 @@ public class AutoLottoNumberGenerator implements LottoNumberGenerateStrategy {
     public List<LottoNumber> generate() {
         List<LottoNumber> lottoNumberRange = IntStream.rangeClosed(LottoNumber.LOTTO_MIN_NUMBER , LottoNumber.LOTTO_MAX_NUMBER)
                 .boxed()
-                .map(LottoNumber::new)
+                .map(LottoNumber::create)
                 .collect(Collectors.toList());
         Collections.shuffle(lottoNumberRange);
         return lottoNumberRange.subList(LOTTO_NUMBER_FIRST_INDEX, Lotto.LOTTO_NUMBER_SIZE);

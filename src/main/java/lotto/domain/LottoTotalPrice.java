@@ -3,18 +3,18 @@ package lotto.domain;
 import lotto.util.StringNumberUtils;
 
 public class LottoTotalPrice {
-    private static final int UNIT_LOTTO_PRICE = 1000;
+    public static final int UNIT_LOTTO_PRICE = 1000;
     private static final int ZERO = 0;
 
     private final int totalPrice;
 
-    LottoTotalPrice(int totalPrice) {
+    public LottoTotalPrice(int totalPrice) {
         validateTotalPriceRange(totalPrice);
         this.totalPrice = totalPrice;
     }
 
-    public LottoTotalPrice(String stringTotalPrice) {
-        this(StringNumberUtils.parse(stringTotalPrice));
+    public static LottoTotalPrice create(String stringTotalPrice) {
+        return new LottoTotalPrice(StringNumberUtils.parse(stringTotalPrice));
     }
 
     public int getTotalPrice() {
@@ -23,6 +23,10 @@ public class LottoTotalPrice {
 
     public int getPurchaseLottoCount() {
         return this.totalPrice / UNIT_LOTTO_PRICE;
+    }
+
+    public boolean lessThan(int totalPrice) {
+        return this.totalPrice < totalPrice;
     }
 
     private void validateTotalPriceRange(int totalPrice) {

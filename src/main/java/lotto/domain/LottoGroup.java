@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoGroup {
     private static final int NO_COUNT = 0;
@@ -20,8 +21,24 @@ public class LottoGroup {
         this.lottos = lottos;
     }
 
-    public LottoGroup(int lottoCount, LottoNumberGenerateStrategy lottoNumberGenerateStrategy) {
-        this(IntStream.range(0, lottoCount).mapToObj(i -> new Lotto(lottoNumberGenerateStrategy)).collect(Collectors.toList()));
+    public static LottoGroup create(int lottoCount, LottoNumberGenerateStrategy lottoNumberGenerateStrategy) {
+        return new LottoGroup(createLottos(lottoCount, lottoNumberGenerateStrategy));
+    }
+
+    public static LottoGroup create(List<Lotto> manualLottos, List<Lotto> autoLottos) {
+        validateManualAndAutoLottos(manualLottos, autoLottos);
+        return new LottoGroup(Stream.concat(manualLottos.stream(), autoLottos.stream()).collect(Collectors.toList()));
+    }
+
+    private static void validateManualAndAutoLottos(List<Lotto> manualLottos, List<Lotto> autoLottos) {
+        if (manualLottos == null || autoLottos == null) {
+            throw new IllegalArgumentException(String.format("입력받은 수동로또 또는 자동로또는 null 일 수 없습니다. 입력받은 수동 로또 : %s , 자동 로또 : %s", manualLottos, autoLottos));
+        }
+    }
+
+    public static List<Lotto> createLottos(int lottoCount, LottoNumberGenerateStrategy lottoNumberGenerateStrategy) {
+        validateLottoCount(lottoCount);
+        return IntStream.range(0, lottoCount).mapToObj(i -> new Lotto(lottoNumberGenerateStrategy)).collect(Collectors.toList());
     }
 
     public LottoGroupResult getLottoGroupResult(WinningLotto winningLotto) {
@@ -41,6 +58,16 @@ public class LottoGroup {
         if (lottos == null) {
             throw new IllegalArgumentException("로또 리스트가 null 일 수 없습니다.");
         }
+    }
+
+    private static void validateLottoCount(int lottoCount) {
+        if (isNegativeLottoCount(lottoCount)) {
+            throw new IllegalArgumentException(String.format("생성하고자 하는 로또 갯수가 음수일 수 없습니다. 입력한 로또 갯수 : %d", lottoCount));
+        }
+    }
+
+    private static boolean isNegativeLottoCount(int lottoCount) {
+        return lottoCount < NO_COUNT;
     }
 
     @Override
