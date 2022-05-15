@@ -9,6 +9,7 @@ import java.util.stream.LongStream;
 public class Game {
     private static final String BUY_MESSAGE_BY_AUTO = "%s개를 구매했습니다.";
     private static final String BUY_MESSAGE_BY_MANUAL = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
+    private static final Number WON = Number.of(1000L);
     private final List<Lotto> lottoList;
 
     private Game(List<Lotto> lottoList) {
@@ -16,7 +17,7 @@ public class Game {
     }
 
     private static Number getBuyingCount(Number price) {
-        return price.divide(Number.of(1000L));
+        return price.divide(WON);
     }
 
     public static Game pay(Number price) {
@@ -24,7 +25,7 @@ public class Game {
         ResultView.print(String.format(BUY_MESSAGE_BY_AUTO, count));
 
         List<Lotto> lottoList = LongStream
-                .range(0L, count)
+                .range(Number.of().longValue(), count)
                 .mapToObj(i -> Lotto.auto())
                 .peek(ResultView::print)
                 .collect(Collectors.toList());

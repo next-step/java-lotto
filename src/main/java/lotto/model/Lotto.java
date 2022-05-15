@@ -8,10 +8,10 @@ import java.util.stream.IntStream;
 
 public class Lotto {
 
-    private static final int START_NUMBER = 1;
-    private static final int END_NUMBER = 46;
-    private static final int START_INDEX = 0;
-    private static final int END_INDEX = 6;
+    private static final Number START_NUMBER = Number.of(1);
+    private static final Number END_NUMBER = Number.of(46);
+    private static final Number START_INDEX = Number.of();
+    private static final Number END_INDEX = Number.of(6);
     private List<Number> lotto;
 
     private Lotto() {
@@ -26,7 +26,7 @@ public class Lotto {
         Collections.shuffle(numbers);
 
         this.lotto = numbers
-                .subList(START_INDEX, END_INDEX)
+                .subList(START_INDEX.intValue(), END_INDEX.intValue())
                 .stream()
                 .sorted()
                 .map(Number::of)
@@ -37,7 +37,7 @@ public class Lotto {
 
     public static Lotto auto() {
         List<Integer> numbers = IntStream
-                .range(START_NUMBER, END_NUMBER)
+                .range(START_NUMBER.intValue(), END_NUMBER.intValue())
                 .boxed()
                 .collect(Collectors.toList());
 

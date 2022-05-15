@@ -33,7 +33,7 @@ public class InputView {
         ResultView.print();
         ResultView.print(MANUAL_LOTTO_NUMBER_MESSAGE);
         List<Lotto> lottoList = LongStream
-                .range(0L, manualCount.longValue())
+                .range(Number.of().longValue(), manualCount.longValue())
                 .mapToObj(plain -> getLotto(stringValue()))
                 .collect(Collectors.toList());
 

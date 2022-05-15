@@ -54,6 +54,14 @@ public class Number implements Operator, Comparator {
         return this.value.equals(BigDecimal.ZERO);
     }
 
+    public boolean isLessThan(Number right) {
+        return this.longValue() < right.longValue();
+    }
+
+    public int intValue() {
+        return this.value.intValue();
+    }
+
     public long longValue() {
         return this.value.longValue();
     }

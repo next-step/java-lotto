@@ -57,9 +57,7 @@ public class Prize {
         return this.ranks;
     }
 
-    public double getWinningRate() {
-        return this.getTotalPrize()
-                .divide(this.getPrice())
-                .doubleValue();
+    public Number getWinningRate() {
+        return this.getTotalPrize().divide(this.getPrice());
     }
 }
