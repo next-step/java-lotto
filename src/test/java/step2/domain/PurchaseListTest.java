@@ -16,9 +16,9 @@ class PurchaseListTest {
 
     @Test
     void 로또_목록을_입력_받아서_Wrapping하는_객체_생성() {
-        String numbers1 = "1, 2, 3, 4, 5, 6";
-        String numbers2 = "7, 8, 9, 10, 11, 12";
-        List<Lotto> expect = List.of(new Lotto(numbers1), new Lotto(numbers2));
+        Lotto e1 = new Lotto("1, 2, 3, 4, 5, 6");
+        Lotto e2 = new Lotto("7, 8, 9, 10, 11, 12");
+        List<Lotto> expect = List.of(e1, e2);
 
         PurchaseList purchaseList = new PurchaseList(expect);
 
