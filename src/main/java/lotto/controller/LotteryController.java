@@ -30,14 +30,14 @@ public class LotteryController {
 
     public Lottery scanAnswer() {
         String scanned = InputView.scan("Put lottery answer.");
-        return new Lottery(parseAnswerNumbers(scanned));
+        return new Lottery(parseNumbers(scanned));
     }
 
-    public List<LotteryNumber> parseAnswerNumbers(String scanned) {
+    public static List<LotteryNumber> parseNumbers(String scanned) {
         return toLotteryNumbers(scanned.split("\\s*,\\s*"));
     }
 
-    public List<LotteryNumber> toLotteryNumbers(String[] numberStrings) {
+    public static List<LotteryNumber> toLotteryNumbers(String[] numberStrings) {
         List<LotteryNumber> list = new ArrayList();
         for (String numberString : numberStrings) {
             list.add(toLotteryNumber(numberString));
@@ -45,7 +45,7 @@ public class LotteryController {
         return list;
     }
 
-    public LotteryNumber toLotteryNumber(String numberString) {
+    public static LotteryNumber toLotteryNumber(String numberString) {
         int number = Integer.parseInt(numberString);
         return new LotteryNumber(number);
     }
@@ -86,6 +86,7 @@ public class LotteryController {
 
     public void start() {
         Money money = this.scanMoney();
+        List<Lottery> manualLotteries = this.scanManualLotteries();
         this.createLotteries(money);
         this.printLotteries();
         Winning winning = new Winning(this.scanAnswer(), this.scanBonus());
@@ -93,5 +94,11 @@ public class LotteryController {
         this.printWinStatistics();
         this.printEarningRate(money);
         this.printEarned(money);
+    }
+
+    public List<Lottery> scanManualLotteries() {
+        List<Lottery> manualLotteries = InputView.scanMultiLine("Put manual lottery.(Quit with Carriage return)");
+        System.out.println(manualLotteries);
+        return manualLotteries;
     }
 }
