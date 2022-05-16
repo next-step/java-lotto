@@ -4,13 +4,13 @@ import java.util.*;
 
 public class Lottos {
 
-    private final List<Lotto> list = new ArrayList<>();
-
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_NUMBER_SIZE = 6;
 
-    private int passiveLottoCnt;
-    private int automaticLottoCnt;
+    private static final List<Lotto> list = new ArrayList<>();
+
+    private static int passiveLottoCnt;
+    private static int automaticLottoCnt;
 
     public Lottos(Lotto [] lottos) {
         for (Lotto lotto : lottos) {
@@ -18,30 +18,34 @@ public class Lottos {
         }
     }
 
-    public Lottos(int automaticLottosCnt, List<Lotto> passiveLottos) {
-        initLottoCount(automaticLottosCnt, passiveLottos.size());
+    public static Lottos createLottosWithPassive(int automaticLottoCnt, List<Lotto> passiveLottos) {
+        initLottoCount(automaticLottoCnt, passiveLottos.size());
 
-        List<Integer> tmpNumbers = createAllNumbers();
+        List<Integer> allNumbers = createAllNumbers();
 
-        addPassiveLottos(passiveLottos);
+        List<Lotto> myLottoList = addPassiveLottos(passiveLottos);
 
         for (int i = 0; i < automaticLottoCnt; ++i) {
-            pickLottoNumbers(tmpNumbers);
+            myLottoList = pickLottoNumbers(myLottoList, allNumbers);
         }
+
+        return new Lottos(myLottoList.toArray(new Lotto[myLottoList.size()]));
     }
 
-    private void initLottoCount(int automaticLottosCnt, int passiveLottoCnt) {
-        this.automaticLottoCnt = automaticLottosCnt;
-        this.passiveLottoCnt = passiveLottoCnt;
+    private static void initLottoCount(int automaticLottosCount, int passiveLottoCount) {
+        automaticLottoCnt = automaticLottosCount;
+        passiveLottoCnt = passiveLottoCount;
     }
 
-    private void addPassiveLottos(List<Lotto> passiveLottos) {
-        for (int i = 0; i < passiveLottos.size(); ++i) {
-            list.add(passiveLottos.get(i));
-        }
+    private static List<Lotto> addPassiveLottos(List<Lotto> passiveLottos) {
+        List<Lotto> list = new ArrayList<>();
+
+        list.addAll(passiveLottos);
+
+        return list;
     }
 
-    private List<Integer> createAllNumbers() {
+    private static List<Integer> createAllNumbers() {
         List<Integer> tmpNumbers = new ArrayList<>();
 
         for (int i = 0; i < LOTTO_MAX_NUMBER; ++i) {
@@ -51,17 +55,29 @@ public class Lottos {
         return tmpNumbers;
     }
 
-    private void pickLottoNumbers(List<Integer> tmpNumbers) {
+    private static List<Lotto> pickLottoNumbers(List<Lotto> myLottoList, List<Integer> allNumbers) {
         List<Integer> lottoNumbers = new ArrayList<>();
 
-        Collections.shuffle(tmpNumbers);
+        Collections.shuffle(allNumbers);
         for (int j = 0; j < LOTTO_NUMBER_SIZE; ++j) {
-            lottoNumbers.add(tmpNumbers.get(j));
+            lottoNumbers.add(allNumbers.get(j));
         }
-
         Collections.sort(lottoNumbers);
 
-        list.add(new Lotto(lottoNumbers));
+        myLottoList.add(new Lotto(lottoNumbers));
+
+        return myLottoList;
+    }
+
+    private static int getSameRankCnt(Map<EqualLottoCntInfo, Integer> winningLottoMap, EqualLottoCntInfo equalLottoCntInfo) {
+        int cnt;
+        if (winningLottoMap.containsKey(equalLottoCntInfo)) {
+            cnt = winningLottoMap.get(equalLottoCntInfo);
+            cnt += 1;
+        } else {
+            cnt = 1;
+        }
+        return cnt;
     }
 
     public Map<EqualLottoCntInfo, Integer> findWinningLotto(Lotto winningNumbers) {
@@ -80,16 +96,6 @@ public class Lottos {
         return winningLottoRankMap;
     }
 
-    private static int getSameRankCnt(Map<EqualLottoCntInfo, Integer> winningLottoMap, EqualLottoCntInfo equalLottoCntInfo) {
-        int cnt;
-        if (winningLottoMap.containsKey(equalLottoCntInfo)) {
-            cnt = winningLottoMap.get(equalLottoCntInfo);
-            cnt += 1;
-        } else {
-            cnt = 1;
-        }
-        return cnt;
-    }
 
     public Lotto getLotto(int idx) {
         return list.get(idx);

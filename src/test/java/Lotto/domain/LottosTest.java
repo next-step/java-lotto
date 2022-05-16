@@ -64,7 +64,7 @@ public class LottosTest {
     @MethodSource("lottoKindsCntArgs")
     @DisplayName("구매한 로또들 중에 수동갯수와 자동갯수를 확인하는 테스트")
     void lottoKindsCntArgsTest(int automaticLottosCnt, List<Lotto> passiveLottos, int automaticCnt, int passiveCnt) {
-        Lottos lottos = new Lottos(automaticLottosCnt, passiveLottos);
+        Lottos lottos = Lottos.createLottosWithPassive(automaticLottosCnt, passiveLottos);
 
         Assertions.assertThat(lottos.getAutomaticLottoCnt()).isEqualTo(automaticCnt);
         Assertions.assertThat(lottos.getPassiveLottoCnt()).isEqualTo(passiveCnt);

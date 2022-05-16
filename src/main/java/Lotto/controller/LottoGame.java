@@ -32,7 +32,7 @@ public class LottoGame {
 
         int automaticLottosCnt = money.changeMoneyToLottoNum() - passiveLottos.size();
 
-        return new Lottos(automaticLottosCnt, passiveLottos);
+        return Lottos.createLottosWithPassive(automaticLottosCnt, passiveLottos);
     }
 
     private List<Lotto> inputAndCreatePassiveLotto() {
