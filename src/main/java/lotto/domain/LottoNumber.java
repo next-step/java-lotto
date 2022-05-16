@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exceptions.InvalidLottoNumberException;
+
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int MIN_LOTTO_NUMBER = 1;
@@ -15,10 +17,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber of(int number) {
-        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException("1에서 45사이의 숫자만 입력 가능합니다.");
-        }
+        lottoNumberExceptionHandler(number);
         return lottoNumbers[number];
+    }
+
+    private static void lottoNumberExceptionHandler(int number) {
+        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
+            throw new InvalidLottoNumberException();
+        }
     }
 
     public static LottoNumber of(String number) {

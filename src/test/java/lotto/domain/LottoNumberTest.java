@@ -1,8 +1,10 @@
 package lotto.domain;
 
+import lotto.exceptions.InvalidLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static lotto.exceptions.InvalidLottoNumberException.INVALID_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,9 +21,9 @@ class LottoNumberTest {
     @Test
     @DisplayName("1에서 45 사이의 숫자가 아닐 경우 Exception")
     void exception() {
-        assertThatExceptionOfType(IllegalArgumentException.class)
+        assertThatExceptionOfType(InvalidLottoNumberException.class)
                 .isThrownBy(() -> LottoNumber.of(46))
-                .withMessage("1에서 45사이의 숫자만 입력 가능합니다.");
+                .withMessage(INVALID_LOTTO_NUMBER);
     }
 
 }

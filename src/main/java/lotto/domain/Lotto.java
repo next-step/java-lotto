@@ -1,8 +1,10 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import lotto.exceptions.DuplicatedNumbersException;
+import lotto.exceptions.InvalidLottoByHandLengthException;
+import lotto.util.Duplicated;
+
+import java.util.*;
 
 public class Lotto {
 
@@ -21,14 +23,32 @@ public class Lotto {
     }
 
     public Lotto(int[] lottoByHand) {
+        if (Duplicated.hasDuplicatedNumber(lottoByHand)) {
+            throw new DuplicatedNumbersException();
+        }
+        if (lottoByHand.length != LOTTO_LENGTH) {
+            throw new InvalidLottoByHandLengthException();
+        }
         this.lottoNumbers = parseIntegerArrayToLotto(lottoByHand);
     }
 
     public Lotto(List<LottoNumber> lottoNumbers) {
+        if (Duplicated.hasDuplicatedNumber(lottoNumbers)) {
+            throw new DuplicatedNumbersException();
+        }
+        if (lottoNumbers.size() != LOTTO_LENGTH) {
+            throw new InvalidLottoByHandLengthException();
+        }
         this.lottoNumbers = lottoNumbers;
     }
 
     public Lotto(String[] lottoByHand) {
+        if (Duplicated.hasDuplicatedNumber(lottoByHand)) {
+            throw new DuplicatedNumbersException();
+        }
+        if (lottoByHand.length != LOTTO_LENGTH) {
+            throw new InvalidLottoByHandLengthException();
+        }
         this.lottoNumbers = parseStringArrayToLotto(lottoByHand);
     }
 
