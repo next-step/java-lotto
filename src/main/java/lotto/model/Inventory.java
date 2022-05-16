@@ -26,7 +26,7 @@ public class Inventory {
         if (!money.enough()) {
             throw new IllegalCallerException("Not enough money.");
         }
-        money.pay();
+        money.pay(1);
         this.lotteries.add(new Lottery());
     }
 

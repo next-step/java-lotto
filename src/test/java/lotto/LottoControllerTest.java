@@ -48,6 +48,5 @@ public class LottoControllerTest {
 
     @Test
     void name() {
-        lotteryController.scanManualLotteries();
     }
 }

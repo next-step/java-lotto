@@ -16,7 +16,7 @@ public class LotteryController {
     }
 
     public Money scanMoney() {
-        String scanned = InputView.scan("Put your money.");
+        String scanned = InputView.scanWithPayload("Put your money.");
         return new Money(Integer.parseInt(scanned));
     }
 
@@ -29,7 +29,7 @@ public class LotteryController {
     }
 
     public Lottery scanAnswer() {
-        String scanned = InputView.scan("Put lottery answer.");
+        String scanned = InputView.scanWithPayload("Put lottery answer.");
         return new Lottery(parseNumbers(scanned));
     }
 
@@ -80,13 +80,34 @@ public class LotteryController {
     }
 
     public int scanBonus() {
-        String scanned = InputView.scan("Put bonus number.");
+        String scanned = InputView.scanWithPayload("Put bonus number.");
         return Integer.parseInt(scanned);
+    }
+
+    private void payManualLotteries(Money money, int amount) {
+        money.pay(amount);
+    }
+
+    public List<Lottery> scanManualLotteries() {
+        List<Lottery> scannedNumbers = new ArrayList<>();
+        System.out.println("Put manual lottery.(Quit with Carriage return)");
+        return scanManualLottery(scannedNumbers);
+    }
+
+    private List<Lottery> scanManualLottery(List<Lottery> lotteries) {
+        String scanned = InputView.scan();
+        if (scanned.length() > 0) {
+            List<LotteryNumber> lotteryNumbers = LotteryController.parseNumbers(scanned);
+            lotteries.add(new Lottery(lotteryNumbers));
+            scanManualLottery(lotteries);
+        }
+        return lotteries;
     }
 
     public void start() {
         Money money = this.scanMoney();
         List<Lottery> manualLotteries = this.scanManualLotteries();
+        this.payManualLotteries(money, manualLotteries.size());
         this.createLotteries(money);
         this.printLotteries();
         Winning winning = new Winning(this.scanAnswer(), this.scanBonus());
@@ -96,9 +117,4 @@ public class LotteryController {
         this.printEarned(money);
     }
 
-    public List<Lottery> scanManualLotteries() {
-        List<Lottery> manualLotteries = InputView.scanMultiLine("Put manual lottery.(Quit with Carriage return)");
-        System.out.println(manualLotteries);
-        return manualLotteries;
-    }
 }

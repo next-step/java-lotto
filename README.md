@@ -240,7 +240,7 @@ Earning rate: 2142.8571428571427
 ### Requirements
 
 - [x] 수동으로 구매할 번호를 입력해 주세요. 출력 후 수동 로또는 입력 받음
-- [ ] createLotteries 에서 수동 만큼 차감한 개수를 적용
+- [x] createLotteries 에서 수동 만큼 차감한 개수를 적용 - payManualLotteries
 - [ ] 수동으로 구매할 개수, 자동으로 구매된 개수 출력 후 전체 로또 번호 나열
     - [ ] 수동을 먼저 보여주고 자동을 보여줄까? 분류해서 보여줄까
 - [ ] Optional 적용하여 NullPointerException 발생하지 않게 하기
