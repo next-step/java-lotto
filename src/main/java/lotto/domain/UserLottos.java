@@ -4,28 +4,17 @@ import java.util.*;
 
 public class UserLottos {
     private final List<Lotto> userLottos;
-    private Quantity quantity;
 
-    public UserLottos(String money) {
-        this(new ArrayList<>(), new Money(money));
+    public UserLottos() {
+        this(new ArrayList<>());
     }
 
-    public UserLottos(int money) {
-        this(new ArrayList<>(), new Money(money));
-    }
-
-    public UserLottos(List<Lotto> buyLottoNumbers, int money) {
-        this(buyLottoNumbers, new Money(money));
-    }
-
-    public UserLottos(List<Lotto> buyLottoNumbers, Money money) {
+    public UserLottos(List<Lotto> buyLottoNumbers) {
         this.userLottos = buyLottoNumbers;
-        this.quantity = new Quantity(money.getQuantity(), userLottos.size());
     }
 
-    public void autoCreate() {
-        this.userLottos.add(LottoFactory.createAutoLotto());
-        this.quantity = this.quantity.increase();
+    public void add(Lotto lotto) {
+        this.userLottos.add(lotto);
     }
 
     public LottoResults getWinningResults(WinningLotto winningLottoNumber) {
@@ -48,20 +37,8 @@ public class UserLottos {
         return Collections.unmodifiableList(userLottos);
     }
 
-    public int getSize() {
-        return userLottos.size();
-    }
-
-    public boolean contains(LottoNumber lottoNumber) {
-        return this.userLottos.contains(lottoNumber);
-    }
-
-    public boolean isPurchasable() {
-        return quantity.isPurchasable();
-    }
-
-    public int getMaxPurchasableQuantity() {
-        return quantity.getMaxPurchasableQuantity();
+    public boolean isEmpty() {
+        return this.userLottos.isEmpty();
     }
 
     @Override

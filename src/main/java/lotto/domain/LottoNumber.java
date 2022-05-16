@@ -12,7 +12,6 @@ public class LottoNumber {
     private static final String TILDE = " ~ ";
     private static final String WRONG_NUMBER_RANGE_MESSAGE =
             FIRST_LOTTO_NUMBER + TILDE + LAST_LOTTO_NUMBER + RANGE_NUMBER_MESSAGE;
-
     private static final Map<Integer, LottoNumber> cache = new HashMap<>();
 
     private final int lottoNumber;
@@ -23,14 +22,7 @@ public class LottoNumber {
     }
 
     private LottoNumber(int lottoNumber) {
-        validate(lottoNumber);
         this.lottoNumber = lottoNumber;
-    }
-
-    private void validate(int lottoNumber) {
-        if (lottoNumber < FIRST_LOTTO_NUMBER || lottoNumber > LAST_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(WRONG_NUMBER_RANGE_MESSAGE);
-        }
     }
 
     public static LottoNumber valueOf(String lottoNumber) {

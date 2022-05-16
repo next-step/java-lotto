@@ -22,6 +22,7 @@ public class RankTest {
             "5,THIRD",
             "6,FIRST"
     })
+
     @DisplayName("0~6 값을 입력 받으면 Rank enum을 반환한다.")
     void getEnumByCountOfMatch(int countOfMatch, Rank rank) {
         assertThat(Rank.valueOf(countOfMatch)).isEqualTo(rank);
@@ -36,7 +37,7 @@ public class RankTest {
     }
 
     @Test
-    @DisplayName("합")
+    @DisplayName("5등 금액인 5000에 1000을 더한 값은 6000이다")
     void sumWinningMoney() {
         assertThat(Rank.FIFTH.sumWinningMoney(new Money(1000))).isEqualTo(new Money(6000));
     }

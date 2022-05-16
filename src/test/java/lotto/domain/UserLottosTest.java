@@ -11,25 +11,31 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserLottosTest {
     private UserLottos userLottos;
+    private Lotto lotto1;
+    private Lotto lotto2;
 
     @BeforeEach
     void set() {
-        userLottos = new UserLottos(List.of(new Lotto("1,2,3,4,5,6"), new Lotto("1,2,3,4,5,6")), 2000);
+        lotto1 = new Lotto("1,2,3,4,5,6");
+        lotto2 = new Lotto("10,11,12,13,14,15");
+        userLottos = new UserLottos(List.of(
+                lotto1, lotto1, lotto2));
     }
+
     @Test
     @DisplayName("로또 번호를 3번 추가 하면 수량은 3개이다.")
-    void name() {
-        UserLottos userLottos = new UserLottos(3000);
-        userLottos.autoCreate();
-        userLottos.autoCreate();
-        userLottos.autoCreate();
-        assertThat(userLottos.getSize()).isEqualTo(3);
+    void add() {
+        UserLottos userLottos = new UserLottos();
+        userLottos.add(lotto1);
+        userLottos.add(lotto1);
+        userLottos.add(lotto2);
+        assertThat(userLottos).isEqualTo(this.userLottos);
     }
 
     @Test
     @DisplayName("로또 1등 당첨수량은 2개이다.")
     void getWinningResults() {
-        WinningLotto winningLotto = new WinningLotto(new Lotto("1,2,3,4,5,6"), LottoNumber.valueOf("10"));
+        WinningLotto winningLotto = new WinningLotto(lotto1, LottoNumber.valueOf("10"));
         assertThat(userLottos.getWinningResults(winningLotto).getWinningCount(Rank.FIRST)).isEqualTo(2);
     }
 
@@ -38,5 +44,17 @@ public class UserLottosTest {
     void getWinningMoney() {
         WinningLotto winningLotto = new WinningLotto(new Lotto("1,2,3,4,5,8"), LottoNumber.valueOf("6"));
         assertThat(userLottos.getWinningMoney(winningLotto)).isEqualTo(new Money(60000000));
+    }
+
+    @Test
+    @DisplayName("객체에 추가된 로또가 없으면 true를 반환한다")
+    void isEmptyTrue() {
+        assertThat(new UserLottos().isEmpty()).isTrue();
+    }
+
+    @Test
+    @DisplayName("객체에 추가된 로또가 있으면 false를 반환한다")
+    void isEmptyFalse() {
+        assertThat(new UserLottos(List.of(lotto1)).isEmpty()).isFalse();
     }
 }

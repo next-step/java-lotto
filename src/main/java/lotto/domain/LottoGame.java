@@ -3,24 +3,33 @@ package lotto.domain;
 import java.util.List;
 
 public class LottoGame {
-    private static final String MAX_QUANTITY_ERROR_MESSAGE = "생성할 수 있는 수량을 초과하였습니다.";
-
-    private final UserLottos userLottos;
     private final Money money;
 
-    public LottoGame(String buyPrice) {
-        this(buyPrice, new UserLottos(buyPrice));
-    }
+    private Quantity quantity;
+    private UserLottos userLottos;
 
-    public LottoGame(String buyPrice, UserLottos lottoNumbers) {
-        this.userLottos = lottoNumbers;
+    public LottoGame(String buyPrice, int manualLottoCount) {
         this.money = new Money(buyPrice);
+        this.quantity = new Quantity(money.getMaxPurchasableQuantity(), manualLottoCount);
+        this.userLottos = new UserLottos();
     }
 
-    public void auto() {
-        validate();
+    public void buyLotto(UserLottos manualUserLottos) {
+        manual(manualUserLottos);
+        auto();
+    }
+
+    private void manual(UserLottos manualUserLottos) {
+        if (manualUserLottos.isEmpty()) {
+            return;
+        }
+        this.userLottos = manualUserLottos;
+    }
+
+    private void auto() {
         while (isPurchasable()) {
-            userLottos.autoCreate();
+            userLottos.add(LottoFactory.createAutoLotto());
+            quantity = quantity.increase();
         }
     }
 
@@ -28,31 +37,23 @@ public class LottoGame {
         return this.money.calculateReturnRate(userLottos.getWinningMoney(winningLottoNumber));
     }
 
-    public LottoResults getLottoGameResults(WinningLotto winningLottoNumber) {
-        return userLottos.getWinningResults(winningLottoNumber);
-    }
-
-    private void validate() {
-        if (!isPurchasable()) {
-            throw new IllegalArgumentException(MAX_QUANTITY_ERROR_MESSAGE);
-        }
-    }
-
     private boolean isPurchasable() {
-        return userLottos.isPurchasable();
+        return quantity.isPurchasable();
     }
 
-    public int getMaxPurchasableQuantity() {
-        return userLottos.getMaxPurchasableQuantity();
+    public int getManualBuyCount() {
+        return quantity.getManualBuyCount();
     }
 
-    public List<Lotto> getBuyLottoNumbers() {
+    public List<Lotto> getUserLottos() {
         return userLottos.getUserLottos();
     }
 
-    @Override
-    public String toString() {
-        return userLottos.toString();
+    public LottoResults getWinningResults(WinningLotto winningLottoNumber) {
+        return userLottos.getWinningResults(winningLottoNumber);
     }
 
+    public int getAutoBuyCount() {
+        return quantity.getAutoBuyCount();
+    }
 }

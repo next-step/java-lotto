@@ -7,46 +7,45 @@ public class Money {
     private static final String BUY_PRICE_VALID_ERROR_MESSAGE = "1,000원 단위로만 구매 가능합니다.";
     private static final String WRONG_NUMBER_EXCEPTION = "숫자형식이 아닙니다.";
 
-    private final int money;
+    private final double money;
 
     public Money(String money) {
-        this(parseInt(money));
+        this(parseDouble(money));
     }
 
     public Money() {
         this(0);
     }
 
-    public Money(int money) {
+    public Money(double money) {
         validate(money);
         this.money = money;
     }
 
-    private static int parseInt(String buyPrice) {
+    private static double parseDouble(String money) {
         try {
-            return Integer.parseInt(buyPrice);
+            return Double.parseDouble(money);
         } catch (Exception e) {
             throw new IllegalArgumentException(WRONG_NUMBER_EXCEPTION);
         }
     }
 
-    private void validate(int money) {
+    private void validate(double money) {
         if (money % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(BUY_PRICE_VALID_ERROR_MESSAGE);
         }
     }
 
     public double calculateReturnRate(Money winningMoney) {
-        return (double) winningMoney.money / this.money;
+        return winningMoney.money / this.money;
     }
 
     public Money sumMoney(Money money) {
         return new Money(this.money + money.money);
     }
 
-
-    public int getQuantity() {
-        return money / LOTTO_PRICE;
+    public int getMaxPurchasableQuantity() {
+        return (int) (money / LOTTO_PRICE);
     }
 
     @Override
@@ -64,6 +63,6 @@ public class Money {
 
     @Override
     public String toString() {
-        return Integer.toString(money);
+        return Double.toString(money);
     }
 }

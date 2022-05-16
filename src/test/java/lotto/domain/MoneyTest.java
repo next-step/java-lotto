@@ -30,9 +30,8 @@ class MoneyTest {
     }
 
     @Test
-    @DisplayName("합")
+    @DisplayName("1000에 2000을 합한 값은 3000이다")
     void sumMoney() {
-        Money money = new Money(1000);
-        assertThat(money.sumMoney(new Money(2000))).isEqualTo(new Money(3000));
+        assertThat(new Money(1000).sumMoney(new Money(2000))).isEqualTo(new Money(3000));
     }
 }
