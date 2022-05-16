@@ -70,9 +70,7 @@ public class InputView {
 
     private List<Integer> stringToIntegers(String winnerNumbers) {
         return Arrays.stream(winnerNumbers.split(DEFAULT_SPLIT_REGEX))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .distinct()
+                .map(e -> Integer.parseInt(e.trim()))
                 .collect(Collectors.toList());
     }
 }
