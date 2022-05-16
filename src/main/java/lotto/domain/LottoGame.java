@@ -4,34 +4,36 @@ import java.util.List;
 
 public class LottoGame {
     private final Money money;
+
     private Quantity quantity;
+    private UserLottos userLottos;
 
-    public LottoGame(String buyPrice, String manualBuyCount) {
+    public LottoGame(String buyPrice, int manualLottoCount) {
         this.money = new Money(buyPrice);
-        this.quantity = new Quantity(money.getMaxPurchasableQuantity(), manualBuyCount);
+        this.quantity = new Quantity(money.getMaxPurchasableQuantity(), manualLottoCount);
+        this.userLottos = new UserLottos();
     }
 
-    public UserLottos buyLotto(List<String> manualLottos) {
-        UserLottos userLottos = new UserLottos();
-        manual(manualLottos, userLottos);
-        auto(userLottos);
-        return userLottos;
+    public void buyLotto(UserLottos manualUserLottos) {
+        manual(manualUserLottos);
+        auto();
     }
 
-    private void manual(List<String> manualLottos, UserLottos userLottos) {
-        for (String lotto : manualLottos) {
-            userLottos.createManual(new Lotto(lotto));
+    private void manual(UserLottos manualUserLottos) {
+        if (manualUserLottos.isEmpty()) {
+            return;
         }
+        this.userLottos = manualUserLottos;
     }
 
-    private void auto(UserLottos userLottos) {
+    private void auto() {
         while (isPurchasable()) {
-            userLottos.createAuto();
+            userLottos.add(LottoFactory.createAutoLotto());
             quantity = quantity.increase();
         }
     }
 
-    public double getReturnRate(WinningLotto winningLottoNumber, UserLottos userLottos) {
+    public double getReturnRate(WinningLotto winningLottoNumber) {
         return this.money.calculateReturnRate(userLottos.getWinningMoney(winningLottoNumber));
     }
 
@@ -39,11 +41,19 @@ public class LottoGame {
         return quantity.isPurchasable();
     }
 
-    public int getMaxPurchasableQuantity() {
-        return quantity.getMaxPurchasableQuantity();
-    }
-
     public int getManualBuyCount() {
         return quantity.getManualBuyCount();
+    }
+
+    public List<Lotto> getUserLottos() {
+        return userLottos.getUserLottos();
+    }
+
+    public LottoResults getWinningResults(WinningLotto winningLottoNumber) {
+        return userLottos.getWinningResults(winningLottoNumber);
+    }
+
+    public int getAutoBuyCount() {
+        return quantity.getAutoBuyCount();
     }
 }
