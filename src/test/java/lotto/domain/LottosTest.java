@@ -19,10 +19,10 @@ public class LottosTest {
         lottoList.add(new Lotto(1, 2, 10, 11, 12, 13));
 
         LottoGameResult lottoGameResult = new LottoGameResult(3000);
-        lottoGameResult.addMatchResult(LOTTO_REWARD.FIFTH);
-        lottoGameResult.addMatchResult(LOTTO_REWARD.SECOND);
-        lottoGameResult.addMatchResult(LOTTO_REWARD.MISS);
+        lottoGameResult.addMatchResult(LottoReward.FIFTH);
+        lottoGameResult.addMatchResult(LottoReward.SECOND);
+        lottoGameResult.addMatchResult(LottoReward.MISS);
 
-        assertThat(new Lottos(lottoList).matchNumbers(numbers, bonusNumber)).isEqualTo(lottoGameResult);
+        assertThat(new Lottos(lottoList).matchNumbers(new Lotto(numbers), bonusNumber)).isEqualTo(lottoGameResult);
     }
 }

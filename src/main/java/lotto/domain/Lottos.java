@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import static lotto.domain.Lotto.LOTTO_PRICE;
 import lotto.domain.result.LottoGameResult;
 
@@ -24,11 +23,11 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public LottoGameResult matchNumbers(Set<Integer> numbers, int bonusNumber) {
+    public LottoGameResult matchNumbers(Lotto winningLotto, int bonusNumber) {
         LottoGameResult lottoGameResult = new LottoGameResult(LOTTO_PRICE * lottos.size());
 
         for (Lotto lotto : lottos) {
-            lottoGameResult.addMatchResult(lotto.hasWinningNumbers(numbers, bonusNumber));
+            lottoGameResult.addMatchResult(lotto.hasWinningNumbers(winningLotto, bonusNumber));
         }
 
         return lottoGameResult;

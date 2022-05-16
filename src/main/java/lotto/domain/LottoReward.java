@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-public enum LOTTO_REWARD {
+public enum LottoReward {
     MISS(0, 0),
     FIFTH(3, 5_000),
     FOURTH(4, 50_000),
@@ -13,13 +13,13 @@ public enum LOTTO_REWARD {
     private final int matches;
     private final long reward;
 
-    LOTTO_REWARD(int matches, long reward) {
+    LottoReward(int matches, long reward) {
         this.matches = matches;
         this.reward = reward;
     }
 
-    public static LOTTO_REWARD of(int matches, boolean bonusMatched) {
-        LOTTO_REWARD reward = Arrays.stream(LOTTO_REWARD.values()).filter(it -> it.matches == matches)
+    public static LottoReward of(int matches, boolean bonusMatched) {
+        LottoReward reward = Arrays.stream(LottoReward.values()).filter(it -> it.matches == matches)
                 .findFirst().orElse(MISS);
 
         if(matches == 5 && bonusMatched) {

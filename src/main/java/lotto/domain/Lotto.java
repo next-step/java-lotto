@@ -10,7 +10,7 @@ public class Lotto {
     public final static int LOTTO_END_NUMBER = 45;
     public final static int LOTTO_PRICE = 1000;
 
-    protected Set<Integer> numbers;
+    private Set<Integer> numbers;
 
     Lotto(int num1, int num2, int num3, int num4, int num5, int num6) {
         this(Set.of(num1, num2, num3, num4, num5, num6));
@@ -28,15 +28,15 @@ public class Lotto {
         return numbers;
     }
 
-    public LOTTO_REWARD hasWinningNumbers(Set<Integer> winningNumbers, int bonusNumber) {
+    public LottoReward hasWinningNumbers(Lotto winningLotto, int bonusNumber) {
         int result = 0;
-        for (int winningNumber : winningNumbers) {
+        for (int winningNumber : winningLotto.numbers) {
             result += hasNumber(winningNumber);
         }
 
         boolean isBonusMatched = numbers.contains(bonusNumber);
 
-        return LOTTO_REWARD.of(result, isBonusMatched);
+        return LottoReward.of(result, isBonusMatched);
     }
 
     private int hasNumber(int number) {

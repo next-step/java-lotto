@@ -1,13 +1,13 @@
 package lotto.domain.result;
 
 import java.util.Objects;
-import lotto.domain.LOTTO_REWARD;
+import lotto.domain.LottoReward;
 
 public class MatchResult {
     private int matchedLottoNumberCount;
-    private LOTTO_REWARD lottoReward;
+    private LottoReward lottoReward;
 
-    MatchResult(int matchedLottoNumberCount, LOTTO_REWARD lottoReward) {
+    MatchResult(int matchedLottoNumberCount, LottoReward lottoReward) {
         this.matchedLottoNumberCount = matchedLottoNumberCount;
         this.lottoReward = lottoReward;
     }
@@ -24,7 +24,7 @@ public class MatchResult {
         return matchedLottoNumberCount;
     }
 
-    public LOTTO_REWARD getLottoReward() {
+    public LottoReward getLottoReward() {
         return lottoReward;
     }
 
