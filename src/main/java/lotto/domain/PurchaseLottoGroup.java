@@ -16,6 +16,12 @@ public class PurchaseLottoGroup {
 			.collect(Collectors.toList()));
 	}
 
+	public PurchaseLottoGroup(List<String> inputLottoList) {
+		lottoList.addAll(inputLottoList.stream()
+			.map(Lotto::new)
+			.collect(Collectors.toList()));
+	}
+
 	public int size() {
 		return lottoList.size();
 	}

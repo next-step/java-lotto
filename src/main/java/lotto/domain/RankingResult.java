@@ -3,14 +3,12 @@ package lotto.domain;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class RankingResult {
 	private final Map<LottoRank, Long> ranking = new LinkedHashMap<>();
 	public RankingResult() {
 		Stream.of(LottoRank.values())
-			.filter(LottoRank::isStatistics)
 			.forEach(rank -> ranking.put(rank, 0L));
 	}
 
@@ -21,11 +19,15 @@ public class RankingResult {
 		rankResults.forEach(this::countLottoRank);
 	}
 
-	public Yield calculateYield() {
+	public Roi calculateRoi() {
 		long proceeds = calculateProceeds();
 		long investment = calculateInvestment();
 
-		return new Yield(1 - (double) (investment - proceeds) / (double) investment);
+		return new Roi(1 - (double) (investment - proceeds) / (double) investment);
+	}
+
+	public Map<LottoRank, Long> ranking() {
+		return ranking;
 	}
 
 	private long calculateProceeds() {
@@ -36,7 +38,9 @@ public class RankingResult {
 	}
 
 	private long calculateInvestment() {
-		long resultSize = ranking.keySet().stream().mapToLong(ranking::get).sum();
+		long resultSize = ranking.keySet().stream()
+			.mapToLong(ranking::get)
+			.sum();
 
 		return Lotto.LOTTO_PRICE.multi(resultSize);
 	}
@@ -47,4 +51,11 @@ public class RankingResult {
 		}
 	}
 
+	@Override
+	public String toString() {
+		final StringBuffer sb = new StringBuffer("RankingResult{");
+		sb.append("ranking=").append(ranking);
+		sb.append('}');
+		return sb.toString();
+	}
 }

@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,7 +25,9 @@ public class WinningNumber {
 	}
 
 	private void validateSize(String[] splits) {
-		if(splits.length != NUMBER_SIZE) {
+		Set<String> deduplicationSplitInput = Arrays.stream(splits)
+			.collect(Collectors.toSet());
+		if(deduplicationSplitInput.size() != NUMBER_SIZE) {
 			throw new IllegalArgumentException("당첨번호는 " + NUMBER_SIZE + "개로 입력해주세요.");
 		}
 	}
@@ -32,5 +36,10 @@ public class WinningNumber {
 		return this.numbers.stream()
 			.filter(lotto::contain)
 			.count();
+	}
+
+	@Override
+	public String toString() {
+		return numbers.toString();
 	}
 }

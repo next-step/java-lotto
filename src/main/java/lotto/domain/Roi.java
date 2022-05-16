@@ -1,22 +1,22 @@
 package lotto.domain;
 
-public class Yield {
-	public final double yield;
+public class Roi {
+	public final double roi;
 
-	public Yield(double yield) {
-		this.yield  = yield;
+	public Roi(double roi) {
+		this.roi  = roi;
 	}
 
 	public double crop(int size) {
 		double m = Math.pow(10, size);
-		return Math.round(yield * m) / m;
+		return Math.round(roi * m) / m;
 	}
 
 	public boolean moreThen(double target) {
-		return yield > target;
+		return roi > target;
 	}
 
 	public boolean lessThen(double target) {
-		return yield < target;
+		return roi < target;
 	}
 }

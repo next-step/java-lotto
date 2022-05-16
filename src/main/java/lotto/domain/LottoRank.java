@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.StringJoiner;
 import java.util.stream.Stream;
 
 public enum LottoRank {
@@ -33,8 +34,15 @@ public enum LottoRank {
 		return amount.value();
 	}
 
+	public long sameQuantity() {
+		return sameQuantity;
+	}
+
 	@Override
 	public String toString() {
-		return sameQuantity + "개 일치 (" + amount.toString() + "원)";
+		return this.name() + "{" +
+			"sameQuantity=" + sameQuantity +
+			", amount=" + amount +
+			'}';
 	}
 }

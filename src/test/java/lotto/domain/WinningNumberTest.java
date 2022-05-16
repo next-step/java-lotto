@@ -11,8 +11,10 @@ import exception.StringParsingToNumberException;
 
 public class WinningNumberTest {
 
+	public static WinningNumber WINNING_NUMBER_1 = new WinningNumber("16,3,19,2,1,4");
+
 	@DisplayName("입력한 당첨번호가 6개가 아닌경우 에러 발생")
-	@ValueSource(strings = {"1,2,3,4,5,6,7", "1,2,3,4,5"})
+	@ValueSource(strings = {"1,2,3,4,5,6,7", "1,2,3,4,5", "1,2,3,4,5,5"})
 	@ParameterizedTest
 	public void When_GivenWrongSizeInput_Expected_IllegalArgumentException(String input) {
 		assertThatThrownBy(() -> new WinningNumber(input))

@@ -10,16 +10,16 @@ public enum ProfitOrLoss {
 	;
 
 	private final String title;
-	private final Predicate<Yield> condition;
+	private final Predicate<Roi> condition;
 
-	ProfitOrLoss(String title, Predicate<Yield> condition) {
+	ProfitOrLoss(String title, Predicate<Roi> condition) {
 		this.title = title;
 		this.condition = condition;
 	}
 
-	public static ProfitOrLoss findByYield(Yield yield) {
+	public static ProfitOrLoss findByYield(Roi roi) {
 		return Stream.of(ProfitOrLoss.values())
-			.filter(value -> value.condition.test(yield))
+			.filter(value -> value.condition.test(roi))
 			.findFirst()
 			.orElse(NOTHING);
 	}
