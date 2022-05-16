@@ -18,6 +18,24 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.value = number;
     }
 
+    public LottoNumber(final String number) {
+        this(toNumber(number));
+    }
+
+    private static int toNumber(final String number) {
+        if (!isNumber(number)) {
+            throw new IllegalArgumentException("로또 번호는 숫자여야 합니다.");
+        }
+
+        return Integer.parseInt(number);
+    }
+
+    private static boolean isNumber(final String input) {
+        String regExp = "^[0-9]+$";
+
+        return input.matches(regExp);
+    }
+
     public void validate(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException("로또 번호 범위는 " + MIN_NUMBER + " ~ " + MAX_NUMBER + " 입니다.");

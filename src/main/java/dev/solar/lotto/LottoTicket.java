@@ -1,8 +1,10 @@
 package dev.solar.lotto;
 
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     private static final int LOTTO_NUMBERS_SIZE = 6;
@@ -14,6 +16,14 @@ public class LottoTicket {
             lottoNumbers.add(LottoNumber.random());
         }
         return new LottoTicket(lottoNumbers);
+    }
+
+    public LottoTicket(final String numbers) {
+        this(Arrays.stream(numbers.split(","))
+              .map(LottoNumber::new)
+              .collect(Collectors.toCollection(
+                      () -> new TreeSet<>(LottoNumber::compareTo)
+              )));
     }
 
     public LottoTicket(final TreeSet<LottoNumber> lottoNumbers) {

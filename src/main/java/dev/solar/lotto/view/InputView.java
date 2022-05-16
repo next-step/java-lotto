@@ -27,7 +27,6 @@ public class InputView {
     public static Set<LottoNumber> inputWinningNumbers() {
         System.out.println(LAST_WEEK_WINNING_NUMBER_MESSAGE);
         return Arrays.stream(scanner.nextLine().split(DELIMITER))
-                     .map(Integer::parseInt)
                      .map(LottoNumber::new)
                      .collect(Collectors.toSet());
     }

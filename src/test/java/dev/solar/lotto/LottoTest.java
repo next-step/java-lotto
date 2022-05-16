@@ -46,12 +46,9 @@ public class LottoTest {
     }
 
     private static Stream<Arguments> lottoNumbers() {
-        return Stream.of(Arguments.of(new LottoTicket(new TreeSet<>(
-                                 Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(44), new LottoNumber(45)))), 4),
-                         Arguments.of(new LottoTicket(new TreeSet<>(
-                                 Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(45)))), 5),
-                         Arguments.of(new LottoTicket(new TreeSet<>(
-                                 Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)))), 6));
+        return Stream.of(Arguments.of(new LottoTicket("1,2,3,4,44,45"), 4),
+                         Arguments.of(new LottoTicket("1,2,3,4,5,45"), 5),
+                         Arguments.of(new LottoTicket("1,2,3,4,5,6"), 6));
     }
 
     @DisplayName("수익률을 계산한다.")
