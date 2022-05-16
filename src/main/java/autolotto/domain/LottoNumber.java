@@ -1,11 +1,12 @@
 package autolotto.domain;
 
 import autolotto.exception.LottoException;
-import autolotto.exception.LottoExceptionCode;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import static autolotto.exception.LottoExceptionCode.INVALID_LOTTO_NUMBER_TYPE;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final Map<Integer, LottoNumber> cache = new HashMap<>();
@@ -25,7 +26,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber of(String number) {
         if (!LottoNumberPattern.match(number)) {
-            throw new LottoException(LottoExceptionCode.INVALID_LOTTO_NUMBER_TYPE, number);
+            throw new LottoException(INVALID_LOTTO_NUMBER_TYPE, number);
         }
         return cache.get(Integer.parseInt(number));
     }

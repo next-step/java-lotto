@@ -2,6 +2,7 @@ package autolotto;
 
 import autolotto.constant.Rank;
 import autolotto.domain.*;
+import autolotto.exception.LottoException;
 import autolotto.view.LottoInput;
 import autolotto.view.LottoOutput;
 
@@ -10,7 +11,13 @@ import java.util.Set;
 
 public class Lottery {
     public static void main(String[] args) {
-        runLottery(createLotto(), createWinningNumbers());
+        try {
+            runLottery(createLotto(), createWinningNumbers());
+        } catch (LottoException e) {
+            System.out.println("게임 진행 중 에러가 발생했습니다. " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("알 수 없는 에러가 발생했습니다.");
+        }
     }
 
     private static Lottos createLotto() {

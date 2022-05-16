@@ -3,10 +3,11 @@ package autolotto.view;
 import autolotto.domain.LottoNumber;
 import autolotto.domain.LottoNumbers;
 import autolotto.exception.LottoException;
-import autolotto.exception.LottoExceptionCode;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static autolotto.exception.LottoExceptionCode.INVALID_NEGATIVE_NUMBER_TYPE;
 
 public class LottoInput {
     public static final String AMOUNT_QUESTION = "구입 금액을 입력해주세요. ex. 14000";
@@ -19,7 +20,7 @@ public class LottoInput {
         int purchaseAmount = scanner.nextInt();
         scanner.nextLine();
         if (purchaseAmount < 0) {
-            throw new IllegalArgumentException("양수만 입력 가능합니다.");
+            throw new LottoException(INVALID_NEGATIVE_NUMBER_TYPE, String.valueOf(purchaseAmount));
         }
 
         return purchaseAmount;
@@ -54,7 +55,7 @@ public class LottoInput {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         int quantity = Integer.parseInt(scanner.nextLine());
         if (quantity < 0) {
-            throw new LottoException(LottoExceptionCode.INVALID_QUANTITY_NUMBER_TYPE, String.valueOf(quantity));
+            throw new LottoException(INVALID_NEGATIVE_NUMBER_TYPE, String.valueOf(quantity));
         }
         return quantity;
     }
