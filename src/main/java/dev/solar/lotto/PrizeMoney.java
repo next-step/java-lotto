@@ -1,7 +1,6 @@
 package dev.solar.lotto;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.BiPredicate;
 
@@ -25,13 +24,6 @@ public enum PrizeMoney {
         return Arrays.stream(values())
                 .filter(value -> filter.test(value, count))
                 .findAny();
-    }
-
-    static class PrizeMoneyComparator implements Comparator<PrizeMoney> {
-        @Override
-        public int compare(final PrizeMoney o1, final PrizeMoney o2) {
-            return Integer.compare(o1.count, o2.count);
-        }
     }
 
     public int getCount() {

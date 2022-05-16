@@ -36,7 +36,7 @@ public class Lotto {
     private static void initialWinningResult(final Lotto lotto) {
         Arrays.stream(PrizeMoney.values())
               .forEach(
-                      PrizeMoney -> lotto.winningResult.put(PrizeMoney, INITIAL_COUNT)
+                      prizemoney -> lotto.winningResult.put(prizemoney, INITIAL_COUNT)
               );
     }
 
@@ -94,6 +94,6 @@ public class Lotto {
     }
 
     public List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
+        return List.copyOf(lottoTickets);
     }
 }
