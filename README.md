@@ -85,6 +85,10 @@
   * LottoNumbers
     * Variables
       * 로또 번호
+* Exceptions
+  * DuplicatedNumbersException: 중복 로또 번호 Exception
+  * InvalidLottoByHandLengthException: 로또 번호 6개 아님 Exception
+  * InvalidLottoNumberException: 로또 번호 1~45 사이 아님 Exception
 * Util
   * Ratio
     * Functions
