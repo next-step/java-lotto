@@ -14,11 +14,6 @@ public enum Rank {
     private final int coincidence;
     private final Money reward;
 
-    Rank(int coincidence, Money reward) {
-        this.coincidence = coincidence;
-        this.reward = reward;
-    }
-
     Rank(int coincidence, int reward) {
         this.coincidence = coincidence;
         this.reward = new Money(reward);
@@ -28,18 +23,23 @@ public enum Rank {
         return this.coincidence == coincidence;
     }
 
-    public static Rank of(int num, boolean bonesBall){
-        if(num == 5 && bonesBall){
-            return Rank.SECOND;
-        }
-        if(num == 5){
-            return Rank.THIRD;
-        }
-
-        return  Arrays.stream(Rank.values())
+    public static Rank of(int num, boolean bonusBall){
+        Rank rank = Arrays.stream(Rank.values())
                 .filter(op -> op.isEqual(num))
                 .findAny()
                 .orElse(NONE);
+
+        return checkSecondOrThird(rank, bonusBall);
+    }
+
+    private static Rank checkSecondOrThird(Rank rank, boolean bonusBall){
+        if(rank != SECOND && rank != THIRD){
+            return rank;
+        }
+        if(bonusBall){
+            return SECOND;
+        }
+        return THIRD;
     }
 
     public Money getReward() {

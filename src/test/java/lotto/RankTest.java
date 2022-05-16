@@ -18,4 +18,11 @@ public class RankTest {
     void Rank_3등_테스트(){
         assertThat(Rank.of(5, false)).isEqualTo(Rank.THIRD);
     }
+
+    @Test
+    @DisplayName("NONE Rank 테스트")
+    void Rank_NONE_테스트(){
+        assertThat(Rank.of(-1, false)).isEqualTo(Rank.NONE);
+        assertThat(Rank.of(2, false)).isEqualTo(Rank.NONE);
+    }
 }
