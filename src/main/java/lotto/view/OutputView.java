@@ -21,12 +21,16 @@ public class OutputView {
 	}
 
 	public static void printWinningStatistics(RankingResult rankingResult) {
-		System.out.println("당첨 통계");
-		System.out.println("---------");
-		System.out.println(rankingResult.ranking().keySet().stream()
+		StringBuffer printBuffer = new StringBuffer();
+
+		printBuffer.append("당첨 통계");
+		printBuffer.append("---------");
+		printBuffer.append(rankingResult.ranking().keySet().stream()
 			.filter(LottoRank::isStatistics)
 			.map(rank -> String.format("%d개 일치 (%d원) - %d개", rank.sameQuantity(), rank.amount(), rankingResult.ranking().get(rank)))
 			.collect(Collectors.joining("\n")));
+
+		System.out.println(printBuffer);
 	}
 
 	public static void printYield(Roi roi) {
