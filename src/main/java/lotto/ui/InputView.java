@@ -1,7 +1,12 @@
 package lotto.ui;
 
+import lotto.domain.Lotto;
+import lotto.domain.UserLottos;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
     private static final String INPUT_PRICE_MESSAGE = "구입금액을 입력해 주세요.";
@@ -23,17 +28,16 @@ public class InputView {
         return Console.readLine();
     }
 
-    public static String getManualLottoCount() {
+    public static int getManualLottoCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return Console.readLine();
+        return Integer.parseInt(Console.readLine());
     }
 
-    public static List<String> getManualLottos(int count) {
+    public static UserLottos getManualLottos(int count) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<String> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(Console.readLine());
-        }
-        return lottos;
+        List<Lotto> userLottos = IntStream.range(0, count)
+                .mapToObj(i -> new Lotto(Console.readLine()))
+                .collect(Collectors.toList());
+        return new UserLottos(userLottos);
     }
 }
