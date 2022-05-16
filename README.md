@@ -228,7 +228,7 @@ Earning rate: 2142.8571428571427
 
 ### Requested changes - phase3
 - [x] 로또 당첨 결과 반환을 Winning이 수행하도록 변경
-- [ ] LotteryNumber 테스트 추가
+- [x] LotteryNumber 테스트 추가
 - [ ] LotteryBox 에 List 대신 Set을 사용하여 중복 허용 막기, 테스트 확인
 - [ ] findSixNumbers -> createLottery 로 이름 변경
 - [ ] doesMatchAnswer, doesMatchBonus 를 하나의 메소드로 병합
