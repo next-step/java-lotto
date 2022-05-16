@@ -3,51 +3,56 @@ package study.step4.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 @DisplayName("번호 그룹")
 class LottoNumbersTest {
-    public Set<Integer> createLottoNumber() {
-        return IntStream.range(1,7)
-                .boxed()
-                .collect(Collectors.toSet());
-    }
-    public Set<Integer> createLottoNumber_2() {
-        return IntStream.range(2, 8)
-                .boxed()
-                .collect(Collectors.toSet());
+    private static Stream<Arguments> createLottoNumber() {
+        return Stream.of(
+                Arguments.of(IntStream.range(1,7)
+                        .boxed()
+                        .collect(Collectors.toSet()))
+        );
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("번호 사이즈 6개 확인")
-    void 번호_사이즈_6개_확인() {
-        LottoNumbers numbers = new LottoNumbers(createLottoNumber());
+    @MethodSource("createLottoNumber")
+    void 번호_사이즈_6개_확인(Set<Integer> lottoNumber) {
+        LottoNumbers numbers = new LottoNumbers(lottoNumber);
 
         assertThat(numbers.readOnlyNumbers().size()).isEqualTo(6);
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("번호 일치 확인")
-    void 번호_일치_확인() {
-        Set<Integer> intList = createLottoNumber();
+    @MethodSource("createLottoNumber")
+    void 번호_일치_확인(Set<Integer> lottoNumber) {
+        Set<Integer> intList = lottoNumber;
         LottoNumbers numbers = new LottoNumbers(intList);
         LottoNumbers numbers2 = new LottoNumbers(intList);
 
         assertThat(numbers.equals(numbers2)).isTrue();
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("번호 불일치 확인")
-    void 번호_불일치_확인() {
-        LottoNumbers numbers = new LottoNumbers(createLottoNumber());
-        LottoNumbers numbers2 = new LottoNumbers(createLottoNumber_2());
+    @MethodSource({"createLottoNumber"})
+    void 번호_불일치_확인(Set<Integer> lottoNumber) {
+        LottoNumbers numbers = new LottoNumbers(lottoNumber);
+        LottoNumbers numbers2 = new LottoNumbers(IntStream.range(2, 8)
+                .boxed()
+                .collect(Collectors.toSet()));
 
         assertThat(numbers.equals(numbers2)).isFalse();
     }
