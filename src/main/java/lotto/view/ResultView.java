@@ -11,7 +11,7 @@ public class ResultView {
     public static void printBuyingLottos(Lottos lottos) {
         System.out.println(lottos.getCount() + "개를 구매했습니다.");
         for (Lotto lotto : lottos.getLottoList()) {
-            System.out.println(lotto.getString());
+            System.out.println(lotto.getLottoNumberString());
         }
     }
 

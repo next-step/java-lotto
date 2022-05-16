@@ -4,9 +4,9 @@ import java.util.*;
 
 public class Lotto {
 
-    public static final int LOTTO_COUNT = 6;
-    public static final int MIN_NUM = 1;
-    public static final int MAX_NUM = 45;
+    private static final int LOTTO_COUNT = 6;
+    private static final int MIN_NUM = 1;
+    private static final int MAX_NUM = 45;
     public static final int PRICE = 1000;
 
     private final List<Integer> numbers;
@@ -47,7 +47,7 @@ public class Lotto {
         return ConfirmationOfWinning.getRank(winner, this);
     }
 
-    public String getString() {
+    public String getLottoNumberString() {
         return numbers.toString();
     }
 
