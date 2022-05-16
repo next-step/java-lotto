@@ -28,13 +28,12 @@ public class LottoResultTest {
         Integer[] res = {2, 1, 2};
         int coincidence = 3;
         for (int i = 0; i < res.length; i++) {
-            assertThat(lottoResult.getResult(coincidence, false)).isEqualTo(res[i]);
+            Rank rank = Rank.of(coincidence,false);
+            assertThat(lottoResult.getRankValue(rank)).isEqualTo(res[i]);
             coincidence += 1;
         }
-        assertThat(lottoResult.getResult(5, true)).isEqualTo(1);
-
+        assertThat(lottoResult.getRankValue(Rank.SECOND)).isEqualTo(1);
     }
-
 
     @Test
     @DisplayName("수익률 테스트")

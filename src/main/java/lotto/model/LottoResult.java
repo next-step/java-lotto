@@ -9,15 +9,7 @@ public class LottoResult {
         this.rankMap = rankMap;
     }
 
-    public int getResult(int coincidence, boolean bonusBall) {
-        Rank rank = Rank.of(coincidence, bonusBall);
-        if(rankMap.get(rank) == null){
-            return 0;
-        }
-        return rankMap.get(rank).intValue();
-    }
-
-    public int getResult(Rank rank) {
+    public int getRankValue(Rank rank) {
         if(rankMap.get(rank) == null){
             return 0;
         }
