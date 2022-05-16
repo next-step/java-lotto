@@ -13,12 +13,8 @@ public class UserLottos {
         this.userLottos = buyLottoNumbers;
     }
 
-    public void createManual(Lotto lotto) {
+    public void add(Lotto lotto) {
         this.userLottos.add(lotto);
-    }
-
-    public void createAuto() {
-        this.userLottos.add(LottoFactory.createAutoLotto());
     }
 
     public LottoResults getWinningResults(WinningLotto winningLottoNumber) {
@@ -37,12 +33,12 @@ public class UserLottos {
         return moneySum;
     }
 
-    public List<Lotto> getBuyLottos() {
+    public List<Lotto> getUserLottos() {
         return Collections.unmodifiableList(userLottos);
     }
 
-    public int getSize() {
-        return userLottos.size();
+    public boolean isEmpty() {
+        return this.userLottos.isEmpty();
     }
 
     @Override
