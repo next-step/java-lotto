@@ -9,6 +9,9 @@ public class LottoAutoMachine {
 
     private static final List<Integer> numberPool = Stream.iterate(1, n -> n + 1).limit(45).collect(Collectors.toList());
 
+    private LottoAutoMachine() {
+    }
+
     public static Lotto makeLotto() {
         Collections.shuffle(numberPool);
         List<Integer> integers = numberPool.subList(0, 6);

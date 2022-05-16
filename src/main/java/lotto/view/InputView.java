@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 
 public class InputView {
 
+    private InputView() {
+    }
+
     public static int inputMoney() {
         System.out.println("구입금액을 입력해주세요");
         Scanner scanner = new Scanner(System.in);

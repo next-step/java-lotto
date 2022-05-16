@@ -4,6 +4,9 @@ import java.util.List;
 
 public class ConfirmationOfWinning {
 
+    private ConfirmationOfWinning() {
+    }
+
     public static int getRank(Lotto winningLotto, Lotto buyingLotto) {
         int containCount = getContainCount(winningLotto, buyingLotto);
 

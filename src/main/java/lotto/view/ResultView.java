@@ -5,6 +5,9 @@ import lotto.domain.Lottos;
 
 public class ResultView {
 
+    private ResultView() {
+    }
+
     public static void printBuyingLottos(Lottos lottos) {
         System.out.println(lottos.getCount() + "개를 구매했습니다.");
         for (Lotto lotto : lottos.getLottoList()) {

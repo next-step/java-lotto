@@ -8,6 +8,9 @@ public class WinningMoneyCalculator {
     static final int FOURTH_RANK_MONEY = 5000;
     static final int DROP_MONEY = 0;
 
+    private WinningMoneyCalculator() {
+    }
+
     public static int getTotalWinningMoney(Lotto winningLotto, Lottos buyingLottos) {
         int totalWinningMoney = 0;
         for (Lotto buyingLotto : buyingLottos.getLottoList()) {
