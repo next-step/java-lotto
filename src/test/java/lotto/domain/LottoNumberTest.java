@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import exception.OutOfRangeException;
 
@@ -25,11 +27,10 @@ public class LottoNumberTest {
 	}
 
 	@DisplayName("로또번호가 빈 값이거나 null 인 경우 IllegalArgumentException")
-	@Test
-	public void When_lottoNumberBlankOrNull_expected_IllegalArgumentException() {
-		assertThatThrownBy(() -> new LottoNumber(""))
-			.isInstanceOf(IllegalArgumentException.class);
-		assertThatThrownBy(() -> new LottoNumber(null))
+	@NullAndEmptySource
+	@ParameterizedTest
+	public void When_lottoNumberBlankOrNull_expected_IllegalArgumentException(String blankLottoNumber) {
+		assertThatThrownBy(() -> new LottoNumber(blankLottoNumber))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 }
