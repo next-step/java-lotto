@@ -14,11 +14,11 @@ public class RankingResult {
 			.forEach(rank -> ranking.put(rank, 0L));
 	}
 
-	public RankingResult(List<LottoRank> results) {
+	public RankingResult(PurchaseLottoGroup purchaseLottoGroup, WinningNumber winningNumber) {
 		this();
-		for (LottoRank resultRank : results) {
-			countLottoRank(resultRank);
-		}
+		List<LottoRank> rankResults = purchaseLottoGroup.ranking(winningNumber);
+
+		rankResults.forEach(this::countLottoRank);
 	}
 
 	public Yield calculateYield() {

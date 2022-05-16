@@ -24,9 +24,7 @@ public class LottoController {
 
 		WinningNumber winningNumber = InputView.inputWinningNumber();
 
-		List<LottoRank> ranking = purchaseLottoGroup.ranking(winningNumber);
-
-		RankingResult rankingResult = new RankingResult(ranking);
+		RankingResult rankingResult = new RankingResult(purchaseLottoGroup, winningNumber);
 
 		OutputView.printWinningStatistics(rankingResult);
 		OutputView.printYield(rankingResult.calculateYield());
