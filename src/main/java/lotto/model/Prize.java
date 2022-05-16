@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.util.Calculator;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -52,16 +50,14 @@ public class Prize {
         Number left = Number.of(this.ranks.size());
         Number right = Number.of(1000L);
 
-        return Calculator.multiply(left, right);
+        return left.multiply(right);
     }
 
     public List<Rank> getRanks() {
         return this.ranks;
     }
 
-    public double getWinningRate() {
-        return Calculator
-                .divide(this.getTotalPrize(), this.getPrice())
-                .doubleValue();
+    public Number getWinningRate() {
+        return this.getTotalPrize().divide(this.getPrice());
     }
 }

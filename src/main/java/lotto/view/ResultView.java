@@ -28,9 +28,9 @@ public class ResultView {
         print(message);
     }
 
-    private static void print(double winningRate) {
-        String message = RESULT_MESSAGE.apply(String.valueOf(winningRate));
-        if (winningRate < 1) {
+    private static void print(Number winningRate) {
+        String message = RESULT_MESSAGE.apply(String.valueOf(winningRate.doubleValue()));
+        if (winningRate.isLessThan(Number.of(1L))) {
             message += LOSS_MESSAGE;
         }
 
