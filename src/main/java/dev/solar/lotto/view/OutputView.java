@@ -5,9 +5,9 @@ import java.util.Set;
 import java.util.StringJoiner;
 import java.util.TreeMap;
 
-import dev.solar.lotto.Lotto;
-import dev.solar.lotto.LottoNumber;
-import dev.solar.lotto.PrizeMoney;
+import dev.solar.lotto.domain.Lotto;
+import dev.solar.lotto.domain.LottoNumber;
+import dev.solar.lotto.domain.PrizeMoney;
 
 public class OutputView {
     private static final String PREFIX = "[";

@@ -10,6 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import dev.solar.lotto.domain.Lotto;
+import dev.solar.lotto.domain.LottoTicket;
+import dev.solar.lotto.domain.PrizeMoney;
+
 public class LottoTest {
 
     @DisplayName("로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급한다.")

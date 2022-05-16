@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 
+import dev.solar.lotto.domain.Lotto;
+import dev.solar.lotto.domain.LottoNumber;
+import dev.solar.lotto.domain.LottoTicket;
+import dev.solar.lotto.domain.PrizeMoney;
 import dev.solar.lotto.view.InputView;
 import dev.solar.lotto.view.OutputView;
 

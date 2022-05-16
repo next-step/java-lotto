@@ -1,4 +1,4 @@
-package dev.solar.lotto;
+package dev.solar.lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
+
+import dev.solar.lotto.LottoException;
 
 public class Lotto {
     private static final int LOTTO_PRICE = 1000;

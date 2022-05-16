@@ -1,10 +1,12 @@
-package dev.solar.lotto;
+package dev.solar.lotto.domain;
 
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
+
+import dev.solar.lotto.LottoException;
 
 public class LottoTicket {
     private static final int LOTTO_NUMBERS_SIZE = 6;

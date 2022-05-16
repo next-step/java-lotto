@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import dev.solar.lotto.LottoNumber;
+import dev.solar.lotto.domain.LottoNumber;
 
 public class InputView {
     private static final String PURCHASING_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";

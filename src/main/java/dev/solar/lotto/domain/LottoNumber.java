@@ -1,4 +1,4 @@
-package dev.solar.lotto;
+package dev.solar.lotto.domain;
 
 import java.util.Objects;
 import java.util.Random;

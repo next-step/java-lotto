@@ -12,6 +12,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import dev.solar.lotto.domain.LottoNumber;
+import dev.solar.lotto.domain.LottoTicket;
+
 public class LottoTicketTest {
     @DisplayName("입력받은 당첨 번호로 몇개의 번호를 맞췄는지 계산한다.")
     @MethodSource("lottoNumbers")
