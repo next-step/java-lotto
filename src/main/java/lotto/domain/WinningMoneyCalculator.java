@@ -2,10 +2,10 @@ package lotto.domain;
 
 public class WinningMoneyCalculator {
 
-    static final int FIRST_RANK_MONEY = 2000000000;
-    static final int SECOND_RANK_MONEY = 1500000;
-    static final int THIRD_RANK_MONEY = 50000;
-    static final int FOURTH_RANK_MONEY = 5000;
+    static final int FIRST_RANK_MONEY = 2_000_000_000;
+    static final int SECOND_RANK_MONEY = 1_500_000;
+    static final int THIRD_RANK_MONEY = 50_000;
+    static final int FOURTH_RANK_MONEY = 5_000;
     static final int DROP_MONEY = 0;
 
     private WinningMoneyCalculator() {
