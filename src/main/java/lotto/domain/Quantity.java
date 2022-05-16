@@ -3,26 +3,26 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Quantity {
-    private static final String EXCEED_QUANTITY_MESSAGE = "수량을 초과하였습니다.";
+    private static final String EXCEED_QUANTITY_MESSAGE = "구매가능한 수량을 초과하였습니다.";
 
     private final int maxPurchasableQuantity;
     private final int purchasedQuantity;
     private final int manualBuyQuantity;
 
-    public Quantity(int maxPurchasableQuantity, String manualBuyQuantity) {
-        this(maxPurchasableQuantity, Integer.parseInt(manualBuyQuantity), Integer.parseInt(manualBuyQuantity));
+    public Quantity(int maxPurchasableQuantity, int manualBuyQuantity) {
+        this(maxPurchasableQuantity, manualBuyQuantity, manualBuyQuantity);
     }
 
     private Quantity(int maxPurchasableQuantity, int manualBuyQuantity, int purchasedQuantity) {
+        validate(maxPurchasableQuantity, purchasedQuantity);
         this.maxPurchasableQuantity = maxPurchasableQuantity;
         this.manualBuyQuantity = manualBuyQuantity;
         this.purchasedQuantity = purchasedQuantity;
-        validate();
     }
 
-    private void validate() {
+    private void validate(int maxPurchasableQuantity, int purchasedQuantity) {
         if (maxPurchasableQuantity < purchasedQuantity) {
-            throw new IllegalArgumentException(EXCEED_QUANTITY_MESSAGE + this);
+            throw new IllegalArgumentException(EXCEED_QUANTITY_MESSAGE);
         }
     }
 
@@ -40,6 +40,10 @@ public class Quantity {
 
     public int getManualBuyCount() {
         return this.manualBuyQuantity;
+    }
+
+    public int getAutoBuyCount() {
+        return maxPurchasableQuantity - manualBuyQuantity;
     }
 
     @Override
@@ -62,5 +66,4 @@ public class Quantity {
                 ", purchasedQuantity=" + purchasedQuantity +
                 '}';
     }
-
 }
