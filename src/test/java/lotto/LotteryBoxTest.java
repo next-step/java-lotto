@@ -19,7 +19,7 @@ public class LotteryBoxTest {
 
     @Test
     void shouldFindSixNumbers() {
-        assertThat(LotteryBox.findSixNumbers()).hasSize(6);
+        assertThat(LotteryBox.createLottery()).hasSize(6);
     }
 
     @Test

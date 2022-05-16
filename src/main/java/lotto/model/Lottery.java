@@ -19,7 +19,7 @@ public class Lottery {
     }
 
     private List<LotteryNumber> createLottery() {
-        return LotteryBox.findSixNumbers();
+        return LotteryBox.createLottery();
     }
 
     @Override

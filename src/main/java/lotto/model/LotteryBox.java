@@ -16,7 +16,7 @@ public class LotteryBox {
         return lotteryNumbers;
     }
 
-    public static List<LotteryNumber> findSixNumbers() {
+    public static List<LotteryNumber> createLottery() {
         List<LotteryNumber> shuffledLotteryNumbers = LotteryBox.shuffleBox();
         List<LotteryNumber> list = new ArrayList();
         for (int i = 1; i <= 6; i++) {
