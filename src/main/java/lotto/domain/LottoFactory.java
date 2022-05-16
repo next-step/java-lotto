@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -20,9 +21,9 @@ public class LottoFactory {
 
     public static LottoNumbers createAutoLottoNumbers() {
         Collections.shuffle(lottoNumbers);
-        List<LottoNumber> lottoNumbers = LottoFactory.lottoNumbers.stream()
+        Set<LottoNumber> lottoNumbers = LottoFactory.lottoNumbers.stream()
                 .limit(LOTTO_NUMBER_COUNT)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
 
         return new LottoNumbers(lottoNumbers);
     }

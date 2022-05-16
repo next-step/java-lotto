@@ -6,14 +6,16 @@ import java.util.List;
 
 public class LottoGame {
 
-    private final Money money;
+    private final int LOTTO_PRICE = 1000;
+
     private final PurchaseAmount purchaseAmount;
+    private final PurchaseLottoCount purchaseLottoCount;
     private final Lottos lottos;
 
-    public LottoGame(Money money) {
-        this.purchaseAmount = Store.buyLotto(money);
-        this.money = money;
-        this.lottos = new Lottos(purchaseAmount);
+    public LottoGame(PurchaseAmount purchaseAmount) {
+        this.purchaseLottoCount = new PurchaseLottoCount(purchaseAmount, LOTTO_PRICE);
+        this.purchaseAmount = purchaseAmount;
+        this.lottos = new Lottos(purchaseLottoCount);
     }
 
     public int getLottoAmount() {
@@ -33,6 +35,6 @@ public class LottoGame {
     }
 
     public double calculateBenefitRate() {
-        return (double) lottos.getTotalPrizeMoney() / (double) money.getMoney();
+        return (double) lottos.getTotalPrizeMoney() / (double) purchaseAmount.getPurchaseAmount();
     }
 }

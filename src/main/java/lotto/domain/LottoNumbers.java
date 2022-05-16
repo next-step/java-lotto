@@ -1,23 +1,24 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private static final String LOTTO_NUMBERS_TEXT_DELIMITER = ", ";
-    private static final String INVALID_LOTTO_NUMBER_COUNT_= "번호가 부족합니다.";
+    private static final String INVALID_LOTTO_NUMBER_COUNT = "번호가 부족합니다. 입력된 번호 수 : %d";
     private static final int LOTTO_NUMBER_COUNT = 6;
 
     private final Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers(String lottoNumbers) {
-        this.lottoNumbers = toListWinningNumberText(lottoNumbers).stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet());
+        this(toLottoNumbers(lottoNumbers));
     }
 
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = new HashSet<>(lottoNumbers);
+    public LottoNumbers(Set<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     private static List<String> toListWinningNumberText(String lottoNumbers) {
@@ -27,9 +28,15 @@ public class LottoNumbers {
         return lottoNumberTexts;
     }
 
+    private static Set<LottoNumber> toLottoNumbers(String lottoNumbers) {
+        return toListWinningNumberText(lottoNumbers).stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
+    }
+
     private static void validate(List<String> lottoNumberTexts) {
         if (lottoNumberTexts.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_COUNT_);
+            throw new IllegalArgumentException(String.format(INVALID_LOTTO_NUMBER_COUNT, lottoNumberTexts.size()));
         }
     }
 

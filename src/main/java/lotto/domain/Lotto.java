@@ -3,11 +3,6 @@ package lotto.domain;
 import lotto.domain.constant.Rank;
 
 public class Lotto {
-    private static final String DELIMITER = ", ";
-    private static final String PREFIX = "[";
-    private static final String SUFFIX = "]";
-    private static final String LOTTO_NUMBER_DELIMITER = ",";
-
     private final LottoNumbers lottoNumbers;
     private Rank rank;
 

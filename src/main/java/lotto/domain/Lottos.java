@@ -10,12 +10,16 @@ public class Lottos {
 
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(PurchaseAmount purchaseAmount) {
-        createAutoLottos(purchaseAmount);
+    public Lottos(PurchaseLottoCount purchaseLottoCount) {
+        this(purchaseLottoCount.getAmount());
     }
 
-    private void createAutoLottos(PurchaseAmount purchaseAmount) {
-        for (int i = 0; i < purchaseAmount.getAmount(); i++) {
+    public Lottos(int purchaseLottoCount) {
+        createAutoLottos(purchaseLottoCount);
+    }
+
+    private void createAutoLottos(int purchaseLottoCount) {
+        for (int i = 0; i < purchaseLottoCount; i++) {
             lottos.add(new Lotto(LottoFactory.createAutoLottoNumbers()));
         }
     }
