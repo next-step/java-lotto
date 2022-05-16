@@ -14,6 +14,7 @@ public class App {
         ResultView.printBuyLottoNumbers(lottoGame.getUserLottos());
 
         WinningLotto winningLottoNumber = new WinningLotto(InputView.getWinningNumber(), InputView.getBonusNumber());
+
         ResultView.printWinningTitleAndResults(lottoGame.getWinningResults(winningLottoNumber));
         ResultView.printReturnRate(lottoGame.getReturnRate(winningLottoNumber));
     }
