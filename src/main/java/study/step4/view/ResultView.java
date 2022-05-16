@@ -21,6 +21,7 @@ public class ResultView {
     private static final String MATCH_START_BRACKET_MESSAGE = "(";
     private static final String MATCH_END_BRACKET_MESSAGE = ") - ";
     private static final String MATCH_END_MESSAGE = "개";
+    private static final String ENTER = "\n";
     private static final int DEFAULT_LOTTO_YIELD = 1;
     private static final int MISS_MATCH_REMOVE_NUMBER = 0;
 
@@ -33,16 +34,16 @@ public class ResultView {
     public void printLottoTicketInfos(int manualNumber) {
         StringBuilder sb = new StringBuilder();
         List<LottoTicket> tickets = lottoTickets.readOnlyLottoTicket();
-        sb.append(INPUT_RESULT_MANUAL_MESSAGE + manualNumber + INPUT_RESULT_AUTO_MESSAGE + (lottoTickets.lottoQuantity() - manualNumber) + BUY_QUANTITY_MESSAGE + '\n');
+        sb.append(INPUT_RESULT_MANUAL_MESSAGE + manualNumber + INPUT_RESULT_AUTO_MESSAGE + (lottoTickets.lottoQuantity() - manualNumber) + BUY_QUANTITY_MESSAGE + ENTER);
         tickets.stream()
-                .forEach(ticket -> sb.append(ticket.readOnlyLottoNumber().toString() + '\n'));
+                .forEach(ticket -> sb.append(ticket.readOnlyLottoNumber().toString() + ENTER));
         System.out.println(sb);
     }
 
     public void printLottoResultInfos(LottoTickets lottoTickets, LottoWinners lottoWinners) {
         StringBuilder sb = new StringBuilder();
-        sb.append(RESULT_WINNER_RANK);
-        sb.append(RESULT_WINNER_RANK);
+        sb.append(RESULT_WINNER_RANK + ENTER);
+        sb.append(RESULT_WINNER_LINE);
         System.out.println(sb);
         Arrays.asList(LottoRank.values())
                 .stream()
