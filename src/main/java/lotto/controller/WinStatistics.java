@@ -49,7 +49,7 @@ public class WinStatistics {
     public int getEarnedMoney() {
         int earnedMoney = 0;
         for (Reward reward: matches.keySet()) {
-            earnedMoney += reward.calc(matches.get(reward));
+            earnedMoney += reward.calculateEarnedMoney(matches.get(reward));
         }
         return earnedMoney;
     }

@@ -60,8 +60,5 @@ public class Money {
         return Objects.hash(value, investedMoney);
     }
 
-    public int calc(Integer win) {
-        return this.value * win;
-    }
 
 }
