@@ -3,7 +3,6 @@ package lotto.domain;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -12,8 +11,7 @@ class LottoTest {
 
     @Test
     void lotto_normal() {
-        List<Integer> numbers = Arrays.stream(new Integer[]{1, 2, 3, 4, 5, 6})
-                .collect(Collectors.toList());
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         Lotto lotto = new Lotto(numbers);
 
@@ -22,42 +20,36 @@ class LottoTest {
 
     @Test
     void lotto_최대값초과_argumentException() {
-        List<Integer> numbers = Arrays.stream(new Integer[]{1, 2, 3, 4, 5, 46})
-                .collect(Collectors.toList());
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 46);
 
         assertThrows(IllegalArgumentException.class, () -> new Lotto(numbers));
     }
 
     @Test
     void lotto_최소값미만_argumentException() {
-        List<Integer> numbers = Arrays.stream(new Integer[]{0, 2, 3, 4, 5, 6})
-                .collect(Collectors.toList());
+        List<Integer> numbers = Arrays.asList(0, 2, 3, 4, 5, 6);
 
         assertThrows(IllegalArgumentException.class, () -> new Lotto(numbers));
     }
 
     @Test
     void lotto_숫자중복_argumentException() {
-        List<Integer> numbers = Arrays.stream(new Integer[]{1, 2, 3, 4, 5, 5})
-            .collect(Collectors.toList());
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 5);
 
         assertThrows(IllegalArgumentException.class, () -> new Lotto(numbers));
     }
 
     @Test
     void lotto_숫자6개이하_argumentException() {
-        List<Integer> numbers = Arrays.stream(new Integer[]{1, 2, 3, 4, 5})
-                .collect(Collectors.toList());
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
 
         assertThrows(IllegalArgumentException.class, () -> new Lotto(numbers));
     }
 
     @Test
     void getRank_6개일치_1위() {
-        Lotto lotto = new Lotto(Arrays.stream(new Integer[]{1, 2, 3, 4, 5, 6})
-                .collect(Collectors.toList()));
-        Lotto winningLotto = new Lotto(Arrays.stream(new Integer[]{1, 2, 3, 4, 5, 6})
-                .collect(Collectors.toList()));
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         int rank = lotto.getRank(winningLotto);
 
@@ -66,10 +58,8 @@ class LottoTest {
 
     @Test
     void getRank_2개일치_5위() {
-        Lotto lotto = new Lotto(Arrays.stream(new Integer[]{1, 2, 3, 4, 5, 6})
-                .collect(Collectors.toList()));
-        Lotto winningLotto = new Lotto(Arrays.stream(new Integer[]{1, 2, 9, 10, 11, 12})
-                .collect(Collectors.toList()));
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 9, 10, 11, 12));
 
         int rank = lotto.getRank(winningLotto);
 
