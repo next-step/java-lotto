@@ -93,3 +93,8 @@
   * Ratio
     * Functions
       * 로또 구입 금액 대비 효율 계산
+  * Duplicated
+    * Functions
+      * int[]형의 로또 중복 체크
+      * String[]형의 로또 중복 체크
+      * List<LottoNumber>형의 로또 중복 체크
