@@ -15,7 +15,14 @@ public class ResultView {
     private static final String INPUT_RESULT_AUTO_MESSAGE = "장, 자동으로 ";
     private static final String STRING_PROFIT_MESSAGE = "(기준이 1이기 때문에 결과적으로 이익이라는 의미임)";
     private static final String STRING_LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final String TOTAL_START_MESSAGE = "총 수익률을 ";
+    private static final String TOTAL_END_MESSAGE = "입니다. ";
+    private static final String MATCH_START_MESSAGE = "개 일치 ";
+    private static final String MATCH_START_BRACKET_MESSAGE = "(";
+    private static final String MATCH_END_BRACKET_MESSAGE = ") - ";
+    private static final String MATCH_END_MESSAGE = "개";
     private static final int DEFAULT_LOTTO_YIELD = 1;
+    private static final int MISS_MATCH_REMOVE_NUMBER = 0;
 
     private final LottoTickets lottoTickets;
 
@@ -43,7 +50,7 @@ public class ResultView {
 
     public void printLottoYield(LottoTickets lottoTickets, LottoWinners lottoWinners) {
         double yield = LottoYield.operationYield(lottoTickets, lottoWinners);
-        System.out.print("총 수익률을 " + String.format("%.2f", yield) + "입니다. ");
+        System.out.print(TOTAL_START_MESSAGE + String.format("%.2f", yield) + TOTAL_END_MESSAGE);
 
         if (yield >= DEFAULT_LOTTO_YIELD) {
             System.out.print(STRING_PROFIT_MESSAGE);
@@ -53,8 +60,8 @@ public class ResultView {
     }
 
     private void printLottoRank(LottoRank lottoRank, LottoWinners lottoWinners) {
-        if (lottoRank.countOfMatch != 0) {
-            System.out.println(lottoRank.countOfMatch + "개 일치 " + bonusOfString(lottoRank) + "(" + lottoRank.winningMoney + ") - " + lottoRank.winnerCount(lottoTickets.readOnlyLottoTicket(), lottoWinners) + "개");
+        if (lottoRank.countOfMatch != MISS_MATCH_REMOVE_NUMBER) {
+            System.out.println(lottoRank.countOfMatch + MATCH_START_MESSAGE + bonusOfString(lottoRank) + MATCH_START_BRACKET_MESSAGE + lottoRank.winningMoney + MATCH_END_BRACKET_MESSAGE + lottoRank.winnerCount(lottoTickets.readOnlyLottoTicket(), lottoWinners) + MATCH_END_MESSAGE);
         }
     }
 
