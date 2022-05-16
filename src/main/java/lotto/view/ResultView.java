@@ -19,7 +19,7 @@ public class ResultView {
 
         System.out.print("[");
         for (LottoNumber lottoNumber : lotto.lottoNumbers()) {
-            System.out.print(lottoNumber.number());
+            System.out.print(lottoNumber);
             printComma(i++, size);
         }
         System.out.print("]");
