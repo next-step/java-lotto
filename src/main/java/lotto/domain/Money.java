@@ -10,7 +10,7 @@ public class Money {
     private final double money;
 
     public Money(String money) {
-        this(parseInt(money));
+        this(parseDouble(money));
     }
 
     public Money() {
@@ -22,9 +22,9 @@ public class Money {
         this.money = money;
     }
 
-    private static int parseInt(String buyPrice) {
+    private static double parseDouble(String money) {
         try {
-            return Integer.parseInt(buyPrice);
+            return Double.parseDouble(money);
         } catch (Exception e) {
             throw new IllegalArgumentException(WRONG_NUMBER_EXCEPTION);
         }
