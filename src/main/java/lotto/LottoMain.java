@@ -19,7 +19,8 @@ public class LottoMain {
         List<String[]> lottosByHand = inputView.inputLottosByHand(numberOfLottosByHand);
 
         Draw draw = new Draw(price, numberOfLottosByHand);
-        draw.drawLottos(lottosByHand);
+        draw.drawByHand(lottosByHand);
+        draw.drawAuto();
 
         ResultView resultView = new ResultView();
         resultView.printLottos(draw);

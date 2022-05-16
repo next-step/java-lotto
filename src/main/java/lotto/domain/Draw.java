@@ -28,20 +28,24 @@ public class Draw {
         this.lottos = new Lottos();
     }
 
-    public void drawLottos(List<String[]> lottosByHand) {
-        if (lottosByHand != null) {
-            drawByHand(lottosByHand);
-        }
-        drawAuto();
-    }
+//    public void drawLottos(List<String[]> lottosByHand) {
+//        if (lottosByHand != null) {
+//            drawByHand(lottosByHand);
+//        }
+//        drawAuto();
+//    }
 
-    private void drawByHand(List<String[]> lottosByHand) {
+    public void drawByHand(List<String[]> lottosByHand) {
+        if (lottosByHand == null) {
+            return;
+        }
+
         for(String[] lotto : lottosByHand) {
             this.lottos.add(new Lotto(lotto));
         }
     }
 
-    private void drawAuto() {
+    public void drawAuto() {
         for (int i = 0; i < numberOfAutoLottos.number(); i++) {
             this.lottos.add(new Lotto());
         }
