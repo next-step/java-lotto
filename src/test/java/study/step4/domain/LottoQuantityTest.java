@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import study.step3.domain.LottoQuantity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -16,7 +15,7 @@ class LottoQuantityTest {
     @CsvSource(value = {"11000, 11", "1000,1"})
     @DisplayName("로또 금액 대비 개수 확인")
     void 로또금액_대비_개수확인(int amount, int ticketCount) {
-        study.step3.domain.LottoQuantity lottoQuantity = new study.step3.domain.LottoQuantity(amount);
+        LottoQuantity lottoQuantity = new LottoQuantity(amount);
 
         assertThat(lottoQuantity.quantity()).isEqualTo(ticketCount);
     }

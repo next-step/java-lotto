@@ -4,8 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import study.step3.domain.LottoMachine;
-import study.step3.domain.LottoNumbers;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -30,7 +28,7 @@ class LottoNumbersTest {
     @Test
     @DisplayName("번호 사이즈 6개 확인")
     void 번호_사이즈_6개_확인() {
-        study.step3.domain.LottoNumbers numbers = new study.step3.domain.LottoNumbers(createLottoNumber());
+        LottoNumbers numbers = new LottoNumbers(createLottoNumber());
 
         assertThat(numbers.readOnlyNumbers().size()).isEqualTo(6);
     }
@@ -39,8 +37,8 @@ class LottoNumbersTest {
     @DisplayName("번호 일치 확인")
     void 번호_일치_확인() {
         Set<Integer> intList = createLottoNumber();
-        study.step3.domain.LottoNumbers numbers = new study.step3.domain.LottoNumbers(intList);
-        study.step3.domain.LottoNumbers numbers2 = new study.step3.domain.LottoNumbers(intList);
+        LottoNumbers numbers = new LottoNumbers(intList);
+        LottoNumbers numbers2 = new LottoNumbers(intList);
 
         assertThat(numbers.equals(numbers2)).isTrue();
     }
@@ -48,8 +46,8 @@ class LottoNumbersTest {
     @Test
     @DisplayName("번호 불일치 확인")
     void 번호_불일치_확인() {
-        study.step3.domain.LottoNumbers numbers = new study.step3.domain.LottoNumbers(createLottoNumber());
-        study.step3.domain.LottoNumbers numbers2 = new LottoNumbers(createLottoNumber_2());
+        LottoNumbers numbers = new LottoNumbers(createLottoNumber());
+        LottoNumbers numbers2 = new LottoNumbers(createLottoNumber_2());
 
         assertThat(numbers.equals(numbers2)).isFalse();
     }
@@ -59,7 +57,7 @@ class LottoNumbersTest {
     @DisplayName("번호 6개 미만 예외 확인")
     void 번호_6개_미만_예외_확인(String input) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            study.step3.domain.LottoMachine.createLottoTicket(input);
+            LottoMachine.createLottoTicket(input);
         });
     }
 
@@ -68,7 +66,7 @@ class LottoNumbersTest {
     @DisplayName("로또 번호 1 ~ 45 벗어날 시 예외 확인")
     void 로또번호_1_45_벗어날_시_예외_확인(String input) {
         assertThatIllegalArgumentException().isThrownBy(() ->{
-            study.step3.domain.LottoMachine.createLottoTicket(input);
+            LottoMachine.createLottoTicket(input);
         });
     }
 

@@ -3,11 +3,6 @@ package study.step4.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import study.step3.domain.LottoMachine;
-import study.step3.domain.LottoTicket;
-import study.step3.domain.LottoTickets;
-import study.step3.domain.LottoWinners;
-import study.step3.domain.LottoYield;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,12 +21,12 @@ class LottoYieldTest {
         inputBonus = 45;
     }
 
-    public study.step3.domain.LottoTickets createTickets() {
-        List<LottoTicket> lottoTickets = Arrays.asList(study.step3.domain.LottoMachine.createLottoTicket(inputNumbers));
-        return new study.step3.domain.LottoTickets(lottoTickets);
+    public LottoTickets createTickets() {
+        List<LottoTicket> lottoTickets = Arrays.asList(LottoMachine.createLottoTicket(inputNumbers));
+        return new LottoTickets(lottoTickets);
     }
 
-    public study.step3.domain.LottoWinners createWinners(String winners, int bonus) {
+    public LottoWinners createWinners(String winners, int bonus) {
         return LottoMachine.createWinners(winners, bonus);
     }
 
