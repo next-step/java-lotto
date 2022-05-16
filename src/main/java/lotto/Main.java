@@ -20,8 +20,7 @@ public class Main {
         List<LottoNumber> winningLottoNumbers = StringLottoNumber.toList(InputView.getWinnerTicket());
         int bonusNumber = InputView.getBonusBall();
 
-        Lotto lotto = new Lotto(new WinningLotto(new LottoTicket(winningLottoNumbers), new LottoNumber(bonusNumber)));
-
-        ResultView.printWinningStatistics(lotto.compareLotto(lottoTicketGroup), money);
+        RankGroup rankGroup = lottoTicketGroup.getLottoRankings(new WinningLotto(new LottoTicket(winningLottoNumbers), new LottoNumber(bonusNumber)));
+        ResultView.printWinningStatistics(rankGroup, money);
     }
 }
