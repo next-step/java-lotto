@@ -21,20 +21,20 @@ public class Lotto {
     private void validLottoNumberRange(List<Integer> numbers) {
         Integer max = Collections.max(numbers);
         Integer min = Collections.min(numbers);
-        if(max > MAX_NUM || min < MIN_NUM) {
+        if (max > MAX_NUM || min < MIN_NUM) {
             throw new IllegalArgumentException("로또 번호는 1~45까지만 존재합니다.");
         }
     }
 
     private void validLottoNumberCount(List<Integer> numbers) {
-        if(numbers.size() != LOTTO_COUNT) {
+        if (numbers.size() != LOTTO_COUNT) {
             throw new IllegalArgumentException("로또 번호는 6개입니다.");
         }
     }
 
     private void validDuplicate(List<Integer> numbers) {
         Set<Integer> deduplicationLotto = new HashSet<>(numbers);
-        if(deduplicationLotto.size() != numbers.size()) {
+        if (deduplicationLotto.size() != numbers.size()) {
             throw new IllegalArgumentException("로또 번호는 중복이 없어야 합니다.");
         }
     }
