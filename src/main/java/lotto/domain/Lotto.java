@@ -4,14 +4,14 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class Lotto {
+    private static final int LOTTO_NUMBER_COUNT = 6;
     private static final String WRONG_NUMBER_SIZE_MESSAGE = "로또 번호는 6개여야 합니다.";
     private static final String WRONG_INPUT_MESSAGE = "숫자, 공백 및 문자 , 만 사용 가능합니다.";
     private static final String DUPLICATED_NUMBER_ERROR = "중복된 번호가 있습니다.";
     private static final String DELIMITER = ",";
-    private static final String OPERATOR_PATTERN_REGEX = "^[\\d,\\s]*$";
-    private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final Pattern operatorPattern = Pattern.compile(OPERATOR_PATTERN_REGEX);
     private static final String SPACE_TARGET = "\\s+";
+    private static final String OPERATOR_PATTERN_REGEX = "^[\\d,\\s]*$";
+    private static final Pattern operatorPattern = Pattern.compile(OPERATOR_PATTERN_REGEX);
     private static final String REPLACEMENT_BLANK = "";
 
     private final List<LottoNumber> lottoNumbers;
@@ -45,6 +45,10 @@ public class Lotto {
         return operatorPattern.matcher(replace(lottoNumber)).matches();
     }
 
+    private static String[] split(String lottoNumber) {
+        return replace(lottoNumber).split(DELIMITER);
+    }
+
     private static String replace(String lottoNumber) {
         return lottoNumber.replaceAll(SPACE_TARGET, REPLACEMENT_BLANK);
     }
@@ -53,18 +57,14 @@ public class Lotto {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(WRONG_NUMBER_SIZE_MESSAGE);
         }
-        HashSet<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers);
-        if (lottoNumberSet.size() < lottoNumbers.size()) {
+        HashSet<LottoNumber> distinctLottoNumbers = new HashSet<>(lottoNumbers);
+        if (distinctLottoNumbers.size() < LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(DUPLICATED_NUMBER_ERROR);
         }
     }
 
     private void sort(List<LottoNumber> lottoNumbers) {
         lottoNumbers.sort(Comparator.comparingInt(LottoNumber::getLottoNumber));
-    }
-
-    private static String[] split(String lottoNumber) {
-        return replace(lottoNumber).split(DELIMITER);
     }
 
     public boolean isSize(int size) {
