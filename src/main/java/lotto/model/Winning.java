@@ -1,9 +1,5 @@
 package lotto.model;
 
-import lotto.model.Lottery;
-import lotto.model.LotteryNumber;
-import lotto.model.Reward;
-
 import java.util.List;
 
 public class Winning {
@@ -15,18 +11,29 @@ public class Winning {
         this.bonusNumber = bonusNumber;
     }
 
-    public int doesMatchAnswer(LotteryNumber number) {
+    public Reward matchWin(List<LotteryNumber> lotteryNumbers) {
+        int win = 0;
+        for (LotteryNumber lotteryNumber : lotteryNumbers) {
+            win += countWin(lotteryNumber);
+        }
+        Reward bonus = hasBonus(lotteryNumbers);
+        if (win == 5 && bonus != null) {
+            return bonus;
+        }
+        return Reward.of(win, false);
+    }
+
+    public int countWin(LotteryNumber number) {
         if (this.answer.lotteryNumbers.contains(number)) {
             return 1;
         }
         return 0;
     }
 
-    public Reward doesMatchBonus(List<LotteryNumber> numbers) {
-        if (numbers.contains(this.bonusNumber)) {
+    public Reward hasBonus(List<LotteryNumber> lottery) {
+        if (lottery.contains(this.bonusNumber)) {
             return Reward.of(5, true);
         }
         return null;
     }
-
 }

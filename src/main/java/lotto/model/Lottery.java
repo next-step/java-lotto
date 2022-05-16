@@ -28,18 +28,7 @@ public class Lottery {
     }
 
     public Reward findWin(Winning winning) {
-        int win = 0;
-        for (LotteryNumber lotteryNumber : this.lotteryNumbers) {
-            win += winning.doesMatchAnswer(lotteryNumber);
-        }
-        if (win == 5 && hasBonus(winning) != null) {
-            return hasBonus(winning);
-        }
-        return Reward.of(win, false);
-    }
-
-    public Reward hasBonus(Winning winning) {
-        return winning.doesMatchBonus(this.lotteryNumbers);
+        return winning.matchWin(this.lotteryNumbers);
     }
 }
 
