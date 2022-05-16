@@ -4,21 +4,14 @@ import java.util.Objects;
 
 public class PurchaseMoney {
 
-    private static final int DEFAULT_EACH_LOTTO_PRICE = 1000;
+    public static final int DEFAULT_EACH_LOTTO_PRICE = 1000;
 
-    private final int purchaseAmount;
+    private final int amount;
 
-    public PurchaseMoney(int purchaseAmount) {
-        validateInput(purchaseAmount);
-        validateLeast(purchaseAmount);
-        validateDivisible(purchaseAmount);
-        this.purchaseAmount = purchaseAmount;
-    }
-
-    private void validateInput(int purchaseAmount) {
-        if (purchaseAmount < DEFAULT_EACH_LOTTO_PRICE) {
-            throw new IllegalArgumentException("구매 금액은 " + DEFAULT_EACH_LOTTO_PRICE + " 보다 작을 수 없습니다.");
-        }
+    public PurchaseMoney(int amount) {
+        validateLeast(amount);
+        validateDivisible(amount);
+        this.amount = amount;
     }
 
     private void validateLeast(int purchaseAmount) {
@@ -34,11 +27,11 @@ public class PurchaseMoney {
     }
 
     public ReturnRate calculateReturnRate(int sumOfPrizeMoney) {
-        return new ReturnRate(sumOfPrizeMoney, purchaseAmount);
+        return new ReturnRate(sumOfPrizeMoney, amount);
     }
 
-    public int calculatePurchaseCount() {
-        return purchaseAmount / DEFAULT_EACH_LOTTO_PRICE;
+    public ChangeMoney buyManual(int count) {
+        return new ChangeMoney(amount - DEFAULT_EACH_LOTTO_PRICE * count);
     }
 
     @Override
@@ -46,11 +39,11 @@ public class PurchaseMoney {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PurchaseMoney that = (PurchaseMoney) o;
-        return purchaseAmount == that.purchaseAmount;
+        return amount == that.amount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(purchaseAmount);
+        return Objects.hash(amount);
     }
 }

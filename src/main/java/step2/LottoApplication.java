@@ -1,8 +1,14 @@
 package step2;
 
 import step2.domain.*;
+import step2.domain.impl.AutoProvider;
+import step2.domain.impl.ManualProvider;
 import step2.view.InputView;
 import step2.view.OutPutView;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoApplication {
 
@@ -13,9 +19,23 @@ public class LottoApplication {
 
         int purchaseAmount = inputView.askPurchaseAmount();
         PurchaseMoney purchaseMoney = new PurchaseMoney(purchaseAmount);
-        outPutView.showPurchaseCount(purchaseMoney.calculatePurchaseCount());
 
-        PurchaseList purchaseList = new PurchaseList(purchaseMoney);
+        PurchaseCount manualCount = new PurchaseCount(inputView.askManualCount());
+        List<String> manualNumbers = inputView.askManualNumbers(manualCount);
+
+        ManualProvider manualProvider = new ManualProvider(manualCount, manualNumbers);
+        AutoProvider autoProvider = new AutoProvider();
+
+        List<Lotto> manualLottos = manualProvider.generate();
+        ChangeMoney changeMoney = purchaseMoney.buyManual(manualLottos.size());
+        List<Lotto> autoLottos = autoProvider.generate(changeMoney);
+
+        List<Lotto> merge = Stream.concat(manualLottos.stream(), autoLottos.stream())
+                .collect(Collectors.toList());
+
+        PurchaseList purchaseList = new PurchaseList(merge);
+
+        outPutView.showPurchaseCount(manualCount.getValue(), changeMoney.getRemainCount().getValue());
         outPutView.show(purchaseList.toString());
 
         String winnerInput = inputView.askWinnerInput();
