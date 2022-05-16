@@ -1,37 +1,20 @@
 package lotto.domain;
 
-import lotto.exceptions.PurchaseLottoTicketException;
 import lotto.pattern.NumberGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicketGroup {
-    private static final int LOTTO_TICKET_PRICE = 1000;
 
     private final List<LottoTicket> lottoTicketGroup;
 
-    public LottoTicketGroup(int money, NumberGenerator numberGenerator) {
-        this(generateLottoTicketGroup(getTicketCount(money), numberGenerator));
+    public LottoTicketGroup(Pay pay, NumberGenerator numberGenerator) {
+        this(generateLottoTicketGroup(pay.getTicketCount(), numberGenerator));
     }
 
     public LottoTicketGroup(List<LottoTicket> lottoTickets) {
         this.lottoTicketGroup = lottoTickets;
-    }
-
-    private static int getTicketCount(int money) {
-        validatePays(money);
-        return money / LOTTO_TICKET_PRICE;
-    }
-
-    private static void validatePays(int money) {
-        if (money < LOTTO_TICKET_PRICE) {
-            throw new PurchaseLottoTicketException("1000원 이하로는 로또를 구매할 수 없습니다.");
-        }
-
-        if (money % LOTTO_TICKET_PRICE != 0) {
-            throw new PurchaseLottoTicketException("로또는 1000원 단위로만 구매할 수 있습니다.");
-        }
     }
 
     private static List<LottoTicket> generateLottoTicketGroup(int ticketCount, NumberGenerator numberGenerator) {

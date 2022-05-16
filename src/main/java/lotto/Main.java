@@ -12,7 +12,8 @@ public class Main {
     public static void main(String[] args) {
         int money = InputView.getMoney();
 
-        LottoTicketGroup lottoTicketGroup = new LottoTicketGroup(money, new LottoNumberGenerator());
+
+        LottoTicketGroup lottoTicketGroup = new LottoTicketGroup(new Pay(money), new LottoNumberGenerator());
 
         ResultView.printLottoTicketsCount(lottoTicketGroup);
         ResultView.printLottoTickets(lottoTicketGroup);
