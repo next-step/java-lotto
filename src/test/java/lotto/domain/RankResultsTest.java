@@ -23,7 +23,7 @@ class RankResultsTest {
         );
 
         RankResults rankResults = new RankResults(rankResultList);
-        double profitRatio = rankResults.getProfitRatio(money);
+        double profitRatio = rankResults.getProfitRatio(new Money(money));
 
         assertThat(profitRatio).isEqualTo(ratio);
     }
@@ -40,6 +40,6 @@ class RankResultsTest {
 
         RankResults rankResults = new RankResults(rankResultList);
 
-        assertThat(rankResults.getRankResults()).isEqualTo(rankResultList);
+        assertThat(rankResults.getRankResultList()).isEqualTo(rankResultList);
     }
 }

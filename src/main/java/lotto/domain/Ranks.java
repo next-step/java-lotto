@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 
 public class Ranks {
 
-    private final List<Rank> ranks;
+    private final List<Rank> rankList;
 
     public Ranks(List<Rank> ranks) {
-        this.ranks = ranks;
+        this.rankList = ranks;
     }
 
     public static List<RankResult> getRankResults(List<Rank> ranks) {
@@ -20,7 +20,7 @@ public class Ranks {
 
     private List<RankResult> groupBy() {
         Map<Rank, Integer> resultRankMap = this.initResultMap();
-        for (Rank rank : ranks) {
+        for (Rank rank : rankList) {
             resultRankMap.computeIfPresent(rank, (key, value) -> ++value);
         }
         return this.getRankResults(resultRankMap);
@@ -36,7 +36,7 @@ public class Ranks {
 
     private List<RankResult> getRankResults(Map<Rank, Integer> resultRankMap) {
         return resultRankMap.entrySet().stream()
-                .map((e) -> new RankResult(e.getKey(), e.getValue()))
+                .map(e -> new RankResult(e.getKey(), e.getValue()))
                 .collect(Collectors.toList());
     }
 }

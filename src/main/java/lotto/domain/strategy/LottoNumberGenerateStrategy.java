@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.strategy;
+
+import lotto.domain.LottoNumber;
 
 import java.util.Set;
 

@@ -1,8 +1,8 @@
 package lotto.domain;
 
+import lotto.domain.strategy.LottoNumberGenerateStrategy;
 import lotto.exception.InvalidMoneyInputException;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,24 +11,25 @@ import java.util.stream.IntStream;
 public class LottoTicketGenerator {
 
     public static final int LOTTO_COST_PER_TICKET = 1000;
+    public static final Money LOTTO_MONEY_PER_TICKET = new Money(LOTTO_COST_PER_TICKET);
     private final LottoNumberGenerateStrategy generateStrategy;
 
     public LottoTicketGenerator(LottoNumberGenerateStrategy generateStrategy) {
         this.generateStrategy = generateStrategy;
     }
 
-    public List<LottoTicket> generateLottoTickets(int count) {
+    private List<LottoTicket> generateLottoTickets(int count) {
         return IntStream.range(0, count)
                 .mapToObj(i -> generateLottoTicket())
                 .collect(Collectors.toList());
     }
 
-    public List<LottoTicket> buyLottoTickets(int price) {
-        return generateLottoTickets(getCountToBuy(price));
+    public List<LottoTicket> buyLottoTickets(Money money) {
+        return generateLottoTickets(getCountToBuy(money));
     }
 
-    private int getCountToBuy(int price) {
-        int count = price / LOTTO_COST_PER_TICKET;
+    private int getCountToBuy(Money money) {
+        int count = (int) money.divide(LOTTO_MONEY_PER_TICKET);
         validInputPrice(count);
         return count;
     }
@@ -37,18 +38,6 @@ public class LottoTicketGenerator {
         if (count == 0) {
             throw new InvalidMoneyInputException();
         }
-    }
-
-    public WinningTicket generateWinningTicket(List<Integer> winningNumbers, Integer bonusNumber) {
-        HashSet<Integer> numbers = new HashSet<>(winningNumbers);
-        LottoTicket lottoTicket = new LottoTicket(this.generateLottoNumbers(numbers));
-        return new WinningTicket(lottoTicket, new LottoNumber(bonusNumber));
-    }
-
-    private Set<LottoNumber> generateLottoNumbers(Set<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toSet());
     }
 
     private Set<LottoNumber> generateLottoNumbers() {
