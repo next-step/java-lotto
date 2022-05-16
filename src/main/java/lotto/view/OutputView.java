@@ -30,6 +30,6 @@ public class OutputView {
 	}
 
 	public static void printYield(Roi roi) {
-		System.out.printf("총 수익률은 %f 입니다. => (%s)", roi.crop(2), ProfitOrLoss.findByYield(roi).title());
+		System.out.printf("총 수익률은 %s 입니다. => (%s)", roi.crop(2), ProfitOrLoss.findByYield(roi).title());
 	}
 }

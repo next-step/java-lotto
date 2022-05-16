@@ -12,18 +12,23 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
-
-	public void play() {
-		Amount purchaseAmount = InputView.inputPurchaseAmount();
-
+	public long calculateLottoQuantity(Amount purchaseAmount) {
 		long lottoQuantity = purchaseAmount.divide(Lotto.LOTTO_PRICE);
-		PurchaseLottoGroup purchaseLottoGroup = new PurchaseLottoGroup(lottoQuantity);
 
 		OutputView.printPurchaseQuantity(lottoQuantity);
+		return lottoQuantity;
+	}
+
+	public PurchaseLottoGroup purchaseLotto() {
+		long lottoQuantity = calculateLottoQuantity(InputView.inputPurchaseAmount());
+		PurchaseLottoGroup purchaseLottoGroup = new PurchaseLottoGroup(lottoQuantity);
+
 		OutputView.printPurchaseLottoGroup(purchaseLottoGroup);
+		return purchaseLottoGroup;
+	}
 
+	public void ranking(PurchaseLottoGroup purchaseLottoGroup) {
 		WinningNumber winningNumber = InputView.inputWinningNumber();
-
 		RankingResult rankingResult = new RankingResult(purchaseLottoGroup, winningNumber);
 
 		OutputView.printWinningStatistics(rankingResult);
