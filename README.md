@@ -227,9 +227,24 @@ Earning rate: 2142.8571428571427
 - [x] 각 클래스에 대한 패키지 분리
 
 ### Requested changes - phase3
+
 - [x] 로또 당첨 결과 반환을 Winning이 수행하도록 변경
-  - [x] doesMatchAnswer, doesMatchBonus 를 하나의 메소드로 병합
+    - [x] doesMatchAnswer, doesMatchBonus 를 하나의 메소드로 병합
 - [x] LotteryNumber 테스트 추가
 - [x] LotteryBox 에 List 대신 Set을 사용하여 중복 허용 막기, 테스트 확인
 - [x] findSixNumbers -> createLottery 로 이름 변경
-- [x] Reward는 Money 대신 원시값(int or long)를 가지게, Money.calc() 제거 
+- [x] Reward는 Money 대신 원시값(int or long)를 가지게, Money.calc() 제거
+
+## Step4
+
+### Requirements
+
+- [ ] 수동으로 구매할 번호를 입력해 주세요. 출력 후 수동 로또는 입력 받음
+- [ ] 수동으로 구매할 개수, 자동으로 구매된 개수 출력 후 전체 로또 번호 나열
+    - [ ] 수동을 먼저 보여주고 자동을 보여줄까? 분류해서 보여줄까
+- [ ] Optional 적용하여 NullPointerException 발생하지 않게 하기
+- [ ] 잘못된 값을 입력 했을 때 에외 처리
+- [ ] 모든 원시값과 문자열을 포장
+- [ ] 모든 List를 일급 콜션으로 포장
+
+### Result output
