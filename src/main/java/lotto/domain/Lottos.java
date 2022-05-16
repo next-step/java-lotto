@@ -2,17 +2,14 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import static lotto.domain.Lotto.LOTTO_PRICE;
 import lotto.domain.result.LottoGameResult;
 
 public class Lottos {
     private List<Lotto> lottos;
-    private int purchaseAmount;
 
-    Lottos(List<Lotto> lottos, int purchaseAmount) {
+    Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
-        this.purchaseAmount = purchaseAmount;
     }
 
     public static Lottos of(int purchaseAmount) {
@@ -23,14 +20,14 @@ public class Lottos {
             lottos.add(new Lotto(LottoNumberGenerator.generate()));
         }
 
-        return new Lottos(lottos, purchaseAmount);
+        return new Lottos(lottos);
     }
 
-    public LottoGameResult matchNumbers(Set<Integer> numbers) {
-        LottoGameResult lottoGameResult = new LottoGameResult(purchaseAmount);
+    public LottoGameResult matchNumbers(Lotto winningLotto, int bonusNumber) {
+        LottoGameResult lottoGameResult = new LottoGameResult(LOTTO_PRICE * lottos.size());
 
         for (Lotto lotto : lottos) {
-            lottoGameResult.addMatchResult(lotto.hasWinningNumbers(numbers));
+            lottoGameResult.addMatchResult(lotto.hasWinningNumbers(winningLotto, bonusNumber));
         }
 
         return lottoGameResult;

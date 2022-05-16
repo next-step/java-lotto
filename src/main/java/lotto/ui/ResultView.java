@@ -17,9 +17,12 @@ public class ResultView {
 
         String result = "당첨 통계\n---------\n";
 
-        for (int i = 2; i < matchResults.size(); ++i) {
-            result += (i + 1) + "개 일치(" + matchResults.get(i).getReward() + ")- " + matchResults.get(i).getMatchedLottoNumberCount() + "개\n";
-        }
+        result += "3개 일치 (5000원)- " + matchResults.get(1).getMatchedLottoNumberCount() + "개\n";
+        result += "4개 일치 (50000원)- " + matchResults.get(2).getMatchedLottoNumberCount() + "개\n";
+        result += "5개 일치 (1500000원)- " + matchResults.get(3).getMatchedLottoNumberCount() + "개\n";
+        result += "5개 일치, 보너스 볼 일치(30000000원) - " + matchResults.get(4).getMatchedLottoNumberCount() + "개\n";
+        result += "6개 일치 (2000000000원)- " + matchResults.get(5).getMatchedLottoNumberCount() + "개\n";
+
         result += "총 수익률은 " + yield + "입니다";
 
         stringBuilder.append("총 수익률은 ").append(yield).append("입니다.");

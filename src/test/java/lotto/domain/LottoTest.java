@@ -34,4 +34,19 @@ public class LottoTest {
                     Lotto lotto = new Lotto(numbers);
                 }).withMessageMatching("숫자 6개만 입력 가능합니다");
     }
+
+    @Test
+    void 우승숫자_테스트() {
+        Set<Integer> winningNumbers = Set.of(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 7;
+
+        assertThat(new Lotto(7, 8, 9, 10, 11, 12).hasWinningNumbers(new Lotto(winningNumbers), bonusNumber)).isEqualTo(LottoReward.MISS);
+        assertThat(new Lotto(1, 8, 9, 10, 11, 12).hasWinningNumbers(new Lotto(winningNumbers), bonusNumber)).isEqualTo(LottoReward.MISS);
+        assertThat(new Lotto(1, 2, 9, 10, 11, 12).hasWinningNumbers(new Lotto(winningNumbers), bonusNumber)).isEqualTo(LottoReward.MISS);
+        assertThat(new Lotto(1, 2, 3, 10, 11, 12).hasWinningNumbers(new Lotto(winningNumbers), bonusNumber)).isEqualTo(LottoReward.FIFTH);
+        assertThat(new Lotto(1, 2, 3, 4, 11, 12).hasWinningNumbers(new Lotto(winningNumbers), bonusNumber)).isEqualTo(LottoReward.FOURTH);
+        assertThat(new Lotto(1, 2, 3, 4, 5, 12).hasWinningNumbers(new Lotto(winningNumbers), bonusNumber)).isEqualTo(LottoReward.THIRD);
+        assertThat(new Lotto(1, 2, 3, 4, 5, 7).hasWinningNumbers(new Lotto(winningNumbers), bonusNumber)).isEqualTo(LottoReward.SECOND);
+        assertThat(new Lotto(1, 2, 3, 4, 5, 6).hasWinningNumbers(new Lotto(winningNumbers), bonusNumber)).isEqualTo(LottoReward.FIRST);
+    }
 }

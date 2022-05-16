@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -11,27 +10,7 @@ public class Lotto {
     public final static int LOTTO_END_NUMBER = 45;
     public final static int LOTTO_PRICE = 1000;
 
-    public enum LOTTO_REWARD {
-        MATCH_1(1, 0),
-        MATCH_2(2, 0),
-        MATCH_3(3, 5_000),
-        MATCH_4(4, 50_000),
-        MATCH_5(5, 1_500_000),
-        MATCH_6(6, 2_000_000_000);
-
-        private final int matches;
-        private final long reward;
-        LOTTO_REWARD(int mathes, long reward) {
-            this.matches = mathes;
-            this.reward = reward;
-        }
-        public static long valueOf(int matches) {
-            return Arrays.stream(LOTTO_REWARD.values()).filter(it -> it.matches == matches)
-                    .findFirst().get().reward;
-        }
-    }
-
-    protected Set<Integer> numbers;
+    private Set<Integer> numbers;
 
     Lotto(int num1, int num2, int num3, int num4, int num5, int num6) {
         this(Set.of(num1, num2, num3, num4, num5, num6));
@@ -49,13 +28,15 @@ public class Lotto {
         return numbers;
     }
 
-    public int hasWinningNumbers(Set<Integer> winningNumbers) {
+    public LottoReward hasWinningNumbers(Lotto winningLotto, int bonusNumber) {
         int result = 0;
-        for (int winningNumber : winningNumbers) {
+        for (int winningNumber : winningLotto.numbers) {
             result += hasNumber(winningNumber);
         }
 
-        return result;
+        boolean isBonusMatched = numbers.contains(bonusNumber);
+
+        return LottoReward.of(result, isBonusMatched);
     }
 
     private int hasNumber(int number) {

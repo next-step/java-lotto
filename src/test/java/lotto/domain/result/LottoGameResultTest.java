@@ -1,5 +1,6 @@
 package lotto.domain.result;
 
+import lotto.domain.LottoReward;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,10 +11,10 @@ public class LottoGameResultTest {
 
     @BeforeEach
     void setUp() {
-        lottoMatchResults.addMatchNumber(1);
-        lottoMatchResults.addMatchNumber(1);
-        lottoMatchResults.addMatchNumber(3);
-        lottoMatchResults.addMatchNumber(4);
+        lottoMatchResults.addMatchNumber(LottoReward.MISS);
+        lottoMatchResults.addMatchNumber(LottoReward.MISS);
+        lottoMatchResults.addMatchNumber(LottoReward.FIFTH);
+        lottoMatchResults.addMatchNumber(LottoReward.FOURTH);
 
         lottoGameResult = new LottoGameResult(lottoMatchResults, 4000);
     }
@@ -21,12 +22,12 @@ public class LottoGameResultTest {
     @Test
     void 매치_개수_테스트() {
         LottoGameResult gameResult = new LottoGameResult(2000);
-        gameResult.addMatchResult(3);
-        gameResult.addMatchResult(3);
+        gameResult.addMatchResult(LottoReward.FIFTH);
+        gameResult.addMatchResult(LottoReward.FIFTH);
 
         LottoMatchResults matchResults = new LottoMatchResults();
-        matchResults.addMatchNumber(3);
-        matchResults.addMatchNumber(3);
+        matchResults.addMatchNumber(LottoReward.FIFTH);
+        matchResults.addMatchNumber(LottoReward.FIFTH);
 
         assertThat(gameResult).isEqualTo(new LottoGameResult(matchResults, 2000));
     }
