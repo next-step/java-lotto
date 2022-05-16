@@ -31,16 +31,19 @@ public class ResultView {
     }
 
     public void printLottoTicketInfos(int manualNumber) {
+        StringBuilder sb = new StringBuilder();
         List<LottoTicket> tickets = lottoTickets.readOnlyLottoTicket();
-        System.out.println(INPUT_RESULT_MANUAL_MESSAGE + manualNumber + INPUT_RESULT_AUTO_MESSAGE + (lottoTickets.lottoQuantity() - manualNumber) + BUY_QUANTITY_MESSAGE);
+        sb.append(INPUT_RESULT_MANUAL_MESSAGE + manualNumber + INPUT_RESULT_AUTO_MESSAGE + (lottoTickets.lottoQuantity() - manualNumber) + BUY_QUANTITY_MESSAGE + '\n');
         tickets.stream()
-                .forEach(ticket -> System.out.println(ticket.readOnlyLottoNumber().toString()));
+                .forEach(ticket -> sb.append(ticket.readOnlyLottoNumber().toString() + '\n'));
+        System.out.println(sb);
     }
 
     public void printLottoResultInfos(LottoTickets lottoTickets, LottoWinners lottoWinners) {
-        System.out.println(RESULT_WINNER_RANK);
-        System.out.println(RESULT_WINNER_LINE);
-
+        StringBuilder sb = new StringBuilder();
+        sb.append(RESULT_WINNER_RANK);
+        sb.append(RESULT_WINNER_RANK);
+        System.out.println(sb);
         Arrays.asList(LottoRank.values())
                 .stream()
                 .forEach(lottoRank -> printLottoRank(lottoRank, lottoWinners));
@@ -49,14 +52,16 @@ public class ResultView {
     }
 
     public void printLottoYield(LottoTickets lottoTickets, LottoWinners lottoWinners) {
+        StringBuilder sb = new StringBuilder();
         double yield = LottoYield.operationYield(lottoTickets, lottoWinners);
-        System.out.print(TOTAL_START_MESSAGE + String.format("%.2f", yield) + TOTAL_END_MESSAGE);
+        sb.append(TOTAL_START_MESSAGE + String.format("%.2f", yield) + TOTAL_END_MESSAGE);
 
         if (yield >= DEFAULT_LOTTO_YIELD) {
-            System.out.print(STRING_PROFIT_MESSAGE);
+            sb.append(STRING_PROFIT_MESSAGE);
             return;
         }
-        System.out.print(STRING_LOSS_MESSAGE);
+        sb.append(STRING_LOSS_MESSAGE);
+        System.out.println(sb);
     }
 
     private void printLottoRank(LottoRank lottoRank, LottoWinners lottoWinners) {
