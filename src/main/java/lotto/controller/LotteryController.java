@@ -88,26 +88,26 @@ public class LotteryController {
         money.pay(amount);
     }
 
-    public List<Lottery> scanManualLotteries(int amount) {
-        List<Lottery> manualLotteries = new ArrayList<>();
-        System.out.println("Put manual lottery.(" + amount + " times)");
-        for (int i = 0; i < amount; i++) {
-            manualLotteries.add(scanManualLottery());
-        }
-        return manualLotteries;
-    }
-
-    private Lottery scanManualLottery() {
-        String scanned = InputView.scan();
-        List<LotteryNumber> lotteryNumbers = LotteryController.parseNumbers(scanned);
-        return new Lottery(lotteryNumbers);
-    }
+//    public List<Lottery> scanManualLotteries(int amount) {
+//        List<Lottery> manualLotteries = new ArrayList<>();
+//        System.out.println("Put manual lottery.(" + amount + " times)");
+//        for (int i = 0; i < amount; i++) {
+//            manualLotteries.add(scanManualLottery());
+//        }
+//        return manualLotteries;
+//    }
+//
+//    private Lottery scanManualLottery() {
+//        String scanned = InputView.scan();
+//        List<LotteryNumber> lotteryNumbers = LotteryController.parseNumbers(scanned);
+//        return new Lottery(lotteryNumbers);
+//    }
 
     public void start() {
         Money money = this.scanMoney();
         int amount = this.scanManualLotteryAmount();
-        List<Lottery> manualLotteries = this.scanManualLotteries(amount);
-        this.payManualLotteries(money, manualLotteries.size());
+        this.scanManualLotteries(amount);
+        this.payManualLotteries(money, amount);
         this.createLotteries(money);
         this.printLotteries();
         Winning winning = new Winning(this.scanAnswer(), this.scanBonus());
@@ -115,6 +115,10 @@ public class LotteryController {
         this.printWinStatistics();
         this.printEarningRate(money);
         this.printEarned(money);
+    }
+
+    private void scanManualLotteries(int amount) {
+        this.inventory.scanManualLotteries(amount);
     }
 
     private int scanManualLotteryAmount() {
