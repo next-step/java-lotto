@@ -19,7 +19,7 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         for (int number : numbers) {
-            this.myNumbers.add(Number.getNumber(number));
+            myNumbers.add(Number.getNumber(number));
         }
     }
 

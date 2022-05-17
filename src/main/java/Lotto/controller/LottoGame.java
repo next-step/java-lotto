@@ -15,7 +15,6 @@ public class LottoGame {
     private Lotto winningNumbers;
 
     public void start() {
-
         Lottos lottos = createLottos();
 
         viewMyLottoNumbers(lottos);
@@ -30,9 +29,7 @@ public class LottoGame {
 
         List<Lotto> passiveLottos = inputAndCreatePassiveLotto();
 
-        int automaticLottosCnt = money.changeMoneyToLottoNum() - passiveLottos.size();
-
-        return Lottos.createLottosWithPassive(automaticLottosCnt, passiveLottos);
+        return Lottos.createLottosWithPassive(money.changeMoneyToLottoNum(), passiveLottos);
     }
 
     private List<Lotto> inputAndCreatePassiveLotto() {
@@ -40,10 +37,7 @@ public class LottoGame {
 
         InputView.showPassiveLottoNumbers();
 
-        List<Lotto> passiveLottos= new ArrayList<>();
-        for (int i = 0; i < passiveLottoCnt; ++i) {
-            passiveLottos.add(new Lotto(InputView.inputPassiveLotto()));
-        }
+        List<Lotto> passiveLottos = Lottos.createPassiveLotto(passiveLottoCnt);
 
         return passiveLottos;
     }

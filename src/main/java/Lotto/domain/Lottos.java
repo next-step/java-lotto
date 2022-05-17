@@ -1,5 +1,7 @@
 package Lotto.domain;
 
+import Lotto.view.InputView;
+
 import java.util.*;
 
 public class Lottos {
@@ -10,7 +12,6 @@ public class Lottos {
     private static final List<Lotto> list = new ArrayList<>();
 
     private static int passiveLottoCnt;
-    private static int automaticLottoCnt;
 
     public Lottos(Lotto [] lottos) {
         for (Lotto lotto : lottos) {
@@ -18,13 +19,14 @@ public class Lottos {
         }
     }
 
-    public static Lottos createLottosWithPassive(int automaticLottoCnt, List<Lotto> passiveLottos) {
-        initLottoCount(automaticLottoCnt, passiveLottos.size());
+    public static Lottos createLottosWithPassive(int allLottoCnt, List<Lotto> passiveLottos) {
+        initLottoCount(passiveLottos.size());
 
         List<Integer> allNumbers = createAllNumbers();
 
         List<Lotto> myLottoList = addPassiveLottos(passiveLottos);
 
+        int automaticLottoCnt = allLottoCnt - passiveLottos.size();
         for (int i = 0; i < automaticLottoCnt; ++i) {
             myLottoList = pickLottoNumbers(myLottoList, allNumbers);
         }
@@ -32,8 +34,8 @@ public class Lottos {
         return new Lottos(myLottoList.toArray(new Lotto[myLottoList.size()]));
     }
 
-    private static void initLottoCount(int automaticLottosCount, int passiveLottoCount) {
-        automaticLottoCnt = automaticLottosCount;
+    private static void initLottoCount(int passiveLottoCount) {
+        //automaticLottoCnt = automaticLottosCount;
         passiveLottoCnt = passiveLottoCount;
     }
 
@@ -80,6 +82,14 @@ public class Lottos {
         return cnt;
     }
 
+    public static List<Lotto> createPassiveLotto(int passiveLottoCnt) {
+        List<Lotto> passiveLottos = new ArrayList<>();
+        for (int i = 0; i < passiveLottoCnt; ++i) {
+            passiveLottos.add(new Lotto(InputView.inputPassiveLotto()));
+        }
+        return passiveLottos;
+    }
+
     public Map<EqualLottoCntInfo, Integer> findWinningLotto(Lotto winningNumbers) {
         Map<EqualLottoCntInfo, Integer> winningLottoRankMap = new HashMap<>();
 
@@ -105,9 +115,11 @@ public class Lottos {
         return this.passiveLottoCnt;
     }
 
-    public int getAutomaticLottoCnt() {
-        return this.automaticLottoCnt;
+    public int getAllLottoCnt() {
+        return list.size();
     }
 
-
+//    public int getAutomaticLottoCnt() {
+//        return this.automaticLottoCnt;
+//    }
 }

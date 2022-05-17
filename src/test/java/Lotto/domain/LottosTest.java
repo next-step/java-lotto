@@ -37,25 +37,13 @@ public class LottosTest {
 
     private static Stream<Arguments> lottoKindsCntArgs() {
         return Stream.of(
-                arguments(5,
+                arguments(8,
                         List.of(
                         new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                         new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7)),
                         new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8))
                         ),
                         5, 3
-                ),
-                arguments(1,
-                        List.of(
-                                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                                new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7)),
-                                new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8)),
-                                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                                new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7)),
-                                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                                new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7))
-                        ),
-                        1, 7
                 )
         );
     }
@@ -63,10 +51,10 @@ public class LottosTest {
     @ParameterizedTest
     @MethodSource("lottoKindsCntArgs")
     @DisplayName("구매한 로또들 중에 수동갯수와 자동갯수를 확인하는 테스트")
-    void lottoKindsCntArgsTest(int automaticLottosCnt, List<Lotto> passiveLottos, int automaticCnt, int passiveCnt) {
-        Lottos lottos = Lottos.createLottosWithPassive(automaticLottosCnt, passiveLottos);
+    void lottoKindsCntArgsTest(int allLottoCnt, List<Lotto> passiveLottos, int automaticCnt, int passiveCnt) {
+        Lottos lottos = Lottos.createLottosWithPassive(allLottoCnt, passiveLottos);
 
-        Assertions.assertThat(lottos.getAutomaticLottoCnt()).isEqualTo(automaticCnt);
+        Assertions.assertThat(lottos.getAllLottoCnt() - passiveLottos.size()).isEqualTo(automaticCnt);
         Assertions.assertThat(lottos.getPassiveLottoCnt()).isEqualTo(passiveCnt);
     }
 }
