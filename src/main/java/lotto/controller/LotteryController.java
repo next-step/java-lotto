@@ -7,6 +7,7 @@ import lotto.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class LotteryController {
     public Inventory inventory = new Inventory();
@@ -16,8 +17,11 @@ public class LotteryController {
     }
 
     public Money scanMoney() {
-        String scanned = InputView.scanWithPayload("Put your money.");
-        return new Money(Integer.parseInt(scanned));
+        Optional<String> scanned = InputView.scanWithPayload("Put your money.");
+        if (scanned.isPresent()) {
+            return new Money(Integer.parseInt(scanned.get()));
+        }
+        throw new NullPointerException("No input found.");
     }
 
     public void createLotteries(Money money) {
@@ -29,8 +33,11 @@ public class LotteryController {
     }
 
     public Lottery scanAnswer() {
-        String scanned = InputView.scanWithPayload("Put lottery answer.");
-        return new Lottery(parseNumbers(scanned));
+        Optional<String> scanned = InputView.scanWithPayload("Put lottery answer.");
+        if (scanned.isPresent()) {
+            return new Lottery(parseNumbers(scanned.get()));
+        }
+        throw  new NullPointerException("No input found.");
     }
 
     public static List<LotteryNumber> parseNumbers(String scanned) {
@@ -80,8 +87,11 @@ public class LotteryController {
     }
 
     public int scanBonus() {
-        String scanned = InputView.scanWithPayload("Put bonus number.");
-        return Integer.parseInt(scanned);
+        Optional<String> scanned = InputView.scanWithPayload("Put bonus number.");
+        if (scanned.isPresent()) {
+            return Integer.parseInt(scanned.get());
+        }
+        throw new NullPointerException("No input found.");
     }
 
     private void payManualLotteries(Money money, int amount) {
@@ -108,8 +118,11 @@ public class LotteryController {
     }
 
     private int scanManualLotteryAmount() {
-        String scanned = InputView.scanWithPayload("Put the amount of manual lotteries");
-        return Integer.parseInt(scanned);
+        Optional<String> scanned = InputView.scanWithPayload("Put the amount of manual lotteries");
+        if (scanned.isPresent()) {
+            return Integer.parseInt(scanned.get());
+        }
+        throw new NullPointerException("No input found");
     }
 
     public void start() {

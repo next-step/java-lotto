@@ -244,7 +244,7 @@ Earning rate: 2142.8571428571427
 - [x] 수동으로 구매한 개수, 자동으로 구매된 개수 출력 후 전체 로또 번호 나열
     - [x] 수동을 먼저 보여주고 자동을 나중에 분류해서 보여준다
 - [x] Answer match 시 수동도 포함
-- [ ] Optional 적용하여 NullPointerException 발생하지 않게 하기
+- [x] Optional 적용하여 NullPointerException 발생하지 않게 하기
 - [ ] 잘못된 값을 입력 했을 때 에외 처리
 - [ ] 모든 원시값과 문자열을 포장
 - [ ] 모든 List를 일급 콜션으로 포장
