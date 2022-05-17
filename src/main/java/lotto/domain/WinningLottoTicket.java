@@ -32,7 +32,7 @@ public class WinningLottoTicket extends LottoTicket {
 
   private WinningLottoTicket(List<Integer> lottoNumbers, Integer bonusBallNumber) {
     super(lottoNumbers);
-    this.bonusBallNumber = new BonusBallNumber(bonusBallNumber);
+    this.bonusBallNumber = BonusBallNumber.createBonusBallNumber(this, bonusBallNumber);
   }
 
   public boolean matchBonusBall(LottoTicket lottoTicket) {
