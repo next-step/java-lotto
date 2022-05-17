@@ -8,7 +8,6 @@
 * 모든 피드백을 완료하면 다음 단계를 도전하고 앞의 과정을 반복한다.
 
 ## 온라인 코드 리뷰 과정
-<<<<<<< HEAD
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 
@@ -47,4 +46,18 @@ ex)총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 �
 * 당첨 번호 출력
 * 당첨 번호와 일치하는 숫자가 3개이상인 명수와 당첨금 출력
 * 수익률 출력
+
+Step2 feedback 
+-main 길이가 너무 길다.. 기능단위로 메소드 분리
+-view 클래스는 static메소드들만 가지고있음 => 해당 클래스 접근 제한 해보라는 제안
+=> 공부 필요
+-System.out.println()는 성능이 안좋음, 문자열 한번에 출력하는 방법 고민해보고 적용해보기
+-테스트 도메인 객체별로 나눠서 진행(하나의 파일X)
+-테스트를 위해서 추가된 메소드 제거 ex)WinningNumbers.isWinners()
+-Winners, WinningNumbers, Winnings 의 클래스명 좀더직관적의미로 나타내기
+-불변객체 적용
+-toString()에서 출력 영역을 침범해서 domain과 view가 제대로 분리 X => 해결바람
+-Winner클래스에서 map에 더 Map<Winnings, Integer>값으로 변경하고 나머지는 추후 resultView엥서 진행하자
+
+
 

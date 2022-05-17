@@ -1,14 +1,14 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Winners {
     public static final int FINAL_LINE_BREAK = 1;
     public static final int FIRST_STRING = 0;
 
-    private HashMap<String, Integer> winners = new LinkedHashMap<>();
+    private Map<String, Integer> winners = new LinkedHashMap<>();
 
     public Winners() {
         for (int i = 3; i <= 6; i++) {
@@ -51,4 +51,6 @@ public class Winners {
 
         return resultString.substring(FIRST_STRING, resultString.length() - FINAL_LINE_BREAK);
     }
+
+
 }

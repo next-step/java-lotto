@@ -3,9 +3,9 @@ package lotto.domain;
 public enum Winnings {
 
     사등("3개", 5000),
-    삼등("4개", 50000),
-    이등("5개", 1500000),
-    일등("6개", 2000000000);
+    삼등("4개", 50_000),
+    이등("5개", 1500_000),
+    일등("6개", 2_000_000_000);
 
     public static final int WRONG_VALUE = 0;
 

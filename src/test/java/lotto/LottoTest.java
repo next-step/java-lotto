@@ -3,8 +3,11 @@ package lotto;
 import lotto.domain.*;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -37,5 +40,18 @@ public class LottoTest {
         winners.addWinner(3);
 
         assertThat(winners.revenue(buyMoney)).isEqualTo(0.50);
+    }
+
+    @Test
+    void testss() {
+        //IntStream.rangeClosed(1, 10).forEach(System.out::println);
+        List<Integer> lottoAllNumber = new ArrayList<>();
+        List<Integer> lottoNumber = new ArrayList<>();
+
+        IntStream.range(1, 45).forEach(i -> lottoAllNumber.add(i));
+        Collections.shuffle(lottoAllNumber);
+
+        lottoAllNumber.stream().limit(6).forEach(i -> lottoNumber.add(i));
+        Collections.sort(lottoNumber);
     }
 }

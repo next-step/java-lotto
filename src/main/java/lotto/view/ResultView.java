@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.domain.Lottos;
 import lotto.domain.WinningNumbers;
-import lotto.domain.Winnings;
 
 public class ResultView {
     public static void resultLottoNumber(int numberOfLotto, Lottos lottos) {
@@ -22,4 +21,17 @@ public class ResultView {
         System.out.println("총 수익률은 " + revenue + "입니다.(기준이 1이기 때문에 결과적으로 " + winningNumbers.isBenefit(revenue) + "(이)라는 의미임)");
 
     }
+
+
+    /*
+    @Override
+    public String toString() {
+        String resultString = "";
+        for (String winner : winners.keySet()) {
+            resultString += winner + " 일치 (" + Winnings.selectWinnings(winner) + "원)- " + winners.get(winner) + "개" + "\n";
+        }
+
+        return resultString.substring(FIRST_STRING, resultString.length() - FINAL_LINE_BREAK);
+    }
+     */
 }
