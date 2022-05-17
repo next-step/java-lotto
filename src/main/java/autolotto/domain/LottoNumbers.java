@@ -4,20 +4,27 @@ import autolotto.exception.LottoException;
 import autolotto.exception.LottoExceptionCode;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private static final int LOTTO_NUMBER = 6;
-    private static final int BONUS_BALL_CONDITION = 5;
-    private Set<Integer> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(Set<Integer> lottoNumbers) {
+    public static LottoNumbers of(Set<Integer> lottoNumbers) {
         if (isNotLottoSize(lottoNumbers)) {
             throw new LottoException(LottoExceptionCode.INVALID_LOTTO_NUMBER_COUNT, lottoNumbers.toString());
         }
+        return new LottoNumbers(
+                lottoNumbers.stream()
+                        .map(LottoNumber::of)
+                        .collect(Collectors.toSet()));
+    }
+
+    public LottoNumbers(Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    private boolean isNotLottoSize(Set<Integer> lottoNumbers) {
+    private static boolean isNotLottoSize(Set<Integer> lottoNumbers) {
         return lottoNumbers.size() != LOTTO_NUMBER;
     }
 
@@ -27,16 +34,9 @@ public class LottoNumbers {
                 .count();
     }
 
-    public boolean contains(int number) {
-        return lottoNumbers.contains(number);
-    }
-
-    public boolean checkBonus(WinningLotto winningLotto, int countOfMatch) {
-        boolean isBonus = false;
-        if (countOfMatch == BONUS_BALL_CONDITION) {
-            return lottoNumbers.contains(winningLotto.getBonusBall());
-        }
-        return isBonus;
+    public boolean contains(LottoNumber number) {
+        return lottoNumbers
+                .contains(number);
     }
 
     @Override

@@ -9,10 +9,12 @@ public class LottoGenerator {
     private static final int FROM_INDEX = 0;
     private static final int TO_INDEX = 6;
 
-    public static Set<Integer> generate() {
+    public static Set<LottoNumber> generate() {
         Collections.shuffle(numbers);
-        List<Integer> lotto = numbers.subList(FROM_INDEX, TO_INDEX);
-        Collections.sort(lotto);
-        return new LinkedHashSet<>(lotto);
+
+        return numbers.subList(FROM_INDEX, TO_INDEX)
+                .stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 }
