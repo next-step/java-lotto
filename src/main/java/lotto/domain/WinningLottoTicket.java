@@ -9,7 +9,7 @@ public class WinningLottoTicket extends LottoTicket {
 
   private static final String DELIMITER = ",";
 
-  private final Integer bonusBallNumber;
+  private final BonusBallNumber bonusBallNumber;
 
   public static WinningLottoTicket of(String lottoNumbers, String bonusNumber) {
     validate(lottoNumbers, bonusNumber);
@@ -32,13 +32,13 @@ public class WinningLottoTicket extends LottoTicket {
 
   private WinningLottoTicket(List<Integer> lottoNumbers, Integer bonusBallNumber) {
     super(lottoNumbers);
-    this.bonusBallNumber = bonusBallNumber;
+    this.bonusBallNumber = new BonusBallNumber(bonusBallNumber);
   }
 
   public boolean matchBonusBall(LottoTicket lottoTicket) {
     if (lottoTicket == null) {
       throw new IllegalArgumentException("로또 티켓은 null 일 수 없습니다.");
     }
-    return lottoTicket.contains(bonusBallNumber);
+    return bonusBallNumber.matchAny(lottoTicket);
   }
 }

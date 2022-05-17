@@ -1,6 +1,8 @@
 package lotto.domain.strategy;
 
 import static java.util.stream.IntStream.rangeClosed;
+import static lotto.domain.LottoConstants.LOTTO_END_NUMBER;
+import static lotto.domain.LottoConstants.LOTTO_START_NUMBER;
 
 import java.util.Collections;
 import java.util.List;
@@ -10,8 +12,6 @@ public class RandomNumbers implements GenerateNumbersStrategy {
 
   private static final int FROM_INDEX = 0;
   private static final int TO_INDEX = 6;
-  private static final int LOTTO_START_NUMBER = 1;
-  private static final int LOTTO_END_NUMBER = 45;
 
   public List<Integer> generate() {
     List<Integer> numbers = rangeClosed(LOTTO_START_NUMBER, LOTTO_END_NUMBER).boxed()
