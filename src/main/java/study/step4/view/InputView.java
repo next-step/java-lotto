@@ -11,10 +11,8 @@ public class InputView {
     private static final String INPUT_WINNER_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해주세요.";
     private static final String INPUT_BONUS_NUMBERS_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String INPUT_MANUAL_QUANTITY_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
-    private static final String INPUT_MANUAL_QUANTITY_ERROR_MESSAGE = "구입금액을 확인해주세요.";
     private static final String INPUT_MANUAL_NUMBERS_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String DEFAULT_SPLIT_REGEX = ",";
-    private static final int LOTTO_AMOUNT = 1000;
 
     private static final InputView instance = new InputView();
 
@@ -28,18 +26,10 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public int inputManualLottoQuantity(int buyAmount) {
+    public int inputManualLottoQuantity() {
         System.out.println(INPUT_MANUAL_QUANTITY_MESSAGE);
-
         Scanner scanner = new Scanner(System.in);
-        int count = buyAmount / LOTTO_AMOUNT;
-        int result = scanner.nextInt();
-
-        if (result > count) {
-            throw new IllegalArgumentException(INPUT_MANUAL_QUANTITY_ERROR_MESSAGE);
-        }
-
-        return result;
+        return scanner.nextInt();
     }
 
     public String inputWinnerNumbers() {

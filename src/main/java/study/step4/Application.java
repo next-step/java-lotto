@@ -12,7 +12,7 @@ import java.util.List;
 public class Application {
     public static void main(String[] args) {
         int buyAmount = InputView.getInstance().inputBuyAmount();
-        int manualLottoQuantity = InputView.getInstance().inputManualLottoQuantity(buyAmount);
+        int manualLottoQuantity = InputView.getInstance().inputManualLottoQuantity();
 
         List<List<Integer>> inputManual = InputView.getInstance().inputManualLottoNumbers(manualLottoQuantity);
 
