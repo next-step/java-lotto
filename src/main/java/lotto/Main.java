@@ -15,24 +15,24 @@ public class Main {
         int manualTicketCount = InputView.getManualTicketCount();
 
         Pay pay = new Pay(money, manualTicketCount);
-        LottoTicketGroup autoLottoTicketGroup = new LottoTicketGroup(pay, new LottoNumberGenerator());
+        LottoTickets autoLottoTickets = new LottoTickets(pay, new LottoNumberGenerator());
 
         List<String> manualLottoList = InputView.getManualLottoNumbers(manualTicketCount);
 
-        LottoTicketGroup lottoTicketGroup =
-                new LottoTicketGroup(
+        LottoTickets lottoTickets =
+                new LottoTickets(
                         manualLottoList
                                 .stream()
                                 .map(lottoNumbers -> new LottoTicket(StringLottoNumber.toList(lottoNumbers)))
                                 .collect(Collectors.toList())
-                ).merge(autoLottoTicketGroup);
+                ).merge(autoLottoTickets);
 
-        ResultView.printLottoTickets(lottoTicketGroup);
+        ResultView.printLottoTickets(lottoTickets);
 
         List<LottoNumber> winningLottoNumbers = StringLottoNumber.toList(InputView.getWinnerTicket());
 
-        RankGroup rankGroup = lottoTicketGroup.getLottoRankings(new WinningLotto(new LottoTicket(winningLottoNumbers), new LottoNumber(InputView.getBonusBall())));
+        Ranks ranks = lottoTickets.getLottoRankings(new WinningLotto(new LottoTicket(winningLottoNumbers), new LottoNumber(InputView.getBonusBall())));
 
-        ResultView.printWinningStatistics(rankGroup, pay);
+        ResultView.printWinningStatistics(ranks, pay);
     }
 }
