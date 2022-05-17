@@ -72,7 +72,7 @@ public class LottoTicketTest {
         // given
         Integer[] nums = {1, 2, 3, 4, 5, 44};
         LottoTicket lottoTicket =  new LottoTicket(nums);
-        LottoNumber bonusBall = new LottoNumber(1);
+        LottoNumber bonusBall = new LottoNumber(44);
 
         // when
         Rank rankRes = lottoTicket.getRank(winningTicket, bonusBall);
