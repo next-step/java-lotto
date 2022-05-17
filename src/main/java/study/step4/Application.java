@@ -11,10 +11,12 @@ import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
-        int buyAmount = InputView.getInstance().inputBuyAmount();
-        int manualLottoQuantity = InputView.getInstance().inputManualLottoQuantity();
+        InputView instance = InputView.getInstance();
 
-        List<List<Integer>> inputManual = InputView.getInstance().inputManualLottoNumbers(manualLottoQuantity);
+        int buyAmount = instance.inputBuyAmount();
+        int manualLottoQuantity = instance.inputManualLottoQuantity();
+
+        List<List<Integer>> inputManual = instance.inputManualLottoNumbers(manualLottoQuantity);
 
         LottoMachine lottoMachine = new LottoMachine(new LottoAutoCreationStrategy());
         LottoTickets lottoTickets = lottoMachine.createLottoTickets(buyAmount, inputManual);
@@ -22,8 +24,8 @@ public class Application {
         ResultView resultView = new ResultView(lottoTickets);
         resultView.printLottoTicketInfos(inputManual.size());
 
-        String inputNumber = InputView.getInstance().inputWinnerNumbers();
-        int inputBonusNumber = InputView.getInstance().inputBonusNumber();
+        String inputNumber = instance.inputWinnerNumbers();
+        int inputBonusNumber = instance.inputBonusNumber();
         LottoWinners lottoWinners = LottoMachine.createWinners(inputNumber, inputBonusNumber);
 
         resultView.printLottoResultInfos(lottoTickets, lottoWinners);
