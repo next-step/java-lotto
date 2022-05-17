@@ -41,7 +41,11 @@ public class LotteryController {
     }
 
     public static List<LotteryNumber> parseNumbers(String scanned) {
-        return toLotteryNumbers(scanned.split("\\s*,\\s*"));
+        String[] numbers = scanned.split("\\s*,\\s*");
+        if (numbers.length != 6) {
+            throw new IllegalArgumentException("Wrong input found: " + String.join(",", numbers));
+        }
+        return toLotteryNumbers(numbers);
     }
 
     public static List<LotteryNumber> toLotteryNumbers(String[] numberStrings) {
