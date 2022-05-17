@@ -5,7 +5,10 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Inventory {
     private List<Lottery> lotteries;
@@ -47,7 +50,8 @@ public class Inventory {
 
     public List<Reward> findWins(Winning winning) {
         List<Reward> rewards = new ArrayList();
-        for (Lottery lottery : this.lotteries) {
+        List<Lottery> totalLotteries = Stream.of(this.lotteries, this.manualLotteries).flatMap(Collection::stream).collect(Collectors.toList());
+        for (Lottery lottery : totalLotteries) {
             Reward reward = lottery.findWin(winning);
             rewards.add(reward);
         }

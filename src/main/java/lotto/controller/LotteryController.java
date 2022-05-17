@@ -103,6 +103,15 @@ public class LotteryController {
 //        return new Lottery(lotteryNumbers);
 //    }
 
+    private void scanManualLotteries(int amount) {
+        this.inventory.scanManualLotteries(amount);
+    }
+
+    private int scanManualLotteryAmount() {
+        String scanned = InputView.scanWithPayload("Put the amount of manual lotteries");
+        return Integer.parseInt(scanned);
+    }
+
     public void start() {
         Money money = this.scanMoney();
         int amount = this.scanManualLotteryAmount();
@@ -115,15 +124,6 @@ public class LotteryController {
         this.printWinStatistics();
         this.printEarningRate(money);
         this.printEarned(money);
-    }
-
-    private void scanManualLotteries(int amount) {
-        this.inventory.scanManualLotteries(amount);
-    }
-
-    private int scanManualLotteryAmount() {
-        String scanned = InputView.scanWithPayload("Put the amount of manual lotteries");
-        return Integer.parseInt(scanned);
     }
 
 }

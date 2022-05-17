@@ -243,9 +243,40 @@ Earning rate: 2142.8571428571427
 - [x] createLotteries 에서 수동 만큼 차감한 개수를 적용 - payManualLotteries
 - [x] 수동으로 구매한 개수, 자동으로 구매된 개수 출력 후 전체 로또 번호 나열
     - [x] 수동을 먼저 보여주고 자동을 나중에 분류해서 보여준다
+- [x] Answer match 시 수동도 포함
 - [ ] Optional 적용하여 NullPointerException 발생하지 않게 하기
 - [ ] 잘못된 값을 입력 했을 때 에외 처리
 - [ ] 모든 원시값과 문자열을 포장
 - [ ] 모든 List를 일급 콜션으로 포장
 
 ### Result output
+
+```
+Put your money.
+5000
+Put the amount of manual lotteries
+1
+Put manual lottery.(1 times)
+1,2,3,4,5,6
+1 manual lotteries are purchased.
+[1, 2, 3, 4, 5, 6]
+4 auto lotteries are purchased.
+[30, 17, 26, 16, 37, 36]
+[37, 31, 28, 39, 14, 5]
+[26, 41, 25, 28, 44, 38]
+[27, 42, 38, 17, 8, 6]
+Put lottery answer.
+1,2,3,4,5,6
+Put bonus number.
+7
+Win Statistics
+------------------
+THREE matches (₩5000): 0
+FOUR matches (₩50000): 0
+FIVE matches (₩1500000): 0
+BONUS matches (₩30000000): 0
+SIX matches (₩2000000000): 1
+
+Earning rate: 400000.0
+📈Earned!
+```
