@@ -12,12 +12,11 @@ public class LottoNumber {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
     private static final int LOTTO_TICKET_SIZE = 6;
-    private final int number;
-
-    private static final Map<Integer, LottoNumber> lottoNumberMap =
+    private static final Map<Integer, LottoNumber> LOTTO_NUMBER_MAP =
             IntStream.range(MIN_NUMBER, MAX_NUMBER+1)
-            .boxed()
-            .collect(Collectors.toMap(Function.identity(), LottoNumber::new));
+                    .boxed()
+                    .collect(Collectors.toMap(Function.identity(), LottoNumber::new));
+    private final int number;
 
     public LottoNumber(String strNumber) {
         this(Integer.parseInt(strNumber));
@@ -29,10 +28,10 @@ public class LottoNumber {
     }
 
     public static LottoNumber getLottoNumber(Integer number){
-        if(!lottoNumberMap.containsKey(number)){
+        if(!LOTTO_NUMBER_MAP.containsKey(number)){
             throw new InvalidLottoNumberException();
         }
-        return lottoNumberMap.get(number);
+        return LOTTO_NUMBER_MAP.get(number);
     }
 
     private void validate(int number) {
@@ -42,7 +41,7 @@ public class LottoNumber {
     }
 
     public static LottoTicket generateLottoTicket() {
-        List<LottoNumber> numberList = new ArrayList<>(lottoNumberMap.values());
+        List<LottoNumber> numberList = new ArrayList<>(LOTTO_NUMBER_MAP.values());
         Collections.shuffle(numberList);
         return new LottoTicket(new ArrayList<>(numberList.subList(0, LOTTO_TICKET_SIZE)));
     }

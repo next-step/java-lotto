@@ -54,11 +54,43 @@ public class LottoTicketTest {
     @Test
     @DisplayName("몇개 일치하는지 테스트")
     void 일치_수_테스트(){
+        // given
         Integer[] nums = {1, 2, 3, 4, 11, 14};
-        List<LottoNumber> lottoNumbers = Arrays.stream(nums)
-                .map(LottoNumber::getLottoNumber)
-                .collect(Collectors.toList());
-        LottoTicket lottoTicket =  new LottoTicket(lottoNumbers);
-        assertThat(lottoTicket.getRank(winningTicket)).isEqualTo(Rank.four);
+        LottoTicket lottoTicket =  new LottoTicket(nums);
+        LottoNumber bonusBall = new LottoNumber(15);
+
+        // when
+        Rank rankRes = lottoTicket.getRank(winningTicket, bonusBall);
+
+        // then
+        assertThat(rankRes).isEqualTo(Rank.FOURTH);
+    }
+
+    @Test
+    @DisplayName("보너스볼 일치하는지 테스트")
+    void 보너스볼_테스트(){
+        // given
+        Integer[] nums = {1, 2, 3, 4, 5, 44};
+        LottoTicket lottoTicket =  new LottoTicket(nums);
+        LottoNumber bonusBall = new LottoNumber(44);
+
+        // when
+        Rank rankRes = lottoTicket.getRank(winningTicket, bonusBall);
+
+        // then
+        assertThat(rankRes).isEqualTo(Rank.SECOND);
+    }
+
+    @Test
+    @DisplayName("보너스볼이랑 지난번 당첨 번호랑 중복이 있을 때 예외를 던진다.")
+    void 보너스볼_당첨번호_중복_예외_테스트(){
+        Integer[] ints = {1, 2, 3, 4, 5, 6};
+        LottoTicket preWinningTicket = new LottoTicket(ints);
+        LottoNumber bonusBall = new LottoNumber(6);
+        LottoTicket lottoTicket = new LottoTicket(ints);
+        assertThatExceptionOfType(DuplicatedLottoNumberException.class)
+                .isThrownBy(()->{
+                    lottoTicket.getRank(preWinningTicket, bonusBall);
+                });
     }
 }

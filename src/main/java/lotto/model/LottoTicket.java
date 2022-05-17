@@ -38,18 +38,22 @@ public class LottoTicket {
         }
     }
 
-    public Rank getRank(LottoTicket winningNumbers){
+    public Rank getRank(LottoTicket winningNumbers, LottoNumber bonusBall){
+        checkDuplication(winningNumbers, bonusBall);
         int rank = 0;
-        for(LottoNumber lottoNumber: winningNumbers.getLottoNumbers()){
+        for(LottoNumber lottoNumber: winningNumbers.lottoNumbers){
             if(this.lottoNumbers.contains(lottoNumber)){
                 rank += 1;
             }
         }
-        return Rank.of(rank);
+        return Rank.of(rank, this.lottoNumbers.contains(bonusBall));
     }
 
-    private List<LottoNumber> getLottoNumbers(){
-        return lottoNumbers;
+    private void checkDuplication(LottoTicket lottoTicket, LottoNumber bonusBall) {
+        List<LottoNumber> lottoNumbers = lottoTicket.lottoNumbers;
+        if(lottoNumbers.contains(bonusBall)){
+            throw new DuplicatedLottoNumberException();
+        }
     }
 
     @Override

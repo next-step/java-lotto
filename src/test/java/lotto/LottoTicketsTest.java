@@ -38,11 +38,12 @@ public class LottoTicketsTest {
 
         LottoTickets lottoTickets = new LottoTickets(List.of(lottoTicket1, lottoTicket2));
 
-        Map<Rank, Long> rankMap = lottoTickets.getRankMap(winningTicket);
+        LottoNumber bonusBall = new LottoNumber(44);
+        Map<Rank, Long> rankMap = lottoTickets.getRankMap(winningTicket, bonusBall);
 
         Map<Rank, Long> result = Map.ofEntries(
-                entry(Rank.three, 1L),
-                entry(Rank.four, 1L)
+                entry(Rank.FIFTH, 1L),
+                entry(Rank.FOURTH, 1L)
         );
 
         assertThat(rankMap).containsExactlyInAnyOrderEntriesOf(result);

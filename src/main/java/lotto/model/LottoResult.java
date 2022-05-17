@@ -1,6 +1,6 @@
 package lotto.model;
 
-import java.util.Map;
+import java.util.*;
 
 public class LottoResult {
     private final Map<Rank, Long> rankMap;
@@ -9,14 +9,23 @@ public class LottoResult {
         this.rankMap = rankMap;
     }
 
-    public int getResult(int coincidence) {
-        Rank rank = Rank.of(coincidence);
+    public int getRankValue(Rank rank) {
         if(rankMap.get(rank) == null){
             return 0;
         }
         return rankMap.get(rank).intValue();
     }
 
+    public Map<Rank, Long> getRankTreeMap(){
+        Map<Rank, Long> res = new TreeMap<>(Collections.reverseOrder());
+        for (Rank rank: Rank.values()) {
+            if(rank.isWin()){
+                res.put(rank, 0L);
+            }
+        }
+        res.putAll(rankMap);
+        return  res;
+    }
 
     public double getProfitRate(Money buy) {
         Money profit = new Money();
