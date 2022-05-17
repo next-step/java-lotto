@@ -2,7 +2,7 @@ package lotto.controller;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
-import lotto.domain.WinningNumbers;
+import lotto.domain.Winners;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -16,11 +16,11 @@ public class LottoMain {
         Lottos lottos = new Lottos(numberOfLotto);
         ResultView.resultLottoNumber(numberOfLotto, lottos);
 
-        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(InputView.inputWinningNumbers()));
-        lottos.findWinners(winningNumbers);
+        Winners winners = new Winners(new Lotto(InputView.inputWinningNumbers()));
+        lottos.findWinners(winners);
 
-        ResultView.resultWinners(winningNumbers);
-        ResultView.resultRevenue(winningNumbers, money);
+        ResultView.resultWinners(winners);
+        ResultView.resultRevenue(winners, money);
 
     }
 

@@ -13,9 +13,9 @@ public class Lottos {
         }
     }
 
-    public void findWinners(WinningNumbers winningNumbers) {
+    public void findWinners(Winners winners) {
         for (Lotto lotto : lottos) {
-            winningNumbers.findWinners(lotto);
+            winners.findWinners(lotto);
         }
     }
 
@@ -23,9 +23,13 @@ public class Lottos {
 
     public String toString() {
         String resultString = "";
+
+        /*
         for (Lotto lotto : lottos) {
             resultString += lotto.toString() + "\n";
         }
-        return resultString;
+
+         */
+        return lottos.toString();
     }
 }

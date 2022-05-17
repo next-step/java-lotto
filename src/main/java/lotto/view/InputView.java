@@ -7,6 +7,9 @@ import java.util.Scanner;
 public class InputView {
     public static final int LOTTO_UNIT_NUMBER = 6;
     private static Scanner scanner = new Scanner(System.in);
+    
+    private InputView() {
+    }
 
     public static int inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");

@@ -15,11 +15,13 @@ public class Lotto {
         List<Integer> lottoAllNumber = new ArrayList<>();
 
         IntStream.range(LOTTO_MINIMUM_NUMBER, LOTTO_ALL_NUMBER)
-                .forEach(i -> lottoAllNumber.add(i));
+                .forEach(number -> lottoAllNumber.add(number));
         Collections.shuffle(lottoAllNumber);
+
         lottoAllNumber.stream()
                 .limit(6)
-                .forEach(i -> lottoNumbers.add(i));
+                .sorted()
+                .forEach(number -> lottoNumbers.add(number));
     }
 
     public Lotto(List<Integer> lotto) {

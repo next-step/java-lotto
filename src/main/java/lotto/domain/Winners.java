@@ -5,29 +5,49 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Winners {
-    public static final int FINAL_LINE_BREAK = 1;
-    public static final int FIRST_STRING = 0;
+    public static final int WINNING_MINIMUM = 3;
+    public static final int COUNT_UNIT = 1;
+    public static final int COUNT_INITIAL = 0;
 
-    private Map<String, Integer> winners = new LinkedHashMap<>();
+    private Map<WinningsType, Integer> winners = new LinkedHashMap<>();
+    private Lotto winningNumbers;
 
-    public Winners() {
+    public Winners(Lotto winningNumbers) {
+        this.winningNumbers = winningNumbers;
         for (int i = 3; i <= 6; i++) {
-            winners.put(i + "개", 0);
+            winners.put(WinningsType.selectWinningsType(i), COUNT_INITIAL);
+        }
+    }
+
+    public void findWinners(Lotto lotto) {
+        int count = winningNumbers.numberOfSame(lotto);
+        if (count >= WINNING_MINIMUM) {
+            addWinner(count);
         }
     }
 
     public void addWinner(int count) {
-        winners.put(count + "개", winners.get(count + "개") + 1);
+        WinningsType temporary = WinningsType.selectWinningsType(count);
+        winners.put(temporary, winners.get(temporary) + COUNT_UNIT);
     }
 
     public double revenue(int money) {
         double amount = 0;
-        for (String winner : winners.keySet()) {
-            amount += Winnings.selectWinnings(winner) * winners.get(winner);
+        for (int i = 3; i <= 6; i++) {
+            amount += WinningsType.selectWinnings(i) * winners.get(WinningsType.selectWinningsType(i));
         }
         return amount / money;
     }
 
+    public String isBenefit(double revenue) {
+        if (revenue > 1) {
+            return "이득";
+        }
+        if (revenue < 1) {
+            return "손해";
+        }
+        return "본전";
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -44,12 +64,7 @@ public class Winners {
 
     @Override
     public String toString() {
-        String resultString = "";
-        for (String winner : winners.keySet()) {
-            resultString += winner + " 일치 (" + Winnings.selectWinnings(winner) + "원)- " + winners.get(winner) + "개" + "\n";
-        }
-
-        return resultString.substring(FIRST_STRING, resultString.length() - FINAL_LINE_BREAK);
+        return winners.toString();
     }
 
 
