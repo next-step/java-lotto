@@ -20,7 +20,7 @@ class RankGroupTest {
     @DisplayName("수익률 테스트")
     void returnMoneyPercentage() {
         RankGroup rankGroup = new RankGroup(Arrays.asList(Rank.FIFTH, Rank.NO_MATCH, Rank.NO_MATCH, Rank.NO_MATCH));
-        assertThat(rankGroup.returnMoneyPercentage(4000)).isEqualTo(1.25);
+        assertThat(rankGroup.returnMoneyPercentage(new Pay(4000))).isEqualTo(1.25);
     }
 
     @Test

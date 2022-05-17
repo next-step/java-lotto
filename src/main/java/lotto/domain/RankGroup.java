@@ -19,8 +19,8 @@ public class RankGroup {
         return totalMoney;
     }
 
-    public double returnMoneyPercentage(int totalTicketPrice) {
-        return Math.floor((sumMoney() / (double) totalTicketPrice) * SECOND_DIGIT) / SECOND_DIGIT;
+    public double returnMoneyPercentage(Pay pay) {
+        return Math.floor((sumMoney() / (double) pay.getPay()) * SECOND_DIGIT) / SECOND_DIGIT;
     }
 
     public int getCountOf(Rank inputRank) {

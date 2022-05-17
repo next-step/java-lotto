@@ -10,11 +10,16 @@ public class LottoTicketGroup {
     private final List<LottoTicket> lottoTicketGroup;
 
     public LottoTicketGroup(Pay pay, NumberGenerator numberGenerator) {
-        this(generateLottoTicketGroup(pay.getTicketCount(), numberGenerator));
+        this(generateLottoTicketGroup(pay.getAutoTicketCount(), numberGenerator));
     }
 
     public LottoTicketGroup(List<LottoTicket> lottoTickets) {
         this.lottoTicketGroup = lottoTickets;
+    }
+
+    public LottoTicketGroup merge(LottoTicketGroup lottoTicketGroup) {
+        this.lottoTicketGroup.addAll(lottoTicketGroup.getTickets());
+        return new LottoTicketGroup(this.lottoTicketGroup);
     }
 
     private static List<LottoTicket> generateLottoTicketGroup(int ticketCount, NumberGenerator numberGenerator) {
