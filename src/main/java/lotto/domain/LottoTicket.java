@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
@@ -33,11 +32,6 @@ public class LottoTicket {
       String numbers = lottoNumbers.stream().map(Object::toString).collect(Collectors.joining(","));
       throw new IllegalArgumentException(String.format(DUPLICATED_LOTTO_NUMBERS, numbers));
     }
-  }
-
-  public LottoTicket(LottoTicket winLottoNumbers) {
-    Objects.requireNonNull(winLottoNumbers, EMPTY_LOTTO_NUMBERS);
-    this.lottoNumbers = List.copyOf(winLottoNumbers.lottoNumbers);
   }
 
   public List<Integer> getLottoNumbers() {
