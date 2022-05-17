@@ -16,7 +16,7 @@ public class Winnings {
     private RecordMatched recordMatched;
 
     public Winnings(String[] winningNumbers, int bonusNumber) {
-        this.winningNumbers = new WinningNumbers(parseWinningNumbers(winningNumbers), bonusNumber);
+        this.winningNumbers = new WinningNumbers(winningNumbers, bonusNumber);
         this.recordMatched = new RecordMatched(Matched.values().length);
     }
 
@@ -25,12 +25,12 @@ public class Winnings {
         this.recordMatched = new RecordMatched(Matched.values().length);
     }
 
-    public void countMatchedNumbers(List<Integer> numbers) {
+    public void countMatchedNumbers(Lotto lotto) {
         int matchedNumber = 0;
-        for (int number : numbers) {
-            matchedNumber += winningNumbers.checkNumber(number);
+        for (LottoNumber number : winningNumbers.winningNumbers()) {
+            matchedNumber += lotto.hasNumbers(number) ? 1 : 0;
         }
-        Matched matched = Matched.valueOf(matchedNumber, winningNumbers.checkBonus(numbers));
+        Matched matched = Matched.valueOf(matchedNumber, lotto.hasNumbers(winningNumbers.bonusNumber()));
         recordNumberOfMatched(matched.index());
     }
 
@@ -45,15 +45,6 @@ public class Winnings {
             winningsRewards += recordMatched.recordMatched()[i] * matcheds[i].reward();
         }
         return winningsRewards;
-    }
-
-    private List<Integer> parseWinningNumbers(String[] strings) {
-        List<Integer> winningNumbers = new ArrayList<>();
-        for (String string : strings) {
-            winningNumbers.add(Integer.parseInt(string));
-        }
-
-        return winningNumbers;
     }
 
     public int[] recordMatched() {

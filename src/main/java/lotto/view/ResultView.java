@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Draw;
-import lotto.domain.Lotto;
-import lotto.domain.Matched;
-import lotto.domain.Winnings;
+import lotto.domain.*;
 
 public class ResultView {
 
@@ -17,12 +14,12 @@ public class ResultView {
     }
 
     void printLotto(Lotto lotto) {
-        int size = lotto.selectedNumbers().size();
+        int size = lotto.lottoNumbers().size();
         int i = 1;
 
         System.out.print("[");
-        for (int number : lotto.selectedNumbers()) {
-            System.out.print(number);
+        for (LottoNumber lottoNumber : lotto.lottoNumbers()) {
+            System.out.print(lottoNumber);
             printComma(i++, size);
         }
         System.out.print("]");
