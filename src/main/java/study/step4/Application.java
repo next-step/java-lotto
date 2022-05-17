@@ -21,8 +21,8 @@ public class Application {
         LottoMachine lottoMachine = new LottoMachine(new LottoAutoCreationStrategy());
         LottoTickets lottoTickets = lottoMachine.createLottoTickets(buyAmount, inputManual);
 
-        ResultView resultView = new ResultView(lottoTickets);
-        resultView.printLottoTicketInfos(inputManual.size());
+        ResultView resultView = new ResultView();
+        resultView.printLottoTicketInfos(lottoTickets, inputManual.size());
 
         String inputNumber = instance.inputWinnerNumbers();
         int inputBonusNumber = instance.inputBonusNumber();

@@ -25,13 +25,7 @@ public class ResultView {
     private static final int DEFAULT_LOTTO_YIELD = 1;
     private static final int MISS_MATCH_REMOVE_NUMBER = 0;
 
-    private final LottoTickets lottoTickets;
-
-    public ResultView(LottoTickets lottoTickets) {
-        this.lottoTickets = lottoTickets;
-    }
-
-    public void printLottoTicketInfos(int manualNumber) {
+    public void printLottoTicketInfos(LottoTickets lottoTickets, int manualNumber) {
         StringBuilder sb = new StringBuilder();
         List<LottoTicket> tickets = lottoTickets.readOnlyLottoTicket();
         sb.append(INPUT_RESULT_MANUAL_MESSAGE + manualNumber + INPUT_RESULT_AUTO_MESSAGE + (lottoTickets.lottoQuantity() - manualNumber) + BUY_QUANTITY_MESSAGE + ENTER);
@@ -47,7 +41,7 @@ public class ResultView {
         System.out.println(sb);
         Arrays.asList(LottoRank.values())
                 .stream()
-                .forEach(lottoRank -> printLottoRank(lottoRank, lottoWinners));
+                .forEach(lottoRank -> printLottoRank(lottoTickets, lottoRank, lottoWinners));
 
         printLottoYield(lottoTickets, lottoWinners);
     }
@@ -65,7 +59,7 @@ public class ResultView {
         System.out.println(sb);
     }
 
-    private void printLottoRank(LottoRank lottoRank, LottoWinners lottoWinners) {
+    private void printLottoRank(LottoTickets lottoTickets, LottoRank lottoRank, LottoWinners lottoWinners) {
         if (lottoRank.countOfMatch != MISS_MATCH_REMOVE_NUMBER) {
             System.out.println(lottoRank.countOfMatch + MATCH_START_MESSAGE + bonusOfString(lottoRank) + MATCH_START_BRACKET_MESSAGE + lottoRank.winningMoney + MATCH_END_BRACKET_MESSAGE + lottoRank.winnerCount(lottoTickets.readOnlyLottoTicket(), lottoWinners) + MATCH_END_MESSAGE);
         }
