@@ -80,4 +80,17 @@ public class LottoTicketTest {
         // then
         assertThat(rankRes).isEqualTo(Rank.SECOND);
     }
+
+    @Test
+    @DisplayName("보너스볼이랑 지난번 당첨 번호랑 중복이 있을 때 예외를 던진다.")
+    void 보너스볼_당첨번호_중복_예외_테스트(){
+        Integer[] ints = {1, 2, 3, 4, 5, 6};
+        LottoTicket preWinningTicket = new LottoTicket(ints);
+        LottoNumber bonusBall = new LottoNumber(6);
+        LottoTicket lottoTicket = new LottoTicket(ints);
+        assertThatExceptionOfType(DuplicatedLottoNumberException.class)
+                .isThrownBy(()->{
+                    lottoTicket.getRank(preWinningTicket, bonusBall);
+                });
+    }
 }
