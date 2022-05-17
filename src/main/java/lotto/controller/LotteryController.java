@@ -37,7 +37,7 @@ public class LotteryController {
         if (scanned.isPresent()) {
             return new Lottery(parseNumbers(scanned.get()));
         }
-        throw  new NullPointerException("No input found.");
+        throw new NullPointerException("No input found.");
     }
 
     public static List<LotteryNumber> parseNumbers(String scanned) {
@@ -101,21 +101,6 @@ public class LotteryController {
     private void payManualLotteries(Money money, int amount) {
         money.pay(amount);
     }
-
-//    public List<Lottery> scanManualLotteries(int amount) {
-//        List<Lottery> manualLotteries = new ArrayList<>();
-//        System.out.println("Put manual lottery.(" + amount + " times)");
-//        for (int i = 0; i < amount; i++) {
-//            manualLotteries.add(scanManualLottery());
-//        }
-//        return manualLotteries;
-//    }
-//
-//    private Lottery scanManualLottery() {
-//        String scanned = InputView.scan();
-//        List<LotteryNumber> lotteryNumbers = LotteryController.parseNumbers(scanned);
-//        return new Lottery(lotteryNumbers);
-//    }
 
     private void scanManualLotteries(int amount) {
         this.inventory.scanManualLotteries(amount);
