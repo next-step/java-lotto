@@ -88,25 +88,25 @@ public class LotteryController {
         money.pay(amount);
     }
 
-    public List<Lottery> scanManualLotteries() {
-        List<Lottery> scannedNumbers = new ArrayList<>();
-        System.out.println("Put manual lottery.(Quit with Carriage return)");
-        return scanManualLottery(scannedNumbers);
+    public List<Lottery> scanManualLotteries(int amount) {
+        List<Lottery> manualLotteries = new ArrayList<>();
+        System.out.println("Put manual lottery.(" + amount + " times)");
+        for (int i = 0; i < amount; i++) {
+            manualLotteries.add(scanManualLottery());
+        }
+        return manualLotteries;
     }
 
-    private List<Lottery> scanManualLottery(List<Lottery> lotteries) {
+    private Lottery scanManualLottery() {
         String scanned = InputView.scan();
-        if (scanned.length() > 0) {
-            List<LotteryNumber> lotteryNumbers = LotteryController.parseNumbers(scanned);
-            lotteries.add(new Lottery(lotteryNumbers));
-            scanManualLottery(lotteries);
-        }
-        return lotteries;
+        List<LotteryNumber> lotteryNumbers = LotteryController.parseNumbers(scanned);
+        return new Lottery(lotteryNumbers);
     }
 
     public void start() {
         Money money = this.scanMoney();
-        List<Lottery> manualLotteries = this.scanManualLotteries();
+        int amount = this.scanManualLotteryAmount();
+        List<Lottery> manualLotteries = this.scanManualLotteries(amount);
         this.payManualLotteries(money, manualLotteries.size());
         this.createLotteries(money);
         this.printLotteries();
@@ -115,6 +115,11 @@ public class LotteryController {
         this.printWinStatistics();
         this.printEarningRate(money);
         this.printEarned(money);
+    }
+
+    private int scanManualLotteryAmount() {
+        String scanned = InputView.scanWithPayload("Put the amount of manual lotteries");
+        return Integer.parseInt(scanned);
     }
 
 }
