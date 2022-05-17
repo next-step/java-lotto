@@ -7,6 +7,7 @@ import lotto.model.Rank;
 
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Map;
 
 public class Output {
     private static final String LOTTO_CNT_INFO = "개를 구매했습니다.";
@@ -26,17 +27,21 @@ public class Output {
     public static void printWinningStatics(Money buyPrice, LottoResult lottoResult){
         System.out.println(LOTTO_WINNING_STATICS);
 
-        for (int i=3; i<=6 ; i++) {
-            Rank rank = Rank.of(i, false);
-            System.out.printf("%s개 일치 (%s원)- %s개\n", rank.getCoincidence(), rank.getReward(), lottoResult.getResult(rank));
-            if(i == 5){
-                rank = Rank.of(i, true);
-                System.out.printf("%s개 일치, 보너스 볼 일치(%s원)- %s개\n", "5", rank.getReward(), lottoResult.getResult(rank));
-            }
+        Map<Rank, Long> rankMap = lottoResult.getRankTreeMap();
+        for (Map.Entry<Rank, Long> entry: rankMap.entrySet()) {
+            Rank rank = entry.getKey();
+            Long value = entry.getValue();
+            printRankAndValue(rank, value);
         }
 
-        String profitRate = df.format(lottoResult.getProfitRate(buyPrice));
-        System.out.println("총 수익룰은 "+profitRate+"입니다.");
+        System.out.printf("총 수익룰은 %.2f 입니다.", lottoResult.getProfitRate(buyPrice));
     }
 
+    private static void printRankAndValue(Rank rank, Long value) {
+        if(rank == Rank.SECOND){
+            System.out.printf("%s개 일치, 보너스 볼 일치(%s원)- %s개\n", "5", rank.getReward(), value);
+            return;
+        }
+        System.out.printf("%s개 일치 (%s원)- %s개\n", rank.getCoincidence(), rank.getReward(), value);
+    }
 }

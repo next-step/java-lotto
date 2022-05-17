@@ -18,11 +18,10 @@ public class LottoTickets {
     }
 
     public Map<Rank, Long> getRankMap(LottoTicket winningNumbers, LottoNumber bonusBall){
-        Map<Rank, Long> res = lottoTicketList.stream()
+        return lottoTicketList.stream()
                 .map(ticket -> ticket.getRank(winningNumbers, bonusBall))
                 .filter(Rank::isWin)
                 .collect(groupingBy(Function.identity(), Collectors.counting()));
-        return res;
     }
 
     public static List<LottoTicket> generateTickets(int ticketCnt){
