@@ -9,8 +9,8 @@ public class Winners {
     public static final int COUNT_UNIT = 1;
     public static final int COUNT_INITIAL = 0;
 
-    private Map<WinningsType, Integer> winners = new LinkedHashMap<>();
-    private Lotto winningNumbers;
+    private final Map<WinningsType, Integer> winners = new LinkedHashMap<>();
+    private final Lotto winningNumbers;
 
     public Winners(Lotto winningNumbers) {
         this.winningNumbers = winningNumbers;

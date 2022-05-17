@@ -24,8 +24,8 @@ public class Lotto {
                 .forEach(number -> lottoNumbers.add(number));
     }
 
-    public Lotto(List<Integer> lotto) {
-        this.lottoNumbers = lotto;
+    public Lotto(List<Integer> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     public int numberOfSame(Lotto lotto) {
