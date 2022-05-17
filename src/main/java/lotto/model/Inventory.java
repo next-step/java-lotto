@@ -19,12 +19,11 @@ public class Inventory {
     public Inventory() {
         this.lotteries = new ArrayList();
         this.manualLotteries = new ArrayList<>();
-    }
-
-    ;
+    };
 
     public Inventory(List<Lottery> lotteries) {
         this.lotteries = lotteries;
+        this.manualLotteries = new ArrayList<>();
     }
 
     public void createLotteries(Money money) {
