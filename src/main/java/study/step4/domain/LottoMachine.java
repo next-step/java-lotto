@@ -31,14 +31,9 @@ public class LottoMachine {
                 .limit(lottoQuantity.quantity())
                 .collect(Collectors.collectingAndThen(toList(), LottoTickets::new)).readOnlyLottoTicket();
 
-        return joinLottoTickets(lottoAutoTickets, lottoManualTickets);
-    }
-
-    public static LottoTickets joinLottoTickets(List<LottoTicket> autoTickets, List<LottoTicket> manualTickets) {
         List<LottoTicket> result = new ArrayList<>();
-
-        result.addAll(manualTickets);
-        result.addAll(autoTickets);
+        result.addAll(lottoManualTickets);
+        result.addAll(lottoAutoTickets);
 
         return new LottoTickets(result);
     }
