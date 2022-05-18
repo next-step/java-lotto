@@ -9,7 +9,6 @@ public class Main {
             lottoController.start();
         }catch (Exception exception){
             System.out.println(String.join("\n", "ERROR", exception.getMessage()));
-            exception.printStackTrace();
         }
     }
 }

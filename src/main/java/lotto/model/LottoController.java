@@ -11,13 +11,9 @@ public class LottoController {
 
     public void start(){
         Money money = new Money(Input.readMoney());
-        int ticketCnt = getTicketCnt(money);
-
-        int manualLottoCnt = Input.readManualLottoCnt();
-        int autoLottoCnt = ticketCnt - manualLottoCnt;
 
         // 로또 티켓들 생성
-        LottoTickets lottoTickets = generateLottoTickets(manualLottoCnt, autoLottoCnt);
+        LottoTickets lottoTickets = getLottoTickets(money);
 
         // 지난 주 당첨 번호와 보너스볼
         LottoTicket winningTicket =  Input.readPreWeekWinningLottoNums();
@@ -27,6 +23,20 @@ public class LottoController {
         LottoResult lottoResult = new LottoResult(rankMap);
 
         Output.printWinningStatics(money, lottoResult);
+    }
+
+    private LottoTickets getLottoTickets(Money money){
+        int ticketCnt = getTicketCnt(money);
+
+        int manualLottoCnt = Input.readManualLottoCnt();
+        int autoLottoCnt = ticketCnt - manualLottoCnt;
+
+        if(manualLottoCnt > ticketCnt){
+            throw new IllegalArgumentException("수동으로 구매할 수 있는 로또 수를 초과하였습니다.");
+        }
+
+        // 로또 티켓들 생성
+        return generateLottoTickets(manualLottoCnt, autoLottoCnt);
     }
 
     private int getTicketCnt(Money money) {
