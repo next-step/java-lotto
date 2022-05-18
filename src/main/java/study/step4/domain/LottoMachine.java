@@ -29,7 +29,7 @@ public class LottoMachine {
 
         List<LottoTicket> lottoAutoTickets = Stream.generate(LottoMachine::createLottoTicket)
                 .limit(lottoQuantity.quantity())
-                .collect(Collectors.collectingAndThen(toList(), LottoTickets::new)).readOnlyLottoTicket();
+                .collect(Collectors.toList());
 
         List<LottoTicket> result = new ArrayList<>();
         result.addAll(lottoManualTickets);
