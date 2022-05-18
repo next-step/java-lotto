@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.model.LottoResult;
-import lotto.model.LottoTicket;
-import lotto.model.Money;
-import lotto.model.Rank;
+import lotto.model.*;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -16,12 +13,6 @@ public class Output {
 
     public static void printLottoCnt(int cnt){
         System.out.println(cnt+LOTTO_CNT_INFO);
-    }
-
-    public static void printLottoTicketList(List<LottoTicket> lottoTickets){
-        for (LottoTicket lottoTicket: lottoTickets) {
-            System.out.println(lottoTicket);
-        }
     }
 
     public static void printWinningStatics(Money buyPrice, LottoResult lottoResult){
@@ -43,5 +34,15 @@ public class Output {
             return;
         }
         System.out.printf("%s개 일치 (%s원)- %s개\n", rank.getCoincidence(), rank.getReward(), value);
+    }
+
+    public static void printLottoTicketList(List<LottoTicket> manualLottoTickets, List<LottoTicket> autoLottoTickets) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n",manualLottoTickets.size(), autoLottoTickets.size());
+        for (LottoTicket lottoTicket: manualLottoTickets) {
+            System.out.println(lottoTicket);
+        }
+        for (LottoTicket lottoTicket: autoLottoTickets) {
+            System.out.println(lottoTicket);
+        }
     }
 }
