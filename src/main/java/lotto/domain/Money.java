@@ -6,20 +6,20 @@ public class Money {
 
   public static final int LOTTO_TICKET_PRICE = 1000;
 
-  private final int amount;
+  private final long amount;
 
-  public static Money from(int amount) {
+  public static Money from(long amount) {
     return new Money(amount);
   }
 
-  private Money(int amount) {
+  private Money(long amount) {
     if (amount < 0) {
       throw new IllegalArgumentException("돈은 0보다 작을 수 없습니다.");
     }
     this.amount = amount;
   }
 
-  public int countLotto() {
+  public long countLotto() {
     return amount / LOTTO_TICKET_PRICE;
   }
 

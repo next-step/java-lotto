@@ -26,6 +26,10 @@ public enum Rank {
     return rank;
   }
 
+  public long getCashPrize() {
+    return cashPrize;
+  }
+
   private static Rank getLottoRank(long matchCount) {
     return Arrays.stream(values())
         .filter(rank -> rank.isMatched(matchCount))
