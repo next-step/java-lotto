@@ -1,8 +1,10 @@
-package Lotto.domain;
+package Lotto.domain.Lotto;
+
+import Lotto.domain.Number;
 
 import java.util.List;
 
-public class MyLotto extends Lotto{
+public class MyLotto extends Lotto {
 
     public MyLotto(List<Integer> numbers) {
         super(numbers);

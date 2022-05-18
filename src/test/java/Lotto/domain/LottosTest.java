@@ -1,5 +1,7 @@
 package Lotto.domain;
 
+import Lotto.domain.Lotto.MyLotto;
+import Lotto.domain.Lotto.WinningLotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

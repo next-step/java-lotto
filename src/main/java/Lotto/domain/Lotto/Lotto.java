@@ -1,5 +1,6 @@
-package Lotto.domain;
+package Lotto.domain.Lotto;
 
+import Lotto.domain.Number;
 import Lotto.exception.SameNumberException;
 import Lotto.exception.WrongNumberFormatException;
 

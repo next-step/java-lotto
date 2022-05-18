@@ -1,6 +1,8 @@
 package Lotto.controller;
 
 import Lotto.domain.*;
+import Lotto.domain.Lotto.MyLotto;
+import Lotto.domain.Lotto.WinningLotto;
 import Lotto.domain.Number;
 import Lotto.view.InputView;
 import Lotto.view.ResultView;
@@ -24,7 +26,7 @@ public class LottoGame {
     }
 
     private Lottos createLottos() {
-        money = new Money(InputView.inputBuyMoney(), true);
+        money = new Money(InputView.inputBuyMoney(), false);
 
         List<MyLotto> passiveMyLottos = inputAndCreatePassiveLotto();
 

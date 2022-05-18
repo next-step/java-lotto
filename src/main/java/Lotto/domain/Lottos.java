@@ -1,5 +1,7 @@
 package Lotto.domain;
 
+import Lotto.domain.Lotto.MyLotto;
+import Lotto.domain.Lotto.WinningLotto;
 import Lotto.view.InputView;
 
 import java.util.*;
@@ -18,7 +20,6 @@ public class Lottos {
             list.add(myLotto);
         }
     }
-
 
     public static Lottos createLottosWithPassive(int allLottoCnt, List<MyLotto> passiveMyLottos) {
         initLottoCount(passiveMyLottos.size());

@@ -1,5 +1,7 @@
 package Lotto.domain;
 
+import Lotto.domain.Lotto.MyLotto;
+import Lotto.domain.Lotto.WinningLotto;
 import Lotto.exception.SameNumberException;
 import Lotto.exception.WrongNumberFormatException;
 import org.assertj.core.api.Assertions;

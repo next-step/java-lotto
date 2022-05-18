@@ -23,7 +23,7 @@ public enum EqualLottoCntInfo {
 
     EqualLottoCntInfo(int equalCnt, int winningMoney) {
         this.equalCnt = equalCnt;
-        this.winningMoney = new Money(winningMoney, true);
+        this.winningMoney = Money.createWinningMoney(winningMoney);
     }
 
     public static EqualLottoCntInfo findEqualLottoInfo(int equalCnt, boolean isBonus) {
