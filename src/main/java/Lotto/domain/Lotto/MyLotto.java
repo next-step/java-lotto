@@ -10,8 +10,8 @@ public class MyLotto extends Lotto {
         super(numbers);
     }
 
-    public MyLotto(String winningNumbers) {
-        super(winningNumbers);
+    public MyLotto(String myLotto) {
+        super(myLotto);
     }
 
     public int findWinningLottoCnt(WinningLotto winningNumbers) {
