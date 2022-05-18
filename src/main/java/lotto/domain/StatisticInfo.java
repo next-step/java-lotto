@@ -10,13 +10,49 @@ public class StatisticInfo {
   private final Statistics statistics;
   private final Money purchaseAmount;
 
-  public StatisticInfo(WinningLottoTicket winningLottoTicket, LottoTickets lottoTickets,
+  public static StatisticInfo of(WinningLottoTicket winningLottoTicket, LottoTickets lottoTickets,
       Money lottoPrice) {
-    validateWinningLottoTicket(winningLottoTicket);
-    validateLottoTickets(lottoTickets);
+    validate(winningLottoTicket, lottoTickets, lottoPrice);
+    return new StatisticInfo(createStatistics(winningLottoTicket, lottoTickets),
+        lottoPrice.multiply(lottoTickets.size()));
+  }
 
-    this.statistics = createStatistics(winningLottoTicket, lottoTickets);
-    this.purchaseAmount = lottoPrice.multiply(lottoTickets.size());
+  private static Statistics createStatistics(WinningLottoTicket winningLottoTicket,
+      LottoTickets lottoTickets) {
+    List<Statistic> statistics = Arrays.stream(Prize.values())
+        .filter(Prize::winning)
+        .map(prize -> new Statistic(lottoTickets.getMatchedCountPerPrize(prize, winningLottoTicket),
+            prize))
+        .collect(Collectors.toList());
+    return new Statistics(statistics);
+  }
+
+  private static void validate(WinningLottoTicket winningLottoTicket, LottoTickets lottoTickets,
+      Money lottoPrice) {
+    if (winningLottoTicket == null) {
+      throw new IllegalArgumentException("우승 티켓은 null일 수 없습니다.");
+    }
+    if (lottoTickets == null) {
+      throw new IllegalArgumentException("로또 티켓 그룹은 null일 수 없습니다.");
+    }
+    if (lottoPrice == null) {
+      throw new IllegalArgumentException("로또 가격은 null일 수 없습니다.");
+    }
+  }
+
+  private StatisticInfo(Statistics statistics, Money purchaseAmount) {
+    validate(statistics, purchaseAmount);
+    this.statistics = statistics;
+    this.purchaseAmount = purchaseAmount;
+  }
+
+  private void validate(Statistics statistics, Money purchaseAmount) {
+    if (statistics == null) {
+      throw new IllegalArgumentException("당첨 통계 그룹은 null일 수 없습니다.");
+    }
+    if (purchaseAmount == null) {
+      throw new IllegalArgumentException("구매금액은 null일 수 없습니다.");
+    }
   }
 
   public List<Statistic> getStatistics() {
@@ -27,27 +63,5 @@ public class StatisticInfo {
     Money winAmount = statistics.summingTotalPrizeAmount();
     Rate divide = Rate.of((double) winAmount.value() / purchaseAmount.value());
     return divide.getRate();
-  }
-
-  private void validateLottoTickets(LottoTickets lottoTickets) {
-    if (lottoTickets == null) {
-      throw new IllegalArgumentException("로또 그룹은 null 일 수 없습니다.");
-    }
-  }
-
-  private void validateWinningLottoTicket(WinningLottoTicket winningLottoTicket) {
-    if (winningLottoTicket == null) {
-      throw new IllegalArgumentException("우승 티켓은 null 일 수 없습니다.");
-    }
-  }
-
-  private Statistics createStatistics(WinningLottoTicket winningLottoTicket,
-      LottoTickets lottoTickets) {
-    List<Statistic> statistics = Arrays.stream(Prize.values())
-        .filter(Prize::winning)
-        .map(prize -> new Statistic(lottoTickets.getMatchedCountPerPrize(prize, winningLottoTicket),
-            prize))
-        .collect(Collectors.toList());
-    return new Statistics(statistics);
   }
 }

@@ -70,19 +70,19 @@ class LottoTicketsTest {
   @ParameterizedTest
   @MethodSource("provideForGetMatchedCountPerPrize")
   void getMatchedCountPerPrize(LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket,
-      Prize prize,
-      int matchCount) {
+      Prize prize, int matchCount) {
     assertThat(lottoTickets.getMatchedCountPerPrize(prize, winningLottoTicket)).isEqualTo(
         matchCount);
   }
 
   private static Stream<Arguments> provideForGetMatchedCountPerPrize() {
-    WinningLottoTicket winningLottoTicket = new WinningLottoTicket("1,2,3,4,5,6");
+    WinningLottoTicket winningLottoTicket = WinningLottoTicket.of("1,2,3,4,5,6", "7");
     LottoTicket firstPrizeTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
     LottoTicket secondPrizeTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 7));
-    LottoTicket thirdPrizeTicket = new LottoTicket(List.of(1, 2, 3, 4, 7, 8));
-    LottoTicket fourthPrizeTicket = new LottoTicket(List.of(1, 2, 3, 7, 8, 9));
-    LottoTicket nonePrizeTicket = new LottoTicket(List.of(7, 8, 9, 10, 11, 12));
+    LottoTicket thirdPrizeTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 8));
+    LottoTicket fourthPrizeTicket = new LottoTicket(List.of(1, 2, 3, 4, 8, 9));
+    LottoTicket fifthPrizeTicket = new LottoTicket(List.of(1, 2, 3, 8, 9, 10));
+    LottoTicket nonePrizeTicket = new LottoTicket(List.of(8, 9, 10, 11, 12, 13));
 
     return Stream.of(
         arguments(new LottoTickets(
@@ -96,7 +96,10 @@ class LottoTicketsTest {
                 nonePrizeTicket)), winningLottoTicket, Prize.THIRD, 3),
         arguments(new LottoTickets(
             List.of(fourthPrizeTicket, fourthPrizeTicket, fourthPrizeTicket, fourthPrizeTicket,
-                nonePrizeTicket)), winningLottoTicket, Prize.FOURTH, 4)
+                nonePrizeTicket)), winningLottoTicket, Prize.FOURTH, 4),
+        arguments(new LottoTickets(
+            List.of(fifthPrizeTicket, fifthPrizeTicket, fifthPrizeTicket, fifthPrizeTicket,
+                fifthPrizeTicket)), winningLottoTicket, Prize.FIFTH, 5)
     );
   }
 }

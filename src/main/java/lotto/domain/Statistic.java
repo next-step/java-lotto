@@ -40,6 +40,10 @@ public class Statistic {
     return prize.getPrize();
   }
 
+  public boolean isMatchBonus() {
+    return prize.isMatchBonus();
+  }
+
   public Money getTotalPrize() {
     return getPrizeMoney().multiply(getMatchedPrizeCount());
   }

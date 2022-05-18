@@ -18,14 +18,14 @@ class StatisticInfoTest {
   @ParameterizedTest
   @MethodSource("provideForStatistics")
   void statistics(WinningLottoTicket winningLottoTicket, LottoTickets lottoTickets) {
-    StatisticInfo statisticInfo = new StatisticInfo(winningLottoTicket, lottoTickets,
+    StatisticInfo statisticInfo = StatisticInfo.of(winningLottoTicket, lottoTickets,
         Money.createWon(1000));
     assertThat(statisticInfo.rateOfReturn()).isCloseTo(0.35, offset(0.1));
   }
 
   private static Stream<Arguments> provideForStatistics() {
 
-    WinningLottoTicket winningLottoTicket = new WinningLottoTicket("1,2,3,4,5,6");
+    WinningLottoTicket winningLottoTicket = WinningLottoTicket.of("1,2,3,4,5,6", "7");
     List<LottoTicket> lottos = List.of(
         new LottoTicket(List.of(26, 14, 37, 20, 8, 15)),
         new LottoTicket(List.of(13, 8, 29, 37, 11, 6)),

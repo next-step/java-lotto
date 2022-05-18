@@ -23,7 +23,6 @@ class StatisticsTest {
         .withMessage("통계는 빈 값일 수 없습니다.");
   }
 
-
   @DisplayName("총 상금을 반환한다")
   @ParameterizedTest
   @MethodSource("provideForStatistics")
@@ -34,7 +33,7 @@ class StatisticsTest {
   private static Stream<Arguments> provideForStatistics() {
     return Stream.of(
         arguments(
-            new Statistics(List.of(new Statistic(1, Prize.SECOND), new Statistic(2, Prize.FOURTH))),
+            new Statistics(List.of(new Statistic(1, Prize.THIRD), new Statistic(2, Prize.FIFTH))),
             Money.createWon(1_510_000)),
         arguments(new Statistics(
                 List.of(new Statistic(5, Prize.NOT_PRIZE), new Statistic(1, Prize.FIRST))),

@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
@@ -35,11 +34,6 @@ public class LottoTicket {
     }
   }
 
-  public LottoTicket(LottoTicket winLottoNumbers) {
-    Objects.requireNonNull(winLottoNumbers, EMPTY_LOTTO_NUMBERS);
-    this.lottoNumbers = List.copyOf(winLottoNumbers.lottoNumbers);
-  }
-
   public List<Integer> getLottoNumbers() {
     return Collections.unmodifiableList(lottoNumbers);
   }
@@ -50,7 +44,7 @@ public class LottoTicket {
         .count();
   }
 
-  private boolean contains(Integer number) {
+  public boolean contains(Integer number) {
     return lottoNumbers.contains(number);
   }
 

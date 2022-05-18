@@ -16,6 +16,7 @@ public class ResultView {
   private static final String STATISTICS_HEAD = "당첨 통계";
   private static final String HEAD_BODY_SPLIT_LINE = "---------";
   private static final String STATISTIC_DETAIL_FORMAT = "%d개 일치 (%s)- %d개";
+  private static final String STATISTIC_DETAIL_MATCH_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%s)- %d개";
   private static final String RATE_OF_RETURN_FORMAT = "총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
   private static final String GAIN = "이득";
   private static final String LOSS = "손해";
@@ -47,6 +48,14 @@ public class ResultView {
   }
 
   private static void printStatistic(Statistic statistic) {
+    if (statistic.isMatchBonus()) {
+      printStream.println(
+          format(STATISTIC_DETAIL_MATCH_BONUS_FORMAT, statistic.getMatchCount(),
+              statistic.getPrizeMoney().won(),
+              statistic.getMatchedPrizeCount()));
+      return;
+    }
+
     printStream.println(
         format(STATISTIC_DETAIL_FORMAT, statistic.getMatchCount(), statistic.getPrizeMoney().won(),
             statistic.getMatchedPrizeCount()));

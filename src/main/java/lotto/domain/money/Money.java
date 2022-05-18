@@ -7,6 +7,7 @@ import java.util.Objects;
 public class Money {
 
   private static final String WON_FORMAT = "%d원";
+  private static final int MINIMUM_AMOUNT = 0;
 
   private final int amount;
   private final Currency currency;
@@ -16,9 +17,20 @@ public class Money {
   }
 
   private Money(Currency currency, int amount) {
-    Objects.requireNonNull(currency, "통화 객체는 null 일 수 없습니다!");
+    validate(currency, amount);
     this.amount = amount;
     this.currency = currency;
+  }
+
+  private void validate(Currency currency, int amount) {
+    Objects.requireNonNull(currency, "통화 객체는 null 일 수 없습니다!");
+    if (isNegativeAmount(amount)) {
+      throw new IllegalArgumentException(String.format("금액: %d, 금액은 음수일 수 없습니다.", amount));
+    }
+  }
+
+  private boolean isNegativeAmount(int amount) {
+    return amount < MINIMUM_AMOUNT;
   }
 
   public Money multiply(double rate) {
