@@ -4,21 +4,23 @@ import java.util.Objects;
 
 public class Money {
 
-  private final long amount;
+  public static final int LOTTO_TICKET_PRICE = 1000;
 
-  public static Money from(long amount) {
+  private final int amount;
+
+  public static Money from(int amount) {
     return new Money(amount);
   }
 
-  private Money(long amount) {
+  private Money(int amount) {
     if (amount < 0) {
       throw new IllegalArgumentException("돈은 0보다 작을 수 없습니다.");
     }
     this.amount = amount;
   }
 
-  public Money divide(long divisor) {
-    return new Money(amount / divisor);
+  public int countLotto() {
+    return amount / LOTTO_TICKET_PRICE;
   }
 
   public long getAmount() {
