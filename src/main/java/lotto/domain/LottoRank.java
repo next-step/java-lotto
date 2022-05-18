@@ -4,28 +4,28 @@ import java.util.StringJoiner;
 import java.util.stream.Stream;
 
 public enum LottoRank {
-	FIRST(6, 0, new Amount(2_000_000_000)),
-	SECOND(5, 1, new Amount(30_000_000)),
-	THIRD(5, 0, new Amount(1_500_000)),
-	FOURTH(4, 0, new Amount(50_000)),
-	FIFTH(3, 0, new Amount(5_000)),
-	NOTHING(0, 0, new Amount(0))
+	FIRST(6, false, new Amount(2_000_000_000)),
+	SECOND(5, true, new Amount(30_000_000)),
+	THIRD(5, false, new Amount(1_500_000)),
+	FOURTH(4, false, new Amount(50_000)),
+	FIFTH(3, false, new Amount(5_000)),
+	NOTHING(0, false, new Amount(0))
 	;
 
 	private final long sameQuantity;
 
-	private final long bonusQuantity;
+	private final boolean checkBonusBall;
 	private final Amount amount;
 
-	LottoRank(long sameQuantity, long bonusQuantity, Amount amount) {
+	LottoRank(long sameQuantity, boolean checkBonusBall, Amount amount) {
 		this.sameQuantity = sameQuantity;
-		this.bonusQuantity = bonusQuantity;
+		this.checkBonusBall = checkBonusBall;
 		this.amount = amount;
 	}
 
 	public static LottoRank findBySameQuantity(long sameQuantity, long bonusQuantity) {
 		return Stream.of(LottoRank.values())
-			.filter(rank -> rank.sameQuantity == sameQuantity && rank.bonusQuantity == bonusQuantity)
+			.filter(rank -> rank.sameQuantity == sameQuantity && (!rank.checkBonusBall || bonusQuantity > 0))
 			.findFirst()
 			.orElse(LottoRank.NOTHING);
 	}
@@ -48,5 +48,9 @@ public enum LottoRank {
 			"sameQuantity=" + sameQuantity +
 			", amount=" + amount +
 			'}';
+	}
+
+	public boolean checkBonus() {
+		return checkBonusBall;
 	}
 }

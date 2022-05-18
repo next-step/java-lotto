@@ -36,6 +36,18 @@ public class WinningNumbersTest {
 		WinningNumbers winningNumbers = new WinningNumbers(winningNumberInput);
 		Lotto lotto = new Lotto(lottoInput);
 
-		assertThat(winningNumbers.matchQuantity(lotto, LottoNumberType.DEFAULT)).isEqualTo(quantity);
+		assertThat(winningNumbers.matchQuantity(lotto)).isEqualTo(quantity);
+	}
+
+	@DisplayName("당첨번호와 보너스번호와 로또간 일치 갯수")
+	@CsvSource(value = {"1,2,3,4,5,6/7/7,5,4,3,2,1/1", "1,2,3,4,5,6/8/7,5,4,3,2,1/0"}, delimiter = '/')
+	@ParameterizedTest
+	public void When_GivenWinningAndLotto_Expected_SameCount(String winningNumberInput, String bonusInput, String lottoInput, long bonusQuantity) {
+		WinningNumbers winningNumbers = new WinningNumbers(
+			winningNumberInput,
+			LottoNumber.of(bonusInput, LottoNumberType.BONUS));
+		Lotto lotto = new Lotto(lottoInput);
+
+		assertThat(winningNumbers.matchBonusQuantity(lotto)).isEqualTo(bonusQuantity);
 	}
 }

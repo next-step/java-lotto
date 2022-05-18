@@ -27,6 +27,7 @@ public class WinningNumbers {
 
 		validateSize(numbers);
 		validateDuplicationBonusNumber(bonusNumber);
+		numbers.add(bonusNumber);
 	}
 
 	private void validateDuplicationBonusNumber(LottoNumber bonusNumber) {
@@ -40,7 +41,15 @@ public class WinningNumbers {
 		this.numbers = numbers;
 	}
 
-	public long matchQuantity(Lotto lotto, LottoNumberType type) {
+	public long matchQuantity(Lotto lotto) {
+		return matchQuantity(lotto, LottoNumberType.DEFAULT);
+	}
+
+	public long matchBonusQuantity(Lotto lotto) {
+		return matchQuantity(lotto, LottoNumberType.BONUS);
+	}
+
+	private long matchQuantity(Lotto lotto, LottoNumberType type) {
 		return this.numbers.stream()
 			.filter(number -> number.checkType(type) && lotto.contain(number))
 			.count();
