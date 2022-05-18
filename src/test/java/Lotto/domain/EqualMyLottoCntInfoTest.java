@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class EqualLottoCntInfoTest {
+class EqualMyLottoCntInfoTest {
 
     @ParameterizedTest
     @ValueSource(ints = {8,100,999})

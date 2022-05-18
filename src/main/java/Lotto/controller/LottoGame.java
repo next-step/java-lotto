@@ -5,14 +5,13 @@ import Lotto.domain.Number;
 import Lotto.view.InputView;
 import Lotto.view.ResultView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class LottoGame {
 
     private Money money;
-    private Lotto winningNumbers;
+    private WinningLotto winningNumbers;
 
     public void start() {
         Lottos lottos = createLottos();
@@ -27,19 +26,19 @@ public class LottoGame {
     private Lottos createLottos() {
         money = new Money(InputView.inputBuyMoney(), true);
 
-        List<Lotto> passiveLottos = inputAndCreatePassiveLotto();
+        List<MyLotto> passiveMyLottos = inputAndCreatePassiveLotto();
 
-        return Lottos.createLottosWithPassive(money.changeMoneyToLottoNum(), passiveLottos);
+        return Lottos.createLottosWithPassive(money.changeMoneyToLottoNum(), passiveMyLottos);
     }
 
-    private List<Lotto> inputAndCreatePassiveLotto() {
+    private List<MyLotto> inputAndCreatePassiveLotto() {
         int passiveLottoCnt = InputView.inputPassiveLottoCount();
 
         InputView.showPassiveLottoNumbers();
 
-        List<Lotto> passiveLottos = Lottos.createPassiveLotto(passiveLottoCnt);
+        List<MyLotto> passiveMyLottos = Lottos.createPassiveLotto(passiveLottoCnt);
 
-        return passiveLottos;
+        return passiveMyLottos;
     }
 
     private void viewMyLottoNumbers(Lottos lottos) {
@@ -51,7 +50,7 @@ public class LottoGame {
 
         Number bonusNumber = new Number(InputView.inputBonusLottoNumbers());
 
-        winningNumbers = new Lotto(winningNumberStr, bonusNumber);
+        winningNumbers = new WinningLotto(winningNumberStr, bonusNumber);
     }
 
     private void viewResult(Lottos lottos) {

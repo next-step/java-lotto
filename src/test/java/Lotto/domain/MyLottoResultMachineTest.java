@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-public class LottoResultMachineTest {
+public class MyLottoResultMachineTest {
 
     private static Stream<Arguments> lottoWinningMaps() {
         return Stream.of(
