@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class ConfirmationOfWinning {
+
+    private static final int FAIL_RANK = 5;
 
     private ConfirmationOfWinning() {
     }
@@ -10,18 +10,11 @@ public class ConfirmationOfWinning {
     public static int getRank(Lotto winningLotto, Lotto buyingLotto) {
         int containCount = getContainCount(winningLotto, buyingLotto);
 
-        switch (containCount) {
-            case 6:
-                return 1;
-            case 5:
-                return 2;
-            case 4:
-                return 3;
-            case 3:
-                return 4;
-            default:
-                return 5;
+        if(containCount >= 3) {
+            return 6 - containCount + 1;
         }
+
+        return FAIL_RANK;
     }
 
     private static int getContainCount(Lotto winningLotto, Lotto buyingLotto) {

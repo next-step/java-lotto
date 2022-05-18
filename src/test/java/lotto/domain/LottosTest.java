@@ -13,9 +13,7 @@ class LottosTest {
         Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto lotto2 = new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12));
 
-        Lottos lottos = new Lottos();
-        lottos.addLotto(lotto1);
-        lottos.addLotto(lotto2);
+        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2));
 
         Assertions.assertThat(lottos.getCount()).isEqualTo(2);
     }
@@ -27,10 +25,7 @@ class LottosTest {
         Lotto lotto3 = new Lotto(Arrays.asList(1, 7, 9, 12, 15, 17));
         Lotto winningLotto = new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12));
 
-        Lottos lottos = new Lottos();
-        lottos.addLotto(lotto1);
-        lottos.addLotto(lotto2);
-        lottos.addLotto(lotto3);
+        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
         int[] totalRank = lottos.getTotalRank(winningLotto);
 
         Assertions.assertThat(totalRank[3]).isEqualTo(3);

@@ -1,18 +1,20 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
-    private final List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos;
 
-    public List<Lotto> getLottoList() {
-        return lottos;
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    public void addLotto(Lotto lotto) {
-        lottos.add(lotto);
+    public List<Lotto> getLottoList() {
+        return Collections.unmodifiableList(lottos);
     }
 
     public int getCount() {

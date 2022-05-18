@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     private static final int LOTTO_COUNT = 6;
-    public static final int PRICE = 1000;
 
     private final Set<LottoNumber> numbers;
 
@@ -27,7 +26,7 @@ public class Lotto {
 
 
     public Set<LottoNumber> getNumbers() {
-        return numbers;
+        return Collections.unmodifiableSet(numbers);
     }
 
     public int getRank(Lotto winner) {

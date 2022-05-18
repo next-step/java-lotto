@@ -11,7 +11,7 @@ public class LottoApplication {
     public static void main(String[] args) {
         int paying = InputView.inputMoney();
 
-        int buyingCount = paying / Lotto.PRICE;
+        int buyingCount = paying / LottoAutoMachine.PRICE;
 
         Lottos buyingLottos = LottoAutoMachine.makeLottos(buyingCount);
         ResultView.printBuyingLottos(buyingLottos);
