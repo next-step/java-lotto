@@ -2,9 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
 public class PurchaseLottoGroup {
@@ -26,9 +24,11 @@ public class PurchaseLottoGroup {
 		return lottoGroup.size();
 	}
 
-	public List<LottoRank> ranking(WinningNumber winningNumber) {
+	public List<LottoRank> ranking(WinningNumbers winningNumbers) {
 		return lottoGroup.stream()
-			.map(lotto -> LottoRank.findBySameQuantity(winningNumber.matchQuantity(lotto)))
+			.map(lotto -> LottoRank.findBySameQuantity(
+				winningNumbers.matchQuantity(lotto, LottoNumberType.DEFAULT),
+				winningNumbers.matchQuantity(lotto, LottoNumberType.BONUS)))
 			.collect(Collectors.toList());
 	}
 

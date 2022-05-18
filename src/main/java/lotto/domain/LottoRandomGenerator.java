@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 public class LottoRandomGenerator {
 	private static final List<LottoNumber> defaultNumbers = IntStream.rangeClosed(LottoNumber.LOTTO_RANGE_MIN, LottoNumber.LOTTO_RANGE_MAX)
-		.mapToObj(LottoNumber::new)
+		.mapToObj(LottoNumber::of)
 		.collect(Collectors.toList());
 
 	private LottoRandomGenerator() {}

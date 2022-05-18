@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 public class RankingResult {
 	private final Map<LottoRank, Long> ranking = new LinkedHashMap<>();
-	public RankingResult() {
+	private RankingResult() {
 		Stream.of(LottoRank.values())
 			.forEach(rank -> ranking.put(rank, 0L));
 	}

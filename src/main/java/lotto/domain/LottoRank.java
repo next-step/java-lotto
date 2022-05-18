@@ -23,9 +23,9 @@ public enum LottoRank {
 		this.amount = amount;
 	}
 
-	public static LottoRank findBySameQuantity(long sameQuantity) {
+	public static LottoRank findBySameQuantity(long sameQuantity, long bonusQuantity) {
 		return Stream.of(LottoRank.values())
-			.filter(rank -> rank.sameQuantity == sameQuantity)
+			.filter(rank -> rank.sameQuantity == sameQuantity && rank.bonusQuantity == bonusQuantity)
 			.findFirst()
 			.orElse(LottoRank.NOTHING);
 	}

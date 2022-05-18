@@ -9,15 +9,15 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import exception.StringParsingToNumberException;
 
-public class WinningNumberTest {
+public class WinningNumbersTest {
 
-	public static WinningNumber WINNING_NUMBER_1 = new WinningNumber("16,3,19,2,1,4");
+	public static WinningNumbers WINNING_NUMBER_1 = new WinningNumbers("16,3,19,2,1,4");
 
 	@DisplayName("입력한 당첨번호가 6개가 아닌경우 에러 발생")
 	@ValueSource(strings = {"1,2,3,4,5,6,7", "1,2,3,4,5", "1,2,3,4,5,5"})
 	@ParameterizedTest
 	public void When_GivenWrongSizeInput_Expected_IllegalArgumentException(String input) {
-		assertThatThrownBy(() -> new WinningNumber(input))
+		assertThatThrownBy(() -> new WinningNumbers(input))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
@@ -25,7 +25,7 @@ public class WinningNumberTest {
 	@ValueSource(strings = {"1,2,3,4,5,!6", "1,2,a3,4,5,6"})
 	@ParameterizedTest
 	public void When_GivenWrongNumberInput_Expected_StringParsingToIntegerException(String input) {
-		assertThatThrownBy(() -> new WinningNumber(input))
+		assertThatThrownBy(() -> new WinningNumbers(input))
 			.isInstanceOf(StringParsingToNumberException.class);
 	}
 
@@ -33,9 +33,9 @@ public class WinningNumberTest {
 	@CsvSource(value = {"1,2,3,4,5,6:6,5,4,3,2,1:6", "1,2,3,4,5,6:1,2,7,8,13,42:2"}, delimiter = ':')
 	@ParameterizedTest
 	public void When_GivenWinningAndLotto_Expected_SameCount(String winningNumberInput, String lottoInput, long quantity) {
-		WinningNumber winningNumber = new WinningNumber(winningNumberInput);
+		WinningNumbers winningNumbers = new WinningNumbers(winningNumberInput);
 		Lotto lotto = new Lotto(lottoInput);
 
-		assertThat(winningNumber.matchQuantity(lotto)).isEqualTo(quantity);
+		assertThat(winningNumbers.matchQuantity(lotto, LottoNumberType.DEFAULT)).isEqualTo(quantity);
 	}
 }

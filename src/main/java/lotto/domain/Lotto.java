@@ -18,7 +18,7 @@ public class Lotto {
 
 	public Lotto(String lottoNumbersInput) {
 		Set<LottoNumber> generationLottoNumber = Stream.of(lottoNumbersInput.split(SPLIT_DELIMITER))
-			.map(LottoNumber::new)
+			.map(LottoNumber::of)
 			.collect(Collectors.toSet());
 
 		validateNumberSize(generationLottoNumber);
