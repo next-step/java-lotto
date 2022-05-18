@@ -17,11 +17,11 @@ public class LottoWinners {
         }
     }
 
-    public boolean matchOf(LottoTicket lottoTicket, int countOfMatch) {
+    public int matchOf(LottoTicket lottoTicket) {
         return (int) lottoTicket.readOnlyLottoNumber()
                 .stream()
                 .filter(this::numberContains)
-                .count() == countOfMatch;
+                .count();
     }
 
     public boolean bonusOf(LottoTicket lottoTicket) {
