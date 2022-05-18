@@ -24,7 +24,16 @@ public class LottoTicket {
                 .collect(Collectors.toList());
 
         validate(lottoNumbers);
+        this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+    }
 
+    public LottoTicket(String[] nums) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(nums)
+                .map(Integer::parseInt)
+                .map(LottoNumber::getLottoNumber)
+                .collect(Collectors.toList());
+
+        validate(lottoNumbers);
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
