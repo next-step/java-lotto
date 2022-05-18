@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.result.LottoGameResult;
 import lotto.domain.result.MatchResult;
@@ -40,10 +41,10 @@ public class ResultView {
 
         for (Lotto lotto : lottoList) {
             result += "[";
-            List<Integer> printNumbers = new ArrayList<>(lotto.getNumbers());
-            Collections.sort(printNumbers);
-            for (int number : printNumbers) {
-                result += number + ", ";
+            List<LottoNumber> lottoNumbers = new ArrayList<>(lotto.getLottoNumbers());
+            Collections.sort(lottoNumbers);
+            for (LottoNumber lottoNumber : lottoNumbers) {
+                result += lottoNumber.getNumber() + ", ";
             }
 
             result = result.substring(0, result.length() - 2) + "]\n";

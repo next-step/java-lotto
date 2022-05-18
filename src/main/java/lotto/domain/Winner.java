@@ -7,7 +7,7 @@ import lotto.domain.result.LottoGameResult;
 
 public class Winner {
     private Lotto winningLotto;
-    private int bonusNumber;
+    private LottoNumber bonusNumber;
 
     Winner(int num1, int num2, int num3, int num4, int num5, int num6, int bonusNumber) {
         this(Set.of(num1, num2, num3, num4, num5, num6), bonusNumber);
@@ -19,7 +19,7 @@ public class Winner {
         }
 
         winningLotto = new Lotto(winningNumbers);
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
     public static Winner of(String numberString, int bonusNumber) {

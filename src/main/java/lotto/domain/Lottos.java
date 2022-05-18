@@ -23,7 +23,7 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public LottoGameResult matchNumbers(Lotto winningLotto, int bonusNumber) {
+    public LottoGameResult matchNumbers(Lotto winningLotto, LottoNumber bonusNumber) {
         LottoGameResult lottoGameResult = new LottoGameResult(LOTTO_PRICE * lottos.size());
 
         for (Lotto lotto : lottos) {

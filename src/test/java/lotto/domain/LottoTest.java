@@ -38,7 +38,7 @@ public class LottoTest {
     @Test
     void 우승숫자_테스트() {
         Set<Integer> winningNumbers = Set.of(1, 2, 3, 4, 5, 6);
-        int bonusNumber = 7;
+        LottoNumber bonusNumber = new LottoNumber(7);
 
         assertThat(new Lotto(7, 8, 9, 10, 11, 12).hasWinningNumbers(new Lotto(winningNumbers), bonusNumber)).isEqualTo(LottoReward.MISS);
         assertThat(new Lotto(1, 8, 9, 10, 11, 12).hasWinningNumbers(new Lotto(winningNumbers), bonusNumber)).isEqualTo(LottoReward.MISS);

@@ -4,24 +4,24 @@ import java.util.Objects;
 import lotto.domain.LottoReward;
 
 public class MatchResult {
-    private int matchedLottoNumberCount;
+    private MatchCount matchedLottoNumberCount;
     private LottoReward lottoReward;
 
     MatchResult(int matchedLottoNumberCount, LottoReward lottoReward) {
-        this.matchedLottoNumberCount = matchedLottoNumberCount;
+        this.matchedLottoNumberCount = new MatchCount(matchedLottoNumberCount);
         this.lottoReward = lottoReward;
     }
 
     long getMatchReward() {
-        return matchedLottoNumberCount * lottoReward.getReward();
+        return matchedLottoNumberCount.getMatchCount() * lottoReward.getReward();
     }
 
     void addMatchCount() {
-        ++matchedLottoNumberCount;
+        matchedLottoNumberCount.addMatchCount();
     }
 
     public int getMatchedLottoNumberCount() {
-        return matchedLottoNumberCount;
+        return matchedLottoNumberCount.getMatchCount();
     }
 
     public LottoReward getLottoReward() {
@@ -37,7 +37,7 @@ public class MatchResult {
             return false;
         }
         MatchResult matchResult = (MatchResult) obj;
-        return this.matchedLottoNumberCount == matchResult.matchedLottoNumberCount && this.lottoReward == matchResult.lottoReward;
+        return this.matchedLottoNumberCount.equals(matchResult.matchedLottoNumberCount) && this.lottoReward == matchResult.lottoReward;
     }
 
     @Override

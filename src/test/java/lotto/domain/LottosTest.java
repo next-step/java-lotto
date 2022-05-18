@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
     Set<Integer> numbers = Set.of(1, 2, 3, 4, 5, 6);
-    private int bonusNumber = 7;
+    private LottoNumber bonusNumber = new LottoNumber(7);
 
     @Test
     void 로또_당첨_테스트() {
