@@ -26,7 +26,7 @@ public class LottoController {
 
 	public void ranking(PurchaseLottoGroup purchaseLottoGroup) {
 		WinningNumber winningNumber = InputView.inputWinningNumber();
-		RankingResult rankingResult = new RankingResult(purchaseLottoGroup, winningNumber);
+		RankingResult rankingResult = new RankingResult(purchaseLottoGroup.ranking(winningNumber));
 
 		OutputView.printWinningStatistics(rankingResult);
 		OutputView.printYield(rankingResult.calculateRoi());

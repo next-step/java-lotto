@@ -4,18 +4,22 @@ import java.util.StringJoiner;
 import java.util.stream.Stream;
 
 public enum LottoRank {
-	FIRST(6, new Amount(2_000_000_000)),
-	SECOND(5, new Amount(1_500_000)),
-	THIRD(4, new Amount(50_000)),
-	FOURTH(3, new Amount(5_000)),
-	NOTHING(0, new Amount(0)),
+	FIRST(6, 0, new Amount(2_000_000_000)),
+	SECOND(5, 1, new Amount(30_000_000)),
+	THIRD(5, 0, new Amount(1_500_000)),
+	FOURTH(4, 0, new Amount(50_000)),
+	FIFTH(3, 0, new Amount(5_000)),
+	NOTHING(0, 0, new Amount(0))
 	;
 
 	private final long sameQuantity;
+
+	private final long bonusQuantity;
 	private final Amount amount;
 
-	LottoRank(long sameQuantity, Amount amount) {
+	LottoRank(long sameQuantity, long bonusQuantity, Amount amount) {
 		this.sameQuantity = sameQuantity;
+		this.bonusQuantity = bonusQuantity;
 		this.amount = amount;
 	}
 

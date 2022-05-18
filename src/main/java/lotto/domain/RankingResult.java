@@ -12,10 +12,8 @@ public class RankingResult {
 			.forEach(rank -> ranking.put(rank, 0L));
 	}
 
-	public RankingResult(PurchaseLottoGroup purchaseLottoGroup, WinningNumber winningNumber) {
+	public RankingResult(List<LottoRank> rankResults) {
 		this();
-		List<LottoRank> rankResults = purchaseLottoGroup.ranking(winningNumber);
-
 		rankResults.forEach(this::countLottoRank);
 	}
 
