@@ -14,12 +14,11 @@ public class Winner {
     }
 
     public Winner(Set<Integer> winningNumbers, int bonusNumber) {
-        if (winningNumbers.contains(bonusNumber)) {
-            throw new RuntimeException("당첨 번호의 숫자는 보너스 넘버로 입력할 수 없습니다");
-        }
-
-        winningLotto = new Lotto(winningNumbers);
+        this.winningLotto = new Lotto(winningNumbers);
         this.bonusNumber = new LottoNumber(bonusNumber);
+        if (winningLotto.hasNumber(this.bonusNumber)) {
+            throw new IllegalArgumentException("당첨 번호의 숫자는 보너스 넘버로 입력할 수 없습니다");
+        }
     }
 
     public static Winner of(String numberString, int bonusNumber) {

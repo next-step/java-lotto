@@ -18,7 +18,8 @@ public class LottoMain {
         int manualLottoCount = LottoScanner.insertManualLottoCount();
 
         if (manualLottoCount > purchaseAmount / LOTTO_PRICE) {
-            throw new IllegalArgumentException("입력 가능한 최대 수동 로또의 수는 " + purchaseAmount / LOTTO_PRICE + "입니다.");
+            System.out.println("입력 가능한 최대 수동 로또의 수는 " + purchaseAmount / LOTTO_PRICE + "입니다.");
+            return;
         }
 
         if (manualLottoCount > 0) {
@@ -36,7 +37,14 @@ public class LottoMain {
 
         String winningNumbers = LottoScanner.insertWinningNumbers();
         int bonusNumber = LottoScanner.insertBonusNumber();
-        Winner winner = Winner.of(winningNumbers, bonusNumber);
+
+        Winner winner;
+        try {
+            winner = Winner.of(winningNumbers, bonusNumber);
+        } catch (IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
+            return;
+        }
 
         LottoGameResult lottoGameResult = winner.findWinners(lottos);
         ResultView.printLottoGameResult(lottoGameResult);

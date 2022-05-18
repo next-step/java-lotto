@@ -60,7 +60,7 @@ public class Lotto {
         return 0;
     }
 
-    private boolean hasNumber(LottoNumber lottoNumber) {
+    boolean hasNumber(LottoNumber lottoNumber) {
         return lottoNumbers.stream().anyMatch(n -> n.equals(lottoNumber));
     }
 
