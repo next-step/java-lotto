@@ -12,6 +12,17 @@ public class LottoScanner {
         return Integer.parseInt(number);
     }
 
+    public static int insertManualLottoCount() {
+        InputView.printInsertManualLottoCountPhrase();
+        String number = scanner.nextLine();
+
+        return Integer.parseInt(number);
+    }
+
+    public static String insertLotto() {
+        return scanner.nextLine();
+    }
+
     public static String insertWinningNumbers() {
         InputView.printInsertWinningNumbersPhrase();
         return scanner.nextLine();

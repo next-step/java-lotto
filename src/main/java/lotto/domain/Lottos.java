@@ -23,6 +23,17 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
+    public static Lottos of(int purchaseAmount, List<Lotto> manualLottos) {
+        List<Lotto> lottos = new ArrayList<>(manualLottos);
+        int size = purchaseAmount/LOTTO_PRICE - manualLottos.size();
+
+        for (int i = 0; i < size; ++i) {
+            lottos.add(new Lotto(LottoNumberGenerator.generate()));
+        }
+
+        return new Lottos(lottos);
+    }
+
     public LottoGameResult matchNumbers(Lotto winningLotto, LottoNumber bonusNumber) {
         LottoGameResult lottoGameResult = new LottoGameResult(LOTTO_PRICE * lottos.size());
 

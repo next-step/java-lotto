@@ -35,9 +35,11 @@ public class ResultView {
         System.out.println(result);
     }
 
-    public static void printLottos(Lottos lottos) {
+    public static void printLottos(Lottos lottos, int manualLottoCount) {
         List<Lotto> lottoList = lottos.getLottoList();
         String result = "";
+
+        System.out.println("수동으로 " + manualLottoCount + "장, 자동으로 " + (lottoList.size() - manualLottoCount) + "개를 구매했습니다.");
 
         for (Lotto lotto : lottoList) {
             result += "[";
