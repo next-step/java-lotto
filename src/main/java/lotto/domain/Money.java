@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Money {
 
-  public static final int LOTTO_TICKET_PRICE = 1000;
+  public static final int LOTTO_PRICE = 1000;
 
   private final long amount;
 
@@ -22,7 +22,7 @@ public class Money {
   }
 
   public long countLotto() {
-    return amount / LOTTO_TICKET_PRICE;
+    return amount / LOTTO_PRICE;
   }
 
   public double rateOfReturn(Money prize) {
