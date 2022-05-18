@@ -14,8 +14,8 @@ class LottoTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         Lotto lotto = new Lotto(numbers);
-
-        assertThat(lotto.getNumbers()).isEqualTo(numbers);
+        assertThat(lotto.getNumbers())
+                .contains(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
     }
 
     @Test

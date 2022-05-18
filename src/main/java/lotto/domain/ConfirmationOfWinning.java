@@ -25,21 +25,9 @@ public class ConfirmationOfWinning {
     }
 
     private static int getContainCount(Lotto winningLotto, Lotto buyingLotto) {
-        List<Integer> winningNumbers = winningLotto.getNumbers();
-        int containCount = 0;
-        for (Integer winningNumber : winningNumbers) {
-            containCount += isContain(winningNumber, buyingLotto.getNumbers());
-        }
-
-        return containCount;
+        return (int) buyingLotto.getNumbers().stream()
+                .filter(lottoNumber -> winningLotto.getNumbers().contains(lottoNumber))
+                .count();
     }
-
-    private static int isContain(Integer winningNumber, List<Integer> numbers) {
-        if (numbers.contains(winningNumber)) {
-            return 1;
-        }
-        return 0;
-    }
-
 }
 

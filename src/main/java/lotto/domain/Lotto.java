@@ -1,45 +1,32 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
     private static final int LOTTO_COUNT = 6;
-    private static final int MIN_NUM = 1;
-    private static final int MAX_NUM = 45;
     public static final int PRICE = 1000;
 
-    private final List<Integer> numbers;
+    private final Set<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
-        validLottoNumberRange(numbers);
-        validLottoNumberCount(numbers);
-        validDuplicate(numbers);
-        this.numbers = new ArrayList<>(numbers);
+       this.numbers = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
+
+        validLottoNumberCount(this.numbers);
     }
 
-    private void validLottoNumberRange(List<Integer> numbers) {
-        Integer max = Collections.max(numbers);
-        Integer min = Collections.min(numbers);
-        if (max > MAX_NUM || min < MIN_NUM) {
-            throw new IllegalArgumentException("로또 번호는 1~45까지만 존재합니다.");
-        }
-    }
 
-    private void validLottoNumberCount(List<Integer> numbers) {
+    private void validLottoNumberCount(Set<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_COUNT) {
             throw new IllegalArgumentException("로또 번호는 6개입니다.");
         }
     }
 
-    private void validDuplicate(List<Integer> numbers) {
-        Set<Integer> deduplicationLotto = new HashSet<>(numbers);
-        if (deduplicationLotto.size() != numbers.size()) {
-            throw new IllegalArgumentException("로또 번호는 중복이 없어야 합니다.");
-        }
-    }
 
-    public List<Integer> getNumbers() {
+    public Set<LottoNumber> getNumbers() {
         return numbers;
     }
 

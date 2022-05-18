@@ -8,18 +8,18 @@ import java.util.stream.Collectors;
 
 public class InputView {
 
+    static private Scanner scanner = new Scanner(System.in);
+
     private InputView() {
     }
 
     public static int inputMoney() {
         System.out.println("구입금액을 입력해주세요");
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public static Lotto inputWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
         String winningNumberStr = scanner.nextLine();
         String[] winningNumbers = winningNumberStr.split(", ");
         return new Lotto(Arrays.stream(winningNumbers)
