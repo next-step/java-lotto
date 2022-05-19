@@ -30,12 +30,16 @@ public class Money {
   }
 
   public double rateOfReturn(Money prize) {
-    return BigDecimal.valueOf(prize.getAmount())
+    return BigDecimal.valueOf(prize.amount())
         .divide(BigDecimal.valueOf(amount), 2, RoundingMode.FLOOR)
         .doubleValue();
   }
 
-  public long getAmount() {
+  public Money manual(int numberOfManual) {
+    return Money.from(amount - (numberOfManual * LOTTO_PRICE));
+  }
+
+  public long amount() {
     return amount;
   }
 

@@ -24,20 +24,32 @@ public class LottoFactory {
         .collect(toList());
   }
 
-  public static LottoTicket generateAuto(long numberOfLotto) {
-    return new LottoTicket(LongStream.range(0, numberOfLotto)
-        .mapToObj(number -> generateAuto())
-        .collect(toList()));
+  public static List<Lotto> lotto(long numberOfLotto, List<String> lottoNumbers) {
+    List<Lotto> lottos = lotto(numberOfLotto);
+    lottos.addAll(lotto(lottoNumbers));
+    return lottos;
   }
 
-  public static Lotto generateManual(String lottoNumbers) {
+  public static List<Lotto> lotto(long numberOfLotto) {
+    return LongStream.range(0, numberOfLotto)
+        .mapToObj(number -> generateAutoLotto())
+        .collect(toList());
+  }
+
+  public static List<Lotto> lotto(List<String> lottoNumbers) {
+    return lottoNumbers.stream()
+        .map(LottoFactory::lotto)
+        .collect(toList());
+  }
+
+  public static Lotto lotto(String lottoNumbers) {
     if (isBlank(lottoNumbers)) {
       throw new IllegalArgumentException("로또 번호가 비어있습니다.");
     }
     return generateManual(lottoNumbers.split(DELIMITER));
   }
 
-  private static Lotto generateAuto() {
+  private static Lotto generateAutoLotto() {
     Collections.shuffle(cachedLottoNumbers);
     return new Lotto(cachedLottoNumbers.stream()
         .limit(LOTTO_NUMBERS_SIZE)

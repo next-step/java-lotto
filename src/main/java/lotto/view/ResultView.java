@@ -12,8 +12,8 @@ import lotto.domain.Rank;
 
 public class ResultView {
 
-  public static void print(long autoLottoCount) {
-    out.println(autoLottoCount + "개를 구매했습니다.");
+  public static void print(long autoLottoCount, int numberOfManual) {
+    out.println("수동으로 " + numberOfManual + "장, 자동으로 " + autoLottoCount + " 개를 구매했습니다.");
   }
 
   public static void print(LottoTicket lottoTicket) {
