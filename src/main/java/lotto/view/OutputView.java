@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoNumbers;
+import lotto.domain.constant.Rank;
 import lotto.dto.LottoRankDto;
 import lotto.dto.MatchRankDto;
 
@@ -59,9 +60,7 @@ public class OutputView {
 
     private static void printMatchResult(MatchRankDto matchRankDto) {
         for (LottoRankDto lottoRankDto : matchRankDto.getLottoRankDtos()) {
-            stringBuilder.append(lottoRankDto.getRank().getCorrespondCount())
-                    .append(WINNING_MATCH_COUNT)
-                    .append(SPACE)
+            stringBuilder.append(makeMatchAndPrizeText(lottoRankDto))
                     .append(LEFT_PARENTHESIS)
                     .append(lottoRankDto.getRank().getPrizeMoney())
                     .append(KR_WON)
@@ -72,6 +71,21 @@ public class OutputView {
             System.out.println(stringBuilder);
             initStringBuilder();
         }
+    }
+
+    private static String makeMatchAndPrizeText(LottoRankDto lottoRankDto) {
+        StringBuilder stringBuilder = new StringBuilder();
+        if (lottoRankDto.getRank() == Rank.SECOND) {
+            return stringBuilder.append(lottoRankDto.getRank().getCorrespondCount())
+                    .append(WINNING_MATCH_COUNT)
+                    .append(", 보너스 볼 일치")
+                    .toString();
+        }
+
+        return stringBuilder.append(lottoRankDto.getRank().getCorrespondCount())
+                .append(WINNING_MATCH_COUNT)
+                .append(SPACE)
+                .toString();
     }
 
     private static void printBenefitRate(double benefitRate) {

@@ -22,8 +22,8 @@ public class LottoGame {
         return lottos.getLottoAmount();
     }
 
-    public void confirmLottos(LottoNumbers winningLottoNumbers) {
-        lottos.confirmAll(winningLottoNumbers);
+    public void confirmLottos(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
+        lottos.confirmAll(winningLottoNumbers, bonusNumber);
     }
 
     public List<LottoNumbers> getLottoNumbers() {

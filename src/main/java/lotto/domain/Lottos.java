@@ -28,9 +28,9 @@ public class Lottos {
         return this.lottos.size();
     }
 
-    public void confirmAll(LottoNumbers winningLottoNumbers) {
+    public void confirmAll(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
         for (Lotto lotto : this.lottos) {
-            lotto.confirm(winningLottoNumbers);
+            lotto.confirm(winningLottoNumbers, bonusNumber);
         }
     }
 

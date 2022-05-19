@@ -3,9 +3,10 @@ package lotto.domain.constant;
 import java.util.Arrays;
 
 public enum Rank {
-    FOURTH(3, 5000),
-    THIRD(4, 50000),
-    SECOND(5, 1500000),
+    FIFTH(3, 5000),
+    FOURTH(4, 50000),
+    THIRD(5, 1500000),
+    SECOND(5, 30000000),
     FIRST(6, 2000000000),
     NONE(0, 0);
 
@@ -17,11 +18,24 @@ public enum Rank {
         this.prizeMoney = prizeMoney;
     }
 
-    public static Rank create(int correspondCount) {
-        return Arrays.stream(values())
-                .filter(rank -> rank.correspondCount == correspondCount)
+    public static Rank create(int correspondCount, boolean isContainBonusNumber) {
+        Rank rank = Arrays.stream(values()).filter(x -> x.correspondCount == correspondCount)
                 .findAny()
                 .orElse(NONE);
+
+        return checkSecondOrThird(rank, isContainBonusNumber);
+    }
+
+    private static Rank checkSecondOrThird(Rank rank, boolean isContainBonusNumber) {
+        if (rank != SECOND && rank != THIRD) {
+            return rank;
+        }
+
+        if (isContainBonusNumber) {
+            return SECOND;
+        }
+
+        return THIRD;
     }
 
     public int getPrizeMoney() {

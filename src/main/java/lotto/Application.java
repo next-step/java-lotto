@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoGame;
-import lotto.domain.LottoNumbers;
-import lotto.domain.PurchaseAmount;
+import lotto.domain.*;
 import lotto.dto.MatchRankDto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -15,8 +13,9 @@ public class Application {
         OutputView.printLottoNumbers(lottoGame.getLottoNumbers());
 
         String winningNumbers = InputView.getWinningNumbers();
+        String bonusNumber = InputView.getBonusNumber();
         LottoNumbers winningLottoNumbers = new LottoNumbers(winningNumbers);
-        lottoGame.confirmLottos(winningLottoNumbers);
+        lottoGame.confirmLottos(winningLottoNumbers, new LottoNumber(new NumberText(bonusNumber)));
 
         OutputView.printWinningResult(MatchRankDto.from(lottoGame));
     }

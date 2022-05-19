@@ -11,8 +11,8 @@ public class Lotto {
     private Rank rank;
 
     public Lotto(LottoNumbers lottoNumbers) {
-        validate();
         this.lottoNumbers = lottoNumbers;
+        validate();
     }
 
     private void validate() {
@@ -25,8 +25,8 @@ public class Lotto {
         }
     }
 
-    public void confirm(LottoNumbers lottoNumbers) {
-        this.rank = Rank.create(this.lottoNumbers.matchCount(lottoNumbers));
+    public void confirm(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
+        this.rank = Rank.create(this.lottoNumbers.matchCount(lottoNumbers), this.lottoNumbers.isContain(bonusNumber));
     }
 
     public boolean isSameRank(Rank rank) {

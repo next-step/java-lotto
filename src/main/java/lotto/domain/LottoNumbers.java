@@ -22,8 +22,9 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
-    private static List<String> toListWinningNumberText(String lottoNumbers) {
-        List<String> lottoNumberTexts = Arrays.stream(lottoNumbers.trim().split(LOTTO_NUMBERS_TEXT_DELIMITER))
+    private static List<NumberText> toListWinningNumberText(String lottoNumbers) {
+        List<NumberText> lottoNumberTexts = Arrays.stream(lottoNumbers.trim().split(LOTTO_NUMBERS_TEXT_DELIMITER))
+                .map(NumberText::new)
                 .collect(Collectors.toList());
         validate(lottoNumberTexts);
         return lottoNumberTexts;
@@ -39,7 +40,7 @@ public class LottoNumbers {
                 .collect(Collectors.toSet());
     }
 
-    private static void validate(List<String> lottoNumberTexts) {
+    private static void validate(List<NumberText> lottoNumberTexts) {
         if (lottoNumberTexts.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(String.format(INVALID_LOTTO_NUMBER_COUNT, lottoNumberTexts.size()));
         }
