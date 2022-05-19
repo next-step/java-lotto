@@ -14,17 +14,17 @@ public class LottoNumber {
 
     private final int number;
 
+    public LottoNumber(String numberText) {
+        validate(numberText);
+        this.number = toInt(numberText);
+    }
+
     public LottoNumber(int number) {
         if (number > MAX_NUMBER || number < MIN_NUMBER) {
             throw new IllegalArgumentException(String.format(INVALID_NUMBER, number));
         }
 
         this.number = number;
-    }
-
-    public LottoNumber(String numberText) {
-        validate(numberText);
-        this.number = toInt(numberText);
     }
 
     public int getNumber() {

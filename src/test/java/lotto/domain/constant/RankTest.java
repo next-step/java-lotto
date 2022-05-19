@@ -26,6 +26,4 @@ class RankTest {
                 arguments(0, 0)
         );
     }
-
-
 }

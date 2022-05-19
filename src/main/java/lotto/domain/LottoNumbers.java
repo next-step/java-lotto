@@ -10,6 +10,7 @@ public class LottoNumbers {
     private static final String LOTTO_NUMBERS_TEXT_DELIMITER = ", ";
     private static final String INVALID_LOTTO_NUMBER_COUNT = "번호가 부족합니다. 입력된 번호 수 : %d";
     private static final int LOTTO_NUMBER_COUNT = 6;
+    private static final String BLANK_LOTTO_NUMBERS = "로또 번호는 비어있을수 없습니다.";
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -29,6 +30,10 @@ public class LottoNumbers {
     }
 
     private static Set<LottoNumber> toLottoNumbers(String lottoNumbers) {
+        if (lottoNumbers == null || lottoNumbers.isBlank()) {
+            throw new IllegalArgumentException(BLANK_LOTTO_NUMBERS);
+        }
+
         return toListWinningNumberText(lottoNumbers).stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
@@ -48,6 +53,10 @@ public class LottoNumbers {
 
     public boolean isContain(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    public boolean isEmpty() {
+        return lottoNumbers.isEmpty();
     }
 
     @Override
