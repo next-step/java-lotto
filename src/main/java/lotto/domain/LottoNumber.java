@@ -1,8 +1,6 @@
 package lotto.domain;
 
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class LottoNumber {
     private static final int MIN_NUMBER = 1;
