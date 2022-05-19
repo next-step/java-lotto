@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.List;
 import lotto.domain.LotteryShop;
 import lotto.domain.LottoTickets;
 import lotto.domain.StatisticInfo;
@@ -14,6 +15,7 @@ public class LottoMainApplication {
   public static void main(String[] args) {
     Money amount = Money.createWon(InputView.requestPurchaseAmount());
     int manualPurchaseLotto = InputView.requestManualPurchaseLotto();
+    List<String> manualLottoNumbers = InputView.requestManualLottoNumber(manualPurchaseLotto);
     LotteryShop lotteryShop = new LotteryShop();
     LottoTickets lottoTickets = lotteryShop.sell(amount, new RandomNumbers());
     ResultView.printLottoCount(lottoTickets.size());
