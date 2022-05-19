@@ -12,6 +12,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static lotto.util.Const.PAYLOAD_NO_INPUT;
+
 public class Inventory {
     private List<Lottery> lotteries;
     private List<Lottery> manualLotteries;
@@ -71,10 +73,16 @@ public class Inventory {
     private Lottery scanManualLottery() {
         Optional<String> scanned = InputView.scan();
         if (scanned.isPresent()) {
-            List<LotteryNumber> lotteryNumbers = LotteryController.parseNumbers(scanned.get());
-            return new Lottery(lotteryNumbers);
+            try {
+                List<LotteryNumber> lotteryNumbers = LotteryController.parseNumbers(scanned.get());
+                return new Lottery(lotteryNumbers);
+            } catch(Exception e) {
+                System.out.println(e);
+                return this.scanManualLottery();
+            }
         }
-        throw new NullPointerException("No input found");
+        System.out.println(PAYLOAD_NO_INPUT);
+        return this.scanManualLottery();
     }
 
 }

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static lotto.util.Const.PAYLOAD_NO_INPUT;
+
 public class LotteryController {
     public Inventory inventory = new Inventory();
     public final WinStatistics winStatistics = new WinStatistics();
@@ -21,8 +23,10 @@ public class LotteryController {
         if (scanned.isPresent()) {
             return new Money(Integer.parseInt(scanned.get()));
         }
-        throw new NullPointerException("No input found.");
+        System.out.println(PAYLOAD_NO_INPUT);
+        return this.scanMoney();
     }
+
 
     public void createLotteries(Money money) {
         this.inventory.createLotteries(money);
@@ -35,15 +39,21 @@ public class LotteryController {
     public Lottery scanAnswer() {
         Optional<String> scanned = InputView.scanWithPayload("Put lottery answer.");
         if (scanned.isPresent()) {
-            return new Lottery(parseNumbers(scanned.get()));
+            try {
+                return new Lottery(parseNumbers(scanned.get()));
+            } catch (Exception e) {
+                System.out.println(e);
+                return this.scanAnswer();
+            }
         }
-        throw new NullPointerException("No input found.");
+        System.out.println(PAYLOAD_NO_INPUT);
+        return this.scanAnswer();
     }
 
     public static List<LotteryNumber> parseNumbers(String scanned) {
         String[] numbers = scanned.split("\\s*,\\s*");
         if (numbers.length != 6) {
-            throw new IllegalArgumentException("Wrong input found: " + String.join(",", numbers));
+            throw new IllegalArgumentException("Wrong input found: '" + String.join(",", numbers) + "', try again.");
         }
         return toLotteryNumbers(numbers);
     }

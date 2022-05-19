@@ -280,10 +280,12 @@ Earning rate: 400000.0
 ```
 
 ### Requested change
-- [ ] trycatch 제거? 잘못된 숫자 값 입력 받은 경우 다시 입력받는 로직 추가
+- [x] trycatch 제거
+  - [x] scanMoney 입력이 null 인 경우에 다시 입력 받는 로직 추가
+  - [x] scanManualLottery null 혹은 parseNumber 실패시 재시도 
+  - [x] scanAnswer null 혹은 parseNumber 실패시 재시도
 - [ ] LotteryBox 는 List로 원복, Lottery에 Set을 사용
 - [ ] Money.pay manipulate 가 아닌 새로운 객체 생성 
-- [ ] 입력이 null 인 경우에 다시 입력 받는 로직 추가
 - [ ] 한 줄에 점을 하나만 찍는다 -> 기본 포메팅 옵션 변경해야하나?
   - [ ] LotteryBox.numbers
   - [ ] Reward의 constructor
