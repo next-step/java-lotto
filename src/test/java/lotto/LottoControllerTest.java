@@ -33,7 +33,7 @@ public class LottoControllerTest {
 
     @Test
     void inputNumberSeparatedByCommaShouldReturnListOfInteger() {
-        assertThat(lotteryController.parseNumbers("1, 2 ,  3,4,5,6")).isEqualTo(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6h)));
+        assertThat(lotteryController.parseNumbers("1, 2 ,  3,4,5,6")).isEqualTo(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
         assertThat(lotteryController.parseNumbers("6, 11, 18, 22, 24, 38")).isEqualTo(Lottery.toLotteryNumbers(Arrays.asList(6, 11, 18, 22, 24, 38)));
     }
 

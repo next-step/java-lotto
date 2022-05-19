@@ -294,3 +294,8 @@ Earning rate: 400000.0
 - [ ] rename Reward.hasEqualMoney -> eqauls overriding
 - [ ] Winning.countWin private으로 변경
 - [ ] Winning.matchWin 의 인자 List -> Lottery 사용
+
+### bug fix
+- [x] 보너스 번호 확인 시 manual 도 확인 필요
+  - [x] Winning.bonus 내 contains 동작에 대한 테스트 추가 (evaluateBonus)
+- [ ] Winning 모든 테스트 추가

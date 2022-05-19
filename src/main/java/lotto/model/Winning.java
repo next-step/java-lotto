@@ -1,6 +1,10 @@
 package lotto.model;
 
+import org.jetbrains.annotations.NotNull;
+
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 public class Winning {
     private final int bonusNumber;
@@ -16,9 +20,9 @@ public class Winning {
         for (LotteryNumber lotteryNumber : lotteryNumbers) {
             win += countWin(lotteryNumber);
         }
-        Reward bonus = hasBonus(lotteryNumbers);
-        if (win == 5 && bonus != null) {
-            return bonus;
+        Optional<Reward> bonus = bonus(lotteryNumbers);
+        if (win == 5 && bonus.isPresent() ) {
+            return bonus.get();
         }
         return Reward.of(win, false);
     }
@@ -30,9 +34,9 @@ public class Winning {
         return 0;
     }
 
-    public Reward hasBonus(List<LotteryNumber> lottery) {
-        if (lottery.contains(this.bonusNumber)) {
-            return Reward.of(5, true);
+    public Optional<Reward> bonus(List<LotteryNumber> lottery) {
+        if (lottery.contains(new LotteryNumber(this.bonusNumber))) {
+            return Optional.ofNullable(Reward.of(5, true));
         }
         return null;
     }
