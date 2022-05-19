@@ -2,6 +2,8 @@ package Lotto.domain;
 
 import Lotto.exception.OverflowNumberException;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Number {
@@ -9,6 +11,17 @@ public class Number {
     private static final int LOTTO_MAX_NUMBER = 45;
 
     private int number;
+
+    private static Map<Integer, Number> pool = new HashMap<>();
+
+    public static Number getNumber(int num) {
+        Number number = pool.get(num);
+        if(number == null) {
+            number = new Number(num);
+            pool.put(num, number);
+        }
+        return number;
+    }
 
     public Number(int lottoNum) {
         validate(lottoNum);

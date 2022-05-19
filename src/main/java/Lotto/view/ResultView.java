@@ -12,10 +12,12 @@ public class ResultView {
     private static int LOTTO_LAST_NUMBER = 6;
 
     public static void viewLottoNumbers(Lottos lottos) {
-        int lottoNum = lottos.getLottoCnt();
-        System.out.println(lottoNum + "개를 구매했습니다.");
+        int allLottoCnt = lottos.getAllLottoCnt();
+        int passiveLottoCnt = lottos.getPassiveLottoCnt();
+        int automaticLottoCnt = allLottoCnt - passiveLottoCnt;
 
-        for (int i = 0; i < lottoNum; ++i) {
+        System.out.println("수동으로 " + passiveLottoCnt + "장, 자동으로" + automaticLottoCnt + "개를 구매했습니다.");
+        for (int i = 0; i < allLottoCnt; ++i) {
             System.out.print("[");
             viewLottoNumbers(lottos, i);
             System.out.print("]");
@@ -61,7 +63,7 @@ public class ResultView {
 
     private static String isWinningBonusNumber(EqualLottoCntInfo equalLottoCntInfo) {
         String str = "";
-        if ((equalLottoCntInfo == EqualLottoCntInfo.BONUS) && (equalLottoCntInfo.getEqualCnt() == 5))
+        if (equalLottoCntInfo.isWinningBonus())
             str = ", 보너스 볼 일치";
         return str;
     }

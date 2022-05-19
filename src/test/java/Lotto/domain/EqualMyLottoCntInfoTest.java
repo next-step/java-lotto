@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class EqualLottoCntInfoTest {
+class EqualMyLottoCntInfoTest {
 
     @ParameterizedTest
     @ValueSource(ints = {8,100,999})
@@ -56,5 +56,22 @@ class EqualLottoCntInfoTest {
     @DisplayName("상금이 있는 등수만 유효한 등수다.")
     public void validRankTest(EqualLottoCntInfo winningRankInfo, boolean result) {
         Assertions.assertThat(winningRankInfo.isWinning()).isEqualTo(result);
+    }
+
+    private static Stream<Arguments> findEqualLottoInfoArgs() {
+        return Stream.of(
+                arguments(6, true, EqualLottoCntInfo.FIRST),
+                arguments(5, true, EqualLottoCntInfo.BONUS),
+                arguments(5, false, EqualLottoCntInfo.SECOND),
+                arguments(4, true, EqualLottoCntInfo.THIRD),
+                arguments(4, false, EqualLottoCntInfo.THIRD)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("findEqualLottoInfoArgs")
+    @DisplayName("맞춘갯수에 따라 승리등수 객체를 반환한다..")
+    public void findEqualLottoInfoArgsTest(int equalCnt, boolean isBonus, EqualLottoCntInfo equalLottoCntInfo) {
+        Assertions.assertThat(EqualLottoCntInfo.findEqualLottoInfo(equalCnt, isBonus)).isEqualTo(equalLottoCntInfo);
     }
 }
