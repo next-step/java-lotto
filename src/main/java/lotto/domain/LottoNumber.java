@@ -23,7 +23,7 @@ public class LottoNumber {
   }
 
   public static LottoNumber from(String number) {
-    return from(Integer.parseInt(number));
+    return from(Integer.parseInt(number.trim()));
   }
 
   public static LottoNumber from(int number) {
@@ -49,5 +49,10 @@ public class LottoNumber {
   @Override
   public int hashCode() {
     return Objects.hash(number);
+  }
+
+  @Override
+  public String toString() {
+    return String.valueOf(number);
   }
 }

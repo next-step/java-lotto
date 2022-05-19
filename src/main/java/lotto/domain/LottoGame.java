@@ -2,8 +2,8 @@ package lotto.domain;
 
 public class LottoGame {
 
-  public static Rank match(Lotto lotto, WinLotto winLotto) {
-    return winLotto.match(lotto);
+  public static LottoResult match(LottoTicket lottoTicket, WinLotto winLotto) {
+    return lottoTicket.match(winLotto);
   }
 
 }

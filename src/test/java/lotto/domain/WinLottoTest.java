@@ -28,7 +28,7 @@ class WinLottoTest {
   void givenLotto_shouldBeTopLottoRank() {
     Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
     WinLotto winLotto = new WinLotto(List.of(1, 2, 3, 4, 5, 6), 7);
-    assertThat(LottoGame.match(lotto, winLotto)).isEqualTo(Rank.TOP);
+    assertThat(winLotto.match(lotto)).isEqualTo(Rank.TOP);
   }
 
   @Test
@@ -36,6 +36,6 @@ class WinLottoTest {
   void givenLotto_shouldBeSecondLottoRank() {
     Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
     WinLotto winLotto = new WinLotto(List.of(1, 2, 3, 4, 5, 6), 7);
-    assertThat(LottoGame.match(lotto, winLotto)).isEqualTo(Rank.SECOND);
+    assertThat(winLotto.match(lotto)).isEqualTo(Rank.SECOND);
   }
 }

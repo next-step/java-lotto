@@ -37,12 +37,24 @@ public enum Rank {
         .orElse(NONE);
   }
 
+  public boolean isSecond() {
+    return this == SECOND;
+  }
+
+  public boolean isRewarded() {
+    return this != NONE;
+  }
+
   private boolean isMatched(long matchCount) {
     return this.matchCount == matchCount;
   }
 
-  public boolean isSecond() {
-    return this == SECOND;
+  @Override
+  public String toString() {
+    if (isSecond()) {
+      return matchCount + "개 일치, 보너스 볼 일치(" + cashPrize + "원)";
+    }
+    return matchCount + "개 일치 (" + cashPrize + "원)";
   }
 
 }

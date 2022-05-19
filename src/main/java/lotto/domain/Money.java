@@ -10,6 +10,10 @@ public class Money {
 
   private final long amount;
 
+  public static Money from(String amount) {
+    return from(Long.parseLong(amount));
+  }
+
   public static Money from(long amount) {
     return new Money(amount);
   }

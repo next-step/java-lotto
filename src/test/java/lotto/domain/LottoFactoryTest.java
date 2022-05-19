@@ -13,4 +13,11 @@ public class LottoFactoryTest {
     LottoTicket lottoTicket = LottoFactory.generateAuto(3);
     assertThat(lottoTicket.getLottos()).hasSize(3);
   }
+
+  @Test
+  @DisplayName("수동 로또 생성")
+  void generateManualLotto() {
+    Lotto lotto = LottoFactory.generateManual("1,2,3,4,5,6");
+    assertThat(lotto).isEqualTo(LottoFactory.generateManual("1,2,3,4,5,6"));
+  }
 }
