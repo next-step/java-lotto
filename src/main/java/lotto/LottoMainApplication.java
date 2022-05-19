@@ -13,6 +13,7 @@ public class LottoMainApplication {
 
   public static void main(String[] args) {
     Money amount = Money.createWon(InputView.requestPurchaseAmount());
+    int manualPurchaseLotto = InputView.requestManualPurchaseLotto();
     LotteryShop lotteryShop = new LotteryShop();
     LottoTickets lottoTickets = lotteryShop.sell(amount, new RandomNumbers());
     ResultView.printLottoCount(lottoTickets.size());
