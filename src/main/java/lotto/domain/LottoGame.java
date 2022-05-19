@@ -6,7 +6,8 @@ import java.util.List;
 
 public class LottoGame {
 
-    private final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
+    private static final String INVALID_BONUS_NUMBER = "로또 당첨 번호와 보너스 번호가 일치할 수 없습니다. 보너스 번호 : %d";
 
     private final PurchaseAmount purchaseAmount;
     private final PurchaseLottoCount purchaseLottoCount;
@@ -23,6 +24,9 @@ public class LottoGame {
     }
 
     public void confirmLottos(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
+        if (winningLottoNumbers.isContain(bonusNumber)) {
+            throw new IllegalArgumentException(String.format(INVALID_BONUS_NUMBER, bonusNumber.getNumber()));
+        }
         lottos.confirmAll(winningLottoNumbers, bonusNumber);
     }
 

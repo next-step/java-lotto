@@ -12,10 +12,11 @@ public class Application {
         OutputView.printPurchaseLotto(lottoGame.getLottoAmount());
         OutputView.printLottoNumbers(lottoGame.getLottoNumbers());
 
-        String winningNumbers = InputView.getWinningNumbers();
-        String bonusNumber = InputView.getBonusNumber();
-        LottoNumbers winningLottoNumbers = new LottoNumbers(winningNumbers);
-        lottoGame.confirmLottos(winningLottoNumbers, new LottoNumber(new NumberText(bonusNumber)));
+        String winningNumbersText = InputView.getWinningNumbers();
+        String bonusNumberText = InputView.getBonusNumber();
+        LottoNumbers winningLottoNumbers = new LottoNumbers(winningNumbersText);
+        LottoNumber bonusLottoNumber = new LottoNumber(new NumberText(bonusNumberText));
+        lottoGame.confirmLottos(winningLottoNumbers, bonusLottoNumber);
 
         OutputView.printWinningResult(MatchRankDto.from(lottoGame));
     }
