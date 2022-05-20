@@ -286,7 +286,7 @@ Earning rate: 400000.0
   - [x] scanAnswer null 혹은 parseNumber 실패시 재시도
 - [x] LotteryBox 는 List로 원복, Lottery에 Set을 사용
 - [x] Money.pay manipulate 가 아닌 새로운 Money 객체 생성 
-- [x] 한 줄에 점을 하나만 찍는다 -> 기본 포메팅 옵션 변경해야하나?
+- [x] 한 줄에 점을 하나만 찍는다
   - [x] LotteryBox.numbers
   - [x] Reward의 constructor
 - [x] for문 대신 List의 subList() 사용
@@ -294,7 +294,8 @@ Earning rate: 400000.0
 - [ ] rename Reward.hasEqualMoney -> equals overriding?
   - equals 가 별도로 존재하며 hasEqualValue 는 두개 의 인스턴스변수 중 value 만 비교하므로 그대로 두었습니다ㅠ
 - [x] Winning.countWin private 으로 변경
-- [ ] Winning.matchWin 의 인자 List -> Lottery 사용
+- [x] Winning.matchWin 의 인자 List -> Lottery 사용
+  - [x] rename to countMatch, Move to Lottery
 
 ### bug fix
 - [x] 보너스 번호 확인 시 manual 도 확인 필요

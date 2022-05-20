@@ -14,12 +14,7 @@ public class WinningTest {
     Lottery myLottery = new Lottery(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 7)));
 
     @Test
-    void evaluateBonus() {
-        assertThat(winning.bonus(myLottery.lotteryNumbers).isPresent()).isTrue();
-    }
-
-    @Test
     void matchWinReturnBonus() {
-        assertThat(winning.matchWin(myLottery.lotteryNumbers)).isEqualTo(Reward.of(5, true));
+        assertThat(winning.matchWin(myLottery)).isEqualTo(Reward.of(5, true));
     }
 }

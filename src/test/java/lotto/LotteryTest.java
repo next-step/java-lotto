@@ -43,11 +43,6 @@ public class LotteryTest {
         assertThat(lottery.lotteryNumbers).hasSize(6);
     }
 
-//    @Test
-//    void shouldSortAscend() {
-//        assertThat(LotteryBox.sort(Lottery.toLotteryNumbers(Arrays.asList(2, 3, 1)))).isEqualTo(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3)));
-//    }
-
     @Test
     void findWin() {
         Lottery lottery = new Lottery(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
@@ -64,5 +59,11 @@ public class LotteryTest {
     void LotteryShouldNotHaveDuplicatedNumber() {
         Lottery lottery = new Lottery(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 6)));
         assertThat(lottery.lotteryNumbers).hasSize(6);
+    }
+
+    @Test
+    void evaluateBonus() {
+        Lottery lottery = new Lottery(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 6)));
+        assertThat(lottery.bonus(1).isPresent()).isTrue();
     }
 }
