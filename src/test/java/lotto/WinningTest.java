@@ -5,16 +5,26 @@ import lotto.model.Winning;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningTest {
+    Lottery answer = new Lottery(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+    Winning winning = new Winning(answer, 7);
+    Lottery myLottery = new Lottery(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 7)));
+
     @Test
     void evaluateBonus() {
-        Winning winning = new Winning(new Lottery(), 6);
-        Lottery lottery = new Lottery(Lottery.toLotteryNumbers(Arrays.asList(1,2,3,4,5,6)));
-        assertThat(winning.bonus(lottery.lotteryNumbers).isPresent()).isTrue();
+        assertThat(winning.bonus(myLottery.lotteryNumbers).isPresent()).isTrue();
+    }
+
+    @Test
+    void matchWinReturnBonus() {
+        assertThat(winning.matchWin(myLottery.lotteryNumbers)).isEqualTo(Reward.of(5, true));
+    }
+
+    @Test
+    void shouldCount1() {
+        assertThat(winning.countWin(new LotteryNumber(1))).isEqualTo(1);
     }
 }

@@ -298,4 +298,4 @@ Earning rate: 400000.0
 ### bug fix
 - [x] 보너스 번호 확인 시 manual 도 확인 필요
   - [x] Winning.bonus 내 contains 동작에 대한 테스트 추가 (evaluateBonus)
-- [ ] Winning 모든 테스트 추가
+- [x] Winning 모든 테스트 추가
