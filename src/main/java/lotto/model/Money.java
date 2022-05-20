@@ -16,16 +16,11 @@ public class Money {
         this.investedMoney = value;
     }
 
-    public String toPayload() {
-        return "₩" + this.value;
-    }
-
     boolean enough() {
         return this.value >= LOTTERY_PRICE;
     }
 
     public Money pay(int amount) {
-//        this.value  = new Money(this.value - (LOTTERY_PRICE * amount));
         return new Money(this.value - (LOTTERY_PRICE * amount));
     }
 
@@ -60,6 +55,4 @@ public class Money {
     public int hashCode() {
         return Objects.hash(value, investedMoney);
     }
-
-
 }

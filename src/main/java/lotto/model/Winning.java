@@ -1,9 +1,5 @@
 package lotto.model;
 
-import org.jetbrains.annotations.NotNull;
-
-import javax.swing.text.html.Option;
-import java.util.List;
 import java.util.Optional;
 import java.util.TreeSet;
 

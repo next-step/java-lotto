@@ -286,9 +286,9 @@ Earning rate: 400000.0
   - [x] scanAnswer null 혹은 parseNumber 실패시 재시도
 - [x] LotteryBox 는 List로 원복, Lottery에 Set을 사용
 - [x] Money.pay manipulate 가 아닌 새로운 Money 객체 생성 
-- [ ] 한 줄에 점을 하나만 찍는다 -> 기본 포메팅 옵션 변경해야하나?
-  - [ ] LotteryBox.numbers
-  - [ ] Reward의 constructor
+- [x] 한 줄에 점을 하나만 찍는다 -> 기본 포메팅 옵션 변경해야하나?
+  - [x] LotteryBox.numbers
+  - [x] Reward의 constructor
 - [ ] for문 대신 List의 subList() 사용
 - [ ] rename Reward.money -> countOfMatch
 - [ ] rename Reward.hasEqualMoney -> eqauls overriding

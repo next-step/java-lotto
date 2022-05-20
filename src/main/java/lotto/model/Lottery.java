@@ -16,7 +16,9 @@ public class Lottery {
     }
 
     public static TreeSet<LotteryNumber> toLotteryNumbers(List<Integer> numbers) {
-        return numbers.stream().map(number -> new LotteryNumber(number)).collect(Collectors.toCollection(TreeSet::new));
+        return numbers.stream()
+                .map(number -> new LotteryNumber(number))
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 
     private TreeSet<LotteryNumber> createLottery() {

@@ -18,7 +18,9 @@ public class Inventory {
     public Inventory() {
         this.lotteries = new ArrayList();
         this.manualLotteries = new ArrayList<>();
-    };
+    }
+
+    ;
 
     public Inventory(List<Lottery> lotteries) {
         this.lotteries = lotteries;
@@ -26,9 +28,6 @@ public class Inventory {
     }
 
     public void createLotteries(Money money) {
-//        while (money.enough()) {
-//            buyLottery(money);
-//        }
         while (money.enough()) {
             money = buyLottery(money);
         }
@@ -53,7 +52,9 @@ public class Inventory {
 
     public List<Reward> findWins(Winning winning) {
         List<Reward> rewards = new ArrayList();
-        List<Lottery> totalLotteries = Stream.of(this.lotteries, this.manualLotteries).flatMap(Collection::stream).collect(Collectors.toList());
+        List<Lottery> totalLotteries = Stream.of(this.lotteries, this.manualLotteries)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
         for (Lottery lottery : totalLotteries) {
             Reward reward = lottery.findWin(winning);
             rewards.add(reward);
@@ -76,7 +77,7 @@ public class Inventory {
             try {
                 TreeSet<LotteryNumber> lotteryNumbers = LotteryController.parseNumbers(scanned.get());
                 return new Lottery(lotteryNumbers);
-            } catch(Exception e) {
+            } catch (Exception e) {
                 System.out.println(e);
                 return this.scanManualLottery();
             }
