@@ -15,10 +15,6 @@ public class LotteryBox {
 
     public static TreeSet<LotteryNumber> createLottery() {
         LotteryBox.shuffleBox();
-        TreeSet<LotteryNumber> list = new TreeSet<>();
-        for (int i = 1; i <= 6; i++) {
-            list.add(LotteryBox.numbers.get(i));
-        }
-        return list;
+        return new TreeSet<>(LotteryBox.numbers.subList(0, 6));
     }
 }

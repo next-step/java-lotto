@@ -289,7 +289,7 @@ Earning rate: 400000.0
 - [x] 한 줄에 점을 하나만 찍는다 -> 기본 포메팅 옵션 변경해야하나?
   - [x] LotteryBox.numbers
   - [x] Reward의 constructor
-- [ ] for문 대신 List의 subList() 사용
+- [x] for문 대신 List의 subList() 사용
 - [ ] rename Reward.money -> countOfMatch
 - [ ] rename Reward.hasEqualMoney -> eqauls overriding
 - [ ] Winning.countWin private으로 변경
