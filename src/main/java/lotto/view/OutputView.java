@@ -24,6 +24,9 @@ public class OutputView {
     private static final String KR_WON = "원";
     private static final String COUNT = "개";
 
+    private static final String PURCHASE_AMOUNT_MESSAGE = "구매 금액을 입력해주세요.";
+    private static final String PRINT_INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+    private static final String WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
 
     public static void printPurchaseLotto(int amount) {
         stringBuilder.append(amount)
@@ -98,5 +101,17 @@ public class OutputView {
 
     private static void initStringBuilder() {
         stringBuilder.setLength(0);
+    }
+
+    public static void printInputBonusNumber() {
+        System.out.println(PRINT_INPUT_BONUS_NUMBER);
+    }
+
+    public static void printPurchaseAmount() {
+        System.out.println(PURCHASE_AMOUNT_MESSAGE);
+    }
+
+    public static void printWinningNumbers() {
+        System.out.println(WINNING_NUMBERS);
     }
 }

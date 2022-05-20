@@ -11,11 +11,12 @@ public class Lotto {
     private Rank rank;
 
     public Lotto(LottoNumbers lottoNumbers) {
+        validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
-        validate();
+
     }
 
-    private void validate() {
+    private void validate(LottoNumbers lottoNumbers) {
         if (Objects.isNull(lottoNumbers)) {
             throw new IllegalArgumentException(EMPTY_LOTTO_NUMBERS);
         }

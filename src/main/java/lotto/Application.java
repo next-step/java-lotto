@@ -15,7 +15,7 @@ public class Application {
         String winningNumbersText = InputView.getWinningNumbers();
         String bonusNumberText = InputView.getBonusNumber();
         LottoNumbers winningLottoNumbers = new LottoNumbers(winningNumbersText);
-        LottoNumber bonusLottoNumber = new LottoNumber(new NumberText(bonusNumberText));
+        LottoNumber bonusLottoNumber = new LottoNumber(new IntNumber(bonusNumberText));
         lottoGame.confirmLottos(winningLottoNumbers, bonusLottoNumber);
 
         OutputView.printWinningResult(MatchRankDto.from(lottoGame));

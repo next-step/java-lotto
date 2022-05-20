@@ -7,21 +7,20 @@ public class LottoNumber {
     private static final int MAX_NUMBER = 45;
     private static final String INVALID_NUMBER = "숫자는 " + MIN_NUMBER + " ~ " + MAX_NUMBER + " 까지의 숫자만 가능합니다. 현재 숫자 : %d";
 
-    private final int number;
-
-    public LottoNumber(NumberText numberText) {
-        this(numberText.getNumber());
-    }
+    private final IntNumber number;
 
     public LottoNumber(int number) {
-        if (number > MAX_NUMBER || number < MIN_NUMBER) {
-            throw new IllegalArgumentException(String.format(INVALID_NUMBER, number));
+        this(new IntNumber(number));
+    }
+    public LottoNumber(IntNumber intNumber) {
+        if (intNumber.getNumber() > MAX_NUMBER || intNumber.getNumber() < MIN_NUMBER) {
+            throw new IllegalArgumentException(String.format(INVALID_NUMBER, intNumber.getNumber()));
         }
 
-        this.number = number;
+        this.number = intNumber;
     }
 
-    public int getNumber() {
+    public IntNumber getNumber() {
         return number;
     }
 
@@ -30,16 +29,16 @@ public class LottoNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return number == that.number;
+        return number.getNumber() == that.number.getNumber();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number);
+        return Objects.hash(number.getNumber());
     }
 
     @Override
     public String toString() {
-        return String.valueOf(number);
+        return String.valueOf(number.getNumber());
     }
 }

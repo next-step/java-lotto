@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import calculator.model.Formula;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;

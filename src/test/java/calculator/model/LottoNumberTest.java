@@ -1,7 +1,7 @@
 package calculator.model;
 
+import lotto.domain.IntNumber;
 import lotto.domain.LottoNumber;
-import lotto.domain.NumberText;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -28,7 +28,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @MethodSource("정상적인_숫자의_문자_매개변수")
     void 정상적인_숫자의_문자일때(String numberText, int resultNumber) {
-        assertThat(new LottoNumber(new NumberText(numberText)).getNumber()).isEqualTo(resultNumber);
+        assertThat(new LottoNumber(new IntNumber(numberText)).getNumber()).isEqualTo(resultNumber);
     }
 
     static Stream<Arguments> 정상적인_숫자의_문자_매개변수() {
@@ -42,7 +42,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(strings = {"0", "46"})
     void 비정상적인_숫자의_문자일때(String numberText) {
-        assertThatThrownBy(() -> new LottoNumber(new NumberText(numberText)))
+        assertThatThrownBy(() -> new LottoNumber(new IntNumber(numberText)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
