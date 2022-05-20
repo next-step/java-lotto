@@ -37,9 +37,9 @@ public class InventoryTest {
 
     @Test
     void findWins() {
-        List<Lottery> lotteries = Arrays.asList(new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6).stream().map(n -> new LotteryNumber(n)).collect(Collectors.toList())));
+        List<Lottery> lotteries = Arrays.asList(new Lottery(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6))));
         Inventory inventory = new Inventory(lotteries);
-        List<Reward> rewards = inventory.findWins(new Winning(new Lottery(Arrays.asList(1, 2, 3, 14, 15, 16).stream().map(n -> new LotteryNumber(n)).collect(Collectors.toList())), 0));
+        List<Reward> rewards = inventory.findWins(new Winning(new Lottery(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3, 14, 15, 16))), 7));
         assertThat(rewards).isEqualTo(Arrays.asList(Reward.of(3, false)));
     }
 }

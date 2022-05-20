@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
+import java.util.TreeSet;
 
 public class Winning {
     private final int bonusNumber;
@@ -15,7 +16,7 @@ public class Winning {
         this.bonusNumber = bonusNumber;
     }
 
-    public Reward matchWin(List<LotteryNumber> lotteryNumbers) {
+    public Reward matchWin(TreeSet<LotteryNumber> lotteryNumbers) {
         int win = 0;
         for (LotteryNumber lotteryNumber : lotteryNumbers) {
             win += countWin(lotteryNumber);
@@ -34,7 +35,7 @@ public class Winning {
         return 0;
     }
 
-    public Optional<Reward> bonus(List<LotteryNumber> lottery) {
+    public Optional<Reward> bonus(TreeSet<LotteryNumber> lottery) {
         if (lottery.contains(new LotteryNumber(this.bonusNumber))) {
             return Optional.ofNullable(Reward.of(5, true));
         }

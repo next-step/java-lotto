@@ -5,10 +5,7 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import javax.swing.text.html.Option;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -74,7 +71,7 @@ public class Inventory {
         Optional<String> scanned = InputView.scan();
         if (scanned.isPresent()) {
             try {
-                List<LotteryNumber> lotteryNumbers = LotteryController.parseNumbers(scanned.get());
+                TreeSet<LotteryNumber> lotteryNumbers = LotteryController.parseNumbers(scanned.get());
                 return new Lottery(lotteryNumbers);
             } catch(Exception e) {
                 System.out.println(e);

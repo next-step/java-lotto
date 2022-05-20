@@ -1,24 +1,25 @@
 package lotto.model;
 
 import java.util.List;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Lottery {
-    public final List<LotteryNumber> lotteryNumbers;
+    public final TreeSet<LotteryNumber> lotteryNumbers;
 
     public Lottery() {
         this.lotteryNumbers = createLottery();
     }
 
-    public Lottery(List<LotteryNumber> lotteryNumbers) {
+    public Lottery(TreeSet<LotteryNumber> lotteryNumbers) {
         this.lotteryNumbers = lotteryNumbers;
     }
 
-    public static List<LotteryNumber> toLotteryNumbers(List<Integer> numbers) {
-        return numbers.stream().map(number -> new LotteryNumber(number)).collect(Collectors.toList());
+    public static TreeSet<LotteryNumber> toLotteryNumbers(List<Integer> numbers) {
+        return numbers.stream().map(number -> new LotteryNumber(number)).collect(Collectors.toCollection(TreeSet::new));
     }
 
-    private List<LotteryNumber> createLottery() {
+    private TreeSet<LotteryNumber> createLottery() {
         return LotteryBox.createLottery();
     }
 

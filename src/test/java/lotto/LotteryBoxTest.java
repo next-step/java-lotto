@@ -4,6 +4,7 @@ import lotto.model.LotteryBox;
 import lotto.model.LotteryNumber;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -12,9 +13,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LotteryBoxTest {
     @Test
     void shouldShuffleBox() {
-        List<LotteryNumber> shuffled1 = LotteryBox.shuffleBox();
-        List<LotteryNumber> shuffled2 = LotteryBox.shuffleBox();
-        assertThat(shuffled1).isNotEqualTo(shuffled2);
+        List<LotteryNumber> origin = new ArrayList<>(LotteryBox.numbers);
+        LotteryBox.shuffleBox();
+        List<LotteryNumber> shuffled = LotteryBox.numbers;
+        assertThat(origin).isNotEqualTo(shuffled);
     }
 
     @Test
@@ -23,7 +25,7 @@ public class LotteryBoxTest {
     }
 
     @Test
-    void numbersShouldBeHashSet() {
-        assertThat(LotteryBox.numbers).isInstanceOf(HashSet.class);
+    void numbersShouldBeList() {
+        assertThat(LotteryBox.numbers).isInstanceOf(List.class);
     }
 }

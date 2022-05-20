@@ -8,6 +8,7 @@ import lotto.view.ResultView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.TreeSet;
 
 import static lotto.util.Const.PAYLOAD_NO_INPUT;
 
@@ -50,7 +51,7 @@ public class LotteryController {
         return this.scanAnswer();
     }
 
-    public static List<LotteryNumber> parseNumbers(String scanned) {
+    public static TreeSet<LotteryNumber> parseNumbers(String scanned) {
         String[] numbers = scanned.split("\\s*,\\s*");
         if (numbers.length != 6) {
             throw new IllegalArgumentException("Wrong input found: '" + String.join(",", numbers) + "', try again.");
@@ -58,8 +59,8 @@ public class LotteryController {
         return toLotteryNumbers(numbers);
     }
 
-    public static List<LotteryNumber> toLotteryNumbers(String[] numberStrings) {
-        List<LotteryNumber> list = new ArrayList();
+    public static TreeSet<LotteryNumber> toLotteryNumbers(String[] numberStrings) {
+        TreeSet<LotteryNumber> list = new TreeSet();
         for (String numberString : numberStrings) {
             list.add(toLotteryNumber(numberString));
         }
