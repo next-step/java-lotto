@@ -6,54 +6,62 @@ import java.util.Objects;
 
 public class Money {
 
-  private final BigDecimal amount;
+  public static final int LOTTO_PRICE = 1000;
 
-  public static Money wons(String amount) {
-    return new Money(BigDecimal.valueOf(Long.parseLong(amount)));
+  private final long amount;
+
+  public static Money from(String amount) {
+    return from(Long.parseLong(amount));
   }
 
-  public static Money wons(long amount) {
-    return new Money(BigDecimal.valueOf(amount));
+  public static Money from(long amount) {
+    return new Money(amount);
   }
 
-  Money(BigDecimal amount) {
+  private Money(long amount) {
+    if (amount < 0) {
+      throw new IllegalArgumentException("돈은 0보다 작을 수 없습니다.");
+    }
     this.amount = amount;
   }
 
-  public Money plus(Money amount) {
-    return new Money(this.amount.add(amount.amount));
+  public long countLotto() {
+    return amount / LOTTO_PRICE;
   }
 
-  public Money divide(double divisor) {
-    return new Money(amount.divide(BigDecimal.valueOf(divisor), 2, RoundingMode.DOWN));
+  public double rateOfReturn(Money prize) {
+    return BigDecimal.valueOf(prize.amount())
+        .divide(BigDecimal.valueOf(amount), 2, RoundingMode.FLOOR)
+        .doubleValue();
   }
 
-  public Long longValue() {
-    return amount.longValue();
+  public Money manual(int numberOfManual) {
+    return Money.from(amount - (numberOfManual * LOTTO_PRICE));
   }
 
-  public Double doubleValue() {
-    return amount.doubleValue();
+  public long amount() {
+    return amount;
   }
 
-  public boolean equals(Object object) {
-    if (this == object) {
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
       return true;
     }
-
-    if (!(object instanceof Money)) {
+    if (o == null || getClass() != o.getClass()) {
       return false;
     }
-
-    Money other = (Money) object;
-    return Objects.equals(amount.doubleValue(), other.amount.doubleValue());
+    Money money = (Money) o;
+    return amount == money.amount;
   }
 
+  @Override
   public int hashCode() {
-    return Objects.hashCode(amount);
+    return Objects.hash(amount);
   }
 
+  @Override
   public String toString() {
-    return amount.toString() + "원";
+    return String.valueOf(amount);
   }
 }

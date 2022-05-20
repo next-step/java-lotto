@@ -1,48 +1,65 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
+import static lotto.domain.LottoNumber.MAX_LOTTO_NUMBER;
+import static lotto.domain.LottoNumber.MIN_LOTTO_NUMBER;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 public class LottoFactory {
 
   private static final int LOTTO_NUMBERS_SIZE = 6;
-
-  public static final String DELIMITER = ",";
-
-  private static final List<LottoNumber> allLottoNumbers = new ArrayList<>(
-      LottoNumber.MAX_LOTTO_NUMBER);
+  private static final String DELIMITER = ",";
+  private static final List<LottoNumber> cachedLottoNumbers;
 
   static {
-    IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
-        .forEach(number -> allLottoNumbers.add(LottoNumber.from(number)));
+    cachedLottoNumbers = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+        .mapToObj(LottoNumber::from)
+        .collect(toList());
   }
 
-  public static LottoTicket createAuto() {
-    Collections.shuffle(allLottoNumbers);
-    return new LottoTicket(allLottoNumbers.stream()
-        .limit(LOTTO_NUMBERS_SIZE)
-        .collect(Collectors.toList()));
+  public static List<Lotto> lotto(long numberOfLotto, List<String> lottoNumbers) {
+    List<Lotto> lottos = lotto(numberOfLotto);
+    lottos.addAll(lotto(lottoNumbers));
+    return lottos;
   }
 
-  public static LottoTicket createManual(String numbers) {
-    if (isBlank(numbers)) {
+  public static List<Lotto> lotto(long numberOfLotto) {
+    return LongStream.range(0, numberOfLotto)
+        .mapToObj(number -> generateAutoLotto())
+        .collect(toList());
+  }
+
+  public static List<Lotto> lotto(List<String> lottoNumbers) {
+    return lottoNumbers.stream()
+        .map(LottoFactory::lotto)
+        .collect(toList());
+  }
+
+  public static Lotto lotto(String lottoNumbers) {
+    if (isBlank(lottoNumbers)) {
       throw new IllegalArgumentException("로또 번호가 비어있습니다.");
     }
-    return createManual(numbers.split(DELIMITER));
+    return generateManual(lottoNumbers.split(DELIMITER));
   }
 
-  private static LottoTicket createManual(String... numbers) {
-    return createManual(Arrays.stream(numbers)
+  private static Lotto generateAutoLotto() {
+    Collections.shuffle(cachedLottoNumbers);
+    return new Lotto(cachedLottoNumbers.stream()
+        .limit(LOTTO_NUMBERS_SIZE)
+        .collect(Collectors.toSet()));
+  }
+
+  private static Lotto generateManual(String... numbers) {
+    return new Lotto(Arrays.stream(numbers)
         .map(LottoNumber::from)
-        .collect(Collectors.toList()));
-  }
-
-  private static LottoTicket createManual(List<LottoNumber> lottoNumbers) {
-    return new LottoTicket(lottoNumbers);
+        .collect(toSet()));
   }
 
   private static boolean isBlank(String numbers) {

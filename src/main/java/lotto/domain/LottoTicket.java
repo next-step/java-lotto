@@ -1,55 +1,26 @@
 package lotto.domain;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
-  private static final int LOTTO_NUMBERS_SIZE = 6;
-  private final List<LottoNumber> lottoNumbers;
+  private final List<Lotto> lottos;
 
-  public LottoTicket(List<LottoNumber> lottoNumbers) {
-    validateSize(lottoNumbers);
-    validateDuplicate(lottoNumbers);
-    this.lottoNumbers = lottoNumbers;
+  public LottoTicket(List<Lotto> lottos) {
+    this.lottos = lottos;
   }
 
-  public LottoRank getWinLottoNumbers(WinLotto winLotto) {
-    return LottoRank.of(countByMatched(winLotto.getLottoNumbers()), matchBonus(winLotto.getBonusNumber()));
+  public LottoResult match(WinLotto winLotto) {
+    return new LottoResult(lottos.stream()
+        .map(winLotto::match)
+        .collect(Collectors.toList()));
   }
 
-  private long countByMatched(List<LottoNumber> winLottoNumbers) {
-    return lottoNumbers.stream()
-        .filter(winLottoNumbers::contains)
-        .count();
+  public List<Lotto> getLottos() {
+    return Collections.unmodifiableList(lottos);
   }
 
-  private boolean matchBonus(LottoNumber bonusNumber) {
-    return lottoNumbers.stream()
-        .anyMatch(lottoNumber -> lottoNumber.equals(bonusNumber));
-  }
 
-  public List<LottoNumber> getLottoNumbers() {
-    return Collections.unmodifiableList(lottoNumbers);
-  }
-
-  private void validateSize(List<LottoNumber> lottoNumbers) {
-    if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
-      throw new IllegalArgumentException("로또 번호가 6자리가 아닙니다.");
-    }
-  }
-
-  private void validateDuplicate(List<LottoNumber> lottoNumbers) {
-    Set<LottoNumber> noDuplicateNumbers = new HashSet<>(lottoNumbers);
-    if (noDuplicateNumbers.size() != LOTTO_NUMBERS_SIZE) {
-      throw new IllegalArgumentException("로또 번호가 중복되었습니다.");
-    }
-  }
-
-  @Override
-  public String toString() {
-    return lottoNumbers.toString();
-  }
 }

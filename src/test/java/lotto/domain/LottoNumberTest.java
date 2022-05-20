@@ -5,20 +5,22 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoNumberTest {
 
   @Test
-  @DisplayName("로또번호 생성")
-  void givenNumber_ShouldCreated() {
-    assertThat(LottoNumber.from(1)).isEqualTo(LottoNumber.from(1));
+  @DisplayName("로또 번호 생성")
+  void givenNumber_ShouldBeCratedLottoNumber() {
+    assertThat(LottoNumber.from("1")).isEqualTo(LottoNumber.from(1));
+    assertThat(LottoNumber.from("1") == LottoNumber.from(1)).isTrue();
   }
 
-  @Test
-  @DisplayName("로또번호에 포함되지 않는 번호 생성 예외")
-  void givenNumber_ShouldException() {
-    assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.from(0));
-    assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.from(46));
+  @ParameterizedTest
+  @ValueSource(ints = {0, 46})
+  @DisplayName("로또 번호 범위에서 벗어나는 값 예외")
+  void givenNonLottoNumber_ShouldException(int value) {
+    assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.from(value));
   }
-
 }
