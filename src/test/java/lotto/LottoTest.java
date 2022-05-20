@@ -12,7 +12,5 @@ public class LottoTest {
         Lottos lottos = new Lottos(3);
         ResultView.resultLottoNumber(3, lottos);
         assertThat(lottos.toString().split("],").length).isEqualTo(3);
-
     }
-
 }

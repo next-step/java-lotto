@@ -13,6 +13,10 @@ public class Lottos {
         }
     }
 
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
     public void findWinners(Winners winners) {
         for (Lotto lotto : lottos) {
             winners.findWinners(lotto);
@@ -20,16 +24,9 @@ public class Lottos {
     }
 
     @Override
-
     public String toString() {
-        String resultString = "";
-
-        /*
-        for (Lotto lotto : lottos) {
-            resultString += lotto.toString() + "\n";
-        }
-
-         */
-        return lottos.toString();
+        return "Lottos{" +
+                "lottos=" + lottos +
+                '}';
     }
 }

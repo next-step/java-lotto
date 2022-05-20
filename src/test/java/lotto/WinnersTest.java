@@ -10,7 +10,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinnersTest {
-
     @Test
     void 당첨자찾기() {
         List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
@@ -20,7 +19,7 @@ public class WinnersTest {
 
         Winners answerWinners = new Winners(lotto);
         answerWinners.addWinner(6);
-        
+
         assertThat(winners).isEqualTo(answerWinners);
     }
 

@@ -20,7 +20,7 @@ public class LottoMain {
         lottos.findWinners(winners);
 
         ResultView.resultWinners(winners);
-        ResultView.resultRevenue(winners, money);
+        ResultView.resultProfit(winners, money);
 
     }
 

@@ -15,8 +15,12 @@ public class Winners {
     public Winners(Lotto winningNumbers) {
         this.winningNumbers = winningNumbers;
         for (int i = 3; i <= 6; i++) {
-            winners.put(WinningsType.selectWinningsType(i), COUNT_INITIAL);
+            winners.put(WinningsType.selectWinningsType(i).get(), COUNT_INITIAL);
         }
+    }
+
+    public Map<WinningsType, Integer> getWinners() {
+        return winners;
     }
 
     public void findWinners(Lotto lotto) {
@@ -27,26 +31,16 @@ public class Winners {
     }
 
     public void addWinner(int count) {
-        WinningsType temporary = WinningsType.selectWinningsType(count);
+        WinningsType temporary = WinningsType.selectWinningsType(count).get();
         winners.put(temporary, winners.get(temporary) + COUNT_UNIT);
     }
 
     public double revenue(int money) {
         double amount = 0;
         for (int i = 3; i <= 6; i++) {
-            amount += WinningsType.selectWinnings(i) * winners.get(WinningsType.selectWinningsType(i));
+            amount += WinningsType.selectWinningsType(i).get().getWinnings() * winners.get(WinningsType.selectWinningsType(i).get());
         }
         return amount / money;
-    }
-
-    public String isBenefit(double revenue) {
-        if (revenue > 1) {
-            return "이득";
-        }
-        if (revenue < 1) {
-            return "손해";
-        }
-        return "본전";
     }
 
     @Override
@@ -64,8 +58,9 @@ public class Winners {
 
     @Override
     public String toString() {
-        return winners.toString();
+        return "Winners{" +
+                "winners=" + winners +
+                ", winningNumbers=" + winningNumbers +
+                '}';
     }
-
-
 }

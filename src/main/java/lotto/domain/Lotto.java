@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
 public class Lotto {
     public static final int LOTTO_ALL_NUMBER = 45;
     public static final int LOTTO_MINIMUM_NUMBER = 1;
+    public static final int LOTTO_UNIT_NUMBER = 6;
 
     private List<Integer> lottoNumbers = new ArrayList<>();
 
@@ -19,7 +20,7 @@ public class Lotto {
         Collections.shuffle(lottoAllNumber);
 
         lottoAllNumber.stream()
-                .limit(6)
+                .limit(LOTTO_UNIT_NUMBER)
                 .sorted()
                 .forEach(number -> lottoNumbers.add(number));
     }
