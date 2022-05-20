@@ -22,7 +22,7 @@ public class Lotto {
         }
 
         for (int number : numbers) {
-            this.lottoNumbers.add(new LottoNumber(number));
+            this.lottoNumbers.add(LottoNumberFactory.valueOf(number));
         }
     }
 
@@ -61,7 +61,7 @@ public class Lotto {
     }
 
     boolean hasNumber(LottoNumber lottoNumber) {
-        return lottoNumbers.stream().anyMatch(n -> n.equals(lottoNumber));
+        return lottoNumbers.contains(lottoNumber);
     }
 
     @Override

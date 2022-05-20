@@ -15,7 +15,7 @@ public class Winner {
 
     public Winner(Set<Integer> winningNumbers, int bonusNumber) {
         this.winningLotto = new Lotto(winningNumbers);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = LottoNumberFactory.valueOf(bonusNumber);
         if (winningLotto.hasNumber(this.bonusNumber)) {
             throw new IllegalArgumentException("당첨 번호의 숫자는 보너스 넘버로 입력할 수 없습니다");
         }

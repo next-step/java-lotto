@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    int number;
+    private final int number;
 
     LottoNumber(int number) {
         this.number = number;
