@@ -22,9 +22,4 @@ public class WinningTest {
     void matchWinReturnBonus() {
         assertThat(winning.matchWin(myLottery.lotteryNumbers)).isEqualTo(Reward.of(5, true));
     }
-
-    @Test
-    void shouldCount1() {
-        assertThat(winning.countWin(new LotteryNumber(1))).isEqualTo(1);
-    }
 }

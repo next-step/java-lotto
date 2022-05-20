@@ -293,7 +293,7 @@ Earning rate: 400000.0
 - [x] rename Reward.money -> winningMoney, Reward.win -> countOfMatch 
 - [ ] rename Reward.hasEqualMoney -> equals overriding?
   - equals 가 별도로 존재하며 hasEqualValue 는 두개 의 인스턴스변수 중 value 만 비교하므로 그대로 두었습니다ㅠ
-- [ ] Winning.countWin private으로 변경
+- [x] Winning.countWin private 으로 변경
 - [ ] Winning.matchWin 의 인자 List -> Lottery 사용
 
 ### bug fix

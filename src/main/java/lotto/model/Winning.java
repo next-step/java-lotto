@@ -24,7 +24,7 @@ public class Winning {
         return Reward.of(win, false);
     }
 
-    public int countWin(LotteryNumber number) {
+    private int countWin(LotteryNumber number) {
         if (this.answer.lotteryNumbers.contains(number)) {
             return 1;
         }
