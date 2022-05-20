@@ -12,12 +12,12 @@ public enum Reward {
     BONUS(5, 30_000_000),
     SIX(6, 2000000000);
 
-    private int win;
-    private int money;
+    private final int countOfMatch;
+    private final int winningMoney;
 
-    Reward(int win, int money) {
-        this.money = money;
-        this.win = win;
+    Reward(int win, int winningMoney) {
+        this.winningMoney = winningMoney;
+        this.countOfMatch = win;
     }
 
     public static Reward of(int win, boolean isBonus) {
@@ -25,7 +25,7 @@ public enum Reward {
             return BONUS;
         }
         return Arrays.stream(Reward.values())
-                .filter(reward -> reward.win == win)
+                .filter(reward -> reward.countOfMatch == win)
                 .findFirst()
                 .orElse(Blank);
     }
@@ -35,18 +35,17 @@ public enum Reward {
         for (Reward reward : Arrays.stream(Reward.values())
                 .filter(reward -> reward != Blank)
                 .collect(Collectors.toList())) {
-            String sentence = "₩" + reward.money;
+            String sentence = "₩" + reward.winningMoney;
             payload.append(reward.toString() + " matches (" + sentence + "): " + matches.get(reward) + "\n");
         }
         return payload.toString();
     }
 
     public int calculateEarnedMoney(Integer win) {
-        return this.money * win;
+        return this.winningMoney * win;
     }
-
     public boolean hasEqualMoney(int expected) {
-        return this.money == expected;
+        return this.winningMoney == expected;
     }
 };
 

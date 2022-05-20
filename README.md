@@ -290,7 +290,7 @@ Earning rate: 400000.0
   - [x] LotteryBox.numbers
   - [x] Reward의 constructor
 - [x] for문 대신 List의 subList() 사용
-- [ ] rename Reward.money -> countOfMatch
+- [x] rename Reward.money -> winningMoney, Reward.win -> countOfMatch 
 - [ ] rename Reward.hasEqualMoney -> eqauls overriding
 - [ ] Winning.countWin private으로 변경
 - [ ] Winning.matchWin 의 인자 List -> Lottery 사용
