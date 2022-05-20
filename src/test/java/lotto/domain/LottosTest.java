@@ -23,7 +23,7 @@ class LottosTest {
         Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9));
         Lotto lotto2 = new Lotto(Arrays.asList(10, 11, 12, 13, 14, 15));
         Lotto lotto3 = new Lotto(Arrays.asList(1, 7, 9, 12, 15, 17));
-        Lotto winningLotto = new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12));
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList(7, 8, 9, 10, 11, 12), 1);
 
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
         int[] totalRank = lottos.getTotalRank(winningLotto);

@@ -20,7 +20,6 @@ public class LottoAutoMachine {
     public static Lotto makeLotto() {
         Collections.shuffle(numberPool);
         List<Integer> integers = numberPool.subList(LOTTO_START_INDEX, LOTTO_END_INDEX);
-        Collections.sort(integers);
         return new Lotto(integers);
     }
 

@@ -17,24 +17,31 @@ public class Lotto {
         validLottoNumberCount(this.numbers);
     }
 
-
     private void validLottoNumberCount(Set<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_COUNT) {
             throw new IllegalArgumentException("로또 번호는 6개입니다.");
         }
     }
 
-
     public Set<LottoNumber> getNumbers() {
         return Collections.unmodifiableSet(numbers);
     }
 
-    public int getRank(Lotto winner) {
-        return ConfirmationOfWinning.getRank(winner, this);
+    public Rank getRank(WinningLotto winningLotto) {
+        return Rank.valueOf(getMathCount(winningLotto), winningLotto.isMatchBonus(this));
     }
 
     public String getLottoNumberString() {
-        return numbers.toString();
+        return numbers.stream()
+                .sorted(LottoNumber::compareTo)
+                .collect(Collectors.toList())
+                .toString();
+    }
+
+    private int getMathCount(WinningLotto winningLotto) {
+        return (int) numbers.stream()
+                .filter(lottoNumber -> winningLotto.getNumbers().contains(lottoNumber))
+                .count();
     }
 
 }

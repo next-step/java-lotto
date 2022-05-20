@@ -21,19 +21,19 @@ public class Lottos {
         return lottos.size();
     }
 
-    public int[] getTotalRank(Lotto winningLotto) {
+    public int[] getTotalRank(WinningLotto winningLotto) {
         int[] totalLottoRank = new int[5];
         for (int i = 0; i < 5; i++) {
             totalLottoRank[i] = 0;
         }
 
         for (Lotto buyingLotto : lottos) {
-            totalLottoRank[buyingLotto.getRank(winningLotto) - 1]++;
+            totalLottoRank[buyingLotto.getRank(winningLotto).ordinal() - 1]++;
         }
         return totalLottoRank;
     }
 
-    public int getTotalWinningMoney(Lotto winningLotto) {
+    public int getTotalWinningMoney(WinningLotto winningLotto) {
         return WinningMoneyCalculator.getTotalWinningMoney(winningLotto, this);
     }
 }
