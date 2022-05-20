@@ -24,8 +24,9 @@ public class Money {
         return this.value >= LOTTERY_PRICE;
     }
 
-    public void pay(int amount) {
-        this.value -= LOTTERY_PRICE * amount;
+    public Money pay(int amount) {
+//        this.value  = new Money(this.value - (LOTTERY_PRICE * amount));
+        return new Money(this.value - (LOTTERY_PRICE * amount));
     }
 
     public double profitRate(int earnedMoney) {

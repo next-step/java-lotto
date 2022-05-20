@@ -5,7 +5,6 @@ import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.TreeSet;
@@ -109,8 +108,8 @@ public class LotteryController {
         throw new NullPointerException("No input found.");
     }
 
-    private void payManualLotteries(Money money, int amount) {
-        money.pay(amount);
+    private Money payManualLotteries(Money money, int amount) {
+        return money.pay(amount);
     }
 
     private void scanManualLotteries(int amount) {
@@ -129,7 +128,7 @@ public class LotteryController {
         Money money = this.scanMoney();
         int amount = this.scanManualLotteryAmount();
         this.scanManualLotteries(amount);
-        this.payManualLotteries(money, amount);
+        money = this.payManualLotteries(money, amount);
         this.createLotteries(money);
         this.printLotteries();
         Winning winning = new Winning(this.scanAnswer(), this.scanBonus());

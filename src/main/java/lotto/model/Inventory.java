@@ -26,17 +26,20 @@ public class Inventory {
     }
 
     public void createLotteries(Money money) {
+//        while (money.enough()) {
+//            buyLottery(money);
+//        }
         while (money.enough()) {
-            buyLottery(money);
+            money = buyLottery(money);
         }
     }
 
-    public void buyLottery(Money money) {
+    public Money buyLottery(Money money) {
         if (!money.enough()) {
             throw new IllegalCallerException("Not enough money.");
         }
-        money.pay(1);
         this.lotteries.add(new Lottery());
+        return money.pay(1);
     }
 
     public int getLotteriesSize() {
