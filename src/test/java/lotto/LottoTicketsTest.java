@@ -36,7 +36,7 @@ public class LottoTicketsTest {
         Integer[] nums2 = {1, 2, 3, 10, 11, 12}; // 3
         LottoTicket lottoTicket2 = new LottoTicket(nums2);
 
-        LottoTickets lottoTickets = new LottoTickets(List.of(lottoTicket1, lottoTicket2));
+        LottoTickets lottoTickets = new LottoTickets(null, List.of(lottoTicket1, lottoTicket2));
 
         LottoNumber bonusBall = new LottoNumber(44);
         Map<Rank, Long> rankMap = lottoTickets.getRankMap(winningTicket, bonusBall);
