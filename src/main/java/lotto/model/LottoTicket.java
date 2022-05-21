@@ -59,7 +59,7 @@ public class LottoTicket {
         }
     }
 
-    public List<LottoNumber> getLottoTicket(){
+    public List<LottoNumber> getLottoNumberList(){
         return lottoNumbers;
     }
 

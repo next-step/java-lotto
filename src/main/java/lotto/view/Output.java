@@ -3,7 +3,6 @@ package lotto.view;
 import lotto.model.*;
 
 import java.text.DecimalFormat;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -45,7 +44,7 @@ public class Output {
 
     private static void printTicket(LottoTicket lottoTicket) {
         String string = "[" +
-                lottoTicket.getLottoTicket().stream()
+                lottoTicket.getLottoNumberList().stream()
                         .map(LottoNumber::getNumber)
                         .map(String::valueOf)
                         .collect(Collectors.joining(",")) +
