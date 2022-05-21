@@ -15,15 +15,22 @@ public class LottoTickets {
     private final List<LottoTicket> autoLottoTickets;
 
     public LottoTickets(List<LottoTicket> manualLottoTickets, List<LottoTicket> autoLottoTickets) {
+        validate(manualLottoTickets, autoLottoTickets);
         this.manualLottoTickets = unmodifiableList(manualLottoTickets);
         this.autoLottoTickets = unmodifiableList(autoLottoTickets);
     }
 
-    public Map<Rank, Long> getRankMap(LottoTicket winningNumbers, LottoNumber bonusBall){
-        return getMergedLottoTickets().stream()
+    public void validate(List<LottoTicket> manualLottoTickets, List<LottoTicket> autoLottoTickets){
+        if(manualLottoTickets == null || autoLottoTickets == null){
+            throw new IllegalArgumentException("로또 티켓리스트가 널값입니다.");
+        }
+    }
+
+    public LottoResult getRankMap(LottoTicket winningNumbers, LottoNumber bonusBall){
+        return new LottoResult(getMergedLottoTickets().stream()
                 .map(ticket -> ticket.getRank(winningNumbers, bonusBall))
                 .filter(Rank::isWin)
-                .collect(groupingBy(Function.identity(), Collectors.counting()));
+                .collect(groupingBy(Function.identity(), Collectors.counting())));
     }
 
     public List<LottoTicket> getMergedLottoTickets(){
