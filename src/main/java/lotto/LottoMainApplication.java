@@ -17,8 +17,8 @@ public class LottoMainApplication {
     int manualPurchaseLotto = InputView.requestManualPurchaseLotto();
     List<String> manualLottoNumbers = InputView.requestManualLottoNumber(manualPurchaseLotto);
     LotteryShop lotteryShop = new LotteryShop();
-    LottoTickets lottoTickets = lotteryShop.sell(amount, new RandomNumbers());
-    ResultView.printLottoCount(lottoTickets.size());
+    LottoTickets lottoTickets = lotteryShop.sell(amount, new RandomNumbers(), manualLottoNumbers);
+    ResultView.printLottoCount(lottoTickets.randomLottoCount());
     ResultView.printLottoTickets(lottoTickets);
 
     String inputWinningLottoNumbers = InputView.requestLastWeekWinNumbers();

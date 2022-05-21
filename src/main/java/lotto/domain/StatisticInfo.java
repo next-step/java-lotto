@@ -14,7 +14,7 @@ public class StatisticInfo {
       Money lottoPrice) {
     validate(winningLottoTicket, lottoTickets, lottoPrice);
     return new StatisticInfo(createStatistics(winningLottoTicket, lottoTickets),
-        lottoPrice.multiply(lottoTickets.size()));
+        lottoPrice.multiply(lottoTickets.randomLottoCount()));
   }
 
   private static Statistics createStatistics(WinningLottoTicket winningLottoTicket,

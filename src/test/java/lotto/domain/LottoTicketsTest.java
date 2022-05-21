@@ -28,7 +28,7 @@ class LottoTicketsTest {
   @ParameterizedTest
   @MethodSource("provideSize")
   void size(LottoTickets lottoTickets, int expected) {
-    assertThat(lottoTickets.size()).isEqualTo(expected);
+    assertThat(lottoTickets.randomLottoCount()).isEqualTo(expected);
   }
 
   private static Stream<Arguments> provideSize() {
