@@ -105,7 +105,8 @@ public class LotteryController {
         if (scanned.isPresent()) {
             return Integer.parseInt(scanned.get());
         }
-        throw new NullPointerException("No input found.");
+        System.out.println(PAYLOAD_NO_INPUT);
+        return this.scanBonus();
     }
 
     private Money payManualLotteries(Money money, int amount) {
@@ -121,8 +122,10 @@ public class LotteryController {
         if (scanned.isPresent()) {
             return Integer.parseInt(scanned.get());
         }
-        throw new NullPointerException("No input found");
+        System.out.println(PAYLOAD_NO_INPUT);
+        return this.scanManualLotteryAmount();
     }
+
 
     public void start() {
         Money money = this.scanMoney();

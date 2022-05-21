@@ -301,3 +301,4 @@ Earning rate: 400000.0
 - [x] 보너스 번호 확인 시 manual 도 확인 필요
   - [x] Winning.bonus 내 contains 동작에 대한 테스트 추가 (evaluateBonus)
 - [x] Winning 모든 테스트 추가
+- [x] scanManualLotteryAmount, scanBonus 에 null handling 추가
