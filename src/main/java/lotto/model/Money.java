@@ -5,8 +5,8 @@ import java.util.Objects;
 import static lotto.util.Const.LOTTERY_PRICE;
 
 public class Money {
-    private int value;
-    private int investedMoney;
+    private final int value;
+    private final int investedMoney;
 
     public Money(int value) {
         if (value < 0) {
@@ -16,16 +16,17 @@ public class Money {
         this.investedMoney = value;
     }
 
-    public String toPayload() {
-        return "₩" + this.value;
+    public Money(int value, int investedMoney) {
+        this.value = value;
+        this.investedMoney = investedMoney;
     }
 
     boolean enough() {
         return this.value >= LOTTERY_PRICE;
     }
 
-    void pay() {
-        this.value -= LOTTERY_PRICE;
+    public Money pay(int amount) {
+        return new Money(this.value - (LOTTERY_PRICE * amount), this.investedMoney);
     }
 
     public double profitRate(int earnedMoney) {
@@ -60,8 +61,10 @@ public class Money {
         return Objects.hash(value, investedMoney);
     }
 
-    public int calc(Integer win) {
-        return this.value * win;
+    public boolean hasEqualInvestedMoney(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Money money = (Money) o;
+        return investedMoney == money.investedMoney;
     }
-
 }

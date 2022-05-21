@@ -39,19 +39,31 @@ public class LotteryTest {
 
     @Test
     void shouldFindSixNumbers() {
-        assertThat(LotteryBox.findSixNumbers()).hasSize(6);
+        assertThat(LotteryBox.createLottery()).hasSize(6);
         assertThat(lottery.lotteryNumbers).hasSize(6);
-    }
-
-    @Test
-    void shouldSortAscend() {
-        assertThat(LotteryBox.sort(Lottery.toLotteryNumbers(Arrays.asList(2, 3, 1)))).isEqualTo(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3)));
     }
 
     @Test
     void findWin() {
         Lottery lottery = new Lottery(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        Winning winning = new Winning(new Lottery(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6))),0);
+        Winning winning = new Winning(new Lottery(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6))),7);
         assertThat(lottery.findWin(winning)).isEqualTo(Reward.of(6, false));
+    }
+
+    @Test
+    void toLotteryNumbersReturnTreeSet() {
+        assertThat(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6))).isInstanceOf(TreeSet.class);
+    }
+
+    @Test
+    void LotteryShouldNotHaveDuplicatedNumber() {
+        Lottery lottery = new Lottery(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 6)));
+        assertThat(lottery.lotteryNumbers).hasSize(6);
+    }
+
+    @Test
+    void evaluateBonus() {
+        Lottery lottery = new Lottery(Lottery.toLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 6)));
+        assertThat(lottery.bonus(1).isPresent()).isTrue();
     }
 }

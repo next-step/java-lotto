@@ -1,25 +1,29 @@
 package lotto.model;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Lottery {
-    public final List<LotteryNumber> lotteryNumbers;
+    public final TreeSet<LotteryNumber> lotteryNumbers;
 
     public Lottery() {
         this.lotteryNumbers = createLottery();
     }
 
-    public Lottery(List<LotteryNumber> lotteryNumbers) {
+    public Lottery(TreeSet<LotteryNumber> lotteryNumbers) {
         this.lotteryNumbers = lotteryNumbers;
     }
 
-    public static List<LotteryNumber> toLotteryNumbers(List<Integer> numbers) {
-        return numbers.stream().map(number -> new LotteryNumber(number)).collect(Collectors.toList());
+    public static TreeSet<LotteryNumber> toLotteryNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .map(number -> new LotteryNumber(number))
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 
-    private List<LotteryNumber> createLottery() {
-        return LotteryBox.findSixNumbers();
+    private TreeSet<LotteryNumber> createLottery() {
+        return LotteryBox.createLottery();
     }
 
     @Override
@@ -28,18 +32,31 @@ public class Lottery {
     }
 
     public Reward findWin(Winning winning) {
-        int win = 0;
-        for (LotteryNumber lotteryNumber : this.lotteryNumbers) {
-            win += winning.doesMatchAnswer(lotteryNumber);
-        }
-        if (win == 5 && hasBonus(winning) != null) {
-            return hasBonus(winning);
-        }
-        return Reward.of(win, false);
+        return winning.matchWin(this);
     }
 
-    public Reward hasBonus(Winning winning) {
-        return winning.doesMatchBonus(this.lotteryNumbers);
+    public int countMatches(Lottery answer) {
+        int match = 0;
+        for (LotteryNumber lotteryNumber:this.lotteryNumbers
+             ) {
+            match += this.countMatch(lotteryNumber, answer);
+        }
+        return  match;
+
+    }
+
+    private int countMatch(LotteryNumber lotteryNumber, Lottery answer) {
+        if (answer.lotteryNumbers.contains(lotteryNumber)) {
+            return 1;
+        }
+        return 0;
+    }
+
+    public Optional<Reward> bonus(int bonusNumber) {
+            if (this.lotteryNumbers.contains(new LotteryNumber(bonusNumber))) {
+                return Optional.ofNullable(Reward.of(5, true));
+            }
+            return null;
     }
 }
 

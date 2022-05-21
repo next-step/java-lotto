@@ -5,8 +5,11 @@ import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.TreeSet;
+
+import static lotto.util.Const.PAYLOAD_NO_INPUT;
 
 public class LotteryController {
     public Inventory inventory = new Inventory();
@@ -16,9 +19,14 @@ public class LotteryController {
     }
 
     public Money scanMoney() {
-        String scanned = InputView.scan("Put your money.");
-        return new Money(Integer.parseInt(scanned));
+        Optional<String> scanned = InputView.scanWithPayload("Put your money.");
+        if (scanned.isPresent()) {
+            return new Money(Integer.parseInt(scanned.get()));
+        }
+        System.out.println(PAYLOAD_NO_INPUT);
+        return this.scanMoney();
     }
+
 
     public void createLotteries(Money money) {
         this.inventory.createLotteries(money);
@@ -29,23 +37,36 @@ public class LotteryController {
     }
 
     public Lottery scanAnswer() {
-        String scanned = InputView.scan("Put lottery answer.");
-        return new Lottery(parseAnswerNumbers(scanned));
+        Optional<String> scanned = InputView.scanWithPayload("Put lottery answer.");
+        if (scanned.isPresent()) {
+            try {
+                return new Lottery(parseNumbers(scanned.get()));
+            } catch (Exception e) {
+                System.out.println(e);
+                return this.scanAnswer();
+            }
+        }
+        System.out.println(PAYLOAD_NO_INPUT);
+        return this.scanAnswer();
     }
 
-    public List<LotteryNumber> parseAnswerNumbers(String scanned) {
-        return toLotteryNumbers(scanned.split("\\s*,\\s*"));
+    public static TreeSet<LotteryNumber> parseNumbers(String scanned) {
+        String[] numbers = scanned.split("\\s*,\\s*");
+        if (numbers.length != 6) {
+            throw new IllegalArgumentException("Wrong input found: '" + String.join(",", numbers) + "', try again.");
+        }
+        return toLotteryNumbers(numbers);
     }
 
-    public List<LotteryNumber> toLotteryNumbers(String[] numberStrings) {
-        List<LotteryNumber> list = new ArrayList();
+    public static TreeSet<LotteryNumber> toLotteryNumbers(String[] numberStrings) {
+        TreeSet<LotteryNumber> list = new TreeSet();
         for (String numberString : numberStrings) {
             list.add(toLotteryNumber(numberString));
         }
         return list;
     }
 
-    public LotteryNumber toLotteryNumber(String numberString) {
+    public static LotteryNumber toLotteryNumber(String numberString) {
         int number = Integer.parseInt(numberString);
         return new LotteryNumber(number);
     }
@@ -80,12 +101,37 @@ public class LotteryController {
     }
 
     public int scanBonus() {
-        String scanned = InputView.scan("Put bonus number.");
-        return Integer.parseInt(scanned);
+        Optional<String> scanned = InputView.scanWithPayload("Put bonus number.");
+        if (scanned.isPresent()) {
+            return Integer.parseInt(scanned.get());
+        }
+        System.out.println(PAYLOAD_NO_INPUT);
+        return this.scanBonus();
     }
+
+    private Money payManualLotteries(Money money, int amount) {
+        return money.pay(amount);
+    }
+
+    private void scanManualLotteries(int amount) {
+        this.inventory.scanManualLotteries(amount);
+    }
+
+    private int scanManualLotteryAmount() {
+        Optional<String> scanned = InputView.scanWithPayload("Put the amount of manual lotteries");
+        if (scanned.isPresent()) {
+            return Integer.parseInt(scanned.get());
+        }
+        System.out.println(PAYLOAD_NO_INPUT);
+        return this.scanManualLotteryAmount();
+    }
+
 
     public void start() {
         Money money = this.scanMoney();
+        int amount = this.scanManualLotteryAmount();
+        this.scanManualLotteries(amount);
+        money = this.payManualLotteries(money, amount);
         this.createLotteries(money);
         this.printLotteries();
         Winning winning = new Winning(this.scanAnswer(), this.scanBonus());
@@ -94,4 +140,5 @@ public class LotteryController {
         this.printEarningRate(money);
         this.printEarned(money);
     }
+
 }

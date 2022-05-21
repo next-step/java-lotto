@@ -225,3 +225,94 @@ Earning rate: 2142.8571428571427
 - [x] LotteryController 부분을 하나의 메서드로 묶기
 - [x] Winning이 Reward를 반환
 - [x] 각 클래스에 대한 패키지 분리
+
+### Requested changes - phase3
+
+- [x] 로또 당첨 결과 반환을 Winning이 수행하도록 변경
+    - [x] doesMatchAnswer, doesMatchBonus 를 하나의 메소드로 병합
+- [x] LotteryNumber 테스트 추가
+- [x] LotteryBox 에 List 대신 Set을 사용하여 중복 허용 막기, 테스트 확인
+- [x] findSixNumbers -> createLottery 로 이름 변경
+- [x] Reward는 Money 대신 원시값(int or long)를 가지게, Money.calc() 제거
+
+## Step4
+
+### Requirements
+
+- [x] 수동으로 구매할 번호를 입력해 주세요. 출력 후 수동 로또는 입력 받음
+- [x] createLotteries 에서 수동 만큼 차감한 개수를 적용 - payManualLotteries
+- [x] 수동으로 구매한 개수, 자동으로 구매된 개수 출력 후 전체 로또 번호 나열
+    - [x] 수동을 먼저 보여주고 자동을 나중에 분류해서 보여준다
+- [x] Answer match 시 수동도 포함
+- [x] Optional 적용하여 NullPointerException 발생하지 않게 하기
+- [x] 잘못된 값을 입력 했을 때 예외 처리
+
+### Result output
+
+```
+> Task :LotteryApp.main()
+Put your money.
+
+No input found. try again.
+Put your money.
+3000
+Put the amount of manual lotteries
+
+No input found. try again.
+Put the amount of manual lotteries
+1
+Put manual lottery.(1 times)
+1,2,3,4,5
+java.lang.IllegalArgumentException: Wrong input found: '1,2,3,4,5', try again.
+1,2,3,4,5,6
+1 manual lotteries are purchased.
+[1, 2, 3, 4, 5, 6]
+2 auto lotteries are purchased.
+[17, 18, 19, 27, 29, 37]
+[4, 8, 11, 21, 25, 29]
+Put lottery answer.
+1,2,3,4,
+java.lang.IllegalArgumentException: Wrong input found: '1,2,3,4', try again.
+Put lottery answer.
+1,2,3,4,5,7
+Put bonus number.
+
+No input found. try again.
+Put bonus number.
+6
+Win Statistics
+------------------
+THREE matches (₩5000): 0
+FOUR matches (₩50000): 0
+FIVE matches (₩1500000): 0
+BONUS matches (₩30000000): 1
+SIX matches (₩2000000000): 0
+
+Earning rate: 10000.0
+📈Earned!
+```
+
+### Requested change
+- [x] trycatch 제거
+  - [x] scanMoney 입력이 null 인 경우에 다시 입력 받는 로직 추가
+  - [x] scanManualLottery null 혹은 parseNumber 실패시 재시도 
+  - [x] scanAnswer null 혹은 parseNumber 실패시 재시도
+- [x] LotteryBox 는 List로 원복, Lottery에 Set을 사용
+- [x] Money.pay manipulate 가 아닌 새로운 Money 객체 생성 
+- [x] 한 줄에 점을 하나만 찍는다
+  - [x] LotteryBox.numbers
+  - [x] Reward의 constructor
+- [x] for문 대신 List의 subList() 사용
+- [x] rename Reward.money -> winningMoney, Reward.win -> countOfMatch 
+- [ ] rename Reward.hasEqualMoney -> equals overriding?
+  - equals 가 별도로 존재하며 hasEqualValue 는 두개 의 인스턴스변수 중 value 만 비교하므로 그대로 두었습니다ㅠ
+- [x] Winning.countWin private 으로 변경
+- [x] Winning.matchWin 의 인자 List -> Lottery 사용
+  - [x] rename to countMatch, Move to Lottery
+
+### bug fix
+- [x] 보너스 번호 확인 시 manual 도 확인 필요
+  - [x] Winning.bonus 내 contains 동작에 대한 테스트 추가 (evaluateBonus)
+- [x] Winning 모든 테스트 추가
+- [x] scanManualLotteryAmount, scanBonus 에 null handling 추가
+- [x] add constructor Money(int, int), add test investedMoneyShouldBeReserved

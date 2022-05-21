@@ -5,8 +5,8 @@ import lotto.model.Lottery;
 import java.util.List;
 
 public class ResultView {
-    public static void printLotteries(List<Lottery> lotteries) {
-        System.out.printf("%d lotteries are purchased.\n", lotteries.size());
+    public static void printLotteries(List<Lottery> lotteries, String payload) {
+        System.out.printf("%d %s lotteries are purchased.\n", lotteries.size(), payload);
         for (Lottery lottery : lotteries) {
             System.out.println(lottery);
         }

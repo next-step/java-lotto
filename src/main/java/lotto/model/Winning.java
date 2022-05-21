@@ -1,10 +1,6 @@
 package lotto.model;
 
-import lotto.model.Lottery;
-import lotto.model.LotteryNumber;
-import lotto.model.Reward;
-
-import java.util.List;
+import java.util.Optional;
 
 public class Winning {
     private final int bonusNumber;
@@ -15,18 +11,12 @@ public class Winning {
         this.bonusNumber = bonusNumber;
     }
 
-    public int doesMatchAnswer(LotteryNumber number) {
-        if (this.answer.lotteryNumbers.contains(number)) {
-            return 1;
+    public Reward matchWin(Lottery lottery) {
+        Optional<Reward> bonus = lottery.bonus(this.bonusNumber);
+        int match = lottery.countMatches(this.answer);
+        if (match == 5 && bonus.isPresent() ) {
+            return bonus.get();
         }
-        return 0;
+        return Reward.of(match, false);
     }
-
-    public Reward doesMatchBonus(List<LotteryNumber> numbers) {
-        if (numbers.contains(this.bonusNumber)) {
-            return Reward.of(5, true);
-        }
-        return null;
-    }
-
 }

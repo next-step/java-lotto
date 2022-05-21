@@ -14,7 +14,7 @@ public class RewardTest {
     void rewardOfWinShouldMatchWithPrice(String win, String price) {
         int winI = Integer.parseInt(win);
         Reward reward = Reward.of(winI, false);
-        Money expected = new Money(Integer.parseInt(price));
+        int expected = Integer.parseInt(price);
         assertThat(reward.hasEqualMoney(expected)).isTrue();
     }
 
