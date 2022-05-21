@@ -1,12 +1,16 @@
 package lotto.domain;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoTickets {
 
   private final List<LottoTicket> randomTickets;
   private final List<LottoTicket> manualTickets;
+  private final List<LottoTicket> lottoTickets;
 
   public static LottoTickets of(List<LottoTicket> manualTickets, List<LottoTicket> randomTickets) {
     return new LottoTickets(manualTickets, randomTickets);
@@ -20,6 +24,9 @@ public class LottoTickets {
     validate(manualTickets, randomTickets);
     this.manualTickets = manualTickets;
     this.randomTickets = randomTickets;
+    lottoTickets = Stream.of(manualTickets, randomTickets)
+        .flatMap(Collection::stream)
+        .collect(Collectors.toList());
   }
 
   private static void validate(List<LottoTicket> manualTickets, List<LottoTicket> randomTickets) {
@@ -40,11 +47,11 @@ public class LottoTickets {
   }
 
   public List<LottoTicket> tickets() {
-    return Collections.unmodifiableList(randomTickets);
+    return Collections.unmodifiableList(lottoTickets);
   }
 
   public int getMatchedCountPerPrize(Prize prize, WinningLottoTicket winningLottoTicket) {
-    return (int) randomTickets.stream()
+    return (int) lottoTickets.stream()
         .map(lottoTicket -> Prize.of(lottoTicket.countMatched(winningLottoTicket),
             winningLottoTicket.matchBonusBall(lottoTicket)))
         .filter(prize::equals)

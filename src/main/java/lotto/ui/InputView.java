@@ -4,6 +4,8 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
 
@@ -22,7 +24,7 @@ public class InputView {
 
   public static String requestLastWeekWinNumbers() {
     printStream.println(REQUEST_WIN_NUMBERS);
-    return scanner.next();
+    return scanner.nextLine();
   }
 
   public static String requestBonusBallNumber() {
@@ -36,11 +38,17 @@ public class InputView {
   }
 
   public static List<String> requestManualLottoNumber(int count) {
+    scanner.nextLine(); // flush buffer
     printStream.println(REQUEST_MANUAL_LOTTO_NUMBER);
-    List<String> list = new ArrayList<>(count);
-    for (int i = 0; i < count; i++) {
-      list.add(scanner.next());
+    return IntStream.range(0, count)
+        .mapToObj(i -> getNextLine())
+        .collect(Collectors.toCollection(() -> new ArrayList<>(count)));
+  }
+
+  private static String getNextLine() {
+    if (scanner.hasNextLine()) {
+      return scanner.nextLine();
     }
-    return list;
+    return null;
   }
 }

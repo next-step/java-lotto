@@ -8,16 +8,22 @@ import java.util.List;
 public class WinningLottoTicket extends LottoTicket {
 
   private static final String DELIMITER = ",";
+  private static final String WHITESPCE_REGEX = "\\s+";
 
   private final BonusBallNumber bonusBallNumber;
 
   public static WinningLottoTicket of(String lottoNumbers, String bonusNumber) {
     validate(lottoNumbers, bonusNumber);
 
-    return new WinningLottoTicket(Splitter.split(lottoNumbers, DELIMITER)
+    return new WinningLottoTicket(splitAsList(lottoNumbers), Integer.parseInt(bonusNumber));
+  }
+
+  private static List<Integer> splitAsList(String lottoNumbers) {
+    return Splitter.split(lottoNumbers, DELIMITER)
         .stream()
+        .map(WinningLottoTicket::removeWhitespace)
         .map(Integer::parseInt)
-        .collect(toList()), Integer.parseInt(bonusNumber));
+        .collect(toList());
   }
 
   private static void validate(String lottoNumbers, String bonusNumber) {
@@ -33,6 +39,10 @@ public class WinningLottoTicket extends LottoTicket {
   private WinningLottoTicket(List<Integer> lottoNumbers, Integer bonusBallNumber) {
     super(lottoNumbers);
     this.bonusBallNumber = BonusBallNumber.createBonusBallNumber(this, bonusBallNumber);
+  }
+
+  private static String removeWhitespace(String s) {
+    return s.replaceAll(WHITESPCE_REGEX, "");
   }
 
   public boolean matchBonusBall(LottoTicket lottoTicket) {

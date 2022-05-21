@@ -13,6 +13,7 @@ public class LotteryShop {
 
   public static final Money PRICE_PER_PLAY_FOR_LOTTO = Money.createWon(1000);
   private static final String DELIMITER = ",";
+  private static final String WHITESPACE_REGEX = "\\s+";
   private static final int START_TICKET_COUNT = 0;
 
   public LottoTickets sell(Money purchaseAmount, GenerateNumbersStrategy generateNumbersStrategy) {
@@ -88,8 +89,13 @@ public class LotteryShop {
   private static List<Integer> splitAsList(String string) {
     return Splitter.split(string, DELIMITER)
         .stream()
+        .map(LotteryShop::removeWhitespace)
         .map(Integer::parseInt)
         .collect(toList());
+  }
+
+  private static String removeWhitespace(String s) {
+    return s.replaceAll(WHITESPACE_REGEX, "");
   }
 
   private LottoTicket createLottoTicket(List<Integer> lottoNumbers) {

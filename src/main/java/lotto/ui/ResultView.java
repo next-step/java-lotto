@@ -12,7 +12,7 @@ import lotto.domain.StatisticInfo;
 public class ResultView {
 
   private static final double MINIMUM_PROFIT_RATE = 1.0;
-  private static final String PURCHASED_LOTTO_COUNT = "개를 구매했습니다.";
+  private static final String PURCHASED_LOTTO_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
   private static final String STATISTICS_HEAD = "당첨 통계";
   private static final String HEAD_BODY_SPLIT_LINE = "---------";
   private static final String STATISTIC_DETAIL_FORMAT = "%d개 일치 (%s)- %d개";
@@ -22,8 +22,8 @@ public class ResultView {
   private static final String LOSS = "손해";
   private static final PrintStream printStream = System.out;
 
-  public static void printLottoCount(int lottoCount) {
-    printStream.println(lottoCount + PURCHASED_LOTTO_COUNT);
+  public static void printLottoCount(int manual, int random) {
+    printStream.printf(PURCHASED_LOTTO_COUNT, manual, random);
   }
 
   public static void printLottoTickets(LottoTickets lottoTickets) {
