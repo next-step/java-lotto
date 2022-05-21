@@ -14,15 +14,15 @@ public class LottoNumberTest {
 	@DisplayName("로또번호 동등성 비교")
 	@Test
 	public void When_lottoNumberCreatedSameNum_expected_equalObject() {
-		LottoNumber lottoNumber = LottoNumber.of(4);
+		LottoNumber lottoNumber = LottoNumber.from(4);
 
-		assertThat(lottoNumber.equals(LottoNumber.of(4))).isTrue();
+		assertThat(lottoNumber.equals(LottoNumber.from(4))).isTrue();
 	}
 
 	@DisplayName("로또번호가 범위를 벗어난 경우 OutOfRangeException")
 	@Test
 	public void When_lottoNumberOutOfRange_expected_OutOfRangeException() {
-		assertThatThrownBy(() -> LottoNumber.of(46))
+		assertThatThrownBy(() -> LottoNumber.from(46))
 			.isInstanceOf(OutOfRangeException.class);
 	}
 
@@ -30,7 +30,7 @@ public class LottoNumberTest {
 	@NullAndEmptySource
 	@ParameterizedTest
 	public void When_lottoNumberBlankOrNull_expected_IllegalArgumentException(String blankLottoNumber) {
-		assertThatThrownBy(() -> LottoNumber.of(blankLottoNumber))
+		assertThatThrownBy(() -> LottoNumber.from(blankLottoNumber))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 }

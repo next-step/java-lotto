@@ -16,11 +16,11 @@ public class LottoNumber {
 		this.type = type;
 	}
 
-	public static LottoNumber of(int number) {
+	public static LottoNumber from(int number) {
 		return new LottoNumber(number, LottoNumberType.DEFAULT);
 	}
 
-	public static LottoNumber of(String number) {
+	public static LottoNumber from(String number) {
 		return of(number, LottoNumberType.DEFAULT);
 	}
 
@@ -35,9 +35,9 @@ public class LottoNumber {
 		}
 	}
 
-	private static void validateNumber(int number) {
+	private void validateNumber(int number) {
 		if (Range.of(LOTTO_RANGE_MIN, LOTTO_RANGE_MAX).notContain(number)) {
-			throw new OutOfRangeException("생성된 로또번호가 범위를 벗어났습니다. (범위 : " + Range.of(LOTTO_RANGE_MIN, LOTTO_RANGE_MAX) + ")");
+			throw new OutOfRangeException(String.format("생성된 로또번호가 범위를 벗어났습니다. (범위 : %s)", Range.of(LOTTO_RANGE_MIN, LOTTO_RANGE_MAX)));
 		}
 	}
 

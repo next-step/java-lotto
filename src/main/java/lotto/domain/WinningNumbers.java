@@ -14,7 +14,7 @@ public class WinningNumbers {
 
 	public WinningNumbers(String input) {
 		numbers = Stream.of(input.split(DELIMITER))
-			.map(LottoNumber::of)
+			.map(LottoNumber::from)
 			.collect(Collectors.toList());
 
 		validateSize(numbers);
@@ -22,7 +22,7 @@ public class WinningNumbers {
 
 	public WinningNumbers(String input, LottoNumber bonusNumber) {
 		numbers = Stream.of(input.split(DELIMITER))
-			.map(LottoNumber::of)
+			.map(LottoNumber::from)
 			.collect(Collectors.toList());
 
 		validateSize(numbers);

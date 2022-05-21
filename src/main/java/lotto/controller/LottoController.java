@@ -11,12 +11,6 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
-	public long calculateLottoQuantity(Amount purchaseAmount) {
-		long lottoQuantity = purchaseAmount.divide(Lotto.LOTTO_PRICE);
-
-		OutputView.printPurchaseQuantity(lottoQuantity);
-		return lottoQuantity;
-	}
 
 	public PurchaseLottoGroup purchaseLotto() {
 		long lottoQuantity = calculateLottoQuantity(new Amount(InputView.inputPurchaseAmount()));
@@ -24,6 +18,13 @@ public class LottoController {
 
 		OutputView.printPurchaseLottoGroup(purchaseLottoGroup);
 		return purchaseLottoGroup;
+	}
+
+	private long calculateLottoQuantity(Amount purchaseAmount) {
+		long lottoQuantity = purchaseAmount.divide(Lotto.LOTTO_PRICE);
+
+		OutputView.printPurchaseQuantity(lottoQuantity);
+		return lottoQuantity;
 	}
 
 	public void ranking(PurchaseLottoGroup purchaseLottoGroup) {
