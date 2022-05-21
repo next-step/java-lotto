@@ -9,13 +9,6 @@ public class LottoResult {
         this.rankMap = rankMap;
     }
 
-    public int getRankValue(Rank rank) {
-        if(rankMap.get(rank) == null){
-            return 0;
-        }
-        return rankMap.get(rank).intValue();
-    }
-
     public Map<Rank, Long> getRankTreeMap(){
         Map<Rank, Long> res = new TreeMap<>(Collections.reverseOrder());
         for (Rank rank: Rank.values()) {

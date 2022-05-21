@@ -25,11 +25,12 @@ public class LottoResultTest {
 
         LottoResult lottoResult = new LottoResult(rankMap);
 
-        Integer[] res = {2, 1, 2};
+        Long[] res = {2L, 1L, 2L};
         int coincidence = 3;
+        Map<Rank, Long> rankTreeMap = lottoResult.getRankTreeMap();
         for (int i = 0; i < res.length; i++) {
             Rank rank = Rank.of(coincidence,false);
-            assertThat(lottoResult.getRankValue(rank)).isEqualTo(res[i]);
+            assertThat(rankTreeMap.get(rank)).isEqualTo(res[i]);
             coincidence += 1;
         }
         assertThat(lottoResult.getRankValue(Rank.SECOND)).isEqualTo(1);
