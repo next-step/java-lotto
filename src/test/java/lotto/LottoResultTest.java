@@ -33,7 +33,7 @@ public class LottoResultTest {
             assertThat(rankTreeMap.get(rank)).isEqualTo(res[i]);
             coincidence += 1;
         }
-        assertThat(lottoResult.getRankValue(Rank.SECOND)).isEqualTo(1);
+        assertThat(lottoResult.getRankTreeMap().get(Rank.SECOND)).isEqualTo(1);
     }
 
     @Test
