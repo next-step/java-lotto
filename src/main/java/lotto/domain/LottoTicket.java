@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,11 +12,13 @@ public class LottoTicket {
       LOTTO_NUMBER_COUNT);
   private static final String DUPLICATED_LOTTO_NUMBERS = "[%s] 중복된 번호 포함. 로또 번호가 중복될 수 없습니다";
 
-  private final List<Integer> lottoNumbers;
+  private final List<LottoNumber> lottoNumbers;
 
   public LottoTicket(List<Integer> lottoNumbers) {
     validateLottoNumbers(lottoNumbers);
-    this.lottoNumbers = lottoNumbers;
+    this.lottoNumbers = lottoNumbers.stream()
+        .map(LottoNumber::valueOf)
+        .collect(Collectors.toList());
   }
 
   private void validateLottoNumbers(List<Integer> lottoNumbers) {
@@ -35,7 +36,8 @@ public class LottoTicket {
   }
 
   public List<Integer> getLottoNumbers() {
-    return Collections.unmodifiableList(lottoNumbers);
+    return lottoNumbers.stream().map(LottoNumber::getNumber)
+        .collect(Collectors.toUnmodifiableList());
   }
 
   public int countMatched(LottoTicket lottoTicket) {
@@ -44,7 +46,7 @@ public class LottoTicket {
         .count();
   }
 
-  public boolean contains(Integer number) {
+  public boolean contains(LottoNumber number) {
     return lottoNumbers.contains(number);
   }
 
