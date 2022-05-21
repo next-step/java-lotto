@@ -5,6 +5,7 @@ import lotto.model.*;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Output {
     private static final String LOTTO_CNT_INFO = "개를 구매했습니다.";
@@ -36,13 +37,19 @@ public class Output {
         System.out.printf("%s개 일치 (%s원)- %s개\n", rank.getCoincidence(), rank.getReward(), value);
     }
 
-    public static void printLottoTicketList(List<LottoTicket> manualLottoTickets, List<LottoTicket> autoLottoTickets) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n",manualLottoTickets.size(), autoLottoTickets.size());
-        for (LottoTicket lottoTicket: manualLottoTickets) {
-            System.out.println(lottoTicket);
-        }
-        for (LottoTicket lottoTicket: autoLottoTickets) {
-            System.out.println(lottoTicket);
-        }
+    public static void printLottoTicketList(LottoTickets lottoTickets) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n",lottoTickets.getManualLottoSize(), lottoTickets.getAutoTicketSize());
+        lottoTickets.getMergedLottoTickets()
+                .forEach(Output::printTicket);
+    }
+
+    private static void printTicket(LottoTicket lottoTicket) {
+        String string = "[" +
+                lottoTicket.getLottoTicket().stream()
+                        .map(LottoNumber::getNumber)
+                        .map(String::valueOf)
+                        .collect(Collectors.joining(",")) +
+                "]";
+        System.out.println(string);
     }
 }
