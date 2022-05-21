@@ -35,7 +35,7 @@ public class LottoTicketsTest {
         LottoTickets lottoTickets = new LottoTickets(List.of(lottoTicket1), List.of(lottoTicket2));
 
         LottoNumber bonusBall = new LottoNumber(44);
-        LottoResult lottoResult = lottoTickets.getRankMap(winningTicket, bonusBall);
+        LottoResult lottoResult = lottoTickets.getLottoResult(winningTicket, bonusBall);
 
         Map<Rank, Long> result = Map.ofEntries(
                 entry(Rank.FIRST, 0L),

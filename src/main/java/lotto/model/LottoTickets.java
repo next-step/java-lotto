@@ -2,7 +2,6 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -26,7 +25,7 @@ public class LottoTickets {
         }
     }
 
-    public LottoResult getRankMap(LottoTicket winningNumbers, LottoNumber bonusBall){
+    public LottoResult getLottoResult(LottoTicket winningNumbers, LottoNumber bonusBall){
         return new LottoResult(getMergedLottoTickets().stream()
                 .map(ticket -> ticket.getRank(winningNumbers, bonusBall))
                 .filter(Rank::isWin)

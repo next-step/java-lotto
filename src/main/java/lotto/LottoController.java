@@ -1,10 +1,10 @@
-package lotto.model;
+package lotto;
 
+import lotto.model.*;
 import lotto.view.Input;
 import lotto.view.Output;
 
 import java.util.List;
-import java.util.Map;
 
 public class LottoController {
 
@@ -19,7 +19,7 @@ public class LottoController {
         LottoTicket winningTicket =  Input.readPreWeekWinningLottoNums();
         LottoNumber bonusBall = Input.readLottoNumber();
 
-        LottoResult lottoResult = lottoTickets.getRankMap(winningTicket, bonusBall);
+        LottoResult lottoResult = lottoTickets.getLottoResult(winningTicket, bonusBall);
         Output.printWinningStatics(money, lottoResult);
     }
 

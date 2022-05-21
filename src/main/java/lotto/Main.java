@@ -1,7 +1,5 @@
 package lotto;
 
-import lotto.model.*;
-
 public class Main {
     public static void main(String[] args) {
         try {

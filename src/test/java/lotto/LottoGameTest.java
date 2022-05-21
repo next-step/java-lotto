@@ -1,5 +1,9 @@
-package lotto.model;
+package lotto;
 
+import lotto.model.LottoGame;
+import lotto.model.LottoTicket;
+import lotto.model.LottoTickets;
+import lotto.model.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.List;
