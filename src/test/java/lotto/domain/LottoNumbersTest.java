@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,5 +28,11 @@ class LottoNumbersTest {
     void 로또_번호가_정상적일때(String lottoNumberText) {
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberText);
         assertThat(lottoNumbers).isEqualTo(lottoNumbers);
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    void 로또_번호가_비어있을때(String lottoNumbersText) {
+        assertThatThrownBy(() -> new LottoNumbers(lottoNumbersText)).isInstanceOf(IllegalArgumentException.class);
     }
 }

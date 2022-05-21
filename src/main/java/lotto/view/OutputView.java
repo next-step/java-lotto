@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoNumbers;
+import lotto.domain.constant.Rank;
 import lotto.dto.LottoRankDto;
 import lotto.dto.MatchRankDto;
 
@@ -23,6 +24,9 @@ public class OutputView {
     private static final String KR_WON = "원";
     private static final String COUNT = "개";
 
+    private static final String PURCHASE_AMOUNT_MESSAGE = "구매 금액을 입력해주세요.";
+    private static final String PRINT_INPUT_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+    private static final String WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
 
     public static void printPurchaseLotto(int amount) {
         stringBuilder.append(amount)
@@ -59,9 +63,7 @@ public class OutputView {
 
     private static void printMatchResult(MatchRankDto matchRankDto) {
         for (LottoRankDto lottoRankDto : matchRankDto.getLottoRankDtos()) {
-            stringBuilder.append(lottoRankDto.getRank().getCorrespondCount())
-                    .append(WINNING_MATCH_COUNT)
-                    .append(SPACE)
+            stringBuilder.append(makeMatchAndPrizeText(lottoRankDto))
                     .append(LEFT_PARENTHESIS)
                     .append(lottoRankDto.getRank().getPrizeMoney())
                     .append(KR_WON)
@@ -74,6 +76,21 @@ public class OutputView {
         }
     }
 
+    private static String makeMatchAndPrizeText(LottoRankDto lottoRankDto) {
+        StringBuilder stringBuilder = new StringBuilder();
+        if (lottoRankDto.getRank() == Rank.SECOND) {
+            return stringBuilder.append(lottoRankDto.getRank().getCorrespondCount())
+                    .append(WINNING_MATCH_COUNT)
+                    .append(", 보너스 볼 일치")
+                    .toString();
+        }
+
+        return stringBuilder.append(lottoRankDto.getRank().getCorrespondCount())
+                .append(WINNING_MATCH_COUNT)
+                .append(SPACE)
+                .toString();
+    }
+
     private static void printBenefitRate(double benefitRate) {
         final String TOTAL_BENEFIT_RATE_MESSAGE
                 = String.format("총 수익률은 %.2f입니다. (기준이 1이기 때문 결과적으로 손해라는 의미임)", benefitRate);
@@ -84,5 +101,17 @@ public class OutputView {
 
     private static void initStringBuilder() {
         stringBuilder.setLength(0);
+    }
+
+    public static void printInputBonusNumber() {
+        System.out.println(PRINT_INPUT_BONUS_NUMBER);
+    }
+
+    public static void printPurchaseAmount() {
+        System.out.println(PURCHASE_AMOUNT_MESSAGE);
+    }
+
+    public static void printWinningNumbers() {
+        System.out.println(WINNING_NUMBERS);
     }
 }
