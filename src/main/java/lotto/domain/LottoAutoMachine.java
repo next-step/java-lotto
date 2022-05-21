@@ -17,13 +17,14 @@ public class LottoAutoMachine {
     private LottoAutoMachine() {
     }
 
-    public static Lotto makeLotto() {
+    private static Lotto makeLotto() {
         Collections.shuffle(numberPool);
         List<Integer> integers = numberPool.subList(LOTTO_START_INDEX, LOTTO_END_INDEX);
         return new Lotto(integers);
     }
 
-    public static Lottos makeLottos(int count) {
+    public static Lottos makeLottos(int paying) {
+        int count = paying / PRICE;
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottos.add(makeLotto());

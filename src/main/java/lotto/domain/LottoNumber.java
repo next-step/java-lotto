@@ -16,7 +16,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private void validLottoNumberRange(Integer number) {
         if (number > MAX_NUM || number < MIN_NUM) {
-            throw new IllegalArgumentException("로또 번호는 1~45까지만 존재합니다.");
+            throw new IllegalArgumentException(number + "이 입력되었습니다. 로또 번호는 1~45까지만 존재합니다.");
         }
     }
 
