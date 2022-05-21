@@ -288,7 +288,7 @@ FIVE matches (₩1500000): 0
 BONUS matches (₩30000000): 1
 SIX matches (₩2000000000): 0
 
-Earning rate: 15000.0
+Earning rate: 10000.0
 📈Earned!
 ```
 
@@ -315,3 +315,4 @@ Earning rate: 15000.0
   - [x] Winning.bonus 내 contains 동작에 대한 테스트 추가 (evaluateBonus)
 - [x] Winning 모든 테스트 추가
 - [x] scanManualLotteryAmount, scanBonus 에 null handling 추가
+- [x] add constructor Money(int, int), add test investedMoneyShouldBeReserved

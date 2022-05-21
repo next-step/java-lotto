@@ -46,7 +46,5 @@ public class LottoControllerTest {
         assertThat(lotteryController.winStatistics).isEqualTo(new WinStatistics(1, 0, 0, 0, 0));
     }
 
-    @Test
-    void name() {
-    }
+
 }
