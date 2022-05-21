@@ -25,4 +25,9 @@ public class InputView {
         return scanner.nextLine();
     }
 
+    public static int getManualLottoCount() {
+        OutputView.printManualLottoCount();
+        return scanner.nextInt();
+    }
+
 }
