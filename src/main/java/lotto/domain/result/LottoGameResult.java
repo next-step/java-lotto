@@ -5,14 +5,14 @@ import lotto.domain.LottoReward;
 
 public class LottoGameResult {
     private LottoMatchResults lottoMatchResults;
-    private int purchaseAmount;
+    private PurchaseAmount purchaseAmount;
 
     public LottoGameResult(int purchaseAmount) {
         this(null, purchaseAmount);
     }
 
     LottoGameResult(LottoMatchResults lottoMatchResults, int purchaseAmount) {
-        this.purchaseAmount = purchaseAmount;
+        this.purchaseAmount = new PurchaseAmount(purchaseAmount);
 
         if (lottoMatchResults == null) {
             this.lottoMatchResults = new LottoMatchResults();
@@ -30,8 +30,9 @@ public class LottoGameResult {
     }
 
     public double getYield() {
-        return (double) getTotalReward() / purchaseAmount;
+        return purchaseAmount.yield(getTotalReward());
     }
+
     public LottoMatchResults getLottoMatchResults() {
         return lottoMatchResults;
     }

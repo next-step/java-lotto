@@ -10,7 +10,7 @@ public class Lotto {
     public final static int LOTTO_END_NUMBER = 45;
     public final static int LOTTO_PRICE = 1000;
 
-    private Set<Integer> numbers;
+    private final Set<LottoNumber> lottoNumbers = new HashSet<>();
 
     Lotto(int num1, int num2, int num3, int num4, int num5, int num6) {
         this(Set.of(num1, num2, num3, num4, num5, num6));
@@ -21,30 +21,47 @@ public class Lotto {
             throw new IllegalArgumentException("숫자 " + LOTTO_LENGTH + "개만 입력 가능합니다");
         }
 
-        this.numbers = new HashSet<>(numbers);
+        for (int number : numbers) {
+            this.lottoNumbers.add(LottoNumberFactory.valueOf(number));
+        }
     }
 
-    public Set<Integer> getNumbers() {
-        return numbers;
-    }
+    public static Lotto of(String lottoString) {
+        String[] numberArray = lottoString.split(", ");
 
-    public LottoReward hasWinningNumbers(Lotto winningLotto, int bonusNumber) {
-        int result = 0;
-        for (int winningNumber : winningLotto.numbers) {
-            result += hasNumber(winningNumber);
+        Set<Integer> lottoNumbers = new HashSet<>();
+        for (int i = 0; i < LOTTO_LENGTH; ++i) {
+            lottoNumbers.add(Integer.parseInt(numberArray[i]));
         }
 
-        boolean isBonusMatched = numbers.contains(bonusNumber);
+        return new Lotto(lottoNumbers);
+    }
+
+    public Set<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
+    public LottoReward hasWinningNumbers(Lotto winningLotto, LottoNumber bonusNumber) {
+        int result = 0;
+        for (LottoNumber winningNumber : winningLotto.lottoNumbers) {
+            result += addMatchResult(hasNumber(winningNumber));
+        }
+
+        boolean isBonusMatched = hasNumber(bonusNumber);
 
         return LottoReward.of(result, isBonusMatched);
     }
 
-    private int hasNumber(int number) {
-        if (numbers.contains(number)) {
+    private int addMatchResult(boolean matched) {
+        if (matched) {
             return 1;
         }
 
         return 0;
+    }
+
+    boolean hasNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     @Override
@@ -56,11 +73,11 @@ public class Lotto {
             return false;
         }
         Lotto lotto = (Lotto) obj;
-        return this.numbers.equals(lotto.numbers);
+        return this.lottoNumbers.equals(lotto.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers);
+        return Objects.hash(lottoNumbers);
     }
 }

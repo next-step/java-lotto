@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.result.LottoGameResult;
 import lotto.domain.result.MatchResult;
@@ -34,16 +35,18 @@ public class ResultView {
         System.out.println(result);
     }
 
-    public static void printLottos(Lottos lottos) {
+    public static void printLottos(Lottos lottos, int manualLottoCount) {
         List<Lotto> lottoList = lottos.getLottoList();
         String result = "";
 
+        System.out.println("수동으로 " + manualLottoCount + "장, 자동으로 " + (lottoList.size() - manualLottoCount) + "개를 구매했습니다.");
+
         for (Lotto lotto : lottoList) {
             result += "[";
-            List<Integer> printNumbers = new ArrayList<>(lotto.getNumbers());
-            Collections.sort(printNumbers);
-            for (int number : printNumbers) {
-                result += number + ", ";
+            List<LottoNumber> lottoNumbers = new ArrayList<>(lotto.getLottoNumbers());
+            Collections.sort(lottoNumbers);
+            for (LottoNumber lottoNumber : lottoNumbers) {
+                result += lottoNumber.getNumber() + ", ";
             }
 
             result = result.substring(0, result.length() - 2) + "]\n";

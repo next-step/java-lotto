@@ -7,19 +7,18 @@ import lotto.domain.result.LottoGameResult;
 
 public class Winner {
     private Lotto winningLotto;
-    private int bonusNumber;
+    private LottoNumber bonusNumber;
 
     Winner(int num1, int num2, int num3, int num4, int num5, int num6, int bonusNumber) {
         this(Set.of(num1, num2, num3, num4, num5, num6), bonusNumber);
     }
 
     public Winner(Set<Integer> winningNumbers, int bonusNumber) {
-        if (winningNumbers.contains(bonusNumber)) {
-            throw new RuntimeException("당첨 번호의 숫자는 보너스 넘버로 입력할 수 없습니다");
+        this.winningLotto = new Lotto(winningNumbers);
+        this.bonusNumber = LottoNumberFactory.valueOf(bonusNumber);
+        if (winningLotto.hasNumber(this.bonusNumber)) {
+            throw new IllegalArgumentException("당첨 번호의 숫자는 보너스 넘버로 입력할 수 없습니다");
         }
-
-        winningLotto = new Lotto(winningNumbers);
-        this.bonusNumber = bonusNumber;
     }
 
     public static Winner of(String numberString, int bonusNumber) {
