@@ -250,32 +250,45 @@ Earning rate: 2142.8571428571427
 ### Result output
 
 ```
+> Task :LotteryApp.main()
 Put your money.
-5000
+
+No input found. try again.
+Put your money.
+3000
+Put the amount of manual lotteries
+
+No input found. try again.
 Put the amount of manual lotteries
 1
 Put manual lottery.(1 times)
+1,2,3,4,5
+java.lang.IllegalArgumentException: Wrong input found: '1,2,3,4,5', try again.
 1,2,3,4,5,6
 1 manual lotteries are purchased.
 [1, 2, 3, 4, 5, 6]
-4 auto lotteries are purchased.
-[30, 17, 26, 16, 37, 36]
-[37, 31, 28, 39, 14, 5]
-[26, 41, 25, 28, 44, 38]
-[27, 42, 38, 17, 8, 6]
+2 auto lotteries are purchased.
+[17, 18, 19, 27, 29, 37]
+[4, 8, 11, 21, 25, 29]
 Put lottery answer.
-1,2,3,4,5,6
+1,2,3,4,
+java.lang.IllegalArgumentException: Wrong input found: '1,2,3,4', try again.
+Put lottery answer.
+1,2,3,4,5,7
 Put bonus number.
-7
+
+No input found. try again.
+Put bonus number.
+6
 Win Statistics
 ------------------
 THREE matches (₩5000): 0
 FOUR matches (₩50000): 0
 FIVE matches (₩1500000): 0
-BONUS matches (₩30000000): 0
-SIX matches (₩2000000000): 1
+BONUS matches (₩30000000): 1
+SIX matches (₩2000000000): 0
 
-Earning rate: 400000.0
+Earning rate: 15000.0
 📈Earned!
 ```
 
