@@ -19,22 +19,16 @@ public class LottoTicket {
     }
 
     public LottoTicket(Integer[] nums) {
-        List<LottoNumber> lottoNumbers = Arrays.stream(nums)
+        this(Arrays.stream(nums)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
-
-        validate(lottoNumbers);
-        this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+                .collect(Collectors.toList()));
     }
 
     public LottoTicket(String[] nums) {
-        List<LottoNumber> lottoNumbers = Arrays.stream(nums)
+        this(Arrays.stream(nums)
                 .map(Integer::parseInt)
                 .map(LottoNumber::getLottoNumber)
-                .collect(Collectors.toList());
-
-        validate(lottoNumbers);
-        this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+                .collect(Collectors.toList()));
     }
 
     private void validate(List<LottoNumber> lottoNumbers) {
@@ -63,6 +57,10 @@ public class LottoTicket {
         if(lottoNumbers.contains(bonusBall)){
             throw new DuplicatedLottoNumberException();
         }
+    }
+
+    public List<LottoNumber> getLottoTicket(){
+        return lottoNumbers;
     }
 
     @Override
