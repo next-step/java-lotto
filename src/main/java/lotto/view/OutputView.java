@@ -10,6 +10,8 @@ import lotto.domain.Roi;
 
 public class OutputView {
 
+	private static final String ENTER = "\n";
+
 	private OutputView() {}
 
 	public static void printPurchaseLottoGroup(PurchaseLottoGroup purchaseLottoGroup) {
@@ -23,12 +25,12 @@ public class OutputView {
 	public static void printWinningStatistics(RankingResult rankingResult) {
 		StringBuffer printBuffer = new StringBuffer();
 
-		printBuffer.append("당첨 통계\n");
-		printBuffer.append("---------\n");
+		printBuffer.append("당첨 통계").append(ENTER);
+		printBuffer.append("---------").append(ENTER);
 		printBuffer.append(rankingResult.ranking().keySet().stream()
 			.filter(LottoRank::isStatistics)
 			.map(rank -> String.format("%d개 일치 %s (%d원) - %d개", rank.sameQuantity(), checkBonus(rank.checkBonus()), rank.amount(), rankingResult.ranking().get(rank)))
-			.collect(Collectors.joining("\n")));
+			.collect(Collectors.joining(ENTER)));
 
 		System.out.println(printBuffer);
 	}
