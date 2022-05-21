@@ -3,13 +3,25 @@ package lotto.domain;
 import static lotto.domain.LottoConstants.LOTTO_END_NUMBER;
 import static lotto.domain.LottoConstants.LOTTO_START_NUMBER;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
 
   private final Integer number;
 
-  public LottoNumber(Integer number) {
+  private static final Map<Integer, LottoNumber> cache = new HashMap<>(LOTTO_END_NUMBER);
+
+  public static LottoNumber valueOf(Integer number) {
+    if (!cache.containsKey(number)) {
+      cache.put(number, new LottoNumber(number));
+    }
+
+    return cache.get(number);
+  }
+
+  private LottoNumber(Integer number) {
     validate(number);
     this.number = number;
   }
