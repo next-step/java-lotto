@@ -4,7 +4,6 @@ import lotto.domain.constant.Rank;
 import lotto.dto.LottoPurchaseCountDto;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoGame {
 

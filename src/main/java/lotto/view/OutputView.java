@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.LottoNumbers;
-import lotto.domain.PurchaseLottoCount;
 import lotto.domain.constant.Rank;
 import lotto.dto.LottoPurchaseCountDto;
 import lotto.dto.LottoRankDto;

@@ -55,11 +55,11 @@ public class PurchaseLottoCount {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PurchaseLottoCount that = (PurchaseLottoCount) o;
-        return totalAmount == that.totalAmount;
+        return totalAmount == that.totalAmount && manualLottoCount == that.manualLottoCount && autoLottoCount == that.autoLottoCount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(totalAmount);
+        return Objects.hash(totalAmount, manualLottoCount, autoLottoCount);
     }
 }
