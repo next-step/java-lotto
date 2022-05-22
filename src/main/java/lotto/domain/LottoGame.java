@@ -1,8 +1,10 @@
 package lotto.domain;
 
 import lotto.domain.constant.Rank;
+import lotto.dto.LottoPurchaseCountDto;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGame {
 
@@ -13,14 +15,14 @@ public class LottoGame {
     private final PurchaseLottoCount purchaseLottoCount;
     private final Lottos lottos;
 
-    public LottoGame(PurchaseAmount purchaseAmount) {
-        this.purchaseLottoCount = new PurchaseLottoCount(purchaseAmount, LOTTO_PRICE);
+    public LottoGame(PurchaseAmount purchaseAmount, List<LottoNumbers> manualLottoNumbers) {
+        this.purchaseLottoCount = new PurchaseLottoCount(purchaseAmount, manualLottoNumbers.size(), LOTTO_PRICE);
         this.purchaseAmount = purchaseAmount;
-        this.lottos = new Lottos(purchaseLottoCount);
+        this.lottos = new Lottos(purchaseLottoCount, manualLottoNumbers);
     }
 
-    public int getLottoAmount() {
-        return lottos.getLottoAmount();
+    public LottoPurchaseCountDto getPurchaseCount() {
+        return new LottoPurchaseCountDto(purchaseLottoCount.getAutoLottoCount(), purchaseLottoCount.getManualLottoCount());
     }
 
     public void confirmLottos(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {

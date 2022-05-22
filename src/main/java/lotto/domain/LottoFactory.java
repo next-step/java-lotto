@@ -2,8 +2,8 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -21,9 +21,10 @@ public class LottoFactory {
 
     public static LottoNumbers createAutoLottoNumbers() {
         Collections.shuffle(lottoNumbers);
-        Set<LottoNumber> lottoNumbers = LottoFactory.lottoNumbers.stream()
+        List<LottoNumber> lottoNumbers = LottoFactory.lottoNumbers.stream()
                 .limit(LOTTO_NUMBER_COUNT)
-                .collect(Collectors.toSet());
+                .sorted(Comparator.comparing(x -> x.getNumber().getNumber()))
+                .collect(Collectors.toList());
 
         return new LottoNumbers(lottoNumbers);
     }

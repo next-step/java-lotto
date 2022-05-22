@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
@@ -12,13 +11,13 @@ public class LottoNumbers {
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final String BLANK_LOTTO_NUMBERS = "로또 번호는 비어있을수 없습니다.";
 
-    private final Set<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(String lottoNumbers) {
         this(toLottoNumbers(lottoNumbers));
     }
 
-    public LottoNumbers(Set<LottoNumber> lottoNumbers) {
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -30,14 +29,14 @@ public class LottoNumbers {
         return lottoNumberTexts;
     }
 
-    private static Set<LottoNumber> toLottoNumbers(String lottoNumbers) {
+    private static List<LottoNumber> toLottoNumbers(String lottoNumbers) {
         if (lottoNumbers == null || lottoNumbers.isBlank()) {
             throw new IllegalArgumentException(BLANK_LOTTO_NUMBERS);
         }
 
         return toListWinningNumberText(lottoNumbers).stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     private static void validate(List<IntNumber> lottoNumberTexts) {

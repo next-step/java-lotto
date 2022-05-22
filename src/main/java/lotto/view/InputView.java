@@ -7,18 +7,14 @@ public class InputView {
 
     public static int getPurchaseAmount() {
         OutputView.printPurchaseAmount();
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public static String getWinningNumbers() {
-        clearScannerBuffer();
         OutputView.printWinningNumbers();
         return scanner.nextLine();
     }
 
-    private static void clearScannerBuffer() {
-        scanner.nextLine();
-    }
 
     public static String getBonusNumber() {
         OutputView.printInputBonusNumber();
@@ -27,7 +23,11 @@ public class InputView {
 
     public static int getManualLottoCount() {
         OutputView.printManualLottoCount();
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    public static String getManualLottoNumbers() {
+        return scanner.nextLine();
     }
 
 }

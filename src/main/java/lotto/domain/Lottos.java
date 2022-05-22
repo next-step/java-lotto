@@ -10,22 +10,32 @@ public class Lottos {
 
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(PurchaseLottoCount purchaseLottoCount) {
-        this(purchaseLottoCount.getAmount());
+    public Lottos(PurchaseLottoCount purchaseLottoCount, List<LottoNumbers> manualLottoNumbers) {
+        validate(purchaseLottoCount, manualLottoNumbers);
+        addManualLottos(manualLottoNumbers);
+        addAutoLottos(purchaseLottoCount.getAutoLottoCount());
     }
 
-    public Lottos(int purchaseLottoCount) {
-        createAutoLottos(purchaseLottoCount);
+    private void validate(PurchaseLottoCount purchaseLottoCount, List<LottoNumbers> manualLottoNumbers) {
+        if (purchaseLottoCount == null) {
+            throw new IllegalArgumentException("구매 갯수가 존재하지 않습니다.");
+        }
+
+        if (manualLottoNumbers == null || manualLottoNumbers.isEmpty()) {
+            throw new IllegalArgumentException("수동 번호가 존재하지 않습니다.");
+        }
     }
 
-    private void createAutoLottos(int purchaseLottoCount) {
+    private void addAutoLottos(int purchaseLottoCount) {
         for (int i = 0; i < purchaseLottoCount; i++) {
             lottos.add(new Lotto(LottoFactory.createAutoLottoNumbers()));
         }
     }
 
-    public int getLottoAmount() {
-        return this.lottos.size();
+    private void addManualLottos(List<LottoNumbers> manualLottoNumbers) {
+        for (LottoNumbers lottoNumbers : manualLottoNumbers) {
+            lottos.add(new Lotto(lottoNumbers));
+        }
     }
 
     public void confirmAll(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {

@@ -1,35 +1,43 @@
 package lotto.domain;
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.api.Test;
 
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class LottosTest {
 
-    @ParameterizedTest
-    @MethodSource("로또_갯수_만큼_로또_생성_확인_객체로_생성_매개변수")
-    void 로또_갯수_만큼_로또_생성_확인_객체로_생성(int purchaseAmount, int purchaseLottoCount) {
-        final int LOTTO_PRICE = 1000;
-        assertThat(new Lottos(new PurchaseLottoCount(purchaseAmount, LOTTO_PRICE)).getLottoAmount()).isEqualTo(purchaseLottoCount);
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
+    private static final int LOTTO_NUMBER_COUNT = 6;
+
+    private static final List<LottoNumber> lottoNumbers = new ArrayList<>();
+
+    static {
+        IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+                .forEach(number -> lottoNumbers.add(new LottoNumber(number)));
     }
 
-    static Stream<Arguments> 로또_갯수_만큼_로또_생성_확인_객체로_생성_매개변수() {
-        return Stream.of(
-                arguments(10000, 10),
-                arguments(1000, 1),
-                arguments(15000, 15)
-        );
-    }
+    @Test
+    void 수동으로_생성한_번호로_로또_생성() {
+        final int purchaseAmount = 10000;
+        final int manualLottoCount = 5;
+        final int lottoPrice = 1000;
+        PurchaseLottoCount purchaseLottoCount = new PurchaseLottoCount(purchaseAmount, manualLottoCount, lottoPrice);
 
-    @ParameterizedTest
-    @ValueSource(ints = {10, 1, 15})
-    void 로또_갯수_만큼_로또_생성_확인_숫자로_생성(int purchaseLottoCount) {
-        assertThat(new Lottos(purchaseLottoCount).getLottoAmount()).isEqualTo(purchaseLottoCount);
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            Collections.shuffle(lottoNumbers);
+            List<LottoNumber> lottoNumber = LottosTest.lottoNumbers.stream().limit(LOTTO_NUMBER_COUNT).collect(Collectors.toList());
+            lottoNumbers.add(new LottoNumbers(lottoNumber));
+        }
+
+        assertThat(new Lottos(purchaseLottoCount, lottoNumbers).getLottoNumbers()).containsAll(lottoNumbers);
     }
 }
