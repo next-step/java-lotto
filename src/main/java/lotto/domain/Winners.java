@@ -1,22 +1,19 @@
 package lotto.domain;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class Winners {
-    public static final int WINNING_MINIMUM = 3;
     public static final int COUNT_UNIT = 1;
     public static final int COUNT_INITIAL = 0;
 
-    private final Map<WinningsType, Integer> winners = new LinkedHashMap<>();
-    private final Lotto winningNumbers;
+    private Map<WinningsType, Integer> winners = new LinkedHashMap<>();
+    private WinningNumbers winningNumbers;
 
-    public Winners(Lotto winningNumbers) {
-        this.winningNumbers = winningNumbers;
-        for (int i = 3; i <= 6; i++) {
-            winners.put(WinningsType.selectWinningsType(i).get(), COUNT_INITIAL);
+    public Winners(List<Integer> winningNumbers, int bonusNumber) {
+        for (WinningsType winningsType : WinningsType.values()) {
+            winners.put(winningsType, COUNT_INITIAL);
         }
+        this.winningNumbers = new WinningNumbers(winningNumbers, bonusNumber);
     }
 
     public Map<WinningsType, Integer> getWinners() {
@@ -25,20 +22,18 @@ public class Winners {
 
     public void findWinners(Lotto lotto) {
         int count = winningNumbers.numberOfSame(lotto);
-        if (count >= WINNING_MINIMUM) {
-            addWinner(count);
-        }
+        addWinner(lotto, count);
     }
 
-    public void addWinner(int count) {
-        WinningsType temporary = WinningsType.selectWinningsType(count).get();
+    public void addWinner(Lotto lotto, int count) {
+        WinningsType temporary = WinningsType.selectWinningsType(count, winningNumbers.isSameBonus(lotto)).get();
         winners.put(temporary, winners.get(temporary) + COUNT_UNIT);
     }
 
     public double revenue(int money) {
         double amount = 0;
-        for (int i = 3; i <= 6; i++) {
-            amount += WinningsType.selectWinningsType(i).get().getWinnings() * winners.get(WinningsType.selectWinningsType(i).get());
+        for (WinningsType winningsType : WinningsType.values()) {
+            amount += winningsType.getWinnings() * winners.get(winningsType);
         }
         return amount / money;
     }
@@ -60,7 +55,6 @@ public class Winners {
     public String toString() {
         return "Winners{" +
                 "winners=" + winners +
-                ", winningNumbers=" + winningNumbers +
                 '}';
     }
 }

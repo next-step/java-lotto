@@ -35,6 +35,10 @@ public class Lotto {
                 .count();
     }
 
+    public boolean isBonusNumber(BonusNumber bonusNumber) {
+        return this.lottoNumbers.stream().anyMatch(number -> bonusNumber.isSameNumber(number));
+    }
+
     @Override
     public String toString() {
         return lottoNumbers.toString();
