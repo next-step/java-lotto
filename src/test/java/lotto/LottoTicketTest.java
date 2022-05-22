@@ -28,7 +28,30 @@ public class LottoTicketTest {
         winningTicket = new LottoTicket(lottoNumbers);
     }
 
+    @Test
+    @DisplayName("로또 타켓 String 배열 생성자 테스트")
+    void 로또_티켓_문자열배열_생성자_테스트(){
+        new LottoTicket(new String[]{"1", "2", "3", "4", "5", "6"});
+    }
 
+    @Test
+    @DisplayName("로또 타켓 생성자 테스트")
+    void 로또_티켓_정수배열_생성자_테스트(){
+        new LottoTicket(new Integer[]{1, 2, 3, 4, 5, 6});
+    }
+
+    @Test
+    @DisplayName("로또 타켓 생성자 테스트")
+    void 로또_티켓_로또번호리스트_생성자_테스트(){
+        new LottoTicket(List.of(
+                LottoNumber.getLottoNumber(1),
+                LottoNumber.getLottoNumber(2),
+                LottoNumber.getLottoNumber(3),
+                LottoNumber.getLottoNumber(4),
+                LottoNumber.getLottoNumber(5),
+                LottoNumber.getLottoNumber(6)
+        ));
+    }
     @Test
     @DisplayName("로또번호가 6개가 아니라면 예외를 던진다")
     void 티켓_생성_테스트(){

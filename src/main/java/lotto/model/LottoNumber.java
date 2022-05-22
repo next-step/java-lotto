@@ -18,10 +18,6 @@ public class LottoNumber {
                     .collect(Collectors.toMap(Function.identity(), LottoNumber::new));
     private final int number;
 
-    public LottoNumber(String strNumber) {
-        this(Integer.parseInt(strNumber));
-    }
-
     public LottoNumber(int number) {
         validate(number);
         this.number = number;
@@ -46,7 +42,7 @@ public class LottoNumber {
         return new LottoTicket(new ArrayList<>(numberList.subList(0, LOTTO_TICKET_SIZE)));
     }
 
-    private int getNumber(){
+    public int getNumber(){
         return this.number;
     }
 
