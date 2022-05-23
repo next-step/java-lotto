@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class Lotto {
@@ -26,6 +24,13 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_UNIT_NUMBER) {
+            throw new IllegalArgumentException("로또 개수는 6개여야 합니다.");
+        }
+
+        if (Set.copyOf(lottoNumbers).size() != LOTTO_UNIT_NUMBER) {
+            throw new IllegalArgumentException("로또 번호는 중복되어서는 안됩니다.");
+        }
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -37,6 +42,20 @@ public class Lotto {
 
     public boolean isBonusNumber(BonusNumber bonusNumber) {
         return this.lottoNumbers.stream().anyMatch(number -> bonusNumber.isSameNumber(number));
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 
     @Override
