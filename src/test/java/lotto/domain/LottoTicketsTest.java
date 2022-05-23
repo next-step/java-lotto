@@ -32,9 +32,9 @@ class LottoTicketsTest {
   }
 
   private static Stream<Arguments> provideSize() {
-    LottoTicket ticketA = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
-    LottoTicket ticketB = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
-    LottoTicket ticketC = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+    LottoTicket ticketA = LottoTicket.createLottoTicket(List.of(1, 2, 3, 4, 5, 6));
+    LottoTicket ticketB = LottoTicket.createLottoTicket(List.of(1, 2, 3, 4, 5, 6));
+    LottoTicket ticketC = LottoTicket.createLottoTicket(List.of(1, 2, 3, 4, 5, 6));
 
     return Stream.of(
         arguments(new LottoTickets(List.of(ticketA, ticketB, ticketC)), 3),
@@ -60,7 +60,7 @@ class LottoTicketsTest {
   }
 
   private static Stream<Arguments> provideForTickets() {
-    LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+    LottoTicket lottoTicket = LottoTicket.createLottoTicket(List.of(1, 2, 3, 4, 5, 6));
     return Stream.of(
         arguments(new LottoTickets(List.of(lottoTicket)))
     );
@@ -77,12 +77,12 @@ class LottoTicketsTest {
 
   private static Stream<Arguments> provideForGetMatchedCountPerPrize() {
     WinningLottoTicket winningLottoTicket = WinningLottoTicket.of("1,2,3,4,5,6", "7");
-    LottoTicket firstPrizeTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
-    LottoTicket secondPrizeTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 7));
-    LottoTicket thirdPrizeTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 8));
-    LottoTicket fourthPrizeTicket = new LottoTicket(List.of(1, 2, 3, 4, 8, 9));
-    LottoTicket fifthPrizeTicket = new LottoTicket(List.of(1, 2, 3, 8, 9, 10));
-    LottoTicket nonePrizeTicket = new LottoTicket(List.of(8, 9, 10, 11, 12, 13));
+    LottoTicket firstPrizeTicket = LottoTicket.createLottoTicket(List.of(1, 2, 3, 4, 5, 6));
+    LottoTicket secondPrizeTicket = LottoTicket.createLottoTicket(List.of(1, 2, 3, 4, 5, 7));
+    LottoTicket thirdPrizeTicket = LottoTicket.createLottoTicket(List.of(1, 2, 3, 4, 5, 8));
+    LottoTicket fourthPrizeTicket = LottoTicket.createLottoTicket(List.of(1, 2, 3, 4, 8, 9));
+    LottoTicket fifthPrizeTicket = LottoTicket.createLottoTicket(List.of(1, 2, 3, 8, 9, 10));
+    LottoTicket nonePrizeTicket = LottoTicket.createLottoTicket(List.of(8, 9, 10, 11, 12, 13));
 
     return Stream.of(
         arguments(new LottoTickets(
@@ -111,7 +111,7 @@ class LottoTicketsTest {
   }
 
   private static Stream<Arguments> provideForTotalTicketCount() {
-    LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+    LottoTicket lottoTicket = LottoTicket.createLottoTicket(List.of(1, 2, 3, 4, 5, 6));
     return Stream.of(
         arguments(new LottoTickets(List.of(lottoTicket), List.of(lottoTicket)), 2)
     );

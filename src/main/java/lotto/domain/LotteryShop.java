@@ -35,7 +35,7 @@ public class LotteryShop {
 
     List<LottoTicket> manualLottoTickets = manualLottoNumbers.stream()
         .map(LotteryShop::splitAsList)
-        .map(LottoTicket::new)
+        .map(LottoTicket::createLottoTicket)
         .collect(toList());
 
     List<LottoTicket> randomLottoTickets = IntStream.range(START_TICKET_COUNT,
@@ -99,7 +99,7 @@ public class LotteryShop {
   }
 
   private LottoTicket createLottoTicket(List<Integer> lottoNumbers) {
-    return new LottoTicket(lottoNumbers);
+    return LottoTicket.createLottoTicket(lottoNumbers);
   }
 
   private List<Integer> createLottoNumbers(GenerateNumbersStrategy generateNumbersStrategy) {

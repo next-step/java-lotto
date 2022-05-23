@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.toList;
 
 import calculator.Splitter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WinningLottoTicket extends LottoTicket {
 
@@ -37,7 +38,9 @@ public class WinningLottoTicket extends LottoTicket {
   }
 
   private WinningLottoTicket(List<Integer> lottoNumbers, Integer bonusBallNumber) {
-    super(lottoNumbers);
+    super(lottoNumbers.stream()
+        .map(LottoNumber::valueOf)
+        .collect(Collectors.toList()));
     this.bonusBallNumber = BonusBallNumber.createBonusBallNumber(this, bonusBallNumber);
   }
 

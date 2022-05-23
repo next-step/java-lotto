@@ -14,14 +14,25 @@ public class LottoTicket {
 
   private final List<LottoNumber> lottoNumbers;
 
-  public LottoTicket(List<Integer> lottoNumbers) {
+  public static LottoTicket createLottoTicket(List<Integer> lottoNumbers) {
     validateLottoNumbers(lottoNumbers);
-    this.lottoNumbers = lottoNumbers.stream()
+    return new LottoTicket(lottoNumbers.stream()
         .map(LottoNumber::valueOf)
-        .collect(Collectors.toList());
+        .collect(Collectors.toList()));
   }
 
-  private void validateLottoNumbers(List<Integer> lottoNumbers) {
+  public LottoTicket(List<LottoNumber> lottoNumbers) {
+    validate(lottoNumbers);
+    this.lottoNumbers = lottoNumbers;
+  }
+
+  private void validate(List<LottoNumber> lottoNumbers) {
+    if (lottoNumbers == null || lottoNumbers.isEmpty()) {
+      throw new IllegalArgumentException("lottoNumbers는 빈 값일 수 없습니다.");
+    }
+  }
+
+  private static void validateLottoNumbers(List<Integer> lottoNumbers) {
     if (lottoNumbers == null || lottoNumbers.isEmpty()) {
       throw new IllegalArgumentException(EMPTY_LOTTO_NUMBERS);
     }

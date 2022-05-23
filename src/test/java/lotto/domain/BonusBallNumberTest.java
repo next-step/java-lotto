@@ -51,7 +51,7 @@ class BonusBallNumberTest {
   }
 
   private static Stream<Arguments> provideForMatchAny() {
-    LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+    LottoTicket lottoTicket = LottoTicket.createLottoTicket(List.of(1, 2, 3, 4, 5, 6));
     return Stream.of(
         arguments(lottoTicket, BonusBallNumber.createBonusBallNumber(1), true),
         arguments(lottoTicket, BonusBallNumber.createBonusBallNumber(7), false)
@@ -61,7 +61,7 @@ class BonusBallNumberTest {
   @DisplayName("보너스 번호를 생성 시 우승 로또번호와 중복되는 번호는 예외를 던진다")
   @Test
   void duplicateNumber() {
-    LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+    LottoTicket lottoTicket = LottoTicket.createLottoTicket(List.of(1, 2, 3, 4, 5, 6));
     assertThatIllegalArgumentException().isThrownBy(
             () -> BonusBallNumber.createBonusBallNumber(lottoTicket, 1))
         .withMessageMatching("\\d+: 보너스볼 번호는 로또 번호와 중복된 번호일 수 없습니다.");
