@@ -13,6 +13,16 @@ public class Lottos {
         }
     }
 
+    public Lottos(List<Lotto> lottoList, int lottoOfNumber) {
+        lottoList.forEach(lotto -> lottos.add(lotto));
+        lottoOfNumber = lottoOfNumber - lottoList.size();
+
+        for (int i = 0; i < lottoOfNumber; i++) {
+            Lotto lotto = new Lotto();
+            lottos.add(lotto);
+        }
+    }
+
     public List<Lotto> getLottos() {
         return lottos;
     }
@@ -22,6 +32,7 @@ public class Lottos {
             winners.findWinners(lotto);
         }
     }
+
 
     @Override
     public String toString() {

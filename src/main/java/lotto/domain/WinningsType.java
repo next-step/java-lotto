@@ -31,11 +31,12 @@ public enum WinningsType {
     }
 
     public static Optional<WinningsType> selectWinningsType(int numberOfSame, boolean isSameBonusNumber) {
-        if (numberOfSame == FIVE) {
-            return whenCountIsFive(isSameBonusNumber);
-        }
         if (isMissing(numberOfSame)) {
             return Optional.of(꽝);
+        }
+        
+        if (numberOfSame == FIVE) {
+            return whenCountIsFive(isSameBonusNumber);
         }
 
         return Arrays.stream(WinningsType.values()).filter(type -> type.isSameNumber(numberOfSame))
