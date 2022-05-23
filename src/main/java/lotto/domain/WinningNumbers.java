@@ -4,11 +4,11 @@ import java.util.List;
 
 public class WinningNumbers {
     private final Lotto winningNumbers;
-    private final BonusNumber bonusNumber;
+    private final LottoNumber bonusNumber;
 
     public WinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
         this.winningNumbers = new Lotto(winningNumbers);
-        this.bonusNumber = new BonusNumber(bonusNumber);
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
     public int numberOfSame(Lotto lotto) {
@@ -16,6 +16,6 @@ public class WinningNumbers {
     }
 
     public boolean isSameBonus(Lotto lotto) {
-        return lotto.isBonusNumber(bonusNumber);
+        return lotto.isSameNumber(bonusNumber);
     }
 }

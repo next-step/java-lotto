@@ -7,29 +7,28 @@ public class Winners {
     public static final int COUNT_INITIAL = 0;
 
     private final Map<WinningsType, Integer> winners;
-    private final WinningNumbers winningNumbers;
 
-    public Winners(List<Integer> winningNumbers, int bonusNumber) {
+    public Winners() {
         this.winners = new LinkedHashMap<>();
         for (WinningsType winningsType : WinningsType.values()) {
             winners.put(winningsType, COUNT_INITIAL);
         }
-        this.winningNumbers = new WinningNumbers(winningNumbers, bonusNumber);
     }
 
     public Map<WinningsType, Integer> getWinners() {
         return new LinkedHashMap<>(winners);
     }
 
-    public void findWinners(Lotto lotto) {
+    public void findWinners(Lotto lotto, WinningNumbers winningNumbers) {
         int count = winningNumbers.numberOfSame(lotto);
-        addWinner(lotto, count);
+        WinningsType temporary = WinningsType.selectWinningsType(count, winningNumbers.isSameBonus(lotto));
+        addWinner(temporary);
     }
 
-    public void addWinner(Lotto lotto, int count) {
-        WinningsType temporary = WinningsType.selectWinningsType(count, winningNumbers.isSameBonus(lotto));
-        winners.put(temporary, winners.get(temporary) + COUNT_UNIT);
+    public void addWinner(WinningsType winningsType) {
+        winners.put(winningsType, winners.get(winningsType) + COUNT_UNIT);
     }
+
 
     public double revenue(int money) {
         double amount = 0;

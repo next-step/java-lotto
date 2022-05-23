@@ -17,9 +17,9 @@ public class Lottos {
         return new ArrayList<>(this.lottos);
     }
 
-    public void findWinners(Winners winners) {
+    public void findWinners(Winners winners, WinningNumbers winningNumbers) {
         for (Lotto lotto : lottos) {
-            winners.findWinners(lotto);
+            winners.findWinners(lotto, winningNumbers);
         }
     }
 

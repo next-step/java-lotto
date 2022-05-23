@@ -8,7 +8,7 @@ public class Lotto {
     public static final int LOTTO_MINIMUM_NUMBER = 1;
     public static final int LOTTO_UNIT_NUMBER = 6;
 
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto() {
         lottoNumbers = new ArrayList<>();
@@ -21,7 +21,7 @@ public class Lotto {
         lottoAllNumber.stream()
                 .limit(LOTTO_UNIT_NUMBER)
                 .sorted()
-                .forEach(number -> lottoNumbers.add(number));
+                .forEach(number -> lottoNumbers.add(new LottoNumber(number)));
     }
 
     public Lotto(List<Integer> lottoNumbers) {
@@ -32,19 +32,26 @@ public class Lotto {
         if (Set.copyOf(lottoNumbers).size() != LOTTO_UNIT_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 중복되어서는 안됩니다.");
         }
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+
+        List<LottoNumber> temporaryLottoNumbers = new ArrayList<>();
+        lottoNumbers.forEach(lottoNumber -> temporaryLottoNumbers.add(new LottoNumber(lottoNumber)));
+
+        this.lottoNumbers = new ArrayList<>(temporaryLottoNumbers);
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return new ArrayList<>(this.lottoNumbers);
     }
 
     public int numberOfSame(Lotto lotto) {
         return (int) lotto.lottoNumbers.stream()
-                .filter(number -> this.lottoNumbers.contains(number))
+                .filter(lottoNumber -> this.lottoNumbers.contains(lottoNumber))
                 .count();
     }
 
-    public boolean isBonusNumber(BonusNumber bonusNumber) {
-        return this.lottoNumbers.stream().anyMatch(bonusNumber::isSameNumber);
+    public boolean isSameNumber(LottoNumber lottoNumber) {
+        return this.lottoNumbers.stream().anyMatch(lottoNumber::isSameNumber);
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -61,6 +68,8 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return lottoNumbers.toString();
+        return "Lotto{" +
+                "lottoNumbers=" + lottoNumbers +
+                '}';
     }
 }
