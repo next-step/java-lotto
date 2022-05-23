@@ -13,23 +13,20 @@ public class Lottos {
         }
     }
 
-    public void findWinners(Winners winners) {
+    public List<Lotto> getLottos() {
+        return new ArrayList<>(this.lottos);
+    }
+
+    public void findWinners(Winners winners, WinningNumbers winningNumbers) {
         for (Lotto lotto : lottos) {
-            winners.findWinners(lotto);
+            winners.findWinners(lotto, winningNumbers);
         }
     }
 
     @Override
-
     public String toString() {
-        String resultString = "";
-
-        /*
-        for (Lotto lotto : lottos) {
-            resultString += lotto.toString() + "\n";
-        }
-
-         */
-        return lottos.toString();
+        return "Lottos{" +
+                "lottos=" + lottos +
+                '}';
     }
 }

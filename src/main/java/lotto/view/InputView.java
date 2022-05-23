@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class InputView {
     public static final int LOTTO_UNIT_NUMBER = 6;
     private static Scanner scanner = new Scanner(System.in);
-    
+
     private InputView() {
     }
 
@@ -27,6 +27,11 @@ public class InputView {
         }
 
         return Arrays.asList(winningNumber);
+    }
+
+    public static Integer inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextInt();
     }
 
 
