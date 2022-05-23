@@ -28,6 +28,12 @@ public class LottoTicket {
               )));
     }
 
+    public LottoTicket(final Set<Integer> lottoNumbers) {
+        this(lottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toCollection(
+                () -> new TreeSet<>(LottoNumber::compareTo)
+        )));
+    }
+
     public LottoTicket(final TreeSet<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
@@ -37,10 +43,6 @@ public class LottoTicket {
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new LottoException("로또 한장 당 번호는 " + LOTTO_NUMBERS_SIZE + "개여야 합니다.");
         }
-    }
-
-    public int checkWinningNumbers(final Set<LottoNumber> winningNumbers) {
-        return (int) winningNumbers.stream().filter(lottoNumbers::contains).count();
     }
 
     public Set<LottoNumber> getLottoNumbers() {

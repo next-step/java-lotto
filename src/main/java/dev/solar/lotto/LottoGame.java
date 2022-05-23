@@ -2,16 +2,15 @@ package dev.solar.lotto;
 
 import java.util.List;
 import java.util.Set;
-import java.util.TreeMap;
 
 import dev.solar.lotto.domain.Lotto;
-import dev.solar.lotto.domain.LottoNumber;
 import dev.solar.lotto.domain.LottoTicket;
-import dev.solar.lotto.domain.PrizeMoney;
+import dev.solar.lotto.domain.Rank;
+import dev.solar.lotto.domain.WinningLotto;
 import dev.solar.lotto.view.InputView;
 import dev.solar.lotto.view.OutputView;
 
-public class LottoMachine {
+public class LottoGame {
 
     public static void main(String[] args) {
         final int payment = InputView.inputPurchasingAmount();
@@ -26,10 +25,10 @@ public class LottoMachine {
                 lottoTicket -> OutputView.printLotto(lottoTicket.getLottoNumbers())
         );
 
-        final Set<LottoNumber> winningNumbers = InputView.inputWinningNumbers();
-        final TreeMap<PrizeMoney, Integer> winningResult = lotto.checkWinningResult(winningNumbers);
-        OutputView.printResult(winningResult);
-        OutputView.printProfitMargin(lotto);
+        final Set<Integer> winningNumbers = InputView.inputWinningNumbers();
+        final Rank rank = lotto.checkWinningResult(new WinningLotto(winningNumbers));
+        OutputView.printResult(rank);
+        OutputView.printProfitMargin(lotto, rank);
     }
 
 }

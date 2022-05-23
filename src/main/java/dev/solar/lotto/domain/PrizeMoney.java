@@ -1,10 +1,14 @@
 package dev.solar.lotto.domain;
 
 import java.util.Arrays;
-import java.util.Optional;
 import java.util.function.BiPredicate;
 
+import dev.solar.lotto.LottoException;
+
 public enum PrizeMoney {
+    ZERO(0, 0),
+    ONE(1, 0),
+    TWO(2, 0),
     THREE(3, 5000),
     FOUR(4, 50000),
     FIVE(5, 1500000),
@@ -18,12 +22,13 @@ public enum PrizeMoney {
         this.prizeMoney = prizeMoney;
     }
 
-    public static Optional<PrizeMoney> getPrizeMoney(int count) {
+    public static PrizeMoney rank(int count) {
         BiPredicate<PrizeMoney, Integer> filter = (x, y) -> x.count == count;
 
         return Arrays.stream(values())
                 .filter(value -> filter.test(value, count))
-                .findAny();
+                .findAny()
+                .orElseThrow(() -> new LottoException("로또 일치 결과는 0 ~ 6개 사이여야합니다."));
     }
 
     public int getCount() {

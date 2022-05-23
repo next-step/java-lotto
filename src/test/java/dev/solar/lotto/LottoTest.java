@@ -3,8 +3,6 @@ package dev.solar.lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.withPrecision;
 
-import java.util.TreeMap;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,7 +10,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import dev.solar.lotto.domain.Lotto;
 import dev.solar.lotto.domain.LottoTicket;
-import dev.solar.lotto.domain.PrizeMoney;
+import dev.solar.lotto.domain.Rank;
 
 public class LottoTest {
 
@@ -35,14 +33,11 @@ public class LottoTest {
     @DisplayName("수익률을 계산한다.")
     @Test
     void calculate_profit_margin() {
-        final TreeMap<PrizeMoney, Integer> winningResult = new TreeMap<>();
-        winningResult.put(PrizeMoney.THREE, 1);
-        winningResult.put(PrizeMoney.FOUR, 0);
-        winningResult.put(PrizeMoney.FIVE, 0);
-        winningResult.put(PrizeMoney.SIX, 0);
-        final Lotto lotto = new Lotto(14000, winningResult);
+        final Lotto lotto = new Lotto(14000);
+        final Rank rank = new Rank();
+        rank.addResult(3);
 
-        final double actual = lotto.calculateProfitMargin();
+        final double actual = lotto.calculateProfitMargin(rank);
         assertThat(actual).isEqualTo(0.35, withPrecision(0.01));
     }
 }
