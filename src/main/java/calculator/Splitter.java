@@ -13,6 +13,7 @@ public class Splitter {
   }
 
   public static List<String> split(String s) {
+    System.out.println("s = " + s);
     if (s == null || s.isBlank()) {
       throw new IllegalArgumentException(EMPTY_INPUT_STRING);
     }

@@ -23,7 +23,8 @@ public class ResultView {
   private static final PrintStream printStream = System.out;
 
   public static void printLottoCount(int manual, int random) {
-    printStream.printf(PURCHASED_LOTTO_COUNT, manual, random);
+    printStream.print(System.lineSeparator());
+    printStream.println(format(PURCHASED_LOTTO_COUNT, manual, random));
   }
 
   public static void printLottoTickets(LottoTickets lottoTickets) {
@@ -41,6 +42,7 @@ public class ResultView {
   }
 
   public static void printStatistics(StatisticInfo statisticInfo) {
+    printStream.print(System.lineSeparator());
     printStream.println(STATISTICS_HEAD);
     printStream.println(HEAD_BODY_SPLIT_LINE);
     statisticInfo.getStatistics().forEach(ResultView::printStatistic);

@@ -23,6 +23,7 @@ public class InputView {
   }
 
   public static String requestLastWeekWinNumbers() {
+    printStream.print(System.lineSeparator());
     printStream.println(REQUEST_WIN_NUMBERS);
     return scanner.nextLine();
   }
@@ -33,12 +34,14 @@ public class InputView {
   }
 
   public static int requestManualPurchaseLotto() {
+    printStream.print(System.lineSeparator());
     printStream.println(REQUEST_MANUAL_PURCHASE_LOTTO);
     return scanner.nextInt();
   }
 
   public static List<String> requestManualLottoNumber(int count) {
     scanner.nextLine(); // flush buffer
+    printStream.print(System.lineSeparator());
     printStream.println(REQUEST_MANUAL_LOTTO_NUMBER);
     return IntStream.range(0, count)
         .mapToObj(i -> getNextLine())
