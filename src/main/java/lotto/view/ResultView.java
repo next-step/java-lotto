@@ -12,6 +12,7 @@ public class ResultView {
     public static final String RESULT_LOSS = "손해";
     private static final String RESULT_BREAK_EVEN = "본전";
     private static final String RESULT_PROFIT = "이득";
+    private static final int PROFIT_STANDARD = 1;
     private static final int ZERO = 0;
 
     private ResultView() {
@@ -36,7 +37,7 @@ public class ResultView {
         int key = winningsType.getNumberOfSame();
         int value = winnerResult.get(winningsType);
 
-        if (key == 0) {
+        if (key == ZERO) {
             return;
         }
 
@@ -60,10 +61,10 @@ public class ResultView {
     }
 
     private static String resultProfit(double revenue) {
-        if (revenue > 1) {
+        if (revenue > PROFIT_STANDARD) {
             return RESULT_PROFIT;
         }
-        if (revenue < 1) {
+        if (revenue < PROFIT_STANDARD) {
             return RESULT_LOSS;
         }
         return RESULT_BREAK_EVEN;

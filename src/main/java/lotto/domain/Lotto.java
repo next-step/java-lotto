@@ -8,9 +8,10 @@ public class Lotto {
     public static final int LOTTO_MINIMUM_NUMBER = 1;
     public static final int LOTTO_UNIT_NUMBER = 6;
 
-    private List<Integer> lottoNumbers = new ArrayList<>();
+    private final List<Integer> lottoNumbers;
 
     public Lotto() {
+        lottoNumbers = new ArrayList<>();
         List<Integer> lottoAllNumber = new ArrayList<>();
 
         IntStream.range(LOTTO_MINIMUM_NUMBER, LOTTO_ALL_NUMBER)
@@ -31,7 +32,7 @@ public class Lotto {
         if (Set.copyOf(lottoNumbers).size() != LOTTO_UNIT_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 중복되어서는 안됩니다.");
         }
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
     public int numberOfSame(Lotto lotto) {
@@ -41,7 +42,7 @@ public class Lotto {
     }
 
     public boolean isBonusNumber(BonusNumber bonusNumber) {
-        return this.lottoNumbers.stream().anyMatch(number -> bonusNumber.isSameNumber(number));
+        return this.lottoNumbers.stream().anyMatch(bonusNumber::isSameNumber);
     }
 
 

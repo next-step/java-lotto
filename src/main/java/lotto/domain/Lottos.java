@@ -14,7 +14,7 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return new ArrayList<>(this.lottos);
     }
 
     public void findWinners(Winners winners) {

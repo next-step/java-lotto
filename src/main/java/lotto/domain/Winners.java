@@ -6,10 +6,11 @@ public class Winners {
     public static final int COUNT_UNIT = 1;
     public static final int COUNT_INITIAL = 0;
 
-    private Map<WinningsType, Integer> winners = new LinkedHashMap<>();
-    private WinningNumbers winningNumbers;
+    private final Map<WinningsType, Integer> winners;
+    private final WinningNumbers winningNumbers;
 
     public Winners(List<Integer> winningNumbers, int bonusNumber) {
+        this.winners = new LinkedHashMap<>();
         for (WinningsType winningsType : WinningsType.values()) {
             winners.put(winningsType, COUNT_INITIAL);
         }
@@ -17,7 +18,7 @@ public class Winners {
     }
 
     public Map<WinningsType, Integer> getWinners() {
-        return winners;
+        return new LinkedHashMap<>(winners);
     }
 
     public void findWinners(Lotto lotto) {
@@ -26,7 +27,7 @@ public class Winners {
     }
 
     public void addWinner(Lotto lotto, int count) {
-        WinningsType temporary = WinningsType.selectWinningsType(count, winningNumbers.isSameBonus(lotto)).get();
+        WinningsType temporary = WinningsType.selectWinningsType(count, winningNumbers.isSameBonus(lotto));
         winners.put(temporary, winners.get(temporary) + COUNT_UNIT);
     }
 
