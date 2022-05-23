@@ -1,5 +1,8 @@
 package lotto.controller;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import lotto.domain.Amount;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
@@ -29,7 +32,9 @@ public class LottoController {
 
 	public void ranking(PurchaseLottoGroup purchaseLottoGroup) {
 		WinningNumbers winningNumbers = new WinningNumbers(
-			InputView.inputWinningNumber(),
+			Stream.of(InputView.inputWinningNumber().split(WinningNumbers.DELIMITER))
+				.map(LottoNumber::from)
+				.collect(Collectors.toList()),
 			LottoNumber.of(InputView.inputBonusNumber(), LottoNumberType.BONUS)
 		);
 

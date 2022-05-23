@@ -26,9 +26,12 @@ public class PurchaseLottoGroup {
 
 	public List<LottoRank> ranking(WinningNumbers winningNumbers) {
 		return lottoGroup.stream()
-			.map(lotto -> LottoRank.findBySameQuantity(
-				winningNumbers.matchQuantity(lotto), winningNumbers.matchBonusQuantity(lotto)))
+			.map(winningNumbers::ranking)
 			.collect(Collectors.toList());
+	}
+
+	public List<Lotto> values() {
+		return lottoGroup;
 	}
 
 	@Override

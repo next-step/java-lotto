@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.stream.Collectors;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
 import lotto.domain.ProfitOrLoss;
 import lotto.domain.PurchaseLottoGroup;
@@ -15,7 +16,9 @@ public class OutputView {
 	private OutputView() {}
 
 	public static void printPurchaseLottoGroup(PurchaseLottoGroup purchaseLottoGroup) {
-		System.out.println(purchaseLottoGroup);
+		System.out.println(purchaseLottoGroup.values().stream()
+			.map(Lotto::toString)
+			.collect(Collectors.joining("\n")));
 	}
 
 	public static void printPurchaseQuantity(long quantity) {

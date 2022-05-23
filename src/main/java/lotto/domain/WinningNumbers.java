@@ -11,23 +11,28 @@ public class WinningNumbers {
 	public static final String DELIMITER = ",";
 	public static final int NUMBER_SIZE = 6;
 	private final List<LottoNumber> numbers;
+	private final LottoNumber bonusNumber;
 
-	public WinningNumbers(String input) {
-		numbers = Stream.of(input.split(DELIMITER))
-			.map(LottoNumber::from)
-			.collect(Collectors.toList());
 
-		validateSize(numbers);
+	public WinningNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+		validateNull(bonusNumber);
+		validateNull(winningNumbers);
+		validateSize(winningNumbers);
+		this.numbers = winningNumbers;
+		validateDuplicationBonusNumber(bonusNumber);
+		this.bonusNumber = bonusNumber;
 	}
 
-	public WinningNumbers(String input, LottoNumber bonusNumber) {
-		numbers = Stream.of(input.split(DELIMITER))
-			.map(LottoNumber::from)
-			.collect(Collectors.toList());
+	private void validateNull(LottoNumber bonusNumber) {
+		if (bonusNumber == null) {
+			throw new IllegalArgumentException("보너스번호는 null 일 수 없습니다.");
+		}
+	}
 
-		validateSize(numbers);
-		validateDuplicationBonusNumber(bonusNumber);
-		numbers.add(bonusNumber);
+	private void validateNull(List<LottoNumber> bonusNumber) {
+		if (bonusNumber == null) {
+			throw new IllegalArgumentException("당첨번호는 null 일 수 없습니다.");
+		}
 	}
 
 	private void validateDuplicationBonusNumber(LottoNumber bonusNumber) {
@@ -36,23 +41,14 @@ public class WinningNumbers {
 		}
 	}
 
-	public WinningNumbers(List<LottoNumber> numbers) {
-		validateSize(numbers);
-		this.numbers = numbers;
-	}
-
 	public long matchQuantity(Lotto lotto) {
-		return matchQuantity(lotto, LottoNumberType.DEFAULT);
-	}
-
-	public long matchBonusQuantity(Lotto lotto) {
-		return matchQuantity(lotto, LottoNumberType.BONUS);
-	}
-
-	private long matchQuantity(Lotto lotto, LottoNumberType type) {
-		return this.numbers.stream()
-			.filter(number -> number.checkType(type) && lotto.contain(number))
+		return numbers.stream()
+			.filter(lotto::contain)
 			.count();
+	}
+
+	public boolean matchBonus(Lotto lotto) {
+		return lotto.contain(bonusNumber);
 	}
 
 	private void validateSize(List<LottoNumber> numbers) {
@@ -65,5 +61,9 @@ public class WinningNumbers {
 	@Override
 	public String toString() {
 		return numbers.toString();
+	}
+
+	public LottoRank ranking(Lotto lotto) {
+		return LottoRank.findBySameQuantity(matchQuantity(lotto), lotto.contain(bonusNumber));
 	}
 }
