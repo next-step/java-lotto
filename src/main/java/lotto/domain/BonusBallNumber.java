@@ -8,15 +8,26 @@ public class BonusBallNumber {
   private final LottoNumber number;
 
   public static BonusBallNumber createBonusBallNumber(Integer number) {
-    return new BonusBallNumber(number);
+    validate(number);
+    return new BonusBallNumber(LottoNumber.valueOf(number));
   }
 
   public static BonusBallNumber createBonusBallNumber(LottoTicket lottoTicket, Integer number) {
     validate(lottoTicket, number);
-    return new BonusBallNumber(number);
+    return new BonusBallNumber(LottoNumber.valueOf(number));
+  }
+
+  private static void validate(Integer number) {
+    if (number == null) {
+      throw new IllegalArgumentException("보너스볼은 null일 수 없습니다.");
+    }
   }
 
   private static void validate(LottoTicket lottoTicket, Integer number) {
+    validate(number);
+    if (number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
+      throw new IllegalArgumentException(String.format("%d 보너스볼 범위가 올바르지 않습니다.", number));
+    }
     if (lottoTicket == null) {
       throw new IllegalArgumentException("로또 번호는 null일 수 없습니다.");
     }
@@ -26,17 +37,14 @@ public class BonusBallNumber {
     }
   }
 
-  private BonusBallNumber(Integer number) {
+  private BonusBallNumber(LottoNumber number) {
     validate(number);
-    this.number = LottoNumber.valueOf(number);
+    this.number = number;
   }
 
-  private void validate(Integer number) {
+  private void validate(LottoNumber number) {
     if (number == null) {
-      throw new IllegalArgumentException("보너스볼은 null일 수 없습니다.");
-    }
-    if (number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
-      throw new IllegalArgumentException(String.format("%d 보너스볼 범위가 올바르지 않습니다.", number));
+      throw new IllegalArgumentException("LottoNumber null일 수 없습니다.");
     }
   }
 

@@ -40,7 +40,7 @@ class BonusBallNumberTest {
   void bonusBallNumberOutOfBounds(Integer number) {
     assertThatIllegalArgumentException().isThrownBy(
             () -> BonusBallNumber.createBonusBallNumber(number))
-        .withMessageMatching("\\d+ 보너스볼 범위가 올바르지 않습니다.");
+        .withMessageMatching("\\d+ 로또번호 범위가 올바르지 않습니다.");
   }
 
   @DisplayName("로또 번호 6개 중 보너스볼이 일치하면 참을 반환한다")
