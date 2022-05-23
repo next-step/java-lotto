@@ -50,6 +50,10 @@ public class LottoTickets {
     return Collections.unmodifiableList(lottoTickets);
   }
 
+  public int totalTicketCount() {
+    return lottoTickets.size();
+  }
+
   public int getMatchedCountPerPrize(Prize prize, WinningLottoTicket winningLottoTicket) {
     return (int) lottoTickets.stream()
         .map(lottoTicket -> Prize.of(lottoTicket.countMatched(winningLottoTicket),

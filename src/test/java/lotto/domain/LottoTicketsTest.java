@@ -102,4 +102,18 @@ class LottoTicketsTest {
                 fifthPrizeTicket)), winningLottoTicket, Prize.FIFTH, 5)
     );
   }
+
+  @DisplayName("자동 수동을 포함한 모든 구매한 로또 개수를 반환한다.")
+  @ParameterizedTest
+  @MethodSource("provideForTotalTicketCount")
+  void tickets(LottoTickets lottoTickets, int count) {
+    assertThat(lottoTickets.totalTicketCount()).isEqualTo(count);
+  }
+
+  private static Stream<Arguments> provideForTotalTicketCount() {
+    LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+    return Stream.of(
+        arguments(new LottoTickets(List.of(lottoTicket), List.of(lottoTicket)), 2)
+    );
+  }
 }
