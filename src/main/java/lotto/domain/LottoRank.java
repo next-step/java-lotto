@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.StringJoiner;
 import java.util.stream.Stream;
 
 public enum LottoRank {

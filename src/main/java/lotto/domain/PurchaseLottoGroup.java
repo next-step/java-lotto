@@ -1,23 +1,16 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
 public class PurchaseLottoGroup {
-	private final List<Lotto> lottoGroup = new ArrayList<>();
+	private final List<Lotto> lottoGroup;
 
 	public PurchaseLottoGroup(long quantity) {
-		lottoGroup.addAll(LongStream.rangeClosed(1, quantity)
+		lottoGroup =LongStream.rangeClosed(1, quantity)
 			.mapToObj(num -> new Lotto())
-			.collect(Collectors.toList()));
-	}
-
-	public PurchaseLottoGroup(List<String> inputLottoList) {
-		lottoGroup.addAll(inputLottoList.stream()
-			.map(Lotto::new)
-			.collect(Collectors.toList()));
+			.collect(Collectors.toList());
 	}
 
 	public int size() {
@@ -32,12 +25,5 @@ public class PurchaseLottoGroup {
 
 	public List<Lotto> values() {
 		return lottoGroup;
-	}
-
-	@Override
-	public String toString() {
-		return lottoGroup.stream()
-			.map(Lotto::toString)
-			.collect(Collectors.joining("\n"));
 	}
 }
