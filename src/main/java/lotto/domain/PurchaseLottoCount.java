@@ -6,6 +6,7 @@ public class PurchaseLottoCount {
 
     private static final String MIN_PURCHASE_LOTTO_COUNT = "1개 이상 구매할 수 있습니다. 구매 갯수 : %d";
     private static final String MIN_LOTTO_PRICE = "로또 최소 금액은 0 이상입니다. 입력된 로또 최소 금액 : %d";
+    private static final int ZERO = 0;
 
     private final int totalAmount;
     private final int manualLottoCount;
@@ -16,25 +17,20 @@ public class PurchaseLottoCount {
     }
 
     public PurchaseLottoCount(int purchaseAmount, int manualLottoCount, int lottoPrice) {
-        validate(purchaseAmount, manualLottoCount, lottoPrice);
+        validate(purchaseAmount, lottoPrice);
         this.totalAmount = calculateTotalAmount(purchaseAmount, lottoPrice);
         this.manualLottoCount = manualLottoCount;
         this.autoLottoCount = totalAmount - manualLottoCount;
-
     }
 
-    private void validate(int purchaseAmount, int manualLottoCount, int lottoPrice) {
-        if (lottoPrice <= 0) {
+    private void validate(int purchaseAmount, int lottoPrice) {
+        if (lottoPrice <= ZERO) {
             throw new IllegalArgumentException(String.format(MIN_LOTTO_PRICE, lottoPrice));
         }
 
         int totalAmount = calculateTotalAmount(purchaseAmount, lottoPrice);
-        if (totalAmount <= 0) {
+        if (totalAmount <= ZERO) {
             throw new IllegalArgumentException(String.format(MIN_PURCHASE_LOTTO_COUNT, totalAmount));
-        }
-
-        if (manualLottoCount <= 0) {
-            throw new IllegalArgumentException(String.format(MIN_PURCHASE_LOTTO_COUNT, manualLottoCount));
         }
     }
 

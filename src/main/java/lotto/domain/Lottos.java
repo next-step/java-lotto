@@ -8,35 +8,19 @@ import java.util.stream.Collectors;
 
 public class Lottos {
 
-    private final List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos;
 
     public Lottos(PurchaseLottoCount purchaseLottoCount, List<LottoNumbers> manualLottoNumbers) {
         validate(purchaseLottoCount, manualLottoNumbers);
-        addManualLottos(manualLottoNumbers);
-        addAutoLottos(purchaseLottoCount.getAutoLottoCount());
+        this.lottos = LottoFactory.createLottos(manualLottoNumbers, purchaseLottoCount.getAutoLottoCount());
     }
 
     private void validate(PurchaseLottoCount purchaseLottoCount, List<LottoNumbers> manualLottoNumbers) {
-        if (purchaseLottoCount == null) {
+        if (purchaseLottoCount == null && manualLottoNumbers == null) {
             throw new IllegalArgumentException("구매 갯수가 존재하지 않습니다.");
         }
-
-        if (manualLottoNumbers == null || manualLottoNumbers.isEmpty()) {
-            throw new IllegalArgumentException("수동 번호가 존재하지 않습니다.");
-        }
     }
 
-    private void addAutoLottos(int purchaseLottoCount) {
-        for (int i = 0; i < purchaseLottoCount; i++) {
-            lottos.add(new Lotto(LottoFactory.createAutoLottoNumbers()));
-        }
-    }
-
-    private void addManualLottos(List<LottoNumbers> manualLottoNumbers) {
-        for (LottoNumbers lottoNumbers : manualLottoNumbers) {
-            lottos.add(new Lotto(lottoNumbers));
-        }
-    }
 
     public void confirmAll(LottoNumbers winningLottoNumbers, LottoNumber bonusNumber) {
         for (Lotto lotto : this.lottos) {

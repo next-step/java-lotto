@@ -10,6 +10,8 @@ import java.util.List;
 
 public class Application {
 
+    private static int FIRST_LOTTO_NUMBER_COUNT = 0;
+
     public static void main(String args[]) {
         LottoGame lottoGame = new LottoGame(new PurchaseAmount(InputView.getPurchaseAmount()), createLottoNumbers(InputView.getManualLottoCount()));
         OutputView.printPurchaseLotto(lottoGame.getPurchaseCount());
@@ -27,7 +29,7 @@ public class Application {
     private static List<LottoNumbers> createLottoNumbers(int manualLottoCount) {
         OutputView.printManualLottoNumbers();
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        for (int  i = 0; i < manualLottoCount; i++) {
+        for (int  i = FIRST_LOTTO_NUMBER_COUNT; i < manualLottoCount; i++) {
             lottoNumbers.add(new LottoNumbers(InputView.getManualLottoNumbers()));
         }
         return lottoNumbers;

@@ -29,4 +29,22 @@ public class LottoFactory {
         return new LottoNumbers(lottoNumbers);
     }
 
+    public static List<Lotto> createLottos(List<LottoNumbers> manualLottoNumbers, int autoLottoCount) {
+        List<Lotto> lottos = new ArrayList<>();
+        addManualLottos(manualLottoNumbers, lottos);
+        addAutoLottos(autoLottoCount, lottos);
+        return lottos;
+    }
+
+    private static void addManualLottos(List<LottoNumbers> manualLottoNumbers, List<Lotto> lottos) {
+        for (LottoNumbers lottoNumbers : manualLottoNumbers) {
+            lottos.add(new Lotto(lottoNumbers));
+        }
+    }
+
+    private static void addAutoLottos(int autoLottoCount, List<Lotto> lottos) {
+        for (int i = 0; i < autoLottoCount; i++) {
+            lottos.add(new Lotto(LottoFactory.createAutoLottoNumbers()));
+        }
+    }
 }
