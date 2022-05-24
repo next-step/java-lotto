@@ -1,10 +1,6 @@
 package lotto.view;
 
-import lombok.extern.slf4j.Slf4j;
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Winners;
-import lotto.domain.WinningsType;
+import lotto.domain.*;
 
 import java.util.Map;
 
@@ -12,40 +8,55 @@ public class ResultView {
     public static final String RESULT_LOSS = "손해";
     private static final String RESULT_BREAK_EVEN = "본전";
     private static final String RESULT_PROFIT = "이득";
+    private static final int PROFIT_STANDARD = 1;
     private static final int ZERO = 0;
+    private static final int LAST_NUMBER_FORMAT = 2;
 
     private ResultView() {
     }
 
-    public static void resultLottoNumber(int manualSize, int numberOfLotto, Lottos lottos) {
-        System.out.println("\n수동으로 " + manualSize + "장, 자동으로 " + (numberOfLotto - manualSize) + "개를 구매했습니다.");
+    public static void resultLotto(int manualSize, int numberOfLotto, Lottos lottos) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\n수동으로 " + manualSize + "장, 자동으로 " + (numberOfLotto - manualSize) + "개를 구매했습니다.\n");
         for (Lotto lotto : lottos.getLottos()) {
-            System.out.println(lotto);
+            resultLottoNumber(lotto, stringBuilder);
         }
+        System.out.print(stringBuilder);
+    }
+
+    private static void resultLottoNumber(Lotto lotto, StringBuilder stringBuilder) {
+        stringBuilder.append("[");
+
+        for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
+            stringBuilder.append(lottoNumber.getLottoNumber() + ", ");
+        }
+
+        stringBuilder.delete(stringBuilder.length() - LAST_NUMBER_FORMAT, stringBuilder.length());
+        stringBuilder.append("]\n");
     }
 
     public static void resultWinners(Winners winners) {
+        StringBuilder stringBuilder = new StringBuilder();
         Map<WinningsType, Integer> winnerResult = winners.getWinners();
-        System.out.println("\n당첨 통계\n---------");
+        stringBuilder.append("\n당첨 통계\n---------\n");
         for (WinningsType winningsType : winnerResult.keySet()) {
-            resultWinner(winningsType, winnerResult);
+            resultWinner(stringBuilder, winningsType, winnerResult);
         }
+        System.out.println(stringBuilder);
     }
 
-    private static void resultWinner(WinningsType winningsType, Map<WinningsType, Integer> winnerResult) {
+    private static void resultWinner(StringBuilder stringBuilder, WinningsType
+            winningsType, Map<WinningsType, Integer> winnerResult) {
         int key = winningsType.getNumberOfSame();
         int value = winnerResult.get(winningsType);
-
-        if (key == 0) {
+        if (key == ZERO) {
             return;
         }
-
         if (isBonusWinnings(winningsType)) {
-            System.out.println(key + "개 일치, 보너스 볼 일치 (" + winningsType.getWinnings() + "원)- " + value + "개");
+            stringBuilder.append(key + "개 일치, 보너스 볼 일치 (" + winningsType.getWinnings() + "원)- " + value + "개\n");
             return;
         }
-
-        System.out.println(key + "개 일치 (" + winningsType.getWinnings() + "원)- " + value + "개");
+        stringBuilder.append(key + "개 일치 (" + winningsType.getWinnings() + "원)- " + value + "개\n");
     }
 
     private static boolean isBonusWinnings(WinningsType winningsType) {
@@ -54,19 +65,16 @@ public class ResultView {
 
     public static void resultProfit(Winners winners, int money) {
         double revenue = winners.revenue(money);
-        String result = resultProfit(revenue);
-
-        System.out.println("총 수익률은 " + String.format(" %.2f", revenue) + "입니다.(기준이 1이기 때문에 결과적으로 " + result + "(이)라는 의미임)");
+        System.out.println("총 수익률은 " + String.format(" %.2f", revenue) + "입니다.(기준이 1이기 때문에 결과적으로 " + resultProfit(revenue) + "(이)라는 의미임)");
     }
 
     private static String resultProfit(double revenue) {
-        if (revenue > 1) {
+        if (revenue > PROFIT_STANDARD) {
             return RESULT_PROFIT;
         }
-        if (revenue < 1) {
+        if (revenue < PROFIT_STANDARD) {
             return RESULT_LOSS;
         }
         return RESULT_BREAK_EVEN;
     }
-
 }

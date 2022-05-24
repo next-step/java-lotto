@@ -30,31 +30,23 @@ public enum WinningsType {
         return winnings;
     }
 
-    public static Optional<WinningsType> selectWinningsType(int numberOfSame, boolean isSameBonusNumber) {
-        if (isMissing(numberOfSame)) {
-            return Optional.of(꽝);
-        }
-        
+    public static WinningsType selectWinningsType(int numberOfSame, boolean isSameBonusNumber) {
         if (numberOfSame == FIVE) {
             return whenCountIsFive(isSameBonusNumber);
         }
 
         return Arrays.stream(WinningsType.values()).filter(type -> type.isSameNumber(numberOfSame))
-                .findAny();
-    }
-
-    public static boolean isMissing(int numberOfSame) {
-        return numberOfSame < WINNINGS_MINIMUM;
+                .findAny().orElse(꽝);
     }
 
     private boolean isSameNumber(int numberOfSame) {
         return this.numberOfSame == numberOfSame;
     }
 
-    private static Optional<WinningsType> whenCountIsFive(boolean isSameBonusNumber) {
+    private static WinningsType whenCountIsFive(boolean isSameBonusNumber) {
         if (isSameBonusNumber) {
-            return Optional.of(이등);
+            return 이등;
         }
-        return Optional.of(삼등);
+        return 삼등;
     }
 }
