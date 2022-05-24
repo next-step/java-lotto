@@ -13,16 +13,12 @@ public class LottoTicket {
     private final TreeSet<LottoNumber> lottoNumbers;
 
     public static LottoTicket buyOne() {
-        final TreeSet<LottoNumber> lottoNumbers = new TreeSet<>();
-        while (lottoNumbers.size() < LOTTO_NUMBERS_SIZE) {
-            lottoNumbers.add(LottoNumber.random());
-        }
-        return new LottoTicket(lottoNumbers);
+        return new LottoTicket(new TreeSet<>(LottoNumber.random(LOTTO_NUMBERS_SIZE)));
     }
 
     public LottoTicket(final String numbers) {
         this(Arrays.stream(numbers.split(","))
-              .map(LottoNumber::new)
+              .map(LottoNumber::of)
               .collect(Collectors.toCollection(
                       () -> new TreeSet<>(LottoNumber::compareTo)
               )));

@@ -1,16 +1,22 @@
 package dev.solar.lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
-import java.util.Random;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
-    private static final Random random = new Random();
+    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
     private final int value;
 
-    public static LottoNumber random() {
-        return new LottoNumber(random.nextInt(MAX_NUMBER) + MIN_NUMBER);
+    static {
+        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
+        }
     }
 
     public LottoNumber(final int number) {
@@ -18,8 +24,27 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.value = number;
     }
 
-    public LottoNumber(final String number) {
-        this(toNumber(number));
+    public static List<LottoNumber> random(int size) {
+
+        final List<LottoNumber> randomLottoNumbers = new ArrayList<>();
+        final ArrayList<Integer> keys = new ArrayList<>(lottoNumbers.keySet());
+        Collections.shuffle(keys);
+        for (final Integer key : keys) {
+            randomLottoNumbers.add(lottoNumbers.get(key));
+        }
+        return randomLottoNumbers.subList(0, size);
+    }
+
+    public static LottoNumber of(final int number) {
+        final LottoNumber lottoNumber = lottoNumbers.get(number);
+        if (lottoNumber == null) {
+            throw new IllegalArgumentException("로또 번호 범위는 " + MIN_NUMBER + " ~ " + MAX_NUMBER + " 입니다.");
+        }
+        return lottoNumber;
+    }
+
+    public static LottoNumber of(final String number) {
+        return of(toNumber(number));
     }
 
     private static int toNumber(final String number) {
