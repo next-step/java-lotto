@@ -1,22 +1,17 @@
 package lotto.domain;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class RankingResult {
-	private final Map<LottoRank, Long> ranking = new LinkedHashMap<>();
-	public RankingResult() {
-		Stream.of(LottoRank.values())
-			.forEach(rank -> ranking.put(rank, 0L));
-	}
+	private final Map<LottoRank, Long> ranking;
 
-	public RankingResult(PurchaseLottoGroup purchaseLottoGroup, WinningNumber winningNumber) {
-		this();
-		List<LottoRank> rankResults = purchaseLottoGroup.ranking(winningNumber);
-
-		rankResults.forEach(this::countLottoRank);
+	public RankingResult(List<LottoRank> rankResults) {
+		ranking = rankResults
+			.stream()
+			.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 	}
 
 	public Roi calculateRoi() {
@@ -43,12 +38,6 @@ public class RankingResult {
 			.sum();
 
 		return Lotto.LOTTO_PRICE.multi(resultSize);
-	}
-
-	private void countLottoRank(LottoRank resultRank) {
-		if (ranking.containsKey(resultRank)) {
-			ranking.put(resultRank, ranking.get(resultRank) + 1);
-		}
 	}
 
 	@Override

@@ -9,17 +9,25 @@ public class LottoNumber {
 	public static final int LOTTO_RANGE_MAX = 45;
 	private final int number;
 
-	public LottoNumber(int number) {
+	private LottoNumber(int number, LottoNumberType type) {
 		validateNumber(number);
 		this.number = number;
 	}
 
-	public LottoNumber(String number) {
-		validateTextNumber(number);
-		this.number = Parser.toInt(number.trim());
+	public static LottoNumber from(int number) {
+		return new LottoNumber(number, LottoNumberType.DEFAULT);
 	}
 
-	private void validateTextNumber(String number) {
+	public static LottoNumber from(String number) {
+		return of(number, LottoNumberType.DEFAULT);
+	}
+
+	public static LottoNumber of(String number, LottoNumberType type) {
+		validateTextNumber(number);
+		return new LottoNumber(Parser.toInt(number.trim()), type);
+	}
+
+	private static void validateTextNumber(String number) {
 		if (number == null || number.isBlank()) {
 			throw new IllegalArgumentException("로또번호는 빈 값이거나 null 이면 생성할 수 없습니다.");
 		}
@@ -27,7 +35,7 @@ public class LottoNumber {
 
 	private void validateNumber(int number) {
 		if (Range.of(LOTTO_RANGE_MIN, LOTTO_RANGE_MAX).notContain(number)) {
-			throw new OutOfRangeException("생성된 로또번호가 범위를 벗어났습니다. (범위 : "+ Range.of(LOTTO_RANGE_MIN, LOTTO_RANGE_MAX) + ")");
+			throw new OutOfRangeException(String.format("생성된 로또번호가 범위를 벗어났습니다. (범위 : %s)", Range.of(LOTTO_RANGE_MIN, LOTTO_RANGE_MAX)));
 		}
 	}
 

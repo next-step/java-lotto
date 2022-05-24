@@ -37,7 +37,7 @@ public class Amount {
 
 	private void validateRemainder(Amount lottoPrice) {
 		if (this.amount % lottoPrice.amount != 0) {
-			throw new IllegalArgumentException(this.amount + "원은 " + lottoPrice.amount + "원의 배수가 아닙니다.");
+			throw new IllegalArgumentException(String.format("%d원은 %d원의 배수가 아닙니다.", this.amount, lottoPrice.amount));
 		}
 	}
 
