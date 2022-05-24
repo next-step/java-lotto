@@ -44,4 +44,14 @@ public class LottosTest {
         assertThat(rankingMap.get(SECOND)).isEqualTo(1);
         assertThat(rankingMap.get(FOURTH)).isEqualTo(1);
     }
+
+    @DisplayName("로또의 개수를 반환한다.")
+    @Test
+    void sizeTest() {
+        Lottos lottos = new Lottos();
+        lottos.generateLottoFromUserInput("1,2,3,4,5,6");
+        lottos.generateLottoFromUserInput("1,2,3,4,5,7");
+        lottos.generateLottoFromUserInput("1,2,3,4,7,8");
+        assertThat(lottos.size()).isEqualTo(3);
+    }
 }

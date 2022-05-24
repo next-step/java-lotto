@@ -36,6 +36,10 @@ public class Lottos {
                 .forEach(ranking -> winningLottoMap.putIfAbsent(ranking, 0));
     }
 
+    public int size() {
+        return lottos.size();
+    }
+
     @Override
     public String toString() {
         return lottos.stream()
