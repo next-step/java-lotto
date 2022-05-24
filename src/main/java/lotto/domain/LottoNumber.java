@@ -18,13 +18,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private void validateLottoNumber(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
-            throw new IllegalArgumentException("로또 숫자 범위에 벗어납니다.");
+            throw new IllegalArgumentException("[ERROR] 로또 숫자 범위에 벗어납니다.");
         }
     }
 
     public static LottoNumber createNewNumber(String number) {
         if (!number.matches(LOTTO_NUMBER_FORMAT)) {
-            throw new IllegalArgumentException("로또 번호는 정수만 입력해주세요.");
+            throw new IllegalArgumentException("[ERROR] 로또 번호는 정수만 입력해주세요.");
         }
         return createNewNumber(Integer.parseInt(number));
     }
