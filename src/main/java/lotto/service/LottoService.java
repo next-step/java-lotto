@@ -2,11 +2,18 @@ package lotto.service;
 
 import lotto.domain.*;
 
+import java.util.List;
+
 public class LottoService {
     private final Lottos lottos = new Lottos();
 
-    public Lottos generateRandomLottos(GenerateNumberStrategy strategy, int totalPrice, int eachPrice) {
-        lottos.generateLottosFromStrategy(strategy, totalPrice / eachPrice);
+    public Lottos generateRandomLottos(GenerateNumberStrategy strategy, Money randomPurchaseMoney) {
+        lottos.generateLottosFromStrategy(strategy, randomPurchaseMoney.purchaseCount());
+        return lottos;
+    }
+
+    public Lottos generateManualLottos(List<String> lottoList) {
+        lottoList.forEach(lottos::generateLottoFromUserInput);
         return lottos;
     }
 
