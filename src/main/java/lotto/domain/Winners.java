@@ -6,33 +6,31 @@ public class Winners {
     public static final int COUNT_UNIT = 1;
     public static final int COUNT_INITIAL = 0;
 
-    private final Map<WinningsType, Integer> winners;
+    private final Map<Rank, Integer> winners;
 
     public Winners() {
         this.winners = new LinkedHashMap<>();
-        for (WinningsType winningsType : WinningsType.values()) {
+        for (Rank winningsType : Rank.values()) {
             winners.put(winningsType, COUNT_INITIAL);
         }
     }
 
-    public Map<WinningsType, Integer> getWinners() {
+    public Map<Rank, Integer> getWinners() {
         return new LinkedHashMap<>(winners);
     }
 
-    public void findWinners(Lotto lotto, WinningNumbers winningNumbers) {
-        int count = winningNumbers.numberOfSame(lotto);
-        WinningsType temporary = WinningsType.selectWinningsType(count, winningNumbers.isSameBonus(lotto));
-        addWinner(temporary);
+    public void findWinners(Lottos lottos, WinningNumbers winningNumbers) {
+        List<Rank> ranks = lottos.selectRankType(winningNumbers);
+        ranks.forEach(rank -> addWinner(rank));
     }
 
-    public void addWinner(WinningsType winningsType) {
-        winners.put(winningsType, winners.get(winningsType) + COUNT_UNIT);
+    public void addWinner(Rank rank) {
+        winners.put(rank, winners.get(rank) + COUNT_UNIT);
     }
-
 
     public double revenue(int money) {
         double amount = 0;
-        for (WinningsType winningsType : WinningsType.values()) {
+        for (Rank winningsType : Rank.values()) {
             amount += winningsType.getWinnings() * winners.get(winningsType);
         }
         return amount / money;

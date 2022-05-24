@@ -20,13 +20,11 @@ public class LottoController {
         List<Lotto> manualLotto = InputView.inputManualNumbers(manualSize);
 
         Lottos lottos = new Lottos(manualLotto, numberOfLotto);
-        //Lottos lottos = new Lottos(lottoOfNumber);
         ResultView.resultLotto(manualSize, numberOfLotto, lottos);
 
         WinningNumbers winningNumbers = new WinningNumbers(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
         Winners winners = new Winners();
-
-        lottos.findWinners(winners, winningNumbers);
+        winners.findWinners(lottos, winningNumbers);
 
         ResultView.resultWinners(winners);
         ResultView.resultProfit(winners, money);

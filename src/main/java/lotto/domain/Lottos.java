@@ -7,8 +7,8 @@ import java.util.Objects;
 public class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(int lottoOfNumber) {
-        for (int i = 0; i < lottoOfNumber; i++) {
+    public Lottos(int numberOfLotto) {
+        for (int i = 0; i < numberOfLotto; i++) {
             Lotto lotto = new Lotto();
             lottos.add(lotto);
         }
@@ -28,11 +28,15 @@ public class Lottos {
         return new ArrayList<>(this.lottos);
     }
 
-    public void findWinners(Winners winners, WinningNumbers winningNumbers) {
+    public List<Rank> selectRankType(WinningNumbers winningNumbers) {
+        List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            winners.findWinners(lotto, winningNumbers);
+            int count = winningNumbers.numberOfSame(lotto);
+            ranks.add(Rank.selectType(count, winningNumbers.isSameBonus(lotto)));
         }
+        return ranks;
     }
+
 
     @Override
     public boolean equals(Object o) {
