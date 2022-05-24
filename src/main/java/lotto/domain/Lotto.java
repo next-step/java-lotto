@@ -11,23 +11,22 @@ public class Lotto {
 	public static final String SPLIT_DELIMITER = ",";
 	private final Set<LottoNumber> lottoNumbers;
 
-	public Lotto() {
+	private Lotto() {
 		lottoNumbers = new HashSet<>(LottoRandomGenerator.generate(LOTTO_SIZE));
 		validateNumberSize(lottoNumbers);
 	}
 
-	public Lotto(String lottoNumbers) {
-		Set<LottoNumber> generationLottoNumber = Stream.of(lottoNumbers.split(SPLIT_DELIMITER))
-			.map(LottoNumber::from)
-			.collect(Collectors.toSet());
-
-		validateNumberSize(generationLottoNumber);
-		this.lottoNumbers = generationLottoNumber;
-	}
-
-	public Lotto(Set<LottoNumber> lottoNumbers) {
+	private Lotto(Set<LottoNumber> lottoNumbers) {
 		validateNumberSize(lottoNumbers);
 		this.lottoNumbers = lottoNumbers;
+	}
+
+	public static Lotto createAuto() {
+		return new Lotto();
+	}
+
+	public static Lotto createManual(Set<LottoNumber> lottoNumbers) {
+		return new Lotto(lottoNumbers);
 	}
 
 	private void validateNumberSize(Set<LottoNumber> lottoNumbers) {

@@ -2,7 +2,9 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +16,7 @@ public class LottoTest {
 	@DisplayName("로또 번호가 설정한 개수만큼 생성")
 	@Test
 	public void When_createdLotto_Expected_6LottoNumber() {
-		Lotto lotto = new Lotto(Set.of(
+		Lotto lotto = Lotto.createManual(Set.of(
 			LottoNumber.from(1),
 			LottoNumber.from(2),
 			LottoNumber.from(3),
@@ -29,7 +31,7 @@ public class LottoTest {
 	@DisplayName("로또 번호 중복 시, IllegalArgumentException 발생")
 	@Test
 	public void When_createdSameNumberLotto_Expected_IllegalArgumentException() {
-		assertThatThrownBy(() -> new Lotto(Set.of(
+		assertThatThrownBy(() -> Lotto.createManual(Set.of(
 			LottoNumber.from(1),
 			LottoNumber.from(1),
 			LottoNumber.from(1),
@@ -43,7 +45,7 @@ public class LottoTest {
 	@DisplayName("로또의 로또번호가 6개가 아니면, IllegalArgumentException 발생")
 	@Test
 	public void When_created5NumberLotto_Expected_IllegalArgumentException() {
-		assertThatThrownBy(() -> new Lotto(Set.of(
+		assertThatThrownBy(() -> Lotto.createManual(Set.of(
 			LottoNumber.from(1),
 			LottoNumber.from(2),
 			LottoNumber.from(3),
@@ -56,7 +58,10 @@ public class LottoTest {
 	@CsvSource(value = {"1, 2, 3, 4, 5, 6:3:true", "1,2,3,4,5,6:7:false"}, delimiter = ':')
 	@ParameterizedTest
 	public void When_GivenLottoNumber_Expected_ContainOrNot(String lottoInput, int number, boolean expected) {
-		Lotto lotto = new Lotto(lottoInput);
+		Lotto lotto = Lotto.createManual(
+			Arrays.stream(lottoInput.split(Lotto.SPLIT_DELIMITER))
+				.map(LottoNumber::from)
+				.collect(Collectors.toSet()));
 
 		assertThat(lotto.contain(LottoNumber.from(number)))
 			.isEqualTo(expected);

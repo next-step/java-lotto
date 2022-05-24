@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -30,7 +31,7 @@ public class WinningNumbersTest {
 	@ParameterizedTest
 	public void When_GivenWrongSizeInput_Expected_IllegalArgumentException(String winningNumberInput, String bonusNumberInput) {
 		assertThatThrownBy(() -> new WinningNumbers(
-			splitWinningNumbersInput(winningNumberInput),
+			splitLottoInput(winningNumberInput),
 			LottoNumber.from(bonusNumberInput)))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
@@ -40,7 +41,7 @@ public class WinningNumbersTest {
 	@ParameterizedTest
 	public void When_GivenWrongNumberInput_Expected_StringParsingToIntegerException(String winningNumberInput, String bonusNumberInput) {
 		assertThatThrownBy(() -> new WinningNumbers(
-			splitWinningNumbersInput(winningNumberInput),
+			splitLottoInput(winningNumberInput),
 			LottoNumber.from(bonusNumberInput)))
 			.isInstanceOf(StringParsingToNumberException.class);
 	}
@@ -50,22 +51,22 @@ public class WinningNumbersTest {
 	@ParameterizedTest
 	public void When_GivenWinningAndLotto_Expected_SameCount(String lottoInput, long quantity) {
 		WinningNumbers winningNumbers = new WinningNumbers(NUMBERS_1, BONUS_1);
-		Lotto lotto = new Lotto(lottoInput);
+		Lotto lotto = Lotto.createManual(new HashSet<>(splitLottoInput(lottoInput)));
 
 		assertThat(winningNumbers.matchQuantity(lotto)).isEqualTo(quantity);
 	}
 
 	@DisplayName("로또와 보너스번호 포함 여부")
-	@CsvSource(value = {"7,5,4,3,2,1:false", "8,5,4,3,2,1:true"}, delimiter = ':')
+	@CsvSource(value = {"7,5,4,3,2,1:false", "9,5,4,3,2,1:true"}, delimiter = ':')
 	@ParameterizedTest
 	public void When_GivenWinningAndLotto_Expected_MatchingBonus(String lottoInput, boolean expected) {
 		WinningNumbers winningNumbers = new WinningNumbers(NUMBERS_1, BONUS_2);
-		Lotto lotto = new Lotto(lottoInput);
+		Lotto lotto = Lotto.createManual(new HashSet<>(splitLottoInput(lottoInput)));
 
 		assertThat(winningNumbers.matchBonus(lotto)).isEqualTo(expected);
 	}
 
-	private List<LottoNumber> splitWinningNumbersInput(String winningNumberInput) {
+	private List<LottoNumber> splitLottoInput(String winningNumberInput) {
 		return Stream.of(winningNumberInput.split(WinningNumbers.DELIMITER))
 			.map(LottoNumber::from)
 			.collect(Collectors.toList());

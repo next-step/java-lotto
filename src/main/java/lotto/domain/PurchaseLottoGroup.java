@@ -9,7 +9,7 @@ public class PurchaseLottoGroup {
 
 	public PurchaseLottoGroup(long quantity) {
 		lottoGroup =LongStream.rangeClosed(1, quantity)
-			.mapToObj(num -> new Lotto())
+			.mapToObj(num -> Lotto.createAuto())
 			.collect(Collectors.toList());
 	}
 
