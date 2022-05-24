@@ -27,11 +27,11 @@ public class Lotto {
 
     private List<LottoNumber> validateLottoNumbers(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_COUNT) {
-            throw new IllegalArgumentException("로또 숫자는 6개여야 합니다.");
+            throw new IllegalArgumentException("[ERROR] 로또 숫자는 6개여야 합니다.");
         }
 
         if (countDistinctLottoSize(lottoNumbers) < LOTTO_COUNT) {
-            throw new IllegalArgumentException("로또는 중복을 허용하지 않습니다.");
+            throw new IllegalArgumentException("[ERROR] 로또는 중복을 허용하지 않습니다.");
         }
 
         return lottoNumbers;
