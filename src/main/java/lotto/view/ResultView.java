@@ -3,71 +3,67 @@ package lotto.view;
 import lotto.domain.*;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResultView {
     public static final String RESULT_LOSS = "손해";
     private static final String RESULT_BREAK_EVEN = "본전";
     private static final String RESULT_PROFIT = "이득";
+    private static final String ENTER = "\n";
     private static final int PROFIT_STANDARD = 1;
     private static final int ZERO = 0;
-    private static final int LAST_NUMBER_FORMAT = 2;
-
 
     private ResultView() {
     }
 
-    public static void resultLotto(int numberOfLotto, Lottos lottos) {
+    public static void resultLotto(int manualSize, int numberOfLotto, Lottos lottos) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(numberOfLotto + "개를 구매했습니다.\n");
+        int remainNumberOfLotto = numberOfLotto - manualSize;
+        stringBuilder.append(String.format("%s수동으로 %d장, 자동으로 %d개를 구매하였습니다.%s", ENTER, manualSize, remainNumberOfLotto, ENTER));
         for (Lotto lotto : lottos.getLottos()) {
             resultLottoNumber(lotto, stringBuilder);
         }
-        System.out.println(stringBuilder);
+        System.out.print(stringBuilder);
     }
 
     private static void resultLottoNumber(Lotto lotto, StringBuilder stringBuilder) {
-        stringBuilder.append("[");
+        String lottoNumbers = lotto.getLottoNumbers().stream()
+                .map(LottoNumber::getLottoNumber)
+                .map(String::valueOf)
+                .collect(Collectors.joining(", "));
 
-        for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
-            stringBuilder.append(lottoNumber.getLottoNumber() + ", ");
-        }
-
-        stringBuilder.delete(stringBuilder.length() - LAST_NUMBER_FORMAT, stringBuilder.length());
-        stringBuilder.append("]\n");
+        stringBuilder.append(String.format("[%s]%s", lottoNumbers, ENTER));
     }
-
 
     public static void resultWinners(Winners winners) {
         StringBuilder stringBuilder = new StringBuilder();
-        Map<WinningsType, Integer> winnerResult = winners.getWinners();
-        stringBuilder.append("\n당첨 통계\n---------\n");
-        for (WinningsType winningsType : winnerResult.keySet()) {
-            resultWinner(stringBuilder, winningsType, winnerResult);
-        }
+        Map<Rank, Integer> winnerResult = winners.getWinners();
+        stringBuilder.append(String.format("%s당첨 통계%s---------%s", ENTER, ENTER, ENTER));
+        winnerResult.forEach(
+                ((rank, count) -> stringBuilder.append(resultWinner(rank, count))));
         System.out.println(stringBuilder);
     }
 
-    private static void resultWinner(StringBuilder stringBuilder, WinningsType winningsType, Map<WinningsType, Integer> winnerResult) {
-        int key = winningsType.getNumberOfSame();
-        int value = winnerResult.get(winningsType);
+    private static String resultWinner(Rank rank, int count) {
+        int key = rank.getNumberOfSame();
+        int winnings = rank.getWinnings();
         if (key == ZERO) {
-            return;
+            return "";
         }
-        if (isBonusWinnings(winningsType)) {
-            stringBuilder.append(key + "개 일치, 보너스 볼 일치 (" + winningsType.getWinnings() + "원)- " + value + "개\n");
-            return;
+        if (isBonusWinnings(rank)) {
+            return String.format("%d개 일치, 보너스볼 일치(%d원)- %d개%s", key, winnings, count, ENTER);
+
         }
-        stringBuilder.append(key + "개 일치 (" + winningsType.getWinnings() + "원)- " + value + "개\n");
+        return String.format("%d개 일치(%d원)- %d개%s", key, winnings, count, ENTER);
     }
 
-    private static boolean isBonusWinnings(WinningsType winningsType) {
-        return winningsType.equals(WinningsType.이등);
+    private static boolean isBonusWinnings(Rank winningsType) {
+        return winningsType.equals(Rank.이등);
     }
 
     public static void resultProfit(Winners winners, int money) {
         double revenue = winners.revenue(money);
-
-        System.out.println("총 수익률은 " + String.format(" %.2f", revenue) + "입니다.(기준이 1이기 때문에 결과적으로 " + resultProfit(revenue) + "(이)라는 의미임)");
+        System.out.println(String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s(이)라는 의미임)", revenue, resultProfit(revenue)));
     }
 
     private static String resultProfit(double revenue) {
@@ -79,5 +75,4 @@ public class ResultView {
         }
         return RESULT_BREAK_EVEN;
     }
-
 }

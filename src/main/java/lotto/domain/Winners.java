@@ -3,36 +3,45 @@ package lotto.domain;
 import java.util.*;
 
 public class Winners {
-    public static final int COUNT_UNIT = 1;
     public static final int COUNT_INITIAL = 0;
 
-    private final Map<WinningsType, Integer> winners;
+    private final Map<Rank, Integer> winners;
 
-    public Winners() {
+    private Winners() {
         this.winners = new LinkedHashMap<>();
-        for (WinningsType winningsType : WinningsType.values()) {
+        for (Rank winningsType : Rank.values()) {
             winners.put(winningsType, COUNT_INITIAL);
         }
     }
 
-    public Map<WinningsType, Integer> getWinners() {
+    private Winners(Rank rank) {
+        this.winners = new LinkedHashMap<>();
+        for (Rank winningsType : Rank.values()) {
+            winners.put(winningsType, COUNT_INITIAL);
+        }
+        winners.put(rank, winners.getOrDefault(rank, 0) + 1);
+    }
+
+    public static Winners of() {
+        return new Winners();
+    }
+
+    public static Winners of(Rank rank) {
+        return new Winners(rank);
+    }
+
+    public Map<Rank, Integer> getWinners() {
         return new LinkedHashMap<>(winners);
     }
 
-    public void findWinners(Lotto lotto, WinningNumbers winningNumbers) {
-        int count = winningNumbers.numberOfSame(lotto);
-        WinningsType temporary = WinningsType.selectWinningsType(count, winningNumbers.isSameBonus(lotto));
-        addWinner(temporary);
+    public void findWinners(Lottos lottos, WinningNumbers winningNumbers) {
+        Map<Rank, Integer> ranks = lottos.selectRankType(winningNumbers);
+        winners.putAll(ranks);
     }
-
-    public void addWinner(WinningsType winningsType) {
-        winners.put(winningsType, winners.get(winningsType) + COUNT_UNIT);
-    }
-
 
     public double revenue(int money) {
         double amount = 0;
-        for (WinningsType winningsType : WinningsType.values()) {
+        for (Rank winningsType : Rank.values()) {
             amount += winningsType.getWinnings() * winners.get(winningsType);
         }
         return amount / money;
