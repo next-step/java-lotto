@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -14,5 +15,12 @@ class RankingTest {
     void findMatchRankingTest(int matchCount, boolean matchBonus, Ranking ranking) {
         assertThat(Ranking.findMatchRanking(matchCount, matchBonus))
                 .isEqualTo(ranking);
+    }
+
+    @DisplayName("랭킹에 개수를 입력하면 금액을 반환한다.")
+    @Test
+    void priceTest() {
+        assertThat(Ranking.FIFTH.price(3))
+                .isEqualTo(15000);
     }
 }
