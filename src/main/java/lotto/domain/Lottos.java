@@ -7,21 +7,29 @@ import java.util.Objects;
 public class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(int numberOfLotto) {
+    private Lottos(int numberOfLotto) {
         for (int i = 0; i < numberOfLotto; i++) {
-            Lotto lotto = new Lotto();
+            Lotto lotto = Lotto.of();
             lottos.add(lotto);
         }
     }
 
-    public Lottos(List<Lotto> lottoList, int numberOfLotto) {
+    private Lottos(List<Lotto> lottoList, int numberOfLotto) {
         lottoList.forEach(lotto -> lottos.add(lotto));
-        numberOfLotto = numberOfLotto - lottoList.size();
+        int remainNumberOfLotto = numberOfLotto - lottoList.size();
 
-        for (int i = 0; i < numberOfLotto; i++) {
-            Lotto lotto = new Lotto();
+        for (int i = 0; i < remainNumberOfLotto; i++) {
+            Lotto lotto = Lotto.of();
             lottos.add(lotto);
         }
+    }
+
+    public static Lottos createAutoLottos(int numberOfLotto) {
+        return new Lottos(numberOfLotto);
+    }
+
+    public static Lottos createManualLottos(List<Lotto> lottoList, int numberOfLotto) {
+        return new Lottos(lottoList, numberOfLotto);
     }
 
     public List<Lotto> getLottos() {
@@ -36,7 +44,6 @@ public class Lottos {
         }
         return ranks;
     }
-
 
     @Override
     public boolean equals(Object o) {

@@ -7,36 +7,41 @@ public class Lotto {
     public static final int LOTTO_ALL_NUMBER = 45;
     public static final int LOTTO_MINIMUM_NUMBER = 1;
     public static final int LOTTO_UNIT_NUMBER = 6;
+    private static List<Integer> allLottoNumbers = new ArrayList<>();
+
+    static {
+        IntStream.range(LOTTO_MINIMUM_NUMBER, LOTTO_ALL_NUMBER)
+                .forEach(number -> allLottoNumbers.add(number));
+    }
 
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto() {
+    private Lotto() {
         lottoNumbers = new ArrayList<>();
-        List<Integer> lottoAllNumber = new ArrayList<>();
+        Collections.shuffle(allLottoNumbers);
 
-        IntStream.range(LOTTO_MINIMUM_NUMBER, LOTTO_ALL_NUMBER)
-                .forEach(number -> lottoAllNumber.add(number));
-        Collections.shuffle(lottoAllNumber);
-
-        lottoAllNumber.stream()
+        allLottoNumbers.stream()
                 .limit(LOTTO_UNIT_NUMBER)
                 .sorted()
-                .forEach(number -> lottoNumbers.add(new LottoNumber(number)));
+                .forEach(number -> lottoNumbers.add(LottoNumber.of(number)));
     }
 
-    public Lotto(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_UNIT_NUMBER) {
-            throw new IllegalArgumentException("로또 개수는 6개여야 합니다.");
-        }
-
-        if (Set.copyOf(lottoNumbers).size() != LOTTO_UNIT_NUMBER) {
-            throw new IllegalArgumentException("로또 번호는 중복되어서는 안됩니다.");
-        }
-
+    private Lotto(List<Integer> lottoNumbers) {
         List<LottoNumber> temporaryLottoNumbers = new ArrayList<>();
-        lottoNumbers.forEach(lottoNumber -> temporaryLottoNumbers.add(new LottoNumber(lottoNumber)));
+        lottoNumbers.forEach(lottoNumber -> temporaryLottoNumbers.add(LottoNumber.of(lottoNumber)));
 
         this.lottoNumbers = new ArrayList<>(temporaryLottoNumbers);
+    }
+
+    public static Lotto of() {
+        return new Lotto();
+    }
+
+    public static Lotto of(List<Integer> lottoNumbers) {
+        if (Set.copyOf(lottoNumbers).size() != LOTTO_UNIT_NUMBER) {
+            throw new IllegalArgumentException("로또 번호는 서로다른 6개의 값이어야 합니다.");
+        }
+        return new Lotto(lottoNumbers);
     }
 
     public List<LottoNumber> getLottoNumbers() {

@@ -8,11 +8,15 @@ public class Winners {
 
     private final Map<Rank, Integer> winners;
 
-    public Winners() {
+    private Winners() {
         this.winners = new LinkedHashMap<>();
         for (Rank winningsType : Rank.values()) {
             winners.put(winningsType, COUNT_INITIAL);
         }
+    }
+
+    public static Winners of() {
+        return new Winners();
     }
 
     public Map<Rank, Integer> getWinners() {

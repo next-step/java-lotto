@@ -35,7 +35,7 @@ public class InputView {
             lottoNumberString.forEach(number -> {
                 lottoNumber.add(Integer.parseInt(number));
             });
-            lottos.add(new Lotto(lottoNumber));
+            lottos.add(Lotto.of(lottoNumber));
         }
         return lottos;
     }
