@@ -1,14 +1,15 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
-    public static final int LOTTO_UNIT_NUMBER = 6;
     private static Scanner scanner = new Scanner(System.in);
 
     private InputView() {
@@ -30,12 +31,13 @@ public class InputView {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < manualSize; i++) {
-            List<String> lottoNumberString = Arrays.asList(scanner.nextLine().split(", "));
-            List<Integer> lottoNumber = new ArrayList<>();
-            lottoNumberString.forEach(number -> {
-                lottoNumber.add(Integer.parseInt(number));
-            });
-            lottos.add(Lotto.of(lottoNumber));
+            List<Integer> lottoNumbers =
+                    Arrays.asList(scanner.nextLine().split(", "))
+                            .stream()
+                            .map(Integer::valueOf)
+                            .collect(Collectors.toList());
+
+            lottos.add(Lotto.of(lottoNumbers));
         }
         return lottos;
     }
@@ -43,13 +45,9 @@ public class InputView {
     public static List<Integer> inputWinningNumbers() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         String[] winningNumberString = scanner.nextLine().split(", ");
-        Integer[] winningNumber = new Integer[LOTTO_UNIT_NUMBER];
-
-        for (int i = 0; i < LOTTO_UNIT_NUMBER; i++) {
-            winningNumber[i] = Integer.parseInt(winningNumberString[i]);
-        }
-
-        return Arrays.asList(winningNumber);
+        return Arrays.stream(winningNumberString)
+                .map(Integer::valueOf)
+                .collect(Collectors.toList());
     }
 
     public static Integer inputBonusNumber() {

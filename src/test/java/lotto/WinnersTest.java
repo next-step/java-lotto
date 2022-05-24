@@ -18,9 +18,7 @@ public class WinnersTest {
         WinningNumbers winningNumbers = WinningNumbers.of(winningNumber, 7);
         Winners winners = Winners.of();
         winners.findWinners(lottos, winningNumbers);
-
-        Winners compareWinners = Winners.of();
-        compareWinners.addWinner(Rank.일등);
+        Winners compareWinners = Winners.of(Rank.일등);
         assertThat(winners).isEqualTo(compareWinners);
     }
 

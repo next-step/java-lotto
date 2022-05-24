@@ -2,7 +2,10 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
@@ -14,9 +17,8 @@ public class Lottos {
         }
     }
 
-    private Lottos(List<Lotto> lottoList, int numberOfLotto) {
-        lottoList.forEach(lotto -> lottos.add(lotto));
-        int remainNumberOfLotto = numberOfLotto - lottoList.size();
+    private Lottos(List<Lotto> manualLottos, int remainNumberOfLotto) {
+        lottos.addAll(manualLottos);
 
         for (int i = 0; i < remainNumberOfLotto; i++) {
             Lotto lotto = Lotto.of();
@@ -24,25 +26,20 @@ public class Lottos {
         }
     }
 
-    public static Lottos createAutoLottos(int numberOfLotto) {
-        return new Lottos(numberOfLotto);
-    }
-
-    public static Lottos createManualLottos(List<Lotto> lottoList, int numberOfLotto) {
-        return new Lottos(lottoList, numberOfLotto);
+    public static Lottos createManualLottos(List<Lotto> manualLottos, int numberOfLotto) {
+        int remainNumberOfLotto = numberOfLotto - manualLottos.size();
+        return new Lottos(manualLottos, remainNumberOfLotto);
     }
 
     public List<Lotto> getLottos() {
         return new ArrayList<>(this.lottos);
     }
 
-    public List<Rank> selectRankType(WinningNumbers winningNumbers) {
-        List<Rank> ranks = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            int count = winningNumbers.numberOfSame(lotto);
-            ranks.add(Rank.selectType(count, winningNumbers.isSameBonus(lotto)));
-        }
-        return ranks;
+    public Map<Rank, Integer> selectRankType(WinningNumbers winningNumbers) {
+        return lottos.stream()
+                .map(lotto -> Rank.selectType(winningNumbers.numberOfSame(lotto),
+                        winningNumbers.isSameBonus(lotto)))
+                .collect(Collectors.toMap(Function.identity(), value -> 1, Integer::sum));
     }
 
     @Override

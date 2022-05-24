@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.*;
 
 public class Winners {
-    public static final int COUNT_UNIT = 1;
     public static final int COUNT_INITIAL = 0;
 
     private final Map<Rank, Integer> winners;
@@ -15,8 +14,20 @@ public class Winners {
         }
     }
 
+    private Winners(Rank rank) {
+        this.winners = new LinkedHashMap<>();
+        for (Rank winningsType : Rank.values()) {
+            winners.put(winningsType, COUNT_INITIAL);
+        }
+        winners.put(rank, winners.getOrDefault(rank, 0) + 1);
+    }
+
     public static Winners of() {
         return new Winners();
+    }
+
+    public static Winners of(Rank rank) {
+        return new Winners(rank);
     }
 
     public Map<Rank, Integer> getWinners() {
@@ -24,12 +35,8 @@ public class Winners {
     }
 
     public void findWinners(Lottos lottos, WinningNumbers winningNumbers) {
-        List<Rank> ranks = lottos.selectRankType(winningNumbers);
-        ranks.forEach(rank -> addWinner(rank));
-    }
-
-    public void addWinner(Rank rank) {
-        winners.put(rank, winners.get(rank) + COUNT_UNIT);
+        Map<Rank, Integer> ranks = lottos.selectRankType(winningNumbers);
+        winners.putAll(ranks);
     }
 
     public double revenue(int money) {

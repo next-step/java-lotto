@@ -9,7 +9,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumberTest {
-
     @Test
     void 보너스번호일치() {
         LottoNumber lottoNumber = LottoNumber.of(6);
@@ -21,9 +20,7 @@ public class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     void 로또번호유효성체크(int number) {
-        assertThatThrownBy(() -> {
-            LottoNumber lottoNumber = LottoNumber.of(number);
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> LottoNumber.of(number)).isInstanceOf(IllegalArgumentException.class);
     }
 
 }
