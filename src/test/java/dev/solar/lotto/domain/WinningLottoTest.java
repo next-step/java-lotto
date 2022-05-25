@@ -1,4 +1,4 @@
-package dev.solar.lotto;
+package dev.solar.lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
