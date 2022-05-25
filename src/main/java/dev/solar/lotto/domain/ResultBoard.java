@@ -4,13 +4,13 @@ import java.util.Arrays;
 import java.util.NavigableSet;
 import java.util.TreeMap;
 
-public class Rank {
+public class ResultBoard {
     private static final int INITIAL_COUNT = 0;
     private static final int INCREASE_COUNT = 1;
 
     private final TreeMap<PrizeMoney, Integer> winningResult;
 
-    public Rank() {
+    public ResultBoard() {
         this.winningResult = new TreeMap<>();
         initialWinningResult();
     }

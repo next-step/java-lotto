@@ -43,19 +43,19 @@ public class Lotto {
         this.remainingLottoTicket -= 1;
     }
 
-    public Rank checkWinningResult(WinningLotto winningLotto) {
-        final Rank rank = new Rank();
+    public ResultBoard checkWinningResult(WinningLotto winningLotto) {
+        final ResultBoard resultBoard = new ResultBoard();
         for (final LottoTicket lottoTicket : lottoTickets) {
-            rank.addResult(winningLotto.match(lottoTicket));
+            resultBoard.addResult(winningLotto.match(lottoTicket));
         }
-        return rank;
+        return resultBoard;
     }
 
-    public double calculateProfitMargin(Rank rank) {
-        final long totalPrizeMoney = rank.getNavigableKeySet()
-                                                  .stream()
-                                                  .mapToInt(
-                                                          prizeMoney -> prizeMoney.getPrizeMoney() * rank.getValue(prizeMoney)
+    public double calculateProfitMargin(ResultBoard resultBoard) {
+        final long totalPrizeMoney = resultBoard.getNavigableKeySet()
+                                                .stream()
+                                                .mapToInt(
+                                                          prizeMoney -> prizeMoney.getPrizeMoney() * resultBoard.getValue(prizeMoney)
                                                   ).sum();
         return (double) totalPrizeMoney / payment;
     }

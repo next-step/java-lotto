@@ -8,10 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import dev.solar.lotto.domain.Lotto;
-import dev.solar.lotto.domain.LottoTicket;
-import dev.solar.lotto.domain.Rank;
-
 public class LottoTest {
 
     @DisplayName("로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급한다.")
@@ -34,10 +30,10 @@ public class LottoTest {
     @Test
     void calculate_profit_margin() {
         final Lotto lotto = new Lotto(14000);
-        final Rank rank = new Rank();
-        rank.addResult(3);
+        final ResultBoard resultBoard = new ResultBoard();
+        resultBoard.addResult(3);
 
-        final double actual = lotto.calculateProfitMargin(rank);
+        final double actual = lotto.calculateProfitMargin(resultBoard);
         assertThat(actual).isEqualTo(0.35, withPrecision(0.01));
     }
 }
