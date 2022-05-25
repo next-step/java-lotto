@@ -16,13 +16,16 @@ public class OutputView {
 	private OutputView() {}
 
 	public static void printPurchaseLottoGroup(PurchaseLottoGroup purchaseLottoGroup) {
-		System.out.println(purchaseLottoGroup.values().stream()
-			.map(Lotto::toString)
-			.collect(Collectors.joining("\n")));
+		StringBuilder builder = new StringBuilder();
+
+		purchaseLottoGroup.values()
+			.forEach(lotto -> builder.append(lotto.values()).append(ENTER));
+
+		System.out.println(builder);
 	}
 
-	public static void printPurchaseQuantity(long quantity) {
-		System.out.println(quantity + "개를 구매했습니다.");
+	public static void printPurchaseQuantity(long manualQuantity, long autoQuantity) {
+		System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualQuantity, autoQuantity));
 	}
 
 	public static void printWinningStatistics(RankingResult rankingResult) {

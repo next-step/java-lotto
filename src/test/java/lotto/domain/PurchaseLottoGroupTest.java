@@ -2,18 +2,29 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.api.Test;
 
 public class PurchaseLottoGroupTest {
 
 	@DisplayName("구매수량만큼 로또 생성")
-	@ValueSource(ints = {14, 100})
-	@ParameterizedTest
-	public void When_GivenPurchaseQuantity_Expected_matchingSizeLotto(int quantity) {
-		PurchaseLottoGroup purchaseLottoGroup = new PurchaseLottoGroup(quantity);
+	@Test
+	public void When_CreatedPurchaseLottoGroup_Expected_SameSize() {
+		PurchaseLottoGroup purchaseLottoGroup = PurchaseLottoGroup.create(List.of(
+			LottoTest.MANUAL_LOTTO_1,
+			LottoTest.MANUAL_LOTTO_2,
+			LottoTest.MANUAL_LOTTO_3
+		), 5);
 
-		assertThat(purchaseLottoGroup.size()).isEqualTo(quantity);
+		assertThat(purchaseLottoGroup.size()).isEqualTo(8);
+	}
+
+	@DisplayName("구매수량만큼 로또 생성")
+	@Test
+	public void When_GivenManualIsNull_Expected_Exception() {
+		assertThatThrownBy(() -> PurchaseLottoGroup.create(null, 5))
+			.isInstanceOf(IllegalArgumentException.class);
 	}
 }

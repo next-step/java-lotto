@@ -1,6 +1,10 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -12,7 +16,7 @@ public class Lotto {
 	private final Set<LottoNumber> lottoNumbers;
 
 	private Lotto() {
-		lottoNumbers = new HashSet<>(LottoRandomGenerator.generate(LOTTO_SIZE));
+		lottoNumbers = new LinkedHashSet<>(LottoRandomGenerator.generate(LOTTO_SIZE));
 		validateNumberSize(lottoNumbers);
 	}
 
@@ -39,12 +43,17 @@ public class Lotto {
 		return lottoNumbers.size();
 	}
 
-	@Override
-	public String toString() {
-		return lottoNumbers.toString();
+	public List<LottoNumber> values() {
+		return new ArrayList<>(lottoNumbers);
 	}
 
 	public boolean contain(LottoNumber number) {
 		return lottoNumbers.contains(number);
 	}
+
+	@Override
+	public String toString() {
+		return lottoNumbers.toString();
+	}
+
 }
