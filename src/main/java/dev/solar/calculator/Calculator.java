@@ -1,3 +1,5 @@
+package dev.solar.calculator;
+
 import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Queue;
@@ -29,20 +31,21 @@ public class Calculator {
     private static void parse(final String input, final Queue<Integer> operands, final Queue<Operator> operators) {
         final String[] formula = input.split(DELIMITER);
         for (final String str : formula) {
-            if (isNumber(str)) {
-                operands.add(Integer.parseInt(str));
-                continue;
-            }
-            operators.add(Operator.getEnum(str));
+            classifyOperandOrOperator(operands, operators, str);
         }
     }
 
-    private static boolean isNumber(final String str) {
-        try {
-            Integer.parseInt(str);
-        } catch (NumberFormatException e) {
-            return false;
+    private static void classifyOperandOrOperator(final Queue<Integer> operands, final Queue<Operator> operators, final String str) {
+        if (isNumber(str)) {
+            operands.add(Integer.parseInt(str));
+            return;
         }
-        return true;
+        operators.add(Operator.getEnum(str));
+    }
+
+    private static boolean isNumber(final String input) {
+        String regExp = "^[0-9]+$";
+
+        return input.matches(regExp);
     }
 }
