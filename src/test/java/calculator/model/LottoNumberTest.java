@@ -28,7 +28,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @MethodSource("정상적인_숫자의_문자_매개변수")
     void 정상적인_숫자의_문자일때(String numberText, int resultNumber) {
-        assertThat(new LottoNumber(new IntNumber(numberText)).getNumber()).isEqualTo(resultNumber);
+        assertThat(new LottoNumber(new IntNumber(numberText)).getNumber().getNumber()).isEqualTo(resultNumber);
     }
 
     static Stream<Arguments> 정상적인_숫자의_문자_매개변수() {
