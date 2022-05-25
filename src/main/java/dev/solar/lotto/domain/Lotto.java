@@ -26,7 +26,7 @@ public class Lotto {
     }
 
     public LottoTicket pick() {
-        if (!isRemainNewLottoTickes()) {
+        if (!isRemainNewLottoTickets()) {
             throw new LottoException("모든 로또티켓을 사용했습니다.");
         }
         final LottoTicket lottoTicket = LottoTicket.buyOne();
@@ -35,7 +35,7 @@ public class Lotto {
         return lottoTicket;
     }
 
-    public boolean isRemainNewLottoTickes() {
+    public boolean isRemainNewLottoTickets() {
         return remainingLottoTicket > 0;
     }
 

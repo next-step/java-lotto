@@ -16,7 +16,7 @@ public class LottoGame {
         final int payment = InputView.inputPurchasingAmount();
         final Lotto lotto = Lotto.buyLottoTickets(payment);
         OutputView.printPurchaseAmount(lotto.getRemainingLottoTicket());
-        while (lotto.isRemainNewLottoTickes()) {
+        while (lotto.isRemainNewLottoTickets()) {
             lotto.pick();
         }
 
