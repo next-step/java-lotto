@@ -19,7 +19,7 @@ public class LottoMain {
 
         String winningStr = InputView.getWinningNum();
 
-
+        lotto.getStatic(winningStr);
 
     }
 
