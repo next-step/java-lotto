@@ -29,11 +29,12 @@ public class LottoTest {
     @DisplayName("수익률을 계산한다.")
     @Test
     void calculate_profit_margin() {
-        final Lotto lotto = new Lotto(14000);
+        final int payment = 14000;
+        final Lotto lotto = new Lotto(payment);
         final ResultBoard resultBoard = new ResultBoard();
-        resultBoard.addResult(3);
+        resultBoard.addResult(Rank.THIRD);
 
         final double actual = lotto.calculateProfitMargin(resultBoard);
-        assertThat(actual).isEqualTo(0.35, withPrecision(0.01));
+        assertThat(actual).isEqualTo(Rank.THIRD.getPrizeMoney() / (double) payment, withPrecision(0.01));
     }
 }

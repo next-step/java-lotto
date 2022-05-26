@@ -6,7 +6,7 @@ import java.util.StringJoiner;
 
 import dev.solar.lotto.domain.Lotto;
 import dev.solar.lotto.domain.LottoNumber;
-import dev.solar.lotto.domain.PrizeMoney;
+import dev.solar.lotto.domain.Rank;
 import dev.solar.lotto.domain.ResultBoard;
 
 public class OutputView {
@@ -28,9 +28,9 @@ public class OutputView {
 
     public static void printResult(ResultBoard resultBoard) {
         System.out.println("당첨 통계 \n==============");
-        final NavigableSet<PrizeMoney> prizeMonies = resultBoard.getNavigableKeySet();
+        final NavigableSet<Rank> prizeMonies = resultBoard.getNavigableKeySet();
         prizeMonies
-                .forEach(prizeMoney -> System.out.printf("%d개 일치 (%d원) - %d 개 %n", prizeMoney.getCount(), prizeMoney.getPrizeMoney(), resultBoard.getValue(prizeMoney)));
+                .forEach(rank -> System.out.printf("%d개 일치 (%d원) - %d 개 %n", rank.getCountOfMatch(), rank.getPrizeMoney(), resultBoard.getValue(rank)));
     }
 
     public static void printProfitMargin(final Lotto lotto, final ResultBoard resultBoard) {

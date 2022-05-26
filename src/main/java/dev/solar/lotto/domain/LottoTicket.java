@@ -41,8 +41,16 @@ public class LottoTicket {
         }
     }
 
+    public boolean isContain(final LottoNumber number) {
+        return lottoNumbers.contains(number);
+    }
+
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public static int getLottoTicketSize() {
+        return LOTTO_NUMBERS_SIZE;
     }
 
     @Override

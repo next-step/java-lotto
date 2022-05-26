@@ -26,7 +26,8 @@ public class LottoGame {
         );
 
         final Set<Integer> winningNumbers = InputView.inputWinningNumbers();
-        final ResultBoard resultBoard = lotto.checkWinningResult(new WinningLotto(winningNumbers));
+        final int bonusNumber = InputView.inputBonusNumber();
+        final ResultBoard resultBoard = lotto.checkWinningResult(new WinningLotto(winningNumbers, bonusNumber));
         OutputView.printResult(resultBoard);
         OutputView.printProfitMargin(lotto, resultBoard);
     }
