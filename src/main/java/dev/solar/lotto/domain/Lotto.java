@@ -26,7 +26,7 @@ public class Lotto {
     }
 
     public LottoTicket pick() {
-        if (!isRemainNewLottoTickes()) {
+        if (!isRemainNewLottoTickets()) {
             throw new LottoException("모든 로또티켓을 사용했습니다.");
         }
         final LottoTicket lottoTicket = LottoTicket.buyOne();
@@ -35,7 +35,7 @@ public class Lotto {
         return lottoTicket;
     }
 
-    public boolean isRemainNewLottoTickes() {
+    public boolean isRemainNewLottoTickets() {
         return remainingLottoTicket > 0;
     }
 
@@ -43,19 +43,19 @@ public class Lotto {
         this.remainingLottoTicket -= 1;
     }
 
-    public Rank checkWinningResult(WinningLotto winningLotto) {
-        final Rank rank = new Rank();
+    public ResultBoard checkWinningResult(WinningLotto winningLotto) {
+        final ResultBoard resultBoard = new ResultBoard();
         for (final LottoTicket lottoTicket : lottoTickets) {
-            rank.addResult(winningLotto.match(lottoTicket));
+            resultBoard.addResult(winningLotto.match(lottoTicket));
         }
-        return rank;
+        return resultBoard;
     }
 
-    public double calculateProfitMargin(Rank rank) {
-        final long totalPrizeMoney = rank.getNavigableKeySet()
-                                                  .stream()
-                                                  .mapToInt(
-                                                          prizeMoney -> prizeMoney.getPrizeMoney() * rank.getValue(prizeMoney)
+    public double calculateProfitMargin(ResultBoard resultBoard) {
+        final long totalPrizeMoney = resultBoard.getNavigableKeySet()
+                                                .stream()
+                                                .mapToInt(
+                                                          prizeMoney -> prizeMoney.getPrizeMoney() * resultBoard.getValue(prizeMoney)
                                                   ).sum();
         return (double) totalPrizeMoney / payment;
     }

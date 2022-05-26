@@ -6,8 +6,8 @@ import java.util.StringJoiner;
 
 import dev.solar.lotto.domain.Lotto;
 import dev.solar.lotto.domain.LottoNumber;
-import dev.solar.lotto.domain.PrizeMoney;
 import dev.solar.lotto.domain.Rank;
+import dev.solar.lotto.domain.ResultBoard;
 
 public class OutputView {
     private static final String PREFIX = "[";
@@ -26,15 +26,15 @@ public class OutputView {
         System.out.println(purchaseAmount + "개 구매했습니다.");
     }
 
-    public static void printResult(Rank rank) {
+    public static void printResult(ResultBoard resultBoard) {
         System.out.println("당첨 통계 \n==============");
-        final NavigableSet<PrizeMoney> prizeMonies = rank.getNavigableKeySet();
+        final NavigableSet<Rank> prizeMonies = resultBoard.getNavigableKeySet();
         prizeMonies
-                .forEach(prizeMoney -> System.out.printf("%d개 일치 (%d원) - %d 개 %n", prizeMoney.getCount(), prizeMoney.getPrizeMoney(), rank.getValue(prizeMoney)));
+                .forEach(rank -> System.out.printf("%d개 일치 (%d원) - %d 개 %n", rank.getCountOfMatch(), rank.getPrizeMoney(), resultBoard.getValue(rank)));
     }
 
-    public static void printProfitMargin(final Lotto lotto, final Rank rank) {
-        final double profitMargin = lotto.calculateProfitMargin(rank);
+    public static void printProfitMargin(final Lotto lotto, final ResultBoard resultBoard) {
+        final double profitMargin = lotto.calculateProfitMargin(resultBoard);
         System.out.printf("총 수익률은 %.2f 입니다.", profitMargin);
     }
 }

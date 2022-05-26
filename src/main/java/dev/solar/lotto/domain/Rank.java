@@ -1,38 +1,46 @@
 package dev.solar.lotto.domain;
 
 import java.util.Arrays;
-import java.util.NavigableSet;
-import java.util.TreeMap;
+import java.util.Comparator;
+import java.util.function.BiPredicate;
 
-public class Rank {
-    private static final int INITIAL_COUNT = 0;
-    private static final int INCREASE_COUNT = 1;
+public enum Rank {
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    MISS(0, 0);
 
-    private final TreeMap<PrizeMoney, Integer> winningResult;
+    private final int countOfMatch;
+    private final int prizeMoney;
+    private static final Rank[] ranks = values();
 
-    public Rank() {
-        this.winningResult = new TreeMap<>();
-        initialWinningResult();
+    Rank(final int countOfMatch, final int prizeMoney) {
+        this.countOfMatch = countOfMatch;
+        this.prizeMoney = prizeMoney;
     }
 
-    public void initialWinningResult() {
-        Arrays.stream(PrizeMoney.values()).forEach(this::addKey);
+    public static Rank rank(int countOfMatch, boolean matchBonus) {
+        BiPredicate<Rank, Integer> filter = (x, y) -> x.countOfMatch == countOfMatch;
+
+        final Rank rank = Arrays.stream(ranks)
+                                .sorted(Comparator.comparing(Rank::getCountOfMatch).reversed())
+                                .filter(value -> filter.test(value, countOfMatch))
+                                .findAny()
+                                .orElse(Rank.MISS);
+
+        if (rank == Rank.SECOND && !matchBonus) {
+            return Rank.THIRD;
+        }
+        return rank;
     }
 
-    private void addKey(PrizeMoney prizemoney) {
-        this.winningResult.put(prizemoney, INITIAL_COUNT);
+    public int getCountOfMatch() {
+        return countOfMatch;
     }
 
-    public void addResult(int matchResult) {
-        final PrizeMoney rank = PrizeMoney.rank(matchResult);
-        winningResult.put(rank, winningResult.get(rank) + INCREASE_COUNT);
-    }
-
-    public Integer getValue(PrizeMoney prizeMoney) {
-        return winningResult.get(prizeMoney);
-    }
-
-    public NavigableSet<PrizeMoney> getNavigableKeySet() {
-        return winningResult.navigableKeySet();
+    public int getPrizeMoney() {
+        return prizeMoney;
     }
 }
