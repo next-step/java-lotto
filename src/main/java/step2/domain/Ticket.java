@@ -3,20 +3,19 @@ package step2.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
+import java.util.stream.Collectors;
 
 public class Ticket {
 
     private static final int MARBLE_CNT = 7;
     private static final int MAX_NUM = 45;
-    private static final int MIN_NUM = 1;
-    private static List<Integer> generator = new ArrayList<>();
+    private static List<Integer> tempInts = new ArrayList<>();
 
     private List<Marble> marbles;
 
     static{
         for (int i = 1; i <= MAX_NUM; i++) {
-            generator.add(i);
+            tempInts.add(i);
         }
     }
 
@@ -32,14 +31,31 @@ public class Ticket {
 
         List<Marble> marbles = new ArrayList<>();
 
-        List<Integer> randomList = new ArrayList<>(generator);
-        Collections.shuffle(randomList);
+        List<Integer> randomList = new ArrayList<>();
+        Collections.shuffle(tempInts);
 
-        randomList = randomList.subList(0, MARBLE_CNT);
-        for (Integer random : randomList) {
-            marbles.add(new Marble(random));
+        return tempInts.subList(0, MARBLE_CNT)
+                .stream()
+                .map(n->new Marble(n)).collect(Collectors.toList());
+    }
+
+    public int getEachStatistics(int[] winningNums) {
+        int match = 0;
+        for (int winningNum : winningNums) {
+            match = getMatch(match, winningNum);
         }
+        return match;
+    }
 
-        return marbles;
+    private int getMatch(int match, int winningNum) {
+        if(marbles.contains(new Marble(winningNum))){
+            match++;
+        }
+        return match;
+    }
+
+    @Override
+    public String toString() {
+        return marbles.toString();
     }
 }

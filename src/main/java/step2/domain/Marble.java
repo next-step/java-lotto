@@ -6,6 +6,10 @@ public class Marble {
 
     private int n;
 
+    public Marble() {
+        this(0);
+    }
+
     public Marble(int n) {
         this.n = n;
     }
@@ -21,5 +25,10 @@ public class Marble {
     @Override
     public int hashCode() {
         return Objects.hash(n);
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(n);
     }
 }

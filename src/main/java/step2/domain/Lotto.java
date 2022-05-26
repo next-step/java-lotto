@@ -2,11 +2,10 @@ package step2.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Lotto {
 
-    private static final int MARBLE_CNT = 7;
+    private static final int MARBLE_CNT = 6;
 
     private List<Ticket> tickets;
 
@@ -27,12 +26,15 @@ public class Lotto {
         return tickets;
     }
 
-    public Map<Integer, Integer> getStatic(String str){
+    public Statistics getStatistics(String str){
+        int[] statistic = new int[7];
+
         int[] winningNums = toInts(str);
-
-
-
-        return null;
+        for (Ticket ticket : tickets) {
+           int matchCnt = ticket.getEachStatistics(winningNums);
+           statistic[matchCnt]++;
+        }
+        return new Statistics(statistic);
     }
 
     private int[] toInts(String str) {
@@ -40,8 +42,12 @@ public class Lotto {
 
         int[] winningNums = new int[MARBLE_CNT];
         for (int i = 0; i < MARBLE_CNT; i++) {
-            winningNums[i] = Integer.parseInt(split[i]);
+            winningNums[i] = Integer.parseInt(split[i].trim());
         }
         return winningNums;
+    }
+
+    public void print() {
+        tickets.forEach(ticket -> System.out.println(ticket));
     }
 }
