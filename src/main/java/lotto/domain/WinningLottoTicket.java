@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import static java.util.stream.Collectors.toList;
-
 import calculator.Splitter;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,22 +7,14 @@ import java.util.stream.Collectors;
 public class WinningLottoTicket extends LottoTicket {
 
   private static final String DELIMITER = ",";
-  private static final String WHITESPCE_REGEX = "\\s+";
 
   private final BonusBallNumber bonusBallNumber;
 
   public static WinningLottoTicket of(String lottoNumbers, String bonusNumber) {
     validate(lottoNumbers, bonusNumber);
 
-    return new WinningLottoTicket(splitAsList(lottoNumbers), Integer.parseInt(bonusNumber));
-  }
-
-  private static List<Integer> splitAsList(String lottoNumbers) {
-    return Splitter.split(lottoNumbers, DELIMITER)
-        .stream()
-        .map(WinningLottoTicket::removeWhitespace)
-        .map(Integer::parseInt)
-        .collect(toList());
+    return new WinningLottoTicket(Splitter.splitAsList(lottoNumbers, DELIMITER),
+        Integer.parseInt(bonusNumber));
   }
 
   private static void validate(String lottoNumbers, String bonusNumber) {
@@ -42,10 +32,6 @@ public class WinningLottoTicket extends LottoTicket {
         .map(LottoNumber::valueOf)
         .collect(Collectors.toList()));
     this.bonusBallNumber = BonusBallNumber.createBonusBallNumber(this, bonusBallNumber);
-  }
-
-  private static String removeWhitespace(String s) {
-    return s.replaceAll(WHITESPCE_REGEX, "");
   }
 
   public boolean matchBonusBall(LottoTicket lottoTicket) {

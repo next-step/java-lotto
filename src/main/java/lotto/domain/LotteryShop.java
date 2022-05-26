@@ -13,7 +13,6 @@ public class LotteryShop {
 
   public static final Money PRICE_PER_PLAY_FOR_LOTTO = Money.createWon(1000);
   private static final String DELIMITER = ",";
-  private static final String WHITESPACE_REGEX = "\\s+";
   private static final int START_TICKET_COUNT = 0;
 
   public LottoTickets sell(Money purchaseAmount, GenerateNumbersStrategy generateNumbersStrategy) {
@@ -34,7 +33,7 @@ public class LotteryShop {
     int randomLottoTicketCount = availableLottoTicketCount - manualLottoNumbers.size();
 
     List<LottoTicket> manualLottoTickets = manualLottoNumbers.stream()
-        .map(LotteryShop::splitAsList)
+        .map(value -> Splitter.splitAsList(value, DELIMITER))
         .map(LottoTicket::createLottoTicket)
         .collect(toList());
 
@@ -84,18 +83,6 @@ public class LotteryShop {
       throw new IllegalArgumentException(String.format("로또 1장의 가격은 %s 입니다",
           PRICE_PER_PLAY_FOR_LOTTO.won()));
     }
-  }
-
-  private static List<Integer> splitAsList(String string) {
-    return Splitter.split(string, DELIMITER)
-        .stream()
-        .map(LotteryShop::removeWhitespace)
-        .map(Integer::parseInt)
-        .collect(toList());
-  }
-
-  private static String removeWhitespace(String s) {
-    return s.replaceAll(WHITESPACE_REGEX, "");
   }
 
   private LottoTicket createLottoTicket(List<Integer> lottoNumbers) {
