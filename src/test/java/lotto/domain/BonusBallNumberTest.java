@@ -22,7 +22,7 @@ class BonusBallNumberTest {
   void nullBonusBallNumber(Integer number) {
     assertThatIllegalArgumentException().isThrownBy(
             () -> BonusBallNumber.createBonusBallNumber(number))
-        .withMessageContaining("보너스볼은 null일 수 없습니다.");
+        .withMessageContaining("null일 수 없습니다.");
   }
 
   @DisplayName("LottoTicket이 null 이면 예외를 던진다")
@@ -31,7 +31,7 @@ class BonusBallNumberTest {
   void nullLottoTicket(LottoTicket lottoTicket) {
     assertThatIllegalArgumentException().isThrownBy(
             () -> BonusBallNumber.createBonusBallNumber(lottoTicket, 1))
-        .withMessageContaining("로또 번호는 null일 수 없습니다.");
+        .withMessageContaining("null일 수 없습니다.");
   }
 
   @DisplayName("보너스볼 범위를 벗어난 값은 예외를 던진다")

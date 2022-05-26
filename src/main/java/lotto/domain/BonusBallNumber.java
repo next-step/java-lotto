@@ -19,14 +19,16 @@ public class BonusBallNumber {
 
   private static void validate(Integer number) {
     if (number == null) {
-      throw new IllegalArgumentException("보너스볼은 null일 수 없습니다.");
+      throw new IllegalArgumentException("번호는 null일 수 없습니다.");
     }
   }
 
   private static void validate(LottoTicket lottoTicket, Integer number) {
     validate(number);
     if (number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
-      throw new IllegalArgumentException(String.format("%d 보너스볼 범위가 올바르지 않습니다.", number));
+      throw new IllegalArgumentException(
+          String.format("%d 보너스볼 범위는 %d ~ %d 범위 이내의 숫자여야 합니디.", number, LOTTO_START_NUMBER,
+              LOTTO_END_NUMBER));
     }
     if (lottoTicket == null) {
       throw new IllegalArgumentException("로또 번호는 null일 수 없습니다.");
