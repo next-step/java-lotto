@@ -1,9 +1,8 @@
 package lotto.domain;
 
-import static java.util.stream.Collectors.toList;
-
 import calculator.Splitter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WinningLottoTicket extends LottoTicket {
 
@@ -14,10 +13,8 @@ public class WinningLottoTicket extends LottoTicket {
   public static WinningLottoTicket of(String lottoNumbers, String bonusNumber) {
     validate(lottoNumbers, bonusNumber);
 
-    return new WinningLottoTicket(Splitter.split(lottoNumbers, DELIMITER)
-        .stream()
-        .map(Integer::parseInt)
-        .collect(toList()), Integer.parseInt(bonusNumber));
+    return new WinningLottoTicket(Splitter.splitAsList(lottoNumbers, DELIMITER),
+        Integer.parseInt(bonusNumber));
   }
 
   private static void validate(String lottoNumbers, String bonusNumber) {
@@ -31,7 +28,9 @@ public class WinningLottoTicket extends LottoTicket {
   }
 
   private WinningLottoTicket(List<Integer> lottoNumbers, Integer bonusBallNumber) {
-    super(lottoNumbers);
+    super(lottoNumbers.stream()
+        .map(LottoNumber::valueOf)
+        .collect(Collectors.toList()));
     this.bonusBallNumber = BonusBallNumber.createBonusBallNumber(this, bonusBallNumber);
   }
 

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,14 +12,27 @@ public class LottoTicket {
       LOTTO_NUMBER_COUNT);
   private static final String DUPLICATED_LOTTO_NUMBERS = "[%s] 중복된 번호 포함. 로또 번호가 중복될 수 없습니다";
 
-  private final List<Integer> lottoNumbers;
+  private final List<LottoNumber> lottoNumbers;
 
-  public LottoTicket(List<Integer> lottoNumbers) {
+  public static LottoTicket createLottoTicket(List<Integer> lottoNumbers) {
     validateLottoNumbers(lottoNumbers);
+    return new LottoTicket(lottoNumbers.stream()
+        .map(LottoNumber::valueOf)
+        .collect(Collectors.toList()));
+  }
+
+  public LottoTicket(List<LottoNumber> lottoNumbers) {
+    validate(lottoNumbers);
     this.lottoNumbers = lottoNumbers;
   }
 
-  private void validateLottoNumbers(List<Integer> lottoNumbers) {
+  private void validate(List<LottoNumber> lottoNumbers) {
+    if (lottoNumbers == null || lottoNumbers.isEmpty()) {
+      throw new IllegalArgumentException("lottoNumbers는 빈 값일 수 없습니다.");
+    }
+  }
+
+  private static void validateLottoNumbers(List<Integer> lottoNumbers) {
     if (lottoNumbers == null || lottoNumbers.isEmpty()) {
       throw new IllegalArgumentException(EMPTY_LOTTO_NUMBERS);
     }
@@ -35,7 +47,8 @@ public class LottoTicket {
   }
 
   public List<Integer> getLottoNumbers() {
-    return Collections.unmodifiableList(lottoNumbers);
+    return lottoNumbers.stream().map(LottoNumber::getNumber)
+        .collect(Collectors.toUnmodifiableList());
   }
 
   public int countMatched(LottoTicket lottoTicket) {
@@ -44,7 +57,7 @@ public class LottoTicket {
         .count();
   }
 
-  public boolean contains(Integer number) {
+  public boolean contains(LottoNumber number) {
     return lottoNumbers.contains(number);
   }
 

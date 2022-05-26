@@ -30,7 +30,7 @@ class WinningLottoTicketTest {
   }
 
   private static Stream<Arguments> provideFormMatchBonus() {
-    LottoTicket lottoTicket = new LottoTicket(List.of(1, 3, 5, 7, 9, 11));
+    LottoTicket lottoTicket = LottoTicket.createLottoTicket(List.of(1, 3, 5, 7, 9, 11));
     String lottoNumbers = "1,2,3,4,5,6";
     return Stream.of(
         arguments(WinningLottoTicket.of(lottoNumbers, "7"), lottoTicket, true),

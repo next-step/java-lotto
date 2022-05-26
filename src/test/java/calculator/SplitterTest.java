@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
+import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -62,5 +63,35 @@ class SplitterTest {
   void delimNullOrEmpty(String delim) {
     assertThatIllegalArgumentException().isThrownBy(() -> Splitter.split("1 2 3", delim))
         .withMessage("구분자를 입력하세요");
+  }
+
+  @DisplayName("splitAsList의 구분자가 null 또는 빈 문자열인 경우 IllegalArgument 예외를 던진다")
+  @ParameterizedTest
+  @NullAndEmptySource
+  void splitAsListValueNullOrEmpty(String value) {
+    assertThatIllegalArgumentException().isThrownBy(() -> Splitter.splitAsList(value, ","))
+        .withMessage("나누려는 문자열을 입력하세요");
+  }
+
+  @DisplayName("splitAsList의 구분자가 null 또는 빈 문자열인 경우 IllegalArgument 예외를 던진다")
+  @ParameterizedTest
+  @NullAndEmptySource
+  void splitAsListDelimNullOrEmpty(String delim) {
+    assertThatIllegalArgumentException().isThrownBy(() -> Splitter.splitAsList("1,2,3", delim))
+        .withMessage("구분자를 입력하세요");
+  }
+
+  @DisplayName("입력받은 문자열을 숫자 리스트로 반환한다")
+  @ParameterizedTest
+  @MethodSource("provideForSplitAsList")
+  void splitAsList(String value, List<Integer> list) {
+    assertThat(Splitter.splitAsList(value, ",")).isEqualTo(list);
+  }
+
+  private static Stream<Arguments> provideForSplitAsList() {
+    return Stream.of(
+        arguments("1,2,3,4", List.of(1, 2, 3, 4)),
+        arguments("1", List.of(1))
+    );
   }
 }

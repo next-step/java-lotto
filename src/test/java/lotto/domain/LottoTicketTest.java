@@ -21,7 +21,7 @@ class LottoTicketTest {
   @NullAndEmptySource
   void createLottoTicket_null_or_empty_numbers_throwException(List<Integer> lottoNumbers) {
     Assertions.assertThatIllegalArgumentException()
-        .isThrownBy(() -> new LottoTicket(lottoNumbers))
+        .isThrownBy(() -> LottoTicket.createLottoTicket(lottoNumbers))
         .withMessage("로또 번호는 빈 값일 수 없습니다");
   }
 
@@ -30,7 +30,7 @@ class LottoTicketTest {
   @MethodSource("provideLottoNumbers")
   void createLottoTicket_not_equals_size_throwException(List<Integer> lottoNumbers) {
     Assertions.assertThatIllegalArgumentException()
-        .isThrownBy(() -> new LottoTicket(lottoNumbers))
+        .isThrownBy(() -> LottoTicket.createLottoTicket(lottoNumbers))
         .withMessage("로또 번호는 6개여야 합니다");
   }
 
@@ -46,7 +46,7 @@ class LottoTicketTest {
   void createLottoTicket_duplicate_throwException() {
     List<Integer> lottoNumbers = List.of(1, 1, 3, 4, 5, 6);
     Assertions.assertThatIllegalArgumentException()
-        .isThrownBy(() -> new LottoTicket(lottoNumbers))
+        .isThrownBy(() -> LottoTicket.createLottoTicket(lottoNumbers))
         .withMessageMatching(".+? 중복된 번호 포함. 로또 번호가 중복될 수 없습니다");
   }
 
@@ -54,12 +54,12 @@ class LottoTicketTest {
   @ParameterizedTest
   @MethodSource("provideForMatchCount")
   void matchCount(LottoTicket winNumbers, List<Integer> lottoNumbers, int matchCount) {
-    LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+    LottoTicket lottoTicket = LottoTicket.createLottoTicket(lottoNumbers);
     assertThat(lottoTicket.countMatched(winNumbers)).isEqualTo(matchCount);
   }
 
   private static Stream<Arguments> provideForMatchCount() {
-    LottoTicket winLottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+    LottoTicket winLottoTicket = LottoTicket.createLottoTicket(List.of(1, 2, 3, 4, 5, 6));
     return Stream.of(
         arguments(winLottoTicket, List.of(1, 2, 3, 4, 5, 6), 6),
         arguments(winLottoTicket, List.of(1, 2, 3, 4, 5, 7), 5),
@@ -74,7 +74,7 @@ class LottoTicketTest {
   @DisplayName("반환한 로또번호를 수정할 경우 예외를 던진다")
   @Test
   void unmodifiableException() {
-    LottoTicket lottoTicket = new LottoTicket(List.of(1, 2, 3, 4, 5, 6));
+    LottoTicket lottoTicket = LottoTicket.createLottoTicket(List.of(1, 2, 3, 4, 5, 6));
     List<Integer> unmodifiedNumbers = lottoTicket.getLottoNumbers();
     assertThatExceptionOfType(UnsupportedOperationException.class).isThrownBy(
         () -> unmodifiedNumbers.add(1));
