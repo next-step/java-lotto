@@ -21,7 +21,7 @@ public class LottoController {
             List<String> manualLottos = InputView.inputManualLottoList(manualLottoCount);
 
             lottoService.generateManualLottos(manualLottos);
-            Lottos registerLottos = lottoService.generateRandomLottos(new RandomNumberGenerator(), randomPurchaseMoney);
+            List<Lotto> registerLottos = lottoService.generateRandomLottos(new RandomNumberGenerator(), randomPurchaseMoney);
             ResultView.printPurchaseMessage(registerLottos, manualLottoCount, randomPurchaseMoney.purchaseCount());
 
             String lastWeekWinningNumber = InputView.inputLastWeekWinningNumber();
