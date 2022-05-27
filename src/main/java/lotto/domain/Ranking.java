@@ -32,10 +32,9 @@ public enum Ranking {
         return this.matchCount == matchCount;
     }
 
-    public int getMoney() {
-        return money;
+    public int price(int count) {
+        return this.money * count;
     }
-
 
     @Override
     public String toString() {

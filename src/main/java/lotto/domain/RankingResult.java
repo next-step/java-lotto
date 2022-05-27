@@ -12,7 +12,7 @@ public class RankingResult {
 
     public Money calculateProfit() {
         return new Money(winningLottoMap.keySet()
-                .stream().map(ranking -> ranking.getMoney() * winningLottoMap.get(ranking))
+                .stream().map(ranking -> ranking.price(winningLottoMap.get(ranking)))
                 .mapToInt(i -> i)
                 .sum());
     }
