@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class Lottos {
 
@@ -21,15 +18,17 @@ public class Lottos {
         return lottos.size();
     }
 
-    public int[] getTotalRank(WinningLotto winningLotto) {
-        int[] totalLottoRank = new int[5];
-        for (int i = 0; i < 5; i++) {
-            totalLottoRank[i] = 0;
+    public Map<Rank, Integer> getTotalRank(WinningLotto winningLotto) {
+        Map<Rank, Integer> totalLottoRank = new HashMap<>();
+        for (Rank value : Rank.values()) {
+            totalLottoRank.put(value, 0);
         }
 
         for (Lotto buyingLotto : lottos) {
-            totalLottoRank[buyingLotto.getRank(winningLotto).ordinal() - 1]++;
+            Rank rank = buyingLotto.getRank(winningLotto);
+            totalLottoRank.put(rank, totalLottoRank.get(rank) + 1);
         }
+
         return totalLottoRank;
     }
 

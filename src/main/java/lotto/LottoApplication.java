@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoAutoMachine;
 import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
@@ -26,9 +27,9 @@ public class LottoApplication {
     }
 
     private static WinningLotto makeWinningLotto(String[] winningNumbers, int bonusNumber) {
-        return new WinningLotto(Arrays.stream(winningNumbers)
+        return new WinningLotto(new Lotto(Arrays.stream(winningNumbers)
                 .map(Integer::parseInt)
-                .collect(Collectors.toList()),
+                .collect(Collectors.toList())),
                 bonusNumber);
     }
 

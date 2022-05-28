@@ -10,7 +10,7 @@ public class Lotto {
     private final Set<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
-       this.numbers = numbers.stream()
+        this.numbers = numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
 
@@ -28,7 +28,7 @@ public class Lotto {
     }
 
     public Rank getRank(WinningLotto winningLotto) {
-        return Rank.valueOf(getMathCount(winningLotto), winningLotto.isMatchBonus(this));
+        return Rank.valueOf(winningLotto.matchCount(this), winningLotto.isMatchBonus(this));
     }
 
     public String getLottoNumberString() {
@@ -38,11 +38,8 @@ public class Lotto {
                 .toString();
     }
 
-    private int getMathCount(WinningLotto winningLotto) {
-        return (int) numbers.stream()
-                .filter(lottoNumber -> winningLotto.getNumbers().contains(lottoNumber))
-                .count();
+    public boolean isContain(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
-
 }
 
