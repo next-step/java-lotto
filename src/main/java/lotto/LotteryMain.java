@@ -22,10 +22,11 @@ public class LotteryMain {
         WinningNumbers winningNumbers = new WinningNumbers(winNumbers);
         int bonusNumber = InputView.inputBonusNumber();
 
-        Map<Rank, Integer> results = WinningResult.get(winningNumbers.getWinningNumbers(), bonusNumber, purchasedLottery);
+        WinningResult winningResult = new WinningResult(winningNumbers, bonusNumber, purchasedLottery);
+        Map<Rank, Integer> results = winningResult.get();
         ResultView.printResult(results);
 
-        double profitRate = WinningResult.profitRate(WinningResult.profit(results), purchaseAmount * EACH_PRICE);
+        double profitRate = winningResult.profitRate(winningResult.profit(results), purchaseAmount * EACH_PRICE);
         ResultView.printProfit(profitRate);
     }
 }
