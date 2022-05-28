@@ -26,8 +26,8 @@ class LottosTest {
         WinningLotto winningLotto = new WinningLotto(new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12)), 1);
 
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
-        Map<Rank, Integer> totalRank = lottos.getTotalRank(winningLotto);
+        TotalRank totalRank = new TotalRank(winningLotto, lottos);
 
-        Assertions.assertThat(totalRank.get(Rank.FIFTH)).isEqualTo(3);
+        Assertions.assertThat(totalRank.count(Rank.FIFTH)).isEqualTo(3);
     }
 }

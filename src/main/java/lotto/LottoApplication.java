@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoAutoMachine;
-import lotto.domain.Lottos;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -23,7 +20,7 @@ public class LottoApplication {
 
         WinningLotto winningLotto = makeWinningLotto(winningNumbers, bonusNumber);
 
-        ResultView.printWinningStatistics(buyingLottos.getTotalRank(winningLotto), buyingLottos.getTotalWinningMoney(winningLotto), paying);
+        ResultView.printWinningStatistics(new TotalRank(winningLotto, buyingLottos), buyingLottos.getTotalWinningMoney(winningLotto), paying);
     }
 
     private static WinningLotto makeWinningLotto(String[] winningNumbers, int bonusNumber) {
