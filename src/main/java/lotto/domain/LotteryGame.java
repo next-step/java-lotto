@@ -7,25 +7,19 @@ import java.util.List;
 public class LotteryGame {
     private static final int START_NUMBER = 1;
     private static final int END_NUMBER = 45;
-    private static final List<Integer> LOTTO_LIST = new ArrayList<>() {
-        {
-            for (int i = START_NUMBER; i < END_NUMBER; i++) {
-                add(i);
-            }
+    private static final List<Integer> LOTTO_LIST = new ArrayList<>() {{
+        for (int i = START_NUMBER; i < END_NUMBER; i++) {
+            add(i);
         }
-    };
+    }};
 
     private List<Integer> lotteries;
-
-    public LotteryGame() {
-
-    }
 
     public LotteryGame(List<Integer> lotteries) {
         this.lotteries = lotteries;
     }
 
-    public LotteryGame create() {
+    public static LotteryGame create() {
         Collections.shuffle(LOTTO_LIST);
         List<Integer> subList = new ArrayList<>(LOTTO_LIST.subList(0, 6));
         Collections.sort(subList);

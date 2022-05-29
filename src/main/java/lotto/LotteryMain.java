@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LotteryGames;
 import lotto.domain.WinningNumbers;
+import lotto.domain.Rank;
 import lotto.domain.WinningResult;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -19,11 +20,13 @@ public class LotteryMain {
 
         String winNumbers = InputView.inputWinningNumbers();
         WinningNumbers winningNumbers = new WinningNumbers(winNumbers);
+        int bonusNumber = InputView.inputBonusNumber();
 
-        Map<Integer, Integer> results = WinningResult.get(winningNumbers.getWinningNumbers(), purchasedLottery);
+        WinningResult winningResult = new WinningResult(winningNumbers, bonusNumber, purchasedLottery);
+        Map<Rank, Integer> results = winningResult.get();
         ResultView.printResult(results);
 
-        double profitRate = WinningResult.profitRate(WinningResult.profit(results), purchaseAmount * EACH_PRICE);
+        double profitRate = winningResult.profitRate(winningResult.profit(results), purchaseAmount * EACH_PRICE);
         ResultView.printProfit(profitRate);
     }
 }
