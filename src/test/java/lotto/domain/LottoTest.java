@@ -46,24 +46,4 @@ class LottoTest {
         assertThrows(IllegalArgumentException.class, () -> new Lotto(numbers));
     }
 
-    @Test
-    void getRank_6개일치_1위() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-
-        int rank = lotto.getRank(winningLotto);
-
-        assertThat(rank).isEqualTo(1);
-    }
-
-    @Test
-    void getRank_2개일치_5위() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 9, 10, 11, 12));
-
-        int rank = lotto.getRank(winningLotto);
-
-        assertThat(rank).isEqualTo(5);
-    }
-
 }
