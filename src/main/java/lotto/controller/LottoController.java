@@ -1,12 +1,11 @@
 package lotto.controller;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import lotto.domain.Amount;
 import lotto.domain.Lotto;
+import lotto.domain.LottoGroupFactory;
 import lotto.domain.LottoNumber;
 import lotto.domain.PurchaseLottoGroup;
 import lotto.domain.RankingResult;
@@ -22,13 +21,9 @@ public class LottoController {
 		int manualQuantity = Parser.toInt(InputView.inputPurchaseManualQuantity());
 		long autoQuantity = purchaseQuantity - manualQuantity;
 
-		List<Lotto> manualNumbers = InputView.inputPurchaseManualNumbers(manualQuantity).stream()
-			.map(input -> Lotto.createManual(Arrays.stream(input.split(Lotto.SPLIT_DELIMITER))
-				.map(LottoNumber::from)
-				.collect(Collectors.toSet())))
-			.collect(Collectors.toList());
-
-		PurchaseLottoGroup purchaseLottoGroup = PurchaseLottoGroup.create(manualNumbers, autoQuantity);
+		PurchaseLottoGroup purchaseLottoGroup = PurchaseLottoGroup.create(
+			LottoGroupFactory.createManual(InputView.inputPurchaseManualNumbers(manualQuantity)),
+			LottoGroupFactory.createAuto(autoQuantity));
 
 		OutputView.printPurchaseQuantity(manualQuantity, autoQuantity);
 		OutputView.printPurchaseLottoGroup(purchaseLottoGroup);

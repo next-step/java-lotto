@@ -3,7 +3,6 @@ package lotto.view;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
 import lotto.domain.ProfitOrLoss;

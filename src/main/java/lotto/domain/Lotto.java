@@ -1,13 +1,9 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Lotto {
 	public static final int LOTTO_SIZE = 6;

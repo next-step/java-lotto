@@ -5,10 +5,6 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import lotto.domain.Amount;
-import lotto.domain.LottoNumber;
-import lotto.domain.WinningNumbers;
-
 public class InputView {
 
 	private InputView() {}
