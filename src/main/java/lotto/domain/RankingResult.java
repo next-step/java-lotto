@@ -40,6 +40,13 @@ public class RankingResult {
 		return Lotto.LOTTO_PRICE.multi(resultSize);
 	}
 
+	public long matchQuantity(LottoRank rank) {
+		if (!ranking.containsKey(rank)) {
+			return 0;
+		}
+		return ranking.get(rank);
+	}
+
 	@Override
 	public String toString() {
 		final StringBuffer sb = new StringBuffer("RankingResult{");

@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import lotto.domain.Lotto;
@@ -29,24 +30,26 @@ public class OutputView {
 	}
 
 	public static void printWinningStatistics(RankingResult rankingResult) {
-		StringBuffer printBuffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 
-		printBuffer.append("당첨 통계").append(ENTER);
-		printBuffer.append("---------").append(ENTER);
-		printBuffer.append(rankingResult.ranking().keySet().stream()
+		builder.append("당첨 통계").append(ENTER);
+		builder.append("---------").append(ENTER);
+
+		Arrays.stream(LottoRank.values())
 			.filter(LottoRank::isStatistics)
-			.map(rank -> String.format("%d개 일치 %s (%d원) - %d개", rank.sameQuantity(), checkBonus(rank.checkBonus()), rank.amount(), rankingResult.ranking().get(rank)))
-			.collect(Collectors.joining(ENTER)));
+			.forEach(rank -> builder
+				.append(String.format("%d개 일치%s (%d원) - %d개", rank.sameQuantity(), isSecond(rank), rank.amount(), rankingResult.matchQuantity(rank)))
+				.append(ENTER));
 
-		System.out.println(printBuffer);
+		System.out.println(builder);
 	}
 
 	public static void printYield(Roi roi) {
 		System.out.printf("총 수익률은 %s 입니다. => (%s)", roi.crop(2), ProfitOrLoss.findByYield(roi).title());
 	}
 
-	private static String checkBonus(boolean checkBonus) {
-		if (checkBonus) {
+	private static String isSecond(LottoRank lottoRank) {
+		if (lottoRank == LottoRank.SECOND) {
 			return ", 보너스볼 일치";
 		}
 		return "";
