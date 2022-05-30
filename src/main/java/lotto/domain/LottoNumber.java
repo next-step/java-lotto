@@ -35,6 +35,10 @@ public class LottoNumber {
 		}
 	}
 
+	public String value() {
+		return String.valueOf(number);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -50,10 +54,5 @@ public class LottoNumber {
 	@Override
 	public int hashCode() {
 		return number;
-	}
-
-	@Override
-	public String toString() {
-		return String.valueOf(number);
 	}
 }

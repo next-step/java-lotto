@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
 import lotto.domain.ProfitOrLoss;
 import lotto.domain.PurchaseLottoGroup;
@@ -13,6 +14,8 @@ import lotto.domain.Roi;
 public class OutputView {
 
 	private static final String ENTER = "\n";
+	private static final String LOTTO_OPEN = "[";
+	private static final String LOTTO_CLOSE = "]";
 
 	private OutputView() {}
 
@@ -20,7 +23,14 @@ public class OutputView {
 		StringBuilder builder = new StringBuilder();
 
 		purchaseLottoGroup.values()
-			.forEach(lotto -> builder.append(lotto.values()).append(ENTER));
+			.forEach(lotto -> builder
+				.append(LOTTO_OPEN)
+				.append(lotto.values()
+					.stream()
+					.map(LottoNumber::value)
+					.collect(Collectors.joining(", ")))
+				.append(LOTTO_CLOSE)
+				.append(ENTER));
 
 		System.out.println(builder);
 	}
