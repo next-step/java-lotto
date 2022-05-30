@@ -8,7 +8,6 @@ import java.util.stream.Stream;
 import lotto.domain.Amount;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumberType;
 import lotto.domain.PurchaseLottoGroup;
 import lotto.domain.RankingResult;
 import lotto.domain.WinningNumbers;
@@ -45,7 +44,7 @@ public class LottoController {
 			Stream.of(InputView.inputWinningNumber().split(WinningNumbers.DELIMITER))
 				.map(LottoNumber::from)
 				.collect(Collectors.toList()),
-			LottoNumber.of(InputView.inputBonusNumber(), LottoNumberType.BONUS)
+			LottoNumber.from(InputView.inputBonusNumber())
 		);
 
 		RankingResult rankingResult = new RankingResult(purchaseLottoGroup.ranking(winningNumbers));
