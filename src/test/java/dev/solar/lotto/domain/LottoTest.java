@@ -3,6 +3,8 @@ package dev.solar.lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.withPrecision;
 
+import java.util.Set;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,6 +26,18 @@ public class LottoTest {
         LottoTicket lottoTicket = lotto.pick();
         System.out.println(lottoTicket);
         assertThat(lottoTicket.getLottoNumbers()).hasSize(6);
+    }
+
+    @DisplayName("수동으로 로또를 구매한다.")
+    @Test
+    void pick_manual_lotto_number() {
+        final Lotto lotto = Lotto.buyLottoTickets(1000);
+        lotto.pick(new LottoTicket(Set.of(1, 2, 3, 4, 5, 6)));
+        assertThat(lotto.isEmptyNewLottoTickets()).isTrue();
+        final WinningLotto winningLotto = new WinningLotto(Set.of(1, 2, 3, 4, 5, 6), 7);
+        final ResultBoard resultBoard = lotto.checkWinningResult(winningLotto);
+        final Rank match = winningLotto.match(lotto.getLottoTickets().get(0));
+        assertThat(match).isEqualTo(Rank.FIRST);
     }
 
     @DisplayName("수익률을 계산한다.")

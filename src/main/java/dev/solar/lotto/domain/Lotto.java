@@ -7,6 +7,7 @@ import dev.solar.lotto.LottoException;
 
 public class Lotto {
     private static final int LOTTO_PRICE = 1000;
+    private static final int BUY_ONE_LOTTO_TICKET = 1;
 
     private final List<LottoTicket> lottoTickets = new ArrayList<>();
     private int payment;
@@ -23,6 +24,12 @@ public class Lotto {
         lotto.payment = payment;
         lotto.remainingLottoTicket = payment / LOTTO_PRICE;
         return lotto;
+    }
+
+    public LottoTicket pick(LottoTicket lottoTicket) {
+        lottoTickets.add(lottoTicket);
+        this.remainingLottoTicket -= BUY_ONE_LOTTO_TICKET;
+        return lottoTicket;
     }
 
     public LottoTicket pick() {
@@ -55,8 +62,8 @@ public class Lotto {
         final long totalPrizeMoney = resultBoard.getNavigableKeySet()
                                                 .stream()
                                                 .mapToInt(
-                                                          prizeMoney -> prizeMoney.getPrizeMoney() * resultBoard.getValue(prizeMoney)
-                                                  ).sum();
+                                                        prizeMoney -> prizeMoney.getPrizeMoney() * resultBoard.getValue(prizeMoney)
+                                                ).sum();
         return (double) totalPrizeMoney / payment;
     }
 
