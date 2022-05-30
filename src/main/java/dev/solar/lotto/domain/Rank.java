@@ -30,6 +30,10 @@ public enum Rank {
                                 .findAny()
                                 .orElse(Rank.MISS);
 
+        return distinguishSecondOrThird(rank, matchBonus);
+    }
+
+    private static Rank distinguishSecondOrThird(final Rank rank, final boolean matchBonus) {
         if (rank == Rank.SECOND && !matchBonus) {
             return Rank.THIRD;
         }
