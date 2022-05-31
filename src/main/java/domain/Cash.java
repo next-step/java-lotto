@@ -10,16 +10,20 @@ public class Cash {
         this.cashAmount = cashAmount;
     }
 
-    public int capableLottoCount(int lottoPrice) {
-        return cashAmount / lottoPrice;
+    public int divide(Cash cash) {
+        return cashAmount / cash.cashAmount;
     }
 
-    public boolean isLessThan(int comparedNumber) {
-        return cashAmount < comparedNumber;
+    public Cash multiply(int count) {
+        return new Cash(cashAmount * count);
     }
 
-    public boolean isMultipleOf(int price) {
-        return cashAmount % price == 0;
+    public boolean isLessThan(Cash comparedCash) {
+        return cashAmount < comparedCash.cashAmount;
+    }
+
+    public boolean isMultipleOf(Cash cash) {
+        return cashAmount % cash.cashAmount == 0;
     }
 
     public BigDecimal toBigDecimal() {

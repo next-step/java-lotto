@@ -40,13 +40,13 @@ public class InputView {
 
     private void validateMin(Cash inputCash) {
         if (inputCash.isLessThan(Lotto.PRICE)) {
-            throw new IllegalArgumentException(String.format("구입금액은 %d 이상이어야 합니다.", Lotto.PRICE));
+            throw new IllegalArgumentException(String.format("구입금액은 %s 이상이어야 합니다.", Lotto.PRICE));
         }
     }
 
     private void validateMultiple(Cash inputCash) {
         if (!inputCash.isMultipleOf(Lotto.PRICE)) {
-            throw new IllegalArgumentException(String.format("구입금액은 %d의 배수여야 합니다.", Lotto.PRICE));
+            throw new IllegalArgumentException(String.format("구입금액은 %s의 배수여야 합니다.", Lotto.PRICE));
         }
     }
 }

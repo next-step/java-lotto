@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    public static int PRICE = 1000;
+    public static Cash PRICE = new Cash(1000);
     private LottoNumbers lottoNumbers;
 
     public Lotto(LottoNumbers lottoNumbers) {
