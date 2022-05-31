@@ -7,6 +7,7 @@ import dev.solar.lotto.LottoException;
 
 public class Lotto {
     private static final int LOTTO_PRICE = 1000;
+    private static final int BUY_ONE_LOTTO_TICKET = 1;
 
     private final List<LottoTicket> lottoTickets = new ArrayList<>();
     private int payment;
@@ -25,8 +26,14 @@ public class Lotto {
         return lotto;
     }
 
+    public LottoTicket pick(LottoTicket lottoTicket) {
+        lottoTickets.add(lottoTicket);
+        this.remainingLottoTicket -= BUY_ONE_LOTTO_TICKET;
+        return lottoTicket;
+    }
+
     public LottoTicket pick() {
-        if (!isRemainNewLottoTickets()) {
+        if (isEmptyNewLottoTickets()) {
             throw new LottoException("모든 로또티켓을 사용했습니다.");
         }
         final LottoTicket lottoTicket = LottoTicket.buyOne();
@@ -35,8 +42,8 @@ public class Lotto {
         return lottoTicket;
     }
 
-    public boolean isRemainNewLottoTickets() {
-        return remainingLottoTicket > 0;
+    public boolean isEmptyNewLottoTickets() {
+        return remainingLottoTicket <= 0;
     }
 
     private void decreasePurchaseAmount() {
@@ -55,8 +62,8 @@ public class Lotto {
         final long totalPrizeMoney = resultBoard.getNavigableKeySet()
                                                 .stream()
                                                 .mapToInt(
-                                                          prizeMoney -> prizeMoney.getPrizeMoney() * resultBoard.getValue(prizeMoney)
-                                                  ).sum();
+                                                        prizeMoney -> prizeMoney.getPrizeMoney() * resultBoard.getValue(prizeMoney)
+                                                ).sum();
         return (double) totalPrizeMoney / payment;
     }
 

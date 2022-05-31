@@ -15,8 +15,14 @@ public class LottoGame {
     public static void main(String[] args) {
         final int payment = InputView.inputPurchasingAmount();
         final Lotto lotto = Lotto.buyLottoTickets(payment);
-        OutputView.printPurchaseAmount(lotto.getRemainingLottoTicket());
-        while (lotto.isRemainNewLottoTickets()) {
+        final int manualLotto = InputView.inputNumberOfManualLotto();
+        final List<Set<String>> manualLottoNumbers = InputView.inputManualLottoNumbers(manualLotto);
+        for (final Set<String> manualLottoNumber : manualLottoNumbers) {
+            lotto.pick(LottoService.mapToLottoTicket(manualLottoNumber));
+        }
+
+        OutputView.printPurchaseAmount(manualLotto, lotto.getRemainingLottoTicket());
+        while (!lotto.isEmptyNewLottoTickets()) {
             lotto.pick();
         }
 

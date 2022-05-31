@@ -22,8 +22,8 @@ public class OutputView {
         System.out.println(stringJoiner);
     }
 
-    public static void printPurchaseAmount(int purchaseAmount) {
-        System.out.println(purchaseAmount + "개 구매했습니다.");
+    public static void printPurchaseAmount(int manual, final int auto) {
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.", manual, auto);
     }
 
     public static void printResult(ResultBoard resultBoard) {

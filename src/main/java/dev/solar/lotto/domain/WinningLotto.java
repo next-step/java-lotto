@@ -9,9 +9,12 @@ public class WinningLotto {
     private final Set<LottoNumber> winningLotto;
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(final Set<Integer> numbers, final int bonusNumber) {
+    public WinningLotto(final Set<Integer> numbers, final int bonusNumber) throws LottoException {
         if (numbers.size() != LottoTicket.getLottoTicketSize()) {
             throw new LottoException("로또 한장 당 번호는 " + LottoTicket.getLottoTicketSize() + "개여야 합니다.");
+        }
+        if (numbers.contains(bonusNumber)) {
+            throw new LottoException("1등 번호는 보너스 볼이 될 수 없습니다.");
         }
 
         this.winningLotto = numbers.stream()
