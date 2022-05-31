@@ -1,9 +1,9 @@
 package lotto.domain;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Lotto {
 	public static final int LOTTO_SIZE = 6;
@@ -11,23 +11,22 @@ public class Lotto {
 	public static final String SPLIT_DELIMITER = ",";
 	private final Set<LottoNumber> lottoNumbers;
 
-	public Lotto() {
-		lottoNumbers = new HashSet<>(LottoRandomGenerator.generate(LOTTO_SIZE));
+	private Lotto() {
+		lottoNumbers = new LinkedHashSet<>(LottoRandomGenerator.generate(LOTTO_SIZE));
 		validateNumberSize(lottoNumbers);
 	}
 
-	public Lotto(String lottoNumbers) {
-		Set<LottoNumber> generationLottoNumber = Stream.of(lottoNumbers.split(SPLIT_DELIMITER))
-			.map(LottoNumber::from)
-			.collect(Collectors.toSet());
-
-		validateNumberSize(generationLottoNumber);
-		this.lottoNumbers = generationLottoNumber;
-	}
-
-	public Lotto(Set<LottoNumber> lottoNumbers) {
+	private Lotto(Set<LottoNumber> lottoNumbers) {
 		validateNumberSize(lottoNumbers);
 		this.lottoNumbers = lottoNumbers;
+	}
+
+	public static Lotto createAuto() {
+		return new Lotto();
+	}
+
+	public static Lotto createManual(Set<LottoNumber> lottoNumbers) {
+		return new Lotto(lottoNumbers);
 	}
 
 	private void validateNumberSize(Set<LottoNumber> lottoNumbers) {
@@ -40,12 +39,12 @@ public class Lotto {
 		return lottoNumbers.size();
 	}
 
-	@Override
-	public String toString() {
-		return lottoNumbers.toString();
+	public List<LottoNumber> values() {
+		return new ArrayList<>(lottoNumbers);
 	}
 
 	public boolean contain(LottoNumber number) {
 		return lottoNumbers.contains(number);
 	}
+
 }

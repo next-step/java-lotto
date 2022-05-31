@@ -9,22 +9,18 @@ public class LottoNumber {
 	public static final int LOTTO_RANGE_MAX = 45;
 	private final int number;
 
-	private LottoNumber(int number, LottoNumberType type) {
+	private LottoNumber(int number) {
 		validateNumber(number);
 		this.number = number;
 	}
 
 	public static LottoNumber from(int number) {
-		return new LottoNumber(number, LottoNumberType.DEFAULT);
+		return new LottoNumber(number);
 	}
 
 	public static LottoNumber from(String number) {
-		return of(number, LottoNumberType.DEFAULT);
-	}
-
-	public static LottoNumber of(String number, LottoNumberType type) {
 		validateTextNumber(number);
-		return new LottoNumber(Parser.toInt(number.trim()), type);
+		return new LottoNumber(Parser.toInt(number.trim()));
 	}
 
 	private static void validateTextNumber(String number) {
@@ -37,6 +33,10 @@ public class LottoNumber {
 		if (Range.of(LOTTO_RANGE_MIN, LOTTO_RANGE_MAX).notContain(number)) {
 			throw new OutOfRangeException(String.format("생성된 로또번호가 범위를 벗어났습니다. (범위 : %s)", Range.of(LOTTO_RANGE_MIN, LOTTO_RANGE_MAX)));
 		}
+	}
+
+	public String value() {
+		return String.valueOf(number);
 	}
 
 	@Override
@@ -54,10 +54,5 @@ public class LottoNumber {
 	@Override
 	public int hashCode() {
 		return number;
-	}
-
-	@Override
-	public String toString() {
-		return String.valueOf(number);
 	}
 }

@@ -1,16 +1,39 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.LongStream;
 
 public class PurchaseLottoGroup {
 	private final List<Lotto> lottoGroup;
 
-	public PurchaseLottoGroup(long quantity) {
-		lottoGroup =LongStream.rangeClosed(1, quantity)
-			.mapToObj(num -> new Lotto())
-			.collect(Collectors.toList());
+	private PurchaseLottoGroup(List<Lotto> lottoGroup) {
+		this.lottoGroup = lottoGroup;
+	}
+
+	public static PurchaseLottoGroup create(List<Lotto> manualLottoGroup, List<Lotto> autoLottoGroup) {
+		validateNull(manualLottoGroup);
+		validateNull(autoLottoGroup);
+		validateLottoGroup(manualLottoGroup, autoLottoGroup);
+
+		List<Lotto> lottoGroup = new ArrayList<>(manualLottoGroup);
+		lottoGroup.addAll(autoLottoGroup);
+		return new PurchaseLottoGroup(lottoGroup);
+	}
+
+	private static void validateLottoGroup(List<Lotto> manualLottoGroup, List<Lotto> autoLottoGroup) {
+		List<Lotto> lottoGroup = new ArrayList<>(manualLottoGroup);
+		lottoGroup.addAll(autoLottoGroup);
+
+		if (lottoGroup.isEmpty()) {
+			throw new IllegalArgumentException("구매한 로또는 0개일 수 없습니다.");
+		}
+	}
+
+	private static void validateNull(List<Lotto> lottoGroup) {
+		if (lottoGroup == null) {
+			throw new IllegalArgumentException("구매한 로또는 null 일 수 없습니다.");
+		}
 	}
 
 	public int size() {

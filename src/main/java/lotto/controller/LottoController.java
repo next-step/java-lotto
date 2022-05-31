@@ -5,29 +5,33 @@ import java.util.stream.Stream;
 
 import lotto.domain.Amount;
 import lotto.domain.Lotto;
+import lotto.domain.LottoGroupFactory;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumberType;
 import lotto.domain.PurchaseLottoGroup;
 import lotto.domain.RankingResult;
 import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+import util.Parser;
 
 public class LottoController {
 
 	public PurchaseLottoGroup purchaseLotto() {
-		long lottoQuantity = calculateLottoQuantity(new Amount(InputView.inputPurchaseAmount()));
-		PurchaseLottoGroup purchaseLottoGroup = new PurchaseLottoGroup(lottoQuantity);
+		long purchaseQuantity = calculateLottoQuantity(new Amount(InputView.inputPurchaseAmount()));
+		int manualQuantity = Parser.toInt(InputView.inputPurchaseManualQuantity());
+		long autoQuantity = purchaseQuantity - manualQuantity;
 
+		PurchaseLottoGroup purchaseLottoGroup = PurchaseLottoGroup.create(
+			LottoGroupFactory.createManual(InputView.inputPurchaseManualNumbers(manualQuantity)),
+			LottoGroupFactory.createAuto(autoQuantity));
+
+		OutputView.printPurchaseQuantity(manualQuantity, autoQuantity);
 		OutputView.printPurchaseLottoGroup(purchaseLottoGroup);
 		return purchaseLottoGroup;
 	}
 
 	private long calculateLottoQuantity(Amount purchaseAmount) {
-		long lottoQuantity = purchaseAmount.divide(Lotto.LOTTO_PRICE);
-
-		OutputView.printPurchaseQuantity(lottoQuantity);
-		return lottoQuantity;
+		return purchaseAmount.divide(Lotto.LOTTO_PRICE);
 	}
 
 	public void ranking(PurchaseLottoGroup purchaseLottoGroup) {
@@ -35,7 +39,7 @@ public class LottoController {
 			Stream.of(InputView.inputWinningNumber().split(WinningNumbers.DELIMITER))
 				.map(LottoNumber::from)
 				.collect(Collectors.toList()),
-			LottoNumber.of(InputView.inputBonusNumber(), LottoNumberType.BONUS)
+			LottoNumber.from(InputView.inputBonusNumber())
 		);
 
 		RankingResult rankingResult = new RankingResult(purchaseLottoGroup.ranking(winningNumbers));
