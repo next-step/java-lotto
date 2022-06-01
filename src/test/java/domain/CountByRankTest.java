@@ -57,7 +57,7 @@ public class CountByRankTest {
         BigDecimal result = countByRank.winningMoney();
 
         //then
-        assertThat(result).isEqualTo(expectedWinningMoney);
+        assertThat(result).isEqualByComparingTo(expectedWinningMoney);
     }
 
     @Test

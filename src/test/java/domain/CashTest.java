@@ -3,6 +3,7 @@ package domain;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,16 +21,42 @@ public class CashTest {
     }
 
     @Test
+    void createBigInteger() {
+        //given
+        BigInteger cashAmount = BigInteger.valueOf(3000);
+
+        //when
+        Cash result = new Cash(cashAmount);
+
+        //then
+        assertThat(result).isEqualTo(new Cash(cashAmount));
+    }
+
+    @Test
     void divide() {
         //given
         Cash dividend = new Cash(3000);
         Cash divisor = new Cash(1000);
+        Cash expectedCash = new Cash(3);
 
         //when
-        int result = dividend.divide(divisor);
+        Cash result = dividend.divide(divisor);
 
         //then
-        assertThat(result).isEqualTo(3);
+        assertThat(result).isEqualTo(expectedCash);
+    }
+
+    @Test
+    void multiply() {
+        //given
+        Cash cash = new Cash(3000);
+        Cash expectedCash = new Cash(9000);
+
+        //when
+        Cash result = cash.multiply(3);
+
+        //then
+        assertThat(result).isEqualTo(expectedCash);
     }
 
     @Test
@@ -42,6 +69,22 @@ public class CashTest {
         //when
         boolean result1 = cash.isLessThan(comparedCash1);
         boolean result2 = cash.isLessThan(comparedCash2);
+
+        //then
+        assertThat(result1).isTrue();
+        assertThat(result2).isFalse();
+    }
+
+    @Test
+    void isMoreThan() {
+        //given
+        Cash cash = new Cash(2000);
+        Cash comparedCash1 = new Cash(1000);
+        Cash comparedCash2 = new Cash(3000);
+
+        //when
+        boolean result1 = cash.isMoreThan(comparedCash1);
+        boolean result2 = cash.isMoreThan(comparedCash2);
 
         //then
         assertThat(result1).isTrue();
@@ -74,18 +117,5 @@ public class CashTest {
 
         //then
         assertThat(result).isEqualByComparingTo(BigDecimal.valueOf(3000));
-    }
-
-    @Test
-    void multiply() {
-        //given
-        Cash cash = new Cash(3000);
-        Cash expectedCash = new Cash(9000);
-
-        //when
-        Cash result = cash.multiply(3);
-
-        //then
-        assertThat(result).isEqualTo(expectedCash);
     }
 }
