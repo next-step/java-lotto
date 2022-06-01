@@ -65,4 +65,17 @@ public class LottoNumbersTest {
         //then
         assertThat(result).isEqualTo(expectedLottoNumbers);
     }
+
+    @Test
+    void match() {
+        //given
+        LottoNumbers comparedLottoNumbers = TestObjectSupport.createLottoNumbers();
+        LottoNumbers comparingLottoNumbers = TestObjectSupport.createLottoNumbers();
+
+        //when
+        int result = comparedLottoNumbers.match(comparingLottoNumbers);
+
+        //then
+        assertThat(result).isEqualTo(6);
+    }
 }

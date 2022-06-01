@@ -21,6 +21,11 @@ public class LottoNumbers {
         return new LottoNumbers(lottoNumbers);
     }
 
+    public int match(LottoNumbers comparingNumbers) {
+        Set<LottoNumber> mergedLottoNumbers = mergeIntoSet(comparingNumbers);
+        return 2 * LOTTO_NUMBER_COUNT - mergedLottoNumbers.size();
+    }
+
     public List<LottoNumber> toList() {
         return Collections.unmodifiableList(lottoNumbers);
     }
@@ -36,6 +41,13 @@ public class LottoNumbers {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(String.format("로또 번호는 %d개여야 합니다.", LOTTO_NUMBER_COUNT));
         }
+    }
+
+    private Set<LottoNumber> mergeIntoSet(LottoNumbers lottoNumbers) {
+        Set<LottoNumber> mergedLottoNumbers = new HashSet<>();
+        mergedLottoNumbers.addAll(lottoNumbers.toList());
+        mergedLottoNumbers.addAll(this.lottoNumbers);
+        return mergedLottoNumbers;
     }
 
     @Override

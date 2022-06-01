@@ -15,15 +15,7 @@ public class Lotto {
     }
 
     public int countMatch(LottoNumbers comparedNumbers) {
-        Set<LottoNumber> mergedLottoNumbers = mergeIntoSet(comparedNumbers, this.lottoNumbers);
-        return 2 * LottoNumbers.LOTTO_NUMBER_COUNT - mergedLottoNumbers.size();
-    }
-
-    private Set<LottoNumber> mergeIntoSet(LottoNumbers lottoNumbers1, LottoNumbers lottoNumbers2) {
-        Set<LottoNumber> mergedLottoNumbers = new HashSet<>();
-        mergedLottoNumbers.addAll(lottoNumbers1.toList());
-        mergedLottoNumbers.addAll(lottoNumbers2.toList());
-        return mergedLottoNumbers;
+        return lottoNumbers.match(comparedNumbers);
     }
 
     @Override
