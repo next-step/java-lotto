@@ -15,6 +15,10 @@ public class Cash {
         this.cashAmount = cashAmount;
     }
 
+    public Cash add(Cash cash) {
+        return new Cash(cashAmount.add(cash.cashAmount));
+    }
+
     public Cash divide(Cash cash) {
         return new Cash(cashAmount.divide(cash.cashAmount));
     }

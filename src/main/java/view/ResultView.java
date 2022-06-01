@@ -5,7 +5,6 @@ import domain.LottoResult;
 import domain.Rank;
 import domain.Winner;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -32,7 +31,7 @@ public class ResultView {
     }
 
     private static String lottoResultByRankToString(LottoResult lottoResult, Rank rank) {
-        return String.format("%d개 일치 (%.0f원)- %d개",
+        return String.format("%d개 일치 (%s원)- %d개",
                 rank.getMatchCount(), rank.getWinningMoney(), lottoResult.count(rank));
     }
 

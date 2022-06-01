@@ -4,16 +4,16 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(6, BigDecimal.valueOf(2000000000)),
-    SECOND(5, BigDecimal.valueOf(1500000)),
-    THIRD(4, BigDecimal.valueOf(50000)),
-    FOURTH(3, BigDecimal.valueOf(5000)),
-    LOST(0, BigDecimal.ZERO);
+    FIRST(6, new Cash(2_000_000_000)),
+    SECOND(5, new Cash(1_500_000)),
+    THIRD(4, new Cash(50_000)),
+    FOURTH(3, new Cash(5_000)),
+    LOST(0, new Cash(0));
 
     private final int matchCount;
-    private final BigDecimal winningMoney;
+    private final Cash winningMoney;
 
-    Rank(int matchCount, BigDecimal winningMoney) {
+    Rank(int matchCount, Cash winningMoney) {
         this.matchCount = matchCount;
         this.winningMoney = winningMoney;
     }
@@ -29,7 +29,7 @@ public enum Rank {
         return matchCount;
     }
 
-    public BigDecimal getWinningMoney() {
+    public Cash getWinningMoney() {
         return winningMoney;
     }
 

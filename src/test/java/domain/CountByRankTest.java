@@ -2,7 +2,6 @@ package domain;
 
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -51,13 +50,13 @@ public class CountByRankTest {
     void winningMoney() {
         //given
         CountByRank countByRank = CountByRank.create().increaseCount(Rank.FIRST).increaseCount(Rank.SECOND);
-        BigDecimal expectedWinningMoney = Rank.FIRST.getWinningMoney().add(Rank.SECOND.getWinningMoney());
+        Cash expectedWinningMoney = Rank.FIRST.getWinningMoney().add(Rank.SECOND.getWinningMoney());
 
         //when
-        BigDecimal result = countByRank.winningMoney();
+        Cash result = countByRank.winningMoney();
 
         //then
-        assertThat(result).isEqualByComparingTo(expectedWinningMoney);
+        assertThat(result).isEqualTo(expectedWinningMoney);
     }
 
     @Test

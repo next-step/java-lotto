@@ -33,6 +33,20 @@ public class CashTest {
     }
 
     @Test
+    void add() {
+        //given
+        Cash cash1 = new Cash(3000);
+        Cash cash2 = new Cash(2000);
+        Cash expectedCash = new Cash(5000);
+
+        //when
+        Cash result = cash1.add(cash2);
+
+        //then
+        assertThat(result).isEqualTo(expectedCash);
+    }
+
+    @Test
     void divide() {
         //given
         Cash dividend = new Cash(3000);
