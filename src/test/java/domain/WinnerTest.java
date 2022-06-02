@@ -9,18 +9,19 @@ public class WinnerTest {
     void create() {
         //given
         LottoNumbers lottoNumbers = TestObjectSupport.createLottoNumbers();
+        BonusNumber bonusNumber = TestObjectSupport.createBonusNumber();
 
         //when
-        Winner result = new Winner(lottoNumbers);
+        Winner result = new Winner(lottoNumbers, bonusNumber);
 
         //then
-        assertThat(result).isEqualTo(new Winner(lottoNumbers));
+        assertThat(result).isEqualTo(new Winner(lottoNumbers, bonusNumber));
     }
 
     @Test
     void match() {
         //given
-        Winner winner = new Winner(TestObjectSupport.createLottoNumbers());
+        Winner winner = new Winner(TestObjectSupport.createLottoNumbers(), null);
         Lotto lotto = TestObjectSupport.createLotto();
 
         //when

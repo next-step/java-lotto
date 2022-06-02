@@ -38,6 +38,10 @@ public class TestObjectSupport {
     }
 
     public static Winner createWinner() {
-        return new Winner(createLottoNumbers());
+        return new Winner(createLottoNumbers(), null);
+    }
+
+    public static BonusNumber createBonusNumber() {
+        return new BonusNumber(7);
     }
 }
