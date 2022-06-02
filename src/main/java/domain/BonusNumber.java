@@ -9,6 +9,10 @@ public class BonusNumber {
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
+    public LottoNumber toLottoNumber() {
+        return bonusNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

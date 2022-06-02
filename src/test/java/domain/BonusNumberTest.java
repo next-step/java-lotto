@@ -16,4 +16,16 @@ public class BonusNumberTest {
         //then
         assertThat(result).isEqualTo(new BonusNumber(bonusNumber));
     }
+
+    @Test
+    void toLottoNumber() {
+        //given
+        BonusNumber bonusNumber = TestObjectSupport.createBonusNumber();
+
+        //when
+        LottoNumber result = bonusNumber.toLottoNumber();
+
+        //then
+        assertThat(result).isEqualTo(new LottoNumber(7));
+    }
 }

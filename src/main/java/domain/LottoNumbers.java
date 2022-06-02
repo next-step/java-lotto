@@ -26,6 +26,10 @@ public class LottoNumbers {
         return 2 * LOTTO_NUMBER_COUNT - mergedLottoNumbers.size();
     }
 
+    public boolean match(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     public List<LottoNumber> toList() {
         return Collections.unmodifiableList(lottoNumbers);
     }

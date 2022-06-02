@@ -7,6 +7,8 @@ public class Winner {
     private final BonusNumber bonusNumber;
 
     public Winner(LottoNumbers winnerNumbers, BonusNumber bonusNumber) {
+        validateDuplicateBonusNumber(winnerNumbers, bonusNumber);
+
         this.winnerNumbers = winnerNumbers;
         this.bonusNumber = bonusNumber;
     }
@@ -14,6 +16,12 @@ public class Winner {
     public Rank match(Lotto lotto) {
         int matchCount = lotto.countMatch(winnerNumbers);
         return Rank.of(matchCount);
+    }
+
+    private void validateDuplicateBonusNumber(LottoNumbers winnerNumbers, BonusNumber bonusNumber) {
+        if (winnerNumbers.match(bonusNumber.toLottoNumber())) {
+            throw new IllegalArgumentException("보너스 볼은 로또 번호와 중복될 수 없습니다.");
+        }
     }
 
     @Override

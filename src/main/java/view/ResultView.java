@@ -44,7 +44,16 @@ public class ResultView {
     public Winner scanWinner() {
         LottoNumbers winnerNumbers = scanWinnerNumbersWithAnnouncement();
         BonusNumber bonusNumber = scanBonusNumberWithAnnouncement();
-        return new Winner(winnerNumbers, bonusNumber);
+        return createValidWinner(winnerNumbers, bonusNumber);
+    }
+
+    private Winner createValidWinner(LottoNumbers winnerNumbers, BonusNumber bonusNumber) {
+        try {
+            return new Winner(winnerNumbers, bonusNumber);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return createValidWinner(winnerNumbers, scanBonusNumber());
+        }
     }
 
     private LottoNumbers scanWinnerNumbersWithAnnouncement() {

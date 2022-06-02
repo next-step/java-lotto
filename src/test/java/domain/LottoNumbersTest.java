@@ -78,4 +78,20 @@ public class LottoNumbersTest {
         //then
         assertThat(result).isEqualTo(6);
     }
+
+    @Test
+    void matchBonusNumber() {
+        //given
+        LottoNumbers lottoNumbers = TestObjectSupport.createLottoNumbers();
+        LottoNumber lottoNumber1 = new LottoNumber(1);
+        LottoNumber lottoNumber2 = new LottoNumber(7);
+
+        //when
+        boolean result1 = lottoNumbers.match(lottoNumber1);
+        boolean result2 = lottoNumbers.match(lottoNumber2);
+
+        //then
+        assertThat(result1).isTrue();
+        assertThat(result2).isFalse();
+    }
 }
