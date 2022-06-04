@@ -15,7 +15,8 @@ public class Winner {
 
     public Rank match(Lotto lotto) {
         int matchCount = lotto.countMatch(winnerNumbers);
-        return Rank.of(matchCount);
+        boolean bonusMatch = lotto.isMatch(bonusNumber.toLottoNumber());
+        return Rank.of(matchCount, bonusMatch);
     }
 
     private void validateDuplicateBonusNumber(LottoNumbers winnerNumbers, BonusNumber bonusNumber) {

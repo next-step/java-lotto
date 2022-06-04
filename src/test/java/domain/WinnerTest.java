@@ -2,6 +2,8 @@ package domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -34,13 +36,16 @@ public class WinnerTest {
     @Test
     void match() {
         //given
-        Winner winner = new Winner(TestObjectSupport.createLottoNumbers(), null);
-        Lotto lotto = TestObjectSupport.createLotto();
+        Winner winner = new Winner(TestObjectSupport.createLottoNumbers(), TestObjectSupport.createBonusNumber());
+        Lotto lotto1 = TestObjectSupport.createLotto();
+        Lotto lotto2 = TestObjectSupport.createSecondRankLotto();
 
         //when
-        Rank result = winner.match(lotto);
+        Rank result1 = winner.match(lotto1);
+        Rank result2 = winner.match(lotto2);
 
         //then
-        assertThat(result).isEqualTo(Rank.FIRST);
+        assertThat(result1).isEqualTo(Rank.FIRST);
+        assertThat(result2).isEqualTo(Rank.SECOND);
     }
 }

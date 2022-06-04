@@ -24,6 +24,11 @@ public class TestObjectSupport {
         return new Lotto(createLottoNumbers());
     }
 
+    public static Lotto createSecondRankLotto() {
+        LottoNumbers lottoNumbers = new LottoNumbers(convertToLottoNumberList(Arrays.asList(1, 2, 3, 4, 5, 7)));
+        return new Lotto(lottoNumbers);
+    }
+
     public static Lottos createLottos() {
         Lotto lotto = createLotto();
         return new Lottos(Arrays.asList(lotto, lotto, lotto));

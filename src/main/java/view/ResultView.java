@@ -20,6 +20,7 @@ public class ResultView {
         System.out.println();
         System.out.println("당첨 통계\n"
                 + "---------");
+        System.out.println(lottoResultByRankToString(lottoResult, Rank.FIFTH));
         System.out.println(lottoResultByRankToString(lottoResult, Rank.FOURTH));
         System.out.println(lottoResultByRankToString(lottoResult, Rank.THIRD));
         System.out.println(lottoResultByRankToString(lottoResult, Rank.SECOND));
@@ -29,6 +30,10 @@ public class ResultView {
     }
 
     private static String lottoResultByRankToString(LottoResult lottoResult, Rank rank) {
+        if (rank.isBonusMatch()) {
+            return String.format("%d개 일치, 보너스 볼 일치(%s원) - %d개",
+                    rank.getMatchCount(), rank.getWinningMoney(), lottoResult.count(rank));
+        }
         return String.format("%d개 일치 (%s원)- %d개",
                 rank.getMatchCount(), rank.getWinningMoney(), lottoResult.count(rank));
     }
