@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    public static int PRICE = 1000;
+    public static Cash PRICE = new Cash(1000);
     private LottoNumbers lottoNumbers;
 
     public Lotto(LottoNumbers lottoNumbers) {
@@ -15,15 +15,11 @@ public class Lotto {
     }
 
     public int countMatch(LottoNumbers comparedNumbers) {
-        Set<LottoNumber> mergedLottoNumbers = mergeIntoSet(comparedNumbers, this.lottoNumbers);
-        return 2 * LottoNumbers.LOTTO_NUMBER_COUNT - mergedLottoNumbers.size();
+        return lottoNumbers.match(comparedNumbers);
     }
 
-    private Set<LottoNumber> mergeIntoSet(LottoNumbers lottoNumbers1, LottoNumbers lottoNumbers2) {
-        Set<LottoNumber> mergedLottoNumbers = new HashSet<>();
-        mergedLottoNumbers.addAll(lottoNumbers1.toList());
-        mergedLottoNumbers.addAll(lottoNumbers2.toList());
-        return mergedLottoNumbers;
+    public boolean isMatch(LottoNumber lottoNumber) {
+        return lottoNumbers.match(lottoNumber);
     }
 
     @Override

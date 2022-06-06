@@ -25,7 +25,7 @@ public class LottoResultTest {
     @Test
     void createByStaticFactoryMethod() {
         //given
-        Winner winner = new Winner(TestObjectSupport.createLottoNumbers());
+        Winner winner = new Winner(TestObjectSupport.createLottoNumbers(), null);
         Lottos lottos = TestObjectSupport.createLottos();
         Map<Rank, Integer> rankIntegerMap = TestObjectSupport.createRankIntegerMap();
         rankIntegerMap.replace(Rank.FIRST, 3);

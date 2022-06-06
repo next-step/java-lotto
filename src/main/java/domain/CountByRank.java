@@ -1,6 +1,5 @@
 package domain;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -26,8 +25,8 @@ public class CountByRank {
         return new CountByRank(increasedCountByRank);
     }
 
-    public BigDecimal winningMoney() {
-        BigDecimal winningMoney = BigDecimal.ZERO;
+    public Cash winningMoney() {
+        Cash winningMoney = new Cash(0);
         for (Rank rank : countByRank.keySet()) {
             winningMoney = winningMoney.add(winningMoneyByRank(rank));
         }
@@ -38,9 +37,9 @@ public class CountByRank {
         return countByRank.get(rank);
     }
 
-    private BigDecimal winningMoneyByRank(Rank rank) {
+    private Cash winningMoneyByRank(Rank rank) {
         int count = countByRank.get(rank);
-        return rank.getWinningMoney().multiply(BigDecimal.valueOf(count));
+        return rank.getWinningMoney().multiply(count);
     }
 
 

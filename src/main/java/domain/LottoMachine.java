@@ -13,8 +13,8 @@ public class LottoMachine {
 
     public Lottos issue(Cash cash) {
         List<Lotto> lottos = new ArrayList<>();
-        int lottoCount = cash.capableLottoCount(Lotto.PRICE);
-        for (int i = 0; i < lottoCount; i++) {
+        Cash lottoCount = cash.divide(Lotto.PRICE);
+        for (int i = 0; lottoCount.isMoreThan(new Cash(i)); i++) {
             lottos.add(new Lotto(selectRule.select()));
         }
         return new Lottos(lottos);

@@ -12,7 +12,7 @@ public class LottoApplication {
         Lottos lottos = lottoMachine.issue(cash);
         InputView.printLottos(lottos);
         ResultView resultView = new ResultView(new Scanner(System.in));
-        Winner winner = resultView.scanWinnerNumbersWithAnnouncement();
+        Winner winner = resultView.scanWinner();
         LottoResult lottoResult = LottoResult.create(winner, lottos);
         ResultView.printLottoResult(lottoResult);
     }

@@ -19,11 +19,11 @@ public class LottoResult {
             Rank rank = winner.match(lotto);
             countByRank = countByRank.increaseCount(rank);
         }
-        return new LottoResult(countByRank, new Cash(lottos.totalPrice()));
+        return new LottoResult(countByRank, lottos.totalPrice());
     }
 
     public BigDecimal winningRate() {
-        return countByRank.winningMoney().divide(cash.toBigDecimal(), 2, RoundingMode.HALF_UP);
+        return countByRank.winningMoney().toBigDecimal().divide(cash.toBigDecimal(), 2, RoundingMode.HALF_UP);
     }
 
     public int count(Rank rank) {

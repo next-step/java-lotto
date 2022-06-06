@@ -1,11 +1,7 @@
 package view;
 
-import domain.LottoNumbers;
-import domain.LottoResult;
-import domain.Rank;
-import domain.Winner;
+import domain.*;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -13,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class ResultView {
     private static final String WINNER_INPUT_ANNOUNCEMENT = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_INPUT_ANNOUNCEMENT = "보너스 볼을 입력해 주세요.";
     private final Scanner scanner;
 
     public ResultView(Scanner scanner) {
@@ -23,6 +20,7 @@ public class ResultView {
         System.out.println();
         System.out.println("당첨 통계\n"
                 + "---------");
+        System.out.println(lottoResultByRankToString(lottoResult, Rank.FIFTH));
         System.out.println(lottoResultByRankToString(lottoResult, Rank.FOURTH));
         System.out.println(lottoResultByRankToString(lottoResult, Rank.THIRD));
         System.out.println(lottoResultByRankToString(lottoResult, Rank.SECOND));
@@ -32,7 +30,11 @@ public class ResultView {
     }
 
     private static String lottoResultByRankToString(LottoResult lottoResult, Rank rank) {
-        return String.format("%d개 일치 (%.0f원)- %d개",
+        if (rank.isBonusMatch()) {
+            return String.format("%d개 일치, 보너스 볼 일치(%s원) - %d개",
+                    rank.getMatchCount(), rank.getWinningMoney(), lottoResult.count(rank));
+        }
+        return String.format("%d개 일치 (%s원)- %d개",
                 rank.getMatchCount(), rank.getWinningMoney(), lottoResult.count(rank));
     }
 
@@ -44,16 +46,31 @@ public class ResultView {
         return String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)", lottoResult.winningRate(), result);
     }
 
-    public Winner scanWinnerNumbersWithAnnouncement() {
+    public Winner scanWinner() {
+        LottoNumbers winnerNumbers = scanWinnerNumbersWithAnnouncement();
+        BonusNumber bonusNumber = scanBonusNumberWithAnnouncement();
+        return createValidWinner(winnerNumbers, bonusNumber);
+    }
+
+    private Winner createValidWinner(LottoNumbers winnerNumbers, BonusNumber bonusNumber) {
+        try {
+            return new Winner(winnerNumbers, bonusNumber);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return createValidWinner(winnerNumbers, scanBonusNumber());
+        }
+    }
+
+    private LottoNumbers scanWinnerNumbersWithAnnouncement() {
         System.out.println(WINNER_INPUT_ANNOUNCEMENT);
         return scanWinnerNumbers();
     }
 
-    private Winner scanWinnerNumbers() {
+    private LottoNumbers scanWinnerNumbers() {
         String input = scanner.nextLine();
         List<Integer> inputNumbers = parseNumbers(input);
         try {
-            return new Winner(LottoNumbers.create(inputNumbers));
+            return LottoNumbers.create(inputNumbers);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return scanWinnerNumbers();
@@ -65,5 +82,19 @@ public class ResultView {
                 .map(String::trim)
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
+    }
+
+    private BonusNumber scanBonusNumberWithAnnouncement() {
+        System.out.println(BONUS_INPUT_ANNOUNCEMENT);
+        return scanBonusNumber();
+    }
+
+    private BonusNumber scanBonusNumber() {
+        try {
+            return new BonusNumber(scanner.nextInt());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return scanBonusNumber();
+        }
     }
 }

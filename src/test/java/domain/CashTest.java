@@ -3,6 +3,7 @@ package domain;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,27 +21,84 @@ public class CashTest {
     }
 
     @Test
-    void capableLottoCount() {
+    void createBigInteger() {
         //given
-        Cash cash = new Cash(3000);
+        BigInteger cashAmount = BigInteger.valueOf(3000);
 
         //when
-        int result = cash.capableLottoCount(1000);
+        Cash result = new Cash(cashAmount);
 
         //then
-        assertThat(result).isEqualTo(3);
+        assertThat(result).isEqualTo(new Cash(cashAmount));
+    }
+
+    @Test
+    void add() {
+        //given
+        Cash cash1 = new Cash(3000);
+        Cash cash2 = new Cash(2000);
+        Cash expectedCash = new Cash(5000);
+
+        //when
+        Cash result = cash1.add(cash2);
+
+        //then
+        assertThat(result).isEqualTo(expectedCash);
+    }
+
+    @Test
+    void divide() {
+        //given
+        Cash dividend = new Cash(3000);
+        Cash divisor = new Cash(1000);
+        Cash expectedCash = new Cash(3);
+
+        //when
+        Cash result = dividend.divide(divisor);
+
+        //then
+        assertThat(result).isEqualTo(expectedCash);
+    }
+
+    @Test
+    void multiply() {
+        //given
+        Cash cash = new Cash(3000);
+        Cash expectedCash = new Cash(9000);
+
+        //when
+        Cash result = cash.multiply(3);
+
+        //then
+        assertThat(result).isEqualTo(expectedCash);
     }
 
     @Test
     void isLessThan() {
         //given
         Cash cash = new Cash(2000);
-        int comparedNumber1 = 3000;
-        int comparedNumber2 = 1000;
+        Cash comparedCash1 = new Cash(3000);
+        Cash comparedCash2 = new Cash(1000);
 
         //when
-        boolean result1 = cash.isLessThan(comparedNumber1);
-        boolean result2 = cash.isLessThan(comparedNumber2);
+        boolean result1 = cash.isLessThan(comparedCash1);
+        boolean result2 = cash.isLessThan(comparedCash2);
+
+        //then
+        assertThat(result1).isTrue();
+        assertThat(result2).isFalse();
+    }
+
+    @Test
+    void isMoreThan() {
+        //given
+        Cash cash = new Cash(2000);
+        Cash comparedCash1 = new Cash(1000);
+        Cash comparedCash2 = new Cash(3000);
+
+        //when
+        boolean result1 = cash.isMoreThan(comparedCash1);
+        boolean result2 = cash.isMoreThan(comparedCash2);
 
         //then
         assertThat(result1).isTrue();
@@ -51,8 +109,8 @@ public class CashTest {
     void isMultipleOf() {
         //given
         Cash cash = new Cash(2000);
-        int price1 = 1000;
-        int price2 = 999;
+        Cash price1 = new Cash(1000);
+        Cash price2 = new Cash(999);
 
         //when
         boolean result1 = cash.isMultipleOf(price1);

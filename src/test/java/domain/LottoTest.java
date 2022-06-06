@@ -30,4 +30,20 @@ public class LottoTest {
         //then
         assertThat(result).isEqualTo(LottoNumbers.LOTTO_NUMBER_COUNT);
     }
+
+    @Test
+    void isMatch() {
+        //given
+        LottoNumber lottoNumber1 = new LottoNumber(1);
+        LottoNumber lottoNumber2 = new LottoNumber(7);
+        Lotto lotto = TestObjectSupport.createLotto();
+
+        //when
+        boolean result1 = lotto.isMatch(lottoNumber1);
+        boolean result2 = lotto.isMatch(lottoNumber2);
+
+        //then
+        assertThat(result1).isTrue();
+        assertThat(result2).isFalse();
+    }
 }

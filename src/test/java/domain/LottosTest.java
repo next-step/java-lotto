@@ -51,11 +51,12 @@ public class LottosTest {
     void totalPrice() {
         //given
         Lottos lottos = TestObjectSupport.createLottos();
+        Cash expectedPrice = new Cash(3000);
 
         //when
-        int result = lottos.totalPrice();
+        Cash result = lottos.totalPrice();
 
         //then
-        assertThat(result).isEqualTo(3000);
+        assertThat(result).isEqualTo(expectedPrice);
     }
 }

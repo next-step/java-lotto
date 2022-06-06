@@ -19,8 +19,8 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public int totalPrice() {
-        return Lotto.PRICE * size();
+    public Cash totalPrice() {
+        return Lotto.PRICE.multiply(size());
     }
 
     @Override

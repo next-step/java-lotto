@@ -3,15 +3,26 @@ package domain;
 import java.util.Objects;
 
 public class Winner {
-    private final LottoNumbers lottoNumbers;
+    private final LottoNumbers winnerNumbers;
+    private final BonusNumber bonusNumber;
 
-    public Winner(LottoNumbers lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public Winner(LottoNumbers winnerNumbers, BonusNumber bonusNumber) {
+        validateDuplicateBonusNumber(winnerNumbers, bonusNumber);
+
+        this.winnerNumbers = winnerNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
     public Rank match(Lotto lotto) {
-        int matchCount = lotto.countMatch(lottoNumbers);
-        return Rank.of(matchCount);
+        int matchCount = lotto.countMatch(winnerNumbers);
+        boolean bonusMatch = lotto.isMatch(bonusNumber.toLottoNumber());
+        return Rank.of(matchCount, bonusMatch);
+    }
+
+    private void validateDuplicateBonusNumber(LottoNumbers winnerNumbers, BonusNumber bonusNumber) {
+        if (winnerNumbers.match(bonusNumber.toLottoNumber())) {
+            throw new IllegalArgumentException("보너스 볼은 로또 번호와 중복될 수 없습니다.");
+        }
     }
 
     @Override
@@ -19,11 +30,11 @@ public class Winner {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Winner winner = (Winner) o;
-        return lottoNumbers.equals(winner.lottoNumbers);
+        return winnerNumbers.equals(winner.winnerNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoNumbers);
+        return Objects.hash(winnerNumbers);
     }
 }
