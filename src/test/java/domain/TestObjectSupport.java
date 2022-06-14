@@ -43,7 +43,7 @@ public class TestObjectSupport {
     }
 
     public static Winner createWinner() {
-        return new Winner(createLottoNumbers(), null);
+        return new Winner(createLottoNumbers(), createBonusNumber());
     }
 
     public static BonusNumber createBonusNumber() {
