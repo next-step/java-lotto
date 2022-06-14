@@ -3,7 +3,6 @@ package domain;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,9 +20,9 @@ public class CashTest {
     }
 
     @Test
-    void createBigInteger() {
+    void createBigDecimal() {
         //given
-        BigInteger cashAmount = BigInteger.valueOf(3000);
+        BigDecimal cashAmount = BigDecimal.valueOf(3000);
 
         //when
         Cash result = new Cash(cashAmount);

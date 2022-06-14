@@ -1,17 +1,17 @@
 package domain;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Cash {
-    private final BigInteger cashAmount;
+    private final BigDecimal cashAmount;
 
     public Cash(int cashAmount) {
-        this.cashAmount = BigInteger.valueOf(cashAmount);
+        this.cashAmount = BigDecimal.valueOf(cashAmount);
     }
 
-    public Cash(BigInteger cashAmount) {
+    public Cash(BigDecimal cashAmount) {
         this.cashAmount = cashAmount;
     }
 
@@ -20,11 +20,11 @@ public class Cash {
     }
 
     public Cash divide(Cash cash) {
-        return new Cash(cashAmount.divide(cash.cashAmount));
+        return new Cash(cashAmount.divide(cash.cashAmount, RoundingMode.HALF_UP));
     }
 
     public Cash multiply(int count) {
-        return new Cash(cashAmount.multiply(BigInteger.valueOf(count)));
+        return new Cash(cashAmount.multiply(BigDecimal.valueOf(count)));
     }
 
     public boolean isLessThan(Cash comparedCash) {
@@ -36,11 +36,11 @@ public class Cash {
     }
 
     public boolean isMultipleOf(Cash cash) {
-        return cashAmount.remainder(cash.cashAmount).equals(BigInteger.ZERO);
+        return cashAmount.remainder(cash.cashAmount).equals(BigDecimal.ZERO);
     }
 
     public BigDecimal toBigDecimal() {
-        return new BigDecimal(cashAmount);
+        return cashAmount;
     }
 
     @Override
