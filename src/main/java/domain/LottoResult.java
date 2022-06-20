@@ -1,7 +1,6 @@
 package domain;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Objects;
 
 public class LottoResult {
@@ -23,7 +22,8 @@ public class LottoResult {
     }
 
     public BigDecimal winningRate() {
-        return countByRank.winningMoney().toBigDecimal().divide(cash.toBigDecimal(), 2, RoundingMode.HALF_UP);
+        WinningMoney winningMoney = WinningMoney.of(countByRank);
+        return winningMoney.toRate(cash);
     }
 
     public int count(Rank rank) {

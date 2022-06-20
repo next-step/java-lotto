@@ -25,23 +25,9 @@ public class CountByRank {
         return new CountByRank(increasedCountByRank);
     }
 
-    public Cash winningMoney() {
-        Cash winningMoney = new Cash(0);
-        for (Rank rank : countByRank.keySet()) {
-            winningMoney = winningMoney.add(winningMoneyByRank(rank));
-        }
-        return winningMoney;
-    }
-
     public int count(Rank rank) {
         return countByRank.get(rank);
     }
-
-    private Cash winningMoneyByRank(Rank rank) {
-        int count = countByRank.get(rank);
-        return rank.getWinningMoney().multiply(count);
-    }
-
 
     @Override
     public boolean equals(Object o) {

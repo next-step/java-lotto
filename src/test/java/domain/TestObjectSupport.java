@@ -42,11 +42,20 @@ public class TestObjectSupport {
         return countByRank;
     }
 
+    public static CountByRank createFirstCountByRank() {
+        CountByRank countByRank = new CountByRank(createRankIntegerMap());
+        return countByRank.increaseCount(Rank.FIRST);
+    }
+
     public static Winner createWinner() {
         return new Winner(createLottoNumbers(), createBonusNumber());
     }
 
     public static BonusNumber createBonusNumber() {
         return new BonusNumber(7);
+    }
+
+    public static WinningMoney createFirstWinningMoney() {
+        return new WinningMoney(Rank.FIRST.getWinningMoney());
     }
 }

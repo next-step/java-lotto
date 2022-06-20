@@ -46,7 +46,7 @@ public class LottoResultTest {
         LottoResult lottoResult = LottoResult.create(TestObjectSupport.createWinner(), TestObjectSupport.createLottos());
         BigDecimal expectedWinningRate = BigDecimal.valueOf(2000000000)
                 .multiply(BigDecimal.valueOf(3))
-                .divide(BigDecimal.valueOf(3000), 2, RoundingMode.HALF_UP);
+                .divide(BigDecimal.valueOf(3000), RoundingMode.HALF_UP);
 
         //when
         BigDecimal result = lottoResult.winningRate();

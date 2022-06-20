@@ -47,19 +47,6 @@ public class CountByRankTest {
     }
 
     @Test
-    void winningMoney() {
-        //given
-        CountByRank countByRank = CountByRank.create().increaseCount(Rank.FIRST).increaseCount(Rank.SECOND);
-        Cash expectedWinningMoney = Rank.FIRST.getWinningMoney().add(Rank.SECOND.getWinningMoney());
-
-        //when
-        Cash result = countByRank.winningMoney();
-
-        //then
-        assertThat(result).isEqualTo(expectedWinningMoney);
-    }
-
-    @Test
     void count() {
         //given
         CountByRank countByRank = CountByRank.create().increaseCount(Rank.FIRST);
