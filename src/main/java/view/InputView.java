@@ -4,10 +4,12 @@ import domain.Cash;
 import domain.Lotto;
 import domain.Lottos;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class InputView {
     private static final String CASH_INPUT_ANNOUNCEMENT = "구입금액을 입력해 주세요.";
+    private static final String INVALID_CASH_ANNOUNCEMENT = "구입금액은 정수만 가능합니다.";
     private final Scanner scanner;
 
     public InputView(Scanner scanner) {
@@ -27,14 +29,24 @@ public class InputView {
     }
 
     private Cash scanCash() {
-        Cash inputCash = new Cash(scanner.nextInt());
         try {
+            Cash inputCash = new Cash(scanIntForCash());
             validateMin(inputCash);
             validateMultiple(inputCash);
             return inputCash;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return scanCash();
+        }
+    }
+
+    private int scanIntForCash() {
+        try {
+            return scanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println(INVALID_CASH_ANNOUNCEMENT);
+            scanner.nextLine();
+            return scanIntForCash();
         }
     }
 

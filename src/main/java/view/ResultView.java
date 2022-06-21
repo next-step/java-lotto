@@ -3,6 +3,7 @@ package view;
 import domain.*;
 
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -10,6 +11,8 @@ import java.util.stream.Collectors;
 public class ResultView {
     private static final String WINNER_INPUT_ANNOUNCEMENT = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_INPUT_ANNOUNCEMENT = "보너스 볼을 입력해 주세요.";
+    private static final String INVALID_WINNER_INPUT_ANNOUNCEMENT = "당첨 번호는 콤마로 구분된 정수들만 가능합니다.";
+    private static final String INVALID_BONUS_INPUT_ANNOUNCEMENT = "보너스 볼은 정수만 가능합니다.";
     private final Scanner scanner;
 
     public ResultView(Scanner scanner) {
@@ -67,13 +70,22 @@ public class ResultView {
     }
 
     private LottoNumbers scanWinnerNumbers() {
-        String input = scanner.nextLine();
-        List<Integer> inputNumbers = parseNumbers(input);
         try {
+            List<Integer> inputNumbers = scanCommaSeparatedInts();
             return LottoNumbers.create(inputNumbers);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return scanWinnerNumbers();
+        }
+    }
+
+    private List<Integer> scanCommaSeparatedInts() {
+        try {
+            String input = scanner.nextLine();
+            return parseNumbers(input);
+        } catch (NumberFormatException e) {
+            System.out.println(INVALID_WINNER_INPUT_ANNOUNCEMENT);
+            return scanCommaSeparatedInts();
         }
     }
 
@@ -94,6 +106,10 @@ public class ResultView {
             return new BonusNumber(scanner.nextInt());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+            return scanBonusNumber();
+        } catch (InputMismatchException e) {
+            System.out.println(INVALID_BONUS_INPUT_ANNOUNCEMENT);
+            scanner.nextLine();
             return scanBonusNumber();
         }
     }
