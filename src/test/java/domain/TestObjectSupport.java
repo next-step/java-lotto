@@ -16,8 +16,17 @@ public class TestObjectSupport {
         return new LottoNumbers(convertToLottoNumberList(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
+    public static LottoNumbersList createLottoNumbersList() {
+        LottoNumbers lottoNumbers = createLottoNumbers();
+        return new LottoNumbersList(List.of(lottoNumbers, lottoNumbers, lottoNumbers));
+    }
+
     public static SelectRule createSelectRule() {
         return () -> LottoNumbers.create(Arrays.asList(1, 2, 3, 4, 5, 6));
+    }
+
+    public static ManualSelectRule createManualSelectRule() {
+        return new ManualSelectRule(createLottoNumbersList());
     }
 
     public static Lotto createLotto() {
