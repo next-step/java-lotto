@@ -3,6 +3,7 @@ package domain;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -50,7 +51,7 @@ public class CashTest {
         //given
         Cash dividend = new Cash(3000);
         Cash divisor = new Cash(1000);
-        Cash expectedCash = new Cash(3);
+        Cash expectedCash = new Cash(BigDecimal.valueOf(3));
 
         //when
         Cash result = dividend.divide(divisor);

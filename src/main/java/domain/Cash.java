@@ -20,7 +20,7 @@ public class Cash {
     }
 
     public Cash divide(Cash cash) {
-        return new Cash(cashAmount.divide(cash.cashAmount, RoundingMode.HALF_UP));
+        return new Cash(cashAmount.divide(cash.cashAmount, 4, RoundingMode.HALF_UP));
     }
 
     public Cash multiply(int count) {
@@ -48,7 +48,7 @@ public class Cash {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cash cash = (Cash) o;
-        return cashAmount.equals(cash.cashAmount);
+        return cashAmount.compareTo(cash.cashAmount) == 0;
     }
 
     @Override
