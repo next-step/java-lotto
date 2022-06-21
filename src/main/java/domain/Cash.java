@@ -5,7 +5,7 @@ import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Cash {
-    private final BigDecimal cashAmount;
+    protected final BigDecimal cashAmount;
 
     public Cash(int cashAmount) {
         this.cashAmount = BigDecimal.valueOf(cashAmount);
@@ -19,8 +19,8 @@ public class Cash {
         return new Cash(cashAmount.add(cash.cashAmount));
     }
 
-    public Cash divide(Cash cash) {
-        return new Cash(cashAmount.divide(cash.cashAmount, 4, RoundingMode.HALF_UP));
+    public BigDecimal divide(Cash cash) {
+        return cashAmount.divide(cash.cashAmount, 4, RoundingMode.HALF_UP);
     }
 
     public Cash multiply(int count) {

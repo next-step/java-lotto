@@ -1,5 +1,6 @@
 package domain;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -13,8 +14,8 @@ public class LottoMachine {
 
     public Lottos issue(Cash cash) {
         List<Lotto> lottos = new ArrayList<>();
-        Cash lottoCount = cash.divide(Lotto.PRICE);
-        for (int i = 0; lottoCount.isMoreThan(new Cash(i)); i++) {
+        BigDecimal lottoCount = cash.divide(Lotto.PRICE);
+        for (int i = 0; lottoCount.compareTo(BigDecimal.valueOf(i)) > 0; i++) {
             lottos.add(new Lotto(selectRule.select()));
         }
         return new Lottos(lottos);

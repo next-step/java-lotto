@@ -54,8 +54,4 @@ public class TestObjectSupport {
     public static BonusNumber createBonusNumber() {
         return new BonusNumber(7);
     }
-
-    public static WinningMoney createFirstWinningMoney() {
-        return new WinningMoney(Rank.FIRST.getWinningMoney());
-    }
 }

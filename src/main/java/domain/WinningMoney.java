@@ -10,19 +10,35 @@ public class WinningMoney {
         this.winningMoney = winningMoney;
     }
 
+    public WinningMoney(int winningMoney) {
+        this.winningMoney = new Cash(winningMoney);
+    }
+
     public static WinningMoney of(CountByRank countByRank) {
-        Cash winningMoney = new Cash(0);
+        WinningMoney winningMoney = new WinningMoney(0);
         for (Rank rank : Rank.values()) {
             winningMoney = winningMoney.add(winningMoneyByRank(countByRank, rank));
         }
-        return new WinningMoney(winningMoney);
+        return winningMoney;
     }
 
     public BigDecimal toRate(Cash cash) {
-        return winningMoney.divide(cash).toBigDecimal();
+        return winningMoney.divide(cash);
     }
 
-    private static Cash winningMoneyByRank(CountByRank countByRank, Rank rank) {
+    public WinningMoney add(WinningMoney winningMoney) {
+        return new WinningMoney(this.winningMoney.add(winningMoney.toCash()));
+    }
+
+    public WinningMoney multiply(int count) {
+        return new WinningMoney(winningMoney.multiply(count));
+    }
+
+    public Cash toCash() {
+        return winningMoney;
+    }
+
+    private static WinningMoney winningMoneyByRank(CountByRank countByRank, Rank rank) {
         int count = countByRank.count(rank);
         return rank.getWinningMoney().multiply(count);
     }
@@ -38,5 +54,10 @@ public class WinningMoney {
     @Override
     public int hashCode() {
         return Objects.hash(winningMoney);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(winningMoney);
     }
 }
