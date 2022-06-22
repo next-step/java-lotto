@@ -2,6 +2,8 @@ package domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ManualSelectRuleTest {
@@ -9,19 +11,21 @@ public class ManualSelectRuleTest {
     void create() {
         //given
         LottoNumbersList lottoNumbersList = TestObjectSupport.createLottoNumbersList();
+        SelectRule selectRule = TestObjectSupport.createSelectRule();
 
         //when
-        ManualSelectRule result = new ManualSelectRule(lottoNumbersList);
+        ManualSelectRule result = new ManualSelectRule(lottoNumbersList, selectRule);
 
         //then
-        assertThat(result).isEqualTo(new ManualSelectRule(lottoNumbersList));
+        assertThat(result).isEqualTo(new ManualSelectRule(lottoNumbersList, selectRule));
     }
 
     @Test
     void select() {
         //given
         ManualSelectRule manualSelectRule = TestObjectSupport.createManualSelectRule();
-        LottoNumbers expectedLottoNumbers = TestObjectSupport.createLottoNumbers();
+        LottoNumbers expectedManualLottoNumbers = TestObjectSupport.createLottoNumbers();
+        LottoNumbers expectedNonManualLottoNumbers = LottoNumbers.create(Arrays.asList(7, 8, 9, 10, 11, 12));
 
         //when
         LottoNumbers result1 = manualSelectRule.select();
@@ -30,9 +34,9 @@ public class ManualSelectRuleTest {
         LottoNumbers result4 = manualSelectRule.select();
 
         //then
-        assertThat(result1).isEqualTo(expectedLottoNumbers);
-        assertThat(result2).isEqualTo(expectedLottoNumbers);
-        assertThat(result3).isEqualTo(expectedLottoNumbers);
-        assertThat(result4).isNotNull();
+        assertThat(result1).isEqualTo(expectedManualLottoNumbers);
+        assertThat(result2).isEqualTo(expectedManualLottoNumbers);
+        assertThat(result3).isEqualTo(expectedManualLottoNumbers);
+        assertThat(result4).isEqualTo(expectedNonManualLottoNumbers);
     }
 }

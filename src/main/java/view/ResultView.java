@@ -1,6 +1,7 @@
 package view;
 
 import domain.*;
+import util.CustomScanner;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
@@ -71,29 +72,12 @@ public class ResultView {
 
     private LottoNumbers scanWinnerNumbers() {
         try {
-            List<Integer> inputNumbers = scanCommaSeparatedInts();
+            List<Integer> inputNumbers = CustomScanner.scanCommaSeparatedInts(scanner);
             return LottoNumbers.create(inputNumbers);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return scanWinnerNumbers();
         }
-    }
-
-    private List<Integer> scanCommaSeparatedInts() {
-        try {
-            String input = scanner.nextLine();
-            return parseNumbers(input);
-        } catch (NumberFormatException e) {
-            System.out.println(INVALID_WINNER_INPUT_ANNOUNCEMENT);
-            return scanCommaSeparatedInts();
-        }
-    }
-
-    private List<Integer> parseNumbers(String input) {
-        return Arrays.stream(input.split(","))
-                .map(String::trim)
-                .map(Integer::valueOf)
-                .collect(Collectors.toList());
     }
 
     private BonusNumber scanBonusNumberWithAnnouncement() {
@@ -103,13 +87,9 @@ public class ResultView {
 
     private BonusNumber scanBonusNumber() {
         try {
-            return new BonusNumber(scanner.nextInt());
+            return new BonusNumber(CustomScanner.scanInt(scanner));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return scanBonusNumber();
-        } catch (InputMismatchException e) {
-            System.out.println(INVALID_BONUS_INPUT_ANNOUNCEMENT);
-            scanner.nextLine();
             return scanBonusNumber();
         }
     }

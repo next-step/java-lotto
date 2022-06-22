@@ -4,21 +4,23 @@ import java.util.Objects;
 
 public class ManualSelectRule implements SelectRule {
     private final LottoNumbersList manualLottoNumbers;
-    private final RandomSelectRule randomSelectRule;
+    private final SelectRule selectRule;
     private int selectCount;
 
-    public ManualSelectRule(LottoNumbersList manualLottoNumbers) {
+    public ManualSelectRule(LottoNumbersList manualLottoNumbers, SelectRule selectRule) {
         this.manualLottoNumbers = manualLottoNumbers;
-        this.randomSelectRule = new RandomSelectRule();
+        this.selectRule = selectRule;
         this.selectCount = 0;
     }
 
     @Override
     public LottoNumbers select() {
-        if (manualLottoNumbers.isSmallerThanSize(selectCount)) {
-            return manualLottoNumbers.get(selectCount);
+        LottoNumbers lottoNumbers = selectRule.select();
+        if (manualLottoNumbers.isSizeBiggerThan(selectCount)) {
+            lottoNumbers = manualLottoNumbers.get(selectCount);
         }
-        return randomSelectRule.select();
+        selectCount++;
+        return lottoNumbers;
     }
 
     @Override
@@ -26,11 +28,11 @@ public class ManualSelectRule implements SelectRule {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ManualSelectRule that = (ManualSelectRule) o;
-        return selectCount == that.selectCount && manualLottoNumbers.equals(that.manualLottoNumbers);
+        return selectCount == that.selectCount && manualLottoNumbers.equals(that.manualLottoNumbers) && selectRule.equals(that.selectRule);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(manualLottoNumbers, selectCount);
+        return Objects.hash(manualLottoNumbers, selectRule, selectCount);
     }
 }

@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,8 +15,14 @@ public class LottoNumbersList {
         return lottoNumbersList.get(index);
     }
 
-    public boolean isSmallerThanSize(int index) {
+    public boolean isSizeBiggerThan(int index) {
         return lottoNumbersList.size() > index;
+    }
+
+    public LottoNumbersList add(LottoNumbers lottoNumbers) {
+        List<LottoNumbers> addedLottoNumbersList = new ArrayList<>(lottoNumbersList);
+        addedLottoNumbersList.add(lottoNumbers);
+        return new LottoNumbersList(addedLottoNumbersList);
     }
 
     @Override

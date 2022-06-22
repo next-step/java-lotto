@@ -26,7 +26,8 @@ public class TestObjectSupport {
     }
 
     public static ManualSelectRule createManualSelectRule() {
-        return new ManualSelectRule(createLottoNumbersList());
+        SelectRule selectRule = () -> LottoNumbers.create(Arrays.asList(7, 8, 9, 10, 11, 12));
+        return new ManualSelectRule(createLottoNumbersList(), selectRule);
     }
 
     public static Lotto createLotto() {
