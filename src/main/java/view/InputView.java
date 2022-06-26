@@ -29,7 +29,7 @@ public class InputView {
         return scanCash();
     }
 
-    public LottoNumbersList scanManualCountAndManualLottoNumbersWithAnnouncement(Cash cash) {
+    public LottoNumbersList scanManualLottoNumbers(Cash cash) {
         System.out.println(MANUAL_COUNT_INPUT_ANNOUNCEMENT);
         ManualLottoCount manualLottoCount = scanManualLottoCount(cash.divide(Lotto.PRICE).longValue());
 
