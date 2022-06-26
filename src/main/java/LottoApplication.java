@@ -9,7 +9,7 @@ public class LottoApplication {
         InputView inputView = new InputView(new Scanner(System.in));
         Cash cash = inputView.scanCashWithAnnouncement();
         LottoNumbersList lottoNumbersList = inputView.scanManualLottoNumbers(cash);
-        LottoMachine lottoMachine = new LottoMachine(new ManualSelectRule(lottoNumbersList, new RandomSelectRule()));
+        LottoMachine lottoMachine = new LottoMachine(new ComplexSelectRule(lottoNumbersList, new RandomSelectRule()));
         Lottos lottos = lottoMachine.issue(cash);
         InputView.printLottos(lottos);
         ResultView resultView = new ResultView(new Scanner(System.in));

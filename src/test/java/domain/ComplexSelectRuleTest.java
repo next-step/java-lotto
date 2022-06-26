@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ManualSelectRuleTest {
+public class ComplexSelectRuleTest {
     @Test
     void create() {
         //given
@@ -14,24 +14,24 @@ public class ManualSelectRuleTest {
         SelectRule selectRule = TestObjectSupport.createSelectRule();
 
         //when
-        ManualSelectRule result = new ManualSelectRule(lottoNumbersList, selectRule);
+        ComplexSelectRule result = new ComplexSelectRule(lottoNumbersList, selectRule);
 
         //then
-        assertThat(result).isEqualTo(new ManualSelectRule(lottoNumbersList, selectRule));
+        assertThat(result).isEqualTo(new ComplexSelectRule(lottoNumbersList, selectRule));
     }
 
     @Test
     void select() {
         //given
-        ManualSelectRule manualSelectRule = TestObjectSupport.createManualSelectRule();
+        ComplexSelectRule complexSelectRule = TestObjectSupport.createManualSelectRule();
         LottoNumbers expectedManualLottoNumbers = TestObjectSupport.createLottoNumbers();
         LottoNumbers expectedNonManualLottoNumbers = LottoNumbers.create(Arrays.asList(7, 8, 9, 10, 11, 12));
 
         //when
-        LottoNumbers result1 = manualSelectRule.select();
-        LottoNumbers result2 = manualSelectRule.select();
-        LottoNumbers result3 = manualSelectRule.select();
-        LottoNumbers result4 = manualSelectRule.select();
+        LottoNumbers result1 = complexSelectRule.select();
+        LottoNumbers result2 = complexSelectRule.select();
+        LottoNumbers result3 = complexSelectRule.select();
+        LottoNumbers result4 = complexSelectRule.select();
 
         //then
         assertThat(result1).isEqualTo(expectedManualLottoNumbers);

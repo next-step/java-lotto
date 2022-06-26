@@ -2,12 +2,12 @@ package domain;
 
 import java.util.Objects;
 
-public class ManualSelectRule implements SelectRule {
+public class ComplexSelectRule implements SelectRule {
     private final LottoNumbersList manualLottoNumbers;
     private final SelectRule selectRule;
     private int selectCount;
 
-    public ManualSelectRule(LottoNumbersList manualLottoNumbers, SelectRule selectRule) {
+    public ComplexSelectRule(LottoNumbersList manualLottoNumbers, SelectRule selectRule) {
         this.manualLottoNumbers = manualLottoNumbers;
         this.selectRule = selectRule;
         this.selectCount = 0;
@@ -27,7 +27,7 @@ public class ManualSelectRule implements SelectRule {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ManualSelectRule that = (ManualSelectRule) o;
+        ComplexSelectRule that = (ComplexSelectRule) o;
         return selectCount == that.selectCount && manualLottoNumbers.equals(that.manualLottoNumbers) && selectRule.equals(that.selectRule);
     }
 
