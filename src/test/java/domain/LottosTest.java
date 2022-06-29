@@ -22,6 +22,18 @@ public class LottosTest {
     }
 
     @Test
+    void createFromLottoNumbers() {
+        //given
+        LottoNumbersList lottoNumbersList = TestObjectSupport.createLottoNumbersList();
+
+        //when
+        Lottos result = new Lottos(lottoNumbersList);
+
+        //then
+        assertThat(result).isEqualTo(new Lottos(lottoNumbersList));
+    }
+
+    @Test
     void size() {
         //given
         Lottos lottos = TestObjectSupport.createLottos();

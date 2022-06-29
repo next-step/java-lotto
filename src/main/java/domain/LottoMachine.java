@@ -13,12 +13,12 @@ public class LottoMachine {
     }
 
     public Lottos issue(Cash cash) {
-        List<Lotto> lottos = new ArrayList<>();
+        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
         BigDecimal lottoCount = cash.divide(Lotto.PRICE);
         for (int i = 0; lottoCount.compareTo(BigDecimal.valueOf(i)) > 0; i++) {
-            lottos.add(new Lotto(selectRule.select()));
+            lottoNumbersList.add(selectRule.select());
         }
-        return new Lottos(lottos);
+        return new Lottos(new LottoNumbersList(lottoNumbersList));
     }
 
     @Override

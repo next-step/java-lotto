@@ -65,4 +65,18 @@ public class LottoNumbersListTest {
         assertThat(result).isEqualTo(expectedLottoNumbersList);
         assertThat(lottoNumbersList).isEqualTo(TestObjectSupport.createLottoNumbersList());
     }
+
+    @Test
+    void toList() {
+        //given
+        LottoNumbersList lottoNumbersList = TestObjectSupport.createLottoNumbersList();
+        LottoNumbers lottoNumbers = TestObjectSupport.createLottoNumbers();
+        List<LottoNumbers> expectedList = List.of(lottoNumbers, lottoNumbers, lottoNumbers);
+
+        //when
+        List<LottoNumbers> result = lottoNumbersList.toList();
+
+        //then
+        assertThat(result).isEqualTo(expectedList);
+    }
 }
