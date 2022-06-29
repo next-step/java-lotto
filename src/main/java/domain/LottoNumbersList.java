@@ -20,12 +20,6 @@ public class LottoNumbersList {
         return lottoNumbersList.size() > index;
     }
 
-    public LottoNumbersList add(LottoNumbers lottoNumbers) {
-        List<LottoNumbers> addedLottoNumbersList = new ArrayList<>(lottoNumbersList);
-        addedLottoNumbersList.add(lottoNumbers);
-        return new LottoNumbersList(addedLottoNumbersList);
-    }
-
     public List<LottoNumbers> toList() {
         return Collections.unmodifiableList(lottoNumbersList);
     }

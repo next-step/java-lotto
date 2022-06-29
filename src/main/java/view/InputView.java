@@ -34,11 +34,11 @@ public class InputView {
         ManualLottoCount manualLottoCount = scanManualLottoCount(cash.divide(Lotto.PRICE).longValue());
 
         System.out.println(MANUAL_LOTTO_NUMBERS_INPUT_ANNOUNCEMENT);
-        LottoNumbersList manualLottoNumbers = new LottoNumbersList(new ArrayList<>());
+        List<LottoNumbers> manualLottoNumbers = new ArrayList<>();
         for (long i = 0; manualLottoCount.isBiggerThan(i); i++) {
-            manualLottoNumbers = manualLottoNumbers.add(scanManualLottoNumbers());
+            manualLottoNumbers.add(scanManualLottoNumbers());
         }
-        return manualLottoNumbers;
+        return new LottoNumbersList(manualLottoNumbers);
     }
 
     private Cash scanCash() {

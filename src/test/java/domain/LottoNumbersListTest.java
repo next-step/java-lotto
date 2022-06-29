@@ -51,22 +51,6 @@ public class LottoNumbersListTest {
     }
 
     @Test
-    void add() {
-        //given
-        LottoNumbersList lottoNumbersList = TestObjectSupport.createLottoNumbersList();
-        LottoNumbers lottoNumbers = TestObjectSupport.createLottoNumbers();
-        LottoNumbersList expectedLottoNumbersList = new LottoNumbersList(
-                Arrays.asList(lottoNumbers, lottoNumbers, lottoNumbers, lottoNumbers));
-
-        //when
-        LottoNumbersList result = lottoNumbersList.add(lottoNumbers);
-
-        //then
-        assertThat(result).isEqualTo(expectedLottoNumbersList);
-        assertThat(lottoNumbersList).isEqualTo(TestObjectSupport.createLottoNumbersList());
-    }
-
-    @Test
     void toList() {
         //given
         LottoNumbersList lottoNumbersList = TestObjectSupport.createLottoNumbersList();
