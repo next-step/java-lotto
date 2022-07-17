@@ -1,27 +1,25 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class WinningNumbersTest {
 
-    @DisplayName("입력한 문자열이 list로 생성됨을 확인")
-    @ParameterizedTest
-    @ValueSource(strings = "1,2,3,4,5,6")
-    void winningNumbers(String numbers) {
-        WinningNumbers winningNumbers = new WinningNumbers(numbers);
-        assertThat(winningNumbers.getWinningNumberList()).hasSize(6);
-    }
-
-    @DisplayName("입력한 문자열이 6개가 되지 않을 경우")
-    @ParameterizedTest
-    @ValueSource(strings = "1,2,3,4,5")
-    void winningNumbers_notEnoughNumbers(String numbers) {
-        assertThatIllegalArgumentException().isThrownBy(() -> new WinningNumbers(numbers))
-                .withMessageContaining("당첨 번호는 6개 숫자로 이루어져 있습니다.");
+    @DisplayName("당첨번호에 보너스 번호를 입력하여 WinningNumbers 생성")
+    @Test
+    void construct_withBonusNumber() {
+        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6", "7");
+        assertAll(
+                () -> assertThat(winningNumbers.getWinningNumberList().get(0)).isEqualTo(LotteryNumber.of(1)),
+                () -> assertThat(winningNumbers.getWinningNumberList().get(1)).isEqualTo(LotteryNumber.of(2)),
+                () -> assertThat(winningNumbers.getWinningNumberList().get(2)).isEqualTo(LotteryNumber.of(3)),
+                () -> assertThat(winningNumbers.getWinningNumberList().get(3)).isEqualTo(LotteryNumber.of(4)),
+                () -> assertThat(winningNumbers.getWinningNumberList().get(4)).isEqualTo(LotteryNumber.of(5)),
+                () -> assertThat(winningNumbers.getWinningNumberList().get(5)).isEqualTo(LotteryNumber.of(6)),
+                () -> assertThat(winningNumbers.getBonusNumber()).isEqualTo(7)
+        );
     }
 }

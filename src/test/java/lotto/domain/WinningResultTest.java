@@ -1,64 +1,79 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.BeforeEach;
+import lotto.interfaces.LotteryGame;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class WinningResultTest {
-    private WinningResult winningResult;
 
-    @BeforeEach
-    void setup() {
-        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6");
-        int bonusNumber = 7;
-
-        LotteryGame lotteryGame = new LotteryGame(Arrays.asList(1, 2, 3, 4, 5, 6));
-        List<LotteryGame> lotteryGameList = new ArrayList<>();
-        lotteryGameList.add(lotteryGame);
-        LotteryGames lotteryGames = new LotteryGames(lotteryGameList);
-
-        winningResult = new WinningResult(winningNumbers, bonusNumber, lotteryGames);
+    @DisplayName("lotto 당첨 결과 출력 위한 클래스")
+    @Test
+    void construct() {
+        LotteryGame lotteryGame = new AutoLotteryGame();
+        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6", "7");
+        WinningResult winningResult = new WinningResult(lotteryGame, winningNumbers);
+        assertThat(winningResult).isNotNull();
     }
 
-    @DisplayName("복권 당첨 결과")
+    @DisplayName("lotto 당철결과 출력 (1등)")
     @Test
-    void get() {
-        Map<Rank, Integer> rankMap = winningResult.get();
-
-        assertAll(
-                () -> assertThat(rankMap.get(Rank.FIRST)).isEqualTo(1),
-                () -> assertThat(rankMap.get(Rank.SECOND)).isEqualTo(0),
-                () -> assertThat(rankMap.get(Rank.THIRD)).isEqualTo(0),
-                () -> assertThat(rankMap.get(Rank.FOURTH)).isEqualTo(0),
-                () -> assertThat(rankMap.get(Rank.FIFTH)).isEqualTo(0),
-                () -> assertThat(rankMap.get(Rank.MISS)).isEqualTo(0)
-        );
+    void result_first() {
+        LotteryGame lotteryGame = new ManualLotteryGame("1,2,3,4,5,6");
+        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6", "7");
+        WinningResult winningResult = new WinningResult(lotteryGame, winningNumbers);
+        Rank rank = winningResult.result();
+        assertThat(rank).isEqualTo(Rank.FIRST);
     }
 
-    @DisplayName("수익 확")
+    @DisplayName("lotto 당철결과 출력 (2등)")
     @Test
-    void profit() {
-        Map<Rank, Integer> results = new EnumMap<>(Rank.class) {
-            {
-                put(Rank.FIFTH, 2);
-                put(Rank.FOURTH, 0);
-                put(Rank.THIRD, 1);
-                put(Rank.FIRST, 0);
-            }
-        };
-
-        assertThat(winningResult.profit(results)).isEqualTo(1510000);
+    void result_second() {
+        LotteryGame lotteryGame = new ManualLotteryGame("1,2,3,4,5,7");
+        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6", "7");
+        WinningResult winningResult = new WinningResult(lotteryGame, winningNumbers);
+        Rank rank = winningResult.result();
+        assertThat(rank).isEqualTo(Rank.SECOND);
     }
 
-    @DisplayName("수익률인 확인")
+    @DisplayName("lotto 당철결과 출력 (3등)")
     @Test
-    void profitRate() {
-        double profitRate = winningResult.profitRate(25000, 100000);
-        assertThat(profitRate).isEqualTo(0.25);
+    void result_third() {
+        LotteryGame lotteryGame = new ManualLotteryGame("1,2,3,4,5,8");
+        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6", "7");
+        WinningResult winningResult = new WinningResult(lotteryGame, winningNumbers);
+        Rank rank = winningResult.result();
+        assertThat(rank).isEqualTo(Rank.THIRD);
+    }
+
+    @DisplayName("lotto 당철결과 출력 (4등)")
+    @Test
+    void result_fourth() {
+        LotteryGame lotteryGame = new ManualLotteryGame("1,2,3,4,8,9");
+        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6", "7");
+        WinningResult winningResult = new WinningResult(lotteryGame, winningNumbers);
+        Rank rank = winningResult.result();
+        assertThat(rank).isEqualTo(Rank.FOURTH);
+    }
+
+    @DisplayName("lotto 당철결과 출력 (5등)")
+    @Test
+    void result_fifth() {
+        LotteryGame lotteryGame = new ManualLotteryGame("1,2,3,8,9,10");
+        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6", "7");
+        WinningResult winningResult = new WinningResult(lotteryGame, winningNumbers);
+        Rank rank = winningResult.result();
+        assertThat(rank).isEqualTo(Rank.FIFTH);
+    }
+
+    @DisplayName("lotto 당철결과 출력 (미당청)")
+    @Test
+    void result_miss() {
+        LotteryGame lotteryGame = new ManualLotteryGame("1,2,8,9,10,11");
+        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6", "7");
+        WinningResult winningResult = new WinningResult(lotteryGame, winningNumbers);
+        Rank rank = winningResult.result();
+        assertThat(rank).isEqualTo(Rank.MISS);
     }
 }
