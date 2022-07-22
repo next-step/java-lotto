@@ -13,19 +13,13 @@ public class LotteryGames {
     private List<LotteryGame> lotteryGameList;
 
     public LotteryGames(int purchasePrice) {
-        this(new ArrayList<>());
-        validate(purchasePrice);
-        initialAutoGame(purchasePrice);
+        this(purchasePrice, null);
     }
 
     public LotteryGames(int purchasePrice, List<LotteryGame> manualLotteryGameList) {
-        this(new ArrayList<>());
+        lotteryGameList = new ArrayList<>();
         validate(purchasePrice);
-        initialAutoWithManualGame(purchasePrice, manualLotteryGameList);
-    }
-
-    public LotteryGames(List<LotteryGame> lotteryGameList) {
-        this.lotteryGameList = lotteryGameList;
+        initialLotteryGames(purchasePrice, manualLotteryGameList);
     }
 
     private void validate(int purchasePrice) {
@@ -38,13 +32,7 @@ public class LotteryGames {
         }
     }
 
-    private void initialAutoGame(int purchasePrice) {
-        for (int i = 0; i < purchasePrice / EACH_PRICE; i++) {
-            lotteryGameList.add(new AutoLotteryGame());
-        }
-    }
-
-    private void initialAutoWithManualGame(int purchasePrice, List<LotteryGame> manualLotteryGameList) {
+    private void initialLotteryGames(int purchasePrice, List<LotteryGame> manualLotteryGameList) {
         if (manualLotteryGameList != null && manualLotteryGameList.size() > 0) {
             lotteryGameList.addAll(manualLotteryGameList);
         }

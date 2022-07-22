@@ -15,13 +15,13 @@ class LotteryFactoryTest {
     @Test
     void create() {
         List<LotteryNumber> numbers = LotteryFactory.create("1,2,3,4,5,45");
-        assertAll(
-                () -> assertThat(numbers.get(0)).isEqualTo(LotteryNumber.of(1)),
-                () -> assertThat(numbers.get(1)).isEqualTo(LotteryNumber.of(2)),
-                () -> assertThat(numbers.get(2)).isEqualTo(LotteryNumber.of(3)),
-                () -> assertThat(numbers.get(3)).isEqualTo(LotteryNumber.of(4)),
-                () -> assertThat(numbers.get(4)).isEqualTo(LotteryNumber.of(5)),
-                () -> assertThat(numbers.get(5)).isEqualTo(LotteryNumber.of(45))
+        assertThat(numbers).containsExactly(
+                LotteryNumber.of(1),
+                LotteryNumber.of(2),
+                LotteryNumber.of(3),
+                LotteryNumber.of(4),
+                LotteryNumber.of(5),
+                LotteryNumber.of(45)
         );
     }
 

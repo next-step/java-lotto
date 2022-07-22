@@ -41,20 +41,14 @@ public class LotteryGamesTest {
         manualLotteryGames.add(new ManualLotteryGame("1,2,3,4,5,6"));
         manualLotteryGames.add(new ManualLotteryGame("2,3,4,5,6,7"));
 
-        LotteryGames lotteryGames = new LotteryGames(10000, manualLotteryGames);
-        assertThat(lotteryGames.getLotteryGameList()).hasSize(10);
+        LotteryGames lotteryGames = new LotteryGames(4000, manualLotteryGames);
+        assertThat(lotteryGames.getLotteryGameList()).hasSize(4);
 
         assertAll(
                 () -> assertThat(lotteryGames.getLotteryGameList().get(0)).isInstanceOf(ManualLotteryGame.class),
                 () -> assertThat(lotteryGames.getLotteryGameList().get(1)).isInstanceOf(ManualLotteryGame.class),
                 () -> assertThat(lotteryGames.getLotteryGameList().get(2)).isInstanceOf(AutoLotteryGame.class),
-                () -> assertThat(lotteryGames.getLotteryGameList().get(3)).isInstanceOf(AutoLotteryGame.class),
-                () -> assertThat(lotteryGames.getLotteryGameList().get(4)).isInstanceOf(AutoLotteryGame.class),
-                () -> assertThat(lotteryGames.getLotteryGameList().get(5)).isInstanceOf(AutoLotteryGame.class),
-                () -> assertThat(lotteryGames.getLotteryGameList().get(6)).isInstanceOf(AutoLotteryGame.class),
-                () -> assertThat(lotteryGames.getLotteryGameList().get(7)).isInstanceOf(AutoLotteryGame.class),
-                () -> assertThat(lotteryGames.getLotteryGameList().get(8)).isInstanceOf(AutoLotteryGame.class),
-                () -> assertThat(lotteryGames.getLotteryGameList().get(9)).isInstanceOf(AutoLotteryGame.class)
+                () -> assertThat(lotteryGames.getLotteryGameList().get(3)).isInstanceOf(AutoLotteryGame.class)
         );
     }
 
