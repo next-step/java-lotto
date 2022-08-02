@@ -7,7 +7,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 class RankTest {
-
     @DisplayName("맞춘 로또 번호 수에 따라 등수 출력")
     @Test
     void valueOf() {

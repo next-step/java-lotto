@@ -1,51 +1,40 @@
 package lotto.domain;
 
+import lotto.factory.LotteryFactory;
+import lotto.interfaces.LotteryGame;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class WinningNumbers {
-    private static final int LOTTERY_AMOUNT = 6;
-    private static final int START_NUMBER = 1;
-    private static final int END_NUMBER = 45;
+    private List<LotteryNumber> winningNumberList;
+    private final LotteryNumber bonusNumber;
 
-    private List<Integer> winningNumberList;
-
-    public WinningNumbers(String number) {
-        this(new ArrayList<>(), number);
+    public WinningNumbers(String numbers, String bonusNumber) {
+        this(new ArrayList<>(), LotteryNumber.of(bonusNumber));
+        winningNumberList = LotteryFactory.create(numbers);
     }
 
-    public WinningNumbers(List<Integer> winningNumberList, String number) {
+    public WinningNumbers(List<LotteryNumber> winningNumberList, LotteryNumber bonusNumber) {
         this.winningNumberList = winningNumberList;
-        convertToList(number);
+        this.bonusNumber = bonusNumber;
     }
 
-    private void convertToList(String number) {
-        Arrays.stream(splitNumbers(number)).forEach(stringNumber -> winningNumberList.add(Integer.parseInt(stringNumber)));
-    }
-
-    private String[] splitNumbers(String number) {
-        String[] numberArray = number.split(",");
-
-        if (numberArray.length != LOTTERY_AMOUNT) {
-            throw new IllegalArgumentException("당첨 번호는 6개 숫자로 이루어져 있습니다.");
+    public Rank match(LotteryGame lotteryGame) {
+        int countOfMatchedNumbers = 0;
+        for (LotteryNumber number : lotteryGame.getLotteries()) {
+            if (winningNumberList.contains(number)) {
+                countOfMatchedNumbers++;
+            }
         }
-
-        for (String numberString : numberArray) {
-            validateNumberRange(numberString);
-        }
-
-        return numberArray;
+        return Rank.valueOf(countOfMatchedNumbers, lotteryGame.getLotteries().contains(LotteryNumber.of(bonusNumber.getNumber())));
     }
 
-    private void validateNumberRange(String numberString) {
-        int integer = Integer.parseInt(numberString);
-        if (integer < START_NUMBER || integer > END_NUMBER) {
-            throw new IllegalArgumentException("당첨 번호는 1 ~ 45 사이의 숫자입니다.");
-        }
-    }
-
-    public List<Integer> getWinningNumberList() {
+    public List<LotteryNumber> getWinningNumberList() {
         return winningNumberList;
+    }
+
+    public int getBonusNumber() {
+        return bonusNumber.getNumber();
     }
 }

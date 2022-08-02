@@ -1,32 +1,40 @@
 package lotto;
 
-import lotto.domain.LotteryGames;
-import lotto.domain.WinningNumbers;
-import lotto.domain.Rank;
-import lotto.domain.WinningResult;
+import lotto.domain.*;
+import lotto.interfaces.LotteryGame;
+import lotto.interfaces.LotteryResult;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+
 public class LotteryMain {
-    private static final int EACH_PRICE = 1000;
-
     public static void main(String[] args) {
-        int purchaseAmount = InputView.inputPurchaseAmount();
+        int purchasePrice = InputView.inputPurchaseAmount();
+        int manualLotteryAmount = InputView.inputPurchaseManualLotteryAmount();
 
-        LotteryGames purchasedLottery = new LotteryGames(purchaseAmount);
+        InputView.inputManualLotteryAmount();
+        List<LotteryGame> manualLotteryGames = new ArrayList<>();
+        for (int i = 0; i < manualLotteryAmount; i++) {
+            manualLotteryGames.add(new ManualLotteryGame(InputView.inputManualLottery()));
+        }
+
+        InputView.printPurchaseAmount(purchasePrice, manualLotteryAmount);
+        LotteryGames purchasedLottery = new LotteryGames(purchasePrice, manualLotteryGames);
         ResultView.print(purchasedLottery);
 
         String winNumbers = InputView.inputWinningNumbers();
-        WinningNumbers winningNumbers = new WinningNumbers(winNumbers);
-        int bonusNumber = InputView.inputBonusNumber();
+        String bonusNumber = InputView.inputBonusNumber();
+        WinningNumbers winningNumbers = new WinningNumbers(winNumbers, bonusNumber);
 
-        WinningResult winningResult = new WinningResult(winningNumbers, bonusNumber, purchasedLottery);
-        Map<Rank, Integer> results = winningResult.get();
+        LotteryResult lotteryResult = new WinningResults(purchasedLottery, winningNumbers);
+        Map<Rank, Integer> results = lotteryResult.result();
         ResultView.printResult(results);
 
-        double profitRate = winningResult.profitRate(winningResult.profit(results), purchaseAmount * EACH_PRICE);
+        double profitRate = lotteryResult.profit(results, purchasePrice);
         ResultView.printProfit(profitRate);
     }
 }

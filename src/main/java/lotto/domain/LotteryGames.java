@@ -1,43 +1,54 @@
 package lotto.domain;
 
+import lotto.interfaces.LotteryGame;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class LotteryGames {
-    private static final int NOT_CREATE_AUTO_LOTTERY = 0;
+    private static final int EACH_PRICE = 1000;
+    private static final int ZERO_PRICE = 0;
+    private static final int EMPTY_LIST_SIZE = 0;
 
-    private List<LotteryGame> lotteryGames;
+    private List<LotteryGame> lotteryGameList;
 
-    public LotteryGames(int numberOfGames) {
-        this(new ArrayList<>(), numberOfGames);
+    public LotteryGames(int purchasePrice) {
+        this(purchasePrice, null);
     }
 
-    public LotteryGames(List<LotteryGame> lotteryGames) {
-        this(lotteryGames, NOT_CREATE_AUTO_LOTTERY);
+    public LotteryGames(int purchasePrice, List<LotteryGame> manualLotteryGameList) {
+        lotteryGameList = new ArrayList<>();
+        validate(purchasePrice);
+        initialLotteryGames(purchasePrice, manualLotteryGameList);
     }
 
-    public LotteryGames(List<LotteryGame> lotteryGames, int numberOfGames) {
-        this.lotteryGames = lotteryGames;
-        create(numberOfGames);
-    }
+    private void validate(int purchasePrice) {
+        if (purchasePrice < EACH_PRICE) {
+            throw new IllegalArgumentException("로또 구매를 위해서는 천원 이상 입력해야 합니다.");
+        }
 
-    private void create(int number) {
-        for (int i = 0; i < number; i++) {
-            LotteryGame lotteryGame = LotteryGame.create();
-            lotteryGames.add(lotteryGame);
+        if (purchasePrice % EACH_PRICE != ZERO_PRICE) {
+            throw new IllegalArgumentException("천원 단위로 입력해주세요.");
         }
     }
 
-    public List<LotteryGame> getLotteryGames() {
-        return lotteryGames;
+    private void initialLotteryGames(int purchasePrice, List<LotteryGame> manualLotteryGameList) {
+        if (manualLotteryGameList != null && manualLotteryGameList.size() > 0) {
+            lotteryGameList.addAll(manualLotteryGameList);
+        }
+        for (int i = 0; i < purchasePrice / EACH_PRICE - manualLotteryGameSize(manualLotteryGameList); i++) {
+            lotteryGameList.add(new AutoLotteryGame());
+        }
     }
 
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (LotteryGame lotteryGame : lotteryGames) {
-            stringBuilder.append(lotteryGame).append("\n");
+    private int manualLotteryGameSize(List<LotteryGame> manualLotteryGameList) {
+        if (manualLotteryGameList != null) {
+            return manualLotteryGameList.size();
         }
-        return stringBuilder.toString();
+        return EMPTY_LIST_SIZE;
+    }
+
+    public List<LotteryGame> getLotteryGameList() {
+        return lotteryGameList;
     }
 }
