@@ -6,6 +6,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class RandomSelectRule implements SelectRule {
+    @Override
+    public boolean isSelectable() {
+        return true;
+    }
+
     public LottoNumbers select() {
         List<Integer> availableNumbers = findAvailableNumbers(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER);
         Collections.shuffle(availableNumbers);

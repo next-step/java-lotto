@@ -8,22 +8,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ComplexSelectRuleTest {
     @Test
-    void create() {
+    void createByStaticFactoryMethod() {
         //given
-        LottoNumbersList lottoNumbersList = TestObjectSupport.createLottoNumbersList();
-        SelectRule selectRule = TestObjectSupport.createSelectRule();
+        ManualSelectRule manualSelectRule = TestObjectSupport.createManualSelectRule();
+        RandomSelectRule randomSelectRule = TestObjectSupport.createRandomSelectRule();
 
         //when
-        ComplexSelectRule result = new ComplexSelectRule(lottoNumbersList, selectRule);
+        ComplexSelectRule result = ComplexSelectRule.create(manualSelectRule, randomSelectRule);
 
         //then
-        assertThat(result).isEqualTo(new ComplexSelectRule(lottoNumbersList, selectRule));
+        assertThat(result).isEqualTo(ComplexSelectRule.create(manualSelectRule, randomSelectRule));
     }
 
     @Test
     void select() {
         //given
-        ComplexSelectRule complexSelectRule = TestObjectSupport.createManualSelectRule();
+        ComplexSelectRule complexSelectRule = TestObjectSupport.createComplexSelectRule();
         LottoNumbers expectedManualLottoNumbers = TestObjectSupport.createLottoNumbers();
         LottoNumbers expectedNonManualLottoNumbers = LottoNumbers.create(Arrays.asList(7, 8, 9, 10, 11, 12));
 
@@ -38,5 +38,17 @@ public class ComplexSelectRuleTest {
         assertThat(result2).isEqualTo(expectedManualLottoNumbers);
         assertThat(result3).isEqualTo(expectedManualLottoNumbers);
         assertThat(result4).isEqualTo(expectedNonManualLottoNumbers);
+    }
+
+    @Test
+    void isSelectable() {
+        //given
+        ComplexSelectRule complexSelectRule = TestObjectSupport.createComplexSelectRule();
+
+        //when
+        boolean result = complexSelectRule.isSelectable();
+
+        //then
+        assertThat(result).isTrue();
     }
 }

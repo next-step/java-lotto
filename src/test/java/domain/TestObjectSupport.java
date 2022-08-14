@@ -22,12 +22,33 @@ public class TestObjectSupport {
     }
 
     public static SelectRule createSelectRule() {
-        return () -> LottoNumbers.create(Arrays.asList(1, 2, 3, 4, 5, 6));
+        return new SelectRule() {
+
+            @Override
+            public boolean isSelectable() {
+                return true;
+            }
+
+            @Override
+            public LottoNumbers select() {
+                return LottoNumbers.create(Arrays.asList(1, 2, 3, 4, 5, 6));
+            }
+        };
     }
 
-    public static ComplexSelectRule createManualSelectRule() {
-        SelectRule selectRule = () -> LottoNumbers.create(Arrays.asList(7, 8, 9, 10, 11, 12));
-        return new ComplexSelectRule(createLottoNumbersList(), selectRule);
+    public static ComplexSelectRule createComplexSelectRule() {
+        RandomSelectRule randomSelectRule = new RandomSelectRule() {
+            @Override
+            public boolean isSelectable() {
+                return true;
+            }
+
+            @Override
+            public LottoNumbers select() {
+                return LottoNumbers.create(Arrays.asList(7, 8, 9, 10, 11, 12));
+            }
+        };
+        return ComplexSelectRule.create(createManualSelectRule(), randomSelectRule);
     }
 
     public static Lotto createLotto() {
@@ -63,5 +84,25 @@ public class TestObjectSupport {
 
     public static BonusNumber createBonusNumber() {
         return new BonusNumber(7);
+    }
+
+    public static ManualSelectRule createManualSelectRule() {
+        LottoNumbersList lottoNumbersList = createLottoNumbersList();
+        return new ManualSelectRule(lottoNumbersList);
+    }
+
+    public static RandomSelectRule createRandomSelectRule() {
+        return new RandomSelectRule() {
+
+            @Override
+            public boolean isSelectable() {
+                return true;
+            }
+
+            @Override
+            public LottoNumbers select() {
+                return LottoNumbers.create(Arrays.asList(1, 2, 3, 4, 5, 6));
+            }
+        };
     }
 }

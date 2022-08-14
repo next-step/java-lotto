@@ -1,26 +1,32 @@
 package domain;
 
+import java.util.List;
 import java.util.Objects;
 
 public class ComplexSelectRule implements SelectRule {
-    private final LottoNumbersList manualLottoNumbers;
-    private final SelectRule selectRule;
-    private int selectCount;
+    private final List<SelectRule> selectRules;
 
-    public ComplexSelectRule(LottoNumbersList manualLottoNumbers, SelectRule selectRule) {
-        this.manualLottoNumbers = manualLottoNumbers;
-        this.selectRule = selectRule;
-        this.selectCount = 0;
+    private ComplexSelectRule(List<SelectRule> selectRules) {
+        this.selectRules = selectRules;
+    }
+
+    public static ComplexSelectRule create(ManualSelectRule manualSelectRule, RandomSelectRule randomSelectRule) {
+        return new ComplexSelectRule(List.of(manualSelectRule, randomSelectRule));
+    }
+
+    @Override
+    public boolean isSelectable() {
+        return selectRules.stream().anyMatch(SelectRule::isSelectable);
     }
 
     @Override
     public LottoNumbers select() {
-        LottoNumbers lottoNumbers = selectRule.select();
-        if (manualLottoNumbers.isSizeBiggerThan(selectCount)) {
-            lottoNumbers = manualLottoNumbers.get(selectCount);
-        }
-        selectCount++;
-        return lottoNumbers;
+        SelectRule selectableSelectRule = selectRules.stream()
+                .filter(SelectRule::isSelectable)
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("로또를 발행할 수 있는 SelectRule이 없습니다."));
+
+        return selectableSelectRule.select();
     }
 
     @Override
@@ -28,11 +34,11 @@ public class ComplexSelectRule implements SelectRule {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ComplexSelectRule that = (ComplexSelectRule) o;
-        return selectCount == that.selectCount && manualLottoNumbers.equals(that.manualLottoNumbers) && selectRule.equals(that.selectRule);
+        return selectRules.equals(that.selectRules);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(manualLottoNumbers, selectRule, selectCount);
+        return Objects.hash(selectRules);
     }
 }

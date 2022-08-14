@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class RandomSelectRuleTest {
     @Test
-    void pick() {
+    void select() {
         //given
         RandomSelectRule selectRule = new RandomSelectRule();
 
@@ -15,5 +15,17 @@ public class RandomSelectRuleTest {
 
         //then
         assertThat(result).isNotNull();
+    }
+
+    @Test
+    void isSelectable() {
+        //given
+        RandomSelectRule selectRule = new RandomSelectRule();
+
+        //when
+        boolean result = selectRule.isSelectable();
+
+        //then
+        assertThat(result).isTrue();
     }
 }
