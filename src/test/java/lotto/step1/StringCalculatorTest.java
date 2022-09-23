@@ -7,8 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class StringCalculatorTest {
     private StringCalculator stringCalculator;
@@ -49,9 +48,9 @@ public class StringCalculatorTest {
     @Test
     @DisplayName("나눗셈 예외")
     void divide_exception() {
-        assertThatThrownBy(() -> stringCalculator.calculate("9 / 5"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("나눗셈은 정확히 나누어 떨어지는 경우에만 진행할 수 있습니다. 다시 입력해주세요.");
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> stringCalculator.calculate("9 / 5"))
+                .withMessage("나눗셈은 정확히 나누어 떨어지는 경우에만 진행할 수 있습니다. 다시 입력해주세요.");
     }
     
     @Test
@@ -72,44 +71,44 @@ public class StringCalculatorTest {
     @ParameterizedTest(name = "{displayName} : {0}")
     @ValueSource(strings = {"2 + 3 * 4 /2", "2 + 3 *4 / 2", "2 + 3 * 4/ 2", "2 + 3 *4/ 2"})
     void not_space_exception(String formula) {
-        assertThatThrownBy(() -> stringCalculator.calculate(formula))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("올바른 계산 식이 아닙니다. 다시 입력해 주세요.");
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> stringCalculator.calculate(formula))
+                .withMessage("올바른 계산 식이 아닙니다. 다시 입력해 주세요.");
     }
     
     @DisplayName("사칙연산 기호가 아닌 경우 예외")
     @ParameterizedTest(name = "{displayName} : {0}")
     @ValueSource(strings = {"2 & 3 * 4 / 2", "2 + 3 % 4 / 2", "2 # 3 * 4 / 2", "2 + 3 * 4 ++ 2"})
     void symbol_exception(String formula) {
-        assertThatThrownBy(() -> stringCalculator.calculate(formula))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("올바른 계산 식이 아닙니다. 다시 입력해 주세요.");
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> stringCalculator.calculate(formula))
+                .withMessage("올바른 계산 식이 아닙니다. 다시 입력해 주세요.");
     }
     
     @DisplayName("null 및 \"\" 입력 시 예외")
     @ParameterizedTest(name = "{displayName} : {0}")
     @NullAndEmptySource
     void null_and_empty_exception(String formula) {
-        assertThatThrownBy(() -> stringCalculator.calculate(formula))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("올바른 계산 식이 아닙니다. 다시 입력해 주세요.");
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> stringCalculator.calculate(formula))
+                .withMessage("올바른 계산 식이 아닙니다. 다시 입력해 주세요.");
     }
     
     @DisplayName("숫자나 기호를 연속으로 같은 것을 입력 시 예외")
     @ParameterizedTest(name = "{displayName} : {0}")
     @ValueSource(strings = {"2 + - 3 * 4 / 2", "2 + 5 3 * 4 / 2", "2 10 + 3 * 4 / 2", "2 + 3 * / 4 / 2"})
     void different_order_exception(String formula) {
-        assertThatThrownBy(() -> stringCalculator.calculate(formula))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("올바른 계산 식이 아닙니다. 다시 입력해 주세요.");
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> stringCalculator.calculate(formula))
+                .withMessage("올바른 계산 식이 아닙니다. 다시 입력해 주세요.");
     }
     
     @DisplayName("공백 하나 또는 기호 하나만 넣는 경우 예외")
     @ParameterizedTest(name = "{displayName} : {0}")
     @ValueSource(strings = {" ", "+"})
     void one_space_or_one_symbol_exception(String formula) {
-        assertThatThrownBy(() -> stringCalculator.calculate(formula))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("올바른 계산 식이 아닙니다. 다시 입력해 주세요.");
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> stringCalculator.calculate(formula))
+                .withMessage("올바른 계산 식이 아닙니다. 다시 입력해 주세요.");
     }
 }
