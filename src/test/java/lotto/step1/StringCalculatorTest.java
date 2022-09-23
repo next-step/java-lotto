@@ -13,4 +13,12 @@ public class StringCalculatorTest {
         int result = stringCalculator.calculate("2 + 5");
         assertThat(result).isEqualTo(7);
     }
+    
+    @Test
+    @DisplayName("뺄셈")
+    void subtract() {
+        StringCalculator stringCalculator = new StringCalculator();
+        int result = stringCalculator.calculate("2 - 5");
+        assertThat(result).isEqualTo(-3);
+    }
 }

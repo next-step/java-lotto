@@ -21,6 +21,10 @@ public class StringCalculator {
         if (symbols[index] == '+') {
             return numbers[index] + numbers[index + 1];
         }
+    
+        if (symbols[index] == '-') {
+            return numbers[index] - numbers[index + 1];
+        }
         
         return 0;
     }
