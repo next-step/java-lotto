@@ -23,13 +23,17 @@ public class StringCalculator {
     }
     
     public int calculate(String formula) throws IllegalArgumentException {
-        nullCheck(formula);
-        checkCorrectFormula(formula);
+        checkAllException(formula);
         String[] split = getSplit(formula);
         return rotationCalculate(getNumbers(split), getSymbols(split));
     }
     
-    private void nullCheck(String formula) {
+    private void checkAllException(String formula) throws IllegalArgumentException {
+        nullCheck(formula);
+        checkCorrectFormula(formula);
+    }
+    
+    private void nullCheck(String formula) throws IllegalArgumentException {
         if (formula == null) {
             throw new IllegalArgumentException(NOT_CORRECT_FORMULA_EXCEPTION_MESSAGE);
         }
