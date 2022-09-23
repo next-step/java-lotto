@@ -88,4 +88,14 @@ public class StringCalculatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("올바른 계산 식이 아닙니다. 다시 입력해 주세요.");
     }
+    
+    @DisplayName("숫자나 기호를 연속으로 같은 것을 입력 시 예외")
+    @ParameterizedTest(name = "{displayName} : {0}")
+    @ValueSource(strings = {"2 + - 3 * 4 / 2", "2 + 5 3 * 4 / 2", "2 10 + 3 * 4 / 2", "2 + 3 * / 4 / 2"})
+    void different_order_exception(String formula) {
+        StringCalculator stringCalculator = new StringCalculator();
+        assertThatThrownBy(() -> stringCalculator.calculate(formula))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("올바른 계산 식이 아닙니다. 다시 입력해 주세요.");
+    }
 }
