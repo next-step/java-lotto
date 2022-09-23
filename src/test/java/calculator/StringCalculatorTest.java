@@ -59,6 +59,7 @@ public class StringCalculatorTest {
     }
 
     @DisplayName("지원하지 않는 연산자 입력 시 예외 발생")
+    @Test
     void calculateWhenInputNotSupportedOperator() {
         assertThatThrownBy(() -> calculator.calculate("2 % 3")).isInstanceOf(IllegalArgumentException.class);
     }
