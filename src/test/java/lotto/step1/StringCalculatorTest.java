@@ -2,6 +2,8 @@ package lotto.step1;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -44,7 +46,7 @@ public class StringCalculatorTest {
     void divide_exception() {
         StringCalculator stringCalculator = new StringCalculator();
         assertThatThrownBy(() -> stringCalculator.calculate("9 / 5"))
-                .isInstanceOf(UnsupportedOperationException.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("나눗셈은 정확히 나누어 떨어지는 경우에만 진행할 수 있습니다. 다시 입력해주세요.");
     }
     
@@ -54,5 +56,15 @@ public class StringCalculatorTest {
         StringCalculator stringCalculator = new StringCalculator();
         int result = stringCalculator.calculate("2 + 3 * 4 / 2 + 100 - 50 / 5 - 2 * 10");
         assertThat(result).isEqualTo(100);
+    }
+    
+    @DisplayName("숫자와 기호 사이에 공백이 없는 경우 예외")
+    @ParameterizedTest(name = "{displayName} : {0}")
+    @ValueSource(strings = {"2 + 3 * 4 /2", "2 + 3 *4 / 2", "2 + 3 * 4/ 2", "2 + 3 *4/ 2"})
+    void not_space_exception(String formula) {
+        StringCalculator stringCalculator = new StringCalculator();
+        assertThatThrownBy(() -> stringCalculator.calculate(formula))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("올바른 계산 식이 아닙니다. 다시 입력해 주세요.");
     }
 }
