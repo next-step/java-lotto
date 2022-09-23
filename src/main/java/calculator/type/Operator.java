@@ -1,4 +1,4 @@
-package calculator;
+package calculator.type;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -25,5 +25,5 @@ public abstract class Operator {
         return result;
     }
 
-    abstract int operate(int num1, int num2);
+    public abstract int operate(int num1, int num2);
 }

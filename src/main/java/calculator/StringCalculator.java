@@ -1,8 +1,10 @@
 package calculator;
 
+import calculator.type.Operator;
+
 import java.util.Queue;
 
-import static calculator.Operator.ADD;
+import static calculator.type.Operator.ADD;
 
 public class StringCalculator {
     private static final String DEFAULT_OPERATOR_TYPE = ADD;

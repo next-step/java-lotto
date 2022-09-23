@@ -1,5 +1,9 @@
  package calculator;
 
+import calculator.type.Add;
+import calculator.type.Divide;
+import calculator.type.Multiply;
+import calculator.type.Subtract;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
