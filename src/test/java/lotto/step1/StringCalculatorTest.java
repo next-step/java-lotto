@@ -96,4 +96,13 @@ public class StringCalculatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("올바른 계산 식이 아닙니다. 다시 입력해 주세요.");
     }
+    
+    @DisplayName("공백 하나 또는 기호 하나만 넣는 경우 예외")
+    @ParameterizedTest(name = "{displayName} : {0}")
+    @ValueSource(strings = {" ", "+"})
+    void one_space_or_one_symbol_exception(String formula) {
+        assertThatThrownBy(() -> stringCalculator.calculate(formula))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("올바른 계산 식이 아닙니다. 다시 입력해 주세요.");
+    }
 }
