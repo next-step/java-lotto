@@ -61,6 +61,13 @@ public class StringCalculatorTest {
         assertThat(result).isEqualTo(100);
     }
     
+    @Test
+    @DisplayName("숫자 하나")
+    void one_number() {
+        int result = stringCalculator.calculate("2");
+        assertThat(result).isEqualTo(2);
+    }
+    
     @DisplayName("숫자와 기호 사이에 공백이 없는 경우 예외")
     @ParameterizedTest(name = "{displayName} : {0}")
     @ValueSource(strings = {"2 + 3 * 4 /2", "2 + 3 *4 / 2", "2 + 3 * 4/ 2", "2 + 3 *4/ 2"})
