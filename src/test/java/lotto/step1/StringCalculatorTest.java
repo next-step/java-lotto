@@ -10,6 +10,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.*;
 
 public class StringCalculatorTest {
+    private static final String NOT_CORRECT_FORMULA_EXCEPTION_MESSAGE = "올바른 계산 식이 아닙니다. 다시 입력해 주세요.";
+    
     private StringCalculator stringCalculator;
     
     @BeforeEach
@@ -73,7 +75,7 @@ public class StringCalculatorTest {
     void not_space_exception(String formula) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> stringCalculator.calculate(formula))
-                .withMessage("올바른 계산 식이 아닙니다. 다시 입력해 주세요.");
+                .withMessage(NOT_CORRECT_FORMULA_EXCEPTION_MESSAGE);
     }
     
     @DisplayName("사칙연산 기호가 아닌 경우 예외")
@@ -82,7 +84,7 @@ public class StringCalculatorTest {
     void symbol_exception(String formula) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> stringCalculator.calculate(formula))
-                .withMessage("올바른 계산 식이 아닙니다. 다시 입력해 주세요.");
+                .withMessage(NOT_CORRECT_FORMULA_EXCEPTION_MESSAGE);
     }
     
     @DisplayName("null 및 \"\" 입력 시 예외")
@@ -91,7 +93,7 @@ public class StringCalculatorTest {
     void null_and_empty_exception(String formula) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> stringCalculator.calculate(formula))
-                .withMessage("올바른 계산 식이 아닙니다. 다시 입력해 주세요.");
+                .withMessage(NOT_CORRECT_FORMULA_EXCEPTION_MESSAGE);
     }
     
     @DisplayName("숫자나 기호를 연속으로 같은 것을 입력 시 예외")
@@ -100,7 +102,7 @@ public class StringCalculatorTest {
     void different_order_exception(String formula) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> stringCalculator.calculate(formula))
-                .withMessage("올바른 계산 식이 아닙니다. 다시 입력해 주세요.");
+                .withMessage(NOT_CORRECT_FORMULA_EXCEPTION_MESSAGE);
     }
     
     @DisplayName("공백 하나 또는 기호 하나만 넣는 경우 예외")
@@ -109,6 +111,6 @@ public class StringCalculatorTest {
     void one_space_or_one_symbol_exception(String formula) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> stringCalculator.calculate(formula))
-                .withMessage("올바른 계산 식이 아닙니다. 다시 입력해 주세요.");
+                .withMessage(NOT_CORRECT_FORMULA_EXCEPTION_MESSAGE);
     }
 }
