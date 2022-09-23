@@ -23,9 +23,16 @@ public class StringCalculator {
     }
     
     public int calculate(String formula) throws IllegalArgumentException {
+        nullCheck(formula);
         checkCorrectFormula(formula);
         String[] split = getSplit(formula);
         return rotationCalculate(getNumbers(split), getSymbols(split));
+    }
+    
+    private void nullCheck(String formula) {
+        if (formula == null) {
+            throw new IllegalArgumentException(NOT_CORRECT_FORMULA_EXCEPTION_MESSAGE);
+        }
     }
     
     private void checkCorrectFormula(String formula) throws IllegalArgumentException {

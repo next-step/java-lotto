@@ -3,6 +3,7 @@ package lotto.step1;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -72,6 +73,16 @@ public class StringCalculatorTest {
     @ParameterizedTest(name = "{displayName} : {0}")
     @ValueSource(strings = {"2 & 3 * 4 / 2", "2 + 3 % 4 / 2", "2 # 3 * 4 / 2", "2 + 3 * 4 ++ 2"})
     void symbol_exception(String formula) {
+        StringCalculator stringCalculator = new StringCalculator();
+        assertThatThrownBy(() -> stringCalculator.calculate(formula))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("올바른 계산 식이 아닙니다. 다시 입력해 주세요.");
+    }
+    
+    @DisplayName("null 및 \"\" 입력 시 예외")
+    @ParameterizedTest(name = "{displayName} : {0}")
+    @NullAndEmptySource
+    void null_and_empty_exception(String formula) {
         StringCalculator stringCalculator = new StringCalculator();
         assertThatThrownBy(() -> stringCalculator.calculate(formula))
                 .isInstanceOf(IllegalArgumentException.class)
