@@ -12,11 +12,10 @@ public class StringCalculator {
     }
     
     private int rotationCalculate(int[] numbers, char[] symbols) throws UnsupportedOperationException {
-        int result = 0;
         for (int index = 0; index < symbols.length; index++) {
-            result = checkSymbolAndCalculate(numbers, symbols, index);
+            numbers[index + 1] = checkSymbolAndCalculate(numbers, symbols, index);
         }
-        return result;
+        return numbers[numbers.length - 1];
     }
     
     private int checkSymbolAndCalculate(int[] numbers, char[] symbols, int index) throws UnsupportedOperationException {

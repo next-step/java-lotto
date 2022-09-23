@@ -47,4 +47,12 @@ public class StringCalculatorTest {
                 .isInstanceOf(UnsupportedOperationException.class)
                 .hasMessage("나눗셈은 정확히 나누어 떨어지는 경우에만 진행할 수 있습니다. 다시 입력해주세요.");
     }
+    
+    @Test
+    @DisplayName("여러 숫자 사칙연산")
+    void numbers_calculate() {
+        StringCalculator stringCalculator = new StringCalculator();
+        int result = stringCalculator.calculate("2 + 3 * 4 / 2");
+        assertThat(result).isEqualTo(10);
+    }
 }
