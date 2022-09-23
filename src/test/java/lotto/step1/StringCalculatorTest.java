@@ -67,4 +67,14 @@ public class StringCalculatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("올바른 계산 식이 아닙니다. 다시 입력해 주세요.");
     }
+    
+    @DisplayName("사칙연산 기호가 아닌 경우 예외")
+    @ParameterizedTest(name = "{displayName} : {0}")
+    @ValueSource(strings = {"2 & 3 * 4 / 2", "2 + 3 % 4 / 2", "2 # 3 * 4 / 2", "2 + 3 * 4 ++ 2"})
+    void symbol_exception(String formula) {
+        StringCalculator stringCalculator = new StringCalculator();
+        assertThatThrownBy(() -> stringCalculator.calculate(formula))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("올바른 계산 식이 아닙니다. 다시 입력해 주세요.");
+    }
 }
