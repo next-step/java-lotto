@@ -52,7 +52,7 @@ public class StringCalculatorTest {
     @DisplayName("여러 숫자 사칙연산")
     void numbers_calculate() {
         StringCalculator stringCalculator = new StringCalculator();
-        int result = stringCalculator.calculate("2 + 3 * 4 / 2");
-        assertThat(result).isEqualTo(10);
+        int result = stringCalculator.calculate("2 + 3 * 4 / 2 + 100 - 50 / 5 - 2 * 10");
+        assertThat(result).isEqualTo(100);
     }
 }
