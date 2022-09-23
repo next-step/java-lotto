@@ -10,6 +10,8 @@ import java.util.stream.IntStream;
 
 public class StringCalculator {
     private static final Map<Character, BiFunction<Integer, Integer, Integer>> arithmeticOperation;
+    private static final String FORMULA_PATTERN = "[0-9]+(\\s[+\\-*/]\\s[0-9]+)*";
+    private static final String DELIMITER = " ";
     private static final String NOT_CORRECT_FORMULA_EXCEPTION_MESSAGE = "올바른 계산 식이 아닙니다. 다시 입력해 주세요.";
     
     static {
@@ -27,7 +29,7 @@ public class StringCalculator {
     }
     
     private void checkCorrectFormula(String formula) throws IllegalArgumentException {
-        Matcher matcher = Pattern.compile("[0-9]+(\\s[+\\-*/]\\s[0-9]+)*").matcher(formula);
+        Matcher matcher = Pattern.compile(FORMULA_PATTERN).matcher(formula);
         if (!matcher.matches()) {
             throw new IllegalArgumentException(NOT_CORRECT_FORMULA_EXCEPTION_MESSAGE);
         }
@@ -56,6 +58,6 @@ public class StringCalculator {
     }
     
     private String[] getSplit(String formula) {
-        return formula.split(" ");
+        return formula.split(DELIMITER);
     }
 }
