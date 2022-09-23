@@ -21,4 +21,12 @@ public class StringCalculatorTest {
         int result = stringCalculator.calculate("2 - 5");
         assertThat(result).isEqualTo(-3);
     }
+    
+    @Test
+    @DisplayName("곱셈")
+    void multiply() {
+        StringCalculator stringCalculator = new StringCalculator();
+        int result = stringCalculator.calculate("2 * 5");
+        assertThat(result).isEqualTo(10);
+    }
 }
