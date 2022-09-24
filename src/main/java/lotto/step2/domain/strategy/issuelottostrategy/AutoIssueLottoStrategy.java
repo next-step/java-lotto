@@ -28,6 +28,7 @@ public class AutoIssueLottoStrategy implements IssueLottoStrategy {
     private List<LottoNumber> issueLotto(List<LottoNumber> shuffle) {
         return IntStream.rangeClosed(0, 6)
                 .mapToObj(shuffle::get)
+                .sorted()
                 .collect(Collectors.toList());
     }
     
