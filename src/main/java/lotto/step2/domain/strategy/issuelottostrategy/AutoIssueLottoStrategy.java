@@ -1,10 +1,9 @@
 package lotto.step2.domain.strategy.issuelottostrategy;
 
 import lotto.step2.domain.LottoNumber;
-import lotto.step2.domain.strategy.dto.PaymentInformationDTO;
+import lotto.step2.domain.strategy.dto.PaymentPrice;
 import lotto.step2.domain.strategy.factory.LottoNumbersFactory;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,29 +11,28 @@ import java.util.stream.IntStream;
 
 public class AutoIssueLottoStrategy implements IssueLottoStrategy {
     
-    private final PaymentInformationDTO paymentInformationDTO;
+    private final PaymentPrice paymentPrice;
     
-    public AutoIssueLottoStrategy(PaymentInformationDTO paymentInformationDTO) {
-        this.paymentInformationDTO = paymentInformationDTO;
+    public AutoIssueLottoStrategy(PaymentPrice paymentPrice) {
+        this.paymentPrice = paymentPrice;
     }
     
     @Override
     public List<List<LottoNumber>> issueLottoList() {
-        return IntStream.range(0, paymentInformationDTO.getNumberOfTicketsPurchased())
+        return IntStream.range(0, paymentPrice.numberOfTickets())
                 .mapToObj(ticketCount -> issueLotto(shuffleLottoNumbers()))
                 .collect(Collectors.toList());
     }
     
-    private List<LottoNumber> issueLotto(List<LottoNumber> shuffle) {
-        return IntStream.rangeClosed(0, 6)
-                .mapToObj(shuffle::get)
+    private List<LottoNumber> issueLotto(List<LottoNumber> shuffleLottoNumbers) {
+        return IntStream.range(0, 7)
+                .mapToObj(shuffleLottoNumbers::get)
                 .sorted()
                 .collect(Collectors.toList());
     }
     
     private List<LottoNumber> shuffleLottoNumbers() {
-        List<LottoNumber> randomLottoNumbers = new ArrayList<>(createLottoNumbers());
-        return shuffle(randomLottoNumbers);
+        return shuffle(lottoNumbers());
     }
     
     private List<LottoNumber> shuffle(List<LottoNumber> randomLottoNumbers) {
@@ -42,7 +40,7 @@ public class AutoIssueLottoStrategy implements IssueLottoStrategy {
         return randomLottoNumbers;
     }
     
-    private List<LottoNumber> createLottoNumbers() {
-        return LottoNumbersFactory.create();
+    private List<LottoNumber> lottoNumbers() {
+        return LottoNumbersFactory.getInstance();
     }
 }
