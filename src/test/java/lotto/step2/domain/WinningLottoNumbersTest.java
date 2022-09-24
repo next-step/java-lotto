@@ -10,18 +10,18 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinningLottoNumbersTest {
-    private List<LottoNumber> lottoNumbers;
+    private WinningLottoNumbers winningLottoNumbers;
     
     @BeforeEach
     void setUp() {
-        lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        winningLottoNumbers = new WinningLottoNumbers(lottoNumbers);
     }
     
     @Test
     @DisplayName("6개의 번호 일치 확인")
     void confirm_six_number_match() {
         List<LottoNumber> issuedLottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(lottoNumbers);
         int result = winningLottoNumbers.confirmNumberMatch(issuedLottoNumbers);
         assertThat(result).isEqualTo(6);
     }
@@ -30,7 +30,6 @@ class WinningLottoNumbersTest {
     @DisplayName("5개의 번호 일치 확인")
     void confirm_five_number_match() {
         List<LottoNumber> issuedLottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(7), new LottoNumber(5), new LottoNumber(6));
-        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(lottoNumbers);
         int result = winningLottoNumbers.confirmNumberMatch(issuedLottoNumbers);
         assertThat(result).isEqualTo(5);
     }
@@ -39,7 +38,6 @@ class WinningLottoNumbersTest {
     @DisplayName("4개의 번호 일치 확인")
     void confirm_four_number_match() {
         List<LottoNumber> issuedLottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(7), new LottoNumber(8), new LottoNumber(6));
-        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(lottoNumbers);
         int result = winningLottoNumbers.confirmNumberMatch(issuedLottoNumbers);
         assertThat(result).isEqualTo(4);
     }
@@ -48,7 +46,6 @@ class WinningLottoNumbersTest {
     @DisplayName("3개의 번호 일치 확인")
     void confirm_three_number_match() {
         List<LottoNumber> issuedLottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(7), new LottoNumber(8), new LottoNumber(9));
-        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(lottoNumbers);
         int result = winningLottoNumbers.confirmNumberMatch(issuedLottoNumbers);
         assertThat(result).isEqualTo(3);
     }
