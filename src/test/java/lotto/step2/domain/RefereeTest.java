@@ -1,6 +1,7 @@
 package lotto.step2.domain;
 
 import lotto.step2.domain.dto.ToTalRewardDTO;
+import lotto.step2.domain.dto.WinsNumbersDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,5 +23,13 @@ public class RefereeTest {
         ToTalReward totalReward = Referee.getTotalReward(Arrays.asList(MatchNumber.THREE, MatchNumber.THREE, MatchNumber.SIX));
         ToTalRewardDTO toTalRewardDTO = totalReward.totalRewardInformation();
         assertThat(toTalRewardDTO.getTotalReward()).isEqualTo(2000010000);
+    }
+    
+    @Test
+    @DisplayName("번호 일치 개수 당 당첨 횟수")
+    void winsNumbers() {
+        WinsNumbers winsNumbers = Referee.winsNumbers(Arrays.asList(MatchNumber.THREE, MatchNumber.THREE, MatchNumber.SIX));
+        WinsNumbersDTO winsNumbersDTO = winsNumbers.winsNumbersInformation();
+        assertThat(winsNumbersDTO.getWinsNumbers()).isEqualTo(new int[]{2, 0, 0, 1});
     }
 }
