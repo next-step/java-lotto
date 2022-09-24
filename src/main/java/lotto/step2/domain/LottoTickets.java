@@ -5,6 +5,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoTickets {
+    private static final int WINNING_MIN_MATCH_NUMBER = 3;
+    
     private final List<LottoTicket> issueLottoTickets;
     
     public LottoTickets(List<LottoTicket> issueLottoTickets) {
@@ -14,8 +16,8 @@ public class LottoTickets {
     public List<MatchNumber> numberOfMatches(WinningLottoNumbers winningLottoNumbers) {
         return issueLottoTickets.stream()
                 .mapToInt(lottoTicket -> lottoTicket.confirmNumberMatch(winningLottoNumbers))
-                .filter(matchNumber -> matchNumber >= 3)
-                .mapToObj(matchNumber -> MatchNumber.values()[matchNumber - 3])
+                .filter(matchNumber -> matchNumber >= WINNING_MIN_MATCH_NUMBER)
+                .mapToObj(matchNumber -> MatchNumber.values()[matchNumber - WINNING_MIN_MATCH_NUMBER])
                 .collect(Collectors.toList());
     }
     

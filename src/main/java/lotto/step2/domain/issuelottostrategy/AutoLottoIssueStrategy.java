@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class AutoLottoIssueStrategy implements LottoIssueStrategy {
+    private static final int NUMBER_OF_DRAWS = 6;
+    private static final int ZERO = 0;
     
     private final PaymentPrice paymentPrice;
     
@@ -20,13 +22,13 @@ public class AutoLottoIssueStrategy implements LottoIssueStrategy {
     
     @Override
     public List<LottoTicket> issueLottoList() {
-        return IntStream.range(0, paymentPrice.numberOfTickets())
+        return IntStream.range(ZERO, paymentPrice.numberOfTickets())
                 .mapToObj(ticketCount -> new LottoTicket(issueLotto(shuffleLottoNumbers())))
                 .collect(Collectors.toList());
     }
     
     private List<LottoNumber> issueLotto(List<LottoNumber> shuffleLottoNumbers) {
-        return IntStream.range(0, 6)
+        return IntStream.range(ZERO, NUMBER_OF_DRAWS)
                 .mapToObj(shuffleLottoNumbers::get)
                 .sorted()
                 .collect(Collectors.toList());
