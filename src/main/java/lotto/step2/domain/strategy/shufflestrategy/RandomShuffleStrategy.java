@@ -9,9 +9,9 @@ import java.util.List;
 public class RandomShuffleStrategy implements ShuffleStrategy {
     @Override
     public List<LottoNumber> shuffle(List<LottoNumber> lottoNumbers) {
-        List<LottoNumber> shuffleLottoNumbers = new ArrayList<>(lottoNumbers);
-        Collections.shuffle(shuffleLottoNumbers);
-        Collections.sort(shuffleLottoNumbers);
-        return shuffleLottoNumbers;
+        List<LottoNumber> randomLottoNumbers = new ArrayList<>(lottoNumbers);
+        Collections.shuffle(randomLottoNumbers);
+        Collections.sort(randomLottoNumbers);
+        return randomLottoNumbers;
     }
 }
