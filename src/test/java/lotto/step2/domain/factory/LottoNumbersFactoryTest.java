@@ -13,10 +13,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoNumbersFactoryTest {
     
     @Test
-    @DisplayName("처음 로또 번호 리스트 생성")
+    @DisplayName("1 ~ 45 전체 로또 번호 리스트 생성")
     void getInstance() {
         List<LottoNumber> actualLottoNumbers = LottoNumbersFactory.getInstance();
-        List<LottoNumber> expectedLottoNumbers = IntStream.rangeClosed(1, 45).mapToObj(LottoNumber::new).collect(Collectors.toList());
+        List<LottoNumber> expectedLottoNumbers = IntStream.rangeClosed(1, 45)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
         assertThat(actualLottoNumbers).isEqualTo(expectedLottoNumbers);
     }
 }
