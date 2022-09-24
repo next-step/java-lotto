@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoMachineTest {
-    private List<List<LottoNumber>> ascendingLottoTickets;
+    private List<LottoTicket> ascendingLottoTickets;
     private List<LottoNumber> ascendingLottoNumbers;
     
     @BeforeEach
@@ -20,7 +20,7 @@ public class LottoMachineTest {
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
         ascendingLottoTickets = IntStream.range(0, 2)
-                .mapToObj(ticketCount -> ascendingLottoNumbers)
+                .mapToObj(ticketCount -> new LottoTicket(ascendingLottoNumbers))
                 .collect(Collectors.toList());
     }
     

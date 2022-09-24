@@ -1,6 +1,7 @@
 package lotto.step2.domain.factory;
 
 import lotto.step2.domain.LottoNumber;
+import lotto.step2.domain.LottoTicket;
 import lotto.step2.domain.LottoTickets;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +14,7 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class AutoLottoTicketsFactoryTest {
-    private List<List<LottoNumber>> ascendingLottoTickets;
+    private List<LottoTicket> ascendingLottoTickets;
     private List<LottoNumber> ascendingLottoNumbers;
     
     @BeforeEach
@@ -22,7 +23,7 @@ class AutoLottoTicketsFactoryTest {
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
         ascendingLottoTickets = IntStream.range(0, 2)
-                .mapToObj(ticketCount -> ascendingLottoNumbers)
+                .mapToObj(ticketCount -> new LottoTicket(ascendingLottoNumbers))
                 .collect(Collectors.toList());
     }
     

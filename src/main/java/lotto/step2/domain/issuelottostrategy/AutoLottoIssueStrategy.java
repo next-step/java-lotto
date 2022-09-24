@@ -1,6 +1,7 @@
 package lotto.step2.domain.issuelottostrategy;
 
 import lotto.step2.domain.LottoNumber;
+import lotto.step2.domain.LottoTicket;
 import lotto.step2.domain.PaymentPrice;
 import lotto.step2.domain.factory.LottoNumbersFactory;
 
@@ -18,9 +19,9 @@ public class AutoLottoIssueStrategy implements LottoIssueStrategy {
     }
     
     @Override
-    public List<List<LottoNumber>> issueLottoList() {
+    public List<LottoTicket> issueLottoList() {
         return IntStream.range(0, paymentPrice.numberOfTickets())
-                .mapToObj(ticketCount -> issueLotto(shuffleLottoNumbers()))
+                .mapToObj(ticketCount -> new LottoTicket(issueLotto(shuffleLottoNumbers())))
                 .collect(Collectors.toList());
     }
     
