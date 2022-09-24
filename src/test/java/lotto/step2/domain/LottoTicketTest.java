@@ -40,8 +40,16 @@ class LottoTicketTest {
     @Test
     @DisplayName("로또 번호 5개 일치 확인")
     void confirm_five_number_match() {
-        List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(7));
+        List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(7), new LottoNumber(5), new LottoNumber(6));
         int result = lottoTicket.confirmNumberMatch(lottoNumbers);
         assertThat(result).isEqualTo(5);
+    }
+    
+    @Test
+    @DisplayName("로또 번호 4개 일치 확인")
+    void confirm_four_number_match() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(7), new LottoNumber(8), new LottoNumber(6));
+        int result = lottoTicket.confirmNumberMatch(lottoNumbers);
+        assertThat(result).isEqualTo(4);
     }
 }
