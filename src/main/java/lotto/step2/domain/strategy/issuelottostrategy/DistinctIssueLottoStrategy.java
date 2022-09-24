@@ -19,10 +19,8 @@ public class DistinctIssueLottoStrategy implements IssueLottoStrategy {
     
     @Override
     public List<List<LottoNumber>> issueLottoList() {
-        return IntStream.iterate(0, count -> count + 1)
-                .mapToObj(count -> issueLotto(shuffleLottoNumbers(paymentInformationDTO.getShuffleStrategy())))
-                .distinct()
-                .limit(paymentInformationDTO.getNumberOfTicketsPurchased())
+        return IntStream.range(0, paymentInformationDTO.getNumberOfTicketsPurchased())
+                .mapToObj(ticketCount -> issueLotto(shuffleLottoNumbers(paymentInformationDTO.getShuffleStrategy())))
                 .collect(Collectors.toList());
     }
     
