@@ -39,8 +39,7 @@ public class Referee {
     
     private static int winNumbersCalculate(int index, List<MatchNumber> matchNumbers) {
         return (int) matchNumbers.stream()
-                .mapToInt(MatchNumber::getIndex)
-                .filter(matchNumberIndex -> matchNumberIndex == index)
+                .filter(matchNumber -> matchNumber.isSame(index))
                 .count();
     }
 }

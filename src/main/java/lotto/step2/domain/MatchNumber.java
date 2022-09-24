@@ -9,7 +9,8 @@ public enum MatchNumber {
         this.index = index;
     }
     
-    public int getIndex() {
-        return index;
+    
+    public boolean isSame(int index) {
+        return this.index == index;
     }
 }
