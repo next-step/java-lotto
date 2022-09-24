@@ -1,5 +1,7 @@
 package lotto.step2.domain;
 
+import lotto.step2.domain.dto.ToTalRewardDTO;
+
 public class ToTalReward {
     private final int totalReward;
     

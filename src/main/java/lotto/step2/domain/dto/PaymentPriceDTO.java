@@ -1,4 +1,6 @@
-package lotto.step2.domain;
+package lotto.step2.domain.dto;
+
+import lotto.step2.domain.PaymentPrice;
 
 public class PaymentPriceDTO {
     private final int paymentPrice;

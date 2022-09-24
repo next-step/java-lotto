@@ -1,5 +1,7 @@
 package lotto.step2.domain;
 
+import lotto.step2.domain.dto.PaymentPriceDTO;
+
 public class PaymentPrice {
     private static final int TICKET_PRICE = 1000;
     

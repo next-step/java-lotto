@@ -1,5 +1,8 @@
 package lotto.step2.domain;
 
+import lotto.step2.domain.dto.PaymentPriceDTO;
+import lotto.step2.domain.dto.ToTalRewardDTO;
+
 import java.util.List;
 
 public class Referee {
