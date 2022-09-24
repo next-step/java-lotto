@@ -22,7 +22,7 @@ public class DistinctIssueLottoStrategy implements IssueLottoStrategy {
         return IntStream.iterate(0, count -> count + 1)
                 .mapToObj(count -> issueLotto(shuffleLottoNumbers(paymentInformationDTO.getShuffleStrategy())))
                 .distinct()
-                .limit(paymentInformationDTO.getNumberOfIssues())
+                .limit(paymentInformationDTO.getNumberOfTicketsPurchased())
                 .collect(Collectors.toList());
     }
     

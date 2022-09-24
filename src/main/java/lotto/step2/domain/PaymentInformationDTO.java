@@ -4,18 +4,18 @@ import lotto.step2.domain.strategy.shufflestrategy.ShuffleStrategy;
 
 public class PaymentInformationDTO {
     private final ShuffleStrategy shuffleStrategy;
-    private final int numberOfIssues;
+    private final int numberOfTicketsPurchased;
     
-    public PaymentInformationDTO(ShuffleStrategy shuffleStrategy, int numberOfIssues) {
+    public PaymentInformationDTO(ShuffleStrategy shuffleStrategy, int numberOfTicketsPurchased) {
         this.shuffleStrategy = shuffleStrategy;
-        this.numberOfIssues = numberOfIssues;
+        this.numberOfTicketsPurchased = numberOfTicketsPurchased;
     }
     
     public ShuffleStrategy getShuffleStrategy() {
         return shuffleStrategy;
     }
     
-    public int getNumberOfIssues() {
-        return numberOfIssues;
+    public int getNumberOfTicketsPurchased() {
+        return numberOfTicketsPurchased;
     }
 }
