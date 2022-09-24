@@ -8,13 +8,13 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ResultMapTest {
+class TotalRewardCalculateMapTest {
     
     @Test
     @DisplayName("총 당첨금 확인")
     void totalReward() {
-        ResultMap resultMap = new ResultMap();
+        TotalRewardCalculateMap totalRewardCalculateMap = new TotalRewardCalculateMap();
         List<MatchNumber> matchNumbers = Arrays.asList(MatchNumber.THREE, MatchNumber.THREE, MatchNumber.SIX);
-        assertThat(resultMap.totalReward(matchNumbers)).isEqualTo(2000010000);
+        assertThat(totalRewardCalculateMap.totalReward(matchNumbers)).isEqualTo(2000010000);
     }
 }

@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class Referee {
-    private static final ResultMap resultMap = new ResultMap();
+    private static final TotalRewardCalculateMap TOTAL_REWARD_CALCULATE_MAP = new TotalRewardCalculateMap();
     private static final int NUMBER_OF_WINNING_CASES = 4;
     private static final int ZERO = 0;
     
     public static ToTalReward getTotalReward(List<MatchNumber> matchNumbers) {
-        return new ToTalReward(resultMap.totalReward(matchNumbers));
+        return new ToTalReward(TOTAL_REWARD_CALCULATE_MAP.totalReward(matchNumbers));
     }
     
     public static double yield(PaymentPriceDTO paymentPriceDTO, ToTalRewardDTO totalRewardDTO) {
