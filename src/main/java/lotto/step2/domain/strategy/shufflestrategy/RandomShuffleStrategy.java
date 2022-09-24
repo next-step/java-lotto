@@ -11,6 +11,7 @@ public class RandomShuffleStrategy implements ShuffleStrategy {
     public List<LottoNumber> shuffle(List<LottoNumber> lottoNumbers) {
         List<LottoNumber> shuffleLottoNumbers = new ArrayList<>(lottoNumbers);
         Collections.shuffle(shuffleLottoNumbers);
+        Collections.sort(shuffleLottoNumbers);
         return shuffleLottoNumbers;
     }
 }
