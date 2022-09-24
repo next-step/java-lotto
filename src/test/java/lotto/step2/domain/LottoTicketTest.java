@@ -52,4 +52,12 @@ class LottoTicketTest {
         int result = lottoTicket.confirmNumberMatch(lottoNumbers);
         assertThat(result).isEqualTo(4);
     }
+    
+    @Test
+    @DisplayName("로또 번호 3개 일치 확인")
+    void confirm_three_number_match() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(7), new LottoNumber(8), new LottoNumber(9));
+        int result = lottoTicket.confirmNumberMatch(lottoNumbers);
+        assertThat(result).isEqualTo(3);
+    }
 }
