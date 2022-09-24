@@ -21,7 +21,7 @@ public class LotteryMachineTest {
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
         ascendingLottoTickets = IntStream.range(0, 2)
-                .mapToObj(numberOfTickets -> ascendingLottoNumbers)
+                .mapToObj(ticketCount -> ascendingLottoNumbers)
                 .collect(Collectors.toList());
     }
     

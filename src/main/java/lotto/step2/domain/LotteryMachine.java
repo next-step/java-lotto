@@ -1,5 +1,6 @@
 package lotto.step2.domain;
 
+import lotto.step2.domain.strategy.factory.AutoLottoTicketsFactory;
 import lotto.step2.domain.strategy.issuelottostrategy.IssueLottoStrategy;
 
 public class LotteryMachine {

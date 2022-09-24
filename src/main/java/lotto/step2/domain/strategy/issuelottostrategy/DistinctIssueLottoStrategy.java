@@ -1,7 +1,7 @@
 package lotto.step2.domain.strategy.issuelottostrategy;
 
 import lotto.step2.domain.LottoNumber;
-import lotto.step2.domain.LottoNumbersFactory;
+import lotto.step2.domain.strategy.factory.LottoNumbersFactory;
 import lotto.step2.domain.PaymentInformationDTO;
 import lotto.step2.domain.strategy.shufflestrategy.ShuffleStrategy;
 

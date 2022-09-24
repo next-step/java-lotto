@@ -1,4 +1,6 @@
-package lotto.step2.domain;
+package lotto.step2.domain.strategy.factory;
+
+import lotto.step2.domain.LottoNumber;
 
 import java.util.List;
 import java.util.stream.Collectors;
