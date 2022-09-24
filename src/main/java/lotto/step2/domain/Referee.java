@@ -3,21 +3,29 @@ package lotto.step2.domain;
 import java.util.List;
 
 public class Referee {
-    private final ResultMap resultMap;
+    private static final ResultMap resultMap = new ResultMap();
     
-    public Referee() {
-        resultMap = new ResultMap();
+    public static double yield(PaymentPrice paymentPrice, ToTalReward totalReward) {
+        return (int) ((double) getTotalReward(totalReward) / getPaymentPrice(paymentPrice) * 100) / 100.0;
     }
     
-    public double yield(PaymentPrice paymentPrice, ToTalReward totalReward) {
-        PaymentPriceDTO paymentPriceDTO = paymentPrice.paymentPriceInformation();
-        ToTalRewardDTO toTalRewardDTO = totalReward.totalRewardInformation();
-        int paymentPrice1 = paymentPriceDTO.getPaymentPrice();
-        int totalReward1 = toTalRewardDTO.getTotalReward();
-        return (int) ((double) totalReward1 / paymentPrice1 * 100) / 100.0;
+    private static int getTotalReward(ToTalReward totalReward) {
+        return getToTalRewardDTO(totalReward).getTotalReward();
     }
     
-    private int getTotalReward(List<MatchNumber> matchNumbers) {
+    private static int getPaymentPrice(PaymentPrice paymentPrice) {
+        return getPaymentPriceDTO(paymentPrice).getPaymentPrice();
+    }
+    
+    private static ToTalRewardDTO getToTalRewardDTO(ToTalReward totalReward) {
+        return totalReward.totalRewardInformation();
+    }
+    
+    private static PaymentPriceDTO getPaymentPriceDTO(PaymentPrice paymentPrice) {
+        return paymentPrice.paymentPriceInformation();
+    }
+    
+    private static int getTotalReward(List<MatchNumber> matchNumbers) {
         return resultMap.totalReward(matchNumbers);
     }
 }

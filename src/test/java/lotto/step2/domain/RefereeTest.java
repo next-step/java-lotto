@@ -9,8 +9,7 @@ public class RefereeTest {
     @Test
     @DisplayName("총 수익률 계산하기")
     void yield() {
-        Referee referee = new Referee();
-        double yield = referee.yield(new PaymentPrice(14000), new ToTalReward(5000));
+        double yield = Referee.yield(new PaymentPrice(14000), new ToTalReward(5000));
         assertThat(yield).isEqualTo(0.35);
     }
 }
