@@ -8,27 +8,19 @@ import java.util.List;
 public class Referee {
     private static final ResultMap resultMap = new ResultMap();
     
-    public static double yield(PaymentPrice paymentPrice, ToTalReward totalReward) {
-        return (int) ((double) getTotalReward(totalReward) / getPaymentPrice(paymentPrice) * 100) / 100.0;
-    }
-    
-    private static int getTotalReward(ToTalReward totalReward) {
-        return getToTalRewardDTO(totalReward).getTotalReward();
-    }
-    
-    private static int getPaymentPrice(PaymentPrice paymentPrice) {
-        return getPaymentPriceDTO(paymentPrice).getPaymentPrice();
-    }
-    
-    private static ToTalRewardDTO getToTalRewardDTO(ToTalReward totalReward) {
-        return totalReward.totalRewardInformation();
-    }
-    
-    private static PaymentPriceDTO getPaymentPriceDTO(PaymentPrice paymentPrice) {
-        return paymentPrice.paymentPriceInformation();
-    }
-    
-    private static int getTotalReward(List<MatchNumber> matchNumbers) {
+    public static int getTotalReward(List<MatchNumber> matchNumbers) {
         return resultMap.totalReward(matchNumbers);
+    }
+    
+    public static double yield(PaymentPriceDTO paymentPriceDTO, ToTalRewardDTO totalRewardDTO) {
+        return (int) ((double) getTotalReward(totalRewardDTO) / getPaymentPrice(paymentPriceDTO) * 100) / 100.0;
+    }
+    
+    private static int getTotalReward(ToTalRewardDTO totalRewardDTO) {
+        return totalRewardDTO.getTotalReward();
+    }
+    
+    private static int getPaymentPrice(PaymentPriceDTO paymentPriceDTO) {
+        return paymentPriceDTO.getPaymentPrice();
     }
 }
