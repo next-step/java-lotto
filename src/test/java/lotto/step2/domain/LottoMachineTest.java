@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LotteryMachineTest {
+public class LottoMachineTest {
     private List<List<LottoNumber>> ascendingLottoTickets;
     private List<LottoNumber> ascendingLottoNumbers;
     
@@ -27,8 +27,8 @@ public class LotteryMachineTest {
     @Test
     @DisplayName("(입력 받은 값 / 1000) 장 만큼 자동으로 로또 발급하기.")
     void autoIssueLotto() {
-        LotteryMachine lotteryMachine = new LotteryMachine();
-        LottoTickets actualLottoTickets = lotteryMachine.autoIssueLottoTickets(() -> ascendingLottoTickets);
+        LottoMachine lottoMachine = new LottoMachine();
+        LottoTickets actualLottoTickets = lottoMachine.autoIssueLottoTickets(() -> ascendingLottoTickets);
         assertThat(actualLottoTickets).isEqualTo(new LottoTickets(ascendingLottoTickets));
     }
 }
