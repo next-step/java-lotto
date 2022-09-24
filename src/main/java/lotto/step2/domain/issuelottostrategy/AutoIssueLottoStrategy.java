@@ -1,8 +1,8 @@
-package lotto.step2.domain.strategy.issuelottostrategy;
+package lotto.step2.domain.issuelottostrategy;
 
 import lotto.step2.domain.LottoNumber;
-import lotto.step2.domain.strategy.dto.PaymentPrice;
-import lotto.step2.domain.strategy.factory.LottoNumbersFactory;
+import lotto.step2.domain.PaymentPrice;
+import lotto.step2.domain.factory.LottoNumbersFactory;
 
 import java.util.Collections;
 import java.util.List;

@@ -1,4 +1,4 @@
-package lotto.step2.domain.strategy.dto;
+package lotto.step2.domain;
 
 public class PaymentPrice {
     private static final int TICKET_PRICE = 1000;

@@ -1,4 +1,4 @@
-package lotto.step2.domain.strategy.factory;
+package lotto.step2.domain.factory;
 
 import lotto.step2.domain.LottoNumber;
 

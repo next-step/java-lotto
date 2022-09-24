@@ -1,7 +1,7 @@
 package lotto.step2.domain;
 
-import lotto.step2.domain.strategy.factory.AutoLottoTicketsFactory;
-import lotto.step2.domain.strategy.issuelottostrategy.IssueLottoStrategy;
+import lotto.step2.domain.factory.AutoLottoTicketsFactory;
+import lotto.step2.domain.issuelottostrategy.IssueLottoStrategy;
 
 public class LotteryMachine {
     public LottoTickets autoIssueLottoTickets(IssueLottoStrategy issueLottoStrategy) {
