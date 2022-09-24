@@ -1,4 +1,4 @@
-package lotto.step2.domain;
+package lotto.step2.domain.strategy.dto;
 
 import lotto.step2.domain.strategy.shufflestrategy.ShuffleStrategy;
 
