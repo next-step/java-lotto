@@ -16,7 +16,7 @@ public class LottoMachineTest {
     
     @BeforeEach
     void setUp() {
-        ascendingLottoNumbers = IntStream.rangeClosed(1, 7)
+        ascendingLottoNumbers = IntStream.rangeClosed(1, 6)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
         ascendingLottoTickets = IntStream.range(0, 2)
