@@ -27,8 +27,7 @@ public class LottoMachineTest {
     @Test
     @DisplayName("(입력 받은 값 / 1000) 장 만큼 자동으로 로또 발급하기.")
     void autoIssueLotto() {
-        LottoMachine lottoMachine = new LottoMachine();
-        LottoTickets actualLottoTickets = lottoMachine.autoIssueLottoTickets(() -> ascendingLottoTickets);
+        LottoTickets actualLottoTickets = LottoMachine.autoIssueLottoTickets(() -> ascendingLottoTickets);
         assertThat(actualLottoTickets).isEqualTo(new LottoTickets(ascendingLottoTickets));
     }
 }
