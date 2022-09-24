@@ -2,8 +2,6 @@ package lotto.step2.domain.factory;
 
 import lotto.step2.domain.LottoNumber;
 import lotto.step2.domain.LottoTickets;
-import lotto.step2.domain.PaymentPrice;
-import lotto.step2.domain.issuelottostrategy.AutoIssueLottoStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

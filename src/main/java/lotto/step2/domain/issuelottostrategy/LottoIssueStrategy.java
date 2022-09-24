@@ -4,6 +4,6 @@ import lotto.step2.domain.LottoNumber;
 
 import java.util.List;
 
-public interface IssueLottoStrategy {
+public interface LottoIssueStrategy {
     List<List<LottoNumber>> issueLottoList();
 }

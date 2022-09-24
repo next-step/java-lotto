@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class AutoIssueLottoStrategy implements IssueLottoStrategy {
+public class AutoLottoIssueStrategy implements LottoIssueStrategy {
     
     private final PaymentPrice paymentPrice;
     
-    public AutoIssueLottoStrategy(PaymentPrice paymentPrice) {
+    public AutoLottoIssueStrategy(PaymentPrice paymentPrice) {
         this.paymentPrice = paymentPrice;
     }
     
