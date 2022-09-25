@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 import static calculator.type.Operator.ADD;
 
 public class StringCalculator {
-    public static final String INVALID_INPUT_MESSAGE = "수식이 올바르지 않습니다.";
+    private static final String INVALID_INPUT_MESSAGE = "수식이 올바르지 않습니다.";
     private static final String DEFAULT_OPERATOR_TYPE = ADD;
     private static final int DEFAULT_VALUE = 0;
 
