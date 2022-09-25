@@ -24,43 +24,43 @@ public class InputViewTest {
     
     @NullAndEmptySource
     @ParameterizedTest(name = "{displayName} : {0}")
-    @DisplayName("null 또는 \"\" 입력 시 예외 던지기")
-    void null_or_empty_input_exception(String input) {
+    @DisplayName("로또 구입 금액 - null 또는 \"\" 입력 시 예외 던지기")
+    void lotto_payment_price_input_null_or_empty_exception(String input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> InputView.lottoPaymentPriceInput(input))
                 .withMessage("올바른 입력 값이 아닙니다. 다시 입력해 주세요.");
     }
     
-    @DisplayName("숫자가 아닌 값 입력 시 예외 던지기")
+    @DisplayName("로또 구입 금액 - 숫자가 아닌 값 입력 시 예외 던지기")
     @ParameterizedTest(name = "{displayName} : {0}")
     @ValueSource(strings = {"abcde", "!@#$%", "14000a"})
-    void number_format_exception(String input) {
+    void lotto_payment_price_input_number_format_exception(String input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> InputView.lottoPaymentPriceInput(input))
                 .withMessage("올바른 입력 값이 아닙니다. 다시 입력해 주세요.");
     }
     
-    @DisplayName("입력 값이 1000원 단위가 아닐 시 예외 던지기")
+    @DisplayName("로또 구입 금액 입력 - 값이 1000원 단위가 아닐 시 예외 던지기")
     @ParameterizedTest(name = "{displayName} : {0}")
     @ValueSource(strings = {"1400", "1001", "1234", "1100"})
-    void different_unit_exception(String input) {
+    void lotto_payment_price_input_different_unit_exception(String input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> InputView.lottoPaymentPriceInput(input))
                 .withMessage("올바른 입력 값이 아닙니다. 다시 입력해 주세요.");
     }
     
-    @DisplayName("0원 입력 시 예외 던지기")
+    @DisplayName("로또 구입 금액 - 0원 입력 시 예외 던지기")
     @ParameterizedTest(name = "{displayName} : {0}")
     @ValueSource(strings = {"0", "0000"})
-    void zero_input_exception(String input) {
+    void lotto_payment_price_input_zero_exception(String input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> InputView.lottoPaymentPriceInput(input))
                 .withMessage("올바른 입력 값이 아닙니다. 다시 입력해 주세요.");
     }
     
     @Test
-    @DisplayName("음수 입력 시")
-    void negative_input_exception() {
+    @DisplayName("로또 구입 금액 - 음수 입력 시")
+    void lotto_payment_price_input_negative_exception() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> InputView.lottoPaymentPriceInput("-1"))
                 .withMessage("올바른 입력 값이 아닙니다. 다시 입력해 주세요.");
