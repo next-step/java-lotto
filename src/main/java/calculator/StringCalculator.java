@@ -15,31 +15,22 @@ public class StringCalculator {
     public int calculate(String input) {
         Queue<String> tokens = tokenizer.queue(input);
 
-        return calculate(tokens, DEFAULT_OPERATOR_TYPE, 0);
+        return operate(tokens, DEFAULT_OPERATOR_TYPE, 0);
     }
 
-    private int calculate(Queue<String> tokens, String operator, int result) {
+    private int operate(Queue<String> tokens, String operator, int result) {
         if (tokens.isEmpty()) {
             return result;
         }
 
         String token = tokens.remove();
-        if (isNumber(token)) {
-            result = Operator.mapping(operator)
-                            .operate(result, Integer.parseInt(token));
+        Operator supportedOperator = Operator.findOperator(operator);
 
-            return calculate(tokens, operator, result);
-        }
-
-        return calculate(tokens, token, result);
-    }
-
-    private boolean isNumber(String token) {
         try {
-            Integer.parseInt(token);
+            result = supportedOperator.operate(result, Integer.parseInt(token));
+            return operate(tokens, operator, result);
         } catch (NumberFormatException e) {
-            return false;
+            return operate(tokens, token, result);
         }
-        return true;
     }
 }

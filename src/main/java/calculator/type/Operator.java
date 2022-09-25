@@ -2,7 +2,6 @@ package calculator.type;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public abstract class Operator {
     public static final String ADD = "+";
@@ -18,7 +17,7 @@ public abstract class Operator {
         CACHE.put(DIVIDE, new Divide());
     }
 
-    public static Operator mapping(String operator) {
+    public static Operator findOperator(String operator) {
         Operator result = CACHE.get(operator);
         if (result == null) {
             throw new IllegalArgumentException(operator + "은(는) 지원하지 않는 연산자입니다.");
