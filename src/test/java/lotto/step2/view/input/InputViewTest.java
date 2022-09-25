@@ -52,4 +52,12 @@ public class InputViewTest {
                 .isThrownBy(() -> InputView.lottoPaymentInput(input))
                 .withMessage("올바른 입력 값이 아닙니다. 다시 입력해 주세요.");
     }
+    
+    @Test
+    @DisplayName("음수 입력 시")
+    void negative_input_exception() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> InputView.lottoPaymentInput("-1"))
+                .withMessage("올바른 입력 값이 아닙니다. 다시 입력해 주세요.");
+    }
 }
