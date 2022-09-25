@@ -85,7 +85,7 @@ public class InputViewTest {
     
     @DisplayName("지난 주 당첨 번호 - 콤마 구분자가 아닌 경우 예외 던지기")
     @ParameterizedTest(name = "{displayName} : {0}")
-    @ValueSource(strings = {"1, 2, 3. 4", "1, 2, 3$ 4"})
+    @ValueSource(strings = {"1, 2, 3. 4, 5, 6", "1, 2, 3$ 4, 5, 6"})
     void winner_lotto_numbers_input_delimiter_exception(String input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> InputView.winningLottoNumbersInput(input))
