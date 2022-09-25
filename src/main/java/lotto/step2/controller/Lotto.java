@@ -19,5 +19,8 @@ public class Lotto {
         List<MatchNumber> matchNumbers = lottoTickets.numberOfMatches(winningLottoNumbers);
         WinsNumbers winsNumbers = Referee.winsNumbers(matchNumbers);
         ResultView.winsNumbersPrint(winsNumbers);
+    
+        ToTalReward totalReward = Referee.getTotalReward(matchNumbers);
+        ResultView.yieldPrint(paymentPrice, totalReward);
     }
 }

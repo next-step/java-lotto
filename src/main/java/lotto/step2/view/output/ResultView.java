@@ -1,8 +1,6 @@
 package lotto.step2.view.output;
 
-import lotto.step2.domain.LottoTickets;
-import lotto.step2.domain.PaymentPrice;
-import lotto.step2.domain.WinsNumbers;
+import lotto.step2.domain.*;
 
 public class ResultView {
     public static void purchasedLottoNumbersPrint(LottoTickets lottoTickets, PaymentPrice paymentPrice) {
@@ -15,5 +13,10 @@ public class ResultView {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
         System.out.println(winsNumbers);
+    }
+    
+    public static void yieldPrint(PaymentPrice paymentPrice, ToTalReward totalReward) {
+        double yield = Referee.yield(paymentPrice.paymentPriceInformation(), totalReward.totalRewardInformation());
+        System.out.println("총 수익률은 " + yield + "입니다.");
     }
 }
