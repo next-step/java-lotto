@@ -40,7 +40,7 @@ public class InputViewTest {
                 .withMessage("올바른 입력 값이 아닙니다. 다시 입력해 주세요.");
     }
     
-    @DisplayName("로또 구입 금액 입력 - 값이 1000원 단위가 아닐 시 예외 던지기")
+    @DisplayName("로또 구입 금액 - 입력 값이 1000원 단위가 아닐 시 예외 던지기")
     @ParameterizedTest(name = "{displayName} : {0}")
     @ValueSource(strings = {"1400", "1001", "1234", "1100"})
     void lotto_payment_price_input_different_unit_exception(String input) {
@@ -72,5 +72,14 @@ public class InputViewTest {
         WinningLottoNumbers winningLottoNumbers = InputView.winningLottoNumbersInput("1, 2, 3, 4, 5, 6");
         List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
         assertThat(winningLottoNumbers).isEqualTo(new WinningLottoNumbers(lottoNumbers));
+    }
+    
+    @NullAndEmptySource
+    @ParameterizedTest(name = "{displayName} : {0}")
+    @DisplayName("지난 주 당첨 번호 - null 또는 \"\" 입력 시 예외 던지기")
+    void winner_lotto_numbers_input_null_or_empty_exception(String input) {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> InputView.winningLottoNumbersInput(input))
+                .withMessage("올바른 입력 값이 아닙니다. 다시 입력해 주세요.");
     }
 }

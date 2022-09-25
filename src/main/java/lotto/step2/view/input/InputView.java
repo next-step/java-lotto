@@ -9,7 +9,6 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class InputView {
     
@@ -17,6 +16,7 @@ public class InputView {
     private static final String INPUT_FORMAT_EXCEPTION_MESSAGE = "올바른 입력 값이 아닙니다. 다시 입력해 주세요.";
     private static final String LOTTO_PAYMENT_PRICE_INPUT_FORM = "[1-9][0-9]*000";
     private static final String LOTTO_PAYMENT_PRICE_INPUT_MESSAGE = "구입금액을 입력해 주세요.";
+    public static final String WINNING_LOTTO_NUMBERS_INPUT_FORM = "^[1-9]$|^[1-3][0-9]$|^4[0-5]((,)(^[1-9]$|^[1-3][0-9]$|^)){5}";
     
     public static int lottoPaymentPriceInput() {
         try {
@@ -29,11 +29,11 @@ public class InputView {
     }
     
     public static int lottoPaymentPriceInput(String input) throws IllegalArgumentException {
-        checkAllLottoPaymentPriceInputException(input);
+        checkLottoPaymentPriceInputAllException(input);
         return Integer.parseInt(input);
     }
     
-    private static void checkAllLottoPaymentPriceInputException(String input) throws IllegalArgumentException {
+    private static void checkLottoPaymentPriceInputAllException(String input) throws IllegalArgumentException {
         checkNullException(input);
         checkLottoPaymentPriceInputFormatException(input);
     }
@@ -51,8 +51,21 @@ public class InputView {
         }
     }
     
-    public static WinningLottoNumbers winningLottoNumbersInput(String input) {
+    public static WinningLottoNumbers winningLottoNumbersInput(String input) throws IllegalArgumentException {
+        checkWinningLottoNumbersInputAllException(input);
         return new WinningLottoNumbers(getLottoNumbers(removeSpace(input)));
+    }
+    
+    private static void checkWinningLottoNumbersInputAllException(String input) throws IllegalArgumentException {
+        checkNullException(input);
+        checkWinningLottoNumbersInputFormatException(removeSpace(input));
+    }
+    
+    private static void checkWinningLottoNumbersInputFormatException(String input) throws IllegalArgumentException {
+        Matcher matcher = Pattern.compile(WINNING_LOTTO_NUMBERS_INPUT_FORM).matcher(input);
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException(INPUT_FORMAT_EXCEPTION_MESSAGE);
+        }
     }
     
     private static String removeSpace(String input) {
