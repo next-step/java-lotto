@@ -8,6 +8,8 @@ public abstract class Operator {
     public static final String SUBTRACT = "-";
     public static final String MULTIPLY = "*";
     public static final String DIVIDE = "/";
+
+    private static final String NOT_SUPPORTED_MESSAGE = "은(는) 지원하지 않는 연산자입니다.";
     private static final Map<String, Operator> CACHE = new HashMap<>();
 
     static {
@@ -20,7 +22,7 @@ public abstract class Operator {
     public static Operator findOperator(String operator) {
         Operator result = CACHE.get(operator);
         if (result == null) {
-            throw new IllegalArgumentException(operator + "은(는) 지원하지 않는 연산자입니다.");
+            throw new IllegalArgumentException(operator + NOT_SUPPORTED_MESSAGE);
         }
         return result;
     }
