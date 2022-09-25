@@ -1,10 +1,15 @@
 package lotto.step2.view.input;
 
+import lotto.step2.domain.LottoNumber;
+import lotto.step2.domain.WinningLottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -59,5 +64,13 @@ public class InputViewTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> InputView.lottoPaymentPriceInput("-1"))
                 .withMessage("올바른 입력 값이 아닙니다. 다시 입력해 주세요.");
+    }
+    
+    @Test
+    @DisplayName("지난 주 당첨 번호 입력 값 반환")
+    void winner_lotto_numbers_input() {
+        WinningLottoNumbers winningLottoNumbers = InputView.winningLottoNumbersInput("1, 2, 3, 4, 5, 6");
+        List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        assertThat(winningLottoNumbers).isEqualTo(new WinningLottoNumbers(lottoNumbers));
     }
 }

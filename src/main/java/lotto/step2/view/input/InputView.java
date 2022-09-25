@@ -1,8 +1,15 @@
 package lotto.step2.view.input;
 
+import lotto.step2.domain.LottoNumber;
+import lotto.step2.domain.WinningLottoNumbers;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
     
@@ -42,5 +49,20 @@ public class InputView {
         if (input == null) {
             throw new IllegalArgumentException(INPUT_FORMAT_EXCEPTION_MESSAGE);
         }
+    }
+    
+    public static WinningLottoNumbers winningLottoNumbersInput(String input) {
+        return new WinningLottoNumbers(getLottoNumbers(removeSpace(input)));
+    }
+    
+    private static String removeSpace(String input) {
+        return input.replace(" ", "");
+    }
+    
+    private static List<LottoNumber> getLottoNumbers(String input) {
+        return Arrays.stream(input.split(","))
+                .mapToInt(Integer::parseInt)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 }
