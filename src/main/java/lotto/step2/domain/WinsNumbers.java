@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class WinsNumbers {
+    private static final String WINS_NUMBERS_PRINT_FORMAT = "%d개 일치 (%d원) - %d개";
     private static final int THREE_MATCH_REWARD = 5000;
     private static final int FOUR_MATCH_REWARD = 50000;
     private static final int FIVE_MATCH_REWARD = 1_500_000;
@@ -33,7 +34,7 @@ public class WinsNumbers {
     @Override
     public String toString() {
         return IntStream.range(0, winsNumbers.length)
-                .mapToObj(index -> (index + WINNING_MIN_MATCH_NUMBER) + "개 일치 (" + getWinnerPrices()[index] + "원) - " + winsNumbers[index] + "개")
+                .mapToObj(index -> String.format(WINS_NUMBERS_PRINT_FORMAT, index + WINNING_MIN_MATCH_NUMBER, getWinnerPrices()[index], winsNumbers[index]))
                 .collect(Collectors.joining("\n"));
     }
 }
