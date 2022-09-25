@@ -1,6 +1,7 @@
 package lotto.step2.view.input;
 
 import lotto.step2.domain.LottoNumber;
+import lotto.step2.domain.PaymentPrice;
 import lotto.step2.domain.WinningLottoNumbers;
 
 import java.util.Arrays;
@@ -22,7 +23,7 @@ public class InputView {
     private static final String SPACE = " ";
     private static final String EMPTY = "";
     
-    public static int lottoPaymentPriceInput() {
+    public static PaymentPrice lottoPaymentPriceInput() throws IllegalArgumentException {
         try {
             System.out.println(LOTTO_PAYMENT_PRICE_INPUT_MESSAGE);
             return lottoPaymentPriceInput(SCANNER.nextLine());
@@ -32,9 +33,9 @@ public class InputView {
         }
     }
     
-    public static int lottoPaymentPriceInput(String input) throws IllegalArgumentException {
+    public static PaymentPrice lottoPaymentPriceInput(String input) throws IllegalArgumentException {
         checkLottoPaymentPriceInputAllException(input);
-        return Integer.parseInt(input);
+        return new PaymentPrice(Integer.parseInt(input));
     }
     
     private static void checkLottoPaymentPriceInputAllException(String input) throws IllegalArgumentException {

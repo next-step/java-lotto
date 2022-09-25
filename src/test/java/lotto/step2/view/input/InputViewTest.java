@@ -1,6 +1,7 @@
 package lotto.step2.view.input;
 
 import lotto.step2.domain.LottoNumber;
+import lotto.step2.domain.PaymentPrice;
 import lotto.step2.domain.WinningLottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,8 +19,8 @@ public class InputViewTest {
     @Test
     @DisplayName("로또 구입 금액 입력 값 반환")
     void lotto_payment_price_input() {
-        int lottoPaymentInput = InputView.lottoPaymentPriceInput("14000");
-        assertThat(lottoPaymentInput).isEqualTo(14000);
+        PaymentPrice paymentPrice = InputView.lottoPaymentPriceInput("14000");
+        assertThat(paymentPrice).isEqualTo(new PaymentPrice(14000));
     }
     
     @NullAndEmptySource
