@@ -69,8 +69,8 @@ public class InputViewTest {
     @Test
     @DisplayName("지난 주 당첨 번호 입력 값 반환")
     void winner_lotto_numbers_input() {
-        WinningLottoNumbers winningLottoNumbers = InputView.winningLottoNumbersInput("1, 2, 3, 4, 5, 6");
-        List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        WinningLottoNumbers winningLottoNumbers = InputView.winningLottoNumbersInput("1, 5, 20, 39, 41, 45");
+        List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(5), new LottoNumber(20), new LottoNumber(39), new LottoNumber(41), new LottoNumber(45));
         assertThat(winningLottoNumbers).isEqualTo(new WinningLottoNumbers(lottoNumbers));
     }
     
