@@ -3,34 +3,44 @@ package calculator;
 import calculator.type.Operator;
 
 import java.util.Queue;
+import java.util.StringTokenizer;
 
 import static calculator.type.Operator.ADD;
 
 public class StringCalculator {
+    public static final String INVALID_INPUT_MESSAGE = "수식이 올바르지 않습니다.";
     private static final String DEFAULT_OPERATOR_TYPE = ADD;
-    private static final String DEFAULT_DELIMITER = " ";
+    private static final int DEFAULT_VALUE = 0;
 
-    private final Tokenizer tokenizer = new Tokenizer(DEFAULT_DELIMITER);
+    private StringTokenizer tokenizer;
 
     public int calculate(String input) {
-        Queue<String> tokens = tokenizer.queue(input);
+        try {
+            tokenizer = new StringTokenizer(input);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(INVALID_INPUT_MESSAGE);
+        }
 
-        return operate(tokens, DEFAULT_OPERATOR_TYPE, 0);
+        return operate(DEFAULT_OPERATOR_TYPE, DEFAULT_VALUE);
     }
 
-    private int operate(Queue<String> tokens, String operator, int result) {
-        if (tokens.isEmpty()) {
+    private int operate(String operator, int result) {
+        if (hasNoMoreTokens()) {
             return result;
         }
 
-        String token = tokens.remove();
+        String token = tokenizer.nextToken();
         Operator supportedOperator = Operator.findOperator(operator);
 
         try {
             result = supportedOperator.operate(result, Integer.parseInt(token));
-            return operate(tokens, operator, result);
+            return operate(operator, result);
         } catch (NumberFormatException e) {
-            return operate(tokens, token, result);
+            return operate(token, result);
         }
+    }
+
+    private boolean hasNoMoreTokens() {
+        return !tokenizer.hasMoreTokens();
     }
 }
