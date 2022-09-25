@@ -82,4 +82,13 @@ public class InputViewTest {
                 .isThrownBy(() -> InputView.winningLottoNumbersInput(input))
                 .withMessage("올바른 입력 값이 아닙니다. 다시 입력해 주세요.");
     }
+    
+    @DisplayName("지난 주 당첨 번호 - 콤마 구분자가 아닌 경우 예외 던지기")
+    @ParameterizedTest(name = "{displayName} : {0}")
+    @ValueSource(strings = {"1, 2, 3. 4", "1, 2, 3$ 4"})
+    void winner_lotto_numbers_input_delimiter_exception(String input) {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> InputView.winningLottoNumbersInput(input))
+                .withMessage("올바른 입력 값이 아닙니다. 다시 입력해 주세요.");
+    }
 }
