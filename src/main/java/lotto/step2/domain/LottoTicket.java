@@ -2,6 +2,7 @@ package lotto.step2.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     private final List<LottoNumber> lottoTicket;
@@ -25,5 +26,12 @@ public class LottoTicket {
     @Override
     public int hashCode() {
         return Objects.hash(lottoTicket);
+    }
+    
+    @Override
+    public String toString() {
+        return lottoTicket.stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(", ", "[", "]"));
     }
 }

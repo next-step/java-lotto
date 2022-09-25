@@ -33,4 +33,11 @@ public class LottoTickets {
     public int hashCode() {
         return Objects.hash(issueLottoTickets);
     }
+    
+    @Override
+    public String toString() {
+        return issueLottoTickets.stream()
+                .map(LottoTicket::toString)
+                .collect(Collectors.joining("\n"));
+    }
 }
