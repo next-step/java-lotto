@@ -1,5 +1,6 @@
 package calculator.type;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -8,7 +9,7 @@ public abstract class Operator {
     public static final String SUBTRACT = "-";
     public static final String MULTIPLY = "*";
     public static final String DIVIDE = "/";
-    private static final Map<String, Operator> CACHE = new ConcurrentHashMap<>();
+    private static final Map<String, Operator> CACHE = new HashMap<>();
 
     static {
         CACHE.put(ADD, new Add());
