@@ -28,7 +28,7 @@ public class InputViewTest {
     
     @DisplayName("숫자가 아닌 값 입력 시 예외 던지기")
     @ParameterizedTest(name = "{displayName} : {0}")
-    @ValueSource(strings = {"abcde", "!@#$%", "14000a", "0000"})
+    @ValueSource(strings = {"abcde", "!@#$%", "14000a"})
     void number_format_exception(String input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> InputView.lottoPaymentInput(input))
@@ -39,6 +39,15 @@ public class InputViewTest {
     @ParameterizedTest(name = "{displayName} : {0}")
     @ValueSource(strings = {"1400", "1001", "1234", "1100"})
     void different_unit_exception(String input) {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> InputView.lottoPaymentInput(input))
+                .withMessage("올바른 입력 값이 아닙니다. 다시 입력해 주세요.");
+    }
+    
+    @DisplayName("0원 입력 시 예외 던지기")
+    @ParameterizedTest(name = "{displayName} : {0}")
+    @ValueSource(strings = {"0", "0000"})
+    void zero_input_exception(String input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> InputView.lottoPaymentInput(input))
                 .withMessage("올바른 입력 값이 아닙니다. 다시 입력해 주세요.");
