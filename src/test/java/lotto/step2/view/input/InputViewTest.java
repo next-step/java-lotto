@@ -108,4 +108,12 @@ public class InputViewTest {
                 .isThrownBy(() -> InputView.winningLottoNumbersInput("1, 2, 3, 4, -5, 6"))
                 .withMessage("올바른 입력 값이 아닙니다. 다시 입력해 주세요.");
     }
+    
+    @Test
+    @DisplayName("지난 주 당첨 번호 - 0 입력 시 예외 던지기")
+    void winner_lotto_numbers_input_zero_exception() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> InputView.winningLottoNumbersInput("1, 2, 0, 4, 5, 6"))
+                .withMessage("올바른 입력 값이 아닙니다. 다시 입력해 주세요.");
+    }
 }
