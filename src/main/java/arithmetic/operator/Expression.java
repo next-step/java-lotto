@@ -62,7 +62,7 @@ public class Expression {
     private List<Operation> operations(List<String> operations) {
         List<Operation> result = new ArrayList<>();
         for (String operation : operations) {
-            result.add(OperationFactory.getInstance(operation));
+            result.add(Operator.of(operation).getOperation());
         }
         return result;
     }

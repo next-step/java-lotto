@@ -1,6 +1,6 @@
 package arithmetic.operator;
 
-import static arithmetic.operator.OperationFactory.*;
+import static arithmetic.operator.Operator.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.stream.Stream;
@@ -59,10 +59,10 @@ class ExpressionTest {
 
     private static Stream<Arguments> expectedOperations() {
         return Stream.of(
-                Arguments.arguments("1+2", new Operation[] { ADDITION }),
-                Arguments.arguments("4 - 4*1", new Operation[] { SUBTRACTION, MULTIPLICATION }),
-                Arguments.arguments("2 / 1 + 3*4", new Operation[] { DIVISION, ADDITION, MULTIPLICATION }),
-                Arguments.arguments("1 +2 * 3*4/5", new Operation[] { ADDITION, MULTIPLICATION, MULTIPLICATION, DIVISION })
+                Arguments.arguments("1+2", new Operation[] { ADDITION.getOperation() }),
+                Arguments.arguments("4 - 4*1", new Operation[] { SUBTRACTION.getOperation(), MULTIPLICATION.getOperation() }),
+                Arguments.arguments("2 / 1 + 3*4", new Operation[] { DIVISION.getOperation(), ADDITION.getOperation(), MULTIPLICATION.getOperation() }),
+                Arguments.arguments("1 +2 * 3*4/5", new Operation[] { ADDITION.getOperation(), MULTIPLICATION.getOperation(), MULTIPLICATION.getOperation(), DIVISION.getOperation() })
         );
     }
 }

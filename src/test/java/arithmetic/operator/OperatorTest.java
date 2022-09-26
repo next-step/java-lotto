@@ -1,6 +1,5 @@
 package arithmetic.operator;
 
-import static arithmetic.operator.OperationFactory.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.stream.Stream;
@@ -12,29 +11,29 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class OperationFactoryTest {
+class OperatorTest {
     @ParameterizedTest
     @MethodSource("expectedInstance")
-    void getInstance(String operation, Operation expected) {
-        assertThat(OperationFactory.getInstance(operation)).isEqualTo(expected);
+    void of(String operation, Operator expected) {
+        assertThat(Operator.of(operation)).isEqualTo(expected);
     }
 
     @DisplayName(" +, -, *, / 이외의 연산자를 입력하면 예외를 발생시킨다")
     @ParameterizedTest
     @NullSource
     @ValueSource(strings = { "**", "a" })
-    void getInstance_when_unknown_operation(String operation) {
+    void of_when_unknown_operation(String operation) {
         assertThatThrownBy(() -> {
-            OperationFactory.getInstance(operation);
+            Operator.of(operation);
         }).isInstanceOf(UnsupportedOperationException.class).hasMessageMatching("Operator not supported.");
     }
 
     private static Stream<Arguments> expectedInstance() {
         return Stream.of(
-                Arguments.arguments("+", ADDITION),
-                Arguments.arguments("-", SUBTRACTION),
-                Arguments.arguments("*", MULTIPLICATION),
-                Arguments.arguments("/", DIVISION)
+                Arguments.arguments("+", Operator.ADDITION),
+                Arguments.arguments("-", Operator.SUBTRACTION),
+                Arguments.arguments("*", Operator.MULTIPLICATION),
+                Arguments.arguments("/", Operator.DIVISION)
         );
     }
 }
