@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-public class OperatorTest {
+public class OperatorTypeTest {
     @Test
     void add() {
         int result = OperatorType.ADD.operate(10, 20);
