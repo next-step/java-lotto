@@ -9,10 +9,9 @@ public class StringCalculator {
     private static final String DEFAULT_DELIMITER = " ";
 
     public static Operand calculate(String input){
-        String[] splitedInput = input.split(DEFAULT_DELIMITER);
         Deque<Operand> operandStack = new ArrayDeque<>();
         Stack<Operator> operatorStack = new Stack<>();
-        for (String param : splitedInput) {
+        for (String param :  input.split(DEFAULT_DELIMITER)) {
             if (Operator.isOperator(param)){
                 operatorStack.add(Operator.getOperator(param));
             }else{
