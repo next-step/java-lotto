@@ -8,7 +8,7 @@ public class StringCalculatorTest {
 
     @Test
     void add(){
-        Integer sum = StringCalculator.add("11 + 4");
+        int sum = StringCalculator.add("11 + 4");
         assertThat(sum).isEqualTo(15);
     }
 
@@ -16,5 +16,11 @@ public class StringCalculatorTest {
     void minus(){
         int minus = StringCalculator.minus("11 - 4 - 3");
         assertThat(minus).isEqualTo(4);
+    }
+
+    @Test
+    void multiply(){
+        int multiply = StringCalculator.multiply("11 * 5");
+        assertThat(multiply).isEqualTo(55);
     }
 }
