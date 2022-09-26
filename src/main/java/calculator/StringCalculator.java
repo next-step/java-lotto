@@ -2,7 +2,6 @@ package calculator;
 
 import calculator.type.Operator;
 
-import java.util.Queue;
 import java.util.StringTokenizer;
 
 import static calculator.type.Operator.ADD;
@@ -15,13 +14,16 @@ public class StringCalculator {
     private StringTokenizer tokenizer;
 
     public int calculate(String input) {
+        setTokenizer(input);
+        return operate(DEFAULT_OPERATOR_TYPE, DEFAULT_VALUE);
+    }
+
+    private void setTokenizer(String input) {
         try {
             tokenizer = new StringTokenizer(input);
         } catch (Exception e) {
             throw new IllegalArgumentException(INVALID_INPUT_MESSAGE);
         }
-
-        return operate(DEFAULT_OPERATOR_TYPE, DEFAULT_VALUE);
     }
 
     private int operate(String operator, int result) {
@@ -32,12 +34,21 @@ public class StringCalculator {
         String token = tokenizer.nextToken();
         Operator supportedOperator = Operator.findOperator(operator);
 
-        try {
+        if (isNumber(token)) {
             result = supportedOperator.operate(result, Integer.parseInt(token));
             return operate(operator, result);
-        } catch (NumberFormatException e) {
-            return operate(token, result);
         }
+
+        return operate(token, result);
+    }
+
+    private boolean isNumber(String number) {
+        try {
+            Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 
     private boolean hasNoMoreTokens() {
