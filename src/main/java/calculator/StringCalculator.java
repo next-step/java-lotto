@@ -1,14 +1,12 @@
 package calculator;
 
-import calculator.type.Operator;
+import calculator.type.OperatorType;
 
 import java.util.StringTokenizer;
 
-import static calculator.type.Operator.ADD;
-
 public class StringCalculator {
     private static final String INVALID_INPUT_MESSAGE = "수식이 올바르지 않습니다.";
-    private static final String DEFAULT_OPERATOR_TYPE = ADD;
+    private static final String DEFAULT_OPERATOR_TYPE = OperatorType.ADD.getOperator();
     private static final int DEFAULT_VALUE = 0;
 
     private StringTokenizer tokenizer;
@@ -32,7 +30,7 @@ public class StringCalculator {
         }
 
         String token = tokenizer.nextToken();
-        Operator supportedOperator = Operator.findOperator(operator);
+        OperatorType supportedOperator = OperatorType.findOperator(operator);
 
         if (isNumber(token)) {
             result = supportedOperator.operate(result, Integer.parseInt(token));

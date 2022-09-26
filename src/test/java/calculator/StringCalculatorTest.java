@@ -1,6 +1,5 @@
  package calculator;
 
-import calculator.type.Divide;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,12 +21,6 @@ import static org.assertj.core.api.Assertions.*;
         int result = calculator.calculate(input);
 
         assertThat(result).isEqualTo(expected);
-    }
-
-    @DisplayName("0으로 나누면 예외 발생")
-    @Test
-    void divideZero() {
-        assertThatIllegalArgumentException().isThrownBy(() -> new Divide().operate(10, 0));
     }
 
     @DisplayName("지원하지 않는 연산자 입력 시 예외 발생")
