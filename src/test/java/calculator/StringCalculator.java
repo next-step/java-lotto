@@ -1,28 +1,37 @@
 package calculator;
 
-import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Stack;
 
 public class StringCalculator {
 
     private static final String DEFAULT_DELIMITER = " ";
+    private static final int MIN_CALCULABLE_OPERAND_NUMBER = 2;
 
     public static Operand calculate(String input){
-        Deque<Operand> operandStack = new ArrayDeque<>();
-        Stack<Operator> operatorStack = new Stack<>();
-        for (String param :  input.split(DEFAULT_DELIMITER)) {
-            if (Operator.isOperator(param)){
-                operatorStack.add(Operator.getOperator(param));
-            }else{
-                operandStack.add(new Operand(param));
-            }
-            if (operandStack.size() == 2){
-                Operator operator = operatorStack.pop();
-                operandStack.add(operator.operation.apply(operandStack.pollFirst(), operandStack.pollFirst()));
-            }
+        Operands operands = new Operands();
+        Operators operators = new Operators();
+        for (String param : input.split(DEFAULT_DELIMITER)) {
+            addCollectionByParamType(operands, operators, param);
+            calculate(operands, operators);
         }
-        return operandStack.pop();
+        return operands.getOperand();
+    }
+
+    private static void calculate(Operands operands, Operators operators) {
+        if(!operands.isCalculable()){
+            return;
+        }
+        Operator operator = operators.getOperator();
+        operands.add(operator.operation.apply(operands.getOperand(),operands.getOperand()));
+    }
+
+    private static void addCollectionByParamType(Operands operands , Operators operators , String param) {
+        if (Operator.isOperator(param)){
+            operators.add(Operator.getOperator(param));
+            return;
+        }
+        operands.add(new Operand(param));
     }
 
 }
