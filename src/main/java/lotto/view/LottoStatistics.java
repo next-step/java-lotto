@@ -1,25 +1,24 @@
 package lotto.view;
 
-import java.util.List;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 
 public class LottoStatistics {
+    private static final int THREE_MATCH = 3;
+    private static final int FOUR_MATCH = 4;
+    private static final int FIVE_MATCH = 5;
+    private static final int SIX_MATCH = 6;
 
-    private List<Integer> matchCounts;
+    private Lottos lottos;
+    private Lotto winLotto;
 
-    public LottoStatistics(List<Integer> matchCounts) {
-        this.matchCounts = matchCounts;
+
+    public LottoStatistics(Lottos lottos, Lotto winLotto) {
+        this.lottos = lottos;
+        this.winLotto = winLotto;
     }
 
-    public void getStatistics() {
-        System.out.println("3개 일치 (5000원)- " + getCount(3) + "개");
-        System.out.println("4개 일치 (50000원)- " + getCount(4) + "개");
-        System.out.println("5개 일치 (1500000원)- " + getCount(5) + "개");
-        System.out.println("6개 일치 (2000000000원)-" + getCount(6) + "개");
-    }
-
-    private int getCount(int count) {
-        return (int) matchCounts.stream()
-                .filter(i -> i == count)
-                .count();
+    public double benefit() {
+        return 0;
     }
 }

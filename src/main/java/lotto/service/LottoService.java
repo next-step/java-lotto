@@ -5,9 +5,6 @@ import lotto.domain.Lottos;
 import lotto.view.LottoResult;
 import lotto.view.LottoStatistics;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class LottoService {
     private Lottos lottos;
 
@@ -25,18 +22,8 @@ public class LottoService {
         return money / Lotto.PRICE;
     }
 
-
     public LottoStatistics lottoStatistics(String winningNumber) {
-        return new LottoStatistics(getMatchCounts(winningNumber));
-    }
-
-    private List<Integer> getMatchCounts(String winningNumber) {
-        Lotto winLotto = createLotto(winningNumber);
-
-        return lottos.values()
-                .stream()
-                .map(lotto -> lotto.matchCount(winLotto))
-                .collect(Collectors.toList());
+        return new LottoStatistics(lottos, createLotto(winningNumber));
     }
 
     private static Lotto createLotto(String lottoNumbers) {

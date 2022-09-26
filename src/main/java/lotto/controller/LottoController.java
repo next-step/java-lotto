@@ -18,6 +18,7 @@ public class LottoController {
 
         String inputWinningNumber = InputView.inputWinningNumber();
         LottoStatistics lottoStatistics = lottoService.lottoStatistics(inputWinningNumber);
-        lottoStatistics.getStatistics();
+
+        ResultView.printLottoStatistics(lottoStatistics);
     }
 }
