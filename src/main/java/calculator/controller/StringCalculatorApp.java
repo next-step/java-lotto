@@ -1,4 +1,7 @@
-package calculator;
+package calculator.controller;
+
+import calculator.StringCalculator;
+import calculator.model.Operand;
 
 import java.util.Scanner;
 
@@ -12,7 +15,6 @@ public class StringCalculatorApp {
             throw e;
         }
     }
-
     private static void printResult(Operand result){
         System.out.println(result.getOperand());
     }

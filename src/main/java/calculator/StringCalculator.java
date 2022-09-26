@@ -1,5 +1,10 @@
 package calculator;
 
+import calculator.model.Operand;
+import calculator.model.Operands;
+import calculator.model.Operator;
+import calculator.model.Operators;
+
 public class StringCalculator {
 
     private static final String DEFAULT_DELIMITER = " ";
