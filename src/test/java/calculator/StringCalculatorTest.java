@@ -1,33 +1,23 @@
 package calculator;
 
 import calculator.model.Operand;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringCalculatorTest {
-
-    @Test
-    void shouldPlus(){
-        Assertions.assertThat(StringCalculator.calculate("1 + 2")).isEqualTo(new Operand("3"));
+    @ParameterizedTest
+    @CsvFileSource(resources = "/testcase.csv")
+    void shouldCalculate(String input , String expectedResult){
+        assertThat(StringCalculator.calculate(input)).isEqualTo(new Operand(expectedResult));
     }
 
     @Test
-    void shouldMinus(){
-        Assertions.assertThat(StringCalculator.calculate("2 - 1")).isEqualTo(new Operand("1"));
-    }
-
-    @Test
-    void shouldMultiply(){
-        Assertions.assertThat(StringCalculator.calculate("2 * 1")).isEqualTo(new Operand("2"));
-    }
-
-    @Test
-    void shouldDivide(){
-        Assertions.assertThat(StringCalculator.calculate("2 / 1")).isEqualTo(new Operand("2"));
-    }
-
-    @Test
-    void shouldCalculate(){
-        Assertions.assertThat(StringCalculator.calculate("1 + 2 - 4 * 10 / 3")).isEqualTo(new Operand("-3"));
+    void shouldThrowException_whenInvalidInput(){
+        assertThatThrownBy(()->StringCalculator.calculate("1 1 1 * 3 + 4")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(()->StringCalculator.calculate("+ 1 + 1 * 3 + 4")).isInstanceOf(IllegalArgumentException.class);
     }
 }

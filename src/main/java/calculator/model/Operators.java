@@ -18,6 +18,9 @@ public class Operators {
     }
 
     public Operator getOperator() {
+        if (this.operators.isEmpty()){
+            throw new IllegalArgumentException("invalid operator number");
+        }
         return this.operators.pop();
     }
 }

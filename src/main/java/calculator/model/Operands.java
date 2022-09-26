@@ -14,7 +14,7 @@ public class Operands {
     }
 
     public void add(Operand operand) {
-        if (this.operands.size() > CALCULATE_SIZE) {
+        if (this.operands.size() >= CALCULATE_SIZE) {
             throw new IllegalArgumentException("invalid operator number");
         }
         this.operands.add(operand);
@@ -25,6 +25,9 @@ public class Operands {
     }
 
     public Operand getOperand() {
+        if (this.operands.isEmpty()){
+            throw new IllegalArgumentException("invalid operator number");
+        }
         return this.operands.pollFirst();
     }
 }
