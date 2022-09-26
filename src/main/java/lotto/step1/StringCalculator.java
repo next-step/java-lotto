@@ -24,8 +24,7 @@ public class StringCalculator {
     
     public int calculate(String formula) throws IllegalArgumentException {
         checkAllException(formula);
-        String[] split = getSplit(formula);
-        return rotationCalculate(getNumbers(split), getSymbols(split));
+        return rotationCalculate(getNumbers(getSplit(formula)), getSymbols(getSplit(formula)));
     }
     
     private void checkAllException(String formula) throws IllegalArgumentException {
@@ -55,17 +54,25 @@ public class StringCalculator {
     
     private char[] getSymbols(String[] split) {
         return IntStream.range(0, split.length)
-                .filter(index -> index % 2 == 1)
+                .filter(this::isOdd)
                 .mapToObj(index -> split[index])
                 .collect(Collectors.joining())
                 .toCharArray();
     }
     
+    private boolean isOdd(int index) {
+        return index % 2 == 1;
+    }
+    
     private int[] getNumbers(String[] split) {
         return IntStream.range(0, split.length)
-                .filter(index -> index % 2 == 0)
+                .filter(this::isEven)
                 .map(index -> Integer.parseInt(split[index]))
                 .toArray();
+    }
+    
+    private boolean isEven(int index) {
+        return index % 2 == 0;
     }
     
     private String[] getSplit(String formula) {
