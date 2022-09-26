@@ -12,7 +12,7 @@ public class Operators {
 
     public void add(Operator operator){
         if (!this.operators.isEmpty()){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("invalid operator number");
         }
         this.operators.push(operator);
     }
