@@ -22,8 +22,7 @@ public class StringCalculator {
         if(!operands.isCalculable()){
             return;
         }
-        Operator operator = operators.getOperator();
-        operands.add(operator.operation.apply(operands.getOperand(),operands.getOperand()));
+        operands.add(operators.getOperator().operation.apply(operands.getOperand(),operands.getOperand()));
     }
 
     private static void addCollectionByParamType(Operands operands , Operators operators , String param) {
