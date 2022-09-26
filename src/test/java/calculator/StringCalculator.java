@@ -6,8 +6,10 @@ import java.util.Stack;
 
 public class StringCalculator {
 
+    private static final String DEFAULT_DELIMITER = " ";
+
     public static int calculate(String input){
-        String[] splitedInput = input.split(" ");
+        String[] splitedInput = input.split(DEFAULT_DELIMITER);
         Deque<Integer> operandStack = new ArrayDeque<>();
         Stack<Operator> operatorStack = new Stack<>();
         for (String param : splitedInput) {
