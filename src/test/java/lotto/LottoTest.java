@@ -13,7 +13,7 @@ class LottoTest {
 
     @DisplayName("로또는 6개의 번호를 가진다.")
     @Test
-    void createLottos() {
+    void createLotto() {
         List<LottoNumber> numberLottoNumbers = List.of(new LottoNumber(1),
                 new LottoNumber(2),
                 new LottoNumber(3),
@@ -36,10 +36,12 @@ class LottoTest {
         assertThatThrownBy(() -> new Lotto(numberLottoNumbers)).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("로또를 자동으로 생성한다.")
+    @DisplayName("6개 번호를 가진 로또를 자동으로 생성한다.")
     @Test
     void createAuto() {
+        List<LottoNumber> lottoNumbers = Lotto.create().lottoNumbers();
 
+        assertThat(lottoNumbers).hasSize(6);
     }
 
     @DisplayName("로또 끼리 비교해 몇개가 일치하는지 알 수 있다.")

@@ -1,4 +1,0 @@
-package lotto;
-
-class LottoFactoryTest {
-}

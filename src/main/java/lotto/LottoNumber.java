@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class LottoNumber {
@@ -7,7 +9,15 @@ public class LottoNumber {
     public static final int MAX = 45;
     private static final String LOTTO_NUMBER_EXCEPTION_MESSAGE = "로또 번호는 1 이상이어야 합니다.";
 
-    private int number;
+    public static final List<LottoNumber> LOTTO_NUMBERS = new ArrayList<>();
+
+    static {
+        for (int num = MIN; num <= MAX; num++) {
+            LOTTO_NUMBERS.add(new LottoNumber(num));
+        }
+    }
+
+    private final int number;
 
     public LottoNumber(int number) {
         checkRange(number);
