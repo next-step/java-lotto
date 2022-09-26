@@ -7,30 +7,31 @@ public class Operand {
     private final int operand;
 
     public Operand(String operand) {
-        try{
+        try {
             this.operand = Integer.valueOf(operand);
-        }catch (NumberFormatException e){
-            throw new IllegalArgumentException("operand must be integer",e);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("operand must be integer", e);
         }
     }
-    private Operand(int operand){
+
+    private Operand(int operand) {
         this.operand = operand;
     }
 
     public Operand plus(Operand input) {
-        return new Operand(this.operand+input.operand);
+        return new Operand(this.operand + input.operand);
     }
 
     public Operand minus(Operand input) {
-        return new Operand(this.operand-input.operand);
+        return new Operand(this.operand - input.operand);
     }
 
     public Operand multiply(Operand input) {
-        return new Operand(this.operand* input.operand);
+        return new Operand(this.operand * input.operand);
     }
 
     public Operand divide(Operand input) {
-        return new Operand(this.operand/ input.operand);
+        return new Operand(this.operand / input.operand);
     }
 
     public int getOperand() {

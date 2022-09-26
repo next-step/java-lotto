@@ -8,14 +8,15 @@ import java.util.Scanner;
 public class StringCalculatorApp {
 
     public static void main(String[] args) {
-        try(Scanner sc = new Scanner(System.in)){
+        try (Scanner sc = new Scanner(System.in)) {
             printResult(StringCalculator.calculate(sc.next()));
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println("invalid input");
             throw e;
         }
     }
-    private static void printResult(Operand result){
+
+    private static void printResult(Operand result) {
         System.out.println(result.getOperand());
     }
 }

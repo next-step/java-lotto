@@ -9,7 +9,7 @@ public class StringCalculator {
 
     private static final String DEFAULT_DELIMITER = " ";
 
-    public static Operand calculate(String input){
+    public static Operand calculate(String input) {
         Operands operands = new Operands();
         Operators operators = new Operators();
         for (String param : input.split(DEFAULT_DELIMITER)) {
@@ -20,18 +20,17 @@ public class StringCalculator {
     }
 
     private static void calculate(Operands operands, Operators operators) {
-        if(!operands.isCalculable()){
+        if (!operands.isCalculable()) {
             return;
         }
-        operands.add(operators.getOperator().operation.apply(operands.getOperand(),operands.getOperand()));
+        operands.add(operators.getOperator().operation.apply(operands.getOperand(), operands.getOperand()));
     }
 
-    private static void separateParam(Operands operands , Operators operators , String param) {
-        if (Operator.isOperator(param)){
+    private static void separateParam(Operands operands, Operators operators, String param) {
+        if (Operator.isOperator(param)) {
             operators.add(Operator.getOperator(param));
             return;
         }
         operands.add(new Operand(param));
     }
-
 }

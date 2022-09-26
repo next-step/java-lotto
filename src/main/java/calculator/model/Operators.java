@@ -10,8 +10,8 @@ public class Operators {
         this.operators = new Stack<>();
     }
 
-    public void add(Operator operator){
-        if (!this.operators.isEmpty()){
+    public void add(Operator operator) {
+        if (!this.operators.isEmpty()) {
             throw new IllegalArgumentException("invalid operator number");
         }
         this.operators.push(operator);
