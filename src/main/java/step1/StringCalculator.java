@@ -1,71 +1,41 @@
 package step1;
 
+import step1.operator.Operator;
+import step1.operator.OperatorFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class StringCalculator {
 
-    public static int add(String text) {
-        String[] addParameters = text.split(" ");
+    public static int calculate(String text) {
+        String[] parameters = text.split(" ");
 
         List<Integer> numbers = new ArrayList<>();
+        List<String> operators = new ArrayList<>();
 
-        for (int i = 0; i < addParameters.length; i++) {
-            isNumeric(addParameters[i], numbers);
+        for (int i = 0; i < parameters.length; i++) {
+            isNumeric(parameters[i], numbers, operators);
         }
 
-        return numbers.stream()
-                .reduce(0, Integer::sum);
-    }
+        int result = 0;
 
-    public static int minus(String text) {
-        String[] minusParameters = text.split(" ");
-
-        List<Integer> numbers = new ArrayList<>();
-
-        for (int i = 0; i < minusParameters.length; i++) {
-            isNumeric(minusParameters[i], numbers);
+        for (int i = 0; i < operators.size(); i++) {
+            Operator operator = OperatorFactory.createOperator(operators.get(i));
+            result = operator.calculate(numbers.get(i), numbers.get(i+1));
+            numbers.set(i+1, result);
         }
 
-        return numbers.stream()
-                .reduce((a, b) -> a - b)
-                .get().intValue();
+        return result;
     }
 
-    public static int multiply(String text) {
-        String[] minusParameters = text.split(" ");
-
-        List<Integer> numbers = new ArrayList<>();
-
-        for (int i = 0; i < minusParameters.length; i++) {
-            isNumeric(minusParameters[i], numbers);
-        }
-
-        return numbers.stream()
-                .reduce((a, b) -> a * b)
-                .get().intValue();
-    }
-
-    public static int divide(String text) {
-        String[] minusParameters = text.split(" ");
-
-        List<Integer> numbers = new ArrayList<>();
-
-        for (int i = 0; i < minusParameters.length; i++) {
-            isNumeric(minusParameters[i], numbers);
-        }
-
-        return numbers.stream()
-                .reduce((a, b) -> a / b)
-                .get().intValue();
-    }
-
-    private static boolean isNumeric(String addParameter, List<Integer> numbers){
+    private static boolean isNumeric(String operand, List<Integer> numbers, List<String> operator){
         try {
-            int number = Integer.parseInt(addParameter);
+            int number = Integer.parseInt(operand);
             numbers.add(number);
             return true;
         } catch (NumberFormatException numberFormatException) {
+            operator.add(operand);
             return false;
         }
     }
