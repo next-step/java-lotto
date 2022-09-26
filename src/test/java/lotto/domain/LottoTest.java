@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,6 +42,19 @@ class LottoTest {
         List<LottoNumber> lottoNumbers = Lotto.create().lottoNumbers();
 
         assertThat(lottoNumbers).hasSize(6);
+    }
+
+    @DisplayName("로또를 생성하면 번호는 정렬되어있다.")
+    @Test
+    void sort() {
+        Lotto lotto = new Lotto(List.of(new LottoNumber(20),
+                new LottoNumber(10),
+                new LottoNumber(1),
+                new LottoNumber(30),
+                new LottoNumber(5),
+                new LottoNumber(40)));
+
+        assertThat(lotto.lottoNumbers()).containsExactly(new LottoNumber(1), new LottoNumber(5), new LottoNumber(10), new LottoNumber(20), new LottoNumber(30), new LottoNumber(40));
     }
 
     @DisplayName("로또 끼리 비교해 몇개가 일치하는지 알 수 있다.")
