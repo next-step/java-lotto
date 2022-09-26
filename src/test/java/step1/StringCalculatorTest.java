@@ -23,4 +23,10 @@ public class StringCalculatorTest {
         int multiply = StringCalculator.multiply("11 * 5");
         assertThat(multiply).isEqualTo(55);
     }
+
+    @Test
+    void divide(){
+        int divide = StringCalculator.divide("10 / 5");
+        assertThat(divide).isEqualTo(2);
+    }
 }

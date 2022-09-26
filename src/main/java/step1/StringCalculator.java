@@ -46,6 +46,20 @@ public class StringCalculator {
                 .get().intValue();
     }
 
+    public static int divide(String text) {
+        String[] minusParameters = text.split(" ");
+
+        List<Integer> numbers = new ArrayList<>();
+
+        for (int i = 0; i < minusParameters.length; i++) {
+            isNumeric(minusParameters[i], numbers);
+        }
+
+        return numbers.stream()
+                .reduce((a, b) -> a / b)
+                .get().intValue();
+    }
+
     private static boolean isNumeric(String addParameter, List<Integer> numbers){
         try {
             int number = Integer.parseInt(addParameter);
