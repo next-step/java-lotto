@@ -24,7 +24,7 @@ public class StringCalculator {
             if (operandStack.size() == 2){
                 String operator = operatorStack.pop();
                 if (operator.equals(PLUS_OPERATOR)){
-                    operandStack.push(operandStack.pollFirst() + operandStack.pollFirst());
+                    operandStack.push(plus(operandStack.pollFirst() , operandStack.pollFirst()));
                 }else if (operator.equals(MINUS_OPERATOR)){
                     operandStack.push(operandStack.pollFirst() - operandStack.pollFirst());
                 }else if (operator.equals(MULTIPLY_OPERATOR)){
@@ -36,4 +36,10 @@ public class StringCalculator {
         }
         return operandStack.pop();
     }
+
+    private static int plus(int x , int y){
+        return x+y;
+    }
+
+
 }
