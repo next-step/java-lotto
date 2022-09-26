@@ -13,7 +13,7 @@ public class StringCalculatorApp {
         } catch (IllegalArgumentException e) {
             System.out.println("invalid input");
             throw e;
-        } catch (ArithmeticException e){
+        } catch (ArithmeticException e) {
             System.out.println("zero cannot be used as divisor");
             throw new IllegalArgumentException(e);
         }

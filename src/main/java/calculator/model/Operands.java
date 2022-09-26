@@ -25,7 +25,7 @@ public class Operands {
     }
 
     public Operand getOperand() {
-        if (this.operands.isEmpty()){
+        if (this.operands.isEmpty()) {
             throw new IllegalArgumentException("invalid operator number");
         }
         return this.operands.pollFirst();
