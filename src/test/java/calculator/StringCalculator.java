@@ -28,7 +28,7 @@ public class StringCalculator {
                 }else if (operator.equals(MINUS_OPERATOR)){
                     operandStack.push(minus(operandStack.pollFirst() , operandStack.pollFirst()));
                 }else if (operator.equals(MULTIPLY_OPERATOR)){
-                    operandStack.push(operandStack.pollFirst() * operandStack.pollFirst());
+                    operandStack.push(multiply(operandStack.pollFirst(),operandStack.pollFirst()));
                 }else if (operator.equals(DIVIDE_OPERATOR)){
                     operandStack.push(operandStack.pollFirst() / operandStack.pollFirst());
                 }
@@ -43,6 +43,10 @@ public class StringCalculator {
 
     private static int minus(int x , int y ){
         return x-y;
+    }
+
+    private static int multiply(int x , int y){
+        return x*y;
     }
 
 
