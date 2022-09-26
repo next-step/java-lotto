@@ -5,15 +5,15 @@ import java.util.function.BinaryOperator;
 
 public enum Operator{
 
-    PLUS("+",(x,y)->x+y),
-    MINUS("-",(x,y)->x-y),
-    MULTIPLY("*",(x,y)->x*y),
-    DIVIDE("/",(x,y)->x/y)
+    PLUS("+",(x,y)->x.plus(y)),
+    MINUS("-",(x,y)->x.minus(y)),
+    MULTIPLY("*",(x,y)->x.multiply(y)),
+    DIVIDE("/",(x,y)->x.divide(y))
     ;
 
     private final String symbol;
-    public final BinaryOperator<Integer> operation;
-    Operator(String symbol , BinaryOperator<Integer> operation) {
+    public final BinaryOperator<Operand> operation;
+    Operator(String symbol , BinaryOperator<Operand> operation) {
         this.symbol = symbol;
         this.operation = operation;
     }
