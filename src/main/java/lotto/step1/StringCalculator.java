@@ -46,10 +46,8 @@ public class StringCalculator {
     }
     
     private int rotationCalculate(int[] numbers, char[] symbols) throws IllegalArgumentException {
-        for (int index = 0; index < symbols.length; index++) {
-            numbers[index + 1] = ARITHMETIC_OPERATION.get(symbols[index]).apply(numbers[index], numbers[index + 1]);
-        }
-        return numbers[numbers.length - 1];
+        return IntStream.range(0, symbols.length)
+                .reduce(numbers[0], (calculateResult, index) -> ARITHMETIC_OPERATION.get(symbols[index]).apply(calculateResult, numbers[index + 1]));
     }
     
     private char[] getSymbols(String[] split) {
