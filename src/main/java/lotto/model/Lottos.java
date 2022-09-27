@@ -17,6 +17,10 @@ public class Lottos {
         }
     }
 
+    public Integer getReward(Lotto winningNumber){
+        return this.lottos.stream().map((lotto)-> MatchedNumber.getReward(lotto.getMatchedCount(winningNumber))).reduce(Integer::sum).orElse(0);
+    }
+
     public List<Lotto> getLottos() {
         return lottos;
     }

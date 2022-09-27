@@ -3,9 +3,7 @@ package lotto.service;
 import lotto.model.Lotto;
 import lotto.model.Lottos;
 
-public class ProfitStrategy {
+public interface ProfitStrategy {
 
-    float calculate(Lottos lottos , Lotto lotto){
-        return 0;
-    }
+    float calculate(Integer spendMoney , Integer rewardMoney);
 }

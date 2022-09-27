@@ -21,8 +21,8 @@ public class Lotto {
         return lotto;
     }
 
-    public long getMatchedCount(Lotto lotto){
-        return IntStream.range(0,this.checkedTable.length).filter((idx)->isMatched(lotto,idx)).count();
+    public Integer getMatchedCount(Lotto lotto){
+        return IntStream.range(0,this.checkedTable.length).filter((idx)->isMatched(lotto,idx)).reduce(Integer::sum).orElse(0);
     }
 
     private boolean isMatched(Lotto lotto, int index) {
