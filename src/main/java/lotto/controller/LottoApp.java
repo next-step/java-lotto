@@ -26,6 +26,7 @@ public class LottoApp {
             OutputView.printProfit(profitStrategy.calculate(money, lottos.getWinningMoney(winningLotto)));
         } catch (IllegalArgumentException e) {
             System.out.println("유효하지 않은 입력값입니다.");
+            throw e;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
