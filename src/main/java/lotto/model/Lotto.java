@@ -22,7 +22,7 @@ public class Lotto {
     }
 
     public Integer getMatchedCount(Lotto lotto){
-        return IntStream.range(0,this.checkedTable.length).filter((idx)->isMatched(lotto,idx)).reduce(Integer::sum).orElse(0);
+       return Long.valueOf(IntStream.range(0,this.checkedTable.length).filter((idx)->isMatched(lotto,idx)).count()).intValue();
     }
 
     private boolean isMatched(Lotto lotto, int index) {
