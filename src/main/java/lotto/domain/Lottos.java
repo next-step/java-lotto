@@ -11,7 +11,12 @@ public class Lottos {
     public static Lottos create(int quantity) {
         return new Lottos(quantity);
     }
+
     public Lottos(int quantity) {
+        if (quantity == 0) {
+            throw new IllegalArgumentException("0개 생성은 불가능합니다.");
+        }
+
         IntStream.range(0, quantity)
                 .forEach(i -> values.add(Lotto.create()));
     }

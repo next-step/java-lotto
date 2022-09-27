@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class LottoNumberTest {
@@ -22,7 +21,7 @@ public class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {0, -1, 46, 47})
     void createLottoWhenInputNumberLessThanOne(int input) {
-        assertThatThrownBy(() -> new LottoNumber(input)).isInstanceOf(IllegalArgumentException.class);
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(input));
     }
 
     @DisplayName("로또 번호 끼리 비교할 수 있다.")

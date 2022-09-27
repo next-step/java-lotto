@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 class LottoTest {
@@ -33,7 +32,7 @@ class LottoTest {
                 new LottoNumber(4),
                 new LottoNumber(5));
 
-        assertThatThrownBy(() -> new Lotto(numberLottoNumbers)).isInstanceOf(IllegalArgumentException.class);
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(numberLottoNumbers));
     }
 
     @DisplayName("6개 번호를 가진 로또를 자동으로 생성한다.")
@@ -54,7 +53,13 @@ class LottoTest {
                 new LottoNumber(5),
                 new LottoNumber(40)));
 
-        assertThat(lotto.lottoNumbers()).containsExactly(new LottoNumber(1), new LottoNumber(5), new LottoNumber(10), new LottoNumber(20), new LottoNumber(30), new LottoNumber(40));
+        List<LottoNumber> expected = List.of(new LottoNumber(1),
+                new LottoNumber(5),
+                new LottoNumber(10),
+                new LottoNumber(20),
+                new LottoNumber(30),
+                new LottoNumber(40));
+        assertThat(lotto.lottoNumbers()).isEqualTo(expected);
     }
 
     @DisplayName("로또 끼리 비교해 몇개가 일치하는지 알 수 있다.")
