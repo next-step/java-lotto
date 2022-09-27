@@ -10,7 +10,7 @@ import java.util.Random;
 public class RandomNumberPicker implements LottoNumberPicker {
 
     private final Random random = new Random();
-    private final int MAX_BOUND_NUM = 100;
+
 
     private Integer pickOne() {
         return random.nextInt(MAX_BOUND_NUM);

@@ -6,7 +6,7 @@ import lotto.service.LottoNumberPicker;
 
 public class LottoStore {
 
-    private final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
 
     private final LottoNumberPicker lottoNumberPicker;
 
