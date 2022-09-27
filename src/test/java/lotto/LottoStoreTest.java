@@ -12,7 +12,7 @@ public class LottoStoreTest {
     @Test
     void shouldBuyLotto(){
         LottoStore store = new LottoStore();
-        assertThat(store.buy(14000)).isEqualTo(14);
+        assertThat(store.getLottoNum(14000)).isEqualTo(14);
     }
 
     @Test
