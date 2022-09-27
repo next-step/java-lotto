@@ -1,5 +1,6 @@
  package calculator;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -9,7 +10,12 @@ import static org.assertj.core.api.Assertions.*;
 
  public class StringCalculatorTest {
 
-    StringCalculator calculator = new StringCalculator();;
+     StringCalculator calculator;
+
+     @BeforeEach
+     void setUp() {
+         calculator = new StringCalculator();
+     }
 
     @ParameterizedTest
     @CsvSource(value = {"1=1",
