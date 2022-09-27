@@ -17,13 +17,13 @@ public class LottoStoreTest {
     @Test
     void shouldGetLotto(){
         LottoStore store = new LottoStore(()->List.of(1,2,3,4,5,6));
-        assertThat(store.getLotto().getLotto().size()).isEqualTo(6L);
+        assertThat(store.buy(14000).getLottos().size()).isEqualTo(14L);
     }
 
     @Test
     void shouldReturnLottoMatchedCount(){
         LottoStore store = new LottoStore(()->List.of(1,2,3,4,5,6));
-        Lotto lotto = store.getLotto();
+        Lotto lotto = store.buy(14000).getLottos().get(0);
         assertThat(store.getMatchedCount(lotto, List.of(1,2,3,4,5,6))).isEqualTo(6);
     }
 }

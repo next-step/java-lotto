@@ -11,17 +11,12 @@ public class Lotto {
     public Lotto(List<Integer> lottoNum) {
         this.lotto = lottoNum;
     }
-
-    public Lotto() {
-        Random random = new Random();
-        this.lotto = new ArrayList<>();
-        for(int i = 0 ; i < 6 ; i++){
-            int num = random.nextInt(100);
-            this.lotto.add(num);
-        }
-    }
-
     public List<Integer> getLotto() {
         return lotto;
     }
+
+    public long getMatchedCount(List<Integer> input){
+        return input.stream().filter((num)->this.lotto.contains(num)).count();
+    }
+
 }

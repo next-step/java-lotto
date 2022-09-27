@@ -22,13 +22,4 @@ public class LottoStore {
         return input / LOTTO_PRICE;
     }
 
-    public Lotto getLotto() {
-        return new Lotto();
-    }
-
-    public long getMatchedCount(Lotto lotto, List<Integer> input) {
-        List<Integer> x = lotto.getLotto();
-        return input.stream().filter((num)->x.contains(num)).count();
-
-    }
 }

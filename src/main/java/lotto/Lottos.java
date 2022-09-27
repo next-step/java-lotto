@@ -16,4 +16,8 @@ public class Lottos {
             this.lottos.add(new Lotto(lotto));
         }
     }
+
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
 }
