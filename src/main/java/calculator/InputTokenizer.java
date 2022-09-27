@@ -1,6 +1,6 @@
 package calculator;
 
-import calculator.type.OperatorType;
+import calculator.type.Operator;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -36,10 +36,10 @@ public class InputTokenizer {
                 .collect(Collectors.toCollection(LinkedList::new));
     }
 
-    public Queue<OperatorType> operators() {
+    public Queue<Operator> operators() {
         return Stream.of(values)
                 .filter(token -> !isNumber(token))
-                .map(OperatorType::findOperator)
+                .map(Operator::findOperator)
                 .collect(Collectors.toCollection(LinkedList::new));
     }
 

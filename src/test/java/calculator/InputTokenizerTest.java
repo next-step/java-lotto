@@ -1,12 +1,10 @@
 package calculator;
 
-import calculator.type.OperatorType;
+import calculator.type.Operator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -31,6 +29,6 @@ class InputTokenizerTest {
     @Test
     void splitOperator() {
         InputTokenizer inputTokenizer = new InputTokenizer("1 + 2 + 3 / 4 * 5");
-        assertThat(inputTokenizer.operators()).containsExactly(OperatorType.ADD, OperatorType.ADD, OperatorType.DIVIDE, OperatorType.MULTIPLY);
+        assertThat(inputTokenizer.operators()).containsExactly(Operator.ADD, Operator.ADD, Operator.DIVIDE, Operator.MULTIPLY);
     }
 }
