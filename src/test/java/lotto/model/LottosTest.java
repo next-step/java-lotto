@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 
+import static org.assertj.core.api.Assertions.*;
+
 class LottosTest {
 
     @Test
@@ -16,7 +18,7 @@ class LottosTest {
 
         Integer winningMoney = lottos.getWinningMoney(new Lotto(List.of(1, 2, 3, 99, 99, 99)));
 
-        Assertions.assertThat(winningMoney).isEqualTo(MatchNumber.THREE.getMoney() * lottoNumber);
+        assertThat(winningMoney).isEqualTo(MatchNumber.THREE.getMoney() * lottoNumber);
     }
 
     @Test
@@ -26,7 +28,7 @@ class LottosTest {
 
         Map<MatchNumber, Long> matchNumbers = lottos.getMatchNumbers(new Lotto(List.of(1, 2, 3, 99, 99, 99)));
 
-        Assertions.assertThat(matchNumbers.get(MatchNumber.THREE)).isEqualTo(lottoNumber);
+        assertThat(matchNumbers.get(MatchNumber.THREE)).isEqualTo(lottoNumber);
     }
 
 

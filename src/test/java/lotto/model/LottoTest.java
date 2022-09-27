@@ -5,13 +5,14 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoTest {
 
     @Test
     void shouldValidateLotto() {
-        Assertions.assertThatThrownBy(() -> new Lotto(List.of(1, 1, 1, 1, 1, 1, 1))).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lotto(List.of(1, 1, 1, 1, 1, 1, 1))).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
