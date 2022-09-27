@@ -2,8 +2,12 @@ package lotto.service;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.type.MatchType;
 import lotto.view.LottoResult;
 import lotto.view.LottoStatistics;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoService {
     private Lottos lottos;
@@ -23,7 +27,15 @@ public class LottoService {
     }
 
     public LottoStatistics lottoStatistics(String winningNumber) {
-        return new LottoStatistics(lottos, createLotto(winningNumber));
+        Lotto winLotto = createLotto(winningNumber);
+
+        List<Integer> matchCounts = lottos.values()
+                .stream()
+                .map(lotto -> lotto.matchCount(winLotto))
+                .filter(count -> count >= MatchType.THREE.matchCount())
+                .collect(Collectors.toList());
+
+        return new LottoStatistics(lottos.values().size(), matchCounts);
     }
 
     private static Lotto createLotto(String lottoNumbers) {

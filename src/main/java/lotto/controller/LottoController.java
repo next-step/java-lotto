@@ -11,7 +11,6 @@ public class LottoController {
 
     public void start() {
         int purchaseAmount = Integer.parseInt(InputView.inputPurchaseAmount());
-
         LottoResult result = lottoService.buyLotto(purchaseAmount);
 
         ResultView.printLottoResult(result);
