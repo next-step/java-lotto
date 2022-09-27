@@ -3,25 +3,20 @@ package lotto.service.impl;
 import lotto.service.LottoNumberPicker;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 public class RandomNumberPicker implements LottoNumberPicker {
 
-    private final Random random = new Random();
-
-
-    private Integer pickOne() {
-        return random.nextInt(MAX_BOUND_NUM);
-    }
+    private static final int MAX_BOUND_NUM = 100;
+    private final List<Integer> source = IntStream.range(0, MAX_BOUND_NUM).boxed().collect(Collectors.toList());
 
     @Override
     public List<Integer> pick() {
-        List<Integer> lottoNum = new ArrayList<>();
-        for (int i = 0; i < LOTTO_LENGTH; i++) {
-            lottoNum.add(pickOne());
-        }
-        return lottoNum;
+        Collections.shuffle(this.source);
+        return new ArrayList<>(this.source.subList(0,LottoNumberPicker.LOTTO_LENGTH));
     }
 }

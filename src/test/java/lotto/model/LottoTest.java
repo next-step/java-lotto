@@ -15,14 +15,9 @@ class LottoTest {
     }
 
     @Test
-    void shouldReturnMatchedCount_whenOnlyUniqueNumberExist() {
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.getMatchedCount(new Lotto(List.of(1, 2, 3, 4, 8, 9)))).isEqualTo(4);
-    }
-
-    @Test
-    void shouldReturnMatchedCount_whenDuplicateNumberExist() {
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.getMatchedCount(new Lotto(List.of(1, 2, 3, 4, 4, 9)))).isEqualTo(4);
+    void shouldReturnMatchedCount() {
+        assertThat(new Lotto(List.of(1, 2, 3, 4, 5, 6)).getMatchedCount(new Lotto(List.of(1, 2, 3, 4, 5, 6)))).isEqualTo(6);
+        assertThat(new Lotto(List.of(1, 2, 3, 4, 5, 6)).getMatchedCount(new Lotto(List.of(1, 2, 3, 4, 5, 7)))).isEqualTo(5);
+        assertThat(new Lotto(List.of(1, 2, 3, 4,99,99)).getMatchedCount(new Lotto(List.of(1, 2, 3, 4, 8, 9)))).isEqualTo(4);
     }
 }
