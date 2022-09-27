@@ -1,9 +1,8 @@
 package lotto;
 
 
+import lotto.model.Lottos;
 import lotto.service.LottoNumberPicker;
-
-import java.util.List;
 
 public class LottoStore {
 

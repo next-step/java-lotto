@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.model.Lotto;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -20,10 +21,5 @@ public class LottoStoreTest {
         assertThat(store.buy(14000).getLottos().size()).isEqualTo(14L);
     }
 
-    @Test
-    void shouldReturnLottoMatchedCount(){
-        LottoStore store = new LottoStore(()->List.of(1,2,3,4,5,6));
-        Lotto lotto = store.buy(14000).getLottos().get(0);
-        assertThat(store.getMatchedCount(lotto, List.of(1,2,3,4,5,6))).isEqualTo(6);
-    }
+
 }
