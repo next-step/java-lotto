@@ -25,16 +25,19 @@ public class LottoApp {
             ProfitStrategy profitStrategy = getProfitStrategy();
             OutputView.printProfit(profitStrategy.calculate(money, lottos.getWinningMoney(winningLotto)));
         } catch (IllegalArgumentException e) {
-            System.out.println("Invalid Input");
+            System.out.println("유효하지 않은 입력값입니다.");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private static Lotto getWinningLottoFromUser(BufferedReader br) throws IOException {
-        InputView.printWinningNumberQst();
-        return new Lotto(Arrays.stream(br.readLine().split(InputView.DEFAULT_WINNNING_NUMBER_SEPARATOR)).map((num) -> Integer.valueOf(num.trim()))
-                .collect(Collectors.toList()));
+    private static Integer getMoneyFromUser(BufferedReader br) throws IOException {
+        InputView.printMoneyQst();
+        int money = Integer.parseInt(br.readLine().trim());
+        if (money <= 0) {
+            throw new IllegalArgumentException("돈은 0 또는 음수일수 없습니다.");
+        }
+        return money;
     }
 
     private static Lottos getLottos(Integer money) {
@@ -44,9 +47,10 @@ public class LottoApp {
         return lottos;
     }
 
-    private static Integer getMoneyFromUser(BufferedReader br) throws IOException {
-        InputView.printMoneyQst();
-        return Integer.parseInt(br.readLine().trim());
+    private static Lotto getWinningLottoFromUser(BufferedReader br) throws IOException {
+        InputView.printWinningNumberQst();
+        return new Lotto(Arrays.stream(br.readLine().split(InputView.DEFAULT_WINNNING_NUMBER_SEPARATOR)).map((num) -> Integer.valueOf(num.trim()))
+                .collect(Collectors.toList()));
     }
 
     private static ProfitStrategy getProfitStrategy() {
