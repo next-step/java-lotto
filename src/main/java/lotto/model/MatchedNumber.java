@@ -11,13 +11,13 @@ public enum MatchedNumber {
     SIX(6,2000000000)
     ;
 
-    private final Integer money;
-
     private final Integer count;
 
+    private final Integer money;
+
     MatchedNumber(Integer money, Integer count) {
-        this.money = money;
         this.count = count;
+        this.money = money;
     }
 
     public static Integer getReward(Integer value){
