@@ -11,6 +11,9 @@ public class Lotto {
 
     private final boolean[] checkedTable;
     public Lotto(List<Integer> lottoNum) {
+        if (lottoNum.size() != LottoNumberPicker.LOTTO_LENGTH){
+            throw new IllegalArgumentException("유효하지 않은 로또 숫자입니다.");
+        }
         this.lotto = lottoNum;
         this.checkedTable = new boolean[LottoNumberPicker.MAX_BOUND_NUM];
         for (Integer param : lottoNum) {

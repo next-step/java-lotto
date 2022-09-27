@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.model.Lotto;
+import lotto.service.LottoNumberPicker;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -11,15 +12,12 @@ public class LottoStoreTest {
 
     @Test
     void shouldBuyLotto(){
-        LottoStore store = new LottoStore(()->List.of(1,2,3,4,5,6));
-        assertThat(store.getLottoNum(14000)).isEqualTo(14);
+        LottoStore store = new LottoStore(getLottoNumberPicker());
+        assertThat(store.buy(14000).getSize()).isEqualTo(14);
     }
 
-    @Test
-    void shouldGetLotto(){
-        LottoStore store = new LottoStore(()->List.of(1,2,3,4,5,6));
-        assertThat(store.buy(14000).getLottos().size()).isEqualTo(14L);
+    private LottoNumberPicker getLottoNumberPicker() {
+        return () -> List.of(1, 2, 3, 4, 5, 6);
     }
-
 
 }
