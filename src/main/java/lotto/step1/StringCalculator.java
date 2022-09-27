@@ -9,17 +9,17 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class StringCalculator {
-    private static final Map<Character, BiFunction<Integer, Integer, Integer>> arithmeticOperation;
+    private static final Map<Character, BiFunction<Integer, Integer, Integer>> ARITHMETIC_OPERATION;
     private static final String FORMULA_PATTERN = "[1-9][0-9]*(\\s[+\\-*/]\\s[1-9][0-9]*)*";
     private static final String DELIMITER = " ";
     private static final String NOT_CORRECT_FORMULA_EXCEPTION_MESSAGE = "올바른 계산 식이 아닙니다. 다시 입력해 주세요.";
     
     static {
-        arithmeticOperation = new HashMap<>();
-        arithmeticOperation.put('+', Integer::sum);
-        arithmeticOperation.put('-', (firstNumber, secondNumber) -> firstNumber - secondNumber);
-        arithmeticOperation.put('*', (firstNumber, secondNumber) -> firstNumber * secondNumber);
-        arithmeticOperation.put('/', new DivideStrategy());
+        ARITHMETIC_OPERATION = new HashMap<>();
+        ARITHMETIC_OPERATION.put('+', Integer::sum);
+        ARITHMETIC_OPERATION.put('-', (firstNumber, secondNumber) -> firstNumber - secondNumber);
+        ARITHMETIC_OPERATION.put('*', (firstNumber, secondNumber) -> firstNumber * secondNumber);
+        ARITHMETIC_OPERATION.put('/', new DivideStrategy());
     }
     
     public int calculate(String formula) throws IllegalArgumentException {
@@ -47,7 +47,7 @@ public class StringCalculator {
     
     private int rotationCalculate(int[] numbers, char[] symbols) throws IllegalArgumentException {
         for (int index = 0; index < symbols.length; index++) {
-            numbers[index + 1] = arithmeticOperation.get(symbols[index]).apply(numbers[index], numbers[index + 1]);
+            numbers[index + 1] = ARITHMETIC_OPERATION.get(symbols[index]).apply(numbers[index], numbers[index + 1]);
         }
         return numbers[numbers.length - 1];
     }
