@@ -17,7 +17,7 @@ public class LottoStore {
     public Lottos buy(int money){
         return new Lottos(getLottoNum(money),lottoNumberPicker);
     };
-    public int getLottoNum(int input) {
+    int getLottoNum(int input) {
         return input / LOTTO_PRICE;
     }
 
