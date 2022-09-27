@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.model.Lotto;
 import lotto.service.LottoNumberPicker;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoStoreTest {
 
     @Test
-    void shouldBuyLotto(){
+    void shouldBuyLotto() {
         LottoStore store = new LottoStore(getLottoNumberPicker());
         assertThat(store.buy(14000).getSize()).isEqualTo(14);
     }

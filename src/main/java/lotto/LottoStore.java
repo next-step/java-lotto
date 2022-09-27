@@ -14,9 +14,10 @@ public class LottoStore {
         this.lottoNumberPicker = lottoNumberPicker;
     }
 
-    public Lottos buy(int money){
-        return new Lottos(getLottoNum(money),lottoNumberPicker);
-    };
+    public Lottos buy(int money) {
+        return new Lottos(getLottoNum(money), lottoNumberPicker);
+    }
+
     private int getLottoNum(int input) {
         return input / LOTTO_PRICE;
     }

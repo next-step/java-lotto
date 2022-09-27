@@ -1,17 +1,16 @@
 package lotto.service;
 
 import lotto.service.impl.RelativeProfitStrategy;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProfitStrategyTest {
 
     @Test
-    void shouldCalculateProfit(){
+    void shouldCalculateProfit() {
         ProfitStrategy profitStrategy = new RelativeProfitStrategy();
 
-        assertThat(profitStrategy.calculate(14000, 5000)).isEqualTo((5000f/14000f));
+        assertThat(profitStrategy.calculate(14000, 5000)).isEqualTo((5000f / 14000f));
     }
 }

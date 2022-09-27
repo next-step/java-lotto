@@ -10,17 +10,17 @@ import java.util.Map;
 class LottosTest {
 
     @Test
-    void shouldGetWinningMoney(){
+    void shouldGetWinningMoney() {
         int lottoNumber = 3;
         Lottos lottos = new Lottos(lottoNumber, getNumberPicker());
 
         Integer winningMoney = lottos.getWinningMoney(new Lotto(List.of(1, 2, 3, 99, 99, 99)));
 
-        Assertions.assertThat(winningMoney).isEqualTo(MatchNumber.THREE.getMoney()*lottoNumber);
+        Assertions.assertThat(winningMoney).isEqualTo(MatchNumber.THREE.getMoney() * lottoNumber);
     }
 
     @Test
-    void shouldGetMatchedNumbers(){
+    void shouldGetMatchedNumbers() {
         int lottoNumber = 3;
         Lottos lottos = new Lottos(lottoNumber, getNumberPicker());
 
@@ -30,8 +30,8 @@ class LottosTest {
     }
 
 
-    private LottoNumberPicker getNumberPicker(){
-        return ()->List.of(1,2,3,4,5,6);
+    private LottoNumberPicker getNumberPicker() {
+        return () -> List.of(1, 2, 3, 4, 5, 6);
     }
 
 }

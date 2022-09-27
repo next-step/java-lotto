@@ -19,7 +19,7 @@ public class RandomNumberPicker implements LottoNumberPicker {
     @Override
     public List<Integer> pick() {
         List<Integer> lottoNum = new ArrayList<>();
-        for (int i = 0 ; i < LOTTO_LENGTH ; i++){
+        for (int i = 0; i < LOTTO_LENGTH; i++) {
             lottoNum.add(pickOne());
         }
         return lottoNum;

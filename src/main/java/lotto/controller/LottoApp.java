@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class LottoApp {
     public static void main(String[] args) {
-        try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))){
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             Integer money = getMoneyFromUser(br);
             Lottos lottos = getLottos(money);
 
@@ -24,7 +24,7 @@ public class LottoApp {
 
             ProfitStrategy profitStrategy = getProfitStrategy();
             OutputView.printProfit(profitStrategy.calculate(money, lottos.getWinningMoney(winningLotto)));
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println("Invalid Input");
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -3,12 +3,11 @@ package lotto.model;
 import lotto.service.LottoNumberPicker;
 
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static java.util.function.Function.*;
-import static java.util.stream.Collectors.*;
+import static java.util.function.Function.identity;
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
 
 public class Lottos {
 
@@ -23,13 +22,13 @@ public class Lottos {
         }
     }
 
-    public Map<MatchNumber,Long> getMatchNumbers(Lotto winningNumber) {
+    public Map<MatchNumber, Long> getMatchNumbers(Lotto winningNumber) {
         return getStreamOfMatchNumberWithMoney(winningNumber)
                 .sorted(Comparator.comparing(MatchNumber::getCount))
-                .collect(groupingBy(identity(),LinkedHashMap::new,counting()));
+                .collect(groupingBy(identity(), LinkedHashMap::new, counting()));
     }
 
-    public Integer getWinningMoney(Lotto winningNumber){
+    public Integer getWinningMoney(Lotto winningNumber) {
         return getStreamOfMatchNumberWithMoney(winningNumber)
                 .map(MatchNumber::getMoney).reduce(Integer::sum).orElse(DEFAULT_RETURN_VALUE);
     }

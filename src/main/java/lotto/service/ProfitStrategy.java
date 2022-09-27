@@ -2,5 +2,5 @@ package lotto.service;
 
 public interface ProfitStrategy {
 
-    float calculate(Integer spendMoney , Integer rewardMoney);
+    float calculate(Integer spendMoney, Integer rewardMoney);
 }
