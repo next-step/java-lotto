@@ -22,6 +22,13 @@ public enum MatchNumber {
         this.count = count;
         this.money = money;
     }
+    public Integer getCount() {
+        return count;
+    }
+
+    public Integer getMoney() {
+        return money;
+    }
 
     public static MatchNumber getMatchNumber(Integer count) {
         return Arrays.stream(values()).filter((matchNumber -> matchNumber.count == count)).findFirst().orElseThrow(IllegalArgumentException::new);
@@ -31,11 +38,4 @@ public enum MatchNumber {
         return !(matchNumber.equals(ONE) || matchNumber.equals(TWO) || matchNumber.equals(ZERO));
     }
 
-    public Integer getCount() {
-        return count;
-    }
-
-    public Integer getMoney() {
-        return money;
-    }
 }
