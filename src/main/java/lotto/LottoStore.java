@@ -1,7 +1,7 @@
 package lotto;
 
 
-import java.util.Map;
+import java.util.List;
 
 public class LottoStore {
 
@@ -12,5 +12,15 @@ public class LottoStore {
 
     public Lotto getLotto() {
         return new Lotto();
+    }
+
+    public Lotto getLotto(List<Integer> lottoNum) {
+        return new Lotto(lottoNum);
+    }
+
+    public long getMatchedCount(Lotto lotto, List<Integer> input) {
+        List<Integer> x = lotto.getLotto();
+        return input.stream().filter((num)->x.contains(num)).count();
+
     }
 }
