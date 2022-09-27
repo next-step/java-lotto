@@ -1,24 +1,34 @@
 package lotto.domain.type;
 
-import java.util.function.Function;
+import java.util.HashMap;
+import java.util.Map;
 
 public enum MatchType {
-    THREE(3, 5000, (quantity) -> quantity * 5000),
-    FOUR(4, 50000, (quantity) -> quantity * 50000),
-    FIVE(5, 1500000, (quantity) -> quantity * 1500000),
-    SIX(6, 2000000000, (quantity) -> quantity * 2000000000);
+    THREE(3, 5000),
+    FOUR(4, 50000),
+    FIVE(5, 1500000),
+    SIX(6, 2000000000),
+    ZERO(0, 0);
 
-    private int matchCount;
-    private int reward;
-    private Function<Integer, Integer> prize;
-    MatchType(int matchCount, int reward, Function<Integer, Integer> prize) {
-        this.matchCount = matchCount;
-        this.reward = reward;
-        this.prize = prize;
+    private static final Map<Integer, MatchType> STORE = new HashMap<>();
+
+    static {
+        STORE.put(ZERO.matchCount(), ZERO);
+        STORE.put(THREE.matchCount(), THREE);
+        STORE.put(FOUR.matchCount(), FOUR);
+        STORE.put(FIVE.matchCount(), FIVE);
+        STORE.put(SIX.matchCount(), SIX);
     }
 
-    public int prize(int quantity) {
-        return this.prize.apply(quantity);
+    public static MatchType findType(int matchCount) {
+        return STORE.getOrDefault(matchCount, ZERO);
+    }
+    private int matchCount;
+    private int reward;
+
+    MatchType(int matchCount, int reward) {
+        this.matchCount = matchCount;
+        this.reward = reward;
     }
 
     public int matchCount() {

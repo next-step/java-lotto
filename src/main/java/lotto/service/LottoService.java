@@ -29,13 +29,12 @@ public class LottoService {
     public LottoStatistics lottoStatistics(String winningNumber) {
         Lotto winLotto = createLotto(winningNumber);
 
-        List<Integer> matchCounts = lottos.values()
+        List<MatchType> types = lottos.values()
                 .stream()
-                .map(lotto -> lotto.matchCount(winLotto))
-                .filter(count -> count >= MatchType.THREE.matchCount())
+                .map(lotto -> lotto.rank(winLotto))
                 .collect(Collectors.toList());
 
-        return new LottoStatistics(lottos.values().size(), matchCounts);
+        return new LottoStatistics(types);
     }
 
     private static Lotto createLotto(String lottoNumbers) {

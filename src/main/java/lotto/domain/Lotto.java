@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.type.MatchType;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -46,6 +48,10 @@ public class Lotto {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(LOTTO_NUMBER_EXCEPTION_MESSAGE);
         }
+    }
+
+    public MatchType rank(Lotto other) {
+        return MatchType.findType(matchCount(other));
     }
 
     public int matchCount(Lotto other) {

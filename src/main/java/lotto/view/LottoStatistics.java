@@ -3,22 +3,23 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.type.MatchType;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoStatistics {
 
     private final int quantity;
-    private final Map<Integer, Integer> store = new HashMap<>();
+    private final List<MatchType> store;
 
-    public LottoStatistics(int quantity, List<Integer> matchCounts) {
-        this.quantity = quantity;
-        matchCounts.forEach(i -> store.put(i, store.getOrDefault(i, 0) + 1));
+    public LottoStatistics(List<MatchType> types) {
+        this.quantity = types.size();
+        store = types.stream()
+                .filter(type -> !type.equals(MatchType.ZERO))
+                .collect(Collectors.toList());
     }
 
     public String benefit() {
-        int prize = getAllPrize();
+        long prize = getAllPrize();
         if (prize == 0) {
             return "0";
         }
@@ -26,16 +27,18 @@ public class LottoStatistics {
         return String.format("%.2f", prize / (Lotto.PRICE * (double) quantity));
     }
 
-    private int getAllPrize() {
-        int sum = 0;
-        for (MatchType type : MatchType.values()) {
-            sum += type.prize(getMatchCount(type));
+    private long getAllPrize() {
+        long sum = 0;
+        for (MatchType matchType : store) {
+            sum += matchType.reward();
         }
 
         return sum;
     }
 
     public int getMatchCount(MatchType type) {
-        return store.getOrDefault(type.matchCount(), 0);
+        return (int) store.stream().
+                filter(t -> t.name().equals(type.name()))
+                .count();
     }
 }
