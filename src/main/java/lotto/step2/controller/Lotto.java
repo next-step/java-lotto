@@ -28,22 +28,18 @@ public class Lotto {
         resultPrint(lottoTickets, paymentPrice);
     }
     
-    private List<LottoRank> getLottoRanks(LottoTickets lottoTickets) {
-        return lottoTickets.countOfMatchNumbers(inputWinningLottoNumbers());
-    }
-    
-    private List<LottoNumber> inputWinningLottoNumbers() {
-        return InputView.winningLottoNumbersInput();
-    }
-    
     private void purchasedLottoNumbersPrint(PaymentPrice paymentPrice, LottoTickets lottoTickets) {
         ResultView.purchasedLottoNumbersPrint(lottoTickets, paymentPrice);
     }
     
     private void resultPrint(LottoTickets lottoTickets, PaymentPrice paymentPrice) {
-        List<LottoRank> lottoRanks = getLottoRanks(lottoTickets);
+        List<LottoRank> lottoRanks = lottoTickets.lottoRanks(inputWinningLottoNumbers());
         
         ResultView.winsNumbersPrint(lottoRanks);
         ResultView.yieldPrint(LottoRank.getYield(lottoRanks, paymentPrice.paymentPriceInformation()));
+    }
+    
+    private List<LottoNumber> inputWinningLottoNumbers() {
+        return InputView.winningLottoNumbersInput();
     }
 }

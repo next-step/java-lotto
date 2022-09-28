@@ -11,7 +11,7 @@ public class LottoTickets {
         this.issueLottoTickets = issueLottoTickets;
     }
     
-    public List<LottoRank> countOfMatchNumbers(List<LottoNumber> winningLottoNumbers) {
+    public List<LottoRank> lottoRanks(List<LottoNumber> winningLottoNumbers) {
         return issueLottoTickets.stream()
                 .map(lottoTicket -> lottoTicket.confirmNumberMatch(winningLottoNumbers))
                 .map(LottoRank::valueOf)
