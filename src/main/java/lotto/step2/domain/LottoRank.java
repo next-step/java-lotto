@@ -7,7 +7,7 @@ import java.util.*;
 public enum LottoRank {
     FOURTH(3, 5_000),
     THIRD(4, 50_000),
-    SECONd(5, 1_500_000),
+    SECOND(5, 1_500_000),
     FIRST(6, 2_000_000_000),
     MISS(0, 0);
     
@@ -19,10 +19,10 @@ public enum LottoRank {
         this.reward = reward;
     }
     
-    public static LottoRank convertReferee(Integer countOfMatchNumber) {
+    public static LottoRank valueOf(Integer countOfMatchNumber) {
         return Arrays.stream(values())
                 .filter(lottoRank -> lottoRank.countOfMatchNumber == countOfMatchNumber)
-                .findFirst()
+                .findAny()
                 .orElse(MISS);
     }
     

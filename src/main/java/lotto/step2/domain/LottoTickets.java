@@ -14,7 +14,7 @@ public class LottoTickets {
     public List<LottoRank> countOfMatchNumbers(List<LottoNumber> winningLottoNumbers) {
         return issueLottoTickets.stream()
                 .map(lottoTicket -> lottoTicket.confirmNumberMatch(winningLottoNumbers))
-                .map(LottoRank::convertReferee)
+                .map(LottoRank::valueOf)
                 .collect(Collectors.toList());
     }
     
