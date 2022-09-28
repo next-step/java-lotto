@@ -5,19 +5,16 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoTickets {
-    private static final int WINNING_MIN_MATCH_NUMBER = 3;
-    
     private final List<LottoTicket> issueLottoTickets;
     
     public LottoTickets(List<LottoTicket> issueLottoTickets) {
         this.issueLottoTickets = issueLottoTickets;
     }
     
-    public List<MatchNumber> numberOfMatches(WinningLottoNumbers winningLottoNumbers) {
+    public List<LottoRank> countOfMatchNumbers(List<LottoNumber> winningLottoNumbers) {
         return issueLottoTickets.stream()
-                .mapToInt(lottoTicket -> lottoTicket.confirmNumberMatch(winningLottoNumbers))
-                .filter(matchNumber -> matchNumber >= WINNING_MIN_MATCH_NUMBER)
-                .mapToObj(matchNumber -> MatchNumber.values()[matchNumber - WINNING_MIN_MATCH_NUMBER])
+                .map(lottoTicket -> lottoTicket.confirmNumberMatch(winningLottoNumbers))
+                .map(LottoRank::convertReferee)
                 .collect(Collectors.toList());
     }
     

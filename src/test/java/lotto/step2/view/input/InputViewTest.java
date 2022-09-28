@@ -2,7 +2,6 @@ package lotto.step2.view.input;
 
 import lotto.step2.domain.LottoNumber;
 import lotto.step2.domain.PaymentPrice;
-import lotto.step2.domain.WinningLottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -70,9 +69,9 @@ public class InputViewTest {
     @Test
     @DisplayName("지난 주 당첨 번호 입력 값 반환")
     void winner_lotto_numbers_input() {
-        WinningLottoNumbers winningLottoNumbers = InputView.winningLottoNumbersInput("1, 5, 20, 39, 41, 45");
+        List<LottoNumber> winningLottoNumbers = InputView.winningLottoNumbersInput("1, 5, 20, 39, 41, 45");
         List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(5), new LottoNumber(20), new LottoNumber(39), new LottoNumber(41), new LottoNumber(45));
-        assertThat(winningLottoNumbers).isEqualTo(new WinningLottoNumbers(lottoNumbers));
+        assertThat(winningLottoNumbers).isEqualTo(lottoNumbers);
     }
     
     @NullAndEmptySource

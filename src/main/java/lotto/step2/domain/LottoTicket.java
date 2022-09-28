@@ -11,8 +11,10 @@ public class LottoTicket {
         this.lottoTicket = lottoTicket;
     }
     
-    public int confirmNumberMatch(WinningLottoNumbers winningLottoNumbers) {
-        return winningLottoNumbers.confirmNumberMatch(lottoTicket);
+    public int confirmNumberMatch(List<LottoNumber> winningLottoNumbers) {
+        return (int) winningLottoNumbers.stream()
+                .filter(lottoTicket::contains)
+                .count();
     }
     
     @Override

@@ -2,10 +2,12 @@ package lotto.step2.view.output;
 
 import lotto.step2.domain.*;
 
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.util.Arrays;
+import java.util.List;
 
 public class ResultView {
+    private static final String WINS_NUMBERS_PRINT_FORMAT = "%d개 일치 (%d) - %d개";
     private static final String PURCHASED_LOTTO_NUMBER_PRINT_FORM = "%d개를 구매했습니다.\n";
     private static final String WIN_NUMBERS_PRINT_MESSAGE = "\n당첨 통계";
     private static final String BARS = "---------";
@@ -17,10 +19,13 @@ public class ResultView {
         System.out.println();
     }
     
-    public static void winsNumbersPrint(WinsNumbers winsNumbers) {
+    public static void winsNumbersPrint(List<LottoRank> lottoRanks) {
         System.out.println(WIN_NUMBERS_PRINT_MESSAGE);
         System.out.println(BARS);
-        System.out.println(winsNumbers);
+        Arrays.stream(LottoRank.values())
+                .filter(lottoRank -> lottoRank != LottoRank.MISS)
+                .map(lottoRank -> String.format(WINS_NUMBERS_PRINT_FORMAT, lottoRank.getCountOfMatchNumber(), lottoRank.getReward(), lottoRank.getCountOfLottoRanks(lottoRanks)))
+                .forEach(System.out::println);
     }
     
     public static void yieldPrint(double yield) {

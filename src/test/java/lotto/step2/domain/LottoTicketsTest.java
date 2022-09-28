@@ -36,8 +36,8 @@ class LottoTicketsTest {
     @Test
     @DisplayName("일치 번호 개수 리스트 반환")
     void numberOfMatches() {
-        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(45)));
-        List<MatchNumber> matchNumbers = lottoTickets.numberOfMatches(winningLottoNumbers);
-        assertThat(matchNumbers).isEqualTo(Arrays.asList(MatchNumber.FIVE, MatchNumber.FIVE));
+        List<LottoNumber> winningLottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(45));
+        List<LottoRank> lottoRanks = lottoTickets.countOfMatchNumbers(winningLottoNumbers);
+        assertThat(lottoRanks).isEqualTo(Arrays.asList(LottoRank.SECONd, LottoRank.SECONd));
     }
 }
