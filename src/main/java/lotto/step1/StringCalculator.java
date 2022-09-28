@@ -24,15 +24,16 @@ public class StringCalculator {
     
     public int calculate(String formula) {
         checkAllException(formula);
-        return rotationCalculate(getNumbers(getSplit(formula)), getSymbols(getSplit(formula)));
+        String[] split = split(formula);
+        return rotationCalculate(getNumbers(split), getSymbols(split));
     }
     
     private void checkAllException(String formula) {
-        nullCheck(formula);
+        checkNull(formula);
         checkCorrectFormula(formula);
     }
     
-    private void nullCheck(String formula) {
+    private void checkNull(String formula) {
         if (formula == null) {
             throw new IllegalArgumentException(NOT_CORRECT_FORMULA_EXCEPTION_MESSAGE);
         }
@@ -73,7 +74,7 @@ public class StringCalculator {
         return index % 2 == 0;
     }
     
-    private String[] getSplit(String formula) {
+    private String[] split(String formula) {
         return formula.split(DELIMITER);
     }
 }
