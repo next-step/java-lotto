@@ -11,9 +11,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class LottoApp {
+
+    private static final Logger LOGGER = Logger.getLogger( LottoApp.class.getName() );
     public static void main(String[] args) {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             Integer money = getMoneyFromUser(br);
@@ -26,7 +30,7 @@ public class LottoApp {
             OutputView.printProfit(profitStrategy.calculate(money, lottos.getWinningMoney(winningLotto)));
         } catch (IllegalArgumentException e) {
             System.out.println("유효하지 않은 입력값입니다.");
-            throw e;
+            LOGGER.log(Level.SEVERE , e.getMessage() , e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
