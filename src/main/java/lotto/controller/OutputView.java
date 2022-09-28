@@ -17,7 +17,7 @@ public class OutputView {
         lottos.getLottos().stream().map(Lotto::getLotto).forEach(System.out::println);
     }
 
-    public static void printSummary(Map<MatchNumber, Long> map) {
+    public static void printSummary(Map<MatchNumber, Integer> map) {
         System.out.println(RESULT_MSG);
         map.forEach((k, v) -> System.out.printf(BASE_SUMMARY_FORMAT, k.getCount(), k.getMoney(), v));
     }

@@ -26,7 +26,7 @@ class LottosTest {
         int lottoNumber = 3;
         Lottos lottos = new Lottos(lottoNumber, getNumberPicker());
 
-        Map<MatchNumber, Long> matchNumbers = lottos.getMatchNumbers(new Lotto(List.of(1, 2, 3, 99, 99, 99)));
+        Map<MatchNumber, Integer> matchNumbers = lottos.getMatchNumbers(new Lotto(List.of(1, 2, 3, 99, 99, 99)));
 
         assertThat(matchNumbers.get(MatchNumber.THREE)).isEqualTo(lottoNumber);
     }

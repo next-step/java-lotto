@@ -6,8 +6,8 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import static java.util.function.Function.identity;
-import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.summingInt;
 
 public class Lottos {
 
@@ -22,10 +22,10 @@ public class Lottos {
         }
     }
 
-    public Map<MatchNumber, Long> getMatchNumbers(Lotto winningNumber) {
+    public Map<MatchNumber, Integer> getMatchNumbers(Lotto winningNumber) {
         return getStreamOfMatchNumberWithMoney(winningNumber)
                 .sorted(Comparator.comparing(MatchNumber::getCount))
-                .collect(groupingBy(identity(), LinkedHashMap::new, counting()));
+                .collect(groupingBy(identity(), LinkedHashMap::new, summingInt(e->1)));
     }
 
     public Integer getWinningMoney(Lotto winningNumber) {
