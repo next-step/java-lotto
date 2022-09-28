@@ -22,30 +22,30 @@ public class StringCalculator {
         ARITHMETIC_OPERATION.put('/', new DivideStrategy());
     }
     
-    public int calculate(String formula) throws IllegalArgumentException {
+    public int calculate(String formula) {
         checkAllException(formula);
         return rotationCalculate(getNumbers(getSplit(formula)), getSymbols(getSplit(formula)));
     }
     
-    private void checkAllException(String formula) throws IllegalArgumentException {
+    private void checkAllException(String formula) {
         nullCheck(formula);
         checkCorrectFormula(formula);
     }
     
-    private void nullCheck(String formula) throws IllegalArgumentException {
+    private void nullCheck(String formula) {
         if (formula == null) {
             throw new IllegalArgumentException(NOT_CORRECT_FORMULA_EXCEPTION_MESSAGE);
         }
     }
     
-    private void checkCorrectFormula(String formula) throws IllegalArgumentException {
+    private void checkCorrectFormula(String formula) {
         Matcher matcher = Pattern.compile(FORMULA_PATTERN).matcher(formula);
         if (!matcher.matches()) {
             throw new IllegalArgumentException(NOT_CORRECT_FORMULA_EXCEPTION_MESSAGE);
         }
     }
     
-    private int rotationCalculate(int[] numbers, char[] symbols) throws IllegalArgumentException {
+    private int rotationCalculate(int[] numbers, char[] symbols) {
         return IntStream.range(0, symbols.length)
                 .reduce(numbers[0], (calculateResult, index) -> ARITHMETIC_OPERATION.get(symbols[index]).apply(calculateResult, numbers[index + 1]));
     }
