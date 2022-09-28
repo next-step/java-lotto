@@ -1,6 +1,6 @@
-package step1.operator;
+package step1.calculator;
 
-public class MinusOperator implements Operator {
+public class MinusCalculator implements Calculator {
     @Override
     public int calculate(int firstOperand, int secondOperand) {
         return firstOperand - secondOperand;

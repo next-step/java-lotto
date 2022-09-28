@@ -1,21 +1,21 @@
-package step1.operator;
+package step1.calculator;
 
 public class OperatorFactory {
-    public static Operator createOperator(String operator) {
+    public static Calculator createOperator(String operator) {
         if(operator.equals("+")){
-            return new AddOperator();
+            return new AddCalculator();
         };
 
         if (operator.equals("-")) {
-            return new MinusOperator();
+            return new MinusCalculator();
         };
 
         if (operator.equals("*")) {
-            return new MultiplyOperator();
+            return new MultiplyCalculator();
         };
 
         if (operator.equals("/")) {
-            return new DivideOperator();
+            return new DivideCalculator();
         }
 
         throw new IllegalArgumentException("사칙연산 기호가 아닙니다.");

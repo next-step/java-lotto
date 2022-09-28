@@ -1,15 +1,17 @@
 package step1;
 
-import step1.operator.Operator;
-import step1.operator.OperatorFactory;
+import step1.calculator.Calculator;
+import step1.calculator.OperatorFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StringCalculator {
 
+    private static final String OPERATOR_OPERAND_DELIMITER = " ";
+
     public static int calculate(String text) {
-        String[] parameters = text.split(" ");
+        String[] parameters = text.split(OPERATOR_OPERAND_DELIMITER);
         List<Integer> operands = new ArrayList<>();
         List<String> operators = new ArrayList<>();
 
@@ -33,8 +35,8 @@ public class StringCalculator {
         int result = 0;
 
         for (int i = 0; i < operators.size(); i++) {
-            Operator operator = OperatorFactory.createOperator(operators.get(i));
-            result = operator.calculate(operand.get(i), operand.get(i+1));
+            Calculator calculator = OperatorFactory.createOperator(operators.get(i));
+            result = calculator.calculate(operand.get(i), operand.get(i+1));
             operand.set(i+1, result);
         }
 

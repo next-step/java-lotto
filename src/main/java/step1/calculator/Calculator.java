@@ -1,5 +1,5 @@
-package step1.operator;
+package step1.calculator;
 
-public interface Operator {
+public interface Calculator {
     int calculate(int firstOperand, int secondOperand);
 }
