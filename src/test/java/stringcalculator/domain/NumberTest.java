@@ -61,7 +61,7 @@ class NumberTest {
         Number numberX = new Number(String.valueOf(x));
         Number numberY = new Number(String.valueOf(y));
         //when
-        Number addResult = numberX.substract(numberY);
+        Number addResult = numberX.subtract(numberY);
         //then
         assertThat(addResult.getValue()).isEqualTo(x-y);
     }
@@ -74,7 +74,7 @@ class NumberTest {
         Number numberX = new Number(String.valueOf(x));
         Number numberY = new Number(String.valueOf(y));
         //when
-        Number addResult = numberX.multifly(numberY);
+        Number addResult = numberX.multiply(numberY);
         //then
         assertThat(addResult.getValue()).isEqualTo(x*y);
     }
@@ -86,7 +86,7 @@ class NumberTest {
         Number numberX = new Number(String.valueOf(x));
         Number numberY = new Number(String.valueOf(y));
         //when
-        Number addResult = numberX.divied(numberY);
+        Number addResult = numberX.divide(numberY);
         //then
         assertThat(addResult.getValue()).isEqualTo(x/y);
     }
@@ -98,7 +98,7 @@ class NumberTest {
         Number numberX = new Number(String.valueOf(1));
         Number numberY = new Number(String.valueOf(0));
         //then
-        assertThatThrownBy(() -> numberX.divied(numberY))
+        assertThatThrownBy(() -> numberX.divide(numberY))
                 .isInstanceOf(ArithmeticException.class);
     }
 }

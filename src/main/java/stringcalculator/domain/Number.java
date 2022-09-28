@@ -39,13 +39,13 @@ public class Number {
     public Number add(Number input) {
         return new Number(this.value + input.value);
     }
-    public Number substract(Number input) {
+    public Number subtract(Number input) {
         return new Number(this.value - input.value);
     }
-    public Number multifly(Number input) {
+    public Number multiply(Number input) {
         return new Number(this.value * input.value);
     }
-    public Number divied(Number input) {
+    public Number divide(Number input) {
         return new Number(this.value / input.value);
     }
 
