@@ -60,4 +60,28 @@ class LottoTicketTest {
         LottoRank lottoRank = LottoRank.valueOf(lottoTicket.confirmNumberMatch(winningLottoNumbers));
         assertThat(lottoRank).isEqualTo(LottoRank.FOURTH);
     }
+    
+    @Test
+    @DisplayName("로또 번호 2개 일치 확인")
+    void confirm_two_number_match() {
+        List<LottoNumber> winningLottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(7), new LottoNumber(8), new LottoNumber(9), new LottoNumber(10));
+        LottoRank lottoRank = LottoRank.valueOf(lottoTicket.confirmNumberMatch(winningLottoNumbers));
+        assertThat(lottoRank).isEqualTo(LottoRank.MISS);
+    }
+    
+    @Test
+    @DisplayName("로또 번호 1개 일치 확인")
+    void confirm_one_number_match() {
+        List<LottoNumber> winningLottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(7), new LottoNumber(8), new LottoNumber(9), new LottoNumber(10), new LottoNumber(11));
+        LottoRank lottoRank = LottoRank.valueOf(lottoTicket.confirmNumberMatch(winningLottoNumbers));
+        assertThat(lottoRank).isEqualTo(LottoRank.MISS);
+    }
+    
+    @Test
+    @DisplayName("로또 번호 0개 일치 확인")
+    void confirm_zero_number_match() {
+        List<LottoNumber> winningLottoNumbers = Arrays.asList(new LottoNumber(7), new LottoNumber(8), new LottoNumber(9), new LottoNumber(10), new LottoNumber(11), new LottoNumber(12));
+        LottoRank lottoRank = LottoRank.valueOf(lottoTicket.confirmNumberMatch(winningLottoNumbers));
+        assertThat(lottoRank).isEqualTo(LottoRank.MISS);
+    }
 }

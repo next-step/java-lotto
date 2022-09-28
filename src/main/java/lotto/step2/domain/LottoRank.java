@@ -27,7 +27,7 @@ public enum LottoRank {
     }
     
     public static double getYield(List<LottoRank> lottoRanks, PaymentPriceDTO paymentPriceDTO) {
-        return (double) getTotalReward(lottoRanks) / paymentPriceDTO.getPaymentPrice();
+        return (int)(((double) getTotalReward(lottoRanks) / paymentPriceDTO.getPaymentPrice()) * 100) / 100.0;
     }
     
     public static int getTotalReward(List<LottoRank> lottoRankList) {
