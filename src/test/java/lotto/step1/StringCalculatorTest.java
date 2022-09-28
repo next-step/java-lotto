@@ -119,14 +119,6 @@ public class StringCalculatorTest {
     void arithmetic_calculate_exception() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> stringCalculator.calculate("2 + 3 * 4 / 2 + 100 - 50 / 0 - 2 * 10"))
-                .withMessage(NOT_CORRECT_FORMULA_EXCEPTION_MESSAGE);
-    }
-    
-    @Test
-    @DisplayName("두 자리 이상의 숫자이면서 첫번째 자리수가 0인 경우 예외")
-    void first_place_exception() {
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> stringCalculator.calculate("2 + 3 * 04 / 2 + 100 - 50 / 5 - 2 * 10"))
-                .withMessage(NOT_CORRECT_FORMULA_EXCEPTION_MESSAGE);
+                .withMessage("나눗셈의 분모가 0일 수 없습니다. 다시 입력해주세요.");
     }
 }

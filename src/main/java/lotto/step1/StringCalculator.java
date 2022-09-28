@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 
 public class StringCalculator {
     private static final Map<Character, BiFunction<Integer, Integer, Integer>> ARITHMETIC_OPERATION;
-    private static final String FORMULA_PATTERN = "[1-9][0-9]*(\\s[+\\-*/]\\s[1-9][0-9]*)*";
+    private static final String FORMULA_PATTERN = "[0-9]+(\\s[+\\-*/]\\s[0-9]+)*";
     private static final String DELIMITER = " ";
     private static final String NOT_CORRECT_FORMULA_EXCEPTION_MESSAGE = "올바른 계산 식이 아닙니다. 다시 입력해 주세요.";
     
