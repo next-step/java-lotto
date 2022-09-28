@@ -1,6 +1,7 @@
 package lotto.step1;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.regex.Matcher;
@@ -46,28 +47,27 @@ public class StringCalculator {
         }
     }
     
-    private int rotationCalculate(int[] numbers, char[] symbols) {
-        return IntStream.range(0, symbols.length)
-                .reduce(numbers[0], (calculateResult, index) -> ARITHMETIC_OPERATION.get(symbols[index]).apply(calculateResult, numbers[index + 1]));
+    private int rotationCalculate(List<Integer> numbers, List<Character> symbols) {
+        return IntStream.range(0, symbols.size())
+                .reduce(numbers.get(0), (calculateResult, index) -> ARITHMETIC_OPERATION.get(symbols.get(index)).apply(calculateResult, numbers.get(index + 1)));
     }
     
-    private char[] getSymbols(String[] split) {
+    private List<Character> getSymbols(String[] split) {
         return IntStream.range(0, split.length)
                 .filter(this::isOdd)
-                .mapToObj(index -> split[index])
-                .collect(Collectors.joining())
-                .toCharArray();
+                .mapToObj(index -> split[index].charAt(0))
+                .collect(Collectors.toList());
     }
     
     private boolean isOdd(int index) {
         return index % 2 == 1;
     }
     
-    private int[] getNumbers(String[] split) {
+    private List<Integer> getNumbers(String[] split) {
         return IntStream.range(0, split.length)
                 .filter(this::isEven)
-                .map(index -> Integer.parseInt(split[index]))
-                .toArray();
+                .mapToObj(index -> Integer.parseInt(split[index]))
+                .collect(Collectors.toList());
     }
     
     private boolean isEven(int index) {
