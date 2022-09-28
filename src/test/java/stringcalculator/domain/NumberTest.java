@@ -3,11 +3,11 @@ package stringcalculator.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 class NumberTest {
 
@@ -38,5 +38,67 @@ class NumberTest {
     void normal_number(int input) {
         Number number = new Number(String.valueOf(input));
         assertThat(number.getValue()).isEqualTo(input);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"1,1", "-1,1", "0,0" ,"100,0"})
+    @DisplayName("더하기")
+    void add(int x, int y) {
+        //given
+        Number numberX = new Number(String.valueOf(x));
+        Number numberY = new Number(String.valueOf(y));
+        //when
+        Number addResult = numberX.add(numberY);
+        //then
+        assertThat(addResult.getValue()).isEqualTo(x+y);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"1,1", "1,-1", "-1,-1" ,"-1,1"})
+    @DisplayName("빼기")
+    void substract(int x, int y) {
+        //given
+        Number numberX = new Number(String.valueOf(x));
+        Number numberY = new Number(String.valueOf(y));
+        //when
+        Number addResult = numberX.substract(numberY);
+        //then
+        assertThat(addResult.getValue()).isEqualTo(x-y);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"1,1", "-1,1", "100,0" ,"-1,-1"})
+    @DisplayName("곱하기")
+    void multiply(int x, int y) {
+        //given
+        Number numberX = new Number(String.valueOf(x));
+        Number numberY = new Number(String.valueOf(y));
+        //when
+        Number addResult = numberX.multifly(numberY);
+        //then
+        assertThat(addResult.getValue()).isEqualTo(x*y);
+    }
+    @ParameterizedTest
+    @CsvSource({"1,1", "-1,1", "10,3" ,"1,-1"})
+    @DisplayName("나누기")
+    void divide(int x, int y) {
+        //given
+        Number numberX = new Number(String.valueOf(x));
+        Number numberY = new Number(String.valueOf(y));
+        //when
+        Number addResult = numberX.divied(numberY);
+        //then
+        assertThat(addResult.getValue()).isEqualTo(x/y);
+    }
+
+    @Test
+    @DisplayName("분자가 0일때 나누기 에러")
+    void divide_zero() {
+        //given
+        Number numberX = new Number(String.valueOf(1));
+        Number numberY = new Number(String.valueOf(0));
+        //then
+        assertThatThrownBy(() -> numberX.divied(numberY))
+                .isInstanceOf(ArithmeticException.class);
     }
 }

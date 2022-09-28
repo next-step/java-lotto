@@ -15,6 +15,10 @@ public class Number {
 
     }
 
+    private Number(int value) {
+        this.value = value;
+    }
+
     public int getValue(){
         return this.value;
     }
@@ -31,4 +35,19 @@ public class Number {
     public int hashCode() {
         return Objects.hash(this.value);
     }
+
+    public Number add(Number input) {
+        return new Number(this.value + input.value);
+    }
+    public Number substract(Number input) {
+        return new Number(this.value - input.value);
+    }
+    public Number multifly(Number input) {
+        return new Number(this.value * input.value);
+    }
+    public Number divied(Number input) {
+        return new Number(this.value / input.value);
+    }
+
+
 }
