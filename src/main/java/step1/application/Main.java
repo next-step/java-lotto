@@ -20,15 +20,19 @@ public class Main {
 
         while (numbers.size() != 1) {
             Number pollNumber = numbers.pollNumber();
-            number = Calculator.findBy(operators.operator())
-                .apply(number, pollNumber);
+            number = calculate(number, operators, pollNumber);
         }
-        number = Calculator.findBy(operators.operator())
-            .apply(number, numbers.pollNumber());
+        number = calculate(number, operators, numbers.pollNumber());
 
         OutputView outputView = new OutputView(number);
         outputView.result();
 
 
+    }
+
+    private static Number calculate(Number number, Operators operators, Number numbers) {
+        number = Calculator.findBy(operators.operator())
+            .apply(number, numbers);
+        return number;
     }
 }
