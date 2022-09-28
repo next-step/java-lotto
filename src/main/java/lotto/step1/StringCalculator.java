@@ -1,32 +1,20 @@
 package lotto.step1;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.BiFunction;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class StringCalculator {
-    private static final Map<Character, BiFunction<Integer, Integer, Integer>> ARITHMETIC_OPERATION;
     private static final String FORMULA_PATTERN = "[0-9]+(\\s[+\\-*/]\\s[0-9]+)*";
     private static final String DELIMITER = " ";
     private static final String NOT_CORRECT_FORMULA_EXCEPTION_MESSAGE = "올바른 계산 식이 아닙니다. 다시 입력해 주세요.";
     
-    static {
-        ARITHMETIC_OPERATION = new HashMap<>();
-        ARITHMETIC_OPERATION.put('+', Integer::sum);
-        ARITHMETIC_OPERATION.put('-', (firstNumber, secondNumber) -> firstNumber - secondNumber);
-        ARITHMETIC_OPERATION.put('*', (firstNumber, secondNumber) -> firstNumber * secondNumber);
-        ARITHMETIC_OPERATION.put('/', new DivideStrategy());
-    }
-    
     public int calculate(String formula) {
         checkAllException(formula);
         String[] split = split(formula);
-        return rotationCalculate(getNumbers(split), getSymbols(split));
+        return rotationCalculate(getNumbers(split), getOperation(split));
     }
     
     private void checkAllException(String formula) {
@@ -47,15 +35,16 @@ public class StringCalculator {
         }
     }
     
-    private int rotationCalculate(List<Integer> numbers, List<Character> symbols) {
-        return IntStream.range(0, symbols.size())
-                .reduce(numbers.get(0), (calculateResult, index) -> ARITHMETIC_OPERATION.get(symbols.get(index)).apply(calculateResult, numbers.get(index + 1)));
+    private int rotationCalculate(List<Integer> numbers, List<Operation> operations) {
+        return IntStream.range(0, operations.size())
+                .reduce(numbers.get(0), (calculateResult, index) -> operations.get(index).calculate(calculateResult, numbers.get(index + 1)));
     }
     
-    private List<Character> getSymbols(String[] split) {
+    private List<Operation> getOperation(String[] split) {
         return IntStream.range(0, split.length)
                 .filter(this::isOdd)
                 .mapToObj(index -> split[index].charAt(0))
+                .map(Operation::mappingOperation)
                 .collect(Collectors.toList());
     }
     
