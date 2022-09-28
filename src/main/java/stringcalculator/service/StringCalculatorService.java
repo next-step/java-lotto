@@ -9,9 +9,10 @@ public class StringCalculatorService {
     public int calculate(String[] inputs) {
         Number result = new Number(inputs[0]);
 
-        for (int i = 1; i < inputs.length; i++) {
-            Calculator calculator = Operator.get(inputs[i]);
-            Number number = new Number(inputs[2]);
+        int i = 0;
+        while (i < inputs.length - 1) {
+            Calculator calculator = Operator.get(inputs[++i]);
+            Number number = new Number(inputs[++i]);
             result = calculator.calculate(result, number);
         }
 
