@@ -17,3 +17,9 @@
     * 입출력 클래스 추가
   * 요구 사항
     * 메소드 크기가 최대 10라인을 넘지 않도록
+  * 피드백
+    * try with resources 를 이용해 Scanner 자원 정리
+    * Operator Singleton 관리로 성능 개선
+    * try catch 내부에 if 조건으로 숫자와 연산자를 구분
+    * 구분자 상수 관리
+    * calculate 로직 개선
