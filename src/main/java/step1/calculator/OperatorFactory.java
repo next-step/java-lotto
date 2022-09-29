@@ -1,23 +1,17 @@
 package step1.calculator;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class OperatorFactory {
-    public static Calculator createOperator(String operator) {
-        if(operator.equals("+")){
-            return new AddCalculator();
-        };
+    public static Calculator createCalculator(String operator) {
 
-        if (operator.equals("-")) {
-            return new MinusCalculator();
-        };
+        Map<String, Calculator> calculatorMap = new HashMap<>();
+        calculatorMap.put("+", new AddCalculator());
+        calculatorMap.put("-", new MinusCalculator());
+        calculatorMap.put("*", new MultiplyCalculator());
+        calculatorMap.put("/", new DivideCalculator());
 
-        if (operator.equals("*")) {
-            return new MultiplyCalculator();
-        };
-
-        if (operator.equals("/")) {
-            return new DivideCalculator();
-        }
-
-        throw new IllegalArgumentException("사칙연산 기호가 아닙니다.");
+        return calculatorMap.get(operator);
     }
 }

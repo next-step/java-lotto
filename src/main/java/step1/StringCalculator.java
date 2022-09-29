@@ -35,7 +35,7 @@ public class StringCalculator {
         int result = 0;
 
         for (int i = 0; i < operators.size(); i++) {
-            Calculator calculator = OperatorFactory.createOperator(operators.get(i));
+            Calculator calculator = OperatorFactory.createCalculator(operators.get(i));
             result = calculator.calculate(operand.get(i), operand.get(i+1));
             operand.set(i+1, result);
         }
