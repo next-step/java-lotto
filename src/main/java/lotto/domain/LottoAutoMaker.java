@@ -9,8 +9,7 @@ public class LottoAutoMaker {
 
 
     private static final List<LottoNumber> numbers = IntStream.range(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE + 1)
-            .boxed()
-            .map(LottoNumber::new)
+            .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
 
     private LottoAutoMaker() {
