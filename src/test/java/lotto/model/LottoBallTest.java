@@ -8,6 +8,6 @@ public class LottoBallTest {
 
     @Test
     void shouldValidateLottoBall(){
-        Assertions.assertThatThrownBy(()->new LottoBall(LottoNumberPicker.MAX_BOUND_NUM)).isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThatThrownBy(()->LottoBall.noBonusBall(LottoNumberPicker.MAX_BOUND_NUM)).isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -21,7 +21,7 @@ public class Lotto {
     }
 
     public Integer getMatchedCount(Lotto target) {
-        return Long.valueOf(this.lotto.stream().filter((num)-> target.lotto.contains(num)).count()).intValue();
+        return Long.valueOf(this.lotto.stream().filter((ball)-> target.lotto.contains(ball)).count()).intValue();
     }
 
     public void addBonusBall(LottoBall lottoBall) {

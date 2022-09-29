@@ -54,7 +54,7 @@ public class InputView implements AutoCloseable {
 
     public Lotto getWinningLottoFromUser() throws IOException {
         this.printWinningNumberQst();
-        return new Lotto(Arrays.stream(this.bufferedReader.readLine().split(InputView.DEFAULT_WINNNING_NUMBER_SEPARATOR)).map((num) -> new LottoBall(Integer.valueOf(num.trim())))
+        return new Lotto(Arrays.stream(this.bufferedReader.readLine().split(InputView.DEFAULT_WINNNING_NUMBER_SEPARATOR)).map((num) -> LottoBall.noBonusBall(Integer.valueOf(num.trim())))
                 .collect(Collectors.toList()));
     }
 

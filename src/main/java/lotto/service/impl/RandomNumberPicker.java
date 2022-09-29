@@ -18,6 +18,6 @@ public class RandomNumberPicker implements LottoNumberPicker {
     @Override
     public List<LottoBall> pick() {
         Collections.shuffle(this.source);
-        return this.source.subList(0,LottoNumberPicker.LOTTO_LENGTH).stream().map(LottoBall::new).collect(Collectors.toList());
+        return this.source.subList(0,LottoNumberPicker.LOTTO_LENGTH).stream().map(LottoBall::noBonusBall).collect(Collectors.toList());
     }
 }

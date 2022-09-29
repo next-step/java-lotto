@@ -26,11 +26,11 @@ class LottoTest {
     @Test
     void shouldAddBonusBall(){
         Lotto lotto = getLotto(List.of(1,2,3,4,5,6));
-        lotto.addBonusBall(new LottoBall(7));
+        lotto.addBonusBall(LottoBall.bonusBall(7));
         assertThat(lotto.getLotto().size()).isEqualTo(7);
     }
 
     private Lotto getLotto(List<Integer> lottoBalls){
-        return new Lotto(lottoBalls.stream().map(LottoBall::new).collect(Collectors.toList()));
+        return new Lotto(lottoBalls.stream().map(LottoBall::noBonusBall).collect(Collectors.toList()));
     }
 }

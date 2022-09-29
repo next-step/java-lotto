@@ -34,10 +34,10 @@ class LottosTest {
 
 
     private LottoNumberPicker getNumberPicker() {
-        return () -> List.of(1, 2, 3, 4, 5, 6).stream().map(LottoBall::new).collect(Collectors.toList());
+        return () -> List.of(1, 2, 3, 4, 5, 6).stream().map(LottoBall::noBonusBall).collect(Collectors.toList());
     }
 
     private Lotto getLotto(List<Integer> lottoBalls){
-        return new Lotto(lottoBalls.stream().map(LottoBall::new).collect(Collectors.toList()));
+        return new Lotto(lottoBalls.stream().map(LottoBall::noBonusBall).collect(Collectors.toList()));
     }
 }
