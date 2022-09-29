@@ -18,10 +18,6 @@ public class Number {
         return number;
     }
 
-    public Number calculate(CalculatorPolicy calculatorPolicy) {
-        return calculatorPolicy.calculate(this);
-    }
-
     Number plus(Number number) {
         return new Number(this.number + number.number);
     }
