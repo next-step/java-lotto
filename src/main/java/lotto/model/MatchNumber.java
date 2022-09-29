@@ -60,8 +60,8 @@ public enum MatchNumber implements Comparator<MatchNumber> {
             return x.count - y.count;
         }
         if (x.equals(MatchNumber.SIX_WITH_BONUS_BALL)) {
-            return 1;
+            return -1;
         }
-        return -1;
+        return 1;
     }
 }
