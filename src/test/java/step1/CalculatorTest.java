@@ -39,7 +39,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void 공백이나_입력했을_때() {
+    public void 공백을_입력했을_때() {
         assertThatThrownBy(() -> Calculator.calculator(""))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("입력값은 null이거나 공백일 수 없습니다.");
