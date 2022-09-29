@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.type.MatchType;
+import lotto.domain.type.Match;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,17 +9,17 @@ import java.util.stream.Collectors;
 public class LottoStatistics {
 
     private final int quantity;
-    private final List<MatchType> store;
+    private final List<Match> store;
 
-    public LottoStatistics(List<MatchType> types) {
+    public LottoStatistics(List<Match> types) {
         this.quantity = types.size();
         store = types.stream()
-                .filter(type -> !type.equals(MatchType.ZERO))
+                .filter(Match::hasReward)
                 .collect(Collectors.toList());
     }
 
-    public String benefit() {
-        long prize = getAllPrize();
+    public String profit() {
+        long prize = getAllRewards();
         if (prize == 0) {
             return "0";
         }
@@ -27,16 +27,16 @@ public class LottoStatistics {
         return String.format("%.2f", prize / (Lotto.PRICE * (double) quantity));
     }
 
-    private long getAllPrize() {
+    private long getAllRewards() {
         long sum = 0;
-        for (MatchType matchType : store) {
-            sum += matchType.reward();
+        for (Match match : store) {
+            sum += match.reward();
         }
 
         return sum;
     }
 
-    public int getMatchCount(MatchType type) {
+    public int getMatchCount(Match type) {
         return (int) store.stream().
                 filter(t -> t.name().equals(type.name()))
                 .count();

@@ -9,6 +9,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN = 1;
     public static final int MAX = 45;
     private static final String LOTTO_NUMBER_EXCEPTION_MESSAGE = "로또 번호는 1 이상이어야 합니다.";
+    private static final String INPUT_EXCEPTION_MESSAGE = "숫자만 입력해주세요.";
 
     public static final List<LottoNumber> LOTTO_NUMBERS = new ArrayList<>();
 
@@ -23,7 +24,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         try {
             return new LottoNumber(Integer.parseInt(number.strip()));
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자만 입력해주세요.");
+            throw new IllegalArgumentException(INPUT_EXCEPTION_MESSAGE);
         }
     }
 

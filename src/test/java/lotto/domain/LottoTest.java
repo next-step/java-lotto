@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.type.Match;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -72,13 +73,14 @@ class LottoTest {
                 new LottoNumber(5),
                 new LottoNumber(6)));
 
-        Lotto lottoB = new Lotto(List.of(new LottoNumber(1),
+        Lotto winLotto = new Lotto(List.of(new LottoNumber(1),
                 new LottoNumber(20),
                 new LottoNumber(3),
                 new LottoNumber(40),
                 new LottoNumber(5),
                 new LottoNumber(6)));
 
-        assertThat(lottoA.matchCount(lottoB)).isEqualTo(4);
+        Match type = lottoA.rank(winLotto);
+        assertThat(type.count()).isEqualTo(Match.FOUR.count());
     }
 }

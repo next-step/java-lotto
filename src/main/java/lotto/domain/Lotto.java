@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.type.MatchType;
+import lotto.domain.type.Match;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,8 +50,8 @@ public class Lotto {
         }
     }
 
-    public MatchType rank(Lotto other) {
-        return MatchType.findType(matchCount(other));
+    public Match rank(Lotto other) {
+        return Match.findType(matchCount(other));
     }
 
     public int matchCount(Lotto other) {

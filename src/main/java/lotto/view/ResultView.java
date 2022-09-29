@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.type.MatchType;
+import lotto.domain.type.Match;
 
 public class ResultView {
 
@@ -11,13 +11,13 @@ public class ResultView {
     }
 
     public static void printLottoStatistics(LottoStatistics lottoStatistics) {
-        System.out.println("당첨 통계");
+        System.out.println("%n당첨 통계");
         System.out.println("---------");
 
-        for (MatchType matchType : MatchType.values()) {
-            System.out.printf("%d개 일치 (%d)- %d개%n", matchType.matchCount(), matchType.reward(), lottoStatistics.getMatchCount(matchType));
+        for (Match match : Match.rewardValues()) {
+            System.out.printf("%d개 일치 (%d)- %d개%n", match.count(), match.reward(), lottoStatistics.getMatchCount(match));
         }
 
-        System.out.printf("총 수익률은 %s 입니다.%n", lottoStatistics.benefit());
+        System.out.printf("총 수익률은 %s 입니다.%n", lottoStatistics.profit());
     }
 }

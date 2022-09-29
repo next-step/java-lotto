@@ -2,7 +2,7 @@ package lotto.service;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
-import lotto.domain.type.MatchType;
+import lotto.domain.type.Match;
 import lotto.view.LottoResult;
 import lotto.view.LottoStatistics;
 
@@ -29,7 +29,7 @@ public class LottoService {
     public LottoStatistics lottoStatistics(String winningNumber) {
         Lotto winLotto = createLotto(winningNumber);
 
-        List<MatchType> types = lottos.values()
+        List<Match> types = lottos.values()
                 .stream()
                 .map(lotto -> lotto.rank(winLotto))
                 .collect(Collectors.toList());
