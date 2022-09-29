@@ -22,6 +22,10 @@ public class LottoBall {
         return num;
     }
 
+    public boolean isBonusBall(){
+        return this.isBonusBall;
+    }
+
     public static LottoBall bonusBall(int num){
         return new LottoBall(num,true);
     }

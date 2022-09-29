@@ -14,7 +14,7 @@ public class LottoStoreTest {
     @Test
     void shouldBuyLotto() {
         LottoStore store = new LottoStore(getNumberPicker());
-        assertThat(store.buy(14000).getSize()).isEqualTo(14);
+        assertThat(store.buy(14000).size()).isEqualTo(14);
     }
 
     private LottoNumberPicker getNumberPicker() {

@@ -53,7 +53,7 @@ public class InputView implements AutoCloseable {
 
     public Lottos getLottos(Integer money) {
         Lottos lottos = new LottoStore(new RandomNumberPicker()).buy(money);
-        this.printLottoBuyMsg(lottos.getSize());
+        this.printLottoBuyMsg(lottos.size());
         OutputView.printLottos(lottos);
         return lottos;
     }

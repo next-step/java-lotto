@@ -33,7 +33,7 @@ public class Lottos {
     }
 
     private Stream<MatchNumber> getStreamOfMatchNumberWithMoney(Lotto winningNumber) {
-        return this.lottos.stream().map((lotto) -> MatchNumber.getMatchNumber(lotto.getMatchedCount(winningNumber)))
+        return this.lottos.stream().map((lotto) -> MatchNumber.getMatchNumber(lotto.getDifference(winningNumber)))
                 .filter(MatchNumber::hasMoney);
     }
 
@@ -41,7 +41,7 @@ public class Lottos {
         return lottos;
     }
 
-    public int getSize() {
+    public int size() {
         return this.lottos.size();
     }
 }

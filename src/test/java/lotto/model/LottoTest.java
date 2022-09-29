@@ -17,10 +17,10 @@ class LottoTest {
     }
 
     @Test
-    void shouldReturnMatchedCount() {
-        assertThat(getLotto(List.of(1, 2, 3, 4, 5, 6)).getMatchedCount(getLotto(List.of(1, 2, 3, 4, 5, 6)))).isEqualTo(6);
-        assertThat(getLotto(List.of(1, 2, 3, 4, 5, 6)).getMatchedCount(getLotto(List.of(1, 2, 3, 4, 5, 7)))).isEqualTo(5);
-        assertThat(getLotto(List.of(1, 2, 3, 4,99,99)).getMatchedCount(getLotto(List.of(1, 2, 3, 4, 8, 9)))).isEqualTo(4);
+    void shouldReturnDifference() {
+        assertThat(getLotto(List.of(1, 2, 3, 4, 5, 6)).getDifference(getLotto(List.of(1, 2, 3, 4, 5, 6)))).isEqualTo(getLotto(List.of(6)));
+        assertThat(getLotto(List.of(1, 2, 3, 4, 5, 6)).getDifference(getLotto(List.of(1, 2, 3, 4, 5, 7)))).isEqualTo(getLotto(List.of(5,7)));
+        assertThat(getLotto(List.of(1, 2, 3, 4,99,99)).getDifference(getLotto(List.of(1, 2, 3, 4, 8, 9)))).isEqualTo(getLotto(List.of(4,8,9)));
     }
 
     @Test
