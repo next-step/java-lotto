@@ -4,14 +4,14 @@ import java.util.Objects;
 
 public class LottoNumber {
 
-    private static final int MIN_VALUE = 1;
-    private static final int MAX_VALUE = 45;
+    public static final int MIN_VALUE = 1;
+    public static final int MAX_VALUE = 45;
 
-    private final int number;
+    private final int value;
 
     public LottoNumber(int number) {
         validateLottoNumber(number);
-        this.number = number;
+        this.value = number;
     }
 
     private static void validateLottoNumber(int number) {
@@ -25,11 +25,11 @@ public class LottoNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return number == that.number;
+        return value == that.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number);
+        return Objects.hash(value);
     }
 }
