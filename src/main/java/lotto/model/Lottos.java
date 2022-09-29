@@ -2,7 +2,10 @@ package lotto.model;
 
 import lotto.service.LottoNumberPicker;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import static java.util.function.Function.identity;
@@ -23,8 +26,8 @@ public class Lottos {
 
     public Map<MatchNumber, Integer> getMatchNumbers(Lotto winningNumber) {
         return getStreamOfMatchNumberWithMoney(winningNumber)
-                .sorted(Comparator.comparing(MatchNumber::getCount))
-                .collect(groupingBy(identity(), LinkedHashMap::new, summingInt(e->1)));
+                .sorted(MatchNumber::compareTo)
+                .collect(groupingBy(identity(), LinkedHashMap::new, summingInt(e -> 1)));
     }
 
     public Integer getWinningMoney(Lotto winningNumber) {
@@ -33,7 +36,7 @@ public class Lottos {
     }
 
     private Stream<MatchNumber> getStreamOfMatchNumberWithMoney(Lotto winningNumber) {
-        return this.lottos.stream().map((lotto) -> MatchNumber.getMatchNumber(lotto.getDifference(winningNumber)))
+        return this.lottos.stream().map((lotto) -> MatchNumber.getMatchNumber(winningNumber.getSameLottoBalls(lotto)))
                 .filter(MatchNumber::hasMoney);
     }
 

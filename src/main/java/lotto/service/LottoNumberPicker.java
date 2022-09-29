@@ -1,8 +1,8 @@
 package lotto.service;
 
 
-
 import lotto.model.LottoBall;
+
 import java.util.List;
 
 public interface LottoNumberPicker {

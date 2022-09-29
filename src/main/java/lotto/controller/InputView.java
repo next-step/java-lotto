@@ -36,7 +36,8 @@ public class InputView implements AutoCloseable {
     private void printWinningNumberQst() {
         System.out.println(WINNING_NUMBER_QST);
     }
-    private void printBonusBallQst(){
+
+    private void printBonusBallQst() {
         System.out.println(BONUS_BALL_QST);
     }
 

@@ -1,10 +1,11 @@
 package lotto.model;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public enum MatchNumber {
+public enum MatchNumber implements Comparator<MatchNumber> {
 
 
     ZERO(0, 0),
@@ -12,9 +13,9 @@ public enum MatchNumber {
     TWO(2, 0),
     THREE(3, 5_000),
     FOUR(4, 50_000),
-    FIVE(5, 1500_000),
-    FIVE_WITH_BONUS_BALL(6,30_000_000),
-    SIX(6, 2000_000_000);
+    FIVE(5, 1_500_000),
+    SIX_WITH_BONUS_BALL(6, 30_000_000),
+    SIX(6, 2_000_000_000);
 
     private final Integer count;
 
@@ -24,6 +25,27 @@ public enum MatchNumber {
         this.count = count;
         this.money = money;
     }
+
+    public static MatchNumber getMatchNumber(List<LottoBall> lottoBalls) {
+        List<MatchNumber> matchNumbers = findByCount(lottoBalls);
+        if (isSecondRank(matchNumbers, lottoBalls)) {
+            return MatchNumber.SIX_WITH_BONUS_BALL;
+        }
+        return matchNumbers.stream().filter((matchNumber -> !matchNumber.equals(MatchNumber.SIX_WITH_BONUS_BALL))).findAny().orElseThrow(IllegalStateException::new);
+    }
+
+    private static boolean isSecondRank(List<MatchNumber> matchNumbers, List<LottoBall> lottoBalls) {
+        return matchNumbers.contains(MatchNumber.SIX_WITH_BONUS_BALL) && lottoBalls.stream().anyMatch(LottoBall::isBonusBall);
+    }
+
+    private static List<MatchNumber> findByCount(List<LottoBall> lottoBalls) {
+        return Arrays.stream(values()).filter((balls -> balls.count == lottoBalls.size())).collect(Collectors.toList());
+    }
+
+    public static boolean hasMoney(MatchNumber matchNumber) {
+        return !(matchNumber.equals(ONE) || matchNumber.equals(TWO) || matchNumber.equals(ZERO));
+    }
+
     public Integer getCount() {
         return count;
     }
@@ -32,32 +54,14 @@ public enum MatchNumber {
         return money;
     }
 
-    public static MatchNumber getMatchNumber(Lotto lotto) {
-        List<MatchNumber> matchNumbers = findByCount(lotto);
-        if (isInvalidMatchNumbers(matchNumbers)){
-            throw new IllegalStateException();
+    @Override
+    public int compare(MatchNumber x, MatchNumber y) {
+        if (x.count != y.count) {
+            return x.count - y.count;
         }
-        if (matchNumbers.size() == 1){
-            return matchNumbers.get(0);
+        if (x.equals(MatchNumber.SIX_WITH_BONUS_BALL)) {
+            return 1;
         }
-        return getMatchNumberByBonusBall(lotto, matchNumbers);
+        return -1;
     }
-    private static List<MatchNumber> findByCount(Lotto lotto){
-        return Arrays.stream(values()).filter((balls -> balls.count == lotto.size())).collect(Collectors.toList());
-    }
-
-    private static boolean isInvalidMatchNumbers(List<MatchNumber> matchNumbers) {
-        return matchNumbers.size() >= 3 || matchNumbers.size() <= 0;
-    }
-
-    private static MatchNumber getMatchNumberByBonusBall(Lotto lotto, List<MatchNumber> matchNumbers) {
-        if (matchNumbers.size() == 2 || lotto.hasBonusBall()){
-            return MatchNumber.FIVE_WITH_BONUS_BALL;
-        }
-        return MatchNumber.FIVE;
-    }
-    public static boolean hasMoney(MatchNumber matchNumber) {
-        return !(matchNumber.equals(ONE) || matchNumber.equals(TWO) || matchNumber.equals(ZERO));
-    }
-
 }

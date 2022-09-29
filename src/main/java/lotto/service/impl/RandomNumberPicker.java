@@ -4,7 +4,6 @@ package lotto.service.impl;
 import lotto.model.LottoBall;
 import lotto.service.LottoNumberPicker;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +18,6 @@ public class RandomNumberPicker implements LottoNumberPicker {
     @Override
     public List<LottoBall> pick() {
         Collections.shuffle(this.source);
-        return this.source.subList(0,LottoNumberPicker.LOTTO_LENGTH).stream().map(LottoBall::noBonusBall).collect(Collectors.toList());
+        return this.source.subList(0, LottoNumberPicker.LOTTO_LENGTH).stream().map(LottoBall::noBonusBall).collect(Collectors.toList());
     }
 }

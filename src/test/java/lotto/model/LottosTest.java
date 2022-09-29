@@ -1,14 +1,13 @@
 package lotto.model;
 
 import lotto.service.LottoNumberPicker;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosTest {
 
@@ -37,7 +36,7 @@ class LottosTest {
         return () -> List.of(1, 2, 3, 4, 5, 6).stream().map(LottoBall::noBonusBall).collect(Collectors.toList());
     }
 
-    private Lotto getLotto(List<Integer> lottoBalls){
+    private Lotto getLotto(List<Integer> lottoBalls) {
         return new Lotto(lottoBalls.stream().map(LottoBall::noBonusBall).collect(Collectors.toList()));
     }
 }

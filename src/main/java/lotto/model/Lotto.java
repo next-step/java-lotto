@@ -11,33 +11,26 @@ public class Lotto {
 
 
     public Lotto(List<LottoBall> lottoNum) {
-        if (lottoNum.size() != LottoNumberPicker.LOTTO_LENGTH) {
+        if (lottoNum.size() < LottoNumberPicker.LOTTO_LENGTH) {
             throw new IllegalArgumentException("유효하지 않은 로또 숫자입니다.");
         }
         this.lotto = lottoNum;
-    }
-
-    public Integer getMatchedCount(Lotto target) {
-        return Long.valueOf(this.lotto.stream().filter((num)-> target.lotto.contains(num)).count()).intValue();
     }
 
     public List<LottoBall> getLotto() {
         return lotto;
     }
 
-    public Lotto getDifference(Lotto target) {
-        return new Lotto(this.lotto.stream().filter(target.lotto::contains).collect(Collectors.toList()));
+    public List<LottoBall> getSameLottoBalls(Lotto target) {
+        return this.lotto.stream().filter(target.lotto::contains).collect(Collectors.toList());
     }
 
     public void addBonusBall(LottoBall lottoBall) {
         this.lotto.add(lottoBall);
     }
 
-    public int size(){
+    public int size() {
         return this.lotto.size();
     }
 
-    public boolean hasBonusBall() {
-        return this.lotto.stream().anyMatch(LottoBall::isBonusBall);
-    }
 }

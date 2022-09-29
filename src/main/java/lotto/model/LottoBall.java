@@ -10,28 +10,29 @@ public class LottoBall {
     private final int num;
 
     private final boolean isBonusBall;
-    private LottoBall(int num , boolean isBonusBall) {
-        if (validateLottoNumber(num)){
+
+    private LottoBall(int num, boolean isBonusBall) {
+        if (validateLottoNumber(num)) {
             throw new IllegalArgumentException("유효하지 않은 로또 번호입니다.");
         }
         this.num = num;
         this.isBonusBall = isBonusBall;
     }
 
+    public static LottoBall bonusBall(int num) {
+        return new LottoBall(num, true);
+    }
+
+    public static LottoBall noBonusBall(int num) {
+        return new LottoBall(num, false);
+    }
+
     public int getNum() {
         return num;
     }
 
-    public boolean isBonusBall(){
+    public boolean isBonusBall() {
         return this.isBonusBall;
-    }
-
-    public static LottoBall bonusBall(int num){
-        return new LottoBall(num,true);
-    }
-
-    public static LottoBall noBonusBall(int num){
-        return new LottoBall(num,false);
     }
 
     private boolean validateLottoNumber(int num) {
@@ -40,18 +41,14 @@ public class LottoBall {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         LottoBall lottoBall = (LottoBall) o;
-        return num == lottoBall.num && isBonusBall == lottoBall.isBonusBall;
+        return num == lottoBall.num;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(num, isBonusBall);
+        return Objects.hash(num);
     }
 }
