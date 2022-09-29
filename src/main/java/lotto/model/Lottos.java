@@ -17,8 +17,7 @@ public class Lottos {
     public Lottos(int lottoNum, LottoNumberPicker picker) {
         this.lottos = new ArrayList<>();
         for (int i = 0; i < lottoNum; i++) {
-            List<Integer> lotto = picker.pick();
-            this.lottos.add(new Lotto(lotto));
+            this.lottos.add(new Lotto(picker.pick()));
         }
     }
 
@@ -34,7 +33,7 @@ public class Lottos {
     }
 
     private Stream<MatchNumber> getStreamOfMatchNumberWithMoney(Lotto winningNumber) {
-        return this.lottos.stream().map((lotto) -> MatchNumber.getMatchNumber(lotto.getMatchedCount(winningNumber)))
+        return this.lottos.stream().map((lotto) -> MatchNumber.getMatchNumber(lotto.getDifference(winningNumber)))
                 .filter(MatchNumber::hasMoney);
     }
 
@@ -42,7 +41,7 @@ public class Lottos {
         return lottos;
     }
 
-    public int getSize() {
+    public int size() {
         return this.lottos.size();
     }
 }

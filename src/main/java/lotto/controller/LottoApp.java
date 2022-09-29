@@ -20,6 +20,7 @@ public class LottoApp {
             Lottos lottos = inputView.getLottos(money);
 
             Lotto winningLotto = inputView.getWinningLottoFromUser();
+            winningLotto.addBonusBall(inputView.getBonusBallFromUser());
 
             OutputView.printSummary(lottos.getMatchNumbers(winningLotto));
 
