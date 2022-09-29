@@ -17,8 +17,7 @@ public class Lottos {
     public Lottos(int lottoNum, LottoNumberPicker picker) {
         this.lottos = new ArrayList<>();
         for (int i = 0; i < lottoNum; i++) {
-            List<Integer> lotto = picker.pick();
-            this.lottos.add(new Lotto(lotto));
+            this.lottos.add(new Lotto(picker.pick()));
         }
     }
 

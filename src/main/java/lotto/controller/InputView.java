@@ -3,6 +3,7 @@ package lotto.controller;
 
 import lotto.LottoStore;
 import lotto.model.Lotto;
+import lotto.model.LottoBall;
 import lotto.model.Lottos;
 import lotto.service.impl.RandomNumberPicker;
 
@@ -53,7 +54,7 @@ public class InputView implements AutoCloseable {
 
     public Lotto getWinningLottoFromUser() throws IOException {
         this.printWinningNumberQst();
-        return new Lotto(Arrays.stream(this.bufferedReader.readLine().split(InputView.DEFAULT_WINNNING_NUMBER_SEPARATOR)).map((num) -> Integer.valueOf(num.trim()))
+        return new Lotto(Arrays.stream(this.bufferedReader.readLine().split(InputView.DEFAULT_WINNNING_NUMBER_SEPARATOR)).map((num) -> new LottoBall(Integer.valueOf(num.trim())))
                 .collect(Collectors.toList()));
     }
 
