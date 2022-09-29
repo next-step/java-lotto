@@ -1,11 +1,18 @@
 package step1;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class Calculator {
 
+    public static final String NULL_EXCEPTION = "입력값은 null이거나 공백일 수 없습니다.";
+    public static final String NUMBER_EXCEPTION = "잘못된 숫자입니다.";
+    public static final String OPEATOR_EXCEPTION = "잘못된 사칙연산 기호 입니다.";
+    public static final String SPLIT_TEXT = " ";
+
     public static int calculator(String input) {
-        String[] splitInput = input.split(" ");
+
+        String[] splitInput = validate(input).split(SPLIT_TEXT);
         int result = 0;
 
         for (int i = 1; i < splitInput.length - 1; i += 2) {
@@ -19,6 +26,13 @@ public class Calculator {
         }
 
         return result;
+    }
+
+    private static String validate(String input) {
+        if(input == null || input.isBlank()){
+            throw new IllegalArgumentException(NULL_EXCEPTION);
+        }
+        return input;
     }
 
     private static int caculateResult(int firstNum, int secondNum, String operator) {
@@ -39,13 +53,19 @@ public class Calculator {
         return result;
     }
 
-    private static int checkInt(String input) {
-        return Integer.parseInt(input);
+    private static int checkInt(String input){
+        int result;
+        try{
+            result = Integer.parseInt(input);
+        }catch (Exception e){
+            throw new IllegalArgumentException(NUMBER_EXCEPTION);
+        }
+        return result;
     }
 
     private static String checkOperation(String input) {
-        if (Arrays.asList(OperatorType.values()).contains(input)) {
-            throw new RuntimeException();
+        if (!Arrays.stream(OperatorType.values()).map(it->it.getValue()).collect(Collectors.toList()).contains(input)) {
+            throw new IllegalArgumentException(OPEATOR_EXCEPTION);
         }
         return input;
     }
