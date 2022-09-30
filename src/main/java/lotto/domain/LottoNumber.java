@@ -1,22 +1,12 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN = 1;
     public static final int MAX = 45;
     private static final String LOTTO_NUMBER_EXCEPTION_MESSAGE = "로또 번호는 1 이상이어야 합니다.";
     private static final String INPUT_EXCEPTION_MESSAGE = "숫자만 입력해주세요.";
-
-    public static final List<LottoNumber> LOTTO_NUMBERS = new ArrayList<>();
-
-    static {
-        IntStream.range(MIN, MAX)
-                .forEach(i -> LOTTO_NUMBERS.add(new LottoNumber(i)));
-    }
 
     private final int number;
 
