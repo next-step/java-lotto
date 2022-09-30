@@ -44,7 +44,7 @@ public class StringCalculator {
         return IntStream.range(0, split.length)
                 .filter(this::isOdd)
                 .mapToObj(index -> split[index].charAt(0))
-                .map(Operation::mappingOperation)
+                .map(Operation::from)
                 .collect(Collectors.toList());
     }
     
