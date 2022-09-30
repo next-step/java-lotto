@@ -11,7 +11,7 @@ public class ResultView {
     }
 
     public static void printLottoStatistics(LottoStatisticsResult result) {
-        System.out.println("%n당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("---------");
 
         for (Rank rank : Rank.rewardValues()) {
