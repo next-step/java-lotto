@@ -14,8 +14,23 @@ public class SingleFormula {
         this.nextSingleFormula = nextSingleFormula;
     }
 
-    // 미완
     public int doOperate(int initNumber){
-        return initNumber;
+        int result = initNumber;
+        if(this.operator.equals("+")){
+            result += number;
+        } else if(this.operator.equals("-")){
+            result -= number;
+        } else if(this.operator.equals("*")){
+            result *= number;
+        } else if(this.operator.equals("/")){
+            result /= number;
+        }
+
+        if(nextSingleFormula == null){
+            return result;
+        }
+
+        return nextSingleFormula.doOperate(result);
     }
+
 }
