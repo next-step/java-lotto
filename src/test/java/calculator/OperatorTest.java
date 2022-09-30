@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class OperatorTest {
 
@@ -36,5 +35,13 @@ class OperatorTest {
     })
     void operate(Operator operator, String left, String right, String expected) {
         assertThat(operator.operate(new Number(left), new Number(right))).isEqualTo(new Number(expected));
+    }
+
+    @DisplayName("0으로 나누면 예외가 발생한다.")
+    @Test
+    void divideBy0_exception() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> Operator.DIVIDE.operate(new Number("1"), new Number("0")))
+                .withMessageContaining("0으로 나눌 수 없습니다.");
     }
 }
