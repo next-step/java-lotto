@@ -13,7 +13,7 @@ public class StringCalculator {
     public static int calculate(String text) {
         String[] parameters = text.split(OPERATOR_OPERAND_DELIMITER);
         List<Operand> operands = new ArrayList<>();
-        List<String> operators = new ArrayList<>();
+        List<Operator> operators = new ArrayList<>();
 
         for (int i = 0; i < parameters.length; i++) {
             distinguishOperandAndOperator(parameters[i], operands, operators);
@@ -22,20 +22,20 @@ public class StringCalculator {
         return generateResult(operators, operands);
     }
 
-    private static void distinguishOperandAndOperator(String operand, List<Operand> operands, List<String> operator){
+    private static void distinguishOperandAndOperator(String operand, List<Operand> operands, List<Operator> operators){
         if (Operator.isOperator(operand)) {
-            operator.add(operand);
+            operators.add(Operator.getOperator(operand));
             return;
         }
 
         operands.add(new Operand(operand));
     }
 
-    private static int generateResult(List<String> operators, List<Operand> operand) {
+    private static int generateResult(List<Operator> operators, List<Operand> operand) {
         int result = 0;
 
         for (int i = 0; i < operators.size(); i++) {
-            Calculator calculator = OperatorFactory.createCalculator(operators.get(i));
+            Calculator calculator = OperatorFactory.createCalculator(operators.get(i).getOperator());
             result = calculator.calculate(operand.get(i).getOperand(), operand.get(i+1).getOperand());
             operand.set(i+1, new Operand(String.valueOf(result)));
         }

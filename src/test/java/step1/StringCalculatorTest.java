@@ -52,7 +52,8 @@ public class StringCalculatorTest {
     void operator_exception(){
         assertThatThrownBy(() ->
             StringCalculator.calculate("11 % 4"))
-            .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("사칙연산만 가능합니다.");
     }
 
     @Test
@@ -60,6 +61,7 @@ public class StringCalculatorTest {
     void operand_exception(){
         assertThatThrownBy(() ->
             StringCalculator.calculate(" + 4"))
-            .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("피연산자에는 문자가 올 수 없습니다.");
     }
 }
