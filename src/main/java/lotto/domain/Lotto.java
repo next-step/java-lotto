@@ -30,4 +30,17 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(numbers);
     }
+
+    public Integer matchedCount(Lotto another) {
+        return another.numbers()
+                .stream()
+                .reduce(0, this::incrementIfMatched);
+    }
+
+    private int incrementIfMatched(Integer total, Integer number) {
+        if (numbers.contains(number)) {
+            return total + 1;
+        }
+        return total;
+    }
 }
