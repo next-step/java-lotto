@@ -8,23 +8,25 @@ public class SingleFormulaVo {
     private Integer number;
     private String operator = "+";
 
-    public SingleFormulaVo(){}
-    public SingleFormulaVo(Integer number, String operator){
+    public SingleFormulaVo() {
+    }
+
+    public SingleFormulaVo(Integer number, String operator) {
         this.number = number;
         this.operator = operator;
     }
 
-    public boolean isValid(){
+    public boolean isValid() {
         return this.number != null && this.operator != null;
     }
 
-    public void set(String string){
-        if(isNumber(string)){
+    public void set(String string) {
+        if (isNumber(string)) {
             this.number = Integer.parseInt(string);
             return;
         }
 
-        if(isOperator(string)){
+        if (isOperator(string)) {
             this.operator = string;
             return;
         }
@@ -40,7 +42,7 @@ public class SingleFormulaVo {
         return operator;
     }
 
-    public void reset(){
+    public void reset() {
         this.number = null;
         this.operator = null;
     }
@@ -49,7 +51,7 @@ public class SingleFormulaVo {
         return NUMBER_PATTERN.matcher(string).find();
     }
 
-    private static boolean isOperator(String string){
+    private static boolean isOperator(String string) {
         return string != null && (string.equals("+") || string.equals("-") || string.equals("*") || string.equals("/"));
     }
 

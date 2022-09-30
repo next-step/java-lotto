@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.*;
 class FormulaTest {
 
     @Test
-    public void formulaTest(){
+    public void formulaTest() {
         Formula formula = new Formula("2 + 3 * 4 / 2");
         assertThat(formula.getFirstSingleFormula().doOperate()).isEqualTo(10);
     }
@@ -18,14 +18,14 @@ class FormulaTest {
     @ParameterizedTest
     @ValueSource(strings = {"", "  "})
     public void exceptionTest1(String string) {
-        assertThatIllegalArgumentException().isThrownBy(()->{
+        assertThatIllegalArgumentException().isThrownBy(() -> {
             new Formula(string);
         });
     }
 
     @Test
     public void exceptionTest2() {
-        assertThatIllegalArgumentException().isThrownBy(()->{
+        assertThatIllegalArgumentException().isThrownBy(() -> {
             new Formula(null);
         });
     }

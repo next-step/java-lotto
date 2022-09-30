@@ -42,7 +42,7 @@ class SingleFormulaVoTest {
 
     @Test
     public void exceptionTest1() {
-        assertThatIllegalArgumentException().isThrownBy(()->{
+        assertThatIllegalArgumentException().isThrownBy(() -> {
             SingleFormulaVo singleFormulaVo = new SingleFormulaVo();
             singleFormulaVo.set("a");
         });
@@ -50,7 +50,7 @@ class SingleFormulaVoTest {
 
     @Test
     public void exceptionTest2() {
-        assertThatIllegalArgumentException().isThrownBy(()->{
+        assertThatIllegalArgumentException().isThrownBy(() -> {
             SingleFormulaVo singleFormulaVo = new SingleFormulaVo();
             singleFormulaVo.set("**");
         });
