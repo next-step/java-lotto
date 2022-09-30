@@ -3,7 +3,7 @@ package step1;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
-public enum Operator {
+public enum OperatorType {
 
     PLUS("+"),
     MINUS("-"),
@@ -14,7 +14,7 @@ public enum Operator {
 
     private String operator;
 
-    Operator(String operator) {
+    OperatorType(String operator) {
         this.operator = operator;
     }
 
@@ -30,9 +30,9 @@ public enum Operator {
         return operator;
     }
 
-    static Operator getOperator(String operator) {
-        return Arrays.stream(Operator.values())
-                .filter(operatorType -> operatorType.getOperator().equals(operator))
+    static OperatorType getOperator(String operator) {
+        return Arrays.stream(OperatorType.values())
+                .filter(operatorTypeType -> operatorTypeType.getOperator().equals(operator))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("사칙연산만 가능합니다."));
     }

@@ -14,32 +14,29 @@ public class StringCalculator {
     public static int calculate(String text) {
         String[] parameters = text.split(OPERATOR_OPERAND_DELIMITER);
         List<Operand> operands = new ArrayList<>();
-        List<Operator> operators = new ArrayList<>();
+        List<OperatorType> operatorTypes = new ArrayList<>();
 
         for (int i = 0; i < parameters.length; i++) {
-            distinguishOperandAndOperator(parameters[i], operands, operators);
+            distinguishOperandAndOperator(parameters[i], operands, operatorTypes);
         }
 
-        return generateResult(operators, operands);
+        return generateResult(operatorTypes, operands);
     }
 
-    private static void distinguishOperandAndOperator(String operand, List<Operand> operands, List<Operator> operators){
-        if (Operator.isOperator(operand)) {
-            operators.add(Operator.getOperator(operand));
+    private static void distinguishOperandAndOperator(String operand, List<Operand> operands, List<OperatorType> operatorTypes){
+        if (OperatorType.isOperator(operand)) {
+            operatorTypes.add(OperatorType.getOperator(operand));
             return;
         }
 
         operands.add(new Operand(operand));
     }
 
-    private static int generateResult(List<Operator> operators, List<Operand> operands) {
-        Iterator<Operand> operandIterator = operands.stream()
-            .iterator();
+    private static int generateResult(List<OperatorType> operatorTypes, List<Operand> operands) {
+        Iterator<Operand> operandIterator = operands.stream().iterator();
+        Iterator<OperatorType> operatorIterator = operatorTypes.iterator();
 
-        int result = operandIterator.next()
-            .getOperand();
-
-        Iterator<Operator> operatorIterator = operators.iterator();
+        int result = operandIterator.next().getOperand();
 
         while (operatorIterator.hasNext()) {
             Calculator calculator = OperatorFactory.createCalculator(operatorIterator.next().getOperator());
