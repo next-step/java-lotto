@@ -1,5 +1,6 @@
 package step1;
 
+import java.util.Iterator;
 import step1.calculator.Calculator;
 import step1.calculator.OperatorFactory;
 
@@ -31,13 +32,21 @@ public class StringCalculator {
         operands.add(new Operand(operand));
     }
 
-    private static int generateResult(List<Operator> operators, List<Operand> operand) {
-        int result = 0;
+    private static int generateResult(List<Operator> operators, List<Operand> operands) {
+        Iterator<Operand> operandIterator = operands.stream()
+            .iterator();
 
-        for (int i = 0; i < operators.size(); i++) {
-            Calculator calculator = OperatorFactory.createCalculator(operators.get(i).getOperator());
-            result = calculator.calculate(operand.get(i).getOperand(), operand.get(i+1).getOperand());
-            operand.set(i+1, new Operand(String.valueOf(result)));
+        int result = operandIterator.next()
+            .getOperand();
+
+        Iterator<Operator> operatorIterator = operators.iterator();
+
+        while (operatorIterator.hasNext()) {
+            Calculator calculator = OperatorFactory.createCalculator(operatorIterator.next().getOperator());
+            int secondOperand = operandIterator.next()
+                .getOperand();
+
+            result = calculator.calculate(result, secondOperand);
         }
 
         return result;
