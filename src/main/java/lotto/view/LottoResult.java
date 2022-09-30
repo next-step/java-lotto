@@ -5,10 +5,9 @@ import lotto.domain.Lottos;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoResult {
-    private Lottos lottos;
+    private final Lottos lottos;
 
     public static LottoResult of(Lottos lottos) {
         return new LottoResult(lottos);
@@ -18,7 +17,7 @@ public class LottoResult {
         this.lottos = lottos;
     }
 
-    public List<String> lottos() {
+    public List<String> lottoInfos() {
         List<String> result = new ArrayList<>();
 
         lottos.values().forEach(lotto -> {
@@ -28,16 +27,17 @@ public class LottoResult {
         return result;
     }
 
-    public String createLottoInfo(Lotto lotto) {
+    private String createLottoInfo(Lotto lotto) {
         List<String> lottoStringNumbers = getStringNumbers(lotto);
         return "[ " + String.join(", ", lottoStringNumbers) + " ]";
     }
 
     private static List<String> getStringNumbers(Lotto lotto) {
-        return lotto.lottoNumbers()
-                .stream()
-                .map(lottoNumber -> String.valueOf(lottoNumber.number()))
-                .collect(Collectors.toList());
+        return lotto.lottoStringNumbers();
+    }
+
+    public Lottos lottos() {
+        return lottos;
     }
 
     public int quantity() {

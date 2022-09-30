@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.type.Match;
+import lotto.domain.type.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -80,7 +80,7 @@ class LottoTest {
                 new LottoNumber(5),
                 new LottoNumber(6)));
 
-        Match type = lottoA.rank(winLotto);
-        assertThat(type.count()).isEqualTo(Match.FOUR.count());
+        Rank type = lottoA.rank(winLotto);
+        assertThat(type.count()).isEqualTo(Rank.FOUR.count());
     }
 }

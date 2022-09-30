@@ -1,23 +1,23 @@
 package lotto.controller;
 
-import lotto.service.LottoService;
+import lotto.service.LottoStore;
 import lotto.view.InputView;
 import lotto.view.LottoResult;
-import lotto.view.LottoStatistics;
+import lotto.view.LottoStatisticsResult;
 import lotto.view.ResultView;
 
 public class LottoController {
-    private final LottoService lottoService = new LottoService();
+    private final LottoStore lottoStore = new LottoStore();
 
     public void start() {
         int purchaseAmount = Integer.parseInt(InputView.inputPurchaseAmount());
-        LottoResult result = lottoService.buyLotto(purchaseAmount);
+        LottoResult lottoResult = lottoStore.buyLotto(purchaseAmount);
 
-        ResultView.printLottoResult(result);
+        ResultView.printLottoResult(lottoResult);
 
         String inputWinningNumber = InputView.inputWinningNumber();
-        LottoStatistics lottoStatistics = lottoService.lottoStatistics(inputWinningNumber);
+        LottoStatisticsResult statistics = lottoStore.createStatistics(lottoResult, inputWinningNumber);
 
-        ResultView.printLottoStatistics(lottoStatistics);
+        ResultView.printLottoStatistics(statistics);
     }
 }
