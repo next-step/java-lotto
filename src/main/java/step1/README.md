@@ -7,8 +7,9 @@
 
 ## 기능목록
 - [x] Number
-- [] Operator
+- [x] Operator
+- [] 사칙연산
 - [] InputView
 - [] InputParser
 - [] ResultView
-- [] 사칙연산 구현
+
