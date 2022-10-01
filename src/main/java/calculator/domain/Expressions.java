@@ -12,6 +12,11 @@ public class Expressions {
         this.expressions = expressions;
     }
 
+    public Expressions(final Expression expression) {
+
+        this(expression.split());
+    }
+
     /**
      * 숫자와 연산자의 수는 짝수가 되면 안되기 떄문에 2로 나누었을때 나머지가 0이면 익셉션 처리
      */
@@ -23,28 +28,13 @@ public class Expressions {
         }
     }
 
-    public String after(final int index) {
+    public List<Operation> separate() {
 
-        return this.expressions.get(index + 1);
+        return Operation.from(expressions);
     }
 
-    public String before(final int index) {
+    public List<Number> disunite() {
 
-        return this.expressions.get(index - 1);
-    }
-
-    public void saveAfter(final int index, final int value) {
-
-        this.expressions.set(index + 1, String.valueOf(value));
-    }
-
-    public String findLast() {
-
-        return this.expressions.get(this.expressions.size() - 1);
-    }
-
-    public Operators extract() {
-
-        return new Operators(expressions);
+        return Number.from(expressions);
     }
 }
