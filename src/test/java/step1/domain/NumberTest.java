@@ -39,4 +39,11 @@ class NumberTest {
         assertThatThrownBy(() -> new Number("hello"))
             .isInstanceOf(NumberFormatException.class);
     }
+
+    @Test
+    @DisplayName("0으로 나눌 시 예외")
+    void divideByZero() {
+        assertThatThrownBy(() -> new Number(3).divide(new Number(0)))
+            .isInstanceOf(ArithmeticException.class);
+    }
 }
