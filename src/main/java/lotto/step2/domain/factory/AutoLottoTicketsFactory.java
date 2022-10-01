@@ -5,6 +5,6 @@ import lotto.step2.domain.issuelottostrategy.LottoIssueStrategy;
 
 public class AutoLottoTicketsFactory {
     public static LottoTickets from(LottoIssueStrategy lottoIssueStrategy) {
-        return new LottoTickets(lottoIssueStrategy.issueLottoList());
+        return lottoIssueStrategy.issueLottoTickets();
     }
 }
