@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class AutoLottoTicketsFactoryTest {
+class LottoTicketsFactoryTest {
     @Test
     @DisplayName("자동으로 로또 발급하기.")
     void autoIssueLotto() {
-        LottoTickets actualLottoTickets = AutoLottoTicketsFactory.from(() -> LottoTicketsTest.LOTTO_TICKETS);
+        LottoTickets actualLottoTickets = LottoTicketsFactory.from(() -> LottoTicketsTest.LOTTO_TICKETS);
         assertThat(actualLottoTickets).isEqualTo(LottoTicketsTest.LOTTO_TICKETS);
     }
 }
