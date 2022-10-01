@@ -11,6 +11,7 @@ public enum Operation {
     
     private static final String DIVIDE_NUMBERS_EXCEPTION_MESSAGE = "나눗셈은 정확히 나누어 떨어지는 경우에만 진행할 수 있습니다. 다시 입력해주세요.";
     private static final String ARITHMETIC_EXCEPTION_MESSAGE = "나눗셈의 분모가 0일 수 없습니다. 다시 입력해주세요.";
+    private static final String NOT_CORRECT_OPERATOR_EXCEPTION_MESSAGE = "올바른 연산자가 아닙니다.";
     
     private final BiFunction<Integer, Integer, Integer> operation;
     private final char operator;
@@ -24,7 +25,7 @@ public enum Operation {
         return Arrays.stream(values())
                 .filter(operation -> operation.operator == operator)
                 .findAny()
-                .orElseThrow();
+                .orElseThrow(() -> new IllegalArgumentException(NOT_CORRECT_OPERATOR_EXCEPTION_MESSAGE));
     }
     
     public int calculate(Integer calculateResult, Integer secondOperand) {
