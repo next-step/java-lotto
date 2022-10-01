@@ -18,7 +18,7 @@ class MathEquationValidatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"a", "*", "="})
+    @ValueSource(strings = {"a", "3 - 4 ? 7", "="})
     @DisplayName("사칙 연산 기호가 아닌 경우 IllegalArgumentException")
     void exceptionTest2(String input) {
         assertThatExceptionOfType(IllegalArgumentException.class)
