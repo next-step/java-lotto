@@ -1,5 +1,7 @@
 package com.calculator.operator;
 
+import java.util.function.BiFunction;
+
 public enum Operator {
 
     ADD("+", (firstNumber, secondNumber) -> firstNumber + secondNumber), // Integer::sum 도 가능
@@ -10,21 +12,21 @@ public enum Operator {
         return firstNumber / secondNumber;
     });
 
+    private final String symbol;
+    private final BiFunction<Integer, Integer, Integer> expression;
+
+    Operator(String symbol, BiFunction<Integer, Integer, Integer> expression) {
+        this.symbol = symbol;
+        this.expression = expression;
+    }
+
     private static void isValidNumberForDivision(Integer firstNumber, Integer secondNumber) {
         if (secondNumber == 0) {
             throw new IllegalArgumentException("올바른 나눗셈 인자가 아닙니다! (0으로 나눌 수 없습니다!)");
         }
-        if (firstNumber % secondNumber > 0) {
+        if (firstNumber % secondNumber != 0) {
             throw new IllegalArgumentException("올바른 나눗셈 인자가 아닙니다! (나눗셈의 결과 값이 정수가 아닙니다!)");
         }
-    }
-
-    private final String symbol;
-    private final FunctionWithTwoArgs<Integer, Integer, Integer> expression;
-
-    Operator(String symbol, FunctionWithTwoArgs<Integer, Integer, Integer> expression) {
-        this.symbol = symbol;
-        this.expression = expression;
     }
 
     public static Operator getOperator(String symbol) {
