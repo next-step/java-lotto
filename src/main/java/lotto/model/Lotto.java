@@ -3,7 +3,6 @@ package lotto.model;
 import lotto.service.LottoNumberPicker;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -21,16 +20,16 @@ public class Lotto {
         return lotto;
     }
 
-    public List<LottoBall> getSameLottoBalls(Lotto target) {
-        return this.lotto.stream().filter(target.lotto::contains).collect(Collectors.toList());
-    }
-
-    public void addBonusBall(LottoBall lottoBall) {
-        this.lotto.add(lottoBall);
+    public int getMatchCount(WinningLotto target) {
+        return Long.valueOf(this.lotto.stream().filter(target::hasLottoBall).count()).intValue();
     }
 
     public int size() {
         return this.lotto.size();
+    }
+
+    public boolean hasLottoBall(LottoBall lottoBall) {
+        return this.lotto.contains(lottoBall);
     }
 
 }

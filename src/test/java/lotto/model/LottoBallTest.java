@@ -9,6 +9,6 @@ public class LottoBallTest {
 
     @Test
     void shouldValidateLottoBall() {
-        assertThatThrownBy(() -> LottoBall.noBonusBall(LottoNumberPicker.MAX_BOUND_NUM)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new LottoBall(LottoNumberPicker.MAX_BOUND_NUM)).isInstanceOf(IllegalArgumentException.class);
     }
 }

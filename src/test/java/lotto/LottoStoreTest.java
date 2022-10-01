@@ -18,7 +18,7 @@ public class LottoStoreTest {
     }
 
     private LottoNumberPicker getNumberPicker() {
-        return () -> List.of(1, 2, 3, 4, 5, 6).stream().map(LottoBall::noBonusBall).collect(Collectors.toList());
+        return () -> List.of(1, 2, 3, 4, 5, 6).stream().map(LottoBall::new).collect(Collectors.toList());
     }
 
 }

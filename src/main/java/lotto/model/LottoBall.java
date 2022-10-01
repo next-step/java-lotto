@@ -9,31 +9,18 @@ public class LottoBall {
 
     private final int num;
 
-    private final boolean isBonusBall;
 
-    private LottoBall(int num, boolean isBonusBall) {
+    public LottoBall(int num) {
         if (validateLottoNumber(num)) {
             throw new IllegalArgumentException("유효하지 않은 로또 번호입니다.");
         }
         this.num = num;
-        this.isBonusBall = isBonusBall;
-    }
-
-    public static LottoBall bonusBall(int num) {
-        return new LottoBall(num, true);
-    }
-
-    public static LottoBall noBonusBall(int num) {
-        return new LottoBall(num, false);
     }
 
     public int getNum() {
         return num;
     }
 
-    public boolean isBonusBall() {
-        return this.isBonusBall;
-    }
 
     private boolean validateLottoNumber(int num) {
         return num < 0 || num >= LottoNumberPicker.MAX_BOUND_NUM;

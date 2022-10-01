@@ -5,17 +5,15 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public enum MatchNumber implements Comparator<MatchNumber> {
+public enum MatchNumber {
 
 
-    ZERO(0, 0),
-    ONE(1, 0),
-    TWO(2, 0),
-    THREE(3, 5_000),
-    FOUR(4, 50_000),
-    FIVE(5, 1_500_000),
-    SIX_WITH_BONUS_BALL(6, 30_000_000),
-    SIX(6, 2_000_000_000);
+    NONE(0, 0),
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000);
 
     private final Integer count;
 
@@ -26,24 +24,26 @@ public enum MatchNumber implements Comparator<MatchNumber> {
         this.money = money;
     }
 
-    public static MatchNumber getMatchNumber(List<LottoBall> lottoBalls) {
-        List<MatchNumber> matchNumbers = findByCount(lottoBalls);
-        if (isSecondRank(matchNumbers, lottoBalls)) {
-            return MatchNumber.SIX_WITH_BONUS_BALL;
+    public static MatchNumber getMatchNumber(int count, boolean hasBonusBall) {
+        return getMatchNumberByBonusBall(hasBonusBall, getMatchNumberByCount(count));
+    }
+
+    private static List<MatchNumber> getMatchNumberByCount(int count) {
+        return Arrays.stream(MatchNumber.values())
+                .filter((matchNumber -> matchNumber.count == count))
+                .sorted(Comparator.comparingInt(MatchNumber::getMoney).reversed())
+                .collect(Collectors.toList());
+    }
+
+    private static MatchNumber getMatchNumberByBonusBall(boolean hasBonusBall, List<MatchNumber> matchNumbers) {
+        int foundMatchNumbers = matchNumbers.size();
+        if (foundMatchNumbers == 0) {
+            return MatchNumber.NONE;
         }
-        return matchNumbers.stream().filter((matchNumber -> !matchNumber.equals(MatchNumber.SIX_WITH_BONUS_BALL))).findAny().orElseThrow(IllegalStateException::new);
-    }
-
-    private static boolean isSecondRank(List<MatchNumber> matchNumbers, List<LottoBall> lottoBalls) {
-        return matchNumbers.contains(MatchNumber.SIX_WITH_BONUS_BALL) && lottoBalls.stream().anyMatch(LottoBall::isBonusBall);
-    }
-
-    private static List<MatchNumber> findByCount(List<LottoBall> lottoBalls) {
-        return Arrays.stream(values()).filter((balls -> balls.count == lottoBalls.size())).collect(Collectors.toList());
-    }
-
-    public static boolean hasMoney(MatchNumber matchNumber) {
-        return !(matchNumber.equals(ONE) || matchNumber.equals(TWO) || matchNumber.equals(ZERO));
+        if (foundMatchNumbers == 1 || hasBonusBall) {
+            return matchNumbers.get(0);
+        }
+        return matchNumbers.get(1);
     }
 
     public Integer getCount() {
@@ -54,14 +54,4 @@ public enum MatchNumber implements Comparator<MatchNumber> {
         return money;
     }
 
-    @Override
-    public int compare(MatchNumber x, MatchNumber y) {
-        if (x.count != y.count) {
-            return x.count - y.count;
-        }
-        if (x.equals(MatchNumber.SIX_WITH_BONUS_BALL)) {
-            return -1;
-        }
-        return 1;
-    }
 }

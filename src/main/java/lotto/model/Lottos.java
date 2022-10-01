@@ -24,20 +24,23 @@ public class Lottos {
         }
     }
 
-    public Map<MatchNumber, Integer> getMatchNumbers(Lotto winningNumber) {
-        return getStreamOfMatchNumberWithMoney(winningNumber)
+    public Map<MatchNumber, Integer> getMatchNumbers(WinningLotto winningLotto) {
+        return getStreamOfMatchNumberWithMoney(winningLotto)
                 .sorted(MatchNumber::compareTo)
                 .collect(groupingBy(identity(), LinkedHashMap::new, summingInt(e -> 1)));
     }
 
-    public Integer getWinningMoney(Lotto winningNumber) {
-        return getStreamOfMatchNumberWithMoney(winningNumber)
+    public Integer getWinningMoney(WinningLotto winningLotto) {
+        return getStreamOfMatchNumberWithMoney(winningLotto)
                 .map(MatchNumber::getMoney).reduce(Integer::sum).orElse(DEFAULT_RETURN_VALUE);
     }
 
-    private Stream<MatchNumber> getStreamOfMatchNumberWithMoney(Lotto winningNumber) {
-        return this.lottos.stream().map((lotto) -> MatchNumber.getMatchNumber(winningNumber.getSameLottoBalls(lotto)))
-                .filter(MatchNumber::hasMoney);
+    private Stream<MatchNumber> getStreamOfMatchNumberWithMoney(WinningLotto winningLotto) {
+        return this.lottos.stream().map((lotto) -> {
+            int matchCount = lotto.getMatchCount(winningLotto);
+            boolean hasBonusBall = winningLotto.hasBonusBall(lotto);
+            return MatchNumber.getMatchNumber(matchCount, hasBonusBall);
+        });
     }
 
     public List<Lotto> getLottos() {

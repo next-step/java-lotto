@@ -1,5 +1,6 @@
 package lotto.model;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -16,34 +17,28 @@ class LottoTest {
     }
 
     @Test
-    void shouldReturnMatchedCount() {
-        assertThat(getLotto(List.of(1, 2, 3, 4, 5, 6)).getSameLottoBalls(getLotto(List.of(1, 2, 3, 4, 5, 6)))).isEqualTo(getLottoBalls(List.of(1, 2, 3, 4, 5, 6)));
-    }
-
-    @Test
-    void shouldReturnSameBall() {
-        List<LottoBall> resultA = getLotto(List.of(1, 2, 3, 4, 5, 6)).getSameLottoBalls(getLotto(List.of(1, 2, 3, 4, 5, 6)));
-        List<LottoBall> resultB = getLotto(List.of(1, 2, 3, 4, 5, 6)).getSameLottoBalls(getLotto(List.of(1, 2, 3, 4, 5, 7)));
-        List<LottoBall> resultC = getLotto(List.of(1, 2, 3, 4, 99, 99)).getSameLottoBalls(getLotto(List.of(1, 2, 3, 4, 8, 9)));
-
-        assertThat(resultA.size()).isEqualTo(6);
-        assertThat(resultB.size()).isEqualTo(5);
-        assertThat(resultC.size()).isEqualTo(4);
-        assertThat(resultC).containsExactly(LottoBall.noBonusBall(1), LottoBall.noBonusBall(2), LottoBall.noBonusBall(3), LottoBall.noBonusBall(4));
-    }
-
-    @Test
-    void shouldAddBonusBall() {
+    @DisplayName("보너스볼이 아닌, 추첨 번호와 일치된 숫자를 반환해야 합니다.")
+    void shouldReturnMatchedCountOfWinnnigLotto() {
         Lotto lotto = getLotto(List.of(1, 2, 3, 4, 5, 6));
-        lotto.addBonusBall(LottoBall.bonusBall(7));
-        assertThat(lotto.getLotto().size()).isEqualTo(7);
+
+        int matchCountA = lotto.getMatchCount(new WinningLotto(getLotto(List.of(1, 2, 3, 4, 5, 8)), new LottoBall(99)));
+        int matchCountB = lotto.getMatchCount(new WinningLotto(getLotto(List.of(1, 2, 3, 4, 5, 8)), new LottoBall(6)));
+
+        assertThat(matchCountA).isEqualTo(5);
+        assertThat(matchCountB).isEqualTo(5);
+    }
+
+
+    @Test
+    void shouldReturnHasBall() {
+        Lotto lottoA = getLotto(List.of(1, 2, 3, 4, 5, 6));
+
+        assertThat(lottoA.hasLottoBall(new LottoBall(1))).isTrue();
+        assertThat(lottoA.hasLottoBall(new LottoBall(99))).isFalse();
     }
 
     private Lotto getLotto(List<Integer> lottoBalls) {
-        return new Lotto(lottoBalls.stream().map(LottoBall::noBonusBall).collect(Collectors.toList()));
+        return new Lotto(lottoBalls.stream().map(LottoBall::new).collect(Collectors.toList()));
     }
 
-    private List<LottoBall> getLottoBalls(List<Integer> lottoBalls) {
-        return lottoBalls.stream().map(LottoBall::noBonusBall).collect(Collectors.toList());
-    }
 }

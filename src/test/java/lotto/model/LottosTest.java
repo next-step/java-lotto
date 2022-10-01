@@ -16,9 +16,9 @@ class LottosTest {
         int lottoNumber = 3;
         Lottos lottos = new Lottos(lottoNumber, getNumberPicker());
 
-        Integer winningMoney = lottos.getWinningMoney(getLotto(List.of(1, 2, 3, 99, 99, 99)));
+        Integer winningMoney = lottos.getWinningMoney(new WinningLotto(getLotto(List.of(1, 2, 3, 4, 99, 99)), new LottoBall(5)));
 
-        assertThat(winningMoney).isEqualTo(MatchNumber.THREE.getMoney() * lottoNumber);
+        assertThat(winningMoney).isEqualTo(MatchNumber.FOURTH.getMoney() * lottoNumber);
     }
 
     @Test
@@ -26,17 +26,17 @@ class LottosTest {
         int lottoNumber = 3;
         Lottos lottos = new Lottos(lottoNumber, getNumberPicker());
 
-        Map<MatchNumber, Integer> matchNumbers = lottos.getMatchNumbers(getLotto(List.of(1, 2, 3, 99, 99, 99)));
+        Map<MatchNumber, Integer> matchNumbers = lottos.getMatchNumbers(new WinningLotto(getLotto(List.of(1, 2, 3, 4, 5, 99)), new LottoBall(6)));
 
-        assertThat(matchNumbers.get(MatchNumber.THREE)).isEqualTo(lottoNumber);
+        assertThat(matchNumbers.get(MatchNumber.SECOND)).isEqualTo(lottoNumber);
     }
 
 
     private LottoNumberPicker getNumberPicker() {
-        return () -> List.of(1, 2, 3, 4, 5, 6).stream().map(LottoBall::noBonusBall).collect(Collectors.toList());
+        return () -> List.of(1, 2, 3, 4, 5, 6).stream().map(LottoBall::new).collect(Collectors.toList());
     }
 
     private Lotto getLotto(List<Integer> lottoBalls) {
-        return new Lotto(lottoBalls.stream().map(LottoBall::noBonusBall).collect(Collectors.toList()));
+        return new Lotto(lottoBalls.stream().map(LottoBall::new).collect(Collectors.toList()));
     }
 }
