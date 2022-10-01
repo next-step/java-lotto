@@ -39,20 +39,4 @@ class NumberTest {
         assertThatThrownBy(() -> new Number("hello"))
             .isInstanceOf(NumberFormatException.class);
     }
-
-    @Test
-    @DisplayName("음수 숫자 문자열이 들어왔을 때 예외 반환")
-    void createWithNegativeIntegerString() {
-        assertThatThrownBy(() -> new Number("-1"))
-            .isInstanceOf(NegativeIntegerException.class)
-            .hasMessageContaining("음수 값을 입력으로 받을 수 없습니다.");
-    }
-
-    @Test
-    @DisplayName("음수 정수가 들어왔을 때 예외 반환")
-    void createWithNegativeInteger() {
-        assertThatThrownBy(() -> new Number(-1))
-            .isInstanceOf(NegativeIntegerException.class)
-            .hasMessageContaining("음수 값을 입력으로 받을 수 없습니다.");
-    }
 }

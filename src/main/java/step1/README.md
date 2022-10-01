@@ -10,6 +10,4 @@
 - [x] Operator
 - [x] 사칙연산
 - [x] InputParser
-- [ ] StringCalculator
-- [ ] InputView
-- [ ] ResultView
+- [x] StringCalculator
