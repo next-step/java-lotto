@@ -19,7 +19,7 @@ public class StringCalculator {
         Iterator<Operator> operatorIterator = parserResult.getOperators().iterator();
         Number result = numberIterator.next();
 
-        while(operatorIterator.hasNext() && numberIterator.hasNext()) {
+        while (operatorIterator.hasNext() && numberIterator.hasNext()) {
             result = operatorIterator.next().calculate(result, numberIterator.next());
         }
 

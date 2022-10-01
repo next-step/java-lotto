@@ -32,7 +32,7 @@ public class Number {
     }
 
     public Number divide(Number other) {
-        if(other.number == 0) {
+        if (other.number == 0) {
             throw new ArithmeticException(DIVISION_BY_ZERO_EXCEPTION_MESSAGE);
         }
 
