@@ -1,7 +1,7 @@
 package lotto.step1;
 
 import java.util.Arrays;
-import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 
 public enum Operator {
     ADD('+', Integer::sum),
@@ -13,10 +13,10 @@ public enum Operator {
     private static final String ARITHMETIC_EXCEPTION_MESSAGE = "나눗셈의 분모가 0일 수 없습니다. 다시 입력해주세요.";
     private static final String NOT_CORRECT_OPERATOR_EXCEPTION_MESSAGE = "올바른 연산자가 아닙니다.";
     
-    private final BiFunction<Integer, Integer, Integer> operation;
+    private final BinaryOperator<Integer> operation;
     private final char operator;
     
-    Operator(char operator, BiFunction<Integer, Integer, Integer> operation) {
+    Operator(char operator, BinaryOperator<Integer> operation) {
         this.operator = operator;
         this.operation = operation;
     }
