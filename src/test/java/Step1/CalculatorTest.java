@@ -1,4 +1,7 @@
-import intefaces.Calculator;
+package Step1;
+
+import Step1.CalculatorImpl;
+import Step1.intefaces.Calculator;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

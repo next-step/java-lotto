@@ -1,4 +1,4 @@
-package intefaces;
+package Step1.intefaces;
 
 public interface Calculator {
 
