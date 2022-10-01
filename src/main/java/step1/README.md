@@ -9,7 +9,7 @@
 - [x] Number
 - [x] Operator
 - [x] 사칙연산
-- [] InputView
-- [] InputParser
-- [] ResultView
-
+- [x] InputParser
+- [ ] StringCalculator
+- [ ] InputView
+- [ ] ResultView
