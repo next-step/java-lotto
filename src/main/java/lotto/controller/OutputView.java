@@ -9,7 +9,7 @@ import lotto.model.MatchNumber;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class OutputView {
+public abstract class OutputView {
     private static final String RESULT_MSG = "당첨 통계\n---------";
     private static final String BASE_SUMMARY_FORMAT = "%d 개 일치 %s(%d원) - %d개 \n";
     private static final String PROFIT_MSG = "총 수익율은 %.2f 입니다.";
