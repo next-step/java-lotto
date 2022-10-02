@@ -1,7 +1,7 @@
 package calculator;
 
-import calculator.domain.CalculateResult;
 import calculator.domain.Calculator;
+import calculator.domain.CalculatorService;
 
 import java.util.Scanner;
 
@@ -12,7 +12,7 @@ public class CalculatorApplication {
 
     public static void main(String[] args) {
         InputScanner inputScanner = new InputScanner(new Scanner(System.in));
-        Calculator calculator = new Calculator(new CalculateResult());
-        System.out.println(calculator.calculate(inputScanner.scan()));
+        CalculatorService calculatorService = new CalculatorService(new Calculator());
+        System.out.println(calculatorService.calculate(inputScanner.scan()));
     }
 }
