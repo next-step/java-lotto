@@ -9,12 +9,12 @@
 
 ## 구현 목록
 - 입력
-  - [ ] 계산될 문자열을 입력받는다.
-  - [ ] " "(white space)로 문자열을 분리한다.
-  - [ ] 분리된 문자리스트의 길이가 3이하인 경우 IllegalArgumentException을 발생시킨다.
-  - [ ] 분리된 문자리스트의 길이가 짝수인경우 IllegalArgumentException을 발생시킨다.
-  - [ ] 분리된 문자리스트의 0 또는 짝수 인덱스의 문자가 숫자가 아닌경우 IllegalArgumentException을 발생시킨다.
-  - [ ] 분리된 문자리스트의 홀수 인덱스의 문자가 사칙연산기호(+,-,*,%)가 아닌경우 IllegalArgumentException을 발생시킨다.
+  - [x] 계산될 문자열을 입력받는다.
+  - [x] " "(white space)로 문자열을 분리한다.
+  - [x] 분리된 문자리스트의 길이가 3이하인 경우 IllegalArgumentException을 발생시킨다.
+  - [x] 분리된 문자리스트의 길이가 짝수인경우 IllegalArgumentException을 발생시킨다.
+  - [x] 분리된 문자리스트의 짝수 인덱스 문자가 숫자가 아닌경우 IllegalArgumentException을 발생시킨다.
+  - [x] 분리된 문자리스트의 홀수 인덱스의 문자가 사칙연산기호(+,-,*,%)가 아닌경우 IllegalArgumentException을 발생시킨다.
 - 출력
   - [ ] 계산 결과를 출력한다.
 - 어플리케이션
