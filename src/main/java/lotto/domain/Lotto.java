@@ -31,13 +31,13 @@ public class Lotto {
     public Integer matchedCount(Lotto another) {
         return another.numbers()
                 .stream()
-                .reduce(0, this::incrementIfMatched);
+                .reduce(0, (total, number) -> total + matchedCount(number));
     }
 
-    private int incrementIfMatched(Integer total, Integer number) {
+    private Integer matchedCount(Integer number) {
         if (numbers.contains(number)) {
-            return total + 1;
+            return 1;
         }
-        return total;
+        return 0;
     }
 }
