@@ -8,10 +8,9 @@ public class CalculatorApplication {
 
     public static void main(String[] args) {
 
-        final Expression expression = new Expression(InputView.input());
-        final Expressions expressions = new Expressions(expression);
+        final Expression expression = new Expression(InputView.expression());
         final CalculationResult calculationResult = CalculationResult.init();
-        calculationResult.calculate(expressions);
+        calculationResult.calculate(new Expressions(expression));
 
         ResultView.resultTitlePrint();
         ResultView.resultPrint(calculationResult);
