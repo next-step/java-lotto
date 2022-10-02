@@ -3,21 +3,24 @@ package calculator;
 public class FormulaCalculator {
 
     public static Integer calculate(String formula) {
-        FormulaElements formulaElements = new FormulaElements(formula);
+        return calculate(new FormulaElements(formula));
+    }
+
+    private static int calculate(FormulaElements formulaElements) {
         int leftOperand = 0;
-
         while (!formulaElements.isEmpty()) {
-            leftOperand = calculate(leftOperand,
-                    formulaElements.poll(),
-                    OperandParser.parse(formulaElements.poll())
-            );
+            leftOperand = getOperator(formulaElements)
+                    .apply(leftOperand, getOperand(formulaElements));
         }
-
         return leftOperand;
     }
 
-    private static int calculate(int leftOperand, String operator, int rightOperand) {
-        return Operator.getOperator(operator)
-                .apply(leftOperand, rightOperand);
+    private static Operator getOperator(FormulaElements formulaElements) {
+        return Operator.getOperator(formulaElements.poll());
     }
+
+    private static int getOperand(FormulaElements formulaElements) {
+        return OperandParser.parse(formulaElements.poll());
+    }
+
 }
