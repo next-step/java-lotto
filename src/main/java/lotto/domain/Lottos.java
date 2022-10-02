@@ -4,7 +4,6 @@ import lotto.domain.enums.LottoPrize;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -58,15 +57,15 @@ public class Lottos {
     }
 
     public BigDecimal totalProfitRate(Lotto winningLotto) {
-        BigDecimal totalSum = Arrays.stream(LottoPrize.values())
-                .reduce(BigDecimal.ZERO, (total, lottoPrize) -> {
-                    Integer winningCount = winningCount(winningLotto, lottoPrize);
-                    BigDecimal winningPrize = lottoPrize.money().multiply(BigDecimal.valueOf(winningCount));
-                    return total.add(winningPrize);
-                }, BigDecimal::add);
+        BigDecimal winningAmount = BigDecimal.ZERO;
+        for (LottoPrize lottoPrize : LottoPrize.values()) {
+            winningAmount = winningAmount.add(lottoPrize.amountByCount(winningCount(winningLotto, lottoPrize)));
+        }
 
-        BigDecimal purchaseAmount = BigDecimal.valueOf(count()).multiply(UNIT_PRICE);
+        return winningAmount.divide(purchaseAmount(), 2, RoundingMode.FLOOR);
+    }
 
-        return totalSum.divide(purchaseAmount, 2, RoundingMode.FLOOR);
+    private BigDecimal purchaseAmount() {
+        return BigDecimal.valueOf(count()).multiply(UNIT_PRICE);
     }
 }

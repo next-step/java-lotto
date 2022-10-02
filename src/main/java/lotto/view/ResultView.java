@@ -28,7 +28,7 @@ public class ResultView {
         Collections.reverse(lottoPrizes);
         lottoPrizes.forEach(lottoPrize -> System.out.println(String.format(WINNING_STATISTICS_FORMAT,
                 lottoPrize.matchedCount(),
-                lottoPrize.money(),
+                lottoPrize.amount(),
                 lottos.winningCount(winningLotto, lottoPrize))));
 
         System.out.println(String.format(WINNING_STATISTICS_TOTAL_PROFIT_RATE_FORMAT,

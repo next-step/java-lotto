@@ -9,19 +9,23 @@ public enum LottoPrize {
     FOURTH(50_000L, 4),
     FIFTH(5_000L, 3);
 
-    private final BigDecimal money;
+    private final BigDecimal amount;
     private final Integer matchedCount;
 
-    LottoPrize(Long money, Integer matchedCount) {
-        this.money = BigDecimal.valueOf(money);
+    LottoPrize(Long amount, Integer matchedCount) {
+        this.amount = BigDecimal.valueOf(amount);
         this.matchedCount = matchedCount;
     }
 
-    public BigDecimal money() {
-        return money;
+    public BigDecimal amount() {
+        return amount;
     }
 
     public Integer matchedCount() {
         return matchedCount;
+    }
+
+    public BigDecimal amountByCount(Integer count) {
+        return amount.multiply(BigDecimal.valueOf(count));
     }
 }
