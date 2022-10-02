@@ -8,7 +8,7 @@ import java.util.Scanner;
 /**
  * Created by seungwoo.song on 2022-09-28
  */
-public class CalculatorRunner {
+public class CalculatorApplication {
 
     public static void main(String[] args) {
         InputScanner inputScanner = new InputScanner(new Scanner(System.in));
