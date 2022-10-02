@@ -8,6 +8,7 @@ import calculator.exception.InvalidFormulaException;
 import calculator.exception.InvalidOperandException;
 import calculator.exception.InvalidOperatorException;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullSource;
@@ -56,4 +57,12 @@ class FormulaCalculatorTest {
         assertThatExceptionOfType(InvalidFormulaException.class)
                 .isThrownBy(() -> FormulaCalculator.calculate(formula));
     }
+
+    @Test
+    @DisplayName("0으로 나누려고 하면 예외 발생.")
+    void fail_to_divide_by_zero() {
+        assertThatExceptionOfType(DivideByZeroException.class)
+                .isThrownBy(() -> FormulaCalculator.calculate("5 / 0"));
+    }
+
 }

@@ -25,6 +25,9 @@ public enum Operator {
     DIV("/") {
         @Override
         public int apply(int leftOperand, int rightOperand) {
+            if (rightOperand == 0) {
+                throw new DivideByZeroException();
+            }
             return leftOperand / rightOperand;
         }
     };
