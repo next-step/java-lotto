@@ -19,6 +19,7 @@ class LottoResultTest {
         lottoGame = new LottoGame(Arrays.asList(
                 new Lotto("1,2,3,4,5,6".split(",")),
                 new Lotto("1,2,3,4,5,45".split(",")),
+                new Lotto("1,2,3,4,5,7".split(",")),
                 new Lotto("1,2,3,4,44,45".split(",")),
                 new Lotto("1,2,3,43,44,45".split(",")),
                 new Lotto("1,2,42,43,44,45".split(","))));
@@ -28,7 +29,7 @@ class LottoResultTest {
     @DisplayName("로또 등수별 갯수 구하기")
     void count_group_by_rank() {
         //given
-        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6".split(","));
+        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6".split(","), 7);
         //when
         LottoResult result = lottoGame.getWinningResult(winningNumbers);
         //then
@@ -36,7 +37,8 @@ class LottoResultTest {
                 () -> assertThat(result.getCount(LottoRank.FIRST)).isEqualTo(1),
                 () -> assertThat(result.getCount(LottoRank.SECOND)).isEqualTo(1),
                 () -> assertThat(result.getCount(LottoRank.THIRD)).isEqualTo(1),
-                () -> assertThat(result.getCount(LottoRank.FOURTH)).isEqualTo(1)
+                () -> assertThat(result.getCount(LottoRank.FOURTH)).isEqualTo(1),
+                () -> assertThat(result.getCount(LottoRank.FIFTH)).isEqualTo(1)
         );
     }
 

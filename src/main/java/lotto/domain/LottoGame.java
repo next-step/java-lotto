@@ -17,7 +17,8 @@ public class LottoGame {
 
         for (Lotto lotto : value) {
             int numberOfEquals = winningNumbers.numberOfEquals(lotto);
-            LottoRank rank = LottoRank.getLottoRank(numberOfEquals);
+            boolean matchBonus = winningNumbers.matchBonus(lotto);
+            LottoRank rank = LottoRank.getLottoRank(numberOfEquals, matchBonus);
             int count = result.getOrDefault(rank, 0) + 1;
             result.put(rank, count);
         }

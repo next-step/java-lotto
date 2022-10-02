@@ -46,4 +46,8 @@ public class Lotto {
         return (int) this.value.stream().filter(lotto.value::contains).count();
     }
 
+    public boolean contain(LottoNumber number) {
+        return value.contains(number);
+    }
+
 }
