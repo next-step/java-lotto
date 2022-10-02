@@ -43,7 +43,7 @@ public class InputView implements AutoCloseable {
 
     public LottoBall getBonusBallFromUser() throws IOException {
         this.printBonusBallQst();
-        return new LottoBall(Integer.parseInt(this.bufferedReader.readLine()));
+        return new LottoBall(getSingleNumber());
     }
 
     private void printMoneyQst() {
