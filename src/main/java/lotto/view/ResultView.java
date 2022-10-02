@@ -13,6 +13,7 @@ public class ResultView {
         for(int matchingCount : Reward.getRewardMap().keySet()){
             System.out.println(matchingCount + "개 일치 ("+ Reward.getReward(matchingCount) +"원)- "+ result.getWinCount(matchingCount) +"개");;
         }
+        System.out.println("총 수익률은 " + result.getRateOfIncome() + "입니다");;
     }
 
     public void printLottoNumber(List<Lotto> lottoList){
