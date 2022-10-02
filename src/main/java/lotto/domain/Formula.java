@@ -26,11 +26,11 @@ public class Formula {
         }
     }
 
-    private void connectSingleFormula(SingleFormulaVo SingleFormulaVo, String element) {
-        SingleFormulaVo.set(element);
-        if (SingleFormulaVo.isValid()) {
-            firstSingleFormula.setLastSingleFormula(new SingleFormula(SingleFormulaVo));
-            SingleFormulaVo.reset();
+    private void connectSingleFormula(SingleFormulaVo singleFormulaVo, String element) {
+        singleFormulaVo.set(element);
+        if (singleFormulaVo.isValid()) {
+            firstSingleFormula.setLastSingleFormula(new SingleFormula(singleFormulaVo));
+            singleFormulaVo.reset();
         }
     }
 
