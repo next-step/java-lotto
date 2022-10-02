@@ -10,24 +10,20 @@ import lotto.service.impl.RandomNumberPicker;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-public class InputView implements AutoCloseable{
+public class InputView implements AutoCloseable {
 
-    private final BufferedReader bufferedReader;
-    private final LottoNumberPicker manualNumberPicker;
-    private final LottoStore store;
     private static final int FIRST = 0;
     private static final int SINLE_LOTTO_NUMBER = 1;
     private static final String LOTTO_BUY_MONEY_QST = "구입금액을 입력해 주세요.";
     private static final String BUY_NUMBER = "수동으로 %d장, 자동으로 %d개를 구매했습니다. \n";
     private static final String WINNING_NUMBER_QST = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_BALL_QST = "보너스 볼을 입력해 주세요.";
-
-    private static final String MANUAL_LOTTO_BUY_NUMBER ="수동으로 구매할 로또 수를 입력해 주세요.";
-
-    private static final String MANUAL_LOTTO_NUMBER_QST ="수동으로 구매할 번호를 입력해 주세요.";
+    private static final String MANUAL_LOTTO_BUY_NUMBER = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUAL_LOTTO_NUMBER_QST = "수동으로 구매할 번호를 입력해 주세요.";
+    private final BufferedReader bufferedReader;
+    private final LottoNumberPicker manualNumberPicker;
+    private final LottoStore store;
 
     protected InputView(BufferedReader bufferedReader) {
         this.bufferedReader = bufferedReader;
@@ -40,12 +36,12 @@ public class InputView implements AutoCloseable{
         return getSingleNumber();
     }
 
-     public Integer getManualLottoNumber() throws IOException {
+    public Integer getManualLottoNumber() throws IOException {
         this.printManualLottoBuyMsg();
         return getSingleNumber();
     }
 
-     public LottoBall getBonusBallFromUser() throws IOException {
+    public LottoBall getBonusBallFromUser() throws IOException {
         this.printBonusBallQst();
         return new LottoBall(Integer.parseInt(this.bufferedReader.readLine()));
     }
@@ -54,15 +50,16 @@ public class InputView implements AutoCloseable{
         System.out.println(LOTTO_BUY_MONEY_QST);
     }
 
-    private void printManualLottoBuyMsg(){
+    private void printManualLottoBuyMsg() {
         System.out.println(MANUAL_LOTTO_BUY_NUMBER);
     }
 
-    private void printManualLottoNumber(){
+    private void printManualLottoNumber() {
         System.out.println(MANUAL_LOTTO_NUMBER_QST);
     }
-    private void printLottoBuyMsg(int lottoNumber , int manualLottoNumber) {
-        System.out.printf(BUY_NUMBER, manualLottoNumber , lottoNumber);
+
+    private void printLottoBuyMsg(int lottoNumber, int manualLottoNumber) {
+        System.out.printf(BUY_NUMBER, manualLottoNumber, lottoNumber);
     }
 
     private void printWinningNumberQst() {
@@ -76,25 +73,27 @@ public class InputView implements AutoCloseable{
     private int getSingleNumber() throws IOException {
         int number = Integer.parseInt(this.bufferedReader.readLine().trim());
         if (number < 0) {
-            throw new IllegalArgumentException("돈은 0 또는 음수일수 없습니다.");
+            throw new IllegalArgumentException("입력값은 음수일수 없습니다.");
         }
         return number;
     }
+
     public Lottos getManualLottos(int number) {
         this.printManualLottoNumber();
-        return new Lottos(number,this.manualNumberPicker);
+        return new Lottos(number, this.manualNumberPicker);
     }
 
-    public Lottos getAutomaticLottos(Integer money , Integer manualLottoNUmber) {
-        Lottos lottos = this.store.buy(money,manualLottoNUmber);
-        this.printLottoBuyMsg(lottos.size(),manualLottoNUmber);
+    public Lottos getAutomaticLottos(Integer money, Integer manualLottoNUmber) {
+        Lottos lottos = this.store.buy(money, manualLottoNUmber);
+        this.printLottoBuyMsg(lottos.size(), manualLottoNUmber);
         return lottos;
     }
 
     public Lotto getWinningLotto() {
         this.printWinningNumberQst();
-        return new Lottos(SINLE_LOTTO_NUMBER,this.manualNumberPicker).getLottos().get(FIRST);
+        return new Lottos(SINLE_LOTTO_NUMBER, this.manualNumberPicker).getLottos().get(FIRST);
     }
+
     @Override
     public void close() throws Exception {
         this.bufferedReader.close();

@@ -1,7 +1,5 @@
 package lotto.controller;
 
-import lotto.model.Lotto;
-import lotto.model.LottoBall;
 import lotto.model.Lottos;
 import lotto.model.WinningLotto;
 import lotto.service.ProfitStrategy;
@@ -19,14 +17,13 @@ public class LottoApp {
     public static void main(String[] args) {
         try (InputView inputView = getInputView()) {
             Integer money = inputView.getMoneyFromUser();
-            Integer manualLottoNumber =  inputView.getManualLottoNumber();
+            Integer manualLottoNumber = inputView.getManualLottoNumber();
 
             Lottos lottos = inputView.getManualLottos(manualLottoNumber);
-            lottos.add(inputView.getAutomaticLottos(money,manualLottoNumber));
+            lottos.add(inputView.getAutomaticLottos(money, manualLottoNumber));
             OutputView.printLottos(lottos);
 
-            WinningLotto winningLotto = new WinningLotto(inputView.getWinningLotto(),inputView.getBonusBallFromUser());
-
+            WinningLotto winningLotto = new WinningLotto(inputView.getWinningLotto(), inputView.getBonusBallFromUser());
             OutputView.printSummary(lottos.getMatchNumbers(winningLotto));
 
             ProfitStrategy profitStrategy = getProfitStrategy();

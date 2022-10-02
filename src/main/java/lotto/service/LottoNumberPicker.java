@@ -3,7 +3,6 @@ package lotto.service;
 
 import lotto.model.LottoBall;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface LottoNumberPicker {
@@ -12,5 +11,5 @@ public interface LottoNumberPicker {
 
     int MAX_BOUND_NUM = 100;
 
-    List<LottoBall> pick() ;
+    List<LottoBall> pick();
 }

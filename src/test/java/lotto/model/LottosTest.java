@@ -33,14 +33,15 @@ class LottosTest {
 
 
     @Test
-    void shouldAddLottos(){
+    void shouldAddLottos() {
         int lottoNumber = 3;
         Lottos lottosA = new Lottos(lottoNumber, getNumberPicker());
         Lottos lottosB = new Lottos(lottoNumber, getNumberPicker());
         lottosA.add(lottosB);
 
-        assertThat(lottosA.size()).isEqualTo(lottoNumber*2);
+        assertThat(lottosA.size()).isEqualTo(lottoNumber * 2);
     }
+
     private LottoNumberPicker getNumberPicker() {
         return () -> List.of(1, 2, 3, 4, 5, 6).stream().map(LottoBall::new).collect(Collectors.toList());
     }
