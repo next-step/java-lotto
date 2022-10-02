@@ -31,43 +31,61 @@ public class InputView implements AutoCloseable {
         this.manualNumberPicker = new ManualNumberPicker(bufferedReader);
     }
 
-    public Integer getMoneyFromUser() throws IOException {
+    public Integer getMoney() throws IOException {
         this.printMoneyQst();
         return getSingleNumber();
-    }
-
-    public Integer getManualLottoNumber() throws IOException {
-        this.printManualLottoBuyMsg();
-        return getSingleNumber();
-    }
-
-    public LottoBall getBonusBallFromUser() throws IOException {
-        this.printBonusBallQst();
-        return new LottoBall(getSingleNumber());
     }
 
     private void printMoneyQst() {
         System.out.println(LOTTO_BUY_MONEY_QST);
     }
 
+
+    public Integer getManualLottoNumber() throws IOException {
+        this.printManualLottoBuyMsg();
+        return getSingleNumber();
+    }
+
     private void printManualLottoBuyMsg() {
         System.out.println(MANUAL_LOTTO_BUY_NUMBER);
+    }
+
+
+    public LottoBall getBonusBall() throws IOException {
+        this.printBonusBallQst();
+        return new LottoBall(getSingleNumber());
+    }
+
+    private void printBonusBallQst() {
+        System.out.println(BONUS_BALL_QST);
+    }
+
+    public Lottos getManualLottos(int number) {
+        this.printManualLottoNumber();
+        return new Lottos(number, this.manualNumberPicker);
     }
 
     private void printManualLottoNumber() {
         System.out.println(MANUAL_LOTTO_NUMBER_QST);
     }
 
+    public Lottos getAutomaticLottos(Integer money, Integer manualLottoNUmber) {
+        Lottos lottos = this.store.buy(money, manualLottoNUmber);
+        this.printLottoBuyMsg(lottos.size(), manualLottoNUmber);
+        return lottos;
+    }
+
     private void printLottoBuyMsg(int lottoNumber, int manualLottoNumber) {
         System.out.printf(BUY_NUMBER, manualLottoNumber, lottoNumber);
     }
 
-    private void printWinningNumberQst() {
-        System.out.println(WINNING_NUMBER_QST);
+    public Lotto getWinningLotto() {
+        this.printWinningNumberQst();
+        return new Lottos(SINLE_LOTTO_NUMBER, this.manualNumberPicker).getLottos().get(FIRST);
     }
 
-    private void printBonusBallQst() {
-        System.out.println(BONUS_BALL_QST);
+    private void printWinningNumberQst() {
+        System.out.println(WINNING_NUMBER_QST);
     }
 
     private int getSingleNumber() throws IOException {
@@ -78,21 +96,6 @@ public class InputView implements AutoCloseable {
         return number;
     }
 
-    public Lottos getManualLottos(int number) {
-        this.printManualLottoNumber();
-        return new Lottos(number, this.manualNumberPicker);
-    }
-
-    public Lottos getAutomaticLottos(Integer money, Integer manualLottoNUmber) {
-        Lottos lottos = this.store.buy(money, manualLottoNUmber);
-        this.printLottoBuyMsg(lottos.size(), manualLottoNUmber);
-        return lottos;
-    }
-
-    public Lotto getWinningLotto() {
-        this.printWinningNumberQst();
-        return new Lottos(SINLE_LOTTO_NUMBER, this.manualNumberPicker).getLottos().get(FIRST);
-    }
 
     @Override
     public void close() throws Exception {
