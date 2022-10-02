@@ -46,6 +46,7 @@ public class Number {
         if (number.number() == 0) {
             throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
         }
+        
         return new Number(this.number / number.number);
     }
 }
