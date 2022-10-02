@@ -51,6 +51,4 @@ class OperatorTest {
     void 연산자_변환() {
         assertThat(Operator.from("+")).isEqualTo(Operator.PLUS);
     }
-
-
 }

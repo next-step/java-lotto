@@ -23,8 +23,8 @@ public enum Operator {
         return result / num;
     });
 
-    private String code;
-    private IntBinaryOperator operate;
+    private final String code;
+    private final IntBinaryOperator operate;
 
     private static final Map<String, Operator> operatorCache;
 
