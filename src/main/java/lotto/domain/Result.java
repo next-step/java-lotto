@@ -6,14 +6,10 @@ public class Result {
     private final Map<Integer, WinResult> winResultMap = new HashMap<>();
     private int initMoney;
 
-    public void saveInitMoney(int lottoCount) {
-        this.initMoney = lottoCount * Config.LOTTE_PRICE;
-    }
-
-    public void saveResult(int matchingCount) {
-        if (isWin(matchingCount)) {
-            winResultMap.putIfAbsent(matchingCount, new WinResult(matchingCount));
-            winResultMap.get(matchingCount).addWinCount();
+    public Result(List<Lotto> lottoList, List<Integer> lastWeeksCollectNumberList) {
+        this.saveInitMoney(lottoList.size());
+        for (Lotto lotto : lottoList) {
+            this.saveResult(lotto.getMatchCount(lastWeeksCollectNumberList));
         }
     }
 
@@ -38,6 +34,17 @@ public class Result {
             sum += Reward.getReward(winResult.getMatchingCount()) * winResult.getWinCount();
         }
         return sum;
+    }
+
+    private void saveInitMoney(int lottoCount) {
+        this.initMoney = lottoCount * Config.LOTTE_PRICE;
+    }
+
+    private void saveResult(int matchingCount) {
+        if (isWin(matchingCount)) {
+            winResultMap.putIfAbsent(matchingCount, new WinResult(matchingCount));
+            winResultMap.get(matchingCount).addWinCount();
+        }
     }
 
     private class WinResult {
