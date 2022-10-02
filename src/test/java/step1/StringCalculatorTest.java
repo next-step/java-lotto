@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import step1.domain.Number;
+import step1.domain.StringCalculator;
 
 class StringCalculatorTest {
 

@@ -9,8 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import step1.domain.InputParser;
 import step1.domain.Number;
 import step1.domain.Operator;
+import step1.domain.ParserResult;
 
 class InputParserTest {
 
@@ -24,7 +26,7 @@ class InputParserTest {
     }
 
     @ParameterizedTest(name = "조건에 맞지 않는 식이 들어올 때: {0}")
-    @ValueSource(strings = {"sfsdfsdfasdf", "-1 + 2", "2 -"})
+    @ValueSource(strings = {"sfsdfsdfasdf", "- 1 + 2", "2 -"})
     void parseInvalidExpression(String expression) {
         assertThatThrownBy(() -> InputParser.parseExpression(expression)).isInstanceOf(RuntimeException.class);
     }

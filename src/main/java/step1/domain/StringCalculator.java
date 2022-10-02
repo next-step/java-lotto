@@ -1,9 +1,6 @@
-package step1;
+package step1.domain;
 
 import java.util.Iterator;
-
-import step1.domain.Number;
-import step1.domain.Operator;
 
 public class StringCalculator {
     private final String expression;

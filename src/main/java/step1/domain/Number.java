@@ -15,10 +15,6 @@ public class Number {
         this.number = number;
     }
 
-    public int getValue() {
-        return number;
-    }
-
     public Number add(Number other) {
         return new Number(this.number + other.number);
     }
@@ -37,6 +33,10 @@ public class Number {
         }
 
         return new Number(this.number / other.number);
+    }
+
+    public int getValue() {
+        return number;
     }
 
     @Override
