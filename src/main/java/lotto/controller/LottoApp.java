@@ -1,10 +1,12 @@
 package lotto.controller;
 
+import lotto.LottoStore;
 import lotto.model.Lotto;
 import lotto.model.LottoBall;
 import lotto.model.Lottos;
 import lotto.model.WinningLotto;
 import lotto.service.ProfitStrategy;
+import lotto.service.impl.RandomNumberPicker;
 import lotto.service.impl.RelativeProfitStrategy;
 
 import java.io.BufferedReader;
@@ -17,9 +19,10 @@ public class LottoApp {
     private static final Logger LOGGER = Logger.getLogger(LottoApp.class.getName());
 
     public static void main(String[] args) {
-        try (InputView inputView = new InputView(new BufferedReader(new InputStreamReader(System.in)))) {
+        try (InputView inputView = new InputView(new BufferedReader(new InputStreamReader(System.in)),new LottoStore(new RandomNumberPicker()))) {
             Integer money = inputView.getMoneyFromUser();
-            Lottos manualLotto = inputView.getManualLotto();
+            Integer manualLottoNumber =  inputView.getManualLottoNumber();
+            Lottos manualLottos = inputView.getManualLotto(manualLottoNumber);
             Lottos lottos = inputView.getLottos(money);
 
             Lotto lotto = inputView.getWinningLottoFromUser();

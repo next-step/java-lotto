@@ -26,9 +26,11 @@ public class InputView implements AutoCloseable {
 
     private static final String MANUAL_LOTTO_NUMBER_QST ="수동으로 구매할 번호를 입력해 주세요.";
     private final BufferedReader bufferedReader;
+    private final LottoStore lottoStore;
 
-    public InputView(BufferedReader bufferedReader) {
+    public InputView(BufferedReader bufferedReader , LottoStore store) {
         this.bufferedReader = bufferedReader;
+        this.lottoStore = store;
     }
 
     private void printMoneyQst() {
@@ -60,13 +62,12 @@ public class InputView implements AutoCloseable {
         return money;
     }
 
-    public Lottos getManualLotto() throws IOException {
+    public Integer getManualLottoNumber() throws IOException {
         this.printManualLottoBuyMsg();
-        int number = getSingleNumber();
-        return getManualLotto(number);
+        return getSingleNumber();
     }
 
-    private Lottos getManualLotto(int number) throws IOException {
+    public Lottos getManualLotto(int number) throws IOException {
         this.printManualLottoNumber();
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < number; i++){
@@ -86,7 +87,7 @@ public class InputView implements AutoCloseable {
     }
 
     public Lottos getLottos(Integer money) {
-        Lottos lottos = new LottoStore(new RandomNumberPicker()).buy(money);
+        Lottos lottos = this.lottoStore.buy(money);
         this.printLottoBuyMsg(lottos.size());
         OutputView.printLottos(lottos);
         return lottos;
