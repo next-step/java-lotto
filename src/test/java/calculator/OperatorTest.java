@@ -4,6 +4,7 @@ import calculator.domain.Operator;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 /**
  * Created by seungwoo.song on 2022-09-27
@@ -27,7 +28,17 @@ class OperatorTest {
 
     @Test
     void 나누기() {
-        assertThat(Operator.DIVIDE.operate(5, 2)).isEqualTo(2);
+        assertThat(Operator.DIVIDE.operate(4, 2)).isEqualTo(2);
+    }
+
+    @Test
+    void 나누기_떨어지지않는수() {
+        assertThatIllegalArgumentException().isThrownBy(() -> Operator.DIVIDE.operate(5, 2));
+    }
+
+    @Test
+    void 나누기_0() {
+        assertThatIllegalArgumentException().isThrownBy(() -> Operator.DIVIDE.operate(5, 0));
     }
 
     @Test
@@ -38,6 +49,8 @@ class OperatorTest {
 
     @Test
     void 연산자_변환() {
-        assertThat(Operator.parse("+")).isEqualTo(Operator.PLUS);
+        assertThat(Operator.from("+")).isEqualTo(Operator.PLUS);
     }
+
+
 }

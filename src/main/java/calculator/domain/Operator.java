@@ -26,10 +26,10 @@ public enum Operator {
     private String code;
     private IntBinaryOperator operate;
 
-    private static final Map<String, Operator> operatorMap;
+    private static final Map<String, Operator> operatorCache;
 
     static {
-        operatorMap = Arrays.stream(values())
+        operatorCache = Arrays.stream(values())
                 .collect(toMap(value -> value.code, value -> value));
     }
 
@@ -38,12 +38,12 @@ public enum Operator {
         this.operate = operator;
     }
 
-    public int operate(Integer result, Integer number) {
+    public int operate(int result, int number) {
         return operate.applyAsInt(result, number);
     }
 
-    public static Operator parse(String code) {
-        Operator operator = operatorMap.get(code);
+    public static Operator from(String code) {
+        Operator operator = operatorCache.get(code);
         if (operator == null) {
             throw  new IllegalArgumentException("잘못된 연산자 입니다");
         }
@@ -51,6 +51,6 @@ public enum Operator {
     }
 
     public static boolean isOperator(String code) {
-        return operatorMap.get(code) != null;
+        return operatorCache.containsKey(code);
     }
 }

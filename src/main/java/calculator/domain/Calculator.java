@@ -40,7 +40,7 @@ public class Calculator {
 
     private CalculateInfo parse(String token) {
         if (Operator.isOperator(token)) {
-            return new OpercatorValue(Operator.parse(token));
+            return new OpercatorValue(Operator.from(token));
         }
 
         return new NumberValue(Integer.valueOf(token));

@@ -8,7 +8,7 @@ import java.util.Stack;
 public class CalculateResult {
 
     private Stack<Operator> operatorStack = new Stack<>();
-    private int result = 0;
+    private int result;
 
     public void calculate(int value) {
         if (operatorStack.isEmpty()) {
