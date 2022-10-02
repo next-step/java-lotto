@@ -16,7 +16,7 @@ class LottosTest {
     @Test
     void create() {
         Integer purchaseAmount = 1000;
-        Lottos lottos = new Lottos(lotto()::numbers, purchaseAmount);
+        Lottos lottos = new Lottos(this::lotto, purchaseAmount);
 
         assertThat(lottos).isEqualTo(new Lottos(List.of(lotto())));
     }
@@ -25,7 +25,7 @@ class LottosTest {
     @Test
     void count() {
         Integer purchaseAmount = 14000;
-        Lottos lottos = new Lottos(lotto()::numbers, purchaseAmount);
+        Lottos lottos = new Lottos(this::lotto, purchaseAmount);
 
         assertThat(lottos.count()).isEqualTo(14);
     }

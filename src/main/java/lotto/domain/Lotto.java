@@ -7,10 +7,6 @@ import java.util.Objects;
 public class Lotto {
     private final List<Integer> numbers;
 
-    public Lotto(RandomGenerator randomGenerator) {
-        numbers = randomGenerator.randomNumbers();
-    }
-
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
     }
