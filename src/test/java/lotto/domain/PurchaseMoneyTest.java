@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.enums.LottoRank;
+import lotto.domain.enums.LottoReward;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -36,11 +38,11 @@ class PurchaseMoneyTest {
         //given
         PurchaseMoney purchaseMoney = new PurchaseMoney(1000);
 
-        HashMap<Integer, Integer> result = new HashMap<>();
-        result.put(LottoResult.FIRST, 1);
+        HashMap<LottoRank, Integer> result = new HashMap<>();
+        result.put(LottoRank.FIRST, 1);
         LottoResult lottoResult = new LottoResult(result);
         //when
-        float expected = LottoResult.FIRST_PRIZE / (float) Lotto.PRICE;
+        float expected = LottoReward.FIRST.getReward() / (float) Lotto.PRICE;
         //then
         assertThat(purchaseMoney.getEarningRate(lottoResult)).isEqualTo(expected);
     }
@@ -51,11 +53,11 @@ class PurchaseMoneyTest {
         //given
         PurchaseMoney purchaseMoney = new PurchaseMoney(2000);
 
-        HashMap<Integer, Integer> result = new HashMap<>();
-        result.put(LottoResult.SECOND, 1);
+        HashMap<LottoRank, Integer> result = new HashMap<>();
+        result.put(LottoRank.SECOND, 1);
         LottoResult lottoResult = new LottoResult(result);
         //when
-        float expected = LottoResult.SECOND_PRIZE / (float) (Lotto.PRICE * 2);
+        float expected = LottoReward.SECOND.getReward() / (float) (Lotto.PRICE * 2);
         //then
         assertThat(purchaseMoney.getEarningRate(lottoResult)).isEqualTo(expected);
     }

@@ -1,9 +1,8 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import lotto.domain.enums.LottoRank;
+
+import java.util.*;
 
 public class LottoGame {
 
@@ -14,16 +13,13 @@ public class LottoGame {
     }
 
     public LottoResult getWinningResult(WinningNumbers winningNumbers) {
-        Map<Integer, Integer> result = new HashMap<>();
-
-        for (int i = 0; i < Lotto.SIZE+1; i++) {
-            result.put(i, 0);
-        }
+        Map<LottoRank, Integer> result = new EnumMap<>(LottoRank.class);
 
         for (Lotto lotto : value) {
             int numberOfEquals = winningNumbers.numberOfEquals(lotto);
-            int count = result.get(numberOfEquals) + 1;
-            result.put(numberOfEquals, count);
+            LottoRank rank = LottoRank.getLottoRank(numberOfEquals);
+            int count = result.getOrDefault(rank, 0) + 1;
+            result.put(rank, count);
         }
         return new LottoResult(result);
     }

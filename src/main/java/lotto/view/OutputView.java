@@ -4,6 +4,8 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoResult;
 import lotto.domain.PurchaseMoney;
+import lotto.domain.enums.LottoRank;
+import lotto.domain.enums.LottoReward;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,10 +39,10 @@ public class OutputView {
     public static void printResult(LottoResult lottoResult) {
         System.out.println("당첨 통계");
         System.out.println(HORIZON);
-        System.out.printf(FORMAT_RESULT, LottoResult.FOURTH, LottoResult.FOURTH_PRIZE, lottoResult.getFourthCount());
-        System.out.printf(FORMAT_RESULT, LottoResult.THIRD, LottoResult.THIRD_PRIZE, lottoResult.getThirdCount());
-        System.out.printf(FORMAT_RESULT, LottoResult.SECOND, LottoResult.SECOND_PRIZE, lottoResult.getSecondCount());
-        System.out.printf(FORMAT_RESULT, LottoResult.FIRST, LottoResult.FIRST_PRIZE, lottoResult.getFirstCount());
+        System.out.printf(FORMAT_RESULT, LottoRank.FOURTH.getMatchCount(), LottoReward.FOURTH.getReward(), lottoResult.getFourthCount());
+        System.out.printf(FORMAT_RESULT, LottoRank.THIRD.getMatchCount(), LottoReward.THIRD.getReward(), lottoResult.getThirdCount());
+        System.out.printf(FORMAT_RESULT, LottoRank.SECOND.getMatchCount(), LottoReward.THIRD.getReward(), lottoResult.getSecondCount());
+        System.out.printf(FORMAT_RESULT, LottoRank.FIRST.getMatchCount(), LottoReward.FOURTH.getReward(), lottoResult.getFirstCount());
     }
     public static void printEarningRate(PurchaseMoney purchaseMoney, LottoResult lottoResult){
         System.out.printf(FORMAT_RESULT_EARNING_RATE, purchaseMoney.getEarningRate(lottoResult));
