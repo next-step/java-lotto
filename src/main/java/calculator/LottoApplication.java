@@ -1,8 +1,8 @@
-package lotto;
+package calculator;
 
-import lotto.domain.Formula;
-import lotto.domain.SingleFormula;
-import lotto.view.InputView;
+import calculator.domain.Formula;
+import calculator.domain.SingleFormula;
+import calculator.view.InputView;
 
 public class LottoApplication {
     public static void main(String[] args) {

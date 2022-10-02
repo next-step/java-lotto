@@ -1,4 +1,4 @@
-package lotto.domain;
+package calculator.domain;
 
 import java.util.regex.Pattern;
 

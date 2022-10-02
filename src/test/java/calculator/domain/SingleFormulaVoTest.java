@@ -1,5 +1,6 @@
-package lotto.domain;
+package calculator.domain;
 
+import calculator.domain.SingleFormulaVo;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;

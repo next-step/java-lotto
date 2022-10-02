@@ -1,4 +1,4 @@
-package lotto.domain;
+package calculator.domain;
 
 public class SingleFormula {
     private final int number;

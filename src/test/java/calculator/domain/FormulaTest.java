@@ -1,5 +1,6 @@
-package lotto.domain;
+package calculator.domain;
 
+import calculator.domain.Formula;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
