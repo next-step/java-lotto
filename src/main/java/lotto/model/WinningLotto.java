@@ -8,6 +8,9 @@ public class WinningLotto {
 
     public WinningLotto(Lotto lotto, LottoBall bonusBall) {
         this.lotto = lotto;
+        if (lotto.hasLottoBall(bonusBall)){
+            throw new IllegalArgumentException("당첨번호에 보너스볼이 또 존재할수는 없습니다.");
+        }
         this.bonusBall = bonusBall;
     }
 
