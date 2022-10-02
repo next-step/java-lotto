@@ -19,6 +19,7 @@ public class LottoApp {
     public static void main(String[] args) {
         try (InputView inputView = new InputView(new BufferedReader(new InputStreamReader(System.in)))) {
             Integer money = inputView.getMoneyFromUser();
+            Lottos manualLotto = inputView.getManualLotto();
             Lottos lottos = inputView.getLottos(money);
 
             Lotto lotto = inputView.getWinningLottoFromUser();

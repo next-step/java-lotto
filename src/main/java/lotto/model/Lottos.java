@@ -24,6 +24,10 @@ public class Lottos {
         }
     }
 
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
     public Map<MatchNumber, Integer> getMatchNumbers(WinningLotto winningLotto) {
         return getStreamOfMatchNumberWithMoney(winningLotto)
                 .sorted(MatchNumber::compareTo)
