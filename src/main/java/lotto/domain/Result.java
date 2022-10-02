@@ -17,8 +17,8 @@ public class Result {
         }
     }
 
-    public double getRateOfIncome(){
-        return ((double)(int)(((double)getTotalIncome() / (double)this.initMoney) * 100) / 100);
+    public double getRateOfIncome() {
+        return ((double) (int) (((double) getTotalIncome() / (double) this.initMoney) * 100) / 100);
     }
 
     public int getWinCount(int matchingCount) {
@@ -32,9 +32,9 @@ public class Result {
         return Reward.getReward(matchingCount) != 0;
     }
 
-    private int getTotalIncome(){
+    private int getTotalIncome() {
         int sum = 0;
-        for(WinResult winResult: this.winResultMap.values()){
+        for (WinResult winResult : this.winResultMap.values()) {
             sum += Reward.getReward(winResult.getMatchingCount()) * winResult.getWinCount();
         }
         return sum;

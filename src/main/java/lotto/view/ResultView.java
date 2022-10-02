@@ -9,15 +9,15 @@ import java.util.List;
 
 public class ResultView {
 
-    public void printResult(Result result){
-        for(int matchingCount : Reward.getRewardMap().keySet()){
-            System.out.println(matchingCount + "개 일치 ("+ Reward.getReward(matchingCount) +"원)- "+ result.getWinCount(matchingCount) +"개");;
+    public void printResult(Result result) {
+        for (int matchingCount : Reward.getRewardMap().keySet()) {
+            System.out.println(matchingCount + "개 일치 (" + Reward.getReward(matchingCount) + "원)- " + result.getWinCount(matchingCount) + "개");
         }
-        System.out.println("총 수익률은 " + result.getRateOfIncome() + "입니다");;
+        System.out.println("총 수익률은 " + result.getRateOfIncome() + "입니다");
     }
 
-    public void printLottoNumber(List<Lotto> lottoList){
-        for(Lotto lotto : lottoList){
+    public void printLottoNumber(List<Lotto> lottoList) {
+        for (Lotto lotto : lottoList) {
             System.out.println(Arrays.toString(lotto.getNumbers()));
         }
     }

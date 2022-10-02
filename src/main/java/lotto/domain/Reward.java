@@ -10,7 +10,7 @@ public class Reward {
         return rewardMap;
     }
 
-    public static int getReward(int matchingCount){
+    public static int getReward(int matchingCount) {
         return rewardMap.get(matchingCount) != null ? rewardMap.get(matchingCount) : 0;
     }
 
@@ -18,7 +18,7 @@ public class Reward {
     // 4개 당첨 : 50000원
     // 5개 당첨 : 1500000원
     // 6개 당첨 : 2000000000원
-    private static Map<Integer, Integer> initRewardMap(){
+    private static Map<Integer, Integer> initRewardMap() {
         Map<Integer, Integer> rewardMap = new HashMap<>();
         rewardMap.put(3, 5000);
         rewardMap.put(4, 50000);

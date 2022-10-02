@@ -17,14 +17,14 @@ public class InputView {
         return lastWeeksCollectNumbers;
     }
 
-    public void setPurchaseAmount(){
+    public void setPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         int purchaseAmount = scanner.nextInt();
         this.purchaseAmount = purchaseAmount;
     }
 
-    public void setLastWeeksCollectNumbers(){
+    public void setLastWeeksCollectNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         String lastWeeksCollectNumbers = scanner.nextLine();
