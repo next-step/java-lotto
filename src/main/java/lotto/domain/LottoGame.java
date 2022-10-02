@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +29,7 @@ public class LottoGame {
     }
 
     public List<Lotto> getValue(){
-        return this.value;
+        return Collections.unmodifiableList(this.value);
     }
 
 }

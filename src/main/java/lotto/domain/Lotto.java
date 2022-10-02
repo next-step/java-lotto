@@ -12,6 +12,7 @@ public class Lotto {
     public Lotto(List<LottoNumber> lottoNumbers) {
         validateDistinct(lottoNumbers);
         validateSize(lottoNumbers);
+        Collections.sort(lottoNumbers);
         this.value = lottoNumbers;
     }
 
@@ -38,7 +39,7 @@ public class Lotto {
     }
 
     public List<LottoNumber> getValue() {
-        return value;
+        return Collections.unmodifiableList(value);
     }
 
     public int numberOfEquals(Lotto lotto) {
