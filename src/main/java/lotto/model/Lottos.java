@@ -2,10 +2,7 @@ package lotto.model;
 
 import lotto.service.LottoNumberPicker;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 import static java.util.function.Function.identity;
@@ -22,10 +19,6 @@ public class Lottos {
         for (int i = 0; i < lottoNum; i++) {
             this.lottos.add(new Lotto(picker.pick()));
         }
-    }
-
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
     }
 
     public Map<MatchNumber, Integer> getMatchNumbers(WinningLotto winningLotto) {
@@ -54,4 +47,9 @@ public class Lottos {
     public int size() {
         return this.lottos.size();
     }
+
+    public void add(Lottos lottos) {
+        this.lottos.addAll(lottos.lottos);
+    }
+
 }

@@ -1,12 +1,10 @@
 package lotto.controller;
 
-import lotto.LottoStore;
 import lotto.model.Lotto;
 import lotto.model.LottoBall;
 import lotto.model.Lottos;
 import lotto.model.WinningLotto;
 import lotto.service.ProfitStrategy;
-import lotto.service.impl.RandomNumberPicker;
 import lotto.service.impl.RelativeProfitStrategy;
 
 import java.io.BufferedReader;
@@ -19,15 +17,15 @@ public class LottoApp {
     private static final Logger LOGGER = Logger.getLogger(LottoApp.class.getName());
 
     public static void main(String[] args) {
-        try (InputView inputView = new InputView(new BufferedReader(new InputStreamReader(System.in)),new LottoStore(new RandomNumberPicker()))) {
+        try (InputView inputView = getInputView()) {
             Integer money = inputView.getMoneyFromUser();
             Integer manualLottoNumber =  inputView.getManualLottoNumber();
-            Lottos manualLottos = inputView.getManualLotto(manualLottoNumber);
-            Lottos lottos = inputView.getLottos(money);
 
-            Lotto lotto = inputView.getWinningLottoFromUser();
-            LottoBall bonusBall = inputView.getBonusBallFromUser();
-            WinningLotto winningLotto = new WinningLotto(lotto, bonusBall);
+            Lottos lottos = inputView.getManualLottos(manualLottoNumber);
+            lottos.add(inputView.getAutomaticLottos(money,manualLottoNumber));
+            OutputView.printLottos(lottos);
+
+            WinningLotto winningLotto = new WinningLotto(inputView.getWinningLotto(),inputView.getBonusBallFromUser());
 
             OutputView.printSummary(lottos.getMatchNumbers(winningLotto));
 
@@ -39,6 +37,10 @@ public class LottoApp {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static InputView getInputView() {
+        return new InputView(new BufferedReader(new InputStreamReader(System.in)));
     }
 
     private static ProfitStrategy getProfitStrategy() {

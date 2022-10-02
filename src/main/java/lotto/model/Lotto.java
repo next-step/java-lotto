@@ -10,7 +10,7 @@ public class Lotto {
 
 
     public Lotto(List<LottoBall> lottoNum) {
-        if (lottoNum.size() < LottoNumberPicker.LOTTO_LENGTH) {
+        if (lottoNum.size() != LottoNumberPicker.LOTTO_LENGTH) {
             throw new IllegalArgumentException("유효하지 않은 로또 숫자입니다.");
         }
         this.lotto = lottoNum;
