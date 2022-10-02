@@ -1,7 +1,9 @@
 package lotto.controller;
 
 import lotto.model.Lotto;
+import lotto.model.LottoBall;
 import lotto.model.Lottos;
+import lotto.model.WinningLotto;
 import lotto.service.ProfitStrategy;
 import lotto.service.impl.RelativeProfitStrategy;
 
@@ -19,7 +21,9 @@ public class LottoApp {
             Integer money = inputView.getMoneyFromUser();
             Lottos lottos = inputView.getLottos(money);
 
-            Lotto winningLotto = inputView.getWinningLottoFromUser();
+            Lotto lotto = inputView.getWinningLottoFromUser();
+            LottoBall bonusBall = inputView.getBonusBallFromUser();
+            WinningLotto winningLotto = new WinningLotto(lotto, bonusBall);
 
             OutputView.printSummary(lottos.getMatchNumbers(winningLotto));
 

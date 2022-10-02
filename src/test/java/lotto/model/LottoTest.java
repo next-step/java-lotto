@@ -1,24 +1,44 @@
 package lotto.model;
 
-import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
 
     @Test
     void shouldValidateLotto() {
-        assertThatThrownBy(() -> new Lotto(List.of(1, 1, 1, 1, 1, 1, 1))).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> getLotto(List.of(1, 1, 1, 1, 1))).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    void shouldReturnMatchedCount() {
-        assertThat(new Lotto(List.of(1, 2, 3, 4, 5, 6)).getMatchedCount(new Lotto(List.of(1, 2, 3, 4, 5, 6)))).isEqualTo(6);
-        assertThat(new Lotto(List.of(1, 2, 3, 4, 5, 6)).getMatchedCount(new Lotto(List.of(1, 2, 3, 4, 5, 7)))).isEqualTo(5);
-        assertThat(new Lotto(List.of(1, 2, 3, 4,99,99)).getMatchedCount(new Lotto(List.of(1, 2, 3, 4, 8, 9)))).isEqualTo(4);
+    @DisplayName("보너스볼이 아닌, 추첨 번호와 일치된 숫자를 반환해야 합니다.")
+    void shouldReturnMatchedCountOfWinnnigLotto() {
+        Lotto lotto = getLotto(List.of(1, 2, 3, 4, 5, 6));
+
+        int matchCountA = lotto.getMatchCount(new WinningLotto(getLotto(List.of(1, 2, 3, 4, 5, 8)), new LottoBall(99)));
+        int matchCountB = lotto.getMatchCount(new WinningLotto(getLotto(List.of(1, 2, 3, 4, 5, 8)), new LottoBall(6)));
+
+        assertThat(matchCountA).isEqualTo(5);
+        assertThat(matchCountB).isEqualTo(5);
     }
+
+
+    @Test
+    void shouldReturnHasBall() {
+        Lotto lottoA = getLotto(List.of(1, 2, 3, 4, 5, 6));
+
+        assertThat(lottoA.hasLottoBall(new LottoBall(1))).isTrue();
+        assertThat(lottoA.hasLottoBall(new LottoBall(99))).isFalse();
+    }
+
+    private Lotto getLotto(List<Integer> lottoBalls) {
+        return new Lotto(lottoBalls.stream().map(LottoBall::new).collect(Collectors.toList()));
+    }
+
 }

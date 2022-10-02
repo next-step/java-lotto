@@ -3,26 +3,33 @@ package lotto.model;
 import lotto.service.LottoNumberPicker;
 
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class Lotto {
 
-    private final List<Integer> lotto;
+    private final List<LottoBall> lotto;
 
 
-    public Lotto(List<Integer> lottoNum) {
-        if (lottoNum.size() != LottoNumberPicker.LOTTO_LENGTH) {
+    public Lotto(List<LottoBall> lottoNum) {
+        if (lottoNum.size() < LottoNumberPicker.LOTTO_LENGTH) {
             throw new IllegalArgumentException("유효하지 않은 로또 숫자입니다.");
         }
         this.lotto = lottoNum;
     }
 
-    public List<Integer> getLotto() {
+    public List<LottoBall> getLotto() {
         return lotto;
     }
 
-    public Integer getMatchedCount(Lotto target) {
-        return Long.valueOf(this.lotto.stream().filter((num)-> target.lotto.contains(num)).count()).intValue();
+    public int getMatchCount(WinningLotto target) {
+        return Long.valueOf(this.lotto.stream().filter(target::hasLottoBall).count()).intValue();
+    }
+
+    public int size() {
+        return this.lotto.size();
+    }
+
+    public boolean hasLottoBall(LottoBall lottoBall) {
+        return this.lotto.contains(lottoBall);
     }
 
 }
