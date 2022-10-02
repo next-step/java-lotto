@@ -1,21 +1,29 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Result {
     private final Map<Integer, WinResult> winResultMap = new HashMap<>();
 
     public void saveResult(int matchingCount) {
-        winResultMap.putIfAbsent(matchingCount, new WinResult(matchingCount));
-        winResultMap.get(matchingCount).addWinCount();
+        if (isWin(matchingCount)) {
+            winResultMap.putIfAbsent(matchingCount, new WinResult(matchingCount));
+            winResultMap.get(matchingCount).addWinCount();
+        }
     }
 
-    public Map<Integer, WinResult> getWinResultMap() {
-        return winResultMap;
+    public int getWinCount(int matchingCount){
+        return Optional.of(this.winResultMap)
+                .map(vo->vo.get(matchingCount))
+                .map(WinResult::getWinCount)
+                .orElse(0);
     }
 
-    public class WinResult {
+    private boolean isWin(int matchingCount) {
+        return Reward.getReward(matchingCount) != 0;
+    }
+
+    private class WinResult {
         private final int matchingCount;
         private int winCount = 0;
 
@@ -23,11 +31,7 @@ public class Result {
             this.matchingCount = matchingCount;
         }
 
-        public int getMatchingCount() {
-            return matchingCount;
-        }
-
-        public int getWinCount() {
+        private int getWinCount() {
             return winCount;
         }
 

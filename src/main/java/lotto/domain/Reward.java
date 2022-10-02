@@ -10,6 +10,10 @@ public class Reward {
         return rewardMap;
     }
 
+    public static int getReward(int matchingCount){
+        return rewardMap.get(matchingCount) != null ? rewardMap.get(matchingCount) : 0;
+    }
+
     // 3개 당첨 : 5000원
     // 4개 당첨 : 50000원
     // 5개 당첨 : 1500000원
