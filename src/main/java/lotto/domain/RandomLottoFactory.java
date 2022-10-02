@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 import static java.util.Collections.shuffle;
 import static java.util.stream.Collectors.toList;
 
-public class RandomLottoGenerator implements LottoGenerator {
+public class RandomLottoFactory implements LottoFactory {
     private static final Integer MIN_NUM = 1;
     private static final Integer MAX_NUM = 45;
     private static final Integer SELECTING_COUNT = 6;

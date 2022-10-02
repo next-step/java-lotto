@@ -17,12 +17,12 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(LottoGenerator lottoGenerator, Integer amount) {
+    public Lottos(LottoFactory lottoFactory, Integer amount) {
         int count = BigDecimal.valueOf(amount)
                 .divide(UNIT_PRICE, 0, RoundingMode.FLOOR)
                 .intValue();
         this.lottos = IntStream.range(0, count)
-                .mapToObj(i -> lottoGenerator.lotto())
+                .mapToObj(i -> lottoFactory.lotto())
                 .collect(toList());
     }
 

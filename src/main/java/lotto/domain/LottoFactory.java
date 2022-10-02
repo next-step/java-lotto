@@ -1,6 +1,6 @@
 package lotto.domain;
 
 @FunctionalInterface
-public interface LottoGenerator {
+public interface LottoFactory {
     Lotto lotto();
 }
