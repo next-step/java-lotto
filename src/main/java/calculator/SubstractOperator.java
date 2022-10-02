@@ -1,21 +1,24 @@
-package step1;
+package calculator;
+
+import java.util.function.IntBinaryOperator;
 
 public class SubstractOperator implements Operator {
 
     private static SubstractOperator substracCalculator;
 
-    private SubstractOperator() {}
+    private SubstractOperator() {
+    }
 
     public static Operator getInstance() {
-        if(substracCalculator == null){
+        if (substracCalculator == null) {
             substracCalculator = new SubstractOperator();
         }
         return substracCalculator;
     }
 
     @Override
-    public int operate(int firstNumber, int secondNumber) {
-        return firstNumber - secondNumber;
+    public IntBinaryOperator operate() {
+        return (firstNumber, secondNumber) -> firstNumber - secondNumber;
     }
 
 }
