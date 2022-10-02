@@ -11,7 +11,7 @@ public class StringCalculatorValidatorTest {
 
     @ParameterizedTest(name = "유효성 검사 실패 - input: {0}")
     @NullSource
-    @ValueSource(strings = {"", " ", "  ", " 1 + 1", "1 + 1 ", "1 + 1 -"})
+    @ValueSource(strings = {"", " ", "  ", " 1 + 1", "1 + 1 ", "1 + 1 -", "1 & 1"})
     void invalidInput(String input) {
         // given & when & given
         assertThatIllegalArgumentException().isThrownBy(() -> StringCalculatorValidator.validateOrThrow(input))
