@@ -1,7 +1,7 @@
 package calculator;
 
 import calculator.domain.Calculator;
-import calculator.domain.CalculatorService;
+import calculator.service.CalculatorService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

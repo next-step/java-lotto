@@ -1,7 +1,7 @@
 package calculator;
 
 import calculator.domain.Calculator;
-import calculator.domain.CalculatorService;
+import calculator.service.CalculatorService;
 
 import java.util.Scanner;
 
