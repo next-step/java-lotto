@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoResult;
+import lotto.domain.PurchaseMoney;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,6 +41,8 @@ public class OutputView {
         System.out.printf(FORMAT_RESULT, LottoResult.THIRD, LottoResult.THIRD_PRIZE, lottoResult.getThirdCount());
         System.out.printf(FORMAT_RESULT, LottoResult.SECOND, LottoResult.SECOND_PRIZE, lottoResult.getSecondCount());
         System.out.printf(FORMAT_RESULT, LottoResult.FIRST, LottoResult.FIRST_PRIZE, lottoResult.getFirstCount());
-        System.out.printf(FORMAT_RESULT_EARNING_RATE, lottoResult.getEarningRate());
+    }
+    public static void printEarningRate(PurchaseMoney purchaseMoney, LottoResult lottoResult){
+        System.out.printf(FORMAT_RESULT_EARNING_RATE, purchaseMoney.getEarningRate(lottoResult));
     }
 }

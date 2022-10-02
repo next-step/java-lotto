@@ -24,7 +24,7 @@ public class LottoGame {
             int count = result.get(numberOfEquals) + 1;
             result.put(numberOfEquals, count);
         }
-        return new LottoResult(result, value.size());
+        return new LottoResult(result);
     }
 
     public List<Lotto> getValue(){

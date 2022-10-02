@@ -1,38 +1,42 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoResultTest {
 
-    @Test
-    @DisplayName("1개 사서 일등 당첨일때 로또 수익률 계산하기")
-    void calculate_earning_rate_when_buy_1_and_win_1() {
-        //given
-        HashMap<Integer, Integer> result = new HashMap<>();
-        result.put(LottoResult.FIRST, 1);
-        LottoResult lottoResult = new LottoResult(result, 1);
-        //when
-        float expected = LottoResult.FIRST_PRIZE / (float) Lotto.PRICE;
-        //then
-        assertThat(lottoResult.getEarningRate()).isEqualTo(expected);
+    private LottoGame lottoGame;
+
+    @BeforeEach
+    void before() {
+        lottoGame = new LottoGame(Arrays.asList(
+                new Lotto("1,2,3,4,5,6".split(",")),
+                new Lotto("1,2,3,4,5,45".split(",")),
+                new Lotto("1,2,3,4,44,45".split(",")),
+                new Lotto("1,2,3,43,44,45".split(",")),
+                new Lotto("1,2,42,43,44,45".split(","))));
     }
 
     @Test
-    @DisplayName("2개 사서 이등 당첨일때 로또 수익률 계산하기")
-    void calculate_earning_rate_when_buy_2_and_win_2() {
+    @DisplayName("로또 등수별 갯수 구하기")
+    void count_group_by_rank() {
         //given
-        HashMap<Integer, Integer> result = new HashMap<>();
-        result.put(LottoResult.SECOND, 1);
-        LottoResult lottoResult = new LottoResult(result, 2);
+        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6".split(","));
         //when
-        float expected = LottoResult.SECOND_PRIZE / (float) (Lotto.PRICE * 2);
+        LottoResult result = lottoGame.getWinningResult(winningNumbers);
         //then
-        assertThat(lottoResult.getEarningRate()).isEqualTo(expected);
+        assertAll(
+                () -> assertThat(result.getFirstCount()).isEqualTo(1),
+                () -> assertThat(result.getSecondCount()).isEqualTo(1),
+                () -> assertThat(result.getThirdCount()).isEqualTo(1),
+                () -> assertThat(result.getFourthCount()).isEqualTo(1)
+        );
     }
 
 }
