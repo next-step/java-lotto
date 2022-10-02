@@ -11,7 +11,8 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
-    private static final String FORMAT_RESULT = "%d개 일치 (%d원) - %d개%n";
+    private static final String FORMAT_RESULT_DEFAULT = "%d개 일치 (%d원) - %d개%n";
+    private static final String FORMAT_RESULT_SECOND = "%d개 일치 (%d원), 보너스 번호 일치 - %d개%n";
     private static final String FORMAT_RESULT_EARNING_RATE = "총 수익률은 %.2f입니다.";
     private static final String FORMAT_COUNT = "%d개를 구매했습니다.%n";
     private static final String HORIZON = "-".repeat(20);
@@ -38,10 +39,11 @@ public class OutputView {
     public static void printResult(LottoResult lottoResult) {
         System.out.println("당첨 통계");
         System.out.println(HORIZON);
-        System.out.printf(FORMAT_RESULT, LottoRank.FOURTH.getMatchCount(), LottoRank.FOURTH.getReward(), lottoResult.getCount(LottoRank.FOURTH));
-        System.out.printf(FORMAT_RESULT, LottoRank.THIRD.getMatchCount(), LottoRank.THIRD.getReward(), lottoResult.getCount(LottoRank.THIRD));
-        System.out.printf(FORMAT_RESULT, LottoRank.SECOND.getMatchCount(), LottoRank.SECOND.getReward(), lottoResult.getCount(LottoRank.SECOND));
-        System.out.printf(FORMAT_RESULT, LottoRank.FIRST.getMatchCount(), LottoRank.FOURTH.getReward(), lottoResult.getCount(LottoRank.FIRST));
+        System.out.printf(FORMAT_RESULT_DEFAULT, LottoRank.FIFTH.getMatchCount(), LottoRank.FIFTH.getReward(), lottoResult.getCount(LottoRank.FIFTH));
+        System.out.printf(FORMAT_RESULT_DEFAULT, LottoRank.FOURTH.getMatchCount(), LottoRank.FOURTH.getReward(), lottoResult.getCount(LottoRank.FOURTH));
+        System.out.printf(FORMAT_RESULT_DEFAULT, LottoRank.THIRD.getMatchCount(), LottoRank.THIRD.getReward(), lottoResult.getCount(LottoRank.THIRD));
+        System.out.printf(FORMAT_RESULT_SECOND, LottoRank.SECOND.getMatchCount(), LottoRank.SECOND.getReward(), lottoResult.getCount(LottoRank.SECOND));
+        System.out.printf(FORMAT_RESULT_DEFAULT, LottoRank.FIRST.getMatchCount(), LottoRank.FOURTH.getReward(), lottoResult.getCount(LottoRank.FIRST));
     }
     public static void printEarningRate(PurchaseMoney purchaseMoney, LottoResult lottoResult){
         System.out.printf(FORMAT_RESULT_EARNING_RATE, purchaseMoney.getEarningRate(lottoResult));
