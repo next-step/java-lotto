@@ -10,7 +10,7 @@ public class Formula {
     }
 
     private void checkValidation(String formulaString) {
-        if (formulaString == null || formulaString.trim().length() == 0) {
+        if (formulaString == null || formulaString.isBlank()) {
             throw new IllegalArgumentException("Wrong Input");
         }
     }
