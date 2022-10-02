@@ -34,11 +34,11 @@ public class SingleFormula {
     public int doOperate(int initNumber) {
         int result = initNumber;
 
-        if (this.operator.equals("+")) result += number;
-        if (this.operator.equals("-")) result -= number;
-        if (this.operator.equals("*")) result *= number;
-        if (this.operator.equals("/")) result /= number;
-        if (nextSingleFormula == null) return result;
+        if (this.operator.equals("+")) { result += number; }
+        if (this.operator.equals("-")) { result -= number; }
+        if (this.operator.equals("*")) { result *= number; }
+        if (this.operator.equals("/")) { result /= number; }
+        if (nextSingleFormula == null) { return result; }
 
         return nextSingleFormula.doOperate(result);
     }
