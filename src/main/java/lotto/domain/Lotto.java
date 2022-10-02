@@ -1,7 +1,6 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -30,7 +29,9 @@ public class Lotto {
     }
 
     private void validateDistinct(List<LottoNumber> lottoNumbers) {
-        List<LottoNumber> collect = lottoNumbers.stream().distinct().collect(Collectors.toList());
+
+        HashSet<LottoNumber> collect = new HashSet<>(lottoNumbers);
+
         if (collect.size() < lottoNumbers.size()) {
             throw new IllegalArgumentException("로또에 중복값이 입력되었습니다.");
         }
