@@ -25,7 +25,7 @@ public class InputView implements AutoCloseable {
     private final LottoNumberPicker manualNumberPicker;
     private final LottoStore store;
 
-    protected InputView(BufferedReader bufferedReader) {
+    public InputView(BufferedReader bufferedReader) {
         this.bufferedReader = bufferedReader;
         this.store = new LottoStore(new RandomNumberPicker());
         this.manualNumberPicker = new ManualNumberPicker(bufferedReader);
