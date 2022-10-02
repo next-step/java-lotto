@@ -16,7 +16,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 class FormulaCalculatorTest {
 
     @ParameterizedTest
-    @CsvSource(value = {"2 + 3 * 4 / 2:10"}, delimiter = ':')
+    @CsvSource(value = {"2 + 3 * 4 / 2:10", "15 + 17 * 20 - 1:639"}, delimiter = ':')
     @DisplayName("연산이 가능한 수식 문자열로 계산")
     void calculate_valid_formula(String formula, int expected) {
         int result = FormulaCalculator.calculate(formula);
@@ -34,7 +34,7 @@ class FormulaCalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"2 + 3 ? 4 / 2"})
+    @ValueSource(strings = {"2 + 3 ? 4 / 2", "15 + 17 * 20 ! 1"})
     @DisplayName("사칙연산자가 아닌 연산자를 포함한 문자열로 연산 시도 시 예외 발생")
     void fail_to_calculate_by_invalid_operator(String formula) {
         assertThatExceptionOfType(InvalidOperatorException.class)
@@ -42,7 +42,7 @@ class FormulaCalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"2 + A * 4 / 2"})
+    @ValueSource(strings = {"2 + A * 4 / 2", "15 + 17 * 20 - ?"})
     @DisplayName("숫자가 아닌 피연산자를 포함한 문자열로 연산 시도 시 예외 발생")
     void fail_to_calculate_by_invalid_operand(String formula) {
         assertThatExceptionOfType(InvalidOperandException.class)
@@ -50,8 +50,8 @@ class FormulaCalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"2 + 3 * 4 / "})
-    @DisplayName("연산하기엔 연산자&피연산자가 부족하게 만들어진 수식으로 연산 시도 시 예외 발생")
+    @ValueSource(strings = {"2 + 3 * 4 / ", "15 + 17 *"})
+    @DisplayName("연산하기엔 피연산자가 부족하게 만들어진 수식으로 연산 시도 시 예외 발생")
     void fail_to_calculate_by_invalid_formula(String formula) {
         assertThatExceptionOfType(InvalidFormulaException.class)
                 .isThrownBy(() -> FormulaCalculator.calculate(formula));
