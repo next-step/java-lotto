@@ -1,13 +1,14 @@
 package calculator.domain;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * Created by seungwoo.song on 2022-09-27
  */
 public class Calculator {
 
-    private Stack<Operator> operator = new Stack<>();
+    private Deque<Operator> operator = new ArrayDeque<>();
     private int result;
 
     public void calculate(String value) {
@@ -21,7 +22,7 @@ public class Calculator {
             return;
         }
 
-        result = operator.pop().operate(result, Integer.parseInt(value));;
+        result = operator.pop().operate(result, Integer.parseInt(value));
     }
 
     public int getResult() {

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CalculatorTest {
+class CalculatorTest {
 
     @Test
     void 계산() {

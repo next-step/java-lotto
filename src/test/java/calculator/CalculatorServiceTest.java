@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.*;
 /**
  * Created by seungwoo.song on 2022-09-27
  */
-public class CalculatorServiceTest {
+class CalculatorServiceTest {
 
     private final CalculatorService calculatorService = new CalculatorService(new Calculator());
 
