@@ -13,7 +13,15 @@ public enum Operator {
     PLUS("+", (result, num) -> result + num),
     MINUS("-", (result, num) -> result - num),
     MULTIPLE("*", (result, num) -> result * num),
-    DIVIDE("/", (result, num) -> result / num);
+    DIVIDE("/", (result, num) -> {
+        if (num == 0 ) {
+            throw new IllegalArgumentException("0으로 나눌수 없습니다.");
+        }
+        if (result % num != 0) {
+            throw new IllegalArgumentException("나누어 떨어지지 않는 수 입니다.");
+        }
+        return result / num;
+    });
 
     private String code;
     private IntBinaryOperator operate;
