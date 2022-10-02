@@ -5,45 +5,87 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class SingleFormulaTest {
+    private static SingleFormulaVo tempSingleFormulaVo = new SingleFormulaVo();
+
     @Test
     public void doOperatePlusTest() {
+        tempSingleFormulaVo.set("1");
+        tempSingleFormulaVo.set("+");
+
         SingleFormula singleFormula = new SingleFormula();
-        singleFormula.setNextSingleFormula(new SingleFormula(new SingleFormulaVo(1, "+")));
+        singleFormula.setNextSingleFormula(new SingleFormula(tempSingleFormulaVo));
         assertThat(singleFormula.doOperate()).isEqualTo(1);
     }
 
     @Test
     public void doOperateMinusTest() {
+        tempSingleFormulaVo.set("1");
+        tempSingleFormulaVo.set("-");
+
         SingleFormula singleFormula = new SingleFormula();
-        singleFormula.setNextSingleFormula(new SingleFormula(new SingleFormulaVo(1, "-")));
+        singleFormula.setNextSingleFormula(new SingleFormula(tempSingleFormulaVo));
         assertThat(singleFormula.doOperate()).isEqualTo(-1);
     }
 
     @Test
     public void doOperateMultipleTest() {
-        SingleFormula singleFormula = new SingleFormula(new SingleFormulaVo(1, "+"));
-        singleFormula.setNextSingleFormula(new SingleFormula(new SingleFormulaVo(5, "*")));
+        tempSingleFormulaVo.set("1");
+        tempSingleFormulaVo.set("+");
+        SingleFormula singleFormula = new SingleFormula(tempSingleFormulaVo);
+
+        tempSingleFormulaVo.set("5");
+        tempSingleFormulaVo.set("*");
+        singleFormula.setNextSingleFormula(new SingleFormula(tempSingleFormulaVo));
         assertThat(singleFormula.doOperate()).isEqualTo(5);
     }
 
     @Test
     public void doOperateDivideTest() {
-        SingleFormula singleFormula = new SingleFormula(new SingleFormulaVo(10, "+"));
-        singleFormula.setNextSingleFormula(new SingleFormula(new SingleFormulaVo(2, "/")));
+        tempSingleFormulaVo.set("10");
+        tempSingleFormulaVo.set("+");
+        SingleFormula singleFormula = new SingleFormula(tempSingleFormulaVo);
+
+        tempSingleFormulaVo.set("2");
+        tempSingleFormulaVo.set("/");
+        singleFormula.setNextSingleFormula(new SingleFormula(tempSingleFormulaVo));
         assertThat(singleFormula.doOperate()).isEqualTo(5);
     }
 
     @Test
     public void doOperateTest() {
         // 1 - 2 * 3 + 4 - 5 + 6 * 7 - 8
-        SingleFormula singleFormula = new SingleFormula(new SingleFormulaVo(1, "+"));
-        singleFormula.setLastSingleFormula(new SingleFormula(new SingleFormulaVo(2, "-")));
-        singleFormula.setLastSingleFormula(new SingleFormula(new SingleFormulaVo(3, "*")));
-        singleFormula.setLastSingleFormula(new SingleFormula(new SingleFormulaVo(4, "+")));
-        singleFormula.setLastSingleFormula(new SingleFormula(new SingleFormulaVo(5, "-")));
-        singleFormula.setLastSingleFormula(new SingleFormula(new SingleFormulaVo(6, "+")));
-        singleFormula.setLastSingleFormula(new SingleFormula(new SingleFormulaVo(7, "*")));
-        singleFormula.setLastSingleFormula(new SingleFormula(new SingleFormulaVo(8, "-")));
+        tempSingleFormulaVo.set("1");
+        tempSingleFormulaVo.set("+");
+        SingleFormula singleFormula = new SingleFormula(tempSingleFormulaVo);
+
+        tempSingleFormulaVo.set("2");
+        tempSingleFormulaVo.set("-");
+        singleFormula.setLastSingleFormula(new SingleFormula(tempSingleFormulaVo));
+
+        tempSingleFormulaVo.set("3");
+        tempSingleFormulaVo.set("*");
+        singleFormula.setLastSingleFormula(new SingleFormula(tempSingleFormulaVo));
+
+        tempSingleFormulaVo.set("4");
+        tempSingleFormulaVo.set("+");
+        singleFormula.setLastSingleFormula(new SingleFormula(tempSingleFormulaVo));
+
+        tempSingleFormulaVo.set("5");
+        tempSingleFormulaVo.set("-");
+        singleFormula.setLastSingleFormula(new SingleFormula(tempSingleFormulaVo));
+
+        tempSingleFormulaVo.set("6");
+        tempSingleFormulaVo.set("+");
+        singleFormula.setLastSingleFormula(new SingleFormula(tempSingleFormulaVo));
+
+        tempSingleFormulaVo.set("7");
+        tempSingleFormulaVo.set("*");
+        singleFormula.setLastSingleFormula(new SingleFormula(tempSingleFormulaVo));
+
+        tempSingleFormulaVo.set("8");
+        tempSingleFormulaVo.set("-");
+        singleFormula.setLastSingleFormula(new SingleFormula(tempSingleFormulaVo));
+
         assertThat(singleFormula.doOperate(0)).isEqualTo(6);
     }
 }

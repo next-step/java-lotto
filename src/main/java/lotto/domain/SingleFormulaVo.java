@@ -11,11 +11,6 @@ public class SingleFormulaVo {
     public SingleFormulaVo() {
     }
 
-    public SingleFormulaVo(Integer number, String operator) {
-        this.number = number;
-        this.operator = operator;
-    }
-
     public boolean isValid() {
         return this.number != null && this.operator != null;
     }
