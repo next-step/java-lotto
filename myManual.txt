@@ -1,5 +1,9 @@
-1. 작업 이후
-1-1) https://github.com/next-step/java-lotto 접근
+0. 처음 미션 수행 시
+0-1) git remote add upstream https://github.com/next-step/java-lotto.git
+0-2) git remote -v 명령어로 제대로 remote 연결이 되었는지 확인
+
+1. 푸시 이후
+1-1) https://github.com/OhSeungCheol/java-lotto 접근
 1-2) Pull requests > New pull request
 1-3) 설정 세팅 및 코맨트 추가
  base repository: next-step/java-lotto
