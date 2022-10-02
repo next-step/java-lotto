@@ -4,17 +4,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Reward {
-    private final Map<Integer, Integer> rewardMap = initRewardMap();
+    private final static Map<Integer, Integer> rewardMap = initRewardMap();
 
-    public Map<Integer, Integer> getRewardMap() {
+    public static Map<Integer, Integer> getRewardMap() {
         return rewardMap;
     }
 
-    private Map<Integer, Integer> initRewardMap(){
-        // 3개 당첨 : 5000원
-        // 4개 당첨 : 50000원
-        // 5개 당첨 : 1500000원
-        // 6개 당첨 : 2000000000원
+    // 3개 당첨 : 5000원
+    // 4개 당첨 : 50000원
+    // 5개 당첨 : 1500000원
+    // 6개 당첨 : 2000000000원
+    private static Map<Integer, Integer> initRewardMap(){
         Map<Integer, Integer> rewardMap = new HashMap<>();
         rewardMap.put(3, 5000);
         rewardMap.put(4, 50000);
