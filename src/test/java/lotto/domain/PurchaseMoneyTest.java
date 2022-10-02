@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.domain.enums.LottoRank;
-import lotto.domain.enums.LottoReward;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -42,7 +41,7 @@ class PurchaseMoneyTest {
         result.put(LottoRank.FIRST, 1);
         LottoResult lottoResult = new LottoResult(result);
         //when
-        float expected = LottoReward.FIRST.getReward() / (float) Lotto.PRICE;
+        float expected = LottoRank.FIRST.getReward() / (float) Lotto.PRICE;
         //then
         assertThat(purchaseMoney.getEarningRate(lottoResult)).isEqualTo(expected);
     }
@@ -57,7 +56,7 @@ class PurchaseMoneyTest {
         result.put(LottoRank.SECOND, 1);
         LottoResult lottoResult = new LottoResult(result);
         //when
-        float expected = LottoReward.SECOND.getReward() / (float) (Lotto.PRICE * 2);
+        float expected = LottoRank.SECOND.getReward() / (float) (Lotto.PRICE * 2);
         //then
         assertThat(purchaseMoney.getEarningRate(lottoResult)).isEqualTo(expected);
     }
