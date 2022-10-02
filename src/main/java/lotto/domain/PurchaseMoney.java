@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.enums.LottoRank;
 import lotto.domain.enums.LottoReward;
 
 public class PurchaseMoney {
@@ -25,10 +26,10 @@ public class PurchaseMoney {
 
     public float getEarningRate(LottoResult result) {
 
-        int totalPrize = (result.getFirstCount() * LottoReward.FIRST.getReward())
-                + (result.getSecondCount() * LottoReward.SECOND.getReward())
-                + (result.getThirdCount() * LottoReward.THIRD.getReward())
-                + (result.getFourthCount() * LottoReward.FOURTH.getReward());
+        int totalPrize = (result.getCount(LottoRank.FIRST) * LottoReward.FIRST.getReward())
+                + (result.getCount(LottoRank.SECOND) * LottoReward.SECOND.getReward())
+                + (result.getCount(LottoRank.THIRD) * LottoReward.THIRD.getReward())
+                + (result.getCount(LottoRank.FOURTH) * LottoReward.FOURTH.getReward());
 
         return  totalPrize / (float) (this.getLottoCount() * Lotto.PRICE);
     }

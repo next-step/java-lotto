@@ -39,10 +39,10 @@ public class OutputView {
     public static void printResult(LottoResult lottoResult) {
         System.out.println("당첨 통계");
         System.out.println(HORIZON);
-        System.out.printf(FORMAT_RESULT, LottoRank.FOURTH.getMatchCount(), LottoReward.FOURTH.getReward(), lottoResult.getFourthCount());
-        System.out.printf(FORMAT_RESULT, LottoRank.THIRD.getMatchCount(), LottoReward.THIRD.getReward(), lottoResult.getThirdCount());
-        System.out.printf(FORMAT_RESULT, LottoRank.SECOND.getMatchCount(), LottoReward.THIRD.getReward(), lottoResult.getSecondCount());
-        System.out.printf(FORMAT_RESULT, LottoRank.FIRST.getMatchCount(), LottoReward.FOURTH.getReward(), lottoResult.getFirstCount());
+        System.out.printf(FORMAT_RESULT, LottoRank.FOURTH.getMatchCount(), LottoReward.FOURTH.getReward(), lottoResult.getCount(LottoRank.FOURTH));
+        System.out.printf(FORMAT_RESULT, LottoRank.THIRD.getMatchCount(), LottoReward.THIRD.getReward(), lottoResult.getCount(LottoRank.THIRD));
+        System.out.printf(FORMAT_RESULT, LottoRank.SECOND.getMatchCount(), LottoReward.SECOND.getReward(), lottoResult.getCount(LottoRank.SECOND));
+        System.out.printf(FORMAT_RESULT, LottoRank.FIRST.getMatchCount(), LottoReward.FOURTH.getReward(), lottoResult.getCount(LottoRank.FIRST));
     }
     public static void printEarningRate(PurchaseMoney purchaseMoney, LottoResult lottoResult){
         System.out.printf(FORMAT_RESULT_EARNING_RATE, purchaseMoney.getEarningRate(lottoResult));

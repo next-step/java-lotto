@@ -12,21 +12,8 @@ public class LottoResult {
         this.value = lottoResult;
     }
 
-    public int getFirstCount() {
-        return value.getOrDefault(LottoRank.FIRST, 0);
-    }
-
-    public int getSecondCount() {
-
-        return value.getOrDefault(LottoRank.SECOND, 0);
-    }
-
-    public int getThirdCount() {
-        return value.getOrDefault(LottoRank.THIRD, 0);
-    }
-
-    public int getFourthCount() {
-        return value.getOrDefault(LottoRank.FOURTH, 0);
+    public int getCount(LottoRank rank) {
+        return value.getOrDefault(rank, 0);
     }
 
 }

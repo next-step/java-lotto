@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.enums.LottoRank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,10 +33,10 @@ class LottoResultTest {
         LottoResult result = lottoGame.getWinningResult(winningNumbers);
         //then
         assertAll(
-                () -> assertThat(result.getFirstCount()).isEqualTo(1),
-                () -> assertThat(result.getSecondCount()).isEqualTo(1),
-                () -> assertThat(result.getThirdCount()).isEqualTo(1),
-                () -> assertThat(result.getFourthCount()).isEqualTo(1)
+                () -> assertThat(result.getCount(LottoRank.FIRST)).isEqualTo(1),
+                () -> assertThat(result.getCount(LottoRank.SECOND)).isEqualTo(1),
+                () -> assertThat(result.getCount(LottoRank.THIRD)).isEqualTo(1),
+                () -> assertThat(result.getCount(LottoRank.FOURTH)).isEqualTo(1)
         );
     }
 
