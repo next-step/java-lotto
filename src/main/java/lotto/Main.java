@@ -15,6 +15,7 @@ public class Main {
         ResultView.printPurchase(lottos);
 
         List<Integer> winningNumbers = InputView.scanWinningNumbers();
-        ResultView.printWinningStatistics(lottos, new Lotto(winningNumbers));
+        Integer bonusNumber = InputView.scanBonusNumber();
+        ResultView.printWinningStatistics(lottos, new Lotto(winningNumbers), bonusNumber);
     }
 }
