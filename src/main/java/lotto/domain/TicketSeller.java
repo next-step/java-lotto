@@ -9,4 +9,10 @@ public class TicketSeller {
             user.buyTicket(TICKET_MACHINE.createLottoTicket(new RandomNumberGenerationStrategy()), TICKET_PRICE);
         }
     }
+
+    public static void verifyRankFor(User user, LottoResult result) {
+        user.getLottoTickets().stream()
+            .map(ticket -> LottoGameRank.findRank(ticket, result))
+            .forEach(System.out::println); // TODO 결과 객체 반환할 것
+    }
 }
