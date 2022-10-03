@@ -21,4 +21,10 @@ public class CalculatorTest {
         assertThat(calculator.getOperator()).isEqualTo(new ArrayList<String>(Arrays.asList("+","*","/")));
         assertThat(calculator.getOperand()).isEqualTo(new ArrayList<Integer>(Arrays.asList(2,3,4,2)));
     }
+
+    @Test
+    void 사칙연산_기호가_아닌_경우_에러() {
+        assertThatThrownBy(() -> new Calculator("2 % 3"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
