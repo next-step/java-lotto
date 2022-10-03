@@ -15,24 +15,36 @@ public class Calculator {
         }
     }
 
-    public int sum(String[] numbers){
+    public int sum(String[] numbers) {
         int sumResult = 0;
+        for (String number : numbers) {
+            sumResult += Integer.parseInt(number);
+        }
         return sumResult;
     }
 
-    public int subtraction(){
-        int subtractionResult = 0;
+    public int subtraction(String[] numbers) {
+        int subtractionResult = Integer.parseInt(numbers[0]);
+        for (int i = 1; i < numbers.length; i++) {
+            subtractionResult -= Integer.parseInt(numbers[i]);
+        }
         return subtractionResult;
     }
 
-    public int multiplication(){
-        int multiplicationResult = 0;
+    public int multiplication(String[] numbers) {
+        int multiplicationResult = 1;
+        for (String number : numbers) {
+            multiplicationResult *= Integer.parseInt(number);
+        }
         return multiplicationResult;
     }
 
-    public int division(){
-        int divisionReusult = 0;
-        return divisionReusult;
+    public int division(String[] numbers) {
+        int divisionResult = Integer.parseInt(numbers[0]);
+        for (int i = 1; i < numbers.length; i++) {
+            divisionResult /= Integer.parseInt(numbers[i]);
+        }
+        return divisionResult;
     }
 
     public int calculatorSystem(String inputValue) throws IllegalAccessException {

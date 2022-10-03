@@ -19,25 +19,25 @@ public class CalculatorTest {
     @DisplayName("덧셈테스트")
     @Test
     void sumTest() throws IllegalAccessException {
-        assertThat(calculator.calculatorSystem("")).isEqualTo(0);
+        assertThat(calculator.sum(new String[]{"1","2"})).isEqualTo(3);
     }
 
     @DisplayName("뺄셈테스트")
     @Test
     void subtractionTest() throws IllegalAccessException {
-        assertThat(calculator.calculatorSystem("")).isEqualTo(0);
+        assertThat(calculator.subtraction(new String[]{"1","2","6"})).isEqualTo(-7);
     }
 
     @DisplayName("곱셈테스트")
     @Test
     void multiplicationTest() throws IllegalAccessException {
-        assertThat(calculator.calculatorSystem("")).isEqualTo(0);
+        assertThat(calculator.multiplication(new String[]{"4","2"})).isEqualTo(8);
     }
 
     @DisplayName("나눗셈테스트")
     @Test
     void divisionTest() throws IllegalAccessException {
-        assertThat(calculator.calculatorSystem("")).isEqualTo(0);
+        assertThat(calculator.division(new String[]{"3","2"})).isEqualTo(1);
     }
 
     @DisplayName("null값 테스트")
