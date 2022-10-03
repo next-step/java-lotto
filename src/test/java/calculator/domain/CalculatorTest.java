@@ -36,7 +36,6 @@ class CalculatorTest {
     @Test
     void doCalculations() {
         Calculator calculator = new Calculator(List.of("6", "+", "5", "-", "4", "*", "3", "/", "2"));
-        //Calculator calculator = new Calculator(List.of("6", "+", "5"));
 
         int actual = calculator.doCalculations();
 
