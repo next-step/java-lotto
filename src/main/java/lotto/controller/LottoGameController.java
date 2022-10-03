@@ -14,7 +14,7 @@ public class LottoGameController {
         List<String[]> manualNumbers = InputView.askManualNumbers(purchaseMoney.getManualCount());
 
         LottoGame lottoGame = LottoSeller.buyLottoGame(purchaseMoney, manualNumbers);
-        OutputView.printLottoGame(lottoGame);
+        OutputView.printLottoGame(lottoGame, purchaseMoney);
 
         WinningNumbers winningNumbers = new WinningNumbers(InputView.askWinnerNumbers(), InputView.askBonusNumber());
 
