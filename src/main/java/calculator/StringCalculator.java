@@ -1,22 +1,19 @@
 package calculator;
 
 import calculator.operator.Operator;
+import calculator.parser.StringCalculatorParser;
 import calculator.validator.StringCalculatorValidator;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class StringCalculator {
 
-    private static final String STRING_DELIMITER = " ";
-
     public static int calculate(String input) {
         StringCalculatorValidator.validateOrThrow(input);
 
-        List<String> splitInputStrings = split(input);
+        List<String> splitInputStrings = StringCalculatorParser.split(input);
         List<Integer> operands = extractOperands(splitInputStrings);
         List<Operator> operators = extractOperator(splitInputStrings);
 
@@ -32,14 +29,6 @@ public class StringCalculator {
         }
 
         return intermediateResult;
-    }
-
-    private static List<String> split(String input) {
-        if (Objects.isNull(input)) {
-            return Collections.emptyList();
-        }
-
-        return Collections.unmodifiableList(List.of(input.split(STRING_DELIMITER)));
     }
 
     private static List<String> getOddOrEvenIndexStrings(List<String> inputStrings, boolean isOdd) {
