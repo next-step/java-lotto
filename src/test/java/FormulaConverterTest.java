@@ -2,6 +2,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Queue;
 
@@ -10,18 +11,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class FormulaConverterTest {
 
-    @Test
-    @DisplayName("영어면 예외를 던진다.")
-    public void validate_input_alphabetic() {
-        assertThatThrownBy(() -> FormulaConverter.convert("1a b c"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("영어는 들어올 수 없습니다.");
-    }
-
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"1 = 2", "2,3", "abc"})
     @DisplayName("연산자가 아니면 예외를 던진다.")
-    public void validate_input_not_operator() {
-        assertThatThrownBy(() -> FormulaConverter.convert("1 = 2"))
+    public void validate_input_not_operator(String input) {
+        assertThatThrownBy(() -> FormulaConverter.convert(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("연산자가 아닙니다.");
     }
@@ -37,13 +31,11 @@ public class FormulaConverterTest {
                 .hasMessageContaining("입력값이 없습니다.");
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"1 + - 12", "2 2", "+ 1 1 +"})
     @DisplayName("수식이 옳지 않으면 예외를 던진다.")
-    public void validate_formula() {
-        assertThatThrownBy(() -> FormulaConverter.convert("1 - -"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("수식이 알맞지 않습니다.");
-        assertThatThrownBy(() -> FormulaConverter.convert("1 12"))
+    public void validate_formula(String input) {
+        assertThatThrownBy(() -> FormulaConverter.convert(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("수식이 알맞지 않습니다.");
     }

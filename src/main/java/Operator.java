@@ -1,17 +1,19 @@
+import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.BiFunction;
 
 public enum Operator {
     PLUS("+", (a, b) -> {
-        return a+b;
+        return a + b;
     }),
     MINUS("-", (a, b) -> {
-        return a-b;
+        return a - b;
     }),
     DIVE("/", (a, b) -> {
-        return a/b;
+        return a / b;
     }),
     MULTIPLY("*", (a, b) -> {
-        return a*b;
+        return a * b;
     });
 
     private String value;
@@ -23,16 +25,15 @@ public enum Operator {
     }
 
     public static Operator findOperator(String input) {
-        Operator op = null;
-        for (Operator operator : values()) {
-            op = isEqual(operator, input) ? operator : op;
-        }
+        Optional<Operator> op = Arrays.stream(values())
+                .filter(operator -> isEqual(operator, input))
+                .findAny();
 
-        if(op == null) {
+        if (op.isEmpty()) {
             throw new IllegalArgumentException("올바르지 않은 수식입니다.");
         }
 
-        return op;
+        return op.get();
     }
 
     private static boolean isEqual(Operator op, String input) {
