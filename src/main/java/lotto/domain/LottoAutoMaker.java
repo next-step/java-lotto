@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 public class LottoAutoMaker {
 
 
-    private static final List<LottoNumber> numbers = IntStream.range(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE + 1)
+    private static final List<LottoNumber> CANDIDATE_NUMBERS = IntStream.range(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE + 1)
             .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
 
@@ -17,8 +17,8 @@ public class LottoAutoMaker {
     }
 
     public static Lotto makeLotto() {
-        Collections.shuffle(numbers);
-        ArrayList<LottoNumber> lottoNumbers = new ArrayList<>(numbers.subList(0, Lotto.SIZE));
+        Collections.shuffle(CANDIDATE_NUMBERS);
+        ArrayList<LottoNumber> lottoNumbers = new ArrayList<>(CANDIDATE_NUMBERS.subList(0, Lotto.SIZE));
         return new Lotto(lottoNumbers);
     }
 }

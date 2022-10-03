@@ -60,4 +60,5 @@ class LottoTest {
         assertThat(lotto1.numberOfEquals(lotto2)).isEqualTo(3);
     }
 
+
 }

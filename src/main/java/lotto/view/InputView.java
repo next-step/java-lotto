@@ -34,4 +34,9 @@ public class InputView {
         }
         return new String[]{};
     }
+
+    public static int askBonusNumber() {
+        System.out.println("보너스 번호을 입력해 주세요.");
+        return SCANNER.nextInt();
+    }
 }
