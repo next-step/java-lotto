@@ -11,9 +11,17 @@ public class LottoSeller {
 
     public static LottoGame buyLottoGame(PurchaseMoney purchaseMoney, List<String[]> manualNumbers) {
 
-        return new LottoGame(IntStream.range(0, purchaseMoney.getLottoCount())
+        List<Lotto> auto = IntStream.range(0, purchaseMoney.getAutoCount())
                 .mapToObj(a -> LottoAutoMaker.makeLotto())
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
+
+        List<Lotto> manual = manualNumbers.stream()
+                .map(Lotto::new)
+                .collect(Collectors.toList());
+
+        auto.addAll(manual);
+
+        return new LottoGame(auto);
 
     }
 }
