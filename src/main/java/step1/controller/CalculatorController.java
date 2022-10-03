@@ -1,7 +1,7 @@
 package step1.controller;
 
-import step1.domain.StringCalculator;
 import step1.domain.Number;
+import step1.domain.StringCalculator;
 import step1.view.InputView;
 import step1.view.ResultView;
 
