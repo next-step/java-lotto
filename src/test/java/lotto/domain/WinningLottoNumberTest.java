@@ -20,7 +20,7 @@ class WinningLottoNumberTest {
     @NullAndEmptySource
     void error_create_lotto(final String input) {
 
-        assertThatThrownBy(() -> new WinningLottoNumber(input))
+        assertThatThrownBy(() -> WinningLottoNumber.from(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("입력 값이 null 또는 빈 공백 입니다.");
 
@@ -31,7 +31,7 @@ class WinningLottoNumberTest {
     @ValueSource(strings = {"1, 2, 2, 4, 5, 6", "1, 2, 3, 4, 5", "1, 2, 3, 4, 5, 6, 7"})
     void error_create_lotto2(final String input) {
 
-        assertThatThrownBy(() -> new WinningLottoNumber(input))
+        assertThatThrownBy(() -> WinningLottoNumber.from(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("6개의 숫자를 입력해야 하며 중복 숫자는 입력할 수 없습니다.");
     }
@@ -41,19 +41,7 @@ class WinningLottoNumberTest {
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     void create_winning_lotto(final int number) {
 
-        final WinningLottoNumber winningLottoNumber = new WinningLottoNumber("1, 2, 3, 4, 5, 6");
+        final WinningLottoNumber winningLottoNumber = WinningLottoNumber.from("1, 2, 3, 4, 5, 6");
         assertThat(winningLottoNumber.getWinnerLottoNumber()).contains(new Number(number));
-    }
-
-    @DisplayName("1등 로또와 매칭하는 결과를 구한다.")
-    @ParameterizedTest
-    @CsvSource(value = {"1, 2, 3, 4, 5, 6:6", "1, 2, 3, 4, 5, 7:5", "1, 2, 3, 4, 7, 8:4", "1, 2, 3, 7, 8, 9:3"
-            , "1, 2, 7, 8, 9, 10:2", "1, 7, 8, 9, 10, 11:1", "7, 8, 9, 10, 11, 12:0"}, delimiter = ':')
-    void winning_lotto(final String autoLotto, final int countOfMatch) {
-
-        final WinningLottoNumber winningLottoNumber = new WinningLottoNumber("1, 2, 3, 4, 5, 6");
-        final LottoNumber lottoNumber = new LottoNumber(autoLotto);
-
-        assertThat(winningLottoNumber.match(lottoNumber)).isEqualTo(countOfMatch);
     }
 }

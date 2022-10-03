@@ -12,30 +12,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class WinningResultTest {
 
-    @DisplayName("총 상금을 구한다.")
-    @ParameterizedTest
-    @CsvSource(value = {"1, 2, 3, 4, 5, 6:2000000000", "1, 2, 3, 4, 5, 7:1500000", "1, 2, 3, 4, 7, 8:50000", "1, 2, 3, 7, 8, 9:5000"
-            , "1, 2, 7, 8, 9, 10:0", "1, 7, 8, 9, 10, 11:0", "7, 8, 9, 10, 11, 12:0"}, delimiter = ':')
-    void total_price(final String autoLotto, final BigDecimal price) {
+    @DisplayName("6개부터 1개까지 매칭된 총 상금을 구한다.")
+    @Test
+    void total_price() {
 
-        final WinningLottoNumber winningLottoNumber = new WinningLottoNumber("1, 2, 3, 4, 5, 6");
-        final List<LottoNumber> lottoNumbers = List.of(new LottoNumber(autoLotto));
+        final List<Integer> resultList = List.of(6, 5, 4, 3, 2, 1);
         final WinningResult winningResult = WinningResult.init();
-        winningResult.match(winningLottoNumber, lottoNumbers);
+        winningResult.collect(resultList);
 
-        assertThat(winningResult.sum()).isEqualTo(price);
+        assertThat(winningResult.sum()).isEqualTo(new BigDecimal(2001555000));
     }
 
-    @DisplayName("같은 등수가 2개인 우승 상금을 구한다.")
+    @DisplayName("5개 매칭된 등수가 2개인 우승 상금을 구한다.")
     @Test
     void tie_price() {
 
-        final WinningLottoNumber winningLottoNumber = new WinningLottoNumber("1, 2, 3, 4, 5, 6");
-        final List<LottoNumber> lottoNumbers = List.of(new LottoNumber("1, 2, 3, 4, 7, 8")
-                , new LottoNumber("3, 4, 5, 6, 7, 8"));
+        final List<Integer> resultList = List.of(5, 5);
         final WinningResult winningResult = WinningResult.init();
-        winningResult.match(winningLottoNumber, lottoNumbers);
+        winningResult.collect(resultList);
 
-        assertThat(winningResult.sum()).isEqualTo(new BigDecimal(100000));
+        assertThat(winningResult.sum()).isEqualTo(new BigDecimal(3000000));
     }
 }
