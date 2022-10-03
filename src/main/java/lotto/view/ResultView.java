@@ -1,13 +1,15 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.Purchase;
-import lotto.domain.WinningPrize;
-import lotto.domain.WinningResult;
+import lotto.domain.*;
+import lotto.domain.Number;
 
 import java.util.List;
 
 public class ResultView {
+
+    public static final String LEFT_BRACKET = "[";
+    public static final String RIGHT_BRACKET = "]";
+    public static final String COMMA_EMPTY_STRING = ", ";
 
     private ResultView() {}
 
@@ -16,11 +18,32 @@ public class ResultView {
         System.out.printf("%d개를 구매했습니다.", count);
     }
 
-    public static void autoLottoNumberPrint(final List<LottoNumber> lottoNumbers) {
+    public static void autoLottoNumberPrint(final LottoNumbers lottoNumbers) {
 
         blank();
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            System.out.println(lottoNumber);
+        for (LottoNumber lottoNumber : lottoNumbers.getLottoNumbers()) {
+            appendResult(lottoNumber.getLottoNumber());
+        }
+    }
+
+    private static void appendResult(final List<Number> lottoNumber1) {
+
+        final StringBuilder result = new StringBuilder();
+        result.append(LEFT_BRACKET);
+        int index = 1;
+        for (Number number : lottoNumber1) {
+            appendNumber(lottoNumber1, result, index, number);
+            index++;
+        }
+        result.append(RIGHT_BRACKET);
+        System.out.println(result);
+    }
+
+    private static void appendNumber(final List<Number> lottoNumber1, final StringBuilder result, final int index, final Number number) {
+
+        result.append(number.getNumber());
+        if (lottoNumber1.size() != index) {
+            result.append(COMMA_EMPTY_STRING);
         }
     }
 
@@ -46,14 +69,14 @@ public class ResultView {
         System.out.printf("%d개 일치 (%s원)- %d개", winningPrice.getCountOfMatch(), winningPrice.getPrice(), rankCount);
     }
 
-    public static void winningPrizeRatePrint(final Purchase purchase) {
+    public static void winningPrizeRatePrint(final ProfitRate profitRate) {
 
-        System.out.printf("총 수익률은 %s 입니다." + check(purchase), purchase.getRate());
+        System.out.printf("총 수익률은 %s 입니다." + check(profitRate), profitRate.getProfitRate());
     }
 
-    private static String check(final Purchase purchase) {
+    private static String check(final ProfitRate profitRate) {
 
-        if (purchase.profit()) {
+        if (profitRate.canProfit()) {
             return "";
         }
         return "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
