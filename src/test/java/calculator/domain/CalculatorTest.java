@@ -32,4 +32,14 @@ class CalculatorTest {
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessage("계산이 불가능한 식 입니다. 숫자가 연산자보다 하나 더 많아야합니다.");
     }
+
+    @Test
+    void doCalculations() {
+        Calculator calculator = new Calculator(List.of("6", "+", "5", "-", "4", "*", "3", "/", "2"));
+        //Calculator calculator = new Calculator(List.of("6", "+", "5"));
+
+        int actual = calculator.doCalculations();
+
+        assertThat(actual).isEqualTo(10);
+    }
 }

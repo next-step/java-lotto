@@ -42,6 +42,14 @@ public class Calculator {
                 .collect(Collectors.toList());
     }
 
+    public int doCalculations() {
+        int result = operators.operate(0, numbers.get(0), numbers.get(1));
+        for (int i = 1; i < operators.size(); i++) {
+            result = operators.operate(i, result, numbers.get(i + 1));
+        }
+        return result;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

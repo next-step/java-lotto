@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.domain.Calculator;
 import calculator.view.InputView;
 
 import java.util.List;
@@ -9,14 +10,18 @@ public class Application {
     private static final InputView INPUT_VIEW = new InputView();
 
     public static void main(String[] args) {
-        List<String> formula = receiveFormula();
+        Calculator calculator = createCalculator();
+        int result = calculator.doCalculations();
+        System.out.println(result);
     }
 
-    private static List<String> receiveFormula() {
+    private static Calculator createCalculator() {
         try {
-            return INPUT_VIEW.receiveFormula();
+            List<String> formula = INPUT_VIEW.receiveFormula();
+            return new Calculator(formula);
         } catch (IllegalArgumentException e) {
-            return receiveFormula();
+            System.out.println(e.getMessage());
+            return createCalculator();
         }
     }
 }

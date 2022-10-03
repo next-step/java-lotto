@@ -44,6 +44,10 @@ public class Numbers {
         return values.size();
     }
 
+    public int get(int index) {
+        return values.get(index);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

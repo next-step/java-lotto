@@ -35,6 +35,12 @@ public class Operators {
         return values.size();
     }
 
+    public int operate(int index, int firstNumber, int secondNumber) {
+        return values
+                .get(index)
+                .operate(firstNumber, secondNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
