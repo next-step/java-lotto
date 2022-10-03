@@ -16,49 +16,50 @@ public class Calculator {
         return calculateProcess(numbers.poll());
     }
 
-    public static int calculateProcess(int initNum){
+    public static int calculateProcess(int initNum) {
         int num = numbers.poll();
         String operation = operations.poll();
 
-        if(operation.equals("+")) {
+        if (operation.equals("+")) {
             initNum += num;
         }
-        if(operation.equals("-")) {
+        if (operation.equals("-")) {
             initNum -= num;
         }
-        if(operation.equals("*")) {
+        if (operation.equals("*")) {
             initNum *= num;
         }
 
-        if(operation.equals("/")) {
+        if (operation.equals("/")) {
             checkDivide(initNum, num);
-            initNum = (int)(initNum / num);
+            initNum = (int) (initNum / num);
         }
 
-        if(numbers.size() > 0) {
+        if (numbers.size() > 0) {
             initNum = calculateProcess(initNum);
         }
         return initNum;
     }
 
     private static void checkDivide(int initNum, int num) {
-        if(initNum % num > 0){
+        if (initNum % num > 0) {
             throw new InvalidParameterException();
         }
     }
 
-    private static void setNumbers(String[] inputs){
-        for (int i = 0; i < inputs.length; i+=2) {
+    private static void setNumbers(String[] inputs) {
+        for (int i = 0; i < inputs.length; i += 2) {
             numbers.add(parseInt(inputs[i]));
         }
     }
 
-    private static void setOperations(String[] inputs){
-        for (int i = 1; i < inputs.length; i+=2) {
+    private static void setOperations(String[] inputs) {
+        for (int i = 1; i < inputs.length; i += 2) {
             operations.add(inputs[i]);
         }
     }
-    private static int parseInt(String input){
+
+    private static int parseInt(String input) {
         return Integer.parseInt(input);
     }
 }
