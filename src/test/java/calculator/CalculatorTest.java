@@ -1,3 +1,6 @@
+package calculator;
+
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -17,8 +20,8 @@ public class CalculatorTest {
     void 연산자와_피연산자로_분리() {
         Calculator calculator = new Calculator("2 + 3 * 4 / 2");
         calculator.split();
-        assertThat(calculator.getOperator()).isEqualTo(new ArrayList<String>(Arrays.asList("+","*","/")));
-        assertThat(calculator.getOperand()).isEqualTo(new ArrayList<Integer>(Arrays.asList(2,3,4,2)));
+        Assertions.assertThat(calculator.getOperator()).isEqualTo(new ArrayList<String>(Arrays.asList("+","*","/")));
+        Assertions.assertThat(calculator.getOperand()).isEqualTo(new ArrayList<Integer>(Arrays.asList(2,3,4,2)));
     }
 
     @Test
