@@ -16,11 +16,10 @@ public class WinningResult {
         return new WinningResult();
     }
 
-    public void match(final WinningLottoNumber winningLottoNumber, final List<LottoNumber> lottoNumbers) {
+    public void collect(final List<Integer> resultList) {
 
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            final int match = winningLottoNumber.match(lottoNumber);
-            final WinningPrize winningPrice = WinningPrize.from(match);
+        for (Integer result : resultList) {
+            final WinningPrize winningPrice = WinningPrize.from(result);
             alreadyExist(winningPrice);
             notExist(winningPrice);
         }
