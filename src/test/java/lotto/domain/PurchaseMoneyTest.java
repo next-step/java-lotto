@@ -32,6 +32,22 @@ class PurchaseMoneyTest {
     }
 
     @Test
+    @DisplayName("구매금액과 수동 개수 입력했을 때 자동 개수 구하기")
+    void calculate_auto_count() {
+        //given
+        PurchaseMoney purchaseMoney = new PurchaseMoney(10000, 5);
+        //then
+        assertThat(purchaseMoney.getAutoCount()).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("구매 가능한 개수보다 수동 개수가 크면 IllegalArgumentException")
+    void manual_count_greater_than_total_count() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new PurchaseMoney(1000, 5));
+    }
+
+    @Test
     @DisplayName("1개 사서 일등 당첨일때 로또 수익률 계산하기")
     void calculate_earning_rate_when_buy_1_and_win_1() {
         //given
