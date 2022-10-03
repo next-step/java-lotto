@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.*;
 class LottoTest {
 
     @Test
-    @DisplayName("로또에 중복값이 있으면 에러")
+    @DisplayName("로또에 중복값이 있으면 IllegalArgumentException")
     void lotto_number_when_duplicate() {
         //given
         String[] lottoNumber = {"1", "1", "3", "12", "1", "18"};
@@ -28,7 +28,7 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("로또 숫자가 6개 이상 입력되면 에러")
+    @DisplayName("로또 숫자가 6개 이상 입력되면 IllegalArgumentException")
     void lotto_number_count_when_over_6() {
         //given
         String[] lottoNumber = {"1", "2", "3", "4", "5", "6", "7"};
@@ -38,7 +38,7 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("로또 숫자가 6개 미만 입력되면 에러")
+    @DisplayName("로또 숫자가 6개 미만 입력되면 IllegalArgumentException")
     void lotto_number_count_when_less_6() {
         //given
         String[] lottoNumber = {"1", "2", "3", "4", "5"};
