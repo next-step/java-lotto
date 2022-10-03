@@ -36,16 +36,18 @@ public class PurchaseMoney {
     }
 
     private static void validateMoney(int money) {
-
         if (money % Lotto.PRICE > 0) {
             throw new IllegalArgumentException("거스름돈은 반환이 불가능합니다. 로또는 " + Lotto.PRICE + "원 입니다.");
         }
     }
 
     public float getEarningRate(LottoResult result) {
-
         int totalPrize = Arrays.stream(LottoRank.values())
                 .mapToInt(rank -> result.getCount(rank) * rank.getReward()).sum();
         return totalPrize / (float) (this.getLottoCount() * Lotto.PRICE);
+    }
+
+    public int getAutoCount() {
+        return this.totalCount - this.manualCount;
     }
 }
