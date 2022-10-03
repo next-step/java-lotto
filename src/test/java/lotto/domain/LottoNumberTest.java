@@ -1,12 +1,10 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -18,7 +16,7 @@ class LottoNumberTest {
     @NullAndEmptySource
     void error_create_lotto(final String input) {
 
-        assertThatThrownBy(() -> new LottoNumber(input))
+        assertThatThrownBy(() -> LottoNumber.from(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("입력 값이 null 또는 빈 공백 입니다.");
 
@@ -29,7 +27,7 @@ class LottoNumberTest {
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     void create_lotto(final int index) {
 
-        final LottoNumber lottoNumber = new LottoNumber("1, 2, 3, 4, 5, 6");
+        final LottoNumber lottoNumber = LottoNumber.from("1, 2, 3, 4, 5, 6");
         final List<Number> result = lottoNumber.getLottoNumber();
 
         assertThat(result).contains(new Number(index));
