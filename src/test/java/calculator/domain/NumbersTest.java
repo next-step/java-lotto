@@ -30,7 +30,7 @@ public class NumbersTest {
 
     @Test
     void of_contain_not_integer_string() {
-        List<String> stringNumbers =  List.of("1", "2", ".");
+        List<String> stringNumbers = List.of("1", "2", ".");
 
         ThrowingCallable actual = () -> Numbers.of(stringNumbers);
 
