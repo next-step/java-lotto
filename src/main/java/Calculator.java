@@ -1,8 +1,9 @@
 import java.util.Queue;
 
 public class Calculator {
+    private static int result;
 
-    static int result;
+    private Calculator() { }
 
     public static int calc(String s) {
         Queue<String> formula = FormulaConverter.convert(s);
