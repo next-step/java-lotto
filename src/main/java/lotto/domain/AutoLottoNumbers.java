@@ -4,18 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class AutoLottoNumbers {
 
-    private static final int MIN = 1;
-    private static final int MAX = 45;
-
-    private static final List<Integer> lottoNumbers = IntStream.range(MIN, MAX)
-            .boxed()
-            .collect(Collectors.toList());
     public static final int LOTTO_INDEX_START = 0;
     public static final int LOTTO_INDEX_END = 6;
+    private static final List<Integer> lottoNumbers = LottoNumber.create();
 
     private AutoLottoNumbers() {}
 
