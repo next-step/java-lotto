@@ -10,6 +10,10 @@ import java.util.stream.IntStream;
 
 public class StringCalculator {
 
+    private StringCalculator() {
+        
+    }
+
     public static int calculate(String input) {
         StringCalculatorValidator.validateOrThrow(input);
 

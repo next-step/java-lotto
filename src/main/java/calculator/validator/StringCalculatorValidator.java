@@ -8,6 +8,10 @@ public class StringCalculatorValidator {
 
     public static final String INPUT_VALIDATION_REGEXP = "^(([0-9]+|-[1-9][0-9]*) [+\\-*/] )*([0-9]+|-[1-9][0-9]*)$";
 
+    private StringCalculatorValidator() {
+
+    }
+
     public static void validateOrThrow(String input) {
         if (Objects.isNull(input)) {
             throw new IllegalArgumentException("입력값이 유효하지 않습니다. null은 허용되지 않습니다.");
