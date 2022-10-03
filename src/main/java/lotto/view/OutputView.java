@@ -15,6 +15,14 @@ public class OutputView {
         System.out.println();
     }
 
+    public void printError(Exception e) {
+        printError(e.getMessage());
+    }
+
+    public void printError(String errorMsg) {
+        System.out.println(errorMsg);
+    }
+
     private void printLottoTicket(LottoTicket lottoTicket) {
         String numberString = lottoTicket.getLottoNumbers().stream()
             .map(LottoNumber::getValue)
