@@ -42,9 +42,19 @@ public class Calculator {
         }
     }
 
+    public void equationException() throws IllegalAccessException {
+        if (splitInputValues.length % 2 == 0) {
+            throw new IllegalAccessException();
+        }
+    }
+
     public int calculateValue(int inputValuePosition) throws IllegalAccessException {
         String operator = splitInputValues[inputValuePosition];
         operatorException(operator);
+        return operateSelect(operator);
+    }
+
+    public int operateSelect(String operator) {
         if (operator.equals("+")) {
             return sum(frontNumber, backNumber);
         }
@@ -57,14 +67,7 @@ public class Calculator {
         return division(frontNumber, backNumber);
     }
 
-    public int calculatorSystem(String inputValue) throws IllegalAccessException {
-        splitInputValues = splitInput(inputValue);
-        if (splitInputValues.length == 1) {
-            return Integer.parseInt(splitInputValues[0]);
-        }
-        if (splitInputValues.length % 2 == 0) {
-            throw new IllegalAccessException();
-        }
+    public int calculatorSystem() throws IllegalAccessException {
         int calculateInput = 0;
         frontNumber = Integer.parseInt(splitInputValues[0]);
         for (int i = 1; i < splitInputValues.length - 1; i = i + 2) {
@@ -73,5 +76,14 @@ public class Calculator {
             frontNumber = calculateInput;
         }
         return calculateInput;
+    }
+
+    public int finalCalculate(String inputValue) throws IllegalAccessException {
+        splitInputValues = splitInput(inputValue);
+        if (splitInputValues.length == 1) {
+            return Integer.parseInt(splitInputValues[0]);
+        }
+        equationException();
+        return calculatorSystem();
     }
 }

@@ -61,12 +61,12 @@ public class CalculatorTest {
     @DisplayName("수식 비정상종료 테스트")
     @Test
     void equationExceptionTest() {
-        assertThatExceptionOfType(IllegalAccessException.class).isThrownBy(() -> calculator.calculatorSystem("1 +"));
+        assertThatExceptionOfType(IllegalAccessException.class).isThrownBy(() -> calculator.finalCalculate("1 +"));
     }
 
     @DisplayName("계산기 테스트")
     @Test
     void calculatorTest() throws IllegalAccessException {
-        assertThat(calculator.calculatorSystem("1 + 2 / 4 + 9 * 4")).isEqualTo(36);
+        assertThat(calculator.finalCalculate("1 + 2 / 4 + 9 * 4 - 1")).isEqualTo(35);
     }
 }
