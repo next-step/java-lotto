@@ -32,6 +32,7 @@ public class InputView {
             .map(Integer::parseInt)
             .map(LottoNumber::new)
             .collect(toList());
+        System.out.println();
 
         return new LottoResult(lottoNumbers);
     }

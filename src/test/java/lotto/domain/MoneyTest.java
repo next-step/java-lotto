@@ -24,6 +24,12 @@ class MoneyTest {
     }
 
     @Test
+    @DisplayName("돈 객체 끼리의 덧셈 연산")
+    void plus() {
+        assertThat(new Money(1_000).plus(new Money(1_234))).isEqualTo(new Money(2_234));
+    }
+
+    @Test
     @DisplayName("돈 객체 끼리의 뺄셈 연산")
     void minus() {
         assertThat(new Money(10_000).minus(new Money(4_000))).isEqualTo(new Money(6_000));
@@ -34,6 +40,12 @@ class MoneyTest {
     void minusException() {
         assertThatThrownBy(() -> new Money(100).minus(new Money(1_000)))
             .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("곱셈 연산")
+    void times() {
+        assertThat(new Money(10_000).times(3)).isEqualTo(new Money(30_000));
     }
 
     @ParameterizedTest(name = "두 수 간의 대소 비교: {0} {1}")

@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import static java.util.stream.Collectors.*;
+
+import java.util.List;
+
 public class TicketSeller {
     private static final Money TICKET_PRICE = new Money(1_000);
     private static final TicketMachine TICKET_MACHINE = new TicketMachine();
@@ -10,9 +14,11 @@ public class TicketSeller {
         }
     }
 
-    public static void verifyRankFor(User user, LottoResult result) {
-        user.getLottoTickets().stream()
+    public static UserLottoResult verifyRankFor(User user, LottoResult result) {
+        List<LottoGameRank> gameRanks = user.getLottoTickets().stream()
             .map(ticket -> LottoGameRank.findRank(ticket, result))
-            .forEach(System.out::println); // TODO 결과 객체 반환할 것
+            .collect(toList());
+
+        return new UserLottoResult(TICKET_PRICE, gameRanks);
     }
 }

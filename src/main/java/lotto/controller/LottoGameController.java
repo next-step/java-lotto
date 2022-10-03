@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.LottoResult;
 import lotto.domain.TicketSeller;
 import lotto.domain.User;
+import lotto.domain.UserLottoResult;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -34,6 +35,7 @@ public class LottoGameController {
         outputView.printTickets(user);
         LottoResult lastWeekLottoResult = inputView.getLastWeekLottoResult();
 
-        TicketSeller.verifyRankFor(user, lastWeekLottoResult);
+        UserLottoResult userLottoResult = TicketSeller.verifyRankFor(user, lastWeekLottoResult);
+        outputView.printResult(userLottoResult);
     }
 }

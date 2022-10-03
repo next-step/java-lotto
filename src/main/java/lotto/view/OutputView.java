@@ -1,10 +1,13 @@
 package lotto.view;
 
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import lotto.domain.LottoGameRank;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.User;
+import lotto.domain.UserLottoResult;
 
 public class OutputView {
     private static final String NUMBER_OF_TICKETS_FORMAT_STRING = "%d개를 구매했습니다.\r\n";
@@ -13,6 +16,17 @@ public class OutputView {
         System.out.printf(NUMBER_OF_TICKETS_FORMAT_STRING, user.getLottoTickets().size());
         user.getLottoTickets().forEach(this::printLottoTicket);
         System.out.println();
+    }
+
+    public void printResult(UserLottoResult result) {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        Stream.of(LottoGameRank.FOURTH, LottoGameRank.THIRD, LottoGameRank.SECOND, LottoGameRank.FIRST)
+            .forEach((rank) -> {
+                System.out.printf("%d개 일치 (%d)원- %d개\r\n", rank.getMinimumMatchNumberCount(), rank.getReward().getValue(), result.countRank(rank));
+            });
+
+        System.out.printf("총 수익률은 %s입니다.\r\n", result.calculateReturnRate());
     }
 
     public void printError(Exception e) {

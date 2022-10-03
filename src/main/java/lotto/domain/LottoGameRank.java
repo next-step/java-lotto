@@ -5,17 +5,19 @@ import java.util.List;
 import java.util.function.Function;
 
 public enum LottoGameRank {
-    FIRST(new Money(2_000_000_000), count -> count == 6),
-    SECOND(new Money(1_500_000), count -> count == 5),
-    THIRD(new Money(50_000), count -> count == 4),
-    FOURTH(new Money(5_000), count -> count == 3),
-    NONE(new Money(0), count -> false);
+    FIRST(new Money(2_000_000_000), 6L, count -> count == 6L),
+    SECOND(new Money(1_500_000), 5L, count -> count == 5L),
+    THIRD(new Money(50_000), 4L, count -> count == 4L),
+    FOURTH(new Money(5_000), 3L, count -> count == 3L),
+    NONE(new Money(0), 0L, count -> false);
 
-    private final Money price;
+    private final Money reward;
+    private final Long rankConditionCount;
     private final Function<Long, Boolean> rankCondition;
 
-    LottoGameRank(Money price, Function<Long, Boolean> rankCondition) {
-        this.price = price;
+    LottoGameRank(Money reward, Long rankConditionCount, Function<Long, Boolean> rankCondition) {
+        this.reward = reward;
+        this.rankConditionCount = rankConditionCount;
         this.rankCondition = rankCondition;
     }
 
@@ -34,7 +36,11 @@ public enum LottoGameRank {
             .count();
     }
 
-    public Money getPrice() {
-        return price;
+    public Money getReward() {
+        return reward;
+    }
+
+    public long getMinimumMatchNumberCount() {
+        return rankConditionCount;
     }
 }
