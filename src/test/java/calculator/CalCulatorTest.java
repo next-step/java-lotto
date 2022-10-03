@@ -2,9 +2,11 @@ package calculator;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static calculator.Calculator.ERR_INPUT_ARG;
+import static calculator.Operator.ERR_MSG_OPERATOR;
 import static org.assertj.core.api.Assertions.*;
 
 public class CalCulatorTest {
@@ -42,11 +44,14 @@ public class CalCulatorTest {
     }
 
     @ParameterizedTest
+    @NullSource
     @ValueSource(strings = {"", "   "})
-    public void 입력값_null_공백() {
+    public void 입력값_null_공백(String s) {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    cal.calculate(null);
+                    cal.calculate(s);
                 }).withMessageMatching(ERR_INPUT_ARG);
     }
+
+
 }

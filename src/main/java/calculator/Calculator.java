@@ -38,7 +38,7 @@ public class Calculator {
         int result = numbers.poll();
         while (!numbers.isEmpty()) {
             int a = numbers.poll();
-            String op = ops.poll();
+            Operator op = new Operator(ops.poll());
             result = operation(result, a, op);
         }
 
@@ -46,7 +46,7 @@ public class Calculator {
     }
 
     private boolean isNullOrBlank(String s) {
-        return s == null || s.equals("");
+        return s == null || s.replaceAll(" ", "").equals("");
     }
 
     private void putExpressions(String e) {
@@ -58,17 +58,17 @@ public class Calculator {
         }
     }
 
-    private int operation(int a, int b, String op) {
-        if (op.equals("+")) {
+    private int operation(int a, int b, Operator op) {
+        if (op.equals(new Operator("+"))) {
             return plus(a, b);
         }
-        if (op.equals("-")) {
+        if (op.equals(new Operator("-"))) {
             return minus(a, b);
         }
-        if (op.equals("*")) {
+        if (op.equals(new Operator("*"))) {
             return multiply(a, b);
         }
-        if (op.equals("/")) {
+        if (op.equals(new Operator("/"))) {
             return divide(a, b);
         }
         return 0;
