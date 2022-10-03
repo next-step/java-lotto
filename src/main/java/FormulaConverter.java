@@ -8,6 +8,7 @@ public class FormulaConverter {
     private static final char MINUS = '-';
     private static final char MULTIPLY = '*';
 
+    private FormulaConverter() {}
 
     public static Queue<String> convert(String input) {
         checkNotEmpty(input);
