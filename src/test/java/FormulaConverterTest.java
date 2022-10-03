@@ -2,6 +2,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Queue;
@@ -20,13 +21,11 @@ public class FormulaConverterTest {
                 .hasMessageContaining("연산자가 아닙니다.");
     }
 
-    @Test
+    @ParameterizedTest
+    @NullAndEmptySource
     @DisplayName("입력값이 빈값이면 예외를 던진다.")
-    public void validate_input_is_empty() {
-        assertThatThrownBy(() -> FormulaConverter.convert(""))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("입력값이 없습니다.");
-        assertThatThrownBy(() -> FormulaConverter.convert(null))
+    public void validate_input_is_empty(String input) {
+        assertThatThrownBy(() -> FormulaConverter.convert(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("입력값이 없습니다.");
     }
