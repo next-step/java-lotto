@@ -39,7 +39,7 @@ public enum LottoRank {
         }
 
         return Arrays.stream(values())
-                .filter(lottoRank -> lottoRank.needBonus && lottoRank.matchCount == matchCount)
+                .filter(lottoRank -> !lottoRank.needBonus && lottoRank.matchCount == matchCount)
                 .findFirst().orElse(NONE);
 
     }
