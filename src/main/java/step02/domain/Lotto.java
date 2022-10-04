@@ -40,7 +40,9 @@ public class Lotto {
 
     public LottoGrade getGradeByComparison(Lotto winningNumbers) {
         Set<Integer> winningNumbersSet = new HashSet<>(winningNumbers.value);
-        int count = (int) value.stream().filter(winningNumbersSet::contains).count();
+        int count = (int) value.stream()
+            .filter(winningNumbersSet::contains)
+            .count();
         return LottoGrade.from(count);
     }
 
