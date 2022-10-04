@@ -24,9 +24,9 @@ public class LottoMain {
         PrintView.printBlank();
 
         List<Integer> lastWeekWinningNumbers = InputView.initLastWeekWinningNumbers();
+        Lotto winners = Lotto.of(lastWeekWinningNumbers);
         int bonusBallNumber = InputView.initBonusBallNumber();
         PrintView.printBlank();
-        Lotto winners = new Lotto(lastWeekWinningNumbers);
 
         LottoResult lottoResult = LottoResultGenerator.generate(lottoList, winners);
         PrintView.printLottoResult(lottoResult, purchasePrice);

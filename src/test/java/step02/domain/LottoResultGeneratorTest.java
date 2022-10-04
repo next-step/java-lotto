@@ -14,20 +14,20 @@ class LottoResultGeneratorTest {
     @DisplayName("로또 결과가 각 순위별로 잘 추출되는지 테스트.")
     void generate() {
         // given
-        Lotto winners = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winners = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
 
         LottoList lottoList = new LottoList(
             List.of(
-                new Lotto(List.of(1, 2, 3, 4, 5, 6)), // 1등
-                new Lotto(List.of(1, 2, 3, 4, 15, 16)), // 3등
-                new Lotto(List.of(1, 2, 5, 6, 7, 8)), // 3등
-                new Lotto(List.of(1, 2, 3, 10, 11, 12)), // 4등
-                new Lotto(List.of(4, 5, 6, 7, 8, 9)), // 4등
-                new Lotto(List.of(1, 4, 6, 7, 41, 42)), // 4등
-                new Lotto(List.of(1, 2, 11, 12, 13, 14)),// 순위 외
-                new Lotto(List.of(1, 6, 41, 42, 43, 44)),// 순위 외
-                new Lotto(List.of(31, 32, 33, 34, 35, 36)),// 순위 외
-                new Lotto(List.of(6, 7, 8, 14, 26, 37)) // 순위 외
+                Lotto.of(List.of(1, 2, 3, 4, 5, 6)), // 1등
+                Lotto.of(List.of(1, 2, 3, 4, 15, 16)), // 3등
+                Lotto.of(List.of(1, 2, 5, 6, 7, 8)), // 3등
+                Lotto.of(List.of(1, 2, 3, 10, 11, 12)), // 4등
+                Lotto.of(List.of(4, 5, 6, 7, 8, 9)), // 4등
+                Lotto.of(List.of(1, 4, 6, 7, 41, 42)), // 4등
+                Lotto.of(List.of(1, 2, 11, 12, 13, 14)),// 순위 외
+                Lotto.of(List.of(1, 6, 41, 42, 43, 44)),// 순위 외
+                Lotto.of(List.of(31, 32, 33, 34, 35, 36)),// 순위 외
+                Lotto.of(List.of(6, 7, 8, 14, 26, 37)) // 순위 외
             )
         );
 

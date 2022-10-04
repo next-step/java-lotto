@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import step02.domain.LottoGrade;
+import step02.domain.LottoNumber;
 import step02.domain.LottoResult;
 
 public class PrintView {
@@ -36,7 +37,7 @@ public class PrintView {
         System.out.println(INIT_LAST_WEEK_WINNING_NUMBERS_PHRASE);
     }
 
-    public static void printLottoNumbers(List<Integer> lottoNumbers) {
+    public static void printLottoNumbers(List<LottoNumber> lottoNumbers) {
         System.out.println(lottoNumbers);
     }
 

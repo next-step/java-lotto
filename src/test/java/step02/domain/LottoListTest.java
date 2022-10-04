@@ -10,7 +10,6 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 class LottoListTest {
 
-
     @ParameterizedTest
     @NullAndEmptySource
     @DisplayName("LottoList를 빈 값으로 생성시 에러 발생 테스트.")
