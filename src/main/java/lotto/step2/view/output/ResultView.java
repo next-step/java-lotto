@@ -10,12 +10,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
+    private static final String WINS_SECOND_PRINT_FORMAT = "%d개 일치, 보너스 볼 일치 (%d) - %d개";
     private static final String WINS_NUMBERS_PRINT_FORMAT = "%d개 일치 (%d) - %d개";
     private static final String PURCHASED_LOTTO_NUMBER_PRINT_FORM = "%d개를 구매했습니다.\n";
     private static final String YIELD_PRINT_FORMAT = "총 수익률은 %s입니다.";
     private static final String WIN_NUMBERS_PRINT_MESSAGE = "\n당첨 통계";
     private static final String BARS = "---------";
     private static final String DECIMAL_FORMAT_PATTERN = "0.##";
+    private static final String NEW_LINE = "\n";
     
     public static void purchasedLottoNumbersPrint(LottoTickets lottoTickets, PaymentPrice paymentPrice) {
         System.out.printf(PURCHASED_LOTTO_NUMBER_PRINT_FORM, paymentPrice.numberOfTickets());
@@ -43,8 +45,15 @@ public class ResultView {
     private static String getWinsNumbers(List<LottoRank> lottoRanks) {
         return Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> lottoRank != LottoRank.MISS)
-                .map(lottoRank -> String.format(WINS_NUMBERS_PRINT_FORMAT, lottoRank.getCountOfMatchNumber(), lottoRank.getReward(), lottoRank.getCountOfLottoRanks(lottoRanks)))
-                .collect(Collectors.joining("\n"));
+                .map(lottoRank -> winsNumbersPrintFormat(lottoRanks, lottoRank))
+                .collect(Collectors.joining(NEW_LINE));
+    }
+    
+    private static String winsNumbersPrintFormat(List<LottoRank> lottoRanks, LottoRank lottoRank) {
+        if (lottoRank == LottoRank.SECOND) {
+            return String.format(WINS_SECOND_PRINT_FORMAT, lottoRank.getCountOfMatchNumber(), lottoRank.getReward(), lottoRank.getCountOfLottoRanks(lottoRanks));
+        }
+        return String.format(WINS_NUMBERS_PRINT_FORMAT, lottoRank.getCountOfMatchNumber(), lottoRank.getReward(), lottoRank.getCountOfLottoRanks(lottoRanks));
     }
     
     public static void yieldPrint(double yield) {
