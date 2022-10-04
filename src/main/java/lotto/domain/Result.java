@@ -6,9 +6,9 @@ public class Result {
     private final Map<Integer, WinResult> winResultMap = new HashMap<>();
     private int initMoney;
 
-    public Result(List<Lotto> lottoList, List<Integer> lastWeeksCollectNumberList) {
-        this.saveInitMoney(lottoList.size());
-        for (Lotto lotto : lottoList) {
+    public Result(List<Lotto> lottos, List<Integer> lastWeeksCollectNumberList) {
+        this.saveInitMoney(lottos.size());
+        for (Lotto lotto : lottos) {
             this.saveResult(lotto.getMatchCount(lastWeeksCollectNumberList));
         }
     }

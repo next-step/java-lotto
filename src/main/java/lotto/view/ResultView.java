@@ -16,8 +16,8 @@ public class ResultView {
         System.out.println("총 수익률은 " + result.getRateOfIncome() + "입니다");
     }
 
-    public void printLottoNumber(List<Lotto> lottoList) {
-        for (Lotto lotto : lottoList) {
+    public void printLottoNumber(List<Lotto> lottos) {
+        for (Lotto lotto : lottos) {
             System.out.println(Arrays.toString(lotto.getNumbers()));
         }
     }
