@@ -6,8 +6,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.domain.LottoNumber.LOTTO_NUMBERS;
-
 
 public class Lotto {
     public static final int PRICE = 1000;
@@ -18,10 +16,15 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public static Lotto create() {
-        Collections.shuffle(LOTTO_NUMBERS);
-        return new Lotto(LOTTO_NUMBERS.stream()
+        List<LottoNumber> numbers = LottoNumber.lottoNumbers();
+
+        Collections.shuffle(numbers);
+
+        List<LottoNumber> numberList = numbers.stream()
                 .limit(LOTTO_SIZE)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
+
+        return new Lotto(numberList);
     }
 
     public Lotto(List<LottoNumber> lottoNumbers) {
