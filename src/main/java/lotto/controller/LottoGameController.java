@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.LottoResult;
+import lotto.domain.vo.LottoResult;
 import lotto.domain.TicketSeller;
 import lotto.domain.User;
 import lotto.domain.UserLottoResult;

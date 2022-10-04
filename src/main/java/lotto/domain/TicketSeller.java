@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import lotto.domain.enums.LottoGameRank;
+import lotto.domain.vo.LottoResult;
+import lotto.domain.vo.Money;
+
 import static java.util.stream.Collectors.*;
 
 import java.util.List;

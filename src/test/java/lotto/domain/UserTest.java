@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 
+import lotto.domain.vo.LottoNumber;
+import lotto.domain.vo.Money;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 

@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.enums;
 
 import static java.util.stream.Collectors.*;
 import static org.assertj.core.api.Assertions.*;
@@ -6,6 +6,10 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.List;
 import java.util.stream.Stream;
 
+import lotto.domain.entity.LottoTicket;
+import lotto.domain.enums.LottoGameRank;
+import lotto.domain.vo.LottoNumber;
+import lotto.domain.vo.LottoResult;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;

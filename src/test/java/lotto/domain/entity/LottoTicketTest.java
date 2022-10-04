@@ -1,10 +1,12 @@
-package lotto.domain;
+package lotto.domain.entity;
 
 import static java.util.stream.Collectors.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 
+import lotto.domain.entity.LottoTicket;
+import lotto.domain.vo.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

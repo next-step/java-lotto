@@ -3,9 +3,9 @@ package lotto.view;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import lotto.domain.LottoGameRank;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
+import lotto.domain.enums.LottoGameRank;
+import lotto.domain.vo.LottoNumber;
+import lotto.domain.entity.LottoTicket;
 import lotto.domain.User;
 import lotto.domain.UserLottoResult;
 

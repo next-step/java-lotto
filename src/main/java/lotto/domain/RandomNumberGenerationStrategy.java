@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.vo.LottoNumber;
+
 import static java.util.stream.Collectors.*;
 
 import java.util.Collections;

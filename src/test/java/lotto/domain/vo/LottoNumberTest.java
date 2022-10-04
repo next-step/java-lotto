@@ -1,7 +1,8 @@
-package lotto.domain;
+package lotto.domain.vo;
 
 import static org.assertj.core.api.Assertions.*;
 
+import lotto.domain.vo.LottoNumber;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 

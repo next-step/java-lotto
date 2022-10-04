@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.vo.LottoNumber;
+
 import java.util.List;
 
 @FunctionalInterface

@@ -6,9 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoResult;
-import lotto.domain.Money;
+import lotto.domain.vo.LottoNumber;
+import lotto.domain.vo.LottoResult;
+import lotto.domain.vo.Money;
 import lotto.domain.User;
 
 public class InputView {

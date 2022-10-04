@@ -1,4 +1,7 @@
-package lotto.domain;
+package lotto.domain.entity;
+
+import lotto.domain.vo.LottoNumber;
+import lotto.domain.vo.LottoNumbers;
 
 import java.util.List;
 import java.util.Objects;

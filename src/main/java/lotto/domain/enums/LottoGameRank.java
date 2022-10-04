@@ -1,4 +1,9 @@
-package lotto.domain;
+package lotto.domain.enums;
+
+import lotto.domain.vo.LottoNumber;
+import lotto.domain.vo.LottoResult;
+import lotto.domain.entity.LottoTicket;
+import lotto.domain.vo.Money;
 
 import java.util.Arrays;
 import java.util.List;
