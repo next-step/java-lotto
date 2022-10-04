@@ -24,6 +24,9 @@ public class LottoApplication {
         // 지난 주 당첨 번호 입력
         List<Integer> lastWeeksCollectNumbers = inputView.inputLastWeeksCollectNumbers();
 
+        // 보너스 볼 번호 입력
+        int bonusNumber = inputView.inputBonusNumber();
+
         // 결과 저장
         Result result = new Result(lottos, lastWeeksCollectNumbers);
 
