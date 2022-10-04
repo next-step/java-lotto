@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    private static final String WINS_SECOND_PRINT_FORMAT = "%d개 일치, 보너스 볼 일치 (%d) - %d개";
-    private static final String WINS_NUMBERS_PRINT_FORMAT = "%d개 일치 (%d) - %d개";
+    private static final String WINS_SECOND_PRINT_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
+    private static final String WINS_NUMBERS_PRINT_FORMAT = "%d개 일치 (%d원) - %d개";
     private static final String PURCHASED_LOTTO_NUMBER_PRINT_FORM = "%d개를 구매했습니다.\n";
     private static final String YIELD_PRINT_FORMAT = "총 수익률은 %s입니다.";
     private static final String WIN_NUMBERS_PRINT_MESSAGE = "\n당첨 통계";
