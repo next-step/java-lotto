@@ -21,7 +21,7 @@ public class OutputView {
     public void printResult(UserLottoResult result) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        Stream.of(LottoGameRank.FOURTH, LottoGameRank.THIRD, LottoGameRank.SECOND, LottoGameRank.FIRST)
+        Stream.of(LottoGameRank.FIFTH, LottoGameRank.FOURTH, LottoGameRank.THIRD, LottoGameRank.FIRST)
             .forEach((rank) -> {
                 System.out.printf("%d개 일치 (%d)원- %d개\r\n", rank.getMinimumMatchNumberCount(), rank.getReward().getValue(), result.countRank(rank));
             });

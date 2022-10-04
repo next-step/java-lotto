@@ -16,10 +16,10 @@ class UserLottoResultTest {
 
     @ParameterizedTest(name = "당첨된 티켓 등수의 갯수를 센다. {2}")
     @MethodSource(value = "provideTestCountRank")
-    void countRank(Money ticketPrice, List<LottoGameRank> ranks, List<Long> expectedCounts) {
+    void countRank(Money ticketPrice, List<LottoGameRank> ranks, List<Integer> expectedCounts) {
         UserLottoResult userLottoResult = new UserLottoResult(ticketPrice, ranks);
 
-        List<Long> counts = Stream.of(LottoGameRank.FIRST, LottoGameRank.SECOND, LottoGameRank.THIRD, LottoGameRank.FOURTH)
+        List<Integer> counts = Stream.of(LottoGameRank.FIRST, LottoGameRank.THIRD, LottoGameRank.FOURTH, LottoGameRank.FIFTH)
             .map(userLottoResult::countRank)
             .collect(toList());
 
@@ -36,8 +36,8 @@ class UserLottoResultTest {
         Money ticketPrice = new Money(1_000);
 
         return Stream.of(
-            Arguments.of(ticketPrice, List.of(LottoGameRank.FIRST, LottoGameRank.SECOND, LottoGameRank.THIRD), List.of(1L, 1L, 1L, 0L)),
-            Arguments.of(ticketPrice, List.of(LottoGameRank.FIRST, LottoGameRank.FIRST, LottoGameRank.THIRD), List.of(2L, 0L, 1L, 0L))
+            Arguments.of(ticketPrice, List.of(LottoGameRank.FIRST, LottoGameRank.THIRD, LottoGameRank.FOURTH), List.of(1, 1, 1, 0)),
+            Arguments.of(ticketPrice, List.of(LottoGameRank.FIRST, LottoGameRank.FIRST, LottoGameRank.FOURTH), List.of(2, 0, 1, 0))
         );
     }
 
@@ -46,9 +46,9 @@ class UserLottoResultTest {
 
         return Stream.of(
             Arguments.of(ticketPrice, List.of(LottoGameRank.NONE), BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP)),
-            Arguments.of(ticketPrice, List.of(LottoGameRank.FOURTH), new BigDecimal("5").setScale(2, RoundingMode.HALF_UP)),
-            Arguments.of(ticketPrice, List.of(LottoGameRank.THIRD), new BigDecimal("50").setScale(2, RoundingMode.HALF_UP)),
-            Arguments.of(ticketPrice, List.of(LottoGameRank.SECOND), new BigDecimal("1500").setScale(2, RoundingMode.HALF_UP)),
+            Arguments.of(ticketPrice, List.of(LottoGameRank.FIFTH), new BigDecimal("5").setScale(2, RoundingMode.HALF_UP)),
+            Arguments.of(ticketPrice, List.of(LottoGameRank.FOURTH), new BigDecimal("50").setScale(2, RoundingMode.HALF_UP)),
+            Arguments.of(ticketPrice, List.of(LottoGameRank.THIRD), new BigDecimal("1500").setScale(2, RoundingMode.HALF_UP)),
             Arguments.of(ticketPrice, List.of(LottoGameRank.FIRST), new BigDecimal("2000000").setScale(2, RoundingMode.HALF_UP))
         );
     }

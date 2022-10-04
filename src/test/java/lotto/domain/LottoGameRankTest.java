@@ -20,9 +20,9 @@ class LottoGameRankTest {
     private static Stream<Arguments> provideTicketAndResult() {
         return Stream.of(
             Arguments.of(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 6))), new LottoResult(createLottoNumberList(List.of(1, 2, 3, 4, 5, 6))), LottoGameRank.FIRST),
-            Arguments.of(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 6))), new LottoResult(createLottoNumberList(List.of(1, 2, 3, 4, 5, 7))), LottoGameRank.SECOND),
-            Arguments.of(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 6))), new LottoResult(createLottoNumberList(List.of(1, 2, 3, 4, 7, 8))), LottoGameRank.THIRD),
-            Arguments.of(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 6))), new LottoResult(createLottoNumberList(List.of(1, 2, 3, 7, 8, 9))), LottoGameRank.FOURTH),
+            Arguments.of(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 6))), new LottoResult(createLottoNumberList(List.of(1, 2, 3, 4, 5, 7))), LottoGameRank.THIRD),
+            Arguments.of(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 6))), new LottoResult(createLottoNumberList(List.of(1, 2, 3, 4, 7, 8))), LottoGameRank.FOURTH),
+            Arguments.of(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 6))), new LottoResult(createLottoNumberList(List.of(1, 2, 3, 7, 8, 9))), LottoGameRank.FIFTH),
             Arguments.of(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 6))), new LottoResult(createLottoNumberList(List.of(1, 2, 7, 8, 9, 10))), LottoGameRank.NONE)
         );
     }

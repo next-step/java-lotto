@@ -13,8 +13,8 @@ public class UserLottoResult {
         this.ranks = ranks;
     }
 
-    public long countRank(LottoGameRank target) {
-        return ranks.stream()
+    public int countRank(LottoGameRank target) {
+        return (int)ranks.stream()
             .filter(rank -> rank == target)
             .count();
     }
