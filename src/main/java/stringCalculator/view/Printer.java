@@ -1,4 +1,6 @@
-package Step1;
+package stringCalculator.view;
+
+import stringCalculator.view.InputScanner;
 
 public class Printer {
 

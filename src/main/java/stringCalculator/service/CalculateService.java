@@ -1,26 +1,32 @@
-package Step1;
+package stringCalculator.service;
 
+
+import stringCalculator.validator.MathEquationValidator;
+import stringCalculator.utils.StringConverter;
 
 import java.util.*;
 
-public class CalculatorService {
+public class CalculateService {
 
-    private final Calculator calculator;
     private final StringConverter stringConverter;
 
-    public CalculatorService() {
-        calculator = new Calculator();
+    public CalculateService() {
         stringConverter = new StringConverter();
     }
 
     public int calculate(String mathEquation) {
         MathEquationValidator.validate(mathEquation);
+
         List<String> decomposedMathEquation = stringConverter.convertToList(mathEquation);
         Deque<String> mathEquationDeque = convertListToDeque(decomposedMathEquation);
 
         while (mathEquationDeque.size() > 1) {
-            int calculationResult = calculate(Integer.parseInt(mathEquationDeque.removeFirst()), mathEquationDeque.removeFirst(), Integer.parseInt(mathEquationDeque.removeFirst()));
-            mathEquationDeque.addFirst(String.valueOf(calculationResult));
+            int calculateResult = calculate(
+                    Integer.parseInt(mathEquationDeque.removeFirst()),
+                    mathEquationDeque.removeFirst(),
+                    Integer.parseInt(mathEquationDeque.removeFirst())
+            );
+            mathEquationDeque.addFirst(String.valueOf(calculateResult));
         }
 
         return Integer.parseInt(mathEquationDeque.pop());
@@ -32,17 +38,17 @@ public class CalculatorService {
 
     private int calculate(int num1, String operatorSymbol, int num2) {
         if (operatorSymbol.equals("+")) {
-            return calculator.addition(num1, num2);
+            return num1 + num2;
         }
 
         if (operatorSymbol.equals("-")) {
-            return calculator.subtraction(num1, num2);
+            return num1 - num2;
         }
 
         if (operatorSymbol.equals("*")) {
-            return calculator.multiplication(num1, num2);
+            return num1 * num2;
         }
 
-        return calculator.division(num1, num2);
+        return num1 / num2;
     }
 }

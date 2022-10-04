@@ -1,4 +1,4 @@
-package Step1;
+package stringCalculator.utils;
 
 import java.util.Arrays;
 import java.util.List;

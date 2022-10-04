@@ -1,6 +1,7 @@
-package Step1;
+package stringCalculator;
 
 import org.junit.jupiter.api.Test;
+import stringCalculator.utils.StringConverter;
 
 import java.util.Arrays;
 import java.util.List;

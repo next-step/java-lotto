@@ -1,4 +1,4 @@
-package Step1;
+package stringCalculator.view;
 
 import java.util.Scanner;
 
