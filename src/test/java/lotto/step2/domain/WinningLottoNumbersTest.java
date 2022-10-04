@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class WinningLottoNumbersTest {
     public static final WinningLottoNumbers WINNING_LOTTO_NUMBERS = new WinningLottoNumbers(Arrays.asList(LottoNumberTest.ONE, LottoNumberTest.TWO, LottoNumberTest.THREE, LottoNumberTest.FOUR, LottoNumberTest.FIVE, LottoNumberTest.SIX), LottoNumberTest.THIRTY);
@@ -34,5 +35,13 @@ class WinningLottoNumbersTest {
         int countMatchingNumber = WINNING_LOTTO_NUMBERS.countMatchingNumber(lottoNumbers);
     
         assertThat(countMatchingNumber).isEqualTo(6);
+    }
+    
+    @Test
+    @DisplayName("로또 당첨번호를 보너스 번호로 입력 시 예외")
+    void bonus_number_exception() {
+        List<LottoNumber> lottoTicket = LottoTicketTest.LOTTO_TICKET.lottoTicketInformation().getLottoTicket();
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinningLottoNumbers(lottoTicket, LottoNumberTest.SIX))
+                .withMessage("입력하신 보너스 번호는 이미 존재하는 당첨 번호 입니다. 다시 입력해주세요.");
     }
 }
