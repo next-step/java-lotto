@@ -28,15 +28,15 @@ public enum LottoGameRank {
         int count = countSameNumbers(lottoTicket.getLottoNumbers(), lottoResult.getLottoNumbers());
 
         return Arrays.stream(values())
-                .filter(rank -> rank.rankConditionCount == count)
-                .findFirst()
-                .orElse(LottoGameRank.NONE);
+            .filter(rank -> rank.rankConditionCount == count)
+            .findFirst()
+            .orElse(LottoGameRank.NONE);
     }
 
     private static int countSameNumbers(List<LottoNumber> lottoNumbers, List<LottoNumber> resultNumbers) {
         return (int) resultNumbers.stream()
-                .filter(lottoNumbers::contains)
-                .count();
+            .filter(lottoNumbers::contains)
+            .count();
     }
 
     public Money getReward() {

@@ -23,9 +23,9 @@ public class InputView {
     public List<Integer> getLastWeekLottoResult() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         List<Integer> lottoNumbers = Arrays.stream(scanner.nextLine().split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .collect(toList());
+            .map(String::trim)
+            .map(Integer::parseInt)
+            .collect(toList());
         System.out.println();
 
         return lottoNumbers;

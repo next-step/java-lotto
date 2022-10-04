@@ -21,7 +21,7 @@ class TicketMachineTest {
 
     private List<LottoNumber> createLottoNumbers(List<Integer> numbers) {
         return numbers.stream()
-                .map(LottoNumber::new)
-                .collect(toList());
+            .map(LottoNumber::new)
+            .collect(toList());
     }
 }

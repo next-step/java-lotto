@@ -9,8 +9,8 @@ public class LottoResult {
 
     public LottoResult(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = numbers.stream()
-                .map(LottoNumber::new)
-                .collect(toList());
+            .map(LottoNumber::new)
+            .collect(toList());
 
         this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }

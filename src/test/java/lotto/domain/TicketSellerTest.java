@@ -10,9 +10,9 @@ class TicketSellerTest {
 
     @ParameterizedTest(name = "사용자가 최대한 티켓을 사고 남은 잔돈과 티켓 수를 검증한다, 소유액: {0}, 티켓 수: {1}, 잔액: {2}")
     @CsvSource(value = {
-            "12005, 12, 5",
-            "10000, 10, 0",
-            "12, 0, 12"
+        "12005, 12, 5",
+        "10000, 10, 0",
+        "12, 0, 12"
     })
     void sellTicketTo(int money, int ticketCount, int change) {
         User user = new User(new Money(money));

@@ -20,8 +20,8 @@ public class TicketSeller {
 
     public static UserLottoResult verifyRankFor(User user, LottoResult result) {
         List<LottoGameRank> gameRanks = user.getLottoTickets().stream()
-                .map(ticket -> LottoGameRank.findRank(ticket, result))
-                .collect(toList());
+            .map(ticket -> LottoGameRank.findRank(ticket, result))
+            .collect(toList());
 
         return new UserLottoResult(TICKET_PRICE, gameRanks);
     }

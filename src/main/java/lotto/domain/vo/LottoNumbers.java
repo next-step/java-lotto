@@ -16,8 +16,8 @@ public class LottoNumbers {
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers.stream()
-                .sorted()
-                .collect(Collectors.toList());
+            .sorted()
+            .collect(Collectors.toList());
     }
 
     private void validate(List<LottoNumber> lottoNumbers) {

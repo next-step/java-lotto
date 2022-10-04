@@ -21,7 +21,7 @@ class LottoTicketTest {
 
     private List<LottoNumber> createLottoNumberList(int... numbers) {
         return Arrays.stream(numbers)
-                .mapToObj(LottoNumber::new)
-                .collect(toList());
+            .mapToObj(LottoNumber::new)
+            .collect(toList());
     }
 }

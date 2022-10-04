@@ -3,8 +3,7 @@ package lotto.domain.vo;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class LottoNumberTest {
     @ParameterizedTest(name = "범위 내의 숫자로 로또 숫자 생성: {0}")
@@ -17,7 +16,7 @@ class LottoNumberTest {
     @ValueSource(ints = {-1, 0, 46, 47})
     void testWithInvalidInput(int number) {
         assertThatThrownBy(() -> new LottoNumber(number))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("로또 번호 범위 밖의 숫자의 입력입니다");
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("로또 번호 범위 밖의 숫자의 입력입니다");
     }
 }

@@ -19,14 +19,14 @@ public class RandomNumberGenerationStrategy implements NumberGenerationStrategy 
         Collections.shuffle(fullNumberList);
 
         return fullNumberList.stream()
-                .limit(LOTTO_NUMBER_COUNT)
-                .map(LottoNumber::new)
-                .collect(toList());
+            .limit(LOTTO_NUMBER_COUNT)
+            .map(LottoNumber::new)
+            .collect(toList());
     }
 
     private List<Integer> getFullNumberList() {
         return IntStream.rangeClosed(START_NUMBER, END_NUMBER)
-                .boxed()
-                .collect(toList());
+            .boxed()
+            .collect(toList());
     }
 }
