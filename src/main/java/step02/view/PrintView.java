@@ -1,8 +1,10 @@
 package step02.view;
 
 import java.util.List;
+import java.util.Map;
 
 import step02.domain.LottoGrade;
+import step02.domain.LottoResult;
 
 public class PrintView {
 
@@ -36,16 +38,25 @@ public class PrintView {
         System.out.println(lottoNumbers);
     }
 
-    public static void printResultWinningMessage() {
+    public static void printLottoResult(LottoResult lottoResult, int purchasePrice) {
+        Map<LottoGrade, Integer> lottoGradeResultMap = lottoResult.getLottoGradeResultMap();
+
         System.out.println(RESULT_WINNING_MESSAGE);
         System.out.println("---------");
+        printLottoResultByGrade(LottoGrade.FOURTH, lottoGradeResultMap.getOrDefault(LottoGrade.FOURTH, 0));
+        printLottoResultByGrade(LottoGrade.THIRD, lottoGradeResultMap.getOrDefault(LottoGrade.THIRD, 0));
+        printLottoResultByGrade(LottoGrade.SECOND, lottoGradeResultMap.getOrDefault(LottoGrade.SECOND, 0));
+        printLottoResultByGrade(LottoGrade.FIRST, lottoGradeResultMap.getOrDefault(LottoGrade.FIRST, 0));
+
+        float earningRate = lottoResult.getTotalAmount() / (float) purchasePrice;
+        printLottoEarningRateResult(earningRate);
     }
 
-    public static void printLottoResultByGrade(LottoGrade lottoGrade, int count) {
+    private static void printLottoResultByGrade(LottoGrade lottoGrade, int count) {
         System.out.printf(LOTTO_WINNING_RESULT_MESSAGE, lottoGrade.getRightCount(), lottoGrade.getWinnings(), count);
     }
 
-    public static void printLottoEarningRateResult(float earningRate) {
+    private static void printLottoEarningRateResult(float earningRate) {
         System.out.printf(LOTTO_EARNING_RATE_RESULT_MESSAGE, earningRate);
     }
 }
