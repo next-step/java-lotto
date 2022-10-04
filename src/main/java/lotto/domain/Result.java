@@ -37,7 +37,7 @@ public class Result {
     }
 
     private void saveInitMoney(int lottoCount) {
-        this.initMoney = lottoCount * Config.LOTTE_PRICE;
+        this.initMoney = lottoCount * Config.LOTTO_PRICE;
     }
 
     private void saveResult(int matchingCount) {

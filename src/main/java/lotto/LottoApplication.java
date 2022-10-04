@@ -3,12 +3,13 @@ package lotto;
 import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
 import java.util.List;
 
 public class LottoApplication {
     public static void main(String[] args) {
         InputView inputView = new InputView();
-        ResultView resultView= new ResultView();
+        ResultView resultView = new ResultView();
         LottoMachine lottoMachine = new LottoMachine();
 
         // 금액 입력

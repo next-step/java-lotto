@@ -15,7 +15,7 @@ class LottoTest {
         Lotto lotto = new Lotto(NumberGenerator.pickLottoNumber());
         List<Integer> numbers = lotto.getNumbers();
 
-        assertThat(numbers).hasSize(Config.LOTTE_NUMBER_COUNT);
+        assertThat(numbers).hasSize(Config.LOTTO_NUMBER_COUNT);
     }
 
     @Test
@@ -25,7 +25,7 @@ class LottoTest {
         List<Integer> numbers = lotto.getNumbers();
 
         for (int number : numbers) {
-            assertThat(number).isBetween(Config.LOTTE_NUMBER_RANGE_TO_MIN, Config.LOTTE_NUMBER_RANGE_TO_MAX);
+            assertThat(number).isBetween(Config.LOTTO_NUMBER_RANGE_TO_MIN, Config.LOTTO_NUMBER_RANGE_TO_MAX);
         }
     }
 
@@ -34,13 +34,13 @@ class LottoTest {
     public void lotteMatchCountTest() {
 
         List<Integer> lottoNumbers = new ArrayList<>();
-        for(int index = 0; index < Config.LOTTE_NUMBER_COUNT; index++){
+        for(int index = 0; index < Config.LOTTO_NUMBER_COUNT; index++){
             lottoNumbers.add(index + 1);
         }
         Lotto lotto = new Lotto(lottoNumbers);
 
         List<Integer> customCollectNumberList = new ArrayList<>();
-        for(int index = 0; index < Config.LOTTE_NUMBER_COUNT; index++){
+        for(int index = 0; index < Config.LOTTO_NUMBER_COUNT; index++){
             customCollectNumberList.add(index + 1);
             assertThat(lotto.getMatchCount(customCollectNumberList)).isEqualTo(index + 1);
         }

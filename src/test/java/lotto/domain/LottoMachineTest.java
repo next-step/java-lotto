@@ -13,7 +13,7 @@ class LottoMachineTest {
     @DisplayName("가격에 맞는 개수의 로또를 반환하는지 테스트")
     void buyLottoTest() {
         LottoMachine lottoMachine = new LottoMachine();
-        List<Lotto> lottos = lottoMachine.buyLotto(Config.LOTTE_PRICE * 10);
+        List<Lotto> lottos = lottoMachine.buyLotto(Config.LOTTO_PRICE * 10);
         assertThat(lottos).hasSize(10);
     }
 }

@@ -18,7 +18,7 @@ class ResultTest {
         List<Integer> collectNumberList = lotto.getNumbers();
         Result result = new Result(lottos, collectNumberList);
 
-        assertThat(result.getWinCount(Config.LOTTE_NUMBER_COUNT)).isEqualTo(1);
+        assertThat(result.getWinCount(Config.LOTTO_NUMBER_COUNT)).isEqualTo(1);
         assertThat(result.getRateOfIncome()).isEqualTo(2000000);
     }
 

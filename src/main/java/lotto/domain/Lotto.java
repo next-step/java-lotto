@@ -21,7 +21,7 @@ public class Lotto {
         return matchCount;
     }
 
-    private int getMatchCount(List<Integer> collectNumberList, int number){
+    private int getMatchCount(List<Integer> collectNumberList, int number) {
         if (collectNumberList.contains(number)) {
             return 1;
         }
