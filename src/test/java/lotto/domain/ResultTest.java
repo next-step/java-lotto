@@ -13,7 +13,7 @@ class ResultTest {
     @Test
     @DisplayName("로또 당첨 결과가 제대로 저장, 계산되는지 테스트")
     void saveResultTest2() {
-        Lotto lotto = new Lotto();
+        Lotto lotto = new Lotto(NumberGenerator.pickLottoNumber());
         List<Lotto> lottos = Arrays.asList(lotto);
         List<Integer> collectNumberList = lotto.getNumbers();
         Result result = new Result(lottos, collectNumberList);

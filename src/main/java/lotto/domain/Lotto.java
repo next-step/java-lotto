@@ -5,8 +5,8 @@ import java.util.List;
 public class Lotto {
     private final List<Integer> numbers;
 
-    Lotto() {
-        this.numbers = NumberGenerator.pickLottoNumber();
+    Lotto(List<Integer> numbers) {
+        this.numbers = numbers;
     }
 
     public List<Integer> getNumbers() {

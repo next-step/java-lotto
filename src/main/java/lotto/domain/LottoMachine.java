@@ -8,7 +8,7 @@ public class LottoMachine {
         List<Lotto> lottos = new ArrayList<>();
         int lottoCount = money / Config.LOTTE_PRICE;
         for (int index = 0; index < lottoCount; index++) {
-            lottos.add(new Lotto());
+            lottos.add(new Lotto(NumberGenerator.pickLottoNumber()));
         }
         return lottos;
     }
