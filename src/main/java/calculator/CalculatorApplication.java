@@ -1,12 +1,10 @@
 package calculator;
 
 import calculator.domain.Calculator;
-import calculator.domain.InputValue;
 import calculator.service.CalculatorService;
 import calculator.util.MessageConverter;
 import calculator.view.InputScanner;
 
-import java.util.List;
 import java.util.Scanner;
 
 /**

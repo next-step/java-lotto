@@ -3,8 +3,6 @@ package calculator.domain;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.function.BiFunction;
-import java.util.function.BinaryOperator;
-import java.util.function.IntBinaryOperator;
 
 import static java.util.stream.Collectors.toMap;
 
@@ -35,7 +33,7 @@ public enum Operator {
     public static Operator from(String code) {
         Operator operator = operatorCache.get(code);
         if (operator == null) {
-            throw  new IllegalArgumentException("잘못된 연산자 입니다");
+            throw new IllegalArgumentException("잘못된 연산자 입니다");
         }
         return operator;
     }
@@ -43,12 +41,12 @@ public enum Operator {
     @Deprecated
     public static Operator from(InputValue value) {
         if (!value.isOperator()) {
-            throw  new IllegalArgumentException("연산자가 아닙니다.");
+            throw new IllegalArgumentException("연산자가 아닙니다.");
         }
 
         Operator operator = operatorCache.get(value);
         if (operator == null) {
-            throw  new IllegalArgumentException("잘못된 연산자 입니다");
+            throw new IllegalArgumentException("잘못된 연산자 입니다");
         }
 
         return operator;

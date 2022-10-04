@@ -2,7 +2,6 @@ package calculator.service;
 
 import calculator.domain.Calculator;
 import calculator.domain.InputValue;
-import calculator.util.StringUtils;
 
 import java.util.List;
 

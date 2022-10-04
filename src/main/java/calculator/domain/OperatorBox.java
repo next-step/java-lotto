@@ -8,7 +8,8 @@ import java.util.Deque;
  */
 public class OperatorBox {
 
-    private Deque<Operator> operators = new ArrayDeque<>();;
+    private Deque<Operator> operators = new ArrayDeque<>();
+    ;
 
     public void add(InputValue inputValue) {
         if (!inputValue.isOperator()) {

@@ -2,14 +2,11 @@ package calculator.service;
 
 import calculator.domain.Calculator;
 import calculator.domain.InputValue;
-import calculator.service.CalculatorService;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by seungwoo.song on 2022-09-27

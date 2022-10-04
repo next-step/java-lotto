@@ -1,8 +1,5 @@
 package calculator.domain;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-
 /**
  * Created by seungwoo.song on 2022-09-27
  */

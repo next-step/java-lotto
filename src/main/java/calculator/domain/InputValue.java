@@ -1,6 +1,5 @@
 package calculator.domain;
 
-import javax.print.attribute.standard.MediaSize;
 import java.util.Objects;
 
 /**
