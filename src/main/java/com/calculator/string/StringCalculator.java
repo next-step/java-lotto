@@ -16,25 +16,25 @@ public class StringCalculator {
      * @return 사칙연산 int 결과값
      */
     public static int calculate(String calculationFormula) {
-        isCaluationFormulaValid(calculationFormula);
+        isValidCalculationFormula(calculationFormula);
         Iterator<String> splitValues = getIteratorFromCalculationFormula(calculationFormula, CALCULATION_FORMULA_SEPARATOR);
         int result = Integer.parseInt(splitValues.next());
         while (splitValues.hasNext()) {
             String operatorSymbol = splitValues.next();
             int nextNumber = Integer.parseInt(splitValues.next());
-            result = Operator.getOperator(operatorSymbol).operate(result, nextNumber);
+            result = Operator.calculateValue(operatorSymbol, result, nextNumber);
         }
         return result;
+    }
+
+    private static void isValidCalculationFormula(String calculationFormula) {
+        if (calculationFormula == null || calculationFormula.isBlank()) {
+            throw new IllegalArgumentException("입력 값이 null이거나 빈 공백 문자입니다!");
+        }
     }
 
     private static Iterator<String> getIteratorFromCalculationFormula(String calculationFormula, String regex) {
         return Arrays.stream(calculationFormula.split(regex))
                 .iterator();
-    }
-
-    private static void isCaluationFormulaValid(String calculationFormula) {
-        if (calculationFormula == null || calculationFormula.isBlank()) {
-            throw new IllegalArgumentException("입력 값이 null이거나 빈 공백 문자입니다!");
-        }
     }
 }

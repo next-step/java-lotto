@@ -4,16 +4,14 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class StringCalculatorTest {
 
     @ParameterizedTest
-    @NullSource
-    @ValueSource(strings = {"", "  ", "    "})
+    @NullAndEmptySource
     @DisplayName("입력 값이 null이거나 빈 공백 문자일 경우 IllegalArgumentException throw 테스트")
     void invalid_input_null_or_blank(String inputString) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
@@ -57,5 +55,13 @@ public class StringCalculatorTest {
     @DisplayName("나눗셈 테스트")
     void division() {
         Assertions.assertEquals(3, StringCalculator.calculate("15 / 5"));
+    }
+
+    @Test
+    @DisplayName("나누기 결과가 정수로 나뉘어지지 않는 경우 IllegalArgumentException throw 테스트")
+    void invalid_input_for_division() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            StringCalculator.calculate("10 / 3");
+        });
     }
 }
