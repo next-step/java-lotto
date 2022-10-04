@@ -11,8 +11,7 @@ public class Result {
     public Result(List<Lotto> lottos, List<Integer> lastWeeksCollectNumberList, int bonusNumber) {
         this.saveInitMoney(lottos.size());
         for (Lotto lotto : lottos) {
-            Rank rank = Rank.valueOf(lotto.getMatchCount(lastWeeksCollectNumberList), lotto.isMatchToBonusNumber(bonusNumber));
-            this.saveResult(rank);
+            this.saveResult(Rank.valueOf(lotto.getMatchCount(lastWeeksCollectNumberList), lotto.isMatchToBonusNumber(bonusNumber)));
         }
     }
 
@@ -40,8 +39,12 @@ public class Result {
     }
 
     private void saveResult(Rank rank) {
-            winResultMap.putIfAbsent(rank, new WinResult(rank));
-            winResultMap.get(rank).addWinCount();
+        if(rank == null){
+            return;
+        }
+
+        winResultMap.putIfAbsent(rank, new WinResult(rank));
+        winResultMap.get(rank).addWinCount();
     }
 
     private class WinResult {
