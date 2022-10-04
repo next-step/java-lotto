@@ -5,10 +5,10 @@ import java.util.function.BinaryOperator;
 
 public enum Calculator {
 
-    PLUS(new Operator('+'), (left, right) -> new PlusCalculator(left).calculate(right)),
-    MINUS(new Operator('-'), (left, right) -> new MinusCalculator(left).calculate(right)),
-    MULTIPLE(new Operator('*'), (left, right) -> new MultipleCalculator(left).calculate(right)),
-    DIVIDE(new Operator('/'), (left, right) -> new DivideCalculator(left).calculate(right));
+    PLUS(new Operator('+'), Number::plus),
+    MINUS(new Operator('-'), Number::minus),
+    MULTIPLE(new Operator('*'), Number::multiple),
+    DIVIDE(new Operator('/'), Number::divide);
 
     private final Operator operator;
     private final BinaryOperator<Number> binaryOperator;
