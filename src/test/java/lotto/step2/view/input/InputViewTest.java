@@ -142,4 +142,12 @@ public class InputViewTest {
         assertThatIllegalArgumentException().isThrownBy(() -> InputView.winningBonusLottoNumberInput(input))
                 .withMessage(EXCEPTION_MESSAGE);
     }
+    
+    @DisplayName("보너스 당첨 번호 - 숫자가 아닌 값 입력 시 예외 던지기")
+    @ParameterizedTest(name = "{displayName} : {0}")
+    @ValueSource(strings = {"d", " ", "%"})
+    void winning_lotto_bonus_numbers_input_number_format_exception(String input) {
+        assertThatIllegalArgumentException().isThrownBy(() -> InputView.winningBonusLottoNumberInput(input))
+                .withMessage(EXCEPTION_MESSAGE);
+    }
 }
