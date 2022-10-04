@@ -22,6 +22,8 @@ public class InputView {
     private static final String EMPTY = "";
     private static final String LOTTO_PAYMENT_PRICE_INPUT_FORM = "[1-9][0-9]*000";
     private static final String WINNING_LOTTO_NUMBERS_INPUT_FORM = "(4[0-5]|[1-3][0-9]|[1-9])(,(4[0-5]|[1-3][0-9]|[1-9])){5}";
+    private static final String LOTTO_BONUS_NUMBER_INPUT_FORMAT = "^4[0-5]|[1-3][0-9]|[1-9]$";
+    private static final String LOTTO_BONUS_NUMBER_INPUT_MESSAGE = "보너스 볼을 입력해 주세요.";
     
     public static PaymentPrice lottoPaymentPriceInput() {
         try {
@@ -34,13 +36,9 @@ public class InputView {
     }
     
     public static PaymentPrice lottoPaymentPriceInput(String input) {
-        checkLottoPaymentPriceInputAllException(input);
-        return new PaymentPrice(Integer.parseInt(input));
-    }
-    
-    private static void checkLottoPaymentPriceInputAllException(String input) {
         checkNullException(input);
         checkLottoPaymentPriceInputFormatException(input);
+        return new PaymentPrice(Integer.parseInt(input));
     }
     
     private static void checkLottoPaymentPriceInputFormatException(String input) {
@@ -56,24 +54,24 @@ public class InputView {
         }
     }
     
-    public static WinningLottoNumbers winningLottoNumbersInput() {
+    public static WinningLottoNumbers winningLottoNumber() {
         try {
-            System.out.println(WINNING_LOTTO_NUMBERS_INPUT_MESSAGE);
-            return new WinningLottoNumbers(winningLottoNumbersInput(SCANNER.nextLine()));
+            return new WinningLottoNumbers(winningLottoNumbersInput(), winningBonusLottoNumberInput());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return winningLottoNumbersInput();
+            return winningLottoNumber();
         }
     }
     
-    public static List<LottoNumber> winningLottoNumbersInput(String input) {
-        checkWinningLottoNumbersInputAllException(input);
-        return getLottoNumbers(removeSpace(input));
+    public static List<LottoNumber> winningLottoNumbersInput() {
+        System.out.println(WINNING_LOTTO_NUMBERS_INPUT_MESSAGE);
+        return winningLottoNumbersInput(SCANNER.nextLine());
     }
     
-    private static void checkWinningLottoNumbersInputAllException(String input) {
+    public static List<LottoNumber> winningLottoNumbersInput(String input) {
         checkNullException(input);
         checkWinningLottoNumbersInputFormatException(removeSpace(input));
+        return getLottoNumbers(removeSpace(input));
     }
     
     private static void checkWinningLottoNumbersInputFormatException(String input) {
@@ -93,5 +91,23 @@ public class InputView {
                 .mapToObj(LottoNumber::new)
                 .sorted()
                 .collect(Collectors.toList());
+    }
+    
+    public static LottoNumber winningBonusLottoNumberInput() {
+        System.out.println(LOTTO_BONUS_NUMBER_INPUT_MESSAGE);
+        return winningBonusLottoNumberInput(SCANNER.nextLine());
+    }
+    
+    public static LottoNumber winningBonusLottoNumberInput(String input) {
+        checkNullException(input);
+        checkWinningLottoBonusNumberInputFormatException(input);
+        return new LottoNumber(Integer.parseInt(input));
+    }
+    
+    private static void checkWinningLottoBonusNumberInputFormatException(String input) {
+        Matcher matcher = Pattern.compile(LOTTO_BONUS_NUMBER_INPUT_FORMAT).matcher(input);
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException(INPUT_FORMAT_EXCEPTION_MESSAGE);
+        }
     }
 }

@@ -12,6 +12,7 @@ public class LottoNumberTest {
     public static final LottoNumber FOUR = new LottoNumber(4);
     public static final LottoNumber FIVE = new LottoNumber(5);
     public static final LottoNumber SIX = new LottoNumber(6);
+    public static final LottoNumber THIRTY = new LottoNumber(30);
     
     @Test
     @DisplayName("로또 번호 생성")

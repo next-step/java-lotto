@@ -55,6 +55,6 @@ public class Lotto {
     }
     
     private WinningLottoNumbers inputWinningLottoNumbers() {
-        return InputView.winningLottoNumbersInput();
+        return InputView.winningLottoNumber();
     }
 }
