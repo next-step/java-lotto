@@ -158,4 +158,11 @@ public class InputViewTest {
         assertThatIllegalArgumentException().isThrownBy(() -> InputView.winningBonusLottoNumberInput(input))
                 .withMessage(EXCEPTION_MESSAGE);
     }
+    
+    @Test
+    @DisplayName("보너스 당첨 번호 - 음수 입력")
+    void winning_lotto_bonus_numbers_input_negative_exception() {
+        assertThatIllegalArgumentException().isThrownBy(() -> InputView.winningBonusLottoNumberInput("-1"))
+                .withMessage(EXCEPTION_MESSAGE);
+    }
 }
