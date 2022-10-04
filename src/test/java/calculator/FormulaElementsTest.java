@@ -38,7 +38,7 @@ class FormulaElementsTest {
 
     @Test
     @DisplayName("수식 구성요소가 남아있지 않은데 요소 획득 시도 시 예외 발생.")
-    void fail_to_get_from_empty_queue() {
+    void fail_to_get_from_empty_deque() {
         FormulaElements formulaElements = getEmptyFormulaElements();
         assertThatExceptionOfType(InvalidFormulaException.class)
                 .isThrownBy(formulaElements::poll);
