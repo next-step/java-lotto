@@ -1,14 +1,13 @@
 package step02.domain;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Objects;
 
 public class LottoResultGenerator {
 
-    public static LottoResult generate(List<Lotto> lottoNumbers, Lotto winners) {
+    public static LottoResult generate(LottoList lottoList, Lotto winners) {
         HashMap<LottoGrade, Integer> lottoGradeResultMap = new HashMap<>();
-        lottoNumbers.stream()
+        lottoList.getValue().stream()
             .map(lottoNumber -> lottoNumber.getGradeByComparison(winners))
             .filter(Objects::nonNull)
             .forEach(lottoGrade -> lottoGradeResultMap.put(

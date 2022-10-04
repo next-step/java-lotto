@@ -1,6 +1,5 @@
 package step02.domain;
 
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -8,10 +7,12 @@ public class LottoSeller {
 
     private static final int LOTTO_PRICE = 1000;
 
-    public static List<Lotto> sell(int price) {
-        return IntStream.range(0, getLottoCount(price))
-            .mapToObj(i -> Lotto.create())
-            .collect(Collectors.toList());
+    public static LottoList sell(int price) {
+        return new LottoList(
+            IntStream.range(0, getLottoCount(price))
+                .mapToObj(i -> Lotto.create())
+                .collect(Collectors.toList())
+        );
     }
 
     private static int getLottoCount(int price) {

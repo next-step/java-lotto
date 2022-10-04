@@ -5,6 +5,7 @@ import java.util.Map;
 
 import step02.domain.Lotto;
 import step02.domain.LottoGrade;
+import step02.domain.LottoList;
 import step02.domain.LottoResult;
 import step02.domain.LottoResultGenerator;
 import step02.domain.LottoSeller;
@@ -18,16 +19,16 @@ public class LottoMain {
 
     public static void main(String[] args) {
         int purchasePrice = InputView.initPurchasePrice();
-        List<Lotto> lottoNumbers = LottoSeller.sell(purchasePrice);
-        PrintView.printLottoPurchaseCountMessage(lottoNumbers.size());
+        LottoList lottoList = LottoSeller.sell(purchasePrice);
+        PrintView.printLottoPurchaseCountMessage(lottoList.size());
 
-        lottoNumbers.stream().map(Lotto::getValue).forEach(PrintView::printLottoNumbers);
+        lottoList.getValue().stream().map(Lotto::getValue).forEach(PrintView::printLottoNumbers);
         PrintView.printBlank();
 
         List<Integer> lastWeekWinningNumbers = InputView.initLastWeekWinningNumbers();
         Lotto winners = new Lotto(lastWeekWinningNumbers);
 
-        LottoResult lottoResult = LottoResultGenerator.generate(lottoNumbers, winners);
+        LottoResult lottoResult = LottoResultGenerator.generate(lottoList, winners);
         Map<LottoGrade, Integer> lottoGradeResultMap = lottoResult.getLottoGradeResultMap();
 
         PrintView.printResultWinningMessage();
