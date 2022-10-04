@@ -1,4 +1,4 @@
-package lotto.domain;
+package calculator.domain;
 
 public class Formula {
     private static final String SEPARATOR = " ";
@@ -10,7 +10,7 @@ public class Formula {
     }
 
     private void checkValidation(String formulaString) {
-        if (formulaString == null || formulaString.trim().length() == 0) {
+        if (formulaString == null || formulaString.isBlank()) {
             throw new IllegalArgumentException("Wrong Input");
         }
     }
@@ -26,11 +26,11 @@ public class Formula {
         }
     }
 
-    private void connectSingleFormula(SingleFormulaVo SingleFormulaVo, String element) {
-        SingleFormulaVo.set(element);
-        if (SingleFormulaVo.isValid()) {
-            firstSingleFormula.setLastSingleFormula(new SingleFormula(SingleFormulaVo));
-            SingleFormulaVo.reset();
+    private void connectSingleFormula(SingleFormulaVo singleFormulaVo, String element) {
+        singleFormulaVo.set(element);
+        if (singleFormulaVo.isValid()) {
+            firstSingleFormula.setLastSingleFormula(new SingleFormula(singleFormulaVo));
+            singleFormulaVo.reset();
         }
     }
 

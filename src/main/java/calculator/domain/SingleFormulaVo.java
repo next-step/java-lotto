@@ -1,4 +1,4 @@
-package lotto.domain;
+package calculator.domain;
 
 import java.util.regex.Pattern;
 
@@ -9,11 +9,6 @@ public class SingleFormulaVo {
     private String operator = "+";
 
     public SingleFormulaVo() {
-    }
-
-    public SingleFormulaVo(Integer number, String operator) {
-        this.number = number;
-        this.operator = operator;
     }
 
     public boolean isValid() {

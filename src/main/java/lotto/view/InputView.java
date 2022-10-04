@@ -1,18 +1,26 @@
 package lotto.view;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
-    private String formulaString;
-
-    public InputView() {
-        System.out.println("계산식을 입력하세요(숫자와 연산자는 공백 기준으로 구분) : ");
+    public int inputPurchaseAmount() {
+        System.out.println("구입금액을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
-        String formulaString = scanner.nextLine();
-        this.formulaString = formulaString;
+        return scanner.nextInt();
     }
 
-    public String getFormulaString() {
-        return formulaString;
+    public List<Integer> inputLastWeeksCollectNumbers() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        String lastWeeksCollectNumbers = scanner.nextLine();
+        String[] split = lastWeeksCollectNumbers.split(", ");
+        return Arrays
+                .stream(split)
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(Collectors.toList());
     }
 }

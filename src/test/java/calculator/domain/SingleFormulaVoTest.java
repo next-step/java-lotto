@@ -1,22 +1,28 @@
-package lotto.domain;
+package calculator.domain;
 
+import calculator.domain.SingleFormulaVo;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
 class SingleFormulaVoTest {
+    private static SingleFormulaVo tempSingleFormulaVo = new SingleFormulaVo();
 
     @Test
     public void isValidTest() {
-        SingleFormulaVo singleFormulaVo1 = new SingleFormulaVo();
-        SingleFormulaVo singleFormulaVo2 = new SingleFormulaVo(1, null);
-        SingleFormulaVo singleFormulaVo3 = new SingleFormulaVo(null, "+");
-        SingleFormulaVo singleFormulaVo4 = new SingleFormulaVo(1, "+");
+        SingleFormulaVo singleFormulaVo = new SingleFormulaVo();
+        singleFormulaVo.reset();
+        assertThat(singleFormulaVo.isValid()).isFalse();
 
-        assertThat(singleFormulaVo1.isValid()).isFalse();
-        assertThat(singleFormulaVo2.isValid()).isFalse();
-        assertThat(singleFormulaVo3.isValid()).isFalse();
-        assertThat(singleFormulaVo4.isValid()).isTrue();
+        singleFormulaVo.set("1");
+        assertThat(singleFormulaVo.isValid()).isFalse();
+
+        singleFormulaVo.reset();
+        singleFormulaVo.set("+");
+        assertThat(singleFormulaVo.isValid()).isFalse();
+
+        singleFormulaVo.set("1");
+        assertThat(singleFormulaVo.isValid()).isTrue();
     }
 
     @Test
@@ -31,7 +37,9 @@ class SingleFormulaVoTest {
 
     @Test
     public void resetTest() {
-        SingleFormulaVo singleFormulaVo = new SingleFormulaVo(1, "+");
+        SingleFormulaVo singleFormulaVo = new SingleFormulaVo();
+        singleFormulaVo.set("1");
+        singleFormulaVo.set("+");
         assertThat(singleFormulaVo.getNumber()).isNotNull();
         assertThat(singleFormulaVo.getOperator()).isNotNull();
 
