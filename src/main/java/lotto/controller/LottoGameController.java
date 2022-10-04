@@ -9,6 +9,7 @@ import lotto.view.OutputView;
 
 public class LottoGameController {
     private static final String GENERAL_EXCEPTION_MESSAGE = "잘못된 형식의 입력을 입력하셨습니다.";
+    private static final String NOT_ENOUGH_MONEY_MESSAGE = "소지 금액이 부족합니다.";
 
     private final InputView inputView;
     private final OutputView outputView;
@@ -31,6 +32,11 @@ public class LottoGameController {
     private void doRun() {
         User user = inputView.getUserInput();
         TicketSeller.sellTicketTo(user);
+
+        if (!user.hasTickets()) {
+            outputView.printError(NOT_ENOUGH_MONEY_MESSAGE);
+            return;
+        }
 
         outputView.printTickets(user);
         LottoResult lastWeekLottoResult = new LottoResult(inputView.getLastWeekLottoResult());

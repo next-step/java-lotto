@@ -19,6 +19,10 @@ public class User {
         return this.money.isGreaterThanOrEqual(money);
     }
 
+    public boolean hasTickets() {
+        return !lottoTickets.isEmpty();
+    }
+
     public void buyTicket(LottoTicket lottoTicket, Money ticketPrice) {
         money = money.minus(ticketPrice);
         lottoTickets.add(lottoTicket);
