@@ -34,7 +34,7 @@ public class Lotto {
     }
     
     private void resultPrint(LottoTickets lottoTickets, PaymentPrice paymentPrice) {
-        List<LottoRank> lottoRanks = lottoTickets.lottoRanks(inputWinningLottoNumbers());
+        List<LottoRank> lottoRanks = lottoTickets.parseLottoRanks(inputWinningLottoNumbers());
         
         ResultView.winsNumbersPrint(lottoRanks);
         ResultView.yieldPrint(LottoRank.getYield(lottoRanks, paymentPrice.paymentPriceInformation()));
