@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.Result;
-import lotto.domain.Reward;
+import lotto.enumerate.Rank;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,8 +10,8 @@ import java.util.stream.Collectors;
 public class ResultView {
 
     public void printResult(Result result) {
-        for (int matchingCount : Reward.getRewardMap().keySet()) {
-            System.out.println(matchingCount + "개 일치 (" + Reward.getReward(matchingCount) + "원)- " + result.getWinCount(matchingCount) + "개");
+        for(Rank rank : Rank.values()){
+            System.out.println(rank.getCountOfMatch() + "개 일치 (" + rank.getWinningMoney() + "원)- " + result.getWinCount(rank) + "개");
         }
         System.out.println("총 수익률은 " + result.getRateOfIncome() + "입니다");
     }

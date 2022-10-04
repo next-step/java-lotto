@@ -1,15 +1,18 @@
 package lotto.domain;
 
+import lotto.enumerate.Rank;
+
 import java.util.*;
 
 public class Result {
-    private final Map<Integer, WinResult> winResultMap = new HashMap<>();
+    private final Map<Rank, WinResult> winResultMap = new HashMap<>();
     private int initMoney;
 
-    public Result(List<Lotto> lottos, List<Integer> lastWeeksCollectNumberList) {
+    public Result(List<Lotto> lottos, List<Integer> lastWeeksCollectNumberList, int bonusNumber) {
         this.saveInitMoney(lottos.size());
         for (Lotto lotto : lottos) {
-            this.saveResult(lotto.getMatchCount(lastWeeksCollectNumberList));
+            Rank rank = Rank.valueOf(lotto.getMatchCount(lastWeeksCollectNumberList), lotto.isMatchToBonusNumber(bonusNumber));
+            this.saveResult(rank);
         }
     }
 
@@ -17,21 +20,17 @@ public class Result {
         return ((double) (int) (((double) getTotalIncome() / (double) this.initMoney) * 100) / 100);
     }
 
-    public int getWinCount(int matchingCount) {
+    public int getWinCount(Rank rank) {
         return Optional.of(this.winResultMap)
-                .map(vo -> vo.get(matchingCount))
+                .map(vo -> vo.get(rank))
                 .map(WinResult::getWinCount)
                 .orElse(0);
-    }
-
-    private boolean isWin(int matchingCount) {
-        return Reward.getReward(matchingCount) != 0;
     }
 
     private int getTotalIncome() {
         int sum = 0;
         for (WinResult winResult : this.winResultMap.values()) {
-            sum += Reward.getReward(winResult.getMatchingCount()) * winResult.getWinCount();
+            sum += winResult.getRank().getWinningMoney() * winResult.getWinCount();
         }
         return sum;
     }
@@ -40,23 +39,21 @@ public class Result {
         this.initMoney = lottoCount * Config.LOTTO_PRICE;
     }
 
-    private void saveResult(int matchingCount) {
-        if (isWin(matchingCount)) {
-            winResultMap.putIfAbsent(matchingCount, new WinResult(matchingCount));
-            winResultMap.get(matchingCount).addWinCount();
-        }
+    private void saveResult(Rank rank) {
+            winResultMap.putIfAbsent(rank, new WinResult(rank));
+            winResultMap.get(rank).addWinCount();
     }
 
     private class WinResult {
-        private final int matchingCount;
+        private final Rank rank;
         private int winCount = 0;
 
-        private WinResult(int matchingCount) {
-            this.matchingCount = matchingCount;
+        private WinResult(Rank rank) {
+            this.rank = rank;
         }
 
-        private int getMatchingCount() {
-            return matchingCount;
+        private Rank getRank() {
+            return rank;
         }
 
         private int getWinCount() {

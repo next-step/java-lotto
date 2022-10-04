@@ -28,7 +28,7 @@ public class LottoApplication {
         int bonusNumber = inputView.inputBonusNumber();
 
         // 결과 저장
-        Result result = new Result(lottos, lastWeeksCollectNumbers);
+        Result result = new Result(lottos, lastWeeksCollectNumbers, bonusNumber);
 
         // 당첨 통계 출력
         resultView.printResult(result);

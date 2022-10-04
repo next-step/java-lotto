@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.enumerate.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,15 +12,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ResultTest {
 
     @Test
-    @DisplayName("로또 당첨 결과가 제대로 저장, 계산되는지 테스트")
+    @DisplayName("로또 당첨 결과가 제대로 저장 테스트")
     void saveResultTest2() {
-        Lotto lotto = new Lotto(NumberGenerator.pickLottoNumber());
-        List<Lotto> lottos = Arrays.asList(lotto);
-        List<Integer> collectNumberList = lotto.getNumbers();
-        Result result = new Result(lottos, collectNumberList);
+        int loseNumber = -1;
+        int bonusNumber = 0;
+        List<Integer> collectNumberList = Arrays.asList(1, 2, 3, 4, 5, 6);
 
-        assertThat(result.getWinCount(Config.LOTTO_NUMBER_COUNT)).isEqualTo(1);
-        assertThat(result.getRateOfIncome()).isEqualTo(2000000);
+        Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, bonusNumber));
+        Lotto lotto3 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, loseNumber));
+        Lotto lotto4 = new Lotto(Arrays.asList(1, 2, 3, 4, loseNumber, loseNumber));
+        Lotto lotto5 = new Lotto(Arrays.asList(1, 2, 3, loseNumber, loseNumber, loseNumber));
+        List<Lotto> lottos = Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5);
+
+        Result result = new Result(lottos, collectNumberList, loseNumber);
+
+        for(Rank rank : Rank.values()){
+            assertThat(result.getWinCount(rank)).isEqualTo(1);
+        }
     }
 
 }
