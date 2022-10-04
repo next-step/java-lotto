@@ -1,18 +1,18 @@
 package lotto.domain;
 
-import static java.util.stream.Collectors.*;
-import static org.assertj.core.api.Assertions.*;
+import lotto.domain.enums.LottoGameRank;
+import lotto.domain.vo.Money;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 import java.util.stream.Stream;
 
-import lotto.domain.enums.LottoGameRank;
-import lotto.domain.vo.Money;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import static java.util.stream.Collectors.toList;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class UserLottoResultTest {
 
@@ -22,8 +22,8 @@ class UserLottoResultTest {
         UserLottoResult userLottoResult = new UserLottoResult(ticketPrice, ranks);
 
         List<Integer> counts = Stream.of(LottoGameRank.FIRST, LottoGameRank.THIRD, LottoGameRank.FOURTH, LottoGameRank.FIFTH)
-            .map(userLottoResult::countRank)
-            .collect(toList());
+                .map(userLottoResult::countRank)
+                .collect(toList());
 
         assertThat(counts).isEqualTo(expectedCounts);
     }
@@ -38,8 +38,8 @@ class UserLottoResultTest {
         Money ticketPrice = new Money(1_000);
 
         return Stream.of(
-            Arguments.of(ticketPrice, List.of(LottoGameRank.FIRST, LottoGameRank.THIRD, LottoGameRank.FOURTH), List.of(1, 1, 1, 0)),
-            Arguments.of(ticketPrice, List.of(LottoGameRank.FIRST, LottoGameRank.FIRST, LottoGameRank.FOURTH), List.of(2, 0, 1, 0))
+                Arguments.of(ticketPrice, List.of(LottoGameRank.FIRST, LottoGameRank.THIRD, LottoGameRank.FOURTH), List.of(1, 1, 1, 0)),
+                Arguments.of(ticketPrice, List.of(LottoGameRank.FIRST, LottoGameRank.FIRST, LottoGameRank.FOURTH), List.of(2, 0, 1, 0))
         );
     }
 
@@ -47,11 +47,11 @@ class UserLottoResultTest {
         Money ticketPrice = new Money(1_000);
 
         return Stream.of(
-            Arguments.of(ticketPrice, List.of(LottoGameRank.NONE), BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP)),
-            Arguments.of(ticketPrice, List.of(LottoGameRank.FIFTH), new BigDecimal("5").setScale(2, RoundingMode.HALF_UP)),
-            Arguments.of(ticketPrice, List.of(LottoGameRank.FOURTH), new BigDecimal("50").setScale(2, RoundingMode.HALF_UP)),
-            Arguments.of(ticketPrice, List.of(LottoGameRank.THIRD), new BigDecimal("1500").setScale(2, RoundingMode.HALF_UP)),
-            Arguments.of(ticketPrice, List.of(LottoGameRank.FIRST), new BigDecimal("2000000").setScale(2, RoundingMode.HALF_UP))
+                Arguments.of(ticketPrice, List.of(LottoGameRank.NONE), BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP)),
+                Arguments.of(ticketPrice, List.of(LottoGameRank.FIFTH), new BigDecimal("5").setScale(2, RoundingMode.HALF_UP)),
+                Arguments.of(ticketPrice, List.of(LottoGameRank.FOURTH), new BigDecimal("50").setScale(2, RoundingMode.HALF_UP)),
+                Arguments.of(ticketPrice, List.of(LottoGameRank.THIRD), new BigDecimal("1500").setScale(2, RoundingMode.HALF_UP)),
+                Arguments.of(ticketPrice, List.of(LottoGameRank.FIRST), new BigDecimal("2000000").setScale(2, RoundingMode.HALF_UP))
         );
     }
 }

@@ -2,11 +2,11 @@ package lotto.domain;
 
 import lotto.domain.vo.LottoNumber;
 
-import static java.util.stream.Collectors.*;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toList;
 
 public class RandomNumberGenerationStrategy implements NumberGenerationStrategy {
     private static final int START_NUMBER = 1;
@@ -19,14 +19,14 @@ public class RandomNumberGenerationStrategy implements NumberGenerationStrategy 
         Collections.shuffle(fullNumberList);
 
         return fullNumberList.stream()
-            .limit(LOTTO_NUMBER_COUNT)
-            .map(LottoNumber::new)
-            .collect(toList());
+                .limit(LOTTO_NUMBER_COUNT)
+                .map(LottoNumber::new)
+                .collect(toList());
     }
 
     private List<Integer> getFullNumberList() {
         return IntStream.rangeClosed(START_NUMBER, END_NUMBER)
-            .boxed()
-            .collect(toList());
+                .boxed()
+                .collect(toList());
     }
 }

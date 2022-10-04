@@ -4,9 +4,9 @@ import lotto.domain.enums.LottoGameRank;
 import lotto.domain.vo.LottoResult;
 import lotto.domain.vo.Money;
 
-import static java.util.stream.Collectors.*;
-
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 public class TicketSeller {
     private static final Money TICKET_PRICE = new Money(1_000);
@@ -20,8 +20,8 @@ public class TicketSeller {
 
     public static UserLottoResult verifyRankFor(User user, LottoResult result) {
         List<LottoGameRank> gameRanks = user.getLottoTickets().stream()
-            .map(ticket -> LottoGameRank.findRank(ticket, result))
-            .collect(toList());
+                .map(ticket -> LottoGameRank.findRank(ticket, result))
+                .collect(toList());
 
         return new UserLottoResult(TICKET_PRICE, gameRanks);
     }

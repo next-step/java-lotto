@@ -26,7 +26,7 @@ public class LottoTicket {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        LottoTicket that = (LottoTicket)o;
+        LottoTicket that = (LottoTicket) o;
         return Objects.equals(ticketId, that.ticketId) && Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 

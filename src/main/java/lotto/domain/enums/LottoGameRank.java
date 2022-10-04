@@ -1,13 +1,12 @@
 package lotto.domain.enums;
 
+import lotto.domain.entity.LottoTicket;
 import lotto.domain.vo.LottoNumber;
 import lotto.domain.vo.LottoResult;
-import lotto.domain.entity.LottoTicket;
 import lotto.domain.vo.Money;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 
 public enum LottoGameRank {
     FIRST(new Money(2_000_000_000), 6),
@@ -29,15 +28,15 @@ public enum LottoGameRank {
         int count = countSameNumbers(lottoTicket.getLottoNumbers(), lottoResult.getLottoNumbers());
 
         return Arrays.stream(values())
-            .filter(rank -> rank.rankConditionCount == count)
-            .findFirst()
-            .orElse(LottoGameRank.NONE);
+                .filter(rank -> rank.rankConditionCount == count)
+                .findFirst()
+                .orElse(LottoGameRank.NONE);
     }
 
     private static int countSameNumbers(List<LottoNumber> lottoNumbers, List<LottoNumber> resultNumbers) {
-        return (int)resultNumbers.stream()
-            .filter(lottoNumbers::contains)
-            .count();
+        return (int) resultNumbers.stream()
+                .filter(lottoNumbers::contains)
+                .count();
     }
 
     public Money getReward() {

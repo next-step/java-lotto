@@ -1,12 +1,12 @@
 package lotto.domain.vo;
 
-import static org.assertj.core.api.Assertions.*;
-
-import lotto.domain.vo.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class MoneyTest {
 
@@ -20,8 +20,8 @@ class MoneyTest {
     @DisplayName("음수 액수를 지닌 객체를 생성할 수 없다.")
     void createWithNegativeInteger() {
         assertThatThrownBy(() -> new Money(-1_000))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining("음수가 될 수 없습니다");
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("음수가 될 수 없습니다");
     }
 
     @Test
@@ -40,7 +40,7 @@ class MoneyTest {
     @DisplayName("뺄셈 연산이 음수가 되면 예외")
     void minusException() {
         assertThatThrownBy(() -> new Money(100).minus(new Money(1_000)))
-            .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -51,9 +51,9 @@ class MoneyTest {
 
     @ParameterizedTest(name = "두 수 간의 대소 비교: {0} {1}")
     @CsvSource(value = {
-        "1000,2000,false",
-        "2000,1000,true",
-        "2000,2000,true"
+            "1000,2000,false",
+            "2000,1000,true",
+            "2000,2000,true"
     })
     void isGreaterThanOrEqual(int money1, int money2, boolean expected) {
         assertThat(new Money(money1).isGreaterThanOrEqual(new Money(money2))).isEqualTo(expected);

@@ -17,9 +17,9 @@ public class UserLottoResult {
     }
 
     public int countRank(LottoGameRank target) {
-        return (int)ranks.stream()
-            .filter(rank -> rank == target)
-            .count();
+        return (int) ranks.stream()
+                .filter(rank -> rank == target)
+                .count();
     }
 
     public BigDecimal calculateReturnRate() {
@@ -32,7 +32,7 @@ public class UserLottoResult {
 
     private Money getTotalReward() {
         return ranks.stream()
-            .map(LottoGameRank::getReward)
-            .reduce(new Money(0), Money::plus);
+                .map(LottoGameRank::getReward)
+                .reduce(new Money(0), Money::plus);
     }
 }
