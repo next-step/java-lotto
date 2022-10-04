@@ -14,7 +14,7 @@ public class Number {
         this(Integer.parseInt(input));
     }
 
-    public int value() {
+    public int getNumber() {
         return number;
     }
 
