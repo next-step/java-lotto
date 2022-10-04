@@ -23,27 +23,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
                 .forEach(i -> LOTTO_NUMBERS.put(i, new LottoNumber(i)));
     }
 
-    public static List<LottoNumber> lottoNumbers() {
-        return new ArrayList<>(LOTTO_NUMBERS.values());
-    }
-
     public static LottoNumber of(String stringNumber) {
         int number = parseNumber(stringNumber);
 
         return LottoNumber.of(number);
-    }
-
-    public static LottoNumber of(int number) {
-        return getLottoNumber(number);
-    }
-
-    private static LottoNumber getLottoNumber(int number) {
-        LottoNumber lottoNumber = LOTTO_NUMBERS.get(number);
-        if (lottoNumber == null) {
-            throw new NoSuchElementException(NOT_FOUND_EXCEPTION_MESSAGE);
-        }
-
-        return lottoNumber;
     }
 
     private static int parseNumber(String stringNumber) {
@@ -54,6 +37,23 @@ public class LottoNumber implements Comparable<LottoNumber> {
             throw new IllegalArgumentException(INPUT_EXCEPTION_MESSAGE);
         }
         return number;
+    }
+
+    public static LottoNumber of(int number) {
+        return getLottoNumber(number);
+    }
+
+    private static LottoNumber getLottoNumber(int number) {
+        LottoNumber lottoNumber = LOTTO_NUMBERS.get(number);
+        if (Objects.isNull(lottoNumber)) {
+            throw new NoSuchElementException(NOT_FOUND_EXCEPTION_MESSAGE);
+        }
+
+        return lottoNumber;
+    }
+
+    public static List<LottoNumber> lottoNumbers() {
+        return new ArrayList<>(LOTTO_NUMBERS.values());
     }
 
     public LottoNumber(int number) {
