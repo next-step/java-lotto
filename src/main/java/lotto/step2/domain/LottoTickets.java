@@ -13,7 +13,7 @@ public class LottoTickets {
     
     public List<LottoRank> lottoRanks(List<LottoNumber> winningLottoNumbers) {
         return issueLottoTickets.stream()
-                .map(lottoTicket -> lottoTicket.confirmNumberMatch(winningLottoNumbers))
+                .map(lottoTicket -> lottoTicket.countMatchingNumber(winningLottoNumbers))
                 .map(LottoRank::valueOf)
                 .collect(Collectors.toList());
     }

@@ -16,7 +16,7 @@ public class LottoTicket {
         this.lottoTicket = lottoTicket;
     }
     
-    public int confirmNumberMatch(List<LottoNumber> winningLottoNumbers) {
+    public int countMatchingNumber(List<LottoNumber> winningLottoNumbers) {
         return (int) winningLottoNumbers.stream()
                 .filter(lottoTicket::contains)
                 .count();
