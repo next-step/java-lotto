@@ -81,6 +81,6 @@ class LottoTest {
                 new LottoNumber(6)));
 
         Rank type = lottoA.rank(winLotto);
-        assertThat(type.count()).isEqualTo(Rank.FOUR.count());
+        assertThat(type.count()).isEqualTo(Rank.FOURTH.count());
     }
 }

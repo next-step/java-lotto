@@ -53,7 +53,7 @@ class LottoStatisticsTest {
 
         LottoStatistics lottoStatistics = new LottoStatistics(lottos, winLotto);
 
-        assertThat(lottoStatistics.getMatchCount(Rank.SIX)).isEqualTo(1);
+        assertThat(lottoStatistics.getMatchCount(Rank.FIRST)).isEqualTo(1);
     }
 
     private Lottos getLottosFixture() {

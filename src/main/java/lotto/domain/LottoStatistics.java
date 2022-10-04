@@ -17,7 +17,7 @@ public class LottoStatistics {
     public LottoStatistics(List<Rank> types) {
         this.quantity = types.size();
         result = types.stream()
-                .filter(Rank::hasReward)
+                .filter(Rank::hasWinningMoney)
                 .collect(Collectors.toList());
     }
 
@@ -33,7 +33,7 @@ public class LottoStatistics {
     private long getAllRewards() {
         long sum = 0;
         for (Rank rank : result) {
-            sum += rank.reward();
+            sum += rank.winningMoney();
         }
 
         return sum;

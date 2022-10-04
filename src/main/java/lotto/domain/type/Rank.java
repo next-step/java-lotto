@@ -7,20 +7,20 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum Rank {
-    BANG(0, 0),
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 1500000),
-    SIX(6, 2000000000);
+    FIRST(6, 2_000_000_000),
+    FIFTH(5, 1_500_000),
+    FOURTH(4, 50_000),
+    SECOND(3, 5_000),
+    MISS(0, 0);
 
     private static final Map<Integer, Rank> STORE = new HashMap<>();
 
     static {
-        STORE.put(BANG.count(), BANG);
-        STORE.put(THREE.count(), THREE);
-        STORE.put(FOUR.count(), FOUR);
-        STORE.put(FIVE.count(), FIVE);
-        STORE.put(SIX.count(), SIX);
+        STORE.put(MISS.count(), MISS);
+        STORE.put(SECOND.count(), SECOND);
+        STORE.put(FOURTH.count(), FOURTH);
+        STORE.put(FIFTH.count(), FIFTH);
+        STORE.put(FIRST.count(), FIRST);
     }
 
     private final int matchCount;
@@ -32,12 +32,12 @@ public enum Rank {
     }
 
     public static Rank findRank(int matchCount) {
-        return STORE.getOrDefault(matchCount, BANG);
+        return STORE.getOrDefault(matchCount, MISS);
     }
 
-    public static List<Rank> rewardValues() {
+    public static List<Rank> winningMoneyValues() {
         return Stream.of(Rank.values())
-                .filter(Rank::hasReward)
+                .filter(Rank::hasWinningMoney)
                 .collect(Collectors.toList());
     }
 
@@ -45,11 +45,11 @@ public enum Rank {
         return this.matchCount;
     }
 
-    public int reward() {
+    public int winningMoney() {
         return this.reward;
     }
 
-    public boolean hasReward() {
-        return !this.equals(BANG);
+    public boolean hasWinningMoney() {
+        return !this.equals(MISS);
     }
 }
