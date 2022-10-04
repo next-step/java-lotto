@@ -50,8 +50,8 @@ public class Lotto {
     }
 
     private void validateSizeIsSix(List<Integer> numbers) {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException("");
+        if (numbers.size() != LOTTO_NUMBERS_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 6개의 번호여야 합니다. | numbers: " + numbers);
         }
     }
 
