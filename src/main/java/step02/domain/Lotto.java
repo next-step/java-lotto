@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.util.stream.IntStream.range;
+import static java.util.stream.IntStream.rangeClosed;
 
 public class Lotto {
 
@@ -15,7 +15,7 @@ public class Lotto {
 
     private static final int LOTTO_NUMBERS_SIZE = 6;
 
-    public static final List<Integer> lottoAllNumbers = range(MIN_LOTTO_NUMBERS, MAX_LOTTO_NUMBERS + 1)
+    public static final List<Integer> lottoAllNumbers = rangeClosed(MIN_LOTTO_NUMBERS, MAX_LOTTO_NUMBERS)
         .boxed().collect(Collectors.toList());
 
     private final List<Integer> value;
