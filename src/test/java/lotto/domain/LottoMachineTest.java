@@ -14,6 +14,6 @@ class LottoMachineTest {
     void buyLottoTest() {
         LottoMachine lottoMachine = new LottoMachine();
         List<Lotto> lottos = lottoMachine.buyLotto(Config.LOTTE_PRICE * 10);
-        assertThat(lottos.size()).isEqualTo(10);
+        assertThat(lottos).hasSize(10);
     }
 }
