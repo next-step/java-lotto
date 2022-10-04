@@ -11,11 +11,8 @@ public class LottoApplication {
         ResultView resultView= new ResultView();
         LottoMachine lottoMachine = new LottoMachine();
 
-        int purchaseAmount;
-        List<Integer> lastWeeksCollectNumbers;
-
         // 금액 입력
-        purchaseAmount = inputView.inputPurchaseAmount();
+        int purchaseAmount = inputView.inputPurchaseAmount();
 
         // 로또 구매
         List<Lotto> lottos = lottoMachine.buyLotto(purchaseAmount);
@@ -24,7 +21,7 @@ public class LottoApplication {
         resultView.printLottoNumber(lottos);
 
         // 지난 주 당첨 번호 입력
-        lastWeeksCollectNumbers = inputView.inputLastWeeksCollectNumbers();
+        List<Integer> lastWeeksCollectNumbers = inputView.inputLastWeeksCollectNumbers();
 
         // 결과 저장
         Result result = new Result(lottos, lastWeeksCollectNumbers);
