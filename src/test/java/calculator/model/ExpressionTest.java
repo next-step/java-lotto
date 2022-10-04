@@ -4,16 +4,15 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.jupiter.api.Assertions.*;
 
-class CalculatorTest {
+class ExpressionTest {
 
     @DisplayName("입력 값이 공백이면 에러를 반환한다.")
     @Test
     void validateExpressionIsEmpty() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    new Calculator("");
+                    new Expression("");
                 });
     }
 
@@ -22,8 +21,16 @@ class CalculatorTest {
     void validateExpressionIsNull() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    new Calculator(null);
+                    new Expression(null);
                 });
     }
 
+    @DisplayName("입력 값이 숫자가 아니면 에러를 반환한다.")
+    @Test
+    void validateExpressionNumber() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    new Expression("a");
+                });
+    }
 }
