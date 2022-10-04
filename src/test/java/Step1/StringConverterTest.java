@@ -10,10 +10,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class StringConverterTest {
 
-    private static StringConverter stringConverter = new StringConverter();
-    private static String REGEX = " ";
+    private static final StringConverter stringConverter = new StringConverter();
+    private static final String REGEX = " ";
 
-    private static String USER_INPUT = "1 + 2 * 3 - 4 / 1";
+    private static final String USER_INPUT = "1 + 2 * 3 - 4 / 1";
 
     @Test
     void 문자열_분해_테스트() {

@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class StringConverter {
-    private static String REGEX = " ";
+    private static final String REGEX = " ";
 
-    public static List<String> convertToList(String mathEquation) {
+    public List<String> convertToList(String mathEquation) {
         return Arrays.asList(mathEquation.split(REGEX));
     }
 

@@ -1,14 +1,12 @@
 package Step1;
 
-import Step1.CalculatorImpl;
-import Step1.intefaces.Calculator;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CalculatorTest {
 
-    public static Calculator calculator = new CalculatorImpl();
+    public static Calculator calculator = new Calculator();
 
     @Test
     void 덧셈_테스트() {
