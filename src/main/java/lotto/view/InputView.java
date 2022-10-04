@@ -12,13 +12,10 @@ import lotto.domain.Money;
 import lotto.domain.User;
 
 public class InputView {
-    private static final String MONEY_INPUT_MESSAGE = "구입 금액을 입력해 주세요.";
-    private static final String LAST_WEEK_LOTTO_RESULT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-
     private final Scanner scanner = new Scanner(System.in);
 
     public User getUserInput() {
-        System.out.println(MONEY_INPUT_MESSAGE);
+        System.out.println("구입 금액을 입력해 주세요.");
         User user = new User(new Money(scanner.nextInt()));
         clearBuffer();
 
@@ -26,7 +23,7 @@ public class InputView {
     }
 
     public LottoResult getLastWeekLottoResult() {
-        System.out.println(LAST_WEEK_LOTTO_RESULT_MESSAGE);
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         List<LottoNumber> lottoNumbers = Arrays.stream(scanner.nextLine().split(","))
             .map(String::trim)
             .map(Integer::parseInt)

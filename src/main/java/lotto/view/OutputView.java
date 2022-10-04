@@ -10,10 +10,8 @@ import lotto.domain.User;
 import lotto.domain.UserLottoResult;
 
 public class OutputView {
-    private static final String NUMBER_OF_TICKETS_FORMAT_STRING = "%d개를 구매했습니다.\r\n";
-
     public void printTickets(User user) {
-        System.out.printf(NUMBER_OF_TICKETS_FORMAT_STRING, user.getLottoTickets().size());
+        System.out.printf("%d개를 구매했습니다.\r\n", user.getLottoTickets().size());
         user.getLottoTickets().forEach(this::printLottoTicket);
         System.out.println();
     }
@@ -23,6 +21,7 @@ public class OutputView {
         System.out.println("---------");
         Stream.of(LottoGameRank.FIFTH, LottoGameRank.FOURTH, LottoGameRank.THIRD, LottoGameRank.FIRST)
             .forEach((rank) -> {
+
                 System.out.printf("%d개 일치 (%d)원- %d개\r\n", rank.getMinimumMatchNumberCount(), rank.getReward().getValue(), result.countRank(rank));
             });
 
