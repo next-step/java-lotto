@@ -15,9 +15,9 @@ public class LottoResult {
         return lottoGradeResultMap;
     }
 
-    public int getTotalAmount() {
+    public long getTotalAmount() {
         return lottoGradeResultMap.keySet().stream()
-            .mapToInt(lottoGrade -> lottoGrade.getWinnings() * lottoGradeResultMap.get(lottoGrade))
+            .mapToLong(lottoGrade -> (long) lottoGrade.getWinnings() * lottoGradeResultMap.get(lottoGrade))
             .sum();
     }
 

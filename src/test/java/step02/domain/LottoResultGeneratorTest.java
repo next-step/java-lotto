@@ -15,15 +15,17 @@ class LottoResultGeneratorTest {
     void generate() {
         // given
         Lotto winners = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winners, new LottoNumber(7));
 
         LottoList lottoList = new LottoList(
             List.of(
                 Lotto.of(List.of(1, 2, 3, 4, 5, 6)), // 1등
-                Lotto.of(List.of(1, 2, 3, 4, 15, 16)), // 3등
-                Lotto.of(List.of(1, 2, 5, 6, 7, 8)), // 3등
-                Lotto.of(List.of(1, 2, 3, 10, 11, 12)), // 4등
-                Lotto.of(List.of(4, 5, 6, 7, 8, 9)), // 4등
-                Lotto.of(List.of(1, 4, 6, 7, 41, 42)), // 4등
+                Lotto.of(List.of(1, 2, 3, 4, 5, 7)), // 2등
+                Lotto.of(List.of(1, 2, 3, 4, 15, 16)), // 4등
+                Lotto.of(List.of(1, 2, 5, 6, 7, 8)), // 4등
+                Lotto.of(List.of(1, 2, 3, 10, 11, 12)), // 5등
+                Lotto.of(List.of(4, 5, 6, 7, 8, 9)), // 5등
+                Lotto.of(List.of(1, 4, 6, 7, 41, 42)), // 5등
                 Lotto.of(List.of(1, 2, 11, 12, 13, 14)),// 순위 외
                 Lotto.of(List.of(1, 6, 41, 42, 43, 44)),// 순위 외
                 Lotto.of(List.of(31, 32, 33, 34, 35, 36)),// 순위 외
@@ -33,8 +35,9 @@ class LottoResultGeneratorTest {
 
         Map<LottoGrade, Integer> lottoGradeResultMap = Map.of(
             LottoGrade.FIRST, 1,
-            LottoGrade.THIRD, 2,
-            LottoGrade.FOURTH, 3,
+            LottoGrade.SECOND, 1,
+            LottoGrade.FOURTH, 2,
+            LottoGrade.FIFTH, 3,
             LottoGrade.OTHER_GRADE, 4
         );
 
@@ -42,6 +45,6 @@ class LottoResultGeneratorTest {
         LottoResult lottoResult = new LottoResult(lottoGradeResultMap);
 
         // then
-        then(LottoResultGenerator.generate(lottoList, winners)).isEqualTo(lottoResult);
+        then(LottoResultGenerator.generate(lottoList, winningLottoNumbers)).isEqualTo(lottoResult);
     }
 }

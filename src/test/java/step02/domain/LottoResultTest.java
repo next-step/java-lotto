@@ -20,6 +20,6 @@ class LottoResultTest {
             )
         );
 
-        then(lottoResult.getTotalAmount()).isEqualTo(2_007_615_000);
+        then(lottoResult.getTotalAmount()).isEqualTo(2_153_150_000L);
     }
 }

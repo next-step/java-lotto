@@ -48,20 +48,20 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("NumbersByLottoGrade")
     @DisplayName("각 일치하는 개수별로 해당하는 로또 등급이 나오는지 검증")
-    void getLottoGrade(LottoGrade lottoGrade, List<Integer> numbers) {
+    void getLottoGrade(LottoGrade lottoGrade, WinningLottoNumbers winningLottoNumbers) {
         Lotto lotto = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
-        then(lotto.getGradeByComparison(Lotto.of(numbers))).isEqualTo(lottoGrade);
+        then(lotto.getGradeByComparison(winningLottoNumbers)).isEqualTo(lottoGrade);
     }
 
     static Stream<Arguments> NumbersByLottoGrade() {
         return Stream.of(
-            Arguments.of(LottoGrade.FIRST, List.of(1, 2, 3, 4, 5, 6)),
-            Arguments.of(LottoGrade.SECOND, List.of(1, 2, 3, 4, 5, 16)),
-            Arguments.of(LottoGrade.THIRD, List.of(1, 2, 3, 4, 15, 16)),
-            Arguments.of(LottoGrade.FOURTH, List.of(1, 2, 3, 14, 15, 16)),
-            Arguments.of(LottoGrade.OTHER_GRADE, List.of(1, 2, 13, 14, 15, 16)),
-            Arguments.of(LottoGrade.OTHER_GRADE, List.of(1, 12, 13, 14, 15, 16)),
-            Arguments.of(LottoGrade.OTHER_GRADE, List.of(11, 12, 13, 14, 15, 16))
+            Arguments.of(LottoGrade.FIRST, new WinningLottoNumbers(Lotto.of(List.of(1,2,3,4,5,6)), new LottoNumber(7))),
+            Arguments.of(LottoGrade.SECOND, new WinningLottoNumbers(Lotto.of(List.of(1,2,3,4,5,7)), new LottoNumber(6))),
+            Arguments.of(LottoGrade.THIRD, new WinningLottoNumbers(Lotto.of(List.of(1,2,3,4,5,7)), new LottoNumber(8))),
+            Arguments.of(LottoGrade.FOURTH, new WinningLottoNumbers(Lotto.of(List.of(1,2,3,4,7,8)), new LottoNumber(6))),
+            Arguments.of(LottoGrade.FIFTH, new WinningLottoNumbers(Lotto.of(List.of(1,2,3,10,11,12)), new LottoNumber(6))),
+            Arguments.of(LottoGrade.OTHER_GRADE, new WinningLottoNumbers(Lotto.of(List.of(3,10,11,12,13,14)), new LottoNumber(7))),
+            Arguments.of(LottoGrade.OTHER_GRADE, new WinningLottoNumbers(Lotto.of(List.of(2,3,7,8,9,10)), new LottoNumber(6)))
         );
     }
 }
