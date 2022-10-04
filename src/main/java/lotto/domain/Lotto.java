@@ -52,10 +52,4 @@ public class Lotto {
     public List<LottoNumber> lottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
-
-    public List<String> lottoStringNumbers() {
-        return lottoNumbers.stream()
-                .map(lottoNumber -> String.valueOf(lottoNumber.number()))
-                .collect(Collectors.toUnmodifiableList());
-    }
 }
