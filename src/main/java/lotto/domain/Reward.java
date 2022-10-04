@@ -11,7 +11,7 @@ public class Reward {
     }
 
     public static int getReward(int matchingCount) {
-        return rewardMap.get(matchingCount) != null ? rewardMap.get(matchingCount) : 0;
+        return rewardMap.getOrDefault(matchingCount, 0);
     }
 
     // 3개 당첨 : 5000원
