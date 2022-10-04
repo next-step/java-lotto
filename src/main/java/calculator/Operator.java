@@ -1,6 +1,7 @@
 package calculator;
 
 import calculator.exception.InvalidOperatorException;
+import java.util.Arrays;
 
 public enum Operator {
 
@@ -40,12 +41,10 @@ public enum Operator {
 
     public abstract int apply(int leftOperand, int rightOperand);
 
-    public static Operator getOperator(String operatorStr) {
-        for (Operator op : Operator.values()) {
-            if (op.operatorStr.equals(operatorStr)) {
-                return op;
-            }
-        }
-        throw new InvalidOperatorException();
+    public static Operator getOperator(String symbol) {
+        return Arrays.stream(Operator.values())
+                .filter(op -> op.symbol.equals(symbol))
+                .findFirst()
+                .orElseThrow(InvalidOperatorException::new);
     }
 }
