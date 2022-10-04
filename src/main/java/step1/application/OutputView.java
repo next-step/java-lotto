@@ -11,7 +11,7 @@ public class OutputView {
     }
 
     public void result() {
-        System.out.println("결과: " + number.value());
+        System.out.println("결과: " + number.getNumber());
     }
 
 }
