@@ -80,7 +80,30 @@ class LottoTest {
                 new LottoNumber(5),
                 new LottoNumber(6)));
 
-        Rank type = lottoA.rank(winLotto);
-        assertThat(type.count()).isEqualTo(Rank.THIRD.count());
+        LottoNumber bonusNumber = LottoNumber.of(45);
+        Rank type = lottoA.rank(winLotto, bonusNumber);
+        assertThat(type).isEqualTo(Rank.FOURTH);
+    }
+
+    @DisplayName("보너스 번호인지 확인이 가능하다.")
+    @Test
+    void checkBonus() {
+        Lotto lottoA = new Lotto(List.of(new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)));
+
+        Lotto winLotto = new Lotto(List.of(new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(45)));
+
+        LottoNumber bonusNumber = LottoNumber.of(6);
+        Rank type = lottoA.rank(winLotto, bonusNumber);
+        assertThat(type).isEqualTo(Rank.BONUS);
     }
 }
