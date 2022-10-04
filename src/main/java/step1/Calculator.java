@@ -1,13 +1,9 @@
 package step1;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 public class Calculator {
 
     public static final String NULL_EXCEPTION = "입력값은 null이거나 공백일 수 없습니다.";
     public static final String NUMBER_EXCEPTION = "잘못된 숫자입니다.";
-    public static final String OPEATOR_EXCEPTION = "잘못된 사칙연산 기호 입니다.";
     public static final String SPLIT_TEXT = " ";
 
     public static int calculator(String input) {
@@ -16,16 +12,20 @@ public class Calculator {
         int result = 0;
 
         for (int i = 1; i < splitInput.length - 1; i += 2) {
-            int firstNum = result;
-            if (i == 1) {
-                firstNum = checkInt(splitInput[i - 1]);
-            }
+            int firstNum = getFirstNum(splitInput, result, i);
             int secondNum = checkInt(splitInput[i + 1]);
-            String operator = checkOperation(splitInput[i]);
-            result = caculateResult(firstNum, secondNum, operator);
+            result = caculateInput(firstNum, secondNum, splitInput[i]);
         }
 
         return result;
+    }
+
+    private static int getFirstNum(String[] splitInput, int result, int i) {
+        int firstNum = result;
+        if (i == 1) {
+            firstNum = checkInt(splitInput[i - 1]);
+        }
+        return firstNum;
     }
 
     private static String validate(String input) {
@@ -35,22 +35,8 @@ public class Calculator {
         return input;
     }
 
-    private static int caculateResult(int firstNum, int secondNum, String operator) {
-        int result = 0;
-        if (operator.equals(OperatorType.PLUS.getValue())) {
-            result = Operator.plus(firstNum, secondNum);
-        }
-        if (operator.equals(OperatorType.MINUS.getValue())) {
-            result = Operator.minus(firstNum, secondNum);
-        }
-        if (operator.equals(OperatorType.TIMES.getValue())) {
-            result = Operator.times(firstNum, secondNum);
-        }
-        if (operator.equals(OperatorType.DIVISION.getValue())) {
-            result = Operator.division(firstNum, secondNum);
-        }
-
-        return result;
+    private static int caculateInput(int firstNum, int secondNum, String operator) {
+        return OperatorType.getType(operator).exe(firstNum,secondNum);
     }
 
     private static int checkInt(String input){
@@ -63,10 +49,4 @@ public class Calculator {
         return result;
     }
 
-    private static String checkOperation(String input) {
-        if (!Arrays.stream(OperatorType.values()).map(it->it.getValue()).collect(Collectors.toList()).contains(input)) {
-            throw new IllegalArgumentException(OPEATOR_EXCEPTION);
-        }
-        return input;
-    }
 }
