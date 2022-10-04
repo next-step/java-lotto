@@ -1,4 +1,4 @@
-package lotto.step2.domain.dto;
+package lotto.step2.dto;
 
 import lotto.step2.domain.PaymentPriceTest;
 import org.junit.jupiter.api.DisplayName;

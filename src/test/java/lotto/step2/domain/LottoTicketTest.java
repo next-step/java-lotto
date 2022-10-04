@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoTicketTest {
+public class LottoTicketTest {
     public static final LottoTicket LOTTO_TICKET = new LottoTicket(Arrays.asList(LottoNumberTest.ONE, LottoNumberTest.TWO, LottoNumberTest.THREE, LottoNumberTest.FOUR, LottoNumberTest.FIVE, LottoNumberTest.SIX));
     
     @Test

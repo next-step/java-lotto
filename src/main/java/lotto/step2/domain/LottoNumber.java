@@ -1,5 +1,7 @@
 package lotto.step2.domain;
 
+import lotto.step2.dto.LottoNumberDTO;
+
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -15,6 +17,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
         
         this.lottoNumber = lottoNumber;
+    }
+    
+    public LottoNumberDTO lottoNumberInformation() {
+        return new LottoNumberDTO(lottoNumber);
     }
     
     @Override
@@ -33,10 +39,5 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
-    }
-    
-    @Override
-    public String toString() {
-        return String.valueOf(lottoNumber);
     }
 }

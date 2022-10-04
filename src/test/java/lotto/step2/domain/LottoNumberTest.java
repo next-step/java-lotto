@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoNumberTest {
+public class LottoNumberTest {
     public static final LottoNumber ONE = new LottoNumber(1);
     public static final LottoNumber TWO = new LottoNumber(2);
     public static final LottoNumber THREE = new LottoNumber(3);
