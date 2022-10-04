@@ -8,7 +8,7 @@ public class InputView {
 
     private InputView() {}
 
-    public static String input() {
+    public static String expression() {
 
         System.out.println("계산할 식을 입력해주세요.");
         return SCANNER.nextLine();

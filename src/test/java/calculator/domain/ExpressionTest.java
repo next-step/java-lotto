@@ -1,22 +1,29 @@
 package calculator.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ExpressionTest {
 
-    @DisplayName("완전한 계산식이 아닌 경우 익셉션 처리한다.")
+    @DisplayName("입력 연산식이 빈 값 또는 null 값인 경우 익셉션 처리한다.")
     @ParameterizedTest
-    @ValueSource(strings = {"3 * 2 2", "3 * 2 *"})
-    void error_not_complete_expression(final String input) {
+    @NullAndEmptySource
+    void error_null_empty(final String input) {
 
-        final StringInput stringInput = new StringInput(input);
-
-        assertThatThrownBy(() -> new Expressions(stringInput.split()))
+        assertThatThrownBy(() -> new Expression(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("계산기를 잘못 입력하였습니다.");
+                .hasMessage("입력 값이 null 또는 빈 공백 입니다.");
+    }
+
+    @DisplayName("문자열로 입력받은 계산식을 리스트 형식으로 변환한다.")
+    @Test
+    void input_string() {
+
+        assertThat(new Expression("3 * 2").split()).contains("3", "*", "2");
     }
 }
