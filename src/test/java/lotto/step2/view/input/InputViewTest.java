@@ -150,4 +150,12 @@ public class InputViewTest {
         assertThatIllegalArgumentException().isThrownBy(() -> InputView.winningBonusLottoNumberInput(input))
                 .withMessage(EXCEPTION_MESSAGE);
     }
+    
+    @DisplayName("보너스 당첨 번호 - 1 ~ 45 범위 초과")
+    @ParameterizedTest(name = "{displayName} : {0}")
+    @ValueSource(strings = {"0", "46"})
+    void winning_lotto_bonus_numbers_input_range_exceed_exception(String input) {
+        assertThatIllegalArgumentException().isThrownBy(() -> InputView.winningBonusLottoNumberInput(input))
+                .withMessage(EXCEPTION_MESSAGE);
+    }
 }
