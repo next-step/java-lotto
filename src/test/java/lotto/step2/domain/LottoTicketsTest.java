@@ -20,7 +20,7 @@ public class LottoTicketsTest {
     @Test
     @DisplayName("일치 번호 개수 리스트 반환")
     void numberOfMatches() {
-        List<LottoNumber> winningLottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(45));
+        List<LottoNumber> winningLottoNumbers = Arrays.asList(LottoNumberTest.ONE, LottoNumberTest.TWO, LottoNumberTest.THREE, LottoNumberTest.FOUR, LottoNumberTest.FIVE, LottoNumberTest.THIRTY);
         List<LottoRank> lottoRanks = LOTTO_TICKETS.parseLottoRanks(new WinningLottoNumbers(winningLottoNumbers, LottoNumberTest.SIX));
         assertThat(lottoRanks).isEqualTo(Arrays.asList(LottoRank.SECOND, LottoRank.SECOND));
     }

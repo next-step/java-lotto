@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoTicketDTOTest {
+public class LottoTicketDTOTest {
     public static final LottoTicketDTO LOTTO_TICKET_DTO = new LottoTicketDTO(LottoTicketTest.LOTTO_TICKET.lottoTicketInformation().getLottoTicket());
     
     @Test

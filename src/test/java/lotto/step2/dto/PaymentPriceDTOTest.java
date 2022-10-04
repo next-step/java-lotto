@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class PaymentPriceDTOTest {
+public class PaymentPriceDTOTest {
     public static final PaymentPriceDTO PAYMENT_PRICE_DTO = new PaymentPriceDTO(PaymentPriceTest.PAYMENT_PRICE);
     
     @Test
