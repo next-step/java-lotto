@@ -15,7 +15,7 @@ public class LottoResult {
         this.lottoNumbers = new LottoNumbers(lottoNumbers);
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers.getValue();
+    public LottoNumbers getLottoNumbers() {
+        return lottoNumbers;
     }
 }

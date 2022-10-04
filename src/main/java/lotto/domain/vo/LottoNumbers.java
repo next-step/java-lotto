@@ -20,6 +20,12 @@ public class LottoNumbers {
             .collect(Collectors.toList());
     }
 
+    public int countSameNumbers(LottoNumbers other) {
+        return (int) other.lottoNumbers.stream()
+            .filter(this.lottoNumbers::contains)
+            .count();
+    }
+
     private void validate(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != VALID_LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(ILLEGAL_NUMBERS_SIZE_EXCEPTION_MESSAGE);
