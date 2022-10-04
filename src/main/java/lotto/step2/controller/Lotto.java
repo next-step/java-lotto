@@ -22,7 +22,7 @@ public class Lotto {
     }
     
     private LottoTickets issueAutoLottoTickets(PaymentPrice paymentPrice) {
-        return LottoTicketsFactory.from(new AutoLottoIssueStrategy(paymentPrice));
+        return LottoTicketsFactory.from(new AutoLottoIssueStrategy(), paymentPrice);
     }
     
     private void print(PaymentPrice paymentPrice, LottoTickets lottoTickets) {

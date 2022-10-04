@@ -15,18 +15,12 @@ public class AutoLottoIssueStrategy implements LottoIssueStrategy {
     private static final int NUMBER_OF_DRAWS = 6;
     private static final int ZERO = 0;
     
-    private final PaymentPrice paymentPrice;
-    
-    public AutoLottoIssueStrategy(PaymentPrice paymentPrice) {
-        this.paymentPrice = paymentPrice;
-    }
-    
     @Override
-    public LottoTickets issueLottoTickets() {
-        return new LottoTickets(issueLottoTicket());
+    public LottoTickets issueLottoTickets(PaymentPrice paymentPrice) {
+        return new LottoTickets(issueLottoTicket(paymentPrice));
     }
     
-    private List<LottoTicket> issueLottoTicket() {
+    private List<LottoTicket> issueLottoTicket(PaymentPrice paymentPrice) {
         return IntStream.range(ZERO, paymentPrice.numberOfTickets())
                 .mapToObj(ticketCount -> new LottoTicket(issueLotto(shuffleLottoNumbers())))
                 .collect(Collectors.toList());
