@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.NoSuchElementException;
+
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -28,5 +30,12 @@ public class LottoNumberTest {
     @Test
     void equals() {
         assertThat(new LottoNumber(1)).isEqualTo(new LottoNumber(1));
+    }
+
+    @DisplayName("캐시 데이터에서 값을 찾지 못하는 경우 예외 발생")
+    @ParameterizedTest
+    @ValueSource(ints = {0, 46})
+    void findException(int input) {
+        assertThatThrownBy(() -> LottoNumber.of(input)).isInstanceOf(NoSuchElementException.class);
     }
 }
