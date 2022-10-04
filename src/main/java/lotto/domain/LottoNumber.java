@@ -19,7 +19,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
                 .forEach(i -> LOTTO_NUMBERS.add(new LottoNumber(i)));
     }
 
-
     public static LottoNumber of(String number) {
         try {
             return new LottoNumber(Integer.parseInt(number.strip()));
