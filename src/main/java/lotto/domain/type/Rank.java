@@ -8,18 +8,19 @@ import java.util.stream.Stream;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
-    FIFTH(5, 1_500_000),
-    FOURTH(4, 50_000),
-    SECOND(3, 5_000),
+    BONUS(5, 30_000_000),
+    SECOND(5, 1_500_000),
+    THIRD(4, 50_000),
+    FOURTH(3, 5_000),
     MISS(0, 0);
 
     private static final Map<Integer, Rank> STORE = new HashMap<>();
 
     static {
         STORE.put(MISS.count(), MISS);
-        STORE.put(SECOND.count(), SECOND);
         STORE.put(FOURTH.count(), FOURTH);
-        STORE.put(FIFTH.count(), FIFTH);
+        STORE.put(THIRD.count(), THIRD);
+        STORE.put(BONUS.count(), BONUS);
         STORE.put(FIRST.count(), FIRST);
     }
 
