@@ -29,4 +29,32 @@ public class CalculatorTest {
         assertThatThrownBy(() -> new Calculator("2 % 3"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 덧셈을_할_수_있다() {
+        Calculator calculator = new Calculator("2 + 3");
+        calculator.split();
+        assertThat(calculator.calculate()).isEqualTo(5);
+    }
+
+    @Test
+    void 뺄셈을_할_수_있다() {
+        Calculator calculator = new Calculator("4 - 2");
+        calculator.split();
+        assertThat(calculator.calculate()).isEqualTo(2);
+    }
+
+    @Test
+    void 곱셈을_할_수_있다() {
+        Calculator calculator = new Calculator("4 * 2");
+        calculator.split();
+        assertThat(calculator.calculate()).isEqualTo(8);
+    }
+
+    @Test
+    void 나눗셈을_할_수_있다() {
+        Calculator calculator = new Calculator("4 / 2");
+        calculator.split();
+        assertThat(calculator.calculate()).isEqualTo(2);
+    }
 }

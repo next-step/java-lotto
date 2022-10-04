@@ -11,6 +11,8 @@ public class Calculator {
     private List<String> operator = new ArrayList<>();
     private List<Integer> operand = new ArrayList<>();
 
+    private int result = 0;
+
     public Calculator(String expression) {
         if (isNullOfEmpty(expression)) {
             this.input = expression;
@@ -36,6 +38,22 @@ public class Calculator {
                 operand.add(Integer.valueOf(string));
             }
         }
+    }
+
+    public int calculate() {
+        result = operand.get(0);
+        for (int i = 0; i < operator.size(); i++) {
+            if (operator.get(i).equals("+")) {
+                result += operand.get(i + 1);
+            } else if (operator.get(i).equals("-")) {
+                result -= operand.get(i + 1);
+            } else if (operator.get(i).equals("*")) {
+                result *= operand.get(i + 1);
+            } else if (operator.get(i).equals("/")) {
+                result /= operand.get(i + 1);
+            }
+        }
+        return result;
     }
 
     public List<String> getOperator() {
