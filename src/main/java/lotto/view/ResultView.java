@@ -15,7 +15,7 @@ public class ResultView {
         System.out.println("---------");
 
         for (Rank rank : Rank.winningMoneyValues()) {
-            System.out.printf("%d개 일치 (%d)- %d개%n", rank.count(), rank.winningMoney(), result.getMatchCount(rank));
+            System.out.println(result.rank(rank));
         }
 
         System.out.printf("총 수익률은 %s 입니다.%n", result.profit());
