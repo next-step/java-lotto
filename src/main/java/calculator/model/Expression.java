@@ -8,8 +8,8 @@ public class Expression {
 
     private static final String DELIMITER = " ";
     private static final String NUMBER_PATTERN = "\\d+";
-    private List<Integer> numbers = new ArrayList<>();
-    private List<Operator> operator = new ArrayList<>();
+    private final List<Integer> numbers = new ArrayList<>();
+    private final List<Operator> operators = new ArrayList<>();
 
     public Expression(String expression) {
         if (expression == null || expression.isBlank()) {
@@ -30,7 +30,7 @@ public class Expression {
             numbers.add(Integer.parseInt(value[index]));
             return;
         }
-        operator.add(Operator.of(value[index]));
+        operators.add(Operator.of(value[index]));
     }
 
     private boolean isOdd(int index) {
@@ -48,6 +48,6 @@ public class Expression {
     }
 
     public List<Operator> getOperator() {
-        return operator;
+        return operators;
     }
 }
