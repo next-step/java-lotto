@@ -21,6 +21,10 @@ public class LottoTicket {
         return winningLottoNumbers.countMatchingNumber(lottoTicket);
     }
     
+    public boolean isExistBonusLottoNumber(WinningLottoNumbers winningLottoNumbers) {
+        return winningLottoNumbers.isExistBonusLottoNumber(lottoTicket);
+    }
+    
     public LottoTicketDTO lottoTicketInformation() {
         return new LottoTicketDTO(lottoTicket);
     }
