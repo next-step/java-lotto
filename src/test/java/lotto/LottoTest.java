@@ -17,7 +17,7 @@ public class LottoTest {
     @MethodSource("randomNumberMatchingCase")
     void match_number_find(List<Integer> lottoNum, List<Integer> winningNum, int matchingNum) {
         Lotto lotto = new Lotto(lottoNum);
-        assertThat(lotto.findMatchingNum(winningNum)).isEqualTo(matchingNum);
+        assertThat(lotto.findMatchingCount(winningNum)).isEqualTo(matchingNum);
     }
 
     static Stream<Arguments> randomNumberMatchingCase() {
