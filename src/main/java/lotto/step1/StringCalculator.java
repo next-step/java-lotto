@@ -35,16 +35,16 @@ public class StringCalculator {
         }
     }
     
-    private int rotationCalculate(List<Integer> numbers, List<Operation> operations) {
-        return IntStream.range(0, operations.size())
-                .reduce(numbers.get(0), (calculateResult, index) -> operations.get(index).calculate(calculateResult, numbers.get(index + 1)));
+    private int rotationCalculate(List<Integer> numbers, List<Operator> operators) {
+        return IntStream.range(0, operators.size())
+                .reduce(numbers.get(0), (calculateResult, index) -> operators.get(index).calculate(calculateResult, numbers.get(index + 1)));
     }
     
-    private List<Operation> getOperation(String[] split) {
+    private List<Operator> getOperation(String[] split) {
         return IntStream.range(0, split.length)
                 .filter(this::isOdd)
                 .mapToObj(index -> split[index].charAt(0))
-                .map(Operation::from)
+                .map(Operator::from)
                 .collect(Collectors.toList());
     }
     
