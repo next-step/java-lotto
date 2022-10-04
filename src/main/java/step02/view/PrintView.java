@@ -15,6 +15,8 @@ public class PrintView {
     private static final String LOTTO_WINNING_RESULT_MESSAGE = "%d개 일치 (%d원)- %d개\n";
     private static final String LOTTO_EARNING_RATE_RESULT_MESSAGE = "총 수익률은 %.2f입니다.\n";
 
+    private static final String INIT_BONUS_BALL_NUMBER_PHRASE = "보너스 볼을 입력해 주세요.";
+
     private PrintView() {
     }
 
@@ -36,6 +38,10 @@ public class PrintView {
 
     public static void printLottoNumbers(List<Integer> lottoNumbers) {
         System.out.println(lottoNumbers);
+    }
+
+    public static void printInitBonusBallNumberPhrase() {
+        System.out.println(INIT_BONUS_BALL_NUMBER_PHRASE);
     }
 
     public static void printLottoResult(LottoResult lottoResult, int purchasePrice) {

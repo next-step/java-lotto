@@ -24,6 +24,7 @@ public class LottoMain {
         PrintView.printBlank();
 
         List<Integer> lastWeekWinningNumbers = InputView.initLastWeekWinningNumbers();
+        int bonusBallNumber = InputView.initBonusBallNumber();
         PrintView.printBlank();
         Lotto winners = new Lotto(lastWeekWinningNumbers);
 
