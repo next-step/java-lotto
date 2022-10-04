@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 import calculator.domain.Calculator;
 import org.junit.jupiter.api.Test;
@@ -10,10 +10,10 @@ class CalculatorTest {
     @Test
     void 계산() {
         Calculator calculator = new Calculator();
-        String[] tokens = "1 + 2".split(" ");
+        String[] inputValues = "1 + 2".split(" ");
 
-        for (String token : tokens) {
-            calculator.calculate(token);
+        for (String value : inputValues) {
+            calculator.calculate(new InputValue(value));
         }
 
         assertThat(calculator.getResult()).isEqualTo(3);

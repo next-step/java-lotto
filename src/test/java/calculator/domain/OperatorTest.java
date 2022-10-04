@@ -1,4 +1,4 @@
-package calculator;
+package calculator.domain;
 
 import calculator.domain.Operator;
 import org.junit.jupiter.api.Test;
@@ -13,32 +13,32 @@ class OperatorTest {
 
     @Test
     void 더하기() {
-        assertThat(Operator.PLUS.operate(0, 1)).isEqualTo(1);
+        assertThat(Operator.PLUS.operate(new CalculateResult(0), new InputValue("1"))).isEqualTo(new CalculateResult(1));
     }
 
     @Test
     void 빼기() {
-        assertThat(Operator.MINUS.operate(2, 1)).isEqualTo(1);
+        assertThat(Operator.MINUS.operate(new CalculateResult(2), new InputValue("1"))).isEqualTo(new CalculateResult(1));
     }
 
     @Test
     void 곱하기() {
-        assertThat(Operator.MULTIPLE.operate(2, 2)).isEqualTo(4);
+        assertThat(Operator.MULTIPLE.operate(new CalculateResult(2), new InputValue("2"))).isEqualTo(new CalculateResult(4));
     }
 
     @Test
     void 나누기() {
-        assertThat(Operator.DIVIDE.operate(4, 2)).isEqualTo(2);
+        assertThat(Operator.DIVIDE.operate(new CalculateResult(4), new InputValue("2"))).isEqualTo(new CalculateResult(2));
     }
 
     @Test
     void 나누기_떨어지지않는수() {
-        assertThatIllegalArgumentException().isThrownBy(() -> Operator.DIVIDE.operate(5, 2));
+        assertThatIllegalArgumentException().isThrownBy(() -> Operator.DIVIDE.operate(new CalculateResult(5), new InputValue("2")));
     }
 
     @Test
     void 나누기_0() {
-        assertThatIllegalArgumentException().isThrownBy(() -> Operator.DIVIDE.operate(5, 0));
+        assertThatIllegalArgumentException().isThrownBy(() -> Operator.DIVIDE.operate(new CalculateResult(5), new InputValue("0")));
     }
 
     @Test

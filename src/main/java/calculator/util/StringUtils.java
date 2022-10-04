@@ -8,8 +8,12 @@ public class StringUtils {
     private StringUtils() {
     }
 
-    public static boolean isBlank(String input) {
-        for (char c : input.toCharArray()) {
+    public static boolean isNotBlank(String text) {
+        return !isBlank(text);
+    }
+
+    public static boolean isBlank(String text) {
+        for (char c : text.toCharArray()) {
             if (c != ' ') {
                 return false;
             }

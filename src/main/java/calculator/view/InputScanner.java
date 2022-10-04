@@ -1,4 +1,4 @@
-package calculator;
+package calculator.view;
 
 import java.util.Scanner;
 
@@ -14,6 +14,7 @@ public class InputScanner {
     }
 
     public String scan() {
+        System.out.println("계산할 값을 입력해 주세요");
         return scanner.nextLine();
     }
 }

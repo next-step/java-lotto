@@ -8,24 +8,32 @@ import java.util.Deque;
  */
 public class Calculator {
 
-    private Deque<Operator> operator = new ArrayDeque<>();
-    private int result;
+    private final OperatorBox operatorBox;
+    private CalculateResult result;
 
-    public void calculate(String value) {
-        if (Operator.isOperator(value)) {
-            operator.push(Operator.from(value));
+    public Calculator() {
+        this(new OperatorBox());
+    }
+
+    public Calculator(OperatorBox operatorBox) {
+        this.operatorBox = operatorBox;
+    }
+
+    public void calculate(InputValue inputValue) {
+        if (inputValue.isOperator()) {
+            operatorBox.add(inputValue);
             return;
         }
 
-        if (operator.isEmpty()) {
-            result = Integer.parseInt(value);
+        if (operatorBox.isEmpty()) {
+            result = new CalculateResult(inputValue.toNumber());
             return;
         }
 
-        result = operator.pop().operate(result, Integer.parseInt(value));
+        result = operatorBox.operate(result, inputValue);
     }
 
     public int getResult() {
-        return result;
+        return result.getResult();
     }
 }
