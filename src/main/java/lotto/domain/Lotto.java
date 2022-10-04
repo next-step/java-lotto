@@ -1,19 +1,21 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
     private final static List<Integer> lottoNumberPool = initLottoNumberPool();
-    private final int[] numbers;
+    private final List<Integer> numbers;
 
     Lotto() {
         this.numbers = pickLottoNumber();
     }
 
-    public int[] getNumbers() {
+    public List<Integer> getNumbers() {
         return numbers;
     }
 
@@ -40,13 +42,16 @@ public class Lotto {
         return lottoNumberList;
     }
 
-    private int[] pickLottoNumber() {
+    private List<Integer> pickLottoNumber() {
         int[] numbers = new int[Config.LOTTE_NUMBER_COUNT];
         Collections.shuffle(lottoNumberPool);
         for (int index = 0; index < Config.LOTTE_NUMBER_COUNT; index++) {
             numbers[index] = lottoNumberPool.get(index);
         }
-        return numbers;
+        return Arrays
+                .stream(numbers)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
 }

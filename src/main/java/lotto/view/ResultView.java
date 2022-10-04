@@ -4,8 +4,8 @@ import lotto.domain.Lotto;
 import lotto.domain.Result;
 import lotto.domain.Reward;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -18,8 +18,12 @@ public class ResultView {
 
     public void printLottoNumber(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            System.out.println(Arrays.toString(lotto.getNumbers()));
+            printLottoNumber(lotto);
         }
+    }
+
+    private void printLottoNumber(Lotto lotto) {
+        System.out.println("[" + lotto.getNumbers().stream().map(Object::toString).collect(Collectors.joining(", ")) + "]");
     }
 
 }

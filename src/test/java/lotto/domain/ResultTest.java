@@ -15,7 +15,7 @@ class ResultTest {
     void saveResultTest2() {
         Lotto lotto = new Lotto();
         List<Lotto> lottos = Arrays.asList(lotto);
-        List<Integer> collectNumberList = Arrays.stream(lotto.getNumbers()).boxed().collect(Collectors.toList());
+        List<Integer> collectNumberList = lotto.getNumbers();
         Result result = new Result(lottos, collectNumberList);
 
         assertThat(result.getWinCount(Config.LOTTE_NUMBER_COUNT)).isEqualTo(1);
