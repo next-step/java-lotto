@@ -11,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -27,7 +28,7 @@ class FormulaCalculatorTest {
 
     @ParameterizedTest
     @NullSource
-    @ValueSource(strings = {"", "  "})
+    @EmptySource
     @DisplayName("빈 문자열로 연산 시도 시 예외 발생")
     void fail_to_calculate_by_empty_formula(String formula) {
         assertThatExceptionOfType(EmptyFormulaException.class)
@@ -59,7 +60,7 @@ class FormulaCalculatorTest {
     }
 
     @Test
-    @DisplayName("0으로 나누려고 하면 예외 발생.")
+    @DisplayName("수식에 0으로 나누는 연산이 존재하면 하면 예외 발생.")
     void fail_to_divide_by_zero() {
         assertThatExceptionOfType(DivideByZeroException.class)
                 .isThrownBy(() -> FormulaCalculator.calculate("5 / 0"));
