@@ -3,6 +3,7 @@ package lotto.step2.controller;
 import lotto.step2.domain.*;
 import lotto.step2.domain.factory.LottoTicketsFactory;
 import lotto.step2.domain.issuelottostrategy.AutoLottoIssueStrategy;
+import lotto.step2.dto.PaymentPriceDTO;
 import lotto.step2.view.input.InputView;
 import lotto.step2.view.output.ResultView;
 
@@ -35,9 +36,22 @@ public class Lotto {
     
     private void resultPrint(LottoTickets lottoTickets, PaymentPrice paymentPrice) {
         List<LottoRank> lottoRanks = lottoTickets.parseLottoRanks(inputWinningLottoNumbers());
+        PaymentPriceDTO paymentPriceDTO = paymentPrice.paymentPriceInformation();
         
         ResultView.winsNumbersPrint(lottoRanks);
-        ResultView.yieldPrint(LottoRank.getYield(lottoRanks, paymentPrice.paymentPriceInformation()));
+        int totalReward = getTotalReward(lottoRanks);
+        int dtoPaymentPrice = paymentPriceDTO.getPaymentPrice();
+        ResultView.yieldPrint(parseYield(totalReward, dtoPaymentPrice));
+    }
+    
+    private double parseYield(int totalReward, int paymentPrice) {
+        return (int) (((double) totalReward / paymentPrice) * 100) / 100.0;
+    }
+    
+    private int getTotalReward(List<LottoRank> lottoRanks) {
+        return lottoRanks.stream()
+                .mapToInt(LottoRank::getReward)
+                .sum();
     }
     
     private List<LottoNumber> inputWinningLottoNumbers() {
