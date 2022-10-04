@@ -9,19 +9,20 @@ import java.util.stream.Stream;
 public enum Rank {
     FIRST(6, 2_000_000_000),
     BONUS(5, 30_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOURTH(3, 5_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     MISS(0, 0);
 
     private static final Map<Integer, Rank> STORE = new HashMap<>();
 
     static {
-        STORE.put(MISS.count(), MISS);
-        STORE.put(FOURTH.count(), FOURTH);
-        STORE.put(THIRD.count(), THIRD);
-        STORE.put(BONUS.count(), BONUS);
         STORE.put(FIRST.count(), FIRST);
+        STORE.put(BONUS.count(), BONUS);
+        STORE.put(THIRD.count(), THIRD);
+        STORE.put(FOURTH.count(), FOURTH);
+        STORE.put(FIFTH.count(), FIFTH);
+        STORE.put(MISS.count(), MISS);
     }
 
     private final int matchCount;
@@ -32,8 +33,16 @@ public enum Rank {
         this.reward = reward;
     }
 
-    public static Rank findRank(int matchCount) {
+    public static Rank findRank(int matchCount, boolean matchBonus) {
+        if (isBonus(matchCount, matchBonus)) {
+            return BONUS;
+        }
+
         return STORE.getOrDefault(matchCount, MISS);
+    }
+
+    private static boolean isBonus(int matchCount, boolean matchBonus) {
+        return matchBonus && matchCount == BONUS.count();
     }
 
     public static List<Rank> winningMoneyValues() {

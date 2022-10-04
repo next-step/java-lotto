@@ -10,8 +10,8 @@ public class LottoStatistics {
     private final int quantity;
     private final List<Rank> result;
 
-    public LottoStatistics(Lottos lottos, Lotto winLotto) {
-        this(lottos.match(winLotto));
+    public LottoStatistics(Lottos lottos, Lotto winLotto, LottoNumber bonusNumber) {
+        this(lottos.match(winLotto, bonusNumber));
     }
 
     public LottoStatistics(List<Rank> types) {

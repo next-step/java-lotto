@@ -37,8 +37,10 @@ public class Lotto {
         }
     }
 
-    public Rank rank(Lotto other) {
-        return Rank.findRank(matchCount(other));
+    public Rank rank(Lotto other, LottoNumber bonusNumber) {
+        boolean matchBonus = lottoNumbers.contains(bonusNumber);
+
+        return Rank.findRank(matchCount(other), matchBonus);
     }
 
     private int matchCount(Lotto other) {

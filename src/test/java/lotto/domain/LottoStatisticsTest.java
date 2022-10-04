@@ -16,7 +16,8 @@ class LottoStatisticsTest {
         Lottos lottos = getLottosFixture();
         Lotto winLotto = lottos.values().get(0);
 
-        LottoStatistics lottoStatistics = new LottoStatistics(lottos, winLotto);
+        LottoNumber bonusNumber = LottoNumber.of(45);
+        LottoStatistics lottoStatistics = new LottoStatistics(lottos, winLotto, bonusNumber);
 
         assertThat(lottoStatistics.profit()).isGreaterThanOrEqualTo(1.0);
     }
@@ -33,7 +34,8 @@ class LottoStatisticsTest {
                 new LottoNumber(11));
         Lotto winLotto = new Lotto(lottoNumbersB);
 
-        LottoStatistics lottoStatistics = new LottoStatistics(lottos, winLotto);
+        LottoNumber bonusNumber = LottoNumber.of(45);
+        LottoStatistics lottoStatistics = new LottoStatistics(lottos, winLotto, bonusNumber);
 
         assertThat(lottoStatistics.profit()).isLessThan(1.0);
     }
@@ -51,7 +53,8 @@ class LottoStatisticsTest {
         Lotto winLotto = new Lotto(lottoNumbers);
         Lottos lottos = getLottosFixture();
 
-        LottoStatistics lottoStatistics = new LottoStatistics(lottos, winLotto);
+        LottoNumber bonusNumber = LottoNumber.of(45);
+        LottoStatistics lottoStatistics = new LottoStatistics(lottos, winLotto, bonusNumber);
 
         assertThat(lottoStatistics.getMatchCount(Rank.FIRST)).isEqualTo(1);
     }

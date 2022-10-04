@@ -34,9 +34,11 @@ public class Lottos {
         return quantity == 0;
     }
 
-    public List<Rank> match(Lotto lotto) {
+    public List<Rank> match(Lotto winLotto, LottoNumber bonusNumber) {
+
+
         return values.stream()
-                .map(l -> l.rank(lotto))
+                .map(l -> l.rank(winLotto, bonusNumber))
                 .collect(Collectors.toUnmodifiableList());
     }
 
