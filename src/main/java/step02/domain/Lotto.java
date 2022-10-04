@@ -3,6 +3,7 @@ package step02.domain;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static java.util.stream.IntStream.rangeClosed;
@@ -38,7 +39,7 @@ public class Lotto {
     }
 
     public LottoGrade getGradeByComparison(Lotto winningNumbers) {
-        HashSet<Integer> winningNumbersSet = new HashSet<>(winningNumbers.value);
+        Set<Integer> winningNumbersSet = new HashSet<>(winningNumbers.value);
         int count = (int) value.stream().filter(winningNumbersSet::contains).count();
         return LottoGrade.from(count);
     }
