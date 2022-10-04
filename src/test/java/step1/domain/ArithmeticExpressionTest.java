@@ -67,7 +67,7 @@ public class ArithmeticExpressionTest {
     @DisplayName("숫자만 가져온다.")
     void get_only_number_test() {
         //given
-        ArithmeticExpression arithmeticExpression = new ArithmeticExpression("1 + 5   +   4   - 3");
+        ArithmeticExpression arithmeticExpression = new ArithmeticExpression("1 + 5   +   4   - 35");
 
         //when
         Numbers numbers = arithmeticExpression.numbers();
@@ -77,7 +77,7 @@ public class ArithmeticExpressionTest {
             new Number(1),
             new Number(5),
             new Number(4),
-            new Number(3)
+            new Number(35)
         );
 
         assertThat(numbers).usingRecursiveComparison().isEqualTo(new Numbers(numberList));

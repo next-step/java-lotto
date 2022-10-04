@@ -7,8 +7,11 @@ import java.util.stream.Collectors;
 
 public class ArithmeticExpression {
 
-    private static final Pattern VALIDATE = Pattern.compile("^\\s*(:?(?!.+/ ?0.*)\\d+ *?[+\\-*/] *?)+\\d+\\s*$");
+    private static final Pattern EXPRESSION_VALIDATE = Pattern.compile(
+        "^\\s*(:?(?!.+/ ?0.*)\\d+ *?[+\\-*/] *?)+\\d+\\s*$");
     private static final Pattern DIVIDE_ZERO = Pattern.compile("/ +0+");
+    private static final String CUT_NUMBERS = "(?<number>[0-9])\\s*([+\\-*/])";
+    private static final String CUT_OPERATOR = "(\\d)(?<operator>[+\\-*/])";
 
     private final String input;
 
@@ -25,15 +28,16 @@ public class ArithmeticExpression {
         if (DIVIDE_ZERO.matcher(input).find()) {
             throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
         }
-        if (!VALIDATE.matcher(input).find()) {
+        if (!EXPRESSION_VALIDATE.matcher(input).find()) {
             throw new IllegalArgumentException("잘못된 연산식입니다.");
         }
     }
 
     public Numbers numbers() {
-        String[] splitNumber = input.replaceAll(" ", "")
-            .replaceAll("(?<number>\\d)(?<operator>[+\\-*/])", "${number}")
-            .split("");
+        String[] splitNumber = input
+            .replaceAll(" ", "")
+            .replaceAll(CUT_NUMBERS, "${number} ")
+            .split(" ");
 
         List<Number> numberList = Arrays.stream(splitNumber)
             .map(Number::new)
@@ -44,7 +48,7 @@ public class ArithmeticExpression {
 
     public Operators operators() {
         String[] splitOperator = input.replaceAll(" ", "")
-            .replaceAll("(\\d)(?<operator>[+\\-*/])", "${operator}")
+            .replaceAll(CUT_OPERATOR, "${operator}")
             .replaceAll("\\d", "")
             .split("");
 
