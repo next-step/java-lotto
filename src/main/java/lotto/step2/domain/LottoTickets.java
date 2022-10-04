@@ -13,7 +13,7 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
     
-    public List<LottoRank> parseLottoRanks(List<LottoNumber> winningLottoNumbers) {
+    public List<LottoRank> parseLottoRanks(WinningLottoNumbers winningLottoNumbers) {
         return lottoTickets.stream()
                 .map(lottoTicket -> lottoTicket.countMatchingNumber(winningLottoNumbers))
                 .map(LottoRank::valueOf)

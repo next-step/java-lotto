@@ -17,10 +17,8 @@ public class LottoTicket {
         this.lottoTicket = lottoTicket;
     }
     
-    public int countMatchingNumber(List<LottoNumber> winningLottoNumbers) {
-        return (int) winningLottoNumbers.stream()
-                .filter(lottoTicket::contains)
-                .count();
+    public int countMatchingNumber(WinningLottoNumbers winningLottoNumbers) {
+        return winningLottoNumbers.countMatchingNumber(lottoTicket);
     }
     
     public LottoTicketDTO lottoTicketInformation() {

@@ -54,7 +54,7 @@ public class Lotto {
                 .sum();
     }
     
-    private List<LottoNumber> inputWinningLottoNumbers() {
+    private WinningLottoNumbers inputWinningLottoNumbers() {
         return InputView.winningLottoNumbersInput();
     }
 }

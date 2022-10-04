@@ -2,6 +2,7 @@ package lotto.step2.view.input;
 
 import lotto.step2.domain.LottoNumber;
 import lotto.step2.domain.PaymentPrice;
+import lotto.step2.domain.WinningLottoNumbers;
 
 import java.util.Arrays;
 import java.util.List;
@@ -55,10 +56,10 @@ public class InputView {
         }
     }
     
-    public static List<LottoNumber> winningLottoNumbersInput() {
+    public static WinningLottoNumbers winningLottoNumbersInput() {
         try {
             System.out.println(WINNING_LOTTO_NUMBERS_INPUT_MESSAGE);
-            return winningLottoNumbersInput(SCANNER.nextLine());
+            return new WinningLottoNumbers(winningLottoNumbersInput(SCANNER.nextLine()));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return winningLottoNumbersInput();

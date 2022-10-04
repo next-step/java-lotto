@@ -23,6 +23,7 @@ public class ResultView {
                 .map(LottoTicket::lottoTicketInformation)
                 .map(ResultView::lottoTicketPrintFormat)
                 .forEach(System.out::println);
+        System.out.println();
     }
     
     private static String lottoTicketPrintFormat(LottoTicketDTO lottoTicketDTO) {
