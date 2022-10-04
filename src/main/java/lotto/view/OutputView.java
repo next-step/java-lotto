@@ -14,7 +14,7 @@ public class OutputView {
     private static final String FORMAT_RESULT_DEFAULT = "%d개 일치 (%d원) - %d개%n";
     private static final String FORMAT_RESULT_SECOND = "%d개 일치 (%d원), 보너스 번호 일치 - %d개%n";
     private static final String FORMAT_RESULT_EARNING_RATE = "총 수익률은 %.2f입니다.";
-    private static final String FORMAT_COUNT = "%d개를 구매했습니다.%n";
+    private static final String FORMAT_BUY_LOTTO = "수동으로 %d장, 자동으로 %d장을 구매했습니다.%n";
     private static final String HORIZON = "-".repeat(20);
 
 
@@ -22,11 +22,9 @@ public class OutputView {
 
     }
 
-    public static void printCount(int lottoCount) {
-        System.out.printf(FORMAT_COUNT,lottoCount);
-    }
+    public static void printLottoGame(LottoGame lottoGame, PurchaseMoney purchaseMoney) {
 
-    public static void printLottoGame(LottoGame lottoGame) {
+        System.out.printf(FORMAT_BUY_LOTTO, purchaseMoney.getManualCount(), purchaseMoney.getAutoCount());
 
         List<Lotto> lottos = lottoGame.getValue();
 

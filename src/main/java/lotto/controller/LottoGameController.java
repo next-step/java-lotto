@@ -4,15 +4,17 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
+
 public class LottoGameController {
 
     public static void main(String[] args) {
 
-        PurchaseMoney purchaseMoney = new PurchaseMoney(InputView.askPurchaseAmount());
-        OutputView.printCount(purchaseMoney.getLottoCount());
+        PurchaseMoney purchaseMoney = new PurchaseMoney(InputView.askPurchaseAmount(), InputView.askManualCount());
+        List<String[]> manualNumbers = InputView.askManualNumbers(purchaseMoney.getManualCount());
 
-        LottoGame lottoGame = LottoSeller.buyLottoGame(purchaseMoney);
-        OutputView.printLottoGame(lottoGame);
+        LottoGame lottoGame = LottoSeller.buyLottoGame(purchaseMoney, manualNumbers);
+        OutputView.printLottoGame(lottoGame, purchaseMoney);
 
         WinningNumbers winningNumbers = new WinningNumbers(InputView.askWinnerNumbers(), InputView.askBonusNumber());
 
