@@ -1,4 +1,4 @@
-package calculator.domain;
+package calculator.view;
 
 import java.util.*;
 
