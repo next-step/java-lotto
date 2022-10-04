@@ -39,7 +39,7 @@ public class Result {
     }
 
     private void saveResult(Rank rank) {
-        if(rank == null){
+        if (rank == null) {
             return;
         }
 

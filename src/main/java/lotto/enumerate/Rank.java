@@ -20,7 +20,7 @@ public enum Rank {
         this.isNeedBonus = isNeedBonus;
     }
 
-    public static Rank[] getOrderedRanks(){
+    public static Rank[] getOrderedRanks() {
         return Arrays
                 .stream(Rank.values())
                 .sorted(Comparator.comparing(Rank::getWinningMoney))
@@ -42,14 +42,14 @@ public enum Rank {
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
         return Arrays
                 .stream(Rank.values())
-                .filter(vo->vo.getCountOfMatch() == countOfMatch)
-                .filter(vo->checkBonus(vo, matchBonus))
+                .filter(vo -> vo.getCountOfMatch() == countOfMatch)
+                .filter(vo -> checkBonus(vo, matchBonus))
                 .findAny()
                 .orElse(null);
     }
 
-    private static boolean checkBonus(Rank rank, boolean matchBonus){
-        if(rank.getIsNeedBonus()){
+    private static boolean checkBonus(Rank rank, boolean matchBonus) {
+        if (rank.getIsNeedBonus()) {
             return matchBonus;
         }
         return true;

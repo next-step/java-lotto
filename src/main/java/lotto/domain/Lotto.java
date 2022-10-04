@@ -21,7 +21,7 @@ public class Lotto {
         return matchCount;
     }
 
-    public boolean isMatchToBonusNumber(int bonusNumber){
+    public boolean isMatchToBonusNumber(int bonusNumber) {
         return this.numbers.contains(bonusNumber);
     }
 

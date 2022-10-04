@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,7 +26,7 @@ class ResultTest {
 
         Result result = new Result(lottos, collectNumberList, loseNumber);
 
-        for(Rank rank : Rank.values()){
+        for (Rank rank : Rank.values()) {
             assertThat(result.getWinCount(rank)).isEqualTo(1);
         }
     }
