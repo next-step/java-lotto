@@ -1,5 +1,6 @@
 package lotto.service.impl;
 
+import lotto.controller.InputView;
 import lotto.model.LottoBall;
 import org.junit.jupiter.api.Test;
 
@@ -13,9 +14,13 @@ class ManualNumberPickerTest {
 
     @Test
     void shouldPickNumber(){
-        ManualNumberPicker picker = new ManualNumberPicker(new BufferedReader(new InputStreamReader(System.in)));
+        ManualNumberPicker picker = new ManualNumberPicker(getInputView());
         List<LottoBall> lottoBalls = picker.pick(new String[]{"1", "2", "3"});
 
         assertThat(lottoBalls).isEqualTo(List.of(new LottoBall(1),new LottoBall(2),new LottoBall(3)));
+    }
+
+    private InputView getInputView() {
+        return new InputView(new BufferedReader(new InputStreamReader(System.in)));
     }
 }

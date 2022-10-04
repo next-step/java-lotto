@@ -1,34 +1,21 @@
 package lotto.controller;
 
-import lotto.LottoStore;
-import lotto.model.Lotto;
-import lotto.model.LottoBall;
-import lotto.model.Lottos;
-import lotto.service.LottoNumberPicker;
-import lotto.service.impl.ManualNumberPicker;
-import lotto.service.impl.RandomNumberPicker;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 
 public class InputView implements AutoCloseable {
 
-    private static final int FIRST = 0;
-    private static final int SINLE_LOTTO_NUMBER = 1;
     private static final String LOTTO_BUY_MONEY_QST = "구입금액을 입력해 주세요.";
     private static final String BUY_NUMBER = "수동으로 %d장, 자동으로 %d개를 구매했습니다. \n";
     private static final String WINNING_NUMBER_QST = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_BALL_QST = "보너스 볼을 입력해 주세요.";
     private static final String MANUAL_LOTTO_BUY_NUMBER = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String MANUAL_LOTTO_NUMBER_QST = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String DEFAULT_DELIMITER = ",";
     private final BufferedReader bufferedReader;
-    private final LottoNumberPicker manualNumberPicker;
-    private final LottoStore store;
 
     public InputView(BufferedReader bufferedReader) {
         this.bufferedReader = bufferedReader;
-        this.store = new LottoStore(new RandomNumberPicker());
-        this.manualNumberPicker = new ManualNumberPicker(bufferedReader);
     }
 
     public Integer getMoney() throws IOException {
@@ -51,40 +38,32 @@ public class InputView implements AutoCloseable {
     }
 
 
-    public LottoBall getBonusBall() throws IOException {
+    public Integer getBonusBall() throws IOException {
         this.printBonusBallQst();
-        return new LottoBall(getSingleNumber());
+        return getSingleNumber();
     }
 
     private void printBonusBallQst() {
         System.out.println(BONUS_BALL_QST);
     }
 
-    public Lottos getManualLottos(int number) {
-        this.printManualLottoNumber();
-        return new Lottos(number, this.manualNumberPicker);
+    public String[] getSplitedInput() {
+        try {
+            return this.bufferedReader.readLine().split(DEFAULT_DELIMITER);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    private void printManualLottoNumber() {
+    public void printManualLottoNumber() {
         System.out.println(MANUAL_LOTTO_NUMBER_QST);
     }
 
-    public Lottos getAutomaticLottos(Integer money, Integer manualLottoNUmber) {
-        Lottos lottos = this.store.buy(money, manualLottoNUmber);
-        this.printLottoBuyMsg(lottos.size(), manualLottoNUmber);
-        return lottos;
-    }
-
-    private void printLottoBuyMsg(int lottoNumber, int manualLottoNumber) {
+    public void printLottoBuyMsg(int lottoNumber, int manualLottoNumber) {
         System.out.printf(BUY_NUMBER, manualLottoNumber, lottoNumber);
     }
 
-    public Lotto getWinningLotto() {
-        this.printWinningNumberQst();
-        return new Lottos(SINLE_LOTTO_NUMBER, this.manualNumberPicker).getLottos().get(FIRST);
-    }
-
-    private void printWinningNumberQst() {
+    public void printWinningNumberQst() {
         System.out.println(WINNING_NUMBER_QST);
     }
 
