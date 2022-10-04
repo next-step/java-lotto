@@ -1,8 +1,10 @@
 package lotto.model;
 
-import lotto.service.LottoNumberPicker;
+import org.assertj.core.util.Lists;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -13,40 +15,36 @@ class LottosTest {
 
     @Test
     void shouldGetWinningMoney() {
-        int lottoNumber = 3;
-        Lottos lottos = new Lottos(lottoNumber, getNumberPicker());
+        Lottos lottos = Lottos.getManualLottos(List.of(createSingleLotto(1, 2, 3, 4, 5, 6)));
 
-        Integer winningMoney = lottos.getWinningMoney(new WinningLotto(getLotto(List.of(1, 2, 3, 4, 99, 99)), new LottoBall(5)));
+        Integer winningMoney = lottos.getWinningMoney(new WinningLotto(createSingleLotto(1, 2, 3, 4, 99, 99), new LottoBall(5)));
 
-        assertThat(winningMoney).isEqualTo(MatchNumber.FOURTH.getMoney() * lottoNumber);
+        assertThat(winningMoney).isEqualTo(MatchNumber.FOURTH.getMoney());
     }
 
     @Test
+    @DisplayName("보너스볼까지 일치된 경우, 맞는 등수에 속하는 개수를 반환해야 합니다.")
     void shouldGetMatchedNumbers() {
-        int lottoNumber = 3;
-        Lottos lottos = new Lottos(lottoNumber, getNumberPicker());
+        Lottos lottos = Lottos.getManualLottos(List.of(createSingleLotto(1, 2, 3, 4, 5, 6)));
 
-        Map<MatchNumber, Integer> matchNumbers = lottos.getMatchNumbers(new WinningLotto(getLotto(List.of(1, 2, 3, 4, 5, 99)), new LottoBall(6)));
+        Map<MatchNumber, Integer> matchNumbers = lottos.getMatchNumbers(new WinningLotto(createSingleLotto(1, 2, 3, 4, 5, 99), new LottoBall(6)));
 
-        assertThat(matchNumbers.get(MatchNumber.SECOND)).isEqualTo(lottoNumber);
+        assertThat(matchNumbers.get(MatchNumber.SECOND)).isEqualTo(1);
     }
 
 
     @Test
     void shouldAddLottos() {
-        int lottoNumber = 3;
-        Lottos lottosA = new Lottos(lottoNumber, getNumberPicker());
-        Lottos lottosB = new Lottos(lottoNumber, getNumberPicker());
+        Lottos lottosA = Lottos.getManualLottos(Lists.list(createSingleLotto(1, 2, 3, 4, 5, 6)));
+        Lottos lottosB = Lottos.getManualLottos(Lists.list(createSingleLotto(7, 8, 9, 4, 5, 6)));
         lottosA.add(lottosB);
 
-        assertThat(lottosA.size()).isEqualTo(lottoNumber * 2);
+        assertThat(lottosA.size()).isEqualTo(2);
     }
 
-    private LottoNumberPicker getNumberPicker() {
-        return () -> List.of(1, 2, 3, 4, 5, 6).stream().map(LottoBall::new).collect(Collectors.toList());
+    private Lotto createSingleLotto(Integer... param) {
+        return new Lotto(Arrays.stream(param).map(LottoBall::new).collect(Collectors.toList()));
     }
 
-    private Lotto getLotto(List<Integer> lottoBalls) {
-        return new Lotto(lottoBalls.stream().map(LottoBall::new).collect(Collectors.toList()));
-    }
+
 }

@@ -1,11 +1,13 @@
 package lotto.model;
 
 import lotto.service.LottoNumberPicker;
+import lotto.service.RandomNumberGenerator;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.util.function.Function.identity;
@@ -17,11 +19,18 @@ public class Lottos {
     private static final int DEFAULT_RETURN_VALUE = 0;
     private final List<Lotto> lottos;
 
-    public Lottos(int lottoNum, LottoNumberPicker picker) {
-        this.lottos = new ArrayList<>();
-        for (int i = 0; i < lottoNum; i++) {
-            this.lottos.add(new Lotto(picker.pick()));
-        }
+    private Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
+    public static Lottos getRandomLottos(int lottoNum) {
+        return new Lottos(IntStream.range(0, lottoNum)
+                .mapToObj((idx) -> new Lotto(LottoNumberPicker.pick(RandomNumberGenerator.generate())))
+                .collect(Collectors.toList()));
+    }
+
+    public static Lottos getManualLottos(List<Lotto> lottos) {
+        return new Lottos(lottos);
     }
 
     public Map<MatchNumber, Integer> getMatchNumbers(WinningLotto winningLotto) {

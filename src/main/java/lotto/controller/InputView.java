@@ -2,6 +2,9 @@ package lotto.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class InputView implements AutoCloseable {
 
@@ -47,9 +50,13 @@ public class InputView implements AutoCloseable {
         System.out.println(BONUS_BALL_QST);
     }
 
-    public String[] getSplitedInput() {
+    public List<Integer> getManualNumber() {
         try {
-            return this.bufferedReader.readLine().split(DEFAULT_DELIMITER);
+            return Arrays.stream(this.bufferedReader.readLine().split(DEFAULT_DELIMITER))
+                    .map((num) -> Integer.valueOf(num.trim()))
+                    .collect(Collectors.toList());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("로또 수동 입력 번호는 오직 숫자만 올 수 있습니다.", e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -2,23 +2,16 @@ package lotto;
 
 
 import lotto.model.Lottos;
-import lotto.service.LottoNumberPicker;
 
 public class LottoStore {
 
     private static final int LOTTO_PRICE = 1000;
 
-    private final LottoNumberPicker lottoNumberPicker;
-
-    public LottoStore(LottoNumberPicker lottoNumberPicker) {
-        this.lottoNumberPicker = lottoNumberPicker;
+    public static Lottos buy(int money, int manualLottoNumber) {
+        return Lottos.getRandomLottos(getLottoNum(money) - manualLottoNumber);
     }
 
-    public Lottos buy(int money, int manualLottoNumber) {
-        return new Lottos(getLottoNum(money) - manualLottoNumber, lottoNumberPicker);
-    }
-
-    private int getLottoNum(int input) {
+    private static int getLottoNum(int input) {
         return input / LOTTO_PRICE;
     }
 
