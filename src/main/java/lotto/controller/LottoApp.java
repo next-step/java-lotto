@@ -40,8 +40,7 @@ public class LottoApp {
 
             ProfitStrategy profitStrategy = getProfitStrategy();
             OutputView.printProfit(profitStrategy.calculate(money, lottos.getWinningMoney(winningLotto)));
-        }
-         catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println("유효하지 않은 입력값입니다.");
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         } catch (Exception e) {
@@ -55,14 +54,18 @@ public class LottoApp {
 
     private static Lottos getManualLottos(InputView inputView, Integer manualLottoNumber) {
         return Lottos.getManualLottos(IntStream.range(0, manualLottoNumber)
-                .mapToObj((idx) -> new Lotto(LottoNumberPicker.pick(inputView.getManualNumber())))
+                .mapToObj((idx) -> getSingleManualLotto(inputView))
                 .collect(Collectors.toList()));
     }
 
     private static WinningLotto getWinningLotto(InputView inputView) throws IOException {
-        Lotto winningLotto = new Lotto(LottoNumberPicker.pick(inputView.getManualNumber()));
+        Lotto winningLotto = getSingleManualLotto(inputView);
         LottoBall bonusBall = new LottoBall(inputView.getBonusBall());
         return new WinningLotto(winningLotto, bonusBall);
+    }
+
+    private static Lotto getSingleManualLotto(InputView inputView) {
+        return new Lotto(LottoNumberPicker.pick(inputView.getManualNumber()));
     }
 
     private static ProfitStrategy getProfitStrategy() {
