@@ -10,16 +10,14 @@ public enum Operator {
     MULTIPLY("*", (firstOperand, secondOperand) -> (firstOperand * secondOperand)),
     DIVIDE("/", (firstOperand, secondOperand) -> {
         int result = firstOperand / secondOperand;
-        if (result >= 1) {
-            return result;
+        if (result == 0) {
+            throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
         }
-        throw new IllegalArgumentException("나눈 값은 양의 정수여야 합니다.");
+        return result;
     });
 
-    private final static Operator[] OPERATORS = Operator.values();
-
-    private String operator;
-    private BiFunction<Integer, Integer, Integer> function;
+    private final String operator;
+    private final BiFunction<Integer, Integer, Integer> function;
 
     Operator(String operator, BiFunction<Integer, Integer, Integer> function) {
         this.operator = operator;
@@ -27,7 +25,7 @@ public enum Operator {
     }
 
     public static Operator from(String operator) {
-        return Arrays.stream(OPERATORS)
+        return Arrays.stream(values())
                 .filter(op -> op.operator.equals(operator))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("연산자가 올바르지 않습니다."));
