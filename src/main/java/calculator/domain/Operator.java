@@ -18,10 +18,10 @@ public enum Operator {
     private final String code;
     private final BiFunction<CalculateResult, InputValue, CalculateResult> operate;
 
-    private static final Map<String, Operator> operatorCache;
+    private static final Map<String, Operator> OPERATOR_CACHE;
 
     static {
-        operatorCache = Arrays.stream(values())
+        OPERATOR_CACHE = Arrays.stream(values())
                 .collect(toMap(value -> value.code, value -> value));
     }
 
@@ -31,7 +31,7 @@ public enum Operator {
     }
 
     public static Operator from(String code) {
-        Operator operator = operatorCache.get(code);
+        Operator operator = OPERATOR_CACHE.get(code);
         if (operator == null) {
             throw new IllegalArgumentException("잘못된 연산자 입니다");
         }
@@ -44,7 +44,7 @@ public enum Operator {
             throw new IllegalArgumentException("연산자가 아닙니다.");
         }
 
-        Operator operator = operatorCache.get(value);
+        Operator operator = OPERATOR_CACHE.get(value);
         if (operator == null) {
             throw new IllegalArgumentException("잘못된 연산자 입니다");
         }
@@ -53,7 +53,7 @@ public enum Operator {
     }
 
     public static boolean isOperator(String code) {
-        return operatorCache.containsKey(code);
+        return OPERATOR_CACHE.containsKey(code);
     }
 
     public CalculateResult operate(CalculateResult calculateResult, InputValue inputValue) {
