@@ -39,19 +39,7 @@ public class Lotto {
         PaymentPriceDTO paymentPriceDTO = paymentPrice.paymentPriceInformation();
         
         ResultView.winsNumbersPrint(lottoRanks);
-        int totalReward = getTotalReward(lottoRanks);
-        int dtoPaymentPrice = paymentPriceDTO.getPaymentPrice();
-        ResultView.yieldPrint(parseYield(totalReward, dtoPaymentPrice));
-    }
-    
-    private double parseYield(int totalReward, int paymentPrice) {
-        return (int) (((double) totalReward / paymentPrice) * 100) / 100.0;
-    }
-    
-    private int getTotalReward(List<LottoRank> lottoRanks) {
-        return lottoRanks.stream()
-                .mapToInt(LottoRank::getReward)
-                .sum();
+        ResultView.yieldPrint(LottoRank.parseYield(lottoRanks, paymentPriceDTO));
     }
     
     private WinningLottoNumbers inputWinningLottoNumbers() {

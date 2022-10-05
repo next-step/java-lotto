@@ -1,5 +1,7 @@
 package lotto.step2.domain;
 
+import lotto.step2.dto.PaymentPriceDTO;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,6 +34,16 @@ public enum LottoRank {
                 .filter(lottoRank -> lottoRank.countOfMatchNumber == countOfMatchNumber)
                 .findAny()
                 .orElse(MISS);
+    }
+    
+    public static double parseYield(List<LottoRank> lottoRanks, PaymentPriceDTO paymentPriceDTO) {
+        return (int) (((double) getTotalReward(lottoRanks) / paymentPriceDTO.getPaymentPrice()) * 100) / 100.0;
+    }
+    
+    private static int getTotalReward(List<LottoRank> lottoRanks) {
+        return lottoRanks.stream()
+                .mapToInt(LottoRank::getReward)
+                .sum();
     }
     
     public int getReward() {
