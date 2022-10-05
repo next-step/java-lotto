@@ -20,6 +20,14 @@ public class CalculatorRequest {
         }
     }
 
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
+    public List<ArithmeticOperator> getOperators() {
+        return operators;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
