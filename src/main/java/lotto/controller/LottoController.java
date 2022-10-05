@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.dto.WinningNumber;
+import lotto.dto.WinningLottoDto;
 import lotto.service.LottoStore;
 import lotto.view.InputView;
 import lotto.view.LottoResult;
@@ -16,8 +16,8 @@ public class LottoController {
 
         ResultView.printLottoResult(lottoResult);
 
-        WinningNumber winningNumber = InputView.inputWinningNumbers();
-        LottoStatisticsResult statistics = lottoStore.createStatistics(lottoResult, winningNumber);
+        WinningLottoDto winningLottoDto = InputView.inputWinningNumbers();
+        LottoStatisticsResult statistics = lottoStore.createStatistics(lottoResult, winningLottoDto);
 
         ResultView.printLottoStatistics(statistics);
     }
