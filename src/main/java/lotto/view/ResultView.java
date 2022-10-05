@@ -1,7 +1,5 @@
 package lotto.view;
 
-import lotto.domain.type.Rank;
-
 public class ResultView {
 
     public static void printLottoResult(LottoResult result) {
@@ -14,9 +12,8 @@ public class ResultView {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
 
-        for (Rank rank : Rank.winningMoneyValues()) {
-            System.out.println(result.rank(rank));
-        }
+        result.rankStatistics()
+                .forEach(System.out::println);
 
         System.out.printf("총 수익률은 %s 입니다.%n", result.profit());
     }

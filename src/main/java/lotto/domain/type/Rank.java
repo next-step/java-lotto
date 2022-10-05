@@ -1,10 +1,7 @@
 package lotto.domain.type;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public enum Rank {
     FIFTH(3, 5_000),
@@ -43,12 +40,6 @@ public enum Rank {
 
     private static boolean isBonus(int matchCount, boolean matchBonus) {
         return matchBonus && matchCount == BONUS.count();
-    }
-
-    public static List<Rank> winningMoneyValues() {
-        return Stream.of(Rank.values())
-                .filter(Rank::hasWinningMoney)
-                .collect(Collectors.toList());
     }
 
     public int count() {

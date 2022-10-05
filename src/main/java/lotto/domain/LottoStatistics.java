@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.domain.type.Rank;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,5 +44,9 @@ public class LottoStatistics {
         return (int) result.stream().
                 filter(t -> t.name().equals(type.name()))
                 .count();
+    }
+
+    public List<Rank> ranks() {
+        return Collections.unmodifiableList(result);
     }
 }
