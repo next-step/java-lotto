@@ -8,9 +8,10 @@ public class Lotto {
 
     public static void main(String[] args) {
         int lottoNum = InputView.buyLotto() / LOTTO_PRICE;
-        InputView.printLottoCount(lottoNum);
+        ResultView.printLottoCount(lottoNum);
         ArrayList<List<Integer>> lottoArray = getAutoLotto(lottoNum);
-        InputView.printLottoNum(lottoArray);
+        ResultView.printLottoNum(lottoArray);
+        List<Integer> lastWinner = InputView.getLastWinner();
     }
 
     private static ArrayList<List<Integer>> getAutoLotto(int lottoNum) {
