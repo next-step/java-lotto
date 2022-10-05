@@ -1,28 +1,30 @@
 package calculator;
 
-import java.util.Objects;
+import java.util.Arrays;
+import java.util.function.BiFunction;
 
-public class Operator {
-    public static final String ERR_MSG_OPERATOR = "사칙연산 기호가 아닙니다";
-    String op;
+public enum Operator {
+    PLUS("+", (a, b) -> a + b),
+    MINUS("-", (a, b) -> a - b),
+    MULTIPLY("*", (a, b) -> a * b),
+    DIVIDE("/", (a, b) -> a / b),
+    UNKNOWN(null, null);
 
-    public Operator(String op) {
-        if (!(op.equals("+") || op.equals("-") || op.equals("*") || op.equals("/"))) {
-            throw new IllegalArgumentException(ERR_MSG_OPERATOR);
-        }
-        this.op = op;
+    private final String operator;
+    private final BiFunction<Integer, Integer, Integer> function;
+
+    Operator(String operator, BiFunction<Integer, Integer, Integer> function) {
+        this.operator = operator;
+        this.function = function;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Operator operator = (Operator) o;
-        return Objects.equals(op, operator.op);
+    public int operate(int a, int b) {
+        return this.function.apply(a, b);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(op);
+    public static Operator findOperator(String op) {
+        return Arrays.stream(Operator.values()).filter(type -> type.operator != null)
+                .filter(type -> op.equals(type.operator))
+                .findFirst().orElse(Operator.UNKNOWN);
     }
 }
