@@ -8,6 +8,9 @@ public enum ArithmeticOperator {
     MINUS("-", (a, b) -> a - b),
     MULTIPLY("*", (a, b) -> a * b),
     DIVIDE("/", (a, b) -> {
+        if (b == 0) {
+            throw new IllegalArgumentException("0 으로 나눌 수 없습니다.");
+        }
         if (a % b != 0) {
             throw new IllegalArgumentException("정수로 나누어 떨어지지 않습니다.");
         }

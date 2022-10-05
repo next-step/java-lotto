@@ -50,6 +50,17 @@ class CalculatorTest {
         assertThat(Calculator.calculate(request)).isEqualTo(2);
     }
 
+    @DisplayName("나눗셈 연산을 요청할 때, 0 으로 나누면 예외가 발생해야 한다.")
+    @Test
+    void calculate_givenDivideWithZero() {
+        CalculatorRequest request = new CalculatorRequest(
+                List.of(4, 0),
+                List.of(ArithmeticOperator.DIVIDE)
+        );
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> Calculator.calculate(request));
+    }
+
     @DisplayName("나눗셈 연산을 요청할 때, 정수로 나누어 떨어지지 않으면 예외가 발생해야 한다.")
     @Test
     void calculate_givenDivideWhenIndivisible() {
