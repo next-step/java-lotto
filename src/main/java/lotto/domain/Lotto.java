@@ -12,6 +12,8 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     public Lotto(List<LottoNumber> numbers) {
+        validateNumbers(numbers);
+
         this.numbers = numbers;
     }
 
@@ -52,5 +54,12 @@ public class Lotto {
 
     private boolean matched(LottoNumber number) {
         return numbers.contains(number);
+    }
+
+    private void validateNumbers(List<LottoNumber> numbers) {
+        if (numbers.size() != SIZE) {
+            String message = "로또 숫자는 %s개 이어야 합니다.";
+            throw new IllegalArgumentException(String.format(message, SIZE));
+        }
     }
 }
