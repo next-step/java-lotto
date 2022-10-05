@@ -2,6 +2,8 @@ package stringcalculator;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -41,6 +43,14 @@ class CalculatorStringRequestConverterTest {
     @Test
     void convert_givenOperatorLast() {
         String input = "1 +";
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> CalculatorStringRequestConverter.convert(input));
+    }
+
+    @DisplayName("입력 받은 문자열이 null 이거나, 공백이라면 예외가 발생해야 한다.")
+    @NullAndEmptySource
+    @ParameterizedTest
+    void convert_givenNullOrBlankString(String input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> CalculatorStringRequestConverter.convert(input));
     }

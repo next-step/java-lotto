@@ -13,10 +13,17 @@ public class CalculatorStringRequestConverter {
     private CalculatorStringRequestConverter() {}
 
     public static CalculatorRequest convert(String input) {
+        validateInput(input);
         String[] numbersAndOperators = input.split(SPACE);
         List<Integer> numbers = getNumbers(numbersAndOperators);
         List<ArithmeticOperator> operators = getOperators(numbersAndOperators);
         return new CalculatorRequest(numbers, operators);
+    }
+
+    private static void validateInput(String input) {
+        if (input == null || input.isBlank()) {
+            throw new IllegalArgumentException("입력 문자열은 null 이거나 공백일 수 없습니다.");
+        }
     }
 
     private static List<Integer> getNumbers(String[] numbersAndOperators) {
